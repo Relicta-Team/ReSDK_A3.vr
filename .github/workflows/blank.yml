@@ -28,6 +28,6 @@ jobs:
       - name: Echo Path
         run: |
           SET var=%cd%
-          echo %cd%
+          echo %var%
         
     
