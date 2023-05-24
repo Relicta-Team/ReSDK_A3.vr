@@ -23,11 +23,18 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      
       - uses: actions/checkout@v3
         
       - name: Echo Path
-        run: |
-          SET var=%cd%
-          echo %var%
-        
-    
+        run: Get-Location
+      
+      - name: Chocolatey Install Net Framework
+        uses: crazy-max/ghaction-chocolatey@v2.2.0
+        with:
+          args: install dotnetfx --version=4.7.2.20180712
+          
+      - name: Chocolatey Install Visual C++ 2013
+        uses: crazy-max/ghaction-chocolatey@v2.2.0
+        with:
+          args: install msvisualcplusplus2013-redist
