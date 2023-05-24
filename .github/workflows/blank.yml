@@ -26,6 +26,8 @@ jobs:
       - uses: actions/checkout@v3
         
       - name: Echo Path
-        run: echo %cd%
+        run: |
+          SET var=%cd%
+          echo %cd%
         
     
