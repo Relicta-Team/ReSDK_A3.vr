@@ -72,6 +72,32 @@ C:\Users\Admin\Documents\Arma 3 - Other Profiles\YOUR_ARMA_PROFILE\missions\ReSD
 
 ![img](Data/loadedmods.png)
 
+# Подключение базы данных
+Проект использует файловую базу на основе sqlite.
+В проекте откройте файл `src\host\Database\SQLite\SQLite.h` любым текстовым редактором и измените путь до базы данных 
+Вероятнее всего ваш путь будет выглядеть как-то так:
+```
+`C:\Program Files\Steam\Steamapps\Common\Arma 3\@EditorContent\db\GameMain.db`
+```
+И в итоге должно получиться:
+```sqf
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+
+
+#define dbRequest "sqlitenet" callExtension 
+
+#ifdef EDITOR
+	#define DB_PATH "C:\Program Files\Steam\Steamapps\Common\Arma 3\@EditorContent\db\GameMain.db"
+#else
+	#define DB_PATH "C:\Games\Arma3\A3Master\@server\db\GameMain.db"
+#endif
+```
+
+
 # Запуск
 
 **Для работы @EditorContent обязательно требуется отключить Battleye**
@@ -91,4 +117,7 @@ C:\Users\Admin\Documents\Arma 3 - Other Profiles\YOUR_ARMA_PROFILE\missions\ReSD
 > Обратите внимание, что если в параметрах лаунчера вы указали *Файл задания*, то после запуска Arma 3 вы сразу попадёте на выбранную карту.
 
 # Дальнейшие действия
-TODO
+
+Рекомендуем ознакомиться со следующими разделами
+[Базовая документация по архитектуре](PROJECT_ARCHITECTURE.md) - для понимания как устроен проект и как он работает
+[Руководство по программированию](ScriptingGuides/README.md) - для тех, кто хочет заняться созданием игровой логики, нового функционала или исправлением текущего.
