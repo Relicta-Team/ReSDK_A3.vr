@@ -1,5 +1,5 @@
-![Client build](https://img.shields.io/github/actions/workflow/status/Relicta-Team/ReSDK_A3.vr/validate.yml?branch=main&style=flat-square)
-![Discord](https://img.shields.io/discord/332607112503099402?style=flat-square)
+[![Client build](https://img.shields.io/github/actions/workflow/status/Relicta-Team/ReSDK_A3.vr/validate.yml?branch=main&style=flat-square)](https://github.com/Relicta-Team/ReSDK_A3.vr/actions)
+[![Discord](https://img.shields.io/discord/332607112503099402?style=flat-square)](https://discord.relicta.ru)
 
 # Описание
 
