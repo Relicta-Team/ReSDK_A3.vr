@@ -17,21 +17,21 @@
 
 В открывшемся окне выбираем ваш репозиторий. Он будет называться как ВАШ_GITHUB_НИК\ReSDK_A3.vr
 
-![img](Data/clonerepo2.png)
+<img src="Data/clonerepo2.png" width="50%">
 
 ## Выбор пути для репозитория
 
 Путь, куда должен быть сохранён репозиторий это папка missions, лежащая в документах вашего пользователя.
 Если у вас только один профил Arma 3, то сохраняйте по путь должне быть такой:
 ```
-C:\Users\Илья\Documents\Arma 3\missions\ReSDK_A3.vr
+C:\Users\Admin\Documents\Arma 3\missions\ReSDK_A3.vr
 ```
 Если же профилей несколько, то такой:
 ```
 C:\Users\Admin\Documents\Arma 3 - Other Profiles\YOUR_ARMA_PROFILE\missions\ReSDK_A3.vr
 ```
 Вместо YOUR_ARMA_PROFILE должно быть имя вашего профиля. Посмотреть список профилей можно в настройках лаунчера
-![img](Data/a3launcher_profiles.png)
+<img src="Data/a3launcher_profiles.png" width="50%">
 
 После клонирования репозитория в указанной папке появится наша версия репозитория, независимая от версий, над которыми работают другие пользователи.
 
@@ -45,11 +45,16 @@ C:\Users\Admin\Documents\Arma 3 - Other Profiles\YOUR_ARMA_PROFILE\missions\ReSD
 > После запуска в папке ReMaker автоматически будет создан файл `config.ini`, в котором хранятся все основные пути.
 
 Во время установки ReMaker предложит ввести путь до папки с установленной Arma3
-![img](Data/remaker_deploy_pre.png)
+
+<img src="Data/remaker_deploy_pre.png" width="50%">
+
 Вставляем туда путь до платформы Arma 3 и нажимаем Enter. Результат выполнения данной команды должен быть таким же как на изображении ниже:
-![img](Data/remaker_deploy_post.png)
+
+<img src="Data/remaker_deploy_post.png" width="50%">
+
 Если после ввода пути в окне консоли появился красный текст как на изображении ниже, то вы указали неверный путь до папки с Arma 3
-![img](Data/remaker_deploy_error.png)
+
+<img src="Data/remaker_deploy_error.png" width="50%">
 
 В результате успешной установки через ReMaker в вашей папке с Arma 3 появится папка `@EditorContent` в которой хранятся библиотеки, необходимые для работы ReSDK.
 
@@ -67,9 +72,13 @@ C:\Users\Admin\Documents\Arma 3 - Other Profiles\YOUR_ARMA_PROFILE\missions\ReSD
 # Запуск
 
 **Для работы @EditorContent обязательно требуется отключить Battleye**
-![img](Data/no_battleye.png)
+
+<img src="Data/no_battleye.png" width="50%">
+
 Так же можно изменить параметры в лаунчере:
-![img](Data/a3launcher_settings.png)
+
+<img src="Data/a3launcher_settings.png" width="50%">
+
 - Пропускать логотип - немного ускоряет загрузку платформы
 - Включить оконный режим - особенность при работе с SDK, связанная с постоянной сменой с окна Arma 3 на редактор или информационное окно кода и обратно.
 - Профиль - если у вас несколько профилей Arma 3, то нужно указать тот, в папку которого вы клонировали репозиторий (YOUR_ARMA_PROFILE), [подробнее выше](##Выбор-пути-для-репозитория)
@@ -77,3 +86,6 @@ C:\Users\Admin\Documents\Arma 3 - Other Profiles\YOUR_ARMA_PROFILE\missions\ReSD
 
 После всех манипуляций с лаунчером нажимаем кнопку **Запуск с модами**. Как и обычно нужно подождать некоторое время пока загрузится Arma 3, после чего в главном меню нажимаем *"редактор"*, выбираем любую карту и жмем *"далее"*. Когда редактор загрузится сверху нажимаем *"Сценарий"* и *"Открыть"*. Выбираем ReSDK_A3 и жмем открыть.
 > Обратите внимание, что если в параметрах лаунчера вы указали *Файл задания*, то после запуска Arma 3 вы сразу попадёте на выбранную карту.
+
+# Дальнейшие действия
+TODO
