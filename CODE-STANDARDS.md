@@ -165,7 +165,7 @@ myModule_myFunction = {
 _globalVariable = 10;
 
 // Хорошо
-MyModule_globalVariable = 10;
+myModule_globalVariable = 10;
 ```
 
 # Заключение 
