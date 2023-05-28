@@ -1,12 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Validate client
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -24,17 +22,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       
-      - uses: actions/checkout@v3
-        
-      - name: Echo Path
-        run: Get-Location
+      - uses: actions/checkout@v3  
       
-      - name: Chocolatey Install Net Framework
-        uses: crazy-max/ghaction-chocolatey@v2.2.0
-        with:
-          args: install dotnetfx --version=4.7.2.20180712
-          
-      - name: Chocolatey Install Visual C++ 2013
-        uses: crazy-max/ghaction-chocolatey@v2.2.0
-        with:
-          args: install msvisualcplusplus2013-redist
+      - name: Run Validation
+        env: 
+          SRCPATH: src|src
+        run: Third-party/VirtualMachine/sqfvm.exe --suppress-welcome --nowarn -a --input-sqf ./src/client/vm_compile.sqf -v ${env:SRCPATH} -D __FLAG_ONLY_PARSE__ -D CMD__RELEASE -D __GH_ACTION
+        working-directory: ${{ github.workspace }}
