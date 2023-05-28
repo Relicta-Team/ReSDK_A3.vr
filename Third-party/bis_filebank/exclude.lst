@@ -1,0 +1,43 @@
+;;;; Files created during binarization
+; Dependency files and log files
+*.dep
+*.log
+*.rpt
+
+;;;; Temporary or working files - should be handled earlies,
+;;;; but to be sure we exclude them here as well
+; Backup files
+*.bak
+
+; Avoid including any source, doc or temp files
+*\Source\*
+*\Temp\*
+*\Doc\*
+Source\*.*
+Temp\*.*
+Doc\*.*
+*.zip
+*.7z
+*.psd
+
+;versioning systems
+*\.svn\*
+*\.git\*
+.svn\*.*
+.git\*.*
+
+;;;; Due to modular packing it might happen that .pbo are inside the temp folder that is packed,
+;;;; but those are of course then a bit waste of space
+*.pbo
+*.ebo
+
+; VSS specific files
+*.scc
+
+; mission editor temporary files
+*.biedi
+
+; BI signature
+*.bisign
+*.bikey
+*.biprivatekey
