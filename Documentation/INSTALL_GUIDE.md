@@ -65,8 +65,11 @@ C:\Users\Admin\Documents\Arma 3 - Other Profiles\YOUR_ARMA_PROFILE\missions\ReSD
 
 # Подключение мода в лаунчере Arma 3
 Запускаем лаунчер Arma 3 и нажимаем кнопку добавления локального мода и указываем папку с `@EditorContent`
+
 ![img](Data/addlocalmod.png)
+
 После этого ставим галочки напротив [мода реликты](https://download.relicta.ru) и нашего `@EditorContent`
+
 ![img](Data/loadedmods.png)
 
 # Запуск
