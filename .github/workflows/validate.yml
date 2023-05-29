@@ -34,3 +34,4 @@ jobs:
           SRCPATH: src|src
         run: Third-party/VirtualMachine/sqfvm.exe --suppress-welcome --nowarn -a --input-sqf ./src/client/vm_compile.sqf -v ${env:SRCPATH} -D __FLAG_ONLY_PARSE__ -D CMD__RELEASE -D __GH_ACTION
         working-directory: ${{ github.workspace }}
+
