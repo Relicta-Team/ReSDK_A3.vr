@@ -268,7 +268,7 @@ function(file_copyAsync)
 
 function(file_unlockAsync)
 {
-	params ["_file","_ctx",["_isRelative",true],["_onUnlocked",{}],["_onTimeout",{}]];
+	params ["_path","_ctx",["_isRelative",true],["_onUnlocked",{}],["_onTimeout",{}]];
 	if ([_path,_isRelative] call file_isLocked) then {
 		startAsyncInvoke
 			{
