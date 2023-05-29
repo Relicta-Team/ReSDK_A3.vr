@@ -55,7 +55,7 @@ class WorkspaceHelper : IScript
 				output.Append(CheckFileAccess(ScriptContext.GetArg(0)).ToString());
 				break;
 			default:
-				Console.WriteLine("Error command");
+				Console.WriteLine("Error command: " + args);
 				break;
 		}
 		

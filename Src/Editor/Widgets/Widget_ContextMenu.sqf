@@ -330,6 +330,21 @@ function(ContextMenu_loadMouseObject)
 		nextFrameParams(vcom_emit_createVisualWindow,_obj);
 	}];
 
+	_stackMenu pushBack ["Перейти к определению",{
+		_obj = (call contextMenu_getContextParams) select 0;
+		_class = [_obj] call golib_getClassName;
+		if isNullVar(_class) exitwith {};
+		
+		_type = missionNamespace getVariable ["pt_"+_class,nullPtr];
+		if !isNullReference(_type) then {
+			(_type getVariable ["__decl_info__",["NULL","NULL"]])params ["_file","_line"];
+			//[format["%1 определен в '%2' на линии %3",_class,_file,_line],10] call showInfo;
+
+			["WorkspaceHelper","gotoclass",[_file,_line],true] call rescript_callCommand;
+		};
+	}];
+
+
 	[
 		_stackMenu,
 		call mouseGetPosition,

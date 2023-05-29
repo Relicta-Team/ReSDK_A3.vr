@@ -34,7 +34,7 @@ class WorkspaceHelper : IScript
 				RunVSCodeAtLine(ScriptContext.GetArg(0),ScriptContext.GetArg(1));
 				break;
 			default:
-				Console.WriteLine("Error command");
+				Console.WriteLine("Error command:" + args);
 				break;
 		}
 		
