@@ -144,6 +144,7 @@ function(Core_reloadEditorFull)
 	//systemChat str (count allControls findDisplay 314);
 	private _ref = (findDisplay 314 displayCtrl 101);
 
+	private _finded = false;
 
 	for "_i" from 0 to (_ref tvCount [])-1 do {
 		//if (_ref tvText[_i] == "MPMissions") exitWith {
@@ -152,14 +153,18 @@ function(Core_reloadEditorFull)
 		//check for missions, mpmissions etc...
 		_ref tvSetCurSel [_i];
 		_lb= (findDisplay 314 displayCtrl 103);
+		
 		for "_i" from 0 to (lnbSize _lb select 0) - 1 do {
 			_t = (_lb lnbText [_i,0]);
+			["check %1",_t] call printTrace;
 			if (_t == missionname) exitWith {
 				_lb lnbSetCurSelRow _i;
+				["ok - %1",_t] call printTrace;
+				_finded = true;
 				ctrlActivate((findDisplay 314) displayctrl 1);
 			}
 		};
-		
+		if (_finded) exitWith {};
 	};
 	
 }
