@@ -1,0 +1,455 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+
+#include <..\..\..\client\Inventory\inventory.hpp>
+
+attributeParams(hasField,"countSlots" arg "maxSize")
+
+getter_func(isContainer,true);
+
+editor_attribute("EditorVisible" arg "custom_provider:container_content") editor_attribute("Tooltip" arg "Содержимое контейнера")
+var_array(content); //содержимое контейнера (массив ссылок)
+//var_num(countSlots); //количество слотов (доступный объём контейнера)
+//var(maxSize,ITEM_SIZE_TINY); //максимальный допустимый объем предмета для укладки в контейнер
+var_num(currentsize); //текущий занятый объём в контейнере
+var_array(openedBy); //кем открыт/просматривается контейнер в данный момент. Добавляются исключительно oop объекты
+var(canUseContainer,true); //флаг для добавления содержимого
+//proto_func(getContainerClientInfo); //собирает лист информации о каждом предмете в контейнере
+//proto_func(canAdd);//аргумент - _item. Проверяет возможность добавления в контейнер по размеру _item и допустимой вместимости
+//proto_func(addItem); //добавляет предмет в контейнер с проверками canadd
+//proto_func(removeItem);//находит и вытаскивает предмет из контейнера. Возвращает bool - выполнено ли действие
+//proto_func(onContainerOpen);//когда кто-то открывает контейнер
+//proto_func(onContainerClose);
+//proto_func(onContainerContentUpdate);//когда кто-то что-то положил/вытащил из контейнера и нужно всем клиентам разослать новую информацию
+//proto_func(onChangeLoc); //перезаписанное событие при измении локации
+
+// ------------- new ss vars
+getterconst_func(startWith,[]); //list of items to start: getterconst_func(startWith,[["Item",["name","Предметец"],["weight",1200]],["Brain",["name","Объект"]]])
+// ------------- new vars end
+
+func(getWeight)
+{
+	objParams();
+	private _w = super();
+	{
+		modvar(_w) + callFunc(_x,getWeight);
+		true
+	} count getSelf(content);
+	_w
+};
+
+//собирает лист информации о каждом предмете в контейнере
+func(getContainerClientInfo)
+{
+	objParams();
+	private _data = [getSelf(countSlots)-getSelf(currentSize)];
+
+	{
+		_data pushBack callFunc(_x,GetItemInfoInContainer);
+	} foreach getSelf(content);
+
+	_data
+};
+
+//Проверяет возможность добавления в контейнер по размеру _item и допустимой вместимости
+func(canAdd)
+{
+	objParams_1(_item);
+	private _size = getVar(_item,size);
+	if (!getSelf(canUseContainer)) exitWith {false};
+	if isTypeOf(_item,SystemItem) exitWith {false};
+	if (_size > getSelf(maxSize)) exitWith {
+		if !isNullVar(_FLAG_msFlag__) exitWith {
+			if !isNullVar(_FLAG_spResize__) then {
+				setSelf(maxSize,_size);
+			};
+			true
+		};
+		false
+	};
+	if (getSelf(currentsize) + BASE_STORAGE_COST(_size) > getSelf(countSlots)) exitWith {
+		if !isNullVar(_FLAG_csFlag__) exitWith {
+			modSelf(countSlots, + BASE_STORAGE_COST(_size));
+			true
+		};
+		false
+	};
+	if (callFunc(_item,isContainer) && {count getVar(_item,content) > 0}) exitWith {false};
+	private _slot = getVar(_item,slot);
+	if (callSelf(isInWorld) && _slot > 0 && !(_slot in INV_LIST_HANDS)) exitWith {false};
+
+	true
+};
+
+func(addItem)
+{
+	objParams_1(_item);
+
+	//cannot add system item into container
+	if isTypeOf(_item,SystemItem) exitWith {false};
+	if !isTypeOf(_item,Item) exitWith {false};
+
+	if (!callSelfParams(canAdd,_item)) exitWith {
+		callSelfParams(getReasonForCantPutin,_item);
+	};
+
+	private _oldLoc = getVar(_item,loc);
+	if equals(_oldLoc,this) exitWith {
+		warningformat("Attempt duplicate item on attach to container: item %1 in container %2 not placed",getVar(_item,pointer) arg getVar(_oldLoc,pointer));
+		"IContainer syserror: oldLoc equals this"
+	};
+
+	callFuncParams(_item,playEventSound,"putdown");
+
+	//Предварительно изменить размер
+	setSelf(currentsize,getSelf(currentsize) + BASE_STORAGE_COST(getVar(_item,size)));
+
+	private _oldSlot = getVar(_item,slot);
+	private _isSlot = _oldSlot != -1;
+	if (callFunc(_oldLoc,isMob) && _isSlot) then {
+		callFuncParams(_oldLoc,removeItem,_item arg this);
+	} else {
+
+	};
+
+	if not_equals(getVar(_item,loc),this) then {
+		setVar(_item,loc,this);
+	};
+
+	getSelf(content) pushBack _item;
+
+	if (_isSlot) then {
+		setVar(_item,slot,-1);
+	};
+
+	callSelf(onContainerContentUpdate);
+
+	callSelf(onWeightChanged);
+
+	callSelfParams(onAddItemInContainer,_item);
+
+	true
+};
+
+func(removeItem)
+{
+	objParams_3(_item,_newLoc,_slot);
+	FHEADER;
+	private _isMobNewLoc = callFunc(_newLoc,isMob);
+	if (_isMobNewLoc) then {
+		if !callFuncParams(_newLoc,canSetItemOnSlot,_item arg _slot) exitWith {
+			private _mes = pick["Ты чё, дебил?","?!?!?Так может чёрная дыра получиться?!?!","Логично блять что ты не можешь так сделать.","И что по-твоему должно было произойти?"];
+			callFuncParams(_newLoc,localSay,_mes arg "error");
+			RETURN(false);
+		};
+	};
+	private _contents = getSelf(content);
+
+	private _index = _contents find _item;
+	if (_index != -1) then {
+		_contents deleteAt _index;
+
+		setSelf(currentSize,getSelf(currentSize) - BASE_STORAGE_COST(getVar(_item,size)));
+
+		callSelf(onContainerContentUpdate);
+
+		if _isMobNewLoc then {
+
+			if (callFuncParams(_newLoc,addItem,args2(_item,_slot))) then {
+				callFuncParams(_item,playEventSound,"pickup");
+			} else {
+				errorformat("IContainer::removeItem() - Critical error on attempt removing item %1 from %2",getVar(_item,pointer) arg getSelf(pointer));
+
+				//critical backward
+				setSelf(currentSize,getSelf(currentSize) + BASE_STORAGE_COST(getVar(_item,size)));
+
+				_contents pushBackUnique _item;
+				callSelf(onContainerContentUpdate);
+
+				callSelf(onWeightChanged);
+
+				RETURN(false);
+			};
+		} else {
+			warning("IContainer::removeItem() - Not implemented condition");
+		};
+
+		setVar(_item,loc,_newLoc);
+		//todo if mob then set on slot
+		//add param _slotId if mob
+
+		callSelf(onWeightChanged);
+
+		callSelfParams(onRemoveItemFromContainer,_item);
+
+		true
+	} else {
+		false
+	};
+};
+
+func(onContainerOpen)
+{
+	objParams_1(_mob);
+	if (!getSelf(canUseContainer)) exitWith {};
+	//private _mobCont = getVar(_mob,openedContainer);
+	//if (_mobCont isEqualTo this) exitWith {};
+	//errorformat("data is %1" getVar(getVar(_mob,openedContainer),pointer));
+	//private _needCloseOld = if (!isNullObject(_mobCont)) then {false} else {true};
+
+	getSelf(openedBy) pushBackUnique _mob;
+
+	private _dataMain = callSelf(getContainerMainData); //last value means ref visual object will autogenerate on client
+
+	private _dataContent = callSelf(getContainerClientInfo);
+	setVar(_mob,openedContainer,this);
+
+	callFuncParams(_mob,sendInfo,"onContainerOpen" arg [_dataMain arg _dataContent]);
+};
+
+getter_func(getContainerMainData,vec3(callSelf(getName),getSelf(pointer),callSelf(isInWorld)));
+
+func(onContainerClose)
+{
+	objParams_1(_mob);
+
+	private _openedList = getSelf(openedBy);
+	private _index = _openedList find _mob;
+	if (_index != -1) then {
+		_openedList deleteAt _index;
+		setVar(_mob,openedContainer,nullPtr);
+	} else {
+		warningformat('Cant find mob in %2.openedBy - %1',callFunc(_mob,getName) arg callSelf(getName));
+	};
+
+};
+
+
+func(onContainerContentUpdate)
+{
+	objParams();
+	private _data = callSelf(getContainerClientInfo);
+	private _own = objNull;
+
+	{
+		callFuncParams(_x,sendInfo,"onContainerContentUpdate" arg _data);
+	} foreach getSelf(openedBy);
+};
+
+
+
+func(getReasonForCantPutin) //Получает причину по которой canAdd провалился
+{
+	objParams_1(_item);
+
+	private _size = getVar(_item,size);
+	if (!getSelf(canUseContainer)) exitWith {""};
+	if isTypeOf(_item,SystemItem) exitWith {""};
+	if (_size > getSelf(maxSize)) exitWith {selectRandom ["Слишком большой размер.","Не влезает.","Великовато..."]};
+	if (getSelf(currentSize) + BASE_STORAGE_COST(_size) > getSelf(countSlots)) exitWith {callSelf(getContainerOwerflowText)};
+	if (callFunc(_item,isContainer) && {count getVar(_item,content) > 0}) exitWith {
+		format[selectRandom ["Сначала нужно опустошить %1","Лучше всё вытащить из %1","Для такого потребуется сделать %1 пустым"],callFunc(_item,getName)]
+	};
+	private _slot = getVar(_item,slot);
+	if (callSelf(isInWorld) && _slot > 0 && !(_slot in INV_LIST_HANDS)) exitWith {
+		format[selectRandom ["%1 надо в руки бы взять.","Сначала нужно взять %1 в руки"],callFunc(_item,getName)]
+	};
+	selectRandom ["Как-то не вышло...","По неизвестным причинам это не удалось.","Не получилось. Ну ничего страшного..."]
+};
+
+//Член приватный
+func(getContainerOwerflowText)
+{
+	private _name = callSelf(getName);
+	selectRandom ["Не хватает места!","А места-то больше нет!","Так ведь битком набито!",_name + " переполнен!",_name + " заполнен доверху!"];
+};
+
+func(onInteractWith)
+{
+	objParams_2(_with,_usr);
+	FHEADER;
+
+	if (!callSelfParams(canAdd,_with)) exitWith {
+		private _reason = callSelfParams(getReasonForCantPutin,_with);
+
+		if (_reason == "") exitWith {RETURN(0)};
+		callFuncParams(_usr,localSay,_reason arg "error");
+	};
+
+	private _result = callSelfParams(addItem,_with);
+
+	if (_result isEqualType "") then {
+		if (_result isEqualTo "") exitWith {};
+		callFuncParams(_usr,localSay,_result arg "error");
+	};
+
+};
+
+//С помощью перечисления создаёт предметы в контейнере
+// Допускается нумерация: type [, chance(0-100) [, count(if stack)]]
+func(createItemsInContainer)
+{
+	NOTIMPLEMENTED(IContainer::createItemsInContainer);
+
+	this = _this deleteAt 0;
+	{
+		if equalTypes(_x,[]) then {
+			_x params ["_cls",["_chance",100],["_count",-1]];
+			if prob(_chance) then {
+				if (_count != -1) then {
+					[_cls,this,_count] call createItemInContainer;
+				} else {
+					[_cls,this] call createItemInContainer;
+				};
+			};
+		} else {
+			[_x,this] call createItemInContainer;
+		};
+	} foreach _this;
+};
+
+//_attrMethods: [["func"|"var","memberName","data"]]
+func(createItemInContainer)
+{
+	params ['this',"_type",["_count",1],["_chance",100],["_attrMethods",[]]];
+	if (_count < 1) exitWith {};
+
+	_chance = clamp(_chance,0,100);
+
+	if (_count == 1) then {
+		if !prob(_chance) exitWith {nullPtr};
+		private _o = [_type,this] call createItemInContainer;
+		if !isNullObject(_o) then {
+			{
+				_x params ["_t","_m","_d"];
+				call {
+					if (_t == "func") exitWith {
+						if isNullVar(_d) then {
+							callFuncReflect(_o,_m);
+						} else {
+							if equalTypes(_d,[]) then {
+								callFuncReflectParamsInline(_o,_m,_d);
+							} else {
+								callFuncReflectParamsInline(_o,_m,[_d]);
+							};
+						};
+					};
+					if (_t == "var") exitWith {
+						setVarReflect(_o,_m,_d);
+					};
+					errorformat("%1::createItemInContainer() - Unknown attribute '%2'",callSelf(getClassName) arg _t);
+				};
+			} foreach _attrMethods;
+
+			//fixed after 0.5.158 (update names,icons if attr changed)
+			if (count _attrMethods > 0) then {
+				callSelf(onContainerContentUpdate);
+			};
+		};
+		_o
+	} else {
+		private _o = nullPtr;
+		private _listObj = [];
+		for "_i" from 1 to _count do {
+			
+			if !prob(_chance) then {continue};
+
+			_o = [_type,this] call createItemInContainer;
+			_listObj pushBack _o;
+			if !isNullObject(_o) then {
+				{
+					_x params ["_t","_m","_d"];
+					call {
+						if (_t == "func") exitWith {
+							if isNullVar(_d) then {
+								callFuncReflect(_o,_m);
+							} else {
+								if equalTypes(_d,[]) then {
+									callFuncReflectParamsInline(_o,_m,_d);
+								} else {
+									callFuncReflectParamsInline(_o,_m,[_d]);
+								};
+							};
+						};
+						if (_t == "var") exitWith {
+							setVarReflect(_o,_m,_d);
+						};
+						errorformat("%1::createItemInContainer() - Unknown attribute '%2'",callSelf(getClassName) arg _t);
+					};
+				} foreach _attrMethods;
+			};
+		};
+
+		//fixed after 0.5.158 (update names,icons if attr changed)
+		if (count _attrMethods > 0) then {
+			callSelf(onContainerContentUpdate);
+		};
+
+		_listObj
+	};
+};
+
+// Специальный пользовательский метод. Вызывается после добавления предмета в контейнер
+func(onAddItemInContainer)
+{
+	objParams_1(_item);
+};
+
+
+// Специальный пользовательский метод. Вызывается после вытаскивания предмета из контейнера
+func(onRemoveItemFromContainer)
+{
+	objParams_1(_item);
+};
+getter_func(canUseMainAction,isTypeOf(_usr,Mob));
+getter_func(getMainActionName,"Открыть");
+func(onMainAction)
+{
+	objParams_1(_usr);
+	callSelfParams(onContainerOpen,_usr);
+};
+
+//Умная инициализация денег
+func(initMoney)
+{
+	params ['this',"_count",["_isBigMon",false]];
+
+	if (_count <= 0) exitWith {};
+
+	if (_isBigMon) then {
+		if (_count > 0) then {
+			private _brCnt = floor(_count / 10);
+			private _zvCnt = _count % 10;
+
+			if (_brCnt > 0) then {
+
+				if (_brCnt < 10) then {
+					callSelfParams(createItemInContainer,"Bryak" arg 1 arg null arg [vec3("func","initCount",_brCnt)]);
+				} else {
+					private _brStack = floor(_brCnt / 10);
+					private _brLeft = _brCnt % 10;
+					callSelfParams(createItemInContainer,"Bryak" arg _brStack arg null arg [vec3("func","initCount",10)]);
+					if (_brLeft > 0) then {
+						callSelfParams(createItemInContainer,"Bryak" arg 1 arg null arg [vec3("func","initCount",_brLeft)]);
+					};
+				};
+			};
+			if (_zvCnt > 0) then {
+				callSelfParams(createItemInContainer,"Zvak" arg 1 arg null arg [vec3("func","initCount",_zvCnt)]);
+			};
+		};
+	} else {
+		//полных стаков
+		private _zvCntStacks = _count / 10;
+		private _zvLast = _count % 10;
+		if (_zvCntStacks > 0) then {
+			callSelfParams(createItemInContainer,"Zvak" arg _zvCntStacks arg null arg [vec3("func","initCount",10)]);
+		};
+		if (_zvLast > 0) then {
+			callSelfParams(createItemInContainer,"Zvak" arg 1 arg null arg [vec3("func","initCount",_zvLast)]);
+		};
+	};
+};

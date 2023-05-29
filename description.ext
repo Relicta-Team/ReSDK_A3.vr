@@ -1,0 +1,66 @@
+
+#include "Resources\ui_schemas\definer.hpp"
+
+class RscTitles
+{
+    #include "Resources\ui_schemas\titles.hpp"
+};
+
+#include "Resources\ui_schemas\controls.hpp"
+#include "Resources\ui_schemas\main.hpp"
+#include <Resources\ui_schemas\loading.hpp>
+
+import RscObject;
+class RscObjectPreviewer
+{
+	idd = 3663;
+	class objects
+	{
+        class PrevirerObj : RscObject
+        {
+            idc = 1000;
+            model = "\a3\Ui_f\objects\Compass.p3d";
+        	access = 0;
+        	type = CT_OBJECT;
+        	scale = 1;
+        	direction[] = {0,0,1};
+        	up[] = {0,1,0};
+        	shadow = 0;
+            x = 0; y = 0; w = 1; h = 1; z =1;
+        };
+    };
+};
+
+#if __has_include("GFPPE\GFPPE.hpp")
+	#include "GFPPE\GFPPE.hpp"
+#endif
+
+disableChannels[] = {0,1,2,4,5};
+disableRandomization[] = { "All", "AllVehicles", "B_G_Offroad_01_F", "myCar", "MyUnitName", "B_Soldier_F" }; //disable random
+enableDebugConsole[] = {"76561198094364528"};
+allowProfileGlasses = 0;
+
+#include <CfgSounds.hpp>
+
+class CfgCommands {
+   allowedHTMLLoadURIs[] += {
+      "https://relicta.ru",
+      "https://github.com"
+   };
+};
+
+/*
+class CfgLocationTypes {
+    class RelictaObject {
+        color[] = {0,0,0,0};
+        drawStyle = "none";
+        font = "PuristaMedium";
+        importance = 1;
+        name = "Relicta Object";
+        shadow = 0;
+        size = 0;
+        textSize = 0.0;
+        texture = "";
+    };
+};
+*/

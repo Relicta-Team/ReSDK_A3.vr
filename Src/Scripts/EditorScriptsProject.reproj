@@ -1,0 +1,7 @@
+// Проект для редактора
+ScriptContext.cs
+Breakpoint.cs
+FileManager.cs
+WorkspaceHelper.cs
+// Скрипты Reditor
+Reditor\OOPBuilder.cs

@@ -1,0 +1,321 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+
+//набор анимации в слоте
+/*getter_func(getChairSitdownAnimation,["re_HubSittingChairA_move1" arg "re_HubSittingChairB_idle1" arg "re_HubSittingChairB_idle2" arg "re_HubSittingChairB_idle3" arg
+"re_HubSittingChairUA_idle1" arg "re_HubSittingChairUA_idle2" arg "re_HubSittingChairUA_idle3" arg "re_HubSittingChairUA_move1" arg
+"re_HubSittingChairUB_idle1" arg "re_HubSittingChairUB_idle2" arg "re_HubSittingChairUB_idle3" arg "re_HubSittingChairUB_move1" arg
+"re_HubSittingChairUC_idle1" arg "re_HubSittingChairUC_idle2" arg "re_HubSittingChairUC_idle3"]);*/
+getter_func(getChairSitdownAnimation,[
+	"re_HubSittingChairA_idle1" arg "re_HubSittingChairA_idle2" arg "re_HubSittingChairA_idle3" arg
+	"re_HubSittingChairB_idle1" arg "re_HubSittingChairB_idle2" arg "re_HubSittingChairB_idle3" arg
+	"re_HubSittingChairC_idle1" arg "re_HubSittingChairC_idle2" arg "re_HubSittingChairC_idle3" arg
+	"re_HubSittingChairUA_idle1" arg "re_HubSittingChairUA_idle2" arg "re_HubSittingChairUA_idle3" arg
+	"re_HubSittingChairUB_idle1" arg "re_HubSittingChairUB_idle2" arg "re_HubSittingChairUB_idle3" arg
+	"re_HubSittingChairUC_idle1" arg "re_HubSittingChairUC_idle2" arg "re_HubSittingChairUC_idle3"]
+);
+
+//набор анимаций при вставании
+//для мирной стоийки - amovpknlmstpsnonwnondnon_amovpercmstpsnonwnondnon
+//для комбата - amovpknlmstpsraswpstdnon_amovpercmstpsraswpstdnon
+getter_func(getChairStandupAnimation,"AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon");
+getter_func(getChairStandupCombatAnimation,"amovpknlmstpsraswpstdnon_amovpercmstpsraswpstdnon");
+
+//константа для стула/кровати или любого объекта на который можно сесть
+getterconst_func(isSeat,true); 
+//одноместное 
+getter_func(isSingleSeat,count callSelf(seatListOffsetPos) == 1);
+
+//массивы смещений трансформации для стула или кровати
+getter_func(seatListOffsetPos,if(true)exitWith{[callSelf(getChairOffsetPos)]};[vec3(0,0,0)]);
+getter_func(seatListOffsetDir,if(true)exitWith{[callSelf(getChairOffsetDir)]};[0]);
+//сюда вписываются мобы которые заняли данные места
+var(seatListOwners,[nullPtr]);
+//это ссылка на объекты-заглушки для репликации
+var(_seatListDummy,[objNUll]);
+
+//название мест
+getter_func(seatListName,["Сиденье"]);
+
+func(constructor)
+{
+	objParams();
+	private _count = count callSelf(seatListOffsetDir);
+	private _l = getSelf(seatListOwners);
+	_l resize _count;
+	setSelf(seatListOwners,_l apply {nullPtr});
+	setSelf(_seatListDummy,_l apply {objNUll});
+};
+
+//свободно ли место
+func(isSeatFree)
+{
+	objParams_1(_index);
+	isNullReference(getSelf(seatListOwners) select _index)
+};
+
+func(canSeat)
+{
+	objParams_2(_usr,_index);
+	callSelfParams(isSeatFree,_index);
+};
+
+//стандартная процедура присоединения
+func(seatConnect)
+{
+	objParams_2(_usr,_index);
+	
+	//место уже занято
+	if !callSelfParams(canSeat,_usr arg _index) exitWith {false};
+	if callFunc(_usr,isConnected) exitWith {false};
+
+	if callFunc(_usr,isGrabbed) then {
+		callFunc(getVar(_usr,grabber),stopAllGrab);
+	};
+
+	//!0.7.645 temp replace
+	//callSelfParams(seatApplySeatAnim,_usr);
+	
+	private _origObj = getSelf(loc);
+	private _offsetPos = callSelf(seatListOffsetPos) select _index;
+	private _offsetDir = callSelf(seatListOffsetDir) select _index;
+	
+	traceformat("sitting data %1 %2",_offsetPos arg _offsetDir)
+	
+	//Создаём репликатор
+	private _rplObj = "C_Quadbike_01_F" createVehicle [0,0,0];
+	_rplObj allowDamage false; 
+	#ifndef EDITOR
+	_rplObj hideObjectGlobal true;
+	#else
+	_rplObj hideObjectGlobal true;
+	#endif
+	getSelf(_seatListDummy) set [_index,_rplObj];
+	private _pos = _origObj modelToWorld (_offsetPos vectorAdd [0,0,-1.62629]);
+	_rplObj setPosAtl _pos;
+	_rplObj setDir (getDir _origObj + _offsetDir);
+	private _pfh_onReplicate = {
+		(_this select 0) params ["_o","_p"];
+		if isNullReference(_o) exitWith {stopThisUpdate()};
+		_o setPosAtl _p;
+	}; startUpdateParams(_pfh_onReplicate,0,vec2(_rplObj,_pos));
+	
+	private _dir = _origObj getRelDir getVar(_usr,owner);
+	private _restDir = if (_dir > 315 || _dir <= 45) then {
+		callFunc(_usr,getDir)+_dir //он спереди
+	} else {callFunc(_usr,getDir)+180};
+	//TODO починить посадку спереди объекта
+	_restDir = callFunc(_usr,getDir) + 180;
+	
+	_rplObj setVariable ["_restDir",_restDir];
+	_rplObj setVariable ["_restPos",callFunc(_usr,getPos)];
+	
+	getSelf(seatListOwners) set [_index,_usr];
+	setVar(_usr,connectedTo,this);
+	
+	private _factDir = getdir _origObj + _offsetDir;
+	private _mobUsr = getVar(_usr,owner);
+	//sync new location
+	[_mobUsr,"seatConnect",[_mobUsr,_factDir,_rplObj]] call repl_doLocal;
+	
+	//apply anim after connect to seat
+	callSelfParams(seatApplySeatAnim,_usr);
+
+	callSelfParams(onSeat,_usr arg _index);
+};
+
+//событие вызываемое после успешной посадки
+func(onSeat)
+{
+	objParams_2(_usr,_index);
+};
+
+//событие вызываемое после успешного вставания
+func(onStand)
+{
+	objParams_2(_usr,_index);
+};
+
+func(seatApplySeatAnim)
+{
+	objParams_1(_usr);
+	private _anim = callSelf(getChairSitdownAnimation);
+	if equalTypes(_anim,[]) then {_anim = pick _anim};
+	callFuncParams(_usr,applyGlobalAnim,"switchmove" arg _anim);
+};
+
+
+func(seatDisconnect)
+{
+	objParams_1(_usrOrIndex);
+	if equalTypes(_usrOrIndex,nullPtr) then {
+		_usrOrIndex = getSelf(seatListOwners) find _usrOrIndex;
+	};
+	if (_usrOrIndex == -1) exitWith {false};
+	
+	private _usr = getSelf(seatListOwners) select _usrOrIndex;
+	private _rplObj = getSelf(_seatListDummy) select _usrOrIndex;
+	private _restPos = _rplObj getVariable "_restPos";
+	private _restDir = _rplObj getVariable "_restDir";
+	
+	detach getVar(_usr,owner); //disconnect
+	setVar(_usr,connectedTo,nullPtr);
+	deleteVehicle _rplObj;
+	getSelf(seatListOwners) set [_usrOrIndex,nullPtr];
+	
+	private _method = "getChairStandup";
+	if getVar(_usr,isCombatModeEnable) then {
+		modvar(_method) + "Combat";
+	};
+	modvar(_method) + "Animation";
+	private _anim = callSelfReflect(_method);
+	if equalTypes(_anim,[]) then {_anim = pick _anim};
+	
+	callFuncParams(_usr,setPos,_restPos);
+	callFuncParams(_usr,setDir,_restDir);
+	
+	if (callFunc(_usr,isUnconscious) || callFunc(_usr,isSleep)) then {
+		callFuncParams(_usr,setUnconsciousAnim,true);
+	} else {
+		callFuncParams(_usr,applyGlobalAnim,"switchmove" arg _anim);
+	};
+	
+	callSelfParams(onStand,_usr arg _usrOrIndex);
+
+	true
+};
+
+getter_func(canUseMainAction,isTypeOf(_usr,Mob));
+getter_func(getMainActionName,"Сесть");
+func(onMainAction) {
+	objParams_1(_usr);
+	
+	callSelfParams(seatConnect,_usr arg 0);
+};
+
+func(onClick)
+{
+	objParams_1(_usr);
+	if callFunc(_usr,isGrabbedInActiveHand) exitWith {
+		private _m = callFunc(_usr,getGrabbedInActiveHand);
+		if isNullReference(_m) exitWith {};
+		callSelfParams(seatConnect,_m arg 0);
+	};
+	super();
+};
+
+
+region(Member for backward compatibility)
+/*	//кем занято место
+	var(seatOwner,nullPtr);
+	//просто ссылочный объект к которотму атачится сущность
+	var(seatAttachObject,objNUll);
+	//Проверяет не занято ли место
+	getter_func(canSeat,not_equals(getSelf(seatOwner),nullPtr));
+	getter_func(getChairOffsetPos,vec3(0,0,0));
+	getter_func(getChairOffsetDir,0);
+	getter_func(restBias,vec3(0,0,0)); //смещение для поднятия со стула
+	getterconst_func(rangeDir,40);
+	var(restPos,vec3(0,0,0));
+	var(restDir,vec3(0,0,0));
+
+	//сажает пользователя на стул
+	func(addSeatOwner) {
+		objParams_1(_usr);
+
+		if (callSelf(canSeat)) exitWith {false};
+		if (!getSelf(isInWorld)) exitWith {false};
+		if callFunc(_usr,isConnected) then {
+			//handle resitting
+			callFunc(getVar(_usr,connectedTo),removeSeatOwner);
+		};	
+
+		private _anim = callSelf(getChairSitdownAnimation);
+		if equalTypes(_anim,[]) then {_anim = pick _anim};
+
+		callFuncParams(_usr,applyGlobalAnim,"switchmove" arg _anim);
+
+		private _worldObj = getSelf(loc);
+
+		private _chairPos = getposatl _worldObj;
+		private _offsetPos = callSelf(getChairOffsetPos);
+		private _offsetDir = callSelf(getChairOffsetDir);
+
+		//_worldObj disableCollisionWith getVar(_usr,owner);
+		private _sphere = "C_Quadbike_01_F" createVehicle [0,0,0];
+		#ifndef EDITOR
+		_sphere hideObjectGlobal true;
+		#endif
+		setSelf(seatAttachObject,_sphere);
+		_sphere setPosAtl (_worldObj modelToWorld _offsetPos);
+		_code = {
+			(_this select 0)params ["_o","_p"];
+			if isNullReference(_o) exitWith {stopThisUpdate()};
+			_o setPosAtl _p;
+		}; startUpdateParams(_code,0,vec2(_sphere,_worldObj modelToWorld _offsetPos));
+		setSelf(restPos,callFunc(_usr,getPos));
+		
+		private _dir = _sphere getRelDir getVar(_usr,owner);
+		private _restDir = if (_dir > 315 || _dir <= 45) then {
+			callFunc(_usr,getDir)+_dir //он спереди
+		} else {callFunc(_usr,getDir)+180};
+		//TODO починить посадку спереди объекта
+		_restDir = callFunc(_usr,getDir)+180;
+		
+		setSelf(restDir,_restDir);
+		//callFuncParams(_usr,setPos,getPosATL _sphere);
+		_sphere setDir (getdir _worldObj + _offsetDir);
+
+		setSelf(seatOwner,_usr);
+		setVar(_usr,connectedTo,this);
+		
+		getVar(_usr,owner) attachTo [_sphere,[0,0,0]];
+		
+		traceformat("character sit restore direction %1",callFunc(_usr,getDir))
+		
+		true;
+	};
+
+	//поднимает пользователя со стула
+	func(removeSeatOwner) {
+		objParams();
+
+		if (!callSelf(canSeat)) exitWith {false};
+		if (!getSelf(isInWorld)) exitWith {false};
+
+		private _usr = getSelf(seatOwner);
+
+		private _anim = callSelf(getChairStandupAnimation);
+		if equalTypes(_anim,[]) then {_anim = pick _anim};
+
+		//getSelf(loc) enableCollisionWith getVar(_usr,owner);
+		detach getVar(_usr,owner);
+		setVar(_usr,connectedTo,nullPtr);
+		deleteVehicle getSelf(seatAttachObject);
+		setSelf(seatOwner,nullPtr);
+		
+		if (callFunc(_usr,isUnconscious) || callFunc(_usr,isSleep)) then {
+			callFuncParams(_usr,setUnconsciousAnim,true);
+		} else {
+			callFuncParams(_usr,applyGlobalAnim,"switchmove" arg _anim);
+		};
+
+		callFuncParams(_usr,setPos,getSelf(restPos));
+		callFuncParams(_usr,setDir,getSelf(restDir));
+
+		true
+	};
+	getter_func(canUseMainAction,isTypeOf(_usr,Mob));
+	getter_func(getMainActionName,"Сесть");
+	func(onMainAction) {
+		objParams_1(_usr);
+		
+		if (callSelf(canSeat)) then {
+			callSelf(removeSeatOwner);
+		} else {
+			callSelfParams(addSeatOwner,_usr);
+		};
+	};*/

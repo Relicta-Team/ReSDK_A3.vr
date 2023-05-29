@@ -1,0 +1,5 @@
+Scripts\TestScript.cs
+Scripts\Breakpoint.cs
+Scripts\ScriptContext.cs
+Scripts\WorkspaceHelper.cs
+..\..\..\Scripts\FileManager.cs

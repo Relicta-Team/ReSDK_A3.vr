@@ -1,0 +1,98 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+// Данный интерфейс используется для присоединения предметов (сковородки к костру и тд)
+
+#define ICONSRC_POSDAT(pos,dir,vec) [pos,dir,vec]
+
+attributeParams(hasField,"connectedItems");
+//var_array(connectedItems); //список присоединённых пердметов
+
+getterconst_func(getConnectionOffset,[ICONSRC_POSDAT(vec3(0,0,0),0,vec3(0,0,1))]);// смещение объектов присоединения
+
+getterconst_func(allowedConnectItems,[]);
+
+//можно ли присоединить предмет
+func(canConnect)
+{
+	objParams_1(_item);
+	private _cls = callFunc(_item,getClassName);
+	
+	(({equals(_x,nullPtr)} count getSelf(connectedItems)) > 0) && (_cls in getSelfConst(allowedConnectItems))
+};	
+
+//присоединение предмета
+func(connectItem)
+{
+	objParams_1(_item);
+
+	if !callSelfParams(canConnect,_item) exitWith {false};
+	private _connectedItems = getSelf(connectedItems);
+
+	private _idx = _connectedItems find nullPtr;
+	if (_idx == -1) exitWith {false};
+	
+	if callFunc(getVar(_item,loc),isMob) then {
+		callFuncParams(getVar(_item,loc),removeItem,_item);
+	};	
+	private _src = getSelf(loc);
+	_connectedItems set [_idx,_item];
+	(callSelf(getConnectionOffset) select _idx) params ["_pos",["_dir",0],["_vup",[0,0,1]]];
+	(callFunc(_item,connectOffset)) params ["_biasPos","_biasDir","_biasVup"];
+	
+	private _cht = callFunc(_item,getChunkType);
+	private _visualItem = callFuncParams(_item,initModel,getPosATL _src arg 0 arg vec3(0,0,1));
+	
+	_visualItem attachTo [_src,_pos vectorAdd _biasPos];
+	_visualItem setdir (_dir+_biasDir);
+	_visualItem setVectorUp (vectorNormalized (_vup vectorAdd _biasVup));
+	
+	detach _visualItem;
+	
+	[_visualItem] call noe_updateObjectByteArr;
+	
+	setVar(_item,connectibleSource,this);
+	//replicate visual object
+	[[getPosATL _visualItem,_cht] call noe_posToChunk,_cht,_visualItem] call noe_registerObject;
+	
+	callFuncParams(_item,onConnectToSource,this);
+	
+	true
+};
+
+//отсоединение предмета
+func(disconnectItem)
+{
+	objParams_2(_item,_usr);
+	
+	// NOW THIS SAME AS > _item.moveItem(_usr)
+	callSelfParams(onDisconnectItem,_item);
+	callFuncParams(_usr,addItem,_item);
+};	
+
+func(canMoveOutItem) 
+{
+	objParams_1(_item);
+	_item in getSelf(connectedItems);
+};
+
+func(onMoveOutItem)
+{
+	objParams_1(_item);
+	callSelfParams(onDisconnectItem,_item);
+};
+
+func(onDisconnectItem)
+{
+	objParams_1(_item);
+	private _connectedItems = getSelf(connectedItems);
+	private _idx = _connectedItems find _item;
+	if (_idx == -1) exitWith {false};
+	
+	_connectedItems set [_idx,nullPtr];
+	setVar(_item,connectibleSource,nullPtr);
+	
+	callFuncParams(_item,onDisconnectFromSource,this);
+};	

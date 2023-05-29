@@ -1,0 +1,138 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+#include <..\engine.hpp>
+#include <..\oop.hpp>
+
+//человеческое имя
+class(HumanNaming) attributeParams(initGlobalSingleton,"naming_default")
+	
+	var(кто,"Человек");
+	var(кого,"Человека");
+	var(кому,"Человеку");
+	var(вин,"Человека");
+	var(кем,"Человеком");
+	var(ком,"Человеке");
+	
+endclass
+
+// Конвертация гендера из типа int в object
+gender_enumToObject = {
+	params [["_genderEnum",0]];
+	if (_genderEnum == 0) exitWith {gender_male};
+	if (_genderEnum == 1) exitWith {gender_female};
+	gender_neuter
+};
+
+gender_objectToEnum = {
+	params [["_genderEnum",gender_male]];
+	private _r = [gender_male,gender_female,gender_neuter] find _genderEnum;
+	if (_r == -1) exitWith {
+		errorformat("gender::objectToEnum() - cannot find gender object %1",_genderEnum);
+		0
+	};
+	_r
+};
+
+/*
+	!!! ВНИМАНИЕ !!!
+	Так работает компилятор что слова в нижнем регистре
+	Но из-за движка большие и русские буквы идут как разные переменные.
+	Для доступа к полям типа Gender_base которые обозваны как русские -
+	использовать только НИЖНИЙ РЕГИСТР
+*/
+
+class(Gender_base)
+	
+	var(Он,"Он"); //и
+	var(Его,"Его"); //р
+	var(Него,"Него"); //рп
+	var(Ему,"Ему"); //д
+	var(Нему,"Нему"); //дп
+	
+	var(кто,"Мужчина");
+	var(кого,"Мужчины");
+	var(кому,"Мужчине");
+	var(вин,"Мужчину");
+	var(кем,"Мужчиной");
+	var(ком,"Мужчине");
+	
+	var(пол,"м")
+	var(пол_целиком,"мужской");
+	
+	getterconst_func(ageText,["дитя" arg "юноша" arg "взрослый" arg "зрелый" arg "пожилой" arg "старик"]);
+	
+	func(getAgeIndex)
+	{
+		objParams_1(_age);
+		if (_age <= 18) exitWith {0};
+		if (_age <= 25) exitWith {1};
+		if (_age <= 35) exitWith {2};
+		if (_age <= 47) exitWith {3};
+		if (_age <= 65) exitWith {4};
+		5
+	};
+	
+	func(isMiddleAge)
+	{
+		objParams_1(_num);
+		callSelfParams(getAgeIndex,_num) == 2
+	};
+	
+	func(getAgeText)
+	{
+		objParams_1(_num);
+		callSelf(ageText) select callSelfParams(getAgeIndex,_num);
+	};
+	
+endclass
+
+class(Gender_male) extends(Gender_base) 
+	attributeParams(initGlobalSingleton,"gender_male")
+endclass
+
+class(Gender_female) extends(Gender_base) 
+	attributeParams(initGlobalSingleton,"gender_female")
+	
+	var(Он,"Она");
+	var(Его,"Её");
+	var(Него,"Неё");
+	var(Ему,"Ей");
+	var(Нему,"Ней");
+	
+	var(кто,"Женщина");
+	var(кого,"Женщины");
+	var(кому,"Женщине");
+	var(вин,"Женщину");
+	var(кем,"Женщиной");
+	var(ком,"Женщине");
+	
+	var(пол,"ж")
+	var(пол_целиком,"женский");
+	
+	getterconst_func(ageText,["дитя" arg "девушка" arg "взрослая" arg "зрелая" arg "пожилая" arg "старуха"]);
+endclass
+
+class(Gender_neuter) extends(Gender_base) 
+	attributeParams(initGlobalSingleton,"gender_neuter")
+	
+	var(Он,"Оно");
+	var(Его,"Его");
+	var(Него,"Него");
+	var(Ему,"Ему");
+	var(Нему,"Нему");
+	
+	var(пол,"?")
+	var(пол_целиком,"неизвестный");
+	
+	var(кто,"Существо");
+	var(кого,"Существа");
+	var(кому,"Существу");
+	var(вин,"Существо");
+	var(кем,"Существом");
+	var(ком,"Существе");
+	
+	getterconst_func(ageText,["молодое" arg "подросшее" arg "взрослое" arg "зрелое" arg "пожилое" arg "старое"]);
+endclass

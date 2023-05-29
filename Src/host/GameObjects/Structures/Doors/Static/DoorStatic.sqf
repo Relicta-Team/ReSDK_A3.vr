@@ -1,0 +1,107 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+#include <..\..\..\..\engine.hpp>
+#include <..\..\..\..\oop.hpp>
+#include <..\..\..\GameConstants.hpp>
+#include <..\..\..\..\ServerRpc\serverRpc.hpp>
+#include <..\..\..\..\NOEngine\NOEngine.hpp>
+
+
+class(DoorStatic) extends(IStruct)
+	
+	getter_func(isDoor,true);
+	var(isOpen,false); //открыта ли дверь
+	editor_attribute("EditorVisible" arg "type:bool") editor_attribute("Tooltip" arg "Заперта ли дверь")
+	var(isLocked,false); //можно ли открыть дверь
+	var_array(keyTypes); //какие типы ключей подходят (строки)
+	getter_func(animateData,[]);//[vecbias,dir]
+
+	getter_func(getOpenSoundParams,["doors\wooden_open" arg getRandomPitchInRange(0.6,1.3) arg null]);
+	getter_func(getCloseSoundParams,["doors\wooden_close" + str pick [1 arg 2] arg getRandomPitchInRange(0.6,1.3) arg null]);
+
+	#include "..\..\..\Interfaces\DoorBaseMethods.Interface"
+
+	var_array(originData);
+
+	func(animateSource) {
+		objParams();
+
+		if (!callSelf(isInWorld)) exitWith {}; //незагруженные не анимируем
+
+		private _mode = getSelf(isOpen);
+		private _src = getSelf(loc);
+		
+		callSelf(animateData) params ["_pos","_dir"];
+
+		private _origin = getSelf(originData);
+
+		if (_mode) then {
+			// !!!WARNING!!! благодаря способу сохранения позиций динамических дверей они не расчитаны на пользовательское изменение позиций в открытом состоянии в данный момент.
+			//private _origin = getSelf(originData);
+			
+			if equals(_origin,[]) then {
+
+				if (!_mode) then {
+					errorformat("Origin in object %1 is empty array. Object is closing process.",callSelf(getClassName));
+				};
+				_origin set [0,getPosATL _src];
+				_origin set [1,getDir _src];
+			};
+			
+			if (count _origin != 4) then {
+				private _tempObj = createSimpleObject [getSelf(model),[0,0,0],true];
+				_tempObj setPosAtl (_origin select 0);
+				_tempObj setDir (_origin select 1);
+				
+				_origin set [2,_tempObj modelToWorld _pos];
+				_origin set [3,_dir + (_origin select 1)];
+
+
+				deleteVehicle _tempObj;
+			};
+			
+			_src setPosAtl (_origin select 2);
+			_src setDir (_origin select 3);
+			[_src,CHUNK_TYPE_STRUCTURE,true] call noe_replicateObject;
+
+		} else {
+
+			if equals(_origin,[]) exitWith {
+				errorformat("Origin in object %1 is empty array.",callSelf(getClassName));
+			};
+
+			_src setPosAtl (_origin select 0);
+			_src setDir (_origin select 1);
+			[_src,CHUNK_TYPE_STRUCTURE,true] call noe_replicateObject;
+
+		};
+
+	};
+endclass
+
+
+//for testing [obj,[-0.73,0.7,-1.365],270] call struct_door_initOpenMode;
+struct_door_initOpenMode = {
+	params ["_o","_vecbias","_dir"];
+	if !isNull(struct_door_internal_ref) then {
+		deleteVehicle struct_door_internal_ref;
+	};
+
+	private _tempObj = createSimpleObject [(getModelInfo _o) select 1,[0,0,0],true];
+
+	_tempObj setPosAtl getPosATL _o;
+	_tempObj setdir (getdir _o);
+
+	_tempObj setPosAtl (_tempObj modelToWorld _vecbias);
+	_tempObj setDir (getdir _o + _dir);
+	struct_door_internal_ref = _tempObj;
+};
+
+/*
+"ml\ml_object_new\ml_object_2\l01_props\reshetka.p3d" решетка
+
+
+*/

@@ -1,0 +1,124 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+#include <..\..\ServerRpc\serverRpc.hpp>
+
+/*
+	Интерфейс сетевого дисплея.
+		Эти переменные вручную требуется определить на каждом владельце данного интерфейса
+	ndName - имя сетевого дисплея
+	ndInteractDistance - дистанция интеракции
+
+	// Функции ниже должны быть переопределены на владельцах интерфейсов
+
+	// собирает всю информацию для отправки. Является виртуальным публичным методом для пользовательских перегрузок
+	func(getNDInfo) {objParams();};
+
+	//обработчик пользовательского ввода.
+	func(onHandleNDInput) {objParams_2(_usr,_inp);};
+*/
+
+attributeParams(hasField,"ndName" arg "ndInteractDistance");
+
+var_array(ndOpenedBy); //who opened nd display
+var(ndCurrentDisplay,0); //current display type (for changed layers)
+var_bool(ndIsLockedInput); //only one user can use action here
+
+
+
+// высылает пользователям обновленное состояние дисплея. Метод вызывается в завивсимости от класса
+func(updateNDisplay)
+{
+	objParams();
+	private _opnList = getSelf(ndOpenedBy);
+	if (count _opnList == 0) exitWith {};
+	
+	private _data = callSelf(getNDInfo);
+	{
+		callFuncParams(_x,sendInfo,"updND" arg _data);
+	} foreach _opnList;
+
+};
+
+// обработчик нажатия пользователем
+func(handleNDInput)
+{
+	objParams_2(_usr,_inpType);
+	if getSelf(ndIsLockedInput) exitWith {};
+	setSelf(ndIsLockedInput,true);
+
+	//handle actions
+	callSelfParams(onHandleNDInput,_usr arg _inpType);
+
+	setSelf(ndIsLockedInput,false);
+};
+
+//Приватная внутренняя реализация открытия сетевого дисплея
+func(openNDisplayImplBackend)
+{
+	objParams_1(_usr);
+	setVar(_usr,openedNDisplay,this);
+	getSelf(ndOpenedBy) pushBackUnique _usr;
+};
+//Приватная внутренняя реализация закрытия сетевого дисплея
+func(closeNDisplayImplBackend)
+{
+	objParams_1(_usr);
+};
+
+func(openNDisplay)
+{
+	objParams_1(_usr);
+
+	callSelfParams(openNDisplayImplBackend,_usr);
+
+	//send info
+	callFuncParams(_usr,sendInfo,"opnND" arg vec4(getSelf(ndName),callSelf(getNDInfo),callSelf(getNDPointer),getSelf(ndInteractDistance)));
+};
+
+getter_func(getNDPointer,getSelf(pointer));
+
+
+func(openNDisplayInternal)
+{
+	objParams_2(_usr,_targetCheck);
+	
+	callSelfParams(openNDisplayImplBackend,_usr);
+
+	//send info
+	callFuncParams(_usr,sendInfo,"opnND" arg vec4(getSelf(ndName),callSelf(getNDInfo),vec2(callSelf(getNDPointer),_targetCheck),getSelf(ndInteractDistance)));
+};
+
+func(closeNDisplay)
+{
+	objParams_1(_usr);
+
+	private _ndList = getSelf(ndOpenedBy);
+	_ndList deleteAt (_ndList find _usr);
+	setVar(_usr,openedNDisplay,nullPtr);
+	callSelfParams(closeNDisplayImplBackend,_usr);
+};
+
+//вызывается с сервера чтобы закрыть клиенту нет-дисплей
+func(closeNDisplayServer)
+{
+	objParams_1(_usr);
+	callSelfParams(closeNDisplay,_usr);
+	callFuncParams(_usr,sendInfo, "clsND");
+};
+
+//закрывает с сервера у всех клиентов открытый нет-дисплей
+func(closeNDisplayForAllMobs)
+{
+	objParams();
+	private _ndList = getSelf(ndOpenedBy);
+	{
+		setVar(_x,openedNDisplay,nullPtr);
+		callSelfParams(closeNDisplayImplBackend,_x);
+		callFuncParams(_x,sendInfo, "clsND");
+	} foreach _ndList;
+	
+	setSelf(ndOpenedBy,[]);
+};

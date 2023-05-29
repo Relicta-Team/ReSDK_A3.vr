@@ -1,0 +1,63 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+getter_func(getAttacksTypeAssoc,ifcheck(getSelf(isShootMode),ATTACK_TYPE_ASSOC_WPN_1_3,ATTACK_TYPE_ASSOC_WPN_HANDLE));
+getter_func(getCombAnim,ifcheck(getSelf(isShootMode),ITEM_COMBATANIM_GUN,ITEM_COMBATANIM_GUN_HANDLE));
+
+func(onSetAttackType)
+{
+	objParams_2(_newType,_usr);
+	private _isSuccess = false;
+	private _assocShootCount = [ATTACK_TYPE_THRUST,ATTACK_TYPE_SWING];
+	
+	if (_newType == ATTACK_TYPE_SPECIAL) then {
+		//не стрелял - будет стрелять. нужно перевыбрать в соответствии с режимом стрельбы
+		if !getSelf(isShootMode) then {
+			private _idx = (vec2(1,3) find getSelf(shootCount));
+			if (_idx != -1) then {
+				setParam(1,_assocShootCount select _idx); //восстанавливаем предыдущий режим стрельбы
+			} else {
+				setParam(1,ATTACK_TYPE_THRUST);
+			};
+		} else {
+			setParam(1,ATTACK_TYPE_THRUST);
+		};
+		setSelf(isShootMode,!getSelf(isShootMode));
+		
+		_isSuccess = true;
+	} else {
+		//[vec2(ATTACK_TYPE_THRUST,"Одиночные"),vec2(ATTACK_TYPE_SWING,"Короткая очередь")
+		
+		private _shootCounter = [1,3];
+		private _idx = _assocShootCount find _newType;
+		if (_idx == -1) exitWith {
+			errorformat("%1::onSetAttackType() - cannot find shoot counter for attack type %2",callSelf(getClassName) arg _newType);
+		};
+		setSelf(shootCount,_shootCounter select _idx);
+		_isSuccess = true
+	};
+
+	if (_isSuccess) then {
+		callSuper(Item,onSetAttackType);
+		//update combat type
+		if equals(getSelf(loc),_usr) then {
+			callFuncParams(_usr,syncSmdSlot,getSelf(slot));
+		};
+	};
+};
+
+func(canSetAttackType)
+{
+	objParams_1(_newType);
+	if (_newType == ATTACK_TYPE_SPECIAL) then {
+		true
+	} else {
+		if getSelf(isShootMode) then {
+			_newType in [ATTACK_TYPE_THRUST,ATTACK_TYPE_SWING] //смотри в этом же файле 14 строку
+		} else {
+			callSuper(Item,canSetAttackType);
+		};
+	};
+};

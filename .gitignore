@@ -3,3 +3,13 @@ ReMaker/config.ini
 ReMaker/remake_output.log
 ReMaker/Temp
 ReMaker/Client/CLIENT
+Src/Editor/EditorSDKConfig.txt
+Src/Editor/EditorSettings.txt
+Src/Scripts/.vs
+Src/Scripts/output.cs
+Src/host/Tools/ScriptingEditor/output.cs
+Src/ReBridge/rebridge_log.txt
+Src/private.h
+Src/Scripts/vs_studio_project/.vs
+Src/Scripts/vs_studio_project/vs_studio_project/bin
+Src/Scripts/vs_studio_project/vs_studio_project/obj

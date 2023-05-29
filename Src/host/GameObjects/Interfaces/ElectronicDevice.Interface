@@ -1,0 +1,183 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+
+	editor_attribute("EditorVisible" arg "type:bool") editor_attribute("Tooltip" arg "Включен ли источник")
+	var(edIsEnabled,false);
+	var(edIsUsePower,false); //запитан ли источник
+	//var(edSyncAwait,false); //
+	//getter_func(canUsePower,getSelf(edIsEnabled) && !getSelf(edIsUsePower));
+
+	var(edIsNode,false);
+	editor_attribute("EditorVisible" arg "custom_provider:edOwner") editor_attribute("Tooltip" arg "Куда подключен источник")
+	editor_attribute("alias" arg "Владелец")
+	var_obj(edOwner);
+
+	editor_attribute("EditorVisible" arg "type:int" arg "range:0:999999") editor_attribute("Tooltip" arg "Сколько энергии расходует источник")
+	var_num(edReqPower);
+
+	func(collectNodesInfo)
+	{
+		objParams_1(_ref);
+
+		if (!getSelf(edIsNode)) then {
+			_ref pushBack [callSelf(getName),getSelf(edIsEnabled),getSelf(edIsUsePower),getSelf(pointer),getVar(getSelf(edOwner),pointer)];
+		} else {
+			_ref pushBack [callSelf(getName),getSelf(edIsEnabled),getSelf(edIsUsePower),getSelf(pointer),getVar(getSelf(edOwner),pointer)];
+			{
+				callFuncParams(_x,collectNodesInfo,_ref);
+			} foreach getSelf(edConnected);
+		};
+	};
+
+	func(getNodeReqPower) {
+		objParams();
+		//traceformat("getNodeReqPower() on %1",this.getClassName());
+		if (!getSelf(edIsEnabled)) exitWith {
+			//log("NONENABLED");
+			0
+		};
+
+		private _needAmount = getSelf(edReqPower);
+
+		if (!getSelf(edIsNode)) exitWith {
+			//log("NOT NODE");
+			_needAmount
+		};
+
+		{
+			MOD(_needAmount, + callFunc(_x,getNodeReqPower));
+		} forEach getSelf(edConnected); //edConnected is undef on edIsNode == false
+
+		//logformat("OUTPUTED - %1",_needAmount);
+
+		_needAmount
+	};
+
+	func(onChangePowerState) {
+		objParams();
+
+		if (!getSelf(edIsNode)) exitWith {
+			//warningformat("IS NOT NODE - %1",this.getClassName());
+			//неузел не включает остальные узлы
+		};
+
+		private _usePower = getSelf(edIsUsePower);
+
+		if (_usePower) then {
+			{
+				if (!getVar(_x,edIsUsePower)) then {
+					if (getVar(_x,edIsNode) && !getVar(_x,edIsEnabled)) exitWith {
+						//error("------------NEW EXCEPTION-----------");
+						//warningformat("%1.onChangePowerState() - SKIPPED BY NON ENABLED NODE",callFunc(_x,getClassName));
+					};
+					callFuncParams(_x,setUsePower,_usePower); //enable is switch-on
+				};
+			} forEach getSelf(edConnected);
+		} else {
+			{
+				callFuncParams(_x,setUsePower,_usePower); //disable
+			} forEach getSelf(edConnected);
+		};
+
+	};
+
+	// Пользовательское событие, которое вызывается при изменении состояния энергии
+	func(onChangeUsePower)
+	{
+		objParams();
+	};
+
+	// Пользовательское событие, которое вызывается при переключении источника
+	func(onChangeEnable)
+	{
+		objParams();
+		//warningformat("%1.onChangeEnable() - required override method",callSelf(getClassName));
+	};
+
+	func(setUsePower)
+	{
+		params ['this',["_mode",true]];
+		//traceformat("SETUSEPOWER on %1 - %2",callSelf(getClassName) arg _mode);
+
+		private _oldMode = getSelf(edIsUsePower);
+
+		if equals(_mode,_oldMode) exitWith {
+			//warningformat("ElectronicDevice::setUsePower() - Device %1 is already setted on %2",callSelf(getClassName) arg _oldMode);
+			false
+		};
+
+		setSelf(edIsUsePower,_mode);
+		callSelf(onChangeUsePower);
+
+		callSelf(onChangePowerState);
+
+		true
+
+	};
+
+	func(setEnable)
+	{
+		objParams_1(_mode);
+
+		if (getSelf(edIsEnabled) == _mode) exitWith {
+			//warningformat("%1.setEnable() - object already setted on mode %2",callSelf(getClassName) arg _mode);
+		};
+
+		setSelf(edIsEnabled,_mode);
+		callSelf(onChangeEnable);
+
+		if getSelf(edIsNode) then { //с помощью этого условия можно определять тип использования энергии
+			private _owner = getSelf(edOwner);
+			if isNullObject(_owner) exitWith {};
+			if (!getVar(_owner,edIsUsePower)) exitWith {
+				//error("+=============================+ CATCHED EXCEPTION");
+				//warningformat("%1.setEnable() - upeer level is not enabled",callSelf(getClassName));
+			};
+
+			callSelfParams(setUsePower,_mode);
+		};
+	};
+
+	func(getDescFor)
+	{
+		objParams_1(_usr);
+
+		_isUse = getSelf(edIsUsePower);
+		_isEnabled = getSelf(edIsEnabled);
+		_isNode = getSelf(edIsNode);
+
+		callSuper(IStruct,getDescFor) 
+		#ifdef EDITOR
+		+ format["%1 Это узел:%2 %1 Включен:%3 %1 Использует энергию:%4","<br/>",_isNode,_isEnabled,_isUse];
+		#else
+		+ (if(_isEnabled)then{"<br/>Включено."}else{"<br/>Выключено."})
+		#endif
+	};
+	getter_func(canUseMainAction,isTypeOf(_usr,Mob));
+	getter_func(getMainActionName,ifcheck(getSelf(edIsEnabled),"Выключить","Включить"));
+	func(onMainAction)
+	{
+		objParams_1(_usr);
+		private _oldMode = getSelf(edIsEnabled);
+
+		callSelfParams(setEnable,!_oldMode);
+	};
+
+	//подключить это устройство к источнику
+	//Внимание! метод addConnection определён в дочернем ElectronicDeviceNode
+	func(connectTo)
+	{
+		objParams_1(_src);
+		callFuncParams(_src,addConnection,this);
+	};
+	
+	// ВНИМАНИЕ! метод addConnection определён в дочернем removeConnection
+	func(disconnectFrom)
+	{
+		objParams_1(_owner);
+		
+		callFuncParams(_owner,removeConnection,this);
+	};

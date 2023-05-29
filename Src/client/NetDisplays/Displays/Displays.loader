@@ -1,0 +1,21 @@
+#include <..\NetDisplay.h>
+
+
+//include all displays here
+#include "PowerConsole.sqf"
+#include "TransferLiquid.sqf"
+#include "TransferStack.sqf"
+#include "FreezerDisplay.sqf"
+#include "DryChemDisplay.sqf"
+#include "ElecticalHacking.sqf"
+#include "ChemicalBlender.sqf"
+#include "ChemReactionsInfo.sqf"
+#include "Book.sqf"
+#include "Paper.sqf"
+#include "HeadConsole.sqf"
+#include "MerchantConsole.sqf"
+
+
+#include "MobInventory.sqf"
+
+#include "MessageBoxes.sqf"

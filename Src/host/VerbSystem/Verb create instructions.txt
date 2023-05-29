@@ -1,0 +1,39 @@
+Новый порядок определения действия
+
+1. Определяем верб в общем модуле src\host\VerbSystem\verbsDefine.sqf
+
+verb(class,stringname,verb_noargs)
+
+class - класс определения действия
+stringname - клиентский текст действия
+verb_noargs - опциональные параметры (пока не доступны)
+
+Макрос парсится
+#define verb(...) verb_map set ['class',[_index,stringname,[]]]; _index = _index + 1;
+
+2. Написать условие для добавления и выполняемое действие в серверном модуле src\host\VerbSystem\verbs.sqf
+
+regVerb(class)
+	act
+		//some code here...
+	cond
+		true
+endRegVerb
+
+макросы парсятся в структуру
+#define regVerb(class) _data = [{},{}]; _lastName = 'class';_lastVerb = [_lastName call verb_common_translateToNumber,_data]; [{
+
+#define act }]; _data set [2,{ verbActionParams();
+
+#define cond }]; _data set [1,{ verbCondParams();
+
+#define endRegVerb }]; logformat("registered verb %1",_lastName);
+
+3. После регистрации действий просто добавляем действие к классу
+
+class(SomeObject) extends(...)
+	...
+
+	verbList(examine arg temp,VERB_NO_INHERITANCE)
+	//or
+	verbList(verb1 arg verb2 arg verb3,GameObject) //inherit verbs from GameObject and added this verbs

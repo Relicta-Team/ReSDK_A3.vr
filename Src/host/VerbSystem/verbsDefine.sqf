@@ -1,0 +1,30 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+#include <..\engine.hpp>
+
+#define verb(class,name,verbargs) _lastVerbClassName = 'class'; verb_list set [_lastVerbClassName,[name,_verbLastIndex,verbargs]]; verb_inverted_list set [_verbLastIndex,_lastVerbClassName]; INC(_verbLastIndex);
+
+#define noargs null
+
+verb_list = createHashMap;
+verb_inverted_list = createHashMap;
+private _verbLastIndex = 0;
+
+verb(description,"Показать описание",noargs)
+verb(standupfromchair,"Встать",noargs)
+verb(smell,"Понюхать",noargs)
+verb(clean,"Очистить от грязи",noargs)
+verb(doempty,"Вылить содержимое",noargs)
+verb(craft,"Создать",noargs)
+//verb(changeatt,"Сменить тип атаки",noargs)
+verb(pickup,"Взять",noargs)
+verb(undress,"Раздеть",noargs)
+verb(twohands,"Двумя руками",noargs)
+verb(mainact,"Действие",noargs)
+verb(wpnopnmode,"Оружие",noargs) //пример: разломить, соеденить
+	verb(spinrev,"Крутить барабан",noargs)
+	verb(dropammorev,"Опустошить барабан",noargs)
+verb(showOrgans,"Внутренности",noargs)

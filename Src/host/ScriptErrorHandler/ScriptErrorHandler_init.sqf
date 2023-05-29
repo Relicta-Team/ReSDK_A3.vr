@@ -1,0 +1,81 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+#include <..\engine.hpp>
+#include <..\text.hpp>
+
+scriptError_internal_handleStack = {
+	params ["_fn","_line","_scope","_varmap"];
+	format["-> f:%1 at %2 (scope:%3), lv: %4",_fn,_line,_scope,(keys _varmap) joinString ", "];
+};
+scriptErrGlobLastMessage = "";
+scriptErrHndlGlobal = addMissionEventHandler ["ScriptError",
+{
+	/*
+		[error text, 
+		filename, 
+		fileline, 
+		fileoffset (character from start), 
+		filecontent (the whole function/file as string), 
+		stacktrace (literally output of diag_stacktrace)]
+			_functionName: String - function name
+			_lineNumber: Number - line number
+			_scopeName: String - scope name
+			_variablesHashmap: HashMap - all local variables
+	*/
+	params ["_errorMsg","_file","_line","_offset","_content","_stack"];
+	
+	#ifdef DEBUG
+		if !isNullReference(findDisplay 49) exitwith {};
+	#endif
+
+	//stack reverse (deep up)
+	reverse _stack;
+
+	_text = format["SCRIPT_ERROR: %1 (file: %2 at %3); %4",
+		_errorMsg,
+		ifcheck(_file=="","RUNTIME_CODE",_file),
+		_line,
+			endl + ((_stack apply {_x call scriptError_internal_handleStack}) joinString endl)
+		];
+	
+	scriptErrGlobLastMessage = _text;
+
+	[_text] call cprintErr;
+
+	if (!isNull(chatPrint)) then {
+		forceUnicode 1;
+		["<t color='#ff0000' size='0.9'>"+(sanitize(_text) regexReplace [endl,sbr])+"</t>","log"] call chatPrint;
+	};
+
+	if (!isNull(logError)) then {
+		[_text] call logError;
+	};
+
+	if (!isNull(relicta_debug_internal_handleError)) then {
+		[_errorMsg,_file,_line,_stack,_offset] call relicta_debug_internal_handleError;
+	};
+}];
+
+#ifdef DEBUG
+scriptError_makeError = {
+	params ["_mode"];
+	if (_mode == 0) exitwith {
+		_var = 0 / 0;
+	};
+	if (_mode == 1) exitwith {
+		_val = true;
+		_val = _val + 3;
+	};
+	if (_mode == 2) exitwith {
+		_de = player;
+		_test = +_de;
+	};
+	if (_mode == 3) exitwith {
+		call compile "a = a = a";
+	};
+	a = b + c;
+};
+#endif

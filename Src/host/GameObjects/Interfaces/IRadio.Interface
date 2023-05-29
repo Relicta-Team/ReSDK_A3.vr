@@ -1,0 +1,82 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+
+/*
+	Интерфейс радиоприёмника
+	Требует определения 
+	getterconst_func(isRadio,true);
+	var(radioIsEnabled,true);
+*/
+
+
+//настройки на земле и в теле персонажа
+// float - текущая частота
+// string - текущая кодировка
+// float - громкость приёмника. Все отрицательные значения указывают что рация не на громкой связи
+// float - дистанция слышимости объектом людей на земле если громкость > 0
+// ?vec3 - смещение относительно источника
+// ?float - расстояние рации. Если null то рацией нельзя пользоваться как говорительной
+// int - режим рации digital,digital_lr,airborne
+//var(radioSettings,[10 arg "someencoding" arg -10 arg 5 arg null arg 300 arg 0]);
+
+// OBSOLETE FUNCTION
+func(getRadioDataForInventory)
+{
+	objParams();
+	//[int freq, float volume,float canHearUnits, [prob pos.x,..pos.z], float dist, int type]
+	getSelf(radioSettings) params ["_freq","_enc","_vol","_hearDist","_biasPos","_waveDist","_raType"];
+	
+	private _unicalFreqInt = [_freq,_enc] call vsm_packFreqData;
+	private _result = [
+		_unicalFreqInt,
+		_vol,
+		_hearDist,
+		_biasPos
+	];
+	if !isNullVar(_waveDist) then {
+		_result pushBack [_waveDist,_raType];
+	};
+	
+	_result
+};	
+
+//Получает данные радио для bytearr
+func(getRadioData)
+{
+	objParams();
+	//[int freq, float volume,float canHearUnits, prob pos.x,..pos.z,radiowave distance,type]
+	
+	getSelf(radioSettings) params ["_freq","_enc","_vol","_dist","_biasPos","_waveDist","_rType"];
+	
+	private _unicalFreqInt = [_freq,_enc] call vsm_packFreqData;
+	
+	private _dat = [
+		_unicalFreqInt,
+		_vol,
+		_dist
+	];
+	
+	if isNullVar(_biasPos) then {
+		_biasPos = [null];
+	};
+	
+	_dat append _biasPos;
+	
+	if !isNullVar(_waveDist) then {
+		_dat set [0,-_unicalFreqInt]; //inverse freq
+		_dat pushBack _waveDist; //add working distance
+		_dat pushBack _rType; //add radio sound type
+	};
+
+	_dat
+};
+
+/*
+	updateRadioData - обновляет дату рации отсылая её клиентам
+		setRadioFrequency - устанавливает новую частоту и обновляет данные
+		setRadioVolume - устанавливает новую громкость
+		setRadioHearingDistance - устанавливает новую дистанцию слышимости
+*/

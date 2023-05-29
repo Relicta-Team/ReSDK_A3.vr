@@ -1,0 +1,235 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+#include <..\..\MatterSystem\MatterSystem.hpp>
+
+
+/*
+	Интерфейс контейнера для реагентов
+	//
+
+	var(reagents,vec3(this,10,[vec2("Water",5) arg vec2("Matter",10)]) call ms_create);
+*/
+
+region(DEPREACTED DEFS - !!remove_this_if_not_needed!!)
+	getterconst_func(defaultReactType,-1);
+	func(getOrDefaultReactType)
+	{
+		objParams_1(_defret);
+		private _drt = callSelf(defaultReactType);
+		[_drt,_defret] select (_drt == -1)
+	};	
+
+endregion
+
+//virtual user interface
+func(onTransferReagents)
+{
+	objParams();
+};
+
+
+attributeParams(hasField,"reagents");
+
+//Процесс реакций
+func(processReaction)
+{
+	objParams_1(_rt);
+	[getSelf(reagents),_rt] call ms_processReaction;
+};
+
+getterconst_func(transferAmount,[]); //Используется для размеров переливния. Оставить пустой массив если переливание невозможно
+var(curTransferSize,0); //системная переменная
+
+//может ли использоваться передача
+getter_func(canTransfer,private _tam = callSelf(transferAmount); !isNullVar(_tam) && {count _tam > 0});
+//Кастомные флаги на возможность передачи из А в Б
+getter_func(canTransferFrom,true);
+getter_func(canTransferTo,true);
+
+getterconst_func(isReagentContainer,true);
+
+getter_func(getFreeSpace,	ms_getFreeSpace(getSelf(reagents)));
+getter_func(getFilledSpace,	ms_getFilledSpace(getSelf(reagents)));
+getter_func(getCapacity,	ms_getCapacity(getSelf(reagents)));
+getter_func(getData,		ms_getMatterData(getSelf(reagents)));
+getter_func(getReagents,	ms_getMatterList(getSelf(reagents)));
+
+func(hasReagent)
+{
+	params ['this',"_r",["_c",0]];
+	_r in callSelf(getReagents) && {(callSelf(getReagents) get _r) >= _c}
+};
+
+func(getReagentVolume)
+{
+	objParams_1(_r);
+	callSelf(getReagents) getOrDefault [_r,0]
+};
+
+//добавляет реагент
+func(addReagent)
+{
+	objParams_2(_mat,_amount);
+	if ([getSelf(reagents),_mat,_amount] call ms_addMatter) exitWith {
+		callFunc(this,onTransferReagents);
+		true
+	};
+	false
+};
+
+//убирает реагент
+func(removeReagent)
+{
+	objParams_2(_mat,_amount);
+	if ([getSelf(reagents),_mat,_amount] call ms_removeMatter) exitWith {
+		callFunc(this,onTransferReagents);
+		true
+	};
+	false
+};
+
+func(removeReagents)
+{
+	objParams_1(_amount);
+	if ([getSelf(reagents),_amount] call ms_removeMatters) exitWith {
+		callFunc(this,onTransferReagents);
+		true
+	};
+	false
+};
+
+func(removeReagentsAndReturn)
+{
+	objParams_1(_amount);
+	private _l = [getSelf(reagents),_amount] call ms_removeMattersWithReturns;
+	callFunc(this,onTransferReagents);
+	_l
+};
+
+//удаляет всё содержимое и нормализует температуру
+func(clearReagentSpace)
+{
+	objParams();
+	private _ms = getSelf(reagents);
+	
+	{
+		[_ms,_x,_y] call ms_removeMatter;
+	} foreach ms_getMatterList(_ms);
+	callFunc(this,onTransferReagents);
+};
+
+//передаёт другому мсу количество жидкости
+func(transferReagents)
+{
+	objParams_2(_to,_amount);
+	if !callFunc(_to,isReagentContainer) exitWith {false};
+	if (_amount <= 0) exitWith {false};
+	
+	//do not use now...
+	if (!callSelf(canTransferFrom) || !callFunc(_to,canTransferTo)) exitWith {false};
+	
+	if ([getSelf(reagents),getVar(_to,reagents),_amount] call ms_transferMatter) then {
+		callFunc(this,onTransferReagents);
+		callFunc(_to,onTransferReagents);
+		true
+	} else {
+		false
+	};
+	
+};
+
+//Передача конкретного реагента из А в Б с отдачей данных
+func(transferReagent)
+{
+	objParams_3(_to,_name,_amount);
+	if !callFunc(_to,isReagentContainer) exitWith {false};
+	if (_amount <= 0) exitWith {false};
+	if (
+		[getSelf(reagents),_name,_amount] call ms_removeMatter
+		) exitWith {
+			[getVar(_to,reagents),_name,_amount] call ms_addMatter;
+			
+			callFunc(this,onTransferReagents);
+			callFunc(_to,onTransferReagents);
+			private _data = callSelf(getData);
+			if (_name in _data) then {
+				callFuncParams(_to,addReagentData,_name arg _data get _name);
+			};
+			
+			true
+		};
+	
+	false
+};
+
+
+
+func(destructor)
+{
+	objParams();
+	private _ms = getSelf(reagents);
+	if !isNullVar(_ms) then {
+		[_ms] call ms_delete;
+	};
+};
+
+//ms data
+func(addReagentData)
+{
+	objParams_2(_matter,_data);
+	[getSelf(reagents),_matter,_data] call ms_addMatterData;
+};
+
+func(removeReagentData)
+{
+	objParams_2(_matter);
+	[getSelf(reagents),_matter] call ms_removeMatterData;
+};
+
+// other
+
+//Возвращает реагент у которого количество привалирует. null если не найдено реагентов
+func(getMasterReagent)
+{
+	objParams();
+	private _reag = null;
+	private _vol = 0;
+	
+	{
+		if (_y > _vol) then {
+			_vol = _y;
+			_reag = [_x,_y];
+		};
+	} foreach callSelf(getReagents);
+	
+	_reag
+};
+
+//Возвращает тип реагента у которого количество привалирует. Пустая строка если не найдено реагентов
+func(getMasterReagentType)
+{
+	objParams();
+	private _reag = "";
+	private _vol = 0;
+	
+	{
+		if (_y > _vol) then {
+			_vol = _y;
+			_reag = _x;
+		};
+	} foreach callSelf(getReagents);
+	
+	_reag
+};
+
+//Возвращает название реагента у которого количество привалирует. Пустая строка если не найдено реагентов
+func(getMasterReagentName)
+{
+	objParams();
+	private _t = callSelf(getMasterReagentType);
+	if (_t == "") exitWith {""};
+	getMatter(_t) get "name"
+};

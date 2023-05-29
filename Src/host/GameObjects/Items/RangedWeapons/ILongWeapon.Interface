@@ -1,0 +1,32 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+getter_func(getAttacksTypeAssoc,ifcheck(getSelf(isShootMode),ATTACK_TYPE_ASSOC_WPN_1,ATTACK_TYPE_ASSOC_WPN_HANDLE));
+getter_func(getCombAnim,ifcheck(getSelf(isShootMode),ITEM_COMBATANIM_GUN,ITEM_COMBATANIM_GUN_HANDLE));
+
+func(onSetAttackType)
+{
+	objParams_2(_newType,_usr);
+	if (_newType == ATTACK_TYPE_SPECIAL) then {
+		setSelf(isShootMode,!getSelf(isShootMode));
+		setParam(1,ATTACK_TYPE_THRUST);
+		callSuper(Item,onSetAttackType);
+		//update combat type
+		if equals(getSelf(loc),_usr) then {
+			callFuncParams(_usr,syncSmdSlot,getSelf(slot));
+		};
+
+	};
+};
+
+func(canSetAttackType)
+{
+	objParams_1(_newType);
+	if (_newType == ATTACK_TYPE_SPECIAL) then {
+		true
+	} else {
+		callSuper(Item,canSetAttackType);
+	};
+};

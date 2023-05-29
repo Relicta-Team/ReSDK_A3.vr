@@ -1,0 +1,415 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+
+getter_func(canUseMainAction,callFunc(_usr,isMob));
+func(getMainActionName)
+{
+	objParams();
+	if isTypeOf(_usr,MobGhost) exitWith {
+		"Прорваться"
+	};
+	ifcheck(getSelf(isOpen),"Закрыть","Открыть")
+};
+getter_func(isWoodenDoor,false);
+getter_func(canBreakDoor,false); //флаг указания можно ли прострелить замок в двери
+
+var(isLockBreaked,false); //сломан ли замочек
+var(stBreakBonus,-4); //штраф за взлом
+var(doorBreakingHP, 5); //оставшихся успехов до слома.
+
+func(onMainAction)
+{
+	objParams_1(_usr);
+	if isTypeOf(_usr,MobGhost) exitWith {
+		callFuncParams(_usr,ghostBreakThroughDoor,this);
+	};
+	private _isOpen = getSelf(isOpen);
+	callSelfParams(setDoorOpen,!_isOpen);
+};
+
+var_num(lastDoorChangeOpenTime);
+
+func(setDoorOpen)
+{
+	objParams_2(_mode,_forced);
+	if isNullVar(_forced) then {_forced = false};
+
+	if (tickTime < getSelf(lastDoorChangeOpenTime) && !_forced) exitWith {};
+
+	private _oldState = getSelf(isOpen);
+	if getSelf(isLocked) exitWith {
+		if (!_oldState) then {
+			_snd = "doors\locked" + str pick [1 arg 2];
+			_rpith = getRandomPitchInRange(0.6,1.3);
+			callSelfParams(playSound,_snd arg _rpith);
+		};
+	};
+
+	setSelf(lastDoorChangeOpenTime,tickTime + 0.4);
+
+	setSelf(isOpen,_mode);
+	callSelf(animateSource);
+
+	private _snd = if (_mode) then {
+		callSelf(getOpenSoundParams);
+	} else {
+		callSelf(getCloseSoundParams);
+	};
+
+	_snd params ["_sound","_pitch","_dist","_vol"];
+
+	callSelfParams(playSound, _sound arg _pitch arg _dist arg _vol);
+};
+
+func(setDoorLock)
+{
+	objParams_2(_state,_doLockingSound);
+	private _oldState = getSelf(isLocked);
+
+	if (_state == _oldState) exitWith {false};
+	if getSelf(isOpen) exitWith {false}; //открытые двери локать нельзя
+	if (getSelf(isLockBreaked) && _state) exitWith {false};//нельзя залочить сломанную дверь
+
+	setSelf(isLocked,_state);
+
+	if isNullVar(_doLockingSound) then {_doLockingSound = true};
+	if (_doLockingSound) then {
+		_snd = "doors\lockswitch";
+		_rpith = getRandomPitchInRange(0.6,1.2);
+		callSelfParams(playSound,_snd arg _rpith);
+	};
+
+	true
+};
+
+func(onInteractWith)
+{
+	objParams_2(_with,_usr);
+
+	if isTypeOf(_with,Key) then {
+		if getSelf(isLockBreaked) exitWith {
+			callFuncParams(_usr,localSay,"Замок выломан" arg "error");
+		};
+
+		if equals(getVar(_with,keyOwner) arrayIntersect getSelf(keyTypes),[]) exitWith {
+			private _errmes = pick ["Ключ не подходит.","Этот ключ не отсюда.","Этим ключом не открыть."];
+			callFuncParams(_usr,localSay,_errmes arg "error");
+		};
+		private _lockstate = getSelf(isLocked);
+
+		if (callSelfParams(setDoorLock,!_lockstate)) then {
+			private _locktext = if (_lockstate) then {" отпирает дверь."} else {" запирает дверь."};
+			callFuncParams(_usr,worldSay,callFuncParams(_usr,getNameEx,"кто") + _locktext arg "act");
+		};
+	};
+	if isTypeOf(_with,Crowbar) then {
+		if getSelf(isLockBreaked) exitWith {
+			callFuncParams(_usr,localSay,"Замок выломан" arg "error");
+		};
+
+		private _bonus = getSelf(stBreakBonus);
+		private _res = callFuncParams(_usr,checkSkill,"ST" arg _bonus);
+		_res = getRollType(_res);
+		call {
+			if (equals(_res,DICE_SUCCESS) || equals(_res,DICE_CRITSUCCESS)) exitWith {
+				_snd = "doors\locked" + str pick [1 arg 2];
+				_rpith = getRandomPitchInRange(0.6,1.3);
+				callSelfParams(playSound,_snd arg _rpith);
+				//delete(this);
+				callSelfParams(setDoorLock,false);
+				setSelf(isLockBreaked,true);
+
+				modVar(_with,leftBreaked, - 1);
+				callFuncParams(_usr,meSay,"выламывает замок.");
+				if (getVar(_with,leftBreaked) <= 0) then {
+					delete(_with);
+					callFuncParams(_usr,worldSay,"Ломик рассыпается." arg "act");
+				};
+			};
+			if equals(_res,DICE_FAIL) exitWith {
+				callFuncParams(_usr,meSay,"ковыряет дверь.");
+			};
+			delete(_with);
+			callFuncParams(_usr,worldSay,"Ломик рассыпается." arg "act");
+		};
+		callFuncParams(_usr,addStaminaLoss,randInt(10,12));
+
+	};
+	if isTypeOf(_with,Lockpick) then {
+		if getSelf(isLockBreaked) exitWith {
+			callFuncParams(_usr,localSay,"Замок выломан" arg "error");
+		};
+		callSelfParams(startLockpick,_usr arg _with);
+	};
+};
+
+func(startLockpick)
+{
+	objParams_2(_usr,_lockpick);
+	if !getSelf(isLocked) exitWith {
+		private _m = pick["Так не закрыто же!","Не заперто.","Зачем взламывать открытое?!?!"];
+		callFuncParams(_usr,localSay,_m arg "error");
+	};
+	if getSelf(isOpen) exitWith {};
+
+	private _v = (50 / callFunc(_usr,getLockpicking));
+	callFuncParams(_usr,startProgress,this arg "target.onLockpicking" arg rand(_v+1,_v+2) arg INTERACT_PROGRESS_TYPE_MEDIUM arg _lockpick);
+};
+
+func(onLockpicking)
+{
+	objParams_2(_usr,_lockpick);
+
+	if !getSelf(isLocked) exitWith {
+		private _m = pick["Так не закрыто же!","Не заперто.","Зачем взламывать открытое?!?!"];
+		callFuncParams(_usr,localSay,_m arg "error");
+	};
+	if getSelf(isOpen) exitWith {};
+
+	private _bonus = 0;
+	if !callFuncParams(_usr,hasPerk,"PerkSeeInDark") then {
+		if (callFunc(_usr,getLighting) < LIGHT_LARGE) then {
+			modvar(_bonus) - 5;
+		};
+	};
+
+	modvar(_bonus) + getVar(_lockpick,lockpickBonus);
+
+	private _res = callFuncParams(_usr,checkSkill,"lockpicking" arg _bonus);
+	_res = getRollType(_res);
+	if (_res in [DICE_SUCCESS,DICE_CRITSUCCESS]) then {
+		callFuncParams(_usr,mindSay,"Мне удалось взломать замок!");
+		callSelfParams(setDoorLock,false arg false);
+	} else {
+		delete(_lockpick);
+		callFuncParams(_usr,localSay,"Отмычка сломалась." arg "error");
+	};
+};
+
+func(onCrushingContact)
+{
+	objParams_1(_usr);
+
+	if isTypeOf(_usr,MobGhost) exitWith {};
+
+	#ifdef EDITOR
+		[format["(DOOR) Врезание в %1",getSelf(pointer)],"log"] call chatPrint;
+	#endif
+	callSelfParams(onDoorKicked,_usr arg "ram");
+};
+
+// _interactType
+// "knock" - стучим ногой
+// "kick" - бъем ногой
+// "ram" - ВЪЕБАТЬСЯ
+func(onDoorKicked)
+{
+	objParams_2(_usr,_interactType);
+	FHEADER;
+	__GLOBAL_FLAG_SPECACT_KICK__ = true;
+
+	//Асс я тебе вытащил функцию для получения ноги. Проверяй её перед действием.
+	// _attWeapon - оружейный модуль: class(Punch)
+	// _attItem - объект ноги. если isNullReference(_attItem) -> ноги нет
+	//private __GLOBAL_FLAG_SPECACT_KICK__ = true; //ставим флаг что атакующее оружие нога (используется в Mob::getAttackerWeapon)
+	if (_interactType != "kick" && _interactType != "knock") then {
+		__GLOBAL_FLAG_SPECACT_KICK__ = null
+	};
+
+	callFunc(_usr,getAttackerWeapon) params ["_attWeapon","_attItem"];
+	if (isNullReference(_attItem) && (_interactType == "kick" || _interactType == "knock")) exitWith {
+		callFuncParams(_usr,localSay,"ЭТОЙ НОЖКИ НЕТ! ЧЕМ ПИНАТЬ?" arg "error");
+	};
+
+	/*//TODO: убрать после реализации проверки ноги
+	warningformat("%1::onDoorKicked() - perform action; Weapon %2; Object %3",
+		callSelf(getClassName) arg _attWeapon arg _attItem
+	);*/
+
+	// Без комбат мода просто стукаем дверочку ножкой
+	if (_interactType == "knock") exitWith {
+		// TODO: Сделать делей для постукиваний
+		_snd = "doors\knock_foot" + str randInt(1,4);
+		callSelfParams(playSound,_snd arg getRandomPitchInRange(0.6,1.3));
+		callFuncParams(_usr,addStaminaLoss,randInt(1,2));
+		callFuncParams(_usr,meSay,"стукает дверь ногой.");
+	};
+	// Комбат или Въебаловка всем телом в дверь
+	if (_interactType == "kick" || _interactType == "ram") exitWith {
+		// Делей
+		if(_interactType == "kick") then {
+			//fix 0.7.422 - выход из скоупа не завершал действие
+			if !callFunc(_usr,checkReadyWeapon) exitWith {
+				RETURN(0); //поскольку функция ничего не возвращает просто вернём нолик
+			};
+			callFuncParams(_usr,syncAttackDelayProcess,"melee" arg nullPtr arg nullPtr);
+		};
+
+		// Если не деревянная дверь, АГРЕССИВНО стучим
+		if (!callSelf(isWoodenDoor)) exitWith {
+			_snd = "doors\kick" + str randInt(1,3);
+			callSelfParams(playSound,_snd arg getRandomPitchInRange(0.6,1.3));
+
+			// Стучимся ножкой
+			if(_interactType == "kick") then {
+				callFuncParams(_usr,addStaminaLoss,randInt(7,10));
+				callFuncParams(_usr,meSay,"безуспешно бьет дверь ногой.");
+			}
+			// Стучимся ТЕЛОМ
+			else {
+				callFuncParams(_usr,addStaminaLoss,randInt(10,15));
+				callFuncParams(_usr,Stun,rand(3,4));
+				callFunc(_usr,Knockdown);
+				callFuncParams(_usr,meSay,"безуспешно бычит в дверь.");
+				// TODO: Накинуть урона телу
+			};
+		};
+
+		// Если деревянная - ломаем.
+		_snd = "doors\kick_break" + str randInt(1,3);
+		callSelfParams(playSound,_snd arg getRandomPitchInRange(0.6,1.3));
+
+		private _bonus = getSelf(stBreakBonus);
+		private _res = callFuncParams(_usr,checkSkill,"ST" arg _bonus);
+		_res = getRollType(_res);
+
+		// Если закрыта и не заперта - вламываемся с ноги
+		if (!getSelf(isOpen) && !getSelf(isLocked)) then {
+			if (equals(_res,DICE_CRITSUCCESS) || equals(_res,DICE_SUCCESS)) then {
+				modSelf(doorBreakingHP,-1);
+				callSelfParams(setDoorOpen,true arg true);
+
+				if(_interactType == "kick") then {
+					callFuncParams(_usr,addStaminaLoss,randInt(4,6));
+					callFuncParams(_usr,meSay,"залетает с ноги.");
+				}
+				else {
+					callFuncParams(_usr,addStaminaLoss,randInt(5,9));
+					callFuncParams(_usr,meSay,"сносит дверь.");
+				};
+			}
+			else {
+				if(_interactType == "kick") then {
+					callFuncParams(_usr,Stun,rand(1,1.5));
+					callFuncParams(_usr,meSay,"слабенько пинает дверку.");
+					callFuncParams(_usr,addStaminaLoss,randInt(10,15));
+				}
+				else {
+					callFuncParams(_usr,addStaminaLoss,randInt(15,20));
+					callFuncParams(_usr,Stun,rand(3,4));
+					callFunc(_usr,Knockdown);
+					callFuncParams(_usr,meSay,"бычит в дверь, но она оказывается сильнее.");
+				};
+			};
+		}
+		else {
+			// Ломаем дверочку
+			if equals(_res,DICE_CRITSUCCESS) then {
+				modSelf(doorBreakingHP,-2);
+				private _word = pick ["ЛЮТО","БЕШЕННО","ЖЕСТКО"];
+				callFuncParams(_usr,meSay,_word + " ломает дверь.");
+			};
+			if equals(_res,DICE_SUCCESS) then {
+				modSelf(doorBreakingHP,-1);
+				callFuncParams(_usr,meSay,"ломает дверь.");
+			};
+			if equals(_res,DICE_FAIL) then {
+				callFuncParams(_usr,meSay,"безуспешно ломает дверь.");
+
+				if(_interactType == "kick") then {
+					callFuncParams(_usr,addStaminaLoss,randInt(5,10));
+					callFuncParams(_usr,Stun,rand(1,1.5));
+				}
+				else {
+					callFuncParams(_usr,addStaminaLoss,randInt(10,15));
+					callFuncParams(_usr,Stun,rand(3,4));
+					callFunc(_usr,Knockdown);
+				};
+			};
+			if equals(_res,DICE_CRITFAIL) then {
+				if(_interactType == "kick") then {
+					callFuncParams(_usr,meSay,"спотыкатся, ломая дверь.");
+					callFuncParams(_usr,Stun,rand(1.5,2));
+					callFuncParams(_usr,addStaminaLoss,randInt(10,15));
+					callFunc(_usr,Knockdown);
+					// TODO: Накинуть урона ногам
+				}
+				else {
+					callFuncParams(_usr,meSay,"спотыкатся, быча в дверь.");
+					callFuncParams(_usr,Stun,rand(3,4));
+					callFuncParams(_usr,addStaminaLoss,randInt(15,20));
+					callFunc(_usr,Knockdown);
+					// TODO: Накинуть урона всему телу
+				};
+				//callFuncParams(_usr,applyDamage,rand(2,6) arg DAMAGE_TYPE_CRUSHING arg [_part] call gurps_convertBodyPartToTargetZone arg DIR_FRONT);
+			};
+			callFuncParams(_usr,addStaminaLoss,randInt(20,25));
+		};
+
+		if (getSelf(doorBreakingHP) <= 0 && !getSelf(isLockBreaked)) then {
+			setSelf(isLockBreaked, true);
+			callSelfParams(worldSay,"Дверь ломается!");
+			if getSelf(isLocked) then {
+				callSelfParams(setDoorLock,false arg false);
+			};
+			if !getSelf(isOpen) then {
+				callSelfParams(setDoorOpen,true arg true);
+			};
+		};
+	};
+};
+
+var(doorLastKnock,0);
+
+func(onClick)
+{
+	objParams_1(_usr);
+	
+	if (getSelf(doorLastKnock) >= tickTime) exitwith {};
+
+	private _snd = "doors\knock" + str randInt(1,6);
+	callFuncParams(_usr,playSound,_snd arg getRandomPitchInRange(0.6,1.3));
+	private _m = format["%1 в %2",pick["стучит","долбит","стучится"],callSelf(getName)];
+	callFuncParams(_usr,meSay,_m);
+	setSelf(doorLastKnock,tickTime + 1.5);
+};
+
+func(onBulletAct)
+{
+	objParams_6(_dam,_type,_sel,_usr,_dist,_throwed);
+	callSelfParams(handleDoorLockBreak,_dam arg _throwed);
+	super(); //базовый вызов после обработчика потому что объект уничтожается в базовом вызове
+};
+
+func(handleDoorLockBreak)
+{
+	objParams_2(_dam,_bulletObj);
+	
+	if !callSelf(canBreakDoor) exitWith {};
+	if getSelf(isLockBreaked) exitWith {};
+	
+	//new damage because max hp <= 5
+	_dam = D6;
+	if callFunc(_bulletObj,isNonLethalAmmo) then {
+		_dam = 0;
+	};
+
+	private _newHP = (getSelf(doorBreakingHP) - _dam) max 0;
+	setSelf(doorBreakingHP, _newHP);
+	if (_newHP <= 0) then {
+		private _mstr = (pick["слетает","вылетает","улетает","вываливается","отваливается","падает"])+" "+(pick["прочь","в сторону","куда-то","вниз"]);
+		callSelfParams(worldSay,"В "+callSelf(getName)+" попадает " + callFunc(_bulletObj,getName) + " и замок "+_mstr arg "act" arg 5 arg false);
+		callSelfParams(setDoorLock,false arg false);
+		setSelf(isLockBreaked,true);
+	} else {
+		private _rm = pick["попадает","влетает","залетает","бьет","хреначит"];
+		private _postmes = if (_dam<=0) then {
+			", "+(pick["но","и"])+" ничего не "+(pick["случилось","произошло","происходит","изменилось"]);
+		} else {""};
+		
+		callSelfParams(worldSay,"В замок " + callSelf(getName) + " "+_rm+" " + callFunc(_bulletObj,getName)+_postmes arg "act" arg 5 arg false);
+	};
+};

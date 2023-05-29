@@ -1,0 +1,132 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+#include <..\..\NOEngine\NOEngine.hpp>
+
+/*
+	Trigger interface:
+
+	Working modes:
+		CalledOnce (tCallDelay == -1) - call only one times
+		Simulated (tCallDelay >= 0) - simulated regular with delay
+
+	tDelay - как часто вызывается метод update проверки состояния
+	tCallDelay - через сколько будет разблокирован триггер. если -1 выключается после активации, 0 не выключается, > 0 включается после указазнного времени в tCallDelay
+*/
+
+// distance interaction, delay thread check, calling delay per units
+attributeParams(hasField,"tDistance" arg "tDelay" arg "tCallDelay");
+
+
+var_array(tListInside); //list mobs inside area object
+var(_tHandle,-1); //internal field
+getter_func(tIsEnabled,getSelf(_tHandle) != -1); //is activated trigger
+var_bool(__tLocker); //locker update thread (Можно использовать для начального состояния триггеров в режиме CalledOnce)
+
+//called on user activated trigger by distance
+func(onTriggerActivated)
+{
+	objParams_1(_usr);
+};
+
+// started or stopped trigger active mode
+func(setTriggerEnalbe)
+{
+	objParams_1(_mode);
+
+	if not_equals(getSelf(__tLocker),_mode) exitWith {}; // already setted on _mode
+	
+	//Нам нужно перевключать ловушки
+	/*if (getSelf(tCallDelay) == -1) exitWith {
+		errorformat("ITrigger::setTriggerEnalbe() - Triggers in <CalledOnce> mode cant switch mode: %1 as %2", callSelf(getName) arg callSelf(getClassName));
+	};*/
+
+	if (_mode) then {
+		setSelf(__tLocker,false);
+		if (count getSelf(tListInside) > 0) then {
+			callSelfParams(setTriggerWork,true);
+		};
+	} else {
+		setSelf(__tLocker,true);
+		callSelfParams(setTriggerWork,false);
+	};
+};
+
+// internal start or stop main trigger loop
+func(setTriggerWork)
+{
+	objParams_1(_mode);
+	if (callSelf(tIsEnabled) == _mode) exitWith {};
+
+	if (_mode) then {
+		if getSelf(__tLocker) exitWith {};
+
+		callSelfParams(startUpdateMethod,"__tOnUpdate" arg "_tHandle" arg getSelf(tDelay));
+	} else {
+		callSelfParams(stopUpdateMethod,"_tHandle");
+	};
+};
+
+
+// internal thread update method
+func(__tOnUpdate)
+{
+	updateParams();
+
+	//lock update check
+	if getSelf(__tLocker) exitWith {};
+	
+	_dist = getSelf(tDistance);
+	_loc = getSelf(loc);
+	{
+		if ((getVar(_x,owner) distance _loc) <= _dist) then {
+			callSelfParams(onTriggerActivated,_x);
+			_tCallDelay = getSelf(tCallDelay);
+			if (_tCallDelay == -1) exitWith {
+				setSelf(__tLocker,true);
+				callSelfParams(setTriggerWork,false);
+				break;
+			};
+			if (_tCallDelay > 0) then {
+				setSelf(__tLocker,true);
+				_code = {
+					objParams();
+					if isNullObject(this) exitWith {};
+					setSelf(__tLocker,false);
+				};
+				invokeAfterDelayParams(_code,_tCallDelay,this);
+				break;
+			};
+		};
+		true;
+	} count getSelf(tListInside);
+};
+
+
+//WARN! Auto impl init model need for noe::internal::loadTrigger
+func(initModel) (compile format['%1;
+private _vobj = callSuper(%2,initModel);
+[this] call noe_internal_loadTrigger;
+_vobj;',toString{objParams_3(_pos,_dir,_vec)},_mother]);
+
+func(onEnterArea)
+{
+	objParams_1(_usr);
+	private _list = getSelf(tListInside);
+	_list pushBack _usr;
+	if (count _list == 1) then {
+		callSelfParams(setTriggerWork,true);
+	};
+};
+
+func(onLeaveArea)
+{
+	objParams_1(_usr);
+	private _list = getSelf(tListInside);
+	_list deleteAt (_list find _usr);
+	if (count _list == 0) then {
+		callSelfParams(setTriggerWork,false);
+	};
+};
