@@ -210,7 +210,8 @@ function(goasm_prefab_createPrefab)
 		call goasm_builder_rebuildClasses;	
 
 		if (_openAfterAdd) then {
-			["WorkspaceHelper","gotoclass",[_file,_line+1],true] call rescript_callCommand;
+			_buildContext params ["_file","_line"];
+			["WorkspaceHelper","gotoclass",[_file,_line],true] call rescript_callCommand;
 		};
 	},{
 		_this params ["","_postEvents",""];
