@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: Beta 7.0';__metaInfoVersion__ = 2;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.0';__metaInfoVersion__ = 2;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -657,11 +657,11 @@ _4060_588873959_377204_15897 = ['IStruct',[4060.59,3959.38,9.40606,true],198.745
 ['AmmoBoxRifle',[4048.69,4085.9,9.33541],274.116,[0,0,1]] call InitItem; 
 ['AmmoBoxRifle',[4047.7,4085.53,9.34633],3.33705,[0,0,1]] call InitItem; 
 ['AmmoBoxRifle',[4024.64,4082.95,8.97185],8.20144,[0,0,1]] call InitItem; 
-['CampfireDisabled',[4049.19,4085.44,13.8361,true],0,[0.00849237,-0.00276203,0.99996]] call InitStruct; 
+['CampfireDisabled',[4049.19,4085.44,13.8361,true],0,[0.00849219,-0.00276204,0.99996]] call InitStruct; 
 _4064_310064035_874518_95234 = ['IStruct',[4064.31,4035.87,14.6516,true],3.16303,[0.0169692,0.367752,0.929769], {_thisObj setvariable ['model','a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4065_312014035_801278_89258 = ['IStruct',[4065.31,4035.8,14.6025,true],0.241023,[-0.231942,0.285176,0.929988], {_thisObj setvariable ['model','a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4069_476324033_426518_46330 = ['IStruct',[4069.48,4033.43,14.7505,true],357.562,[-0.0267012,0.114912,0.993017], {_thisObj setvariable ['model','a3\structures_f_argo\military\fortifications\sandbagbarricade_01_f.p3d'];}] call InitStruct; // !!! realocated model !!!
-_4069_620614078_3029812_82004 = ['Decor',[4069.62,4078.3,17.9995,true],[-0.0600174,0.049355,0.996976],[-0.998177,-0.00932519,-0.059628], {_thisObj setvariable ['model','a3\structures_f_exp\infrastructure\bridges\bridgewooden_01_pillar_f.p3d'];}] call InitDecor; // !!! realocated model !!!
+_4069_620614078_3029812_82004 = ['Decor',[4069.62,4078.3,17.9995,true],[-0.0600174,0.0493553,0.996976],[-0.998177,-0.0093252,-0.059628], {_thisObj setvariable ['model','a3\structures_f_exp\infrastructure\bridges\bridgewooden_01_pillar_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _4064_472664078_198008_59164 = ['IStruct',[4064.47,4078.2,14.3476,true],273.315,[-0.00296668,-0.00843017,0.99996], {_thisObj setvariable ['model','a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4064_468514078_2268112_26885 = ['IStruct',[4064.47,4078.23,16.5177,true],270.972,[-0.0248305,-0.0596615,-0.99791], {_thisObj setvariable ['model','a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4071_789554036_503919_27788 = ['IStruct',[4071.79,4036.5,14.543,true],343.207,[0.169024,-0.163591,0.971941], {_thisObj setvariable ['model','a3\structures_f\households\slum\slum_house01_ruins_f.p3d'];}] call InitStruct; // !!! realocated model !!!

@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: Beta 6.0';__metaInfoVersion__ = 2;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.0';__metaInfoVersion__ = 2;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -655,7 +655,7 @@ _3988_700443956_462409_84011 = ['IStruct',[3988.7,3956.46,14.8697,true],87.5462,
 _3982_386233992_9936510_24331 = ['IStruct',[3982.39,3992.99,15.2729,true],77.5609,[-0.00554887,-0.00702299,0.99996], {_thisObj setvariable ['model','ml_shabut\eft\matrassych.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3983_097173993_8898910_27659 = ['SpawnPoint',[3983.1,3993.89,10.2766],0,[0,0,1]] call InitStruct; 
 _4030_450443959_2981010_16307 = ['SpawnPoint',[4030.45,3959.3,10.1631],0,[0,0,1]] call InitStruct; 
-_3925_357423961_352789_74894 = ['SpawnPoint',[3925.36,3961.35,9.74894],0,[0,0,1]] call InitStruct; 
+_3925_357423961_352789_74893 = ['SpawnPoint',[3925.36,3961.35,9.74893],0,[0,0,1]] call InitStruct; 
 _4078_108644004_4558110_96919 = ['SpawnPoint',[4078.11,4004.46,10.9692],268.814,[0,0,1]] call InitStruct; 
 _4056_144043963_5837412_28744 = ['SpawnPoint',[4056.14,3963.58,12.2874],0,[0,0,1]] call InitStruct; 
 _4014_962163971_1870110_48278 = ['SpawnPoint',[4014.96,3971.19,10.4828],0,[0,0,1]] call InitStruct; 
@@ -1023,8 +1023,8 @@ if (!isNil'_3983_097173993_8898910_27659') then {
 if (!isNil'_4030_450443959_2981010_16307') then {
 	_4030_450443959_2981010_16307 setvariable ['spawnpointname',"bomz2"];
 };
-if (!isNil'_3925_357423961_352789_74894') then {
-	_3925_357423961_352789_74894 setvariable ['spawnpointname',"hunter"];
+if (!isNil'_3925_357423961_352789_74893') then {
+	_3925_357423961_352789_74893 setvariable ['spawnpointname',"hunter"];
 };
 if (!isNil'_4078_108644004_4558110_96919') then {
 	_4078_108644004_4558110_96919 setvariable ['spawnpointname',"event"];
