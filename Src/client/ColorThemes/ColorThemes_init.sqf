@@ -9,7 +9,7 @@
 
 #define defVec4 vec4(1,1,1,1)
 #define defHTML "ffffff"
-=a=a=aa=
+
 ct_map_colors = createHashMapFromArray [
 	//common widgets
 	["back",defVec4], //Задний фон
