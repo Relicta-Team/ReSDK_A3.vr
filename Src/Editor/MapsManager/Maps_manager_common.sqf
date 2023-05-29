@@ -79,12 +79,17 @@ function(mm_build)
 		false
 	};
 
-	forceUnicode 1;
-	//
+	// DEPRECATED solution for map saving
+	//forceUnicode 1;
 	//["FileManager","Write",[_pathFull,_output]] call rescript_callCommandVoid;
-	copyToClipboard _output;
+	//copyToClipboard _output;
+	//["OOPBuilder","runsavemap",[getMissionPath "ScriptsEditor\SaveMapFromClip.exe",_pathFull]] call rescript_callCommandVoid; 
 
-	["OOPBuilder","runsavemap",[getMissionPath "ScriptsEditor\SaveMapFromClip.exe",_pathFull]] call rescript_callCommandVoid; 
+	//now we don't need using clipboard
+	if !([_pathFull,_output,false] call file_write) exitwith {
+		["Неизвестная ошибка при запаковке карты. Не удалось сохранить файл карты."] call showError;
+		false
+	};
 	
 	["Map builded"] call printLog;
 
@@ -93,7 +98,6 @@ function(mm_build)
 	};
 
 	true
-	//;
 }
 
 function(mm_handleObjectSave)
