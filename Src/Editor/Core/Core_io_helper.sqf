@@ -10,6 +10,7 @@ file_const_defaultAsyncWriteTimeout = 5;
 #define PRINT_FILEWRITE_ERROR_REASON
 #define EXTENDED_LOGGING_ASYNCWRITE
 #define EXTENDED_LOGGING_ASYNCCOPY
+#define EXTENDED_LOGGING_ASYNCUNLOCK
 
 function(file_open)
 {
@@ -263,6 +264,55 @@ function(file_copyAsync)
 	};
 
 	true
+}
+
+function(file_unlockAsync)
+{
+	params ["_file","_ctx",["_isRelative",true],["_onUnlocked",{}],["_onTimeout",{}]];
+	if ([_path,_isRelative] call file_isLocked) then {
+		startAsyncInvoke
+			{
+				_this set [0,(_this select 0) + 3];
+				_this params ["_inc","_path","_ctx","_isRelative"];
+				
+				#ifdef EXTENDED_LOGGING_ASYNCUNLOCK
+				["[%3]: check lock %1 (%2) [%4]",_inc,_inc %2,__FILE__,_path] call printTrace;
+				#endif
+				
+				if (_inc%2 != 0) exitwith {false};
+
+				if (
+					[_path,_isRelative] call file_isLocked
+				) then {
+					
+					#ifdef EXTENDED_LOGGING_ASYNCUNLOCK
+					["-------------- try unlock"] call printTrace;
+					#endif
+
+					call file_clearFileLock;
+					false
+				} else {
+					true
+				};
+			},
+			{
+				setScopeName("file_unlockAsync<_onUnlocked>");
+
+				_this params ["_inc","_path","_ctx","_isRelative","_onUnlocked"];
+				_ctx call _onUnlocked;
+			},
+			[0] + _this,
+			file_const_defaultAsyncWriteTimeout,
+			{
+				setScopeName("file_unlockAsync<_onTimeout>");
+
+				_this params ["_inc","_path","_ctx","_isRelative","","_onTimeout"];
+				_ctx call _onTimeout;
+			}
+		endAsyncInvoke
+	} else {
+		_ctx call _onUnlocked;
+	};
 }
 
 //window helper
