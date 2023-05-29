@@ -53,9 +53,6 @@ class(SmallChair) extends(IChairAsItem)
 	var(model,"ca\buildings\furniture\ch_mod_d.p3d");
 	getterconst_func(getChairOffsetPos,vec3(0,0,0.01));
 	getterconst_func(getChairOffsetDir,-180);
-	
-	getter_func(seatListOffsetPos,[vec3(0,0,0.01)]);
-	getter_func(seatListOffsetDir,[-180]);
 endclass
 
 

@@ -164,6 +164,10 @@ cam_camshake_onUpdate = {
 		(call mouseGetPosition)params["_precX","_precY"];
 		modvar(_xdir) + (cam_movingOffest select 0);
 		modvar(_ydir) + (cam_movingOffest select 1);
+		if ([player] call smd_isLyingOnBed) then {
+			modvar(_xdir) + -180;
+			modvar(_ydir) + 0;
+		};
 	};
 
 	cam_camshakePos = [_xb,_y,_z];

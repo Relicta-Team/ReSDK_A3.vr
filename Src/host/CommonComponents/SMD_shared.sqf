@@ -59,3 +59,8 @@ smd_isSitting = {
 	params ["_mob"];
 	equals(TYPEOF(attachedto _mob),"C_Quadbike_01_F")
 };
+
+smd_isLyingOnBed = {
+	params ["_mob"];
+	[_mob] call smd_isSitting && {equals((attachedto _mob) getVariable vec2("sitmode",""),"bed")}
+};

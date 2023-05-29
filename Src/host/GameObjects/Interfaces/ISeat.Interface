@@ -26,24 +26,45 @@ getter_func(getChairStandupCombatAnimation,"amovpknlmstpsraswpstdnon_amovpercmst
 
 //константа для стула/кровати или любого объекта на который можно сесть
 getterconst_func(isSeat,true); 
-//одноместное 
-getter_func(isSingleSeat,count callSelf(seatListOffsetPos) == 1);
+//одноместное ли сиденье
+func(isSingleSeat)
+{
+	objParams();
+	private _ofsPos = callSelf(getChairOffsetPos);
+	count _ofsPos == 3 && {
+		equalTypes(_ofsPos select 0,0)
+		&& equalTypes(_ofsPos select 1,0)
+		&& equalTypes(_ofsPos select 2,0)
+	}
+};
 
-//массивы смещений трансформации для стула или кровати
-getter_func(seatListOffsetPos,if(true)exitWith{[callSelf(getChairOffsetPos)]};[vec3(0,0,0)]);
-getter_func(seatListOffsetDir,if(true)exitWith{[callSelf(getChairOffsetDir)]};[0]);
+//массивы смещений трансформации для стула, многоместного сиденья или кровати
+getter_func(seatListOffsetPos,ifcheck(callSelf(isSingleSeat), [callSelf(getChairOffsetPos)], callSelf(getChairOffsetPos)) );
+func(seatListOffsetDir)
+{
+	objParams();
+	private _ofsDir = callSelf(getChairOffsetDir);
+	if equalTypes(_ofsDir,0) then {
+		//conv to array
+		callSelf(seatListOffsetPos) apply {_ofsDir}
+	} else {
+		_ofsDir
+	}
+};
+
+
 //сюда вписываются мобы которые заняли данные места
 var(seatListOwners,[nullPtr]);
 //это ссылка на объекты-заглушки для репликации
 var(_seatListDummy,[objNUll]);
 
-//название мест
+//название мест (нужно дописать логику)
 getter_func(seatListName,["Сиденье"]);
 
 func(constructor)
 {
 	objParams();
-	private _count = count callSelf(seatListOffsetDir);
+	private _count = count callSelf(seatListOffsetPos);
 	private _l = getSelf(seatListOwners);
 	_l resize _count;
 	setSelf(seatListOwners,_l apply {nullPtr});
@@ -63,11 +84,39 @@ func(canSeat)
 	callSelfParams(isSeatFree,_index);
 };
 
+func(getNearFreeSeatIndex)
+{
+	objParams_1(_usr);
+	if !callSelf(isInWorld) exitwith {-1};
+	private _nearPos = 9999;
+	private _retIndex = -1;
+	private _startPos = callFunc(_usr,getLastInteractEndPos);
+	private _endPos = null;
+	private _wObj = getSelf(loc);
+	
+	{
+		if !callSelfParams(isSeatFree,_foreachIndex) then {continue};
+
+		_endPos = _wObj modelToWorld _x;
+		if (_startPos distance _endPos < _nearPos) then {
+			_nearPos = _startPos distance _endPos;
+			_retIndex = _foreachIndex;
+		};
+	} foreach callSelf(seatListOffsetPos);
+
+	_retIndex
+};
+
 //стандартная процедура присоединения
 func(seatConnect)
 {
-	objParams_2(_usr,_index);
+	objParams_2(_usr,_optIdx);
 	
+	private _index = ifcheck(isNullVar(_optIdx),callSelfParams(getNearFreeSeatIndex,_usr),_optIdx);
+
+	//Не нашлось подходящего места
+	if (_index == -1) exitwith {false};
+
 	//место уже занято
 	if !callSelfParams(canSeat,_usr arg _index) exitWith {false};
 	if callFunc(_usr,isConnected) exitWith {false};
@@ -87,6 +136,11 @@ func(seatConnect)
 	
 	//Создаём репликатор
 	private _rplObj = "C_Quadbike_01_F" createVehicle [0,0,0];
+
+	if isTypeOf(this,BedBase) then {
+		_rplObj setvariable ["sitmode","bed",true];
+	};
+
 	_rplObj allowDamage false; 
 	#ifndef EDITOR
 	_rplObj hideObjectGlobal true;
@@ -193,7 +247,7 @@ getter_func(getMainActionName,"Сесть");
 func(onMainAction) {
 	objParams_1(_usr);
 	
-	callSelfParams(seatConnect,_usr arg 0);
+	callSelfParams(seatConnect,_usr);
 };
 
 func(onClick)
@@ -202,7 +256,8 @@ func(onClick)
 	if callFunc(_usr,isGrabbedInActiveHand) exitWith {
 		private _m = callFunc(_usr,getGrabbedInActiveHand);
 		if isNullReference(_m) exitWith {};
-		callSelfParams(seatConnect,_m arg 0);
+		private _idx = callSelfParams(getNearFreeSeatIndex,_usr);
+		callSelfParams(seatConnect,_m arg _idx);
 	};
 	super();
 };
