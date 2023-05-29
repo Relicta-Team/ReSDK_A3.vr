@@ -58,7 +58,8 @@ menu_structureLayout = [
 		"text:Сохранить карту;act:[true] call mm_saveCurrentMapToFile;",
 		"text:Открыть карту;act: call mm_openMapSelector;",
 		"",
-		"text:Выполнить сборку карты;act:[] call mm_build;"
+		"text:Выполнить сборку карты;act:[] call mm_build;",
+		"text:Собрать все карты;act:['not implemented'] call showError;ena:false"
 	],
 	["text:Правка",
 		"text:Отменить;data:Undo;short:556;pic:a3\3den\data\displays\display3den\toolbar\undo_ca.paa",

@@ -85,6 +85,13 @@ function(core_settings_getValue)
 	_d select SETP_IDX_DEFDATA select SETP_IDX_DEFDATA_CURRENTVAL
 }
 
+function(core_settings_getDefaultValue)
+{
+	private _d = core_settings_map_settings get _this;
+	if isNullVar(_d) exitWith {null};
+	_d select SETP_IDX_DEFDATA select SETP_IDX_DEFDATA_DEFALUT
+}
+
 function(core_settings_setValue)
 {
 	params ["_setName","_value"];
@@ -131,6 +138,7 @@ function(core_settings_load)
 	private _data = ([core_settings_pathAbs,false] call file_read) splitString endl;
 	private _codeCount = {! issectregion(_x) }count core_settings_list_default;
 	private _setsCount = {! ([_x,"^#"] call regex_isMatch)} count _data;
+	/*
 	if (_codeCount != _setsCount) exitWith {
 		private _deleted = [core_settings_pathAbs,false] call file_delete;
 		private _resText = if (_deleted) then {
@@ -140,8 +148,14 @@ function(core_settings_load)
 		};
 		private _info = format["%3%3Настроек редактора: %1%3Настроек в конфиге: %2%3",_codeCount,_setsCount,endl];
 		setLastError("Несоответствие количества параметров в настройках."+_info+endl+_resText);
+	};*/
+
+	if (_codeCount != _setsCount) then {
+		["Settings count missmatch; in config: %1; expected %2",_setsCount,_codeCount] call printWarning;	
 	};
 	
+	private _possibleSettingsList = keys core_settings_map_settings;
+
 	//["prop=""hello""","^\w+=",""] call regex_replace //forvalue
 	//"(?!\w+)=.*" forkey
 
@@ -153,13 +167,30 @@ function(core_settings_load)
 		};
 
 		_key = [_x,"(?!\w+)=.*",""] call regex_replace;
+		if !(_key in _possibleSettingsList) then {
+			["%1 - setting '%2' not exists",__FUNC__,_key] call printWarning;
+			continue;
+		};
 		_val = [_x,"^\w+=",""] call regex_replace;
 		[_key,
 			//?unsafe parsing. maybee use another method?
 			call compile _val
 		] call core_settings_setValue;
+
+		array_remove(_possibleSettingsList,_key);
 	} foreach _data;
 	
+	if (count _possibleSettingsList > 0) then {
+		{
+			_def = _x call core_settings_getDefaultValue;
+			if isNullVar(_def) exitwith {
+				setLastError("Error on get defalut value for " + _x);
+			};
+			[_x,_def] call core_settings_setValue;
+			["Applied default setting for key '%1'",_x] call printLog;
+		} foreach _possibleSettingsList;
+	};
+
 	if (_showMessage) then {
 		["Editor settings loaded"] call printLog;
 	};

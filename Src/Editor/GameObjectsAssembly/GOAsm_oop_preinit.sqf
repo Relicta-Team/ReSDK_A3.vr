@@ -164,7 +164,7 @@ oop_getFieldBaseValue = {
 	if (_doCompile) then {
 		private _val = call compile _valStr;
 		if (isNullVar(_val) && {not_equals(_altMethodNameIfNil,"")}) then {
-			_val = 0 call (_type getVariable [_altMethodNameIfNil,{"ERROR_RUNTIME_METHOD_GET_VALUE"}])
+			_val = nil call (_type getVariable [_altMethodNameIfNil,{"ERROR_RUNTIME_METHOD_GET_VALUE"}])
 		};
 
 		_valStr = _val;

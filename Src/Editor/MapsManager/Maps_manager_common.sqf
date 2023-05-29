@@ -13,6 +13,9 @@
 	no-success-info - без успешного вывода уведомления на экране
 	no-bake-object-info - без лога запеченых объектов 
 	no-ecode-logs - без логов сборки ecode-инструкций
+
+	TODO
+	build-all-maps - собрать все карты
 */
 function(mm_build)
 {

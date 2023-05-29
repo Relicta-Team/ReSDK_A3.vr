@@ -17,9 +17,6 @@ goasm_builder_postInit_delegate = {}; //то что выполнится пос�
 goasm_builder_onError_delegate = {}; //пользовательский код, выполняющийся при ошибке компиляции
 	goasm_builder_postInit_customSetup = false; //это значение отвечает за пользователькое выполнение постбилд кода (смотрите goasm_builder_setPostBuildCode)
 
-//По умолчанию включено потому что постоянно лочится файл
-goasm_prefabCreator_openGeneratedPrefabAfterCreate = true; //при true будет открывать сгенерированный класс в vs code
-
 #include "GOAsm_oop_preinit.sqf"
 #include "GOAsm_oop_builder.sqf"
 #include "GOAsm_oop_attributes.sqf"
