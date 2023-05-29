@@ -263,14 +263,20 @@ function(golib_massoc_resolveConflictsProcess_pickClass)
 	[_obj] call golib_setSelectedObjects;
 	call golib_vis_jumpToSelected;
 	_obj call golib_vis_lockNativeCamera;
-
+	
 	private _classList = [_obj] call golib_massoc_getClassByObject;
+	_classList = array_copy(_classList);
+	_classList sort true;
+
 	if (count _classList == 1) exitWith {
 		["%1 - class list count equals 1 (%2)",__FUNC__,_classList] call printError;
 	};
 	private _list = _classList apply {
+		private _name = [_x,"name",true,"getName"] call oop_getFieldBaseValue;
+		if isNullVar(_name) then {_name = "NULL-NAME"};
+		
 		[
-		format["%1 (%2)",[_x,"classname"] call oop_getTypeValue,[_x,"name",true,"getName"] call oop_getFieldBaseValue],
+		format["%1 (%2)",[_x,"classname"] call oop_getTypeValue,_name],
 			[_x,"classname"] call oop_getTypeValue
 		]
 	};
