@@ -5,7 +5,7 @@ name: Validate client
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  pull_request:
+  pull_request_target:
     branches: [ "main" ]
     types:
       - closed
@@ -29,6 +29,7 @@ jobs:
       
       - name: Run Validation (merged on main)
         if: ${{ github.event.pull_request.merged && github.event.pull_request.base.ref == 'main' }}
+        # if: ${{ github.repository == 'Relicta-Team/ReSDK_A3.vr' && github.ref == 'refs/heads/main' }}
         env: 
           SRCPATH: src|src
         run: Third-party/VirtualMachine/sqfvm.exe --suppress-welcome --nowarn -a --input-sqf ./src/client/vm_compile.sqf -v ${env:SRCPATH} -D __FLAG_ONLY_PARSE__ -D CMD__RELEASE -D __GH_ACTION
