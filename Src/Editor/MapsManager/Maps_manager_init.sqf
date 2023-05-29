@@ -9,3 +9,4 @@ mm_internal_defaultMapExt = ".sqf";
 
 #include "Maps_manager_importOld.sqf"
 #include "Maps_manager_common.sqf"
+#include "Maps_manager_virtualMap.sqf"
