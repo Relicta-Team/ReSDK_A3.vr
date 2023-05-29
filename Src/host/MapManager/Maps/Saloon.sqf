@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: Beta 7.0';__metaInfoVersion__ = 2;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.0';__metaInfoVersion__ = 2;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -1226,7 +1226,6 @@ _3436_560553685_3466817_60794 = ['EffectAsStruct',[3436.56,3685.35,17.6079],0,[0
 _3407_156013626_4414118_53649 = ['EffectAsStruct',[3407.16,3626.44,18.5365],0,[0,0,1]] call InitStruct; // Effect
 _3383_406013654_1208519_37669 = ['EffectAsStruct',[3383.41,3654.12,19.3767],0,[0,0,1]] call InitStruct; // Effect
 _3372_361083686_4948717_77882 = ['EffectAsStruct',[3372.36,3686.49,17.7788],0,[0,0,1]] call InitStruct; // Effect
-_3354_243163627_9772920_42973 = ['BoardWoodenBox',[3354.24,3627.98,20.4297],0,[0,0,1]] call InitStruct; 
 
 
 
@@ -1256,7 +1255,7 @@ if (!isNil'_3351_771483623_9216320_24310') then {
 	[_3351_771483623_9216320_24310,'MagazinePBMLoaded',6,100] call (_3351_771483623_9216320_24310 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3353_571533631_0317420_35670') then {
-	[_3353_571533631_0317420_35670,'RifleBastard',2,100] call (_3353_571533631_0317420_35670 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3353_571533631_0317420_35670,'RifleBastard',3,100] call (_3353_571533631_0317420_35670 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3355_520023630_6899420_42290') then {
 	[_3355_520023630_6899420_42290,'AmmoBoxRifle',4,100] call (_3355_520023630_6899420_42290 getvariable 'proto' getvariable 'createItemInContainer');
@@ -1290,7 +1289,7 @@ if (!isNil'_3363_370123623_1001020_40040') then {
 	[_3363_370123623_1001020_40040,'SmallBattery',6,100] call (_3363_370123623_1001020_40040 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3365_679933630_4099120_40470') then {
-	[_3365_679933630_4099120_40470,'TorchDisabled',4,100] call (_3365_679933630_4099120_40470 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3365_679933630_4099120_40470,'TorchDisabled',8,100] call (_3365_679933630_4099120_40470 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3367_320073632_3100620_42980') then {
 	_3367_320073632_3100620_42980 setvariable ['name',"Защитная стена"];
@@ -1576,8 +1575,4 @@ if (!isNil'_3383_406013654_1208519_37669') then {
 };
 if (!isNil'_3372_361083686_4948717_77882') then {
 	[_3372_361083686_4948717_77882,"dust_clouds_10m"] call (_3372_361083686_4948717_77882 getvariable 'proto' getvariable 'setEffectType');
-};
-if (!isNil'_3354_243163627_9772920_42973') then {
-	[_3354_243163627_9772920_42973,'HandcuffKey',5,100,[["var","handcuffs","saloon_handcuff"]]] call (_3354_243163627_9772920_42973 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3354_243163627_9772920_42973,'HandcuffItem',20,100,[["var","keylockers","saloon_handcuff"]]] call (_3354_243163627_9772920_42973 getvariable 'proto' getvariable 'createItemInContainer');
 };
