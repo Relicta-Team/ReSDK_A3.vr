@@ -305,4 +305,4 @@ delete(_a);
 delete(_b);
 ```
 
-#[Следующий раздел](Preprocessor.md)
+# [Следующий раздел](Preprocessor.md)

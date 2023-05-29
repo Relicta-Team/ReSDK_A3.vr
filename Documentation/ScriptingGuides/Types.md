@@ -53,4 +53,4 @@ private _newstr = "Days in week - " + str _daysInWeek; // _newstr == "Days in we
 // мы получили бы ошибку
 ```
 
-#[Следующий раздел](Control_structures.md)
+# [Следующий раздел](Control_structures.md)

@@ -265,4 +265,4 @@ _v pushBack false; //_v == [true,true,true,false]
 _v pushBackUnique true; //_v == [true,true,true,false]
 ```
 
-#[Следующий раздел](Classes.md)
+# [Следующий раздел](Classes.md)
