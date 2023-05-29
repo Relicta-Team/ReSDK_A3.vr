@@ -42,11 +42,21 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 
 				_widTypename = [_d,INPUT,[30,10*_i,100-30,9.5],_ctg] call createWidget;
 				["_widTypename",_widTypename] call Core_addContext;
+				_widTypename ctrladdeventhandler ["KillFocus",{
+					private _widTypename = "_widTypename" call Core_getContextVar;
+					private _newClass = ctrlText (_widTypename);
+					private _basicType = "_basicType" call Core_getContextVar;
+
+					if !([_newClass,_basicType] call goasm_prefab_validateName) then {
+						_widTypename ctrlsettext "";
+					};
+				}];
 			};
 		},
 		//onsave
 		{
 			private _newClass = ctrlText ("_widTypename" call Core_getContextVar);
+			["_newClass",_newClass] call Core_addContext;
 			private _basicType = "_basicType" call Core_getContextVar;
 			private _worldObj = "_worldObj" call Core_getContextVar;
 
@@ -55,9 +65,14 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 			
 			private _listProps = _mapData toArray false;
 
-			call Core_popContext;
-			private _outvalueError = refcreate("");
-			if ([_newClass,_basicType,_listProps,"prefab_openFileAfterCreated" call core_settings_getValue,_outvalueError] call goasm_prefab_createPrefab) then {
+			
+			private _postSuccess = {
+				call loadingScreen_stop;
+				
+				private _worldObj = "_worldObj" call Core_getContextVar;
+				private _newClass = "_newClass" call Core_getContextVar;
+				private _virtObj = "_virtObj" call Core_getContextVar;
+				_mapData = [_virtObj] call golib_getCustomProps;
 
 				//update hashdata
 				private _hd = [_worldObj,false] call golib_getHashData;
@@ -71,26 +86,36 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 				[_worldObj,_hd,true,"Создание префаба типа "+_newClass] call golib_setHashData;
 				
 				[[]] call inspector_menuLoad;
-
-				//update all in next frame only (because rebuild called at next frame)
-				//private _params = [_newClass];
-				//nextFrameParams(golib_massoc_updateAllObjectsAtClassAndModel,_params);
 				
 				//runtime postbuild code
-				private _code = format["%1 call golib_massoc_updateAllObjectsAtClassAndModel; call golib_vis_loadObjList;",[_newClass]];
+				private _code = format["call golib_vis_loadObjList; %1 call golib_massoc_updateAllObjectsAtClassAndModel;",[_newClass]];
 				(compile _code) call goasm_builder_setPostBuildCode;
-			} else {
+				
+				call Core_popContext;
+			};
+			private _postError = {
+				call loadingScreen_stop;
+				
+				private _virtObj = "_virtObj" call Core_getContextVar;
+				deleteVehicle _virtObj;
+
 				[[]] call inspector_menuLoad;
 
-				private _errCode = refget(_outvalueError);
-				if (!isNullVar(_errCode) && {_errCode == "ioex"}) then {
-					["Ошибка ввода. Передключитесь на редактор, затем обратно и повторите попытку создания"] call showWarning;
-				} else {
-					[format["Ошибка при создании класса %1. Подробнее смотрите в логах",_errCode]] call showWarning;
-				};
+				call Core_popContext;
 			};
+			
+			[displayNull] call loadingScreen_start;
+			
+			[50,"Генерация"] call loadingScreen_setProgress;			
 
-			deleteVehicle _virtObj;
+			[
+				_newClass,
+				_basicType,
+				_listProps,
+				"prefab_openFileAfterCreated" call core_settings_getValue,
+				[_postSuccess,_postError]
+			] call goasm_prefab_createPrefab;
+
 		},
 		"Создание префаба",
 		"Создать",
@@ -100,6 +125,8 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 			deleteVehicle _virtObj;
 
 			call Core_popContext;
+
+			[[]] call inspector_menuLoad;
 		},
 		null,
 		true
@@ -110,7 +137,9 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 
 function(goasm_prefab_createPrefab)
 {
-	params ["_newType","_basicType","_listKeymapValues",["_openAfterAdd",false],"_referror"];
+	params ["_newType","_basicType","_listKeymapValues",["_openAfterAdd",false],["_postEvents",[{},{}]]];
+	_postEvents params [["_onSuccessCreate",{}],["_onErrorCreate",{}]];
+
 	/*
 		1. Check duplicate name new type
 		2. Alloc eoc (end-of-class) in basic type
@@ -118,19 +147,8 @@ function(goasm_prefab_createPrefab)
 		4. emplace info in mother class file
 		5. rebuild classes with goasm_builder_rebuildClasses
 	*/
-	if !([_newType,"^([_a-zA-Z][_a-zA-Z1-9]*)$"] call regex_isMatch) exitWith {
-		refset(_referror,"clserror");
-		["Classname error only in format: ^([_a-zA-Z][_a-zA-Z1-9]*)$"] call printError;
-		false
-	};
-	if (_newType call oop_reflect_hasClass) exitWith {
-		refset(_referror,"duplicateerror");
-		["Class "+_newType+" already exists"] call printError;
-		false
-	};
-	if !(_basicType call oop_reflect_hasClass) exitWith {
-		refset(_referror,"baseclassnotfounderror");
-		["Base class "+_basicType+" not exists"] call printError;
+	if !([_newType,_basicType] call goasm_prefab_validateName) exitwith {
+		call _onErrorCreate;
 		false
 	};
 
@@ -162,22 +180,66 @@ function(goasm_prefab_createPrefab)
 	modvar(_typeInfo) + endl + "endclass";
 	
 	if ("" in _typeInfo) exitwith {
-		["%1 - unrecognized symbol in type info",__FUNC__] call printError;
+		["%1 - unrecognized symbol in type info",__FUNC__] call showError;
+		call _onErrorCreate;
 		false
 	};
 
-	private _out = ["OOPBuilder","buildclass",[_file,_line+1,(_typeInfo) regexReplace["""/g",""] ],true] call rescript_callCommand;
+	private _ctxParams = [
+		// _buildContext
+		[_file,_line+1,_typeInfo regexReplace["""/g",""]],
+		// _postEvents
+		[_onSuccessCreate,_onErrorCreate],
+		// _openAfterAdd
+		_openAfterAdd
+	];
+
+	[_file,_ctxParams,false,{
+		_this params ["_buildContext","_postEvents","_openAfterAdd"];
+
+		private _out = ["OOPBuilder","buildclass",_buildContext,true] call rescript_callCommand;
 	
-	if (_out != "") exitWith {
-		refset(_referror,ifcheck("IOException" in _out,"ioex",_out));
-		["%1 - Output error: %2",__FUNC__,_out] call printError;
+		if (_out != "") exitWith {
+			setScopeName("goasm_prefab_createPrefab<postevent_unlock>");
+			["%1 - Output error: %2",__FUNC__,_out] call printError;
+			call (_postEvents select 1);
+		};
+
+		call (_postEvents select 0);
+
+		call goasm_builder_rebuildClasses;	
+
+		if (_openAfterAdd) then {
+			["WorkspaceHelper","gotoclass",[_file,_line+1],true] call rescript_callCommand;
+		};
+	},{
+		_this params ["","_postEvents",""];
+		call (_postEvents select 1);
+	}] call file_unlockAsync;
+
+	true
+}
+
+function(goasm_prefab_validateName)
+{
+	params ["_newType","_basicType"];
+
+	if !([_newType,"^([_a-zA-Z][_a-zA-Z1-9]*)$"] call regex_isMatch) exitWith {
+		["Имя класса должно содержать только англ. символы. Допускаются цифры и нижнее подчеркивание: ^([_a-zA-Z][_a-zA-Z1-9]*)$"] call showError;
+		false
+	};
+	if (_newType call oop_reflect_hasClass) exitWith {
+		["Класс "+_newType+" уже существуе"] call showError;
+		false
+	};
+	if !(_basicType call oop_reflect_hasClass) exitWith {
+		["Базовый класс "+_basicType+" не существует"] call showError;
 		false
 	};
 
-	call goasm_builder_rebuildClasses;	
-
-	if (_openAfterAdd) then {
-		["WorkspaceHelper","gotoclass",[_file,_line+1],true] call rescript_callCommand;
+	if (count _newType >= 255) exitwith {
+		["Слишком длинное имя класса. Не более 255 символов"] call showError;
+		false
 	};
 
 	true
