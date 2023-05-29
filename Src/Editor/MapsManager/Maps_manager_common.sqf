@@ -71,7 +71,6 @@ function(mm_build)
 		mm_internal_threadErrorText = mm_internal_threadErrorText + endl + "Файл заблокирован на запись (требуется переключение активного окна): " + _pathFull;
 	};
 
-	
 	if (mm_internal_errorCount > 0) exitWith {
 		["Error count %1",mm_internal_errorCount] call printWarning;
 		[mm_internal_threadErrorText] call printError;
