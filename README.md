@@ -23,7 +23,7 @@ ReSDK - это набор инструментов для разработки �
 - .NET Framework 4.7.2 или выше.
 - Visual C++ Redistributable 2013 и 2015-2022
 - Редактор кода Visual Studio Code
-  - Расширение для Visual Studio Code - ReSDK_VSCode
+  - Расширение для Visual Studio Code - ReSDK Extension
 
 
 # Настройка
