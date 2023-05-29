@@ -1,3 +1,8 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
 #include "host\engine.hpp"
 
 //called only in scheduler (public initializer)
