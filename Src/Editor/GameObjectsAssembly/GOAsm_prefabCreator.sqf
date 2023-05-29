@@ -15,11 +15,6 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 
 	//std validate file access
 	([_basicType,"__decl_info_end__"] call oop_getTypeValue)params ["_file","_line"];
-	if ((["WorkspaceHelper","checkfilelock",[_file],true] call rescript_callCommand)=="false") exitwith {
-		["File locked by engine: %1; Switch window",_file] call printError;
-		["Файл базового типа заблокирован платформой. Выполнено переключение активного окна. Повторите попытку."] call showWarning;
-		call file_clearFileLock;
-	};
 
 	
 	//handle from virtual editor
@@ -62,7 +57,7 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 
 			call Core_popContext;
 			private _outvalueError = refcreate("");
-			if ([_newClass,_basicType,_listProps,goasm_prefabCreator_openGeneratedPrefabAfterCreate,_outvalueError] call goasm_prefab_createPrefab) then {
+			if ([_newClass,_basicType,_listProps,"prefab_openFileAfterCreated" call core_settings_getValue,_outvalueError] call goasm_prefab_createPrefab) then {
 
 				//update hashdata
 				private _hd = [_worldObj,false] call golib_getHashData;
