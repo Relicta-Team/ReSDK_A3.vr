@@ -27,11 +27,11 @@ class(GMTemplate_RAdventurer) extends(BasicRole)
 
 	//Массив дополнительных скиллов
 	//Названия всех скиллов хранятся в хэш-карте: skills_internal_map_nameAssoc
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,1,5) arg
 		skillrand(shotgun,1,5) arg
 		skillrand(stealth,1,5)
-	]);
+	]};
 
 	//Функция в которой персонаж получает свой инвентарь
 	func(getEquipment)

@@ -46,12 +46,12 @@ class(ROkopvoComNA) extends(ROkopovoComBase)
 	getter_func(getInitialDir,random 360);
 	getter_func(getSkills,vec4(randInt(10,15),randInt(10,12),randInt(11,15),randInt(10,13))); //["_st","_iq","_dx","_ht"];
 
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(pistol,5,8) arg
 		skillrand(fight,4,7) arg
 		skillrand(rifle,5,8) arg
 		skillrand(stealth,0,2)
-	]);
+	]};
 
 	func(getEquipment)
 	{

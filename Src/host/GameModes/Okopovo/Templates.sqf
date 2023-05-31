@@ -33,12 +33,12 @@ class(ROkopovoComBase) extends(BasicRole)
 	var(side,"na");
 
 	getter_func(getSkills,vec4(randInt(10,15),randInt(10,12),randInt(11,15),randInt(10,13))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(pistol,5,8) arg
 		skillrand(fight,2,4) arg
 		skillrand(rifle,3,5) arg
 		skillrand(stealth,1,2)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -144,12 +144,12 @@ class(ROkopovoCombatRole) extends(BasicRole)
 	};
 	
 	getter_func(getSkills,vec4(randInt(10,15),randInt(10,12),randInt(11,15),randInt(10,13))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(pistol,5,8) arg
 		skillrand(fight,4,7) arg
 		skillrand(rifle,5,8) arg
 		skillrand(stealth,0,2)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -190,11 +190,11 @@ class(ROkopovoCombatSergant) extends(ROkopovoCombatRole)
 	var(count,4);
 	var(deadTimeout,60*4);
 	getter_func(getSkills,vec4(randInt(10,13),randInt(10,12),randInt(10,13),randInt(10,13))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(pistol,5,8) arg
 		skillrand(fight,4,7) arg
 		skillrand(rifle,5,8)
-	]);
+	]};
 
 	func(canVisibleAfterStart)
 	{
@@ -331,11 +331,11 @@ class(ROkopovoCombatRiflemanRole) extends(ROkopovoCombatCommonRole)
 	var(count,999);
 	var(deadTimeout,60);
 	getter_func(getSkills,vec4(randInt(9,11),randInt(9,11),randInt(10,12),randInt(9,12))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(pistol,1,3) arg
 		skillrand(fight,3,5) arg
 		skillrand(rifle,4,7)
-	]);
+	]};
 endclass
 
 class(ROkopovoCombatScoutRole) extends(ROkopovoCombatCommonRole)
@@ -343,14 +343,14 @@ class(ROkopovoCombatScoutRole) extends(ROkopovoCombatCommonRole)
 	var(count,999);
 	var(deadTimeout,60*2);
 	getter_func(getSkills,vec4(randInt(7,10),randInt(9,11),randInt(11,13),randInt(8,11))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(pistol,1,3) arg
 		skillrand(fight,1,3) arg
 		skillrand(rifle,1,5) arg
 		skillrand(stealth,6,8) arg
 		skillrand(stealing,6,8) arg
 		skillrand(traps,4,6)
-	]);
+	]};
 endclass
 
 class(ROkopovoCombatTroopRole) extends(ROkopovoCombatCommonRole)
@@ -358,11 +358,11 @@ class(ROkopovoCombatTroopRole) extends(ROkopovoCombatCommonRole)
 	var(count,6);
 	var(deadTimeout,60*3);
 	getter_func(getSkills,vec4(randInt(12,14),randInt(7,9),randInt(7,11),randInt(12,14))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(pistol,1,3) arg
 		skillrand(fight,5,8) arg
 		skillrand(rifle,1,2) 
-	]);
+	]};
 endclass
 
 class(ROkopovoCombatCookRole) extends(ROkopovoCombatCommonRole)
@@ -370,13 +370,13 @@ class(ROkopovoCombatCookRole) extends(ROkopovoCombatCommonRole)
 	var(count,999);
 	var(deadTimeout,60*2);
 	getter_func(getSkills,vec4(randInt(7,10),randInt(7,9),randInt(9,11),randInt(10,11))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(cooking,7,10) arg
 		skillrand(fight,1,2) arg
 		skillrand(farming,1,4) arg
 		skillrand(knife,1,4) arg
 		skillrand(rifle,1,2) 
-	]);
+	]};
 endclass
 
 class(ROkopovoCombatHealerRole) extends(ROkopovoCombatCommonRole)
@@ -384,12 +384,12 @@ class(ROkopovoCombatHealerRole) extends(ROkopovoCombatCommonRole)
 	var(count,999);
 
 	getter_func(getSkills,vec4(randInt(7,9),randInt(10,13),randInt(11,12),10)); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(pistol,1,2) arg
 		skillrand(fight,1,3) arg
 		skillrand(rifle,1,2) arg
 		skillrand(healing,4,8) arg
 		skillrand(surgery,4,8) arg
 		skillrand(chemistry,2,6)
-	]);
+	]};
 endclass

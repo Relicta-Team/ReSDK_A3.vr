@@ -97,11 +97,11 @@ endclass
 class(RPreyNomadLeader) extends(RPreyNomadBase)
 	var(name,"Лидер кочевников");
 	var(desc,"Именно ты поведёшь группу к заветной мечте.");
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,2,6) arg
 		skillrand(stealth,3,5) arg
 		skillrand(sword,5,8)
-	]);
+	]};
 	func(getEquipment)
 	{
 		objParams_1(_mob);
@@ -116,13 +116,13 @@ endclass
 class(RPreyNomadHealer) extends(RPreyNomadBase)
 	var(name,"Пещерный лекарь");
 	var(desc,"Залечит раны в пути.");
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,1,3) arg
 		skillrand(stealth,1,5) arg
 		skillrand(sword,2,4) arg 
 		skillrand(healing,4,8) arg
 		skillrand(surgery,4,8)
-	]);
+	]};
 	func(getEquipment)
 	{
 		objParams_1(_mob);
@@ -142,11 +142,11 @@ endclass
 class(RPreyNomadCaveman) extends(RPreyNomadBase)
 	var(name,"Топорщик");
 	var(desc,"Безжалостно разрубит врагов на две части.");
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,1,3) arg
 		skillrand(axe,2,6) arg 
 		skillrand(throw,3,6)
-	]);
+	]};
 	func(getEquipment)
 	{
 		objParams_1(_mob);
@@ -188,18 +188,18 @@ class(RPreyEaterStrong) extends(RPreyEater)
 	var(name,"Сильный едок");
 	var(desc,"В одиночку всех уложит.");
 	getter_func(getSkills,vec4(randInt(15,18),randInt(10,12),randInt(13,19),randInt(9,11))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,5,8) arg
 		skillrand(stealth,3,7)
-	]);
+	]};
 endclass
 
 class(RPreyEaterStandard) extends(RPreyEater)
 	var(name,"Едок");
 	var(desc,"Мерзкая тварь.");
 	getter_func(getSkills,vec4(randInt(13,16),randInt(10,12),randInt(12,15),randInt(9,11))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,5,8) arg
 		skillrand(stealth,3,7)
-	]);
+	]};
 endclass

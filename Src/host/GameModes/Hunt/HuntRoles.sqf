@@ -22,12 +22,12 @@ class(RHuntHunter) extends(BasicRole)
 	getter_func(getInitialDir,random 360);
 	getter_func(getSkills,vec4(randInt(13,15),randInt(10,12),randInt(12,16),randInt(10,12))); //["_st","_iq","_dx","_ht"];
 
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(axe,5,8) arg
 		skillrand(fight,4,7) arg
 		skillrand(shotgun,6,9) arg
 		skillrand(stealth,2,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -204,12 +204,12 @@ class(RHuntNACleaner) extends(BasicRole)
 	getter_func(getInitialDir,random 360);
 	getter_func(getSkills,vec4(randInt(13,15),randInt(10,12),randInt(12,16),randInt(10,12))); //["_st","_iq","_dx","_ht"];
 
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(sword,2,5) arg
 		skillrand(fight,4,7) arg
 		skillrand(rifle,6,9) arg
 		skillrand(stealth,2,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
