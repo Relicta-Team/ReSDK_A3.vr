@@ -112,7 +112,7 @@ class(AmmoBoxBase) extends(Item)
 		if getSelf(isReadyToGive) then {
 			callSelfParams(giveAmmo,_usr);
 		} else {
-			callFuncParams(onMainAction,_usr); //логика авто-открытия
+			callSelfParams(onMainAction,_usr); //логика авто-открытия
 		};
 	};
 
