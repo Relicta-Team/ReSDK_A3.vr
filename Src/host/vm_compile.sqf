@@ -23,6 +23,8 @@ vm_lastError = "unk_err";
 #define __vm_log(text) diag_log (text)
 #endif
 
+vm_allClasses = [];
+
 {
 	private _pcontent = LOADFILE "src\private.h";
 	if (count _pcontent > 0) then {
@@ -88,11 +90,8 @@ vm_lastError = "unk_err";
 
 //#include <CommonComponents\loader.hpp>
 
-#define loadFile(path) if (server_isLocked) exitWith {__vm_log("Compile process aborted - server.isLocked == true")}; \
-	__vm_log("Load file: " + path); \
-	private _ctx = compile preprocessFile (path);
+	#include "init.sqf"
 
-#include "init.sqf"
 }
 except__
 {
@@ -115,7 +114,9 @@ except__
 
 #ifdef __FLAG_ONLY_PARSE__
 	if (true) exitWith {
+		__vm_log("	Class count:" + str vm_allClasses);
 		__vm_log("	Parsing done!");
+		copyToClipboard (str vm_allClasses);
 		exitcode__ 0;
 	};
 #endif

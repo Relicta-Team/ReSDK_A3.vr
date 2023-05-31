@@ -149,13 +149,20 @@
 
 	#define loadFile(path) \
 	__vm_log("Load file: " + path); \
-	private _ctx = compile preprocessFile (path);
+	call compile preprocessFile (path);
 
 	#define __vm_warning(data) diag_log format["[VM_WARN]: %1",data];
 
 
 	#define locationnull 0
 	#define is3DEN true
+
+	#define addMissionEventHandler ["addMissionEventHandler"] pushBack 
+
+	#define toString str
+	#define linearConversion  ["linearConversion"] pushBack 
+	#define parseSimpleArray ["parseSimpleArray"] pushBack 
+	#define endMission ["endMission"] pushBack 
 	
 #else
 	#define __vm_log(text)

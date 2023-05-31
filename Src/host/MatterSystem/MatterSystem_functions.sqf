@@ -6,10 +6,13 @@
 
 // Внутренняя функция активации наследования всех свойств
 ms_internal_initInheritance = {
-
+	#ifndef _SQFVM
+	if (true) exitWith {};
+	#endif
 	[ms_map_allMatters] call ms_internal_processInheritanceOnNamespace;
 	[ms_map_allReactions] call ms_internal_processInheritanceOnNamespace;
 
+	
 	call ms_internal_loadExtension;
 };
 
