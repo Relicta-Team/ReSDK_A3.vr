@@ -25,6 +25,51 @@ vm_lastError = "unk_err";
 
 vm_allClasses = [];
 
+checkClassInheritance = {
+	//vm_allClasses = [];
+
+	_classesTest = [
+		["object","<superbase>"],
+		["ManagedObject","object"],
+		["RefCounterObject","object"],
+		["NetObject","<superbase>"],
+		["GameObject","ManagedObject"],
+		["IDestructible","GameObject"],
+		["BasicMob","GameObject"],
+		["MobGhost","BasicMob"]
+	];
+
+	_readyClasses = [];
+	_findBaseClass = {
+		params ["_base","_errRet"];
+		private _idx = vm_allClasses findif {_x select 0 == _base};
+		if (_idx == -1) exitwith {_errRet};
+		vm_allClasses select _idx select 1;
+	};
+	{
+		_pObj = missionNamespace getvariable ["pt_"+_x,"@noclass"];
+		_className_str = _x;
+		if (_pObj isequalto "@noclass") exitwith {
+			__vm_log("Cant find class " + _className_str);
+			throwsafe("!ClassNotFoundException!");
+		};
+		if ((tolower _className_str) in _readyClasses) then {
+			__vm_log("Duplicate classname " + _className_str);
+			throwsafe("!DuplicateClassNameException!");
+		};
+		_readyClasses pushBack (tolower _className_str);
+		
+		_motherType = [_pObj,"@nullclass"] call _findBaseClass;
+		if (_motherType != "<superbase>" && {missionNamespace getvariable ["pt_"+_motherType,"@nullclass"] isequalto "@nullclass"}) exitwith {
+			__vm_log("Cant find mother class " + _motherType + "; Base: " + _className_str);
+			throwsafe("!MotherClassNotFoundException!");
+		};
+
+		_mot = _pObj;
+		
+	} foreach p_table_allclassnames;
+};
+
 {
 	private _pcontent = LOADFILE "src\private.h";
 	if (count _pcontent > 0) then {
@@ -91,7 +136,7 @@ vm_allClasses = [];
 //#include <CommonComponents\loader.hpp>
 
 	#include "init.sqf"
-
+	call checkClassInheritance;
 }
 except__
 {
@@ -114,7 +159,7 @@ except__
 
 #ifdef __FLAG_ONLY_PARSE__
 	if (true) exitWith {
-		__vm_log("	Class count:" + str vm_allClasses);
+		__vm_log("	Class count:" + str count vm_allClasses);
 		__vm_log("	Parsing done!");
 		copyToClipboard (str vm_allClasses);
 		exitcode__ 0;

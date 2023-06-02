@@ -3,7 +3,13 @@
 // sdk.relicta.ru
 // ======================================================
 
-
+/*
+	! Внимание !
+	При изменениях в этом файле выполните сборку на платформе чтобы удостовериться,
+	что этот код работает.
+	При проверке серверной части виртуальной машиной эта секция кода будет проигнорирована
+*/
+#ifndef _SQFVM
 craft_data_count = 0;
 
 
@@ -46,31 +52,31 @@ craft_data_getRecipes = {
 	
 } forEach (["Craft_base",true] call oop_getinhlist);
 
-#ifndef _SQFVM
-	_convReqToString = {
-		params ["_typeList"];
-		private _formatList = [];
-		{
-			_x params ["_type","_count"];
-			private _name = getFieldBaseValueWithMethod(_type,"name","getName");
-			_formatList pushBack (format["%1%2",_name,ifcheck(_count<=1,""," (x" + str _count + ")")]);
-		} foreach _typeList;
-		_formatList
-	};
 
-	//[5001,"Бибки",["Тесто","Яичко"],""] call craft_newRecipe;
-	craft_internal_client_mapRecipes = createHashMap;
+_convReqToString = {
+	params ["_typeList"];
+	private _formatList = [];
 	{
-		//craft_client_allRecipes set [_id,[_id,_name,_listNeed,_desc]];
-		private _id = _x;
-		private this = _y;
-		craft_internal_client_mapRecipes set [getSelf(recipeID),[
-			getSelf(recipeID),
-			getSelf(name),
-			[getSelf(reqItems)] call _convReqToString,
-			getSelf(desc)
-		]]
-	} foreach craft_data_allRecipes;
+		_x params ["_type","_count"];
+		private _name = getFieldBaseValueWithMethod(_type,"name","getName");
+		_formatList pushBack (format["%1%2",_name,ifcheck(_count<=1,""," (x" + str _count + ")")]);
+	} foreach _typeList;
+	_formatList
+};
 
-	netSetGlobal(craft_client_allRecipes,craft_internal_client_mapRecipes);
+//[5001,"Бибки",["Тесто","Яичко"],""] call craft_newRecipe;
+craft_internal_client_mapRecipes = createHashMap;
+{
+	//craft_client_allRecipes set [_id,[_id,_name,_listNeed,_desc]];
+	private _id = _x;
+	private this = _y;
+	craft_internal_client_mapRecipes set [getSelf(recipeID),[
+		getSelf(recipeID),
+		getSelf(name),
+		[getSelf(reqItems)] call _convReqToString,
+		getSelf(desc)
+	]]
+} foreach craft_data_allRecipes;
+
+netSetGlobal(craft_client_allRecipes,craft_internal_client_mapRecipes);
 #endif

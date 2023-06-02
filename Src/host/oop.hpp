@@ -38,8 +38,7 @@
 	call pc_oop_declareClassAttr; \
 	_editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
 	_classmet_declinfo = createHashMap; \
-	pt_##name = createObj; private _pt_obj = pt_##name; \
-	__postclassVM
+	pt_##name = createObj; private _pt_obj = pt_##name;
 
 //создание типа по строке. Нужно для генерации классов
 #define __class_noStrName(name) _decl_info___ = [__FILE__,__LINE__ + 1]; __testSyntaxClass \
@@ -51,15 +50,14 @@
 	call pc_oop_declareClassAttr; \
 	_editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
 	_classmet_declinfo = createHashMap; \
-	missionNamespace setVariable ["pt_"+_class,createObj]; private _pt_obj = missionNamespace getVariable ("pt_"+_class); \
-	__postclassVM
+	missionNamespace setVariable ["pt_"+_class,createObj]; private _pt_obj = missionNamespace getVariable ("pt_"+_class);
 
 #define static_class(name) class(name) _decl_info___ = [__FILE__,__LINE__ + 1]; \
 	name = _pt_obj;
 
 //
 #define endclass [__FILE__,__LINE__] call pc_oop_declareEOC; \
-			p_table_inheritance pushback [_class,_mother]; \
+			p_table_inheritance pushback [_class,_mother]; __postclassVM \
 	_pt_obj setName format[pc_oop_carr_tntps select is3DEN,_class]; \
 	_pt_obj setvariable ['__fields',_fields]; \
 	_pt_obj setvariable ['__methods',_methods]; \
