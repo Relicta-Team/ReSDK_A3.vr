@@ -24,7 +24,7 @@ class(CFryingPan) extends(CFoodBase)
 	func(canCraft)
 	{
 		objParams();
-		callSuper(CFoodBase,canCraft) && !getVar(src,isCooked) && callFunc(src,isConnectedToSource)
+		super() && !getVar(src,isCooked) && callFunc(src,isConnectedToSource)
 	};
 	
 	var(doStartCooking,true); //
@@ -115,14 +115,14 @@ endclass
 // FryingPan crafts
 region(FryingPan)
 
-	class(Bibki) extends(CFryingPan)
+	class(CFryingPan_Bibki) extends(CFryingPan)
 		var(name,"Бибки");
 		var(reqItems,[vec2("Testo",1) arg vec2("Egg",1)]);
 		var(resultItem,"Bun");
 		var(resultAmount,3);
 	endclass
 
-	class(Pancakes) extends(CFryingPan)
+	class(CFryingPan_Pancakes) extends(CFryingPan)
 		var(name,"Блинцы");
 		var(reqItems,[vec2("Lepeshka",1) arg vec2("Egg",1)]);
 		var(resultItem,"Pancakes");
@@ -130,7 +130,7 @@ region(FryingPan)
 	endclass
 
 	//котлетки требуют 5 еденичек соли
-	class(Cutlets) extends(CFryingPan)
+	class(CFryingPan_Cutlets) extends(CFryingPan)
 		var(name,"Котлетки");
 		var(reqItems,[vec2("MeatMinced",2) arg vec2("SaltShaker",1)]);
 		var(resultItem,"Cutlet");
@@ -148,7 +148,7 @@ region(FryingPan)
 				_canRemSalt = callFunc(_salt,getFilledSpace) >= 5;
 			};
 			setSelf(haveSalt,_canRemSalt);
-			callSuper(CFryingPan,canCraft) && _canRemSalt
+			super() && _canRemSalt
 		};
 		
 		func(conditionalDeleteSTD)
@@ -169,19 +169,19 @@ region(FryingPan)
 		
 	endclass
 
-	class(Spureshkay) extends(CFryingPan)
-		var(name,"Котлетки с пюрешкой");
-		var(reqItems,[vec2("BakedPotato",5) arg vec2("Cutlet",5)]);
-		var(resultAmount,6); //порции
-		var(isCustomGiver,true);
-	endclass
+	// class(Spureshkay) extends(CFryingPan)
+	// 	var(name,"Котлетки с пюрешкой");
+	// 	var(reqItems,[vec2("BakedPotato",5) arg vec2("Cutlet",5)]);
+	// 	var(resultAmount,6); //порции
+	// 	var(isCustomGiver,true);
+	// endclass
 
 
 
 //Kastrula class
 region(Kastrula)
 
-	class(Nekachsoup) extends(CKastrula)
+	class(CKastrula_Nekachsoup) extends(CKastrula)
 		var(name,"Некашлиновый суп");
 		var(desc,"Дополнительно: яйцо или крысу");
 		var(reqItems,[vec2("Lapsha",2)]);
@@ -204,12 +204,12 @@ region(Kastrula)
 //bake food
 region(FoodBake)
 
-	class(Shavirma) extends(CFoodBaker)
+	class(CFoodBaker_Shavirma) extends(CFoodBaker)
 		var(reqItems,[vec2("Lepeshka",1) arg vec2("Melteshonok",1)]);
 		var(resultItem,"Shavirma");
 	endclass
 	
-	class(Pie) extends(CFoodBaker)
+	class(CFoodBaker_Pie) extends(CFoodBaker)
 		var(reqItems,[vec2("Testo",2) arg vec2("ButterPiece",1)]);
 		var(resultItem,"Pie");
 		var(desc,"Дополнительно 1 любой ингредиент");
@@ -217,7 +217,7 @@ region(FoodBake)
 		func(canCraft)
 		{
 			objParams();
-			callSuper(CFoodBaker,canCraft) && !isNullObject(getSelf(mainIngredient))
+			super() && !isNullObject(getSelf(mainIngredient))
 		};
 		
 		//Основной ингредиент для пирога (начинка)
@@ -268,17 +268,17 @@ region(FoodBake)
 		
 	endclass
 	
-	class(Bread) extends(CFoodBaker)
+	class(CFoodBaker_Bread) extends(CFoodBaker)
 		var(reqItems,[vec2("Testo",1) arg vec2("Egg",2)]);
 		var(resultItem,"Bread");
 	endclass
 	
-	class(Omlet) extends(CFoodBaker)
+	class(CFoodBaker_Omlet) extends(CFoodBaker)
 		var(reqItems,[vec2("Egg",2) ]);
 		var(resultItem,"Omlet");
 	endclass
 	
-	class(LepFromTesto) extends(CFoodBaker)
+	class(CFoodBaker_LepFromTesto) extends(CFoodBaker)
 		var(reqItems,[vec2("Testo",1)]);
 		var(resultItem,"Lepeshka");
 	endclass
