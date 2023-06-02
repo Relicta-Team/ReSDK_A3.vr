@@ -17,3 +17,7 @@
 	#define netSetGlobal(var,val) missionNamespace setVariable ['var',val,true]
 	#define netSyncObjVar(obj,var,val) obj setvariable [var,val,true]
 #endif
+
+#ifdef _SQFVM
+	#define netSetGlobal(var,val) [var,val];
+#endif

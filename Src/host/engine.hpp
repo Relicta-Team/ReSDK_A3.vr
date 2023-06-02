@@ -144,7 +144,30 @@
 	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 #endif
 
+#ifdef _SQFVM
+	#define __vm_log(text) "debug_console" callExtension ((text)+"#1110")
 
+	#define loadFile(path) \
+	__vm_log("Load file: " + path); \
+	call compile preprocessFile (path);
+
+	#define __vm_warning(data) diag_log format["[VM_WARN]: %1",data];
+
+
+	#define locationnull 0
+	#define is3DEN true
+
+	#define addMissionEventHandler ["addMissionEventHandler"] pushBack 
+
+	#define toString str
+	#define linearConversion  ["linearConversion"] pushBack 
+	#define parseSimpleArray ["parseSimpleArray"] pushBack 
+	#define endMission ["endMission"] pushBack 
+	
+#else
+	#define __vm_log(text)
+	#define __vm_warning(data)
+#endif
 
 //check if file exists
 #define fileExists(file) fileexists (file)

@@ -22,21 +22,11 @@
 //список предметов для удаления
 #define collectedItems _reqItemPointers
 
-#define class(name) \
-	private ["_class","_mother","_mem_name","_lastIndex","_fields","_methods"]; \
-	_class = 'name##_crft'; _mother = "object"; \
-	p_table_allclassnames pushback _class;\
-	_fields = []; _methods = []; _attributes = []; _autoref = []; \
-	pt_##name##_crft = createObj; private _pt_obj = pt_##name##_crft;
-
-#define extends(child) _mother = 'child##_crft';
-#define callSuper(superclass,metname) call ( pt_##superclass##_crft getVariable #metname )
-
 #ifndef EDITOR
 #undef DEBUG_DISTANCE_NEAREST
 #endif
 
-class(Craft_Base) _mother = ("RefCounterObject");
+class(Craft_Base) extends(RefCounterObject);
 	var(name,""); //название рецепта
 	var(desc,""); //нижнее описание рецепта
 	var(categoryName,""); //название категории рецепта

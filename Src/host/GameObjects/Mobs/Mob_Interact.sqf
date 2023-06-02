@@ -45,7 +45,7 @@ func(clickTarget)
 {
 	objParams_1(_targ);
 	//Нельзя взаимодейстсовать с пустой целью. TODo убрать когда будет огнестрел
-	if isNullReference(_targ) exitWith {traceformat("NULLREF CLICK TARGET")};
+	if isNullReference(_targ) exitWith {trace("NULLREF CLICK TARGET")};
 
 	private _activeHand = getSelf(activeHand);
 	private _activeHandIndexPart = if (_activeHand == INV_HAND_L) then {BP_INDEX_ARM_L} else {BP_INDEX_ARM_R};

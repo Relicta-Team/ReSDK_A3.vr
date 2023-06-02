@@ -21,6 +21,12 @@
 	#define __testSyntaxClass
 #endif
 
+#ifdef _SQFVM
+	#define __postclassVM vm_allClasses pushBack [_class,_mother]; __vm_log("Found class: " + _class);
+#else
+	#define __postclassVM
+#endif
+
 //if you want edit this macro - modify macro in craft class list
 //TODO update craft class list
 #define class(name) _decl_info___ = [__FILE__,__LINE__ + 1]; __testSyntaxClass \
@@ -32,7 +38,8 @@
 	call pc_oop_declareClassAttr; \
 	_editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
 	_classmet_declinfo = createHashMap; \
-	pt_##name = createObj; private _pt_obj = pt_##name;
+	pt_##name = createObj; private _pt_obj = pt_##name; \
+	__postclassVM
 
 //создание типа по строке. Нужно для генерации классов
 #define __class_noStrName(name) _decl_info___ = [__FILE__,__LINE__ + 1]; __testSyntaxClass \
@@ -44,7 +51,8 @@
 	call pc_oop_declareClassAttr; \
 	_editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
 	_classmet_declinfo = createHashMap; \
-	missionNamespace setVariable ["pt_"+_class,createObj]; private _pt_obj = missionNamespace getVariable ("pt_"+_class);
+	missionNamespace setVariable ["pt_"+_class,createObj]; private _pt_obj = missionNamespace getVariable ("pt_"+_class); \
+	__postclassVM
 
 #define static_class(name) class(name) _decl_info___ = [__FILE__,__LINE__ + 1]; \
 	name = _pt_obj;

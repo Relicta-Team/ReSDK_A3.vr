@@ -9,12 +9,12 @@
 "re_HubSittingChairUA_idle1" arg "re_HubSittingChairUA_idle2" arg "re_HubSittingChairUA_idle3" arg "re_HubSittingChairUA_move1" arg
 "re_HubSittingChairUB_idle1" arg "re_HubSittingChairUB_idle2" arg "re_HubSittingChairUB_idle3" arg "re_HubSittingChairUB_move1" arg
 "re_HubSittingChairUC_idle1" arg "re_HubSittingChairUC_idle2" arg "re_HubSittingChairUC_idle3"]);*/
-getter_func(getChairSitdownAnimation,[
-	"re_HubSittingChairA_idle1" arg "re_HubSittingChairA_idle2" arg "re_HubSittingChairA_idle3" arg
-	"re_HubSittingChairB_idle1" arg "re_HubSittingChairB_idle2" arg "re_HubSittingChairB_idle3" arg
-	"re_HubSittingChairC_idle1" arg "re_HubSittingChairC_idle2" arg "re_HubSittingChairC_idle3" arg
-	"re_HubSittingChairUA_idle1" arg "re_HubSittingChairUA_idle2" arg "re_HubSittingChairUA_idle3" arg
-	"re_HubSittingChairUB_idle1" arg "re_HubSittingChairUB_idle2" arg "re_HubSittingChairUB_idle3" arg
+getter_func(getChairSitdownAnimation,[ \
+	"re_HubSittingChairA_idle1" arg "re_HubSittingChairA_idle2" arg "re_HubSittingChairA_idle3" arg \
+	"re_HubSittingChairB_idle1" arg "re_HubSittingChairB_idle2" arg "re_HubSittingChairB_idle3" arg \
+	"re_HubSittingChairC_idle1" arg "re_HubSittingChairC_idle2" arg "re_HubSittingChairC_idle3" arg \
+	"re_HubSittingChairUA_idle1" arg "re_HubSittingChairUA_idle2" arg "re_HubSittingChairUA_idle3" arg \
+	"re_HubSittingChairUB_idle1" arg "re_HubSittingChairUB_idle2" arg "re_HubSittingChairUB_idle3" arg \
 	"re_HubSittingChairUC_idle1" arg "re_HubSittingChairUC_idle2" arg "re_HubSittingChairUC_idle3"]
 );
 

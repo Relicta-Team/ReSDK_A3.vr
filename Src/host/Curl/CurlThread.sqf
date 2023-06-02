@@ -95,7 +95,7 @@ _threadFunc = {
 		
 		private _rez = _ref call curl_send;
 		if (_rez != "OK") exitWith {
-			errorformat("Curl result is not OK (%1) when try to send data (%2)"_rez arg _ref);
+			errorformat("Curl result is not OK (%1) when try to send data (%2)",_rez arg _ref);
 		};
 		
 		curl_isAwait = true;

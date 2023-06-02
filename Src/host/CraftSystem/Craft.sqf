@@ -8,8 +8,8 @@
 #include <..\text.hpp>
 #include <Craft.hpp>
 #include <..\ServerRpc\serverRpc.hpp>
+#include <..\Networking\Network.hpp>
 #include <..\PointerSystem\pointers.hpp>
-//#include "Craft_KitchenExtension.sqf"
 
 
 //запрос открытия крафт меню

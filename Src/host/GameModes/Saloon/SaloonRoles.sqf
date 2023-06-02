@@ -48,11 +48,11 @@ class(RBarmenSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,91);
 
 	getter_func(getSkills,vec4(randInt(10,13),randInt(9,10),randInt(9,10),randInt(7,10)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(cooking,2,6) arg
 		skillrand(fight,3,5) arg
 		skillrand(shotgun,4,7)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -75,11 +75,11 @@ class(RGromilaSaloon) extends(BasicRoleSaloon)
 	var(randomHunger,vec2(60,80));
 	
 	getter_func(getSkills,vec4(randInt(14,16),randInt(6,8),randInt(10,13),randInt(9,11)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,5,6) arg
 		skillrand(baton,2,4) arg
 		skillrand(pistol,4,6)
-	]);
+	]};
 	getter_func(canTakeInLobby,true);
 	getter_func(canVisibleAfterStart,false);
 
@@ -112,12 +112,12 @@ class(RCookSaloon) extends(BasicRoleSaloon)
 	getter_func(canVisibleAfterStart,false);
 
 	getter_func(getSkills,vec4(randInt(8,10),randInt(7,9),randInt(9,11),randInt(10,11)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(cooking,4,8) arg
 		skillrand(fight,1,2) arg
 		skillrand(farming,1,4) arg
 		skillrand(knife,1,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -143,7 +143,7 @@ class(RCitizenSaloon) extends(BasicRoleSaloon)
 	getter_func(canVisibleAfterStart,true);
 	var(randomHunger,vec2(50,70));
 	getter_func(getSkills,vec4(randInt(8,17),randInt(8,11),randInt(8,11),randInt(8,11)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,0,6) arg
 		skillrand(throw,0,5) arg
 		skillrand(stealth,0,7) arg
@@ -152,7 +152,7 @@ class(RCitizenSaloon) extends(BasicRoleSaloon)
 		skillrand(healing,0,3) arg
 		skillrand(cooking,0,4) arg
 		skillrand(farming,0,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -190,7 +190,7 @@ class(RAssasinSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,callFuncParams(gm_currentMode,handleRandomDir,267));
 	var(randomHunger,vec2(60,80));
 	getter_func(getSkills,vec4(randInt(13,14),randInt(10,12),randInt(14,15),randInt(11,13)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(healing,2,4) arg
 		skillrand(surgery,1,3) arg
 		skillrand(pistol,2,5) arg
@@ -198,7 +198,7 @@ class(RAssasinSaloon) extends(BasicRoleSaloon)
 		skillrand(fight,5,7) arg
 		skillrand(stealth,6,8) arg
 		skillrand(sword,4,8)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -248,11 +248,11 @@ class(RTorgSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,181);
 	var(randomHunger,vec2(70,100));
 	getter_func(getSkills,vec4(randInt(9,12),randInt(11,13),randInt(8,11),randInt(8,12)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(pistol,1,3) arg
 		skillrand(fight,1,5) arg
 		skillrand(stealth,2,4)
-	]);
+	]};
 	
 	func(getEquipment)
 	{
@@ -300,13 +300,13 @@ class(RTrampSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,callFuncParams(gm_currentMode,handleRandomDir,174));
 	var(randomHunger,vec2(30,50));
 	getter_func(getSkills,vec4(randInt(13,14),randInt(10,12),randInt(14,15),randInt(11,13)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(pistol,2,5) arg
 		skillrand(throw,6,8) arg
 		skillrand(fight,5,7) arg
 		skillrand(stealth,6,8) arg
 		skillrand(sword,4,8)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -360,14 +360,14 @@ class(RBanditMainSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,272);
 	var(randomHunger,vec2(60,70));
 	getter_func(getSkills,vec4(randInt(10,13),randInt(11,12),randInt(10,13),randInt(9,12)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(healing,2,4) arg
 		skillrand(surgery,1,3) arg
 		skillrand(pistol,2,5) arg
 		skillrand(fight,5,7) arg
 		skillrand(stealth,6,8) arg
 		skillrand(lockpicking,3,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -448,14 +448,14 @@ class(RBanditMiniSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,ifcheck(getVar(gm_currentMode,isSBSCommandirSpawned),88,272));
 
 	getter_func(getSkills,vec4(randInt(10,13),randInt(11,12),randInt(10,13),randInt(9,12)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(healing,1,2) arg
 		skillrand(surgery,1,2) arg
 		skillrand(pistol,2,5) arg
 		skillrand(fight,5,7) arg
 		skillrand(stealth,6,8) arg 
 		skillrand(lockpicking,2,3)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -561,7 +561,7 @@ class(RSBSComannderSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,85);
 
 	getter_func(getSkills,vec4(randInt(12,14),randInt(10,12),randInt(12,15),randInt(13,15)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(pistol,2,5) arg
 		skillrand(rifle,2,4) arg
 		skillrand(shotgun,1,5) arg
@@ -569,7 +569,7 @@ class(RSBSComannderSaloon) extends(BasicRoleSaloon)
 		skillrand(fight,4,6) arg
 		skillrand(baton,2,5) arg
 		skillrand(sword,2,6)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -610,7 +610,7 @@ class(RSBSRookieSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,85);
 
 	getter_func(getSkills,vec4(randInt(12,14),randInt(10,12),randInt(12,15),randInt(13,15)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(pistol,2,5) arg
 		skillrand(rifle,5,6) arg
 		skillrand(shotgun,1,5) arg
@@ -618,7 +618,7 @@ class(RSBSRookieSaloon) extends(BasicRoleSaloon)
 		skillrand(fight,4,6) arg
 		skillrand(baton,2,5) arg
 		skillrand(sword,2,6)
-	]);
+	]};
 
 	func(getEquipment)
 	{

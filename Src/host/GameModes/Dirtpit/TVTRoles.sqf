@@ -18,7 +18,7 @@ class(RTVTRole) extends(BasicRole)
 	getter_func(getInitialDir,callFunc(gm_currentMode,getSpawnDir));
 	getter_func(getInitialPos,callFunc(gm_currentMode,getSpawnPos));
 	getter_func(getSkills,callFunc(gm_currentMode,getSkills));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,1,2) arg
 		skillrand(throw,1,3) arg
 		skillrand(pistol,1,2) arg
@@ -26,7 +26,7 @@ class(RTVTRole) extends(BasicRole)
 		skillrand(rifle,1,5) arg
 		skillrand(sword,1,3) arg
 		skillrand(traps,0,6)
-	]);
+	]};
 	func(getEquipment)
 	{
 		objParams_1(_mob);

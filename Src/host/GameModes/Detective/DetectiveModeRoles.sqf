@@ -78,12 +78,12 @@ class(RPomeshik) extends(RDetectiveModeRole)
 	getter_func(isMainRole,true);
 
 	getter_func(getSkills,vec4(randInt(10,14),randInt(10,13),randInt(9,11),randInt(12,14))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,0,3) arg
 		skillrand(sword,1,3) arg
 		skillrand(repair,2,4) arg
 		skillrand(farming,4,7)
-	]);
+	]};
 
 	//cloth GreatcoatBrown,back WoolCoat, head WorkerCoolCap
 	func(getEquipment)
@@ -124,10 +124,10 @@ class(RWifePomeshik) extends(RDetectiveModeRole)
 	getter_func(getInitialPos,vec3(3677.9,3684.88,23.6426));
 	getter_func(getInitialDir,273.718);
 	getter_func(getSkills,vec4(randInt(8,10),randInt(12,14),randInt(7,9),randInt(10,13))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(cooking,2,5) arg
 		skillrand(farming,2,3)
-	]);
+	]};
 
 	func(canVisibleAfterStart)
 	{
@@ -169,11 +169,11 @@ class(RPrikazchik) extends(RDetectiveModeRole)
 	var(desc,"Заместитель и помощник помещика. Организовывает работу прислужников и следит за порядком в поместье.");
 	var(reputationNeed,rolerep(1,5,9));
 	getter_func(getSkills,vec4(randInt(9,15),randInt(11,12),randInt(8,11),randInt(9,12))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(surgery,0,3) arg
 		skillrand(healing,0,4) arg
 		skillrand(fight,1,4)
-	]);
+	]};
 	//room give
 	getter_func(getInitialPos,getVar(gm_currentMode,listRooms) select (getVar(gm_currentMode,lastRoomNumber)-1) select 0);
 	getter_func(getInitialDir,random 360);
@@ -212,12 +212,12 @@ class(RDetective) extends(RDetectiveModeRole)
 	getter_func(getInitialPos,vec3(3632,3667.2,13.3369));
 	getter_func(getInitialDir,92.3);
 	getter_func(getSkills,vec4(randInt(12,14),randInt(10,12),randInt(11,13),randInt(9,11))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(sword,2,5) arg
 		skillrand(fight,3,6) arg
 		skillrand(pistol,2,6) arg
 		skillrand(stealth,3,5)
-	]);
+	]};
 
 	getterconst_func(canShownMurderInfo,false);
 
@@ -519,12 +519,12 @@ class(RButler) extends(RDetectiveModeRole)
 	var(reputationNeed,rolerep(1,2,5));
 	var(count,4);
 	getter_func(getSkills,vec4(randInt(7,13),randInt(6,10),randInt(6,14),randInt(7,10))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(cooking,0,7) arg
 		skillrand(repair,0,6) arg
 		skillrand(engineering,0,6) arg
 		skillrand(farming,0,7)
-	]);
+	]};
 
 	getter_func(getInitialPos,vec3(3684.31,3654.2,17.1444));
 	getter_func(getInitialDir,275.4);
@@ -550,10 +550,10 @@ class(RDetectiveTrader) extends(RDetectiveModeRole)
 	getter_func(getInitialPos,getVar(gm_currentMode,listRooms) select (getVar(gm_currentMode,lastRoomNumber)-1) select 0);
 	getter_func(getInitialDir,random 360);
 	getter_func(getSkills,vec4(randInt(10,13),randInt(11,12),randInt(10,14),randInt(9,12))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(stealth,2,4) arg
 		skillrand(fight,0,4)
-	]);
+	]};
 
 	//room give
 	//cloth TorgashPalthCloth,head HatGrayOldUshanka
@@ -595,12 +595,12 @@ class(RStorozh) extends(RDetectiveModeRole)
 	var(desc,"Ещё в прошлом цикле охранял вход в поместье. Сегодня же будешь охранять постояльцев внутри друг от друга.");
 	getter_func(getSkills,vec4(randInt(11,13),randInt(8,10),randInt(8,12),randInt(8,10))); //["_st","_iq","_dx","_ht"];
 	var(reputationNeed,rolerep(1,8,6));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(surgery,0,2) arg
 		skillrand(healing,0,3) arg
 		skillrand(baton,1,3) arg
 		skillrand(fight,2,4)
-	]);
+	]};
 
 	getter_func(getInitialPos,vec3(3633.65,3672.38,13.4181));
 	getter_func(getInitialDir,356.511);
@@ -639,11 +639,11 @@ class(RDetectiveHelper) extends(RDetectiveModeRole)
 	getter_func(getInitialPos,vec3(3632,3667.2,13.3369));
 	getter_func(getInitialDir,92.3);
 	getter_func(getSkills,vec4(randInt(10,13),randInt(10,11),randInt(10,12),randInt(9,10))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(sword,0,3) arg
 		skillrand(fight,1,3) arg
 		skillrand(pistol,0,4)
-	]);
+	]};
 	getterconst_func(canShownMurderInfo,false);
 	//cloth GreatcoatWhiteBrown
 
@@ -688,12 +688,12 @@ class(RDetectiveFriend) extends(RDetectiveModeRole)
 	getter_func(getInitialPos,vec3(3632,3667.2,13.3369));
 	getter_func(getInitialDir,92.3);
 	getter_func(getSkills,vec4(randInt(6,15),randInt(8,13),randInt(6,14),randInt(7,12))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(healing,0,4) arg
 		skillrand(farming,0,5) arg
 		skillrand(cooking,0,6) arg
 		skillrand(fight,0,3)
-	]);
+	]};
 	getterconst_func(canShownMurderInfo,false);
 	//cloth CitizenCloth11
 
@@ -729,11 +729,11 @@ class(RDetectiveMilker) extends(RDetectiveModeRole)
 	getter_func(getInitialPos,vec3(3632,3667.2,13.3369));
 	getter_func(getInitialDir,92.3);
 	getter_func(getSkills,vec4(randInt(9,12),randInt(8,10),randInt(8,13),randInt(8,10))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(farming,3,5) arg
 		skillrand(cooking,0,2) arg
 		skillrand(fight,0,4)
-	]);
+	]};
 	//cloth CookerCloth - rename
 	func(getEquipment)
 	{
@@ -771,11 +771,11 @@ class(RDetectiveThief) extends(RDetectiveModeRole)
 	getter_func(canTakeInLobby,false);
 	getter_func(getSkills,vec4(randInt(10,13),randInt(8,11),randInt(13,16),randInt(8,12))); //["_st","_iq","_dx","_ht"];
 	var(reputationNeed,rolerep(0,7,7));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(theft,6,9) arg
 		skillrand(stealth,7,10) arg
 		skillrand(lockpicking,6,9)
-	]);
+	]};
 	#ifdef EDITOR
 	getter_func(canVisibleAfterStart,true);
 	#else

@@ -129,6 +129,30 @@
 			}
 		},
 		{
+			"label": "Validate server",
+			"type": "process",
+			"command": "third-party\\VirtualMachine\\sqfvm.exe",
+			"args": [
+				"--suppress-welcome",
+				"--nowarn",
+				"-a",
+				"-v src|src",
+				"--define __FLAG_ONLY_PARSE__",
+				"--define CMD__RELEASE",
+				"--input-sqf .\\src\\host\\vm_compile.sqf",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}\\.."
+			},
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"clear": true,
+				"focus": true,
+				"group": "SQF-VM"
+			}
+		},
+		{
 			"label": "BUILD ALL (PROD)",
 			"type": "process",
 			"command": "ReMaker\\ReMaker.exe",

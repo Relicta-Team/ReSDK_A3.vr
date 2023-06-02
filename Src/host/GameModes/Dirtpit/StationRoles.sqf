@@ -95,12 +95,12 @@ class(RHead) extends(IRStationRole)
 	var(reputationNeed,rolerep(1,10,10));
 	getter_func(isMainRole,true);
 	getter_func(getSkills,vec4(randInt(9,11),randInt(8,13),randInt(9,12),randInt(9,11)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(sword,1,2) arg
 		skillrand(fight,1,3) arg
 		skillrand(throw,1,2) arg
 		skillrand(pistol,1,3)
-	]);
+	]};
 
 	func(canTakeInLobby)
 	{
@@ -185,11 +185,11 @@ class(RHeadSon) extends(IRStationRole)
 	var(count,1);
 
 	getter_func(getSkills,vec4(randInt(2,5),randInt(3,6),randInt(3,7),randInt(4,9)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,0,2) arg
 		skillrand(throw,1,2) arg
 		skillrand(stealth,1,2)
-	]);
+	]};
 
 	func(canBeFullAntag)
 	{
@@ -253,9 +253,9 @@ class(RWifeHead) extends(IRStationRole)
 	getter_func(getInitialPos,vec3(3744.05,3760.24,33.3045));
 	getter_func(getInitialDir,359.659);
 	getter_func(getSkills,vec4(randInt(7,9),randInt(9,12),randInt(6,9),randInt(9,12))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(stealth,2,3)
-	]);
+	]};
 
 	func(canVisibleAfterStart)
 	{
@@ -309,11 +309,11 @@ class(RKnut) extends(IRStationRole)
 	getter_func(getInitialDir,94);
 
 	getter_func(getSkills,vec4(randInt(11,12),11,randInt(11,13),randInt(11,12)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,1,2) arg
 		skillrand(throw,1,3) arg
 		skillrand(pistol,1,2)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -336,12 +336,12 @@ class(RAbbat) extends(IRStationRole)
 	getter_func(getInitialDir,267);
 
 	getter_func(getSkills,vec4(randInt(8,10),randInt(10,13),randInt(8,10),10));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(whip,3,5) arg
 		skillrand(fight,1,2) arg
 		skillrand(throw,1,3) arg
 		skillrand(healing,2,3)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -370,13 +370,13 @@ class(RAbbatNovice) extends(IRStationRole)
 	getter_func(getInitialDir,2.2);
 
 	getter_func(getSkills,vec4(randInt(11,12),randInt(8,10),randInt(11,13),randInt(11,12)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(whip,2,4) arg
 		skillrand(fight,1,4) arg
 		skillrand(throw,1,2) arg
 		skillrand(healing,1,2) arg
 		skillrand(stealth,1,3)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -399,7 +399,7 @@ class(RCaretaker) extends(IRStationRole)
 	getter_func(getInitialDir,182);
 
 	getter_func(getSkills,vec4(randInt(12,14),randInt(10,12),randInt(12,15),randInt(13,15)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(surgery,0,2) arg
 		skillrand(healing,0,3) arg
 		skillrand(pistol,2,5) arg
@@ -409,7 +409,7 @@ class(RCaretaker) extends(IRStationRole)
 		skillrand(fight,4,6) arg
 		skillrand(baton,2,5) arg
 		skillrand(sword,2,6)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -455,14 +455,14 @@ class(RVeteran) extends(IRStationRole)
 	getter_func(getInitialDir,2);
 
 	getter_func(getSkills,vec4(randInt(12,14),randInt(10,12),randInt(12,15),randInt(13,15)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(healing,0,3) arg
 		skillrand(pistol,1,3) arg
 		skillrand(throw,2,3) arg
 		skillrand(fight,3,5) arg
 		skillrand(baton,1,4) arg
 		skillrand(sword,1,5)
-	]);
+	]};
 
 
 	func(getEquipment)
@@ -494,12 +494,12 @@ class(RStreak) extends(IRStationRole)
 	getter_func(getInitialDir,88);
 
 	getter_func(getSkills,vec4(randInt(9,10),randInt(7,10),randInt(13,15),randInt(9,10)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(throw,1,2) arg
 		skillrand(fight,1,3) arg
 		skillrand(baton,1,3) arg
 		skillrand(sword,1,2)
-	]);
+	]};
 
 
 	func(onAssigned)
@@ -538,12 +538,12 @@ class(RBrigadir) extends(IRStationRole)
 	getter_func(getInitialDir,178);
 
 	getter_func(getSkills,vec4(randInt(12,13),randInt(8,10),randInt(7,9),randInt(11,13)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(engineering,4,8) arg
 		skillrand(repair,4,8) arg
 		skillrand(baton,1,4) arg
 		skillrand(fight,1,3)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -567,12 +567,12 @@ class(RBrigadirNovice) extends(RBrigadir)
 	getter_func(getInitialDir,0);
 
 	getter_func(getSkills,vec4(randInt(12,13),randInt(8,10),randInt(7,9),randInt(11,13)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(engineering,4,8) arg
 		skillrand(repair,4,8) arg
 		skillrand(baton,1,4) arg
 		skillrand(fight,1,3)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -596,11 +596,11 @@ class(RBarmen) extends(IRStationRole)
 	getter_func(getInitialDir,178);
 
 	getter_func(getSkills,vec4(randInt(9,10),randInt(9,10),randInt(9,10),randInt(7,10)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(cooking,2,6) arg
 		skillrand(fight,1,2) arg
 		skillrand(shotgun,1,3)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -622,12 +622,12 @@ class(RCook) extends(IRStationRole)
 	getter_func(getInitialDir,0.6);
 
 	getter_func(getSkills,vec4(randInt(8,10),randInt(7,9),randInt(9,11),randInt(10,11)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(cooking,4,8) arg
 		skillrand(fight,1,2) arg
 		skillrand(farming,1,4) arg
 		skillrand(knife,1,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -651,12 +651,12 @@ class(RCookNovice) extends(RCook)
 	getter_func(getInitialDir,272.168);
 
 	getter_func(getSkills,vec4(randInt(7,10),randInt(7,9),randInt(9,11),randInt(10,11)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(cooking,2,5) arg
 		skillrand(fight,1,2) arg
 		skillrand(farming,1,4) arg
 		skillrand(knife,1,4)
-	]);
+	]};
 
 	func(canVisibleAfterStart)
 	{
@@ -675,12 +675,12 @@ class(RFarmer) extends(IRStationRole)
 	getter_func(getInitialDir,271);
 
 	getter_func(getSkills,vec4(randInt(7,9),randInt(7,9),randInt(7,9),randInt(7,9)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(throw,1,4) arg
 		skillrand(fight,1,2) arg
 		skillrand(farming,4,8) arg
 		skillrand(alchemy,1,5)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -709,12 +709,12 @@ class(RMedHealer) extends(IRStationRole)
 	getter_func(getInitialDir,273);
 
 	getter_func(getSkills,vec4(randInt(7,9),randInt(10,13),randInt(11,13),10));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(healing,4,8) arg
 		skillrand(fight,1,2) arg
 		skillrand(surgery,4,8) arg
 		skillrand(chemistry,2,6)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -737,12 +737,12 @@ class(RMedHealerNovice) extends(RMedHealer)
 	getter_func(getInitialDir,random 360);
 
 	getter_func(getSkills,vec4(randInt(6,9),randInt(10,13),randInt(9,12),10));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(healing,3,6) arg
 		skillrand(fight,1,2) arg
 		skillrand(surgery,3,6) arg
 		skillrand(chemistry,2,4)
-	]);
+	]};
 
 	func(canVisibleAfterStart)
 	{
@@ -763,14 +763,14 @@ class(RWatchman) extends(IRStationRole)
 	getter_func(needDiscordRoles,["Gatekeeper"]);
 
 	getter_func(getSkills,vec4(randInt(10,12),randInt(9,11),randInt(10,12),randInt(10,11)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(surgery,0,3) arg
 		skillrand(healing,0,4) arg
 		skillrand(repair,3,5) arg
 		skillrand(fight,2,3) arg
 		skillrand(pistol,2,4) arg
 		skillrand(cavelore,3,6)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -791,11 +791,11 @@ class(RCleaner) extends(IRStationRole)
 	getter_func(getInitialDir,87);
 
 	getter_func(getSkills,vec4(randInt(9,10),randInt(7,9),randInt(9,10),randInt(9,11)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(stealth,3,6) arg
 		skillrand(fight,1,3) arg
 		skillrand(theft,2,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -817,12 +817,12 @@ class(RMerchant) extends(IRStationRole)
 	getter_func(getInitialDir,184);
 
 	getter_func(getSkills,vec4(randInt(7,9),randInt(12,15),randInt(7,10),randInt(9,11)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(healing,0,4) arg
 		skillrand(pistol,2,5) arg
 		skillrand(fight,1,2) arg
 		skillrand(knife,1,3)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -855,11 +855,11 @@ class(RGromila) extends(IRStationRole)
 	getter_func(getInitialDir,88);
 
 	getter_func(getSkills,vec4(randInt(12,13),randInt(8,9),randInt(11,12),randInt(10,12)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,2,4) arg
 		skillrand(baton,1,3) arg
 		skillrand(stealth,2,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -878,7 +878,7 @@ class(RCitizen) extends(IRStationRole)
 	getter_func(getInitialDir,random 360);
 
 	getter_func(getSkills,vec4(randInt(8,11),randInt(8,11),randInt(8,11),randInt(8,11)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,0,6) arg
 		skillrand(throw,0,5) arg
 		skillrand(stealth,0,5) arg
@@ -887,7 +887,7 @@ class(RCitizen) extends(IRStationRole)
 		skillrand(healing,0,3) arg
 		skillrand(cooking,0,4) arg
 		skillrand(farming,0,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -976,11 +976,11 @@ class(RBum) extends(BasicRole)
 	getter_func(getInitialPos,getSelf(lastPos));
 
 	getter_func(getSkills,vec4(randInt(6,15),randInt(6,15),randInt(6,15),randInt(6,15)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,1,6) arg
 		skillrand(theft,1,4) arg
 		skillrand(stealth,4,7)
-	]);
+	]};
 
 	var(__posesList,null);
 	var(lastPos,[]);
@@ -1059,10 +1059,10 @@ class(REaterStation) extends(RPreyEater)
 	var(desc,"Ужасный монстр");
 	
 	getter_func(getSkills,vec4(randInt(13,16),randInt(10,12),randInt(12,15),randInt(9,11))); //["_st","_iq","_dx","_ht"];
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,5,8) arg
 		skillrand(stealth,3,7)
-	]);
+	]};
 	getter_func(needDiscordRoles,["Dweller"]);
 	var(count,9);
 	func(onAssigned)
@@ -1192,11 +1192,11 @@ class(RTEmbNomadHunter) extends(RTEmbNomadBase)
 	var(name,"Охотник");
 	getter_func(getSkills,vec4(randInt(10,12),randInt(9,10),randInt(10,12),randInt(9,11))); //["_st","_iq","_dx","_ht"];
 
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,4,6) arg
 		skillrand(shotgun,6,9) arg
 		skillrand(stealth,2,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -1214,13 +1214,13 @@ class(RTEmbNomadHealer) extends(RTEmbNomadBase)
 	var(name,"Пещерный лекарь");
 	getter_func(getSkills,vec4(randInt(8,11),randInt(11,13),randInt(9,13),randInt(10,13))); //["_st","_iq","_dx","_ht"];
 
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,1,3) arg
 		skillrand(stealth,1,5) arg
 		skillrand(sword,2,4) arg 
 		skillrand(healing,4,8) arg
 		skillrand(surgery,4,8)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -1239,11 +1239,11 @@ endclass
 class(RTEmbNomadMushromer) extends(RTEmbNomadBase)
 	var(name,"Гриборуб");
 	getter_func(getSkills,vec4(randInt(12,14),randInt(7,10),randInt(11,14),randInt(9,12)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(fight,1,3) arg
 		skillrand(axe,2,6) arg 
 		skillrand(throw,3,6)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -1257,11 +1257,11 @@ endclass
 class(RTEmbNomadRatter) extends(RTEmbNomadBase)
 	var(name,"Ловец мельтешат");
 	getter_func(getSkills,vec4(randInt(9,10),randInt(7,9),randInt(9,13),randInt(9,11)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(stealth,3,6) arg
 		skillrand(fight,1,3) arg
 		skillrand(theft,2,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -1281,12 +1281,12 @@ endclass
 class(RTEmbNomadCook) extends(RTEmbNomadBase)
 	var(name,"Готовщик");
 	getter_func(getSkills,vec4(randInt(7,10),randInt(7,9),randInt(9,11),randInt(10,11)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(cooking,2,5) arg
 		skillrand(fight,1,2) arg
 		skillrand(farming,1,4) arg
 		skillrand(knife,1,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
@@ -1308,11 +1308,11 @@ endclass
 class(RTEmbNomadSpirter) extends(RTEmbNomadBase)
 	var(name,"Самогонщик");
 	getter_func(getSkills,vec4(randInt(9,10),randInt(8,10),randInt(8,10),randInt(9,10)));
-	getter_func(getOtherSkills,[
+	func(getOtherSkills) {[
 		skillrand(cooking,2,5) arg
 		skillrand(fight,1,2) arg
 		skillrand(knife,1,4)
-	]);
+	]};
 
 	func(getEquipment)
 	{
