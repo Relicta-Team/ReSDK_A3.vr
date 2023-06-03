@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Validate ${{ matrix.build_type }}
         run: Third-party/BuildTools/Validate.bat ${{ matrix.build_type }}
-      #  working-directory: ${{ github.workspace }}
+        working-directory: ${{ github.workspace }}
   updateversion:
     runs-on: windows-latest
     if: github.job.allbuild 
