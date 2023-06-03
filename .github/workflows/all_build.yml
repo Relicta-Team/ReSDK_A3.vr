@@ -6,10 +6,13 @@ on:
     branches:
       - main
     paths:
-      - Src/*
-    paths-ignore:
-      - Src/VERSION
-      - Src/version.hpp
+      - Src/client/*
+      - Src/host/*
+      - Src/ReBridge/*
+      - Src/Scripts/*
+      - Src/Scripts/*.sqf
+      - Src/Scripts/*.cpp
+      - Src/Scripts/SETTINGS.h
   workflow_dispatch:
 
 jobs:
