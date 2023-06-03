@@ -36,4 +36,8 @@ if not exist %workdir%\third-party\VirtualMachine\sqfvm.exe (
 	exit /b 1
 )
 
-%workdir%\third-party\VirtualMachine\sqfvm.exe %MAIN_OPTIONS% %MACRO_COMMON% --input-sqf %COMPILER_PATH% %BUILD_TYPE%
+set arguments=%MAIN_OPTIONS% --input-sqf %COMPILER_PATH% %MACRO_COMMON% %BUILD_TYPE%
+
+echo Args:%arguments%
+
+%workdir%\third-party\VirtualMachine\sqfvm.exe %arguments%

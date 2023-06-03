@@ -169,6 +169,10 @@
 	#define __vm_warning(data)
 #endif
 
+#ifdef __GH_ACTION
+	#define __vm_log(text) diag_log (text)
+#endif
+
 //check if file exists
 #define fileExists(file) fileexists (file)
 
