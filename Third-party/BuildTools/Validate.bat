@@ -26,7 +26,7 @@ echo Compiler: %COMPILER_PATH%
 echo Main options: %MAIN_OPTIONS%
 echo Common macro: %MACRO_COMMON%
 
-cd ..\..\
+REM cd ..\..\
 
 set workdir=%cd%
 echo %workdir%
