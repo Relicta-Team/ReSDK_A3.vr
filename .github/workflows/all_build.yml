@@ -38,7 +38,7 @@ jobs:
           $version = Get-Content .\src\VERSION
           Write-Host "Now version is: $version"
           echo "version_value=${version}" >> $env:GITHUB_OUTPUT
-      
+        working-directory: ${{ github.workspace }}/Third-party/BuildTools
       - name: Push changes
         if: steps.new_version.outputs.version_value && github.repository == 'Relicta-Team/ReSDK_A3.vr'
         run: |
