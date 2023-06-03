@@ -27,6 +27,7 @@ jobs:
         run: Third-party/BuildTools/Validate.bat ${{ matrix.build_type }}
         working-directory: ${{ github.workspace }}
   updateversion:
+    name: Update build number
     runs-on: windows-latest
     needs:
       - allbuild
