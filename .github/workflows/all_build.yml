@@ -18,9 +18,9 @@ jobs:
       matrix:
         build_type:
           - client
-          #- client-debug
-          #- server
-          #- server-debug
+          - client-debug
+          - server
+          - server-debug
     steps:
       - uses: actions/checkout@v3
       - name: Validate ${{ matrix.build_type }}
@@ -47,13 +47,9 @@ jobs:
         uses: test-room-7/action-update-file@v1  
         if: steps.new_version.outputs.version_value && github.repository == 'Relicta-Team/ReSDK_A3.vr'
         with:
+          commiter-name: Autoupdater
           file-path: |
             Src/VERSION
             Src/version.hpp
-          commit-msg: Autoupdate to ${{steps.new_version.outputs.version_value}}
+          commit-msg: Update - ${{steps.new_version.outputs.version_value}}
           github-token: ${{secrets.TOKEN}}
-      
-      - name: postcheck
-        run: |
-         $version = Get-Content .\src\VERSION
-         Write-Host "Version is: $version"
