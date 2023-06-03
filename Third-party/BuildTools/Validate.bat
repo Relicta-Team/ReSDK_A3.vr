@@ -2,7 +2,7 @@ echo off
 
 echo Setup env
 
-set MACRO_COMMON=-D __FLAG_ONLY_PARSE__
+set MACRO_COMMON=-D __FLAG_ONLY_PARSE__ -D __GH_ACTION
 set MAIN_OPTIONS=--suppress-welcome --nowarn -a -v "src|src"
 
 if [%1] == [client] (

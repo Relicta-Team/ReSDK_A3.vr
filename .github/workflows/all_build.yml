@@ -26,7 +26,6 @@ jobs:
         working-directory: ${{ github.workspace }}
   updateversion:
     runs-on: windows-latest
-    if: github.job.allbuild 
     needs:
       - allbuild
     steps:
