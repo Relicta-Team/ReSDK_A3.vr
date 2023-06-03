@@ -1,0 +1,50 @@
+
+name: All build
+
+on:
+  push:
+    branches:
+    - master
+  workflow_dispatch:
+
+jobs:
+  allbuild:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: true
+      
+      matrix:
+        build_type:
+          - client
+          - client-debug
+          - server
+          - server-debug
+    steps:
+      - uses: actions/checkout@v3
+      - name: Validate ${{ matrix.build_type }}
+        run: Third-party/BuildTools/Validate.bat ${{ matrix.build_type }}
+      #  working-directory: ${{ github.workspace }}
+  updateversion:
+    runs-on: windows-latest
+    if: github.job.allbuild 
+    needs:
+      - allbuild
+    steps:
+      - uses: actions/checkout@v3
+      - name: Increment build number
+        id: new_version  
+        shell: powershell
+        run: |
+          Third-party/BuildTools/update_version.exe path:..\..\ updpath
+          $version = Get-Content .\src\VERSION
+          Write-Host "New version is: $version"
+          echo "version_value=${version}" >> $env:GITHUB_OUTPUT
+      
+      - name: Push changes
+        if: steps.new_version && steps.new_version.outputs.version_value && github.repository == 'Relicta-Team/ReSDK_A3.vr'
+        run: |
+          git config user.name "Autoupdate"
+          git config user.email "workflow@example.com"
+          git add .
+          git commit -m "Autoupdated to ${{steps.new_version.outputs.version_value}}"
+          git push origin master
