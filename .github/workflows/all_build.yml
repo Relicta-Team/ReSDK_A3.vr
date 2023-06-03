@@ -16,9 +16,9 @@ jobs:
       matrix:
         build_type:
           - client
-          #- client-debug
-          #- server
-          #- server-debug
+          - client-debug
+          - server
+          - server-debug
     steps:
       - uses: actions/checkout@v3
       - name: Validate ${{ matrix.build_type }}
