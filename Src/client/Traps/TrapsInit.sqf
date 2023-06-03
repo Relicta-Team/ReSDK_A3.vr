@@ -84,8 +84,3 @@ traps_syncObject = {
 	_obj hideObject (!_doKnown);
 	
 }; rpcAdd("syncTrap",traps_syncObject);
-
-#ifdef DEBUG
-//this is a test error
-	a =a a =a= a= a =a a= a= a
-#endif
