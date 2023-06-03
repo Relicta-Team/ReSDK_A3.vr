@@ -91,6 +91,13 @@ vm_lastError = "unk_err";
 	private _ctx = compile preprocessFile (path); allClientContents pushback _ctx;
 
 #include <loader.hpp>
+
+	if (count allClientContents == 0) then {
+		__vm_log("Not found any client files...");
+		throwsafe("!NotFoundClientContent!");
+	} else {
+		__vm_log("Collected " + str count allClientContents + " modules!");
+	};
 }
 except__
 {
