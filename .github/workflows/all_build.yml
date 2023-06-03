@@ -48,7 +48,12 @@ jobs:
         if: steps.new_version.outputs.version_value && github.repository == 'Relicta-Team/ReSDK_A3.vr'
         with:
           file-path: |
-            .\Src\VERSION
-            .\Src\version.hpp
+            ./Src/VERSION
+            ./Src/version.hpp
           commit-msg: Autoupdate to ${{steps.new_version.outputs.version_value}}
           github-token: ${{secrets.TOKEN}}
+      
+      - name: postcheck
+        run: |
+         $version = Get-Content .\src\VERSION
+         Write-Host "Version is: $version"
