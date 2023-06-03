@@ -6,7 +6,6 @@
 #include <..\engine.hpp>
 #include <Curl.hpp>
 
-
 //to get steamid https://relicta.ru/UidToName.php?&uid=76561198094364528
 
 //#define u_test
