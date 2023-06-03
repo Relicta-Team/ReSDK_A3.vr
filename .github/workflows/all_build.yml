@@ -49,4 +49,4 @@ jobs:
           git config user.email "workflow@example.com"
           git add .
           git commit -m "Autoupdated to ${{steps.new_version.outputs.version_value}}"
-          git push origin master
+          git push origin main
