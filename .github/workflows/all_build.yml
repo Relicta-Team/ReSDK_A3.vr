@@ -4,7 +4,9 @@ name: All build
 on:
   push:
     branches:
-    - main
+      - main
+    paths:
+      - Src/*
   workflow_dispatch:
 
 jobs:
