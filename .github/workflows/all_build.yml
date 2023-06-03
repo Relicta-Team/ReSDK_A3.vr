@@ -34,7 +34,7 @@ jobs:
         id: new_version  
         shell: powershell
         run: |
-          Third-party/BuildTools/update_version.exe updpath
+          Third-party/BuildTools/update_version.exe path:..\..\ updpath
           $version = Get-Content .\src\VERSION
           Write-Host "Now version is: $version"
           echo "version_value=${version}" >> $env:GITHUB_OUTPUT
