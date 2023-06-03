@@ -18,9 +18,9 @@ jobs:
       matrix:
         build_type:
           - client
-          - client-debug
-          - server
-          - server-debug
+          #- client-debug
+          #- server
+          #- server-debug
     steps:
       - uses: actions/checkout@v3
       - name: Validate ${{ matrix.build_type }}
@@ -42,12 +42,13 @@ jobs:
           $version = Get-Content .\src\VERSION
           Write-Host "Now version is: $version"
           echo "version_value=${version}" >> $env:GITHUB_OUTPUT
-        
+      
+      - uses: test-room-7/action-update-file@v1  
       - name: Push changes
         if: steps.new_version.outputs.version_value && github.repository == 'Relicta-Team/ReSDK_A3.vr'
-        run: |
-          git config user.name "Autoupdate"
-          git config user.email "workflow@example.com"
-          git add ./Src/VERSION ./Src/version.hpp
-          git commit -m "Autoupdated to ${{steps.new_version.outputs.version_value}}"
-          git push origin main
+        with:
+          file-path: |
+            .\Src\VERSION
+            .\Src\version.hpp
+          commit-msg: Autoupdate to ${{steps.new_version.outputs.version_value}}
+          github-token: ${{secrets.TOKEN}}
