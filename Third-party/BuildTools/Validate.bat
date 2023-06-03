@@ -28,4 +28,9 @@ echo Common macro: %MACRO_COMMON%
 
 cd ..\..\
 
+if not exist third-party\VirtualMachine\sqfvm.exe (
+	echo VM executable not found.
+	exit /b 1
+)
+
 third-party\VirtualMachine\sqfvm.exe %MAIN_OPTIONS% %MACRO_COMMON% --input-sqf %COMPILER_PATH% %BUILD_TYPE%
