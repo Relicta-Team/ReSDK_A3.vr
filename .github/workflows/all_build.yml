@@ -36,11 +36,11 @@ jobs:
         run: |
           Third-party/BuildTools/update_version.exe path:..\..\ updpath
           $version = Get-Content .\src\VERSION
-          Write-Host "New version is: $version"
+          Write-Host "Now version is: $version"
           echo "version_value=${version}" >> $env:GITHUB_OUTPUT
       
       - name: Push changes
-        if: steps.new_version && steps.new_version.outputs.version_value && github.repository == 'Relicta-Team/ReSDK_A3.vr'
+        if: steps.new_version.outputs.version_value && github.repository == 'Relicta-Team/ReSDK_A3.vr'
         run: |
           git config user.name "Autoupdate"
           git config user.email "workflow@example.com"
