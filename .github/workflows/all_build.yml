@@ -7,6 +7,9 @@ on:
       - main
     paths:
       - Src/*
+    paths-ignore:
+      - Src/VERSION
+      - Src/version.hpp
   workflow_dispatch:
 
 jobs:
