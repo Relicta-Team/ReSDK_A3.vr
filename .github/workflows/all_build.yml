@@ -48,6 +48,6 @@ jobs:
         run: |
           git config user.name "Autoupdate"
           git config user.email "workflow@example.com"
-          git add .
+          git add ./Src/VERSION ./Src/version.hpp
           git commit -m "Autoupdated to ${{steps.new_version.outputs.version_value}}"
           git push origin main
