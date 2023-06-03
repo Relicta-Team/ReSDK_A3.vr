@@ -6,10 +6,10 @@ on:
     branches:
       - main
     paths:
-      - Src/client/*
-      - Src/host/*
-      - Src/ReBridge/*
-      - Src/Scripts/*
+      - Src/client/**
+      - Src/host/**
+      - Src/ReBridge/**
+      - Src/Scripts/**
       - Src/Scripts/*.sqf
       - Src/Scripts/*.cpp
       - Src/Scripts/SETTINGS.h
