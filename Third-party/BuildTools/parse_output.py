@@ -23,7 +23,7 @@ if not os.path.exists(path):
     sys.exit(-600)
 
 content = open(path).read().splitlines()
-
+hasErrors = 0
 log(f"Start processing logfile {path}")
 
 def parse_line(ln):
@@ -50,6 +50,8 @@ def parse_line(ln):
             handle_error(llf,path,line,message)
 
 def handle_error(errored_file,catched_path,catched_line,error_message):
+    global hasErrors
+    hasErrors += 1
     optionals = ""
     errmes = error_message
     if errmes.find("Arg Count Missmatch") != -1:
@@ -74,7 +76,9 @@ for line in content:
     parse_line(line)
     #log(f"data: {line}")
 
-
+if hasErrors > 0:
+    log(f"Errors detected: {hasErrors}")
+    sys.exit(-5)
 
 
 
