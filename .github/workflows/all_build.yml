@@ -32,7 +32,7 @@ jobs:
       - name: Validate ${{ matrix.build_type }}
         run: | 
           Third-party/BuildTools/Validate.bat ${{ matrix.build_type }}
-          Third-party/BuildTools/parser_output.bat ./Third-party/BuildTools/output.txt ./
+          Third-party/BuildTools/parse_output.py ./Third-party/BuildTools/output.txt ./
         working-directory: ${{ github.workspace }}
   updateversion:
     if: github.event_name != 'workflow_dispatch'
