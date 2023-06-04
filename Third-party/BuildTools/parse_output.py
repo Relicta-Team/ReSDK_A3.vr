@@ -3,7 +3,6 @@ import sys
 import string
 import os
 
-print("test print")
 
 def log(mes):
     print(mes,file=sys.stdout)
@@ -54,12 +53,12 @@ def handle_error(errored_file,catched_path,catched_line,error_message):
     optionals = ""
     errmes = error_message
     if errmes.find("Arg Count Missmatch") != -1:
-        optionals = optionals + f",title=Preprocessor error"
+        #optionals = optionals + f",title=Preprocessor error"
         patdef = r"\#define\s+(\w+\(.*\))\s"
-        errmes = f"Error macro arguments count: {re.search(patdef,read_src_file(catched_path,catched_line),re.DOTALL).group(1)}"
+        errmes = f"Macro signature error. Incorrect number of parameters: {re.search(patdef,read_src_file(catched_path,catched_line),re.DOTALL).group(1)}"
     else:
         errmes = f"{error_message} [{catched_path} at {catched_line}]"
-    log(f"::error file={errored_file}{optionals}::{errmes}")
+    log(f"::error file={errored_file},line=1{optionals}::{errmes}")
     
 
 def read_src_file(file,line):
