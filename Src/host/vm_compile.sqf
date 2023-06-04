@@ -7,6 +7,7 @@
 #include <engine.hpp>
 allClientContents = [];
 client_isLocked = false;
+server_isLocked = false;
 vm_lastError = "unk_err";
 #define __vm_log(text) "debug_console" callExtension ((text)+"#1110")
 #define throwsafe(res) vm_lastError = res; throw vm_lastError;
@@ -23,51 +24,79 @@ vm_lastError = "unk_err";
 #define __vm_log(text) diag_log (text)
 #endif
 
-vm_allClasses = [];
+p_table_inheritance = [];
+p_table_allclassnames = [];
 
 checkClassInheritance = {
-	//vm_allClasses = [];
-
-	_classesTest = [
-		["object","<superbase>"],
-		["ManagedObject","object"],
-		["RefCounterObject","object"],
-		["NetObject","<superbase>"],
-		["GameObject","ManagedObject"],
-		["IDestructible","GameObject"],
-		["BasicMob","GameObject"],
-		["MobGhost","BasicMob"]
-	];
+	
+	//p_table_inheritance
+	//p_table_allclassnames
+	// p_table_inheritance = [
+	// 	["object","<superbase>"],
+	// 	["ManagedObject","object"],
+	// 	["RefCounterObject","object"],
+	// 	["NetObject","<superbase>"],
+	// 	["GameObject","ManagedObject"],
+	// 	["IDestructible","GameObject"],
+	// 	["BasicMob","GameObject"],
+	// 	["MobGhost","BasicMob"]
+	// ]; p_table_allclassnames = p_table_inheritance apply {_x select 0};
 
 	_readyClasses = [];
 	_findBaseClass = {
 		params ["_base","_errRet"];
-		private _idx = vm_allClasses findif {_x select 0 == _base};
+		private _idx = p_table_inheritance findif {_x select 0 == _base};
 		if (_idx == -1) exitwith {_errRet};
-		vm_allClasses select _idx select 1;
+		p_table_inheritance select _idx select 1;
 	};
 	{
-		_pObj = missionNamespace getvariable ["pt_"+_x,"@noclass"];
 		_className_str = _x;
-		if (_pObj isequalto "@noclass") exitwith {
-			__vm_log("Cant find class " + _className_str);
-			throwsafe("!ClassNotFoundException!");
-		};
+		__vm_log("-----------------------------------------------");
+		__vm_log("Class: " + _className_str);
+
 		if ((tolower _className_str) in _readyClasses) then {
 			__vm_log("Duplicate classname " + _className_str);
 			throwsafe("!DuplicateClassNameException!");
 		};
 		_readyClasses pushBack (tolower _className_str);
 		
-		_motherType = [_pObj,"@nullclass"] call _findBaseClass;
-		if (_motherType != "<superbase>" && {missionNamespace getvariable ["pt_"+_motherType,"@nullclass"] isequalto "@nullclass"}) exitwith {
+		_motherType = [_className_str,"@nullclass"] call _findBaseClass;
+		if (_motherType != "<superbase>" && {_motherType isequalto "@nullclass"}) exitwith {
 			__vm_log("Cant find mother class " + _motherType + "; Base: " + _className_str);
 			throwsafe("!MotherClassNotFoundException!");
 		};
 
-		_mot = _pObj;
+		_mot = _className_str;
+		_inc = 0;
+
+		_inhList = [];
+
+		while {_mot != "<superbase>"} do {
+			if (_inc >= 9999) exitwith {
+				__vm_log("While interator limit reach on check class " + _className_str);
+				throwsafe("!WhileIteratorLimitMax!");
+			};
+			_bmot = [_mot,""] call _findBaseClass;
+			if (_bmot == "") then {
+				__vm_log("Cant find base class for " + _mot);
+				throwsafe("!BaseClassNotExists!");
+			};
+			_mot = _bmot;
+
+			if (_mot != "<superbase>") then {
+				_inhList pushBack _mot;
+			};
+
+			_inc = _inc + 1;
+		};
 		
+		__vm_log("Parents: " + (_inhList joinstring "->"));
+
 	} foreach p_table_allclassnames;
+
+	__vm_log("");
+	__vm_log("");
+	__vm_log("	Class count:" + str count p_table_allclassnames);
 };
 
 {
@@ -133,7 +162,7 @@ checkClassInheritance = {
 		throwsafe( "!NullCryptKeyException");
 	};
 
-//#include <CommonComponents\loader.hpp>
+	#include <CommonComponents\loader.hpp>
 
 	#include "init.sqf"
 	call checkClassInheritance;
@@ -154,14 +183,17 @@ except__
 	for"_i"from 0 to 900000 do {};
 	#endif
 	
+	copyToClipboard (str p_table_allclassnames);
+
 	exitcode__ 1;
 };
 
 #ifdef __FLAG_ONLY_PARSE__
 	if (true) exitWith {
-		__vm_log("	Class count:" + str count vm_allClasses);
+		__vm_log("");
+		__vm_log("");
 		__vm_log("	Parsing done!");
-		copyToClipboard (str vm_allClasses);
+		//copyToClipboard (str p_table_allclassnames);
 		exitcode__ 0;
 	};
 #endif

@@ -10,7 +10,8 @@ vm_lastError = "unk_err";
 #define __vm_log(text) "debug_console" callExtension ((text)+"#1110")
 #define throwsafe(res) vm_lastError = res; throw vm_lastError;
 
-#define cmplog(data) __vm_log("	[LOAD] Module "+data);
+//disable postoutput info
+#define cmplog(data) 
 
 #define DISABLE_REGEX_ON_FLIE
 
@@ -88,6 +89,7 @@ vm_lastError = "unk_err";
 #include <..\host\CommonComponents\loader.hpp>
 
 #define importClient(path) if (isNil {allClientContents}) then {allClientContents = [];}; if (client_isLocked) exitWith {__vm_log("Compile process aborted - client.isLocked == true")}; \
+	__vm_log("[LOAD] " + path); \
 	private _ctx = compile preprocessFile (path); allClientContents pushback _ctx;
 
 #include <loader.hpp>

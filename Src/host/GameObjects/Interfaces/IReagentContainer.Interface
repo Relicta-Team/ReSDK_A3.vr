@@ -185,7 +185,7 @@ func(addReagentData)
 
 func(removeReagentData)
 {
-	objParams_2(_matter);
+	objParams_1(_matter);
 	[getSelf(reagents),_matter] call ms_removeMatterData;
 };
 

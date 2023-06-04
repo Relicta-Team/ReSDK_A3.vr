@@ -7,7 +7,8 @@
 #include <..\client_compiled.hpp>
 
 #ifdef _SQFVM
-	#define importCommon(path) cmplog("common " + path); if (isNil {allClientContents}) then {allClientContents = [];}; \
+	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = [];}; \
+	__vm_log("[LOAD] " + ("src\host\CommonComponents\" + path)); \
 	private _ctx = compile __pragma_prep_cli ("src\host\CommonComponents\" + path); \
 	allClientContents pushback _ctx;
 #endif

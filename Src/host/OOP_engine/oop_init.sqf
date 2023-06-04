@@ -138,11 +138,15 @@ _attr_ex_init_list = [];
 	//calling ctors
 	_shell_data = _shell_data + '{this call (_x getvariable "constructor")} foreach (this getvariable "proto" getvariable "__ctors"); this';
 
+	#ifndef _SQFVM
 	_pObj setvariable ['__instance',compile _shell_data];
+	#endif
 	_pObj setvariable ["__inhlist",_inheritance_list];
 
+	#ifndef _SQFVM
 	//make hashset for isTypeOf faster algorithm
 	_pObj setVariable ["__inhlist_map",hashSet_create(_inheritance_list)];
+	#endif
 
 	//reversing ctors. base to childs...
 	reverse _ctor_objects;
@@ -164,8 +168,10 @@ _attr_ex_init_list = [];
 	_pObj setVariable ["__allfields",_exist_fields];
 	_pObj setVariable ["__allmethods",_exists_methods];
 
+	#ifndef _SQFVM
 	//hashing faster than arrays
 	_pObj setVariable ["__allfields_map",createHashMapFromArray _fieldsBaseValues];
+	#endif
 
 	//init all attributes
 	if not_equals(_attrs,[]) then {

@@ -14,7 +14,7 @@ class(CleanableItem) extends(Item)
 	getter_func(canPickup,false);
 	var(icon,null);
 	var(weight,-1);
-	var(model,"WaterSpill_01_Small_New_F")
+	var(model,"WaterSpill_01_Small_New_F");
 	#include "..\..\Interfaces\IReagentContainer.Interface"
 	var(reagents,[[] arg 5000] newReagents);
 	

@@ -40,4 +40,6 @@ set arguments=%MAIN_OPTIONS% --input-sqf %COMPILER_PATH% %MACRO_COMMON% %BUILD_T
 
 echo Args:%arguments%
 
-%workdir%\third-party\VirtualMachine\sqfvm.exe %arguments%
+set buildToolsPath=%workdir%\third-party\BuildTools\
+
+%workdir%\third-party\VirtualMachine\sqfvm.exe %arguments% | %buildToolsPath%\tee.bat %buildToolsPath%\output.txt

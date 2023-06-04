@@ -22,9 +22,23 @@
 #endif
 
 #ifdef _SQFVM
-	#define __postclassVM vm_allClasses pushBack [_class,_mother]; __vm_log("Found class: " + _class);
+	//#define __postclassVM __vm_log("Found class: " + _class);
+	#define __postclassVM
+
+	#define createObj (call { \
+		if (isnil "_class") then { \
+			(customnamespace__ ("runtime_object<"+ ((round random 999999999999) Tofixed 0) + ">")) \
+		} else { \
+			(customnamespace__ (_class + "runtime_type<"+ ((round random 999999999999) Tofixed 0) + ">")) \
+		}; \
+	})
+
+	#define vm_throw(ctx) vm_lastError = ctx; throw vm_lastError;
+
+	#define setName ;
 #else
 	#define __postclassVM
+	#define vm_throw(ctx)
 #endif
 
 //if you want edit this macro - modify macro in craft class list
