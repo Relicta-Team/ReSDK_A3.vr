@@ -37,6 +37,7 @@ def parse_line(ln):
         message = match.group(4)
         # check if loader by rules:
         # loader.hpp in path; [LOAD] in message
+        # if path not loader.hpp then path is last_loaded_file
         if message.find("[LOAD]")!=-1 or path.find("loader.hpp")!=-1:
             last_loaded_file = re.search(r"([\/\\.\w]+\.sqf)",message,re.DOTALL).group(1)
             #log(f"{cat} on {path} {line} with message:{message}")
@@ -52,7 +53,7 @@ def handle_error(errored_file,catched_path,catched_line,error_message):
     errmes = error_message
     if errmes.find("Arg Count Missmatch") != -1:
         optionals = optionals + f",title=Preprocessor error"
-        patdef = r"\#define\s+(\w+\(.*\))"
+        patdef = r"\#define\s+(\w+\(.*\))\s"
         errmes = f"Error macro arguments count: {re.search(patdef,read_src_file(catched_path,catched_line),re.DOTALL).group(1)}"
     else:
         errmes = f"{error_message} [{catched_path} at {catched_line}]"
