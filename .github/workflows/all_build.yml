@@ -24,9 +24,9 @@ jobs:
       matrix:
         build_type:
           - client
-          #- client-debug
-          #- server
-          #- server-debug
+          - client-debug
+          - server
+          - server-debug
     steps:
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
