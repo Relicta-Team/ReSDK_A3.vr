@@ -53,7 +53,7 @@ jobs:
         uses: test-room-7/action-update-file@v1  
         if: steps.new_version.outputs.version_value && github.repository == 'Relicta-Team/ReSDK_A3.vr'
         with:
-          commiter-name: Autoupdater
+          committer-name: Autoupdater
           file-path: |
             Src/VERSION
             Src/version.hpp
