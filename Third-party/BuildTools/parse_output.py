@@ -3,6 +3,8 @@ import sys
 import string
 import os
 
+print("test print")
+
 def log(mes):
     print(mes,file=sys.stdout)
 
