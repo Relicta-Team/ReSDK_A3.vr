@@ -43,3 +43,9 @@ echo Args:%arguments%
 set buildToolsPath=%workdir%\third-party\BuildTools\
 
 %workdir%\third-party\VirtualMachine\sqfvm.exe %arguments% | %buildToolsPath%\tee.bat %buildToolsPath%\output.txt
+
+if not exist %buildToolsPath%\output.txt (
+	set otufile=%buildToolsPath%\output.txt
+	echo Output file not found: %otufile%
+	exit /b 1
+)
