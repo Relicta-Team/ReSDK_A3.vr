@@ -33,6 +33,7 @@ jobs:
         run: Third-party/BuildTools/Validate.bat ${{ matrix.build_type }}
         working-directory: ${{ github.workspace }}
   updateversion:
+    if: github.event_name != 'workflow_dispatch'
     name: Update build number
     runs-on: windows-latest
     needs:
