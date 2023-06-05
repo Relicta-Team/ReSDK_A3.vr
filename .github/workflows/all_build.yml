@@ -17,6 +17,7 @@ on:
 
 jobs:
   allbuild:
+    if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     name: Build
     runs-on: windows-latest
     strategy:
@@ -38,7 +39,6 @@ jobs:
           Third-party/BuildTools/Validate.bat ${{ matrix.build_type }}
           echo "::endgroup::"
           echo "::group::Python validate"
-          echo Starting output checker
           python Third-party/BuildTools/parse_output.py ./Third-party/BuildTools/output.txt ./
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}

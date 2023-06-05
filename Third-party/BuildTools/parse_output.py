@@ -84,5 +84,5 @@ if hasErrors > 0:
     sys.exit(-5)
 
 
-
+log(f"No errors!")
 
