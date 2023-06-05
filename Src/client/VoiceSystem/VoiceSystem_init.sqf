@@ -20,4 +20,3 @@
 
 //Публичный интерфейс управления
 #include "VoiceSystem_publicInterface.sqf"
-
