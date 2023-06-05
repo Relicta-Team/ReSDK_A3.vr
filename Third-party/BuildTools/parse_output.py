@@ -22,7 +22,7 @@ if not os.path.exists(path):
     log(f"Wrong path:{path}")
     sys.exit(-600)
 
-content = open(path).read().splitlines()
+content = open(path,"r",encoding="utf8").read().splitlines()
 hasErrors = 0
 log(f"Start processing logfile {path}")
 
@@ -68,7 +68,7 @@ def handle_error(errored_file,catched_path,catched_line,error_message):
 
 def read_src_file(file,line):
     #log(f"{workspace}\\{file} at {line-1}")
-    f = open(f"{workspace}\\{file}",'r')
+    f = open(f"{workspace}\\{file}",'r',encoding="utf8")
     lines=f.readlines()
     # index based
     return lines[line-1 - 1]

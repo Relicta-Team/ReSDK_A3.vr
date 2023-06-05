@@ -33,11 +33,15 @@ jobs:
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
       - name: Validate ${{ matrix.build_type }}
+        continue-on-error: true
         run: | 
-          python -V
           echo "::group::VM validate"
           Third-party/BuildTools/Validate.bat ${{ matrix.build_type }}
           echo "::endgroup::"
+        working-directory: ${{ github.workspace }}
+      - name: Post validate ${{ matrix.build_type }}
+        run: | 
+          python -V
           echo "::group::Python validate"
           python Third-party/BuildTools/parse_output.py ./Third-party/BuildTools/output.txt ./
           echo "::endgroup::"
