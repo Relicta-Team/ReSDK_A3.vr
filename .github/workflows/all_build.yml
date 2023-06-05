@@ -17,7 +17,6 @@ on:
 
 jobs:
   allbuild:
-    if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     name: Build
     runs-on: windows-latest
     strategy:
