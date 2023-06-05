@@ -15,6 +15,11 @@ if len(sys.argv) <= 1:
 
 path = sys.argv[1]
 workspace = sys.argv[2]
+doPrettyPrint = False
+if len(sys.argv) > 3:
+    prettyprint = sys.argv[3]
+    if prettyprint == "prettyprint":
+        doPrettyPrint = True
 
 last_loaded_file = ""
 
@@ -66,7 +71,10 @@ def handle_error(errored_file,catched_path,catched_line,error_message):
     else:
         errmes = f"{error_message} [{catched_path} at {catched_line}]"
     
-    log(f"::error file={errored_file},line=1{optionals}::{errmes}")
+    if doPrettyPrint:
+        log(f"Error:{errmes} \nfile:\t\t{errored_file}\n")
+    else:
+        log(f"::error file={errored_file},line=1{optionals}::{errmes}")
     
 
 def read_src_file(file,line):

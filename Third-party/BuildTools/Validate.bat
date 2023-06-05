@@ -3,7 +3,7 @@ echo off
 echo Setup env
 
 set MACRO_COMMON=-D __FLAG_ONLY_PARSE__ -D __GH_ACTION
-set MAIN_OPTIONS=-V --suppress-welcome --nowarn -a -v "src|src"
+set MAIN_OPTIONS=--suppress-welcome --nowarn -a -v "src|src"
 
 if [%1] == [client] (
 	set COMPILER_PATH=./src/client/vm_compile.sqf
