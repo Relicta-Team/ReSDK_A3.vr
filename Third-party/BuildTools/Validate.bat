@@ -49,3 +49,7 @@ if not exist %buildToolsPath%\output.txt (
 	echo Output file not found: %otufile%
 	exit /b 1
 )
+
+if [%2] == [printoutput] (
+	python %buildToolsPath%\parse_output.py %buildToolsPath%\output.txt .\ prettyprint
+)
