@@ -56,10 +56,13 @@ def handle_error(errored_file,catched_path,catched_line,error_message):
     errmes = error_message
     if errmes.find("Arg Count Missmatch") != -1:
         #optionals = optionals + f",title=Preprocessor error"
-        patdef = r"\#define\s+(\w+\(.*\))\s"
-        macrosig = re.search(patdef,read_src_file(catched_path,catched_line),re.DOTALL).group(1)
-        errmes = f"Macro signature error. Incorrect number of parameters: {macrosig}"
-        errmes = errmes + f"\nSee module: {errored_file}"
+        patdef = r"\#define\s+(\w+\(\w+(\,\w+)*\))"
+        macrosig = re.search(patdef,read_src_file(catched_path,catched_line),re.DOTALL)
+        if macrosig:
+            macrosig = macrosig.group(1)
+        else:
+            macrosig = f"UNKNOWN MACRO ({catched_path} at {catched_line})"
+        errmes = f"Macro signature error. Incorrect number of parameters: {macrosig}\nSee module: {errored_file}"
     else:
         errmes = f"{error_message} [{catched_path} at {catched_line}]"
     
@@ -70,8 +73,17 @@ def read_src_file(file,line):
     #log(f"{workspace}\\{file} at {line-1}")
     f = open(f"{workspace}\\{file}",'r',encoding="utf8")
     lines=f.readlines()
+    #log(f"READLINES: {lines[line-1 - 1]}")
     # index based
-    return lines[line-1 - 1]
+    curidx = line-1 - 1
+    result = lines[curidx]
+    if result.find("#define")==-1:
+        curidx -= 1
+        while result.find("#define")==-1 and curidx >= 0:
+            result = lines[curidx] + " " + result
+            curidx -= 1
+    #log(f"RETURN{result}")
+    return result
 
 
 
