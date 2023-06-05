@@ -572,7 +572,7 @@ region(learning skills)
 
 	func(getSkillLearnProgressToText)
 	{
-		objParams_2(_name);
+		objParams_1(_name);
 		private _learned = getSelf(__learnStatus) getOrDefault [toLower _name,0];
 		private _skillVal = getSelfReflect(_name);
 		private _val = _learned / (_skillVal max 1);

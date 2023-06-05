@@ -62,7 +62,7 @@ def handle_error(errored_file,catched_path,catched_line,error_message):
             macrosig = macrosig.group(1)
         else:
             macrosig = f"UNKNOWN MACRO ({catched_path} at {catched_line})"
-        errmes = f"Macro signature error. Incorrect number of parameters: {macrosig}\nSee module: {errored_file}"
+        errmes = f"Macro signature error. Incorrect number of parameters: {macrosig}; See module: {errored_file}"
     else:
         errmes = f"{error_message} [{catched_path} at {catched_line}]"
     

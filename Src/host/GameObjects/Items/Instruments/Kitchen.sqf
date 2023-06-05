@@ -196,7 +196,7 @@ class(Polovnik) extends(Item)
 	
 	func(onInteractWith)
 	{
-		objParams_1(_with,_usr);
+		objParams_2(_with,_usr);
 	};
 	
 	func(getNDInfo)
