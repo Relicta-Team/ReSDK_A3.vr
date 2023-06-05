@@ -920,7 +920,7 @@ region(Captives)
 		if !callFunc(_itm,isGrabProcess) then {
 			callFuncParams(_itm,startGrab,_grabSrc arg _slotTo);
 		} else {
-			callFuncParams(_itm,stopGrab);
+			callFunc(_itm,stopGrab);
 		};
 	};
 
