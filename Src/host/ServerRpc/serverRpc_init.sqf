@@ -18,9 +18,14 @@
 #define DISABLED_RPC_LOG ["onupdch","onupdob"]
 #define canlog(eventname,code) if !((toLower eventname) in DISABLED_RPC_LOG) then {code}
 
+#define debugprint_type "debug_console" callExtension
+#ifdef _SQFVM
+	#define debugprint_type diag_log
+#endif
+
 #ifdef log_server_rpc
-	#define rpc_log(event,owner,args) canlog(event,'debug_console' callExtension format['[NET::LOG::SERVER]:    <%1> send %4 bytes to (%2) with %3' arg event arg owner arg args arg args call oop_getTypeSizeFull]; ["<%1> send %4 bytes to (%2) with %3" arg event arg owner arg args arg args call oop_getTypeSizeFull] call logInfo)
-	#define rpc_simple(data) 'debug_console' callExtension format['[NET::LOG]:    %1' arg data]; ["<RPC::Simple> %1" arg  data] call logInfo
+	#define rpc_log(event,owner,args) canlog(event,debugprint_type format['[NET::LOG::SERVER]:    <%1> send %4 bytes to (%2) with %3' arg event arg owner arg args arg args call oop_getTypeSizeFull]; ["<%1> send %4 bytes to (%2) with %3" arg event arg owner arg args arg args call oop_getTypeSizeFull] call logInfo)
+	#define rpc_simple(data) debugprint_type format['[NET::LOG]:    %1' arg data]; ["<RPC::Simple> %1" arg  data] call logInfo
 #else
 	#define rpc_log(event,owner,args) 
 	#define rpc_simple(data) 
