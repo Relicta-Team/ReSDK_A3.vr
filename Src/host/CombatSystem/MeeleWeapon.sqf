@@ -49,6 +49,14 @@ class(WeaponModuleBase) attribute(weapModule)
 	
 endclass
 diag_log "predef meleeweapon class";
+
+#define func(name) _mem_name = #name; diag_log format["decl function %1 at %2",_mem_name,__LINE__];_classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LINE__)]; \
+	_lastIndex = _methods pushback [_mem_name]; \
+	_propOverride = _methods findIf {(_x select 0) == _mem_name}; \
+	if (_propOverride != -1) then {_methods deleteAt _lastIndex; _methods set [_propOverride,[_mem_name]]; _lastIndex = _propOverride}; \
+	call pc_oop_handleAttrM; \
+	(_methods select _lastIndex) pushback
+
 //Чтобы использовать модификатор двуручного оружия добавьте к типу постфикс ATTACK_TYPE_SWING+"2h"
 class(MeleeWeapon) extends(WeaponModuleBase)
 
