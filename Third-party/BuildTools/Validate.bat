@@ -42,5 +42,5 @@ echo Args:%arguments%
 
 set buildToolsPath=%workdir%\third-party\BuildTools\
 
-%workdir%\third-party\VirtualMachine\sqfvm.exe %arguments% | %buildToolsPath%\tee.bat %buildToolsPath%\output.txt
+%workdir%\third-party\VirtualMachine\sqfvm.exe %arguments%
 
