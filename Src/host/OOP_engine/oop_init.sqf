@@ -14,6 +14,10 @@
 #define shell_init(__name__system,__value__system) format["_thisobj setvariable ['%1',%2]; ",__name__system,__value__system]
 #define logoop(mes) "debug_console" callExtension ("[OOP]:    " + (mes) + "#0111"); ["(OOP_init)	%1",mes] call logInfo
 
+#ifdef _SQFVM
+	#define logoop(mes) diag_log format["[OOP_init]: %1",mes]
+#endif
+
 logoop("Starting class compilation");
 
 _iserror = false;
