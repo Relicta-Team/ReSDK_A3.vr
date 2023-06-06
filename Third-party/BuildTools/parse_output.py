@@ -59,7 +59,7 @@ def parse_line(ln):
         if message.find("[CLASS]")!=-1:
             handle_classinfo(re.search(r"\[CLASS\](.*)",message).group(1),re.DOTALL)
 
-        if message == "VM compile done":
+        if message.find("VM compile done")!=-1:
             global hasSuccessMessage
             hasSuccessMessage = True
 
