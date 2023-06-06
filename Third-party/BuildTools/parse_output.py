@@ -118,7 +118,7 @@ if len(content) == 0:
 
 lastItem = content[len(content) - 1]
 if lastItem.find("VM compile done") == -1:
-    log("Wrong last message output: {lastItem}; Need: 'VM Compile done'")
+    log(f"Wrong last message output: {lastItem}; Need: 'VM compile done'")
     sys.exit(-600)
 
 
