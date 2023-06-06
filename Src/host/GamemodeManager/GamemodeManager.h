@@ -18,7 +18,7 @@
 
 //Печатники сообщений
 #ifdef _SQFVM
-	conDllCall diag_log
+	#define conDllCall diag_log
 #endif
 
 #define gprint(mes) conDllCall format["[GMM]:	%1 #0101",mes]
