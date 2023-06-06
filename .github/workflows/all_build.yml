@@ -46,7 +46,7 @@ jobs:
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
   updateversion:
-    if: github.event_name != 'workflow_dispatch'
+    if: github.event_name != 'workflow_dispatch' && github.repository == 'Relicta-Team/ReSDK_A3.vr'
     name: Update build number
     runs-on: windows-latest
     needs:
