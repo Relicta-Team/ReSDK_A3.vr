@@ -99,6 +99,8 @@ checkClassInheritance = {
 	__vm_log("Class count:" + str count p_table_allclassnames);
 };
 
+__vm_log("Start VM compile");
+
 {
 	private _pcontent = LOADFILE "src\private.h";
 	if (count _pcontent > 0) then {
@@ -187,6 +189,8 @@ except__
 
 	exitcode__ 1;
 };
+
+__vm_log("VM compile done");
 
 #ifdef __FLAG_ONLY_PARSE__
 	if (true) exitWith {
