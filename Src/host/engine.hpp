@@ -166,9 +166,12 @@
 	//for randInt
 	#define FLOOR 
 	
+	#define NO_VM_EXECUTE if (true) exitwith {};
 #else
 	#define __vm_log(text)
 	#define __vm_warning(data)
+	
+	#define NO_VM_EXECUTE
 #endif
 
 #ifdef __GH_ACTION

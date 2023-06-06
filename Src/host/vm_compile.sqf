@@ -52,7 +52,7 @@ checkClassInheritance = {
 	{
 		_className_str = _x;
 		__vm_log("-----------------------------------------------");
-		__vm_log("Class: " + _className_str);
+		__vm_log("[CLASS] Class: " + _className_str);
 
 		if ((tolower _className_str) in _readyClasses) then {
 			__vm_log("Duplicate classname " + _className_str);
@@ -90,13 +90,13 @@ checkClassInheritance = {
 			_inc = _inc + 1;
 		};
 		
-		__vm_log("Parents: " + (_inhList joinstring "->"));
+		__vm_log("[CLASS] Parents: " + (_inhList joinstring "->"));
 
 	} foreach p_table_allclassnames;
 
 	__vm_log("");
 	__vm_log("");
-	__vm_log("	Class count:" + str count p_table_allclassnames);
+	__vm_log("Class count:" + str count p_table_allclassnames);
 };
 
 {

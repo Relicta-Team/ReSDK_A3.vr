@@ -6,6 +6,7 @@
 #include <..\engine.hpp>
 #include <..\oop.hpp>
 
+NO_VM_EXECUTE
 
 naming_parseNames = {
 	

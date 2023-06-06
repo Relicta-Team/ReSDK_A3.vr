@@ -23,6 +23,10 @@ if len(sys.argv) > 3:
 
 last_loaded_file = ""
 
+summaryInfo = ""
+loadedFilesInfo = []
+loadedClassesInfo = []
+
 if not os.path.exists(path):
     log(f"Wrong path:{path}")
     sys.exit(-600)
@@ -46,8 +50,12 @@ def parse_line(ln):
         # if path not loader.hpp then path is last_loaded_file
         if message.find("[LOAD]")!=-1 or path.find("loader.hpp")!=-1 or message.find("Load file:")!=-1:
             last_loaded_file = re.search(r"([\/\\.\w]+\.(sqf|cpp|hpp|c|h|Interface))",message,re.DOTALL).group(1)
+            loadedFilesInfo.append(last_loaded_file)
             #log(f"{cat} on {path} {line} with message:{message}")
         
+        if message.find("[CLASS]")!=-1:
+            handle_classinfo(re.search(r"\[CLASS\](.*)",message).group(1),re.DOTALL)
+
         if cat == "ERR":
             llf = last_loaded_file
             if llf == "":
@@ -93,7 +101,8 @@ def read_src_file(file,line):
     #log(f"RETURN{result}")
     return result
 
-
+def handle_classinfo(mes : str):
+    loadedClassesInfo.append(mes)
 
 for line in content:
     parse_line(line)
@@ -105,4 +114,8 @@ if hasErrors > 0:
 
 
 log(f"No errors!")
+
+if "GITHUB_STEP_SUMMARY" in os.environ :
+        with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f :
+            print(summaryInfo, file=f)
 
