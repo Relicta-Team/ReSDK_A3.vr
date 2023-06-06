@@ -1034,7 +1034,7 @@ class(PrinterMerchantConsole) extends(ElectronicDevice)
 	{
 		objParams_1(_item);
 		getSelf(papers) pushBack _item;
-		getVar(_item,loc,this);
+		setVar(_item,loc,this);
 	};
 
 	func(canMoveOutItem)

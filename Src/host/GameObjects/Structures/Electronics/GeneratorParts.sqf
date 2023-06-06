@@ -189,7 +189,7 @@ class(ConvertorForGenerator) extends(IStruct)
 	{
 		objParams_1(_gen);
 		if !isNullReference(getSelf(generator)) exitWith {
-			errorformat("Convertor already linked to generator");
+			error("Convertor already linked to generator");
 		};
 		setSelf(generator,_gen);
 	};
