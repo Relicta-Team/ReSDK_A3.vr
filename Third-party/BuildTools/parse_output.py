@@ -44,8 +44,8 @@ def parse_line(ln):
         # check if loader by rules:
         # loader.hpp in path; [LOAD] in message
         # if path not loader.hpp then path is last_loaded_file
-        if message.find("[LOAD]")!=-1 or path.find("loader.hpp")!=-1:
-            last_loaded_file = re.search(r"([\/\\.\w]+\.sqf)",message,re.DOTALL).group(1)
+        if message.find("[LOAD]")!=-1 or path.find("loader.hpp")!=-1 or message.find("Load file:")!=-1:
+            last_loaded_file = re.search(r"([\/\\.\w]+\.(sqf|cpp|hpp|c|h|Interface))",message,re.DOTALL).group(1)
             #log(f"{cat} on {path} {line} with message:{message}")
         
         if cat == "ERR":

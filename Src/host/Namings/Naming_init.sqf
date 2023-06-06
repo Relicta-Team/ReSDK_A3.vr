@@ -67,7 +67,7 @@ naming_generateName_old = {
 	params ['this',['_f',""],['_s',""]];
 	
 	if (_f == "") exitWith {
-		errorformat("Parameter for first name is empty");
+		error("Parameter for first name is empty");
 	};
 	
 	if equals(this,nullPtr) exitWith {

@@ -131,7 +131,7 @@ region(functions)
 			callFunc(_r,onRemove);
 			delete(_r);
 		} else {
-			setVar(_list get _id,_newamount);
+			setSelf(_list get _id,_newamount);
 		};
 
 		if (!_safety) then {

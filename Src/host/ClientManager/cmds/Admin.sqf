@@ -20,7 +20,7 @@ addCommandWithDescription("returnlobby",ACCESS_ADMIN,"Возвращает вы�
 			_success = true;
 		};
 		callSelf(CloseMessageBox);
-		callSelfParams(this,localSay,"Выполнено - " + ifcheck(_success,"да","нет") arg "system");
+		callSelfParams(localSay,"Выполнено - " + ifcheck(_success,"да","нет") arg "system");
 	};
 
 	_dat = ["Выберите кого вернуть в лобби:"];
@@ -62,7 +62,7 @@ addCommandWithDescription("tpto",ACCESS_ADMIN,"Телепортироватьс�
 			_success = true;
 		};
 		callSelf(CloseMessageBox);
-		callSelfParams(this,localSay,"Выполнено - " + ifcheck(_success,"да","нет") arg "system");
+		callSelfParams(localSay,"Выполнено - " + ifcheck(_success,"да","нет") arg "system");
 	};
 
 	_dat = ["Выберите к кому телепортироваться:"];
@@ -100,7 +100,7 @@ addCommandWithDescription("tptome",ACCESS_ADMIN,"Телепортировать 
 			_success = true;
 		};
 		callSelf(CloseMessageBox);
-		callSelfParams(this,localSay,"Выполнено - " + ifcheck(_success,"да","нет") arg "system");
+		callSelfParams(localSay,"Выполнено - " + ifcheck(_success,"да","нет") arg "system");
 	};
 
 	_dat = ["Выберите кого телепортировать к себе:"];
@@ -228,7 +228,7 @@ addCommandWithDescription("jonblow",ACCESS_ADMIN,"Взрывает головы 
 			_success = true;
 		};
 		callSelf(CloseMessageBox);
-		callSelfParams(this,localSay,"Выполнено - " + ifcheck(_success,"да","нет") arg "system");
+		callSelfParams(localSay,"Выполнено - " + ifcheck(_success,"да","нет") arg "system");
 	};
 
 	_dat = ["Выберите кто будет освобожден от РП процесса:"];

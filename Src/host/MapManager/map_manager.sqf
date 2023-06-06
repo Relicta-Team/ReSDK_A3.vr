@@ -63,7 +63,7 @@ MapManager_loadmap = {
 
 mapManager_collectAllGameObjects = {
 	if (isMultiplayer) exitWith {
-		errorformat("mapManager::collectAllgameObject() - is not allowed in mp game");
+		error("mapManager::collectAllgameObject() - is not allowed in mp game");
 	};
 
 	_data = [];
