@@ -13,6 +13,16 @@ on:
       - Src/Scripts/*.sqf
       - Src/Scripts/*.cpp
       - Src/Scripts/SETTINGS.h
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
+    paths:
+      - Src/client/**
+      - Src/host/**
+      - Src/ReBridge/**
+      - Src/Scripts/**
+      - Src/Scripts/*.sqf
+      - Src/Scripts/*.cpp
+      - Src/Scripts/SETTINGS.h
   workflow_dispatch:
 
 jobs:
@@ -51,7 +61,7 @@ jobs:
           name: Output log ${{ matrix.build_type }}
           path: ./Third-party/BuildTools/output.txt
   updateversion:
-    if: github.event_name != 'workflow_dispatch' && github.repository == 'Relicta-Team/ReSDK_A3.vr'
+    if: github.event_name != 'workflow_dispatch' && github.repository == 'Relicta-Team/ReSDK_A3.vr' && github.event_name != 'pull_request'
     name: Update build number
     runs-on: windows-latest
     needs:
