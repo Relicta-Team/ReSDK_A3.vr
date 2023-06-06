@@ -23,7 +23,7 @@ class(IInfluenceEvent) extends(IGameEvent)
 		callSelf(onActivate);
 		
 		if callSelf(canUpdate) then {
-			setSelf(__handle_update,startSelfUpdate(_onUpdateImpl,1));
+			setSelf(__handle_update,startSelfUpdateWithDelay(_onUpdateImpl,1));
 		};
 	};
 	

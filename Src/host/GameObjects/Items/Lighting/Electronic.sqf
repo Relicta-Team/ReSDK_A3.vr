@@ -65,7 +65,7 @@ class(Flashlight) extends(ILightible)
 		objParams_1(_item);
 		setVar(_item,loc,this);
 		setSelf(energySource,_item);
-		callFuncParams(_item,onChangeLoc);
+		callFunc(_item,onChangeLoc);
 		callSelf(onWeightChanged);
 	};
 
@@ -97,7 +97,7 @@ class(Flashlight) extends(ILightible)
 			setVar(_with,loc,this);
 		};
 
-		callFunc(onWeightChanged);
+		callSelf(onWeightChanged);
 	};
 
 	func(onItemClick)

@@ -47,7 +47,7 @@ newTest(Default naming case)
 
 			_checked = _ptr select 0;
 
-			assert_false(equals(_ptr count {_x == _checked},6));
+			assert_false(equals(_ptr count {_x == _checked},6),"wrong count man names");
 
 		} foreach naming_list_ManSecondName;
 	} foreach naming_list_ManFirstName;
@@ -61,7 +61,7 @@ newTest(Default naming case)
 
 			_checked = _ptr select 0;
 
-			assert_false(equals(_ptr count {_x == _checked},6));
+			assert_false(equals(_ptr count {_x == _checked},6),"wrong count woman names");
 
 		} foreach naming_list_WomanSecondName;
 	} foreach naming_list_WomanFirstName;

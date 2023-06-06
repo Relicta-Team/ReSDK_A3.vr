@@ -18,7 +18,5 @@
 //Всё что не влезло в первый файл по препроцессору влезет во вторую часть
 #include "VoiceSystem_part2.sqf"
 
-
 //Публичный интерфейс управления
 #include "VoiceSystem_publicInterface.sqf"
-

@@ -712,7 +712,7 @@ class(RegistrationPaperArchive) extends(IStruct)
 
 		delete(_with);
 
-		callFuncParams(getSelf(headconsole),updateNDisplay);
+		callFunc(getSelf(headconsole),updateNDisplay);
 	};
 
 endclass

@@ -6,6 +6,7 @@
 #include <..\engine.hpp>
 #include <..\oop.hpp>
 
+NO_VM_EXECUTE
 
 naming_parseNames = {
 	
@@ -67,7 +68,7 @@ naming_generateName_old = {
 	params ['this',['_f',""],['_s',""]];
 	
 	if (_f == "") exitWith {
-		errorformat("Parameter for first name is empty");
+		error("Parameter for first name is empty");
 	};
 	
 	if equals(this,nullPtr) exitWith {

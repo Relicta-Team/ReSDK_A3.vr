@@ -160,13 +160,18 @@
 	#define addMissionEventHandler ["addMissionEventHandler"] pushBack 
 
 	#define toString str
-	#define linearConversion  ["linearConversion"] pushBack 
+	#define linearConversion ["linearConversion"] pushBack 
 	#define parseSimpleArray ["parseSimpleArray"] pushBack 
 	#define endMission ["endMission"] pushBack 
+	//for randInt
+	#define FLOOR 
 	
+	#define NO_VM_EXECUTE if (true) exitwith {};
 #else
 	#define __vm_log(text)
 	#define __vm_warning(data)
+	
+	#define NO_VM_EXECUTE
 #endif
 
 #ifdef __GH_ACTION
@@ -433,7 +438,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 //выбор рандомного числа включительно Bis_fnc_randomNum
 #define rand(_beg,_end) (linearConversion [0,1,random 1,_beg,_end])
 //BIS_fnc_randomInt
-#define randInt(_beg,_end) (floor linearConversion [0,1,random 1,(_beg)min(_end),(_end)max(_beg)+1])
+#define randInt(_beg,_end) (FLOOR linearConversion [0,1,random 1,(_beg)min(_end),(_end)max(_beg)+1])
 
 #define prob(val) (random[0,50,100]<(val))
 

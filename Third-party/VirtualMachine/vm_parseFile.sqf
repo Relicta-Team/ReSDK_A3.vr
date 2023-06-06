@@ -1,3 +1,11 @@
+#include <..\..\src\host\precomiled.sqf>
+#include <..\..\src\host\engine.hpp>
+allClientContents = [];
+client_isLocked = false;
+server_isLocked = false;
+p_table_inheritance = [];
+p_table_allclassnames = [];
+
 diag_log format["Start parsing file: %1",__PARSED_FILE_PATH__];
 {
 	_testedPath = __PARSED_FILE_PATH__;

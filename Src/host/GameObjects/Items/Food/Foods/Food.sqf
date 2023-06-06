@@ -402,7 +402,7 @@ class(Pie) extends(IFoodItem)
 			if callSelf(isInWorld) then {
 
 				//safe cant pickup
-				setSelf(__isLockedByPiecing);
+				setSelf(__isLockedByPiecing,true);
 
 				private _pos = getPosAtl getSelf(loc);
 				private _weight = getSelf(weight);
