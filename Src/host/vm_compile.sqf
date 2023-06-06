@@ -185,7 +185,7 @@ except__
 	for"_i"from 0 to 900000 do {};
 	#endif
 	
-	copyToClipboard (str p_table_allclassnames);
+	//copyToClipboard (str p_table_allclassnames);
 
 	exitcode__ 1;
 };

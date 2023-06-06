@@ -188,7 +188,7 @@
 
 //do not use now
 //TODO поменять местами абстракт и прото
-#define abstract_func(name) func(name) {}; 'debug_console' callExtension format['[OOP]:    <%1::%2> Method requires implementation (%3)',_class,#name,SHORT_PATH]
+#define abstract_func(name) func(name) {}; private _reqImpl = format['[OOP]:    <%1::%2> Method requires implementation (%3)',_class,#name,SHORT_PATH]; warning(_reqImpl);
 #define proto_func(name) func(name) {}
 
 //instansing and deleting
