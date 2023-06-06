@@ -117,5 +117,7 @@ log(f"No errors!")
 
 if "GITHUB_STEP_SUMMARY" in os.environ :
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f :
-            print(summaryInfo, file=f)
+            print("# Files:\n", file=f)
+            for file in loadedFilesInfo:
+                print(f"* {file}", file=f)
 
