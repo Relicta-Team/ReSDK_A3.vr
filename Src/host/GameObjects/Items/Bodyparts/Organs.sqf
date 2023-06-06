@@ -330,7 +330,7 @@ endclass
 
 editor_attribute("InterfaceClass")
 class(VitalOrgan) extends(Organ)
-	var("Жизненно важный орган");
+	var(name,"Жизненно важный орган");
 	var(isVital,true);
 
 	func(onVitalDamaged)

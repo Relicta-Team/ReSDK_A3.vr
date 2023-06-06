@@ -104,7 +104,7 @@ class(DeliveryPipe) extends(IDeliveryPipeInternal)
 	};
 
 
-	autoref var(handleUpdate);
+	autoref var(handleUpdate,-1);
 	func(constructor)
 	{
 		objParams();

@@ -12,7 +12,7 @@
 class(PowerGenerator) extends(ElectronicDeviceNode)
 	var(name,"Генератор");
 	var(model,"relicta_models\models\interier\controlpanel.p3d");
-	var("Вырабатывает электричество, которое в наши времена порой дороже сотен бряков.");
+	var(desc,"Вырабатывает электричество, которое в наши времена порой дороже сотен бряков.");
 
 	var(edIsEnabled,true);
 	var(edIsUsePower,true);

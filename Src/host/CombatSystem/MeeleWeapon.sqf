@@ -258,15 +258,15 @@ class(MeleeWeapon) extends(WeaponModuleBase)
 		if !callFuncParams(_caller,hasPerk,"PerkSeeInDark") then {
 			private _callerLight = callFunc(_caller,getLighting);
 			if (_callerLight < LIGHT_MEDIUM) then {
-				if (_callerLight == LIGHT_LOW) exitWith {modvar(_modif,-2)};
-				modvar(_modif,-4); //драка в полной темноте
+				if (_callerLight == LIGHT_LOW) exitWith {modvar(_modif) -2};
+				modvar(_modif) -4; //драка в полной темноте
 			};
 		};
 		
 		//с закрытыми глазами или без них не повоюешь
 		private _viewmode = callFunc(_caller,getViewMode);
 		if (_viewmode < VIEW_MODE_FULL) then {
-			modvar(_modif,ifcheck(equals(_viewmode,VIEW_MODE_MEDIUM),-5,-10));
+			modvar(_modif) + ifcheck(equals(_viewmode,VIEW_MODE_MEDIUM),-5,-10);
 			_restrictionByModifier = true;
 		};
 

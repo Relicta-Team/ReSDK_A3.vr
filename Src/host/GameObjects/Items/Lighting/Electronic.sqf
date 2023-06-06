@@ -97,7 +97,7 @@ class(Flashlight) extends(ILightible)
 			setVar(_with,loc,this);
 		};
 
-		callFunc(onWeightChanged);
+		callSelf(onWeightChanged);
 	};
 
 	func(onItemClick)
