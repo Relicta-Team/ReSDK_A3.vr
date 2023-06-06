@@ -9,9 +9,9 @@
 #include "..\GURPS\gurps.hpp"
 #include <CombatSystem.hpp>
 #include <..\GameObjects\GameConstants.hpp>
-
+diag_log "precompile mw";
 #include "Functions.sqf"
-
+diag_log "precompile mw-init funcions";
 class(WeaponModuleBase) attribute(weapModule)
 	var(isCommon,true); //Флаг общего модуля. Такие модули распространяются на целые слои типов ссылаясь на один объект. Изменять можно только уникальные модули
 
@@ -48,7 +48,7 @@ class(WeaponModuleBase) attribute(weapModule)
 	};
 	
 endclass
-
+diag_log "predef meleeweapon class";
 //Чтобы использовать модификатор двуручного оружия добавьте к типу постфикс ATTACK_TYPE_SWING+"2h"
 class(MeleeWeapon) extends(WeaponModuleBase)
 
@@ -709,3 +709,4 @@ class(MeleeWeapon) extends(WeaponModuleBase)
 	};
 
 endclass
+diag_log "postdef meleeweapon class";
