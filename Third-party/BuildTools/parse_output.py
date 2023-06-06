@@ -112,6 +112,15 @@ if hasErrors > 0:
     log(f"Errors detected: {hasErrors}")
     sys.exit(-5)
 
+if len(content) == 0:
+    log("Empty output file")
+    sys.exit(-100)
+
+lastItem = content[len(content) - 1]
+if lastItem.find("VM compile done") == -1:
+    log("Wrong last message output: {lastItem}; Need: 'VM Compile done'")
+    sys.exit(-600)
+
 
 log(f"No errors!")
 

@@ -39,7 +39,6 @@ jobs:
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
       - name: Post validate ${{ matrix.build_type }}
-        if: false
         run: | 
           python -V
           echo "::group::Python validate"
@@ -47,7 +46,6 @@ jobs:
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
       - name: Upload output
-        if: false
         uses: actions/upload-artifact@v3.1.2
         with:
           name: Output log ${{ matrix.build_type }}
