@@ -33,6 +33,9 @@ if not os.path.exists(path):
 
 content = open(path,"r",encoding="utf8").read().splitlines()
 hasErrors = 0
+
+hasSuccessMessage = False
+
 log(f"Start processing logfile {path}")
 
 def parse_line(ln):
@@ -55,6 +58,9 @@ def parse_line(ln):
         
         if message.find("[CLASS]")!=-1:
             handle_classinfo(re.search(r"\[CLASS\](.*)",message).group(1),re.DOTALL)
+
+        if message == "VM compile done":
+            hasSuccessMessage = True
 
         if cat == "ERR":
             llf = last_loaded_file
@@ -116,9 +122,9 @@ if len(content) == 0:
     log("Empty output file")
     sys.exit(-100)
 
-lastItem = content[len(content) - 1]
-if lastItem.find("VM compile done") == -1:
-    log(f"Wrong last message output: {lastItem}; Need: 'VM compile done'")
+
+if not hasSuccessMessage:
+    log(f"Compilation failed...")
     sys.exit(-600)
 
 

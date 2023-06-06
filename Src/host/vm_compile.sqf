@@ -195,6 +195,9 @@ __vm_log("VM compile done");
 
 #ifdef __FLAG_ONLY_PARSE__
 	if (true) exitWith {
+		__vm_log("");
+		__vm_log("");
+		__vm_log("	Parsing done!");
 		//copyToClipboard (str p_table_allclassnames);
 		exitcode__ 0;
 	};

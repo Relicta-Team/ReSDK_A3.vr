@@ -124,7 +124,9 @@ __vm_log("VM compile done");
 
 #ifdef __FLAG_ONLY_PARSE__
 	if (true) exitWith {
-		//__vm_log("	Parsing done!");
+		__vm_log("");
+		__vm_log("");
+		__vm_log("	Parsing done!");
 		exitcode__ 0;
 	};
 #endif
