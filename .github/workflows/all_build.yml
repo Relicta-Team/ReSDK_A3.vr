@@ -45,6 +45,11 @@ jobs:
           python Third-party/BuildTools/parse_output.py ./Third-party/BuildTools/output.txt ./
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
+      - name: Upload output
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: Output log ${{ matrix.build_type }}
+          path: ./Third-party/BuildTools/output.txt
   updateversion:
     if: github.event_name != 'workflow_dispatch' && github.repository == 'Relicta-Team/ReSDK_A3.vr'
     name: Update build number
