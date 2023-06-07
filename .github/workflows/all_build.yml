@@ -88,3 +88,27 @@ jobs:
             Src/version.hpp
           commit-msg: Update - ${{steps.new_version.outputs.version_value}}
           github-token: ${{secrets.TOKEN}}
+  generatedocs:
+    runs-on: windows-latest
+    name: Generate documentation
+    needs: 
+      - updateversion
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v3.1.4
+      - uses: actions/checkout@v3
+      - name: Generating documentation
+        working-directory: ${{ github.workspace }}/Third-party/Docgen
+        run: |
+          python -V
+          python main.py
+      
+      - name: Push changes
+        uses: test-room-7/action-update-file@v1
+        with:
+          committer-name: Docgen
+          file-path: |
+            Documentation/API/**
+          commit-msg: Generated documentation
+          github-token: ${{secrets.TOKEN}}
+        
