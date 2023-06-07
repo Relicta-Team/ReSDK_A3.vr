@@ -128,7 +128,7 @@ with open(docsource + "\\README.md","w+",encoding="utf-8") as handle:
         handle.write(f"Count modules: {len(mlist)}\n")
         
         for mod in mlist:
-            createdPath = f"{side}/{mod}.md"
+            createdPath = f"{side}//{mod}.md"
             filesInModule = flielists[f'{side}-{mod}'] # list of files, defined in module
             handle.write(f" - [{mod}]({createdPath}) - {len(filesInModule)} files\n")
         #print(f"{side} : {mlist}")
