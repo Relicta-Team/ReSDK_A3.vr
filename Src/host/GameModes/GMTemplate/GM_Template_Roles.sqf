@@ -10,6 +10,8 @@ class(GMTemplate_RAdventurer) extends(BasicRole)
 	getter_func(canTakeInLobby,true);
 	//можно ли взять эту роль после старта, если эта роль 
 	getter_func(canVisibleAfterStart,false);
+	//Это для того, чтобы не просило сменить лицо и имя при следующих заходах
+	getter_func(canStoreNameAndFaceForValidate,false);
 
 	//сколько человек может зайти за эту роль
 	var(count,2);
@@ -99,7 +101,7 @@ class(GMTemplate_RAdventurerLate) extends(GMTemplate_RAdventurer)
 	getter_func(getInitialPos,"latespawn" call getRandomSpawnPosByName);
 	getter_func(getInitialDir,random 360); //случайное направление от 0 до 360
 
-	var(count,1);
+	var(count,5);
 
 	func(getEquipment)
 	{
