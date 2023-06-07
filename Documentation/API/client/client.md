@@ -3,7 +3,9 @@
 ## cmplog(fcat)
 
 Type: constant
+
 > Exists if **DEBUG** defined
+
 Description: 
 - Param: fcat
 
@@ -15,7 +17,9 @@ File: [client\Init.sqf at line 49](../../../Src/client/Init.sqf#L49)
 ## cmplog(fcat)
 
 Type: constant
+
 > Exists if **DEBUG** not defined
+
 Description: 
 - Param: fcat
 
@@ -29,6 +33,7 @@ File: [client\Init.sqf at line 51](../../../Src/client/Init.sqf#L51)
 ## ptx_
 
 Type: constant
+
 Description: 
 
 

@@ -3,6 +3,7 @@
 ## repCat(class,name)
 
 Type: constant
+
 Description: 
 - Param: class
 - Param: name
@@ -15,6 +16,7 @@ File: [client\ClientMenus\ErrorReports.sqf at line 13](../../../Src/client/Clien
 ## report_open
 
 Type: function
+
 Description: 
 
 
@@ -22,6 +24,7 @@ File: [client\ClientMenus\ErrorReports.sqf at line 22](../../../Src/client/Clien
 ## report_close
 
 Type: function
+
 Description: 
 
 

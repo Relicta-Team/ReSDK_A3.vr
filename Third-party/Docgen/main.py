@@ -98,11 +98,11 @@ for fpath in result:
                 let = "constant"
                 function_name = values['MacroFullname']
             handle.write(f"## {function_name}\n\n")
-            handle.write(f"Type: {let}\n")
+            handle.write(f"Type: {let}\n\n")
             if isConditional:
                 cond = values['conditional']
                 condText = "defined" if cond['required'] else "not defined"
-                handle.write(f"> Exists if **{cond['name']}** {condText}\n")
+                handle.write(f"> Exists if **{cond['name']}** {condText}\n\n")
 
             handle.write(f"Description: {values['Desc']}\n")
             

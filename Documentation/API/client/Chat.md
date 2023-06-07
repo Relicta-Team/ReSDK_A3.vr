@@ -3,7 +3,8 @@
 ## getChatAllText()
 
 Type: constant
-Description: ======================================================
+
+Description: 
 - Param: 
 
 Replaced value:
@@ -16,6 +17,7 @@ File: [client\Chat\Chat.hpp at line 8](../../../Src/client/Chat/Chat.hpp#L8)
 ## chat_unit_tests
 
 Type: constant
+
 Description: 
 
 
@@ -29,6 +31,7 @@ File: [client\Chat\chat_init.sqf at line 14](../../../Src/client/Chat/chat_init.
 ## mlp(v)
 
 Type: constant
+
 Description: 
 - Param: v
 
@@ -40,6 +43,7 @@ File: [client\Chat\Chat_onScreen.sqf at line 8](../../../Src/client/Chat/Chat_on
 ## chatos_onUpdate
 
 Type: function
+
 Description: 
 
 
@@ -47,6 +51,7 @@ File: [client\Chat\Chat_onScreen.sqf at line 41](../../../Src/client/Chat/Chat_o
 ## chatos_inlinecode
 
 Type: function
+
 Description: 
 - Param: _xpos
 - Param: _ypos
@@ -55,6 +60,7 @@ File: [client\Chat\Chat_onScreen.sqf at line 124](../../../Src/client/Chat/Chat_
 ## chatos_getMobMessages
 
 Type: function
+
 Description: get message buffer
 
 
@@ -62,6 +68,7 @@ File: [client\Chat\Chat_onScreen.sqf at line 150](../../../Src/client/Chat/Chat_
 ## chatos_getTimeText
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _text
@@ -70,6 +77,7 @@ File: [client\Chat\Chat_onScreen.sqf at line 154](../../../Src/client/Chat/Chat_
 ## chatos_canSeeObject
 
 Type: function
+
 Description: standart check
 - Param: _obj
 
@@ -77,6 +85,7 @@ File: [client\Chat\Chat_onScreen.sqf at line 167](../../../Src/client/Chat/Chat_
 ## chatos_actBlob
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _mes
@@ -90,6 +99,7 @@ File: [client\Chat\Chat_onScreen.sqf at line 240](../../../Src/client/Chat/Chat_
 ## chatos_onUpdateBlobTask
 
 Type: function
+
 Description: 
 - Param: _nextcall
 - Param: _speed
@@ -101,6 +111,7 @@ File: [client\Chat\Chat_onScreen.sqf at line 259](../../../Src/client/Chat/Chat_
 ## chatos_onUpdatePrintingSay
 
 Type: function
+
 Description: 
 
 
@@ -108,6 +119,7 @@ File: [client\Chat\Chat_onScreen.sqf at line 293](../../../Src/client/Chat/Chat_
 ## chatos_isMobPrinting
 
 Type: function
+
 Description: 
 
 
@@ -115,6 +127,7 @@ File: [client\Chat\Chat_onScreen.sqf at line 321](../../../Src/client/Chat/Chat_
 ## chatos_event_onSpeak
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _isspeaking
@@ -123,6 +136,7 @@ File: [client\Chat\Chat_onScreen.sqf at line 331](../../../Src/client/Chat/Chat_
 ## chatos_onSay
 
 Type: function
+
 Description: 
 
 
@@ -132,6 +146,7 @@ File: [client\Chat\Chat_onScreen.sqf at line 339](../../../Src/client/Chat/Chat_
 ## HIST_SIZE_H
 
 Type: constant
+
 Description: 
 
 
@@ -143,6 +158,7 @@ File: [client\Chat\functions.sqf at line 120](../../../Src/client/Chat/functions
 ## chatGettextwidget
 
 Type: function
+
 Description: 
 
 
@@ -150,6 +166,7 @@ File: [client\Chat\functions.sqf at line 13](../../../Src/client/Chat/functions.
 ## chatgetbackgroundwidget
 
 Type: function
+
 Description: 
 
 
@@ -157,6 +174,7 @@ File: [client\Chat\functions.sqf at line 15](../../../Src/client/Chat/functions.
 ## chatgetwidget
 
 Type: function
+
 Description: 
 
 
@@ -164,6 +182,7 @@ File: [client\Chat\functions.sqf at line 17](../../../Src/client/Chat/functions.
 ## chat_syncsize
 
 Type: function
+
 Description: 
 - Param: _x
 - Param: _y
@@ -174,6 +193,7 @@ File: [client\Chat\functions.sqf at line 19](../../../Src/client/Chat/functions.
 ## chatprint
 
 Type: function
+
 Description: 
 - Param: _text
 - Param: _type (optional, default "default")
@@ -182,6 +202,7 @@ File: [client\Chat\functions.sqf at line 35](../../../Src/client/Chat/functions.
 ## chat_onRenderLobby
 
 Type: function
+
 Description: 
 
 
@@ -189,6 +210,7 @@ File: [client\Chat\functions.sqf at line 98](../../../Src/client/Chat/functions.
 ## chatshowhistory
 
 Type: function
+
 Description: 
 
 
@@ -196,6 +218,7 @@ File: [client\Chat\functions.sqf at line 117](../../../Src/client/Chat/functions
 ## chatPrintSmart
 
 Type: function
+
 Description: 
 - Param: _txt
 - Param: _ch
@@ -206,6 +229,7 @@ File: [client\Chat\functions.sqf at line 150](../../../Src/client/Chat/functions
 ## chat_resetFadeTimer
 
 Type: function
+
 Description: 
 
 
@@ -213,6 +237,7 @@ File: [client\Chat\functions.sqf at line 156](../../../Src/client/Chat/functions
 ## chat_restoreVisible
 
 Type: function
+
 Description: 
 - Param: _now
 
@@ -220,6 +245,7 @@ File: [client\Chat\functions.sqf at line 161](../../../Src/client/Chat/functions
 ## chat_onUpdate
 
 Type: function
+
 Description: 
 
 
@@ -227,6 +253,7 @@ File: [client\Chat\functions.sqf at line 175](../../../Src/client/Chat/functions
 ## chat_applyColorTheme
 
 Type: function
+
 Description: 
 
 
@@ -236,7 +263,8 @@ File: [client\Chat\functions.sqf at line 195](../../../Src/client/Chat/functions
 ## ENM_TIPS_ERROR
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -254,6 +282,7 @@ File: [client\Chat\helpers.hpp at line 6](../../../Src/client/Chat/helpers.hpp#L
 ## getTextField
 
 Type: constant
+
 Description: 
 
 
@@ -265,6 +294,7 @@ File: [client\Chat\helpers.hpp at line 15](../../../Src/client/Chat/helpers.hpp#
 ## getBackground
 
 Type: constant
+
 Description: 
 
 
@@ -276,6 +306,7 @@ File: [client\Chat\helpers.hpp at line 16](../../../Src/client/Chat/helpers.hpp#
 ## getHistoryField
 
 Type: constant
+
 Description: 
 
 
@@ -287,6 +318,7 @@ File: [client\Chat\helpers.hpp at line 17](../../../Src/client/Chat/helpers.hpp#
 ## CHAT_HIDE_CHECK_UPDATE
 
 Type: constant
+
 Description: 
 
 
@@ -298,6 +330,7 @@ File: [client\Chat\helpers.hpp at line 19](../../../Src/client/Chat/helpers.hpp#
 ## CHAT_ONE_STEP_FADE_SIMULATION
 
 Type: constant
+
 Description: 
 
 
@@ -311,6 +344,7 @@ File: [client\Chat\helpers.hpp at line 20](../../../Src/client/Chat/helpers.hpp#
 ## chat_native_checktimeDelay
 
 Type: constant
+
 Description: need initialization after client connect
 
 
@@ -322,6 +356,7 @@ File: [client\Chat\nativeChatHandler.sqf at line 25](../../../Src/client/Chat/na
 ## chat_native_handleDebug
 
 Type: function
+
 Description: 
 
 

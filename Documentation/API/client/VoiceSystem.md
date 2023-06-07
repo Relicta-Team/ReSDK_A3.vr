@@ -3,6 +3,7 @@
 ## ENABLE_LINE_IN_FILES
 
 Type: constant
+
 Description: 
 
 
@@ -14,7 +15,9 @@ File: [client\VoiceSystem\engine.h at line 8](../../../Src/client/VoiceSystem/en
 ## __pragma_preprocess
 
 Type: constant
+
 > Exists if **ENABLE_LINE_IN_FILES** defined
+
 Description: 
 
 
@@ -26,7 +29,9 @@ File: [client\VoiceSystem\engine.h at line 11](../../../Src/client/VoiceSystem/e
 ## __pragma_preprocess
 
 Type: constant
+
 > Exists if **ENABLE_LINE_IN_FILES** not defined
+
 Description: 
 
 
@@ -38,6 +43,7 @@ File: [client\VoiceSystem\engine.h at line 13](../../../Src/client/VoiceSystem/e
 ## __pragma_prep_cli
 
 Type: constant
+
 Description: 
 
 
@@ -49,6 +55,7 @@ File: [client\VoiceSystem\engine.h at line 16](../../../Src/client/VoiceSystem/e
 ## arg
 
 Type: constant
+
 Description: logger
 
 
@@ -60,6 +67,7 @@ File: [client\VoiceSystem\engine.h at line 19](../../../Src/client/VoiceSystem/e
 ## conDllCall
 
 Type: constant
+
 Description: 
 
 
@@ -71,6 +79,7 @@ File: [client\VoiceSystem\engine.h at line 21](../../../Src/client/VoiceSystem/e
 ## log(message)
 
 Type: constant
+
 Description: 
 - Param: message
 
@@ -82,6 +91,7 @@ File: [client\VoiceSystem\engine.h at line 23](../../../Src/client/VoiceSystem/e
 ## logformat(provider,formatText)
 
 Type: constant
+
 Description: 
 - Param: provider
 - Param: formatText
@@ -94,6 +104,7 @@ File: [client\VoiceSystem\engine.h at line 24](../../../Src/client/VoiceSystem/e
 ## warning(message)
 
 Type: constant
+
 Description: 
 - Param: message
 
@@ -105,6 +116,7 @@ File: [client\VoiceSystem\engine.h at line 26](../../../Src/client/VoiceSystem/e
 ## error(message)
 
 Type: constant
+
 Description: 
 - Param: message
 
@@ -116,6 +128,7 @@ File: [client\VoiceSystem\engine.h at line 27](../../../Src/client/VoiceSystem/e
 ## warningformat(message,fmt)
 
 Type: constant
+
 Description: 
 - Param: message
 - Param: fmt
@@ -128,6 +141,7 @@ File: [client\VoiceSystem\engine.h at line 29](../../../Src/client/VoiceSystem/e
 ## errorformat(message,fmt)
 
 Type: constant
+
 Description: 
 - Param: message
 - Param: fmt
@@ -140,7 +154,9 @@ File: [client\VoiceSystem\engine.h at line 30](../../../Src/client/VoiceSystem/e
 ## trace(message)
 
 Type: constant
+
 > Exists if **__TRACE__ENABLED** defined
+
 Description: 
 - Param: message
 
@@ -152,7 +168,9 @@ File: [client\VoiceSystem\engine.h at line 34](../../../Src/client/VoiceSystem/e
 ## traceformat(message,fmt)
 
 Type: constant
+
 > Exists if **__TRACE__ENABLED** defined
+
 Description: 
 - Param: message
 - Param: fmt
@@ -165,7 +183,9 @@ File: [client\VoiceSystem\engine.h at line 34](../../../Src/client/VoiceSystem/e
 ## traceformat(message,fmt)
 
 Type: constant
+
 > Exists if **__TRACE__ENABLED** not defined
+
 Description: 
 - Param: message
 - Param: fmt
@@ -180,7 +200,8 @@ File: [client\VoiceSystem\engine.h at line 37](../../../Src/client/VoiceSystem/e
 ## SHIFTL
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -191,6 +212,7 @@ File: [client\VoiceSystem\script.h at line 6](../../../Src/client/VoiceSystem/sc
 ## CTRLL
 
 Type: constant
+
 Description: 
 
 
@@ -202,6 +224,7 @@ File: [client\VoiceSystem\script.h at line 7](../../../Src/client/VoiceSystem/sc
 ## ALTL
 
 Type: constant
+
 Description: 
 
 
@@ -213,6 +236,7 @@ File: [client\VoiceSystem\script.h at line 8](../../../Src/client/VoiceSystem/sc
 ## ACTIVE_CHANNEL_OFFSET
 
 Type: constant
+
 Description: 
 
 
@@ -224,6 +248,7 @@ File: [client\VoiceSystem\script.h at line 9](../../../Src/client/VoiceSystem/sc
 ## VOLUME_OFFSET
 
 Type: constant
+
 Description: 
 
 
@@ -235,6 +260,7 @@ File: [client\VoiceSystem\script.h at line 10](../../../Src/client/VoiceSystem/s
 ## RADIO_OWNER
 
 Type: constant
+
 Description: 
 
 
@@ -248,6 +274,7 @@ File: [client\VoiceSystem\script.h at line 11](../../../Src/client/VoiceSystem/s
 ## stamina_border_size_x
 
 Type: constant
+
 Description: 
 
 
@@ -259,6 +286,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 14](../../../Src/clien
 ## stamina_border_size_y
 
 Type: constant
+
 Description: 
 
 
@@ -270,6 +298,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 15](../../../Src/clien
 ## voice_changer_border_size_x
 
 Type: constant
+
 Description: 
 
 
@@ -281,6 +310,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 18](../../../Src/clien
 ## voice_changer_border_size_y
 
 Type: constant
+
 Description: 
 
 
@@ -292,6 +322,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 19](../../../Src/clien
 ## voice_changer_size_h
 
 Type: constant
+
 Description: 
 
 
@@ -303,6 +334,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 22](../../../Src/clien
 ## voice_changer_size_w
 
 Type: constant
+
 Description: 
 
 
@@ -314,6 +346,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 23](../../../Src/clien
 ## voice_changer_bias_x
 
 Type: constant
+
 Description: 
 
 
@@ -325,6 +358,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 25](../../../Src/clien
 ## voice_changer_bias_y
 
 Type: constant
+
 Description: 
 
 
@@ -336,6 +370,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 26](../../../Src/clien
 ## vec4(a,b,c,d)
 
 Type: constant
+
 Description: 
 - Param: a
 - Param: b
@@ -350,6 +385,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 28](../../../Src/clien
 ## vs_getWidgetText
 
 Type: constant
+
 Description: 
 
 
@@ -361,6 +397,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 32](../../../Src/clien
 ## vs_getWidgetProgress
 
 Type: constant
+
 Description: 
 
 
@@ -372,6 +409,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 33](../../../Src/clien
 ## vs_getWidgetGroup
 
 Type: constant
+
 Description: 
 
 
@@ -383,6 +421,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 34](../../../Src/clien
 ## vs_voiceDelayFadein
 
 Type: constant
+
 Description: время после которого тухнет диспл
 
 
@@ -394,6 +433,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 37](../../../Src/clien
 ## vs_voiceAmountFade
 
 Type: constant
+
 Description: сколько за кадр будет тухнуть хуйня
 
 
@@ -405,6 +445,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 40](../../../Src/clien
 ## vs_getMaxVolume
 
 Type: function
+
 Description: 
 
 
@@ -412,6 +453,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 56](../../../Src/clien
 ## vs_changeVoiceVolume
 
 Type: function
+
 Description: Изменяет громкость разговора
 - Param: _mode
 
@@ -419,6 +461,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 61](../../../Src/clien
 ## vs_voiceVolumeOnUpdate
 
 Type: function
+
 Description: 
 
 
@@ -426,6 +469,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 88](../../../Src/clien
 ## vs_initChangeVoiceCtrl
 
 Type: function
+
 Description: 
 
 
@@ -435,6 +479,7 @@ File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 111](../../../Src/clie
 ## vs_tangentSetMode
 
 Type: function
+
 Description: Обработка тангенты
 - Param: _obj
 - Param: _mode
@@ -445,6 +490,7 @@ File: [client\VoiceSystem\VoiceSystem_HandleTangent.sqf at line 10](../../../Src
 ## VOICE_DISABLE_LEGACYCODE
 
 Type: constant
+
 Description: Включенный флаг отключает компиляцию старых функций
 
 
@@ -456,6 +502,7 @@ File: [client\VoiceSystem\VoiceSystem_init.sqf at line 11](../../../Src/client/V
 ## VOICE_USE_NEW_ALGORITM_VOICE_INTERSECTION
 
 Type: constant
+
 Description: Новый алгоритм затухания звука
 
 
@@ -469,7 +516,9 @@ File: [client\VoiceSystem\VoiceSystem_init.sqf at line 14](../../../Src/client/V
 ## TFAR_fnc_setActiveLrRadio
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -477,7 +526,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 8](../../../Src/client/V
 ## TFAR_fnc_setActiveSwRadio
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -485,7 +536,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 38](../../../Src/client/
 ## TFAR_fnc_setAdditionalLrChannel
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -493,7 +546,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 63](../../../Src/client/
 ## TFAR_fnc_setAdditionalLrStereo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -501,7 +556,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 101](../../../Src/client
 ## TFAR_fnc_setAdditionalSwChannel
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -509,7 +566,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 136](../../../Src/client
 ## TFAR_fnc_setAdditionalSwStereo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -517,7 +576,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 172](../../../Src/client
 ## TFAR_fnc_setChannelFrequency
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -525,7 +586,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 204](../../../Src/client
 ## TFAR_fnc_setChannelViaDialog
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -533,7 +596,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 253](../../../Src/client
 ## TFAR_fnc_setLongRangeRadioFrequency
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -541,7 +606,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 318](../../../Src/client
 ## TFAR_fnc_setLrChannel
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -549,7 +616,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 342](../../../Src/client
 ## TFAR_fnc_setLrFrequency
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -557,7 +626,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 376](../../../Src/client
 ## TFAR_fnc_setLrRadioCode
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -565,7 +636,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 404](../../../Src/client
 ## TFAR_fnc_setLrSettings
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -573,7 +646,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 433](../../../Src/client
 ## TFAR_fnc_setLrSpeakers
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -581,7 +656,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 463](../../../Src/client
 ## TFAR_fnc_setLrStereo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -589,7 +666,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 508](../../../Src/client
 ## TFAR_fnc_setLrVolume
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -597,7 +676,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 546](../../../Src/client
 ## TFAR_fnc_setPersonalRadioFrequency
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -605,7 +686,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 580](../../../Src/client
 ## TFAR_fnc_setRadioOwner
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -613,7 +696,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 604](../../../Src/client
 ## TFAR_fnc_setSwChannel
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -621,7 +706,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 642](../../../Src/client
 ## TFAR_fnc_setSwFrequency
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -629,7 +716,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 674](../../../Src/client
 ## TFAR_fnc_setSwRadioCode
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -637,7 +726,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 702](../../../Src/client
 ## TFAR_fnc_setSwSettings
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -645,7 +736,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 730](../../../Src/client
 ## TFAR_fnc_setSwSpeakers
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -653,7 +746,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 768](../../../Src/client
 ## TFAR_fnc_setSwStereo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -661,7 +756,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 808](../../../Src/client
 ## TFAR_fnc_setSwVolume
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -669,7 +766,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 844](../../../Src/client
 ## TFAR_fnc_setVoiceVolume
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -677,7 +776,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 876](../../../Src/client
 ## TFAR_fnc_setVolumeViaDialog
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -685,6 +786,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 903](../../../Src/client
 ## TFAR_fnc_ShowHint
 
 Type: function
+
 Description: VOICE_DISABLE_LEGACYCODE
 
 
@@ -692,7 +794,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 956](../../../Src/client
 ## TFAR_fnc_ShowRadioInfo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -700,7 +804,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1002](../../../Src/clien
 ## TFAR_fnc_showRadioSpeakers
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -708,7 +814,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1053](../../../Src/clien
 ## TFAR_fnc_ShowRadioVolume
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -716,7 +824,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1101](../../../Src/clien
 ## TFAR_fnc_swRadioMenu
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -724,7 +834,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1157](../../../Src/clien
 ## TFAR_fnc_swRadioSubMenu
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -732,7 +844,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1217](../../../Src/clien
 ## TFAR_fnc_TaskForceArrowheadRadioInit
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -740,7 +854,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1250](../../../Src/clien
 ## TFAR_fnc_unableToUseHint
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -748,7 +864,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1286](../../../Src/clien
 ## TFAR_fnc_updateDDDialog
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -756,7 +874,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1290](../../../Src/clien
 ## TFAR_fnc_updateLRDialogToChannel
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -764,7 +884,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1318](../../../Src/clien
 ## TFAR_fnc_updateProgrammatorDialog
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -772,7 +894,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1358](../../../Src/clien
 ## TFAR_fnc_updateSWDialogToChannel
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -780,7 +904,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1368](../../../Src/clien
 ## TFAR_fnc_vehicleId
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -788,7 +914,9 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1408](../../../Src/clien
 ## TFAR_fnc_vehicleLr
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -796,6 +924,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1443](../../../Src/clien
 ## TFAR_fnc_vehicleIsIsolatedAndInside
 
 Type: function
+
 Description: VOICE_DISABLE_LEGACYCODE
 
 
@@ -805,6 +934,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1486](../../../Src/clien
 ## VOICE_IS_USE_NICKNAME_AS_TS
 
 Type: constant
+
 Description: 
 
 
@@ -816,6 +946,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 12](../../../S
 ## VOICE_DISABLE_IN_SINGLEPLAYERMODE
 
 Type: constant
+
 Description: при включенном режиме не будет запускать войс в СП-моде
 
 
@@ -827,6 +958,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 15](../../../S
 ## VOICE_DEBUG
 
 Type: constant
+
 Description: режим отладки войс системы (для возможности изменения переменных кода)
 
 
@@ -838,6 +970,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 18](../../../S
 ## VS_ERROR_CONNECTION_TIMEOUT
 
 Type: constant
+
 Description: таймаут до кика
 
 
@@ -849,6 +982,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 21](../../../S
 ## VS_ERROR_NOTINGAMECHANNEL_TIMEOUT
 
 Type: constant
+
 Description: 
 
 
@@ -860,6 +994,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 22](../../../S
 ## VS_INTERCOM_MAXDISTANCE_TRANSMITH
 
 Type: constant
+
 Description: 
 
 
@@ -871,6 +1006,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 24](../../../S
 ## itermes(me,data)
 
 Type: constant
+
 Description: 
 - Param: me
 - Param: data
@@ -883,6 +1019,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 724](../../../
 ## getRadioVar(obj,var)
 
 Type: constant
+
 Description: 
 - Param: obj
 - Param: var
@@ -895,6 +1032,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 926](../../../
 ## vs_init
 
 Type: function
+
 Description: 
 
 
@@ -902,6 +1040,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 30](../../../S
 ## vs_sendVersionInfo
 
 Type: function
+
 Description: Sends information about the current TFAR version.
 
 
@@ -909,6 +1048,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 165](../../../
 ## vs_isPluginEnabled
 
 Type: function
+
 Description: 
 
 
@@ -916,6 +1056,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 171](../../../
 ## vs_getCurrentTSChannel
 
 Type: function
+
 Description: Получает строковое название канала
 
 
@@ -923,6 +1064,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 176](../../../
 ## vs_isIngameTSChannel
 
 Type: function
+
 Description: 
 
 
@@ -930,6 +1072,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 180](../../../
 ## vs_getCurrentTSServer
 
 Type: function
+
 Description: получает строковое название сервера
 
 
@@ -937,6 +1080,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 185](../../../
 ## vs_isSpeaking
 
 Type: function
+
 Description: Говорит ли юнит в данный момент
 
 
@@ -944,6 +1088,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 190](../../../
 ## vs_onProcessPlayerPosition
 
 Type: function
+
 Description: Process some player positions on each call and sends it to the plugin.
 
 
@@ -951,6 +1096,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 195](../../../
 ## vs_startHandleProcessPlayerPos
 
 Type: function
+
 Description: 
 
 
@@ -958,6 +1104,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 323](../../../
 ## vs_stopHandleProcessPlayerPos
 
 Type: function
+
 Description: останавливает процессинг
 
 
@@ -965,6 +1112,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 333](../../../
 ## vs_sendFrequencyInfo
 
 Type: function
+
 Description: отсылает частоты раций у игрока в плагин
 
 
@@ -972,6 +1120,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 341](../../../
 ## vs_calculateInteraction
 
 Type: function
+
 Description: 
 - Param: _curVoice
 - Param: _unit
@@ -980,6 +1129,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 441](../../../
 ## vs_processSpeakerRadios
 
 Type: function
+
 Description: Обрабатывает все радио спикерные
 
 
@@ -987,6 +1137,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 446](../../../
 ## vs_sendPlayerInfo
 
 Type: function
+
 Description: Notifies the plugin about a player
 
 
@@ -994,6 +1145,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 541](../../../
 ## vs_preparePositionCoordinates
 
 Type: function
+
 Description: Prepares the position coordinates of the passed unit.
 
 
@@ -1001,6 +1153,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 604](../../../
 ## vs_processSpeakingLangs
 
 Type: function
+
 Description: Калькулирует понимание речи персонажа
 - Param: _unit
 - Param: _curVol
@@ -1009,6 +1162,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 688](../../../
 ## vs_calcVoiceIntersection
 
 Type: function
+
 Description: Просчитывает гашение звука от препятствий
 - Param: _unit
 - Param: _curVol
@@ -1017,6 +1171,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 716](../../../
 ## vs_internal_getObjBBXData
 
 Type: function
+
 Description: возвращает высоту объекта и площадь
 - Param: _obj
 
@@ -1024,7 +1179,9 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 835](../../../
 ## vs_debug_voiceIntersection
 
 Type: function
+
 > Exists if **DEBUG** defined
+
 Description: 
 - Param: _unit
 - Param: _posesASL
@@ -1033,6 +1190,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 849](../../../
 ## vs_getNearInGameMobs
 
 Type: function
+
 Description: Получает ближайших мобов
 
 
@@ -1040,6 +1198,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 870](../../../
 ## vs_releaseAllTangents
 
 Type: function
+
 Description: вырубает локальному плееру все рации
 
 
@@ -1049,6 +1208,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 920](../../../
 ## VS_TRANSMITHINFO_DEFAULT
 
 Type: constant
+
 Description: 
 
 
@@ -1060,6 +1220,7 @@ File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 64](../../../Src/cli
 ## vs_startTransmith
 
 Type: function
+
 Description: запускает потоковую передачу
 - Param: _freqAndCode
 - Param: _dist (optional, default vs_transmithDistance)
@@ -1069,6 +1230,7 @@ File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 17](../../../Src/cli
 ## vs_stopTransmith
 
 Type: function
+
 Description: останавливает потоковую передачу
 - Param: _freqAndCode
 - Param: _dist (optional, default vs_transmithDistance)
@@ -1078,6 +1240,7 @@ File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 43](../../../Src/cli
 ## vs_doStopTransmith
 
 Type: function
+
 Description: Логика остановки передачи в радио
 
 
@@ -1085,6 +1248,7 @@ File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 69](../../../Src/cli
 ## vs_handleTransmith
 
 Type: function
+
 Description: запускаем передачу
 - Param: _mode
 
@@ -1092,6 +1256,7 @@ File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 79](../../../Src/cli
 ## vs_canUseIntercomObject
 
 Type: function
+
 Description: 
 - Param: _obj
 - Param: _pos
@@ -1100,6 +1265,7 @@ File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 124](../../../Src/cl
 ## vs_handleProcessedTransmith
 
 Type: function
+
 Description: Обработчик цикла
 - Param: _obj
 - Param: _tData
@@ -1108,6 +1274,7 @@ File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 130](../../../Src/cl
 ## vs_addProcessingRadio
 
 Type: function
+
 Description: В параметрах надо указать частоту и громкость передачи
 - Param: _obj
 - Param: _rParams
@@ -1116,6 +1283,7 @@ File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 146](../../../Src/cl
 ## vs_removeProcessingRadio
 
 Type: function
+
 Description: Убирает процессироуемое радио
 - Param: _obj
 
@@ -1123,6 +1291,7 @@ File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 171](../../../Src/cl
 ## vs_clearProcessingRadio
 
 Type: function
+
 Description: 
 
 
@@ -1130,6 +1299,7 @@ File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 189](../../../Src/cl
 ## vs_onProcessingRadios
 
 Type: function
+
 Description: Получает все радио игрока
 
 
@@ -1139,6 +1309,7 @@ File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 192](../../../Src/cl
 ## DEBUG_MODE_FULL
 
 Type: constant
+
 Description: 
 
 
@@ -1150,13 +1321,15 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 346](../../../Sr
 ## TFAR_fnc_activeLrRadio
 
 Type: function
-Description: ======================================================
+
+Description: 
 
 
 File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 7](../../../Src/client/VoiceSystem/VoiceSystem_uncategorized.sqf#L7)
 ## TFAR_fnc_activeSwRadio
 
 Type: function
+
 Description: 
 
 
@@ -1164,6 +1337,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 49](../../../Src
 ## TFAR_fnc_addEventHandler
 
 Type: function
+
 Description: 
 
 
@@ -1171,6 +1345,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 77](../../../Src
 ## TFAR_fnc_backpackLr
 
 Type: function
+
 Description: 
 
 
@@ -1178,6 +1353,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 128](../../../Sr
 ## TFAR_fnc_calcTerrainInterception
 
 Type: function
+
 Description: 
 
 
@@ -1185,6 +1361,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 156](../../../Sr
 ## TFAR_fnc_canSpeak
 
 Type: function
+
 Description: 
 
 
@@ -1192,6 +1369,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 203](../../../Sr
 ## TFAR_fnc_canUseDDRadio
 
 Type: function
+
 Description: 
 
 
@@ -1199,6 +1377,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 235](../../../Sr
 ## TFAR_fnc_canUseLRRadio
 
 Type: function
+
 Description: 
 
 
@@ -1206,6 +1385,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 263](../../../Sr
 ## TFAR_fnc_canUseSWRadio
 
 Type: function
+
 Description: 
 
 
@@ -1213,6 +1393,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 305](../../../Sr
 ## TFAR_fnc_ClientInit
 
 Type: function
+
 Description: 
 
 
@@ -1220,6 +1401,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 345](../../../Sr
 ## TFAR_fnc_copyRadioSettingMenu
 
 Type: function
+
 Description: 
 
 
@@ -1227,6 +1409,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 730](../../../Sr
 ## TFAR_fnc_CopySettings
 
 Type: function
+
 Description: 
 
 
@@ -1234,6 +1417,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 778](../../../Sr
 ## TFAR_fnc_currentDirection
 
 Type: function
+
 Description: 
 
 
@@ -1241,6 +1425,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 833](../../../Sr
 ## TFAR_fnc_currentLRFrequency
 
 Type: function
+
 Description: 
 
 
@@ -1248,6 +1433,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 877](../../../Sr
 ## TFAR_fnc_currentSWFrequency
 
 Type: function
+
 Description: 
 
 
@@ -1255,6 +1441,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 881](../../../Sr
 ## TFAR_fnc_currentUnit
 
 Type: function
+
 Description: 
 
 
@@ -1262,6 +1449,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 885](../../../Sr
 ## TFAR_fnc_defaultPositionCoordinates
 
 Type: function
+
 Description: 
 
 
@@ -1269,6 +1457,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 909](../../../Sr
 ## TFAR_fnc_eyeDepth
 
 Type: function
+
 Description: 
 
 
@@ -1276,7 +1465,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 958](../../../Sr
 ## TFAR_fnc_fireEventHandlers
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1284,7 +1475,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 963](../../../Sr
 ## TFAR_fnc_forceSpectator
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1292,7 +1485,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1002](../../../S
 ## TFAR_fnc_getAdditionalLrChannel
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1300,7 +1495,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1033](../../../S
 ## TFAR_fnc_getAdditionalLrStereo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1308,7 +1505,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1060](../../../S
 ## TFAR_fnc_getAdditionalSwChannel
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1316,7 +1515,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1091](../../../S
 ## TFAR_fnc_getAdditionalSwStereo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1324,7 +1525,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1116](../../../S
 ## TFAR_fnc_getChannelFrequency
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1332,7 +1535,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1145](../../../S
 ## TFAR_fnc_getConfigProperty
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1340,7 +1545,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1186](../../../S
 ## TFAR_fnc_getCurrentLrStereo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1348,7 +1555,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1239](../../../S
 ## TFAR_fnc_getCurrentSwStereo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1356,7 +1565,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1271](../../../S
 ## TFAR_fnc_getDefaultRadioClasses
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1364,6 +1575,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1301](../../../S
 ## TFAR_tryResolveFactionClass
 
 Type: function
+
 Description: 
 
 
@@ -1371,7 +1583,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line -1](../../../Src
 ## TFAR_fnc_getLrChannel
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1379,7 +1593,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1352](../../../S
 ## TFAR_fnc_getLrFrequency
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1387,7 +1603,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1379](../../../S
 ## TFAR_fnc_getLrRadioCode
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1395,7 +1613,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1405](../../../S
 ## TFAR_fnc_getLrRadioProperty
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1403,7 +1623,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1428](../../../S
 ## TFAR_fnc_getLrSettings
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1411,7 +1633,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1500](../../../S
 ## TFAR_fnc_getLrSpeakers
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1419,7 +1643,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1599](../../../S
 ## TFAR_fnc_getLrStereo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1427,7 +1653,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1630](../../../S
 ## TFAR_fnc_getLrVolume
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1435,6 +1663,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1661](../../../S
 ## TFAR_fnc_getNearPlayers
 
 Type: function
+
 Description: VOICE_DISABLE_LEGACYCODE
 
 
@@ -1442,7 +1671,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1691](../../../S
 ## TFAR_fnc_getRadioOwner
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1450,7 +1681,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1733](../../../S
 ## TFAR_fnc_getSideRadio
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1458,7 +1691,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1762](../../../S
 ## TFAR_fnc_getSwChannel
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1466,7 +1701,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1806](../../../S
 ## TFAR_fnc_getSwFrequency
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1474,7 +1711,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1831](../../../S
 ## TFAR_fnc_getSwRadioCode
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1482,7 +1721,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1855](../../../S
 ## TFAR_fnc_getSwSettings
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1490,7 +1731,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1878](../../../S
 ## TFAR_fnc_getSwSpeakers
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1498,7 +1741,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1946](../../../S
 ## TFAR_fnc_getSwStereo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1506,7 +1751,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1975](../../../S
 ## TFAR_fnc_getSwVolume
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1514,7 +1761,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2004](../../../S
 ## TFAR_fnc_getTransmittingDistanceMultiplicator
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1522,7 +1771,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2029](../../../S
 ## TFAR_fnc_getVehicleSide
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1530,7 +1781,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2056](../../../S
 ## TFAR_fnc_hasVehicleRadio
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1538,7 +1791,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2096](../../../S
 ## TFAR_fnc_haveDDRadio
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1546,7 +1801,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2124](../../../S
 ## TFAR_fnc_haveLRRadio
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1554,7 +1811,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2154](../../../S
 ## TFAR_fnc_haveProgrammator
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1562,7 +1821,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2177](../../../S
 ## TFAR_fnc_haveSWRadio
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1570,7 +1831,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2200](../../../S
 ## TFAR_fnc_HideHint
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1578,7 +1841,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2229](../../../S
 ## TFAR_fnc_initialiseBaseModule
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1586,7 +1851,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2251](../../../S
 ## TFAR_fnc_initialiseEnforceUsageModule
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1594,7 +1861,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2343](../../../S
 ## TFAR_fnc_initialiseFreqModule
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1602,7 +1871,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2382](../../../S
 ## TFAR_fnc_inWaterHint
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1610,7 +1881,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2444](../../../S
 ## TFAR_fnc_isAbleToUseRadio
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1618,7 +1891,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2448](../../../S
 ## TFAR_fnc_isForcedCurator
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1626,7 +1901,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2457](../../../S
 ## TFAR_fnc_isRadio
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1634,7 +1911,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2486](../../../S
 ## TFAR_fnc_isSameRadio
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1642,7 +1921,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2515](../../../S
 ## TFAR_fnc_isSpeaking
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1650,7 +1931,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2551](../../../S
 ## TFAR_fnc_isTeamSpeakPluginEnabled
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1658,7 +1941,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2575](../../../S
 ## TFAR_fnc_isTurnedOut
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1666,7 +1951,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2597](../../../S
 ## TFAR_fnc_isVehicleIsolated
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1674,7 +1961,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2703](../../../S
 ## TFAR_fnc_lrRadioMenu
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1682,7 +1971,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2729](../../../S
 ## TFAR_fnc_lrRadiosList
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1690,7 +1981,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2772](../../../S
 ## TFAR_fnc_lrRadioSubMenu
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1698,7 +1991,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2817](../../../S
 ## TFAR_fnc_objectInterception
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1706,7 +2001,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2830](../../../S
 ## KK_fnc_inString
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1714,7 +2011,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2834](../../../S
 ## TFAR_fnc_onAdditionalLRTangentPressed
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1722,7 +2021,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2876](../../../S
 ## TFAR_fnc_onAdditionalLRTangentReleased
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1730,7 +2031,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2903](../../../S
 ## TFAR_fnc_onAdditionalSwTangentPressed
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1738,7 +2041,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2923](../../../S
 ## TFAR_fnc_onAdditionalSwTangentReleased
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1746,7 +2051,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2953](../../../S
 ## TFAR_fnc_onDDDialogOpen
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1754,7 +2061,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2972](../../../S
 ## TFAR_fnc_onDDTangentPressed
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1762,7 +2071,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2985](../../../S
 ## TFAR_fnc_onDDTangentReleased
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1770,7 +2081,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3009](../../../S
 ## TFAR_fnc_onDDTangentReleasedHack
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1778,7 +2091,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3020](../../../S
 ## TFAR_fnc_onGroundHint
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1786,7 +2101,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3040](../../../S
 ## TFAR_fnc_onLRDialogOpen
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1794,7 +2111,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3044](../../../S
 ## TFAR_fnc_onLRTangentPressed
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1802,7 +2121,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3066](../../../S
 ## TFAR_fnc_onLRTangentReleased
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1810,7 +2131,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3095](../../../S
 ## TFAR_fnc_onLRTangentReleasedHack
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1818,7 +2141,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3113](../../../S
 ## TFAR_fnc_onSpeakVolumeChange
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1826,7 +2151,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3133](../../../S
 ## TFAR_fnc_onSwDialogOpen
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1834,7 +2161,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3160](../../../S
 ## TFAR_fnc_onSwTangentPressed
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1842,7 +2171,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3176](../../../S
 ## TFAR_fnc_onSwTangentPressedHack
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1850,7 +2181,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3205](../../../S
 ## TFAR_fnc_onSwTangentReleased
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1858,7 +2191,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3226](../../../S
 ## TFAR_fnc_onSwTangentReleasedHack
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1866,7 +2201,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3245](../../../S
 ## TFAR_fnc_preparePositionCoordinates
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1874,7 +2211,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3259](../../../S
 ## TFAR_fnc_processCuratorKey
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1882,7 +2221,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3338](../../../S
 ## TFAR_fnc_processLRChannelKeys
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1890,7 +2231,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3366](../../../S
 ## TFAR_fnc_processLRCycleKeys
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1898,7 +2241,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3402](../../../S
 ## TFAR_fnc_processLRStereoKeys
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1906,7 +2251,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3464](../../../S
 ## TFAR_fnc_processPlayerPositions
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1914,7 +2261,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3498](../../../S
 ## TFAR_fnc_processRespawn
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1922,7 +2271,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3634](../../../S
 ## TFAR_fnc_processSpeakerRadios
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1930,7 +2281,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3701](../../../S
 ## TFAR_fnc_processSWChannelKeys
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1938,7 +2291,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3787](../../../S
 ## TFAR_fnc_processSWCycleKeys
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1946,7 +2301,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3823](../../../S
 ## TFAR_fnc_processSWStereoKeys
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1954,7 +2311,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3885](../../../S
 ## TFAR_fnc_ProcessTangent
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1962,7 +2321,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3919](../../../S
 ## TFAR_fnc_radioReplaceProcess
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1970,7 +2331,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3957](../../../S
 ## TFAR_fnc_radiosList
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1978,7 +2341,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4079](../../../S
 ## TFAR_fnc_radiosListSorted
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1986,7 +2351,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4116](../../../S
 ## TFAR_fnc_radioToRequestCount
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -1994,7 +2361,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4137](../../../S
 ## TFAR_fnc_removeEventHandler
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -2002,7 +2371,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4223](../../../S
 ## TFAR_fnc_requestRadios
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -2010,7 +2381,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4264](../../../S
 ## TFAR_fnc_sendFrequencyInfo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -2018,7 +2391,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4358](../../../S
 ## TFAR_fnc_sendPlayerInfo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -2026,7 +2401,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4470](../../../S
 ## TFAR_fnc_sendPlayerKilled
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -2034,7 +2411,9 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4529](../../../S
 ## TFAR_fnc_sendVersionInfo
 
 Type: function
+
 > Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+
 Description: 
 
 
@@ -2042,6 +2421,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4554](../../../S
 ## TFAR_fnc_sessionTracker
 
 Type: function
+
 Description: VOICE_DISABLE_LEGACYCODE
 
 
@@ -2049,6 +2429,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4582](../../../S
 ## cvar
 
 Type: function
+
 Description: 
 
 
@@ -2058,7 +2439,8 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4610](../../../S
 ## SW_EDIT
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -2069,6 +2451,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 6](../../../Src/clie
 ## SW_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -2080,6 +2463,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 7](../../../Src/clie
 ## ID_ADDITIONAL
 
 Type: constant
+
 Description: 
 
 
@@ -2091,6 +2475,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 8](../../../Src/clie
 ## ID_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -2102,6 +2487,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 9](../../../Src/clie
 ## LR_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -2113,6 +2499,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 11](../../../Src/cli
 ## LR_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -2124,6 +2511,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 12](../../../Src/cli
 ## IDD_ANPRC152_RADIO_DIALOG
 
 Type: constant
+
 Description: --- anprc152_radio_dialog
 
 
@@ -2135,6 +2523,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 15](../../../Src/cli
 ## IDD_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -2146,6 +2535,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 16](../../../Src/cli
 ## IDC_ANPRC152_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -2157,6 +2547,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 18](../../../Src/cli
 ## IDC_ANPRC152_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -2168,6 +2559,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 19](../../../Src/cli
 ## IDC_ANPRC152_ENTER
 
 Type: constant
+
 Description: 
 
 
@@ -2179,6 +2571,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 20](../../../Src/cli
 ## IDC_ANPRC152_CLEAR
 
 Type: constant
+
 Description: 
 
 
@@ -2190,6 +2583,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 21](../../../Src/cli
 ## IDC_ANPRC152_NEXT
 
 Type: constant
+
 Description: 
 
 
@@ -2201,6 +2595,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 22](../../../Src/cli
 ## IDC_ANPRC152_PREV
 
 Type: constant
+
 Description: 
 
 
@@ -2212,6 +2607,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 23](../../../Src/cli
 ## IDC_ANPRC152_CHANNEL_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -2223,6 +2619,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 24](../../../Src/cli
 ## IDC_ANPRC152_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -2234,6 +2631,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 25](../../../Src/cli
 ## IDC_ANPRC152_DECREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -2245,6 +2643,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 26](../../../Src/cli
 ## IDC_ANPRC152_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -2256,6 +2655,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 27](../../../Src/cli
 ## IDC_ANPRC152_RADIO_DIALOG_ADDITIONAL
 
 Type: constant
+
 Description: 
 
 
@@ -2267,6 +2667,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 28](../../../Src/cli
 ## IDC_ANPRC152_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -2278,6 +2679,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 29](../../../Src/cli
 ## IDD_ANPRC148JEM_RADIO_DIALOG
 
 Type: constant
+
 Description: --- anprc148jem
 
 
@@ -2289,6 +2691,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 32](../../../Src/cli
 ## IDC_ANPRC148JEM_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -2300,6 +2703,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 33](../../../Src/cli
 ## IDC_ANPRC148JEM_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -2311,6 +2715,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 34](../../../Src/cli
 ## IDC_ANPRC148JEM_CHANNEL_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -2322,6 +2727,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 35](../../../Src/cli
 ## IDC_ANPRC148JEM_ENTER
 
 Type: constant
+
 Description: 
 
 
@@ -2333,6 +2739,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 36](../../../Src/cli
 ## IDC_ANPRC148JEM_CLEAR
 
 Type: constant
+
 Description: 
 
 
@@ -2344,6 +2751,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 37](../../../Src/cli
 ## IDC_ANPRC148JEM_PREV_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -2355,6 +2763,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 38](../../../Src/cli
 ## IDC_ANPRC148JEM_NEXT_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -2366,6 +2775,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 39](../../../Src/cli
 ## IDC_ANPRC148JEM_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -2377,6 +2787,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 40](../../../Src/cli
 ## IDC_ANPRC148JEM_DECREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -2388,6 +2799,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 41](../../../Src/cli
 ## IDC_ANPRC148JEM_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -2399,6 +2811,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 42](../../../Src/cli
 ## IDC_ANPRC148JEM_ADDITIONAL
 
 Type: constant
+
 Description: 
 
 
@@ -2410,6 +2823,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 43](../../../Src/cli
 ## IDC_ANPRC148JEM_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -2421,6 +2835,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 44](../../../Src/cli
 ## IDD_FADAK_RADIO_DIALOG
 
 Type: constant
+
 Description: --- fadak
 
 
@@ -2432,6 +2847,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 47](../../../Src/cli
 ## IDC_FADAK_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -2443,6 +2859,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 48](../../../Src/cli
 ## IDC_FADAK_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -2454,6 +2871,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 49](../../../Src/cli
 ## IDC_FADAK_CHANNEL_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -2465,6 +2883,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 50](../../../Src/cli
 ## IDC_FADAK_ENTER_FADAK
 
 Type: constant
+
 Description: 
 
 
@@ -2476,6 +2895,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 51](../../../Src/cli
 ## IDC_FADAK_CLEAR
 
 Type: constant
+
 Description: 
 
 
@@ -2487,6 +2907,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 52](../../../Src/cli
 ## IDC_FADAK_NEXT_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -2498,6 +2919,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 53](../../../Src/cli
 ## IDC_FADAK_PREVIOUS_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -2509,6 +2931,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 54](../../../Src/cli
 ## IDC_FADAK_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -2520,6 +2943,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 55](../../../Src/cli
 ## IDC_FADAK_DECREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -2531,6 +2955,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 56](../../../Src/cli
 ## IDC_FADAK_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -2542,6 +2967,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 57](../../../Src/cli
 ## IDC_FADAK_ADDITIONAL
 
 Type: constant
+
 Description: 
 
 
@@ -2553,6 +2979,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 58](../../../Src/cli
 ## IDC_FADAK_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -2564,6 +2991,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 59](../../../Src/cli
 ## IDD_RT1523G_RADIO_DIALOG
 
 Type: constant
+
 Description: --- rt1523g_radio_dialog
 
 
@@ -2575,6 +3003,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 64](../../../Src/cli
 ## IDC_RT1523G_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -2586,6 +3015,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 65](../../../Src/cli
 ## IDC_RT1523G_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -2597,6 +3027,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 66](../../../Src/cli
 ## IDC_RT1523G_CHANNEL_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -2608,6 +3039,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 67](../../../Src/cli
 ## IDC_RT1523G_ENTER
 
 Type: constant
+
 Description: 
 
 
@@ -2619,6 +3051,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 68](../../../Src/cli
 ## IDC_RT1523G_CLEAR
 
 Type: constant
+
 Description: 
 
 
@@ -2630,6 +3063,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 69](../../../Src/cli
 ## IDC_RT1523G_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -2641,6 +3075,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 70](../../../Src/cli
 ## IDC_RT1523G_DECREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -2652,6 +3087,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 71](../../../Src/cli
 ## IDC_RT1523G_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -2663,6 +3099,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 85](../../../Src/cli
 ## IDC_RT1523G_CHANNEL_01
 
 Type: constant
+
 Description: 
 
 
@@ -2674,6 +3111,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 74](../../../Src/cli
 ## IDC_RT1523G_CHANNEL_02
 
 Type: constant
+
 Description: 
 
 
@@ -2685,6 +3123,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 75](../../../Src/cli
 ## IDC_RT1523G_CHANNEL_03
 
 Type: constant
+
 Description: 
 
 
@@ -2696,6 +3135,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 76](../../../Src/cli
 ## IDC_RT1523G_CHANNEL_04
 
 Type: constant
+
 Description: 
 
 
@@ -2707,6 +3147,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 77](../../../Src/cli
 ## IDC_RT1523G_CHANNEL_05
 
 Type: constant
+
 Description: 
 
 
@@ -2718,6 +3159,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 78](../../../Src/cli
 ## IDC_RT1523G_CHANNEL_06
 
 Type: constant
+
 Description: 
 
 
@@ -2729,6 +3171,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 79](../../../Src/cli
 ## IDC_RT1523G_CHANNEL_07
 
 Type: constant
+
 Description: 
 
 
@@ -2740,6 +3183,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 80](../../../Src/cli
 ## IDC_RT1523G_CHANNEL_08
 
 Type: constant
+
 Description: 
 
 
@@ -2751,6 +3195,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 81](../../../Src/cli
 ## IDC_RT1523G_CHANNEL_09
 
 Type: constant
+
 Description: 
 
 
@@ -2762,6 +3207,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 82](../../../Src/cli
 ## IDC_RT1523G_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -2773,6 +3219,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 83](../../../Src/cli
 ## IDC_RT1523G_ADDITIONAL
 
 Type: constant
+
 Description: 
 
 
@@ -2784,6 +3231,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 84](../../../Src/cli
 ## IDD_MR3000_RADIO_DIALOG
 
 Type: constant
+
 Description: --- mr3000
 
 
@@ -2795,6 +3243,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 89](../../../Src/cli
 ## IDC_MR3000_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -2806,6 +3255,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 90](../../../Src/cli
 ## IDC_MR3000_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -2817,6 +3267,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 91](../../../Src/cli
 ## IDC_MR3000_CHANNEL_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -2828,6 +3279,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 92](../../../Src/cli
 ## IDC_MR3000_ENTER
 
 Type: constant
+
 Description: 
 
 
@@ -2839,6 +3291,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 93](../../../Src/cli
 ## IDC_MR3000_CLEAR
 
 Type: constant
+
 Description: 
 
 
@@ -2850,6 +3303,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 94](../../../Src/cli
 ## IDC_MR3000_NEXT_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -2861,6 +3315,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 95](../../../Src/cli
 ## IDC_MR3000_PREVIOUS_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -2872,6 +3327,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 96](../../../Src/cli
 ## IDC_MR3000_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -2883,6 +3339,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 97](../../../Src/cli
 ## IDC_MR3000_DECREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -2894,6 +3351,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 98](../../../Src/cli
 ## IDC_MR3000_VOLUME_SWITCH
 
 Type: constant
+
 Description: 
 
 
@@ -2905,6 +3363,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 99](../../../Src/cli
 ## IDC_MR3000_CHANNEL_1
 
 Type: constant
+
 Description: 
 
 
@@ -2916,6 +3375,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 100](../../../Src/cl
 ## IDC_MR3000_CHANNEL_2
 
 Type: constant
+
 Description: 
 
 
@@ -2927,6 +3387,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 101](../../../Src/cl
 ## IDC_MR3000_CHANNEL_3
 
 Type: constant
+
 Description: 
 
 
@@ -2938,6 +3399,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 102](../../../Src/cl
 ## IDC_MR3000_CHANNEL_4
 
 Type: constant
+
 Description: 
 
 
@@ -2949,6 +3411,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 103](../../../Src/cl
 ## IDC_MR3000_CHANNEL_5
 
 Type: constant
+
 Description: 
 
 
@@ -2960,6 +3423,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 104](../../../Src/cl
 ## IDC_MR3000_CHANNEL_6
 
 Type: constant
+
 Description: 
 
 
@@ -2971,6 +3435,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 105](../../../Src/cl
 ## IDC_MR3000_CHANNEL_7
 
 Type: constant
+
 Description: 
 
 
@@ -2982,6 +3447,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 106](../../../Src/cl
 ## IDC_MR3000_CHANNEL_8
 
 Type: constant
+
 Description: 
 
 
@@ -2993,6 +3459,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 107](../../../Src/cl
 ## IDC_MR3000_CHANNEL_9
 
 Type: constant
+
 Description: 
 
 
@@ -3004,6 +3471,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 108](../../../Src/cl
 ## IDC_MR3000_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -3015,6 +3483,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 109](../../../Src/cl
 ## IDC_MR3000_CHANNEL_SWITCH
 
 Type: constant
+
 Description: 
 
 
@@ -3026,6 +3495,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 110](../../../Src/cl
 ## IDC_MR3000_ADDITIONAL
 
 Type: constant
+
 Description: 
 
 
@@ -3037,6 +3507,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 111](../../../Src/cl
 ## IDC_MR3000_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -3048,6 +3519,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 112](../../../Src/cl
 ## IDD_ANPRC155_RADIO_DIALOG
 
 Type: constant
+
 Description: --- anprc155
 
 
@@ -3059,6 +3531,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 115](../../../Src/cl
 ## IDC_ANPRC155_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -3070,6 +3543,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 116](../../../Src/cl
 ## IDC_ANPRC155_CHANNEL_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -3081,6 +3555,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 117](../../../Src/cl
 ## IDC_ANPRC155_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -3092,6 +3567,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 118](../../../Src/cl
 ## IDC_ANPRC155_ENTER
 
 Type: constant
+
 Description: 
 
 
@@ -3103,6 +3579,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 119](../../../Src/cl
 ## IDC_ANPRC155_CLEAR
 
 Type: constant
+
 Description: 
 
 
@@ -3114,6 +3591,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 120](../../../Src/cl
 ## IDC_ANPRC155_PREV_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -3125,6 +3603,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 121](../../../Src/cl
 ## IDC_ANPRC155_NEXT_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -3136,6 +3615,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 122](../../../Src/cl
 ## IDC_ANPRC155_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -3147,6 +3627,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 123](../../../Src/cl
 ## IDC_ANPRC155_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -3158,6 +3639,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 124](../../../Src/cl
 ## IDC_ANPRC155_ADDITIONAL
 
 Type: constant
+
 Description: 
 
 
@@ -3169,6 +3651,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 125](../../../Src/cl
 ## IDC_ANPRC155_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -3180,6 +3663,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 126](../../../Src/cl
 ## IDD_DIVER_RADIO_DIALOG
 
 Type: constant
+
 Description: --- diver_radio
 
 
@@ -3191,6 +3675,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 130](../../../Src/cl
 ## IDC_DIVER_RADIO_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -3202,6 +3687,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 132](../../../Src/cl
 ## IDC_DIVER_RADIO_ENTER
 
 Type: constant
+
 Description: 
 
 
@@ -3213,6 +3699,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 133](../../../Src/cl
 ## IDC_DIVER_RADIO_CLEAR
 
 Type: constant
+
 Description: 
 
 
@@ -3224,6 +3711,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 134](../../../Src/cl
 ## IDC_DIVER_RADIO_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -3235,6 +3723,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 135](../../../Src/cl
 ## IDC_DIVER_RADIO_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -3246,6 +3735,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 136](../../../Src/cl
 ## IDC_DIVER_RADIO_DEPTH_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -3257,6 +3747,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 137](../../../Src/cl
 ## IDD_ANPRC210_RADIO_DIALOG
 
 Type: constant
+
 Description: --- anprc210
 
 
@@ -3268,6 +3759,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 140](../../../Src/cl
 ## IDC_ANPRC210_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -3279,6 +3771,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 141](../../../Src/cl
 ## IDC_ANPRC210_CHANNEL_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -3290,6 +3783,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 142](../../../Src/cl
 ## IDC_ANPRC210_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -3301,6 +3795,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 143](../../../Src/cl
 ## IDC_ANPRC210_ENTER
 
 Type: constant
+
 Description: 
 
 
@@ -3312,6 +3807,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 144](../../../Src/cl
 ## IDC_ANPRC210_CLEAR
 
 Type: constant
+
 Description: 
 
 
@@ -3323,6 +3819,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 145](../../../Src/cl
 ## IDC_ANPRC210_CHANNEL_SWITCH
 
 Type: constant
+
 Description: 
 
 
@@ -3334,6 +3831,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 146](../../../Src/cl
 ## IDC_ANPRC210_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -3345,6 +3843,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 147](../../../Src/cl
 ## IDC_ANPRC210_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -3356,6 +3855,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 148](../../../Src/cl
 ## IDC_ANPRC210_CHANNEL_01
 
 Type: constant
+
 Description: 
 
 
@@ -3367,6 +3867,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 149](../../../Src/cl
 ## IDC_ANPRC210_CHANNEL_02
 
 Type: constant
+
 Description: 
 
 
@@ -3378,6 +3879,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 150](../../../Src/cl
 ## IDC_ANPRC210_CHANNEL_03
 
 Type: constant
+
 Description: 
 
 
@@ -3389,6 +3891,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 151](../../../Src/cl
 ## IDC_ANPRC210_CHANNEL_04
 
 Type: constant
+
 Description: 
 
 
@@ -3400,6 +3903,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 152](../../../Src/cl
 ## IDC_ANPRC210_CHANNEL_05
 
 Type: constant
+
 Description: 
 
 
@@ -3411,6 +3915,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 153](../../../Src/cl
 ## IDC_ANPRC210_CHANNEL_06
 
 Type: constant
+
 Description: 
 
 
@@ -3422,6 +3927,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 154](../../../Src/cl
 ## IDC_ANPRC210_CHANNEL_07
 
 Type: constant
+
 Description: 
 
 
@@ -3433,6 +3939,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 155](../../../Src/cl
 ## IDC_ANPRC210_CHANNEL_08
 
 Type: constant
+
 Description: 
 
 
@@ -3444,6 +3951,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 156](../../../Src/cl
 ## IDC_ANPRC210_CHANNEL_09
 
 Type: constant
+
 Description: 
 
 
@@ -3455,6 +3963,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 157](../../../Src/cl
 ## IDC_ANPRC210_ADDITIONAL
 
 Type: constant
+
 Description: 
 
 
@@ -3466,6 +3975,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 158](../../../Src/cl
 ## IDC_ANPRC210_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -3477,6 +3987,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 159](../../../Src/cl
 ## IDD_MR6000L_RADIO_DIALOG
 
 Type: constant
+
 Description: --- mr6000l_radio_dialog
 
 
@@ -3488,6 +3999,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 163](../../../Src/cl
 ## IDC_MR6000L_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -3499,6 +4011,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 164](../../../Src/cl
 ## IDC_MR6000L_CHANNEL_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -3510,6 +4023,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 165](../../../Src/cl
 ## IDC_MR6000L_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -3521,6 +4035,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 166](../../../Src/cl
 ## IDC_MR6000L_ENTER
 
 Type: constant
+
 Description: 
 
 
@@ -3532,6 +4047,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 167](../../../Src/cl
 ## IDC_MR6000L_CLEAR
 
 Type: constant
+
 Description: 
 
 
@@ -3543,6 +4059,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 168](../../../Src/cl
 ## IDC_MR6000L_PREV_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -3554,6 +4071,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 169](../../../Src/cl
 ## IDC_MR6000L_NEXT_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -3565,6 +4083,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 170](../../../Src/cl
 ## IDC_MR6000L_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -3576,6 +4095,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 171](../../../Src/cl
 ## IDC_MR6000L_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -3587,6 +4107,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 172](../../../Src/cl
 ## IDC_MR6000L_CHANNEL_01
 
 Type: constant
+
 Description: 
 
 
@@ -3598,6 +4119,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 173](../../../Src/cl
 ## IDC_MR6000L_CHANNEL_02
 
 Type: constant
+
 Description: 
 
 
@@ -3609,6 +4131,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 174](../../../Src/cl
 ## IDC_MR6000L_CHANNEL_03
 
 Type: constant
+
 Description: 
 
 
@@ -3620,6 +4143,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 175](../../../Src/cl
 ## IDC_MR6000L_CHANNEL_04
 
 Type: constant
+
 Description: 
 
 
@@ -3631,6 +4155,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 176](../../../Src/cl
 ## IDC_MR6000L_CHANNEL_05
 
 Type: constant
+
 Description: 
 
 
@@ -3642,6 +4167,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 177](../../../Src/cl
 ## IDC_MR6000L_CHANNEL_06
 
 Type: constant
+
 Description: 
 
 
@@ -3653,6 +4179,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 178](../../../Src/cl
 ## IDC_MR6000L_CHANNEL_07
 
 Type: constant
+
 Description: 
 
 
@@ -3664,6 +4191,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 179](../../../Src/cl
 ## IDC_MR6000L_CHANNEL_08
 
 Type: constant
+
 Description: 
 
 
@@ -3675,6 +4203,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 180](../../../Src/cl
 ## IDC_MR6000L_CHANNEL_09
 
 Type: constant
+
 Description: 
 
 
@@ -3686,6 +4215,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 181](../../../Src/cl
 ## IDC_MR6000L_RADIO_DIALOG_ADDITIONAL
 
 Type: constant
+
 Description: 
 
 
@@ -3697,6 +4227,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 182](../../../Src/cl
 ## IDC_MR6000L_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -3708,6 +4239,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 183](../../../Src/cl
 ## IDD_ANARC164_RADIO_DIALOG
 
 Type: constant
+
 Description: --- anarc164
 
 
@@ -3719,6 +4251,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 187](../../../Src/cl
 ## IDC_ANARC164_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -3730,6 +4263,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 188](../../../Src/cl
 ## IDC_ANARC164_CHANNEL_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -3741,6 +4275,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 189](../../../Src/cl
 ## IDC_ANARC164_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -3752,6 +4287,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 190](../../../Src/cl
 ## IDC_ANARC164_ENTER
 
 Type: constant
+
 Description: 
 
 
@@ -3763,6 +4299,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 191](../../../Src/cl
 ## IDC_ANARC164_CLEAR
 
 Type: constant
+
 Description: 
 
 
@@ -3774,6 +4311,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 192](../../../Src/cl
 ## IDC_ANARC164_PREV_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -3785,6 +4323,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 193](../../../Src/cl
 ## IDC_ANARC164_NEXT_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -3796,6 +4335,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 194](../../../Src/cl
 ## IDC_ANARC164_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -3807,6 +4347,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 195](../../../Src/cl
 ## IDC_ANARC164_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -3818,6 +4359,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 196](../../../Src/cl
 ## IDC_ANARC164_ADDITIONAL
 
 Type: constant
+
 Description: 
 
 
@@ -3829,6 +4371,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 197](../../../Src/cl
 ## IDC_ANARC164_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -3840,6 +4383,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 198](../../../Src/cl
 ## IDD_ANPRC154_RADIO_DIALOG
 
 Type: constant
+
 Description: --- anprc154
 
 
@@ -3851,6 +4395,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 201](../../../Src/cl
 ## IDC_ANPRC154_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -3862,6 +4407,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 202](../../../Src/cl
 ## IDC_ANPRC154_RESET_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -3873,6 +4419,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 203](../../../Src/cl
 ## IDC_ANPRC154_PREV_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -3884,6 +4431,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 204](../../../Src/cl
 ## IDC_ANPRC154_NEXT_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -3895,6 +4443,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 205](../../../Src/cl
 ## IDC_ANPRC154_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -3906,6 +4455,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 206](../../../Src/cl
 ## IDC_ANPRC154_DECREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -3917,6 +4467,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 207](../../../Src/cl
 ## IDC_ANPRC154_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -3928,6 +4479,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 208](../../../Src/cl
 ## IDC_ANPRC154_RESET_CHANNEL_ALT
 
 Type: constant
+
 Description: 
 
 
@@ -3939,6 +4491,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 209](../../../Src/cl
 ## IDC_ANPRC154_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -3950,6 +4503,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 210](../../../Src/cl
 ## IDD_RF7800STR_RADIO_DIALOG
 
 Type: constant
+
 Description: --- rf7800str
 
 
@@ -3961,6 +4515,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 213](../../../Src/cl
 ## IDC_RF7800STR_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -3972,6 +4527,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 214](../../../Src/cl
 ## IDC_RF7800STR_NEXT_CHANNEL_ALT
 
 Type: constant
+
 Description: 
 
 
@@ -3983,6 +4539,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 215](../../../Src/cl
 ## IDC_RF7800STR_PREV_CHANNEL_ALT
 
 Type: constant
+
 Description: 
 
 
@@ -3994,6 +4551,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 216](../../../Src/cl
 ## IDC_RF7800STR_PREV_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -4005,6 +4563,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 216](../../../Src/cl
 ## IDC_RF7800STR_NEXT_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -4016,6 +4575,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 215](../../../Src/cl
 ## IDC_RF7800STR_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -4027,6 +4587,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 219](../../../Src/cl
 ## IDC_RF7800STR_DECREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -4038,6 +4599,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 220](../../../Src/cl
 ## IDC_RF7800STR_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -4049,6 +4611,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 221](../../../Src/cl
 ## IDC_RF7800STR_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -4060,6 +4623,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 222](../../../Src/cl
 ## IDC_PNR1000A_RADIO_DIALOG
 
 Type: constant
+
 Description: --- pnr1000a
 
 
@@ -4071,6 +4635,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 225](../../../Src/cl
 ## IDC_PNR1000A_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -4082,6 +4647,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 226](../../../Src/cl
 ## IDC_PNR1000A_RESET_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -4093,6 +4659,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 227](../../../Src/cl
 ## IDC_PNR1000A_PREV_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -4104,6 +4671,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 228](../../../Src/cl
 ## IDC_PNR1000A_NEXT_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -4115,6 +4683,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 229](../../../Src/cl
 ## IDC_PNR1000A_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -4126,6 +4695,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 230](../../../Src/cl
 ## IDC_PNR1000A_DECREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -4137,6 +4707,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 231](../../../Src/cl
 ## IDC_PNR1000A_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -4148,6 +4719,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 232](../../../Src/cl
 ## IDC_PNR1000A_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -4159,6 +4731,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 233](../../../Src/cl
 ## IDC_MICRODAGR_BACKGROUND
 
 Type: constant
+
 Description: -- microdagr
 
 
@@ -4170,6 +4743,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 236](../../../Src/cl
 ## IDC_MICRODAGR_CLEAR
 
 Type: constant
+
 Description: 
 
 
@@ -4181,6 +4755,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 237](../../../Src/cl
 ## IDC_MICRODAGR_ENTER
 
 Type: constant
+
 Description: 
 
 
@@ -4192,6 +4767,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 238](../../../Src/cl
 ## IDC_MICRODAGR_CHANNEL_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -4203,6 +4779,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 239](../../../Src/cl
 ## IDC_MICRODAGR_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -4214,6 +4791,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 240](../../../Src/cl
 ## IDD_BUSSOLE_RADIO_DIALOG
 
 Type: constant
+
 Description: --- bussole
 
 
@@ -4225,6 +4803,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 243](../../../Src/cl
 ## IDC_BUSSOLE_BACKGROUND
 
 Type: constant
+
 Description: 
 
 
@@ -4236,6 +4815,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 244](../../../Src/cl
 ## IDC_BUSSOLE_CHANNEL_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -4247,6 +4827,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 245](../../../Src/cl
 ## IDC_BUSSOLE_EDIT
 
 Type: constant
+
 Description: 
 
 
@@ -4258,6 +4839,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 246](../../../Src/cl
 ## IDC_BUSSOLE_ENTER
 
 Type: constant
+
 Description: 
 
 
@@ -4269,6 +4851,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 247](../../../Src/cl
 ## IDC_BUSSOLE_CLEAR
 
 Type: constant
+
 Description: 
 
 
@@ -4280,6 +4863,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 248](../../../Src/cl
 ## IDC_BUSSOLE_PREV_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -4291,6 +4875,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 249](../../../Src/cl
 ## IDC_BUSSOLE_NEXT_CHANNEL
 
 Type: constant
+
 Description: 
 
 
@@ -4302,6 +4887,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 250](../../../Src/cl
 ## IDC_BUSSOLE_INCREASE_VOLUME
 
 Type: constant
+
 Description: 
 
 
@@ -4313,6 +4899,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 251](../../../Src/cl
 ## IDC_BUSSOLE_STEREO
 
 Type: constant
+
 Description: 
 
 
@@ -4324,6 +4911,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 252](../../../Src/cl
 ## IDC_BUSSOLE_ADDITIONAL
 
 Type: constant
+
 Description: 
 
 
@@ -4335,6 +4923,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 253](../../../Src/cl
 ## IDC_BUSSOLE_SPEAKERS
 
 Type: constant
+
 Description: 
 
 
@@ -4346,6 +4935,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 254](../../../Src/cl
 ## IDC_BUSSOLE_CHANNEL_01
 
 Type: constant
+
 Description: 
 
 
@@ -4357,6 +4947,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 255](../../../Src/cl
 ## IDC_BUSSOLE_CHANNEL_02
 
 Type: constant
+
 Description: 
 
 
@@ -4368,6 +4959,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 256](../../../Src/cl
 ## IDC_BUSSOLE_CHANNEL_03
 
 Type: constant
+
 Description: 
 
 
@@ -4379,6 +4971,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 257](../../../Src/cl
 ## IDC_BUSSOLE_CHANNEL_04
 
 Type: constant
+
 Description: 
 
 
@@ -4390,6 +4983,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 258](../../../Src/cl
 ## IDC_BUSSOLE_CHANNEL_05
 
 Type: constant
+
 Description: 
 
 
@@ -4401,6 +4995,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 259](../../../Src/cl
 ## IDC_BUSSOLE_CHANNEL_06
 
 Type: constant
+
 Description: 
 
 
@@ -4412,6 +5007,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 260](../../../Src/cl
 ## IDC_BUSSOLE_CHANNEL_07
 
 Type: constant
+
 Description: 
 
 
@@ -4423,6 +5019,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 261](../../../Src/cl
 ## IDC_BUSSOLE_CHANNEL_08
 
 Type: constant
+
 Description: 
 
 
@@ -4434,6 +5031,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 262](../../../Src/cl
 ## IDC_BUSSOLE_CHANNEL_09
 
 Type: constant
+
 Description: 
 
 
@@ -4447,6 +5045,7 @@ File: [client\VoiceSystem\VoiceSystem_widgetEnums.h at line 263](../../../Src/cl
 ## _eyePosAgl
 
 Type: constant
+
 Description: 
 
 
@@ -4458,6 +5057,7 @@ File: [client\VoiceSystem\VoiceSystem_WorldRadioComponent.sqf at line 90](../../
 ## _currentVolume
 
 Type: constant
+
 Description: 
 
 
@@ -4469,6 +5069,7 @@ File: [client\VoiceSystem\VoiceSystem_WorldRadioComponent.sqf at line 91](../../
 ## vs_loadWorldRadio
 
 Type: function
+
 Description: Загружает в мир всю инфу о радио. Последний параметр указывает использовать ли радио как наушник
 - Param: _obj
 - Param: _radioData
@@ -4479,6 +5080,7 @@ File: [client\VoiceSystem\VoiceSystem_WorldRadioComponent.sqf at line 10](../../
 ## vs_unloadWorldRadio
 
 Type: function
+
 Description: выгружает мировое радио
 - Param: _obj
 
@@ -4486,6 +5088,7 @@ File: [client\VoiceSystem\VoiceSystem_WorldRadioComponent.sqf at line 50](../../
 ## vs_isWorldRadioObject
 
 Type: function
+
 Description: Является ли объект земным радио
 
 
@@ -4493,6 +5096,7 @@ File: [client\VoiceSystem\VoiceSystem_WorldRadioComponent.sqf at line 86](../../
 ## vs_processWorldRadios
 
 Type: function
+
 Description: Обрабатывает мировые радио записывая их в tf_speakerRadios
 
 
@@ -4500,6 +5104,7 @@ File: [client\VoiceSystem\VoiceSystem_WorldRadioComponent.sqf at line 89](../../
 ## vs_calcSpeakerIntersection
 
 Type: function
+
 Description: Тушит громкость от пересечений
 - Param: _obj
 - Param: _curVol

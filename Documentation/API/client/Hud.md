@@ -3,6 +3,7 @@
 ## HUD_SIZE_X
 
 Type: constant
+
 Description: 
 
 
@@ -14,6 +15,7 @@ File: [client\Hud\Hud_init.sqf at line 12](../../../Src/client/Hud/Hud_init.sqf#
 ## STAT_SIZE_H
 
 Type: constant
+
 Description: 
 
 
@@ -25,6 +27,7 @@ File: [client\Hud\Hud_init.sqf at line 14](../../../Src/client/Hud/Hud_init.sqf#
 ## canVisibleAttribute(data)
 
 Type: constant
+
 Description: 
 - Param: data
 
@@ -36,6 +39,7 @@ File: [client\Hud\Hud_init.sqf at line 16](../../../Src/client/Hud/Hud_init.sqf#
 ## getWidgetVar(_w,var)
 
 Type: constant
+
 Description: 
 - Param: _w
 - Param: var
@@ -48,6 +52,7 @@ File: [client\Hud\Hud_init.sqf at line 18](../../../Src/client/Hud/Hud_init.sqf#
 ## setWidgetVar(_w,var,val)
 
 Type: constant
+
 Description: 
 - Param: _w
 - Param: var
@@ -61,6 +66,7 @@ File: [client\Hud\Hud_init.sqf at line 19](../../../Src/client/Hud/Hud_init.sqf#
 ## LIGHT_NO
 
 Type: constant
+
 Description: 
 
 
@@ -72,6 +78,7 @@ File: [client\Hud\Hud_init.sqf at line 61](../../../Src/client/Hud/Hud_init.sqf#
 ## LIGHT_LOW
 
 Type: constant
+
 Description: 
 
 
@@ -83,6 +90,7 @@ File: [client\Hud\Hud_init.sqf at line 62](../../../Src/client/Hud/Hud_init.sqf#
 ## LIGHT_MEDIUM
 
 Type: constant
+
 Description: 
 
 
@@ -94,6 +102,7 @@ File: [client\Hud\Hud_init.sqf at line 63](../../../Src/client/Hud/Hud_init.sqf#
 ## LIGHT_LARGE
 
 Type: constant
+
 Description: 
 
 
@@ -105,6 +114,7 @@ File: [client\Hud\Hud_init.sqf at line 64](../../../Src/client/Hud/Hud_init.sqf#
 ## LIGHT_FULL
 
 Type: constant
+
 Description: 
 
 
@@ -116,6 +126,7 @@ File: [client\Hud\Hud_init.sqf at line 65](../../../Src/client/Hud/Hud_init.sqf#
 ## hud_combStyle_onCombatUpdate
 
 Type: function
+
 Description: 
 
 
@@ -123,6 +134,7 @@ File: [client\Hud\Hud_init.sqf at line 73](../../../Src/client/Hud/Hud_init.sqf#
 ## hud_combatMode_sync
 
 Type: function
+
 Description: 
 
 
@@ -130,6 +142,7 @@ File: [client\Hud\Hud_init.sqf at line 89](../../../Src/client/Hud/Hud_init.sqf#
 ## hud_specAct_update
 
 Type: function
+
 Description: вызывается при обновлении спец.кнопок.
 
 
@@ -137,6 +150,7 @@ File: [client\Hud\Hud_init.sqf at line 100](../../../Src/client/Hud/Hud_init.sqf
 ## hud_updateTimestamp
 
 Type: function
+
 Description: 
 
 
@@ -144,6 +158,7 @@ File: [client\Hud\Hud_init.sqf at line 122](../../../Src/client/Hud/Hud_init.sqf
 ## hud_hide_reset
 
 Type: function
+
 Description: Восстановить худ
 - Param: _enableLock (optional, default false)
 - Param: _lockProcess (optional, default false)
@@ -152,6 +167,7 @@ File: [client\Hud\Hud_init.sqf at line 127](../../../Src/client/Hud/Hud_init.sqf
 ## hud_recalculateStat
 
 Type: function
+
 Description: 
 - Param: _name
 
@@ -159,6 +175,7 @@ File: [client\Hud\Hud_init.sqf at line 140](../../../Src/client/Hud/Hud_init.sqf
 ## hud_cleanup
 
 Type: function
+
 Description: очистка худа - сброс всех переменных на стандартные значения
 
 
@@ -166,6 +183,7 @@ File: [client\Hud\Hud_init.sqf at line 147](../../../Src/client/Hud/Hud_init.sqf
 ## hud_init
 
 Type: function
+
 Description: 
 
 
@@ -173,6 +191,7 @@ File: [client\Hud\Hud_init.sqf at line 153](../../../Src/client/Hud/Hud_init.sqf
 ## hud_onUpdate
 
 Type: function
+
 Description: 
 
 

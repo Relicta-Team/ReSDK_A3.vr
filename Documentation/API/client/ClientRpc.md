@@ -3,7 +3,8 @@
 ## __rpcmode_client
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -14,6 +15,7 @@ File: [client\ClientRpc\clientRpc.hpp at line 7](../../../Src/client/ClientRpc/c
 ## rpcAdd(name,code)
 
 Type: constant
+
 Description: #endif
 - Param: name
 - Param: code
@@ -26,6 +28,7 @@ File: [client\ClientRpc\clientRpc.hpp at line 13](../../../Src/client/ClientRpc/
 ## rpcAddGlobal(name,code)
 
 Type: constant
+
 Description: 
 - Param: name
 - Param: code
@@ -38,6 +41,7 @@ File: [client\ClientRpc\clientRpc.hpp at line 15](../../../Src/client/ClientRpc/
 ## rpcRemove(name,id)
 
 Type: constant
+
 Description: 
 - Param: name
 - Param: id
@@ -50,6 +54,7 @@ File: [client\ClientRpc\clientRpc.hpp at line 17](../../../Src/client/ClientRpc/
 ## rpcRemoveGlobal(name,id)
 
 Type: constant
+
 Description: 
 - Param: name
 - Param: id
@@ -62,6 +67,7 @@ File: [client\ClientRpc\clientRpc.hpp at line 19](../../../Src/client/ClientRpc/
 ## rpcCall(name,args)
 
 Type: constant
+
 Description: 
 - Param: name
 - Param: args
@@ -74,6 +80,7 @@ File: [client\ClientRpc\clientRpc.hpp at line 21](../../../Src/client/ClientRpc/
 ## rpcSendToServer(name,args)
 
 Type: constant
+
 Description: 
 - Param: name
 - Param: args
@@ -88,6 +95,7 @@ File: [client\ClientRpc\clientRpc.hpp at line 23](../../../Src/client/ClientRpc/
 ## log_client_rpc
 
 Type: constant
+
 Description: 
 
 
@@ -99,7 +107,9 @@ File: [client\ClientRpc\clientrpc_init.sqf at line 8](../../../Src/client/Client
 ## rpc_log(event,args)
 
 Type: constant
+
 > Exists if **log_client_rpc** defined
+
 Description: 
 - Param: event
 - Param: args
@@ -112,7 +122,9 @@ File: [client\ClientRpc\clientrpc_init.sqf at line 19](../../../Src/client/Clien
 ## rpc_simple(data)
 
 Type: constant
+
 > Exists if **log_client_rpc** defined
+
 Description: 
 - Param: data
 
@@ -124,7 +136,9 @@ File: [client\ClientRpc\clientrpc_init.sqf at line 20](../../../Src/client/Clien
 ## rpc_log(event,args)
 
 Type: constant
+
 > Exists if **log_client_rpc** not defined
+
 Description: 
 - Param: event
 - Param: args
@@ -137,6 +151,7 @@ File: [client\ClientRpc\clientrpc_init.sqf at line 22](../../../Src/client/Clien
 ## client_addEvent
 
 Type: function
+
 Description: 
 - Param: _eventName
 - Param: _eventCode
@@ -145,6 +160,7 @@ File: [client\ClientRpc\clientrpc_init.sqf at line 25](../../../Src/client/Clien
 ## client_removeEvent
 
 Type: function
+
 Description: 
 - Param: _eventName
 - Param: _eventId
@@ -153,6 +169,7 @@ File: [client\ClientRpc\clientrpc_init.sqf at line 30](../../../Src/client/Clien
 ## rpc_removeEventGlobal
 
 Type: function
+
 Description: 
 - Param: _eventName
 - Param: _eventId
@@ -161,6 +178,7 @@ File: [client\ClientRpc\clientrpc_init.sqf at line 35](../../../Src/client/Clien
 ## client_callEvent
 
 Type: function
+
 Description: 
 - Param: _eventName
 - Param: _args
@@ -169,6 +187,7 @@ File: [client\ClientRpc\clientrpc_init.sqf at line 40](../../../Src/client/Clien
 ## client_sendToServer
 
 Type: function
+
 Description: 
 - Param: _eventName
 - Param: _eventargs

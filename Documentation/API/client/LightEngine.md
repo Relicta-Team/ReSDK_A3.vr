@@ -3,6 +3,7 @@
 ## usedebuglightrender
 
 Type: constant
+
 Description: 
 
 
@@ -14,6 +15,7 @@ File: [client\LightEngine\LightEngine.h at line 7](../../../Src/client/LightEngi
 ## lightObject
 
 Type: constant
+
 Description: #define usedebuglightrender
 
 
@@ -25,6 +27,7 @@ File: [client\LightEngine\LightEngine.h at line 9](../../../Src/client/LightEngi
 ## sourceObject
 
 Type: constant
+
 Description: 
 
 
@@ -36,6 +39,7 @@ File: [client\LightEngine\LightEngine.h at line 11](../../../Src/client/LightEng
 ## allEmitters
 
 Type: constant
+
 Description: 
 
 
@@ -47,6 +51,7 @@ File: [client\LightEngine\LightEngine.h at line 13](../../../Src/client/LightEng
 ## le_light_max_index
 
 Type: constant
+
 Description: 
 
 
@@ -58,6 +63,7 @@ File: [client\LightEngine\LightEngine.h at line 15](../../../Src/client/LightEng
 ## regLight(type)
 
 Type: constant
+
 Description: 
 - Param: type
 
@@ -71,6 +77,7 @@ File: [client\LightEngine\LightEngine.h at line 17](../../../Src/client/LightEng
 ## endRegLight
 
 Type: constant
+
 Description: 
 
 
@@ -82,6 +89,7 @@ File: [client\LightEngine\LightEngine.h at line 21](../../../Src/client/LightEng
 ## regCustomLight(type,classnamestr)
 
 Type: constant
+
 Description: 
 - Param: type
 - Param: classnamestr
@@ -96,6 +104,7 @@ File: [client\LightEngine\LightEngine.h at line 23](../../../Src/client/LightEng
 ## emitterObject
 
 Type: constant
+
 Description: 
 
 
@@ -107,6 +116,7 @@ File: [client\LightEngine\LightEngine.h at line 27](../../../Src/client/LightEng
 ## regEffect(type)
 
 Type: constant
+
 Description: 
 - Param: type
 
@@ -120,6 +130,7 @@ File: [client\LightEngine\LightEngine.h at line 29](../../../Src/client/LightEng
 ## endRegEffect
 
 Type: constant
+
 Description: 
 
 
@@ -131,6 +142,7 @@ File: [client\LightEngine\LightEngine.h at line 32](../../../Src/client/LightEng
 ## regFireLight(type)
 
 Type: constant
+
 Description: firelight event type def
 - Param: type
 
@@ -142,6 +154,7 @@ File: [client\LightEngine\LightEngine.h at line 35](../../../Src/client/LightEng
 ## endRegFireLight
 
 Type: constant
+
 Description: 
 
 
@@ -153,6 +166,7 @@ File: [client\LightEngine\LightEngine.h at line 37](../../../Src/client/LightEng
 ## initLightObject()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -164,6 +178,7 @@ File: [client\LightEngine\LightEngine.h at line 39](../../../Src/client/LightEng
 ## regVST(type)
 
 Type: constant
+
 Description: visual states functionality
 - Param: type
 
@@ -175,6 +190,7 @@ File: [client\LightEngine\LightEngine.h at line 42](../../../Src/client/LightEng
 ## vstParams
 
 Type: constant
+
 Description: 
 
 
@@ -186,6 +202,7 @@ File: [client\LightEngine\LightEngine.h at line 43](../../../Src/client/LightEng
 ## src
 
 Type: constant
+
 Description: source object who inited vst
 
 
@@ -197,6 +214,7 @@ File: [client\LightEngine\LightEngine.h at line 45](../../../Src/client/LightEng
 ## localPlayer
 
 Type: constant
+
 Description: local player == this
 
 
@@ -208,6 +226,7 @@ File: [client\LightEngine\LightEngine.h at line 48](../../../Src/client/LightEng
 ## VST_COND_CREATE
 
 Type: constant
+
 Description: 
 
 
@@ -219,6 +238,7 @@ File: [client\LightEngine\LightEngine.h at line 49](../../../Src/client/LightEng
 ## VST_COND_DESTR
 
 Type: constant
+
 Description: 
 
 
@@ -230,6 +250,7 @@ File: [client\LightEngine\LightEngine.h at line 50](../../../Src/client/LightEng
 ## vstIsState(state)
 
 Type: constant
+
 Description: 
 - Param: state
 
@@ -241,6 +262,7 @@ File: [client\LightEngine\LightEngine.h at line 51](../../../Src/client/LightEng
 ## VSTCreate
 
 Type: constant
+
 Description: 
 
 
@@ -252,6 +274,7 @@ File: [client\LightEngine\LightEngine.h at line 52](../../../Src/client/LightEng
 ## VSTDestroy
 
 Type: constant
+
 Description: 
 
 
@@ -263,6 +286,7 @@ File: [client\LightEngine\LightEngine.h at line 53](../../../Src/client/LightEng
 ## endRegVST
 
 Type: constant
+
 Description: 
 
 
@@ -274,6 +298,7 @@ File: [client\LightEngine\LightEngine.h at line 55](../../../Src/client/LightEng
 ## vector(x,y,z)
 
 Type: constant
+
 Description: 
 - Param: x
 - Param: y
@@ -287,6 +312,7 @@ File: [client\LightEngine\LightEngine.h at line 57](../../../Src/client/LightEng
 ## initBrightness(val)
 
 Type: constant
+
 Description: 
 - Param: val
 
@@ -298,6 +324,7 @@ File: [client\LightEngine\LightEngine.h at line 59](../../../Src/client/LightEng
 ## initAsRenderer()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -309,6 +336,7 @@ File: [client\LightEngine\LightEngine.h at line 61](../../../Src/client/LightEng
 ## linkLight(light,object,anotherParams)
 
 Type: constant
+
 Description: Сразу делает свет динамическим и рабочим (проблема при отсутствии первого атача к игроку)
 - Param: light
 - Param: object
@@ -322,6 +350,7 @@ File: [client\LightEngine\LightEngine.h at line 63](../../../Src/client/LightEng
 ## linkLightDynamic(src,object,anotParams)
 
 Type: constant
+
 Description: Сразу делает свет динамическим и рабочим (проблема при отсутствии первого атача к игроку)
 - Param: src
 - Param: object
@@ -335,6 +364,7 @@ File: [client\LightEngine\LightEngine.h at line 66](../../../Src/client/LightEng
 ## joinEmitter(link)
 
 Type: constant
+
 Description: 
 - Param: link
 
@@ -346,6 +376,7 @@ File: [client\LightEngine\LightEngine.h at line 69](../../../Src/client/LightEng
 ## update_delay_mainThread
 
 Type: constant
+
 Description: частота обновления основного треда
 
 
@@ -357,6 +388,7 @@ File: [client\LightEngine\LightEngine.h at line 72](../../../Src/client/LightEng
 ## checktime_ondestroysource
 
 Type: constant
+
 Description: частота проверики на необходимость удаления
 
 
@@ -368,6 +400,7 @@ File: [client\LightEngine\LightEngine.h at line 74](../../../Src/client/LightEng
 ## le_firelight_startindex
 
 Type: constant
+
 Description: начальное число индексатора для firelight событий (исключая его)
 
 
@@ -379,6 +412,7 @@ File: [client\LightEngine\LightEngine.h at line 76](../../../Src/client/LightEng
 ## addEventOnDestroySource(listobjects)
 
 Type: constant
+
 Description: 
 - Param: listobjects
 
@@ -392,6 +426,7 @@ File: [client\LightEngine\LightEngine.h at line 78](../../../Src/client/LightEng
 ## __lcfg__null_params__
 
 Type: constant
+
 Description: 
 
 
@@ -403,6 +438,7 @@ File: [client\LightEngine\LightEngine.h at line 82](../../../Src/client/LightEng
 ## addEventOnDestroySourceNoParams()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -414,6 +450,7 @@ File: [client\LightEngine\LightEngine.h at line 83](../../../Src/client/LightEng
 ## stopUpdateIfNull(data)
 
 Type: constant
+
 Description: spec events helper
 - Param: data
 
@@ -425,6 +462,7 @@ File: [client\LightEngine\LightEngine.h at line 86](../../../Src/client/LightEng
 ## isAttachedToMob()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -436,6 +474,7 @@ File: [client\LightEngine\LightEngine.h at line 90](../../../Src/client/LightEng
 ## attachedMobSlot
 
 Type: constant
+
 Description: 
 
 
@@ -447,6 +486,7 @@ File: [client\LightEngine\LightEngine.h at line 91](../../../Src/client/LightEng
 ## glsNull
 
 Type: constant
+
 Description: ////                 ===== OBSOLETE =====
 
 
@@ -458,6 +498,7 @@ File: [client\LightEngine\LightEngine.h at line 100](../../../Src/client/LightEn
 ## getGLSData(_type,_x,_y)
 
 Type: constant
+
 Description: 
 - Param: _type
 - Param: _x
@@ -471,6 +512,7 @@ File: [client\LightEngine\LightEngine.h at line 102](../../../Src/client/LightEn
 ## setLocalGLSData(_type,_x,_y,lastHash)
 
 Type: constant
+
 Description: 
 - Param: _type
 - Param: _x
@@ -485,6 +527,7 @@ File: [client\LightEngine\LightEngine.h at line 103](../../../Src/client/LightEn
 ## getLocalGLSData(_type,_x,_y)
 
 Type: constant
+
 Description: 
 - Param: _type
 - Param: _x
@@ -498,6 +541,7 @@ File: [client\LightEngine\LightEngine.h at line 104](../../../Src/client/LightEn
 ## getOnlyObjects(_data)
 
 Type: constant
+
 Description: 
 - Param: _data
 
@@ -509,6 +553,7 @@ File: [client\LightEngine\LightEngine.h at line 106](../../../Src/client/LightEn
 ## le_shot_startindex
 
 Type: constant
+
 Description: начальное число индексатора для shot событий (исключая его)
 
 
@@ -520,6 +565,7 @@ File: [client\LightEngine\LightEngine.h at line 110](../../../Src/client/LightEn
 ## shotParams
 
 Type: constant
+
 Description: 
 
 
@@ -531,6 +577,7 @@ File: [client\LightEngine\LightEngine.h at line 112](../../../Src/client/LightEn
 ## regShot(type)
 
 Type: constant
+
 Description: 
 - Param: type
 
@@ -542,6 +589,7 @@ File: [client\LightEngine\LightEngine.h at line 114](../../../Src/client/LightEn
 ## makeParticle(namevar)
 
 Type: constant
+
 Description: 
 - Param: namevar
 
@@ -553,6 +601,7 @@ File: [client\LightEngine\LightEngine.h at line 115](../../../Src/client/LightEn
 ## makeLight(namevar)
 
 Type: constant
+
 Description: 
 - Param: namevar
 
@@ -564,6 +613,7 @@ File: [client\LightEngine\LightEngine.h at line 116](../../../Src/client/LightEn
 ## disposeAllAfterTime(time)
 
 Type: constant
+
 Description: 
 - Param: time
 
@@ -575,6 +625,7 @@ File: [client\LightEngine\LightEngine.h at line 118](../../../Src/client/LightEn
 ## linkObject(light,object,anotherParams)
 
 Type: constant
+
 Description: 
 - Param: light
 - Param: object
@@ -588,6 +639,7 @@ File: [client\LightEngine\LightEngine.h at line 120](../../../Src/client/LightEn
 ## endRegShot
 
 Type: constant
+
 Description: 
 
 
@@ -599,6 +651,7 @@ File: [client\LightEngine\LightEngine.h at line 122](../../../Src/client/LightEn
 ## regScriptEmit(type)
 
 Type: constant
+
 Description: scripted emitters
 - Param: type
 
@@ -616,6 +669,7 @@ File: [client\LightEngine\LightEngine.h at line 130](../../../Src/client/LightEn
 ## endScriptEmit
 
 Type: constant
+
 Description: 
 
 
@@ -627,7 +681,9 @@ File: [client\LightEngine\LightEngine.h at line 138](../../../Src/client/LightEn
 ## _emitAlias(strval)
 
 Type: constant
+
 > Exists if **EDITOR** defined
+
 Description: 
 - Param: strval
 
@@ -639,7 +695,9 @@ File: [client\LightEngine\LightEngine.h at line 142](../../../Src/client/LightEn
 ## _emitAlias(strval)
 
 Type: constant
+
 > Exists if **EDITOR** not defined
+
 Description: 
 - Param: strval
 
@@ -651,6 +709,7 @@ File: [client\LightEngine\LightEngine.h at line 144](../../../Src/client/LightEn
 ## type
 
 Type: function
+
 Description: 
 - Param: sourceObject
 
@@ -660,6 +719,7 @@ File: [client\LightEngine\LightEngine.h at line 130](../../../Src/client/LightEn
 ## LIGHT_FIRE
 
 Type: constant
+
 Description: !!!Значение нумератора не должно быть меньше нуля!!!
 
 
@@ -671,6 +731,7 @@ File: [client\LightEngine\LightEngine.hpp at line 8](../../../Src/client/LightEn
 ## LIGHT_CAMPFIRE
 
 Type: constant
+
 Description: 
 
 
@@ -682,6 +743,7 @@ File: [client\LightEngine\LightEngine.hpp at line 9](../../../Src/client/LightEn
 ## LIGHT_SIGARETTE
 
 Type: constant
+
 Description: 
 
 
@@ -693,6 +755,7 @@ File: [client\LightEngine\LightEngine.hpp at line 10](../../../Src/client/LightE
 ## LIGHT_STREETLAMP
 
 Type: constant
+
 Description: 
 
 
@@ -704,6 +767,7 @@ File: [client\LightEngine\LightEngine.hpp at line 11](../../../Src/client/LightE
 ## LIGHT_FLASHLIGHT
 
 Type: constant
+
 Description: 
 
 
@@ -715,6 +779,7 @@ File: [client\LightEngine\LightEngine.hpp at line 12](../../../Src/client/LightE
 ## LIGHT_CAMPFIRE_BIG
 
 Type: constant
+
 Description: 
 
 
@@ -726,6 +791,7 @@ File: [client\LightEngine\LightEngine.hpp at line 13](../../../Src/client/LightE
 ## LIGHT_SIGN_BAR
 
 Type: constant
+
 Description: 
 
 
@@ -737,6 +803,7 @@ File: [client\LightEngine\LightEngine.hpp at line 14](../../../Src/client/LightE
 ## LIGHT_SIGN_MEDICAL
 
 Type: constant
+
 Description: 
 
 
@@ -748,6 +815,7 @@ File: [client\LightEngine\LightEngine.hpp at line 15](../../../Src/client/LightE
 ## LIGHT_LAMP_CEILING
 
 Type: constant
+
 Description: 
 
 
@@ -759,6 +827,7 @@ File: [client\LightEngine\LightEngine.hpp at line 16](../../../Src/client/LightE
 ## LIGHT_LAMP_WALL
 
 Type: constant
+
 Description: 
 
 
@@ -770,6 +839,7 @@ File: [client\LightEngine\LightEngine.hpp at line 17](../../../Src/client/LightE
 ## LIGHT_LAMP_KEROSENE
 
 Type: constant
+
 Description: 
 
 
@@ -781,6 +851,7 @@ File: [client\LightEngine\LightEngine.hpp at line 18](../../../Src/client/LightE
 ## LIGHT_CANDLE
 
 Type: constant
+
 Description: 
 
 
@@ -792,6 +863,7 @@ File: [client\LightEngine\LightEngine.hpp at line 19](../../../Src/client/LightE
 ## LIGHT_LAMP_CEILING_REDLIGHT
 
 Type: constant
+
 Description: 
 
 
@@ -803,6 +875,7 @@ File: [client\LightEngine\LightEngine.hpp at line 20](../../../Src/client/LightE
 ## LIGHT_BAKE
 
 Type: constant
+
 Description: 
 
 
@@ -814,6 +887,7 @@ File: [client\LightEngine\LightEngine.hpp at line 21](../../../Src/client/LightE
 ## LIGHT_BAKESTOVE
 
 Type: constant
+
 Description: 
 
 
@@ -825,6 +899,7 @@ File: [client\LightEngine\LightEngine.hpp at line 22](../../../Src/client/LightE
 ## LIGHT_MATCH
 
 Type: constant
+
 Description: 
 
 
@@ -836,6 +911,7 @@ File: [client\LightEngine\LightEngine.hpp at line 23](../../../Src/client/LightE
 ## LIGHT_AREA_EATER_NIGHTVISION
 
 Type: constant
+
 Description: area light configs (starts after 500)
 
 
@@ -847,6 +923,7 @@ File: [client\LightEngine\LightEngine.hpp at line 25](../../../Src/client/LightE
 ## LIGHT_AREA_GHOST_NIGHTVISION
 
 Type: constant
+
 Description: 
 
 
@@ -858,6 +935,7 @@ File: [client\LightEngine\LightEngine.hpp at line 26](../../../Src/client/LightE
 ## LIGHT_TRAP_HIDDEN_EFFECT
 
 Type: constant
+
 Description: trap effect
 
 
@@ -869,6 +947,7 @@ File: [client\LightEngine\LightEngine.hpp at line 28](../../../Src/client/LightE
 ## LIGHT_LAMP_CEILING_OLD
 
 Type: constant
+
 Description: 
 
 
@@ -880,6 +959,7 @@ File: [client\LightEngine\LightEngine.hpp at line 30](../../../Src/client/LightE
 ## LIGHT_LAMP_WALL_OLD
 
 Type: constant
+
 Description: 
 
 
@@ -891,6 +971,7 @@ File: [client\LightEngine\LightEngine.hpp at line 31](../../../Src/client/LightE
 ## EFF_DUST_PARTICLES
 
 Type: constant
+
 Description: effects start after 2000
 
 
@@ -902,6 +983,7 @@ File: [client\LightEngine\LightEngine.hpp at line 34](../../../Src/client/LightE
 ## EFF_DUST_CLOUDS
 
 Type: constant
+
 Description: 
 
 
@@ -913,6 +995,7 @@ File: [client\LightEngine\LightEngine.hpp at line 35](../../../Src/client/LightE
 ## EFF_GREEN_DUST
 
 Type: constant
+
 Description: 
 
 
@@ -924,6 +1007,7 @@ File: [client\LightEngine\LightEngine.hpp at line 36](../../../Src/client/LightE
 ## EFF_ROTTEN_HUMAN
 
 Type: constant
+
 Description: 
 
 
@@ -935,6 +1019,7 @@ File: [client\LightEngine\LightEngine.hpp at line 37](../../../Src/client/LightE
 ## FLIGHT_TEST
 
 Type: constant
+
 Description: firelghts start after 5000 (le_firelight_startindex)
 
 
@@ -946,6 +1031,7 @@ File: [client\LightEngine\LightEngine.hpp at line 43](../../../Src/client/LightE
 ## SHOT_MEATSPLAT
 
 Type: constant
+
 Description: shotable effects start only after 10000 (le_shot_startindex)
 
 
@@ -957,6 +1043,7 @@ File: [client\LightEngine\LightEngine.hpp at line 46](../../../Src/client/LightE
 ## SHOT_DESTROYLIMB
 
 Type: constant
+
 Description: 
 
 
@@ -968,6 +1055,7 @@ File: [client\LightEngine\LightEngine.hpp at line 47](../../../Src/client/LightE
 ## SHOT_BULLET_PISTOL
 
 Type: constant
+
 Description: 
 
 
@@ -979,6 +1067,7 @@ File: [client\LightEngine\LightEngine.hpp at line 48](../../../Src/client/LightE
 ## SHOT_BULLET_SHOTGUN
 
 Type: constant
+
 Description: 
 
 
@@ -990,6 +1079,7 @@ File: [client\LightEngine\LightEngine.hpp at line 49](../../../Src/client/LightE
 ## SHOT_BULLET_SHOTRIFLE
 
 Type: constant
+
 Description: 
 
 
@@ -1001,6 +1091,7 @@ File: [client\LightEngine\LightEngine.hpp at line 50](../../../Src/client/LightE
 ## VST_EATER_NIGHTVISION
 
 Type: constant
+
 Description: visual states start only after 20000
 
 
@@ -1012,6 +1103,7 @@ File: [client\LightEngine\LightEngine.hpp at line 53](../../../Src/client/LightE
 ## VST_HUMAN_STEALTH
 
 Type: constant
+
 Description: 
 
 
@@ -1023,6 +1115,7 @@ File: [client\LightEngine\LightEngine.hpp at line 54](../../../Src/client/LightE
 ## VST_CLOTH_BREASTPLATE
 
 Type: constant
+
 Description: 
 
 
@@ -1034,6 +1127,7 @@ File: [client\LightEngine\LightEngine.hpp at line 55](../../../Src/client/LightE
 ## VST_CLOTH_CERAMIC
 
 Type: constant
+
 Description: 
 
 
@@ -1045,6 +1139,7 @@ File: [client\LightEngine\LightEngine.hpp at line 56](../../../Src/client/LightE
 ## VST_CLOTH_STRONGARMOR
 
 Type: constant
+
 Description: 
 
 
@@ -1056,6 +1151,7 @@ File: [client\LightEngine\LightEngine.hpp at line 57](../../../Src/client/LightE
 ## VST_CLOTH_METALARMOR
 
 Type: constant
+
 Description: 
 
 
@@ -1067,6 +1163,7 @@ File: [client\LightEngine\LightEngine.hpp at line 58](../../../Src/client/LightE
 ## VST_CLOTH_FLEXIBLEARMOR
 
 Type: constant
+
 Description: 
 
 
@@ -1078,6 +1175,7 @@ File: [client\LightEngine\LightEngine.hpp at line 59](../../../Src/client/LightE
 ## VST_GHOST_EFFECT
 
 Type: constant
+
 Description: 
 
 
@@ -1089,6 +1187,7 @@ File: [client\LightEngine\LightEngine.hpp at line 60](../../../Src/client/LightE
 ## VST_ATTACHED_OBJECTS
 
 Type: constant
+
 Description: 
 
 
@@ -1102,6 +1201,7 @@ File: [client\LightEngine\LightEngine.hpp at line 61](../../../Src/client/LightE
 ## createArrow()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -1113,6 +1213,7 @@ File: [client\LightEngine\LightEngine.sqf at line 434](../../../Src/client/Light
 ## le_init
 
 Type: function
+
 Description: 
 
 
@@ -1120,6 +1221,7 @@ File: [client\LightEngine\LightEngine.sqf at line 42](../../../Src/client/LightE
 ## le_loadLight
 
 Type: function
+
 Description: загружает источник освещения или частиц
 - Param: _type (optional, default -1)
 - Param: _src
@@ -1128,6 +1230,7 @@ File: [client\LightEngine\LightEngine.sqf at line 62](../../../Src/client/LightE
 ## le_doFireLight
 
 Type: function
+
 Description: автоматическое событие освещения, эффектов или звука
 - Param: _type (optional, default -1)
 - Param: _src
@@ -1136,6 +1239,7 @@ File: [client\LightEngine\LightEngine.sqf at line 95](../../../Src/client/LightE
 ## le_doShot
 
 Type: function
+
 Description: 
 - Param: _type
 - Param: _src
@@ -1145,6 +1249,7 @@ File: [client\LightEngine\LightEngine.sqf at line 111](../../../Src/client/Light
 ## le_unloadLight
 
 Type: function
+
 Description: выгружает источник освещения
 - Param: _obj
 
@@ -1152,6 +1257,7 @@ File: [client\LightEngine\LightEngine.sqf at line 128](../../../Src/client/Light
 ## le_isLoadedLight
 
 Type: function
+
 Description: проверяет висит ли на объекте источник света
 - Param: _obj
 
@@ -1159,6 +1265,7 @@ File: [client\LightEngine\LightEngine.sqf at line 156](../../../Src/client/Light
 ## le_isLightConfig
 
 Type: function
+
 Description: 
 
 
@@ -1166,6 +1273,7 @@ File: [client\LightEngine\LightEngine.sqf at line 162](../../../Src/client/Light
 ## le_isShotConfig
 
 Type: function
+
 Description: 
 
 
@@ -1173,6 +1281,7 @@ File: [client\LightEngine\LightEngine.sqf at line 166](../../../Src/client/Light
 ## le_reloadLightSystem
 
 Type: function
+
 Description: 
 
 
@@ -1180,6 +1289,7 @@ File: [client\LightEngine\LightEngine.sqf at line 171](../../../Src/client/Light
 ## le_debug_canViewLight
 
 Type: function
+
 Description: 
 - Param: _src
 - Param: _isLightObject
@@ -1188,6 +1298,7 @@ File: [client\LightEngine\LightEngine.sqf at line 204](../../../Src/client/Light
 ## le_debug_lightRender
 
 Type: function
+
 Description: 
 
 
@@ -1195,6 +1306,7 @@ File: [client\LightEngine\LightEngine.sqf at line 305](../../../Src/client/Light
 ## le_debug_getNotEmptyChunks
 
 Type: function
+
 Description: 
 - Param: _categs
 - Param: _doOnlyObjs (optional, default true)
@@ -1203,6 +1315,7 @@ File: [client\LightEngine\LightEngine.sqf at line 352](../../../Src/client/Light
 ## le_debug_getlightprops
 
 Type: function
+
 Description: 
 - Param: _vehicle
 - Param: _light
@@ -1211,6 +1324,7 @@ File: [client\LightEngine\LightEngine.sqf at line 374](../../../Src/client/Light
 ## le_debug_getlight
 
 Type: function
+
 Description: 
 
 
@@ -1218,6 +1332,7 @@ File: [client\LightEngine\LightEngine.sqf at line 388](../../../Src/client/Light
 ## le_debug_calc
 
 Type: function
+
 Description: 
 - Param: _unit
 - Param: _lightSource
@@ -1228,6 +1343,7 @@ File: [client\LightEngine\LightEngine.sqf at line 398](../../../Src/client/Light
 ## le_debug_getNearObjects
 
 Type: function
+
 Description: 
 - Param: _xPos
 - Param: _yPos
@@ -1236,6 +1352,7 @@ File: [client\LightEngine\LightEngine.sqf at line 432](../../../Src/client/Light
 ## le_getLocalObjectsData
 
 Type: function
+
 Description: отправляет запрос на сервер о том, что ему нужна информация о созданных объектах типа свет
 - Param: _chunk
 - Param: _chunkType
@@ -1246,6 +1363,7 @@ File: [client\LightEngine\LightEngine.sqf at line 464](../../../Src/client/Light
 ## loadLightOnObject(_x)
 
 Type: constant
+
 Description: 
 - Param: _x
 
@@ -1257,6 +1375,7 @@ File: [client\LightEngine\LightEngine_mainThread.sqf at line 47](../../../Src/cl
 ## unloadLightOnObject(_x)
 
 Type: constant
+
 Description: 
 - Param: _x
 
@@ -1268,6 +1387,7 @@ File: [client\LightEngine\LightEngine_mainThread.sqf at line 48](../../../Src/cl
 ## __chunkToGLSType()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -1279,6 +1399,7 @@ File: [client\LightEngine\LightEngine_mainThread.sqf at line 50](../../../Src/cl
 ## __compareHashesStr()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -1290,6 +1411,7 @@ File: [client\LightEngine\LightEngine_mainThread.sqf at line 51](../../../Src/cl
 ## use_trace_onloadlight
 
 Type: constant
+
 Description: 
 
 
@@ -1301,6 +1423,7 @@ File: [client\LightEngine\LightEngine_mainThread.sqf at line 53](../../../Src/cl
 ## le_onUpdate
 
 Type: function
+
 Description: основной поток обновления
 
 
@@ -1308,6 +1431,7 @@ File: [client\LightEngine\LightEngine_mainThread.sqf at line 11](../../../Src/cl
 ## le_collectAroundChunks
 
 Type: function
+
 Description: 
 - Param: _loadList
 - Param: _chunk
@@ -1319,6 +1443,7 @@ File: [client\LightEngine\LightEngine_mainThread.sqf at line 110](../../../Src/c
 ## LIGHT_RENDER_PRINT_ERROR_IF_NOT_INIT_ON_CUSTOM
 
 Type: constant
+
 Description: так как на конфиг-объектах света нельзя изменять яркость (не скриптовый свет)
 
 
@@ -1330,6 +1455,7 @@ File: [client\LightEngine\LightRender.sqf at line 8](../../../Src/client/LightEn
 ## NEW_ALGORITHM_LIGHT_RENDERING
 
 Type: constant
+
 Description: Новый алгоритм затухания и появления света. С первой легаси версии является основным способом рендеринга света
 
 
@@ -1341,6 +1467,7 @@ File: [client\LightEngine\LightRender.sqf at line 11](../../../Src/client/LightE
 ## BRIGHT_CHANGE_VALUE_ON_FRAME
 
 Type: constant
+
 Description: как я понял расчёт по кадрам
 
 
@@ -1352,6 +1479,7 @@ File: [client\LightEngine\LightRender.sqf at line 14](../../../Src/client/LightE
 ## DRAW_UPPER_RENDER_LINES
 
 Type: constant
+
 Description: 
 
 
@@ -1363,6 +1491,7 @@ File: [client\LightEngine\LightRender.sqf at line 16](../../../Src/client/LightE
 ## LE_RENDER_DISTANCE_ONCHECK
 
 Type: constant
+
 Description: дистанция отрисовки света если локальный игрок не смотрит на него
 
 
@@ -1374,6 +1503,7 @@ File: [client\LightEngine\LightRender.sqf at line 19](../../../Src/client/LightE
 ## distRad
 
 Type: constant
+
 Description: 
 
 
@@ -1385,6 +1515,7 @@ File: [client\LightEngine\LightRender.sqf at line 48](../../../Src/client/LightE
 ## upperMax
 
 Type: constant
+
 Description: 
 
 
@@ -1396,6 +1527,7 @@ File: [client\LightEngine\LightRender.sqf at line 49](../../../Src/client/LightE
 ## inline_canSee(ob)
 
 Type: constant
+
 Description: 
 - Param: ob
 
@@ -1407,6 +1539,7 @@ File: [client\LightEngine\LightRender.sqf at line 123](../../../Src/client/Light
 ## __getrender(v,i)
 
 Type: constant
+
 Description: 
 - Param: v
 - Param: i
@@ -1419,6 +1552,7 @@ File: [client\LightEngine\LightRender.sqf at line 116](../../../Src/client/Light
 ## constbias
 
 Type: constant
+
 Description: lastpos_cached = _npos;
 
 
@@ -1430,6 +1564,7 @@ File: [client\LightEngine\LightRender.sqf at line 150](../../../Src/client/Light
 ## gvar(obj,val)
 
 Type: constant
+
 Description: _eyeZ = eyepos player select 2;
 - Param: obj
 - Param: val
@@ -1442,6 +1577,7 @@ File: [client\LightEngine\LightRender.sqf at line 159](../../../Src/client/Light
 ## gvardef(obj,val,def)
 
 Type: constant
+
 Description: 
 - Param: obj
 - Param: val
@@ -1455,6 +1591,7 @@ File: [client\LightEngine\LightRender.sqf at line 160](../../../Src/client/Light
 ## svar(obj,var,val)
 
 Type: constant
+
 Description: 
 - Param: obj
 - Param: var
@@ -1468,6 +1605,7 @@ File: [client\LightEngine\LightRender.sqf at line 161](../../../Src/client/Light
 ## timetofadelight
 
 Type: constant
+
 Description: 
 
 
@@ -1479,6 +1617,7 @@ File: [client\LightEngine\LightRender.sqf at line 162](../../../Src/client/Light
 ## le_initRenderer
 
 Type: function
+
 Description: 
 - Param: _obj
 
@@ -1486,6 +1625,7 @@ File: [client\LightEngine\LightRender.sqf at line 30](../../../Src/client/LightE
 ## le_render_findUpSide
 
 Type: function
+
 Description: 
 
 
@@ -1493,6 +1633,7 @@ File: [client\LightEngine\LightRender.sqf at line 45](../../../Src/client/LightE
 ## le_addTransitionState
 
 Type: function
+
 Description: if _mode then do render else hide
 - Param: _src
 - Param: _mode
@@ -1501,6 +1642,7 @@ File: [client\LightEngine\LightRender.sqf at line 78](../../../Src/client/LightE
 ## le_onupdrender
 
 Type: function
+
 Description: 
 
 
@@ -1508,6 +1650,7 @@ File: [client\LightEngine\LightRender.sqf at line 105](../../../Src/client/Light
 ## le_onchangeview
 
 Type: function
+
 Description: 
 - Param: _src
 - Param: _lt
@@ -1521,7 +1664,8 @@ File: [client\LightEngine\LightRender.sqf at line 258](../../../Src/client/Light
 ## SLIGHT_MAGICSTORM_DEBUG
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -1532,6 +1676,7 @@ File: [client\LightEngine\ScriptedEffects.hpp at line 6](../../../Src/client/Lig
 ## SLIGHT_SET123_DEBUG
 
 Type: constant
+
 Description: 
 
 
@@ -1543,6 +1688,7 @@ File: [client\LightEngine\ScriptedEffects.hpp at line 7](../../../Src/client/Lig
 ## SLIGHT_TEMPLATE_DIRECTLIGHT
 
 Type: constant
+
 Description: 
 
 
@@ -1554,6 +1700,7 @@ File: [client\LightEngine\ScriptedEffects.hpp at line 8](../../../Src/client/Lig
 ## SLIGHT_TEMPLATE_POINTLIGHT
 
 Type: constant
+
 Description: 
 
 
@@ -1567,6 +1714,7 @@ File: [client\LightEngine\ScriptedEffects.hpp at line 9](../../../Src/client/Lig
 ## le_se_handleConfig
 
 Type: function
+
 Description: Функция-обработчик скриптового освещения (для клиента)
 
 
@@ -1574,6 +1722,7 @@ File: [client\LightEngine\ScriptedEffects.sqf at line 35](../../../Src/client/Li
 ## le_se_errorHandler
 
 Type: function
+
 Description: 
 
 
@@ -1581,6 +1730,7 @@ File: [client\LightEngine\ScriptedEffects.sqf at line 114](../../../Src/client/L
 ## le_se_intenral_handleVarInit
 
 Type: function
+
 Description: 
 
 
@@ -1588,6 +1738,7 @@ File: [client\LightEngine\ScriptedEffects.sqf at line 118](../../../Src/client/L
 ## le_se_doSorting
 
 Type: function
+
 Description: Спасибо Богемия...
 
 
@@ -1597,6 +1748,7 @@ File: [client\LightEngine\ScriptedEffects.sqf at line 135](../../../Src/client/L
 ## VAR_FULL_PREFIX__VST_PRIVATE
 
 Type: constant
+
 Description: vst varmap manager
 
 
@@ -1608,6 +1760,7 @@ File: [client\LightEngine\VisualStatesConfigs.sqf at line 77](../../../Src/clien
 ## le_vst_create
 
 Type: function
+
 Description: initialize vst
 - Param: _type
 - Param: _src
@@ -1617,6 +1770,7 @@ File: [client\LightEngine\VisualStatesConfigs.sqf at line 7](../../../Src/client
 ## le_isVSTConfig
 
 Type: function
+
 Description: 
 
 
@@ -1624,6 +1778,7 @@ File: [client\LightEngine\VisualStatesConfigs.sqf at line 37](../../../Src/clien
 ## le_vst_remove
 
 Type: function
+
 Description: remove vst
 - Param: _type
 - Param: _src
@@ -1633,6 +1788,7 @@ File: [client\LightEngine\VisualStatesConfigs.sqf at line 40](../../../Src/clien
 ## le_vst_createDummyObj
 
 Type: function
+
 Description: 
 - Param: _model (optional, default "Sign_Sphere10cm_F")
 - Param: _doHide (optional, default true)
@@ -1642,6 +1798,7 @@ File: [client\LightEngine\VisualStatesConfigs.sqf at line 63](../../../Src/clien
 ## le_vst_regVar
 
 Type: function
+
 Description: 
 - Param: _obj
 - Param: _var
@@ -1651,6 +1808,7 @@ File: [client\LightEngine\VisualStatesConfigs.sqf at line 78](../../../Src/clien
 ## le_vst_hasVar
 
 Type: function
+
 Description: 
 - Param: _obj
 - Param: _var
@@ -1659,6 +1817,7 @@ File: [client\LightEngine\VisualStatesConfigs.sqf at line 82](../../../Src/clien
 ## le_vst_hasVarExt
 
 Type: function
+
 Description: 
 - Param: _obj
 - Param: _var
@@ -1668,6 +1827,7 @@ File: [client\LightEngine\VisualStatesConfigs.sqf at line 85](../../../Src/clien
 ## le_vst_getVar
 
 Type: function
+
 Description: 
 - Param: _obj
 - Param: _var
@@ -1676,6 +1836,7 @@ File: [client\LightEngine\VisualStatesConfigs.sqf at line 90](../../../Src/clien
 ## le_vst_getVarExt
 
 Type: function
+
 Description: 
 - Param: _obj
 - Param: _var
@@ -1685,6 +1846,7 @@ File: [client\LightEngine\VisualStatesConfigs.sqf at line 93](../../../Src/clien
 ## le_vst_remVar
 
 Type: function
+
 Description: 
 - Param: _obj
 - Param: _var
@@ -1695,6 +1857,7 @@ File: [client\LightEngine\VisualStatesConfigs.sqf at line 98](../../../Src/clien
 ## __event
 
 Type: constant
+
 Description: Blinking light
 
 
@@ -1709,6 +1872,7 @@ File: [client\LightEngine\LightConfigs\Natural.sqf at line 603](../../../Src/cli
 ## TORCH_SOUND_DELAY
 
 Type: constant
+
 Description: 
 
 
@@ -1720,6 +1884,7 @@ File: [client\LightEngine\LightConfigs\Natural.sqf at line 610](../../../Src/cli
 ## CAMPFIRE_SOUND_DELAY
 
 Type: constant
+
 Description: 
 
 
@@ -1731,6 +1896,7 @@ File: [client\LightEngine\LightConfigs\Natural.sqf at line 550](../../../Src/cli
 ## light_min_brightness
 
 Type: constant
+
 Description: [false,0,10,4.34,[0.013,0.001,0],0,[0,0,0],[0,50,3,700,4,1]]
 
 
@@ -1742,6 +1908,7 @@ File: [client\LightEngine\LightConfigs\Natural.sqf at line 256](../../../Src/cli
 ## light_max_brightness
 
 Type: constant
+
 Description: 
 
 
@@ -1755,6 +1922,7 @@ File: [client\LightEngine\LightConfigs\Natural.sqf at line 257](../../../Src/cli
 ## stdLink(x,y,z)
 
 Type: constant
+
 Description: #define stdLink() 	linkLight(emitterObject,player,vector(0,0,0)); linkLight(emitterObject,sourceObject,vector(0,0,0))
 - Param: x
 - Param: y
@@ -1770,6 +1938,7 @@ File: [client\LightEngine\ParticleConfigs\WorldEffects.sqf at line 8](../../../S
 ## SHOT_BULLET_PISTOL_TIMEOUT
 
 Type: constant
+
 Description: 
 
 
@@ -1781,6 +1950,7 @@ File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 50](../../../Src/c
 ## SHOT_BULLET_SHOTGUN_TIMEOUT
 
 Type: constant
+
 Description: 
 
 
@@ -1792,6 +1962,7 @@ File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 91](../../../Src/c
 ## SHOT_BULLET_RIFLE_TIMEOUT
 
 Type: constant
+
 Description: 
 
 
@@ -1803,7 +1974,8 @@ File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 110](../../../Src/
 ## le_internal_shot_bullet_loadLight
 
 Type: function
-Description: ======================================================
+
+Description: 
 - Param: _intensity
 - Param: _timeout
 
@@ -1811,6 +1983,7 @@ File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 7](../../../Src/cl
 ## le_internal_shot_bullet_getFactPos
 
 Type: function
+
 Description: 
 - Param: _addY (optional, default 0)
 

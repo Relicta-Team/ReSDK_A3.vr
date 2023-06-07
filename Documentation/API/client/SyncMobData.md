@@ -3,6 +3,7 @@
 ## smd_update_delay
 
 Type: constant
+
 Description: частота обновления потока
 
 
@@ -14,6 +15,7 @@ File: [client\SyncMobData\smd.h at line 8](../../../Src/client/SyncMobData/smd.h
 ## smd_local_prefix
 
 Type: constant
+
 Description: префикс для локальной переменной на мобе, необходимой для сранвнеия значений
 
 
@@ -27,6 +29,7 @@ File: [client\SyncMobData\smd.h at line 11](../../../Src/client/SyncMobData/smd.
 ## VISIBILITY_MODE_DEFAULT
 
 Type: constant
+
 Description: TODO replace to header
 
 
@@ -38,6 +41,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 545](../../../Src/client/SyncMobD
 ## VISIBILITY_MODE_GHOST
 
 Type: constant
+
 Description: 
 
 
@@ -49,6 +53,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 546](../../../Src/client/SyncMobD
 ## VISIBILITY_MODE_STEALTH
 
 Type: constant
+
 Description: 
 
 
@@ -60,6 +65,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 547](../../../Src/client/SyncMobD
 ## VISIBILITY_MODE_ADMIN
 
 Type: constant
+
 Description: 
 
 
@@ -71,6 +77,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 548](../../../Src/client/SyncMobD
 ## VISIBILITY_MODE_CUSTOM
 
 Type: constant
+
 Description: 
 
 
@@ -82,6 +89,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 549](../../../Src/client/SyncMobD
 ## smd_isProcessed
 
 Type: function
+
 Description: 
 
 
@@ -89,6 +97,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 61](../../../Src/client/SyncMobDa
 ## smd_startUpdate
 
 Type: function
+
 Description: 
 
 
@@ -96,6 +105,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 62](../../../Src/client/SyncMobDa
 ## smd_stopUpdate
 
 Type: function
+
 Description: 
 
 
@@ -103,6 +113,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 74](../../../Src/client/SyncMobDa
 ## smd_unloadVST
 
 Type: function
+
 Description: выгрузка визуальных эффектов с привязкой к старому локальному игроку
 - Param: _prevPlayer
 
@@ -110,6 +121,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 97](../../../Src/client/SyncMobDa
 ## smd_onUpdate
 
 Type: function
+
 Description: 
 
 
@@ -117,6 +129,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 106](../../../Src/client/SyncMobD
 ## smd_syncVar
 
 Type: function
+
 Description: Выполняет принудительную синхрозинацию переменной по её названию или названию функции
 - Param: _mob
 - Param: _varName
@@ -126,6 +139,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 117](../../../Src/client/SyncMobD
 ## smd_onUpdateSetting
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _varName
@@ -135,6 +149,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 131](../../../Src/client/SyncMobD
 ## smd_onChangeFace
 
 Type: function
+
 Description: событие смены лица
 - Param: _mob
 - Param: _ctx
@@ -143,6 +158,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 144](../../../Src/client/SyncMobD
 ## smd_onChangeFaceAnim
 
 Type: function
+
 Description: Лицевая анимация
 - Param: _mob
 - Param: _ctx
@@ -151,6 +167,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 170](../../../Src/client/SyncMobD
 ## smd_onChangeBodyParts
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _ctx
@@ -159,6 +176,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 176](../../../Src/client/SyncMobD
 ## smd_onChangeCustomAnim
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _ctx
@@ -167,6 +185,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 197](../../../Src/client/SyncMobD
 ## smd_onChangeCombat
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _ctx
@@ -175,6 +194,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 207](../../../Src/client/SyncMobD
 ## smd_onAttackOrDamage
 
 Type: function
+
 Description: smd_attdam
 - Param: _mob
 - Param: _ctx
@@ -183,6 +203,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 221](../../../Src/client/SyncMobD
 ## smd_setSlotDataProcessor
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _mode
@@ -191,6 +212,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 360](../../../Src/client/SyncMobD
 ## smd_internal_deleteAttachments_rec
 
 Type: function
+
 Description: 
 
 
@@ -198,6 +220,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 394](../../../Src/client/SyncMobD
 ## smd_onChangeSlotData
 
 Type: function
+
 Description: событие смены предмета в слоте
 - Param: _mob
 - Param: _ctx
@@ -206,6 +229,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 402](../../../Src/client/SyncMobD
 ## smd_isSMDObjectInSlot
 
 Type: function
+
 Description: 
 
 
@@ -213,6 +237,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 507](../../../Src/client/SyncMobD
 ## smd_onStun
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _ctx
@@ -221,6 +246,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 511](../../../Src/client/SyncMobD
 ## smd_isStunned
 
 Type: function
+
 Description: проверяет застанен ли персонаж
 
 
@@ -228,6 +254,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 515](../../../Src/client/SyncMobD
 ## smd_onGrabbed
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _ctx
@@ -236,6 +263,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 518](../../../Src/client/SyncMobD
 ## smd_onVisiblility
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _ctx
@@ -244,6 +272,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 557](../../../Src/client/SyncMobD
 ## smd_onVisualStates
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _ctx
@@ -252,6 +281,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 571](../../../Src/client/SyncMobD
 ## smd_hasVisualState
 
 Type: function
+
 Description: check if unit have visual state [player,VST_HUMAN_STEALTH] call smd_hasVisualState;
 - Param: _mob
 - Param: _state
@@ -260,6 +290,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 594](../../../Src/client/SyncMobD
 ## smd_getObjectInSlot
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _slot
@@ -268,6 +299,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 602](../../../Src/client/SyncMobD
 ## smd_getRedirectOnTwoHanded
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _slot
@@ -276,6 +308,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 610](../../../Src/client/SyncMobD
 ## smd_reloadMobsLighting
 
 Type: function
+
 Description: 
 
 
@@ -283,6 +316,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 617](../../../Src/client/SyncMobD
 ## smd_onChatMessage
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _ctx
@@ -291,6 +325,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 640](../../../Src/client/SyncMobD
 ## smd_onVoiceBlobInit
 
 Type: function
+
 Description: ["_voiceType","_basePitch","_baseSpeed"]
 - Param: _mob
 - Param: _ctx
@@ -299,6 +334,7 @@ File: [client\SyncMobData\SMD_init.sqf at line 675](../../../Src/client/SyncMobD
 ## smd_onIsPrintingSay
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _ctx

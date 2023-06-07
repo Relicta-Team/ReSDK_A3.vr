@@ -3,7 +3,8 @@
 ## theme(name)
 
 Type: constant
-Description: ======================================================
+
+Description: 
 - Param: name
 
 Replaced value:
@@ -14,6 +15,7 @@ File: [client\ColorThemes\ColorThemes.h at line 8](../../../Src/client/ColorThem
 ## var(name,val)
 
 Type: constant
+
 Description: 
 - Param: name
 - Param: val
@@ -26,6 +28,7 @@ File: [client\ColorThemes\ColorThemes.h at line 9](../../../Src/client/ColorThem
 ## copyFrom(__theme,key__)
 
 Type: constant
+
 Description: Копирование параметров
 - Param: __theme
 - Param: key__
@@ -38,6 +41,7 @@ File: [client\ColorThemes\ColorThemes.h at line 12](../../../Src/client/ColorThe
 ## copy(key__)
 
 Type: constant
+
 Description: Копирование параметров
 - Param: key__
 
@@ -49,6 +53,7 @@ File: [client\ColorThemes\ColorThemes.h at line 12](../../../Src/client/ColorThe
 ## fromHTML(val)
 
 Type: constant
+
 Description: 
 - Param: val
 
@@ -60,6 +65,7 @@ File: [client\ColorThemes\ColorThemes.h at line 16](../../../Src/client/ColorThe
 ## html(val)
 
 Type: constant
+
 Description: 
 - Param: val
 
@@ -73,6 +79,7 @@ File: [client\ColorThemes\ColorThemes.h at line 17](../../../Src/client/ColorThe
 ## defVec4
 
 Type: constant
+
 Description: 
 
 
@@ -84,6 +91,7 @@ File: [client\ColorThemes\ColorThemes_init.sqf at line 10](../../../Src/client/C
 ## defHTML
 
 Type: constant
+
 Description: 
 
 
@@ -95,6 +103,7 @@ File: [client\ColorThemes\ColorThemes_init.sqf at line 11](../../../Src/client/C
 ## ct_load
 
 Type: function
+
 Description: 
 - Param: _themeName
 
@@ -102,6 +111,7 @@ File: [client\ColorThemes\ColorThemes_init.sqf at line 60](../../../Src/client/C
 ## ct_reset
 
 Type: function
+
 Description: Восстанавливает тему по-умолчанию
 
 
@@ -109,6 +119,7 @@ File: [client\ColorThemes\ColorThemes_init.sqf at line 78](../../../Src/client/C
 ## ct_applyTheme
 
 Type: function
+
 Description: Применяет установленную тему из ct_map_colors
 
 
@@ -116,6 +127,7 @@ File: [client\ColorThemes\ColorThemes_init.sqf at line 83](../../../Src/client/C
 ## ct_internal_copy
 
 Type: function
+
 Description: 
 - Param: _name
 - Param: _key
@@ -125,6 +137,7 @@ File: [client\ColorThemes\ColorThemes_init.sqf at line 114](../../../Src/client/
 ## ct_getValue
 
 Type: function
+
 Description: Возвращает цвет с карты
 - Param: _name
 
@@ -132,7 +145,9 @@ File: [client\ColorThemes\ColorThemes_init.sqf at line 139](../../../Src/client/
 ## ct_debug_viewColors
 
 Type: function
+
 > Exists if **DEBUG** defined
+
 Description: 
 - Param: _themeName
 

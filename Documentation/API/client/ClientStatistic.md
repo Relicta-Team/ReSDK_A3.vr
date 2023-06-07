@@ -3,6 +3,7 @@
 ## colortext(clr,txt)
 
 Type: constant
+
 Description: 
 - Param: clr
 - Param: txt
@@ -15,6 +16,7 @@ File: [client\ClientStatistic\LogVariables.sqf at line 21](../../../Src/client/C
 ## clistat_onupdate
 
 Type: function
+
 Description: 
 
 
@@ -22,6 +24,7 @@ File: [client\ClientStatistic\LogVariables.sqf at line 79](../../../Src/client/C
 ## clistat_setLogVars
 
 Type: function
+
 Description: 
 - Param: _mode
 

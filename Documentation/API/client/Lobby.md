@@ -3,6 +3,7 @@
 ## _faith_text
 
 Type: constant
+
 Description: 
 
 
@@ -14,6 +15,7 @@ File: [client\Lobby\CharSettings.sqf at line 311](../../../Src/client/Lobby/Char
 ## lobby_onCloseSetting
 
 Type: function
+
 Description: serverside includes end
 
 
@@ -21,6 +23,7 @@ File: [client\Lobby\CharSettings.sqf at line 14](../../../Src/client/Lobby/CharS
 ## lobby_onSetName
 
 Type: function
+
 Description: событие при ОК имени
 
 
@@ -28,6 +31,7 @@ File: [client\Lobby\CharSettings.sqf at line 31](../../../Src/client/Lobby/CharS
 ## lobby_onSetRandomName
 
 Type: function
+
 Description: событие рандомного имени
 
 
@@ -35,6 +39,7 @@ File: [client\Lobby\CharSettings.sqf at line 80](../../../Src/client/Lobby/CharS
 ## lobby_onSetNameCode
 
 Type: function
+
 Description: событие когда сервер заколбечил и подтвердил изменения
 - Param: _wid
 - Param: _val
@@ -43,6 +48,7 @@ File: [client\Lobby\CharSettings.sqf at line 114](../../../Src/client/Lobby/Char
 ## lobby_setName
 
 Type: function
+
 Description: Событие при выборе имени
 
 
@@ -50,6 +56,7 @@ File: [client\Lobby\CharSettings.sqf at line 139](../../../Src/client/Lobby/Char
 ## lobby_onSetAgeCode
 
 Type: function
+
 Description: callback on server
 - Param: _wid
 - Param: _val
@@ -58,6 +65,7 @@ File: [client\Lobby\CharSettings.sqf at line 164](../../../Src/client/Lobby/Char
 ## lobby_setAge
 
 Type: function
+
 Description: 
 
 
@@ -65,6 +73,7 @@ File: [client\Lobby\CharSettings.sqf at line 169](../../../Src/client/Lobby/Char
 ## lobby_onSetAge
 
 Type: function
+
 Description: 
 
 
@@ -72,6 +81,7 @@ File: [client\Lobby\CharSettings.sqf at line 198](../../../Src/client/Lobby/Char
 ## lobby_setFaith
 
 Type: function
+
 Description: 
 - Param: _class
 - Param: _attributes
@@ -80,6 +90,7 @@ File: [client\Lobby\CharSettings.sqf at line 220](../../../Src/client/Lobby/Char
 ## lobby_onSetFaith
 
 Type: function
+
 Description: 
 
 
@@ -87,6 +98,7 @@ File: [client\Lobby\CharSettings.sqf at line 292](../../../Src/client/Lobby/Char
 ## lobby_onSetFaithCode
 
 Type: function
+
 Description: 
 - Param: _wid
 - Param: _val
@@ -95,6 +107,7 @@ File: [client\Lobby\CharSettings.sqf at line 308](../../../Src/client/Lobby/Char
 ## lobby_setAntag
 
 Type: function
+
 Description: 
 
 
@@ -102,6 +115,7 @@ File: [client\Lobby\CharSettings.sqf at line 330](../../../Src/client/Lobby/Char
 ## lobby_onSetAntagCode
 
 Type: function
+
 Description: 
 - Param: _wid
 - Param: _val
@@ -110,6 +124,7 @@ File: [client\Lobby\CharSettings.sqf at line 341](../../../Src/client/Lobby/Char
 ## lobby_setTrait
 
 Type: function
+
 Description: 
 
 
@@ -117,6 +132,7 @@ File: [client\Lobby\CharSettings.sqf at line 363](../../../Src/client/Lobby/Char
 ## lobby_setFace
 
 Type: function
+
 Description: 
 
 
@@ -124,6 +140,7 @@ File: [client\Lobby\CharSettings.sqf at line 367](../../../Src/client/Lobby/Char
 ## lobby_onSetFace
 
 Type: function
+
 Description: 
 
 
@@ -131,6 +148,7 @@ File: [client\Lobby\CharSettings.sqf at line 558](../../../Src/client/Lobby/Char
 ## lobby_onSetFaceCode
 
 Type: function
+
 Description: 
 - Param: _wid
 - Param: _val
@@ -139,6 +157,7 @@ File: [client\Lobby\CharSettings.sqf at line 575](../../../Src/client/Lobby/Char
 ## lobby_setVice
 
 Type: function
+
 Description: 
 - Param: _class
 - Param: _name
@@ -147,6 +166,7 @@ File: [client\Lobby\CharSettings.sqf at line 595](../../../Src/client/Lobby/Char
 ## lobby_onSetVice
 
 Type: function
+
 Description: 
 
 
@@ -154,6 +174,7 @@ File: [client\Lobby\CharSettings.sqf at line 633](../../../Src/client/Lobby/Char
 ## lobby_onSetViceCode
 
 Type: function
+
 Description: 
 - Param: _wid
 - Param: _val
@@ -162,6 +183,7 @@ File: [client\Lobby\CharSettings.sqf at line 649](../../../Src/client/Lobby/Char
 ## lobby_setBlood
 
 Type: function
+
 Description: 
 
 
@@ -169,6 +191,7 @@ File: [client\Lobby\CharSettings.sqf at line 670](../../../Src/client/Lobby/Char
 ## lobby_onSetBlood
 
 Type: function
+
 Description: 
 
 
@@ -176,6 +199,7 @@ File: [client\Lobby\CharSettings.sqf at line 718](../../../Src/client/Lobby/Char
 ## lobby_onSetBloodCode
 
 Type: function
+
 Description: 
 - Param: _wid
 - Param: _val
@@ -184,6 +208,7 @@ File: [client\Lobby\CharSettings.sqf at line 740](../../../Src/client/Lobby/Char
 ## lobby_onSetGender
 
 Type: function
+
 Description: 
 
 
@@ -191,6 +216,7 @@ File: [client\Lobby\CharSettings.sqf at line 759](../../../Src/client/Lobby/Char
 ## lobby_onSetGenderCode
 
 Type: function
+
 Description: 
 - Param: _wid
 - Param: _val
@@ -199,6 +225,7 @@ File: [client\Lobby\CharSettings.sqf at line 782](../../../Src/client/Lobby/Char
 ## lobby_onSetFamily
 
 Type: function
+
 Description: 
 
 
@@ -206,6 +233,7 @@ File: [client\Lobby\CharSettings.sqf at line 795](../../../Src/client/Lobby/Char
 ## lobby_onSetFamilyCode
 
 Type: function
+
 Description: 
 - Param: _wid
 - Param: _val
@@ -214,6 +242,7 @@ File: [client\Lobby\CharSettings.sqf at line 826](../../../Src/client/Lobby/Char
 ## lobby_onSetMainHand
 
 Type: function
+
 Description: 
 
 
@@ -221,6 +250,7 @@ File: [client\Lobby\CharSettings.sqf at line 845](../../../Src/client/Lobby/Char
 ## lobby_onSetMainHandCode
 
 Type: function
+
 Description: 
 - Param: _wid
 - Param: _val
@@ -229,6 +259,7 @@ File: [client\Lobby\CharSettings.sqf at line 859](../../../Src/client/Lobby/Char
 ## lobby_onSetRole
 
 Type: function
+
 Description: событие при выборе
 
 
@@ -236,6 +267,7 @@ File: [client\Lobby\CharSettings.sqf at line 868](../../../Src/client/Lobby/Char
 ## lobby_onSetRoleCode
 
 Type: function
+
 Description: событие вызывается когда сервер подтвердил изменения
 - Param: _wid
 - Param: _val
@@ -244,6 +276,7 @@ File: [client\Lobby\CharSettings.sqf at line 891](../../../Src/client/Lobby/Char
 ## lobby_resizingByRoleChanged
 
 Type: function
+
 Description: вызывается когда установлена новая роль и надо изменить размер
 - Param: _x
 - Param: _y
@@ -253,6 +286,7 @@ File: [client\Lobby\CharSettings.sqf at line 926](../../../Src/client/Lobby/Char
 ## lobby_setRole
 
 Type: function
+
 Description: Событие при выборе роли
 
 
@@ -260,6 +294,7 @@ File: [client\Lobby\CharSettings.sqf at line 938](../../../Src/client/Lobby/Char
 ## lobby_setEnableCharSetting
 
 Type: function
+
 Description: 
 - Param: _mode
 
@@ -267,6 +302,7 @@ File: [client\Lobby\CharSettings.sqf at line 989](../../../Src/client/Lobby/Char
 ## lobby_createInput
 
 Type: function
+
 Description: 
 
 
@@ -274,6 +310,7 @@ File: [client\Lobby\CharSettings.sqf at line 1003](../../../Src/client/Lobby/Cha
 ## lobby_createColorize
 
 Type: function
+
 Description: создаёт выборку цвета
 
 
@@ -281,6 +318,7 @@ File: [client\Lobby\CharSettings.sqf at line 1008](../../../Src/client/Lobby/Cha
 ## lobby_initReadyButton
 
 Type: function
+
 Description: 
 
 
@@ -288,6 +326,7 @@ File: [client\Lobby\CharSettings.sqf at line 1016](../../../Src/client/Lobby/Cha
 ## lobby_switchReady
 
 Type: function
+
 Description: переключение режима готовности моба
 - Param: _wid
 - Param: _butt
@@ -296,6 +335,7 @@ File: [client\Lobby\CharSettings.sqf at line 1065](../../../Src/client/Lobby/Cha
 ## lobby_onSwitchReadyCallback
 
 Type: function
+
 Description: 
 - Param: _newMode
 
@@ -305,7 +345,8 @@ File: [client\Lobby\CharSettings.sqf at line 1096](../../../Src/client/Lobby/Cha
 ## lobby_sendToServerSetting
 
 Type: function
-Description: ======================================================
+
+Description: 
 - Param: _settingName
 - Param: _val
 
@@ -315,6 +356,7 @@ File: [client\Lobby\Events.sqf at line 7](../../../Src/client/Lobby/Events.sqf#L
 ## BACKGROUND_COLOR
 
 Type: constant
+
 Description: 
 
 
@@ -326,6 +368,7 @@ File: [client\Lobby\functions.sqf at line 12](../../../Src/client/Lobby/function
 ## TIME_ONLOAD
 
 Type: constant
+
 Description: 
 
 
@@ -337,6 +380,7 @@ File: [client\Lobby\functions.sqf at line 13](../../../Src/client/Lobby/function
 ## LOBBY_LOADING_TIME
 
 Type: constant
+
 Description: 
 
 
@@ -348,6 +392,7 @@ File: [client\Lobby\functions.sqf at line 15](../../../Src/client/Lobby/function
 ## LOBBY_HINT_TIME_MINIMUM
 
 Type: constant
+
 Description: 
 
 
@@ -359,6 +404,7 @@ File: [client\Lobby\functions.sqf at line 16](../../../Src/client/Lobby/function
 ## LOBBY_HINT_TIME_PER_SYMBOL
 
 Type: constant
+
 Description: 
 
 
@@ -370,6 +416,7 @@ File: [client\Lobby\functions.sqf at line 17](../../../Src/client/Lobby/function
 ## addWid(type,pos)
 
 Type: constant
+
 Description: 
 - Param: type
 - Param: pos
@@ -382,6 +429,7 @@ File: [client\Lobby\functions.sqf at line 162](../../../Src/client/Lobby/functio
 ## vec4(x,y,w,h)
 
 Type: constant
+
 Description: 
 - Param: x
 - Param: y
@@ -396,6 +444,7 @@ File: [client\Lobby\functions.sqf at line 163](../../../Src/client/Lobby/functio
 ## initButtonMenu(wid)
 
 Type: constant
+
 Description: В дебаг ветке сломан ctrlSetFontHeight
 - Param: wid
 
@@ -407,6 +456,7 @@ File: [client\Lobby\functions.sqf at line 168](../../../Src/client/Lobby/functio
 ## iniTextInfoStyle(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -418,6 +468,7 @@ File: [client\Lobby\functions.sqf at line 170](../../../Src/client/Lobby/functio
 ## iniText(text)
 
 Type: constant
+
 Description: 
 - Param: text
 
@@ -429,6 +480,7 @@ File: [client\Lobby\functions.sqf at line 170](../../../Src/client/Lobby/functio
 ## iniVar(var)
 
 Type: constant
+
 Description: 
 - Param: var
 
@@ -440,6 +492,7 @@ File: [client\Lobby\functions.sqf at line 172](../../../Src/client/Lobby/functio
 ## iniOnSetCode(code)
 
 Type: constant
+
 Description: 
 - Param: code
 
@@ -451,6 +504,7 @@ File: [client\Lobby\functions.sqf at line 173](../../../Src/client/Lobby/functio
 ## iniOnPress(event)
 
 Type: constant
+
 Description: 
 - Param: event
 
@@ -462,6 +516,7 @@ File: [client\Lobby\functions.sqf at line 174](../../../Src/client/Lobby/functio
 ## iniVarResizingName(name)
 
 Type: constant
+
 Description: 
 - Param: name
 
@@ -473,7 +528,9 @@ File: [client\Lobby\functions.sqf at line 175](../../../Src/client/Lobby/functio
 ## TIME_ONLOAD
 
 Type: constant
+
 > Exists if **FAST_INIT_LOBBY** defined
+
 Description: 
 
 
@@ -485,6 +542,7 @@ File: [client\Lobby\functions.sqf at line 419](../../../Src/client/Lobby/functio
 ## DEFADE_GUI_ELEMENTS_TIME
 
 Type: constant
+
 Description: 
 
 
@@ -496,6 +554,7 @@ File: [client\Lobby\functions.sqf at line 574](../../../Src/client/Lobby/functio
 ## lobbyOpen
 
 Type: function
+
 Description: 
 - Param: _settings
 
@@ -503,6 +562,7 @@ File: [client\Lobby\functions.sqf at line 21](../../../Src/client/Lobby/function
 ## lobby_handleMusic
 
 Type: function
+
 Description: 
 - Param: _mode
 
@@ -510,6 +570,7 @@ File: [client\Lobby\functions.sqf at line 378](../../../Src/client/Lobby/functio
 ## lobby_onLoad
 
 Type: function
+
 Description: 
 - Param: _isOpenMode
 
@@ -517,6 +578,7 @@ File: [client\Lobby\functions.sqf at line 395](../../../Src/client/Lobby/functio
 ## lobby_initLoadingScreen
 
 Type: function
+
 Description: 
 
 
@@ -524,6 +586,7 @@ File: [client\Lobby\functions.sqf at line 433](../../../Src/client/Lobby/functio
 ## lobby_loadSettings
 
 Type: function
+
 Description: 
 
 
@@ -531,6 +594,7 @@ File: [client\Lobby\functions.sqf at line 538](../../../Src/client/Lobby/functio
 ## lobby_onSendChatMessage
 
 Type: function
+
 Description: 
 - Param: _text
 
@@ -538,6 +602,7 @@ File: [client\Lobby\functions.sqf at line 545](../../../Src/client/Lobby/functio
 ## lobbyClose
 
 Type: function
+
 Description: 
 
 
@@ -545,6 +610,7 @@ File: [client\Lobby\functions.sqf at line 561](../../../Src/client/Lobby/functio
 ## lobby_onChangeGameState
 
 Type: function
+
 Description: 
 - Param: _oldState
 - Param: _newState
@@ -553,6 +619,7 @@ File: [client\Lobby\functions.sqf at line 590](../../../Src/client/Lobby/functio
 ## lobby_openSelectLateRole
 
 Type: function
+
 Description: коллбэк сервера на показ списка ролей
 
 
@@ -560,6 +627,7 @@ File: [client\Lobby\functions.sqf at line 622](../../../Src/client/Lobby/functio
 ## lobby_onSelectedLateRole
 
 Type: function
+
 Description: 
 
 
@@ -569,6 +637,7 @@ File: [client\Lobby\functions.sqf at line 710](../../../Src/client/Lobby/functio
 ## DISABLE_NOT_USED_SETTINGS
 
 Type: constant
+
 Description: 
 
 
@@ -580,6 +649,7 @@ File: [client\Lobby\lobbi_init.sqf at line 13](../../../Src/client/Lobby/lobbi_i
 ## test_lobby
 
 Type: constant
+
 Description: 
 
 
@@ -593,6 +663,7 @@ File: [client\Lobby\lobbi_init.sqf at line 95](../../../Src/client/Lobby/lobbi_i
 ## FAST_INIT_LOBBY
 
 Type: constant
+
 Description: без фейдов быстро появляем лобби
 
 
@@ -604,6 +675,7 @@ File: [client\Lobby\lobby.hpp at line 8](../../../Src/client/Lobby/lobby.hpp#L8)
 ## lobby_log_enable
 
 Type: constant
+
 Description: 
 
 
@@ -615,6 +687,7 @@ File: [client\Lobby\lobby.hpp at line 10](../../../Src/client/Lobby/lobby.hpp#L1
 ## CHAT_SIZE_X
 
 Type: constant
+
 Description: 
 
 
@@ -626,6 +699,7 @@ File: [client\Lobby\lobby.hpp at line 12](../../../Src/client/Lobby/lobby.hpp#L1
 ## READY_BUTTON_SIZE_X
 
 Type: constant
+
 Description: 
 
 
@@ -637,6 +711,7 @@ File: [client\Lobby\lobby.hpp at line 14](../../../Src/client/Lobby/lobby.hpp#L1
 ## READY_BUTTON_COLOR_OFF
 
 Type: constant
+
 Description: 
 
 
@@ -648,6 +723,7 @@ File: [client\Lobby\lobby.hpp at line 16](../../../Src/client/Lobby/lobby.hpp#L1
 ## READY_BUTTON_COLOR_ON
 
 Type: constant
+
 Description: 
 
 
@@ -659,6 +735,7 @@ File: [client\Lobby\lobby.hpp at line 17](../../../Src/client/Lobby/lobby.hpp#L1
 ## CHARSETMENU_SIZE_X
 
 Type: constant
+
 Description: 
 
 
@@ -670,6 +747,7 @@ File: [client\Lobby\lobby.hpp at line 19](../../../Src/client/Lobby/lobby.hpp#L1
 ## widgetList
 
 Type: constant
+
 Description: 
 
 
@@ -681,6 +759,7 @@ File: [client\Lobby\lobby.hpp at line 21](../../../Src/client/Lobby/lobby.hpp#L2
 ## getBackground
 
 Type: constant
+
 Description: 
 
 
@@ -692,6 +771,7 @@ File: [client\Lobby\lobby.hpp at line 23](../../../Src/client/Lobby/lobby.hpp#L2
 ## setBackground(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -703,6 +783,7 @@ File: [client\Lobby\lobby.hpp at line 24](../../../Src/client/Lobby/lobby.hpp#L2
 ## getTextField
 
 Type: constant
+
 Description: 
 
 
@@ -714,6 +795,7 @@ File: [client\Lobby\lobby.hpp at line 26](../../../Src/client/Lobby/lobby.hpp#L2
 ## setTextField(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -725,6 +807,7 @@ File: [client\Lobby\lobby.hpp at line 27](../../../Src/client/Lobby/lobby.hpp#L2
 ## getTextFieldWg
 
 Type: constant
+
 Description: 
 
 
@@ -736,6 +819,7 @@ File: [client\Lobby\lobby.hpp at line 29](../../../Src/client/Lobby/lobby.hpp#L2
 ## setTextFieldWg(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -747,6 +831,7 @@ File: [client\Lobby\lobby.hpp at line 30](../../../Src/client/Lobby/lobby.hpp#L3
 ## getMainCtg
 
 Type: constant
+
 Description: 
 
 
@@ -758,6 +843,7 @@ File: [client\Lobby\lobby.hpp at line 32](../../../Src/client/Lobby/lobby.hpp#L3
 ## setMainCtg(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -769,6 +855,7 @@ File: [client\Lobby\lobby.hpp at line 33](../../../Src/client/Lobby/lobby.hpp#L3
 ## getButtonSend
 
 Type: constant
+
 Description: 
 
 
@@ -780,6 +867,7 @@ File: [client\Lobby\lobby.hpp at line 35](../../../Src/client/Lobby/lobby.hpp#L3
 ## setButtonSend(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -791,6 +879,7 @@ File: [client\Lobby\lobby.hpp at line 36](../../../Src/client/Lobby/lobby.hpp#L3
 ## getInputChat
 
 Type: constant
+
 Description: 
 
 
@@ -802,6 +891,7 @@ File: [client\Lobby\lobby.hpp at line 38](../../../Src/client/Lobby/lobby.hpp#L3
 ## setInputChat(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -813,6 +903,7 @@ File: [client\Lobby\lobby.hpp at line 39](../../../Src/client/Lobby/lobby.hpp#L3
 ## getReadyButton
 
 Type: constant
+
 Description: 
 
 
@@ -824,6 +915,7 @@ File: [client\Lobby\lobby.hpp at line 41](../../../Src/client/Lobby/lobby.hpp#L4
 ## setReadyButton(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -835,6 +927,7 @@ File: [client\Lobby\lobby.hpp at line 42](../../../Src/client/Lobby/lobby.hpp#L4
 ## getSettingCtg
 
 Type: constant
+
 Description: 
 
 
@@ -846,6 +939,7 @@ File: [client\Lobby\lobby.hpp at line 44](../../../Src/client/Lobby/lobby.hpp#L4
 ## setSettingCtg(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -857,6 +951,7 @@ File: [client\Lobby\lobby.hpp at line 45](../../../Src/client/Lobby/lobby.hpp#L4
 ## setMainWid(var,val)
 
 Type: constant
+
 Description: 
 - Param: var
 - Param: val
@@ -869,6 +964,7 @@ File: [client\Lobby\lobby.hpp at line 47](../../../Src/client/Lobby/lobby.hpp#L4
 ## getMainWid(var)
 
 Type: constant
+
 Description: 
 - Param: var
 
@@ -880,6 +976,7 @@ File: [client\Lobby\lobby.hpp at line 48](../../../Src/client/Lobby/lobby.hpp#L4
 ## setMainProp(var,val)
 
 Type: constant
+
 Description: 
 - Param: var
 - Param: val
@@ -892,6 +989,7 @@ File: [client\Lobby\lobby.hpp at line 50](../../../Src/client/Lobby/lobby.hpp#L5
 ## getMainProp(var)
 
 Type: constant
+
 Description: 
 - Param: var
 
@@ -903,6 +1001,7 @@ File: [client\Lobby\lobby.hpp at line 51](../../../Src/client/Lobby/lobby.hpp#L5
 ## getCurrentCharData(val)
 
 Type: constant
+
 Description: Получает текущую настройку
 - Param: val
 
@@ -914,6 +1013,7 @@ File: [client\Lobby\lobby.hpp at line 54](../../../Src/client/Lobby/lobby.hpp#L5
 ## wid
 
 Type: constant
+
 Description: settings helpers
 
 
@@ -925,6 +1025,7 @@ File: [client\Lobby\lobby.hpp at line 21](../../../Src/client/Lobby/lobby.hpp#L2
 ## key
 
 Type: constant
+
 Description: 
 
 
@@ -936,6 +1037,7 @@ File: [client\Lobby\lobby.hpp at line 59](../../../Src/client/Lobby/lobby.hpp#L5
 ## onPressParams()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -947,6 +1049,7 @@ File: [client\Lobby\lobby.hpp at line 61](../../../Src/client/Lobby/lobby.hpp#L6
 ## addWidToList(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -958,6 +1061,7 @@ File: [client\Lobby\lobby.hpp at line 62](../../../Src/client/Lobby/lobby.hpp#L6
 ## addCloseEvent(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -969,6 +1073,7 @@ File: [client\Lobby\lobby.hpp at line 63](../../../Src/client/Lobby/lobby.hpp#L6
 ## addOnPressEvent(wid,code)
 
 Type: constant
+
 Description: 
 - Param: wid
 - Param: code
@@ -981,6 +1086,7 @@ File: [client\Lobby\lobby.hpp at line 64](../../../Src/client/Lobby/lobby.hpp#L6
 ## DELAY_TO_PICKRANDOMNAME
 
 Type: constant
+
 Description: common
 
 
@@ -992,6 +1098,7 @@ File: [client\Lobby\lobby.hpp at line 67](../../../Src/client/Lobby/lobby.hpp#L6
 ## DELAY_TO_PICKGENDER
 
 Type: constant
+
 Description: 
 
 
@@ -1003,6 +1110,7 @@ File: [client\Lobby\lobby.hpp at line 68](../../../Src/client/Lobby/lobby.hpp#L6
 ## DELAY_TO_PICKMAINHAND
 
 Type: constant
+
 Description: 
 
 
@@ -1014,6 +1122,7 @@ File: [client\Lobby\lobby.hpp at line 69](../../../Src/client/Lobby/lobby.hpp#L6
 ## DELAY_TO_PICKFAMILY
 
 Type: constant
+
 Description: 
 
 
@@ -1025,6 +1134,7 @@ File: [client\Lobby\lobby.hpp at line 70](../../../Src/client/Lobby/lobby.hpp#L7
 ## DELAY_TO_READY
 
 Type: constant
+
 Description: 
 
 
@@ -1036,6 +1146,7 @@ File: [client\Lobby\lobby.hpp at line 72](../../../Src/client/Lobby/lobby.hpp#L7
 ## DELAY_TO_NOT_READY
 
 Type: constant
+
 Description: 
 
 
@@ -1047,6 +1158,7 @@ File: [client\Lobby\lobby.hpp at line 73](../../../Src/client/Lobby/lobby.hpp#L7
 ## RANDFACE_UPD_TIME
 
 Type: constant
+
 Description: 
 
 
@@ -1058,7 +1170,9 @@ File: [client\Lobby\lobby.hpp at line 75](../../../Src/client/Lobby/lobby.hpp#L7
 ## loblog(mes,ft)
 
 Type: constant
+
 > Exists if **lobby_log_enable** defined
+
 Description: 
 - Param: mes
 - Param: ft
@@ -1071,7 +1185,9 @@ File: [client\Lobby\lobby.hpp at line 78](../../../Src/client/Lobby/lobby.hpp#L7
 ## loblog(mes,ft)
 
 Type: constant
+
 > Exists if **lobby_log_enable** not defined
+
 Description: 
 - Param: mes
 - Param: ft
@@ -1086,6 +1202,7 @@ File: [client\Lobby\lobby.hpp at line 80](../../../Src/client/Lobby/lobby.hpp#L8
 ## LOBBY_USING_SPRITE_RENDERER
 
 Type: constant
+
 Description: 
 
 
@@ -1097,6 +1214,7 @@ File: [client\Lobby\sprite_renderer.sqf at line 11](../../../Src/client/Lobby/sp
 ## SPRITE_LIFETIME
 
 Type: constant
+
 Description: 
 
 
@@ -1108,6 +1226,7 @@ File: [client\Lobby\sprite_renderer.sqf at line 17](../../../Src/client/Lobby/sp
 ## SPRITE_COUNTER
 
 Type: constant
+
 Description: 
 
 
@@ -1119,6 +1238,7 @@ File: [client\Lobby\sprite_renderer.sqf at line 18](../../../Src/client/Lobby/sp
 ## SPRITE_STARTPOS
 
 Type: constant
+
 Description: 
 
 
@@ -1130,6 +1250,7 @@ File: [client\Lobby\sprite_renderer.sqf at line 20](../../../Src/client/Lobby/sp
 ## SPRITE_ENDPOS
 
 Type: constant
+
 Description: 
 
 
@@ -1141,6 +1262,7 @@ File: [client\Lobby\sprite_renderer.sqf at line 21](../../../Src/client/Lobby/sp
 ## COLORS
 
 Type: constant
+
 Description: 
 
 
@@ -1152,6 +1274,7 @@ File: [client\Lobby\sprite_renderer.sqf at line 23](../../../Src/client/Lobby/sp
 ## WINDPOS
 
 Type: constant
+
 Description: 
 
 
@@ -1163,6 +1286,7 @@ File: [client\Lobby\sprite_renderer.sqf at line 121](../../../Src/client/Lobby/s
 ## lobby_sprite_onUpdateCode
 
 Type: function
+
 Description: 
 
 
@@ -1172,6 +1296,7 @@ File: [client\Lobby\sprite_renderer.sqf at line 25](../../../Src/client/Lobby/sp
 ## charset_size_h
 
 Type: constant
+
 Description: 
 
 
@@ -1183,6 +1308,7 @@ File: [client\Lobby\SystemSettings.sqf at line 410](../../../Src/client/Lobby/Sy
 ## lobby_sysLoadMenu
 
 Type: function
+
 Description: загружает окно системных настроек
 - Param: _b
 
@@ -1190,6 +1316,7 @@ File: [client\Lobby\SystemSettings.sqf at line 48](../../../Src/client/Lobby/Sys
 ## lobby_sysLoadSettings
 
 Type: function
+
 Description: 
 - Param: _cat
 
@@ -1197,6 +1324,7 @@ File: [client\Lobby\SystemSettings.sqf at line 141](../../../Src/client/Lobby/Sy
 ## lobby_sysSetEnable
 
 Type: function
+
 Description: 
 - Param: _mode
 
@@ -1204,6 +1332,7 @@ File: [client\Lobby\SystemSettings.sqf at line 189](../../../Src/client/Lobby/Sy
 ## lobby_thread_textRender
 
 Type: function
+
 Description: 
 - Param: _textRender
 
@@ -1211,6 +1340,7 @@ File: [client\Lobby\SystemSettings.sqf at line 218](../../../Src/client/Lobby/Sy
 ## lobby_sys_bc_isAsking
 
 Type: function
+
 Description: виджеты слотов персонажей
 
 
@@ -1218,6 +1348,7 @@ File: [client\Lobby\SystemSettings.sqf at line 262](../../../Src/client/Lobby/Sy
 ## lobby_sys_bc_restoreAfterAsking
 
 Type: function
+
 Description: 
 
 
@@ -1225,6 +1356,7 @@ File: [client\Lobby\SystemSettings.sqf at line 264](../../../Src/client/Lobby/Sy
 ## lobby_sys_bc_charachters
 
 Type: function
+
 Description: 
 
 
@@ -1232,6 +1364,7 @@ File: [client\Lobby\SystemSettings.sqf at line 272](../../../Src/client/Lobby/Sy
 ## lobby_sys_ba_action
 
 Type: function
+
 Description: 
 - Param: _action
 - Param: _ctxParams

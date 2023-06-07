@@ -3,6 +3,7 @@
 ## bindKey(name,val)
 
 Type: constant
+
 Description: 
 - Param: name
 - Param: val
@@ -15,6 +16,7 @@ File: [client\InputSystem\InputAssoc.sqf at line 13](../../../Src/client/InputSy
 ## bindMouse(name,val)
 
 Type: constant
+
 Description: 
 - Param: name
 - Param: val
@@ -27,6 +29,7 @@ File: [client\InputSystem\InputAssoc.sqf at line 14](../../../Src/client/InputSy
 ## mouse_key_prefix
 
 Type: constant
+
 Description: 
 
 
@@ -38,6 +41,7 @@ File: [client\InputSystem\InputAssoc.sqf at line 15](../../../Src/client/InputSy
 ## input_getKeyValue
 
 Type: function
+
 Description: Получает значение ключа из клавиатуры
 - Param: _str
 - Param: _isMouse
@@ -46,6 +50,7 @@ File: [client\InputSystem\InputAssoc.sqf at line 188](../../../Src/client/InputS
 ## input_getAllKeyNames
 
 Type: function
+
 Description: Получает массив всех названий кнопок
 - Param: _idx
 
@@ -55,6 +60,7 @@ File: [client\InputSystem\InputAssoc.sqf at line 203](../../../Src/client/InputS
 ## INPUTHELPER_WIDGET_SIZE_W
 
 Type: constant
+
 Description: Помощь по управлению
 
 
@@ -66,6 +72,7 @@ File: [client\InputSystem\inputHelper.sqf at line 12](../../../Src/client/InputS
 ## INPUTHELPER_WIDGET_SIZE_H
 
 Type: constant
+
 Description: 
 
 
@@ -77,6 +84,7 @@ File: [client\InputSystem\inputHelper.sqf at line 13](../../../Src/client/InputS
 ## inputHelper_init
 
 Type: function
+
 Description: 
 
 
@@ -84,6 +92,7 @@ File: [client\InputSystem\inputHelper.sqf at line 32](../../../Src/client/InputS
 ## inputHelper_showNotification
 
 Type: function
+
 Description: 
 - Param: _text
 - Param: _timeOrCode
@@ -92,6 +101,7 @@ File: [client\InputSystem\inputHelper.sqf at line 63](../../../Src/client/InputS
 ## inputHelper_internal_sortWidgets
 
 Type: function
+
 Description: 
 
 
@@ -101,6 +111,7 @@ File: [client\InputSystem\inputHelper.sqf at line 83](../../../Src/client/InputS
 ## KEYBIND_INDEX_NAME
 
 Type: constant
+
 Description: // [name,desc,current,default,variable]
 
 
@@ -112,6 +123,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 9](../../../Src/client/In
 ## KEYBIND_INDEX_DESC
 
 Type: constant
+
 Description: 
 
 
@@ -123,6 +135,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 10](../../../Src/client/I
 ## KEYBIND_INDEX_CURRENT
 
 Type: constant
+
 Description: 
 
 
@@ -134,6 +147,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 11](../../../Src/client/I
 ## KEYBIND_INDEX_DEFAULT
 
 Type: constant
+
 Description: 
 
 
@@ -145,6 +159,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 12](../../../Src/client/I
 ## KEYBIND_INDEX_VARNAME
 
 Type: constant
+
 Description: 
 
 
@@ -156,6 +171,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 13](../../../Src/client/I
 ## KEYBIND_INDEX_SERIALIZED
 
 Type: constant
+
 Description: 
 
 
@@ -167,6 +183,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 14](../../../Src/client/I
 ## KEYDATA_INDEX_KEY
 
 Type: constant
+
 Description: [value,shift,ctrl,alt,isMouse]
 
 
@@ -178,6 +195,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 17](../../../Src/client/I
 ## KEYDATA_INDEX_SHIFT
 
 Type: constant
+
 Description: 
 
 
@@ -189,6 +207,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 18](../../../Src/client/I
 ## KEYDATA_INDEX_CTRL
 
 Type: constant
+
 Description: 
 
 
@@ -200,6 +219,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 19](../../../Src/client/I
 ## KEYDATA_INDEX_ALT
 
 Type: constant
+
 Description: 
 
 
@@ -211,6 +231,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 20](../../../Src/client/I
 ## KEYDATA_INDEX_ISMOUSE
 
 Type: constant
+
 Description: 
 
 
@@ -222,6 +243,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 21](../../../Src/client/I
 ## unpackKeyData(_dat)
 
 Type: constant
+
 Description: Распаковывает массив клавиш
 - Param: _dat
 
@@ -233,6 +255,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 24](../../../Src/client/I
 ## doPrepareKeyData()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -244,6 +267,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 26](../../../Src/client/I
 ## isPressed(var)
 
 Type: constant
+
 Description: Проверяет состояние кейдаты
 - Param: var
 
@@ -255,6 +279,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 27](../../../Src/client/I
 ## isPressedKey(_key,variable)
 
 Type: constant
+
 Description: Проверяет состояние кейдаты
 - Param: _key
 - Param: variable
@@ -269,6 +294,7 @@ File: [client\InputSystem\inputKeyHandlers.hpp at line 30](../../../Src/client/I
 ## kb(name,desc,defkey,varname)
 
 Type: constant
+
 Description: [name,desc,current,default,variable]
 - Param: name
 - Param: desc
@@ -283,6 +309,7 @@ File: [client\InputSystem\inputKeyHandlers.sqf at line 10](../../../Src/client/I
 ## keybind(value,shift,ctrl,alt,isMouse)
 
 Type: constant
+
 Description: 
 - Param: value
 - Param: shift
@@ -298,6 +325,7 @@ File: [client\InputSystem\inputKeyHandlers.sqf at line 11](../../../Src/client/I
 ## std_key(name)
 
 Type: constant
+
 Description: 
 - Param: name
 
@@ -309,6 +337,7 @@ File: [client\InputSystem\inputKeyHandlers.sqf at line 13](../../../Src/client/I
 ## std_keyArgs(name,shift,ctrl,alt,isMouse)
 
 Type: constant
+
 Description: 
 - Param: name
 - Param: shift
@@ -324,6 +353,7 @@ File: [client\InputSystem\inputKeyHandlers.sqf at line 14](../../../Src/client/I
 ## input_updateAllKeyBinds
 
 Type: function
+
 Description: 
 
 
@@ -331,6 +361,7 @@ File: [client\InputSystem\inputKeyHandlers.sqf at line 47](../../../Src/client/I
 ## input_checkKeyState
 
 Type: function
+
 Description: 
 - Param: _keyData
 - Param: _state
@@ -340,6 +371,7 @@ File: [client\InputSystem\inputKeyHandlers.sqf at line 107](../../../Src/client/
 ## input_spamProtect
 
 Type: function
+
 Description: 
 - Param: _strname
 - Param: _timeout (optional, default 0.3)
@@ -348,6 +380,7 @@ File: [client\InputSystem\inputKeyHandlers.sqf at line 125](../../../Src/client/
 ## input_movementCheck
 
 Type: function
+
 Description: Проверяет пользовательский инпут. true означает что клавиша заблокирована
 - Param: _key
 
@@ -355,6 +388,7 @@ File: [client\InputSystem\inputKeyHandlers.sqf at line 144](../../../Src/client/
 ## input_internal_isChangeStance
 
 Type: function
+
 Description: 
 
 
@@ -362,6 +396,7 @@ File: [client\InputSystem\inputKeyHandlers.sqf at line 196](../../../Src/client/
 ## input_internal_isMovingButton
 
 Type: function
+
 Description: 
 
 
@@ -369,6 +404,7 @@ File: [client\InputSystem\inputKeyHandlers.sqf at line 197](../../../Src/client/
 ## input_getKeyNameByInputName
 
 Type: function
+
 Description: 
 - Param: _inp
 
@@ -378,6 +414,7 @@ File: [client\InputSystem\inputKeyHandlers.sqf at line 199](../../../Src/client/
 ## isPressed(var)
 
 Type: constant
+
 Description: 
 - Param: var
 
@@ -389,7 +426,9 @@ File: [client\InputSystem\inputManager.sqf at line 35](../../../Src/client/Input
 ## attr
 
 Type: constant
+
 > Exists if **DEBUG** defined
+
 Description: 
 
 
@@ -401,7 +440,9 @@ File: [client\InputSystem\inputManager.sqf at line 117](../../../Src/client/Inpu
 ## dbg_addAtr(name,amount)
 
 Type: constant
+
 > Exists if **DEBUG** defined
+
 Description: 
 - Param: name
 - Param: amount
@@ -414,6 +455,7 @@ File: [client\InputSystem\inputManager.sqf at line 118](../../../Src/client/Inpu
 ## onGameInputs_Down
 
 Type: function
+
 Description: invokeAfterDelay({inventory_isHoldMode = true},2);
 - Param: 
 - Param: _key
@@ -425,6 +467,7 @@ File: [client\InputSystem\inputManager.sqf at line 10](../../../Src/client/Input
 ## onGameKeyInputs
 
 Type: function
+
 Description: клавиши в режиме игры
 - Param: 
 - Param: _key
@@ -436,6 +479,7 @@ File: [client\InputSystem\inputManager.sqf at line 24](../../../Src/client/Input
 ## onGameMouseInputs
 
 Type: function
+
 Description: мышь в режиме игры
 - Param: 
 - Param: _button

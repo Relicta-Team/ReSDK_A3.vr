@@ -3,6 +3,7 @@
 ## GEOMETRY_FIXER_TRACE_POSITIONS
 
 Type: constant
+
 Description: 
 
 
@@ -14,6 +15,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 7](../../../Src/client/Geome
 ## GEOMETRY_FIXER_DISTANCE_SAVE_POSITION
 
 Type: constant
+
 Description: расстояние сохранения позиций
 
 
@@ -25,6 +27,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 10](../../../Src/client/Geom
 ## GEOMETRY_FIXER_DISTANCE_TO_RESET_POSITION
 
 Type: constant
+
 Description: Если за отведённое время в падении расстояние с начала падения не дальше этого то вернём персонажа назад
 
 
@@ -36,6 +39,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 13](../../../Src/client/Geom
 ## GEOMETRY_FIXER_UPDATE_DELAY
 
 Type: constant
+
 Description: Частота обновления проверки геометрии
 
 
@@ -47,6 +51,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 16](../../../Src/client/Geom
 ## GEOMETRY_FIXER_FALLING_TIMEOUT
 
 Type: constant
+
 Description: 
 
 
@@ -58,6 +63,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 18](../../../Src/client/Geom
 ## GEOMETRY_FIXER_COUNT_FALLING_CHECK
 
 Type: constant
+
 Description: 
 
 
@@ -69,6 +75,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 21](../../../Src/client/Geom
 ## __falling_animation_prefix__
 
 Type: constant
+
 Description: #define GEOMETRY_FIXER_COUNT_FALLING_CHECK 4
 
 
@@ -80,6 +87,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 23](../../../Src/client/Geom
 ## __handler_falling_animation(state_value)
 
 Type: constant
+
 Description: 
 - Param: state_value
 
@@ -91,6 +99,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 24](../../../Src/client/Geom
 ## isInFallingAnimation(mob)
 
 Type: constant
+
 Description: 
 - Param: mob
 
@@ -102,6 +111,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 26](../../../Src/client/Geom
 ## isOnGround(mob)
 
 Type: constant
+
 Description: 
 - Param: mob
 
@@ -113,6 +123,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 27](../../../Src/client/Geom
 ## getLastSavedPos()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -124,6 +135,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 28](../../../Src/client/Geom
 ## getSavedPosAtIndex(idx)
 
 Type: constant
+
 Description: 
 - Param: idx
 
@@ -135,6 +147,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 29](../../../Src/client/Geom
 ## getDistance(from,to)
 
 Type: constant
+
 Description: 
 - Param: from
 - Param: to
@@ -149,6 +162,7 @@ File: [client\GeometryFixer\GeometryFixer.h at line 30](../../../Src/client/Geom
 ## LAST_WALL_CRUSH_DELAY
 
 Type: constant
+
 Description: 
 
 
@@ -160,13 +174,15 @@ File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 191](../../../Sr
 ## gf_start
 
 Type: function
-Description: ======================================================
+
+Description: 
 
 
 File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 8](../../../Src/client/GeometryFixer/GeometryFixer_functions.sqf#L8)
 ## gf_stop
 
 Type: function
+
 Description: 
 
 
@@ -174,6 +190,7 @@ File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 19](../../../Src
 ## gf_onUpdate
 
 Type: function
+
 Description: 
 
 
@@ -181,7 +198,9 @@ File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 28](../../../Src
 ## gf_processGeometry
 
 Type: function
+
 > Exists if **GEOMETRYFIXER_GEOSAVER_DISABLED** defined
+
 Description: функционал сломан и не поддерживатеся на данный момент
 
 
@@ -189,6 +208,7 @@ File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 71](../../../Src
 ## gf_processRoadway
 
 Type: function
+
 Description: GEOMETRYFIXER_GEOSAVER_DISABLED
 
 
@@ -196,6 +216,7 @@ File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 174](../../../Sr
 ## gf_processWallLock
 
 Type: function
+
 Description: 
 
 
@@ -203,6 +224,7 @@ File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 193](../../../Sr
 ## gf_collisionProcess
 
 Type: function
+
 Description: не самое оптимизированное решеие. нужно собрать через ближние объекты
 
 
@@ -210,6 +232,7 @@ File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 253](../../../Sr
 ## gf_cp_internal_isMovingTo
 
 Type: function
+
 Description: 
 - Param: _targ
 
@@ -219,6 +242,7 @@ File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 284](../../../Sr
 ## GEOMETRYFIXER_GEOSAVER_DISABLED
 
 Type: constant
+
 Description: отключает лагалку ебаную (только для геометрии)
 
 
@@ -230,6 +254,7 @@ File: [client\GeometryFixer\GeometryFixer_init.sqf at line 12](../../../Src/clie
 ## GEOMETRYFIXER_ROADWAY_DISABLED
 
 Type: constant
+
 Description: отключает лифт (требуется фикс)
 
 
@@ -241,6 +266,7 @@ File: [client\GeometryFixer\GeometryFixer_init.sqf at line 14](../../../Src/clie
 ## GEOMETRYFIXER_COLLISION_ALLOWED
 
 Type: constant
+
 Description: отключает армовскую коллизию сущностей
 
 

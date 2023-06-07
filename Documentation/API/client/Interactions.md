@@ -3,7 +3,8 @@
 ## AIM_SIZE
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -14,6 +15,7 @@ File: [client\Interactions\aim_cursor.sqf at line 7](../../../Src/client/Interac
 ## interaction_aim_init
 
 Type: function
+
 Description: 
 
 
@@ -21,6 +23,7 @@ File: [client\Interactions\aim_cursor.sqf at line 18](../../../Src/client/Intera
 ## interaction_aim_getStdPos
 
 Type: function
+
 Description: 
 
 
@@ -28,6 +31,7 @@ File: [client\Interactions\aim_cursor.sqf at line 33](../../../Src/client/Intera
 ## interaction_aim_alphaUpdate
 
 Type: function
+
 Description: 
 - Param: _r
 - Param: _g
@@ -37,6 +41,7 @@ File: [client\Interactions\aim_cursor.sqf at line 38](../../../Src/client/Intera
 ## interaction_aim_applyColorTheme
 
 Type: function
+
 Description: 
 
 
@@ -44,6 +49,7 @@ File: [client\Interactions\aim_cursor.sqf at line 64](../../../Src/client/Intera
 ## interaction_aim_onUpdate
 
 Type: function
+
 Description: 
 
 
@@ -53,6 +59,7 @@ File: [client\Interactions\aim_cursor.sqf at line 68](../../../Src/client/Intera
 ## INTERACT_ITEM_DISTANCE
 
 Type: constant
+
 Description: 
 
 
@@ -64,6 +71,7 @@ File: [client\Interactions\interact.hpp at line 7](../../../Src/client/Interacti
 ## INTERACT_ITEM_LEG_DISTANCE
 
 Type: constant
+
 Description: 
 
 
@@ -75,6 +83,7 @@ File: [client\Interactions\interact.hpp at line 8](../../../Src/client/Interacti
 ## INTERACT_MOB_DISTANCE
 
 Type: constant
+
 Description: 
 
 
@@ -86,6 +95,7 @@ File: [client\Interactions\interact.hpp at line 9](../../../Src/client/Interacti
 ## INTERACT_MOB_COLLECT_DIST
 
 Type: constant
+
 Description: 
 
 
@@ -97,6 +107,7 @@ File: [client\Interactions\interact.hpp at line 10](../../../Src/client/Interact
 ## WORLD_CONTAINER_ALLOWDISTANCE
 
 Type: constant
+
 Description: 
 
 
@@ -108,6 +119,7 @@ File: [client\Interactions\interact.hpp at line 11](../../../Src/client/Interact
 ## INTERACT_DISTANCE
 
 Type: constant
+
 Description: 
 
 
@@ -119,6 +131,7 @@ File: [client\Interactions\interact.hpp at line 14](../../../Src/client/Interact
 ## getHeadMobPos(mob)
 
 Type: constant
+
 Description: 
 - Param: mob
 
@@ -130,6 +143,7 @@ File: [client\Interactions\interact.hpp at line 16](../../../Src/client/Interact
 ## getCenterMobPos(mob)
 
 Type: constant
+
 Description: 
 - Param: mob
 
@@ -141,6 +155,7 @@ File: [client\Interactions\interact.hpp at line 17](../../../Src/client/Interact
 ## isInteractible(targ)
 
 Type: constant
+
 Description: 
 - Param: targ
 
@@ -152,6 +167,7 @@ File: [client\Interactions\interact.hpp at line 19](../../../Src/client/Interact
 ## VERB_LASTCHECKEDOBJECTDATA_DEFAULT
 
 Type: constant
+
 Description: 
 
 
@@ -163,6 +179,7 @@ File: [client\Interactions\interact.hpp at line 21](../../../Src/client/Interact
 ## INTERACT_LODS_CHECK_STANDART
 
 Type: constant
+
 Description: 
 
 
@@ -174,6 +191,7 @@ File: [client\Interactions\interact.hpp at line 24](../../../Src/client/Interact
 ## INTERACT_LODS_CHECK_GEOM
 
 Type: constant
+
 Description: #define INTERACT_LODS_CHECK_STANDART "ROADWAY","VIEW"
 
 
@@ -185,6 +203,7 @@ File: [client\Interactions\interact.hpp at line 25](../../../Src/client/Interact
 ## INTERACT_RPC_CLICK
 
 Type: constant
+
 Description: interact modes in rpc iact
 
 
@@ -196,6 +215,7 @@ File: [client\Interactions\interact.hpp at line 28](../../../Src/client/Interact
 ## INTERACT_RPC_ALTCLICK
 
 Type: constant
+
 Description: 
 
 
@@ -207,6 +227,7 @@ File: [client\Interactions\interact.hpp at line 29](../../../Src/client/Interact
 ## INTERACT_RPC_EXAMINE
 
 Type: constant
+
 Description: 
 
 
@@ -218,6 +239,7 @@ File: [client\Interactions\interact.hpp at line 30](../../../Src/client/Interact
 ## INTERACT_RPC_MAIN
 
 Type: constant
+
 Description: 
 
 
@@ -229,6 +251,7 @@ File: [client\Interactions\interact.hpp at line 31](../../../Src/client/Interact
 ## INTERACT_RPC_EXTRA
 
 Type: constant
+
 Description: 
 
 
@@ -240,6 +263,7 @@ File: [client\Interactions\interact.hpp at line 32](../../../Src/client/Interact
 ## INTERACT_RPC_CLICK_SELF
 
 Type: constant
+
 Description: 
 
 
@@ -251,6 +275,7 @@ File: [client\Interactions\interact.hpp at line 33](../../../Src/client/Interact
 ## INTERACT_PROGRESS_TYPE_FULL
 
 Type: constant
+
 Description: 
 
 
@@ -262,6 +287,7 @@ File: [client\Interactions\interact.hpp at line 41](../../../Src/client/Interact
 ## INTERACT_PROGRESS_TYPE_MEDIUM
 
 Type: constant
+
 Description: 
 
 
@@ -273,6 +299,7 @@ File: [client\Interactions\interact.hpp at line 42](../../../Src/client/Interact
 ## INTERACT_PROGRESS_TYPE_LAZY
 
 Type: constant
+
 Description: 
 
 
@@ -284,6 +311,7 @@ File: [client\Interactions\interact.hpp at line 43](../../../Src/client/Interact
 ## ATTACK_TYPE_ASSOC_HAND
 
 Type: constant
+
 Description: 
 
 
@@ -295,6 +323,7 @@ File: [client\Interactions\interact.hpp at line 46](../../../Src/client/Interact
 ## ATTACK_TYPE_ASSOC_THRUST_ONLY
 
 Type: constant
+
 Description: только прямые
 
 
@@ -306,6 +335,7 @@ File: [client\Interactions\interact.hpp at line 48](../../../Src/client/Interact
 ## ATTACK_TYPE_ASSOC_SWING_ONLY
 
 Type: constant
+
 Description: только амплитудные
 
 
@@ -317,6 +347,7 @@ File: [client\Interactions\interact.hpp at line 50](../../../Src/client/Interact
 ## ATTACK_TYPE_ASSOC_STANDARD
 
 Type: constant
+
 Description: 2 стандартных режима
 
 
@@ -328,6 +359,7 @@ File: [client\Interactions\interact.hpp at line 52](../../../Src/client/Interact
 ## ATTACK_TYPE_ASSOC_WPN_HANDLE
 
 Type: constant
+
 Description: по сколько выстрелов можно делать WPN_[x]_[n] (ATTACK_TYPE_ASSOC_WPN_1_3 - 1 и 3)
 
 
@@ -339,6 +371,7 @@ File: [client\Interactions\interact.hpp at line 54](../../../Src/client/Interact
 ## ATTACK_TYPE_ASSOC_WPN_1
 
 Type: constant
+
 Description: 
 
 
@@ -350,6 +383,7 @@ File: [client\Interactions\interact.hpp at line 55](../../../Src/client/Interact
 ## ATTACK_TYPE_ASSOC_WPN_1_3
 
 Type: constant
+
 Description: 
 
 
@@ -361,6 +395,7 @@ File: [client\Interactions\interact.hpp at line 56](../../../Src/client/Interact
 ## ATTACK_TYPE_ASSOC_SWING_HANDLE
 
 Type: constant
+
 Description: 
 
 
@@ -372,6 +407,7 @@ File: [client\Interactions\interact.hpp at line 58](../../../Src/client/Interact
 ## ATTACK_TYPE_ASSOC_IS_SHOOTING(v)
 
 Type: constant
+
 Description: 
 - Param: v
 
@@ -385,6 +421,7 @@ File: [client\Interactions\interact.hpp at line 60](../../../Src/client/Interact
 ## __hardcoded_angle__
 
 Type: constant
+
 Description: private _angle = (getCameraViewDirection player) select 2;
 
 
@@ -396,6 +433,7 @@ File: [client\Interactions\interact.sqf at line 254](../../../Src/client/Interac
 ## INTERACT_LOG_CANINTERACTWITHOBJECT
 
 Type: constant
+
 Description: 
 
 
@@ -407,6 +445,7 @@ File: [client\Interactions\interact.sqf at line 316](../../../Src/client/Interac
 ## interact_isActive
 
 Type: function
+
 Description: 
 - Param: _conscious (optional, default true)
 - Param: _stunned (optional, default false)
@@ -415,6 +454,7 @@ File: [client\Interactions\interact.sqf at line 42](../../../Src/client/Interact
 ## interact_onLMBPress
 
 Type: function
+
 Description: 
 - Param: _isWorld (optional, default true)
 - Param: _isSelfClick (optional, default false)
@@ -423,6 +463,7 @@ File: [client\Interactions\interact.sqf at line 48](../../../Src/client/Interact
 ## interact_onRMBPress
 
 Type: function
+
 Description: 
 - Param: _isWorld (optional, default true)
 
@@ -430,6 +471,7 @@ File: [client\Interactions\interact.sqf at line 71](../../../Src/client/Interact
 ## interact_onMainAction
 
 Type: function
+
 Description: 
 - Param: _obj
 - Param: _posAtl
@@ -438,6 +480,7 @@ File: [client\Interactions\interact.sqf at line 99](../../../Src/client/Interact
 ## interact_onExtraAction
 
 Type: function
+
 Description: 
 - Param: _obj
 - Param: _posAtl
@@ -446,6 +489,7 @@ File: [client\Interactions\interact.sqf at line 114](../../../Src/client/Interac
 ## interact_sendAction
 
 Type: function
+
 Description: параметры: _isMouseMode - если включен то вектор направления будет браться от позиции мыши
 - Param: _isMouseMode
 - Param: _actionType
@@ -454,6 +498,7 @@ File: [client\Interactions\interact.sqf at line 130](../../../Src/client/Interac
 ## interact_setCombatMode
 
 Type: function
+
 Description: 
 - Param: _newMode
 
@@ -461,6 +506,7 @@ File: [client\Interactions\interact.sqf at line 147](../../../Src/client/Interac
 ## interact_cursorObject
 
 Type: function
+
 Description: Получает цель. В отличии от cursorObject может поймать объект в этом же кадре при свапе видимости
 
 
@@ -468,6 +514,7 @@ File: [client\Interactions\interact.sqf at line 165](../../../Src/client/Interac
 ## interact_getCursorIntersectPos
 
 Type: function
+
 Description: Получает точку пересечения центра экрана в мир
 
 
@@ -475,6 +522,7 @@ File: [client\Interactions\interact.sqf at line 196](../../../Src/client/Interac
 ## interact_getIntersectData
 
 Type: function
+
 Description: Получает информацию об объекте пересечения в виде: [object, intersect position as ATL,vectorUp lod]
 - Param: _ignored
 
@@ -482,6 +530,7 @@ File: [client\Interactions\interact.sqf at line 222](../../../Src/client/Interac
 ## interact_getMouseIntersectData
 
 Type: function
+
 Description: Функция аналогична interact_getIntersectData но по-умоному вычисляет позицию не из центра а из мыши (если возможно)
 - Param: _ignored
 
@@ -489,6 +538,7 @@ File: [client\Interactions\interact.sqf at line 250](../../../Src/client/Interac
 ## interact_checkPosition
 
 Type: function
+
 Description: Проверяет дистанцию до позиции - может ли взаимодействовать по дистанции
 
 
@@ -496,6 +546,7 @@ File: [client\Interactions\interact.sqf at line 278](../../../Src/client/Interac
 ## interact_inScreenView
 
 Type: function
+
 Description: Проверяет видимость позиции в экране
 
 
@@ -503,6 +554,7 @@ File: [client\Interactions\interact.sqf at line 283](../../../Src/client/Interac
 ## interact_canTouchPosition
 
 Type: function
+
 Description: Иным образом функция является проверкой: может ли игрок дотянуться рукой до позиции
 - Param: _posAtl
 - Param: _ignored (optional, default objNull)
@@ -511,6 +563,7 @@ File: [client\Interactions\interact.sqf at line 289](../../../Src/client/Interac
 ## interact_canInteractWithObject
 
 Type: function
+
 Description: Основной обработчик возможности взаимодействия с пердметом. Включает в себя все стандартные проверки позиции, направления и пересечения
 - Param: _object
 - Param: _pos
@@ -519,6 +572,7 @@ File: [client\Interactions\interact.sqf at line 318](../../../Src/client/Interac
 ## interact_getNearPointForObject
 
 Type: function
+
 Description: Находит ближайшую точку на линии игрок->объект
 - Param: _targetOrPos
 
@@ -526,6 +580,7 @@ File: [client\Interactions\interact.sqf at line 345](../../../Src/client/Interac
 ## interact_canUseInteract
 
 Type: function
+
 Description: Однако открыть меню интеракций и изменить какое-либо из значений (кроме интента) можно без этой проверки
 
 
@@ -533,6 +588,7 @@ File: [client\Interactions\interact.sqf at line 378](../../../Src/client/Interac
 ## interact_openMouseMode
 
 Type: function
+
 Description: 
 
 
@@ -540,6 +596,7 @@ File: [client\Interactions\interact.sqf at line 383](../../../Src/client/Interac
 ## interact_closeMouseMode
 
 Type: function
+
 Description: 
 
 
@@ -547,6 +604,7 @@ File: [client\Interactions\interact.sqf at line 408](../../../Src/client/Interac
 ## interact_closeMouseMode_handle
 
 Type: function
+
 Description: 
 
 
@@ -554,6 +612,7 @@ File: [client\Interactions\interact.sqf at line 462](../../../Src/client/Interac
 ## interact_onMouseButtonUp
 
 Type: function
+
 Description: 
 - Param: _d
 - Param: _key
@@ -567,6 +626,7 @@ File: [client\Interactions\interact.sqf at line 477](../../../Src/client/Interac
 ## interact_getReachItem
 
 Type: function
+
 Description: 
 
 
@@ -574,7 +634,9 @@ File: [client\Interactions\interact.sqf at line 542](../../../Src/client/Interac
 ## setpostestmobinmouse
 
 Type: function
+
 > Exists if **DEBUG** defined
+
 Description: 
 
 
@@ -584,6 +646,7 @@ File: [client\Interactions\interact.sqf at line 610](../../../Src/client/Interac
 ## CS_MAP_INDEX_TEXT
 
 Type: constant
+
 Description: ключи для комбат стилей
 
 
@@ -595,6 +658,7 @@ File: [client\Interactions\interactCombat.hpp at line 8](../../../Src/client/Int
 ## CS_MAP_INDEX_COLOR
 
 Type: constant
+
 Description: 
 
 
@@ -606,6 +670,7 @@ File: [client\Interactions\interactCombat.hpp at line 9](../../../Src/client/Int
 ## CS_MAP_INDEX_ENUM
 
 Type: constant
+
 Description: 
 
 
@@ -617,6 +682,7 @@ File: [client\Interactions\interactCombat.hpp at line 10](../../../Src/client/In
 ## CS_MAP_INDEX_TEXT_RANGED
 
 Type: constant
+
 Description: 
 
 
@@ -628,6 +694,7 @@ File: [client\Interactions\interactCombat.hpp at line 11](../../../Src/client/In
 ## curWidgets
 
 Type: constant
+
 Description: ссылки на массив в interactCombat_curWidgets
 
 
@@ -639,6 +706,7 @@ File: [client\Interactions\interactCombat.hpp at line 14](../../../Src/client/In
 ## CM_CUR_IND_ATT
 
 Type: constant
+
 Description: 
 
 
@@ -650,6 +718,7 @@ File: [client\Interactions\interactCombat.hpp at line 16](../../../Src/client/In
 ## CM_CUR_IND_DEF
 
 Type: constant
+
 Description: 
 
 
@@ -661,6 +730,7 @@ File: [client\Interactions\interactCombat.hpp at line 17](../../../Src/client/In
 ## CM_CUR_IND_CS
 
 Type: constant
+
 Description: 
 
 
@@ -672,6 +742,7 @@ File: [client\Interactions\interactCombat.hpp at line 18](../../../Src/client/In
 ## CS_SIZE_H
 
 Type: constant
+
 Description: высота комбат меню
 
 
@@ -683,6 +754,7 @@ File: [client\Interactions\interactCombat.hpp at line 21](../../../Src/client/In
 ## CS_SIZE_W
 
 Type: constant
+
 Description: ширина
 
 
@@ -694,6 +766,7 @@ File: [client\Interactions\interactCombat.hpp at line 23](../../../Src/client/In
 ## TIME_TOLOAD_INTERACTCOMBAT
 
 Type: constant
+
 Description: 
 
 
@@ -705,6 +778,7 @@ File: [client\Interactions\interactCombat.hpp at line 26](../../../Src/client/In
 ## TIME_TOUNLOAD_INTERACTCOMBAT
 
 Type: constant
+
 Description: 
 
 
@@ -716,6 +790,7 @@ File: [client\Interactions\interactCombat.hpp at line 27](../../../Src/client/In
 ## FADE_BUT_AT
 
 Type: constant
+
 Description: 
 
 
@@ -727,6 +802,7 @@ File: [client\Interactions\interactCombat.hpp at line 31](../../../Src/client/In
 ## FADE_BUT_DEF
 
 Type: constant
+
 Description: 
 
 
@@ -738,6 +814,7 @@ File: [client\Interactions\interactCombat.hpp at line 32](../../../Src/client/In
 ## FADE_BUT_CS
 
 Type: constant
+
 Description: 
 
 
@@ -749,6 +826,7 @@ File: [client\Interactions\interactCombat.hpp at line 33](../../../Src/client/In
 ## TIME_BUT_AT
 
 Type: constant
+
 Description: 
 
 
@@ -760,6 +838,7 @@ File: [client\Interactions\interactCombat.hpp at line 35](../../../Src/client/In
 ## TIME_BUT_DEF
 
 Type: constant
+
 Description: 
 
 
@@ -771,6 +850,7 @@ File: [client\Interactions\interactCombat.hpp at line 36](../../../Src/client/In
 ## TIME_BUT_CS
 
 Type: constant
+
 Description: 
 
 
@@ -784,6 +864,7 @@ File: [client\Interactions\interactCombat.hpp at line 37](../../../Src/client/In
 ## vec4(x,y,w,h)
 
 Type: constant
+
 Description: 
 - Param: x
 - Param: y
@@ -798,6 +879,7 @@ File: [client\Interactions\interactCombat.sqf at line 9](../../../Src/client/Int
 ## size_def_w
 
 Type: constant
+
 Description: 
 
 
@@ -809,6 +891,7 @@ File: [client\Interactions\interactCombat.sqf at line 12](../../../Src/client/In
 ## size_col
 
 Type: constant
+
 Description: 
 
 
@@ -820,6 +903,7 @@ File: [client\Interactions\interactCombat.sqf at line 170](../../../Src/client/I
 ## centerizeText(mes)
 
 Type: constant
+
 Description: 
 - Param: mes
 
@@ -831,6 +915,7 @@ File: [client\Interactions\interactCombat.sqf at line 171](../../../Src/client/I
 ## setFadeIfMode(checked,enum,fade,index)
 
 Type: constant
+
 Description: 
 - Param: checked
 - Param: enum
@@ -849,6 +934,7 @@ File: [client\Interactions\interactCombat.sqf at line 173](../../../Src/client/I
 ## allocDefButton(sizes,name,_mode)
 
 Type: constant
+
 Description: 
 - Param: sizes
 - Param: name
@@ -867,6 +953,7 @@ File: [client\Interactions\interactCombat.sqf at line 179](../../../Src/client/I
 ## allocAttTypeButton(sizes,name,_mode)
 
 Type: constant
+
 Description: 
 - Param: sizes
 - Param: name
@@ -886,6 +973,7 @@ File: [client\Interactions\interactCombat.sqf at line 186](../../../Src/client/I
 ## allocCombatStyle(pos,name,_mode)
 
 Type: constant
+
 Description: 
 - Param: pos
 - Param: name
@@ -910,6 +998,7 @@ File: [client\Interactions\interactCombat.sqf at line 195](../../../Src/client/I
 ## getMode(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -921,6 +1010,7 @@ File: [client\Interactions\interactCombat.sqf at line 289](../../../Src/client/I
 ## interactCombat_initCombatStyles
 
 Type: function
+
 Description: 
 - Param: _d
 - Param: _pos
@@ -931,6 +1021,7 @@ File: [client\Interactions\interactCombat.sqf at line 14](../../../Src/client/In
 ## interactCombat_updateAttackTypes
 
 Type: function
+
 Description: 
 - Param: _assocEnum (optional, default interactCombat_at_assocEnum)
 
@@ -938,6 +1029,7 @@ File: [client\Interactions\interactCombat.sqf at line 71](../../../Src/client/In
 ## interactCombat_load
 
 Type: function
+
 Description: 
 
 
@@ -945,6 +1037,7 @@ File: [client\Interactions\interactCombat.sqf at line 158](../../../Src/client/I
 ## interactCombat_onMouseMoving
 
 Type: function
+
 Description: Событие при движении мыши
 - Param: _display
 
@@ -952,6 +1045,7 @@ File: [client\Interactions\interactCombat.sqf at line 261](../../../Src/client/I
 ## interactCombat_onPressCS
 
 Type: function
+
 Description: перегрузка метода принимет первый параметр как стиль
 - Param: _ct
 - Param: _butt
@@ -960,6 +1054,7 @@ File: [client\Interactions\interactCombat.sqf at line 293](../../../Src/client/I
 ## interactCombat_onPressDef
 
 Type: function
+
 Description: событие при нажатии на кнопку типа защиты
 - Param: _ct
 - Param: _butt
@@ -968,6 +1063,7 @@ File: [client\Interactions\interactCombat.sqf at line 308](../../../Src/client/I
 ## interactCombat_onPressAttType
 
 Type: function
+
 Description: событие при нажатии на кнопку типа атаки
 - Param: _ct
 - Param: _butt
@@ -978,6 +1074,7 @@ File: [client\Interactions\interactCombat.sqf at line 330](../../../Src/client/I
 ## addCStyle(_color,name,nameranged,_enum)
 
 Type: constant
+
 Description: 0 handed,1 shooting
 - Param: _color
 - Param: name
@@ -994,6 +1091,7 @@ File: [client\Interactions\interactCombat_defines.sqf at line 12](../../../Src/c
 ## INTERACT_EMOTE_SIZE_H
 
 Type: constant
+
 Description: 
 
 
@@ -1005,6 +1103,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 17](../../../Src/client
 ## INTERACT_EMOTE_SIZE_W
 
 Type: constant
+
 Description: 
 
 
@@ -1016,6 +1115,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 18](../../../Src/client
 ## interactEmote_load
 
 Type: function
+
 Description: 
 - Param: 
 - Param: _key
@@ -1024,6 +1124,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 24](../../../Src/client
 ## interactEmote_onListCategoryes
 
 Type: function
+
 Description: открыть лист категорий
 - Param: _mode
 
@@ -1031,6 +1132,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 164](../../../Src/clien
 ## interactEmote_cleanupInputText
 
 Type: function
+
 Description: 
 
 
@@ -1038,6 +1140,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 230](../../../Src/clien
 ## interactEmote_getInputTextParams
 
 Type: function
+
 Description: Получение виджета инпута и текста в нём
 
 
@@ -1045,6 +1148,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 236](../../../Src/clien
 ## interactEmote_handleInputText
 
 Type: function
+
 Description: Обработчик строки инпута. Возврат bool значений означает ошибку текста
 - Param: _text
 
@@ -1052,6 +1156,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 242](../../../Src/clien
 ## interactEmote_onSendEmote
 
 Type: function
+
 Description: 
 - Param: _text
 
@@ -1059,6 +1164,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 290](../../../Src/clien
 ## interactEmote_onMouseMoving
 
 Type: function
+
 Description: 
 - Param: _display
 
@@ -1066,6 +1172,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 305](../../../Src/clien
 ## interactEmote_switchActionMenu
 
 Type: function
+
 Description: 
 - Param: _mode
 - Param: _isSetMode (optional, default false)
@@ -1074,6 +1181,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 329](../../../Src/clien
 ## interactEmote_loadActions
 
 Type: function
+
 Description: 
 
 
@@ -1081,6 +1189,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 349](../../../Src/clien
 ## interactEmote_doEmoteAction
 
 Type: function
+
 Description: Отправка эмоута
 - Param: _act
 
@@ -1088,6 +1197,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 425](../../../Src/clien
 ## interactEmote_unloadActions
 
 Type: function
+
 Description: 
 - Param: _acts
 
@@ -1097,6 +1207,7 @@ File: [client\Interactions\interactEmoteMenu.sqf at line 447](../../../Src/clien
 ## SIZE_HITPART_ZONE
 
 Type: constant
+
 Description: 
 
 
@@ -1108,6 +1219,7 @@ File: [client\Interactions\interactMenu.hpp at line 8](../../../Src/client/Inter
 ## map_hit(x,y)
 
 Type: constant
+
 Description: 
 - Param: x
 - Param: y
@@ -1120,6 +1232,7 @@ File: [client\Interactions\interactMenu.hpp at line 10](../../../Src/client/Inte
 ## map_zonenames
 
 Type: constant
+
 Description: 
 
 
@@ -1131,6 +1244,7 @@ File: [client\Interactions\interactMenu.hpp at line 12](../../../Src/client/Inte
 ## map_zoneindex
 
 Type: constant
+
 Description: 
 
 
@@ -1142,6 +1256,7 @@ File: [client\Interactions\interactMenu.hpp at line 13](../../../Src/client/Inte
 ## map_limbs
 
 Type: constant
+
 Description: 
 
 
@@ -1153,6 +1268,7 @@ File: [client\Interactions\interactMenu.hpp at line 15](../../../Src/client/Inte
 ## CALLING_IN_DISPLAY_MODE
 
 Type: constant
+
 Description: 
 
 
@@ -1164,6 +1280,7 @@ File: [client\Interactions\interactMenu.hpp at line 17](../../../Src/client/Inte
 ## TIME_TOLOAD_INTERACTMENU
 
 Type: constant
+
 Description: 
 
 
@@ -1175,6 +1292,7 @@ File: [client\Interactions\interactMenu.hpp at line 19](../../../Src/client/Inte
 ## TIME_TOUNLOAD_INTERACTMENU
 
 Type: constant
+
 Description: 
 
 
@@ -1186,6 +1304,7 @@ File: [client\Interactions\interactMenu.hpp at line 20](../../../Src/client/Inte
 ## FADEIN_SPECACT
 
 Type: constant
+
 Description: 
 
 
@@ -1197,6 +1316,7 @@ File: [client\Interactions\interactMenu.hpp at line 22](../../../Src/client/Inte
 ## FADE_TIME
 
 Type: constant
+
 Description: 
 
 
@@ -1208,6 +1328,7 @@ File: [client\Interactions\interactMenu.hpp at line 23](../../../Src/client/Inte
 ## FADE_FOR_SELECTED
 
 Type: constant
+
 Description: 
 
 
@@ -1219,6 +1340,7 @@ File: [client\Interactions\interactMenu.hpp at line 25](../../../Src/client/Inte
 ## TIME_TO_INFADE
 
 Type: constant
+
 Description: 
 
 
@@ -1230,6 +1352,7 @@ File: [client\Interactions\interactMenu.hpp at line 26](../../../Src/client/Inte
 ## ACTION_SWITCHABLE
 
 Type: constant
+
 Description: типы действий. ACTION_SWITCHABLE - переключаемое, ACTION_PLAYING - проигрываемое
 
 
@@ -1241,6 +1364,7 @@ File: [client\Interactions\interactMenu.hpp at line 29](../../../Src/client/Inte
 ## ACTION_PLAYING
 
 Type: constant
+
 Description: 
 
 
@@ -1254,6 +1378,7 @@ File: [client\Interactions\interactMenu.hpp at line 30](../../../Src/client/Inte
 ## DEBUG_USE_BORDERS
 
 Type: constant
+
 Description: 
 
 
@@ -1265,6 +1390,7 @@ File: [client\Interactions\interactMenu.sqf at line 16](../../../Src/client/Inte
 ## debug_colorize(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -1276,6 +1402,7 @@ File: [client\Interactions\interactMenu.sqf at line 18](../../../Src/client/Inte
 ## debug_colorizeButton(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -1287,6 +1414,7 @@ File: [client\Interactions\interactMenu.sqf at line 19](../../../Src/client/Inte
 ## colorizeCategory(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -1298,6 +1426,7 @@ File: [client\Interactions\interactMenu.sqf at line 21](../../../Src/client/Inte
 ## colorizeButton(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -1309,6 +1438,7 @@ File: [client\Interactions\interactMenu.sqf at line 22](../../../Src/client/Inte
 ## setButtonText(wid,text)
 
 Type: constant
+
 Description: setting text for attr (skill)
 - Param: wid
 - Param: text
@@ -1321,6 +1451,7 @@ File: [client\Interactions\interactMenu.sqf at line 25](../../../Src/client/Inte
 ## setCategText(wid,text)
 
 Type: constant
+
 Description: 
 - Param: wid
 - Param: text
@@ -1333,6 +1464,7 @@ File: [client\Interactions\interactMenu.sqf at line 26](../../../Src/client/Inte
 ## setAttrText(wid,text,addit)
 
 Type: constant
+
 Description: 
 - Param: wid
 - Param: text
@@ -1346,6 +1478,7 @@ File: [client\Interactions\interactMenu.sqf at line 27](../../../Src/client/Inte
 ## setText(wid,text)
 
 Type: constant
+
 Description: 
 - Param: wid
 - Param: text
@@ -1358,6 +1491,7 @@ File: [client\Interactions\interactMenu.sqf at line 28](../../../Src/client/Inte
 ## WIDTH_ATTR
 
 Type: constant
+
 Description: 
 
 
@@ -1369,6 +1503,7 @@ File: [client\Interactions\interactMenu.sqf at line 30](../../../Src/client/Inte
 ## HEIGHT_CATEGORY
 
 Type: constant
+
 Description: 
 
 
@@ -1380,6 +1515,7 @@ File: [client\Interactions\interactMenu.sqf at line 31](../../../Src/client/Inte
 ## SIZE_INTENT_BUTTON
 
 Type: constant
+
 Description: 
 
 
@@ -1391,6 +1527,7 @@ File: [client\Interactions\interactMenu.sqf at line 32](../../../Src/client/Inte
 ## STD_BIAS_Y
 
 Type: constant
+
 Description: 
 
 
@@ -1402,6 +1539,7 @@ File: [client\Interactions\interactMenu.sqf at line 33](../../../Src/client/Inte
 ## STD_BIAS_X
 
 Type: constant
+
 Description: 
 
 
@@ -1413,6 +1551,7 @@ File: [client\Interactions\interactMenu.sqf at line 34](../../../Src/client/Inte
 ## createText(sizes)
 
 Type: constant
+
 Description: 
 - Param: sizes
 
@@ -1424,6 +1563,7 @@ File: [client\Interactions\interactMenu.sqf at line 50](../../../Src/client/Inte
 ## createButton(sizes)
 
 Type: constant
+
 Description: 
 - Param: sizes
 
@@ -1435,6 +1575,7 @@ File: [client\Interactions\interactMenu.sqf at line 51](../../../Src/client/Inte
 ## createSpecButton(sizes)
 
 Type: constant
+
 Description: 
 - Param: sizes
 
@@ -1446,6 +1587,7 @@ File: [client\Interactions\interactMenu.sqf at line 52](../../../Src/client/Inte
 ## vec4(x,y,w,h)
 
 Type: constant
+
 Description: 
 - Param: x
 - Param: y
@@ -1460,6 +1602,7 @@ File: [client\Interactions\interactMenu.sqf at line 54](../../../Src/client/Inte
 ## MAX_SELECTIONS_TODOWN
 
 Type: constant
+
 Description: 
 
 
@@ -1471,6 +1614,7 @@ File: [client\Interactions\interactMenu.sqf at line 159](../../../Src/client/Int
 ## allocSelectionId(wid,sel)
 
 Type: constant
+
 Description: 
 - Param: wid
 - Param: sel
@@ -1485,6 +1629,7 @@ File: [client\Interactions\interactMenu.sqf at line 161](../../../Src/client/Int
 ## allocSelectionId_limb(wid,sel)
 
 Type: constant
+
 Description: 
 - Param: wid
 - Param: sel
@@ -1498,6 +1643,7 @@ File: [client\Interactions\interactMenu.sqf at line 165](../../../Src/client/Int
 ## _specact_bias_x
 
 Type: constant
+
 Description: 
 
 
@@ -1509,6 +1655,7 @@ File: [client\Interactions\interactMenu.sqf at line 290](../../../Src/client/Int
 ## _specact_bias_y
 
 Type: constant
+
 Description: 
 
 
@@ -1520,6 +1667,7 @@ File: [client\Interactions\interactMenu.sqf at line 291](../../../Src/client/Int
 ## _specact_size_h
 
 Type: constant
+
 Description: 
 
 
@@ -1531,6 +1679,7 @@ File: [client\Interactions\interactMenu.sqf at line 292](../../../Src/client/Int
 ## interactMenu_load
 
 Type: function
+
 Description: 
 
 
@@ -1538,6 +1687,7 @@ File: [client\Interactions\interactMenu.sqf at line 40](../../../Src/client/Inte
 ## interactMenu_onMouseMove
 
 Type: function
+
 Description: 
 - Param: _display
 - Param: _xPos
@@ -1547,6 +1697,7 @@ File: [client\Interactions\interactMenu.sqf at line 245](../../../Src/client/Int
 ## interactMenu_unloadMenu
 
 Type: function
+
 Description: 
 
 
@@ -1554,6 +1705,7 @@ File: [client\Interactions\interactMenu.sqf at line 264](../../../Src/client/Int
 ## interactMenu_syncSpecialActions
 
 Type: function
+
 Description: 
 - Param: _isInit (optional, default true)
 
@@ -1563,6 +1715,7 @@ File: [client\Interactions\interactMenu.sqf at line 272](../../../Src/client/Int
 ## INT_PATH(pt)
 
 Type: constant
+
 Description: 
 - Param: pt
 
@@ -1576,6 +1729,7 @@ File: [client\Interactions\interactMenu_defines.sqf at line 17](../../../Src/cli
 ## interactMenu_onUpdateSkills
 
 Type: function
+
 Description: 
 
 
@@ -1583,6 +1737,7 @@ File: [client\Interactions\interactMenu_functions.sqf at line 9](../../../Src/cl
 ## interactMenu_getMemories
 
 Type: function
+
 Description: Запрос на получение воспоминаний
 - Param: _mode
 
@@ -1590,6 +1745,7 @@ File: [client\Interactions\interactMenu_functions.sqf at line 34](../../../Src/c
 ## interactMenu_setSelection
 
 Type: function
+
 Description: 
 - Param: _id
 - Param: _button
@@ -1598,6 +1754,7 @@ File: [client\Interactions\interactMenu_functions.sqf at line 47](../../../Src/c
 ## interactMenu_syncCurSelection
 
 Type: function
+
 Description: 
 
 
@@ -1605,6 +1762,7 @@ File: [client\Interactions\interactMenu_functions.sqf at line 60](../../../Src/c
 ## interactMenu_onPressSpecAct
 
 Type: function
+
 Description: 
 - Param: _ct
 - Param: _butt
@@ -1615,7 +1773,8 @@ File: [client\Interactions\interactMenu_functions.sqf at line 84](../../../Src/c
 ## getObjReference(obj)
 
 Type: constant
-Description: ======================================================
+
+Description: 
 - Param: obj
 
 Replaced value:
@@ -1626,6 +1785,7 @@ File: [client\Interactions\interact_component_shared.hpp at line 7](../../../Src
 ## getObjReferenceWithMob(obj)
 
 Type: constant
+
 Description: 
 - Param: obj
 
@@ -1639,6 +1799,7 @@ File: [client\Interactions\interact_component_shared.hpp at line 9](../../../Src
 ## nonSee(ind)
 
 Type: constant
+
 Description: 
 - Param: ind
 
@@ -1650,6 +1811,7 @@ File: [client\Interactions\interact_deprecated.sqf at line 61](../../../Src/clie
 ## useviswidgets
 
 Type: constant
+
 Description: 
 
 
@@ -1661,6 +1823,7 @@ File: [client\Interactions\interact_deprecated.sqf at line 93](../../../Src/clie
 ## mlp(selection)
 
 Type: constant
+
 Description: 
 - Param: selection
 
@@ -1672,6 +1835,7 @@ File: [client\Interactions\interact_deprecated.sqf at line 196](../../../Src/cli
 ## DEBUG_ALLOW_DRAW_BBX
 
 Type: constant
+
 Description: 
 
 
@@ -1683,6 +1847,7 @@ File: [client\Interactions\interact_deprecated.sqf at line 252](../../../Src/cli
 ## DEBUG_DRAW_BBX_DISTANCE
 
 Type: constant
+
 Description: #define DEBUG_ALLOW_DRAW_BBX
 
 
@@ -1694,6 +1859,7 @@ File: [client\Interactions\interact_deprecated.sqf at line 253](../../../Src/cli
 ## interact_canHandReach
 
 Type: function
+
 Description: позиция достаточно близка чтобы тронуть рукой
 - Param: _pos2
 - Param: _dopDist (optional, default 0)
@@ -1702,6 +1868,7 @@ File: [client\Interactions\interact_deprecated.sqf at line 10](../../../Src/clie
 ## interact_canSeeObject
 
 Type: function
+
 Description: видно ли объект
 
 
@@ -1709,6 +1876,7 @@ File: [client\Interactions\interact_deprecated.sqf at line 28](../../../Src/clie
 ## interact_canSeeMob_handReach
 
 Type: function
+
 Description: #define useviswidgets
 - Param: _target
 
@@ -1716,6 +1884,7 @@ File: [client\Interactions\interact_deprecated.sqf at line 95](../../../Src/clie
 ## interact_findNearPosMob
 
 Type: function
+
 Description: 
 - Param: _mx
 - Param: _my
@@ -1724,7 +1893,9 @@ File: [client\Interactions\interact_deprecated.sqf at line 194](../../../Src/cli
 ## interact_debug_drawBBX
 
 Type: function
+
 > Exists if **DEBUG_ALLOW_DRAW_BBX** defined
+
 Description: 
 
 
@@ -1732,7 +1903,9 @@ File: [client\Interactions\interact_deprecated.sqf at line 260](../../../Src/cli
 ## interact_debug_unboxDecal
 
 Type: function
+
 > Exists if **DEBUG_ALLOW_DRAW_BBX** defined
+
 Description: 
 
 
@@ -1740,7 +1913,9 @@ File: [client\Interactions\interact_deprecated.sqf at line 265](../../../Src/cli
 ## interact_debug_internal_drawBBXObject
 
 Type: function
+
 > Exists if **DEBUG_ALLOW_DRAW_BBX** defined
+
 Description: 
 
 
@@ -1750,13 +1925,15 @@ File: [client\Interactions\interact_deprecated.sqf at line 270](../../../Src/cli
 ## interact_examine
 
 Type: function
-Description: ======================================================
+
+Description: 
 
 
 File: [client\Interactions\interact_examine.sqf at line 8](../../../Src/client/Interactions/interact_examine.sqf#L8)
 ## interact_pointTo
 
 Type: function
+
 Description: 
 
 
@@ -1766,7 +1943,8 @@ File: [client\Interactions\interact_examine.sqf at line 19](../../../Src/client/
 ## INTERACT_GRAB_UPDATE_DELAY
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -1777,6 +1955,7 @@ File: [client\Interactions\interact_grabbing.sqf at line 7](../../../Src/client/
 ## interact_grab_start
 
 Type: function
+
 Description: 
 - Param: _src
 - Param: _sidePos
@@ -1787,6 +1966,7 @@ File: [client\Interactions\interact_grabbing.sqf at line 16](../../../Src/client
 ## interact_grab_onUpdate
 
 Type: function
+
 Description: 
 - Param: _src
 - Param: _sidePos
@@ -1796,6 +1976,7 @@ File: [client\Interactions\interact_grabbing.sqf at line 26](../../../Src/client
 ## interact_grab_stop
 
 Type: function
+
 Description: 
 - Param: _idx
 
@@ -1805,6 +1986,7 @@ File: [client\Interactions\interact_grabbing.sqf at line 60](../../../Src/client
 ## __log_mainhandle
 
 Type: constant
+
 Description: 
 
 
@@ -1816,7 +1998,9 @@ File: [client\Interactions\interact_mainhandle.sqf at line 9](../../../Src/clien
 ## ON_FINALIZE(reason)
 
 Type: constant
+
 > Exists if **__log_mainhandle** defined
+
 Description: 
 - Param: reason
 
@@ -1828,7 +2012,9 @@ File: [client\Interactions\interact_mainhandle.sqf at line 16](../../../Src/clie
 ## ON_FINALIZE(reason)
 
 Type: constant
+
 > Exists if **__log_mainhandle** not defined
+
 Description: 
 - Param: reason
 
@@ -1840,6 +2026,7 @@ File: [client\Interactions\interact_mainhandle.sqf at line 18](../../../Src/clie
 ## checkExiter()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -1851,6 +2038,7 @@ File: [client\Interactions\interact_mainhandle.sqf at line 28](../../../Src/clie
 ## setExiter(mode)
 
 Type: constant
+
 Description: 
 - Param: mode
 
@@ -1864,7 +2052,8 @@ File: [client\Interactions\interact_mainhandle.sqf at line 29](../../../Src/clie
 ## interact_processResist
 
 Type: function
-Description: ======================================================
+
+Description: 
 
 
 File: [client\Interactions\interact_resist.sqf at line 7](../../../Src/client/Interactions/interact_resist.sqf#L7)
@@ -1873,6 +2062,7 @@ File: [client\Interactions\interact_resist.sqf at line 7](../../../Src/client/In
 ## PROGRESS_DEBUG
 
 Type: constant
+
 Description: 
 
 
@@ -1884,6 +2074,7 @@ File: [client\Interactions\progress.sqf at line 7](../../../Src/client/Interacti
 ## SIZEPROG
 
 Type: constant
+
 Description: #define PROGRESS_DEBUG
 
 
@@ -1895,6 +2086,7 @@ File: [client\Interactions\progress.sqf at line 9](../../../Src/client/Interacti
 ## ONEPERCENTSIZE
 
 Type: constant
+
 Description: 
 
 
@@ -1906,6 +2098,7 @@ File: [client\Interactions\progress.sqf at line 10](../../../Src/client/Interact
 ## PROGRADIUSPERCENT
 
 Type: constant
+
 Description: 
 
 
@@ -1917,6 +2110,7 @@ File: [client\Interactions\progress.sqf at line 11](../../../Src/client/Interact
 ## PROGRESS_MAX_DISTANCE_FALLDOWN
 
 Type: constant
+
 Description: 
 
 
@@ -1928,6 +2122,7 @@ File: [client\Interactions\progress.sqf at line 13](../../../Src/client/Interact
 ## PROGRESS_DISTANCE_TARGET_FALLDOWN
 
 Type: constant
+
 Description: 
 
 
@@ -1939,6 +2134,7 @@ File: [client\Interactions\progress.sqf at line 14](../../../Src/client/Interact
 ## TIME_TO_OUTFADE_PROGRESS
 
 Type: constant
+
 Description: 
 
 
@@ -1950,6 +2146,7 @@ File: [client\Interactions\progress.sqf at line 17](../../../Src/client/Interact
 ## TIME_TO_SUCCESS_PROGRESS
 
 Type: constant
+
 Description: 
 
 
@@ -1961,6 +2158,7 @@ File: [client\Interactions\progress.sqf at line 18](../../../Src/client/Interact
 ## TIME_TO_ABORT_PROGRESS
 
 Type: constant
+
 Description: 
 
 
@@ -1972,6 +2170,7 @@ File: [client\Interactions\progress.sqf at line 19](../../../Src/client/Interact
 ## ROUNDSTEP
 
 Type: constant
+
 Description: 
 
 
@@ -1983,6 +2182,7 @@ File: [client\Interactions\progress.sqf at line 21](../../../Src/client/Interact
 ## ROUNDCOUNT
 
 Type: constant
+
 Description: 
 
 
@@ -1994,6 +2194,7 @@ File: [client\Interactions\progress.sqf at line 22](../../../Src/client/Interact
 ## override_setpos_precent_w(h_value)
 
 Type: constant
+
 Description: 
 - Param: h_value
 
@@ -2005,6 +2206,7 @@ File: [client\Interactions\progress.sqf at line 24](../../../Src/client/Interact
 ## interact_progress_countItms
 
 Type: constant
+
 Description: 
 
 
@@ -2016,6 +2218,7 @@ File: [client\Interactions\progress.sqf at line 33](../../../Src/client/Interact
 ## MAX_ALLOW_DISTANCE_CAM_OFFSET
 
 Type: constant
+
 Description: interact_progress_lastPlayerDir = 0;
 
 
@@ -2027,6 +2230,7 @@ File: [client\Interactions\progress.sqf at line 42](../../../Src/client/Interact
 ## interact_progress_checkActivity
 
 Type: function
+
 Description: 
 
 
@@ -2034,6 +2238,7 @@ File: [client\Interactions\progress.sqf at line 94](../../../Src/client/Interact
 ## interact_progress_start
 
 Type: function
+
 Description: Запуск функции прогресса
 - Param: _duration
 
@@ -2041,6 +2246,7 @@ File: [client\Interactions\progress.sqf at line 120](../../../Src/client/Interac
 ## interact_progress_onUpdate
 
 Type: function
+
 Description: 
 
 
@@ -2048,6 +2254,7 @@ File: [client\Interactions\progress.sqf at line 141](../../../Src/client/Interac
 ## interact_progress_success
 
 Type: function
+
 Description: Прогресс выполнен
 
 
@@ -2055,6 +2262,7 @@ File: [client\Interactions\progress.sqf at line 170](../../../Src/client/Interac
 ## interact_progress_stop
 
 Type: function
+
 Description: Остановка прогресса
 - Param: _sendToServerCancellationToken (optional, default false)
 - Param: _fadeValue (optional, default 0)
@@ -2063,6 +2271,7 @@ File: [client\Interactions\progress.sqf at line 176](../../../Src/client/Interac
 ## interact_progress_init
 
 Type: function
+
 Description: initializer progress
 - Param: _rs
 - Param: _gs
@@ -2072,6 +2281,7 @@ File: [client\Interactions\progress.sqf at line 203](../../../Src/client/Interac
 ## interact_progress_applyColorTheme
 
 Type: function
+
 Description: 
 
 
@@ -2081,6 +2291,7 @@ File: [client\Interactions\progress.sqf at line 248](../../../Src/client/Interac
 ## getPosObjFromList(idx)
 
 Type: constant
+
 Description: ret vec2 relative pos from camera
 - Param: idx
 
@@ -2092,6 +2303,7 @@ File: [client\Interactions\RayCastConcept.sqf at line 79](../../../Src/client/In
 ## rc_init
 
 Type: function
+
 Description: 
 
 
@@ -2099,6 +2311,7 @@ File: [client\Interactions\RayCastConcept.sqf at line 22](../../../Src/client/In
 ## rc_getConvertedPos
 
 Type: function
+
 Description: 
 - Param: _xPos
 - Param: _yPos
@@ -2109,6 +2322,7 @@ File: [client\Interactions\RayCastConcept.sqf at line 75](../../../Src/client/In
 ## TIME_FADEOUT_VERBMENU
 
 Type: constant
+
 Description: 
 
 
@@ -2120,6 +2334,7 @@ File: [client\Interactions\verbs.sqf at line 10](../../../Src/client/Interaction
 ## TIME_FADEIN_VERBMENU
 
 Type: constant
+
 Description: 
 
 
@@ -2131,6 +2346,7 @@ File: [client\Interactions\verbs.sqf at line 11](../../../Src/client/Interaction
 ## SIZE_WIND_W
 
 Type: constant
+
 Description: 
 
 
@@ -2142,6 +2358,7 @@ File: [client\Interactions\verbs.sqf at line 97](../../../Src/client/Interaction
 ## SIZE_WIND_H
 
 Type: constant
+
 Description: 
 
 
@@ -2153,6 +2370,7 @@ File: [client\Interactions\verbs.sqf at line 98](../../../Src/client/Interaction
 ## SIZE_BUTTON
 
 Type: constant
+
 Description: 
 
 
@@ -2164,7 +2382,9 @@ File: [client\Interactions\verbs.sqf at line 99](../../../Src/client/Interaction
 ## ON_FINALIZE(reason)
 
 Type: constant
+
 > Exists if **DEBUG** defined
+
 Description: 
 - Param: reason
 
@@ -2176,7 +2396,9 @@ File: [client\Interactions\verbs.sqf at line 186](../../../Src/client/Interactio
 ## ON_FINALIZE(reason)
 
 Type: constant
+
 > Exists if **DEBUG** not defined
+
 Description: 
 - Param: reason
 
@@ -2188,6 +2410,7 @@ File: [client\Interactions\verbs.sqf at line 188](../../../Src/client/Interactio
 ## ON_FINALIZE(reason)
 
 Type: constant
+
 Description: 
 - Param: reason
 
@@ -2199,6 +2422,7 @@ File: [client\Interactions\verbs.sqf at line 190](../../../Src/client/Interactio
 ## interact_onLoadVerbs
 
 Type: function
+
 Description: 
 - Param: _targetName
 - Param: _verbList
@@ -2208,6 +2432,7 @@ File: [client\Interactions\verbs.sqf at line 13](../../../Src/client/Interaction
 ## verb_internal_checkBind
 
 Type: function
+
 Description: Проверка бинда и возвращение доп постфикса
 - Param: _intorstr
 
@@ -2215,6 +2440,7 @@ File: [client\Interactions\verbs.sqf at line 70](../../../Src/client/Interaction
 ## verb_translate
 
 Type: function
+
 Description: 
 - Param: _verb
 
@@ -2222,6 +2448,7 @@ File: [client\Interactions\verbs.sqf at line 82](../../../Src/client/Interaction
 ## verb_loadMenu
 
 Type: function
+
 Description: 
 - Param: _translateList
 - Param: _verbList
@@ -2232,6 +2459,7 @@ File: [client\Interactions\verbs.sqf at line 94](../../../Src/client/Interaction
 ## verb_onPickVerb
 
 Type: function
+
 Description: Событие которое возникает при нажатии на кнопку действия
 - Param: _control
 
@@ -2239,6 +2467,7 @@ File: [client\Interactions\verbs.sqf at line 182](../../../Src/client/Interactio
 ## verb_resetDataForND
 
 Type: function
+
 Description: 
 
 
@@ -2246,6 +2475,7 @@ File: [client\Interactions\verbs.sqf at line 223](../../../Src/client/Interactio
 ## verb_unloadMenu
 
 Type: function
+
 Description: 
 
 
@@ -2253,6 +2483,7 @@ File: [client\Interactions\verbs.sqf at line 232](../../../Src/client/Interactio
 ## verb_setHideInventory
 
 Type: function
+
 Description: 
 - Param: _mode
 - Param: _closeFlag (optional, default false)
@@ -2261,6 +2492,7 @@ File: [client\Interactions\verbs.sqf at line 256](../../../Src/client/Interactio
 ## isInsideVerbMenu
 
 Type: function
+
 Description: 
 
 

@@ -3,6 +3,7 @@
 ## ND_INIT(name)
 
 Type: constant
+
 Description: 
 - Param: name
 
@@ -14,6 +15,7 @@ File: [client\NetDisplays\NetDisplay.h at line 10](../../../Src/client/NetDispla
 ## ND_END
 
 Type: constant
+
 Description: 
 
 
@@ -25,6 +27,7 @@ File: [client\NetDisplays\NetDisplay.h at line 12](../../../Src/client/NetDispla
 ## vec4(x,y,w,h)
 
 Type: constant
+
 Description: 
 - Param: x
 - Param: y
@@ -39,6 +42,7 @@ File: [client\NetDisplays\NetDisplay.h at line 14](../../../Src/client/NetDispla
 ## ctgNULL
 
 Type: constant
+
 Description: 
 
 
@@ -50,6 +54,7 @@ File: [client\NetDisplays\NetDisplay.h at line 15](../../../Src/client/NetDispla
 ## addSavedWdiget(wid)
 
 Type: constant
+
 Description: 
 - Param: wid
 
@@ -61,6 +66,7 @@ File: [client\NetDisplays\NetDisplay.h at line 17](../../../Src/client/NetDispla
 ## getSavedWidgets
 
 Type: constant
+
 Description: 
 
 
@@ -72,6 +78,7 @@ File: [client\NetDisplays\NetDisplay.h at line 18](../../../Src/client/NetDispla
 ## regNDWidget(widgetType,vecpos,probCtg,datatype)
 
 Type: constant
+
 Description: 
 - Param: widgetType
 - Param: vecpos
@@ -88,6 +95,7 @@ File: [client\NetDisplays\NetDisplay.h at line 20](../../../Src/client/NetDispla
 ## regNDRPC(evname)
 
 Type: constant
+
 Description: 
 - Param: evname
 
@@ -102,6 +110,7 @@ File: [client\NetDisplays\NetDisplay.h at line 24](../../../Src/client/NetDispla
 ## lastNDWidget
 
 Type: constant
+
 Description: 
 
 
@@ -113,6 +122,7 @@ File: [client\NetDisplays\NetDisplay.h at line 29](../../../Src/client/NetDispla
 ## thisDisplay
 
 Type: constant
+
 Description: 
 
 
@@ -124,6 +134,7 @@ File: [client\NetDisplays\NetDisplay.h at line 30](../../../Src/client/NetDispla
 ## isFirstLoad
 
 Type: constant
+
 Description: 
 
 
@@ -135,6 +146,7 @@ File: [client\NetDisplays\NetDisplay.h at line 31](../../../Src/client/NetDispla
 ## ctxParams
 
 Type: constant
+
 Description: 
 
 
@@ -148,7 +160,9 @@ File: [client\NetDisplays\NetDisplay.h at line 32](../../../Src/client/NetDispla
 ## nd_createTestDisplay
 
 Type: function
+
 > Exists if **DEBUG** defined
+
 Description: 
 - Param: _class
 - Param: _data
@@ -157,6 +171,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 39](../../../Src/client/NetDis
 ## nd_loadDisplay
 
 Type: function
+
 Description: 
 - Param: _type
 - Param: _data (optional, default [])
@@ -167,6 +182,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 57](../../../Src/client/NetDis
 ## nd_loadDisplay_lobby
 
 Type: function
+
 Description: 
 - Param: _type
 - Param: _data (optional, default [])
@@ -175,6 +191,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 203](../../../Src/client/NetDi
 ## nd_closeND_lobby
 
 Type: function
+
 Description: 
 - Param: _isRpc (optional, default false)
 
@@ -182,6 +199,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 237](../../../Src/client/NetDi
 ## nd_closeND_lobbyImpl
 
 Type: function
+
 Description: 
 
 
@@ -189,6 +207,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 249](../../../Src/client/NetDi
 ## nd_onPressButton
 
 Type: function
+
 Description: отсылает тип ввода пользователем. можно отправлять данные. Вся логика обработки на сервере в onHandleNDInput
 - Param: _data
 
@@ -196,6 +215,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 256](../../../Src/client/NetDi
 ## nd_cleanupData
 
 Type: function
+
 Description: очистка списка виджетов для полной перегрузки визуала
 
 
@@ -203,6 +223,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 269](../../../Src/client/NetDi
 ## nd_regWidget
 
 Type: function
+
 Description: 
 - Param: _type
 - Param: _vecpos
@@ -213,6 +234,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 277](../../../Src/client/NetDi
 ## nd_addClosingButton
 
 Type: function
+
 Description: 
 - Param: _display
 - Param: _vec4Pos
@@ -223,6 +245,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 283](../../../Src/client/NetDi
 ## nd_onUpdate
 
 Type: function
+
 Description: 
 
 
@@ -230,6 +253,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 299](../../../Src/client/NetDi
 ## nd_onClose
 
 Type: function
+
 Description: 
 
 
@@ -237,6 +261,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 305](../../../Src/client/NetDi
 ## nd_unloadDisplay
 
 Type: function
+
 Description: 
 
 
@@ -244,6 +269,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 315](../../../Src/client/NetDi
 ## nd_stdLoad
 
 Type: function
+
 Description: стандартный алгоритм
 - Param: _sx (optional, default 50)
 - Param: _sy (optional, default 50)
@@ -255,6 +281,7 @@ File: [client\NetDisplays\NetDisplays.sqf at line 332](../../../Src/client/NetDi
 ## __ND_MB_INPUT_MAX_CHARS
 
 Type: constant
+
 Description: 
 
 
@@ -266,6 +293,7 @@ File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 250](../../../Src/cl
 ## __ND_MB_INPUT_MIN_CHARS
 
 Type: constant
+
 Description: 
 
 
@@ -277,6 +305,7 @@ File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 251](../../../Src/cl
 ## ND_VOTEREP_WIDGET_INDEX_ERROR
 
 Type: constant
+
 Description: 
 
 
@@ -288,6 +317,7 @@ File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 344](../../../Src/cl
 ## ND_VOTEREP_WIDGET_INDEX_BESTCTG
 
 Type: constant
+
 Description: 
 
 
@@ -299,6 +329,7 @@ File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 345](../../../Src/cl
 ## ND_VOTEREP_WIDGET_INDEX_BADCTG
 
 Type: constant
+
 Description: 
 
 
@@ -310,6 +341,7 @@ File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 346](../../../Src/cl
 ## nd_internal_voterep_cleanupMaps
 
 Type: function
+
 Description: структуры с виджетами
 
 
@@ -319,6 +351,7 @@ File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 339](../../../Src/cl
 ## SIZE_INVSLOT
 
 Type: constant
+
 Description: 
 
 
@@ -330,6 +363,7 @@ File: [client\NetDisplays\Displays\MobInventory.sqf at line 62](../../../Src/cli
 ## SLOT_BIASH
 
 Type: constant
+
 Description: 
 
 
@@ -341,6 +375,7 @@ File: [client\NetDisplays\Displays\MobInventory.sqf at line 63](../../../Src/cli
 ## allocpos__(xpos,ypos)
 
 Type: constant
+
 Description: 
 - Param: xpos
 - Param: ypos

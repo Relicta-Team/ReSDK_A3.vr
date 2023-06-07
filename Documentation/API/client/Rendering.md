@@ -3,6 +3,7 @@
 ## setRendering(dist)
 
 Type: constant
+
 Description: 
 - Param: dist
 
@@ -14,6 +15,7 @@ File: [client\Rendering\RenderDistance.sqf at line 13](../../../Src/client/Rende
 ## render_dist_onupdate
 
 Type: function
+
 Description: 
 
 
@@ -21,6 +23,7 @@ File: [client\Rendering\RenderDistance.sqf at line 11](../../../Src/client/Rende
 ## render_dist_init
 
 Type: function
+
 Description: 
 
 
@@ -30,7 +33,8 @@ File: [client\Rendering\RenderDistance.sqf at line 35](../../../Src/client/Rende
 ## CAMERA_MODE_ARCADE
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -41,6 +45,7 @@ File: [client\Rendering\Camera\CameraControl.hpp at line 8](../../../Src/client/
 ## CAMERA_MODE_REALISTIC
 
 Type: constant
+
 Description: 
 
 
@@ -54,6 +59,7 @@ File: [client\Rendering\Camera\CameraControl.hpp at line 9](../../../Src/client/
 ## dynamicCamera
 
 Type: constant
+
 Description: 
 
 
@@ -65,6 +71,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 13](../../../Src/client
 ## staticCamera
 
 Type: constant
+
 Description: 
 
 
@@ -76,6 +83,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 14](../../../Src/client
 ## initCam(camtype)
 
 Type: constant
+
 Description: 
 - Param: camtype
 
@@ -87,6 +95,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 15](../../../Src/client
 ## probInverse(val)
 
 Type: constant
+
 Description: 
 - Param: val
 
@@ -98,6 +107,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 97](../../../Src/client
 ## convset(var,svar)
 
 Type: constant
+
 Description: linearConversion [minFrom, maxFrom, value, minTo, maxTo]
 - Param: var
 - Param: svar
@@ -110,6 +120,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 129](../../../Src/clien
 ## convsetFuller(var)
 
 Type: constant
+
 Description: Процентное соотношение когда движение начнет затухать: меньше знач. раньше начнет -V
 - Param: var
 
@@ -121,6 +132,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 129](../../../Src/clien
 ## conversion(data)
 
 Type: constant
+
 Description: 
 - Param: data
 
@@ -132,6 +144,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 260](../../../Src/clien
 ## invertNum(val)
 
 Type: constant
+
 Description: #define conversion(data) linearConversion [0,1,data,] OR vectorLinearConversion
 - Param: val
 
@@ -143,6 +156,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 261](../../../Src/clien
 ## cam_setCameraOnPlayer
 
 Type: function
+
 Description: 
 
 
@@ -150,6 +164,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 31](../../../Src/client
 ## cam_camShake_resetAll
 
 Type: function
+
 Description: here adding tasks for shake
 
 
@@ -157,6 +172,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 57](../../../Src/client
 ## cam_addCamShake
 
 Type: function
+
 Description: 
 - Param: _power
 - Param: _powerDir
@@ -167,6 +183,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 64](../../../Src/client
 ## cam_camshake_onUpdate
 
 Type: function
+
 Description: 
 - Param: _pwr
 - Param: _frq
@@ -181,6 +198,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 72](../../../Src/client
 ## cam_updateCameraRotation
 
 Type: function
+
 Description: 
 
 
@@ -188,6 +206,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 189](../../../Src/clien
 ## cam_onFrame
 
 Type: function
+
 Description: 
 
 
@@ -195,6 +214,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 297](../../../Src/clien
 ## cam_setCameraSetting
 
 Type: function
+
 Description: 
 - Param: _camSetting
 - Param: _applyToVar (optional, default true)
@@ -205,6 +225,7 @@ File: [client\Rendering\Camera\CameraControl.sqf at line 335](../../../Src/clien
 ## probInverse(val)
 
 Type: constant
+
 Description: 
 - Param: val
 
@@ -216,6 +237,7 @@ File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 57](../../../Src/client/
 ## convset(var,svar)
 
 Type: constant
+
 Description: linearConversion [minFrom, maxFrom, value, minTo, maxTo]
 - Param: var
 - Param: svar
@@ -228,6 +250,7 @@ File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 88](../../../Src/client/
 ## convsetFuller(var)
 
 Type: constant
+
 Description: 
 - Param: var
 
@@ -239,6 +262,7 @@ File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 88](../../../Src/client/
 ## cam_camShake_resetAll
 
 Type: function
+
 Description: FOR DEBUG ONLY
  DO NOT INCLUDE THIS FILE IN CLIENTSIDE
 
@@ -247,6 +271,7 @@ File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 15](../../../Src/client/
 ## cam_addCamShake
 
 Type: function
+
 Description: 
 - Param: _power
 - Param: _powerDir
@@ -257,6 +282,7 @@ File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 22](../../../Src/client/
 ## cam_camshake_onUpdate
 
 Type: function
+
 Description: 
 - Param: _pwr
 - Param: _frq
@@ -273,13 +299,15 @@ File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 32](../../../Src/client/
 ## cam_getCamShakeConfig
 
 Type: function
-Description: ======================================================
+
+Description: 
 
 
 File: [client\Rendering\Camera\Camera_ShakeDefs.sqf at line 8](../../../Src/client/Rendering/Camera/Camera_ShakeDefs.sqf#L8)
 ## cam_addCamShakeByConfig
 
 Type: function
+
 Description: 
 - Param: _configName
 - Param: _duration
@@ -290,7 +318,8 @@ File: [client\Rendering\Camera\Camera_ShakeDefs.sqf at line 12](../../../Src/cli
 ## RENDER_EFFECTS_UPDATEDELAY
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -301,6 +330,7 @@ File: [client\Rendering\Effects\Effects_init.sqf at line 7](../../../Src/client/
 ## newParticle()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -312,6 +342,7 @@ File: [client\Rendering\Effects\Effects_init.sqf at line 9](../../../Src/client/
 ## render_effects_init
 
 Type: function
+
 Description: 
 
 
@@ -319,6 +350,7 @@ File: [client\Rendering\Effects\Effects_init.sqf at line 15](../../../Src/client
 ## render_effects_updateParticles
 
 Type: function
+
 Description: обновление частиц
 
 
@@ -326,6 +358,7 @@ File: [client\Rendering\Effects\Effects_init.sqf at line 39](../../../Src/client
 ## render_effects_onUpdate
 
 Type: function
+
 Description: цикл обновления частиц
 
 
@@ -335,14 +368,17 @@ File: [client\Rendering\Effects\Effects_init.sqf at line 45](../../../Src/client
 ## render_hdr_init
 
 Type: function
-Description: ======================================================
+
+Description: 
 
 
 File: [client\Rendering\HDR\HDRInit.sqf at line 8](../../../Src/client/Rendering/HDR/HDRInit.sqf#L8)
 ## render_hdr_setMode
 
 Type: function
+
 > Exists if **HDR_DYNAMIC_ENABLED** defined
+
 Description: 
 
 
@@ -350,7 +386,9 @@ File: [client\Rendering\HDR\HDRInit.sqf at line 17](../../../Src/client/Renderin
 ## render_hdr_setWorldTIme
 
 Type: function
+
 > Exists if **HDR_DYNAMIC_ENABLED** defined
+
 Description: underground, world
 
 
@@ -360,7 +398,8 @@ File: [client\Rendering\HDR\HDRInit.sqf at line 19](../../../Src/client/Renderin
 ## PP_MACRO_PREF
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -371,6 +410,7 @@ File: [client\Rendering\PostProcessing\postprocessing.h at line 8](../../../Src/
 ## setGV(var,val)
 
 Type: constant
+
 Description: 
 - Param: var
 - Param: val
@@ -383,6 +423,7 @@ File: [client\Rendering\PostProcessing\postprocessing.h at line 10](../../../Src
 ## getGV(var)
 
 Type: constant
+
 Description: 
 - Param: var
 
@@ -394,6 +435,7 @@ File: [client\Rendering\PostProcessing\postprocessing.h at line 11](../../../Src
 ## setPPVar(var,val)
 
 Type: constant
+
 Description: 
 - Param: var
 - Param: val
@@ -406,6 +448,7 @@ File: [client\Rendering\PostProcessing\postprocessing.h at line 13](../../../Src
 ## getPPVar(var)
 
 Type: constant
+
 Description: 
 - Param: var
 
@@ -417,6 +460,7 @@ File: [client\Rendering\PostProcessing\postprocessing.h at line 14](../../../Src
 ## setEffect
 
 Type: constant
+
 Description: 
 
 
@@ -428,6 +472,7 @@ File: [client\Rendering\PostProcessing\postprocessing.h at line 17](../../../Src
 ## commitEffect
 
 Type: constant
+
 Description: 
 
 
@@ -439,6 +484,7 @@ File: [client\Rendering\PostProcessing\postprocessing.h at line 18](../../../Src
 ## setThisEffect
 
 Type: constant
+
 Description: 
 
 
@@ -450,6 +496,7 @@ File: [client\Rendering\PostProcessing\postprocessing.h at line 20](../../../Src
 ## setThisEffectCommit
 
 Type: constant
+
 Description: 
 
 
@@ -461,6 +508,7 @@ File: [client\Rendering\PostProcessing\postprocessing.h at line 21](../../../Src
 ## setThisEffectEnable
 
 Type: constant
+
 Description: 
 
 
@@ -472,6 +520,7 @@ File: [client\Rendering\PostProcessing\postprocessing.h at line 22](../../../Src
 ## unpackParams()
 
 Type: constant
+
 Description: для отложенных вызовов
 - Param: 
 
@@ -483,6 +532,7 @@ File: [client\Rendering\PostProcessing\postprocessing.h at line 25](../../../Src
 ## packParams()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -496,6 +546,7 @@ File: [client\Rendering\PostProcessing\postprocessing.h at line 26](../../../Src
 ## pp_reload
 
 Type: function
+
 Description: 
 
 
@@ -503,6 +554,7 @@ File: [client\Rendering\PostProcessing\PPInit.sqf at line 25](../../../Src/clien
 ## pp_init
 
 Type: function
+
 Description: 
 
 
@@ -510,6 +562,7 @@ File: [client\Rendering\PostProcessing\PPInit.sqf at line 45](../../../Src/clien
 ## pp_init_active
 
 Type: function
+
 Description: 
 
 
@@ -517,6 +570,7 @@ File: [client\Rendering\PostProcessing\PPInit.sqf at line 70](../../../Src/clien
 ## pp_setEnable
 
 Type: function
+
 Description: 
 - Param: _varName
 - Param: _mode

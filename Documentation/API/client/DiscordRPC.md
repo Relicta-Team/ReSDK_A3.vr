@@ -3,6 +3,7 @@
 ## allowtrace
 
 Type: constant
+
 Description: 
 
 
@@ -14,6 +15,7 @@ File: [client\DiscordRPC\DiscordRPC.h at line 7](../../../Src/client/DiscordRPC/
 ## extname
 
 Type: constant
+
 Description: #define allowtrace
 
 
@@ -25,6 +27,7 @@ File: [client\DiscordRPC\DiscordRPC.h at line 9](../../../Src/client/DiscordRPC/
 ## updateState()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -36,6 +39,7 @@ File: [client\DiscordRPC\DiscordRPC.h at line 11](../../../Src/client/DiscordRPC
 ## setTask(_v,_vl)
 
 Type: constant
+
 Description: 
 - Param: _v
 - Param: _vl
@@ -48,6 +52,7 @@ File: [client\DiscordRPC\DiscordRPC.h at line 13](../../../Src/client/DiscordRPC
 ## getAppToken()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -59,6 +64,7 @@ File: [client\DiscordRPC\DiscordRPC.h at line 15](../../../Src/client/DiscordRPC
 ## initApplication()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -70,6 +76,7 @@ File: [client\DiscordRPC\DiscordRPC.h at line 17](../../../Src/client/DiscordRPC
 ## encodeString(val)
 
 Type: constant
+
 Description: 
 - Param: val
 
@@ -81,6 +88,7 @@ File: [client\DiscordRPC\DiscordRPC.h at line 19](../../../Src/client/DiscordRPC
 ## USE_LOCALES
 
 Type: constant
+
 Description: 
 
 
@@ -94,6 +102,7 @@ File: [client\DiscordRPC\DiscordRPC.h at line 22](../../../Src/client/DiscordRPC
 ## discrpc_send
 
 Type: function
+
 Description: отправляет новую информацию в rpc и обновляет статус клиента
 
 
@@ -101,6 +110,7 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 33](../../../Src/client/Dis
 ## discrpc_init
 
 Type: function
+
 Description: инициализатор. вызывается при подключении к серверу и устанавливает статус клиента
 - Param: _applicationID
 - Param: _defaultDetails
@@ -115,6 +125,7 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 64](../../../Src/client/Dis
 ## discrpc_reload
 
 Type: function
+
 Description: 
 
 
@@ -122,6 +133,7 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 105](../../../Src/client/Di
 ## discrpc_unload
 
 Type: function
+
 Description: 
 
 
@@ -129,6 +141,7 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 109](../../../Src/client/Di
 ## discrpc_encodeRu
 
 Type: function
+
 Description: кодирует русские символы из utf8 в win-1252
 - Param: _ruStr
 
@@ -136,7 +149,9 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 114](../../../Src/client/Di
 ## discrpc_getLetterByLocale
 
 Type: function
+
 > Exists if **USE_LOCALES** defined
+
 Description: 
 - Param: _l
 
@@ -144,6 +159,7 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 132](../../../Src/client/Di
 ## discrpc_setStatus
 
 Type: function
+
 Description: установить статус клиента. Доступные статусы ingame,lobby
 - Param: _strStatus
 
@@ -151,6 +167,7 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 146](../../../Src/client/Di
 ## discrpc_setIngameStatus
 
 Type: function
+
 Description: вызывается когда клиент подключился
 
 
@@ -158,6 +175,7 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 165](../../../Src/client/Di
 ## discrpc_setInLobbyStatus
 
 Type: function
+
 Description: вызывается когда клиент в лобби
 - Param: _mainRole (optional, default "")
 
@@ -165,6 +183,7 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 174](../../../Src/client/Di
 ## discrpc_setPlayingStatus
 
 Type: function
+
 Description: вызывается когда клиент в игре
 - Param: _charName
 
@@ -172,6 +191,7 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 192](../../../Src/client/Di
 ## discrpc_editor_init
 
 Type: function
+
 Description: 
 
 
@@ -179,6 +199,7 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 209](../../../Src/client/Di
 ## discrpc_editor_updateState
 
 Type: function
+
 Description: 
 
 

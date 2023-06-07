@@ -3,6 +3,7 @@
 ## CRAFT_WIND_SIZE_X
 
 Type: constant
+
 Description: 
 
 
@@ -14,6 +15,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 14](../../../Src/client/Craft
 ## CRAFT_WIND_SIZE_Y
 
 Type: constant
+
 Description: 
 
 
@@ -25,6 +27,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 15](../../../Src/client/Craft
 ## SIZE_CATEGORY_BUTTON
 
 Type: constant
+
 Description: 
 
 
@@ -36,6 +39,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 17](../../../Src/client/Craft
 ## SIZE_RECIPE_TEXT
 
 Type: constant
+
 Description: 
 
 
@@ -47,6 +51,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 18](../../../Src/client/Craft
 ## getRecipesWidget()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -58,6 +63,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 20](../../../Src/client/Craft
 ## setRecipesWidget(_refer)
 
 Type: constant
+
 Description: 
 - Param: _refer
 
@@ -69,6 +75,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 21](../../../Src/client/Craft
 ## getRecipeInfoWidget()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -80,6 +87,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 23](../../../Src/client/Craft
 ## setRecipeInfoWidget(_refer)
 
 Type: constant
+
 Description: 
 - Param: _refer
 
@@ -91,6 +99,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 24](../../../Src/client/Craft
 ## getCraftButton()
 
 Type: constant
+
 Description: 
 - Param: 
 
@@ -102,6 +111,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 26](../../../Src/client/Craft
 ## setCraftButton(_refer)
 
 Type: constant
+
 Description: 
 - Param: _refer
 
@@ -113,6 +123,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 27](../../../Src/client/Craft
 ## craft_open
 
 Type: function
+
 Description: 
 - Param: _visibleCat
 - Param: _listRecipes
@@ -121,6 +132,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 42](../../../Src/client/Craft
 ## craft_onLoadCategory
 
 Type: function
+
 Description: 
 - Param: _cat
 - Param: _listRecipes
@@ -129,6 +141,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 142](../../../Src/client/Craf
 ## craft_onSelectRecipe
 
 Type: function
+
 Description: 
 - Param: _systemId
 
@@ -136,6 +149,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 189](../../../Src/client/Craf
 ## craft_clearRecipeInfo
 
 Type: function
+
 Description: 
 
 
@@ -143,6 +157,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 208](../../../Src/client/Craf
 ## craft_setActiveCraftButton
 
 Type: function
+
 Description: 
 - Param: _mode
 
@@ -150,6 +165,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 215](../../../Src/client/Craf
 ## craft_onPressCraft
 
 Type: function
+
 Description: 
 
 
@@ -157,6 +173,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 231](../../../Src/client/Craf
 ## craft_onClose
 
 Type: function
+
 Description: 
 
 
@@ -164,6 +181,7 @@ File: [client\CraftMenu\craftmeun_init.sqf at line 239](../../../Src/client/Craf
 ## craft_close
 
 Type: function
+
 Description: 
 
 

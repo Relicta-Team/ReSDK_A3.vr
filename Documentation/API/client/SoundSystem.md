@@ -3,7 +3,8 @@
 ## MUSIC_SMOOTH_NO
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -14,6 +15,7 @@ File: [client\SoundSystem\Music.hpp at line 8](../../../Src/client/SoundSystem/M
 ## MUSIC_SMOOTH_START
 
 Type: constant
+
 Description: 
 
 
@@ -25,6 +27,7 @@ File: [client\SoundSystem\Music.hpp at line 9](../../../Src/client/SoundSystem/M
 ## MUSIC_SMOOTH_END
 
 Type: constant
+
 Description: 
 
 
@@ -36,6 +39,7 @@ File: [client\SoundSystem\Music.hpp at line 10](../../../Src/client/SoundSystem/
 ## MUSIC_SMOOTH_FULL
 
 Type: constant
+
 Description: 
 
 
@@ -47,6 +51,7 @@ File: [client\SoundSystem\Music.hpp at line 11](../../../Src/client/SoundSystem/
 ## MUSIC_REPEAT_NO
 
 Type: constant
+
 Description: 
 
 
@@ -58,6 +63,7 @@ File: [client\SoundSystem\Music.hpp at line 13](../../../Src/client/SoundSystem/
 ## MUSIC_REPEAT_YES
 
 Type: constant
+
 Description: 
 
 
@@ -69,6 +75,7 @@ File: [client\SoundSystem\Music.hpp at line 14](../../../Src/client/SoundSystem/
 ## MUSIC_REPEAT_AND_BACKWARD
 
 Type: constant
+
 Description: 
 
 
@@ -80,6 +87,7 @@ File: [client\SoundSystem\Music.hpp at line 15](../../../Src/client/SoundSystem/
 ## MUSIC_SMOOTH_TIME_DEFAULT
 
 Type: constant
+
 Description: 
 
 
@@ -91,6 +99,7 @@ File: [client\SoundSystem\Music.hpp at line 17](../../../Src/client/SoundSystem/
 ## MUSIC_CHANNEL_BASE
 
 Type: constant
+
 Description: системный. не используется
 
 
@@ -102,6 +111,7 @@ File: [client\SoundSystem\Music.hpp at line 21](../../../Src/client/SoundSystem/
 ## MUSIC_CHANNEL_LOBBY
 
 Type: constant
+
 Description: канал лобби
 
 
@@ -113,6 +123,7 @@ File: [client\SoundSystem\Music.hpp at line 23](../../../Src/client/SoundSystem/
 ## MUSIC_CHANNEL_AMBIENT
 
 Type: constant
+
 Description: эмбиент - основной
 
 
@@ -124,6 +135,7 @@ File: [client\SoundSystem\Music.hpp at line 25](../../../Src/client/SoundSystem/
 ## MUSIC_CHANNEL_AMBIENT_LOCAL
 
 Type: constant
+
 Description: эмбиент - локальный. вход в интересное место или подобное
 
 
@@ -135,6 +147,7 @@ File: [client\SoundSystem\Music.hpp at line 27](../../../Src/client/SoundSystem/
 ## MUSIC_CHANNEL_COMBATAMBIENT
 
 Type: constant
+
 Description: боевой эмбиент - пока не задействован
 
 
@@ -146,6 +159,7 @@ File: [client\SoundSystem\Music.hpp at line 29](../../../Src/client/SoundSystem/
 ## MUSIC_CHANNEL_EVENT_GLOBAL
 
 Type: constant
+
 Description: музыка конца раунда, или любого важного события
 
 
@@ -157,6 +171,7 @@ File: [client\SoundSystem\Music.hpp at line 31](../../../Src/client/SoundSystem/
 ## chm(a,b)
 
 Type: constant
+
 Description: 
 - Param: a
 - Param: b
@@ -169,6 +184,7 @@ File: [client\SoundSystem\Music.hpp at line 33](../../../Src/client/SoundSystem/
 ## MUSIC_MAP_INTERNAL_ALLCHANNELS
 
 Type: constant
+
 Description: 
 
 
@@ -189,6 +205,7 @@ File: [client\SoundSystem\Music.hpp at line 34](../../../Src/client/SoundSystem/
 ## BUFFER_PRIORITY_MAX
 
 Type: constant
+
 Description: 
 
 
@@ -200,6 +217,7 @@ File: [client\SoundSystem\Music.sqf at line 99](../../../Src/client/SoundSystem/
 ## MUSIC_DEBUG
 
 Type: constant
+
 Description: 
 
 
@@ -211,7 +229,9 @@ File: [client\SoundSystem\Music.sqf at line 101](../../../Src/client/SoundSystem
 ## mlog(text)
 
 Type: constant
+
 > Exists if **MUSIC_DEBUG** defined
+
 Description: 
 - Param: text
 
@@ -223,7 +243,9 @@ File: [client\SoundSystem\Music.sqf at line 109](../../../Src/client/SoundSystem
 ## mlogformat(text,args)
 
 Type: constant
+
 > Exists if **MUSIC_DEBUG** defined
+
 Description: 
 - Param: text
 - Param: args
@@ -236,7 +258,9 @@ File: [client\SoundSystem\Music.sqf at line 109](../../../Src/client/SoundSystem
 ## mlogformat(text,args)
 
 Type: constant
+
 > Exists if **MUSIC_DEBUG** not defined
+
 Description: 
 - Param: text
 - Param: args
@@ -249,6 +273,7 @@ File: [client\SoundSystem\Music.sqf at line 112](../../../Src/client/SoundSystem
 ## music_play
 
 Type: function
+
 Description: 
 - Param: _file
 - Param: _priority (optional, default 0)
@@ -258,6 +283,7 @@ File: [client\SoundSystem\Music.sqf at line 136](../../../Src/client/SoundSystem
 ## music_setPause
 
 Type: function
+
 Description: 
 - Param: _chan
 - Param: _mode
@@ -267,6 +293,7 @@ File: [client\SoundSystem\Music.sqf at line 300](../../../Src/client/SoundSystem
 ## music_stop
 
 Type: function
+
 Description: принудительная остановка музыки на данном канале и очистка канала. параметр -1 чистит все каналы
 - Param: _chan (optional, default -1)
 
@@ -274,6 +301,7 @@ File: [client\SoundSystem\Music.sqf at line 333](../../../Src/client/SoundSystem
 ## music_internal_setFade
 
 Type: function
+
 Description: 
 - Param: _fade
 - Param: _time (optional, default -1)
@@ -282,6 +310,7 @@ File: [client\SoundSystem\Music.sqf at line 359](../../../Src/client/SoundSystem
 ## music_internal_onUpdate
 
 Type: function
+
 Description: 
 
 
@@ -291,7 +320,8 @@ File: [client\SoundSystem\Music.sqf at line 364](../../../Src/client/SoundSystem
 ## getStructData(var)
 
 Type: constant
-Description: ======================================================
+
+Description: 
 - Param: var
 
 Replaced value:
@@ -302,6 +332,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 7](../../../Src/client/SoundS
 ## setStructData(var,val)
 
 Type: constant
+
 Description: 
 - Param: var
 - Param: val
@@ -314,6 +345,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 8](../../../Src/client/SoundS
 ## music_internal_createStruct
 
 Type: function
+
 Description: Создаёт структуру категории музыки
 - Param: _countSounds
 
@@ -321,6 +353,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 29](../../../Src/client/Sound
 ## music_resetCurrentPlayMemory
 
 Type: function
+
 Description: сборс параметров музыки
 
 
@@ -328,6 +361,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 35](../../../Src/client/Sound
 ## music_initCurrentPlayMemory
 
 Type: function
+
 Description: Вызывается только внутри запускатора музыки
 - Param: _t
 - Param: _d
@@ -336,6 +370,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 41](../../../Src/client/Sound
 ## music_isStarted
 
 Type: function
+
 Description: Находится ли музыка в буфере
 
 
@@ -343,6 +378,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 49](../../../Src/client/Sound
 ## music_isPlaying
 
 Type: function
+
 Description: играет ли музка в данный момент
 
 
@@ -350,6 +386,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 51](../../../Src/client/Sound
 ## music_pause
 
 Type: function
+
 Description: пауза музыки
 
 
@@ -357,6 +394,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 54](../../../Src/client/Sound
 ## music_return
 
 Type: function
+
 Description: возобновить проигрывание
 
 
@@ -364,6 +402,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 60](../../../Src/client/Sound
 ## music_getPlayedTime
 
 Type: function
+
 Description: Вовзаращет текущее время с начала композиции
 
 
@@ -371,6 +410,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 71](../../../Src/client/Sound
 ## music_play
 
 Type: function
+
 Description: 
 - Param: _config
 - Param: _startTime (optional, default 0)
@@ -379,6 +419,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 75](../../../Src/client/Sound
 ## music_stop
 
 Type: function
+
 Description: 
 - Param: _fadetime (optional, default 0)
 
@@ -386,6 +427,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 90](../../../Src/client/Sound
 ## music_changeToNew
 
 Type: function
+
 Description: плавная смена композиции
 - Param: _config
 - Param: _startTime
@@ -396,6 +438,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 110](../../../Src/client/Soun
 ## music_setVolume
 
 Type: function
+
 Description: ----- VOLUME MUSIC MANAGMENT ------
 - Param: _fade
 - Param: _time (optional, default 0)
@@ -404,6 +447,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 117](../../../Src/client/Soun
 ## music_playRandomAmbientMusic
 
 Type: function
+
 Description: testing sound
 
 
@@ -411,6 +455,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 123](../../../Src/client/Soun
 ## music_setRoundMusicMode
 
 Type: function
+
 Description: 
 - Param: _mode
 
@@ -418,6 +463,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 129](../../../Src/client/Soun
 ## music_onUpdate
 
 Type: function
+
 Description: регулярный цикл обновления музыки
 
 
@@ -427,6 +473,7 @@ File: [client\SoundSystem\MusicManager.sqf at line 143](../../../Src/client/Soun
 ## MM_CHANNELS_MAX_ORDER_ID
 
 Type: constant
+
 Description: Layer component
 
 
@@ -438,6 +485,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 35](../../../Src
 ## MM_LAYER_NULL
 
 Type: constant
+
 Description: 
 
 
@@ -449,6 +497,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 36](../../../Src
 ## MM_STATE_PLAYED
 
 Type: constant
+
 Description: TODO move to public header
 
 
@@ -460,6 +509,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 39](../../../Src
 ## MM_STATE_PAUSED
 
 Type: constant
+
 Description: 
 
 
@@ -471,6 +521,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 40](../../../Src
 ## MM_STATE_STOPPED
 
 Type: constant
+
 Description: 
 
 
@@ -482,6 +533,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 41](../../../Src
 ## mm_channels_internal_initStruct
 
 Type: function
+
 Description: 
 
 
@@ -489,6 +541,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 47](../../../Src
 ## mm_init
 
 Type: function
+
 Description: 
 
 
@@ -496,6 +549,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 61](../../../Src
 ## mm_internal_thread_onUpdate
 
 Type: function
+
 Description: 
 
 
@@ -503,6 +557,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 70](../../../Src
 ## mm_channel_register
 
 Type: function
+
 Description: 
 - Param: _id
 
@@ -510,6 +565,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 75](../../../Src
 ## mm_layer_unregister
 
 Type: function
+
 Description: 
 - Param: _channel
 
@@ -517,6 +573,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 85](../../../Src
 ## mm_setChannelPlaying
 
 Type: function
+
 Description: 
 - Param: _mode
 - Param: _channel (optional, default mm_currentChannel)
@@ -525,6 +582,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 98](../../../Src
 ## mm_setChannelVolume
 
 Type: function
+
 Description: 
 - Param: _vol
 - Param: _channel (optional, default mm_currentChannel)
@@ -533,6 +591,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 102](../../../Sr
 ## mm_getChannelVolume
 
 Type: function
+
 Description: 
 - Param: _ch (optional, default mm_currentChannel)
 
@@ -540,6 +599,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 106](../../../Sr
 ## mm_internal_play
 
 Type: function
+
 Description: 
 - Param: _id (optional, default mm_currentChannel)
 - Param: _config
@@ -551,6 +611,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 110](../../../Sr
 ## mm_getPlayedTime
 
 Type: function
+
 Description: 
 - Param: _layer (optional, default mm_currentChannel)
 
@@ -560,6 +621,7 @@ File: [client\SoundSystem\MusicManager_experimental.sqf at line 116](../../../Sr
 ## distLTG
 
 Type: constant
+
 Description: 
 
 
@@ -571,6 +633,7 @@ File: [client\SoundSystem\Sound3d.sqf at line 188](../../../Src/client/SoundSyst
 ## lastDist
 
 Type: constant
+
 Description: 
 
 
@@ -582,6 +645,7 @@ File: [client\SoundSystem\Sound3d.sqf at line 189](../../../Src/client/SoundSyst
 ## isNegativize
 
 Type: constant
+
 Description: 
 
 
@@ -593,6 +657,7 @@ File: [client\SoundSystem\Sound3d.sqf at line 190](../../../Src/client/SoundSyst
 ## isPositivize
 
 Type: constant
+
 Description: 
 
 
@@ -604,6 +669,7 @@ File: [client\SoundSystem\Sound3d.sqf at line 191](../../../Src/client/SoundSyst
 ## soundProcessor_play
 
 Type: function
+
 Description: Рантайм вычисление процессор громкости звука
 
 
@@ -611,6 +677,7 @@ File: [client\SoundSystem\Sound3d.sqf at line 19](../../../Src/client/SoundSyste
 ## sound3d_playOnObject
 
 Type: function
+
 Description: функция локальна
 - Param: _source
 - Param: _class
@@ -622,6 +689,7 @@ File: [client\SoundSystem\Sound3d.sqf at line 41](../../../Src/client/SoundSyste
 ## sound3d_playOnObjectLooped
 
 Type: function
+
 Description: функция локальна
 - Param: _additionalObjects
 - Param: _3dSoundData
@@ -631,6 +699,7 @@ File: [client\SoundSystem\Sound3d.sqf at line 69](../../../Src/client/SoundSyste
 ## sound_selfPlay
 
 Type: function
+
 Description: Проигрывает локальный звук
 - Param: _path
 - Param: _offset (optional, default 0)
@@ -639,6 +708,7 @@ File: [client\SoundSystem\Sound3d.sqf at line 104](../../../Src/client/SoundSyst
 ## sound3d_playLocal
 
 Type: function
+
 Description: from say3D [sound, maxDistance, pitch, isSpeech, offset]
 - Param: _obj
 - Param: _clsSound
@@ -650,6 +720,7 @@ File: [client\SoundSystem\Sound3d.sqf at line 113](../../../Src/client/SoundSyst
 ## debug_doFootStep
 
 Type: function
+
 Description: 
 
 

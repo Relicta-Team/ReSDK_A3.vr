@@ -136,6 +136,9 @@ def parse_sqf_functions(code):
         if condit:
             macroname += f"@{condit['name']}->{condit['required']}"
         
+        if MemberDesc == "======================================================":
+            MemberDesc = ""
+
         results[macroname] = {
                     "Type": "Macro",
                     "DefLine": start_line,
@@ -212,7 +215,9 @@ def parse_sqf_functions(code):
             
 
             results[function_name]['conditional'] = condit
-
+            
+            if MemberDesc == "======================================================":
+                MemberDesc = ""
             if MemberDesc:
                 results[function_name]['Desc'] = MemberDesc
 

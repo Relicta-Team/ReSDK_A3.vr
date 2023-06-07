@@ -3,7 +3,8 @@
 ## EFFECT_EVENT_INDEX_CREATE
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -14,6 +15,7 @@ File: [client\LocalEffects\LocalEffects.h at line 8](../../../Src/client/LocalEf
 ## EFFECT_EVENT_INDEX_DESTROY
 
 Type: constant
+
 Description: 
 
 
@@ -25,6 +27,7 @@ File: [client\LocalEffects\LocalEffects.h at line 9](../../../Src/client/LocalEf
 ## EFFECT_EVENT_INDEX_UPDATE
 
 Type: constant
+
 Description: 
 
 
@@ -36,6 +39,7 @@ File: [client\LocalEffects\LocalEffects.h at line 10](../../../Src/client/LocalE
 ## effect(class)
 
 Type: constant
+
 Description: 
 - Param: class
 
@@ -47,6 +51,7 @@ File: [client\LocalEffects\LocalEffects.h at line 12](../../../Src/client/LocalE
 ## destroy
 
 Type: constant
+
 Description: 
 
 
@@ -58,6 +63,7 @@ File: [client\LocalEffects\LocalEffects.h at line 14](../../../Src/client/LocalE
 ## create
 
 Type: constant
+
 Description: 
 
 
@@ -69,6 +75,7 @@ File: [client\LocalEffects\LocalEffects.h at line 16](../../../Src/client/LocalE
 ## update
 
 Type: constant
+
 Description: 
 
 
@@ -80,6 +87,7 @@ File: [client\LocalEffects\LocalEffects.h at line 18](../../../Src/client/LocalE
 ## end
 
 Type: constant
+
 Description: 
 
 
@@ -91,6 +99,7 @@ File: [client\LocalEffects\LocalEffects.h at line 20](../../../Src/client/LocalE
 ## thisEventName
 
 Type: constant
+
 Description: 
 
 
@@ -102,6 +111,7 @@ File: [client\LocalEffects\LocalEffects.h at line 22](../../../Src/client/LocalE
 ## thisContext
 
 Type: constant
+
 Description: 
 
 
@@ -113,6 +123,7 @@ File: [client\LocalEffects\LocalEffects.h at line 24](../../../Src/client/LocalE
 ## jumpto(index)
 
 Type: constant
+
 Description: 
 - Param: index
 
@@ -124,6 +135,7 @@ File: [client\LocalEffects\LocalEffects.h at line 26](../../../Src/client/LocalE
 ## updateContext(newdata)
 
 Type: constant
+
 Description: 
 - Param: newdata
 
@@ -137,6 +149,7 @@ File: [client\LocalEffects\LocalEffects.h at line 28](../../../Src/client/LocalE
 ## sanitizeCfgName(var)
 
 Type: constant
+
 Description: key:name, value:context data (list)
 - Param: var
 
@@ -148,6 +161,7 @@ File: [client\LocalEffects\LocalEffects_init.sqf at line 26](../../../Src/client
 ## effectExists(checked)
 
 Type: constant
+
 Description: 
 - Param: checked
 
@@ -159,6 +173,7 @@ File: [client\LocalEffects\LocalEffects_init.sqf at line 27](../../../Src/client
 ## callEffectEvent(name,indx)
 
 Type: constant
+
 Description: 
 - Param: name
 - Param: indx
@@ -171,6 +186,7 @@ File: [client\LocalEffects\LocalEffects_init.sqf at line 29](../../../Src/client
 ## locef_add
 
 Type: function
+
 Description: 
 - Param: thisEventName
 - Param: _context
@@ -179,6 +195,7 @@ File: [client\LocalEffects\LocalEffects_init.sqf at line 32](../../../Src/client
 ## locef_remove
 
 Type: function
+
 Description: };
 
 
@@ -186,6 +203,7 @@ File: [client\LocalEffects\LocalEffects_init.sqf at line 38](../../../Src/client
 ## locef_update
 
 Type: function
+
 Description: 
 - Param: thisEventName
 - Param: _context (optional, default [])
@@ -194,6 +212,7 @@ File: [client\LocalEffects\LocalEffects_init.sqf at line 48](../../../Src/client
 ## locef_removeAll
 
 Type: function
+
 Description: 
 
 
@@ -201,6 +220,7 @@ File: [client\LocalEffects\LocalEffects_init.sqf at line 61](../../../Src/client
 ## locef_createTempObject
 
 Type: function
+
 Description: 
 
 

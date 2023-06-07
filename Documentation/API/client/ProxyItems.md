@@ -3,7 +3,8 @@
 ## __confiBuffer
 
 Type: constant
-Description: ======================================================
+
+Description: 
 
 
 Replaced value:
@@ -14,6 +15,7 @@ File: [client\ProxyItems\ConfigProxyItems.h at line 7](../../../Src/client/Proxy
 ## model(path)
 
 Type: constant
+
 Description: model(axe) ]; _cb sv [axe, [5,5,2,6]
 - Param: path
 
@@ -27,6 +29,7 @@ File: [client\ProxyItems\ConfigProxyItems.h at line 12](../../../Src/client/Prox
 ## proxIt_prepName
 
 Type: function
+
 Description: Подготавливает имя если указан класснейм
 - Param: _modelPath
 
@@ -34,6 +37,7 @@ File: [client\ProxyItems\ProxyItems.sqf at line 15](../../../Src/client/ProxyIte
 ## proxIt_updateModel
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _object
@@ -43,6 +47,7 @@ File: [client\ProxyItems\ProxyItems.sqf at line 38](../../../Src/client/ProxyIte
 ## proxIt_loadConfig
 
 Type: function
+
 Description: 
 - Param: _mob
 - Param: _modelPathOrClass

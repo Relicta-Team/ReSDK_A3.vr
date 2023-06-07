@@ -3,6 +3,7 @@
 ## stamina_debug
 
 Type: constant
+
 Description: 
 
 
@@ -14,6 +15,7 @@ File: [client\StaminaControl\Stamina.hpp at line 8](../../../Src/client/StaminaC
 ## stamina_bias_x
 
 Type: constant
+
 Description: #define stamina_debug
 
 
@@ -25,6 +27,7 @@ File: [client\StaminaControl\Stamina.hpp at line 10](../../../Src/client/Stamina
 ## stamina_bias_y
 
 Type: constant
+
 Description: 
 
 
@@ -36,6 +39,7 @@ File: [client\StaminaControl\Stamina.hpp at line 11](../../../Src/client/Stamina
 ## stamina_size_h
 
 Type: constant
+
 Description: 
 
 
@@ -47,6 +51,7 @@ File: [client\StaminaControl\Stamina.hpp at line 13](../../../Src/client/Stamina
 ## stamina_size_w
 
 Type: constant
+
 Description: 
 
 
@@ -58,6 +63,7 @@ File: [client\StaminaControl\Stamina.hpp at line 14](../../../Src/client/Stamina
 ## stamina_border_size_x
 
 Type: constant
+
 Description: 
 
 
@@ -69,6 +75,7 @@ File: [client\StaminaControl\Stamina.hpp at line 16](../../../Src/client/Stamina
 ## stamina_border_size_y
 
 Type: constant
+
 Description: 
 
 
@@ -80,6 +87,7 @@ File: [client\StaminaControl\Stamina.hpp at line 17](../../../Src/client/Stamina
 ## stamina_mainbar_size_h
 
 Type: constant
+
 Description: 
 
 
@@ -91,6 +99,7 @@ File: [client\StaminaControl\Stamina.hpp at line 19](../../../Src/client/Stamina
 ## getMainBar
 
 Type: constant
+
 Description: 
 
 
@@ -102,6 +111,7 @@ File: [client\StaminaControl\Stamina.hpp at line 21](../../../Src/client/Stamina
 ## getBackroundBar
 
 Type: constant
+
 Description: 
 
 
@@ -113,6 +123,7 @@ File: [client\StaminaControl\Stamina.hpp at line 22](../../../Src/client/Stamina
 ## getCtgBar
 
 Type: constant
+
 Description: 
 
 
@@ -124,6 +135,7 @@ File: [client\StaminaControl\Stamina.hpp at line 23](../../../Src/client/Stamina
 ## getLowValueBar
 
 Type: constant
+
 Description: 
 
 
@@ -135,6 +147,7 @@ File: [client\StaminaControl\Stamina.hpp at line 24](../../../Src/client/Stamina
 ## stamina_widgetUpdate
 
 Type: constant
+
 Description: 
 
 
@@ -146,6 +159,7 @@ File: [client\StaminaControl\Stamina.hpp at line 26](../../../Src/client/Stamina
 ## stamina_fadetime_mainctg
 
 Type: constant
+
 Description: 
 
 
@@ -159,6 +173,7 @@ File: [client\StaminaControl\Stamina.hpp at line 28](../../../Src/client/Stamina
 ## stamina_init
 
 Type: function
+
 Description: 
 - Param: _wid
 - Param: _ctg
@@ -167,6 +182,7 @@ File: [client\StaminaControl\Stamina.sqf at line 11](../../../Src/client/Stamina
 ## stamina_onUpdate
 
 Type: function
+
 Description: 
 
 
@@ -174,6 +190,7 @@ File: [client\StaminaControl\Stamina.sqf at line 59](../../../Src/client/Stamina
 ## stamina_setValue
 
 Type: function
+
 Description: 
 - Param: _val
 
@@ -181,6 +198,7 @@ File: [client\StaminaControl\Stamina.sqf at line 63](../../../Src/client/Stamina
 ## stamina_convCurToPrec
 
 Type: function
+
 Description: 
 
 
@@ -188,6 +206,7 @@ File: [client\StaminaControl\Stamina.sqf at line 71](../../../Src/client/Stamina
 ## stamina_syncVisual
 
 Type: function
+
 Description: 
 
 
@@ -195,6 +214,7 @@ File: [client\StaminaControl\Stamina.sqf at line 75](../../../Src/client/Stamina
 ## stamina_applyColorTheme
 
 Type: function
+
 Description: 
 
 
