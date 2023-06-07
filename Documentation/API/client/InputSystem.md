@@ -11,7 +11,7 @@ Replaced value:
 ```sqf
 input_map_keyName set [name,val];
 ```
-File: [client\InputSystem\InputAssoc.sqf at line 13](../../../src/client/InputSystem/InputAssoc.sqf#L13)
+File: [client\InputSystem\InputAssoc.sqf at line 13](../../../Src/client/InputSystem/InputAssoc.sqf#L13)
 ## bindMouse(name,val)
 
 Type: constant
@@ -23,7 +23,7 @@ Replaced value:
 ```sqf
 bindKey(mouse_key_prefix  + name,val)
 ```
-File: [client\InputSystem\InputAssoc.sqf at line 14](../../../src/client/InputSystem/InputAssoc.sqf#L14)
+File: [client\InputSystem\InputAssoc.sqf at line 14](../../../Src/client/InputSystem/InputAssoc.sqf#L14)
 ## mouse_key_prefix
 
 Type: constant
@@ -34,7 +34,7 @@ Replaced value:
 ```sqf
 "@"
 ```
-File: [client\InputSystem\InputAssoc.sqf at line 15](../../../src/client/InputSystem/InputAssoc.sqf#L15)
+File: [client\InputSystem\InputAssoc.sqf at line 15](../../../Src/client/InputSystem/InputAssoc.sqf#L15)
 ## input_getKeyValue
 
 Type: function
@@ -42,14 +42,14 @@ Description: Получает значение ключа из клавиату�
 - Param: _str
 - Param: _isMouse
 
-File: [client\InputSystem\InputAssoc.sqf at line 188](../../../src/client/InputSystem/InputAssoc.sqf#L188)
+File: [client\InputSystem\InputAssoc.sqf at line 188](../../../Src/client/InputSystem/InputAssoc.sqf#L188)
 ## input_getAllKeyNames
 
 Type: function
 Description: Получает массив всех названий кнопок
 - Param: _idx
 
-File: [client\InputSystem\InputAssoc.sqf at line 203](../../../src/client/InputSystem/InputAssoc.sqf#L203)
+File: [client\InputSystem\InputAssoc.sqf at line 203](../../../Src/client/InputSystem/InputAssoc.sqf#L203)
 # inputHelper.sqf
 
 ## INPUTHELPER_WIDGET_SIZE_W
@@ -62,7 +62,7 @@ Replaced value:
 ```sqf
 30
 ```
-File: [client\InputSystem\inputHelper.sqf at line 12](../../../src/client/InputSystem/inputHelper.sqf#L12)
+File: [client\InputSystem\inputHelper.sqf at line 12](../../../Src/client/InputSystem/inputHelper.sqf#L12)
 ## INPUTHELPER_WIDGET_SIZE_H
 
 Type: constant
@@ -73,14 +73,14 @@ Replaced value:
 ```sqf
 13
 ```
-File: [client\InputSystem\inputHelper.sqf at line 13](../../../src/client/InputSystem/inputHelper.sqf#L13)
+File: [client\InputSystem\inputHelper.sqf at line 13](../../../Src/client/InputSystem/inputHelper.sqf#L13)
 ## inputHelper_init
 
 Type: function
 Description: 
 
 
-File: [client\InputSystem\inputHelper.sqf at line 32](../../../src/client/InputSystem/inputHelper.sqf#L32)
+File: [client\InputSystem\inputHelper.sqf at line 32](../../../Src/client/InputSystem/inputHelper.sqf#L32)
 ## inputHelper_showNotification
 
 Type: function
@@ -88,14 +88,14 @@ Description:
 - Param: _text
 - Param: _timeOrCode
 
-File: [client\InputSystem\inputHelper.sqf at line 63](../../../src/client/InputSystem/inputHelper.sqf#L63)
+File: [client\InputSystem\inputHelper.sqf at line 63](../../../Src/client/InputSystem/inputHelper.sqf#L63)
 ## inputHelper_internal_sortWidgets
 
 Type: function
 Description: 
 
 
-File: [client\InputSystem\inputHelper.sqf at line 83](../../../src/client/InputSystem/inputHelper.sqf#L83)
+File: [client\InputSystem\inputHelper.sqf at line 83](../../../Src/client/InputSystem/inputHelper.sqf#L83)
 # inputKeyHandlers.hpp
 
 ## KEYBIND_INDEX_NAME
@@ -108,7 +108,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 9](../../../src/client/InputSystem/inputKeyHandlers.hpp#L9)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 9](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L9)
 ## KEYBIND_INDEX_DESC
 
 Type: constant
@@ -119,7 +119,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 10](../../../src/client/InputSystem/inputKeyHandlers.hpp#L10)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 10](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L10)
 ## KEYBIND_INDEX_CURRENT
 
 Type: constant
@@ -130,7 +130,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 11](../../../src/client/InputSystem/inputKeyHandlers.hpp#L11)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 11](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L11)
 ## KEYBIND_INDEX_DEFAULT
 
 Type: constant
@@ -141,7 +141,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 12](../../../src/client/InputSystem/inputKeyHandlers.hpp#L12)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 12](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L12)
 ## KEYBIND_INDEX_VARNAME
 
 Type: constant
@@ -152,7 +152,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 13](../../../src/client/InputSystem/inputKeyHandlers.hpp#L13)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 13](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L13)
 ## KEYBIND_INDEX_SERIALIZED
 
 Type: constant
@@ -163,7 +163,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 14](../../../src/client/InputSystem/inputKeyHandlers.hpp#L14)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 14](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L14)
 ## KEYDATA_INDEX_KEY
 
 Type: constant
@@ -174,7 +174,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 17](../../../src/client/InputSystem/inputKeyHandlers.hpp#L17)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 17](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L17)
 ## KEYDATA_INDEX_SHIFT
 
 Type: constant
@@ -185,7 +185,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 18](../../../src/client/InputSystem/inputKeyHandlers.hpp#L18)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 18](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L18)
 ## KEYDATA_INDEX_CTRL
 
 Type: constant
@@ -196,7 +196,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 19](../../../src/client/InputSystem/inputKeyHandlers.hpp#L19)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 19](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L19)
 ## KEYDATA_INDEX_ALT
 
 Type: constant
@@ -207,7 +207,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 20](../../../src/client/InputSystem/inputKeyHandlers.hpp#L20)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 20](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L20)
 ## KEYDATA_INDEX_ISMOUSE
 
 Type: constant
@@ -218,7 +218,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 21](../../../src/client/InputSystem/inputKeyHandlers.hpp#L21)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 21](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L21)
 ## unpackKeyData(_dat)
 
 Type: constant
@@ -229,7 +229,7 @@ Replaced value:
 ```sqf
 _dat select [1,4]
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 24](../../../src/client/InputSystem/inputKeyHandlers.hpp#L24)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 24](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L24)
 ## doPrepareKeyData()
 
 Type: constant
@@ -240,7 +240,7 @@ Replaced value:
 ```sqf
 __ikdp = unpackKeyData(_this)
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 26](../../../src/client/InputSystem/inputKeyHandlers.hpp#L26)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 26](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L26)
 ## isPressed(var)
 
 Type: constant
@@ -251,7 +251,7 @@ Replaced value:
 ```sqf
 isPressedKey(__ikdp,var)
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 27](../../../src/client/InputSystem/inputKeyHandlers.hpp#L27)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 27](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L27)
 ## isPressedKey(_key,variable)
 
 Type: constant
@@ -263,7 +263,7 @@ Replaced value:
 ```sqf
 ([_key,variable,true] call input_checkKeyState)
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 30](../../../src/client/InputSystem/inputKeyHandlers.hpp#L30)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 30](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L30)
 # inputKeyHandlers.sqf
 
 ## kb(name,desc,defkey,varname)
@@ -279,7 +279,7 @@ Replaced value:
 ```sqf
 [name,desc,defkey,defkey,call{varname = defkey; 'varname'},defkey]
 ```
-File: [client\InputSystem\inputKeyHandlers.sqf at line 10](../../../src/client/InputSystem/inputKeyHandlers.sqf#L10)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 10](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L10)
 ## keybind(value,shift,ctrl,alt,isMouse)
 
 Type: constant
@@ -294,7 +294,7 @@ Replaced value:
 ```sqf
 [value,shift,ctrl,alt,isMouse]
 ```
-File: [client\InputSystem\inputKeyHandlers.sqf at line 11](../../../src/client/InputSystem/inputKeyHandlers.sqf#L11)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 11](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L11)
 ## std_key(name)
 
 Type: constant
@@ -305,7 +305,7 @@ Replaced value:
 ```sqf
 keybind([name arg false] call input_getKeyValue,false,false,false,false)
 ```
-File: [client\InputSystem\inputKeyHandlers.sqf at line 13](../../../src/client/InputSystem/inputKeyHandlers.sqf#L13)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 13](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L13)
 ## std_keyArgs(name,shift,ctrl,alt,isMouse)
 
 Type: constant
@@ -320,14 +320,14 @@ Replaced value:
 ```sqf
 keybind([name arg false] call input_getKeyValue,shift,ctrl,alt,isMouse)
 ```
-File: [client\InputSystem\inputKeyHandlers.sqf at line 14](../../../src/client/InputSystem/inputKeyHandlers.sqf#L14)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 14](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L14)
 ## input_updateAllKeyBinds
 
 Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 47](../../../src/client/InputSystem/inputKeyHandlers.sqf#L47)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 47](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L47)
 ## input_checkKeyState
 
 Type: function
@@ -336,7 +336,7 @@ Description:
 - Param: _state
 - Param: _doRemKeyState (optional, default false)
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 107](../../../src/client/InputSystem/inputKeyHandlers.sqf#L107)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 107](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L107)
 ## input_spamProtect
 
 Type: function
@@ -344,35 +344,35 @@ Description:
 - Param: _strname
 - Param: _timeout (optional, default 0.3)
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 125](../../../src/client/InputSystem/inputKeyHandlers.sqf#L125)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 125](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L125)
 ## input_movementCheck
 
 Type: function
 Description: Проверяет пользовательский инпут. true означает что клавиша заблокирована
 - Param: _key
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 144](../../../src/client/InputSystem/inputKeyHandlers.sqf#L144)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 144](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L144)
 ## input_internal_isChangeStance
 
 Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 196](../../../src/client/InputSystem/inputKeyHandlers.sqf#L196)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 196](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L196)
 ## input_internal_isMovingButton
 
 Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 197](../../../src/client/InputSystem/inputKeyHandlers.sqf#L197)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 197](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L197)
 ## input_getKeyNameByInputName
 
 Type: function
 Description: 
 - Param: _inp
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 199](../../../src/client/InputSystem/inputKeyHandlers.sqf#L199)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 199](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L199)
 # inputManager.sqf
 
 ## isPressed(var)
@@ -385,7 +385,7 @@ Replaced value:
 ```sqf
 isPressedKey(_kupc,var)
 ```
-File: [client\InputSystem\inputManager.sqf at line 35](../../../src/client/InputSystem/inputManager.sqf#L35)
+File: [client\InputSystem\inputManager.sqf at line 35](../../../Src/client/InputSystem/inputManager.sqf#L35)
 ## attr
 
 Type: constant
@@ -397,7 +397,7 @@ Replaced value:
 ```sqf
 ([#st,#ht,#dx,#iq,#fp,#will,#per,#hp] select ind_stat)
 ```
-File: [client\InputSystem\inputManager.sqf at line 117](../../../src/client/InputSystem/inputManager.sqf#L117)
+File: [client\InputSystem\inputManager.sqf at line 117](../../../Src/client/InputSystem/inputManager.sqf#L117)
 ## dbg_addAtr(name,amount)
 
 Type: constant
@@ -410,7 +410,7 @@ Replaced value:
 ```sqf
 [(player),amount] call ((player) getVariable 'proto' getVariable ('add'+ name))
 ```
-File: [client\InputSystem\inputManager.sqf at line 118](../../../src/client/InputSystem/inputManager.sqf#L118)
+File: [client\InputSystem\inputManager.sqf at line 118](../../../Src/client/InputSystem/inputManager.sqf#L118)
 ## onGameInputs_Down
 
 Type: function
@@ -421,7 +421,7 @@ Description: invokeAfterDelay({inventory_isHoldMode = true},2);
 - Param: _ctrl
 - Param: _alt
 
-File: [client\InputSystem\inputManager.sqf at line 10](../../../src/client/InputSystem/inputManager.sqf#L10)
+File: [client\InputSystem\inputManager.sqf at line 10](../../../Src/client/InputSystem/inputManager.sqf#L10)
 ## onGameKeyInputs
 
 Type: function
@@ -432,7 +432,7 @@ Description: клавиши в режиме игры
 - Param: _ctrl
 - Param: _alt
 
-File: [client\InputSystem\inputManager.sqf at line 24](../../../src/client/InputSystem/inputManager.sqf#L24)
+File: [client\InputSystem\inputManager.sqf at line 24](../../../Src/client/InputSystem/inputManager.sqf#L24)
 ## onGameMouseInputs
 
 Type: function
@@ -445,4 +445,4 @@ Description: мышь в режиме игры
 - Param: _ctrl
 - Param: _alt
 
-File: [client\InputSystem\inputManager.sqf at line 147](../../../src/client/InputSystem/inputManager.sqf#L147)
+File: [client\InputSystem\inputManager.sqf at line 147](../../../Src/client/InputSystem/inputManager.sqf#L147)

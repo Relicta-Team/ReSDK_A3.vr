@@ -10,7 +10,7 @@ Replaced value:
 ```sqf
 "sqlitenet" callExtension 
 ```
-File: [host\Database\SQLite\SQLite.h at line 8](../../../src/host/Database/SQLite/SQLite.h#L8)
+File: [host\Database\SQLite\SQLite.h at line 8](../../../Src/host/Database/SQLite/SQLite.h#L8)
 ## DB_PATH
 
 Type: constant
@@ -22,7 +22,7 @@ Replaced value:
 ```sqf
 "P:\armatools\steamapps\common\Arma 3\@Profura\db\GameMain.db"
 ```
-File: [host\Database\SQLite\SQLite.h at line 11](../../../src/host/Database/SQLite/SQLite.h#L11)
+File: [host\Database\SQLite\SQLite.h at line 11](../../../Src/host/Database/SQLite/SQLite.h#L11)
 ## DB_PATH
 
 Type: constant
@@ -34,7 +34,7 @@ Replaced value:
 ```sqf
 "C:\Games\Arma3\A3Master\@server\db\GameMain.db"
 ```
-File: [host\Database\SQLite\SQLite.h at line 13](../../../src/host/Database/SQLite/SQLite.h#L13)
+File: [host\Database\SQLite\SQLite.h at line 13](../../../Src/host/Database/SQLite/SQLite.h#L13)
 # SQLite_functions.sqf
 
 ## CATCH_REQUEST_ERROR
@@ -47,7 +47,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Database\SQLite\SQLite_functions.sqf at line 8](../../../src/host/Database/SQLite/SQLite_functions.sqf#L8)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 8](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L8)
 ## applyficator(val)
 
 Type: constant
@@ -58,56 +58,56 @@ Replaced value:
 ```sqf
 (if (val < 10) then {"0" + str val} else {str val})
 ```
-File: [host\Database\SQLite\SQLite_functions.sqf at line 149](../../../src/host/Database/SQLite/SQLite_functions.sqf#L149)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 149](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L149)
 ## db_open
 
 Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 10](../../../src/host/Database/SQLite/SQLite_functions.sqf#L10)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 10](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L10)
 ## db_close
 
 Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 14](../../../src/host/Database/SQLite/SQLite_functions.sqf#L14)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 14](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L14)
 ## db_isOpened
 
 Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 20](../../../src/host/Database/SQLite/SQLite_functions.sqf#L20)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 20](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L20)
 ## db_getlasterror
 
 Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 24](../../../src/host/Database/SQLite/SQLite_functions.sqf#L24)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 24](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L24)
 ## db_flushlasterror
 
 Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 28](../../../src/host/Database/SQLite/SQLite_functions.sqf#L28)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 28](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L28)
 ## db_isEnabledStdoutLog
 
 Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 32](../../../src/host/Database/SQLite/SQLite_functions.sqf#L32)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 32](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L32)
 ## db_switchStdoutLog
 
 Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 36](../../../src/host/Database/SQLite/SQLite_functions.sqf#L36)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 36](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L36)
 ## db_checkSystemReturn
 
 Type: function
@@ -115,7 +115,7 @@ Description: true если системный возврат
 - Param: _output
 - Param: _printtoconsole (optional, default true)
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 41](../../../src/host/Database/SQLite/SQLite_functions.sqf#L41)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 41](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L41)
 ## db_query
 
 Type: function
@@ -124,14 +124,14 @@ Description:
 - Param: _retTypes (optional, default "")
 - Param: _singleReturn (optional, default false)
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 98](../../../src/host/Database/SQLite/SQLite_functions.sqf#L98)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 98](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L98)
 ## db_getVersion
 
 Type: function
 Description: versioning
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 115](../../../src/host/Database/SQLite/SQLite_functions.sqf#L115)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 115](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L115)
 ## db_getCommonVal
 
 Type: function
@@ -139,7 +139,7 @@ Description:
 - Param: _varName
 - Param: _returnType (optional, default "string")
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 122](../../../src/host/Database/SQLite/SQLite_functions.sqf#L122)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 122](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L122)
 ## db_setCommonVal
 
 Type: function
@@ -148,7 +148,7 @@ Description:
 - Param: _value
 - Param: _inString (optional, default true)
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 130](../../../src/host/Database/SQLite/SQLite_functions.sqf#L130)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 130](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L130)
 ## db_dateTimeFormatForComparsion
 
 Type: function
@@ -161,7 +161,7 @@ Description: Форматирует массив даты-времени в ст
 - Param: _s (optional, default 0)
 - Param: _ms (optional, default 0)
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 146](../../../src/host/Database/SQLite/SQLite_functions.sqf#L146)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 146](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L146)
 # SQLite_init.sqf
 
 ## db_init
@@ -170,7 +170,7 @@ Type: function
 Description: Основная функция инициализации базы данных
 
 
-File: [host\Database\SQLite\SQLite_init.sqf at line 19](../../../src/host/Database/SQLite/SQLite_init.sqf#L19)
+File: [host\Database\SQLite\SQLite_init.sqf at line 19](../../../Src/host/Database/SQLite/SQLite_init.sqf#L19)
 # SQLite_manager.sqf
 
 ## __logrepsync(txtval,fmt)
@@ -185,7 +185,7 @@ Replaced value:
 ```sqf
 [(format[txtval arg fmt]) call {if not_equalTypes(_this,"") then {str _this} else {str parseText _this}},"log"] call chatPrint;
 ```
-File: [host\Database\SQLite\SQLite_manager.sqf at line 678](../../../src/host/Database/SQLite/SQLite_manager.sqf#L678)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 678](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L678)
 ## __logrepsync(txtval,fmt)
 
 Type: constant
@@ -198,28 +198,28 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Database\SQLite\SQLite_manager.sqf at line 680](../../../src/host/Database/SQLite/SQLite_manager.sqf#L680)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 680](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L680)
 ## db_closeConnection
 
 Type: function
 Description: Закрывает базу данных
 
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 8](../../../src/host/Database/SQLite/SQLite_manager.sqf#L8)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 8](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L8)
 ## db_isClientRegistered
 
 Type: function
 Description: 
 - Param: this
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 13](../../../src/host/Database/SQLite/SQLite_manager.sqf#L13)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 13](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L13)
 ## db_isUIDRegistered
 
 Type: function
 Description: 
 - Param: _uid
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 18](../../../src/host/Database/SQLite/SQLite_manager.sqf#L18)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 18](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L18)
 ## db_checkBan
 
 Type: function
@@ -227,7 +227,7 @@ Description: Проверяет юид в бан-листе. Если забан
 - Param: _uid
 - Param: _refData
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 24](../../../src/host/Database/SQLite/SQLite_manager.sqf#L24)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 24](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L24)
 ## db_unbanByName
 
 Type: function
@@ -235,7 +235,7 @@ Description:
 - Param: _name
 - Param: _whoWantUnban
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 53](../../../src/host/Database/SQLite/SQLite_manager.sqf#L53)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 53](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L53)
 ## db_banByName
 
 Type: function
@@ -245,7 +245,7 @@ Description:
 - Param: _reason (optional, default "")
 - Param: _modif (optional, default [])
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 93](../../../src/host/Database/SQLite/SQLite_manager.sqf#L93)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 93](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L93)
 ## db_banJobByName
 
 Type: function
@@ -256,7 +256,7 @@ Description: При изменении кода: все ошибочные во�
 - Param: _reason (optional, default "")
 - Param: _modif (optional, default [])
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 135](../../../src/host/Database/SQLite/SQLite_manager.sqf#L135)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 135](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L135)
 ## db_unbanJobByName
 
 Type: function
@@ -265,14 +265,14 @@ Description:
 - Param: _name
 - Param: _role (optional, default "")
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 171](../../../src/host/Database/SQLite/SQLite_manager.sqf#L171)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 171](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L171)
 ## db_isNickRegistered
 
 Type: function
 Description: 
 - Param: _nick
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 204](../../../src/host/Database/SQLite/SQLite_manager.sqf#L204)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 204](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L204)
 ## db_uidToNick
 
 Type: function
@@ -280,7 +280,7 @@ Description: конвертация uid в никнейм из базы данн
 - Param: _uid
 - Param: _errorNick (optional, default "")
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 210](../../../src/host/Database/SQLite/SQLite_manager.sqf#L210)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 210](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L210)
 ## db_NickToUid
 
 Type: function
@@ -288,7 +288,7 @@ Description:
 - Param: _nick
 - Param: _errorUid (optional, default "")
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 217](../../../src/host/Database/SQLite/SQLite_manager.sqf#L217)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 217](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L217)
 ## db_registerAccount
 
 Type: function
@@ -296,21 +296,21 @@ Description: Регистрация аккаунта по юиду и имени
 - Param: _uid
 - Param: _name
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 225](../../../src/host/Database/SQLite/SQLite_manager.sqf#L225)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 225](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L225)
 ## db_updateValuesOnConnect
 
 Type: function
 Description: Обновление коунтера подключений и даты последнего коннекта
 - Param: _uid
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 235](../../../src/host/Database/SQLite/SQLite_manager.sqf#L235)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 235](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L235)
 ## db_checkAccessOnFirstSession
 
 Type: function
 Description: 
 - Param: _dt
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 242](../../../src/host/Database/SQLite/SQLite_manager.sqf#L242)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 242](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L242)
 ## db_checkAccountLifetime
 
 Type: function
@@ -318,28 +318,28 @@ Description: ! только для системных вызовов
 - Param: _cli
 - Param: _values
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 254](../../../src/host/Database/SQLite/SQLite_manager.sqf#L254)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 254](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L254)
 ## db_isConnectedFirstTimeToday
 
 Type: function
 Description: 
 - Param: _dt
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 268](../../../src/host/Database/SQLite/SQLite_manager.sqf#L268)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 268](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L268)
 ## db_getAllBannedRoles
 
 Type: function
 Description: 
 - Param: _uid
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 277](../../../src/host/Database/SQLite/SQLite_manager.sqf#L277)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 277](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L277)
 ## db_getAllBannedRolesWithDescription
 
 Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 292](../../../src/host/Database/SQLite/SQLite_manager.sqf#L292)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 292](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L292)
 ## db_checkBanRole
 
 Type: function
@@ -347,28 +347,28 @@ Description:
 - Param: _uid
 - Param: _role
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 313](../../../src/host/Database/SQLite/SQLite_manager.sqf#L313)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 313](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L313)
 ## db_registerClient
 
 Type: function
 Description: регистрация аккаунта по объекту
 - Param: this
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 321](../../../src/host/Database/SQLite/SQLite_manager.sqf#L321)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 321](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L321)
 ## db_saveClient
 
 Type: function
 Description: 
 - Param: this
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 330](../../../src/host/Database/SQLite/SQLite_manager.sqf#L330)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 330](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L330)
 ## db_loadClient
 
 Type: function
 Description: 
 - Param: this
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 367](../../../src/host/Database/SQLite/SQLite_manager.sqf#L367)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 367](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L367)
 ## db_updateClientSettings
 
 Type: function
@@ -376,14 +376,14 @@ Description: При обновлении никнейма, доступа и п�
 - Param: this
 - Param: _doSyncData (optional, default false)
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 474](../../../src/host/Database/SQLite/SQLite_manager.sqf#L474)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 474](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L474)
 ## db_handleReputation
 
 Type: function
 Description: 
 - Param: this
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 502](../../../src/host/Database/SQLite/SQLite_manager.sqf#L502)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 502](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L502)
 ## db_saveReputationTests
 
 Type: function
@@ -392,35 +392,35 @@ Description: в TestQuestions записывается результирующ�
 - Param: _result
 - Param: _mode
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 533](../../../src/host/Database/SQLite/SQLite_manager.sqf#L533)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 533](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L533)
 ## db_saveReputation
 
 Type: function
 Description: обычное сохранение репы
 - Param: this
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 565](../../../src/host/Database/SQLite/SQLite_manager.sqf#L565)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 565](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L565)
 ## db_createGamemodeSession
 
 Type: function
 Description: создаем сессию и возвращаем её айди
 - Param: _gmName
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 574](../../../src/host/Database/SQLite/SQLite_manager.sqf#L574)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 574](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L574)
 ## db_onGamemodeSessionStart
 
 Type: function
 Description: вызывается когда сессия началась
 
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 593](../../../src/host/Database/SQLite/SQLite_manager.sqf#L593)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 593](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L593)
 ## db_onGamemodeSessionEnd
 
 Type: function
 Description: вызывается когда сессия закончилась
 
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 603](../../../src/host/Database/SQLite/SQLite_manager.sqf#L603)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 603](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L603)
 ## db_registerNewVote
 
 Type: function
@@ -429,7 +429,7 @@ Description:
 - Param: _charTStruct
 - Param: _clientList
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 621](../../../src/host/Database/SQLite/SQLite_manager.sqf#L621)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 621](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L621)
 ## db_registerVoteClient
 
 Type: function
@@ -437,7 +437,7 @@ Description:
 - Param: _id
 - Param: _name
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 631](../../../src/host/Database/SQLite/SQLite_manager.sqf#L631)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 631](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L631)
 ## db_processVoteClient
 
 Type: function
@@ -446,14 +446,14 @@ Description:
 - Param: _vote
 - Param: _autoSync (optional, default true)
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 639](../../../src/host/Database/SQLite/SQLite_manager.sqf#L639)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 639](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L639)
 ## db_onSyncReputations
 
 Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 672](../../../src/host/Database/SQLite/SQLite_manager.sqf#L672)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 672](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L672)
 ## db_hasNeedClientVote
 
 Type: function
@@ -462,7 +462,7 @@ Description:
 - Param: _reputation (optional, default "")
 - Param: _refInfo
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 885](../../../src/host/Database/SQLite/SQLite_manager.sqf#L885)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 885](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L885)
 ## db_da_isSynced
 
 Type: function
@@ -471,21 +471,21 @@ Description: ======================================
 - Param: _refId
 - Param: _loadArrived (optional, default false)
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 956](../../../src/host/Database/SQLite/SQLite_manager.sqf#L956)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 956](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L956)
 ## db_da_isSyncedAsDiscordId
 
 Type: function
 Description: 
 - Param: _id
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 975](../../../src/host/Database/SQLite/SQLite_manager.sqf#L975)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 975](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L975)
 ## db_da_updateArrivedInCity
 
 Type: function
 Description: 
 - Param: _nick
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 982](../../../src/host/Database/SQLite/SQLite_manager.sqf#L982)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 982](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L982)
 ## db_da_register
 
 Type: function
@@ -493,4 +493,4 @@ Description:
 - Param: _nick
 - Param: _discordid
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 996](../../../src/host/Database/SQLite/SQLite_manager.sqf#L996)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 996](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L996)

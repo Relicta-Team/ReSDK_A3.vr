@@ -6,35 +6,35 @@ Type: function
 Description: Загружает все известные ловушки
 - Param: _ptrlist
 
-File: [client\Traps\TrapsInit.sqf at line 30](../../../src/client/Traps/TrapsInit.sqf#L30)
+File: [client\Traps\TrapsInit.sqf at line 30](../../../Src/client/Traps/TrapsInit.sqf#L30)
 ## traps_unhideAll
 
 Type: function
 Description: 
 
 
-File: [client\Traps\TrapsInit.sqf at line 39](../../../src/client/Traps/TrapsInit.sqf#L39)
+File: [client\Traps\TrapsInit.sqf at line 39](../../../Src/client/Traps/TrapsInit.sqf#L39)
 ## traps_syncAll
 
 Type: function
 Description: 
 
 
-File: [client\Traps\TrapsInit.sqf at line 45](../../../src/client/Traps/TrapsInit.sqf#L45)
+File: [client\Traps\TrapsInit.sqf at line 45](../../../Src/client/Traps/TrapsInit.sqf#L45)
 ## traps_checkKnownObject
 
 Type: function
 Description: 
 - Param: _o
 
-File: [client\Traps\TrapsInit.sqf at line 51](../../../src/client/Traps/TrapsInit.sqf#L51)
+File: [client\Traps\TrapsInit.sqf at line 51](../../../Src/client/Traps/TrapsInit.sqf#L51)
 ## traps_AutoDispose
 
 Type: function
 Description: 
 - Param: _ptr
 
-File: [client\Traps\TrapsInit.sqf at line 61](../../../src/client/Traps/TrapsInit.sqf#L61)
+File: [client\Traps\TrapsInit.sqf at line 61](../../../Src/client/Traps/TrapsInit.sqf#L61)
 ## traps_syncObject
 
 Type: function
@@ -42,4 +42,4 @@ Description:
 - Param: _ref
 - Param: _doKnown
 
-File: [client\Traps\TrapsInit.sqf at line 67](../../../src/client/Traps/TrapsInit.sqf#L67)
+File: [client\Traps\TrapsInit.sqf at line 67](../../../Src/client/Traps/TrapsInit.sqf#L67)

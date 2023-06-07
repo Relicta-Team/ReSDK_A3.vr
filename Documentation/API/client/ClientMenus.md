@@ -11,18 +11,18 @@ Replaced value:
 ```sqf
 [class,name]
 ```
-File: [client\ClientMenus\ErrorReports.sqf at line 13](../../../src/client/ClientMenus/ErrorReports.sqf#L13)
+File: [client\ClientMenus\ErrorReports.sqf at line 13](../../../Src/client/ClientMenus/ErrorReports.sqf#L13)
 ## report_open
 
 Type: function
 Description: 
 
 
-File: [client\ClientMenus\ErrorReports.sqf at line 22](../../../src/client/ClientMenus/ErrorReports.sqf#L22)
+File: [client\ClientMenus\ErrorReports.sqf at line 22](../../../Src/client/ClientMenus/ErrorReports.sqf#L22)
 ## report_close
 
 Type: function
 Description: 
 
 
-File: [client\ClientMenus\ErrorReports.sqf at line 26](../../../src/client/ClientMenus/ErrorReports.sqf#L26)
+File: [client\ClientMenus\ErrorReports.sqf at line 26](../../../Src/client/ClientMenus/ErrorReports.sqf#L26)

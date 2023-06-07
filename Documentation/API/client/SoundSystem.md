@@ -10,7 +10,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\SoundSystem\Music.hpp at line 8](../../../src/client/SoundSystem/Music.hpp#L8)
+File: [client\SoundSystem\Music.hpp at line 8](../../../Src/client/SoundSystem/Music.hpp#L8)
 ## MUSIC_SMOOTH_START
 
 Type: constant
@@ -21,7 +21,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\SoundSystem\Music.hpp at line 9](../../../src/client/SoundSystem/Music.hpp#L9)
+File: [client\SoundSystem\Music.hpp at line 9](../../../Src/client/SoundSystem/Music.hpp#L9)
 ## MUSIC_SMOOTH_END
 
 Type: constant
@@ -32,7 +32,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\SoundSystem\Music.hpp at line 10](../../../src/client/SoundSystem/Music.hpp#L10)
+File: [client\SoundSystem\Music.hpp at line 10](../../../Src/client/SoundSystem/Music.hpp#L10)
 ## MUSIC_SMOOTH_FULL
 
 Type: constant
@@ -43,7 +43,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\SoundSystem\Music.hpp at line 11](../../../src/client/SoundSystem/Music.hpp#L11)
+File: [client\SoundSystem\Music.hpp at line 11](../../../Src/client/SoundSystem/Music.hpp#L11)
 ## MUSIC_REPEAT_NO
 
 Type: constant
@@ -54,7 +54,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\SoundSystem\Music.hpp at line 13](../../../src/client/SoundSystem/Music.hpp#L13)
+File: [client\SoundSystem\Music.hpp at line 13](../../../Src/client/SoundSystem/Music.hpp#L13)
 ## MUSIC_REPEAT_YES
 
 Type: constant
@@ -65,7 +65,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\SoundSystem\Music.hpp at line 14](../../../src/client/SoundSystem/Music.hpp#L14)
+File: [client\SoundSystem\Music.hpp at line 14](../../../Src/client/SoundSystem/Music.hpp#L14)
 ## MUSIC_REPEAT_AND_BACKWARD
 
 Type: constant
@@ -76,7 +76,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\SoundSystem\Music.hpp at line 15](../../../src/client/SoundSystem/Music.hpp#L15)
+File: [client\SoundSystem\Music.hpp at line 15](../../../Src/client/SoundSystem/Music.hpp#L15)
 ## MUSIC_SMOOTH_TIME_DEFAULT
 
 Type: constant
@@ -87,7 +87,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\SoundSystem\Music.hpp at line 17](../../../src/client/SoundSystem/Music.hpp#L17)
+File: [client\SoundSystem\Music.hpp at line 17](../../../Src/client/SoundSystem/Music.hpp#L17)
 ## MUSIC_CHANNEL_BASE
 
 Type: constant
@@ -98,7 +98,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\SoundSystem\Music.hpp at line 21](../../../src/client/SoundSystem/Music.hpp#L21)
+File: [client\SoundSystem\Music.hpp at line 21](../../../Src/client/SoundSystem/Music.hpp#L21)
 ## MUSIC_CHANNEL_LOBBY
 
 Type: constant
@@ -109,7 +109,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\SoundSystem\Music.hpp at line 23](../../../src/client/SoundSystem/Music.hpp#L23)
+File: [client\SoundSystem\Music.hpp at line 23](../../../Src/client/SoundSystem/Music.hpp#L23)
 ## MUSIC_CHANNEL_AMBIENT
 
 Type: constant
@@ -120,7 +120,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\SoundSystem\Music.hpp at line 25](../../../src/client/SoundSystem/Music.hpp#L25)
+File: [client\SoundSystem\Music.hpp at line 25](../../../Src/client/SoundSystem/Music.hpp#L25)
 ## MUSIC_CHANNEL_AMBIENT_LOCAL
 
 Type: constant
@@ -131,7 +131,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\SoundSystem\Music.hpp at line 27](../../../src/client/SoundSystem/Music.hpp#L27)
+File: [client\SoundSystem\Music.hpp at line 27](../../../Src/client/SoundSystem/Music.hpp#L27)
 ## MUSIC_CHANNEL_COMBATAMBIENT
 
 Type: constant
@@ -142,7 +142,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [client\SoundSystem\Music.hpp at line 29](../../../src/client/SoundSystem/Music.hpp#L29)
+File: [client\SoundSystem\Music.hpp at line 29](../../../Src/client/SoundSystem/Music.hpp#L29)
 ## MUSIC_CHANNEL_EVENT_GLOBAL
 
 Type: constant
@@ -153,7 +153,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\SoundSystem\Music.hpp at line 31](../../../src/client/SoundSystem/Music.hpp#L31)
+File: [client\SoundSystem\Music.hpp at line 31](../../../Src/client/SoundSystem/Music.hpp#L31)
 ## chm(a,b)
 
 Type: constant
@@ -165,7 +165,7 @@ Replaced value:
 ```sqf
 [ #a , b ]
 ```
-File: [client\SoundSystem\Music.hpp at line 33](../../../src/client/SoundSystem/Music.hpp#L33)
+File: [client\SoundSystem\Music.hpp at line 33](../../../Src/client/SoundSystem/Music.hpp#L33)
 ## MUSIC_MAP_INTERNAL_ALLCHANNELS
 
 Type: constant
@@ -183,7 +183,7 @@ chm(MUSIC_CHANNEL_COMBATAMBIENT,4), \
 chm(MUSIC_CHANNEL_EVENT_GLOBAL,5) \
 ]
 ```
-File: [client\SoundSystem\Music.hpp at line 34](../../../src/client/SoundSystem/Music.hpp#L34)
+File: [client\SoundSystem\Music.hpp at line 34](../../../Src/client/SoundSystem/Music.hpp#L34)
 # Music.sqf
 
 ## BUFFER_PRIORITY_MAX
@@ -196,7 +196,7 @@ Replaced value:
 ```sqf
 32
 ```
-File: [client\SoundSystem\Music.sqf at line 99](../../../src/client/SoundSystem/Music.sqf#L99)
+File: [client\SoundSystem\Music.sqf at line 99](../../../Src/client/SoundSystem/Music.sqf#L99)
 ## MUSIC_DEBUG
 
 Type: constant
@@ -207,7 +207,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\SoundSystem\Music.sqf at line 101](../../../src/client/SoundSystem/Music.sqf#L101)
+File: [client\SoundSystem\Music.sqf at line 101](../../../Src/client/SoundSystem/Music.sqf#L101)
 ## mlog(text)
 
 Type: constant
@@ -219,7 +219,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\SoundSystem\Music.sqf at line 109](../../../src/client/SoundSystem/Music.sqf#L109)
+File: [client\SoundSystem\Music.sqf at line 109](../../../Src/client/SoundSystem/Music.sqf#L109)
 ## mlogformat(text,args)
 
 Type: constant
@@ -232,7 +232,7 @@ Replaced value:
 ```sqf
 logformat("[MUSIC::DEBUG]: " + text,args);
 ```
-File: [client\SoundSystem\Music.sqf at line 109](../../../src/client/SoundSystem/Music.sqf#L109)
+File: [client\SoundSystem\Music.sqf at line 109](../../../Src/client/SoundSystem/Music.sqf#L109)
 ## mlogformat(text,args)
 
 Type: constant
@@ -245,7 +245,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\SoundSystem\Music.sqf at line 112](../../../src/client/SoundSystem/Music.sqf#L112)
+File: [client\SoundSystem\Music.sqf at line 112](../../../Src/client/SoundSystem/Music.sqf#L112)
 ## music_play
 
 Type: function
@@ -254,7 +254,7 @@ Description:
 - Param: _priority (optional, default 0)
 - Param: _params (optional, default [])
 
-File: [client\SoundSystem\Music.sqf at line 136](../../../src/client/SoundSystem/Music.sqf#L136)
+File: [client\SoundSystem\Music.sqf at line 136](../../../Src/client/SoundSystem/Music.sqf#L136)
 ## music_setPause
 
 Type: function
@@ -263,14 +263,14 @@ Description:
 - Param: _mode
 - Param: _smooth (optional, default false)
 
-File: [client\SoundSystem\Music.sqf at line 300](../../../src/client/SoundSystem/Music.sqf#L300)
+File: [client\SoundSystem\Music.sqf at line 300](../../../Src/client/SoundSystem/Music.sqf#L300)
 ## music_stop
 
 Type: function
 Description: принудительная остановка музыки на данном канале и очистка канала. параметр -1 чистит все каналы
 - Param: _chan (optional, default -1)
 
-File: [client\SoundSystem\Music.sqf at line 333](../../../src/client/SoundSystem/Music.sqf#L333)
+File: [client\SoundSystem\Music.sqf at line 333](../../../Src/client/SoundSystem/Music.sqf#L333)
 ## music_internal_setFade
 
 Type: function
@@ -278,14 +278,14 @@ Description:
 - Param: _fade
 - Param: _time (optional, default -1)
 
-File: [client\SoundSystem\Music.sqf at line 359](../../../src/client/SoundSystem/Music.sqf#L359)
+File: [client\SoundSystem\Music.sqf at line 359](../../../Src/client/SoundSystem/Music.sqf#L359)
 ## music_internal_onUpdate
 
 Type: function
 Description: 
 
 
-File: [client\SoundSystem\Music.sqf at line 364](../../../src/client/SoundSystem/Music.sqf#L364)
+File: [client\SoundSystem\Music.sqf at line 364](../../../Src/client/SoundSystem/Music.sqf#L364)
 # MusicManager.sqf
 
 ## getStructData(var)
@@ -298,7 +298,7 @@ Replaced value:
 ```sqf
 (music_currentPlay get var)
 ```
-File: [client\SoundSystem\MusicManager.sqf at line 7](../../../src/client/SoundSystem/MusicManager.sqf#L7)
+File: [client\SoundSystem\MusicManager.sqf at line 7](../../../Src/client/SoundSystem/MusicManager.sqf#L7)
 ## setStructData(var,val)
 
 Type: constant
@@ -310,21 +310,21 @@ Replaced value:
 ```sqf
 music_currentPlay set [var,val]
 ```
-File: [client\SoundSystem\MusicManager.sqf at line 8](../../../src/client/SoundSystem/MusicManager.sqf#L8)
+File: [client\SoundSystem\MusicManager.sqf at line 8](../../../Src/client/SoundSystem/MusicManager.sqf#L8)
 ## music_internal_createStruct
 
 Type: function
 Description: Создаёт структуру категории музыки
 - Param: _countSounds
 
-File: [client\SoundSystem\MusicManager.sqf at line 29](../../../src/client/SoundSystem/MusicManager.sqf#L29)
+File: [client\SoundSystem\MusicManager.sqf at line 29](../../../Src/client/SoundSystem/MusicManager.sqf#L29)
 ## music_resetCurrentPlayMemory
 
 Type: function
 Description: сборс параметров музыки
 
 
-File: [client\SoundSystem\MusicManager.sqf at line 35](../../../src/client/SoundSystem/MusicManager.sqf#L35)
+File: [client\SoundSystem\MusicManager.sqf at line 35](../../../Src/client/SoundSystem/MusicManager.sqf#L35)
 ## music_initCurrentPlayMemory
 
 Type: function
@@ -332,42 +332,42 @@ Description: Вызывается только внутри запускатор
 - Param: _t
 - Param: _d
 
-File: [client\SoundSystem\MusicManager.sqf at line 41](../../../src/client/SoundSystem/MusicManager.sqf#L41)
+File: [client\SoundSystem\MusicManager.sqf at line 41](../../../Src/client/SoundSystem/MusicManager.sqf#L41)
 ## music_isStarted
 
 Type: function
 Description: Находится ли музыка в буфере
 
 
-File: [client\SoundSystem\MusicManager.sqf at line 49](../../../src/client/SoundSystem/MusicManager.sqf#L49)
+File: [client\SoundSystem\MusicManager.sqf at line 49](../../../Src/client/SoundSystem/MusicManager.sqf#L49)
 ## music_isPlaying
 
 Type: function
 Description: играет ли музка в данный момент
 
 
-File: [client\SoundSystem\MusicManager.sqf at line 51](../../../src/client/SoundSystem/MusicManager.sqf#L51)
+File: [client\SoundSystem\MusicManager.sqf at line 51](../../../Src/client/SoundSystem/MusicManager.sqf#L51)
 ## music_pause
 
 Type: function
 Description: пауза музыки
 
 
-File: [client\SoundSystem\MusicManager.sqf at line 54](../../../src/client/SoundSystem/MusicManager.sqf#L54)
+File: [client\SoundSystem\MusicManager.sqf at line 54](../../../Src/client/SoundSystem/MusicManager.sqf#L54)
 ## music_return
 
 Type: function
 Description: возобновить проигрывание
 
 
-File: [client\SoundSystem\MusicManager.sqf at line 60](../../../src/client/SoundSystem/MusicManager.sqf#L60)
+File: [client\SoundSystem\MusicManager.sqf at line 60](../../../Src/client/SoundSystem/MusicManager.sqf#L60)
 ## music_getPlayedTime
 
 Type: function
 Description: Вовзаращет текущее время с начала композиции
 
 
-File: [client\SoundSystem\MusicManager.sqf at line 71](../../../src/client/SoundSystem/MusicManager.sqf#L71)
+File: [client\SoundSystem\MusicManager.sqf at line 71](../../../Src/client/SoundSystem/MusicManager.sqf#L71)
 ## music_play
 
 Type: function
@@ -375,14 +375,14 @@ Description:
 - Param: _config
 - Param: _startTime (optional, default 0)
 
-File: [client\SoundSystem\MusicManager.sqf at line 75](../../../src/client/SoundSystem/MusicManager.sqf#L75)
+File: [client\SoundSystem\MusicManager.sqf at line 75](../../../Src/client/SoundSystem/MusicManager.sqf#L75)
 ## music_stop
 
 Type: function
 Description: 
 - Param: _fadetime (optional, default 0)
 
-File: [client\SoundSystem\MusicManager.sqf at line 90](../../../src/client/SoundSystem/MusicManager.sqf#L90)
+File: [client\SoundSystem\MusicManager.sqf at line 90](../../../Src/client/SoundSystem/MusicManager.sqf#L90)
 ## music_changeToNew
 
 Type: function
@@ -392,7 +392,7 @@ Description: плавная смена композиции
 - Param: _fadeOld (optional, default 5)
 - Param: _fadeNew (optional, default 5)
 
-File: [client\SoundSystem\MusicManager.sqf at line 110](../../../src/client/SoundSystem/MusicManager.sqf#L110)
+File: [client\SoundSystem\MusicManager.sqf at line 110](../../../Src/client/SoundSystem/MusicManager.sqf#L110)
 ## music_setVolume
 
 Type: function
@@ -400,28 +400,28 @@ Description: ----- VOLUME MUSIC MANAGMENT ------
 - Param: _fade
 - Param: _time (optional, default 0)
 
-File: [client\SoundSystem\MusicManager.sqf at line 117](../../../src/client/SoundSystem/MusicManager.sqf#L117)
+File: [client\SoundSystem\MusicManager.sqf at line 117](../../../Src/client/SoundSystem/MusicManager.sqf#L117)
 ## music_playRandomAmbientMusic
 
 Type: function
 Description: testing sound
 
 
-File: [client\SoundSystem\MusicManager.sqf at line 123](../../../src/client/SoundSystem/MusicManager.sqf#L123)
+File: [client\SoundSystem\MusicManager.sqf at line 123](../../../Src/client/SoundSystem/MusicManager.sqf#L123)
 ## music_setRoundMusicMode
 
 Type: function
 Description: 
 - Param: _mode
 
-File: [client\SoundSystem\MusicManager.sqf at line 129](../../../src/client/SoundSystem/MusicManager.sqf#L129)
+File: [client\SoundSystem\MusicManager.sqf at line 129](../../../Src/client/SoundSystem/MusicManager.sqf#L129)
 ## music_onUpdate
 
 Type: function
 Description: регулярный цикл обновления музыки
 
 
-File: [client\SoundSystem\MusicManager.sqf at line 143](../../../src/client/SoundSystem/MusicManager.sqf#L143)
+File: [client\SoundSystem\MusicManager.sqf at line 143](../../../Src/client/SoundSystem/MusicManager.sqf#L143)
 # MusicManager_experimental.sqf
 
 ## MM_CHANNELS_MAX_ORDER_ID
@@ -434,7 +434,7 @@ Replaced value:
 ```sqf
 512
 ```
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 35](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L35)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 35](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L35)
 ## MM_LAYER_NULL
 
 Type: constant
@@ -445,7 +445,7 @@ Replaced value:
 ```sqf
 objnull
 ```
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 36](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L36)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 36](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L36)
 ## MM_STATE_PLAYED
 
 Type: constant
@@ -456,7 +456,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 39](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L39)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 39](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L39)
 ## MM_STATE_PAUSED
 
 Type: constant
@@ -467,7 +467,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 40](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L40)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 40](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L40)
 ## MM_STATE_STOPPED
 
 Type: constant
@@ -478,42 +478,42 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 41](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L41)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 41](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L41)
 ## mm_channels_internal_initStruct
 
 Type: function
 Description: 
 
 
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 47](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L47)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 47](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L47)
 ## mm_init
 
 Type: function
 Description: 
 
 
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 61](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L61)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 61](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L61)
 ## mm_internal_thread_onUpdate
 
 Type: function
 Description: 
 
 
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 70](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L70)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 70](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L70)
 ## mm_channel_register
 
 Type: function
 Description: 
 - Param: _id
 
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 75](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L75)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 75](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L75)
 ## mm_layer_unregister
 
 Type: function
 Description: 
 - Param: _channel
 
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 85](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L85)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 85](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L85)
 ## mm_setChannelPlaying
 
 Type: function
@@ -521,7 +521,7 @@ Description:
 - Param: _mode
 - Param: _channel (optional, default mm_currentChannel)
 
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 98](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L98)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 98](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L98)
 ## mm_setChannelVolume
 
 Type: function
@@ -529,14 +529,14 @@ Description:
 - Param: _vol
 - Param: _channel (optional, default mm_currentChannel)
 
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 102](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L102)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 102](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L102)
 ## mm_getChannelVolume
 
 Type: function
 Description: 
 - Param: _ch (optional, default mm_currentChannel)
 
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 106](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L106)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 106](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L106)
 ## mm_internal_play
 
 Type: function
@@ -547,14 +547,14 @@ Description:
 - Param: _smoothStart (optional, default 0)
 - Param: _isLooped (optional, default false)
 
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 110](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L110)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 110](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L110)
 ## mm_getPlayedTime
 
 Type: function
 Description: 
 - Param: _layer (optional, default mm_currentChannel)
 
-File: [client\SoundSystem\MusicManager_experimental.sqf at line 116](../../../src/client/SoundSystem/MusicManager_experimental.sqf#L116)
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 116](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L116)
 # Sound3d.sqf
 
 ## distLTG
@@ -567,7 +567,7 @@ Replaced value:
 ```sqf
 (_leg distance _ground )
 ```
-File: [client\SoundSystem\Sound3d.sqf at line 188](../../../src/client/SoundSystem/Sound3d.sqf#L188)
+File: [client\SoundSystem\Sound3d.sqf at line 188](../../../Src/client/SoundSystem/Sound3d.sqf#L188)
 ## lastDist
 
 Type: constant
@@ -578,7 +578,7 @@ Replaced value:
 ```sqf
 (_ground getVariable ["lastdistance",distLTG])
 ```
-File: [client\SoundSystem\Sound3d.sqf at line 189](../../../src/client/SoundSystem/Sound3d.sqf#L189)
+File: [client\SoundSystem\Sound3d.sqf at line 189](../../../Src/client/SoundSystem/Sound3d.sqf#L189)
 ## isNegativize
 
 Type: constant
@@ -589,7 +589,7 @@ Replaced value:
 ```sqf
 (distLTG < lastDist)
 ```
-File: [client\SoundSystem\Sound3d.sqf at line 190](../../../src/client/SoundSystem/Sound3d.sqf#L190)
+File: [client\SoundSystem\Sound3d.sqf at line 190](../../../Src/client/SoundSystem/Sound3d.sqf#L190)
 ## isPositivize
 
 Type: constant
@@ -600,14 +600,14 @@ Replaced value:
 ```sqf
 (distLTG > lastDist)
 ```
-File: [client\SoundSystem\Sound3d.sqf at line 191](../../../src/client/SoundSystem/Sound3d.sqf#L191)
+File: [client\SoundSystem\Sound3d.sqf at line 191](../../../Src/client/SoundSystem/Sound3d.sqf#L191)
 ## soundProcessor_play
 
 Type: function
 Description: Рантайм вычисление процессор громкости звука
 
 
-File: [client\SoundSystem\Sound3d.sqf at line 19](../../../src/client/SoundSystem/Sound3d.sqf#L19)
+File: [client\SoundSystem\Sound3d.sqf at line 19](../../../Src/client/SoundSystem/Sound3d.sqf#L19)
 ## sound3d_playOnObject
 
 Type: function
@@ -618,7 +618,7 @@ Description: функция локальна
 - Param: _pitch (optional, default 1)
 - Param: _offset (optional, default 0)
 
-File: [client\SoundSystem\Sound3d.sqf at line 41](../../../src/client/SoundSystem/Sound3d.sqf#L41)
+File: [client\SoundSystem\Sound3d.sqf at line 41](../../../Src/client/SoundSystem/Sound3d.sqf#L41)
 ## sound3d_playOnObjectLooped
 
 Type: function
@@ -627,7 +627,7 @@ Description: функция локальна
 - Param: _3dSoundData
 - Param: _soundDuration (optional, default -1)
 
-File: [client\SoundSystem\Sound3d.sqf at line 69](../../../src/client/SoundSystem/Sound3d.sqf#L69)
+File: [client\SoundSystem\Sound3d.sqf at line 69](../../../Src/client/SoundSystem/Sound3d.sqf#L69)
 ## sound_selfPlay
 
 Type: function
@@ -635,7 +635,7 @@ Description: Проигрывает локальный звук
 - Param: _path
 - Param: _offset (optional, default 0)
 
-File: [client\SoundSystem\Sound3d.sqf at line 104](../../../src/client/SoundSystem/Sound3d.sqf#L104)
+File: [client\SoundSystem\Sound3d.sqf at line 104](../../../Src/client/SoundSystem/Sound3d.sqf#L104)
 ## sound3d_playLocal
 
 Type: function
@@ -646,11 +646,11 @@ Description: from say3D [sound, maxDistance, pitch, isSpeech, offset]
 - Param: _distance (optional, default 10)
 - Param: _offset (optional, default 0)
 
-File: [client\SoundSystem\Sound3d.sqf at line 113](../../../src/client/SoundSystem/Sound3d.sqf#L113)
+File: [client\SoundSystem\Sound3d.sqf at line 113](../../../Src/client/SoundSystem/Sound3d.sqf#L113)
 ## debug_doFootStep
 
 Type: function
 Description: 
 
 
-File: [client\SoundSystem\Sound3d.sqf at line 138](../../../src/client/SoundSystem/Sound3d.sqf#L138)
+File: [client\SoundSystem\Sound3d.sqf at line 138](../../../Src/client/SoundSystem/Sound3d.sqf#L138)

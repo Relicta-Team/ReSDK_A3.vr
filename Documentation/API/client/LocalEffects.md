@@ -10,7 +10,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\LocalEffects\LocalEffects.h at line 8](../../../src/client/LocalEffects/LocalEffects.h#L8)
+File: [client\LocalEffects\LocalEffects.h at line 8](../../../Src/client/LocalEffects/LocalEffects.h#L8)
 ## EFFECT_EVENT_INDEX_DESTROY
 
 Type: constant
@@ -21,7 +21,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\LocalEffects\LocalEffects.h at line 9](../../../src/client/LocalEffects/LocalEffects.h#L9)
+File: [client\LocalEffects\LocalEffects.h at line 9](../../../Src/client/LocalEffects/LocalEffects.h#L9)
 ## EFFECT_EVENT_INDEX_UPDATE
 
 Type: constant
@@ -32,7 +32,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\LocalEffects\LocalEffects.h at line 10](../../../src/client/LocalEffects/LocalEffects.h#L10)
+File: [client\LocalEffects\LocalEffects.h at line 10](../../../Src/client/LocalEffects/LocalEffects.h#L10)
 ## effect(class)
 
 Type: constant
@@ -43,7 +43,7 @@ Replaced value:
 ```sqf
 _data = [{},{},{}]; _lasteff = tolower 'class';_lasteffstruct = [_lasteff,_data]; [{
 ```
-File: [client\LocalEffects\LocalEffects.h at line 12](../../../src/client/LocalEffects/LocalEffects.h#L12)
+File: [client\LocalEffects\LocalEffects.h at line 12](../../../Src/client/LocalEffects/LocalEffects.h#L12)
 ## destroy
 
 Type: constant
@@ -54,7 +54,7 @@ Replaced value:
 ```sqf
 }]; _data set [EFFECT_EVENT_INDEX_DESTROY,{ 
 ```
-File: [client\LocalEffects\LocalEffects.h at line 14](../../../src/client/LocalEffects/LocalEffects.h#L14)
+File: [client\LocalEffects\LocalEffects.h at line 14](../../../Src/client/LocalEffects/LocalEffects.h#L14)
 ## create
 
 Type: constant
@@ -65,7 +65,7 @@ Replaced value:
 ```sqf
 }]; _data set [EFFECT_EVENT_INDEX_CREATE,{
 ```
-File: [client\LocalEffects\LocalEffects.h at line 16](../../../src/client/LocalEffects/LocalEffects.h#L16)
+File: [client\LocalEffects\LocalEffects.h at line 16](../../../Src/client/LocalEffects/LocalEffects.h#L16)
 ## update
 
 Type: constant
@@ -76,7 +76,7 @@ Replaced value:
 ```sqf
 }]; _data set [EFFECT_EVENT_INDEX_UPDATE,{
 ```
-File: [client\LocalEffects\LocalEffects.h at line 18](../../../src/client/LocalEffects/LocalEffects.h#L18)
+File: [client\LocalEffects\LocalEffects.h at line 18](../../../Src/client/LocalEffects/LocalEffects.h#L18)
 ## end
 
 Type: constant
@@ -87,7 +87,7 @@ Replaced value:
 ```sqf
 }]; locef_allEffectsCfg set _lasteffstruct;
 ```
-File: [client\LocalEffects\LocalEffects.h at line 20](../../../src/client/LocalEffects/LocalEffects.h#L20)
+File: [client\LocalEffects\LocalEffects.h at line 20](../../../Src/client/LocalEffects/LocalEffects.h#L20)
 ## thisEventName
 
 Type: constant
@@ -98,7 +98,7 @@ Replaced value:
 ```sqf
 _name
 ```
-File: [client\LocalEffects\LocalEffects.h at line 22](../../../src/client/LocalEffects/LocalEffects.h#L22)
+File: [client\LocalEffects\LocalEffects.h at line 22](../../../Src/client/LocalEffects/LocalEffects.h#L22)
 ## thisContext
 
 Type: constant
@@ -109,7 +109,7 @@ Replaced value:
 ```sqf
 _ctx
 ```
-File: [client\LocalEffects\LocalEffects.h at line 24](../../../src/client/LocalEffects/LocalEffects.h#L24)
+File: [client\LocalEffects\LocalEffects.h at line 24](../../../Src/client/LocalEffects/LocalEffects.h#L24)
 ## jumpto(index)
 
 Type: constant
@@ -120,7 +120,7 @@ Replaced value:
 ```sqf
 call(locef_allEffectsCfg get thisEventName select index)
 ```
-File: [client\LocalEffects\LocalEffects.h at line 26](../../../src/client/LocalEffects/LocalEffects.h#L26)
+File: [client\LocalEffects\LocalEffects.h at line 26](../../../Src/client/LocalEffects/LocalEffects.h#L26)
 ## updateContext(newdata)
 
 Type: constant
@@ -131,7 +131,7 @@ Replaced value:
 ```sqf
 locef_allActiveEffects set [thisEventName,newdata]
 ```
-File: [client\LocalEffects\LocalEffects.h at line 28](../../../src/client/LocalEffects/LocalEffects.h#L28)
+File: [client\LocalEffects\LocalEffects.h at line 28](../../../Src/client/LocalEffects/LocalEffects.h#L28)
 # LocalEffects_init.sqf
 
 ## sanitizeCfgName(var)
@@ -144,7 +144,7 @@ Replaced value:
 ```sqf
 var = tolower var
 ```
-File: [client\LocalEffects\LocalEffects_init.sqf at line 26](../../../src/client/LocalEffects/LocalEffects_init.sqf#L26)
+File: [client\LocalEffects\LocalEffects_init.sqf at line 26](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L26)
 ## effectExists(checked)
 
 Type: constant
@@ -155,7 +155,7 @@ Replaced value:
 ```sqf
 (checked in locef_allActiveEffects)
 ```
-File: [client\LocalEffects\LocalEffects_init.sqf at line 27](../../../src/client/LocalEffects/LocalEffects_init.sqf#L27)
+File: [client\LocalEffects\LocalEffects_init.sqf at line 27](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L27)
 ## callEffectEvent(name,indx)
 
 Type: constant
@@ -167,7 +167,7 @@ Replaced value:
 ```sqf
 call (locef_allEffectsCfg get (name) select indx)
 ```
-File: [client\LocalEffects\LocalEffects_init.sqf at line 29](../../../src/client/LocalEffects/LocalEffects_init.sqf#L29)
+File: [client\LocalEffects\LocalEffects_init.sqf at line 29](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L29)
 ## locef_add
 
 Type: function
@@ -175,14 +175,14 @@ Description:
 - Param: thisEventName
 - Param: _context
 
-File: [client\LocalEffects\LocalEffects_init.sqf at line 32](../../../src/client/LocalEffects/LocalEffects_init.sqf#L32)
+File: [client\LocalEffects\LocalEffects_init.sqf at line 32](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L32)
 ## locef_remove
 
 Type: function
 Description: };
 
 
-File: [client\LocalEffects\LocalEffects_init.sqf at line 38](../../../src/client/LocalEffects/LocalEffects_init.sqf#L38)
+File: [client\LocalEffects\LocalEffects_init.sqf at line 38](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L38)
 ## locef_update
 
 Type: function
@@ -190,18 +190,18 @@ Description:
 - Param: thisEventName
 - Param: _context (optional, default [])
 
-File: [client\LocalEffects\LocalEffects_init.sqf at line 48](../../../src/client/LocalEffects/LocalEffects_init.sqf#L48)
+File: [client\LocalEffects\LocalEffects_init.sqf at line 48](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L48)
 ## locef_removeAll
 
 Type: function
 Description: 
 
 
-File: [client\LocalEffects\LocalEffects_init.sqf at line 61](../../../src/client/LocalEffects/LocalEffects_init.sqf#L61)
+File: [client\LocalEffects\LocalEffects_init.sqf at line 61](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L61)
 ## locef_createTempObject
 
 Type: function
 Description: 
 
 
-File: [client\LocalEffects\LocalEffects_init.sqf at line 67](../../../src/client/LocalEffects/LocalEffects_init.sqf#L67)
+File: [client\LocalEffects\LocalEffects_init.sqf at line 67](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L67)

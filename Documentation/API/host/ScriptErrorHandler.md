@@ -9,7 +9,7 @@ Description:
 - Param: _scope
 - Param: _varmap
 
-File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 9](../../../src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L9)
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 9](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L9)
 ## scriptError_makeError
 
 Type: function
@@ -17,4 +17,4 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 63](../../../src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L63)
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 63](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L63)

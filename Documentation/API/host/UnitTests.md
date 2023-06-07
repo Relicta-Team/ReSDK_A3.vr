@@ -10,7 +10,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\UnitTests\UnitTest.h at line 8](../../../src/host/UnitTests/UnitTest.h#L8)
+File: [host\UnitTests\UnitTest.h at line 8](../../../Src/host/UnitTests/UnitTest.h#L8)
 ## assertion_errors
 
 Type: constant
@@ -21,7 +21,7 @@ Replaced value:
 ```sqf
 _as_err
 ```
-File: [host\UnitTests\UnitTest.h at line 11](../../../src/host/UnitTests/UnitTest.h#L11)
+File: [host\UnitTests\UnitTest.h at line 11](../../../Src/host/UnitTests/UnitTest.h#L11)
 ## test_errors
 
 Type: constant
@@ -32,7 +32,7 @@ Replaced value:
 ```sqf
 _ts_err
 ```
-File: [host\UnitTests\UnitTest.h at line 12](../../../src/host/UnitTests/UnitTest.h#L12)
+File: [host\UnitTests\UnitTest.h at line 12](../../../Src/host/UnitTests/UnitTest.h#L12)
 ## setTestName(name)
 
 Type: constant
@@ -43,7 +43,7 @@ Replaced value:
 ```sqf
 private _unitName = name;
 ```
-File: [host\UnitTests\UnitTest.h at line 14](../../../src/host/UnitTests/UnitTest.h#L14)
+File: [host\UnitTests\UnitTest.h at line 14](../../../Src/host/UnitTests/UnitTest.h#L14)
 ## predefTestName
 
 Type: constant
@@ -54,7 +54,7 @@ Replaced value:
 ```sqf
 _unitName = if (isNil"_unitName") then {"UNDEFINED"} else {_unitName}
 ```
-File: [host\UnitTests\UnitTest.h at line 16](../../../src/host/UnitTests/UnitTest.h#L16)
+File: [host\UnitTests\UnitTest.h at line 16](../../../Src/host/UnitTests/UnitTest.h#L16)
 ## __internal_log_red(message,fmt)
 
 Type: constant
@@ -66,7 +66,7 @@ Replaced value:
 ```sqf
 predefTestName; "debug_console" callExtension (format[message,fmt] + "#1001")
 ```
-File: [host\UnitTests\UnitTest.h at line 18](../../../src/host/UnitTests/UnitTest.h#L18)
+File: [host\UnitTests\UnitTest.h at line 18](../../../Src/host/UnitTests/UnitTest.h#L18)
 ## __internal_log_green(message,fmt)
 
 Type: constant
@@ -78,7 +78,7 @@ Replaced value:
 ```sqf
 predefTestName; "debug_console" callExtension (format[message,fmt] + "#0101")
 ```
-File: [host\UnitTests\UnitTest.h at line 19](../../../src/host/UnitTests/UnitTest.h#L19)
+File: [host\UnitTests\UnitTest.h at line 19](../../../Src/host/UnitTests/UnitTest.h#L19)
 ## __internal_log_common(message,fmt)
 
 Type: constant
@@ -90,7 +90,7 @@ Replaced value:
 ```sqf
 predefTestName; "debug_console" callExtension (format[message,fmt] + "#1101")
 ```
-File: [host\UnitTests\UnitTest.h at line 20](../../../src/host/UnitTests/UnitTest.h#L20)
+File: [host\UnitTests\UnitTest.h at line 20](../../../Src/host/UnitTests/UnitTest.h#L20)
 ## assert_error(mes)
 
 Type: constant
@@ -101,7 +101,7 @@ Replaced value:
 ```sqf
 __internal_log_red("<Assert>	["+_unitName+"]: - %1",mes); INC(assertion_errors)
 ```
-File: [host\UnitTests\UnitTest.h at line 22](../../../src/host/UnitTests/UnitTest.h#L22)
+File: [host\UnitTests\UnitTest.h at line 22](../../../Src/host/UnitTests/UnitTest.h#L22)
 ## test_ok(mes)
 
 Type: constant
@@ -112,7 +112,7 @@ Replaced value:
 ```sqf
 __internal_log_green("<Test>	["+_unitName+"]: - Test OK. %1",mes)
 ```
-File: [host\UnitTests\UnitTest.h at line 24](../../../src/host/UnitTests/UnitTest.h#L24)
+File: [host\UnitTests\UnitTest.h at line 24](../../../Src/host/UnitTests/UnitTest.h#L24)
 ## test_fail(mes)
 
 Type: constant
@@ -123,7 +123,7 @@ Replaced value:
 ```sqf
 __internal_log_red("<Test>	["+_unitName+"]: - Test Fail! %1",mes); INC(test_errors)
 ```
-File: [host\UnitTests\UnitTest.h at line 25](../../../src/host/UnitTests/UnitTest.h#L25)
+File: [host\UnitTests\UnitTest.h at line 25](../../../Src/host/UnitTests/UnitTest.h#L25)
 ## test_flags(flags)
 
 Type: constant
@@ -134,7 +134,7 @@ Replaced value:
 ```sqf
 flags
 ```
-File: [host\UnitTests\UnitTest.h at line 27](../../../src/host/UnitTests/UnitTest.h#L27)
+File: [host\UnitTests\UnitTest.h at line 27](../../../Src/host/UnitTests/UnitTest.h#L27)
 ## onlyMultiplayer
 
 Type: constant
@@ -145,7 +145,7 @@ Replaced value:
 ```sqf
 if (!isMultiplayer) exitWith {};
 ```
-File: [host\UnitTests\UnitTest.h at line 28](../../../src/host/UnitTests/UnitTest.h#L28)
+File: [host\UnitTests\UnitTest.h at line 28](../../../Src/host/UnitTests/UnitTest.h#L28)
 ## newTest(name)
 
 Type: constant
@@ -159,7 +159,7 @@ call { \
 		setTestName('name') \
 		private assertion_errors = 0;  private test_errors = 0;
 ```
-File: [host\UnitTests\UnitTest.h at line 31](../../../src/host/UnitTests/UnitTest.h#L31)
+File: [host\UnitTests\UnitTest.h at line 31](../../../Src/host/UnitTests/UnitTest.h#L31)
 ## newTest(name)
 
 Type: constant
@@ -171,7 +171,7 @@ Replaced value:
 ```sqf
 {
 ```
-File: [host\UnitTests\UnitTest.h at line 35](../../../src/host/UnitTests/UnitTest.h#L35)
+File: [host\UnitTests\UnitTest.h at line 35](../../../Src/host/UnitTests/UnitTest.h#L35)
 ## endTest
 
 Type: constant
@@ -196,7 +196,7 @@ if (__hasFail) then { \
 }; \
 };
 ```
-File: [host\UnitTests\UnitTest.h at line 39](../../../src/host/UnitTests/UnitTest.h#L39)
+File: [host\UnitTests\UnitTest.h at line 39](../../../Src/host/UnitTests/UnitTest.h#L39)
 ## assert_true(cond,mes)
 
 Type: constant
@@ -210,7 +210,7 @@ if (!(cond)) then { \
 	assert_error('Assertion (cond) failed! ' + mes) \
 }
 ```
-File: [host\UnitTests\UnitTest.h at line 55](../../../src/host/UnitTests/UnitTest.h#L55)
+File: [host\UnitTests\UnitTest.h at line 55](../../../Src/host/UnitTests/UnitTest.h#L55)
 ## assert_false(cond,mes)
 
 Type: constant
@@ -224,7 +224,7 @@ if (cond) then { \
 	assert_error('Assertion (NOT cond) failed! ' + mes) \
 }
 ```
-File: [host\UnitTests\UnitTest.h at line 59](../../../src/host/UnitTests/UnitTest.h#L59)
+File: [host\UnitTests\UnitTest.h at line 59](../../../Src/host/UnitTests/UnitTest.h#L59)
 ## assert_op(a,op,b,mes)
 
 Type: constant
@@ -240,7 +240,7 @@ if (!(a op b)) then { \
 	assert_error('Assertion (a op b) failed!' + mes) \
 }
 ```
-File: [host\UnitTests\UnitTest.h at line 63](../../../src/host/UnitTests/UnitTest.h#L63)
+File: [host\UnitTests\UnitTest.h at line 63](../../../Src/host/UnitTests/UnitTest.h#L63)
 ## assert_def(var,mes)
 
 Type: constant
@@ -254,7 +254,7 @@ if (isNil {var}) then { \
 	assert_error('Assertion (var is defined) failed!' + mes) \
 }
 ```
-File: [host\UnitTests\UnitTest.h at line 67](../../../src/host/UnitTests/UnitTest.h#L67)
+File: [host\UnitTests\UnitTest.h at line 67](../../../Src/host/UnitTests/UnitTest.h#L67)
 ## test_true(CONDITION, MESSAGE)
 
 Type: constant
@@ -274,7 +274,7 @@ Replaced value:
         test_fail('(CONDITION) ' + (MESSAGE)); \
     }
 ```
-File: [host\UnitTests\UnitTest.h at line 71](../../../src/host/UnitTests/UnitTest.h#L71)
+File: [host\UnitTests\UnitTest.h at line 71](../../../Src/host/UnitTests/UnitTest.h#L71)
 ## test_false(CONDITION, MESSAGE)
 
 Type: constant
@@ -294,7 +294,7 @@ Replaced value:
         test_fail('(not (CONDITION)) ' + (MESSAGE)); \
     }
 ```
-File: [host\UnitTests\UnitTest.h at line 81](../../../src/host/UnitTests/UnitTest.h#L81)
+File: [host\UnitTests\UnitTest.h at line 81](../../../Src/host/UnitTests/UnitTest.h#L81)
 ## test_op(A,OPERATOR,B,MESSAGE)
 
 Type: constant
@@ -316,7 +316,7 @@ Replaced value:
         test_fail('(A OPERATOR B)') \
     }
 ```
-File: [host\UnitTests\UnitTest.h at line 91](../../../src/host/UnitTests/UnitTest.h#L91)
+File: [host\UnitTests\UnitTest.h at line 91](../../../Src/host/UnitTests/UnitTest.h#L91)
 ## TEST_DEFINED(VARIABLE,MESSAGE)
 
 Type: constant
@@ -336,7 +336,7 @@ Replaced value:
         test_fail('(' + VARIABLE + ' is not defined)' + (MESSAGE)); \
     }
 ```
-File: [host\UnitTests\UnitTest.h at line 101](../../../src/host/UnitTests/UnitTest.h#L101)
+File: [host\UnitTests\UnitTest.h at line 101](../../../Src/host/UnitTests/UnitTest.h#L101)
 # UnitTest.sqf
 
 ## wToPrec(val)
@@ -349,7 +349,7 @@ Replaced value:
 ```sqf
 _w * (val) / 100
 ```
-File: [host\UnitTests\UnitTest.sqf at line 29](../../../src/host/UnitTests/UnitTest.sqf#L29)
+File: [host\UnitTests\UnitTest.sqf at line 29](../../../Src/host/UnitTests/UnitTest.sqf#L29)
 ## dllExec(var)
 
 Type: constant
@@ -360,4 +360,4 @@ Replaced value:
 ```sqf
 (parseSimpleArray ("RelictaNC" callExtension (var)))
 ```
-File: [host\UnitTests\UnitTest.sqf at line 39](../../../src/host/UnitTests/UnitTest.sqf#L39)
+File: [host\UnitTests\UnitTest.sqf at line 39](../../../Src/host/UnitTests/UnitTest.sqf#L39)

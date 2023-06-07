@@ -114,7 +114,8 @@ for fpath in result:
             
             refpath = relativePath.replace('\\','/')
             #print(f'relative: {refpath}')
-            handle.write(f"File: [{relpath} at line {values['DefLine']}](../../../src/{refpath}#L{values['DefLine']})\n")
+            # ! Src folder case-senstivity
+            handle.write(f"File: [{relpath} at line {values['DefLine']}](../../../Src/{refpath}#L{values['DefLine']})\n")
     if side in mlistMain:
         if not module in mlistMain[side]:
             mlistMain[side].append(module)
@@ -127,7 +128,7 @@ with open(docsource + "\\README.md","w+",encoding="utf-8") as handle:
         handle.write(f"Count modules: {len(mlist)}\n")
         
         for mod in mlist:
-            createdPath = f"{side}\\{mod}.md"
+            createdPath = f"{side}/{mod}.md"
             filesInModule = flielists[f'{side}-{mod}'] # list of files, defined in module
             handle.write(f" - [{mod}]({createdPath}) - {len(filesInModule)} files\n")
         #print(f"{side} : {mlist}")

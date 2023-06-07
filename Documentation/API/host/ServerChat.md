@@ -7,7 +7,7 @@ Description: Сказать что-то в оос канал
 - Param: _client
 - Param: _text
 
-File: [host\ServerChat\serverChat.sqf at line 10](../../../src/host/ServerChat/serverChat.sqf#L10)
+File: [host\ServerChat\serverChat.sqf at line 10](../../../Src/host/ServerChat/serverChat.sqf#L10)
 ## sc_say_world
 
 Type: function
@@ -16,4 +16,4 @@ Description:
 - Param: _text
 - Param: _chanell
 
-File: [host\ServerChat\serverChat.sqf at line 16](../../../src/host/ServerChat/serverChat.sqf#L16)
+File: [host\ServerChat\serverChat.sqf at line 16](../../../Src/host/ServerChat/serverChat.sqf#L16)

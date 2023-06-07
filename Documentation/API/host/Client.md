@@ -10,7 +10,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Client\client.sqf at line 18](../../../src/host/Client/client.sqf#L18)
+File: [host\Client\client.sqf at line 18](../../../Src/host/Client/client.sqf#L18)
 ## debug(var,fmt)
 
 Type: constant
@@ -23,7 +23,7 @@ Replaced value:
 ```sqf
 logformat("[ServerClient::DEBUG]: " + (format[" (client:%1<%2>) " arg getSelf(id) arg getSelf(name)]) + var,fmt);
 ```
-File: [host\Client\client.sqf at line 21](../../../src/host/Client/client.sqf#L21)
+File: [host\Client\client.sqf at line 21](../../../Src/host/Client/client.sqf#L21)
 ## debug(var,fmt)
 
 Type: constant
@@ -36,7 +36,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Client\client.sqf at line 23](../../../src/host/Client/client.sqf#L23)
+File: [host\Client\client.sqf at line 23](../../../Src/host/Client/client.sqf#L23)
 ## hashPair(key,val)
 
 Type: constant
@@ -48,7 +48,7 @@ Replaced value:
 ```sqf
 [#key,val]
 ```
-File: [host\Client\client.sqf at line 402](../../../src/host/Client/client.sqf#L402)
+File: [host\Client\client.sqf at line 402](../../../Src/host/Client/client.sqf#L402)
 ## getRoleByClass(val)
 
 Type: constant
@@ -59,7 +59,7 @@ Replaced value:
 ```sqf
 (missionNamespace getVariable ["role_"+(val),nullPtr])
 ```
-File: [host\Client\client.sqf at line 540](../../../src/host/Client/client.sqf#L540)
+File: [host\Client\client.sqf at line 540](../../../Src/host/Client/client.sqf#L540)
 # sysmes.h
 
 ## sysmes(mname)
@@ -72,4 +72,4 @@ Replaced value:
 ```sqf
 }],[ mname ,{
 ```
-File: [host\Client\sysmes.h at line 8](../../../src/host/Client/sysmes.h#L8)
+File: [host\Client\sysmes.h at line 8](../../../Src/host/Client/sysmes.h#L8)

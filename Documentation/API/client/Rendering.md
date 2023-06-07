@@ -10,21 +10,21 @@ Replaced value:
 ```sqf
 setViewDistance (dist); setObjectViewDistance (dist)
 ```
-File: [client\Rendering\RenderDistance.sqf at line 13](../../../src/client/Rendering/RenderDistance.sqf#L13)
+File: [client\Rendering\RenderDistance.sqf at line 13](../../../Src/client/Rendering/RenderDistance.sqf#L13)
 ## render_dist_onupdate
 
 Type: function
 Description: 
 
 
-File: [client\Rendering\RenderDistance.sqf at line 11](../../../src/client/Rendering/RenderDistance.sqf#L11)
+File: [client\Rendering\RenderDistance.sqf at line 11](../../../Src/client/Rendering/RenderDistance.sqf#L11)
 ## render_dist_init
 
 Type: function
 Description: 
 
 
-File: [client\Rendering\RenderDistance.sqf at line 35](../../../src/client/Rendering/RenderDistance.sqf#L35)
+File: [client\Rendering\RenderDistance.sqf at line 35](../../../Src/client/Rendering/RenderDistance.sqf#L35)
 # CameraControl.hpp
 
 ## CAMERA_MODE_ARCADE
@@ -37,7 +37,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Rendering\Camera\CameraControl.hpp at line 8](../../../src/client/Rendering/Camera/CameraControl.hpp#L8)
+File: [client\Rendering\Camera\CameraControl.hpp at line 8](../../../Src/client/Rendering/Camera/CameraControl.hpp#L8)
 ## CAMERA_MODE_REALISTIC
 
 Type: constant
@@ -48,7 +48,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Rendering\Camera\CameraControl.hpp at line 9](../../../src/client/Rendering/Camera/CameraControl.hpp#L9)
+File: [client\Rendering\Camera\CameraControl.hpp at line 9](../../../Src/client/Rendering/Camera/CameraControl.hpp#L9)
 # CameraControl.sqf
 
 ## dynamicCamera
@@ -61,7 +61,7 @@ Replaced value:
 ```sqf
 "Land_HandyCam_F"
 ```
-File: [client\Rendering\Camera\CameraControl.sqf at line 13](../../../src/client/Rendering/Camera/CameraControl.sqf#L13)
+File: [client\Rendering\Camera\CameraControl.sqf at line 13](../../../Src/client/Rendering/Camera/CameraControl.sqf#L13)
 ## staticCamera
 
 Type: constant
@@ -72,7 +72,7 @@ Replaced value:
 ```sqf
 "camera"
 ```
-File: [client\Rendering\Camera\CameraControl.sqf at line 14](../../../src/client/Rendering/Camera/CameraControl.sqf#L14)
+File: [client\Rendering\Camera\CameraControl.sqf at line 14](../../../Src/client/Rendering/Camera/CameraControl.sqf#L14)
 ## initCam(camtype)
 
 Type: constant
@@ -83,7 +83,7 @@ Replaced value:
 ```sqf
 call{private _c = camtype createVehicleLocal [0,0,0]; _c hideObject true; _c}
 ```
-File: [client\Rendering\Camera\CameraControl.sqf at line 15](../../../src/client/Rendering/Camera/CameraControl.sqf#L15)
+File: [client\Rendering\Camera\CameraControl.sqf at line 15](../../../Src/client/Rendering/Camera/CameraControl.sqf#L15)
 ## probInverse(val)
 
 Type: constant
@@ -94,7 +94,7 @@ Replaced value:
 ```sqf
 (pick [-1,1]) * (val)
 ```
-File: [client\Rendering\Camera\CameraControl.sqf at line 97](../../../src/client/Rendering/Camera/CameraControl.sqf#L97)
+File: [client\Rendering\Camera\CameraControl.sqf at line 97](../../../Src/client/Rendering/Camera/CameraControl.sqf#L97)
 ## convset(var,svar)
 
 Type: constant
@@ -106,7 +106,7 @@ Replaced value:
 ```sqf
 _conv = linearConversion [_fDelta, _fDelta + _freq, tickTime, svar, var]; var = _conv
 ```
-File: [client\Rendering\Camera\CameraControl.sqf at line 129](../../../src/client/Rendering/Camera/CameraControl.sqf#L129)
+File: [client\Rendering\Camera\CameraControl.sqf at line 129](../../../Src/client/Rendering/Camera/CameraControl.sqf#L129)
 ## convsetFuller(var)
 
 Type: constant
@@ -117,7 +117,7 @@ Replaced value:
 ```sqf
 _conv = linearConversion [_addTime, _left, tickTime, var*70/100, 0]; var = _conv
 ```
-File: [client\Rendering\Camera\CameraControl.sqf at line 129](../../../src/client/Rendering/Camera/CameraControl.sqf#L129)
+File: [client\Rendering\Camera\CameraControl.sqf at line 129](../../../Src/client/Rendering/Camera/CameraControl.sqf#L129)
 ## conversion(data)
 
 Type: constant
@@ -128,7 +128,7 @@ Replaced value:
 ```sqf
 linearConversion [0,1,data,] OR vectorLinearConversion
 ```
-File: [client\Rendering\Camera\CameraControl.sqf at line 260](../../../src/client/Rendering/Camera/CameraControl.sqf#L260)
+File: [client\Rendering\Camera\CameraControl.sqf at line 260](../../../Src/client/Rendering/Camera/CameraControl.sqf#L260)
 ## invertNum(val)
 
 Type: constant
@@ -139,21 +139,21 @@ Replaced value:
 ```sqf
 -(val)
 ```
-File: [client\Rendering\Camera\CameraControl.sqf at line 261](../../../src/client/Rendering/Camera/CameraControl.sqf#L261)
+File: [client\Rendering\Camera\CameraControl.sqf at line 261](../../../Src/client/Rendering/Camera/CameraControl.sqf#L261)
 ## cam_setCameraOnPlayer
 
 Type: function
 Description: 
 
 
-File: [client\Rendering\Camera\CameraControl.sqf at line 31](../../../src/client/Rendering/Camera/CameraControl.sqf#L31)
+File: [client\Rendering\Camera\CameraControl.sqf at line 31](../../../Src/client/Rendering/Camera/CameraControl.sqf#L31)
 ## cam_camShake_resetAll
 
 Type: function
 Description: here adding tasks for shake
 
 
-File: [client\Rendering\Camera\CameraControl.sqf at line 57](../../../src/client/Rendering/Camera/CameraControl.sqf#L57)
+File: [client\Rendering\Camera\CameraControl.sqf at line 57](../../../Src/client/Rendering/Camera/CameraControl.sqf#L57)
 ## cam_addCamShake
 
 Type: function
@@ -163,7 +163,7 @@ Description:
 - Param: _freq
 - Param: _duration
 
-File: [client\Rendering\Camera\CameraControl.sqf at line 64](../../../src/client/Rendering/Camera/CameraControl.sqf#L64)
+File: [client\Rendering\Camera\CameraControl.sqf at line 64](../../../Src/client/Rendering/Camera/CameraControl.sqf#L64)
 ## cam_camshake_onUpdate
 
 Type: function
@@ -177,21 +177,21 @@ Description:
 - Param: _fromPwr
 - Param: _fromORX
 
-File: [client\Rendering\Camera\CameraControl.sqf at line 72](../../../src/client/Rendering/Camera/CameraControl.sqf#L72)
+File: [client\Rendering\Camera\CameraControl.sqf at line 72](../../../Src/client/Rendering/Camera/CameraControl.sqf#L72)
 ## cam_updateCameraRotation
 
 Type: function
 Description: 
 
 
-File: [client\Rendering\Camera\CameraControl.sqf at line 189](../../../src/client/Rendering/Camera/CameraControl.sqf#L189)
+File: [client\Rendering\Camera\CameraControl.sqf at line 189](../../../Src/client/Rendering/Camera/CameraControl.sqf#L189)
 ## cam_onFrame
 
 Type: function
 Description: 
 
 
-File: [client\Rendering\Camera\CameraControl.sqf at line 297](../../../src/client/Rendering/Camera/CameraControl.sqf#L297)
+File: [client\Rendering\Camera\CameraControl.sqf at line 297](../../../Src/client/Rendering/Camera/CameraControl.sqf#L297)
 ## cam_setCameraSetting
 
 Type: function
@@ -199,7 +199,7 @@ Description:
 - Param: _camSetting
 - Param: _applyToVar (optional, default true)
 
-File: [client\Rendering\Camera\CameraControl.sqf at line 335](../../../src/client/Rendering/Camera/CameraControl.sqf#L335)
+File: [client\Rendering\Camera\CameraControl.sqf at line 335](../../../Src/client/Rendering/Camera/CameraControl.sqf#L335)
 # Camera_DEBUG.sqf
 
 ## probInverse(val)
@@ -212,7 +212,7 @@ Replaced value:
 ```sqf
 (pick [-1,1]) * (val)
 ```
-File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 57](../../../src/client/Rendering/Camera/Camera_DEBUG.sqf#L57)
+File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 57](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L57)
 ## convset(var,svar)
 
 Type: constant
@@ -224,7 +224,7 @@ Replaced value:
 ```sqf
 _conv = linearConversion [_fDelta, _fDelta + _freq, tickTime, svar, var]; var = _conv
 ```
-File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 88](../../../src/client/Rendering/Camera/Camera_DEBUG.sqf#L88)
+File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 88](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L88)
 ## convsetFuller(var)
 
 Type: constant
@@ -235,7 +235,7 @@ Replaced value:
 ```sqf
 _conv = linearConversion [_addTime, _left, tickTime, var*70/100, 0]; var = _conv
 ```
-File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 88](../../../src/client/Rendering/Camera/Camera_DEBUG.sqf#L88)
+File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 88](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L88)
 ## cam_camShake_resetAll
 
 Type: function
@@ -243,7 +243,7 @@ Description: FOR DEBUG ONLY
  DO NOT INCLUDE THIS FILE IN CLIENTSIDE
 
 
-File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 15](../../../src/client/Rendering/Camera/Camera_DEBUG.sqf#L15)
+File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 15](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L15)
 ## cam_addCamShake
 
 Type: function
@@ -253,7 +253,7 @@ Description:
 - Param: _freq
 - Param: _duration
 
-File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 22](../../../src/client/Rendering/Camera/Camera_DEBUG.sqf#L22)
+File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 22](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L22)
 ## cam_camshake_onUpdate
 
 Type: function
@@ -267,7 +267,7 @@ Description:
 - Param: _fromPwr
 - Param: _fromORX
 
-File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 32](../../../src/client/Rendering/Camera/Camera_DEBUG.sqf#L32)
+File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 32](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L32)
 # Camera_ShakeDefs.sqf
 
 ## cam_getCamShakeConfig
@@ -276,7 +276,7 @@ Type: function
 Description: ======================================================
 
 
-File: [client\Rendering\Camera\Camera_ShakeDefs.sqf at line 8](../../../src/client/Rendering/Camera/Camera_ShakeDefs.sqf#L8)
+File: [client\Rendering\Camera\Camera_ShakeDefs.sqf at line 8](../../../Src/client/Rendering/Camera/Camera_ShakeDefs.sqf#L8)
 ## cam_addCamShakeByConfig
 
 Type: function
@@ -284,7 +284,7 @@ Description:
 - Param: _configName
 - Param: _duration
 
-File: [client\Rendering\Camera\Camera_ShakeDefs.sqf at line 12](../../../src/client/Rendering/Camera/Camera_ShakeDefs.sqf#L12)
+File: [client\Rendering\Camera\Camera_ShakeDefs.sqf at line 12](../../../Src/client/Rendering/Camera/Camera_ShakeDefs.sqf#L12)
 # Effects_init.sqf
 
 ## RENDER_EFFECTS_UPDATEDELAY
@@ -297,7 +297,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Rendering\Effects\Effects_init.sqf at line 7](../../../src/client/Rendering/Effects/Effects_init.sqf#L7)
+File: [client\Rendering\Effects\Effects_init.sqf at line 7](../../../Src/client/Rendering/Effects/Effects_init.sqf#L7)
 ## newParticle()
 
 Type: constant
@@ -308,28 +308,28 @@ Replaced value:
 ```sqf
 ("#particlesource" createVehicleLocal [0,0,0])
 ```
-File: [client\Rendering\Effects\Effects_init.sqf at line 9](../../../src/client/Rendering/Effects/Effects_init.sqf#L9)
+File: [client\Rendering\Effects\Effects_init.sqf at line 9](../../../Src/client/Rendering/Effects/Effects_init.sqf#L9)
 ## render_effects_init
 
 Type: function
 Description: 
 
 
-File: [client\Rendering\Effects\Effects_init.sqf at line 15](../../../src/client/Rendering/Effects/Effects_init.sqf#L15)
+File: [client\Rendering\Effects\Effects_init.sqf at line 15](../../../Src/client/Rendering/Effects/Effects_init.sqf#L15)
 ## render_effects_updateParticles
 
 Type: function
 Description: обновление частиц
 
 
-File: [client\Rendering\Effects\Effects_init.sqf at line 39](../../../src/client/Rendering/Effects/Effects_init.sqf#L39)
+File: [client\Rendering\Effects\Effects_init.sqf at line 39](../../../Src/client/Rendering/Effects/Effects_init.sqf#L39)
 ## render_effects_onUpdate
 
 Type: function
 Description: цикл обновления частиц
 
 
-File: [client\Rendering\Effects\Effects_init.sqf at line 45](../../../src/client/Rendering/Effects/Effects_init.sqf#L45)
+File: [client\Rendering\Effects\Effects_init.sqf at line 45](../../../Src/client/Rendering/Effects/Effects_init.sqf#L45)
 # HDRInit.sqf
 
 ## render_hdr_init
@@ -338,7 +338,7 @@ Type: function
 Description: ======================================================
 
 
-File: [client\Rendering\HDR\HDRInit.sqf at line 8](../../../src/client/Rendering/HDR/HDRInit.sqf#L8)
+File: [client\Rendering\HDR\HDRInit.sqf at line 8](../../../Src/client/Rendering/HDR/HDRInit.sqf#L8)
 ## render_hdr_setMode
 
 Type: function
@@ -346,7 +346,7 @@ Type: function
 Description: 
 
 
-File: [client\Rendering\HDR\HDRInit.sqf at line 17](../../../src/client/Rendering/HDR/HDRInit.sqf#L17)
+File: [client\Rendering\HDR\HDRInit.sqf at line 17](../../../Src/client/Rendering/HDR/HDRInit.sqf#L17)
 ## render_hdr_setWorldTIme
 
 Type: function
@@ -354,7 +354,7 @@ Type: function
 Description: underground, world
 
 
-File: [client\Rendering\HDR\HDRInit.sqf at line 19](../../../src/client/Rendering/HDR/HDRInit.sqf#L19)
+File: [client\Rendering\HDR\HDRInit.sqf at line 19](../../../Src/client/Rendering/HDR/HDRInit.sqf#L19)
 # postprocessing.h
 
 ## PP_MACRO_PREF
@@ -367,7 +367,7 @@ Replaced value:
 ```sqf
 "pp_effect_"
 ```
-File: [client\Rendering\PostProcessing\postprocessing.h at line 8](../../../src/client/Rendering/PostProcessing/postprocessing.h#L8)
+File: [client\Rendering\PostProcessing\postprocessing.h at line 8](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L8)
 ## setGV(var,val)
 
 Type: constant
@@ -379,7 +379,7 @@ Replaced value:
 ```sqf
 missionNamespace setVariable [var,val]
 ```
-File: [client\Rendering\PostProcessing\postprocessing.h at line 10](../../../src/client/Rendering/PostProcessing/postprocessing.h#L10)
+File: [client\Rendering\PostProcessing\postprocessing.h at line 10](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L10)
 ## getGV(var)
 
 Type: constant
@@ -390,7 +390,7 @@ Replaced value:
 ```sqf
 (missionNamespace getVariable (var))
 ```
-File: [client\Rendering\PostProcessing\postprocessing.h at line 11](../../../src/client/Rendering/PostProcessing/postprocessing.h#L11)
+File: [client\Rendering\PostProcessing\postprocessing.h at line 11](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L11)
 ## setPPVar(var,val)
 
 Type: constant
@@ -402,7 +402,7 @@ Replaced value:
 ```sqf
 setGV(PP_MACRO_PREF + var,val)
 ```
-File: [client\Rendering\PostProcessing\postprocessing.h at line 13](../../../src/client/Rendering/PostProcessing/postprocessing.h#L13)
+File: [client\Rendering\PostProcessing\postprocessing.h at line 13](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L13)
 ## getPPVar(var)
 
 Type: constant
@@ -413,7 +413,7 @@ Replaced value:
 ```sqf
 getGV(PP_MACRO_PREF + var)
 ```
-File: [client\Rendering\PostProcessing\postprocessing.h at line 14](../../../src/client/Rendering/PostProcessing/postprocessing.h#L14)
+File: [client\Rendering\PostProcessing\postprocessing.h at line 14](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L14)
 ## setEffect
 
 Type: constant
@@ -424,7 +424,7 @@ Replaced value:
 ```sqf
 ppEffectAdjust
 ```
-File: [client\Rendering\PostProcessing\postprocessing.h at line 17](../../../src/client/Rendering/PostProcessing/postprocessing.h#L17)
+File: [client\Rendering\PostProcessing\postprocessing.h at line 17](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L17)
 ## commitEffect
 
 Type: constant
@@ -435,7 +435,7 @@ Replaced value:
 ```sqf
 ppEffectCommit
 ```
-File: [client\Rendering\PostProcessing\postprocessing.h at line 18](../../../src/client/Rendering/PostProcessing/postprocessing.h#L18)
+File: [client\Rendering\PostProcessing\postprocessing.h at line 18](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L18)
 ## setThisEffect
 
 Type: constant
@@ -446,7 +446,7 @@ Replaced value:
 ```sqf
 getPPVar(__EFFECT_NAME) setEffect
 ```
-File: [client\Rendering\PostProcessing\postprocessing.h at line 20](../../../src/client/Rendering/PostProcessing/postprocessing.h#L20)
+File: [client\Rendering\PostProcessing\postprocessing.h at line 20](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L20)
 ## setThisEffectCommit
 
 Type: constant
@@ -457,7 +457,7 @@ Replaced value:
 ```sqf
 getPPVar(__EFFECT_NAME) commitEffect
 ```
-File: [client\Rendering\PostProcessing\postprocessing.h at line 21](../../../src/client/Rendering/PostProcessing/postprocessing.h#L21)
+File: [client\Rendering\PostProcessing\postprocessing.h at line 21](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L21)
 ## setThisEffectEnable
 
 Type: constant
@@ -468,7 +468,7 @@ Replaced value:
 ```sqf
 getPPVar(__EFFECT_NAME) ppEffectEnable 
 ```
-File: [client\Rendering\PostProcessing\postprocessing.h at line 22](../../../src/client/Rendering/PostProcessing/postprocessing.h#L22)
+File: [client\Rendering\PostProcessing\postprocessing.h at line 22](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L22)
 ## unpackParams()
 
 Type: constant
@@ -479,7 +479,7 @@ Replaced value:
 ```sqf
 params ["__EFFECT_NAME","__args"]
 ```
-File: [client\Rendering\PostProcessing\postprocessing.h at line 25](../../../src/client/Rendering/PostProcessing/postprocessing.h#L25)
+File: [client\Rendering\PostProcessing\postprocessing.h at line 25](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L25)
 ## packParams()
 
 Type: constant
@@ -490,7 +490,7 @@ Replaced value:
 ```sqf
 vec2(__EFFECT_NAME,__args)
 ```
-File: [client\Rendering\PostProcessing\postprocessing.h at line 26](../../../src/client/Rendering/PostProcessing/postprocessing.h#L26)
+File: [client\Rendering\PostProcessing\postprocessing.h at line 26](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L26)
 # PPInit.sqf
 
 ## pp_reload
@@ -499,21 +499,21 @@ Type: function
 Description: 
 
 
-File: [client\Rendering\PostProcessing\PPInit.sqf at line 25](../../../src/client/Rendering/PostProcessing/PPInit.sqf#L25)
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 25](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L25)
 ## pp_init
 
 Type: function
 Description: 
 
 
-File: [client\Rendering\PostProcessing\PPInit.sqf at line 45](../../../src/client/Rendering/PostProcessing/PPInit.sqf#L45)
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 45](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L45)
 ## pp_init_active
 
 Type: function
 Description: 
 
 
-File: [client\Rendering\PostProcessing\PPInit.sqf at line 70](../../../src/client/Rendering/PostProcessing/PPInit.sqf#L70)
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 70](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L70)
 ## pp_setEnable
 
 Type: function
@@ -521,4 +521,4 @@ Description:
 - Param: _varName
 - Param: _mode
 
-File: [client\Rendering\PostProcessing\PPInit.sqf at line 76](../../../src/client/Rendering/PostProcessing/PPInit.sqf#L76)
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 76](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L76)

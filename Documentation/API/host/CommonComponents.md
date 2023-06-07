@@ -9,7 +9,7 @@ Description: регистрация переменной
 - Param: _line
 - Param: _moduleName (optional, default "__undef__")
 
-File: [host\CommonComponents\!MemReflect.sqf at line 10](../../../src/host/CommonComponents/!MemReflect.sqf#L10)
+File: [host\CommonComponents\!MemReflect.sqf at line 10](../../../Src/host/CommonComponents/!MemReflect.sqf#L10)
 ## gv_rf
 
 Type: function
@@ -19,7 +19,7 @@ Description: регистрация функции
 - Param: _line
 - Param: _moduleName (optional, default "__undef__")
 
-File: [host\CommonComponents\!MemReflect.sqf at line 41](../../../src/host/CommonComponents/!MemReflect.sqf#L41)
+File: [host\CommonComponents\!MemReflect.sqf at line 41](../../../Src/host/CommonComponents/!MemReflect.sqf#L41)
 # !PreInit.sqf
 
 ## PRFX__
@@ -32,7 +32,7 @@ Replaced value:
 ```sqf
 "WARN: "
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 65](../../../src/host/CommonComponents/!PreInit.sqf#L65)
+File: [host\CommonComponents\!PreInit.sqf at line 65](../../../Src/host/CommonComponents/!PreInit.sqf#L65)
 ## __ptr_size__
 
 Type: constant
@@ -43,7 +43,7 @@ Replaced value:
 ```sqf
 8
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 144](../../../src/host/CommonComponents/!PreInit.sqf#L144)
+File: [host\CommonComponents\!PreInit.sqf at line 144](../../../Src/host/CommonComponents/!PreInit.sqf#L144)
 ## __num_size__
 
 Type: constant
@@ -54,7 +54,7 @@ Replaced value:
 ```sqf
 8
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 145](../../../src/host/CommonComponents/!PreInit.sqf#L145)
+File: [host\CommonComponents\!PreInit.sqf at line 145](../../../Src/host/CommonComponents/!PreInit.sqf#L145)
 ## __vector_size__
 
 Type: constant
@@ -65,7 +65,7 @@ Replaced value:
 ```sqf
 24
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 146](../../../src/host/CommonComponents/!PreInit.sqf#L146)
+File: [host\CommonComponents\!PreInit.sqf at line 146](../../../Src/host/CommonComponents/!PreInit.sqf#L146)
 ## __map_size__
 
 Type: constant
@@ -76,7 +76,7 @@ Replaced value:
 ```sqf
 48
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 147](../../../src/host/CommonComponents/!PreInit.sqf#L147)
+File: [host\CommonComponents\!PreInit.sqf at line 147](../../../Src/host/CommonComponents/!PreInit.sqf#L147)
 ## C_PTR_REALOC_SIZE
 
 Type: constant
@@ -87,7 +87,7 @@ Replaced value:
 ```sqf
 1024
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 181](../../../src/host/CommonComponents/!PreInit.sqf#L181)
+File: [host\CommonComponents\!PreInit.sqf at line 181](../../../Src/host/CommonComponents/!PreInit.sqf#L181)
 ## C_PTR_BYTE_SITE
 
 Type: constant
@@ -98,7 +98,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 182](../../../src/host/CommonComponents/!PreInit.sqf#L182)
+File: [host\CommonComponents\!PreInit.sqf at line 182](../../../Src/host/CommonComponents/!PreInit.sqf#L182)
 ## _findTok__(t__)
 
 Type: constant
@@ -109,28 +109,28 @@ Replaced value:
 ```sqf
 ((_src find t__)!=-1)
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 317](../../../src/host/CommonComponents/!PreInit.sqf#L317)
+File: [host\CommonComponents\!PreInit.sqf at line 317](../../../Src/host/CommonComponents/!PreInit.sqf#L317)
 ## cprint
 
 Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 36](../../../src/host/CommonComponents/!PreInit.sqf#L36)
+File: [host\CommonComponents\!PreInit.sqf at line 36](../../../Src/host/CommonComponents/!PreInit.sqf#L36)
 ## cprintErr
 
 Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 50](../../../src/host/CommonComponents/!PreInit.sqf#L50)
+File: [host\CommonComponents\!PreInit.sqf at line 50](../../../Src/host/CommonComponents/!PreInit.sqf#L50)
 ## cprintWarn
 
 Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 64](../../../src/host/CommonComponents/!PreInit.sqf#L64)
+File: [host\CommonComponents\!PreInit.sqf at line 64](../../../Src/host/CommonComponents/!PreInit.sqf#L64)
 ## rpc_addEventGlobal
 
 Type: function
@@ -138,56 +138,56 @@ Description:
 - Param: _eventName
 - Param: _eventCode
 
-File: [host\CommonComponents\!PreInit.sqf at line 112](../../../src/host/CommonComponents/!PreInit.sqf#L112)
+File: [host\CommonComponents\!PreInit.sqf at line 112](../../../Src/host/CommonComponents/!PreInit.sqf#L112)
 ## rv_cppcheck
 
 Type: function
 Description: if (isValid(nullPtr)) then {} else {};
 - Param: _val
 
-File: [host\CommonComponents\!PreInit.sqf at line 131](../../../src/host/CommonComponents/!PreInit.sqf#L131)
+File: [host\CommonComponents\!PreInit.sqf at line 131](../../../Src/host/CommonComponents/!PreInit.sqf#L131)
 ## rv_sizeOf
 
 Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 143](../../../src/host/CommonComponents/!PreInit.sqf#L143)
+File: [host\CommonComponents\!PreInit.sqf at line 143](../../../Src/host/CommonComponents/!PreInit.sqf#L143)
 ## ptr_create
 
 Type: function
 Description: initialize new pointer
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 188](../../../src/host/CommonComponents/!PreInit.sqf#L188)
+File: [host\CommonComponents\!PreInit.sqf at line 188](../../../Src/host/CommonComponents/!PreInit.sqf#L188)
 ## ptr_destroy
 
 Type: function
 Description: delete pointer if not null
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 194](../../../src/host/CommonComponents/!PreInit.sqf#L194)
+File: [host\CommonComponents\!PreInit.sqf at line 194](../../../Src/host/CommonComponents/!PreInit.sqf#L194)
 ## ptr_cts
 
 Type: function
 Description: convert to string
 - Param: _p
 
-File: [host\CommonComponents\!PreInit.sqf at line 205](../../../src/host/CommonComponents/!PreInit.sqf#L205)
+File: [host\CommonComponents\!PreInit.sqf at line 205](../../../Src/host/CommonComponents/!PreInit.sqf#L205)
 ## ptr_remval
 
 Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 237](../../../src/host/CommonComponents/!PreInit.sqf#L237)
+File: [host\CommonComponents\!PreInit.sqf at line 237](../../../Src/host/CommonComponents/!PreInit.sqf#L237)
 ## ptr_check
 
 Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 243](../../../src/host/CommonComponents/!PreInit.sqf#L243)
+File: [host\CommonComponents\!PreInit.sqf at line 243](../../../Src/host/CommonComponents/!PreInit.sqf#L243)
 ## toNumeralString
 
 Type: function
@@ -196,7 +196,7 @@ Description: Склоняет слова в числительное
 - Param: _counter (optional, default ['"Штука"', '"Штуки"', '"Штук"'])
 - Param: _addNumToText (optional, default false)
 
-File: [host\CommonComponents\!PreInit.sqf at line 250](../../../src/host/CommonComponents/!PreInit.sqf#L250)
+File: [host\CommonComponents\!PreInit.sqf at line 250](../../../Src/host/CommonComponents/!PreInit.sqf#L250)
 ## regex_isMatch
 
 Type: function
@@ -204,7 +204,7 @@ Description: ===================================================================
 - Param: _txt
 - Param: _pattern
 
-File: [host\CommonComponents\!PreInit.sqf at line 264](../../../src/host/CommonComponents/!PreInit.sqf#L264)
+File: [host\CommonComponents\!PreInit.sqf at line 264](../../../Src/host/CommonComponents/!PreInit.sqf#L264)
 ## regex_getFirstMatch
 
 Type: function
@@ -212,7 +212,7 @@ Description:
 - Param: _txt
 - Param: _pattern
 
-File: [host\CommonComponents\!PreInit.sqf at line 270](../../../src/host/CommonComponents/!PreInit.sqf#L270)
+File: [host\CommonComponents\!PreInit.sqf at line 270](../../../Src/host/CommonComponents/!PreInit.sqf#L270)
 ## regex_replace
 
 Type: function
@@ -221,35 +221,35 @@ Description:
 - Param: _pattern
 - Param: _replacer
 
-File: [host\CommonComponents\!PreInit.sqf at line 277](../../../src/host/CommonComponents/!PreInit.sqf#L277)
+File: [host\CommonComponents\!PreInit.sqf at line 277](../../../Src/host/CommonComponents/!PreInit.sqf#L277)
 ## cst_toString
 
 Type: function
 Description: 
 - Param: _src
 
-File: [host\CommonComponents\!PreInit.sqf at line 290](../../../src/host/CommonComponents/!PreInit.sqf#L290)
+File: [host\CommonComponents\!PreInit.sqf at line 290](../../../Src/host/CommonComponents/!PreInit.sqf#L290)
 ## cst_compress
 
 Type: function
 Description: убираем пробелы внутри структурированного текста
 - Param: _src
 
-File: [host\CommonComponents\!PreInit.sqf at line 297](../../../src/host/CommonComponents/!PreInit.sqf#L297)
+File: [host\CommonComponents\!PreInit.sqf at line 297](../../../Src/host/CommonComponents/!PreInit.sqf#L297)
 ## cst_decomress
 
 Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 303](../../../src/host/CommonComponents/!PreInit.sqf#L303)
+File: [host\CommonComponents\!PreInit.sqf at line 303](../../../Src/host/CommonComponents/!PreInit.sqf#L303)
 ## cst_isComressed
 
 Type: function
 Description: 
 - Param: _src
 
-File: [host\CommonComponents\!PreInit.sqf at line 315](../../../src/host/CommonComponents/!PreInit.sqf#L315)
+File: [host\CommonComponents\!PreInit.sqf at line 315](../../../Src/host/CommonComponents/!PreInit.sqf#L315)
 ## selectBest
 
 Type: function
@@ -258,7 +258,7 @@ Description: Выбирает лучший случай [[1,2,3],{_x > 2}] call 
 - Param: _criteria
 - Param: _return
 
-File: [host\CommonComponents\!PreInit.sqf at line 328](../../../src/host/CommonComponents/!PreInit.sqf#L328)
+File: [host\CommonComponents\!PreInit.sqf at line 328](../../../Src/host/CommonComponents/!PreInit.sqf#L328)
 ## searchInList
 
 Type: function
@@ -267,7 +267,7 @@ Description:
 - Param: _lambda
 - Param: _defaultReturn
 
-File: [host\CommonComponents\!PreInit.sqf at line 344](../../../src/host/CommonComponents/!PreInit.sqf#L344)
+File: [host\CommonComponents\!PreInit.sqf at line 344](../../../Src/host/CommonComponents/!PreInit.sqf#L344)
 # Animator.sqf
 
 ## addAnim(name)
@@ -280,7 +280,7 @@ Replaced value:
 ```sqf
 INC(__animIndex); anim_assocList_keyString set [name,__animIndex]; anim_assocList_keyInt set [__animIndex,name]
 ```
-File: [host\CommonComponents\Animator.sqf at line 9](../../../src/host/CommonComponents/Animator.sqf#L9)
+File: [host\CommonComponents\Animator.sqf at line 9](../../../Src/host/CommonComponents/Animator.sqf#L9)
 ## __compareanims(idx)
 
 Type: constant
@@ -291,28 +291,28 @@ Replaced value:
 ```sqf
 ((_anims select idx) == "nl" && ((_blender select idx) == 1))
 ```
-File: [host\CommonComponents\Animator.sqf at line 215](../../../src/host/CommonComponents/Animator.sqf#L215)
+File: [host\CommonComponents\Animator.sqf at line 215](../../../Src/host/CommonComponents/Animator.sqf#L215)
 ## anim_getAssoc
 
 Type: function
 Description: конвертор ассоциаций
 - Param: _value
 
-File: [host\CommonComponents\Animator.sqf at line 25](../../../src/host/CommonComponents/Animator.sqf#L25)
+File: [host\CommonComponents\Animator.sqf at line 25](../../../Src/host/CommonComponents/Animator.sqf#L25)
 ## anim_getUnitAnim
 
 Type: function
 Description: 
 
 
-File: [host\CommonComponents\Animator.sqf at line 72](../../../src/host/CommonComponents/Animator.sqf#L72)
+File: [host\CommonComponents\Animator.sqf at line 72](../../../Src/host/CommonComponents/Animator.sqf#L72)
 ## anim_syncAnim
 
 Type: function
 Description: 
 - Param: _mob
 
-File: [host\CommonComponents\Animator.sqf at line 74](../../../src/host/CommonComponents/Animator.sqf#L74)
+File: [host\CommonComponents\Animator.sqf at line 74](../../../Src/host/CommonComponents/Animator.sqf#L74)
 ## anim_doAttack
 
 Type: function
@@ -321,7 +321,7 @@ Description:
 - Param: _slotIdx
 - Param: _enumAtt
 
-File: [host\CommonComponents\Animator.sqf at line 229](../../../src/host/CommonComponents/Animator.sqf#L229)
+File: [host\CommonComponents\Animator.sqf at line 229](../../../Src/host/CommonComponents/Animator.sqf#L229)
 ## anim_doDodge
 
 Type: function
@@ -329,7 +329,7 @@ Description:
 - Param: _mob
 - Param: _side
 
-File: [host\CommonComponents\Animator.sqf at line 277](../../../src/host/CommonComponents/Animator.sqf#L277)
+File: [host\CommonComponents\Animator.sqf at line 277](../../../Src/host/CommonComponents/Animator.sqf#L277)
 ## anim_doParry
 
 Type: function
@@ -338,7 +338,7 @@ Description:
 - Param: _idxHand
 - Param: _enumParry
 
-File: [host\CommonComponents\Animator.sqf at line 297](../../../src/host/CommonComponents/Animator.sqf#L297)
+File: [host\CommonComponents\Animator.sqf at line 297](../../../Src/host/CommonComponents/Animator.sqf#L297)
 # AttackTypesAssoc.sqf
 
 ## ata_buf_process
@@ -349,7 +349,7 @@ Description: эту функцию можно ускорить передела�
 - Param: _type
 - Param: _mode
 
-File: [host\CommonComponents\AttackTypesAssoc.sqf at line 12](../../../src/host/CommonComponents/AttackTypesAssoc.sqf#L12)
+File: [host\CommonComponents\AttackTypesAssoc.sqf at line 12](../../../Src/host/CommonComponents/AttackTypesAssoc.sqf#L12)
 # bitflags.sqf
 
 ## bitwise_and
@@ -361,7 +361,7 @@ Description: ======================================================
 - Param: _num1rem
 - Param: _num2rem
 
-File: [host\CommonComponents\bitflags.sqf at line 8](../../../src/host/CommonComponents/bitflags.sqf#L8)
+File: [host\CommonComponents\bitflags.sqf at line 8](../../../Src/host/CommonComponents/bitflags.sqf#L8)
 ## bitwise_or
 
 Type: function
@@ -371,7 +371,7 @@ Description:
 - Param: _num1rem
 - Param: _num2rem
 
-File: [host\CommonComponents\bitflags.sqf at line 29](../../../src/host/CommonComponents/bitflags.sqf#L29)
+File: [host\CommonComponents\bitflags.sqf at line 29](../../../Src/host/CommonComponents/bitflags.sqf#L29)
 ## bitwise_xor
 
 Type: function
@@ -381,7 +381,7 @@ Description:
 - Param: _num1rem
 - Param: _num2rem
 
-File: [host\CommonComponents\bitflags.sqf at line 48](../../../src/host/CommonComponents/bitflags.sqf#L48)
+File: [host\CommonComponents\bitflags.sqf at line 48](../../../Src/host/CommonComponents/bitflags.sqf#L48)
 ## bitwise_not
 
 Type: function
@@ -389,7 +389,7 @@ Description:
 - Param: _num (optional, default 0, expected types: ['0'])
 - Param: _numrem
 
-File: [host\CommonComponents\bitflags.sqf at line 67](../../../src/host/CommonComponents/bitflags.sqf#L67)
+File: [host\CommonComponents\bitflags.sqf at line 67](../../../Src/host/CommonComponents/bitflags.sqf#L67)
 ## bit_set
 
 Type: function
@@ -397,7 +397,7 @@ Description:
 - Param: _flagset
 - Param: _flags
 
-File: [host\CommonComponents\bitflags.sqf at line 84](../../../src/host/CommonComponents/bitflags.sqf#L84)
+File: [host\CommonComponents\bitflags.sqf at line 84](../../../Src/host/CommonComponents/bitflags.sqf#L84)
 ## bit_unset
 
 Type: function
@@ -405,7 +405,7 @@ Description:
 - Param: _flagset
 - Param: _flags
 
-File: [host\CommonComponents\bitflags.sqf at line 90](../../../src/host/CommonComponents/bitflags.sqf#L90)
+File: [host\CommonComponents\bitflags.sqf at line 90](../../../Src/host/CommonComponents/bitflags.sqf#L90)
 ## bit_flip
 
 Type: function
@@ -413,7 +413,7 @@ Description:
 - Param: _flagset
 - Param: _flags
 
-File: [host\CommonComponents\bitflags.sqf at line 96](../../../src/host/CommonComponents/bitflags.sqf#L96)
+File: [host\CommonComponents\bitflags.sqf at line 96](../../../Src/host/CommonComponents/bitflags.sqf#L96)
 ## bit_check
 
 Type: function
@@ -421,7 +421,7 @@ Description:
 - Param: _flagset
 - Param: _flags
 
-File: [host\CommonComponents\bitflags.sqf at line 102](../../../src/host/CommonComponents/bitflags.sqf#L102)
+File: [host\CommonComponents\bitflags.sqf at line 102](../../../Src/host/CommonComponents/bitflags.sqf#L102)
 ## bit_toArray
 
 Type: function
@@ -429,7 +429,7 @@ Description:
 - Param: _flags (optional, default 0)
 - Param: _flag
 
-File: [host\CommonComponents\bitflags.sqf at line 108](../../../src/host/CommonComponents/bitflags.sqf#L108)
+File: [host\CommonComponents\bitflags.sqf at line 108](../../../Src/host/CommonComponents/bitflags.sqf#L108)
 # Color.sqf
 
 ## importNative(funcname__)
@@ -442,7 +442,7 @@ Replaced value:
 ```sqf
 BIS_fnc_##funcname__
 ```
-File: [host\CommonComponents\Color.sqf at line 18](../../../src/host/CommonComponents/Color.sqf#L18)
+File: [host\CommonComponents\Color.sqf at line 18](../../../Src/host/CommonComponents/Color.sqf#L18)
 ## color_RGBAtoHTML
 
 Type: function
@@ -452,7 +452,7 @@ Description: свои
 - Param: _b
 - Param: _a
 
-File: [host\CommonComponents\Color.sqf at line 57](../../../src/host/CommonComponents/Color.sqf#L57)
+File: [host\CommonComponents\Color.sqf at line 57](../../../Src/host/CommonComponents/Color.sqf#L57)
 ## color_RGBtoHTML
 
 Type: function
@@ -461,7 +461,7 @@ Description:
 - Param: _g
 - Param: _b
 
-File: [host\CommonComponents\Color.sqf at line 69](../../../src/host/CommonComponents/Color.sqf#L69)
+File: [host\CommonComponents\Color.sqf at line 69](../../../Src/host/CommonComponents/Color.sqf#L69)
 ## color_RGBAtoTex
 
 Type: function
@@ -471,21 +471,21 @@ Description:
 - Param: _b
 - Param: _a (optional, default 1)
 
-File: [host\CommonComponents\Color.sqf at line 80](../../../src/host/CommonComponents/Color.sqf#L80)
+File: [host\CommonComponents\Color.sqf at line 80](../../../Src/host/CommonComponents/Color.sqf#L80)
 ## color_HTMLtoRGBA
 
 Type: function
 Description: 
 - Param: _html
 
-File: [host\CommonComponents\Color.sqf at line 92](../../../src/host/CommonComponents/Color.sqf#L92)
+File: [host\CommonComponents\Color.sqf at line 92](../../../Src/host/CommonComponents/Color.sqf#L92)
 ## color_HTMLtoRGB
 
 Type: function
 Description: 
 - Param: _html
 
-File: [host\CommonComponents\Color.sqf at line 114](../../../src/host/CommonComponents/Color.sqf#L114)
+File: [host\CommonComponents\Color.sqf at line 114](../../../Src/host/CommonComponents/Color.sqf#L114)
 # CombatMode.sqf
 
 ## cc_setCombatMode
@@ -497,7 +497,7 @@ Description:
 - Param: _needSyncCameraAnim (optional, default false)
 - Param: _doSkipApplyMove (optional, default false)
 
-File: [host\CommonComponents\CombatMode.sqf at line 9](../../../src/host/CommonComponents/CombatMode.sqf#L9)
+File: [host\CommonComponents\CombatMode.sqf at line 9](../../../Src/host/CommonComponents/CombatMode.sqf#L9)
 # Craft.sqf
 
 ## craft_newRecipe
@@ -509,7 +509,7 @@ Description:
 - Param: _listNeed
 - Param: _desc
 
-File: [host\CommonComponents\Craft.sqf at line 13](../../../src/host/CommonComponents/Craft.sqf#L13)
+File: [host\CommonComponents\Craft.sqf at line 13](../../../Src/host/CommonComponents/Craft.sqf#L13)
 # DateTime.sqf
 
 ## applyficator(val)
@@ -522,7 +522,7 @@ Replaced value:
 ```sqf
 (if (val < 10 && _zero) then {"0" + str val} else {str val})
 ```
-File: [host\CommonComponents\DateTime.sqf at line 16](../../../src/host/CommonComponents/DateTime.sqf#L16)
+File: [host\CommonComponents\DateTime.sqf at line 16](../../../Src/host/CommonComponents/DateTime.sqf#L16)
 ## dateTime_toString
 
 Type: function
@@ -531,7 +531,7 @@ Description: Конвертация даты и времени в строку
 - Param: _zero (optional, default false)
 - Param: _outms (optional, default false)
 
-File: [host\CommonComponents\DateTime.sqf at line 13](../../../src/host/CommonComponents/DateTime.sqf#L13)
+File: [host\CommonComponents\DateTime.sqf at line 13](../../../Src/host/CommonComponents/DateTime.sqf#L13)
 # loader.hpp
 
 ## importCommon(path)
@@ -548,7 +548,7 @@ if (isNil {allClientContents}) then {allClientContents = [];}; \
 	private _ctx = compile __pragma_prep_cli ("src\host\CommonComponents\" + path); \
 	allClientContents pushback _ctx;
 ```
-File: [host\CommonComponents\loader.hpp at line 10](../../../src/host/CommonComponents/loader.hpp#L10)
+File: [host\CommonComponents\loader.hpp at line 10](../../../Src/host/CommonComponents/loader.hpp#L10)
 ## importCommon(path)
 
 Type: constant
@@ -562,7 +562,7 @@ diag_log format["Start loading common module %1",path]; \
 	private _ctx = compile preprocessFileLineNumberS ("src\host\CommonComponents\" + path); \
 	diag_log format["   - Module %1 loaded",path];
 ```
-File: [host\CommonComponents\loader.hpp at line 17](../../../src/host/CommonComponents/loader.hpp#L17)
+File: [host\CommonComponents\loader.hpp at line 17](../../../Src/host/CommonComponents/loader.hpp#L17)
 # ModelsPath.sqf
 
 ## model_getAssoc
@@ -571,14 +571,14 @@ Type: function
 Description: 
 - Param: _value
 
-File: [host\CommonComponents\ModelsPath.sqf at line 8](../../../src/host/CommonComponents/ModelsPath.sqf#L8)
+File: [host\CommonComponents\ModelsPath.sqf at line 8](../../../Src/host/CommonComponents/ModelsPath.sqf#L8)
 ## model_convertPithBankYawToVec
 
 Type: function
 Description: 
 
 
-File: [host\CommonComponents\ModelsPath.sqf at line 24](../../../src/host/CommonComponents/ModelsPath.sqf#L24)
+File: [host\CommonComponents\ModelsPath.sqf at line 24](../../../Src/host/CommonComponents/ModelsPath.sqf#L24)
 ## model_SetPitchBankYaw
 
 Type: function
@@ -586,14 +586,14 @@ Description:
 - Param: _object
 - Param: _data
 
-File: [host\CommonComponents\ModelsPath.sqf at line 63](../../../src/host/CommonComponents/ModelsPath.sqf#L63)
+File: [host\CommonComponents\ModelsPath.sqf at line 63](../../../Src/host/CommonComponents/ModelsPath.sqf#L63)
 ## model_getPitchBankYaw
 
 Type: function
 Description: 
 - Param: _vehicle
 
-File: [host\CommonComponents\ModelsPath.sqf at line 69](../../../src/host/CommonComponents/ModelsPath.sqf#L69)
+File: [host\CommonComponents\ModelsPath.sqf at line 69](../../../Src/host/CommonComponents/ModelsPath.sqf#L69)
 ## model_debug_dumpAllModels
 
 Type: function
@@ -601,7 +601,7 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\ModelsPath.sqf at line 75](../../../src/host/CommonComponents/ModelsPath.sqf#L75)
+File: [host\CommonComponents\ModelsPath.sqf at line 75](../../../Src/host/CommonComponents/ModelsPath.sqf#L75)
 # Pencfg.sqf
 
 ## addtobj(model,soundpen,armpen)
@@ -616,14 +616,14 @@ Replaced value:
 ```sqf
 pencfg_map_all set [tolower model,[soundpen,armpen]]
 ```
-File: [host\CommonComponents\Pencfg.sqf at line 13](../../../src/host/CommonComponents/Pencfg.sqf#L13)
+File: [host\CommonComponents\Pencfg.sqf at line 13](../../../Src/host/CommonComponents/Pencfg.sqf#L13)
 ## pencfg_isExistsModel
 
 Type: function
 Description: 
 
 
-File: [host\CommonComponents\Pencfg.sqf at line 15](../../../src/host/CommonComponents/Pencfg.sqf#L15)
+File: [host\CommonComponents\Pencfg.sqf at line 15](../../../Src/host/CommonComponents/Pencfg.sqf#L15)
 ## pencfg_handleVoice
 
 Type: function
@@ -631,14 +631,14 @@ Description:
 - Param: _obj
 - Param: _srcDist
 
-File: [host\CommonComponents\Pencfg.sqf at line 21](../../../src/host/CommonComponents/Pencfg.sqf#L21)
+File: [host\CommonComponents\Pencfg.sqf at line 21](../../../Src/host/CommonComponents/Pencfg.sqf#L21)
 ## pencfg_handleObject_canPenetrate
 
 Type: function
 Description: 
 - Param: _obj
 
-File: [host\CommonComponents\Pencfg.sqf at line 37](../../../src/host/CommonComponents/Pencfg.sqf#L37)
+File: [host\CommonComponents\Pencfg.sqf at line 37](../../../Src/host/CommonComponents/Pencfg.sqf#L37)
 # SMD_shared.sqf
 
 ## smd_getAnimValue
@@ -649,49 +649,49 @@ Description:
 - Param: _slot
 - Param: _animType (optional, default ANIM_INDEX_HANDED)
 
-File: [host\CommonComponents\SMD_shared.sqf at line 11](../../../src/host/CommonComponents/SMD_shared.sqf#L11)
+File: [host\CommonComponents\SMD_shared.sqf at line 11](../../../Src/host/CommonComponents/SMD_shared.sqf#L11)
 ## smd_isCombatModeEnabled
 
 Type: function
 Description: 
 - Param: _mob
 
-File: [host\CommonComponents\SMD_shared.sqf at line 19](../../../src/host/CommonComponents/SMD_shared.sqf#L19)
+File: [host\CommonComponents\SMD_shared.sqf at line 19](../../../Src/host/CommonComponents/SMD_shared.sqf#L19)
 ## smd_isTwoHandedModeEnabled
 
 Type: function
 Description: 
 - Param: _mob
 
-File: [host\CommonComponents\SMD_shared.sqf at line 21](../../../src/host/CommonComponents/SMD_shared.sqf#L21)
+File: [host\CommonComponents\SMD_shared.sqf at line 21](../../../Src/host/CommonComponents/SMD_shared.sqf#L21)
 ## smd_isCustomAnimationEnabled
 
 Type: function
 Description: 
 - Param: _mob
 
-File: [host\CommonComponents\SMD_shared.sqf at line 35](../../../src/host/CommonComponents/SMD_shared.sqf#L35)
+File: [host\CommonComponents\SMD_shared.sqf at line 35](../../../Src/host/CommonComponents/SMD_shared.sqf#L35)
 ## smd_internal_generateCustomAnimation
 
 Type: function
 Description: 
 - Param: _mob
 
-File: [host\CommonComponents\SMD_shared.sqf at line 37](../../../src/host/CommonComponents/SMD_shared.sqf#L37)
+File: [host\CommonComponents\SMD_shared.sqf at line 37](../../../Src/host/CommonComponents/SMD_shared.sqf#L37)
 ## smd_isSitting
 
 Type: function
 Description: 
 - Param: _mob
 
-File: [host\CommonComponents\SMD_shared.sqf at line 58](../../../src/host/CommonComponents/SMD_shared.sqf#L58)
+File: [host\CommonComponents\SMD_shared.sqf at line 58](../../../Src/host/CommonComponents/SMD_shared.sqf#L58)
 ## smd_isLyingOnBed
 
 Type: function
 Description: 
 - Param: _mob
 
-File: [host\CommonComponents\SMD_shared.sqf at line 63](../../../src/host/CommonComponents/SMD_shared.sqf#L63)
+File: [host\CommonComponents\SMD_shared.sqf at line 63](../../../Src/host/CommonComponents/SMD_shared.sqf#L63)
 # SoundEngine.sqf
 
 ## SIMPLE_RUNTIME_PROCESS_SOUNDS
@@ -704,7 +704,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\CommonComponents\SoundEngine.sqf at line 27](../../../src/host/CommonComponents/SoundEngine.sqf#L27)
+File: [host\CommonComponents\SoundEngine.sqf at line 27](../../../Src/host/CommonComponents/SoundEngine.sqf#L27)
 ## DEBUG_SOUND_TRACE
 
 Type: constant
@@ -715,7 +715,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\CommonComponents\SoundEngine.sqf at line 70](../../../src/host/CommonComponents/SoundEngine.sqf#L70)
+File: [host\CommonComponents\SoundEngine.sqf at line 70](../../../Src/host/CommonComponents/SoundEngine.sqf#L70)
 ## soundGlobal_play
 
 Type: function
@@ -730,14 +730,14 @@ Description: динамический источник звука, удален�
 - Param: _isLocal (optional, default false)
 - Param: _isRTProcess (optional, default false)
 
-File: [host\CommonComponents\SoundEngine.sqf at line 21](../../../src/host/CommonComponents/SoundEngine.sqf#L21)
+File: [host\CommonComponents\SoundEngine.sqf at line 21](../../../Src/host/CommonComponents/SoundEngine.sqf#L21)
 ## soundLocal_play
 
 Type: function
 Description: Аналог soundGlobal::play() но без репликации по сети
 
 
-File: [host\CommonComponents\SoundEngine.sqf at line 141](../../../src/host/CommonComponents/SoundEngine.sqf#L141)
+File: [host\CommonComponents\SoundEngine.sqf at line 141](../../../Src/host/CommonComponents/SoundEngine.sqf#L141)
 ## soundUI_play
 
 Type: function
@@ -748,7 +748,7 @@ Description:
 - Param: _isEffect (optional, default false)
 - Param: _soundExtension (optional, default "ogg")
 
-File: [host\CommonComponents\SoundEngine.sqf at line 147](../../../src/host/CommonComponents/SoundEngine.sqf#L147)
+File: [host\CommonComponents\SoundEngine.sqf at line 147](../../../Src/host/CommonComponents/SoundEngine.sqf#L147)
 # TransportLayer.sqf
 
 ## rpc_internal_regEnum_server
@@ -757,7 +757,7 @@ Type: function
 Description: 
 - Param: _enumName
 
-File: [host\CommonComponents\TransportLayer.sqf at line 33](../../../src/host/CommonComponents/TransportLayer.sqf#L33)
+File: [host\CommonComponents\TransportLayer.sqf at line 33](../../../Src/host/CommonComponents/TransportLayer.sqf#L33)
 # __notcompile__PerFrame.sqf
 
 ## PF_IND_CODE
@@ -770,7 +770,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 177](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L177)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 177](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L177)
 ## PF_IND_DELAY
 
 Type: constant
@@ -781,7 +781,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 178](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L178)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 178](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L178)
 ## PF_IND_ARGS
 
 Type: constant
@@ -792,7 +792,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 179](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L179)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 179](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L179)
 ## PF_IND_DISPOSE
 
 Type: constant
@@ -803,7 +803,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 13](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L13)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 13](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L13)
 ## sizeofnum
 
 Type: constant
@@ -814,7 +814,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 22](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L22)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 22](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L22)
 ## fixed(num)
 
 Type: constant
@@ -825,7 +825,7 @@ Replaced value:
 ```sqf
 (num toFixed sizeofnum)
 ```
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 23](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L23)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 23](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L23)
 ## fixnum(num)
 
 Type: constant
@@ -836,7 +836,7 @@ Replaced value:
 ```sqf
 (parseNumber fixed(num))
 ```
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 24](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L24)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 24](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L24)
 ## _mapval
 
 Type: constant
@@ -847,7 +847,7 @@ Replaced value:
 ```sqf
 _y
 ```
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 32](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L32)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 32](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L32)
 ## PF_IND_DISPOS
 
 Type: constant
@@ -858,7 +858,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 13](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L13)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 13](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L13)
 ## pointfloat
 
 Type: constant
@@ -869,7 +869,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 182](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L182)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 182](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L182)
 ## fixefize(numb)
 
 Type: constant
@@ -880,7 +880,7 @@ Replaced value:
 ```sqf
 numb
 ```
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 184](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L184)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 184](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L184)
 ## maxtime
 
 Type: constant
@@ -891,7 +891,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 274](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L274)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 274](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L274)
 ## pf_addTimer
 
 Type: function
@@ -900,14 +900,14 @@ Description:
 - Param: _delay
 - Param: _args
 
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 86](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L86)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 86](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L86)
 ## pf_removeTimer
 
 Type: function
 Description: 
 - Param: _handle
 
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 101](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L101)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 101](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L101)
 ## pf_changeTimerInterval
 
 Type: function
@@ -915,7 +915,7 @@ Description:
 - Param: _handle
 - Param: _newDelay
 
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 108](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L108)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 108](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L108)
 ## pf_performanceTest
 
 Type: function
@@ -924,7 +924,7 @@ Description:
 - Param: _amounter (optional, default 1000)
 - Param: _delay (optional, default 0.1)
 
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 113](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L113)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 113](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L113)
 ## pf_add
 
 Type: function
@@ -933,14 +933,14 @@ Description:
 - Param: _delay
 - Param: _args (optional, default 0)
 
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 250](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L250)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 250](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L250)
 ## pf_getworks
 
 Type: function
 Description: 
 
 
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 263](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L263)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 263](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L263)
 ## pf_test
 
 Type: function
@@ -948,4 +948,4 @@ Description:
 - Param: _isHashed
 - Param: _counter
 
-File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 272](../../../src/host/CommonComponents/__notcompile__PerFrame.sqf#L272)
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 272](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L272)

@@ -12,7 +12,7 @@ Replaced value:
 ```sqf
 ;_item = [#type,name,desc]; _map pushBack _item; _item pushBack
 ```
-File: [host\Medals\Medals.h at line 8](../../../src/host/Medals/Medals.h#L8)
+File: [host\Medals\Medals.h at line 8](../../../Src/host/Medals/Medals.h#L8)
 ## thisMob
 
 Type: constant
@@ -23,7 +23,7 @@ Replaced value:
 ```sqf
 _mob
 ```
-File: [host\Medals\Medals.h at line 11](../../../src/host/Medals/Medals.h#L11)
+File: [host\Medals\Medals.h at line 11](../../../Src/host/Medals/Medals.h#L11)
 ## thisClient
 
 Type: constant
@@ -34,7 +34,7 @@ Replaced value:
 ```sqf
 _client
 ```
-File: [host\Medals\Medals.h at line 12](../../../src/host/Medals/Medals.h#L12)
+File: [host\Medals\Medals.h at line 12](../../../Src/host/Medals/Medals.h#L12)
 # Medals_init.sqf
 
 ## medl_check
@@ -45,4 +45,4 @@ Description: ["test",this,nullPtr] call medl_test
 - Param: _mob
 - Param: _client
 
-File: [host\Medals\Medals_init.sqf at line 32](../../../src/host/Medals/Medals_init.sqf#L32)
+File: [host\Medals\Medals_init.sqf at line 32](../../../Src/host/Medals/Medals_init.sqf#L32)

@@ -10,7 +10,7 @@ Replaced value:
 ```sqf
 nd_map_displays set ['name',{ private _args = _this select 0; private _isFirstCreate = _this select 1; private _w_d_ = widgetNull;
 ```
-File: [client\NetDisplays\NetDisplay.h at line 10](../../../src/client/NetDisplays/NetDisplay.h#L10)
+File: [client\NetDisplays\NetDisplay.h at line 10](../../../Src/client/NetDisplays/NetDisplay.h#L10)
 ## ND_END
 
 Type: constant
@@ -21,7 +21,7 @@ Replaced value:
 ```sqf
 }];
 ```
-File: [client\NetDisplays\NetDisplay.h at line 12](../../../src/client/NetDisplays/NetDisplay.h#L12)
+File: [client\NetDisplays\NetDisplay.h at line 12](../../../Src/client/NetDisplays/NetDisplay.h#L12)
 ## vec4(x,y,w,h)
 
 Type: constant
@@ -35,7 +35,7 @@ Replaced value:
 ```sqf
 [x,y,w,h]
 ```
-File: [client\NetDisplays\NetDisplay.h at line 14](../../../src/client/NetDisplays/NetDisplay.h#L14)
+File: [client\NetDisplays\NetDisplay.h at line 14](../../../Src/client/NetDisplays/NetDisplay.h#L14)
 ## ctgNULL
 
 Type: constant
@@ -46,7 +46,7 @@ Replaced value:
 ```sqf
 NIL
 ```
-File: [client\NetDisplays\NetDisplay.h at line 15](../../../src/client/NetDisplays/NetDisplay.h#L15)
+File: [client\NetDisplays\NetDisplay.h at line 15](../../../Src/client/NetDisplays/NetDisplay.h#L15)
 ## addSavedWdiget(wid)
 
 Type: constant
@@ -57,7 +57,7 @@ Replaced value:
 ```sqf
 getSavedWidgets pushBack(wid)
 ```
-File: [client\NetDisplays\NetDisplay.h at line 17](../../../src/client/NetDisplays/NetDisplay.h#L17)
+File: [client\NetDisplays\NetDisplay.h at line 17](../../../Src/client/NetDisplays/NetDisplay.h#L17)
 ## getSavedWidgets
 
 Type: constant
@@ -68,7 +68,7 @@ Replaced value:
 ```sqf
 (nd_list_widgets select 0)
 ```
-File: [client\NetDisplays\NetDisplay.h at line 18](../../../src/client/NetDisplays/NetDisplay.h#L18)
+File: [client\NetDisplays\NetDisplay.h at line 18](../../../Src/client/NetDisplays/NetDisplay.h#L18)
 ## regNDWidget(widgetType,vecpos,probCtg,datatype)
 
 Type: constant
@@ -84,7 +84,7 @@ _w_d_ = [_d,widgetType,vecpos,probCtg] call createWidget; \
 (nd_list_widgets select 1)pushBack _w_d_; \
 _w_d_ setVariable ["data",datatype];
 ```
-File: [client\NetDisplays\NetDisplay.h at line 20](../../../src/client/NetDisplays/NetDisplay.h#L20)
+File: [client\NetDisplays\NetDisplay.h at line 20](../../../Src/client/NetDisplays/NetDisplay.h#L20)
 ## regNDRPC(evname)
 
 Type: constant
@@ -98,7 +98,7 @@ params ["_wid","_butt"]; \
 todo \
 }];
 ```
-File: [client\NetDisplays\NetDisplay.h at line 24](../../../src/client/NetDisplays/NetDisplay.h#L24)
+File: [client\NetDisplays\NetDisplay.h at line 24](../../../Src/client/NetDisplays/NetDisplay.h#L24)
 ## lastNDWidget
 
 Type: constant
@@ -109,7 +109,7 @@ Replaced value:
 ```sqf
 _w_d_
 ```
-File: [client\NetDisplays\NetDisplay.h at line 29](../../../src/client/NetDisplays/NetDisplay.h#L29)
+File: [client\NetDisplays\NetDisplay.h at line 29](../../../Src/client/NetDisplays/NetDisplay.h#L29)
 ## thisDisplay
 
 Type: constant
@@ -120,7 +120,7 @@ Replaced value:
 ```sqf
 _d
 ```
-File: [client\NetDisplays\NetDisplay.h at line 30](../../../src/client/NetDisplays/NetDisplay.h#L30)
+File: [client\NetDisplays\NetDisplay.h at line 30](../../../Src/client/NetDisplays/NetDisplay.h#L30)
 ## isFirstLoad
 
 Type: constant
@@ -131,7 +131,7 @@ Replaced value:
 ```sqf
 _isFirstCreate
 ```
-File: [client\NetDisplays\NetDisplay.h at line 31](../../../src/client/NetDisplays/NetDisplay.h#L31)
+File: [client\NetDisplays\NetDisplay.h at line 31](../../../Src/client/NetDisplays/NetDisplay.h#L31)
 ## ctxParams
 
 Type: constant
@@ -142,7 +142,7 @@ Replaced value:
 ```sqf
 _args
 ```
-File: [client\NetDisplays\NetDisplay.h at line 32](../../../src/client/NetDisplays/NetDisplay.h#L32)
+File: [client\NetDisplays\NetDisplay.h at line 32](../../../Src/client/NetDisplays/NetDisplay.h#L32)
 # NetDisplays.sqf
 
 ## nd_createTestDisplay
@@ -153,7 +153,7 @@ Description:
 - Param: _class
 - Param: _data
 
-File: [client\NetDisplays\NetDisplays.sqf at line 39](../../../src/client/NetDisplays/NetDisplays.sqf#L39)
+File: [client\NetDisplays\NetDisplays.sqf at line 39](../../../Src/client/NetDisplays/NetDisplays.sqf#L39)
 ## nd_loadDisplay
 
 Type: function
@@ -163,7 +163,7 @@ Description:
 - Param: _srcRef
 - Param: _interactDistance
 
-File: [client\NetDisplays\NetDisplays.sqf at line 57](../../../src/client/NetDisplays/NetDisplays.sqf#L57)
+File: [client\NetDisplays\NetDisplays.sqf at line 57](../../../Src/client/NetDisplays/NetDisplays.sqf#L57)
 ## nd_loadDisplay_lobby
 
 Type: function
@@ -171,35 +171,35 @@ Description:
 - Param: _type
 - Param: _data (optional, default [])
 
-File: [client\NetDisplays\NetDisplays.sqf at line 203](../../../src/client/NetDisplays/NetDisplays.sqf#L203)
+File: [client\NetDisplays\NetDisplays.sqf at line 203](../../../Src/client/NetDisplays/NetDisplays.sqf#L203)
 ## nd_closeND_lobby
 
 Type: function
 Description: 
 - Param: _isRpc (optional, default false)
 
-File: [client\NetDisplays\NetDisplays.sqf at line 237](../../../src/client/NetDisplays/NetDisplays.sqf#L237)
+File: [client\NetDisplays\NetDisplays.sqf at line 237](../../../Src/client/NetDisplays/NetDisplays.sqf#L237)
 ## nd_closeND_lobbyImpl
 
 Type: function
 Description: 
 
 
-File: [client\NetDisplays\NetDisplays.sqf at line 249](../../../src/client/NetDisplays/NetDisplays.sqf#L249)
+File: [client\NetDisplays\NetDisplays.sqf at line 249](../../../Src/client/NetDisplays/NetDisplays.sqf#L249)
 ## nd_onPressButton
 
 Type: function
 Description: отсылает тип ввода пользователем. можно отправлять данные. Вся логика обработки на сервере в onHandleNDInput
 - Param: _data
 
-File: [client\NetDisplays\NetDisplays.sqf at line 256](../../../src/client/NetDisplays/NetDisplays.sqf#L256)
+File: [client\NetDisplays\NetDisplays.sqf at line 256](../../../Src/client/NetDisplays/NetDisplays.sqf#L256)
 ## nd_cleanupData
 
 Type: function
 Description: очистка списка виджетов для полной перегрузки визуала
 
 
-File: [client\NetDisplays\NetDisplays.sqf at line 269](../../../src/client/NetDisplays/NetDisplays.sqf#L269)
+File: [client\NetDisplays\NetDisplays.sqf at line 269](../../../Src/client/NetDisplays/NetDisplays.sqf#L269)
 ## nd_regWidget
 
 Type: function
@@ -209,7 +209,7 @@ Description:
 - Param: _probCtg
 - Param: _dataType
 
-File: [client\NetDisplays\NetDisplays.sqf at line 277](../../../src/client/NetDisplays/NetDisplays.sqf#L277)
+File: [client\NetDisplays\NetDisplays.sqf at line 277](../../../Src/client/NetDisplays/NetDisplays.sqf#L277)
 ## nd_addClosingButton
 
 Type: function
@@ -219,28 +219,28 @@ Description:
 - Param: _ctg (optional, default widgetNull)
 - Param: _registerAsReloaded (optional, default false)
 
-File: [client\NetDisplays\NetDisplays.sqf at line 283](../../../src/client/NetDisplays/NetDisplays.sqf#L283)
+File: [client\NetDisplays\NetDisplays.sqf at line 283](../../../Src/client/NetDisplays/NetDisplays.sqf#L283)
 ## nd_onUpdate
 
 Type: function
 Description: 
 
 
-File: [client\NetDisplays\NetDisplays.sqf at line 299](../../../src/client/NetDisplays/NetDisplays.sqf#L299)
+File: [client\NetDisplays\NetDisplays.sqf at line 299](../../../Src/client/NetDisplays/NetDisplays.sqf#L299)
 ## nd_onClose
 
 Type: function
 Description: 
 
 
-File: [client\NetDisplays\NetDisplays.sqf at line 305](../../../src/client/NetDisplays/NetDisplays.sqf#L305)
+File: [client\NetDisplays\NetDisplays.sqf at line 305](../../../Src/client/NetDisplays/NetDisplays.sqf#L305)
 ## nd_unloadDisplay
 
 Type: function
 Description: 
 
 
-File: [client\NetDisplays\NetDisplays.sqf at line 315](../../../src/client/NetDisplays/NetDisplays.sqf#L315)
+File: [client\NetDisplays\NetDisplays.sqf at line 315](../../../Src/client/NetDisplays/NetDisplays.sqf#L315)
 ## nd_stdLoad
 
 Type: function
@@ -249,7 +249,7 @@ Description: стандартный алгоритм
 - Param: _sy (optional, default 50)
 - Param: _btName (optional, default "Закрыть")
 
-File: [client\NetDisplays\NetDisplays.sqf at line 332](../../../src/client/NetDisplays/NetDisplays.sqf#L332)
+File: [client\NetDisplays\NetDisplays.sqf at line 332](../../../Src/client/NetDisplays/NetDisplays.sqf#L332)
 # MessageBoxes.sqf
 
 ## __ND_MB_INPUT_MAX_CHARS
@@ -262,7 +262,7 @@ Replaced value:
 ```sqf
 255
 ```
-File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 250](../../../src/client/NetDisplays/Displays/MessageBoxes.sqf#L250)
+File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 250](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L250)
 ## __ND_MB_INPUT_MIN_CHARS
 
 Type: constant
@@ -273,7 +273,7 @@ Replaced value:
 ```sqf
 100
 ```
-File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 251](../../../src/client/NetDisplays/Displays/MessageBoxes.sqf#L251)
+File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 251](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L251)
 ## ND_VOTEREP_WIDGET_INDEX_ERROR
 
 Type: constant
@@ -284,7 +284,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 344](../../../src/client/NetDisplays/Displays/MessageBoxes.sqf#L344)
+File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 344](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L344)
 ## ND_VOTEREP_WIDGET_INDEX_BESTCTG
 
 Type: constant
@@ -295,7 +295,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 345](../../../src/client/NetDisplays/Displays/MessageBoxes.sqf#L345)
+File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 345](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L345)
 ## ND_VOTEREP_WIDGET_INDEX_BADCTG
 
 Type: constant
@@ -306,14 +306,14 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 346](../../../src/client/NetDisplays/Displays/MessageBoxes.sqf#L346)
+File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 346](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L346)
 ## nd_internal_voterep_cleanupMaps
 
 Type: function
 Description: структуры с виджетами
 
 
-File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 339](../../../src/client/NetDisplays/Displays/MessageBoxes.sqf#L339)
+File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 339](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L339)
 # MobInventory.sqf
 
 ## SIZE_INVSLOT
@@ -326,7 +326,7 @@ Replaced value:
 ```sqf
 7
 ```
-File: [client\NetDisplays\Displays\MobInventory.sqf at line 62](../../../src/client/NetDisplays/Displays/MobInventory.sqf#L62)
+File: [client\NetDisplays\Displays\MobInventory.sqf at line 62](../../../Src/client/NetDisplays/Displays/MobInventory.sqf#L62)
 ## SLOT_BIASH
 
 Type: constant
@@ -337,7 +337,7 @@ Replaced value:
 ```sqf
 0.3
 ```
-File: [client\NetDisplays\Displays\MobInventory.sqf at line 63](../../../src/client/NetDisplays/Displays/MobInventory.sqf#L63)
+File: [client\NetDisplays\Displays\MobInventory.sqf at line 63](../../../Src/client/NetDisplays/Displays/MobInventory.sqf#L63)
 ## allocpos__(xpos,ypos)
 
 Type: constant
@@ -349,4 +349,4 @@ Replaced value:
 ```sqf
 [_xp + ((_wp + _biasW) * xpos),_yp + ((_hp + SLOT_BIASH) * ypos),_wp,_hp]
 ```
-File: [client\NetDisplays\Displays\MobInventory.sqf at line 72](../../../src/client/NetDisplays/Displays/MobInventory.sqf#L72)
+File: [client\NetDisplays\Displays\MobInventory.sqf at line 72](../../../Src/client/NetDisplays/Displays/MobInventory.sqf#L72)

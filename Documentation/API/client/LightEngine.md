@@ -10,7 +10,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\LightEngine\LightEngine.h at line 7](../../../src/client/LightEngine/LightEngine.h#L7)
+File: [client\LightEngine\LightEngine.h at line 7](../../../Src/client/LightEngine/LightEngine.h#L7)
 ## lightObject
 
 Type: constant
@@ -21,7 +21,7 @@ Replaced value:
 ```sqf
 _light
 ```
-File: [client\LightEngine\LightEngine.h at line 9](../../../src/client/LightEngine/LightEngine.h#L9)
+File: [client\LightEngine\LightEngine.h at line 9](../../../Src/client/LightEngine/LightEngine.h#L9)
 ## sourceObject
 
 Type: constant
@@ -32,7 +32,7 @@ Replaced value:
 ```sqf
 _source
 ```
-File: [client\LightEngine\LightEngine.h at line 11](../../../src/client/LightEngine/LightEngine.h#L11)
+File: [client\LightEngine\LightEngine.h at line 11](../../../Src/client/LightEngine/LightEngine.h#L11)
 ## allEmitters
 
 Type: constant
@@ -43,7 +43,7 @@ Replaced value:
 ```sqf
 _allEmitters
 ```
-File: [client\LightEngine\LightEngine.h at line 13](../../../src/client/LightEngine/LightEngine.h#L13)
+File: [client\LightEngine\LightEngine.h at line 13](../../../Src/client/LightEngine/LightEngine.h#L13)
 ## le_light_max_index
 
 Type: constant
@@ -54,7 +54,7 @@ Replaced value:
 ```sqf
 1999
 ```
-File: [client\LightEngine\LightEngine.h at line 15](../../../src/client/LightEngine/LightEngine.h#L15)
+File: [client\LightEngine\LightEngine.h at line 15](../../../Src/client/LightEngine/LightEngine.h#L15)
 ## regLight(type)
 
 Type: constant
@@ -67,7 +67,7 @@ le_conf_##type = { params ['sourceObject']; private lightObject = "#lightpoint" 
 sourceObject setvariable ["__config",type]; sourceObject setVariable ["__light",lightObject]; private allEmitters = [lightObject]; sourceObject setVariable ["__allEmitters",allEmitters]; \
 1 call le_debug_lightRender;
 ```
-File: [client\LightEngine\LightEngine.h at line 17](../../../src/client/LightEngine/LightEngine.h#L17)
+File: [client\LightEngine\LightEngine.h at line 17](../../../Src/client/LightEngine/LightEngine.h#L17)
 ## endRegLight
 
 Type: constant
@@ -78,7 +78,7 @@ Replaced value:
 ```sqf
 lightObject };
 ```
-File: [client\LightEngine\LightEngine.h at line 21](../../../src/client/LightEngine/LightEngine.h#L21)
+File: [client\LightEngine\LightEngine.h at line 21](../../../Src/client/LightEngine/LightEngine.h#L21)
 ## regCustomLight(type,classnamestr)
 
 Type: constant
@@ -92,7 +92,7 @@ le_conf_##type = {params ['sourceObject']; private lightObject = (classnamestr) 
 sourceObject setvariable ["__config",type]; sourceObject setVariable ["__light",lightObject]; private allEmitters = [lightObject]; sourceObject setVariable ["__allEmitters",allEmitters]; \
 2 call le_debug_lightRender;
 ```
-File: [client\LightEngine\LightEngine.h at line 23](../../../src/client/LightEngine/LightEngine.h#L23)
+File: [client\LightEngine\LightEngine.h at line 23](../../../Src/client/LightEngine/LightEngine.h#L23)
 ## emitterObject
 
 Type: constant
@@ -103,7 +103,7 @@ Replaced value:
 ```sqf
 _effEmitter
 ```
-File: [client\LightEngine\LightEngine.h at line 27](../../../src/client/LightEngine/LightEngine.h#L27)
+File: [client\LightEngine\LightEngine.h at line 27](../../../Src/client/LightEngine/LightEngine.h#L27)
 ## regEffect(type)
 
 Type: constant
@@ -116,7 +116,7 @@ le_conf_##type = { params ['sourceObject']; private emitterObject = "#particleso
 sourceObject setvariable ["__config",type]; sourceObject setVariable ["__light",emitterObject]; private allEmitters = [emitterObject]; sourceObject setVariable ["__allEmitters",allEmitters]; \
 
 ```
-File: [client\LightEngine\LightEngine.h at line 29](../../../src/client/LightEngine/LightEngine.h#L29)
+File: [client\LightEngine\LightEngine.h at line 29](../../../Src/client/LightEngine/LightEngine.h#L29)
 ## endRegEffect
 
 Type: constant
@@ -127,7 +127,7 @@ Replaced value:
 ```sqf
 };
 ```
-File: [client\LightEngine\LightEngine.h at line 32](../../../src/client/LightEngine/LightEngine.h#L32)
+File: [client\LightEngine\LightEngine.h at line 32](../../../Src/client/LightEngine/LightEngine.h#L32)
 ## regFireLight(type)
 
 Type: constant
@@ -138,7 +138,7 @@ Replaced value:
 ```sqf
 _rfl_t = type; _rfl_ev = {params ['sourceObject'];
 ```
-File: [client\LightEngine\LightEngine.h at line 35](../../../src/client/LightEngine/LightEngine.h#L35)
+File: [client\LightEngine\LightEngine.h at line 35](../../../Src/client/LightEngine/LightEngine.h#L35)
 ## endRegFireLight
 
 Type: constant
@@ -149,7 +149,7 @@ Replaced value:
 ```sqf
 }; missionNamespace setVariable ["le_conf_fire_" + str(_rfl_t - le_firelight_startindex),_rfl_ev];
 ```
-File: [client\LightEngine\LightEngine.h at line 37](../../../src/client/LightEngine/LightEngine.h#L37)
+File: [client\LightEngine\LightEngine.h at line 37](../../../Src/client/LightEngine/LightEngine.h#L37)
 ## initLightObject()
 
 Type: constant
@@ -160,7 +160,7 @@ Replaced value:
 ```sqf
 private lightObject = "#lightpoint" createVehicleLocal [0,0,0]
 ```
-File: [client\LightEngine\LightEngine.h at line 39](../../../src/client/LightEngine/LightEngine.h#L39)
+File: [client\LightEngine\LightEngine.h at line 39](../../../Src/client/LightEngine/LightEngine.h#L39)
 ## regVST(type)
 
 Type: constant
@@ -171,7 +171,7 @@ Replaced value:
 ```sqf
 le_conf_##type = { params ["_condit","_src",["_ctxParams",0]]; private __GLOB_CFG_IDX__ = type ;
 ```
-File: [client\LightEngine\LightEngine.h at line 42](../../../src/client/LightEngine/LightEngine.h#L42)
+File: [client\LightEngine\LightEngine.h at line 42](../../../Src/client/LightEngine/LightEngine.h#L42)
 ## vstParams
 
 Type: constant
@@ -182,7 +182,7 @@ Replaced value:
 ```sqf
 _ctxParams
 ```
-File: [client\LightEngine\LightEngine.h at line 43](../../../src/client/LightEngine/LightEngine.h#L43)
+File: [client\LightEngine\LightEngine.h at line 43](../../../Src/client/LightEngine/LightEngine.h#L43)
 ## src
 
 Type: constant
@@ -193,7 +193,7 @@ Replaced value:
 ```sqf
 _src
 ```
-File: [client\LightEngine\LightEngine.h at line 45](../../../src/client/LightEngine/LightEngine.h#L45)
+File: [client\LightEngine\LightEngine.h at line 45](../../../Src/client/LightEngine/LightEngine.h#L45)
 ## localPlayer
 
 Type: constant
@@ -204,7 +204,7 @@ Replaced value:
 ```sqf
 __LOCAL_PLAYER__
 ```
-File: [client\LightEngine\LightEngine.h at line 48](../../../src/client/LightEngine/LightEngine.h#L48)
+File: [client\LightEngine\LightEngine.h at line 48](../../../Src/client/LightEngine/LightEngine.h#L48)
 ## VST_COND_CREATE
 
 Type: constant
@@ -215,7 +215,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\LightEngine\LightEngine.h at line 49](../../../src/client/LightEngine/LightEngine.h#L49)
+File: [client\LightEngine\LightEngine.h at line 49](../../../Src/client/LightEngine/LightEngine.h#L49)
 ## VST_COND_DESTR
 
 Type: constant
@@ -226,7 +226,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\LightEngine\LightEngine.h at line 50](../../../src/client/LightEngine/LightEngine.h#L50)
+File: [client\LightEngine\LightEngine.h at line 50](../../../Src/client/LightEngine/LightEngine.h#L50)
 ## vstIsState(state)
 
 Type: constant
@@ -237,7 +237,7 @@ Replaced value:
 ```sqf
 (state == _condit)
 ```
-File: [client\LightEngine\LightEngine.h at line 51](../../../src/client/LightEngine/LightEngine.h#L51)
+File: [client\LightEngine\LightEngine.h at line 51](../../../Src/client/LightEngine/LightEngine.h#L51)
 ## VSTCreate
 
 Type: constant
@@ -248,7 +248,7 @@ Replaced value:
 ```sqf
 if (_condit == VST_COND_CREATE) exitWith
 ```
-File: [client\LightEngine\LightEngine.h at line 52](../../../src/client/LightEngine/LightEngine.h#L52)
+File: [client\LightEngine\LightEngine.h at line 52](../../../Src/client/LightEngine/LightEngine.h#L52)
 ## VSTDestroy
 
 Type: constant
@@ -259,7 +259,7 @@ Replaced value:
 ```sqf
 if (_condit == VST_COND_DESTR) exitWith
 ```
-File: [client\LightEngine\LightEngine.h at line 53](../../../src/client/LightEngine/LightEngine.h#L53)
+File: [client\LightEngine\LightEngine.h at line 53](../../../Src/client/LightEngine/LightEngine.h#L53)
 ## endRegVST
 
 Type: constant
@@ -270,7 +270,7 @@ Replaced value:
 ```sqf
 };
 ```
-File: [client\LightEngine\LightEngine.h at line 55](../../../src/client/LightEngine/LightEngine.h#L55)
+File: [client\LightEngine\LightEngine.h at line 55](../../../Src/client/LightEngine/LightEngine.h#L55)
 ## vector(x,y,z)
 
 Type: constant
@@ -283,7 +283,7 @@ Replaced value:
 ```sqf
 [x,y,z]
 ```
-File: [client\LightEngine\LightEngine.h at line 57](../../../src/client/LightEngine/LightEngine.h#L57)
+File: [client\LightEngine\LightEngine.h at line 57](../../../Src/client/LightEngine/LightEngine.h#L57)
 ## initBrightness(val)
 
 Type: constant
@@ -294,7 +294,7 @@ Replaced value:
 ```sqf
 lightObject setLightBrightness (val); sourceObject setvariable ["__defBright",val];
 ```
-File: [client\LightEngine\LightEngine.h at line 59](../../../src/client/LightEngine/LightEngine.h#L59)
+File: [client\LightEngine\LightEngine.h at line 59](../../../Src/client/LightEngine/LightEngine.h#L59)
 ## initAsRenderer()
 
 Type: constant
@@ -305,7 +305,7 @@ Replaced value:
 ```sqf
 sourceObject call le_initRenderer;
 ```
-File: [client\LightEngine\LightEngine.h at line 61](../../../src/client/LightEngine/LightEngine.h#L61)
+File: [client\LightEngine\LightEngine.h at line 61](../../../Src/client/LightEngine/LightEngine.h#L61)
 ## linkLight(light,object,anotherParams)
 
 Type: constant
@@ -318,7 +318,7 @@ Replaced value:
 ```sqf
 light attachto [object,anotherParams]
 ```
-File: [client\LightEngine\LightEngine.h at line 63](../../../src/client/LightEngine/LightEngine.h#L63)
+File: [client\LightEngine\LightEngine.h at line 63](../../../Src/client/LightEngine/LightEngine.h#L63)
 ## linkLightDynamic(src,object,anotParams)
 
 Type: constant
@@ -331,7 +331,7 @@ Replaced value:
 ```sqf
 linkLight(src,player,vector(0,0,0)); linkLight(src,object,anotParams)
 ```
-File: [client\LightEngine\LightEngine.h at line 66](../../../src/client/LightEngine/LightEngine.h#L66)
+File: [client\LightEngine\LightEngine.h at line 66](../../../Src/client/LightEngine/LightEngine.h#L66)
 ## joinEmitter(link)
 
 Type: constant
@@ -342,7 +342,7 @@ Replaced value:
 ```sqf
 allEmitters pushBackUnique link
 ```
-File: [client\LightEngine\LightEngine.h at line 69](../../../src/client/LightEngine/LightEngine.h#L69)
+File: [client\LightEngine\LightEngine.h at line 69](../../../Src/client/LightEngine/LightEngine.h#L69)
 ## update_delay_mainThread
 
 Type: constant
@@ -353,7 +353,7 @@ Replaced value:
 ```sqf
 0.01
 ```
-File: [client\LightEngine\LightEngine.h at line 72](../../../src/client/LightEngine/LightEngine.h#L72)
+File: [client\LightEngine\LightEngine.h at line 72](../../../Src/client/LightEngine/LightEngine.h#L72)
 ## checktime_ondestroysource
 
 Type: constant
@@ -364,7 +364,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\LightEngine\LightEngine.h at line 74](../../../src/client/LightEngine/LightEngine.h#L74)
+File: [client\LightEngine\LightEngine.h at line 74](../../../Src/client/LightEngine/LightEngine.h#L74)
 ## le_firelight_startindex
 
 Type: constant
@@ -375,7 +375,7 @@ Replaced value:
 ```sqf
 5000
 ```
-File: [client\LightEngine\LightEngine.h at line 76](../../../src/client/LightEngine/LightEngine.h#L76)
+File: [client\LightEngine\LightEngine.h at line 76](../../../Src/client/LightEngine/LightEngine.h#L76)
 ## addEventOnDestroySource(listobjects)
 
 Type: constant
@@ -388,7 +388,7 @@ private __onframecode = { sourceObject = (_this select 0) select 0; lightObject 
 {deleteVehicle _x} foreach ((_this select 0) select 1); [sourceObject] call le_unloadLight; stopThisUpdate(); \
 }}; startUpdateParams(__onframecode,checktime_ondestroysource,[sourceObject arg [listobjects]])
 ```
-File: [client\LightEngine\LightEngine.h at line 78](../../../src/client/LightEngine/LightEngine.h#L78)
+File: [client\LightEngine\LightEngine.h at line 78](../../../Src/client/LightEngine/LightEngine.h#L78)
 ## __lcfg__null_params__
 
 Type: constant
@@ -399,7 +399,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\LightEngine\LightEngine.h at line 82](../../../src/client/LightEngine/LightEngine.h#L82)
+File: [client\LightEngine\LightEngine.h at line 82](../../../Src/client/LightEngine/LightEngine.h#L82)
 ## addEventOnDestroySourceNoParams()
 
 Type: constant
@@ -410,7 +410,7 @@ Replaced value:
 ```sqf
 addEventOnDestroySource(__lcfg__null_params__)
 ```
-File: [client\LightEngine\LightEngine.h at line 83](../../../src/client/LightEngine/LightEngine.h#L83)
+File: [client\LightEngine\LightEngine.h at line 83](../../../Src/client/LightEngine/LightEngine.h#L83)
 ## stopUpdateIfNull(data)
 
 Type: constant
@@ -421,7 +421,7 @@ Replaced value:
 ```sqf
 if (isNULL (data)) exitWith {stopThisUpdate()}
 ```
-File: [client\LightEngine\LightEngine.h at line 86](../../../src/client/LightEngine/LightEngine.h#L86)
+File: [client\LightEngine\LightEngine.h at line 86](../../../Src/client/LightEngine/LightEngine.h#L86)
 ## isAttachedToMob()
 
 Type: constant
@@ -432,7 +432,7 @@ Replaced value:
 ```sqf
 (!isNullVar(_smd_slotId))
 ```
-File: [client\LightEngine\LightEngine.h at line 90](../../../src/client/LightEngine/LightEngine.h#L90)
+File: [client\LightEngine\LightEngine.h at line 90](../../../Src/client/LightEngine/LightEngine.h#L90)
 ## attachedMobSlot
 
 Type: constant
@@ -443,7 +443,7 @@ Replaced value:
 ```sqf
 _smd_slotId
 ```
-File: [client\LightEngine\LightEngine.h at line 91](../../../src/client/LightEngine/LightEngine.h#L91)
+File: [client\LightEngine\LightEngine.h at line 91](../../../Src/client/LightEngine/LightEngine.h#L91)
 ## glsNull
 
 Type: constant
@@ -454,7 +454,7 @@ Replaced value:
 ```sqf
 ["nan"]
 ```
-File: [client\LightEngine\LightEngine.h at line 100](../../../src/client/LightEngine/LightEngine.h#L100)
+File: [client\LightEngine\LightEngine.h at line 100](../../../Src/client/LightEngine/LightEngine.h#L100)
 ## getGLSData(_type,_x,_y)
 
 Type: constant
@@ -467,7 +467,7 @@ Replaced value:
 ```sqf
 le_glsData getvariable [format["%1:%2:%3",_type,_x,_y],glsNull]
 ```
-File: [client\LightEngine\LightEngine.h at line 102](../../../src/client/LightEngine/LightEngine.h#L102)
+File: [client\LightEngine\LightEngine.h at line 102](../../../Src/client/LightEngine/LightEngine.h#L102)
 ## setLocalGLSData(_type,_x,_y,lastHash)
 
 Type: constant
@@ -481,7 +481,7 @@ Replaced value:
 ```sqf
 le_localGlsData setvariable [format["%1:%2:%3",_type,_x,_y],lastHash]
 ```
-File: [client\LightEngine\LightEngine.h at line 103](../../../src/client/LightEngine/LightEngine.h#L103)
+File: [client\LightEngine\LightEngine.h at line 103](../../../Src/client/LightEngine/LightEngine.h#L103)
 ## getLocalGLSData(_type,_x,_y)
 
 Type: constant
@@ -494,7 +494,7 @@ Replaced value:
 ```sqf
 le_localGlsData getvariable [format["%1:%2:%3",_type,_x,_y],glsNull]
 ```
-File: [client\LightEngine\LightEngine.h at line 104](../../../src/client/LightEngine/LightEngine.h#L104)
+File: [client\LightEngine\LightEngine.h at line 104](../../../Src/client/LightEngine/LightEngine.h#L104)
 ## getOnlyObjects(_data)
 
 Type: constant
@@ -505,7 +505,7 @@ Replaced value:
 ```sqf
 ((_data) select [1,count (_data) - 1])
 ```
-File: [client\LightEngine\LightEngine.h at line 106](../../../src/client/LightEngine/LightEngine.h#L106)
+File: [client\LightEngine\LightEngine.h at line 106](../../../Src/client/LightEngine/LightEngine.h#L106)
 ## le_shot_startindex
 
 Type: constant
@@ -516,7 +516,7 @@ Replaced value:
 ```sqf
 10000
 ```
-File: [client\LightEngine\LightEngine.h at line 110](../../../src/client/LightEngine/LightEngine.h#L110)
+File: [client\LightEngine\LightEngine.h at line 110](../../../Src/client/LightEngine/LightEngine.h#L110)
 ## shotParams
 
 Type: constant
@@ -527,7 +527,7 @@ Replaced value:
 ```sqf
 _shotParams
 ```
-File: [client\LightEngine\LightEngine.h at line 112](../../../src/client/LightEngine/LightEngine.h#L112)
+File: [client\LightEngine\LightEngine.h at line 112](../../../Src/client/LightEngine/LightEngine.h#L112)
 ## regShot(type)
 
 Type: constant
@@ -538,7 +538,7 @@ Replaced value:
 ```sqf
 _rshot_t = type; _rfl_ev = {params ['sourceObject','shotParams']; private __disposable = [];
 ```
-File: [client\LightEngine\LightEngine.h at line 114](../../../src/client/LightEngine/LightEngine.h#L114)
+File: [client\LightEngine\LightEngine.h at line 114](../../../Src/client/LightEngine/LightEngine.h#L114)
 ## makeParticle(namevar)
 
 Type: constant
@@ -549,7 +549,7 @@ Replaced value:
 ```sqf
 namevar = "#particlesource" createVehicleLocal [0,0,0]; __disposable pushBack namevar
 ```
-File: [client\LightEngine\LightEngine.h at line 115](../../../src/client/LightEngine/LightEngine.h#L115)
+File: [client\LightEngine\LightEngine.h at line 115](../../../Src/client/LightEngine/LightEngine.h#L115)
 ## makeLight(namevar)
 
 Type: constant
@@ -560,7 +560,7 @@ Replaced value:
 ```sqf
 namevar = "#lightpoint" createVehicleLocal [0,0,0]; __disposable pushBack namevar
 ```
-File: [client\LightEngine\LightEngine.h at line 116](../../../src/client/LightEngine/LightEngine.h#L116)
+File: [client\LightEngine\LightEngine.h at line 116](../../../Src/client/LightEngine/LightEngine.h#L116)
 ## disposeAllAfterTime(time)
 
 Type: constant
@@ -571,7 +571,7 @@ Replaced value:
 ```sqf
 invokeAfterDelayParams({{deleteVehicle _x}count _this},time,__disposable)
 ```
-File: [client\LightEngine\LightEngine.h at line 118](../../../src/client/LightEngine/LightEngine.h#L118)
+File: [client\LightEngine\LightEngine.h at line 118](../../../Src/client/LightEngine/LightEngine.h#L118)
 ## linkObject(light,object,anotherParams)
 
 Type: constant
@@ -584,7 +584,7 @@ Replaced value:
 ```sqf
 light attachto [object,anotherParams]
 ```
-File: [client\LightEngine\LightEngine.h at line 120](../../../src/client/LightEngine/LightEngine.h#L120)
+File: [client\LightEngine\LightEngine.h at line 120](../../../Src/client/LightEngine/LightEngine.h#L120)
 ## endRegShot
 
 Type: constant
@@ -595,7 +595,7 @@ Replaced value:
 ```sqf
 }; missionNamespace setVariable ["le_conf_shot_" + str(_rshot_t - le_shot_startindex),_rfl_ev];
 ```
-File: [client\LightEngine\LightEngine.h at line 122](../../../src/client/LightEngine/LightEngine.h#L122)
+File: [client\LightEngine\LightEngine.h at line 122](../../../Src/client/LightEngine/LightEngine.h#L122)
 ## regScriptEmit(type)
 
 Type: constant
@@ -612,7 +612,7 @@ _semDat = []; le_se_map set ['type',_semDat]; le_conf_##type = { \
 	(le_se_map get 'type') call le_se_handleConfig; \
 };	_semDat append [
 ```
-File: [client\LightEngine\LightEngine.h at line 130](../../../src/client/LightEngine/LightEngine.h#L130)
+File: [client\LightEngine\LightEngine.h at line 130](../../../Src/client/LightEngine/LightEngine.h#L130)
 ## endScriptEmit
 
 Type: constant
@@ -623,7 +623,7 @@ Replaced value:
 ```sqf
 ] ;
 ```
-File: [client\LightEngine\LightEngine.h at line 138](../../../src/client/LightEngine/LightEngine.h#L138)
+File: [client\LightEngine\LightEngine.h at line 138](../../../Src/client/LightEngine/LightEngine.h#L138)
 ## _emitAlias(strval)
 
 Type: constant
@@ -635,7 +635,7 @@ Replaced value:
 ```sqf
 ["alias",strval],
 ```
-File: [client\LightEngine\LightEngine.h at line 142](../../../src/client/LightEngine/LightEngine.h#L142)
+File: [client\LightEngine\LightEngine.h at line 142](../../../Src/client/LightEngine/LightEngine.h#L142)
 ## _emitAlias(strval)
 
 Type: constant
@@ -647,14 +647,14 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\LightEngine\LightEngine.h at line 144](../../../src/client/LightEngine/LightEngine.h#L144)
+File: [client\LightEngine\LightEngine.h at line 144](../../../Src/client/LightEngine/LightEngine.h#L144)
 ## type
 
 Type: function
 Description: 
 - Param: sourceObject
 
-File: [client\LightEngine\LightEngine.h at line 130](../../../src/client/LightEngine/LightEngine.h#L130)
+File: [client\LightEngine\LightEngine.h at line 130](../../../Src/client/LightEngine/LightEngine.h#L130)
 # LightEngine.hpp
 
 ## LIGHT_FIRE
@@ -667,7 +667,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\LightEngine\LightEngine.hpp at line 8](../../../src/client/LightEngine/LightEngine.hpp#L8)
+File: [client\LightEngine\LightEngine.hpp at line 8](../../../Src/client/LightEngine/LightEngine.hpp#L8)
 ## LIGHT_CAMPFIRE
 
 Type: constant
@@ -678,7 +678,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\LightEngine\LightEngine.hpp at line 9](../../../src/client/LightEngine/LightEngine.hpp#L9)
+File: [client\LightEngine\LightEngine.hpp at line 9](../../../Src/client/LightEngine/LightEngine.hpp#L9)
 ## LIGHT_SIGARETTE
 
 Type: constant
@@ -689,7 +689,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\LightEngine\LightEngine.hpp at line 10](../../../src/client/LightEngine/LightEngine.hpp#L10)
+File: [client\LightEngine\LightEngine.hpp at line 10](../../../Src/client/LightEngine/LightEngine.hpp#L10)
 ## LIGHT_STREETLAMP
 
 Type: constant
@@ -700,7 +700,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [client\LightEngine\LightEngine.hpp at line 11](../../../src/client/LightEngine/LightEngine.hpp#L11)
+File: [client\LightEngine\LightEngine.hpp at line 11](../../../Src/client/LightEngine/LightEngine.hpp#L11)
 ## LIGHT_FLASHLIGHT
 
 Type: constant
@@ -711,7 +711,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\LightEngine\LightEngine.hpp at line 12](../../../src/client/LightEngine/LightEngine.hpp#L12)
+File: [client\LightEngine\LightEngine.hpp at line 12](../../../Src/client/LightEngine/LightEngine.hpp#L12)
 ## LIGHT_CAMPFIRE_BIG
 
 Type: constant
@@ -722,7 +722,7 @@ Replaced value:
 ```sqf
 6
 ```
-File: [client\LightEngine\LightEngine.hpp at line 13](../../../src/client/LightEngine/LightEngine.hpp#L13)
+File: [client\LightEngine\LightEngine.hpp at line 13](../../../Src/client/LightEngine/LightEngine.hpp#L13)
 ## LIGHT_SIGN_BAR
 
 Type: constant
@@ -733,7 +733,7 @@ Replaced value:
 ```sqf
 7
 ```
-File: [client\LightEngine\LightEngine.hpp at line 14](../../../src/client/LightEngine/LightEngine.hpp#L14)
+File: [client\LightEngine\LightEngine.hpp at line 14](../../../Src/client/LightEngine/LightEngine.hpp#L14)
 ## LIGHT_SIGN_MEDICAL
 
 Type: constant
@@ -744,7 +744,7 @@ Replaced value:
 ```sqf
 8
 ```
-File: [client\LightEngine\LightEngine.hpp at line 15](../../../src/client/LightEngine/LightEngine.hpp#L15)
+File: [client\LightEngine\LightEngine.hpp at line 15](../../../Src/client/LightEngine/LightEngine.hpp#L15)
 ## LIGHT_LAMP_CEILING
 
 Type: constant
@@ -755,7 +755,7 @@ Replaced value:
 ```sqf
 9
 ```
-File: [client\LightEngine\LightEngine.hpp at line 16](../../../src/client/LightEngine/LightEngine.hpp#L16)
+File: [client\LightEngine\LightEngine.hpp at line 16](../../../Src/client/LightEngine/LightEngine.hpp#L16)
 ## LIGHT_LAMP_WALL
 
 Type: constant
@@ -766,7 +766,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [client\LightEngine\LightEngine.hpp at line 17](../../../src/client/LightEngine/LightEngine.hpp#L17)
+File: [client\LightEngine\LightEngine.hpp at line 17](../../../Src/client/LightEngine/LightEngine.hpp#L17)
 ## LIGHT_LAMP_KEROSENE
 
 Type: constant
@@ -777,7 +777,7 @@ Replaced value:
 ```sqf
 11
 ```
-File: [client\LightEngine\LightEngine.hpp at line 18](../../../src/client/LightEngine/LightEngine.hpp#L18)
+File: [client\LightEngine\LightEngine.hpp at line 18](../../../Src/client/LightEngine/LightEngine.hpp#L18)
 ## LIGHT_CANDLE
 
 Type: constant
@@ -788,7 +788,7 @@ Replaced value:
 ```sqf
 12
 ```
-File: [client\LightEngine\LightEngine.hpp at line 19](../../../src/client/LightEngine/LightEngine.hpp#L19)
+File: [client\LightEngine\LightEngine.hpp at line 19](../../../Src/client/LightEngine/LightEngine.hpp#L19)
 ## LIGHT_LAMP_CEILING_REDLIGHT
 
 Type: constant
@@ -799,7 +799,7 @@ Replaced value:
 ```sqf
 13
 ```
-File: [client\LightEngine\LightEngine.hpp at line 20](../../../src/client/LightEngine/LightEngine.hpp#L20)
+File: [client\LightEngine\LightEngine.hpp at line 20](../../../Src/client/LightEngine/LightEngine.hpp#L20)
 ## LIGHT_BAKE
 
 Type: constant
@@ -810,7 +810,7 @@ Replaced value:
 ```sqf
 14
 ```
-File: [client\LightEngine\LightEngine.hpp at line 21](../../../src/client/LightEngine/LightEngine.hpp#L21)
+File: [client\LightEngine\LightEngine.hpp at line 21](../../../Src/client/LightEngine/LightEngine.hpp#L21)
 ## LIGHT_BAKESTOVE
 
 Type: constant
@@ -821,7 +821,7 @@ Replaced value:
 ```sqf
 15
 ```
-File: [client\LightEngine\LightEngine.hpp at line 22](../../../src/client/LightEngine/LightEngine.hpp#L22)
+File: [client\LightEngine\LightEngine.hpp at line 22](../../../Src/client/LightEngine/LightEngine.hpp#L22)
 ## LIGHT_MATCH
 
 Type: constant
@@ -832,7 +832,7 @@ Replaced value:
 ```sqf
 16
 ```
-File: [client\LightEngine\LightEngine.hpp at line 23](../../../src/client/LightEngine/LightEngine.hpp#L23)
+File: [client\LightEngine\LightEngine.hpp at line 23](../../../Src/client/LightEngine/LightEngine.hpp#L23)
 ## LIGHT_AREA_EATER_NIGHTVISION
 
 Type: constant
@@ -843,7 +843,7 @@ Replaced value:
 ```sqf
 501
 ```
-File: [client\LightEngine\LightEngine.hpp at line 25](../../../src/client/LightEngine/LightEngine.hpp#L25)
+File: [client\LightEngine\LightEngine.hpp at line 25](../../../Src/client/LightEngine/LightEngine.hpp#L25)
 ## LIGHT_AREA_GHOST_NIGHTVISION
 
 Type: constant
@@ -854,7 +854,7 @@ Replaced value:
 ```sqf
 502
 ```
-File: [client\LightEngine\LightEngine.hpp at line 26](../../../src/client/LightEngine/LightEngine.hpp#L26)
+File: [client\LightEngine\LightEngine.hpp at line 26](../../../Src/client/LightEngine/LightEngine.hpp#L26)
 ## LIGHT_TRAP_HIDDEN_EFFECT
 
 Type: constant
@@ -865,7 +865,7 @@ Replaced value:
 ```sqf
 1000
 ```
-File: [client\LightEngine\LightEngine.hpp at line 28](../../../src/client/LightEngine/LightEngine.hpp#L28)
+File: [client\LightEngine\LightEngine.hpp at line 28](../../../Src/client/LightEngine/LightEngine.hpp#L28)
 ## LIGHT_LAMP_CEILING_OLD
 
 Type: constant
@@ -876,7 +876,7 @@ Replaced value:
 ```sqf
 90
 ```
-File: [client\LightEngine\LightEngine.hpp at line 30](../../../src/client/LightEngine/LightEngine.hpp#L30)
+File: [client\LightEngine\LightEngine.hpp at line 30](../../../Src/client/LightEngine/LightEngine.hpp#L30)
 ## LIGHT_LAMP_WALL_OLD
 
 Type: constant
@@ -887,7 +887,7 @@ Replaced value:
 ```sqf
 100
 ```
-File: [client\LightEngine\LightEngine.hpp at line 31](../../../src/client/LightEngine/LightEngine.hpp#L31)
+File: [client\LightEngine\LightEngine.hpp at line 31](../../../Src/client/LightEngine/LightEngine.hpp#L31)
 ## EFF_DUST_PARTICLES
 
 Type: constant
@@ -898,7 +898,7 @@ Replaced value:
 ```sqf
 2001
 ```
-File: [client\LightEngine\LightEngine.hpp at line 34](../../../src/client/LightEngine/LightEngine.hpp#L34)
+File: [client\LightEngine\LightEngine.hpp at line 34](../../../Src/client/LightEngine/LightEngine.hpp#L34)
 ## EFF_DUST_CLOUDS
 
 Type: constant
@@ -909,7 +909,7 @@ Replaced value:
 ```sqf
 2002
 ```
-File: [client\LightEngine\LightEngine.hpp at line 35](../../../src/client/LightEngine/LightEngine.hpp#L35)
+File: [client\LightEngine\LightEngine.hpp at line 35](../../../Src/client/LightEngine/LightEngine.hpp#L35)
 ## EFF_GREEN_DUST
 
 Type: constant
@@ -920,7 +920,7 @@ Replaced value:
 ```sqf
 2003
 ```
-File: [client\LightEngine\LightEngine.hpp at line 36](../../../src/client/LightEngine/LightEngine.hpp#L36)
+File: [client\LightEngine\LightEngine.hpp at line 36](../../../Src/client/LightEngine/LightEngine.hpp#L36)
 ## EFF_ROTTEN_HUMAN
 
 Type: constant
@@ -931,7 +931,7 @@ Replaced value:
 ```sqf
 2004
 ```
-File: [client\LightEngine\LightEngine.hpp at line 37](../../../src/client/LightEngine/LightEngine.hpp#L37)
+File: [client\LightEngine\LightEngine.hpp at line 37](../../../Src/client/LightEngine/LightEngine.hpp#L37)
 ## FLIGHT_TEST
 
 Type: constant
@@ -942,7 +942,7 @@ Replaced value:
 ```sqf
 5001
 ```
-File: [client\LightEngine\LightEngine.hpp at line 43](../../../src/client/LightEngine/LightEngine.hpp#L43)
+File: [client\LightEngine\LightEngine.hpp at line 43](../../../Src/client/LightEngine/LightEngine.hpp#L43)
 ## SHOT_MEATSPLAT
 
 Type: constant
@@ -953,7 +953,7 @@ Replaced value:
 ```sqf
 10001
 ```
-File: [client\LightEngine\LightEngine.hpp at line 46](../../../src/client/LightEngine/LightEngine.hpp#L46)
+File: [client\LightEngine\LightEngine.hpp at line 46](../../../Src/client/LightEngine/LightEngine.hpp#L46)
 ## SHOT_DESTROYLIMB
 
 Type: constant
@@ -964,7 +964,7 @@ Replaced value:
 ```sqf
 10002
 ```
-File: [client\LightEngine\LightEngine.hpp at line 47](../../../src/client/LightEngine/LightEngine.hpp#L47)
+File: [client\LightEngine\LightEngine.hpp at line 47](../../../Src/client/LightEngine/LightEngine.hpp#L47)
 ## SHOT_BULLET_PISTOL
 
 Type: constant
@@ -975,7 +975,7 @@ Replaced value:
 ```sqf
 10003
 ```
-File: [client\LightEngine\LightEngine.hpp at line 48](../../../src/client/LightEngine/LightEngine.hpp#L48)
+File: [client\LightEngine\LightEngine.hpp at line 48](../../../Src/client/LightEngine/LightEngine.hpp#L48)
 ## SHOT_BULLET_SHOTGUN
 
 Type: constant
@@ -986,7 +986,7 @@ Replaced value:
 ```sqf
 10004
 ```
-File: [client\LightEngine\LightEngine.hpp at line 49](../../../src/client/LightEngine/LightEngine.hpp#L49)
+File: [client\LightEngine\LightEngine.hpp at line 49](../../../Src/client/LightEngine/LightEngine.hpp#L49)
 ## SHOT_BULLET_SHOTRIFLE
 
 Type: constant
@@ -997,7 +997,7 @@ Replaced value:
 ```sqf
 10005
 ```
-File: [client\LightEngine\LightEngine.hpp at line 50](../../../src/client/LightEngine/LightEngine.hpp#L50)
+File: [client\LightEngine\LightEngine.hpp at line 50](../../../Src/client/LightEngine/LightEngine.hpp#L50)
 ## VST_EATER_NIGHTVISION
 
 Type: constant
@@ -1008,7 +1008,7 @@ Replaced value:
 ```sqf
 20001
 ```
-File: [client\LightEngine\LightEngine.hpp at line 53](../../../src/client/LightEngine/LightEngine.hpp#L53)
+File: [client\LightEngine\LightEngine.hpp at line 53](../../../Src/client/LightEngine/LightEngine.hpp#L53)
 ## VST_HUMAN_STEALTH
 
 Type: constant
@@ -1019,7 +1019,7 @@ Replaced value:
 ```sqf
 20002
 ```
-File: [client\LightEngine\LightEngine.hpp at line 54](../../../src/client/LightEngine/LightEngine.hpp#L54)
+File: [client\LightEngine\LightEngine.hpp at line 54](../../../Src/client/LightEngine/LightEngine.hpp#L54)
 ## VST_CLOTH_BREASTPLATE
 
 Type: constant
@@ -1030,7 +1030,7 @@ Replaced value:
 ```sqf
 20003
 ```
-File: [client\LightEngine\LightEngine.hpp at line 55](../../../src/client/LightEngine/LightEngine.hpp#L55)
+File: [client\LightEngine\LightEngine.hpp at line 55](../../../Src/client/LightEngine/LightEngine.hpp#L55)
 ## VST_CLOTH_CERAMIC
 
 Type: constant
@@ -1041,7 +1041,7 @@ Replaced value:
 ```sqf
 20004
 ```
-File: [client\LightEngine\LightEngine.hpp at line 56](../../../src/client/LightEngine/LightEngine.hpp#L56)
+File: [client\LightEngine\LightEngine.hpp at line 56](../../../Src/client/LightEngine/LightEngine.hpp#L56)
 ## VST_CLOTH_STRONGARMOR
 
 Type: constant
@@ -1052,7 +1052,7 @@ Replaced value:
 ```sqf
 20005
 ```
-File: [client\LightEngine\LightEngine.hpp at line 57](../../../src/client/LightEngine/LightEngine.hpp#L57)
+File: [client\LightEngine\LightEngine.hpp at line 57](../../../Src/client/LightEngine/LightEngine.hpp#L57)
 ## VST_CLOTH_METALARMOR
 
 Type: constant
@@ -1063,7 +1063,7 @@ Replaced value:
 ```sqf
 20006
 ```
-File: [client\LightEngine\LightEngine.hpp at line 58](../../../src/client/LightEngine/LightEngine.hpp#L58)
+File: [client\LightEngine\LightEngine.hpp at line 58](../../../Src/client/LightEngine/LightEngine.hpp#L58)
 ## VST_CLOTH_FLEXIBLEARMOR
 
 Type: constant
@@ -1074,7 +1074,7 @@ Replaced value:
 ```sqf
 20007
 ```
-File: [client\LightEngine\LightEngine.hpp at line 59](../../../src/client/LightEngine/LightEngine.hpp#L59)
+File: [client\LightEngine\LightEngine.hpp at line 59](../../../Src/client/LightEngine/LightEngine.hpp#L59)
 ## VST_GHOST_EFFECT
 
 Type: constant
@@ -1085,7 +1085,7 @@ Replaced value:
 ```sqf
 20008
 ```
-File: [client\LightEngine\LightEngine.hpp at line 60](../../../src/client/LightEngine/LightEngine.hpp#L60)
+File: [client\LightEngine\LightEngine.hpp at line 60](../../../Src/client/LightEngine/LightEngine.hpp#L60)
 ## VST_ATTACHED_OBJECTS
 
 Type: constant
@@ -1096,7 +1096,7 @@ Replaced value:
 ```sqf
 20009
 ```
-File: [client\LightEngine\LightEngine.hpp at line 61](../../../src/client/LightEngine/LightEngine.hpp#L61)
+File: [client\LightEngine\LightEngine.hpp at line 61](../../../Src/client/LightEngine/LightEngine.hpp#L61)
 # LightEngine.sqf
 
 ## createArrow()
@@ -1109,14 +1109,14 @@ Replaced value:
 ```sqf
 "Sign_Arrow_F" createVehicle [0,0,0]
 ```
-File: [client\LightEngine\LightEngine.sqf at line 434](../../../src/client/LightEngine/LightEngine.sqf#L434)
+File: [client\LightEngine\LightEngine.sqf at line 434](../../../Src/client/LightEngine/LightEngine.sqf#L434)
 ## le_init
 
 Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 42](../../../src/client/LightEngine/LightEngine.sqf#L42)
+File: [client\LightEngine\LightEngine.sqf at line 42](../../../Src/client/LightEngine/LightEngine.sqf#L42)
 ## le_loadLight
 
 Type: function
@@ -1124,7 +1124,7 @@ Description: загружает источник освещения или ча�
 - Param: _type (optional, default -1)
 - Param: _src
 
-File: [client\LightEngine\LightEngine.sqf at line 62](../../../src/client/LightEngine/LightEngine.sqf#L62)
+File: [client\LightEngine\LightEngine.sqf at line 62](../../../Src/client/LightEngine/LightEngine.sqf#L62)
 ## le_doFireLight
 
 Type: function
@@ -1132,7 +1132,7 @@ Description: автоматическое событие освещения, э�
 - Param: _type (optional, default -1)
 - Param: _src
 
-File: [client\LightEngine\LightEngine.sqf at line 95](../../../src/client/LightEngine/LightEngine.sqf#L95)
+File: [client\LightEngine\LightEngine.sqf at line 95](../../../Src/client/LightEngine/LightEngine.sqf#L95)
 ## le_doShot
 
 Type: function
@@ -1141,42 +1141,42 @@ Description:
 - Param: _src
 - Param: _ctxParams (optional, default [])
 
-File: [client\LightEngine\LightEngine.sqf at line 111](../../../src/client/LightEngine/LightEngine.sqf#L111)
+File: [client\LightEngine\LightEngine.sqf at line 111](../../../Src/client/LightEngine/LightEngine.sqf#L111)
 ## le_unloadLight
 
 Type: function
 Description: выгружает источник освещения
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 128](../../../src/client/LightEngine/LightEngine.sqf#L128)
+File: [client\LightEngine\LightEngine.sqf at line 128](../../../Src/client/LightEngine/LightEngine.sqf#L128)
 ## le_isLoadedLight
 
 Type: function
 Description: проверяет висит ли на объекте источник света
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 156](../../../src/client/LightEngine/LightEngine.sqf#L156)
+File: [client\LightEngine\LightEngine.sqf at line 156](../../../Src/client/LightEngine/LightEngine.sqf#L156)
 ## le_isLightConfig
 
 Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 162](../../../src/client/LightEngine/LightEngine.sqf#L162)
+File: [client\LightEngine\LightEngine.sqf at line 162](../../../Src/client/LightEngine/LightEngine.sqf#L162)
 ## le_isShotConfig
 
 Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 166](../../../src/client/LightEngine/LightEngine.sqf#L166)
+File: [client\LightEngine\LightEngine.sqf at line 166](../../../Src/client/LightEngine/LightEngine.sqf#L166)
 ## le_reloadLightSystem
 
 Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 171](../../../src/client/LightEngine/LightEngine.sqf#L171)
+File: [client\LightEngine\LightEngine.sqf at line 171](../../../Src/client/LightEngine/LightEngine.sqf#L171)
 ## le_debug_canViewLight
 
 Type: function
@@ -1184,14 +1184,14 @@ Description:
 - Param: _src
 - Param: _isLightObject
 
-File: [client\LightEngine\LightEngine.sqf at line 204](../../../src/client/LightEngine/LightEngine.sqf#L204)
+File: [client\LightEngine\LightEngine.sqf at line 204](../../../Src/client/LightEngine/LightEngine.sqf#L204)
 ## le_debug_lightRender
 
 Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 305](../../../src/client/LightEngine/LightEngine.sqf#L305)
+File: [client\LightEngine\LightEngine.sqf at line 305](../../../Src/client/LightEngine/LightEngine.sqf#L305)
 ## le_debug_getNotEmptyChunks
 
 Type: function
@@ -1199,7 +1199,7 @@ Description:
 - Param: _categs
 - Param: _doOnlyObjs (optional, default true)
 
-File: [client\LightEngine\LightEngine.sqf at line 352](../../../src/client/LightEngine/LightEngine.sqf#L352)
+File: [client\LightEngine\LightEngine.sqf at line 352](../../../Src/client/LightEngine/LightEngine.sqf#L352)
 ## le_debug_getlightprops
 
 Type: function
@@ -1207,14 +1207,14 @@ Description:
 - Param: _vehicle
 - Param: _light
 
-File: [client\LightEngine\LightEngine.sqf at line 374](../../../src/client/LightEngine/LightEngine.sqf#L374)
+File: [client\LightEngine\LightEngine.sqf at line 374](../../../Src/client/LightEngine/LightEngine.sqf#L374)
 ## le_debug_getlight
 
 Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 388](../../../src/client/LightEngine/LightEngine.sqf#L388)
+File: [client\LightEngine\LightEngine.sqf at line 388](../../../Src/client/LightEngine/LightEngine.sqf#L388)
 ## le_debug_calc
 
 Type: function
@@ -1224,7 +1224,7 @@ Description:
 - Param: _asConfig (optional, default false)
 - Param: _intens (optional, default (25 + 10 * ((1 + 1) / 2)))
 
-File: [client\LightEngine\LightEngine.sqf at line 398](../../../src/client/LightEngine/LightEngine.sqf#L398)
+File: [client\LightEngine\LightEngine.sqf at line 398](../../../Src/client/LightEngine/LightEngine.sqf#L398)
 ## le_debug_getNearObjects
 
 Type: function
@@ -1232,7 +1232,7 @@ Description:
 - Param: _xPos
 - Param: _yPos
 
-File: [client\LightEngine\LightEngine.sqf at line 432](../../../src/client/LightEngine/LightEngine.sqf#L432)
+File: [client\LightEngine\LightEngine.sqf at line 432](../../../Src/client/LightEngine/LightEngine.sqf#L432)
 ## le_getLocalObjectsData
 
 Type: function
@@ -1240,7 +1240,7 @@ Description: отправляет запрос на сервер о том, чт
 - Param: _chunk
 - Param: _chunkType
 
-File: [client\LightEngine\LightEngine.sqf at line 464](../../../src/client/LightEngine/LightEngine.sqf#L464)
+File: [client\LightEngine\LightEngine.sqf at line 464](../../../Src/client/LightEngine/LightEngine.sqf#L464)
 # LightEngine_mainThread.sqf
 
 ## loadLightOnObject(_x)
@@ -1253,7 +1253,7 @@ Replaced value:
 ```sqf
 [_x getVariable "light",_x] call le_loadLight
 ```
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 47](../../../src/client/LightEngine/LightEngine_mainThread.sqf#L47)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 47](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L47)
 ## unloadLightOnObject(_x)
 
 Type: constant
@@ -1264,7 +1264,7 @@ Replaced value:
 ```sqf
 [_x] call le_unloadLight
 ```
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 48](../../../src/client/LightEngine/LightEngine_mainThread.sqf#L48)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 48](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L48)
 ## __chunkToGLSType()
 
 Type: constant
@@ -1275,7 +1275,7 @@ Replaced value:
 ```sqf
 (format["%1:%2:%3",_type,_cx,_cy])
 ```
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 50](../../../src/client/LightEngine/LightEngine_mainThread.sqf#L50)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 50](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L50)
 ## __compareHashesStr()
 
 Type: constant
@@ -1286,7 +1286,7 @@ Replaced value:
 ```sqf
 (format["G:%1 -> L:%2",_hash,_localHash])
 ```
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 51](../../../src/client/LightEngine/LightEngine_mainThread.sqf#L51)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 51](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L51)
 ## use_trace_onloadlight
 
 Type: constant
@@ -1297,14 +1297,14 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 53](../../../src/client/LightEngine/LightEngine_mainThread.sqf#L53)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 53](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L53)
 ## le_onUpdate
 
 Type: function
 Description: основной поток обновления
 
 
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 11](../../../src/client/LightEngine/LightEngine_mainThread.sqf#L11)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 11](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L11)
 ## le_collectAroundChunks
 
 Type: function
@@ -1313,7 +1313,7 @@ Description:
 - Param: _chunk
 - Param: _chunkType
 
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 110](../../../src/client/LightEngine/LightEngine_mainThread.sqf#L110)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 110](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L110)
 # LightRender.sqf
 
 ## LIGHT_RENDER_PRINT_ERROR_IF_NOT_INIT_ON_CUSTOM
@@ -1326,7 +1326,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\LightEngine\LightRender.sqf at line 8](../../../src/client/LightEngine/LightRender.sqf#L8)
+File: [client\LightEngine\LightRender.sqf at line 8](../../../Src/client/LightEngine/LightRender.sqf#L8)
 ## NEW_ALGORITHM_LIGHT_RENDERING
 
 Type: constant
@@ -1337,7 +1337,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\LightEngine\LightRender.sqf at line 11](../../../src/client/LightEngine/LightRender.sqf#L11)
+File: [client\LightEngine\LightRender.sqf at line 11](../../../Src/client/LightEngine/LightRender.sqf#L11)
 ## BRIGHT_CHANGE_VALUE_ON_FRAME
 
 Type: constant
@@ -1348,7 +1348,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [client\LightEngine\LightRender.sqf at line 14](../../../src/client/LightEngine/LightRender.sqf#L14)
+File: [client\LightEngine\LightRender.sqf at line 14](../../../Src/client/LightEngine/LightRender.sqf#L14)
 ## DRAW_UPPER_RENDER_LINES
 
 Type: constant
@@ -1359,7 +1359,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\LightEngine\LightRender.sqf at line 16](../../../src/client/LightEngine/LightRender.sqf#L16)
+File: [client\LightEngine\LightRender.sqf at line 16](../../../Src/client/LightEngine/LightRender.sqf#L16)
 ## LE_RENDER_DISTANCE_ONCHECK
 
 Type: constant
@@ -1370,7 +1370,7 @@ Replaced value:
 ```sqf
 7
 ```
-File: [client\LightEngine\LightRender.sqf at line 19](../../../src/client/LightEngine/LightRender.sqf#L19)
+File: [client\LightEngine\LightRender.sqf at line 19](../../../Src/client/LightEngine/LightRender.sqf#L19)
 ## distRad
 
 Type: constant
@@ -1381,7 +1381,7 @@ Replaced value:
 ```sqf
 1400.5
 ```
-File: [client\LightEngine\LightRender.sqf at line 48](../../../src/client/LightEngine/LightRender.sqf#L48)
+File: [client\LightEngine\LightRender.sqf at line 48](../../../Src/client/LightEngine/LightRender.sqf#L48)
 ## upperMax
 
 Type: constant
@@ -1392,7 +1392,7 @@ Replaced value:
 ```sqf
 1000
 ```
-File: [client\LightEngine\LightRender.sqf at line 49](../../../src/client/LightEngine/LightRender.sqf#L49)
+File: [client\LightEngine\LightRender.sqf at line 49](../../../Src/client/LightEngine/LightRender.sqf#L49)
 ## inline_canSee(ob)
 
 Type: constant
@@ -1403,7 +1403,7 @@ Replaced value:
 ```sqf
 (!(call _isPotolokFinded))
 ```
-File: [client\LightEngine\LightRender.sqf at line 123](../../../src/client/LightEngine/LightRender.sqf#L123)
+File: [client\LightEngine\LightRender.sqf at line 123](../../../Src/client/LightEngine/LightRender.sqf#L123)
 ## __getrender(v,i)
 
 Type: constant
@@ -1415,7 +1415,7 @@ Replaced value:
 ```sqf
 (v getvariable "rnglt" select i)
 ```
-File: [client\LightEngine\LightRender.sqf at line 116](../../../src/client/LightEngine/LightRender.sqf#L116)
+File: [client\LightEngine\LightRender.sqf at line 116](../../../Src/client/LightEngine/LightRender.sqf#L116)
 ## constbias
 
 Type: constant
@@ -1426,7 +1426,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [client\LightEngine\LightRender.sqf at line 150](../../../src/client/LightEngine/LightRender.sqf#L150)
+File: [client\LightEngine\LightRender.sqf at line 150](../../../Src/client/LightEngine/LightRender.sqf#L150)
 ## gvar(obj,val)
 
 Type: constant
@@ -1438,7 +1438,7 @@ Replaced value:
 ```sqf
 (obj getvariable #val)
 ```
-File: [client\LightEngine\LightRender.sqf at line 159](../../../src/client/LightEngine/LightRender.sqf#L159)
+File: [client\LightEngine\LightRender.sqf at line 159](../../../Src/client/LightEngine/LightRender.sqf#L159)
 ## gvardef(obj,val,def)
 
 Type: constant
@@ -1451,7 +1451,7 @@ Replaced value:
 ```sqf
 (obj getvariable [#val,def])
 ```
-File: [client\LightEngine\LightRender.sqf at line 160](../../../src/client/LightEngine/LightRender.sqf#L160)
+File: [client\LightEngine\LightRender.sqf at line 160](../../../Src/client/LightEngine/LightRender.sqf#L160)
 ## svar(obj,var,val)
 
 Type: constant
@@ -1464,7 +1464,7 @@ Replaced value:
 ```sqf
 obj setvariable [#var,val]
 ```
-File: [client\LightEngine\LightRender.sqf at line 161](../../../src/client/LightEngine/LightRender.sqf#L161)
+File: [client\LightEngine\LightRender.sqf at line 161](../../../Src/client/LightEngine/LightRender.sqf#L161)
 ## timetofadelight
 
 Type: constant
@@ -1475,21 +1475,21 @@ Replaced value:
 ```sqf
 0.05
 ```
-File: [client\LightEngine\LightRender.sqf at line 162](../../../src/client/LightEngine/LightRender.sqf#L162)
+File: [client\LightEngine\LightRender.sqf at line 162](../../../Src/client/LightEngine/LightRender.sqf#L162)
 ## le_initRenderer
 
 Type: function
 Description: 
 - Param: _obj
 
-File: [client\LightEngine\LightRender.sqf at line 30](../../../src/client/LightEngine/LightRender.sqf#L30)
+File: [client\LightEngine\LightRender.sqf at line 30](../../../Src/client/LightEngine/LightRender.sqf#L30)
 ## le_render_findUpSide
 
 Type: function
 Description: 
 
 
-File: [client\LightEngine\LightRender.sqf at line 45](../../../src/client/LightEngine/LightRender.sqf#L45)
+File: [client\LightEngine\LightRender.sqf at line 45](../../../Src/client/LightEngine/LightRender.sqf#L45)
 ## le_addTransitionState
 
 Type: function
@@ -1497,14 +1497,14 @@ Description: if _mode then do render else hide
 - Param: _src
 - Param: _mode
 
-File: [client\LightEngine\LightRender.sqf at line 78](../../../src/client/LightEngine/LightRender.sqf#L78)
+File: [client\LightEngine\LightRender.sqf at line 78](../../../Src/client/LightEngine/LightRender.sqf#L78)
 ## le_onupdrender
 
 Type: function
 Description: 
 
 
-File: [client\LightEngine\LightRender.sqf at line 105](../../../src/client/LightEngine/LightRender.sqf#L105)
+File: [client\LightEngine\LightRender.sqf at line 105](../../../Src/client/LightEngine/LightRender.sqf#L105)
 ## le_onchangeview
 
 Type: function
@@ -1515,7 +1515,7 @@ Description:
 - Param: _modif
 - Param: _mode
 
-File: [client\LightEngine\LightRender.sqf at line 258](../../../src/client/LightEngine/LightRender.sqf#L258)
+File: [client\LightEngine\LightRender.sqf at line 258](../../../Src/client/LightEngine/LightRender.sqf#L258)
 # ScriptedEffects.hpp
 
 ## SLIGHT_MAGICSTORM_DEBUG
@@ -1528,7 +1528,7 @@ Replaced value:
 ```sqf
 2100
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 6](../../../src/client/LightEngine/ScriptedEffects.hpp#L6)
+File: [client\LightEngine\ScriptedEffects.hpp at line 6](../../../Src/client/LightEngine/ScriptedEffects.hpp#L6)
 ## SLIGHT_SET123_DEBUG
 
 Type: constant
@@ -1539,7 +1539,7 @@ Replaced value:
 ```sqf
 2101
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 7](../../../src/client/LightEngine/ScriptedEffects.hpp#L7)
+File: [client\LightEngine\ScriptedEffects.hpp at line 7](../../../Src/client/LightEngine/ScriptedEffects.hpp#L7)
 ## SLIGHT_TEMPLATE_DIRECTLIGHT
 
 Type: constant
@@ -1550,7 +1550,7 @@ Replaced value:
 ```sqf
 2102
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 8](../../../src/client/LightEngine/ScriptedEffects.hpp#L8)
+File: [client\LightEngine\ScriptedEffects.hpp at line 8](../../../Src/client/LightEngine/ScriptedEffects.hpp#L8)
 ## SLIGHT_TEMPLATE_POINTLIGHT
 
 Type: constant
@@ -1561,7 +1561,7 @@ Replaced value:
 ```sqf
 2103
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 9](../../../src/client/LightEngine/ScriptedEffects.hpp#L9)
+File: [client\LightEngine\ScriptedEffects.hpp at line 9](../../../Src/client/LightEngine/ScriptedEffects.hpp#L9)
 # ScriptedEffects.sqf
 
 ## le_se_handleConfig
@@ -1570,28 +1570,28 @@ Type: function
 Description: Функция-обработчик скриптового освещения (для клиента)
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 35](../../../src/client/LightEngine/ScriptedEffects.sqf#L35)
+File: [client\LightEngine\ScriptedEffects.sqf at line 35](../../../Src/client/LightEngine/ScriptedEffects.sqf#L35)
 ## le_se_errorHandler
 
 Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 114](../../../src/client/LightEngine/ScriptedEffects.sqf#L114)
+File: [client\LightEngine\ScriptedEffects.sqf at line 114](../../../Src/client/LightEngine/ScriptedEffects.sqf#L114)
 ## le_se_intenral_handleVarInit
 
 Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 118](../../../src/client/LightEngine/ScriptedEffects.sqf#L118)
+File: [client\LightEngine\ScriptedEffects.sqf at line 118](../../../Src/client/LightEngine/ScriptedEffects.sqf#L118)
 ## le_se_doSorting
 
 Type: function
 Description: Спасибо Богемия...
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 135](../../../src/client/LightEngine/ScriptedEffects.sqf#L135)
+File: [client\LightEngine\ScriptedEffects.sqf at line 135](../../../Src/client/LightEngine/ScriptedEffects.sqf#L135)
 # VisualStatesConfigs.sqf
 
 ## VAR_FULL_PREFIX__VST_PRIVATE
@@ -1604,7 +1604,7 @@ Replaced value:
 ```sqf
 ("__levst_cfg"+str __GLOB_CFG_IDX__+"_var_"+_var)
 ```
-File: [client\LightEngine\VisualStatesConfigs.sqf at line 77](../../../src/client/LightEngine/VisualStatesConfigs.sqf#L77)
+File: [client\LightEngine\VisualStatesConfigs.sqf at line 77](../../../Src/client/LightEngine/VisualStatesConfigs.sqf#L77)
 ## le_vst_create
 
 Type: function
@@ -1613,14 +1613,14 @@ Description: initialize vst
 - Param: _src
 - Param: _ctx
 
-File: [client\LightEngine\VisualStatesConfigs.sqf at line 7](../../../src/client/LightEngine/VisualStatesConfigs.sqf#L7)
+File: [client\LightEngine\VisualStatesConfigs.sqf at line 7](../../../Src/client/LightEngine/VisualStatesConfigs.sqf#L7)
 ## le_isVSTConfig
 
 Type: function
 Description: 
 
 
-File: [client\LightEngine\VisualStatesConfigs.sqf at line 37](../../../src/client/LightEngine/VisualStatesConfigs.sqf#L37)
+File: [client\LightEngine\VisualStatesConfigs.sqf at line 37](../../../Src/client/LightEngine/VisualStatesConfigs.sqf#L37)
 ## le_vst_remove
 
 Type: function
@@ -1629,7 +1629,7 @@ Description: remove vst
 - Param: _src
 - Param: _ctx
 
-File: [client\LightEngine\VisualStatesConfigs.sqf at line 40](../../../src/client/LightEngine/VisualStatesConfigs.sqf#L40)
+File: [client\LightEngine\VisualStatesConfigs.sqf at line 40](../../../Src/client/LightEngine/VisualStatesConfigs.sqf#L40)
 ## le_vst_createDummyObj
 
 Type: function
@@ -1638,7 +1638,7 @@ Description:
 - Param: _doHide (optional, default true)
 - Param: _createAsVehicle (optional, default false)
 
-File: [client\LightEngine\VisualStatesConfigs.sqf at line 63](../../../src/client/LightEngine/VisualStatesConfigs.sqf#L63)
+File: [client\LightEngine\VisualStatesConfigs.sqf at line 63](../../../Src/client/LightEngine/VisualStatesConfigs.sqf#L63)
 ## le_vst_regVar
 
 Type: function
@@ -1647,7 +1647,7 @@ Description:
 - Param: _var
 - Param: _val
 
-File: [client\LightEngine\VisualStatesConfigs.sqf at line 78](../../../src/client/LightEngine/VisualStatesConfigs.sqf#L78)
+File: [client\LightEngine\VisualStatesConfigs.sqf at line 78](../../../Src/client/LightEngine/VisualStatesConfigs.sqf#L78)
 ## le_vst_hasVar
 
 Type: function
@@ -1655,7 +1655,7 @@ Description:
 - Param: _obj
 - Param: _var
 
-File: [client\LightEngine\VisualStatesConfigs.sqf at line 82](../../../src/client/LightEngine/VisualStatesConfigs.sqf#L82)
+File: [client\LightEngine\VisualStatesConfigs.sqf at line 82](../../../Src/client/LightEngine/VisualStatesConfigs.sqf#L82)
 ## le_vst_hasVarExt
 
 Type: function
@@ -1664,7 +1664,7 @@ Description:
 - Param: _var
 - Param: _cfg
 
-File: [client\LightEngine\VisualStatesConfigs.sqf at line 85](../../../src/client/LightEngine/VisualStatesConfigs.sqf#L85)
+File: [client\LightEngine\VisualStatesConfigs.sqf at line 85](../../../Src/client/LightEngine/VisualStatesConfigs.sqf#L85)
 ## le_vst_getVar
 
 Type: function
@@ -1672,7 +1672,7 @@ Description:
 - Param: _obj
 - Param: _var
 
-File: [client\LightEngine\VisualStatesConfigs.sqf at line 90](../../../src/client/LightEngine/VisualStatesConfigs.sqf#L90)
+File: [client\LightEngine\VisualStatesConfigs.sqf at line 90](../../../Src/client/LightEngine/VisualStatesConfigs.sqf#L90)
 ## le_vst_getVarExt
 
 Type: function
@@ -1681,7 +1681,7 @@ Description:
 - Param: _var
 - Param: _cfg
 
-File: [client\LightEngine\VisualStatesConfigs.sqf at line 93](../../../src/client/LightEngine/VisualStatesConfigs.sqf#L93)
+File: [client\LightEngine\VisualStatesConfigs.sqf at line 93](../../../Src/client/LightEngine/VisualStatesConfigs.sqf#L93)
 ## le_vst_remVar
 
 Type: function
@@ -1689,7 +1689,7 @@ Description:
 - Param: _obj
 - Param: _var
 
-File: [client\LightEngine\VisualStatesConfigs.sqf at line 98](../../../src/client/LightEngine/VisualStatesConfigs.sqf#L98)
+File: [client\LightEngine\VisualStatesConfigs.sqf at line 98](../../../Src/client/LightEngine/VisualStatesConfigs.sqf#L98)
 # Natural.sqf
 
 ## __event
@@ -1705,7 +1705,7 @@ stopUpdateIfNull(_this select 0); \
 		(_this select 0) setLightAmbient [rand(0.18,0.2),0.05,0]; \
 		(_this select 0) setLightBrightness rand(0.04,0.043);
 ```
-File: [client\LightEngine\LightConfigs\Natural.sqf at line 603](../../../src/client/LightEngine/LightConfigs/Natural.sqf#L603)
+File: [client\LightEngine\LightConfigs\Natural.sqf at line 603](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L603)
 ## TORCH_SOUND_DELAY
 
 Type: constant
@@ -1716,7 +1716,7 @@ Replaced value:
 ```sqf
 20
 ```
-File: [client\LightEngine\LightConfigs\Natural.sqf at line 610](../../../src/client/LightEngine/LightConfigs/Natural.sqf#L610)
+File: [client\LightEngine\LightConfigs\Natural.sqf at line 610](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L610)
 ## CAMPFIRE_SOUND_DELAY
 
 Type: constant
@@ -1727,7 +1727,7 @@ Replaced value:
 ```sqf
 50
 ```
-File: [client\LightEngine\LightConfigs\Natural.sqf at line 550](../../../src/client/LightEngine/LightConfigs/Natural.sqf#L550)
+File: [client\LightEngine\LightConfigs\Natural.sqf at line 550](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L550)
 ## light_min_brightness
 
 Type: constant
@@ -1738,7 +1738,7 @@ Replaced value:
 ```sqf
 2.5
 ```
-File: [client\LightEngine\LightConfigs\Natural.sqf at line 256](../../../src/client/LightEngine/LightConfigs/Natural.sqf#L256)
+File: [client\LightEngine\LightConfigs\Natural.sqf at line 256](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L256)
 ## light_max_brightness
 
 Type: constant
@@ -1749,7 +1749,7 @@ Replaced value:
 ```sqf
 4.34
 ```
-File: [client\LightEngine\LightConfigs\Natural.sqf at line 257](../../../src/client/LightEngine/LightConfigs/Natural.sqf#L257)
+File: [client\LightEngine\LightConfigs\Natural.sqf at line 257](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L257)
 # WorldEffects.sqf
 
 ## stdLink(x,y,z)
@@ -1764,7 +1764,7 @@ Replaced value:
 ```sqf
 emitterObject setposatl ((getposatl sourceObject) vectorAdd vec3(x,y,z))
 ```
-File: [client\LightEngine\ParticleConfigs\WorldEffects.sqf at line 8](../../../src/client/LightEngine/ParticleConfigs/WorldEffects.sqf#L8)
+File: [client\LightEngine\ParticleConfigs\WorldEffects.sqf at line 8](../../../Src/client/LightEngine/ParticleConfigs/WorldEffects.sqf#L8)
 # Bullets.sqf
 
 ## SHOT_BULLET_PISTOL_TIMEOUT
@@ -1777,7 +1777,7 @@ Replaced value:
 ```sqf
 0.25
 ```
-File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 50](../../../src/client/LightEngine/ShotableConfigs/Bullets.sqf#L50)
+File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 50](../../../Src/client/LightEngine/ShotableConfigs/Bullets.sqf#L50)
 ## SHOT_BULLET_SHOTGUN_TIMEOUT
 
 Type: constant
@@ -1788,7 +1788,7 @@ Replaced value:
 ```sqf
 0.25
 ```
-File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 91](../../../src/client/LightEngine/ShotableConfigs/Bullets.sqf#L91)
+File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 91](../../../Src/client/LightEngine/ShotableConfigs/Bullets.sqf#L91)
 ## SHOT_BULLET_RIFLE_TIMEOUT
 
 Type: constant
@@ -1799,7 +1799,7 @@ Replaced value:
 ```sqf
 0.25
 ```
-File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 110](../../../src/client/LightEngine/ShotableConfigs/Bullets.sqf#L110)
+File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 110](../../../Src/client/LightEngine/ShotableConfigs/Bullets.sqf#L110)
 ## le_internal_shot_bullet_loadLight
 
 Type: function
@@ -1807,11 +1807,11 @@ Description: ======================================================
 - Param: _intensity
 - Param: _timeout
 
-File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 7](../../../src/client/LightEngine/ShotableConfigs/Bullets.sqf#L7)
+File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 7](../../../Src/client/LightEngine/ShotableConfigs/Bullets.sqf#L7)
 ## le_internal_shot_bullet_getFactPos
 
 Type: function
 Description: 
 - Param: _addY (optional, default 0)
 
-File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 32](../../../src/client/LightEngine/ShotableConfigs/Bullets.sqf#L32)
+File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 32](../../../Src/client/LightEngine/ShotableConfigs/Bullets.sqf#L32)
