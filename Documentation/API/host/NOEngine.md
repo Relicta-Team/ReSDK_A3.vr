@@ -621,43 +621,6 @@ Description: getting ngo
 File: [host\NOEngine\NOEngine_NGOServer.sqf at line 74](../../../Src/host/NOEngine/NOEngine_NGOServer.sqf#L74)
 # NOEngine_ObjectManager.sqf
 
-## TESTMACRO
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 10](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L10)
-## TESTMACROVALUE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-123
-```
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 12](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L12)
-## TESTPARAMS(a,b)
-
-Type: constant
-
-Description: 
-- Param: a
-- Param: b
-
-Replaced value:
-```sqf
-a + b
-```
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 14](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L14)
 ## createItemInWorld
 
 Type: function
@@ -670,7 +633,7 @@ Description:
 - Param: _vec (optional, default ['0', '0', '1'])
 - Param: _probStackSize (optional, default 1)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 16](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L16)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 10](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L10)
 ## createItemInContainer
 
 Type: function
@@ -681,7 +644,7 @@ Description: create item in container
 - Param: _probStackSize (optional, default 1)
 - Param: _ignoreMode (optional, default "")
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 65](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L65)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 59](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L59)
 ## createItemInInventory
 
 Type: function
@@ -692,7 +655,7 @@ Description:
 - Param: _slot
 - Param: _probStackSize (optional, default 1)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 125](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L125)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 119](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L119)
 ## createStructure
 
 Type: function
@@ -704,7 +667,7 @@ Description:
 - Param: _emulDrop (optional, default true)
 - Param: _vec (optional, default ['0', '0', '1'])
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 168](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L168)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 162](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L162)
 ## deleteDecor
 
 Type: function
@@ -712,7 +675,7 @@ Type: function
 Description: 
 - Param: _dec
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 209](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L209)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 203](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L203)
 ## deleteStructure
 
 Type: function
@@ -720,7 +683,7 @@ Type: function
 Description: 
 - Param: _struct
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 223](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L223)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 217](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L217)
 ## deleteItem
 
 Type: function
@@ -728,7 +691,7 @@ Type: function
 Description: 
 - Param: _item
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 237](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L237)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 231](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L231)
 ## getGameObjectOnPosition
 
 Type: function
@@ -740,7 +703,7 @@ Description: _retChild - опциональный параметр для воз
 - Param: _retAsList (optional, default false)
 - Param: _retChild (optional, default false)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 267](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L267)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 261](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L261)
 ## getAllObjectsInWorldTypeOf
 
 Type: function
@@ -749,7 +712,7 @@ Description: возвращает все объекты в мире. очень 
 - Param: _type
 - Param: _retChild (optional, default true)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 307](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L307)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 301](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L301)
 ## getAllItemsTypeOf
 
 Type: function
@@ -758,7 +721,7 @@ Description: Возвращает все итемы определенного �
 - Param: _type
 - Param: _retChild (optional, default true)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 314](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L314)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 308](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L308)
 ## getAllItemInInventory
 
 Type: function
@@ -768,7 +731,7 @@ Description: Получает все итемы в инвентаре сущно
 - Param: _type
 - Param: _retChild (optional, default true)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 321](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L321)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 315](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L315)
 ## getAllItemsOnPosition
 
 Type: function
@@ -779,7 +742,7 @@ Description: Собирает все игровые объекты на пози
 - Param: _dist (optional, default 3)
 - Param: _retChild (optional, default false)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 350](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L350)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 344](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L344)
 ## getMobsOnPosition
 
 Type: function
@@ -791,7 +754,7 @@ Description:
 - Param: _retAsList (optional, default false)
 - Param: _retChild (optional, default false)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 412](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L412)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 406](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L406)
 ## getAllMobsInWorld
 
 Type: function
@@ -800,7 +763,7 @@ Description:
 - Param: _type
 - Param: _retChild (optional, default false)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 432](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L432)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 426](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L426)
 ## getObjectByRef
 
 Type: function
@@ -809,7 +772,7 @@ Description: Получает игровой объект по ссылке
 - Param: _name (optional, default "")
 - Param: _def (optional, default nullPtr)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 446](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L446)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 440](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L440)
 ## getZoneByName
 
 Type: function
@@ -817,7 +780,7 @@ Type: function
 Description: получить зону по имени
 
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 452](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L452)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 446](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L446)
 ## noe_transform_position
 
 Type: function
@@ -827,7 +790,7 @@ Description:
 - Param: _newpos
 - Param: _transformAsWPos (optional, default false)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 456](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L456)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 450](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L450)
 ## noe_transform_direction
 
 Type: function
@@ -835,7 +798,7 @@ Type: function
 Description: 
 
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 461](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L461)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 455](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L455)
 ## noe_transform_vector
 
 Type: function
@@ -843,7 +806,7 @@ Type: function
 Description: 
 
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 465](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L465)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 459](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L459)
 ## noe_transform_all
 
 Type: function
@@ -851,7 +814,7 @@ Type: function
 Description: 
 
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 469](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L469)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 463](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L463)
 # NOEngine_ObjectRegisterModel.sqf
 
 ## noe_extended_log_reguister
