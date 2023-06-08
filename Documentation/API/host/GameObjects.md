@@ -470,6 +470,42 @@ Replaced value:
 3
 ```
 File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 19](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L19)
+## CE_STABLE
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"stable"       // Inaprovaline
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 23](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L23)
+## CE_ANTIBIOTIC
+
+Type: constant
+
+Description: Inaprovaline
+
+
+Replaced value:
+```sqf
+"antibiotic"   // Spaceacilin
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 24](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L24)
+## CE_BLOODRESTORE
+
+Type: constant
+
+Description: Spaceacilin
+
+
+Replaced value:
+```sqf
+"bloodrestore" // Iron/nutriment
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 25](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L25)
 ## CE_PAINKILLER
 
 Type: constant
@@ -482,6 +518,258 @@ Replaced value:
 "painkiller"
 ```
 File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 26](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L26)
+## CE_ALCOHOL
+
+Type: constant
+
+Description: Liver filtering
+
+
+Replaced value:
+```sqf
+"alcohol"      // Liver filtering
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 27](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L27)
+## CE_ALCOHOL_TOXIC
+
+Type: constant
+
+Description: Liver filtering
+
+
+Replaced value:
+```sqf
+"alcotoxic"    // Liver damage
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 28](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L28)
+## CE_SPEEDBOOST
+
+Type: constant
+
+Description: Liver damage
+
+
+Replaced value:
+```sqf
+"gofast"       // Hyperzine
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 29](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L29)
+## CE_SLOWDOWN
+
+Type: constant
+
+Description: Hyperzine
+
+
+Replaced value:
+```sqf
+"goslow"       // Slowdown
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 30](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L30)
+## CE_PULSE
+
+Type: constant
+
+Description: Slowdown
+
+
+Replaced value:
+```sqf
+"xcardic"      // increases or decreases heart rate
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 31](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L31)
+## CE_NOPULSE
+
+Type: constant
+
+Description: increases or decreases heart rate
+
+
+Replaced value:
+```sqf
+"heartstop"    // stops heartbeat
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 32](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L32)
+## CE_ANTITOX
+
+Type: constant
+
+Description: stops heartbeat
+
+
+Replaced value:
+```sqf
+"antitox"      // Dylovene
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 33](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L33)
+## CE_OXYGENATED
+
+Type: constant
+
+Description: Dylovene
+
+
+Replaced value:
+```sqf
+"oxygen"       // Dexalin.
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 34](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L34)
+## CE_BRAIN_REGEN
+
+Type: constant
+
+Description: Dexalin.
+
+
+Replaced value:
+```sqf
+"brainfix"     // Alkysine.
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 35](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L35)
+## CE_ANTIVIRAL
+
+Type: constant
+
+Description: Alkysine.
+
+
+Replaced value:
+```sqf
+"antiviral"    // Anti-virus effect.
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 36](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L36)
+## CE_TOXIN
+
+Type: constant
+
+Description: Anti-virus effect.
+
+
+Replaced value:
+```sqf
+"toxins"       // Generic toxins, stops autoheal.
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 37](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L37)
+## CE_BREATHLOSS
+
+Type: constant
+
+Description: Generic toxins, stops autoheal.
+
+
+Replaced value:
+```sqf
+"breathloss"   // Breathing depression, makes you need more air
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 38](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L38)
+## CE_MIND
+
+Type: constant
+
+Description: Breathing depression, makes you need more air
+
+
+Replaced value:
+```sqf
+"mindbending"  // Stabilizes or wrecks mind. Used for hallucinations
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 39](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L39)
+## CE_CRYO
+
+Type: constant
+
+Description: Stabilizes or wrecks mind. Used for hallucinations
+
+
+Replaced value:
+```sqf
+"cryogenic"    // Prevents damage from being frozen
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 40](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L40)
+## CE_BLOCKAGE
+
+Type: constant
+
+Description: Prevents damage from being frozen
+
+
+Replaced value:
+```sqf
+"blockage"     // Gets in the way of blood circulation, higher the worse
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 41](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L41)
+## CE_SQUEAKY
+
+Type: constant
+
+Description: Gets in the way of blood circulation, higher the worse
+
+
+Replaced value:
+```sqf
+"squeaky"      // Helium voice. Squeak squeak.
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 42](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L42)
+## CE_THIRDEYE
+
+Type: constant
+
+Description: Helium voice. Squeak squeak.
+
+
+Replaced value:
+```sqf
+"thirdeye"     // Gives xray vision.
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 43](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L43)
+## CE_SEDATE
+
+Type: constant
+
+Description: Gives xray vision.
+
+
+Replaced value:
+```sqf
+"sedate"       // Applies sedation effects, i.e. paralysis, inability to use items, etc.
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 44](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L44)
+## CE_ENERGETIC
+
+Type: constant
+
+Description: Applies sedation effects, i.e. paralysis, inability to use items, etc.
+
+
+Replaced value:
+```sqf
+"energetic"    // Speeds up stamina recovery.
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 45](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L45)
+## CE_VOICELOSS
+
+Type: constant
+
+Description: Speeds up stamina recovery.
+
+
+Replaced value:
+```sqf
+"whispers"     // Lowers the subject's voice to a whisper
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 46](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L46)
+## CE_STIMULANT
+
+Type: constant
+
+Description: Lowers the subject's voice to a whisper
+
+
+Replaced value:
+```sqf
+"stimulants"   // Makes it harder to disarm someone
+```
+File: [host\GameObjects\ConstantAndDefines\Chemistry.h at line 47](../../../Src/host/GameObjects/ConstantAndDefines/Chemistry.h#L47)
 # Cleanable.h
 
 ## GERM_COUNT_MAX
@@ -788,6 +1076,18 @@ Replaced value:
 0x60   /*  LEG_LEFT | LEG_RIGHT*/
 ```
 File: [host\GameObjects\ConstantAndDefines\item_clothing.h at line 17](../../../Src/host/GameObjects/ConstantAndDefines/item_clothing.h#L17)
+## FEET
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+0x180  // FOOT_LEFT | FOOT_RIGHT*/
+```
+File: [host\GameObjects\ConstantAndDefines\item_clothing.h at line 20](../../../Src/host/GameObjects/ConstantAndDefines/item_clothing.h#L20)
 ## ARM_LEFT
 
 Type: constant
@@ -824,6 +1124,18 @@ Replaced value:
 0x600 /*  ARM_LEFT | ARM_RIGHT*/
 ```
 File: [host\GameObjects\ConstantAndDefines\item_clothing.h at line 23](../../../Src/host/GameObjects/ConstantAndDefines/item_clothing.h#L23)
+## HANDS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+0x1800 // HAND_LEFT | HAND_RIGHT*/
+```
+File: [host\GameObjects\ConstantAndDefines\item_clothing.h at line 26](../../../Src/host/GameObjects/ConstantAndDefines/item_clothing.h#L26)
 ## GROIN
 
 Type: constant
@@ -2044,6 +2356,30 @@ Replaced value:
 0xFFFF
 ```
 File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 122](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L122)
+## DEFAULT_SLOW_COOLDOWN
+
+Type: constant
+
+Description: Click cooldown
+
+
+Replaced value:
+```sqf
+16 //The default cooldown for slow actions.*/
+```
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 127](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L127)
+## DEFAULT_ATTACK_COOLDOWN
+
+Type: constant
+
+Description: The default cooldown for slow actions.*/
+
+
+Replaced value:
+```sqf
+8 //Default timeout for aggressive actions*/
+```
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 128](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L128)
 ## DEFAULT_QUICK_COOLDOWN
 
 Type: constant

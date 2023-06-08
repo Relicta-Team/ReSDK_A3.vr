@@ -148,6 +148,18 @@ Replaced value:
 }; ["(OOP) Attribute '" + _oop_attr_last_name + "' loaded."] call logInfo;
 ```
 File: [host\OOP_engine\oop_attributes.sqf at line 22](../../../Src/host/OOP_engine/oop_attributes.sqf#L22)
+## rolesystem_internal_net_idx
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0 //internal var
+```
+File: [host\OOP_engine\oop_attributes.sqf at line 69](../../../Src/host/OOP_engine/oop_attributes.sqf#L69)
 ## name
 
 Type: function
@@ -234,6 +246,56 @@ Replaced value:
 this setName "%2"
 ```
 File: [host\OOP_engine\oop_init.sqf at line 56](../../../Src/host/OOP_engine/oop_init.sqf#L56)
+# oop_logging.sqf
+
+## oop_upd
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0 // all update methods
+```
+File: [host\OOP_engine\oop_logging.sqf at line 7](../../../Src/host/OOP_engine/oop_logging.sqf#L7)
+## oop_cao
+
+Type: Variable
+
+Description: all update methods
+
+
+Initial value:
+```sqf
+0 // count active objects
+```
+File: [host\OOP_engine\oop_logging.sqf at line 9](../../../Src/host/OOP_engine/oop_logging.sqf#L9)
+## oop_cco
+
+Type: Variable
+
+Description: count active objects
+
+
+Initial value:
+```sqf
+0 // count created objects
+```
+File: [host\OOP_engine\oop_logging.sqf at line 10](../../../Src/host/OOP_engine/oop_logging.sqf#L10)
+## oop_memuse
+
+Type: Variable
+
+Description: not used in engine
+
+
+Initial value:
+```sqf
+0 //bytes
+```
+File: [host\OOP_engine\oop_logging.sqf at line 13](../../../Src/host/OOP_engine/oop_logging.sqf#L13)
 # oop_object.sqf
 
 ## basic()

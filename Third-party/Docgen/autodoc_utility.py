@@ -122,7 +122,7 @@ def parse_sqf_functions(code):
                 multilineCom = True
             if "*/" in line:
                 multilineCom = False
-            if "//" in line:
+            if re.match(r"^[\s]*\/\/.*",line,re.DOTALL):
                 singleCom = True
 
             pat = re.search(rf"[ \t]*#define[ \t]+{macroname}", line, re.DOTALL)
@@ -197,7 +197,7 @@ def parse_sqf_functions(code):
             multilineCom = True
         if "*/" in line:
             multilineCom = False
-        if "//" in line:
+        if re.match(r"^[\s]*\/\/.*",line,re.DOTALL):
             singleCom = True
 
         if bracketLevel > 0:
@@ -212,8 +212,8 @@ def parse_sqf_functions(code):
             if multilineCom or singleCom or checkedName in checkedVars:
                 break
             varvalue = vardecl.group(2)
-            #if not varvalue.endswith(";"):
-            varvalue = (varvalue + "..." if not varvalue.endswith(";") else varvalue[:-1])
+            
+            varvalue = (varvalue + "..." if not ";" in varvalue else varvalue.replace(";",""))
             checkedVars.append(checkedName)
             #print(f"newvar {varname} {varvalue}")
             #sys.exit()
@@ -269,7 +269,7 @@ def parse_sqf_functions(code):
                     multilineCom = True
                 if "*/" in line:
                     multilineCom = False
-                if "//" in line:
+                if re.match(r"^[\s]*\/\/.*",line,re.DOTALL):
                     singleCom = True
 
                 checkedName = f"{function_name}@{i + 1}"

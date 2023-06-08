@@ -109,6 +109,32 @@ Description:
 - Param: _end
 
 File: [host\Tools\MoveToTargetDebugger.sqf at line 79](../../../Src/host/Tools/MoveToTargetDebugger.sqf#L79)
+# EditorDebug.sqf
+
+## editorDebug_isEnabled
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false //not working correctly (position wrong). need fix
+```
+File: [host\Tools\EditorDebug\EditorDebug.sqf at line 14](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L14)
+## editorDebug_handlerUpdate
+
+Type: Variable
+
+Description: not working correctly (position wrong). need fix
+
+
+Initial value:
+```sqf
+-1
+```
+File: [host\Tools\EditorDebug\EditorDebug.sqf at line 16](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L16)
 # EditorDebug_datahandler.sqf
 
 ## editorDebug_init
@@ -423,6 +449,42 @@ Initial value:
 ""
 ```
 File: [host\Tools\IconGenerator\IconGenerator.sqf at line 29](../../../Src/host/Tools/IconGenerator/IconGenerator.sqf#L29)
+## iconGen_outputInfo
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"" //non-code information
+```
+File: [host\Tools\IconGenerator\IconGenerator.sqf at line 30](../../../Src/host/Tools/IconGenerator/IconGenerator.sqf#L30)
+## iconGen_internal_typeTable
+
+Type: Variable
+
+Description: non-code information
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\Tools\IconGenerator\IconGenerator.sqf at line 32](../../../Src/host/Tools/IconGenerator/IconGenerator.sqf#L32)
+## iconGen_internal_isError
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [host\Tools\IconGenerator\IconGenerator.sqf at line 33](../../../Src/host/Tools/IconGenerator/IconGenerator.sqf#L33)
 ## iconGenerator_start
 
 Type: function

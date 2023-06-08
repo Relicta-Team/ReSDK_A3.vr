@@ -153,6 +153,30 @@ Initial value:
 0
 ```
 File: [client\InputSystem\inputHelper.sqf at line 19](../../../Src/client/InputSystem/inputHelper.sqf#L19)
+## inputHelper_isSuccessCurrentTask
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false //системная переменная для выполнения внутренней задачи
+```
+File: [client\InputSystem\inputHelper.sqf at line 21](../../../Src/client/InputSystem/inputHelper.sqf#L21)
+## inputHelper_basicTask
+
+Type: Variable
+
+Description: Базовые задачи это первый вход
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\InputSystem\inputHelper.sqf at line 24](../../../Src/client/InputSystem/inputHelper.sqf#L24)
 ## inputHelper_init
 
 Type: function

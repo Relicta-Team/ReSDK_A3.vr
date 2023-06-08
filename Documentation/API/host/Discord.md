@@ -12,6 +12,78 @@ Initial value:
 true
 ```
 File: [host\Discord\Accounts.sqf at line 9](../../../Src/host/Discord/Accounts.sqf#L9)
+## dsm_accounts_mapRegister
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //карта регистрации. ключи - токены, значения - данные для регистрации
+```
+File: [host\Discord\Accounts.sqf at line 15](../../../Src/host/Discord/Accounts.sqf#L15)
+## dsm_accounts_userRequester
+
+Type: Variable
+
+Description: карта регистрации. ключи - токены, значения - данные для регистрации
+
+
+Initial value:
+```sqf
+createHashMap //карта юзеров. защита от дублей токенов
+```
+File: [host\Discord\Accounts.sqf at line 16](../../../Src/host/Discord/Accounts.sqf#L16)
+## dsm_accounts_nickRequester
+
+Type: Variable
+
+Description: карта юзеров. защита от дублей токенов
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\Discord\Accounts.sqf at line 17](../../../Src/host/Discord/Accounts.sqf#L17)
+## dsm_accounts_tokenLifetime
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+60 * 5
+```
+File: [host\Discord\Accounts.sqf at line 19](../../../Src/host/Discord/Accounts.sqf#L19)
+## dsm_accounts_arriveInCityCountNeed
+
+Type: Variable
+
+Description: сколько раз нужно зарегаться в городе, чтобы получить роль форсеки
+
+
+Initial value:
+```sqf
+5
+```
+File: [host\Discord\Accounts.sqf at line 22](../../../Src/host/Discord/Accounts.sqf#L22)
+## dsm_accounts_list_arriveSessionUnique
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\Discord\Accounts.sqf at line 134](../../../Src/host/Discord/Accounts.sqf#L134)
 ## dsm_accounts_canUse
 
 Type: function
@@ -211,6 +283,44 @@ Initial value:
 "Logger"
 ```
 File: [host\Discord\Discord.sqf at line 31](../../../Src/host/Discord/Discord.sqf#L31)
+## disc_icon_logger
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"https://flammlin.com/wp-content/uploads/2020/03/logfile_file.png"
+```
+File: [host\Discord\Discord.sqf at line 32](../../../Src/host/Discord/Discord.sqf#L32)
+## disc_icon_serverNotif
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"https://cdn.discordapp.com/emojis/467665814540124170.png?v=1"
+```
+File: [host\Discord\Discord.sqf at line 40](../../../Src/host/Discord/Discord.sqf#L40)
+## disc_handle_update
+
+Type: Variable
+
+> Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+startUpdate(disc_onUpdate,DISCORD_UPDATE_DELAY)
+```
+File: [host\Discord\Discord.sqf at line 71](../../../Src/host/Discord/Discord.sqf#L71)
 ## disc_onUpdate
 
 Type: function

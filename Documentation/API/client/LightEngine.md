@@ -1119,6 +1119,42 @@ Replaced value:
 File: [client\LightEngine\LightEngine.hpp at line 61](../../../Src/client/LightEngine/LightEngine.hpp#L61)
 # LightEngine.sqf
 
+## le_simulated
+
+Type: Variable
+
+Description: Нужно выяснить какое существо самое лучшее в плане атачинга при первом создании
+
+
+Initial value:
+```sqf
+clientMob//"B_Soldier_F" createVehicleLocal [0,0,0]
+```
+File: [client\LightEngine\LightEngine.sqf at line 31](../../../Src/client/LightEngine/LightEngine.sqf#L31)
+## le_allChunkTypes
+
+Type: Variable
+
+Description: le_localGlsData = nullPtr;
+
+
+Initial value:
+```sqf
+[CHUNK_TYPE_ITEM,CHUNK_TYPE_STRUCTURE,CHUNK_TYPE_DECOR]
+```
+File: [client\LightEngine\LightEngine.sqf at line 38](../../../Src/client/LightEngine/LightEngine.sqf#L38)
+## le_allLights
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[] //all light points
+```
+File: [client\LightEngine\LightEngine.sqf at line 40](../../../Src/client/LightEngine/LightEngine.sqf#L40)
 ## le_loadLight
 
 Type: function

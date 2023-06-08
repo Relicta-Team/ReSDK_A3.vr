@@ -257,3 +257,29 @@ Initial value:
 -1
 ```
 File: [client\StaminaControl\Stamina_init.sqf at line 16](../../../Src/client/StaminaControl/Stamina_init.sqf#L16)
+## stamina_lastFullTime
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1 //отметка времени последнего полного заполнения стамины
+```
+File: [client\StaminaControl\Stamina_init.sqf at line 17](../../../Src/client/StaminaControl/Stamina_init.sqf#L17)
+## ison
+
+Type: Variable
+
+> Exists if **stamina_debug** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+true
+```
+File: [client\StaminaControl\Stamina_init.sqf at line 24](../../../Src/client/StaminaControl/Stamina_init.sqf#L24)

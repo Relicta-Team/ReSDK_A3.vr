@@ -127,6 +127,42 @@ Replaced value:
 
 ```
 File: [host\Curl\CurlThread.sqf at line 19](../../../Src/host/Curl/CurlThread.sqf#L19)
+## curl_query
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[] // очередь запроса
+```
+File: [host\Curl\CurlThread.sqf at line 23](../../../Src/host/Curl/CurlThread.sqf#L23)
+## curl_isAwait
+
+Type: Variable
+
+Description: очередь запроса
+
+
+Initial value:
+```sqf
+false//идёт ли ожидание на получение сообщения
+```
+File: [host\Curl\CurlThread.sqf at line 24](../../../Src/host/Curl/CurlThread.sqf#L24)
+## curl_asyncAwaitData
+
+Type: Variable
+
+Description: идёт ли ожидание на получение сообщения
+
+
+Initial value:
+```sqf
+[] //то что будет вызывано когда ответ будет получен
+```
+File: [host\Curl\CurlThread.sqf at line 25](../../../Src/host/Curl/CurlThread.sqf#L25)
 ## curl_addRequest
 
 Type: function

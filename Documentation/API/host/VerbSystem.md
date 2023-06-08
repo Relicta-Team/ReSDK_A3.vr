@@ -109,6 +109,18 @@ Description:
 File: [host\VerbSystem\loadBeforeOOPInit.sqf at line 18](../../../Src/host/VerbSystem/loadBeforeOOPInit.sqf#L18)
 # verbs.sqf
 
+## verbs_funcData
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //only before init verbsCondAndAct.sqf
+```
+File: [host\VerbSystem\verbs.sqf at line 15](../../../Src/host/VerbSystem/verbs.sqf#L15)
 ## verb_act_undefinded
 
 Type: function

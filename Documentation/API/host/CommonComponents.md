@@ -120,6 +120,126 @@ Replaced value:
 4
 ```
 File: [host\CommonComponents\!PreInit.sqf at line 182](../../../Src/host/CommonComponents/!PreInit.sqf#L182)
+## cprint_usestdout
+
+Type: Variable
+
+Description: console helpers
+
+
+Initial value:
+```sqf
+true //flag for standart console output
+```
+File: [host\CommonComponents\!PreInit.sqf at line 32](../../../Src/host/CommonComponents/!PreInit.sqf#L32)
+## cprint_isserver
+
+Type: Variable
+
+Description: flag for standart console output
+
+
+Initial value:
+```sqf
+isMultiplayer && isServer
+```
+File: [host\CommonComponents\!PreInit.sqf at line 33](../../../Src/host/CommonComponents/!PreInit.sqf#L33)
+## allThreads
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[] //init thread pool
+```
+File: [host\CommonComponents\!PreInit.sqf at line 107](../../../Src/host/CommonComponents/!PreInit.sqf#L107)
+## hashMapNull
+
+Type: Variable
+
+Description: init thread pool
+
+
+Initial value:
+```sqf
+createHashMapFromArray [["__NULL_HASH_MAP__","__NULL_HASH_MAP__"]]
+```
+File: [host\CommonComponents\!PreInit.sqf at line 108](../../../Src/host/CommonComponents/!PreInit.sqf#L108)
+## table_hex
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"0123456789abcdef"splitString stringEmpty
+```
+File: [host\CommonComponents\!PreInit.sqf at line 110](../../../Src/host/CommonComponents/!PreInit.sqf#L110)
+## ptr_i_mctr
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+1//internal memory counter
+```
+File: [host\CommonComponents\!PreInit.sqf at line 179](../../../Src/host/CommonComponents/!PreInit.sqf#L179)
+## ptr_i_al
+
+Type: Variable
+
+Description: internal memory counter
+
+
+Initial value:
+```sqf
+0 //allocated before realoc ( not used now...)
+```
+File: [host\CommonComponents\!PreInit.sqf at line 180](../../../Src/host/CommonComponents/!PreInit.sqf#L180)
+## ptr_cnl
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+__ptr_struct_internal__(str ptr_i_mctr,0) //null pointer
+```
+File: [host\CommonComponents\!PreInit.sqf at line 183](../../../Src/host/CommonComponents/!PreInit.sqf#L183)
+## ptr_htable
+
+Type: Variable
+
+Description: null pointer
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CommonComponents\!PreInit.sqf at line 184](../../../Src/host/CommonComponents/!PreInit.sqf#L184)
+## ptr_i_hex__
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"0123456789abcdef"splitString stringEmpty
+```
+File: [host\CommonComponents\!PreInit.sqf at line 202](../../../Src/host/CommonComponents/!PreInit.sqf#L202)
 ## cprint
 
 Type: function
@@ -302,7 +422,7 @@ Description:
 
 Initial value:
 ```sqf
-createHashMap; ...
+createHashMap 
 ```
 File: [host\CommonComponents\Animator.sqf at line 10](../../../Src/host/CommonComponents/Animator.sqf#L10)
 ## anim_assocList_keyInt

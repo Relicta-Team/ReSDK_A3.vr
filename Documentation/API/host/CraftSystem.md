@@ -310,6 +310,54 @@ Initial value:
 0
 ```
 File: [host\CraftSystem\Craft_initData.sqf at line 13](../../../Src/host/CraftSystem/Craft_initData.sqf#L13)
+## craft_data_categories
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //value is array
+```
+File: [host\CraftSystem\Craft_initData.sqf at line 17](../../../Src/host/CraftSystem/Craft_initData.sqf#L17)
+## craft_data_allRecipes
+
+Type: Variable
+
+Description: value is array
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CraftSystem\Craft_initData.sqf at line 18](../../../Src/host/CraftSystem/Craft_initData.sqf#L18)
+## craft_data_catIndexes
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+CRAFT_CATEGORY_LIST_ALL apply ...
+```
+File: [host\CraftSystem\Craft_initData.sqf at line 20](../../../Src/host/CraftSystem/Craft_initData.sqf#L20)
+## craft_internal_client_mapRecipes
+
+Type: Variable
+
+Description: [5001,"Бибки",["Тесто","Яичко"],""] call craft_newRecipe;
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CraftSystem\Craft_initData.sqf at line 68](../../../Src/host/CraftSystem/Craft_initData.sqf#L68)
 ## craft_data_getRecipes
 
 Type: function

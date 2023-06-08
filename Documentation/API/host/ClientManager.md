@@ -182,6 +182,18 @@ Initial value:
 addMissionEventHandler ["PlayerConnected",_event_onClientConnected]
 ```
 File: [host\ClientManager\ClientManager.sqf at line 44](../../../Src/host/ClientManager/ClientManager.sqf#L44)
+## client_handler_onDisconnect
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+addMissionEventHandler ["PlayerDisconnected",_event_onClientDisconnected] //HandleDisconnect - не удовлетворяет требованиям
+```
+File: [host\ClientManager\ClientManager.sqf at line 45](../../../Src/host/ClientManager/ClientManager.sqf#L45)
 # CommandsExec.sqf
 
 ## PUBLIC_COMMAND
@@ -418,6 +430,150 @@ Initial value:
 []
 ```
 File: [host\ClientManager\functions.sqf at line 15](../../../Src/host/ClientManager/functions.sqf#L15)
+## cm_allClients
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[] //список зарегистрированных объектов клиентов
+```
+File: [host\ClientManager\functions.sqf at line 17](../../../Src/host/ClientManager/functions.sqf#L17)
+## cm_disconnectedClients
+
+Type: Variable
+
+Description: список зарегистрированных объектов клиентов
+
+
+Initial value:
+```sqf
+hashMapNew //список дисконнектнутых клиентов. Отсюда берутся все jip-ам
+```
+File: [host\ClientManager\functions.sqf at line 18](../../../Src/host/ClientManager/functions.sqf#L18)
+## cm_allInGameMobs
+
+Type: Variable
+
+Description: список дисконнектнутых клиентов. Отсюда берутся все jip-ам
+
+
+Initial value:
+```sqf
+[] //список всех мобов в игре. Этот массив требуется в основном потоке обработчика карты
+```
+File: [host\ClientManager\functions.sqf at line 19](../../../Src/host/ClientManager/functions.sqf#L19)
+## cm_allAwaitMobs
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+allUnits //список нераспределённых мобов
+```
+File: [host\ClientManager\functions.sqf at line 21](../../../Src/host/ClientManager/functions.sqf#L21)
+## cm_maxClients
+
+Type: Variable
+
+Description: список нераспределённых мобов
+
+
+Initial value:
+```sqf
+0 //сколько максимально клиентов подключалось
+```
+File: [host\ClientManager\functions.sqf at line 23](../../../Src/host/ClientManager/functions.sqf#L23)
+## cm_owners
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+["76561198094364528"] //me
+```
+File: [host\ClientManager\functions.sqf at line 33](../../../Src/host/ClientManager/functions.sqf#L33)
+## cm_admins
+
+Type: Variable
+
+Description: админы           пони					румын
+
+
+Initial value:
+```sqf
+["76561198057042311","76561197994426107"]
+```
+File: [host\ClientManager\functions.sqf at line 36](../../../Src/host/ClientManager/functions.sqf#L36)
+## cm_forsakens
+
+Type: Variable
+
+Description: игроки              квадрат              krakatuk          борзый             ходовой
+
+
+Initial value:
+```sqf
+["76561198096453655","76561198072294284","76561198156220735","76561198156220735",...
+```
+File: [host\ClientManager\functions.sqf at line 39](../../../Src/host/ClientManager/functions.sqf#L39)
+## cm_accessMap
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ClientManager\functions.sqf at line 109](../../../Src/host/ClientManager/functions.sqf#L109)
+## cm_accessMap_inverted
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ClientManager\functions.sqf at line 110](../../../Src/host/ClientManager/functions.sqf#L110)
+## cm_map_nickColor
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ClientManager\functions.sqf at line 114](../../../Src/host/ClientManager/functions.sqf#L114)
+## cm_map_messagesColor
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ClientManager\functions.sqf at line 115](../../../Src/host/ClientManager/functions.sqf#L115)
 ## by_func
 
 Type: function

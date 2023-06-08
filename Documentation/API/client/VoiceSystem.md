@@ -1991,6 +1991,30 @@ Replaced value:
 (obj getvariable '__radio_##var')
 ```
 File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 926](../../../Src/client/VoiceSystem/VoiceSystem_publicInterface.sqf#L926)
+## vs_canProcess
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+true //при выключенном режиме процессинг радио не будет происходить
+```
+File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 26](../../../Src/client/VoiceSystem/VoiceSystem_publicInterface.sqf#L26)
+## vs_intercom_maxdist
+
+Type: Variable
+
+Description: при выключенном режиме процессинг радио не будет происходить
+
+
+Initial value:
+```sqf
+VS_INTERCOM_MAXDISTANCE_TRANSMITH
+```
+File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 28](../../../Src/client/VoiceSystem/VoiceSystem_publicInterface.sqf#L28)
 ## vs_init
 
 Type: function
@@ -2203,6 +2227,66 @@ Initial value:
 1000
 ```
 File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 11](../../../Src/client/VoiceSystem/VoiceSystem_Transmith.sqf#L11)
+## vs_curTransmithType
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0 //режим передачи
+```
+File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 13](../../../Src/client/VoiceSystem/VoiceSystem_Transmith.sqf#L13)
+## vs_transmithTypes
+
+Type: Variable
+
+Description: режим передачи
+
+
+Initial value:
+```sqf
+["digital","digital_lr","airborne"]
+```
+File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 14](../../../Src/client/VoiceSystem/VoiceSystem_Transmith.sqf#L14)
+## vs_hasTransmithProcess
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 65](../../../Src/client/VoiceSystem/VoiceSystem_Transmith.sqf#L65)
+## vs_lastTransmithInfo
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+VS_TRANSMITHINFO_DEFAULT //object and radiocode
+```
+File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 66](../../../Src/client/VoiceSystem/VoiceSystem_Transmith.sqf#L66)
+## vs_processingRadiosList
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[] //какие радио слышит клиент из ушей
+```
+File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 142](../../../Src/client/VoiceSystem/VoiceSystem_Transmith.sqf#L142)
 ## vs_startTransmith
 
 Type: function

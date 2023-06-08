@@ -1368,6 +1368,30 @@ Replaced value:
 if (_hitZone in [vals]) exitWith {ret}
 ```
 File: [host\CombatSystem\Functions.sqf at line 177](../../../Src/host/CombatSystem/Functions.sqf#L177)
+## gurps_internal_tzn
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+hashMapNewArgs [ //reference type...
+```
+File: [host\CombatSystem\Functions.sqf at line 8](../../../Src/host/CombatSystem/Functions.sqf#L8)
+## gurps_internal_tzToSel
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+hashMapNewArgs [ //reference type...
+```
+File: [host\CombatSystem\Functions.sqf at line 64](../../../Src/host/CombatSystem/Functions.sqf#L64)
 ## gurps_pickThrowingZone
 
 Type: function

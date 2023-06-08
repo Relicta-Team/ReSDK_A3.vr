@@ -718,6 +718,150 @@ Initial value:
 false
 ```
 File: [client\Lobby\lobbi_init.sqf at line 28](../../../Src/client/Lobby/lobbi_init.sqf#L28)
+## lobby_openedCharSetWidList
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[] //этот лист для виджетов в режиме открытого меню конкрентной настройки
+```
+File: [client\Lobby\lobbi_init.sqf at line 29](../../../Src/client/Lobby/lobbi_init.sqf#L29)
+## lobby_backgroundWidget
+
+Type: Variable
+
+Description: этот лист для виджетов в режиме открытого меню конкрентной настройки
+
+
+Initial value:
+```sqf
+[widgetNull]
+```
+File: [client\Lobby\lobbi_init.sqf at line 31](../../../Src/client/Lobby/lobbi_init.sqf#L31)
+## lobby_background_local
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+PATH_PICTURE("lobby\black.paa")
+```
+File: [client\Lobby\lobbi_init.sqf at line 39](../../../Src/client/Lobby/lobbi_init.sqf#L39)
+## lobby_listResizingName
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Lobby\lobbi_init.sqf at line 41](../../../Src/client/Lobby/lobbi_init.sqf#L41)
+## lobby_charData
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createLocation ["cba_namespacedummy",[100,100,100],0,0]
+```
+File: [client\Lobby\lobbi_init.sqf at line 43](../../../Src/client/Lobby/lobbi_init.sqf#L43)
+## lobby_roleList
+
+Type: Variable
+
+Description: net variables
+
+
+Initial value:
+```sqf
+[] //Содержит список ролей с описанием, названием и айди
+```
+File: [client\Lobby\lobbi_init.sqf at line 46](../../../Src/client/Lobby/lobbi_init.sqf#L46)
+## lobby_timeLeft
+
+Type: Variable
+
+Description: lobby_handleMainThread = -1;
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\Lobby\lobbi_init.sqf at line 49](../../../Src/client/Lobby/lobbi_init.sqf#L49)
+## lobby_RoleContenders
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Lobby\lobbi_init.sqf at line 50](../../../Src/client/Lobby/lobbi_init.sqf#L50)
+## lobby_isReadyToPlay
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false //готовность к игре в лобби до начала раунда
+```
+File: [client\Lobby\lobbi_init.sqf at line 51](../../../Src/client/Lobby/lobbi_init.sqf#L51)
+## lobby_isSelectedEmbarkRole
+
+Type: Variable
+
+Description: готовность к игре в лобби до начала раунда
+
+
+Initial value:
+```sqf
+false //выбранная роль эмбарковая (только во время прогресса раунда)
+```
+File: [client\Lobby\lobbi_init.sqf at line 52](../../../Src/client/Lobby/lobbi_init.sqf#L52)
+## lobby_faithDesc_map
+
+Type: Variable
+
+Description: выбранная роль эмбарковая (только во время прогресса раунда)
+
+
+Initial value:
+```sqf
+createHashMap //клиентские описания вероисповеданий
+```
+File: [client\Lobby\lobbi_init.sqf at line 54](../../../Src/client/Lobby/lobbi_init.sqf#L54)
+## lobby_loading_allHints
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\Lobby\lobbi_init.sqf at line 73](../../../Src/client/Lobby/lobbi_init.sqf#L73)
 # lobby.hpp
 
 ## FAST_INIT_LOBBY
@@ -1413,6 +1557,114 @@ Initial value:
 "system"
 ```
 File: [client\Lobby\SystemSettings.sqf at line 17](../../../Src/client/Lobby/SystemSettings.sqf#L17)
+## lobby_sys_maxCatPerList
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+4 //сколько элементов грузится
+```
+File: [client\Lobby\SystemSettings.sqf at line 18](../../../Src/client/Lobby/SystemSettings.sqf#L18)
+## lobby_sys_curCatList
+
+Type: Variable
+
+Description: сколько элементов грузится
+
+
+Initial value:
+```sqf
+0 //индекс начала
+```
+File: [client\Lobby\SystemSettings.sqf at line 19](../../../Src/client/Lobby/SystemSettings.sqf#L19)
+## lobby_sys_buttonActions
+
+Type: Variable
+
+Description: индекс начала
+
+
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
+File: [client\Lobby\SystemSettings.sqf at line 20](../../../Src/client/Lobby/SystemSettings.sqf#L20)
+## lobby_sys_buttonActions_sortedList
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+["system","endgame","server","admin"]
+```
+File: [client\Lobby\SystemSettings.sqf at line 44](../../../Src/client/Lobby/SystemSettings.sqf#L44)
+## lobby_sys_buttonActions_sortedListName
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[["Система","55780E"],["Конец раунда","55780E"],["Сервер","C4AD68"],["Админ","8F3140"]]
+```
+File: [client\Lobby\SystemSettings.sqf at line 45](../../../Src/client/Lobby/SystemSettings.sqf#L45)
+## lobby_sys_isActive
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Lobby\SystemSettings.sqf at line 187](../../../Src/client/Lobby/SystemSettings.sqf#L187)
+## lobby_sys_bc_widgets
+
+Type: Variable
+
+Description: isnide event calling
+
+
+Initial value:
+```sqf
+[widgetNull,widgetNull] //виджеты контрольных групп
+```
+File: [client\Lobby\SystemSettings.sqf at line 260](../../../Src/client/Lobby/SystemSettings.sqf#L260)
+## lobby_sys_bc_slots
+
+Type: Variable
+
+Description: виджеты контрольных групп
+
+
+Initial value:
+```sqf
+[] //виджеты слотов персонажей
+```
+File: [client\Lobby\SystemSettings.sqf at line 261](../../../Src/client/Lobby/SystemSettings.sqf#L261)
+## lobby_sys_bc_isAskingData
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Lobby\SystemSettings.sqf at line 263](../../../Src/client/Lobby/SystemSettings.sqf#L263)
 ## lobby_sysLoadMenu
 
 Type: function

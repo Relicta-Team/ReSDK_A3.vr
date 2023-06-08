@@ -111,6 +111,234 @@ Initial value:
 ["СЛ","ИН","ЛВ","ЗД","ВНС","ВОЛЯ","ВОС","ЖЗ"]
 ```
 File: [client\ClientData\ClientData.sqf at line 42](../../../Src/client/ClientData/ClientData.sqf#L42)
+## cd_skills
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[sk_nan,sk_nan,sk_nan,sk_nan,sk_nan,sk_nan,sk_nan,sk_nan] //массив со скиллами
+```
+File: [client\ClientData\ClientData.sqf at line 43](../../../Src/client/ClientData/ClientData.sqf#L43)
+## cd_stamina_cur
+
+Type: Variable
+
+Description: stamina vars
+
+
+Initial value:
+```sqf
+100
+```
+File: [client\ClientData\ClientData.sqf at line 46](../../../Src/client/ClientData/ClientData.sqf#L46)
+## cd_stamina_max
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+100
+```
+File: [client\ClientData\ClientData.sqf at line 47](../../../Src/client/ClientData/ClientData.sqf#L47)
+## cd_curSelection
+
+Type: Variable
+
+Description: текущая зона взаимодействия
+
+
+Initial value:
+```sqf
+TARGET_ZONE_TORSO
+```
+File: [client\ClientData\ClientData.sqf at line 77](../../../Src/client/ClientData/ClientData.sqf#L77)
+## cd_specialAction
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+SPECIAL_ACTION_NO
+```
+File: [client\ClientData\ClientData.sqf at line 78](../../../Src/client/ClientData/ClientData.sqf#L78)
+## cd_curDefType
+
+Type: Variable
+
+Description: комбат штуки
+
+
+Initial value:
+```sqf
+DEF_TYPE_DODGE
+```
+File: [client\ClientData\ClientData.sqf at line 81](../../../Src/client/ClientData/ClientData.sqf#L81)
+## cd_curCombatStyle
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+COMBAT_STYLE_ATTACK
+```
+File: [client\ClientData\ClientData.sqf at line 82](../../../Src/client/ClientData/ClientData.sqf#L82)
+## cd_curAttackType
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+ATTACK_TYPE_THRUST
+```
+File: [client\ClientData\ClientData.sqf at line 83](../../../Src/client/ClientData/ClientData.sqf#L83)
+## cd_activeHand
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+INV_HAND_L
+```
+File: [client\ClientData\ClientData.sqf at line 85](../../../Src/client/ClientData/ClientData.sqf#L85)
+## cd_lca_r
+
+Type: Variable
+
+Description: last combat action colorizer
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\ClientData\ClientData.sqf at line 87](../../../Src/client/ClientData/ClientData.sqf#L87)
+## cd_lca_l
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\ClientData\ClientData.sqf at line 88](../../../Src/client/ClientData/ClientData.sqf#L88)
+## cd_cameraSetting
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+CAMERA_MODE_ARCADE
+```
+File: [client\ClientData\ClientData.sqf at line 90](../../../Src/client/ClientData/ClientData.sqf#L90)
+## cd_videoSettings
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+VIDEO_SETTINGS_MAX //пользовательские настройки графики
+```
+File: [client\ClientData\ClientData.sqf at line 93](../../../Src/client/ClientData/ClientData.sqf#L93)
+## cd_internal_lastTPPos
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+vec3(0,0,0)
+```
+File: [client\ClientData\ClientData.sqf at line 213](../../../Src/client/ClientData/ClientData.sqf#L213)
+## cd_internal_lastTPDir
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+null
+```
+File: [client\ClientData\ClientData.sqf at line 214](../../../Src/client/ClientData/ClientData.sqf#L214)
+## cd_internal_tpHandle
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\ClientData\ClientData.sqf at line 215](../../../Src/client/ClientData/ClientData.sqf#L215)
+## cd_internal_hasTPError
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\ClientData\ClientData.sqf at line 216](../../../Src/client/ClientData/ClientData.sqf#L216)
+## cd_internal_lastTPObj
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+objnull
+```
+File: [client\ClientData\ClientData.sqf at line 217](../../../Src/client/ClientData/ClientData.sqf#L217)
+## cd_internal_startLoadTime
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\ClientData\ClientData.sqf at line 218](../../../Src/client/ClientData/ClientData.sqf#L218)
 ## cd_setVideoSettings
 
 Type: function
@@ -150,6 +378,30 @@ Replaced value:
 0.1
 ```
 File: [client\ClientData\ClientDataUnconscious.sqf at line 14](../../../Src/client/ClientData/ClientDataUnconscious.sqf#L14)
+## cd_isUnconscious
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false //в бессознанке
+```
+File: [client\ClientData\ClientDataUnconscious.sqf at line 16](../../../Src/client/ClientData/ClientDataUnconscious.sqf#L16)
+## cd_internal_uncState
+
+Type: Variable
+
+Description: в бессознанке
+
+
+Initial value:
+```sqf
+false //внутрення переменная перехода состояния
+```
+File: [client\ClientData\ClientDataUnconscious.sqf at line 17](../../../Src/client/ClientData/ClientDataUnconscious.sqf#L17)
 ## cd_onUnconsciousEvent
 
 Type: function
@@ -1244,6 +1496,18 @@ Replaced value:
 if equals('str',_changeStateReason) exitWith {action}
 ```
 File: [client\ClientData\EyeHandler.sqf at line 23](../../../Src/client/ClientData/EyeHandler.sqf#L23)
+## cd_eyeState
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+1 // 0 - ok > 0 - closed
+```
+File: [client\ClientData\EyeHandler.sqf at line 8](../../../Src/client/ClientData/EyeHandler.sqf#L8)
 ## cd_isEyesClosed
 
 Type: function

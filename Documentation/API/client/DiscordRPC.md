@@ -75,6 +75,30 @@ Replaced value:
 File: [client\DiscordRPC\DiscordRPC.h at line 19](../../../Src/client/DiscordRPC/DiscordRPC.h#L19)
 # DiscordRPC_init.sqf
 
+## discrpc_list_ruLetters
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //в кодировке 1251
+```
+File: [client\DiscordRPC\DiscordRPC_init.sqf at line 14](../../../Src/client/DiscordRPC/DiscordRPC_init.sqf#L14)
+## discrpc_allowedTaskTypes
+
+Type: Variable
+
+Description: допустимые ключи для расширения
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\DiscordRPC\DiscordRPC_init.sqf at line 19](../../../Src/client/DiscordRPC/DiscordRPC_init.sqf#L19)
 ## discrpc_send
 
 Type: function

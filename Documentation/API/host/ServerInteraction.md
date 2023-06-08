@@ -127,6 +127,44 @@ Initial value:
 "Sign_Sphere10cm_F" createVehicleLocal[0,0,0]
 ```
 File: [host\ServerInteraction\ServerInteractionInit.sqf at line 69](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L69)
+## si_throwTasks
+
+Type: Variable
+
+Description: Список задач летящих объектов
+
+
+Initial value:
+```sqf
+[] //obj, vecpos, vecdir, dist, precdown, downlevel, speed
+```
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 237](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L237)
+## si_debug_listVectors
+
+Type: Variable
+
+> Exists if **SI_THROW_DEBUG** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 244](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L244)
+## si_throwModes
+
+Type: Variable
+
+Description: список алгоритмов полета объектов. каждый элемент - структура из 2 сегментов кода
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 581](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L581)
 ## si_throwingProcess
 
 Type: function

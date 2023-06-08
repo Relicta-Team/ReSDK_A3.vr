@@ -12,6 +12,42 @@ Replaced value:
 1000
 ```
 File: [host\ServerVoice\ServerVoice_init.sqf at line 90](../../../Src/host/ServerVoice/ServerVoice_init.sqf#L90)
+## vsm_map_freqAndCode
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //карта ассоциаций кода и частоты
+```
+File: [host\ServerVoice\ServerVoice_init.sqf at line 8](../../../Src/host/ServerVoice/ServerVoice_init.sqf#L8)
+## vsm_map_inverted
+
+Type: Variable
+
+Description: карта ассоциаций кода и частоты
+
+
+Initial value:
+```sqf
+createHashMap //инвертированная карта
+```
+File: [host\ServerVoice\ServerVoice_init.sqf at line 9](../../../Src/host/ServerVoice/ServerVoice_init.sqf#L9)
+## vsm_counter
+
+Type: Variable
+
+Description: инвертированная карта
+
+
+Initial value:
+```sqf
+1 //для ассоциаций. является value в FCData и key в inverted. Не должно быть меньше нуля
+```
+File: [host\ServerVoice\ServerVoice_init.sqf at line 10](../../../Src/host/ServerVoice/ServerVoice_init.sqf#L10)
 ## vsm_registerFCData
 
 Type: function

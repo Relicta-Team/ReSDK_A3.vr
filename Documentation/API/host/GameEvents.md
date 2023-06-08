@@ -24,6 +24,18 @@ Initial value:
 []
 ```
 File: [host\GameEvents\loader.hpp at line 15](../../../Src/host/GameEvents/loader.hpp#L15)
+## gameEvents_internal_map_createdEvents
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //key(string) classname, value(int) count 
+```
+File: [host\GameEvents\loader.hpp at line 16](../../../Src/host/GameEvents/loader.hpp#L16)
 ## gameEvents_sys_getAllEventTypes
 
 Type: function
