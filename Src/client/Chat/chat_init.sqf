@@ -20,21 +20,30 @@ _textfield = [_ui,TEXT,[0,0,100,100],_ctg] call createWidget;
 
 _background setBackgroundColor [0,0,0,0.5];
 
-//											chat history field
+//Ссылки на основные виджеты чата
 chat_widgets = [_ctg,_background,_textfield,widgetNull];
 
+// Буффер сообщений
 chat_messages_data = [];
+// Максимальное количество сообщений в буфере/истории
 chat_maxmessages = 100;
 
+// Размер истории чата (ширина)
 chat_size_x = 35;
+// Размер истории чата (высота)
 chat_size_y = 20;
 
+// Открыта ли история чата
 chat_isHistoryOpen = false;
-
+// Включено ли автоматическое скрытие чата
 chat_isHideEnabled = true;
+	// Время автоматического скрытия
 	chat_hideAfter = 3;
+	// Был ли чат полностью скрыт
 	chat_isFullHidden = false;
+	// Внутреннее значение при расчете прозрачности во время скрытия
 	chat_hideValue = 0;
+	// Время последнего скрытия
 	chat_hideTimestamp = -1;
 
 #include "functions.sqf"

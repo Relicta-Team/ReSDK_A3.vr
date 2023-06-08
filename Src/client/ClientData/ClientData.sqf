@@ -372,6 +372,8 @@ _authproc = {
 	call cd_openAuth;
 }; rpcAdd("authproc",_authproc);
 
+
+// Открытие окна регистрации клиента
 cd_openAuth = {
 	private _d = call displayOpen;
 	private _back = [_d,BACKGROUND,[0,0,100,100]] call createWidget;

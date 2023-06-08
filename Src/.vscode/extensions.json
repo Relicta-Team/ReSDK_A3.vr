@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "yodes.resdk-vscode"
+        "yodes.resdk-vscode",
+        "codeium.codeium"
     ]
 }

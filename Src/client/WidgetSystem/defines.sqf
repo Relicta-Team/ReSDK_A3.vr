@@ -8,7 +8,7 @@
 #include "widgets.hpp"
 
 
-
+// Создать виджет типа закрывающая дисплей кнопка
 createWidget_closeButton = {
 	params ["_display",["_text","Закрыть"],"_pos","_parent"];
 
@@ -27,8 +27,10 @@ createWidget_closeButton = {
 	_closeButton
 };
 
+// Размер верхней части окна (драг-зоны)
 #define HEIGHT_WINDOW_DRAGGER 3
 
+// Создать виджет типа окно
 createWidget_window = {
 	params ["_display","_type","_pos","_parent"];
 
@@ -63,6 +65,7 @@ createWidget_square = {
 
 // theme creator
 
+// NOT USED
 createCtWidget = {
 	params ["_name","_params"];
 	_params call (missionNamespace getVariable ("createWidget_"+_name))
@@ -75,6 +78,7 @@ createWidget_backImpl = {
 	[_d,BACKGROUND,_pos,_ctg] call createWidget;
 };
 
+// Бэкграунд
 createWidget_back = {
 	params ["_d","_pos","_parent"];
 	private _w = [_d,_pos,_ctg] call createWidget_backImpl;
@@ -82,6 +86,7 @@ createWidget_back = {
 	_w
 };
 
+// Бэкграунд
 createWidget_back2 = {
 	params ["_d","_pos","_parent"];
 	private _w = [_d,_pos,_ctg] call createWidget_backImpl;
@@ -89,6 +94,7 @@ createWidget_back2 = {
 	_w
 };
 
+// Заголовок
 createWidget_title = {
 	params ["_d","_pos","_parent",["_text",""]];
 	private _tit = [_d,TEXT,_pos,_parent] call createWidget;
@@ -97,6 +103,7 @@ createWidget_title = {
 	_tit
 };
 
+// Кнопка
 createWidget_button = {
 	params ["_d","_pos","_ctg","_txt"];
 	private _bt = [_d,BUTTON,_pos,_ctg] call createWidget;
