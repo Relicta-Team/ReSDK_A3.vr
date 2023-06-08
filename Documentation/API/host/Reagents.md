@@ -345,6 +345,68 @@ Replaced value:
 (1000*(am) / 28.35)
 ```
 File: [host\Reagents\Reagetns.hpp at line 61](../../../Src/host/Reagents/Reagetns.hpp#L61)
+# ReagetSystem_init.sqf
+
+## reagentSystem_count_created
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0 //сколько создано реагентов
+```
+File: [host\Reagents\ReagetSystem_init.sqf at line 12](../../../Src/host/Reagents/ReagetSystem_init.sqf#L12)
+## reagentSystem_count_destroyed
+
+Type: Variable
+
+Description: сколько создано реагентов
+
+
+Initial value:
+```sqf
+0 //сколько удалено реагетов
+```
+File: [host\Reagents\ReagetSystem_init.sqf at line 13](../../../Src/host/Reagents/ReagetSystem_init.sqf#L13)
+## reagentSystem_internal_lastEx
+
+Type: Variable
+
+Description: сколько удалено реагетов
+
+
+Initial value:
+```sqf
+""
+```
+File: [host\Reagents\ReagetSystem_init.sqf at line 17](../../../Src/host/Reagents/ReagetSystem_init.sqf#L17)
+## reagentSystem_internal_lastObj
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+nullPtr
+```
+File: [host\Reagents\ReagetSystem_init.sqf at line 18](../../../Src/host/Reagents/ReagetSystem_init.sqf#L18)
+## reagentSystem_map_allReactions
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\Reagents\ReagetSystem_init.sqf at line 20](../../../Src/host/Reagents/ReagetSystem_init.sqf#L20)
 # Reaction.sqf
 
 ## reactgen_common
@@ -396,6 +458,18 @@ Replaced value:
 endclass
 ```
 File: [host\Reagents\Reactions\Reaction.sqf at line 43](../../../Src/host/Reagents/Reactions/Reaction.sqf#L43)
+## reagentsystem_reactions_counter
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [host\Reagents\Reactions\Reaction.sqf at line 7](../../../Src/host/Reagents/Reactions/Reaction.sqf#L7)
 # ReagentsAll.sqf
 
 ## defchem(__class,txtpropval)

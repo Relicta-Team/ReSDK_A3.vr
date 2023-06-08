@@ -100,6 +100,42 @@ Replaced value:
 "ffffff"
 ```
 File: [client\ColorThemes\ColorThemes_init.sqf at line 11](../../../Src/client/ColorThemes/ColorThemes_init.sqf#L11)
+## ct_map_colors
+
+Type: Variable
+
+Description: Помещаем ссылку
+
+
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
+File: [client\ColorThemes\ColorThemes_init.sqf at line 13](../../../Src/client/ColorThemes/ColorThemes_init.sqf#L13)
+## ct_map_defaultColors
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
++ct_map_colors
+```
+File: [client\ColorThemes\ColorThemes_init.sqf at line 55](../../../Src/client/ColorThemes/ColorThemes_init.sqf#L55)
+## ct_map_themes
+
+Type: Variable
+
+Description: Лист с темами
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\ColorThemes\ColorThemes_init.sqf at line 58](../../../Src/client/ColorThemes/ColorThemes_init.sqf#L58)
 ## ct_load
 
 Type: function

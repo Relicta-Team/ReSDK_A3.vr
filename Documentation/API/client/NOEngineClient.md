@@ -1,17 +1,5 @@
 # NOEngineClient.h
 
-## DEBUG_MESSAGE_NOE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\NOEngineClient\NOEngineClient.h at line 7](../../../Src/client/NOEngineClient/NOEngineClient.h#L7)
 ## PACKET_LIFETIME
 
 Type: constant
@@ -460,6 +448,104 @@ uiSleep (2 / diag_fps)
 File: [client\NOEngineClient\NOEngineClient.h at line 75](../../../Src/client/NOEngineClient/NOEngineClient.h#L75)
 # NOEngineClientInit.sqf
 
+## noe_debug_allthreads
+
+Type: Variable
+
+> Exists if **NOE_CLIENT_THREAD_DEBUG** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 28](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L28)
+## noe_client_cs
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 31](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L31)
+## noe_client_allChunkTypes
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[CHUNK_TYPE_ITEM,CHUNK_TYPE_STRUCTURE,CHUNK_TYPE_DECOR]
+```
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 32](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L32)
+## noe_client_packetId
+
+Type: Variable
+
+Description: первый обязательный вызов
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 43](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L43)
+## noe_client_packets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 44](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L44)
+## noe_client_packetsChunks
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 45](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L45)
+## noe_client_allPointers
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 47](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L47)
+## noe_client_handlers
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 49](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L49)
 ## noe_client_generateStorage
 
 Type: function
@@ -510,54 +596,6 @@ Description:
 File: [client\NOEngineClient\NOEngineClientInit.sqf at line 117](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L117)
 # NOEngineClient_chunkDebug.sqf
 
-## enableDebugDraw
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-1
-```
-File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 8](../../../Src/client/NOEngineClient/NOEngineClient_chunkDebug.sqf#L8)
-## enableDebugDrawText
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-1
-```
-File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 9](../../../Src/client/NOEngineClient/NOEngineClient_chunkDebug.sqf#L9)
-## enableDebugDrawInfo
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-1
-```
-File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 10](../../../Src/client/NOEngineClient/NOEngineClient_chunkDebug.sqf#L10)
-## enableDebugDrawSectors
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-1
-```
-File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 11](../../../Src/client/NOEngineClient/NOEngineClient_chunkDebug.sqf#L11)
 ## upside
 
 Type: constant
@@ -611,6 +649,18 @@ Replaced value:
 1
 ```
 File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 162](../../../Src/client/NOEngineClient/NOEngineClient_chunkDebug.sqf#L162)
+## noe_debug_canDrawInfo
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+!isNull(enableDebugDrawInfo)
+```
+File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 22](../../../Src/client/NOEngineClient/NOEngineClient_chunkDebug.sqf#L22)
 ## noe_debug_drawChunkSides_player
 
 Type: function
@@ -658,6 +708,18 @@ Description:
 File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 174](../../../Src/client/NOEngineClient/NOEngineClient_chunkDebug.sqf#L174)
 # NOEngineClient_Components.sqf
 
+## noe_client_threadList
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\NOEngineClient\NOEngineClient_Components.sqf at line 47](../../../Src/client/NOEngineClient/NOEngineClient_Components.sqf#L47)
 ## noe_client_isChunkCreated
 
 Type: function
@@ -711,30 +773,6 @@ Description: проверяет загружены ли все объекты ч
 File: [client\NOEngineClient\NOEngineClient_Components.sqf at line 127](../../../Src/client/NOEngineClient/NOEngineClient_Components.sqf#L127)
 # NOEngineClient_NOGEOM_ext.sqf
 
-## NOE_NGO_DEBUG_MODE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 8](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L8)
-## NOE_NGOEXT_DEBUG_MODE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 10](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L10)
 ## NGOExt_create
 
 Type: function
@@ -962,24 +1000,78 @@ Replaced value:
 trace('State num')
 ```
 File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 52](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L52)
-## renderTracer(t,del)
+## objLeft
 
-Type: constant
+Type: Variable
+
+Description: RENDERING (not optimized). Need rewrite
+
+
+Initial value:
+```sqf
+"Sign_Arrow_F" createVehicle [0,0,0]
+```
+File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 9](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L9)
+## objRight
+
+Type: Variable
 
 Description: 
-- Param: t
-- Param: del
 
-Replaced value:
+
+Initial value:
 ```sqf
-_re = { \
-	_ppos = getPosATL player; _eyedir = [0,0,0] getdir (eyeDirection player); \
-	_size = getChunkSizeByType(t); \
-	objLeft setposatl vectorFromDir(_ppos,-210,_size); \
-	objRight setPosATL vectorFromDir(_ppos,210,_size); \
-}; startUpdate(_re,del);
+"Sign_Arrow_F" createVehicle [0,0,0]
 ```
-File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 86](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L86)
+File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 10](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L10)
+## objTemp
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"Sign_Arrow_F" createVehicle [0,0,0]
+```
+File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 11](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L11)
+## objMode
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 12](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L12)
+## prevPosObj
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[[0,0],[0,0],[0,0]]
+```
+File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 13](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L13)
+## prevStateIsHidden
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[false,false,false]
+```
+File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 14](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L14)
 # NOEngineClient_TransportLevel.sqf
 
 ## debug_calltraceOnErrorConvert
@@ -1156,16 +1248,6 @@ Description: генерирует пакет который указывает �
 - Param: _lifetime (optional, default PACKET_LIFETIME)
 
 File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 145](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L145)
-## noe_client_debug_bytearrTest
-
-Type: function
-
-> Exists if **DEBUG** defined
-
-Description: 
-
-
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 174](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L174)
 ## noe_client_byteArrToObjStruct
 
 Type: function

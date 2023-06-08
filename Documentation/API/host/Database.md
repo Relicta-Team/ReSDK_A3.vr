@@ -184,6 +184,30 @@ Description: Форматирует массив даты-времени в ст
 File: [host\Database\SQLite\SQLite_functions.sqf at line 146](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L146)
 # SQLite_init.sqf
 
+## db_version
+
+Type: Variable
+
+Description: !версия базы данных (не расширения)
+
+
+Initial value:
+```sqf
+"1.0"
+```
+File: [host\Database\SQLite\SQLite_init.sqf at line 14](../../../Src/host/Database/SQLite/SQLite_init.sqf#L14)
+## db_canUseQueryLogToStdout
+
+Type: Variable
+
+Description: true будет выводить каждый запрос в дебаг консоль
+
+
+Initial value:
+```sqf
+false
+```
+File: [host\Database\SQLite\SQLite_init.sqf at line 16](../../../Src/host/Database/SQLite/SQLite_init.sqf#L16)
 ## db_init
 
 Type: function
@@ -383,15 +407,6 @@ Description:
 
 
 File: [host\Database\SQLite\SQLite_manager.sqf at line 292](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L292)
-## db_checkBanRole
-
-Type: function
-
-Description: 
-- Param: _uid
-- Param: _role
-
-File: [host\Database\SQLite\SQLite_manager.sqf at line 313](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L313)
 ## db_registerClient
 
 Type: function

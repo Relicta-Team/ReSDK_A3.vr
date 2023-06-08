@@ -450,11 +450,3 @@ Replaced value:
 		}; 
 ```
 File: [host\CaveSystem\CaveSystemInit.sqf at line 541](../../../Src/host/CaveSystem/CaveSystemInit.sqf#L541)
-## initDecor
-
-Type: function
-
-Description: 
-
-
-File: [host\CaveSystem\CaveSystemInit.sqf at line 414](../../../Src/host/CaveSystem/CaveSystemInit.sqf#L414)

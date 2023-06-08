@@ -296,6 +296,68 @@ Replaced value:
 _obj
 ```
 File: [host\CraftSystem\Craft_initData.sqf at line 16](../../../Src/host/CraftSystem/Craft_initData.sqf#L16)
+## craft_data_count
+
+Type: Variable
+
+> Exists if **_SQFVM** not defined
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [host\CraftSystem\Craft_initData.sqf at line 13](../../../Src/host/CraftSystem/Craft_initData.sqf#L13)
+## craft_data_categories
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //value is array
+```
+File: [host\CraftSystem\Craft_initData.sqf at line 17](../../../Src/host/CraftSystem/Craft_initData.sqf#L17)
+## craft_data_allRecipes
+
+Type: Variable
+
+Description: value is array
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CraftSystem\Craft_initData.sqf at line 18](../../../Src/host/CraftSystem/Craft_initData.sqf#L18)
+## craft_data_catIndexes
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+CRAFT_CATEGORY_LIST_ALL apply ...
+```
+File: [host\CraftSystem\Craft_initData.sqf at line 20](../../../Src/host/CraftSystem/Craft_initData.sqf#L20)
+## craft_internal_client_mapRecipes
+
+Type: Variable
+
+Description: [5001,"Бибки",["Тесто","Яичко"],""] call craft_newRecipe;
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CraftSystem\Craft_initData.sqf at line 68](../../../Src/host/CraftSystem/Craft_initData.sqf#L68)
 ## craft_data_getRecipes
 
 Type: function
@@ -309,18 +371,6 @@ Description: Получает рецепты с категории
 File: [host\CraftSystem\Craft_initData.sqf at line 23](../../../Src/host/CraftSystem/Craft_initData.sqf#L23)
 # Basic.sqf
 
-## DEBUG_DISTANCE_NEAREST
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\CraftSystem\Crafts\Basic.sqf at line 17](../../../Src/host/CraftSystem/Crafts/Basic.sqf#L17)
 ## src
 
 Type: constant

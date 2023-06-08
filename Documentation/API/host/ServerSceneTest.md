@@ -1,3 +1,17 @@
+# Debug.sqf
+
+## this
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_vMob
+```
+File: [host\ServerSceneTest\Debug.sqf at line 7](../../../Src/host/ServerSceneTest/Debug.sqf#L7)
 # serverscrene_init.sqf
 
 ## vecForward(bias)
@@ -60,6 +74,30 @@ Replaced value:
 rand(-randDist_chunk,randDist_chunk)
 ```
 File: [host\ServerSceneTest\serverscrene_init.sqf at line 406](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L406)
+## memcloth
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_virtCloth
+```
+File: [host\ServerSceneTest\serverscrene_init.sqf at line 410](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L410)
+## memplay
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_vMob
+```
+File: [host\ServerSceneTest\serverscrene_init.sqf at line 411](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L411)
 ## tptomap
 
 Type: function
@@ -94,16 +132,6 @@ Description:
 
 
 File: [host\ServerSceneTest\serverscrene_init.sqf at line 43](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L43)
-## gm_startFromLobbyCondition
-
-Type: function
-
-> Exists if **ENABLE_LAG_NETWORK** not defined
-
-Description: 
-
-
-File: [host\ServerSceneTest\serverscrene_init.sqf at line 55](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L55)
 ## debug_asyncCode
 
 Type: function
@@ -112,11 +140,3 @@ Description:
 
 
 File: [host\ServerSceneTest\serverscrene_init.sqf at line 67](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L67)
-## reloadgens
-
-Type: function
-
-Description: 
-
-
-File: [host\ServerSceneTest\serverscrene_init.sqf at line 244](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L244)

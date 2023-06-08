@@ -137,6 +137,30 @@ Replaced value:
 
 ```
 File: [host\ServerLighting\ServerLighting_init.sqf at line 44](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L44)
+## slt_map_scriptCfgs
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ServerLighting\ServerLighting_init.sqf at line 31](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L31)
+## slt_scriptedCfgMapHandlers
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
+File: [host\ServerLighting\ServerLighting_init.sqf at line 88](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L88)
 ## type
 
 Type: function

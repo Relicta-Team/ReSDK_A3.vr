@@ -46,18 +46,6 @@ Replaced value:
 
 ```
 File: [host\MapManager\ObjectManager.sqf at line 13](../../../Src/host/MapManager/ObjectManager.sqf#L13)
-## enablePhisics
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\MapManager\ObjectManager.sqf at line 14](../../../Src/host/MapManager/ObjectManager.sqf#L14)
 ## simlog(data)
 
 Type: constant

@@ -1,3 +1,17 @@
+# main.sqf
+
+## testobj
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+new(TestGameClass)
+```
+File: [host\OOP_engine\main.sqf at line 9](../../../Src/host/OOP_engine/main.sqf#L9)
 # oop_attributes.sqf
 
 ## newAttribute(name)
@@ -134,78 +148,18 @@ Replaced value:
 }; ["(OOP) Attribute '" + _oop_attr_last_name + "' loaded."] call logInfo;
 ```
 File: [host\OOP_engine\oop_attributes.sqf at line 22](../../../Src/host/OOP_engine/oop_attributes.sqf#L22)
-## ITEM_SIZE_TINY
+## rolesystem_internal_net_idx
 
-Type: constant
-
-Description: 5 большие предметы: винтовка,канистра; 6 огромные: складной стул, гранатомёт )
-
-
-Replaced value:
-```sqf
-1
-```
-File: [host\OOP_engine\oop_attributes.sqf at line 197](../../../Src/host/OOP_engine/oop_attributes.sqf#L197)
-## ITEM_SIZE_SMALL
-
-Type: constant
+Type: Variable
 
 Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-2
+0 //internal var
 ```
-File: [host\OOP_engine\oop_attributes.sqf at line 198](../../../Src/host/OOP_engine/oop_attributes.sqf#L198)
-## ITEM_SIZE_MEDIUM
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-3
-```
-File: [host\OOP_engine\oop_attributes.sqf at line 199](../../../Src/host/OOP_engine/oop_attributes.sqf#L199)
-## ITEM_SIZE_LARGE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-4
-```
-File: [host\OOP_engine\oop_attributes.sqf at line 200](../../../Src/host/OOP_engine/oop_attributes.sqf#L200)
-## ITEM_SIZE_BIG
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-5
-```
-File: [host\OOP_engine\oop_attributes.sqf at line 201](../../../Src/host/OOP_engine/oop_attributes.sqf#L201)
-## ITEM_SIZE_HUGE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-6
-```
-File: [host\OOP_engine\oop_attributes.sqf at line 202](../../../Src/host/OOP_engine/oop_attributes.sqf#L202)
+File: [host\OOP_engine\oop_attributes.sqf at line 69](../../../Src/host/OOP_engine/oop_attributes.sqf#L69)
 ## name
 
 Type: function
@@ -292,6 +246,56 @@ Replaced value:
 this setName "%2"
 ```
 File: [host\OOP_engine\oop_init.sqf at line 56](../../../Src/host/OOP_engine/oop_init.sqf#L56)
+# oop_logging.sqf
+
+## oop_upd
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0 // all update methods
+```
+File: [host\OOP_engine\oop_logging.sqf at line 7](../../../Src/host/OOP_engine/oop_logging.sqf#L7)
+## oop_cao
+
+Type: Variable
+
+Description: all update methods
+
+
+Initial value:
+```sqf
+0 // count active objects
+```
+File: [host\OOP_engine\oop_logging.sqf at line 9](../../../Src/host/OOP_engine/oop_logging.sqf#L9)
+## oop_cco
+
+Type: Variable
+
+Description: count active objects
+
+
+Initial value:
+```sqf
+0 // count created objects
+```
+File: [host\OOP_engine\oop_logging.sqf at line 10](../../../Src/host/OOP_engine/oop_logging.sqf#L10)
+## oop_memuse
+
+Type: Variable
+
+Description: not used in engine
+
+
+Initial value:
+```sqf
+0 //bytes
+```
+File: [host\OOP_engine\oop_logging.sqf at line 13](../../../Src/host/OOP_engine/oop_logging.sqf#L13)
 # oop_object.sqf
 
 ## basic()
@@ -332,6 +336,30 @@ Replaced value:
 8
 ```
 File: [host\OOP_engine\oop_preinit.sqf at line 46](../../../Src/host/OOP_engine/oop_preinit.sqf#L46)
+## p_table_inheritance
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\OOP_engine\oop_preinit.sqf at line 32](../../../Src/host/OOP_engine/oop_preinit.sqf#L32)
+## p_table_allclassnames
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\OOP_engine\oop_preinit.sqf at line 33](../../../Src/host/OOP_engine/oop_preinit.sqf#L33)
 ## oop_deleteObject
 
 Type: function

@@ -18,6 +18,32 @@ Description:
 File: [host\PointerSystem\GarbageCollector.sqf at line 28](../../../Src/host/PointerSystem/GarbageCollector.sqf#L28)
 # Pointer.sqf
 
+## pointerUniInx
+
+Type: Variable
+
+> Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [host\PointerSystem\Pointer.sqf at line 13](../../../Src/host/PointerSystem/Pointer.sqf#L13)
+## pointerList
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createObj
+```
+File: [host\PointerSystem\Pointer.sqf at line 16](../../../Src/host/PointerSystem/Pointer.sqf#L16)
 ## pointer_getLastPointer
 
 Type: function

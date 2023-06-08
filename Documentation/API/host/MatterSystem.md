@@ -885,18 +885,18 @@ Replaced value:
 (_ns get (val))
 ```
 File: [host\MatterSystem\MatterSystem_functions.sqf at line 22](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L22)
-## ms_log_transfer
+## ms_debug_count
 
-Type: constant
+Type: Variable
 
 Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-
+0
 ```
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 434](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L434)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 290](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L290)
 ## ms_internal_initInheritance
 
 Type: function
@@ -1078,6 +1078,32 @@ Description: убирает материи из мса и возвращает �
 - Param: _mAmount (optional, default INFINITY)
 
 File: [host\MatterSystem\MatterSystem_functions.sqf at line 543](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L543)
+# MatterSystem_init.sqf
+
+## ms_map_allMatters
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\MatterSystem\MatterSystem_init.sqf at line 16](../../../Src/host/MatterSystem/MatterSystem_init.sqf#L16)
+## ms_map_allReactions
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\MatterSystem\MatterSystem_init.sqf at line 17](../../../Src/host/MatterSystem/MatterSystem_init.sqf#L17)
 # Basic.sqf
 
 ## defchem(class,txtpropval)
@@ -1093,6 +1119,20 @@ Replaced value:
 matter(class) extends(Matter) prop(name,txtpropval);
 ```
 File: [host\MatterSystem\Matters\Basic.sqf at line 83](../../../Src/host/MatterSystem/Matters/Basic.sqf#L83)
+# Reactions.sqf
+
+## ms_internal_react_gen
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [host\MatterSystem\Reactions\Reactions.sqf at line 7](../../../Src/host/MatterSystem/Reactions/Reactions.sqf#L7)
 # Reagent.sqf
 
 ## SOLID

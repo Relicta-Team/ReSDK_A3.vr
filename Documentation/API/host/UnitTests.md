@@ -1,17 +1,5 @@
 # UnitTest.h
 
-## unit_test_enabled
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\UnitTests\UnitTest.h at line 8](../../../Src/host/UnitTests/UnitTest.h#L8)
 ## assertion_errors
 
 Type: constant

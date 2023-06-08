@@ -12,10 +12,11 @@ cm_getAllClientsByAccessLevel = {
     params ["_lvl", ["_thisAndHight", false],"_tv"];
     // Код функции cm_getAllClientsByAccessLevel
 };
-
+/*
 cm_accessTypeToNum = {params ["_accessString"];
     // Код функции cm_accessTypeToNum
 };
+*/
 
 cm_noparamsFUnc = {a == 3};
 
@@ -45,13 +46,18 @@ fninside = {
 
 /* comment start
 commentline
-comment end */
+comment end 
+
+#define macro
+*/
 
 passedparamFunc = {
     
     
     private _thisObj = _this; 
-    
+       _inline = {
+            othervar = "test";
+       };
     };
 
 _nonglobal = {params ["_x"]; }
@@ -60,6 +66,12 @@ _nonglobal = {params ["_x"]; }
  Inline some data
  Use this in any cases
 */
+
+
+asd_asd32 = 34;
+//Test Docs
+testvar = 1;
+
 
 #define preprocessed  {params["_DONOT"]};
 
@@ -79,16 +91,22 @@ functions = parse_sqf_functions(sqf_code_testcode)
 for function_name, values in functions.items():
     if values["Type"] == "Macro":
         print(f"Macro:{function_name}")
+        #print(f"Docs:{values['Desc']}")
+        #print(f"Defined at line {values['DefLine']}")
+        #print(f"{parameters_to_string(values['Arguments'])}")
+        #print(f"Replaced value:{values['Value']}")
+        #condit = values['conditional']
+        #if condit:
+        #    print(f"Exists if {condit['name']} is {condit['required']}")
+    elif values["Type"] == "Variable":
+        print(f"Var: {function_name}")
         print(f"Docs:{values['Desc']}")
-        print(f"Defined at line {values['DefLine']}")
-        print(f"{parameters_to_string(values['Arguments'])}")
-        print(f"Replaced value:{values['Value']}")
         condit = values['conditional']
         if condit:
             print(f"Exists if {condit['name']} is {condit['required']}")
     else:
         print(f"Function: {function_name}")
-        #print(f"Docs:{values['Desc']}")
+        print(f"Docs:{values['Desc']}")
         #print(f"Parameters:")
         #print(f"{parameters_to_string(values['Arguments'])}")
     print()

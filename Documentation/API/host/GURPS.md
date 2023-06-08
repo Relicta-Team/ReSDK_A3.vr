@@ -223,18 +223,6 @@ Replaced value:
 File: [host\GURPS\gurps.hpp at line 36](../../../Src/host/GURPS/gurps.hpp#L36)
 # Gurps.sqf
 
-## log_onEncumbranceRecalculate
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GURPS\Gurps.sqf at line 13](../../../Src/host/GURPS/Gurps.sqf#L13)
 ## AMOUNT
 
 Type: constant
@@ -492,3 +480,15 @@ Replaced value:
 for "_i" from low to (up - 1) do {allocSTVal(_i,data)}
 ```
 File: [host\GURPS\Gurps_init.sqf at line 12](../../../Src/host/GURPS/Gurps_init.sqf#L12)
+## obj_gurps_combat
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createObj
+```
+File: [host\GURPS\Gurps_init.sqf at line 7](../../../Src/host/GURPS/Gurps_init.sqf#L7)

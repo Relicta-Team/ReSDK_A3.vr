@@ -86,6 +86,54 @@ Replaced value:
 4
 ```
 File: [client\SyncMobData\SMD_init.sqf at line 549](../../../Src/client/SyncMobData/SMD_init.sqf#L549)
+## smd_list_variables
+
+Type: Variable
+
+Description: ассоциативный список переменная слежения, метод выполнения при изменении состояния
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\SyncMobData\SMD_init.sqf at line 25](../../../Src/client/SyncMobData/SMD_init.sqf#L25)
+## smd_list_allSlots
+
+Type: Variable
+
+Description: adding inventory slots
+
+
+Initial value:
+```sqf
+INV_LIST_ALL apply ...
+```
+File: [client\SyncMobData\SMD_init.sqf at line 43](../../../Src/client/SyncMobData/SMD_init.sqf#L43)
+## smd_handle_update
+
+Type: Variable
+
+Description: updater code
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\SyncMobData\SMD_init.sqf at line 60](../../../Src/client/SyncMobData/SMD_init.sqf#L60)
+## smd_internal_map_vis
+
+Type: Variable
+
+Description: todo change to bitflags
+
+
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
+File: [client\SyncMobData\SMD_init.sqf at line 551](../../../Src/client/SyncMobData/SMD_init.sqf#L551)
 ## smd_isProcessed
 
 Type: function

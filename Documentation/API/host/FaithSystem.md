@@ -26,3 +26,17 @@ Replaced value:
 faith_map set [class,[name,desc]];
 ```
 File: [host\FaithSystem\Faith.h at line 11](../../../Src/host/FaithSystem/Faith.h#L11)
+# FaithInit.sqf
+
+## faith_map
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\FaithSystem\FaithInit.sqf at line 9](../../../Src/host/FaithSystem/FaithInit.sqf#L9)

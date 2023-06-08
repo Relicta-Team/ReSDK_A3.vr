@@ -300,36 +300,6 @@ Replaced value:
 1
 ```
 File: [host\GameObjects\GameConstants.hpp at line 104](../../../Src/host/GameObjects/GameConstants.hpp#L104)
-## declgotype(_t,_mot,_mdl)
-
-Type: constant
-
-Description: 
-- Param: _t
-- Param: _mot
-- Param: _mdl
-
-Replaced value:
-```sqf
-class(_t) extends(_mot) var(model,_mdl) endclass
-```
-File: [host\GameObjects\GameConstants.hpp at line 108](../../../Src/host/GameObjects/GameConstants.hpp#L108)
-## gconst_internal_showinfo
-
-Type: function
-
-Description: 
-
-
-File: [host\GameObjects\GameConstants.hpp at line 60](../../../Src/host/GameObjects/GameConstants.hpp#L60)
-## gconst_internal_reload
-
-Type: function
-
-Description: 
-
-
-File: [host\GameObjects\GameConstants.hpp at line 80](../../../Src/host/GameObjects/GameConstants.hpp#L80)
 # GameObject.sqf
 
 ## PIC_PREP
@@ -368,6 +338,30 @@ Replaced value:
 1
 ```
 File: [host\GameObjects\GameObject.sqf at line 462](../../../Src/host/GameObjects/GameObject.sqf#L462)
+## flyingObject
+
+Type: Variable
+
+Description: летящий объект. системная переменная
+
+
+Initial value:
+```sqf
+createObj
+```
+File: [host\GameObjects\GameObject.sqf at line 50](../../../Src/host/GameObjects/GameObject.sqf#L50)
+## go_internal_updateMethodsAfterStart
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\GameObjects\GameObject.sqf at line 226](../../../Src/host/GameObjects/GameObject.sqf#L226)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
@@ -1082,30 +1076,6 @@ Replaced value:
 0x60   /*  LEG_LEFT | LEG_RIGHT*/
 ```
 File: [host\GameObjects\ConstantAndDefines\item_clothing.h at line 17](../../../Src/host/GameObjects/ConstantAndDefines/item_clothing.h#L17)
-## FOOT_LEFT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-0x80
-```
-File: [host\GameObjects\ConstantAndDefines\item_clothing.h at line 18](../../../Src/host/GameObjects/ConstantAndDefines/item_clothing.h#L18)
-## FOOT_RIGHT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-0x100
-```
-File: [host\GameObjects\ConstantAndDefines\item_clothing.h at line 19](../../../Src/host/GameObjects/ConstantAndDefines/item_clothing.h#L19)
 ## FEET
 
 Type: constant
@@ -1154,30 +1124,6 @@ Replaced value:
 0x600 /*  ARM_LEFT | ARM_RIGHT*/
 ```
 File: [host\GameObjects\ConstantAndDefines\item_clothing.h at line 23](../../../Src/host/GameObjects/ConstantAndDefines/item_clothing.h#L23)
-## HAND_LEFT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-0x800
-```
-File: [host\GameObjects\ConstantAndDefines\item_clothing.h at line 24](../../../Src/host/GameObjects/ConstantAndDefines/item_clothing.h#L24)
-## HAND_RIGHT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-0x1000
-```
-File: [host\GameObjects\ConstantAndDefines\item_clothing.h at line 25](../../../Src/host/GameObjects/ConstantAndDefines/item_clothing.h#L25)
 ## HANDS
 
 Type: constant
@@ -1420,21 +1366,6 @@ Replaced value:
 0.00045
 ```
 File: [host\GameObjects\ConstantAndDefines\Life.h at line 13](../../../Src/host/GameObjects/ConstantAndDefines/Life.h#L13)
-## BLOOD_LOSS_MAP
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-[0.04, \
-						1, \
-						2, \
-						4]*/
-```
-File: [host\GameObjects\ConstantAndDefines\Life.h at line 20](../../../Src/host/GameObjects/ConstantAndDefines/Life.h#L20)
 ## BLOOD_GET_BLOODLOSS_BY_WOUND_SIZE(size)
 
 Type: constant
@@ -3501,20 +3432,20 @@ Replaced value:
 [t,hashMapNew]
 ```
 File: [host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 218](../../../Src/host/GameObjects/Items/Bodyparts/Bodyparts.sqf#L218)
-## debug_body_wounds_regen
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 348](../../../Src/host/GameObjects/Items/Bodyparts/Bodyparts.sqf#L348)
 # CaptiveBase.sqf
 
+## server_handcuff_internal_random
+
+Type: Variable
+
+Description: системные функции для кодов наручников
+
+
+Initial value:
+```sqf
+rand(-99,99)
+```
+File: [host\GameObjects\Items\Captives\CaptiveBase.sqf at line 41](../../../Src/host/GameObjects/Items/Captives/CaptiveBase.sqf#L41)
 ## server_handcuff_internal_codeToString
 
 Type: function
@@ -3553,20 +3484,6 @@ Replaced value:
 _y get #func
 ```
 File: [host\GameObjects\Items\Office\Books.sqf at line 312](../../../Src/host/GameObjects/Items/Office/Books.sqf#L312)
-# Stack.sqf
-
-## EXPERIMENTAL_STACK_CHANGE_MODEL
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Items\Stackable\Stack.sqf at line 11](../../../Src/host/GameObjects/Items/Stackable/Stack.sqf#L11)
 # BasicMob.sqf
 
 ## emulate_mp_in_sp
@@ -3629,18 +3546,20 @@ Replaced value:
 [[INV_BACKPACK,null], [INV_ARMOR,null], [INV_HEAD,null], [INV_BACK,null],[INV_CLOTH,null],[INV_FACE,null],[INV_HAND_R,null],[INV_HAND_L,null],[INV_BELT,null]]
 ```
 File: [host\GameObjects\Mobs\BasicMob.sqf at line 750](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L750)
-## __debug_mob_sync_smdslot____
+## debug_internal_getinteractiontarget_spheres
 
-Type: constant
+Type: Variable
+
+> Exists if **__debug_getinteractiontarget_spheres__** defined
 
 Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-
+[]
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 757](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L757)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 211](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L211)
 # Mob.sqf
 
 ## __performace_attacklog
@@ -3709,42 +3628,6 @@ Replaced value:
 "debug_console" callExtension ("<server::Roleplay> " + format[text,fmt] + "#0111")
 ```
 File: [host\GameObjects\Mobs\Mob.sqf at line 34](../../../Src/host/GameObjects/Mobs/Mob.sqf#L34)
-## debug_throw_slow
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Mobs\Mob.sqf at line 37](../../../Src/host/GameObjects/Mobs/Mob.sqf#L37)
-## emulate_critAttack
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Mobs\Mob.sqf at line 40](../../../Src/host/GameObjects/Mobs/Mob.sqf#L40)
-## emulate_critFailAttack
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Mobs\Mob.sqf at line 41](../../../Src/host/GameObjects/Mobs/Mob.sqf#L41)
 ## DELAY_SHOCK
 
 Type: constant
@@ -3807,19 +3690,6 @@ Replaced value:
 !isNullObject(_bpArray getOrDefault [idx arg nullPtr])
 ```
 File: [host\GameObjects\Mobs\MobGhost.sqf at line 87](../../../Src/host/GameObjects/Mobs/MobGhost.sqf#L87)
-## si_rayCast
-
-Type: function
-
-Description: 
-- Param: _rayPosStart
-- Param: _rayVector
-- Param: _retVirtual (optional, default false)
-- Param: */
-			(_doorObj worldToModel callFunc(this
-- Param: getPos))params["_x","_y","_z"
-
-File: [host\GameObjects\Mobs\MobGhost.sqf at line 164](../../../Src/host/GameObjects/Mobs/MobGhost.sqf#L164)
 # MobSkills_idx.hpp
 
 ## SKILL_INDEX_ST
@@ -4014,6 +3884,18 @@ Replaced value:
 if (_attTargetZone in [zones]) exitWith {MOD(_mod,modif)}
 ```
 File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1334](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1334)
+## go_static_internal_map_redirzones
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray[...
+```
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 702](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L702)
 # Mob_combat_attdam_enum.hpp
 
 ## COMBAT_ATTDAM_ATTACK
@@ -4267,18 +4149,6 @@ Replaced value:
 _mod = mod;
 ```
 File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 515](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L515)
-## _mob_internal__log_canseeobject__
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 1276](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L1276)
 ## mlp(v)
 
 Type: constant
@@ -4308,18 +4178,6 @@ _oth = getSelf(prevname); setSelf(prevname,getSelf(nextname)); setSelf(nextname,
 File: [host\GameObjects\Mobs\Mob_Inventory.sqf at line 154](../../../Src/host/GameObjects/Mobs/Mob_Inventory.sqf#L154)
 # Mob_Life.sqf
 
-## USEPERLOGGER
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 251](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L251)
 ## checktime_nextcall
 
 Type: constant
@@ -4661,6 +4519,30 @@ __func_noStrName('get' + 'name') { \
 	_csl = 'name'; __var_noStrName(_csl,0)
 ```
 File: [host\GameObjects\Mobs\Mob_Skills.sqf at line 144](../../../Src/host/GameObjects/Mobs/Mob_Skills.sqf#L144)
+## skills_internal_map_nameAssoc
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray[...
+```
+File: [host\GameObjects\Mobs\Mob_Skills.sqf at line 518](../../../Src/host/GameObjects/Mobs/Mob_Skills.sqf#L518)
+## skills_internal_list_otherSkillsSystemNames
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\GameObjects\Mobs\Mob_Skills.sqf at line 618](../../../Src/host/GameObjects/Mobs/Mob_Skills.sqf#L618)
 # Mob_WoundSystem.sqf
 
 ## usesimplog
@@ -5291,90 +5173,6 @@ Replaced value:
 File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 45](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L45)
 # Tech.sqf
 
-## testcase_buy
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 12](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L12)
-## testcase_buyaccept
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 13](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L13)
-## testcase_buyaccept_throwerror_lowmoney
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 14](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L14)
-## testcase_sell
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 15](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L15)
-## testcase_priceget
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 16](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L16)
-## LOG_TRADE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 17](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L17)
-## sell_cancel_extended_logging
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 360](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L360)
 ## item_data(typename,lowprice,maxprice,ctg,countslow,countsmax)
 
 Type: constant
@@ -5572,6 +5370,20 @@ Description:
 - Param: _dir
 
 File: [host\GameObjects\Structures\Effects\Teleport.sqf at line 10](../../../Src/host/GameObjects/Structures/Effects/Teleport.sqf#L10)
+# Zones.sqf
+
+## zoneLocations_map_all
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\GameObjects\Structures\Effects\Zones.sqf at line 10](../../../Src/host/GameObjects/Structures/Effects/Zones.sqf#L10)
 # GeneratorParts.sqf
 
 ## STD_UPDATE_DELAY
@@ -5888,6 +5700,42 @@ equals(callFunc(_item,getClassName),'type')
 File: [host\GameObjects\Structures\Kitchen\Kitchen.sqf at line 92](../../../Src/host/GameObjects/Structures/Kitchen/Kitchen.sqf#L92)
 # Spawners.sqf
 
+## spawnPos_internal_list_all
+
+Type: Variable
+
+Description: список всех спавнпойнтов
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 28](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L28)
+## spawnPos_internal_map_equalCollections
+
+Type: Variable
+
+Description: список спавнпойтов по тегу
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 30](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L30)
+## spawnPos_internal_list_rnd
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 32](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L32)
 ## getSpawnPosByName
 
 Type: function

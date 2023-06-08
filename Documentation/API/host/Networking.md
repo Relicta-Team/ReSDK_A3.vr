@@ -121,18 +121,6 @@ Replaced value:
 File: [host\Networking\Network.hpp at line 22](../../../Src/host/Networking/Network.hpp#L22)
 # Network.sqf
 
-## net_log
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\Networking\Network.sqf at line 9](../../../Src/host/Networking/Network.sqf#L9)
 ## netlog(mes,fmt)
 
 Type: constant

@@ -1,17 +1,5 @@
 # LightEngine.h
 
-## usedebuglightrender
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\LightEngine\LightEngine.h at line 7](../../../Src/client/LightEngine/LightEngine.h#L7)
 ## lightObject
 
 Type: constant
@@ -483,73 +471,6 @@ Replaced value:
 _smd_slotId
 ```
 File: [client\LightEngine\LightEngine.h at line 91](../../../Src/client/LightEngine/LightEngine.h#L91)
-## glsNull
-
-Type: constant
-
-Description: ////                 ===== OBSOLETE =====
-
-
-Replaced value:
-```sqf
-["nan"]
-```
-File: [client\LightEngine\LightEngine.h at line 100](../../../Src/client/LightEngine/LightEngine.h#L100)
-## getGLSData(_type,_x,_y)
-
-Type: constant
-
-Description: 
-- Param: _type
-- Param: _x
-- Param: _y
-
-Replaced value:
-```sqf
-le_glsData getvariable [format["%1:%2:%3",_type,_x,_y],glsNull]
-```
-File: [client\LightEngine\LightEngine.h at line 102](../../../Src/client/LightEngine/LightEngine.h#L102)
-## setLocalGLSData(_type,_x,_y,lastHash)
-
-Type: constant
-
-Description: 
-- Param: _type
-- Param: _x
-- Param: _y
-- Param: lastHash
-
-Replaced value:
-```sqf
-le_localGlsData setvariable [format["%1:%2:%3",_type,_x,_y],lastHash]
-```
-File: [client\LightEngine\LightEngine.h at line 103](../../../Src/client/LightEngine/LightEngine.h#L103)
-## getLocalGLSData(_type,_x,_y)
-
-Type: constant
-
-Description: 
-- Param: _type
-- Param: _x
-- Param: _y
-
-Replaced value:
-```sqf
-le_localGlsData getvariable [format["%1:%2:%3",_type,_x,_y],glsNull]
-```
-File: [client\LightEngine\LightEngine.h at line 104](../../../Src/client/LightEngine/LightEngine.h#L104)
-## getOnlyObjects(_data)
-
-Type: constant
-
-Description: 
-- Param: _data
-
-Replaced value:
-```sqf
-((_data) select [1,count (_data) - 1])
-```
-File: [client\LightEngine\LightEngine.h at line 106](../../../Src/client/LightEngine/LightEngine.h#L106)
 ## le_shot_startindex
 
 Type: constant
@@ -1198,26 +1119,42 @@ Replaced value:
 File: [client\LightEngine\LightEngine.hpp at line 61](../../../Src/client/LightEngine/LightEngine.hpp#L61)
 # LightEngine.sqf
 
-## createArrow()
+## le_simulated
 
-Type: constant
+Type: Variable
 
-Description: 
-- Param: 
+Description: Нужно выяснить какое существо самое лучшее в плане атачинга при первом создании
 
-Replaced value:
+
+Initial value:
 ```sqf
-"Sign_Arrow_F" createVehicle [0,0,0]
+clientMob//"B_Soldier_F" createVehicleLocal [0,0,0]
 ```
-File: [client\LightEngine\LightEngine.sqf at line 434](../../../Src/client/LightEngine/LightEngine.sqf#L434)
-## le_init
+File: [client\LightEngine\LightEngine.sqf at line 31](../../../Src/client/LightEngine/LightEngine.sqf#L31)
+## le_allChunkTypes
 
-Type: function
+Type: Variable
+
+Description: le_localGlsData = nullPtr;
+
+
+Initial value:
+```sqf
+[CHUNK_TYPE_ITEM,CHUNK_TYPE_STRUCTURE,CHUNK_TYPE_DECOR]
+```
+File: [client\LightEngine\LightEngine.sqf at line 38](../../../Src/client/LightEngine/LightEngine.sqf#L38)
+## le_allLights
+
+Type: Variable
 
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 42](../../../Src/client/LightEngine/LightEngine.sqf#L42)
+Initial value:
+```sqf
+[] //all light points
+```
+File: [client\LightEngine\LightEngine.sqf at line 40](../../../Src/client/LightEngine/LightEngine.sqf#L40)
 ## le_loadLight
 
 Type: function
@@ -1278,14 +1215,6 @@ Description:
 
 
 File: [client\LightEngine\LightEngine.sqf at line 166](../../../Src/client/LightEngine/LightEngine.sqf#L166)
-## le_reloadLightSystem
-
-Type: function
-
-Description: 
-
-
-File: [client\LightEngine\LightEngine.sqf at line 171](../../../Src/client/LightEngine/LightEngine.sqf#L171)
 ## le_debug_canViewLight
 
 Type: function
@@ -1303,61 +1232,6 @@ Description:
 
 
 File: [client\LightEngine\LightEngine.sqf at line 305](../../../Src/client/LightEngine/LightEngine.sqf#L305)
-## le_debug_getNotEmptyChunks
-
-Type: function
-
-Description: 
-- Param: _categs
-- Param: _doOnlyObjs (optional, default true)
-
-File: [client\LightEngine\LightEngine.sqf at line 352](../../../Src/client/LightEngine/LightEngine.sqf#L352)
-## le_debug_getlightprops
-
-Type: function
-
-Description: 
-- Param: _vehicle
-- Param: _light
-
-File: [client\LightEngine\LightEngine.sqf at line 374](../../../Src/client/LightEngine/LightEngine.sqf#L374)
-## le_debug_getlight
-
-Type: function
-
-Description: 
-
-
-File: [client\LightEngine\LightEngine.sqf at line 388](../../../Src/client/LightEngine/LightEngine.sqf#L388)
-## le_debug_calc
-
-Type: function
-
-Description: 
-- Param: _unit
-- Param: _lightSource
-- Param: _asConfig (optional, default false)
-- Param: _intens (optional, default (25 + 10 * ((1 + 1) / 2)))
-
-File: [client\LightEngine\LightEngine.sqf at line 398](../../../Src/client/LightEngine/LightEngine.sqf#L398)
-## le_debug_getNearObjects
-
-Type: function
-
-Description: 
-- Param: _xPos
-- Param: _yPos
-
-File: [client\LightEngine\LightEngine.sqf at line 432](../../../Src/client/LightEngine/LightEngine.sqf#L432)
-## le_getLocalObjectsData
-
-Type: function
-
-Description: отправляет запрос на сервер о том, что ему нужна информация о созданных объектах типа свет
-- Param: _chunk
-- Param: _chunkType
-
-File: [client\LightEngine\LightEngine.sqf at line 464](../../../Src/client/LightEngine/LightEngine.sqf#L464)
 # LightEngine_mainThread.sqf
 
 ## loadLightOnObject(_x)
@@ -1408,18 +1282,30 @@ Replaced value:
 (format["G:%1 -> L:%2",_hash,_localHash])
 ```
 File: [client\LightEngine\LightEngine_mainThread.sqf at line 51](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L51)
-## use_trace_onloadlight
+## le_lastChunkItem
 
-Type: constant
+Type: Variable
 
 Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-
+null
 ```
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 53](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L53)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 7](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L7)
+## le_lastChunkStructure
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+null
+```
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 8](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L8)
 ## le_onUpdate
 
 Type: function
@@ -1476,18 +1362,6 @@ Replaced value:
 10
 ```
 File: [client\LightEngine\LightRender.sqf at line 14](../../../Src/client/LightEngine/LightRender.sqf#L14)
-## DRAW_UPPER_RENDER_LINES
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\LightEngine\LightRender.sqf at line 16](../../../Src/client/LightEngine/LightRender.sqf#L16)
 ## LE_RENDER_DISTANCE_ONCHECK
 
 Type: constant
@@ -1524,31 +1398,6 @@ Replaced value:
 1000
 ```
 File: [client\LightEngine\LightRender.sqf at line 49](../../../Src/client/LightEngine/LightRender.sqf#L49)
-## inline_canSee(ob)
-
-Type: constant
-
-Description: 
-- Param: ob
-
-Replaced value:
-```sqf
-(!(call _isPotolokFinded))
-```
-File: [client\LightEngine\LightRender.sqf at line 123](../../../Src/client/LightEngine/LightRender.sqf#L123)
-## __getrender(v,i)
-
-Type: constant
-
-Description: 
-- Param: v
-- Param: i
-
-Replaced value:
-```sqf
-(v getvariable "rnglt" select i)
-```
-File: [client\LightEngine\LightRender.sqf at line 116](../../../Src/client/LightEngine/LightRender.sqf#L116)
 ## constbias
 
 Type: constant
@@ -1614,6 +1463,44 @@ Replaced value:
 0.05
 ```
 File: [client\LightEngine\LightRender.sqf at line 162](../../../Src/client/LightEngine/LightRender.sqf#L162)
+## le_list_changevis
+
+Type: Variable
+
+Description: structs in type: src,lt,curview,
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\LightEngine\LightRender.sqf at line 28](../../../Src/client/LightEngine/LightRender.sqf#L28)
+## le_render_handleState
+
+Type: Variable
+
+> Exists if **NEW_ALGORITHM_LIGHT_RENDERING** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+startUpdate(le_onchangeview,0)
+```
+File: [client\LightEngine\LightRender.sqf at line 306](../../../Src/client/LightEngine/LightRender.sqf#L306)
+## le_render_handleUpdate
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+startUpdate(le_onupdrender,0)
+```
+File: [client\LightEngine\LightRender.sqf at line 309](../../../Src/client/LightEngine/LightRender.sqf#L309)
 ## le_initRenderer
 
 Type: function
@@ -1709,8 +1596,106 @@ Replaced value:
 2103
 ```
 File: [client\LightEngine\ScriptedEffects.hpp at line 9](../../../Src/client/LightEngine/ScriptedEffects.hpp#L9)
+## SLIGHT_MAGICSTORM_DEBUG_var
+
+Type: Variable
+
+> Exists if **SCRIPT_EMIT_EVAL_SERVER** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+2100
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 13](../../../Src/client/LightEngine/ScriptedEffects.hpp#L13)
+## SLIGHT_SET123_DEBUG_var
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+2101
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 14](../../../Src/client/LightEngine/ScriptedEffects.hpp#L14)
+## SLIGHT_TEMPLATE_DIRECTLIGHT_var
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+2102
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 15](../../../Src/client/LightEngine/ScriptedEffects.hpp#L15)
+## SLIGHT_TEMPLATE_POINTLIGHT_var
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+2103
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 16](../../../Src/client/LightEngine/ScriptedEffects.hpp#L16)
 # ScriptedEffects.sqf
 
+## le_se_map
+
+Type: Variable
+
+Description: place this file before all configs
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\LightEngine\ScriptedEffects.sqf at line 10](../../../Src/client/LightEngine/ScriptedEffects.sqf#L10)
+## le_se_noattr
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+null
+```
+File: [client\LightEngine\ScriptedEffects.sqf at line 11](../../../Src/client/LightEngine/ScriptedEffects.sqf#L11)
+## le_se_cfgRange
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[2100,4900]
+```
+File: [client\LightEngine\ScriptedEffects.sqf at line 12](../../../Src/client/LightEngine/ScriptedEffects.sqf#L12)
+## le_se_mapHandlers
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
+File: [client\LightEngine\ScriptedEffects.sqf at line 77](../../../Src/client/LightEngine/ScriptedEffects.sqf#L77)
 ## le_se_handleConfig
 
 Type: function
@@ -1880,7 +1865,7 @@ Replaced value:
 ```sqf
 20
 ```
-File: [client\LightEngine\LightConfigs\Natural.sqf at line 610](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L610)
+File: [client\LightEngine\LightConfigs\Natural.sqf at line 111](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L111)
 ## CAMPFIRE_SOUND_DELAY
 
 Type: constant
@@ -1917,22 +1902,6 @@ Replaced value:
 4.34
 ```
 File: [client\LightEngine\LightConfigs\Natural.sqf at line 257](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L257)
-# WorldEffects.sqf
-
-## stdLink(x,y,z)
-
-Type: constant
-
-Description: #define stdLink() 	linkLight(emitterObject,player,vector(0,0,0)); linkLight(emitterObject,sourceObject,vector(0,0,0))
-- Param: x
-- Param: y
-- Param: z
-
-Replaced value:
-```sqf
-emitterObject setposatl ((getposatl sourceObject) vectorAdd vec3(x,y,z))
-```
-File: [client\LightEngine\ParticleConfigs\WorldEffects.sqf at line 8](../../../Src/client/LightEngine/ParticleConfigs/WorldEffects.sqf#L8)
 # Bullets.sqf
 
 ## SHOT_BULLET_PISTOL_TIMEOUT
@@ -1988,3 +1957,17 @@ Description:
 - Param: _addY (optional, default 0)
 
 File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 32](../../../Src/client/LightEngine/ShotableConfigs/Bullets.sqf#L32)
+# Stealth.sqf
+
+## vst_human_stealth_allowStepsounds
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+true
+```
+File: [client\LightEngine\VisualStates\Stealth.sqf at line 7](../../../Src/client/LightEngine/VisualStates/Stealth.sqf#L7)

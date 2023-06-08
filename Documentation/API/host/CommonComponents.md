@@ -1,5 +1,17 @@
 # !MemReflect.sqf
 
+## global_modules
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CommonComponents\!MemReflect.sqf at line 68](../../../Src/host/CommonComponents/!MemReflect.sqf#L68)
 ## gv_rv
 
 Type: function
@@ -108,18 +120,126 @@ Replaced value:
 4
 ```
 File: [host\CommonComponents\!PreInit.sqf at line 182](../../../Src/host/CommonComponents/!PreInit.sqf#L182)
-## _findTok__(t__)
+## cprint_usestdout
 
-Type: constant
+Type: Variable
+
+Description: console helpers
+
+
+Initial value:
+```sqf
+true //flag for standart console output
+```
+File: [host\CommonComponents\!PreInit.sqf at line 32](../../../Src/host/CommonComponents/!PreInit.sqf#L32)
+## cprint_isserver
+
+Type: Variable
+
+Description: flag for standart console output
+
+
+Initial value:
+```sqf
+isMultiplayer && isServer
+```
+File: [host\CommonComponents\!PreInit.sqf at line 33](../../../Src/host/CommonComponents/!PreInit.sqf#L33)
+## allThreads
+
+Type: Variable
 
 Description: 
-- Param: t__
 
-Replaced value:
+
+Initial value:
 ```sqf
-((_src find t__)!=-1)
+[] //init thread pool
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 317](../../../Src/host/CommonComponents/!PreInit.sqf#L317)
+File: [host\CommonComponents\!PreInit.sqf at line 107](../../../Src/host/CommonComponents/!PreInit.sqf#L107)
+## hashMapNull
+
+Type: Variable
+
+Description: init thread pool
+
+
+Initial value:
+```sqf
+createHashMapFromArray [["__NULL_HASH_MAP__","__NULL_HASH_MAP__"]]
+```
+File: [host\CommonComponents\!PreInit.sqf at line 108](../../../Src/host/CommonComponents/!PreInit.sqf#L108)
+## table_hex
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"0123456789abcdef"splitString stringEmpty
+```
+File: [host\CommonComponents\!PreInit.sqf at line 110](../../../Src/host/CommonComponents/!PreInit.sqf#L110)
+## ptr_i_mctr
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+1//internal memory counter
+```
+File: [host\CommonComponents\!PreInit.sqf at line 179](../../../Src/host/CommonComponents/!PreInit.sqf#L179)
+## ptr_i_al
+
+Type: Variable
+
+Description: internal memory counter
+
+
+Initial value:
+```sqf
+0 //allocated before realoc ( not used now...)
+```
+File: [host\CommonComponents\!PreInit.sqf at line 180](../../../Src/host/CommonComponents/!PreInit.sqf#L180)
+## ptr_cnl
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+__ptr_struct_internal__(str ptr_i_mctr,0) //null pointer
+```
+File: [host\CommonComponents\!PreInit.sqf at line 183](../../../Src/host/CommonComponents/!PreInit.sqf#L183)
+## ptr_htable
+
+Type: Variable
+
+Description: null pointer
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CommonComponents\!PreInit.sqf at line 184](../../../Src/host/CommonComponents/!PreInit.sqf#L184)
+## ptr_i_hex__
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"0123456789abcdef"splitString stringEmpty
+```
+File: [host\CommonComponents\!PreInit.sqf at line 202](../../../Src/host/CommonComponents/!PreInit.sqf#L202)
 ## cprint
 
 Type: function
@@ -247,38 +367,6 @@ Description:
 - Param: _replacer
 
 File: [host\CommonComponents\!PreInit.sqf at line 277](../../../Src/host/CommonComponents/!PreInit.sqf#L277)
-## cst_toString
-
-Type: function
-
-Description: 
-- Param: _src
-
-File: [host\CommonComponents\!PreInit.sqf at line 290](../../../Src/host/CommonComponents/!PreInit.sqf#L290)
-## cst_compress
-
-Type: function
-
-Description: убираем пробелы внутри структурированного текста
-- Param: _src
-
-File: [host\CommonComponents\!PreInit.sqf at line 297](../../../Src/host/CommonComponents/!PreInit.sqf#L297)
-## cst_decomress
-
-Type: function
-
-Description: 
-
-
-File: [host\CommonComponents\!PreInit.sqf at line 303](../../../Src/host/CommonComponents/!PreInit.sqf#L303)
-## cst_isComressed
-
-Type: function
-
-Description: 
-- Param: _src
-
-File: [host\CommonComponents\!PreInit.sqf at line 315](../../../Src/host/CommonComponents/!PreInit.sqf#L315)
 ## selectBest
 
 Type: function
@@ -325,6 +413,30 @@ Replaced value:
 ((_anims select idx) == "nl" && ((_blender select idx) == 1))
 ```
 File: [host\CommonComponents\Animator.sqf at line 215](../../../Src/host/CommonComponents/Animator.sqf#L215)
+## anim_assocList_keyString
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap 
+```
+File: [host\CommonComponents\Animator.sqf at line 10](../../../Src/host/CommonComponents/Animator.sqf#L10)
+## anim_assocList_keyInt
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CommonComponents\Animator.sqf at line 11](../../../Src/host/CommonComponents/Animator.sqf#L11)
 ## anim_getAssoc
 
 Type: function
@@ -380,6 +492,18 @@ Description:
 File: [host\CommonComponents\Animator.sqf at line 297](../../../Src/host/CommonComponents/Animator.sqf#L297)
 # AttackTypesAssoc.sqf
 
+## ata_assoc_map
+
+Type: Variable
+
+Description: assoc for attack types
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CommonComponents\AttackTypesAssoc.sqf at line 90](../../../Src/host/CommonComponents/AttackTypesAssoc.sqf#L90)
 ## ata_buf_process
 
 Type: function
@@ -493,6 +617,44 @@ Replaced value:
 BIS_fnc_##funcname__
 ```
 File: [host\CommonComponents\Color.sqf at line 18](../../../Src/host/CommonComponents/Color.sqf#L18)
+## color_diagfonts
+
+Type: Variable
+
+> Exists if **DEBUG** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+importNative(3DENDiagFonts)
+```
+File: [host\CommonComponents\Color.sqf at line 20](../../../Src/host/CommonComponents/Color.sqf#L20)
+## color_hexTable256
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\CommonComponents\Color.sqf at line 42](../../../Src/host/CommonComponents/Color.sqf#L42)
+## color_map_hexStrToNum
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CommonComponents\Color.sqf at line 43](../../../Src/host/CommonComponents/Color.sqf#L43)
 ## color_RGBAtoHTML
 
 Type: function
@@ -554,19 +716,6 @@ Description:
 - Param: _doSkipApplyMove (optional, default false)
 
 File: [host\CommonComponents\CombatMode.sqf at line 9](../../../Src/host/CommonComponents/CombatMode.sqf#L9)
-# Craft.sqf
-
-## craft_newRecipe
-
-Type: function
-
-Description: 
-- Param: _id
-- Param: _name
-- Param: _listNeed
-- Param: _desc
-
-File: [host\CommonComponents\Craft.sqf at line 13](../../../Src/host/CommonComponents/Craft.sqf#L13)
 # DateTime.sqf
 
 ## applyficator(val)
@@ -687,6 +836,18 @@ Replaced value:
 pencfg_map_all set [tolower model,[soundpen,armpen]]
 ```
 File: [host\CommonComponents\Pencfg.sqf at line 13](../../../Src/host/CommonComponents/Pencfg.sqf#L13)
+## pencfg_map_all
+
+Type: Variable
+
+Description: common data
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CommonComponents\Pencfg.sqf at line 11](../../../Src/host/CommonComponents/Pencfg.sqf#L11)
 ## pencfg_isExistsModel
 
 Type: function
@@ -712,6 +873,20 @@ Description:
 - Param: _obj
 
 File: [host\CommonComponents\Pencfg.sqf at line 37](../../../Src/host/CommonComponents/Pencfg.sqf#L37)
+# Replicator.sqf
+
+## repl_map_funcs
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
+File: [host\CommonComponents\Replicator.sqf at line 8](../../../Src/host/CommonComponents/Replicator.sqf#L8)
 # SMD_shared.sqf
 
 ## smd_getAnimValue
@@ -786,18 +961,6 @@ Replaced value:
 
 ```
 File: [host\CommonComponents\SoundEngine.sqf at line 27](../../../Src/host/CommonComponents/SoundEngine.sqf#L27)
-## DEBUG_SOUND_TRACE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\CommonComponents\SoundEngine.sqf at line 70](../../../Src/host/CommonComponents/SoundEngine.sqf#L70)
 ## soundGlobal_play
 
 Type: function
@@ -844,6 +1007,44 @@ Description:
 - Param: _enumName
 
 File: [host\CommonComponents\TransportLayer.sqf at line 33](../../../Src/host/CommonComponents/TransportLayer.sqf#L33)
+# Voice.sqf
+
+## TF_ADDON_VERSION
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"TF RELICTA ADDON API 1.8"
+```
+File: [host\CommonComponents\Voice.sqf at line 8](../../../Src/host/CommonComponents/Voice.sqf#L8)
+## vs_list_langs
+
+Type: Variable
+
+Description: список языков
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\CommonComponents\Voice.sqf at line 10](../../../Src/host/CommonComponents/Voice.sqf#L10)
+## vs_map_whohear
+
+Type: Variable
+
+Description: ["eater",["eater","human"]] -> жруны слышат жрунов и людей
+
+
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
+File: [host\CommonComponents\Voice.sqf at line 15](../../../Src/host/CommonComponents/Voice.sqf#L15)
 # __notcompile__PerFrame.sqf
 
 ## PF_IND_CODE
@@ -990,6 +1191,18 @@ Replaced value:
 5
 ```
 File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 274](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L274)
+## pf_hash
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 8](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L8)
 ## pf_addTimer
 
 Type: function

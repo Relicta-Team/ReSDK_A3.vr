@@ -157,6 +157,138 @@ _args
 File: [client\NetDisplays\NetDisplay.h at line 32](../../../Src/client/NetDisplays/NetDisplay.h#L32)
 # NetDisplays.sqf
 
+## nd_map_displays
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\NetDisplays\NetDisplays.sqf at line 17](../../../Src/client/NetDisplays/NetDisplays.sqf#L17)
+## nd_handleUpdate
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\NetDisplays\NetDisplays.sqf at line 23](../../../Src/client/NetDisplays/NetDisplays.sqf#L23)
+## nd_list_widgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[[],[]] //список виджетов с данными. В левом стеке неочищаемые данные до закрытия окна, в правом обновляемый список
+```
+File: [client\NetDisplays\NetDisplays.sqf at line 25](../../../Src/client/NetDisplays/NetDisplays.sqf#L25)
+## nd_sourceObject
+
+Type: Variable
+
+Description: список виджетов с данными. В левом стеке неочищаемые данные до закрытия окна, в правом обновляемый список
+
+
+Initial value:
+```sqf
+objNUll
+```
+File: [client\NetDisplays\NetDisplays.sqf at line 26](../../../Src/client/NetDisplays/NetDisplays.sqf#L26)
+## nd_interactionDistance
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\NetDisplays\NetDisplays.sqf at line 27](../../../Src/client/NetDisplays/NetDisplays.sqf#L27)
+## nd_isOpenDisplay
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\NetDisplays\NetDisplays.sqf at line 28](../../../Src/client/NetDisplays/NetDisplays.sqf#L28)
+## nd_openedDisplayType
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+""
+```
+File: [client\NetDisplays\NetDisplays.sqf at line 29](../../../Src/client/NetDisplays/NetDisplays.sqf#L29)
+## nd_sourceRef
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+""
+```
+File: [client\NetDisplays\NetDisplays.sqf at line 30](../../../Src/client/NetDisplays/NetDisplays.sqf#L30)
+## nd_checkedPos
+
+Type: Variable
+
+Description: find nearest intersection point
+
+
+Initial value:
+```sqf
+vec3(0,0,0)
+```
+File: [client\NetDisplays\NetDisplays.sqf at line 31](../../../Src/client/NetDisplays/NetDisplays.sqf#L31)
+## nd_lobby_isOpen
+
+Type: Variable
+
+Description: variables for lobby
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\NetDisplays\NetDisplays.sqf at line 34](../../../Src/client/NetDisplays/NetDisplays.sqf#L34)
+## nd_internal_attemptLoad
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\NetDisplays\NetDisplays.sqf at line 36](../../../Src/client/NetDisplays/NetDisplays.sqf#L36)
 ## nd_createTestDisplay
 
 Type: function
@@ -276,6 +408,20 @@ Description: стандартный алгоритм
 - Param: _btName (optional, default "Закрыть")
 
 File: [client\NetDisplays\NetDisplays.sqf at line 332](../../../Src/client/NetDisplays/NetDisplays.sqf#L332)
+# Book.sqf
+
+## nd_internal_map_books
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //key:pointer,value:content
+```
+File: [client\NetDisplays\Displays\Book.sqf at line 8](../../../Src/client/NetDisplays/Displays/Book.sqf#L8)
 # MessageBoxes.sqf
 
 ## __ND_MB_INPUT_MAX_CHARS
@@ -338,6 +484,18 @@ Replaced value:
 2
 ```
 File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 346](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L346)
+## nd_internal_voterep_widgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 343](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L343)
 ## nd_internal_voterep_cleanupMaps
 
 Type: function
@@ -346,42 +504,3 @@ Description: структуры с виджетами
 
 
 File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 339](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L339)
-# MobInventory.sqf
-
-## SIZE_INVSLOT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-7
-```
-File: [client\NetDisplays\Displays\MobInventory.sqf at line 62](../../../Src/client/NetDisplays/Displays/MobInventory.sqf#L62)
-## SLOT_BIASH
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-0.3
-```
-File: [client\NetDisplays\Displays\MobInventory.sqf at line 63](../../../Src/client/NetDisplays/Displays/MobInventory.sqf#L63)
-## allocpos__(xpos,ypos)
-
-Type: constant
-
-Description: 
-- Param: xpos
-- Param: ypos
-
-Replaced value:
-```sqf
-[_xp + ((_wp + _biasW) * xpos),_yp + ((_hp + SLOT_BIASH) * ypos),_wp,_hp]
-```
-File: [client\NetDisplays\Displays\MobInventory.sqf at line 72](../../../Src/client/NetDisplays/Displays/MobInventory.sqf#L72)

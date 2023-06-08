@@ -12,6 +12,42 @@ Replaced value:
 3
 ```
 File: [client\Interactions\aim_cursor.sqf at line 7](../../../Src/client/Interactions/aim_cursor.sqf#L7)
+## interaction_aim_handle
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\Interactions\aim_cursor.sqf at line 9](../../../Src/client/Interactions/aim_cursor.sqf#L9)
+## interaction_aim_alphaUpdHandle
+
+Type: Variable
+
+Description: TODO dynamic change opacity
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\Interactions\aim_cursor.sqf at line 10](../../../Src/client/Interactions/aim_cursor.sqf#L10)
+## interaction_aim_widgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[widgetNull]
+```
+File: [client\Interactions\aim_cursor.sqf at line 12](../../../Src/client/Interactions/aim_cursor.sqf#L12)
 ## interaction_aim_init
 
 Type: function
@@ -185,9 +221,9 @@ Description:
 
 Replaced value:
 ```sqf
-"ROADWAY","VIEW"
+"VIEW","FIRE"
 ```
-File: [client\Interactions\interact.hpp at line 24](../../../Src/client/Interactions/interact.hpp#L24)
+File: [client\Interactions\interact.hpp at line 23](../../../Src/client/Interactions/interact.hpp#L23)
 ## INTERACT_LODS_CHECK_GEOM
 
 Type: constant
@@ -430,18 +466,54 @@ Replaced value:
 -0.2
 ```
 File: [client\Interactions\interact.sqf at line 254](../../../Src/client/Interactions/interact.sqf#L254)
-## INTERACT_LOG_CANINTERACTWITHOBJECT
+## verb_internal_bufferedObjData
 
-Type: constant
+Type: Variable
+
+Description: это инвентарный мировой верб
+
+
+Initial value:
+```sqf
+[[objNUll,vec3(0,0,0),false],[50,50]]
+```
+File: [client\Interactions\interact.sqf at line 95](../../../Src/client/Interactions/interact.sqf#L95)
+## verb_internal_isAwaitWorldVerb
+
+Type: Variable
 
 Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-
+false
 ```
-File: [client\Interactions\interact.sqf at line 316](../../../Src/client/Interactions/interact.sqf#L316)
+File: [client\Interactions\interact.sqf at line 96](../../../Src/client/Interactions/interact.sqf#L96)
+## interact_isOpenMousemode
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Interactions\interact.sqf at line 373](../../../Src/client/Interactions/interact.sqf#L373)
+## interact_isMouseModeActive
+
+Type: Variable
+
+Description: reset mousemode
+
+
+Initial value:
+```sqf
+true //допускается ли активность режима мышь/мир
+```
+File: [client\Interactions\interact.sqf at line 374](../../../Src/client/Interactions/interact.sqf#L374)
 ## interact_isActive
 
 Type: function
@@ -970,31 +1042,6 @@ Replaced value:
 		_butt ctrlSetTextColor [0.886,0,0.282,1]
 ```
 File: [client\Interactions\interactCombat.sqf at line 186](../../../Src/client/Interactions/interactCombat.sqf#L186)
-## allocCombatStyle(pos,name,_mode)
-
-Type: constant
-
-Description: 
-- Param: pos
-- Param: name
-- Param: _mode
-
-Replaced value:
-```sqf
-\
-		_butt = [_d,TEXT,pos,_ctg] call createWidget; \
-		_butt setvariable ['mode',_mode]; \
-		[_butt,name] call widgetSetText; \
-		if (_mode == _curCSMode) then {_butt setFade FADE_BUT_CS; _butt commit 0; curWidgets set [CM_CUR_IND_CS,_butt]}; \
-		_butt ctrlAddEventHandler ["MouseEnter",{ \
-			params ["_but"]; _but setBackgroundColor [.15,.15,.15,.6]; \
-		}]; \
-		_butt ctrlAddEventHandler ["MouseExit",{ \
-			params ["_but"]; _but setBackgroundColor [0,0,0,0]; \
-		}]; \
-		_butt ctrlAddEventHandler ["MouseButtonUp",interactCombat_onPressCS]; */
-```
-File: [client\Interactions\interactCombat.sqf at line 195](../../../Src/client/Interactions/interactCombat.sqf#L195)
 ## getMode(wid)
 
 Type: constant
@@ -1086,6 +1133,138 @@ Replaced value:
 ['name','_color',_enum,'nameranged']
 ```
 File: [client\Interactions\interactCombat_defines.sqf at line 12](../../../Src/client/Interactions/interactCombat_defines.sqf#L12)
+## interactCombat_disableGlobal
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false //true means upper combat menu is not shown
+```
+File: [client\Interactions\interactCombat_defines.sqf at line 6](../../../Src/client/Interactions/interactCombat_defines.sqf#L6)
+## interactCombat_isLoadedMenu
+
+Type: Variable
+
+Description: true means upper combat menu is not shown
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Interactions\interactCombat_defines.sqf at line 8](../../../Src/client/Interactions/interactCombat_defines.sqf#L8)
+## interactCombat_csModesType
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0 //0 handed,1 shooting
+```
+File: [client\Interactions\interactCombat_defines.sqf at line 10](../../../Src/client/Interactions/interactCombat_defines.sqf#L10)
+## interactCombat_styleMap
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\Interactions\interactCombat_defines.sqf at line 13](../../../Src/client/Interactions/interactCombat_defines.sqf#L13)
+## interactCombat_map_widgetStyles
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\Interactions\interactCombat_defines.sqf at line 39](../../../Src/client/Interactions/interactCombat_defines.sqf#L39)
+## interactCombat_hud_map_Styles
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\Interactions\interactCombat_defines.sqf at line 40](../../../Src/client/Interactions/interactCombat_defines.sqf#L40)
+## interactCombat_curWidgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[widgetNull,widgetNull,widgetNull]
+```
+File: [client\Interactions\interactCombat_defines.sqf at line 51](../../../Src/client/Interactions/interactCombat_defines.sqf#L51)
+## interactCombat_at_list_types
+
+Type: Variable
+
+Description: сюда вносятся типы атак
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Interactions\interactCombat_defines.sqf at line 53](../../../Src/client/Interactions/interactCombat_defines.sqf#L53)
+## interactCombat_at_assocEnum
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+ATTACK_TYPE_ASSOC_HAND
+```
+File: [client\Interactions\interactCombat_defines.sqf at line 54](../../../Src/client/Interactions/interactCombat_defines.sqf#L54)
+## interactCombat_map_attTypeWidgets
+
+Type: Variable
+
+Description: карта ассоциаций виджетов типов атаки. ключ тип
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\Interactions\interactCombat_defines.sqf at line 56](../../../Src/client/Interactions/interactCombat_defines.sqf#L56)
+## interactCombat_at_widgets
+
+Type: Variable
+
+Description: виджеты комбата в порядке объявления
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Interactions\interactCombat_defines.sqf at line 60](../../../Src/client/Interactions/interactCombat_defines.sqf#L60)
 # interactEmoteMenu.sqf
 
 ## INTERACT_EMOTE_SIZE_H
@@ -1112,6 +1291,78 @@ Replaced value:
 40
 ```
 File: [client\Interactions\interactEmoteMenu.sqf at line 18](../../../Src/client/Interactions/interactEmoteMenu.sqf#L18)
+## interactEmote_isLoadedMenu
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Interactions\interactEmoteMenu.sqf at line 7](../../../Src/client/Interactions/interactEmoteMenu.sqf#L7)
+## interactEmote_inputText
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+""
+```
+File: [client\Interactions\interactEmoteMenu.sqf at line 9](../../../Src/client/Interactions/interactEmoteMenu.sqf#L9)
+## interactEmote_curTabIdx
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\Interactions\interactEmoteMenu.sqf at line 11](../../../Src/client/Interactions/interactEmoteMenu.sqf#L11)
+## interactEmote_actions
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[["Эмоции","Эмоция:emt_1"]]
+```
+File: [client\Interactions\interactEmoteMenu.sqf at line 13](../../../Src/client/Interactions/interactEmoteMenu.sqf#L13)
+## interactEmote_generatedActs
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Interactions\interactEmoteMenu.sqf at line 14](../../../Src/client/Interactions/interactEmoteMenu.sqf#L14)
+## interactEmote_act_widgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Interactions\interactEmoteMenu.sqf at line 15](../../../Src/client/Interactions/interactEmoteMenu.sqf#L15)
 ## interactEmote_load
 
 Type: function
@@ -1724,6 +1975,174 @@ Replaced value:
 (PATH_PICTURE_FOLDER + "interact\" + 'pt' + ".paa" )
 ```
 File: [client\Interactions\interactMenu_defines.sqf at line 17](../../../Src/client/Interactions/interactMenu_defines.sqf#L17)
+## interactMenu_disableGlobal
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 7](../../../Src/client/Interactions/interactMenu_defines.sqf#L7)
+## interactMenu_isLoadedMenu
+
+Type: Variable
+
+Description: активно ли интеракт меню
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 10](../../../Src/client/Interactions/interactMenu_defines.sqf#L10)
+## interactMenu_skillWidgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_interactMenu_skillWidgets apply ...
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 14](../../../Src/client/Interactions/interactMenu_defines.sqf#L14)
+## interactMenu_skillNames
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+["СЛ","ИН","ЛВ","ЗД","ВНС","ВОЛЯ","ВОС","ЖЗ"]
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 15](../../../Src/client/Interactions/interactMenu_defines.sqf#L15)
+## interactMenu_intentPath
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[INT_PATH(help),INT_PATH(grab),INT_PATH(harm)]
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 19](../../../Src/client/Interactions/interactMenu_defines.sqf#L19)
+## interactMenu_intentWidgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[widgetNull,widgetNull,widgetNull]
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 21](../../../Src/client/Interactions/interactMenu_defines.sqf#L21)
+## interactMenu_activeIntent
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[widgetNull] //ссылка на виджет активного
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 22](../../../Src/client/Interactions/interactMenu_defines.sqf#L22)
+## interactMenu_intentActiveColors
+
+Type: Variable
+
+Description: ссылка на виджет активного
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 23](../../../Src/client/Interactions/interactMenu_defines.sqf#L23)
+## interactMenu_selectionWidgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_sels apply ...
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 31](../../../Src/client/Interactions/interactMenu_defines.sqf#L31)
+## interactMenu_activeSelectionWidget
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[widgetNull] //виджет активной зоны
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 33](../../../Src/client/Interactions/interactMenu_defines.sqf#L33)
+## interactMenu_specialActions
+
+Type: Variable
+
+Description: специальные действия на F
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 36](../../../Src/client/Interactions/interactMenu_defines.sqf#L36)
+## interactMenu_specialActions_map_hud
+
+Type: Variable
+
+Description: фразы для худа
+
+
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 50](../../../Src/client/Interactions/interactMenu_defines.sqf#L50)
+## interactMenu_curActiveSpecAct
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[widgetNull]
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 59](../../../Src/client/Interactions/interactMenu_defines.sqf#L59)
+## interactMenu_specActWidgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_nmap apply ...
+```
+File: [client\Interactions\interactMenu_defines.sqf at line 64](../../../Src/client/Interactions/interactMenu_defines.sqf#L64)
 # interactMenu_functions.sqf
 
 ## interactMenu_onUpdateSkills
@@ -1796,30 +2215,6 @@ Replaced value:
 File: [client\Interactions\interact_component_shared.hpp at line 9](../../../Src/client/Interactions/interact_component_shared.hpp#L9)
 # interact_deprecated.sqf
 
-## nonSee(ind)
-
-Type: constant
-
-Description: 
-- Param: ind
-
-Replaced value:
-```sqf
-_pass##ind
-```
-File: [client\Interactions\interact_deprecated.sqf at line 61](../../../Src/client/Interactions/interact_deprecated.sqf#L61)
-## useviswidgets
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\Interactions\interact_deprecated.sqf at line 93](../../../Src/client/Interactions/interact_deprecated.sqf#L93)
 ## mlp(selection)
 
 Type: constant
@@ -1832,18 +2227,6 @@ Replaced value:
 #selection
 ```
 File: [client\Interactions\interact_deprecated.sqf at line 196](../../../Src/client/Interactions/interact_deprecated.sqf#L196)
-## DEBUG_ALLOW_DRAW_BBX
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\Interactions\interact_deprecated.sqf at line 252](../../../Src/client/Interactions/interact_deprecated.sqf#L252)
 ## DEBUG_DRAW_BBX_DISTANCE
 
 Type: constant
@@ -1856,6 +2239,18 @@ Replaced value:
 10
 ```
 File: [client\Interactions\interact_deprecated.sqf at line 253](../../../Src/client/Interactions/interact_deprecated.sqf#L253)
+## interact_debug_viswidgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Interactions\interact_deprecated.sqf at line 92](../../../Src/client/Interactions/interact_deprecated.sqf#L92)
 ## interact_canHandReach
 
 Type: function
@@ -1952,6 +2347,66 @@ Replaced value:
 0
 ```
 File: [client\Interactions\interact_grabbing.sqf at line 7](../../../Src/client/Interactions/interact_grabbing.sqf#L7)
+## interact_grab_handleupdate
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+vec2(-1,-1)
+```
+File: [client\Interactions\interact_grabbing.sqf at line 8](../../../Src/client/Interactions/interact_grabbing.sqf#L8)
+## interact_grab_bias
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+vec3(0,0,0)
+```
+File: [client\Interactions\interact_grabbing.sqf at line 10](../../../Src/client/Interactions/interact_grabbing.sqf#L10)
+## interact_grab_dir
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+vec3(0,0,0)
+```
+File: [client\Interactions\interact_grabbing.sqf at line 11](../../../Src/client/Interactions/interact_grabbing.sqf#L11)
+## interact_grab_mobObj
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+objNUll
+```
+File: [client\Interactions\interact_grabbing.sqf at line 12](../../../Src/client/Interactions/interact_grabbing.sqf#L12)
+## interact_grab_isGrabbed
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Interactions\interact_grabbing.sqf at line 14](../../../Src/client/Interactions/interact_grabbing.sqf#L14)
 ## interact_grab_start
 
 Type: function
@@ -2047,6 +2502,18 @@ Replaced value:
 _exiter = mode
 ```
 File: [client\Interactions\interact_mainhandle.sqf at line 29](../../../Src/client/Interactions/interact_mainhandle.sqf#L29)
+## interact_mainHandleLock
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Interactions\interact_mainhandle.sqf at line 21](../../../Src/client/Interactions/interact_mainhandle.sqf#L21)
 # interact_resist.sqf
 
 ## interact_processResist
@@ -2059,18 +2526,6 @@ Description:
 File: [client\Interactions\interact_resist.sqf at line 7](../../../Src/client/Interactions/interact_resist.sqf#L7)
 # progress.sqf
 
-## PROGRESS_DEBUG
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\Interactions\progress.sqf at line 7](../../../Src/client/Interactions/progress.sqf#L7)
 ## SIZEPROG
 
 Type: constant
@@ -2203,18 +2658,6 @@ Replaced value:
 transformSizeByAR(h_value)
 ```
 File: [client\Interactions\progress.sqf at line 24](../../../Src/client/Interactions/progress.sqf#L24)
-## interact_progress_countItms
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-90
-```
-File: [client\Interactions\progress.sqf at line 33](../../../Src/client/Interactions/progress.sqf#L33)
 ## MAX_ALLOW_DISTANCE_CAM_OFFSET
 
 Type: constant
@@ -2227,14 +2670,186 @@ Replaced value:
 0.01
 ```
 File: [client\Interactions\progress.sqf at line 42](../../../Src/client/Interactions/progress.sqf#L42)
-## interact_progress_checkActivity
+## interact_progress_hasProcessed
 
-Type: function
+Type: Variable
+
+Description: interact_progress_curItmIndex = 0;
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Interactions\progress.sqf at line 30](../../../Src/client/Interactions/progress.sqf#L30)
+## interact_progress_countItms
+
+Type: Variable
+
+Description: interact_progress_curItmIndex = 0;
+
+
+Initial value:
+```sqf
+0 //use inline interact_progress_countItms
+```
+File: [client\Interactions\progress.sqf at line 32](../../../Src/client/Interactions/progress.sqf#L32)
+## interact_progress_handleUpdate
+
+Type: Variable
+
+Description: #define interact_progress_countItms 90
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\Interactions\progress.sqf at line 34](../../../Src/client/Interactions/progress.sqf#L34)
+## interact_progress_tick
+
+Type: Variable
+
+Description: interact_progress_lastDelta = 0;
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\Interactions\progress.sqf at line 36](../../../Src/client/Interactions/progress.sqf#L36)
+## interact_progress_pData
+
+Type: Variable
 
 Description: 
 
 
-File: [client\Interactions\progress.sqf at line 94](../../../Src/client/Interactions/progress.sqf#L94)
+Initial value:
+```sqf
+["",objnull] //ref to player, and ptr to target
+```
+File: [client\Interactions\progress.sqf at line 37](../../../Src/client/Interactions/progress.sqf#L37)
+## interact_progress_lastTargetPos
+
+Type: Variable
+
+Description: ref to player, and ptr to target
+
+
+Initial value:
+```sqf
+vec3(0,0,0)
+```
+File: [client\Interactions\progress.sqf at line 38](../../../Src/client/Interactions/progress.sqf#L38)
+## interact_progress_lastPlayerPos
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+vec3(0,0,0)
+```
+File: [client\Interactions\progress.sqf at line 39](../../../Src/client/Interactions/progress.sqf#L39)
+## interact_progress_lastScreenPoint
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+vec3(0,0,0)
+```
+File: [client\Interactions\progress.sqf at line 40](../../../Src/client/Interactions/progress.sqf#L40)
+## interact_progress_renderPos
+
+Type: Variable
+
+Description: interact_progress_lastPlayerDir = getDir player;
+
+
+Initial value:
+```sqf
+vec3(0,0,0)
+```
+File: [client\Interactions\progress.sqf at line 43](../../../Src/client/Interactions/progress.sqf#L43)
+## interact_progress_lastProgressType
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\Interactions\progress.sqf at line 44](../../../Src/client/Interactions/progress.sqf#L44)
+## interact_progress_checkDelegates
+
+Type: Variable
+
+Description: if return true then falldown
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\Interactions\progress.sqf at line 99](../../../Src/client/Interactions/progress.sqf#L99)
+## interact_progress_startColor
+
+Type: Variable
+
+Description: widget components and initializers
+
+
+Initial value:
+```sqf
+[0,0.427,0.298,1]
+```
+File: [client\Interactions\progress.sqf at line 195](../../../Src/client/Interactions/progress.sqf#L195)
+## interact_progress_endColor
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[0.11,0.161,0.043,1]
+```
+File: [client\Interactions\progress.sqf at line 196](../../../Src/client/Interactions/progress.sqf#L196)
+## interact_progress_widgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[widgetNull,widgetNull] //ctg,text
+```
+File: [client\Interactions\progress.sqf at line 197](../../../Src/client/Interactions/progress.sqf#L197)
+## interact_progress_allItems
+
+Type: Variable
+
+Description: ctg,text
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Interactions\progress.sqf at line 198](../../../Src/client/Interactions/progress.sqf#L198)
 ## interact_progress_start
 
 Type: function
@@ -2300,6 +2915,126 @@ Replaced value:
 ((rc_listObject select idx) getVariable "curVal")
 ```
 File: [client\Interactions\RayCastConcept.sqf at line 79](../../../Src/client/Interactions/RayCastConcept.sqf#L79)
+## rc_list
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[vec2(-1,1),vec2(1,1), //upper left, upper right...
+```
+File: [client\Interactions\RayCastConcept.sqf at line 7](../../../Src/client/Interactions/RayCastConcept.sqf#L7)
+## rc_modelPath
+
+Type: Variable
+
+Description: lower left, lower right
+
+
+Initial value:
+```sqf
+"a3\structures_f_epa\items\food\canteen_f.p3d"
+```
+File: [client\Interactions\RayCastConcept.sqf at line 10](../../../Src/client/Interactions/RayCastConcept.sqf#L10)
+## rc_listObject
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Interactions\RayCastConcept.sqf at line 12](../../../Src/client/Interactions/RayCastConcept.sqf#L12)
+## rc_forwardDistance
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+5
+```
+File: [client\Interactions\RayCastConcept.sqf at line 14](../../../Src/client/Interactions/RayCastConcept.sqf#L14)
+## rc_multiplyBias
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0.005
+```
+File: [client\Interactions\RayCastConcept.sqf at line 16](../../../Src/client/Interactions/RayCastConcept.sqf#L16)
+## rc_updateVec4PosPerFrame
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\Interactions\RayCastConcept.sqf at line 18](../../../Src/client/Interactions/RayCastConcept.sqf#L18)
+## rc_3dCursor
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"Sign_Arrow_F" createVehicle [0,0,0]
+```
+File: [client\Interactions\RayCastConcept.sqf at line 20](../../../Src/client/Interactions/RayCastConcept.sqf#L20)
+## needchange
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Interactions\RayCastConcept.sqf at line 97](../../../Src/client/Interactions/RayCastConcept.sqf#L97)
+## newvalue
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+1
+```
+File: [client\Interactions\RayCastConcept.sqf at line 98](../../../Src/client/Interactions/RayCastConcept.sqf#L98)
+## vecbias
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[0,0,0]
+```
+File: [client\Interactions\RayCastConcept.sqf at line 99](../../../Src/client/Interactions/RayCastConcept.sqf#L99)
 ## rc_init
 
 Type: function
@@ -2379,46 +3114,66 @@ Replaced value:
 20
 ```
 File: [client\Interactions\verbs.sqf at line 99](../../../Src/client/Interactions/verbs.sqf#L99)
-## ON_FINALIZE(reason)
+## verb_widgets
 
-Type: constant
-
-> Exists if **DEBUG** defined
+Type: Variable
 
 Description: 
-- Param: reason
 
-Replaced value:
+
+Initial value:
 ```sqf
-warningformat("verb::onPickVerb() - Reason to closed: %1",reason);nextFrame(verb_unloadMenu)
+[]
 ```
-File: [client\Interactions\verbs.sqf at line 186](../../../Src/client/Interactions/verbs.sqf#L186)
-## ON_FINALIZE(reason)
+File: [client\Interactions\verbs.sqf at line 303](../../../Src/client/Interactions/verbs.sqf#L303)
+## verb_lastclickedpos
 
-Type: constant
+Type: Variable
 
-> Exists if **DEBUG** not defined
+Description: Последняя позиция мыши
+
+
+Initial value:
+```sqf
+[0,0]
+```
+File: [client\Interactions\verbs.sqf at line 304](../../../Src/client/Interactions/verbs.sqf#L304)
+## verb_isMenuLoaded
+
+Type: Variable
 
 Description: 
-- Param: reason
 
-Replaced value:
+
+Initial value:
 ```sqf
-nextFrame(verb_unloadMenu)
+false
 ```
-File: [client\Interactions\verbs.sqf at line 188](../../../Src/client/Interactions/verbs.sqf#L188)
-## ON_FINALIZE(reason)
+File: [client\Interactions\verbs.sqf at line 305](../../../Src/client/Interactions/verbs.sqf#L305)
+## verb_lastTargetObjectData
 
-Type: constant
+Type: Variable
 
-Description: 
-- Param: reason
+Description: deprecated variable
 
-Replaced value:
+
+Initial value:
 ```sqf
-nextFrame(verb_unloadMenu)
+[objnull,[0,0,0]] //колбэк дата последнего захваченного объекта
 ```
-File: [client\Interactions\verbs.sqf at line 190](../../../Src/client/Interactions/verbs.sqf#L190)
+File: [client\Interactions\verbs.sqf at line 309](../../../Src/client/Interactions/verbs.sqf#L309)
+## verb_lastCheckedObjectData
+
+Type: Variable
+
+Description: Последняя позиция объекта
+
+
+Initial value:
+```sqf
+VERB_LASTCHECKEDOBJECTDATA_DEFAULT //[object reference,interact bias pos (use (object modeltoworld pos)),ismob]
+```
+File: [client\Interactions\verbs.sqf at line 310](../../../Src/client/Interactions/verbs.sqf#L310)
 ## interact_onLoadVerbs
 
 Type: function

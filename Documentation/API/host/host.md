@@ -663,43 +663,6 @@ Replaced value:
 [provider,formatText] call cprint
 ```
 File: [host\engine.hpp at line 53](../../../Src/host/engine.hpp#L53)
-## warning(message)
-
-Type: constant
-
-Description: / -------------------------------------- FUNCTIONAL PRINTS ---------------------------------------
-- Param: message
-
-Replaced value:
-```sqf
-[message] call cprintWarn
-```
-File: [host\engine.hpp at line 58](../../../Src/host/engine.hpp#L58)
-## error(message)
-
-Type: constant
-
-Description: 
-- Param: message
-
-Replaced value:
-```sqf
-[message] call cprintErr
-```
-File: [host\engine.hpp at line 59](../../../Src/host/engine.hpp#L59)
-## warningformat(message,fmt)
-
-Type: constant
-
-Description: 
-- Param: message
-- Param: fmt
-
-Replaced value:
-```sqf
-[message,fmt] call cprintWarn
-```
-File: [host\engine.hpp at line 64](../../../Src/host/engine.hpp#L64)
 ## errorformat(message,fmt)
 
 Type: constant
@@ -1438,30 +1401,6 @@ Replaced value:
 (obj isequaltypeany [locationnull,controlnull,objnull,displaynull])
 ```
 File: [host\engine.hpp at line 212](../../../Src/host/engine.hpp#L212)
-## isRefType(val)
-
-Type: constant
-
-Description: 
-- Param: val
-
-Replaced value:
-```sqf
-(val isEqualTypeAny [locationnull,controlnull,objnull,displaynull])
-```
-File: [host\engine.hpp at line 215](../../../Src/host/engine.hpp#L215)
-## isValType(val)
-
-Type: constant
-
-Description: 
-- Param: val
-
-Replaced value:
-```sqf
-!isRefType(val)
-```
-File: [host\engine.hpp at line 216](../../../Src/host/engine.hpp#L216)
 ## stringEmpty
 
 Type: constant
@@ -3086,32 +3025,6 @@ Replaced value:
 (linearConversion [0, 1, random 1,low, up])
 ```
 File: [host\engine.hpp at line 538](../../../Src/host/engine.hpp#L538)
-## DISABLE_POINTER_CRIPT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\engine.hpp at line 542](../../../Src/host/engine.hpp#L542)
-## DISABLE_POINTER_CRIPT
-
-Type: constant
-
-> Exists if **DEBUG** defined
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\engine.hpp at line 545](../../../Src/host/engine.hpp#L545)
 ## criptPtr_index
 
 Type: constant
@@ -3568,23 +3481,6 @@ Replaced value:
 
 ```
 File: [host\engine.hpp at line 626](../../../Src/host/engine.hpp#L626)
-## CALLSTACK(function)
-
-Type: constant
-
-Description: 
-- Param: function
-
-Replaced value:
-```sqf
-{private ['_ret']; \
-if (ACRE_IS_ERRORED) then { ['AUTO','AUTO'] call ACRE_DUMPSTACK_FNC; ACRE_IS_ERRORED = false; }; \
-ACRE_IS_ERRORED = true; ACRE_STACK_TRACE set [ACRE_STACK_DEPTH, [diag_tickTime, __FILE__, __LINE__, ACRE_CURRENT_FUNCTION, 'ANON', _this]]; \
-ACRE_STACK_DEPTH = ACRE_STACK_DEPTH + 1; ACRE_CURRENT_FUNCTION = 'ANON'; \
-_ret = _this call ##function; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH - 1; \
-ACRE_IS_ERRORED = false; _ret;}*/
-```
-File: [host\engine.hpp at line 630](../../../Src/host/engine.hpp#L630)
 ## setLastError(data__)
 
 Type: constant
@@ -3637,31 +3533,6 @@ Replaced value:
 diag_stacktrace
 ```
 File: [host\engine.hpp at line 646](../../../Src/host/engine.hpp#L646)
-## CALLSTACK_NAMED(function, functionName)
-
-Type: constant
-
-Description: 
-- Param: function
-- Param: functionName
-
-Replaced value:
-```sqf
-{private ['_ret']; if (ACRE_IS_ERRORED) then { ['AUTO','AUTO'] call ACRE_DUMPSTACK_FNC; ACRE_IS_ERRORED = false; }; ACRE_IS_ERRORED = true; ACRE_STACK_TRACE set [ACRE_STACK_DEPTH, [diag_tickTime, __FILE__, __LINE__, ACRE_CURRENT_FUNCTION, functionName, _this]]; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH + 1; ACRE_CURRENT_FUNCTION = functionName; _ret = _this call ##function; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH - 1; ACRE_IS_ERRORED = false; _ret;}
-```
-File: [host\engine.hpp at line 647](../../../Src/host/engine.hpp#L647)
-## DUMPSTACK
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-([__FILE__, __LINE__] call acre_main_fnc_dumpCallStack
-```
-File: [host\engine.hpp at line 648](../../../Src/host/engine.hpp#L648)
 ## BASIC_MOB_TYPE
 
 Type: constant
@@ -3713,14 +3584,20 @@ Replaced value:
 name = compile 'cmd'
 ```
 File: [host\engine.hpp at line 660](../../../Src/host/engine.hpp#L660)
-## systemPrint
+# init.sqf
 
-Type: function
+## server_loadingState
+
+Type: Variable
 
 Description: 
 
 
-File: [host\engine.hpp at line 380](../../../Src/host/engine.hpp#L380)
+Initial value:
+```sqf
+1
+```
+File: [host\init.sqf at line 89](../../../Src/host/init.sqf#L89)
 # keyboard.hpp
 
 ## KEY_ESCAPE
@@ -5990,20 +5867,6 @@ Replaced value:
 
 ```
 File: [host\oop.hpp at line 21](../../../Src/host/oop.hpp#L21)
-## __postclassVM
-
-Type: constant
-
-> Exists if **_SQFVM** defined
-
-Description: #define __postclassVM __vm_log("Found class: " + _class);
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\oop.hpp at line 26](../../../Src/host/oop.hpp#L26)
 ## createObj
 
 Type: constant
@@ -6052,20 +5915,6 @@ Replaced value:
 ;
 ```
 File: [host\oop.hpp at line 38](../../../Src/host/oop.hpp#L38)
-## __postclassVM
-
-Type: constant
-
-> Exists if **_SQFVM** not defined
-
-Description: #define __postclassVM __vm_log("Found class: " + _class);
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\oop.hpp at line 40](../../../Src/host/oop.hpp#L40)
 ## vm_throw(ctx)
 
 Type: constant
@@ -6462,18 +6311,6 @@ Replaced value:
 var(name,createHashMap)
 ```
 File: [host\oop.hpp at line 156](../../../Src/host/oop.hpp#L156)
-## var_multi(defaultvalue)
-
-Type: constant
-
-Description: 
-- Param: defaultvalue
-
-Replaced value:
-```sqf
-
-```
-File: [host\oop.hpp at line 158](../../../Src/host/oop.hpp#L158)
 ## func(name)
 
 Type: constant
@@ -6765,18 +6602,6 @@ Replaced value:
 ([type,true] call oop_getinhlist)
 ```
 File: [host\oop.hpp at line 212](../../../Src/host/oop.hpp#L212)
-## call
-
-Type: constant
-
-Description: NOT WORK! ERROR RECURSION ->
-
-
-Replaced value:
-```sqf
-Base(metname) call (this getVariable PROTOTYPE_VAR_NAME getVariable ("__motherObject") getvariable #metname)
-```
-File: [host\oop.hpp at line 215](../../../Src/host/oop.hpp#L215)
 ## callSuper(superclass,metname)
 
 Type: constant
@@ -7027,201 +6852,6 @@ Replaced value:
 params ['this', #a , #b , #c , #d , #e , #f]
 ```
 File: [host\oop.hpp at line 248](../../../Src/host/oop.hpp#L248)
-## getself(name)
-
-Type: constant
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-(this getvariable #name)
-```
-File: [host\oop.hpp at line 254](../../../Src/host/oop.hpp#L254)
-## setself(name,val)
-
-Type: constant
-
-Description: 
-- Param: name
-- Param: val
-
-Replaced value:
-```sqf
-this setvariable [#name,val]
-```
-File: [host\oop.hpp at line 255](../../../Src/host/oop.hpp#L255)
-## modself(name,val)
-
-Type: constant
-
-Description: 
-- Param: name
-- Param: val
-
-Replaced value:
-```sqf
-setSelf(name,getSelf(name) val)
-```
-File: [host\oop.hpp at line 256](../../../Src/host/oop.hpp#L256)
-## callself(func)
-
-Type: constant
-
-Description: 
-- Param: func
-
-Replaced value:
-```sqf
-(this call (this getvariable PROTOTYPE_VAR_NAME getvariable #func))
-```
-File: [host\oop.hpp at line 258](../../../Src/host/oop.hpp#L258)
-## callselfparams(func,parms)
-
-Type: constant
-
-Description: 
-- Param: func
-- Param: parms
-
-Replaced value:
-```sqf
-([this,parms] call (this getvariable PROTOTYPE_VAR_NAME getvariable #func))
-```
-File: [host\oop.hpp at line 259](../../../Src/host/oop.hpp#L259)
-## getselfprop(func)
-
-Type: constant
-
-Description: 
-- Param: func
-
-Replaced value:
-```sqf
-(this call (this getvariable PROTOTYPE_VAR_NAME getvariable 'get##func'))
-```
-File: [host\oop.hpp at line 261](../../../Src/host/oop.hpp#L261)
-## setselfprop(func,val)
-
-Type: constant
-
-Description: 
-- Param: func
-- Param: val
-
-Replaced value:
-```sqf
-[this,val] call (this getvariable PROTOTYPE_VAR_NAME getvariable 'set##func')
-```
-File: [host\oop.hpp at line 262](../../../Src/host/oop.hpp#L262)
-## callfunc(obj,func)
-
-Type: constant
-
-Description: external access
-- Param: obj
-- Param: func
-
-Replaced value:
-```sqf
-((obj) call ((obj) getvariable PROTOTYPE_VAR_NAME getvariable (#func)))
-```
-File: [host\oop.hpp at line 265](../../../Src/host/oop.hpp#L265)
-## callfuncparams(obj,func,parms)
-
-Type: constant
-
-Description: 
-- Param: obj
-- Param: func
-- Param: parms
-
-Replaced value:
-```sqf
-([obj, parms] call ((obj) getvariable PROTOTYPE_VAR_NAME getvariable (#func)))
-```
-File: [host\oop.hpp at line 266](../../../Src/host/oop.hpp#L266)
-## getfunc(obj,func)
-
-Type: constant
-
-Description: 
-- Param: obj
-- Param: func
-
-Replaced value:
-```sqf
-((obj) getvariable PROTOTYPE_VAR_NAME getvariable (#func))
-```
-File: [host\oop.hpp at line 268](../../../Src/host/oop.hpp#L268)
-## getfuncreflect(obj,func)
-
-Type: constant
-
-Description: 
-- Param: obj
-- Param: func
-
-Replaced value:
-```sqf
-((obj) getvariable PROTOTYPE_VAR_NAME getvariable (func))
-```
-File: [host\oop.hpp at line 269](../../../Src/host/oop.hpp#L269)
-## getvar(obj,name)
-
-Type: constant
-
-Description: 
-- Param: obj
-- Param: name
-
-Replaced value:
-```sqf
-((obj) getvariable (#name))
-```
-File: [host\oop.hpp at line 271](../../../Src/host/oop.hpp#L271)
-## setvar(obj,name,value)
-
-Type: constant
-
-Description: 
-- Param: obj
-- Param: name
-- Param: value
-
-Replaced value:
-```sqf
-(obj) setvariable [#name,value]
-```
-File: [host\oop.hpp at line 272](../../../Src/host/oop.hpp#L272)
-## modvar(obj,name,val)
-
-Type: constant
-
-Description: 
-- Param: obj
-- Param: name
-- Param: val
-
-Replaced value:
-```sqf
-setvar(obj,name,getvar(obj,name) val)
-```
-File: [host\oop.hpp at line 273](../../../Src/host/oop.hpp#L273)
-## getprop(obj,func)
-
-Type: constant
-
-Description: 
-- Param: obj
-- Param: func
-
-Replaced value:
-```sqf
-((obj) call ((obj) getvariable PROTOTYPE_VAR_NAME getvariable ('get##func')))
-```
-File: [host\oop.hpp at line 275](../../../Src/host/oop.hpp#L275)
 ## setprop(obj,func,val)
 
 Type: constant
@@ -7911,9 +7541,9 @@ Description: NON USABLE
 
 Replaced value:
 ```sqf
-((tolower type) in ((obj) getVariable PROTOTYPE_VAR_NAME getVariable "__inhlist_map"))
+((tolower (type)) in ((obj) getvariable PROTOTYPE_VAR_NAME getvariable ("__inhlist_map")))
 ```
-File: [host\oop.hpp at line 365](../../../Src/host/oop.hpp#L365)
+File: [host\oop.hpp at line 355](../../../Src/host/oop.hpp#L355)
 ## isTypeNameOf(obj,type)
 
 Type: constant
@@ -8004,6 +7634,18 @@ Replaced value:
 ((obj) isequalto nullPtr)
 ```
 File: [host\oop.hpp at line 368](../../../Src/host/oop.hpp#L368)
+## name
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_pt_obj
+```
+File: [host\oop.hpp at line 70](../../../Src/host/oop.hpp#L70)
 # precomiled.sqf
 
 ## __on_editor_attribute(membername,membertype)
@@ -8022,6 +7664,18 @@ if (count _editor_next_attr > 0) then { \
 };
 ```
 File: [host\precomiled.sqf at line 92](../../../Src/host/precomiled.sqf#L92)
+## pc_oop_carr_tntps
+
+Type: Variable
+
+Description: константные типы объектов. 0 - обычные называния типов, 1 - названия в редакторе
+
+
+Initial value:
+```sqf
+["<Type::%1>","<EDITOR_Type::%1>"]
+```
+File: [host\precomiled.sqf at line 36](../../../Src/host/precomiled.sqf#L36)
 ## pc_oop_declareClassAttr
 
 Type: function

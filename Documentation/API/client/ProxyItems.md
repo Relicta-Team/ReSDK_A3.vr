@@ -26,6 +26,54 @@ Replaced value:
 File: [client\ProxyItems\ConfigProxyItems.h at line 12](../../../Src/client/ProxyItems/ConfigProxyItems.h#L12)
 # ProxyItems.sqf
 
+## proxIt_configData
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createObj
+```
+File: [client\ProxyItems\ProxyItems.sqf at line 9](../../../Src/client/ProxyItems/ProxyItems.sqf#L9)
+## proxIt_vec
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[0,0,0]
+```
+File: [client\ProxyItems\ProxyItems.sqf at line 10](../../../Src/client/ProxyItems/ProxyItems.sqf#L10)
+## proxIt_def
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[proxIt_vec,proxIt_vec]
+```
+File: [client\ProxyItems\ProxyItems.sqf at line 11](../../../Src/client/ProxyItems/ProxyItems.sqf#L11)
+## proxIt_list_selections
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+["spine3","spine3","head","rightshoulder","spine3","head","lefthand","pelvis","righthand"]
+```
+File: [client\ProxyItems\ProxyItems.sqf at line 12](../../../Src/client/ProxyItems/ProxyItems.sqf#L12)
 ## proxIt_prepName
 
 Type: function

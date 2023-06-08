@@ -270,6 +270,126 @@ Replaced value:
 
 ```
 File: [client\SoundSystem\Music.sqf at line 112](../../../Src/client/SoundSystem/Music.sqf#L112)
+## music_internal_class2path
+
+Type: Variable
+
+Description: двойная ассоциация класса и пути
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\SoundSystem\Music.sqf at line 57](../../../Src/client/SoundSystem/Music.sqf#L57)
+## music_internal_path2class
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\SoundSystem\Music.sqf at line 58](../../../Src/client/SoundSystem/Music.sqf#L58)
+## music_internal_folderData
+
+Type: Variable
+
+Description: хэш карта папок и композиций внутри них
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\SoundSystem\Music.sqf at line 60](../../../Src/client/SoundSystem/Music.sqf#L60)
+## music_internal_durationMap
+
+Type: Variable
+
+Description: карта длительности (key: musicname, val: duration)
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\SoundSystem\Music.sqf at line 62](../../../Src/client/SoundSystem/Music.sqf#L62)
+## music_playedObject
+
+Type: Variable
+
+Description: объект композиции который играет в данную минуту
+
+
+Initial value:
+```sqf
+null
+```
+File: [client\SoundSystem\Music.sqf at line 65](../../../Src/client/SoundSystem/Music.sqf#L65)
+## music_internal_priority
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_buffer apply ...
+```
+File: [client\SoundSystem\Music.sqf at line 121](../../../Src/client/SoundSystem/Music.sqf#L121)
+## music_internal_paused
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_buffer apply ...
+```
+File: [client\SoundSystem\Music.sqf at line 122](../../../Src/client/SoundSystem/Music.sqf#L122)
+## music_internal_lastPriority
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\SoundSystem\Music.sqf at line 123](../../../Src/client/SoundSystem/Music.sqf#L123)
+## music_internal_map_chanToEnum
+
+Type: Variable
+
+Description: строковая карта всех каналов
+
+
+Initial value:
+```sqf
+createHashMapFromArray MUSIC_MAP_INTERNAL_ALLCHANNELS
+```
+File: [client\SoundSystem\Music.sqf at line 247](../../../Src/client/SoundSystem/Music.sqf#L247)
+## music_internal_handleOnUpdate
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+startUpdate(music_internal_onUpdate,0)
+```
+File: [client\SoundSystem\Music.sqf at line 443](../../../Src/client/SoundSystem/Music.sqf#L443)
 ## music_play
 
 Type: function
@@ -342,6 +462,102 @@ Replaced value:
 music_currentPlay set [var,val]
 ```
 File: [client\SoundSystem\MusicManager.sqf at line 8](../../../Src/client/SoundSystem/MusicManager.sqf#L8)
+## music_categories
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+hashSet_createList("ambient" arg "caveambient" arg "lobby" arg "events")
+```
+File: [client\SoundSystem\MusicManager.sqf at line 10](../../../Src/client/SoundSystem/MusicManager.sqf#L10)
+## music_durations
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\SoundSystem\MusicManager.sqf at line 11](../../../Src/client/SoundSystem/MusicManager.sqf#L11)
+## music_currentPlay
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray [["type","nan"],["duration",0],["isplaying",false]]
+```
+File: [client\SoundSystem\MusicManager.sqf at line 12](../../../Src/client/SoundSystem/MusicManager.sqf#L12)
+## music_volume
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+1
+```
+File: [client\SoundSystem\MusicManager.sqf at line 13](../../../Src/client/SoundSystem/MusicManager.sqf#L13)
+## music_mainThread_handle
+
+Type: Variable
+
+Description: music_counters = createHashMapFromArray []; //сколько конфигураций для музыки
+
+
+Initial value:
+```sqf
+startUpdate(music_onUpdate,0)
+```
+File: [client\SoundSystem\MusicManager.sqf at line 161](../../../Src/client/SoundSystem/MusicManager.sqf#L161)
+## music_lastPlayedTheme
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+""
+```
+File: [client\SoundSystem\MusicManager.sqf at line 16](../../../Src/client/SoundSystem/MusicManager.sqf#L16)
+## music_settedLobbyTheme
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+""
+```
+File: [client\SoundSystem\MusicManager.sqf at line 26](../../../Src/client/SoundSystem/MusicManager.sqf#L26)
+## music_isStartedAmbientMode
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\SoundSystem\MusicManager.sqf at line 127](../../../Src/client/SoundSystem/MusicManager.sqf#L127)
 ## music_internal_createStruct
 
 Type: function
@@ -530,6 +746,54 @@ Replaced value:
 2
 ```
 File: [client\SoundSystem\MusicManager_experimental.sqf at line 41](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L41)
+## mm_list_channels
+
+Type: Variable
+
+Description: elements info in mm_channels_internal_initStruct
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 45](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L45)
+## mm_internal_mainThread_handle
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 56](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L56)
+## mm_currentChannel
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 58](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L58)
+## mm_globalVolume
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+1
+```
+File: [client\SoundSystem\MusicManager_experimental.sqf at line 59](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L59)
 ## mm_channels_internal_initStruct
 
 Type: function
@@ -618,54 +882,66 @@ Description:
 File: [client\SoundSystem\MusicManager_experimental.sqf at line 116](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L116)
 # Sound3d.sqf
 
-## distLTG
+## tmpPos
 
-Type: constant
+Type: Variable
+
+Description: Тестовый обработчик шагов
+
+
+Initial value:
+```sqf
+[0,0,0]
+```
+File: [client\SoundSystem\Sound3d.sqf at line 121](../../../Src/client/SoundSystem/Sound3d.sqf#L121)
+## lastpos
+
+Type: Variable
 
 Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-(_leg distance _ground )
+getPosWorld player
 ```
-File: [client\SoundSystem\Sound3d.sqf at line 188](../../../Src/client/SoundSystem/Sound3d.sqf#L188)
-## lastDist
+File: [client\SoundSystem\Sound3d.sqf at line 122](../../../Src/client/SoundSystem/Sound3d.sqf#L122)
+## debug_lastpos
 
-Type: constant
+Type: Variable
 
 Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-(_ground getVariable ["lastdistance",distLTG])
+getPosAtl player
 ```
-File: [client\SoundSystem\Sound3d.sqf at line 189](../../../Src/client/SoundSystem/Sound3d.sqf#L189)
-## isNegativize
+File: [client\SoundSystem\Sound3d.sqf at line 143](../../../Src/client/SoundSystem/Sound3d.sqf#L143)
+## arrows
 
-Type: constant
+Type: Variable
 
 Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-(distLTG < lastDist)
+["Sign_Sphere10cm_F" createVehicle [0,0,0],"Sign_Sphere10cm_F" createVehicle [0,0,0]]
 ```
-File: [client\SoundSystem\Sound3d.sqf at line 190](../../../Src/client/SoundSystem/Sound3d.sqf#L190)
-## isPositivize
+File: [client\SoundSystem\Sound3d.sqf at line 145](../../../Src/client/SoundSystem/Sound3d.sqf#L145)
+## arrowsGround
 
-Type: constant
+Type: Variable
 
 Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-(distLTG > lastDist)
+["Sign_Sphere10cm_F" createVehicle [0,0,0],"Sign_Sphere10cm_F" createVehicle [0,0,0]]
 ```
-File: [client\SoundSystem\Sound3d.sqf at line 191](../../../Src/client/SoundSystem/Sound3d.sqf#L191)
+File: [client\SoundSystem\Sound3d.sqf at line 146](../../../Src/client/SoundSystem/Sound3d.sqf#L146)
 ## soundProcessor_play
 
 Type: function

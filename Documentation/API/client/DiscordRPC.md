@@ -1,17 +1,5 @@
 # DiscordRPC.h
 
-## allowtrace
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\DiscordRPC\DiscordRPC.h at line 7](../../../Src/client/DiscordRPC/DiscordRPC.h#L7)
 ## extname
 
 Type: constant
@@ -85,20 +73,32 @@ Replaced value:
 (val call discrpc_encodeRu)
 ```
 File: [client\DiscordRPC\DiscordRPC.h at line 19](../../../Src/client/DiscordRPC/DiscordRPC.h#L19)
-## USE_LOCALES
+# DiscordRPC_init.sqf
 
-Type: constant
+## discrpc_list_ruLetters
+
+Type: Variable
 
 Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-
+createHashMap //в кодировке 1251
 ```
-File: [client\DiscordRPC\DiscordRPC.h at line 22](../../../Src/client/DiscordRPC/DiscordRPC.h#L22)
-# DiscordRPC_init.sqf
+File: [client\DiscordRPC\DiscordRPC_init.sqf at line 14](../../../Src/client/DiscordRPC/DiscordRPC_init.sqf#L14)
+## discrpc_allowedTaskTypes
 
+Type: Variable
+
+Description: допустимые ключи для расширения
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\DiscordRPC\DiscordRPC_init.sqf at line 19](../../../Src/client/DiscordRPC/DiscordRPC_init.sqf#L19)
 ## discrpc_send
 
 Type: function

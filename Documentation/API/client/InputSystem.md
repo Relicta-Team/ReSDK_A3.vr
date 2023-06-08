@@ -38,6 +38,30 @@ Replaced value:
 "@"
 ```
 File: [client\InputSystem\InputAssoc.sqf at line 15](../../../Src/client/InputSystem/InputAssoc.sqf#L15)
+## input_map_keyName
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\InputSystem\InputAssoc.sqf at line 10](../../../Src/client/InputSystem/InputAssoc.sqf#L10)
+## input_keyList_reversedAssoc
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\InputSystem\InputAssoc.sqf at line 11](../../../Src/client/InputSystem/InputAssoc.sqf#L11)
 ## input_getKeyValue
 
 Type: function
@@ -81,6 +105,78 @@ Replaced value:
 13
 ```
 File: [client\InputSystem\inputHelper.sqf at line 13](../../../Src/client/InputSystem/inputHelper.sqf#L13)
+## inputHelper_enabled
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+true
+```
+File: [client\InputSystem\inputHelper.sqf at line 15](../../../Src/client/InputSystem/inputHelper.sqf#L15)
+## inputHelper_handleUpdate
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\InputSystem\inputHelper.sqf at line 17](../../../Src/client/InputSystem/inputHelper.sqf#L17)
+## inputHelper_widgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\InputSystem\inputHelper.sqf at line 18](../../../Src/client/InputSystem/inputHelper.sqf#L18)
+## inputHelper_firstRunTaskId
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\InputSystem\inputHelper.sqf at line 19](../../../Src/client/InputSystem/inputHelper.sqf#L19)
+## inputHelper_isSuccessCurrentTask
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false //системная переменная для выполнения внутренней задачи
+```
+File: [client\InputSystem\inputHelper.sqf at line 21](../../../Src/client/InputSystem/inputHelper.sqf#L21)
+## inputHelper_basicTask
+
+Type: Variable
+
+Description: Базовые задачи это первый вход
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\InputSystem\inputHelper.sqf at line 24](../../../Src/client/InputSystem/inputHelper.sqf#L24)
 ## inputHelper_init
 
 Type: function
@@ -350,6 +446,42 @@ Replaced value:
 keybind([name arg false] call input_getKeyValue,shift,ctrl,alt,isMouse)
 ```
 File: [client\InputSystem\inputKeyHandlers.sqf at line 14](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L14)
+## cd_settingsKeyboard
+
+Type: Variable
+
+Description: Список кейбиндов
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\InputSystem\inputKeyHandlers.sqf at line 17](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L17)
+## input_internal_map_act2kb
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\InputSystem\inputKeyHandlers.sqf at line 42](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L42)
+## input_map_spamProtect
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\InputSystem\inputKeyHandlers.sqf at line 123](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L123)
 ## input_updateAllKeyBinds
 
 Type: function
@@ -490,3 +622,29 @@ Description: мышь в режиме игры
 - Param: _alt
 
 File: [client\InputSystem\inputManager.sqf at line 147](../../../Src/client/InputSystem/inputManager.sqf#L147)
+# input_init.sqf
+
+## input_catchedEscape
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\InputSystem\input_init.sqf at line 21](../../../Src/client/InputSystem/input_init.sqf#L21)
+## input_internal_handleNativeEsc
+
+Type: Variable
+
+Description: Хандлить ли нативную паузу
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\InputSystem\input_init.sqf at line 26](../../../Src/client/InputSystem/input_init.sqf#L26)

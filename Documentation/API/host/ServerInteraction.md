@@ -12,30 +12,6 @@ Replaced value:
 2000
 ```
 File: [host\ServerInteraction\ServerInteractionInit.sqf at line 74](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L74)
-## __si_raycast_test_0_6_262
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 76](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L76)
-## SI_THROW_DEBUG
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 233](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L233)
 ## SH_DEBUG_SHOTGUN
 
 Type: constant
@@ -139,6 +115,56 @@ Replaced value:
 
 ```
 File: [host\ServerInteraction\ServerInteractionInit.sqf at line 455](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L455)
+## si_internal_rayObject
+
+Type: Variable
+
+Description: Общий объект рэйкаста. Арма у нас в одном потоке так что боятся нечего
+
+
+Initial value:
+```sqf
+"Sign_Sphere10cm_F" createVehicleLocal[0,0,0]
+```
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 69](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L69)
+## si_throwTasks
+
+Type: Variable
+
+Description: Список задач летящих объектов
+
+
+Initial value:
+```sqf
+[] //obj, vecpos, vecdir, dist, precdown, downlevel, speed
+```
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 237](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L237)
+## si_debug_listVectors
+
+Type: Variable
+
+> Exists if **SI_THROW_DEBUG** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 244](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L244)
+## si_throwModes
+
+Type: Variable
+
+Description: список алгоритмов полета объектов. каждый элемент - структура из 2 сегментов кода
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 581](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L581)
 ## si_throwingProcess
 
 Type: function
@@ -264,6 +290,90 @@ Replaced value:
 (interact_map_secondPass getOrDefault [toLower(getModelInfo (obj) select 1),true])
 ```
 File: [host\ServerInteraction\ServerInteractionShared.sqf at line 15](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L15)
+## interact_map_secondPass
+
+Type: Variable
+
+Description: Публичные данные
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 10](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L10)
+## interact_throwlist
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 17](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L17)
+## interact_th_map_codeAssoc
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray [["th",0],["sh",1]]
+```
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 218](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L218)
+## interact_th_delegates
+
+Type: Variable
+
+Description: mode -> vec2: success fly, intersection
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 221](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L221)
+## interact_shassoc_idx
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 296](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L296)
+## interact_map_shassoc_keyint
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 297](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L297)
+## interact_map_shassoc_keystr
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 298](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L298)
 ## interact_th_getItscData
 
 Type: function
@@ -333,6 +443,58 @@ Replaced value:
 
 ```
 File: [host\ServerInteraction\ServerInteractionTests.sqf at line 8](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L8)
+## si_debug_tracelineobjs
+
+Type: Variable
+
+> Exists if **SI_DEBUG_TRACELINE** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\ServerInteraction\ServerInteractionTests.sqf at line 12](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L12)
+## si_debug_obj
+
+Type: Variable
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+createSimpleObject ["Sign_Sphere10cm_F",[0,0,0],true]
+```
+File: [host\ServerInteraction\ServerInteractionTests.sqf at line 97](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L97)
+## si_debug_task
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [host\ServerInteraction\ServerInteractionTests.sqf at line 98](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L98)
+## si_debug_olist
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\ServerInteraction\ServerInteractionTests.sqf at line 103](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L103)
 ## si_makeline
 
 Type: function
@@ -438,6 +600,18 @@ Description: common funcs
 File: [host\ServerInteraction\ServerInteractionTests.sqf at line 245](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L245)
 # ServerInteraction_Collision.sqf
 
+## si_collision_onUpdate_handle
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+startUpdate(...
+```
+File: [host\ServerInteraction\ServerInteraction_Collision.sqf at line 23](../../../Src/host/ServerInteraction/ServerInteraction_Collision.sqf#L23)
 ## si_collision_onUpdate
 
 Type: function

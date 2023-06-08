@@ -183,15 +183,30 @@ Replaced value:
 call (locef_allEffectsCfg get (name) select indx)
 ```
 File: [client\LocalEffects\LocalEffects_init.sqf at line 29](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L29)
-## locef_add
+## locef_allEffectsCfg
 
-Type: function
+Type: Variable
 
 Description: 
-- Param: thisEventName
-- Param: _context
 
-File: [client\LocalEffects\LocalEffects_init.sqf at line 32](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L32)
+
+Initial value:
+```sqf
+createHashMap //списки конфигураций эффектов
+```
+File: [client\LocalEffects\LocalEffects_init.sqf at line 23](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L23)
+## locef_allActiveEffects
+
+Type: Variable
+
+Description: списки конфигураций эффектов
+
+
+Initial value:
+```sqf
+createHashMap //key:name, value:context data (list)
+```
+File: [client\LocalEffects\LocalEffects_init.sqf at line 24](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L24)
 ## locef_remove
 
 Type: function
@@ -225,3 +240,17 @@ Description:
 
 
 File: [client\LocalEffects\LocalEffects_init.sqf at line 67](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L67)
+# LocalEffects_list.sqf
+
+## vst_human_stealth_allowStepsounds
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\LocalEffects\LocalEffects_list.sqf at line 56](../../../Src/client/LocalEffects/LocalEffects_list.sqf#L56)

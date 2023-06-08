@@ -14,18 +14,32 @@ Replaced value:
 File: [host\Curl\Curl.hpp at line 7](../../../Src/host/Curl/Curl.hpp#L7)
 # Curl.sqf
 
-## u_test
+## glob
 
-Type: constant
+Type: Variable
+
+> Exists if **u_test** defined
 
 Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-
+_strict
 ```
-File: [host\Curl\Curl.sqf at line 12](../../../Src/host/Curl/Curl.sqf#L12)
+File: [host\Curl\Curl.sqf at line 80](../../../Src/host/Curl/Curl.sqf#L80)
+## glob_invert
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_new
+```
+File: [host\Curl\Curl.sqf at line 95](../../../Src/host/Curl/Curl.sqf#L95)
 ## curl_send
 
 Type: function
@@ -42,14 +56,6 @@ Description:
 
 
 File: [host\Curl\Curl.sqf at line 18](../../../Src/host/Curl/Curl.sqf#L18)
-## curl_getstatus
-
-Type: function
-
-Description: 
-
-
-File: [host\Curl\Curl.sqf at line 24](../../../Src/host/Curl/Curl.sqf#L24)
 ## curl_error
 
 Type: function
@@ -69,30 +75,6 @@ Description:
 File: [host\Curl\Curl.sqf at line 33](../../../Src/host/Curl/Curl.sqf#L33)
 # CurlThread.sqf
 
-## __allowCurlLog
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\Curl\CurlThread.sqf at line 8](../../../Src/host/Curl/CurlThread.sqf#L8)
-## __timePerformance
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\Curl\CurlThread.sqf at line 10](../../../Src/host/Curl/CurlThread.sqf#L10)
 ## __allowCurlMessageForSuccess
 
 Type: constant
@@ -145,6 +127,42 @@ Replaced value:
 
 ```
 File: [host\Curl\CurlThread.sqf at line 19](../../../Src/host/Curl/CurlThread.sqf#L19)
+## curl_query
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[] // очередь запроса
+```
+File: [host\Curl\CurlThread.sqf at line 23](../../../Src/host/Curl/CurlThread.sqf#L23)
+## curl_isAwait
+
+Type: Variable
+
+Description: очередь запроса
+
+
+Initial value:
+```sqf
+false//идёт ли ожидание на получение сообщения
+```
+File: [host\Curl\CurlThread.sqf at line 24](../../../Src/host/Curl/CurlThread.sqf#L24)
+## curl_asyncAwaitData
+
+Type: Variable
+
+Description: идёт ли ожидание на получение сообщения
+
+
+Initial value:
+```sqf
+[] //то что будет вызывано когда ответ будет получен
+```
+File: [host\Curl\CurlThread.sqf at line 25](../../../Src/host/Curl/CurlThread.sqf#L25)
 ## curl_addRequest
 
 Type: function

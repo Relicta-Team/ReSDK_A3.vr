@@ -1,17 +1,5 @@
 # Stamina.hpp
 
-## stamina_debug
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\StaminaControl\Stamina.hpp at line 8](../../../Src/client/StaminaControl/Stamina.hpp#L8)
 ## stamina_bias_x
 
 Type: constant
@@ -219,3 +207,79 @@ Description:
 
 
 File: [client\StaminaControl\Stamina.sqf at line 80](../../../Src/client/StaminaControl/Stamina.sqf#L80)
+# Stamina_init.sqf
+
+## stamina_widgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\StaminaControl\Stamina_init.sqf at line 13](../../../Src/client/StaminaControl/Stamina_init.sqf#L13)
+## stamina_mainHandle
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\StaminaControl\Stamina_init.sqf at line 14](../../../Src/client/StaminaControl/Stamina_init.sqf#L14)
+## stamina_heartbeatHandle
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\StaminaControl\Stamina_init.sqf at line 15](../../../Src/client/StaminaControl/Stamina_init.sqf#L15)
+## stamina_lastVal
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\StaminaControl\Stamina_init.sqf at line 16](../../../Src/client/StaminaControl/Stamina_init.sqf#L16)
+## stamina_lastFullTime
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1 //отметка времени последнего полного заполнения стамины
+```
+File: [client\StaminaControl\Stamina_init.sqf at line 17](../../../Src/client/StaminaControl/Stamina_init.sqf#L17)
+## ison
+
+Type: Variable
+
+> Exists if **stamina_debug** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+true
+```
+File: [client\StaminaControl\Stamina_init.sqf at line 24](../../../Src/client/StaminaControl/Stamina_init.sqf#L24)

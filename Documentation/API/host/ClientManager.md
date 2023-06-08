@@ -166,6 +166,34 @@ Replaced value:
 120
 ```
 File: [host\ClientManager\ClientManager.h at line 13](../../../Src/host/ClientManager/ClientManager.h#L13)
+# ClientManager.sqf
+
+## client_handler_onConnect
+
+Type: Variable
+
+> Exists if **EMULATE_CLIENT_INSP** not defined
+
+Description: 
+
+
+Initial value:
+```sqf
+addMissionEventHandler ["PlayerConnected",_event_onClientConnected]
+```
+File: [host\ClientManager\ClientManager.sqf at line 44](../../../Src/host/ClientManager/ClientManager.sqf#L44)
+## client_handler_onDisconnect
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+addMissionEventHandler ["PlayerDisconnected",_event_onClientDisconnected] //HandleDisconnect - не удовлетворяет требованиям
+```
+File: [host\ClientManager\ClientManager.sqf at line 45](../../../Src/host/ClientManager/ClientManager.sqf#L45)
 # CommandsExec.sqf
 
 ## PUBLIC_COMMAND
@@ -279,6 +307,18 @@ Replaced value:
 _client
 ```
 File: [host\ClientManager\CommandsExec.sqf at line 77](../../../Src/host/ClientManager/CommandsExec.sqf#L77)
+## cm_commands_map
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ClientManager\CommandsExec.sqf at line 68](../../../Src/host/ClientManager/CommandsExec.sqf#L68)
 ## cm_processClientCommand
 
 Type: function
@@ -366,6 +406,174 @@ Replaced value:
 cm_map_nickColor set [access,nick]; cm_map_messagesColor set [access,mes];
 ```
 File: [host\ClientManager\functions.sqf at line 113](../../../Src/host/ClientManager/functions.sqf#L113)
+## cm_isServerLocked
+
+Type: Variable
+
+Description: закрыт ли сервер
+
+
+Initial value:
+```sqf
+false
+```
+File: [host\ClientManager\functions.sqf at line 12](../../../Src/host/ClientManager/functions.sqf#L12)
+## cm_preAwaitClientData
+
+Type: Variable
+
+Description: список клиентов на ожидание кика. Только значимые типы в массивах
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\ClientManager\functions.sqf at line 15](../../../Src/host/ClientManager/functions.sqf#L15)
+## cm_allClients
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[] //список зарегистрированных объектов клиентов
+```
+File: [host\ClientManager\functions.sqf at line 17](../../../Src/host/ClientManager/functions.sqf#L17)
+## cm_disconnectedClients
+
+Type: Variable
+
+Description: список зарегистрированных объектов клиентов
+
+
+Initial value:
+```sqf
+hashMapNew //список дисконнектнутых клиентов. Отсюда берутся все jip-ам
+```
+File: [host\ClientManager\functions.sqf at line 18](../../../Src/host/ClientManager/functions.sqf#L18)
+## cm_allInGameMobs
+
+Type: Variable
+
+Description: список дисконнектнутых клиентов. Отсюда берутся все jip-ам
+
+
+Initial value:
+```sqf
+[] //список всех мобов в игре. Этот массив требуется в основном потоке обработчика карты
+```
+File: [host\ClientManager\functions.sqf at line 19](../../../Src/host/ClientManager/functions.sqf#L19)
+## cm_allAwaitMobs
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+allUnits //список нераспределённых мобов
+```
+File: [host\ClientManager\functions.sqf at line 21](../../../Src/host/ClientManager/functions.sqf#L21)
+## cm_maxClients
+
+Type: Variable
+
+Description: список нераспределённых мобов
+
+
+Initial value:
+```sqf
+0 //сколько максимально клиентов подключалось
+```
+File: [host\ClientManager\functions.sqf at line 23](../../../Src/host/ClientManager/functions.sqf#L23)
+## cm_owners
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+["76561198094364528"] //me
+```
+File: [host\ClientManager\functions.sqf at line 33](../../../Src/host/ClientManager/functions.sqf#L33)
+## cm_admins
+
+Type: Variable
+
+Description: админы           пони					румын
+
+
+Initial value:
+```sqf
+["76561198057042311","76561197994426107"]
+```
+File: [host\ClientManager\functions.sqf at line 36](../../../Src/host/ClientManager/functions.sqf#L36)
+## cm_forsakens
+
+Type: Variable
+
+Description: игроки              квадрат              krakatuk          борзый             ходовой
+
+
+Initial value:
+```sqf
+["76561198096453655","76561198072294284","76561198156220735","76561198156220735",...
+```
+File: [host\ClientManager\functions.sqf at line 39](../../../Src/host/ClientManager/functions.sqf#L39)
+## cm_accessMap
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ClientManager\functions.sqf at line 109](../../../Src/host/ClientManager/functions.sqf#L109)
+## cm_accessMap_inverted
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ClientManager\functions.sqf at line 110](../../../Src/host/ClientManager/functions.sqf#L110)
+## cm_map_nickColor
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ClientManager\functions.sqf at line 114](../../../Src/host/ClientManager/functions.sqf#L114)
+## cm_map_messagesColor
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\ClientManager\functions.sqf at line 115](../../../Src/host/ClientManager/functions.sqf#L115)
 ## by_func
 
 Type: function
@@ -562,8 +770,46 @@ Description: Отправляет сообщение всем клиентам �
 - Param: _groups (optional, default "")
 
 File: [host\ClientManager\functions.sqf at line 370](../../../Src/host/ClientManager/functions.sqf#L370)
+# OnConnected.sqf
+
+## cm_maxClients
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+(count allPlayers) max cm_maxClients
+```
+File: [host\ClientManager\OnConnected.sqf at line 9](../../../Src/host/ClientManager/OnConnected.sqf#L9)
 # Common.sqf
 
+## system_internal_list_allJoiners
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\ClientManager\cmds\Common.sqf at line 162](../../../Src/host/ClientManager/cmds/Common.sqf#L162)
+## system_internal_string_generatedJoinedString
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+""
+```
+File: [host\ClientManager\cmds\Common.sqf at line 163](../../../Src/host/ClientManager/cmds/Common.sqf#L163)
 ## system_internal_generateJoinedRoles
 
 Type: function
@@ -572,6 +818,46 @@ Description:
 
 
 File: [host\ClientManager\cmds\Common.sqf at line 164](../../../Src/host/ClientManager/cmds/Common.sqf#L164)
+# EditorAndDebug.sqf
+
+## cmd_internal_debug_protomaker_versionrequired
+
+Type: Variable
+
+> Exists if **DEBUG** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+"0.7.687"
+```
+File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 19](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L19)
+## cmd_internal_debug_protomaker_listmodels
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+hashSet_createEmpty()
+```
+File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 20](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L20)
+## cmd_internal_debug_tobjmarker_versionrequired
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"0.7.655"
+```
+File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 95](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L95)
 # Reflect.sqf
 
 ## isvar(x)
@@ -598,13 +884,3 @@ Replaced value:
 errorformat("[Command::spawnitem]: " + cause + " - (%1 = %2)",_varName arg _varValue)
 ```
 File: [host\ClientManager\cmds\Reflect.sqf at line 29](../../../Src/host/ClientManager/cmds/Reflect.sqf#L29)
-# ServerControl.sqf
-
-## gm_startFromLobbyCondition
-
-Type: function
-
-Description: 
-
-
-File: [host\ClientManager\cmds\ServerControl.sqf at line 224](../../../Src/host/ClientManager/cmds/ServerControl.sqf#L224)

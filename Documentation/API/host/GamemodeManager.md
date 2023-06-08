@@ -12,18 +12,6 @@ Replaced value:
 
 ```
 File: [host\GamemodeManager\GamemodeFunctions.sqf at line 8](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L8)
-## implementation_dynamic_restart
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 168](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L168)
 ## getRoleByClass(val)
 
 Type: constant
@@ -257,20 +245,6 @@ Replaced value:
 
 ```
 File: [host\GamemodeManager\GamemodeManager.h at line 11](../../../Src/host/GamemodeManager/GamemodeManager.h#L11)
-## IS_ENABLE_GAMEMODEMANAGER
-
-Type: constant
-
-> Exists if **EMULATE_CLIENT_INSP** not defined
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GamemodeManager\GamemodeManager.h at line 14](../../../Src/host/GamemodeManager/GamemodeManager.h#L14)
 ## getRoleObject(val)
 
 Type: constant
@@ -360,20 +334,6 @@ Replaced value:
 60*3
 ```
 File: [host\GamemodeManager\GamemodeManager.h at line 35](../../../Src/host/GamemodeManager/GamemodeManager.h#L35)
-## PRE_LOBBY_AWAIT_TIME
-
-Type: constant
-
-> Exists if **EDITOR** defined
-
-Description: прелобби ожидание после которого пикнется режим
-
-
-Replaced value:
-```sqf
-1
-```
-File: [host\GamemodeManager\GamemodeManager.h at line 37](../../../Src/host/GamemodeManager/GamemodeManager.h#L37)
 ## GM_STARTLOGIC_2_0
 
 Type: constant
@@ -464,20 +424,6 @@ Replaced value:
 3
 ```
 File: [host\GamemodeManager\GamemodeManager.hpp at line 11](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L11)
-## addRole(roleclass,rolename,countSlots)
-
-Type: constant
-
-Description: 
-- Param: roleclass
-- Param: rolename
-- Param: countSlots
-
-Replaced value:
-```sqf
-[roleclass,rolename,countSlots,[]]
-```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 14](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L14)
 ## ROLE_NAME
 
 Type: constant
@@ -689,6 +635,548 @@ errorformat("Cant load late role <%2> in game mode %1: Null reference",gm_gameMo
 File: [host\GamemodeManager\GamemodeManager.hpp at line 43](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L43)
 # GamemodeManager.sqf
 
+## gm_currentMode
+
+Type: Variable
+
+Description: Выполняет первичную инициализацию гейммода
+
+
+Initial value:
+```sqf
+nullPtr //текущий установленный игровой режим
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 31](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L31)
+## gm_defaultMode
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"GMTVTGame"// режим по-умолчанию
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 33](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L33)
+## gm_currentModeId
+
+Type: Variable
+
+Description: режим по-умолчанию
+
+
+Initial value:
+```sqf
+-1 //айди установленного режима
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 34](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L34)
+## gm_internal_ingameClients
+
+Type: Variable
+
+Description: айди установленного режима
+
+
+Initial value:
+```sqf
+[] //сюда записываются все клиенты, зашедшие в игру хотя-бы один раз
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 35](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L35)
+## gm_handleMainLoop
+
+Type: Variable
+
+Description: сюда записываются все клиенты, зашедшие в игру хотя-бы один раз
+
+
+Initial value:
+```sqf
+-1 //основной хандлер игры
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 37](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L37)
+## gm_handleLobbyLoop
+
+Type: Variable
+
+Description: основной хандлер игры
+
+
+Initial value:
+```sqf
+-1 //хандлер лобби
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 38](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L38)
+## gm_handleEvents
+
+Type: Variable
+
+Description: хандлер лобби
+
+
+Initial value:
+```sqf
+-1 //хандлер событий
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 39](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L39)
+## gm_nextEventPlay
+
+Type: Variable
+
+Description: хандлер событий
+
+
+Initial value:
+```sqf
+0 //отметка когда следующее событие будет запущено
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 40](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L40)
+## gm_isCustomRoundEnd
+
+Type: Variable
+
+Description: кастомный конец раунда
+
+
+Initial value:
+```sqf
+false
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 43](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L43)
+## gm_idCustomResult
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+INFINITY
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 44](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L44)
+## gm_customTextResult
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"Конец смены" //кастомный текст конца раунда
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 45](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L45)
+## gm_modesFolder
+
+Type: Variable
+
+Description: путь до папки со всеми модами
+
+
+Initial value:
+```sqf
+"src\host\GamemodeManager\GameModes\"
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 48](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L48)
+## gm_modesList
+
+Type: Variable
+
+Description: файл со списокм модов
+
+
+Initial value:
+```sqf
+["TestMode"]
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 50](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L50)
+## gm_defaultRoles
+
+Type: Variable
+
+Description: DEPRECATED
+
+
+Initial value:
+```sqf
+createHashMap //хэшкарта дефолтных ролей
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 53](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L53)
+## gm_isCachedDefaultRoles
+
+Type: Variable
+
+Description: хэшкарта дефолтных ролей
+
+
+Initial value:
+```sqf
+false //закеширован ли резульат дефлотных ролей для клиента
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 54](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L54)
+## gm_chachedDefaultRoles
+
+Type: Variable
+
+Description: закеширован ли резульат дефлотных ролей для клиента
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 55](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L55)
+## gm_roles
+
+Type: Variable
+
+Description: роли, регистрируемые для лейтгейма.
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 58](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L58)
+## gm_inGameRoles
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //роли, доступные после начала раунда
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 61](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L61)
+## gm_roleContenders
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[[],[],[]]// - список клиентов которые претендуют на роли. readonly только для вывода информации.
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 68](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L68)
+## gm_preStartRoles
+
+Type: Variable
+
+Description: new roles functionality
+
+
+Initial value:
+```sqf
+[] //роли доступные на престарте (объекты)
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 71](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L71)
+## gm_preStartMainRoles
+
+Type: Variable
+
+Description: роли доступные на престарте (объекты)
+
+
+Initial value:
+```sqf
+[] //приоритетные роли на престарте (ключевые) (объекты)
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 72](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L72)
+## gm_roundProgressRoles
+
+Type: Variable
+
+Description: приоритетные роли на престарте (ключевые) (объекты)
+
+
+Initial value:
+```sqf
+[] //роли доступные после старта. Оставшиеся после престарта с количеством > 0 и возможность добавления перемещаются в этот лист
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 73](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L73)
+## gm_embarks
+
+Type: Variable
+
+Description: роли доступные после старта. Оставшиеся после престарта с количеством > 0 и возможность добавления перемещаются в этот лист
+
+
+Initial value:
+```sqf
+[] //типы эмбарковых ролей. доступны и заполняются только после
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 74](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L74)
+## gm_antagClients
+
+Type: Variable
+
+Description: Антаговые определения. Первые 3 переменные не должны быть использованы
+
+
+Initial value:
+```sqf
+[] //массив клиентов для антагов ОСОБЫЕ роли
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 77](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L77)
+## gm_antagClientsHidden
+
+Type: Variable
+
+Description: массив клиентов для антагов ОСОБЫЕ роли
+
+
+Initial value:
+```sqf
+[] //лист скрытых антагов (скрытые + ВСЕ)
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 81](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L81)
+## gm_antagClientsCounter
+
+Type: Variable
+
+Description: массив скрытых
+
+
+Initial value:
+```sqf
+0 //просто счётчик по созданным антагам
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 79](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L79)
+## gm_antagClientsFull
+
+Type: Variable
+
+Description: просто счётчик по созданным антагам
+
+
+Initial value:
+```sqf
+[] //лист фулловых антагов (особые + ВСЕ)
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 80](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L80)
+## gm_preparedClients
+
+Type: Variable
+
+Description: лист скрытых антагов (скрытые + ВСЕ)
+
+
+Initial value:
+```sqf
+[] //vec2 лист: ServerClient, RoleObject
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 82](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L82)
+## gm_noRoleClients
+
+Type: Variable
+
+Description: vec2 лист: ServerClient, RoleObject
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 84](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L84)
+## gm_state
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+GAME_STATE_PRELOAD
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 86](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L86)
+## gm_lobbyTimeToStart
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+DEFAULT_TIME_TO_START
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 88](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L88)
+## gm_lobbyTimeLeft
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+60*5 //сколько до начала раунда. инициализированное состояние - превыбор режима
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 89](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L89)
+## gm_lobbyCanProcessTime
+
+Type: Variable
+
+Description: сколько до начала раунда. инициализированное состояние - превыбор режима
+
+
+Initial value:
+```sqf
+true //можно зафризить таймер до начала раунда
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 90](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L90)
+## gm_gameModeClass
+
+Type: Variable
+
+Description: можно зафризить таймер до начала раунда
+
+
+Initial value:
+```sqf
+"" //тип установленного режима.
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 91](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L91)
+## gm_gameModeName
+
+Type: Variable
+
+Description: тип установленного режима.
+
+
+Initial value:
+```sqf
+"" //Русское название режима
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 92](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L92)
+## gm_isLastRound
+
+Type: Variable
+
+Description: Русское название режима
+
+
+Initial value:
+```sqf
+false //включенный флаг означает что после конца раунда сервер не перезапустится а выключится
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 93](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L93)
+## gm_supressStartCondition
+
+Type: Variable
+
+Description: включенный флаг означает что после конца раунда сервер не перезапустится а выключится
+
+
+Initial value:
+```sqf
+false //при true раунд стартует принудительно без проверки GMBase::conditionToStart()
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 95](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L95)
+## gm_preLobbyHandler
+
+Type: Variable
+
+Description: при true раунд стартует принудительно без проверки GMBase::conditionToStart()
+
+
+Initial value:
+```sqf
+-1
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 97](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L97)
+## gm_currentAspect
+
+Type: Variable
+
+Description: текущий игровой аспект
+
+
+Initial value:
+```sqf
+nullPtr
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 100](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L100)
+## gm_forcedAspect
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+""
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 101](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L101)
+## gm_canVote
+
+Type: Variable
+
+Description: votable component
+
+
+Initial value:
+```sqf
+true
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 105](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L105)
+## gm_votedMode
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+""
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 106](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L106)
+## gm_votedClients
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 107](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L107)
+## gm_voteMap
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 108](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L108)
+## sdk_temp_internal_forcedAspect
+
+Type: Variable
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+null
+```
+File: [host\GamemodeManager\GamemodeManager.sqf at line 133](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L133)
 ## gm_internal_forcestart
 
 Type: function
@@ -699,6 +1187,20 @@ Description:
 
 
 File: [host\GamemodeManager\GamemodeManager.sqf at line 231](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L231)
+# Gamemode_AllowedModes.sqf
+
+## gm_allowedModes
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\GamemodeManager\Gamemode_AllowedModes.sqf at line 6](../../../Src/host/GamemodeManager/Gamemode_AllowedModes.sqf#L6)
 # Gamemode_deprecated.sqf
 
 ## gm_processAntags
@@ -719,6 +1221,18 @@ Description: ! УСТАРЕВШИЙ МЕТОД - НЕ ВЫЗЫВАЕТСЯ
 File: [host\GamemodeManager\Gamemode_deprecated.sqf at line 115](../../../Src/host/GamemodeManager/Gamemode_deprecated.sqf#L115)
 # Gamemode_internal_auto.sqf
 
+## gm_internal_auto_timeLoad
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[__DATE_ARR__]
+```
+File: [host\GamemodeManager\Gamemode_internal_auto.sqf at line 70](../../../Src/host/GamemodeManager/Gamemode_internal_auto.sqf#L70)
 ## gm_getTimeOffset
 
 Type: function
@@ -730,30 +1244,6 @@ Description: Получение смещения времени
 File: [host\GamemodeManager\Gamemode_internal_auto.sqf at line 7](../../../Src/host/GamemodeManager/Gamemode_internal_auto.sqf#L7)
 # Gamemode_RoundManager.sqf
 
-## testcase_moreclients
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 7](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L7)
-## TEST_EMULATE_CLIENT_FROM_DATABASE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 10](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L10)
 ## gm_processSpawnRole_disabledFullAntags
 
 Type: constant
@@ -766,18 +1256,6 @@ Replaced value:
 
 ```
 File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 470](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L470)
-## debuguser_fortestspawn
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 559](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L559)
 ## additionalData
 
 Type: constant
@@ -815,6 +1293,18 @@ Replaced value:
 (_cliSettings get #var)
 ```
 File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 678](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L678)
+## gameEvents_internal_list_allObjects
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1326](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1326)
 ## gm_startRound
 
 Type: function

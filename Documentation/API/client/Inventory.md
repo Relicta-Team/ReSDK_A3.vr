@@ -243,6 +243,18 @@ Replaced value:
 _xp + ((_wp + _biasW) * DEMAP(INV_HAND_R,0)) + _wp,_yp + ((_hp + SLOT_BIASH) * DEMAP(INV_HAND_R,1)) + _hp
 ```
 File: [client\Inventory\functions.sqf at line 421](../../../Src/client/Inventory/functions.sqf#L421)
+## inventory_isGlobalVisible
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+true
+```
+File: [client\Inventory\functions.sqf at line 104](../../../Src/client/Inventory/functions.sqf#L104)
 ## inventory_init
 
 Type: function
@@ -549,14 +561,6 @@ Description:
 
 
 File: [client\Inventory\functions.sqf at line 1188](../../../Src/client/Inventory/functions.sqf#L1188)
-## inventory_onAltClick
-
-Type: function
-
-Description: 
-
-
-File: [client\Inventory\functions.sqf at line 1204](../../../Src/client/Inventory/functions.sqf#L1204)
 ## inventory_onExamine
 
 Type: function
@@ -645,18 +649,6 @@ Replaced value:
 
 ```
 File: [client\Inventory\helpers.hpp at line 11](../../../Src/client/Inventory/helpers.hpp#L11)
-## INVENTORY_USE_NEW_RENDER_ICONS
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\Inventory\helpers.hpp at line 16](../../../Src/client/Inventory/helpers.hpp#L16)
 ## BACKGROUND_COLOR_NOITEM
 
 Type: constant
@@ -822,9 +814,9 @@ Description:
 
 Replaced value:
 ```sqf
-((inventory_previewObject getVariable ["isInteractible",false]) && inventory_isPressedInteractButton || (typeof getInteractibleTarget == BASIC_MOB_TYPE))
+((inventory_previewObject getVariable ["isInteractible",false]) || (typeof getInteractibleTarget == BASIC_MOB_TYPE))
 ```
-File: [client\Inventory\helpers.hpp at line 45](../../../Src/client/Inventory/helpers.hpp#L45)
+File: [client\Inventory\helpers.hpp at line 44](../../../Src/client/Inventory/helpers.hpp#L44)
 ## getInteractibleTarget
 
 Type: constant
@@ -921,18 +913,6 @@ Replaced value:
 (wid getVariable "icon")
 ```
 File: [client\Inventory\helpers.hpp at line 64](../../../Src/client/Inventory/helpers.hpp#L64)
-## widgetSetPicture
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-inventory_widgetSetPicture
-```
-File: [client\Inventory\helpers.hpp at line 67](../../../Src/client/Inventory/helpers.hpp#L67)
 ## getSlotBackground(wid)
 
 Type: constant
@@ -1675,18 +1655,438 @@ Replaced value:
 PIC_PATH("items\temp_item")
 ```
 File: [client\Inventory\inventory_init.sqf at line 11](../../../Src/client/Inventory/inventory_init.sqf#L11)
-## UNIT_TEST_ITEM
+## inventory_sloticons_default
 
-Type: constant
+Type: Variable
+
+Description: ассоциатор путей до картинок
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\Inventory\inventory_init.sqf at line 20](../../../Src/client/Inventory/inventory_init.sqf#L20)
+## inventory_openModeSlotsId
+
+Type: Variable
 
 Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-
+[INV_BACKPACK,INV_ARMOR,INV_HEAD,INV_BACK,INV_CLOTH,INV_FACE,INV_BELT]
 ```
-File: [client\Inventory\inventory_init.sqf at line 17](../../../Src/client/Inventory/inventory_init.sqf#L17)
+File: [client\Inventory\inventory_init.sqf at line 32](../../../Src/client/Inventory/inventory_init.sqf#L32)
+## inventory_slotnames_default
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+INV_LIST_SLOTNAMES
+```
+File: [client\Inventory\inventory_init.sqf at line 36](../../../Src/client/Inventory/inventory_init.sqf#L36)
+## inventory_slotpos_map
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\Inventory\inventory_init.sqf at line 38](../../../Src/client/Inventory/inventory_init.sqf#L38)
+## inventor_slot_widgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Inventory\inventory_init.sqf at line 50](../../../Src/client/Inventory/inventory_init.sqf#L50)
+## inventory_slotdata
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_inventory_slotdata apply ...
+```
+File: [client\Inventory\inventory_init.sqf at line 55](../../../Src/client/Inventory/inventory_init.sqf#L55)
+## isInventoryOpen
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Inventory\inventory_init.sqf at line 57](../../../Src/client/Inventory/inventory_init.sqf#L57)
+## inventory_modifierScroll
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false//множитель прокручивания при нажатом шифте
+```
+File: [client\Inventory\inventory_init.sqf at line 59](../../../Src/client/Inventory/inventory_init.sqf#L59)
+## inventory_pressedwidget
+
+Type: Variable
+
+Description: common flags and other info
+
+
+Initial value:
+```sqf
+[widgetNull,widgetNull]
+```
+File: [client\Inventory\inventory_init.sqf at line 62](../../../Src/client/Inventory/inventory_init.sqf#L62)
+## inventory_pressedSlotPosition
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[0,0]
+```
+File: [client\Inventory\inventory_init.sqf at line 63](../../../Src/client/Inventory/inventory_init.sqf#L63)
+## inventory_isInsidePressedSlot
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false //На данный момент (Legacy - 0.5.148) данная переменная только устанавливает значения, но не использует их.
+```
+File: [client\Inventory\inventory_init.sqf at line 64](../../../Src/client/Inventory/inventory_init.sqf#L64)
+## inventory_invWidgetSize
+
+Type: Variable
+
+Description: На данный момент (Legacy - 0.5.148) данная переменная только устанавливает значения, но не использует их.
+
+
+Initial value:
+```sqf
+[0,0,0,0]
+```
+File: [client\Inventory\inventory_init.sqf at line 66](../../../Src/client/Inventory/inventory_init.sqf#L66)
+## inventory_verbMenuWidgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[widgetNull]
+```
+File: [client\Inventory\inventory_init.sqf at line 68](../../../Src/client/Inventory/inventory_init.sqf#L68)
+## inventory_lastPressedSlotId
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1 //нигде не используется?
+```
+File: [client\Inventory\inventory_init.sqf at line 69](../../../Src/client/Inventory/inventory_init.sqf#L69)
+## inventory_verbItemPointer
+
+Type: Variable
+
+Description: нигде не используется?
+
+
+Initial value:
+```sqf
+""
+```
+File: [client\Inventory\inventory_init.sqf at line 70](../../../Src/client/Inventory/inventory_init.sqf#L70)
+## inventory_protectAltClick
+
+Type: Variable
+
+Description: inventory_protectExtraAction = false;
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Inventory\inventory_init.sqf at line 73](../../../Src/client/Inventory/inventory_init.sqf#L73)
+## inventory_containerCommonData
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+nullContainerCommonData//name,ref,local game object
+```
+File: [client\Inventory\inventory_init.sqf at line 75](../../../Src/client/Inventory/inventory_init.sqf#L75)
+## inventory_containerData
+
+Type: Variable
+
+Description: name,ref,local game object
+
+
+Initial value:
+```sqf
+[]// check SD_<var>
+```
+File: [client\Inventory\inventory_init.sqf at line 76](../../../Src/client/Inventory/inventory_init.sqf#L76)
+## inventory_isOpenContainer
+
+Type: Variable
+
+Description: check SD_<var>
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Inventory\inventory_init.sqf at line 77](../../../Src/client/Inventory/inventory_init.sqf#L77)
+## inventory_containerWidgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[widgetNull,widgetNull]//0 - ctg,1 - ctgScroll
+```
+File: [client\Inventory\inventory_init.sqf at line 78](../../../Src/client/Inventory/inventory_init.sqf#L78)
+## inventory_containerSlots
+
+Type: Variable
+
+Description: 0 - ctg,1 - ctgScroll
+
+
+Initial value:
+```sqf
+[]//список виджетов иконок внутри контейнера
+```
+File: [client\Inventory\inventory_init.sqf at line 79](../../../Src/client/Inventory/inventory_init.sqf#L79)
+## inventory_freeSpaceSlots
+
+Type: Variable
+
+Description: список виджетов иконок внутри контейнера
+
+
+Initial value:
+```sqf
+[]//список виджетов свободного места
+```
+File: [client\Inventory\inventory_init.sqf at line 80](../../../Src/client/Inventory/inventory_init.sqf#L80)
+## inventory_contWidgetSize
+
+Type: Variable
+
+Description: список виджетов свободного места
+
+
+Initial value:
+```sqf
+[0,0,0,0]
+```
+File: [client\Inventory\inventory_init.sqf at line 81](../../../Src/client/Inventory/inventory_init.sqf#L81)
+## inventory_isPressedRMBDrag
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false //для защиты драга пкмом
+```
+File: [client\Inventory\inventory_init.sqf at line 83](../../../Src/client/Inventory/inventory_init.sqf#L83)
+## inventory_isPressedInteractButton
+
+Type: Variable
+
+Description: для защиты драга пкмом
+
+
+Initial value:
+```sqf
+false //специальный модификатор интерации
+```
+File: [client\Inventory\inventory_init.sqf at line 84](../../../Src/client/Inventory/inventory_init.sqf#L84)
+## inventory_isOutsideDragCatch
+
+Type: Variable
+
+Description: специальный модификатор интерации
+
+
+Initial value:
+```sqf
+false //указатель защиты от main action при условии: mouseDown > move outside current slot > move inside current
+```
+File: [client\Inventory\inventory_init.sqf at line 86](../../../Src/client/Inventory/inventory_init.sqf#L86)
+## inventory_supressInventoryOpen
+
+Type: Variable
+
+Description: указатель защиты от main action при условии: mouseDown > move outside current slot > move inside current
+
+
+Initial value:
+```sqf
+false //подавляет открытие инвентарных функций. работает для ПКМ по предмету
+```
+File: [client\Inventory\inventory_init.sqf at line 88](../../../Src/client/Inventory/inventory_init.sqf#L88)
+## inventory_lastFocusedWidget
+
+Type: Variable
+
+Description: подавляет открытие инвентарных функций. работает для ПКМ по предмету
+
+
+Initial value:
+```sqf
+[widgetNull] //последний в фокусе для увеличения
+```
+File: [client\Inventory\inventory_init.sqf at line 90](../../../Src/client/Inventory/inventory_init.sqf#L90)
+## inventory_canHideHands
+
+Type: Variable
+
+Description: Скрывает инвентарь
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Inventory\inventory_init.sqf at line 93](../../../Src/client/Inventory/inventory_init.sqf#L93)
+## inventory_isFullHide
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Inventory\inventory_init.sqf at line 94](../../../Src/client/Inventory/inventory_init.sqf#L94)
+## inventory_hideAfter
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+10
+```
+File: [client\Inventory\inventory_init.sqf at line 95](../../../Src/client/Inventory/inventory_init.sqf#L95)
+## inventory_hideValue
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\Inventory\inventory_init.sqf at line 96](../../../Src/client/Inventory/inventory_init.sqf#L96)
+## inventory_hideTimestamp
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\Inventory\inventory_init.sqf at line 97](../../../Src/client/Inventory/inventory_init.sqf#L97)
+## inventory_hideHandler
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\Inventory\inventory_init.sqf at line 98](../../../Src/client/Inventory/inventory_init.sqf#L98)
+## inventory_isHoldMode
+
+Type: Variable
+
+Description: Инвентарь по удержанию
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Inventory\inventory_init.sqf at line 101](../../../Src/client/Inventory/inventory_init.sqf#L101)
+## inventory_selfWidgets
+
+Type: Variable
+
+Description: Селф окно
+
+
+Initial value:
+```sqf
+[widgetNull,widgetNull] //0 ctg,1 text
+```
+File: [client\Inventory\inventory_init.sqf at line 104](../../../Src/client/Inventory/inventory_init.sqf#L104)
 # PreviewObject.sqf
 
 ## MAX_ONMOUSECURSOR_DROP_ANGLE
@@ -1737,6 +2137,30 @@ Replaced value:
 _visObj hideObject false; __internal_resetBackColor
 ```
 File: [client\Inventory\PreviewObject.sqf at line 52](../../../Src/client/Inventory/PreviewObject.sqf#L52)
+## inventory_previewObject
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+objnull
+```
+File: [client\Inventory\PreviewObject.sqf at line 18](../../../Src/client/Inventory/PreviewObject.sqf#L18)
+## inventory_lastDirPreviewObject
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\Inventory\PreviewObject.sqf at line 19](../../../Src/client/Inventory/PreviewObject.sqf#L19)
 ## inventory_createPreviewObject
 
 Type: function

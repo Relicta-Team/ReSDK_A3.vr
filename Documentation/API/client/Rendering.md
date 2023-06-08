@@ -12,6 +12,42 @@ Replaced value:
 setViewDistance (dist); setObjectViewDistance (dist)
 ```
 File: [client\Rendering\RenderDistance.sqf at line 13](../../../Src/client/Rendering/RenderDistance.sqf#L13)
+## render_dist_handle
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\Rendering\RenderDistance.sqf at line 7](../../../Src/client/Rendering/RenderDistance.sqf#L7)
+## render_dist_maxDistance
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+170
+```
+File: [client\Rendering\RenderDistance.sqf at line 8](../../../Src/client/Rendering/RenderDistance.sqf#L8)
+## render_dist_minDistance
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+25
+```
+File: [client\Rendering\RenderDistance.sqf at line 9](../../../Src/client/Rendering/RenderDistance.sqf#L9)
 ## render_dist_onupdate
 
 Type: function
@@ -129,18 +165,6 @@ Replaced value:
 _conv = linearConversion [_addTime, _left, tickTime, var*70/100, 0]; var = _conv
 ```
 File: [client\Rendering\Camera\CameraControl.sqf at line 129](../../../Src/client/Rendering/Camera/CameraControl.sqf#L129)
-## conversion(data)
-
-Type: constant
-
-Description: 
-- Param: data
-
-Replaced value:
-```sqf
-linearConversion [0,1,data,] OR vectorLinearConversion
-```
-File: [client\Rendering\Camera\CameraControl.sqf at line 260](../../../Src/client/Rendering/Camera/CameraControl.sqf#L260)
 ## invertNum(val)
 
 Type: constant
@@ -153,6 +177,222 @@ Replaced value:
 -(val)
 ```
 File: [client\Rendering\Camera\CameraControl.sqf at line 261](../../../Src/client/Rendering/Camera/CameraControl.sqf#L261)
+## cam_isEnabled
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+true
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 16](../../../Src/client/Rendering/Camera/CameraControl.sqf#L16)
+## cam_defaultPos
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[-0.05,-0.05,0.12]
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 17](../../../Src/client/Rendering/Camera/CameraControl.sqf#L17)
+## cam_lastPlayerObject
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+objNUll
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 18](../../../Src/client/Rendering/Camera/CameraControl.sqf#L18)
+## cam_updateDelay
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 19](../../../Src/client/Rendering/Camera/CameraControl.sqf#L19)
+## cam_currentCamera
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+cam_fixedObject
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 27](../../../Src/client/Rendering/Camera/CameraControl.sqf#L27)
+## cam_object
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+initCam(dynamicCamera)
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 25](../../../Src/client/Rendering/Camera/CameraControl.sqf#L25)
+## cam_fixedObject
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+initCam(staticCamera)
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 26](../../../Src/client/Rendering/Camera/CameraControl.sqf#L26)
+## cam_viewMode
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"INTERNAL"
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 29](../../../Src/client/Rendering/Camera/CameraControl.sqf#L29)
+## cam_isNewCamera
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 45](../../../Src/client/Rendering/Camera/CameraControl.sqf#L45)
+## cam_renderPos
+
+Type: Variable
+
+Description: Параметры для рендеринга. Нужны при отправке на сервер
+
+
+Initial value:
+```sqf
+[0,0,0] //data in ATL coordinates
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 48](../../../Src/client/Rendering/Camera/CameraControl.sqf#L48)
+## cam_renderVec
+
+Type: Variable
+
+Description: data in ATL coordinates
+
+
+Initial value:
+```sqf
+[[0,0,0],[0,0,1]]
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 49](../../../Src/client/Rendering/Camera/CameraControl.sqf#L49)
+## cam_renderVecMouse
+
+Type: Variable
+
+Description: мы получили вектор направления для мыши. Если луч не прокнул то
+
+
+Initial value:
+```sqf
+[[0,0,0],[0,0,1]] //вектор направления мыши
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 50](../../../Src/client/Rendering/Camera/CameraControl.sqf#L50)
+## cam_movingOffest
+
+Type: Variable
+
+Description: вектор направления мыши
+
+
+Initial value:
+```sqf
+[0,0]
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 52](../../../Src/client/Rendering/Camera/CameraControl.sqf#L52)
+## cam_camshakeDir
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[0,0]//x,y
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 54](../../../Src/client/Rendering/Camera/CameraControl.sqf#L54)
+## cam_camshakePos
+
+Type: Variable
+
+Description: x,y
+
+
+Initial value:
+```sqf
+[0,0,0]
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 55](../../../Src/client/Rendering/Camera/CameraControl.sqf#L55)
+## cam_camshake_tasks
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[] //here adding tasks for shake
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 56](../../../Src/client/Rendering/Camera/CameraControl.sqf#L56)
+## cam_camShake_internal_handler
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+startUpdate(cam_camshake_onUpdate,0)
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 177](../../../Src/client/Rendering/Camera/CameraControl.sqf#L177)
+## cam_internal_isEnabledBisCam
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\Rendering\Camera\CameraControl.sqf at line 296](../../../Src/client/Rendering/Camera/CameraControl.sqf#L296)
 ## cam_setCameraOnPlayer
 
 Type: function
@@ -259,6 +499,18 @@ Replaced value:
 _conv = linearConversion [_addTime, _left, tickTime, var*70/100, 0]; var = _conv
 ```
 File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 88](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L88)
+## cam_camShake_internal_handler
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+startUpdate(cam_camshake_onUpdate,0)
+```
+File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 128](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L128)
 ## cam_camShake_resetAll
 
 Type: function
@@ -296,6 +548,18 @@ Description:
 File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 32](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L32)
 # Camera_ShakeDefs.sqf
 
+## cam_camshake_map
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+hashMapNewArgs [	...
+```
+File: [client\Rendering\Camera\Camera_ShakeDefs.sqf at line 18](../../../Src/client/Rendering/Camera/Camera_ShakeDefs.sqf#L18)
 ## cam_getCamShakeConfig
 
 Type: function
@@ -339,6 +603,42 @@ Replaced value:
 ("#particlesource" createVehicleLocal [0,0,0])
 ```
 File: [client\Rendering\Effects\Effects_init.sqf at line 9](../../../Src/client/Rendering/Effects/Effects_init.sqf#L9)
+## render_effects_lastPlayer
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+objnull
+```
+File: [client\Rendering\Effects\Effects_init.sqf at line 11](../../../Src/client/Rendering/Effects/Effects_init.sqf#L11)
+## render_effects_dustParticles
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+objnull
+```
+File: [client\Rendering\Effects\Effects_init.sqf at line 12](../../../Src/client/Rendering/Effects/Effects_init.sqf#L12)
+## render_effects_dustGlob
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+objNull
+```
+File: [client\Rendering\Effects\Effects_init.sqf at line 13](../../../Src/client/Rendering/Effects/Effects_init.sqf#L13)
 ## render_effects_init
 
 Type: function
@@ -543,6 +843,42 @@ vec2(__EFFECT_NAME,__args)
 File: [client\Rendering\PostProcessing\postprocessing.h at line 26](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L26)
 # PPInit.sqf
 
+## pp_buffer_efx
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 21](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L21)
+## pp_allEffects
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 22](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L22)
+## pp_uniIndex
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+5000
+```
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 23](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L23)
 ## pp_reload
 
 Type: function
