@@ -403,6 +403,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [host\Reagents\Reactions\Reaction.sqf at line 7](../../../Src/host/Reagents/Reactions/Reaction.sqf#L7)
 # ReagentsAll.sqf
 

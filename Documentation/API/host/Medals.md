@@ -47,6 +47,10 @@ Type: Variable
 Description: achievements system
 
 
+Initial value:
+```sqf
+hashMapNew
+```
 File: [host\Medals\Medals_init.sqf at line 15](../../../Src/host/Medals/Medals_init.sqf#L15)
 ## medl_register
 
@@ -55,6 +59,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[...
+```
 File: [host\Medals\Medals_init.sqf at line 18](../../../Src/host/Medals/Medals_init.sqf#L18)
 ## medl_check
 

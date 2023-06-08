@@ -33,6 +33,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\VerbSystem\ActionsPseudonames.sqf at line 6](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L6)
 ## ie_actions_mapinverted
 
@@ -41,6 +45,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\VerbSystem\ActionsPseudonames.sqf at line 7](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L7)
 ## ie_action_setPrefix
 
@@ -76,6 +84,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\VerbSystem\loadBeforeOOPInit.sqf at line 8](../../../Src/host/VerbSystem/loadBeforeOOPInit.sqf#L8)
 ## ie_actions_regNew
 
@@ -465,6 +477,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\VerbSystem\verbsDefine.sqf at line 12](../../../Src/host/VerbSystem/verbsDefine.sqf#L12)
 ## verb_inverted_list
 
@@ -473,4 +489,8 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\VerbSystem\verbsDefine.sqf at line 13](../../../Src/host/VerbSystem/verbsDefine.sqf#L13)

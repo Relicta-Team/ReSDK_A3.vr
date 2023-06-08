@@ -7,6 +7,10 @@ Type: Variable
 Description: first clear prev
 
 
+Initial value:
+```sqf
+hashSet_createEmpty()
+```
 File: [client\Traps\TrapsInit.sqf at line 27](../../../Src/client/Traps/TrapsInit.sqf#L27)
 ## traps_resyncAllTraps
 

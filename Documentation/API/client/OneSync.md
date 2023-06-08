@@ -19,6 +19,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+-1
+```
 File: [client\OneSync\OneSync_Falling.sqf at line 10](../../../Src/client/OneSync/OneSync_Falling.sqf#L10)
 ## os_falling_startPos
 
@@ -27,6 +31,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+vec3(0,0,0)
+```
 File: [client\OneSync\OneSync_Falling.sqf at line 14](../../../Src/client/OneSync/OneSync_Falling.sqf#L14)
 ## os_falling_isOnGround
 
@@ -35,6 +43,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\OneSync\OneSync_Falling.sqf at line 15](../../../Src/client/OneSync/OneSync_Falling.sqf#L15)
 ## os_falling_isEnabled
 
@@ -85,6 +97,10 @@ Type: Variable
 Description: "steps",
 
 
+Initial value:
+```sqf
+["falling","light"/*,"mobcollision" Коллизия сломана*/]
+```
 File: [client\OneSync\OneSync_init.sqf at line 40](../../../Src/client/OneSync/OneSync_init.sqf#L40)
 ## os_isActive
 
@@ -93,6 +109,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\OneSync\OneSync_init.sqf at line 42](../../../Src/client/OneSync/OneSync_init.sqf#L42)
 ## os_start
 
@@ -143,6 +163,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+-1
+```
 File: [client\OneSync\OneSync_light.sqf at line 14](../../../Src/client/OneSync/OneSync_light.sqf#L14)
 ## os_light_lastTimeSendInfo
 
@@ -151,6 +175,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [client\OneSync\OneSync_light.sqf at line 15](../../../Src/client/OneSync/OneSync_light.sqf#L15)
 ## os_light_list_noProcessedLights
 
@@ -159,6 +187,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\OneSync\OneSync_light.sqf at line 16](../../../Src/client/OneSync/OneSync_light.sqf#L16)
 ## os_light_setEnable
 
@@ -237,6 +269,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+-1
+```
 File: [client\OneSync\OneSync_mobcollision.sqf at line 14](../../../Src/client/OneSync/OneSync_mobcollision.sqf#L14)
 ## os_mobcollision_lastTarg
 
@@ -245,6 +281,10 @@ Type: Variable
 Description: os_mobcollision_canMove = true;
 
 
+Initial value:
+```sqf
+objnull
+```
 File: [client\OneSync\OneSync_mobcollision.sqf at line 17](../../../Src/client/OneSync/OneSync_mobcollision.sqf#L17)
 ## os_mobcollision_bbObj
 
@@ -253,6 +293,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+objnull
+```
 File: [client\OneSync\OneSync_mobcollision.sqf at line 18](../../../Src/client/OneSync/OneSync_mobcollision.sqf#L18)
 ## os_mobcollision_setEnable
 
@@ -295,6 +339,10 @@ Type: Variable
 Description: TODO возможно определять тип звука стоит от объекта на стороне сервера
 
 
+Initial value:
+```sqf
+-1
+```
 File: [client\OneSync\OneSync_steps.sqf at line 9](../../../Src/client/OneSync/OneSync_steps.sqf#L9)
 ## os_steps_currentSound
 
@@ -303,6 +351,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"gen"
+```
 File: [client\OneSync\OneSync_steps.sqf at line 11](../../../Src/client/OneSync/OneSync_steps.sqf#L11)
 ## os_steps_reverbLevel
 
@@ -311,6 +363,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+1
+```
 File: [client\OneSync\OneSync_steps.sqf at line 12](../../../Src/client/OneSync/OneSync_steps.sqf#L12)
 ## os_steps_soundsType
 
@@ -319,6 +375,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\OneSync\OneSync_steps.sqf at line 14](../../../Src/client/OneSync/OneSync_steps.sqf#L14)
 ## os_steps_setEnable
 

@@ -7,6 +7,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\Traits\TraitsInit.sqf at line 11](../../../Src/host/Traits/TraitsInit.sqf#L11)
 ## traits_viceMap
 
@@ -15,6 +19,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\Traits\TraitsInit.sqf at line 12](../../../Src/host/Traits/TraitsInit.sqf#L12)
 ## traits_getViceDescByClass
 

@@ -345,6 +345,10 @@ Type: Variable
 Description: летящий объект. системная переменная
 
 
+Initial value:
+```sqf
+createObj
+```
 File: [host\GameObjects\GameObject.sqf at line 50](../../../Src/host/GameObjects/GameObject.sqf#L50)
 ## go_internal_updateMethodsAfterStart
 
@@ -353,6 +357,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\GameObjects\GameObject.sqf at line 226](../../../Src/host/GameObjects/GameObject.sqf#L226)
 ## debug_internal_collectInheritanceDesign
 
@@ -3097,6 +3105,10 @@ Type: Variable
 Description: системные функции для кодов наручников
 
 
+Initial value:
+```sqf
+rand(-99,99)
+```
 File: [host\GameObjects\Items\Captives\CaptiveBase.sqf at line 41](../../../Src/host/GameObjects/Items/Captives/CaptiveBase.sqf#L41)
 ## server_handcuff_internal_codeToString
 
@@ -3207,6 +3219,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\GameObjects\Mobs\BasicMob.sqf at line 211](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L211)
 # Mob.sqf
 
@@ -3539,6 +3555,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMapFromArray[...
+```
 File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 702](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L702)
 # Mob_combat_attdam_enum.hpp
 
@@ -4170,6 +4190,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMapFromArray[...
+```
 File: [host\GameObjects\Mobs\Mob_Skills.sqf at line 518](../../../Src/host/GameObjects/Mobs/Mob_Skills.sqf#L518)
 ## skills_internal_list_otherSkillsSystemNames
 
@@ -4178,6 +4202,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[...
+```
 File: [host\GameObjects\Mobs\Mob_Skills.sqf at line 618](../../../Src/host/GameObjects/Mobs/Mob_Skills.sqf#L618)
 # Mob_WoundSystem.sqf
 
@@ -5015,6 +5043,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\GameObjects\Structures\Effects\Zones.sqf at line 10](../../../Src/host/GameObjects/Structures/Effects/Zones.sqf#L10)
 # GeneratorParts.sqf
 
@@ -5339,6 +5371,10 @@ Type: Variable
 Description: список всех спавнпойнтов
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 28](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L28)
 ## spawnPos_internal_map_equalCollections
 
@@ -5347,6 +5383,10 @@ Type: Variable
 Description: список спавнпойтов по тегу
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 30](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L30)
 ## spawnPos_internal_list_rnd
 
@@ -5355,6 +5395,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 32](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L32)
 ## getSpawnPosByName
 

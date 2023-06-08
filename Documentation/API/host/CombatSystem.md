@@ -1486,6 +1486,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+hashMapNew
+```
 File: [host\CombatSystem\RuntimeWeaponModulesGenerator.sqf at line 25](../../../Src/host/CombatSystem/RuntimeWeaponModulesGenerator.sqf#L25)
 ## cs_runtime_internal_generate
 

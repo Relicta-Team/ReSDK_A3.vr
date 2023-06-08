@@ -225,4 +225,8 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\LocalEffects\LocalEffects_list.sqf at line 56](../../../Src/client/LocalEffects/LocalEffects_list.sqf#L56)

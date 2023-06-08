@@ -7,6 +7,10 @@ Type: Variable
 Description: структура: ник (аккаунт), персонаж (имя), роль (тип),флаги - строка с разделителем: var=val:var:var=val
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\Reputation\Reputation_functions.sqf at line 19](../../../Src/host/Reputation/Reputation_functions.sqf#L19)
 ## repvote_list_textNames
 
@@ -15,6 +19,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[...
+```
 File: [host\Reputation\Reputation_functions.sqf at line 252](../../../Src/host/Reputation/Reputation_functions.sqf#L252)
 ## repvote_serializeFlags
 
@@ -174,6 +182,10 @@ Type: Variable
 Description: ! WARNING - система нестабильна и нуждается в доработке.
 
 
+Initial value:
+```sqf
+false
+```
 File: [host\Reputation\Reputation_init.sqf at line 12](../../../Src/host/Reputation/Reputation_init.sqf#L12)
 ## rep_map_questions
 
@@ -182,6 +194,10 @@ Type: Variable
 Description: Список вопросов
 
 
+Initial value:
+```sqf
+hashMapNew
+```
 File: [host\Reputation\Reputation_init.sqf at line 17](../../../Src/host/Reputation/Reputation_init.sqf#L17)
 ## rep_list_categories
 
@@ -190,6 +206,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+rep_list_categories apply ...
+```
 File: [host\Reputation\Reputation_init.sqf at line 30](../../../Src/host/Reputation/Reputation_init.sqf#L30)
 ## rep_map_customQuestions
 
@@ -198,6 +218,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+hashMapNew
+```
 File: [host\Reputation\Reputation_init.sqf at line 19](../../../Src/host/Reputation/Reputation_init.sqf#L19)
 ## rep_startTest_info
 
@@ -206,6 +230,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"<t size='1.6' font='RobotoCondensedLight'>Перед тем, как начать игру на проекте, вы должны пройти небольшой тест," +...
+```
 File: [host\Reputation\Reputation_init.sqf at line 32](../../../Src/host/Reputation/Reputation_init.sqf#L32)
 ## rep_regQuestion
 

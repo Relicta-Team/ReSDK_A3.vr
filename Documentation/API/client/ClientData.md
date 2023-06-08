@@ -82,6 +82,10 @@ Type: Variable
 Description: уникальное имя клиента
 
 
+Initial value:
+```sqf
+""
+```
 File: [client\ClientData\ClientData.sqf at line 38](../../../Src/client/ClientData/ClientData.sqf#L38)
 ## cd_charName
 
@@ -90,6 +94,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"Обитатель Сети"
+```
 File: [client\ClientData\ClientData.sqf at line 39](../../../Src/client/ClientData/ClientData.sqf#L39)
 ## cd_skillNames
 
@@ -98,6 +106,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+["СЛ","ИН","ЛВ","ЗД","ВНС","ВОЛЯ","ВОС","ЖЗ"]
+```
 File: [client\ClientData\ClientData.sqf at line 42](../../../Src/client/ClientData/ClientData.sqf#L42)
 ## cd_setVideoSettings
 
@@ -179,6 +191,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"init"
+```
 File: [client\ClientData\ClientData_ConnectionManager.sqf at line 14](../../../Src/client/ClientData/ClientData_ConnectionManager.sqf#L14)
 ## client_getState
 
@@ -240,6 +256,10 @@ Type: Variable
 Description: системный флаг блокировки бега (когда персонаж без ноги)
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\ClientData\ClientData_forceWalk.sqf at line 18](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L18)
 ## cd_fw_hasBreakBone
 
@@ -248,6 +268,10 @@ Type: Variable
 Description: сломанные кости на ногах записываются сюда
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\ClientData\ClientData_forceWalk.sqf at line 20](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L20)
 ## cd_fw_isForceWalk
 
@@ -551,6 +575,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\ClientData\EscapeMenu.sqf at line 25](../../../Src/client/ClientData/EscapeMenu.sqf#L25)
 ## esc_widgets
 
@@ -559,6 +587,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[widgetNull]
+```
 File: [client\ClientData\EscapeMenu.sqf at line 26](../../../Src/client/ClientData/EscapeMenu.sqf#L26)
 ## esc_buttonsData
 
@@ -567,6 +599,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[...
+```
 File: [client\ClientData\EscapeMenu.sqf at line 32](../../../Src/client/ClientData/EscapeMenu.sqf#L32)
 ## esc_settings_widgets
 
@@ -575,6 +611,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[widgetNull,widgetNull,widgetNull,widgetNull]
+```
 File: [client\ClientData\EscapeMenu.sqf at line 210](../../../Src/client/ClientData/EscapeMenu.sqf#L210)
 ## esc_settings_names
 
@@ -583,6 +623,10 @@ Type: Variable
 Description: Порядок настроек строго фиксирован и связан с ServerClient::clientSettings
 
 
+Initial value:
+```sqf
+[...
+```
 File: [client\ClientData\EscapeMenu.sqf at line 212](../../../Src/client/ClientData/EscapeMenu.sqf#L212)
 ## esc_settings_curIndex
 
@@ -591,6 +635,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+-1
+```
 File: [client\ClientData\EscapeMenu.sqf at line 218](../../../Src/client/ClientData/EscapeMenu.sqf#L218)
 ## cd_settingsVersion
 
@@ -599,6 +647,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+1.0
+```
 File: [client\ClientData\EscapeMenu.sqf at line 220](../../../Src/client/ClientData/EscapeMenu.sqf#L220)
 ## esc_openMenu
 
@@ -994,6 +1046,10 @@ Type: Variable
 Description: !!! only debug !!!
 
 
+Initial value:
+```sqf
+1
+```
 File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 43](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L43)
 ## somedebugvar2
 
@@ -1002,6 +1058,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+1
+```
 File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 44](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L44)
 ## testbool
 
@@ -1010,6 +1070,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 45](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L45)
 ## cd_settingsGame
 
@@ -1018,6 +1082,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[...
+```
 File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 48](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L48)
 ## esc_settings_game_unloading
 
@@ -1241,6 +1309,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [client\ClientData\SendCommand.sqf at line 106](../../../Src/client/ClientData/SendCommand.sqf#L106)
 ## cd_openSendCommandWindow
 
@@ -1311,6 +1383,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[_ctg,_back,_txt]
+```
 File: [client\ClientData\VersionViewer.sqf at line 26](../../../Src/client/ClientData/VersionViewer.sqf#L26)
 ## cd_vv_syncVisual
 

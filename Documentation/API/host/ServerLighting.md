@@ -144,6 +144,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\ServerLighting\ServerLighting_init.sqf at line 31](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L31)
 ## slt_scriptedCfgMapHandlers
 
@@ -152,6 +156,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
 File: [host\ServerLighting\ServerLighting_init.sqf at line 88](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L88)
 ## type
 

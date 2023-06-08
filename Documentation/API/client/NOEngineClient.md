@@ -457,6 +457,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\NOEngineClient\NOEngineClientInit.sqf at line 28](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L28)
 ## noe_client_cs
 
@@ -465,6 +469,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [client\NOEngineClient\NOEngineClientInit.sqf at line 31](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L31)
 ## noe_client_allChunkTypes
 
@@ -473,6 +481,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[CHUNK_TYPE_ITEM,CHUNK_TYPE_STRUCTURE,CHUNK_TYPE_DECOR]
+```
 File: [client\NOEngineClient\NOEngineClientInit.sqf at line 32](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L32)
 ## noe_client_packetId
 
@@ -481,6 +493,10 @@ Type: Variable
 Description: первый обязательный вызов
 
 
+Initial value:
+```sqf
+0
+```
 File: [client\NOEngineClient\NOEngineClientInit.sqf at line 43](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L43)
 ## noe_client_packets
 
@@ -489,6 +505,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\NOEngineClient\NOEngineClientInit.sqf at line 44](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L44)
 ## noe_client_packetsChunks
 
@@ -497,6 +517,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [client\NOEngineClient\NOEngineClientInit.sqf at line 45](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L45)
 ## noe_client_allPointers
 
@@ -505,6 +529,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [client\NOEngineClient\NOEngineClientInit.sqf at line 47](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L47)
 ## noe_client_handlers
 
@@ -513,6 +541,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\NOEngineClient\NOEngineClientInit.sqf at line 49](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L49)
 ## noe_client_generateStorage
 
@@ -624,6 +656,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+!isNull(enableDebugDrawInfo)
+```
 File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 22](../../../Src/client/NOEngineClient/NOEngineClient_chunkDebug.sqf#L22)
 ## noe_debug_drawChunkSides_player
 
@@ -679,6 +715,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\NOEngineClient\NOEngineClient_Components.sqf at line 47](../../../Src/client/NOEngineClient/NOEngineClient_Components.sqf#L47)
 ## noe_client_isChunkCreated
 
@@ -967,6 +1007,10 @@ Type: Variable
 Description: RENDERING (not optimized). Need rewrite
 
 
+Initial value:
+```sqf
+"Sign_Arrow_F" createVehicle [0,0,0]
+```
 File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 9](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L9)
 ## objRight
 
@@ -975,6 +1019,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"Sign_Arrow_F" createVehicle [0,0,0]
+```
 File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 10](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L10)
 ## objTemp
 
@@ -983,6 +1031,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"Sign_Arrow_F" createVehicle [0,0,0]
+```
 File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 11](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L11)
 ## objMode
 
@@ -991,6 +1043,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 12](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L12)
 ## prevPosObj
 
@@ -999,6 +1055,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[[0,0],[0,0],[0,0]]
+```
 File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 13](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L13)
 ## prevStateIsHidden
 
@@ -1007,6 +1067,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false,false,false]
+```
 File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 14](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L14)
 # NOEngineClient_TransportLevel.sqf
 

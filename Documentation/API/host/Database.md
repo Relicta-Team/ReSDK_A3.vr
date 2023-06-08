@@ -191,6 +191,10 @@ Type: Variable
 Description: !версия базы данных (не расширения)
 
 
+Initial value:
+```sqf
+"1.0"
+```
 File: [host\Database\SQLite\SQLite_init.sqf at line 14](../../../Src/host/Database/SQLite/SQLite_init.sqf#L14)
 ## db_canUseQueryLogToStdout
 
@@ -199,6 +203,10 @@ Type: Variable
 Description: true будет выводить каждый запрос в дебаг консоль
 
 
+Initial value:
+```sqf
+false
+```
 File: [host\Database\SQLite\SQLite_init.sqf at line 16](../../../Src/host/Database/SQLite/SQLite_init.sqf#L16)
 ## db_init
 

@@ -72,6 +72,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+hashMapNew
+```
 File: [host\Logger\Logger_init.sqf at line 41](../../../Src/host/Logger/Logger_init.sqf#L41)
 ## Log
 

@@ -19,6 +19,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+-1
+```
 File: [client\Interactions\aim_cursor.sqf at line 9](../../../Src/client/Interactions/aim_cursor.sqf#L9)
 ## interaction_aim_alphaUpdHandle
 
@@ -27,6 +31,10 @@ Type: Variable
 Description: TODO dynamic change opacity
 
 
+Initial value:
+```sqf
+-1
+```
 File: [client\Interactions\aim_cursor.sqf at line 10](../../../Src/client/Interactions/aim_cursor.sqf#L10)
 ## interaction_aim_widgets
 
@@ -35,6 +43,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[widgetNull]
+```
 File: [client\Interactions\aim_cursor.sqf at line 12](../../../Src/client/Interactions/aim_cursor.sqf#L12)
 ## interaction_aim_init
 
@@ -461,6 +473,10 @@ Type: Variable
 Description: это инвентарный мировой верб
 
 
+Initial value:
+```sqf
+[[objNUll,vec3(0,0,0),false],[50,50]]
+```
 File: [client\Interactions\interact.sqf at line 95](../../../Src/client/Interactions/interact.sqf#L95)
 ## verb_internal_isAwaitWorldVerb
 
@@ -469,6 +485,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Interactions\interact.sqf at line 96](../../../Src/client/Interactions/interact.sqf#L96)
 ## interact_isOpenMousemode
 
@@ -477,6 +497,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Interactions\interact.sqf at line 373](../../../Src/client/Interactions/interact.sqf#L373)
 ## interact_isActive
 
@@ -1130,6 +1154,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Interactions\interactEmoteMenu.sqf at line 7](../../../Src/client/Interactions/interactEmoteMenu.sqf#L7)
 ## interactEmote_inputText
 
@@ -1138,6 +1166,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+""
+```
 File: [client\Interactions\interactEmoteMenu.sqf at line 9](../../../Src/client/Interactions/interactEmoteMenu.sqf#L9)
 ## interactEmote_curTabIdx
 
@@ -1146,6 +1178,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [client\Interactions\interactEmoteMenu.sqf at line 11](../../../Src/client/Interactions/interactEmoteMenu.sqf#L11)
 ## interactEmote_actions
 
@@ -1154,6 +1190,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[["Эмоции","Эмоция:emt_1"]]
+```
 File: [client\Interactions\interactEmoteMenu.sqf at line 13](../../../Src/client/Interactions/interactEmoteMenu.sqf#L13)
 ## interactEmote_generatedActs
 
@@ -1162,6 +1202,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\Interactions\interactEmoteMenu.sqf at line 14](../../../Src/client/Interactions/interactEmoteMenu.sqf#L14)
 ## interactEmote_act_widgets
 
@@ -1170,6 +1214,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\Interactions\interactEmoteMenu.sqf at line 15](../../../Src/client/Interactions/interactEmoteMenu.sqf#L15)
 ## interactEmote_load
 
@@ -1790,6 +1838,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Interactions\interactMenu_defines.sqf at line 7](../../../Src/client/Interactions/interactMenu_defines.sqf#L7)
 ## interactMenu_isLoadedMenu
 
@@ -1798,6 +1850,10 @@ Type: Variable
 Description: активно ли интеракт меню
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Interactions\interactMenu_defines.sqf at line 10](../../../Src/client/Interactions/interactMenu_defines.sqf#L10)
 ## interactMenu_skillWidgets
 
@@ -1806,6 +1862,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+_interactMenu_skillWidgets apply ...
+```
 File: [client\Interactions\interactMenu_defines.sqf at line 14](../../../Src/client/Interactions/interactMenu_defines.sqf#L14)
 ## interactMenu_skillNames
 
@@ -1814,6 +1874,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+["СЛ","ИН","ЛВ","ЗД","ВНС","ВОЛЯ","ВОС","ЖЗ"]
+```
 File: [client\Interactions\interactMenu_defines.sqf at line 15](../../../Src/client/Interactions/interactMenu_defines.sqf#L15)
 ## interactMenu_intentPath
 
@@ -1822,6 +1886,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[INT_PATH(help),INT_PATH(grab),INT_PATH(harm)]
+```
 File: [client\Interactions\interactMenu_defines.sqf at line 19](../../../Src/client/Interactions/interactMenu_defines.sqf#L19)
 ## interactMenu_intentWidgets
 
@@ -1830,6 +1898,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[widgetNull,widgetNull,widgetNull]
+```
 File: [client\Interactions\interactMenu_defines.sqf at line 21](../../../Src/client/Interactions/interactMenu_defines.sqf#L21)
 # interactMenu_functions.sqf
 
@@ -1934,6 +2006,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\Interactions\interact_deprecated.sqf at line 92](../../../Src/client/Interactions/interact_deprecated.sqf#L92)
 ## interact_canHandReach
 
@@ -2038,6 +2114,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+vec2(-1,-1)
+```
 File: [client\Interactions\interact_grabbing.sqf at line 8](../../../Src/client/Interactions/interact_grabbing.sqf#L8)
 ## interact_grab_bias
 
@@ -2046,6 +2126,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+vec3(0,0,0)
+```
 File: [client\Interactions\interact_grabbing.sqf at line 10](../../../Src/client/Interactions/interact_grabbing.sqf#L10)
 ## interact_grab_dir
 
@@ -2054,6 +2138,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+vec3(0,0,0)
+```
 File: [client\Interactions\interact_grabbing.sqf at line 11](../../../Src/client/Interactions/interact_grabbing.sqf#L11)
 ## interact_grab_mobObj
 
@@ -2062,6 +2150,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+objNUll
+```
 File: [client\Interactions\interact_grabbing.sqf at line 12](../../../Src/client/Interactions/interact_grabbing.sqf#L12)
 ## interact_grab_isGrabbed
 
@@ -2070,6 +2162,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Interactions\interact_grabbing.sqf at line 14](../../../Src/client/Interactions/interact_grabbing.sqf#L14)
 ## interact_grab_start
 
@@ -2173,6 +2269,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Interactions\interact_mainhandle.sqf at line 21](../../../Src/client/Interactions/interact_mainhandle.sqf#L21)
 # interact_resist.sqf
 
@@ -2337,6 +2437,10 @@ Type: Variable
 Description: interact_progress_curItmIndex = 0;
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Interactions\progress.sqf at line 30](../../../Src/client/Interactions/progress.sqf#L30)
 ## interact_progress_start
 
@@ -2489,6 +2593,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\Interactions\verbs.sqf at line 303](../../../Src/client/Interactions/verbs.sqf#L303)
 ## verb_lastclickedpos
 
@@ -2497,6 +2605,10 @@ Type: Variable
 Description: Последняя позиция мыши
 
 
+Initial value:
+```sqf
+[0,0]
+```
 File: [client\Interactions\verbs.sqf at line 304](../../../Src/client/Interactions/verbs.sqf#L304)
 ## verb_isMenuLoaded
 
@@ -2505,6 +2617,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Interactions\verbs.sqf at line 305](../../../Src/client/Interactions/verbs.sqf#L305)
 ## interact_onLoadVerbs
 

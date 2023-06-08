@@ -430,6 +430,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+_noe_onUpdateArea
+```
 File: [host\NOEngine\NOEngineInit.sqf at line 136](../../../Src/host/NOEngine/NOEngineInit.sqf#L136)
 ## noe_init
 
@@ -498,6 +502,10 @@ Type: Variable
 Description: содержит список типов чанков
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\NOEngine\NOEngine_ChunkModel.sqf at line 13](../../../Src/host/NOEngine/NOEngine_ChunkModel.sqf#L13)
 ## noe_allChunkTypes
 
@@ -506,6 +514,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[CHUNK_TYPE_ITEM,CHUNK_TYPE_STRUCTURE,CHUNK_TYPE_DECOR]
+```
 File: [host\NOEngine\NOEngine_ChunkModel.sqf at line 14](../../../Src/host/NOEngine/NOEngine_ChunkModel.sqf#L14)
 ## noe_getChunkObject
 
@@ -601,6 +613,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\NOEngine\NOEngine_NGO.hpp at line 13](../../../Src/host/NOEngine/NOEngine_NGO.hpp#L13)
 # NOEngine_NGOServer.sqf
 

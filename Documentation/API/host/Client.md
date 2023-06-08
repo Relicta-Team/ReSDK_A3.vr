@@ -74,6 +74,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+""
+```
 File: [host\Client\client.sqf at line 1033](../../../Src/host/Client/client.sqf#L1033)
 ## serverclient_internal_map_sysmes
 
@@ -82,6 +86,10 @@ Type: Variable
 Description: system message internal funcs
 
 
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
 File: [host\Client\client.sqf at line 1037](../../../Src/host/Client/client.sqf#L1037)
 # sysmes.h
 

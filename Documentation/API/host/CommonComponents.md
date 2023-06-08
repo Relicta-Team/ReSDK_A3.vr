@@ -7,6 +7,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\CommonComponents\!MemReflect.sqf at line 68](../../../Src/host/CommonComponents/!MemReflect.sqf#L68)
 ## gv_rv
 
@@ -296,6 +300,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap; ...
+```
 File: [host\CommonComponents\Animator.sqf at line 10](../../../Src/host/CommonComponents/Animator.sqf#L10)
 ## anim_assocList_keyInt
 
@@ -304,6 +312,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\CommonComponents\Animator.sqf at line 11](../../../Src/host/CommonComponents/Animator.sqf#L11)
 ## anim_getAssoc
 
@@ -367,6 +379,10 @@ Type: Variable
 Description: assoc for attack types
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\CommonComponents\AttackTypesAssoc.sqf at line 90](../../../Src/host/CommonComponents/AttackTypesAssoc.sqf#L90)
 ## ata_buf_process
 
@@ -490,6 +506,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+importNative(3DENDiagFonts)
+```
 File: [host\CommonComponents\Color.sqf at line 20](../../../Src/host/CommonComponents/Color.sqf#L20)
 ## color_hexTable256
 
@@ -498,6 +518,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\CommonComponents\Color.sqf at line 42](../../../Src/host/CommonComponents/Color.sqf#L42)
 ## color_map_hexStrToNum
 
@@ -506,6 +530,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\CommonComponents\Color.sqf at line 43](../../../Src/host/CommonComponents/Color.sqf#L43)
 ## color_RGBAtoHTML
 
@@ -695,6 +723,10 @@ Type: Variable
 Description: common data
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\CommonComponents\Pencfg.sqf at line 11](../../../Src/host/CommonComponents/Pencfg.sqf#L11)
 ## pencfg_isExistsModel
 
@@ -730,6 +762,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
 File: [host\CommonComponents\Replicator.sqf at line 8](../../../Src/host/CommonComponents/Replicator.sqf#L8)
 # SMD_shared.sqf
 
@@ -860,6 +896,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"TF RELICTA ADDON API 1.8"
+```
 File: [host\CommonComponents\Voice.sqf at line 8](../../../Src/host/CommonComponents/Voice.sqf#L8)
 ## vs_list_langs
 
@@ -868,6 +908,10 @@ Type: Variable
 Description: список языков
 
 
+Initial value:
+```sqf
+[...
+```
 File: [host\CommonComponents\Voice.sqf at line 10](../../../Src/host/CommonComponents/Voice.sqf#L10)
 ## vs_map_whohear
 
@@ -876,6 +920,10 @@ Type: Variable
 Description: ["eater",["eater","human"]] -> жруны слышат жрунов и людей
 
 
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
 File: [host\CommonComponents\Voice.sqf at line 15](../../../Src/host/CommonComponents/Voice.sqf#L15)
 # __notcompile__PerFrame.sqf
 
@@ -1030,6 +1078,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 8](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L8)
 ## pf_addTimer
 

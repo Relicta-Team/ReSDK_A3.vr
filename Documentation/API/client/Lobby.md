@@ -558,6 +558,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+true
+```
 File: [client\Lobby\functions.sqf at line 376](../../../Src/client/Lobby/functions.sqf#L376)
 ## lobby_internal_progressclose
 
@@ -566,6 +570,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Lobby\functions.sqf at line 559](../../../Src/client/Lobby/functions.sqf#L559)
 ## lobbyOpen
 
@@ -669,6 +677,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Lobby\lobbi_init.sqf at line 15](../../../Src/client/Lobby/lobbi_init.sqf#L15)
 ## lobby_widgetList
 
@@ -677,6 +689,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[...
+```
 File: [client\Lobby\lobbi_init.sqf at line 16](../../../Src/client/Lobby/lobbi_init.sqf#L16)
 ## lobby_charSetWidList
 
@@ -685,6 +701,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\Lobby\lobbi_init.sqf at line 27](../../../Src/client/Lobby/lobbi_init.sqf#L27)
 ## lobby_isOpenCharSetting
 
@@ -693,6 +713,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Lobby\lobbi_init.sqf at line 28](../../../Src/client/Lobby/lobbi_init.sqf#L28)
 # lobby.hpp
 
@@ -1326,6 +1350,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\Lobby\sprite_renderer.sqf at line 13](../../../Src/client/Lobby/sprite_renderer.sqf#L13)
 ## lobby_sprite_readyButton
 
@@ -1334,6 +1362,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[widgetNull]
+```
 File: [client\Lobby\sprite_renderer.sqf at line 15](../../../Src/client/Lobby/sprite_renderer.sqf#L15)
 ## lobby_sprite_onUpdateCode
 
@@ -1364,6 +1396,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\Lobby\SystemSettings.sqf at line 16](../../../Src/client/Lobby/SystemSettings.sqf#L16)
 ## lobby_sys_curActionCategory
 
@@ -1372,6 +1408,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"system"
+```
 File: [client\Lobby\SystemSettings.sqf at line 17](../../../Src/client/Lobby/SystemSettings.sqf#L17)
 ## lobby_sysLoadMenu
 

@@ -164,6 +164,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [client\NetDisplays\NetDisplays.sqf at line 17](../../../Src/client/NetDisplays/NetDisplays.sqf#L17)
 ## nd_handleUpdate
 
@@ -172,6 +176,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+-1
+```
 File: [client\NetDisplays\NetDisplays.sqf at line 23](../../../Src/client/NetDisplays/NetDisplays.sqf#L23)
 ## nd_createTestDisplay
 
@@ -361,6 +369,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 343](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L343)
 ## nd_internal_voterep_cleanupMaps
 

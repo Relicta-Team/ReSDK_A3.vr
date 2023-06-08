@@ -305,6 +305,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [host\CraftSystem\Craft_initData.sqf at line 13](../../../Src/host/CraftSystem/Craft_initData.sqf#L13)
 ## craft_data_getRecipes
 

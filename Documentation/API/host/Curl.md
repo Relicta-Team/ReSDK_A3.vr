@@ -23,6 +23,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+_strict
+```
 File: [host\Curl\Curl.sqf at line 80](../../../Src/host/Curl/Curl.sqf#L80)
 ## glob_invert
 
@@ -31,6 +35,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+_new
+```
 File: [host\Curl\Curl.sqf at line 95](../../../Src/host/Curl/Curl.sqf#L95)
 ## curl_send
 

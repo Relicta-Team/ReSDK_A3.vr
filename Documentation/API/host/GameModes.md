@@ -64,6 +64,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\GameModes\BasicTask.sqf at line 10](../../../Src/host/GameModes/BasicTask.sqf#L10)
 ## taskSystem_checkedOnEndRound
 
@@ -72,6 +76,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\GameModes\BasicTask.sqf at line 11](../../../Src/host/GameModes/BasicTask.sqf#L11)
 # CommonGameAspects.sqf
 
@@ -106,6 +114,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\GameModes\CommonGameAspects.sqf at line 8](../../../Src/host/GameModes/CommonGameAspects.sqf#L8)
 # GameMode.h
 
@@ -221,6 +233,10 @@ Type: Variable
 Description: structure: class, handler,
 
 
+Initial value:
+```sqf
+[...
+```
 File: [host\GameModes\CommonTasks\PublicTasks.sqf at line 8](../../../Src/host/GameModes/CommonTasks/PublicTasks.sqf#L8)
 ## taskSystem_generateTask
 
@@ -300,6 +316,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [host\GameModes\Hunt\GM_Hunt.sqf at line 106](../../../Src/host/GameModes/Hunt/GM_Hunt.sqf#L106)
 # HuntRoles.sqf
 

@@ -177,6 +177,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+addMissionEventHandler ["PlayerConnected",_event_onClientConnected]
+```
 File: [host\ClientManager\ClientManager.sqf at line 44](../../../Src/host/ClientManager/ClientManager.sqf#L44)
 # CommandsExec.sqf
 
@@ -298,6 +302,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\ClientManager\CommandsExec.sqf at line 68](../../../Src/host/ClientManager/CommandsExec.sqf#L68)
 ## cm_processClientCommand
 
@@ -393,6 +401,10 @@ Type: Variable
 Description: закрыт ли сервер
 
 
+Initial value:
+```sqf
+false
+```
 File: [host\ClientManager\functions.sqf at line 12](../../../Src/host/ClientManager/functions.sqf#L12)
 ## cm_preAwaitClientData
 
@@ -401,6 +413,10 @@ Type: Variable
 Description: список клиентов на ожидание кика. Только значимые типы в массивах
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\ClientManager\functions.sqf at line 15](../../../Src/host/ClientManager/functions.sqf#L15)
 ## by_func
 
@@ -607,6 +623,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+(count allPlayers) max cm_maxClients
+```
 File: [host\ClientManager\OnConnected.sqf at line 9](../../../Src/host/ClientManager/OnConnected.sqf#L9)
 # Common.sqf
 
@@ -617,6 +637,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\ClientManager\cmds\Common.sqf at line 162](../../../Src/host/ClientManager/cmds/Common.sqf#L162)
 ## system_internal_string_generatedJoinedString
 
@@ -625,6 +649,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+""
+```
 File: [host\ClientManager\cmds\Common.sqf at line 163](../../../Src/host/ClientManager/cmds/Common.sqf#L163)
 ## system_internal_generateJoinedRoles
 
@@ -645,6 +673,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"0.7.687"
+```
 File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 19](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L19)
 ## cmd_internal_debug_protomaker_listmodels
 
@@ -653,6 +685,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+hashSet_createEmpty()
+```
 File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 20](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L20)
 ## cmd_internal_debug_tobjmarker_versionrequired
 
@@ -661,6 +697,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"0.7.655"
+```
 File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 95](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L95)
 # Reflect.sqf
 

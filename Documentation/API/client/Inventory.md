@@ -250,6 +250,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+true
+```
 File: [client\Inventory\functions.sqf at line 104](../../../Src/client/Inventory/functions.sqf#L104)
 ## inventory_init
 
@@ -1634,6 +1638,10 @@ Type: Variable
 Description: ассоциатор путей до картинок
 
 
+Initial value:
+```sqf
+[...
+```
 File: [client\Inventory\inventory_init.sqf at line 20](../../../Src/client/Inventory/inventory_init.sqf#L20)
 ## inventory_openModeSlotsId
 
@@ -1642,6 +1650,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[INV_BACKPACK,INV_ARMOR,INV_HEAD,INV_BACK,INV_CLOTH,INV_FACE,INV_BELT]
+```
 File: [client\Inventory\inventory_init.sqf at line 32](../../../Src/client/Inventory/inventory_init.sqf#L32)
 ## inventory_slotnames_default
 
@@ -1650,6 +1662,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+INV_LIST_SLOTNAMES
+```
 File: [client\Inventory\inventory_init.sqf at line 36](../../../Src/client/Inventory/inventory_init.sqf#L36)
 ## inventory_slotpos_map
 
@@ -1658,6 +1674,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[...
+```
 File: [client\Inventory\inventory_init.sqf at line 38](../../../Src/client/Inventory/inventory_init.sqf#L38)
 ## inventor_slot_widgets
 
@@ -1666,6 +1686,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\Inventory\inventory_init.sqf at line 50](../../../Src/client/Inventory/inventory_init.sqf#L50)
 ## inventory_slotdata
 
@@ -1674,6 +1698,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+_inventory_slotdata apply ...
+```
 File: [client\Inventory\inventory_init.sqf at line 55](../../../Src/client/Inventory/inventory_init.sqf#L55)
 ## isInventoryOpen
 
@@ -1682,6 +1710,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\Inventory\inventory_init.sqf at line 57](../../../Src/client/Inventory/inventory_init.sqf#L57)
 # PreviewObject.sqf
 
@@ -1740,6 +1772,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+objnull
+```
 File: [client\Inventory\PreviewObject.sqf at line 18](../../../Src/client/Inventory/PreviewObject.sqf#L18)
 ## inventory_lastDirPreviewObject
 
@@ -1748,6 +1784,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [client\Inventory\PreviewObject.sqf at line 19](../../../Src/client/Inventory/PreviewObject.sqf#L19)
 ## inventory_createPreviewObject
 

@@ -487,4 +487,8 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createObj
+```
 File: [host\GURPS\Gurps_init.sqf at line 7](../../../Src/host/GURPS/Gurps_init.sqf#L7)

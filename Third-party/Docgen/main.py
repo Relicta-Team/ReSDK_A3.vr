@@ -113,7 +113,9 @@ for fpath in result:
             if memtype == "Macro":
                 handle.write(f"Replaced value:\n```sqf\n{values['Value']}\n```\n")
 
-            
+            if memtype == "Variable":
+                handle.write(f"Initial value:\n```sqf\n{values['Value']}\n```\n")
+
             refpath = relativePath.replace('\\','/')
             #print(f'relative: {refpath}')
             # ! Src folder case-senstivity

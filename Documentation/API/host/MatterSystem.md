@@ -892,6 +892,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [host\MatterSystem\MatterSystem_functions.sqf at line 290](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L290)
 ## ms_internal_initInheritance
 
@@ -1083,6 +1087,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\MatterSystem\MatterSystem_init.sqf at line 16](../../../Src/host/MatterSystem/MatterSystem_init.sqf#L16)
 ## ms_map_allReactions
 
@@ -1091,6 +1099,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\MatterSystem\MatterSystem_init.sqf at line 17](../../../Src/host/MatterSystem/MatterSystem_init.sqf#L17)
 # Basic.sqf
 
@@ -1116,6 +1128,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [host\MatterSystem\Reactions\Reactions.sqf at line 7](../../../Src/host/MatterSystem/Reactions/Reactions.sqf#L7)
 # Reagent.sqf
 

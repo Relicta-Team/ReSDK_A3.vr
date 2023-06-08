@@ -122,6 +122,10 @@ Type: Variable
 Description: Общий объект рэйкаста. Арма у нас в одном потоке так что боятся нечего
 
 
+Initial value:
+```sqf
+"Sign_Sphere10cm_F" createVehicleLocal[0,0,0]
+```
 File: [host\ServerInteraction\ServerInteractionInit.sqf at line 69](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L69)
 ## si_throwingProcess
 
@@ -255,6 +259,10 @@ Type: Variable
 Description: Публичные данные
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\ServerInteraction\ServerInteractionShared.sqf at line 10](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L10)
 ## interact_throwlist
 
@@ -263,6 +271,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\ServerInteraction\ServerInteractionShared.sqf at line 17](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L17)
 ## interact_th_map_codeAssoc
 
@@ -271,6 +283,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMapFromArray [["th",0],["sh",1]]
+```
 File: [host\ServerInteraction\ServerInteractionShared.sqf at line 218](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L218)
 ## interact_th_delegates
 
@@ -279,6 +295,10 @@ Type: Variable
 Description: mode -> vec2: success fly, intersection
 
 
+Initial value:
+```sqf
+[...
+```
 File: [host\ServerInteraction\ServerInteractionShared.sqf at line 221](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L221)
 ## interact_shassoc_idx
 
@@ -287,6 +307,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [host\ServerInteraction\ServerInteractionShared.sqf at line 296](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L296)
 ## interact_map_shassoc_keyint
 
@@ -295,6 +319,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\ServerInteraction\ServerInteractionShared.sqf at line 297](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L297)
 ## interact_map_shassoc_keystr
 
@@ -303,6 +331,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\ServerInteraction\ServerInteractionShared.sqf at line 298](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L298)
 ## interact_th_getItscData
 
@@ -382,6 +414,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\ServerInteraction\ServerInteractionTests.sqf at line 12](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L12)
 ## si_debug_obj
 
@@ -392,6 +428,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createSimpleObject ["Sign_Sphere10cm_F",[0,0,0],true]
+```
 File: [host\ServerInteraction\ServerInteractionTests.sqf at line 97](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L97)
 ## si_debug_task
 
@@ -400,6 +440,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+-1
+```
 File: [host\ServerInteraction\ServerInteractionTests.sqf at line 98](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L98)
 ## si_debug_olist
 
@@ -408,6 +452,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\ServerInteraction\ServerInteractionTests.sqf at line 103](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L103)
 ## si_makeline
 
@@ -521,6 +569,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+startUpdate(...
+```
 File: [host\ServerInteraction\ServerInteraction_Collision.sqf at line 23](../../../Src/host/ServerInteraction/ServerInteraction_Collision.sqf#L23)
 ## si_collision_onUpdate
 

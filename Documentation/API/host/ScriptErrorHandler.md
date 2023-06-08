@@ -7,6 +7,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+""
+```
 File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 13](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L13)
 ## scriptErrHndlGlobal
 
@@ -15,6 +19,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+addMissionEventHandler ["ScriptError",...
+```
 File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 14](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L14)
 ## scriptError_internal_handleStack
 

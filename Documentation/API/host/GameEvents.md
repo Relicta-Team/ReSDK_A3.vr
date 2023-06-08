@@ -19,6 +19,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\GameEvents\loader.hpp at line 15](../../../Src/host/GameEvents/loader.hpp#L15)
 ## gameEvents_sys_getAllEventTypes
 

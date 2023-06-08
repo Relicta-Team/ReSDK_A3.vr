@@ -654,6 +654,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[...
+```
 File: [host\GamemodeManager\Gamemode_AllowedModes.sqf at line 6](../../../Src/host/GamemodeManager/Gamemode_AllowedModes.sqf#L6)
 # Gamemode_deprecated.sqf
 
@@ -682,6 +686,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[__DATE_ARR__]
+```
 File: [host\GamemodeManager\Gamemode_internal_auto.sqf at line 70](../../../Src/host/GamemodeManager/Gamemode_internal_auto.sqf#L70)
 ## gm_getTimeOffset
 
@@ -750,6 +758,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1326](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1326)
 ## gm_startRound
 

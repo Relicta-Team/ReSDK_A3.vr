@@ -7,6 +7,10 @@ Type: Variable
 Description: ! Внимание! На рантайме если перелкючать этот флаг, то нужно принудительно вызывать dsm_accounts_loadDiscordId на каждом клиенте в сессии
 
 
+Initial value:
+```sqf
+true
+```
 File: [host\Discord\Accounts.sqf at line 9](../../../Src/host/Discord/Accounts.sqf#L9)
 ## dsm_accounts_canUse
 
@@ -142,6 +146,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\Discord\Discord.sqf at line 20](../../../Src/host/Discord/Discord.sqf#L20)
 ## disc_lastLoggerTime
 
@@ -150,6 +158,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+tickTime
+```
 File: [host\Discord\Discord.sqf at line 21](../../../Src/host/Discord/Discord.sqf#L21)
 ## disc_messagesLeftPerSec
 
@@ -158,6 +170,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+DISCORD_MAX_MESSAGES_COUNT_PERDELAY
+```
 File: [host\Discord\Discord.sqf at line 22](../../../Src/host/Discord/Discord.sqf#L22)
 ## disc_handle_update
 
@@ -166,6 +182,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+-1
+```
 File: [host\Discord\Discord.sqf at line 24](../../../Src/host/Discord/Discord.sqf#L24)
 ## disc_token_admin
 
@@ -174,6 +194,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"Admin"
+```
 File: [host\Discord\Discord.sqf at line 30](../../../Src/host/Discord/Discord.sqf#L30)
 ## disc_token_logger
 
@@ -182,6 +206,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"Logger"
+```
 File: [host\Discord\Discord.sqf at line 31](../../../Src/host/Discord/Discord.sqf#L31)
 ## disc_onUpdate
 
@@ -313,6 +341,10 @@ Type: Variable
 Description: #define DSM_DISABLE
 
 
+Initial value:
+```sqf
+-1
+```
 File: [host\Discord\ServerManager.sqf at line 8](../../../Src/host/Discord/ServerManager.sqf#L8)
 ## dsm_callbackExtensionHandle
 
@@ -321,6 +353,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+-1
+```
 File: [host\Discord\ServerManager.sqf at line 9](../../../Src/host/Discord/ServerManager.sqf#L9)
 ## dsm_isFirstLoad
 
@@ -329,6 +365,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [host\Discord\ServerManager.sqf at line 10](../../../Src/host/Discord/ServerManager.sqf#L10)
 ## dsm_connectedToManager
 
@@ -337,6 +377,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [host\Discord\ServerManager.sqf at line 12](../../../Src/host/Discord/ServerManager.sqf#L12)
 ## dsm_internal_virtualClient
 
@@ -345,6 +389,10 @@ Type: Variable
 Description: ================================= server command executer =============================
 
 
+Initial value:
+```sqf
+nullPtr
+```
 File: [host\Discord\ServerManager.sqf at line 163](../../../Src/host/Discord/ServerManager.sqf#L163)
 ## dsm_stdCall
 

@@ -7,6 +7,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+_vMob
+```
 File: [host\ServerSceneTest\Debug.sqf at line 7](../../../Src/host/ServerSceneTest/Debug.sqf#L7)
 # serverscrene_init.sqf
 
@@ -77,6 +81,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+_virtCloth
+```
 File: [host\ServerSceneTest\serverscrene_init.sqf at line 410](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L410)
 ## memplay
 
@@ -85,6 +93,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+_vMob
+```
 File: [host\ServerSceneTest\serverscrene_init.sqf at line 411](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L411)
 ## tptomap
 

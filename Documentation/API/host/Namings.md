@@ -21,6 +21,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+"NO_CALLED"
+```
 File: [host\Namings\FacesHelpers.sqf at line 12](../../../Src/host/Namings/FacesHelpers.sqf#L12)
 ## facesys_generateConfig
 
@@ -107,6 +111,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+loadMobNames(ManFirstName)
+```
 File: [host\Namings\ParseNaming.sqf at line 15](../../../Src/host/Namings/ParseNaming.sqf#L15)
 ## naming_list_WomanFirstName
 
@@ -115,6 +123,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+loadMobNames(WomanFirstName)
+```
 File: [host\Namings\ParseNaming.sqf at line 16](../../../Src/host/Namings/ParseNaming.sqf#L16)
 ## naming_list_ManCavenick
 
@@ -123,6 +135,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+loadMobNames(ManCavenick)
+```
 File: [host\Namings\ParseNaming.sqf at line 23](../../../Src/host/Namings/ParseNaming.sqf#L23)
 ## naming_list_WomanCavenick
 
@@ -131,6 +147,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+loadMobNames(WomanCavenick)
+```
 File: [host\Namings\ParseNaming.sqf at line 24](../../../Src/host/Namings/ParseNaming.sqf#L24)
 ## naming_list_ManSecondName
 
@@ -139,6 +159,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+loadMobNames(ManSecondName)
+```
 File: [host\Namings\ParseNaming.sqf at line 26](../../../Src/host/Namings/ParseNaming.sqf#L26)
 ## naming_list_WomanSecondName
 
@@ -147,6 +171,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+loadMobNames(WomanSecondName)
+```
 File: [host\Namings\ParseNaming.sqf at line 27](../../../Src/host/Namings/ParseNaming.sqf#L27)
 ## naming_getRandomName
 
@@ -166,6 +194,10 @@ Type: Variable
 Description: replicate mp vars
 
 
+Initial value:
+```sqf
+[false] call facesys_prepManFaces
+```
 File: [host\Namings\PrepareFaces.sqf at line 14](../../../Src/host/Namings/PrepareFaces.sqf#L14)
 ## faces_list_woman
 
@@ -174,4 +206,8 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+call facesys_prepWomanFaces
+```
 File: [host\Namings\PrepareFaces.sqf at line 15](../../../Src/host/Namings/PrepareFaces.sqf#L15)

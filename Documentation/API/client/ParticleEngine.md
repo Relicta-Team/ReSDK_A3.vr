@@ -33,6 +33,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createObj
+```
 File: [client\ParticleEngine\ParticleEngine.sqf at line 10](../../../Src/client/ParticleEngine/ParticleEngine.sqf#L10)
 ## pe_loadParticle
 

@@ -35,4 +35,8 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [host\FaithSystem\FaithInit.sqf at line 9](../../../Src/host/FaithSystem/FaithInit.sqf#L9)

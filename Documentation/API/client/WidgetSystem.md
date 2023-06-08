@@ -444,6 +444,10 @@ Type: Variable
 Description: other screen support
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\WidgetSystem\functions.sqf at line 569](../../../Src/client/WidgetSystem/functions.sqf#L569)
 ## displayOpen
 
@@ -1202,6 +1206,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\WidgetSystem\widget_eventSystem.sqf at line 8](../../../Src/client/WidgetSystem/widget_eventSystem.sqf#L8)
 ## displayAddCloseEvent
 

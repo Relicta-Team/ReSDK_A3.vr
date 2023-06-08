@@ -425,6 +425,10 @@ Type: Variable
 Description: _bg3 ctrlEnable true;
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 30](../../../Src/client/VoiceSystem/VoiceSystem_Control.sqf#L30)
 ## vs_curVoiceMode
 
@@ -433,6 +437,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 42](../../../Src/client/VoiceSystem/VoiceSystem_Control.sqf#L42)
 ## vs_canFadeVoiceVolumeWidget
 
@@ -441,6 +449,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+true
+```
 File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 44](../../../Src/client/VoiceSystem/VoiceSystem_Control.sqf#L44)
 ## vs_voiceVolume_lastUpdate
 
@@ -449,6 +461,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 46](../../../Src/client/VoiceSystem/VoiceSystem_Control.sqf#L46)
 ## vs_voiceVolumeList
 
@@ -457,6 +473,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[...
+```
 File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 48](../../../Src/client/VoiceSystem/VoiceSystem_Control.sqf#L48)
 ## vs_getMaxVolume
 
@@ -536,6 +556,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+58
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 6](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L6)
 ## TF_tangent_sw_modifiers
 
@@ -544,6 +568,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false,false,false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 7](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L7)
 ## TF_tangent_sw_2_scancode
 
@@ -552,6 +580,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 9](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L9)
 ## TF_tangent_sw_2_modifiers
 
@@ -560,6 +592,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false,false,false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 10](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L10)
 ## TF_tangent_additional_sw_scancode
 
@@ -568,6 +604,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+20
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 12](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L12)
 ## TF_tangent_additional_sw_modifiers
 
@@ -576,6 +616,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false,false,false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 13](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L13)
 ## TF_dialog_sw_scancode
 
@@ -584,6 +628,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+25
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 15](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L15)
 ## TF_dialog_sw_modifiers
 
@@ -592,6 +640,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 16](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L16)
 ## TF_sw_cycle_next_scancode
 
@@ -600,6 +652,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+27
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 18](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L18)
 ## TF_sw_cycle_next_modifiers
 
@@ -608,6 +664,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 19](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L19)
 ## TF_sw_cycle_prev_scancode
 
@@ -616,6 +676,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+26
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 21](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L21)
 ## TF_sw_cycle_prev_modifiers
 
@@ -624,6 +688,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 22](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L22)
 ## TF_sw_stereo_both_scancode
 
@@ -632,6 +700,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+200
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 24](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L24)
 ## TF_sw_stereo_both_modifiers
 
@@ -640,6 +712,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 25](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L25)
 ## TF_sw_stereo_left_scancode
 
@@ -648,6 +724,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+203
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 27](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L27)
 ## TF_sw_stereo_left_modifiers
 
@@ -656,6 +736,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 28](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L28)
 ## TF_sw_stereo_right_scancode
 
@@ -664,6 +748,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+205
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 30](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L30)
 ## TF_sw_stereo_right_modifiers
 
@@ -672,6 +760,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 31](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L31)
 ## TF_sw_channel_1_scancode
 
@@ -680,6 +772,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+79
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 33](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L33)
 ## TF_sw_channel_1_modifiers
 
@@ -688,6 +784,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 34](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L34)
 ## TF_sw_channel_2_scancode
 
@@ -696,6 +796,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+80
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 36](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L36)
 ## TF_sw_channel_2_modifiers
 
@@ -704,6 +808,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 37](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L37)
 ## TF_sw_channel_3_scancode
 
@@ -712,6 +820,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+81
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 39](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L39)
 ## TF_sw_channel_3_modifiers
 
@@ -720,6 +832,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 40](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L40)
 ## TF_sw_channel_4_scancode
 
@@ -728,6 +844,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+75
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 42](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L42)
 ## TF_sw_channel_4_modifiers
 
@@ -736,6 +856,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 43](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L43)
 ## TF_sw_channel_5_scancode
 
@@ -744,6 +868,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+76
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 45](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L45)
 ## TF_sw_channel_5_modifiers
 
@@ -752,6 +880,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 46](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L46)
 ## TF_sw_channel_6_scancode
 
@@ -760,6 +892,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+77
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 48](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L48)
 ## TF_sw_channel_6_modifiers
 
@@ -768,6 +904,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 49](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L49)
 ## TF_sw_channel_7_scancode
 
@@ -776,6 +916,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+71
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 51](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L51)
 ## TF_sw_channel_7_modifiers
 
@@ -784,6 +928,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 52](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L52)
 ## TF_sw_channel_8_scancode
 
@@ -792,6 +940,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+72
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 54](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L54)
 ## TF_sw_channel_8_modifiers
 
@@ -800,6 +952,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 55](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L55)
 ## TF_tangent_lr_scancode
 
@@ -808,6 +964,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+58
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 57](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L57)
 ## TF_tangent_lr_modifiers
 
@@ -816,6 +976,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 58](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L58)
 ## TF_tangent_lr_2_scancode
 
@@ -824,6 +988,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 60](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L60)
 ## TF_tangent_lr_2_modifiers
 
@@ -832,6 +1000,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 61](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L61)
 ## TF_tangent_additional_lr_scancode
 
@@ -840,6 +1012,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+21
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 63](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L63)
 ## TF_tangent_additional_lr_modifiers
 
@@ -848,6 +1024,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 64](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L64)
 ## TF_dialog_lr_scancode
 
@@ -856,6 +1036,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+25
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 66](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L66)
 ## TF_dialog_lr_modifiers
 
@@ -864,6 +1048,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, true]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 67](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L67)
 ## TF_lr_cycle_next_scancode
 
@@ -872,6 +1060,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+27
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 69](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L69)
 ## TF_lr_cycle_next_modifiers
 
@@ -880,6 +1072,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, true]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 70](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L70)
 ## TF_lr_cycle_prev_scancode
 
@@ -888,6 +1084,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+26
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 72](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L72)
 ## TF_lr_cycle_prev_modifiers
 
@@ -896,6 +1096,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, true]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 73](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L73)
 ## TF_lr_stereo_both_scancode
 
@@ -904,6 +1108,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+200
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 75](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L75)
 ## TF_lr_stereo_both_modifiers
 
@@ -912,6 +1120,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, true]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 76](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L76)
 ## TF_lr_stereo_left_scancode
 
@@ -920,6 +1132,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+203
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 78](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L78)
 ## TF_lr_stereo_left_modifiers
 
@@ -928,6 +1144,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, true]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 79](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L79)
 ## TF_lr_stereo_right_scancode
 
@@ -936,6 +1156,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+205
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 81](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L81)
 ## TF_lr_stereo_right_modifiers
 
@@ -944,6 +1168,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, true]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 82](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L82)
 ## TF_lr_channel_1_scancode
 
@@ -952,6 +1180,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+79
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 84](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L84)
 ## TF_lr_channel_1_modifiers
 
@@ -960,6 +1192,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 85](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L85)
 ## TF_lr_channel_2_scancode
 
@@ -968,6 +1204,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+80
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 87](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L87)
 ## TF_lr_channel_2_modifiers
 
@@ -976,6 +1216,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 88](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L88)
 ## TF_lr_channel_3_scancode
 
@@ -984,6 +1228,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+81
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 90](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L90)
 ## TF_lr_channel_3_modifiers
 
@@ -992,6 +1240,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 91](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L91)
 ## TF_lr_channel_4_scancode
 
@@ -1000,6 +1252,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+75
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 93](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L93)
 ## TF_lr_channel_4_modifiers
 
@@ -1008,6 +1264,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 94](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L94)
 ## TF_lr_channel_5_scancode
 
@@ -1016,6 +1276,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+76
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 96](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L96)
 ## TF_lr_channel_5_modifiers
 
@@ -1024,6 +1288,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 97](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L97)
 ## TF_lr_channel_6_scancode
 
@@ -1032,6 +1300,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+77
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 99](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L99)
 ## TF_lr_channel_6_modifiers
 
@@ -1040,6 +1312,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 100](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L100)
 ## TF_lr_channel_7_scancode
 
@@ -1048,6 +1324,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+71
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 102](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L102)
 ## TF_lr_channel_7_modifiers
 
@@ -1056,6 +1336,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 103](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L103)
 ## TF_lr_channel_8_scancode
 
@@ -1064,6 +1348,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+72
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 105](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L105)
 ## TF_lr_channel_8_modifiers
 
@@ -1072,6 +1360,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 106](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L106)
 ## TF_lr_channel_9_scancode
 
@@ -1080,6 +1372,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+73
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 108](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L108)
 ## TF_lr_channel_9_modifiers
 
@@ -1088,6 +1384,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 109](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L109)
 ## TF_tangent_dd_scancode
 
@@ -1096,6 +1396,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+41
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 112](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L112)
 ## TF_tangent_dd_modifiers
 
@@ -1104,6 +1408,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 113](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L113)
 ## TF_tangent_dd_2_scancode
 
@@ -1112,6 +1420,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+0
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 115](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L115)
 ## TF_tangent_dd_2_modifiers
 
@@ -1120,6 +1432,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, false, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 116](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L116)
 ## TF_dialog_dd_scancode
 
@@ -1128,6 +1444,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+25
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 118](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L118)
 ## TF_dialog_dd_modifiers
 
@@ -1136,6 +1456,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[true, false, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 119](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L119)
 ## TF_speak_volume_scancode
 
@@ -1144,6 +1468,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+15
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 121](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L121)
 ## TF_speak_volume_modifiers
 
@@ -1152,6 +1480,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[false, true, false]
+```
 File: [client\VoiceSystem\VoiceSystem_keysConstant.sqf at line 122](../../../Src/client/VoiceSystem/VoiceSystem_keysConstant.sqf#L122)
 # VoiceSystem_part2.sqf
 
@@ -1854,6 +2186,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+false
+```
 File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 9](../../../Src/client/VoiceSystem/VoiceSystem_Transmith.sqf#L9)
 ## vs_transmithDistance
 
@@ -1862,6 +2198,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+1000
+```
 File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 11](../../../Src/client/VoiceSystem/VoiceSystem_Transmith.sqf#L11)
 ## vs_startTransmith
 
@@ -5707,6 +6047,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\VoiceSystem\VoiceSystem_WorldRadioComponent.sqf at line 8](../../../Src/client/VoiceSystem/VoiceSystem_WorldRadioComponent.sqf#L8)
 ## vs_loadWorldRadio
 

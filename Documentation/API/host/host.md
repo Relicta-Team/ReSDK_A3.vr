@@ -3593,6 +3593,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+1
+```
 File: [host\init.sqf at line 89](../../../Src/host/init.sqf#L89)
 # keyboard.hpp
 
@@ -7637,6 +7641,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+_pt_obj
+```
 File: [host\oop.hpp at line 70](../../../Src/host/oop.hpp#L70)
 # precomiled.sqf
 
@@ -7663,6 +7671,10 @@ Type: Variable
 Description: константные типы объектов. 0 - обычные называния типов, 1 - названия в редакторе
 
 
+Initial value:
+```sqf
+["<Type::%1>","<EDITOR_Type::%1>"]
+```
 File: [host\precomiled.sqf at line 36](../../../Src/host/precomiled.sqf#L36)
 ## pc_oop_declareClassAttr
 

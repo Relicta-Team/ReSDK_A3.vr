@@ -1253,6 +1253,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+null
+```
 File: [client\LightEngine\LightEngine_mainThread.sqf at line 7](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L7)
 ## le_lastChunkStructure
 
@@ -1261,6 +1265,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+null
+```
 File: [client\LightEngine\LightEngine_mainThread.sqf at line 8](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L8)
 ## le_onUpdate
 
@@ -1426,6 +1434,10 @@ Type: Variable
 Description: structs in type: src,lt,curview,
 
 
+Initial value:
+```sqf
+[]
+```
 File: [client\LightEngine\LightRender.sqf at line 28](../../../Src/client/LightEngine/LightRender.sqf#L28)
 ## le_render_handleState
 
@@ -1436,6 +1448,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+startUpdate(le_onchangeview,0)
+```
 File: [client\LightEngine\LightRender.sqf at line 306](../../../Src/client/LightEngine/LightRender.sqf#L306)
 ## le_render_handleUpdate
 
@@ -1444,6 +1460,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+startUpdate(le_onupdrender,0)
+```
 File: [client\LightEngine\LightRender.sqf at line 309](../../../Src/client/LightEngine/LightRender.sqf#L309)
 ## le_initRenderer
 
@@ -1549,6 +1569,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+2100
+```
 File: [client\LightEngine\ScriptedEffects.hpp at line 13](../../../Src/client/LightEngine/ScriptedEffects.hpp#L13)
 ## SLIGHT_SET123_DEBUG_var
 
@@ -1557,6 +1581,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+2101
+```
 File: [client\LightEngine\ScriptedEffects.hpp at line 14](../../../Src/client/LightEngine/ScriptedEffects.hpp#L14)
 ## SLIGHT_TEMPLATE_DIRECTLIGHT_var
 
@@ -1565,6 +1593,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+2102
+```
 File: [client\LightEngine\ScriptedEffects.hpp at line 15](../../../Src/client/LightEngine/ScriptedEffects.hpp#L15)
 ## SLIGHT_TEMPLATE_POINTLIGHT_var
 
@@ -1573,6 +1605,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+2103
+```
 File: [client\LightEngine\ScriptedEffects.hpp at line 16](../../../Src/client/LightEngine/ScriptedEffects.hpp#L16)
 # ScriptedEffects.sqf
 
@@ -1583,6 +1619,10 @@ Type: Variable
 Description: place this file before all configs
 
 
+Initial value:
+```sqf
+createHashMap
+```
 File: [client\LightEngine\ScriptedEffects.sqf at line 10](../../../Src/client/LightEngine/ScriptedEffects.sqf#L10)
 ## le_se_noattr
 
@@ -1591,6 +1631,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+null
+```
 File: [client\LightEngine\ScriptedEffects.sqf at line 11](../../../Src/client/LightEngine/ScriptedEffects.sqf#L11)
 ## le_se_cfgRange
 
@@ -1599,6 +1643,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[2100,4900]
+```
 File: [client\LightEngine\ScriptedEffects.sqf at line 12](../../../Src/client/LightEngine/ScriptedEffects.sqf#L12)
 ## le_se_mapHandlers
 
@@ -1607,6 +1655,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
 File: [client\LightEngine\ScriptedEffects.sqf at line 77](../../../Src/client/LightEngine/ScriptedEffects.sqf#L77)
 ## le_se_handleConfig
 
@@ -1878,4 +1930,8 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+true
+```
 File: [client\LightEngine\VisualStates\Stealth.sqf at line 7](../../../Src/client/LightEngine/VisualStates/Stealth.sqf#L7)

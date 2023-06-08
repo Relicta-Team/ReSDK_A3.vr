@@ -7,6 +7,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+new(TestGameClass)
+```
 File: [host\OOP_engine\main.sqf at line 9](../../../Src/host/OOP_engine/main.sqf#L9)
 # oop_attributes.sqf
 
@@ -277,6 +281,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\OOP_engine\oop_preinit.sqf at line 32](../../../Src/host/OOP_engine/oop_preinit.sqf#L32)
 ## p_table_allclassnames
 
@@ -285,6 +293,10 @@ Type: Variable
 Description: 
 
 
+Initial value:
+```sqf
+[]
+```
 File: [host\OOP_engine\oop_preinit.sqf at line 33](../../../Src/host/OOP_engine/oop_preinit.sqf#L33)
 ## oop_deleteObject
 
