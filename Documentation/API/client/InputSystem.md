@@ -38,6 +38,22 @@ Replaced value:
 "@"
 ```
 File: [client\InputSystem\InputAssoc.sqf at line 15](../../../Src/client/InputSystem/InputAssoc.sqf#L15)
+## input_map_keyName
+
+Type: Variable
+
+Description: 
+
+
+File: [client\InputSystem\InputAssoc.sqf at line 10](../../../Src/client/InputSystem/InputAssoc.sqf#L10)
+## input_keyList_reversedAssoc
+
+Type: Variable
+
+Description: 
+
+
+File: [client\InputSystem\InputAssoc.sqf at line 11](../../../Src/client/InputSystem/InputAssoc.sqf#L11)
 ## input_getKeyValue
 
 Type: function
@@ -81,6 +97,38 @@ Replaced value:
 13
 ```
 File: [client\InputSystem\inputHelper.sqf at line 13](../../../Src/client/InputSystem/inputHelper.sqf#L13)
+## inputHelper_enabled
+
+Type: Variable
+
+Description: 
+
+
+File: [client\InputSystem\inputHelper.sqf at line 15](../../../Src/client/InputSystem/inputHelper.sqf#L15)
+## inputHelper_handleUpdate
+
+Type: Variable
+
+Description: 
+
+
+File: [client\InputSystem\inputHelper.sqf at line 17](../../../Src/client/InputSystem/inputHelper.sqf#L17)
+## inputHelper_widgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\InputSystem\inputHelper.sqf at line 18](../../../Src/client/InputSystem/inputHelper.sqf#L18)
+## inputHelper_firstRunTaskId
+
+Type: Variable
+
+Description: 
+
+
+File: [client\InputSystem\inputHelper.sqf at line 19](../../../Src/client/InputSystem/inputHelper.sqf#L19)
 ## inputHelper_init
 
 Type: function
@@ -350,6 +398,30 @@ Replaced value:
 keybind([name arg false] call input_getKeyValue,shift,ctrl,alt,isMouse)
 ```
 File: [client\InputSystem\inputKeyHandlers.sqf at line 14](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L14)
+## cd_settingsKeyboard
+
+Type: Variable
+
+Description: Список кейбиндов
+
+
+File: [client\InputSystem\inputKeyHandlers.sqf at line 17](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L17)
+## input_internal_map_act2kb
+
+Type: Variable
+
+Description: 
+
+
+File: [client\InputSystem\inputKeyHandlers.sqf at line 42](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L42)
+## input_map_spamProtect
+
+Type: Variable
+
+Description: 
+
+
+File: [client\InputSystem\inputKeyHandlers.sqf at line 123](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L123)
 ## input_updateAllKeyBinds
 
 Type: function
@@ -427,7 +499,7 @@ File: [client\InputSystem\inputManager.sqf at line 35](../../../Src/client/Input
 
 Type: constant
 
-> <font size="5">Exists if **DEBUG** defined</font>
+> Exists if **DEBUG** defined
 
 Description: 
 
@@ -441,7 +513,7 @@ File: [client\InputSystem\inputManager.sqf at line 117](../../../Src/client/Inpu
 
 Type: constant
 
-> <font size="5">Exists if **DEBUG** defined</font>
+> Exists if **DEBUG** defined
 
 Description: 
 - Param: name
@@ -490,3 +562,21 @@ Description: мышь в режиме игры
 - Param: _alt
 
 File: [client\InputSystem\inputManager.sqf at line 147](../../../Src/client/InputSystem/inputManager.sqf#L147)
+# input_init.sqf
+
+## input_catchedEscape
+
+Type: Variable
+
+Description: 
+
+
+File: [client\InputSystem\input_init.sqf at line 21](../../../Src/client/InputSystem/input_init.sqf#L21)
+## input_internal_handleNativeEsc
+
+Type: Variable
+
+Description: Хандлить ли нативную паузу
+
+
+File: [client\InputSystem\input_init.sqf at line 26](../../../Src/client/InputSystem/input_init.sqf#L26)

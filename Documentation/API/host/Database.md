@@ -16,7 +16,7 @@ File: [host\Database\SQLite\SQLite.h at line 8](../../../Src/host/Database/SQLit
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 
@@ -30,7 +30,7 @@ File: [host\Database\SQLite\SQLite.h at line 11](../../../Src/host/Database/SQLi
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** not defined</font>
+> Exists if **EDITOR** not defined
 
 Description: 
 
@@ -184,6 +184,22 @@ Description: Форматирует массив даты-времени в ст
 File: [host\Database\SQLite\SQLite_functions.sqf at line 146](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L146)
 # SQLite_init.sqf
 
+## db_version
+
+Type: Variable
+
+Description: !версия базы данных (не расширения)
+
+
+File: [host\Database\SQLite\SQLite_init.sqf at line 14](../../../Src/host/Database/SQLite/SQLite_init.sqf#L14)
+## db_canUseQueryLogToStdout
+
+Type: Variable
+
+Description: true будет выводить каждый запрос в дебаг консоль
+
+
+File: [host\Database\SQLite\SQLite_init.sqf at line 16](../../../Src/host/Database/SQLite/SQLite_init.sqf#L16)
 ## db_init
 
 Type: function
@@ -198,7 +214,7 @@ File: [host\Database\SQLite\SQLite_init.sqf at line 19](../../../Src/host/Databa
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 - Param: txtval
@@ -213,7 +229,7 @@ File: [host\Database\SQLite\SQLite_manager.sqf at line 678](../../../Src/host/Da
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** not defined</font>
+> Exists if **EDITOR** not defined
 
 Description: 
 - Param: txtval

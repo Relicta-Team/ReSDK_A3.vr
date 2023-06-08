@@ -16,7 +16,7 @@ File: [host\Client\client.sqf at line 18](../../../Src/host/Client/client.sqf#L1
 
 Type: constant
 
-> <font size="5">Exists if **use_client_connection_log** defined</font>
+> Exists if **use_client_connection_log** defined
 
 Description: 
 - Param: var
@@ -31,7 +31,7 @@ File: [host\Client\client.sqf at line 21](../../../Src/host/Client/client.sqf#L2
 
 Type: constant
 
-> <font size="5">Exists if **use_client_connection_log** not defined</font>
+> Exists if **use_client_connection_log** not defined
 
 Description: 
 - Param: var
@@ -67,6 +67,22 @@ Replaced value:
 (missionNamespace getVariable ["role_"+(val),nullPtr])
 ```
 File: [host\Client\client.sqf at line 540](../../../Src/host/Client/client.sqf#L540)
+## serverclient_internal_string_changelogs
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Client\client.sqf at line 1033](../../../Src/host/Client/client.sqf#L1033)
+## serverclient_internal_map_sysmes
+
+Type: Variable
+
+Description: system message internal funcs
+
+
+File: [host\Client\client.sqf at line 1037](../../../Src/host/Client/client.sqf#L1037)
 # sysmes.h
 
 ## sysmes(mname)

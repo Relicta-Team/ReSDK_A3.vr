@@ -235,7 +235,7 @@ File: [host\GamemodeManager\GamemodeFunctions.sqf at line 801](../../../Src/host
 
 Type: constant
 
-> <font size="5">Exists if **EMULATE_CLIENT_INSP** defined</font>
+> Exists if **EMULATE_CLIENT_INSP** defined
 
 Description: 
 
@@ -261,7 +261,7 @@ File: [host\GamemodeManager\GamemodeManager.h at line 17](../../../Src/host/Game
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -312,7 +312,7 @@ File: [host\GamemodeManager\GamemodeManager.h at line 29](../../../Src/host/Game
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: время в секундах до начала раунда
 
@@ -350,7 +350,7 @@ File: [host\GamemodeManager\GamemodeManager.h at line 40](../../../Src/host/Game
 
 Type: constant
 
-> <font size="5">Exists if **GM_STARTLOGIC_2_0** defined</font>
+> Exists if **GM_STARTLOGIC_2_0** defined
 
 Description: 
 - Param: name
@@ -364,7 +364,7 @@ File: [host\GamemodeManager\GamemodeManager.h at line 43](../../../Src/host/Game
 
 Type: constant
 
-> <font size="5">Exists if **GM_STARTLOGIC_2_0** not defined</font>
+> Exists if **GM_STARTLOGIC_2_0** not defined
 
 Description: 
 - Param: name
@@ -639,12 +639,22 @@ File: [host\GamemodeManager\GamemodeManager.hpp at line 43](../../../Src/host/Ga
 
 Type: function
 
-> <font size="5">Exists if **RELEASE** not defined</font>
+> Exists if **RELEASE** not defined
 
 Description: 
 
 
 File: [host\GamemodeManager\GamemodeManager.sqf at line 231](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L231)
+# Gamemode_AllowedModes.sqf
+
+## gm_allowedModes
+
+Type: Variable
+
+Description: 
+
+
+File: [host\GamemodeManager\Gamemode_AllowedModes.sqf at line 6](../../../Src/host/GamemodeManager/Gamemode_AllowedModes.sqf#L6)
 # Gamemode_deprecated.sqf
 
 ## gm_processAntags
@@ -665,6 +675,14 @@ Description: ! УСТАРЕВШИЙ МЕТОД - НЕ ВЫЗЫВАЕТСЯ
 File: [host\GamemodeManager\Gamemode_deprecated.sqf at line 115](../../../Src/host/GamemodeManager/Gamemode_deprecated.sqf#L115)
 # Gamemode_internal_auto.sqf
 
+## gm_internal_auto_timeLoad
+
+Type: Variable
+
+Description: 
+
+
+File: [host\GamemodeManager\Gamemode_internal_auto.sqf at line 70](../../../Src/host/GamemodeManager/Gamemode_internal_auto.sqf#L70)
 ## gm_getTimeOffset
 
 Type: function
@@ -725,6 +743,14 @@ Replaced value:
 (_cliSettings get #var)
 ```
 File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 678](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L678)
+## gameEvents_internal_list_allObjects
+
+Type: Variable
+
+Description: 
+
+
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1326](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1326)
 ## gm_startRound
 
 Type: function

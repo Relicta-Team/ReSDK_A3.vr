@@ -1,5 +1,13 @@
 # Accounts.sqf
 
+## dsm_accounts_isEnabled
+
+Type: Variable
+
+Description: ! Внимание! На рантайме если перелкючать этот флаг, то нужно принудительно вызывать dsm_accounts_loadDiscordId на каждом клиенте в сессии
+
+
+File: [host\Discord\Accounts.sqf at line 9](../../../Src/host/Discord/Accounts.sqf#L9)
 ## dsm_accounts_canUse
 
 Type: function
@@ -87,7 +95,7 @@ File: [host\Discord\Accounts.sqf at line 176](../../../Src/host/Discord/Accounts
 
 Type: constant
 
-> <font size="5">Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined</font>
+> Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined
 
 Description: 
 
@@ -101,7 +109,7 @@ File: [host\Discord\Discord.sqf at line 18](../../../Src/host/Discord/Discord.sq
 
 Type: constant
 
-> <font size="5">Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined</font>
+> Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined
 
 Description: 
 - Param: 
@@ -115,7 +123,7 @@ File: [host\Discord\Discord.sqf at line 23](../../../Src/host/Discord/Discord.sq
 
 Type: constant
 
-> <font size="5">Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined</font>
+> Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined
 
 Description: задержка между сообщениями
 
@@ -125,11 +133,61 @@ Replaced value:
 5.001
 ```
 File: [host\Discord\Discord.sqf at line 26](../../../Src/host/Discord/Discord.sqf#L26)
+## disc_stack_logger
+
+Type: Variable
+
+> Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined
+
+Description: 
+
+
+File: [host\Discord\Discord.sqf at line 20](../../../Src/host/Discord/Discord.sqf#L20)
+## disc_lastLoggerTime
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Discord\Discord.sqf at line 21](../../../Src/host/Discord/Discord.sqf#L21)
+## disc_messagesLeftPerSec
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Discord\Discord.sqf at line 22](../../../Src/host/Discord/Discord.sqf#L22)
+## disc_handle_update
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Discord\Discord.sqf at line 24](../../../Src/host/Discord/Discord.sqf#L24)
+## disc_token_admin
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Discord\Discord.sqf at line 30](../../../Src/host/Discord/Discord.sqf#L30)
+## disc_token_logger
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Discord\Discord.sqf at line 31](../../../Src/host/Discord/Discord.sqf#L31)
 ## disc_onUpdate
 
 Type: function
 
-> <font size="5">Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined</font>
+> Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined
 
 Description: 
 
@@ -224,7 +282,7 @@ File: [host\Discord\ServerManager.sqf at line 14](../../../Src/host/Discord/Serv
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 
@@ -238,7 +296,7 @@ File: [host\Discord\ServerManager.sqf at line 17](../../../Src/host/Discord/Serv
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** not defined</font>
+> Exists if **EDITOR** not defined
 
 Description: 
 
@@ -248,6 +306,46 @@ Replaced value:
 "847850893076201522"
 ```
 File: [host\Discord\ServerManager.sqf at line 19](../../../Src/host/Discord/ServerManager.sqf#L19)
+## dsm_onlineUpdateHandle
+
+Type: Variable
+
+Description: #define DSM_DISABLE
+
+
+File: [host\Discord\ServerManager.sqf at line 8](../../../Src/host/Discord/ServerManager.sqf#L8)
+## dsm_callbackExtensionHandle
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Discord\ServerManager.sqf at line 9](../../../Src/host/Discord/ServerManager.sqf#L9)
+## dsm_isFirstLoad
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Discord\ServerManager.sqf at line 10](../../../Src/host/Discord/ServerManager.sqf#L10)
+## dsm_connectedToManager
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Discord\ServerManager.sqf at line 12](../../../Src/host/Discord/ServerManager.sqf#L12)
+## dsm_internal_virtualClient
+
+Type: Variable
+
+Description: ================================= server command executer =============================
+
+
+File: [host\Discord\ServerManager.sqf at line 163](../../../Src/host/Discord/ServerManager.sqf#L163)
 ## dsm_stdCall
 
 Type: function

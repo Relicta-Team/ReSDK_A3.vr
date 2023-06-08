@@ -50,7 +50,7 @@ File: [host\MapManager\ObjectManager.sqf at line 13](../../../Src/host/MapManage
 
 Type: constant
 
-> <font size="5">Exists if **doPhisicsLog** defined</font>
+> Exists if **doPhisicsLog** defined
 
 Description: 
 - Param: data
@@ -64,7 +64,7 @@ File: [host\MapManager\ObjectManager.sqf at line 18](../../../Src/host/MapManage
 
 Type: constant
 
-> <font size="5">Exists if **doPhisicsLog** defined</font>
+> Exists if **doPhisicsLog** defined
 
 Description: 
 - Param: data
@@ -79,7 +79,7 @@ File: [host\MapManager\ObjectManager.sqf at line 18](../../../Src/host/MapManage
 
 Type: constant
 
-> <font size="5">Exists if **doPhisicsLog** not defined</font>
+> Exists if **doPhisicsLog** not defined
 
 Description: 
 - Param: data

@@ -1,5 +1,21 @@
 # Reputation_functions.sqf
 
+## repvote_list_tStructVoteObject
+
+Type: Variable
+
+Description: структура: ник (аккаунт), персонаж (имя), роль (тип),флаги - строка с разделителем: var=val:var:var=val
+
+
+File: [host\Reputation\Reputation_functions.sqf at line 19](../../../Src/host/Reputation/Reputation_functions.sqf#L19)
+## repvote_list_textNames
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Reputation\Reputation_functions.sqf at line 252](../../../Src/host/Reputation/Reputation_functions.sqf#L252)
 ## repvote_serializeFlags
 
 Type: function
@@ -57,7 +73,7 @@ File: [host\Reputation\Reputation_functions.sqf at line 236](../../../Src/host/R
 
 Type: function
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 - Param: _name
@@ -95,7 +111,7 @@ File: [host\Reputation\Reputation_functions.sqf at line 302](../../../Src/host/R
 
 Type: function
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 
@@ -151,6 +167,46 @@ Replaced value:
 QUESTIONS_COUNT
 ```
 File: [host\Reputation\Reputation_init.sqf at line 27](../../../Src/host/Reputation/Reputation_init.sqf#L27)
+## rep_system_enable
+
+Type: Variable
+
+Description: ! WARNING - система нестабильна и нуждается в доработке.
+
+
+File: [host\Reputation\Reputation_init.sqf at line 12](../../../Src/host/Reputation/Reputation_init.sqf#L12)
+## rep_map_questions
+
+Type: Variable
+
+Description: Список вопросов
+
+
+File: [host\Reputation\Reputation_init.sqf at line 17](../../../Src/host/Reputation/Reputation_init.sqf#L17)
+## rep_list_categories
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Reputation\Reputation_init.sqf at line 30](../../../Src/host/Reputation/Reputation_init.sqf#L30)
+## rep_map_customQuestions
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Reputation\Reputation_init.sqf at line 19](../../../Src/host/Reputation/Reputation_init.sqf#L19)
+## rep_startTest_info
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Reputation\Reputation_init.sqf at line 32](../../../Src/host/Reputation/Reputation_init.sqf#L32)
 ## rep_regQuestion
 
 Type: function

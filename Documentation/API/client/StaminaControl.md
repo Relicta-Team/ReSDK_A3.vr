@@ -207,3 +207,37 @@ Description:
 
 
 File: [client\StaminaControl\Stamina.sqf at line 80](../../../Src/client/StaminaControl/Stamina.sqf#L80)
+# Stamina_init.sqf
+
+## stamina_widgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\StaminaControl\Stamina_init.sqf at line 13](../../../Src/client/StaminaControl/Stamina_init.sqf#L13)
+## stamina_mainHandle
+
+Type: Variable
+
+Description: 
+
+
+File: [client\StaminaControl\Stamina_init.sqf at line 14](../../../Src/client/StaminaControl/Stamina_init.sqf#L14)
+## stamina_heartbeatHandle
+
+Type: Variable
+
+Description: 
+
+
+File: [client\StaminaControl\Stamina_init.sqf at line 15](../../../Src/client/StaminaControl/Stamina_init.sqf#L15)
+## stamina_lastVal
+
+Type: Variable
+
+Description: 
+
+
+File: [client\StaminaControl\Stamina_init.sqf at line 16](../../../Src/client/StaminaControl/Stamina_init.sqf#L16)

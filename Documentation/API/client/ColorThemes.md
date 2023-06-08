@@ -100,6 +100,30 @@ Replaced value:
 "ffffff"
 ```
 File: [client\ColorThemes\ColorThemes_init.sqf at line 11](../../../Src/client/ColorThemes/ColorThemes_init.sqf#L11)
+## ct_map_colors
+
+Type: Variable
+
+Description: Помещаем ссылку
+
+
+File: [client\ColorThemes\ColorThemes_init.sqf at line 13](../../../Src/client/ColorThemes/ColorThemes_init.sqf#L13)
+## ct_map_defaultColors
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ColorThemes\ColorThemes_init.sqf at line 55](../../../Src/client/ColorThemes/ColorThemes_init.sqf#L55)
+## ct_map_themes
+
+Type: Variable
+
+Description: Лист с темами
+
+
+File: [client\ColorThemes\ColorThemes_init.sqf at line 58](../../../Src/client/ColorThemes/ColorThemes_init.sqf#L58)
 ## ct_load
 
 Type: function
@@ -146,7 +170,7 @@ File: [client\ColorThemes\ColorThemes_init.sqf at line 139](../../../Src/client/
 
 Type: function
 
-> <font size="5">Exists if **DEBUG** defined</font>
+> Exists if **DEBUG** defined
 
 Description: 
 - Param: _themeName

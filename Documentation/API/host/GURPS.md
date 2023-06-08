@@ -480,3 +480,11 @@ Replaced value:
 for "_i" from low to (up - 1) do {allocSTVal(_i,data)}
 ```
 File: [host\GURPS\Gurps_init.sqf at line 12](../../../Src/host/GURPS/Gurps_init.sqf#L12)
+## obj_gurps_combat
+
+Type: Variable
+
+Description: 
+
+
+File: [host\GURPS\Gurps_init.sqf at line 7](../../../Src/host/GURPS/Gurps_init.sqf#L7)

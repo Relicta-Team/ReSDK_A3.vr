@@ -169,7 +169,7 @@ File: [client\WidgetSystem\blockedButtons.hpp at line 46](../../../Src/client/Wi
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: temporary fix for VM
 - Param: forkey
@@ -437,6 +437,14 @@ Replaced value:
 [wid,format["<t align='center' size='%2'>%1</t>",_t,_sz]] call widgetSetText
 ```
 File: [client\WidgetSystem\functions.sqf at line 657](../../../Src/client/WidgetSystem/functions.sqf#L657)
+## hasEnabledBlackScreen
+
+Type: Variable
+
+Description: other screen support
+
+
+File: [client\WidgetSystem\functions.sqf at line 569](../../../Src/client/WidgetSystem/functions.sqf#L569)
 ## displayOpen
 
 Type: function
@@ -1187,6 +1195,14 @@ Replaced value:
 File: [client\WidgetSystem\widgets.hpp at line 63](../../../Src/client/WidgetSystem/widgets.hpp#L63)
 # widget_eventSystem.sqf
 
+## display_internal_onCloseEventList
+
+Type: Variable
+
+Description: 
+
+
+File: [client\WidgetSystem\widget_eventSystem.sqf at line 8](../../../Src/client/WidgetSystem/widget_eventSystem.sqf#L8)
 ## displayAddCloseEvent
 
 Type: function
@@ -1209,7 +1225,7 @@ File: [client\WidgetSystem\widget_eventSystem.sqf at line 15](../../../Src/clien
 
 Type: constant
 
-> <font size="5">Exists if **DEBUG** defined</font>
+> Exists if **DEBUG** defined
 
 Description: 
 - Param: proc_val

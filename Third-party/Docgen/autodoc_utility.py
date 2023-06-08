@@ -227,13 +227,20 @@ def parse_sqf_functions(code):
                 
                 MemberDesc = MemberDesc.lstrip("\n").lstrip(" ").rstrip(" ").rstrip("\n")
 
+            if MemberDesc == "======================================================":
+                MemberDesc = ""
+
             results[varname] = {
                 "Type": "Variable",
                 "DefLine": i + 1,
                 "Value": varvalue,
                 "Desc": MemberDesc,
+                "Arguments": None,
                 'conditional' : condit
             }
+
+            MemberDesc = ""
+            condit = None
 
     for function_name in functions:
         function_signature = re.search(rf"{function_name}\s*=\s*{{(.+?)}}", code, re.DOTALL)

@@ -26,6 +26,22 @@ _ps = format[__catprefix +"_"+ 'name']; _met = #method ; \
 ie_actions_map set [_ps,_met]; ie_actions_mapinverted set [_met,_ps];
 ```
 File: [host\VerbSystem\ActionsPseudonames.sqf at line 49](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L49)
+## ie_actions_map
+
+Type: Variable
+
+Description: 
+
+
+File: [host\VerbSystem\ActionsPseudonames.sqf at line 6](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L6)
+## ie_actions_mapinverted
+
+Type: Variable
+
+Description: 
+
+
+File: [host\VerbSystem\ActionsPseudonames.sqf at line 7](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L7)
 ## ie_action_setPrefix
 
 Type: function
@@ -53,6 +69,14 @@ Description:
 File: [host\VerbSystem\ActionsPseudonames.sqf at line 26](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L26)
 # loadBeforeOOPInit.sqf
 
+## ie_actions_list_preInitActions
+
+Type: Variable
+
+Description: 
+
+
+File: [host\VerbSystem\loadBeforeOOPInit.sqf at line 8](../../../Src/host/VerbSystem/loadBeforeOOPInit.sqf#L8)
 ## ie_actions_regNew
 
 Type: function
@@ -434,3 +458,19 @@ Replaced value:
 null
 ```
 File: [host\VerbSystem\verbsDefine.sqf at line 10](../../../Src/host/VerbSystem/verbsDefine.sqf#L10)
+## verb_list
+
+Type: Variable
+
+Description: 
+
+
+File: [host\VerbSystem\verbsDefine.sqf at line 12](../../../Src/host/VerbSystem/verbsDefine.sqf#L12)
+## verb_inverted_list
+
+Type: Variable
+
+Description: 
+
+
+File: [host\VerbSystem\verbsDefine.sqf at line 13](../../../Src/host/VerbSystem/verbsDefine.sqf#L13)

@@ -24,6 +24,46 @@ Replaced value:
 "Stop"
 ```
 File: [host\Tools\MoveToTargetDebugger.sqf at line 10](../../../Src/host/Tools/MoveToTargetDebugger.sqf#L10)
+## mttd_targetpos
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Tools\MoveToTargetDebugger.sqf at line 73](../../../Src/host/Tools/MoveToTargetDebugger.sqf#L73)
+## mttd_curhandle
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Tools\MoveToTargetDebugger.sqf at line 74](../../../Src/host/Tools/MoveToTargetDebugger.sqf#L74)
+## mttd_srcobj
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Tools\MoveToTargetDebugger.sqf at line 75](../../../Src/host/Tools/MoveToTargetDebugger.sqf#L75)
+## mttd_arrForward
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Tools\MoveToTargetDebugger.sqf at line 76](../../../Src/host/Tools/MoveToTargetDebugger.sqf#L76)
+## mttd_arrDirect
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Tools\MoveToTargetDebugger.sqf at line 77](../../../Src/host/Tools/MoveToTargetDebugger.sqf#L77)
 ## mttd_start
 
 Type: function
@@ -98,6 +138,22 @@ Description: общий обработчик данных
 File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 126](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L126)
 # EditorDebug_visual.sqf
 
+## editorDebug_handlerWidgets
+
+Type: Variable
+
+Description: struct of vec3: ref ctg, name, code target, positions(size),handler
+
+
+File: [host\Tools\EditorDebug\EditorDebug_visual.sqf at line 8](../../../Src/host/Tools/EditorDebug/EditorDebug_visual.sqf#L8)
+## editorDebug_internal_activeTab
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Tools\EditorDebug\EditorDebug_visual.sqf at line 30](../../../Src/host/Tools/EditorDebug/EditorDebug_visual.sqf#L30)
 ## editorDebug_createVisual
 
 Type: function
@@ -168,11 +224,43 @@ Replaced value:
 (toString [9])
 ```
 File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 75](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L75)
+## relicta_debug_internal_isEntryPointInitialized
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 41](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L41)
+## relicta_debug_internal_isHandledError
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 79](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L79)
+## relicta_debug_internal_canShowStackVariables
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 81](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L81)
+## relicta_debug_internal_lastErrorName
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 83](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L83)
 ## relicta_debug_internal_postCompileProcess
 
 Type: function
 
-> <font size="5">Exists if **DEEP_DEBUG_MODE** defined</font>
+> Exists if **DEEP_DEBUG_MODE** defined
 
 Description: 
 
@@ -279,6 +367,14 @@ if (iconGen_internal_isError) exitWith { \
 }
 ```
 File: [host\Tools\IconGenerator\IconGenerator.sqf at line 35](../../../Src/host/Tools/IconGenerator/IconGenerator.sqf#L35)
+## iconGen_output
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Tools\IconGenerator\IconGenerator.sqf at line 29](../../../Src/host/Tools/IconGenerator/IconGenerator.sqf#L29)
 ## iconGenerator_start
 
 Type: function
@@ -355,6 +451,14 @@ icomaker_##name
 File: [host\Tools\IconGenerator\IconMaker.sqf at line 8](../../../Src/host/Tools/IconGenerator/IconMaker.sqf#L8)
 # SDK_init.sqf
 
+## sdk_isFirstLoad
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Tools\SDK\SDK_init.sqf at line 10](../../../Src/host/Tools/SDK/SDK_init.sqf#L10)
 ## sdk_init
 
 Type: function

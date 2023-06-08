@@ -227,7 +227,7 @@ File: [host\CaveSystem\CaveSystem.h at line 45](../../../Src/host/CaveSystem/Cav
 
 Type: constant
 
-> <font size="5">Exists if **usecavelog** defined</font>
+> Exists if **usecavelog** defined
 
 Description: 
 - Param: a
@@ -241,7 +241,7 @@ File: [host\CaveSystem\CaveSystem.h at line 49](../../../Src/host/CaveSystem/Cav
 
 Type: constant
 
-> <font size="5">Exists if **usecavelog** defined</font>
+> Exists if **usecavelog** defined
 
 Description: 
 - Param: a
@@ -256,7 +256,7 @@ File: [host\CaveSystem\CaveSystem.h at line 49](../../../Src/host/CaveSystem/Cav
 
 Type: constant
 
-> <font size="5">Exists if **usecavelog** not defined</font>
+> Exists if **usecavelog** not defined
 
 Description: 
 - Param: a

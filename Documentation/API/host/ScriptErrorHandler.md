@@ -1,5 +1,21 @@
 # ScriptErrorHandler_init.sqf
 
+## scriptErrGlobLastMessage
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 13](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L13)
+## scriptErrHndlGlobal
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 14](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L14)
 ## scriptError_internal_handleStack
 
 Type: function
@@ -15,7 +31,7 @@ File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 9](../../../S
 
 Type: function
 
-> <font size="5">Exists if **DEBUG** defined</font>
+> Exists if **DEBUG** defined
 
 Description: 
 - Param: _mode

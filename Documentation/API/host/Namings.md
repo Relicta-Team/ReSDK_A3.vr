@@ -12,11 +12,21 @@ Replaced value:
 (var in _name || var in _class)
 ```
 File: [host\Namings\FacesHelpers.sqf at line 67](../../../Src/host/Namings/FacesHelpers.sqf#L67)
+## facesys_generatedConfig
+
+Type: Variable
+
+> Exists if **DEBUG** defined
+
+Description: 
+
+
+File: [host\Namings\FacesHelpers.sqf at line 12](../../../Src/host/Namings/FacesHelpers.sqf#L12)
 ## facesys_generateConfig
 
 Type: function
 
-> <font size="5">Exists if **DEBUG** defined</font>
+> Exists if **DEBUG** defined
 
 Description: Генерирует конфиг для нохедов и лиц
 
@@ -90,6 +100,54 @@ Replaced value:
 ['Mobs\##filename##.txt'] call naming_parseNames
 ```
 File: [host\Namings\ParseNaming.sqf at line 12](../../../Src/host/Namings/ParseNaming.sqf#L12)
+## naming_list_ManFirstName
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Namings\ParseNaming.sqf at line 15](../../../Src/host/Namings/ParseNaming.sqf#L15)
+## naming_list_WomanFirstName
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Namings\ParseNaming.sqf at line 16](../../../Src/host/Namings/ParseNaming.sqf#L16)
+## naming_list_ManCavenick
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Namings\ParseNaming.sqf at line 23](../../../Src/host/Namings/ParseNaming.sqf#L23)
+## naming_list_WomanCavenick
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Namings\ParseNaming.sqf at line 24](../../../Src/host/Namings/ParseNaming.sqf#L24)
+## naming_list_ManSecondName
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Namings\ParseNaming.sqf at line 26](../../../Src/host/Namings/ParseNaming.sqf#L26)
+## naming_list_WomanSecondName
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Namings\ParseNaming.sqf at line 27](../../../Src/host/Namings/ParseNaming.sqf#L27)
 ## naming_getRandomName
 
 Type: function
@@ -99,3 +157,21 @@ Description:
 - Param: _retAsString (optional, default false)
 
 File: [host\Namings\ParseNaming.sqf at line 78](../../../Src/host/Namings/ParseNaming.sqf#L78)
+# PrepareFaces.sqf
+
+## faces_list_man
+
+Type: Variable
+
+Description: replicate mp vars
+
+
+File: [host\Namings\PrepareFaces.sqf at line 14](../../../Src/host/Namings/PrepareFaces.sqf#L14)
+## faces_list_woman
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Namings\PrepareFaces.sqf at line 15](../../../Src/host/Namings/PrepareFaces.sqf#L15)

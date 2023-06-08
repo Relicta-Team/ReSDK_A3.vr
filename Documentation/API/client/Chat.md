@@ -12,6 +12,96 @@ Replaced value:
 (chat_messages_data joinString "<br/>")
 ```
 File: [client\Chat\Chat.hpp at line 8](../../../Src/client/Chat/Chat.hpp#L8)
+# chat_init.sqf
+
+## chat_widgets
+
+Type: Variable
+
+Description: 											chat history field
+
+
+File: [client\Chat\chat_init.sqf at line 24](../../../Src/client/Chat/chat_init.sqf#L24)
+## chat_messages_data
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\chat_init.sqf at line 26](../../../Src/client/Chat/chat_init.sqf#L26)
+## chat_maxmessages
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\chat_init.sqf at line 27](../../../Src/client/Chat/chat_init.sqf#L27)
+## chat_size_x
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\chat_init.sqf at line 29](../../../Src/client/Chat/chat_init.sqf#L29)
+## chat_size_y
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\chat_init.sqf at line 30](../../../Src/client/Chat/chat_init.sqf#L30)
+## chat_isHistoryOpen
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\chat_init.sqf at line 32](../../../Src/client/Chat/chat_init.sqf#L32)
+## chat_isHideEnabled
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\chat_init.sqf at line 34](../../../Src/client/Chat/chat_init.sqf#L34)
+## chat_hideAfter
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\chat_init.sqf at line 35](../../../Src/client/Chat/chat_init.sqf#L35)
+## chat_isFullHidden
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\chat_init.sqf at line 36](../../../Src/client/Chat/chat_init.sqf#L36)
+## chat_hideValue
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\chat_init.sqf at line 37](../../../Src/client/Chat/chat_init.sqf#L37)
+## chat_hideTimestamp
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\chat_init.sqf at line 38](../../../Src/client/Chat/chat_init.sqf#L38)
 # Chat_onScreen.sqf
 
 ## mlp(v)
@@ -26,6 +116,54 @@ Replaced value:
 'v'
 ```
 File: [client\Chat\Chat_onScreen.sqf at line 8](../../../Src/client/Chat/Chat_onScreen.sqf#L8)
+## chatos_mobSelections
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\Chat_onScreen.sqf at line 10](../../../Src/client/Chat/Chat_onScreen.sqf#L10)
+## chatos_guiCtg
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\Chat_onScreen.sqf at line 34](../../../Src/client/Chat/Chat_onScreen.sqf#L34)
+## chatos_renderedWidgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\Chat_onScreen.sqf at line 36](../../../Src/client/Chat/Chat_onScreen.sqf#L36)
+## chatos_renderedWidgetsPrint
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\Chat_onScreen.sqf at line 37](../../../Src/client/Chat/Chat_onScreen.sqf#L37)
+## chatos_postMessageVisibleDelay
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\Chat_onScreen.sqf at line 39](../../../Src/client/Chat/Chat_onScreen.sqf#L39)
+## chatos_list_blobMobs
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Chat\Chat_onScreen.sqf at line 238](../../../Src/client/Chat/Chat_onScreen.sqf#L238)
 ## chatos_onUpdate
 
 Type: function
@@ -339,6 +477,14 @@ Replaced value:
 60
 ```
 File: [client\Chat\nativeChatHandler.sqf at line 25](../../../Src/client/Chat/nativeChatHandler.sqf#L25)
+## chat_native_lastTimestamp
+
+Type: Variable
+
+Description: regular update tickStamp (for disable launcher)
+
+
+File: [client\Chat\nativeChatHandler.sqf at line 43](../../../Src/client/Chat/nativeChatHandler.sqf#L43)
 ## chat_native_handleDebug
 
 Type: function

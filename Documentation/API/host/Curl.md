@@ -14,6 +14,24 @@ Replaced value:
 File: [host\Curl\Curl.hpp at line 7](../../../Src/host/Curl/Curl.hpp#L7)
 # Curl.sqf
 
+## glob
+
+Type: Variable
+
+> Exists if **u_test** defined
+
+Description: 
+
+
+File: [host\Curl\Curl.sqf at line 80](../../../Src/host/Curl/Curl.sqf#L80)
+## glob_invert
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Curl\Curl.sqf at line 95](../../../Src/host/Curl/Curl.sqf#L95)
 ## curl_send
 
 Type: function
@@ -77,7 +95,7 @@ File: [host\Curl\CurlThread.sqf at line 14](../../../Src/host/Curl/CurlThread.sq
 
 Type: constant
 
-> <font size="5">Exists if **__allowCurlLog** defined</font>
+> Exists if **__allowCurlLog** defined
 
 Description: 
 - Param: mes
@@ -91,7 +109,7 @@ File: [host\Curl\CurlThread.sqf at line 17](../../../Src/host/Curl/CurlThread.sq
 
 Type: constant
 
-> <font size="5">Exists if **__allowCurlLog** not defined</font>
+> Exists if **__allowCurlLog** not defined
 
 Description: 
 - Param: mes

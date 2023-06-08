@@ -75,6 +75,30 @@ Replaced value:
 if (_code == code) exitWith {[text] call (getDisplay getVariable ["printError",{}])}
 ```
 File: [client\ClientData\ClientData.sqf at line 486](../../../Src/client/ClientData/ClientData.sqf#L486)
+## cd_clientName
+
+Type: Variable
+
+Description: уникальное имя клиента
+
+
+File: [client\ClientData\ClientData.sqf at line 38](../../../Src/client/ClientData/ClientData.sqf#L38)
+## cd_charName
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\ClientData.sqf at line 39](../../../Src/client/ClientData/ClientData.sqf#L39)
+## cd_skillNames
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\ClientData.sqf at line 42](../../../Src/client/ClientData/ClientData.sqf#L42)
 ## cd_setVideoSettings
 
 Type: function
@@ -148,6 +172,14 @@ Replaced value:
 30
 ```
 File: [client\ClientData\ClientData_ConnectionManager.sqf at line 10](../../../Src/client/ClientData/ClientData_ConnectionManager.sqf#L10)
+## client_state
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\ClientData_ConnectionManager.sqf at line 14](../../../Src/client/ClientData/ClientData_ConnectionManager.sqf#L14)
 ## client_getState
 
 Type: function
@@ -201,6 +233,22 @@ Description: Подключаемся к мобу
 File: [client\ClientData\ClientData_ConnectionManager.sqf at line 175](../../../Src/client/ClientData/ClientData_ConnectionManager.sqf#L175)
 # ClientData_forceWalk.sqf
 
+## cd_fw_forceWalk
+
+Type: Variable
+
+Description: системный флаг блокировки бега (когда персонаж без ноги)
+
+
+File: [client\ClientData\ClientData_forceWalk.sqf at line 18](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L18)
+## cd_fw_hasBreakBone
+
+Type: Variable
+
+Description: сломанные кости на ногах записываются сюда
+
+
+File: [client\ClientData\ClientData_forceWalk.sqf at line 20](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L20)
 ## cd_fw_isForceWalk
 
 Type: function
@@ -496,6 +544,62 @@ Replaced value:
 ESC_MENU_BACKGROUND_COLOR_T3
 ```
 File: [client\ClientData\EscapeMenu.sqf at line 203](../../../Src/client/ClientData/EscapeMenu.sqf#L203)
+## esc_isMenuOpened
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\EscapeMenu.sqf at line 25](../../../Src/client/ClientData/EscapeMenu.sqf#L25)
+## esc_widgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\EscapeMenu.sqf at line 26](../../../Src/client/ClientData/EscapeMenu.sqf#L26)
+## esc_buttonsData
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\EscapeMenu.sqf at line 32](../../../Src/client/ClientData/EscapeMenu.sqf#L32)
+## esc_settings_widgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\EscapeMenu.sqf at line 210](../../../Src/client/ClientData/EscapeMenu.sqf#L210)
+## esc_settings_names
+
+Type: Variable
+
+Description: Порядок настроек строго фиксирован и связан с ServerClient::clientSettings
+
+
+File: [client\ClientData\EscapeMenu.sqf at line 212](../../../Src/client/ClientData/EscapeMenu.sqf#L212)
+## esc_settings_curIndex
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\EscapeMenu.sqf at line 218](../../../Src/client/ClientData/EscapeMenu.sqf#L218)
+## cd_settingsVersion
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\EscapeMenu.sqf at line 220](../../../Src/client/ClientData/EscapeMenu.sqf#L220)
 ## esc_openMenu
 
 Type: function
@@ -883,6 +987,38 @@ Replaced value:
 10
 ```
 File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 144](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L144)
+## somedebugvar1
+
+Type: Variable
+
+Description: !!! only debug !!!
+
+
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 43](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L43)
+## somedebugvar2
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 44](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L44)
+## testbool
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 45](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L45)
+## cd_settingsGame
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 48](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L48)
 ## esc_settings_game_unloading
 
 Type: function
@@ -1098,6 +1234,14 @@ Replaced value:
 _args
 ```
 File: [client\ClientData\SendCommand.sqf at line 110](../../../Src/client/ClientData/SendCommand.sqf#L110)
+## cd_commands_localCommandsList
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\SendCommand.sqf at line 106](../../../Src/client/ClientData/SendCommand.sqf#L106)
 ## cd_openSendCommandWindow
 
 Type: function
@@ -1160,6 +1304,14 @@ Replaced value:
 10
 ```
 File: [client\ClientData\VersionViewer.sqf at line 12](../../../Src/client/ClientData/VersionViewer.sqf#L12)
+## cd_vv_widgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ClientData\VersionViewer.sqf at line 26](../../../Src/client/ClientData/VersionViewer.sqf#L26)
 ## cd_vv_syncVisual
 
 Type: function

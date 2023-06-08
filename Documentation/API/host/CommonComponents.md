@@ -1,5 +1,13 @@
 # !MemReflect.sqf
 
+## global_modules
+
+Type: Variable
+
+Description: 
+
+
+File: [host\CommonComponents\!MemReflect.sqf at line 68](../../../Src/host/CommonComponents/!MemReflect.sqf#L68)
 ## gv_rv
 
 Type: function
@@ -281,6 +289,22 @@ Replaced value:
 ((_anims select idx) == "nl" && ((_blender select idx) == 1))
 ```
 File: [host\CommonComponents\Animator.sqf at line 215](../../../Src/host/CommonComponents/Animator.sqf#L215)
+## anim_assocList_keyString
+
+Type: Variable
+
+Description: 
+
+
+File: [host\CommonComponents\Animator.sqf at line 10](../../../Src/host/CommonComponents/Animator.sqf#L10)
+## anim_assocList_keyInt
+
+Type: Variable
+
+Description: 
+
+
+File: [host\CommonComponents\Animator.sqf at line 11](../../../Src/host/CommonComponents/Animator.sqf#L11)
 ## anim_getAssoc
 
 Type: function
@@ -336,6 +360,14 @@ Description:
 File: [host\CommonComponents\Animator.sqf at line 297](../../../Src/host/CommonComponents/Animator.sqf#L297)
 # AttackTypesAssoc.sqf
 
+## ata_assoc_map
+
+Type: Variable
+
+Description: assoc for attack types
+
+
+File: [host\CommonComponents\AttackTypesAssoc.sqf at line 90](../../../Src/host/CommonComponents/AttackTypesAssoc.sqf#L90)
 ## ata_buf_process
 
 Type: function
@@ -449,6 +481,32 @@ Replaced value:
 BIS_fnc_##funcname__
 ```
 File: [host\CommonComponents\Color.sqf at line 18](../../../Src/host/CommonComponents/Color.sqf#L18)
+## color_diagfonts
+
+Type: Variable
+
+> Exists if **DEBUG** defined
+
+Description: 
+
+
+File: [host\CommonComponents\Color.sqf at line 20](../../../Src/host/CommonComponents/Color.sqf#L20)
+## color_hexTable256
+
+Type: Variable
+
+Description: 
+
+
+File: [host\CommonComponents\Color.sqf at line 42](../../../Src/host/CommonComponents/Color.sqf#L42)
+## color_map_hexStrToNum
+
+Type: Variable
+
+Description: 
+
+
+File: [host\CommonComponents\Color.sqf at line 43](../../../Src/host/CommonComponents/Color.sqf#L43)
 ## color_RGBAtoHTML
 
 Type: function
@@ -540,7 +598,7 @@ File: [host\CommonComponents\DateTime.sqf at line 13](../../../Src/host/CommonCo
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 - Param: path
@@ -557,7 +615,7 @@ File: [host\CommonComponents\loader.hpp at line 10](../../../Src/host/CommonComp
 
 Type: constant
 
-> <font size="5">Exists if **__VM_PARSE_FILE** defined</font>
+> Exists if **__VM_PARSE_FILE** defined
 
 Description: 
 - Param: path
@@ -608,7 +666,7 @@ File: [host\CommonComponents\ModelsPath.sqf at line 69](../../../Src/host/Common
 
 Type: function
 
-> <font size="5">Exists if **DEBUG** defined</font>
+> Exists if **DEBUG** defined
 
 Description: 
 
@@ -630,6 +688,14 @@ Replaced value:
 pencfg_map_all set [tolower model,[soundpen,armpen]]
 ```
 File: [host\CommonComponents\Pencfg.sqf at line 13](../../../Src/host/CommonComponents/Pencfg.sqf#L13)
+## pencfg_map_all
+
+Type: Variable
+
+Description: common data
+
+
+File: [host\CommonComponents\Pencfg.sqf at line 11](../../../Src/host/CommonComponents/Pencfg.sqf#L11)
 ## pencfg_isExistsModel
 
 Type: function
@@ -655,6 +721,16 @@ Description:
 - Param: _obj
 
 File: [host\CommonComponents\Pencfg.sqf at line 37](../../../Src/host/CommonComponents/Pencfg.sqf#L37)
+# Replicator.sqf
+
+## repl_map_funcs
+
+Type: Variable
+
+Description: 
+
+
+File: [host\CommonComponents\Replicator.sqf at line 8](../../../Src/host/CommonComponents/Replicator.sqf#L8)
 # SMD_shared.sqf
 
 ## smd_getAnimValue
@@ -775,6 +851,32 @@ Description:
 - Param: _enumName
 
 File: [host\CommonComponents\TransportLayer.sqf at line 33](../../../Src/host/CommonComponents/TransportLayer.sqf#L33)
+# Voice.sqf
+
+## TF_ADDON_VERSION
+
+Type: Variable
+
+Description: 
+
+
+File: [host\CommonComponents\Voice.sqf at line 8](../../../Src/host/CommonComponents/Voice.sqf#L8)
+## vs_list_langs
+
+Type: Variable
+
+Description: список языков
+
+
+File: [host\CommonComponents\Voice.sqf at line 10](../../../Src/host/CommonComponents/Voice.sqf#L10)
+## vs_map_whohear
+
+Type: Variable
+
+Description: ["eater",["eater","human"]] -> жруны слышат жрунов и людей
+
+
+File: [host\CommonComponents\Voice.sqf at line 15](../../../Src/host/CommonComponents/Voice.sqf#L15)
 # __notcompile__PerFrame.sqf
 
 ## PF_IND_CODE
@@ -921,6 +1023,14 @@ Replaced value:
 5
 ```
 File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 274](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L274)
+## pf_hash
+
+Type: Variable
+
+Description: 
+
+
+File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 8](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L8)
 ## pf_addTimer
 
 Type: function

@@ -529,7 +529,7 @@ File: [client\Lobby\functions.sqf at line 175](../../../Src/client/Lobby/functio
 
 Type: constant
 
-> <font size="5">Exists if **FAST_INIT_LOBBY** defined</font>
+> Exists if **FAST_INIT_LOBBY** defined
 
 Description: 
 
@@ -551,6 +551,22 @@ Replaced value:
 5
 ```
 File: [client\Lobby\functions.sqf at line 574](../../../Src/client/Lobby/functions.sqf#L574)
+## lobby_isMusicEnabled
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Lobby\functions.sqf at line 376](../../../Src/client/Lobby/functions.sqf#L376)
+## lobby_internal_progressclose
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Lobby\functions.sqf at line 559](../../../Src/client/Lobby/functions.sqf#L559)
 ## lobbyOpen
 
 Type: function
@@ -646,6 +662,38 @@ Replaced value:
 
 ```
 File: [client\Lobby\lobbi_init.sqf at line 13](../../../Src/client/Lobby/lobbi_init.sqf#L13)
+## isLobbyOpen
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Lobby\lobbi_init.sqf at line 15](../../../Src/client/Lobby/lobbi_init.sqf#L15)
+## lobby_widgetList
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Lobby\lobbi_init.sqf at line 16](../../../Src/client/Lobby/lobbi_init.sqf#L16)
+## lobby_charSetWidList
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Lobby\lobbi_init.sqf at line 27](../../../Src/client/Lobby/lobbi_init.sqf#L27)
+## lobby_isOpenCharSetting
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Lobby\lobbi_init.sqf at line 28](../../../Src/client/Lobby/lobbi_init.sqf#L28)
 # lobby.hpp
 
 ## FAST_INIT_LOBBY
@@ -1159,7 +1207,7 @@ File: [client\Lobby\lobby.hpp at line 75](../../../Src/client/Lobby/lobby.hpp#L7
 
 Type: constant
 
-> <font size="5">Exists if **lobby_log_enable** defined</font>
+> Exists if **lobby_log_enable** defined
 
 Description: 
 - Param: mes
@@ -1174,7 +1222,7 @@ File: [client\Lobby\lobby.hpp at line 78](../../../Src/client/Lobby/lobby.hpp#L7
 
 Type: constant
 
-> <font size="5">Exists if **lobby_log_enable** not defined</font>
+> Exists if **lobby_log_enable** not defined
 
 Description: 
 - Param: mes
@@ -1271,6 +1319,22 @@ Replaced value:
 50
 ```
 File: [client\Lobby\sprite_renderer.sqf at line 121](../../../Src/client/Lobby/sprite_renderer.sqf#L121)
+## lobby_sprite_list
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Lobby\sprite_renderer.sqf at line 13](../../../Src/client/Lobby/sprite_renderer.sqf#L13)
+## lobby_sprite_readyButton
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Lobby\sprite_renderer.sqf at line 15](../../../Src/client/Lobby/sprite_renderer.sqf#L15)
 ## lobby_sprite_onUpdateCode
 
 Type: function
@@ -1293,6 +1357,22 @@ Replaced value:
 10
 ```
 File: [client\Lobby\SystemSettings.sqf at line 410](../../../Src/client/Lobby/SystemSettings.sqf#L410)
+## lobby_sys_listWidgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Lobby\SystemSettings.sqf at line 16](../../../Src/client/Lobby/SystemSettings.sqf#L16)
+## lobby_sys_curActionCategory
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Lobby\SystemSettings.sqf at line 17](../../../Src/client/Lobby/SystemSettings.sqf#L17)
 ## lobby_sysLoadMenu
 
 Type: function

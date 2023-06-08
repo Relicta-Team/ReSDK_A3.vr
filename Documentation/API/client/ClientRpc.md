@@ -108,7 +108,7 @@ File: [client\ClientRpc\clientrpc_init.sqf at line 8](../../../Src/client/Client
 
 Type: constant
 
-> <font size="5">Exists if **log_client_rpc** defined</font>
+> Exists if **log_client_rpc** defined
 
 Description: 
 - Param: event
@@ -123,7 +123,7 @@ File: [client\ClientRpc\clientrpc_init.sqf at line 19](../../../Src/client/Clien
 
 Type: constant
 
-> <font size="5">Exists if **log_client_rpc** defined</font>
+> Exists if **log_client_rpc** defined
 
 Description: 
 - Param: data
@@ -137,7 +137,7 @@ File: [client\ClientRpc\clientrpc_init.sqf at line 20](../../../Src/client/Clien
 
 Type: constant
 
-> <font size="5">Exists if **log_client_rpc** not defined</font>
+> Exists if **log_client_rpc** not defined
 
 Description: 
 - Param: event

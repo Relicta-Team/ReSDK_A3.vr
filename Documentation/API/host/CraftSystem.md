@@ -286,7 +286,7 @@ File: [host\CraftSystem\Craft.sqf at line 63](../../../Src/host/CraftSystem/Craf
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** not defined</font>
+> Exists if **_SQFVM** not defined
 
 Description: 
 
@@ -296,11 +296,21 @@ Replaced value:
 _obj
 ```
 File: [host\CraftSystem\Craft_initData.sqf at line 16](../../../Src/host/CraftSystem/Craft_initData.sqf#L16)
+## craft_data_count
+
+Type: Variable
+
+> Exists if **_SQFVM** not defined
+
+Description: 
+
+
+File: [host\CraftSystem\Craft_initData.sqf at line 13](../../../Src/host/CraftSystem/Craft_initData.sqf#L13)
 ## craft_data_getRecipes
 
 Type: function
 
-> <font size="5">Exists if **_SQFVM** not defined</font>
+> Exists if **_SQFVM** not defined
 
 Description: Получает рецепты с категории
 - Param: _cat

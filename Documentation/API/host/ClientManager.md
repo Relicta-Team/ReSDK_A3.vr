@@ -166,6 +166,18 @@ Replaced value:
 120
 ```
 File: [host\ClientManager\ClientManager.h at line 13](../../../Src/host/ClientManager/ClientManager.h#L13)
+# ClientManager.sqf
+
+## client_handler_onConnect
+
+Type: Variable
+
+> Exists if **EMULATE_CLIENT_INSP** not defined
+
+Description: 
+
+
+File: [host\ClientManager\ClientManager.sqf at line 44](../../../Src/host/ClientManager/ClientManager.sqf#L44)
 # CommandsExec.sqf
 
 ## PUBLIC_COMMAND
@@ -279,6 +291,14 @@ Replaced value:
 _client
 ```
 File: [host\ClientManager\CommandsExec.sqf at line 77](../../../Src/host/ClientManager/CommandsExec.sqf#L77)
+## cm_commands_map
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ClientManager\CommandsExec.sqf at line 68](../../../Src/host/ClientManager/CommandsExec.sqf#L68)
 ## cm_processClientCommand
 
 Type: function
@@ -366,6 +386,22 @@ Replaced value:
 cm_map_nickColor set [access,nick]; cm_map_messagesColor set [access,mes];
 ```
 File: [host\ClientManager\functions.sqf at line 113](../../../Src/host/ClientManager/functions.sqf#L113)
+## cm_isServerLocked
+
+Type: Variable
+
+Description: закрыт ли сервер
+
+
+File: [host\ClientManager\functions.sqf at line 12](../../../Src/host/ClientManager/functions.sqf#L12)
+## cm_preAwaitClientData
+
+Type: Variable
+
+Description: список клиентов на ожидание кика. Только значимые типы в массивах
+
+
+File: [host\ClientManager\functions.sqf at line 15](../../../Src/host/ClientManager/functions.sqf#L15)
 ## by_func
 
 Type: function
@@ -562,8 +598,34 @@ Description: Отправляет сообщение всем клиентам �
 - Param: _groups (optional, default "")
 
 File: [host\ClientManager\functions.sqf at line 370](../../../Src/host/ClientManager/functions.sqf#L370)
+# OnConnected.sqf
+
+## cm_maxClients
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ClientManager\OnConnected.sqf at line 9](../../../Src/host/ClientManager/OnConnected.sqf#L9)
 # Common.sqf
 
+## system_internal_list_allJoiners
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ClientManager\cmds\Common.sqf at line 162](../../../Src/host/ClientManager/cmds/Common.sqf#L162)
+## system_internal_string_generatedJoinedString
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ClientManager\cmds\Common.sqf at line 163](../../../Src/host/ClientManager/cmds/Common.sqf#L163)
 ## system_internal_generateJoinedRoles
 
 Type: function
@@ -572,6 +634,34 @@ Description:
 
 
 File: [host\ClientManager\cmds\Common.sqf at line 164](../../../Src/host/ClientManager/cmds/Common.sqf#L164)
+# EditorAndDebug.sqf
+
+## cmd_internal_debug_protomaker_versionrequired
+
+Type: Variable
+
+> Exists if **DEBUG** defined
+
+Description: 
+
+
+File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 19](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L19)
+## cmd_internal_debug_protomaker_listmodels
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 20](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L20)
+## cmd_internal_debug_tobjmarker_versionrequired
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 95](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L95)
 # Reflect.sqf
 
 ## isvar(x)

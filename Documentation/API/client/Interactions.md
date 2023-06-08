@@ -12,6 +12,30 @@ Replaced value:
 3
 ```
 File: [client\Interactions\aim_cursor.sqf at line 7](../../../Src/client/Interactions/aim_cursor.sqf#L7)
+## interaction_aim_handle
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\aim_cursor.sqf at line 9](../../../Src/client/Interactions/aim_cursor.sqf#L9)
+## interaction_aim_alphaUpdHandle
+
+Type: Variable
+
+Description: TODO dynamic change opacity
+
+
+File: [client\Interactions\aim_cursor.sqf at line 10](../../../Src/client/Interactions/aim_cursor.sqf#L10)
+## interaction_aim_widgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\aim_cursor.sqf at line 12](../../../Src/client/Interactions/aim_cursor.sqf#L12)
 ## interaction_aim_init
 
 Type: function
@@ -430,6 +454,30 @@ Replaced value:
 -0.2
 ```
 File: [client\Interactions\interact.sqf at line 254](../../../Src/client/Interactions/interact.sqf#L254)
+## verb_internal_bufferedObjData
+
+Type: Variable
+
+Description: это инвентарный мировой верб
+
+
+File: [client\Interactions\interact.sqf at line 95](../../../Src/client/Interactions/interact.sqf#L95)
+## verb_internal_isAwaitWorldVerb
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interact.sqf at line 96](../../../Src/client/Interactions/interact.sqf#L96)
+## interact_isOpenMousemode
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interact.sqf at line 373](../../../Src/client/Interactions/interact.sqf#L373)
 ## interact_isActive
 
 Type: function
@@ -623,7 +671,7 @@ File: [client\Interactions\interact.sqf at line 542](../../../Src/client/Interac
 
 Type: function
 
-> <font size="5">Exists if **DEBUG** defined</font>
+> Exists if **DEBUG** defined
 
 Description: 
 
@@ -1075,6 +1123,54 @@ Replaced value:
 40
 ```
 File: [client\Interactions\interactEmoteMenu.sqf at line 18](../../../Src/client/Interactions/interactEmoteMenu.sqf#L18)
+## interactEmote_isLoadedMenu
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interactEmoteMenu.sqf at line 7](../../../Src/client/Interactions/interactEmoteMenu.sqf#L7)
+## interactEmote_inputText
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interactEmoteMenu.sqf at line 9](../../../Src/client/Interactions/interactEmoteMenu.sqf#L9)
+## interactEmote_curTabIdx
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interactEmoteMenu.sqf at line 11](../../../Src/client/Interactions/interactEmoteMenu.sqf#L11)
+## interactEmote_actions
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interactEmoteMenu.sqf at line 13](../../../Src/client/Interactions/interactEmoteMenu.sqf#L13)
+## interactEmote_generatedActs
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interactEmoteMenu.sqf at line 14](../../../Src/client/Interactions/interactEmoteMenu.sqf#L14)
+## interactEmote_act_widgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interactEmoteMenu.sqf at line 15](../../../Src/client/Interactions/interactEmoteMenu.sqf#L15)
 ## interactEmote_load
 
 Type: function
@@ -1687,6 +1783,54 @@ Replaced value:
 (PATH_PICTURE_FOLDER + "interact\" + 'pt' + ".paa" )
 ```
 File: [client\Interactions\interactMenu_defines.sqf at line 17](../../../Src/client/Interactions/interactMenu_defines.sqf#L17)
+## interactMenu_disableGlobal
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interactMenu_defines.sqf at line 7](../../../Src/client/Interactions/interactMenu_defines.sqf#L7)
+## interactMenu_isLoadedMenu
+
+Type: Variable
+
+Description: активно ли интеракт меню
+
+
+File: [client\Interactions\interactMenu_defines.sqf at line 10](../../../Src/client/Interactions/interactMenu_defines.sqf#L10)
+## interactMenu_skillWidgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interactMenu_defines.sqf at line 14](../../../Src/client/Interactions/interactMenu_defines.sqf#L14)
+## interactMenu_skillNames
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interactMenu_defines.sqf at line 15](../../../Src/client/Interactions/interactMenu_defines.sqf#L15)
+## interactMenu_intentPath
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interactMenu_defines.sqf at line 19](../../../Src/client/Interactions/interactMenu_defines.sqf#L19)
+## interactMenu_intentWidgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interactMenu_defines.sqf at line 21](../../../Src/client/Interactions/interactMenu_defines.sqf#L21)
 # interactMenu_functions.sqf
 
 ## interactMenu_onUpdateSkills
@@ -1783,6 +1927,14 @@ Replaced value:
 10
 ```
 File: [client\Interactions\interact_deprecated.sqf at line 253](../../../Src/client/Interactions/interact_deprecated.sqf#L253)
+## interact_debug_viswidgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interact_deprecated.sqf at line 92](../../../Src/client/Interactions/interact_deprecated.sqf#L92)
 ## interact_canHandReach
 
 Type: function
@@ -1821,7 +1973,7 @@ File: [client\Interactions\interact_deprecated.sqf at line 194](../../../Src/cli
 
 Type: function
 
-> <font size="5">Exists if **DEBUG_ALLOW_DRAW_BBX** defined</font>
+> Exists if **DEBUG_ALLOW_DRAW_BBX** defined
 
 Description: 
 
@@ -1831,7 +1983,7 @@ File: [client\Interactions\interact_deprecated.sqf at line 260](../../../Src/cli
 
 Type: function
 
-> <font size="5">Exists if **DEBUG_ALLOW_DRAW_BBX** defined</font>
+> Exists if **DEBUG_ALLOW_DRAW_BBX** defined
 
 Description: 
 
@@ -1841,7 +1993,7 @@ File: [client\Interactions\interact_deprecated.sqf at line 265](../../../Src/cli
 
 Type: function
 
-> <font size="5">Exists if **DEBUG_ALLOW_DRAW_BBX** defined</font>
+> Exists if **DEBUG_ALLOW_DRAW_BBX** defined
 
 Description: 
 
@@ -1879,6 +2031,46 @@ Replaced value:
 0
 ```
 File: [client\Interactions\interact_grabbing.sqf at line 7](../../../Src/client/Interactions/interact_grabbing.sqf#L7)
+## interact_grab_handleupdate
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interact_grabbing.sqf at line 8](../../../Src/client/Interactions/interact_grabbing.sqf#L8)
+## interact_grab_bias
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interact_grabbing.sqf at line 10](../../../Src/client/Interactions/interact_grabbing.sqf#L10)
+## interact_grab_dir
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interact_grabbing.sqf at line 11](../../../Src/client/Interactions/interact_grabbing.sqf#L11)
+## interact_grab_mobObj
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interact_grabbing.sqf at line 12](../../../Src/client/Interactions/interact_grabbing.sqf#L12)
+## interact_grab_isGrabbed
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interact_grabbing.sqf at line 14](../../../Src/client/Interactions/interact_grabbing.sqf#L14)
 ## interact_grab_start
 
 Type: function
@@ -1926,7 +2118,7 @@ File: [client\Interactions\interact_mainhandle.sqf at line 9](../../../Src/clien
 
 Type: constant
 
-> <font size="5">Exists if **__log_mainhandle** defined</font>
+> Exists if **__log_mainhandle** defined
 
 Description: 
 - Param: reason
@@ -1940,7 +2132,7 @@ File: [client\Interactions\interact_mainhandle.sqf at line 16](../../../Src/clie
 
 Type: constant
 
-> <font size="5">Exists if **__log_mainhandle** not defined</font>
+> Exists if **__log_mainhandle** not defined
 
 Description: 
 - Param: reason
@@ -1974,6 +2166,14 @@ Replaced value:
 _exiter = mode
 ```
 File: [client\Interactions\interact_mainhandle.sqf at line 29](../../../Src/client/Interactions/interact_mainhandle.sqf#L29)
+## interact_mainHandleLock
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\interact_mainhandle.sqf at line 21](../../../Src/client/Interactions/interact_mainhandle.sqf#L21)
 # interact_resist.sqf
 
 ## interact_processResist
@@ -2130,6 +2330,14 @@ Replaced value:
 0.01
 ```
 File: [client\Interactions\progress.sqf at line 42](../../../Src/client/Interactions/progress.sqf#L42)
+## interact_progress_hasProcessed
+
+Type: Variable
+
+Description: interact_progress_curItmIndex = 0;
+
+
+File: [client\Interactions\progress.sqf at line 30](../../../Src/client/Interactions/progress.sqf#L30)
 ## interact_progress_start
 
 Type: function
@@ -2274,6 +2482,30 @@ Replaced value:
 20
 ```
 File: [client\Interactions\verbs.sqf at line 99](../../../Src/client/Interactions/verbs.sqf#L99)
+## verb_widgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\verbs.sqf at line 303](../../../Src/client/Interactions/verbs.sqf#L303)
+## verb_lastclickedpos
+
+Type: Variable
+
+Description: Последняя позиция мыши
+
+
+File: [client\Interactions\verbs.sqf at line 304](../../../Src/client/Interactions/verbs.sqf#L304)
+## verb_isMenuLoaded
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Interactions\verbs.sqf at line 305](../../../Src/client/Interactions/verbs.sqf#L305)
 ## interact_onLoadVerbs
 
 Type: function

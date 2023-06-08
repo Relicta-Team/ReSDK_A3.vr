@@ -1,3 +1,13 @@
+# main.sqf
+
+## testobj
+
+Type: Variable
+
+Description: 
+
+
+File: [host\OOP_engine\main.sqf at line 9](../../../Src/host/OOP_engine/main.sqf#L9)
 # oop_attributes.sqf
 
 ## newAttribute(name)
@@ -198,7 +208,7 @@ File: [host\OOP_engine\oop_init.sqf at line 15](../../../Src/host/OOP_engine/oop
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 - Param: mes
@@ -260,6 +270,22 @@ Replaced value:
 8
 ```
 File: [host\OOP_engine\oop_preinit.sqf at line 46](../../../Src/host/OOP_engine/oop_preinit.sqf#L46)
+## p_table_inheritance
+
+Type: Variable
+
+Description: 
+
+
+File: [host\OOP_engine\oop_preinit.sqf at line 32](../../../Src/host/OOP_engine/oop_preinit.sqf#L32)
+## p_table_allclassnames
+
+Type: Variable
+
+Description: 
+
+
+File: [host\OOP_engine\oop_preinit.sqf at line 33](../../../Src/host/OOP_engine/oop_preinit.sqf#L33)
 ## oop_deleteObject
 
 Type: function

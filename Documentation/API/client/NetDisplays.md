@@ -157,11 +157,27 @@ _args
 File: [client\NetDisplays\NetDisplay.h at line 32](../../../Src/client/NetDisplays/NetDisplay.h#L32)
 # NetDisplays.sqf
 
+## nd_map_displays
+
+Type: Variable
+
+Description: 
+
+
+File: [client\NetDisplays\NetDisplays.sqf at line 17](../../../Src/client/NetDisplays/NetDisplays.sqf#L17)
+## nd_handleUpdate
+
+Type: Variable
+
+Description: 
+
+
+File: [client\NetDisplays\NetDisplays.sqf at line 23](../../../Src/client/NetDisplays/NetDisplays.sqf#L23)
 ## nd_createTestDisplay
 
 Type: function
 
-> <font size="5">Exists if **DEBUG** defined</font>
+> Exists if **DEBUG** defined
 
 Description: 
 - Param: _class
@@ -338,6 +354,14 @@ Replaced value:
 2
 ```
 File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 346](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L346)
+## nd_internal_voterep_widgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 343](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L343)
 ## nd_internal_voterep_cleanupMaps
 
 Type: function

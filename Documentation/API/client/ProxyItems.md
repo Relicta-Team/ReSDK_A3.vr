@@ -26,6 +26,38 @@ Replaced value:
 File: [client\ProxyItems\ConfigProxyItems.h at line 12](../../../Src/client/ProxyItems/ConfigProxyItems.h#L12)
 # ProxyItems.sqf
 
+## proxIt_configData
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ProxyItems\ProxyItems.sqf at line 9](../../../Src/client/ProxyItems/ProxyItems.sqf#L9)
+## proxIt_vec
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ProxyItems\ProxyItems.sqf at line 10](../../../Src/client/ProxyItems/ProxyItems.sqf#L10)
+## proxIt_def
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ProxyItems\ProxyItems.sqf at line 11](../../../Src/client/ProxyItems/ProxyItems.sqf#L11)
+## proxIt_list_selections
+
+Type: Variable
+
+Description: 
+
+
+File: [client\ProxyItems\ProxyItems.sqf at line 12](../../../Src/client/ProxyItems/ProxyItems.sqf#L12)
 ## proxIt_prepName
 
 Type: function

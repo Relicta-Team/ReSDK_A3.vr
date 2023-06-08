@@ -32,7 +32,7 @@ File: [host\Networking\Network.hpp at line 10](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> <font size="5">Exists if **ENABLE_LAG_NETWORK** defined</font>
+> Exists if **ENABLE_LAG_NETWORK** defined
 
 Description: 
 - Param: var
@@ -47,7 +47,7 @@ File: [host\Networking\Network.hpp at line 13](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> <font size="5">Exists if **ENABLE_LAG_NETWORK** defined</font>
+> Exists if **ENABLE_LAG_NETWORK** defined
 
 Description: 
 - Param: ind
@@ -61,7 +61,7 @@ File: [host\Networking\Network.hpp at line 14](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> <font size="5">Exists if **ENABLE_LAG_NETWORK** defined</font>
+> Exists if **ENABLE_LAG_NETWORK** defined
 
 Description: 
 - Param: obj
@@ -77,7 +77,7 @@ File: [host\Networking\Network.hpp at line 15](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> <font size="5">Exists if **ENABLE_LAG_NETWORK** not defined</font>
+> Exists if **ENABLE_LAG_NETWORK** not defined
 
 Description: 
 - Param: var
@@ -92,7 +92,7 @@ File: [host\Networking\Network.hpp at line 17](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> <font size="5">Exists if **ENABLE_LAG_NETWORK** not defined</font>
+> Exists if **ENABLE_LAG_NETWORK** not defined
 
 Description: 
 - Param: obj
@@ -108,7 +108,7 @@ File: [host\Networking\Network.hpp at line 18](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 - Param: var
@@ -125,7 +125,7 @@ File: [host\Networking\Network.hpp at line 22](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> <font size="5">Exists if **net_log** defined</font>
+> Exists if **net_log** defined
 
 Description: 
 - Param: mes
@@ -140,7 +140,7 @@ File: [host\Networking\Network.sqf at line 12](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> <font size="5">Exists if **net_log** not defined</font>
+> Exists if **net_log** not defined
 
 Description: 
 - Param: mes

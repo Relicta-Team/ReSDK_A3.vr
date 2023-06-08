@@ -28,7 +28,7 @@ File: [host\ServerInteraction\ServerInteractionInit.sqf at line 234](../../../Sr
 
 Type: constant
 
-> <font size="5">Exists if **SI_THROW_DEBUG** defined</font>
+> Exists if **SI_THROW_DEBUG** defined
 
 Description: 
 - Param: data
@@ -42,7 +42,7 @@ File: [host\ServerInteraction\ServerInteractionInit.sqf at line 240](../../../Sr
 
 Type: constant
 
-> <font size="5">Exists if **SI_THROW_DEBUG** defined</font>
+> Exists if **SI_THROW_DEBUG** defined
 
 Description: 
 - Param: p
@@ -59,7 +59,7 @@ File: [host\ServerInteraction\ServerInteractionInit.sqf at line 241](../../../Sr
 
 Type: constant
 
-> <font size="5">Exists if **SI_THROW_DEBUG** not defined</font>
+> Exists if **SI_THROW_DEBUG** not defined
 
 Description: 
 - Param: data
@@ -73,7 +73,7 @@ File: [host\ServerInteraction\ServerInteractionInit.sqf at line 246](../../../Sr
 
 Type: constant
 
-> <font size="5">Exists if **SI_THROW_DEBUG** not defined</font>
+> Exists if **SI_THROW_DEBUG** not defined
 
 Description: 
 - Param: p
@@ -89,7 +89,7 @@ File: [host\ServerInteraction\ServerInteractionInit.sqf at line 247](../../../Sr
 
 Type: constant
 
-> <font size="5">Exists if **SH_DEBUG_SHOTGUN** defined</font>
+> Exists if **SH_DEBUG_SHOTGUN** defined
 
 Description: 
 - Param: txt
@@ -104,7 +104,7 @@ File: [host\ServerInteraction\ServerInteractionInit.sqf at line 453](../../../Sr
 
 Type: constant
 
-> <font size="5">Exists if **SH_DEBUG_SHOTGUN** not defined</font>
+> Exists if **SH_DEBUG_SHOTGUN** not defined
 
 Description: 
 - Param: txt
@@ -115,6 +115,14 @@ Replaced value:
 
 ```
 File: [host\ServerInteraction\ServerInteractionInit.sqf at line 455](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L455)
+## si_internal_rayObject
+
+Type: Variable
+
+Description: Общий объект рэйкаста. Арма у нас в одном потоке так что боятся нечего
+
+
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 69](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L69)
 ## si_throwingProcess
 
 Type: function
@@ -240,6 +248,62 @@ Replaced value:
 (interact_map_secondPass getOrDefault [toLower(getModelInfo (obj) select 1),true])
 ```
 File: [host\ServerInteraction\ServerInteractionShared.sqf at line 15](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L15)
+## interact_map_secondPass
+
+Type: Variable
+
+Description: Публичные данные
+
+
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 10](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L10)
+## interact_throwlist
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 17](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L17)
+## interact_th_map_codeAssoc
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 218](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L218)
+## interact_th_delegates
+
+Type: Variable
+
+Description: mode -> vec2: success fly, intersection
+
+
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 221](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L221)
+## interact_shassoc_idx
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 296](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L296)
+## interact_map_shassoc_keyint
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 297](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L297)
+## interact_map_shassoc_keystr
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 298](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L298)
 ## interact_th_getItscData
 
 Type: function
@@ -309,6 +373,42 @@ Replaced value:
 
 ```
 File: [host\ServerInteraction\ServerInteractionTests.sqf at line 8](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L8)
+## si_debug_tracelineobjs
+
+Type: Variable
+
+> Exists if **SI_DEBUG_TRACELINE** defined
+
+Description: 
+
+
+File: [host\ServerInteraction\ServerInteractionTests.sqf at line 12](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L12)
+## si_debug_obj
+
+Type: Variable
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+File: [host\ServerInteraction\ServerInteractionTests.sqf at line 97](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L97)
+## si_debug_task
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ServerInteraction\ServerInteractionTests.sqf at line 98](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L98)
+## si_debug_olist
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ServerInteraction\ServerInteractionTests.sqf at line 103](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L103)
 ## si_makeline
 
 Type: function
@@ -324,7 +424,7 @@ File: [host\ServerInteraction\ServerInteractionTests.sqf at line 19](../../../Sr
 
 Type: function
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 
@@ -334,7 +434,7 @@ File: [host\ServerInteraction\ServerInteractionTests.sqf at line 53](../../../Sr
 
 Type: function
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: DEPRECATED
 
@@ -344,7 +444,7 @@ File: [host\ServerInteraction\ServerInteractionTests.sqf at line 58](../../../Sr
 
 Type: function
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 - Param: _sp
@@ -356,7 +456,7 @@ File: [host\ServerInteraction\ServerInteractionTests.sqf at line 105](../../../S
 
 Type: function
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 - Param: _basepos
@@ -370,7 +470,7 @@ File: [host\ServerInteraction\ServerInteractionTests.sqf at line 125](../../../S
 
 Type: function
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 
@@ -380,7 +480,7 @@ File: [host\ServerInteraction\ServerInteractionTests.sqf at line 153](../../../S
 
 Type: function
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 
@@ -390,7 +490,7 @@ File: [host\ServerInteraction\ServerInteractionTests.sqf at line 176](../../../S
 
 Type: function
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: ACTUAL
 - Param: _model
@@ -406,7 +506,7 @@ File: [host\ServerInteraction\ServerInteractionTests.sqf at line 196](../../../S
 
 Type: function
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: common funcs
 
@@ -414,6 +514,14 @@ Description: common funcs
 File: [host\ServerInteraction\ServerInteractionTests.sqf at line 245](../../../Src/host/ServerInteraction/ServerInteractionTests.sqf#L245)
 # ServerInteraction_Collision.sqf
 
+## si_collision_onUpdate_handle
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ServerInteraction\ServerInteraction_Collision.sqf at line 23](../../../Src/host/ServerInteraction/ServerInteraction_Collision.sqf#L23)
 ## si_collision_onUpdate
 
 Type: function

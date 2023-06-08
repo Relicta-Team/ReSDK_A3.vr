@@ -65,6 +65,14 @@ Replaced value:
 type##Log = { [format _this, 'type'] call logger_action};
 ```
 File: [host\Logger\Logger_init.sqf at line 54](../../../Src/host/Logger/Logger_init.sqf#L54)
+## logger_internal_map
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Logger\Logger_init.sqf at line 41](../../../Src/host/Logger/Logger_init.sqf#L41)
 ## Log
 
 Type: function

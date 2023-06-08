@@ -216,3 +216,13 @@ Description:
 
 
 File: [client\LocalEffects\LocalEffects_init.sqf at line 67](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L67)
+# LocalEffects_list.sqf
+
+## vst_human_stealth_allowStepsounds
+
+Type: Variable
+
+Description: 
+
+
+File: [client\LocalEffects\LocalEffects_list.sqf at line 56](../../../Src/client/LocalEffects/LocalEffects_list.sqf#L56)

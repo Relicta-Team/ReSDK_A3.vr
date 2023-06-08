@@ -1479,6 +1479,14 @@ if (_attTargetZone in [zones]) exitWith {ifcheck(_isAimed,MOD(_modif,aimmodif),M
 File: [host\CombatSystem\MeeleWeapon.sqf at line 191](../../../Src/host/CombatSystem/MeeleWeapon.sqf#L191)
 # RuntimeWeaponModulesGenerator.sqf
 
+## cs_runtime_map_modules
+
+Type: Variable
+
+Description: 
+
+
+File: [host\CombatSystem\RuntimeWeaponModulesGenerator.sqf at line 25](../../../Src/host/CombatSystem/RuntimeWeaponModulesGenerator.sqf#L25)
 ## cs_runtime_internal_generate
 
 Type: function

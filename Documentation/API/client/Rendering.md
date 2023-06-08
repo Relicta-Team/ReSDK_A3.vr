@@ -12,6 +12,30 @@ Replaced value:
 setViewDistance (dist); setObjectViewDistance (dist)
 ```
 File: [client\Rendering\RenderDistance.sqf at line 13](../../../Src/client/Rendering/RenderDistance.sqf#L13)
+## render_dist_handle
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\RenderDistance.sqf at line 7](../../../Src/client/Rendering/RenderDistance.sqf#L7)
+## render_dist_maxDistance
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\RenderDistance.sqf at line 8](../../../Src/client/Rendering/RenderDistance.sqf#L8)
+## render_dist_minDistance
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\RenderDistance.sqf at line 9](../../../Src/client/Rendering/RenderDistance.sqf#L9)
 ## render_dist_onupdate
 
 Type: function
@@ -141,6 +165,78 @@ Replaced value:
 -(val)
 ```
 File: [client\Rendering\Camera\CameraControl.sqf at line 261](../../../Src/client/Rendering/Camera/CameraControl.sqf#L261)
+## cam_isEnabled
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Camera\CameraControl.sqf at line 16](../../../Src/client/Rendering/Camera/CameraControl.sqf#L16)
+## cam_defaultPos
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Camera\CameraControl.sqf at line 17](../../../Src/client/Rendering/Camera/CameraControl.sqf#L17)
+## cam_lastPlayerObject
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Camera\CameraControl.sqf at line 18](../../../Src/client/Rendering/Camera/CameraControl.sqf#L18)
+## cam_updateDelay
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Camera\CameraControl.sqf at line 19](../../../Src/client/Rendering/Camera/CameraControl.sqf#L19)
+## cam_currentCamera
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Camera\CameraControl.sqf at line 27](../../../Src/client/Rendering/Camera/CameraControl.sqf#L27)
+## cam_object
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Camera\CameraControl.sqf at line 25](../../../Src/client/Rendering/Camera/CameraControl.sqf#L25)
+## cam_fixedObject
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Camera\CameraControl.sqf at line 26](../../../Src/client/Rendering/Camera/CameraControl.sqf#L26)
+## cam_viewMode
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Camera\CameraControl.sqf at line 29](../../../Src/client/Rendering/Camera/CameraControl.sqf#L29)
+## cam_isNewCamera
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Camera\CameraControl.sqf at line 45](../../../Src/client/Rendering/Camera/CameraControl.sqf#L45)
 ## cam_setCameraOnPlayer
 
 Type: function
@@ -247,6 +343,14 @@ Replaced value:
 _conv = linearConversion [_addTime, _left, tickTime, var*70/100, 0]; var = _conv
 ```
 File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 88](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L88)
+## cam_camShake_internal_handler
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 128](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L128)
 ## cam_camShake_resetAll
 
 Type: function
@@ -284,6 +388,14 @@ Description:
 File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 32](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L32)
 # Camera_ShakeDefs.sqf
 
+## cam_camshake_map
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Camera\Camera_ShakeDefs.sqf at line 18](../../../Src/client/Rendering/Camera/Camera_ShakeDefs.sqf#L18)
 ## cam_getCamShakeConfig
 
 Type: function
@@ -327,6 +439,30 @@ Replaced value:
 ("#particlesource" createVehicleLocal [0,0,0])
 ```
 File: [client\Rendering\Effects\Effects_init.sqf at line 9](../../../Src/client/Rendering/Effects/Effects_init.sqf#L9)
+## render_effects_lastPlayer
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Effects\Effects_init.sqf at line 11](../../../Src/client/Rendering/Effects/Effects_init.sqf#L11)
+## render_effects_dustParticles
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Effects\Effects_init.sqf at line 12](../../../Src/client/Rendering/Effects/Effects_init.sqf#L12)
+## render_effects_dustGlob
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\Effects\Effects_init.sqf at line 13](../../../Src/client/Rendering/Effects/Effects_init.sqf#L13)
 ## render_effects_init
 
 Type: function
@@ -365,7 +501,7 @@ File: [client\Rendering\HDR\HDRInit.sqf at line 8](../../../Src/client/Rendering
 
 Type: function
 
-> <font size="5">Exists if **HDR_DYNAMIC_ENABLED** defined</font>
+> Exists if **HDR_DYNAMIC_ENABLED** defined
 
 Description: underground, world
 
@@ -521,6 +657,30 @@ vec2(__EFFECT_NAME,__args)
 File: [client\Rendering\PostProcessing\postprocessing.h at line 26](../../../Src/client/Rendering/PostProcessing/postprocessing.h#L26)
 # PPInit.sqf
 
+## pp_buffer_efx
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 21](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L21)
+## pp_allEffects
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 22](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L22)
+## pp_uniIndex
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 23](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L23)
 ## pp_reload
 
 Type: function

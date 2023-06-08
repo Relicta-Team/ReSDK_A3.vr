@@ -603,7 +603,7 @@ File: [client\LightEngine\LightEngine.h at line 138](../../../Src/client/LightEn
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 - Param: strval
@@ -617,7 +617,7 @@ File: [client\LightEngine\LightEngine.h at line 142](../../../Src/client/LightEn
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** not defined</font>
+> Exists if **EDITOR** not defined
 
 Description: 
 - Param: strval
@@ -1246,6 +1246,22 @@ Replaced value:
 (format["G:%1 -> L:%2",_hash,_localHash])
 ```
 File: [client\LightEngine\LightEngine_mainThread.sqf at line 51](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L51)
+## le_lastChunkItem
+
+Type: Variable
+
+Description: 
+
+
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 7](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L7)
+## le_lastChunkStructure
+
+Type: Variable
+
+Description: 
+
+
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 8](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L8)
 ## le_onUpdate
 
 Type: function
@@ -1403,6 +1419,32 @@ Replaced value:
 0.05
 ```
 File: [client\LightEngine\LightRender.sqf at line 162](../../../Src/client/LightEngine/LightRender.sqf#L162)
+## le_list_changevis
+
+Type: Variable
+
+Description: structs in type: src,lt,curview,
+
+
+File: [client\LightEngine\LightRender.sqf at line 28](../../../Src/client/LightEngine/LightRender.sqf#L28)
+## le_render_handleState
+
+Type: Variable
+
+> Exists if **NEW_ALGORITHM_LIGHT_RENDERING** defined
+
+Description: 
+
+
+File: [client\LightEngine\LightRender.sqf at line 306](../../../Src/client/LightEngine/LightRender.sqf#L306)
+## le_render_handleUpdate
+
+Type: Variable
+
+Description: 
+
+
+File: [client\LightEngine\LightRender.sqf at line 309](../../../Src/client/LightEngine/LightRender.sqf#L309)
 ## le_initRenderer
 
 Type: function
@@ -1498,8 +1540,74 @@ Replaced value:
 2103
 ```
 File: [client\LightEngine\ScriptedEffects.hpp at line 9](../../../Src/client/LightEngine/ScriptedEffects.hpp#L9)
+## SLIGHT_MAGICSTORM_DEBUG_var
+
+Type: Variable
+
+> Exists if **SCRIPT_EMIT_EVAL_SERVER** defined
+
+Description: 
+
+
+File: [client\LightEngine\ScriptedEffects.hpp at line 13](../../../Src/client/LightEngine/ScriptedEffects.hpp#L13)
+## SLIGHT_SET123_DEBUG_var
+
+Type: Variable
+
+Description: 
+
+
+File: [client\LightEngine\ScriptedEffects.hpp at line 14](../../../Src/client/LightEngine/ScriptedEffects.hpp#L14)
+## SLIGHT_TEMPLATE_DIRECTLIGHT_var
+
+Type: Variable
+
+Description: 
+
+
+File: [client\LightEngine\ScriptedEffects.hpp at line 15](../../../Src/client/LightEngine/ScriptedEffects.hpp#L15)
+## SLIGHT_TEMPLATE_POINTLIGHT_var
+
+Type: Variable
+
+Description: 
+
+
+File: [client\LightEngine\ScriptedEffects.hpp at line 16](../../../Src/client/LightEngine/ScriptedEffects.hpp#L16)
 # ScriptedEffects.sqf
 
+## le_se_map
+
+Type: Variable
+
+Description: place this file before all configs
+
+
+File: [client\LightEngine\ScriptedEffects.sqf at line 10](../../../Src/client/LightEngine/ScriptedEffects.sqf#L10)
+## le_se_noattr
+
+Type: Variable
+
+Description: 
+
+
+File: [client\LightEngine\ScriptedEffects.sqf at line 11](../../../Src/client/LightEngine/ScriptedEffects.sqf#L11)
+## le_se_cfgRange
+
+Type: Variable
+
+Description: 
+
+
+File: [client\LightEngine\ScriptedEffects.sqf at line 12](../../../Src/client/LightEngine/ScriptedEffects.sqf#L12)
+## le_se_mapHandlers
+
+Type: Variable
+
+Description: 
+
+
+File: [client\LightEngine\ScriptedEffects.sqf at line 77](../../../Src/client/LightEngine/ScriptedEffects.sqf#L77)
 ## le_se_handleConfig
 
 Type: function
@@ -1761,3 +1869,13 @@ Description:
 - Param: _addY (optional, default 0)
 
 File: [client\LightEngine\ShotableConfigs\Bullets.sqf at line 32](../../../Src/client/LightEngine/ShotableConfigs/Bullets.sqf#L32)
+# Stealth.sqf
+
+## vst_human_stealth_allowStepsounds
+
+Type: Variable
+
+Description: 
+
+
+File: [client\LightEngine\VisualStates\Stealth.sqf at line 7](../../../Src/client/LightEngine/VisualStates/Stealth.sqf#L7)

@@ -120,6 +120,70 @@ Replaced value:
 (craft_widgets set [2,_refer])
 ```
 File: [client\CraftMenu\craftmeun_init.sqf at line 27](../../../Src/client/CraftMenu/craftmeun_init.sqf#L27)
+## craft_cxtRpcSourcePtr
+
+Type: Variable
+
+Description: 
+
+
+File: [client\CraftMenu\craftmeun_init.sqf at line 29](../../../Src/client/CraftMenu/craftmeun_init.sqf#L29)
+## isCraftOpen
+
+Type: Variable
+
+Description: 
+
+
+File: [client\CraftMenu\craftmeun_init.sqf at line 31](../../../Src/client/CraftMenu/craftmeun_init.sqf#L31)
+## craft_widgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\CraftMenu\craftmeun_init.sqf at line 33](../../../Src/client/CraftMenu/craftmeun_init.sqf#L33)
+## craft_isActiveCraftButton
+
+Type: Variable
+
+Description: 
+
+
+File: [client\CraftMenu\craftmeun_init.sqf at line 34](../../../Src/client/CraftMenu/craftmeun_init.sqf#L34)
+## craft_attributes
+
+Type: Variable
+
+Description: 
+
+
+File: [client\CraftMenu\craftmeun_init.sqf at line 35](../../../Src/client/CraftMenu/craftmeun_init.sqf#L35)
+## craft_lastPressedRecipeID
+
+Type: Variable
+
+Description: 
+
+
+File: [client\CraftMenu\craftmeun_init.sqf at line 37](../../../Src/client/CraftMenu/craftmeun_init.sqf#L37)
+## craft_loadCateg_isLoading
+
+Type: Variable
+
+Description: 
+
+
+File: [client\CraftMenu\craftmeun_init.sqf at line 39](../../../Src/client/CraftMenu/craftmeun_init.sqf#L39)
+## craft_loadCateg_lastLoadingTime
+
+Type: Variable
+
+Description: 
+
+
+File: [client\CraftMenu\craftmeun_init.sqf at line 40](../../../Src/client/CraftMenu/craftmeun_init.sqf#L40)
 ## craft_open
 
 Type: function

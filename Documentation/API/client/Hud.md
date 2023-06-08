@@ -63,6 +63,30 @@ Replaced value:
 _w setVariable [#var,val]
 ```
 File: [client\Hud\Hud_init.sqf at line 19](../../../Src/client/Hud/Hud_init.sqf#L19)
+## hud_vars
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Hud\Hud_init.sqf at line 21](../../../Src/client/Hud/Hud_init.sqf#L21)
+## hud_map_defaultValues
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Hud\Hud_init.sqf at line 23](../../../Src/client/Hud/Hud_init.sqf#L23)
+## hud_map_widgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Hud\Hud_init.sqf at line 24](../../../Src/client/Hud/Hud_init.sqf#L24)
 ## hud_combStyle_onCombatUpdate
 
 Type: function

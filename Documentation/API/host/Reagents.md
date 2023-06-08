@@ -396,6 +396,14 @@ Replaced value:
 endclass
 ```
 File: [host\Reagents\Reactions\Reaction.sqf at line 43](../../../Src/host/Reagents/Reactions/Reaction.sqf#L43)
+## reagentsystem_reactions_counter
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Reagents\Reactions\Reaction.sqf at line 7](../../../Src/host/Reagents/Reactions/Reaction.sqf#L7)
 # ReagentsAll.sqf
 
 ## defchem(__class,txtpropval)

@@ -1,3 +1,13 @@
+# Debug.sqf
+
+## this
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ServerSceneTest\Debug.sqf at line 7](../../../Src/host/ServerSceneTest/Debug.sqf#L7)
 # serverscrene_init.sqf
 
 ## vecForward(bias)
@@ -60,6 +70,22 @@ Replaced value:
 rand(-randDist_chunk,randDist_chunk)
 ```
 File: [host\ServerSceneTest\serverscrene_init.sqf at line 406](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L406)
+## memcloth
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ServerSceneTest\serverscrene_init.sqf at line 410](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L410)
+## memplay
+
+Type: Variable
+
+Description: 
+
+
+File: [host\ServerSceneTest\serverscrene_init.sqf at line 411](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L411)
 ## tptomap
 
 Type: function
@@ -88,7 +114,7 @@ File: [host\ServerSceneTest\serverscrene_init.sqf at line 33](../../../Src/host/
 
 Type: function
 
-> <font size="5">Exists if **ENABLE_LAG_NETWORK** defined</font>
+> Exists if **ENABLE_LAG_NETWORK** defined
 
 Description: 
 

@@ -151,7 +151,7 @@ File: [host\UnitTests\UnitTest.h at line 28](../../../Src/host/UnitTests/UnitTes
 
 Type: constant
 
-> <font size="5">Exists if **unit_test_enabled** defined</font>
+> Exists if **unit_test_enabled** defined
 
 Description: 
 - Param: name
@@ -167,7 +167,7 @@ File: [host\UnitTests\UnitTest.h at line 31](../../../Src/host/UnitTests/UnitTes
 
 Type: constant
 
-> <font size="5">Exists if **unit_test_enabled** not defined</font>
+> Exists if **unit_test_enabled** not defined
 
 Description: 
 - Param: name

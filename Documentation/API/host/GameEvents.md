@@ -12,6 +12,14 @@ Replaced value:
 gameEvents_internal_list_interfaces pushBack (tolower #name); class(name)
 ```
 File: [host\GameEvents\loader.hpp at line 13](../../../Src/host/GameEvents/loader.hpp#L13)
+## gameEvents_internal_list_interfaces
+
+Type: Variable
+
+Description: 
+
+
+File: [host\GameEvents\loader.hpp at line 15](../../../Src/host/GameEvents/loader.hpp#L15)
 ## gameEvents_sys_getAllEventTypes
 
 Type: function

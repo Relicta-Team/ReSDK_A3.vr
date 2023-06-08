@@ -40,6 +40,22 @@ _client
 File: [host\Medals\Medals.h at line 12](../../../Src/host/Medals/Medals.h#L12)
 # Medals_init.sqf
 
+## medl_map
+
+Type: Variable
+
+Description: achievements system
+
+
+File: [host\Medals\Medals_init.sqf at line 15](../../../Src/host/Medals/Medals_init.sqf#L15)
+## medl_register
+
+Type: Variable
+
+Description: 
+
+
+File: [host\Medals\Medals_init.sqf at line 18](../../../Src/host/Medals/Medals_init.sqf#L18)
 ## medl_check
 
 Type: function

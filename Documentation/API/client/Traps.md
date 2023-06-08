@@ -1,5 +1,13 @@
 # TrapsInit.sqf
 
+## traps_hashSet_pointers
+
+Type: Variable
+
+Description: first clear prev
+
+
+File: [client\Traps\TrapsInit.sqf at line 27](../../../Src/client/Traps/TrapsInit.sqf#L27)
 ## traps_resyncAllTraps
 
 Type: function

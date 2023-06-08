@@ -243,6 +243,14 @@ Replaced value:
 _xp + ((_wp + _biasW) * DEMAP(INV_HAND_R,0)) + _wp,_yp + ((_hp + SLOT_BIASH) * DEMAP(INV_HAND_R,1)) + _hp
 ```
 File: [client\Inventory\functions.sqf at line 421](../../../Src/client/Inventory/functions.sqf#L421)
+## inventory_isGlobalVisible
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Inventory\functions.sqf at line 104](../../../Src/client/Inventory/functions.sqf#L104)
 ## inventory_init
 
 Type: function
@@ -460,7 +468,7 @@ File: [client\Inventory\functions.sqf at line 801](../../../Src/client/Inventory
 
 Type: function
 
-> <font size="5">Exists if **INVENTORY_USE_NEW_RENDER_ICONS** defined</font>
+> Exists if **INVENTORY_USE_NEW_RENDER_ICONS** defined
 
 Description: 
 - Param: _wid
@@ -1325,7 +1333,7 @@ File: [client\Inventory\helpers.hpp at line 130](../../../Src/client/Inventory/h
 
 Type: constant
 
-> <font size="5">Exists if **INVENTORY_LOG** defined</font>
+> Exists if **INVENTORY_LOG** defined
 
 Description: 
 - Param: mes
@@ -1340,7 +1348,7 @@ File: [client\Inventory\helpers.hpp at line 141](../../../Src/client/Inventory/h
 
 Type: constant
 
-> <font size="5">Exists if **INVENTORY_LOG** not defined</font>
+> Exists if **INVENTORY_LOG** not defined
 
 Description: 
 - Param: mes
@@ -1619,6 +1627,62 @@ Replaced value:
 PIC_PATH("items\temp_item")
 ```
 File: [client\Inventory\inventory_init.sqf at line 11](../../../Src/client/Inventory/inventory_init.sqf#L11)
+## inventory_sloticons_default
+
+Type: Variable
+
+Description: ассоциатор путей до картинок
+
+
+File: [client\Inventory\inventory_init.sqf at line 20](../../../Src/client/Inventory/inventory_init.sqf#L20)
+## inventory_openModeSlotsId
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Inventory\inventory_init.sqf at line 32](../../../Src/client/Inventory/inventory_init.sqf#L32)
+## inventory_slotnames_default
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Inventory\inventory_init.sqf at line 36](../../../Src/client/Inventory/inventory_init.sqf#L36)
+## inventory_slotpos_map
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Inventory\inventory_init.sqf at line 38](../../../Src/client/Inventory/inventory_init.sqf#L38)
+## inventor_slot_widgets
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Inventory\inventory_init.sqf at line 50](../../../Src/client/Inventory/inventory_init.sqf#L50)
+## inventory_slotdata
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Inventory\inventory_init.sqf at line 55](../../../Src/client/Inventory/inventory_init.sqf#L55)
+## isInventoryOpen
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Inventory\inventory_init.sqf at line 57](../../../Src/client/Inventory/inventory_init.sqf#L57)
 # PreviewObject.sqf
 
 ## MAX_ONMOUSECURSOR_DROP_ANGLE
@@ -1669,6 +1733,22 @@ Replaced value:
 _visObj hideObject false; __internal_resetBackColor
 ```
 File: [client\Inventory\PreviewObject.sqf at line 52](../../../Src/client/Inventory/PreviewObject.sqf#L52)
+## inventory_previewObject
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Inventory\PreviewObject.sqf at line 18](../../../Src/client/Inventory/PreviewObject.sqf#L18)
+## inventory_lastDirPreviewObject
+
+Type: Variable
+
+Description: 
+
+
+File: [client\Inventory\PreviewObject.sqf at line 19](../../../Src/client/Inventory/PreviewObject.sqf#L19)
 ## inventory_createPreviewObject
 
 Type: function

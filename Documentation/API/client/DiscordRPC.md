@@ -126,7 +126,7 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 114](../../../Src/client/Di
 
 Type: function
 
-> <font size="5">Exists if **USE_LOCALES** defined</font>
+> Exists if **USE_LOCALES** defined
 
 Description: 
 - Param: _l

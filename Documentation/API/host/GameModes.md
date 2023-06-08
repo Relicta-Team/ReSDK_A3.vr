@@ -35,7 +35,7 @@ File: [host\GameModes\BasicDefines.sqf at line 186](../../../Src/host/GameModes/
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 
@@ -57,6 +57,22 @@ Replaced value:
 errorformat("[TASKS][%1]: %2",callSelf(getClassName) arg message); nextFrameParams({delete(_this)},this)
 ```
 File: [host\GameModes\BasicTask.sqf at line 159](../../../Src/host/GameModes/BasicTask.sqf#L159)
+## taskSystem_allTasks
+
+Type: Variable
+
+Description: 
+
+
+File: [host\GameModes\BasicTask.sqf at line 10](../../../Src/host/GameModes/BasicTask.sqf#L10)
+## taskSystem_checkedOnEndRound
+
+Type: Variable
+
+Description: 
+
+
+File: [host\GameModes\BasicTask.sqf at line 11](../../../Src/host/GameModes/BasicTask.sqf#L11)
 # CommonGameAspects.sqf
 
 ## DEFAULT_WEIGHT
@@ -83,6 +99,14 @@ Replaced value:
 server_gameAspects_list_nopicked pushBack #name; class(name)
 ```
 File: [host\GameModes\CommonGameAspects.sqf at line 10](../../../Src/host/GameModes/CommonGameAspects.sqf#L10)
+## server_gameAspects_list_nopicked
+
+Type: Variable
+
+Description: 
+
+
+File: [host\GameModes\CommonGameAspects.sqf at line 8](../../../Src/host/GameModes/CommonGameAspects.sqf#L8)
 # GameMode.h
 
 ## skill(name,val)
@@ -190,6 +214,14 @@ Replaced value:
 File: [host\GameModes\GameMode.h at line 23](../../../Src/host/GameModes/GameMode.h#L23)
 # PublicTasks.sqf
 
+## taskSystem_internal_list_generator
+
+Type: Variable
+
+Description: structure: class, handler,
+
+
+File: [host\GameModes\CommonTasks\PublicTasks.sqf at line 8](../../../Src/host/GameModes/CommonTasks/PublicTasks.sqf#L8)
 ## taskSystem_generateTask
 
 Type: function
@@ -205,7 +237,7 @@ File: [host\GameModes\CommonTasks\PublicTasks.sqf at line 19](../../../Src/host/
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 - Param: lvl
@@ -221,7 +253,7 @@ File: [host\GameModes\Detective\DetectiveModeRoles.sqf at line 348](../../../Src
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** not defined</font>
+> Exists if **EDITOR** not defined
 
 Description: 
 - Param: lvl
@@ -257,6 +289,18 @@ Description: Получает массив ролей с мобами
 
 
 File: [host\GameModes\Dirtpit\StationRoles.sqf at line 9](../../../Src/host/GameModes/Dirtpit/StationRoles.sqf#L9)
+# GM_Hunt.sqf
+
+## gmhunt_debug_canend
+
+Type: Variable
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+File: [host\GameModes\Hunt\GM_Hunt.sqf at line 106](../../../Src/host/GameModes/Hunt/GM_Hunt.sqf#L106)
 # HuntRoles.sqf
 
 ## DP

@@ -467,7 +467,7 @@ File: [host\engine.hpp at line 25](../../../Src/host/engine.hpp#L25)
 
 Type: constant
 
-> <font size="5">Exists if **ENABLE_LINE_IN_FILES** defined</font>
+> Exists if **ENABLE_LINE_IN_FILES** defined
 
 Description: 
 
@@ -481,7 +481,7 @@ File: [host\engine.hpp at line 28](../../../Src/host/engine.hpp#L28)
 
 Type: constant
 
-> <font size="5">Exists if **ENABLE_LINE_IN_FILES** not defined</font>
+> Exists if **ENABLE_LINE_IN_FILES** not defined
 
 Description: 
 
@@ -680,7 +680,7 @@ File: [host\engine.hpp at line 65](../../../Src/host/engine.hpp#L65)
 
 Type: constant
 
-> <font size="5">Exists if **__TRACE__ENABLED** defined</font>
+> Exists if **__TRACE__ENABLED** defined
 
 Description: 
 - Param: message
@@ -694,7 +694,7 @@ File: [host\engine.hpp at line 71](../../../Src/host/engine.hpp#L71)
 
 Type: constant
 
-> <font size="5">Exists if **__TRACE__ENABLED** defined</font>
+> Exists if **__TRACE__ENABLED** defined
 
 Description: 
 - Param: message
@@ -709,7 +709,7 @@ File: [host\engine.hpp at line 71](../../../Src/host/engine.hpp#L71)
 
 Type: constant
 
-> <font size="5">Exists if **__TRACE__ENABLED** defined</font>
+> Exists if **__TRACE__ENABLED** defined
 
 Description: breakpoints
 - Param: x
@@ -723,7 +723,7 @@ File: [host\engine.hpp at line 74](../../../Src/host/engine.hpp#L74)
 
 Type: constant
 
-> <font size="5">Exists if **__TRACE__ENABLED** defined</font>
+> Exists if **__TRACE__ENABLED** defined
 
 Description: breakpoints
 - Param: data
@@ -737,7 +737,7 @@ File: [host\engine.hpp at line 75](../../../Src/host/engine.hpp#L75)
 
 Type: constant
 
-> <font size="5">Exists if **__TRACE__ENABLED** not defined</font>
+> Exists if **__TRACE__ENABLED** not defined
 
 Description: 
 - Param: message
@@ -752,7 +752,7 @@ File: [host\engine.hpp at line 80](../../../Src/host/engine.hpp#L80)
 
 Type: constant
 
-> <font size="5">Exists if **__TRACE__ENABLED** not defined</font>
+> Exists if **__TRACE__ENABLED** not defined
 
 Description: breakpoints
 - Param: x
@@ -930,7 +930,7 @@ File: [host\engine.hpp at line 113](../../../Src/host/engine.hpp#L113)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -944,7 +944,7 @@ File: [host\engine.hpp at line 119](../../../Src/host/engine.hpp#L119)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_REGEX_ON_FILE** defined</font>
+> Exists if **DISABLE_REGEX_ON_FILE** defined
 
 Description: 
 - Param: path
@@ -958,7 +958,7 @@ File: [host\engine.hpp at line 125](../../../Src/host/engine.hpp#L125)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_REGEX_ON_FILE** defined</font>
+> Exists if **DISABLE_REGEX_ON_FILE** defined
 
 Description: 
 - Param: path
@@ -973,7 +973,7 @@ File: [host\engine.hpp at line 127](../../../Src/host/engine.hpp#L127)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_REGEX_ON_FILE** defined</font>
+> Exists if **DISABLE_REGEX_ON_FILE** defined
 
 Description: 
 - Param: path
@@ -989,7 +989,7 @@ File: [host\engine.hpp at line 130](../../../Src/host/engine.hpp#L130)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_REGEX_ON_FILE** not defined</font>
+> Exists if **DISABLE_REGEX_ON_FILE** not defined
 
 Description: 
 - Param: path
@@ -1003,7 +1003,7 @@ File: [host\engine.hpp at line 134](../../../Src/host/engine.hpp#L134)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_REGEX_ON_FILE** not defined</font>
+> Exists if **DISABLE_REGEX_ON_FILE** not defined
 
 Description: 
 - Param: path
@@ -1019,7 +1019,7 @@ File: [host\engine.hpp at line 136](../../../Src/host/engine.hpp#L136)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_REGEX_ON_FILE** not defined</font>
+> Exists if **DISABLE_REGEX_ON_FILE** not defined
 
 Description: 
 - Param: path
@@ -1037,7 +1037,7 @@ File: [host\engine.hpp at line 140](../../../Src/host/engine.hpp#L140)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 - Param: text
@@ -1051,7 +1051,7 @@ File: [host\engine.hpp at line 148](../../../Src/host/engine.hpp#L148)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 - Param: path
@@ -1067,7 +1067,7 @@ File: [host\engine.hpp at line 150](../../../Src/host/engine.hpp#L150)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 - Param: data
@@ -1081,7 +1081,7 @@ File: [host\engine.hpp at line 154](../../../Src/host/engine.hpp#L154)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -1095,7 +1095,7 @@ File: [host\engine.hpp at line 157](../../../Src/host/engine.hpp#L157)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -1109,7 +1109,7 @@ File: [host\engine.hpp at line 158](../../../Src/host/engine.hpp#L158)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -1123,7 +1123,7 @@ File: [host\engine.hpp at line 160](../../../Src/host/engine.hpp#L160)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -1137,7 +1137,7 @@ File: [host\engine.hpp at line 162](../../../Src/host/engine.hpp#L162)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -1151,7 +1151,7 @@ File: [host\engine.hpp at line 163](../../../Src/host/engine.hpp#L163)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -1165,7 +1165,7 @@ File: [host\engine.hpp at line 164](../../../Src/host/engine.hpp#L164)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -1179,7 +1179,7 @@ File: [host\engine.hpp at line 165](../../../Src/host/engine.hpp#L165)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: for randInt
 
@@ -1193,7 +1193,7 @@ File: [host\engine.hpp at line 167](../../../Src/host/engine.hpp#L167)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -1207,7 +1207,7 @@ File: [host\engine.hpp at line 169](../../../Src/host/engine.hpp#L169)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** not defined</font>
+> Exists if **_SQFVM** not defined
 
 Description: 
 - Param: text
@@ -1221,7 +1221,7 @@ File: [host\engine.hpp at line 171](../../../Src/host/engine.hpp#L171)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** not defined</font>
+> Exists if **_SQFVM** not defined
 
 Description: 
 - Param: data
@@ -1235,7 +1235,7 @@ File: [host\engine.hpp at line 172](../../../Src/host/engine.hpp#L172)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** not defined</font>
+> Exists if **_SQFVM** not defined
 
 Description: 
 
@@ -1249,7 +1249,7 @@ File: [host\engine.hpp at line 174](../../../Src/host/engine.hpp#L174)
 
 Type: constant
 
-> <font size="5">Exists if **__GH_ACTION** defined</font>
+> Exists if **__GH_ACTION** defined
 
 Description: 
 - Param: text
@@ -3029,7 +3029,7 @@ File: [host\engine.hpp at line 538](../../../Src/host/engine.hpp#L538)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_POINTER_CRIPT** defined</font>
+> Exists if **DISABLE_POINTER_CRIPT** defined
 
 Description: 
 
@@ -3043,7 +3043,7 @@ File: [host\engine.hpp at line 550](../../../Src/host/engine.hpp#L550)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_POINTER_CRIPT** defined</font>
+> Exists if **DISABLE_POINTER_CRIPT** defined
 
 Description: 
 - Param: val
@@ -3057,7 +3057,7 @@ File: [host\engine.hpp at line 551](../../../Src/host/engine.hpp#L551)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_POINTER_CRIPT** not defined</font>
+> Exists if **DISABLE_POINTER_CRIPT** not defined
 
 Description: 
 
@@ -3083,7 +3083,7 @@ File: [host\engine.hpp at line 558](../../../Src/host/engine.hpp#L558)
 
 Type: constant
 
-> <font size="5">Exists if **DATA_MANAGER_ENABLED** defined</font>
+> Exists if **DATA_MANAGER_ENABLED** defined
 
 Description: определяем имя модуля
 - Param: name
@@ -3097,7 +3097,7 @@ File: [host\engine.hpp at line 565](../../../Src/host/engine.hpp#L565)
 
 Type: constant
 
-> <font size="5">Exists if **DATA_MANAGER_ENABLED** defined</font>
+> Exists if **DATA_MANAGER_ENABLED** defined
 
 Description: 
 - Param: var
@@ -3111,7 +3111,7 @@ File: [host\engine.hpp at line 567](../../../Src/host/engine.hpp#L567)
 
 Type: constant
 
-> <font size="5">Exists if **DATA_MANAGER_ENABLED** defined</font>
+> Exists if **DATA_MANAGER_ENABLED** defined
 
 Description: 
 - Param: var
@@ -3125,7 +3125,7 @@ File: [host\engine.hpp at line 568](../../../Src/host/engine.hpp#L568)
 
 Type: constant
 
-> <font size="5">Exists if **DATA_MANAGER_ENABLED** defined</font>
+> Exists if **DATA_MANAGER_ENABLED** defined
 
 Description: register for type-safety variable
 - Param: var
@@ -3140,7 +3140,7 @@ File: [host\engine.hpp at line 583](../../../Src/host/engine.hpp#L583)
 
 Type: constant
 
-> <font size="5">Exists if **DATA_MANAGER_ENABLED** defined</font>
+> Exists if **DATA_MANAGER_ENABLED** defined
 
 Description: 
 - Param: var
@@ -3154,7 +3154,7 @@ File: [host\engine.hpp at line 584](../../../Src/host/engine.hpp#L584)
 
 Type: constant
 
-> <font size="5">Exists if **DATA_MANAGER_ENABLED** defined</font>
+> Exists if **DATA_MANAGER_ENABLED** defined
 
 Description: 
 - Param: var
@@ -3168,7 +3168,7 @@ File: [host\engine.hpp at line 585](../../../Src/host/engine.hpp#L585)
 
 Type: constant
 
-> <font size="5">Exists if **DATA_MANAGER_ENABLED** defined</font>
+> Exists if **DATA_MANAGER_ENABLED** defined
 
 Description: 
 - Param: var
@@ -3182,7 +3182,7 @@ File: [host\engine.hpp at line 586](../../../Src/host/engine.hpp#L586)
 
 Type: constant
 
-> <font size="5">Exists if **DATA_MANAGER_ENABLED** defined</font>
+> Exists if **DATA_MANAGER_ENABLED** defined
 
 Description: 
 - Param: var
@@ -3196,7 +3196,7 @@ File: [host\engine.hpp at line 587](../../../Src/host/engine.hpp#L587)
 
 Type: constant
 
-> <font size="5">Exists if **DATA_MANAGER_ENABLED** defined</font>
+> Exists if **DATA_MANAGER_ENABLED** defined
 
 Description: 
 - Param: var
@@ -3222,7 +3222,7 @@ File: [host\engine.hpp at line 591](../../../Src/host/engine.hpp#L591)
 
 Type: constant
 
-> <font size="5">Exists if **ENABLE_EXIT_ON_ASSERT** not defined</font>
+> Exists if **ENABLE_EXIT_ON_ASSERT** not defined
 
 Description: 
 
@@ -3311,7 +3311,7 @@ File: [host\engine.hpp at line 603](../../../Src/host/engine.hpp#L603)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_REGEX_ON_FILE** defined</font>
+> Exists if **DISABLE_REGEX_ON_FILE** defined
 
 Description: 
 
@@ -3325,7 +3325,7 @@ File: [host\engine.hpp at line 607](../../../Src/host/engine.hpp#L607)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_ASSERT** defined</font>
+> Exists if **DISABLE_ASSERT** defined
 
 Description: 
 - Param: _cond
@@ -3339,7 +3339,7 @@ File: [host\engine.hpp at line 612](../../../Src/host/engine.hpp#L612)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_ASSERT** defined</font>
+> Exists if **DISABLE_ASSERT** defined
 
 Description: 
 - Param: code
@@ -3356,7 +3356,7 @@ File: [host\engine.hpp at line 613](../../../Src/host/engine.hpp#L613)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_ASSERT** defined</font>
+> Exists if **DISABLE_ASSERT** defined
 
 Description: assertion
 
@@ -3370,7 +3370,7 @@ File: [host\engine.hpp at line 614](../../../Src/host/engine.hpp#L614)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_ASSERT** defined</font>
+> Exists if **DISABLE_ASSERT** defined
 
 Description: 
 
@@ -3384,7 +3384,7 @@ File: [host\engine.hpp at line 615](../../../Src/host/engine.hpp#L615)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_ASSERT** defined</font>
+> Exists if **DISABLE_ASSERT** defined
 
 Description: 
 - Param: data
@@ -3398,7 +3398,7 @@ File: [host\engine.hpp at line 616](../../../Src/host/engine.hpp#L616)
 
 Type: constant
 
-> <font size="5">Exists if **DISABLE_ASSERT** defined</font>
+> Exists if **DISABLE_ASSERT** defined
 
 Description: todo assert return bool on clinet, server and editor
 - Param: _cond
@@ -3412,7 +3412,7 @@ File: [host\engine.hpp at line 611](../../../Src/host/engine.hpp#L611)
 
 Type: constant
 
-> <font size="5">Exists if **DEBUG** not defined</font>
+> Exists if **DEBUG** not defined
 
 Description: 
 - Param: _cond
@@ -3426,7 +3426,7 @@ File: [host\engine.hpp at line 622](../../../Src/host/engine.hpp#L622)
 
 Type: constant
 
-> <font size="5">Exists if **DEBUG** not defined</font>
+> Exists if **DEBUG** not defined
 
 Description: 
 - Param: code
@@ -3443,7 +3443,7 @@ File: [host\engine.hpp at line 623](../../../Src/host/engine.hpp#L623)
 
 Type: constant
 
-> <font size="5">Exists if **DEBUG** not defined</font>
+> Exists if **DEBUG** not defined
 
 Description: assertion
 
@@ -3457,7 +3457,7 @@ File: [host\engine.hpp at line 624](../../../Src/host/engine.hpp#L624)
 
 Type: constant
 
-> <font size="5">Exists if **DEBUG** not defined</font>
+> Exists if **DEBUG** not defined
 
 Description: 
 
@@ -3471,7 +3471,7 @@ File: [host\engine.hpp at line 625](../../../Src/host/engine.hpp#L625)
 
 Type: constant
 
-> <font size="5">Exists if **DEBUG** not defined</font>
+> Exists if **DEBUG** not defined
 
 Description: 
 - Param: data
@@ -3485,7 +3485,7 @@ File: [host\engine.hpp at line 626](../../../Src/host/engine.hpp#L626)
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 - Param: data__
@@ -3499,7 +3499,7 @@ File: [host\engine.hpp at line 638](../../../Src/host/engine.hpp#L638)
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** not defined</font>
+> Exists if **EDITOR** not defined
 
 Description: 
 - Param: data__
@@ -3584,6 +3584,16 @@ Replaced value:
 name = compile 'cmd'
 ```
 File: [host\engine.hpp at line 660](../../../Src/host/engine.hpp#L660)
+# init.sqf
+
+## server_loadingState
+
+Type: Variable
+
+Description: 
+
+
+File: [host\init.sqf at line 89](../../../Src/host/init.sqf#L89)
 # keyboard.hpp
 
 ## KEY_ESCAPE
@@ -5829,7 +5839,7 @@ File: [host\oop.hpp at line 16](../../../Src/host/oop.hpp#L16)
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: 
 
@@ -5843,7 +5853,7 @@ File: [host\oop.hpp at line 19](../../../Src/host/oop.hpp#L19)
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** not defined</font>
+> Exists if **EDITOR** not defined
 
 Description: 
 
@@ -5857,7 +5867,7 @@ File: [host\oop.hpp at line 21](../../../Src/host/oop.hpp#L21)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -5877,7 +5887,7 @@ File: [host\oop.hpp at line 28](../../../Src/host/oop.hpp#L28)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 - Param: ctx
@@ -5891,7 +5901,7 @@ File: [host\oop.hpp at line 36](../../../Src/host/oop.hpp#L36)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -5905,7 +5915,7 @@ File: [host\oop.hpp at line 38](../../../Src/host/oop.hpp#L38)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** not defined</font>
+> Exists if **_SQFVM** not defined
 
 Description: 
 - Param: ctx
@@ -6050,7 +6060,7 @@ File: [host\oop.hpp at line 97](../../../Src/host/oop.hpp#L97)
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** defined</font>
+> Exists if **EDITOR** defined
 
 Description: editor_attribute("atrname")
 - Param: key_s
@@ -6064,7 +6074,7 @@ File: [host\oop.hpp at line 103](../../../Src/host/oop.hpp#L103)
 
 Type: constant
 
-> <font size="5">Exists if **EDITOR** not defined</font>
+> Exists if **EDITOR** not defined
 
 Description: editor_attribute("atrname")
 - Param: key_s
@@ -7620,6 +7630,14 @@ Replaced value:
 ((obj) isequalto nullPtr)
 ```
 File: [host\oop.hpp at line 368](../../../Src/host/oop.hpp#L368)
+## name
+
+Type: Variable
+
+Description: 
+
+
+File: [host\oop.hpp at line 70](../../../Src/host/oop.hpp#L70)
 # precomiled.sqf
 
 ## __on_editor_attribute(membername,membertype)
@@ -7638,6 +7656,14 @@ if (count _editor_next_attr > 0) then { \
 };
 ```
 File: [host\precomiled.sqf at line 92](../../../Src/host/precomiled.sqf#L92)
+## pc_oop_carr_tntps
+
+Type: Variable
+
+Description: константные типы объектов. 0 - обычные называния типов, 1 - названия в редакторе
+
+
+File: [host\precomiled.sqf at line 36](../../../Src/host/precomiled.sqf#L36)
 ## pc_oop_declareClassAttr
 
 Type: function
@@ -7740,7 +7766,7 @@ File: [host\text.hpp at line 11](../../../Src/host/text.hpp#L11)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: <
 
@@ -7754,7 +7780,7 @@ File: [host\text.hpp at line 15](../../../Src/host/text.hpp#L15)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
@@ -7768,7 +7794,7 @@ File: [host\text.hpp at line 16](../../../Src/host/text.hpp#L16)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: >
 
@@ -7782,7 +7808,7 @@ File: [host\text.hpp at line 18](../../../Src/host/text.hpp#L18)
 
 Type: constant
 
-> <font size="5">Exists if **_SQFVM** defined</font>
+> Exists if **_SQFVM** defined
 
 Description: 
 
