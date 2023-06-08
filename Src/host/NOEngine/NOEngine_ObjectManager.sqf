@@ -6,7 +6,7 @@
 
 #include <..\..\client\Inventory\inventory.hpp>
 
-
+// Создание предмета в 3д пространстве
 createItemInWorld = {
 	params ['_name_str',"_pos",["_dir",random 360],["_emulDrop",true],["_vec",[0,0,1]],["_probStackSize",1]];
 
@@ -55,7 +55,7 @@ createItemInWorld = {
 	this
 };
 
-//create item in container
+// Создание предмета в контейнере
 createItemInContainer = {
 	params ["_name_str","_container",["_probStackSize",1],["_ignoreMode",""]]; 
 	//ignoremode = all,maxsize,countslots,none
@@ -116,6 +116,7 @@ createItemInContainer = {
 	_item
 };
 
+// Создание предмета в инвентаре
 createItemInInventory = {
 	params ["_name_str","_mob","_slot",["_probStackSize",1]];
 
@@ -159,6 +160,7 @@ createItemInInventory = {
 	_item
 };
 
+// Создание структуры в мире
 createStructure = {
 	params ['_name_str',"_pos",["_dir",random 360],["_emulDrop",true],["_vec",[0,0,1]]];
 
@@ -200,6 +202,7 @@ createStructure = {
 	this
 };
 
+// Удаление декора
 deleteDecor = {
 	params ["_dec"];
 	FHEADER;
@@ -214,6 +217,7 @@ deleteDecor = {
 	delete(_dec);
 };
 
+// Удаление структуры
 deleteStructure = {
 	params ["_struct"];
 	FHEADER;
@@ -228,6 +232,7 @@ deleteStructure = {
 	delete(_struct);
 };
 
+// Удаление предмета
 deleteItem = {
 	params ["_item"];
 	FHEADER;
@@ -403,6 +408,7 @@ getAllItemsOnPosition = {
 	_objRet;
 };
 
+//Возвращает всех мобов в радиусе _dist на позиции _vecPos
 getMobsOnPosition = {
 	params ["_type","_vecPos",["_dist",3],["_retAsList",false],["_retChild",false]];
 	FHEADER;
@@ -423,6 +429,7 @@ getMobsOnPosition = {
 	_objRet;
 };
 
+//Возвращает список всех мобов в мире
 getAllMobsInWorld = {
 	params ["_type",["_retChild",false]];
 	private _list = cm_allInGameMobs apply {_x getvariable "LINK"};
@@ -447,19 +454,20 @@ getZoneByName = {
 	zoneLocations_map_all getOrDefault [_this,nullPtr];
 };
 
+//TODO implement
 noe_transform_position = {
 	params ["_ptr","_newpos",["_transformAsWPos",false]];
 	//TODO...
 };
-
+//TODO implement
 noe_transform_direction = {
 
 };
-
+//TODO implement
 noe_transform_vector = {
 
 };
-
+//TODO implement
 noe_transform_all = {
 
 };

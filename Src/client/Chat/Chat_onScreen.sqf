@@ -7,6 +7,7 @@
 
 #define mlp(v) 'v'
 
+// Список селекшонов мобов
 chatos_mobSelections = [
 				mlp(neck),
 				mlp(head),
@@ -31,6 +32,7 @@ chatos_mobSelections = [
 
 #undef mlp
 
+// Ссылка на контрольную группу текстового чата
 chatos_guiCtg = [widgetNull];
 
 chatos_renderedWidgets = createHashMap;

@@ -17,6 +17,7 @@
 
 #define HOME_PROTECT if (_key == KEY_HOME) then {call displayClose};
 
+// Открыть дисплей
 displayOpen = {
 
 	if (isDisplayOpen) exitWith {displayNull};
@@ -45,6 +46,7 @@ displayOpen = {
 	_display
 };
 
+// Открыть динамический дисплей
 dynamicDisplayOpen = {
 	if (isDisplayOpen) exitWith {displayNull};
 
@@ -71,10 +73,12 @@ dynamicDisplayOpen = {
 	_display
 };
 
+// Закрыть дисплей
 displayClose = {
 	getDisplay closeDisplay 0
 };
 
+// Создать виджет
 createWidget = {
 	params ["_display","_type","_pos","_parent"];
 	private _postevent = {};
@@ -141,6 +145,7 @@ createWidget = {
 	_newObject
 };
 
+// Удалить виджет
 deleteWidget = {
 	params ["_widget",["_nextFrame",false]];
 
@@ -200,6 +205,7 @@ widgetSetPosition = {
 	};
 };
 
+//Преобразовать позицию виджета из процента в экранное пространство
 widgetPosPrecentToSafezone = {
 	params ["_widget","_prec","_index"];
 	private _vec4 = [0,0,0,0];
@@ -235,6 +241,7 @@ widgetPosPrecentToSafezone = {
     };
 };
 
+//Устанавливает новую позицию виджету без изменеия размеров
 widgetSetPositionOnly = {
 	params ["_widget","_posarray",["_time",-1]];
 	#define precent_to_real(proc_val) (proc_val / 100)
@@ -369,6 +376,7 @@ isMouseInsideWidget = {
 	true*/
 };
 
+//Проверяет находится ли мышь внутри позиции
 isMouseInsidePosition = {
 
 	params ["_xe","_ye","_xe2","_ye2"];
@@ -433,6 +441,7 @@ getMousePositionInWidget = {
    }
 };
 
+// Устанавливает текст в виджет
 widgetSetText = {
 	params ["_obj","_text"];
 
@@ -445,12 +454,14 @@ widgetSetText = {
     }
 };
 
+// Устанавливает картинку в виджет
 widgetSetPicture = {
 	params ["_obj","_text"];
 
 	_obj ctrlsettext _text;
 };
 
+// Получает высоту текста виджета
 widgetGetTextHeight = {
 
 	private _window = ctrlParentControlsGroup _this;
@@ -480,12 +491,15 @@ widgetWGScrolldown = {
 };
 
 //=================== MOUSE HELPERS =====================
+
+// Устанавливает позицию мыши в процентах
 mouseSetPosition = {
 	params ["_xpos","_ypos"];
 	#define precent_to_real(proc_val) (proc_val / 100)
     setMousePosition [precent_to_real(_xpos) * safezoneW + safezoneX,precent_to_real(_ypos) * safezoneH + safezoneY];
 };
 
+//Получает позицию мыши (значения в процентах)
 mouseGetPosition = {
 
 	getMousePosition params ["_mX","_mY"];
@@ -502,6 +516,7 @@ mouseGetPosition = {
 	[_xp,_yp];
 };
 
+//Преобразует позицию мыши в координаты экранного пространства
 convertScreenCoords = {
 	if (count _this == 0) exitWith {[-100,-100]};
 	_this params ["_mX","_mY"];
@@ -568,6 +583,7 @@ hasObjectInScene = {
 //other screen support
 hasEnabledBlackScreen = false;
 
+// Устанавливает режим черного экрана
 setBlackScreenGUI = {
 	params ["_mode",["_time",0.001]];
 
@@ -581,8 +597,7 @@ setBlackScreenGUI = {
 };
 
 
-
-
+// Устанавливает режим видимости HUD-а
 setVisibleHUD = {
 	params ["_mode"];
 
@@ -632,6 +647,7 @@ widget_antiGammaCheck = {
 	checkRange(_brival,low_protect,max_protect) && checkRange(_gam,low_protect,max_protect)
 };
 
+// Создание сообщения отключения от сервера
 widget_createDisconnectMessage = {
 	private _args = _this;
 	if (isDisplayOpen) then {
@@ -706,6 +722,7 @@ widget_registerInput = {
 	}];
 };
 
+// Внутренняя функция для расчетов размеров объекта в экранном пространстве
 widgetModel_objectHelper = {
 	params ["_func", "_array", ["_scale", 1]];
 

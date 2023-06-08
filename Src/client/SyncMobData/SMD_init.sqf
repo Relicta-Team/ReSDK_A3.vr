@@ -71,6 +71,7 @@ smd_startUpdate = {
 	
 };
 
+// завершение обновления системы SMD
 smd_stopUpdate = {
 	if (smd_handle_update == -1) exitWith {};
 	stopUpdate(smd_handle_update);
@@ -103,6 +104,7 @@ smd_unloadVST = {
 	} foreach smd_allInGameMobs;
 };
 
+// Обработчик обновления, вызываемый в каждом кадре
 smd_onUpdate = {
 	#include "smd_onUpdate.sqf"
 };
@@ -128,6 +130,7 @@ smd_syncVar = {
 	[_mob,smd_list_variables select _idx select 0,smd_list_variables select _idx select 1] call smd_onUpdateSetting;
 };
 
+// Обновление настроек SMD
 smd_onUpdateSetting = {
 	params ["_mob","_varName","_func"];
 
@@ -172,7 +175,7 @@ smd_onChangeFaceAnim = {
 	_mob setMimic _ctx;
 };
 
-
+// Изменения наличия частей тела
 smd_onChangeBodyParts = {
 	params ["_mob","_ctx"];
 
@@ -194,6 +197,7 @@ smd_onChangeBodyParts = {
 
 };
 
+// Изменение и синхрозинация анимации персонажа
 smd_onChangeCustomAnim = {
 	params ["_mob","_ctx"];
 	//ctx is vec3: _ani,_blen,_prfx
@@ -204,6 +208,7 @@ smd_onChangeCustomAnim = {
 	};
 };
 
+// Изменение статуса боевого режима
 smd_onChangeCombat = {
 	params ["_mob","_ctx"];
 

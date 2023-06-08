@@ -22,26 +22,31 @@
 	#define rpc_log(event,args)
 #endif
 
+// Добавляет обработчик событий на стороне клиента
 client_addEvent = {
 	params ["_eventName","_eventCode"];
 	["client_" + _eventName,_eventCode] call cba_fnc_addEventHandler
 };
 
+// Удаляет обработчик событий на стороне клиента
 client_removeEvent = {
 	params ["_eventName","_eventId"];
 	["client_" + _eventName,_eventId] call CBA_fnc_removeeventhandler
 };
 
+// Удаляет глобальный обработчик событий на стороне клиента
 rpc_removeEventGlobal = {
 	params ["_eventName","_eventId"];
 	[_eventName,_eventId] call CBA_fnc_removeeventhandler
 };
 
+// Вызывает клиентский обработчик событий
 client_callEvent = {
 	params ["_eventName","_args"];
 	["client_" + _eventName,_args] call CBA_fnc_localEvent
 };
 
+// Отправляет событие на сервер
 client_sendToServer = {
 	params ["_eventName","_eventargs"];
 	
