@@ -89,6 +89,7 @@ def parse_sqf_functions(code):
     macros = re.findall(macros_pattern,code)
     results = {}
     checkedMacro = []
+    checkedVars = []
     checkedFuncs = []
    
     for macro in macros:
@@ -163,7 +164,76 @@ def parse_sqf_functions(code):
 
                     "conditional": condit
                 }
-            
+
+    #fields search
+    # check brackets { and }  
+    bracketLevel = 0
+    pat_var = r"^[\t ]*[a-zA-Z]\w+\s*\=\s*([^{]*);"
+    pat_vardecl = r"^[\t ]*([a-zA-Z]\w+)\s*\=\s*([^{\n]*)"
+    
+    condit = None
+    multilineCom = False
+    MemberDesc = ""
+
+    for i, line in enumerate(lines):
+        singleCom = False
+        bracketLevel += line.count("{")
+        bracketLevel -= line.count("}")
+        
+        cond = re.search(ifdef_pattern,line,re.DOTALL)
+        if cond:
+            requireDef = cond.group(1) == "ifdef"
+            defName = cond.group(3)
+            condit = {
+                "required": requireDef,
+                "name": defName
+            }
+        if "#else" in line and condit:
+            condit["required"] = not condit["required"]
+        if "#endif" in line:
+            condit = None 
+        
+        if "/*" in line:
+            multilineCom = True
+        if "*/" in line:
+            multilineCom = False
+        if "//" in line:
+            singleCom = True
+
+        if bracketLevel > 0:
+            continue
+
+        vardecl = re.match(pat_vardecl,line,re.DOTALL)
+        if vardecl and vardecl.group(2):
+            varname = vardecl.group(1)
+            if condit:
+                varname += f"@{condit['name']}->{condit['required']}"
+            checkedName = f"{varname}@{i + 1}"
+            if multilineCom or singleCom or checkedName in checkedVars:
+                break
+            varvalue = vardecl.group(2)
+            #if not varvalue.endswith(";"):
+            varvalue = (varvalue + "..." if not varvalue.endswith(";") else varvalue[:-1])
+            checkedVars.append(checkedName)
+            #print(f"newvar {varname} {varvalue}")
+            #sys.exit()
+
+            com = re.search(rf"{compat_all}{varname}\s*=\s*", code, re.MULTILINE)
+            if com:
+                if com.group(2):
+                    MemberDesc = com.group(2)
+                if com.group(3):
+                    MemberDesc = com.group(3).replace('\t',' ')
+                
+                MemberDesc = MemberDesc.lstrip("\n").lstrip(" ").rstrip(" ").rstrip("\n")
+
+            results[varname] = {
+                "Type": "Variable",
+                "DefLine": i + 1,
+                "Value": varvalue,
+                "Desc": MemberDesc,
+                'conditional' : condit
+            }
 
     for function_name in functions:
         function_signature = re.search(rf"{function_name}\s*=\s*{{(.+?)}}", code, re.DOTALL)
@@ -254,5 +324,7 @@ def parse_sqf_functions(code):
             results[function_name]["DefLine"] = start_line
             if not 'Desc' in results[function_name]:
                 results[function_name]['Desc'] = ""
-             
+
+
+
     return results

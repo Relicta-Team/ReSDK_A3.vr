@@ -55,7 +55,9 @@ passedparamFunc = {
     
     
     private _thisObj = _this; 
-    
+       _inline = {
+            othervar = "test";
+       };
     };
 
 _nonglobal = {params ["_x"]; }
@@ -64,6 +66,12 @@ _nonglobal = {params ["_x"]; }
  Inline some data
  Use this in any cases
 */
+
+
+asd_asd32 = 34;
+//Test Docs
+testvar = 1;
+
 
 #define preprocessed  {params["_DONOT"]};
 
@@ -90,6 +98,12 @@ for function_name, values in functions.items():
         #condit = values['conditional']
         #if condit:
         #    print(f"Exists if {condit['name']} is {condit['required']}")
+    elif values["Type"] == "Variable":
+        print(f"Var: {function_name}")
+        print(f"Docs:{values['Desc']}")
+        condit = values['conditional']
+        if condit:
+            print(f"Exists if {condit['name']} is {condit['required']}")
     else:
         print(f"Function: {function_name}")
         print(f"Docs:{values['Desc']}")
