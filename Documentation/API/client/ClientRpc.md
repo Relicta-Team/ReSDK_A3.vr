@@ -152,44 +152,44 @@ File: [client\ClientRpc\clientrpc_init.sqf at line 22](../../../Src/client/Clien
 
 Type: function
 
-Description: 
+Description: Добавляет обработчик событий на стороне клиента
 - Param: _eventName
 - Param: _eventCode
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 25](../../../Src/client/ClientRpc/clientrpc_init.sqf#L25)
+File: [client\ClientRpc\clientrpc_init.sqf at line 26](../../../Src/client/ClientRpc/clientrpc_init.sqf#L26)
 ## client_removeEvent
 
 Type: function
 
-Description: 
+Description: Удаляет обработчик событий на стороне клиента
 - Param: _eventName
 - Param: _eventId
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 30](../../../Src/client/ClientRpc/clientrpc_init.sqf#L30)
+File: [client\ClientRpc\clientrpc_init.sqf at line 32](../../../Src/client/ClientRpc/clientrpc_init.sqf#L32)
 ## rpc_removeEventGlobal
 
 Type: function
 
-Description: 
+Description: Удаляет глобальный обработчик событий на стороне клиента
 - Param: _eventName
 - Param: _eventId
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 35](../../../Src/client/ClientRpc/clientrpc_init.sqf#L35)
+File: [client\ClientRpc\clientrpc_init.sqf at line 38](../../../Src/client/ClientRpc/clientrpc_init.sqf#L38)
 ## client_callEvent
 
 Type: function
 
-Description: 
+Description: Вызывает клиентский обработчик событий
 - Param: _eventName
 - Param: _args
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 40](../../../Src/client/ClientRpc/clientrpc_init.sqf#L40)
+File: [client\ClientRpc\clientrpc_init.sqf at line 44](../../../Src/client/ClientRpc/clientrpc_init.sqf#L44)
 ## client_sendToServer
 
 Type: function
 
-Description: 
+Description: Отправляет событие на сервер
 - Param: _eventName
 - Param: _eventargs
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 45](../../../Src/client/ClientRpc/clientrpc_init.sqf#L45)
+File: [client\ClientRpc\clientrpc_init.sqf at line 50](../../../Src/client/ClientRpc/clientrpc_init.sqf#L50)

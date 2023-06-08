@@ -74,7 +74,7 @@ Replaced value:
 ```sqf
 if (_code == code) exitWith {[text] call (getDisplay getVariable ["printError",{}])}
 ```
-File: [client\ClientData\ClientData.sqf at line 486](../../../Src/client/ClientData/ClientData.sqf#L486)
+File: [client\ClientData\ClientData.sqf at line 488](../../../Src/client/ClientData/ClientData.sqf#L488)
 ## cd_clientName
 
 Type: Variable
@@ -351,10 +351,10 @@ File: [client\ClientData\ClientData.sqf at line 94](../../../Src/client/ClientDa
 
 Type: function
 
-Description: 
+Description: Открытие окна регистрации клиента
 - Param: _mes
 
-File: [client\ClientData\ClientData.sqf at line 375](../../../Src/client/ClientData/ClientData.sqf#L375)
+File: [client\ClientData\ClientData.sqf at line 377](../../../Src/client/ClientData/ClientData.sqf#L377)
 ## repl_doLocal
 
 Type: function
@@ -363,7 +363,7 @@ Description:
 - Param: _method
 - Param: _ctx
 
-File: [client\ClientData\ClientData.sqf at line 547](../../../Src/client/ClientData/ClientData.sqf#L547)
+File: [client\ClientData\ClientData.sqf at line 549](../../../Src/client/ClientData/ClientData.sqf#L549)
 # ClientDataUnconscious.sqf
 
 ## __UNCONSCIOUS_DELAY__

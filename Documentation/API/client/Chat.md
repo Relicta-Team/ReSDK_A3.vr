@@ -4,7 +4,7 @@
 
 Type: constant
 
-Description: 
+Description: Получение всех сообщений сгруппированных в цельную строку с переносом строки
 - Param: 
 
 Replaced value:
@@ -18,7 +18,7 @@ File: [client\Chat\Chat.hpp at line 8](../../../Src/client/Chat/Chat.hpp#L8)
 
 Type: Variable
 
-Description: 											chat history field
+Description: Ссылки на основные виджеты чата
 
 
 Initial value:
@@ -30,122 +30,122 @@ File: [client\Chat\chat_init.sqf at line 24](../../../Src/client/Chat/chat_init.
 
 Type: Variable
 
-Description: 
+Description: Буффер сообщений
 
 
 Initial value:
 ```sqf
 []
 ```
-File: [client\Chat\chat_init.sqf at line 26](../../../Src/client/Chat/chat_init.sqf#L26)
+File: [client\Chat\chat_init.sqf at line 27](../../../Src/client/Chat/chat_init.sqf#L27)
 ## chat_maxmessages
 
 Type: Variable
 
-Description: 
+Description: Максимальное количество сообщений в буфере/истории
 
 
 Initial value:
 ```sqf
 100
 ```
-File: [client\Chat\chat_init.sqf at line 27](../../../Src/client/Chat/chat_init.sqf#L27)
+File: [client\Chat\chat_init.sqf at line 29](../../../Src/client/Chat/chat_init.sqf#L29)
 ## chat_size_x
 
 Type: Variable
 
-Description: 
+Description: Размер истории чата (ширина)
 
 
 Initial value:
 ```sqf
 35
 ```
-File: [client\Chat\chat_init.sqf at line 29](../../../Src/client/Chat/chat_init.sqf#L29)
+File: [client\Chat\chat_init.sqf at line 32](../../../Src/client/Chat/chat_init.sqf#L32)
 ## chat_size_y
 
 Type: Variable
 
-Description: 
+Description: Размер истории чата (высота)
 
 
 Initial value:
 ```sqf
 20
 ```
-File: [client\Chat\chat_init.sqf at line 30](../../../Src/client/Chat/chat_init.sqf#L30)
+File: [client\Chat\chat_init.sqf at line 34](../../../Src/client/Chat/chat_init.sqf#L34)
 ## chat_isHistoryOpen
 
 Type: Variable
 
-Description: 
+Description: Открыта ли история чата
 
 
 Initial value:
 ```sqf
 false
 ```
-File: [client\Chat\chat_init.sqf at line 32](../../../Src/client/Chat/chat_init.sqf#L32)
+File: [client\Chat\chat_init.sqf at line 37](../../../Src/client/Chat/chat_init.sqf#L37)
 ## chat_isHideEnabled
 
 Type: Variable
 
-Description: 
+Description: Включено ли автоматическое скрытие чата
 
 
 Initial value:
 ```sqf
 true
 ```
-File: [client\Chat\chat_init.sqf at line 34](../../../Src/client/Chat/chat_init.sqf#L34)
+File: [client\Chat\chat_init.sqf at line 39](../../../Src/client/Chat/chat_init.sqf#L39)
 ## chat_hideAfter
 
 Type: Variable
 
-Description: 
+Description: Время автоматического скрытия
 
 
 Initial value:
 ```sqf
 3
 ```
-File: [client\Chat\chat_init.sqf at line 35](../../../Src/client/Chat/chat_init.sqf#L35)
+File: [client\Chat\chat_init.sqf at line 41](../../../Src/client/Chat/chat_init.sqf#L41)
 ## chat_isFullHidden
 
 Type: Variable
 
-Description: 
+Description: Был ли чат полностью скрыт
 
 
 Initial value:
 ```sqf
 false
 ```
-File: [client\Chat\chat_init.sqf at line 36](../../../Src/client/Chat/chat_init.sqf#L36)
+File: [client\Chat\chat_init.sqf at line 43](../../../Src/client/Chat/chat_init.sqf#L43)
 ## chat_hideValue
 
 Type: Variable
 
-Description: 
+Description: Внутреннее значение при расчете прозрачности во время скрытия
 
 
 Initial value:
 ```sqf
 0
 ```
-File: [client\Chat\chat_init.sqf at line 37](../../../Src/client/Chat/chat_init.sqf#L37)
+File: [client\Chat\chat_init.sqf at line 45](../../../Src/client/Chat/chat_init.sqf#L45)
 ## chat_hideTimestamp
 
 Type: Variable
 
-Description: 
+Description: Время последнего скрытия
 
 
 Initial value:
 ```sqf
 -1
 ```
-File: [client\Chat\chat_init.sqf at line 38](../../../Src/client/Chat/chat_init.sqf#L38)
+File: [client\Chat\chat_init.sqf at line 47](../../../Src/client/Chat/chat_init.sqf#L47)
 # Chat_onScreen.sqf
 
 ## mlp(v)
@@ -164,26 +164,26 @@ File: [client\Chat\Chat_onScreen.sqf at line 8](../../../Src/client/Chat/Chat_on
 
 Type: Variable
 
-Description: 
+Description: Список селекшонов мобов
 
 
 Initial value:
 ```sqf
 [...
 ```
-File: [client\Chat\Chat_onScreen.sqf at line 10](../../../Src/client/Chat/Chat_onScreen.sqf#L10)
+File: [client\Chat\Chat_onScreen.sqf at line 11](../../../Src/client/Chat/Chat_onScreen.sqf#L11)
 ## chatos_guiCtg
 
 Type: Variable
 
-Description: 
+Description: Ссылка на контрольную группу текстового чата
 
 
 Initial value:
 ```sqf
 [widgetNull]
 ```
-File: [client\Chat\Chat_onScreen.sqf at line 34](../../../Src/client/Chat/Chat_onScreen.sqf#L34)
+File: [client\Chat\Chat_onScreen.sqf at line 36](../../../Src/client/Chat/Chat_onScreen.sqf#L36)
 ## chatos_renderedWidgets
 
 Type: Variable
@@ -195,7 +195,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\Chat\Chat_onScreen.sqf at line 36](../../../Src/client/Chat/Chat_onScreen.sqf#L36)
+File: [client\Chat\Chat_onScreen.sqf at line 38](../../../Src/client/Chat/Chat_onScreen.sqf#L38)
 ## chatos_renderedWidgetsPrint
 
 Type: Variable
@@ -207,7 +207,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\Chat\Chat_onScreen.sqf at line 37](../../../Src/client/Chat/Chat_onScreen.sqf#L37)
+File: [client\Chat\Chat_onScreen.sqf at line 39](../../../Src/client/Chat/Chat_onScreen.sqf#L39)
 ## chatos_postMessageVisibleDelay
 
 Type: Variable
@@ -219,7 +219,7 @@ Initial value:
 ```sqf
 2.5
 ```
-File: [client\Chat\Chat_onScreen.sqf at line 39](../../../Src/client/Chat/Chat_onScreen.sqf#L39)
+File: [client\Chat\Chat_onScreen.sqf at line 41](../../../Src/client/Chat/Chat_onScreen.sqf#L41)
 ## chatos_list_blobMobs
 
 Type: Variable
@@ -231,7 +231,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\Chat\Chat_onScreen.sqf at line 238](../../../Src/client/Chat/Chat_onScreen.sqf#L238)
+File: [client\Chat\Chat_onScreen.sqf at line 240](../../../Src/client/Chat/Chat_onScreen.sqf#L240)
 ## chatos_onUpdate
 
 Type: function
@@ -239,7 +239,7 @@ Type: function
 Description: 
 
 
-File: [client\Chat\Chat_onScreen.sqf at line 41](../../../Src/client/Chat/Chat_onScreen.sqf#L41)
+File: [client\Chat\Chat_onScreen.sqf at line 43](../../../Src/client/Chat/Chat_onScreen.sqf#L43)
 ## chatos_inlinecode
 
 Type: function
@@ -248,7 +248,7 @@ Description:
 - Param: _xpos
 - Param: _ypos
 
-File: [client\Chat\Chat_onScreen.sqf at line 124](../../../Src/client/Chat/Chat_onScreen.sqf#L124)
+File: [client\Chat\Chat_onScreen.sqf at line 126](../../../Src/client/Chat/Chat_onScreen.sqf#L126)
 ## chatos_getMobMessages
 
 Type: function
@@ -256,7 +256,7 @@ Type: function
 Description: get message buffer
 
 
-File: [client\Chat\Chat_onScreen.sqf at line 150](../../../Src/client/Chat/Chat_onScreen.sqf#L150)
+File: [client\Chat\Chat_onScreen.sqf at line 152](../../../Src/client/Chat/Chat_onScreen.sqf#L152)
 ## chatos_getTimeText
 
 Type: function
@@ -265,7 +265,7 @@ Description:
 - Param: _mob
 - Param: _text
 
-File: [client\Chat\Chat_onScreen.sqf at line 154](../../../Src/client/Chat/Chat_onScreen.sqf#L154)
+File: [client\Chat\Chat_onScreen.sqf at line 156](../../../Src/client/Chat/Chat_onScreen.sqf#L156)
 ## chatos_canSeeObject
 
 Type: function
@@ -273,7 +273,7 @@ Type: function
 Description: standart check
 - Param: _obj
 
-File: [client\Chat\Chat_onScreen.sqf at line 167](../../../Src/client/Chat/Chat_onScreen.sqf#L167)
+File: [client\Chat\Chat_onScreen.sqf at line 169](../../../Src/client/Chat/Chat_onScreen.sqf#L169)
 ## chatos_actBlob
 
 Type: function
@@ -287,7 +287,7 @@ Description:
 - Param: _baseSpeed
 - Param: _pertick (optional, default 0.5)
 
-File: [client\Chat\Chat_onScreen.sqf at line 240](../../../Src/client/Chat/Chat_onScreen.sqf#L240)
+File: [client\Chat\Chat_onScreen.sqf at line 242](../../../Src/client/Chat/Chat_onScreen.sqf#L242)
 ## chatos_onUpdateBlobTask
 
 Type: function
@@ -299,7 +299,7 @@ Description:
 - Param: _deleteAfter
 - Param: _startTime
 
-File: [client\Chat\Chat_onScreen.sqf at line 259](../../../Src/client/Chat/Chat_onScreen.sqf#L259)
+File: [client\Chat\Chat_onScreen.sqf at line 261](../../../Src/client/Chat/Chat_onScreen.sqf#L261)
 ## chatos_onUpdatePrintingSay
 
 Type: function
@@ -307,7 +307,7 @@ Type: function
 Description: 
 
 
-File: [client\Chat\Chat_onScreen.sqf at line 293](../../../Src/client/Chat/Chat_onScreen.sqf#L293)
+File: [client\Chat\Chat_onScreen.sqf at line 295](../../../Src/client/Chat/Chat_onScreen.sqf#L295)
 ## chatos_isMobPrinting
 
 Type: function
@@ -315,7 +315,7 @@ Type: function
 Description: 
 
 
-File: [client\Chat\Chat_onScreen.sqf at line 321](../../../Src/client/Chat/Chat_onScreen.sqf#L321)
+File: [client\Chat\Chat_onScreen.sqf at line 323](../../../Src/client/Chat/Chat_onScreen.sqf#L323)
 ## chatos_event_onSpeak
 
 Type: function
@@ -324,7 +324,7 @@ Description:
 - Param: _mob
 - Param: _isspeaking
 
-File: [client\Chat\Chat_onScreen.sqf at line 331](../../../Src/client/Chat/Chat_onScreen.sqf#L331)
+File: [client\Chat\Chat_onScreen.sqf at line 333](../../../Src/client/Chat/Chat_onScreen.sqf#L333)
 ## chatos_onSay
 
 Type: function
@@ -332,7 +332,7 @@ Type: function
 Description: 
 
 
-File: [client\Chat\Chat_onScreen.sqf at line 339](../../../Src/client/Chat/Chat_onScreen.sqf#L339)
+File: [client\Chat\Chat_onScreen.sqf at line 341](../../../Src/client/Chat/Chat_onScreen.sqf#L341)
 # functions.sqf
 
 ## HIST_SIZE_H
@@ -346,12 +346,12 @@ Replaced value:
 ```sqf
 70
 ```
-File: [client\Chat\functions.sqf at line 120](../../../Src/client/Chat/functions.sqf#L120)
+File: [client\Chat\functions.sqf at line 125](../../../Src/client/Chat/functions.sqf#L125)
 ## chatGettextwidget
 
 Type: function
 
-Description: 
+Description: Получает виджет, содержащий текстовое поле чата
 
 
 File: [client\Chat\functions.sqf at line 13](../../../Src/client/Chat/functions.sqf#L13)
@@ -359,104 +359,104 @@ File: [client\Chat\functions.sqf at line 13](../../../Src/client/Chat/functions.
 
 Type: function
 
-Description: 
+Description: Получает виджет, содержащий задний фон чата
 
 
-File: [client\Chat\functions.sqf at line 15](../../../Src/client/Chat/functions.sqf#L15)
+File: [client\Chat\functions.sqf at line 16](../../../Src/client/Chat/functions.sqf#L16)
 ## chatgetwidget
 
 Type: function
 
-Description: 
+Description: Получает основную контрольную группу, содержающу виджеты чата
 
 
-File: [client\Chat\functions.sqf at line 17](../../../Src/client/Chat/functions.sqf#L17)
+File: [client\Chat\functions.sqf at line 19](../../../Src/client/Chat/functions.sqf#L19)
 ## chat_syncsize
 
 Type: function
 
-Description: 
+Description: Синхронизирует размеры виджетов чата
 - Param: _x
 - Param: _y
 - Param: _w
 - Param: _h
 
-File: [client\Chat\functions.sqf at line 19](../../../Src/client/Chat/functions.sqf#L19)
+File: [client\Chat\functions.sqf at line 22](../../../Src/client/Chat/functions.sqf#L22)
 ## chatprint
 
 Type: function
 
-Description: 
+Description: Выводит текст в чат
 - Param: _text
 - Param: _type (optional, default "default")
 
-File: [client\Chat\functions.sqf at line 35](../../../Src/client/Chat/functions.sqf#L35)
+File: [client\Chat\functions.sqf at line 39](../../../Src/client/Chat/functions.sqf#L39)
 ## chat_onRenderLobby
 
 Type: function
 
-Description: 
+Description: Отрисовывает чат в лобби. Копирует информацию из основного GUI чата в чат лобби
 
 
-File: [client\Chat\functions.sqf at line 98](../../../Src/client/Chat/functions.sqf#L98)
+File: [client\Chat\functions.sqf at line 103](../../../Src/client/Chat/functions.sqf#L103)
 ## chatshowhistory
 
 Type: function
 
-Description: 
+Description: Открывает окно истории чата
 
 
-File: [client\Chat\functions.sqf at line 117](../../../Src/client/Chat/functions.sqf#L117)
+File: [client\Chat\functions.sqf at line 122](../../../Src/client/Chat/functions.sqf#L122)
 ## chatPrintSmart
 
 Type: function
 
-Description: 
+Description: NOT USED
 - Param: _txt
 - Param: _ch
 - Param: _src
 - Param: _targ
 
-File: [client\Chat\functions.sqf at line 150](../../../Src/client/Chat/functions.sqf#L150)
+File: [client\Chat\functions.sqf at line 156](../../../Src/client/Chat/functions.sqf#L156)
 ## chat_resetFadeTimer
 
 Type: function
 
-Description: 
+Description: Восстанавливает файдер чата
 
 
-File: [client\Chat\functions.sqf at line 156](../../../Src/client/Chat/functions.sqf#L156)
+File: [client\Chat\functions.sqf at line 163](../../../Src/client/Chat/functions.sqf#L163)
 ## chat_restoreVisible
 
 Type: function
 
-Description: 
+Description: Восстанавливает видимость. Параметр _now в случае true восстанавливает видимость чата моментально
 - Param: _now
 
-File: [client\Chat\functions.sqf at line 161](../../../Src/client/Chat/functions.sqf#L161)
+File: [client\Chat\functions.sqf at line 169](../../../Src/client/Chat/functions.sqf#L169)
 ## chat_onUpdate
 
 Type: function
 
-Description: 
+Description: Обновляет чат
 
 
-File: [client\Chat\functions.sqf at line 175](../../../Src/client/Chat/functions.sqf#L175)
+File: [client\Chat\functions.sqf at line 184](../../../Src/client/Chat/functions.sqf#L184)
 ## chat_applyColorTheme
 
 Type: function
 
-Description: 
+Description: Применяет цветовую тему к виджетам чата
 
 
-File: [client\Chat\functions.sqf at line 195](../../../Src/client/Chat/functions.sqf#L195)
+File: [client\Chat\functions.sqf at line 205](../../../Src/client/Chat/functions.sqf#L205)
 # helpers.hpp
 
 ## ENM_TIPS_ERROR
 
 Type: constant
 
-Description: 
+Description: Префикс при печате сообщений типа "error"
 
 
 Replaced value:
@@ -470,55 +470,55 @@ Replaced value:
 "Ой!","Упс...","Жаль...","Грустно...","Глупо всё это.","Досада.", \
 "Не судьба.","Этому не суждено сбыться."]
 ```
-File: [client\Chat\helpers.hpp at line 6](../../../Src/client/Chat/helpers.hpp#L6)
+File: [client\Chat\helpers.hpp at line 7](../../../Src/client/Chat/helpers.hpp#L7)
 ## getTextField
 
 Type: constant
 
-Description: 
+Description: Макрос для получения ссылки на текстовое поле
 
 
 Replaced value:
 ```sqf
 (call chatGettextwidget)
 ```
-File: [client\Chat\helpers.hpp at line 15](../../../Src/client/Chat/helpers.hpp#L15)
+File: [client\Chat\helpers.hpp at line 17](../../../Src/client/Chat/helpers.hpp#L17)
 ## getBackground
 
 Type: constant
 
-Description: 
+Description: Макрос для получения ссылки на бекграунд
 
 
 Replaced value:
 ```sqf
 (call chatgetbackgroundwidget)
 ```
-File: [client\Chat\helpers.hpp at line 16](../../../Src/client/Chat/helpers.hpp#L16)
+File: [client\Chat\helpers.hpp at line 19](../../../Src/client/Chat/helpers.hpp#L19)
 ## getHistoryField
 
 Type: constant
 
-Description: 
+Description: Макрос для получения ссылки на окно истории
 
 
 Replaced value:
 ```sqf
 (chat_widgets select 3)
 ```
-File: [client\Chat\helpers.hpp at line 17](../../../Src/client/Chat/helpers.hpp#L17)
+File: [client\Chat\helpers.hpp at line 21](../../../Src/client/Chat/helpers.hpp#L21)
 ## CHAT_HIDE_CHECK_UPDATE
 
 Type: constant
 
-Description: 
+Description: Время, через которое выполняется проверка скрытия окна чата
 
 
 Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Chat\helpers.hpp at line 19](../../../Src/client/Chat/helpers.hpp#L19)
+File: [client\Chat\helpers.hpp at line 24](../../../Src/client/Chat/helpers.hpp#L24)
 ## CHAT_ONE_STEP_FADE_SIMULATION
 
 Type: constant
@@ -530,7 +530,7 @@ Replaced value:
 ```sqf
 0.09
 ```
-File: [client\Chat\helpers.hpp at line 20](../../../Src/client/Chat/helpers.hpp#L20)
+File: [client\Chat\helpers.hpp at line 25](../../../Src/client/Chat/helpers.hpp#L25)
 # nativeChatHandler.sqf
 
 ## chat_native_checktimeDelay
