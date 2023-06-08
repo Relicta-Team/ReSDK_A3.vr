@@ -16,7 +16,7 @@ File: [host\Namings\FacesHelpers.sqf at line 67](../../../Src/host/Namings/Faces
 
 Type: function
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: Генерирует конфиг для нохедов и лиц
 
@@ -78,18 +78,6 @@ Description:
 File: [host\Namings\Naming_init.sqf at line 67](../../../Src/host/Namings/Naming_init.sqf#L67)
 # ParseNaming.sqf
 
-## NAMING_VALIDATE_CASING
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\Namings\ParseNaming.sqf at line 9](../../../Src/host/Namings/ParseNaming.sqf#L9)
 ## loadMobNames(filename)
 
 Type: constant

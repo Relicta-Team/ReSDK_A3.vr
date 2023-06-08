@@ -174,14 +174,6 @@ Description:
 - Param: _mode
 
 File: [client\OneSync\OneSync_mobcollision.sqf at line 20](../../../Src/client/OneSync/OneSync_mobcollision.sqf#L20)
-## os_mobcollision_isVisible
-
-Type: function
-
-Description: 
-
-
-File: [client\OneSync\OneSync_mobcollision.sqf at line 34](../../../Src/client/OneSync/OneSync_mobcollision.sqf#L34)
 ## os_mobcollision_createBB
 
 Type: function

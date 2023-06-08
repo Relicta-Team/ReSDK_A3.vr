@@ -134,78 +134,6 @@ Replaced value:
 }; ["(OOP) Attribute '" + _oop_attr_last_name + "' loaded."] call logInfo;
 ```
 File: [host\OOP_engine\oop_attributes.sqf at line 22](../../../Src/host/OOP_engine/oop_attributes.sqf#L22)
-## ITEM_SIZE_TINY
-
-Type: constant
-
-Description: 5 большие предметы: винтовка,канистра; 6 огромные: складной стул, гранатомёт )
-
-
-Replaced value:
-```sqf
-1
-```
-File: [host\OOP_engine\oop_attributes.sqf at line 197](../../../Src/host/OOP_engine/oop_attributes.sqf#L197)
-## ITEM_SIZE_SMALL
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2
-```
-File: [host\OOP_engine\oop_attributes.sqf at line 198](../../../Src/host/OOP_engine/oop_attributes.sqf#L198)
-## ITEM_SIZE_MEDIUM
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-3
-```
-File: [host\OOP_engine\oop_attributes.sqf at line 199](../../../Src/host/OOP_engine/oop_attributes.sqf#L199)
-## ITEM_SIZE_LARGE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-4
-```
-File: [host\OOP_engine\oop_attributes.sqf at line 200](../../../Src/host/OOP_engine/oop_attributes.sqf#L200)
-## ITEM_SIZE_BIG
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-5
-```
-File: [host\OOP_engine\oop_attributes.sqf at line 201](../../../Src/host/OOP_engine/oop_attributes.sqf#L201)
-## ITEM_SIZE_HUGE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-6
-```
-File: [host\OOP_engine\oop_attributes.sqf at line 202](../../../Src/host/OOP_engine/oop_attributes.sqf#L202)
 ## name
 
 Type: function
@@ -270,7 +198,7 @@ File: [host\OOP_engine\oop_init.sqf at line 15](../../../Src/host/OOP_engine/oop
 
 Type: constant
 
-> Exists if **_SQFVM** defined
+> <font size="5">Exists if **_SQFVM** defined</font>
 
 Description: 
 - Param: mes

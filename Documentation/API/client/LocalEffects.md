@@ -183,15 +183,6 @@ Replaced value:
 call (locef_allEffectsCfg get (name) select indx)
 ```
 File: [client\LocalEffects\LocalEffects_init.sqf at line 29](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L29)
-## locef_add
-
-Type: function
-
-Description: 
-- Param: thisEventName
-- Param: _context
-
-File: [client\LocalEffects\LocalEffects_init.sqf at line 32](../../../Src/client/LocalEffects/LocalEffects_init.sqf#L32)
 ## locef_remove
 
 Type: function

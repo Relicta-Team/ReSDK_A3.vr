@@ -529,7 +529,7 @@ File: [client\Lobby\functions.sqf at line 175](../../../Src/client/Lobby/functio
 
 Type: constant
 
-> Exists if **FAST_INIT_LOBBY** defined
+> <font size="5">Exists if **FAST_INIT_LOBBY** defined</font>
 
 Description: 
 
@@ -646,18 +646,6 @@ Replaced value:
 
 ```
 File: [client\Lobby\lobbi_init.sqf at line 13](../../../Src/client/Lobby/lobbi_init.sqf#L13)
-## test_lobby
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\Lobby\lobbi_init.sqf at line 95](../../../Src/client/Lobby/lobbi_init.sqf#L95)
 # lobby.hpp
 
 ## FAST_INIT_LOBBY
@@ -1171,7 +1159,7 @@ File: [client\Lobby\lobby.hpp at line 75](../../../Src/client/Lobby/lobby.hpp#L7
 
 Type: constant
 
-> Exists if **lobby_log_enable** defined
+> <font size="5">Exists if **lobby_log_enable** defined</font>
 
 Description: 
 - Param: mes
@@ -1186,7 +1174,7 @@ File: [client\Lobby\lobby.hpp at line 78](../../../Src/client/Lobby/lobby.hpp#L7
 
 Type: constant
 
-> Exists if **lobby_log_enable** not defined
+> <font size="5">Exists if **lobby_log_enable** not defined</font>
 
 Description: 
 - Param: mes

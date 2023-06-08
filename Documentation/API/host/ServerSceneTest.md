@@ -88,22 +88,12 @@ File: [host\ServerSceneTest\serverscrene_init.sqf at line 33](../../../Src/host/
 
 Type: function
 
-> Exists if **ENABLE_LAG_NETWORK** defined
+> <font size="5">Exists if **ENABLE_LAG_NETWORK** defined</font>
 
 Description: 
 
 
 File: [host\ServerSceneTest\serverscrene_init.sqf at line 43](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L43)
-## gm_startFromLobbyCondition
-
-Type: function
-
-> Exists if **ENABLE_LAG_NETWORK** not defined
-
-Description: 
-
-
-File: [host\ServerSceneTest\serverscrene_init.sqf at line 55](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L55)
 ## debug_asyncCode
 
 Type: function
@@ -112,11 +102,3 @@ Description:
 
 
 File: [host\ServerSceneTest\serverscrene_init.sqf at line 67](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L67)
-## reloadgens
-
-Type: function
-
-Description: 
-
-
-File: [host\ServerSceneTest\serverscrene_init.sqf at line 244](../../../Src/host/ServerSceneTest/serverscrene_init.sqf#L244)

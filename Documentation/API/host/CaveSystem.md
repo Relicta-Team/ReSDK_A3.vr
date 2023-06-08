@@ -227,7 +227,7 @@ File: [host\CaveSystem\CaveSystem.h at line 45](../../../Src/host/CaveSystem/Cav
 
 Type: constant
 
-> Exists if **usecavelog** defined
+> <font size="5">Exists if **usecavelog** defined</font>
 
 Description: 
 - Param: a
@@ -241,7 +241,7 @@ File: [host\CaveSystem\CaveSystem.h at line 49](../../../Src/host/CaveSystem/Cav
 
 Type: constant
 
-> Exists if **usecavelog** defined
+> <font size="5">Exists if **usecavelog** defined</font>
 
 Description: 
 - Param: a
@@ -256,7 +256,7 @@ File: [host\CaveSystem\CaveSystem.h at line 49](../../../Src/host/CaveSystem/Cav
 
 Type: constant
 
-> Exists if **usecavelog** not defined
+> <font size="5">Exists if **usecavelog** not defined</font>
 
 Description: 
 - Param: a
@@ -450,11 +450,3 @@ Replaced value:
 		}; 
 ```
 File: [host\CaveSystem\CaveSystemInit.sqf at line 541](../../../Src/host/CaveSystem/CaveSystemInit.sqf#L541)
-## initDecor
-
-Type: function
-
-Description: 
-
-
-File: [host\CaveSystem\CaveSystemInit.sqf at line 414](../../../Src/host/CaveSystem/CaveSystemInit.sqf#L414)

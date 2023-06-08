@@ -46,23 +46,11 @@ Replaced value:
 
 ```
 File: [host\MapManager\ObjectManager.sqf at line 13](../../../Src/host/MapManager/ObjectManager.sqf#L13)
-## enablePhisics
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\MapManager\ObjectManager.sqf at line 14](../../../Src/host/MapManager/ObjectManager.sqf#L14)
 ## simlog(data)
 
 Type: constant
 
-> Exists if **doPhisicsLog** defined
+> <font size="5">Exists if **doPhisicsLog** defined</font>
 
 Description: 
 - Param: data
@@ -76,7 +64,7 @@ File: [host\MapManager\ObjectManager.sqf at line 18](../../../Src/host/MapManage
 
 Type: constant
 
-> Exists if **doPhisicsLog** defined
+> <font size="5">Exists if **doPhisicsLog** defined</font>
 
 Description: 
 - Param: data
@@ -91,7 +79,7 @@ File: [host\MapManager\ObjectManager.sqf at line 18](../../../Src/host/MapManage
 
 Type: constant
 
-> Exists if **doPhisicsLog** not defined
+> <font size="5">Exists if **doPhisicsLog** not defined</font>
 
 Description: 
 - Param: data

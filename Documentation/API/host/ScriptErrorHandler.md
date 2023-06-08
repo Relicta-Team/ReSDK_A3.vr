@@ -15,7 +15,7 @@ File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 9](../../../S
 
 Type: function
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: 
 - Param: _mode

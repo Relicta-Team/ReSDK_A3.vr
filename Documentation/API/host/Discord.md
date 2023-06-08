@@ -83,23 +83,11 @@ Description: установка никнейма для дискорд клие�
 File: [host\Discord\Accounts.sqf at line 176](../../../Src/host/Discord/Accounts.sqf#L176)
 # Discord.sqf
 
-## DISCORD_ENABLE_EXTENDED_TRANSPORT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\Discord\Discord.sqf at line 13](../../../Src/host/Discord/Discord.sqf#L13)
 ## DISCORD_MAX_MESSAGES_COUNT_PERDELAY
 
 Type: constant
 
-> Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined
+> <font size="5">Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined</font>
 
 Description: 
 
@@ -113,7 +101,7 @@ File: [host\Discord\Discord.sqf at line 18](../../../Src/host/Discord/Discord.sq
 
 Type: constant
 
-> Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined
+> <font size="5">Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined</font>
 
 Description: 
 - Param: 
@@ -127,7 +115,7 @@ File: [host\Discord\Discord.sqf at line 23](../../../Src/host/Discord/Discord.sq
 
 Type: constant
 
-> Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined
+> <font size="5">Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined</font>
 
 Description: задержка между сообщениями
 
@@ -141,7 +129,7 @@ File: [host\Discord\Discord.sqf at line 26](../../../Src/host/Discord/Discord.sq
 
 Type: function
 
-> Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined
+> <font size="5">Exists if **DISCORD_ENABLE_EXTENDED_TRANSPORT** defined</font>
 
 Description: 
 
@@ -220,18 +208,6 @@ Description:
 File: [host\Discord\Discord.sqf at line 161](../../../Src/host/Discord/Discord.sqf#L161)
 # ServerManager.sqf
 
-## DSM_DISABLE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\Discord\ServerManager.sqf at line 6](../../../Src/host/Discord/ServerManager.sqf#L6)
 ## DSM_CALLBACKNAME
 
 Type: constant
@@ -248,7 +224,7 @@ File: [host\Discord\ServerManager.sqf at line 14](../../../Src/host/Discord/Serv
 
 Type: constant
 
-> Exists if **EDITOR** defined
+> <font size="5">Exists if **EDITOR** defined</font>
 
 Description: 
 
@@ -262,7 +238,7 @@ File: [host\Discord\ServerManager.sqf at line 17](../../../Src/host/Discord/Serv
 
 Type: constant
 
-> Exists if **EDITOR** not defined
+> <font size="5">Exists if **EDITOR** not defined</font>
 
 Description: 
 

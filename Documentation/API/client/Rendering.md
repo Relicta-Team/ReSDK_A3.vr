@@ -129,18 +129,6 @@ Replaced value:
 _conv = linearConversion [_addTime, _left, tickTime, var*70/100, 0]; var = _conv
 ```
 File: [client\Rendering\Camera\CameraControl.sqf at line 129](../../../Src/client/Rendering/Camera/CameraControl.sqf#L129)
-## conversion(data)
-
-Type: constant
-
-Description: 
-- Param: data
-
-Replaced value:
-```sqf
-linearConversion [0,1,data,] OR vectorLinearConversion
-```
-File: [client\Rendering\Camera\CameraControl.sqf at line 260](../../../Src/client/Rendering/Camera/CameraControl.sqf#L260)
 ## invertNum(val)
 
 Type: constant
@@ -373,21 +361,11 @@ Description:
 
 
 File: [client\Rendering\HDR\HDRInit.sqf at line 8](../../../Src/client/Rendering/HDR/HDRInit.sqf#L8)
-## render_hdr_setMode
-
-Type: function
-
-> Exists if **HDR_DYNAMIC_ENABLED** defined
-
-Description: 
-
-
-File: [client\Rendering\HDR\HDRInit.sqf at line 17](../../../Src/client/Rendering/HDR/HDRInit.sqf#L17)
 ## render_hdr_setWorldTIme
 
 Type: function
 
-> Exists if **HDR_DYNAMIC_ENABLED** defined
+> <font size="5">Exists if **HDR_DYNAMIC_ENABLED** defined</font>
 
 Description: underground, world
 

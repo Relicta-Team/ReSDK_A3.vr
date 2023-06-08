@@ -36,18 +36,6 @@ Replaced value:
 (_rules_critAttack in [vars])
 ```
 File: [host\CombatSystem\CombatRules.hpp at line 9](../../../Src/host/CombatSystem/CombatRules.hpp#L9)
-## ca_emulate_rule
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\CombatSystem\CombatRules.hpp at line 12](../../../Src/host/CombatSystem/CombatRules.hpp#L12)
 ## ca_emulated_rule_roll
 
 Type: constant
@@ -292,18 +280,6 @@ Replaced value:
 "def_parry"
 ```
 File: [host\CombatSystem\CombatSystem.hpp at line 13](../../../Src/host/CombatSystem/CombatSystem.hpp#L13)
-## DEF_TYPE_BLOCK
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2
-```
-File: [host\CombatSystem\CombatSystem.hpp at line 14](../../../Src/host/CombatSystem/CombatSystem.hpp#L14)
 ## COMBAT_STYLE_NO
 
 Type: constant
@@ -721,21 +697,9 @@ Description: кожа и мясо
 
 Replaced value:
 ```sqf
-2
+WOUND_TYPE_BRUISE
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 102](../../../Src/host/CombatSystem/CombatSystem.hpp#L102)
-## WOUND_TYPE_TOXIC
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-3
-```
-File: [host\CombatSystem\CombatSystem.hpp at line 103](../../../Src/host/CombatSystem/CombatSystem.hpp#L103)
+File: [host\CombatSystem\CombatSystem.hpp at line 101](../../../Src/host/CombatSystem/CombatSystem.hpp#L101)
 ## WOUND_SIZE_SCRATCH
 
 Type: constant
@@ -880,30 +844,6 @@ Replaced value:
 3
 ```
 File: [host\CombatSystem\CombatSystem.hpp at line 130](../../../Src/host/CombatSystem/CombatSystem.hpp#L130)
-## LIMB_INDEX_HAND_R
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-3
-```
-File: [host\CombatSystem\CombatSystem.hpp at line 131](../../../Src/host/CombatSystem/CombatSystem.hpp#L131)
-## LIMB_INDEX_HAND_L
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-4
-```
-File: [host\CombatSystem\CombatSystem.hpp at line 132](../../../Src/host/CombatSystem/CombatSystem.hpp#L132)
 ## BP_INDEX_LEG_R
 
 Type: constant
@@ -928,30 +868,6 @@ Replaced value:
 5
 ```
 File: [host\CombatSystem\CombatSystem.hpp at line 134](../../../Src/host/CombatSystem/CombatSystem.hpp#L134)
-## LIMB_INDEX_FOOT_R
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-7
-```
-File: [host\CombatSystem\CombatSystem.hpp at line 135](../../../Src/host/CombatSystem/CombatSystem.hpp#L135)
-## LIMB_INDEX_FOOT_L
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-8
-```
-File: [host\CombatSystem\CombatSystem.hpp at line 136](../../../Src/host/CombatSystem/CombatSystem.hpp#L136)
 ## BP_INDEX_ALL
 
 Type: constant
@@ -1216,42 +1132,6 @@ Replaced value:
 12
 ```
 File: [host\CombatSystem\CombatSystem.hpp at line 163](../../../Src/host/CombatSystem/CombatSystem.hpp#L163)
-## TARGET_ZONE_HAND_L
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-13
-```
-File: [host\CombatSystem\CombatSystem.hpp at line 164](../../../Src/host/CombatSystem/CombatSystem.hpp#L164)
-## TARGET_ZONE_HAND_R
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-14
-```
-File: [host\CombatSystem\CombatSystem.hpp at line 165](../../../Src/host/CombatSystem/CombatSystem.hpp#L165)
-## TARGET_ZONE_FOOT_L
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-15
-```
-File: [host\CombatSystem\CombatSystem.hpp at line 166](../../../Src/host/CombatSystem/CombatSystem.hpp#L166)
 ## TARGET_ZONE_FOOT_R
 
 Type: constant
@@ -1276,30 +1156,6 @@ Replaced value:
 20
 ```
 File: [host\CombatSystem\CombatSystem.hpp at line 168](../../../Src/host/CombatSystem/CombatSystem.hpp#L168)
-## TARGET_ZONE_WEAPON
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-17 /*обдумать*/
-```
-File: [host\CombatSystem\CombatSystem.hpp at line 169](../../../Src/host/CombatSystem/CombatSystem.hpp#L169)
-## TARGET_ZONE_LARGEAREA
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-18 /*не нужное*/
-```
-File: [host\CombatSystem\CombatSystem.hpp at line 170](../../../Src/host/CombatSystem/CombatSystem.hpp#L170)
 ## TARGET_ZONE_RANDOM
 
 Type: constant
@@ -1621,18 +1477,6 @@ Replaced value:
 if (_attTargetZone in [zones]) exitWith {ifcheck(_isAimed,MOD(_modif,aimmodif),MOD(_modif,modif))}
 ```
 File: [host\CombatSystem\MeeleWeapon.sqf at line 191](../../../Src/host/CombatSystem/MeeleWeapon.sqf#L191)
-## SSC
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-_isSideChecked = true;
-```
-File: [host\CombatSystem\MeeleWeapon.sqf at line 290](../../../Src/host/CombatSystem/MeeleWeapon.sqf#L290)
 # RuntimeWeaponModulesGenerator.sqf
 
 ## cs_runtime_internal_generate

@@ -16,7 +16,7 @@ File: [host\Database\SQLite\SQLite.h at line 8](../../../Src/host/Database/SQLit
 
 Type: constant
 
-> Exists if **EDITOR** defined
+> <font size="5">Exists if **EDITOR** defined</font>
 
 Description: 
 
@@ -30,7 +30,7 @@ File: [host\Database\SQLite\SQLite.h at line 11](../../../Src/host/Database/SQLi
 
 Type: constant
 
-> Exists if **EDITOR** not defined
+> <font size="5">Exists if **EDITOR** not defined</font>
 
 Description: 
 
@@ -198,7 +198,7 @@ File: [host\Database\SQLite\SQLite_init.sqf at line 19](../../../Src/host/Databa
 
 Type: constant
 
-> Exists if **EDITOR** defined
+> <font size="5">Exists if **EDITOR** defined</font>
 
 Description: 
 - Param: txtval
@@ -213,7 +213,7 @@ File: [host\Database\SQLite\SQLite_manager.sqf at line 678](../../../Src/host/Da
 
 Type: constant
 
-> Exists if **EDITOR** not defined
+> <font size="5">Exists if **EDITOR** not defined</font>
 
 Description: 
 - Param: txtval
@@ -383,15 +383,6 @@ Description:
 
 
 File: [host\Database\SQLite\SQLite_manager.sqf at line 292](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L292)
-## db_checkBanRole
-
-Type: function
-
-Description: 
-- Param: _uid
-- Param: _role
-
-File: [host\Database\SQLite\SQLite_manager.sqf at line 313](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L313)
 ## db_registerClient
 
 Type: function

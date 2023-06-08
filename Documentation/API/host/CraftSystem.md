@@ -286,7 +286,7 @@ File: [host\CraftSystem\Craft.sqf at line 63](../../../Src/host/CraftSystem/Craf
 
 Type: constant
 
-> Exists if **_SQFVM** not defined
+> <font size="5">Exists if **_SQFVM** not defined</font>
 
 Description: 
 
@@ -300,7 +300,7 @@ File: [host\CraftSystem\Craft_initData.sqf at line 16](../../../Src/host/CraftSy
 
 Type: function
 
-> Exists if **_SQFVM** not defined
+> <font size="5">Exists if **_SQFVM** not defined</font>
 
 Description: Получает рецепты с категории
 - Param: _cat
@@ -309,18 +309,6 @@ Description: Получает рецепты с категории
 File: [host\CraftSystem\Craft_initData.sqf at line 23](../../../Src/host/CraftSystem/Craft_initData.sqf#L23)
 # Basic.sqf
 
-## DEBUG_DISTANCE_NEAREST
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\CraftSystem\Crafts\Basic.sqf at line 17](../../../Src/host/CraftSystem/Crafts/Basic.sqf#L17)
 ## src
 
 Type: constant

@@ -12,18 +12,6 @@ Replaced value:
 
 ```
 File: [host\GamemodeManager\GamemodeFunctions.sqf at line 8](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L8)
-## implementation_dynamic_restart
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 168](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L168)
 ## getRoleByClass(val)
 
 Type: constant
@@ -247,7 +235,7 @@ File: [host\GamemodeManager\GamemodeFunctions.sqf at line 801](../../../Src/host
 
 Type: constant
 
-> Exists if **EMULATE_CLIENT_INSP** defined
+> <font size="5">Exists if **EMULATE_CLIENT_INSP** defined</font>
 
 Description: 
 
@@ -257,20 +245,6 @@ Replaced value:
 
 ```
 File: [host\GamemodeManager\GamemodeManager.h at line 11](../../../Src/host/GamemodeManager/GamemodeManager.h#L11)
-## IS_ENABLE_GAMEMODEMANAGER
-
-Type: constant
-
-> Exists if **EMULATE_CLIENT_INSP** not defined
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GamemodeManager\GamemodeManager.h at line 14](../../../Src/host/GamemodeManager/GamemodeManager.h#L14)
 ## getRoleObject(val)
 
 Type: constant
@@ -287,7 +261,7 @@ File: [host\GamemodeManager\GamemodeManager.h at line 17](../../../Src/host/Game
 
 Type: constant
 
-> Exists if **_SQFVM** defined
+> <font size="5">Exists if **_SQFVM** defined</font>
 
 Description: 
 
@@ -338,7 +312,7 @@ File: [host\GamemodeManager\GamemodeManager.h at line 29](../../../Src/host/Game
 
 Type: constant
 
-> Exists if **EDITOR** defined
+> <font size="5">Exists if **EDITOR** defined</font>
 
 Description: время в секундах до начала раунда
 
@@ -360,20 +334,6 @@ Replaced value:
 60*3
 ```
 File: [host\GamemodeManager\GamemodeManager.h at line 35](../../../Src/host/GamemodeManager/GamemodeManager.h#L35)
-## PRE_LOBBY_AWAIT_TIME
-
-Type: constant
-
-> Exists if **EDITOR** defined
-
-Description: прелобби ожидание после которого пикнется режим
-
-
-Replaced value:
-```sqf
-1
-```
-File: [host\GamemodeManager\GamemodeManager.h at line 37](../../../Src/host/GamemodeManager/GamemodeManager.h#L37)
 ## GM_STARTLOGIC_2_0
 
 Type: constant
@@ -390,7 +350,7 @@ File: [host\GamemodeManager\GamemodeManager.h at line 40](../../../Src/host/Game
 
 Type: constant
 
-> Exists if **GM_STARTLOGIC_2_0** defined
+> <font size="5">Exists if **GM_STARTLOGIC_2_0** defined</font>
 
 Description: 
 - Param: name
@@ -404,7 +364,7 @@ File: [host\GamemodeManager\GamemodeManager.h at line 43](../../../Src/host/Game
 
 Type: constant
 
-> Exists if **GM_STARTLOGIC_2_0** not defined
+> <font size="5">Exists if **GM_STARTLOGIC_2_0** not defined</font>
 
 Description: 
 - Param: name
@@ -464,20 +424,6 @@ Replaced value:
 3
 ```
 File: [host\GamemodeManager\GamemodeManager.hpp at line 11](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L11)
-## addRole(roleclass,rolename,countSlots)
-
-Type: constant
-
-Description: 
-- Param: roleclass
-- Param: rolename
-- Param: countSlots
-
-Replaced value:
-```sqf
-[roleclass,rolename,countSlots,[]]
-```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 14](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L14)
 ## ROLE_NAME
 
 Type: constant
@@ -693,7 +639,7 @@ File: [host\GamemodeManager\GamemodeManager.hpp at line 43](../../../Src/host/Ga
 
 Type: function
 
-> Exists if **RELEASE** not defined
+> <font size="5">Exists if **RELEASE** not defined</font>
 
 Description: 
 
@@ -730,30 +676,6 @@ Description: Получение смещения времени
 File: [host\GamemodeManager\Gamemode_internal_auto.sqf at line 7](../../../Src/host/GamemodeManager/Gamemode_internal_auto.sqf#L7)
 # Gamemode_RoundManager.sqf
 
-## testcase_moreclients
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 7](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L7)
-## TEST_EMULATE_CLIENT_FROM_DATABASE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 10](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L10)
 ## gm_processSpawnRole_disabledFullAntags
 
 Type: constant
@@ -766,18 +688,6 @@ Replaced value:
 
 ```
 File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 470](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L470)
-## debuguser_fortestspawn
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 559](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L559)
 ## additionalData
 
 Type: constant

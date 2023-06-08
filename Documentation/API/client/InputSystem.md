@@ -427,7 +427,7 @@ File: [client\InputSystem\inputManager.sqf at line 35](../../../Src/client/Input
 
 Type: constant
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: 
 
@@ -441,7 +441,7 @@ File: [client\InputSystem\inputManager.sqf at line 117](../../../Src/client/Inpu
 
 Type: constant
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: 
 - Param: name

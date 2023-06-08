@@ -1,17 +1,5 @@
 # NOEngineClient.h
 
-## DEBUG_MESSAGE_NOE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\NOEngineClient\NOEngineClient.h at line 7](../../../Src/client/NOEngineClient/NOEngineClient.h#L7)
 ## PACKET_LIFETIME
 
 Type: constant
@@ -510,54 +498,6 @@ Description:
 File: [client\NOEngineClient\NOEngineClientInit.sqf at line 117](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L117)
 # NOEngineClient_chunkDebug.sqf
 
-## enableDebugDraw
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-1
-```
-File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 8](../../../Src/client/NOEngineClient/NOEngineClient_chunkDebug.sqf#L8)
-## enableDebugDrawText
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-1
-```
-File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 9](../../../Src/client/NOEngineClient/NOEngineClient_chunkDebug.sqf#L9)
-## enableDebugDrawInfo
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-1
-```
-File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 10](../../../Src/client/NOEngineClient/NOEngineClient_chunkDebug.sqf#L10)
-## enableDebugDrawSectors
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-1
-```
-File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 11](../../../Src/client/NOEngineClient/NOEngineClient_chunkDebug.sqf#L11)
 ## upside
 
 Type: constant
@@ -587,7 +527,7 @@ File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 142](../../..
 
 Type: constant
 
-> Exists if **enableDebugDrawSectors** defined
+> <font size="5">Exists if **enableDebugDrawSectors** defined</font>
 
 Description: 
 
@@ -601,7 +541,7 @@ File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 161](../../..
 
 Type: constant
 
-> Exists if **enableDebugDrawSectors** defined
+> <font size="5">Exists if **enableDebugDrawSectors** defined</font>
 
 Description: 
 
@@ -615,7 +555,7 @@ File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 162](../../..
 
 Type: function
 
-> Exists if **enableDebugDraw** defined
+> <font size="5">Exists if **enableDebugDraw** defined</font>
 
 Description: 
 - Param: _chunk
@@ -637,7 +577,7 @@ File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 58](../../../
 
 Type: function
 
-> Exists if **enableDebugDrawSectors** defined
+> <font size="5">Exists if **enableDebugDrawSectors** defined</font>
 
 Description: 
 - Param: _x
@@ -649,7 +589,7 @@ File: [client\NOEngineClient\NOEngineClient_chunkDebug.sqf at line 164](../../..
 
 Type: function
 
-> Exists if **enableDebugDrawSectors** defined
+> <font size="5">Exists if **enableDebugDrawSectors** defined</font>
 
 Description: 
 - Param: _chunk
@@ -711,30 +651,6 @@ Description: проверяет загружены ли все объекты ч
 File: [client\NOEngineClient\NOEngineClient_Components.sqf at line 127](../../../Src/client/NOEngineClient/NOEngineClient_Components.sqf#L127)
 # NOEngineClient_NOGEOM_ext.sqf
 
-## NOE_NGO_DEBUG_MODE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 8](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L8)
-## NOE_NGOEXT_DEBUG_MODE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 10](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L10)
 ## NGOExt_create
 
 Type: function
@@ -868,7 +784,7 @@ File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 288](../..
 
 Type: function
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: 
 - Param: _pointer
@@ -962,24 +878,6 @@ Replaced value:
 trace('State num')
 ```
 File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 52](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L52)
-## renderTracer(t,del)
-
-Type: constant
-
-Description: 
-- Param: t
-- Param: del
-
-Replaced value:
-```sqf
-_re = { \
-	_ppos = getPosATL player; _eyedir = [0,0,0] getdir (eyeDirection player); \
-	_size = getChunkSizeByType(t); \
-	objLeft setposatl vectorFromDir(_ppos,-210,_size); \
-	objRight setPosATL vectorFromDir(_ppos,210,_size); \
-}; startUpdate(_re,del);
-```
-File: [client\NOEngineClient\NOEngineClient_Rendering.sqf at line 86](../../../Src/client/NOEngineClient/NOEngineClient_Rendering.sqf#L86)
 # NOEngineClient_TransportLevel.sqf
 
 ## debug_calltraceOnErrorConvert
@@ -998,7 +896,7 @@ File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 209](../.
 
 Type: constant
 
-> Exists if **debug_calltraceOnErrorConvert** defined
+> <font size="5">Exists if **debug_calltraceOnErrorConvert** defined</font>
 
 Description: 
 - Param: macroname
@@ -1012,7 +910,7 @@ File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 212](../.
 
 Type: constant
 
-> Exists if **debug_calltraceOnErrorConvert** not defined
+> <font size="5">Exists if **debug_calltraceOnErrorConvert** not defined</font>
 
 Description: 
 - Param: ma
@@ -1122,7 +1020,7 @@ File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 232](../.
 
 Type: function
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: 
 
@@ -1156,16 +1054,6 @@ Description: генерирует пакет который указывает �
 - Param: _lifetime (optional, default PACKET_LIFETIME)
 
 File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 145](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L145)
-## noe_client_debug_bytearrTest
-
-Type: function
-
-> Exists if **DEBUG** defined
-
-Description: 
-
-
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 174](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L174)
 ## noe_client_byteArrToObjStruct
 
 Type: function

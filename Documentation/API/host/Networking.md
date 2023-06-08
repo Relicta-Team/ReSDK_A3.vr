@@ -32,7 +32,7 @@ File: [host\Networking\Network.hpp at line 10](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> Exists if **ENABLE_LAG_NETWORK** defined
+> <font size="5">Exists if **ENABLE_LAG_NETWORK** defined</font>
 
 Description: 
 - Param: var
@@ -47,7 +47,7 @@ File: [host\Networking\Network.hpp at line 13](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> Exists if **ENABLE_LAG_NETWORK** defined
+> <font size="5">Exists if **ENABLE_LAG_NETWORK** defined</font>
 
 Description: 
 - Param: ind
@@ -61,7 +61,7 @@ File: [host\Networking\Network.hpp at line 14](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> Exists if **ENABLE_LAG_NETWORK** defined
+> <font size="5">Exists if **ENABLE_LAG_NETWORK** defined</font>
 
 Description: 
 - Param: obj
@@ -77,7 +77,7 @@ File: [host\Networking\Network.hpp at line 15](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> Exists if **ENABLE_LAG_NETWORK** not defined
+> <font size="5">Exists if **ENABLE_LAG_NETWORK** not defined</font>
 
 Description: 
 - Param: var
@@ -92,7 +92,7 @@ File: [host\Networking\Network.hpp at line 17](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> Exists if **ENABLE_LAG_NETWORK** not defined
+> <font size="5">Exists if **ENABLE_LAG_NETWORK** not defined</font>
 
 Description: 
 - Param: obj
@@ -108,7 +108,7 @@ File: [host\Networking\Network.hpp at line 18](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> Exists if **_SQFVM** defined
+> <font size="5">Exists if **_SQFVM** defined</font>
 
 Description: 
 - Param: var
@@ -121,23 +121,11 @@ Replaced value:
 File: [host\Networking\Network.hpp at line 22](../../../Src/host/Networking/Network.hpp#L22)
 # Network.sqf
 
-## net_log
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\Networking\Network.sqf at line 9](../../../Src/host/Networking/Network.sqf#L9)
 ## netlog(mes,fmt)
 
 Type: constant
 
-> Exists if **net_log** defined
+> <font size="5">Exists if **net_log** defined</font>
 
 Description: 
 - Param: mes
@@ -152,7 +140,7 @@ File: [host\Networking\Network.sqf at line 12](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> Exists if **net_log** not defined
+> <font size="5">Exists if **net_log** not defined</font>
 
 Description: 
 - Param: mes

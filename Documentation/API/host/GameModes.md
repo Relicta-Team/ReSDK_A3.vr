@@ -35,7 +35,7 @@ File: [host\GameModes\BasicDefines.sqf at line 186](../../../Src/host/GameModes/
 
 Type: constant
 
-> Exists if **EDITOR** defined
+> <font size="5">Exists if **EDITOR** defined</font>
 
 Description: 
 
@@ -205,7 +205,7 @@ File: [host\GameModes\CommonTasks\PublicTasks.sqf at line 19](../../../Src/host/
 
 Type: constant
 
-> Exists if **EDITOR** defined
+> <font size="5">Exists if **EDITOR** defined</font>
 
 Description: 
 - Param: lvl
@@ -221,7 +221,7 @@ File: [host\GameModes\Detective\DetectiveModeRoles.sqf at line 348](../../../Src
 
 Type: constant
 
-> Exists if **EDITOR** not defined
+> <font size="5">Exists if **EDITOR** not defined</font>
 
 Description: 
 - Param: lvl

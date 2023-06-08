@@ -14,18 +14,6 @@ Replaced value:
 File: [host\Curl\Curl.hpp at line 7](../../../Src/host/Curl/Curl.hpp#L7)
 # Curl.sqf
 
-## u_test
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\Curl\Curl.sqf at line 12](../../../Src/host/Curl/Curl.sqf#L12)
 ## curl_send
 
 Type: function
@@ -42,14 +30,6 @@ Description:
 
 
 File: [host\Curl\Curl.sqf at line 18](../../../Src/host/Curl/Curl.sqf#L18)
-## curl_getstatus
-
-Type: function
-
-Description: 
-
-
-File: [host\Curl\Curl.sqf at line 24](../../../Src/host/Curl/Curl.sqf#L24)
 ## curl_error
 
 Type: function
@@ -69,30 +49,6 @@ Description:
 File: [host\Curl\Curl.sqf at line 33](../../../Src/host/Curl/Curl.sqf#L33)
 # CurlThread.sqf
 
-## __allowCurlLog
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\Curl\CurlThread.sqf at line 8](../../../Src/host/Curl/CurlThread.sqf#L8)
-## __timePerformance
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\Curl\CurlThread.sqf at line 10](../../../Src/host/Curl/CurlThread.sqf#L10)
 ## __allowCurlMessageForSuccess
 
 Type: constant
@@ -121,7 +77,7 @@ File: [host\Curl\CurlThread.sqf at line 14](../../../Src/host/Curl/CurlThread.sq
 
 Type: constant
 
-> Exists if **__allowCurlLog** defined
+> <font size="5">Exists if **__allowCurlLog** defined</font>
 
 Description: 
 - Param: mes
@@ -135,7 +91,7 @@ File: [host\Curl\CurlThread.sqf at line 17](../../../Src/host/Curl/CurlThread.sq
 
 Type: constant
 
-> Exists if **__allowCurlLog** not defined
+> <font size="5">Exists if **__allowCurlLog** not defined</font>
 
 Description: 
 - Param: mes

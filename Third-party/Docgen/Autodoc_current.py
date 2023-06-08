@@ -12,10 +12,11 @@ cm_getAllClientsByAccessLevel = {
     params ["_lvl", ["_thisAndHight", false],"_tv"];
     // Код функции cm_getAllClientsByAccessLevel
 };
-
+/*
 cm_accessTypeToNum = {params ["_accessString"];
     // Код функции cm_accessTypeToNum
 };
+*/
 
 cm_noparamsFUnc = {a == 3};
 
@@ -45,7 +46,10 @@ fninside = {
 
 /* comment start
 commentline
-comment end */
+comment end 
+
+#define macro
+*/
 
 passedparamFunc = {
     
@@ -79,16 +83,16 @@ functions = parse_sqf_functions(sqf_code_testcode)
 for function_name, values in functions.items():
     if values["Type"] == "Macro":
         print(f"Macro:{function_name}")
-        print(f"Docs:{values['Desc']}")
-        print(f"Defined at line {values['DefLine']}")
-        print(f"{parameters_to_string(values['Arguments'])}")
-        print(f"Replaced value:{values['Value']}")
-        condit = values['conditional']
-        if condit:
-            print(f"Exists if {condit['name']} is {condit['required']}")
+        #print(f"Docs:{values['Desc']}")
+        #print(f"Defined at line {values['DefLine']}")
+        #print(f"{parameters_to_string(values['Arguments'])}")
+        #print(f"Replaced value:{values['Value']}")
+        #condit = values['conditional']
+        #if condit:
+        #    print(f"Exists if {condit['name']} is {condit['required']}")
     else:
         print(f"Function: {function_name}")
-        #print(f"Docs:{values['Desc']}")
+        print(f"Docs:{values['Desc']}")
         #print(f"Parameters:")
         #print(f"{parameters_to_string(values['Arguments'])}")
     print()

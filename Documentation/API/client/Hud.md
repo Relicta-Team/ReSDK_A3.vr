@@ -63,66 +63,6 @@ Replaced value:
 _w setVariable [#var,val]
 ```
 File: [client\Hud\Hud_init.sqf at line 19](../../../Src/client/Hud/Hud_init.sqf#L19)
-## LIGHT_NO
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-0
-```
-File: [client\Hud\Hud_init.sqf at line 61](../../../Src/client/Hud/Hud_init.sqf#L61)
-## LIGHT_LOW
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-1
-```
-File: [client\Hud\Hud_init.sqf at line 62](../../../Src/client/Hud/Hud_init.sqf#L62)
-## LIGHT_MEDIUM
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2
-```
-File: [client\Hud\Hud_init.sqf at line 63](../../../Src/client/Hud/Hud_init.sqf#L63)
-## LIGHT_LARGE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-3
-```
-File: [client\Hud\Hud_init.sqf at line 64](../../../Src/client/Hud/Hud_init.sqf#L64)
-## LIGHT_FULL
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-4
-```
-File: [client\Hud\Hud_init.sqf at line 65](../../../Src/client/Hud/Hud_init.sqf#L65)
 ## hud_combStyle_onCombatUpdate
 
 Type: function
@@ -147,23 +87,6 @@ Description: вызывается при обновлении спец.кноп�
 
 
 File: [client\Hud\Hud_init.sqf at line 100](../../../Src/client/Hud/Hud_init.sqf#L100)
-## hud_updateTimestamp
-
-Type: function
-
-Description: 
-
-
-File: [client\Hud\Hud_init.sqf at line 122](../../../Src/client/Hud/Hud_init.sqf#L122)
-## hud_hide_reset
-
-Type: function
-
-Description: Восстановить худ
-- Param: _enableLock (optional, default false)
-- Param: _lockProcess (optional, default false)
-
-File: [client\Hud\Hud_init.sqf at line 127](../../../Src/client/Hud/Hud_init.sqf#L127)
 ## hud_recalculateStat
 
 Type: function

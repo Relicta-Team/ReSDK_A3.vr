@@ -161,7 +161,7 @@ File: [client\NetDisplays\NetDisplay.h at line 32](../../../Src/client/NetDispla
 
 Type: function
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: 
 - Param: _class
@@ -346,42 +346,3 @@ Description: структуры с виджетами
 
 
 File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 339](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L339)
-# MobInventory.sqf
-
-## SIZE_INVSLOT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-7
-```
-File: [client\NetDisplays\Displays\MobInventory.sqf at line 62](../../../Src/client/NetDisplays/Displays/MobInventory.sqf#L62)
-## SLOT_BIASH
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-0.3
-```
-File: [client\NetDisplays\Displays\MobInventory.sqf at line 63](../../../Src/client/NetDisplays/Displays/MobInventory.sqf#L63)
-## allocpos__(xpos,ypos)
-
-Type: constant
-
-Description: 
-- Param: xpos
-- Param: ypos
-
-Replaced value:
-```sqf
-[_xp + ((_wp + _biasW) * xpos),_yp + ((_hp + SLOT_BIASH) * ypos),_wp,_hp]
-```
-File: [client\NetDisplays\Displays\MobInventory.sqf at line 72](../../../Src/client/NetDisplays/Displays/MobInventory.sqf#L72)

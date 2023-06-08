@@ -223,18 +223,6 @@ Replaced value:
 File: [host\GURPS\gurps.hpp at line 36](../../../Src/host/GURPS/gurps.hpp#L36)
 # Gurps.sqf
 
-## log_onEncumbranceRecalculate
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\GURPS\Gurps.sqf at line 13](../../../Src/host/GURPS/Gurps.sqf#L13)
 ## AMOUNT
 
 Type: constant

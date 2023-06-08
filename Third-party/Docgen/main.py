@@ -102,7 +102,7 @@ for fpath in result:
             if isConditional:
                 cond = values['conditional']
                 condText = "defined" if cond['required'] else "not defined"
-                handle.write(f"> Exists if **{cond['name']}** {condText}\n\n")
+                handle.write(f"> <font size=\"5\">Exists if **{cond['name']}** {condText}</font>\n\n")
 
             handle.write(f"Description: {values['Desc']}\n")
             

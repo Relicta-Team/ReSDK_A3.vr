@@ -230,7 +230,7 @@ File: [client\SoundSystem\Music.sqf at line 101](../../../Src/client/SoundSystem
 
 Type: constant
 
-> Exists if **MUSIC_DEBUG** defined
+> <font size="5">Exists if **MUSIC_DEBUG** defined</font>
 
 Description: 
 - Param: text
@@ -244,7 +244,7 @@ File: [client\SoundSystem\Music.sqf at line 109](../../../Src/client/SoundSystem
 
 Type: constant
 
-> Exists if **MUSIC_DEBUG** defined
+> <font size="5">Exists if **MUSIC_DEBUG** defined</font>
 
 Description: 
 - Param: text
@@ -259,7 +259,7 @@ File: [client\SoundSystem\Music.sqf at line 109](../../../Src/client/SoundSystem
 
 Type: constant
 
-> Exists if **MUSIC_DEBUG** not defined
+> <font size="5">Exists if **MUSIC_DEBUG** not defined</font>
 
 Description: 
 - Param: text
@@ -618,54 +618,6 @@ Description:
 File: [client\SoundSystem\MusicManager_experimental.sqf at line 116](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L116)
 # Sound3d.sqf
 
-## distLTG
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-(_leg distance _ground )
-```
-File: [client\SoundSystem\Sound3d.sqf at line 188](../../../Src/client/SoundSystem/Sound3d.sqf#L188)
-## lastDist
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-(_ground getVariable ["lastdistance",distLTG])
-```
-File: [client\SoundSystem\Sound3d.sqf at line 189](../../../Src/client/SoundSystem/Sound3d.sqf#L189)
-## isNegativize
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-(distLTG < lastDist)
-```
-File: [client\SoundSystem\Sound3d.sqf at line 190](../../../Src/client/SoundSystem/Sound3d.sqf#L190)
-## isPositivize
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-(distLTG > lastDist)
-```
-File: [client\SoundSystem\Sound3d.sqf at line 191](../../../Src/client/SoundSystem/Sound3d.sqf#L191)
 ## soundProcessor_play
 
 Type: function

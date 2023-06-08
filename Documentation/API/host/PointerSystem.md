@@ -64,7 +64,7 @@ File: [host\PointerSystem\Pointer.sqf at line 73](../../../Src/host/PointerSyste
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined</font>
 
 Description: create and return pointer
 - Param: ref
@@ -78,7 +78,7 @@ File: [host\PointerSystem\pointers.hpp at line 10](../../../Src/host/PointerSyst
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined</font>
 
 Description: 
 - Param: ref
@@ -92,7 +92,7 @@ File: [host\PointerSystem\pointers.hpp at line 12](../../../Src/host/PointerSyst
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined</font>
 
 Description: 
 - Param: id
@@ -106,7 +106,7 @@ File: [host\PointerSystem\pointers.hpp at line 14](../../../Src/host/PointerSyst
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined</font>
 
 Description: 
 - Param: id
@@ -120,7 +120,7 @@ File: [host\PointerSystem\pointers.hpp at line 16](../../../Src/host/PointerSyst
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined</font>
 
 Description: 
 - Param: result
@@ -134,7 +134,7 @@ File: [host\PointerSystem\pointers.hpp at line 18](../../../Src/host/PointerSyst
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined</font>
 
 Description: 
 - Param: _ref
@@ -149,7 +149,7 @@ File: [host\PointerSystem\pointers.hpp at line 21](../../../Src/host/PointerSyst
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** defined</font>
 
 Description: 
 - Param: _ref
@@ -164,7 +164,7 @@ File: [host\PointerSystem\pointers.hpp at line 21](../../../Src/host/PointerSyst
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** not defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** not defined</font>
 
 Description: create and return pointer
 - Param: ref
@@ -178,7 +178,7 @@ File: [host\PointerSystem\pointers.hpp at line 25](../../../Src/host/PointerSyst
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** not defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** not defined</font>
 
 Description: 
 - Param: ref
@@ -192,7 +192,7 @@ File: [host\PointerSystem\pointers.hpp at line 27](../../../Src/host/PointerSyst
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** not defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** not defined</font>
 
 Description: 
 - Param: id
@@ -206,7 +206,7 @@ File: [host\PointerSystem\pointers.hpp at line 29](../../../Src/host/PointerSyst
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** not defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** not defined</font>
 
 Description: 
 - Param: id
@@ -220,7 +220,7 @@ File: [host\PointerSystem\pointers.hpp at line 31](../../../Src/host/PointerSyst
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** not defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** not defined</font>
 
 Description: 
 - Param: result
@@ -234,7 +234,7 @@ File: [host\PointerSystem\pointers.hpp at line 33](../../../Src/host/PointerSyst
 
 Type: constant
 
-> Exists if **POINTER_SYSTEM_EXPERIMENTAL** not defined
+> <font size="5">Exists if **POINTER_SYSTEM_EXPERIMENTAL** not defined</font>
 
 Description: 
 - Param: _ref

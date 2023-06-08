@@ -99,10 +99,11 @@ def parse_sqf_functions(code):
         #print(f"name->>>>>>>>>>>>>>>>>>>{macroname}")
         start_line = -1
         condit = None
-
+        multilineCom = False
         MemberDesc = ""
         
         for i, line in enumerate(lines):
+            singleCom = False
             cond = re.search(ifdef_pattern,line,re.DOTALL)
             if cond:
                 requireDef = cond.group(1) == "ifdef"
@@ -116,10 +117,20 @@ def parse_sqf_functions(code):
             if "#endif" in line and condit:
                 condit = None 
 
+            if "/*" in line:
+                multilineCom = True
+            if "*/" in line:
+                multilineCom = False
+            if "//" in line:
+                singleCom = True
+
             pat = re.search(rf"[ \t]*#define[ \t]+{macroname}", line, re.DOTALL)
             checkedName = f"{macroname}@{i + 1}"
 
             if pat and not checkedName in checkedMacro:
+                if multilineCom or singleCom:
+                    macroname = ""
+                    break
                 start_line = i + 1
                 checkedMacro.append(checkedName)
 
@@ -132,6 +143,9 @@ def parse_sqf_functions(code):
                     
                     MemberDesc = MemberDesc.lstrip("\n").lstrip(" ").rstrip(" ").rstrip("\n")
                 break
+        
+        if macroname == "":
+            continue
 
         if condit:
             macroname += f"@{condit['name']}->{condit['required']}"
@@ -158,7 +172,9 @@ def parse_sqf_functions(code):
             start_line = -1
             condit = None
             MemberDesc = ""
+            multilineCom = False
             for i, line in enumerate(lines):
+                singleCom = False
                 cond = re.search(ifdef_pattern,line,re.DOTALL)
                 if cond:
                     requireDef = cond.group(1) == "ifdef"
@@ -172,9 +188,19 @@ def parse_sqf_functions(code):
                 if "#endif" in line:
                     condit = None 
                 
+                if "/*" in line:
+                    multilineCom = True
+                if "*/" in line:
+                    multilineCom = False
+                if "//" in line:
+                    singleCom = True
+
                 checkedName = f"{function_name}@{i + 1}"
 
                 if re.search(rf"{function_name}\s*=\s*{{", line) and not checkedName in checkedFuncs:
+                    if multilineCom or singleCom:
+                        function_name = ""
+                        break
                     start_line = i + 1
                     checkedFuncs.append(checkedName)
                     
@@ -187,6 +213,10 @@ def parse_sqf_functions(code):
                         
                         MemberDesc = MemberDesc.lstrip("\n").lstrip(" ").rstrip(" ").rstrip("\n")
                     break
+            
+            if function_name == "":
+                continue
+            
             #print(f"func {function_name} at {start_line}")
 
             #print(f'signature found: {function_signature.group()}')

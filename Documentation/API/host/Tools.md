@@ -172,7 +172,7 @@ File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 75](../../../Src
 
 Type: function
 
-> Exists if **DEEP_DEBUG_MODE** defined
+> <font size="5">Exists if **DEEP_DEBUG_MODE** defined</font>
 
 Description: 
 

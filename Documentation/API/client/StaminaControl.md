@@ -1,17 +1,5 @@
 # Stamina.hpp
 
-## stamina_debug
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\StaminaControl\Stamina.hpp at line 8](../../../Src/client/StaminaControl/Stamina.hpp#L8)
 ## stamina_bias_x
 
 Type: constant

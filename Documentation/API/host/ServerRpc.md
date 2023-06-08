@@ -212,7 +212,7 @@ File: [host\ServerRpc\serverRpc_init.sqf at line 21](../../../Src/host/ServerRpc
 
 Type: constant
 
-> Exists if **_SQFVM** defined
+> <font size="5">Exists if **_SQFVM** defined</font>
 
 Description: 
 
@@ -226,7 +226,7 @@ File: [host\ServerRpc\serverRpc_init.sqf at line 23](../../../Src/host/ServerRpc
 
 Type: constant
 
-> Exists if **log_server_rpc** defined
+> <font size="5">Exists if **log_server_rpc** defined</font>
 
 Description: 
 - Param: event
@@ -242,7 +242,7 @@ File: [host\ServerRpc\serverRpc_init.sqf at line 27](../../../Src/host/ServerRpc
 
 Type: constant
 
-> Exists if **log_server_rpc** defined
+> <font size="5">Exists if **log_server_rpc** defined</font>
 
 Description: 
 - Param: data
@@ -256,7 +256,7 @@ File: [host\ServerRpc\serverRpc_init.sqf at line 28](../../../Src/host/ServerRpc
 
 Type: constant
 
-> Exists if **log_server_rpc** not defined
+> <font size="5">Exists if **log_server_rpc** not defined</font>
 
 Description: 
 - Param: event
@@ -272,7 +272,7 @@ File: [host\ServerRpc\serverRpc_init.sqf at line 30](../../../Src/host/ServerRpc
 
 Type: constant
 
-> Exists if **log_server_rpc** not defined
+> <font size="5">Exists if **log_server_rpc** not defined</font>
 
 Description: 
 - Param: data
@@ -372,7 +372,7 @@ File: [host\ServerRpc\serverRpc_init.sqf at line 139](../../../Src/host/ServerRp
 
 Type: function
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: 
 - Param: _name
@@ -382,7 +382,7 @@ File: [host\ServerRpc\serverRpc_init.sqf at line 162](../../../Src/host/ServerRp
 
 Type: function
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: 
 - Param: _name

@@ -62,18 +62,6 @@ Replaced value:
 [0,0]
 ```
 File: [client\ClientData\ClientData.sqf at line 41](../../../Src/client/ClientData/ClientData.sqf#L41)
-## interp(skill)
-
-Type: constant
-
-Description: 
-- Param: skill
-
-Replaced value:
-```sqf
-linearConversion [1, 100, (cd_skills select skill select 0) + (cd_skills select skill select 1), 0.5, 2]
-```
-File: [client\ClientData\ClientData.sqf at line 60](../../../Src/client/ClientData/ClientData.sqf#L60)
 ## printerr(code,text)
 
 Type: constant

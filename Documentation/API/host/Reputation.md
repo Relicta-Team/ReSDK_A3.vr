@@ -1,17 +1,5 @@
 # Reputation_functions.sqf
 
-## TEST_REPUTATION_AUTOVOTE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\Reputation\Reputation_functions.sqf at line 23](../../../Src/host/Reputation/Reputation_functions.sqf#L23)
 ## repvote_serializeFlags
 
 Type: function
@@ -69,7 +57,7 @@ File: [host\Reputation\Reputation_functions.sqf at line 236](../../../Src/host/R
 
 Type: function
 
-> Exists if **EDITOR** defined
+> <font size="5">Exists if **EDITOR** defined</font>
 
 Description: 
 - Param: _name
@@ -107,7 +95,7 @@ File: [host\Reputation\Reputation_functions.sqf at line 302](../../../Src/host/R
 
 Type: function
 
-> Exists if **EDITOR** defined
+> <font size="5">Exists if **EDITOR** defined</font>
 
 Description: 
 

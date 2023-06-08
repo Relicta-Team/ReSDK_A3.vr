@@ -169,7 +169,7 @@ File: [client\WidgetSystem\blockedButtons.hpp at line 46](../../../Src/client/Wi
 
 Type: constant
 
-> Exists if **_SQFVM** defined
+> <font size="5">Exists if **_SQFVM** defined</font>
 
 Description: temporary fix for VM
 - Param: forkey
@@ -1209,7 +1209,7 @@ File: [client\WidgetSystem\widget_eventSystem.sqf at line 15](../../../Src/clien
 
 Type: constant
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: 
 - Param: proc_val

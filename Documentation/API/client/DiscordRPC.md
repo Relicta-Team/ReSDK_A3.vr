@@ -1,17 +1,5 @@
 # DiscordRPC.h
 
-## allowtrace
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\DiscordRPC\DiscordRPC.h at line 7](../../../Src/client/DiscordRPC/DiscordRPC.h#L7)
 ## extname
 
 Type: constant
@@ -85,18 +73,6 @@ Replaced value:
 (val call discrpc_encodeRu)
 ```
 File: [client\DiscordRPC\DiscordRPC.h at line 19](../../../Src/client/DiscordRPC/DiscordRPC.h#L19)
-## USE_LOCALES
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\DiscordRPC\DiscordRPC.h at line 22](../../../Src/client/DiscordRPC/DiscordRPC.h#L22)
 # DiscordRPC_init.sqf
 
 ## discrpc_send
@@ -150,7 +126,7 @@ File: [client\DiscordRPC\DiscordRPC_init.sqf at line 114](../../../Src/client/Di
 
 Type: function
 
-> Exists if **USE_LOCALES** defined
+> <font size="5">Exists if **USE_LOCALES** defined</font>
 
 Description: 
 - Param: _l

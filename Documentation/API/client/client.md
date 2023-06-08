@@ -4,7 +4,7 @@
 
 Type: constant
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: 
 - Param: fcat
@@ -18,7 +18,7 @@ File: [client\Init.sqf at line 49](../../../Src/client/Init.sqf#L49)
 
 Type: constant
 
-> Exists if **DEBUG** not defined
+> <font size="5">Exists if **DEBUG** not defined</font>
 
 Description: 
 - Param: fcat

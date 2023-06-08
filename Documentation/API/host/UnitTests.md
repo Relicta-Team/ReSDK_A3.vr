@@ -1,17 +1,5 @@
 # UnitTest.h
 
-## unit_test_enabled
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\UnitTests\UnitTest.h at line 8](../../../Src/host/UnitTests/UnitTest.h#L8)
 ## assertion_errors
 
 Type: constant
@@ -163,7 +151,7 @@ File: [host\UnitTests\UnitTest.h at line 28](../../../Src/host/UnitTests/UnitTes
 
 Type: constant
 
-> Exists if **unit_test_enabled** defined
+> <font size="5">Exists if **unit_test_enabled** defined</font>
 
 Description: 
 - Param: name
@@ -179,7 +167,7 @@ File: [host\UnitTests\UnitTest.h at line 31](../../../Src/host/UnitTests/UnitTes
 
 Type: constant
 
-> Exists if **unit_test_enabled** not defined
+> <font size="5">Exists if **unit_test_enabled** not defined</font>
 
 Description: 
 - Param: name

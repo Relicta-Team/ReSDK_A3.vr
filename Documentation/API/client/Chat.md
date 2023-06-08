@@ -12,20 +12,6 @@ Replaced value:
 (chat_messages_data joinString "<br/>")
 ```
 File: [client\Chat\Chat.hpp at line 8](../../../Src/client/Chat/Chat.hpp#L8)
-# chat_init.sqf
-
-## chat_unit_tests
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\Chat\chat_init.sqf at line 14](../../../Src/client/Chat/chat_init.sqf#L14)
 # Chat_onScreen.sqf
 
 ## mlp(v)

@@ -460,7 +460,7 @@ File: [client\Inventory\functions.sqf at line 801](../../../Src/client/Inventory
 
 Type: function
 
-> Exists if **INVENTORY_USE_NEW_RENDER_ICONS** defined
+> <font size="5">Exists if **INVENTORY_USE_NEW_RENDER_ICONS** defined</font>
 
 Description: 
 - Param: _wid
@@ -549,14 +549,6 @@ Description:
 
 
 File: [client\Inventory\functions.sqf at line 1188](../../../Src/client/Inventory/functions.sqf#L1188)
-## inventory_onAltClick
-
-Type: function
-
-Description: 
-
-
-File: [client\Inventory\functions.sqf at line 1204](../../../Src/client/Inventory/functions.sqf#L1204)
 ## inventory_onExamine
 
 Type: function
@@ -645,18 +637,6 @@ Replaced value:
 
 ```
 File: [client\Inventory\helpers.hpp at line 11](../../../Src/client/Inventory/helpers.hpp#L11)
-## INVENTORY_USE_NEW_RENDER_ICONS
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\Inventory\helpers.hpp at line 16](../../../Src/client/Inventory/helpers.hpp#L16)
 ## BACKGROUND_COLOR_NOITEM
 
 Type: constant
@@ -705,30 +685,6 @@ Replaced value:
 [0,0.4,0,0.7]
 ```
 File: [client\Inventory\helpers.hpp at line 22](../../../Src/client/Inventory/helpers.hpp#L22)
-## PRESSED_LINK
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-0 //ссылка на ивентарный нажатый слот
-```
-File: [client\Inventory\helpers.hpp at line 24](../../../Src/client/Inventory/helpers.hpp#L24)
-## PRESSED_DRAG
-
-Type: constant
-
-Description: ссылка на ивентарный нажатый слот
-
-
-Replaced value:
-```sqf
-1 //ссылка на драгуемую ктгшку
-```
-File: [client\Inventory\helpers.hpp at line 25](../../../Src/client/Inventory/helpers.hpp#L25)
 ## INDEX_DRAGGER
 
 Type: constant
@@ -822,9 +778,9 @@ Description:
 
 Replaced value:
 ```sqf
-((inventory_previewObject getVariable ["isInteractible",false]) && inventory_isPressedInteractButton || (typeof getInteractibleTarget == BASIC_MOB_TYPE))
+((inventory_previewObject getVariable ["isInteractible",false]) || (typeof getInteractibleTarget == BASIC_MOB_TYPE))
 ```
-File: [client\Inventory\helpers.hpp at line 45](../../../Src/client/Inventory/helpers.hpp#L45)
+File: [client\Inventory\helpers.hpp at line 44](../../../Src/client/Inventory/helpers.hpp#L44)
 ## getInteractibleTarget
 
 Type: constant
@@ -921,18 +877,6 @@ Replaced value:
 (wid getVariable "icon")
 ```
 File: [client\Inventory\helpers.hpp at line 64](../../../Src/client/Inventory/helpers.hpp#L64)
-## widgetSetPicture
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-inventory_widgetSetPicture
-```
-File: [client\Inventory\helpers.hpp at line 67](../../../Src/client/Inventory/helpers.hpp#L67)
 ## getSlotBackground(wid)
 
 Type: constant
@@ -1381,7 +1325,7 @@ File: [client\Inventory\helpers.hpp at line 130](../../../Src/client/Inventory/h
 
 Type: constant
 
-> Exists if **INVENTORY_LOG** defined
+> <font size="5">Exists if **INVENTORY_LOG** defined</font>
 
 Description: 
 - Param: mes
@@ -1396,7 +1340,7 @@ File: [client\Inventory\helpers.hpp at line 141](../../../Src/client/Inventory/h
 
 Type: constant
 
-> Exists if **INVENTORY_LOG** not defined
+> <font size="5">Exists if **INVENTORY_LOG** not defined</font>
 
 Description: 
 - Param: mes
@@ -1675,18 +1619,6 @@ Replaced value:
 PIC_PATH("items\temp_item")
 ```
 File: [client\Inventory\inventory_init.sqf at line 11](../../../Src/client/Inventory/inventory_init.sqf#L11)
-## UNIT_TEST_ITEM
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\Inventory\inventory_init.sqf at line 17](../../../Src/client/Inventory/inventory_init.sqf#L17)
 # PreviewObject.sqf
 
 ## MAX_ONMOUSECURSOR_DROP_ANGLE

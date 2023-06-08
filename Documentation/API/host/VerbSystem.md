@@ -105,7 +105,7 @@ Replaced value:
 ```sqf
 _usr
 ```
-File: [host\VerbSystem\verbsCondAndAct.h at line 50](../../../Src/host/VerbSystem/verbsCondAndAct.h#L50)
+File: [host\VerbSystem\verbsCondAndAct.h at line 9](../../../Src/host/VerbSystem/verbsCondAndAct.h#L9)
 ## src
 
 Type: constant
@@ -115,21 +115,9 @@ Description: источник верба (предмет или другой м�
 
 Replaced value:
 ```sqf
-this
+_src
 ```
-File: [host\VerbSystem\verbsCondAndAct.h at line 51](../../../Src/host/VerbSystem/verbsCondAndAct.h#L51)
-## verbCondParams()
-
-Type: constant
-
-Description: 
-- Param: 
-
-Replaced value:
-```sqf
-params ["_src","_usr"]
-```
-File: [host\VerbSystem\verbsCondAndAct.h at line 12](../../../Src/host/VerbSystem/verbsCondAndAct.h#L12)
+File: [host\VerbSystem\verbsCondAndAct.h at line 11](../../../Src/host/VerbSystem/verbsCondAndAct.h#L11)
 ## this
 
 Type: constant
@@ -142,18 +130,6 @@ Replaced value:
 src
 ```
 File: [host\VerbSystem\verbsCondAndAct.h at line 13](../../../Src/host/VerbSystem/verbsCondAndAct.h#L13)
-## TEMP_DEF_FUNC(name)
-
-Type: constant
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-func(name) {verbCondParams(); true};
-```
-File: [host\VerbSystem\verbsCondAndAct.h at line 14](../../../Src/host/VerbSystem/verbsCondAndAct.h#L14)
 ## isSrcInInventory
 
 Type: constant
@@ -334,18 +310,6 @@ Replaced value:
 if (cond) exitWith {true}
 ```
 File: [host\VerbSystem\verbsCondAndAct.h at line 45](../../../Src/host/VerbSystem/verbsCondAndAct.h#L45)
-## ACTION(name)
-
-Type: constant
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-verb_act_##name = { params ['this',"_usr","_client"];
-```
-File: [host\VerbSystem\verbsCondAndAct.h at line 49](../../../Src/host/VerbSystem/verbsCondAndAct.h#L49)
 ## callbackObject
 
 Type: constant
@@ -408,14 +372,16 @@ true}]; _data set [0,{
 File: [host\VerbSystem\verbsCondAndAct.h at line 64](../../../Src/host/VerbSystem/verbsCondAndAct.h#L64)
 ## name
 
-Type: function
+Type: constant
 
-Description: #define ACTION(name) verb_act_##
-- Param: this
-- Param: _usr
-- Param: _client
+Description: 
 
-File: [host\VerbSystem\verbsCondAndAct.h at line 49](../../../Src/host/VerbSystem/verbsCondAndAct.h#L49)
+
+Replaced value:
+```sqf
+true}]; _data set [2,{
+```
+File: [host\VerbSystem\verbsCondAndAct.h at line 66](../../../Src/host/VerbSystem/verbsCondAndAct.h#L66)
 ## setName(newstr)
 
 Type: constant

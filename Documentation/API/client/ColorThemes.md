@@ -146,7 +146,7 @@ File: [client\ColorThemes\ColorThemes_init.sqf at line 139](../../../Src/client/
 
 Type: function
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: 
 - Param: _themeName

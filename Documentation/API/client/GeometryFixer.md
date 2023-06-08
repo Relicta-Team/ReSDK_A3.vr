@@ -1,17 +1,5 @@
 # GeometryFixer.h
 
-## GEOMETRY_FIXER_TRACE_POSITIONS
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\GeometryFixer\GeometryFixer.h at line 7](../../../Src/client/GeometryFixer/GeometryFixer.h#L7)
 ## GEOMETRY_FIXER_DISTANCE_SAVE_POSITION
 
 Type: constant
@@ -60,18 +48,6 @@ Replaced value:
 0.6
 ```
 File: [client\GeometryFixer\GeometryFixer.h at line 18](../../../Src/client/GeometryFixer/GeometryFixer.h#L18)
-## GEOMETRY_FIXER_COUNT_FALLING_CHECK
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-4
-```
-File: [client\GeometryFixer\GeometryFixer.h at line 21](../../../Src/client/GeometryFixer/GeometryFixer.h#L21)
 ## __falling_animation_prefix__
 
 Type: constant
@@ -199,7 +175,7 @@ File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 28](../../../Src
 
 Type: function
 
-> Exists if **GEOMETRYFIXER_GEOSAVER_DISABLED** defined
+> <font size="5">Exists if **GEOMETRYFIXER_GEOSAVER_DISABLED** defined</font>
 
 Description: функционал сломан и не поддерживатеся на данный момент
 

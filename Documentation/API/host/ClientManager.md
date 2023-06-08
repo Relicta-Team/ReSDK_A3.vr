@@ -598,13 +598,3 @@ Replaced value:
 errorformat("[Command::spawnitem]: " + cause + " - (%1 = %2)",_varName arg _varValue)
 ```
 File: [host\ClientManager\cmds\Reflect.sqf at line 29](../../../Src/host/ClientManager/cmds/Reflect.sqf#L29)
-# ServerControl.sqf
-
-## gm_startFromLobbyCondition
-
-Type: function
-
-Description: 
-
-
-File: [host\ClientManager\cmds\ServerControl.sqf at line 224](../../../Src/host/ClientManager/cmds/ServerControl.sqf#L224)

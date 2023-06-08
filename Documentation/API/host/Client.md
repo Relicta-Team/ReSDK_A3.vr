@@ -16,7 +16,7 @@ File: [host\Client\client.sqf at line 18](../../../Src/host/Client/client.sqf#L1
 
 Type: constant
 
-> Exists if **use_client_connection_log** defined
+> <font size="5">Exists if **use_client_connection_log** defined</font>
 
 Description: 
 - Param: var
@@ -31,7 +31,7 @@ File: [host\Client\client.sqf at line 21](../../../Src/host/Client/client.sqf#L2
 
 Type: constant
 
-> Exists if **use_client_connection_log** not defined
+> <font size="5">Exists if **use_client_connection_log** not defined</font>
 
 Description: 
 - Param: var

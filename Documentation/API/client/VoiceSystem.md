@@ -16,7 +16,7 @@ File: [client\VoiceSystem\engine.h at line 8](../../../Src/client/VoiceSystem/en
 
 Type: constant
 
-> Exists if **ENABLE_LINE_IN_FILES** defined
+> <font size="5">Exists if **ENABLE_LINE_IN_FILES** defined</font>
 
 Description: 
 
@@ -30,7 +30,7 @@ File: [client\VoiceSystem\engine.h at line 11](../../../Src/client/VoiceSystem/e
 
 Type: constant
 
-> Exists if **ENABLE_LINE_IN_FILES** not defined
+> <font size="5">Exists if **ENABLE_LINE_IN_FILES** not defined</font>
 
 Description: 
 
@@ -155,7 +155,7 @@ File: [client\VoiceSystem\engine.h at line 30](../../../Src/client/VoiceSystem/e
 
 Type: constant
 
-> Exists if **__TRACE__ENABLED** defined
+> <font size="5">Exists if **__TRACE__ENABLED** defined</font>
 
 Description: 
 - Param: message
@@ -169,7 +169,7 @@ File: [client\VoiceSystem\engine.h at line 34](../../../Src/client/VoiceSystem/e
 
 Type: constant
 
-> Exists if **__TRACE__ENABLED** defined
+> <font size="5">Exists if **__TRACE__ENABLED** defined</font>
 
 Description: 
 - Param: message
@@ -184,7 +184,7 @@ File: [client\VoiceSystem\engine.h at line 34](../../../Src/client/VoiceSystem/e
 
 Type: constant
 
-> Exists if **__TRACE__ENABLED** not defined
+> <font size="5">Exists if **__TRACE__ENABLED** not defined</font>
 
 Description: 
 - Param: message
@@ -271,30 +271,6 @@ Replaced value:
 File: [client\VoiceSystem\script.h at line 11](../../../Src/client/VoiceSystem/script.h#L11)
 # VoiceSystem_Control.sqf
 
-## stamina_border_size_x
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-1
-```
-File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 14](../../../Src/client/VoiceSystem/VoiceSystem_Control.sqf#L14)
-## stamina_border_size_y
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-15
-```
-File: [client\VoiceSystem\VoiceSystem_Control.sqf at line 15](../../../Src/client/VoiceSystem/VoiceSystem_Control.sqf#L15)
 ## voice_changer_border_size_x
 
 Type: constant
@@ -517,7 +493,7 @@ File: [client\VoiceSystem\VoiceSystem_init.sqf at line 14](../../../Src/client/V
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -527,7 +503,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 8](../../../Src/client/V
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -537,7 +513,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 38](../../../Src/client/
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -547,7 +523,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 63](../../../Src/client/
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -557,7 +533,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 101](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -567,7 +543,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 136](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -577,7 +553,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 172](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -587,7 +563,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 204](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -597,7 +573,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 253](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -607,7 +583,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 318](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -617,7 +593,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 342](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -627,7 +603,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 376](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -637,7 +613,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 404](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -647,7 +623,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 433](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -657,7 +633,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 463](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -667,7 +643,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 508](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -677,7 +653,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 546](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -687,7 +663,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 580](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -697,7 +673,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 604](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -707,7 +683,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 642](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -717,7 +693,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 674](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -727,7 +703,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 702](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -737,7 +713,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 730](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -747,7 +723,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 768](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -757,7 +733,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 808](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -767,7 +743,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 844](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -777,7 +753,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 876](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -795,7 +771,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 956](../../../Src/client
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -805,7 +781,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1002](../../../Src/clien
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -815,7 +791,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1053](../../../Src/clien
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -825,7 +801,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1101](../../../Src/clien
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -835,7 +811,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1157](../../../Src/clien
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -845,7 +821,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1217](../../../Src/clien
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -855,7 +831,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1250](../../../Src/clien
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -865,7 +841,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1286](../../../Src/clien
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -875,7 +851,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1290](../../../Src/clien
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -885,7 +861,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1318](../../../Src/clien
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -895,7 +871,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1358](../../../Src/clien
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -905,7 +881,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1368](../../../Src/clien
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -915,7 +891,7 @@ File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1408](../../../Src/clien
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -931,18 +907,6 @@ Description: VOICE_DISABLE_LEGACYCODE
 File: [client\VoiceSystem\VoiceSystem_part2.sqf at line 1486](../../../Src/client/VoiceSystem/VoiceSystem_part2.sqf#L1486)
 # VoiceSystem_publicInterface.sqf
 
-## VOICE_IS_USE_NICKNAME_AS_TS
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 12](../../../Src/client/VoiceSystem/VoiceSystem_publicInterface.sqf#L12)
 ## VOICE_DISABLE_IN_SINGLEPLAYERMODE
 
 Type: constant
@@ -1180,7 +1144,7 @@ File: [client\VoiceSystem\VoiceSystem_publicInterface.sqf at line 835](../../../
 
 Type: function
 
-> Exists if **DEBUG** defined
+> <font size="5">Exists if **DEBUG** defined</font>
 
 Description: 
 - Param: _unit
@@ -1306,18 +1270,6 @@ Description: Получает все радио игрока
 File: [client\VoiceSystem\VoiceSystem_Transmith.sqf at line 192](../../../Src/client/VoiceSystem/VoiceSystem_Transmith.sqf#L192)
 # VoiceSystem_uncategorized.sqf
 
-## DEBUG_MODE_FULL
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 346](../../../Src/client/VoiceSystem/VoiceSystem_uncategorized.sqf#L346)
 ## TFAR_fnc_activeLrRadio
 
 Type: function
@@ -1466,7 +1418,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 958](../../../Sr
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1476,7 +1428,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 963](../../../Sr
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1486,7 +1438,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1002](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1496,7 +1448,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1033](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1506,7 +1458,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1060](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1516,7 +1468,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1091](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1526,7 +1478,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1116](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1536,7 +1488,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1145](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1546,7 +1498,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1186](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1556,7 +1508,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1239](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1566,7 +1518,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1271](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1584,7 +1536,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line -1](../../../Src
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1594,7 +1546,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1352](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1604,7 +1556,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1379](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1614,7 +1566,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1405](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1624,7 +1576,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1428](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1634,7 +1586,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1500](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1644,7 +1596,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1599](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1654,7 +1606,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1630](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1672,7 +1624,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1691](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1682,7 +1634,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1733](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1692,7 +1644,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1762](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1702,7 +1654,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1806](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1712,7 +1664,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1831](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1722,7 +1674,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1855](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1732,7 +1684,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1878](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1742,7 +1694,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1946](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1752,7 +1704,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 1975](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1762,7 +1714,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2004](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1772,7 +1724,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2029](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1782,7 +1734,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2056](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1792,7 +1744,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2096](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1802,7 +1754,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2124](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1812,7 +1764,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2154](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1822,7 +1774,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2177](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1832,7 +1784,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2200](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1842,7 +1794,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2229](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1852,7 +1804,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2251](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1862,7 +1814,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2343](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1872,7 +1824,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2382](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1882,7 +1834,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2444](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1892,7 +1844,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2448](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1902,7 +1854,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2457](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1912,7 +1864,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2486](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1922,7 +1874,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2515](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1932,7 +1884,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2551](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1942,7 +1894,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2575](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1952,7 +1904,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2597](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1962,7 +1914,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2703](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1972,7 +1924,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2729](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1982,7 +1934,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2772](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -1992,7 +1944,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2817](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2002,7 +1954,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2830](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2012,7 +1964,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2834](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2022,7 +1974,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2876](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2032,7 +1984,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2903](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2042,7 +1994,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2923](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2052,7 +2004,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2953](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2062,7 +2014,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2972](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2072,7 +2024,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 2985](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2082,7 +2034,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3009](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2092,7 +2044,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3020](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2102,7 +2054,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3040](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2112,7 +2064,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3044](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2122,7 +2074,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3066](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2132,7 +2084,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3095](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2142,7 +2094,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3113](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2152,7 +2104,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3133](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2162,7 +2114,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3160](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2172,7 +2124,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3176](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2182,7 +2134,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3205](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2192,7 +2144,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3226](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2202,7 +2154,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3245](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2212,7 +2164,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3259](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2222,7 +2174,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3338](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2232,7 +2184,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3366](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2242,7 +2194,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3402](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2252,7 +2204,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3464](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2262,7 +2214,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3498](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2272,7 +2224,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3634](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2282,7 +2234,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3701](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2292,7 +2244,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3787](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2302,7 +2254,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3823](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2312,7 +2264,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3885](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2322,7 +2274,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3919](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2332,7 +2284,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 3957](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2342,7 +2294,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4079](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2352,7 +2304,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4116](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2362,7 +2314,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4137](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2372,7 +2324,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4223](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2382,7 +2334,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4264](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2392,7 +2344,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4358](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2402,7 +2354,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4470](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 
@@ -2412,7 +2364,7 @@ File: [client\VoiceSystem\VoiceSystem_uncategorized.sqf at line 4529](../../../S
 
 Type: function
 
-> Exists if **VOICE_DISABLE_LEGACYCODE** not defined
+> <font size="5">Exists if **VOICE_DISABLE_LEGACYCODE** not defined</font>
 
 Description: 
 

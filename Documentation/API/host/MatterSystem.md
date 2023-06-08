@@ -885,18 +885,6 @@ Replaced value:
 (_ns get (val))
 ```
 File: [host\MatterSystem\MatterSystem_functions.sqf at line 22](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L22)
-## ms_log_transfer
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 434](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L434)
 ## ms_internal_initInheritance
 
 Type: function
