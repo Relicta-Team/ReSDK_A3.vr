@@ -5,18 +5,14 @@
 
 #include <..\..\..\..\engine.hpp>
 #include <..\..\..\..\oop.hpp>
+#include <..\..\..\..\text.hpp>
 #include <..\..\..\GameConstants.hpp>
 #include <..\..\..\..\ServerRpc\serverRpc.hpp>
 #include <..\..\..\..\NOEngine\NOEngine.hpp>
 
-
+//Статическая дверь. Открывается сменой позиции/поворотом
 class(DoorStatic) extends(IStruct)
 	
-	getter_func(isDoor,true);
-	var(isOpen,false); //открыта ли дверь
-	editor_attribute("EditorVisible" arg "type:bool") editor_attribute("Tooltip" arg "Заперта ли дверь")
-	var(isLocked,false); //можно ли открыть дверь
-	var_array(keyTypes); //какие типы ключей подходят (строки)
 	getter_func(animateData,[]);//[vecbias,dir]
 
 	getter_func(getOpenSoundParams,["doors\wooden_open" arg getRandomPitchInRange(0.6,1.3) arg null]);

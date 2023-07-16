@@ -5,18 +5,14 @@
 
 #include <..\..\..\..\engine.hpp>
 #include <..\..\..\..\oop.hpp>
+#include <..\..\..\..\text.hpp>
 #include <..\..\..\GameConstants.hpp>
 #include <..\..\..\..\NOEngine\NOEngine_SharedTransportLevel.hpp>
 #include <..\..\..\..\NOEngine\NOEngine.hpp>
 
-
+//Динамическая дверь. Открывается через анимацию
 class(DoorDynamic) extends(DynamicStruct)
 	var(name,"Дверь");
-	getter_func(isDoor,true);
-	var(isOpen,false); //открыта ли дверь
-	editor_attribute("EditorVisible" arg "type:bool") editor_attribute("Tooltip" arg "Заперта ли дверь")
-	var(isLocked,false); //можно ли открыть дверь
-	var_array(keyTypes); //какие типы ключей подходят (строки)
 	getter_func(animateData,[]); //лист аргументов справа от animate (НЕ ДОЛЖНО СОДЕРЖАТЬ ПОКА БОЛЕЕ 1 СТЕЙТА АНИМАЦИИ)
 	var(serializedAnim,[-1 arg -1 arg -1]); //подготовленная анимация (должна совпадать с количеством анимаций)
 
