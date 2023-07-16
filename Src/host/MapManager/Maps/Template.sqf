@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: 1.0';__metaInfoVersion__ = 2;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.2';__metaInfoVersion__ = 2;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -58,7 +58,7 @@ _4052_544194007_642334_10439 = ['TeleportBase',[4052.54,4007.64,4.10439],277.851
 ['TeleportExit',[4053.63,4016.99,4.31423],255.482,[0,0,1], {go_editor_globalRefs set ['tp_main',_thisObj];
 }] call InitStruct; 
 _4072_994874042_888184_53377 = ['TeleportBase',[4072.99,4042.89,4.53377],0,[0,0,1]] call InitStruct; 
-_4034_460454002_918219_31756 = ['LampWall',[4034.46,4002.92,14.3047,true],133.232,[0.882371,0.402267,0.244138], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4034_460454002_918219_31756 = ['LampWall',[4034.46,4002.92,14.3047,true],156.996,[0.969658,0.0125973,0.244142], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 _4006_545174019_7182611_18008 = ['LampWall',[4006.55,4019.72,16.1657,true],292.182,[-0.431516,-0.901254,0.0391875], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 _4020_542974020_298589_83190 = ['LampWall',[4020.54,4020.3,14.8166,true],18.7499,[-0.965691,0.254814,-0.0500989], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 _4011_509774007_692144_30183 = ['LampWall',[4011.51,4007.69,4.30183],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
@@ -84,6 +84,26 @@ _4076_875984049_953134_56122 = ['IStruct',[4076.88,4049.95,9.97233,true],176.437
 }] call InitItem; 
 _4037_524904010_855714_03957 = ['IStruct',[4037.52,4010.86,9.45068,true],87.5654,[0.024512,0.0395593,0.998917], {_thisObj setvariable ['model','a3\structures_f\civ\camping\campingtable_f.p3d']; go_editor_globalRefs set ['table_target',_thisObj];
 }] call InitStruct; // !!! realocated model !!!
+['Campfire',[4017.82,4010.49,9.32876,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['HospitalBed',[4015.69,4014.17,10.0549,true],0,[-0.0154596,-0.00693025,0.999856]] call InitStruct; 
+['ChairLibrary',[4017.03,4014.29,4.4526],346.692,[0,0,1]] call InitItem; 
+_4036_612064008_184084_12800 = ['SteelGreenDoor',[4036.61,4008.18,4.128],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"keymain;keymaster"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BetonTrapeciaSmall',[4034.96,4007.7,4.78337],273.858,[0,0,1]] call InitStruct; 
+['BetonTrapeciaSmall',[4038.14,4007.65,10.3463,true],87.2918,[-0.0895523,-0.00130586,0.995981]] call InitStruct; 
+_4034_712894004_802984_20000 = ['SteelGreenDoor',[4034.71,4004.8,4.2],275.485,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"keyback;keymaster"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BetonTrapeciaSmall',[4035.38,4006.42,4.88616],0.939378,[0,0,1]] call InitStruct; 
+['BetonTrapeciaSmall',[4035.12,4003.12,10.7132,true],182.922,[0,0.0861225,0.996285]] call InitStruct; 
+['ConcertePanel',[4038.78,4005.42,9.9939,true],355.413,[0.835988,0.0749653,0.543602]] call InitStruct; 
+['ConcertePanel',[4038.46,4001.86,9.99901,true],12.067,[0.822403,-0.16777,0.543605]] call InitStruct; 
+['BetonTrapeciaSmall',[4036.45,4003.07,10.6655,true],182.922,[0,0.0861225,0.996285]] call InitStruct; 
+['BetonTrapeciaSmall',[4037.89,4003.07,10.3688,true],90.907,[-0.0860692,-0.003026,0.996285]] call InitStruct; 
+_4037_181404004_369144_11875 = ['IStruct',[4037.18,4004.37,9.51643,true],87.5645,[-0.0384802,0.0395592,0.998476], {_thisObj setvariable ['model','a3\structures_f_heli\furniture\rattantable_01_f.p3d'];}] call InitStruct; // !!! realocated model !!!
+['LampKerosene',[4036.87,4004.08,4.91473],302.836,[0,0,1]] call InitItem; 
+_4037_229004004_448004_91524 = ['Key',[4037.23,4004.45,9.91817,true],51.8121,[0.0462523,0.00517806,0.998916], {_thisObj setvariable ['preinit@__keytypesstr',"keymaster"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
+_4037_104004004_490974_91924 = ['Key',[4037.1,4004.49,9.92217,true],0,[0.0245368,0.0395618,0.998916], {_thisObj setvariable ['preinit@__keytypesstr',"keyback"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
+_4035_395024008_773444_27704 = ['IStruct',[4035.4,4008.77,9.67472,true],96.4641,[-0.031897,0.0450359,0.998476], {_thisObj setvariable ['model','a3\structures_f_heli\furniture\rattantable_01_f.p3d'];}] call InitStruct; // !!! realocated model !!!
+_4035_437994008_815925_07424 = ['Key',[4035.44,4008.82,10.0772,true],0,[0.0245368,0.0395618,0.998916], {_thisObj setvariable ['preinit@__keytypesstr',"keymain"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
+['LampKerosene',[4035.08,4008.58,5.07209],354.914,[0,0,1]] call InitItem; 
 
 
 
@@ -154,4 +174,27 @@ if (!isNil'_4076_875984049_953134_56122') then {
 };
 if (!isNil'_4037_524904010_855714_03957') then {
 	_4037_524904010_855714_03957 setvariable ['name',"Столецкий"];
+};
+if (!isNil'_4036_612064008_184084_12800') then {
+	_4036_612064008_184084_12800 setvariable ['name',"Главный вход"];
+	_4036_612064008_184084_12800 setvariable ['islocked',true];
+};
+if (!isNil'_4034_712894004_802984_20000') then {
+	_4034_712894004_802984_20000 setvariable ['name',"Задняя дверь"];
+	_4034_712894004_802984_20000 setvariable ['islocked',true];
+};
+if (!isNil'_4037_181404004_369144_11875') then {
+	_4037_181404004_369144_11875 setvariable ['name',"Столецкий"];
+};
+if (!isNil'_4037_229004004_448004_91524') then {
+	_4037_229004004_448004_91524 setvariable ['name',"Ключ (универсальный)"];
+};
+if (!isNil'_4037_104004004_490974_91924') then {
+	_4037_104004004_490974_91924 setvariable ['name',"Ключ от заднего входа"];
+};
+if (!isNil'_4035_395024008_773444_27704') then {
+	_4035_395024008_773444_27704 setvariable ['name',"Столецкий"];
+};
+if (!isNil'_4035_437994008_815925_07424') then {
+	_4035_437994008_815925_07424 setvariable ['name',"Ключ от главного входа"];
 };
