@@ -3,6 +3,28 @@
 // sdk.relicta.ru
 // ======================================================
 
+getter_func(isDoor,true);
+var(isOpen,false); //открыта ли дверь
+editor_attribute("EditorVisible" arg "type:bool") editor_attribute("Tooltip" arg "Заперта ли дверь")
+var(isLocked,false); //можно ли открыть дверь
+var_array(keyTypes); //какие типы ключей подходят (строки)
+
+editor_attribute("alias" arg "Типы ключей")
+editor_attribute("Tooltip" arg "Какими типами ключей можно открыть эту дверь (с учетом регистра).\n\nЗдесь можно перечислить типы ключей с разделитерями: \n точка с запятой (;)\n запятой (" pcomma ")\n прямой чертой (|)\n пробелом ( )\n\nПример: ""key1;key2;key3""")
+editor_attribute("EditorVisible" arg "type:string" arg "stringmaxsize:512")
+var(preinit@__keyTypesStr,""); //системная переменная для установки ключей через редактор
+
+func(__handlePreInitVars__)
+{
+	objParams();
+	super();
+	private _ktypes = getSelf(preinit@__keyTypesStr);
+	if (count _ktypes > 0) then {
+		private _listKeys = _ktypes splitString ";| ,";
+		setSelf(keyTypes,_listKeys);
+	};
+	setSelf(preinit@__keyTypesStr,null);
+};
 
 getter_func(canUseMainAction,callFunc(_usr,isMob));
 func(getMainActionName)
