@@ -313,7 +313,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\GameObject.sqf at line 184](../../../Src/host/GameObjects/GameObject.sqf#L184)
+File: [host\GameObjects\GameObject.sqf at line 190](../../../Src/host/GameObjects/GameObject.sqf#L190)
 ## startSectorIndex
 
 Type: constant
@@ -325,7 +325,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 461](../../../Src/host/GameObjects/GameObject.sqf#L461)
+File: [host\GameObjects\GameObject.sqf at line 467](../../../Src/host/GameObjects/GameObject.sqf#L467)
 ## sectorSize
 
 Type: constant
@@ -337,7 +337,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 462](../../../Src/host/GameObjects/GameObject.sqf#L462)
+File: [host\GameObjects\GameObject.sqf at line 468](../../../Src/host/GameObjects/GameObject.sqf#L468)
 ## flyingObject
 
 Type: Variable
@@ -361,7 +361,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\GameObject.sqf at line 226](../../../Src/host/GameObjects/GameObject.sqf#L226)
+File: [host\GameObjects\GameObject.sqf at line 232](../../../Src/host/GameObjects/GameObject.sqf#L232)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
@@ -5357,7 +5357,7 @@ Description: for testing [obj,[-0.73,0.7,-1.365],270] call struct_door_initOpenM
 - Param: _vecbias
 - Param: _dir
 
-File: [host\GameObjects\Structures\Doors\Static\DoorStatic.sqf at line 87](../../../Src/host/GameObjects/Structures/Doors/Static/DoorStatic.sqf#L87)
+File: [host\GameObjects\Structures\Doors\Static\DoorStatic.sqf at line 83](../../../Src/host/GameObjects/Structures/Doors/Static/DoorStatic.sqf#L83)
 # Teleport.sqf
 
 ## teleportMobToPoint
