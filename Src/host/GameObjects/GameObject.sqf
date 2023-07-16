@@ -127,6 +127,12 @@ class(GameObject) extends(ManagedObject)
 		};
 	};
 
+	//Системный метод для обработки начальных значений переменных с префиксом preinit@
+	func(__handlePreInitVars__)
+	{
+		objParams();
+	};
+
 	//Получает список всех объектов данного типа
 	func(getAllObjects)
 	{

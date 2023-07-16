@@ -158,6 +158,7 @@ function(mm_handleObjectSave)
 	_randPosString = "";
 	_objcustomdata = [];
 	_initCodeArgs = [];
+		_addPreInitHandler = false;
 
 	if (_realocModel != "") then {
 		_initCodeArgs pushBackUnique (format["%1 setvariable ['%2','%3'];",'_thisObj','model',_realocModel])
@@ -195,6 +196,11 @@ function(mm_handleObjectSave)
 				format["Wrong light type '%1' for object at position '%2'",_realVal,getposatl _obj];
 				continue;
 			};
+		};
+		if ("preinit@" in _x) then {
+			_addPreInitHandler = true;
+			_initCodeArgs pushBackUnique (format["%1 setvariable ['%2',%3];",'_thisObj',_name,_val]);
+			continue;
 		};
 		if (_x == "lightIsEnabled" || _x == "light") then {
 			_initCodeArgs pushBackUnique (format["%1 setvariable ['%2',%3];",'_thisObj',_name,_val]);
@@ -320,6 +326,12 @@ function(mm_handleObjectSave)
 	};
 	if (_isEffectModel) then {
 		_addictPost = "// Effect";
+	};
+
+	if (_addPreInitHandler) then {
+		_initCodeArgs pushBack (
+			format["%1 call (%1 getvariable '"+PROTOTYPE_VAR_NAME+"' getvariable '__handlePreInitVars__');","_thisObj"]
+		);
 	};
 
 	//pre init code initializer
