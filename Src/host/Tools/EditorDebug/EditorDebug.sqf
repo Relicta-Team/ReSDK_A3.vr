@@ -11,7 +11,7 @@
 #include "EditorDebug_datahandler.sqf"
 #include "EditorDebug_visual.sqf"
 
-editorDebug_isEnabled = false; //not working correctly (position wrong). need fix
+editorDebug_isEnabled = true; //global mode
 
 editorDebug_handlerUpdate = -1;
 

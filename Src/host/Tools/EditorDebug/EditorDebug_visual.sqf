@@ -6,13 +6,10 @@
 
 //struct of vec3: ref ctg, name, code target, positions(size),handler
 editorDebug_handlerWidgets = [
-	[widgetNull,"Usr",{
-		player getVariable ["link",nullPtr]
-		},vec4(40,0,20,100),editorDebug_handler_gameObject],
 	[widgetNull,"Hand",{
 		_ref = player getVariable "link";
 		callFunc(_ref,getItemInActiveHand)
-		},vec4(40+20,0,20,100),editorDebug_handler_gameObject],
+		},vec4(40,0,20,100),editorDebug_handler_gameObject],
 	[widgetNull,"Targ",{
 		_o=call interact_cursorObject;
 		if isNullReference(_o) exitWith {nullPtr};
@@ -23,9 +20,24 @@ editorDebug_handlerWidgets = [
 			pointerList getOrDefault [(_o getVariable ["link","nan"]),nullPtr];
 		};*/
 		_o
+	},vec4(40+20,0,20,100),editorDebug_handler_gameObject],
+	[widgetNull,"Usr",{
+		player getVariable ["link",nullPtr]
 	},vec4(40+20+20,0,20,100),editorDebug_handler_gameObject],
 	[widgetNull,"Common",{player},vec4(0,0,30,30),editorDebug_handler_common]
 ];
+
+editorDebug_setVisibleWidgets = {
+	params ["_mode"];
+	{
+		(_x select 0) ctrlShow _mode;
+	} foreach editorDebug_handlerWidgets;
+	
+	editorDebug_internal_debuggerStatus = _mode;
+};
+editorDebug_isVisibleWidgets = {
+	ctrlShown (editorDebug_handlerWidgets select 0 select 0)
+};
 
 editorDebug_internal_activeTab = -1;
 
@@ -65,9 +77,10 @@ editorDebug_scrollActiveTab = {
 	_ctg = editorDebug_handlerWidgets select editorDebug_internal_activeTab select 0;
 	_tf = _ctg getVariable "textField";
 	_maxSizeY = _tf getVariable ["textSizeY",100];
+	//traceformat("maxy: %1; newy: %2",_maxSizeY arg ((_tf getVariable ["biasY" arg 0]) + _val))
 	_tf setVariable ["biasY",
-		((_tf getVariable ["biasY",0]) + _val)
-		max 0 min (_maxSizeY)
+		clamp((_tf getVariable ["biasY" arg 0]) + _val,-_maxSizeY+100,0)
+		
 	];
 };
 
@@ -76,13 +89,13 @@ editorDebug_handleKeyPress = {
 	params ["_str","_isShift"];
 
 	if (_str == "up") exitWith {
-		_v = -1.5;
-		if (_isShift) then {modvar(_v) * 2};
+		_v = 1.5;
+		if (_isShift) then {modvar(_v) * 5};
 		[_v] call editorDebug_scrollActiveTab;
 	};
 	if (_str == "down") exitWith {
-		_v = 1.5;
-		if (_isShift) then {modvar(_v) * 2};
+		_v = -1.5;
+		if (_isShift) then {modvar(_v) * 5};
 		[_v] call editorDebug_scrollActiveTab;
 	};
 	_ch = if (_str == "left") then {-1} else {1};
