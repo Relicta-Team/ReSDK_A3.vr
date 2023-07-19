@@ -8,7 +8,7 @@
 #define dbRequest "sqlitenet" callExtension 
 
 #ifdef EDITOR
-	#define DB_PATH "P:\armatools\steamapps\common\Arma 3\@Profura\db\GameMain.db"
+	#define DB_PATH ((["WorkspaceHelper","getworkdir",[],true] call rescript_callCommand) + "\@EditorContent\db\GameMain.db")
 #else
 	#define DB_PATH "C:\Games\Arma3\A3Master\@server\db\GameMain.db"
 #endif

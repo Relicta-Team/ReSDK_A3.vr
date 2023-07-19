@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using ReEngine;
 
 class ScriptContext : IScript
@@ -24,6 +25,10 @@ class ScriptContext : IScript
 	public static string GetWorkspace()
 	{
 		return Engine.GetWorkspace();
+	}
+	public static string GetAppDir()
+	{
+		return Directory.GetCurrentDirectory();
 	}
 
 	//Преобразует значения из нативного массива в игровой массив и сохраняет данные в строке
