@@ -19,5 +19,7 @@ class(FortificationConstruction) extends(Constructions) var(name,"Оборони
 
 editor_attribute("EditorGenerated")
 class(BetonTrapeciaSmall) extends(FortificationConstruction)
+	var(name,"Бетонное сооружение");	
+	var(desc, null);
 	var(model,"a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d");
 endclass

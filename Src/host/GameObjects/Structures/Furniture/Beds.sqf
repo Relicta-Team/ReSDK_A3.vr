@@ -41,6 +41,12 @@ class(BedBase) extends(IChair)
 	getter_func(getMainActionName,"Лечь");
 endclass
 
+editor_attribute("EditorGenerated")
+class(SingleWhiteBed) extends(BedBase)
+	var(model,"relicta_models\models\interier\bed4.p3d");
+	getter_func(getChairOffsetPos,[[0 arg 0.240001 arg 0]]);
+endclass
+
 class(BedOld) extends(BedBase)
 	var(model,"ca\buildings\furniture\postel_panelak2.p3d");
 	getter_func(getChairOffsetPos,[[0.5 arg 0.2 arg 0.3]]);
