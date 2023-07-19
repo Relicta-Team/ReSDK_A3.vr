@@ -88,3 +88,8 @@ class(Trench) extends(SmallWall)
 	};
 	
 endclass
+
+editor_attribute("EditorGenerated")
+class(MediumBetonWall) extends(SmallWall)
+	var(model,"ml_shabut\sbs\betonblocksbs.p3d");
+endclass
