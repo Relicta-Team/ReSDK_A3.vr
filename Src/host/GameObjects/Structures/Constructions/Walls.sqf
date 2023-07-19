@@ -92,4 +92,6 @@ endclass
 editor_attribute("EditorGenerated")
 class(MediumBetonWall) extends(SmallWall)
 	var(model,"ml_shabut\sbs\betonblocksbs.p3d");
+	var(name,"Бетонная стена");
+	var(desc,"Стены никогда не видел?");
 endclass
