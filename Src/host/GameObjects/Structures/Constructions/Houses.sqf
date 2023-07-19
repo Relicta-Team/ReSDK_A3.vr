@@ -15,4 +15,6 @@ class(SmallHouse) extends(Constructions) var(name,"Небольшое здани
 editor_attribute("EditorGenerated")
 class(LittleHouseBomj) extends(SmallHouse)
 	var(model,"a3\structures_f\households\slum\slum_house03_f.p3d");
+	var(name, "Хижина");
+	var(desc, "Сделана из дерева");
 endclass
