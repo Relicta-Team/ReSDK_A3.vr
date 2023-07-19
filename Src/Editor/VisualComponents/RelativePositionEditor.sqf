@@ -35,6 +35,14 @@ function(vcom_relposEditorOpen)
 	
 	[_ctg,[50,0,50,5]] call vcom_createNoGeomWidget;
 
+	private _t = [_d,TEXT,[50,95,50,5],_ctg] call createWidget;
+	[_t,null,
+		[""]+(notificationSounds select 1 select [1,2])
+	] call setNotificationContext;
+	["onDisplayClose",{
+		[null] call setNotificationContext;
+	}] call Core_addEventHandler;
+
 	[_sel select 0,null,false] call vcom_loadModel;
 	call vcom_observ_centerAtModel;
 
@@ -353,31 +361,48 @@ function(vcom_relpos_saveInClipboardCommon)
 function(vcom_relpos_loadFromClipboard)
 {
 	private _str = copyfromclipboard;
+	if (_str == "") exitwith {["No data in clipboard"] call showWarning; true};
+
 	private _strBase = _str;
 	private _lastErr = "unknown error";
-	private _errReturn = {[ "%1 - Convert value error: %3 -> %2",__FUNC__,str _strBase,_lastErr] call printError;};
-	_str = [_str," arg ",","] call regex_replace;
-	private _arr = null;
-	_lastErr = "Parsing error";
-	private _out = parseSimpleArray _str;
-	if isNullVar(_out) exitWith _errReturn;
-	_arr = _out;
-	_lastErr = "Type error";
-	if not_equalTypes(_arr,[]) exitWith _errReturn;
-	_lastErr = "Array size error";
-	if (count _arr != ({equalTypes(_x,[]) && {count _x == 3}} count _arr)) exitwith _errReturn;
-	
-	//clear
-	call vcom_relpos_deleteAllPoints;
+	private _errReturn = {
+		if (relicta_debug_internal_isHandledError) then {
+			relicta_debug_internal_isHandledError = false;
+		};
+		[ "%1 - Convert value error: %3 -> %2",__FUNC__,str _strBase,_lastErr] call printError;
+		["Ошибка загрузки. Некорректный формат данных в буфере обмена"] call showWarning;
+		true
+	};
+	private _isSuccess = call {
+		_str = [_str," arg ",","] call regex_replace;
+		private _arr = null;
+		_lastErr = "Parsing error";
+		private _out = parseSimpleArray _str;
+		if (isNullVar(_out) || {count _out == 0}) exitWith _errReturn;
+		_arr = _out;
+		_lastErr = "Type error";
+		if not_equalTypes(_arr,[]) exitWith _errReturn;
+		_lastErr = "Array size error";
+		if (count _arr != ({equalTypes(_x,[]) && {count _x == 3}} count _arr)) exitwith _errReturn;
+		
+		//clear
+		call vcom_relpos_deleteAllPoints;
 
-	{
-		call vcom_relpos_createPoint;
+		{
+			call vcom_relpos_createPoint;
 
-		_x params ["_xp","_yp","_zp"];
-		[_foreachindex,0,_xp] call vcom_relpos_forceUpdatePoint;
-		[_foreachindex,1,_yp] call vcom_relpos_forceUpdatePoint;
-		[_foreachindex,2,_zp] call vcom_relpos_forceUpdatePoint;
-	} foreach _arr;
+			_x params ["_xp","_yp","_zp"];
+			[_foreachindex,0,_xp] call vcom_relpos_forceUpdatePoint;
+			[_foreachindex,1,_yp] call vcom_relpos_forceUpdatePoint;
+			[_foreachindex,2,_zp] call vcom_relpos_forceUpdatePoint;
+		} foreach _arr;
+
+		true
+	};
+	["%1 - Unhandled exception; Drop errhndl: %2 (%3)",__FUNC__,isNullVar(_isSuccess),_isSuccess] call printTrace;
+	if isNullVar(_isSuccess) then {
+		call _errReturn;
+	};
 }
 
 function(vcom_relpos_onDrawPointName)
