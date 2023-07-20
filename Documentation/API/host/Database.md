@@ -23,7 +23,7 @@ Description:
 
 Replaced value:
 ```sqf
-"P:\armatools\steamapps\common\Arma 3\@Profura\db\GameMain.db"
+((["WorkspaceHelper","getworkdir",[],true] call rescript_callCommand) + "\@EditorContent\db\GameMain.db")
 ```
 File: [host\Database\SQLite\SQLite.h at line 11](../../../Src/host/Database/SQLite/SQLite.h#L11)
 ## DB_PATH

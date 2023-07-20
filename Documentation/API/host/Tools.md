@@ -120,23 +120,83 @@ Description:
 
 Initial value:
 ```sqf
-false //not working correctly (position wrong). need fix
+true //global mode
 ```
-File: [host\Tools\EditorDebug\EditorDebug.sqf at line 14](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L14)
+File: [host\Tools\EditorDebug\EditorDebug.sqf at line 15](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L15)
 ## editorDebug_handlerUpdate
 
 Type: Variable
 
-Description: not working correctly (position wrong). need fix
+Description: global mode
 
 
 Initial value:
 ```sqf
 -1
 ```
-File: [host\Tools\EditorDebug\EditorDebug.sqf at line 16](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L16)
+File: [host\Tools\EditorDebug\EditorDebug.sqf at line 17](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L17)
 # EditorDebug_datahandler.sqf
 
+## metstart(val)
+
+Type: constant
+
+Description: 
+- Param: val
+
+Replaced value:
+```sqf
+
+```
+File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 39](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L39)
+## metprint
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 40](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L40)
+## symb__(dat)
+
+Type: constant
+
+Description: 
+- Param: dat
+
+Replaced value:
+```sqf
+###dat
+```
+File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 224](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L224)
+## bcol(button)
+
+Type: constant
+
+Description: 
+- Param: button
+
+Replaced value:
+```sqf
+<t color=''symb__(ff0000)''>button</t> 
+```
+File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 225](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L225)
+## editorDebug_internal_const_typemapColors
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray[...
+```
+File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 158](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L158)
 ## editorDebug_init
 
 Type: function
@@ -150,13 +210,9 @@ File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 8](../../../Sr
 Type: function
 
 Description: 
-- Param: _w
-- Param: _nameT
-- Param: _deleg_retObj
-- Param: _defpos
-- Param: _deleg_setText
 
-File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 24](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L24)
+
+File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 30](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L30)
 ## editorDebug_handler_gameObject_valueToText
 
 Type: function
@@ -164,8 +220,9 @@ Type: function
 Description: 
 - Param: _varname
 - Param: _varval
+- Param: _dirty (optional, default 0)
 
-File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 59](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L59)
+File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 80](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L80)
 ## editorDebug_handler_gameObject
 
 Type: function
@@ -173,7 +230,7 @@ Type: function
 Description: обработчик игрового объекта
 
 
-File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 114](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L114)
+File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 171](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L171)
 ## editorDebug_handler_common
 
 Type: function
@@ -181,7 +238,57 @@ Type: function
 Description: общий обработчик данных
 
 
-File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 126](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L126)
+File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 223](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L223)
+# EditorDebug_shared.sqf
+
+## checkdata(cachevalue)
+
+Type: constant
+
+Description: 
+- Param: cachevalue
+
+Replaced value:
+```sqf
+if !(cachevalue in _cache) exitwith {cachevalue}
+```
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 44](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L44)
+## checkempty(cachevalue)
+
+Type: constant
+
+Description: 
+- Param: cachevalue
+
+Replaced value:
+```sqf
+if (_cache get cachevalue == "") exitwith {cachevalue}
+```
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 45](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L45)
+## editorDebug_serializePlayerSettings
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 3](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L3)
+## editorDebug_getPlayerSettings
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 38](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L38)
+## editorDebug_internal_validateValuesCanStart
+
+Type: function
+
+Description: 
+- Param: _cache
+
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 42](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L42)
 # EditorDebug_visual.sqf
 
 ## editorDebug_handlerWidgets
@@ -207,7 +314,23 @@ Initial value:
 ```sqf
 -1
 ```
-File: [host\Tools\EditorDebug\EditorDebug_visual.sqf at line 30](../../../Src/host/Tools/EditorDebug/EditorDebug_visual.sqf#L30)
+File: [host\Tools\EditorDebug\EditorDebug_visual.sqf at line 44](../../../Src/host/Tools/EditorDebug/EditorDebug_visual.sqf#L44)
+## editorDebug_setVisibleWidgets
+
+Type: function
+
+Description: 
+- Param: _mode
+
+File: [host\Tools\EditorDebug\EditorDebug_visual.sqf at line 32](../../../Src/host/Tools/EditorDebug/EditorDebug_visual.sqf#L32)
+## editorDebug_isVisibleWidgets
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\EditorDebug\EditorDebug_visual.sqf at line 40](../../../Src/host/Tools/EditorDebug/EditorDebug_visual.sqf#L40)
 ## editorDebug_createVisual
 
 Type: function
@@ -215,7 +338,7 @@ Type: function
 Description: 
 - Param: _catName
 
-File: [host\Tools\EditorDebug\EditorDebug_visual.sqf at line 32](../../../Src/host/Tools/EditorDebug/EditorDebug_visual.sqf#L32)
+File: [host\Tools\EditorDebug\EditorDebug_visual.sqf at line 46](../../../Src/host/Tools/EditorDebug/EditorDebug_visual.sqf#L46)
 ## editorDebug_scrollActiveTab
 
 Type: function
@@ -223,7 +346,7 @@ Type: function
 Description: 
 - Param: _val
 
-File: [host\Tools\EditorDebug\EditorDebug_visual.sqf at line 63](../../../Src/host/Tools/EditorDebug/EditorDebug_visual.sqf#L63)
+File: [host\Tools\EditorDebug\EditorDebug_visual.sqf at line 77](../../../Src/host/Tools/EditorDebug/EditorDebug_visual.sqf#L77)
 ## editorDebug_handleKeyPress
 
 Type: function
@@ -232,7 +355,7 @@ Description:
 - Param: _str
 - Param: _isShift
 
-File: [host\Tools\EditorDebug\EditorDebug_visual.sqf at line 75](../../../Src/host/Tools/EditorDebug/EditorDebug_visual.sqf#L75)
+File: [host\Tools\EditorDebug\EditorDebug_visual.sqf at line 90](../../../Src/host/Tools/EditorDebug/EditorDebug_visual.sqf#L90)
 # EntryPoint.sqf
 
 ## relicta_debug_main
