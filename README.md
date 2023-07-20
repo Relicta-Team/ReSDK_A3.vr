@@ -1,6 +1,5 @@
 [![Client build](https://img.shields.io/github/actions/workflow/status/Relicta-Team/ReSDK_A3.vr/all_build.yml?branch=main&style=flat-square&logo=github&label=Build+status)](https://github.com/Relicta-Team/ReSDK_A3.vr/actions)
 [![Discord](https://img.shields.io/discord/332607112503099402?style=flat-square&logo=discord&label=Discord+server)](https://discord.relicta.ru)
-![Lines of code](https://img.shields.io/tokei/lines/github/Relicta-Team/ReSDK_A3.vr?label=Lines%20of%20code&style=flat-square)
 ![Size](https://img.shields.io/github/repo-size/Relicta-Team/ReSDK_A3.vr?style=flat-square&label=Project+size)
 
 # Описание
