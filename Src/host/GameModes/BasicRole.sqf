@@ -173,6 +173,18 @@ class(BasicRole) extends(object) attribute(Role)
 	func(initLocation)
 	{
 		objParams_1(_mob);
+		
+		#ifdef EDITOR
+		if ("spawnposFromCache" call sdk_hasSystemFlag && gm_roundduration <= 1) exitwith {
+			private _cache = call editorDebug_getPlayerSettings;
+			private _pos = _cache getOrDefault ["pos",callSelf(getInitialPos)];
+			private _dir = _cache getOrDefault ["dir",callSelf(getInitialDir)];
+			
+			callFuncParams(_mob,setInitialPos,_pos);
+			callFuncParams(_mob,setDir,_dir);
+		};
+		#endif
+
 		callFuncParams(_mob,setInitialPos,callSelf(getInitialPos));
 		callFuncParams(_mob,setDir,callSelf(getInitialDir));
 	};

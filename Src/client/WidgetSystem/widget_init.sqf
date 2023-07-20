@@ -67,6 +67,9 @@ if (!isMultiplayer) then {
 			if ((findDisplay 49)getvariable["__escapeMenuReady",false]) exitwith {};
 			(findDisplay 49) setvariable ["__escapeMenuReady",true];
 
+			//serialize character info
+			call editorDebug_serializePlayerSettings;
+
 			_abort1 = (findDisplay 49 displayCtrl 103);
 			_abort1 ctrlEnable false;
 			_abort1 ctrlShow false;

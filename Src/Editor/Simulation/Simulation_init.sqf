@@ -27,6 +27,23 @@ function(sim_openMapSelector)
 	] call control_createList;
 }
 
+function(sim_startSimFromCache)
+{
+	private _cache = call editorDebug_getPlayerSettings;
+	if (count _cache == 0) exitwith {
+		["Настройки в кеше отсутствуют. Зайдите за роль в режиме"] call showWarning;
+	};
+	private _ret = [_cache] call editorDebug_internal_validateValuesCanStart;
+	if (_ret != "") exitwith {
+		[format["Невозможно запустить симуляцию. Секция '%1' не принимает значения",_ret]] call showWarning;
+	};
+
+	[["autoGamemode","startGame","spawnposFromCache"],[
+		["startGamemodeName",_cache get "gamemode"],
+		["startRoleName",_cache get "role"]
+	]] call sim_internal_processLaunchSim;
+}
+
 function(sim_startupDefault)
 {
 	[null,null] call sim_internal_processLaunchSim;

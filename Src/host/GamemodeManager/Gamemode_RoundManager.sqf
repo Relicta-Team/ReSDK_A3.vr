@@ -818,8 +818,7 @@ gm_internal_assignToImpl = {
 		callFuncParams(_mob,updateSkillLevel,_skName arg _val);
 	} foreach callSelf(getOtherSkills);
 
-	callFuncParams(_mob,setInitialPos,callSelf(getInitialPos));
-	callFuncParams(_mob,setDir,callSelf(getInitialDir));
+	callSelfParams(initLocation,_mob);
 	callSelfParams(getEquipment,_mob);
 	callSelfParams(initWelcome,_mob);
 	

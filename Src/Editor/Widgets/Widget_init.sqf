@@ -165,6 +165,7 @@ menu_structureLayout = [
 	["text:Запуск;",
 		"text:Запустить симуляцию;act:call sim_startupDefault;path:menu_path_launch;", //short:28; data:MissionPreview;
 		"text:Запустить симуляцию с режимом;act:call sim_openMapSelector",
+		"text:Запуск симуляции с последним режимом и ролью;act:call sim_startSimFromCache",
 		"text:Настроить симуляцию и запустить;act:call sim_openDetaliSetup",
 		"",
 		"text:Запуск симуляции частиц;act:['Не реализовано. Тут можно будет прямо в редакторе посмотреть как выглядит карта ночью с частицами']call showWarning"
