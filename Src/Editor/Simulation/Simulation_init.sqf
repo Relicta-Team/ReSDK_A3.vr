@@ -5,15 +5,23 @@
 
 init_function(sim_initialize)
 {
-	#include "..\..\host\GamemodeManager\Gamemode_AllowedModes.sqf"
-
 	sim_internal_const_pathAbsSDKConfig = getMissionPath "src\Editor\EditorSDKConfig.txt";
 }
 
 function(sim_openMapSelector)
 {
+	private _allowedModes = [];
+	{
+		if ([_x,"InterfaceClass"] call goasm_attributes_hasAttributeClass
+			|| [_x,"HiddenClass"] call goasm_attributes_hasAttributeClass
+		) then {continue};
+		_allowedModes pushBack ([_x,"classname"] call oop_getTypeValue);
+	} foreach (call gm_getAllGamemodeObjects);
+
+	_allowedModes sort true;
+	
 	[
-		gm_allowedModes,
+		_allowedModes,
 		//event on select
 		{
 			_curMode = _text;

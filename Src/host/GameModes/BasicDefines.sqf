@@ -14,13 +14,19 @@ endclass
 
 //Базовый игрвой режим
 editor_attribute("ColorClass" arg "C7007D")
+editor_attribute("InterfaceClass")
 class(GMBase) extends(IGameEvent) attribute(Story)
+	editor_attribute("GMField" arg "type:string") editor_attribute("Tooltip" arg "Название режима")
 	var(name,"История"); //Название истории
+	editor_attribute("GMField" arg "type:string") editor_attribute("Tooltip" arg "Краткое описание режима")
 	var(desc,""); //Описание краткое для голосований например
+	editor_attribute("GMField" arg "type:string") editor_attribute("Tooltip" arg "Расширенное описание режима для конца раунда")
 	var(descExtended,"");//Расширенное описание для конца раунда
 	
+	editor_attribute("GMField" arg "type:bool") editor_attribute("Tooltip" arg "Можно ли прописать аспект на этот режим.\nfalse выключает систему аспектов для режима")
 	var(canAddAspect,true); //можно ли прописать аспект на этот режим. false выключает систему аспектов для режима
 	
+	editor_attribute("GMField" arg "type:float") editor_attribute("Tooltip" arg "Длительность режима в минутах")
 	var(duration,60*60);// стандартная длительность режима
 
 	getterconst_func(getProbability,100); //в процентах возвращает вероятность на автопик режима

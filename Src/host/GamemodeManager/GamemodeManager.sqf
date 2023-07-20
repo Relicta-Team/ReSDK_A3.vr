@@ -133,7 +133,7 @@ _forceAspectName = ["forcedAspectName",""] call sdk_getPropertyValue;
 sdk_temp_internal_forcedAspect = null;
 
 if ("startAtNight" call sdk_hasSystemFlag) then {
-	invokeAfterDelay({call setNight;call setNight;[]spawn setNight},0.5);
+	invokeAfterDelay({call setNight;call setNight;[]spawn setNight},0.3);
 };
 
 //apply logic

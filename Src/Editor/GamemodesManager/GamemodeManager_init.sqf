@@ -110,5 +110,5 @@ function(gm_internal_setGolibMode)
 //get all gamemodes objects
 function(gm_getAllGamemodeObjects)
 {
-	(["GMBase",true] call oop_getAllObjectsOfType)
+	(["GMBase",false,true] call oop_getAllObjectsOfType)
 }

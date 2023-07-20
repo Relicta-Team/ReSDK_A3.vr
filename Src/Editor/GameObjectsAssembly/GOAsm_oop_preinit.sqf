@@ -151,12 +151,15 @@ oop_getinhlist = {
 };
 
 oop_getAllObjectsOfType = {
-	params ["_typename",["_includeThis",false]];
+	params ["_typename",["_includeThis",false],["_retAsStrings",false]];
 	private _result = [_typename,true] call oop_getinhlist;
 	if (count _result == 0) exitwith {[]};
 	if (_includeThis) then {
 		_result pushBack _typename;
 	};
+	
+	if (_retAsStrings) exitwith {_result};
+
 	{
 		_result set [_foreachindex,missionNamespace getvariable ["pt_"+_x,nullPtr]];
 	} foreach _result;
