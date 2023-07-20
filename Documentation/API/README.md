@@ -76,7 +76,7 @@ Count modules: 48
  - [ServerVoice](host//ServerVoice.md) - 1 files
  - [SpecialActions](host//SpecialActions.md) - 3 files
  - [StatusEffects](host//StatusEffects.md) - 6 files
- - [Tools](host//Tools.md) - 10 files
+ - [Tools](host//Tools.md) - 11 files
  - [Traits](host//Traits.md) - 4 files
  - [UnitTests](host//UnitTests.md) - 2 files
  - [VerbSystem](host//VerbSystem.md) - 6 files

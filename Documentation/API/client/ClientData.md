@@ -943,7 +943,7 @@ Type: function
 Description: 
 - Param: _isSaved (optional, default false)
 
-File: [client\ClientData\EscapeMenu.sqf at line 278](../../../Src/client/ClientData/EscapeMenu.sqf#L278)
+File: [client\ClientData\EscapeMenu.sqf at line 283](../../../Src/client/ClientData/EscapeMenu.sqf#L283)
 ## esc_settings_clearSettingList
 
 Type: function
@@ -951,7 +951,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\EscapeMenu.sqf at line 304](../../../Src/client/ClientData/EscapeMenu.sqf#L304)
+File: [client\ClientData\EscapeMenu.sqf at line 309](../../../Src/client/ClientData/EscapeMenu.sqf#L309)
 # EscapeMenu_settingsGame.sqf
 
 ## SETTING_INDEX_NAME

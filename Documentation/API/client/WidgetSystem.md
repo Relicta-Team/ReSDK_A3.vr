@@ -1242,7 +1242,7 @@ Replaced value:
 ```sqf
 (proc_val / 100)
 ```
-File: [client\WidgetSystem\widget_init.sqf at line 109](../../../Src/client/WidgetSystem/widget_init.sqf#L109)
+File: [client\WidgetSystem\widget_init.sqf at line 112](../../../Src/client/WidgetSystem/widget_init.sqf#L112)
 ## removealldisplayevents
 
 Type: function
