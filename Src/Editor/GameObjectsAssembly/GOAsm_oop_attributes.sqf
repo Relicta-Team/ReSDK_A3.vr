@@ -36,8 +36,6 @@ init_function(goasm_attributes_main_init)
 	*/
 	["GMField"] call goasm_attributes_bindAttribute;
 
-	["GMConstField"] call goasm_attributes_bindAttribute;
-
 	// ---------------- Классовые атрибуты ----------------
 
 	// Атрибут для класса указывает что он не может быть создан явно. Возможно только использование как наследника
