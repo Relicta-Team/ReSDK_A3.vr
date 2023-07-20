@@ -8,6 +8,8 @@
 /*
 Прорыв кочевников через бомжей к точке
 */
+
+editor_attribute("CodeOnyGamemode")
 class(GMPrey) extends(GMBase)
 
 	var(name,"Добыча"); //Название истории

@@ -5,6 +5,7 @@
 
 #include <..\GameMode.h>
 
+editor_attribute("CodeOnyGamemode")
 class(GMDetective) extends(GMBase)
 
 	var(name,"Поместье ''Хвостово''"); //Название истории

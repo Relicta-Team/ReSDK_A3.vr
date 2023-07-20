@@ -6,6 +6,7 @@
 #include "..\GameMode.h"
 #include "Okopovo.h"
 
+editor_attribute("CodeOnyGamemode")
 class(GMOkopovo) extends(GMBase)
 	var(name,"Последний фронт");
 	var(desc,"Противостояние Новой Армии и Истязателей");

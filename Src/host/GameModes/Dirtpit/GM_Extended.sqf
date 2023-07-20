@@ -5,6 +5,7 @@
 
 #include <..\GameMode.h>
 
+editor_attribute("CodeOnyGamemode")
 class(GMExtended) extends(GMStationBase)
 	var(name,"Тихий день");
 	var(desc,"Свободный режим. Развлекайтесь");

@@ -120,6 +120,8 @@ componentInit(Game_objects_assembly)
 #include "GameObjectsAssembly\GOAsm_init.sqf"
 componentInit(Game_objects_library)
 #include "GameObjectsLibrary\GOLib_init.sqf"
+componentInit(GameMode_manager)
+#include "GamemodesManager\GamemodeManager_init.sqf"
 componentInit(Maps_manager)
 #include "MapsManager\Maps_manager_init.sqf"
 componentInit(Viusal_components)

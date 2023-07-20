@@ -5,6 +5,7 @@
 
 #include <..\GameMode.h>
 
+editor_attribute("HiddenClass")
 class(GMRevolution) extends(GMStationBase)
 	var(name,"Революция");
 	var(desc,"Кто-то задумал переворот. Остановите злодея или присоединитесь к нему.");

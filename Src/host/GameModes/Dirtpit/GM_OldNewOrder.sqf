@@ -5,6 +5,7 @@
 
 #include <..\GameMode.h>
 
+editor_attribute("CodeOnyGamemode")
 class(GMOldNewOrder) extends(GMExtended)
 	var(name,"Старый Новый Порядок");
 	var(desc,"Агенты Новой Армии пытаются исполнить свои планы.");

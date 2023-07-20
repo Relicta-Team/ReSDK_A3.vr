@@ -168,6 +168,7 @@ function(golib_openArraySelector)
 		["arraySelector - count loaded elements %1, Storage %2, Display %3",_countElements,_ctgStorage,_d] call printTrace;
 		private _globIncrement = 0;
 		for "_i" from 0 to _countElements - 1 do {
+			_isFirstItem = _i == 0;
 			_isLastItem = _i == (_countElements - 1);
 			(_data select _i) call _handlerElementCreate;
 		};

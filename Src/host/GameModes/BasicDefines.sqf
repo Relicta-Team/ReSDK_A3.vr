@@ -350,6 +350,7 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 
 endclass
 
+editor_attribute("HiddenClass")
 class(GMStationBase) extends(GMBase)
 
 	var(headSecondNames,vec2("","")); //фамилия головы для мужского и женского варианта

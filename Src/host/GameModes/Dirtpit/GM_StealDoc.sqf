@@ -5,6 +5,7 @@
 
 #include <..\GameMode.h>
 
+editor_attribute("HiddenClass")
 class(GMStealDoc) extends(GMStationBase)
 	var(name,"Спиздили");
 	var(desc,"Агент Новой Армии должен выкрасть секретные документы.");

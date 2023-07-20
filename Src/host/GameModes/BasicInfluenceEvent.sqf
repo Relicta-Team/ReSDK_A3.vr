@@ -5,7 +5,7 @@
 
 #include <GameMode.h>
 
-
+editor_attribute("HiddenClass" arg "allChild")
 class(IInfluenceEvent) extends(IGameEvent)
 	
 	var(name,"Событие");
@@ -130,7 +130,7 @@ class(BaseGameAspect) extends(IInfluenceEvent)
 	
 endclass
 
-
+editor_attribute("HiddenClass")
 // влияние реликты (колдун сотворил непотребство)
 class(BaseProgressInfluenceEvent) extends(IGameEvent)
 		

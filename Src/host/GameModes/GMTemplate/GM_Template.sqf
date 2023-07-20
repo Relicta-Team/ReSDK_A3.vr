@@ -1,5 +1,6 @@
 #include <..\GameMode.h>
 
+editor_attribute("CodeOnyGamemode")
 class(GMTemplate) extends(GMBase)
 	
 	var(name,"Тестовый режим");

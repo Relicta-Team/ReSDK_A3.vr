@@ -5,6 +5,7 @@
 
 #include <..\GameMode.h>
 
+editor_attribute("CodeOnyGamemode")
 class(GMSaloon) extends(GMBase)
 	
 	var(name,"Переполох"); //Название истории
