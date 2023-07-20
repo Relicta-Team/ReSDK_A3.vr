@@ -5,6 +5,7 @@
 
 #include <GameMode.h>
 
+editor_attribute("ColorClass" arg "05F014")
 class(BasicRole) extends(object) attribute(Role)
 	var(roleIdx,-1); //указатель на роль для клиента (оптимизация сетевого трафика)
 	var(name,""); //role name

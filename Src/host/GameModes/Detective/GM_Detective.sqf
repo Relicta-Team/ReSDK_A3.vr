@@ -501,7 +501,7 @@ endclass
 
 //Улики
 region(evidences)
-	class(GMDet_Evidence)
+	class(GMDet_Evidence) extends(IGamemodeSpecificClass)
 		var(canCreateOnDetective,false); //создаётся на детективе объект
 		var(evidenceInfo,"");//объект который создаётся или текст что за улика
 		func(onCreateEvidenceOnDetective)
@@ -671,7 +671,7 @@ region(evidences)
 	
 region(Murder info)
 
-	class(GMDet_MurderInfo)
+	class(GMDet_MurderInfo) extends(IGamemodeSpecificClass)
 		var(murderLoc,vec3(0,0,0)); //где было убийство
 		var(murderLocName,"Поместье"); //строковое название
 		var(bloodPoolRandOffset,vec3(0,0,0));//рандомизация лужи крови. может быть vec2
@@ -819,7 +819,7 @@ region(Murder info)
 	endclass
 
 region(Kill info)
-	class(GMDet_KillInfo)
+	class(GMDet_KillInfo) extends(IGamemodeSpecificClass)
 		
 		func(getReason)
 		{
@@ -894,7 +894,7 @@ region(Kill info)
 
 region(murder reason)
 	//мотивы убийцы
-	class(GMDet_MurderReason)
+	class(GMDet_MurderReason) extends(IGamemodeSpecificClass)
 		var(reasonText,"");//причина убийства
 	endclass
 	

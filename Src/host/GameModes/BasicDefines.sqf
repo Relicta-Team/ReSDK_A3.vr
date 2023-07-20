@@ -5,6 +5,7 @@
 
 #include <GameMode.h>
 
+editor_attribute("ColorClass" arg "BD5998")
 class(IGameEvent) extends(object)
 
 endclass
@@ -12,6 +13,7 @@ endclass
 
 
 //Базовый игрвой режим
+editor_attribute("ColorClass" arg "C7007D")
 class(GMBase) extends(IGameEvent) attribute(Story)
 	var(name,"История"); //Название истории
 	var(desc,""); //Описание краткое для голосований например
@@ -417,5 +419,10 @@ class(GMStationBase) extends(GMBase)
 			errorformat("Collectors initialize error; Count ladders %1; sewercover %2",count _ladders arg count _sewercover);
 		};
 	};
+
+endclass
+
+//Специфичный для режима компонент
+class(IGamemodeSpecificClass)
 
 endclass

@@ -20,6 +20,7 @@ taskSystem_checkedOnEndRound = [];
 	 - проверяемые до успешного выполнения
 */
 
+editor_attribute("ColorClass" arg "1370A2")
 class(TBase) extends(IGameEvent)
 	var(tag,"");//системный тэг задачи
 	

@@ -353,7 +353,7 @@ class(GMSaloon) extends(GMBase)
 	var(isSBSCommandirSpawned,false); //заспавнился ли командир сбс
 endclass
 
-class(Saloon_Task_Base)
+class(Saloon_Task_Base) extends(IGamemodeSpecificClass)
 	func(onTaskInit) {}; //событие инициализации задачи
 	func(getDesc) {""}; //описание что надо сделать бандитам
 	func(getFinishDesc) {objParams_1(_result); ""}; //описание если задача выполнена
