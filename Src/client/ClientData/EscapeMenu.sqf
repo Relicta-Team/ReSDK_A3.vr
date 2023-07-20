@@ -221,6 +221,11 @@ cd_settingsVersion = 1.0;
 
 esc_settings_open = {
 
+	#ifdef EDITOR
+		//serialize info in editor mode
+		call editorDebug_serializePlayerSettings;
+	#endif
+
 	_ctg = getEscapeCtg;
 	_ctg ctrlEnable false;
 	_ctg setFade 1;

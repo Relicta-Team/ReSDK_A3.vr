@@ -164,7 +164,7 @@ editorDebug_handler_common = {
 	#define symb__(dat) ###dat
 	#define bcol(button) <t color=''symb__(ff0000)''>button</t> 
 
-	"<t size='1.4'>Use <t color='#ff0000'>J,I,K,L</t> for switch and scroll active debug panel</t>" + sbr + sbr +
+	"<t size='1.4'>Use <t color='#ff0000'>J,I,K,L</t> for switch and scroll active debug panel. shift - for fast scroll</t>" + sbr + sbr +
 	format["FPS (cur/min): %1; %2",round diag_fps,round diag_fpsmin] + sbr +
 	format["Delta: %1; tickTime: %2; frame: %3",diag_deltaTime,diag_ticktime,diag_frameno] + sbr +
 	format["OOP Info: Created: %1; Active: %2; Threads: %3",oop_cco,oop_cao,oop_upd] + sbr + 
