@@ -18,6 +18,23 @@ onGameInputs_Down = {
 		call openInventory;
 		false
 	};
+
+	#ifdef EDITOR
+	//editorDebug functionality
+
+	if (_key in [KEY_UP,KEY_LEFT,KEY_RIGHT,KEY_DOWN]) exitWith {
+		[
+			["up","left","right","down"]select ([KEY_UP,KEY_LEFT,KEY_RIGHT,KEY_DOWN]find _key),
+			_shift
+		] call editorDebug_handleKeyPress;
+	};
+	if (_key in [KEY_I,KEY_J,KEY_L,KEY_K]) exitWith {
+		[
+			["up","left","right","down"]select ([KEY_I,KEY_J,KEY_L,KEY_K]find _key),
+			_shift
+		] call editorDebug_handleKeyPress;
+	};
+	#endif
 };
 
 //клавиши в режиме игры
@@ -96,24 +113,15 @@ onGameKeyInputs = {
 	// next all debuger inputs
 #ifdef DEBUG
 
-	//editorDebug functionality
-
-	if (_key in [KEY_UP,KEY_LEFT,KEY_RIGHT,KEY_DOWN]) exitWith {
-		[
-			["up","left","right","down"]select ([KEY_UP,KEY_LEFT,KEY_RIGHT,KEY_DOWN]find _key),
-			_shift
-		] call editorDebug_handleKeyPress;
-	};
-
 	if (_key == KEY_U) exitWith {
 		call proxEd_openEditor;
 	};
-	if (_key == KEY_J) exitWith {
-		call ped_openMenu
-	};
-	if (_key == KEY_K) exitWith {
-		call led_openMenu;
-	};
+	// if (_key == KEY_J) exitWith {
+	// 	call ped_openMenu
+	// };
+	// if (_key == KEY_K) exitWith {
+	// 	call led_openMenu;
+	// };
 	#define attr ([#st,#ht,#dx,#iq,#fp,#will,#per,#hp] select ind_stat)
 	#define dbg_addAtr(name,amount) [(player),amount] call ((player) getVariable 'proto' getVariable ('add'+ name))
 

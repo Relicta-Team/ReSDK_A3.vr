@@ -239,6 +239,9 @@ function(Core_invokeEvent)
 
 #include "..\..\ReBridge\ReBridge_init.sqf"
 
+//shared debug
+#include "..\..\host\Tools\EditorDebug\EditorDebug_shared.sqf"
+
 // активируем компонет
 [] call ReBridge_start;
 

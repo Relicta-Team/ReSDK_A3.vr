@@ -53,9 +53,10 @@ class(ManagedObject) extends(object)
 
 	func(destructor)
 	{
-		if (callSelf(hasUpdate)) then {
-			private _hnd = getSelf(handleUpdate);
-			if (_hnd > -1) then {stopUpdate(_hnd)};
+		
+		private _hnd = getSelf(handleUpdate);
+		if (_hnd > -1) then {
+			stopUpdate(_hnd);
 			DEC(oop_upd);
 		};
 		

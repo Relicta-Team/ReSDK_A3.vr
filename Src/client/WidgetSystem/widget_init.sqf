@@ -67,6 +67,9 @@ if (!isMultiplayer) then {
 			if ((findDisplay 49)getvariable["__escapeMenuReady",false]) exitwith {};
 			(findDisplay 49) setvariable ["__escapeMenuReady",true];
 
+			//serialize character info
+			call editorDebug_serializePlayerSettings;
+
 			_abort1 = (findDisplay 49 displayCtrl 103);
 			_abort1 ctrlEnable false;
 			_abort1 ctrlShow false;
@@ -130,10 +133,16 @@ if (!isMultiplayer) then {
 			precent_to_real(20) * safezoneW,
 			precent_to_real(10) * safezoneH];
 			_bt ctrlCommit 0;
-			_bt ctrlSetText "TEMP BUTTON 1";
-			_bt ctrlSetTooltip "Зарезервированная кнопка для доп. функционала";
+			_sysEnabled = call editorDebug_isVisibleWidgets;
+			_bt ctrlSetText ifcheck(_sysEnabled,"Выключить дебагинфо","Включить дебагинфо");
+			_bt ctrlSetTooltip "Переключение отладчика цели,игрока и активной руки";
 			_bt ctrlAddEventHandler ["MouseButtonUp",{
-				(findDisplay 49) closeDisplay 0;
+				_bt = _this select 0;
+				_sysEnabled = call editorDebug_isVisibleWidgets;
+				[!_sysEnabled] call editorDebug_setVisibleWidgets;
+				_sysEnabled = call editorDebug_isVisibleWidgets;
+				_bt ctrlSetText ifcheck(_sysEnabled,"Выключить дебагинфо","Включить дебагинфо");
+				//(findDisplay 49) closeDisplay 0;
 			}];
 
 			_bt = (findDisplay 49) ctrlCreate ["RscButton",-1];

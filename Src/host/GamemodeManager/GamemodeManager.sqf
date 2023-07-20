@@ -174,12 +174,14 @@ if (_canAutoSetupGamemode) then {
 		};
 		_gmObj = _startupMode call gm_getGameModeObject;
 		_allowedRoles = callFunc(_gmObj,getLobbyRoles) apply {tolower _x};
+		modvar(_allowedRoles) + (callFunc(_gmObj,getLateRoles) apply {tolower _x});
+		
 		if !((tolower _startupRole) in _allowedRoles) exitwith {
 			["Роль %1 отсутствует в списке лобби ролей для выбранного режима",_startupRole] 
 			call MessageBox;
 		};
 
-		invokeAfterDelayParams({ ["onClientChangeCharSetting" arg ["role1" arg _this arg 0]] call client_sendToServer },1.0,_startupRole);
+		invokeAfterDelayParams({ ["onClientChangeCharSetting" arg ["role1" arg _this arg 0]] call client_sendToServer },1.01,_startupRole);
 
 		if (_canAutostartGame) then {
 			//rpcSendToServer("onClientPrepareToPlay",[true arg 0]);

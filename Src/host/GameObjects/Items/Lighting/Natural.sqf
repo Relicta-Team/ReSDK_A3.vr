@@ -143,7 +143,9 @@ class(Torch) extends(ILightible)
 		objParams_1(_usr);
 		private _desc = callSuper(ILightible,getDescFor);
 		private _fleft = getSelf(fuelLeft);
-		if (_fleft > 0 && _fleft <= 60) then {_desc = _desc + sbr + pick["Скоро потухнет","Почти выгорело всё","Огонь угасает"]};
+		if getSelf(lightIsEnabled) then {
+			if (_fleft > 0 && _fleft <= 60) then {_desc = _desc + sbr + pick["Скоро потухнет","Почти выгорело всё","Огонь угасает"]};
+		};
 
 #ifdef DEBUG
 		_desc = _desc + sbr + "ОСТАЛОСЬ: " + formatTime(_fleft);

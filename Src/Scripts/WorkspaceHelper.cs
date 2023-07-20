@@ -54,6 +54,9 @@ class WorkspaceHelper : IScript
 			case "checkfilelock":
 				output.Append(CheckFileAccess(ScriptContext.GetArg(0)).ToString());
 				break;
+			case "getworkdir":
+				output.Append(ScriptContext.GetAppDir());
+				break;
 			default:
 				Console.WriteLine("Error command: " + args);
 				break;
