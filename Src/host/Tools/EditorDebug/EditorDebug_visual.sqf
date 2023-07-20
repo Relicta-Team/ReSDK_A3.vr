@@ -11,14 +11,16 @@ editorDebug_handlerWidgets = [
 		callFunc(_ref,getItemInActiveHand)
 		},vec4(40,0,20,100),editorDebug_handler_gameObject],
 	[widgetNull,"Targ",{
-		_o=call interact_cursorObject;
-		if isNullReference(_o) exitWith {nullPtr};
-		_o = pointerList getOrDefault [(_o getVariable ["ref","nan"]),nullPtr];
+		// _o=call interact_cursorObject;
+		// if isNullReference(_o) exitWith {nullPtr};
+		// _o = pointerList getOrDefault [(_o getVariable ["ref","nan"]),nullPtr];
 		/*if isNullReference(_o) exitWith {
 			_o = call interact_cursorObject;
 			if isNullReference(_o) exitWith {nullPtr};
 			pointerList getOrDefault [(_o getVariable ["link","nan"]),nullPtr];
 		};*/
+		private _o = (["target",""] call oop_getData) select 0;
+		if equalTypes(_o,"") exitwith {nullPtr};
 		_o
 	},vec4(40+20,0,20,100),editorDebug_handler_gameObject],
 	[widgetNull,"Usr",{

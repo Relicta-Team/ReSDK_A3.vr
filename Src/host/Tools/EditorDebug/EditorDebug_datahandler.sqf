@@ -33,8 +33,15 @@ editorDebug_onUpdate = {
 
 	{
 		_x params ["_w","_nameT","_deleg_retObj","_defpos","_deleg_setText"];
+		_metrics = _nameT == "usr";
+		#define metstart(seg) _segtime = tickTime; _lastseg = #seg;
+		#define metprint if (_metrics) then {traceformat("Metrics[%1]: %2",_lastseg arg (tickTime - _segtime) * 1000)};
+		#define metstart(val) 
+		#define metprint 
 
+		metstart(getObject)
 		_o = call _deleg_retObj;
+		metprint
 		_txt = "ERR - NO DATA";
 		if isNullVar(_o) then {
 			_txt = "ERR - NULL RETOBJ";
@@ -42,10 +49,13 @@ editorDebug_onUpdate = {
 			if isNullReference(_o) then {
 				_txt = "ERR - NULL REFERENCE";
 			} else {
+				metstart(createText)
 				_txt = _o call _deleg_setText;
+				metprint
 			};
 		};
 		
+		metstart(changePos)
 		//_txt = _txt + sbr + "!EOF!";
 		_tf = _w getVariable "textField";
 		[_tf,_txt] call widgetSetText;
@@ -54,6 +64,7 @@ editorDebug_onUpdate = {
 		_b = _tf getVariable ["biasY",0]; //TODO scroll text saving
 		[_tf,[0,_b /* max 0 min _textSizeH*/,100,_textSizeH]] call widgetSetPosition; //500 for long values
 
+		metprint
 
 		//[0,0,0,0.3] std back
 		if equals(_w getVariable "index",editorDebug_internal_activeTab) then {
@@ -67,50 +78,45 @@ editorDebug_onUpdate = {
 };
 
 editorDebug_handler_gameObject_valueToText = {
-	params ['_varname',"_varval"];
-
-	_type = ""; _realval = _varval;
+	params ['_varname',"_varval",["_dirty",0]];
+	
+	_type = ""; _realval = _varval; _postTypeMod = "";
 	call {
 		if isNullVar(_varval) exitWith {
 			_realval = "NULL";
 			_type = "null"
 		};
-		if (typename _varval == "location") exitWith {
+		_typevar = typename _varval;
+
+		if (_typevar == "scalar") exitWith {
+			if (floor _varval == _varval) then {
+				_type = "int";
+			} else {
+				_type = "float";
+			};
+			//_realval = str _realval;
+		};
+		if (_typevar == "string") exitWith {
+			_type = "string";
+			//_realval = sanitizeHTML(_realval);
+		};
+		if (_typevar == "bool") exitWith {_type = "bool"};
+		if (_typevar == "array") exitWith {
+			_type = "array";
+			_postTypeMod = "%1["+str count _varval+"]";
+			_realval = sanitizeHTML(str _realval);
+		};
+		if (_typevar == "location") exitWith {
 			if isNullReference(_varval) then {
 				_realval = "nullPtr";
 				_type = "object";
 			} else {
 				//_type = _varval getVariable PROTOTYPE_VAR_NAME getVariable "classname";
 				_type = "object";
-				_realval = sanitizeHTML(str _realval);
+				_realval = sanitize(str _realval);
 			};
 		};
-		if (typename _varval == "scalar") exitWith {
-			if (floor _varval == _varval) then {
-				_type = "int";
-			} else {
-				_type = "float";
-			};
-			_realval = str _realval;
-		};
-		if (typename _varval == "string") exitWith {
-			_type = "string";
-			_realval = sanitizeHTML(_realval);
-		};
-		if (typename _varval == "bool") exitWith {_type = "bool"};
-		if (typename _varval == "array") exitWith {
-			_type = "array["+str count _varval+"]";
-			_realval = sanitizeHTML(str _realval);
-		};
-		if (typename _varval == "hashmap") exitWith {
-			if(({isNullVar(_x)}count (values _varval)) == (count _varval))then{
-				_type = "hashset";
-			}else{
-				_type = "dict";
-			};
-			_realval = sanitizeHTML(str _realval);
-		};
-		if (typename _varval == "object") exitWith {
+		if (_typevar == "object") exitWith {
 			if isNullReference(_varval) then {
 				_type = "model";
 				_realval = "mdl_null";
@@ -119,22 +125,37 @@ editorDebug_handler_gameObject_valueToText = {
 				_realval = sanitizeHTML(str _realval);
 			};
 		};
+		if (_typevar == "hashmap") exitWith {
+			if(({isNullVar(_x)}count (values _varval)) == (count _varval))then{
+				_type = "hashset";
+				_realval = keys _varval;
+			}else{
+				_type = "dict";
+			};
+			_realval = sanitize(str _realval);
+		};
 		_type = "ERROR TYPE - "+typeName _varval;
 	};
 
-	_colorType = editorDebug_internal_const_typemapColors findif {(_x select 0) in _type};
-	if (_colorType!=-1) then {
+	_colorType = editorDebug_internal_const_typemapColors get _type;
+	if !isNullVar(_colorType) then {
+		if (_postTypeMod!="") then {
+			_type = format[_postTypeMod,_type];
+		};
 		_type = format["<t color='%2'>%1</t>",
 			_type,
-			editorDebug_internal_const_typemapColors select _colorType select 1
+			_colorType
 		];
 	};
-
+	if (_dirty > 0) then {
+		_clamped = clamp(_dirty,0,1);
+		_realval = format["<t color='%2'>%1</t>",_realval,[1,_clamped,_clamped] call color_RGBtoHTML];
+	};
 	_txtRet = format["(%1) %2 = %3",_type,_varname,_realval];
 	_txtRet
 };
 
-editorDebug_internal_const_typemapColors = [
+editorDebug_internal_const_typemapColors = createHashMapFromArray[
 	["object","#7E07A9"]
 	,["bool","#00CD00"]
 	,["int","#FFC901"]
@@ -149,13 +170,52 @@ editorDebug_internal_const_typemapColors = [
 //обработчик игрового объекта
 editorDebug_handler_gameObject = {
 	_ret = "";
-	_varlist = allVariables _this;
+	//_varlist = allVariables _this;
 	//_varlist sort true;
+
+	_wid = _w;
+
+	_lastptr = _wid getvariable ["lastpointer",nullPtr];
+	_storedvalues = _wid getvariable "storedvalues";
+	//_storedstrings = _wid getvariable ["storedstrings",[]];
+
+	if not_equals(_lastptr,_this) then {
+		_storedvalues = createHashMap;
+		
+		_varlist = allVariables _this;
+		_varlist sort true;
+		_wid setvariable ["varlist",_varlist];
+	};
+	_varlist = _wid getvariable "varlist";
+	
+	_curstored = null;
 	{
+
 		_v = getVarReflect(_this,_x);
-		modvar(_ret) + ([_x,_v] call editorDebug_handler_gameObject_valueToText) + sbr;
+		_curstored = _storedvalues getOrDefault [_x,[_v,0]];
+		_rv = ifcheck(isNullVar(_v),"#NOT_DEF#",_v);
+		if not_equals(_curstored select 0,_rv) then {
+			_curstored set [1,tickTime + 4];
+			_curstored set [0,_rv];
+		};
+
+		_storedvalues set [_x,_curstored];
+		_curtime = (_curstored select 1);
+		_newvalue = linearConversion [4,0,_curtime - tickTime,0,1,true];
+		// if (_newvalue >= -1) then {
+		// 	_storedstrings set [_foreachindex,
+		// 		([_x,_v,_newvalue] call editorDebug_handler_gameObject_valueToText)
+		// 	]
+		// };
+		
+		modvar(_ret) + ([_x,_v,_newvalue] call editorDebug_handler_gameObject_valueToText) + sbr;
 	} foreach _varlist;
 
+	_wid setvariable ["lastpointer",_this];
+	_wid setvariable ["storedvalues",_storedvalues];
+	//_wid setvariable ["storedstrings",_storedstrings];
+
+	//_storedstrings joinString sbr;
 	_ret
 };
 
