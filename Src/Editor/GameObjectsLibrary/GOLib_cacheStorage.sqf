@@ -4,7 +4,7 @@
 // ======================================================
 
 
-
+//!FIXME performance issues
 init_function(golib_cs_initAll)
 {
 	params [["_syncMarks",true],["_syncElectronic",true]];

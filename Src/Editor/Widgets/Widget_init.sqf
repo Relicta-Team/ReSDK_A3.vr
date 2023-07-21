@@ -147,6 +147,7 @@ menu_structureLayout = [
 			"text:Проверка несуществующих классов;act:['Не реализовано'] call showWarning;"
 		],
 		"",
+		"text:Создать режим;act:call gm_filegen_openWindow",
 		// "text:Менеджер режимов;act:call gm_createGamemode",
 		// "",
 		"text:Просмотр моделей;act:call golib_modelViewerContextOpen",
