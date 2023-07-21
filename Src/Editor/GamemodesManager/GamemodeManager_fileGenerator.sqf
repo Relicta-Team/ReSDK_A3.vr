@@ -22,11 +22,21 @@ function(gm_filegen_openWindow)
 		_modeName = "GM" + _modeName;
 	};
 
+	private _replaceString = "@GAMEMODE_NAME@";
+
 	private _modeFrom = getMissionPath gm_filegen_internal_path_protomode;
 	private _modeTo = getMissionPath gm_filegen_internal_path_gamemodes + format["\%1\%1.sqf",_modeName];
+	private _rez = ["OOPBuilder","gm_generator",[_modeFrom,_modeTo,_replaceString,_modeName],true] call rescript_callCommand;
+	if (_rez == "false") exitwith {
+		[format["Невозможно создать файл режима: %1",_modeName]] call showWarning;
+	};
 
 	private _roleFrom = getMissionPath gm_filegen_internal_path_protomode;
 	private _roleTo = getMissionPath gm_filegen_internal_path_protorole + format["\%1\%1_roles.sqf",_modeName];
+	_rez = ["OOPBuilder","gm_generator",[_roleFrom,_roleTo,_replaceString,_modeName],true] call rescript_callCommand;
+	if (_rez == "false") exitwith {
+		[format["Невозможно создать файл роли: %1",_modeName]] call showWarning;
+	};
 
 	// [ 
 	// 	[

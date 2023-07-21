@@ -56,6 +56,30 @@ class OOPBuilder : IScript
 			} else {
 				output.Append("");
 			}
+		} else if (args == "gm_generator")
+		{
+			try {
+				if (ScriptContext.GetArgsCount() != 4) {
+					output.Append("false");
+					return;
+				}
+
+				string fileFrom = ScriptContext.GetArg(0);
+				string fileTo = ScriptContext.GetArg(1);
+				string replaceFrom = ScriptContext.GetArg(2);
+				string replaceTo = ScriptContext.GetArg(3);
+
+				// read all text from
+				string input = File.ReadAllText(fileFrom);
+				// replace all
+				input = input.Replace(replaceFrom, replaceTo);
+				// write to
+				File.WriteAllText(fileTo, input);
+
+				output.Append("true");
+			} catch (Exception ex) {
+				output.Append("false");
+			}
 		}
 	}
 

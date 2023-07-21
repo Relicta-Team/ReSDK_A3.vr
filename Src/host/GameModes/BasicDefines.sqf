@@ -295,6 +295,13 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		"Хуй знает почему не вышло";
 	};
 
+	//Получает количество игроков-претендентов на роль
+	func(getCandidatesCount)
+	{
+		objParams_1(_roleName);
+		count getVar((_roleName)call gm_getRoleObject,contenders_1)
+	};
+
 	//вызывается каждую секунду. стандартный обработчик раунда
 	//Является статической виртуальной функцией. this будет являться неопределенным
 	func(onRoundCode)
