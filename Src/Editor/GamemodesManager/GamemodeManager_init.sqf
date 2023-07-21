@@ -10,6 +10,12 @@ variable_define
 	//hashmap of gamemode settings
 	gm_internal_map_settings = createHashMap;
 
+/*
+		!WARNING
+	На данный момент принято решение приостановить разработку данного компонента.
+	Создание режимов производится через код.
+
+*/
 
 function(gm_createGamemode)
 {

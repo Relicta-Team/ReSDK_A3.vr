@@ -147,8 +147,8 @@ menu_structureLayout = [
 			"text:Проверка несуществующих классов;act:['Не реализовано'] call showWarning;"
 		],
 		"",
-		"text:Менеджер режимов;act:call gm_createGamemode",
-		"",
+		// "text:Менеджер режимов;act:call gm_createGamemode",
+		// "",
 		"text:Просмотр моделей;act:call golib_modelViewerContextOpen",
 		"text:Редактор позиций модели;act:[nil] call vcom_relposEditorOpen",//vector maker - relative model positions
 		"text:Редактор частиц и освещения;act:[nil] call vcom_emit_createVisualWindow",
