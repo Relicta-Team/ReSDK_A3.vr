@@ -1,8 +1,8 @@
 variable_define
 	//all pathes are relative
 	gm_filegen_internal_path_gamemodes = "src\host\GameModes";
-	gm_filegen_internal_path_protomode = "src\editor\bin\proto_mode.sqf";
-	gm_filegen_internal_path_protorole = "src\editor\bin\proto_role.sqf";
+	gm_filegen_internal_path_protomode = "src\editor\bin\protogamemode\proto_mode.sqf";
+	gm_filegen_internal_path_protorole = "src\editor\bin\protogamemode\proto_role.sqf";
 	gm_filegen_internal_path_gamemodes_loader_file = gm_filegen_internal_path_gamemodes + "\scripted_loader.hpp";
 
 function(gm_filegen_openWindow)
@@ -31,11 +31,20 @@ function(gm_filegen_openWindow)
 		[format["Невозможно создать файл режима: %1",_modeName]] call showWarning;
 	};
 
-	private _roleFrom = getMissionPath gm_filegen_internal_path_protomode;
-	private _roleTo = getMissionPath gm_filegen_internal_path_protorole + format["\%1\%1_roles.sqf",_modeName];
+	private _roleFrom = getMissionPath gm_filegen_internal_path_protorole;
+	private _roleTo = getMissionPath gm_filegen_internal_path_gamemodes + format["\%1\%1_roles.sqf",_modeName];
 	_rez = ["OOPBuilder","gm_generator",[_roleFrom,_roleTo,_replaceString,_modeName],true] call rescript_callCommand;
 	if (_rez == "false") exitwith {
 		[format["Невозможно создать файл роли: %1",_modeName]] call showWarning;
+	};
+
+	_rez = ["OOPBuilder","gm_generator_finalize",[
+		getMissionPath gm_filegen_internal_path_gamemodes_loader_file,
+		getMissionPath (gm_filegen_internal_path_gamemodes + "\" + _modeName),
+		_modeName
+	],true] call rescript_callCommand;
+	if (_rez == "false") exitwith {
+		[format["Невозможно завершить создание режима: %1",_modeName]] call showWarning;
 	};
 
 	// [ 

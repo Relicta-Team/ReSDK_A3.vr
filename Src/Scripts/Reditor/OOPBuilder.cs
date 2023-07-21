@@ -78,6 +78,28 @@ class OOPBuilder : IScript
 
 				output.Append("true");
 			} catch (Exception ex) {
+				Console.WriteLine(ex);
+				output.Append("false");
+			}
+		} else if (args == "gm_generator_finalize")
+		{
+			try {
+				if (ScriptContext.GetArgsCount() != 3) {
+					output.Append("false");
+					return;
+				}
+
+				string scriptloaderfile = ScriptContext.GetArg(0);
+				string foldergamemode = ScriptContext.GetArg(1);
+				string modename = ScriptContext.GetArg(2);
+
+				//create file in foldergamemode loader.sqf
+				File.WriteAllText(foldergamemode + "\\loader.sqf", "#include <..\\GameMode.h>\r\n//hello!");
+
+				//add this loader to scriptloaderfile
+				File.AppendAllText(scriptloaderfile, $"\r\nload(\"{modename}\\loader.sqf\");");
+
+			} catch (Exception ex) {
 				output.Append("false");
 			}
 		}
