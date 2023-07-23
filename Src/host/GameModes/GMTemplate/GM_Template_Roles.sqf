@@ -20,8 +20,7 @@ class(GMTemplate_RAdventurer) extends(BasicRole)
 	var(returnInLobbyAfterDead,true);
 
 	//Указываем позицию и направление при заходе за эту роль
-	getter_func(getInitialPos,"base" call getSpawnPosByName);
-	getter_func(getInitialDir,"base" call getSpawnDirByName);
+	getter_func(spawnLocation,"pos:base");
 
 	//Массив базовых скиллов в определенном порядке:
 	// Сила, Интеллект, Ловкость, Здоровье
@@ -98,8 +97,8 @@ class(GMTemplate_RAdventurerLate) extends(GMTemplate_RAdventurer)
 	getter_func(canVisibleAfterStart,true);
 
 	//Одна из добавленных точек с названием latespawn
-	getter_func(getInitialPos,"latespawn" call getRandomSpawnPosByName);
-	getter_func(getInitialDir,random 360); //случайное направление от 0 до 360
+	getter_func(spawnLocation,"rpos:latespawn");
+	getter_func(useRandomDirOnSpawn,true); //случайное направление от 0 до 360
 
 	var(count,5);
 

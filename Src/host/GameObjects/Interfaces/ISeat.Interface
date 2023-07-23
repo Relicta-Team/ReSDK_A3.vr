@@ -71,16 +71,18 @@ func(constructor)
 	setSelf(_seatListDummy,_l apply {objNUll});
 };
 
-//свободно ли место
+//свободно ли место (unsafe function)
 func(isSeatFree)
 {
 	objParams_1(_index);
 	isNullReference(getSelf(seatListOwners) select _index)
 };
 
+//public function with indexoutofrange check
 func(canSeat)
 {
 	objParams_2(_usr,_index);
+	if !inRange(_index,0,(count getSelf(seatListOwners)) - 1) exitwith {false};
 	callSelfParams(isSeatFree,_index);
 };
 
@@ -157,16 +159,26 @@ func(seatConnect)
 		_o setPosAtl _p;
 	}; startUpdateParams(_pfh_onReplicate,0,vec2(_rplObj,_pos));
 	
-	private _dir = _origObj getRelDir getVar(_usr,owner);
+	
+	private _usrPos = callFunc(_usr,getPos);
+	private _usrDir = callFunc(_usr,getDir);
+
+	if !isNullVar(__GLOBAL_INITIALIZER_POS__) then {
+		private _usrPos = __GLOBAL_INITIALIZER_POS__ select 0;
+		private _usrDir = __GLOBAL_INITIALIZER_POS__ select 1;
+	};
+
+		private _dir = _origObj getRelDir getVar(_usr,owner);
 	private _restDir = if (_dir > 315 || _dir <= 45) then {
-		callFunc(_usr,getDir)+_dir //он спереди
-	} else {callFunc(_usr,getDir)+180};
+		_usrDir+_dir //он спереди
+	} else {_usrDir+180};
 	//TODO починить посадку спереди объекта
-	_restDir = callFunc(_usr,getDir) + 180;
+	_restDir = _usrDir + 180;
 	
 	_rplObj setVariable ["_restDir",_restDir];
-	_rplObj setVariable ["_restPos",callFunc(_usr,getPos)];
+	_rplObj setVariable ["_restPos",_usrPos];
 	
+
 	getSelf(seatListOwners) set [_index,_usr];
 	setVar(_usr,connectedTo,this);
 	

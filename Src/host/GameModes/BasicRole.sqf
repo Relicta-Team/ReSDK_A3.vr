@@ -164,25 +164,29 @@ class(BasicRole) extends(object) attribute(Role)
 	func(getInitialPos)
 	{
 		objParams();
+		null
 	};
 
 	// Возвращает направление, на котором будет созадна роль
 	func(getInitialDir)
 	{
 		objParams();
+		null
 	};
 
 	//Стартовая точка спавна. 
 	/*
 		Может быть:
-		- точкой спавна
-		- рандомной точкой спавна
-		- глобальной ссылкой на объект (если кровать или стул то привяжет персонажа к нему)
+		- точкой спавна (pos:spawnpointname)
+		- рандомной точкой спавна (rpos:randomspawnpointname)
 
+		если не указан тип, он будет вычислен автоматически.
+		Но если есть тип рандомной точки и обычной с одинаковым выбранным названием то будет по умолчанию применен префикс pos
 	*/
 	func(spawnLocation)
 	{
 		objParams();
+		null
 	};
 
 	// Работает в связке с spawnLocation. 
@@ -190,24 +194,113 @@ class(BasicRole) extends(object) attribute(Role)
 	// true - задает случайное направление
 	getter_func(useRandomDirOnSpawn,false);
 
+	//Точка привязки (кровать или стул)
+	/*
+		Может быть:
+			- глобальной ссылкой на объект: ref:objectglobalreference (for getObjectByRef)
+			- именем типа: type:IChair
+		
+		!!! Указать только connectedTo без spawnLocation невозможно, так как при вставании со стула/кровати
+		система должна знать куда поместить персонажа.
+	*/
+	getter_func(connectedTo,null);
+
 	// Внутренняя инициализация позиции
 	func(initLocation)
 	{
 		objParams_1(_mob);
+
+		//deprecated values
+		private _spawnPos = callSelf(getInitialPos);
+		private _spawnDir = callSelf(getInitialDir);
+
+		private _spawnLoc = callSelf(spawnLocation);
+		private _connectedTo = callSelf(connectedTo);
+		private _canPostConnectTo = !isNullVar(_connectedTo);
 		
-		#ifdef EDITOR
-		if ("spawnposFromCache" call sdk_hasSystemFlag && gm_roundduration <= 1) exitwith {
-			private _cache = call editorDebug_getPlayerSettings;
-			private _pos = _cache getOrDefault ["pos",callSelf(getInitialPos)];
-			private _dir = _cache getOrDefault ["dir",callSelf(getInitialDir)];
+		if (!isNullVar(_spawnLoc)) then {
+			// автоматическое определение типа точки
+			if ((["pos:","rpos:"] findif {(_x select [0,4]) in _spawnLoc})==-1) then {
+				private _isSpawnP = _spawnLoc call isExistsSpawn;
+				private _isRandSpawnP = _spawnLoc call isExistsRandomSpawn;
+				if (_isSpawnP && _isRandSpawnP) then {
+					_spawnLoc = "pos:" + _spawnLoc;
+				} else {
+					_spawnLoc = ifcheck(_isSpawnP,"pos:","rpos:") + _spawnLoc;
+				};
+			};
 			
-			callFuncParams(_mob,setInitialPos,_pos);
-			callFuncParams(_mob,setDir,_dir);
+			(_spawnLoc splitString ":")params ["_mode","_spawnName"];
+			
+			if !(_mode in ["pos","rpos"]) exitwith {};
+
+			private _funcGetPos = ifcheck(_mode=="pos",getSpawnPosByName,getRandomSpawnPosByName);
+			
+			private _pos = [_spawnName,-1] call _funcGetPos;
+			if equals(_pos,-1) exitwith {};
+			_spawnPos = _pos;
+			
+			private _funcGetDir = ifcheck(callSelf(useRandomDirOnSpawn),{random 360},ifcheck(_mode=="pos",getSpawnDirByName,getRandomSpawnDirByName));
+			private _dir = [_spawnName,""] call _funcGetDir;
+			if not_equals(_dir,"") then {
+				_spawnDir = _dir;
+			};
 		};
+
+		#ifdef EDITOR
+		if ("spawnposFromCache" call sdk_hasSystemFlag && gm_roundduration <= 1) then {
+			private _cache = call editorDebug_getPlayerSettings;
+			if ("pos" in _cache) then {_spawnPos = _cache get "pos"};
+			if ("dir" in _cache) then {_spawnDir = _cache get "dir"};
+			_canPostConnectTo = false; //drop postconnect
+		};
+
+		if (isNullVar(_spawnPos) || isNullVar(_spawnDir)) then {
+			["Определите spawnLocation для роли %1",callSelf(getClassName)] call messageBox;
+			_spawnPos = [0,0,0];
+			_spawnDir = 0;
+		};
+
 		#endif
 
-		callFuncParams(_mob,setInitialPos,callSelf(getInitialPos));
-		callFuncParams(_mob,setDir,callSelf(getInitialDir));
+		callFuncParams(_mob,setInitialPos,_spawnPos);
+		callFuncParams(_mob,setDir,_spawnDir);
+
+		if (_canPostConnectTo) then {
+			if ((["type:","ref:"] findif {(_x select [0,4]) in _connectedTo})==-1) then {
+				private _isRef = !isNullReference(_connectedTo call getObjectByRef);
+				private _isTyped = isImplementClass(_connectedTo) && {typeHasVar(typeGetFromString(_connectedTo),seatConnect)};
+				
+				if (_isRef) exitwith {_connectedTo = "ref:" + _connectedTo};
+				if (_isTyped) exitwith {_connectedTo = "type:" + _connectedTo};
+				#ifdef EDITOR
+				["Определите метку ссылки или типа в connectedTo для роли %1",callSelf(getClassName)] call messageBox;
+				#endif
+			};
+			(_connectedTo splitString ":") params ["_typeConnect","_nameConnect","_optConnection"];
+			private _objRef = nullPtr;
+			if (_typeConnect == "ref") then {
+				_objRef = _nameConnect call getObjectByRef;
+			};
+			if (_typeConnect == "type") then {
+				_objRef = [_nameConnect,_spawnPos,3,false,true] call getGameObjectOnPosition;
+			};
+			if (!isNullReference(_objRef)) then {
+				if !isNullReference(_optConnection) then {
+					if not_equalTypes(_optConnection,0) then {_optConnection = null};
+				};
+
+				private _args = [_objRef,_mob,_optConnection,[_spawnPos,_spawnDir]];
+				private _postcode = {
+					params ["_objRef","_mob","_optConnection","_vec2resetpos"];
+
+					private __GLOBAL_INITIALIZER_POS__ = _vec2resetpos;
+
+					if (isNullReference(_objRef) || isNullReference(_mob)) exitwith {};
+					callFuncParams(_objRef,seatConnect,_mob arg _optConnection);
+				}; invokeAfterDelayParams(_postcode,0.001,_args);
+			};	
+		};
 	};
 
 	/*
