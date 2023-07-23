@@ -10,13 +10,26 @@ init_function(sim_initialize)
 
 function(sim_openMapSelector)
 {
+	params [["_selectFromAllModes",true]];
 	private _allowedModes = [];
+	private _thisMapName = "missionName" call golib_getCommonStorageParam;
 	{
 		if ([_x,"InterfaceClass"] call goasm_attributes_hasAttributeClass
 			|| [_x,"HiddenClass"] call goasm_attributes_hasAttributeClass
 		) then {continue};
-		_allowedModes pushBack ([_x,"classname"] call oop_getTypeValue);
+		if (_selectFromAllModes) then {
+			_allowedModes pushBack ([_x,"classname"] call oop_getTypeValue);
+		} else {
+			private _mapName = [_x,"",true,"getMapName"] call oop_getFieldBaseValue;
+			if (_mapName == _thisMapName) then {
+				_allowedModes pushBack ([_x,"classname"] call oop_getTypeValue);
+			};
+		};
 	} foreach (call gm_getAllGamemodeObjects);
+
+	if (!_selectFromAllModes && count _allowedModes == 1) exitwith {
+		[[],[vec2("startupMode",_allowedModes select 0)]] call sim_internal_processLaunchSim;
+	};
 
 	_allowedModes sort true;
 	

@@ -167,7 +167,8 @@ menu_structureLayout = [
 	],
 	["text:Запуск;",
 		"text:Запустить симуляцию;act:call sim_startupDefault;path:menu_path_launch;", //short:28; data:MissionPreview;
-		"text:Запустить симуляцию с режимом;act:call sim_openMapSelector",
+		"text:Запустить симуляцию с режимом;act:[true] call sim_openMapSelector",
+		"text:Запустить симуляцию с режимом для этой карты;act:[false] call sim_openMapSelector",
 		"text:Запуск симуляции с последним режимом и ролью;act:call sim_startSimFromCache",
 		"text:Настроить симуляцию и запустить;act:call sim_openDetaliSetup",
 		"",
