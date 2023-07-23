@@ -1,28 +1,40 @@
+// ======================================================
+// Copyright (c) 2017-2023 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
 #include <..\GameMode.h>
 
 
-class(@GAMEMODE_NAME@_BaseRole) extends(BasicRole)
+class(@GAMEMODE_NAME@_BaseRole) extends(BasicRole) //BasicRole - базовая роль, от которой унаследованы все возможные роли.
     
-     // -----------------------------------------------------------------//
+    // -----------------------------------------------------------------//
     // -------------------- Базовые настройки роли ---------------------//
     // -----------------------------------------------------------------//
 	var(name,"Имя роли");
 	var(desc,"Описание роли.");
 
-	// Можно ли взять эту роль до начала игры
+	// Специальное условие можно ли взять эту роль до старта раунда
 	getter_func(canTakeInLobby,true);
-	//можно ли взять эту роль после старта, если эта роль 
-	getter_func(canVisibleAfterStart,false);
-	//Это для того, чтобы не просило сменить лицо и имя при следующих заходах
-	getter_func(canStoreNameAndFaceForValidate,false);
+	// Специальное условие можно ли взять эту роль после старта раунда
+	getter_func(canVisibleAfterStart,true);
+	// Данное свойство потребует смены лица и имени при следующем заходе за любую другую роль. 
+	/* 
+		Оно нужно для того, чтобы игроки после смерти не заходили за персонажа с таким же именем и лицом как и в предыдущей роли
+		Например у жрунов это свойство принимает значение false 
+	*/
+	getter_func(canStoreNameAndFaceForValidate,true);
 
-	//сколько человек может зайти за эту роль
-	var(count,2);
+	/*
+		Сколько человек может зайти за эту роль. При заходе каждого игрока данный счетчик уменьшается на 1.
+		Когда счетчик становится равным 0 роль удаляется из списка ролей, которые можно взять
+	*/
+	var(count,1);
 	
-	// при true после смерти клиента сразу вернет в лобби вместо возможности зайти в призрака
+	// Если данное поле true, то после смерти персонажа игрока сразу вернет в лобби вместо возможности зайти в призрака
 	var(returnInLobbyAfterDead,true);
 
-	//Указываем позицию и направление при заходе за эту роль
+	// Указываем позицию и направление при заходе за эту роль
 	getter_func(getInitialPos,"base" call getSpawnPosByName);
 	getter_func(getInitialDir,"base" call getSpawnDirByName);
 
@@ -45,44 +57,44 @@ class(@GAMEMODE_NAME@_BaseRole) extends(BasicRole)
     */
 	func(getOtherSkills) {[
 		
-		skillrand("fight",0,0), //навык рукопашного боя
-		skillrand("shield",0,0), //навык владения щитами
-		skillrand("fencing",0,0), //навык владения фехтовальным оружием
-		skillrand("axe",0,0), //навык владения топорами
-		skillrand("baton",0,0), //навык валдения дубиной
-		skillrand("spear",0,0), //навык владения копьем
-		skillrand("sword",0,0), //навык владения мечами
-		skillrand("knife",0,0), //навык владения ножами
-		skillrand("whip",0,0), //навык владения кнутами
+		skillrand(fight,0,0), //навык рукопашного боя
+		skillrand(shield,0,0), //навык владения щитами
+		skillrand(fencing,0,0), //навык владения фехтовальным оружием
+		skillrand(axe,0,0), //навык владения топорами
+		skillrand(baton,0,0), //навык валдения дубиной
+		skillrand(spear,0,0), //навык владения копьем
+		skillrand(sword,0,0), //навык владения мечами
+		skillrand(knife,0,0), //навык владения ножами
+		skillrand(whip,0,0), //навык владения кнутами
 
-		skillrand("pistol",0,0), //навык владения пистолетами
-		skillrand("rifle",0,0), //навык владения винтовками
-		skillrand("shotgun",0,0), //навык владения дробовиками
-		skillrand("crossbow",0,0), //навык стрельбы из лука
+		skillrand(pistol,0,0), //навык владения пистолетами
+		skillrand(rifle,0,0), //навык владения винтовками
+		skillrand(shotgun,0,0), //навык владения дробовиками
+		skillrand(crossbow,0,0), //навык стрельбы из лука
 
-		skillrand("throw",0,0), //навык метания
+		skillrand(throw,0,0), //навык метания
 
-		skillrand("chemistry",0,0), //навык работы с химией
-		skillrand("alchemy",0,0), //навык работы с пещерной химией
+		skillrand(chemistry,0,0), //навык работы с химией
+		skillrand(alchemy,0,0), //навык работы с пещерной химией
 
-		skillrand("engineering",0,0), //навык строительства
-		skillrand("traps",0,0), //навык работы с ловушками
-		skillrand("repair",0,0), //навык ремонта
-		skillrand("blacksmithing",0,0), //навык кузнецкого ремесла
-		skillrand("craft",0,0), //навык создания различных предметов
+		skillrand(engineering,0,0), //навык строительства
+		skillrand(traps,0,0), //навык работы с ловушками
+		skillrand(repair,0,0), //навык ремонта
+		skillrand(blacksmithing,0,0), //навык кузнецкого ремесла
+		skillrand(craft,0,0), //навык создания различных предметов
 
-		skillrand("theft",0,0), //навык воровства
-		skillrand("stealth",0,0), //навык скрытности
-		skillrand("agility",0,0), //навык акробатики
-		skillrand("lockpicking",0,0), //навык взлома
+		skillrand(theft,0,0), //навык воровства
+		skillrand(stealth,0,0), //навык скрытности
+		skillrand(agility,0,0), //навык акробатики
+		skillrand(lockpicking,0,0), //навык взлома
 
-		skillrand("healing",0,0), //навык первой помощи
-		skillrand("surgery",0,0), //навык хирургии
+		skillrand(healing,0,0), //навык первой помощи
+		skillrand(surgery,0,0), //навык хирургии
 
-		skillrand("cavelore",0,0), //навык знания пещер
+		skillrand(cavelore,0,0), //навык знания пещер
 
-		skillrand("cooking",0,0), //навык готовки
-		skillrand("farming",0,0) //навык фермерства
+		skillrand(cooking,0,0), //навык готовки
+		skillrand(farming,0,0) //навык фермерства
 	]};
 
 	//Функция в которой персонаж получает свой инвентарь
@@ -140,31 +152,31 @@ class(@GAMEMODE_NAME@_BaseRole) extends(BasicRole)
 	
 endclass
 
-class(GMTemplate_RAdventurerLate) extends(GMTemplate_RAdventurer)
+// class(GMTemplate_RAdventurerLate) extends(GMTemplate_RAdventurer)
 	
-	var(name,"Опоздавший приключенец");
-	var(desc,"Немного не успел");
+// 	var(name,"Опоздавший приключенец");
+// 	var(desc,"Немного не успел");
 
-	getter_func(canVisibleAfterStart,true);
+// 	getter_func(canVisibleAfterStart,true);
 
-	//Одна из добавленных точек с названием latespawn
-	getter_func(getInitialPos,"latespawn" call getRandomSpawnPosByName);
-	getter_func(getInitialDir,random 360); //случайное направление от 0 до 360
+// 	//Одна из добавленных точек с названием latespawn
+// 	getter_func(getInitialPos,"latespawn" call getRandomSpawnPosByName);
+// 	getter_func(getInitialDir,random 360); //случайное направление от 0 до 360
 
-	var(count,5);
+// 	var(count,5);
 
-	func(getEquipment)
-	{
-		objParams_1(_mob);
+// 	func(getEquipment)
+// 	{
+// 		objParams_1(_mob);
 		
-		//вызываем базовый метод, определенный в GMTemplate_RAdventurer
-		super();
+// 		//вызываем базовый метод, определенный в GMTemplate_RAdventurer
+// 		super();
 
-		//Создаем факел в руках персонажа. 
-			//Сначала проверяет в активной руке
-			//Если она занята, то вторую руку. 
-			//Если и она занята то спавнит предмет под персонажем
-		["Torch",_mob] call createItemInInventory;
-	};
+// 		//Создаем факел в руках персонажа. 
+// 			//Сначала проверяет в активной руке
+// 			//Если она занята, то вторую руку. 
+// 			//Если и она занята то спавнит предмет под персонажем
+// 		["Torch",_mob] call createItemInInventory;
+// 	};
 
-endclass
+// endclass

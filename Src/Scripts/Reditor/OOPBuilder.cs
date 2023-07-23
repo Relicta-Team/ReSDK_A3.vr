@@ -54,7 +54,7 @@ class OOPBuilder : IScript
 			{
 				output.Append(value);
 			} else {
-				output.Append("");
+				output.Append("$CLOSED$");
 			}
 		} else if (args == "gm_generator")
 		{
@@ -73,6 +73,11 @@ class OOPBuilder : IScript
 				string input = File.ReadAllText(fileFrom);
 				// replace all
 				input = input.Replace(replaceFrom, replaceTo);
+				
+				//directory create if not exists
+				System.IO.FileInfo file = new System.IO.FileInfo(fileTo);
+				file.Directory.Create();
+				
 				// write to
 				File.WriteAllText(fileTo, input);
 
@@ -94,12 +99,15 @@ class OOPBuilder : IScript
 				string modename = ScriptContext.GetArg(2);
 
 				//create file in foldergamemode loader.sqf
-				File.WriteAllText(foldergamemode + "\\loader.sqf", "#include <..\\GameMode.h>\r\n//hello!");
+				string loaderfile = foldergamemode + "\\loader.sqf";
+				File.WriteAllText(loaderfile, $"#include <..\\GameMode.h>\r\n\r\nload(\"{modename}\\{modename}.sqf\");\r\nload(\"{modename}\\{modename}_roles.sqf\");");
 
 				//add this loader to scriptloaderfile
 				File.AppendAllText(scriptloaderfile, $"\r\nload(\"{modename}\\loader.sqf\");");
-
+				
+				output.Append("true");
 			} catch (Exception ex) {
+				Console.WriteLine(ex);
 				output.Append("false");
 			}
 		}
