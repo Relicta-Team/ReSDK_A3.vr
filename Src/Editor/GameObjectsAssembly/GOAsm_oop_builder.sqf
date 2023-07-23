@@ -25,7 +25,7 @@ function(goasm_builder_postbuildCode)
 		goasm_builder_postInit_customSetup = false; //resert to default
 	} else {
 		goasm_builder_isBuildedClasses = null;
-		["Build error. See console"] call showWarning;
+		["Build error. See console",10] call showWarning;
 		call goasm_builder_onError_delegate;
 	};
 }
@@ -406,10 +406,8 @@ function(goasm_builder_makeClassTable)
 	
 	// для оптимизации пока отключил загрузчик всех классов в игру
 	//#include "GOAsm_test_objects.sqf"
-	#include <..\..\host\GameObjects\loader.hpp>
-	
-	//Загрузчик объектов игровых режимов
-	#include <..\..\host\GameModes\loader.hpp>
+
+	call compile preprocessFileLineNumbers "src\Editor\GameObjectsAssembly\__GOAsm_loader.sqf";
 
 	1
 }
