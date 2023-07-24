@@ -86,6 +86,19 @@ func(canSeat)
 	callSelfParams(isSeatFree,_index);
 };
 
+// Получить владельца конкретного сиденья. Если сиденье только 1 - передайте аргументом 0 или null
+func(getSeatOwner)
+{
+	objParams_1(_idx);
+
+	if isNullVar(_idx) then {_idx = 0};
+
+	private _listSeats = getSelf(seatListOwners);
+	if !inRange(_index,0,(count _listSeats) - 1) exitwith {nullPtr};
+
+	_listSeats select _idx;
+};
+
 func(getNearFreeSeatIndex)
 {
 	objParams_1(_usr);
