@@ -9,6 +9,7 @@
 #include <..\..\GameConstants.hpp>
 
 //При входе клиента в зону спавна удаляет его
+editor_attribute("HiddenClass")
 class(ISpawnerStruct) extends(IStruct)
 	var(model,"a3\structures_f\system\cluttercutter_small_f.p3d");
 	getter_func(onSpawn,null);
