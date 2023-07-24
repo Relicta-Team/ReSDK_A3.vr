@@ -156,11 +156,12 @@ function(gm_filegen_internal_processCreate)
 			_this params ["_modeName"];
 
 			private _replaceString = "@GAMEMODE_NAME@";
+			private _thisMapName = "missionName" call golib_getCommonStorageParam;
 
 			[30,"Генерация файла режима"] call loadingScreen_setProgress;
 			private _modeFrom = getMissionPath gm_filegen_internal_path_protomode;
 			private _modeTo = getMissionPath gm_filegen_internal_path_gamemodes + format["\%1\%1.sqf",_modeName];
-			private _rez = ["OOPBuilder","gm_generator",[_modeFrom,_modeTo,_replaceString,_modeName],true] call rescript_callCommand;
+			private _rez = ["OOPBuilder","gm_generator",[_modeFrom,_modeTo,_replaceString,_modeName,_thisMapName],true] call rescript_callCommand;
 			if (_rez == "false") exitwith {
 				call loadingScreen_stop;
 				[format["Невозможно создать файл режима: %1",_modeName]] call showWarning;
@@ -169,7 +170,7 @@ function(gm_filegen_internal_processCreate)
 			[60,"Генерация файла ролей"] call loadingScreen_setProgress;
 			private _roleFrom = getMissionPath gm_filegen_internal_path_protorole;
 			private _roleTo = getMissionPath gm_filegen_internal_path_gamemodes + format["\%1\%1_roles.sqf",_modeName];
-			_rez = ["OOPBuilder","gm_generator",[_roleFrom,_roleTo,_replaceString,_modeName],true] call rescript_callCommand;
+			_rez = ["OOPBuilder","gm_generator",[_roleFrom,_roleTo,_replaceString,_modeName,_thisMapName],true] call rescript_callCommand;
 			if (_rez == "false") exitwith {
 				call loadingScreen_stop;
 				[format["Невозможно создать файл роли: %1",_modeName]] call showWarning;
@@ -188,11 +189,12 @@ function(gm_filegen_internal_processCreate)
 			
 			call loadingScreen_stop;
 			[format["Режим %1 создан",_modeName]] call showInfo;
+			nextFrame(goasm_builder_rebuildClasses);
 		},
 		{
 			["Не удалось разблокировать файл для записи: " + gm_filegen_internal_path_gamemodes_loader_file] call showWarning;
 			[5,"Не удалось разблокировать файл для записи: " + gm_filegen_internal_path_gamemodes_loader_file] call loadingScreen_setProgress;
-			invokeAfterDelay({call loadingScreen_stop; nextFrame(goasm_builder_rebuildClasses)},3);
+			invokeAfterDelay({call loadingScreen_stop;},3);
 		}
 	] call file_unlockAsync;
 }

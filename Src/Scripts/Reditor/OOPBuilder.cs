@@ -59,7 +59,7 @@ class OOPBuilder : IScript
 		} else if (args == "gm_generator")
 		{
 			try {
-				if (ScriptContext.GetArgsCount() != 4) {
+				if (ScriptContext.GetArgsCount() != 5) {
 					output.Append("false");
 					return;
 				}
@@ -68,11 +68,13 @@ class OOPBuilder : IScript
 				string fileTo = ScriptContext.GetArg(1);
 				string replaceFrom = ScriptContext.GetArg(2);
 				string replaceTo = ScriptContext.GetArg(3);
+				string replaceMapName = ScriptContext.GetArg(4);
 
 				// read all text from
 				string input = File.ReadAllText(fileFrom);
 				// replace all
 				input = input.Replace(replaceFrom, replaceTo);
+				input = input.Replace("@MAP_NAME@", replaceMapName);
 				
 				//directory create if not exists
 				System.IO.FileInfo file = new System.IO.FileInfo(fileTo);
