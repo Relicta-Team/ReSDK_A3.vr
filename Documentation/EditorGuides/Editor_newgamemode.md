@@ -528,7 +528,7 @@ func(postSetup)
 Немного изменим наши методы **checkFinish** и **getResultTextOnFinish**, дополнив их обработкой для скрытых антагонистов.
 
 ```sqf
-var(sittingOnChair,nullPtr); // сюда впишем ниже антагониста, который сел на стул
+var(sittingOnChair,nullPtr); // сюда чуть позже впишем антагониста через checkFinish, который сел на стул
 
 func(checkFinish)
 {
