@@ -103,6 +103,10 @@ function(sim_internal_processLaunchSim)
 
 function(sim_openDetaliSetup)
 {
+	if (call golib_isOpenedArraySelector) exitwith {
+		["Окно уже открыто"] call showWarning;
+	};
+
 	sim_internal_map_onDragEvent = createHashMapFromArray [
 		["startGamemodeName",{params ["_class"]; isTypeNameOf(_class,GMBase) && _class != "GMBase"}],
 		["startRoleName",{params ["_class"]; isTypeNameOf(_class,BasicRole) && _class != "BasicRole"}]
