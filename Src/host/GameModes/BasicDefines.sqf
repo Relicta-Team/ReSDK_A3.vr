@@ -379,6 +379,7 @@ class(GMStationBase) extends(GMBase)
 	};
 
 	//стандартизированное событие начала раунда
+	//!!! Не рекомендуется к использованию
 	func(onRoundBegin)
 	{
 		objParams();

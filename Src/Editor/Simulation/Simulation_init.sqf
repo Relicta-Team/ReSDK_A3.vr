@@ -6,11 +6,18 @@
 init_function(sim_initialize)
 {
 	sim_internal_const_pathAbsSDKConfig = getMissionPath "src\Editor\EditorSDKConfig.txt";
+
+	sim_internal_isStartFromPointMode = false;
+
+	sim_internal_lastCachedSpawnPos = [0,0,0];
 }
 
 function(sim_openMapSelector)
 {
-	params [["_selectFromAllModes",true]];
+	params [["_selectFromAllModes",true],["_startFromPoint",false]];
+	
+	sim_internal_isStartFromPointMode = _startFromPoint;
+	
 	private _allowedModes = [];
 	private _thisMapName = "missionName" call golib_getCommonStorageParam;
 	{
@@ -28,7 +35,7 @@ function(sim_openMapSelector)
 	} foreach (call gm_getAllGamemodeObjects);
 
 	if (!_selectFromAllModes && count _allowedModes == 1) exitwith {
-		[[],[vec2("startupMode",_allowedModes select 0)]] call sim_internal_processLaunchSim;
+		[_allowedModes select 0] call sim_onStartFromSelectedMode;
 	};
 
 	_allowedModes sort true;
@@ -38,7 +45,7 @@ function(sim_openMapSelector)
 		//event on select
 		{
 			_curMode = _text;
-			[[],[vec2("startupMode",_curMode)]] call sim_internal_processLaunchSim;
+			[_curMode] call sim_onStartFromSelectedMode;
 		},
 		{
 			
@@ -46,6 +53,23 @@ function(sim_openMapSelector)
 		null,
 		"Выберите режим с которым будет запускаться симуляция"
 	] call control_createList;
+}
+
+function(sim_onStartFromSelectedMode)
+{
+	params ["_modeName"];
+
+	if (sim_internal_isStartFromPointMode) then {
+		//update cache
+		[sim_internal_lastCachedSpawnPos,0] call editorDebug_updatePosAndDirInCache;
+
+		[["autoGamemode","startGame","spawnposFromCache"],[
+			["startGamemodeName",_modeName],
+			["startRoleName","GMTemplate_RAdventurer"]
+		]] call sim_internal_processLaunchSim;
+	} else {
+		[[],[vec2("startupMode",_modeName)]] call sim_internal_processLaunchSim;
+	};
 }
 
 function(sim_startSimFromCache)

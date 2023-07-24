@@ -462,7 +462,7 @@ class(GameObject) extends(ManagedObject)
 	getter_func(getModelDirection,getDir callSelf(getBasicLoc));
 
 	getter_func(getPos,callSelf(getModelPosition));
-	getter_func(getDir,callSelf(getModelPosition));
+	getter_func(getDir,callSelf(getModelDirection));
 
 	#define startSectorIndex 1
 	#define sectorSize 1

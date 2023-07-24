@@ -239,6 +239,20 @@ function(ContextMenu_loadMouseObject)
 		]
 	};
 
+	_stackMenu pushBack ["Запустить симуляцию отсюда",{
+		_obj = (call contextMenu_getContextParams) select 0;
+		_screenToWorldPos = screenToWorld getMousePosition;
+		([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR","_atlPos"];
+		if equals(_atlPos,vec3(0,0,0)) then {_atlPos = _screenToWorldPos};
+		if not_equals(_obj,_objR) exitwith {
+			["Несоответствие точки старта симуляции. Повторите попытку"] call printWarning;
+		};
+
+		private _params = [false,true];
+		sim_internal_lastCachedSpawnPos = _atlPos;
+		nextFrameParams(sim_openMapSelector,_params);
+	}];
+
 	_stackMenu pushBack [
 		"Создать префаб (новый класс)",
 		{
