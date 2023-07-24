@@ -48,9 +48,9 @@ class(@GAMEMODE_NAME@) extends(GMBase) //GMBase - базовый режим, о�
 			// Введите тут строковые имена классов ролей через запятую
             /*
                 Пример:
-                    "@GAMEMODE_NAME@_BaseRole1",
-                    "@GAMEMODE_NAME@_BaseRole2",
-                    "@GAMEMODE_NAME@_BaseRole3"
+                    "@GAMEMODE_NAME@_BasicRole1",
+                    "@GAMEMODE_NAME@_BasicRole2",
+                    "@GAMEMODE_NAME@_BasicRole3"
             */
 		]
 	};
@@ -89,14 +89,14 @@ class(@GAMEMODE_NAME@) extends(GMBase) //GMBase - базовый режим, о�
 		objParams();
         /*
             Как правило здесь описываются условия типа: 
-                если на "@GAMEMODE_NAME@_BaseRole1" встало 2 игрока и на "@GAMEMODE_NAME@_BaseRole2" встал 1 игрок,
+                если на "@GAMEMODE_NAME@_BasicRole1" встало 2 игрока и на "@GAMEMODE_NAME@_BasicRole2" встал 1 игрок,
                 то раунд можно запускать.
                 В лююбых других случаях раунд не стартуер.
             
             Для получения количества игроков, вставших на роли используйте функцию getCandidatesCount
 
-            callSelfParams(getCandidatesCount,"@GAMEMODE_NAME@_BaseRole1") >= 2 
-            && callSelfParams(getCandidatesCount,"@GAMEMODE_NAME@_BaseRole2") >= 1
+            callSelfParams(getCandidatesCount,"@GAMEMODE_NAME@_BasicRole1") >= 2 
+            && callSelfParams(getCandidatesCount,"@GAMEMODE_NAME@_BasicRole2") >= 1
             
         */
 		false
