@@ -18,7 +18,7 @@ class(@GAMEMODE_NAME@) extends(GMBase) //GMBase - базовый режим, о�
 	var(descExtended,"Описание в конце игры.");
 
 	// Длительность игры в режиме @GAMEMODE_NAME@.
-	var(duration,t_atMin(30)); // 30 минут
+	var(duration,t_asMin(30)); // 30 минут
     
     // Имя карты, которая будет создана в режиме @GAMEMODE_NAME@
 	getterconst_func(getMapName,"@MAP_NAME@");
@@ -74,8 +74,8 @@ class(@GAMEMODE_NAME@) extends(GMBase) //GMBase - базовый режим, о�
     // Можно ли запускать события "Влияния Реликты"
     getterconst_func(canPlayEvents,true);
     //Минимальное и максимальное время между запусками "Влияния Реликты"
-    getter_func(getMinPlayEventTime,t_atMin(30));
-	getter_func(getMaxPlayEventTime,t_atMin(50));
+    getter_func(getMinPlayEventTime,t_asMin(30));
+	getter_func(getMaxPlayEventTime,t_asMin(50));
 
 
 	// -----------------------------------------------------------------//

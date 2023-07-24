@@ -277,7 +277,7 @@ class(FarmGarden) extends(IStruct)
 		setSelf(createdMushroomsWorldObjects,[]);
 
 		#ifndef EDITOR
-		setSelf(timeLeft,t_atMin(randInt(10,20)) + randInt(1,60));
+		setSelf(timeLeft,t_asMin(randInt(10,20)) + randInt(1,60));
 		#else
 		setSelf(timeLeft,5);
 		#endif
