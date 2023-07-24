@@ -235,3 +235,25 @@ class(@GAMEMODE_NAME@_BasicRole) extends(BasicRole) // BasicRole - базова�
 	};
 	
 endclass
+
+/*
+	Определяем роли, унаследованные от @GAMEMODE_NAME@_BasicRole
+
+class(RDebugRole_@GAMEMODE_NAME@) extends(@GAMEMODE_NAME@_BasicRole)
+	//change if need
+	var(name,"Debug role");
+	var(desc,"For debugging");
+
+	// Needs:
+	// Setup main role, count, serialization, ghosted (isMainRole, count, canStoreNameAndFaceForValidate, returnInLobbyAfterDead)
+	// Setup spawn and bed/chair if needed (spawnLocation, useRandomDirOnSpawn, connectedTo)
+	// Setup skills and otherskills (getSkills, getOtherSkills)
+	// Access settings: canTakeInLobby, canVisibleAfterStart 
+	// 		(optional) Special access: needDiscordRoles, roleAccess
+	// Generic join/dead events: onAssigned, onDeadBasic, onEndgameBasic
+	//		(optional) Custom events: onDead, onEndgame
+	// (optional) Antag logics (Can be antagonist???) (canBeFullAntag, canBeHiddenAntag)
+
+endclass
+
+*/
