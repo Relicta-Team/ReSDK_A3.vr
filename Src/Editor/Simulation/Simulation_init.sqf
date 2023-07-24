@@ -103,6 +103,11 @@ function(sim_internal_processLaunchSim)
 
 function(sim_openDetaliSetup)
 {
+	sim_internal_map_onDragEvent = createHashMapFromArray [
+		["startGamemodeName",{params ["_class"]; isTypeNameOf(_class,GMBase) && _class != "GMBase"}],
+		["startRoleName",{params ["_class"]; isTypeNameOf(_class,BasicRole) && _class != "BasicRole"}]
+	];
+
 	private _params = [
 		//setting,name(|desc),valuetype,defaultvalue
 		["autoGamemode","Авторежим|Установить режим и роль","check"],
@@ -113,6 +118,8 @@ function(sim_openDetaliSetup)
 		["forcedAspectName","Имя аспекта|Класснейм аспекта, который будет установлен","input"]
 	];
 	
+	[true] call gm_internal_setGolibMode;
+
 	sim_internal_map_settings = createHashMap;
 	sim_intenral_list_widgets = [];
 	[_params,
@@ -150,11 +157,17 @@ function(sim_openDetaliSetup)
 			if !isNullVar(_valueSetup) then {
 				_valueSetup params ["_t","_s","_ev","_pset"];
 				_w = [_d,_t,_s,_ctg] call createWidget;
+				private _onDragFromTree = sim_internal_map_onDragEvent getOrDefault [_setname,{params ["_classname"]; false}];
+				_w setvariable ["_onDragFromTree",_onDragFromTree];
 				_w setvariable ["eventGetValue",_ev];
 				_w setvariable ["settingName",_setname];
 				_w setvariable ["valuetype",_valuetype];
+				_w setvariable ["onsetvalue",_pset];
 				_w setBackgroundColor _color;
 				sim_intenral_list_widgets pushBack _w;
+
+				_w setvariable ["associatedWith",_tex];
+				_tex setvariable ["associatedWith",_w];
 
 				_idxFind = (_resdk_cache_simsetup findif {_x select 0 == _setname});
 				if (_idxFind != -1) then {
@@ -179,6 +192,8 @@ function(sim_openDetaliSetup)
 			profileNamespace setvariable ["resdk_cache_simsetup",_vauleList];
 			saveprofilenamespace;
 
+			[false] call gm_internal_setGolibMode;
+
 			//onsave
 			nextFrame(displayClose);
 
@@ -187,9 +202,28 @@ function(sim_openDetaliSetup)
 		},
 		"Настройка запуска симуляции",
 		"Запуск",
-		null,
+		getEdenDisplay,
 		{
+			[false] call gm_internal_setGolibMode;
 			nextFrame(displayClose);
-		}
+		},
+		{
+			//ondrag
+			params ["_class"];
+			private _wid = widgetNull;
+			{
+				if (_x call isMouseInsideWidget) exitwith {_wid = _x};
+				_assocWith = _x getvariable "associatedWith";
+				if (_assocWith call isMouseInsideWidget) exitwith {_wid = _x};
+			} foreach sim_intenral_list_widgets;
+			
+			if isNullReference(_wid) exitwith {};
+
+			["pressed on %1 with %2",_wid getvariable "settingName",_class] call printTrace;
+			if ([_class] call (_wid getvariable "_onDragFromTree")) then {
+				[_wid,_class] call (_wid getvariable "onsetvalue");
+			};
+		},
+		true
 	] call golib_openArraySelector
 }
