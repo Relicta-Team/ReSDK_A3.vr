@@ -1168,6 +1168,7 @@ gm_endRound = {
 	};
 
 	private _mob = null;
+	private __GFLAG_ENDGAME_POINTS_UPDATE__ = true; // используется в addPoints, removePoints
 	//Всем клиентам в игре инкрементируем отыгранные раунды
 	{
 		modVar(_x,playedRounds, + 1);
@@ -1182,6 +1183,9 @@ gm_endRound = {
 		};
 		
 	} foreach (call cm_getAllClientsInGame);
+
+	// reset flag
+	__GFLAG_ENDGAME_POINTS_UPDATE__ = null;
 
 	//Обрабатываем все задачи
 	{

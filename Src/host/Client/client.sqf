@@ -664,6 +664,9 @@ region(Points system)
 	{
 		params ['this',"_p",["_onlyOnGame",false]];
 
+		//forceoff onlygame onEndGame, onEndGameBasic
+		if !isNullVar(__GFLAG_ENDGAME_POINTS_UPDATE__) then {_onlyOnGame = false};
+
 		if (_onlyOnGame && {[">=","GAME_STATE_END"] call gm_checkState}) exitwith {};
 
 		_p = round _p;
@@ -681,6 +684,9 @@ region(Points system)
 	func(removePoints)
 	{
 		params ['this',"_p",["_onlyOnGame",false]];
+
+		//forceoff onlygame onEndGame, onEndGameBasic
+		if !isNullVar(__GFLAG_ENDGAME_POINTS_UPDATE__) then {_onlyOnGame = false};
 
 		if (_onlyOnGame && {[">=","GAME_STATE_END"] call gm_checkState}) exitwith {};
 
