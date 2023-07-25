@@ -125,11 +125,29 @@ class(TBase) extends(IGameEvent)
 	|								USER FUNCTIONALITY									|
 	\ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+	/*
+		Мы можем создавать задачи двумя способами:
+		Унаследовав определенный тип и изменив методы:
+			getReward,checkCondition,onSuccess,onFail
+		либо добавить события к созданному стандартному классу задачи:
+
+	
+	*/
+
+	// user event listeners
+	var(onReward,[]);
+	var(onFail,[]);
+	var(onSuccess,[]);
+	
+	var(onCheckCondition,[]);
+
 	// Событие при получении награды за выполненную задачу
 	func(getReward)
 	{
 		objParams();
-
+		{
+			this call _x;
+		} foreach getSelf(onReward);
 	};
 	
 	// проверка условий
@@ -138,19 +156,27 @@ class(TBase) extends(IGameEvent)
 	func(checkCondition)
 	{
 		objParams();
-		
+		{
+			this call _x;
+		} foreach getSelf(onCheckCondition);
 	};
 
 	// событие при успешном выполнении
 	func(onSuccess)
 	{
 		objParams_1(_val);
+		{
+			[this,_val] call _x;
+		} foreach getSelf(onSuccess);
 	};
 
 	// событие при провале
 	func(onFail)
 	{
 		objParams_1(_val);
+		{
+			[this,_val] call _x;
+		} foreach getSelf(onFail);
 	};
 
 endclass

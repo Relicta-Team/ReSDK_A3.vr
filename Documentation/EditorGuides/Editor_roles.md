@@ -457,7 +457,7 @@ func(canBeFullAntag)
 
 ## Создание роли полного антагониста
 
-В справочнике по созданию режима мы затронули создание скрытого антагониста. Теперь настало время создать полноценного антагониста с отдельной ролью и настроить логику его выдачи. Для начала добавим новую роль, унаследованную от `GMSampleGamemode_BasicRole`:
+В справочнике по созданию режима мы затронули создание скрытого антагониста. Теперь настало время создать полноценного антагониста с отдельной ролью и настроить логику его выдачи. При создании задачи антагонисту мы будем использовать задачу на получение предмета. Полный список типов задач определен в `Src\host\GameModes\BasicTask.sqf`. Для начала добавим новую роль, унаследованную от `GMSampleGamemode_BasicRole`:
 
 ```sqf
 class(RAntagGeneric_GMSampleGamemode) extends(GMSampleGamemode_BasicRole)
@@ -467,7 +467,20 @@ class(RAntagGeneric_GMSampleGamemode) extends(GMSampleGamemode_BasicRole)
 
 	getter_func(spawnLocation,"centermap");
 
+	func(onAssigned)
+	{
+		objParams_2(_mob,_usr);
+		
+		private _getItemTask = new(ItemGetTask);
+		setVar(_getItemTask,item,"Candle");
 
+		getVar(_getItemTask,onSuccess) pushBack {
+			objParams_1(_result);
+			// ....
+		};
+
+		callFuncParams(_mob,addTask,_getItemTask);
+	};
 endclass
 ```
 
