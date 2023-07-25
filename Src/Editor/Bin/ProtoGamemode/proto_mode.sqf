@@ -209,10 +209,10 @@ class(@GAMEMODE_NAME@) extends(GMBase) //GMBase - базовый режим, о�
     */
     func(getAntagRoleFull)
 	{
-		objParams_2(_client,_index);
+		objParams_2(_usr,_index);
         /*
             Параметры:
-                _client - объект клиента
+                _usr - объект клиента
                 _index - порядковый номер проверяемого игрока
         */
         /*
@@ -244,10 +244,10 @@ class(@GAMEMODE_NAME@) extends(GMBase) //GMBase - базовый режим, о�
     */
     func(handleAntagRoleHidden)
 	{
-		objParams_3(_client,_mob,_index);
+		objParams_3(_usr,_mob,_index);
         /*
             Параметры:
-                _client - объект клиента
+                _usr - объект клиента
                 _mob - игровой персонаж
                 _index - порядковый номер проверяемого игрока
         */
