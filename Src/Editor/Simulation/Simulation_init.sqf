@@ -9,7 +9,8 @@ init_function(sim_initialize)
 
 	sim_internal_isStartFromPointMode = false;
 
-	sim_internal_lastCachedSpawnPos = [0,0,0];
+	// vec2: pos, dir
+	sim_internal_lastCachedTransform = [[0,0,0],0];
 }
 
 function(sim_openMapSelector)
@@ -61,7 +62,7 @@ function(sim_onStartFromSelectedMode)
 
 	if (sim_internal_isStartFromPointMode) then {
 		//update cache
-		[sim_internal_lastCachedSpawnPos,0] call editorDebug_updatePosAndDirInCache;
+		sim_internal_lastCachedTransform call editorDebug_updatePosAndDirInCache;
 
 		[["autoGamemode","startGame","spawnposFromCache"],[
 			["startGamemodeName",_modeName],

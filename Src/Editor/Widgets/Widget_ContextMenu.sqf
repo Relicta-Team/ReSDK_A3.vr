@@ -249,7 +249,7 @@ function(ContextMenu_loadMouseObject)
 		};
 
 		private _params = [false,true];
-		sim_internal_lastCachedSpawnPos = _atlPos;
+		sim_internal_lastCachedTransform = [_atlPos,getDir get3DENCamera];
 		nextFrameParams(sim_openMapSelector,_params);
 	}];
 
