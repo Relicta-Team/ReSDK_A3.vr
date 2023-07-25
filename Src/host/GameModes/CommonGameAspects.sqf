@@ -200,6 +200,7 @@ endclass
 
 //мельтешата пожрали 50% еды
 //Ты можешь идти, куда захочешь (никакие двери не залочены и ключи их не локают)
+//!WARNING used obsolete function getInitialiPos
 class(RatsEatFoodAspect) extends(BaseGameAspect)
 	var(name,"Меньше еды");
 	var(desc,"Половина еды съедена мельтешатами");
@@ -464,6 +465,7 @@ class(StealedDoorsAspect) extends(BaseGameAspect)
 endclass
 
 //Грязноямск: Сын Головы убежал в пещеры
+//!WARNING used obsolete function getInitialiPos
 class(HeadSonEscapedAspect) extends(DirtpitGameAspect)
 	var(name,"Блудный сын");
 	var(desc,"Сын головы появляется за городом");
