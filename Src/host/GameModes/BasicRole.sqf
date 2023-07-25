@@ -306,7 +306,8 @@ class(BasicRole) extends(object) attribute(Role)
 				_objRef = _nameConnect call getObjectByRef;
 			};
 			if (_typeConnect == "type") then {
-				_objRef = [_nameConnect,_spawnPos,3,false,true] call getGameObjectOnPosition;
+				private _objRefTest = [_nameConnect,_spawnPos,3,false,true] call getGameObjectOnPosition;
+				if !isNullReference(_objRefTest) then {_objRef = _objRefTest};
 			};
 			if (!isNullReference(_objRef)) then {
 				if !isNullReference(_optConnection) then {

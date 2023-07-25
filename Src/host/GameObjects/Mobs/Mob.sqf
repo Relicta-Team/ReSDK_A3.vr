@@ -88,6 +88,26 @@ class(Mob) extends(BasicMob)
 	var(connectedTo,nullPtr); //к чему приаттачен моб в данный момент (кровать, стул)
 	getter_func(isConnected,not_equals(getSelf(connectedTo),nullPtr)); //подключен ли к чему-либо
 	
+	// Высокоуровневые абстракции лежит ли персонаж на кровати или сидит на стуле
+	//сидит на чем то
+	// Пока оставляю в комментарии так как тут дополнительно нужен псевдоним безопасного получения объекта на котором сидит/лежит персонаж
+	// func(isSitting)
+	// {
+	// 	objParams();
+	// 	private _conObj = getSelf(connectedTo);
+	// 	if isNullReference(_conObj) exitwith {false};
+	// 	callFunc(_conObj,isSeat) && {!isTypeOf(_conObj,BedBase)}
+	// };
+	// //лежит на кровати
+	// func(isLying)
+	// {
+	// 	objParams();
+	// 	private _conObj = getSelf(connectedTo);
+	// 	if isNullReference(_conObj) exitwith {false};
+	// 	callFunc(_conObj,isSeat) && {isTypeOf(_conObj,BedBase)}
+	// };
+
+
 	//объект наручников
 	var(handcuffObject,nullPtr);
 	//связана ли сущность

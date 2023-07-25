@@ -804,7 +804,8 @@ gm_internal_assignToImpl = {
 	if (callSelf(getClassName)!="GhostRole" && callSelf(getClassName)!="AdminObserverRole") then {
 		setVar(_usr,lastMob,_mob);
 	};
-
+	
+	// TODO: use serialization
 	private _skills = callSelf(getSkills);
 	private _skillsMap = ["ST","IQ","DX","HT"];
 	private _allocSkills = [10,10,10,10];
@@ -840,6 +841,7 @@ gm_internal_assignToImpl = {
 	[_mob,_st,_iq,_dx,_ht] call gurps_initSkills;
 	callFunc(_mob,calculateCommonSkillsBasicValues);
 
+	// TODO: use serialization
 	private _otherSkills = callSelf(getOtherSkills);
 	private _arrayOtherSkills = _otherSkills;
 
