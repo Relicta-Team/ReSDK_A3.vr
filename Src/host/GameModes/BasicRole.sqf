@@ -151,8 +151,13 @@ class(BasicRole) extends(object) attribute(Role)
 		true
 	};
 
+	// сущности хранятся в массиведаже после смерти
 	var_array(basicMobs); //базовый список мобов, которые зашли за эту роль
 	var_array(mobs); //Список мобов которым выдавалась эта роль. Массив обновляемый
+
+	// геттеры для базовых и назначенных мобов
+	getter_func(getBasicMobs,getSelf(basicMobs));
+	getter_func(getMobs,getSelf(mobs));
 
 	//кто распределился на эту роль
 	var_array(contenders_1);
