@@ -302,6 +302,21 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		count getVar((_roleName)call gm_getRoleObject,contenders_1)
 	};
 
+	// Получение объектов задач по тэгу
+	getterconst_func(getAllTasksByTag,taskSystem_map_tags getOrDefault [_this arg []]);
+
+	// Получение первой задачи по тэгу 
+	func(getFirstTaskByTag)
+	{
+		private _taskList = taskSystem_map_tags getOrDefault [_this,[]];
+		if (count _taskList == 0) exitWith {nullPtr};
+		_taskList select 0
+	};
+
+	getterconst_func(hasAnySuccessTaskByTag,({} count (taskSystem_map_tags getOrDefault [_this,[]])) > 0);
+
+	getterconst_func()
+
 	//вызывается каждую секунду. стандартный обработчик раунда
 	//Является статической виртуальной функцией. this будет являться неопределенным
 	func(onRoundCode)

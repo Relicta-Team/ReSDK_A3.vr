@@ -10,17 +10,7 @@
 taskSystem_allTasks = [];
 taskSystem_checkedOnEndRound = [];
 
-taskSystem_map_tags = []; //map of all tagged tasks
-
-taskSystem_getAllTasksByTag = {
-	taskSystem_map_tags getOrDefault [_this,[]];
-};
-
-taskSystem_getFirstTaskByTag = {
-	private _taskList = taskSystem_map_tags getOrDefault [_this,[]];
-	if (count _taskList == 0) exitWith {nullPtr};
-	_taskList select 0
-};
+taskSystem_map_tags = createHashMap; //map of all tagged tasks
 
 #ifdef EDITOR
 	#define editor_task_test
@@ -96,8 +86,22 @@ class(TBase) extends(IGameEvent)
 			_tasksByTag deleteAt (_tasksByTag find this);
 		};
 
+		if array_exists(taskSystem_map_tags,_tagName) then {
+			(taskSystem_map_tags get _tagName) pushBack this;
+		} else {
+			taskSystem_map_tags set [_tagName,[this]];
+		};
+
 		setSelf(tag,_tagName);
-		(taskSystem_map_tags get _tagName) pushBack this;
+	};
+
+	func(destructor)
+	{
+		objParams();
+		if (getSelf(tag) != "") then {
+			private _tasklist = taskSystem_map_tags getOrDefault [getSelf(tag),[]];
+			array_remove(_tasklist,this)
+		};
 	};
 
 	//обработчик входных параметров при создании задачи. 
