@@ -10,6 +10,18 @@
 taskSystem_allTasks = [];
 taskSystem_checkedOnEndRound = [];
 
+taskSystem_map_tags = []; //map of all tagged tasks
+
+taskSystem_getAllTasksByTag = {
+	taskSystem_map_tags getOrDefault [_this,[]];
+};
+
+taskSystem_getFirstTaskByTag = {
+	private _taskList = taskSystem_map_tags getOrDefault [_this,[]];
+	if (count _taskList == 0) exitWith {nullPtr};
+	_taskList select 0
+};
+
 #ifdef EDITOR
 	#define editor_task_test
 #endif
@@ -73,6 +85,19 @@ class(TBase) extends(IGameEvent)
 		#ifdef editor_task_test 
 			traceformat("[TASK_SYSTEM]: Added %1 to %2",callSelf(getClassName) arg callFuncParams(_mob,getNameEx,"кто"));
 		#endif
+	};
+
+	func(setTag)
+	{
+		objParams_1(_tagName);
+		private _oldTag = getSelf(tag);
+		if array_exists(taskSystem_map_tags,_oldTag) then {
+			private _tasksByTag = (taskSystem_map_tags get _oldTag);
+			_tasksByTag deleteAt (_tasksByTag find this);
+		};
+
+		setSelf(tag,_tagName);
+		(taskSystem_map_tags get _tagName) pushBack this;
 	};
 
 	//обработчик входных параметров при создании задачи. 
