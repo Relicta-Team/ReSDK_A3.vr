@@ -177,11 +177,11 @@ func(seatConnect)
 	private _usrDir = callFunc(_usr,getDir);
 
 	if !isNullVar(__GLOBAL_INITIALIZER_POS__) then {
-		private _usrPos = __GLOBAL_INITIALIZER_POS__ select 0;
-		private _usrDir = __GLOBAL_INITIALIZER_POS__ select 1;
+		_usrPos = __GLOBAL_INITIALIZER_POS__ select 0;
+		_usrDir = __GLOBAL_INITIALIZER_POS__ select 1;
 	};
 
-		private _dir = _origObj getRelDir getVar(_usr,owner);
+	private _dir = _origObj getRelDir getVar(_usr,owner);
 	private _restDir = if (_dir > 315 || _dir <= 45) then {
 		_usrDir+_dir //он спереди
 	} else {_usrDir+180};
