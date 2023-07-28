@@ -302,20 +302,48 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		count getVar((_roleName)call gm_getRoleObject,contenders_1)
 	};
 
+	func(hasTaskByTag)
+	{
+		objParams_1(_tag);
+		(taskSystem_map_tags getOrDefault [_tag arg []]) > 0
+	};
+
 	// Получение объектов задач по тэгу
-	getterconst_func(getAllTasksByTag,taskSystem_map_tags getOrDefault [_this arg []]);
+	func(getAllTasksByTag)
+	{
+		objParams_1(_tag);
+		taskSystem_map_tags getOrDefault [_tag arg []]
+	};
 
 	// Получение первой задачи по тэгу 
 	func(getFirstTaskByTag)
 	{
-		private _taskList = taskSystem_map_tags getOrDefault [_this,[]];
+		objParams_1(_tag);
+		private _taskList = taskSystem_map_tags getOrDefault [_tag,[]];
 		if (count _taskList == 0) exitWith {nullPtr};
 		_taskList select 0
 	};
 
-	getterconst_func(hasAnySuccessTaskByTag,({} count (taskSystem_map_tags getOrDefault [_this,[]])) > 0);
+	// Проверить есть ли хотя бы одна выполненная задача с указанным тэгом
+	func(hasAnySuccessTaskByTag)
+	{
+		objParams_1(_tag);
+		({getVar(_x,isDone) && getVar(_x,result) > 0} count (taskSystem_map_tags getOrDefault [_tag arg []])) > 0
+	};
 
-	getterconst_func()
+	// Проверить есть выполнены ли все задачи с указанным тэгом
+	func(hasAllSuccessTaskByTag)
+	{
+		objParams_1(_tag);
+		private _tasksByTag = taskSystem_map_tags getOrDefault [_tag,[]];
+		
+		// Задач с таким тэгом нет. ничего не выполнено
+		if (count _tasksByTag == 0) exitWith {false};
+		
+		{
+			getVar(_x,isDone) && getVar(_x,result) > 0
+		} count _tasksByTag == (count _tasksByTag);
+	};
 
 	//вызывается каждую секунду. стандартный обработчик раунда
 	//Является статической виртуальной функцией. this будет являться неопределенным

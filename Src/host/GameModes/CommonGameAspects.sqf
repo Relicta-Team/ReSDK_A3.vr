@@ -639,7 +639,7 @@ class(GAExtendedKeys) extends(BaseGameAspect)
 		super();
 		{
 			callSelfParams(_onKey,_x);
-		} foreach ([_mob,"Key"] call getAllItemInInventory);
+		} foreach ([_mob,"Key"] call getAllItemsInInventory);
 	};
 
 	func(onActivate)
@@ -900,17 +900,17 @@ class(GASaloonNoAmmo) extends(BaseGameAspect)
 
 		{
 			delete(_x);
-		} foreach ([_mob,"IAmmoBase",true] call getAllItemInInventory);
+		} foreach ([_mob,"IAmmoBase",true] call getAllItemsInInventory);
 		{
 			_mag = _x;
 			{delete(_x)} foreach array_copy(getVar(_mag,content));
-		} foreach ([_mob,"IMagazineBase",true] call getAllItemInInventory);
+		} foreach ([_mob,"IMagazineBase",true] call getAllItemsInInventory);
 		{
 			if callFunc(_x,hasMagazine) then {
 				_mag = getVar(_x,magazine);
 				{delete(_x)} foreach array_copy(getVar(_mag,content));
 			};
-		} foreach ([_mob,"IRangedWeapon",true] call getAllItemInInventory);
+		} foreach ([_mob,"IRangedWeapon",true] call getAllItemsInInventory);
 	};
 
 endclass

@@ -360,7 +360,7 @@ getAllItemsTypeOf = {
 };
 
 //Получает все итемы в инвентаре сущности
-getAllItemInInventory = {
+getAllItemsInInventory = {
 	params ["_mob","_type",["_retChild",true]];
 	private _objRet = [];
 	private _algGet = ifcheck(_retChild,{isTypeStringOf(_this,_type)},{callFunc(_this,getClassName) == _type});

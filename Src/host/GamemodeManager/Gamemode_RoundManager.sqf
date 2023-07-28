@@ -1192,6 +1192,13 @@ gm_endRound = {
 		callFunc(_x,checkCondition);
 	} foreach taskSystem_checkedOnEndRound;
 
+	//обрабатываем задачи как проваленные
+	{
+		if !getVar(_x,isDone) then {
+			callFuncParams(_x,taskDone,-1);
+		};
+	} foreach (taskSystem_allTasks - taskSystem_checkedOnEndRound);
+
 	setVar(gm_currentMode,finishResult,_endgameState);
 
 	callFunc(gm_currentMode,onFinish);
