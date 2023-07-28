@@ -179,21 +179,8 @@ class(TBase) extends(IGameEvent)
 	*/
 
 	// user event listeners
-	var(onReward,[]);
 	var(onFail,[]);
 	var(onSuccess,[]);
-
-	// Событие получения награды за выполненную задачу
-	// эти методы выполняются после успешного завершения задачи
-	func(getReward)
-	{
-		objParams();
-		private _params = [this,getSelf(mob),callFunc(getSelf(mob),getLastPlayerClient)];
-		_params params ["","_mob","_usr"];
-		{
-			_params call _x;
-		} foreach getSelf(onReward);
-	};
 	
 	// проверка условий
 	// любое значение возратимое от нуля считается завершением
@@ -229,9 +216,55 @@ class(TBase) extends(IGameEvent)
 
 endclass
 
+#define __mbx(message) ["[TASKS][%1]: %2",callSelf(getClassName) arg message] call messageBox
+#ifndef EDITOR
+	#undef __mbx
+#endif
+#define taskError(message) errorformat("[TASKS][%1]: %2",callSelf(getClassName) arg message); __mbx(message); nextFrameParams({delete(_this)},this)
 
 
-#define taskError(message) errorformat("[TASKS][%1]: %2",callSelf(getClassName) arg message); nextFrameParams({delete(_this)},this)
+//условная задача
+class(ConditionalTask) extends(TBase)
+	
+	var(name,"Выполнить задачу");
+	var(desc,"Требуется выполнение задачи");
+	var(descRoleplay,"Требуется выполнение задачи");
+
+	// обрабатываемй объект задачи
+	var(handledObject,nullPtr);
+	var(condition,null);
+
+	func(handleTaskAddedParams)
+	{
+		objParams_1(_ctx);
+		if (isNullVar(_ctx) && !isNull(getSelf(condition))) then {
+			_ctx = getSelf(condition);
+		};
+
+		if equalTypes(_ctx,[]) then {
+			setSelf(handledObject,_ctx select 0);
+			_ctx = _ctx select 1;
+		};
+		setSelf(condition,_ctx);
+	};
+
+	getter_func(stopOnSuccess,true);
+
+	func(checkCondition)
+	{
+		objParams();
+
+		private _taskObject = this;
+		//unsafe switch context
+		this = getSelf(handledObject);
+		if (this call getVar(_taskObject,condition)) then {
+			this = _taskObject;
+			callSelfParams(taskDone,1);
+		};
+
+	};
+
+endclass
 
 //задача получения предмета. выполнено когда сущность имеет в наличии предмет
 class(ItemGetTask) extends(TBase)
@@ -260,6 +293,10 @@ class(ItemGetTask) extends(TBase)
 			массивом строк - префикс typeof: означает, что проверяет наследников
 			ссылкой на объект 
 			массивом ссылок на объект
+			глобалрефом - требует префикс ref: (получаются системой через getObjectByRef)
+			массивом глобалрефов
+
+			массивом из строк,глобалрефов или сырых ссылок
 	*/
 	//! Небезопасный контекст списка предметов. Рекомендуется добавлять только через интерфейс добавления задачи
 	var(item,null);// может быть листом строк или названием класса
@@ -296,6 +333,11 @@ class(ItemGetTask) extends(TBase)
 				if ([_typename,"typeof:",false] call stringStartWith) then {
 					_inherited = true;
 					_typename = [_typename,"^typeof\:",""] call regex_replace;
+				};
+				if ([_typename,"ref:",false] call stringStartWith) then {
+					_inherited = true;
+					_typename = [_typename,"^ref\:",""] call regex_replace;
+					_typename = _typename call getObjectByRef;
 				};
 
 				_serialized pushBack vec2(_typename,_inherited);

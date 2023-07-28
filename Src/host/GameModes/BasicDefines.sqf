@@ -324,14 +324,14 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		_taskList select 0
 	};
 
-	// Проверить есть ли хотя бы одна выполненная задача с указанным тэгом
+	// Проверить есть ли хотя бы одна успешно выполненная задача с указанным тэгом
 	func(hasAnySuccessTaskByTag)
 	{
 		objParams_1(_tag);
 		({getVar(_x,isDone) && getVar(_x,result) > 0} count (taskSystem_map_tags getOrDefault [_tag arg []])) > 0
 	};
 
-	// Проверить есть выполнены ли все задачи с указанным тэгом
+	// Проверить выполнены ли успешно все задачи с указанным тэгом
 	func(hasAllSuccessTaskByTag)
 	{
 		objParams_1(_tag);
