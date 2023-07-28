@@ -66,7 +66,7 @@ function(sim_onStartFromSelectedMode)
 
 		[["autoGamemode","startGame","spawnposFromCache"],[
 			["startGamemodeName",_modeName],
-			["startRoleName","GMTemplate_RAdventurer"]
+			["startRoleName","BasicRole_SimulationReSDK"]
 		]] call sim_internal_processLaunchSim;
 	} else {
 		[[],[vec2("startupMode",_modeName)]] call sim_internal_processLaunchSim;

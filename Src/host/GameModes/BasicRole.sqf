@@ -458,3 +458,42 @@ class(TheEssenseRole) extends(BasicRole)
 	var(name,"Сущность");
 	var(desc,"Вы - воплощение Сути. Вас не интересует судьба этих людей" pcomma " а только их зрелищность. Томные не должны тревожить эту историю. Если" pcomma " конечно" pcomma " присутствие томных не делает ее зрелищной...");
 endclass
+
+//! Do not use this role in usercode
+#ifdef EDITOR
+class(BasicRole_SimulationReSDK) extends(BasicRole)
+	
+	var(name,"Приключенец");
+	var(desc,"Он здесь чтобы повеселиться.");
+
+	getter_func(canTakeInLobby,true);
+	getter_func(canVisibleAfterStart,true);
+	getter_func(canStoreNameAndFaceForValidate,false);
+
+	var(count,100);
+	
+	var(returnInLobbyAfterDead,true);
+
+	getter_func(spawnLocation,null);
+
+	getter_func(getSkills,"st=10; dx=10; iq=10; ht=10");
+
+	func(getOtherSkills) {[]};
+
+	func(getEquipment)
+	{
+		objParams_1(_mob);
+	};
+
+	func(onDeadBasic)
+	{
+		objParams_2(_mob,_usr);
+	};
+	
+	func(onAssigned)
+	{
+		objParams_2(_mob,_usr);
+	};
+	
+endclass
+#endif
