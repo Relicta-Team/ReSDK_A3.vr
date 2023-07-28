@@ -6,7 +6,7 @@
 #include "..\GameMode.h"
 #include "Okopovo.h"
 
-class(OkopovoSergantesSquad)
+class(OkopovoSergantesSquad) extends(IGamemodeSpecificClass)
 	var(side,"na");
 	var(squadName,"");
 	var(commander,nullPtr);

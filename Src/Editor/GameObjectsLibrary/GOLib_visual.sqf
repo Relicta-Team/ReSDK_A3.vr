@@ -424,12 +424,15 @@ function(golib_vis_loadObjectList_Recursive)
 			};
 			_tree tvSetData [_listRef,[_type,_tobj] call golib_vis_allocTreeItemProperty];
 			//_tobj getVariable "__decl_info__"
-			_tree tvSetTooltip [_listRef,
+			private _ttp = if (gm_isInsideModemanager) then {
+				format["%1",([_type,"__decl_info__"] call oop_getTypeValue) joinString " at "]
+			} else {
 				format["Имя:%1\nОписание: %2",
-				[_type,"name",false,"getName"] call oop_getFieldBaseValue,
-				[_type,"desc",false,"getDesc"] call oop_getFieldBaseValue
+					[_type,"name",false,"getName"] call oop_getFieldBaseValue,
+					[_type,"desc",false,"getDesc"] call oop_getFieldBaseValue
 				]
-			];
+			};
+			_tree tvSetTooltip [_listRef,_ttp];
 		};
 			
 		{
@@ -446,8 +449,14 @@ function(golib_vis_loadObjList)
 	private _conditionAdd = if isNullVar(_golib_global_flag_search) then { {true} } else {_golib_global_flag_search};
 	
 	tvClear (call golib_vis_getTree);
+	
+	private _startPath = "GameObject";
+	if (gm_isInsideModemanager) then {
+		_startPath = "object";
+		_conditionAdd = compile ((toString _conditionAdd) + " && " + ("!('managedobject' in (_tobj getVariable '__inhlist_map'))"));
+	};
 
-	["GameObject",[],_conditionAdd] call golib_vis_loadObjectList_Recursive;
+	[_startPath,[],_conditionAdd] call golib_vis_loadObjectList_Recursive;
 
 	(call golib_vis_getTree) tvSortAll [[], false];
 
@@ -709,7 +718,7 @@ function(golib_vis_libPreviewOnLeaveZone)
 function(golib_vis_libPreviewUpdatePosition)
 {
 	params ["_path"];
-	if (count _path == 0) exitwith {};
+	if (count _path == 0 || gm_isInsideModemanager) exitwith {};
 	
 
 	_ctg = "golib_vis_libPreviewCtg_bind" call widget_getBind;

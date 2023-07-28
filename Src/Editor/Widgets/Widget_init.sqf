@@ -147,6 +147,9 @@ menu_structureLayout = [
 			"text:Проверка несуществующих классов;act:['Не реализовано'] call showWarning;"
 		],
 		"",
+		"text:Создать режим;act:call gm_filegen_openWindow",
+		// "text:Менеджер режимов;act:call gm_createGamemode",
+		// "",
 		"text:Просмотр моделей;act:call golib_modelViewerContextOpen",
 		"text:Редактор позиций модели;act:[nil] call vcom_relposEditorOpen",//vector maker - relative model positions
 		"text:Редактор частиц и освещения;act:[nil] call vcom_emit_createVisualWindow",
@@ -164,7 +167,8 @@ menu_structureLayout = [
 	],
 	["text:Запуск;",
 		"text:Запустить симуляцию;act:call sim_startupDefault;path:menu_path_launch;", //short:28; data:MissionPreview;
-		"text:Запустить симуляцию с режимом;act:call sim_openMapSelector",
+		"text:Запустить симуляцию с режимом;act:[true] call sim_openMapSelector",
+		"text:Запустить симуляцию с режимом для этой карты;act:[false] call sim_openMapSelector",
 		"text:Запуск симуляции с последним режимом и ролью;act:call sim_startSimFromCache",
 		"text:Настроить симуляцию и запустить;act:call sim_openDetaliSetup",
 		"",

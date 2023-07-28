@@ -29,6 +29,13 @@ init_function(goasm_attributes_main_init)
 	//Параметры: нет
 	["ReadOnly"] call goasm_attributes_bindAttribute;
 
+	//Указывает что атрибут доступен в менеджере режима
+	/*
+		Параметры:
+			TODO
+	*/
+	["GMField"] call goasm_attributes_bindAttribute;
+
 	// ---------------- Классовые атрибуты ----------------
 
 	// Атрибут для класса указывает что он не может быть создан явно. Возможно только использование как наследника
@@ -43,6 +50,9 @@ init_function(goasm_attributes_main_init)
 	["EditorGenerated"] call goasm_attributes_bindAttribute;
 	//Атрибут указыает, что класс является прототипом для создания из шаблонов (для наследования от IStruct, Decor)
 	["TemplatePrefab",{!_isInherited}] call goasm_attributes_bindAttribute;
+
+	// Режимы, помеченные данным атрибутом не могут быть отредактированы
+	["CodeOnyGamemode",{!_isInherited}] call goasm_attributes_bindAttribute;
 
 	//TODO нужно больше атрибутов
 }

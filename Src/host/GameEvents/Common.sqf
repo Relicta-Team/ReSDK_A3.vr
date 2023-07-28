@@ -71,7 +71,7 @@ class(WindFireDisablerEvent) extends(InfluenceEventAllMaps)
 		if (_t >= getSelf(nextCallMobs)) then {
 			setSelf(nextCallMobs,_t + randInt(15,30));
 			{
-				private _items = [_x,"ILightible",true] call getAllItemInInventory;
+				private _items = [_x,"ILightible",true] call getAllItemsInInventory;
 				{
 					if callFunc(_x,isFireLight) then {
 						if getVar(_x,lightIsEnabled) then {
@@ -199,7 +199,7 @@ class(MoneyLowerEvent) extends(InfluenceEventAllMaps)
 					callFuncParams(_newItem,initCount,_count);
 				};
 			};
-		} foreach ([_mob,getSelf(classFrom),false] call getAllItemInInventory);
+		} foreach ([_mob,getSelf(classFrom),false] call getAllItemsInInventory);
 	};
 
 endclass

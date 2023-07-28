@@ -9,6 +9,7 @@
 #include <..\..\GameConstants.hpp>
 
 //При входе клиента в зону спавна удаляет его
+editor_attribute("HiddenClass")
 class(ISpawnerStruct) extends(IStruct)
 	var(model,"a3\structures_f\system\cluttercutter_small_f.p3d");
 	getter_func(onSpawn,null);
@@ -31,6 +32,9 @@ spawnPos_internal_map_equalCollections = createHashMap;
 
 spawnPos_internal_list_rnd = [];
 
+isExistsSpawn = { private _name = _this; (spawnPos_internal_list_all findif {getVar(_x,spawnPointName) == _name}) != -1 };
+isExistsRandomSpawn = { private _name = _this; equalTypes(vec2(_name,"NOT_FOUND") call getRandomSpawnDirByName,0) };
+
 getSpawnPosByName = {
 	params ["_name",["_def",[0,0,0]]];
 	private _ind = spawnPos_internal_list_all findif {getVar(_x,spawnPointName) == _name};
@@ -52,10 +56,26 @@ getSpawnDirByName = {
 };
 
 getRandomSpawnPosByName = {
-	params ["_name",["_def",[0,0,0]]];
+	params ["_pos",["_defpos",0]];
+
+	private _wobj = [_pos,_defpos] call getRandomSpawnByNameProvider;
+	if isNullReference(_wobj) exitWith {_defpos};
+	getPosAtl _wobj
+
+};
+getRandomSpawnDirByName = {
+	params ["_pos",["_dir",0]];
+
+	private _wobj = [_pos,_dir] call getRandomSpawnByNameProvider;
+	if isNullReference(_wobj) exitWith {_dir};
+	getDir _wobj
+};
+
+getRandomSpawnByNameProvider = {
+	params ["_name","_def"];
 
 	if (count spawnPos_internal_map_equalCollections == 0) then {
-		//generate maps
+		//generate collection of spawnmaps
 		{
 			private _key = getVar(_x,spawnPointName);
 		
@@ -75,9 +95,9 @@ getRandomSpawnPosByName = {
 	private _posList = spawnPos_internal_map_equalCollections get _name;
 	if isNullVar(_posList) exitWith {
 		errorformat("getRandomSpawnPosByName() - cant find spawnpos '%1'",_name);
-		_def
+		objnull
 	};
-	getPosAtl getVar(pick _posList,loc)
+	getVar(pick _posList,loc)
 };
 
 editor_attribute("EffectClass" arg "type:spawnpoint")

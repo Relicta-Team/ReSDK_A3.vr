@@ -79,7 +79,7 @@
 #include <EditorEngine.h>
 
 //Строковое название версии. Пишется в пользовательском интерфейсе редактора
-Core_version_name = "1.3";
+Core_version_name = "1.4";
 //Номер версии сборки редактора. Используется в бинарных файлах карт.
 Core_version_number = 2;
 
@@ -120,6 +120,8 @@ componentInit(Game_objects_assembly)
 #include "GameObjectsAssembly\GOAsm_init.sqf"
 componentInit(Game_objects_library)
 #include "GameObjectsLibrary\GOLib_init.sqf"
+componentInit(GameMode_manager)
+#include "GamemodesManager\GamemodeManager_init.sqf"
 componentInit(Maps_manager)
 #include "MapsManager\Maps_manager_init.sqf"
 componentInit(Viusal_components)

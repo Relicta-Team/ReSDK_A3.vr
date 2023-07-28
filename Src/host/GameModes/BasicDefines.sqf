@@ -5,6 +5,7 @@
 
 #include <GameMode.h>
 
+editor_attribute("ColorClass" arg "BD5998")
 class(IGameEvent) extends(object)
 
 endclass
@@ -12,13 +13,20 @@ endclass
 
 
 //Базовый игрвой режим
+editor_attribute("ColorClass" arg "C7007D")
+editor_attribute("InterfaceClass")
 class(GMBase) extends(IGameEvent) attribute(Story)
+	editor_attribute("GMField" arg "type:string") editor_attribute("Tooltip" arg "Название режима")
 	var(name,"История"); //Название истории
+	editor_attribute("GMField" arg "type:string") editor_attribute("Tooltip" arg "Краткое описание режима")
 	var(desc,""); //Описание краткое для голосований например
+	editor_attribute("GMField" arg "type:string") editor_attribute("Tooltip" arg "Расширенное описание режима для конца раунда")
 	var(descExtended,"");//Расширенное описание для конца раунда
 	
+	editor_attribute("GMField" arg "type:bool") editor_attribute("Tooltip" arg "Можно ли прописать аспект на этот режим.\nfalse выключает систему аспектов для режима")
 	var(canAddAspect,true); //можно ли прописать аспект на этот режим. false выключает систему аспектов для режима
 	
+	editor_attribute("GMField" arg "type:float") editor_attribute("Tooltip" arg "Длительность режима в минутах")
 	var(duration,60*60);// стандартная длительность режима
 
 	getterconst_func(getProbability,100); //в процентах возвращает вероятность на автопик режима
@@ -287,6 +295,56 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		"Хуй знает почему не вышло";
 	};
 
+	//Получает количество игроков-претендентов на роль
+	func(getCandidatesCount)
+	{
+		objParams_1(_roleName);
+		count getVar((_roleName)call gm_getRoleObject,contenders_1)
+	};
+
+	func(hasTaskByTag)
+	{
+		objParams_1(_tag);
+		(taskSystem_map_tags getOrDefault [_tag arg []]) > 0
+	};
+
+	// Получение объектов задач по тэгу
+	func(getAllTasksByTag)
+	{
+		objParams_1(_tag);
+		taskSystem_map_tags getOrDefault [_tag arg []]
+	};
+
+	// Получение первой задачи по тэгу 
+	func(getFirstTaskByTag)
+	{
+		objParams_1(_tag);
+		private _taskList = taskSystem_map_tags getOrDefault [_tag,[]];
+		if (count _taskList == 0) exitWith {nullPtr};
+		_taskList select 0
+	};
+
+	// Проверить есть ли хотя бы одна успешно выполненная задача с указанным тэгом
+	func(hasAnySuccessTaskByTag)
+	{
+		objParams_1(_tag);
+		({getVar(_x,isDone) && getVar(_x,result) > 0} count (taskSystem_map_tags getOrDefault [_tag arg []])) > 0
+	};
+
+	// Проверить выполнены ли успешно все задачи с указанным тэгом
+	func(hasAllSuccessTaskByTag)
+	{
+		objParams_1(_tag);
+		private _tasksByTag = taskSystem_map_tags getOrDefault [_tag,[]];
+		
+		// Задач с таким тэгом нет. ничего не выполнено
+		if (count _tasksByTag == 0) exitWith {false};
+		
+		{
+			getVar(_x,isDone) && getVar(_x,result) > 0
+		} count _tasksByTag == (count _tasksByTag);
+	};
+
 	//вызывается каждую секунду. стандартный обработчик раунда
 	//Является статической виртуальной функцией. this будет являться неопределенным
 	func(onRoundCode)
@@ -348,6 +406,7 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 
 endclass
 
+editor_attribute("HiddenClass")
 class(GMStationBase) extends(GMBase)
 
 	var(headSecondNames,vec2("","")); //фамилия головы для мужского и женского варианта
@@ -363,6 +422,7 @@ class(GMStationBase) extends(GMBase)
 	};
 
 	//стандартизированное событие начала раунда
+	//!!! Не рекомендуется к использованию
 	func(onRoundBegin)
 	{
 		objParams();
@@ -417,5 +477,10 @@ class(GMStationBase) extends(GMBase)
 			errorformat("Collectors initialize error; Count ladders %1; sewercover %2",count _ladders arg count _sewercover);
 		};
 	};
+
+endclass
+
+//Специфичный для режима компонент
+class(IGamemodeSpecificClass)
 
 endclass

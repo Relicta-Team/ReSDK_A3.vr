@@ -17,3 +17,12 @@ gm_allowedModes = [
 	"GMOkopovo"
 	
 ];
+
+call {
+	//TODO replace class generator
+	
+	private _classlist = ["gmbase",true] call oop_getinhlist;
+	private _setter = [];
+	
+	gm_allowedModes = _setter;
+};

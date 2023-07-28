@@ -39,6 +39,19 @@ editorDebug_getPlayerSettings = {
 	profileNamespace getvariable ["resdk_cache_playerSettings",createHashMap]
 };
 
+//only for 3den
+editorDebug_updatePosAndDirInCache = {
+	params ["_pos",["_dir",0]];
+	if (!is3DEN) exitwith {};
+	private _cache = call editorDebug_getPlayerSettings;
+
+	_cache set ["pos",_pos];
+	_cache set ["dir",_dir];
+
+	profileNamespace setvariable ["resdk_cache_playerSettings",_cache];
+	saveprofilenamespace;
+};
+
 editorDebug_internal_validateValuesCanStart = {
 	params ["_cache"];
 	#define checkdata(cachevalue) if !(cachevalue in _cache) exitwith {cachevalue}

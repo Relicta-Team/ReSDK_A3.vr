@@ -367,6 +367,7 @@ class(Brain) extends(VitalOrgan)
 
 endclass
 
+	editor_attribute("HiddenClass")
 	class(VirtualMemoryStorage) extends(object)
 
 		var(originalOwner,nullPtr); //базовый владелец воспоминаний (моб)

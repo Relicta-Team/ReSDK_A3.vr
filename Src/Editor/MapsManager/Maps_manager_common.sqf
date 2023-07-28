@@ -177,7 +177,19 @@ function(mm_handleObjectSave)
 				mm_internal_threadErrorText = mm_internal_threadErrorText + endl +
 				format["SpawnPoint '%1' double define at position %2",_val,getposatl _obj];
 			};
+			if (":" in _val) exitWith {
+				INC(mm_internal_errorCount);
+				mm_internal_threadErrorText = mm_internal_threadErrorText + endl +
+				format["SpawnPoint '%1' unexpected name at %2: Forbidden character in the point name ':'",_val,getposatl _obj];
+			};
 			mm_internal_allSpawnPoints pushBack _val;
+		};
+		if (_class == "CollectionSpawnPoint" && {_x == "spawnPointName"}) then {
+			if (":" in _val) exitWith {
+				INC(mm_internal_errorCount);
+				mm_internal_threadErrorText = mm_internal_threadErrorText + endl +
+				format["CollectionSpawnPoint '%1' unexpected name at %2: Forbidden character in the point name ':'",_val,getposatl _obj];
+			};
 		};
 
 		if equalTypes(_val,"") then {

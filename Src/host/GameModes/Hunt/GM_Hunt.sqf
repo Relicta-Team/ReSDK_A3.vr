@@ -5,6 +5,7 @@
 
 #include <..\GameMode.h>
 
+editor_attribute("CodeOnyGamemode")
 class(GMHunt) extends(GMBase)
 	var(name,"Охота");
 	var(desc,"Бомжи пытаются не попасться в лапы истязателей");

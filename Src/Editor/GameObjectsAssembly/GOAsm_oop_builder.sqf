@@ -25,7 +25,7 @@ function(goasm_builder_postbuildCode)
 		goasm_builder_postInit_customSetup = false; //resert to default
 	} else {
 		goasm_builder_isBuildedClasses = null;
-		["Build error. See console"] call showWarning;
+		["Build error. See console",10] call showWarning;
 		call goasm_builder_onError_delegate;
 	};
 }
@@ -185,6 +185,9 @@ function(goasm_builder_buildImplMain)
 				} else {
 					private _atdata = _x select [1,(count _x) - 1];
 					if ([_atName,_mot,_flag,_atdata,_isInherAtr] call goasm_attributes_canAddAttribute) then {
+						//fix upper inheritance attributes. Editor 1.4
+						//Так как наследование идёт сверху вниз нам не нужно переопределять дочерними свойствами значения атрибута при наличии
+						if (_atName in _refArr) exitwith {};
 						_refArr set [_atName,_atdata];
 					};
 				};
@@ -403,7 +406,8 @@ function(goasm_builder_makeClassTable)
 	
 	// для оптимизации пока отключил загрузчик всех классов в игру
 	//#include "GOAsm_test_objects.sqf"
-	#include <..\..\host\GameObjects\loader.hpp>
+
+	call compile preprocessFileLineNumbers "src\Editor\GameObjectsAssembly\__GOAsm_loader.sqf";
 
 	1
 }

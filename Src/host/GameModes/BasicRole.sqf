@@ -5,6 +5,7 @@
 
 #include <GameMode.h>
 
+editor_attribute("ColorClass" arg "05F014")
 class(BasicRole) extends(object) attribute(Role)
 	var(roleIdx,-1); //указатель на роль для клиента (оптимизация сетевого трафика)
 	var(name,""); //role name
@@ -45,16 +46,34 @@ class(BasicRole) extends(object) attribute(Role)
 	var(count,1); //сколько персонажей может залететь за эту роль
 	getter_func(canAddAfterStart,true);// может ли быть добавлена роль после старта из лобби ролей в нелобби
 
-	//навыки персонажа: "_st","_iq","_dx","_ht"
+	//навыки персонажа: "_st","_iq","_dx","_ht". Может быть массивом или строкой
+	/*
+		строка имеет разделитель между навыками:	;
+		между именем навыка и значением:	=-: и пробел
+			Пример определения двух навыков
+			"st:3;dx:5"
+			"st=3;dx:5"
+			"ST:3-5; Dx=5"
+			"st=3-5; DX = 5-6"
+
+		Стандартизированный вид:
+			разделитель навыков:	;
+			разделитель названия навыка и значения:	=
+			разделитель минимального и максимального значения навыка:	-
+	*/
 	getter_func(getSkills,vec4(10,10,10,10));
 
-	getter_func(getOtherSkills,[]); //array in form vec2(string,[number, vec2(min,max)])
+	//настройки дополнительных навыков определяются так же как и в getSkills при использовании через строку
+	//список всех навыков в skills_internal_list_otherSkillsSystemNames
+	getter_func(getOtherSkills,[]); //array in form vec2(string,[number, vec2(min,max)]) or string of settings
 
 	//Вызывается после старта раунда
 	//Срабатывает только для лобби ролей
+	//? не используется в данный момент
 	func(onStarted)
 	{
 		objParams();
+		//! не используется нигде в коде
 	};
 
 	//Будет ли видна роль в списке после старта
@@ -132,8 +151,13 @@ class(BasicRole) extends(object) attribute(Role)
 		true
 	};
 
+	// сущности хранятся в массиведаже после смерти
 	var_array(basicMobs); //базовый список мобов, которые зашли за эту роль
 	var_array(mobs); //Список мобов которым выдавалась эта роль. Массив обновляемый
+
+	// геттеры для базовых и назначенных мобов
+	getter_func(getBasicMobs,getSelf(basicMobs));
+	getter_func(getMobs,getSelf(mobs));
 
 	//кто распределился на эту роль
 	var_array(contenders_1);
@@ -157,36 +181,150 @@ class(BasicRole) extends(object) attribute(Role)
 		objParams();
 	};
 
-
-	//возвращает позицию на которой будет создана роль
+	//!!!Устаревший способ позиционирования персонажа!!!
+	// Не рекомендуется к использованию.
+	// возвращает позицию на которой будет создана роль
 	func(getInitialPos)
 	{
 		objParams();
+		null
 	};
 
+	// Возвращает направление, на котором будет созадна роль
 	func(getInitialDir)
 	{
 		objParams();
+		null
 	};
 
-	//инициализация позиции
+	//Стартовая точка спавна. 
+	/*
+		Может быть:
+		- точкой спавна (pos:spawnpointname)
+		- рандомной точкой спавна (rpos:randomspawnpointname)
+
+		если не указан тип, он будет вычислен автоматически.
+		Но если есть тип рандомной точки и обычной с одинаковым выбранным названием то будет по умолчанию применен префикс pos
+	*/
+	func(spawnLocation)
+	{
+		objParams();
+		null
+	};
+
+	// Работает в связке с spawnLocation. 
+	// false - берет направление от стартовой точки
+	// true - задает случайное направление
+	getter_func(useRandomDirOnSpawn,false);
+
+	//Точка привязки (кровать или стул)
+	/*
+		Может быть:
+			- глобальной ссылкой на объект: ref:objectglobalreference (for getObjectByRef)
+			- именем типа: type:IChair
+		
+		!!! Указать только connectedTo без spawnLocation невозможно, так как при вставании со стула/кровати
+		система должна знать куда поместить персонажа.
+	*/
+	getter_func(connectedTo,null);
+
+	// Внутренняя инициализация позиции
 	func(initLocation)
 	{
 		objParams_1(_mob);
+
+		//deprecated values
+		private _spawnPos = callSelf(getInitialPos);
+		private _spawnDir = callSelf(getInitialDir);
+
+		private _spawnLoc = callSelf(spawnLocation);
+		private _connectedTo = callSelf(connectedTo);
+		private _canPostConnectTo = !isNullVar(_connectedTo);
 		
-		#ifdef EDITOR
-		if ("spawnposFromCache" call sdk_hasSystemFlag && gm_roundduration <= 1) exitwith {
-			private _cache = call editorDebug_getPlayerSettings;
-			private _pos = _cache getOrDefault ["pos",callSelf(getInitialPos)];
-			private _dir = _cache getOrDefault ["dir",callSelf(getInitialDir)];
+		if (!isNullVar(_spawnLoc)) then {
+			// автоматическое определение типа точки
+			if ((["pos:","rpos:"] findif {(_x select [0,4]) in _spawnLoc})==-1) then {
+				private _isSpawnP = _spawnLoc call isExistsSpawn;
+				private _isRandSpawnP = _spawnLoc call isExistsRandomSpawn;
+				if (_isSpawnP && _isRandSpawnP) then {
+					_spawnLoc = "pos:" + _spawnLoc;
+				} else {
+					_spawnLoc = ifcheck(_isSpawnP,"pos:","rpos:") + _spawnLoc;
+				};
+			};
 			
-			callFuncParams(_mob,setInitialPos,_pos);
-			callFuncParams(_mob,setDir,_dir);
+			(_spawnLoc splitString ":")params ["_mode","_spawnName"];
+			
+			if !(_mode in ["pos","rpos"]) exitwith {};
+
+			private _funcGetPos = ifcheck(_mode=="pos",getSpawnPosByName,getRandomSpawnPosByName);
+			
+			private _pos = [_spawnName,-1] call _funcGetPos;
+			if equals(_pos,-1) exitwith {};
+			_spawnPos = _pos;
+			
+			private _funcGetDir = ifcheck(callSelf(useRandomDirOnSpawn),{random 360},ifcheck(_mode=="pos",getSpawnDirByName,getRandomSpawnDirByName));
+			private _dir = [_spawnName,""] call _funcGetDir;
+			if not_equals(_dir,"") then {
+				_spawnDir = _dir;
+			};
 		};
+
+		#ifdef EDITOR
+		if ("spawnposFromCache" call sdk_hasSystemFlag && gm_roundduration <= 1) then {
+			private _cache = call editorDebug_getPlayerSettings;
+			if ("pos" in _cache) then {_spawnPos = _cache get "pos"};
+			if ("dir" in _cache) then {_spawnDir = _cache get "dir"};
+			_canPostConnectTo = false; //drop postconnect
+		};
+
+		if (isNullVar(_spawnPos) || isNullVar(_spawnDir)) then {
+			["Определите spawnLocation для роли %1",callSelf(getClassName)] call messageBox;
+			_spawnPos = [0,0,0];
+			_spawnDir = 0;
+		};
+
 		#endif
 
-		callFuncParams(_mob,setInitialPos,callSelf(getInitialPos));
-		callFuncParams(_mob,setDir,callSelf(getInitialDir));
+		callFuncParams(_mob,setInitialPos,_spawnPos);
+		callFuncParams(_mob,setDir,_spawnDir);
+
+		if (_canPostConnectTo) then {
+			if ((["type:","ref:"] findif {(_x select [0,4]) in _connectedTo})==-1) then {
+				private _isRef = !isNullReference(_connectedTo call getObjectByRef);
+				private _isTyped = isImplementClass(_connectedTo) && {typeHasVar(typeGetFromString(_connectedTo),seatConnect)};
+				
+				if (_isRef) exitwith {_connectedTo = "ref:" + _connectedTo};
+				if (_isTyped) exitwith {_connectedTo = "type:" + _connectedTo};
+				#ifdef EDITOR
+				["Определите метку ссылки или типа в connectedTo для роли %1",callSelf(getClassName)] call messageBox;
+				#endif
+			};
+			(_connectedTo splitString ":") params ["_typeConnect","_nameConnect","_optConnection"];
+			private _objRef = nullPtr;
+			if (_typeConnect == "ref") then {
+				_objRef = _nameConnect call getObjectByRef;
+			};
+			if (_typeConnect == "type") then {
+				private _objRefTest = [_nameConnect,_spawnPos,3,false,true] call getGameObjectOnPosition;
+				if !isNullReference(_objRefTest) then {_objRef = _objRefTest};
+			};
+			if (!isNullReference(_objRef)) then {
+				if !isNullReference(_optConnection) then {
+					if not_equalTypes(_optConnection,0) then {_optConnection = null};
+				};
+
+				private _args = [_objRef,_mob,_optConnection,[_spawnPos,_spawnDir]];
+				private _postcode = {
+					params ["_objRef","_mob","_optConnection","_vec2resetpos"];
+
+					private __GLOBAL_INITIALIZER_POS__ = _vec2resetpos;
+
+					if (isNullReference(_objRef) || isNullReference(_mob)) exitwith {};
+					callFuncParams(_objRef,seatConnect,_mob arg _optConnection);
+				}; invokeAfterDelayParams(_postcode,0.001,_args);
+			};	
+		};
 	};
 
 	/*
@@ -320,3 +458,42 @@ class(TheEssenseRole) extends(BasicRole)
 	var(name,"Сущность");
 	var(desc,"Вы - воплощение Сути. Вас не интересует судьба этих людей" pcomma " а только их зрелищность. Томные не должны тревожить эту историю. Если" pcomma " конечно" pcomma " присутствие томных не делает ее зрелищной...");
 endclass
+
+//! Do not use this role in usercode
+#ifdef EDITOR
+class(BasicRole_SimulationReSDK) extends(BasicRole)
+	
+	var(name,"Приключенец");
+	var(desc,"Он здесь чтобы повеселиться.");
+
+	getter_func(canTakeInLobby,true);
+	getter_func(canVisibleAfterStart,true);
+	getter_func(canStoreNameAndFaceForValidate,false);
+
+	var(count,100);
+	
+	var(returnInLobbyAfterDead,true);
+
+	getter_func(spawnLocation,null);
+
+	getter_func(getSkills,"st=10; dx=10; iq=10; ht=10");
+
+	func(getOtherSkills) {[]};
+
+	func(getEquipment)
+	{
+		objParams_1(_mob);
+	};
+
+	func(onDeadBasic)
+	{
+		objParams_2(_mob,_usr);
+	};
+	
+	func(onAssigned)
+	{
+		objParams_2(_mob,_usr);
+	};
+	
+endclass
+#endif

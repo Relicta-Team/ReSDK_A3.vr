@@ -200,6 +200,7 @@ endclass
 
 //мельтешата пожрали 50% еды
 //Ты можешь идти, куда захочешь (никакие двери не залочены и ключи их не локают)
+//!WARNING used obsolete function getInitialiPos
 class(RatsEatFoodAspect) extends(BaseGameAspect)
 	var(name,"Меньше еды");
 	var(desc,"Половина еды съедена мельтешатами");
@@ -464,6 +465,7 @@ class(StealedDoorsAspect) extends(BaseGameAspect)
 endclass
 
 //Грязноямск: Сын Головы убежал в пещеры
+//!WARNING used obsolete function getInitialiPos
 class(HeadSonEscapedAspect) extends(DirtpitGameAspect)
 	var(name,"Блудный сын");
 	var(desc,"Сын головы появляется за городом");
@@ -637,7 +639,7 @@ class(GAExtendedKeys) extends(BaseGameAspect)
 		super();
 		{
 			callSelfParams(_onKey,_x);
-		} foreach ([_mob,"Key"] call getAllItemInInventory);
+		} foreach ([_mob,"Key"] call getAllItemsInInventory);
 	};
 
 	func(onActivate)
@@ -898,17 +900,17 @@ class(GASaloonNoAmmo) extends(BaseGameAspect)
 
 		{
 			delete(_x);
-		} foreach ([_mob,"IAmmoBase",true] call getAllItemInInventory);
+		} foreach ([_mob,"IAmmoBase",true] call getAllItemsInInventory);
 		{
 			_mag = _x;
 			{delete(_x)} foreach array_copy(getVar(_mag,content));
-		} foreach ([_mob,"IMagazineBase",true] call getAllItemInInventory);
+		} foreach ([_mob,"IMagazineBase",true] call getAllItemsInInventory);
 		{
 			if callFunc(_x,hasMagazine) then {
 				_mag = getVar(_x,magazine);
 				{delete(_x)} foreach array_copy(getVar(_mag,content));
 			};
-		} foreach ([_mob,"IRangedWeapon",true] call getAllItemInInventory);
+		} foreach ([_mob,"IRangedWeapon",true] call getAllItemsInInventory);
 	};
 
 endclass

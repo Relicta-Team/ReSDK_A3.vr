@@ -10,6 +10,8 @@
 taskSystem_allTasks = [];
 taskSystem_checkedOnEndRound = [];
 
+taskSystem_map_tags = createHashMap; //map of all tagged tasks
+
 #ifdef EDITOR
 	#define editor_task_test
 #endif
@@ -18,8 +20,22 @@ taskSystem_checkedOnEndRound = [];
 	Задачи делятся на 2 категории:
 	 - проверяемые в конце раунда
 	 - проверяемые до успешного выполнения
+
+	Список задач:
+
+	ItemGetTask - получение предмета
+	ItemSaveTask - сохранение предмета
+	TargetSaveTask - сохранение цели до конца раунда (не должна умереть)
+	SelfSafeTask - владелец цели не долен умереть
+	TargetDeadTask - цель дожна умереть
+	LocationTask - посетить определнную локацию (позицию)
+	MoneyGetTask - получить определенное количество денег
+	RoleGetTask - получить определенную роль
+	StatusEffectGetTask - получить определенный статус эффект
+	ReagentTask - получить определенный реагент
 */
 
+editor_attribute("ColorClass" arg "1370A2")
 class(TBase) extends(IGameEvent)
 	var(tag,"");//системный тэг задачи
 	
@@ -48,6 +64,7 @@ class(TBase) extends(IGameEvent)
 	
 	// показывает результат выполнения задачи в конце раунда.
 	// По сути является глобальной задачей
+	//TODO: implement
 	var(showTaskResultOnEndRound,false);
 
 	//возвращает текст результата задачи при активном флаге showTaskResultOnEndRound
@@ -61,9 +78,11 @@ class(TBase) extends(IGameEvent)
 	func(onTaskAdded)
 	{
 		objParams_1(_mob);
+
 		setSelf(mob,_mob);
 
 		taskSystem_allTasks pushBack this;
+
 		if callSelf(checkOnlyAfterEndRound) then {
 			taskSystem_checkedOnEndRound pushBack this;
 		} else {
@@ -72,6 +91,34 @@ class(TBase) extends(IGameEvent)
 		#ifdef editor_task_test 
 			traceformat("[TASK_SYSTEM]: Added %1 to %2",callSelf(getClassName) arg callFuncParams(_mob,getNameEx,"кто"));
 		#endif
+	};
+
+	func(destructor)
+	{
+		objParams();
+		if (getSelf(tag) != "") then {
+			private _tasklist = taskSystem_map_tags getOrDefault [getSelf(tag),[]];
+			array_remove(_tasklist,this)
+		};
+	};
+
+	//Установить тэг задачи
+	func(setTag)
+	{
+		objParams_1(_tagName);
+		private _oldTag = getSelf(tag);
+		if array_exists(taskSystem_map_tags,_oldTag) then {
+			private _tasksByTag = (taskSystem_map_tags get _oldTag);
+			_tasksByTag deleteAt (_tasksByTag find this);
+		};
+
+		if array_exists(taskSystem_map_tags,_tagName) then {
+			(taskSystem_map_tags get _tagName) pushBack this;
+		} else {
+			taskSystem_map_tags set [_tagName,[this]];
+		};
+
+		setSelf(tag,_tagName);
 	};
 
 	//обработчик входных параметров при создании задачи. 
@@ -103,18 +150,16 @@ class(TBase) extends(IGameEvent)
 		#endif
 
 		setSelf(result,_result);
+		setSelf(isDone,true);
+
+		// поскольку задача остановлена при завершении то сразу выводим результат
+		if (_result > 0) then {
+			callSelf(onSuccess);
+		} else {
+			callSelf(onFail);
+		};
 
 		if callSelf(stopOnSuccess) then {
-
-			// поскольку задача остановлена при завершении то сразу выводим результат
-			if (_result > 0) then {
-				callSelfParams(onSuccess,_result);
-			} else {
-				callSelfParams(onFail,_result);
-			};
-
-			setSelf(isDone,true);
-
 			stopUpdate(getSelf(_handle));
 			setSelf(_handle,-1);
 		};
@@ -124,12 +169,18 @@ class(TBase) extends(IGameEvent)
 	|								USER FUNCTIONALITY									|
 	\ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	// Событие при получении награды за выполненную задачу
-	func(getReward)
-	{
-		objParams();
+	/*
+		Мы можем создавать задачи двумя способами:
+		Унаследовав определенный тип и изменив методы:
+			onSuccess,onFail
+		либо добавить события к созданному стандартному классу задачи:
 
-	};
+	
+	*/
+
+	// user event listeners
+	var(onFail,[]);
+	var(onSuccess,[]);
 	
 	// проверка условий
 	// любое значение возратимое от нуля считается завершением
@@ -143,20 +194,79 @@ class(TBase) extends(IGameEvent)
 	// событие при успешном выполнении
 	func(onSuccess)
 	{
-		objParams_1(_val);
+		objParams();
+		//? Клиент только текущий подключенный к мобу. Плохо выйдет когда игрок выполнил задачу будучи другим человеком или не находясь на сервере...
+		private _params = [this,getSelf(mob),getVar(getSelf(mob),client)];
+		_params params ["","_mob","_usr"];
+		{
+			this call _x;
+		} foreach getSelf(onSuccess);
 	};
 
 	// событие при провале
 	func(onFail)
 	{
-		objParams_1(_val);
+		objParams();
+		private _params = [this,getSelf(mob),getVar(getSelf(mob),client)];
+		_params params ["","_mob","_usr"];
+		{
+			this call _x;
+		} foreach getSelf(onFail);
 	};
 
 endclass
 
+#define __mbx__(message) ["[TASKS][%1]: %2",callSelf(getClassName) arg message] call messageBox;
+
+#ifndef EDITOR
+	#define __mbx__(message)
+#endif
+
+#define taskError(message) errorformat("[TASKS][%1]: %2",callSelf(getClassName) arg message); __mbx__(message) nextFrameParams({delete(_this)},this)
 
 
-#define taskError(message) errorformat("[TASKS][%1]: %2",callSelf(getClassName) arg message); nextFrameParams({delete(_this)},this)
+//условная задача
+class(ConditionalTask) extends(TBase)
+	
+	var(name,"Выполнить задачу");
+	var(desc,"Требуется выполнение задачи");
+	var(descRoleplay,"Требуется выполнение задачи");
+
+	// обрабатываемй объект задачи
+	var(handledObject,nullPtr);
+	var(condition,null);
+
+	func(handleTaskAddedParams)
+	{
+		objParams_1(_ctx);
+		if (isNullVar(_ctx) && !isNull(getSelf(condition))) then {
+			_ctx = getSelf(condition);
+		};
+
+		if equalTypes(_ctx,[]) then {
+			setSelf(handledObject,_ctx select 0);
+			_ctx = _ctx select 1;
+		};
+		setSelf(condition,_ctx);
+	};
+
+	getter_func(stopOnSuccess,true);
+
+	func(checkCondition)
+	{
+		objParams();
+
+		private _taskObject = this;
+		//unsafe switch context
+		this = getSelf(handledObject);
+		if (this call getVar(_taskObject,condition)) then {
+			this = _taskObject;
+			callSelfParams(taskDone,1);
+		};
+
+	};
+
+endclass
 
 //задача получения предмета. выполнено когда сущность имеет в наличии предмет
 class(ItemGetTask) extends(TBase)
@@ -171,16 +281,29 @@ class(ItemGetTask) extends(TBase)
 	{
 		objParams();
 		private _t = [];
+		private _itm = null;
 		{
-			_t pushBack ifcheck(equalTypes(_x,""), getFieldBaseValueWithMethod(_x,"name","getName"),callFunc(_x,getName))
-		} foreach getSelf(item);
+			_itm = _x select 0;
+			_t pushBack ifcheck(equalTypes(_itm,""), getFieldBaseValueWithMethod(_itm,"name","getName"),callFunc(_itm,getName))
+		} foreach getSelf(__serializedItems);
 		_t joinString ", "
 	};
 
-	var(item,null);// может быть листом строк или названием класса
-	var(inherited,true); //true если предмет наследуется. false сравнивает по названию класса
+	/*
+		Может быть:
+			строкой - имя класса, префикс typeof: означает, что проверяет наследников
+			массивом строк - префикс typeof: означает, что проверяет наследников
+			ссылкой на объект 
+			массивом ссылок на объект
+			глобалрефом - требует префикс ref: (получаются системой через getObjectByRef)
+			массивом глобалрефов
 
-	//var(_isSingleItem,false); //системная переменная, указывающая что предмет проверяется в еденичном экземпляре
+			массивом из строк,глобалрефов или сырых ссылок
+	*/
+	//! Небезопасный контекст списка предметов. Рекомендуется добавлять только через интерфейс добавления задачи
+	var(item,null);// может быть листом строк или названием класса
+
+	var(__serializedItems,[]); //vec2 name, inherited
 
 	getter_func(stopOnSuccess,true);
 
@@ -192,55 +315,58 @@ class(ItemGetTask) extends(TBase)
 			taskError("items data not setted");
 		};
 
-		private _defaultInherited = getSelf(inherited);
-		if equalTypes(_ctx,"") then {
-			setSelf(item,[_ctx]);
-			setSelf(inherited,[_defaultInherited]);
-		} else {
-			private _items = [];
-			private _inherited = [];
-			if (count _ctx == 2 && {
-					(
-						equalTypes(_ctx select 0,"") ||
-						equalTypes(_ctx select 0,nullPtr)
-					) && 
-					equalTypes(_ctx select 1,false)
-				}) exitWith {
-				_items pushBack (_ctx select 0);
-				_inherited pushBack (_ctx select 1);
-				setSelf(item,_items);
-				setSelf(inherited,_inherited);
-			};
+		//validate null context param
+		if isNullVar(_ctx) then {_ctx = [];};
 
-			{
-				if equalTypes(_x,[]) then {
-					_items pushBack (_x select 0);
-					_inherited pushBack (_x select 1);
-				} else {
-					_items pushBack _x;
-					_inherited pushback _defaultInherited;
-				};
-			} foreach _ctx;
-
-			setSelf(item,_items);
-			setSelf(inherited,_inherited);
+		if not_equalTypes(_ctx,[]) then {
+			_ctx = [_ctx];
 		};
+
+		if !isNull(getSelf(item)) then {
+			_ctx = _ctx + ifcheck(equalTypes([],getSelf(item)),getSelf(item),[getSelf(item)]);
+		};
+
+		private _serialized = getSelf(__serializedItems);
+
+		{
+			if equalTypes(_x,"") then {
+				private _typename = _x;
+				private _inherited = false;
+				if ([_typename,"typeof:",false] call stringStartWith) then {
+					_inherited = true;
+					_typename = [_typename,"^typeof\:",""] call regex_replace;
+				};
+				if ([_typename,"ref:",false] call stringStartWith) then {
+					_inherited = true;
+					_typename = [_typename,"^ref\:",""] call regex_replace;
+					_typename = _typename call getObjectByRef;
+				};
+
+				_serialized pushBack vec2(_typename,_inherited);
+				continue;
+			};
+			if equalTypes(_x,nullPtr) then {
+				_serialized pushBack vec2(_x,false);
+				continue;
+			};
+		} foreach _ctx;
 	};
 
 	func(checkCondition)
 	{
 		objParams();
 		private _m = getSelf(mob);
-		private _itm = getSelf(item);
+		private _itmList = getSelf(__serializedItems);
 		private _inh = getSelf(inherited);
 		private _itemsCount = 0;
 		{
-			if callFuncParams(_m,hasItem,_x arg _inh select _foreachindex) then {
+			_x params ["_it","_inh"];
+			if callFuncParams(_m,hasItem,_it arg _inh) then {
 				INC(_itemsCount);
 			};
-		} foreach _itm;
+		} foreach _itmList;
 
-		if (count _itm == _itemsCount) then {
+		if (count _itmList == _itemsCount) then {
 			callSelfParams(taskDone,1);
 		} else {
 			if callSelf(checkOnlyAfterEndRound) then {
@@ -279,11 +405,13 @@ class(TargetSaveTask) extends(TBase)
 	{
 		objParams_1(_ctx);
 
-		if isNullVar(_ctx) exitwith {
+		if (isNullVar(_ctx) && isNullReference(getSelf(target))) exitwith {
 			taskError("Null context");
 		};
 
-		setSelf(target,_ctx);
+		if !isNullVar(_ctx) then {
+			setSelf(target,_ctx);
+		};
 	};
 
 	func(checkCondition)
@@ -315,7 +443,7 @@ endclass
 class(TargetDeadTask) extends(TargetSaveTask)
 	var(name,"Смерть");
 	var(desc,"Цель - %1. Она должна умереть любым способом.");
-	var(descRoleplay,"Нужно разобраться кое с кем. Цель %1 не должна выжить.");
+	var(descRoleplay,"Нужно разобраться кое с кем. %1 не суждено дожить до конца смены.");
 	getter_func(stopOnSuccess,true);
 	getterconst_func(checkOnlyAfterEndRound,false);
 	func(checkCondition)
@@ -323,8 +451,9 @@ class(TargetDeadTask) extends(TargetSaveTask)
 		objParams();
 		if getVar(getSelf(target),isDead) then {
 			callSelfParams(taskDone,1);
-		} else {
-			callSelfParams(taskDone,-1);
+		//} else {
+			//This will be checked on end round
+			//callSelfParams(taskDone,-1);
 		};
 	};
 endclass
@@ -339,7 +468,7 @@ class(LocationTask) extends(TBase)
 
 	getter_func(stopOnSuccess,true);
 
-	var(pos,vec3(0,0,0));
+	var(pos,null); //TODO: use pos, rpos (string), globalref
 	var(maxDistance,1);
 
 	// соглашение о передаче параметров:
@@ -351,14 +480,46 @@ class(LocationTask) extends(TBase)
 	{
 		objParams_1(_ctx);
 		
-		if (isNullVar(_ctx) || {not_equalTypes(_ctx,[])}) exitwith {taskError("null position or type error")};
-		
-		if (count _ctx == 3) then {
-			setSelf(pos,_ctx);
-		} else {
-			setSelf(pos,_ctx select 0);
-			setSelf(maxDistance,_ctx select 1);
+		if (isNullVar(_ctx) && !isNull(getSelf(pos))) then {
+			_ctx = getSelf(pos);
 		};
+
+		if (isNullVar(_ctx)) exitwith {taskError("null position or type error")};
+		
+		private _position = null;
+
+		if equalTypes(_ctx,[]) then {
+			if (count _ctx == 3) then {
+				_position = _ctx;
+			} else {
+				_position = _ctx select 0;
+				setSelf(maxDistance,_ctx select 1);
+			};
+		} else {
+			_position = _ctx;
+		};
+
+
+		if equalTypes(_position,[]) exitwith {
+			setSelf(pos,_position);
+		};
+
+		//convert position
+		call {
+			if equalTypes(_position,nullPtr) exitwith {
+				_position = callFunc(_position,getPos);
+			};
+			if ([_position,"pos:"] call stringStartWith) exitWith {
+				_position = [(_position splitString ":") select 1] call getSpawnPosByName;
+			};
+			if ([_position,"ref:"] call stringStartWith) then {
+				_position = ((_position splitString ":") select 1);
+			};
+
+			_position = callFunc(_position call getObjectByRef,getPos);
+		};
+
+		setSelf(pos,_position);
 	};
 
 	func(checkCondition)
@@ -371,6 +532,7 @@ class(LocationTask) extends(TBase)
 endclass
 
 //кастомная задача. контекст является кодом с параметрами, которые обрабатываются самостоятельно
+//! OBSOLETED. Do not use this in new code
 class(CustomTask) extends(TBase)
 
 	func(constructor)
@@ -405,13 +567,13 @@ class(CustomTask) extends(TBase)
 
 	func(onSuccess)
 	{
-		objParams_1(_val);
+		objParams();
 		call getSelf(eventOnSuccess);
 	};
 
 	func(onFail)
 	{
-		objParams_1(_val);
+		objParams();
 		call getSelf(eventOnFail);
 	};
 endclass
@@ -439,6 +601,11 @@ class(MoneyGetTask) extends(TBase)
 	func(handleTaskAddedParams)
 	{
 		objParams_1(_ctx);
+
+		if (isNullVar(_ctx) && !isNull(getSelf(amount))) then {
+			_ctx = getSelf(amount);
+		};
+
 		if (isNullVar(_ctx) || {not_equalTypes(_ctx,0)} || {_ctx <= 0}) exitwith {
 			taskError("null context or wrong type (or not uint)");
 		};
@@ -449,7 +616,7 @@ class(MoneyGetTask) extends(TBase)
 	func(checkCondition)
 	{
 		objParams();
-		private _mon = [getSelf(mob),"Zvak",true] call getAllItemInInventory;
+		private _mon = [getSelf(mob),"Zvak",true] call getAllItemsInInventory;
 		private _collected = 0;
 		private _stackCount = 0;
 		{
@@ -492,6 +659,10 @@ class(RoleGetTask) extends(TBase)
 	{
 		objParams_1(_ctx);
 		
+		if (isNullVar(_ctx) && getSelf(roleClass)!="") then {
+			_ctx = getSelf(roleClass);
+		};	
+
 		if (isNullVar(_ctx) || {isNullReference(_ctx call gm_getRoleObject)}) exitwith {
 			taskError("null context or wrong role type ");
 		};

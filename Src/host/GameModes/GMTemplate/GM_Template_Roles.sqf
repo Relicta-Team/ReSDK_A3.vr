@@ -20,20 +20,20 @@ class(GMTemplate_RAdventurer) extends(BasicRole)
 	var(returnInLobbyAfterDead,true);
 
 	//Указываем позицию и направление при заходе за эту роль
-	getter_func(getInitialPos,"base" call getSpawnPosByName);
-	getter_func(getInitialDir,"base" call getSpawnDirByName);
+	getter_func(spawnLocation,"pos:base");
 
-	//Массив базовых скиллов в определенном порядке:
+	//Массив базовых навыков:
 	// Сила, Интеллект, Ловкость, Здоровье
-	getter_func(getSkills,vec4(randInt(13,15),randInt(10,12),randInt(12,16),randInt(10,12)));
+	// Разделитель между навыками ;
+	// Разделители между навыком, и значением (либо нижним и верхним значением) =-: и пробел
+	getter_func(getSkills,"st=9; dx=10-12; iq=12-16; ht=10-12");
 
 	//Массив дополнительных скиллов
-	//Названия всех скиллов хранятся в хэш-карте: skills_internal_map_nameAssoc
-	func(getOtherSkills) {[
-		skillrand(fight,1,5) arg
-		skillrand(shotgun,1,5) arg
-		skillrand(stealth,1,5)
-	]};
+	//Названия всех скиллов хранятся в хэш-карте: skills_internal_map_nameAssoc либо в skills_internal_list_otherSkillsSystemNames
+	func(getOtherSkills) {
+		"fight:1-5; shotgun:1-5; " +
+		"stealth:1-5;"
+	};
 
 	//Функция в которой персонаж получает свой инвентарь
 	func(getEquipment)
@@ -98,8 +98,8 @@ class(GMTemplate_RAdventurerLate) extends(GMTemplate_RAdventurer)
 	getter_func(canVisibleAfterStart,true);
 
 	//Одна из добавленных точек с названием latespawn
-	getter_func(getInitialPos,"latespawn" call getRandomSpawnPosByName);
-	getter_func(getInitialDir,random 360); //случайное направление от 0 до 360
+	getter_func(spawnLocation,"rpos:latespawn");
+	getter_func(useRandomDirOnSpawn,true); //случайное направление от 0 до 360
 
 	var(count,5);
 

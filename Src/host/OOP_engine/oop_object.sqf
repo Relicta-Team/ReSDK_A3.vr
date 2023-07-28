@@ -9,6 +9,7 @@
 #define basic() _mother = TYPE_SUPER_BASE;
 
 //basic object for all oop system
+editor_attribute("HiddenClass")
 class(object) basic()
 
 	func(getClassName)
@@ -101,6 +102,7 @@ class(ManagedObject) extends(object)
 endclass
 
 //Объект с системой подсчёта ссылок созданных экземпляров
+editor_attribute("HiddenClass")
 class(RefCounterObject)
 
 	func(getRefList)

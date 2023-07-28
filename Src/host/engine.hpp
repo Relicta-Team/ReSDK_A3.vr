@@ -250,8 +250,8 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define formatTime(secs) (secs call{format["%1 мин. %2 сек.",floor(_this / 60),_this % 60]})
 
 //форматирование времени: каст секунды в минуты
-#define t_atMin(s) ((s)*60)
-#define t_atHrs(s) (t_atMin(s)*60)
+#define t_asMin(s) ((s)*60)
+#define t_asHrs(s) ((s)*3600)
 
 #define INFINITY 1e39
 

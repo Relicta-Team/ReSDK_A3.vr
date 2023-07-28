@@ -10,6 +10,9 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 
+using System.Windows.Forms;
+using System.Drawing;
+
 class OOPBuilder : IScript
 {
 	public void Init()
@@ -44,7 +47,114 @@ class OOPBuilder : IScript
 				output.Append("err:argserror:" + ScriptContext.GetArgsCount());
 			}
 			output.Append(clstofile(ScriptContext.GetArg(0),Int32.Parse(ScriptContext.GetArg(1)),ScriptContext.GetArg(2)));
+		} else if (args == "inputbox")
+		{
+			string value = "";
+			if (InputBox(ScriptContext.GetArg(0),ScriptContext.GetArg(1),ref value) == DialogResult.OK)
+			{
+				output.Append(value);
+			} else {
+				output.Append("$CLOSED$");
+			}
+		} else if (args == "gm_generator")
+		{
+			try {
+				if (ScriptContext.GetArgsCount() != 5) {
+					output.Append("false");
+					return;
+				}
+
+				string fileFrom = ScriptContext.GetArg(0);
+				string fileTo = ScriptContext.GetArg(1);
+				string replaceFrom = ScriptContext.GetArg(2);
+				string replaceTo = ScriptContext.GetArg(3);
+				string replaceMapName = ScriptContext.GetArg(4);
+
+				// read all text from
+				string input = File.ReadAllText(fileFrom);
+				// replace all
+				input = input.Replace(replaceFrom, replaceTo);
+				input = input.Replace("@MAP_NAME@", replaceMapName);
+				
+				//directory create if not exists
+				System.IO.FileInfo file = new System.IO.FileInfo(fileTo);
+				file.Directory.Create();
+				
+				// write to
+				File.WriteAllText(fileTo, input);
+
+				output.Append("true");
+			} catch (Exception ex) {
+				Console.WriteLine(ex);
+				output.Append("false");
+			}
+		} else if (args == "gm_generator_finalize")
+		{
+			try {
+				if (ScriptContext.GetArgsCount() != 3) {
+					output.Append("false");
+					return;
+				}
+
+				string scriptloaderfile = ScriptContext.GetArg(0);
+				string foldergamemode = ScriptContext.GetArg(1);
+				string modename = ScriptContext.GetArg(2);
+
+				//create file in foldergamemode loader.sqf
+				string loaderfile = foldergamemode + "\\loader.sqf";
+				File.WriteAllText(loaderfile, $"#include <..\\GameMode.h>\r\n\r\nload(\"{modename}\\{modename}.sqf\");\r\nload(\"{modename}\\{modename}_roles.sqf\");");
+
+				//add this loader to scriptloaderfile
+				File.AppendAllText(scriptloaderfile, $"\r\nload(\"{modename}\\loader.sqf\");");
+				
+				output.Append("true");
+			} catch (Exception ex) {
+				Console.WriteLine(ex);
+				output.Append("false");
+			}
 		}
+	}
+
+	public static DialogResult InputBox(string title, string promptText, ref string value)
+	{
+		Form form = new Form();
+		Label label = new Label();
+		TextBox textBox = new TextBox();
+		Button buttonOk = new Button();
+		Button buttonCancel = new Button();
+
+		form.Text = title;
+		label.Text = promptText;
+		textBox.Text = value;
+
+		buttonOk.Text = "OK";
+		buttonCancel.Text = "Cancel";
+		buttonOk.DialogResult = DialogResult.OK;
+		buttonCancel.DialogResult = DialogResult.Cancel;
+
+		label.SetBounds(9, 20, 372, 13);
+		textBox.SetBounds(12, 36, 372, 20);
+		buttonOk.SetBounds(228, 72, 75, 23);
+		buttonCancel.SetBounds(309, 72, 75, 23);
+
+		label.AutoSize = true;
+		textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+		buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+		buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+		form.ClientSize = new Size(396, 107);
+		form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+		form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+		form.FormBorderStyle = FormBorderStyle.FixedDialog;
+		form.StartPosition = FormStartPosition.CenterScreen;
+		form.MinimizeBox = false;
+		form.MaximizeBox = false;
+		form.AcceptButton = buttonOk;
+		form.CancelButton = buttonCancel;
+
+		DialogResult dialogResult = form.ShowDialog();
+		value = textBox.Text;
+		return dialogResult;
 	}
 
 	private void runSaveMap()
