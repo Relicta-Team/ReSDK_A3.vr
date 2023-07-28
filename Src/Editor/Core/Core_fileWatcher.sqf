@@ -9,8 +9,24 @@ init_function(fileWatcher_initialie)
 	["FileWatcher","init",[getMissionPath "Src","*.*",false]] call rescript_callCommand;
 
 	fileWatcher_internal_lastTickTime = 0;
-	fileWatcher_internal_lastUpdateMode = 0;
+		fileWatcher_internal_const_updateDelay = 1;
+	fileWatcher_internal_hasAnyUpdate = false;
 	fileWatcher_internal_lastEvent = []; //editor, host
+
+	["onFrame",fileWatcher_onFrame] call Core_addEventHandler;
+}
+
+function(fileWatcher_onFrame)
+{
+	if (!isGameFocused) exitwith {};
+
+	if (tickTime >= fileWatcher_internal_lastTickTime) then {
+		fileWatcher_internal_lastTickTime = tickTime + fileWatcher_internal_const_updateDelay;
+		if (fileWatcher_internal_hasAnyUpdate) then {
+			fileWatcher_internal_hasAnyUpdate = false;
+			["TODO: filewatcher update"] call showInfo;
+		};
+	};
 }
 
 function(FileWatcher_handleCallbackExtension)
@@ -24,6 +40,5 @@ function(FileWatcher_handleCallbackExtension)
 	private _lowerPath = toLower _path;
 
 	["callback fws: %1",_this] call printTrace;
+	fileWatcher_internal_hasAnyUpdate = true;
 }
-
-
