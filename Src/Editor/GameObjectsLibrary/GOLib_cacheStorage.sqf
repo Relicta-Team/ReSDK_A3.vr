@@ -88,14 +88,42 @@ init_function(golib_cs_initAll)
 
 init_function(golib_cs_initHandler)
 {
+	golib_history_markDirty = false;
+	golib_history_changeMode = 0; //1 redo, -1 undo;
+	golib_history_skippedHistoryStageFlag = "#SYSTEM#";
+
 	["onPaste",{
 		call golib_cs_syncMarks;
 	}] call Core_addEventHandler;
 	["onUndo",{
-		call golib_cs_syncMarks;
+		golib_history_markDirty = true;
+		golib_history_changeMode = -1;
 	}] call Core_addEventHandler;
 	["onRedo",{
-		call golib_cs_syncMarks;
+		golib_history_markDirty = true;
+		golib_history_changeMode = 1;
+	}] call Core_addEventHandler;
+
+	["onFrame",{
+		if (golib_history_markDirty) then {
+			_changeMode = "";
+			if (golib_history_changeMode == 1) then {_changeMode = "Redo"};
+			if (golib_history_changeMode == -1) then {_changeMode = "Undo"};
+			_historyText = call nativeWidgets_getCurrentHistoryText;
+			["[%3] (%2) %1",_historyText,lbcursel (call nativeWidgets_getListboxHistory),_changeMode] call printTrace;
+			golib_history_markDirty = false;
+			golib_history_changeMode = 0;
+
+			if (golib_history_skippedHistoryStageFlag in _historyText) then {
+				if (_changeMode != "") then {
+					do3DENAction _changeMode;
+				} else {
+					["Unexpected history stage"] call showWarning;
+				};
+			};
+
+			call golib_cs_syncMarks;
+		};
 	}] call Core_addEventHandler;
 }
 
