@@ -216,11 +216,13 @@ class(TBase) extends(IGameEvent)
 
 endclass
 
-#define __mbx(message) ["[TASKS][%1]: %2",callSelf(getClassName) arg message] call messageBox
+#define __mbx__(message) ["[TASKS][%1]: %2",callSelf(getClassName) arg message] call messageBox;
+
 #ifndef EDITOR
-	#undef __mbx
+	#define __mbx__(message)
 #endif
-#define taskError(message) errorformat("[TASKS][%1]: %2",callSelf(getClassName) arg message); __mbx(message); nextFrameParams({delete(_this)},this)
+
+#define taskError(message) errorformat("[TASKS][%1]: %2",callSelf(getClassName) arg message); __mbx__(message) nextFrameParams({delete(_this)},this)
 
 
 //условная задача
