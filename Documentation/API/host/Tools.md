@@ -252,7 +252,7 @@ Replaced value:
 ```sqf
 if !(cachevalue in _cache) exitwith {cachevalue}
 ```
-File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 44](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L44)
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 57](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L57)
 ## checkempty(cachevalue)
 
 Type: constant
@@ -264,7 +264,7 @@ Replaced value:
 ```sqf
 if (_cache get cachevalue == "") exitwith {cachevalue}
 ```
-File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 45](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L45)
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 58](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L58)
 ## editorDebug_serializePlayerSettings
 
 Type: function
@@ -281,6 +281,15 @@ Description:
 
 
 File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 38](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L38)
+## editorDebug_updatePosAndDirInCache
+
+Type: function
+
+Description: only for 3den
+- Param: _pos
+- Param: _dir (optional, default 0)
+
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 43](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L43)
 ## editorDebug_internal_validateValuesCanStart
 
 Type: function
@@ -288,7 +297,7 @@ Type: function
 Description: 
 - Param: _cache
 
-File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 42](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L42)
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 55](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L55)
 # EditorDebug_visual.sqf
 
 ## editorDebug_handlerWidgets

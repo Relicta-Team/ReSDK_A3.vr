@@ -1524,7 +1524,7 @@ Replaced value:
 (secs call{format["%1 мин. %2 сек.",floor(_this / 60),_this % 60]})
 ```
 File: [host\engine.hpp at line 250](../../../Src/host/engine.hpp#L250)
-## t_atMin(s)
+## t_asMin(s)
 
 Type: constant
 
@@ -1536,7 +1536,7 @@ Replaced value:
 ((s)*60)
 ```
 File: [host\engine.hpp at line 253](../../../Src/host/engine.hpp#L253)
-## t_atHrs(s)
+## t_asHrs(s)
 
 Type: constant
 
@@ -1545,7 +1545,7 @@ Description:
 
 Replaced value:
 ```sqf
-(t_atMin(s)*60)
+((s)*3600)
 ```
 File: [host\engine.hpp at line 254](../../../Src/host/engine.hpp#L254)
 ## INFINITY

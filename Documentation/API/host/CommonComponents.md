@@ -120,6 +120,24 @@ Replaced value:
 4
 ```
 File: [host\CommonComponents\!PreInit.sqf at line 182](../../../Src/host/CommonComponents/!PreInit.sqf#L182)
+## testcheck(value,errortext)
+
+Type: constant
+
+> Exists if **__ENABLE_STATIC_TEST** defined
+
+Description: 
+- Param: value
+- Param: errortext
+
+Replaced value:
+```sqf
+if !(value) exitWith { \
+		private _format = format["%1 - %2",errortext,'value']; \
+		setLastError(_format); \
+	};
+```
+File: [host\CommonComponents\!PreInit.sqf at line 388](../../../Src/host/CommonComponents/!PreInit.sqf#L388)
 ## cprint_usestdout
 
 Type: Variable
@@ -367,6 +385,26 @@ Description:
 - Param: _replacer
 
 File: [host\CommonComponents\!PreInit.sqf at line 277](../../../Src/host/CommonComponents/!PreInit.sqf#L277)
+## stringStartWith
+
+Type: function
+
+Description: Строковые хелперы
+- Param: _checked
+- Param: _started
+- Param: _casesense (optional, default true)
+
+File: [host\CommonComponents\!PreInit.sqf at line 332](../../../Src/host/CommonComponents/!PreInit.sqf#L332)
+## stringEndWith
+
+Type: function
+
+Description: 
+- Param: _checked
+- Param: _ended
+- Param: _casesense (optional, default true)
+
+File: [host\CommonComponents\!PreInit.sqf at line 338](../../../Src/host/CommonComponents/!PreInit.sqf#L338)
 ## selectBest
 
 Type: function
@@ -376,7 +414,7 @@ Description: Выбирает лучший случай [[1,2,3],{_x > 2}] call 
 - Param: _criteria
 - Param: _return
 
-File: [host\CommonComponents\!PreInit.sqf at line 328](../../../Src/host/CommonComponents/!PreInit.sqf#L328)
+File: [host\CommonComponents\!PreInit.sqf at line 347](../../../Src/host/CommonComponents/!PreInit.sqf#L347)
 ## searchInList
 
 Type: function
@@ -386,7 +424,17 @@ Description:
 - Param: _lambda
 - Param: _defaultReturn
 
-File: [host\CommonComponents\!PreInit.sqf at line 344](../../../Src/host/CommonComponents/!PreInit.sqf#L344)
+File: [host\CommonComponents\!PreInit.sqf at line 363](../../../Src/host/CommonComponents/!PreInit.sqf#L363)
+## functionalitests_preinit
+
+Type: function
+
+> Exists if **__ENABLE_STATIC_TEST** defined
+
+Description: 
+
+
+File: [host\CommonComponents\!PreInit.sqf at line 387](../../../Src/host/CommonComponents/!PreInit.sqf#L387)
 # Animator.sqf
 
 ## addAnim(name)

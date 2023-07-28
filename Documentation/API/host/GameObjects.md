@@ -3663,7 +3663,7 @@ Replaced value:
 ```sqf
 getSelf(name)
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 228](../../../Src/host/GameObjects/Mobs/Mob.sqf#L228)
+File: [host\GameObjects\Mobs\Mob.sqf at line 248](../../../Src/host/GameObjects/Mobs/Mob.sqf#L248)
 ## PIC_PREP
 
 Type: constant
@@ -3675,7 +3675,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 290](../../../Src/host/GameObjects/Mobs/Mob.sqf#L290)
+File: [host\GameObjects\Mobs\Mob.sqf at line 310](../../../Src/host/GameObjects/Mobs/Mob.sqf#L310)
 # MobGhost.sqf
 
 ## hasBP(idx)
@@ -5711,7 +5711,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 28](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L28)
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 29](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L29)
 ## spawnPos_internal_map_equalCollections
 
 Type: Variable
@@ -5723,7 +5723,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 30](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L30)
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 31](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L31)
 ## spawnPos_internal_list_rnd
 
 Type: Variable
@@ -5735,7 +5735,23 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 32](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L32)
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 33](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L33)
+## isExistsSpawn
+
+Type: function
+
+Description: 
+- Param: _name
+
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 35](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L35)
+## isExistsRandomSpawn
+
+Type: function
+
+Description: 
+- Param: _name
+
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 36](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L36)
 ## getSpawnPosByName
 
 Type: function
@@ -5744,7 +5760,7 @@ Description:
 - Param: _name
 - Param: _def (optional, default ['0', '0', '0'])
 
-File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 34](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L34)
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 38](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L38)
 ## getSpawnDirByName
 
 Type: function
@@ -5753,13 +5769,31 @@ Description:
 - Param: _name
 - Param: _def (optional, default random 360)
 
-File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 44](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L44)
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 48](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L48)
 ## getRandomSpawnPosByName
 
 Type: function
 
 Description: 
-- Param: _name
-- Param: _def (optional, default ['0', '0', '0'])
+- Param: _pos
+- Param: _defpos (optional, default 0)
 
-File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 54](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L54)
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 58](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L58)
+## getRandomSpawnDirByName
+
+Type: function
+
+Description: 
+- Param: _pos
+- Param: _dir (optional, default 0)
+
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 66](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L66)
+## getRandomSpawnByNameProvider
+
+Type: function
+
+Description: 
+- Param: _name
+- Param: _def
+
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 74](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L74)

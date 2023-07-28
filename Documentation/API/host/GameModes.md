@@ -13,7 +13,7 @@ Replaced value:
 ```sqf
 (if (getSelf(var__) val__ ) then {text__ + (str getSelf(var__)) + sbr} else {""})
 ```
-File: [host\GameModes\BasicDefines.sqf at line 185](../../../Src/host/GameModes/BasicDefines.sqf#L185)
+File: [host\GameModes\BasicDefines.sqf at line 193](../../../Src/host/GameModes/BasicDefines.sqf#L193)
 ## printInfoIf_Handled(val__,text__,var__,__hnd)
 
 Type: constant
@@ -28,7 +28,7 @@ Replaced value:
 ```sqf
 (if (getSelf(var__) val__ ) then {text__ + (__hnd) + sbr} else {""})
 ```
-File: [host\GameModes\BasicDefines.sqf at line 186](../../../Src/host/GameModes/BasicDefines.sqf#L186)
+File: [host\GameModes\BasicDefines.sqf at line 194](../../../Src/host/GameModes/BasicDefines.sqf#L194)
 # BasicTask.sqf
 
 ## editor_task_test
@@ -44,7 +44,33 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameModes\BasicTask.sqf at line 14](../../../Src/host/GameModes/BasicTask.sqf#L14)
+File: [host\GameModes\BasicTask.sqf at line 16](../../../Src/host/GameModes/BasicTask.sqf#L16)
+## __mbx__(message)
+
+Type: constant
+
+Description: 
+- Param: message
+
+Replaced value:
+```sqf
+["[TASKS][%1]: %2",callSelf(getClassName) arg message] call messageBox;
+```
+File: [host\GameModes\BasicTask.sqf at line 219](../../../Src/host/GameModes/BasicTask.sqf#L219)
+## __mbx__(message)
+
+Type: constant
+
+> Exists if **EDITOR** not defined
+
+Description: 
+- Param: message
+
+Replaced value:
+```sqf
+
+```
+File: [host\GameModes\BasicTask.sqf at line 222](../../../Src/host/GameModes/BasicTask.sqf#L222)
 ## taskError(message)
 
 Type: constant
@@ -54,9 +80,9 @@ Description:
 
 Replaced value:
 ```sqf
-errorformat("[TASKS][%1]: %2",callSelf(getClassName) arg message); nextFrameParams({delete(_this)},this)
+errorformat("[TASKS][%1]: %2",callSelf(getClassName) arg message); __mbx__(message) nextFrameParams({delete(_this)},this)
 ```
-File: [host\GameModes\BasicTask.sqf at line 159](../../../Src/host/GameModes/BasicTask.sqf#L159)
+File: [host\GameModes\BasicTask.sqf at line 225](../../../Src/host/GameModes/BasicTask.sqf#L225)
 ## taskSystem_allTasks
 
 Type: Variable
@@ -81,6 +107,18 @@ Initial value:
 []
 ```
 File: [host\GameModes\BasicTask.sqf at line 11](../../../Src/host/GameModes/BasicTask.sqf#L11)
+## taskSystem_map_tags
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //map of all tagged tasks
+```
+File: [host\GameModes\BasicTask.sqf at line 13](../../../Src/host/GameModes/BasicTask.sqf#L13)
 # CommonGameAspects.sqf
 
 ## DEFAULT_WEIGHT
@@ -237,7 +275,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [host\GameModes\CommonTasks\PublicTasks.sqf at line 8](../../../Src/host/GameModes/CommonTasks/PublicTasks.sqf#L8)
+File: [host\GameModes\CommonTasks\PublicTasks.sqf at line 9](../../../Src/host/GameModes/CommonTasks/PublicTasks.sqf#L9)
 ## taskSystem_generateTask
 
 Type: function
@@ -246,7 +284,7 @@ Description:
 - Param: _class
 - Param: _handler
 
-File: [host\GameModes\CommonTasks\PublicTasks.sqf at line 19](../../../Src/host/GameModes/CommonTasks/PublicTasks.sqf#L19)
+File: [host\GameModes\CommonTasks\PublicTasks.sqf at line 20](../../../Src/host/GameModes/CommonTasks/PublicTasks.sqf#L20)
 # DetectiveModeRoles.sqf
 
 ## evidCheck(lvl,time,othrcond)
@@ -320,7 +358,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\GameModes\Hunt\GM_Hunt.sqf at line 106](../../../Src/host/GameModes/Hunt/GM_Hunt.sqf#L106)
+File: [host\GameModes\Hunt\GM_Hunt.sqf at line 107](../../../Src/host/GameModes/Hunt/GM_Hunt.sqf#L107)
 # HuntRoles.sqf
 
 ## DP
@@ -406,4 +444,4 @@ Replaced value:
 	}; \
 	
 ```
-File: [host\GameModes\Prey\GM_Prey.sqf at line 309](../../../Src/host/GameModes/Prey/GM_Prey.sqf#L309)
+File: [host\GameModes\Prey\GM_Prey.sqf at line 311](../../../Src/host/GameModes/Prey/GM_Prey.sqf#L311)
