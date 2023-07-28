@@ -9,14 +9,22 @@ ReBridge_isLoaded = {
 	engineGetReturn(engineCall(isrunning))=="true"
 };
 
-ReBridge_start = {
-	params [["_logFile",
+ReBridge_defaultLogFile = 
 	#ifdef EDITOR
 	getMissionPath "src\ReBridge\rebridge_log.txt"
 	#else
 	""
 	#endif
+;
+
+ReBridge_loadedLogFile = "";
+
+ReBridge_start = {
+	params [["_logFile",
+	ReBridge_defaultLogFile
 	]];
+
+	ReBridge_loadedLogFile = _logFile;
 	engineCallParams(start,[_logFile]);
 };
 

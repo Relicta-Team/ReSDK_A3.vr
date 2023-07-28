@@ -88,6 +88,8 @@ Editor_enableAutoloadGOLIB = true;
 //core
 componentInit(Core)
 #include "Core\Core_init.sqf"
+componentInit(Core_fileWatcher)
+#include "Core\Core_fileWatcher.sqf"
 componentInit(Core_pathes)
 #include "Core\Core_pathes.sqf"
 componentInit(Core_io)
