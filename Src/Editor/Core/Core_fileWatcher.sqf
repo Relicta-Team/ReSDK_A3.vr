@@ -3,9 +3,15 @@
 // sdk.relicta.ru
 // ======================================================
 
+variable_define
+	// global filewatcher flag enable
+	fileWatcher_enableSystem = false;
+
 //fws_changed
 init_function(fileWatcher_initialie)
 {
+	if (!fileWatcher_enableSystem) exitwith {};
+
 	["FileWatcher","init",[getMissionPath "Src","*.*",false]] call rescript_callCommand;
 
 	fileWatcher_internal_lastTickTime = 0;
@@ -24,7 +30,7 @@ function(fileWatcher_onFrame)
 		fileWatcher_internal_lastTickTime = tickTime + fileWatcher_internal_const_updateDelay;
 		if (fileWatcher_internal_hasAnyUpdate) then {
 			fileWatcher_internal_hasAnyUpdate = false;
-			["TODO: filewatcher update"] call showInfo;
+			//["TODO: filewatcher update"] call showInfo;
 		};
 	};
 }
