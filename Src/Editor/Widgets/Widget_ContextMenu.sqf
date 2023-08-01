@@ -246,6 +246,7 @@ function(ContextMenu_loadMouseObject)
 		if equals(_atlPos,vec3(0,0,0)) then {_atlPos = _screenToWorldPos};
 		if not_equals(_obj,_objR) exitwith {
 			["Несоответствие точки старта симуляции. Повторите попытку"] call printWarning;
+			["Object1: %1; Object2: %2",_obj,_objR] call printTrace;
 		};
 
 		private _params = [false,true];

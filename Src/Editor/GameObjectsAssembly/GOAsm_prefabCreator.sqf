@@ -76,14 +76,24 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 
 				//update hashdata
 				private _hd = [_worldObj,false] call golib_getHashData;
+				_oldClass = _hd get "class";
 				_hd set ["class",_newClass];
-				if (("model" in _mapData) && {(_mapData get "model")!=(_hd get "model")}) then {
+				_cust = _hd getOrDefault ["customProps",createHashMap];
+				if (("model" in _mapData) && {(_mapData get "model")!=(_cust getOrDefault ["model","--nomodel--"])}) then {
 					_mapData deleteat "model";
 					["Модель не будет обновлена в данном случае, так как создается префаб из уже изменённой модели"] call showWarning;
 					["goasm_prefab_createTemplateFrom_openWindow - handled potential error with model logic"] call printWarning;
 				};
+				
+				["mapdata: %1; hashdata: %2",_mapData,_hd] call printTrace;
+
 				_hd set ["customProps",_mapData];
-				[_worldObj,_hd,true,"Создание префаба типа "+_newClass] call golib_setHashData;
+				// Это действие не будет выполнено, поскольку после ребилда вызывается golib_massoc_updateAllObjectsAtClassAndModel
+				// который в свою очередь размапит структуры и декорации
+				// TODO: разкомментировать когда будет реализован префаб генератор
+				// if ((tolower _oldClass) in ["istruct","decor"]) then {
+				// 	[_worldObj,_hd,true,"Создание префаба типа "+_newClass] call golib_setHashData;
+				// };
 				
 				[[]] call inspector_menuLoad;
 				
