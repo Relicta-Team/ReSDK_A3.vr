@@ -435,7 +435,7 @@ _testmb = {
 	_client = _owner call cm_findClientById;
 	_event = {
 		callSelf(CloseMessageBox);
-		callSelfParams(addSytemAction,"system" arg "sysact_test" arg "Кнопочка прикольчик");
+		callSelfParams(addSystemAction,"system" arg "sysact_test" arg "Кнопочка прикольчик");
 	};
 	callFuncParams(_client,ShowMessageBox,"MessageBox" arg vec2("приветик!","Жмяк") arg _event);
 }; rpcAdd("testmessagebox",_testmb);

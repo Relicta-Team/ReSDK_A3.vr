@@ -112,7 +112,11 @@ class(BasicRole) extends(object) attribute(Role)
 		private _needRoles = callSelf(needDiscordRoles);
 
 		//при выключенной системе обходим логику
-		if (!call dsm_accounts_canUse) then {_needRoles = []};
+		private _enabledDSMAccounts = call dsm_accounts_canUse;
+		if (!_enabledDSMAccounts) then {_needRoles = []};
+		if (!dsm_accounts_enableRoleAccessCheck) then {
+			_needRoles = [];
+		};
 
 		//нет доступных ролей
 		if (count _needRoles > 0 && {count (_discRoles arrayIntersect _needRoles) == 0}) exitwith {false};

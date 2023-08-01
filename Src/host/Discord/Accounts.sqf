@@ -8,6 +8,9 @@
 //! Внимание! На рантайме если перелкючать этот флаг, то нужно принудительно вызывать dsm_accounts_loadDiscordId на каждом клиенте в сессии
 dsm_accounts_isEnabled = true;
 
+// рантайм система проверки ролей дискорда и ограничения игровых ролей
+dsm_accounts_enableRoleAccessCheck = true;
+
 dsm_accounts_canUse = {
 	dsm_accounts_isEnabled && dsm_connectedToManager
 };

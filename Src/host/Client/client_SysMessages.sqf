@@ -159,6 +159,8 @@ sysmes("admin_returnToLastBody")
 	if isNullReference(_m) exitwith {};
 
 	callSelfParams(tryConnectToMob,_m);
+sysmes("admin_discrolesprotect")
+	[this,"setdiscordroleprotect " + ifcheck(dsm_accounts_enableRoleAccessCheck,"0","1"),true] call cm_processClientCommand;
 //--------------------------
 sysmes("server_srvrest")
 	private _event = {
