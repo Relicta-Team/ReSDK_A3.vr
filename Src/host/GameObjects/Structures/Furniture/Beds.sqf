@@ -42,6 +42,37 @@ class(BedBase) extends(IChair)
 endclass
 
 editor_attribute("EditorGenerated")
+class(SimpleDoubleBed) extends(BedBase)
+	var(model,"ca\buildings\furniture\bed_big_a.p3d");
+	getter_func(getChairOffsetPos,[[0.4 arg 0.05 arg 0.5] arg [-0.3 arg 0.05 arg 0.5]]);
+endclass
+
+editor_attribute("EditorGenerated")
+class(BedOld2) extends(BedBase)
+	var(model,"ca\buildings\furniture\postel_panelak1.p3d");
+	getter_func(getChairOffsetPos,[[0.45 arg -0.05 arg 0.3]]);
+endclass
+
+editor_attribute("EditorGenerated")
+class(SurgicalBed) extends(BedBase)
+	var(model,"ml_shabut\nvprops\surgtable.p3d");
+	getter_func(getChairOffsetPos,[[0.2 arg -0.1 arg 0.5]]);
+	getter_func(getChairOffsetDir,90);
+endclass
+
+editor_attribute("EditorGenerated")
+class(HospitalBedWheels) extends(BedBase)
+	var(model,"relicta_models\models\interier\bed1.p3d");
+	getter_func(getChairOffsetPos,[[0 arg 0.15 arg 0.15]]);
+endclass
+
+editor_attribute("EditorGenerated")
+class(DoubleArmyBed) extends(BedBase)
+	var(model,"ca\structures\furniture\chairs\vojenska_palanda\vojenska_palanda.p3d");
+	getter_func(getChairOffsetPos,[[0 arg -0.1 arg 0.4] arg [0 arg -0.1 arg 1.2]]);
+endclass
+
+editor_attribute("EditorGenerated")
 class(SingleWhiteBed) extends(BedBase)
 	var(model,"relicta_models\models\interier\bed4.p3d");
 	getter_func(getChairOffsetPos,[[0 arg 0.240001 arg 0]]);
