@@ -3,3 +3,4 @@ Scripts\TestScript.cs
 ..\..\..\Scripts\ScriptContext.cs
 ..\..\..\Scripts\WorkspaceHelper.cs
 ..\..\..\Scripts\FileManager.cs
+..\..\..\Scripts\FileWatcher.cs

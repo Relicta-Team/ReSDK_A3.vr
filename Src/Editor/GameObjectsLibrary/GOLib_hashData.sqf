@@ -239,7 +239,12 @@ function(golib_hasCommonStorageParam)
 
 function(golib_saveCommonStorage)
 {
-	[golib_com_object,golib_com_objectHash,false] call golib_setHashData
+	params [["_logMessage",""]];
+	private _showLog = false;
+	if (_logMessage != "") then {
+		_showLog = true;
+	};
+	[golib_com_object,golib_com_objectHash,_showLog,_logMessage] call golib_setHashData
 }
 
 //процессор общих данных для режима симуляции. _mode true вызывается при входе, false при выходе или загрузке редактора
@@ -249,11 +254,11 @@ function(golib_saveCommonStorage)
 // 	if (_mode) then {
 // 		golib_com_objectHash set ["__systemFlags",__systemFlags];
 // 		golib_com_objectHash set ["__sdkProps",__sdkProps];
-// 		call golib_saveCommonStorage;
+// 		[] call golib_saveCommonStorage;
 // 	} else {
 // 		golib_com_objectHash deleteAt "__systemFlags";
 // 		golib_com_objectHash deleteAt "__sdkProps";
-// 		call golib_saveCommonStorage;
+// 		[] call golib_saveCommonStorage;
 // 	};
 // }
 
@@ -304,7 +309,7 @@ function(golib_initCommonStorage_nonAuto)
 
 	if !("version" call golib_hasCommonStorageParam) then {
 		golib_com_objectHash set ["version",Core_version_number];
-		call golib_saveCommonStorage;
+		["!!! Инициализация версии"] call golib_saveCommonStorage;
 	};
 
 	if equals("missionName" call golib_getCommonStorageParam,"TEMP") then {
@@ -346,7 +351,7 @@ function(golib_setMapNameFromDisplay)
 			};
 
 			golib_com_objectHash set ["missionName",_text];
-			call golib_saveCommonStorage;
+			["Установка названия карты"] call golib_saveCommonStorage;
 			nextFrame(displayClose);
 		}];
 }
@@ -356,7 +361,7 @@ function(golib_validateVersion)
 {
 	_curVers = "version" call golib_getCommonStorageParam;
 	if (_curVers != Core_version_number) then {
-		[format["Project version mismatch; Current %1; Need %2. Process update...",_curVers,Core_version_number]] call showWarning;
+		[format["Project version mismatch; Current %1; Need %2. Process update...",_curVers,Core_version_number],30] call showWarning;
 	};
 
 	if (_curVers > Core_version_number) exitWith {
@@ -379,11 +384,11 @@ function(golib_validateVersion)
 		
 		_curVers = _newVers;
 		golib_com_objectHash set ["version",_curVers];
-		call golib_saveCommonStorage;
+		[format["Миграция версии с %1 до %2",_curVers-1,_curVers]] call golib_saveCommonStorage;
 		["Version updated to %1",_curVers] call printLog;
 	};
 
-	["Версия обновлена. Перезапустите редактор"] call showInfo;
+	["Версия карты обновлена. Сохраните, соберите карту и перезапустите редактор.",30] call showInfo;
 }
 
 
@@ -445,7 +450,33 @@ function(golib_internal_handleVersionUpdate)
 		   	//add object to layer
 			[_obj,"Effects"] call layer_addObject;
 
-			["Updated object %1",_obj] call printLog;
+			["(v2) Updated object %1",_obj] call printLog;
+		};
+	};
+	/*
+		В третьей версии исправляется проблема замены модели при обновлении объектов
+		Если объект с классом имеет модель в хэшдате, равную базовой модели, определенной в классе - 
+		сбрасываем избыточную установку модели из хэшдаты
+		https://github.com/Relicta-Team/ReSDK_A3.vr/issues/20#issue-1814830351
+	*/
+	if (_newVers == 3) exitWith {
+		
+		if (!_hasHashData) exitwith {};
+
+		private _data = [_obj,true] call golib_getHashData;
+
+		private _class = _data get "class";
+		private _props = _data get "customProps";
+
+		if (!("class" in _data) || !("customProps" in _data)) exitwith {
+			["Skip object %1 at %2",_obj,getposatl _obj] call printLog;
+		};
+		
+		private _defModel = [_class,"model",true,"getModel"] call oop_getFieldBaseValue;
+		if ("model" in _props && {_defModel == (_props get "model")}) then {
+			_props deleteAt "model";
+			[_obj,_data,true,"Обновление объекта до версии 3"] call golib_setHashData;
+			["(v3) Updated object %1",_obj] call printLog;
 		};
 	};
 }

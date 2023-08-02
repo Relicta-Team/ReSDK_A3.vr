@@ -237,7 +237,11 @@ function(Core_invokeEvent)
 //native error handler
 #include "Core_errorHandler.sqf"
 
+#define DISABLE_CALLBACK_DEBUG
+
 #include "..\..\ReBridge\ReBridge_init.sqf"
+
+#undef DISABLE_CALLBACK_DEBUG
 
 //shared debug
 #include "..\..\host\Tools\EditorDebug\EditorDebug_shared.sqf"
@@ -254,4 +258,5 @@ function(Core_invokeEvent)
 ["OOPBuilder"] call rescript_initScript;
 ["FileManager"] call rescript_initScript;
 ["WorkspaceHelper"] call rescript_initScript;
+["FileWatcher"] call rescript_initScript;
 

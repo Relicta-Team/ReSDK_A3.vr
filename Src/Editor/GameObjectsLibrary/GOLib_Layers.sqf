@@ -8,16 +8,16 @@ function(layer_internal_addPtr)
 	params ["_ptr","_name"];
 	if !("layer_ptrToName" call golib_hasCommonStorageParam) then {
 		golib_com_objectHash set ["layer_ptrToName", createHashMap ];
-		call golib_saveCommonStorage;
+		[] call golib_saveCommonStorage;
 	};
 	if !("layer_nameToPtr" call golib_hasCommonStorageParam) then {
 		golib_com_objectHash set ["layer_nameToPtr", createHashMap ];
-		call golib_saveCommonStorage;
+		[] call golib_saveCommonStorage;
 	};
 
 	golib_com_objectHash get "layer_ptrToName" set [_ptr,_name];
 	golib_com_objectHash get "layer_nameToPtr" set [_name,_ptr];
-	call golib_saveCommonStorage;
+	[] call golib_saveCommonStorage;
 }
 
 function(layer_internal_removePtr)
@@ -25,18 +25,18 @@ function(layer_internal_removePtr)
 	private _ptr = _this;
 	if !("layer_ptrToName" call golib_hasCommonStorageParam) then {
 		golib_com_objectHash set ["layer_ptrToName", createHashMap ];
-		call golib_saveCommonStorage;
+		[] call golib_saveCommonStorage;
 	};
 	if !("layer_nameToPtr" call golib_hasCommonStorageParam) then {
 		golib_com_objectHash set ["layer_nameToPtr", createHashMap ];
-		call golib_saveCommonStorage;
+		[] call golib_saveCommonStorage;
 	};
 
 	//getting name by ptr
 	private _name = golib_com_objectHash get "layer_ptrToName" getOrDefault [_ptr,"$ERROR_LAYER_NOT_FOUND$"];
 	(golib_com_objectHash get "layer_ptrToName") deleteAt _ptr;
 	(golib_com_objectHash get "layer_nameToPtr") deleteAt _name;
-	call golib_saveCommonStorage;
+	[] call golib_saveCommonStorage;
 }
 
 function(layer_create)

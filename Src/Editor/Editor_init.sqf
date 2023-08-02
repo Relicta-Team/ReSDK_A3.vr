@@ -81,13 +81,15 @@
 //Строковое название версии. Пишется в пользовательском интерфейсе редактора
 Core_version_name = "1.4";
 //Номер версии сборки редактора. Используется в бинарных файлах карт.
-Core_version_number = 2;
+Core_version_number = 3;
 
 Editor_enableAutoloadGOLIB = true;
 
 //core
 componentInit(Core)
 #include "Core\Core_init.sqf"
+componentInit(Core_fileWatcher)
+#include "Core\Core_fileWatcher.sqf"
 componentInit(Core_pathes)
 #include "Core\Core_pathes.sqf"
 componentInit(Core_io)

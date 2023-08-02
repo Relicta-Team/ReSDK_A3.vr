@@ -9,7 +9,8 @@ init_function(golib_cs_initAll)
 {
 	params [["_syncMarks",true],["_syncElectronic",true]];
 	private _hash = null;
-	private _isNeedReload = false;
+	// private _isNeedReload = false; //!update is always performed
+	private _selectedObjects = call golib_getSelectedObjects;
 	{
 		if (_x call golib_hasHashData) then {
 			_hash = _x call golib_getHashData;
@@ -34,11 +35,10 @@ init_function(golib_cs_initAll)
 						["Mark '%1' already registered. Replaced to '%2'",_oldMark,_curMark] call printError;
 						_hash set ["mark",_curMark];
 						[_x,_hash] call golib_setHashData;
-
-						if (!_isNeedReload && {_x in (call golib_getSelectedObjects)}) then {
-							_isNeedReload = true;
-						};
 					};
+					
+					//if (!_isNeedReload && {_x in _selectedObjects}) then {_isNeedReload = true;};
+					
 					golib_internal_map_marks set [_curMark,_x];
 				};
 			};
@@ -77,25 +77,60 @@ init_function(golib_cs_initAll)
 
 					golib_internal_map_connected set [_hash get "mark",_hash get "edConnected"];
 				};
+			} else {
+				["Unexpected object on sync electronics %1",_x] call printError;
 			};
-		} foreach (all3DENEntities select 0);		
+		} foreach ifcheck(_syncMarks,values golib_internal_map_marks,all3DENEntities select 0);		
 	};
 	
-	if (_isNeedReload) then {
-		[null] call inspector_menuLoad;
+	// Обновление нужно в любом случае: нарпимер если марку на выбранном объекте удалили
+	if (count _selectedObjects == 0) then {
+		_selectedObjects = null;
 	};
+	//!TEMPFIX
+	nextFrameParams(inspector_menuLoad,[_selectedObjects]);
+	
 }
 
 init_function(golib_cs_initHandler)
 {
+	golib_history_markDirty = false;
+	golib_history_changeMode = 0; //1 redo, -1 undo;
+	golib_history_skippedHistoryStageFlag = "#SYSTEM#";
+
 	["onPaste",{
 		call golib_cs_syncMarks;
 	}] call Core_addEventHandler;
 	["onUndo",{
-		call golib_cs_syncMarks;
+		golib_history_markDirty = true;
+		golib_history_changeMode = -1;
 	}] call Core_addEventHandler;
 	["onRedo",{
-		call golib_cs_syncMarks;
+		golib_history_markDirty = true;
+		golib_history_changeMode = 1;
+	}] call Core_addEventHandler;
+
+	["onFrame",{
+		if (golib_history_markDirty) then {
+			_changeMode = "";
+			if (golib_history_changeMode == 1) then {_changeMode = "Redo"};
+			if (golib_history_changeMode == -1) then {_changeMode = "Undo"};
+			_historyText = call nativeWidgets_getCurrentHistoryText;
+			["[%3] (%2) %1",_historyText,lbcursel (call nativeWidgets_getListboxHistory),_changeMode] call printTrace;
+			golib_history_markDirty = false;
+			golib_history_changeMode = 0;
+
+			if (golib_history_skippedHistoryStageFlag in _historyText) then {
+				if (_changeMode != "") then {
+					do3DENAction _changeMode;
+				} else {
+					["Unexpected history stage"] call showWarning;
+				};
+			} else {
+				call golib_cs_syncMarks;
+			};
+
+		};
 	}] call Core_addEventHandler;
 }
 

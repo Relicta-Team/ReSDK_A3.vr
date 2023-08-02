@@ -15,6 +15,13 @@ class(BenchBase) extends(IChair)
 	//многоместное сидение(лавка)
 endclass
 
+editor_attribute("EditorGenerated")
+class(ChurchBench) extends(BenchBase)
+	var(model,"ca\structures\furniture\chairs\church_chair\church_chair.p3d");
+	getter_func(getChairOffsetPos,[[0.25 arg -1.2 arg -0.5] arg [0.25 arg -0.6 arg -0.5] arg [0.25 arg 0 arg -0.5] arg [0.25 arg 0.6 arg -0.5] arg [0.25 arg 1.2 arg -0.5]]);
+	getter_func(getChairOffsetDir,90);
+endclass
+
 class(HospitalBench) extends(BenchBase)
 	var(model,"ca\structures\furniture\chairs\hospital_bench\hospital_bench.p3d");
 	getter_func(getChairOffsetPos,[[0.3 arg 0 arg -0.1] arg [-0.3 arg 0 arg -0.1]]);

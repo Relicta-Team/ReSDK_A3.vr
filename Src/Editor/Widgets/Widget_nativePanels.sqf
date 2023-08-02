@@ -43,3 +43,16 @@ function(nativePanels_onToggleRight)
 		call nativePanels_isHiddenRight
 	] call Core_invokeEvent;
 }
+
+function(nativeWidgets_getListboxHistory)
+{
+	((findDisplay 313) displayctrl 74)
+}
+
+function(nativeWidgets_getCurrentHistoryText)
+{
+	private _lb = call nativeWidgets_getListboxHistory;
+	private _idx = lbCurSel _lb;
+	if (_idx == -1) exitWith {null};
+	_lb lbText _idx
+}

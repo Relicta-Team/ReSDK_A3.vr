@@ -120,6 +120,16 @@ function(golib_massoc_updateAllObjectsAtClassAndModel)
 			};
 			_data = [_x,false] call golib_getHashData;
 			_data set ["class",_type];
+
+			//fix actual model at new class
+			private _props = _data get "customProps";
+			if ("model" in _props) then {
+				private _defModel = [_type,"model",true,"getModel"] call oop_getFieldBaseValue;
+				if (_defModel == (_props get "model")) then {
+					_props deleteAt "model";
+				};
+			};
+			
 			[_x,_data,true,"Синхронизация объекта "+_type] call golib_setHashData;
 			//[_x] call golib_setSelectedObjects;
 			INC(_increment);
@@ -151,6 +161,15 @@ function(golib_massoc_auto_lowLevelUpdateClass)
 	params ["_obj","_type",["_doLogs",false]];
 	private _data = [_obj,false] call golib_getHashData;
 	_data set ["class",_type];
+
+	private _props = _data get "customProps";
+	if ("model" in _props) then {
+		private _defModel = [_type,"model",true,"getModel"] call oop_getFieldBaseValue;
+		if (_defModel == (_props get "model")) then {
+			_props deleteAt "model";
+		};
+	};
+
 	if (_doLogs) then {
 		[_obj,_data,true,"Синхронизация объекта "+_type] call golib_setHashData;
 	} else {

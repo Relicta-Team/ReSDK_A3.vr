@@ -605,7 +605,7 @@ function(goasm_attributes_handleProvider_model)
 										};
 										
 										_props set [_memberName,_text];
-										[_objWorld,_data,true,"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
+										[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
 										[_objWorld,_text] call golib_om_replaceObject;
 									} call Core_callContext;
 								},null,null,null,
@@ -617,7 +617,7 @@ function(goasm_attributes_handleProvider_model)
 								};
 								
 								_props set [_memberName,_cfg];
-								[_objWorld,_data,true,"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
+								[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
 								if !isNullReference(_wid) then {
 									_wid = _wid getVariable "_input";
 									call (_wid getVariable "_onSync");
@@ -627,7 +627,7 @@ function(goasm_attributes_handleProvider_model)
 						} else {
 							
 							_props set [_memberName,_value];
-							[_objWorld,_data,true,"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
+							[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
 							if !isNullReference(_wid) then {
 								_wid = _wid getVariable "_input";
 								call (_wid getVariable "_onSync");
@@ -660,7 +660,7 @@ function(goasm_attributes_handleProvider_model)
 		} else {
 			if (_memberName in _props) then {
 				_props deleteAt _memberName;
-				[_objWorld,_data,true,"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
+				[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
 				
 				_wid = _wid getVariable "_input";
 				call (_wid getVariable "_onSync");
