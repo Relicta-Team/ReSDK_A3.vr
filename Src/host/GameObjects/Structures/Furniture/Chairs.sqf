@@ -19,6 +19,12 @@ class(IChair) extends(Furniture)
 	getterconst_func(getChairOffsetDir,0);
 endclass
 
+editor_attribute("EditorGenerated")
+class(BrownOldArmchair) extends(IChair)
+	var(model,"ml\ml_object_new\model_14_10\kreslo.p3d");
+	getter_func(getChairOffsetPos,[[0 arg 0.3 arg -0.5]]);
+endclass
+
 
 class(HeadThrone) extends(IChair)
 	var(name,"Трон");

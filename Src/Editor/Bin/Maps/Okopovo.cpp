@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=221;
+		nextID=223;
 	};
 	class Camera
 	{
-		pos[]={4058.615,16.704763,4064.8862};
-		dir[]={-0.53592205,-0.2889052,0.79345727};
-		up[]={-0.16177939,0.95726424,0.23951995};
-		aside[]={0.82880819,-2.7769202e-006,0.55979556};
+		pos[]={4053.501,16.704763,4068.4182};
+		dir[]={-0.76536816,-0.36389261,0.53108203};
+		up[]={-0.29906192,0.93134117,0.20751525};
+		aside[]={0.57017535,-2.4767651e-006,0.82170236};
 	};
 };
 binarizationWanted=0;
@@ -510,7 +510,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""layer_nameToPtr"",createHashMapFromArray[[""Spawn points"",2648],[""Effects"",2731]]],[""missionName"",""Okopovo""],[""version"",2],[""layer_ptrToName"",createHashMapFromArray[[2648,""Spawn points""],[2731,""Effects""]]]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""layer_nameToPtr"",createHashMapFromArray[[""Spawn points"",2648],[""Effects"",2731]]],[""missionName"",""Okopovo""],[""version"",3],[""layer_ptrToName"",createHashMapFromArray[[2648,""Spawn points""],[2731,""Effects""]]]]}";
 			};
 			id=2205;
 			type="Land_Orange_01_F";
@@ -946,7 +946,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""FarmGarden""]]}";
 			};
 			id=2246;
 			type="Land_ShellCrater_01_F";
@@ -964,7 +964,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\military\trenches\trench_01_forest_f.p3d""]]],[""class"",""Trench""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Trench""]]}";
 			};
 			id=2248;
 			type="Land_Trench_01_forest_F";
@@ -1123,7 +1123,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d""]]],[""class"",""BetonTrapeciaSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonTrapeciaSmall""]]}";
 			};
 			id=2268;
 			type="Land_Target_Concrete_Support_01_F";
@@ -3140,7 +3140,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2455;
 			type="Land_ShellCrater_01_F";
@@ -3158,7 +3158,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2456;
 			type="Land_ShellCrater_01_F";
@@ -3176,7 +3176,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2457;
 			type="Land_ShellCrater_01_F";
@@ -3194,7 +3194,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2458;
 			type="Land_ShellCrater_01_F";
@@ -3212,7 +3212,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2459;
 			type="Land_ShellCrater_01_F";
@@ -3230,7 +3230,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2460;
 			type="Land_ShellCrater_01_F";
@@ -3248,7 +3248,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2461;
 			type="Land_ShellCrater_01_F";
@@ -3266,7 +3266,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2462;
 			type="Land_ShellCrater_01_F";
@@ -3630,7 +3630,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d""]]],[""class"",""BetonTrapeciaSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonTrapeciaSmall""]]}";
 			};
 			id=2483;
 			type="Land_Target_Concrete_Support_01_F";
@@ -3648,7 +3648,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d""]]],[""class"",""BetonTrapeciaSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonTrapeciaSmall""]]}";
 			};
 			id=2484;
 			type="Land_Target_Concrete_Support_01_F";
@@ -3666,7 +3666,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d""]]],[""class"",""BetonTrapeciaSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonTrapeciaSmall""]]}";
 			};
 			id=2485;
 			type="Land_Target_Concrete_Support_01_F";
@@ -3872,7 +3872,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2501;
 			type="Land_ShellCrater_01_F";
@@ -3889,7 +3889,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2502;
 			type="Land_ShellCrater_01_F";
@@ -3906,7 +3906,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2503;
 			type="Land_ShellCrater_01_F";
@@ -3923,7 +3923,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2504;
 			type="Land_ShellCrater_01_F";
@@ -4503,7 +4503,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d""]]],[""class"",""BetonTrapeciaSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonTrapeciaSmall""]]}";
 			};
 			id=2563;
 			type="Land_Target_Concrete_Support_01_F";
@@ -4521,7 +4521,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d""]]],[""class"",""BetonTrapeciaSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonTrapeciaSmall""]]}";
 			};
 			id=2565;
 			type="Land_Target_Concrete_Support_01_F";
@@ -5444,7 +5444,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2640;
 			type="Land_ShellCrater_01_F";
@@ -5462,7 +5462,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2641;
 			type="Land_ShellCrater_01_F";
@@ -5480,7 +5480,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2642;
 			type="Land_ShellCrater_01_F";
@@ -5497,7 +5497,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2643;
 			type="Land_ShellCrater_01_F";
@@ -5515,7 +5515,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",2],[""class"",""FarmGarden""]]}";
 			};
 			id=2644;
 			type="Land_ShellCrater_01_F";
@@ -8642,7 +8642,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""FarmGarden""]]}";
 			};
 			id=2901;
 			type="Land_ShellCrater_01_F";
@@ -9377,7 +9377,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""FarmGarden""]]}";
 			};
 			id=2973;
 			type="Land_ShellCrater_01_F";
@@ -9395,7 +9395,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""FarmGarden""]]}";
 			};
 			id=2974;
 			type="Land_ShellCrater_01_F";
@@ -9449,7 +9449,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d""]]],[""class"",""BetonTrapeciaSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonTrapeciaSmall""]]}";
 			};
 			id=2978;
 			type="Land_Target_Concrete_Support_01_F";
@@ -9485,7 +9485,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""rdir"",true],[""rpos"",1],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""rdir"",true],[""rpos"",1],[""class"",""FarmGarden""]]}";
 			};
 			id=2980;
 			type="Land_ShellCrater_01_F";
@@ -10022,7 +10022,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d""]]],[""class"",""BetonTrapeciaSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonTrapeciaSmall""]]}";
 			};
 			id=2965;
 			type="Land_Target_Concrete_Support_01_F";
@@ -10609,7 +10609,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""FarmGarden""]]}";
 			};
 			id=3073;
 			type="Land_ShellCrater_01_F";
@@ -10661,7 +10661,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""FarmGarden""]]}";
 			};
 			id=3076;
 			type="Land_ShellCrater_01_F";
@@ -10679,7 +10679,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\shellcrater_01_f.p3d""]]],[""class"",""FarmGarden""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""FarmGarden""]]}";
 			};
 			id=3077;
 			type="Land_ShellCrater_01_F";
@@ -11551,7 +11551,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d""]]],[""class"",""BetonTrapeciaSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonTrapeciaSmall""]]}";
 			};
 			id=3161;
 			type="Land_Target_Concrete_Support_01_F";
@@ -11569,7 +11569,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d""]]],[""class"",""BetonTrapeciaSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonTrapeciaSmall""]]}";
 			};
 			id=3162;
 			type="Land_Target_Concrete_Support_01_F";
@@ -11623,7 +11623,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d""]]],[""class"",""BetonTrapeciaSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonTrapeciaSmall""]]}";
 			};
 			id=3166;
 			type="Land_Target_Concrete_Support_01_F";
@@ -11641,7 +11641,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\military\training\target_concrete_support_01_f.p3d""]]],[""class"",""BetonTrapeciaSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonTrapeciaSmall""]]}";
 			};
 			id=3167;
 			type="Land_Target_Concrete_Support_01_F";

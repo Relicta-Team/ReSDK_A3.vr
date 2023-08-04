@@ -54,7 +54,7 @@ endclass
 
 class(WoodenAncientBench) extends(BenchBase)
 	var(model,"a3\structures_f_exp\civilian\accessories\bench_03_f.p3d");
-	getter_func(getChairOffsetPos,[[0.6 arg 0 arg -0.5] arg [-0.6 arg 0 arg -0.5] arg [0 arg 0 arg -0.5]]);
+	getter_func(getChairOffsetPos,[[0.6 arg 0 arg -0.4] arg [-0.6 arg 0 arg -0.4] arg [0 arg 0 arg -0.4]]);
 	getter_func(getChairOffsetDir,180);
 endclass
 
