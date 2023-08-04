@@ -7,6 +7,7 @@
 
 editor_attribute("CodeOnyGamemode")
 class(GMExtended) extends(GMStationBase)
+	getterconst_func(isPlayableGamemode,true);
 	var(name,"Тихий день");
 	var(desc,"Свободный режим. Развлекайтесь");
 	var(descExtended,"Ещё один относительно спокойный день.");

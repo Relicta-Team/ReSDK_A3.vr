@@ -7,6 +7,7 @@
 
 editor_attribute("CodeOnyGamemode")
 class(GMOldNewOrder) extends(GMExtended)
+	getterconst_func(isPlayableGamemode,true);
 	var(name,"Старый Новый Порядок");
 	var(desc,"Агенты Новой Армии пытаются исполнить свои планы.");
 	var(descExtended,"В поселение тайно проникли агенты Новой Армии! Их цели неизвестны" + comma + " но средства их достижения пугают: ведь цель оправдывает все.");

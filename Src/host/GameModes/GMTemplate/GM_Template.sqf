@@ -16,6 +16,8 @@ class(GMTemplate) extends(GMBase)
 	getterconst_func(getReqPlayersMin,1);
 	getterconst_func(getReqPlayersMax,4);
 
+	getterconst_func(isPlayableGamemode,false); //режим не доступен только в симуляции
+
 	//данные режима
 	//имя загружаемой карты
 	getterconst_func(getMapName,"Template");
