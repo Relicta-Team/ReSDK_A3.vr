@@ -14,6 +14,12 @@ class(SofaBase) extends(IChair)
 	//диваны
 endclass
 
+editor_attribute("EditorGenerated")
+class(BrownOldSofa) extends(SofaBase)
+	var(model,"metro_ob\model\mebel_outdoor_couch_01a.p3d");
+	getter_func(getChairOffsetPos,[[0.8 arg 0.25 arg -0.5] arg [0 arg 0.25 arg -0.5] arg [-0.8 arg 0.25 arg -0.5]]);
+endclass
+
 class(SofaBrown) extends(SofaBase)
 	var(model,"smg_metro_building\drugoe\smg_bomjdivan.p3d");
 	getter_func(getChairOffsetPos,[[-0.65 arg 0.2 arg -0.5] arg [0 arg 0.2 arg -0.5] arg [0.65 arg 0.2 arg -0.5]]);
