@@ -794,7 +794,7 @@ File: [host\CommonComponents\DateTime.sqf at line 13](../../../Src/host/CommonCo
 
 Type: constant
 
-> Exists if **_SQFVM** defined
+> Exists if **__VM_BUILD** defined
 
 Description: 
 - Param: path
@@ -811,14 +811,14 @@ File: [host\CommonComponents\loader.hpp at line 10](../../../Src/host/CommonComp
 
 Type: constant
 
-> Exists if **__VM_PARSE_FILE** defined
+> Exists if **__VM_VALIDATE** defined
 
 Description: 
 - Param: path
 
 Replaced value:
 ```sqf
-diag_log format["Start loading common module %1",path]; \
+diag_log format["Start validate common module %1",path]; \
 	private _ctx = compile preprocessFileLineNumberS ("src\host\CommonComponents\" + path); \
 	diag_log format["   - Module %1 loaded",path];
 ```

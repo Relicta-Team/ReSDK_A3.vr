@@ -96,7 +96,7 @@ File: [client\WidgetSystem\blockedButtons.hpp at line 31](../../../Src/client/Wi
 
 Type: constant
 
-Description: temporary fix for VM
+Description: 
 - Param: forkey
 
 Replaced value:
@@ -171,14 +171,14 @@ Type: constant
 
 > Exists if **_SQFVM** defined
 
-Description: temporary fix for VM
+Description: 
 - Param: forkey
 
 Replaced value:
 ```sqf
 (forkey in GROUP_ACTIONS || forkey in GROUP_COMMA_MENU || forkey in SIMPLE_PLAYER_INTERACTION)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 51](../../../Src/client/WidgetSystem/blockedButtons.hpp#L51)
+File: [client\WidgetSystem\blockedButtons.hpp at line 50](../../../Src/client/WidgetSystem/blockedButtons.hpp#L50)
 # defines.sqf
 
 ## HEIGHT_WINDOW_DRAGGER

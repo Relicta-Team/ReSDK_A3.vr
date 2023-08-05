@@ -224,7 +224,7 @@ File: [host\OOP_engine\oop_init.sqf at line 15](../../../Src/host/OOP_engine/oop
 
 Type: constant
 
-> Exists if **_SQFVM** defined
+> Exists if **__VM_VALIDATE** defined
 
 Description: 
 - Param: mes
