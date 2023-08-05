@@ -339,6 +339,14 @@ function(ContextMenu_loadMouseObject)
 		];
 	};
 
+	_stackMenu pushBack ["Измерить расстояние",{
+		_obj = (call contextMenu_getContextParams) select 0;
+		_screenToWorldPos = screenToWorld getMousePosition;
+		([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR","_atlPos"];
+		if equals(_atlPos,vec3(0,0,0)) then {_atlPos = _screenToWorldPos};
+		[_atlPos] call meterTool_onActivate;
+	}];
+
 	_stackMenu pushBack ["<t size='0.9'>Открыть редактор позиций модели</t>",{nextFrameParams(vcom_relposEditorOpen,(call contextMenu_getContextParams) select 0)}];
 	_stackMenu pushBack ["Открыть редактор эмиттеров",{
 		private _obj = (call contextMenu_getContextParams) select 0;
