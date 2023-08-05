@@ -19,7 +19,7 @@ private __slt_configs = [];
 #define linkLightToSource(obj,vecoffset) obj lightAttachObject [sourceObject,vecoffset]
 
 #include "ServerLighting_configs.sqf"
-static_assert_str(count __slt_configs == 0,"Test server static assert");
+
 {
 	_x params ["_id","_code"];
 	missionNamespace setVariable [format["slt_cfg_id_%1",_id],_code];

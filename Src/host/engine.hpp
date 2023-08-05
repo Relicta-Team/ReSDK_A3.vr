@@ -628,24 +628,24 @@ _ret} \
 #define __assert_static_compile_expr2(expr,message) __EVAL(__assert_static_runtime_expr2(expr,message))
 #define __assert_runtime_expr1(expr) if !([expr] call sys_int_evalassert)exitWith {['(expr)',__assert_runtime_file__,__LINE__] call sys_assert_}
 
-//called at compile/build
+//called at compile/build; Only simple expressions without macros
 #define static_assert(expr) __assert_static_runtime_expr1(expr)
-//see static_assert
+//see static_assert; Only simple expressions without macros
 #define static_assert_str(expr,message) __assert_static_runtime_expr2(expr,message)
 
-//called at runtime
+//called at runtime; Only simple expressions without macros
 #define assert(expr) __assert_runtime_expr1(expr)
 
 #ifdef __VM_BUILD
-	//called at compile/build
+	//called at compile/build; Only simple expressions without macros
 	#define static_assert(expr) __assert_static_compile_expr1(expr)
-	//see static_assert
+	//see static_assert; Only simple expressions without macros
 	#define static_assert_str(expr,message) __assert_static_compile_expr2(expr,message)
 #endif
 #ifdef __VM_VALIDATE
-	//called at compile/build
+	//called at compile/build; Only simple expressions without macros
 	#define static_assert(expr) __assert_static_compile_expr1(expr)
-	//see static_assert
+	//see static_assert; Only simple expressions without macros
 	#define static_assert_str(expr,message) __assert_static_compile_expr2(expr,message)
 #endif
 
@@ -665,7 +665,9 @@ _ret} \
 
 //Вне дебага все ассерты выключаются
 #ifndef DEBUG
-	
+	#define assert(a)
+	#define static_assert(a)
+	#define static_assert_str(a,b)
 	
 	#define __THIS_FILE_REPLACE__
 #endif
