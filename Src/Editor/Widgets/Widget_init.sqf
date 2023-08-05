@@ -111,6 +111,8 @@ menu_structureLayout = [
 			"text:Поиск в элементах на сцене;data:SearchEdit;act:;short:1569;"
 		],*/
 		["text:Интерфейс",
+			["text:Переключить иконки;act:call MouseArea_toggleIcons"],
+			["text:Переключить линии объектов;act:call MouseArea_toggleLines"],
 			"text:Переключить интерфейс;data:InterfaceToggle;act:with uinamespace do {'showInterface' call BIS_fnc_3DENInterface};short:14;",
 			"text:Список элементов сцены;data:InterfacePanelLeft;act:call nativePanels_onToggleLeft;short:18;",
 			"text:Библиотека объектов (АРМА3);data:InterfacePanelRight;act:call nativePanels_onToggleRight;short:19;",

@@ -232,7 +232,7 @@ function(ContextMenu_loadMouseObject)
 		_stackMenu pushBack [
 			"Подключить к источнику",
 			{
-				["Нажмите ЛКМ чтобы связать объект, ПКМ для отмены"] call showInfo;
+				["Нажмите ЛКМ чтобы связать объект, ПКМ + Ctrl для отмены"] call showInfo;
 
 				contextMenu_internal_energy_connector = (call contextMenu_getContextParams) select 0;
 			}
@@ -339,6 +339,14 @@ function(ContextMenu_loadMouseObject)
 		];
 	};
 
+	_stackMenu pushBack ["Измерить расстояние",{
+		_obj = (call contextMenu_getContextParams) select 0;
+		_screenToWorldPos = screenToWorld getMousePosition;
+		([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR","_atlPos"];
+		if equals(_atlPos,vec3(0,0,0)) then {_atlPos = _screenToWorldPos};
+		[_atlPos] call meterTool_onActivate;
+	}];
+
 	_stackMenu pushBack ["<t size='0.9'>Открыть редактор позиций модели</t>",{nextFrameParams(vcom_relposEditorOpen,(call contextMenu_getContextParams) select 0)}];
 	_stackMenu pushBack ["Открыть редактор эмиттеров",{
 		private _obj = (call contextMenu_getContextParams) select 0;
@@ -401,6 +409,13 @@ init_function(ContextMenu_mouseArea_init)
 				_atlPos, 
 				[0,1,0,1]
 			];
+			drawIcon3D ["", [0,0.7,0,1], (getPosAtl contextMenu_internal_energy_connector) vectoradd [0,0,1], 0, 0, 0, "Точка привязки", 1, 0.05, "PuristaMedium"];
+			if (contextMenu_internal_energy_toObject call golib_hasHashData) then {
+				_hd = contextMenu_internal_energy_toObject call golib_getHashData;
+				_t = format["Привязать к %1",_hd getOrDefault ["class","ERROR_TYPE"]];
+				drawIcon3D ["", [0,1,0,2,1], _atlPos, 0, 0, 0, _t, 1, 0.07, "PuristaMedium","right"];
+			};
+
 		};
 	}] call Core_addEventHandler;
 
@@ -410,17 +425,18 @@ init_function(ContextMenu_mouseArea_init)
 
 function(ContextMenu_mouseArea_handleEvent)
 {
-	params ["_mouse"];
+	params ["_mouse","_shift","_ctrl","_alt"];
 
 	if isNullReference(contextMenu_internal_energy_connector) exitwith {};
 
 	//["Связывание через контекст не реализовано в данной версии"] call showWarning;
-
+	
 	if (_mouse == MOUSE_RIGHT) exitwith {
+		if (!_ctrl) exitwith {};
 		contextMenu_internal_energy_connector = objnull;
 		contextMenu_internal_energy_toObject = objnull;
 	};
-
+	
 	[contextMenu_internal_energy_connector,contextMenu_internal_energy_toObject] call golib_en_connectObjects;
 
 	contextMenu_internal_energy_connector = objnull;
