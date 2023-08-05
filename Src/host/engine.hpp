@@ -115,6 +115,7 @@
 
 // fread subsystem
 
+//this is really need?
 #ifdef _SQFVM
 	#define DISABLE_REGEX_ON_FILE
 #endif
@@ -144,7 +145,7 @@
 	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 #endif
 
-#ifdef _SQFVM
+#ifdef __VM_VALIDATE
 	#define __vm_log(text) "debug_console" callExtension ((text)+"#1110")
 
 	#define loadFile(path) \
