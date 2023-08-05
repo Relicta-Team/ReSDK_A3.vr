@@ -36,6 +36,8 @@ __G_FLAG_BUILD = false;
 #endif
 
 {
+	call compile preprocessFile "src\host\CommonComponents\Assert.sqf";
+
 	if (!__G_FLAG_BUILD && !__G_FLAG_VALIDATE) then {
 		throwsafe("!VMUnknownVMMode");
 	};
@@ -106,7 +108,7 @@ __G_FLAG_BUILD = false;
 
 #define importClient(path) if (isNil {allClientContents}) then {allClientContents = [];}; if (client_isLocked) exitWith {__vm_log("Compile process aborted - client.isLocked == true")}; \
 	__vm_log("[LOAD] " + path); \
-	private _ctx = compile preprocessFile (path); allClientContents pushback _ctx;
+	private _ctx = compile ((preprocessFile (path))); allClientContents pushback _ctx;
 
 #include <loader.hpp>
 

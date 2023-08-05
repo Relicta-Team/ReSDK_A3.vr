@@ -178,6 +178,9 @@
 #ifdef __GH_ACTION
 	#define __vm_log(text) diag_log (text)
 #endif
+#ifdef __VM_BUILD
+	#define __vm_log(text) "debug_console" callExtension ((text)+"#1110")
+#endif
 
 //check if file exists
 #define fileExists(file) fileexists (file)
@@ -595,13 +598,58 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 #endif
 
 //assertion
-#define __COMMA__ ","
+
+//При билдинге/валидации может быть задействовано сервером. 
+//В режиме игры на клиенте и сервере срабатывает только при компиляции модулей скриптов
+
+#define __ASSERT_WEBHOOK_PREFIX__ "<@&1137382730074697728> "
+
+#define __assert_value_tostring__(val) 'val'
+
+#define __assert_runtime_file__ __FILE__
+
+#define __EVAL_PATH_VM__(filepath) (filepath) call { \
+private _arr = (tolower _this) splitString "\/"; private _ret = ""; if ("src" in _arr) then {_ret = (_arr select [(_arr find "src"),count _arr]) joinString "\" \
+} else {_ret = _this};\
+_ret} \
+
+#ifdef __VM_BUILD
+	#define __assert_runtime_file__ __EVAL(call compile '_ref = toArray __FILE__;{if (_x <= 0)then{_ref set [_foreachindex,32]}} foreach _ref; __EVAL_PATH_VM__(TOString _ref)')
+	#define __assert_value_tostring__(val) 'val'
+#endif
+#ifdef __VM_VALIDATE
+	#define __assert_runtime_file__ __EVAL(call compile '_ref = toArray __FILE__;{if (_x <= 0)then{_ref set [_foreachindex,32]}} foreach _ref; __EVAL_PATH_VM__(TOString _ref)')
+	#define __assert_value_tostring__(val) 'val'
+#endif
+
+#define __assert_static_runtime_expr1(expr) if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__] call sys_static_assert_}
+#define __assert_static_runtime_expr2(expr,message) if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__,message] call sys_static_assert_}
+#define __assert_static_compile_expr1(expr) __EVAL(__assert_static_runtime_expr1(expr))
+#define __assert_static_compile_expr2(expr,message) __EVAL(__assert_static_runtime_expr2(expr,message))
+#define __assert_runtime_expr1(expr) if !([expr] call sys_int_evalassert)exitWith {['(expr)',__assert_runtime_file__,__LINE__] call sys_assert_}
+
+//called at compile/build
+#define static_assert(expr) __assert_static_runtime_expr1(expr)
+//see static_assert
+#define static_assert_str(expr,message) __assert_static_runtime_expr2(expr,message)
+
+//called at runtime
+#define assert(expr) __assert_runtime_expr1(expr)
+
+#ifdef __VM_BUILD
+	//called at compile/build
+	#define static_assert(expr) __assert_static_compile_expr1(expr)
+	//see static_assert
+	#define static_assert_str(expr,message) __assert_static_compile_expr2(expr,message)
+#endif
+#ifdef __VM_VALIDATE
+	//called at compile/build
+	#define static_assert(expr) __assert_static_compile_expr1(expr)
+	//see static_assert
+	#define static_assert_str(expr,message) __assert_static_compile_expr2(expr,message)
+#endif
+
 #define __THIS_FILE_REPLACE__ SHORT_PATH
-#define __assert_string_convert(data) (tostring{data})
-//todo assert return bool on clinet, server and editor
-#define assert(_cond) ASSERT (_cond);if!(_cond)exitWith{__assert_error__(__assert_string_convert(_cond),__THIS_FILE_REPLACE__,__LINE__,"file")};
-#define assert_client(_cond) ASSERT (_cond);if!(_cond)exitWith{__assert_error__('<Runtime client>',__THIS_MODULE_REPLACE__,__LINE__,"module")};
-#define __assert_error__(code,modl,line__,comp__) errorformat("Assertion failed: %2%1 %5 %3%1 line %4",__COMMA__ arg code arg modl arg line__ arg comp__); __aps_on_assert_exit
 
 //Преобразование внутри файла не будет выполнено. Нужно заменить всё на всё
 #ifdef DISABLE_REGEX_ON_FILE
@@ -609,22 +657,17 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 #endif
 
 #ifdef DISABLE_ASSERT
-	#define assert(_cond)
-	#define assert_client(_cond)
-	#define __assert_error__(code,modl,line__,comp__)
-	#define __COMMA__
+	#define assert(a)
+	#define static_assert(a)
+	#define static_assert_str(a,b)
 	#define __THIS_FILE_REPLACE__
-	#define __assert_string_convert(data)
 #endif
 
 //Вне дебага все ассерты выключаются
 #ifndef DEBUG
-	#define assert(_cond)
-	#define assert_client(_cond)
-	#define __assert_error__(code,modl,line__,comp__)
-	#define __COMMA__
+	
+	
 	#define __THIS_FILE_REPLACE__
-	#define __assert_string_convert(data)
 #endif
 
 //debuging

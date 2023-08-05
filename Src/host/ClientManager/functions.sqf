@@ -270,6 +270,15 @@ cm_serverKickById = {
 		};
 	};
 
+	pre_notifClientAssert = {
+		params ["_message","_owner","_uid"];
+		private _id = (str randInt(1,1000)) + "-" + (toUpper generatePtr);
+		_message = format["%1 (ID: %2, UID: %3)",_message,_id,_uid];
+		[__ASSERT_WEBHOOK_PREFIX__ + _message] call discError;
+		[_message] call logCritical;
+		[_owner,format["Системная ошибка. Сообщите администрации в дискорде айди: %1",_id]] call cm_serverKickById;
+	};
+
 _kickself_ = {
 	params ["_owner",["_reason",""]];
 	if equals(_reason,"") then {
