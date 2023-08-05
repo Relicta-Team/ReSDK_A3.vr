@@ -68,6 +68,13 @@ def parse_line(ln):
             if llf == "":
                 llf = path
             handle_error(llf,path,line,message)
+        
+        if message.find("&SYSTEMLOG")!=-1:
+            message = re.search(r"\&SYSTEMLOG(.*)",message,re.DOTALL).group(1)
+            llf = last_loaded_file
+            if llf == "":
+                llf = path
+            handle_error(llf,path,line,message)
 
 def handle_error(errored_file,catched_path,catched_line,error_message):
     global hasErrors

@@ -41,13 +41,13 @@ set arguments=%MAIN_OPTIONS% --input-sqf %COMPILER_PATH% %MACRO_COMMON% %BUILD_T
 
 echo Args:%arguments%
 
-set buildToolsPath=%workdir%\third-party\BuildTools\
+set buildToolsPath="%workdir%\third-party\BuildTools\"
 
 if [%2] == [outputoff] (
-echo Output to file disabled - outputoff
-%vmpath% %arguments%
+	echo Output to file disabled - outputoff
+	%vmpath% %arguments%
 ) else (
-%vmpath% %arguments% | %buildToolsPath%\tee.bat %buildToolsPath%\output.txt
+	%vmpath% %arguments% | %buildToolsPath%\tee.bat %buildToolsPath%\output.txt
 )
 
 
