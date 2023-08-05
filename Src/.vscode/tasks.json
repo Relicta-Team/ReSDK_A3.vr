@@ -104,18 +104,37 @@
 			"group": "build",
 			"problemMatcher": []
 		},
+		// {
+		// 	"label": "Validate client",
+		// 	"type": "process",
+		// 	"command": "third-party\\VirtualMachine\\sqfvm.exe",
+		// 	"args": [
+		// 		"--suppress-welcome",
+		// 		"--nowarn",
+		// 		"-a",
+		// 		"--input-sqf .\\src\\client\\vm_compile.sqf",
+		// 		"-v src|src",
+		// 		"--define __FLAG_ONLY_PARSE__",
+		// 		"--define CMD__RELEASE"
+		// 	],
+		// 	"options": {
+		// 		"cwd": "${workspaceFolder}\\.."
+		// 	},
+		// 	"group": "test",
+		// 	"presentation": {
+		// 		"reveal": "always",
+		// 		"clear": true,
+		// 		"focus": true,
+		// 		"group": "SQF-VM"
+		// 	}
+		// },
 		{
 			"label": "Validate client",
 			"type": "process",
-			"command": "third-party\\VirtualMachine\\sqfvm.exe",
+			"command": "third-party\\BuildTools\\Validate.bat",
 			"args": [
-				"--suppress-welcome",
-				"--nowarn",
-				"-a",
-				"--input-sqf .\\src\\client\\vm_compile.sqf",
-				"-v src|src",
-				"--define __FLAG_ONLY_PARSE__",
-				"--define CMD__RELEASE"
+				"client",
+				"outputoff"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}\\.."
@@ -125,21 +144,16 @@
 				"reveal": "always",
 				"clear": true,
 				"focus": true,
-				"group": "SQF-VM"
+				"group": "Validate"
 			}
 		},
 		{
 			"label": "Validate server",
 			"type": "process",
-			"command": "third-party\\VirtualMachine\\sqfvm.exe",
+			"command": "third-party\\BuildTools\\Validate.bat",
 			"args": [
-				"--suppress-welcome",
-				"--nowarn",
-				"-a",
-				"-v src|src",
-				"--define __FLAG_ONLY_PARSE__",
-				"--define CMD__RELEASE",
-				"--input-sqf .\\src\\host\\vm_compile.sqf",
+				"server",
+				"outputoff"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}\\.."
@@ -149,7 +163,7 @@
 				"reveal": "always",
 				"clear": true,
 				"focus": true,
-				"group": "SQF-VM"
+				"group": "Validate"
 			}
 		},
 		{

@@ -27,6 +27,13 @@ vm_lastError = "unk_err";
 p_table_inheritance = [];
 p_table_allclassnames = [];
 
+#ifdef __VM_VALIDATE
+	__vm_log(" VM started in validate mode");
+#endif
+#ifdef __VM_BUILD
+	__vm_log(" VM started in build mode");
+#endif
+
 checkClassInheritance = {
 	
 	//p_table_inheritance

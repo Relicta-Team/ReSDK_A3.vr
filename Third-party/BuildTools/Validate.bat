@@ -2,7 +2,7 @@ echo off
 
 echo Setup env
 
-set MACRO_COMMON=-D __FLAG_ONLY_PARSE__ -D __GH_ACTION
+set MACRO_COMMON=-D __FLAG_ONLY_PARSE__ -D __GH_ACTION -D __VM_VALIDATE
 set MAIN_OPTIONS=--suppress-welcome --nowarn -a -v "src|src"
 
 if [%1] == [client] (
@@ -29,10 +29,11 @@ echo Common macro: %MACRO_COMMON%
 REM cd ..\..\
 
 set workdir=%cd%
-echo %workdir%
-
-if not exist %workdir%\third-party\VirtualMachine\sqfvm.exe (
-	echo VM executable not found: %workdir%
+echo Work directory: %workdir%
+set vmpath="%workdir%\Third-party\VirtualMachine\sqfvm.exe"
+echo Virtual machine: %vmpath%
+if not exist %vmpath% (
+	echo VM executable not found: %vmpath%
 	exit /b 1
 )
 
@@ -42,5 +43,11 @@ echo Args:%arguments%
 
 set buildToolsPath=%workdir%\third-party\BuildTools\
 
-%workdir%\third-party\VirtualMachine\sqfvm.exe %arguments% | %buildToolsPath%\tee.bat %buildToolsPath%\output.txt
+if [%2] == [outputoff] (
+echo Output to file disabled - outputoff
+%vmpath% %arguments%
+) else (
+%vmpath% %arguments% | %buildToolsPath%\tee.bat %buildToolsPath%\output.txt
+)
+
 

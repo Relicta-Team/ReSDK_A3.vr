@@ -23,6 +23,13 @@ vm_lastError = "unk_err";
 #define __vm_log(text) diag_log (text)
 #endif
 
+#ifdef __VM_VALIDATE
+	__vm_log(" VM started in validate mode");
+#endif
+#ifdef __VM_BUILD
+	__vm_log(" VM started in build mode");
+#endif
+
 {
 	private _pcontent = LOADFILE "src\private.h";
 	if (count _pcontent > 0) then {
