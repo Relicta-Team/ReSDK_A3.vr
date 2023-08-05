@@ -288,6 +288,20 @@ func(onClick)
 };
 
 
+func(getSeatRestPos)
+{
+	objParams_1(_usr);
+	
+	if equalTypes(_usr,nullPtr) then {
+		_usr = getSelf(seatListOwners) find _usr;
+	};
+	if (_usr == -1) exitWith {null};
+	
+	private _rplObj = getSelf(_seatListDummy) select _usr;
+	private _restPos = _rplObj getVariable "_restPos";
+	_restPos
+};
+
 region(Member for backward compatibility)
 /*	//кем занято место
 	var(seatOwner,nullPtr);
