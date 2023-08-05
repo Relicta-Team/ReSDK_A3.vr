@@ -458,6 +458,18 @@ Initial value:
 ""
 ```
 File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 83](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L83)
+## relicta_debug_internal_lastErrorFileLine
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+null
+```
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 84](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L84)
 ## relicta_debug_internal_postCompileProcess
 
 Type: function
@@ -516,7 +528,7 @@ Description:
 - Param: _stack
 - Param: _offset
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 85](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L85)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 86](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L86)
 ## relicta_debug_internal_serializeStackTrace
 
 Type: function
@@ -527,7 +539,7 @@ Description:
 - Param: _scope
 - Param: _varmap
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 128](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L128)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 133](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L133)
 ## relicta_debug_setlasterror
 
 Type: function
@@ -535,7 +547,7 @@ Type: function
 Description: used on halt system call
 - Param: _name
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 164](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L164)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 169](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L169)
 ## relicta_debug_internal_testErrorInternal
 
 Type: function
@@ -543,7 +555,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 169](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L169)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 174](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L174)
 ## relicta_debug_internal_testError
 
 Type: function
@@ -551,7 +563,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 176](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L176)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 181](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L181)
 # IconGenerator.sqf
 
 ## main_ExitIfError()
