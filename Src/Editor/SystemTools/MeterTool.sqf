@@ -22,6 +22,7 @@ init_function(meterTool_init)
 			_dist = meterTool_internal_startPressedPos distance _atlPos;
 			_t = format["Расстояние: %1 м",_dist];
 			drawIcon3D ["", [0,1,0,1], _atlPos, 0, 0, 0, _t, 1, 0.09, "PuristaMedium"];
+			drawIcon3D ["", [0,0.7,0,1], meterTool_internal_startPressedPos, 0, 0, 0, "Начало", 1, 0.05, "PuristaMedium"];
 		};
 	}] call Core_addEventHandler;
 }

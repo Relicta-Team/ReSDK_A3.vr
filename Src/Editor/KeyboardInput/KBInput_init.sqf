@@ -36,7 +36,7 @@ getEdenDisplay displayAddEventHandler ["KeyUp",{
 }];
 
 getEdenDisplay displayAddEventHandler ["MouseButtonUp",{
-	params ["_w","_key","_shift","_ctrl","_alt"];
+	params ["_w","_key","_xPressPos","_yPressPos","_shift","_ctrl","_alt"];
 	
 	Core_posInit_perframe_awaitInput = true;
 
