@@ -51,8 +51,7 @@ if (!isMultiplayer) then {
 } else {
     call _drpc;
 };
-
-static_assert_str(isNullVar(_drpc),"Testing client static assert");
+static_assert_str(_drpcx,"Testing client static assert");
 
 //adding remove client code
 __uiCode_onDisconnect = {
