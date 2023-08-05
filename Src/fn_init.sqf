@@ -20,6 +20,9 @@ if (fileExists("src\private.h")) then {
 if (!isMultiplayer) then {
 	call compile __pragma_preprocess ("src\host\Tools\EditorWorkspaceDebug\InternalImpl.sqf");
 };
+#else
+	//assert preinit
+	call compile __pragma_preprocess ("src\host\CommonComponents\Assert.sqf");
 #endif
 
 #ifdef EDITOR
@@ -30,6 +33,7 @@ if (!isMultiplayer) then {
 call compile __pragma_preprocess ("src\host\Logger\Logger_init.sqf");
 
 if (isMultiplayer) then {
+	static_assert_str(SERVER_PASSWORD,"Server password must be defined");
 
 	//lock server
 	SERVER_PASSWORD serverCommand "#lock";
@@ -71,7 +75,9 @@ if (isMultiplayer) then {
 #define consoleNullLine() "debug_console" callExtension ("")
 #define progLog(mes) "debug_console" callExtension (mes + "#0101"); [mes] call logInfo
 
-server_isLocked = false; // указывает может ли сервер принимать активные соединения. !Не путать с cm_isServerLocked!
+if (isMultiplayer && isNullVar(server_isLocked)) then {
+	server_isLocked = false; // указывает может ли сервер принимать активные соединения. !Не путать с cm_isServerLocked!
+};
 ["Start loading server..."] call systemLog;
 
 //Валидация включенного редактора

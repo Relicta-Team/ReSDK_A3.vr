@@ -121,6 +121,8 @@ checkClassInheritance = {
 __vm_log("Start VM compile");
 
 {
+	call compile preprocessFile "src\host\CommonComponents\Assert.sqf";
+
 	if (!__G_FLAG_BUILD && !__G_FLAG_VALIDATE) then {
 		throwsafe("!VMUnknownVMMode");
 	};

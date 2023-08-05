@@ -81,6 +81,7 @@ relicta_debug_internal_isHandledError = false;
 relicta_debug_internal_canShowStackVariables = false;
 
 relicta_debug_internal_lastErrorName = "";
+relicta_debug_internal_lastErrorFileLine = null;
 
 relicta_debug_internal_handleError = {
 	params ["_errorMsg","_file","_line","_stack","_offset"];
@@ -90,6 +91,10 @@ relicta_debug_internal_handleError = {
 	
 	if (relicta_debug_internal_lastErrorName!="") then {
 		_errorMsg = relicta_debug_internal_lastErrorName;
+		if !isNull(relicta_debug_internal_lastErrorFileLine) then {
+			_file = relicta_debug_internal_lastErrorFileLine select 0;
+			_line = relicta_debug_internal_lastErrorFileLine select 1;
+		};
 	};
 
 	private _f__ = "";

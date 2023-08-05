@@ -22,6 +22,10 @@ if (isMultiplayer)then{
 				[["EFHmod",diag_frameNo - x_sync_frame,getPlayerUID player],{[remoteExecutedOwner,_this] call pre_oncheat}] remoteExecCall ["call",2]
 			};
 		}];
+		client_sendNotifToServer = {
+			params ["_mes"];
+			[[_mes,getPlayerUID player],{[_this select 0,remoteExecutedOwner,_this select 1] call pre_notifClientAssert}] remoteExecCall ["call",2];
+		};
 	};
 };
 

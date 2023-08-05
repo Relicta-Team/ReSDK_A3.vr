@@ -42,6 +42,8 @@ if (!_canload_) exitWith {};
 
 player allowDamage false;
 
+client_sys_loaded = true; //flag for skip static asserts on client
+
 // initialization discord rpc
 _drpc = {call discrpc_init;};
 if (!isMultiplayer) then {
@@ -49,7 +51,6 @@ if (!isMultiplayer) then {
 } else {
     call _drpc;
 };
-
 
 //adding remove client code
 __uiCode_onDisconnect = {

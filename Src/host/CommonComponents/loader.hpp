@@ -9,7 +9,8 @@
 #ifdef __VM_BUILD
 	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = [];}; \
 	__vm_log("[LOAD] " + ("src\host\CommonComponents\" + path)); \
-	private _ctx = compile __pragma_prep_cli ("src\host\CommonComponents\" + path); \
+	_path = "src\host\CommonComponents\" + path; \
+	private _ctx = compile ((__pragma_prep_cli _path)); \
 	allClientContents pushback _ctx;
 #endif
 
@@ -20,6 +21,7 @@
 #endif
 
 importCommon("!PreInit.sqf");
+importCommon("Assert.sqf");
 importCommon("bitflags.sqf");
 importCommon("Animator.sqf");
 importCommon("Color.sqf");
