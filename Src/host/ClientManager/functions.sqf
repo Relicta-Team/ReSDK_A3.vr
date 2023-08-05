@@ -22,7 +22,7 @@ cm_allAwaitMobs = allUnits; //список нераспределённых мо
 
 cm_maxClients = 0; //сколько максимально клиентов подключалось
 
-#ifndef _SQFVM
+#ifndef __VM_VALIDATE
 //Быренько раскидываем указатели мобов
 _tx = table_hex;
 {

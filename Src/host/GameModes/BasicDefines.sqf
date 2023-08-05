@@ -33,6 +33,8 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 
 	getterconst_func(isVotable,true); //включение в голосование
 
+	getterconst_func(isPlayableGamemode,true); //будет ли режим доступен при выборе админом
+
 	//Значения меньше или равны нулю автоматически добавляют режим на вероятность
 	getterconst_func(getReqPlayersMin,1); //сколько должно быть игроков для этого режима
 	getterconst_func(getReqPlayersMax,999); //максимально игроков для режима
@@ -408,7 +410,7 @@ endclass
 
 editor_attribute("HiddenClass")
 class(GMStationBase) extends(GMBase)
-
+	getterconst_func(isPlayableGamemode,false);
 	var(headSecondNames,vec2("","")); //фамилия головы для мужского и женского варианта
 
 	func(preSetup)

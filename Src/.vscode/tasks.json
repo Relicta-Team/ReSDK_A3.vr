@@ -104,18 +104,37 @@
 			"group": "build",
 			"problemMatcher": []
 		},
+		// {
+		// 	"label": "Validate client",
+		// 	"type": "process",
+		// 	"command": "third-party\\VirtualMachine\\sqfvm.exe",
+		// 	"args": [
+		// 		"--suppress-welcome",
+		// 		"--nowarn",
+		// 		"-a",
+		// 		"--input-sqf .\\src\\client\\vm_compile.sqf",
+		// 		"-v src|src",
+		// 		"--define __FLAG_ONLY_PARSE__",
+		// 		"--define CMD__RELEASE"
+		// 	],
+		// 	"options": {
+		// 		"cwd": "${workspaceFolder}\\.."
+		// 	},
+		// 	"group": "test",
+		// 	"presentation": {
+		// 		"reveal": "always",
+		// 		"clear": true,
+		// 		"focus": true,
+		// 		"group": "SQF-VM"
+		// 	}
+		// },
 		{
 			"label": "Validate client",
 			"type": "process",
-			"command": "third-party\\VirtualMachine\\sqfvm.exe",
+			"command": "third-party\\BuildTools\\Validate.bat",
 			"args": [
-				"--suppress-welcome",
-				"--nowarn",
-				"-a",
-				"--input-sqf .\\src\\client\\vm_compile.sqf",
-				"-v src|src",
-				"--define __FLAG_ONLY_PARSE__",
-				"--define CMD__RELEASE"
+				"client",
+				"outputoff"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}\\.."
@@ -125,21 +144,16 @@
 				"reveal": "always",
 				"clear": true,
 				"focus": true,
-				"group": "SQF-VM"
+				"group": "Validate"
 			}
 		},
 		{
 			"label": "Validate server",
 			"type": "process",
-			"command": "third-party\\VirtualMachine\\sqfvm.exe",
+			"command": "third-party\\BuildTools\\Validate.bat",
 			"args": [
-				"--suppress-welcome",
-				"--nowarn",
-				"-a",
-				"-v src|src",
-				"--define __FLAG_ONLY_PARSE__",
-				"--define CMD__RELEASE",
-				"--input-sqf .\\src\\host\\vm_compile.sqf",
+				"server",
+				"outputoff"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}\\.."
@@ -149,231 +163,16 @@
 				"reveal": "always",
 				"clear": true,
 				"focus": true,
-				"group": "SQF-VM"
+				"group": "Validate"
 			}
 		},
 		{
-			"label": "BUILD ALL (PROD)",
+			"label": "BUILD PROJECT",
 			"type": "process",
 			"command": "ReMaker\\ReMaker.exe",
 			"args": [
-				"full",
-				"buildType=RELEASE"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}\\.."
-			},
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"clear": true,
-				"focus": true,
-				"group": "SQF-VM"
-			}
-		},
-		{
-			"label": "BUILD ALL (DEV)",
-			"type": "process",
-			"command": "ReMaker\\ReMaker.exe",
-			"args": [
-				"full",
-				"buildType=DEBUG"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}\\.."
-			},
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"clear": true,
-				"focus": true,
-				"group": "SQF-VM"
-			}
-		},
-		{
-			"label": "BUILD ALL (PROD) - Unstable",
-			"type": "process",
-			"command": "ReMaker\\ReMaker.exe",
-			"args": [
-				"full",
-				"buildType=RELEASE",
-				"unstable"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}\\.."
-			},
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"clear": true,
-				"focus": true,
-				"group": "SQF-VM"
-			}
-		},
-		{
-			"label": "BUILD ALL (DEV) - Unstable",
-			"type": "process",
-			"command": "ReMaker\\ReMaker.exe",
-			"args": [
-				"full",
-				"buildType=DEBUG",
-				"unstable"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}\\.."
-			},
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"clear": true,
-				"focus": true,
-				"group": "SQF-VM"
-			}
-		},
-		{
-			"label": "BUILD CLIENT (PROD)",
-			"type": "process",
-			"command": "ReMaker\\ReMaker.exe",
-			"args": [
-				"cli",
-				"buildType=RELEASE"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}\\.."
-			},
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"clear": true,
-				"focus": true,
-				"group": "SQF-VM"
-			}
-		},
-		{
-			"label": "BUILD CLIENT (DEV)",
-			"type": "process",
-			"command": "ReMaker\\ReMaker.exe",
-			"args": [
-				"cli",
-				"buildType=DEBUG"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}\\.."
-			},
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"clear": true,
-				"focus": true,
-				"group": "SQF-VM"
-			}
-		},
-		{
-			"label": "BUILD CLIENT (PROD) - Unstable",
-			"type": "process",
-			"command": "ReMaker\\ReMaker.exe",
-			"args": [
-				"cli",
-				"buildType=RELEASE",
-				"unstable"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}\\.."
-			},
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"clear": true,
-				"focus": true,
-				"group": "SQF-VM"
-			}
-		},
-		{
-			"label": "BUILD CLIENT (DEV) - Unstable",
-			"type": "process",
-			"command": "ReMaker\\ReMaker.exe",
-			"args": [
-				"cli",
-				"buildType=DEBUG",
-				"unstable"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}\\.."
-			},
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"clear": true,
-				"focus": true,
-				"group": "SQF-VM"
-			}
-		},
-		{
-			"label": "BUILD SERVER (PROD)",
-			"type": "process",
-			"command": "ReMaker\\ReMaker.exe",
-			"args": [
-				"srv",
-				"buildType=RELEASE"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}\\.."
-			},
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"clear": true,
-				"focus": true,
-				"group": "SQF-VM"
-			}
-		},
-		{
-			"label": "BUILD SERVER (DEV)",
-			"type": "process",
-			"command": "ReMaker\\ReMaker.exe",
-			"args": [
-				"srv",
-				"buildType=DEBUG"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}\\.."
-			},
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"clear": true,
-				"focus": true,
-				"group": "SQF-VM"
-			}
-		},
-		{
-			"label": "BUILD SERVER (PROD) - Unstable",
-			"type": "process",
-			"command": "ReMaker\\ReMaker.exe",
-			"args": [
-				"srv",
-				"buildType=RELEASE",
-				"unstable"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}\\.."
-			},
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"clear": true,
-				"focus": true,
-				"group": "SQF-VM"
-			}
-		},
-		{
-			"label": "BUILD SERVER (DEV) - Unstable",
-			"type": "process",
-			"command": "ReMaker\\ReMaker.exe",
-			"args": [
-				"srv",
-				"buildType=DEBUG",
-				"unstable"
+				"build=client",
+				"build=server"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}\\.."
