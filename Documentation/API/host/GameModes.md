@@ -13,7 +13,7 @@ Replaced value:
 ```sqf
 (if (getSelf(var__) val__ ) then {text__ + (str getSelf(var__)) + sbr} else {""})
 ```
-File: [host\GameModes\BasicDefines.sqf at line 193](../../../Src/host/GameModes/BasicDefines.sqf#L193)
+File: [host\GameModes\BasicDefines.sqf at line 195](../../../Src/host/GameModes/BasicDefines.sqf#L195)
 ## printInfoIf_Handled(val__,text__,var__,__hnd)
 
 Type: constant
@@ -28,7 +28,7 @@ Replaced value:
 ```sqf
 (if (getSelf(var__) val__ ) then {text__ + (__hnd) + sbr} else {""})
 ```
-File: [host\GameModes\BasicDefines.sqf at line 194](../../../Src/host/GameModes/BasicDefines.sqf#L194)
+File: [host\GameModes\BasicDefines.sqf at line 196](../../../Src/host/GameModes/BasicDefines.sqf#L196)
 # BasicTask.sqf
 
 ## editor_task_test

@@ -261,7 +261,7 @@ File: [host\GamemodeManager\GamemodeManager.h at line 17](../../../Src/host/Game
 
 Type: constant
 
-> Exists if **_SQFVM** defined
+> Exists if **__VM_VALIDATE** defined
 
 Description: 
 
