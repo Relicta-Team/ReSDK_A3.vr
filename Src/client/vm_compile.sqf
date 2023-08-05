@@ -23,14 +23,23 @@ vm_lastError = "unk_err";
 #define __vm_log(text) diag_log (text)
 #endif
 
+__G_FLAG_VALIDATE = false;
+__G_FLAG_BUILD = false;
+
 #ifdef __VM_VALIDATE
 	__vm_log(" VM started in validate mode");
+	__G_FLAG_VALIDATE = true;
 #endif
 #ifdef __VM_BUILD
+	__G_FLAG_BUILD = true;
 	__vm_log(" VM started in build mode");
 #endif
 
 {
+	if (!__G_FLAG_BUILD && !__G_FLAG_VALIDATE) then {
+		throwsafe("!VMUnknownVMMode");
+	};
+
 	private _pcontent = LOADFILE "src\private.h";
 	if (count _pcontent > 0) then {
 		call compile preprocessFile "src\private.h";
@@ -48,7 +57,7 @@ vm_lastError = "unk_err";
 
 	#ifdef EDITOR
 		__vm_log("		Editor macro not disabled");
-		throw "!EditorMacroError";
+		throwsafe("!EditorMacroError");
 	#endif
 
 	#ifdef RELEASE
@@ -101,6 +110,12 @@ vm_lastError = "unk_err";
 
 #include <loader.hpp>
 
+	//override vmlog again
+	#define __vm_log(text) "debug_console" callExtension ((text)+"#1110")
+	#ifdef __GH_ACTION
+	#define __vm_log(text) diag_log (text)
+	#endif
+
 	if (count allClientContents == 0) then {
 		__vm_log("Not found any client files...");
 		throwsafe("!NotFoundClientContent!");
@@ -121,6 +136,7 @@ except__
 	__vm_log(endl+endl+_m);
 	
 	#ifdef __NO_WIN32_MODE__
+	__vm_log("End process...");
 	for"_i"from 0 to 900000 do {};
 	#endif
 	
