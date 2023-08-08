@@ -219,6 +219,20 @@ function(widgetSetPosition)
 	};
 }
 
+function(widgetGetSizeFromPrecent)
+{
+	params ["_WorH","_val"];
+	if equalTypes(_WorH,"") then {
+		if (_WorH == "W") then {_WorH = 0};
+		if (_WorH == "H") then {_WorH = 1};
+	};
+	if (_WorH == 0) then {
+		precent_to_real(_val) * safezoneW + safezoneX
+	} else {
+		precent_to_real(_val) * safezoneH + safezoneY
+	};			
+}
+
 function(widgetSetPositionOnly)
 {
 	params ["_widget","_posarray",["_time",-1]];

@@ -9,7 +9,8 @@ init_function(drawNames_init)
 	drawNames_enabled = false;
 	drawNames_distance = 50; //default value
 	drawNames_const_updateDelay = 1;
-
+	
+	drawNames_internal_listNoShown = [];
 
 	drawNames_internal_lastUpdate = 0;
 
@@ -37,6 +38,7 @@ function(drawNames_internal_onFrame)
 			if ([_x,false] call golib_hasHashData) then {
 				if (isObjectHidden _x) exitwith {};
 				_class = ([_x,false] call golib_getHashData) getOrDefault ["class","<no class>"];
+				if ((tolower _class) in drawNames_internal_listNoShown) exitwith {};
 				_element = [_x,_class];
 				drawNames_internal_list_collectedOjbects pushBack _element;
 			};

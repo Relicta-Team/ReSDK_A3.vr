@@ -273,6 +273,7 @@ function(core_settings_openWinow)
 				_t = [_d,TEXT,[20,_sizeH * _i+(_sizeH/4),60,_sizeH/2],_ctg] call createWidget;
 				[_t,format["<t align='center'>%1</t>",_name]] call widgetSetText;
 				_t ctrlSetTooltip _desc;
+				_t ctrlSetTooltipMaxWidth (40 call widgetGetSizeFromPrecent);
 				_color = "#328C32" call color_HTMLtoRGBA;
 				_color set [3,0.6];
 				_t setBackgroundColor _color;
@@ -291,6 +292,7 @@ function(core_settings_openWinow)
 				_t = [_d,TEXT,[0,_sizeH * _i,85,_sizeH],_ctg] call createWidget;
 				[_t,format["<t align='left'>%1</t>",_text]] call widgetSetText;
 				_t ctrlSetTooltip _desc;
+				_t ctrlSetTooltipMaxWidth (40 call widgetGetSizeFromPrecent);
 
 				_ch = [_d,"RscCheckBox",[85,_sizeH * _i,10,_sizeH],_ctg] call createWidget;
 				core_settings_internal_list_allWidgets pushBack _ch;
@@ -316,6 +318,7 @@ function(core_settings_openWinow)
 				_t = [_d,TEXT,[0,_sizeH * _i,50,_sizeH],_ctg] call createWidget;
 				[_t,format["<t align='left'>%1</t>",_text]] call widgetSetText;
 				_t ctrlSetTooltip _desc;
+				_t ctrlSetTooltipMaxWidth (40 call widgetGetSizeFromPrecent);
 
 				_list = [_d,"RscCombo",[50,_sizeH * _i,45,_sizeH],_ctg] call createWidget;
 				core_settings_internal_list_allWidgets pushBack _list;
@@ -352,6 +355,7 @@ function(core_settings_openWinow)
 				_t = [_d,TEXT,[0,_sizeH * _i,50,_sizeH],_ctg] call createWidget;
 				[_t,format["<t align='left'>%1</t>",_text]] call widgetSetText;
 				_t ctrlSetTooltip _desc;
+				_t ctrlSetTooltipMaxWidth (40 call widgetGetSizeFromPrecent);
 
 				_inp = [_d,INPUT,[50,_sizeH * _i,50,_sizeH],_ctg] call createWidget;
 				core_settings_internal_list_allWidgets pushBack _inp;

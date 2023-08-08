@@ -95,6 +95,17 @@ core_settings_list_default = [
 				{drawNames_distance = _value}
 			]
 		],
+		["system_classNamesNoShown",
+			[
+				"Не отображаемые имена классов",
+				"Укажите список классов, которые не будут отображаться при включенном режиме отображения классов в сцене\nНапример: blockdirt,decor,candle - выключит отображение имен всех блоков земли, декораций и свечей",
+				["","input"],
+				{true},
+				{
+					drawNames_internal_listNoShown = (_value splitString ";, |") apply {tolower _x};
+				}
+			]
+		],
 		["system_enableDrawCursorOnLoad",
 			[
 				"Включить отображение курсора геометрии при загрузке редактора",
