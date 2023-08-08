@@ -35,6 +35,11 @@ class(ContainerGreen) extends(SContainer)
 	var(model,"ml_shabut\exoduss\sundugan.p3d");
 endclass
 
+editor_attribute("EditorGenerated")
+class(ContainerGreen4) extends(ContainerGreen)
+	var(model,"ml_shabut\exodus\boxuzk.p3d");
+endclass
+
 class(ContainerGreen2) extends(ContainerGreen)
 	var(name,"Деревянный ящик");
 	var(model,"ml\ml_object_new\shabbat\yashi4ek.p3d");

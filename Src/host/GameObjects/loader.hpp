@@ -123,4 +123,5 @@ loadFile("src\host\GameObjects\Decors\Decor.sqf");
 loadFile("src\host\GameObjects\Decors\Blocks\Blocks.sqf");
 loadFile("src\host\GameObjects\Decors\Ruins.sqf");
 loadFile("src\host\GameObjects\Decors\BigWalls.sqf");
+loadFile("src\host\GameObjects\Decors\Stones.sqf");
 loadFile("src\host\GameObjects\Decors\Houses.sqf");

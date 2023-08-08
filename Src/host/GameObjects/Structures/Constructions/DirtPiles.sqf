@@ -14,6 +14,17 @@ editor_attribute("TemplatePrefab")
 class(SmallDirtPile) extends(Constructions) var(name,"Куча грязи"); var(desc,"Небольшая куча грязи"); endclass
 
 editor_attribute("EditorGenerated")
+class(Grave) extends(SmallDirtPile)
+	var(model,"a3\structures_f_enoch\cultural\cemeteries\grave_11_f.p3d");
+	var(name,"Могила");
+endclass
+
+editor_attribute("EditorGenerated")
+class(DirtCraterLong) extends(SmallDirtPile)
+	var(model,"a3\structures_f_enoch\military\training\craterlong_02_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(MediumDirt) extends(SmallDirtPile)
 	var(model,"apalon\metro_a3\surfaces\gryazoookass.p3d");
 endclass

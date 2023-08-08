@@ -42,6 +42,13 @@ class(BedBase) extends(IChair)
 endclass
 
 editor_attribute("EditorGenerated")
+class(SleepingMatras) extends(BedBase)
+	var(model,"ml\ml_object_new\model_05\matras_2.p3d");
+	getter_func(getChairOffsetPos,[[0.1 arg 0 arg 0.05]]);
+	getter_func(getChairOffsetDir,90);
+endclass
+
+editor_attribute("EditorGenerated")
 class(SimpleDoubleBed) extends(BedBase)
 	var(model,"ca\buildings\furniture\bed_big_a.p3d");
 	getter_func(getChairOffsetPos,[[0.4 arg 0.05 arg 0.5] arg [-0.3 arg 0.05 arg 0.5]]);
