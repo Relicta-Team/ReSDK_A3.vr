@@ -190,7 +190,7 @@ _3745_156983760_6003429_79778 = ['Decor',[3745.16,3760.6,29.7978],0,[0,0,1], {_t
 _3755_814703764_4934129_45460 = ['SteelBrownDoor',[3755.81,3764.49,29.4546],88.9357,[0,0,1]] call InitStruct; 
 _3754_360603768_0781329_30210 = ['SteelBrownDoor',[3754.36,3768.08,29.3021],1.30685,[0,0,1]] call InitStruct; 
 _3770_044193754_4694826_60818 = ['SteelBrownDoor',[3770.04,3754.47,26.6082],2.34221,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3761.09,3765.31,30.738],270.893,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3761.09,3765.31,30.738],270.893,[0,0,1]] call InitStruct; 
 _3746_714603752_0170929_30323 = ['Decor',[3746.71,3752.02,29.3032],0,[0,0,1], {_thisObj setvariable ['model','ml\ml_object_new\ml_object_2\l01_props\stair01.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3749_064703756_1452633_17274 = ['Decor',[3749.06,3756.15,33.1727],178.537,[0,0,1], {_thisObj setvariable ['model','ml_shabut\furniture\vitoriansofa.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['ChairLibrary',[3744.51,3761.26,29.9163],221.68,[0,0,1]] call InitItem; 
@@ -1382,7 +1382,7 @@ _3823_795413904_8212923_32480 = ['Decor',[3823.8,3904.82,23.3248],0.527715,[0,0,
 ['BlackSmallStove',[3811.05,3967.09,4.76837e-007],0,[0,0,1]] call InitStruct; 
 ['LuxuryDoubleBed',[3829.49,3966.3,-4.76837e-007],0,[0,0,1]] call InitStruct; 
 ['TrashCan',[3830.49,3966.3,0],0,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3823.49,3966.3,0],0,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3823.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['BigPipePump',[3813.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['RedPappedChair',[3828.49,3966.3,0],0,[0,0,1]] call InitItem; 
 ['SteelBrownContainer',[3831.49,3966.3,0],0,[0,0,1]] call InitItem; 

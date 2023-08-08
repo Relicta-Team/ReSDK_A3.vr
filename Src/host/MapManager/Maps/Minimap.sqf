@@ -220,7 +220,7 @@ _3752_489993767_1599133_30960 = ['SteelGreenCabinet',[3752.49,3767.16,33.3096],9
 ['RedLuxuryChair',[3749.02,3756.71,29.6681],270.149,[0,0,1]] call InitStruct; 
 ['LuxuryDoubleBed',[3744.12,3766.76,33.2367],0,[0,0,1]] call InitStruct; 
 ['RedSofa',[3747.97,3763.36,29.776],90,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3761.09,3765.31,30.738],270.893,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3761.09,3765.31,30.738],270.893,[0,0,1]] call InitStruct; 
 _3769_889893759_1499030_23150 = ['ElectricalShieldSmall',[3769.89,3759.15,30.2315],181.984,[0,0,1], {go_editor_globalRefs set ['_transAdmin',_thisObj];
 }] call InitStruct; 
 _3746_100103763_0200230_53680 = ['Intercom',[3746.1,3763.02,30.5368],0.857433,[0,0,1], {go_editor_globalRefs set ['Imported Intercom47894',_thisObj];
@@ -1517,7 +1517,7 @@ _3825_639893873_6398924_99618 = ['Decor',[3825.64,3873.64,30.0322,true],291.791,
 ['Scales',[3834.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['Umivalnik',[3833.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['CaseBedroomSmall',[3824.49,3966.3,0],0,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3823.49,3966.3,0],0,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3823.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['RedPappedChair',[3828.49,3966.3,0],0,[0,0,1]] call InitItem; 
 ['LuxuryCabinet',[3821.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['BigClothCabinet',[3825.49,3966.3,0],0,[0,0,1]] call InitStruct; 

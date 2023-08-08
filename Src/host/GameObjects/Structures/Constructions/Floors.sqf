@@ -45,7 +45,7 @@ class(ThickConcreteFloorSmall) extends(SmallFloor)
 endclass
 
 editor_attribute("EditorGenerated")
-class(ThickConcerteFloorMedium) extends(ThickConcreteFloorSmall)
+class(ThickConcreteFloorMedium) extends(ThickConcreteFloorSmall)
 	var(model,"csa_constr\csa_obj\pod_18x6.p3d");
 endclass
 
@@ -71,26 +71,26 @@ class(Rail) extends(SmallFloor)
 	var(desc, "Обветшалые рельсы");
 endclass
 
-class(ConcertePanel) extends(SmallFloor)
+class(ConcretePanel) extends(SmallFloor)
 	var(name,"Бетонная плита");
 	var(model,"a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_v1_f.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
-class(ConcretePanel2) extends(ConcertePanel)
+class(ConcretePanel2) extends(ConcretePanel)
 	var(model,"a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_v2_f.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
-class(ConcretePanelDamaged) extends(ConcertePanel)
+class(ConcretePanelDamaged) extends(ConcretePanel)
 	var(model,"a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
-class(BigConcertePanel) extends(ConcertePanel)
+class(BigConcretePanel) extends(ConcretePanel)
 	var(model,"a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d");
 endclass
 editor_attribute("EditorGenerated")
-class(SmallConcretePanel) extends(ConcertePanel)
+class(SmallConcretePanel) extends(ConcretePanel)
 	var(model,"a3\structures_f_exp\infrastructure\pavements\gardenpavement_01_f.p3d");
 endclass

@@ -93,8 +93,8 @@ _4036_612064008_184084_12800 = ['SteelGreenDoor',[4036.61,4008.18,4.128],0,[0,0,
 _4034_712894004_802984_20000 = ['SteelGreenDoor',[4034.71,4004.8,4.2],275.485,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"keyback;keymaster"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['BetonTrapeciaSmall',[4035.38,4006.42,4.88616],0.939378,[0,0,1]] call InitStruct; 
 ['BetonTrapeciaSmall',[4035.12,4003.12,10.7132,true],182.922,[0,0.0861225,0.996285]] call InitStruct; 
-['ConcertePanel',[4038.78,4005.42,9.9939,true],355.413,[0.835988,0.0749653,0.543602]] call InitStruct; 
-['ConcertePanel',[4038.46,4001.86,9.99901,true],12.067,[0.822403,-0.16777,0.543605]] call InitStruct; 
+['ConcretePanel',[4038.78,4005.42,9.9939,true],355.413,[0.835988,0.0749653,0.543602]] call InitStruct; 
+['ConcretePanel',[4038.46,4001.86,9.99901,true],12.067,[0.822403,-0.16777,0.543605]] call InitStruct; 
 ['BetonTrapeciaSmall',[4036.45,4003.07,10.6655,true],182.922,[0,0.0861225,0.996285]] call InitStruct; 
 ['BetonTrapeciaSmall',[4037.89,4003.07,10.3688,true],90.907,[-0.0860692,-0.003026,0.996285]] call InitStruct; 
 _4037_181404004_369144_11875 = ['IStruct',[4037.18,4004.37,9.51643,true],87.5645,[-0.0384802,0.0395592,0.998476], {_thisObj setvariable ['model','a3\structures_f_heli\furniture\rattantable_01_f.p3d'];}] call InitStruct; // !!! realocated model !!!
