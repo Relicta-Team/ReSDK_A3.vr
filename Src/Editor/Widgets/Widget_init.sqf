@@ -111,18 +111,20 @@ menu_structureLayout = [
 			"text:Поиск в элементах на сцене;data:SearchEdit;act:;short:1569;"
 		],*/
 		["text:Интерфейс",
-			["text:Переключить иконки;act:call MouseArea_toggleIcons"],
-			["text:Переключить линии объектов;act:call MouseArea_toggleLines"],
+			"text:Переключить иконки;act:call MouseArea_toggleIcons",
+			"text:Переключить линии объектов;act:call MouseArea_toggleLines",
+			"",
 			"text:Переключить интерфейс;data:InterfaceToggle;act:with uinamespace do {'showInterface' call BIS_fnc_3DENInterface};short:14;",
 			"text:Список элементов сцены;data:InterfacePanelLeft;act:call nativePanels_onToggleLeft;short:18;",
 			"text:Библиотека объектов (АРМА3);data:InterfacePanelRight;act:call nativePanels_onToggleRight;short:19;",
 			"text:Библиотека объектов (Relicta);act:call golib_vis_onPressButtonObjLib;",
 			"text:Виджет навигации;data:InterfaceNavigationWidget;act:with uinamespace do {'navigationWidget' call BIS_fnc_3DENInterface};"
 		],
-		["text:Настройка карты",
-			"text:Переключить время суток;act:(!call rendering_isNightEnabled) call rendering_setNight",
-			"text:Переключить отображение курсора геометрии;act:['Не реализовано']call showWarning",
-			"text:Переключить отображение сетки чанков;act: call pertest_chunkViewToggle;"
+		["text:Сцена",
+			"text:Переключить отображение классов;act:(!drawNames_enabled) call drawNames_setEnable",//short:512 + 0x16
+			"text:Переключить отображение курсора геометрии;act:call geoCursor_toggle",
+			"text:Переключить отображение сетки чанков;act: call pertest_chunkViewToggle;",
+			"text:Переключить время суток;act:(!call rendering_isNightEnabled) call rendering_setNight"
 		]
 	],
 	["text:Инструменты",
@@ -201,3 +203,4 @@ menu_structureLayout = [
 #include "MouseArea.sqf"
 #include "GenericControls.sqf"
 #include "LoadingScreen.sqf"
+#include "DrawNames.sqf"

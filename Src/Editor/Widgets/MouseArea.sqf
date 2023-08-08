@@ -142,6 +142,9 @@ function(MouseArea_applyFixLostFocusAtWindow)
 	}] call Core_addEventHandler;
 }
 
+function(MouseArea_isEnabledIcons) { (get3DENIconsVisible select 0) }
+function(MouseArea_isEnabledLines) { (get3DENLinesVisible select 0) }
+
 function(MouseArea_toggleIcons)
 {
 	set3DENIconsVisible [!(get3DENIconsVisible select 0),!(get3DENIconsVisible select 1)];
@@ -151,3 +154,5 @@ function(MouseArea_toggleLines)
 {
 	set3DENLinesVisible [!(get3DENLinesVisible select 0),!(get3DENLinesVisible select 1)];
 }
+
+

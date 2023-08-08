@@ -184,7 +184,7 @@ function(menu_internal_parseLayoutElement)
 				[_item,_val] call menu_setPicture;
 			};
 			if (_name == "short") exitWith {
-				[_item,parseNumber _val] call menu_setShortcut;
+				[_item,call compile _val] call menu_setShortcut;
 			};
 			/*if (_name == "shtxt") exitWith {
 				[_item,_val] call menu_setShortcutText;

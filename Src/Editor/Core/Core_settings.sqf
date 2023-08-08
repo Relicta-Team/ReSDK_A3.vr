@@ -172,6 +172,9 @@ function(core_settings_load)
 			continue;
 		};
 		_val = [_x,"^\w+=",""] call regex_replace;
+		if ("<null>" in (tolower _val)) then {
+			setLastError("Setting error; recreate editor settings: null data for key " + _key);
+		};
 		[_key,
 			//?unsafe parsing. maybee use another method?
 			call compile _val
