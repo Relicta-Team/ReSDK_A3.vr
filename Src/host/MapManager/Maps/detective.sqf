@@ -751,8 +751,8 @@ _3706_270023659_1001018_11580 = ['SteelGreenDoor',[3706.27,3659.1,18.1158],181.4
 ['ClothCabinet',[3692.03,3672.54,24.7926],263.191,[0,0,1]] call InitStruct; 
 ['CampfireBigDisabled',[3684.08,3673.62,16.7099],0,[0,0,1]] call InitStruct; 
 ['CaseBedroomSmall',[3690.87,3674.3,23.5011],270.982,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3693.57,3671.07,19.0704],270.893,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3697.44,3670.99,19.0753],270.893,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3693.57,3671.07,19.0704],270.893,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3697.44,3670.99,19.0753],270.893,[0,0,1]] call InitStruct; 
 ['LuxuryCabinet',[3691.76,3661.83,23.5057],357.553,[0,0,1]] call InitStruct; 
 ['BigClothCabinet',[3690.34,3671.45,23.559],0,[0,0,1]] call InitStruct; 
 ['Bookcase',[3696.53,3676.14,23.559],264.71,[0,0,1]] call InitStruct; 
@@ -1044,7 +1044,7 @@ _3747_969973666_7600133_21953 = ['Decor',[3747.97,3666.76,47.2437,true],1.12027,
 ['Scales',[3834.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['Umivalnik',[3833.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['CaseBedroomSmall',[3824.49,3966.3,0],0,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3823.49,3966.3,0],0,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3823.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['RedPappedChair',[3828.49,3966.3,0],0,[0,0,1]] call InitItem; 
 ['LuxuryCabinet',[3821.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['BigClothCabinet',[3825.49,3966.3,0],0,[0,0,1]] call InitStruct; 

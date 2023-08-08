@@ -26,14 +26,14 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 	call Core_pushContext;
 
 	private _args=[ [
-		"Создать наследника "+_basicType+"|text",
+		"Создать наследника от|text",
 		"Имя класса|typename|Введите имя класса\nИмя может содержать только символы английского алфавита, цифры и нижнее подчеркивание.\nИмя должно начинаться только с нижнего подчеркивания либо буквы"
 	  ],
 		{
 			(_this splitString "|") params [["_name","ERROR_NAME"],["_t","ERROR_TYPE"],["_desc",""]];
 			if (_t == "text") then {
 				_text = [_d,TEXT,[0,10*_i,100,9.5],_ctg] call createWidget;
-				[_text,_name] call widgetSetText;
+				[_text,_name + " " +("_basicType" call Core_getContextVar) + " (перетащите класс из библиотеки для замены)"] call widgetSetText;
 			};
 			if (_t == "typename") then {
 				_text = [_d,TEXT,[0,10*_i,30,9.5],_ctg] call createWidget;
@@ -138,7 +138,11 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 
 			[[]] call inspector_menuLoad;
 		},
-		null,
+		{
+			params ["_draggedClass"];
+			["_basicType",_draggedClass] call Core_updateContextVar;
+			call golib_eventReloadArraySelector;
+		},
 		true
 	]; //call golib_openArraySelector;
 	//В следующем кадре вызов. в текущем ещё удаляется дисплей

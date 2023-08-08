@@ -117,7 +117,7 @@ function(sim_internal_processLaunchSim)
 	if (cfg_sim_startAtNight) then {
 		__systemFlags pushBack "startAtNight";
 	};
-	if (cfg_system_startWithLogVars) then {
+	if (cfg_sim_startWithLogVars) then {
 		__systemFlags pushBack "enableLogVars";
 	};
 

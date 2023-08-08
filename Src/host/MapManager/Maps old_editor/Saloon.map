@@ -933,7 +933,7 @@ _3832_953863731_1333017_50575 = ['EffectAsStruct',[3832.95,3731.13,17.5057],355.
 ['OldEngine',[3819.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['BigElectricPumpFan',[3814.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['BigPipePump',[3813.49,3966.3,0],0,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3823.49,3966.3,0],0,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3823.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['Umivalnik',[3833.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['DrumGenerator',[3816.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['CampfireBig',[3809.49,3966.3,-1.28746e-005],0,[0,0,1]] call InitStruct; 

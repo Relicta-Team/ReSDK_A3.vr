@@ -997,7 +997,7 @@ _3470_439944038_550050_00000 = ['Decor',[3470.44,4038.55,0],0,[0,0,1], {_thisObj
 ['Scales',[3834.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['Umivalnik',[3833.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['CaseBedroomSmall',[3824.49,3966.3,0],0,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3823.49,3966.3,0],0,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3823.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['RedPappedChair',[3828.49,3966.3,0],0,[0,0,1]] call InitItem; 
 ['LuxuryCabinet',[3821.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['BigClothCabinet',[3825.49,3966.3,0],0,[0,0,1]] call InitStruct; 

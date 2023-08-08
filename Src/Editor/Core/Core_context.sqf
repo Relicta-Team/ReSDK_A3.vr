@@ -72,6 +72,15 @@ function(Core_getContextVar)
 	core_internal_contextData get _varName
 }
 
+function(Core_updateContextVar)
+{
+	params ["_varname","_varval"];
+	private _varName = tolower _varname;
+	if !(_varName in core_internal_contextData) exitWith {false};
+	core_internal_contextData set [_varname,_varval];
+	true
+}
+
 function(Core_callContext)
 {
 	if equalTypes(_this,[]) then {

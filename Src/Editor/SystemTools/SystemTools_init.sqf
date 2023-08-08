@@ -13,3 +13,4 @@
 #include "PerformanceObjectsTest.sqf"
 #include "Rendering.sqf"
 #include "MeterTool.sqf"
+#include "GeometryCursor.sqf"
