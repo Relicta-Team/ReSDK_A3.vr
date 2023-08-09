@@ -376,15 +376,40 @@ addCommand("nvg",ACCESS_OWNERS)
 	};
 };
 
-addCommand("newmob",ACCESS_OWNERS)
+addCommandWithDescription("newmob",ACCESS_OWNERS,"Опциональные аргументы: role=RHead type=Mob; role - роль с которой будет выдана экипировка. type - тип создаваемой сущности. Пример: newmob role=RCaretaker")
 {
-	if (!isMultiplay) exitwith {};
+	checkIfMobExists();
+	if (isMultiplayer) exitwith {};
 
 	private _pos = (call interact_getIntersectData) select 1;
 	if equals(_pos,vec3(0,0,0)) exitwith {};
+	
+	private _instance = "Mob";
+	private _role = "";
+
+	private _argv = args splitString "=;, ";
+	for "_i" from 0 to (count _argv) - 1 step 2 do {
+		_curit = _argv select _i;
+		if (_i + 1 > ((count _argv) -1)) exitwith {};
+		_curval = _argv select (_i + 1);
+		if (_curit == "role") then {
+			if isImplementClass(_curval) then {
+				if isTypeNameOf(_curval,BasicRole) then {
+					_role = _curval;
+				};
+			};
+		};
+		if (_curit == "type") then {
+			if isImplementClass(_curval) then {
+				if isTypeNameOf(_curval,BasicMob) then {
+					_instance = _curval;
+				};
+			};
+		};
+	};
 
 	private _gMob = _pos call gm_createMob;
-	private _mob = new(Mob);
+	private _mob = instantiate(_instance);
 	callFuncParams(_mob,initAsActor,_gMob);
 	[_mob,8,10,8,12] call gurps_initSkills;
 	setVar(_mob,name,"Существо");
@@ -394,6 +419,29 @@ addCommand("newmob",ACCESS_OWNERS)
 	smd_allInGameMobs pushBackUnique _gMob;
 	callFuncParams(_mob,setMobFace,pick faces_list_man);
 	setVar(_mob,curTargZone,TARGET_ZONE_RANDOM);
+
+	//fix initpos for new entity
+	callFuncParams(_mob,setInitialPos,_pos);
+	
+	//setup previous entity initpos
+	callFuncParams(this,setInitialPos,callFunc(this,getPos));
+
+	if (_role != "") then {
+		private _robj = _role call gm_getRoleObject;
+		if !isNullReference(_robj) then {
+			callFuncParams(_robj,getEquipment,_mob);
+		};
+	};
+};
+
+addCommandWithDescription("playtarget",ACCESS_OWNERS,"Перейти за другую сущность на которую вы нацелены")
+{
+	checkIfMobExists();
+	private _data = (["target",""] call oop_getData) select 0;
+	if !isReference(_data) exitwith {};
+	if !isTypeOf(_data,BasicMob) exitwith {};
+
+	[this,_data] call cm_switchToMob;
 };
 
 
