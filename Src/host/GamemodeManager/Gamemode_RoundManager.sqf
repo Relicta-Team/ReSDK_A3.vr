@@ -1492,6 +1492,7 @@ gm_createMob = {
 	private _tx = table_hex;
 	_mob setvariable ["voiceptr",pick _tx + pick _tx + pick _tx + pick _tx + pick _tx + pick _tx,true]; //generator pointers for voice system
 	removeUniform _mob;
+	assert(uniform _mob == "");
 	//_mob action ["SwitchWeapon", _mob, _mob, 100];
 	//_mob switchmove "amovpercmstpsnonwnondnon";
 	if equals(_pos,0) exitWith {_mob};
