@@ -11,6 +11,8 @@
 class(SignBar) extends(StreetLampEnabled)
 	var(name,"Бар");
 	var(desc,"Знаменитый Бар ""Кабак""! Эта вывеска так приятно переливается своими цветами и будто зазывает каждого прохожего внутрь.");
+	editor_attribute("EditorVisible" arg "type:string") editor_attribute("Tooltip" arg "Описание таблички в выключенном состоянии")
+	var(descDisabled,"Знаменитый Бар ""Кабак""! Судя по отсуствию красивой подсветки заведение сейчас не работает.");
 	var(light,LIGHT_SIGN_BAR);
 	var(edIsEnabled,true);
 	var(edReqPower,80);
@@ -23,15 +25,12 @@ class(SignBar) extends(StreetLampEnabled)
 		private _buf = "";
 		private _output = "";
 		// Не самое элегантное решение, но чтобы не заморачиваться можно и так оставить
-		if !getSelf(edIsUsePower) then {
-			_output = "Знаменитый Бар ""Кабак""! Судя по отсуствию красивой подсветки заведение сейчас не работает.";
-			_buf = callSelf(getDesc);
-			setSelf(desc,_output);
-			_output = callSuper(StreetLampEnabled,getDescFor);
-			setSelf(desc,_buf);
-			_output
+		if !getSelf(edIsEnabled) then {
+			private _desc = getSelf(descDisabled);
+			if (isNullVar(_desc) || {_desc == ""}) exitWith {super()};
+			_desc
 		} else {
-			callSuper(StreetLampEnabled,getDescFor)
+			super();
 		};
 
 	};
