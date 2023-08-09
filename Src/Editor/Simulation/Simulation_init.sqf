@@ -35,6 +35,10 @@ function(sim_openMapSelector)
 		};
 	} foreach (call gm_getAllGamemodeObjects);
 
+	if (count _allowedModes == 0) exitWith {
+		[format["Для карты %1 не существует режима. Сгенерируйте его в меню ''Инструменты'' - (Создать режим)","missionName" call golib_getCommonStorageParam],10] call showError;
+	};
+
 	if (!_selectFromAllModes && count _allowedModes == 1) exitwith {
 		[_allowedModes select 0] call sim_onStartFromSelectedMode;
 	};
