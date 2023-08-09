@@ -100,8 +100,18 @@ function(golib_om_placeObjectAtMouse)
 	{
 		_screenToWorldPos = screenToWorld getMousePosition;
 		([_screenToWorldPos] call golib_om_getRayCastData) params ["_obj","_atlPos"];
-		if equals(_atlPos,vec3(0,0,0)) then {_atlPos = _screenToWorldPos};
+		if equals(_atlPos,vec3(0,0,0)) then {
+			["atl pos is zerovec"] call printTrace;
+			_atlPos = _screenToWorldPos;
+		};
+
 		_obj = create3DENEntity ["Object",_cfg, _atlPos];
+		_emplacedPos = _obj call golib_om_getPosition;
+		if (_emplacedPos distance _atlPos >= 2) then {
+			["Fixed position"] call printTrace;
+			// История судя по всему не работает в этом же фрейме, в котором объект создан
+			[_obj,_atlPos,false,golib_history_skippedHistoryStageFlag + " - fixpos"] call golib_om_setPosition;
+		};
 		[_obj,_gameObject] call golib_initHashData;
 		
 		[_obj] call golib_om_internal_handleTransformEvent;
