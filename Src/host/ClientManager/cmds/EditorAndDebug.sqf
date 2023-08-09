@@ -420,12 +420,28 @@ addCommandWithDescription("newmob",ACCESS_OWNERS,"Опциональные ар�
 	callFuncParams(_mob,setMobFace,pick faces_list_man);
 	setVar(_mob,curTargZone,TARGET_ZONE_RANDOM);
 
+	//fix initpos for new entity
+	callFuncParams(_mob,setInitialPos,_pos);
+	
+	//setup previous entity initpos
+	callFuncParams(this,setInitialPos,callFunc(this,getPos));
+
 	if (_role != "") then {
 		private _robj = _role call gm_getRoleObject;
 		if !isNullReference(_robj) then {
 			callFuncParams(_robj,getEquipment,_mob);
 		};
 	};
+};
+
+addCommandWithDescription("playtarget",ACCESS_OWNERS,"Перейти за другую сущность на которую вы нацелены")
+{
+	checkIfMobExists();
+	private _data = (["target",""] call oop_getData) select 0;
+	if !isReference(_data) exitwith {};
+	if !isTypeOf(_data,BasicMob) exitwith {};
+
+	[this,_data] call cm_switchToMob;
 };
 
 
