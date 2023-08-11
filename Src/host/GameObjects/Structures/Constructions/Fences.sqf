@@ -14,6 +14,12 @@ editor_attribute("TemplatePrefab")
 class(SmallFence) extends(Constructions) var(name,"Ограда"); var(desc,"Небольшие заборы и ограды" pcomma " которые можно разрушить"); endclass
 
 editor_attribute("EditorGenerated")
+class(SmallGridWithWoodenFrame) extends(SmallFence)
+	var(model,"a3\structures_f_enoch\walls\net\gameprooffence_01_l_gate_f.p3d");
+	var(name,"Решётка с деревянной рамой");
+endclass
+
+editor_attribute("EditorGenerated")
 class(RustyCell) extends(SmallFence)
 	var(model,"ml_shabut\exodus\kaleetka.p3d");
 endclass
