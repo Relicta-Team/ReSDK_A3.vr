@@ -93,15 +93,15 @@
 //закрытие потока программы
 #define ___appexitstr(value) #value
 #define appExit(exitCode) logformat("Application exited. Reason: %1 (%2)",exitCode arg __appexit_listreasons select exitCode); if (!isMultiplayer) then {client_isLocked = true; server_isLocked = true; endMission "END1";} else {if (isServer) then {server_isLocked = true} else {client_isLocked = true}}
-	#define __appexit_listreasons ["APPEXIT_REASON_EXIT" \
-	,"APPEXIT_REASON_CRITICAL" \
-	,"APPEXIT_REASON_DOUBLEDEF" \
-	,"APPEXIT_REASON_UNDEFINEDMODULE" \
-	,"APPEXIT_REASON_COMPILATIOEXCEPTION" \
-	,"APPEXIT_REASON_RUNTIMEERROR" \
-	,"APPEXIT_REASON_ASSERTION_FAIL" \
-	,"APPEXIT_REASON_EXTENSION_ERROR" \
-	]
+	#define __appexit_listreasons (["EXIT" \
+	,"CRITICAL" \
+	,"DOUBLEDEF" \
+	,"UNDEFINEDMODULE" \
+	,"COMPILATIOEXCEPTION" \
+	,"RUNTIMEERROR" \
+	,"ASSERTION_FAIL" \
+	,"EXTENSION_ERROR" \
+	])apply{"APPEXIT_REASON_"+_x}
 
 	#define APPEXIT_REASON_EXIT 0
 	#define APPEXIT_REASON_CRITICAL 1
