@@ -5,6 +5,8 @@
 
 #include "..\..\host\engine.hpp"
 #include "..\..\host\oop.hpp"
+#include "..\..\host\text.hpp"
+#include "..\..\host\keyboard.hpp"
 #include <..\WidgetSystem\widgets.hpp>
 #include <..\Inventory\helpers.hpp>
 

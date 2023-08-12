@@ -7,6 +7,15 @@
 
 #define SC_SIZE_W 40
 #define SC_SIZE_H 30
+#define CD_MAX_COMMANDS_HISTORY_COUNT 100
+
+cd_commandHistoryBuffer = [];
+
+// #ifdef DEBUG
+// for "_i" from 1 to 20 do {
+// 	cd_commandHistoryBuffer pushBack ("command " + (str _i));
+// };
+// #endif
 
 //Открывает окно отправки сообщения на сервер
 cd_openSendCommandWindow = {
@@ -54,7 +63,13 @@ cd_openSendCommandWindow = {
 			};	
 			if (_data != "") then {
 				_args = [_data,player];
+				cd_commandHistoryBuffer pushBack _data;
+
 				rpcSendToServer("processClientCommand",_args);
+
+				if (count cd_commandHistoryBuffer > CD_MAX_COMMANDS_HISTORY_COUNT) then {
+					cd_commandHistoryBuffer deleteAt 0;	
+				};
 			};
 
 		} else {
@@ -70,7 +85,83 @@ cd_openSendCommandWindow = {
 
 	ctrlSetFocus _input;
 
+	//commands history
+	_d setVariable ["_input",_input];
+	_d displayAddEventHandler ["KeyDown",{
+		_wid = _this select 0;
+		_key = _this select 1;
+		_locked = false;
+		_input = _wid getvariable "_input";
+		
+		//fix lobby bypass logic
+		if not_equals(focusedCtrl _wid,_input) exitwith {false};
 
+		_bufidx = _input getvariable ["cmdhistidx",count cd_commandHistoryBuffer -1];
+		if (_key == KEY_UP) then {
+			DEC(_bufidx);
+			_locked = true;
+		};
+		if (_key == KEY_DOWN) then {
+			INC(_bufidx);
+			_locked = true;
+		};
+		if (!_locked) exitwith {false};
+
+		if (_bufidx >= 0 && _bufidx <= (count cd_commandHistoryBuffer-1)) then {
+			_input ctrlsettext (cd_commandHistoryBuffer select _bufidx);
+			_input setvariable ["cmdhistidx",_bufidx];
+		};
+		if (_locked) then {
+			true
+		} else {false};
+	}];
+
+	//list commands
+	#ifdef EDITOR
+	//TODO: fixme - in lobby ctg2 created on maingroup
+	(_ctg call widgetGetPosition)params["_baseX","_baseY","_baseW","_baseH"];
+	_ctg2 = [_d,WIDGETGROUP,[_baseX,_baseY+_baseH,_baseW,_baseY]] call createWidget;
+	_input setvariable ["_searchCtg",_ctg2];
+	_back = [_d,TEXT,WIDGET_FULLSIZE,_ctg2] call createWidget;
+	_back setBackgroundColor [0.1,0.1,0.1,0.4];
+	_ctg2 setvariable ["_back",_back];
+	_input ctrlAddEventHandler ["KeyUp",{
+		_b = _this select 0;
+		_key = _this select 1;
+		_moder = 0;
+		if (_key == KEY_UP) then {
+			_moder = -1;
+		};
+		if (_key == KEY_DOWN) then {
+			_moder = 1;
+		};
+		_cur = _b getvariable ["curidx",0];
+
+		_ctg2 = _b getvariable "_searchCtg";
+		_back = _ctg2 getvariable "_back";
+		_inputed = tolower (ctrlText _b) splitString " " joinString "";
+		_text = [];
+		{
+			if (_inputed in _x) then {
+				// _maxLen = selectMax ((keys cm_commands_map) apply {count _x});
+				// _need = (_maxLen - count _x);
+				// _spaces = ""; for "_i" from 1 to _need do {_spaces = _spaces + " "};
+				_spaces = "        ";
+				_text pushBack (format["<t color='#00AF64'>%1</t>%3%2",_x,sanitize(_y select 1),_spaces]);
+			};
+		} foreach cm_commands_map;
+
+		_cur = _cur max 0 min (count _text - 1);
+		_cur = _cur + _moder;
+		_b setvariable ["curidx",_cur];
+		if (count _text > 0) then {
+			_text set [_cur,format["<t color='#00B00C'>%1</t>",sanitizeHTML(_text select _cur)]];
+		};
+		
+
+		[_back,_text joinString sbr] call widgetSetText;
+	}];
+	#endif
 };
 
 cd_closeSendCommandWindow = {
