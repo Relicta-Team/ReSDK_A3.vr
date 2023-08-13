@@ -12,3 +12,8 @@
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
 class(SmallGarbage) extends(Constructions) var(name,"Куча мусора"); var(desc,"Небольшая куча мусора"); endclass
+editor_attribute("EditorGenerated")
+class(BigPileBurntGarbage) extends(SmallGarbage)
+	var(model,"a3\props_f_enoch\military\garbage\burntgarbage_01_f.p3d");
+	var(name,"Куча мусора");
+endclass

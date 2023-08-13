@@ -20,6 +20,13 @@ class(WoodenDoor) extends(DoorDynamic)
 	var(stBreakBonus,0);
 endclass
 
+editor_attribute("EditorGenerated")
+class(WoodenGridDoor) extends(WoodenDoor)
+	var(model,"Land_GameProofFence_01_l_gate_F");
+	var(name,"Калитка");
+	getter_func(animateData,[["door_1_rot" arg 1.5 arg 2.5]]);
+endclass
+
 
 class(WoodenDoubleDoor) extends(DoorDynamic)
 	var(name,"Деревянная двойная дверь");

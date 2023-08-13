@@ -14,6 +14,36 @@ editor_attribute("TemplatePrefab")
 class(SmallWall) extends(Constructions) var(name,"Стена"); var(desc,"Маленькие стена" pcomma " которую можно разрушить"); endclass
 
 editor_attribute("EditorGenerated")
+class(MediumLightWall) extends(SmallWall)
+	var(model,"a3\structures_f_argo\walls\city\wallcity_01_4m_plain_grey_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(LargeConcreteWallWithReinforcement) extends(SmallWall)
+	var(model,"a3\structures_f\walls\canal_wallsmall_10m_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumRuinedWhiteConcreteWall) extends(SmallWall)
+	var(model,"a3\structures_f_argo\walls\city\wallcity_01_8m_dmg_whiteblue_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumWhiteConcreteWall) extends(SmallWall)
+	var(model,"a3\structures_f_argo\walls\city\wallcity_01_8m_plain_whiteblue_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumWoodenWall) extends(SmallWall)
+	var(model,"ml_shabut\sbs\woodstenka.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
 class(PlywoodThinWall) extends(SmallWall)
 	var(model,"ml_exodusnew\fanerka_vata.p3d");
 endclass

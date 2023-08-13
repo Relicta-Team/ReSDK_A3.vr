@@ -47,6 +47,14 @@ class(IChairAsItem) extends(ItemBaseChair)
 	};
 endclass
 
+editor_attribute("EditorGenerated")
+class(StumpChair) extends(IChairAsItem)
+	var(model,"a3\props_f_enoch\civilian\forest\woodenlog_02_f.p3d");
+	var(name,"Пенёк");
+	getterconst_func(getChairOffsetPos,vec3(0,-0.1,-0.25));
+	var(weight,15);
+endclass
+
 
 class(SmallChair) extends(IChairAsItem)
 	var(icon,invicon(brownchair));
