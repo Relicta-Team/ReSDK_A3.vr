@@ -14,6 +14,48 @@ editor_attribute("TemplatePrefab")
 class(BasicPipe) extends(Constructions) var(name,"Труба"); var(desc,"Обычная разрушаемая труба"); endclass
 
 editor_attribute("EditorGenerated")
+class(BigPilePipes) extends(BasicPipe)
+	var(model,"a3\structures_f\civ\constructions\ironpipes_f.p3d");
+	var(name,"Трубы");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PipeCutOnSupportingStructure) extends(BasicPipe)
+	var(model,"a3\structures_f_exp\industrial\sugarcanefactory_01\scf_01_pipe_8m_high_f.p3d");
+	var(name,"Труба");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SmallDestroyedCornerPipe) extends(BasicPipe)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_45degl.p3d");
+	var(name,"Разрушенная труба");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumRuinedPipe) extends(BasicPipe)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_valve.p3d");
+	var(name,"Разрушенная труба");
+endclass
+
+editor_attribute("EditorGenerated")
+class(LongDestroyedPipeWithSupportingStructure) extends(BasicPipe)
+	var(model,"a3\structures_f_exp\industrial\sugarcanefactory_01\scf_01_pipe_24m_f.p3d");
+	var(name,"Разрушенная труба");
+endclass
+
+editor_attribute("EditorGenerated")
+class(LargeDestroyedVerticalPipe) extends(BasicPipe)
+	var(model,"a3\structures_f_exp\industrial\sugarcanefactory_01\scf_01_pipe_up_f.p3d");
+	var(name,"Разрушенная труба");
+endclass
+
+editor_attribute("EditorGenerated")
+class(DestroyedPipeWithValve) extends(BasicPipe)
+	var(model,"a3\structures_f_exp\industrial\sugarcanefactory_01\scf_01_pipe_end_f.p3d");
+	var(name,"Разрушенная труба с вентилем");
+endclass
+
+editor_attribute("EditorGenerated")
 class(SmallConcretePipe) extends(BasicPipe)
 	var(model,"ca\structures_e\misc\misc_construction\misc_concoutlet_ep1.p3d");
 endclass
