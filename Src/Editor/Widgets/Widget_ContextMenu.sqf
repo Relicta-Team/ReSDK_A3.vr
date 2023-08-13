@@ -44,6 +44,9 @@ function(contextMenu_create) {
 
 	if (call contextMenu_isOpened) exitwith {setLastError(__FUNC__ + " - Context menu already opened.")};
 
+	ContextMenu_internal_openedMousePos = call mouseGetPosition;
+	ContextMenu_internal_openedMousePosNative = getMousePosition;
+
 	private _d = getEdenDisplay createDisplay "RscDisplayEmpty";
 	{_x ctrlShow false} foreach (allControls _d);
 	
@@ -218,11 +221,50 @@ function(contextMenu_internal_showCat)
 function(ContextMenu_loadMouseObject)
 {
 	private _obj = get3DENMouseOver;
-	if (count _obj == 0) exitWith {};
-	if ((_obj select 0)!= "Object") exitWith {};
-	_obj = _obj select 1;
+	private _hasObject = false;
+	if (count _obj > 0 && (_obj select 0)== "Object") then {
+		_hasObject = true;
+		_obj = _obj select 1;
+	};
+	//second check 
+	if (!_hasObject) then {
+		_screenToWorldPos = screenToWorld getMousePosition;
+		([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR"];
+		if !isNullReference(_objR) then {
+			_obj = _objR;
+			_hasObject = true;
+		};
+	};
 	_stackMenu = [["Отмена",{}]];
 	private _ctxParams = [_obj];
+
+	private _commonSimStart = {
+		_stackMenu pushBack ["Запустить симуляцию отсюда",{
+			_obj = (call contextMenu_getContextParams) select 0;
+			_screenToWorldPos = screenToWorld ContextMenu_internal_openedMousePosNative;
+			([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR","_atlPos"];
+			if equals(_atlPos,vec3(0,0,0)) then {_atlPos = getposatl get3DENCamera};
+			// if not_equals(_obj,_objR) then {
+			// 	["Несоответствие точки старта симуляции."] call printWarning;
+			// 	["Object1: %1; Object2: %2",_obj,_objR] call printTrace;
+			// };
+
+			private _params = [false,true];
+			sim_internal_lastCachedTransform = [_atlPos,getDir get3DENCamera];
+			nextFrameParams(sim_openMapSelector,_params);
+		}];
+	};
+	private _commonCheckDistance = {
+		_stackMenu pushBack ["Измерить расстояние",{
+			_obj = (call contextMenu_getContextParams) select 0;
+			_screenToWorldPos = screenToWorld ContextMenu_internal_openedMousePosNative;
+			([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR","_atlPos"];
+			if equals(_atlPos,vec3(0,0,0)) then {_atlPos = _screenToWorldPos};
+			[_atlPos] call meterTool_onActivate;
+		}];
+	};
+	
+	if (!_hasObject) exitwith {};
 	
 	if !(_obj call golib_hasHashData) exitWith {};
 
@@ -239,20 +281,7 @@ function(ContextMenu_loadMouseObject)
 		]
 	};
 
-	_stackMenu pushBack ["Запустить симуляцию отсюда",{
-		_obj = (call contextMenu_getContextParams) select 0;
-		_screenToWorldPos = screenToWorld getMousePosition;
-		([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR","_atlPos"];
-		if equals(_atlPos,vec3(0,0,0)) then {_atlPos = _screenToWorldPos};
-		if not_equals(_obj,_objR) exitwith {
-			["Несоответствие точки старта симуляции. Повторите попытку"] call printWarning;
-			["Object1: %1; Object2: %2",_obj,_objR] call printTrace;
-		};
-
-		private _params = [false,true];
-		sim_internal_lastCachedTransform = [_atlPos,getDir get3DENCamera];
-		nextFrameParams(sim_openMapSelector,_params);
-	}];
+	call _commonSimStart;
 
 	_stackMenu pushBack [
 		"Создать префаб (новый класс)",
@@ -339,13 +368,7 @@ function(ContextMenu_loadMouseObject)
 		];
 	};
 
-	_stackMenu pushBack ["Измерить расстояние",{
-		_obj = (call contextMenu_getContextParams) select 0;
-		_screenToWorldPos = screenToWorld getMousePosition;
-		([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR","_atlPos"];
-		if equals(_atlPos,vec3(0,0,0)) then {_atlPos = _screenToWorldPos};
-		[_atlPos] call meterTool_onActivate;
-	}];
+	call _commonCheckDistance;
 
 	_stackMenu pushBack ["<t size='0.9'>Открыть редактор позиций модели</t>",{nextFrameParams(vcom_relposEditorOpen,(call contextMenu_getContextParams) select 0)}];
 	_stackMenu pushBack ["Открыть редактор эмиттеров",{
@@ -377,6 +400,9 @@ function(ContextMenu_loadMouseObject)
 
 init_function(ContextMenu_mouseArea_init)
 {
+	ContextMenu_internal_openedMousePos = [0,0];
+	ContextMenu_internal_openedMousePosNative = [0,0];
+
 	["onMouseAreaPressed",ContextMenu_mouseArea_handleEvent] call Core_addEventHandler;
 	["onFrame",{
 		if !isNullReference(contextMenu_internal_energy_connector) then {

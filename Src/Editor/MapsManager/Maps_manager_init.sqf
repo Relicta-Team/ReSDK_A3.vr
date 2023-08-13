@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
+mm_use_alg2_vdir_check = true; // дополнительная валидация сериализации поворота/трансформации объекта
 
 mm_folderSaveMaps = getMissionPath "src\host\MapManager\Maps\";
 mm_internal_defaultMapExt = ".sqf";
