@@ -14,6 +14,24 @@ editor_attribute("TemplatePrefab")
 class(SmallFence) extends(Constructions) var(name,"Ограда"); var(desc,"Небольшие заборы и ограды" pcomma " которые можно разрушить"); endclass
 
 editor_attribute("EditorGenerated")
+class(SmallCornerFenceMadeOfJunk) extends(SmallFence)
+	var(model,"ml_shabut\ferrum\xlamfence2.p3d");
+	var(name,"Забор");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumFenceOfSheetsAndBoards) extends(SmallFence)
+	var(model,"ml_shabut\stalker_props\woodbyatch.p3d");
+	var(name,"Ограда из мусора");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SmallFenceMadeOfSticks) extends(SmallFence)
+	var(model,"a3\structures_f_enoch\walls\polewalls\polewall_02_3m_v2_f.p3d");
+	var(name,"Ограда");
+endclass
+
+editor_attribute("EditorGenerated")
 class(SmallGridWithWoodenFrame) extends(SmallFence)
 	var(model,"a3\structures_f_enoch\walls\net\gameprooffence_01_l_gate_f.p3d");
 	var(name,"Решётка с деревянной рамой");

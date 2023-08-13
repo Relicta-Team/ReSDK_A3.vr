@@ -14,6 +14,12 @@ editor_attribute("TemplatePrefab")
 class(SmallFloor) extends(Constructions) var(name,"Пол"); var(desc,"Обычное напольное покрытие"); endclass
 
 editor_attribute("EditorGenerated")
+class(LongRottenBoards) extends(SmallFloor)
+	var(model,"a3\structures_f_exp\civilian\accessories\plank_01_8m_f.p3d");
+	var(name,"Доски");
+endclass
+
+editor_attribute("EditorGenerated")
 class(SmallOldWell) extends(SmallFloor)
 	var(model,"a3\structures_f_enoch\civilian\accessories\stonewell_01_f.p3d");
 	var(name,"Старый колодец");
