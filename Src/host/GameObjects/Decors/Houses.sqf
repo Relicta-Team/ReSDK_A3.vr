@@ -20,7 +20,7 @@ endclass
 editor_attribute("EditorGenerated")
 class(MediumClayHouse) extends(BigHouse)
 	var(model,"ca\structures_e\housel\house_l_9_ep1.p3d");
-	var(name,"Глинянный барак");
+	var(name,"Глиняный барак");
 endclass
 
 editor_attribute("EditorGenerated")
