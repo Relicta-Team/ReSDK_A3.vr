@@ -327,9 +327,35 @@ function(mm_handleObjectSave)
 		//if equals((__probNewDir select 2)toFixed 1,"-1") then {
 		// THIS IS ACTUAL ALGORITHM OF VECDIR COLLECT DATA ON OBJECTS
 		_zPosVDir = parseNumber((__probNewDir select 2) toFixed 1);
-		if (_zPosVDir <= -0.85 || _zPosVDir >= 0.85) then {
+		
+		private _editedVdir = false;
+		if equalTypes(_vdir,"") then {_editedVdir = true}; //if rdir enabled then do not override vdir 
+
+		if (_zPosVDir <= -0.85 || _zPosVDir >= 0.85 && !_editedVdir) then {
 			_vdir = __probNewDir;
+			_editedVdir = true;
 			eden_debug_vuplist pushBack _obj;
+		};
+
+		//---------- rule2 transform serialization check 
+		if (mm_use_alg2_vdir_check) then {
+			private _transformVec = _obj call core_getPitchBankYaw;//do not use relative transform: _obj call golib_om_getRotation;
+			//if (!_editedVdir && {(_transformVec select [0,2] apply {(abs _x) toFixed 0}) isNOTEQUALTO ["0","0"]}) then {
+			if (!_editedVdir && {{_x=="0"}count(_transformVec apply {(abs _x) toFixed 0})<2 }) then {
+				//post comparator rule: 2 fixed elements equals
+				private _tempRes = 0;
+				private _cmparr = _transformVec apply {_tempRes=parseNumber(abs _x toFixed 0);ifcheck(_tempRes<=2,"0",_tempRes toFixed 0)};
+				private _condit = false;
+				{
+					private _thisX = _x;
+					if ({_x == _thisX}count _cmparr >= 2) exitwith {_condit = true};
+				} foreach _cmparr;
+				if (_condit) exitwith {}; //exit from vdir check scope
+
+				_vdir = __probNewDir;//(str __probNewDir) +"/* "+str _cmparr+" */" ;
+				_editedVdir = true;
+				eden_debug_vuplist pushBack _obj;
+			};
 		};
 
 	_addictPost = "";

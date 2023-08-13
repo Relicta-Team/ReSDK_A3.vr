@@ -61,7 +61,7 @@ Replaced value:
 ```sqf
 [0,0]
 ```
-File: [client\ClientData\ClientData.sqf at line 41](../../../Src/client/ClientData/ClientData.sqf#L41)
+File: [client\ClientData\ClientData.sqf at line 43](../../../Src/client/ClientData/ClientData.sqf#L43)
 ## printerr(code,text)
 
 Type: constant
@@ -74,7 +74,7 @@ Replaced value:
 ```sqf
 if (_code == code) exitWith {[text] call (getDisplay getVariable ["printError",{}])}
 ```
-File: [client\ClientData\ClientData.sqf at line 488](../../../Src/client/ClientData/ClientData.sqf#L488)
+File: [client\ClientData\ClientData.sqf at line 490](../../../Src/client/ClientData/ClientData.sqf#L490)
 ## cd_clientName
 
 Type: Variable
@@ -86,7 +86,7 @@ Initial value:
 ```sqf
 ""
 ```
-File: [client\ClientData\ClientData.sqf at line 38](../../../Src/client/ClientData/ClientData.sqf#L38)
+File: [client\ClientData\ClientData.sqf at line 40](../../../Src/client/ClientData/ClientData.sqf#L40)
 ## cd_charName
 
 Type: Variable
@@ -98,7 +98,7 @@ Initial value:
 ```sqf
 "Обитатель Сети"
 ```
-File: [client\ClientData\ClientData.sqf at line 39](../../../Src/client/ClientData/ClientData.sqf#L39)
+File: [client\ClientData\ClientData.sqf at line 41](../../../Src/client/ClientData/ClientData.sqf#L41)
 ## cd_skillNames
 
 Type: Variable
@@ -110,7 +110,7 @@ Initial value:
 ```sqf
 ["СЛ","ИН","ЛВ","ЗД","ВНС","ВОЛЯ","ВОС","ЖЗ"]
 ```
-File: [client\ClientData\ClientData.sqf at line 42](../../../Src/client/ClientData/ClientData.sqf#L42)
+File: [client\ClientData\ClientData.sqf at line 44](../../../Src/client/ClientData/ClientData.sqf#L44)
 ## cd_skills
 
 Type: Variable
@@ -122,7 +122,7 @@ Initial value:
 ```sqf
 [sk_nan,sk_nan,sk_nan,sk_nan,sk_nan,sk_nan,sk_nan,sk_nan] //массив со скиллами
 ```
-File: [client\ClientData\ClientData.sqf at line 43](../../../Src/client/ClientData/ClientData.sqf#L43)
+File: [client\ClientData\ClientData.sqf at line 45](../../../Src/client/ClientData/ClientData.sqf#L45)
 ## cd_stamina_cur
 
 Type: Variable
@@ -134,7 +134,7 @@ Initial value:
 ```sqf
 100
 ```
-File: [client\ClientData\ClientData.sqf at line 46](../../../Src/client/ClientData/ClientData.sqf#L46)
+File: [client\ClientData\ClientData.sqf at line 48](../../../Src/client/ClientData/ClientData.sqf#L48)
 ## cd_stamina_max
 
 Type: Variable
@@ -146,7 +146,7 @@ Initial value:
 ```sqf
 100
 ```
-File: [client\ClientData\ClientData.sqf at line 47](../../../Src/client/ClientData/ClientData.sqf#L47)
+File: [client\ClientData\ClientData.sqf at line 49](../../../Src/client/ClientData/ClientData.sqf#L49)
 ## cd_curSelection
 
 Type: Variable
@@ -158,7 +158,7 @@ Initial value:
 ```sqf
 TARGET_ZONE_TORSO
 ```
-File: [client\ClientData\ClientData.sqf at line 77](../../../Src/client/ClientData/ClientData.sqf#L77)
+File: [client\ClientData\ClientData.sqf at line 79](../../../Src/client/ClientData/ClientData.sqf#L79)
 ## cd_specialAction
 
 Type: Variable
@@ -170,7 +170,7 @@ Initial value:
 ```sqf
 SPECIAL_ACTION_NO
 ```
-File: [client\ClientData\ClientData.sqf at line 78](../../../Src/client/ClientData/ClientData.sqf#L78)
+File: [client\ClientData\ClientData.sqf at line 80](../../../Src/client/ClientData/ClientData.sqf#L80)
 ## cd_curDefType
 
 Type: Variable
@@ -182,7 +182,7 @@ Initial value:
 ```sqf
 DEF_TYPE_DODGE
 ```
-File: [client\ClientData\ClientData.sqf at line 81](../../../Src/client/ClientData/ClientData.sqf#L81)
+File: [client\ClientData\ClientData.sqf at line 83](../../../Src/client/ClientData/ClientData.sqf#L83)
 ## cd_curCombatStyle
 
 Type: Variable
@@ -194,7 +194,7 @@ Initial value:
 ```sqf
 COMBAT_STYLE_ATTACK
 ```
-File: [client\ClientData\ClientData.sqf at line 82](../../../Src/client/ClientData/ClientData.sqf#L82)
+File: [client\ClientData\ClientData.sqf at line 84](../../../Src/client/ClientData/ClientData.sqf#L84)
 ## cd_curAttackType
 
 Type: Variable
@@ -206,7 +206,7 @@ Initial value:
 ```sqf
 ATTACK_TYPE_THRUST
 ```
-File: [client\ClientData\ClientData.sqf at line 83](../../../Src/client/ClientData/ClientData.sqf#L83)
+File: [client\ClientData\ClientData.sqf at line 85](../../../Src/client/ClientData/ClientData.sqf#L85)
 ## cd_activeHand
 
 Type: Variable
@@ -218,7 +218,7 @@ Initial value:
 ```sqf
 INV_HAND_L
 ```
-File: [client\ClientData\ClientData.sqf at line 85](../../../Src/client/ClientData/ClientData.sqf#L85)
+File: [client\ClientData\ClientData.sqf at line 87](../../../Src/client/ClientData/ClientData.sqf#L87)
 ## cd_lca_r
 
 Type: Variable
@@ -230,7 +230,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\ClientData\ClientData.sqf at line 87](../../../Src/client/ClientData/ClientData.sqf#L87)
+File: [client\ClientData\ClientData.sqf at line 89](../../../Src/client/ClientData/ClientData.sqf#L89)
 ## cd_lca_l
 
 Type: Variable
@@ -242,7 +242,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\ClientData\ClientData.sqf at line 88](../../../Src/client/ClientData/ClientData.sqf#L88)
+File: [client\ClientData\ClientData.sqf at line 90](../../../Src/client/ClientData/ClientData.sqf#L90)
 ## cd_cameraSetting
 
 Type: Variable
@@ -254,7 +254,7 @@ Initial value:
 ```sqf
 CAMERA_MODE_ARCADE
 ```
-File: [client\ClientData\ClientData.sqf at line 90](../../../Src/client/ClientData/ClientData.sqf#L90)
+File: [client\ClientData\ClientData.sqf at line 92](../../../Src/client/ClientData/ClientData.sqf#L92)
 ## cd_videoSettings
 
 Type: Variable
@@ -266,7 +266,7 @@ Initial value:
 ```sqf
 VIDEO_SETTINGS_MAX //пользовательские настройки графики
 ```
-File: [client\ClientData\ClientData.sqf at line 93](../../../Src/client/ClientData/ClientData.sqf#L93)
+File: [client\ClientData\ClientData.sqf at line 95](../../../Src/client/ClientData/ClientData.sqf#L95)
 ## cd_internal_lastTPPos
 
 Type: Variable
@@ -278,7 +278,7 @@ Initial value:
 ```sqf
 vec3(0,0,0)
 ```
-File: [client\ClientData\ClientData.sqf at line 213](../../../Src/client/ClientData/ClientData.sqf#L213)
+File: [client\ClientData\ClientData.sqf at line 215](../../../Src/client/ClientData/ClientData.sqf#L215)
 ## cd_internal_lastTPDir
 
 Type: Variable
@@ -290,7 +290,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [client\ClientData\ClientData.sqf at line 214](../../../Src/client/ClientData/ClientData.sqf#L214)
+File: [client\ClientData\ClientData.sqf at line 216](../../../Src/client/ClientData/ClientData.sqf#L216)
 ## cd_internal_tpHandle
 
 Type: Variable
@@ -302,7 +302,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [client\ClientData\ClientData.sqf at line 215](../../../Src/client/ClientData/ClientData.sqf#L215)
+File: [client\ClientData\ClientData.sqf at line 217](../../../Src/client/ClientData/ClientData.sqf#L217)
 ## cd_internal_hasTPError
 
 Type: Variable
@@ -314,7 +314,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\ClientData\ClientData.sqf at line 216](../../../Src/client/ClientData/ClientData.sqf#L216)
+File: [client\ClientData\ClientData.sqf at line 218](../../../Src/client/ClientData/ClientData.sqf#L218)
 ## cd_internal_lastTPObj
 
 Type: Variable
@@ -326,7 +326,7 @@ Initial value:
 ```sqf
 objnull
 ```
-File: [client\ClientData\ClientData.sqf at line 217](../../../Src/client/ClientData/ClientData.sqf#L217)
+File: [client\ClientData\ClientData.sqf at line 219](../../../Src/client/ClientData/ClientData.sqf#L219)
 ## cd_internal_startLoadTime
 
 Type: Variable
@@ -338,7 +338,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\ClientData\ClientData.sqf at line 218](../../../Src/client/ClientData/ClientData.sqf#L218)
+File: [client\ClientData\ClientData.sqf at line 220](../../../Src/client/ClientData/ClientData.sqf#L220)
 ## cd_setVideoSettings
 
 Type: function
@@ -346,7 +346,7 @@ Type: function
 Description: пользовательские настройки графики
 - Param: _value
 
-File: [client\ClientData\ClientData.sqf at line 94](../../../Src/client/ClientData/ClientData.sqf#L94)
+File: [client\ClientData\ClientData.sqf at line 96](../../../Src/client/ClientData/ClientData.sqf#L96)
 ## cd_openAuth
 
 Type: function
@@ -354,7 +354,7 @@ Type: function
 Description: Открытие окна регистрации клиента
 - Param: _mes
 
-File: [client\ClientData\ClientData.sqf at line 377](../../../Src/client/ClientData/ClientData.sqf#L377)
+File: [client\ClientData\ClientData.sqf at line 379](../../../Src/client/ClientData/ClientData.sqf#L379)
 ## repl_doLocal
 
 Type: function
@@ -363,7 +363,7 @@ Description:
 - Param: _method
 - Param: _ctx
 
-File: [client\ClientData\ClientData.sqf at line 549](../../../Src/client/ClientData/ClientData.sqf#L549)
+File: [client\ClientData\ClientData.sqf at line 551](../../../Src/client/ClientData/ClientData.sqf#L551)
 # ClientDataUnconscious.sqf
 
 ## __UNCONSCIOUS_DELAY__
@@ -1542,6 +1542,18 @@ Replaced value:
 30
 ```
 File: [client\ClientData\SendCommand.sqf at line 9](../../../Src/client/ClientData/SendCommand.sqf#L9)
+## CD_MAX_COMMANDS_HISTORY_COUNT
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+100
+```
+File: [client\ClientData\SendCommand.sqf at line 10](../../../Src/client/ClientData/SendCommand.sqf#L10)
 ## localCommand(name)
 
 Type: constant
@@ -1553,7 +1565,7 @@ Replaced value:
 ```sqf
 _cd_map_dataCode = []; cd_commands_localCommandsList set [name,_cd_map_dataCode]; _cd_map_dataCode pushBack
 ```
-File: [client\ClientData\SendCommand.sqf at line 108](../../../Src/client/ClientData/SendCommand.sqf#L108)
+File: [client\ClientData\SendCommand.sqf at line 284](../../../Src/client/ClientData/SendCommand.sqf#L284)
 ## arguments
 
 Type: constant
@@ -1565,7 +1577,19 @@ Replaced value:
 ```sqf
 _args
 ```
-File: [client\ClientData\SendCommand.sqf at line 110](../../../Src/client/ClientData/SendCommand.sqf#L110)
+File: [client\ClientData\SendCommand.sqf at line 286](../../../Src/client/ClientData/SendCommand.sqf#L286)
+## cd_commandHistoryBuffer
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\ClientData\SendCommand.sqf at line 12](../../../Src/client/ClientData/SendCommand.sqf#L12)
 ## cd_commands_localCommandsList
 
 Type: Variable
@@ -1577,7 +1601,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\ClientData\SendCommand.sqf at line 106](../../../Src/client/ClientData/SendCommand.sqf#L106)
+File: [client\ClientData\SendCommand.sqf at line 282](../../../Src/client/ClientData/SendCommand.sqf#L282)
 ## cd_openSendCommandWindow
 
 Type: function
@@ -1585,7 +1609,7 @@ Type: function
 Description: Открывает окно отправки сообщения на сервер
 - Param: _isLobbyContext (optional, default false)
 
-File: [client\ClientData\SendCommand.sqf at line 12](../../../Src/client/ClientData/SendCommand.sqf#L12)
+File: [client\ClientData\SendCommand.sqf at line 21](../../../Src/client/ClientData/SendCommand.sqf#L21)
 ## cd_closeSendCommandWindow
 
 Type: function
@@ -1593,7 +1617,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\SendCommand.sqf at line 76](../../../Src/client/ClientData/SendCommand.sqf#L76)
+File: [client\ClientData\SendCommand.sqf at line 252](../../../Src/client/ClientData/SendCommand.sqf#L252)
 ## cd_openAhelp
 
 Type: function
@@ -1601,7 +1625,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\SendCommand.sqf at line 85](../../../Src/client/ClientData/SendCommand.sqf#L85)
+File: [client\ClientData\SendCommand.sqf at line 261](../../../Src/client/ClientData/SendCommand.sqf#L261)
 # VersionViewer.sqf
 
 ## versionviewer_timeout_init_clientname
