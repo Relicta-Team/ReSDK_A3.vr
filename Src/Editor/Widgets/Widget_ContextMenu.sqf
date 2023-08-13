@@ -243,11 +243,11 @@ function(ContextMenu_loadMouseObject)
 			_obj = (call contextMenu_getContextParams) select 0;
 			_screenToWorldPos = screenToWorld ContextMenu_internal_openedMousePosNative;
 			([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR","_atlPos"];
-			if equals(_atlPos,vec3(0,0,0)) then {_atlPos = _screenToWorldPos};
-			if not_equals(_obj,_objR) then {
-				["Несоответствие точки старта симуляции."] call printWarning;
-				["Object1: %1; Object2: %2",_obj,_objR] call printTrace;
-			};
+			if equals(_atlPos,vec3(0,0,0)) then {_atlPos = getposatl get3DENCamera};
+			// if not_equals(_obj,_objR) then {
+			// 	["Несоответствие точки старта симуляции."] call printWarning;
+			// 	["Object1: %1; Object2: %2",_obj,_objR] call printTrace;
+			// };
 
 			private _params = [false,true];
 			sim_internal_lastCachedTransform = [_atlPos,getDir get3DENCamera];
