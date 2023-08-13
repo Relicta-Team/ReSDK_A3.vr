@@ -12,18 +12,18 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=337;
+		nextID=349;
 	};
 	class Camera
 	{
-		pos[]={3987.4961,16.07443,3589.2859};
-		dir[]={0.91184849,-0.40803513,0.047726318};
-		up[]={0.40755555,0.91289353,0.021329956};
-		aside[]={0.052268937,6.7844121e-007,-0.99875343};
+		pos[]={4049.3345,35.607002,3634.1194};
+		dir[]={0.17634641,-0.28071639,0.94345438};
+		up[]={0.051577412,0.95979059,0.27593952};
+		aside[]={0.98297989,5.2765245e-008,-0.18373433};
 	};
 };
 binarizationWanted=0;
-sourceName="ReSDK_A3";
+sourceName="resdk_a3";
 addons[]=
 {
 	"A3_Characters_F",
@@ -2098,6 +2098,7 @@ class Mission
 		{
 			dataType="Layer";
 			name="Стены, пол и потолок";
+			state=1;
 			class Entities
 			{
 				items=242;
@@ -12537,7 +12538,7 @@ class Mission
 			};
 			id=6274;
 			type="CraterLong_02_F";
-			atlOffset=0.067218781;
+			atlOffset=0.067217827;
 		};
 		class Item81
 		{
@@ -12562,7 +12563,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3983.6597,11.023526,3594.2368};
-				angles[]={0,6.1261067,-0};
+				angles[]={0,6.1261067,0};
 			};
 			side="Empty";
 			class Attributes
@@ -12579,7 +12580,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3974.5405,11.14963,3592.6487};
-				angles[]={0,6.056294,-0};
+				angles[]={0,6.056294,0};
 			};
 			side="Empty";
 			class Attributes
@@ -12596,7 +12597,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3965.2935,11.064405,3589.8232};
-				angles[]={0,5.9515748,-0};
+				angles[]={0,5.9515748,0};
 			};
 			side="Empty";
 			class Attributes
