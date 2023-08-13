@@ -12,12 +12,23 @@ editor_attribute("TemplatePrefab")
 class(BigHouse) extends(BigConstructions) var(name,"Большое здание"); var(desc,"Крупное здание выполняющее роль декорации и являющееся нерушимой конструкцией"); endclass
 
 editor_attribute("EditorGenerated")
+class(DestroyedMetalHangar) extends(BigHouse)
+	var(name,"Руины");
+	var(desc, null);
+	var(model,"a3\structures_f_enoch\industrial\farms\barn_04_ruins_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(LargeTwoStoreyStoneHouse) extends(BigHouse)
 	var(model,"a3\structures_f\households\stone_big\i_stone_housebig_v3_f.p3d");
+	var(name,"Кирпичный дом");
+	var(desc, null);
 endclass
 
 editor_attribute("EditorGenerated")
 class(Golovinskaya) extends(BigHouse)
 	var(model,"a3\structures_f\households\stone_big\d_stone_housebig_v1_f.p3d");
+	var(name, "Разрушенная хибара");
 	var(desc, null);
 endclass
+
