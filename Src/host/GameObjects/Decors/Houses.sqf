@@ -12,6 +12,12 @@ editor_attribute("TemplatePrefab")
 class(BigHouse) extends(BigConstructions) var(name,"Большое здание"); var(desc,"Крупное здание выполняющее роль декорации и являющееся нерушимой конструкцией"); endclass
 
 editor_attribute("EditorGenerated")
+class(BigBrickUnfinishedTwoStoreyHouse) extends(BigHouse)
+	var(model,"a3\structures_f\households\wip\unfinished_building_02_f.p3d");
+	var(name,"Постройка");
+endclass
+
+editor_attribute("EditorGenerated")
 class(PartiallyBlockedTunnelIntersection) extends(BigHouse)
 	var(model,"ml\ml_object\l03_camp_1\l03_camp_02.p3d");
 	var(name,"Туннель");
@@ -82,4 +88,3 @@ class(Golovinskaya) extends(BigHouse)
 	var(model,"a3\structures_f\households\stone_big\d_stone_housebig_v1_f.p3d");
 	var(name, "Разрушенная хибара");
 endclass
-

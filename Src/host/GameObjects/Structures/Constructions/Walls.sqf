@@ -74,6 +74,11 @@ class(ConcreteWall) extends(SmallWall)
 endclass
 
 editor_attribute("EditorGenerated")
+class(ConcreteWallDestroyed) extends(ConcreteWall)
+	var(model,"a3\structures_f_exp\walls\concrete\concretewall_01_m_d_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(BetonWallMedium) extends(SmallWall)
 	var(model,"csa_constr\csa_obj\plita_3x6.p3d");
 endclass
@@ -118,6 +123,12 @@ endclass
 editor_attribute("EditorGenerated")
 class(BrickThinWallDoorway) extends(BrickThinWall)
 	var(model,"csa_constr\csa_obj\kr_stena_1d.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BrickThinWallTwoDoorways) extends(BrickThinWallDoorway)
+	var(model,"csa_constr\csa_obj\kr_stena_2d.p3d");
+	var(name,"Стена");
 endclass
 
 editor_attribute("EditorGenerated")

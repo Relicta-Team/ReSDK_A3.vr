@@ -13,6 +13,12 @@ editor_attribute("TemplatePrefab")
 class(BigRuins) extends(BigConstructions) var(name,"Крупные руины"); var(desc,"Остатки разрушенного здания для декорации. Не разрушаемы"); endclass
 
 editor_attribute("EditorGenerated")
+class(MediumStoneHouseRuins) extends(BigRuins)
+	var(model,"a3\structures_f_argo\civilian\stone_shed_01\stone_shed_01_b_raw_ruins_f.p3d");
+	var(name,"Руины");
+endclass
+
+editor_attribute("EditorGenerated")
 class(BigDestroyedRedConcreteBuilding) extends(BigRuins)
 	var(model,"a3\structures_f_argo\civilian\house_small01\house_small_01_b_pink_ruins_f.p3d");
 	var(name,"Руины");

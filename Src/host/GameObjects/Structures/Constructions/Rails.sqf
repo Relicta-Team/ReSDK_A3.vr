@@ -12,6 +12,12 @@
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
 class(RailBase) extends(Constructions) var(name,"Рельсы"); var(desc,"Рельсы"); endclass
+
+editor_attribute("EditorGenerated")
+class(ShortTurnedRails) extends(RailBase)
+	var(model,"ml\ml_object\l03_camp_1\l03_camp_rails_02.p3d");
+	var(name,"Рельсы");
+endclass
 editor_attribute("EditorGenerated")
 class(LongStraightRails) extends(RailBase)
 	var(model,"ml\ml_object\l03_camp_1\l03_camp_rails_03.p3d");

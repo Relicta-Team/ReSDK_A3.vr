@@ -14,6 +14,18 @@ editor_attribute("TemplatePrefab")
 class(SmallGarbage) extends(Constructions) var(name,"Куча мусора"); var(desc,"Небольшая куча мусора"); endclass
 
 editor_attribute("EditorGenerated")
+class(MetalAndConcreteRuins) extends(SmallGarbage)
+	var(model,"ml_shabut\nvprops\nv_gryaz2.p3d");
+	var(name,"Куча мусора");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SmallBrickHouseRuins) extends(SmallGarbage)
+	var(model,"ca\structures_e\ind\ind_fuelstation\ind_fuelstation_build_ruins_ep1.p3d");
+	var(name,"Куча мусора");
+endclass
+
+editor_attribute("EditorGenerated")
 class(SmallPileOfConcreteFragments) extends(SmallGarbage)
 	var(model,"a3\structures_f_argo\walls\military\mil_wallbig_debris_f.p3d");
 	var(name,"Обломки бетона");

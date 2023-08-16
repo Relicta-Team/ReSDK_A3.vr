@@ -48,6 +48,11 @@ class(WoodenSmallFence) extends(SmallFence)
 endclass
 
 editor_attribute("EditorGenerated")
+class(WoodenSmallFence1) extends(WoodenSmallFence)
+	var(model,"ml\ml_object_new\model_14_10\derewobarik.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(LuxuryRedCurtain) extends(SmallFence)
 	var(model,"ml\ml_object_new\shabbat\shtora_pravo.p3d");
 endclass
