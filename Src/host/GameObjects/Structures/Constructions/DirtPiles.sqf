@@ -14,6 +14,18 @@ editor_attribute("TemplatePrefab")
 class(SmallDirtPile) extends(Constructions) var(name,"Куча грязи"); var(desc,"Небольшая куча грязи"); endclass
 
 editor_attribute("EditorGenerated")
+class(MediumPileOfLightMud) extends(SmallDirtPile)
+	var(model,"apalon\metro_a3\surfaces\gryazoookass2.p3d");
+	var(name,"Куча грязи");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumPileOfDirtAndStones) extends(SmallDirtPile)
+	var(model,"ca\structures\castle\a_castle_walls_5_d_ruins.p3d");
+	var(name,"Куча грязи");
+endclass
+
+editor_attribute("EditorGenerated")
 class(SmallGrayStone) extends(SmallDirtPile)
 	var(model,"ca\rocks2\r2_stone.p3d");
 	var(name,"Маленький камень");

@@ -70,6 +70,7 @@ loadFile("src\host\GameObjects\Structures\Constructions\Construction.sqf");
 	loadFile("src\host\GameObjects\Structures\Constructions\DirtPiles.sqf");
 	loadFile("src\host\GameObjects\Structures\Constructions\Fences.sqf");
 	loadFile("src\host\GameObjects\Structures\Constructions\Floors.sqf");
+	loadFile("src\host\GameObjects\Structures\Constructions\Rails.sqf");
 	loadFile("src\host\GameObjects\Structures\Constructions\Garbages.sqf");
 	loadFile("src\host\GameObjects\Structures\Constructions\Houses.sqf");
 	loadFile("src\host\GameObjects\Structures\Constructions\Pipes.sqf");
