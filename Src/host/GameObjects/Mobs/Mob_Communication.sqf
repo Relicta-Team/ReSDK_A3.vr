@@ -52,7 +52,7 @@ if !isNullVar(__b_flag_textChatEnabled) then {
 		//ru spam
 		if ([_text,"([А-Яа-я])\1{9,}"] call regex_isMatch) exitWith {"спам-текст"};
 		//wrong charachters
-		if ([_text,"[^А-Яа-я\,\.\ \-\:\;\?\!\""\'1-9]"] call regex_isMatch) exitWith {"недопустимый символ"};
+		if ([_text,"[^А-Яа-я\,\.\ \-\:\;\?\!\""\'0-9]"] call regex_isMatch) exitWith {"недопустимый символ"};
 		//badwords
 		//! not implemented
 		//if (tolower _text in (server_textchat_badwords)) exitWith {"плохое слово"};
