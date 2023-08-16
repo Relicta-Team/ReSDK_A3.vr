@@ -100,7 +100,7 @@ _4039_958983632_9201728_68727 = ['IStruct',[4039.96,3632.92,28.6873],60,[0,0,1],
 ['SmallGridWithWoodenFrame',[4070.16,3640.95,30.0044],0,[0,0,1]] call InitStruct; 
 ['MediumWoodenTable',[4070.15,3641.68,28.6482],90,[0,0,1]] call InitStruct; 
 ['ChairBigCasual',[4069.92,3642.66,28.6482],180,[0,0,1]] call InitItem; 
-['BetonWallMedium',[4069.71,3647.57,35.3813,true],89.998,[4.11669e-006,-0.999967,-0.00815524]] call InitStruct; 
+['MediumConcreteFloor',[4069.71,3647.57,35.3813,true],89.998,[4.11669e-006,-0.999967,-0.00815524]] call InitStruct; 
 ['ConcreteWallWithNetfence',[4066.9,3645.16,29.1987],90,[0,0,1]] call InitStruct; 
 ['ConcreteWallWithNetfence',[4066.9,3645.16,36.3032,true],[-1,-9.65598e-007,4.06129e-007],[-4.06126e-007,-2.94845e-006,-1]] call InitStruct; 
 ['BrickThinWallSmall',[4066.89,3642.29,35.0449,true],90,[-0.00702907,0.000811576,0.999975]] call InitStruct; 
@@ -157,9 +157,9 @@ _4039_958983632_9201728_68727 = ['IStruct',[4039.96,3632.92,28.6873],60,[0,0,1],
 ['WoodenSmallFloor',[4062.29,3661.51,26.379],1.06722e-005,[0,0,1]] call InitStruct; 
 ['WoodenSmallFloor',[4063.95,3661.51,26.3799],1.06722e-005,[0,0,1]] call InitStruct; 
 ['WoodenSmallFloor',[4062.02,3658.73,26.3798],1.06722e-005,[0,0,1]] call InitStruct; 
-['BetonWallMedium',[4064.27,3656.28,26.309],305,[0,0,1]] call InitStruct; 
-['BetonWallMedium',[4070.62,3665.14,26.3301],270,[0,0,1]] call InitStruct; 
-['BetonWallMedium',[4070.62,3668.14,26.3301],270,[0,0,1]] call InitStruct; 
+['MediumConcreteFloor',[4064.27,3656.28,26.309],305,[0,0,1]] call InitStruct; 
+['MediumConcreteFloor',[4070.62,3665.14,26.3301],270,[0,0,1]] call InitStruct; 
+['MediumConcreteFloor',[4070.62,3668.14,26.3301],270,[0,0,1]] call InitStruct; 
 ['LampKeroseneHolderCharged',[4062.68,3655.23,26.6113],130,[0,0,1]] call InitStruct; 
 ['MediumFenceOfSheetsAndBoards',[4063.04,3663.48,28.4257],270,[0,0,1]] call InitStruct; 
 ['WoodenSmallFence',[4066.19,3663.41,34.4932,true],[2.2925e-013,-1,-1.92245e-005],[1,0,1.19249e-008]] call InitStruct; 

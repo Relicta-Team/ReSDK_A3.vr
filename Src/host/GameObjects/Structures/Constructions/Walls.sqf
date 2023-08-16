@@ -79,11 +79,6 @@ class(ConcreteWallDestroyed) extends(ConcreteWall)
 endclass
 
 editor_attribute("EditorGenerated")
-class(BetonWallMedium) extends(SmallWall)
-	var(model,"csa_constr\csa_obj\plita_3x6.p3d");
-endclass
-
-editor_attribute("EditorGenerated")
 class(ClayWallSmall) extends(SmallWall)
 	var(model,"ca\structures_e\wall\wall_l\wall_l_2m5_ep1.p3d");
 	var(name,"Глиняная стена");

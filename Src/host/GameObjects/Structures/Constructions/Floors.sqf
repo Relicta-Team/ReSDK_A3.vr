@@ -63,6 +63,11 @@ class(ThickConcreteFloorSmall) extends(SmallFloor)
 endclass
 
 editor_attribute("EditorGenerated")
+class(MediumConcreteFloor) extends(SmallFloor)
+	var(model,"csa_constr\csa_obj\plita_3x6.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(ThickConcreteFloorMedium) extends(ThickConcreteFloorSmall)
 	var(model,"csa_constr\csa_obj\pod_18x6.p3d");
 endclass
