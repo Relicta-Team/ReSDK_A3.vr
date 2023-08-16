@@ -8,18 +8,18 @@ class EditorData
 	toggles=46;
 	class ItemIDProvider
 	{
-		nextID=7188;
+		nextID=7189;
 	};
 	class LayerIndexProvider
 	{
-		nextID=847;
+		nextID=878;
 	};
 	class Camera
 	{
-		pos[]={4344.7119,41.878109,3679.9219};
-		dir[]={-0.66024649,-0.42761397,0.61763322};
-		up[]={-0.31234503,0.90387714,0.29218692};
-		aside[]={0.68321681,4.7800131e-007,0.73036033};
+		pos[]={4310.9858,52.451904,3662.0764};
+		dir[]={0.020894686,-0.43990698,0.89793366};
+		up[]={0.01023589,0.89793974,0.43988603};
+		aside[]={0.99982929,2.3982184e-006,-0.023256198};
 	};
 };
 binarizationWanted=0;
@@ -3807,7 +3807,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LittleHouseBomj""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSheetMetalHouse""]]}";
 							};
 							id=6366;
 							type="Land_Slum_House03_F";
@@ -11380,7 +11380,7 @@ class Mission
 					flags=1;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LittleHouseBomj""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSheetMetalHouse""]]}";
 					};
 					id=2761;
 					type="Land_Slum_House03_F";
@@ -12492,23 +12492,24 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={4314.9854,36.844795,3672.7903};
+						position[]={4332,36.732925,3671.5};
 					};
 					side="Empty";
-					flags=5;
+					flags=1;
 					class Attributes
 					{
 						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumDestroyedCanopy""]]}";
 					};
 					id=6465;
 					type="Land_MetalShelter_01_ruins_F";
+					atlOffset=30;
 				};
 				class Item5
 				{
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={4285.7212,36.926105,3710.1863};
+						position[]={4356.75,36.844437,3678.75};
 						angles[]={0,1.5707963,0};
 					};
 					side="Empty";
@@ -12519,7 +12520,7 @@ class Mission
 					};
 					id=6460;
 					type="Land_Metal_Shed_F";
-					atlOffset=0.57118988;
+					atlOffset=0.27756882;
 				};
 				class Item6
 				{
@@ -14319,18 +14320,18 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={4344.5,36.856457,3698.5};
+						position[]={4345.75,36.856457,3685.75};
 						angles[]={0.0032018754,0,0.043787107};
 					};
 					side="Empty";
-					flags=1;
+					flags=5;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exodusss\budkapsinaebana.p3d""]]],[""class"",""IStruct""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSheetMetalHouse3""]]}";
 					};
 					id=6797;
 					type="land_budkapsinaebana";
-					atlOffset=30;
+					atlOffset=0.021842957;
 				};
 				class Item22
 				{
@@ -14354,18 +14355,18 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={4338.75,36.517242,3688.25};
+						position[]={4344.5,36.517242,3681.5};
 						angles[]={6.2762537,0,6.2775221};
 					};
 					side="Empty";
 					flags=1;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_05\hata_4.p3d""]]],[""class"",""IStruct""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSheetMetalHouse1""]]}";
 					};
 					id=6727;
 					type="hata_4";
-					atlOffset=1.3192482;
+					atlOffset=1.2999268;
 				};
 				class Item24
 				{
@@ -14709,7 +14710,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={4310.5,35.219418,3684.75};
+						position[]={4338,35.219418,3683.25};
 						angles[]={6.2762537,0,6.2775221};
 					};
 					side="Empty";
@@ -14720,7 +14721,7 @@ class Mission
 					};
 					id=6804;
 					type="nv_gryaz2";
-					atlOffset=0.16484451;
+					atlOffset=0.068733215;
 				};
 				class Item44
 				{
@@ -14781,7 +14782,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={4318.436,35.626499,3680.0552};
+						position[]={4333,35.57423,3675};
 					};
 					side="Empty";
 					flags=5;
@@ -14791,7 +14792,7 @@ class Mission
 					};
 					id=6825;
 					type="land_trubaduba1";
-					atlOffset=0.19726181;
+					atlOffset=0.10102081;
 				};
 				class Item48
 				{
@@ -14849,7 +14850,7 @@ class Mission
 				};
 			};
 			id=5534;
-			atlOffset=0.56608582;
+			atlOffset=0.55603027;
 		};
 		class Item7
 		{

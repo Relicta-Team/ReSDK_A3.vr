@@ -67,12 +67,22 @@ class(ChurchPrayHouse) extends(ChurchSmallHouse)
 	var(model,"a3\structures_f_enoch\cultural\chapel_02\chapel_02_white_damaged_f.p3d");
 endclass
 editor_attribute("EditorGenerated")
-class(LittleHouseBomj) extends(SmallHouse)
+class(SmallSheetMetalHouse) extends(SmallHouse)
 	var(model,"a3\structures_f\households\slum\slum_house03_f.p3d");
 	var(name, "Хижина");
 	var(desc, "Сделана из дерева");
 endclass
+
 editor_attribute("EditorGenerated")
-class(LittleHouseBomj2) extends(LittleHouseBomj)
+class(SmallSheetMetalHouse3) extends(SmallSheetMetalHouse)
+	var(model,"ml_shabut\exodusss\budkapsinaebana.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SmallSheetMetalHouse1) extends(SmallSheetMetalHouse)
+	var(model,"ml\ml_object_new\model_05\hata_4.p3d");
+endclass
+editor_attribute("EditorGenerated")
+class(SmallSheetMetalHouse2) extends(SmallSheetMetalHouse)
 	var(model,"a3\structures_f\households\slum\slum_house01_f.p3d");
 endclass

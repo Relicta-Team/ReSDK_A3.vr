@@ -193,7 +193,7 @@ _4039_958983632_9201728_68727 = ['IStruct',[4039.96,3632.92,28.6873],60,[0,0,1],
 ['RatCage',[4060.72,3679.53,32.1893,true],65.9974,[0.017476,-0.000912352,0.999847]] call InitStruct; 
 ['RatCage',[4062.6,3679.56,32.287,true],96.0014,[0.017476,-0.000912352,0.999847]] call InitStruct; 
 ['SteelCanopy',[4062.22,3674.91,27.4515],16,[0,0,1]] call InitStruct; 
-['LittleHouseBomj',[4062,3668.48,27.0383],90,[0,0,1]] call InitStruct; 
+['SmallSheetMetalHouse',[4062,3668.48,27.0383],90,[0,0,1]] call InitStruct; 
 ['LongRottenBoards',[4058.14,3669.72,33.1123,true],[0.606311,-0.0315816,-0.7946],[0.790506,-0.0847865,0.606557]] call InitStruct; 
 ['LongRottenBoards',[4058.4,3670.35,33.1134,true],[0.606311,-0.0315816,-0.7946],[0.790506,-0.0847865,0.606557]] call InitStruct; 
 ['LongRottenBoards',[4058.09,3670.79,33.0895,true],[0.608738,0.0276861,-0.792888],[0.793356,-0.0152071,0.608567]] call InitStruct; 
@@ -637,7 +637,7 @@ _4034_613283653_9711931_71975 = ['IStruct',[4034.61,3653.97,37.4901,true],270,[0
 ['MediumGreenRock',[4009.92,3591.06,10.1221,true],[0.00179391,0.967637,0.252341],[-0.264289,-0.242911,0.933352]] call InitDecor; 
 ['BigGreenRock',[3952.21,3652.32,5],175,[0,0,1]] call InitDecor; 
 ['FarmGarden',[4048.41,3762.68,21.5018,true],105,[0.00454359,0.0050348,0.999977]] call InitStruct; 
-['LittleHouseBomj',[4037.3,3771.4,17.1619],350.406,[0,0,1]] call InitStruct; 
+['SmallSheetMetalHouse',[4037.3,3771.4,17.1619],350.406,[0,0,1]] call InitStruct; 
 ['SmallClothShelter',[4022.23,3758.53,16.0325],112.411,[0,0,1]] call InitStruct; 
 ['SteelCanopySmall',[4046.89,3769.08,15.7167],138.076,[0,0,1]] call InitStruct; 
 ['WoodenToiletSmall',[4033.31,3776.51,16.5882],168,[0,0,1]] call InitStruct; 

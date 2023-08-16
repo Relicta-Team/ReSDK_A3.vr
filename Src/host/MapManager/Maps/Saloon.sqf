@@ -220,7 +220,7 @@ _3369_800053692_7299818_63850 = ['Decor',[3369.8,3692.73,18.6385],2.40577,[0,0,1
 ['Candle',[3365.01,3705.48,21.8339],0,[0,0,1]] call InitItem; 
 ['LampKerosene',[3365.01,3705.9,21.8034],319.633,[0,0,1]] call InitItem; 
 _3365_070073705_4899920_96930 = ['IStruct',[3365.07,3705.49,20.9693],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_epa\civ\camping\woodentable_small_f.p3d'];}] call InitStruct; // !!! realocated model !!!
-['LittleHouseBomj',[3391.35,3683.74,24.4693,true],89.4004,[0.000121895,0.00933483,0.999956]] call InitStruct; 
+['SmallSheetMetalHouse',[3391.35,3683.74,24.4693,true],89.4004,[0.000121895,0.00933483,0.999956]] call InitStruct; 
 _3387_629883702_7199719_22734 = ['Decor',[3387.63,3702.72,26.5506,true],0,[0,-0.174799,0.984604], {_thisObj setvariable ['model','ca\buildings2\houseblocks\houseblock_c\houseblock_c1_ruins.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['TorchHolderCharged',[3387.69,3680.06,18.6897],353.723,[0,0,1]] call InitStruct; 
 ['TorchHolderCharged',[3367.1,3696.9,21.159],173.395,[0,0,1]] call InitStruct; 
@@ -513,9 +513,9 @@ _3445_040043616_5300318_02900 = ['ElectricalShield',[3445.04,3616.53,18.029],182
 _3440_540043631_8898917_85780 = ['Decor',[3440.54,3631.89,17.8578],92.1828,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v2_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3440_580083623_1499017_86220 = ['Decor',[3440.58,3623.15,17.8622],88.0297,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v2_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3441_530033635_5800817_84700 = ['Decor',[3441.53,3635.58,17.847],120.004,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v2_f.p3d'];}] call InitDecor; // !!! realocated model !!!
-['LittleHouseBomj',[3428.95,3640.71,24.0175,true],89.931,[0.000680749,0.0288042,0.999585]] call InitStruct; 
-['LittleHouseBomj',[3444.92,3625.49,23.984,true],91.2571,[0.000436131,0.00932582,0.999956]] call InitStruct; 
-['LittleHouseBomj',[3443.39,3618.01,24.1536,true],1.2288,[-0.00932605,0.000429142,0.999956]] call InitStruct; 
+['SmallSheetMetalHouse',[3428.95,3640.71,24.0175,true],89.931,[0.000680749,0.0288042,0.999585]] call InitStruct; 
+['SmallSheetMetalHouse',[3444.92,3625.49,23.984,true],91.2571,[0.000436131,0.00932582,0.999956]] call InitStruct; 
+['SmallSheetMetalHouse',[3443.39,3618.01,24.1536,true],1.2288,[-0.00932605,0.000429142,0.999956]] call InitStruct; 
 _3448_500003647_2399918_04280 = ['Decor',[3448.5,3647.24,18.0428],91.6825,[0,0,1], {_thisObj setvariable ['model','ca\buildings2\houseblocks\houseblock_c\houseblock_c1_ruins.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3445_760013645_0100144_59040 = ['Decor',[3445.76,3645.01,49.5904,true],359.998,[0.0232979,-3.48871e-005,-0.999729], {_thisObj setvariable ['model','a3\structures_f_enoch\industrial\farms\barn_04_ruins_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3453_659913616_5400422_66979 = ['IStruct',[3453.66,3616.54,29.041,true],359.907,[0.017435,-0.0181826,0.999683], {_thisObj setvariable ['model','a3\structures_f\households\addons\metal_shed_f.p3d'];}] call InitStruct; // !!! realocated model !!!
