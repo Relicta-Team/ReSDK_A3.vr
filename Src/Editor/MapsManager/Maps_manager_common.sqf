@@ -92,7 +92,7 @@ function(mm_build)
 		["Неизвестная ошибка при запаковке карты. Не удалось сохранить файл карты."] call showError;
 		false
 	};
-	
+
 	["Map builded"] call printLog;
 
 	if !("no-success-info" in _buildOptions) then {
@@ -115,7 +115,7 @@ function(mm_handleObjectSave)
 	if !((_hash get "class") call oop_reflect_hasClass) exitwith {
 		INC(mm_internal_errorCount);
 		mm_internal_threadErrorText = mm_internal_threadErrorText + endl +
-		format["Cant find class for object %1 at position %2",_obj,getposatl _obj];
+		format["Cant find class '%3' for object %1 at position %2. Require start validator for dead classes",_obj,getposatl _obj,_hash get "class"];
 	};
 
 	private _class = _hash get "class";

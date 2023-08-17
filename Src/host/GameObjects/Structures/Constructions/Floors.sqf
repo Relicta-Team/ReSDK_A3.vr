@@ -11,7 +11,7 @@
 //пол
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallFloor) extends(Constructions) var(name,"Пол"); var(desc,"Обычное напольное покрытие"); endclass
+class(SmallFloor) extends(Constructions) var(name,"Пол"); editor_only(var(desc,"Обычное напольное покрытие");) endclass
 
 editor_attribute("EditorGenerated")
 class(LongBoardsOnStilts) extends(SmallFloor)

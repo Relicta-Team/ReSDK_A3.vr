@@ -11,7 +11,7 @@
 //лестница
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(StepsLadder) extends(Constructions) var(name,"Лестница"); var(desc,"Ступенчатые лестницы"); endclass
+class(StepsLadder) extends(Constructions) var(name,"Лестница"); editor_only(var(desc,"Ступенчатые лестницы");) endclass
 
 editor_attribute("EditorGenerated")
 class(SmallSteelRustyStairs) extends(StepsLadder)

@@ -15,7 +15,7 @@ class(Constructions) extends(StructureBasicCategory) endclass
 
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(FortificationConstruction) extends(Constructions) var(name,"Оборонительное сооружение"); var(desc,"Оборонные заграждения"); endclass
+class(FortificationConstruction) extends(Constructions) var(name,"Оборонительное сооружение"); editor_only(var(desc,"Оборонные заграждения");) endclass
 
 editor_attribute("EditorGenerated")
 class(SmallConcreteBlockDestyoed) extends(FortificationConstruction)
