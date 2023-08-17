@@ -11,7 +11,7 @@ editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
 class(BenchBase) extends(IChair)
 	var(name,"Скамья");
-	var(desc,"Многоместное сиденье");
+	editor_only(var(desc,"Многоместное сиденье");)
 	//многоместное сидение(лавка)
 endclass
 

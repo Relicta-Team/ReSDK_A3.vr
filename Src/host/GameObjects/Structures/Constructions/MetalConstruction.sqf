@@ -11,7 +11,7 @@
 //пол
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(MetalConstruction) extends(Constructions) var(name,"Стальная конструкция"); var(desc,""); endclass
+class(MetalConstruction) extends(Constructions) var(name,"Стальная конструкция"); editor_only(var(desc,"Различные стальные конструкции");) endclass
 
 editor_attribute("EditorGenerated")
 class(LongMetalBeams) extends(MetalConstruction)

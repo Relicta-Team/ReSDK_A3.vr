@@ -11,7 +11,7 @@
 //забор
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallFence) extends(Constructions) var(name,"Ограда"); var(desc,"Небольшие заборы и ограды" pcomma " которые можно разрушить"); endclass
+class(SmallFence) extends(Constructions) var(name,"Ограда"); editor_only(var(desc,"Небольшие заборы и ограды" pcomma " которые можно разрушить");) endclass
 
 editor_attribute("EditorGenerated")
 class(SmallCornerFenceMadeOfJunk) extends(SmallFence)

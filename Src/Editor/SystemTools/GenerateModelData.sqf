@@ -65,6 +65,11 @@ function(systools_internal_generateModelData)
 			if searchcmp(_model, _blacklist) then {continue};
 			//if searchcmp(_model, _restrictedModels) then {continue};
 			
+			//Fix #70
+			if !([_model,".p3d",false] call stringEndWith) then {
+				_model = _model + ".p3d";
+			};
+
 			_obj = createSimpleObject [_model,getPosATL cameraOn];
 			if isNullReference(_obj) exitWith {
 				INC(_brokenModels);

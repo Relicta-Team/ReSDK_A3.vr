@@ -14,3 +14,4 @@
 #include "Rendering.sqf"
 #include "MeterTool.sqf"
 #include "GeometryCursor.sqf"
+#include "ClassValidator.sqf"
