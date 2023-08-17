@@ -10,6 +10,9 @@
 #include <..\..\NOEngine\NOEngine_SharedTransportLevel.hpp>
 
 oop_internal_decor_makeUnicalName = {
+	#ifdef EDITOR
+	if is3DEN exitwith {"СЛУЧАЙНОЕ ИМЯ"};
+	#endif
 	if prob(50) exitWith {
 		(pick ["Часть","Кусочек","Частица","Малая часть","Декорация"])+" Сети"
 	};
