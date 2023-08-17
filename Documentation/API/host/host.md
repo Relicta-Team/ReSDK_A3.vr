@@ -3726,6 +3726,64 @@ Replaced value:
 name = compile 'cmd'
 ```
 File: [host\engine.hpp at line 706](../../../Src/host/engine.hpp#L706)
+## editor_only(any)
+
+Type: constant
+
+> Exists if **EDITOR** defined
+
+Description: 
+- Param: any
+
+Replaced value:
+```sqf
+any
+```
+File: [host\engine.hpp at line 710](../../../Src/host/engine.hpp#L710)
+## editor_conditional(ed__,noted__)
+
+Type: constant
+
+> Exists if **EDITOR** defined
+
+Description: 
+- Param: ed__
+- Param: noted__
+
+Replaced value:
+```sqf
+ed__
+```
+File: [host\engine.hpp at line 711](../../../Src/host/engine.hpp#L711)
+## editor_only(any)
+
+Type: constant
+
+> Exists if **EDITOR** not defined
+
+Description: 
+- Param: any
+
+Replaced value:
+```sqf
+
+```
+File: [host\engine.hpp at line 713](../../../Src/host/engine.hpp#L713)
+## editor_conditional(ed__,noted__)
+
+Type: constant
+
+> Exists if **EDITOR** not defined
+
+Description: 
+- Param: ed__
+- Param: noted__
+
+Replaced value:
+```sqf
+noted__
+```
+File: [host\engine.hpp at line 714](../../../Src/host/engine.hpp#L714)
 # init.sqf
 
 ## server_loadingState
