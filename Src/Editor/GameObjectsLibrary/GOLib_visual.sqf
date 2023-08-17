@@ -3,6 +3,67 @@
 // sdk.relicta.ru
 // ======================================================
 
+function(golib_internal_cleanupTreeSavedData)
+{
+	uinamespace setvariable [golib_internal_const_nameofTreeSaver,createHashMap];
+}
+
+function(golib_internal_expandAllTreeSavedData)
+{
+	call golib_internal_cleanupTreeSavedData;
+
+	private _map = call golib_internal_getTreeSaverStorage;
+	private _tree = call golib_vis_getTree;
+	private _path = [];
+	for "_i" from 0 to (_tree tvCount _path) do {
+		[_tree,_path+[_i],_map] call golib_internal_expandTreeBranchRecursively;
+	};
+}
+
+function(golib_internal_expandTreeBranchRecursively)
+{
+	params ["_tree","_path","_map"];
+	private _curtext = _tree tvText _path;
+	_map set [_curtext,_path];
+	for "_i" from 0 to (_tree tvCount _path) do {
+		[_tree,_path+[_i],_map] call golib_internal_expandTreeBranchRecursively;
+	};
+};
+
+function(golib_internal_getTreeSaverStorage) { uinamespace getvariable golib_internal_const_nameofTreeSaver }
+
+function(golib_internal_initTreeStateSaver)
+{
+	params ["_tree"];
+
+	golib_internal_const_nameofTreeSaver = "resdk_internal_treeSaver";
+	golib_internal_list_treeAllPathes = [];
+
+	if isNull(uinamespace getvariable golib_internal_const_nameofTreeSaver) then {
+		call golib_internal_cleanupTreeSavedData;
+	};
+
+	_tree ctrlAddEventHandler ["TreeExpanded",{
+		params ["_tree","_path"];
+		_map = call golib_internal_getTreeSaverStorage;
+		_curname = _tree tvText _path;
+		_map set [_curname,_path];
+	}];
+	_tree ctrlAddEventHandler ["TreeCollapsed",{
+		params ["_tree","_path"];
+		_map = call golib_internal_getTreeSaverStorage;
+		_curname = _tree tvText _path;
+		_map deleteAt [_curname,_path];
+	}];
+}
+
+function(golib_vis_applyExpand)
+{
+	params ["_tree"];
+	{
+		_tree tvExpand _y;
+	} foreach (call golib_internal_getTreeSaverStorage);
+}
 
 function(golib_vis_onCreateExpand)
 {
@@ -92,13 +153,13 @@ function(golib_vis_onCreateExpand)
 	_searchButton ctrlSetText "a3\3den\data\displays\display3den\tree_collapse_ca.paa";
 	_searchButton ctrlSetActiveColor  [0,1,0,1];
 	_searchButton ctrlSetTooltip "Свернуть все";
-	_searchButton ctrlAddEventHandler ["MouseButtonUp",{tvCollapseAll (call golib_vis_getTree)}];
+	_searchButton ctrlAddEventHandler ["MouseButtonUp",{tvCollapseAll (call golib_vis_getTree); call golib_internal_cleanupTreeSavedData}];
 
 	_searchButton = [_d,"RscActivePicture",[70+_btW+_btW,_sizeY,_btW,_btH],_ctg] call createWidget;
 	_searchButton ctrlSetText "a3\3den\data\displays\display3den\tree_expand_ca.paa";
 	_searchButton ctrlSetActiveColor  [0,1,0,1];
 	_searchButton ctrlSetTooltip "Развернуть все";
-	_searchButton ctrlAddEventHandler ["MouseButtonUp",{tvExpandAll (call golib_vis_getTree)}];
+	_searchButton ctrlAddEventHandler ["MouseButtonUp",{tvExpandAll (call golib_vis_getTree); call golib_internal_expandAllTreeSavedData}];
 
 	modvar(_sizeY) + _searchSizeH;
 
@@ -117,6 +178,8 @@ function(golib_vis_onCreateExpand)
 	_tree ctrlAddEventHandler ["TreeMouseMove",golib_vis_ontreeMouseMoved];
 	_tree ctrlAddEventHandler ["MouseEnter",golib_vis_ontreeMouseEnter];
 	_tree ctrlAddEventHandler ["MouseExit",golib_vis_ontreeMouseExit];
+
+	[_tree] call golib_internal_initTreeStateSaver;
 
 	[_d] call golib_vis_createLibPreviewer;
 	["onFrame",golib_vis_onFrame_LibPreview] call  Core_addEventHandler;
@@ -415,6 +478,7 @@ function(golib_vis_loadObjectList_Recursive)
 			private _tree = call golib_vis_getTree;
 			private _idx = _tree tvAdd [_listRef,_tobj getVariable "classname"];
 			_listRef = _listRef + [_idx];
+			
 			if ([_type,"ColorClass"] call goasm_attributes_hasAttributeClass) then {
 				_color = ([_type,"Class","ColorClass"] call goasm_attributes_getValues) select 0;
 				_tree tvSetColor [_listRef,[_color] call color_HTMLtoRGBA];
@@ -449,7 +513,8 @@ function(golib_vis_loadObjList)
 	private _conditionAdd = if isNullVar(_golib_global_flag_search) then { {true} } else {_golib_global_flag_search};
 	
 	tvClear (call golib_vis_getTree);
-	
+	golib_internal_list_treeAllPathes = [];
+
 	private _startPath = "GameObject";
 	if (gm_isInsideModemanager) then {
 		_startPath = "object";
@@ -459,7 +524,8 @@ function(golib_vis_loadObjList)
 	[_startPath,[],_conditionAdd] call golib_vis_loadObjectList_Recursive;
 
 	(call golib_vis_getTree) tvSortAll [[], false];
-
+	
+	(call golib_vis_getTree) call golib_vis_applyExpand;
 	//["pressed load objs"] call showInfo;
 }
 
