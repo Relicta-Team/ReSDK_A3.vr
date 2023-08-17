@@ -11,7 +11,7 @@
 //пол
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(RailBase) extends(Constructions) var(name,"Рельсы"); var(desc,"Рельсы"); endclass
+class(RailBase) extends(Constructions) var(name,"Рельсы"); editor_only(var(desc,"Рельсы");) endclass
 
 editor_attribute("EditorGenerated")
 class(ShortTurnedRails) extends(RailBase)

@@ -11,7 +11,7 @@
 //кучи грязи
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallDirtPile) extends(Constructions) var(name,"Куча грязи"); var(desc,"Небольшая куча грязи"); endclass
+class(SmallDirtPile) extends(Constructions) var(name,"Куча грязи"); editor_only(var(desc,"Небольшая куча грязи");) endclass
 
 editor_attribute("EditorGenerated")
 class(MediumPileOfLightMud) extends(SmallDirtPile)

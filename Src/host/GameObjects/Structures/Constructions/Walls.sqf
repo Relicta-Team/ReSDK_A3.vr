@@ -11,7 +11,7 @@
 //стена
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallWall) extends(Constructions) var(name,"Стена"); var(desc,"Маленькие стена" pcomma " которую можно разрушить"); endclass
+class(SmallWall) extends(Constructions) var(name,"Стена"); editor_only(var(desc,"Маленькие стена" pcomma " которую можно разрушить");) endclass
 
 editor_attribute("EditorGenerated")
 class(StoneWall) extends(SmallWall)

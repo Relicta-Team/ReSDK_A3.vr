@@ -11,7 +11,7 @@
 //мусор
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallGarbage) extends(Constructions) var(name,"Куча мусора"); var(desc,"Небольшая куча мусора"); endclass
+class(SmallGarbage) extends(Constructions) var(name,"Куча мусора"); editor_only(var(desc,"Небольшая куча мусора");) endclass
 
 editor_attribute("EditorGenerated")
 class(MetalAndConcreteRuins) extends(SmallGarbage)

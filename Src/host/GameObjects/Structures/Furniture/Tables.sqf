@@ -10,7 +10,7 @@
 // Столы
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(TableBase) extends(Furniture) var(name,"Стол"); var(desc,"Просто стол"); endclass
+class(TableBase) extends(Furniture) var(name,"Стол"); editor_only(var(desc,"Просто стол");) endclass
 
 editor_attribute("EditorGenerated")
 class(WoodenTableHandmade) extends(TableBase)

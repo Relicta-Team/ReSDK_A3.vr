@@ -704,3 +704,12 @@ ACRE_IS_ERRORED = false; _ret;}*/
 #define VM_COMPILER_ADDFUNC_BINARY(name,cmd) name = compile '(_this select 0) cmd (_this select 1)'
 #define VM_COMPILER_ADDFUNC_UNARY(name,cmd) name = compile 'cmd _this'
 #define VM_COMPILER_ADDFUNC_NULAR(name,cmd) name = compile 'cmd'
+
+
+#ifdef EDITOR
+	#define editor_only(any) any
+	#define editor_conditional(ed__,noted__) ed__
+#else
+	#define editor_only(any) 
+	#define editor_conditional(ed__,noted__) noted__
+#endif

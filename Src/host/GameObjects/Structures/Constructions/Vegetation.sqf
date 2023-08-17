@@ -11,7 +11,7 @@
 //Растительность
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(Vegetation) extends(Constructions) var(name,"Растительность"); var(desc,"Растительность"); endclass
+class(Vegetation) extends(Constructions) var(name,"Растительность"); editor_only(var(desc,"Растительность");) endclass
 
 editor_attribute("EditorGenerated")
 class(SmallMushroom) extends(Vegetation)

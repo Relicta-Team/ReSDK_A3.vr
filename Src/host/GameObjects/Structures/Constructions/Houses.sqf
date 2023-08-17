@@ -11,7 +11,7 @@
 //небольшое здание
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallHouse) extends(Constructions) var(name,"Небольшое здание"); var(desc,"Маленькие дома" pcomma " которые можно разрушить"); endclass
+class(SmallHouse) extends(Constructions) var(name,"Небольшое здание"); editor_only(var(desc,"Маленькие дома" pcomma " которые можно разрушить");) endclass
 
 editor_attribute("EditorGenerated")
 class(MediumClothCanopy) extends(SmallHouse)
