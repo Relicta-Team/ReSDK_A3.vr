@@ -146,6 +146,7 @@ menu_structureLayout = [
 				"text:Запуск процедуры обновления;act:call golib_massoc_syncAllObjects",
 				"text:Разрешение конфликтов;act:call golib_massoc_resolveConflictsProcess"
 			],
+			"text:Проверка ''мертвых'' классов;act: call classValidator_process",
 			"text:Проверка путей классов;act:call systools_checkClassPathes",
 			"text:Проверка нагрузки сцены игровыми объектами;act:['Не реализовано'] call showWarning;",
 			"text:Проверка несуществующих классов;act:['Не реализовано'] call showWarning;"

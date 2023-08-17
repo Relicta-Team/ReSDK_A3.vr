@@ -107,6 +107,11 @@ oop_isTypeOf = {
 	_findedClass
 };
 
+oop_isImplementClass = {
+	params ["_classname"];
+	isImplementClass(_classname)
+};
+
 //получает имя родительского класса
 oop_getMotherClassName = {
 	params ["_type"];
