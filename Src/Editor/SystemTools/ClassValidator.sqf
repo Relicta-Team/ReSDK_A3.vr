@@ -34,6 +34,7 @@ function(classValidator_process)
 	private _hd = null; private _custom = null;
 	private _deadClassesCount = count _erroredObjects;
 	private _curClass = null;
+	private _needRegenerateMarks = false;
 	if (_deadClassesCount > 0) then {
 		{
 			_mpath = (getModelInfo _x) select 1;
@@ -47,11 +48,23 @@ function(classValidator_process)
 			};
 
 			_hd set ["class","IStruct"];
+			if (count keys _custom > 0 && { not_equals((keys _custom)apply{tolower _x},["model"]) } ) then {
+				_needRegenerateMarks = true;
+				_custom = createHashMap;
+				_hd set ["customProps",_custom];
+			};
+
 			_custom set ["model",_mpath];
 			[_x,_hd] call golib_setHashData;
 
 		} foreach _erroredObjects;
-		["Найдено %1 'мертвых' классов. Все они были заменены на IStruct;%3%3Список несуществующих классов: %2",
+
+		if (_needRegenerateMarks) then {
+			call golib_cs_syncMarks;
+			["Метки объектов проверены"] call messageBox;
+		};
+
+		["Найдено %1 несуществующих классов. Все они были заменены на IStruct;%3%3Список несуществующих классов: %2",
 			_deadClassesCount,_erroredClasses joinString (", "),endl] call messageBox;
 	} else {
 		["%1 - No dead classes found",__FUNC__] call printLog;
