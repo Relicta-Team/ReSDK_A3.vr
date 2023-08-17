@@ -11,7 +11,18 @@
 //стена
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallWall) extends(Constructions) var(name,"Стена"); var(desc,"Маленькие стена" pcomma " которую можно разрушить"); endclass
+class(SmallWall) extends(Constructions) var(name,"Стена"); editor_only(var(desc,"Маленькие стена" pcomma " которую можно разрушить");) endclass
+
+editor_attribute("EditorGenerated")
+class(StoneWall) extends(SmallWall)
+	var(model,"a3\structures_f\walls\stone_4m_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BigStoneWallWithPassage) extends(StoneWall)
+	var(model,"ml\ml_object_new\model_24\barikada.p3d");
+endclass
 
 editor_attribute("EditorGenerated")
 class(MediumLightWall) extends(SmallWall)
@@ -74,8 +85,24 @@ class(ConcreteWall) extends(SmallWall)
 endclass
 
 editor_attribute("EditorGenerated")
-class(BetonWallMedium) extends(SmallWall)
-	var(model,"csa_constr\csa_obj\plita_3x6.p3d");
+class(MediumConcreteWallDestroyed) extends(ConcreteWall)
+	var(model,"a3\structures_f_argo\walls\military\mil_wallbig_4m_damaged_left_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BigConcreteWallDestroyed) extends(ConcreteWall)
+	var(model,"a3\structures_f\walls\canal_wall_d_left_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumConcreteWall) extends(ConcreteWall)
+	var(model,"a3\structures_f\walls\concrete_smallwall_4m_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ConcreteWallDestroyed) extends(ConcreteWall)
+	var(model,"a3\structures_f_exp\walls\concrete\concretewall_01_m_d_f.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -118,6 +145,12 @@ endclass
 editor_attribute("EditorGenerated")
 class(BrickThinWallDoorway) extends(BrickThinWall)
 	var(model,"csa_constr\csa_obj\kr_stena_1d.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BrickThinWallTwoDoorways) extends(BrickThinWallDoorway)
+	var(model,"csa_constr\csa_obj\kr_stena_2d.p3d");
+	var(name,"Стена");
 endclass
 
 editor_attribute("EditorGenerated")

@@ -28,8 +28,8 @@ go_editor_globalRefs getOrDefault [_m,locationnull];
 ['BigStoneWall',[3608.81,3634.06,37.8041,true],70.6137,[0.0306781,0.163856,0.986007]] call InitDecor; 
 ['BlockDirt',[3615.01,3663.69,12.9282,true],268.667,[0,0.148954,0.988844]] call InitDecor; 
 ['BigStoneWall',[3614.69,3652.07,23.7759,true],59.3117,[0.150208,0.177419,0.972605]] call InitDecor; 
-['LittleHouseBomj',[3612.4,3668.27,19.3215,true],88.6091,[0,0.200755,0.979641]] call InitStruct; 
-['LittleHouseBomj',[3615.41,3674.99,16.1622],131.161,[0,0,1]] call InitStruct; 
+['SmallSheetMetalHouse',[3612.4,3668.27,19.3215,true],88.6091,[0,0.200755,0.979641]] call InitStruct; 
+['SmallSheetMetalHouse',[3615.41,3674.99,16.1622],131.161,[0,0,1]] call InitStruct; 
 _3614_239993678_4599619_08990 = ['Decor',[3614.24,3678.46,19.0899],74.4119,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\slum\slum_house01_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3609_989993666_3400918_15497 = ['IStruct',[3609.99,3666.34,24.5041,true],265.156,[0,0.149024,0.988834], {_thisObj setvariable ['model','a3\structures_f\households\addons\metal_shed_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3589_280033669_6999512_48034 = ['Decor',[3589.28,3669.7,26.969,true],6.90372,[0.0434279,0.104372,0.99359], {_thisObj setvariable ['model','a3\rocks_f\water\w_sharprock_wallh.p3d'];}] call InitDecor; // !!! realocated model !!!
@@ -101,8 +101,8 @@ _3627_139893655_9099114_45430 = ['IStruct',[3627.14,3655.91,21.6929,true],0,[0,0
 ['Shovel',[3637.04,3653.55,12.9872],249.042,[0,0,1]] call InitItem; 
 ['BlockDirt',[3635.43,3685.56,13.3769],268.652,[0,0,1]] call InitDecor; 
 ['BlockDirt',[3646.48,3686.4,13.7391,true],176.179,[-0.142922,-0.129237,0.98126]] call InitDecor; 
-['LittleHouseBomj',[3623.36,3685.29,12.5904],133.992,[0,0,1]] call InitStruct; 
-['LittleHouseBomj',[3616.5,3681.57,16.5363],103.771,[0,0,1]] call InitStruct; 
+['SmallSheetMetalHouse',[3623.36,3685.29,12.5904],133.992,[0,0,1]] call InitStruct; 
+['SmallSheetMetalHouse',[3616.5,3681.57,16.5363],103.771,[0,0,1]] call InitStruct; 
 _3635_459963688_1298812_94152 = ['Decor',[3635.46,3688.13,19.3444,true],126.284,[0.480055,-0.334021,0.811158], {_thisObj setvariable ['model','a3\structures_f\ind\pipes\indpipe1_uup_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3633_300053706_1899414_89116 = ['Decor',[3633.3,3706.19,22.5657,true],0,[0.244596,-0.172938,0.954078], {_thisObj setvariable ['model','a3\structures_f_enoch\ruins\houseruin_small_02_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3632_719973685_4399413_30437 = ['Decor',[3632.72,3685.44,19.7169,true],121.524,[0.00363046,0.00592172,0.999976], {_thisObj setvariable ['model','ca\structures_e\wall\wall_l\wall_l3_5m_ep1.p3d'];}] call InitDecor; // !!! realocated model !!!
@@ -385,7 +385,7 @@ _3664_320073702_959966_39826 = ['Decor',[3664.32,3702.96,31.738,true],58.8916,[0
 _3679_330083683_5800823_56320 = ['Decor',[3679.33,3683.58,23.5632],92.1258,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3676_840093684_6499016_75240 = ['Decor',[3676.84,3684.65,16.7524],90.2207,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3679_969973687_6201216_78920 = ['Decor',[3679.97,3687.62,16.7892],181.44,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitDecor; // !!! realocated model !!!
-['LittleHouseBomj',[3648.62,3693.06,16.3057],170.524,[0,0,1]] call InitStruct; 
+['SmallSheetMetalHouse',[3648.62,3693.06,16.3057],170.524,[0,0,1]] call InitStruct; 
 _3676_030033681_1999520_67860 = ['Decor',[3676.03,3681.2,20.6786],358.506,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\walls\canal_wallsmall_10m_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3671_610113686_4599626_17240 = ['Decor',[3671.61,3686.46,26.1724],180.352,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\walls\canal_wallsmall_10m_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3675_540043686_4199227_07409 = ['Decor',[3675.54,3686.42,33.5734,true],181.148,[-0.00442073,-8.73478e-005,-0.99999], {_thisObj setvariable ['model','a3\structures_f\walls\canal_wallsmall_10m_f.p3d'];}] call InitDecor; // !!! realocated model !!!

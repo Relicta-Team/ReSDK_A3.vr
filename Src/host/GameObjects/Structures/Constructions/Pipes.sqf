@@ -11,7 +11,19 @@
 //труба
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(BasicPipe) extends(Constructions) var(name,"Труба"); var(desc,"Обычная разрушаемая труба"); endclass
+class(BasicPipe) extends(Constructions) var(name,"Труба"); editor_only(var(desc,"Обычная разрушаемая труба");) endclass
+
+editor_attribute("EditorGenerated")
+class(ShortPipeBlueMetal) extends(BasicPipe)
+	var(model,"ml_shabut\exodusss\trubaduba1.p3d");
+	var(name,"Труба");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumPieceSuspendedPipe) extends(BasicPipe)
+	var(model,"ml\ml_object_new\shabbat\trooobaba2.p3d");
+	var(name,"Труба");
+endclass
 
 editor_attribute("EditorGenerated")
 class(BigPilePipes) extends(BasicPipe)

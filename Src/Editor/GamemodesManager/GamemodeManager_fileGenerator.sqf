@@ -133,19 +133,23 @@ function(gm_filegen_internal_processCreate)
 {
 	params ["_modeName"];
 
-	if !([_modeName,"[\w+_0-9]{3,64}"] call regex_isMatch) exitwith {
+	if ([_modeName,"[а-яА-Я]"] call regex_isMatch) exitwith {
 		call loadingScreen_stop;
-		["Название режима содержит недопустимые символы"] call showWarning;
+		["Русские символы в названии режима не допускаются"] call showWarning;
+	};
+	if !([_modeName,"^[\w+_0-9]{3,64}$"] call regex_isMatch) exitwith {
+		call loadingScreen_stop;
+		["Название режима содержит недопустимые символы. Название должно быть не менее 3х символов, может содержать англ.буквы, цифры и нижнее подчеркивание",10] call showWarning;
 	};
 
 	private _fullModeName = gm_filegen_internal_path_gamemodes + "\" + _modeName;
 	if ([_fullModeName] call folder_exists) exitwith {
 		call loadingScreen_stop;
-		[format["Указанная директория уже существует: %1",_modeName]] call showWarning;
+		[format["Указанная директория уже существует: %1",_modeName],10] call showWarning;
 	};
 
 	if !([_modeName,"^GM\w+"] call regex_isMatch) then {
-		_modeName = "GM" + _modeName;
+		_modeName = "GM" + capitalize(_modeName);
 	};
 
 	//unlock params:params ["_path","_ctx",["_isRelative",true],["_onUnlocked",{}],["_onTimeout",{}]];

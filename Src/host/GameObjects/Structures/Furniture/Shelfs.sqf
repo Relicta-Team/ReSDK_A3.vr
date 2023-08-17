@@ -10,7 +10,7 @@
 // Стеллажи
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(ShelfBase) extends(Furniture) var(name,"Полка"); var(desc,"Мебель для сладирования предметов на поверхности"); endclass
+class(ShelfBase) extends(Furniture) var(name,"Полка"); editor_only(var(desc,"Мебель для складирования предметов на поверхности");) endclass
 
 editor_attribute("EditorGenerated")
 class(WoodenSmallShelf) extends(ShelfBase)

@@ -11,7 +11,13 @@
 //пол
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallFloor) extends(Constructions) var(name,"Пол"); var(desc,"Обычное напольное покрытие"); endclass
+class(SmallFloor) extends(Constructions) var(name,"Пол"); editor_only(var(desc,"Обычное напольное покрытие");) endclass
+
+editor_attribute("EditorGenerated")
+class(LongBoardsOnStilts) extends(SmallFloor)
+	var(model,"ca\structures\nav_boathouse\nav_boathouse_piert.p3d");
+	var(name,"Доски");
+endclass
 
 editor_attribute("EditorGenerated")
 class(LongRottenBoards) extends(SmallFloor)
@@ -54,6 +60,11 @@ editor_attribute("EditorGenerated")
 class(ThickConcreteFloorSmall) extends(SmallFloor)
 	var(model,"csa_constr\csa_obj\pod_6x6.p3d");
 	var(name,"Бетон");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumConcreteFloor) extends(SmallFloor)
+	var(model,"csa_constr\csa_obj\plita_3x6.p3d");
 endclass
 
 editor_attribute("EditorGenerated")

@@ -16,11 +16,11 @@ class(SmallDecorations) extends(StructureBasicCategory) endclass
 //картины
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(Picture) extends(SmallDecorations) var(name,"Картина"); var(desc,"Просто картина"); endclass
+class(Picture) extends(SmallDecorations) var(name,"Картина"); editor_only(var(desc,"Просто картина");) endclass
 //ковры
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(Carpet) extends(SmallDecorations) var(name,"Ковер"); var(desc,"Красивый ковер"); endclass
+class(Carpet) extends(SmallDecorations) var(name,"Ковер"); editor_only(var(desc,"Красивый ковер");) endclass
 
 editor_attribute("EditorGenerated")
 class(OrangeCapet) extends(Carpet)
@@ -29,7 +29,7 @@ endclass
 //таблички
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallSign) extends(SmallDecorations) var(name,"Табличка"); var(desc,"Табличка или указатель"); endclass
+class(SmallSign) extends(SmallDecorations) var(name,"Табличка"); editor_only(var(desc,"Табличка или указатель");) endclass
 
 editor_attribute("EditorGenerated")
 class(OldTombstone3) extends(SmallSign)

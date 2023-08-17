@@ -11,7 +11,7 @@
 //забор
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallFence) extends(Constructions) var(name,"Ограда"); var(desc,"Небольшие заборы и ограды" pcomma " которые можно разрушить"); endclass
+class(SmallFence) extends(Constructions) var(name,"Ограда"); editor_only(var(desc,"Небольшие заборы и ограды" pcomma " которые можно разрушить");) endclass
 
 editor_attribute("EditorGenerated")
 class(SmallCornerFenceMadeOfJunk) extends(SmallFence)
@@ -48,6 +48,16 @@ class(WoodenSmallFence) extends(SmallFence)
 endclass
 
 editor_attribute("EditorGenerated")
+class(WoodenSmallFence2) extends(WoodenSmallFence)
+	var(model,"ml\ml_object_new\model_24\ykritie.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(WoodenSmallFence1) extends(WoodenSmallFence)
+	var(model,"ml\ml_object_new\model_14_10\derewobarik.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(LuxuryRedCurtain) extends(SmallFence)
 	var(model,"ml\ml_object_new\shabbat\shtora_pravo.p3d");
 endclass
@@ -80,6 +90,11 @@ endclass
 editor_attribute("EditorGenerated")
 class(TinFence) extends(SmallFence)
 	var(model,"a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v1_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SheetMetalTinFence) extends(TinFence)
+	var(model,"ml_exodusnew\zhelezodozz.p3d");
 endclass
 
 editor_attribute("EditorGenerated")

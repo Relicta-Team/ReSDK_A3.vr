@@ -11,7 +11,7 @@ editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
 class(BedBase) extends(IChair)
 	var(name,"Кровать");
-	var(desc,"Место для сна");
+	editor_only(var(desc,"Место для сна");)
 	/*
 		Не подходят:
 		Acts_LyingWounded_loop

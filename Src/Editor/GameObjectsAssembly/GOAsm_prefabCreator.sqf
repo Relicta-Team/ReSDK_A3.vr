@@ -239,8 +239,8 @@ function(goasm_prefab_validateName)
 {
 	params ["_newType","_basicType"];
 
-	if !([_newType,"^([_a-zA-Z][_a-zA-Z1-9]*)$"] call regex_isMatch) exitWith {
-		["Имя класса должно содержать только англ. символы. Допускаются цифры и нижнее подчеркивание: ^([_a-zA-Z][_a-zA-Z1-9]*)$"] call showError;
+	if !([_newType,"^([_a-zA-Z][_a-zA-Z0-9]*)$"] call regex_isMatch) exitWith {
+		["Имя класса должно содержать только англ. символы. Допускаются цифры и нижнее подчеркивание: ^([_a-zA-Z][_a-zA-Z0-9]*)$"] call showError;
 		false
 	};
 	if (_newType call oop_reflect_hasClass) exitWith {
