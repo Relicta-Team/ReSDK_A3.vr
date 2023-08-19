@@ -56,6 +56,23 @@ class OOPBuilder : IScript
 			} else {
 				output.Append("$CLOSED$");
 			}
+		} else if (args == "colorbox") {
+
+			var selectedColor = Color();
+			ColorDialog colorDialog = new ColorDialog
+			{
+				Color = selectedColor 
+			};
+
+			DialogResult result = colorDialog.ShowDialog();
+
+			if (result == DialogResult.OK)
+			{
+				selectedColor = colorDialog.Color;
+				output.Append(selectedColor.ToString());
+			} else {
+				output.Append("$CLOSED$");
+			}
 		} else if (args == "gm_generator")
 		{
 			try {
@@ -145,6 +162,49 @@ class OOPBuilder : IScript
 		form.ClientSize = new Size(396, 107);
 		form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
 		form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+		form.FormBorderStyle = FormBorderStyle.FixedDialog;
+		form.StartPosition = FormStartPosition.CenterScreen;
+		form.MinimizeBox = false;
+		form.MaximizeBox = false;
+		form.AcceptButton = buttonOk;
+		form.CancelButton = buttonCancel;
+
+		DialogResult dialogResult = form.ShowDialog();
+		value = textBox.Text;
+		return dialogResult;
+	}
+
+	public static DialogResult TextBox(string title, string promptText, ref string value)
+	{
+		Form form = new Form();
+		Label label = new Label();
+		TextBox textBox = new TextBox();
+		Button buttonOk = new Button();
+		Button buttonCancel = new Button();
+
+		form.Text = title;
+		label.Text = promptText;
+		textBox.Text = value;
+		textBox.Multiline = true; // Мультистрочное поле ввода
+		textBox.Size = new Size(800, 600); // Устанавливаем размер
+
+		buttonOk.Text = "OK";
+		buttonCancel.Text = "Cancel";
+		buttonOk.DialogResult = DialogResult.OK;
+		buttonCancel.DialogResult = DialogResult.Cancel;
+
+		label.SetBounds(9, 20, 372, 13);
+		textBox.SetBounds(12, 36, 800, 600);
+		buttonOk.SetBounds(636, 656, 75, 23);
+		buttonCancel.SetBounds(717, 656, 75, 23);
+
+		label.AutoSize = true;
+		textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+		buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+		buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+		form.ClientSize = new Size(800, 691); // Устанавливаем размер окна
+		form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
 		form.FormBorderStyle = FormBorderStyle.FixedDialog;
 		form.StartPosition = FormStartPosition.CenterScreen;
 		form.MinimizeBox = false;
