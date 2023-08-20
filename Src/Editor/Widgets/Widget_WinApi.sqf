@@ -8,8 +8,9 @@ function(widget_winapi_openTextBox)
 {
 	params ["_refOut",["_header","Ввод текста"],["_desc","Введите текст"],["_baseText",""],["_canMultiLine",true]];
 	if isNullVar(_refOut) exitWith {false};
-
+	//private _cachedMousePos = getMousePosition; //replaced inside c#-side
 	private _result = ["OOPBuilder","textbox",[_header,_desc,_canMultiLine,_baseText],true] call rescript_callCommand;
+	//setMousePosition _cachedMousePos;
 	if (_result != "$CLOSED$") exitWith {
 		refset(_refOut,_result);
 		true

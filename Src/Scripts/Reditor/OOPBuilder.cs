@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Globalization;
+using System.Runtime.InteropServices;
 
 class OOPBuilder : IScript
 {
@@ -92,12 +93,15 @@ class OOPBuilder : IScript
 		} else if (args == "textbox")
 		{
 			string value = ScriptContext.GetArg(3);
+			var mpos = Control.MousePosition;
 			if (TextBox(ScriptContext.GetArg(0), ScriptContext.GetArg(1), ScriptContext.GetArg(2)=="true", ref value) == DialogResult.OK)
 			{
+				SetCursorPos(mpos.X,mpos.Y);
 				output.Append(ScriptContext.EncodingToRV(value));
 			}
 			else
 			{
+				SetCursorPos(mpos.X, mpos.Y);
 				output.Append("$CLOSED$");
 			}
 		}
@@ -210,6 +214,9 @@ class OOPBuilder : IScript
 		value = textBox.Text;
 		return dialogResult;
 	}
+
+	[DllImport("user32.dll")]
+	private static extern bool SetCursorPos(int X, int Y);
 
 	public static DialogResult TextBox(string title, string promptText,bool canMultiline, ref string value)
 	{
