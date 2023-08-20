@@ -12,6 +12,7 @@ using System.Collections.Generic;
 
 using System.Windows.Forms;
 using System.Drawing;
+using System.Globalization;
 
 class OOPBuilder : IScript
 {
@@ -30,38 +31,45 @@ class OOPBuilder : IScript
 		if (args == "runsavemap")
 		{
 			runSaveMap();
-		} else if (args == "buildclass_DEPRECATED")
+		}
+		else if (args == "buildclass_DEPRECATED")
 		{
 			if (ScriptContext.GetArgsCount() < 3)
 			{
 				output.Append("err:argserror:" + ScriptContext.GetArgsCount());
 			}
 
-			output.Append(AddNewClassToFile(ScriptContext.GetArg(0),Int32.Parse(ScriptContext.GetArg(1)),ScriptContext.GetArg(2)));
+			output.Append(AddNewClassToFile(ScriptContext.GetArg(0), Int32.Parse(ScriptContext.GetArg(1)), ScriptContext.GetArg(2)));
 		}
 		else if (args == "buildclass")
 		{
-			
+
 			if (ScriptContext.GetArgsCount() < 3)
 			{
 				output.Append("err:argserror:" + ScriptContext.GetArgsCount());
 			}
-			output.Append(clstofile(ScriptContext.GetArg(0),Int32.Parse(ScriptContext.GetArg(1)),ScriptContext.GetArg(2)));
-		} else if (args == "inputbox")
+			output.Append(clstofile(ScriptContext.GetArg(0), Int32.Parse(ScriptContext.GetArg(1)), ScriptContext.GetArg(2)));
+		}
+		else if (args == "inputbox")
 		{
 			string value = "";
-			if (InputBox(ScriptContext.GetArg(0),ScriptContext.GetArg(1),ref value) == DialogResult.OK)
+			if (InputBox(ScriptContext.GetArg(0), ScriptContext.GetArg(1), ref value) == DialogResult.OK)
 			{
 				output.Append(value);
-			} else {
+			}
+			else
+			{
 				output.Append("$CLOSED$");
 			}
-		} else if (args == "colorbox") {
-
-			var selectedColor = Color();
+		}
+		else if (args == "colorbox")
+		{
+			
+			var selectedColor = Color.Black;
 			ColorDialog colorDialog = new ColorDialog
 			{
-				Color = selectedColor 
+				Color = selectedColor,
+				FullOpen = true
 			};
 
 			DialogResult result = colorDialog.ShowDialog();
@@ -69,14 +77,36 @@ class OOPBuilder : IScript
 			if (result == DialogResult.OK)
 			{
 				selectedColor = colorDialog.Color;
-				output.Append(selectedColor.ToString());
+				double r = selectedColor.R / 255.0; // Нормализация к диапазону [0, 1]
+				double g = selectedColor.G / 255.0;
+				double b = selectedColor.B / 255.0;
+
+				string colorText = $"[{r.ToString("0.######", CultureInfo.InvariantCulture)}, " +
+								  $"{g.ToString("0.######", CultureInfo.InvariantCulture)}, " +
+								  $"{b.ToString("0.######", CultureInfo.InvariantCulture)}]";
+				output.Append(colorText);
 			} else {
 				output.Append("$CLOSED$");
 			}
-		} else if (args == "gm_generator")
+			
+		} else if (args == "textbox")
 		{
-			try {
-				if (ScriptContext.GetArgsCount() != 5) {
+			string value = ScriptContext.GetArg(2);
+			if (TextBox(ScriptContext.GetArg(0), ScriptContext.GetArg(1), ref value) == DialogResult.OK)
+			{
+				output.Append(ScriptContext.EncodingToRV(value));
+			}
+			else
+			{
+				output.Append("$CLOSED$");
+			}
+		}
+		else if (args == "gm_generator")
+		{
+			try
+			{
+				if (ScriptContext.GetArgsCount() != 5)
+				{
 					output.Append("false");
 					return;
 				}
@@ -92,23 +122,28 @@ class OOPBuilder : IScript
 				// replace all
 				input = input.Replace(replaceFrom, replaceTo);
 				input = input.Replace("@MAP_NAME@", replaceMapName);
-				
+
 				//directory create if not exists
 				System.IO.FileInfo file = new System.IO.FileInfo(fileTo);
 				file.Directory.Create();
-				
+
 				// write to
 				File.WriteAllText(fileTo, input);
 
 				output.Append("true");
-			} catch (Exception ex) {
+			}
+			catch (Exception ex)
+			{
 				Console.WriteLine(ex);
 				output.Append("false");
 			}
-		} else if (args == "gm_generator_finalize")
+		}
+		else if (args == "gm_generator_finalize")
 		{
-			try {
-				if (ScriptContext.GetArgsCount() != 3) {
+			try
+			{
+				if (ScriptContext.GetArgsCount() != 3)
+				{
 					output.Append("false");
 					return;
 				}
@@ -123,9 +158,11 @@ class OOPBuilder : IScript
 
 				//add this loader to scriptloaderfile
 				File.AppendAllText(scriptloaderfile, $"\r\nload(\"{modename}\\loader.sqf\");");
-				
+
 				output.Append("true");
-			} catch (Exception ex) {
+			}
+			catch (Exception ex)
+			{
 				Console.WriteLine(ex);
 				output.Append("false");
 			}
@@ -144,8 +181,8 @@ class OOPBuilder : IScript
 		label.Text = promptText;
 		textBox.Text = value;
 
-		buttonOk.Text = "OK";
-		buttonCancel.Text = "Cancel";
+		buttonOk.Text = "ОК";
+		buttonCancel.Text = "Отмена";
 		buttonOk.DialogResult = DialogResult.OK;
 		buttonCancel.DialogResult = DialogResult.Cancel;
 
@@ -186,30 +223,41 @@ class OOPBuilder : IScript
 		label.Text = promptText;
 		textBox.Text = value;
 		textBox.Multiline = true; // Мультистрочное поле ввода
-		textBox.Size = new Size(800, 600); // Устанавливаем размер
+		textBox.ScrollBars = ScrollBars.Vertical; // Вертикальная прокрутка
 
-		buttonOk.Text = "OK";
-		buttonCancel.Text = "Cancel";
+		buttonOk.Text = "ОК";
+		buttonCancel.Text = "Отмена";
 		buttonOk.DialogResult = DialogResult.OK;
 		buttonCancel.DialogResult = DialogResult.Cancel;
 
 		label.SetBounds(9, 20, 372, 13);
-		textBox.SetBounds(12, 36, 800, 600);
-		buttonOk.SetBounds(636, 656, 75, 23);
-		buttonCancel.SetBounds(717, 656, 75, 23);
+		textBox.SetBounds(12, 36, 670, 500); // Изменил размеры на 670x500
+		buttonOk.SetBounds(516, 546, 75, 23); // Изменил координаты кнопок
+		buttonCancel.SetBounds(597, 546, 75, 23); // Изменил координаты кнопок
 
 		label.AutoSize = true;
 		textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
 		buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 		buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 
-		form.ClientSize = new Size(800, 691); // Устанавливаем размер окна
+		// Обработка нажатия клавиш в поле ввода
+		/*textBox.KeyDown += (sender, e) =>
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				int selectionStart = textBox.SelectionStart;
+				textBox.Text = textBox.Text.Insert(selectionStart, Environment.NewLine);
+				textBox.SelectionStart = selectionStart + Environment.NewLine.Length;
+				e.Handled = true; // Подавляем обработку Enter
+			}
+		};*/
+
+		form.ClientSize = new Size(700, 600); // Устанавливаем размер окна
 		form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
 		form.FormBorderStyle = FormBorderStyle.FixedDialog;
 		form.StartPosition = FormStartPosition.CenterScreen;
 		form.MinimizeBox = false;
 		form.MaximizeBox = false;
-		form.AcceptButton = buttonOk;
 		form.CancelButton = buttonCancel;
 
 		DialogResult dialogResult = form.ShowDialog();

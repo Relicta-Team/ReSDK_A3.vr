@@ -70,4 +70,11 @@ class ScriptContext : IScript
 	{
 		
 	}
+
+	/// <summary>
+	/// Преобразование строки в формат для движка платформы
+	/// </summary>
+	/// <param name="str">Входная строка</param>
+	/// <returns>Преобразованная строка</returns>
+	public static string EncodingToRV(string str) => Encoding.GetEncoding(1251).GetString(Encoding.GetEncoding(65001).GetBytes(str));
 }
