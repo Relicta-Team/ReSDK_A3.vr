@@ -71,6 +71,7 @@ init_function(vcom_emit_initialize)
 	vcom_emit_internal_copyedData = null;
 
 	vcom_emit_envObject_ground = objNull;
+		vcom_emit_envObject_groundAreaList = [];
 	vcom_emit_envObjects_list_box = [];
 }
 
@@ -124,7 +125,11 @@ function(vcom_emit_openMainContextMenuSettings)
 		_stackMenu pushBack [
 			"<t size='1'>"+ifcheck(isObjectHidden vcom_emit_envObject_ground,"Включить","Выключить") + " показ пола</t>",
 			{
-				vcom_emit_envObject_ground hideObject !(isObjectHidden vcom_emit_envObject_ground);
+				_newval = !(isObjectHidden vcom_emit_envObject_ground);
+				vcom_emit_envObject_ground hideObject _newval;
+				{
+					_x hideObject _newval;
+				} foreach vcom_emit_envObject_groundAreaList;
 			},null,"Показывает или скрывает поверхность под центральной позицией эмиттеров"
 		];
 	};
@@ -937,9 +942,21 @@ function(vcom_emit_loadEnvObjects)
 		,[0,0,9.5+5]
 	];
 
+	for "_x" from -100 to 100 step 10 do {
+		for "_y" from -100 to 100 step 10 do {
+			if (_x == 0 && _y == 0) then {continue};
+			private _attpos = [_x,_y,-5.5];
+			private _obj = createvehicle [_modelPath,position _logic,[],0,"none"];
+			_obj attachto [_logic,_attpos];
+
+			vcom_emit_envObject_groundAreaList pushBack _obj;
+		};
+	};
+
 	if (_isInit) then {
 		vcom_emit_envObject_ground hideObject true;
 		{_x hideObject true} foreach vcom_emit_envObjects_list_box;
+		{_x hideObject true} foreach vcom_emit_envObject_groundAreaList;
 
 		["onDisplayClose",{
 			deleteVehicle vcom_emit_envObject_ground;
@@ -947,6 +964,11 @@ function(vcom_emit_loadEnvObjects)
 				deleteVehicle _x;
 			} foreach vcom_emit_envObjects_list_box;
 			vcom_emit_envObjects_list_box = [];
+
+			{
+				deleteVehicle _x;
+			} foreach vcom_emit_envObject_groundAreaList;
+			vcom_emit_envObject_groundAreaList = [];
 		}] call Core_addEventHandler;
 	};
 

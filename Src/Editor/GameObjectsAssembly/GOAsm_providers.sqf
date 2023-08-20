@@ -157,8 +157,37 @@ function(goasm_attributes_handleProvider_inputGeneric)
 	} else {
 		_allowedRangeText = "Вводимый тип данных: "+_inputType
 	};
+
+	if (_inputType=="string") then {
+		modvar(_allowedRangeText) + "\n\n" + "Нажмите ПКМ для детального редактирования";
+		{
+			if (_key == MOUSE_RIGHT) then {
+				//Жидко... но работает
+				private _ref = refcreate("");
+				_props = _data get "customProps";
+				private _base = ctrlText _wid;//[_objWorld,_memberName] call golib_getActualDataValue;
+				//["base %1",_base] call printTrace;
+				if ([_ref,"Изменение поля " + format["%1::%2",_data get "class",_memberName],"Введите текст",_base,true] call widget_winapi_openTextBox) then {
+					private _newvalue = refget(_ref);
+					_props set [_memberName,_newvalue];
+					private _changedData = true;
+					_defval = [_data get "class",_memberName] call oop_getFieldBaseValue;
+					//["pre (%1); post (%2)",_defval,str _newvalue] call printTrace;
+					if (equals(str _newvalue,_defval) || _newvalue == "") then {
+						if (_memberName in _props) then {_changedData = true} else {_changedData = false};
+						_props deleteAt _memberName;
+					};
+					if (_changedData) then {
+						[_objWorld,_data,true] call golib_setHashData;
+					};
+				};
+			};
+		} call _setOnPressCode;
+	};
+
 	_wid ctrlSetTooltip _allowedRangeText;
 	_wid setVariable ["_memberName",_memberName];
+	_wid setvariable ["_button",_button];
 	_wid setVariable ["_editorContext",_editorContext];
 	_wid setVariable ["_inputType",_inputType];
 	_wid setVariable ["_conditionType",_conditionType];
