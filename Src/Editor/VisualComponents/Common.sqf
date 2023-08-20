@@ -260,7 +260,7 @@ function(vcom_observ_handleControl)
 			_z = _thisParams select 1;
 			_dis = vcom_observ_camPos select 0;
 			_dis = _dis - (_z / 4);
-			_dis = _dis max 1 min 10;
+			_dis = _dis max 1 min 30; //prev 10
 			vcom_observ_camPos set [0,_dis];
 		};
 		if (_controlType == "Mouse") exitWith {
@@ -296,8 +296,8 @@ function(vcom_observ_handleControl)
 				];
 				_targetPos = [_targetPos,_dY,_dirH + 00] call bis_fnc_relpos;
 				_targetPos = [_targetPos,_dX,_dirH - 90] call bis_fnc_relpos;
-				_targetPos set [0,(_targetPos select 0) max (-5) min (+5)];
-				_targetPos set [1,(_targetPos select 1) max (-5) min (+5)];
+				_targetPos set [0,(_targetPos select 0) max (-50) min (+50)]; //min/max editor area size
+				_targetPos set [1,(_targetPos select 1) max (-50) min (+50)];
 				_target attachto [_logic,_targetPos,""];
 				
 			};
