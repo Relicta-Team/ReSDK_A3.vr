@@ -204,3 +204,4 @@ menu_structureLayout = [
 #include "GenericControls.sqf"
 #include "LoadingScreen.sqf"
 #include "DrawNames.sqf"
+#include "Widget_WinApi.sqf"
