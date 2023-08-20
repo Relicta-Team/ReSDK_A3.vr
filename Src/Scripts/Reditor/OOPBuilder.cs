@@ -91,8 +91,8 @@ class OOPBuilder : IScript
 			
 		} else if (args == "textbox")
 		{
-			string value = ScriptContext.GetArg(2);
-			if (TextBox(ScriptContext.GetArg(0), ScriptContext.GetArg(1), ref value) == DialogResult.OK)
+			string value = ScriptContext.GetArg(3);
+			if (TextBox(ScriptContext.GetArg(0), ScriptContext.GetArg(1), ScriptContext.GetArg(2)=="true", ref value) == DialogResult.OK)
 			{
 				output.Append(ScriptContext.EncodingToRV(value));
 			}
@@ -211,7 +211,7 @@ class OOPBuilder : IScript
 		return dialogResult;
 	}
 
-	public static DialogResult TextBox(string title, string promptText, ref string value)
+	public static DialogResult TextBox(string title, string promptText,bool canMultiline, ref string value)
 	{
 		Form form = new Form();
 		Label label = new Label();
@@ -241,16 +241,13 @@ class OOPBuilder : IScript
 		buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 
 		// Обработка нажатия клавиш в поле ввода
-		/*textBox.KeyDown += (sender, e) =>
+		if (!canMultiline)
 		{
-			if (e.KeyCode == Keys.Enter)
+			textBox.TextChanged += (sender, e) =>
 			{
-				int selectionStart = textBox.SelectionStart;
-				textBox.Text = textBox.Text.Insert(selectionStart, Environment.NewLine);
-				textBox.SelectionStart = selectionStart + Environment.NewLine.Length;
-				e.Handled = true; // Подавляем обработку Enter
-			}
-		};*/
+				textBox.Text = textBox.Text.Replace(Environment.NewLine, " ");
+			};
+		}
 
 		form.ClientSize = new Size(700, 600); // Устанавливаем размер окна
 		form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });

@@ -6,10 +6,10 @@
 
 function(widget_winapi_openTextBox)
 {
-	params ["_refOut",["_header","Ввод текста"],["_desc","Введите текст"],["_baseText",""]];
+	params ["_refOut",["_header","Ввод текста"],["_desc","Введите текст"],["_baseText",""],["_canMultiLine",true]];
 	if isNullVar(_refOut) exitWith {false};
 
-	private _result = ["OOPBuilder","textbox",[_header,_desc,_baseText],true] call rescript_callCommand;
+	private _result = ["OOPBuilder","textbox",[_header,_desc,_canMultiLine,_baseText],true] call rescript_callCommand;
 	if (_result != "$CLOSED$") exitWith {
 		refset(_refOut,_result);
 		true
