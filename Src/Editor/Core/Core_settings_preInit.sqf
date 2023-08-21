@@ -120,6 +120,13 @@ core_settings_list_default = [
 				}
 			]
 		],
+		["system_enableKeymapInfoOnVcomLoad",
+			[
+				"Показать информацию о клавишах в редакторе эмиттеров и позиций модели",
+				"Включает показ скрываемого информационного сообщения с доступными клавишами управления",
+				[true,"check"],validate_check
+			]
+		],
 
 	["region","General","Общие настройки редактора"],
 		["gen_leftTabSize",

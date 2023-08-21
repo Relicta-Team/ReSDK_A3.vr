@@ -184,6 +184,52 @@ function(vcom_observ_loadCameraController)
 
 	_d setvariable ["____zoneDragRef",_zoneDrag];
 
+	if (cfg_system_enableKeymapInfoOnVcomLoad) then {
+		private _widHelp = [_d,TEXT,
+			_sizes
+		,_ctg] call createWidget;
+		[_widHelp,format["<t size='1.7'>%1Управление визуальной сценой:%1%1ЛКМ (зажать) - движение камеры%1ПКМ (зажать) - вращение камеры%1"+
+		"ЛКМ+Q или ЛКМ+W - поднять камеру%1"+
+		"ЛКМ+Z или ЛКМ+S - опустить камеру камеру%1"+
+		"Добавление Shift к модификаторам камеры (Q,W,S,Z) - увеличение шага изменения высоты камеры%1%1"+
+		"Нажмите на это окно для закрытия, либо оно само закроется через 10 секунд</t>",sbr]] call widgetSetText;
+		_widHelp setBackgroundColor [0.1,0.1,0.1,0.9];
+		_widHelp ctrladdeventhandler ["MouseButtonUp",{
+			(_this select 0)setFade 1;
+			(_this select 0) commit 0.2;
+			(_this select 0) ctrlEnable false;
+		}];
+		ctrlsetfocus _widHelp;
+		private _post = {
+			_this ctrlEnable false;
+			_this setFade 1;
+			_this commit 1.3;
+		};
+		invokeAfterDelayParams(_post,10,_widHelp);
+	};
+
+
+	vcom_observ_camModifier = 0;
+	vcom_observ_internal_camModifKeyVal = 0;
+	_d DisplayAddEventHandler ["KeyDown",{
+		params ["_wid","_key","_shift","_ctrl","_alt"];
+		vcom_observ_internal_camModifKeyVal = 0;
+		_shifMod = ifcheck(_shift,10,1);
+		if (_key in [KEY_Q,KEY_W]) exitwith {
+			vcom_observ_internal_camModifKeyVal = 0.01 * _shifMod;
+			//!((_wid getvariable "____zoneDragRef") call isMouseInsideWidget);
+		};
+		if (_key in [KEY_Z,KEY_S]) exitwith {
+			vcom_observ_internal_camModifKeyVal = -0.01 * _shifMod;
+			//!((_wid getvariable "____zoneDragRef") call isMouseInsideWidget);
+		};
+		false
+	}];
+	_d DisplayAddEventHandler ["KeyUp",{
+		params ["","_key"];
+		vcom_observ_internal_camModifKeyVal = 0;
+	}];
+
 	vcom_handler_draw3D = addMissionEventHandler ["draw3D",{['draw3D',_this] call vcom_observ_handleControl;}];
 
 	call vcom_observ_reloadCamPos;
@@ -287,12 +333,17 @@ function(vcom_observ_handleControl)
 				_dY = (_cY - _mY) * 10;
 				vcom_observ_buttons set [0,[_mX,_mY]];
 
+				if (vcom_observ_internal_camModifKeyVal!=0) then {
+					modvar(vcom_observ_camModifier) + vcom_observ_internal_camModifKeyVal;
+					vcom_observ_camModifier = clamp(vcom_observ_camModifier,-30,30);
+				};
+				
 				_targetPos = position _target;
 				_logicPos = position _logic;
 				_targetPos = [
 					(_logicPos select 0) - (_targetPos select 0),
 					(_logicPos select 1) - (_targetPos select 1),
-					0
+					vcom_observ_camModifier
 				];
 				_targetPos = [_targetPos,_dY,_dirH + 00] call bis_fnc_relpos;
 				_targetPos = [_targetPos,_dX,_dirH - 90] call bis_fnc_relpos;

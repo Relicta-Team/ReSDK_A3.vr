@@ -769,6 +769,7 @@ function(vcom_emit_internal_addParticleProperties)
 				"Рандомизирует настройки цвета каждого кадра индивидуально."],
 					[0,1],0.001,_colorsRandomBack,1.0],
 				_genEvSetup
+				,null, true //for vcom_emit_internal_createZonevec3
 			];modvar(_yPos)+_perButtonSizeH;
 
 			_listData pushBack ["Input",
@@ -874,7 +875,7 @@ function(vcom_emit_internal_addParticleProperties)
 
 	private _w = null;
 	{
-		_x params ["_callerVar","_genericParams","_customParams",["_evUpd",_genEvSetup],["_postCreateEvent",{}]];
+		_x params ["_callerVar","_genericParams","_customParams",["_evUpd",_genEvSetup],["_postCreateEvent",{}],["_opt",null]];
 		
 		if (_callerVar == "simpleText") then {
 			private _code = _customParams;
@@ -890,7 +891,7 @@ function(vcom_emit_internal_addParticleProperties)
 		
 		_genericParams params ["_zoneStorageName","_sizes"];
 		//params ["_varname","_size","_ctg","_props","_eventUpdate"]
-		_w = [_zoneStorageName,_sizes,_ctgParticle,_customParams,_evUpd] call (missionNamespace getvariable ["vcom_emit_internal_createZone"+_callerVar,{
+		_w = [_zoneStorageName,_sizes,_ctgParticle,_customParams,_evUpd,_opt] call (missionNamespace getvariable ["vcom_emit_internal_createZone"+_callerVar,{
 			setLastError(__FUNC__ + " - Error on call function (not exists): vcom_emit_internal_createZone"+_callerVar);
 			widgetNull;
 		}]);

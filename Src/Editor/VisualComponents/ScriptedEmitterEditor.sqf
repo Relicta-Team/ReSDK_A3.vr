@@ -153,14 +153,16 @@ function(vcom_emit_openMainContextMenuSettings)
 
 function(vcom_emit_createEmitterObject)
 {
-	params ["_emitterType"];
-	private _emit = _emitterType createVehicleLocal [0,0,0];
+	params ["_emitterTypeCfg","_emitType"];
+	private _emit = _emitterTypeCfg createVehicleLocal [0,0,0];
 	private _storage = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
 	_storage setvariable ["emitter",_emit];
+	_storage setvariable ["type",_emitType];
 	_storage setvariable ["attributes",[]];
 	_storage
 }
 function(vcom_emit_getEmitterVisual) {_this getvariable "emitter"}
+function(vcom_emit_getEmitterType) {_this getvariable "type"}
 function(vcom_emit_deleteEmitterObject) {deleteVehicle(_this call vcom_emit_getEmitterVisual);deleteVehicle _this}
 
 function(vcom_emit_createVisualWindow)
@@ -478,9 +480,12 @@ function(vcom_emit_relpos_updatePositionAtAxis)
 		_curPos = _curPos vectoradd [0,0,9999];
 	};
 
-	(_cur call vcom_emit_getEmitterVisual) attachto [vcom_logicObject,_curPos];
+	//prev attached to vcom_logicObject
+	//visual object cant accept attached particles
+	_sourceObject = ifcheck((_cur call vcom_emit_getEmitterType)=="particle",vcom_logicObject,vcom_visualObject);
+	(_cur call vcom_emit_getEmitterVisual) attachto [_sourceObject,_curPos];
 	[_cur call vcom_emit_getEmitterVisual,_curOrient] call BIS_fnc_setObjectRotation;
-	(_cur call vcom_emit_getEmitterVisual) attachto [vcom_logicObject,_curPos];
+	//(_cur call vcom_emit_getEmitterVisual) attachto [vcom_visualObject,_curPos];
 
 	//sync from real to visual
 	call vcom_emit_relpos_syncValuesFromObjectToWidgets;
@@ -539,7 +544,7 @@ function(vcom_emit_createEmitter)
 
 	(vcom_emit_emitterTypeAssoc get _emitType) params ["_engineCfgType","_typeShort","_emitterNameStr"];
 	//! Rule: All objects variable name without "_" symbol
-	private _o = [_engineCfgType] call vcom_emit_createEmitterObject;
+	private _o = [_engineCfgType,_emitType] call vcom_emit_createEmitterObject;
 	
 	if isNullReference(_o) exitwith {
 		setLastError(__FUNC__ + " - Cannot create emitter by config: " + _engineCfgType);
