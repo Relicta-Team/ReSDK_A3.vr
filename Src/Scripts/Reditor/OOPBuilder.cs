@@ -67,6 +67,27 @@ class OOPBuilder : IScript
 		{
 			
 			var selectedColor = Color.Black;
+			if (ScriptContext.GetArgsCount() == 3)
+			{
+				//try {
+					//Console.WriteLine(ScriptContext.GetArg(0));
+					double rNormalized = float.Parse(ScriptContext.GetArg(0).Replace(".",","));
+					double gNormalized = float.Parse(ScriptContext.GetArg(1).Replace(".", ","));
+					double bNormalized = float.Parse(ScriptContext.GetArg(2).Replace(".", ","));
+					//Console.WriteLine("POST COLOR");
+					int r = (int)(rNormalized * 255.0);
+					int g = (int)(gNormalized * 255.0);
+					int b = (int)(bNormalized * 255.0);
+					//Console.WriteLine($"PRESETUP {r} {g} {b}");
+					selectedColor = Color.FromArgb(r, g, b);
+					//Console.WriteLine($"POSTSETUP {selectedColor}");
+				/*} catch (Exception ex)
+				{
+					Console.WriteLine(ex);
+					output.Append("[]");
+					return;
+				}*/
+			}
 			ColorDialog colorDialog = new ColorDialog
 			{
 				Color = selectedColor,
