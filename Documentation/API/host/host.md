@@ -1698,7 +1698,7 @@ Description: копирование массива
 
 Replaced value:
 ```sqf
-(+array)
+(+(array))
 ```
 File: [host\engine.hpp at line 278](../../../Src/host/engine.hpp#L278)
 ## array_remlast(arr)
