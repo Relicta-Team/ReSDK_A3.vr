@@ -20,7 +20,7 @@ function(widget_winapi_openTextBox)
 
 function(widget_winapi_openColor)
 {
-	params ["_refOut",["_defColor",[0,0,0]]];
+	params ["_refOut",["_defColor",[0,0,0]],["_precision",6]];
 	if isNullVar(_refOut) exitWith {false};
 	private _result = ["OOPBuilder","colorbox",[
 		clamp(_defColor select 0,0,1),
@@ -28,7 +28,7 @@ function(widget_winapi_openColor)
 		clamp(_defColor select 2,0,1)
 	],true] call rescript_callCommand;
 	if (_result != "$CLOSED$") exitWith {
-		refset(_refOut,parseSimpleArray _result);
+		refset(_refOut,(parseSimpleArray _result) apply {parseNumber (_x toFixed _precision)});
 		true;
 	};
 	false
