@@ -91,6 +91,8 @@ regScriptEmit(SLIGHT_TEMPLATE_DIRECTLIGHT)
 		_emitAlias("Источник света")
 		["linkToSrc",[0.05,0,0]],
 		["setOrient",[90,0,0]],
+		["linkToSrc",[-0.11,0,0]],
+		["setOrient",[-90,0,0]],
 		["setLightColor",[0.48,0.48,0.45]],
 		["setLightAmbient",[0.03,0.03,0.04]],
 		["setLightIntensity",1000],

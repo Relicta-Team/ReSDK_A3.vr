@@ -478,9 +478,9 @@ function(vcom_emit_relpos_updatePositionAtAxis)
 		_curPos = _curPos vectoradd [0,0,9999];
 	};
 
-	(_cur call vcom_emit_getEmitterVisual) attachto [vcom_logicObject,_curPos];
+	(_cur call vcom_emit_getEmitterVisual) attachto [vcom_visualObject,_curPos];
 	[_cur call vcom_emit_getEmitterVisual,_curOrient] call BIS_fnc_setObjectRotation;
-	(_cur call vcom_emit_getEmitterVisual) attachto [vcom_logicObject,_curPos];
+	//(_cur call vcom_emit_getEmitterVisual) attachto [vcom_visualObject,_curPos];
 
 	//sync from real to visual
 	call vcom_emit_relpos_syncValuesFromObjectToWidgets;
