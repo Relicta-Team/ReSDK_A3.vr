@@ -202,6 +202,16 @@ function(mm_handleObjectSave)
 			_realVal = _val select [1,count _val - 2];
 			if ([_realVal,"#ERR#"] call vcom_emit_io_parseConfigName != "#ERR#") then {
 				_val = _realVal + "_var";
+				if !(call vcom_emit_io_isEnumConfigsLoaded) then {
+					[true] call vcom_emit_io_loadEnumAssoc;
+				};
+				private _idxlight = (keys vcom_emit_io_enumAssocKeyStr) findif {_realVal==_x};
+				if (_idxlight == -1) exitWith {
+					INC(mm_internal_errorCount);
+					mm_internal_threadErrorText = mm_internal_threadErrorText + endl +
+					format["Non-existing light type '%1' for object at position '%2'",_realVal,getposatl _obj];
+					continue;
+				};
 			} else {
 				INC(mm_internal_errorCount);
 				mm_internal_threadErrorText = mm_internal_threadErrorText + endl +
