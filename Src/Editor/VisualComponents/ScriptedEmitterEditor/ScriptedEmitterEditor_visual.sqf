@@ -18,7 +18,7 @@
 */
 function(vcom_emit_internal_createZoneVec3)
 {
-	params ["_varname","_size","_ctg","_props","_eventUpdate"]; //_eventUpdate - функция контроля за объектом из UI
+	params ["_varname","_size","_ctg","_props","_eventUpdate",["_colorPalette",false]]; //_eventUpdate - функция контроля за объектом из UI
 	
 	_props params ["_varsysname","_listnames","_rangeVec2","_delta",["_backColor",[0.5,0.5,0.5,0.7]],["_sizeNameModif",1]];
 
@@ -44,7 +44,9 @@ function(vcom_emit_internal_createZoneVec3)
 		private _assocFunc = ifcheck(_isParticle,vcom_emit_prop_internal_getParticleAssoc,vcom_emit_prop_internal_getLightAssoc);
 		private _data = _emit getvariable "data";
 		private _clearSysName = _zone getvariable "_varsysname";
-
+		private _updateColor = false;
+		private _lastSlider = widgetNull;
+		private _newcolorPalette = [0,0,0,1];
 		for "_i" from 0 to 2 do {
 			_sli = _zone getvariable ("_slid_"+str _i);
 			_inp = _zone getvariable ("_inp_"+str _i);
@@ -53,12 +55,24 @@ function(vcom_emit_internal_createZoneVec3)
 			
 			_inp ctrlsettext ifcheck(equalTypes(_val,""),_val,str _val);;
 			_sli sliderSetPosition ifcheck(equalTypes(_val,""),parseNumber _val,_val);
+
+			if (_sli getvariable ["_colorPalette",false]) then {
+				_updateColor = true;
+				_lastSlider = _sli;
+				_newcolorPalette set [_i,clamp( ifcheck(equalTypes(_val,""),parseNumber _val,_val) ,0,1)];
+			};
+		};
+		if _updateColor then {
+			private _colorPalette = _lastSlider getvariable "_colorPaletteWidget";
+			_colorPalette setBackgroundColor _newcolorPalette;
 		};
 	};
 
 
+	_perbut = 100/3;
+	_colorPaletteSizeSlid = 62;
+	_allSliders = [];
 	for "_i" from 0 to 2 do {
-		_perbut = 100/3;
 		_col = [0,0,0,1];
 		_col set [_i,1];
 
@@ -77,14 +91,16 @@ function(vcom_emit_internal_createZoneVec3)
 			[(_this select 0) getvariable "_varsysname",parseNumberSafe(_passedValue),_this select 0,_passedValue] call ((_this select 0) getvariable "__eventUpdate");
 			nextFrameParams((_this select 0)getvariable "__onSyncFunction",(_this select 0)getvariable "_zone");
 		}];
-
-		_slid = [_d,SLIDERWNEW,[20+10,_perbut*_i,70,_perbut-8],_zone] call createWidget;
+		_sizeWSlider = ifcheck(_colorPalette,_colorPaletteSizeSlid,70);
+		_slid = [_d,SLIDERWNEW,[20+10,_perbut*_i,_sizeWSlider,_perbut-8],_zone] call createWidget;
 		_slid ctrlSetActiveColor _col;
 		_slid ctrlSetForegroundColor _col;
 		_slid sliderSetPosition 0;
 		_slid sliderSetSpeed [0.1,_delta,_delta];
 		_slid sliderSetRange _rangeVec2;
 		_slid setvariable ["_index",_i];
+		_slid setvariable ["_colorPalette",_colorPalette];
+		_allSliders pushBack _slid;
 
 		_slid ctrladdeventhandler ["SliderPosChanged",{
 			private _passedValue = _this select 1;
@@ -102,6 +118,32 @@ function(vcom_emit_internal_createZoneVec3)
 		_zone setvariable ["_slid_"+str _i,_slid];
 		_zone setvariable ["_inp_"+str _i,_inp];
 		_zone setvariable ["__onSyncFunction",_syncFunction];
+	};
+
+	if (_colorPalette) then {
+		_color = [_d,TEXT,[20+10+_colorPaletteSizeSlid +1,_perbut*0+2,70-_colorPaletteSizeSlid - 2,(_perbut*3)-8],_zone] call createWidget;
+		_color setBackgroundColor [1,1,1,1];
+		{_x setvariable ["_colorPaletteWidget",_color]} foreach _allSliders;
+		_color setvariable ["__onSyncFunction",_syncFunction];
+		_color setvariable ["_zone",_zone];
+		_color setvariable ["_allSliders",_allSliders];
+		_color ctrlSetTooltip "Нажмите ЛКМ для открытия палитры цветов";
+		_color ctrladdeventhandler ["MouseButtonUp",{
+			params ["_wid","_key"];
+			_zone = _wid getvariable "_zone";
+			_syncFunction = _wid getvariable "__onSyncFunction";
+			if (_key == MOUSE_LEFT) then {
+				_ref = refcreate(0);
+				if ([_ref,ctrlBackgroundColor _wid,4] call widget_winapi_openColor) then {
+					_ref = refget(_ref);
+					{
+						_passedValue = _ref select _foreachIndex;
+						[_x getvariable "_varsysname",_passedValue,_x,str _passedValue] call (_x getvariable "__eventUpdate");
+					} foreach (_wid getvariable "_allSliders");
+					nextFrameParams(_syncFunction,_zone);
+				};
+			};
+		}];
 	};
 
 	_zone setvariable ["_varsysname",_varsysname];
@@ -524,10 +566,10 @@ function(vcom_emit_internal_createZoneComboBox)
 
 	See: vcom_emit_internal_createZoneVec3
 */
-
+//used only for color
 function(vcom_emit_internal_createZone_Vec4_RenderParams)
 {
-	params ["_varname","_size","_ctg","_props","_eventUpdate"]; //_eventUpdate - функция контроля за объектом из UI
+	params ["_varname","_size","_ctg","_props","_eventUpdate",["_colorPalette",true]]; //_eventUpdate - функция контроля за объектом из UI
 	
 	_props params ["_varsysname","_listnames","_rangeVec2_s","_delta",["_backColor",[0.5,0.5,0.5,0.7]],["_sizeNameModif",1]];
 	_rangeVec2_s params ["_rangeVec3","_rangeAlpha"];
@@ -554,7 +596,10 @@ function(vcom_emit_internal_createZone_Vec4_RenderParams)
 		private _assocFunc = ifcheck(_isParticle,vcom_emit_prop_internal_getParticleAssoc,vcom_emit_prop_internal_getLightAssoc);
 		private _data = _emit getvariable "data";
 		private _clearSysName = _zone getvariable "_varsysname";
-
+		private _updateColor = false;
+		private _lastSlider = widgetNull;
+		private _newcolorPalette = [0,0,0,1];
+		private _enabledPalette = true;
 		for "_i" from 0 to 3 do {
 			_sli = _zone getvariable ("_slid_"+str _i);
 			_inp = _zone getvariable ("_inp_"+str _i);
@@ -579,12 +624,40 @@ function(vcom_emit_internal_createZone_Vec4_RenderParams)
 			
 			_inp ctrlsettext ifcheck(equalTypes(_val,""),_val,str _val);
 			_sli sliderSetPosition ifcheck(equalTypes(_val,""),parseNumber _val,_val);
+
+			if (_sli getvariable ["_colorPalette",false]) then {
+				_updateColor = true;
+				_lastSlider = _sli;
+				_val = ifcheck(equalTypes(_val,""),parseNumber _val,_val);
+				if (_i <= 2) then {_val = clamp( _val ,0,1)};
+				_newcolorPalette set [_i,_val];
+				if !(ctrlEnabled _sli) then {
+					_enabledPalette = false;
+				};
+			};
+		};
+
+		if _updateColor then {
+			forceUnicode 0;
+			private _colorPalette = _lastSlider getvariable "_colorPaletteWidget";
+			private _alpha = _newcolorPalette select 3;
+			_text = if (_alpha <= 0.5) then {format["<t size='1' color='%1'>%2</t>",_newcolorPalette call color_RGBtoHTML,
+				("Цвет"splitString "" joinstring sbr)
+			]} else {""};
+			if (!_enabledPalette) then {
+				_text = "<t size='1'>"+("выкл"splitString "" joinstring sbr)+"</t>";
+			};
+			[_colorPalette,_text] call widgetSetText;
+			_colorPalette setBackgroundColor _newcolorPalette;
+			_colorPalette ctrlEnable _enabledPalette;
 		};
 	};
 
 
+	_perbut = 100/4;
+	_colorPaletteSizeSlid = 62;
+	_allSliders = [];
 	for "_i" from 0 to 3 do {
-		_perbut = 100/4;
 		_col = [0,0,0,1];
 		if (_i > 2) then {_col = [1,1,1,1]};
 		_col set [_i,1];
@@ -633,7 +706,8 @@ function(vcom_emit_internal_createZone_Vec4_RenderParams)
 			nextFrameParams((_this select 0)getvariable "__onSyncFunction",(_this select 0)getvariable "_zone");
 		}];
 
-		_slid = [_d,SLIDERWNEW,[20+10,_perbut*_i,70,_perbut-8],_zone] call createWidget;
+		_sizeWSlider = ifcheck(_colorPalette,_colorPaletteSizeSlid,70);
+		_slid = [_d,SLIDERWNEW,[20+10,_perbut*_i,_sizeWSlider,_perbut-8],_zone] call createWidget;
 		_slid ctrlSetActiveColor _col;
 		_slid ctrlSetForegroundColor _col;
 		_slid sliderSetPosition 0;
@@ -641,8 +715,10 @@ function(vcom_emit_internal_createZone_Vec4_RenderParams)
 		
 		_slid sliderSetRange ifcheck(_i>2,_rangeAlpha,_rangeVec3);
 		_slid setvariable ["_index",_i];
+		_slid setvariable ["_colorPalette",_colorPalette];
+		_allSliders pushBack _slid;
 
-		_slid ctrladdeventhandler ["SliderPosChanged",{
+		_slidPosChanged = {
 			private _passedValue = _this select 1;
 			private _varsysname = (_this select 0) getvariable "_varsysnameReal";
 			_arrOffsetIdx = (_this select 0) getvariable "_index";
@@ -674,7 +750,9 @@ function(vcom_emit_internal_createZone_Vec4_RenderParams)
 			] call ((_this select 0) getvariable "__eventUpdate");
 
 			nextFrameParams((_this select 0)getvariable "__onSyncFunction",(_this select 0)getvariable "_zone");
-		}];
+		};
+		_slid ctrladdeventhandler ["SliderPosChanged",_slidPosChanged];
+		_slid setvariable ["_slidPosChanged",_slidPosChanged];
 
 		{
 			_x setvariable ["__eventUpdate",_eventUpdate];
@@ -689,6 +767,38 @@ function(vcom_emit_internal_createZone_Vec4_RenderParams)
 		_zone setvariable ["_slid_"+str _i,_slid];
 		_zone setvariable ["_inp_"+str _i,_inp];
 		_zone setvariable ["__onSyncFunction",_syncFunction];
+	};
+
+	if (_colorPalette) then {
+		_color = [_d,TEXT,[20+10+_colorPaletteSizeSlid +1,_perbut*0+2,70-_colorPaletteSizeSlid - 2,(_perbut*4)-8],_zone] call createWidget;
+		_color setBackgroundColor [1,1,1,1];
+		{_x setvariable ["_colorPaletteWidget",_color]} foreach _allSliders;
+		_color setvariable ["__onSyncFunction",_syncFunction];
+		_color setvariable ["_zone",_zone];
+		_color setvariable ["_allSliders",_allSliders];
+		_color ctrlSetTooltip "Нажмите ЛКМ для открытия палитры цветов";
+		_color ctrladdeventhandler ["MouseButtonUp",{
+			params ["_wid","_key"];
+			_zone = _wid getvariable "_zone";
+			_syncFunction = _wid getvariable "__onSyncFunction";
+			if (_key == MOUSE_LEFT) then {
+				_ref = refcreate(0);
+				_buildedColor = [0,0,0,0];
+				{_buildedColor set [_foreachIndex,sliderPosition _x]} foreach (_wid getvariable "_allSliders");
+				if ([_ref,_buildedColor,4] call widget_winapi_openColor) then {
+					_ref = refget(_ref);
+					_ref set [3,_buildedColor select 3];
+					_allSliders = array_copy(_wid getvariable "_allSliders");
+					reverse _allSliders; //if not setted rendercolor then alpha basicly set to 0
+					reverse _ref;
+					{
+						_passedValue = _ref select _foreachIndex;
+						[_x,_passedValue] call (_x getvariable "_slidPosChanged");
+					} foreach _allSliders;
+					//nextFrameParams(_syncFunction,_zone);
+				};
+			};
+		}];
 	};
 
 	_zone setvariable ["_varsysname",_varsysname];
