@@ -29,6 +29,7 @@ class(Decor) extends(IDestructible)
 	getter_func(isDecor,true);
 	editor_attribute("EditorVisible" arg "custom_provider:model") editor_attribute("Tooltip" arg "Модель декорации")
 	var(model,"a3\structures_f\dominants\wip\wip_ruins_f.p3d");
+	var(loc,objNull);
 
 	func(InitModel)
 	{
