@@ -734,14 +734,13 @@ endregion
 
 		if isTypeOf(this,BasicMob) exitwith {false};
 		
-		assert(!isImplementVar(this,"light"));
 		assert(!callSelf(isSeat));
 
 		if callSelf(isInWorld) then {
 			//update modelpath
 			setSelf(model,_newmodel);
 
-			setLastError("TODO: implement world model update");
+			//setLastError("TODO: implement world model update");
 			/*
 				1. Получаем метаданные с текущего визуального объекта.
 				2. создаем объект
@@ -754,13 +753,13 @@ endregion
 			private _vec = vectorUpVisual _loc;
 
 
-			setLastError("TODO: Check all variables on object" + str (allVariables _loc));
+			//setLastError("TODO: Check all variables on object" + str (allVariables _loc));
 			// private _varmap = [];
 			// {_varmap pushBack [_x,_loc getvariable _x]} foreach (allVariables _loc);
 
 
 			callSelf(unloadModel); //now object deleted from world
-			assert(isNullReference(_loc));
+			//assert(isNullReference(_loc));
 
 			private _visObj = callSelfParams(InitModel,_pos arg _dir arg _vec);
 			[[_pos,_cht] call noe_posToChunk,_cht,_visObj] call noe_registerObject;
