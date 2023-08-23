@@ -30,6 +30,8 @@ jobs:
     name: Validation
     runs-on: windows-latest
     steps:
+      - name: Setup Python
+        uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
       - name: Running Map Validator
         run: |
@@ -47,6 +49,8 @@ jobs:
           - client-debug
           - server
           - server-debug
+        needs:
+          - mapvalidator
     steps:
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
