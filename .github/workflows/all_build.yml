@@ -80,6 +80,7 @@ jobs:
     runs-on: windows-latest
     needs:
       - allbuild
+      - mapvalidator
     steps:
       - uses: actions/checkout@v3
       - name: Increment build number
