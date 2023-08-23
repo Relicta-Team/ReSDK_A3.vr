@@ -360,6 +360,8 @@
 //проверка наличия членов
 #define isImplementFunc(objref,met) (!isnil{getFunc(objref,met)})
 #define isImplementVar(objref,var) ((tolower #var) in getFunc(objref,__allfields_map))
+	#define isImplementFuncStr(objref,met) (!isnil{getFuncReflect(objref,met)})
+	#define isImplementVarStr(objref,var) ((tolower (var)) in getFunc(objref,__allfields_map))
 //Прямое получение дефолтных значений по подстроке через рефлексию
 #define getFieldBaseValue(strt,varx) ([strt,varx,true] call oop_getFieldBaseValue)
 #define getFieldBaseValueWithMethod(strt,varx,prp) ([strt,varx,true,prp] call oop_getFieldBaseValue)

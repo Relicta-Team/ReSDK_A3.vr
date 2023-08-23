@@ -276,7 +276,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 			setSelfReflect(_fieldName,_obj);
 		};
 		#ifdef DEBUG
-		if !isImplementVar(_obj,_name) then {
+		if !isImplementVarStr(_obj,_name) then {
 			warningformat("%1->%2::getWeaponProperty<%3> - Property not implemented",callSelf(getClassName) arg _fieldName arg _name);
 		};
 		#endif
@@ -290,7 +290,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		private _ret = getSelfReflect(_fieldName);
 		if isNullReference(_ret) exitWith {_retDef};
 		#ifdef DEBUG
-		if !isImplementVar(_ret,_name) then {
+		if !isImplementVarStr(_ret,_name) then {
 			warningformat("%1->%2::getWeaponProperty<%3> - Property not implemented",callSelf(getClassName) arg _fieldName arg _name);
 		};
 		#endif
