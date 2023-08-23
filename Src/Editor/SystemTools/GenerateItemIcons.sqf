@@ -241,6 +241,7 @@ function(systools_internal_imageProcessor)
 		uiSleep 2;
 		
 		_folderName = SYSTEMTIME select [0,5] joinString "_";
+		systools_imageProcessor_lastUsedFolder = _folderName;
 		
 		{
 			waitUntil {isNullReference(findDisplay 316000)};
@@ -424,4 +425,19 @@ function(systools_internal_imageProcessor)
 		deleteVehicle _centerObject;
 	};
 	
+
+	call systools_imageProcessor_convertAndSave;
+}
+
+
+function(systools_imageProcessor_convertAndSave)
+{
+	// systools_imageProcessor_lastUsedFolder (SYSTEMTIME mark)
+
+	//C:\Users\Username\Documents\Arma 3\missions\MissionName.Altis
+
+	//<PROFILEDIR>\Screenshots\ <--- screenshots path
+	//_generatedPath = (getMissionPath "") + "..\";
+
+	//TODO add automatic replace to sources, convert and rescale
 }
