@@ -34,7 +34,6 @@ jobs:
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
       - name: Running Map Validator
-        continue-on-error: false
         run: |
           python -V
           python Third-party/BuildTools/map_validator.py map_cfg_light_check ${{ github.workspace }}
@@ -56,6 +55,9 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
+      - name: Check Map Validator result
+        if: ${{ needs.mapvalidator.outputs.map_validation == 'success' }}
+        run: echo "Validation succeeded, proceeding with build..."
       - name: Validate ${{ matrix.build_type }}
         continue-on-error: true
         run: | 
