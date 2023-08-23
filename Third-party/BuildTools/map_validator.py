@@ -56,9 +56,9 @@ def validateConfigs():
 
     log("Scanning configs")
     allContents = ""
-    with open(scriptedLightsFile,"r") as f:
+    with open(scriptedLightsFile,"r",encoding="utf8") as f:
         allContents += f.read()
-    with open(legacyLightsFile,"r") as f:
+    with open(legacyLightsFile,"r",encoding="utf8") as f:
         allContents += f.read()
     
     mathces = re.findall("\#\s*define\s+(S?LIGHT_\w+)\s+(\d+)",allContents)
@@ -83,7 +83,7 @@ def validateConfigs():
 
         mapPath = os.path.join(mapStorageFolder,map)
         log(f"Scan map file {map}")
-        with open(mapPath,"r") as f:
+        with open(mapPath,"r",encoding="utf8") as f:
             buf = f.read()
             
             mapnamebin = re.findall("\"\"missionName\"\",\"\"([\w_]*)\"\"",buf)
@@ -106,7 +106,7 @@ def validateConfigs():
 
         mapPath = os.path.join(mapCompiledFolder,map)
         log(f"Scan map file {map}")
-        with open(mapPath,"r") as f:
+        with open(mapPath,"r",encoding="utf8") as f:
             buf = f.read()
 
             mathces = re.findall("\[\'light\'\,(\w+)\]",buf)
@@ -128,3 +128,4 @@ else:
     log(f"Unknown task {taskname}")
     sys.exit(-501)
 
+log("Work done!!!")
