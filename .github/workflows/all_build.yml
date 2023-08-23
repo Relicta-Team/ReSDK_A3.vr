@@ -49,8 +49,6 @@ jobs:
           - client-debug
           - server
           - server-debug
-        needs:
-          - mapvalidator
     steps:
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
