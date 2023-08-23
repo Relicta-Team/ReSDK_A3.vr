@@ -15,3 +15,4 @@
 #include "MeterTool.sqf"
 #include "GeometryCursor.sqf"
 #include "ClassValidator.sqf"
+#include "LightConfigValidator.sqf"
