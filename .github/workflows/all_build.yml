@@ -55,9 +55,6 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
-      - name: Check Map Validator result
-        if: ${{ needs.mapvalidator.outputs.map_validation == 'success' }}
-        run: echo "Validation succeeded, proceeding with build..."
       - name: Validate ${{ matrix.build_type }}
         continue-on-error: true
         run: | 
