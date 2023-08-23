@@ -75,7 +75,7 @@ _4019_863534010_298349_98452 = ['LampWall',[4019.86,4010.3,14.9584,true],180,[1,
 ['BlockDirt',[4086.56,4046.95,12.007],0,[0,0,1]] call InitDecor; 
 ['BlockDirt',[4076.86,4056.31,11.7679],0,[0,0,1]] call InitDecor; 
 _4076_094734047_1113310_85253 = ['LampWall',[4076.09,4047.11,15.8264,true],180,[1,0,1.19249e-008], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
-_4073_305664043_026126_03741 = ['LampWall',[4073.31,4043.03,11.0221,true],92.5038,[-0.0255269,0.998418,-0.050099], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_POINTLIGHT_var];}] call InitStruct; 
+_4073_305664043_026126_03741 = ['LampWall',[4073.31,4043.03,11.0221,true],92.5038,[-0.0255269,0.998418,-0.050099], {_thisObj setvariable ['light',1SLIGHT_TEMPLATE_POINTLIGHT_var];}] call InitStruct; 
 _4039_448004018_080577_97911 = ['LampWall',[4039.45,4018.08,12.953,true],349.06,[-0.981629,-0.190252,-0.014421], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 _4027_218264007_087408_35834 = ['LampWall',[4027.22,4007.09,13.3327,true],350.837,[-0.986574,-0.162475,-0.016522], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 _4076_875984049_953134_56122 = ['IStruct',[4076.88,4049.95,9.97233,true],176.437,[0.0400344,-0.0237284,0.998917], {_thisObj setvariable ['model','a3\structures_f\civ\camping\campingtable_f.p3d']; go_editor_globalRefs set ['table_box',_thisObj];
