@@ -7,6 +7,26 @@
 
 function(systools_imageProcessor)
 {
+	params [["_fullBuild",true],["_searchPatternUse",false]];
+
+	systools_imageProcessor_isFullBuild = _fullBuild;
+	systools_imageProcessor_searchPatterns = [];
+	private _aborted = false;
+	if (_searchPatternUse) then {
+		_ref = refcreate(0);
+		if ([_ref,"Установка путей генерации картинок",
+			"Укажите части путей модели (каждую с новой строки), которые необходимо добавить на проверку. Регистр не учитывается."
+		] call widget_winapi_openTextBox) then {
+			systools_imageProcessor_searchPatterns = (_ref splitString endl) apply {tolower _x};
+		} else {
+			_aborted = true;
+		};
+	};
+
+	if (_aborted) exitwith {
+		["Операция отменена"] call showWarning;
+	};
+
 	[ 
 	"Вы уверены? Процесс может занять какое-то время", 
 	"Генератор иконок", 
@@ -185,9 +205,40 @@ function(systools_internal_imageProcessor)
 				}
 			} foreach core_modelBBX;
 			
-			["Collected models %1 (bigger %2)",count _modelList,_bigger] call printLog;
-			uiSleep 2;
 		};
+
+		if !(systools_imageProcessor_isFullBuild) then {
+			["Enabled non-full build"] call printLog;
+			_countPre = count _modelList;
+			{
+				_path = "Resources\ui\inventory\items\gen\" +
+				(_x splitString "/\." joinString "+") + ".paa";
+						
+				if !([_path] call file_exists) then {
+					_modelList set [_foreachindex,objNUll];
+				};
+			} foreach _modelList;
+
+			_modelList = _modelList - [objNUll];
+			["New models count - %1",count _modelList] call printLog;
+		};
+
+		if (count systools_imageProcessor_searchPatterns > 0) then {
+			["Enabled only pattern-based models"] call printLog;
+			_countPre = count _modelList;
+			{
+				_lpath = tolower _x;
+				if ((systools_imageProcessor_searchPatterns findif {_x in _lpath}) == -1) then {
+					_modelList set [_foreachindex,objNUll];
+				};
+			} foreach _modelList;
+
+			_modelList = _modelList - [objNUll];
+			["New models count - %1",count _modelList] call printLog;
+		};
+
+		["Collected models %1 (bigger %2)",count _modelList,_bigger] call printLog;
+		uiSleep 2;
 		
 		_folderName = SYSTEMTIME select [0,5] joinString "_";
 		
