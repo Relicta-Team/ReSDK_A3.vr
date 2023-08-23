@@ -77,12 +77,12 @@ def validateConfigs():
         allConfigsLE[cfg] = id
 
     
-    log("Validate storage")
+    log("\n\nValidate storage")
     for map in os.listdir(mapStorageFolder):
         if not map.endswith(".cpp"): continue
 
         mapPath = os.path.join(mapStorageFolder,map)
-        log(f"Scan map file {map}")
+        log(f"Scanning map file {map}")
         with open(mapPath,"r",encoding="utf8") as f:
             buf = f.read()
             
@@ -94,21 +94,26 @@ def validateConfigs():
             mapnamebin = mapnamebin[0]
 
             mathces = re.findall("\"\"light\"\",\"\"(\w+)\"\"",buf)
+            foundedCfgs = 0
             for match in mathces:
                 cfg = match
                 if not cfg in allConfigsLE:
                     error(f"Config {cfg} not found in binary map {mapnamebin}")
                     sys.exit(-1)
+                else:
+                    foundedCfgs += 1
+            
+            log(f"Map {map} has {foundedCfgs} config uses")
     
-    log("Validate compiled maps")
+    log("\n\nValidate compiled maps")
     for map in os.listdir(mapCompiledFolder):
         if not map.endswith(".sqf"): continue
 
         mapPath = os.path.join(mapCompiledFolder,map)
-        log(f"Scan map file {map}")
+        log(f"Scanning map builded file {map}")
         with open(mapPath,"r",encoding="utf8") as f:
             buf = f.read()
-
+            foundedCfgs = 0
             mathces = re.findall("\[\'light\'\,(\w+)\]",buf)
             for match in mathces:
                 if match.endswith('_var'):
@@ -117,6 +122,10 @@ def validateConfigs():
                 if not cfg in allConfigsLE:
                     error(f"Config {cfg} not found in builded map {map}")
                     sys.exit(-1)
+                else:
+                    foundedCfgs += 1
+            
+            log(f"Map {map} has {foundedCfgs} config uses")
 
 #endregion
 
