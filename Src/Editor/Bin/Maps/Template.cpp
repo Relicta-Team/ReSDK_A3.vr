@@ -1047,7 +1047,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""edreqpower"",0],[""light"",""1SLIGHT_TEMPLATE_DIRECTLIGHT""]]],[""class"",""LampWall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""edreqpower"",0],[""light"",""SLIGHT_TEMPLATE_DIRECTLIGHT""]]],[""class"",""LampWall""]]}";
 			};
 			id=2250;
 			type="Lamp_stena";
