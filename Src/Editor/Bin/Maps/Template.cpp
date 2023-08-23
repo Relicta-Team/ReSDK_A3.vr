@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=205;
+		nextID=207;
 	};
 	class Camera
 	{
-		pos[]={4031.6565,12.74592,4010.4397};
-		dir[]={0.61579484,-0.62043422,-0.48568985};
-		up[]={0.48715883,0.78424573,-0.38422942};
-		aside[]={-0.61928678,5.561742e-007,-0.78518558};
+		pos[]={4010.0713,12.74592,4011.0698};
+		dir[]={0.91392612,-0.40567705,-0.014429681};
+		up[]={0.40565178,0.91400492,-0.0064027072};
+		aside[]={-0.015783399,1.512461e-006,-0.99989527};
 	};
 };
 binarizationWanted=0;
@@ -378,7 +378,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""layer_nameToPtr"",createHashMapFromArray[[""Spawn points"",2208],[""Teleports"",2237]]],[""missionName"",""Template""],[""version"",2],[""layer_ptrToName"",createHashMapFromArray[[2208,""Spawn points""],[2237,""Teleports""]]]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""layer_nameToPtr"",createHashMapFromArray[[""Spawn points"",2208],[""Teleports"",2237]]],[""missionName"",""Template""],[""version"",3],[""layer_ptrToName"",createHashMapFromArray[[2208,""Spawn points""],[2237,""Teleports""]]]]}";
 			};
 			id=2205;
 			type="Land_Orange_01_F";
@@ -1385,7 +1385,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4034.9595,10.538957,4007.6965};
-				angles[]={0,4.7797236,-0};
+				angles[]={0,4.7797236,0};
 			};
 			side="Empty";
 			flags=1;
@@ -1439,7 +1439,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4035.3779,10.641748,4006.4221};
-				angles[]={0,0.016395248,-0};
+				angles[]={0,0.016395248,0};
 			};
 			side="Empty";
 			flags=1;
@@ -1457,7 +1457,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4035.1162,10.713164,4003.1235};
-				angles[]={0.086229309,3.1924055,-0};
+				angles[]={0.086229309,3.1924055,0};
 			};
 			side="Empty";
 			flags=1;
@@ -1480,7 +1480,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcertePanel""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcretePanel""]]}";
 			};
 			id=2288;
 			type="Land_ConcretePanels_02_single_v1_F";
@@ -1497,7 +1497,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcertePanel""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcretePanel""]]}";
 			};
 			id=2292;
 			type="Land_ConcretePanels_02_single_v1_F";
@@ -1509,7 +1509,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4036.4451,10.665472,4003.0696};
-				angles[]={0.086229309,3.1924055,-0};
+				angles[]={0.086229309,3.1924055,0};
 			};
 			side="Empty";
 			flags=1;
@@ -1562,7 +1562,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4036.8708,10.267884,4004.0818};
-				angles[]={0,5.285491,-0};
+				angles[]={0,5.285491,0};
 			};
 			side="Empty";
 			flags=5;
@@ -1639,7 +1639,7 @@ class Mission
 			};
 			id=2302;
 			type="key";
-			atlOffset=0.79565811;
+			atlOffset=0.79565907;
 		};
 		class Item71
 		{
@@ -1647,7 +1647,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4035.0811,10.425241,4008.5847};
-				angles[]={0,6.1944156,-0};
+				angles[]={0,6.1944156,0};
 			};
 			side="Empty";
 			flags=5;

@@ -11,7 +11,163 @@
 //стена
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallWall) extends(Constructions) var(name,"Стена"); var(desc,"Маленькие стена" pcomma " которую можно разрушить"); endclass
+class(SmallWall) extends(Constructions) var(name,"Стена"); editor_only(var(desc,"Маленькие стена" pcomma " которую можно разрушить");) endclass
+
+editor_attribute("EditorGenerated")
+class(StoneWall) extends(SmallWall)
+	var(model,"a3\structures_f\walls\stone_4m_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BigStoneWallWithPassage) extends(StoneWall)
+	var(model,"ml\ml_object_new\model_24\barikada.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumLightWall) extends(SmallWall)
+	var(model,"a3\structures_f_argo\walls\city\wallcity_01_4m_plain_grey_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(LargeConcreteWallWithReinforcement) extends(SmallWall)
+	var(model,"a3\structures_f\walls\canal_wallsmall_10m_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumRuinedWhiteConcreteWall) extends(SmallWall)
+	var(model,"a3\structures_f_argo\walls\city\wallcity_01_8m_dmg_whiteblue_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumWhiteConcreteWall) extends(SmallWall)
+	var(model,"a3\structures_f_argo\walls\city\wallcity_01_8m_plain_whiteblue_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumWoodenWall) extends(SmallWall)
+	var(model,"ml_shabut\sbs\woodstenka.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PlywoodThinWall) extends(SmallWall)
+	var(model,"ml_exodusnew\fanerka_vata.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ConcreteWallWithNetfence) extends(SmallWall)
+	var(model,"a3\structures_f_exp\walls\net\netfence_02_m_4m_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(NormalClayWall) extends(SmallWall)
+	var(model,"ca\structures_e\wall\wall_l\wall_l1_5m_ep1.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(LuxuryClayWall) extends(SmallWall)
+	var(model,"ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SmallConcreteArch) extends(SmallWall)
+	var(model,"a3\structures_f\walls\cncshelter_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ConcreteWall) extends(SmallWall)
+	var(model,"a3\structures_f_exp\walls\concrete\concretewall_01_l_8m_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumConcreteWallDestroyed) extends(ConcreteWall)
+	var(model,"a3\structures_f_argo\walls\military\mil_wallbig_4m_damaged_left_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BigConcreteWallDestroyed) extends(ConcreteWall)
+	var(model,"a3\structures_f\walls\canal_wall_d_left_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumConcreteWall) extends(ConcreteWall)
+	var(model,"a3\structures_f\walls\concrete_smallwall_4m_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ConcreteWallDestroyed) extends(ConcreteWall)
+	var(model,"a3\structures_f_exp\walls\concrete\concretewall_01_m_d_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ClayWallSmall) extends(SmallWall)
+	var(model,"ca\structures_e\wall\wall_l\wall_l_2m5_ep1.p3d");
+	var(name,"Глиняная стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ClayWallBig) extends(ClayWallSmall)
+	var(model,"ca\structures_e\wall\wall_l\wall_l_5m_ep1.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BrickThinWallSmall) extends(SmallWall)
+	var(model,"csa_constr\csa_obj\kr_stena_m.p3d");
+	var(name,"Кирпичная стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BrickThinWall) extends(BrickThinWallSmall)
+	var(model,"csa_constr\csa_obj\kr_stena.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BrickThinWallWindow) extends(BrickThinWall)
+	var(model,"csa_constr\csa_obj\kr_stena_1o.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BrickThinWallWindow3) extends(BrickThinWallWindow)
+	var(model,"csa_constr\csa_obj\kr_stena_3o.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BrickThinWallWindow2) extends(BrickThinWallWindow)
+	var(model,"csa_constr\csa_obj\kr_stena_o.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BrickThinWallDoorway) extends(BrickThinWall)
+	var(model,"csa_constr\csa_obj\kr_stena_1d.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BrickThinWallTwoDoorways) extends(BrickThinWallDoorway)
+	var(model,"csa_constr\csa_obj\kr_stena_2d.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BrickThinWallDoorwayWindow) extends(BrickThinWallDoorway)
+	var(model,"csa_constr\csa_obj\kr_stena_do1.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SteelThinWallSmall) extends(SmallWall)
+	var(model,"ml_exodusnew\ganzazhelezo3.p3d");
+	var(name,"Стальная стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SteelThinWallMedium) extends(SteelThinWallSmall)
+	var(model,"ml_exodusnew\ganzazhelezo2.p3d");
+endclass
 
 
 class(Trench) extends(SmallWall)

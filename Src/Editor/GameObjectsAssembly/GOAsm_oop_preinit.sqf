@@ -94,6 +94,7 @@ oop_getSimpleTypeSize = {
 --------------------------------------------------------------------------------
 */
 
+// object istypeof gameobject (from base to childs) (!!!Slower)
 oop_isTypeOf = {
 	params ["_type","_searched"];
 	if (_type == _searched) exitwith {true};
@@ -104,6 +105,11 @@ oop_isTypeOf = {
 		if (_x == _searched) exitwith {_findedClass = true};
 	} foreach _list;
 	_findedClass
+};
+
+oop_isImplementClass = {
+	params ["_classname"];
+	isImplementClass(_classname)
 };
 
 //получает имя родительского класса
@@ -127,6 +133,7 @@ oop_getinhlist = {
 	private _type = missionNamespace getVariable ["pt_"+_typename,0];
 	if equals(_type,0) exitWith {
 		errorformat("oop::getInhlist() - Cant find type %1 in memory",_typename);
+		[]
 	};
 
 	private _childs = +(_type getVariable "__childList");
@@ -146,6 +153,23 @@ oop_getinhlist = {
 	} else {
 		_childs
 	};
+};
+
+oop_getAllObjectsOfType = {
+	params ["_typename",["_includeThis",false],["_retAsStrings",false]];
+	private _result = [_typename,true] call oop_getinhlist;
+	if (count _result == 0) exitwith {[]};
+	if (_includeThis) then {
+		_result pushBack _typename;
+	};
+	
+	if (_retAsStrings) exitwith {_result};
+
+	{
+		_result set [_foreachindex,missionNamespace getvariable ["pt_"+_x,nullPtr]];
+	} foreach _result;
+
+	_result
 };
 
 //Небезопасный контекст получения значения переменной от типа

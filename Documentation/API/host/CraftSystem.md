@@ -286,7 +286,7 @@ File: [host\CraftSystem\Craft.sqf at line 63](../../../Src/host/CraftSystem/Craf
 
 Type: constant
 
-> Exists if **_SQFVM** not defined
+> Exists if **__VM_VALIDATE** not defined
 
 Description: 
 
@@ -300,7 +300,7 @@ File: [host\CraftSystem\Craft_initData.sqf at line 16](../../../Src/host/CraftSy
 
 Type: Variable
 
-> Exists if **_SQFVM** not defined
+> Exists if **__VM_VALIDATE** not defined
 
 Description: 
 
@@ -362,7 +362,7 @@ File: [host\CraftSystem\Craft_initData.sqf at line 68](../../../Src/host/CraftSy
 
 Type: function
 
-> Exists if **_SQFVM** not defined
+> Exists if **__VM_VALIDATE** not defined
 
 Description: Получает рецепты с категории
 - Param: _cat

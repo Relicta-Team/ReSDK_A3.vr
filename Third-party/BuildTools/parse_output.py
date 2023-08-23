@@ -53,7 +53,8 @@ def parse_line(ln):
         # if path not loader.hpp then path is last_loaded_file
         if message.find("[LOAD]")!=-1 or path.find("loader.hpp")!=-1 or message.find("Load file:")!=-1:
             last_loaded_file = re.search(r"([\/\\.\w]+\.(sqf|cpp|hpp|c|h|Interface))",message,re.DOTALL).group(1)
-            loadedFilesInfo.append(last_loaded_file)
+            if not last_loaded_file in loadedFilesInfo:
+                loadedFilesInfo.append(last_loaded_file)
             #log(f"{cat} on {path} {line} with message:{message}")
         
         if message.find("[CLASS]")!=-1:
@@ -64,6 +65,13 @@ def parse_line(ln):
             hasSuccessMessage = True
 
         if cat == "ERR":
+            llf = last_loaded_file
+            if llf == "":
+                llf = path
+            handle_error(llf,path,line,message)
+        
+        if message.find("&SYSTEMLOG")!=-1:
+            message = re.search(r"\&SYSTEMLOG(.*)",message,re.DOTALL).group(1)
             llf = last_loaded_file
             if llf == "":
                 llf = path

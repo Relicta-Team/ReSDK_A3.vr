@@ -336,3 +336,37 @@ Description:
 - Param: _o
 
 File: [host\MapManager\Maps\Template.sqf at line 22](../../../Src/host/MapManager/Maps/Template.sqf#L22)
+# test_govna.sqf
+
+## reditor_binding_fc
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\test_govna.sqf at line 3](../../../Src/host/MapManager/Maps/test_govna.sqf#L3)
+## reditor_binding_gv
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\test_govna.sqf at line 12](../../../Src/host/MapManager/Maps/test_govna.sqf#L12)
+## reditor_binding_sv
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\test_govna.sqf at line 17](../../../Src/host/MapManager/Maps/test_govna.sqf#L17)
+## reditor_binding_gref
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\test_govna.sqf at line 22](../../../Src/host/MapManager/Maps/test_govna.sqf#L22)

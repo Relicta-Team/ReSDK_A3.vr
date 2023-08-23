@@ -131,7 +131,7 @@ _3669_101813715_0397939_60698 = ['Decor',[3669.1,3715.04,39.607],63.0131,[0,0,1]
 _3675_931883738_2778310_09110 = ['Decor',[3675.93,3738.28,10.0911],209.513,[0,0,1], {setVar(this,model,'ml_shabut\nvprops\gryazyuka4.p3d');}] call InitDecor; // !!! realocated model !!!
 _3675_682373735_4792539_25481 = ['Decor',[3675.68,3735.48,44.0504,true],359.838,[-0.000147803,-0.0127081,0.999919], {setVar(this,model,'ml_shabut\nvprops\gryazyuka3.p3d');}] call InitDecor; // !!! realocated model !!!
 _3676_402833720_9436039_46986 = ['Decor',[3676.4,3720.94,39.4699],18.0001,[0,0,1], {setVar(this,model,'a3\rocks_f_exp\lavastones\lavastonecluster_large_f.p3d');}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3678.57,3740.27,39.172],0,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3678.57,3740.27,39.172],0,[0,0,1]] call InitStruct; 
 _3670_272223731_3764639_91193 = ['Decor',[3670.27,3731.38,39.9119],20.8315,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\wrecks\trailercistern_wreck_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3671_769783735_4853539_97527 = ['Decor',[3671.77,3735.49,39.9753],0,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\wrecks\trailercistern_wreck_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3660_285403715_3964839_84081 = ['Decor',[3660.29,3715.4,39.8408],103.903,[0,0,1], {setVar(this,model,'a3\props_f_exp\industrial\heavyequipment\bulldozer_01_wreck_f.p3d');}] call InitDecor; // !!! realocated model !!!
@@ -163,12 +163,12 @@ _3665_947023770_2990740_08262 = ['Decor',[3665.95,3770.3,40.0826],120.427,[0,0,1
 _3676_895753771_9328632_16036 = ['Decor',[3676.9,3771.93,37.0459,true],359.834,[0,-0.213964,0.976842], {setVar(this,model,'ml_shabut\nvprops\gryazyuka4.p3d');}] call InitDecor; // !!! realocated model !!!
 _3672_863283771_6645539_94393 = ['Decor',[3672.86,3771.66,39.9439],359.838,[0,0,1], {setVar(this,model,'ml_shabut\nvprops\gryazyuka4.p3d');}] call InitDecor; // !!! realocated model !!!
 _3675_923833768_1101110_06467 = ['Decor',[3675.92,3768.11,10.0647],334.739,[0,0,1], {setVar(this,model,'ml_shabut\nvprops\gryazyuka4.p3d');}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3677.83,3761.58,35.1567,true],346.766,[0.00392562,-0.190368,0.981705]] call InitStruct; 
-['ConcertePanel',[3677.12,3755.44,33.996,true],9.13652,[-2.09548e-009,-0.173648,0.984808]] call InitStruct; 
-['ConcertePanel',[3679.77,3756.62,34.2221,true],345.793,[-1.71829e-007,-0.173648,0.984808]] call InitStruct; 
-['ConcertePanel',[3676.99,3750.66,33.0643,true],5.07673,[-1.16415e-009,-0.173648,0.984808]] call InitStruct; 
-['ConcertePanel',[3675.64,3771.92,41.7922,true],7.05669,[0.383873,-0.215875,0.897797]] call InitStruct; 
-['ConcertePanel',[3676.93,3744.07,10.0402],352,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3677.83,3761.58,35.1567,true],346.766,[0.00392562,-0.190368,0.981705]] call InitStruct; 
+['ConcretePanel',[3677.12,3755.44,33.996,true],9.13652,[-2.09548e-009,-0.173648,0.984808]] call InitStruct; 
+['ConcretePanel',[3679.77,3756.62,34.2221,true],345.793,[-1.71829e-007,-0.173648,0.984808]] call InitStruct; 
+['ConcretePanel',[3676.99,3750.66,33.0643,true],5.07673,[-1.16415e-009,-0.173648,0.984808]] call InitStruct; 
+['ConcretePanel',[3675.64,3771.92,41.7922,true],7.05669,[0.383873,-0.215875,0.897797]] call InitStruct; 
+['ConcretePanel',[3676.93,3744.07,10.0402],352,[0,0,1]] call InitStruct; 
 _3677_376463766_9311531_13234 = ['Decor',[3677.38,3766.93,36.1323,true],348.835,[-1.72528e-007,-0.173648,0.984808], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3676_172363744_6220720_26085 = ['Decor',[3676.17,3744.62,25.2608,true],266.777,[-0.00949548,-0.0238431,0.999671], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3667_509773792_1086447_98080 = ['Decor',[3667.51,3792.11,47.9808],0,[0,0,1], {setVar(this,model,'a3\rocks_f_exp\lavastones\lavaboulder_02_f.p3d');}] call InitDecor; // !!! realocated model !!!
@@ -195,8 +195,8 @@ _3677_645513793_8586446_53982 = ['Decor',[3677.65,3793.86,61.4374,true],0.000257
 _3679_624023785_3879440_01800 = ['Decor',[3679.62,3785.39,40.018],0,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3679_624023805_3879440_01800 = ['Decor',[3679.62,3805.39,40.018],180,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3679_625003797_3750040_01800 = ['Decor',[3679.63,3797.38,40.018],0,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d');}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3678.6,3779.72,40.018],0,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3678.6,3791.73,40.018],0,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3678.6,3779.72,40.018],0,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3678.6,3791.73,40.018],0,[0,0,1]] call InitStruct; 
 ['BlockDirt',[3670.42,3824.54,60],8.15598,[0,0,1]] call InitDecor; 
 ['BlockDirt',[3680,3824,70],0,[0,0,1]] call InitDecor; 
 ['BlockDirt',[3670,3814,50],6.83019e-005,[0,0,1]] call InitDecor; 
@@ -208,14 +208,14 @@ _3679_625003797_3750040_01800 = ['Decor',[3679.63,3797.38,40.018],0,[0,0,1], {se
 ['BlockDirt',[3680,3824,40],6.83019e-005,[0,0,1]] call InitDecor; 
 ['BlockDirt',[3680,3834,40],6.83019e-005,[0,0,1]] call InitDecor; 
 _3679_625003817_3750040_01800 = ['Decor',[3679.63,3817.38,40.018],180,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d');}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3679.72,3828.55,40.018],0,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3679.72,3828.55,40.018],0,[0,0,1]] call InitStruct; 
 _3678_573003811_7429240_01800 = ['Decor',[3678.57,3811.74,40.018],180,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3678_625003823_7500040_00000 = ['Decor',[3678.63,3823.75,40],180,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 ['BlockDirt',[3672.63,3843.48,50],23.9243,[0,0,1]] call InitDecor; 
 ['BlockDirt',[3680,3844,64.9808,true],4.88548,[-0.258291,0.300952,0.917994]] call InitDecor; 
 ['BlockDirt',[3672.63,3843.48,60],23.9243,[0,0,1]] call InitDecor; 
 ['BlockDirt',[3680,3844,40],6.83019e-005,[0,0,1]] call InitDecor; 
-['ConcertePanel',[3679.92,3841.49,40.018],22,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3679.92,3841.49,40.018],22,[0,0,1]] call InitStruct; 
 ['BlockDirt',[3711.38,3678.5,60],6.83019e-005,[0,0,1]] call InitDecor; 
 ['BlockDirt',[3691.63,3678.5,60],6.83019e-005,[0,0,1]] call InitDecor; 
 ['BlockDirt',[3701.38,3678.5,50],6.83019e-005,[0,0,1]] call InitDecor; 
@@ -356,7 +356,7 @@ _3697_179443735_2351139_74034 = ['Decor',[3697.18,3735.24,39.7403],0,[0,0,1], {s
 _3691_331793736_1918939_34266 = ['Decor',[3691.33,3736.19,39.3427],272.849,[0,0,1], {setVar(this,model,'a3\rocks_f_exp\lavastones\lavastone_small_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3683_634523736_0134339_43715 = ['Decor',[3683.63,3736.01,39.4371],263.551,[0,0,1], {setVar(this,model,'a3\rocks_f_exp\lavastones\lavastone_small_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3688_316163738_2827139_20054 = ['Decor',[3688.32,3738.28,39.2005],77.8349,[0,0,1], {setVar(this,model,'a3\rocks_f_exp\lavastones\lavastone_small_f.p3d');}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3680.23,3739.73,28.2521,true],345.864,[-1.71829e-007,0.141429,0.989948]] call InitStruct; 
+['ConcretePanel',[3680.23,3739.73,28.2521,true],345.864,[-1.71829e-007,0.141429,0.989948]] call InitStruct; 
 _3682_742923741_7002010_08054 = ['Decor',[3682.74,3741.7,10.0805],32,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3680_645513739_5573739_17196 = ['Decor',[3680.65,3739.56,39.172],0,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3696_487553714_0759340_47171 = ['Decor',[3696.49,3714.08,45.6964,true],20.6924,[-0.277984,-0.735937,0.617351], {setVar(this,model,'smg_trup\model\smg_trup_head.p3d');}] call InitDecor; // !!! realocated model !!!
@@ -408,7 +408,7 @@ _3710_316413751_5007339_85000 = ['Decor',[3710.32,3751.5,39.85],61.562,[0,0,1], 
 _3681_407963747_607676_60038 = ['Decor',[3681.41,3747.61,6.60038],92,[0,0,1], {setVar(this,model,'apalon\metro_a3\surfaces\gryazoookass.p3d');}] call InitDecor; // !!! realocated model !!!
 _3693_126953764_3820832_81115 = ['Decor',[3693.13,3764.38,40.5145,true],91.549,[-0.0780589,-0.189578,0.978758], {setVar(this,model,'ca\buildings2\houseblocks\houseblock_d\houseblock_d2_ruins.p3d');}] call InitDecor; // !!! realocated model !!!
 _3684_276863772_738289_26534 = ['Decor',[3684.28,3772.74,9.26534],359.649,[0,0,1], {setVar(this,model,'a3\rocks_f\blunt\bluntrock_apart.p3d');}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3680.49,3772.42,37.2852,true],350.729,[0,-0.241922,0.970296]] call InitStruct; 
+['ConcretePanel',[3680.49,3772.42,37.2852,true],350.729,[0,-0.241922,0.970296]] call InitStruct; 
 _3683_722903746_1191426_10511 = ['Decor',[3683.72,3746.12,31.1051,true],49.8312,[-0.157442,-0.0732327,0.984809], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3680_539313765_5373530_86644 = ['Decor',[3680.54,3765.54,35.8664,true],15.2207,[-3.49246e-009,-0.173648,0.984808], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3680_150153750_8242228_15058 = ['Decor',[3680.15,3750.82,33.1506,true],344.779,[-1.71596e-007,-0.173648,0.984808], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
@@ -494,11 +494,11 @@ _3681_041023834_5639640_01800 = ['Decor',[3681.04,3834.56,40.018],0,[0,0,1], {se
 _3700_125003823_6250040_01800 = ['Decor',[3700.13,3823.63,40.018],270,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3688_061043823_8449740_01800 = ['Decor',[3688.06,3823.84,40.018],270,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3708_262943823_6259840_01800 = ['Decor',[3708.26,3823.63,40.018],270,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d');}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3693.78,3822.6,40.018],270,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3683.95,3820.58,40.018],270,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3711.28,3828.23,40.018],180,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3680.65,3811.03,40.018],180,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3681.72,3822.73,40.018],270,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3693.78,3822.6,40.018],270,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3683.95,3820.58,40.018],270,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3711.28,3828.23,40.018],180,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3680.65,3811.03,40.018],180,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3681.72,3822.73,40.018],270,[0,0,1]] call InitStruct; 
 _3694_492923824_6770040_01800 = ['Decor',[3694.49,3824.68,40.018],270,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3682_170903824_9660640_01800 = ['Decor',[3682.17,3824.97,40.018],270,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3709_057373828_2402340_01800 = ['Decor',[3709.06,3828.24,40.018],180,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
@@ -531,7 +531,7 @@ _3701_439943845_2102140_67110 = ['Decor',[3701.44,3845.21,40.6711],179.617,[0,0,
 ['BlockDirt',[3710,3844,40],6.83019e-005,[0,0,1]] call InitDecor; 
 _3690_198243845_1804240_84091 = ['Decor',[3690.2,3845.18,40.8409],180.892,[0,0,1], {setVar(this,model,'a3\structures_f_exp\walls\tin\tinwall_02_l_4m_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3687_375733843_0788640_84388 = ['Decor',[3687.38,3843.08,40.8439],91.1386,[0,0,1], {setVar(this,model,'a3\structures_f_exp\walls\tin\tinwall_02_l_4m_f.p3d');}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3681.95,3844.79,40.018],97.8526,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3681.95,3844.79,40.018],97.8526,[0,0,1]] call InitStruct; 
 _3682_459963840_6640640_01800 = ['Decor',[3682.46,3840.66,40.018],14,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _arenaSwitcher = ['Tumbler',[3697.25,3844.78,42.4086],87.6792,[0,0,1]] call InitStruct; 
 _3690_953373842_3537638_13799 = ['Decor',[3690.95,3842.35,38.138],180.723,[0,0,1], {setVar(this,model,'ml\ml_object_new\ml_object_2\l01_props\stair.p3d');}] call InitDecor; // !!! realocated model !!!
@@ -789,11 +789,11 @@ _3732_830323828_5837439_99977 = ['Decor',[3732.83,3828.58,39.9998],328.84,[0,0,1
 _3720_418953823_6130440_01800 = ['Decor',[3720.42,3823.61,40.018],270,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3728_478273823_6386740_01800 = ['Decor',[3728.48,3823.64,40.018],270,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3740_500003823_6250040_01829 = ['Decor',[3740.5,3823.63,40.0183],270,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d');}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3734.13,3822.63,40.018],270,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3741.1,3836.16,40.0335],89.9958,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3713.91,3822.6,40.018],270,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3741.03,3830.28,40.0339],89.9958,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3736.37,3831.89,40.0182],170.252,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3734.13,3822.63,40.018],270,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3741.1,3836.16,40.0335],89.9958,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3713.91,3822.6,40.018],270,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3741.03,3830.28,40.0339],89.9958,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3736.37,3831.89,40.0182],170.252,[0,0,1]] call InitStruct; 
 _3741_025883832_2641640_03349 = ['Decor',[3741.03,3832.26,40.0335],89.9958,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_v2_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3734_867923824_6770040_01800 = ['Decor',[3734.87,3824.68,40.018],270,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3714_617923824_6770040_01800 = ['Decor',[3714.62,3824.68,40.018],270,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
@@ -881,8 +881,8 @@ _3727_721443847_9677740_18166 = ['Decor',[3727.72,3847.97,40.1817],0,[0,0,1], {s
 _3739_777833856_3195838_14724 = ['Decor',[3739.78,3856.32,38.1472],83.5276,[0,0,1], {setVar(this,model,'apalon\metro_a3\surfaces\gryazoookass.p3d');}] call InitDecor; // !!! realocated model !!!
 ['Anvil',[3719.35,3844.13,40.9706],29.9438,[0,0,1]] call InitStruct; 
 ['Forge',[3717.79,3844.45,40.3405],359.242,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3735.63,3844.27,40.0271],185.327,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3741.42,3843.71,40.0271],185.327,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3735.63,3844.27,40.0271],185.327,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3741.42,3843.71,40.0271],185.327,[0,0,1]] call InitStruct; 
 _3739_494633843_8945340_02707 = ['Decor',[3739.49,3843.89,40.0271],185.327,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_v2_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3737_557133844_0534740_02707 = ['Decor',[3737.56,3844.05,40.0271],185.327,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3726_379153840_5773940_01178 = ['SteelGridDoor',[3726.38,3840.58,40.0118],262.102,[0,0,1], {setVar(this,model,'ml_shabut\kapeze\reshetow.p3d');}] call InitStruct; // !!! realocated model !!!
@@ -1797,7 +1797,7 @@ _3777_959723807_8515619_87304 = ['Decor',[3777.96,3807.85,19.873],0,[0,0,1], {se
 ['OldEngine',[3776.75,3783.29,31.696],0,[0,0,1]] call InitStruct; 
 ['BigPipePump',[3781.6,3779.47,30.9612],6.83019e-005,[0,0,1]] call InitStruct; 
 ['BigElectricPumpFan',[3781.57,3782.61,31.4646],180,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3783.96,3786.67,31.6191],0,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3783.96,3786.67,31.6191],0,[0,0,1]] call InitStruct; 
 ['WoodenDoor',[3792.29,3783.15,40.13],334.393,[0,0,1]] call InitStruct; 
 ['WoodenDoor',[3795.18,3788.38,40.13],346.743,[0,0,1]] call InitStruct; 
 _3796_072023776_6564945_90619 = ['Decor',[3796.07,3776.66,45.9062],359.581,[0,0,1], {setVar(this,model,'a3\structures_f\walls\concrete_smallwall_4m_f.p3d');}] call InitDecor; // !!! realocated model !!!
@@ -1896,8 +1896,8 @@ _3804_319343834_5686019_24973 = ['Decor',[3804.32,3834.57,19.2497],45.0002,[0,0,
 _3786_491703819_1049820_00920 = ['Decor',[3786.49,3819.1,20.0092],0,[0,0,1], {setVar(this,model,'a3\rocks_f\blunt\bluntrock_apart.p3d');}] call InitDecor; // !!! realocated model !!!
 _3803_250003822_0000040_00000 = ['Decor',[3803.25,3822,40],180,[0,0,1], {setVar(this,model,'relicta_models\models\nocategory\savin\savin.p3d');}] call InitDecor; // !!! realocated model !!!
 _3780_346443817_9633840_11734 = ['Decor',[3780.35,3817.96,40.1173],0,[0,0,1], {setVar(this,model,'a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v1_f.p3d');}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3782.9,3819.73,40.0031],179.818,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3779.06,3819.72,40.0031],179.818,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3782.9,3819.73,40.0031],179.818,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3779.06,3819.72,40.0031],179.818,[0,0,1]] call InitStruct; 
 _3777_857183819_9353040_00200 = ['Decor',[3777.86,3819.94,40.002],200.578,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_v2_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3784_843993819_7424340_00312 = ['Decor',[3784.84,3819.74,40.0031],179.818,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_v2_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3776_055913820_6149939_99538 = ['Decor',[3776.06,3820.61,39.9954],200.549,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
@@ -2217,10 +2217,10 @@ _3839_083253743_7070339_90429 = ['Decor',[3839.08,3743.71,39.9043],25.5553,[0,0,
 _3834_157713741_8784239_70467 = ['Decor',[3834.16,3741.88,39.7047],353.668,[0,0,1], {setVar(this,model,'a3\rocks_f_exp\lavastones\lavastone_small_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3810_168213728_0588419_25446 = ['Decor',[3810.17,3728.06,19.2545],0,[0,0,1], {setVar(this,model,'a3\rocks_f\water\w_sharprock_apart.p3d');}] call InitDecor; // !!! realocated model !!!
 _3836_000493732_5561539_15881 = ['Decor',[3836,3732.56,39.1588],231.001,[0,0,1], {setVar(this,model,'a3\rocks_f\water\w_sharprock_apart.p3d');}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3819.82,3736.61,40.035],214,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3831.9,3737.87,39.9774],30,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3826.78,3740.7,39.977],30,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3823.02,3734.44,40.035],214,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3819.82,3736.61,40.035],214,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3831.9,3737.87,39.9774],30,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3826.78,3740.7,39.977],30,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3823.02,3734.44,40.035],214,[0,0,1]] call InitStruct; 
 _3821_423583735_5253940_03500 = ['Decor',[3821.42,3735.53,40.035],214,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_v2_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3828_525393739_8046939_97700 = ['Decor',[3828.53,3739.8,39.977],30,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_v2_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3818_207033737_7033740_03500 = ['Decor',[3818.21,3737.7,40.035],214,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!
@@ -2320,8 +2320,8 @@ _3836_661623759_5014639_91633 = ['Decor',[3836.66,3759.5,39.9163],353.668,[0,0,1
 _3814_359133771_1579639_86709 = ['Decor',[3814.36,3771.16,39.8671],30,[0,0,1], {setVar(this,model,'ml_exodusnew\bsg_eft\gryazuchkas1.p3d');}] call InitDecor; // !!! realocated model !!!
 _3829_718753770_1933640_33532 = ['Decor',[3829.72,3770.19,40.3353],90,[0,0,1], {setVar(this,model,'ml_exodusnew\stalker_tun\radarkitchen.p3d');}] call InitDecor; // !!! realocated model !!!
 _3822_646733770_0419942_53667 = ['Decor',[3822.65,3770.04,42.5367],270,[0,0,1], {setVar(this,model,'ml_exodusnew\zhelezoxyeta.p3d');}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3827.15,3750.1,40.001],60,[0,0,1]] call InitStruct; 
-['ConcertePanel',[3818.71,3752.02,39.987],135,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3827.15,3750.1,40.001],60,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3818.71,3752.02,39.987],135,[0,0,1]] call InitStruct; 
 _3828_142583748_4311540_00100 = ['Decor',[3828.14,3748.43,40.001],60,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_v2_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3825_244633753_4631340_00100 = ['Decor',[3825.24,3753.46,40.001],60,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_v2_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3817_351073750_5856939_98700 = ['Decor',[3817.35,3750.59,39.987],135,[0,0,1], {setVar(this,model,'a3\structures_f_enoch\infrastructure\roads\concretepanels_02_single_dmg_f.p3d');}] call InitDecor; // !!! realocated model !!!

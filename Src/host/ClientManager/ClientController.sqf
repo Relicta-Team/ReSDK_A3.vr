@@ -93,7 +93,14 @@ cm_switchToMob = {
 			//код здесь по сути копирует спавнер от клиента
 			getSelf(ctxOnRequestNextMob) params ["_mob","_worldMobOld"];
 			_ghostRole = "GhostRole" call gm_getroleobject;
-			setVar(_ghostRole,lastSpawnpos,callFunc(_mob,getPos) vectorAdd vec3(pick vec2(-.1,.1),pick vec2(-.1,.1),0));
+			_pos = callFunc(_mob,getPos) vectorAdd vec3(pick vec2(-.1,.1),pick vec2(-.1,.1),0);
+			if callFunc(_mob,isConnected) then {
+				private _seatPos = callFuncParams(getVar(_mob,connectedTo),getSeatRestPos,_mob);
+				if !isNullVar(_seatPos) then {
+					_pos = _seatPos;
+				};
+			};
+			setVar(_ghostRole,lastSpawnpos,_pos);
 			private _map = [
 				["gender",getVar(_mob,gender)],
 				["name",""],

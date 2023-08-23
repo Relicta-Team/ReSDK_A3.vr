@@ -17,7 +17,7 @@
 #define getRoleObject(val) (missionNamespace getVariable ["role_"+(val),nullPtr])
 
 //Печатники сообщений
-#ifdef _SQFVM
+#ifdef __VM_VALIDATE
 	#define conDllCall diag_log
 #endif
 

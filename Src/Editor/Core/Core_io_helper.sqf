@@ -127,6 +127,14 @@ function(file_exists)
 	(["FileManager","Exists",[_path],true] call rescript_callCommand)=="true"
 }
 
+function(folder_exists)
+{
+	params ["_path",["_isRelative",true]];
+	if (_isRelative) then {_path = getMissionPath _path};
+	(["FileManager","ExistsDir",[_path],true] call rescript_callCommand)=="true"
+}
+
+
 function(file_isLocked)
 {
 	params ["_path",["_isRelative",true]];

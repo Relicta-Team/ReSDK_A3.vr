@@ -252,7 +252,7 @@ Replaced value:
 ```sqf
 if !(cachevalue in _cache) exitwith {cachevalue}
 ```
-File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 44](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L44)
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 57](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L57)
 ## checkempty(cachevalue)
 
 Type: constant
@@ -264,7 +264,7 @@ Replaced value:
 ```sqf
 if (_cache get cachevalue == "") exitwith {cachevalue}
 ```
-File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 45](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L45)
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 58](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L58)
 ## editorDebug_serializePlayerSettings
 
 Type: function
@@ -281,6 +281,15 @@ Description:
 
 
 File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 38](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L38)
+## editorDebug_updatePosAndDirInCache
+
+Type: function
+
+Description: only for 3den
+- Param: _pos
+- Param: _dir (optional, default 0)
+
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 43](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L43)
 ## editorDebug_internal_validateValuesCanStart
 
 Type: function
@@ -288,7 +297,7 @@ Type: function
 Description: 
 - Param: _cache
 
-File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 42](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L42)
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 55](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L55)
 # EditorDebug_visual.sqf
 
 ## editorDebug_handlerWidgets
@@ -449,6 +458,18 @@ Initial value:
 ""
 ```
 File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 83](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L83)
+## relicta_debug_internal_lastErrorFileLine
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+null
+```
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 84](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L84)
 ## relicta_debug_internal_postCompileProcess
 
 Type: function
@@ -507,7 +528,7 @@ Description:
 - Param: _stack
 - Param: _offset
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 85](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L85)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 86](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L86)
 ## relicta_debug_internal_serializeStackTrace
 
 Type: function
@@ -518,7 +539,7 @@ Description:
 - Param: _scope
 - Param: _varmap
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 128](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L128)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 133](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L133)
 ## relicta_debug_setlasterror
 
 Type: function
@@ -526,7 +547,7 @@ Type: function
 Description: used on halt system call
 - Param: _name
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 164](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L164)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 169](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L169)
 ## relicta_debug_internal_testErrorInternal
 
 Type: function
@@ -534,7 +555,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 169](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L169)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 174](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L174)
 ## relicta_debug_internal_testError
 
 Type: function
@@ -542,7 +563,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 176](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L176)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 181](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L181)
 # IconGenerator.sqf
 
 ## main_ExitIfError()

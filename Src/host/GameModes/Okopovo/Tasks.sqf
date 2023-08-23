@@ -6,7 +6,7 @@
 #include "..\GameMode.h"
 #include "Okopovo.h"
 
-class(ROkopovoTask)
+class(ROkopovoTask) extends(IGamemodeSpecificClass)
 	var(name,"");
 	var(desc,"");
 

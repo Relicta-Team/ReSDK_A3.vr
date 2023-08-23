@@ -212,7 +212,7 @@ File: [host\ServerRpc\serverRpc_init.sqf at line 21](../../../Src/host/ServerRpc
 
 Type: constant
 
-> Exists if **_SQFVM** defined
+> Exists if **__VM_VALIDATE** defined
 
 Description: 
 

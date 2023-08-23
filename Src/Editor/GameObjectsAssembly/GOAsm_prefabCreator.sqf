@@ -26,14 +26,14 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 	call Core_pushContext;
 
 	private _args=[ [
-		"Создать наследника "+_basicType+"|text",
+		"Создать наследника от|text",
 		"Имя класса|typename|Введите имя класса\nИмя может содержать только символы английского алфавита, цифры и нижнее подчеркивание.\nИмя должно начинаться только с нижнего подчеркивания либо буквы"
 	  ],
 		{
 			(_this splitString "|") params [["_name","ERROR_NAME"],["_t","ERROR_TYPE"],["_desc",""]];
 			if (_t == "text") then {
 				_text = [_d,TEXT,[0,10*_i,100,9.5],_ctg] call createWidget;
-				[_text,_name] call widgetSetText;
+				[_text,_name + " " +("_basicType" call Core_getContextVar) + " (перетащите класс из библиотеки для замены)"] call widgetSetText;
 			};
 			if (_t == "typename") then {
 				_text = [_d,TEXT,[0,10*_i,30,9.5],_ctg] call createWidget;
@@ -76,14 +76,24 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 
 				//update hashdata
 				private _hd = [_worldObj,false] call golib_getHashData;
+				_oldClass = _hd get "class";
 				_hd set ["class",_newClass];
-				if (("model" in _mapData) && {(_mapData get "model")!=(_hd get "model")}) then {
+				_cust = _hd getOrDefault ["customProps",createHashMap];
+				if (("model" in _mapData) && {(_mapData get "model")!=(_cust getOrDefault ["model","--nomodel--"])}) then {
 					_mapData deleteat "model";
 					["Модель не будет обновлена в данном случае, так как создается префаб из уже изменённой модели"] call showWarning;
 					["goasm_prefab_createTemplateFrom_openWindow - handled potential error with model logic"] call printWarning;
 				};
+				
+				["mapdata: %1; hashdata: %2",_mapData,_hd] call printTrace;
+
 				_hd set ["customProps",_mapData];
-				[_worldObj,_hd,true,"Создание префаба типа "+_newClass] call golib_setHashData;
+				// Это действие не будет выполнено, поскольку после ребилда вызывается golib_massoc_updateAllObjectsAtClassAndModel
+				// который в свою очередь размапит структуры и декорации
+				// TODO: разкомментировать когда будет реализован префаб генератор
+				// if ((tolower _oldClass) in ["istruct","decor"]) then {
+				// 	[_worldObj,_hd,true,"Создание префаба типа "+_newClass] call golib_setHashData;
+				// };
 				
 				[[]] call inspector_menuLoad;
 				
@@ -128,7 +138,11 @@ function(goasm_prefab_createTemplateFrom_openWindow)
 
 			[[]] call inspector_menuLoad;
 		},
-		null,
+		{
+			params ["_draggedClass"];
+			["_basicType",_draggedClass] call Core_updateContextVar;
+			call golib_eventReloadArraySelector;
+		},
 		true
 	]; //call golib_openArraySelector;
 	//В следующем кадре вызов. в текущем ещё удаляется дисплей
@@ -225,8 +239,8 @@ function(goasm_prefab_validateName)
 {
 	params ["_newType","_basicType"];
 
-	if !([_newType,"^([_a-zA-Z][_a-zA-Z1-9]*)$"] call regex_isMatch) exitWith {
-		["Имя класса должно содержать только англ. символы. Допускаются цифры и нижнее подчеркивание: ^([_a-zA-Z][_a-zA-Z1-9]*)$"] call showError;
+	if !([_newType,"^([_a-zA-Z][_a-zA-Z0-9]*)$"] call regex_isMatch) exitWith {
+		["Имя класса должно содержать только англ. символы. Допускаются цифры и нижнее подчеркивание: ^([_a-zA-Z][_a-zA-Z0-9]*)$"] call showError;
 		false
 	};
 	if (_newType call oop_reflect_hasClass) exitWith {

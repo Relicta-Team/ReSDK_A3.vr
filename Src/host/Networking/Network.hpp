@@ -18,6 +18,6 @@
 	#define netSyncObjVar(obj,var,val) obj setvariable [var,val,true]
 #endif
 
-#ifdef _SQFVM
+#ifdef __VM_VALIDATE
 	#define netSetGlobal(var,val) [var,val];
 #endif

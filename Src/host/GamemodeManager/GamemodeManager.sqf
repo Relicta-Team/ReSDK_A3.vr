@@ -133,7 +133,7 @@ _forceAspectName = ["forcedAspectName",""] call sdk_getPropertyValue;
 sdk_temp_internal_forcedAspect = null;
 
 if ("startAtNight" call sdk_hasSystemFlag) then {
-	invokeAfterDelay({call setNight;call setNight;[]spawn setNight},0.5);
+	invokeAfterDelay({call setNight;call setNight;[]spawn setNight},0.3);
 };
 
 //apply logic
@@ -176,7 +176,7 @@ if (_canAutoSetupGamemode) then {
 		_allowedRoles = callFunc(_gmObj,getLobbyRoles) apply {tolower _x};
 		modvar(_allowedRoles) + (callFunc(_gmObj,getLateRoles) apply {tolower _x});
 		
-		if !((tolower _startupRole) in _allowedRoles) exitwith {
+		if (!((tolower _startupRole) in _allowedRoles) && _startupRole != "BasicRole_SimulationReSDK") exitwith {
 			["Роль %1 отсутствует в списке лобби ролей для выбранного режима",_startupRole] 
 			call MessageBox;
 		};

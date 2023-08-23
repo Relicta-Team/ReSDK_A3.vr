@@ -1346,7 +1346,7 @@ _o = create3DENEntity ["Object", "Land_ConcretePanels_02_single_v1_F", [0,0,0]];
 	_o set3DENAttribute ['position',[3761.09,3765.31,30.738]];
 	_o set3DENAttribute ['rotation',[0,0,270.893]];
 
-	_hash = [_o,'ConcertePanel'] call mm_importOld_initHashData;
+	_hash = [_o,'ConcretePanel'] call mm_importOld_initHashData;
 	[_o] call mm_importOld_postCreated;
 
 _o = create3DENEntity ["Object", "transformator", [0,0,0]];
@@ -10741,7 +10741,7 @@ _o = create3DENEntity ["Object", "Land_ConcretePanels_02_single_v1_F", [0,0,0]];
 	_o set3DENAttribute ['position',[3823.49,3966.3,0]];
 	_o set3DENAttribute ['rotation',[0,0,0]];
 
-	_hash = [_o,'ConcertePanel'] call mm_importOld_initHashData;
+	_hash = [_o,'ConcretePanel'] call mm_importOld_initHashData;
 	[_o] call mm_importOld_postCreated;
 
 _o = create3DENEntity ["Object", "CUP_ch_mod_h", [0,0,0]];

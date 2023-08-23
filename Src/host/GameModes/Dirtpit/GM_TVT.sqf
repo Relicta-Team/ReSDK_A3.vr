@@ -5,6 +5,7 @@
 
 #include <..\GameMode.h>
 
+editor_attribute("CodeOnyGamemode")
 class(GMTVTGame) extends(GMStationBase)
 	var(canAddAspect,false);
 	getterconst_func(canPlayEvents,false);

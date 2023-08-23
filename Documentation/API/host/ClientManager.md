@@ -706,6 +706,16 @@ Description: Системная функция при обнаружении п�
 - Param: _uid
 
 File: [host\ClientManager\functions.sqf at line 237](../../../Src/host/ClientManager/functions.sqf#L237)
+## pre_notifClientAssert
+
+Type: function
+
+Description: 
+- Param: _message
+- Param: _owner
+- Param: _uid
+
+File: [host\ClientManager\functions.sqf at line 273](../../../Src/host/ClientManager/functions.sqf#L273)
 ## cm_getAllClientsInLobby
 
 Type: function
@@ -713,7 +723,7 @@ Type: function
 Description: Получает всех клиентов в лобби
 
 
-File: [host\ClientManager\functions.sqf at line 283](../../../Src/host/ClientManager/functions.sqf#L283)
+File: [host\ClientManager\functions.sqf at line 292](../../../Src/host/ClientManager/functions.sqf#L292)
 ## cm_getAllClientsInGame
 
 Type: function
@@ -721,7 +731,7 @@ Type: function
 Description: Получает всех клиентов в игре
 
 
-File: [host\ClientManager\functions.sqf at line 296](../../../Src/host/ClientManager/functions.sqf#L296)
+File: [host\ClientManager\functions.sqf at line 305](../../../Src/host/ClientManager/functions.sqf#L305)
 ## cm_registerMobInGame
 
 Type: function
@@ -731,7 +741,7 @@ Description: регистрирует моба как ingameMob
 - Param: _client
 - Param: _vMob
 
-File: [host\ClientManager\functions.sqf at line 309](../../../Src/host/ClientManager/functions.sqf#L309)
+File: [host\ClientManager\functions.sqf at line 318](../../../Src/host/ClientManager/functions.sqf#L318)
 ## cm_unregisterMobInGame
 
 Type: function
@@ -740,7 +750,7 @@ Description: снимаем регистрацию моба с игры
 - Param: _mobObj
 - Param: _removeObj (optional, default true)
 
-File: [host\ClientManager\functions.sqf at line 319](../../../Src/host/ClientManager/functions.sqf#L319)
+File: [host\ClientManager\functions.sqf at line 328](../../../Src/host/ClientManager/functions.sqf#L328)
 ## cm_checkClientInJIPMemory
 
 Type: function
@@ -749,7 +759,7 @@ Description: Проверяет наличие ранее подключенно
 - Param: _uid
 - Param: _owner
 
-File: [host\ClientManager\functions.sqf at line 330](../../../Src/host/ClientManager/functions.sqf#L330)
+File: [host\ClientManager\functions.sqf at line 339](../../../Src/host/ClientManager/functions.sqf#L339)
 ## cm_sendOOSMessage
 
 Type: function
@@ -759,7 +769,7 @@ Description: Отправляет всем клиентам сообщение �
 - Param: _type (optional, default null)
 - Param: _groups (optional, default "")
 
-File: [host\ClientManager\functions.sqf at line 359](../../../Src/host/ClientManager/functions.sqf#L359)
+File: [host\ClientManager\functions.sqf at line 368](../../../Src/host/ClientManager/functions.sqf#L368)
 ## cm_sendLobbyMessage
 
 Type: function
@@ -769,7 +779,7 @@ Description: Отправляет сообщение всем клиентам �
 - Param: _type (optional, default null)
 - Param: _groups (optional, default "")
 
-File: [host\ClientManager\functions.sqf at line 370](../../../Src/host/ClientManager/functions.sqf#L370)
+File: [host\ClientManager\functions.sqf at line 379](../../../Src/host/ClientManager/functions.sqf#L379)
 # OnConnected.sqf
 
 ## cm_maxClients

@@ -108,7 +108,7 @@ File: [host\Networking\Network.hpp at line 18](../../../Src/host/Networking/Netw
 
 Type: constant
 
-> Exists if **_SQFVM** defined
+> Exists if **__VM_VALIDATE** defined
 
 Description: 
 - Param: var

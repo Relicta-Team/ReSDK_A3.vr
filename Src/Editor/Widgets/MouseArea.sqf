@@ -84,7 +84,11 @@ function(MouseArea_init)
 			_d = finddisplay _x;
 			if !isNullReference(_d) then {
 				//do not close editor native attributes
-				if (_x == 315 && count allControls _d == 62) exitwith {};
+				_count = count allControls _d;
+				if (_x == 315 && 
+					(_count == 62 //forget what this is...
+					|| _count == 21 //layeredit
+					)) exitwith {};
 				if (cfg_debug_devMode) exitwith {};
 				_d CloseDisplay 0;				
 			};
@@ -141,3 +145,18 @@ function(MouseArea_applyFixLostFocusAtWindow)
 		};
 	}] call Core_addEventHandler;
 }
+
+function(MouseArea_isEnabledIcons) { (get3DENIconsVisible select 0) }
+function(MouseArea_isEnabledLines) { (get3DENLinesVisible select 0) }
+
+function(MouseArea_toggleIcons)
+{
+	set3DENIconsVisible [!(get3DENIconsVisible select 0),!(get3DENIconsVisible select 1)];
+}
+
+function(MouseArea_toggleLines)
+{
+	set3DENLinesVisible [!(get3DENLinesVisible select 0),!(get3DENLinesVisible select 1)];
+}
+
+

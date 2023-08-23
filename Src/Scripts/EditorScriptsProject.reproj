@@ -2,6 +2,7 @@
 ScriptContext.cs
 Breakpoint.cs
 FileManager.cs
+FileWatcher.cs
 WorkspaceHelper.cs
 // Скрипты Reditor
 Reditor\OOPBuilder.cs

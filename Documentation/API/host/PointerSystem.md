@@ -67,7 +67,7 @@ Type: function
 Description: 
 
 
-File: [host\PointerSystem\Pointer.sqf at line 47](../../../Src/host/PointerSystem/Pointer.sqf#L47)
+File: [host\PointerSystem\Pointer.sqf at line 51](../../../Src/host/PointerSystem/Pointer.sqf#L51)
 ## pointer_isExists
 
 Type: function
@@ -75,7 +75,7 @@ Type: function
 Description: 
 
 
-File: [host\PointerSystem\Pointer.sqf at line 58](../../../Src/host/PointerSystem/Pointer.sqf#L58)
+File: [host\PointerSystem\Pointer.sqf at line 62](../../../Src/host/PointerSystem/Pointer.sqf#L62)
 ## pointer_memoryClear
 
 Type: function
@@ -83,7 +83,7 @@ Type: function
 Description: Полная очистка и пересоздание объекта
 
 
-File: [host\PointerSystem\Pointer.sqf at line 73](../../../Src/host/PointerSystem/Pointer.sqf#L73)
+File: [host\PointerSystem\Pointer.sqf at line 77](../../../Src/host/PointerSystem/Pointer.sqf#L77)
 # pointers.hpp
 
 ## pointer_new(ref)

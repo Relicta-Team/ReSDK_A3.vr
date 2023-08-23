@@ -60,6 +60,31 @@ if ("FullScreen" == _res) then {
 
 // ---------- resolution checks end ------------
 
+// validate script error
+if (ReBridge_lastError != "") exitWith {
+	[ 
+		(format[
+			"Компиляция ReBridge завершена с ошибкой: %1%2Лог: %3",
+			ReBridge_lastError,
+			endl,
+			ReBridge_loadedLogFile
+		]), 
+		"Ошибка ReBridge", 
+		[ 
+			"Recompile", 
+			{ 
+				[]spawn{isnil compileEditor};
+			} 
+		], 
+		[ 
+			"Reload editor", 
+			{[] spawn Core_reloadEditorFull; } 
+		], 
+		"\A3\ui_f\data\map\markers\handdrawn\warning_CA.paa", 
+		findDisplay 313 
+	] call createMessageBox;
+};
+
 ["onSaving",{
 	params ["_isAuto"];
 	["Saving process; is autosave - %1",_isAuto] call printLog;

@@ -10,7 +10,12 @@
 //большие стены
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(BigWall) extends(BigConstructions) var(name,"Большая стена"); var(desc,"Огромная стена выполняющая роль ограничения доступной зоны. Не разрушаема"); endclass
+class(BigWall) extends(BigConstructions) var(name,"Большая стена"); editor_only(var(desc,"Огромная стена выполняющая роль ограничения доступной зоны. Не разрушаема");) endclass
+
+editor_attribute("EditorGenerated")
+class(ConcreteArch) extends(BigWall)
+	var(model,"ml\ml_object\l04_catacombs\l04_catacombs_00.p3d");
+endclass
 
 
 editor_attribute("EditorGenerated")

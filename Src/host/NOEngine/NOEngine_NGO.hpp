@@ -49,3 +49,5 @@ addNGO("a3\structures_f_epa\items\tools\metalwire_f.p3d",vec3(0,0,-0.1),0.025);
 addNGO("ml_shabut\eft\svd_trubka.p3d",vec3(0,0,0),0.025);
 //люк
 addNGO("a3\structures_f_exp\infrastructure\roads\sewercover_03_f.p3d",vec3(0,0,-0.25),0.065);
+// матрас
+addNGODecal("ml\ml_object_new\model_05\matras_2.p3d",vec3(0,0,-0.05),0.4,"geopolsm");

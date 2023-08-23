@@ -12,6 +12,18 @@ Initial value:
 true
 ```
 File: [host\Discord\Accounts.sqf at line 9](../../../Src/host/Discord/Accounts.sqf#L9)
+## dsm_accounts_enableRoleAccessCheck
+
+Type: Variable
+
+Description: рантайм система проверки ролей дискорда и ограничения игровых ролей
+
+
+Initial value:
+```sqf
+true
+```
+File: [host\Discord\Accounts.sqf at line 12](../../../Src/host/Discord/Accounts.sqf#L12)
 ## dsm_accounts_mapRegister
 
 Type: Variable
@@ -23,7 +35,7 @@ Initial value:
 ```sqf
 createHashMap //карта регистрации. ключи - токены, значения - данные для регистрации
 ```
-File: [host\Discord\Accounts.sqf at line 15](../../../Src/host/Discord/Accounts.sqf#L15)
+File: [host\Discord\Accounts.sqf at line 18](../../../Src/host/Discord/Accounts.sqf#L18)
 ## dsm_accounts_userRequester
 
 Type: Variable
@@ -35,7 +47,7 @@ Initial value:
 ```sqf
 createHashMap //карта юзеров. защита от дублей токенов
 ```
-File: [host\Discord\Accounts.sqf at line 16](../../../Src/host/Discord/Accounts.sqf#L16)
+File: [host\Discord\Accounts.sqf at line 19](../../../Src/host/Discord/Accounts.sqf#L19)
 ## dsm_accounts_nickRequester
 
 Type: Variable
@@ -47,7 +59,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\Discord\Accounts.sqf at line 17](../../../Src/host/Discord/Accounts.sqf#L17)
+File: [host\Discord\Accounts.sqf at line 20](../../../Src/host/Discord/Accounts.sqf#L20)
 ## dsm_accounts_tokenLifetime
 
 Type: Variable
@@ -59,7 +71,7 @@ Initial value:
 ```sqf
 60 * 5
 ```
-File: [host\Discord\Accounts.sqf at line 19](../../../Src/host/Discord/Accounts.sqf#L19)
+File: [host\Discord\Accounts.sqf at line 22](../../../Src/host/Discord/Accounts.sqf#L22)
 ## dsm_accounts_arriveInCityCountNeed
 
 Type: Variable
@@ -71,7 +83,7 @@ Initial value:
 ```sqf
 5
 ```
-File: [host\Discord\Accounts.sqf at line 22](../../../Src/host/Discord/Accounts.sqf#L22)
+File: [host\Discord\Accounts.sqf at line 25](../../../Src/host/Discord/Accounts.sqf#L25)
 ## dsm_accounts_list_arriveSessionUnique
 
 Type: Variable
@@ -83,7 +95,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\Discord\Accounts.sqf at line 134](../../../Src/host/Discord/Accounts.sqf#L134)
+File: [host\Discord\Accounts.sqf at line 137](../../../Src/host/Discord/Accounts.sqf#L137)
 ## dsm_accounts_canUse
 
 Type: function
@@ -91,7 +103,7 @@ Type: function
 Description: 
 
 
-File: [host\Discord\Accounts.sqf at line 11](../../../Src/host/Discord/Accounts.sqf#L11)
+File: [host\Discord\Accounts.sqf at line 14](../../../Src/host/Discord/Accounts.sqf#L14)
 ## dsm_accounts_checkSync
 
 Type: function
@@ -102,7 +114,7 @@ Description: вызывается из лс сообщений у бота. за
 - Param: _chanId
 - Param: _discordUserId
 
-File: [host\Discord\Accounts.sqf at line 26](../../../Src/host/Discord/Accounts.sqf#L26)
+File: [host\Discord\Accounts.sqf at line 29](../../../Src/host/Discord/Accounts.sqf#L29)
 ## dsm_accounts_register
 
 Type: function
@@ -111,7 +123,7 @@ Description: выполняет привязку дискорда к учетк�
 - Param: _client
 - Param: _token
 
-File: [host\Discord\Accounts.sqf at line 69](../../../Src/host/Discord/Accounts.sqf#L69)
+File: [host\Discord\Accounts.sqf at line 72](../../../Src/host/Discord/Accounts.sqf#L72)
 ## dsm_accounts_loadDiscordId
 
 Type: function
@@ -120,7 +132,7 @@ Description: загрузка привязки дискорда. Вызывае�
 - Param: _client
 - Param: _nick
 
-File: [host\Discord\Accounts.sqf at line 119](../../../Src/host/Discord/Accounts.sqf#L119)
+File: [host\Discord\Accounts.sqf at line 122](../../../Src/host/Discord/Accounts.sqf#L122)
 ## dsm_accounts_handleRegisterArriveInCity
 
 Type: function
@@ -128,7 +140,7 @@ Type: function
 Description: Вызывается когда клиента регистрируют в городе
 - Param: _cli
 
-File: [host\Discord\Accounts.sqf at line 136](../../../Src/host/Discord/Accounts.sqf#L136)
+File: [host\Discord\Accounts.sqf at line 139](../../../Src/host/Discord/Accounts.sqf#L139)
 ## dsm_accounts_requestUpdateRoles
 
 Type: function
@@ -137,7 +149,7 @@ Description: запрос в менеджер на обновление роле
 - Param: _name
 - Param: _discordUserId
 
-File: [host\Discord\Accounts.sqf at line 160](../../../Src/host/Discord/Accounts.sqf#L160)
+File: [host\Discord\Accounts.sqf at line 163](../../../Src/host/Discord/Accounts.sqf#L163)
 ## dsm_accounts_addToRole
 
 Type: function
@@ -146,7 +158,7 @@ Description:
 - Param: _discordUserId
 - Param: _roleName
 
-File: [host\Discord\Accounts.sqf at line 165](../../../Src/host/Discord/Accounts.sqf#L165)
+File: [host\Discord\Accounts.sqf at line 168](../../../Src/host/Discord/Accounts.sqf#L168)
 ## dsm_accounts_removeFromRole
 
 Type: function
@@ -155,7 +167,7 @@ Description:
 - Param: _discordUserId
 - Param: _roleName
 
-File: [host\Discord\Accounts.sqf at line 170](../../../Src/host/Discord/Accounts.sqf#L170)
+File: [host\Discord\Accounts.sqf at line 173](../../../Src/host/Discord/Accounts.sqf#L173)
 ## dsm_acconunts_setNickname
 
 Type: function
@@ -164,7 +176,7 @@ Description: установка никнейма для дискорд клие�
 - Param: _discordUserId
 - Param: _nickname
 
-File: [host\Discord\Accounts.sqf at line 176](../../../Src/host/Discord/Accounts.sqf#L176)
+File: [host\Discord\Accounts.sqf at line 179](../../../Src/host/Discord/Accounts.sqf#L179)
 # Discord.sqf
 
 ## DISCORD_MAX_MESSAGES_COUNT_PERDELAY

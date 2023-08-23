@@ -273,3 +273,14 @@ addCommand("rempoints",ACCESS_OWNERS)
 	callFuncParams(_targ,removePoints,_num);
 	callFuncParams(thisClient,localSay,"ok" arg "system");
 };
+
+addCommandWithDescription("setdiscordroleprotect",ACCESS_ADMIN,"Включить или выключить доступ к ролям от дискорд ролей")
+{
+	private _oldval = dsm_accounts_enableRoleAccessCheck;
+	
+	dsm_accounts_enableRoleAccessCheck = (parseNumber args) > 0;
+
+	if not_equals(dsm_accounts_enableRoleAccessCheck,_oldval) then {
+		[format["<t size='1.6'>%1 %2 систему доступа к ролям от дискорд ролей</t>",getVar(thisClient,name),ifcheck(dsm_accounts_enableRoleAccessCheck,"включил","выключил")],"system"] call cm_sendLobbyMessage;
+	};
+};

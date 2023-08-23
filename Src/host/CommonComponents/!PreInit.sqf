@@ -22,6 +22,10 @@ if (isMultiplayer)then{
 				[["EFHmod",diag_frameNo - x_sync_frame,getPlayerUID player],{[remoteExecutedOwner,_this] call pre_oncheat}] remoteExecCall ["call",2]
 			};
 		}];
+		client_sendNotifToServer = {
+			params ["_mes"];
+			[[_mes,getPlayerUID player],{[_this select 0,remoteExecutedOwner,_this select 1] call pre_notifClientAssert}] remoteExecCall ["call",2];
+		};
 	};
 };
 
@@ -324,6 +328,25 @@ cst_isComressed = {
 //==================================================================================================
 //		Other utility functions
 //==================================================================================================
+
+//enable preinit functional tests function decl
+//#define __ENABLE_STATIC_TEST
+
+// Строковые хелперы
+stringStartWith = {
+	params ["_checked","_started",["_casesense",true]];
+	private _comparer = _checked select [0,count _started];
+	ifcheck(_casesense,equals(_comparer,_started),_comparer == _started)
+};
+
+stringEndWith = {
+	params ["_checked","_ended",["_casesense",true]];
+	private _cnt = count _ended;
+	private _comparer = _checked select [(count _checked) - _cnt,_cnt];
+	ifcheck(_casesense,equals(_comparer,_ended),_comparer == _ended)
+};
+
+
 //Выбирает лучший случай [[1,2,3],{_x > 2}] call selectBest
 selectBest = {
 	params ["_array", "_criteria", "_return"];
@@ -357,3 +380,26 @@ missionNamespace setVariable ["pushFront",
 }
 ];
 //!pushfront = {}; <- throws compier error
+
+#ifndef EDITOR
+	#undef __ENABLE_STATIC_TEST
+#endif
+
+//tests
+#ifdef __ENABLE_STATIC_TEST
+
+functionalitests_preinit = {
+		#define testcheck(value,errortext) if !(value) exitWith { \
+		private _format = format["%1 - %2",errortext,'value']; \
+		setLastError(_format); \
+	};
+
+	testcheck(vec3("helloworld","Hello",false) call stringStartWith,"")
+	testcheck(!(vec3("helloworld","Hello",true) call stringStartWith),"")
+	testcheck(vec3("helloworld","rld",false) call stringEndWith,"")
+	testcheck(!(vec3("helloWORLD","RLD",true) call stringEndWith),"")
+
+	#undef testcheck
+};
+
+#endif

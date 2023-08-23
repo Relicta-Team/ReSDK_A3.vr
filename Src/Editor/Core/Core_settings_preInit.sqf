@@ -32,10 +32,98 @@
 
 core_settings_list_default = [
 	["region","System","Различные системные настройки"],
-		["system_startWithLogVars",
+		["system_enableChunkviewOnLoad",
 			[
-				"Показывать окно отлдаки в симуляции",
-				"Показывает окно отладки во время симуляции в котором содержатся различные статистики",
+				"Отображать чанки при загрузке редактора",
+				"Включает отображение чанков при загрузке редактора",
+				[false,"check"],validate_check,
+				{
+					if (_isInit && _value) then {
+						call pertest_chunkViewToggle;
+					};
+				}
+			]
+		],
+		["system_enableIconsOnLoad",
+			[
+				"Включить иконки объектов при загрузке редактора",
+				"Включает отображение иконок при загрузке редактора\nОбратите внимание, что отключенные иконки также отключат отображение названий объектов",
+				[true,"check"],validate_check,
+				{
+					if (_isInit && _value) then {
+						if !(call MouseArea_isEnabledIcons) then {
+							call MouseArea_toggleIcons;
+						};
+					};
+				}
+			]
+		],
+		["system_enableLinesOnLoad",
+			[
+				"Включить линии границ объектов при загрузке редактора",
+				"Включает отображение линий границ объектов при загрузке редактора",
+				[true,"check"],validate_check,
+				{
+					if (_isInit && _value) then {
+						if !(call MouseArea_isEnabledLines) then {
+							call MouseArea_toggleLines;
+						};
+					};
+				}
+			]
+		],
+		["system_enableClassNamesOnLoad",
+			[
+				"Включить отображение класснеймов объектов при загрузке редактора",
+				"Включает отображение имен классов объектов при загрузке редактора",
+				[false,"check"],validate_check,
+				{
+					if (_isInit && _value) then {
+						if !(drawNames_enabled) then {
+							(_value) call drawNames_setEnable;
+						};
+					};
+				}
+			]
+		],
+		["system_classNamesDrawDistance",
+			[
+				"Расстояние отображения класснеймов объектов",
+				"Устанавливает расстояние отображения имен классов в сцене. Число в диапазоне от 5 до 200",
+				[50,"num_input"],
+				{finite _value && inRange(floor _value,5,200)},
+				{drawNames_distance = _value}
+			]
+		],
+		["system_classNamesNoShown",
+			[
+				"Не отображаемые имена классов",
+				"Укажите список классов, которые не будут отображаться при включенном режиме отображения классов в сцене\nНапример: blockdirt,decor,candle - выключит отображение имен всех блоков земли, декораций и свечей",
+				["","input"],
+				{true},
+				{
+					drawNames_internal_listNoShown = (_value splitString ";, |") apply {tolower _x};
+				}
+			]
+		],
+		["system_enableDrawCursorOnLoad",
+			[
+				"Включить отображение курсора геометрии при загрузке редактора",
+				"Включает отображение курсора геометрии при загрузке редактора",
+				[false,"check"],validate_check,
+				{
+					if (_isInit && _value) then {
+						if !(geoCursor_enabled) then {
+							call geoCursor_toggle;
+						};
+					};
+				}
+			]
+		],
+		["system_enableKeymapInfoOnVcomLoad",
+			[
+				"Показать информацию о клавишах в редакторе эмиттеров и позиций модели",
+				"Включает показ скрываемого информационного сообщения с доступными клавишами управления",
 				[true,"check"],validate_check
 			]
 		],
@@ -223,6 +311,13 @@ core_settings_list_default = [
 				[true,"check"],validate_check
 			]
 		],
+		["sim_startWithLogVars",
+			[
+				"Показывать окно отлдаки в симуляции",
+				"Показывает окно отладки во время симуляции в котором содержатся различные статистики",
+				[true,"check"],validate_check
+			]
+		],
 	["region","Map",""],
 		
 		["map_autosaveBinary",
@@ -230,18 +325,6 @@ core_settings_list_default = [
 				"Сохранять файл карты при сохранении в рабочей области",
 				"Автоматически сохраняет карту в хранилище карт при сохранении карты в рабочей области",
 				[false,"check"],validate_check
-			]
-		],
-		["map_enableChunkviewOnLoad",
-			[
-				"Отображать чанки при загрузке редактора",
-				"Включает отображение чанков при загрузке редактора",
-				[false,"check"],validate_check,
-				{
-					if (_isInit && _value) then {
-						call pertest_chunkViewToggle;
-					};
-				}
 			]
 		],
 		["map_canBuildBeforeSimulate",

@@ -79,15 +79,17 @@
 #include <EditorEngine.h>
 
 //Строковое название версии. Пишется в пользовательском интерфейсе редактора
-Core_version_name = "1.3";
+Core_version_name = "1.12";
 //Номер версии сборки редактора. Используется в бинарных файлах карт.
-Core_version_number = 2;
+Core_version_number = 3;
 
 Editor_enableAutoloadGOLIB = true;
 
 //core
 componentInit(Core)
 #include "Core\Core_init.sqf"
+componentInit(Core_fileWatcher)
+#include "Core\Core_fileWatcher.sqf"
 componentInit(Core_pathes)
 #include "Core\Core_pathes.sqf"
 componentInit(Core_io)
@@ -120,6 +122,8 @@ componentInit(Game_objects_assembly)
 #include "GameObjectsAssembly\GOAsm_init.sqf"
 componentInit(Game_objects_library)
 #include "GameObjectsLibrary\GOLib_init.sqf"
+componentInit(GameMode_manager)
+#include "GamemodesManager\GamemodeManager_init.sqf"
 componentInit(Maps_manager)
 #include "MapsManager\Maps_manager_init.sqf"
 componentInit(Viusal_components)

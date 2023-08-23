@@ -19,7 +19,7 @@
 #define canlog(eventname,code) if !((toLower eventname) in DISABLED_RPC_LOG) then {code}
 
 #define debugprint_type "debug_console" callExtension
-#ifdef _SQFVM
+#ifdef __VM_VALIDATE
 	#define debugprint_type diag_log
 #endif
 

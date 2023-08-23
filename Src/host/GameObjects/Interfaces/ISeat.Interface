@@ -71,17 +71,32 @@ func(constructor)
 	setSelf(_seatListDummy,_l apply {objNUll});
 };
 
-//свободно ли место
+//свободно ли место (unsafe function)
 func(isSeatFree)
 {
 	objParams_1(_index);
 	isNullReference(getSelf(seatListOwners) select _index)
 };
 
+//public function with indexoutofrange check
 func(canSeat)
 {
 	objParams_2(_usr,_index);
+	if !inRange(_index,0,(count getSelf(seatListOwners)) - 1) exitwith {false};
 	callSelfParams(isSeatFree,_index);
+};
+
+// Получить владельца конкретного сиденья. Если сиденье только 1 - передайте аргументом 0 или null
+func(getSeatOwner)
+{
+	objParams_1(_idx);
+
+	if isNullVar(_idx) then {_idx = 0};
+
+	private _listSeats = getSelf(seatListOwners);
+	if !inRange(_index,0,(count _listSeats) - 1) exitwith {nullPtr};
+
+	_listSeats select _idx;
 };
 
 func(getNearFreeSeatIndex)
@@ -157,16 +172,26 @@ func(seatConnect)
 		_o setPosAtl _p;
 	}; startUpdateParams(_pfh_onReplicate,0,vec2(_rplObj,_pos));
 	
+	
+	private _usrPos = callFunc(_usr,getPos);
+	private _usrDir = callFunc(_usr,getDir);
+
+	if !isNullVar(__GLOBAL_INITIALIZER_POS__) then {
+		_usrPos = __GLOBAL_INITIALIZER_POS__ select 0;
+		_usrDir = __GLOBAL_INITIALIZER_POS__ select 1;
+	};
+
 	private _dir = _origObj getRelDir getVar(_usr,owner);
 	private _restDir = if (_dir > 315 || _dir <= 45) then {
-		callFunc(_usr,getDir)+_dir //он спереди
-	} else {callFunc(_usr,getDir)+180};
+		_usrDir+_dir //он спереди
+	} else {_usrDir+180};
 	//TODO починить посадку спереди объекта
-	_restDir = callFunc(_usr,getDir) + 180;
+	_restDir = _usrDir + 180;
 	
 	_rplObj setVariable ["_restDir",_restDir];
-	_rplObj setVariable ["_restPos",callFunc(_usr,getPos)];
+	_rplObj setVariable ["_restPos",_usrPos];
 	
+
 	getSelf(seatListOwners) set [_index,_usr];
 	setVar(_usr,connectedTo,this);
 	
@@ -262,6 +287,20 @@ func(onClick)
 	super();
 };
 
+
+func(getSeatRestPos)
+{
+	objParams_1(_usr);
+	
+	if equalTypes(_usr,nullPtr) then {
+		_usr = getSelf(seatListOwners) find _usr;
+	};
+	if (_usr == -1) exitWith {null};
+	
+	private _rplObj = getSelf(_seatListDummy) select _usr;
+	private _restPos = _rplObj getVariable "_restPos";
+	_restPos
+};
 
 region(Member for backward compatibility)
 /*	//кем занято место

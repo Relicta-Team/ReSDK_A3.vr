@@ -10,7 +10,7 @@
 #define gt &gt;
 #define sgt "&gt;"
 
-#ifdef _SQFVM
+#ifdef __VM_VALIDATE
 //<
 #define lt left_br
 #define slt "string_left_br"

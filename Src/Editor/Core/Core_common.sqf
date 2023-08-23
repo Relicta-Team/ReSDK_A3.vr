@@ -96,3 +96,17 @@ regex_replace = {
 	params ["_txt","_pattern","_replacer"];
 	_txt regexReplace [_pattern,_replacer];
 };
+
+//copy from preipit build
+stringStartWith = {
+	params ["_checked","_started",["_casesense",true]];
+	private _comparer = _checked select [0,count _started];
+	ifcheck(_casesense,equals(_comparer,_started),_comparer == _started)
+};
+
+stringEndWith = {
+	params ["_checked","_ended",["_casesense",true]];
+	private _cnt = count _ended;
+	private _comparer = _checked select [(count _checked) - _cnt,_cnt];
+	ifcheck(_casesense,equals(_comparer,_ended),_comparer == _ended)
+};

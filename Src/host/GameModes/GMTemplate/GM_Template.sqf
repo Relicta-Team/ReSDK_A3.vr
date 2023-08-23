@@ -1,5 +1,6 @@
 #include <..\GameMode.h>
 
+editor_attribute("CodeOnyGamemode")
 class(GMTemplate) extends(GMBase)
 	
 	var(name,"Тестовый режим");
@@ -7,13 +8,15 @@ class(GMTemplate) extends(GMBase)
 	var(descExtended,"Описание в конце игры.");
 
 	// Длительность режима. Обратите внимание, что логика конца режима по времени должна быть обработана вручную
-	var(duration,t_atMin(25)); //25 минут
+	var(duration,t_asMin(25)); //25 минут
 
 	//Вероятность режима при случайном выборе
 	getterconst_func(getProbability,50);
 	//минимальное и максимальное колчиество людей для случайного выбора режима
 	getterconst_func(getReqPlayersMin,1);
 	getterconst_func(getReqPlayersMax,4);
+
+	getterconst_func(isPlayableGamemode,false); //режим не доступен только в симуляции
 
 	//данные режима
 	//имя загружаемой карты

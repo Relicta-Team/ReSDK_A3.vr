@@ -230,6 +230,12 @@ class(LadderBase) extends(TeleportInteractible)
 	
 endclass
 
+editor_attribute("EditorGenerated")
+class(WoodenLadder) extends(LadderBase)
+	var(model,"ml_shabut\sbs\laddersbs.p3d");
+	var(name,"Лестница");
+endclass
+
 class(SewercoverBase) extends(TeleportInteractible)
 	var(name,"Люк");
 	var(model,"a3\structures_f_exp\infrastructure\roads\sewercover_03_f.p3d");

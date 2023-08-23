@@ -376,7 +376,7 @@ _3683_547123664_8378933_84684 = ['Decor',[3683.55,3664.84,33.8468],325.658,[0,0,
 _3676_501713677_5544423_05817 = ['IStruct',[3676.5,3677.55,23.0582],359.879,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x6.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['ContainerGreen3',[3863.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 _3702_222413656_9311519_22748 = ['Decor',[3702.22,3656.93,24.6665,true],92.3884,[0.00702215,0.0054209,0.999961], {_thisObj setvariable ['model','ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d'];}] call InitDecor; // !!! realocated model !!!
-['ConcertePanel',[3823.49,3966.3,0],0,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3823.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 _3670_493413677_5686023_06390 = ['IStruct',[3670.49,3677.57,23.0639],359.879,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x6.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['BoardWoodenBox',[3865.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 _3685_111573656_7998021_12137 = ['Decor',[3685.11,3656.8,26.5604,true],359.371,[-0.00578277,0.00672897,0.999961], {_thisObj setvariable ['model','ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d'];}] call InitDecor; // !!! realocated model !!!
@@ -818,11 +818,11 @@ _3699_360843663_0112310_33298 = ['Decor',[3699.36,3663.01,10.333],178.112,[0,0,1
 _3677_488283682_1650417_02313 = if ((random 1) < 0.8) then {
 	['Egg',[3677.49,3682.17,17.0231],0,[0,0,1]] call InitItem; 
 };
-['ConcertePanel',[3693.57,3671.07,19.0704],270.893,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3693.57,3671.07,19.0704],270.893,[0,0,1]] call InitStruct; 
 _3677_429443684_7360817_02313 = if ((random 1) < 0.8) then {
 	['Egg',[3677.43,3684.74,17.0231],0,[0,0,1]] call InitItem; 
 };
-['ConcertePanel',[3697.44,3670.99,19.0753],270.893,[0,0,1]] call InitStruct; 
+['ConcretePanel',[3697.44,3670.99,19.0753],270.893,[0,0,1]] call InitStruct; 
 _3677_441653682_0656717_73820 = if ((random 1) < 0.8) then {
 	['Egg',[3677.44,3682.07,17.7382],35.4515,[0,0,1]] call InitItem; 
 };

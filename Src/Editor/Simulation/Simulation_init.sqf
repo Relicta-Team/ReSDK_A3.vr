@@ -5,19 +5,52 @@
 
 init_function(sim_initialize)
 {
-	#include "..\..\host\GamemodeManager\Gamemode_AllowedModes.sqf"
-
 	sim_internal_const_pathAbsSDKConfig = getMissionPath "src\Editor\EditorSDKConfig.txt";
+
+	sim_internal_isStartFromPointMode = false;
+
+	// vec2: pos, dir
+	sim_internal_lastCachedTransform = [[0,0,0],0];
 }
 
 function(sim_openMapSelector)
 {
+	params [["_selectFromAllModes",true],["_startFromPoint",false]];
+	
+	sim_internal_isStartFromPointMode = _startFromPoint;
+	
+	private _allowedModes = [];
+	private _thisMapName = "missionName" call golib_getCommonStorageParam;
+	{
+		if ([_x,"InterfaceClass"] call goasm_attributes_hasAttributeClass
+			|| [_x,"HiddenClass"] call goasm_attributes_hasAttributeClass
+		) then {continue};
+		if (_selectFromAllModes) then {
+			_allowedModes pushBack ([_x,"classname"] call oop_getTypeValue);
+		} else {
+			private _mapName = [_x,"",true,"getMapName"] call oop_getFieldBaseValue;
+			if (_mapName == _thisMapName) then {
+				_allowedModes pushBack ([_x,"classname"] call oop_getTypeValue);
+			};
+		};
+	} foreach (call gm_getAllGamemodeObjects);
+
+	if (count _allowedModes == 0) exitWith {
+		[format["Для карты %1 не существует режима. Сгенерируйте его в меню ''Инструменты'' - (Создать режим)","missionName" call golib_getCommonStorageParam],10] call showError;
+	};
+
+	if (!_selectFromAllModes && count _allowedModes == 1) exitwith {
+		[_allowedModes select 0] call sim_onStartFromSelectedMode;
+	};
+
+	_allowedModes sort true;
+	
 	[
-		gm_allowedModes,
+		_allowedModes,
 		//event on select
 		{
 			_curMode = _text;
-			[[],[vec2("startupMode",_curMode)]] call sim_internal_processLaunchSim;
+			[_curMode] call sim_onStartFromSelectedMode;
 		},
 		{
 			
@@ -25,6 +58,23 @@ function(sim_openMapSelector)
 		null,
 		"Выберите режим с которым будет запускаться симуляция"
 	] call control_createList;
+}
+
+function(sim_onStartFromSelectedMode)
+{
+	params ["_modeName"];
+
+	if (sim_internal_isStartFromPointMode) then {
+		//update cache
+		sim_internal_lastCachedTransform call editorDebug_updatePosAndDirInCache;
+
+		[["autoGamemode","startGame","spawnposFromCache"],[
+			["startGamemodeName",_modeName],
+			["startRoleName","BasicRole_SimulationReSDK"]
+		]] call sim_internal_processLaunchSim;
+	} else {
+		[[],[vec2("startupMode",_modeName)]] call sim_internal_processLaunchSim;
+	};
 }
 
 function(sim_startSimFromCache)
@@ -71,7 +121,7 @@ function(sim_internal_processLaunchSim)
 	if (cfg_sim_startAtNight) then {
 		__systemFlags pushBack "startAtNight";
 	};
-	if (cfg_system_startWithLogVars) then {
+	if (cfg_sim_startWithLogVars) then {
 		__systemFlags pushBack "enableLogVars";
 	};
 
@@ -82,6 +132,15 @@ function(sim_internal_processLaunchSim)
 
 function(sim_openDetaliSetup)
 {
+	if (call golib_isOpenedArraySelector) exitwith {
+		["Окно уже открыто"] call showWarning;
+	};
+
+	sim_internal_map_onDragEvent = createHashMapFromArray [
+		["startGamemodeName",{params ["_class"]; isTypeNameOf(_class,GMBase) && _class != "GMBase"}],
+		["startRoleName",{params ["_class"]; isTypeNameOf(_class,BasicRole) && _class != "BasicRole"}]
+	];
+
 	private _params = [
 		//setting,name(|desc),valuetype,defaultvalue
 		["autoGamemode","Авторежим|Установить режим и роль","check"],
@@ -92,6 +151,8 @@ function(sim_openDetaliSetup)
 		["forcedAspectName","Имя аспекта|Класснейм аспекта, который будет установлен","input"]
 	];
 	
+	[true] call gm_internal_setGolibMode;
+
 	sim_internal_map_settings = createHashMap;
 	sim_intenral_list_widgets = [];
 	[_params,
@@ -129,11 +190,17 @@ function(sim_openDetaliSetup)
 			if !isNullVar(_valueSetup) then {
 				_valueSetup params ["_t","_s","_ev","_pset"];
 				_w = [_d,_t,_s,_ctg] call createWidget;
+				private _onDragFromTree = sim_internal_map_onDragEvent getOrDefault [_setname,{params ["_classname"]; false}];
+				_w setvariable ["_onDragFromTree",_onDragFromTree];
 				_w setvariable ["eventGetValue",_ev];
 				_w setvariable ["settingName",_setname];
 				_w setvariable ["valuetype",_valuetype];
+				_w setvariable ["onsetvalue",_pset];
 				_w setBackgroundColor _color;
 				sim_intenral_list_widgets pushBack _w;
+
+				_w setvariable ["associatedWith",_tex];
+				_tex setvariable ["associatedWith",_w];
 
 				_idxFind = (_resdk_cache_simsetup findif {_x select 0 == _setname});
 				if (_idxFind != -1) then {
@@ -158,6 +225,8 @@ function(sim_openDetaliSetup)
 			profileNamespace setvariable ["resdk_cache_simsetup",_vauleList];
 			saveprofilenamespace;
 
+			[false] call gm_internal_setGolibMode;
+
 			//onsave
 			nextFrame(displayClose);
 
@@ -166,9 +235,28 @@ function(sim_openDetaliSetup)
 		},
 		"Настройка запуска симуляции",
 		"Запуск",
-		null,
+		getEdenDisplay,
 		{
+			[false] call gm_internal_setGolibMode;
 			nextFrame(displayClose);
-		}
+		},
+		{
+			//ondrag
+			params ["_class"];
+			private _wid = widgetNull;
+			{
+				if (_x call isMouseInsideWidget) exitwith {_wid = _x};
+				_assocWith = _x getvariable "associatedWith";
+				if (_assocWith call isMouseInsideWidget) exitwith {_wid = _x};
+			} foreach sim_intenral_list_widgets;
+			
+			if isNullReference(_wid) exitwith {};
+
+			["pressed on %1 with %2",_wid getvariable "settingName",_class] call printTrace;
+			if ([_class] call (_wid getvariable "_onDragFromTree")) then {
+				[_wid,_class] call (_wid getvariable "onsetvalue");
+			};
+		},
+		true
 	] call golib_openArraySelector
 }

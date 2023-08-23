@@ -5,6 +5,8 @@
 
 #include "..\..\host\engine.hpp"
 #include "..\..\host\oop.hpp"
+#include "..\..\host\text.hpp"
+#include "..\..\host\keyboard.hpp"
 #include <..\WidgetSystem\widgets.hpp>
 #include <..\Inventory\helpers.hpp>
 
@@ -448,7 +450,7 @@ cd_openAuth = {
 		_txt = ctrlText (_d getVariable "input");
 
 
-		if (count (_txt regexFind ["[^a-zA-Z1-9\_]/i"]) > 0) exitWith {rpcCall("authResult",2)};
+		if (count (_txt regexFind ["[^a-zA-Z0-9\_]/i"]) > 0) exitWith {rpcCall("authResult",2)};
 		_matches = _txt regexFind ["[a-zA-Z]/i"];
 		if (count _matches == 0) exitWith {rpcCall("authResult",3)};
 		(_matches select 0 select 0)params ["_tok","_idx"];

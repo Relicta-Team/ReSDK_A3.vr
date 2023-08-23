@@ -184,7 +184,7 @@ function(menu_internal_parseLayoutElement)
 				[_item,_val] call menu_setPicture;
 			};
 			if (_name == "short") exitWith {
-				[_item,parseNumber _val] call menu_setShortcut;
+				[_item,call compile _val] call menu_setShortcut;
 			};
 			/*if (_name == "shtxt") exitWith {
 				[_item,_val] call menu_setShortcutText;
@@ -298,6 +298,8 @@ init_function(menu_internal_initialize)
 			//? Можно и удалять но основные системные ветки пересоздаются сразу же. Можно делать в цикле но производительность...
 		};
 	};
+	//TODO custom objectlist tree view
+	// Исходное дерево не имеет данных и не дает заменять названия
 
 	//play button
 	

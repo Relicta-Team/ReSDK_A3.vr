@@ -45,8 +45,7 @@ ACT(SelectGroupUnit8) + ACT(SelectGroupUnit9) + ACT(SelectGroupUnit0) + ACT(sele
 //защита от стрейфа тупых школьников
 #define SIDEWAYS_MOVEMENT_BUTTONS (ACT(TurnLeft) + ACT(TurnRight))
 
-
+//common vm replace (for build and validate)
 #ifdef _SQFVM
-	//temporary fix for VM
 	#define ADDRULE_FORBIDDEN_BUTTONS(forkey) (forkey in GROUP_ACTIONS || forkey in GROUP_COMMA_MENU || forkey in SIMPLE_PLAYER_INTERACTION)
 #endif

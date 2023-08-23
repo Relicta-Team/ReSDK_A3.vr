@@ -120,7 +120,7 @@ gm_showVoteMessage = {
 	} foreach gm_allowedModes;
 	modvar(_txt) + "</t>"+sbr+"Для голосования используйте окно комманд: votemode число</t>";
 	callFuncParams(_client,localSay,_txt arg "system");*/
-	callFuncParams(_client,addSytemAction,"system" arg "system_votemode" arg "ГОЛОСОВАНИЕ!");
+	callFuncParams(_client,addSystemAction,"system" arg "system_votemode" arg "ГОЛОСОВАНИЕ!");
 };
 
 gm_getCanVoteCondition = {

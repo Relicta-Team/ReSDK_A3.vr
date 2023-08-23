@@ -804,10 +804,83 @@ gm_internal_assignToImpl = {
 	if (callSelf(getClassName)!="GhostRole" && callSelf(getClassName)!="AdminObserverRole") then {
 		setVar(_usr,lastMob,_mob);
 	};
-
-	callSelf(getSkills) params [["_st",10],["_iq",10],["_dx",10],["_ht",10]];
+	
+	// TODO: use serialization
+	private _skills = callSelf(getSkills);
+	private _skillsMap = ["ST","IQ","DX","HT"];
+	private _allocSkills = [10,10,10,10];
+	if equalTypes(_skills,"") then {
+		private _skList = null;
+		private _skName = null; private _skVal = null;
+		private _idxSkill = -1;
+		{
+			_skList = _x splitString "=:- ";
+			if !inRange(count _skList,2,3) exitWith {
+				#ifdef EDITOR
+				["Неверно определен навык ""%3"" для роли %1 -> ""%2""",callFunc(this,getClassName) arg _skills arg _x] call messageBox;
+				#endif
+				
+			};
+			_skName = _skList select 0;
+			_skVal = parseNumber (_skList select 1);
+			if (count _skList > 2) then {
+				_skVal = randInt(_skVal,parseNumber (_skList select 2));
+			};
+			_idxSkill = _skillsMap findif {_x == _skName};
+			if (_idxSkill == -1) exitwith {
+				#ifdef EDITOR
+				["Неверное название навыка для роли %1 -> %2",callFunc(this,getClassName) arg _skName] call messageBox;
+				#endif
+			};
+			_allocSkills set [_idxSkill,_skVal];
+		} foreach (_skills splitString ";,");
+	} else {
+		_allocSkills = _skills;
+	};
+	_allocSkills params [["_st",10],["_iq",10],["_dx",10],["_ht",10]];
 	[_mob,_st,_iq,_dx,_ht] call gurps_initSkills;
 	callFunc(_mob,calculateCommonSkillsBasicValues);
+
+	// TODO: use serialization
+	private _otherSkills = callSelf(getOtherSkills);
+	private _arrayOtherSkills = _otherSkills;
+
+	if equalTypes(_otherSkills,"") then {
+		private _skName = null; private _skVal = null;
+		private _idxSkill = -1; private _skList = null;
+		_arrayOtherSkills = []; _mapAllSkills = createHashMap;
+		{
+			_skList = _x splitString "=:- ";
+			if !inRange(count _skList,2,3) exitWith {
+				#ifdef EDITOR
+				["Неверно определен дополнительный навык ""%3"" для роли %1 -> ""%2""",callFunc(this,getClassName) arg _otherSkills arg _x] call messageBox;
+				#endif
+			};
+
+			_skName = _skList select 0;
+			_skVal = parseNumber (_skList select 1);
+			if (count _skList > 2) then {
+				_skVal = vec2(_skVal,parseNumber (_skList select 2));
+			};
+			_idxSkill = skills_internal_list_otherSkillsSystemNames findif {_x == _skName};
+			if (_idxSkill == -1) exitwith {
+				#ifdef EDITOR
+				["Неверное название дополнительного навыка для роли %1 -> %2",callFunc(this,getClassName) arg _skName] call messageBox;
+				#endif
+			};
+			if ((tolower _skName) in _mapAllSkills) then {
+				#ifdef EDITOR
+				["Дубликат дополнительного навыка для роли %1 -> %2",callFunc(this,getClassName) arg _skName] call messageBox;
+				#endif
+				continue;	
+			};
+			_mapAllSkills set [tolower _skName,0];
+
+			_arrayOtherSkills pushBack [_skName,_skVal];
+			
+		} foreach (_otherSkills splitString ";,");
+	};
+	
 	{
 		_x params ["_skName","_val"];
 		if equalTypes(_val,[]) then {_val = randInt(_val select 0,_val select 1)};
@@ -816,7 +889,7 @@ gm_internal_assignToImpl = {
 			continue;
 		};
 		callFuncParams(_mob,updateSkillLevel,_skName arg _val);
-	} foreach callSelf(getOtherSkills);
+	} foreach _arrayOtherSkills;
 
 	callSelfParams(initLocation,_mob);
 	callSelfParams(getEquipment,_mob);
@@ -1095,6 +1168,7 @@ gm_endRound = {
 	};
 
 	private _mob = null;
+	private __GFLAG_ENDGAME_POINTS_UPDATE__ = true; // используется в addPoints, removePoints
 	//Всем клиентам в игре инкрементируем отыгранные раунды
 	{
 		modVar(_x,playedRounds, + 1);
@@ -1110,10 +1184,20 @@ gm_endRound = {
 		
 	} foreach (call cm_getAllClientsInGame);
 
+	// reset flag
+	__GFLAG_ENDGAME_POINTS_UPDATE__ = null;
+
 	//Обрабатываем все задачи
 	{
 		callFunc(_x,checkCondition);
 	} foreach taskSystem_checkedOnEndRound;
+
+	//обрабатываем задачи как проваленные
+	{
+		if !getVar(_x,isDone) then {
+			callFuncParams(_x,taskDone,-1);
+		};
+	} foreach (taskSystem_allTasks - taskSystem_checkedOnEndRound);
 
 	setVar(gm_currentMode,finishResult,_endgameState);
 
@@ -1408,6 +1492,7 @@ gm_createMob = {
 	private _tx = table_hex;
 	_mob setvariable ["voiceptr",pick _tx + pick _tx + pick _tx + pick _tx + pick _tx + pick _tx,true]; //generator pointers for voice system
 	removeUniform _mob;
+	assert(uniform _mob == "");
 	//_mob action ["SwitchWeapon", _mob, _mob, 100];
 	//_mob switchmove "amovpercmstpsnonwnondnon";
 	if equals(_pos,0) exitWith {_mob};

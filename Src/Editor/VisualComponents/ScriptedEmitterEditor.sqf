@@ -71,6 +71,7 @@ init_function(vcom_emit_initialize)
 	vcom_emit_internal_copyedData = null;
 
 	vcom_emit_envObject_ground = objNull;
+		vcom_emit_envObject_groundAreaList = [];
 	vcom_emit_envObjects_list_box = [];
 }
 
@@ -124,7 +125,11 @@ function(vcom_emit_openMainContextMenuSettings)
 		_stackMenu pushBack [
 			"<t size='1'>"+ifcheck(isObjectHidden vcom_emit_envObject_ground,"Включить","Выключить") + " показ пола</t>",
 			{
-				vcom_emit_envObject_ground hideObject !(isObjectHidden vcom_emit_envObject_ground);
+				_newval = !(isObjectHidden vcom_emit_envObject_ground);
+				vcom_emit_envObject_ground hideObject _newval;
+				{
+					_x hideObject _newval;
+				} foreach vcom_emit_envObject_groundAreaList;
 			},null,"Показывает или скрывает поверхность под центральной позицией эмиттеров"
 		];
 	};
@@ -148,14 +153,16 @@ function(vcom_emit_openMainContextMenuSettings)
 
 function(vcom_emit_createEmitterObject)
 {
-	params ["_emitterType"];
-	private _emit = _emitterType createVehicleLocal [0,0,0];
+	params ["_emitterTypeCfg","_emitType"];
+	private _emit = _emitterTypeCfg createVehicleLocal [0,0,0];
 	private _storage = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
 	_storage setvariable ["emitter",_emit];
+	_storage setvariable ["type",_emitType];
 	_storage setvariable ["attributes",[]];
 	_storage
 }
 function(vcom_emit_getEmitterVisual) {_this getvariable "emitter"}
+function(vcom_emit_getEmitterType) {_this getvariable "type"}
 function(vcom_emit_deleteEmitterObject) {deleteVehicle(_this call vcom_emit_getEmitterVisual);deleteVehicle _this}
 
 function(vcom_emit_createVisualWindow)
@@ -473,9 +480,12 @@ function(vcom_emit_relpos_updatePositionAtAxis)
 		_curPos = _curPos vectoradd [0,0,9999];
 	};
 
-	(_cur call vcom_emit_getEmitterVisual) attachto [vcom_logicObject,_curPos];
+	//prev attached to vcom_logicObject
+	//visual object cant accept attached particles
+	_sourceObject = ifcheck((_cur call vcom_emit_getEmitterType)=="particle",vcom_logicObject,vcom_visualObject);
+	(_cur call vcom_emit_getEmitterVisual) attachto [_sourceObject,_curPos];
 	[_cur call vcom_emit_getEmitterVisual,_curOrient] call BIS_fnc_setObjectRotation;
-	(_cur call vcom_emit_getEmitterVisual) attachto [vcom_logicObject,_curPos];
+	//(_cur call vcom_emit_getEmitterVisual) attachto [vcom_visualObject,_curPos];
 
 	//sync from real to visual
 	call vcom_emit_relpos_syncValuesFromObjectToWidgets;
@@ -534,7 +544,7 @@ function(vcom_emit_createEmitter)
 
 	(vcom_emit_emitterTypeAssoc get _emitType) params ["_engineCfgType","_typeShort","_emitterNameStr"];
 	//! Rule: All objects variable name without "_" symbol
-	private _o = [_engineCfgType] call vcom_emit_createEmitterObject;
+	private _o = [_engineCfgType,_emitType] call vcom_emit_createEmitterObject;
 	
 	if isNullReference(_o) exitwith {
 		setLastError(__FUNC__ + " - Cannot create emitter by config: " + _engineCfgType);
@@ -937,9 +947,21 @@ function(vcom_emit_loadEnvObjects)
 		,[0,0,9.5+5]
 	];
 
+	for "_x" from -100 to 100 step 10 do {
+		for "_y" from -100 to 100 step 10 do {
+			if (_x == 0 && _y == 0) then {continue};
+			private _attpos = [_x,_y,-5.5];
+			private _obj = createvehicle [_modelPath,position _logic,[],0,"none"];
+			_obj attachto [_logic,_attpos];
+
+			vcom_emit_envObject_groundAreaList pushBack _obj;
+		};
+	};
+
 	if (_isInit) then {
 		vcom_emit_envObject_ground hideObject true;
 		{_x hideObject true} foreach vcom_emit_envObjects_list_box;
+		{_x hideObject true} foreach vcom_emit_envObject_groundAreaList;
 
 		["onDisplayClose",{
 			deleteVehicle vcom_emit_envObject_ground;
@@ -947,6 +969,11 @@ function(vcom_emit_loadEnvObjects)
 				deleteVehicle _x;
 			} foreach vcom_emit_envObjects_list_box;
 			vcom_emit_envObjects_list_box = [];
+
+			{
+				deleteVehicle _x;
+			} foreach vcom_emit_envObject_groundAreaList;
+			vcom_emit_envObject_groundAreaList = [];
 		}] call Core_addEventHandler;
 	};
 

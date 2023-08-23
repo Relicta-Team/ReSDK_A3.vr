@@ -202,6 +202,49 @@ createStructure = {
 	this
 };
 
+// Создание декорации в мире
+createDecoration = {
+	params ['_name_str',"_pos",["_dir",random 360],["_emulDrop",true],["_vec",[0,0,1]]];
+
+	private _type = missionnamespace getVariable ["pt_" + _name_str,"NAN"];
+	if (_type isEqualTo "NAN") exitWith {
+		errorformat("Cant instantiate object with class %1 (not found)",_name_str);
+	};
+	//std validate type
+	if (!(call (_type getVariable "isDecor"))) exitWith {
+		errorformat("Cant instantiate object %1 as decoration",_name_str);
+		nullPtr
+	};
+	private this = call (_type getvariable '__instance');
+
+	//private _vec = [0,0,1];
+
+	if (_emulDrop) then {
+
+		private _posI = [0,0,0];
+		private _posI = (ATLToASL _pos) vectorAdd [0,0,0.1];
+
+		private _dirPos = random 360;
+
+		private _itsc = lineIntersectsSurfaces [_posI,_posI vectorDiff [0,0,1000],objNull,objNull,true,1,"VIEW","FIRE"];
+
+		if ((count _itsc) == 0) then {
+			_pos = ASLToATL _posI;
+		} else {
+			(_itsc select 0) params ["_posIn","_vecup","_targ"];
+			_pos = ASLToATL _posIn;
+			_vec = _vecUp
+		};
+	};
+
+	private _visObj = callSelfParams(InitModel,_pos arg _dir arg _vec);
+
+	[[_pos,CHUNK_TYPE_DECOR] call noe_posToChunk,CHUNK_TYPE_DECOR,_visObj] call noe_registerObject;
+
+	this
+};
+
+
 // Удаление декора
 deleteDecor = {
 	params ["_dec"];
@@ -317,7 +360,7 @@ getAllItemsTypeOf = {
 };
 
 //Получает все итемы в инвентаре сущности
-getAllItemInInventory = {
+getAllItemsInInventory = {
 	params ["_mob","_type",["_retChild",true]];
 	private _objRet = [];
 	private _algGet = ifcheck(_retChild,{isTypeStringOf(_this,_type)},{callFunc(_this,getClassName) == _type});

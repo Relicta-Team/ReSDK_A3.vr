@@ -664,6 +664,9 @@ region(Points system)
 	{
 		params ['this',"_p",["_onlyOnGame",false]];
 
+		//forceoff onlygame onEndGame, onEndGameBasic
+		if !isNullVar(__GFLAG_ENDGAME_POINTS_UPDATE__) then {_onlyOnGame = false};
+
 		if (_onlyOnGame && {[">=","GAME_STATE_END"] call gm_checkState}) exitwith {};
 
 		_p = round _p;
@@ -681,6 +684,9 @@ region(Points system)
 	func(removePoints)
 	{
 		params ['this',"_p",["_onlyOnGame",false]];
+
+		//forceoff onlygame onEndGame, onEndGameBasic
+		if !isNullVar(__GFLAG_ENDGAME_POINTS_UPDATE__) then {_onlyOnGame = false};
 
 		if (_onlyOnGame && {[">=","GAME_STATE_END"] call gm_checkState}) exitwith {};
 
@@ -720,7 +726,7 @@ region(system actions)
 			errorformat("Cant call system message %1 - not found",_action);
 			}]);
 	};
-	func(addSytemAction)
+	func(addSystemAction)
 	{
 		objParams_3(_cat,_name,_runame);
 		
@@ -738,18 +744,19 @@ region(system actions)
 		objParams();
 		private _status = getSelf(access);
 		if (_status >= (["ACCESS_ADMIN"] call cm_accessTypeToNum)) then {
-			callSelfParams(addSytemAction,"admin" arg "admin_lobbytimer" arg "Переключить таймер");
-			callSelfParams(addSytemAction,"admin" arg "admin_setmode" arg "Установить режим");
-			callSelfParams(addSytemAction,"admin" arg "admin_forceaspect" arg "Форс аспекта");
-			callSelfParams(addSytemAction,"admin" arg "admin_startObserver" arg "Зайти в наблюдателя");
-			callSelfParams(addSytemAction,"admin" arg "admin_returnToLastBody" arg "Вернуться в своего персонажа");
-			callSelfParams(addSytemAction,"admin" arg "admin_setlastgame" arg "Переключить режим последнего раунда");
-			callSelfParams(addSytemAction,"admin" arg "admin_setendgame" arg "Закончить режим с кастомным текстом");
+			callSelfParams(addSystemAction,"admin" arg "admin_lobbytimer" arg "Переключить таймер");
+			callSelfParams(addSystemAction,"admin" arg "admin_setmode" arg "Установить режим");
+			callSelfParams(addSystemAction,"admin" arg "admin_forceaspect" arg "Форс аспекта");
+			callSelfParams(addSystemAction,"admin" arg "admin_startObserver" arg "Зайти в наблюдателя");
+			callSelfParams(addSystemAction,"admin" arg "admin_returnToLastBody" arg "Вернуться в своего персонажа");
+			callSelfParams(addSystemAction,"admin" arg "admin_discrolesprotect" arg "Переключить доступ к ролям по дискорду");
+			callSelfParams(addSystemAction,"admin" arg "admin_setlastgame" arg "Переключить режим последнего раунда");
+			callSelfParams(addSystemAction,"admin" arg "admin_setendgame" arg "Закончить режим с кастомным текстом");
 
-			callSelfParams(addSytemAction,"server" arg "server_srvrest" arg "ПЕРЕЗАПУСТИТЬ СЕРВЕР");
-			callSelfParams(addSytemAction,"server" arg "server_srvstop" arg "ВЫКЛЮЧИТЬ СЕРВЕР");
-			callSelfParams(addSytemAction,"server" arg "server_srvislock" arg "Залочен ли сервер?");
-			callSelfParams(addSytemAction,"server" arg "server_srvlockswitch" arg "Переключить лок сервера");
+			callSelfParams(addSystemAction,"server" arg "server_srvrest" arg "ПЕРЕЗАПУСТИТЬ СЕРВЕР");
+			callSelfParams(addSystemAction,"server" arg "server_srvstop" arg "ВЫКЛЮЧИТЬ СЕРВЕР");
+			callSelfParams(addSystemAction,"server" arg "server_srvislock" arg "Залочен ли сервер?");
+			callSelfParams(addSystemAction,"server" arg "server_srvlockswitch" arg "Переключить лок сервера");
 		};
 	};
 	

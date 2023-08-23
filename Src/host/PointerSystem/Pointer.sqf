@@ -23,7 +23,6 @@ pointer_getLastPointer = {
 pointer_create = {
 	private _ref = _this;
 
-
 #ifdef POINTER_SYSTEM_EXPERIMENTAL
 	// private _nptr = generatePtr;
 	// _nptr = _nptr + str pointerUniInx;
@@ -40,6 +39,11 @@ pointer_create = {
 #else
 	pointerList setVariable [_nptr,_ref];
 #endif
+
+	// adding pointer id to object name in string representation
+	#ifdef EDITOR
+	_ref SETNAME (format["%1#%2",NAME _ref,_nptr]);
+	#endif
 
 	_nptr
 };

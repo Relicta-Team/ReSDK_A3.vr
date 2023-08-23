@@ -176,6 +176,12 @@ class(CampfireBig) extends(Campfire)
 	getter_func(canConnect,false);
 endclass
 
+editor_attribute("EditorGenerated")
+class(BarrelCampfireBig) extends(CampfireBig)
+	var(model,"a3\props_f_enoch\military\garbage\garbagebarrel_02_buried_f.p3d");
+	var(name,"Костёр в бочке");
+endclass
+
 class(CampfireDisabled) extends(Campfire)
 	var(lightIsEnabled,false);
 endclass

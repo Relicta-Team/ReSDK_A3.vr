@@ -93,15 +93,15 @@
 //закрытие потока программы
 #define ___appexitstr(value) #value
 #define appExit(exitCode) logformat("Application exited. Reason: %1 (%2)",exitCode arg __appexit_listreasons select exitCode); if (!isMultiplayer) then {client_isLocked = true; server_isLocked = true; endMission "END1";} else {if (isServer) then {server_isLocked = true} else {client_isLocked = true}}
-	#define __appexit_listreasons ["APPEXIT_REASON_EXIT" \
-	,"APPEXIT_REASON_CRITICAL" \
-	,"APPEXIT_REASON_DOUBLEDEF" \
-	,"APPEXIT_REASON_UNDEFINEDMODULE" \
-	,"APPEXIT_REASON_COMPILATIOEXCEPTION" \
-	,"APPEXIT_REASON_RUNTIMEERROR" \
-	,"APPEXIT_REASON_ASSERTION_FAIL" \
-	,"APPEXIT_REASON_EXTENSION_ERROR" \
-	]
+	#define __appexit_listreasons (["EXIT" \
+	,"CRITICAL" \
+	,"DOUBLEDEF" \
+	,"UNDEFINEDMODULE" \
+	,"COMPILATIOEXCEPTION" \
+	,"RUNTIMEERROR" \
+	,"ASSERTION_FAIL" \
+	,"EXTENSION_ERROR" \
+	])apply{"APPEXIT_REASON_"+_x}
 
 	#define APPEXIT_REASON_EXIT 0
 	#define APPEXIT_REASON_CRITICAL 1
@@ -115,6 +115,7 @@
 
 // fread subsystem
 
+//this is really need?
 #ifdef _SQFVM
 	#define DISABLE_REGEX_ON_FILE
 #endif
@@ -144,7 +145,7 @@
 	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 #endif
 
-#ifdef _SQFVM
+#ifdef __VM_VALIDATE
 	#define __vm_log(text) "debug_console" callExtension ((text)+"#1110")
 
 	#define loadFile(path) \
@@ -176,6 +177,9 @@
 
 #ifdef __GH_ACTION
 	#define __vm_log(text) diag_log (text)
+#endif
+#ifdef __VM_BUILD
+	#define __vm_log(text) "debug_console" callExtension ((text)+"#1110")
 #endif
 
 //check if file exists
@@ -250,8 +254,8 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define formatTime(secs) (secs call{format["%1 мин. %2 сек.",floor(_this / 60),_this % 60]})
 
 //форматирование времени: каст секунды в минуты
-#define t_atMin(s) ((s)*60)
-#define t_atHrs(s) (t_atMin(s)*60)
+#define t_asMin(s) ((s)*60)
+#define t_asHrs(s) ((s)*3600)
 
 #define INFINITY 1e39
 
@@ -271,7 +275,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 //рандомный сорт массива
 #define array_shuffle(array) (array call BIS_fnc_arrayShuffle)
 //копирование массива
-#define array_copy(array) (+array)
+#define array_copy(array) (+(array))
 //poplast
 #define array_remlast(arr) (arr call {_this deleteAt (count _this - 1)})
 //select last item
@@ -594,13 +598,58 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 #endif
 
 //assertion
-#define __COMMA__ ","
+
+//При билдинге/валидации может быть задействовано сервером. 
+//В режиме игры на клиенте и сервере срабатывает только при компиляции модулей скриптов
+
+#define __ASSERT_WEBHOOK_PREFIX__ "<@&1137382730074697728> "
+
+#define __assert_value_tostring__(val) 'val'
+
+#define __assert_runtime_file__ __FILE__
+
+#define __EVAL_PATH_VM__(filepath) (filepath) call { \
+private _arr = (tolower _this) splitString "\/"; private _ret = ""; if ("src" in _arr) then {_ret = (_arr select [(_arr find "src"),count _arr]) joinString "\" \
+} else {_ret = _this};\
+_ret} \
+
+#ifdef __VM_BUILD
+	#define __assert_runtime_file__ __EVAL(call compile '_ref = toArray __FILE__;{if (_x <= 0)then{_ref set [_foreachindex,32]}} foreach _ref; __EVAL_PATH_VM__(TOString _ref)')
+	#define __assert_value_tostring__(val) 'val'
+#endif
+#ifdef __VM_VALIDATE
+	#define __assert_runtime_file__ __EVAL(call compile '_ref = toArray __FILE__;{if (_x <= 0)then{_ref set [_foreachindex,32]}} foreach _ref; __EVAL_PATH_VM__(TOString _ref)')
+	#define __assert_value_tostring__(val) 'val'
+#endif
+
+#define __assert_static_runtime_expr1(expr) if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__] call sys_static_assert_}
+#define __assert_static_runtime_expr2(expr,message) if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__,message] call sys_static_assert_}
+#define __assert_static_compile_expr1(expr) __EVAL(__assert_static_runtime_expr1(expr))
+#define __assert_static_compile_expr2(expr,message) __EVAL(__assert_static_runtime_expr2(expr,message))
+#define __assert_runtime_expr1(expr) if !([expr] call sys_int_evalassert)exitWith {['(expr)',__assert_runtime_file__,__LINE__] call sys_assert_}
+
+//called at compile/build; Only simple expressions without macros
+#define static_assert(expr) __assert_static_runtime_expr1(expr)
+//see static_assert; Only simple expressions without macros
+#define static_assert_str(expr,message) __assert_static_runtime_expr2(expr,message)
+
+//called at runtime; Only simple expressions without macros
+#define assert(expr) __assert_runtime_expr1(expr)
+
+#ifdef __VM_BUILD
+	//called at compile/build; Only simple expressions without macros
+	#define static_assert(expr) __assert_static_compile_expr1(expr)
+	//see static_assert; Only simple expressions without macros
+	#define static_assert_str(expr,message) __assert_static_compile_expr2(expr,message)
+#endif
+#ifdef __VM_VALIDATE
+	//called at compile/build; Only simple expressions without macros
+	#define static_assert(expr) __assert_static_compile_expr1(expr)
+	//see static_assert; Only simple expressions without macros
+	#define static_assert_str(expr,message) __assert_static_compile_expr2(expr,message)
+#endif
+
 #define __THIS_FILE_REPLACE__ SHORT_PATH
-#define __assert_string_convert(data) (tostring{data})
-//todo assert return bool on clinet, server and editor
-#define assert(_cond) ASSERT (_cond);if!(_cond)exitWith{__assert_error__(__assert_string_convert(_cond),__THIS_FILE_REPLACE__,__LINE__,"file")};
-#define assert_client(_cond) ASSERT (_cond);if!(_cond)exitWith{__assert_error__('<Runtime client>',__THIS_MODULE_REPLACE__,__LINE__,"module")};
-#define __assert_error__(code,modl,line__,comp__) errorformat("Assertion failed: %2%1 %5 %3%1 line %4",__COMMA__ arg code arg modl arg line__ arg comp__); __aps_on_assert_exit
 
 //Преобразование внутри файла не будет выполнено. Нужно заменить всё на всё
 #ifdef DISABLE_REGEX_ON_FILE
@@ -608,22 +657,19 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 #endif
 
 #ifdef DISABLE_ASSERT
-	#define assert(_cond)
-	#define assert_client(_cond)
-	#define __assert_error__(code,modl,line__,comp__)
-	#define __COMMA__
+	#define assert(a)
+	#define static_assert(a)
+	#define static_assert_str(a,b)
 	#define __THIS_FILE_REPLACE__
-	#define __assert_string_convert(data)
 #endif
 
 //Вне дебага все ассерты выключаются
 #ifndef DEBUG
-	#define assert(_cond)
-	#define assert_client(_cond)
-	#define __assert_error__(code,modl,line__,comp__)
-	#define __COMMA__
+	#define assert(a)
+	#define static_assert(a)
+	#define static_assert_str(a,b)
+	
 	#define __THIS_FILE_REPLACE__
-	#define __assert_string_convert(data)
 #endif
 
 //debuging
@@ -658,3 +704,12 @@ ACRE_IS_ERRORED = false; _ret;}*/
 #define VM_COMPILER_ADDFUNC_BINARY(name,cmd) name = compile '(_this select 0) cmd (_this select 1)'
 #define VM_COMPILER_ADDFUNC_UNARY(name,cmd) name = compile 'cmd _this'
 #define VM_COMPILER_ADDFUNC_NULAR(name,cmd) name = compile 'cmd'
+
+
+#ifdef EDITOR
+	#define editor_only(any) any
+	#define editor_conditional(ed__,noted__) ed__
+#else
+	#define editor_only(any) 
+	#define editor_conditional(ed__,noted__) noted__
+#endif

@@ -14,7 +14,7 @@
 #define shell_init(__name__system,__value__system) format["_thisobj setvariable ['%1',%2]; ",__name__system,__value__system]
 #define logoop(mes) "debug_console" callExtension ("[OOP]:    " + (mes) + "#0111"); ["(OOP_init)	%1",mes] call logInfo
 
-#ifdef _SQFVM
+#ifdef __VM_VALIDATE
 	#define logoop(mes) diag_log format["[OOP_init]: %1",mes]
 #endif
 
@@ -142,12 +142,12 @@ _attr_ex_init_list = [];
 	//calling ctors
 	_shell_data = _shell_data + '{this call (_x getvariable "constructor")} foreach (this getvariable "proto" getvariable "__ctors"); this';
 
-	#ifndef _SQFVM
+	#ifndef __VM_VALIDATE
 	_pObj setvariable ['__instance',compile _shell_data];
 	#endif
 	_pObj setvariable ["__inhlist",_inheritance_list];
 
-	#ifndef _SQFVM
+	#ifndef __VM_VALIDATE
 	//make hashset for isTypeOf faster algorithm
 	_pObj setVariable ["__inhlist_map",hashSet_create(_inheritance_list)];
 	#endif
@@ -172,7 +172,7 @@ _attr_ex_init_list = [];
 	_pObj setVariable ["__allfields",_exist_fields];
 	_pObj setVariable ["__allmethods",_exists_methods];
 
-	#ifndef _SQFVM
+	#ifndef __VM_VALIDATE
 	//hashing faster than arrays
 	_pObj setVariable ["__allfields_map",createHashMapFromArray _fieldsBaseValues];
 	#endif

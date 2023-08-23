@@ -31,6 +31,9 @@
 #define CALLBACK_DEBUG
 #define CALLBACK_COUNTER_INFO
 
+#ifdef DISABLE_CALLBACK_DEBUG
+	#undef CALLBACK_DEBUG
+#endif
 
 //generic bridge macros
 #define engine_extName "ReEngine"

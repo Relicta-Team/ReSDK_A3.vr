@@ -12,3 +12,7 @@
 #include "Common.sqf"
 #include "PerformanceObjectsTest.sqf"
 #include "Rendering.sqf"
+#include "MeterTool.sqf"
+#include "GeometryCursor.sqf"
+#include "ClassValidator.sqf"
+#include "LightConfigValidator.sqf"

@@ -21,7 +21,7 @@
 	#define __testSyntaxClass
 #endif
 
-#ifdef _SQFVM
+#ifdef __VM_VALIDATE
 	//#define __postclassVM __vm_log("Found class: " + _class);
 	#define __postclassVM
 
@@ -36,6 +36,7 @@
 	#define vm_throw(ctx) vm_lastError = ctx; throw vm_lastError;
 
 	#define setName ;
+	
 #else
 	#define __postclassVM
 	#define vm_throw(ctx)

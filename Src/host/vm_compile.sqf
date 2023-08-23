@@ -24,8 +24,27 @@ vm_lastError = "unk_err";
 #define __vm_log(text) diag_log (text)
 #endif
 
+__G_FLAG_VALIDATE = false;
+__G_FLAG_BUILD = false;
+
+#ifdef __VM_VALIDATE
+	__vm_log(" VM started in validate mode");
+	__G_FLAG_VALIDATE = true;
+#endif
+#ifdef __VM_BUILD
+	__G_FLAG_BUILD = true;
+	__vm_log(" VM started in build mode");
+#endif
+
 p_table_inheritance = [];
 p_table_allclassnames = [];
+
+#ifdef __VM_VALIDATE
+	__vm_log(" VM started in validate mode");
+#endif
+#ifdef __VM_BUILD
+	__vm_log(" VM started in build mode");
+#endif
 
 checkClassInheritance = {
 	
@@ -102,6 +121,12 @@ checkClassInheritance = {
 __vm_log("Start VM compile");
 
 {
+	call compile preprocessFile "src\host\CommonComponents\Assert.sqf";
+
+	if (!__G_FLAG_BUILD && !__G_FLAG_VALIDATE) then {
+		throwsafe("!VMUnknownVMMode");
+	};
+
 	private _pcontent = LOADFILE "src\private.h";
 	if (count _pcontent > 0) then {
 		call compile preprocessFile "src\private.h";
@@ -119,7 +144,7 @@ __vm_log("Start VM compile");
 
 	#ifdef EDITOR
 		__vm_log("		Editor macro not disabled");
-		throw "!EditorMacroError";
+		throwsafe("!EditorMacroError");
 	#endif
 
 	#ifdef RELEASE
@@ -171,6 +196,12 @@ __vm_log("Start VM compile");
 }
 except__
 {
+	//override vmlog again
+	#define __vm_log(text) "debug_console" callExtension ((text)+"#1110")
+	#ifdef __GH_ACTION
+	#define __vm_log(text) diag_log (text)
+	#endif
+
 	_exName = str _exception;
 	if (_exName select[2,1] == "!") then {
 		//_exName = ((_exName splitString "!")select 1) ;

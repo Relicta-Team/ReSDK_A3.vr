@@ -38,4 +38,4 @@ load("Okopovo\GM_Okopovo.sqf");
 	load("Okopovo\Mob.sqf");
 	load("Okopovo\OkopovoRoles.sqf");
 
-
+#include "scripted_loader.hpp"

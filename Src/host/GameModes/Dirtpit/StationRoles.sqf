@@ -991,7 +991,7 @@ class(RBum) extends(BasicRole)
 	{
 		objParams_1(_cliObj);
 		gm_roundDuration >=
-		ifcheck(!callFuncParams(_cliObj,hasDiscordRole,"Forsaken"),1,t_atMin(5))
+		ifcheck(!callFuncParams(_cliObj,hasDiscordRole,"Forsaken"),1,t_asMin(5))
 	};
 
 	func(getEquipment)
@@ -1110,7 +1110,7 @@ class(RNomadDirtpit) extends(BasicRole)
 		true
 		#else
 		gm_roundDuration >= 
-		ifcheck(!callFuncParams(_cliObj,hasDiscordRole,"Forsaken"),t_atMin(1),t_atMin(10))
+		ifcheck(!callFuncParams(_cliObj,hasDiscordRole,"Forsaken"),t_asMin(1),t_asMin(10))
 		#endif
 	};
 	var(count,999);

@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
+// ITemGetTask updated. Refactoring this file required
 
 //structure: class, handler, 
 taskSystem_internal_list_generator = [

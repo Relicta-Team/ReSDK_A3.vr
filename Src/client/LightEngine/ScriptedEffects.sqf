@@ -88,7 +88,7 @@ le_se_mapHandlers = createHashMapFromArray [
 	["linkToLight",{
 		(_this select 0) attachTo [sourceObject getvariable "__light",(_this select 1) vectorDiff _offset];
 	}],
-	["setOrient",{[_this select 0,(_this select 1) vectorMultiply -1] call BIS_fnc_setObjectRotation}],
+	["setOrient",{[_this select 0,_this select 1] call BIS_fnc_setObjectRotation}],
 	
 	//for light
 	["setLightColor",{(_this select 0) setLightColor (_this select 1)}],
