@@ -50,18 +50,32 @@ class FileManager : IScript
 		{
 			case "Open":
 				if (ScriptContext.GetArgsCount() == 1)
+				{
 					Process.Start(ScriptContext.GetArg(0));
+				}
 				else
-					Process.Start(ScriptContext.GetArg(0),ScriptContext.GetArg(1));
+				{
+					string readedTextOpen = ScriptContext.GetArg(1);
+					string cdelim = ScriptContext.GetArg(2);
+					readedTextOpen = readedTextOpen.Replace("\"", cdelim);
+					Process.Start(ScriptContext.GetArg(0), readedTextOpen);
+				}
 				
 				output.Append(File.Exists(ScriptContext.GetArg(0)));
 				break;
 			case "OpenReturn":
 				Process procH = null;
 				if (ScriptContext.GetArgsCount() == 1)
+				{
 					procH = Process.Start(ScriptContext.GetArg(0));
+				}
 				else
-					procH = Process.Start(ScriptContext.GetArg(0), ScriptContext.GetArg(1));
+				{
+					string readedTextOpenRet = ScriptContext.GetArg(1);
+					string cdelim = ScriptContext.GetArg(2);
+					readedTextOpenRet = readedTextOpenRet.Replace("\"", cdelim);
+					procH = Process.Start(ScriptContext.GetArg(0), readedTextOpenRet);
+				}
 				procH.WaitForExit();
 				output.Append(procH.ExitCode.ToString());
 				break;
