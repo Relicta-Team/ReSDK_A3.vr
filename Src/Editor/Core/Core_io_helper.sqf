@@ -24,8 +24,9 @@ function(file_open)
 			_path
 		],true] call rescript_callCommand;
 	} else {
+		_args = _args regexReplace["""/g",file_const_defaultDelimeter];
 		["FileManager","Open",[
-			_path,_args
+			_path,_args,file_const_defaultDelimeter
 		],true] call rescript_callCommand;
 	};
 
@@ -43,7 +44,8 @@ function(file_openReturn)
 	if (_args == "") then {
 		parseNumber(["FileManager","OpenReturn",[_path],true] call rescript_callCommand);
 	} else {
-		parseNumber(["FileManager","OpenReturn",[_path,_args],true] call rescript_callCommand);
+		_args = _args regexReplace["""/g",file_const_defaultDelimeter];
+		parseNumber(["FileManager","OpenReturn",[_path,_args,file_const_defaultDelimeter],true] call rescript_callCommand);
 	};
 }
 
