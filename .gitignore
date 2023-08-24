@@ -16,3 +16,4 @@ Src/Scripts/vs_studio_project/vs_studio_project/obj
 Third-party/BuildTools/output.txt
 Third-party/Docgen/__pycache__/*
 Third-party/Docgen/out**
+Third-party/ImageConverter/icon_output/*

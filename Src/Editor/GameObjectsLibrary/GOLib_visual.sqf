@@ -611,6 +611,12 @@ function(golib_vis_switchLockCameraOnSelected)
 	};
 }
 
+function(golib_vis_jumpToObjects)
+{
+	_this call golib_setSelectedObjects;
+	call golib_vis_jumpToSelected;
+}
+
 function(golib_vis_jumpToSelected)
 {
 	//_pos = [];

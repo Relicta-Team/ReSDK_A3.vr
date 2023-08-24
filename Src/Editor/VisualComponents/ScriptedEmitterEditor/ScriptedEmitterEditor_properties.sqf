@@ -166,7 +166,7 @@ function(vcom_emit_internal_makeLightWidgetProperties)
 	modvar(_yPos) + 5;
 	["_zoneColor",[_xPos,_yPos,30,30-5],_ctg,
 		["color",["R","G","B"],[0,1],0.01,_defBackground,1.7],
-		_eventControlVec3
+		_eventControlVec3,true
 	] call vcom_emit_internal_createZoneVec3;
 	modvar(_yPos) + 25;
 
@@ -177,7 +177,7 @@ function(vcom_emit_internal_makeLightWidgetProperties)
 	modvar(_yPos) + 5;
 	["_zoneAmbient",[_xPos,_yPos,30,30-5],_ctg,
 		["ambient",["R","G","B"],[0,1],0.01,_defBackground,1.7],
-		_eventControlVec3
+		_eventControlVec3,true
 	] call vcom_emit_internal_createZoneVec3;
 	modvar(_yPos) + 25;
 

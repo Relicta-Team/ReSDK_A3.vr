@@ -727,6 +727,51 @@ endregion
 		};
 	};
 
+	// Замена модели объекта
+	func(setModel)
+	{
+		objParams_1(_newmodel);
+
+		if isTypeOf(this,BasicMob) exitwith {false};
+		
+		assert(!callSelf(isSeat));
+
+		if callSelf(isInWorld) then {
+			//update modelpath
+			setSelf(model,_newmodel);
+
+			//setLastError("TODO: implement world model update");
+			/*
+				1. Получаем метаданные с текущего визуального объекта.
+				2. создаем объект
+			*/
+			private _cht = callSelf(getChunkType);
+			private _loc = getSelf(loc);
+
+			private _pos = getPosATLVisual _loc;
+			private _dir = vectorDirVisual _loc;
+			private _vec = vectorUpVisual _loc;
+
+
+			//setLastError("TODO: Check all variables on object" + str (allVariables _loc));
+			// private _varmap = [];
+			// {_varmap pushBack [_x,_loc getvariable _x]} foreach (allVariables _loc);
+
+
+			callSelf(unloadModel); //now object deleted from world
+			//assert(isNullReference(_loc));
+
+			private _visObj = callSelfParams(InitModel,_pos arg _dir arg _vec);
+			[[_pos,_cht] call noe_posToChunk,_cht,_visObj] call noe_registerObject;
+		} else {
+			private _loc = getSelf(loc);
+			if isNullReference(_loc) exitwith {false};
+			if !isTypeOf(_loc,BasicMob) exitwith {false};
+			setSelf(model,_newmodel);
+			callFuncParams(_loc,syncSmdSlot,getSelf(slot));
+		};
+	};
+
 region(smelling)
 	
 	//источать запах. тип определяется параметром. вонь - stink, вкусный - delicious, резкий - pungent,отвратительный sickening 

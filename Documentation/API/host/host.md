@@ -1698,7 +1698,7 @@ Description: копирование массива
 
 Replaced value:
 ```sqf
-(+array)
+(+(array))
 ```
 File: [host\engine.hpp at line 278](../../../Src/host/engine.hpp#L278)
 ## array_remlast(arr)
@@ -7795,6 +7795,32 @@ Replaced value:
 ((tolower #var) in getFunc(objref,__allfields_map))
 ```
 File: [host\oop.hpp at line 362](../../../Src/host/oop.hpp#L362)
+## isImplementFuncStr(objref,met)
+
+Type: constant
+
+Description: 
+- Param: objref
+- Param: met
+
+Replaced value:
+```sqf
+(!isnil{getFuncReflect(objref,met)})
+```
+File: [host\oop.hpp at line 363](../../../Src/host/oop.hpp#L363)
+## isImplementVarStr(objref,var)
+
+Type: constant
+
+Description: 
+- Param: objref
+- Param: var
+
+Replaced value:
+```sqf
+((tolower (var)) in getFunc(objref,__allfields_map))
+```
+File: [host\oop.hpp at line 364](../../../Src/host/oop.hpp#L364)
 ## getFieldBaseValue(strt,varx)
 
 Type: constant
@@ -7807,7 +7833,7 @@ Replaced value:
 ```sqf
 ([strt,varx,true] call oop_getFieldBaseValue)
 ```
-File: [host\oop.hpp at line 364](../../../Src/host/oop.hpp#L364)
+File: [host\oop.hpp at line 366](../../../Src/host/oop.hpp#L366)
 ## getFieldBaseValueWithMethod(strt,varx,prp)
 
 Type: constant
@@ -7821,7 +7847,7 @@ Replaced value:
 ```sqf
 ([strt,varx,true,prp] call oop_getFieldBaseValue)
 ```
-File: [host\oop.hpp at line 365](../../../Src/host/oop.hpp#L365)
+File: [host\oop.hpp at line 367](../../../Src/host/oop.hpp#L367)
 ## isNullObject(obj)
 
 Type: constant
@@ -7833,7 +7859,7 @@ Replaced value:
 ```sqf
 ((obj) isequalto nullPtr)
 ```
-File: [host\oop.hpp at line 369](../../../Src/host/oop.hpp#L369)
+File: [host\oop.hpp at line 371](../../../Src/host/oop.hpp#L371)
 ## name
 
 Type: Variable

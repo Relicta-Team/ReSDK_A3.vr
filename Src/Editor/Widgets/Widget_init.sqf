@@ -138,7 +138,11 @@ menu_structureLayout = [
 		["text:Генераторы;path:menu_path_generators",
 			//"text:Обновить шаблонные объекты;act:call golib_massoc_syncAndUpdateAllObjects", //IStruct to custom
 			"text:Генерировать карту моделей;act:call systools_GenerateModelData",
-			"text:Генерировать иконки предметов;act:call systools_imageProcessor;",
+			["text:Генерировать иконки предметов;",
+				"text:Полная генерация;act:[true] call systools_imageProcessor;",
+				"text:Только отсутствующие;act:[false] call systools_imageProcessor;",
+				"text:Генерация по указанным;act:[true,true] call systools_imageProcessor;"
+			],
 			"text:Запустить импорт старой карты;act:call mm_doImportOldMap"
 		],
 		["text:Валидаторы",
@@ -147,6 +151,7 @@ menu_structureLayout = [
 				"text:Разрешение конфликтов;act:call golib_massoc_resolveConflictsProcess"
 			],
 			"text:Проверка ''мертвых'' классов (несуществующих классов);act: call classValidator_process",
+			"text:Проверка несуществующих конфигов света на карте;act:call lightValidator_process",
 			"text:Проверка путей классов;act:call systools_checkClassPathes",
 			"text:Проверка нагрузки сцены игровыми объектами;act:['Не реализовано'] call showWarning;"
 		],

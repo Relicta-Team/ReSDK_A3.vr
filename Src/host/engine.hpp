@@ -275,7 +275,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 //рандомный сорт массива
 #define array_shuffle(array) (array call BIS_fnc_arrayShuffle)
 //копирование массива
-#define array_copy(array) (+array)
+#define array_copy(array) (+(array))
 //poplast
 #define array_remlast(arr) (arr call {_this deleteAt (count _this - 1)})
 //select last item
