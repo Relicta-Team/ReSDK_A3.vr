@@ -57,7 +57,7 @@ class FileManager : IScript
 				{
 					string readedTextOpen = ScriptContext.GetArg(1);
 					string cdelim = ScriptContext.GetArg(2);
-					readedTextOpen = readedTextOpen.Replace("\"", cdelim);
+					readedTextOpen = readedTextOpen.Replace(cdelim, "\"");
 					Process.Start(ScriptContext.GetArg(0), readedTextOpen);
 				}
 				
@@ -73,7 +73,7 @@ class FileManager : IScript
 				{
 					string readedTextOpenRet = ScriptContext.GetArg(1);
 					string cdelim = ScriptContext.GetArg(2);
-					readedTextOpenRet = readedTextOpenRet.Replace("\"", cdelim);
+					readedTextOpenRet = readedTextOpenRet.Replace(cdelim, "\"");
 					procH = Process.Start(ScriptContext.GetArg(0), readedTextOpenRet);
 				}
 				procH.WaitForExit();
