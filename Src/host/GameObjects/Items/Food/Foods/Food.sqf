@@ -276,7 +276,7 @@ endclass
 
 class(BreadChopped) extends(IFoodItem)
 	var(name,"Кусок хлеба");
-	var(model,"ml_exodusnew\becondry.p3d");
+	var(model,"relicta_models2\food\s_bread\s_bread.p3d");
 	var(weight,gramm(300));
 	var(size,ITEM_SIZE_SMALL);
 	var(reagents,[vec2("Nutriment",4)]newReagentsFood);
