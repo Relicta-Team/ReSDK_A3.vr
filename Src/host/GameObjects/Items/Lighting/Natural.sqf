@@ -253,6 +253,7 @@ class(Sigarette) extends(Torch)
 		setSelf(canRestoreLight,false);
 		//nextFrameParams({delete(_this)},this);
 		setSelf(name,"Окурок");
+		callSelf(setModel,"relicta_models2\misc\s_cigarette_end\s_cigarette_end.p3d");
 		if !callSelf(isInWorld) then {
 			private _loc = getSelf(loc);
 			if callFunc(_loc,isMob) then {
