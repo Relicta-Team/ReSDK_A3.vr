@@ -141,7 +141,7 @@ menu_structureLayout = [
 			["text:Генерировать иконки предметов;",
 				"text:Полная генерация;act:[true] call systools_imageProcessor;",
 				"text:Только отсутствующие;act:[false] call systools_imageProcessor;",
-				"text:Генерация по указанным;act [true,true] call systools_imageProcessor;"
+				"text:Генерация по указанным;act:[true,true] call systools_imageProcessor;"
 			],
 			"text:Запустить импорт старой карты;act:call mm_doImportOldMap"
 		],
