@@ -17,6 +17,7 @@ function(systools_imageProcessor)
 		if ([_ref,"Установка путей генерации картинок",
 			"Укажите части путей модели (каждую с новой строки), которые необходимо добавить на проверку. Регистр не учитывается."
 		] call widget_winapi_openTextBox) then {
+			_ref = refget(_ref);
 			systools_imageProcessor_searchPatterns = (_ref splitString endl) apply {tolower _x};
 		} else {
 			_aborted = true;
@@ -193,9 +194,10 @@ function(systools_internal_imageProcessor)
 			["Collected models %1 (broken %2, bigger %3)",count _modelList,_brokens,_bigger] call printLog;
 			uiSleep 2;
 		};*/
+		_bigger = 0;
 		if (!isNIL{core_modelBBX}) then {
 			_modelList = [];
-			_bigger = 0;
+			
 			{
 				_size = _y select 2;
 				if (_size > 0.9 || _size == 0) then {
@@ -384,9 +386,9 @@ function(systools_internal_imageProcessor)
 			};
 			if (!screenshot _fileName) then {
 				bcondabort = true;
-				["Error on save %1 (%2/%3) [bbx:%4]. Operation aborted...",_fileName, _forEachIndex,count _modelList,_size] call printError;
+				["Error on save %1 (%2/%3) [bbx:%4]. Operation aborted...",_fileName, _forEachIndex,(count _modelList)-1,_size] call printError;
 			} else {
-				["saved icon: %1 (%2/%3) [bbx:%4]",_fileName, _forEachIndex,count _modelList,_size] call printLog;
+				["saved icon: %1 (%2/%3) [bbx:%4]",_fileName, _forEachIndex,(count _modelList) - 1,_size] call printLog;
 			};
 			sleep 0.01;
 	
@@ -432,12 +434,88 @@ function(systools_internal_imageProcessor)
 
 function(systools_imageProcessor_convertAndSave)
 {
+	[displayNull] call loadingScreen_start;
 	// systools_imageProcessor_lastUsedFolder (SYSTEMTIME mark)
 
 	//C:\Users\Username\Documents\Arma 3\missions\MissionName.Altis
 
 	//<PROFILEDIR>\Screenshots\ <--- screenshots path
-	//_generatedPath = (getMissionPath "") + "..\";
+	private _screenshotsPath = (getMissionPath "") + "..\..\Screenshots\";
+	private _generatedPath = _screenshotsPath + systools_imageProcessor_lastUsedFolder;
+	private _outputFolder = _screenshotsPath + "output";
+	
+	private _imgRemoverGreenScreenExe = getMissionPath "Third-party\ImageConverter\icon_builder.exe";
+	private _paltopac = getMissionPath "Third-party\ImageConverter\Pal2PacE.exe";
+	private _nogreenOutputRelative = "Third-party\ImageConverter\icon_output";
+	private _nogreenOutput = getMissionPath _nogreenOutputRelative;
 
-	//TODO add automatic replace to sources, convert and rescale
+	private _pathGeneratedIcons = "Resources\ui\inventory\items\gen\";
+
+	if !([_imgRemoverGreenScreenExe,false] call file_exists) exitWith {
+		["%1 not found",_imgRemoverGreenScreenExe] call printError;
+		call loadingScreen_stop;
+	};
+
+	[1,"Определение путей"] call loadingScreen_setProgress;
+
+	if ([_outputFolder,false] call folder_exists) then {
+		_outputNameReplacer = "_oldfrom_"+(SYSTEMTIME select [0,5] joinString "_");
+		["Старая папка output уже существует; Переименовываем в output%1",_outputNameReplacer] call printLog;
+		[
+			_outputFolder,
+			_outputFolder + _outputNameReplacer,
+			false
+		] call dir_move;
+	};
+
+	if isNullVar(__SYSNOCONV__) then {
+		if (canSuspend) then {
+			[12,"Prepare to suspend..."] call loadingScreen_setProgress;
+			["Preparing..."] call printLog;
+			sleep 5;
+		};
+		[10,"Запуск очистки фона..."] call loadingScreen_setProgress;
+		private _result = [_imgRemoverGreenScreenExe,false,""""+_generatedPath+""" 600"] call file_openReturn;
+		["Icon converter result: %1",_result] call printLog;
+		if (_result != 0) exitwith {
+			["Icon converter exitcode error... [CODE %1]",_result] call printError;
+			call loadingScreen_stop;
+		};
+	};
+	
+	["Icons converted path: %1",_nogreenOutput] call printLog;
+	
+	if !([_nogreenOutput,false] call folder_exists) exitwith {
+		["%1 not found",_nogreenOutput] call printError;
+		call loadingScreen_stop;
+	};
+	
+	private _fileList = [_nogreenOutput,false,"*.png",false] call file_getFileList;
+	["Count of png icons: %1",count _fileList] call printLog;
+
+	{
+		["Processing %1",_x] call printLog;
+		forceUnicode 0;
+		_newname = (_x select [0,count _x -4])+".paa";
+		_fullPathPaaTemp = _nogreenOutput+"\"+_newname;
+		[_paltopac,false,""""+_nogreenOutput+"\"+_x+""" """+_fullPathPaaTemp+""""] call file_openReturn;
+		_newpath = _pathGeneratedIcons + _newname;
+		if ([_newpath,true] call file_exists) then {
+			if !([_newpath] call file_delete) then {
+				["CANNOT DELETE FILE %1",_newpath] call printError;
+			} else {
+				["Alredy exists; Move status - %1",[_fullPathPaaTemp,_newpath,[false,true]] call file_move] call printLog;
+			};
+		} else {
+			["Move status - %1",[_fullPathPaaTemp,_newpath,[false,true]] call file_move] call printLog;
+		};
+	} foreach _fileList;
+
+	private _deletedTemp = [_nogreenOutputRelative] call folder_delete;
+	["temp deleted (%2) - %1",_deletedTemp,_nogreenOutputRelative] call printLog;
+
+	["DONE!"] call printLog;
+	call loadingScreen_stop;
+
+	["Процедура успешно завершена. Перезапустите редактор для обновления иконок"] call messageBox;
 }

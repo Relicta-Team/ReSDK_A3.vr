@@ -14,17 +14,37 @@ file_const_defaultAsyncWriteTimeout = 5;
 
 function(file_open)
 {
-	params ["_path",["_isRelative",true]];
+	params ["_path",["_isRelative",true],["_args",""]];
 	
 	if (_isRelative) then {_path = getMissionPath _path};
 
-	if ([_path,false] call file_exists) exitwith {false};
-
-	["FileManager","Open",[
-		_path
-	],true] call rescript_callCommand;
+	if !([_path,false] call file_exists) exitwith {false};
+	if (_arsgs == "") then {
+		["FileManager","Open",[
+			_path
+		],true] call rescript_callCommand;
+	} else {
+		["FileManager","Open",[
+			_path,_args
+		],true] call rescript_callCommand;
+	};
 
 	true
+}
+
+function(file_openReturn)
+{
+	params ["_path",["_isRelative",true],["_args",""]];
+
+	if (_isRelative) then {_path = getMissionPath _path};
+
+	if !([_path,false] call file_exists) exitwith {999999};
+
+	if (_args == "") then {
+		parseNumber(["FileManager","OpenReturn",[_path],true] call rescript_callCommand);
+	} else {
+		parseNumber(["FileManager","OpenReturn",[_path,_args],true] call rescript_callCommand);
+	};
 }
 
 // Example: ["temp.txt","temp2.txt",true] call file_copy
@@ -59,6 +79,11 @@ function(file_move)
 	(["FileManager","Move",[
 		_path,_dest
 	],true] call rescript_callCommand)=="true";
+}
+
+function(dir_move)
+{
+	_this call file_move;
 }
 
 function(file_getFileList)
@@ -118,6 +143,18 @@ function(file_delete)
 	} else {
 		false
 	};
+}
+
+function(folder_delete)
+{
+	params ["_path"]; //обязательная защита
+	_path = getMissionPath _path;
+	if ([_path,false] call folder_exists) then {
+		["FileManager","FolderDelete",[_path]] call rescript_callCommandVoid;
+		true
+	} else {
+		false
+	}
 }
 
 function(file_exists)
