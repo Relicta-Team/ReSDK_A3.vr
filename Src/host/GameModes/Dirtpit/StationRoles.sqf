@@ -1096,7 +1096,16 @@ class(RNomadDirtpit) extends(BasicRole)
 	func(constructor)
 	{
 		objParams();
+		callSelfAfter(_firstInitNomadRole,2);
+	};
+
+	func(_firstInitNomadRole)
+	{
+		objParams();
 		callSelf(nextNomadRole);
+		if (isNull(getSelf(currentNomadRole)) || {isNullReference(getSelf(currentNomadRole))}) then {
+			["Current nomad role not setupped %1",callSelf(getClassName)] call logError;
+		};
 	};
 
 	var(name,"Кочевник");

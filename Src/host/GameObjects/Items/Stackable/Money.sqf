@@ -42,7 +42,7 @@ class(Tooth) extends(Stack)
 	var(name,"Зуб");
 	var(stackName,"Зубы");
 	//var(model,"relicta_models\models\medical\tablet2.p3d");
-	var(model,"a3\structures_f_epa\items\tools\matches_f.p3d");
+	var(model,"relicta_models2\misc\s_tooth\s_tooth.p3d");
 	getterconst_func(stackNames,vec3("Зуб","Зуба","Зубов"));
 	var(stackMaxAmount,10);
 	var(size,ITEM_SIZE_TINY);

@@ -128,7 +128,7 @@ endclass
 class(Crutch) extends(Item)
 	var(name,"Костыль");
 	var(desc,"Безногим?!");
-	var(model,"land_stretcher_01_folded_olive_f");
+	var(model,"relicta_models2\medicine\s_crutch\s_crutch.p3d");
 	var(weight,gramm(800));
 	var(size,ITEM_SIZE_MEDIUM);
 	var(allowedSlots,[INV_BACK arg INV_BACKPACK]);
