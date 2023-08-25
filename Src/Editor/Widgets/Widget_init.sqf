@@ -138,7 +138,11 @@ menu_structureLayout = [
 		["text:Генераторы;path:menu_path_generators",
 			//"text:Обновить шаблонные объекты;act:call golib_massoc_syncAndUpdateAllObjects", //IStruct to custom
 			"text:Генерировать карту моделей;act:call systools_GenerateModelData",
-			"text:Генерировать иконки предметов;act:call systools_imageProcessor;",
+			["text:Генерировать иконки предметов;",
+				"text:Полная генерация;act:[true] call systools_imageProcessor;",
+				"text:Только отсутствующие;act:[false] call systools_imageProcessor;",
+				"text:Генерация по указанным;act:[true,true] call systools_imageProcessor;"
+			],
 			"text:Запустить импорт старой карты;act:call mm_doImportOldMap"
 		],
 		["text:Валидаторы",

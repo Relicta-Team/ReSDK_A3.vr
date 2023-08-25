@@ -8,7 +8,18 @@
 
 scriptError_internal_handleStack = {
 	params ["_fn","_line","_scope","_varmap"];
-	format["-> f:%1 at %2 (scope:%3), lv: %4",_fn,_line,_scope,(keys _varmap) joinString ", "];
+	private _stackInfo = []; private _valInfo = null;
+	{
+		_valInfo = _y;
+		if equalTypes(_valInfo,[]) then {
+			_valInfo = str _valInfo;
+		};
+		if equalTypes(_valInfo,"") then {
+			if (count _valInfo > 255) then {_valInfo = _valInfo select [0,255]}
+		};
+		_stackInfo pushBack (format["%1=%2",_x,_valInfo]);
+	} foreach _varmap;
+	format["-> f:%1 at %2 (scope:%3), lv: %4",_fn,_line,_scope,_stackInfo joinString ", "];
 };
 scriptErrGlobLastMessage = "";
 scriptErrHndlGlobal = addMissionEventHandler ["ScriptError",
