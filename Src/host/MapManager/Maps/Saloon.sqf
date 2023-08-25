@@ -1265,7 +1265,7 @@ _3472_654053620_2065412_81608 = ['Decor',[3472.65,3620.21,12.8161],268.654,[0,0,
 ['LargeConcreteWallWithReinforcement',[3473.18,3621.3,15.3024],180,[0,0,1]] call InitStruct; 
 ['LampCeiling',[3472.69,3617.12,15.7392],0,[0,0,1], {go_editor_globalRefs set ['Imported LampCeiling570303 (1)',_thisObj];
 }] call InitStruct; 
-_3473_605713614_7807614_36978 = ['RedButton',[3473.61,3614.78,19.3714,true],[-0.998938,-0.0460453,0.00172378],[-0.045894,0.997598,0.051888], {go_editor_globalRefs set ['_sw_barkitchen (1)',_thisObj];
+_3473_605713614_7971214_36978 = ['RedButton',[3473.61,3614.8,19.3714,true],[-0.998938,-0.0460453,0.00172378],[-0.045894,0.997598,0.051888], {go_editor_globalRefs set ['_sw_barkitchen (1)',_thisObj];
 }] call InitStruct; 
 ['Candle',[3472.91,3620.19,13.6807],0,[0,0,1]] call InitItem; 
 ['MetalAndConcreteRuins',[3472.57,3606.78,12.9765],162.396,[0,0,1]] call InitStruct; 
@@ -1319,9 +1319,9 @@ _3401_500243666_0800819_07231 = ['Decor',[3401.5,3666.08,19.0723],268.777,[0,0,1
 ['BarrelCampfireBig',[3412.65,3650.16,17.7176],0,[0,0,1]] call InitStruct; 
 ['WoodenDoor',[3403.97,3667.46,19.3548],84.2679,[0,0,1]] call InitStruct; 
 ['SmallPileOfGarbageAndBoards',[3394.85,3669.56,24.8567,true],63.7149,[0.000414197,-0.000835721,1]] call InitStruct; 
-['WoodenChair',[3411.53,3649.35,22.7514,true],229.415,[0.00157339,0.0088058,0.99996]] call InitItem; 
-['WoodenChair',[3413.72,3649.55,22.8451,true],114.553,[-0.00865173,-0.00227091,0.99996]] call InitItem; 
-['Melteshonok',[3412.73,3650.2,23.8066,true],[-0.986272,-0.141646,0.0848758],[-0.165095,0.835507,-0.524091]] call InitItem; 
+['WoodenChair',[3411.53,3649.35,22.6803,true],229.415,[0.00157339,0.0088058,0.99996]] call InitItem; 
+['WoodenChair',[3413.72,3649.55,22.7082,true],114.553,[-0.00865173,-0.00227091,0.99996]] call InitItem; 
+['Melteshonok',[3412.73,3650.2,23.8066,true],[-0.986272,-0.141646,0.0848757],[-0.165095,0.835507,-0.524091]] call InitItem; 
 _3412_360603650_1704118_45857 = ['IStruct',[3412.36,3650.17,23.5441,true],0.397218,[0.999966,-0.00693285,0.00447221], {_thisObj setvariable ['model','ml_shabut\eft\svd_trubka.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3412_928963650_1838418_45857 = ['IStruct',[3412.93,3650.18,23.5441,true],0.397218,[0.999966,-0.00693285,0.00447221], {_thisObj setvariable ['model','ml_shabut\eft\svd_trubka.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3412_641363650_1777318_81260 = ['IStruct',[3412.64,3650.18,23.819,true],358.956,[-0.00434615,-0.00700873,0.999966], {_thisObj setvariable ['model','ml_shabut\eft\svd_trubka.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -1331,7 +1331,7 @@ _3412_641363650_1777318_81260 = ['IStruct',[3412.64,3650.18,23.819,true],358.956
 ['SquareWoodenBox',[3419.21,3664.85,18.7992],9.61857,[0,0,1]] call InitStruct; 
 ['GlassBottle',[3411.97,3650.55,22.7586,true],[-0.310254,0.950653,-0.000912666],[-0.943056,-0.307895,-0.125884]] call InitItem; 
 ['SmallFenceMadeOfSticks',[3415.25,3651.65,17.7503],5.45421,[0,0,1]] call InitStruct; 
-['SmallCornerFenceMadeOfJunk',[3411.62,3649.44,17.7518],91.9055,[0,0,1]] call InitStruct; 
+['SmallCornerFenceMadeOfJunk',[3411.62,3649.44,17.6603],91.9055,[0,0,1]] call InitStruct; 
 _3407_280033644_2299818_39120 = ['Decor',[3407.28,3644.23,18.3912],179.189,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\wip\unfinished_building_02_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3395_530033652_6298820_88860 = ['Decor',[3395.53,3652.63,20.8886],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\ruins\houseruin_small_01_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['TorchHolderCharged',[3372.04,3626.92,19.0293],84.7128,[0,0,1]] call InitStruct; 
@@ -1340,7 +1340,6 @@ _3395_530033652_6298820_88860 = ['Decor',[3395.53,3652.63,20.8886],0,[0,0,1], {_
 ['MediumConcreteWallDestroyed',[3415.81,3667.2,29.9587,true],0,[0,-0.0494439,0.998777]] call InitStruct; 
 ['SmallWhiteConcretePillar',[3413.53,3667.16,22.979,true],357.515,[0.00366908,0.00305131,0.999989]] call InitStruct; 
 ['SmallWhiteConcretePillar',[3413.53,3667.16,25.6354,true],[0.0299234,-0.999527,-0.00716806],[0.00546244,0.00733468,-0.999958]] call InitStruct; 
-['SmallWhiteConcretePillar',[3406.93,3668.89,18.4739],7.76242,[0,0,1]] call InitStruct; 
 ['ThickLightConcreteColumn',[3413.54,3667.19,23.4353,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
 _3473_259523612_1315912_30964 = ['Decor',[3473.26,3612.13,12.3096],180.148,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18_2.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['SmallWoodenTable',[3472.82,3604.04,18.0387],0,[0,0,1]] call InitStruct; 
@@ -1489,6 +1488,7 @@ if (!isNil'_3445_040043616_5300318_02900') then {
 	[_3445_040043616_5300318_02900,go_editor_globalRefs get '_sw_barsign'] call (_3445_040043616_5300318_02900 getvariable 'proto' getvariable 'addConnection');
 	[_3445_040043616_5300318_02900,go_editor_globalRefs get '_room2f_glob'] call (_3445_040043616_5300318_02900 getvariable 'proto' getvariable 'addConnection');
 	[_3445_040043616_5300318_02900,go_editor_globalRefs get 'StationSpeaker G:0GQk9evz1s0'] call (_3445_040043616_5300318_02900 getvariable 'proto' getvariable 'addConnection');
+	[_3445_040043616_5300318_02900,go_editor_globalRefs get '_sw_barkitchen (1)'] call (_3445_040043616_5300318_02900 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3424_040043670_3898919_06720') then {
 	_3424_040043670_3898919_06720 setvariable ['keytypes',["torg"]];
@@ -1721,6 +1721,6 @@ if (!isNil'_3467_093513605_0476124_09978') then {
 if (!isNil'_3461_320563605_0075724_16239') then {
 	[_3461_320563605_0075724_16239,go_editor_globalRefs get 'Imported LampCeiling609599 (6)'] call (_3461_320563605_0075724_16239 getvariable 'proto' getvariable 'addConnection');
 };
-if (!isNil'_3473_605713614_7807614_36978') then {
-	[_3473_605713614_7807614_36978,go_editor_globalRefs get 'Imported LampCeiling570303 (1)'] call (_3473_605713614_7807614_36978 getvariable 'proto' getvariable 'addConnection');
+if (!isNil'_3473_605713614_7971214_36978') then {
+	[_3473_605713614_7971214_36978,go_editor_globalRefs get 'Imported LampCeiling570303 (1)'] call (_3473_605713614_7971214_36978 getvariable 'proto' getvariable 'addConnection');
 };
