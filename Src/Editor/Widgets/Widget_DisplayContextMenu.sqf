@@ -138,13 +138,16 @@ function(dcm_internal_loadContext)
 		_backItems pushBack _w;
 		_w setBackgroundColor dcm_internal_contextmenu_exitcolor;
 		
-		if !(call _condToVisible) then {
+		private _canVisible = call _condToVisible;
+		if !(_canVisible) then {
 			_w ctrlEnable false;
 			_w setBackgroundColor (dcm_internal_contextmenu_exitcolor apply {(_x - 0.5)max 0});
 		};
-
-		_w ctrlAddEventHandler ["MouseEnter",{(_this select 0) setBackgroundColor dcm_internal_contextmenu_entercolor}];
-		_w ctrlAddEventHandler ["MouseExit",{(_this select 0) setBackgroundColor dcm_internal_contextmenu_exitcolor}];
+		
+		if (_canVisible) then {
+			_w ctrlAddEventHandler ["MouseEnter",{(_this select 0) setBackgroundColor dcm_internal_contextmenu_entercolor}];
+			_w ctrlAddEventHandler ["MouseExit",{(_this select 0) setBackgroundColor dcm_internal_contextmenu_exitcolor}];
+		};
 
 		if (_level > 0) then {
 			_w setFade 1;
@@ -155,7 +158,10 @@ function(dcm_internal_loadContext)
 		if equalTypes(_includedListOrAction,[]) then {
 			modvar(_name) + "<t align='right' size='1.3'>+"+sgt+"</t>";
 			
+			_w setvariable ["enabled__",_canVisible];
 			_w ctrlAddEventHandler ["MouseButtonUp",{
+				if !((_this select 0) getvariable "enabled__") exitwith {};
+
 				_nextBack = ((_this select 0) getVariable "childBack");
 				_curBack = (_this select 0) getVariable "back";
 				//Если в древе нет текущего бэка то скрываем всю ветку и чистим её
@@ -192,6 +198,9 @@ function(dcm_internal_loadContext)
 			
 		};
 		
+		if (!_canVisible) then {
+			_name = "<t color='#5E5E5E'>"+_name+"</t>";
+		};
 		[_w,format["<t align='center'>%1</t>",_name]] call widgetSetText;
 		if (_name == "") then {
 			_w ctrlEnable false;
@@ -206,7 +215,10 @@ function(dcm_internal_loadContext)
 		} else {
 			
 			_w setVariable ["_action",_includedListOrAction];
+			_w setvariable ["enabled__",_canVisible];
 			_w ctrlAddEventHandler ["MouseButtonUp",{
+				["enabled action %1",(_this select 0) getvariable "enabled__"] call printTrace;
+				if !((_this select 0) getvariable "enabled__") exitwith {};
 				
 				_buttonContext = _this select 0;
 				_nameContext = sanitizeHTML(ctrlText _buttonContext);
