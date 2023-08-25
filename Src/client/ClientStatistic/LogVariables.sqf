@@ -31,6 +31,9 @@ clistat_buffer = [
 			if (_x call hasObjectInScene) then {INC(_sceneObj)};
 		} foreach le_allLights; format["all:%1 (dis:%2;rend:%3)		s:%4",count le_allLights,_nonvis,(count le_allLights)-_nonvis,_sceneObj]
 	}],
+	#ifdef EDITOR
+	[colortext(E4F500,"ServerLightRender: "),{count (attachedObjects slt_const_dummyMob)}],
+	#endif
 	[colortext(D3C857,"NOE packets: "),{format["amount %1; packets query %2",noe_client_packetId,count noe_client_packets]}],
 	[colortext(D3C857,"NOE progress: "),{
 		_ppos = getPosATL player; _buf = [];
