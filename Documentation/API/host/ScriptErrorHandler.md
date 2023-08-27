@@ -11,7 +11,7 @@ Initial value:
 ```sqf
 ""
 ```
-File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 24](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L24)
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 34](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L34)
 ## scriptErrHndlGlobal
 
 Type: Variable
@@ -23,7 +23,7 @@ Initial value:
 ```sqf
 addMissionEventHandler ["ScriptError",...
 ```
-File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 25](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L25)
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 35](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L35)
 ## scriptError_internal_handleStack
 
 Type: function
@@ -44,4 +44,4 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 74](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L74)
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 84](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L84)
