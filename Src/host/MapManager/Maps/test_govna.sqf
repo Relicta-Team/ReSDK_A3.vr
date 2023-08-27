@@ -926,7 +926,7 @@ _4050_391603676_8361827_62570 = ['IStruct',[4050.39,3676.84,32.6257,true],250,[0
 ['BigSmoothStone',[3863.47,3362.84,-7.53065],177.475,[0,0,1]] call InitDecor; 
 ['BigSmoothStone',[3860.39,3383.37,-7.53065],168.714,[0,0,1]] call InitDecor; 
 ['BigSmoothStone',[3850.43,3395.28,-7.39606],122.828,[0,0,1]] call InitDecor; 
-['BigSmoothStone',[3834.65,3392.39,-7.64375],187.883,[0,0,1]] call InitDecor; 
+['BigSmoothStone',[3836.27,3399.21,-7.32417],187.883,[0,0,1]] call InitDecor; 
 ['BigSmoothStone',[3812.79,3389.17,-7.41349],345,[0,0,1]] call InitDecor; 
 ['BlockStone',[3835.13,3388.71,8.25163],0,[0,0,1]] call InitDecor; 
 ['BlockStone',[3830.76,3429.46,4.89566],55,[0,0,1]] call InitDecor; 
@@ -990,7 +990,7 @@ _4050_391603676_8361827_62570 = ['IStruct',[4050.39,3676.84,32.6257,true],250,[0
 ['BigGreenRock',[3867.12,3460.4,22.8997,true],[-4.37114e-008,7.54979e-008,1],[-1,0,-4.37114e-008]] call InitDecor; 
 ['BigGreenRock',[3837.57,3539.03,30.3361,true],[-4.22219e-008,-0.258827,0.965924],[-1,0,-4.37114e-008]] call InitDecor; 
 ['BigGreenRock',[3821.13,3536.9,29.895,true],[-1.12058e-008,-0.342012,0.939696],[1,0,1.19249e-008]] call InitDecor; 
-['BigGreenRock',[3821.72,3571.06,34.9592,true],[-1.19249e-008,1.19249e-008,1],[1,0,1.19249e-008]] call InitDecor; 
+['BigGreenRock',[3821.7,3571.11,34.9592,true],[-1.19249e-008,1.19249e-008,1],[1,0,1.19249e-008]] call InitDecor; 
 ['BigGreenRock',[3836.75,3569.9,35.7028,true],[-4.37114e-008,-8.14994e-006,1],[-1,0,-4.37114e-008]] call InitDecor; 
 ['BigGreenRock',[3824.57,3602.45,39.5522,true],[-1.19249e-008,1.19249e-008,1],[1,0,1.19249e-008]] call InitDecor; 
 ['BigGreenRock',[3839.6,3601.29,40.2958,true],[-4.37114e-008,-8.14994e-006,1],[-1,0,-4.37114e-008]] call InitDecor; 
@@ -1141,7 +1141,8 @@ _4050_391603676_8361827_62570 = ['IStruct',[4050.39,3676.84,32.6257,true],250,[0
 ['MediumPileGreenStones',[3810.59,3355.55,14.3031,true],[-0.0456994,0.995446,0.0836622],[0.658768,-0.0329273,0.751626]] call InitDecor; 
 ['MediumPileGreenStones',[3814.05,3380.15,14.6322,true],[-0.0391374,-0.985549,0.164809],[0.894515,0.0389498,0.445339]] call InitDecor; 
 ['BigGreenRock',[3813.74,3406.36,19.1735],90.0003,[0,0,1]] call InitDecor; 
-['ConcreteArch',[3912.07,3486.38,4.67257],270,[0,0,1]] call InitDecor; 
+['LargeHighRock',[3817.84,3563.67,-6.70873],355,[0,0,1]] call InitDecor; 
+['ConcreteArch',[3911.35,3486.38,4.67257],270,[0,0,1]] call InitDecor; 
 ['FarmGarden',[4048.41,3762.68,21.5018,true],105,[0.00454359,0.0050348,0.999977]] call InitStruct; 
 ['SmallSheetMetalHouse',[4037.3,3771.4,17.1619],350.406,[0,0,1]] call InitStruct; 
 ['SmallClothShelter',[4022.23,3758.53,16.0325],112.411,[0,0,1]] call InitStruct; 
@@ -1203,11 +1204,11 @@ _4050_391603676_8361827_62570 = ['IStruct',[4050.39,3676.84,32.6257,true],250,[0
 ['CampfireBig',[4038.81,3682.52,26.4268],0,[0,0,1]] call InitStruct; 
 ['BetonTrapeciaSmall',[4034.7,3731.37,18.1723],185,[0,0,1]] call InitStruct; 
 ['BetonTrapeciaSmall',[4035.51,3731.25,18.1259],185,[0,0,1]] call InitStruct; 
-['BetonTrapeciaSmall',[4035.4,3721.58,18.4664],185,[0,0,1]] call InitStruct; 
+['BetonTrapeciaSmall',[4035.03,3721.75,18.3773],180,[0,0,1]] call InitStruct; 
 ['BetonTrapeciaSmall',[4041.17,3735.53,27.5491,true],[-0.00258911,0.0156958,0.999874],[-0.998749,-0.0499786,-0.00180164]] call InitStruct; 
 ['BetonTrapeciaSmall',[4045.82,3735.47,22.2103],185,[0,0,1]] call InitStruct; 
 ['SmallConcreteArch',[4035.15,3732.45,18.1381],184.158,[0,0,1]] call InitStruct; 
-['LongSteelPipe',[4035.27,3712.04,23.8369,true],0,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
+['LongSteelPipe',[4035.03,3712.27,23.7773,true],0,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
 ['MediumSteelUpperPipe',[4035.01,3727.6,18.4416],0,[0,0,1]] call InitStruct; 
 ['IndustrialPipes',[4040.29,3684.61,26.118],90.9925,[0,0,1]] call InitDecor; 
 ['SmallConcretePipe',[4044.02,3735.68,27.3028,true],90,[-0.00692887,-0.00565972,0.99996]] call InitStruct; 
@@ -1277,7 +1278,6 @@ _4050_391603676_8361827_62570 = ['IStruct',[4050.39,3676.84,32.6257,true],250,[0
 ['LongMetalBeams',[3964.73,3726.43,14.3272,true],[-0.171736,0.874954,-0.452728],[-0.0871992,0.444251,0.891648]] call InitStruct; 
 ['BigDestroyedRedConcreteBuilding',[3979.92,3642.33,8.90353,true],357.999,[0.0140069,0.00953336,0.999856]] call InitDecor; 
 ['BigPartiallyDestroyedLightBrickBuilding',[3973.29,3625.69,5.60574],0,[0,0,1]] call InitDecor; 
-['SmallBrickHouseRuins',[3968.77,3636.2,10.2713,true],270,[-0.00695695,0.0154503,0.999856]] call InitStruct; 
 ['MediumStoneHouseRuins',[3957.98,3644.11,10.9235,true],350.001,[-0.00618966,-0.00272632,0.999977]] call InitDecor; 
 ['MediumRuinedWhiteConcreteBuilding',[4000.93,3561.46,10.6397,true],[0.964723,0.258497,0.0498782],[-0.0471876,-0.0166064,0.998748]] call InitDecor; 
 ['BigRuinedBrickBuilding1',[4012.32,3562.97,14.9262,true],0,[0.00566319,-0.00693144,0.99996]] call InitDecor; 
@@ -1298,7 +1298,7 @@ _4050_391603676_8361827_62570 = ['IStruct',[4050.39,3676.84,32.6257,true],250,[0
 ['MediumBrickHouseRuins',[3897.24,3463.41,9.69097,true],5.00043,[0.00503473,-0.00738921,0.99996]] call InitDecor; 
 ['MediumStoneHouseRuins',[3847.85,3456.2,10.1407,true],350.001,[-0.00618966,-0.00272632,0.999977]] call InitDecor; 
 ['MediumRuinedWhiteConcreteBuilding',[3850.53,3479.29,10.285,true],4.27419e-006,[0.00382596,-0.0498764,0.998748]] call InitDecor; 
-['Golovinskaya',[3829.38,3622.26,19.1137],0,[0,0,1]] call InitDecor; 
+['Golovinskaya',[3829.28,3621.55,19.1137],14.4797,[0,0,1]] call InitDecor; 
 ['BigBrickUnfinishedTwoStoreyHouse',[3833.67,3602.66,18.1998],110,[0,0,1]] call InitDecor; 
 ['DestroyedMetalHangar',[3832.81,3617.84,12.0117],16.0058,[0,0,1]] call InitDecor; 
 ['DestroyedMetalHangar',[3828.04,3534.78,36.3096,true],180,[0,0.173649,-0.984808]] call InitDecor; 
@@ -1307,6 +1307,33 @@ _4050_391603676_8361827_62570 = ['IStruct',[4050.39,3676.84,32.6257,true],250,[0
 ['SmallSheetMetalHouse1',[3862.16,3450.42,6.35437],175,[0,0,1]] call InitStruct; 
 ['SmallSheetMetalHouse1',[3997.79,3641.83,6.77886],0,[0,0,1]] call InitStruct; 
 ['OldGreenToiletBowl',[3977.4,3627.82,5.81138],90,[0,0,1]] call InitStruct; 
+['BigDestroyedRedConcreteBuilding',[3927.65,3644.55,5.97278],333.2,[0,0,1]] call InitDecor; 
+_3914_755133654_364264_91203 = ['IStruct',[3914.76,3654.36,14.7558,true],202.237,[0.00161964,-0.00659681,0.999977], {_thisObj setvariable ['model','a3\structures_f_enoch\ruins\houseruin_big_03_f.p3d'];}] call InitStruct; // !!! realocated model !!!
+['MediumJunkShed',[3916.71,3667.8,4.63115],182.778,[0,0,1]] call InitStruct; 
+['BigDestroyedLightConcreteBuilding',[3907.11,3668.95,4.98276],100.397,[0,0,1]] call InitDecor; 
+['MediumBrickHouseRuins',[3902.98,3662.7,4.16412],342.715,[0,0,1]] call InitDecor; 
+['SmallRuinedBellTower',[3918.72,3639.69,5.04572],346.138,[0,0,1]] call InitDecor; 
+['BigBrickHouseRuins',[3907.95,3637.78,11.2887,true],180,[0.00103552,-0.00699926,0.999975]] call InitDecor; 
+['SmallRuinedWoodenBuilding',[3908.16,3639.51,7.02163],199.389,[0,0,1]] call InitDecor; 
+['SmallRuinedLightBrickBuilding',[3902.27,3647.12,4.99426],235.288,[0,0,1]] call InitDecor; 
+['BigPartiallyDestroyedLightBrickBuilding',[3819,3608.58,17.7207],20,[0,0,1]] call InitDecor; 
+['BigRuinedLightBrickBuilding',[3825.92,3549.59,17.4934,true],[-0.996116,0.0589105,0.0654425],[0.041064,-0.346651,0.937095]] call InitDecor; 
+['BigRuinedLightBrickBuilding',[3821.47,3542.53,13.9984,true],174.001,[0.00566176,-0.00693001,0.99996]] call InitDecor; 
+['BigLightRuinedBuilding',[3844.82,3618.03,23.9696,true],200,[0.00566319,-0.00693144,0.99996]] call InitDecor; 
+['SmallClothShelter',[3850.13,3479.31,12.3484,true],0,[-0.00564169,-0.00376629,0.999977]] call InitStruct; 
+['SmallSheetMetalHouse2',[3824.71,3516.55,5.19442],90,[0,0,1]] call InitStruct; 
+['SmallSheetMetalHouse2',[3821.91,3578.11,17.6584],90,[0,0,1]] call InitStruct; 
+['MediumLightRuinedStoneHouse',[3827.96,3414.77,9.72866,true],280.001,[-0.0069996,-0.00103597,0.999975]] call InitDecor; 
+['BigDestroyedRedConcreteBuilding',[3828.25,3578.99,20.589,true],357.999,[0.0140069,0.00953336,0.999856]] call InitDecor; 
+['BigDestroyedRedConcreteBuilding',[3865.12,3651.83,16.5324,true],[-0.969411,0.236125,0.0669866],[0.122305,0.228098,0.965926]] call InitDecor; 
+['BigGreyRuinedBuilding',[3847.44,3518.36,11.6886,true],29.9988,[0.00862475,-0.00241682,0.99996]] call InitDecor; 
+['MediumBrickHouseRuins',[3834.83,3533.14,6.41347],120,[0,0,1]] call InitDecor; 
+['MediumBrickHouseRuins',[3853.23,3506.78,7.83821],80,[0,0,1]] call InitDecor; 
+['MediumBrickHouseRuins',[3824.39,3531.88,4.52099],120,[0,0,1]] call InitDecor; 
+['SteelCanopySmall',[3910.27,3472.93,5.28118],0,[0,0,1]] call InitStruct; 
+['SteelCanopySmall',[3912.68,3488.38,10.5955,true],[0.0858271,-0.981061,-0.173648],[0.0151336,-0.172987,0.984808]] call InitStruct; 
+['ClayWallSmall',[3933.4,3644.33,11.7769,true],241.517,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['MediumClothCanopy',[3944.09,3639.76,11.7762,true],13.3698,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
 ['MediumPileOfDirtAndStones',[3993.02,3574.31,10.9209,true],[0.968698,-0.0871259,0.232449],[-0.230117,0.0360566,0.972495]] call InitStruct; 
 ['SmallPileOfGarbageAndBoards',[3996.02,3565.42,10.9167,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
 ['DirtCraterLong',[4003.06,3568.26,10.6476,true],300,[-0.00178324,0.00825918,0.999964]] call InitStruct; 
@@ -1326,7 +1353,7 @@ _4050_391603676_8361827_62570 = ['IStruct',[4050.39,3676.84,32.6257,true],250,[0
 ['DirtCraterLong',[4003.14,3608.3,11.5991,true],0,[-0.766044,0,0.642788]] call InitStruct; 
 ['DirtCraterLong',[3950.27,3576.01,12.1896,true],[0.996179,0.0783138,0.0386651],[0.00619581,-0.504954,0.863124]] call InitStruct; 
 ['DirtCraterLong',[3979.47,3570.27,10.198,true],0,[0.00626256,0.00567318,0.999964]] call InitStruct; 
-['DirtCraterLong',[3969.18,3567.54,9.98984,true],306,[-0.000915846,0.00839658,0.999964]] call InitStruct; 
+['DirtCraterLong',[3913.17,3546.83,10.0305,true],11.0021,[-0.000915852,0.00839657,0.999964]] call InitStruct; 
 ['DirtCraterLong',[3908.45,3519.46,10.0683,true],30,[0.00825903,0.00178201,0.999964]] call InitStruct; 
 ['BigPileBurntGarbage',[3977.66,3569.8,4.03905],67,[0,0,1]] call InitStruct; 
 ['BigPileBurntGarbage',[3970.97,3576.8,4.04324],30,[0,0,1]] call InitStruct; 
@@ -1422,6 +1449,87 @@ _4050_391603676_8361827_62570 = ['IStruct',[4050.39,3676.84,32.6257,true],250,[0
 ['MetalAndConcreteRuins',[3904.54,3451.61,10.4994,true],0,[-0.707107,0,0.707107]] call InitStruct; 
 ['MediumPileOfDirtAndStones',[3838.8,3537.02,11.5277,true],[0.964945,0.261422,-0.0232123],[0.0682432,-0.164522,0.98401]] call InitStruct; 
 ['MediumPileOfDirtAndStones',[3838.38,3544.49,13.5545,true],[0.988058,-0.0649259,-0.139735],[0.111212,-0.327179,0.938395]] call InitStruct; 
+['BigPileBurntGarbage',[3929.05,3673.86,12.0813,true],358.544,[-0.151967,-0.162864,0.974875]] call InitStruct; 
+['SmallBrickHouseRuins',[3968.77,3636.2,10.2713,true],270,[-0.00695695,0.0154503,0.999856]] call InitStruct; 
+['SmallPileOfBricksAndPlanks',[3942.19,3643.81,4.90166],0,[0,0,1]] call InitStruct; 
+['SmallBrickHouseRuins',[3937.49,3638.93,10.3758,true],225.006,[-0.00695696,0.0154503,0.999856]] call InitStruct; 
+['DirtCraterLong',[3952.05,3638.69,10.1435,true],270.002,[0.00626256,0.00567318,0.999964]] call InitStruct; 
+['SmallBrickHouseRuins',[3894.77,3660.47,10.6256,true],0,[0.179222,-0.00681885,0.983785]] call InitStruct; 
+['SmallBrickHouseRuins',[3843.33,3487.47,10.3667,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['DirtCraterLong',[3916.88,3670.2,9.85673,true],280.002,[-0.00693115,-0.00566258,0.99996]] call InitStruct; 
+['DirtCraterLong',[3885.85,3659.12,12.6902,true],[-0.952912,-0.174067,0.248312],[0.252441,-0.00163639,0.967611]] call InitStruct; 
+['DirtCraterLong',[3861.54,3624.82,22.7284,true],[-0.996171,0.0870389,0.00825024],[0.029251,0.242874,0.969617]] call InitStruct; 
+['DirtCraterLong',[3849.02,3488.33,4.69695],205,[0,0,1]] call InitStruct; 
+['DirtCraterLong',[3832.07,3542.19,12.127,true],0,[0.00176031,-0.348211,0.937415]] call InitStruct; 
+['DirtCraterLong',[3833.67,3554.5,16.9367,true],0,[0.00114471,-0.348593,0.937274]] call InitStruct; 
+['DirtCraterLong',[3830.81,3522.07,10.0106,true],[-0.707027,0.701919,-0.0861526],[-0.014966,0.106946,0.994152]] call InitStruct; 
+['DirtCraterLong',[3845.52,3463.74,9.8846,true],345,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['SmallPileOfBricksAndPlanks',[3904.91,3649.31,9.66743,true],275.002,[0.00693107,0.00566265,0.99996]] call InitStruct; 
+['SmallPileOfBricksAndPlanks',[3861.52,3641.29,20.282,true],[-0.996193,0.0847596,-0.0203719],[0.00169117,0.252441,0.967611]] call InitStruct; 
+['SmallPileOfBricks',[3899.69,3652.96,10.8286,true],0,[0.252046,-0.00100208,0.967715]] call InitStruct; 
+['SmallPileOfBricks',[3833.36,3591.89,22.8037,true],0,[0.00161916,-0.00659633,0.999977]] call InitStruct; 
+['SmallPileOfBricks',[3829.61,3580.02,22.6644,true],0,[-0.0321372,-0.0168627,0.999341]] call InitStruct; 
+['SmallPileOfBricks',[3842.07,3504.4,11.5243,true],239.999,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['SmallPileOfBricks',[3830.4,3424.82,11.0394,true],319.999,[-0.00487058,0.00513269,0.999975]] call InitStruct; 
+['SmallPileOfBricks',[3839.01,3442.05,10.7571,true],270.006,[-0.0154596,-0.00693025,0.999856]] call InitStruct; 
+['MetalAndConcreteRuins',[3903.5,3654.34,5.0829],0,[0,0,1]] call InitStruct; 
+['MetalAndConcreteRuins',[3922.6,3668.21,5.13121],325,[0,0,1]] call InitStruct; 
+['MetalAndConcreteRuins',[3864.83,3630.13,17.6965],0,[0,0,1]] call InitStruct; 
+['MetalAndConcreteRuins',[3827.99,3626.57,17.7916],290,[0,0,1]] call InitStruct; 
+['MetalAndConcreteRuins',[3831.05,3595.76,17.5341],315,[0,0,1]] call InitStruct; 
+['MetalAndConcreteRuins',[3830.8,3609.81,17.5231],25,[0,0,1]] call InitStruct; 
+['MetalAndConcreteRuins',[3834.78,3577.72,17.4769],320,[0,0,1]] call InitStruct; 
+['MetalAndConcreteRuins',[3829.35,3559.38,18.7417,true],0,[0,-0.34202,0.939693]] call InitStruct; 
+['SmallDirtBrown',[3927.26,3664.4,5.13633],0,[0,0,1]] call InitStruct; 
+['SmallDirtBrown',[3891.37,3655.84,11.0797,true],[-0.925417,0.163178,0.342019],[0.336823,-0.0593907,0.939693]] call InitStruct; 
+['SmallDirtBrown',[3834.81,3542.39,11.9418,true],0,[0,-0.422618,0.906308]] call InitStruct; 
+['SmallDirtBrown',[3825.92,3573.8,17.2175],0,[0,0,1]] call InitStruct; 
+['SmallDirtBrown',[3832.86,3512.83,4.94474],285,[0,0,1]] call InitStruct; 
+['SmallDirtBrown',[3841.73,3510.19,5.04776],295,[0,0,1]] call InitStruct; 
+['SmallDirtBrown',[3836.01,3562.2,19.5976,true],0,[0,-0.34202,0.939693]] call InitStruct; 
+['SmallDirtBrown',[3857.99,3448.57,5.00243],260,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[3890.86,3660.56,11.248,true],[-0.965926,5.22944e-007,0.258819],[0.258819,1.2757e-007,0.965926]] call InitStruct; 
+['SmallDirtGrey',[3855.8,3628.21,17.7181],270,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[3834.71,3548.78,14.4231,true],0,[0,-0.34202,0.939693]] call InitStruct; 
+['SmallDirtGrey',[3822.87,3516.38,4.99899],0,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[3825.81,3514.3,4.86964],270,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[3857.07,3454.6,5.02444],100,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[3846.5,3474.09,5.02389],0,[0,0,1]] call InitStruct; 
+['MediumPileOfDirtAndStones',[3927.86,3657.41,10.7807,true],[-0.979833,-0.0848058,0.180926],[0.179808,0.0207037,0.983484]] call InitStruct; 
+['MediumPileOfDirtAndStones',[3868.28,3644.59,20.6242,true],[-0.996194,0.0846042,-0.0209697],[0.00103552,0.252047,0.967714]] call InitStruct; 
+['MediumPileOfDirtAndStones',[3853.93,3494.19,11.2965,true],279.998,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['MediumPileOfDirtAndStones',[3822.47,3572.01,21.6464,true],10.1623,[0.00165588,-0.18014,0.98364]] call InitStruct; 
+['MediumPileOfDirtAndStones',[3828.69,3569.02,21.26,true],[0.819151,0.564437,0.10199],[0.00165588,-0.18014,0.98364]] call InitStruct; 
+['MediumPileOfDirtAndStones',[3822.35,3522.88,9.97423,true],265,[0.00103552,-0.00699926,0.999975]] call InitStruct; 
+['SmallPileOfConcreteFragments',[3919.93,3667.32,10.3928,true],0,[-0.00161945,0.00659627,0.999977]] call InitStruct; 
+['SmallPileOfConcreteFragments',[3862.14,3648.91,18.7978,true],0,[0.00718427,0.264285,0.964418]] call InitStruct; 
+['SmallPileOfConcreteFragments',[3828.11,3592.56,17.4988],0,[0,0,1]] call InitStruct; 
+['SmallPileOfConcreteFragments',[3835.91,3598.17,18.2262],0,[0,0,1]] call InitStruct; 
+['SmallPileOfConcreteFragments',[3834.67,3608.01,18.3246],0,[0,0,1]] call InitStruct; 
+['SmallPileOfConcreteFragments',[3820.46,3607.21,23.0523,true],0,[0.0562941,0.0490759,0.997207]] call InitStruct; 
+['SmallPileOfConcreteFragments',[3842.76,3618.3,18.5576],0,[0,0,1]] call InitStruct; 
+['SmallPileOfConcreteFragments',[3835.34,3613.05,22.7862,true],0,[0.00103552,-0.00699926,0.999975]] call InitStruct; 
+['SmallPileOfConcreteFragments',[3823.7,3614.96,17.6322],0,[0,0,1]] call InitStruct; 
+['SmallPileOfConcreteFragments',[3890.12,3456.64,10.3048,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['SmallPileOfConcreteFragments',[3865.86,3450.88,10.3078,true],0,[-0.0069996,-0.00103549,0.999975]] call InitStruct; 
+['SmallPileOfConcreteFragments',[3872.45,3453.26,10.3073,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['SmallBrickHouseRuins',[3863.58,3636.15,21.993,true],[-0.000179116,0.985999,-0.166751],[0.00101835,0.166751,0.985998]] call InitStruct; 
+['SmallBrickHouseRuins',[3832.56,3630.19,22.7529,true],0,[-0.00693114,-0.00566258,0.99996]] call InitStruct; 
+['SmallBrickHouseRuins',[3821.54,3619.19,22.8847,true],300.002,[0.00693107,0.00566265,0.99996]] call InitStruct; 
+['BigPileBurntGarbage',[3879.53,3654.79,14.378,true],[0.939693,-4.45868e-007,-0.34202],[0.34202,1.22342e-007,0.939693]] call InitStruct; 
+['BigPileBurntGarbage',[3841.86,3627.79,16.7817],270,[0,0,1]] call InitStruct; 
+['BigPileBurntGarbage',[3823.16,3597.93,22.441,true],10,[0,4.02331e-007,1]] call InitStruct; 
+['MediumDirt',[3821.24,3573.5,12.7149],265,[0,0,1]] call InitStruct; 
+['MediumPileOfLightMud',[3900.96,3653.22,2.39664],0,[0,0,1]] call InitStruct; 
+['MediumPileOfLightMud',[3839.25,3572.35,22.3529,true],0,[0,-0.0871556,0.996195]] call InitStruct; 
+['SmallGrayStone',[3823.7,3525.71,9.90506,true],315.001,[0.00693107,0.00566265,0.99996]] call InitStruct; 
+['SmallGrayStone',[3836.09,3512.51,10.0291,true],0,[0.00862475,-0.00241682,0.99996]] call InitStruct; 
+_3845_448733430_893314_65545 = ['IStruct',[3845.45,3430.89,10.9398,true],275,[0.00103552,-0.00699926,0.999975], {_thisObj setvariable ['model','ca\misc_e\dirthump02_ep1.p3d'];}] call InitStruct; // !!! realocated model !!!
+['SmallPileOfGarbageAndBoards',[3862.2,3653.91,17.781,true],0,[0.00103552,0.252047,0.967714]] call InitStruct; 
+['SmallDirtBrown',[3943.66,3637.19,5.03203],275.722,[0,0,1]] call InitStruct; 
+['SmallDirtBrown',[3844.16,3483.73,5.15305],0,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[3843.05,3452.48,5.14582],325,[0,0,1]] call InitStruct; 
+['MotherBunchOfShit',[3820.51,3556.71,22.9443,true],[1.71363e-007,-0.173647,0.984808],[0.173648,-0.969846,-0.171009]] call InitStruct; 
 ['StraightTunnelWithSideExit',[3950.6,3571.75,14.3092,true],0,[-0.00567329,0.00693103,0.99996]] call InitDecor; 
 ['StraightTunnelWithSideExit',[3998.53,3609.43,14.2462,true],90,[0.00692964,0.00567387,0.99996]] call InitDecor; 
 ['PartiallyBlockedTunnelIntersection',[3999.56,3630.97,4.70137],0,[0,0,1]] call InitDecor; 
@@ -1444,6 +1552,45 @@ _4050_391603676_8361827_62570 = ['IStruct',[4050.39,3676.84,32.6257,true],250,[0
 ['BigConcretePipe',[3969.31,3578.37,11.1802,true],31.7677,[0.00168211,-0.00699448,0.999974]] call InitStruct; 
 ['StraightTunnelWithSideExit',[3910.26,3476.69,14.2118,true],270,[-0.00692804,-0.00567354,0.99996]] call InitDecor; 
 ['StraightTunnelWithSideExit',[3910.3,3457.71,4.48154],269.998,[0,0,1]] call InitDecor; 
+['MediumPieceSuspendedPipe',[3827.82,3622.2,30.8137],100,[0,0,1]] call InitStruct; 
+['MediumPieceSuspendedPipe',[3957.12,3642.66,13.0137],275,[0,0,1]] call InitStruct; 
+['ShortPipeBlueMetal',[3836.03,3628.75,17.747],0,[0,0,1]] call InitStruct; 
+['ShortPipeBlueMetal',[3875.11,3658.61,14.0453],280,[0,0,1]] call InitStruct; 
+['ShortPipeBlueMetal',[3874.42,3654.73,14.0547],280,[0,0,1]] call InitStruct; 
+['DestroyedPipeWithValve',[3844.14,3611.36,19.3656],293.959,[0,0,1]] call InitStruct; 
+['LargeDestroyedVerticalPipe',[3840.53,3612.71,19.2886],107.686,[0,0,1]] call InitStruct; 
+['LargeDestroyedVerticalPipe',[3828.61,3627.85,18.2411],0,[0,0,1]] call InitStruct; 
+['LongDestroyedPipeWithSupportingStructure',[3837.92,3626.97,33.982,true],[-6.52472e-006,1,-2.71002e-006],[-1.20699e-006,-2.71003e-006,-1]] call InitStruct; 
+['LongDestroyedPipeWithSupportingStructure',[3839.95,3626.99,33.9893,true],[-6.52472e-006,1,-2.71002e-006],[-1.20699e-006,-2.71003e-006,-1]] call InitStruct; 
+['SmallDestroyedCornerPipe',[3831.68,3592.46,23.2525,true],0,[-0.100657,0.110938,0.988717]] call InitStruct; 
+['SmallDestroyedCornerPipe',[3878.73,3653.91,15.2498,true],0,[0.243852,-0.00693502,0.969788]] call InitStruct; 
+['MediumRuinedPipe',[3863.41,3628.23,23.6572,true],0,[-0.0261903,-0.0384703,0.998916]] call InitStruct; 
+['BigConcretePipe',[3823.44,3556.18,22.9422,true],0,[0,-0.258819,0.965926]] call InitStruct; 
+['BigConcretePipe',[3823.44,3553.37,22.1898,true],0,[0,-0.258819,0.965926]] call InitStruct; 
+['BigConcretePipe',[3823.43,3550.77,21.4807,true],0,[0,-0.258819,0.965926]] call InitStruct; 
+['BigConcretePipe',[3823.43,3547.96,20.7282,true],0,[0,-0.258819,0.965926]] call InitStruct; 
+['BigConcretePipe',[3823.45,3545.13,19.9957,true],0,[0,-0.258819,0.965926]] call InitStruct; 
+['BigConcretePipe',[3823.46,3542.32,19.2433,true],0,[0,-0.258819,0.965926]] call InitStruct; 
+['BigConcretePipe',[3823.44,3539.72,18.5341,true],0,[0,-0.258819,0.965926]] call InitStruct; 
+['BigConcretePipe',[3823.45,3536.91,17.7818,true],0,[0,-0.258819,0.965926]] call InitStruct; 
+['BigConcretePipe',[3823.53,3531.32,10.5735,true],0,[0,-0.258819,0.965926]] call InitStruct; 
+['BigConcretePipe',[3823.18,3534.41,10.5626,true],[-0.286788,0.267798,0.919803],[0.409574,-0.833686,0.370427]] call InitStruct; 
+['BigConcretePipe',[3824.84,3513.85,17.9025,true],0,[0,1.86265e-007,1]] call InitStruct; 
+['BigConcretePipe',[3824.88,3516.74,17.9068,true],0,[0,1.86265e-007,1]] call InitStruct; 
+['BigConcretePipe',[3970.81,3648.98,11.4866],0,[0,0,1]] call InitStruct; 
+['BigConcretePipe',[3970.82,3646.17,11.4943],0,[0,0,1]] call InitStruct; 
+['SmallConcretePipe',[3849.72,3632.05,25.5766,true],0,[0.00693107,0.00566264,0.99996]] call InitStruct; 
+['BigPilePipes',[3833.13,3603.61,18.341],0,[0,0,1]] call InitStruct; 
+['LongSteelPipe',[3821.19,3591.38,22.978,true],0,[0.00693107,0.00566264,0.99996]] call InitStruct; 
+['MediumSteelUpperPipe',[3863.18,3651.19,21.084,true],[0,0.992646,-0.121055],[-0.140895,0.119847,0.982744]] call InitStruct; 
+['IndustrialPipes',[3963.67,3643.39,13.2566,true],0,[0.00566271,-0.00693096,0.99996]] call InitDecor; 
+['HighMetalConstruction',[3823.38,3536.81,2.69005],0,[0,0,1]] call InitStruct; 
+['HighMetalConstruction',[3843.99,3460.44,8.97178],0,[0,0,1]] call InitStruct; 
+['HighMetalConstruction',[3842.87,3443.16,8.91756],0,[0,0,1]] call InitStruct; 
+['LongSteelPipe',[3830.84,3609.08,33.1206,true],[-0.939672,0.342046,0.00458181],[-0.00693639,-0.00566093,-0.99996]] call InitStruct; 
+['LongSteelPipe',[3831.2,3610.09,33.0127,true],[-0.939672,0.342046,0.00458181],[-0.00693639,-0.00566093,-0.99996]] call InitStruct; 
+['LongSteelPipe',[3831.05,3611.24,32.9159,true],[-0.939672,0.342046,0.00458181],[-0.00693639,-0.00566093,-0.99996]] call InitStruct; 
+['LongMetalBeams',[3847.1,3514.8,10.3892],225,[0,0,1]] call InitStruct; 
 ['ShortTurnedRails',[3967.22,3580.71,4.93735],19.9996,[0,0,1]] call InitStruct; 
 ['ShortTurnedRails',[3961.78,3573.39,4.94889],224.999,[0,0,1]] call InitStruct; 
 ['LongStraightRails',[3998.25,3589.62,5.25812],0,[0,0,1]] call InitStruct; 
@@ -1473,6 +1620,62 @@ _4050_391603676_8361827_62570 = ['IStruct',[4050.39,3676.84,32.6257,true],250,[0
 ['MediumConcreteBlockDestroyed',[3949.34,3570.49,11.1522,true],[0.0727646,0.995718,0.0570088],[-0.990511,0.0654655,0.120839]] call InitStruct; 
 ['MediumBetonWall',[3949.28,3568.41,4.93424],93.0883,[0,0,1]] call InitStruct; 
 ['SmallConcreteArch',[3909.08,3538.35,10.8165,true],0,[0.336809,0,0.941573]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[3923.52,3654.18,10.2771,true],[-0.998193,0.0600944,2.77534e-007],[-0.0120055,-0.199421,0.97984]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[3926.69,3657.74,4.93662],0,[0,0,1]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[3924.23,3657.09,4.76621],309.002,[0,0,1]] call InitStruct; 
+['SmallConcreteBlockDestyoed',[3901.9,3659.25,4.43567],0,[0,0,1]] call InitStruct; 
+['MediumConcreteWall',[3902.09,3656.26,10.4129,true],[0.645551,0.746705,-0.160301],[0.1439,0.0872117,0.985742]] call InitStruct; 
+['MediumConcreteWall',[3897.63,3660,10.2989,true],[-0.304019,0.939082,-0.160302],[0,0.168267,0.985741]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[3890.34,3659.88,13.1771,true],[-0.998193,0.0600946,2.53133e-006],[-0.0599839,-0.996356,0.060629]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[3871.67,3658.24,17.1061,true],[-0.998193,0.0600966,-5.4948e-007],[0.0140041,0.232614,0.972468]] call InitStruct; 
+['MediumBetonWall',[3861.65,3642.72,21.3017,true],[-0.910926,-0.412569,-2.88337e-006],[-0.0348314,0.0768985,0.99643]] call InitStruct; 
+['MediumConcreteWall',[3859.77,3627.44,22.6844,true],[-0.078683,0.0805195,-0.993643],[-0.293659,0.950635,0.100288]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[3839.23,3629.16,23.2473,true],[-0.998193,0.0600944,2.77534e-007],[-0.0120055,-0.199421,0.97984]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[3833.13,3630.61,23.5905,true],[-0.998193,0.0600927,-4.14532e-006],[0.0588804,0.97807,0.199781]] call InitStruct; 
+['MediumBetonWall',[3826.46,3612.41,22.7893,true],[-0.907388,0.401562,-0.124076],[-0.125089,0.0238101,0.99186]] call InitStruct; 
+['MediumBetonWall',[3907.46,3475.4,11.4637,true],350.401,[-0.0415435,-0.00381313,0.999129]] call InitStruct; 
+['MediumBetonWall',[3909.97,3474.49,11.2365,true],[-0.166758,0.985993,-0.0031708],[0.0444736,0.0107342,0.998953]] call InitStruct; 
+['MediumConcreteWall',[3909.77,3456.35,11.1107,true],[-0.304019,0.939082,-0.160302],[0,0.168267,0.985741]] call InitStruct; 
+['SmallCornerFenceMadeOfJunk',[3911.66,3487.56,5.29288],180,[0,0,1]] call InitStruct; 
+['TinBigFence',[3912.79,3486.57,5.52465],0,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3892.59,3459.09,4.92824],285,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3888.16,3459.77,4.97243],275,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3883.87,3460.7,4.94366],275,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3879.49,3460.47,4.97856],260,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3874.85,3459.25,4.93317],240,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3867.08,3454.63,4.96817],250,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3858.3,3451.73,4.96746],260,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3848.14,3450.85,4.97301],265,[0,0,1]] call InitStruct; 
+['LongRottenBoards',[3898.74,3457.86,4.95005],280,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3826.41,3515.81,13.7813,true],[-3.01992e-007,0.866027,-0.499997],[-4.39212e-006,0.499997,0.866027]] call InitStruct; 
+['ShortRottenBoards',[3831.96,3575.28,20.6966],267.782,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3831.61,3574.75,20.7427],267.782,[0,0,1]] call InitStruct; 
+['LongRottenBoards',[3824.49,3521.8,11.2758,true],0,[0,0.422618,0.906308]] call InitStruct; 
+['LongRottenBoards',[3849.81,3513.72,12.7073,true],[-0.554032,0.79124,-0.258819],[-0.148452,0.212012,0.965926]] call InitStruct; 
+['LongRottenBoards',[3849.1,3504.14,15.1249,true],[0.604023,0.719846,-0.34202],[0.219846,0.262003,0.939693]] call InitStruct; 
+['LongRottenBoards',[3835,3571.6,25.5042,true],[-0.577425,0.815149,0.0459688],[0.0265885,-0.0374991,0.998943]] call InitStruct; 
+['LongRottenBoards',[3827.8,3577.58,23.9135,true],[-0.582171,0.643834,-0.496543],[-0.287147,0.408542,0.866395]] call InitStruct; 
+['LongRottenBoards',[3827.14,3573.56,25.9453,true],[0.929521,0.364702,-0.0546143],[-0.0601726,0.296113,0.953255]] call InitStruct; 
+['LongRottenBoards',[3823.01,3573.6,25.9289,true],[-0.0351121,0.987723,-0.152216],[0.0202798,0.152983,0.988021]] call InitStruct; 
+['LongRottenBoards',[3822.77,3532.33,15.9049,true],10.1098,[0.0151341,-0.174926,0.984465]] call InitStruct; 
+['TinBigFence',[3954.25,3640.67,5.44153],260.49,[0,0,1]] call InitStruct; 
+['TinFence',[3827.46,3591.57,17.9936],14.1163,[0,0,1]] call InitStruct; 
+['TinFence',[3847.14,3630.67,18.5657],105,[0,0,1]] call InitStruct; 
+['TinFence',[3845.97,3626.85,18.4271],110,[0,0,1]] call InitStruct; 
+['TinFence',[3822.91,3615.13,23.0516],12.9334,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3831.52,3618.84,27.7375,true],[0.246049,0.918267,-0.310235],[0.0802909,0.299665,0.95066]] call InitStruct; 
+['ShortRottenBoards',[3830.57,3615.3,28.2115,true],[0.257163,0.959748,0.112919],[-0.0292275,-0.109071,0.993604]] call InitStruct; 
+['ShortRottenBoards',[3832.45,3613.55,22.957],286.667,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3832.14,3612.85,22.9662],286.667,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[3824.32,3624.02,29.3295,true],[-0.871676,-0.266809,-0.411089],[-0.437721,0.0466001,0.897902]] call InitStruct; 
+['ShortRottenBoards',[3822.87,3620.46,28.3858,true],[0.0568397,-0.979853,-0.19146],[0,-0.19177,0.98144]] call InitStruct; 
+['MediumFenceOfSheetsAndBoards',[3845.84,3461.89,5.00912],0,[0,0,1]] call InitStruct; 
+['MediumFenceOfSheetsAndBoards',[3877.27,3458.4,5.03471],250,[0,0,1]] call InitStruct; 
+['MediumFenceOfSheetsAndBoards',[3872.43,3456.09,4.96538],240,[0,0,1]] call InitStruct; 
+['MediumFenceOfSheetsAndBoards',[3847.3,3476.56,5.02999],295,[0,0,1]] call InitStruct; 
+['WoodenSmallFence',[3845.78,3465.69,5.56],270,[0,0,1]] call InitStruct; 
+_3843_730473467_708014_20435 = ['IStruct',[3843.73,3467.71,5.05303,true],355,[0.00566271,-0.00693096,0.99996], {_thisObj setvariable ['model','ca\structures\nav_boathouse\nav_boathouse_piert.p3d'];}] call InitStruct; // !!! realocated model !!!
+['SmallSteelRustyFence',[3840.73,3610.15,22.9926],290.168,[0,0,1]] call InitStruct; 
 ['SmallMushroom2',[3999.82,3690.38,18.2808,true],0,[0.288415,0,0.957505]] call InitStruct; 
 ['SmallMushroom2',[3939.04,3571.81,5.7437],0,[0,0,1]] call InitStruct; 
 ['SmallMushroom2',[3914.68,3494.72,5.46928],0,[0,0,1]] call InitStruct; 
@@ -1505,22 +1708,73 @@ _4050_391603676_8361827_62570 = ['IStruct',[4050.39,3676.84,32.6257,true],250,[0
 ['BigMushroom3',[3917.78,3509.38,5.81379],0,[0,0,1]] call InitStruct; 
 ['TreeRoots2',[4001.86,3680.62,6.91529],0,[0,0,1]] call InitStruct; 
 ['TreeRoots2',[3979.84,3583.27,4.92862],326.192,[0,0,1]] call InitStruct; 
-['CampfireBig',[3969.98,3640.99,5.02767],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3948.39,3639.66,4.94542],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3916.89,3655.28,4.98219],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3866.87,3653.88,12.478],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3862.13,3628.21,17.6183],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3835.32,3615.93,17.6232],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3823.68,3585.59,17.4754],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3828.49,3537.08,11.2747,true],0,[0,-0.173648,0.984808]] call InitStruct; 
-['CampfireBig',[3830.76,3515.68,5.09186],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3849.92,3498.01,4.9327],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3843.34,3457.11,4.88317],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3836.92,3425.8,4.87022],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3835.7,3363.13,8.24581],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3870.3,3456.34,4.9531],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3892.99,3454.81,4.84583],0,[0,0,1]] call InitStruct; 
-['CampfireBig',[3911.74,3468.6,4.83716],0,[0,0,1]] call InitStruct; 
+['SmallMushroom2',[3902.04,3456.16,5.31632],40,[0,0,1]] call InitStruct; 
+['SmallMushroom2',[3869.06,3452,5.59616],0,[0,0,1]] call InitStruct; 
+['SmallMushroom2',[3842.84,3509.24,5.20708],0,[0,0,1]] call InitStruct; 
+['SmallMushroom',[3860.74,3625.98,17.6921],0,[0,0,1]] call InitStruct; 
+['SmallMushroom',[3865.75,3644.33,21.045,true],0,[-0.819152,0,0.573576]] call InitStruct; 
+['SmallMushroom',[3925.91,3663.87,11.0093,true],0,[-0.258819,0,0.965926]] call InitStruct; 
+['SmallMushroom',[3983.25,3636.72,5.7892],0,[0,0,1]] call InitStruct; 
+['TreeRoots',[3924.57,3669.14,5.75891],0,[0,0,1]] call InitStruct; 
+['TreeRoots',[3907.93,3639.4,7.38229],0,[0,0,1]] call InitStruct; 
+['TreeRoots',[3842.93,3628.95,17.9691],0,[0,0,1]] call InitStruct; 
+['TreeRoots',[3825.74,3594.37,17.6487],0,[0,0,1]] call InitStruct; 
+['TreeRoots',[3834.99,3548.51,17.171,true],0,[0,-0.34202,0.939693]] call InitStruct; 
+['TreeRoots',[3839.39,3511.93,4.8172],0,[0,0,1]] call InitStruct; 
+['TreeRootsNoGeom',[3948.16,3640.23,12.3026],0,[0,0,1]] call InitStruct; 
+['TreeRootsNoGeom',[3876,3656.37,17.4038],0,[0,0,1]] call InitStruct; 
+['TreeRootsNoGeom',[3866.07,3450.5,11.1087],0,[0,0,1]] call InitStruct; 
+['TreeRootsNoGeom',[3852.59,3457.89,13.1256],0,[0,0,1]] call InitStruct; 
+['TreeRootsNoGeom',[3840.4,3470.11,12.766],0,[0,0,1]] call InitStruct; 
+['TreeRootsNoGeom',[3867.27,3463.93,11.2592],0,[0,0,1]] call InitStruct; 
+['TreeRootsNoGeom',[3825.03,3606.42,28.5126],0,[0,0,1]] call InitStruct; 
+['SmallMushroom4',[3853.89,3449.45,4.36961],65,[0,0,1]] call InitStruct; 
+['TreeRoots1',[3942.49,3645.32,3.06672],0,[0,0,1]] call InitStruct; 
+['TreeRoots1',[3892.26,3660.78,4.32702],0,[0,0,1]] call InitStruct; 
+['TreeRoots1',[3850.62,3462.73,3.16467],0,[0,0,1]] call InitStruct; 
+['BigMushroom7',[3849.69,3485.21,5.62583],0,[0,0,1]] call InitStruct; 
+['BigMushroom2',[3832.65,3578.05,18.0237],0,[0,0,1]] call InitStruct; 
+['BigMushroom1',[3902.47,3453.38,2.94223],35,[0,0,1]] call InitStruct; 
+['BigMushroom9',[3907.78,3666.16,2.11032],155,[0,0,1]] call InitStruct; 
+['SmallMushroom3',[3873.72,3452.71,5.3113],0,[0,0,1]] call InitStruct; 
+['SmallMushroom3',[3836.75,3543.79,18.6682,true],[-0.258819,0.965926,4.06329e-010],[-0.965926,-0.258819,3.08638e-009]] call InitStruct; 
+['BigMushroom6',[3876.28,3654.22,7.81354],0,[0,0,1]] call InitStruct; 
+['SmallMushroom1',[3896.04,3463.09,12.2699,true],0,[0,-0.258819,0.965926]] call InitStruct; 
+['SmallMushroom1',[3851.58,3502.6,14.4308,true],358.246,[-0.17101,-0.173648,0.969846]] call InitStruct; 
+['SmallMushroom1',[3837.23,3627.08,17.9727],0,[0,0,1]] call InitStruct; 
+['SmallMushroom1',[3925.78,3654.12,11.7088,true],0,[-0.766044,0,0.642788]] call InitStruct; 
+['SmallMushroom1',[3849.09,3517.86,6.56321],0,[0,0,1]] call InitStruct; 
+['BigMushroom5',[3833.97,3535.7,7.67811],0,[0,0,1]] call InitStruct; 
+['BigMushroom',[3823.03,3602.98,15.1895],0,[0,0,1]] call InitStruct; 
+['BigMushroom3',[3828.42,3552.11,12.2828],0,[0,0,1]] call InitStruct; 
+['BarrelCampfireBig',[4005.46,3567.66,5.80511],0,[0,0,1]] call InitStruct; 
+['BarrelCampfireBig',[3863.95,3452.28,4.95455],0,[0,0,1]] call InitStruct; 
+['BarrelCampfireBig',[3842.47,3444.89,4.94707],0,[0,0,1]] call InitStruct; 
+['BarrelCampfireBig',[3825.67,3576.61,17.8405],0,[0,0,1]] call InitStruct; 
+['BarrelCampfireBig',[3831.88,3606.17,18.3382],0,[0,0,1]] call InitStruct; 
+['BarrelCampfireBig',[3944.12,3640.14,4.94443],0,[0,0,1]] call InitStruct; 
+['CampfireDisabled',[3999.92,3694.12,17.6977,true],0,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
+['CampfireDisabled',[4002.18,3672.35,12.9043,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['CampfireDisabled',[3984.02,3671.1,9.94488,true],0,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
+['CampfireDisabled',[3971.23,3639.88,10.0563,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['CampfireDisabled',[3999.7,3608.5,10.3775,true],0,[0.00676562,0.00566265,0.999961]] call InitStruct; 
+['CampfireDisabled',[3974.55,3578.03,11.0687,true],0,[0.00218326,0.0042707,0.999988]] call InitStruct; 
+['CampfireDisabled',[3916.53,3558.86,11.2135,true],0,[-0.0243634,0.0211301,0.99948]] call InitStruct; 
+['CampfireDisabled',[3914.74,3520.81,10.0747,true],0,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
+['CampfireDisabled',[3902.51,3514.54,10.4016],0,[0,0,1]] call InitStruct; 
+['CampfireDisabled',[3914.54,3490.66,10.0749,true],0,[-0.0069996,-0.00103549,0.999975]] call InitStruct; 
+['CampfireDisabled',[3908.98,3470.23,10.2289,true],0,[-0.00675697,-0.00566258,0.999961]] call InitStruct; 
+['CampfireDisabled',[3892.88,3454.67,10.0627,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['CampfireDisabled',[3852.24,3486.65,10.0621,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['CampfireDisabled',[3854.09,3508.35,13.8827,true],0,[0.00253707,0.0105855,0.999941]] call InitStruct; 
+['CampfireDisabled',[3829.4,3514.79,10.0262,true],0,[0.00693107,0.00566264,0.99996]] call InitStruct; 
+['CampfireDisabled',[3833.3,3539.03,11.4515,true],0,[0.00103552,-0.180541,0.983567]] call InitStruct; 
+['CampfireDisabled',[3829.95,3622.56,20.3913],0,[0,0,1]] call InitStruct; 
+['CampfireDisabled',[3861.77,3629.96,22.7084,true],0,[0.00693107,0.00566264,0.99996]] call InitStruct; 
+['CampfireDisabled',[3880.08,3656.07,14.621,true],0,[0.264291,-0.00692882,0.964418]] call InitStruct; 
+['CampfireDisabled',[3909.81,3651.81,14.2159,true],0,[-0.00996488,-0.0312427,0.999462]] call InitStruct; 
+['BlackSmallStove',[3917.25,3658.02,5.24198],20,[0,0,1], {_thisObj setvariable ['lightisenabled',false];}] call InitStruct; 
+['SteelDoorThinSmall',[3932.48,3642.05,6.29158],336.255,[0,0,1]] call InitStruct; 
 _3965_197513732_835457_81252 = ['EffectAsStruct',[3965.2,3732.84,7.81252],0,[0,0,1]] call InitStruct; // Effect
 _3965_181883720_864267_80771 = ['EffectAsStruct',[3965.18,3720.86,7.80771],0,[0,0,1]] call InitStruct; // Effect
 _3977_166993732_826907_73271 = ['EffectAsStruct',[3977.17,3732.83,7.73271],0,[0,0,1]] call InitStruct; // Effect
@@ -1536,11 +1790,38 @@ _3973_165283578_601076_14499 = ['EffectAsStruct',[3973.17,3578.6,6.14499],0,[0,0
 _3919_745613562_655526_32535 = ['EffectAsStruct',[3919.75,3562.66,6.32535],0,[0,0,1]] call InitStruct; // Effect
 _3916_299073501_421396_64944 = ['EffectAsStruct',[3916.3,3501.42,6.64944],0,[0,0,1]] call InitStruct; // Effect
 _3900_101323523_656986_15879 = ['EffectAsStruct',[3900.1,3523.66,6.15879],0,[0,0,1]] call InitStruct; // Effect
-['EffectAsStruct',[3931.88,3570.62,5.74742],0,[0,0,1]] call InitStruct; // Effect
-['EffectAsStruct',[3911.51,3545.9,6.80209],0,[0,0,1]] call InitStruct; // Effect
-['EffectAsStruct',[3996.66,3607.29,5.73553],0,[0,0,1]] call InitStruct; // Effect
-['EffectAsStruct',[3981.77,3668.83,6.13023],0,[0,0,1]] call InitStruct; // Effect
+_3931_882813570_623785_74742 = ['EffectAsStruct',[3931.88,3570.62,5.74742],0,[0,0,1]] call InitStruct; // Effect
+_3911_507083545_903086_80209 = ['EffectAsStruct',[3911.51,3545.9,6.80209],0,[0,0,1]] call InitStruct; // Effect
+_3996_659913607_289065_73553 = ['EffectAsStruct',[3996.66,3607.29,5.73553],0,[0,0,1]] call InitStruct; // Effect
+_3981_772713668_831306_13023 = ['EffectAsStruct',[3981.77,3668.83,6.13023],0,[0,0,1]] call InitStruct; // Effect
 _4036_886233759_9714416_22865 = ['EffectAsStruct',[4036.89,3759.97,16.2286],0,[0,0,1]] call InitStruct; // Effect
+_3924_133543665_698245_21644 = ['EffectAsStruct',[3924.13,3665.7,5.21644],0,[0,0,1]] call InitStruct; // Effect
+_3924_059813653_767585_14141 = ['EffectAsStruct',[3924.06,3653.77,5.14141],0,[0,0,1]] call InitStruct; // Effect
+_3912_008303653_581055_48118 = ['EffectAsStruct',[3912.01,3653.58,5.48118],0,[0,0,1]] call InitStruct; // Effect
+_3912_190433665_652105_22513 = ['EffectAsStruct',[3912.19,3665.65,5.22513],0,[0,0,1]] call InitStruct; // Effect
+_3862_268313629_2539117_79409 = ['EffectAsStruct',[3862.27,3629.25,17.7941],0,[0,0,1]] call InitStruct; // Effect
+_3849_989263628_9711917_79818 = ['EffectAsStruct',[3849.99,3628.97,17.7982],0,[0,0,1]] call InitStruct; // Effect
+_3837_896003629_0690918_41556 = ['EffectAsStruct',[3837.9,3629.07,18.4156],0,[0,0,1]] call InitStruct; // Effect
+_3837_969733617_1845717_85803 = ['EffectAsStruct',[3837.97,3617.18,17.858],0,[0,0,1]] call InitStruct; // Effect
+_3826_423583609_9062517_82038 = ['EffectAsStruct',[3826.42,3609.91,17.8204],0,[0,0,1]] call InitStruct; // Effect
+_3823_632813595_1154817_91390 = ['EffectAsStruct',[3823.63,3595.12,17.9139],0,[0,0,1]] call InitStruct; // Effect
+_3827_700683578_2312018_63560 = ['EffectAsStruct',[3827.7,3578.23,18.6356],0,[0,0,1]] call InitStruct; // Effect
+_3832_325443562_4521514_98184 = ['EffectAsStruct',[3832.33,3562.45,21.8612,true],0,[0,-0.34202,0.939693]] call InitStruct; // Effect
+_3832_510503548_191899_97620 = ['EffectAsStruct',[3832.51,3548.19,16.8556,true],0,[0,-0.34202,0.939693]] call InitStruct; // Effect
+_3828_284673531_277595_15473 = ['EffectAsStruct',[3828.28,3531.28,5.15473],0,[0,0,1]] call InitStruct; // Effect
+_3836_959473515_478525_06149 = ['EffectAsStruct',[3836.96,3515.48,5.06149],0,[0,0,1]] call InitStruct; // Effect
+_3846_974123495_141365_19740 = ['EffectAsStruct',[3846.97,3495.14,5.1974],0,[0,0,1]] call InitStruct; // Effect
+_3847_317873506_382325_22018 = ['EffectAsStruct',[3847.32,3506.38,5.22018],0,[0,0,1]] call InitStruct; // Effect
+_3843_848143478_156495_93085 = ['EffectAsStruct',[3843.85,3478.16,5.93085],0,[0,0,1]] call InitStruct; // Effect
+_3844_190193462_010745_81703 = ['EffectAsStruct',[3844.19,3462.01,5.81703],0,[0,0,1]] call InitStruct; // Effect
+_3844_722663448_591065_23680 = ['EffectAsStruct',[3844.72,3448.59,5.2368],0,[0,0,1]] call InitStruct; // Effect
+_3861_765143452_163575_09419 = ['EffectAsStruct',[3861.77,3452.16,5.09419],0,[0,0,1]] call InitStruct; // Effect
+_3883_337403460_948005_04392 = ['EffectAsStruct',[3883.34,3460.95,5.04392],0,[0,0,1]] call InitStruct; // Effect
+_3904_483153457_378915_54688 = ['EffectAsStruct',[3904.48,3457.38,5.54688],0,[0,0,1]] call InitStruct; // Effect
+_3911_285893477_848395_12250 = ['EffectAsStruct',[3911.29,3477.85,5.1225],0,[0,0,1]] call InitStruct; // Effect
+_3972_326423641_126955_07805 = ['EffectAsStruct',[3972.33,3641.13,5.07805],0,[0,0,1]] call InitStruct; // Effect
+_3985_551513633_121835_66607 = ['EffectAsStruct',[3985.55,3633.12,5.66607],0,[0,0,1]] call InitStruct; // Effect
+_3977_880133589_241215_35786 = ['EffectAsStruct',[3977.88,3589.24,5.35786],0,[0,0,1]] call InitStruct; // Effect
 _4282_083983701_7395031_68367 = ['IStruct',[4282.08,3701.74,31.6837],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\civ\belltowers\belltower_01_v2_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4281_857913694_4445830_10473 = ['IStruct',[4281.86,3694.44,30.1047],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\slum\slum_house02_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4282_750003687_7500030_00000 = ['IStruct',[4282.75,3687.75,30],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\stalker_props\kosterchik.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -1682,16 +1963,8 @@ _4280_664063713_8776929_97654 = ['IStruct',[4280.66,3713.88,35.6115,true],0,[0.0
 _4284_702153712_1843329_92508 = ['IStruct',[4284.7,3712.18,35.0017,true],0,[0.00566319,-0.00693144,0.99996], {_thisObj setvariable ['model','apalon\metro_a3\redgates\concrete_slub2.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4279_691893720_6335429_99363 = ['IStruct',[4279.69,3720.63,35.1823,true],0,[-0.0069996,-0.00103597,0.999975], {_thisObj setvariable ['model','ml_shabut\exoduss\concreteplat.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4293_087403692_0029331_14708 = ['IStruct',[4293.09,3692,36.1471,true],0,[0.00566271,-0.00693001,0.99996], {_thisObj setvariable ['model','ca\misc2\skeetmachine\skeetdisk.p3d'];}] call InitStruct; // !!! realocated model !!!
-['BigBrickHouseRuins',[3907.95,3637.78,11.2887,true],180,[0.00103552,-0.00699926,0.999975]] call InitDecor; 
-_3914_755133654_364264_91203 = ['IStruct',[3914.76,3654.36,14.7558,true],202.237,[0.00161964,-0.00659681,0.999977], {_thisObj setvariable ['model','a3\structures_f_enoch\ruins\houseruin_big_03_f.p3d'];}] call InitStruct; // !!! realocated model !!!
-['BigPileBurntGarbage',[3929.05,3673.86,12.0813,true],358.544,[-0.151967,-0.162864,0.974875]] call InitStruct; 
-['MediumJunkShed',[3916.71,3667.8,4.63115],182.778,[0,0,1]] call InitStruct; 
-['BigDestroyedLightConcreteBuilding',[3907.11,3668.95,4.98276],100.397,[0,0,1]] call InitDecor; 
-['SmallRuinedLightBrickBuilding',[3902.27,3647.12,4.99426],235.288,[0,0,1]] call InitDecor; 
-['SmallRuinedWoodenBuilding',[3908.16,3639.51,7.02163],199.389,[0,0,1]] call InitDecor; 
-['SmallRuinedBellTower',[3918.72,3639.69,5.04572],346.138,[0,0,1]] call InitDecor; 
-['MediumBrickHouseRuins',[3902.98,3662.7,4.16412],342.715,[0,0,1]] call InitDecor; 
-['BigDestroyedRedConcreteBuilding',[3927.65,3644.55,5.97278],333.2,[0,0,1]] call InitDecor; 
+_3850_382083359_410168_35477 = ['IStruct',[3850.38,3359.41,8.35477],90,[0,0,1], {_thisObj setvariable ['model','ml_exodusnew\stalker_tun\radar1_enoch.p3d'];}] call InitStruct; // !!! realocated model !!!
+_3825_358893369_960948_92231 = ['IStruct',[3825.36,3369.96,18.1189,true],0,[0.00566319,-0.00693144,0.99996], {_thisObj setvariable ['model','ml_exodusnew\stalker_tun\radarkitchen.p3d'];}] call InitStruct; // !!! realocated model !!!
 
 
 
@@ -1770,8 +2043,101 @@ if (!isNil'_3916_299073501_421396_64944') then {
 if (!isNil'_3900_101323523_656986_15879') then {
 	[_3900_101323523_656986_15879,"dust_clouds_10m"] call (_3900_101323523_656986_15879 getvariable 'proto' getvariable 'setEffectType');
 };
+if (!isNil'_3931_882813570_623785_74742') then {
+	[_3931_882813570_623785_74742,"dust_clouds_10m"] call (_3931_882813570_623785_74742 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3911_507083545_903086_80209') then {
+	[_3911_507083545_903086_80209,"dust_clouds_10m"] call (_3911_507083545_903086_80209 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3996_659913607_289065_73553') then {
+	[_3996_659913607_289065_73553,"dust_clouds_10m"] call (_3996_659913607_289065_73553 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3981_772713668_831306_13023') then {
+	[_3981_772713668_831306_13023,"dust_clouds_10m"] call (_3981_772713668_831306_13023 getvariable 'proto' getvariable 'setEffectType');
+};
 if (!isNil'_4036_886233759_9714416_22865') then {
 	[_4036_886233759_9714416_22865,"dust_clouds_10m"] call (_4036_886233759_9714416_22865 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3924_133543665_698245_21644') then {
+	[_3924_133543665_698245_21644,"dust_clouds_10m"] call (_3924_133543665_698245_21644 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3924_059813653_767585_14141') then {
+	[_3924_059813653_767585_14141,"dust_clouds_10m"] call (_3924_059813653_767585_14141 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3912_008303653_581055_48118') then {
+	[_3912_008303653_581055_48118,"dust_clouds_10m"] call (_3912_008303653_581055_48118 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3912_190433665_652105_22513') then {
+	[_3912_190433665_652105_22513,"dust_clouds_10m"] call (_3912_190433665_652105_22513 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3862_268313629_2539117_79409') then {
+	[_3862_268313629_2539117_79409,"dust_clouds_10m"] call (_3862_268313629_2539117_79409 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3849_989263628_9711917_79818') then {
+	[_3849_989263628_9711917_79818,"dust_clouds_10m"] call (_3849_989263628_9711917_79818 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3837_896003629_0690918_41556') then {
+	[_3837_896003629_0690918_41556,"dust_clouds_10m"] call (_3837_896003629_0690918_41556 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3837_969733617_1845717_85803') then {
+	[_3837_969733617_1845717_85803,"dust_clouds_10m"] call (_3837_969733617_1845717_85803 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3826_423583609_9062517_82038') then {
+	[_3826_423583609_9062517_82038,"dust_clouds_10m"] call (_3826_423583609_9062517_82038 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3823_632813595_1154817_91390') then {
+	[_3823_632813595_1154817_91390,"dust_clouds_10m"] call (_3823_632813595_1154817_91390 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3827_700683578_2312018_63560') then {
+	[_3827_700683578_2312018_63560,"dust_clouds_10m"] call (_3827_700683578_2312018_63560 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3832_325443562_4521514_98184') then {
+	[_3832_325443562_4521514_98184,"dust_clouds_10m"] call (_3832_325443562_4521514_98184 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3832_510503548_191899_97620') then {
+	[_3832_510503548_191899_97620,"dust_clouds_10m"] call (_3832_510503548_191899_97620 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3828_284673531_277595_15473') then {
+	[_3828_284673531_277595_15473,"dust_clouds_10m"] call (_3828_284673531_277595_15473 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3836_959473515_478525_06149') then {
+	[_3836_959473515_478525_06149,"dust_clouds_10m"] call (_3836_959473515_478525_06149 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3846_974123495_141365_19740') then {
+	[_3846_974123495_141365_19740,"dust_clouds_10m"] call (_3846_974123495_141365_19740 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3847_317873506_382325_22018') then {
+	[_3847_317873506_382325_22018,"dust_clouds_10m"] call (_3847_317873506_382325_22018 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3843_848143478_156495_93085') then {
+	[_3843_848143478_156495_93085,"dust_clouds_10m"] call (_3843_848143478_156495_93085 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3844_190193462_010745_81703') then {
+	[_3844_190193462_010745_81703,"dust_clouds_10m"] call (_3844_190193462_010745_81703 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3844_722663448_591065_23680') then {
+	[_3844_722663448_591065_23680,"dust_clouds_10m"] call (_3844_722663448_591065_23680 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3861_765143452_163575_09419') then {
+	[_3861_765143452_163575_09419,"dust_clouds_10m"] call (_3861_765143452_163575_09419 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3883_337403460_948005_04392') then {
+	[_3883_337403460_948005_04392,"dust_clouds_10m"] call (_3883_337403460_948005_04392 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3904_483153457_378915_54688') then {
+	[_3904_483153457_378915_54688,"dust_clouds_10m"] call (_3904_483153457_378915_54688 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3911_285893477_848395_12250') then {
+	[_3911_285893477_848395_12250,"dust_clouds_10m"] call (_3911_285893477_848395_12250 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3972_326423641_126955_07805') then {
+	[_3972_326423641_126955_07805,"dust_clouds_10m"] call (_3972_326423641_126955_07805 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3985_551513633_121835_66607') then {
+	[_3985_551513633_121835_66607,"dust_clouds_10m"] call (_3985_551513633_121835_66607 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3977_880133589_241215_35786') then {
+	[_3977_880133589_241215_35786,"dust_clouds_10m"] call (_3977_880133589_241215_35786 getvariable 'proto' getvariable 'setEffectType');
 };
 if (!isNil'_4280_500003684_5000030_00000') then {
 	[_4280_500003684_5000030_00000,go_editor_globalRefs get 'StreetLampEnabled G:80hjW+sfXjs'] call (_4280_500003684_5000030_00000 getvariable 'proto' getvariable 'addConnection');
