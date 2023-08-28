@@ -104,8 +104,8 @@ class(GameObject) extends(ManagedObject)
 	getter_func(canUseAsCraftSpace,false);//для пукнта в verb-меню (позволяет открывать крафт от этого объекта)
 	getter_func(getAllowedCraftCategories,[]); //доступные категории для крафт меню
 
-	editor_attribute("EditorVisible" arg "type:float" arg "range:0:999999")
-	editor_attribute("Tooltip" arg "Вес объекта в граммах")
+	editor_attribute("EditorVisible" arg "custom_provider:weight")
+	editor_attribute("Tooltip" arg "Вес объекта в граммах или килограммах")
 	var(weight,gramm(1000));//вес в граммах
 
 	editor_attribute("ReadOnly")

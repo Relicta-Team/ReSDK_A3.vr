@@ -11,6 +11,9 @@ init_function(sim_initialize)
 
 	// vec2: pos, dir
 	sim_internal_lastCachedTransform = [[0,0,0],0];
+
+	sim_internal_preload_flags = [];
+	sim_internal_preload_props = [];
 }
 
 function(sim_openMapSelector)
@@ -77,6 +80,18 @@ function(sim_onStartFromSelectedMode)
 	};
 }
 
+function(sim_addSDKProp)
+{
+	params ["_key","_value"];
+	sim_internal_preload_props pushBack [_key,_value];
+}
+
+function(sim_addSDKFlag)
+{
+	params ["_flag"];
+	sim_internal_preload_flags pushBack _flag;
+}
+
 function(sim_startSimFromCache)
 {
 	private _cache = call editorDebug_getPlayerSettings;
@@ -124,6 +139,19 @@ function(sim_internal_processLaunchSim)
 	if (cfg_sim_startWithLogVars) then {
 		__systemFlags pushBack "enableLogVars";
 	};
+
+	{
+		__systemFlags pushBackUnique _x;
+	} foreach sim_internal_preload_flags;
+
+	{
+		_x params ["_key","_val"];
+		if (_key in __sdkProps) then {
+			__sdkProps set [__sdkProps findif {_key == (_x select 0)},_val];
+		} else {
+			__sdkProps pushBack _x;
+		};
+	} foreach sim_internal_preload_props;
 
 	[__systemFlags,__sdkProps] call sim_applySDKConfig;
 

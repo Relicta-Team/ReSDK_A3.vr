@@ -279,6 +279,7 @@ class(BasicRole) extends(object) attribute(Role)
 			private _cache = call editorDebug_getPlayerSettings;
 			if ("pos" in _cache) then {_spawnPos = _cache get "pos"};
 			if ("dir" in _cache) then {_spawnDir = _cache get "dir"};
+			assert(not_equals(_spawnPos,vec3(0,0,0)));
 			_canPostConnectTo = false; //drop postconnect
 		};
 
@@ -487,6 +488,17 @@ class(BasicRole_SimulationReSDK) extends(BasicRole)
 	func(getEquipment)
 	{
 		objParams_1(_mob);
+		private _sdkProp = ["currentRoleEquip",""] call sdk_getPropertyValue;
+		if (_sdkProp == "") exitwith {};
+
+		private _roleType = typeGetFromString(_sdkProp);
+		
+		assert(!isNullReference(_roleType));
+		private _hasMethodGetEquipment = typeHasVar(_roleType,getEquipment);
+		assert(_hasMethodGetEquipment);
+
+		private _method = typeGetVar(_roleType,getEquipment);
+		[this,_mob] call _method;
 	};
 
 	func(onDeadBasic)
