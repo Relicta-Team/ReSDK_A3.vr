@@ -7,6 +7,7 @@
 #include "..\..\..\oop.hpp"
 #include "..\..\GameConstants.hpp"
 
+editor_attribute("InterfaceClass")
 class(Money) extends(Stack)
 	var(stackMaxAmount,10);
 	var(name,"Деньги");
@@ -27,7 +28,8 @@ class(Zvak) extends(Money)
 	//var(weight,gramm(1000));
 	
 	getter_func(getDropSound,"dropping\drop_small");
-	
+	getter_func(canDisentegrate,true);
+
 endclass
 
 class(Bryak) extends(Zvak)
@@ -47,4 +49,6 @@ class(Tooth) extends(Stack)
 	var(stackMaxAmount,10);
 	var(size,ITEM_SIZE_TINY);
 	var(weight,gramm(3));
+
+	getter_func(canDisentegrate,true);
 endclass
