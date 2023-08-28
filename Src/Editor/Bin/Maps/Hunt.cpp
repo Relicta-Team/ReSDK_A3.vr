@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=200;
+		nextID=201;
 	};
 	class Camera
 	{
-		pos[]={3980.7007,17.428726,4028.4473};
-		dir[]={0.92088079,-0.36983642,0.12328751};
-		up[]={0.36656591,0.92909688,0.049075842};
-		aside[]={0.13269608,0,-0.99115694};
+		pos[]={4007.0503,20.76198,3996.3416};
+		dir[]={0.72157151,-0.40572938,-0.56100774};
+		up[]={0.32031158,0.91399199,-0.24903616};
+		aside[]={-0.61379892,-1.0151416e-007,-0.78947175};
 	};
 };
 binarizationWanted=0;
@@ -503,7 +503,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""layer_nameToPtr"",createHashMapFromArray[[""Spawn points"",2718]]],[""missionName"",""Hunt""],[""version"",2],[""layer_ptrToName"",createHashMapFromArray[[2718,""Spawn points""]]]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""missionName"",""Hunt""],[""version"",4]]}";
 			};
 			id=2205;
 			type="Land_Orange_01_F";
@@ -7258,7 +7258,7 @@ class Mission
 			};
 			id=2703;
 			type="land_matrassych";
-			atlOffset=10.072842;
+			atlOffset=10.072841;
 		};
 		class Item403
 		{
@@ -7442,7 +7442,7 @@ class Mission
 					};
 					id=2736;
 					type="VR_3DSelector_01_default_F";
-					atlOffset=9.7489357;
+					atlOffset=9.7489347;
 				};
 				class Item3
 				{
@@ -7450,7 +7450,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={4078.1086,17.018187,4004.4558};
-						angles[]={0,4.6916895,-0};
+						angles[]={0,4.6916895,0};
 					};
 					side="Empty";
 					flags=5;
@@ -7626,7 +7626,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4048.8708,17.169025,4005.1367};
-				angles[]={0,4.7431431,-0};
+				angles[]={0,4.7431431,0};
 			};
 			side="Empty";
 			flags=1;
@@ -7644,7 +7644,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4054.2188,17.148643,4005.9814};
-				angles[]={0,3.2459037,-0};
+				angles[]={0,3.2459037,0};
 			};
 			side="Empty";
 			flags=5;

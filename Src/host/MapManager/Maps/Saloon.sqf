@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: 1.12';__metaInfoVersion__ = 3;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.13';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -740,15 +740,6 @@ _3469_060063606_0300319_49300 = ['Tumbler',[3469.06,3606.03,19.493],268.455,[0,0
 }] call InitStruct; 
 _3469_070073605_0400419_49530 = ['Tumbler',[3469.07,3605.04,19.4953],268.455,[0,0,1], {go_editor_globalRefs set ['_sw_barsign',_thisObj];
 }] call InitStruct; 
-_3476_399903607_5400418_39600 = ['SugarShaker',[3476.4,3607.54,18.396],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3476_300053607_0500518_39340 = ['SaltShaker',[3476.3,3607.05,18.3934],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3476_310063606_6001018_39130 = ['SaltShaker',[3476.31,3606.6,18.3913],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3476_379883607_9199218_38870 = ['SugarShaker',[3476.38,3607.92,18.3887],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3476_300053606_8300818_39350 = ['SaltShaker',[3476.3,3606.83,18.3935],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3476_110113608_1899418_40230 = ['PepperShaker',[3476.11,3608.19,18.4023],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3476_199953607_6398918_40520 = ['PepperShaker',[3476.2,3607.64,18.4052],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3476_300053607_2399918_39570 = ['PepperShaker',[3476.3,3607.24,18.3957],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3476_360113608_3898918_38870 = ['SugarShaker',[3476.36,3608.39,18.3887],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
 _3471_679933611_3501018_54710 = ['SpirtBottle',[3471.68,3611.35,18.5471],0,[0,0,1]] call InitItem; 
 _3476_320073602_8701219_10260 = if ((random 1) < 0.5) then {
 	['SpirtBottle',[3476.32,3602.87,19.1026],3.9811,[0,0,1]] call InitItem; 
@@ -1347,6 +1338,15 @@ _3473_259523612_1315912_30964 = ['Decor',[3473.26,3612.13,12.3096],180.148,[0,0,
 ['BlockBrick',[3412.11,3647.8,17.7291],0,[0,0,1]] call InitDecor; 
 ['SmallTrashCan',[3424.39,3659.56,17.739],180.03,[0,0,1]] call InitStruct; 
 ['SmallTrashCan',[3425.67,3653.76,17.7352],178.655,[0,0,1]] call InitStruct; 
+['SugarShaker',[3476.4,3607.54,18.4016],0,[0,0,1]] call InitItem; 
+['SaltShaker',[3476.3,3607.05,18.3977],0,[0,0,1]] call InitItem; 
+['SaltShaker',[3476.31,3606.6,18.3952],0,[0,0,1]] call InitItem; 
+['SugarShaker',[3476.38,3607.92,18.3951],0,[0,0,1]] call InitItem; 
+['SaltShaker',[3476.3,3606.83,18.3935],0,[0,0,1]] call InitItem; 
+['PepperShaker',[3476.11,3608.19,18.4036],0,[0,0,1]] call InitItem; 
+['PepperShaker',[3476.2,3607.64,18.3977],0,[0,0,1]] call InitItem; 
+['PepperShaker',[3476.3,3607.24,18.4005],0,[0,0,1]] call InitItem; 
+['SugarShaker',[3476.36,3608.39,18.3942],0,[0,0,1]] call InitItem; 
 
 
 

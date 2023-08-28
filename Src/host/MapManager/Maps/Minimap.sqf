@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: 1.12';__metaInfoVersion__ = 3;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.13';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -1223,12 +1223,6 @@ _3833_929933775_6201223_71320 = ['RedButton',[3833.93,3775.62,28.7161,true],[-0.
 }] call InitStruct; 
 _3833_610113775_6499023_71370 = ['RedButton',[3833.61,3775.65,28.7166,true],[-0.9972,0.0747762,-6.62869e-006],[0.0744738,0.993176,0.0897535], {go_editor_globalRefs set ['_sw_barvip',_thisObj];
 }] call InitStruct; 
-_3837_479983775_4599623_05290 = ['SugarShaker',[3837.48,3775.46,23.0529],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3837_379883775_2700223_05210 = ['SaltShaker',[3837.38,3775.27,23.0521],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3837_510013775_1298823_06530 = ['PepperShaker',[3837.51,3775.13,23.0653],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3837_379883775_4499523_05680 = ['SugarShaker',[3837.38,3775.45,23.0568],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3837_510013775_2800323_04660 = ['SaltShaker',[3837.51,3775.28,23.0466],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
-_3837_399903775_1298823_06600 = ['PepperShaker',[3837.4,3775.13,23.066],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\eft\ibuprofenka.p3d'];}] call InitItem; // !!! realocated model !!!
 ['SpirtBottle',[3836.23,3775.16,23.5811],0,[0,0,1]] call InitItem; 
 ['SpirtBottle',[3836.2,3774.51,23.2842],0,[0,0,1]] call InitItem; 
 ['SpirtBottle',[3836.22,3774.06,23.2812],0,[0,0,1]] call InitItem; 
@@ -2730,6 +2724,12 @@ _3830_880623777_7851622_22951 = ['Decor',[3830.88,3777.79,22.2295],273.303,[0,0,
 ['ChestCabinet',[3827.44,3776.12,22.4165],89.4882,[0,0,1]] call InitStruct; 
 ['WoodenChair',[3828.79,3772.52,22.4822],178.082,[0,0,1]] call InitItem; 
 ['BigSteelGrating',[3822.1,3779.12,25.1704],0,[0,0,1]] call InitStruct; 
+['SugarShaker',[3837.48,3775.46,23.065],0,[0,0,1]] call InitItem; 
+['SaltShaker',[3837.38,3775.27,23.0626],0,[0,0,1]] call InitItem; 
+['PepperShaker',[3837.51,3775.13,23.0635],0,[0,0,1]] call InitItem; 
+['SugarShaker',[3837.38,3775.45,23.0651],0,[0,0,1]] call InitItem; 
+['SaltShaker',[3837.51,3775.28,23.0628],0,[0,0,1]] call InitItem; 
+['PepperShaker',[3837.4,3775.13,23.0633],0,[0,0,1]] call InitItem; 
 
 
 
