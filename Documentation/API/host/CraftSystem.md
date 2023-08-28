@@ -204,30 +204,6 @@ Replaced value:
 3
 ```
 File: [host\CraftSystem\Craft.hpp at line 27](../../../Src/host/CraftSystem/Craft.hpp#L27)
-## CRAFT_USING_TYPE_NAMESPACE(var)
-
-Type: constant
-
-Description: 
-- Param: var
-
-Replaced value:
-```sqf
-var##_crft
-```
-File: [host\CraftSystem\Craft.hpp at line 30](../../../Src/host/CraftSystem/Craft.hpp#L30)
-## CRAFT_USING_TYPE_NAMESPACE_STR(var)
-
-Type: constant
-
-Description: 
-- Param: var
-
-Replaced value:
-```sqf
-'var##_crft'
-```
-File: [host\CraftSystem\Craft.hpp at line 31](../../../Src/host/CraftSystem/Craft.hpp#L31)
 # Craft.sqf
 
 ## craft_trycraft_debug_flag

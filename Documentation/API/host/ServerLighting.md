@@ -160,7 +160,21 @@ Initial value:
 ```sqf
 createHashMapFromArray [...
 ```
-File: [host\ServerLighting\ServerLighting_init.sqf at line 88](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L88)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 90](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L90)
+## slt_const_dummyMob
+
+Type: Variable
+
+> Exists if **__VM_VALIDATE** not defined
+
+Description: 
+
+
+Initial value:
+```sqf
+[10,10,0] call gm_createMob
+```
+File: [host\ServerLighting\ServerLighting_init.sqf at line 131](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L131)
 ## type
 
 Type: function
@@ -184,7 +198,7 @@ Type: function
 Description: 
 
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 77](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L77)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 79](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L79)
 ## slt_create
 
 Type: function
@@ -195,7 +209,7 @@ Description:
 - Param: _autolink (optional, default true)
 - Param: _select (optional, default "")
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 129](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L129)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 134](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L134)
 ## slt_destr
 
 Type: function
@@ -203,7 +217,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 154](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L154)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 159](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L159)
 ## slt_destr_impl
 
 Type: function
@@ -211,7 +225,7 @@ Type: function
 Description: real impl of destroy server light
 - Param: _o
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 162](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L162)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 167](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L167)
 ## slt_scriptCfg_doSorting
 
 Type: function
@@ -219,4 +233,4 @@ Type: function
 Description: фикс из le_se_doSorting с доп.оптимизацией
 
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 172](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L172)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 177](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L177)
