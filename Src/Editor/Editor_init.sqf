@@ -81,7 +81,7 @@
 //Строковое название версии. Пишется в пользовательском интерфейсе редактора
 Core_version_name = "1.12";
 //Номер версии сборки редактора. Используется в бинарных файлах карт.
-Core_version_number = 3;
+Core_version_number = 4;
 
 Editor_enableAutoloadGOLIB = true;
 

@@ -364,9 +364,10 @@ function(golib_validateVersion)
 	};
 
 	["Start update version from %1 to %2",_curVers,Core_version_number] call printLog;
-
+	private _calledOnceFlag = false;
 	while {_curVers < Core_version_number} do {
 		_newVers = _curVers + 1;
+		_calledOnceFlag = false;
 		{
 			[_x,_newVers] call golib_internal_handleVersionUpdate;
 		} foreach (all3DENEntities select 0);
@@ -467,6 +468,39 @@ function(golib_internal_handleVersionUpdate)
 			_props deleteAt "model";
 			[_obj,_data,true,"Обновление объекта до версии 3"] call golib_setHashData;
 			["(v3) Updated object %1",_obj] call printLog;
+		};
+	};
+	/*
+		В четвертой версии заменяются модели соли, сахара и перца
+		Так же удаляется устаревшая метадата о слоях
+	*/
+	if (_newVers == 4) exitwith {
+		//cleanup map hash data
+		if (!_calledOnceFlag) then {
+			_calledOnceFlag = true;
+			golib_com_objectHash deleteAt "layer_ptrToName";
+			golib_com_objectHash deleteAt "layer_nameToPtr";
+			[format["v%1 Удаление устаревших данных о слоях",_newVers]] call golib_saveCommonStorage;
+		};
+		//skip non-go objects
+		if (!_hasHashData) exitwith {};
+
+		private _class = [_obj] call golib_getClassName;
+		if isNullVar(_class) exitwith {};
+		if ([_class,"SaltShaker"] call oop_isTypeOf) then {
+			private _newModel = [_class,"model",true] call oop_getFieldBaseValue;
+			
+			//cleanup model data
+			private _data = [_obj,true] call golib_getHashData;
+			_props = _data get "customProps";
+			if ("model" in _props && {_newModel == (_props get "model")}) then {
+				_props deleteAt "model";
+				[_obj,_data,true,format["v%1 Очистка метаданных модели",_newVers]] call golib_setHashData;
+			};
+			
+			//update world object
+			[_obj,_newModel] call golib_om_replaceObject;
+
 		};
 	};
 }
