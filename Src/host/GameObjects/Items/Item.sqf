@@ -408,10 +408,10 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		false
 	};
 
-	//Когда предмет падает на землю
+	//Когда предмет падает на землю, _isDropFromFly - флаг указывающий что предмет падает из полета
 	func(onDrop)
 	{
-		objParams_1(_usr);
+		objParams_2(_usr,_isDropFromFly);
 		callSelf(updateGerms);
 		callSelfParams(playEventSound, "drop");
 		//errorformat("USER IS DROPPING ITEM %1",callSelf(getName));

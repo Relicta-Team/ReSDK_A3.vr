@@ -406,7 +406,7 @@ si_onThrowingEnd = {
 	if isNullReference(_real) exitWith {
 		deleteVehicle _tempObj; false;
 	};
-	callFuncParams(_item,onDrop,_thrower);
+	callFuncParams(_item,onDrop,_thrower arg true);
 	debug_t("++++++++++++++DONE++++++++++++++")
 	_tempObj setvariable ["__pend_del",true];
 	deleteVehicle _tempObj;
