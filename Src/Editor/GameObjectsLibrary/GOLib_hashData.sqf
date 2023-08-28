@@ -24,16 +24,6 @@ function(golib_serializeHashData)
 		_serializedData = _serializedData insert [_idx+15,"createHashMapFromArray"]
 	};
 
-	// ! По хорошему тут должна быть умная сериализация...
-	private _idx = _serializedData find "[""layer_nameToPtr"",[";
-	if (_idx!=-1) then {
-		_serializedData = _serializedData insert [_idx+19,"createHashMapFromArray"]
-	};
-	private _idx = _serializedData find "[""layer_ptrToName"",[";
-	if (_idx!=-1) then {
-		_serializedData = _serializedData insert [_idx+19,"createHashMapFromArray"]
-	};
-
 	_serializedData
 }
 

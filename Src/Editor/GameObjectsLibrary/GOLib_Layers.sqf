@@ -3,63 +3,101 @@
 // sdk.relicta.ru
 // ======================================================
 
-function(layer_internal_addPtr)
-{
-	params ["_ptr","_name"];
-	if !("layer_ptrToName" call golib_hasCommonStorageParam) then {
-		golib_com_objectHash set ["layer_ptrToName", createHashMap ];
-		[] call golib_saveCommonStorage;
-	};
-	if !("layer_nameToPtr" call golib_hasCommonStorageParam) then {
-		golib_com_objectHash set ["layer_nameToPtr", createHashMap ];
-		[] call golib_saveCommonStorage;
-	};
+/* *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *
+|						LOW LEVEL API								|
+*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***/
 
-	golib_com_objectHash get "layer_ptrToName" set [_ptr,_name];
-	golib_com_objectHash get "layer_nameToPtr" set [_name,_ptr];
-	[] call golib_saveCommonStorage;
+//check if layer exists by name or pointer
+function(layer_internal_exists)
+{
+	private _layer = _this;
+	if equalTypes(_layer,0) then {
+		array_exists(call layer_internal_getLayerPtrList,_layer);
+	} else {
+		private _finded = false;
+		private _layername = null;
+		{
+			_layername = _x call layer_internal_getLayerNameByPtr;
+
+			if equals(_layername,_layer) exitwith {
+				_finded = true;
+			};
+		} foreach (call layer_internal_getLayerPtrList);
+
+		_finded
+	};
 }
 
-function(layer_internal_removePtr)
+//_layerptr - обязательно должен быть проверен на существование извне чтобы случайно не получить имя объекта
+function(layer_internal_getLayerNameByPtr)
 {
-	private _ptr = _this;
-	if !("layer_ptrToName" call golib_hasCommonStorageParam) then {
-		golib_com_objectHash set ["layer_ptrToName", createHashMap ];
-		[] call golib_saveCommonStorage;
-	};
-	if !("layer_nameToPtr" call golib_hasCommonStorageParam) then {
-		golib_com_objectHash set ["layer_nameToPtr", createHashMap ];
-		[] call golib_saveCommonStorage;
-	};
-
-	//getting name by ptr
-	private _name = golib_com_objectHash get "layer_ptrToName" getOrDefault [_ptr,"$ERROR_LAYER_NOT_FOUND$"];
-	(golib_com_objectHash get "layer_ptrToName") deleteAt _ptr;
-	(golib_com_objectHash get "layer_nameToPtr") deleteAt _name;
-	[] call golib_saveCommonStorage;
+	private _layerptr = _this;
+	private _name = (_layerptr get3DENAttribute "name") select 0;
+	if isNullVar(_name) exitwith {""};
+	_name
 }
+
+function(layer_internal_getLayerPtrByName)
+{
+	private _layername = _this;
+	private _ptr = -1;
+	private _curname = null;
+	{
+		_curname = _x call layer_internal_getLayerNameByPtr;
+		if equals(_curname,_layername) exitwith {
+			_ptr = _x;	
+		};
+	} foreach (call layer_internal_getLayerPtrList);
+	_ptr
+}
+
+function(layer_internal_getLayerPtrList)
+{
+	(all3DENEntities select 6)
+}
+
+function(layer_internal_allObjects)
+{
+	get3DENLayerEntities _this
+}
+
+/* *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *
+|						HIGH LEVEL API								|
+*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***/
 
 function(layer_create)
 {
 	params ["_name",["_parent",-1]];
 	private _ptr = _parent add3DENLayer _name;
-	[_ptr,_name] call layer_internal_addPtr;
+	_ptr
 }
 
 function(layer_isExists)
 {
 	private _name = _this;
-	(_name call layer_nameToPtr) != -1;
+	(_name call layer_internal_exists)
 }
 
 function(layer_delete)
 {
 	private _ptr = _this;
 	if equalTypes(_ptr,"") then {
-		_ptr = _ptr call layer_nameToPtr;
+		_ptr = _ptr call layer_internal_getLayerPtrByName;
 	};
-	[_ptr] call layer_internal_removePtr;
+	
+	if (_ptr == -1) exitwith {false};
+
 	remove3DENLayer _ptr;
+}
+
+function(layer_setName)
+{
+	params ["_layer","_name"];
+	if equalTypes(_layer,0) then {
+		_layer = _layer call layer_internal_getLayerPtrByName;
+	};
+	if (_layer == -1) exitwith {false};
+	_layer set3DENAttribute ["name",_name]
 }
 
 function(layer_addObject)
@@ -67,9 +105,11 @@ function(layer_addObject)
 	params ["_object","_layer"];
 	if !(_layer call layer_isExists) exitWith {false};
 	if equalTypes(_layer,"") then {
-		_layer = _layer call layer_nameToPtr;
+		_layer = _layer call layer_internal_getLayerPtrByName;
 	};
 	
+	if (_layer == -1) exitwith {false};
+
 	_object set3DENLayer _layer;
 }
 
@@ -77,29 +117,26 @@ function(layer_getObjects)
 {
 	private _ptr = _this;
 	if equalTypes(_ptr,"") then {
-		_ptr = _ptr call layer_nameToPtr;
+		_ptr = _ptr call layer_internal_getLayerPtrByName;
 	};
 
-	get3DENLayerEntities _ptr
+	if (_ptr == -1) exitwith {[]};
+
+	_ptr call layer_internal_allObjects;
 }
 
-function(layer_nameToPtr)
-{
-	private _name = _this;
-	if !("layer_nameToPtr" in golib_com_objectHash) exitWith {-1};
-	(golib_com_objectHash get "layer_nameToPtr") getOrDefault [_name,-1]
-}
 
 function(layer_getObjectLayer)
 {
 	private _o = _this;
-	private _listMap = (golib_com_objectHash get "layer_nameToPtr");
-	if isNullVar(_listMap) exitwith {""};
-	private _lname = "";
-	private _olist = null;
+	private _list = null;
+	private _retval = "";
 	{
-		_olist = _x call layer_getObjects;
-		if (_o in _olist) exitwith {_lname = _x};
-	} foreach (keys _listMap);
-	_lname
+		_list = _x call layer_internal_allObjects;
+		if array_exists(_list,_o) exitWith {
+			_retval = _x call layer_internal_getLayerNameByPtr;
+		};
+	} foreach (call layer_internal_getLayerPtrList);
+
+	_retval
 }
