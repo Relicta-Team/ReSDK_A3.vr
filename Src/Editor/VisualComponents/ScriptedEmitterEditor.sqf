@@ -557,9 +557,11 @@ function(vcom_emit_createEmitter)
 	private _defPos = [0,0,0]; private _defOrient = [0,0,0];
 	_o setvariable ["pos",_defPos];
 	_o setvariable ["orient",_defOrient];
+	
+	//! THIS DOSEN'T WORK. FUCK BIS
 	(_o call vcom_emit_getEmitterVisual) attachto [vcom_logicObject,_defPos];
 	[_o call vcom_emit_getEmitterVisual,_defOrient] call BIS_fnc_setObjectRotation;
-	(_o call vcom_emit_getEmitterVisual) attachto [vcom_logicObject,_defPos];
+	//(_o call vcom_emit_getEmitterVisual) attachto [vcom_logicObject,_defPos];
 
 	//unical id
 	private _unicalIdStorage = ["_ctgMaker","_list"] call vcom_emit_getVarInSets;
@@ -587,7 +589,10 @@ function(vcom_emit_createEmitter)
 	//update list
 	call vcom_emit_reloadEmitterList;
 
-	_o
+	//sync position (ебал рот чехов кстати)
+	[0,0,_o getvariable "index"] call vcom_emit_relpos_updatePositionAtAxis;
+	
+	_o //return value not used?!
 }
 
 function(vcom_emit_reloadEmitterList)
