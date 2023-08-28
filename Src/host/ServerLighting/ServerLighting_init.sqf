@@ -58,10 +58,12 @@ slt_handleScriptedCfg = {
 		call {
 			if (_t == "lt") exitwith {
 				_o = "#lightpoint" createVehicleLocal [0,0,0];
+				_o attachTo [slt_const_dummyMob,[0,0,0]];
 				call slt_handleScriptedCfgVars;
 			};
 			if (_t == "ltd") exitwith {
 				_o = "#lightreflector" createVehicleLocal [0,0,0];
+				_o attachTo [slt_const_dummyMob,[0,0,0]];
 				call slt_handleScriptedCfgVars;
 			};
 		};
@@ -89,27 +91,24 @@ slt_handleScriptedCfg = {
 		["linkToSrc",{
 			_offset = _this select 1;
 			if (_autolink) then {
-				(_this select 0) lightAttachObject [sourceObject,_offset];
+				(_this select 0) attachTo [sourceObject,_offset];
 			} else {
 				(_this select 0) attachTo [_obj,_offset,_select];
 			};
 		}],
 		["linkToLight",{
 			if (_autolink) then {
-				(_this select 0) lightAttachObject [_firstLight,(_this select 1) vectorDiff _offset];
+				(_this select 0) attachTo [sourceObject,(_this select 1)];
 			} else {
-				(_this select 0) attachTo [_firstLight,(_this select 1) vectorDiff _offset,_select];
+				(_this select 0) attachTo [_firstLight,(_this select 1),_select];
 			};
 		}],
 		["setOrient",{
 			if (_autolink) then {
-				[_this select 0,
-					(_this select 1) vectoradd 
-						[getDirVisual sourceObject,0,0] //relative direction offset
-				] call BIS_fnc_setObjectRotation;
+				[_this select 0,_this select 1] call BIS_fnc_setObjectRotation;
 			} else {
 				[_this select 0,//(_this select 1)
-					(_this select 1) vectorAdd [-90,0,0] //?Возможно не точное решение
+					(_this select 1)
 				] call BIS_fnc_setObjectRotation;
 			};
 		}],
@@ -118,13 +117,19 @@ slt_handleScriptedCfg = {
 		["setLightAmbient",{(_this select 0) setLightAmbient (_this select 1)}],
 		["setLightAttenuation",{(_this select 0) setLightAttenuation (_this select 1)}],
 		["setLightIntensity",{(_this select 0) setLightIntensity (_this select 1)}],
+		
+		//TODO remove flare section (non-usage on server)
 		["setLightUseFlare",{(_this select 0) setLightUseFlare (_this select 1)}],
 		["setLightFlareSize",{(_this select 0) setLightFlareSize (_this select 1)}],
 		["setLightFlareMaxDistance",{(_this select 0) setLightFlareMaxDistance (_this select 1)}],
+
 		["setLightConePars",{(_this select 0) setLightConePars (_this select 1)}],
 		["setLightVolumeShape",{(_this select 0) setLightVolumeShape (_this select 1)}]
 	];
 
+#ifndef __VM_VALIDATE
+slt_const_dummyMob = [10,10,0] call gm_createMob;
+#endif
 
 slt_create = {
 	params ["_obj","_cfg",["_autolink",true],["_select",""]];

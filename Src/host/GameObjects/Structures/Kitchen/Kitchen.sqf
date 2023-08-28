@@ -169,7 +169,7 @@ class(BlackSmallStove) extends(ILightibleStruct)
 		if (count _result > 0) exitWith {_result};
 		
 		private _list = null;
-		private _typeListString = getAllObjectsTypeOf(CRAFT_USING_TYPE_NAMESPACE(CFoodBaker));
+		private _typeListString = getAllObjectsTypeOf(CFoodBaker);
 		private _typeObj = null;
 		{
 			_typeObj = typeGetFromString(_x);

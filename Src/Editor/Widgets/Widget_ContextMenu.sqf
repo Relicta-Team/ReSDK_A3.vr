@@ -108,13 +108,16 @@ function(contextMenu_internal_loadContext)
 		_backItems pushBack _w;
 		_w setBackgroundColor widget_internal_contextmenu_exitcolor;
 		
-		if !(call _condToVisible) then {
+		private _canVisible = call _condToVisible;
+		if !(_canVisible) then {
 			_w ctrlEnable false;
 			_w setBackgroundColor (widget_internal_contextmenu_exitcolor apply {(_x - 0.5)max 0});
 		};
 
-		_w ctrlAddEventHandler ["MouseEnter",{(_this select 0) setBackgroundColor widget_internal_contextmenu_entercolor}];
-		_w ctrlAddEventHandler ["MouseExit",{(_this select 0) setBackgroundColor widget_internal_contextmenu_exitcolor}];
+		if (_canVisible) then {
+			_w ctrlAddEventHandler ["MouseEnter",{(_this select 0) setBackgroundColor widget_internal_contextmenu_entercolor}];
+			_w ctrlAddEventHandler ["MouseExit",{(_this select 0) setBackgroundColor widget_internal_contextmenu_exitcolor}];
+		};
 
 		if (_level > 0) then {
 			_w setFade 1;
@@ -124,8 +127,10 @@ function(contextMenu_internal_loadContext)
 		
 		if equalTypes(_includedListOrAction,[]) then {
 			modvar(_name) + "<t align='right' size='1.3'>+"+sgt+"</t>";
-			
+			_w setvariable ["enabled__",_canVisible];
 			_w ctrlAddEventHandler ["MouseButtonUp",{
+				if !((_this select 0) getvariable "enabled__") exitwith {};
+
 				_nextBack = ((_this select 0) getVariable "childBack");
 				_curBack = (_this select 0) getVariable "back";
 				//Если в древе нет текущего бэка то скрываем всю ветку и чистим её
@@ -161,7 +166,9 @@ function(contextMenu_internal_loadContext)
 			}];
 			
 		};
-		
+		if (!_canVisible) then {
+			_name = "<t color='#5E5E5E'>"+_name+"</t>";
+		};
 		[_w,format["<t align='center'>%1</t>",_name]] call widgetSetText;
 		if (_name == "") then {
 			_w ctrlEnable false;
@@ -176,7 +183,10 @@ function(contextMenu_internal_loadContext)
 		} else {
 			
 			_w setVariable ["_action",_includedListOrAction];
+			_w setvariable ["enabled__",_canVisible];
 			_w ctrlAddEventHandler ["MouseButtonUp",{
+				["enabled action %1",(_this select 0) getvariable "enabled__"] call printTrace;
+				if !((_this select 0) getvariable "enabled__") exitwith {};
 				_c = {
 					_buttonContext = _this select 0;
 					_nameContext = sanitizeHTML(ctrlText _buttonContext);
@@ -239,20 +249,94 @@ function(ContextMenu_loadMouseObject)
 	private _ctxParams = [_obj];
 
 	private _commonSimStart = {
-		_stackMenu pushBack ["Запустить симуляцию отсюда",{
-			_obj = (call contextMenu_getContextParams) select 0;
-			_screenToWorldPos = screenToWorld ContextMenu_internal_openedMousePosNative;
-			([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR","_atlPos"];
-			if equals(_atlPos,vec3(0,0,0)) then {_atlPos = getposatl get3DENCamera};
-			// if not_equals(_obj,_objR) then {
-			// 	["Несоответствие точки старта симуляции."] call printWarning;
-			// 	["Object1: %1; Object2: %2",_obj,_objR] call printTrace;
-			// };
+		_stackMenu pushBack ["Запустить симуляцию отсюда",[
+			["Запуск",{
+				_obj = (call contextMenu_getContextParams) select 0;
+				_screenToWorldPos = screenToWorld ContextMenu_internal_openedMousePosNative;
+				([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR","_atlPos"];
+				if equals(_atlPos,vec3(0,0,0)) then {_atlPos = getposatl get3DENCamera};
+				// if not_equals(_obj,_objR) then {
+				// 	["Несоответствие точки старта симуляции."] call printWarning;
+				// 	["Object1: %1; Object2: %2",_obj,_objR] call printTrace;
+				// };
 
-			private _params = [false,true];
-			sim_internal_lastCachedTransform = [_atlPos,getDir get3DENCamera];
-			nextFrameParams(sim_openMapSelector,_params);
-		}];
+				private _params = [false,true];
+				sim_internal_lastCachedTransform = [_atlPos,getDir get3DENCamera];
+				nextFrameParams(sim_openMapSelector,_params);
+			}],
+			["С выбранным снаряжением роли",{
+				_obj = (call contextMenu_getContextParams) select 0;
+				_screenToWorldPos = screenToWorld ContextMenu_internal_openedMousePosNative;
+				([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR","_atlPos"];
+				if equals(_atlPos,vec3(0,0,0)) then {_atlPos = getposatl get3DENCamera};
+
+				sim_internal_lastCachedTransform = [_atlPos,getDir get3DENCamera];
+				_allRoles = [];
+				_uniqueRoles = [];
+
+				{
+					if ([_x,"InterfaceClass"] call goasm_attributes_hasAttributeClass
+						|| [_x,"HiddenClass"] call goasm_attributes_hasAttributeClass
+					) then {continue};
+					private _curGamemode = [_x,"classname"] call oop_getTypeValue;
+					private _roles = ([_curGamemode,"",true,"getLobbyRoles"] call oop_getFieldBaseValue) 
+						+ ([_curGamemode,"",true,"getLateRoles"] call oop_getFieldBaseValue);
+						{
+							if !array_exists(_uniqueRoles,_x) then {
+								_uniqueRoles pushBack _x;
+								_allRoles pushBack [
+									format["%1 (%2) с режима %3",
+										[_x,"name",true] call oop_getFieldBaseValue,
+										_x,
+										_curGamemode
+									]
+									,_x
+								]
+							};
+							
+						} foreach _roles;
+					
+					_allRoles pushBack ["---",control_const_listElementNoExitAtSelect];
+				} foreach (call gm_getAllGamemodeObjects);
+
+				[
+					_allRoles,
+					//event on select
+					{
+						if equals(control_const_listElementNoExitAtSelect,_data) exitWith {};
+						_curRoleName = _data;
+
+						["lastContextStartupRole",_curRoleName] call Core_setSessionPlatformCachedValue;
+						["currentRoleEquip",_curRoleName] call sim_addSDKProp;
+						private _params = [false,true];
+						nextFrameParams(sim_openMapSelector,_params);
+					},
+					{
+						
+					},
+					null,
+					"Выберите снаряжение роли"
+				] call control_createList;
+				
+			},null,"Открывает окно выбора роли, от которой будет выдано снаряжение"],
+			["С последней выбранной ролью",{
+				private _lastrole = ["lastContextStartupRole"] call Core_getSessionPlatformCachedValue;
+				if isNullVar(_lastrole) exitwith {
+					["Вы ещё не запускали симуляцию через пункт ""С выбранным снаряжением роли"". Выберите роль и пункт станет активным.",10] call showError;
+				};
+				["currentRoleEquip",["lastContextStartupRole"] call Core_getSessionPlatformCachedValue] call sim_addSDKProp;
+
+				_obj = (call contextMenu_getContextParams) select 0;
+				_screenToWorldPos = screenToWorld ContextMenu_internal_openedMousePosNative;
+				([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR","_atlPos"];
+				if equals(_atlPos,vec3(0,0,0)) then {_atlPos = getposatl get3DENCamera};
+
+				private _params = [false,true];
+				sim_internal_lastCachedTransform = [_atlPos,getDir get3DENCamera];
+				nextFrameParams(sim_openMapSelector,_params);
+			},{!isNull(["lastContextStartupRole"] call Core_getSessionPlatformCachedValue)}]
+		]
+	];
 	};
 	private _commonCheckDistance = {
 		_stackMenu pushBack ["Измерить расстояние",{

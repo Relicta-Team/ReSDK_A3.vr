@@ -25,7 +25,3 @@
 #define CRAFT_RECIPE_NAME 1
 #define CRAFT_RECIPE_REQITEMS 2
 #define CRAFT_RECIPE_DESC 3
-
-
-#define CRAFT_USING_TYPE_NAMESPACE(var) var##_crft
-#define CRAFT_USING_TYPE_NAMESPACE_STR(var) 'var##_crft'

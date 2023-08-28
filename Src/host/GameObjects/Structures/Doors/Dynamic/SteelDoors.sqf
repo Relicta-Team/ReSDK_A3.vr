@@ -69,6 +69,11 @@ class(SteelArmoredDoor) extends(DoorDynamic)
 	
 endclass
 
+class(SteelArmoredDoor2) extends(SteelArmoredDoor)
+	var(desc,"Массивная стальная дверь");
+	getter_func(animateData,[["reshotks" arg 2.5 arg 5] arg vec3("plomba5",1.78,1.4)]);
+endclass
+
 class(GreenAmbarWithDoors) extends(DoorDynamic)
 	getter_func(canUseMainAction,false); //В амбаре нельзя юзать такие дейсвтия
 	var(model,"Land_Barn_W_02");

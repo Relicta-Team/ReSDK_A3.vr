@@ -12,7 +12,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=223;
+		nextID=225;
 	};
 	class Camera
 	{
@@ -510,7 +510,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""layer_nameToPtr"",createHashMapFromArray[[""Spawn points"",2648],[""Effects"",2731]]],[""missionName"",""Okopovo""],[""version"",3],[""layer_ptrToName"",createHashMapFromArray[[2648,""Spawn points""],[2731,""Effects""]]]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""missionName"",""Okopovo""],[""version"",4]]}";
 			};
 			id=2205;
 			type="Land_Orange_01_F";
