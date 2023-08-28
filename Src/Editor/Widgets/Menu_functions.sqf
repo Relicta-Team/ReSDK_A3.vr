@@ -234,9 +234,9 @@ init_function(menu_internal_initialize)
 	_mcat ctrlEnable false;
 	
 	//disable layer delete button
-	_e = (getEdenDisplay) displayCtrl 85;
-	_e ctrlEnable false;
-	_e ctrlshow false;
+	// _e = (getEdenDisplay) displayCtrl 85;
+	// _e ctrlEnable false;
+	// _e ctrlshow false;
 	
 	//disable changetime button
 	_e = getEdenDisplay displayCtrl 10302;
