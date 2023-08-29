@@ -627,6 +627,18 @@ region(learning skills)
 		"cooking","farming"
 	];
 
+	skills_internal_list_otherSkillsSystemNames_withCategories = [
+		"@Ближний бой","fight","shield","fencing","axe","baton","spear","sword","knife","whip",
+		"@Дальний бой","pistol","rifle","shotgun","crossbow",
+		"throw",
+		"@Химичество","chemistry","alchemy",
+		"@Ремесло","engineering","traps","repair","blacksmithing","craft",
+		"cavelore",
+		"@Проворство","theft","stealth","agility","lockpicking",
+		"@Медицина","healing","surgery",
+		"@Кухня","cooking","farming"
+	];
+
 	//get all skills info
 	func(getLearnedSkillsInfo)
 	{
@@ -634,18 +646,29 @@ region(learning skills)
 
 		//TODO: опциональный режим вывода ТОЛЬКО изученных навыков. Изученный, это тот, который числится в getSelf(__learnStatus)
 
-		private _text = pick["Я знаю:","Мне известно:"];
+		private _text = pick["Я знаю:","Мне известно:","Мне ведомо:","Я умею:","Я владею:"];
 		//_text = format["<t underline='1'>%1</t>",_text];
 		private _lvl = 0;
 		private _knownany = false;
+		private _awaitedCat = "";
+		forceUnicode 0; //for work ru-cat
 		{
+			if (_x select [0,1] == "@") then {
+				_x = _x select [1,count _x];
+				_awaitedCat = toUpper _x;
+				continue;
+			};
 			_lvl = getSelfReflect(_x);
 			if (_lvl > 0) then {
+				if (_awaitedCat != "") then {
+					modvar(_text) + sbr + setstyle(format["[ %1 ]" arg _awaitedCat],style_learnedskillscategory);
+					_awaitedCat = "";
+				};
 				modvar(_text) + sbr + capitalize(callSelfParams(getSkillName,_x))
 				+ ": "+callSelfParams(getSkillLevelText,_x);
 				_knownany = true;
 			};
-		} foreach skills_internal_list_otherSkillsSystemNames;
+		} foreach skills_internal_list_otherSkillsSystemNames_withCategories;
 		if (!_knownany) then {_text = "Я ничего не умею..."};
 
 		_text
