@@ -760,7 +760,7 @@ endregion
 		if callSelf(isInWorld) then {
 			//update modelpath
 			setSelf(model,_newmodel);
-
+			if callSelf(isItem) then {callSelf(syncIcon);};
 			//setLastError("TODO: implement world model update");
 			/*
 				1. Получаем метаданные с текущего визуального объекта.
@@ -789,7 +789,9 @@ endregion
 			if isNullReference(_loc) exitwith {false};
 			if !isTypeOf(_loc,BasicMob) exitwith {false};
 			setSelf(model,_newmodel);
-			callFuncParams(_loc,syncSmdSlot,getSelf(slot));
+			if callSelf(isItem) then {callSelf(syncIcon);};
+			callFuncParams(_loc,syncSlotInfo,getSelf(slot)); //for update icon
+			callFuncParams(_loc,syncSmdSlot,getSelf(slot)); //for update render in proxy
 		};
 	};
 
