@@ -57,6 +57,15 @@ function(drawNames_internal_onFrame)
 		if (_class == "IStruct" || _class == "Decor") then {
 			_clr = [1,0.3,0,_distOpacity];
 		};
+		private _isDepr = _obj getvariable "___cache_depr";
+		if isNullVar(_isDepr) then {
+			_obj setvariable ["___cache_depr",[_class,"Deprecated"] call goasm_attributes_hasAttributeClass];
+		} else {
+			if (_isDepr) then {
+				_clr = [1,0,0,_distOpacity];
+				_t = "(DEPRECATED) " + _t;
+			};
+		};
 		drawIcon3D ["", _clr, (getposatl _obj)vectorAdd (boundingCenter _obj), 0, 0, 0, _t, 1, _distSize, "EtelkaMonospaceProBold"];
 	} foreach drawNames_internal_list_collectedOjbects;
 }

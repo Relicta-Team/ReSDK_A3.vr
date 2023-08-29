@@ -68,7 +68,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientStatistic\LogVariables.sqf at line 79](../../../Src/client/ClientStatistic/LogVariables.sqf#L79)
+File: [client\ClientStatistic\LogVariables.sqf at line 82](../../../Src/client/ClientStatistic/LogVariables.sqf#L82)
 ## clistat_setLogVars
 
 Type: function
@@ -76,4 +76,4 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\ClientStatistic\LogVariables.sqf at line 90](../../../Src/client/ClientStatistic/LogVariables.sqf#L90)
+File: [client\ClientStatistic\LogVariables.sqf at line 93](../../../Src/client/ClientStatistic/LogVariables.sqf#L93)

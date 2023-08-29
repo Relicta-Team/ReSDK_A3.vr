@@ -372,7 +372,12 @@ function(inspector_menuLoad)
 		
 	//text
 	[TEXT,[100,_optimalSizeH]] call _createElement;
-	[_wid,format["<t align='left'>Свойства объекта: %1</t>",_obj getVariable "classname"]] call widgetSetText;
+	_classnameShow = _type;
+	if ([_type,"Deprecated"] call goasm_attributes_hasAttributeClass) then {
+		_classnameShow = format["<t color='#ff0000'>(УСТАРЕВШИЙ) %1</t>",_classnameShow];
+	};
+	_text = format["<t align='left'>Свойства объекта: %1</t>",_classnameShow];
+	[_wid,_text] call widgetSetText;
 	
 	//mark
 	[TEXT,[50,_optimalSizeH],0,false] call _createElement;
@@ -426,7 +431,7 @@ function(inspector_menuLoad)
 	//invisible
 	[TEXT,[50,_optimalSizeH],0,false] call _createElement;
 	{
-		_layer = _objWorld call layer_getObjectLayer;
+		_layer = [_objWorld,true] call layer_getObjectLayer;
 		if (_layer == "") then {_layer = slt+"нет"+sgt};
 		[_wid,format["<t align='left'>Слой: %1</t>",_layer]] call widgetSetText;
 	} call _setSyncValCode;
