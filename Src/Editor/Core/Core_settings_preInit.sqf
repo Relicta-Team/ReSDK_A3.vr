@@ -187,6 +187,8 @@ core_settings_list_default = [
 				[true,"check"],validate_check,{
 					if (!_isInit) then {
 						["Для изменения режима отслеживания изменений перезапустите редактор"] call messageBox;
+					} else {
+						call fileWatcher_initialie;
 					};
 				}
 			]

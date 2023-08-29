@@ -19,7 +19,7 @@ variable_define
 	fileWatcher_editorChangedPath = tolower "Src\Editor\";
 
 //fws_changed
-init_function(fileWatcher_initialie)
+function(fileWatcher_initialie)
 {
 	fileWatcher_enableSystem = cfg_fws_enabled;
 
