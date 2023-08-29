@@ -179,6 +179,25 @@ core_settings_list_default = [
 				[true,"check"],validate_check
 			]
 		],
+	["region","File watcher system","Система отслеживания изменения файлов в проекте"],
+		["fws_enabled",
+			[
+				"Включить отслеживание изменения",
+				"Включает отслеживание изменения файлов в проекте",
+				[true,"check"],validate_check,{
+					if (!_isInit) then {
+						["Для изменения режима отслеживания изменений перезапустите редактор"] call messageBox;
+					};
+				}
+			]
+		],
+		["fws_autorecompEditor",
+			[
+				"Авторекомпиляция редактора при изменении",
+				"Включает авторекомпиляцию редактора при изменении кода редактора",
+				[true,"check"],validate_check
+			]
+		],
 	["region","Prefab creator",""],
 	/*
 		map_enableGeometryCursorOnLoad
