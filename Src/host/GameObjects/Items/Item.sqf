@@ -142,6 +142,33 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		#endif
 	};
 
+	//процедура синхронизации иконки
+	func(syncIcon)
+	{
+		objParams();
+		//copypaste... bruh...
+		private _m = getSelf(model);
+		//сначала проверяем если это конфиг модель то получаем путь до модели
+		if (!(".p3d" in _m) && !("\" in _m)) then {
+			_m = core_cfg2model getVariable _m;
+		};
+		
+		//на всякий случай ассертим путь
+		#ifdef EDITOR
+		if (isNullVar(_m) || {not_equalTypes(_m,"")}) exitWith {
+			errorformat("%1 %2 %3",this arg _m arg getSelf(model));
+			appExit(APPEXIT_REASON_COMPILATIOEXCEPTION);
+		};
+		#endif
+		
+		//если в пути модели есть \ - убираем
+		if ((_m select [0,1]) == "\") then {
+			_m = _m select [1,count _m];
+		};
+		
+		setSelf(icon,"gen\"+(_m splitString "\/." joinString "+"));
+	};
+
 	generateItemSize = {
 		params ["_bmin","_bmax","_radius"];
 		//_bmin,_bmax - массив vec3; выбрать элемент массива так: _bmin select 0 - вернет ось X
