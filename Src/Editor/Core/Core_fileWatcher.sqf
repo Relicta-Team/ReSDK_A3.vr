@@ -41,6 +41,13 @@ function(fileWatcher_initialie)
 	["onFrame",fileWatcher_onFrame] call Core_addEventHandler;
 }
 
+function(fileWatcher_guardSafeRebuild)
+{
+	if (fileWatcher_internal_hasAnyUpdate) then {
+		fileWatcher_internal_hasAnyUpdate = false;
+	};
+}
+
 function(fileWatcher_onFrame)
 {
 	if (!isGameFocused) exitwith {};
@@ -75,7 +82,7 @@ function(FileWatcher_handleCallbackExtension)
 	private _lowerPath = toLower _path;
 	fileWatcher_internal_preparedLastEvent = [_lowerPath,_mode];
 
-	["callback fws: %1",_this] call printTrace;
+	["(%2) callback fws: %1",_path,_mode] call printTrace;
 	fileWatcher_internal_hasAnyUpdate = true;
 }
 
