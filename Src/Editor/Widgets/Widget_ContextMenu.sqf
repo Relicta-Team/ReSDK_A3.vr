@@ -460,9 +460,9 @@ function(ContextMenu_loadMouseObject)
 		nextFrameParams(vcom_emit_createVisualWindow,_obj);
 	}];
 
-	_stackMenu pushBack ["Добавить комментарий",{
-		do3DENAction "CreateComment";
-	}];
+	// _stackMenu pushBack ["Добавить комментарий",{
+	// 	do3DENAction "CreateComment";
+	// }];
 
 	_stackMenu pushBack ["Перейти к определению",{
 		_obj = (call contextMenu_getContextParams) select 0;
