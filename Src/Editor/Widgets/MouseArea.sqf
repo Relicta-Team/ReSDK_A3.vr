@@ -85,9 +85,11 @@ function(MouseArea_init)
 			if !isNullReference(_d) then {
 				//do not close editor native attributes
 				_count = count allControls _d;
+				//["Check native display with id %1 and ctrlcount %2",_x,_count] call printTrace;
 				if (_x == 315 && 
 					(_count == 62 //forget what this is...
-					|| _count == 21 //layeredit
+					|| _count == 21 //layer edit
+					|| _count == 27 //comment edit
 					)) exitwith {};
 				if (cfg_debug_devMode) exitwith {};
 				_d CloseDisplay 0;				
