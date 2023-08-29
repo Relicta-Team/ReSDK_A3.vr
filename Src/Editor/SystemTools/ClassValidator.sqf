@@ -16,7 +16,7 @@ function(classValidator_process)
 	private _class = null;
 	private _erroredClasses = [];
 	private _erroredObjects = [];
-	private _mapModeToClasses = createHashMap;
+	private _mapClassToDesc = createHashMap;
 	{
 		if (_x call golib_hasHashData) then {
 			if not_equals(golib_com_object,_x) then {
@@ -32,8 +32,8 @@ function(classValidator_process)
 				if (_validateDeprecated) then {
 					private _isDeprecated = [_class,"Deprecated"] call goasm_attributes_getClassValues;
 					if !isNullVar(_isDeprecated) then {
-						if !(_class in _mapModeToClasses) then {
-							_mapModeToClasses set [_class,_isDeprecated select 0];
+						if !(_class in _mapClassToDesc) then {
+							_mapClassToDesc set [_class,_isDeprecated select 0];
 						};
 					};
 				};
@@ -88,15 +88,53 @@ function(classValidator_process)
 	classValidator_internal_validated = true;
 
 	if (_validateDeprecated) then {
-		if (count _mapModeToClasses > 0) then {
+		if (count _mapClassToDesc > 0) then {
 			private _text = format["На карте '%1' найдены устаревшие классы, которые будут удалены в будущем:","missionName" call golib_getCommonStorageParam];
 			modvar(_text) + endl;
 			{
 				modvar(_text) + endl + format["%1 - %2",_x,_y];
-			} foreach (_mapModeToClasses);
+			} foreach (_mapClassToDesc);
 
 			[_text] call printWarning;
 			[_text] call messageBox;
 		};
 	};
+}
+
+
+function(classValidator_validateModels)
+{
+	["Start %1",__FUNC__] call printLog;
+	private _ignoredDir = ["Cloth"] apply {tolower _x};
+	private _matches = 0;
+	private _mapModelToClass = createHashMap;
+	{
+		private _class = _x;
+		private _isIgnored = false;
+		if ([_class,"InterfaceClass"] call goasm_attributes_hasAttributeClass) then {continue};
+		if ([_class,"HiddenClass"] call goasm_attributes_hasAttributeClass) then {continue};
+		if ([_class,"TemplatePrefab"] call goasm_attributes_hasAttributeClass) then {continue};
+		{
+			if ([_class,_x] call oop_isTypeOf) exitwith {_isIgnored = true};
+		} foreach _ignoredDir;
+		if _isIgnored then {continue};
+
+		private _model = tolower ([_class,"model",true] call oop_getFieldBaseValue);
+		if isNullVar(_model) then {continue};
+		if (_model in _mapModelToClass) then {
+			(_mapModelToClass get _model) pushBack _class;
+		} else {
+			_mapModelToClass set [_model,[_class]];
+		};
+	} foreach (["GameObject",true] call oop_getinhlist);
+
+	{
+		if (count _y > 1) then {
+			INC(_matches);
+			["Model %1: classes %2",_x, _y joinString ", "] call printWarning;
+		};
+	} foreach (_mapModelToClass);
+
+	["Validation done. Found %1 probably duplicated classes",_matches] call printLog;
+	["Work done. See console",20] call showInfo;
 }
