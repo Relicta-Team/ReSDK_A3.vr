@@ -93,12 +93,77 @@ function(layer_delete)
 function(layer_setName)
 {
 	params ["_layer","_name"];
-	if equalTypes(_layer,0) then {
+	if equalTypes(_layer,"") then {
 		_layer = _layer call layer_internal_getLayerPtrByName;
 	};
 	if (_layer == -1) exitwith {false};
 	_layer set3DENAttribute ["name",_name]
 }
+
+function(layer_setLocked)
+{
+	params ["_layer","_name",["_postMes",""]];
+	if equalTypes(_layer,"") then {
+		_layer = _layer call layer_internal_getLayerPtrByName;
+	};
+	if (_layer == -1) exitwith {false};
+	["Слои" + _postMes, "Переключение видимости слоя", "a3\3den\data\cfg3den\history\changeAttributes_ca.paa"] collect3DENHistory {
+		_layer set3DENAttribute ["Transformation",!_name];
+	};
+}
+
+function(layer_lockGuard)
+{
+	params ["_mode"];
+	if (_mode) then {
+		if !isNull(layer_internal_lockGuardCache) exitwith {
+			setLastError("Lock guard cache not empty. Restart editor required");
+		};
+
+		private _allLayersPtr = call layer_internal_getLayerPtrList;
+		layer_internal_lockGuardCache = _allLayersPtr apply {[_x,_x call layer_isLocked]};
+		{
+			[_x,false,golib_history_skippedHistoryStageFlag+" Системное переключение"] call layer_setLocked;
+		} foreach _allLayersPtr;
+	} else {
+		{
+			//[_x select 0,_x select 1,golib_history_skippedHistoryStageFlag + " Системное переключение (возврат)"] call layer_setLocked;
+			do3DENAction "Undo";
+		} foreach layer_internal_lockGuardCache;
+		layer_internal_lockGuardCache = null;
+	};
+}
+
+function(layer_isLocked)
+{
+	params ["_layer"];
+	if equalTypes(_layer,"") then {
+		_layer = _layer call layer_internal_getLayerPtrByName;
+	};
+	if (_layer == -1) exitwith {false};
+	!((_layer get3DENAttribute "Transformation") select 0)
+}
+
+function(layer_setVisible)
+{
+	params ["_layer","_name"];
+	if equalTypes(_layer,"") then {
+		_layer = _layer call layer_internal_getLayerPtrByName;
+	};
+	if (_layer == -1) exitwith {false};
+	_layer set3DENAttribute ["Visibility",_name];
+}
+
+function(layer_isVisible)
+{
+	params ["_layer"];
+	if equalTypes(_layer,"") then {
+		_layer = _layer call layer_internal_getLayerPtrByName;
+	};
+	if (_layer == -1) exitwith {false};
+	(_layer get3DENAttribute "Visibility") select 0
+}
+
 
 function(layer_addObject)
 {
@@ -128,13 +193,13 @@ function(layer_getObjects)
 
 function(layer_getObjectLayer)
 {
-	private _o = _this;
+	params ["_o",["_retAsString",true]];
 	private _list = null;
-	private _retval = "";
+	private _retval = ifcheck(_retAsString,"",-1);
 	{
 		_list = _x call layer_internal_allObjects;
 		if array_exists(_list,_o) exitWith {
-			_retval = _x call layer_internal_getLayerNameByPtr;
+			_retval = ifcheck(_retAsString,_x call layer_internal_getLayerNameByPtr,_x);
 		};
 	} foreach (call layer_internal_getLayerPtrList);
 

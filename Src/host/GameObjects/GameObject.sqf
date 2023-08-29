@@ -709,6 +709,27 @@ endregion
 		true
 	};
 
+	//Загрузить модель в мир. Параметр _vecOrDist - если _simDrop это дистанция дропа. иначе это вектор up для трансформа
+	func(loadModel)
+	{
+		objParams_4(_pos,_dir,_vecOrDist,_simDrop);
+		
+		if isNullVar(_simDrop) then {_simDrop = true};
+
+		if equals(getSelf(loc),objNULL) then {
+			setSelf(loc,nullPtr); //drop value for checks in noe_loadVisualObject
+		};
+		if callSelf(isInWorld) exitwith {false};
+		private _wobj = objNull;
+		if (_simDrop) then {
+			_wobj = [this,_pos,_vecOrDist,_dir] call noe_loadVisualObject_OnDrop;
+		} else {
+			_wobj = [this,_pos,_dir,_vec] call noe_loadVisualObject;
+		};
+		
+		!isNullReference(_wobj)
+	};
+
 	//Реплицирует позицию или любое изменённое состояние объекта
 	func(replicateObject)
 	{
@@ -739,7 +760,7 @@ endregion
 		if callSelf(isInWorld) then {
 			//update modelpath
 			setSelf(model,_newmodel);
-
+			if callSelf(isItem) then {callSelf(syncIcon);};
 			//setLastError("TODO: implement world model update");
 			/*
 				1. Получаем метаданные с текущего визуального объекта.
@@ -768,7 +789,9 @@ endregion
 			if isNullReference(_loc) exitwith {false};
 			if !isTypeOf(_loc,BasicMob) exitwith {false};
 			setSelf(model,_newmodel);
-			callFuncParams(_loc,syncSmdSlot,getSelf(slot));
+			if callSelf(isItem) then {callSelf(syncIcon);};
+			callFuncParams(_loc,syncSlotInfo,getSelf(slot)); //for update icon
+			callFuncParams(_loc,syncSmdSlot,getSelf(slot)); //for update render in proxy
 		};
 	};
 

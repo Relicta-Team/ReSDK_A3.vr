@@ -29,6 +29,16 @@ class Breakpoint : IScript
 		System.Console.WriteLine("called bp");
 		MessageBoxButtons bts;
 		string fileProb = ScriptContext.GetArg(1);
+		if (fileProb == "CUSTOM")
+		{
+			output.Append((MessageBox.Show(
+				ScriptContext.GetArg(0),
+				args,
+				MessageBoxButtons.YesNo,
+				MessageBoxIcon.Warning
+			) == DialogResult.Yes));
+			return;
+		}
 		if (fileProb == "") {
 			MessageBox.Show(
 				ScriptContext.GetArg(0),

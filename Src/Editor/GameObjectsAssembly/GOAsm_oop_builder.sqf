@@ -67,6 +67,9 @@ function(goasm_builder_setPostBuildCode)
 
 function(goasm_builder_buildImplMain)
 {
+	//disable fws update
+	call fileWatcher_guardSafeRebuild;
+
 	goasm_isbuilded = false;
 	call goasm_builder_cleanup;
 
