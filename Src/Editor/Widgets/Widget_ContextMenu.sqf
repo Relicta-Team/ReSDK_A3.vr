@@ -230,22 +230,21 @@ function(contextMenu_internal_showCat)
 
 function(ContextMenu_loadMouseObject)
 {
-	private _obj = get3DENMouseOver;
+	
+	private _obj = objNull;
 	private _hasObject = false;
-	if (count _obj > 0 && (_obj select 0)== "Object") then {
-		_hasObject = true;
-		_obj = _obj select 1;
-	};
+	
 	//second check 
-	if (!_hasObject) then {
-		_screenToWorldPos = screenToWorld getMousePosition;
-		([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR"];
-		if !isNullReference(_objR) then {
-			_obj = _objR;
-			_hasObject = true;
-		};
+	
+	_screenToWorldPos = screenToWorld getMousePosition;
+	([_screenToWorldPos] call golib_om_getRayCastData) params ["_objR"];
+	if !isNullReference(_objR) then {
+		_obj = _objR;
+		_hasObject = true;
 	};
+	
 	_stackMenu = [["Отмена",{}]];
+	["Context selected object %1",_obj] call printTrace;
 	private _ctxParams = [_obj];
 
 	private _commonSimStart = {
@@ -346,6 +345,43 @@ function(ContextMenu_loadMouseObject)
 			if equals(_atlPos,vec3(0,0,0)) then {_atlPos = _screenToWorldPos};
 			[_atlPos] call meterTool_onActivate;
 		}];
+	};
+
+	private _commonSelectQuery = {
+		_stackMenu pushBack ["Выбрать в сцене",
+			[
+				["Все объекты "+_class,{
+					_class = [(call contextMenu_getContextParams) select 0] call golib_getClassName;
+					[_class,{_x == _class}] call golib_selectObjectsBy;
+				},null,"Выделяет все объекты типа "+_class],
+				["Дочерние от "+_class,{
+					_class = [(call contextMenu_getContextParams) select 0] call golib_getClassName;
+					[_class,{
+						_curItem = _x;
+						(([_class,false] call oop_getinhlist) findif {_curItem == _x}) !=-1
+					}] call golib_selectObjectsBy;
+				},null,"Выделяет типы, унаследованные от "+_class],
+				["Всех от "+_class,{
+					_class = [(call contextMenu_getContextParams) select 0] call golib_getClassName;
+					[_class,{
+						_curItem = _x;
+						(([_class,true] call oop_getinhlist) findif {_curItem == _x})!=-1
+					}] call golib_selectObjectsBy;
+				},null,"Выделяет все типы, унаследованные от "+_class+" (глубокое наследование)"],
+				["Объекты "+_class + " и дочерние",{
+					_class = [(call contextMenu_getContextParams) select 0] call golib_getClassName;
+					[_class,{
+						_curItem = _x;
+						_x == _class || 
+						(([_class,false] call oop_getinhlist) findif {_curItem == _x})!=-1
+					}] call golib_selectObjectsBy;
+				},null,"Выделяет типы "+_class+", и унаследованные от "+_class],
+				["Объекты "+_class + " и всех наследн.",{
+					_class = [(call contextMenu_getContextParams) select 0] call golib_getClassName;
+					[_class,{[_x,_class] call oop_isTypeOf}] call golib_selectObjectsBy;
+				},null,"Выделяет все типы, которые являются типами "+_class+" или наследниками от "+_class]
+			]
+		]
 	};
 	
 	if (!_hasObject) exitwith {};
@@ -452,6 +488,7 @@ function(ContextMenu_loadMouseObject)
 		];
 	};
 
+	call _commonSelectQuery;
 	call _commonCheckDistance;
 
 	_stackMenu pushBack ["<t size='0.9'>Открыть редактор позиций модели</t>",{nextFrameParams(vcom_relposEditorOpen,(call contextMenu_getContextParams) select 0)}];
@@ -507,13 +544,19 @@ init_function(ContextMenu_mouseArea_init)
 				];
 			};
 			contextMenu_internal_energy_toObject = objnull;
-			private _obj = get3DENMouseOver;
-			if (count _obj == 0) exitWith _errDraw;
-			if ((_obj select 0)!= "Object") exitWith _errDraw;
-			contextMenu_internal_energy_toObject = _obj select 1;
+			
+			//! get3denMouseOver not collect locked object
+			// private _obj = get3DENMouseOver;
+			// if (count _obj == 0) exitWith _errDraw;
+			// if ((_obj select 0)!= "Object") exitWith _errDraw;
+			// contextMenu_internal_energy_toObject = _obj select 1;
 
 			_screenToWorldPos = screenToWorld getMousePosition;
 			([_screenToWorldPos] call golib_om_getRayCastData) params ["_obj","_atlPos"];
+			if isNullReference(_obj) exitwith _errDraw;
+
+			contextMenu_internal_energy_toObject = _obj;
+
 			if equals(_atlPos,vec3(0,0,0)) then {
 				_atlPos = getPosAtl contextMenu_internal_energy_toObject;
 			};

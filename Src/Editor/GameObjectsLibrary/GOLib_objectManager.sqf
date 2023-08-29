@@ -137,6 +137,57 @@ function(golib_getSelectedObjects)
 	get3DENSelected "" select 0
 }
 
+function(golib_searchObjectsBy)
+{
+	params ["_class",["_algSearch",{_x == _class}]];
+	private _retList = [];
+	private _obj = objnull;
+	{
+		_obj = _x;
+		if (_obj call golib_hasHashData) then {
+			if not_equals(golib_com_object,_obj) then {
+				_x = [_obj] call golib_getClassName;
+				if (call _algSearch) then {
+					_retList pushBack _obj;
+				};	
+			};
+		};
+	} foreach (all3DENEntities select 0);
+	_retList
+}
+
+function(golib_selectObjectsBy)
+{
+	params ["_class","_algSearch",["_unlockLayers",true]];
+	private _list = [_class,_algSearch] call golib_searchObjectsBy;
+	if (count _list == 0) exitwith {
+		["Объектов не найдено",null,null,0] call showInfo;
+	};
+	private _layerPtr = -1;
+	private _unlockedLayers = [];
+	private _unlockedLayersNames = [];
+	{
+		_layerPtr = [_x,false] call layer_getObjectLayer;
+		if (_layerPtr != -1) then {
+			if ([_layerPtr] call layer_isLocked) then {
+				[_layerPtr,false] call layer_setLocked;
+				if ((_unlockedLayers pushBackUnique _layerPtr)!=-1) then {
+					_unlockedLayersNames pushBack (_layerPtr call layer_internal_getLayerNameByPtr);
+				};
+			};
+		};
+	} foreach _list;
+
+	private _postMes = "";
+	if (count _unlockedLayersNames > 0) then {
+		_postMes = "; Разблокированы слои: " + (_unlockedLayersNames joinString ", ");
+	};
+
+	_list call golib_setSelectedObjects;
+	[format["Выделено %1 объектов%2",count _list,_postMes],10,null,0] call showInfo;
+}
+
+
 function(golib_om_getConfigByGameObject)
 {
 	params ["_type",["_throwWarn",true]];
@@ -189,7 +240,7 @@ function(golib_om_getRayCastData)
 		1,
 		INTERACT_LODS_CHECK_STANDART
  	];
-	if (count _ins == 0) exitWith {[objnull,[0,0,0],[0,0,0]]};
+	if (count _ins > 0) exitWith {[_ins select 0 select 2,asltoatl (_ins select 0 select 0),_ins select 0 select 1]};
 	_ins = lineIntersectsSurfaces [
   		AGLToASL positionCameraToWorld [0,0,0],
   		AGLToASL _toPos,

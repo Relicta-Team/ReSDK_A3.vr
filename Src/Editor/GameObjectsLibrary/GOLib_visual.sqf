@@ -405,16 +405,42 @@ function(golib_vis_onPressSettingsObject)
 	
 	[
 		[
+			["Отмена",{}],
 			["Создать новый тип из "+_class,{["TODO implement (use virtual object)"] call showInfo}],
 			["Выделить в сцене",
 				[
-					["Все объекты "+_class,{},null,"Выделяет все объекты типа "+_class],
-					["Наследников от "+_class,{},null,"Выделяет типы, унаследованные от "+_class],
+					["Все объекты "+_class,{
+						(call contextMenu_getContextParams) params ["_class"];
+						[_class,{_x == _class}] call golib_selectObjectsBy;
+					},null,"Выделяет все объекты типа "+_class],
+					["Дочерние от "+_class,{
+						(call contextMenu_getContextParams) params ["_class"];
+						[_class,{
+							_curItem = _x;
+							(([_class,false] call oop_getinhlist) findif {_curItem == _x}) !=-1
+						}] call golib_selectObjectsBy;
+					},null,"Выделяет типы, унаследованные от "+_class],
 					//! 2 тултипа не показываются изза прекрытия другой категорией
 					//TODO исправить
-					["Всех от "+_class,{},null,"Выделяет все типы, унаследованные от "+_class+" (глубокое наследование)"],
-					["Объекты "+_class + " и наследн.",{},null,"Выделяет типы "+_class+", и унаследованные от "+_class],
-					["Объекты "+_class + " и всех наследн.",{},null,"Выделяет все типы, которые являются типами "+_class+" или наследниками от "+_class]
+					["Всех от "+_class,{
+						(call contextMenu_getContextParams) params ["_class"];
+						[_class,{
+							_curItem = _x;
+							(([_class,true] call oop_getinhlist) findif {_curItem == _x})!=-1
+						}] call golib_selectObjectsBy;
+					},null,"Выделяет все типы, унаследованные от "+_class+" (глубокое наследование)"],
+					["Объекты "+_class + " и дочерние",{
+						(call contextMenu_getContextParams) params ["_class"];
+						[_class,{
+							_curItem = _x;
+							_x == _class || 
+							(([_class,false] call oop_getinhlist) findif {_curItem == _x})!=-1
+						}] call golib_selectObjectsBy;
+					},null,"Выделяет типы "+_class+", и унаследованные от "+_class],
+					["Объекты "+_class + " и всех наследн.",{
+						(call contextMenu_getContextParams) params ["_class"];
+						[_class,{[_x,_class] call oop_isTypeOf}] call golib_selectObjectsBy;
+					},null,"Выделяет все типы, которые являются типами "+_class+" или наследниками от "+_class]
 				]
 			],
 			["Подробная информация о типе",{}],
