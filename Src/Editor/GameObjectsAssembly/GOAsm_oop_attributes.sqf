@@ -37,7 +37,8 @@ init_function(goasm_attributes_main_init)
 	["GMField"] call goasm_attributes_bindAttribute;
 
 	// ---------------- Классовые атрибуты ----------------
-
+	// Атрибут для класса указывает что он является устаревшим и будет удален в будущем
+	["Deprecated",{!_isInherited}] call goasm_attributes_bindAttribute;
 	// Атрибут для класса указывает что он не может быть создан явно. Возможно только использование как наследника
 	["InterfaceClass",{!_isInherited}] call goasm_attributes_bindAttribute;
 	//Скрытые классы не видны в библиотеке объектов. Указав параметр "allChild" все наследники класса так же не будут видны
