@@ -1947,7 +1947,7 @@ _3872_750003782_3200722_59060 = ['Decor',[3872.75,3782.32,22.5906],87.9997,[0,0,
 ['SteelGridDoor',[3889.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['SteelBrownDoor',[3884.49,3964.72,0],0,[0,0,1]] call InitStruct; 
 ['StreetLamp',[3894.49,3966.3,0],0,[0,0,1]] call InitStruct; 
-['GreenArmChair',[3877.49,3966.3,0],0,[0,0,1]] call InitStruct; 
+['GreenChair',[3877.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['SteelDoorThinSmall',[3885.61,3963.96,0],0,[0,0,1]] call InitStruct; 
 ['WoodenChair',[3879.5,3966.25,0.00284195],0,[0,0,1]] call InitItem; 
 ['ChemDistiller',[3893.49,3966.3,0],0,[0,0,1]] call InitItem; 
