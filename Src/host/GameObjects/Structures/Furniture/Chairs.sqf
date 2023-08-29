@@ -81,7 +81,3 @@ class(GreenArmChair) extends(IChair)
 	getterconst_func(getChairOffsetDir,180);
 	var(model,"ml\ml_object_new\model_14_10\diwan.p3d");
 endclass
-	//EQUALS
-	class(GreenChair) extends(GreenArmChair)
-		var(model,"ml\ml_object_new\model_14_10\diwan.p3d");
-	endclass

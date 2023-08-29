@@ -810,7 +810,7 @@ _3739_929933834_2199740_12500 = ['Decor',[3739.93,3834.22,40.125],90.4371,[0,0,1
 _3735_370123831_0400440_12500 = ['Decor',[3735.37,3831.04,40.125],350.736,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\slum\slum_house01_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3727_129883832_7399939_86760 = ['Decor',[3727.13,3832.74,39.8676],271,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\addons\metal_shed_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3720_489993828_2900440_16510 = ['Decor',[3720.49,3828.29,40.1651],1.54322,[0,0,1], {_thisObj setvariable ['model','metro_ob\model\stelazh.p3d'];}] call InitDecor; // !!! realocated model !!!
-['GreenChair',[3742.32,3830.59,40.0516],99.4073,[0,0,1]] call InitStruct; 
+['GreenArmChair',[3742.32,3830.59,40.0516],99.4073,[0,0,1]] call InitStruct; 
 _3728_030033836_6201240_84830 = ['Decor',[3728.03,3836.62,40.8483],0,[0,0,1], {_thisObj setvariable ['model','ml\ml_object_new\model_24\press.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['WoodenChair',[3734.86,3830.51,40.071],87.9897,[0,0,1]] call InitItem; 
 _3737_310063829_6899439_94640 = ['Decor',[3737.31,3829.69,39.9464],358.451,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
@@ -2305,7 +2305,7 @@ _3828_379883738_6298840_09970 = ['Decor',[3828.38,3738.63,40.0997],30,[0,0,1], {
 ['WoodenDoor',[3826.1,3740.33,40.0693],300.028,[0,0,1]] call InitStruct; 
 ['WoodenDoor',[3825.43,3734.65,39.6541],34.8457,[0,0,1]] call InitStruct; 
 ['WoodenDoor',[3820.84,3738.02,40.1273],33.4239,[0,0,1]] call InitStruct; 
-['GreenChair',[3828.11,3741.07,40.0253],0,[0,0,1]] call InitStruct; 
+['GreenArmChair',[3828.11,3741.07,40.0253],0,[0,0,1]] call InitStruct; 
 ['FabricBagBig2',[3818.94,3735.69,40.0782],0,[0,0,1]] call InitItem; 
 ['SmallTrashCan',[3826.47,3741.6,40.0749],27.5949,[0,0,1]] call InitStruct; 
 ['ContainerGreen2',[3820.17,3735.14,40.0689],222.384,[0,0,1]] call InitStruct; 

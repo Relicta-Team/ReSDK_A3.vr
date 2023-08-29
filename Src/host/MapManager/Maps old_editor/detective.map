@@ -548,7 +548,7 @@ _3673_636963657_5419916_72774 = ['SteelGridDoor',[3673.64,3657.54,16.7277],183.0
 ['ArmChairBrown',[3872.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['SpirtBottle',[3704.25,3671.41,13.941],0,[0,0,1]] call InitItem; 
 _3673_726073657_5293016_59376 = ['Decor',[3673.73,3657.53,16.5938],92.8954,[0,0,1], {_thisObj setvariable ['model','ml_shabut\exodus\kaleetka.p3d'];}] call InitDecor; // !!! realocated model !!!
-['GreenChair',[3877.49,3966.3,0],0,[0,0,1]] call InitStruct; 
+['GreenArmChair',[3877.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 _sw_detroom4 = ['RedButton',[3687.48,3669.9,29.8833,true],359.353,[0.995899,0.011246,0.0897649]] call InitStruct; 
 _3649_709233679_2487813_98080 = ['StreetLamp',[3649.71,3679.25,13.9808],218.33,[0,0,1]] call InitStruct; 
 ['ChemDistiller',[3893.49,3966.3,0],0,[0,0,1]] call InitItem; 

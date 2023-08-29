@@ -14151,7 +14151,7 @@ _o = create3DENEntity ["Object", "diwan", [0,0,0]];
 	_o set3DENAttribute ['position',[3877.49,3966.3,0]];
 	_o set3DENAttribute ['rotation',[0,0,0]];
 
-	_hash = [_o,'GreenChair'] call mm_importOld_initHashData;
+	_hash = [_o,'GreenArmChair'] call mm_importOld_initHashData;
 	[_o] call mm_importOld_postCreated;
 
 _o = create3DENEntity ["Object", "Land_door_solar", [0,0,0]];

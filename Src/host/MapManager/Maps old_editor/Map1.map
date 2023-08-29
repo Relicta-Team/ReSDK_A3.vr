@@ -825,7 +825,7 @@ _3726_560553833_3740241_58638 = ['Decor',[3726.56,3833.37,46.5864,true],90,[0,1,
 ['SmallChair',[3727.41,3828.4,40.0419],178.127,[0,0,1]] call InitItem; 
 ['SmallChair',[3727.44,3830.16,40.0791],351.795,[0,0,1]] call InitItem; 
 ['WoodenChair',[3734.86,3830.51,40.071],87.9897,[0,0,1]] call InitItem; 
-['GreenChair',[3742.32,3830.59,40.0516],99.4073,[0,0,1]] call InitStruct; 
+['GreenArmChair',[3742.32,3830.59,40.0516],99.4073,[0,0,1]] call InitStruct; 
 ['GreenBed',[3742.39,3833.3,40.0742],178.472,[0,0,1]] call InitStruct; 
 _3736_581793831_9672940_04781 = ['Decor',[3736.58,3831.97,40.0478],171.375,[0,0,1], {setVar(this,model,'ml_shabut\stalker_props\zhmikhkrovatz.p3d');}] call InitDecor; // !!! realocated model !!!
 _3734_291993830_4006340_06863 = ['Decor',[3734.29,3830.4,40.0686],81.328,[0,0,1], {setVar(this,model,'ca\structures\furniture\tables\table_drawer\table_drawer.p3d');}] call InitDecor; // !!! realocated model !!!
@@ -2233,7 +2233,7 @@ _3838_779053717_0566439_89524 = ['Decor',[3838.78,3717.06,46.6428,true],238,[-0.
 _3822_481453720_3713439_96489 = ['Decor',[3822.48,3720.37,46.7376,true],173,[-0.00425314,0.0346394,0.999391], {setVar(this,model,'a3\structures_f\walls\cncwall4_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3812_663823716_4003939_86419 = ['Decor',[3812.66,3716.4,46.6369,true],147.999,[-0.0174497,0.0302238,0.999391], {setVar(this,model,'a3\structures_f\walls\cncwall4_f.p3d');}] call InitDecor; // !!! realocated model !!!
 _3832_052983719_7844239_91130 = ['Decor',[3832.05,3719.78,46.6801,true],191,[0.00333005,0.0171317,0.999848], {setVar(this,model,'a3\structures_f\walls\cncwall4_f.p3d');}] call InitDecor; // !!! realocated model !!!
-['GreenChair',[3828.11,3741.07,40.0253],0,[0,0,1]] call InitStruct; 
+['GreenArmChair',[3828.11,3741.07,40.0253],0,[0,0,1]] call InitStruct; 
 _3831_041503737_3190940_12139 = ['Decor',[3831.04,3737.32,40.1214],19.903,[0,0,1], {setVar(this,model,'ml\ml_object_new\model_05\matras_2.p3d');}] call InitDecor; // !!! realocated model !!!
 _3816_806883738_6564940_13397 = ['Decor',[3816.81,3738.66,40.134],308.508,[0,0,1], {setVar(this,model,'ml_shabut\sovokbed\sovokbed.p3d');}] call InitDecor; // !!! realocated model !!!
 ['FabricBagBig2',[3818.94,3735.69,40.0782],0,[0,0,1]] call InitItem; 

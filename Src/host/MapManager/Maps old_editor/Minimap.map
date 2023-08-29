@@ -1844,7 +1844,7 @@ _3873_038823781_0693422_55612 = ['Decor',[3873.04,3781.07,22.5561],264.091,[0,0,
 ['ChairLibrary',[3883.49,3966.3,0],0,[0,0,1]] call InitItem; 
 _3895_489993966_300050_00000 = ['IStruct',[3895.49,3966.3,0],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\exoduss\medzanaves2.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['SteelGridDoor',[3889.49,3966.3,0],0,[0,0,1]] call InitStruct; 
-['GreenChair',[3877.49,3966.3,0],0,[0,0,1]] call InitStruct; 
+['GreenArmChair',[3877.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['WoodenDoubleDoor',[3887.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['ArmChairBrown',[3872.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['ChemDistiller',[3893.49,3966.3,0],0,[0,0,1]] call InitItem; 

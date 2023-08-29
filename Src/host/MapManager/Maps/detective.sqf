@@ -1087,7 +1087,7 @@ _3862_489993966_300050_00000 = ['OldWoodenBox',[3862.49,3966.3,0],0,[0,0,1], {_t
 ['SteelGridDoor',[3889.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['SteelBrownDoor',[3884.49,3964.72,0],0,[0,0,1]] call InitStruct; 
 ['StreetLamp',[3894.49,3966.3,0],0,[0,0,1]] call InitStruct; 
-['GreenChair',[3877.49,3966.3,0],0,[0,0,1]] call InitStruct; 
+['GreenArmChair',[3877.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['SteelDoorThinSmall',[3885.61,3963.96,0],0,[0,0,1]] call InitStruct; 
 ['WoodenChair',[3879.5,3966.25,0.00284195],0,[0,0,1]] call InitItem; 
 ['ChemDistiller',[3893.49,3966.3,0],0,[0,0,1]] call InitItem; 

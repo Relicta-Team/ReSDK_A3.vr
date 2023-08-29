@@ -979,7 +979,7 @@ _3889_330573739_4477519_68600 = ['EffectAsStruct',[3889.33,3739.45,19.686],0,[0,
 ['SteelBrownDoor',[3884.49,3964.72,0],0,[0,0,1]] call InitStruct; 
 ['SteelGridDoor',[3889.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['WoodenChair',[3879.5,3966.25,0.00284195],0,[0,0,1]] call InitItem; 
-['GreenChair',[3877.49,3966.3,0],0,[0,0,1]] call InitStruct; 
+['GreenArmChair',[3877.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['SteelDoorThinSmall',[3885.61,3963.96,0],0,[0,0,1]] call InitStruct; 
 ['SteelGreenDoor',[3884.49,3966.3,0],0,[0,0,1]] call InitStruct; 
 ['ArmChair',[3875.48,3966.3,-7.05719e-005],0,[0,0,1]] call InitStruct; 
