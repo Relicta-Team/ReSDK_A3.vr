@@ -1095,7 +1095,7 @@ function(goasm_attributes_handleProvider_container_content)
 					_dummyObj = "_dummyObj" call Core_getContextVar;
 					_dummyObj setvariable ["observedIndex",-1];
 					_srcObject = "_srcObject" call Core_getContextVar;
-					_srcObject call golib_setSelectedObjects;
+					[_srcObject,true] call golib_setSelectedObjects;
 
 					if (count _refContent == 0) then {
 						call ("___syncHeaderText" call Core_getContextVar);
@@ -1146,7 +1146,7 @@ function(goasm_attributes_handleProvider_container_content)
 					call (_wid getVariable "_onSync");
 				} call Core_callContext;
 
-				_srcObject call golib_setSelectedObjects;
+				[_srcObject,true] call golib_setSelectedObjects;
 				
 				call Core_popContext;
 
@@ -1174,7 +1174,7 @@ function(goasm_attributes_handleProvider_container_content)
 				if isNullReference(_srcObject) exitwith {
 					["Cannot get reference to null object"] call printError;
 				};
-				_srcObject call golib_setSelectedObjects;
+				[_srcObject,true] call golib_setSelectedObjects;
 				
 				deleteVehicle _dummyObj;
 
@@ -1365,7 +1365,7 @@ function(goasm_attributes_handleProvider_edConnected)
 						_markSearch = _edc select _idx;
 						["Searching object %1",_markSearch] call printTrace;
 						_o = _markSearch call golib_cs_getObjectByMark;
-						nextFrameParams({_this call golib_setSelectedObjects;call golib_vis_jumpToSelected},_o);
+						nextFrameParams({[_this] call golib_vis_jumpToObjects},_o);
 					}
 				]
 			} foreach (_edc);
@@ -1535,7 +1535,7 @@ function(goasm_attributes_handleProvider_edConnected)
 							_buttonClose = _ctgStorage getvariable "_buttonClose";
 							nextFrame(displayClose);
 							nextFrame(_buttonClose getvariable vec2("_customEventClose",{}));
-							nextFrameParams({_this call golib_setSelectedObjects;call golib_vis_jumpToSelected},_o);
+							nextFrameParams({[_this] call golib_vis_jumpToObjects},_o);
 						}];
 
 						INC(_globIncrement);
@@ -1645,7 +1645,7 @@ function(goasm_attributes_handleProvider_edOwner)
 				if isNullReference(_o) exitWith {
 					["Generic error on get object by mark: object %1 not found",_x] call printError;
 				};
-				nextFrameParams({_this call golib_setSelectedObjects; call golib_vis_jumpToSelected},_o);
+				nextFrameParams({[_this] call golib_setSelectedObjects; call golib_vis_jumpToSelected},_o);
 				_finded = true;
 			};
 		} foreach golib_internal_map_connected;

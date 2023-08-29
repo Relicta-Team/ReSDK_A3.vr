@@ -639,7 +639,7 @@ function(golib_vis_switchLockCameraOnSelected)
 
 function(golib_vis_jumpToObjects)
 {
-	_this call golib_setSelectedObjects;
+	[_this] call golib_setSelectedObjects;
 	call golib_vis_jumpToSelected;
 }
 

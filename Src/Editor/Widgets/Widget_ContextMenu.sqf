@@ -474,7 +474,7 @@ function(ContextMenu_loadMouseObject)
 						
 						_objWorld = _ctxData select 0;
 
-						_objWorld call golib_setSelectedObjects;
+						[_objWorld] call golib_setSelectedObjects;
 						private _args = [_data,_objWorld];// call goasm_prefab_createTemplateFrom_openWindow;
 						nextFrameParams(goasm_prefab_createTemplateFrom_openWindow,_args);
 					},

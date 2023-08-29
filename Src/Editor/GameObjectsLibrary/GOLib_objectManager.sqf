@@ -126,10 +126,32 @@ function(golib_om_placeObjectAtMouse)
 
 function(golib_setSelectedObjects)
 {
-	if not_equalTypes(_this,[]) then {
-		_this = [_this];
+	params [["_objList",["_unlockLayer",false]]];
+	if not_equalTypes(_objList,[]) then {
+		_objList = [_objList];
 	};
-	set3DENSelected _this
+	if (_unlockLayer) then {
+		private _layerPtr = -1;
+		private _unlockedLayers = [];
+		private _unlockedLayersNames = [];
+		{
+			_layerPtr = [_x,false] call layer_getObjectLayer;
+			if (_layerPtr != -1) then {
+				if ([_layerPtr] call layer_isLocked) then {
+					[_layerPtr,false] call layer_setLocked;
+					if ((_unlockedLayers pushBackUnique _layerPtr)!=-1) then {
+						_unlockedLayersNames pushBack (_layerPtr call layer_internal_getLayerNameByPtr);
+					};
+				};
+			};
+		} foreach _objList;
+
+		private _postMes = "";
+		if (count _unlockedLayersNames > 0) then {
+			["Разблокированы слои: " + (_unlockedLayersNames joinString ", ")] call showInfo;
+		};
+	};
+	set3DENSelected _objList;
 }
 
 function(golib_getSelectedObjects)
@@ -183,7 +205,7 @@ function(golib_selectObjectsBy)
 		_postMes = "; Разблокированы слои: " + (_unlockedLayersNames joinString ", ");
 	};
 
-	_list call golib_setSelectedObjects;
+	[_list,false] call golib_setSelectedObjects;
 	[format["Выделено %1 объектов%2",count _list,_postMes],10,null,0] call showInfo;
 }
 
