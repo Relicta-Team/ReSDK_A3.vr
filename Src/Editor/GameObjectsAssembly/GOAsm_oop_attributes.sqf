@@ -158,6 +158,24 @@ function(goasm_attributes_getValues)
 	};
 }
 
+function(goasm_attributes_getClassValues)
+{
+	params ["_typeOrObj","_atrName"];
+	[_typeOrObj,"Class",_atrName] call goasm_attributes_getValues;
+}
+
+function(goasm_attributes_getFieldValues)
+{
+	params ["_typeOrObj","_atrName","_memName"];
+	[_typeOrObj,"field",_atrName,_memName] call goasm_attributes_getValues;
+}
+
+function(goasm_attributes_getMethodValues)
+{
+	params ["_typeOrObj","_atrName","_memName"];
+	[_typeOrObj,"method",_atrName,_memName] call goasm_attributes_getValues;
+}
+
 function(goasm_attributes_getProperty)
 {
 	params ["_atrObj","_prop",["_isClassAtr",false]];
