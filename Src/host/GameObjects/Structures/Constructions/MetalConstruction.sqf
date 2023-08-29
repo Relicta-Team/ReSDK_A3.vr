@@ -14,6 +14,11 @@ editor_attribute("TemplatePrefab")
 class(MetalConstruction) extends(Constructions) var(name,"Стальная конструкция"); editor_only(var(desc,"Различные стальные конструкции");) endclass
 
 editor_attribute("EditorGenerated")
+class(RustyTank) extends(MetalConstruction)
+	var(model,"ca\buildings\misc\nasypka.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(LongMetalBeams) extends(MetalConstruction)
 	var(model,"ml\ml_object_new\ml_object_2\l01_props\l01_props_elevator_engine.p3d");
 	var(name,"Стальная конструкция");

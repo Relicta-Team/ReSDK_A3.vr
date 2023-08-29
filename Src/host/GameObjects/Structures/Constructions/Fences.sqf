@@ -88,6 +88,11 @@ class(SmallSteelRustyFence) extends(SmallFence)
 endclass
 
 editor_attribute("EditorGenerated")
+class(RustyWindowFrameMeduim) extends(SmallSteelRustyFence)
+	var(model,"ml\ml_object_new\ml_object_2\l01_props\guardroom_window.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(TinFence) extends(SmallFence)
 	var(model,"a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v1_f.p3d");
 endclass

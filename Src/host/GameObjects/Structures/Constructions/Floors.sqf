@@ -47,6 +47,11 @@ class(ConcreteSmallFloor) extends(SmallFloor)
 endclass
 
 editor_attribute("EditorGenerated")
+class(ConcreteSmallFloor1) extends(ConcreteSmallFloor)
+	var(model,"apalon\metro_a3\redgates\concrete_slub2.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(SmallStoneRoad) extends(SmallFloor)
 	var(model,"a3\structures_f_exp\infrastructure\pavements\gardenpavement_02_f.p3d");
 endclass
@@ -70,6 +75,11 @@ endclass
 editor_attribute("EditorGenerated")
 class(MediumConcreteFloor) extends(SmallFloor)
 	var(model,"csa_constr\csa_obj\plita_3x6.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(WhiteConcreteFloorBig) extends(MediumConcreteFloor)
+	var(model,"ml_shabut\exoduss\concreteplat.p3d");
 endclass
 
 editor_attribute("EditorGenerated")

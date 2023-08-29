@@ -12,6 +12,32 @@ editor_attribute("TemplatePrefab")
 class(BigHouse) extends(BigConstructions) var(name,"Большое здание"); editor_only(var(desc,"Крупное здание выполняющее роль декорации и являющееся нерушимой конструкцией");) endclass
 
 editor_attribute("EditorGenerated")
+class(FactoryWithTanks) extends(BigHouse)
+	var(model,"ca\buildings2\ind_cementworks\ind_mlyn\ind_mlyn_03.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(Tunnel) extends(BigHouse)
+	var(model,"apalon\metro_a3\menu\menu_tunnel.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(RustyTunnel) extends(Tunnel)
+	var(model,"apalon\metro_a3\menu\tunnel_vurez.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ConcreteFloorHangarLong) extends(BigHouse)
+	var(model,"ca\buildings2\houseruins\r_barn_w_01.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(FactoryBigBrick) extends(BigHouse)
+	var(model,"ml_exodusnew\stalker_tun\radarkitchen.p3d");
+	var(name,"Большое здание");
+endclass
+
+editor_attribute("EditorGenerated")
 class(BigBrickUnfinishedTwoStoreyHouse) extends(BigHouse)
 	var(model,"a3\structures_f\households\wip\unfinished_building_02_f.p3d");
 	var(name,"Постройка");

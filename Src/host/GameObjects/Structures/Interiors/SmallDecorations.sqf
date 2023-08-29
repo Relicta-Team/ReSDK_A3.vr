@@ -17,19 +17,59 @@ class(SmallDecorations) extends(StructureBasicCategory) endclass
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
 class(Picture) extends(SmallDecorations) var(name,"Картина"); editor_only(var(desc,"Просто картина");) endclass
+
+editor_attribute("EditorGenerated")
+class(PictureIcon) extends(Picture)
+	var(model,"enoch_rip\pravoslavnenko\otetzpi.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PictureFranklin) extends(PictureIcon)
+	var(model,"ml_exodusnew\ml_plakats3\picture_119.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PictureSussy) extends(PictureIcon)
+	var(model,"ml_exodusnew\ml_plakats3\picture_117.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PosterLive) extends(Picture)
+	var(model,"metro_ob\model\sovet3.p3d");
+endclass
 //ковры
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
 class(Carpet) extends(SmallDecorations) var(name,"Ковер"); editor_only(var(desc,"Красивый ковер");) endclass
 
 editor_attribute("EditorGenerated")
+class(RedCarpetWall) extends(Carpet)
+	var(model,"ca\structures_e\misc\misc_interier\carpet_wall_ep1.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(RedCarpet) extends(Carpet)
+	var(model,"ml_shabut\carpet\carpet.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(OrangeCapet) extends(Carpet)
 	var(model,"ml_shabut\kovrik\kovernew.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(OrangeCarpet1) extends(OrangeCapet)
+	var(model,"ml_shabut\kovrik\koverold.p3d");
 endclass
 //таблички
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
 class(SmallSign) extends(SmallDecorations) var(name,"Табличка"); editor_only(var(desc,"Табличка или указатель");) endclass
+
+editor_attribute("EditorGenerated")
+class(SignWelcome) extends(SmallSign)
+	var(model,"metro_ob\model\dobro.p3d");
+endclass
 
 editor_attribute("EditorGenerated")
 class(OldTombstone3) extends(SmallSign)

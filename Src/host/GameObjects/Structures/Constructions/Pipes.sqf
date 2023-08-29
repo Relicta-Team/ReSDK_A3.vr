@@ -14,6 +14,11 @@ editor_attribute("TemplatePrefab")
 class(BasicPipe) extends(Constructions) var(name,"Труба"); editor_only(var(desc,"Обычная разрушаемая труба");) endclass
 
 editor_attribute("EditorGenerated")
+class(DestroyedPipeMedium) extends(BasicPipe)
+	var(model,"ca\buildings2\ind_cementworks\ind_malykomin\ind_malykomin_ruins.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(ShortPipeBlueMetal) extends(BasicPipe)
 	var(model,"ml_shabut\exodusss\trubaduba1.p3d");
 	var(name,"Труба");
