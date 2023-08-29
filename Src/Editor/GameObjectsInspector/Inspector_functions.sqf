@@ -431,7 +431,7 @@ function(inspector_menuLoad)
 	//invisible
 	[TEXT,[50,_optimalSizeH],0,false] call _createElement;
 	{
-		_layer = _objWorld call layer_getObjectLayer;
+		_layer = [_objWorld,true] call layer_getObjectLayer;
 		if (_layer == "") then {_layer = slt+"нет"+sgt};
 		[_wid,format["<t align='left'>Слой: %1</t>",_layer]] call widgetSetText;
 	} call _setSyncValCode;
