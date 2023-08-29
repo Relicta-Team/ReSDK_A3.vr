@@ -47,6 +47,11 @@ class(ConcreteSmallFloor) extends(SmallFloor)
 endclass
 
 editor_attribute("EditorGenerated")
+class(ConcreteSmallFloor2) extends(ConcreteSmallFloor)
+	var(model,"ml_shabut\exoduss\concrete_slub.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(ConcreteSmallFloor1) extends(ConcreteSmallFloor)
 	var(model,"apalon\metro_a3\redgates\concrete_slub2.p3d");
 endclass

@@ -48,6 +48,11 @@ class(WoodenSmallFence) extends(SmallFence)
 endclass
 
 editor_attribute("EditorGenerated")
+class(WoodenSmallFence3) extends(WoodenSmallFence)
+	var(model,"metro_ob\model\tunnels_props_wood_tupik_small_02.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(WoodenSmallFence2) extends(WoodenSmallFence)
 	var(model,"ml\ml_object_new\model_24\ykritie.p3d");
 endclass
