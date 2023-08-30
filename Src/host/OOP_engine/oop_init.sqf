@@ -16,7 +16,7 @@
 
 #ifdef __VM_VALIDATE
 	#define logoop(mes) diag_log format["[OOP_init]: %1",mes]
-	#define EXIT_IF_ERROR(mes) diag_log format["[OOP_init]: [Critical]: %1",mes]; exitcode__ -10000;
+	#define EXIT_IF_ERROR(mes) if (_iserror || server_isLocked) exitWith { diag_log format["[OOP_init]: [Critical]: %1",mes]; exitcode__ -10000; };
 	#define error(mes) diag_log format["[OOP_init]: [Error]: %1",mes];
 	#define errorformat(mes,fmt) diag_log format["[OOP_init]: [Error]: %1",format[mes,fmt]];
 #endif
