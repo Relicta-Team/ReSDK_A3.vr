@@ -40,7 +40,6 @@ jobs:
     name: Validate PR
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
     runs-on: windows-latest
-    needs: [checkmap, checkclient, checkserver]
     steps:
       - name: Start validate
         run: |
@@ -48,6 +47,7 @@ jobs:
   checkmap:
     name: Validate maps
     runs-on: windows-latest
+    needs: [ValidatePR]
     steps:
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
@@ -60,6 +60,7 @@ jobs:
   checkclient:
     name: Check client
     runs-on: windows-latest
+    needs: [ValidatePR]
     strategy:
       fail-fast: true
       matrix:
@@ -93,6 +94,7 @@ jobs:
   checkserver:
     name: Check host
     runs-on: windows-latest
+    needs: [ValidatePR]
     strategy:
       fail-fast: true
       matrix:
