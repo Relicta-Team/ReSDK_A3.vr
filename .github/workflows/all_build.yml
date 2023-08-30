@@ -33,7 +33,7 @@ env:
   GENDOC_COMMIT_MES: Generated documentation
 
 jobs:
-  mapvalidator:
+  checkmap:
     name: Check map
     runs-on: windows-latest
     steps:
@@ -81,7 +81,6 @@ jobs:
   checkserver:
     name: Check host
     runs-on: windows-latest
-    needs: [mapvalidator]
     strategy:
       fail-fast: true
       matrix:
@@ -118,6 +117,7 @@ jobs:
     needs:
       - checkclient
       - checkserver
+      - checkmap
     steps:
       - uses: actions/checkout@v3
       - name: Increment build number
