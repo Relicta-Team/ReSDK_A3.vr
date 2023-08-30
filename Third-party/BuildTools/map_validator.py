@@ -7,6 +7,11 @@ import os
 def log(mes):
     print(mes,file=sys.stdout)
 
+def writeSummary(content):
+    if "GITHUB_STEP_SUMMARY" in os.environ :
+        with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f :
+            print(content="\n", file=f)
+
 def error(message,optfile = '',optline='',opttitle=''):
     build = '::error '
     listargs = []
@@ -67,6 +72,7 @@ def validateConfigs():
     
     mathces = re.findall("\#\s*define\s+(S?LIGHT_\w+)\s+(\d+)",allContents)
     
+    writeSummary(f"Light configs:")
     for match in mathces:
         cfg = match[0]
         id = match[1]
@@ -78,16 +84,19 @@ def validateConfigs():
             error(f"Duplicate config id {id}; This id already used for {configwithid}")
             hasError = True
         log(f'Found config {cfg} with id {id}')
+        writeSummary(f" - {cfg}={id}")
         allConfigsLE[cfg] = id
 
     if hasError: return
     
     log("\n\nValidate storage")
+    writeSummary("# Maps in storage:")
     for map in os.listdir(mapStorageFolder):
         if not map.endswith(".cpp"): continue
 
         mapPath = os.path.join(mapStorageFolder,map)
         log(f"Scanning map file {map}")
+        writeSummary(f"- {map}")
         with open(mapPath,"r",encoding="utf8") as f:
             buf = f.read()
             
@@ -113,11 +122,13 @@ def validateConfigs():
     if hasError: return
         
     log("\n\nValidate compiled maps")
+    writeSummary("# Compiled maps:")
     for map in os.listdir(mapCompiledFolder):
         if not map.endswith(".sqf"): continue
 
         mapPath = os.path.join(mapCompiledFolder,map)
         log(f"Scanning map builded file {map}")
+        writeSummary(f"- {map}")
         with open(mapPath,"r",encoding="utf8") as f:
             buf = f.read()
             foundedCfgs = 0
