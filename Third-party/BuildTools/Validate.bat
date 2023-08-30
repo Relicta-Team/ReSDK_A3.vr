@@ -23,11 +23,10 @@ if [%1] == [client] (
 	echo Invalid build type
 	exit /b 1
 )
-
 set workdir=%cd%
 echo Work directory: %workdir%
 
-set MAPS_VALIDATOR_PATH="%workdir%\Third-party\BuildTools\map_validator.exe"
+set MAPS_VALIDATOR_PATH="%workdir%\Third-party\BuildTools\map_validator.py"
 
 if not exist %MAPS_VALIDATOR_PATH% (
 	echo Map validator not found: %MAPS_VALIDATOR_PATH%
@@ -36,10 +35,11 @@ if not exist %MAPS_VALIDATOR_PATH% (
 
 if DEFINED MAP_CHECKS (
 	echo Maps validator start: %MAPS_VALIDATOR_PATH%
-	%MAPS_VALIDATOR_PATH% "map_cfg_light_check" %workdir%
-	echo Validator exit code: %ERRORLEVEL%
+	python %MAPS_VALIDATOR_PATH% "map_cfg_light_check" %workdir%
+	echo Exit code: %ERRORLEVEL%
 	exit /b %ERRORLEVEL%
 )
+
 
 
 
