@@ -33,8 +33,16 @@ env:
   GENDOC_COMMIT_MES: Generated documentation
 
 jobs:
+
+  # Проверка клиента, сервера и карт (только в PR, workflow_dispatch)
+  
+  ValidatePR:
+    name: Validate PR
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
+    runs-on: windows-latest
+    needs: [checkmap, checkclient, checkserver]
   checkmap:
-    name: Check map
+    name: Validate maps
     runs-on: windows-latest
     steps:
       - name: Setup Python
@@ -46,7 +54,7 @@ jobs:
           python ${{ env.map_validator_path }} map_cfg_light_check ${{ github.workspace }}
         working-directory: ${{ github.workspace }}
   checkclient:
-    name: Check
+    name: Check client
     runs-on: windows-latest
     strategy:
       fail-fast: true
@@ -110,14 +118,13 @@ jobs:
         with:
           name: Output log ${{ matrix.build_type }}
           path: ${{ env.source_out_path }}
+  
+  # Обновление версии и документации (only on main)
+
   updateversion:
     if: github.event_name != 'workflow_dispatch' && github.repository == 'Relicta-Team/ReSDK_A3.vr' && github.event_name != 'pull_request'
     name: Update build number
     runs-on: windows-latest
-    needs:
-      - checkclient
-      - checkserver
-      - checkmap
     steps:
       - uses: actions/checkout@v3
       - name: Increment build number
