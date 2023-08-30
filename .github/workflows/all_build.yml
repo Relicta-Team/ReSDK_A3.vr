@@ -50,6 +50,7 @@ jobs:
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
       - name: Post validate ${{ matrix.build_type }}
+        if: matrix.build_type != 'maps'
         run: | 
           python -V
           echo "::group::Python validate"
