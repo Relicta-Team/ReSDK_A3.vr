@@ -37,11 +37,11 @@ log(f"Workspace path: {workspace}")
 
 mapStorageFolder = os.path.abspath(workspace + '\\Src\\Editor\\Bin\\Maps')
 log(f'Check map storage: {mapStorageFolder}')
-if not os.path.exists(mapStorageFolder): sys.exit(20)
+if not os.path.exists(mapStorageFolder): sys.exit(-20)
 
 mapCompiledFolder = os.path.abspath(workspace + '\\Src\\host\\MapManager\\Maps')
 log(f'Check baked maps: {mapCompiledFolder}')
-if not os.path.exists(mapCompiledFolder): sys.exit(21)
+if not os.path.exists(mapCompiledFolder): sys.exit(-21)
 
 lightEngineFolder ='\\Src\\client\\LightEngine\\'
 legacyLightsFile = os.path.abspath(workspace + lightEngineFolder + 'LightEngine.hpp')
@@ -54,13 +54,14 @@ hasError = False
 
 #region Functions
 def validateConfigs():
+    global hasError
     global mapStorageFolder
     global mapCompiledFolder
     global legacyLightsFile
     global scriptedLightsFile
     allConfigsLE = {}
     
-    global hasError
+    
 
 
     log("Scanning configs")
