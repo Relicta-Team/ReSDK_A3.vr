@@ -26,20 +26,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  mapvalidator:
-    name: Validation
-    runs-on: windows-latest
-    steps:
-      - name: Setup Python
-        uses: actions/setup-python@v3.1.4
-      - uses: actions/checkout@v3
-      - name: Running Map Validator
-        run: |
-          python -V
-          python Third-party/BuildTools/map_validator.py map_cfg_light_check ${{ github.workspace }}
-        working-directory: ${{ github.workspace }}
   allbuild:
-    name: Build
+    name: Check
     runs-on: windows-latest
     strategy:
       fail-fast: true
@@ -49,6 +37,7 @@ jobs:
           - client-debug
           - server
           - server-debug
+          - maps
     steps:
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
@@ -78,7 +67,6 @@ jobs:
     runs-on: windows-latest
     needs:
       - allbuild
-      - mapvalidator
     steps:
       - uses: actions/checkout@v3
       - name: Increment build number
