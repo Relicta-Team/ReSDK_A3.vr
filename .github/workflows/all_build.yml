@@ -40,8 +40,6 @@ jobs:
         working-directory: ${{ github.workspace }}
   allbuild:
     name: Check build
-    needs: 
-      - mapvalidator
     runs-on: windows-latest
     strategy:
       fail-fast: true
@@ -63,7 +61,6 @@ jobs:
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
       - name: Post validate ${{ matrix.build_type }}
-        if: matrix.build_type != 'maps'
         run: | 
           python -V
           echo "::group::Output check"
@@ -71,7 +68,6 @@ jobs:
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
       - name: Upload output ${{ matrix.build_type }}
-        if: matrix.build_type != 'maps'
         uses: actions/upload-artifact@v3.1.2
         with:
           name: Output log ${{ matrix.build_type }}
