@@ -158,6 +158,6 @@ else:
 
 log(f"Work done!!! Error: {hasError}")
 if hasError:
-    sys.exit(2)
+    os.environ['SCRIPT_EXIT_STATUS'] = 1
 else:
-    sys.exit(0)
+    os.environ['SCRIPT_EXIT_STATUS'] = 0
