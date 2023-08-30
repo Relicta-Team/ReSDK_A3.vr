@@ -18,6 +18,11 @@ class(WoodenSmallShelf) extends(ShelfBase)
 endclass
 
 editor_attribute("EditorGenerated")
+class(WoodenSmallShelf1) extends(WoodenSmallShelf)
+	var(model,"a3\structures_f_epb\furniture\shelveswooden_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(LongShelf) extends(ShelfBase)
 	var(model,"ml_shabut\stelazh_ot_seregi\stelazh_ot_seregi.p3d");
 endclass

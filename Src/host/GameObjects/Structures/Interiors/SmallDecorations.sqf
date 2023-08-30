@@ -34,9 +34,71 @@ class(PictureSussy) extends(PictureIcon)
 endclass
 
 editor_attribute("EditorGenerated")
+class(PictureTwoMans) extends(PictureIcon)
+	var(model,"ml\ml_plakats\pictures\picture_02.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PictureHovan) extends(PictureIcon)
+	var(model,"ml\ml_plakats\pictures\picture_03.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PictureFoliesBergere) extends(PictureIcon)
+	var(model,"ml_exodusnew\ml_plakats3\picture_121.p3d");
+endclass
+
+//постеры
+editor_attribute("EditorGenerated")
 class(PosterLive) extends(Picture)
 	var(model,"metro_ob\model\sovet3.p3d");
 endclass
+
+editor_attribute("EditorGenerated")
+class(PosterGirl) extends(PosterLive)
+	var(model,"ml\ml_object_new\model_14_10\plakatgirl.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PosterGirl1) extends(PosterLive)
+	var(model,"ml_exodusnew\ml_plakats3\poster_nushi.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PosterEpidemic) extends(PosterLive)
+	var(model,"ml\ml_plakats\biohazard_plakat\biohazard_plakat_8.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PosterEpidemic1) extends(PosterLive)
+	var(model,"ml\ml_plakats\biohazard_plakat\biohazard_plakat_4.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PosterFireAlarm) extends(PosterLive)
+	var(model,"ml\ml_plakats\plakats\01.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PosterWorkplaceClean) extends(PosterLive)
+	var(model,"ml\ml_plakats\plakats\aginka.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PosterFireSafety) extends(PosterLive)
+	var(model,"ml\ml_plakats\plakats\01_plakat.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PosterWorkingClass) extends(PosterLive)
+	var(model,"ml\ml_plakats\transparants\lenin_plakat7.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(PosterManSuite) extends(PosterLive)
+	var(model,"ml\ml_plakats\transparants\lenin_plakat5.p3d");
+endclass
+
 //ковры
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
@@ -76,6 +138,65 @@ class(SignWelcome) extends(SmallSign)
 	var(model,"metro_ob\model\dobro.p3d");
 endclass
 
+editor_attribute("EditorGenerated")
+class(SignHighVoltage) extends(SignWelcome)
+	var(model,"ml\ml_plakats\wm\sign_electrohazard.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SignHighVoltage1) extends(SignWelcome)
+	var(model,"ml\ml_plakats\plakats\voltage_04.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SignScheme) extends(SignWelcome)
+	var(model,"ml\ml_plakats\plakats\diagram.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SignNoEntry) extends(SignWelcome)
+	var(model,"ml\ml_plakats\plakats\stop_01.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SignNoEntry1) extends(SignWelcome)
+	var(model,"ml\ml_plakats\plakats\no_exit_01.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SignNoEntry2) extends(SignWelcome)
+	var(model,"ml\ml_plakats\plakats\no_exit.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SignEmergencyExit) extends(SignWelcome)
+	var(model,"ml\ml_plakats\plakats\exit.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SignSmokingArea) extends(SignWelcome)
+	var(model,"ml\ml_plakats\plakats\no_smoking_01.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SignInfirmary) extends(SignWelcome)
+	var(model,"smg_metro_building\plakatitablichki\smg_plakat2_4.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SignGenerator) extends(SignWelcome)
+	var(model,"smg_metro_building\plakatitablichki\smg_plakat2_2.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SignArmory) extends(SignWelcome)
+	var(model,"smg_metro_building\plakatitablichki\smg_plakat2_7.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SignChargingUnit) extends(SignWelcome)
+	var(model,"ml\ml_plakats\plakats\tablichka_01.p3d");
+endclass
 
 //Монументы, памятники, могилы
 editor_attribute("InterfaceClass")

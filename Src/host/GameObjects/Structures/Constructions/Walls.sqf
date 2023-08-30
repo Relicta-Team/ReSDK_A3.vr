@@ -25,6 +25,11 @@ class(OldBrickWallMedium) extends(SmallWall)
 endclass
 
 editor_attribute("EditorGenerated")
+class(OldBrickWallMedium1) extends(OldBrickWallMedium)
+	var(model,"ca\structures\wall\wall_cbrk_5.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(StoneWall) extends(SmallWall)
 	var(model,"a3\structures_f\walls\stone_4m_f.p3d");
 	var(name,"Стена");
