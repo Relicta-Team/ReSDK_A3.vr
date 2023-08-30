@@ -156,5 +156,5 @@ else:
     log(f"Unknown task {taskname}")
     sys.exit(-501)
 
-log("Work done!!! Error: {hasError}")
+log(f"Work done!!! Error: {hasError}")
 sys.exit(0 if not hasError else -1)
