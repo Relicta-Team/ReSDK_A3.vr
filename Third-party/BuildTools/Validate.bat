@@ -37,7 +37,9 @@ if not exist %MAPS_VALIDATOR_PATH% (
 if DEFINED MAP_CHECKS (
 	echo Maps validator start: %MAPS_VALIDATOR_PATH%
 	%MAPS_VALIDATOR_PATH% "map_cfg_light_check" %workdir%
-	exit /b %ERRORLEVEL%
+	set CUSTOM_ERRORLEVEL=%ERRORLEVEL%
+	echo Validator exit code: %CUSTOM_ERRORLEVEL%
+	exit /b %CUSTOM_ERRORLEVEL%
 )
 
 
