@@ -46,11 +46,9 @@ jobs:
         continue-on-error: true
         run: | 
           echo "::group::Process validate"
-          if [ "${{ matrix.build_type }}" = "maps" ]; then
-            python Third-party/BuildTools/map_validator.py "map_cfg_light_check" ${{ github.workspace }}
-          else
-            Third-party/BuildTools/Validate.bat ${{ matrix.build_type }}
-          fi
+          
+          python Third-party/BuildTools/map_validator.py "map_cfg_light_check" ${{ github.workspace }}
+          
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
       - name: Post validate ${{ matrix.build_type }}
