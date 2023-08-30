@@ -45,6 +45,8 @@ scriptedLightsFile = os.path.abspath(workspace + lightEngineFolder + 'ScriptedEf
 log('Check light configs')
 if not os.path.exists(legacyLightsFile) or not os.path.exists(scriptedLightsFile): sys.exit(22)
 
+hasError = False
+
 #region Functions
 def validateConfigs():
     global mapStorageFolder
@@ -52,6 +54,8 @@ def validateConfigs():
     global legacyLightsFile
     global scriptedLightsFile
     allConfigsLE = {}
+    
+    global hasError
 
 
     log("Scanning configs")
@@ -68,14 +72,15 @@ def validateConfigs():
         id = match[1]
         if cfg in allConfigsLE:
             error(f"Duplicate config {cfg}")
-            sys.exit(-1)
+            hasError = True
         if id in allConfigsLE.values():
             configwithid = next((k for k, v in allConfigsLE.items() if v == id), None)
             error(f"Duplicate config id {id}; This id already used for {configwithid}")
-            sys.exit(-1)
+            hasError = True
         log(f'Found config {cfg} with id {id}')
         allConfigsLE[cfg] = id
 
+    if hasError: return
     
     log("\n\nValidate storage")
     for map in os.listdir(mapStorageFolder):
@@ -89,7 +94,7 @@ def validateConfigs():
             mapnamebin = re.findall("\"\"missionName\"\",\"\"([\w_]*)\"\"",buf)
             if mapnamebin.__len__() != 1:
                 error(f"Map {map} has no internal name")
-                sys.exit(-1)
+                hasError = True
             
             mapnamebin = mapnamebin[0]
 
@@ -99,12 +104,14 @@ def validateConfigs():
                 cfg = match
                 if not cfg in allConfigsLE:
                     error(f"Config {cfg} not found in binary map {mapnamebin}")
-                    sys.exit(-1)
+                    hasError = True
                 else:
                     foundedCfgs += 1
             
             log(f"Map {map} has {foundedCfgs} config uses")
     
+    if hasError: return
+        
     log("\n\nValidate compiled maps")
     for map in os.listdir(mapCompiledFolder):
         if not map.endswith(".sqf"): continue
@@ -121,7 +128,7 @@ def validateConfigs():
                 cfg = match
                 if not cfg in allConfigsLE:
                     error(f"Config {cfg} not found in builded map {map}")
-                    sys.exit(-1)
+                    hasError = True
                 else:
                     foundedCfgs += 1
             
@@ -138,3 +145,4 @@ else:
     sys.exit(-501)
 
 log("Work done!!!")
+sys.exit(0 if not hasError else -1)
