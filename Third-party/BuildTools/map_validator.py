@@ -157,4 +157,7 @@ else:
     sys.exit(-501)
 
 log(f"Work done!!! Error: {hasError}")
-sys.exit(0 if not hasError else -1)
+if hasError:
+    sys.exit(-1)
+else:
+    sys.exit(0)
