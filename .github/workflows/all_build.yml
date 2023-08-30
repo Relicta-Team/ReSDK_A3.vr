@@ -44,6 +44,16 @@ jobs:
       - name: Start validate
         run: |
           echo Checks started...
+
+  NewRelease:
+    name: New release
+    if: github.event_name != 'workflow_dispatch' && github.repository == 'Relicta-Team/ReSDK_A3.vr' && github.event_name != 'pull_request' 
+    runs-on: windows-latest
+    steps:
+      - name: Start
+        run: |
+          echo Started...
+  
   checkmap:
     name: Validate maps
     runs-on: windows-latest
@@ -128,8 +138,8 @@ jobs:
   # Обновление версии и документации (only on main)
 
   updateversion:
-    if: github.event_name != 'workflow_dispatch' && github.repository == 'Relicta-Team/ReSDK_A3.vr' && github.event_name != 'pull_request'
     name: Update build number
+    needs: [NewRelease]
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
