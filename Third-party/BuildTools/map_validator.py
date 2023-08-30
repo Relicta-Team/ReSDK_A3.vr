@@ -147,17 +147,17 @@ def validateConfigs():
             log(f"Map {map} has {foundedCfgs} config uses")
 
 #endregion
+if __name__ == "__main__":
+    if taskname=="map_cfg_light_check":
+        validateConfigs()
+    elif taskname=="todo_check":
+        pass
+    else:
+        log(f"Unknown task {taskname}")
+        sys.exit(-130)
 
-if taskname=="map_cfg_light_check":
-    validateConfigs()
-elif taskname=="todo_check":
-    pass
-else:
-    log(f"Unknown task {taskname}")
-    sys.exit(-130)
-
-log(f"Work done!!! Error: {hasError}")
-if hasError:
-    raise SystemExit()
-else:
-    sys.exit(0)
+    log(f"Work done!!! Error: {hasError}")
+    if hasError:
+        sys.exit(-5)
+    else:
+        sys.exit(0)
