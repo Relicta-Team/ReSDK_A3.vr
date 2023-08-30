@@ -3,7 +3,6 @@ import sys
 import string
 import os
 
-sys.exit(1005)  # или другой ненулевой код возврата для ошибки
 
 def log(mes):
     print(mes,file=sys.stdout)
@@ -159,6 +158,6 @@ else:
 
 log(f"Work done!!! Error: {hasError}")
 if hasError:
-    sys.exit(-5)
+    os._exit(-20)
 else:
     sys.exit(0)
