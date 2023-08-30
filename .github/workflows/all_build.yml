@@ -57,7 +57,8 @@ jobs:
           python Third-party/BuildTools/parse_output.py ./Third-party/BuildTools/output.txt ./
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
-      - name: Upload output
+      - name: Upload output ${{ matrix.build_type }}
+        if: matrix.build_type != 'maps'
         uses: actions/upload-artifact@v3.1.2
         with:
           name: Output log ${{ matrix.build_type }}
