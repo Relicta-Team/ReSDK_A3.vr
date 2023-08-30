@@ -105,7 +105,7 @@ class(RCookSaloon) extends(BasicRoleSaloon)
 	var(desc,"Готовит еду и разносит напитки.");
 	var(reputationNeed,rolerep(1,4,6));
 	var(count,3);
-	getter_func(getInitialPos,vec3(3474.25,3603.78,18.1101) vectorAdd vec3(rand(-0.1,0.1),rand(-0.1,0.1),0));
+	getter_func(getInitialPos,vec3(3473.81,3616.92,12.8096) vectorAdd vec3(rand(-0.1,0.1),rand(-0.1,0.1),0));
 	getter_func(getInitialDir,354);
 	var(randomHunger,vec2(80,100));
 	getter_func(canTakeInLobby,true);

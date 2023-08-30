@@ -50,14 +50,32 @@ class FileManager : IScript
 		{
 			case "Open":
 				if (ScriptContext.GetArgsCount() == 1)
+				{
 					Process.Start(ScriptContext.GetArg(0));
+				}
 				else
-					Process.Start(ScriptContext.GetArg(0),ScriptContext.GetArg(0));
+				{
+					string readedTextOpen = ScriptContext.GetArg(1);
+					string cdelim = ScriptContext.GetArg(2);
+					readedTextOpen = readedTextOpen.Replace(cdelim, "\"");
+					Process.Start(ScriptContext.GetArg(0), readedTextOpen);
+				}
 				
 				output.Append(File.Exists(ScriptContext.GetArg(0)));
 				break;
 			case "OpenReturn":
-				var procH = Process.Start(ScriptContext.GetArg(0));
+				Process procH = null;
+				if (ScriptContext.GetArgsCount() == 1)
+				{
+					procH = Process.Start(ScriptContext.GetArg(0));
+				}
+				else
+				{
+					string readedTextOpenRet = ScriptContext.GetArg(1);
+					string cdelim = ScriptContext.GetArg(2);
+					readedTextOpenRet = readedTextOpenRet.Replace(cdelim, "\"");
+					procH = Process.Start(ScriptContext.GetArg(0), readedTextOpenRet);
+				}
 				procH.WaitForExit();
 				output.Append(procH.ExitCode.ToString());
 				break;
@@ -86,10 +104,21 @@ class FileManager : IScript
 				try
 				{
 					string moveFrom = ScriptContext.GetArg(0);
+					string moveTo = ScriptContext.GetArg(1);
+					
+					Console.WriteLine($"path type from {GetPathType(moveFrom)}");
+					Console.WriteLine($"path type to {GetPathType(moveTo)}");
+
+					if (GetPathType(moveFrom) == PathType.Directory && GetPathType(moveTo) == PathType.Invalid)
+					{
+						Console.WriteLine($"dir from {moveFrom} to {moveTo}");
+						Directory.Move(moveFrom, moveTo);
+						output.Append(true);
+						break;
+					}
 
 					if (GetPathType(moveFrom) != PathType.File) throw new FileNotFoundException("moveFrom not a file");
 
-					string moveTo = ScriptContext.GetArg(1);
 					if (GetPathType(moveTo) == PathType.Directory)
 					{
 						moveTo = Path.Combine(moveTo, Path.GetFileName(moveFrom));
@@ -141,6 +170,9 @@ class FileManager : IScript
 				break;
 			case "Delete":
 				File.Delete(ScriptContext.GetArg(0));
+				break;
+			case "FolderDelete":
+				Directory.Delete(ScriptContext.GetArg(0),true);
 				break;
 			//seraching
 			//not used in src code...

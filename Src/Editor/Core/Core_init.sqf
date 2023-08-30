@@ -169,6 +169,18 @@ function(Core_reloadEditorFull)
 	
 }
 
+function(Core_setSessionPlatformCachedValue)
+{
+	params ["_name", "_value"];
+	uiNamespace setvariable ["resdk_internal_cached_" + _name,_value]
+}
+
+function(Core_getSessionPlatformCachedValue)
+{
+	params ["_name"];
+	uiNamespace getvariable ["resdk_internal_cached_" + _name,null]
+}
+
 function(Core_onPostInitCheckPerFrame)
 {
 	Core_posInit_perframe_awaitInput = false;

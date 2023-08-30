@@ -48,6 +48,7 @@
 #define style_prop(name,valstr) name=''valstr''
 
 #define style_learnedskills style_prop(align,center) style_prop(size,1.4) style_prop(color,#00B74A)
+#define style_learnedskillscategory style_prop(align,center) style_prop(size,1.5) style_prop(color,#ffffff)
 #define style_test color='#ff0000'
 #define style_redbig style_prop(color,#ff0000) style_prop(size,1.5)
 

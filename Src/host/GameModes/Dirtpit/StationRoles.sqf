@@ -893,10 +893,9 @@ class(RCitizen) extends(IRStationRole)
 	{
 		objParams_1(_mob);
 		private _cloth = ["CitizenCloth" + str randInt(1,22),_mob,INV_CLOTH] call createItemInInventory;
-		_keyRef = getSelf(lastHome) select 1;
-		regKeyInUniform(_cloth,[_keyRef],"Ключ от дома");
-		callFuncParams(_cloth,initMoney,randInt(1,5));
+		setSelf(lastCloth,_cloth);
 	};
+	var(lastCloth,nullPtr);
 
 	var(lastHome,[]); //сюда заносится объект дома с данными
 
@@ -914,6 +913,16 @@ class(RCitizen) extends(IRStationRole)
 		objParams_2(_mob,_usr);
 
 		callSelf(pickHome);
+
+		private _cloth = getSelf(lastCloth);
+		private _keyRef = getSelf(lastHome) select 1;
+		if (!isNullVar(_keyRef)) then {
+			regKeyInUniform(_cloth,[_keyRef],"Ключ от дома");
+		};
+		if !isNullVar(_cloth) then {
+			callFuncParams(_cloth,initMoney,randInt(1,5));
+		};
+
 		callSuper(IRStationRole,onAssigned);
 
 		getSelf(clients) pushBackUnique _usr;
@@ -973,7 +982,7 @@ class(RBum) extends(BasicRole)
 	var(count,9);
 	var(reputationNeed,rolerep(0,0,0));
 	getter_func(getInitialDir,88);
-	getter_func(getInitialPos,getSelf(lastPos));
+	getter_func(getInitialPos,callSelf(pickPos); getSelf(lastPos));
 
 	getter_func(getSkills,vec4(randInt(6,15),randInt(6,15),randInt(6,15),randInt(6,15)));
 	func(getOtherSkills) {[
@@ -1017,7 +1026,6 @@ class(RBum) extends(BasicRole)
 	{
 		objParams_2(_mob,_usr);
 
-		callSelf(pickPos);
 		callSuper(BasicRole,onAssigned);
 
 		callFuncParams(_mob,setHunger,randInt(20,40));
@@ -1096,7 +1104,16 @@ class(RNomadDirtpit) extends(BasicRole)
 	func(constructor)
 	{
 		objParams();
+		callSelfAfter(_firstInitNomadRole,2);
+	};
+
+	func(_firstInitNomadRole)
+	{
+		objParams();
 		callSelf(nextNomadRole);
+		if (isNull(getSelf(currentNomadRole)) || {isNullReference(getSelf(currentNomadRole))}) then {
+			["Current nomad role not setupped %1",callSelf(getClassName)] call logError;
+		};
 	};
 
 	var(name,"Кочевник");

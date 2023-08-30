@@ -69,6 +69,12 @@ messageBox = {
 	["Breakpoint","Relicta Message Box",[format _d,""],true] call rescript_callCommand
 };
 
+messageBoxRet = {
+	private _d = _this;
+	if not_equalTypes(_d,[]) then {_d = [_d]};
+	(["Breakpoint","Relicta Message Box",[format _d,"CUSTOM"],true] call rescript_callCommand) == "True";
+};
+
 /* *********************************************************
 	Section: Script error handler
 ********************************************************* */

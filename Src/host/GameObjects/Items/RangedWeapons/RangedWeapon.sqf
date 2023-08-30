@@ -687,7 +687,10 @@ class(IAmmoBase) extends(Stack)
 	getterconst_func(getCaliber,"9мм");
 	var(name,"Патрон");
 	var(stackName,"Патроны");
+	editor_attribute("EditorVisible" arg "type:int" arg "range:1:20")
+	var(stackCount,1);
 	var(stackMaxAmount,20);
+	getter_func(canDisentegrate,true);
 	getterconst_func(stackNames,vec3("Патрона","Патрона","Патронов"));
 	var(size,ITEM_SIZE_TINY);
 	var(weight,gramm(16.8)); //basic pistol ammo weight
@@ -740,7 +743,10 @@ class(BulletCase) extends(Stack)
 	var(name,"Гильза");
 	var(stackName,"Гильзы");
 	var(model,"\A3\Weapons_f\ammo\cartridge_small");
+	editor_attribute("EditorVisible" arg "type:int" arg "range:1:20")
+	var(stackCount,1);
 	var(stackMaxAmount,20);
+	getter_func(canDisentegrate,true);
 	getterconst_func(stackNames,vec3("Гильзы","Гильзы","Гильз"));
 	var(size,ITEM_SIZE_TINY);
 	var(weight,gramm(5.3));

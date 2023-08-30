@@ -12,7 +12,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=207;
+		nextID=209;
 	};
 	class Camera
 	{
@@ -378,7 +378,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""layer_nameToPtr"",createHashMapFromArray[[""Spawn points"",2208],[""Teleports"",2237]]],[""missionName"",""Template""],[""version"",3],[""layer_ptrToName"",createHashMapFromArray[[2208,""Spawn points""],[2237,""Teleports""]]]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""missionName"",""Template""],[""version"",4]]}";
 			};
 			id=2205;
 			type="Land_Orange_01_F";

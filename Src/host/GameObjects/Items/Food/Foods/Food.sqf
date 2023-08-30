@@ -67,18 +67,20 @@ endclass
 
 class(Testo) extends(IFoodItem)
 	var(name,"Тесто");
-	var(model,"a3\structures_f_heli\items\food\tableware_01_stackofnapkins_f.p3d");
+	var(model,"relicta_models2\food\s_dough\s_dough.p3d");
 	var(weight,gramm(200));
 	var(size,ITEM_SIZE_SMALL);
 endclass
 
 class(Lapsha) extends(Testo)
 	var(name,"Лапша");
+	var(model,"relicta_models2\food\s_noodle\s_noodle.p3d");
 	var(reagents,[vec2("Nutriment",5)]newReagentsFood);
 endclass
 
 class(Lepeshka) extends(Testo)
 	var(name,"Лепёшка");
+	var(model,"relicta_models2\food\s_tortilla\s_tortilla.p3d");
 	var(reagents,[vec2("Nutriment",12)]newReagentsFood);
 endclass
 
@@ -122,7 +124,7 @@ endclass
 
 class(MeatChopped) extends(IFoodItem)
 	var(name,"Кусок мяса");
-	var(model,"ml_exodusnew\beconfried.p3d"); //or "ml_exodusnew\becondry.p3d"
+	var(model,"relicta_models2\food\s_meat_peice\s_meat_peice.p3d"); //or "ml_exodusnew\becondry.p3d"
 	var(weight,gramm(300));
 	var(size,ITEM_SIZE_SMALL);
 	var(reagents,[vec2("Nutriment",45)]newReagentsFood);
@@ -131,11 +133,13 @@ endclass
 
 class(MeatMinced) extends(MeatChopped)
 	var(name,"Фарш");
+	var(model,"relicta_models2\food\s_minced_meat\s_minced_meat.p3d");
 	var(reagents,[vec2("Nutriment",10)]newReagentsFood);
 endclass
 
 class(Cutlet) extends(MeatMinced)
 	var(name,"Котлетка");
+	var(model,"relicta_models2\food\s_cutlet\s_cutlet.p3d");
 	var(weight,gramm(150));
 	var(reagents,[vec2("Nutriment",15)]newReagentsFood);
 endclass
@@ -151,7 +155,7 @@ endclass
 
 class(Pancakes) extends(IFoodItem)
 	var(name,"Блинцы");
-	var(model,"Skeet_Clay_F");
+	var(model,"relicta_models2\food\s_pancakes\s_pancakes.p3d");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(130));
 	var(reagents,[vec2("Nutriment",30)]newReagentsFood);
@@ -199,7 +203,7 @@ endclass
 
 class(ButterPiece) extends(IFoodItem)
 	var(name,"Кусочек масла");
-	var(model,"ml_exodusnew\becondry.p3d");
+	var(model,"relicta_models2\food\s_butter_piece\s_butter_piece.p3d");
 	var(weight,gramm(40));
 	var(reagents,[vec2("Nutriment",2)]newReagentsFood);
 endclass
@@ -263,7 +267,7 @@ class(Bread) extends(IFoodItem)
 				private _itm = null;
 				delete(this);
 				for "_i" from 1 to _count do {
-					_itm = ["BreadChopped",_pos,null,false] call createItemInWorld;
+					_itm = ["BreadChopped",_pos vectoradd [rand(-0.01,0.01),rand(-0.01,0.01),rand(-0.001,0.001)],null,false] call createItemInWorld;
 					setVar(_itm,weight,_wperitem);
 				};
 			} else {
@@ -276,7 +280,7 @@ endclass
 
 class(BreadChopped) extends(IFoodItem)
 	var(name,"Кусок хлеба");
-	var(model,"ml_exodusnew\becondry.p3d");
+	var(model,"relicta_models2\food\s_bread\s_bread.p3d");
 	var(weight,gramm(300));
 	var(size,ITEM_SIZE_SMALL);
 	var(reagents,[vec2("Nutriment",4)]newReagentsFood);
@@ -299,6 +303,7 @@ class(BreadChopped) extends(IFoodItem)
 		if (equals(_cls,"ButterPiece") && !getSelf(isCrafted)) exitWith {
 			call _anonSetCrafted;
 			setSelf(name,"Бутер с маслом");
+			callSelfParams(setModel,"relicta_models2\food\s_sandwich\s_sandwich.p3d");
 			callSelfParams(addReagent,"Nutriment" arg 30);
 		};
 		if (equals(_cls,"Cutlet") && !getSelf(isCrafted)) exitWith {
@@ -330,7 +335,7 @@ endclass
 class(SaltShaker) extends(IFoodItem)
 	var(name,"Соль");
 	var(desc,"Маленькая баночка.");
-	var(model,"ml_shabut\eft\ibuprofenka.p3d");
+	var(model,"relicta_models2\food\s_salt\s_salt.p3d");
 	var(reagents,[vec2("Salt",30)]newReagentsFood);
 	getterconst_func(getBiteSize,2);
 	getter_func(canEat,callSelf(getFilledSpace) > 0);

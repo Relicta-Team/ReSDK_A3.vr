@@ -37,7 +37,8 @@ init_function(goasm_attributes_main_init)
 	["GMField"] call goasm_attributes_bindAttribute;
 
 	// ---------------- Классовые атрибуты ----------------
-
+	// Атрибут для класса указывает что он является устаревшим и будет удален в будущем
+	["Deprecated",{!_isInherited}] call goasm_attributes_bindAttribute;
 	// Атрибут для класса указывает что он не может быть создан явно. Возможно только использование как наследника
 	["InterfaceClass",{!_isInherited}] call goasm_attributes_bindAttribute;
 	//Скрытые классы не видны в библиотеке объектов. Указав параметр "allChild" все наследники класса так же не будут видны
@@ -155,6 +156,24 @@ function(goasm_attributes_getValues)
 		if isNullVar(_mData) exitWith {null};
 		_mData select (_mData findif {equals(_x select 0,_atrName)})
 	};
+}
+
+function(goasm_attributes_getClassValues)
+{
+	params ["_typeOrObj","_atrName"];
+	[_typeOrObj,"Class",_atrName] call goasm_attributes_getValues;
+}
+
+function(goasm_attributes_getFieldValues)
+{
+	params ["_typeOrObj","_atrName","_memName"];
+	[_typeOrObj,"field",_atrName,_memName] call goasm_attributes_getValues;
+}
+
+function(goasm_attributes_getMethodValues)
+{
+	params ["_typeOrObj","_atrName","_memName"];
+	[_typeOrObj,"method",_atrName,_memName] call goasm_attributes_getValues;
 }
 
 function(goasm_attributes_getProperty)
