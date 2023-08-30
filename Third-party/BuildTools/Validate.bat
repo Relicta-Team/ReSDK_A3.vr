@@ -40,10 +40,6 @@ if DEFINED MAP_CHECKS (
 	exit /b %ERRORLEVEL%
 )
 
-
-
-
-
 echo Compiler: %COMPILER_PATH%
 echo Main options: %MAIN_OPTIONS%
 echo Common macro: %MACRO_COMMON%
