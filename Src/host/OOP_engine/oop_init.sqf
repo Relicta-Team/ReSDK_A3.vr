@@ -16,6 +16,9 @@
 
 #ifdef __VM_VALIDATE
 	#define logoop(mes) diag_log format["[OOP_init]: %1",mes]
+	#define EXIT_IF_ERROR(mes) diag_log format["[OOP_init]: [Critical]: %1",mes]; exitcode__ -10000;
+	#define error(mes) diag_log format["[OOP_init]: [Error]: %1",mes];
+	#define errorformat(mes,fmt) diag_log format["[OOP_init]: [Error]: %1",format[mes,fmt]];
 #endif
 
 logoop("Starting class compilation");
@@ -200,6 +203,9 @@ private _errorAttr = {
 	errorformat("Cant find attribute <%1> in class <%2>",_name arg _pObj getVariable ["classname" arg "UNKNOWN_CLASS"]);
 };
 
+//do not check attributes
+#ifndef _SQFVM
+
 {
 	_x params ["_pObj","_attrs"];
 	
@@ -210,6 +216,8 @@ private _errorAttr = {
 
 	} foreach _attrs;
 } foreach _attr_ex_init_list;
+
+#endif
 
 EXIT_IF_ERROR("Class compilation was terminated");
 
