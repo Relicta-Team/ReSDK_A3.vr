@@ -36,7 +36,8 @@ if not exist %MAPS_VALIDATOR_PATH% (
 
 if DEFINED MAP_CHECKS (
 	echo Maps validator start: %MAPS_VALIDATOR_PATH%
-	python %MAPS_VALIDATOR_PATH% "map_cfg_light_check" %workdir%
+	REM python %MAPS_VALIDATOR_PATH% "map_cfg_light_check" %workdir%
+	for /f %%x in ('python %MAPS_VALIDATOR_PATH% "map_cfg_light_check" %workdir%') do set SCRIPT_EXIT_STATUS=%%x
 	echo Validator exit code: %SCRIPT_EXIT_STATUS%
 	exit /b %SCRIPT_EXIT_STATUS%
 )
