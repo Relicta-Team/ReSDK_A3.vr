@@ -28,7 +28,7 @@ if len(sys.argv) < 3:
     error(f"No cli param found; Count {len(sys.argv)}")
     for line in sys.argv:
         log(f"arg: {line}")
-    sys.exit(-500)
+    sys.exit(-120)
 
 taskname = sys.argv[1]
 workspace = os.path.abspath(sys.argv[2])
@@ -154,10 +154,10 @@ elif taskname=="todo_check":
     pass
 else:
     log(f"Unknown task {taskname}")
-    sys.exit(-501)
+    sys.exit(-130)
 
 log(f"Work done!!! Error: {hasError}")
 if hasError:
-    sys.exit(-1)
+    sys.exit(2)
 else:
     sys.exit(0)
