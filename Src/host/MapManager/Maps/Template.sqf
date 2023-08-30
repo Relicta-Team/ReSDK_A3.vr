@@ -58,7 +58,7 @@ _4052_544194007_642334_10439 = ['TeleportBase',[4052.54,4007.64,4.10439],277.851
 ['TeleportExit',[4053.63,4016.99,4.31423],255.482,[0,0,1], {go_editor_globalRefs set ['tp_main',_thisObj];
 }] call InitStruct; 
 _4072_994874042_888184_53377 = ['TeleportBase',[4072.99,4042.89,4.53377],0,[0,0,1]] call InitStruct; 
-_4034_460454002_918219_31756 = ['LampWall',[4034.46,4002.92,14.3047,true],156.996,[0.969658,0.0125973,0.244142], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4034_460454002_918219_31756 = ['LampWall',[4034.46,4002.92,14.3047,true],156.996,[0.969658,0.0125973,0.244142], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_ERRORTEST_var];}] call InitStruct; 
 _4006_545174019_7182611_18008 = ['LampWall',[4006.55,4019.72,16.1657,true],292.182,[-0.431516,-0.901254,0.0391875], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 _4020_542974020_298589_83190 = ['LampWall',[4020.54,4020.3,14.8166,true],18.7499,[-0.965691,0.254814,-0.0500989], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 _4011_509774007_692144_30183 = ['LampWall',[4011.51,4007.69,4.30183],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
