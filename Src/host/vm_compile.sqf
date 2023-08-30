@@ -192,7 +192,10 @@ __vm_log("Start VM compile");
 	#include <CommonComponents\loader.hpp>
 
 	#include "init.sqf"
-	call checkClassInheritance;
+	//call checkClassInheritance;
+	//#ifdef __GH_ACTION
+	//copyToClipboard (str p_table_inheritance);
+	//#endif
 }
 except__
 {
