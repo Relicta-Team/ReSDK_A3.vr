@@ -46,9 +46,7 @@ jobs:
         continue-on-error: true
         run: | 
           echo "::group::Process validate"
-          
-          python Third-party/BuildTools/map_validator.py "map_cfg_light_check" ${{ github.workspace }}
-          
+          Third-party/BuildTools/Validate.bat ${{ matrix.build_type }}
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
       - name: Post validate ${{ matrix.build_type }}

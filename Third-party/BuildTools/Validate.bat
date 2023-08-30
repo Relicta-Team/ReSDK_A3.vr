@@ -37,7 +37,7 @@ if DEFINED MAP_CHECKS (
 	echo Maps validator start: %MAPS_VALIDATOR_PATH%
 	python %MAPS_VALIDATOR_PATH% "map_cfg_light_check" %workdir%
 	echo Exit code: %ERRORLEVEL%
-	exit /b %ERRORLEVEL%
+	exit /b -5
 )
 
 echo Compiler: %COMPILER_PATH%
