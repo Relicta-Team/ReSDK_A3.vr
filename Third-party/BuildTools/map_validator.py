@@ -158,6 +158,6 @@ else:
 
 log(f"Work done!!! Error: {hasError}")
 if hasError:
-    raise SystemExit()
+    quit(-5)
 else:
     sys.exit(0)
