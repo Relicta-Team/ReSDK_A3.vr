@@ -10,7 +10,7 @@ def log(mes):
 def writeSummary(content):
     if "GITHUB_STEP_SUMMARY" in os.environ :
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f :
-            print(content="\n", file=f)
+            print(content+"\n", file=f)
 
 def error(message,optfile = '',optline='',opttitle=''):
     build = '::error '
