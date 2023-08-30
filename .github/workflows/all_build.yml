@@ -45,7 +45,7 @@ jobs:
       - name: Validate ${{ matrix.build_type }}
         continue-on-error: true
         run: | 
-          echo "::group::VM validate"
+          echo "::group::Process validate"
           Third-party/BuildTools/Validate.bat ${{ matrix.build_type }}
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
@@ -53,7 +53,7 @@ jobs:
         if: matrix.build_type != 'maps'
         run: | 
           python -V
-          echo "::group::Python validate"
+          echo "::group::Output check"
           python Third-party/BuildTools/parse_output.py ./Third-party/BuildTools/output.txt ./
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
