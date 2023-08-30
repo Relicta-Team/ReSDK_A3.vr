@@ -9,7 +9,7 @@
 #include "CombatSystem.hpp"
 
 //as ShortSword
-class(WeapSword) extends(ERROR_MeleeWeapon)
+class(WeapSword) extends(MeleeWeapon)
 
 	varpair(attackedBy,pair(ATTACK_TYPE_SWING,"рубит мечом"); pair(ATTACK_TYPE_THRUST,"колет мечом"));
 	var(defenceBy,"меча");
