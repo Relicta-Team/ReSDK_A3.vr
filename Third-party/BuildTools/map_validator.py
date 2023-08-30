@@ -158,6 +158,6 @@ else:
 
 log(f"Work done!!! Error: {hasError}")
 if hasError:
-    os._exit(-20)
+    os._exit(20)
 else:
     sys.exit(0)
