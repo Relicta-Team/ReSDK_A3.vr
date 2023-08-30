@@ -27,7 +27,7 @@ if [%1] == [client] (
 set workdir=%cd%
 echo Work directory: %workdir%
 
-set MAPS_VALIDATOR_PATH="%workdir%\Third-party\BuildTools\map_validator.py"
+set MAPS_VALIDATOR_PATH="%workdir%\Third-party\BuildTools\map_validator.exe"
 
 if not exist %MAPS_VALIDATOR_PATH% (
 	echo Map validator not found: %MAPS_VALIDATOR_PATH%
@@ -36,7 +36,7 @@ if not exist %MAPS_VALIDATOR_PATH% (
 
 if DEFINED MAP_CHECKS (
 	echo Maps validator start: %MAPS_VALIDATOR_PATH%
-	python %MAPS_VALIDATOR_PATH% "map_cfg_light_check" %workdir%
+	%MAPS_VALIDATOR_PATH% "map_cfg_light_check" %workdir%
 	echo Validator exit code: %ERRORLEVEL%
 	exit /b %ERRORLEVEL%
 )
