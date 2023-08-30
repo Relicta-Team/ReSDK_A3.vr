@@ -26,22 +26,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  mapvalidator:
-    name: Check map
-    runs-on: windows-latest
-    steps:
-      - name: Setup Python
-        uses: actions/setup-python@v3.1.4
-      - uses: actions/checkout@v3
-      - name: Validate map
-        run: |
-          python -V
-          python Third-party/BuildTools/map_validator.py map_cfg_light_check ${{ github.workspace }}
-        working-directory: ${{ github.workspace }}
   allbuild:
-    name: Check build
-    needs: 
-      - mapvalidator
+    name: Check
     runs-on: windows-latest
     strategy:
       fail-fast: true
@@ -51,12 +37,13 @@ jobs:
           - client-debug
           - server
           - server-debug
+          - maps
     steps:
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
       - name: Validate ${{ matrix.build_type }}
-        continue-on-error: true
+        continue-on-error: false
         run: | 
           echo "::group::Process validate"
           Third-party/BuildTools/Validate.bat ${{ matrix.build_type }}
