@@ -29,10 +29,12 @@ categories:
       - "Editor"
 exclude-labels:
   - 'Ignore changelog'
-category-template: "**$TITLE**"
+category-template: '## **$TITLE**'
 change-template: '- $TITLE (#$NUMBER) **$AUTHOR**'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
-
+exclude-contributors:
+  - "github-actions[bot]"
+  - "github-actions"
 #replacers:
 #  - search: '/CVE-(\d{4})-(\d+)/g'
 #    replace: 'https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-$1-$2'
@@ -47,7 +49,7 @@ autolabeler:
       - '/fix|фикс|исправлен|правк/i'
   - label: 'Feature'
     title:
-      - '/request|add|feature|фича|добав|enhancement/i'
+      - '/feature|фича|добав|enhancement/i'
   - label: 'Editor'
     title: 
       - '/editor/i'
@@ -66,6 +68,8 @@ autolabeler:
   - label: 'Common'
     title: 
       - '/Common/i'
+
+
 version-resolver:
   major:
     labels:
@@ -82,10 +86,10 @@ version-resolver:
 
 template: |
   # Описание
-  `Описание отсутствует...`
+  Стабильное обновление $RESOLVED_VERSION
 
-  # Изменения
+  # Список изменений
   $CHANGES
 
   # Участники
-  $CONTRIBUTORS
+  Список участников, принявших участие в выходе обновления $RESOLVED_VERSION: $CONTRIBUTORS
