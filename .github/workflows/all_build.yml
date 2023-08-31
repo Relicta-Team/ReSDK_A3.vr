@@ -137,37 +137,37 @@ jobs:
   
   # Обновление версии и документации (only on main)
 
-  updateversion:
-    name: Update build number
-    needs: [NewRelease]
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Increment build number
-        id: new_version  
-        shell: powershell
-        run: |
-          echo Workspace is ${{github.workspace}}
-          Third-party/BuildTools/update_version.exe path:.\ updpath
-          $version = Get-Content .\src\VERSION
-          Write-Host "Now version is: $version"
-          echo "version_value=${version}" >> $env:GITHUB_OUTPUT
+  #updateversion:
+    #name: Update build number
+    #needs: [NewRelease]
+    #runs-on: windows-latest
+    #steps:
+      #- uses: actions/checkout@v3
+      #- name: Increment build number
+        #id: new_version  
+        #shell: powershell
+        #run: |
+          #echo Workspace is ${{github.workspace}}
+          #Third-party/BuildTools/update_version.exe path:.\ updpath
+          #$version = Get-Content .\src\VERSION
+          #Write-Host "Now version is: $version"
+          #echo "version_value=${version}" >> $env:GITHUB_OUTPUT
           
-      - name: Push changes
-        uses: test-room-7/action-update-file@v1  
-        if: steps.new_version.outputs.version_value && github.repository == 'Relicta-Team/ReSDK_A3.vr'
-        with:
-          committer-name: Autoupdater
-          file-path: |
-            Src/VERSION
-            Src/version.hpp
-          commit-msg: Update - ${{steps.new_version.outputs.version_value}}
-          github-token: ${{secrets.TOKEN}}
+      #- name: Push changes
+        #uses: test-room-7/action-update-file@v1  
+        #if: steps.new_version.outputs.version_value && github.repository == 'Relicta-Team/ReSDK_A3.vr'
+        #with:
+          #committer-name: Autoupdater
+          #file-path: |
+            #Src/VERSION
+            #Src/version.hpp
+          #commit-msg: Update - ${{steps.new_version.outputs.version_value}}
+          #github-token: ${{secrets.TOKEN}}
   generatedocs:
     runs-on: windows-latest
     name: Generate documentation
     needs: 
-      - updateversion
+      - NewRelease
     steps:
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
