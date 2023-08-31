@@ -1,31 +1,95 @@
-name-template: 'v$RESOLVED_VERSION 🌈'
+name-template: 'ReSDK_A3 v$RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
 categories:
-  - title: '🚀 Features'
+  - title: 'Добавлено'
+    collapse-after: 10
     labels:
-      - 'feature'
-      - 'enhancement'
-  - title: '🐛 Bug Fixes'
+      - "Feature"
+      - "Enhancement"
+  - title: 'Исправлено'
+    collapse-after: 10
     labels:
-      - 'fix'
-      - 'bugfix'
-      - 'bug'
-  - title: '🧰 Maintenance'
-    label: 'chore'
-change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+      - "Bug fix"
+      - "Bug"
+  - title: "Общее"
+    collapse-after: 10
+    labels:
+      - "Common"      
+  - title: 'Cервер'
+    collapse-after: 10
+    labels:
+      - "Server"
+  - title: 'Клиент'
+    collapse-after: 10
+    labels:
+      - "Client"
+  - title: 'Редактор'
+    collapse-after: 10
+    labels:
+      - "Editor"
+exclude-labels:
+  - 'Ignore changelog'
+category-template: '## **$TITLE**'
+change-template: '- $TITLE (#$NUMBER) **$AUTHOR**'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
+exclude-contributors:
+  - "github-actions[bot]"
+  - "github-actions"
+#replacers:
+#  - search: '/CVE-(\d{4})-(\d+)/g'
+#    replace: 'https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-$1-$2'
+
+# Автометки для PR
+autolabeler:
+  - label: 'Documentation'
+    files:
+      - '*.md'
+  - label: 'Bug fix'
+    title:
+      - '/fix|фикс|исправлен|правк/i'
+  - label: 'Feature'
+    title:
+      - '/feature|фича|добав|enhancement/i'
+  - label: 'Editor'
+    title: 
+      - '/editor/i'
+    files:
+      - '**\Editor\**.*'
+  - label: 'Client'
+    title: 
+      - '/Client/i'
+    files:
+      - '**\client\**.*'
+  - label: 'Server'
+    title: 
+      - '/Server|Map/i'
+    files:
+      - '**\host\**.*'
+  - label: 'Common'
+    title: 
+      - '/Common/i'
+
+
 version-resolver:
   major:
     labels:
-      - 'major'
+      - 'Major update'
   minor:
     labels:
-      - 'minor'
+      - 'Minor update'
   patch:
     labels:
-      - 'patch'
+      - 'Path update'
   default: patch
-template: |
-  ## Changes
 
+
+
+template: |
+  # Описание
+  Стабильное обновление $RESOLVED_VERSION
+
+  # Список изменений
   $CHANGES
+
+  # Участники
+  Список участников, принявших участие в выходе обновления $RESOLVED_VERSION: $CONTRIBUTORS
