@@ -48,12 +48,17 @@ function(golib_internal_initTreeStateSaver)
 		_map = call golib_internal_getTreeSaverStorage;
 		_curname = _tree tvText _path;
 		_map set [_curname,_path];
+		//["Tree expanded %1 %3 (saved %2)",_path,_curname in _map,_curname] call printTrace;
 	}];
 	_tree ctrlAddEventHandler ["TreeCollapsed",{
 		params ["_tree","_path"];
 		_map = call golib_internal_getTreeSaverStorage;
 		_curname = _tree tvText _path;
-		_map deleteAt [_curname,_path];
+		_map deleteAt _curname;
+		// TODO: при сворачивании ветки в _map могут храниться дочки.
+		// Они не раскрываются при перезгрузке (иногда всё же бывает проблема)
+		//! Нужно удалять из карты дочерние ветки для работы нативной логике дерева.
+		//["Tree collapsed %1 %3 (saved %2)",_path,_curname in _map,_curname] call printTrace;
 	}];
 }
 
