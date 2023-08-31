@@ -24,9 +24,9 @@ inventory_sloticons_default = [
 	PIC_PATH("shoulder"),
 	PIC_PATH("cloth"),
 	PIC_PATH("face"),
-	PIC_PATH("hand_r"),
+	PIC_PATH("hand_l"),
 	PIC_PATH("belt_r"),
-	PIC_PATH("hand_l")
+	PIC_PATH("hand_r")
 ];
 
 inventory_openModeSlotsId = [INV_BACKPACK,INV_ARMOR,INV_HEAD,INV_BACK,INV_CLOTH,INV_FACE,INV_BELT];
