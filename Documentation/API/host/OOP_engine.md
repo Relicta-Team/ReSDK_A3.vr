@@ -234,6 +234,49 @@ Replaced value:
 diag_log format["[OOP_init]: %1",mes]
 ```
 File: [host\OOP_engine\oop_init.sqf at line 18](../../../Src/host/OOP_engine/oop_init.sqf#L18)
+## EXIT_IF_ERROR(mes)
+
+Type: constant
+
+> Exists if **__VM_VALIDATE** defined
+
+Description: 
+- Param: mes
+
+Replaced value:
+```sqf
+if (_iserror || server_isLocked) exitWith { diag_log format["[OOP_init]: [Critical]: %1",mes]; exitcode__ -10000; };
+```
+File: [host\OOP_engine\oop_init.sqf at line 19](../../../Src/host/OOP_engine/oop_init.sqf#L19)
+## error(mes)
+
+Type: constant
+
+> Exists if **__VM_VALIDATE** defined
+
+Description: 
+- Param: mes
+
+Replaced value:
+```sqf
+diag_log format["[OOP_init]: [Error]: %1",mes];
+```
+File: [host\OOP_engine\oop_init.sqf at line 20](../../../Src/host/OOP_engine/oop_init.sqf#L20)
+## errorformat(mes,fmt)
+
+Type: constant
+
+> Exists if **__VM_VALIDATE** defined
+
+Description: 
+- Param: mes
+- Param: fmt
+
+Replaced value:
+```sqf
+diag_log format["[OOP_init]: [Error]: %1",format[mes,fmt]];
+```
+File: [host\OOP_engine\oop_init.sqf at line 21](../../../Src/host/OOP_engine/oop_init.sqf#L21)
 ## allocName
 
 Type: constant
@@ -245,7 +288,7 @@ Replaced value:
 ```sqf
 this setName "%2"
 ```
-File: [host\OOP_engine\oop_init.sqf at line 56](../../../Src/host/OOP_engine/oop_init.sqf#L56)
+File: [host\OOP_engine\oop_init.sqf at line 59](../../../Src/host/OOP_engine/oop_init.sqf#L59)
 # oop_logging.sqf
 
 ## oop_upd

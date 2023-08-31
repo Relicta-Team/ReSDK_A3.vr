@@ -243,6 +243,22 @@ function(ContextMenu_loadMouseObject)
 		_hasObject = true;
 	};
 	
+	private _sel = get3DENMouseOver;
+	if (count _sel == 2 && {(_sel select 0) == "Object"}) then {
+		private _checkObj = _sel select 1;
+		if isNullReference(_checkObj) exitwith {};
+		
+		private _isNoGeom = ((allLods _checkObj) findif {_x select 1 == "geometry"})==-1;
+		
+		if isNullReference(_obj) exitwith {_obj = _checkObj; _hasObject = true};
+		
+		//get3DENCamera distance to targets check
+		if (_isNoGeom) then {
+			_obj = _checkObj;
+			_hasObject = true;
+		};
+	};
+
 	_stackMenu = [["Отмена",{}]];
 	["Context selected object %1",_obj] call printTrace;
 	private _ctxParams = [_obj];
