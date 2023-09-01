@@ -17,9 +17,27 @@ if [%1] == [client] (
 ) else if [%1] == [server-debug] (
 	set COMPILER_PATH=./src/host/vm_compile.sqf
 	set BUILD_TYPE=-D CMD__DEBUG
+) else if [%1] == [maps] (
+	set MAP_CHECKS=1
 ) else (
 	echo Invalid build type
 	exit /b 1
+)
+set workdir=%cd%
+echo Work directory: %workdir%
+
+set MAPS_VALIDATOR_PATH="%workdir%\Third-party\BuildTools\map_validator.py"
+
+if not exist %MAPS_VALIDATOR_PATH% (
+	echo Map validator not found: %MAPS_VALIDATOR_PATH%
+	exit /b 1
+)
+
+if DEFINED MAP_CHECKS (
+	echo Maps validator start: %MAPS_VALIDATOR_PATH%
+	python %MAPS_VALIDATOR_PATH% "map_cfg_light_check" %workdir%
+	echo Exit code: %ERRORLEVEL%
+	exit %ERRORLEVEL%
 )
 
 echo Compiler: %COMPILER_PATH%
@@ -28,8 +46,6 @@ echo Common macro: %MACRO_COMMON%
 
 REM cd ..\..\
 
-set workdir=%cd%
-echo Work directory: %workdir%
 set vmpath="%workdir%\Third-party\VirtualMachine\sqfvm.exe"
 echo Virtual machine: %vmpath%
 if not exist %vmpath% (
