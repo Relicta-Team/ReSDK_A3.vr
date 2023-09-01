@@ -104,6 +104,12 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		objParams();
 	};
 
+	//!Устаревший метод. Используйте postSetup
+	func(onRoundBegin)
+	{
+		objParams();
+	};
+
 	//Проверка финиша. Должен возвращать больше 0
 	func(checkFinish)
 	{
@@ -404,80 +410,6 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 			"Ваше тело расслаблено, глаза закрыты. Одна из немногочисленных радостей, которую могут себе позволить обитатели Сети — это сон."+sbr+sbr+"Крепко спит солдат Новой Армии на скрипучей кровати казармы. В тоннелях на куче тряпья спят культисты. Истязатель спит, подложив под голову раба, который тоже спит, но уже на холодном полу. Спят кочевники в пещерной юрте, всвалку, прижавшись друг к другу и сохраняя тепло. Спят жители свободных поселений, даже вырожденцы спят своим беспокойным сном."+sbr+sbr+"Спите и вы.",
 			"Ваши сны никогда не смогут вырваться за пределы Сети, ведь вы никогда не видели и не увидите ничего другого. Среди переплетения тоннелей, воздвигнутых когда-то давно людьми и пещер, воздвигнутых природой, род человеческий провел уже пять поколений. Строились и разрушались поселения, торговые связи, союзы, режимы правления. От былых времён остались только легенды да небылицы."
 		]
-	};
-
-endclass
-
-editor_attribute("HiddenClass")
-class(GMStationBase) extends(GMBase)
-	getterconst_func(isPlayableGamemode,false);
-	var(headSecondNames,vec2("","")); //фамилия головы для мужского и женского варианта
-
-	func(preSetup)
-	{
-		objParams();
-	};
-
-	func(postSetup)
-	{
-		objParams();
-	};
-
-	//стандартизированное событие начала раунда
-	//!!! Не рекомендуется к использованию
-	func(onRoundBegin)
-	{
-		objParams();
-		//init bank money
-		private _bank = ["SteelGreenCabinet",[3753.97,3772.06,29.788],4,false] call getGameObjectOnPosition;
-		if !isNullReference(_bank) then {
-
-			private _pap = ["Paper",_bank] call createItemInContainer;
-			setVar(_pap,name,"Напоминание");
-
-
-			private _count = randInt(300,1200);
-
-			if ("MoreMoneyInBankAspect" call gm_isAspectSetup) then {
-				_count = 3000;
-			};
-
-			if ("NoMoneyInBankAspect" call gm_isAspectSetup) exitwith {
-				setVar(_pap,name,"Смятая записка");
-				setVar(_pap,content,"Тебя развели дуда! Спасибо за эту кучу звяков. Мы богачи а ты - сюсявый бибовед.");
-			};
-
-			private _mCnttxt = format["В казне на сегодня %1",[_count,["звяк","звяка","звяков"],true] call toNumeralString];
-			setVar(_pap,content,"Для размена бряков на звяки обращаться к торгашу." +sbr+_mCnttxt);
-
-			callFuncParams(_bank,initMoney,_count arg true);
-		};
-
-		//start generator
-		private _gen = ["PowerGenerator",[3827.37,3728.61,17.0241],4,false] call getGameObjectOnPosition;
-		if !isNullReference(_gen) then {
-			callFunc(_gen,beginUpdateGenerator);
-		};
-
-		if (count cm_allClients >= 30) then {	
-			setSelf(duration,60* (60*3));
-			setSelf(deadThreshold,35);
-		};
-
-		_ladders = ["LadderBase"] call getAllObjectsInWorldTypeOf;
-		_sewercover = ["SewercoverBase"] call getAllObjectsInWorldTypeOf;
-		if (count _ladders == count _sewercover) then {
-			_sewercover = array_shuffle(_sewercover);
-			{
-				private _curlad = _ladders select _forEachIndex;
-				private _cursew = _x;
-				
-				setVar(_curlad,pointTo,_cursew);
-				setVar(_cursew,pointTo,_curlad);
-			} foreach _sewercover;
-		} else {
-			errorformat("Collectors initialize error; Count ladders %1; sewercover %2",count _ladders arg count _sewercover);
-		};
 	};
 
 endclass
