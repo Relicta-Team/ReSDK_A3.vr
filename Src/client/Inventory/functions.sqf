@@ -13,7 +13,9 @@
 
 #define SIZE_INVSLOT 7
 
-
+#define MYPERSON_FADEVAL_EXIT 0.9
+#define MYPERSON_FADEVAL_ENTER 0.2
+#define MYPERSON_FADETIME 0.5
 
 inventory_init = {
 
@@ -332,10 +334,19 @@ openInventory = {
 	_ctgSelf setVariable ["resetpos",vec2(50 - _sizeWSelf/2,100 - SELF_CTG_SIZE_H)];
 	widgetFadeNow(_ctgSelf,1);
 	setSelfCtg(_ctgSelf);
-	private _ctgSelfText = [_d,TEXT,WIDGET_FULLSIZE,_ctgSelf] call createWidget;
-	setSelfCtgText(_ctgSelfText);
+	private _ctgBackground = [_d,BACKGROUND,WIDGET_FULLSIZE,_ctgSelf] call createWidget;
+	_ctgBackground setBackgroundColor BACKGROUND_COLOR_ACTIVEHAND;
+	private _scaleMyPerson = 32; //ширина кнопки моей персоны
+	private _ctgSelfIcon = [_d,PICTURE,[50-(_scaleMyPerson/2),0,_scaleMyPerson,100],_ctgSelf] call createWidget;
+	[_ctgSelfIcon,PIC_PATH("myperson")] call widgetSetPicture;
+	private _ctgSelfText = [_d,TEXT,[0,30,100,100-30],_ctgSelf] call createWidget;
+	setSelfCtgText(_ctgBackground); _ctgBackground setvariable ["__text",_ctgSelfText];
 	[_ctgSelfText,"<t align='center'>Моя персона</t>"] call widgetSetText;
-	_ctgSelfText setBackgroundColor BACKGROUND_COLOR_ACTIVEHAND;
+
+	//fade on load
+	_ctgSelfText setFade MYPERSON_FADEVAL_EXIT;
+	_ctgSelfText commit 0;
+	
 
 	true call inventory_onPrepareSlots;
 
@@ -614,6 +625,7 @@ inventory_onUpdate = {
 	};
 	
 	//TODO: доделать - очень сырой вариант
+	//Увеличение иконки при наведении
 	_w = call inventoryGetWidgetOnMouse;
 	if (!isInventoryOpen) then {_w = widgetNull};
 	if !isNullReference(_w) then {
@@ -639,6 +651,29 @@ inventory_onUpdate = {
 			_wid = getSlotIcon(_lastFocus);
 			[_wid,WIDGET_FULLSIZE,0.1] call widgetSetPosition;
 			inventory_lastFocusedWidget set [0,widgetNull];
+		};
+	};
+
+	//хандлер скрытия текста моей персоны
+	if (isInventoryOpen) then {
+		_ctgT = getSelfCtgText;
+		_t = _ctgT getvariable "__text";
+		_state = _t getvariable ["_state",false];
+		_stateChanged = _t getvariable ["_isChanged",false];
+		
+		if (_ctgT call isMouseInsideWidget) then {
+			
+			if (!_state) then {
+				_t setFade MYPERSON_FADEVAL_ENTER;
+				_t commit MYPERSON_FADETIME;
+				_t setvariable ["_state",true];
+			};
+		} else {
+			if (_state) then {
+				_t setFade MYPERSON_FADEVAL_EXIT;
+				_t commit MYPERSON_FADETIME;
+				_t setvariable ["_state",false];
+			};
 		};
 	};
 	

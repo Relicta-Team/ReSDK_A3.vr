@@ -5,6 +5,7 @@
 
 #include "..\WidgetSystem\widgets.hpp"
 #include "..\..\host\engine.hpp"
+#include "..\..\host\text.hpp"
 #include "inventory.hpp"
 
 #define PIC_PATH(name) (PATH_PICTURE_FOLDER + "inventory\" + name + ".paa")
