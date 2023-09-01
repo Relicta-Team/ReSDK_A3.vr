@@ -108,8 +108,8 @@ endclass
 editor_attribute("EditorGenerated")
 class(DoubleCitizenBed1) extends(DoubleArmyBed)
 	var(model,"ml\ml_object_new\ml_object_2\decor\bed_original1.p3d");
-	getter_func(getChairOffsetPos,[[0 arg 0.1 arg -0.55] arg [0 arg -0.3 arg 0.55]]);
-	getter_func(getChairOffsetDir,0);
+	getter_func(getChairOffsetPos,[[0 arg 0.1 arg -0.55] arg [0 arg 0 arg 0.65]]);
+	getter_func(getChairOffsetDir,[0 arg 180]);
 endclass
 
 editor_attribute("EditorGenerated")
