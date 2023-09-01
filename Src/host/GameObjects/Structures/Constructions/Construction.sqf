@@ -18,6 +18,17 @@ editor_attribute("TemplatePrefab")
 class(FortificationConstruction) extends(Constructions) var(name,"Оборонительное сооружение"); editor_only(var(desc,"Оборонные заграждения");) endclass
 
 editor_attribute("EditorGenerated")
+class(ConcreteSlabsStack) extends(FortificationConstruction)
+	var(model,"ca\buildings2\misc_concrete\misc_concrete_high.p3d");
+	var(name,"Бетон");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ConcreteCircleReinforcement) extends(FortificationConstruction)
+	var(model,"a3\structures_f_enoch\military\training\target_concrete_01_v1_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(SmallConcreteBlockDestyoed) extends(FortificationConstruction)
 	var(model,"ml\ml_object_new\model_24\barikada_1.p3d");
 	var(name,"Бетон");

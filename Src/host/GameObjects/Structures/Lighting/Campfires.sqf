@@ -177,9 +177,19 @@ class(CampfireBig) extends(Campfire)
 endclass
 
 editor_attribute("EditorGenerated")
+class(CampFireBig1) extends(CampfireBig)
+	var(model,"a3\structures_f\civ\camping\campfire_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(BarrelCampfireBig) extends(CampfireBig)
 	var(model,"a3\props_f_enoch\military\garbage\garbagebarrel_02_buried_f.p3d");
 	var(name,"Костёр в бочке");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BarrelCampfireBig1) extends(BarrelCampfireBig)
+	var(model,"ml_shabut\stalker_props\kosterchik.p3d");
 endclass
 
 class(CampfireDisabled) extends(Campfire)
