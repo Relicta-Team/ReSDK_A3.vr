@@ -8202,6 +8202,18 @@ Replaced value:
 style_prop(align,center) style_prop(size,1.4) style_prop(color,#00B74A)
 ```
 File: [host\text.hpp at line 50](../../../Src/host/text.hpp#L50)
+## style_learnedskillscategory
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+style_prop(align,center) style_prop(size,1.5) style_prop(color,#ffffff)
+```
+File: [host\text.hpp at line 51](../../../Src/host/text.hpp#L51)
 ## style_test
 
 Type: constant
@@ -8213,7 +8225,7 @@ Replaced value:
 ```sqf
 color='#ff0000'
 ```
-File: [host\text.hpp at line 51](../../../Src/host/text.hpp#L51)
+File: [host\text.hpp at line 52](../../../Src/host/text.hpp#L52)
 ## style_redbig
 
 Type: constant
@@ -8225,7 +8237,7 @@ Replaced value:
 ```sqf
 style_prop(color,#ff0000) style_prop(size,1.5)
 ```
-File: [host\text.hpp at line 52](../../../Src/host/text.hpp#L52)
+File: [host\text.hpp at line 53](../../../Src/host/text.hpp#L53)
 ## ST_ATTR_TOKEN_OPEN
 
 Type: constant
@@ -8237,7 +8249,7 @@ Replaced value:
 ```sqf
 @1
 ```
-File: [host\text.hpp at line 64](../../../Src/host/text.hpp#L64)
+File: [host\text.hpp at line 65](../../../Src/host/text.hpp#L65)
 ## ST_ATTR_TOKEN_CLOSE
 
 Type: constant
@@ -8249,7 +8261,7 @@ Replaced value:
 ```sqf
 @2
 ```
-File: [host\text.hpp at line 65](../../../Src/host/text.hpp#L65)
+File: [host\text.hpp at line 66](../../../Src/host/text.hpp#L66)
 ## ST_ATTR_TOKEN_END
 
 Type: constant
@@ -8261,7 +8273,7 @@ Replaced value:
 ```sqf
 @3
 ```
-File: [host\text.hpp at line 66](../../../Src/host/text.hpp#L66)
+File: [host\text.hpp at line 67](../../../Src/host/text.hpp#L67)
 ## ST_ATTR_TOKEN_OPEN_S
 
 Type: constant
@@ -8273,7 +8285,7 @@ Replaced value:
 ```sqf
 @1
 ```
-File: [host\text.hpp at line 68](../../../Src/host/text.hpp#L68)
+File: [host\text.hpp at line 69](../../../Src/host/text.hpp#L69)
 ## ST_ATTR_TOKEN_CLOSE_S
 
 Type: constant
@@ -8285,7 +8297,7 @@ Replaced value:
 ```sqf
 @2
 ```
-File: [host\text.hpp at line 69](../../../Src/host/text.hpp#L69)
+File: [host\text.hpp at line 70](../../../Src/host/text.hpp#L70)
 ## ST_ATTR_TOKEN_END_S
 
 Type: constant
@@ -8297,7 +8309,7 @@ Replaced value:
 ```sqf
 @3
 ```
-File: [host\text.hpp at line 70](../../../Src/host/text.hpp#L70)
+File: [host\text.hpp at line 71](../../../Src/host/text.hpp#L71)
 ## T_BREAK
 
 Type: constant
@@ -8309,7 +8321,7 @@ Replaced value:
 ```sqf
 @4
 ```
-File: [host\text.hpp at line 73](../../../Src/host/text.hpp#L73)
+File: [host\text.hpp at line 74](../../../Src/host/text.hpp#L74)
 ## T_BREAK_S
 
 Type: constant
@@ -8321,7 +8333,7 @@ Replaced value:
 ```sqf
 'T_BREAK'
 ```
-File: [host\text.hpp at line 74](../../../Src/host/text.hpp#L74)
+File: [host\text.hpp at line 75](../../../Src/host/text.hpp#L75)
 ## T_ATTR_S(attributes__)
 
 Type: constant
@@ -8333,7 +8345,7 @@ Replaced value:
 ```sqf
 'ST_ATTR_TOKEN_OPEN attributes__ ST_ATTR_TOKEN_CLOSE'
 ```
-File: [host\text.hpp at line 76](../../../Src/host/text.hpp#L76)
+File: [host\text.hpp at line 77](../../../Src/host/text.hpp#L77)
 ## T_ATTR(attrs_)
 
 Type: constant
@@ -8345,7 +8357,7 @@ Replaced value:
 ```sqf
 ST_ATTR_TOKEN_OPEN attrs_ ST_ATTR_TOKEN_CLOSE
 ```
-File: [host\text.hpp at line 76](../../../Src/host/text.hpp#L76)
+File: [host\text.hpp at line 77](../../../Src/host/text.hpp#L77)
 ## T_ATTR_END_S
 
 Type: constant
@@ -8357,7 +8369,7 @@ Replaced value:
 ```sqf
 'ST_ATTR_TOKEN_END'
 ```
-File: [host\text.hpp at line 79](../../../Src/host/text.hpp#L79)
+File: [host\text.hpp at line 80](../../../Src/host/text.hpp#L80)
 ## T_ATTR_END
 
 Type: constant
@@ -8369,7 +8381,7 @@ Replaced value:
 ```sqf
 ST_ATTR_TOKEN_END
 ```
-File: [host\text.hpp at line 79](../../../Src/host/text.hpp#L79)
+File: [host\text.hpp at line 80](../../../Src/host/text.hpp#L80)
 ## T_SIZE(val)
 
 Type: constant
@@ -8381,7 +8393,7 @@ Replaced value:
 ```sqf
 s=val
 ```
-File: [host\text.hpp at line 82](../../../Src/host/text.hpp#L82)
+File: [host\text.hpp at line 83](../../../Src/host/text.hpp#L83)
 ## T_SIZE_S(val)
 
 Type: constant
@@ -8393,7 +8405,7 @@ Replaced value:
 ```sqf
 'T_SIZE(val)'
 ```
-File: [host\text.hpp at line 83](../../../Src/host/text.hpp#L83)
+File: [host\text.hpp at line 84](../../../Src/host/text.hpp#L84)
 ## T_COLOR(val)
 
 Type: constant
@@ -8405,7 +8417,7 @@ Replaced value:
 ```sqf
 c=val
 ```
-File: [host\text.hpp at line 85](../../../Src/host/text.hpp#L85)
+File: [host\text.hpp at line 86](../../../Src/host/text.hpp#L86)
 ## T_COLOR_S(val)
 
 Type: constant
@@ -8417,7 +8429,7 @@ Replaced value:
 ```sqf
 'T_COLOR(val)'
 ```
-File: [host\text.hpp at line 86](../../../Src/host/text.hpp#L86)
+File: [host\text.hpp at line 87](../../../Src/host/text.hpp#L87)
 ## T_FONT_TAHOMA
 
 Type: constant
@@ -8429,7 +8441,7 @@ Replaced value:
 ```sqf
 f=0
 ```
-File: [host\text.hpp at line 88](../../../Src/host/text.hpp#L88)
+File: [host\text.hpp at line 89](../../../Src/host/text.hpp#L89)
 ## __t_align_provider(val)
 
 Type: constant
@@ -8441,7 +8453,7 @@ Replaced value:
 ```sqf
 a=val
 ```
-File: [host\text.hpp at line 94](../../../Src/host/text.hpp#L94)
+File: [host\text.hpp at line 95](../../../Src/host/text.hpp#L95)
 ## T_H_ALIGN_LEFT
 
 Type: constant
@@ -8453,7 +8465,7 @@ Replaced value:
 ```sqf
 __t_align_provider(0)
 ```
-File: [host\text.hpp at line 96](../../../Src/host/text.hpp#L96)
+File: [host\text.hpp at line 97](../../../Src/host/text.hpp#L97)
 ## T_H_ALIGN_CENTER
 
 Type: constant
@@ -8465,7 +8477,7 @@ Replaced value:
 ```sqf
 __t_align_provider(1)
 ```
-File: [host\text.hpp at line 97](../../../Src/host/text.hpp#L97)
+File: [host\text.hpp at line 98](../../../Src/host/text.hpp#L98)
 ## T_H_ALIGN_RIGHT
 
 Type: constant
@@ -8477,7 +8489,7 @@ Replaced value:
 ```sqf
 __t_align_provider(2)
 ```
-File: [host\text.hpp at line 98](../../../Src/host/text.hpp#L98)
+File: [host\text.hpp at line 99](../../../Src/host/text.hpp#L99)
 ## T_H_ALIGN_LEFT_S
 
 Type: constant
@@ -8489,7 +8501,7 @@ Replaced value:
 ```sqf
 'T_H_ALIGN_LEFT'
 ```
-File: [host\text.hpp at line 100](../../../Src/host/text.hpp#L100)
+File: [host\text.hpp at line 101](../../../Src/host/text.hpp#L101)
 ## T_H_ALIGN_CENTER_S
 
 Type: constant
@@ -8501,7 +8513,7 @@ Replaced value:
 ```sqf
 'T_H_ALIGN_CENTER'
 ```
-File: [host\text.hpp at line 101](../../../Src/host/text.hpp#L101)
+File: [host\text.hpp at line 102](../../../Src/host/text.hpp#L102)
 ## T_H_ALIGN_RIGHT_S
 
 Type: constant
@@ -8513,7 +8525,7 @@ Replaced value:
 ```sqf
 'T_H_ALIGN_RIGHT'
 ```
-File: [host\text.hpp at line 102](../../../Src/host/text.hpp#L102)
+File: [host\text.hpp at line 103](../../../Src/host/text.hpp#L103)
 ## __t_valign_provider(val)
 
 Type: constant
@@ -8525,7 +8537,7 @@ Replaced value:
 ```sqf
 v=val
 ```
-File: [host\text.hpp at line 105](../../../Src/host/text.hpp#L105)
+File: [host\text.hpp at line 106](../../../Src/host/text.hpp#L106)
 ## T_V_ALIGN_TOP
 
 Type: constant
@@ -8537,7 +8549,7 @@ Replaced value:
 ```sqf
 __t_valign_provider(0)
 ```
-File: [host\text.hpp at line 107](../../../Src/host/text.hpp#L107)
+File: [host\text.hpp at line 108](../../../Src/host/text.hpp#L108)
 ## T_V_ALIGN_MIDDLE
 
 Type: constant
@@ -8549,7 +8561,7 @@ Replaced value:
 ```sqf
 __t_valign_provider(1)
 ```
-File: [host\text.hpp at line 108](../../../Src/host/text.hpp#L108)
+File: [host\text.hpp at line 109](../../../Src/host/text.hpp#L109)
 ## T_V_ALIGN_BOTTOM
 
 Type: constant
@@ -8561,7 +8573,7 @@ Replaced value:
 ```sqf
 __t_valign_provider(2)
 ```
-File: [host\text.hpp at line 109](../../../Src/host/text.hpp#L109)
+File: [host\text.hpp at line 110](../../../Src/host/text.hpp#L110)
 ## T_V_ALIGN_TOP_S
 
 Type: constant
@@ -8573,7 +8585,7 @@ Replaced value:
 ```sqf
 'T_V_ALIGN_TOP'
 ```
-File: [host\text.hpp at line 111](../../../Src/host/text.hpp#L111)
+File: [host\text.hpp at line 112](../../../Src/host/text.hpp#L112)
 ## T_V_ALIGN_MIDDLE_S
 
 Type: constant
@@ -8585,7 +8597,7 @@ Replaced value:
 ```sqf
 'T_V_ALIGN_MIDDLE'
 ```
-File: [host\text.hpp at line 112](../../../Src/host/text.hpp#L112)
+File: [host\text.hpp at line 113](../../../Src/host/text.hpp#L113)
 ## T_V_ALIGN_BOTTOM_S
 
 Type: constant
@@ -8597,7 +8609,7 @@ Replaced value:
 ```sqf
 'T_V_ALIGN_BOTTOM'
 ```
-File: [host\text.hpp at line 113](../../../Src/host/text.hpp#L113)
+File: [host\text.hpp at line 114](../../../Src/host/text.hpp#L114)
 ## T_UNDERLINE(mode)
 
 Type: constant
@@ -8609,7 +8621,7 @@ Replaced value:
 ```sqf
 u=mode
 ```
-File: [host\text.hpp at line 117](../../../Src/host/text.hpp#L117)
+File: [host\text.hpp at line 118](../../../Src/host/text.hpp#L118)
 ## T_UNDERLINE_S(mode)
 
 Type: constant
@@ -8621,7 +8633,7 @@ Replaced value:
 ```sqf
 'T_UNDERLINE(mode)'
 ```
-File: [host\text.hpp at line 118](../../../Src/host/text.hpp#L118)
+File: [host\text.hpp at line 119](../../../Src/host/text.hpp#L119)
 ## T_SHADOW_MODE(mode)
 
 Type: constant
@@ -8633,7 +8645,7 @@ Replaced value:
 ```sqf
 h=mode
 ```
-File: [host\text.hpp at line 121](../../../Src/host/text.hpp#L121)
+File: [host\text.hpp at line 122](../../../Src/host/text.hpp#L122)
 ## T_SHADOW_MODE_S(mode)
 
 Type: constant
@@ -8645,7 +8657,7 @@ Replaced value:
 ```sqf
 'T_SHADOW_MODE(mode)'
 ```
-File: [host\text.hpp at line 122](../../../Src/host/text.hpp#L122)
+File: [host\text.hpp at line 123](../../../Src/host/text.hpp#L123)
 ## T_SHADOW_COLOR(col)
 
 Type: constant
@@ -8657,7 +8669,7 @@ Replaced value:
 ```sqf
 g=col
 ```
-File: [host\text.hpp at line 124](../../../Src/host/text.hpp#L124)
+File: [host\text.hpp at line 125](../../../Src/host/text.hpp#L125)
 ## T_SHADOW_COLOR_S(col)
 
 Type: constant
@@ -8669,7 +8681,7 @@ Replaced value:
 ```sqf
 'T_SHADOW_COLOR(col)'
 ```
-File: [host\text.hpp at line 125](../../../Src/host/text.hpp#L125)
+File: [host\text.hpp at line 126](../../../Src/host/text.hpp#L126)
 ## T_SHADOW_OFFSET(val)
 
 Type: constant
@@ -8681,7 +8693,7 @@ Replaced value:
 ```sqf
 j=val
 ```
-File: [host\text.hpp at line 127](../../../Src/host/text.hpp#L127)
+File: [host\text.hpp at line 128](../../../Src/host/text.hpp#L128)
 ## T_SHADOW_OFFSET_S(val)
 
 Type: constant
@@ -8693,7 +8705,7 @@ Replaced value:
 ```sqf
 'T_SHADOW_OFFSET(val)'
 ```
-File: [host\text.hpp at line 128](../../../Src/host/text.hpp#L128)
+File: [host\text.hpp at line 129](../../../Src/host/text.hpp#L129)
 ## T_IMAGE(dat)
 
 Type: constant
@@ -8705,7 +8717,7 @@ Replaced value:
 ```sqf
 @5 dat @6
 ```
-File: [host\text.hpp at line 134](../../../Src/host/text.hpp#L134)
+File: [host\text.hpp at line 135](../../../Src/host/text.hpp#L135)
 ## T_IMAGE_S(dat)
 
 Type: constant
@@ -8717,7 +8729,7 @@ Replaced value:
 ```sqf
 'T_IMAGE(dat)'
 ```
-File: [host\text.hpp at line 135](../../../Src/host/text.hpp#L135)
+File: [host\text.hpp at line 136](../../../Src/host/text.hpp#L136)
 ## T_IMAGEPATH(pth)
 
 Type: constant
@@ -8729,7 +8741,7 @@ Replaced value:
 ```sqf
 i=pth
 ```
-File: [host\text.hpp at line 137](../../../Src/host/text.hpp#L137)
+File: [host\text.hpp at line 138](../../../Src/host/text.hpp#L138)
 ## T_IMAGEPATH_S(pth)
 
 Type: constant
@@ -8741,7 +8753,7 @@ Replaced value:
 ```sqf
 'T_IMAGEPATH(pth)'
 ```
-File: [host\text.hpp at line 138](../../../Src/host/text.hpp#L138)
+File: [host\text.hpp at line 139](../../../Src/host/text.hpp#L139)
 ## T_HREF(data,text)
 
 Type: constant
@@ -8754,7 +8766,7 @@ Replaced value:
 ```sqf
 @7 data @8text @9
 ```
-File: [host\text.hpp at line 141](../../../Src/host/text.hpp#L141)
+File: [host\text.hpp at line 142](../../../Src/host/text.hpp#L142)
 ## T_HREF_S(data,text)
 
 Type: constant
@@ -8767,7 +8779,7 @@ Replaced value:
 ```sqf
 'T_HREF(data,text)'
 ```
-File: [host\text.hpp at line 142](../../../Src/host/text.hpp#L142)
+File: [host\text.hpp at line 143](../../../Src/host/text.hpp#L143)
 ## T_HREF_COLOR(col)
 
 Type: constant
@@ -8779,7 +8791,7 @@ Replaced value:
 ```sqf
 l=col
 ```
-File: [host\text.hpp at line 144](../../../Src/host/text.hpp#L144)
+File: [host\text.hpp at line 145](../../../Src/host/text.hpp#L145)
 ## T_HREF_COLOR_S(col)
 
 Type: constant
@@ -8791,7 +8803,7 @@ Replaced value:
 ```sqf
 'T_HREF_COLOR(col)'
 ```
-File: [host\text.hpp at line 145](../../../Src/host/text.hpp#L145)
+File: [host\text.hpp at line 146](../../../Src/host/text.hpp#L146)
 # thread.hpp
 
 ## threadNew(code)

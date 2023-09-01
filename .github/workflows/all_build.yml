@@ -14,7 +14,7 @@ on:
       - Src/Scripts/*.cpp
       - Src/Scripts/SETTINGS.h
   pull_request:
-    types: [assigned, opened, synchronize, reopened]
+    types: [opened, synchronize, reopened]
     paths:
       - Src/client/**
       - Src/host/**
@@ -25,16 +25,90 @@ on:
       - Src/Scripts/SETTINGS.h
   workflow_dispatch:
 
+env:
+  map_validator_path: Third-party/BuildTools/map_validator.py
+  validate_source_path: Third-party/BuildTools/Validate.bat
+  parse_source_out_path: Third-party/BuildTools/parse_output.py
+  source_out_path: ./Third-party/BuildTools/output.txt
+  GENDOC_COMMIT_MES: Generated documentation
+
 jobs:
-  allbuild:
-    name: Build
+
+  # Проверка клиента, сервера и карт (только в PR, workflow_dispatch)
+
+  ValidatePR:
+    name: Validate PR
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
     runs-on: windows-latest
+    steps:
+      - name: Start validate
+        run: |
+          echo Checks started...
+
+  NewRelease:
+    name: New release
+    if: github.event_name != 'workflow_dispatch' && github.repository == 'Relicta-Team/ReSDK_A3.vr' && github.event_name != 'pull_request' 
+    runs-on: windows-latest
+    steps:
+      - name: Start
+        run: |
+          echo Started...
+  
+  checkmap:
+    name: Validate maps
+    runs-on: windows-latest
+    needs: [ValidatePR]
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v3.1.4
+      - uses: actions/checkout@v3
+      - name: Check map
+        run: |
+          python -V
+          python ${{ env.map_validator_path }} map_cfg_light_check ${{ github.workspace }}
+        working-directory: ${{ github.workspace }}
+  checkclient:
+    name: Check client
+    runs-on: windows-latest
+    needs: [ValidatePR]
     strategy:
       fail-fast: true
       matrix:
         build_type:
           - client
           - client-debug
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v3.1.4
+      - uses: actions/checkout@v3
+      - name: Validate ${{ matrix.build_type }}
+        continue-on-error: true
+        run: | 
+          echo "::group::Process validate"
+          ${{ env.validate_source_path }} ${{ matrix.build_type }}
+          echo "::endgroup::"
+        working-directory: ${{ github.workspace }}
+      - name: Post validate ${{ matrix.build_type }}
+        run: | 
+          python -V
+          echo "::group::Output check"
+          python ${{ env.parse_source_out_path }} ${{ env.source_out_path }} ./
+          echo "::endgroup::"
+        working-directory: ${{ github.workspace }}
+      - name: Upload output ${{ matrix.build_type }}
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: Output log ${{ matrix.build_type }}
+          path: ${{ env.source_out_path }}
+
+  checkserver:
+    name: Check host
+    runs-on: windows-latest
+    needs: [ValidatePR]
+    strategy:
+      fail-fast: true
+      matrix:
+        build_type:
           - server
           - server-debug
     steps:
@@ -44,55 +118,56 @@ jobs:
       - name: Validate ${{ matrix.build_type }}
         continue-on-error: true
         run: | 
-          echo "::group::VM validate"
-          Third-party/BuildTools/Validate.bat ${{ matrix.build_type }}
+          echo "::group::Process validate"
+          ${{ env.validate_source_path }} ${{ matrix.build_type }}
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
       - name: Post validate ${{ matrix.build_type }}
         run: | 
           python -V
-          echo "::group::Python validate"
-          python Third-party/BuildTools/parse_output.py ./Third-party/BuildTools/output.txt ./
+          echo "::group::Output check"
+          python ${{ env.parse_source_out_path }} ${{ env.source_out_path }} ./
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
-      - name: Upload output
+      - name: Upload output ${{ matrix.build_type }}
         uses: actions/upload-artifact@v3.1.2
         with:
           name: Output log ${{ matrix.build_type }}
-          path: ./Third-party/BuildTools/output.txt
-  updateversion:
-    if: github.event_name != 'workflow_dispatch' && github.repository == 'Relicta-Team/ReSDK_A3.vr' && github.event_name != 'pull_request'
-    name: Update build number
-    runs-on: windows-latest
-    needs:
-      - allbuild
-    steps:
-      - uses: actions/checkout@v3
-      - name: Increment build number
-        id: new_version  
-        shell: powershell
-        run: |
-          echo Workspace is ${{github.workspace}}
-          Third-party/BuildTools/update_version.exe path:.\ updpath
-          $version = Get-Content .\src\VERSION
-          Write-Host "Now version is: $version"
-          echo "version_value=${version}" >> $env:GITHUB_OUTPUT
+          path: ${{ env.source_out_path }}
+  
+  # Обновление версии и документации (only on main)
+
+  #updateversion:
+    #name: Update build number
+    #needs: [NewRelease]
+    #runs-on: windows-latest
+    #steps:
+      #- uses: actions/checkout@v3
+      #- name: Increment build number
+        #id: new_version  
+        #shell: powershell
+        #run: |
+          #echo Workspace is ${{github.workspace}}
+          #Third-party/BuildTools/update_version.exe path:.\ updpath
+          #$version = Get-Content .\src\VERSION
+          #Write-Host "Now version is: $version"
+          #echo "version_value=${version}" >> $env:GITHUB_OUTPUT
           
-      - name: Push changes
-        uses: test-room-7/action-update-file@v1  
-        if: steps.new_version.outputs.version_value && github.repository == 'Relicta-Team/ReSDK_A3.vr'
-        with:
-          committer-name: Autoupdater
-          file-path: |
-            Src/VERSION
-            Src/version.hpp
-          commit-msg: Update - ${{steps.new_version.outputs.version_value}}
-          github-token: ${{secrets.TOKEN}}
+      #- name: Push changes
+        #uses: test-room-7/action-update-file@v1  
+        #if: steps.new_version.outputs.version_value && github.repository == 'Relicta-Team/ReSDK_A3.vr'
+        #with:
+          #committer-name: Autoupdater
+          #file-path: |
+            #Src/VERSION
+            #Src/version.hpp
+          #commit-msg: Update - ${{steps.new_version.outputs.version_value}}
+          #github-token: ${{secrets.TOKEN}}
   generatedocs:
     runs-on: windows-latest
     name: Generate documentation
     needs: 
-      - updateversion
+      - NewRelease
     steps:
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
@@ -111,4 +186,3 @@ jobs:
             Documentation/API/**
           commit-msg: Generated documentation
           github-token: ${{secrets.TOKEN}}
-        
