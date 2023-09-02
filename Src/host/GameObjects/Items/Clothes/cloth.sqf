@@ -40,6 +40,19 @@ class(Cloth) extends(Container)
 		getVar(_usr,owner) forceAddUniform getSelf(armaClass);
 	};
 
+	func(setUniformClass)
+	{
+		objParams_1(_class);
+		setSelf(armaClass,_class);
+		if callSelf(isInWorld) exitwith {};
+		private _loc = getSelf(loc);
+		if !isTypeOf(_loc,BasicMob) exitwith {};
+
+		if (getSelf(slot) in getSelf(allowedSlots)) then {
+			callSelfParams(armaItemAddImpl,_loc);
+		};
+	};
+
 	func(armaItemRemoveImpl)
 	{
 		objParams_1(_usr);
