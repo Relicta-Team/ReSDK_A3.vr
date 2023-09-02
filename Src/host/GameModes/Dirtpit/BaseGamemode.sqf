@@ -465,3 +465,63 @@ class(GMStationIdeologyDictatorship) extends(GMStationIdeology)
 		};
 	};
 endclass
+
+class(GMStationIdeologyCouncilOfFive) extends(GMStationIdeology)
+	var(name,"Совет Пяти");
+	var(desc,"Социализм и демократия");
+
+	var(additionalAccess,[]);
+
+	getter_func(roles,["RHead" arg "RCaretaker" arg "RBarmen" arg "RMedHealer" arg "RBrigadir"]);
+
+	func(onStarted)
+	{
+		objParams();
+
+		private _desc = "Решения по любым вопросам принимаются коллективно группой людей. "
+		+ "В совет входят 5 человек: Голова, Смотритель, Бригадир, Лекарь и Барник. Голова - принимает основные решения по управлению городом. Смотритель - отвечает за безопасность жителей."
+		+" Барник - отвечает за пищевые припасы и управляет фермой. Лекарь - отвечает за здравоохранение и заведует складом препаратов."
+		+" Бригадир - отвечает за энергообеспечение. Каждый член совета имеет ключ к залу переговоров.";
+		setSelf(descExtended,_desc);
+
+		private _keyAccess = ["sobranie","headpre"];
+		setSelf(additionalAccess,_keyAccess);
+	};
+
+	func(canVisible)
+	{
+		#ifdef EDITOR
+		true
+		#else
+
+		private _existsAll = true;
+		{
+			private _role = _x call gm_getRoleObject;
+			if ((count callFunc(_role,getBasicMobs)) == 0) exitwith {
+				_existsAll = false;
+			};
+		} foreach callSelf(roles);
+		
+		_existsAll
+
+		#endif
+	};
+
+	func(onApplyToMob)
+	{
+		objParams_2(_mob,_isInit);
+		super();
+
+		private _baseRole = getVar(_mob,basicRole);
+		private _class = callFunc(_baseRole,getClassName);
+		private _roles = callSelf(roles);
+		
+		if (_class in _roles) then {
+			private _key = ["Key",_mob] call createItemInInventory;
+			setVar(_key,name,"Ключ Совета");
+			{
+				getVar(_key,keyOwner) pushBack _x;
+			} foreach getSelf(additionalAccess);
+		};
+	};
+endclass
