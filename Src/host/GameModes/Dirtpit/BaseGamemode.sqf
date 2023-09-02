@@ -310,8 +310,6 @@ class(GMStationIdeologyFugu) extends(GMStationIdeology)
 				delete(_x);
 			};
 		} foreach _listDel;
-
-		//скипетр 
 	};
 
 	func(canVisible)
@@ -397,5 +395,73 @@ class(GMStationIdeologyFugu) extends(GMStationIdeology)
 			callFuncParams(_headItm,setUniformClass,"TIOW_Cultist_Hood_green");
 		};
 		
+	};
+endclass
+
+class(GMStationIdeologyDictatorship) extends(GMStationIdeology)
+	var(name,"Республика Железной Руки");
+	var(desc,"Военная диктатура");
+
+	func(onStarted)
+	{
+		objParams();
+
+		private _desc = "Голова - диктатор и верховный главнокомандующий. Весь город держится им в железной руке при помощи городского ополчения. "
+		+ "Расстрелы и пропаганда здесь - обычное дело. У каждого находящегося в городе при себе обязательно должны быть документы. В Расход уходит только командование.";
+		setSelf(descExtended,_desc);
+
+		private _listDel = (["Sword",true] call getAllItemsTypeOf)
+			+ (["AxeBase",true] call getAllItemsTypeOf);
+
+		{
+			delete(_x);
+		} foreach _listDel;
+	};
+
+	var(id_docs,0);
+	var(randNum,randInt(1,9999));
+
+	//IdentityDocs makeRegList
+	func(onApplyToMob)
+	{
+		objParams_2(_mob,_isInit);
+		super();
+
+		modSelf(id_docs, + 1);
+
+		private _docs = ["IdentityDocs",_mob] call createItemInInventory;
+		private _id = format["%1-%2",getSelf(randNum),getSelf(id_docs)];
+		callFuncParams(_docs,makeRegList,_mob arg _id);
+
+		private _baseRole = getVar(_mob,basicRole);
+		private _class = callFunc(_baseRole,getClassName);
+
+		if (_class == "RHead") exitwith {
+			private _cloth = callFuncParams(_mob,getItemInSlot,INV_CLOTH);
+			if !isNullReference(_cloth) then {
+				{
+					callFuncParams(_x,setUniformClass,"sovietisher");
+					setVar(_x,name,"Одежда главнокомандующего");
+				} foreach ([callFunc(_cloth,getClassName),false] call getAllItemsTypeOf);
+			};
+			["HatArmyCap",_mob,INV_HEAD] call createItemInInventory;
+		};
+		if (_class == "RCaretaker") exitwith {
+			private _cap = ["HatBeret",_mob,INV_HEAD] call createItemInInventory;
+			callFuncParams(_cap,setUniformClass,"H_ParadeDressCap_01_AAF_F");
+
+			["HatBeret",_mob,INV_HEAD] call createItemInInventory;
+			private _weapon = ["RifleFinisherSmall",_mob] call createItemInInventory;
+			callFuncParams(_weapon,createMagazine,"MagazineFinisherLoaded");
+			["MagazineFinisherLoaded",["ArmorLite",_mob,INV_ARMOR] call createItemInInventory] call createItemInContainer;
+		};
+		if (_class == "RVeteran"|| _class == "RStreak") exitwith {
+			if (_class == "RVeteran") then {
+				["MagazineFinisherLoaded",["ArmorLite",_mob,INV_ARMOR] call createItemInInventory] call createItemInContainer;
+			};
+			["HatBeret",_mob,INV_HEAD] call createItemInInventory;
+			private _weapon = ["RifleFinisher",_mob] call createItemInInventory;
+			callFuncParams(_weapon,createMagazine,"MagazineFinisherLoaded");
+		};
 	};
 endclass

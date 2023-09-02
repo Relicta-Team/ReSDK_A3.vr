@@ -1134,6 +1134,9 @@ class(RNomadDirtpit) extends(BasicRole)
 		gm_roundDuration >= 
 		ifcheck(!callFuncParams(_cliObj,hasDiscordRole,"Forsaken"),t_asMin(1),t_asMin(10))
 		#endif
+
+		//Чтобы кочевник с дробовиком не заспавнился без него...
+		&& callFunc(gm_currentMode,isPickedIdeology)
 	};
 	var(count,999);
 	getter_func(needDiscordRoles,["Dweller"]);
