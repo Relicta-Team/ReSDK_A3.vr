@@ -122,7 +122,7 @@ model("\a3\structures_f_epa\items\medical\bandage_f.p3d") [[INV_FACE,[[-0.059,0.
 model("\relicta_models\models\cloth\littlerag.p3d") [[INV_FACE,[[-0.062,-0.018,-0.115],[87,-5,80]]],[INV_HAND_L,[[0.079,0.015,-0.012],[88,-24,0]]],[INV_HAND_R,[[-0.139,-0.042,0.008],[92,21,0]]]]
 model("\relicta_models\models\interier\props\spichka.p3d") [[INV_FACE,[[-0.064,0.039,0.075],[83,0,0]]],[INV_HAND_L,[[0.024,0.029,0.056],[77,-24,0]]],[INV_HAND_R,[[-0.094,-0.027,0.038],[158,60,31]]]]
 
-
+model("\relicta_models\models\interier\props\treasure\scepter\scepter.p3d") [[INV_BACKPACK,[[-0.05,-0.1,-0.1],[-84,-54,66]]],[INV_BACK,[[-0.066,-0.117,-0.234],[90,-48,96]]],[INV_HAND_L,[[0,-0.015,0.001],[163,0,0]]],[INV_HAND_R,[[-0.047,-0.019,0.015],[193,0,0]]]]
 
 
 

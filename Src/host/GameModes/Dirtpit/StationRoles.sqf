@@ -20,6 +20,11 @@ class(IRStationRole) extends(BasicRole)
 		getVar("IRStationRole" call gm_getRoleObject,stationMobs) pushBack _mob;
 
 		getVar("IRStationRole" call gm_getRoleObject,playedClients) pushBackUnique _usr;
+
+		private _ideology = getVar(gm_currentMode,ideology);
+		if !isNullReference(_ideology) then {
+			callFuncParams(_ideology,onApplyToMob,_mob arg false);
+		};
 	};
 
 	getter_func(getInitialDir,random 360);
