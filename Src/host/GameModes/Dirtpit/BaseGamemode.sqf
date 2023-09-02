@@ -525,3 +525,84 @@ class(GMStationIdeologyCouncilOfFive) extends(GMStationIdeology)
 		};
 	};
 endclass
+
+class(GMStationIdeologyCavecity) extends(GMStationIdeology)
+	var(name,"Пещероград");
+	var(desc,"Община в пещерах");
+
+	func(onStarted)
+	{
+		objParams();
+
+		private _desc = "Жители Грязноямска - кочевники, пришедшие в пустующий город и занявшие его."
+		+" В основе общность и отсутствие материальных ценностей. Освещение в городе удалось восстановить только в покои Головы. В Расход должны уйти все кочевники.";
+		setSelf(descExtended,_desc);
+
+		private _listDel = (["Money",true] call getAllItemsTypeOf)
+			+ (["Key",true] call getAllItemsTypeOf);
+		{
+			delete(_x);
+		} foreach _listDel;
+
+		{
+			if !isImplementVar(_x,edIsEnabled) then {
+				callFuncParams(_x,setDoorLock,false arg false);
+			};
+		} foreach (
+			(["DoorStatic",true] call getAllObjectsInWorldTypeOf)
+			+ (["DoorDynamic",true] call getAllObjectsInWorldTypeOf)
+		);
+
+		//open gates
+		private _gates = ["GateCity",true] call getAllObjectsInWorldTypeOf;
+		_gates = _gates - ["gate_escape" call getObjectByRef];
+
+		{
+			if (!getVar(_x,isOpen)) then {
+				callFunc(_x,onActivate);
+			};
+		} foreach _gates;
+
+		//gen disable
+		private _gen = nullPtr;
+		private _itm = nullPtr;
+		{
+			_gen = _x;
+			
+			{
+				_itm = _x;
+				if (getVar(_itm,name) != "Администрация") then {
+					//callFuncParams(_x,setEnable,false);
+					callFuncParams(_gen,removeConnection,_itm);
+				} else {
+					
+				};
+			} foreach array_copy(getVar(_gen,edConnected));
+		} foreach (["PowerGenerator",false] call getAllObjectsInWorldTypeOf);
+	};
+
+	func(onApplyToMob)
+	{
+		objParams_2(_mob,_isInit);
+		super();
+		
+		private _cloth = callFuncParams(_mob,getItemInSlot,INV_CLOTH);
+		if !isNullReference(_cloth) then {
+			private _type = "NomadCloth" + (str randInt(1,23));
+			callFuncParams(_cloth,setUniformClass,getFieldBaseValue(_type,"armaClass"));
+		};
+
+		private _baseRole = getVar(_mob,basicRole);
+		private _class = callFunc(_baseRole,getClassName);
+
+		if (_class == "RHead") then {
+			["WoolCoat",_mob,INV_BACK] call createItemInInventory;
+		};
+
+		if prob(80) then {
+			["Torch",_mob] call createItemInInventory;
+		} else {
+			["Candle",_mob] call createItemInInventory;
+		};
+	};
+endclass
