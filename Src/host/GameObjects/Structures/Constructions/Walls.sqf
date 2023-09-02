@@ -14,6 +14,22 @@ editor_attribute("TemplatePrefab")
 class(SmallWall) extends(Constructions) var(name,"Стена"); editor_only(var(desc,"Маленькие стена" pcomma " которую можно разрушить");) endclass
 
 editor_attribute("EditorGenerated")
+class(WhiteBrickWall) extends(SmallWall)
+	var(model,"a3\structures_f\walls\city2_4m_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(OldBrickWallMedium) extends(SmallWall)
+	var(model,"a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_old_f.p3d");
+	var(name,"Стена");
+endclass
+
+editor_attribute("EditorGenerated")
+class(OldBrickWallMedium1) extends(OldBrickWallMedium)
+	var(model,"ca\structures\wall\wall_cbrk_5.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(StoneWall) extends(SmallWall)
 	var(model,"a3\structures_f\walls\stone_4m_f.p3d");
 	var(name,"Стена");

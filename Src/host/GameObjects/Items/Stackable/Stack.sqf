@@ -117,26 +117,7 @@ class(Stack) extends(Item)
 
 	func(onStack) {objParams_1(_usr);}; //событие при стаке (например проиграть звук)
 	func(onDestack) {objParams_1(_usr);}; //событие при дестаке
-		func(onDrop)
-	{
-		objParams_2(_usr,_isDropFromFly);
-		super();
-		if (_isDropFromFly) then {
-			private _itm = null;
-			private _defPos = callSelf(getPos);
-			private _curcount = getSelf(stackCount);
-			
-			if (_curcount <= 1) exitwith {};
-
-			for "_i" from 2 to _curcount do {
-				_itm = callSelfParams(removeFromStack,1);
-				callFuncParams(_itm,loadModel,[_defPos arg null arg rand(0.25,0.7)] call noe_visual_getRelRadiusPos arg null arg 0);
-				if (_i%5==0) then {
-					callFuncAfterParams(_itm,playEventSound,rand(0.001,0.2), "drop");
-				};
-			};
-		};
-	};
+	
 	func(canStack) //количественная провера на вместимость стака
 	{
 		objParams();
@@ -354,7 +335,7 @@ class(Stack) extends(Item)
 		private _curcount = getSelf(stackCount);
 		
 		if (_curcount <= 1) exitwith {};
-
+		
 		for "_i" from 2 to _curcount do {
 			_itm = callSelfParams(removeFromStack,1);
 			callFuncParams(_itm,loadModel,[_defPos arg null arg rand(0.25,0.7)] call noe_visual_getRelRadiusPos arg null arg 0);

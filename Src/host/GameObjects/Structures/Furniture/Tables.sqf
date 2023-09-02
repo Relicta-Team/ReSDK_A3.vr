@@ -13,6 +13,11 @@ editor_attribute("TemplatePrefab")
 class(TableBase) extends(Furniture) var(name,"Стол"); editor_only(var(desc,"Просто стол");) endclass
 
 editor_attribute("EditorGenerated")
+class(Workbench) extends(TableBase)
+	var(model,"a3\structures_f_heli\furniture\workbench_01_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(WoodenTableHandmade) extends(TableBase)
 	var(model,"a3\props_f_exp\commercial\market\woodencounter_01_f.p3d");
 endclass
@@ -20,6 +25,11 @@ endclass
 editor_attribute("EditorGenerated")
 class(SmallSteelTable) extends(TableBase)
 	var(model,"ca\misc2\smalltable\smalltable.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SmallSteelTable1) extends(SmallSteelTable)
+	var(model,"relicta_models\models\interier\table.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -55,6 +65,11 @@ endclass
 editor_attribute("EditorGenerated")
 class(SmallRoundWoodenTable) extends(TableBase)
 	var(model,"ml_shabut\exodus\stolempire.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SmallRoundWoodenTable1) extends(SmallRoundWoodenTable)
+	var(model,"ml_shabut\exodusss\stolkafeshechka.p3d");
 endclass
 
 editor_attribute("EditorGenerated")

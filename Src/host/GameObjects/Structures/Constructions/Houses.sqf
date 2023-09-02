@@ -14,6 +14,43 @@ editor_attribute("TemplatePrefab")
 class(SmallHouse) extends(Constructions) var(name,"Небольшое здание"); editor_only(var(desc,"Маленькие дома" pcomma " которые можно разрушить");) endclass
 
 editor_attribute("EditorGenerated")
+class(SmallBrickHouse) extends(SmallHouse)
+	var(model,"ml_shabut\exodusss\domdiridom.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(HouseWithGarageSmall) extends(SmallHouse)
+	var(model,"a3\structures_f_argo\industrial\agriculture\shed_08_brown_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(HouseWithGarageSmall1) extends(HouseWithGarageSmall)
+	var(model,"a3\structures_f_argo\industrial\agriculture\shed_08_grey_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(TwoStoreyHouseBalcony) extends(SmallHouse)
+	var(model,"a3\structures_f\households\stone_big\i_stone_housebig_v2_dam_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(TwoStoreyHouseBalcony1) extends(TwoStoreyHouseBalcony)
+	var(model,"a3\structures_f\households\stone_big\i_stone_housebig_v1_dam_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(Golovinskaya) extends(TwoStoreyHouseBalcony)
+	var(model,"a3\structures_f\households\stone_big\d_stone_housebig_v1_f.p3d");
+	var(name, "Разрушенная хибара");
+endclass
+
+editor_attribute("EditorGenerated")
+class(LargeTwoStoreyStoneHouse) extends(TwoStoreyHouseBalcony)
+	var(model,"a3\structures_f\households\stone_big\i_stone_housebig_v3_f.p3d");
+	var(name,"Кирпичный дом");
+endclass
+
+editor_attribute("EditorGenerated")
 class(MediumClothCanopy) extends(SmallHouse)
 	var(model,"a3\structures_f_exp\commercial\market\clothshelter_02_f.p3d");
 	var(name,"Навес");
@@ -85,4 +122,10 @@ endclass
 editor_attribute("EditorGenerated")
 class(SmallSheetMetalHouse2) extends(SmallSheetMetalHouse)
 	var(model,"a3\structures_f\households\slum\slum_house01_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumClayHouse) extends(SmallHouse)
+	var(model,"ca\structures_e\housel\house_l_9_ep1.p3d");
+	var(name,"Глиняный барак");
 endclass
