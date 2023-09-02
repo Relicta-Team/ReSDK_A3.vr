@@ -78,14 +78,22 @@ class(GMStationBase) extends(GMBase)
 		private _head = callFunc("RHead" call gm_getRoleObject,getBasicMobs);
 		if (count _head > 0) then {
 			[format["Правитель грязноямска - %1",callFuncParams(_head select 0,getNameEx,"кто")],"event"] call cm_sendOOSMessage;
+
+			if (count getSelf(possibleIdeologies) > 0) then {
+				private _tleft = [callSelf(ideologySelectionTimeout),["секунда","секунды","секунд"],true] call toNumeralString;
+				callFuncAfterParams(_head select 0,localSay,5,"<t size='1.4'>У вас "+_tleft+" на обдумывание. Очнитесь и выберите судьбу города...</t>" arg "system");
+			};
 		};
 	};
 	
 	var(possibleIdeologies,[]);
-	getterconst_func(ideologySelectionTimeout,t_asMin(3));
+	getterconst_func(ideologySelectionTimeout,t_asMin(2));
 	func(processInitIdeology)
 	{
 		objParams();
+
+		if isTypeOf(this,GMTVTGame) exitwith {};
+
 		private _ideologies = getAllObjectsTypeOf(GMStationIdeology);
 		{
 			if !(call typeGetVar(typeGetFromString(_x),canVisible)) then {
@@ -124,7 +132,16 @@ class(GMStationBase) extends(GMBase)
 				callFuncParams(this,setSleep,false);
 			};
 		};
-		private _dat = ["Выберите идеологию:"] + (getVar(gm_currentMode,possibleIdeologies) apply {
+		private _ideoList = array_copy(getVar(gm_currentMode,possibleIdeologies));
+		{
+			if !([nullPtr,getVar(_mob,client)] call typeGetVar(typeGetFromString(_x),canClientVisibleIdeology)) then {
+				_ideoList set [_foreachIndex,objnull];
+			};
+		} foreach _ideoList;
+
+		_ideoList = _ideoList - [objnull];
+
+		private _dat = ["Выберите идеологию:"] + (_ideoList apply {
 			getFieldBaseValue(_x,"name") + "|" + _x
 		});
 		_dat pushBack "Случайно|random__ideology";
@@ -162,6 +179,8 @@ class(GMStationBase) extends(GMBase)
 		if isNullReference(_idObject) then {
 			_idObject = instantiate(pick getSelf(possibleIdeologies));
 		};
+
+		[format["Selected ideology: %1 (passed %2)",callFunc(_idObject,getClassName),_selected]] call gameLog;
 
 		setSelf(ideology,_idObject);
 
@@ -216,6 +235,13 @@ class(GMStationIdeology) extends(IGamemodeSpecificClass)
 	//константная функция
 	func(canVisible)
 	{
+		true
+	};
+
+	//Может ли клиент увидеть идеологию
+	func(canClientVisibleIdeology)
+	{
+		objParams_1(_usr);
 		true
 	};
 
@@ -548,10 +574,34 @@ class(GMStationIdeologyCavecity) extends(GMStationIdeology)
 			if !isImplementVar(_x,edIsEnabled) then {
 				callFuncParams(_x,setDoorLock,false arg false);
 			};
+
+
 		} foreach (
 			(["DoorStatic",true] call getAllObjectsInWorldTypeOf)
 			+ (["DoorDynamic",true] call getAllObjectsInWorldTypeOf)
 		);
+		private _gen = "_gen" call getobjectbyref;
+		//max allowed distance
+		private _maxDist = 78;
+		private _genPos = callFunc(_gen,getPos);
+		private _pos = 0;
+		{
+			//create dirt
+			//SmallDirtBrown/SmallDirtGrey
+
+			_pos = callFunc(_x,getPos);
+			if (_pos distance _genPos >= _maxDist) then {continue};
+			if ((_pos select 2) >= 24.469) then {continue};
+
+			for "_i" from 1 to randInt(2,5) do {
+				[pick["SmallDirtBrown","SmallDirtGrey"],callFunc(_x,getPos) vectorAdd [rand(-5,5),rand(-5,5),rand(-0.3,0.2)],null,false]
+					call createStructure;
+			};
+		} foreach ((["BlockBrick",false] call getAllObjectsInWorldTypeOf)
+			+ (["BlockStone",false] call getAllObjectsInWorldTypeOf)
+		);
+
+		{delete(_x)} foreach (["DeliveryPipe"] call getAllObjectsInWorldTypeOf);
 
 		//open gates
 		private _gates = ["GateCity",true] call getAllObjectsInWorldTypeOf;
@@ -559,6 +609,10 @@ class(GMStationIdeologyCavecity) extends(GMStationIdeology)
 
 		{
 			if (!getVar(_x,isOpen)) then {
+				for "_i" from 3 to randInt(4,7) do {
+					["TrapEnabled",callFunc(_x,getPos) vectorAdd [rand(-3,3),rand(-3,3),1],null,true] call createItemInWorld;
+				};
+
 				callFunc(_x,onActivate);
 			};
 		} foreach _gates;
@@ -590,6 +644,7 @@ class(GMStationIdeologyCavecity) extends(GMStationIdeology)
 		if !isNullReference(_cloth) then {
 			private _type = "NomadCloth" + (str randInt(1,23));
 			callFuncParams(_cloth,setUniformClass,getFieldBaseValue(_type,"armaClass"));
+			setVar(_cloth,name,"Кочевняя одежда");
 		};
 
 		private _baseRole = getVar(_mob,basicRole);
@@ -605,4 +660,27 @@ class(GMStationIdeologyCavecity) extends(GMStationIdeology)
 			["Candle",_mob] call createItemInInventory;
 		};
 	};
+endclass
+
+class(GMStationIdeologyVanilla) extends(GMStationIdeology)
+	var(name,"Старый Добрый Грязноямск");
+	var(desc,"Классический Грязноямск");
+	func(onStarted)
+	{
+		objParams();
+
+		private _desc = "Старый Добрый Грязноямск... Самый обычный маленький чистый городок. Что же Голова уготовил нам сегодня?";
+		setSelf(descExtended,_desc);
+	};
+
+	func(canClientVisibleIdeology)
+	{
+		objParams_1(_usr);
+		if isNullReference(_usr) exitwith {false};
+
+
+		getVar(_usr,access) >= (["ACCESS_PLAYER"] call cm_accessTypeToNum)
+		&& getVar(_usr,playedRounds) >= 50
+	};
+
 endclass
