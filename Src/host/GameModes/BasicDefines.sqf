@@ -412,6 +412,24 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		]
 	};
 
+region(Sound Helpers)
+	
+	//Получение стартовой композиции. Пустая строка или null - без проигрыша
+	func(getStartSong)
+	{
+		objParams_1(_usr);
+		""
+	};
+
+	//Получение композиции в конце. Пустая строка или null - без проигрыша. Внутри этого метода можно получить finishResult
+	func(getEndSong)
+	{
+		objParams_1(_usr);
+		""
+	};
+
+endregion
+
 endclass
 
 //Специфичный для режима компонент

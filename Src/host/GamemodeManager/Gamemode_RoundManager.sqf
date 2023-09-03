@@ -179,7 +179,8 @@ gm_startRound = {
 	call gm_startMainThread;
 
 	//вызываем событие при старте раунда
-	callFunc(gm_currentMode,onRoundBegin);
+	//! Вызывается ниже
+	//callFunc(gm_currentMode,onRoundBegin);
 
 	//Спец методы
 	trace("ROUND STARTED");
@@ -210,8 +211,17 @@ gm_startRound = {
 
 	//Пост запуск
 	callFunc(gm_currentMode,postSetup);
-	
 	callFunc(gm_currentAspect,onRoundBegin);
+	
+	//start song play
+	private _startSong = null;
+	private _ctxSong = [["repeat",0],["wait",false],["smooth",0]];
+	{
+		_startSong = callFuncParams(gm_currentMode,getStartSong,_x);
+		if (!isNullVar(_startSong) && {_startSong != ""}) then {
+			callFuncParams(_x,playMusic,_startSong arg "MUSIC_CHANNEL_EVENT_GLOBAL" arg _ctxSong);
+		};
+	} forEach cm_allClients;
 
 	//запись в бд инфы
 	call db_onGamemodeSessionStart;
@@ -1204,6 +1214,16 @@ gm_endRound = {
 	callFunc(gm_currentMode,onFinish);
 	
 	callFunc(gm_currentAspect,onRoundEnd);
+
+	//end song play
+	private _endSong = null;
+	private _ctxSong = [["repeat",0],["wait",false],["smooth",0]];
+	{
+		_endSong = callFuncParams(gm_currentMode,getEndSong,_x);
+		if (!isNullVar(_endSong) && {_endSong != ""}) then {
+			callFuncParams(_x,playMusic,_endSong arg "MUSIC_CHANNEL_EVENT_GLOBAL" arg _ctxSong);
+		};
+	} forEach cm_allClients;
 
 	//фиксация режима в бд
 	call db_onGamemodeSessionEnd;
