@@ -29,12 +29,12 @@ cd_vv_syncVisual = {
 	params [["_cliName",cd_clientName]];
 	
 	_txt = cd_vv_widgets select 2;
-	_rev = format["Comp: %1",client_compiledDate];
+	_rev = "";
 	#ifdef ENABLE_HOT_RELOAD
 	_rev = format["HRC:%1",client_hrc_ver];
 	#endif
 	
-	[_txt,format["<t align='right' size='0.9'>Name: %2%1LegacyVer: %3%1%4</t>",sbr,_cliName,client_version + "."+ cd_versioning_hash,_rev]] call widgetSetText;
+	[_txt,format["<t align='right' size='0.9'>Name: %2%v%3%1%4</t>",sbr,_cliName,client_version,_rev]] call widgetSetText;
 };
 
 //Ожидаем пока клиент не загрузится чтобы выдать ему имя
