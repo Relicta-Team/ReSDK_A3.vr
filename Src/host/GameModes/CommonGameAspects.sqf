@@ -445,8 +445,8 @@ endclass
 //Все стальные двери украдены и переплавлены
 class(StealedDoorsAspect) extends(BaseGameAspect)
 	var(name,"Без стальных дверей");
-	var(desc,"Двери не локаются");
-	var(descRoleplay,"Все стальные двери бессовестно украли.");
+	var(desc,"Двери уничтожаются");
+	var(descRoleplay,"Некоторые стальные двери бессовестно украли.");
 	
 	func(onRoundBegin)
 	{
@@ -455,7 +455,9 @@ class(StealedDoorsAspect) extends(BaseGameAspect)
 		{
 			//только не электронные двери
 			if !isTypeOf(_x,ElectronicDeviceDoor) then {
-				delete(_x);
+				if prob(40) then {
+					delete(_x);
+				};
 			};
 		} foreach (
 			(["SteelGridDoor",true] call getAllObjectsInWorldTypeOf) + 
