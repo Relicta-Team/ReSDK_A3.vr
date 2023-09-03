@@ -57,7 +57,7 @@
 #include <..\client\Inventory\inventory.hpp>
 
 //встраиваемые предварительные функции
-#include <..\host\precomiled.sqf>
+#include <..\host\precompiled.sqf>
 
 
 //Отладчик

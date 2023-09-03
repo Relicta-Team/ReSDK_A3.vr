@@ -7,7 +7,7 @@
 #include "host\oop.hpp"
 #include <host\Networking\Network.hpp>
 
-#include <host\precomiled.sqf>
+#include <host\precompiled.sqf>
 
 //server password and crypt key if exists
 if (fileExists("src\private.h")) then {

@@ -108,3 +108,7 @@ pc_oop_handleAttrM = {
 	if (isnil '_editor_next_attr') exitwith {};
 	__on_editor_attribute(_mem_name,_editor_attrs_m);
 };
+
+//------------------ initializer renodes component --------------------
+//!nothrow load module
+call compile preprocessFile "src\host\ReNodes\ReNodes_init.sqf";
