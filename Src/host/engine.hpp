@@ -713,3 +713,24 @@ ACRE_IS_ERRORED = false; _ret;}*/
 	#define editor_only(any) 
 	#define editor_conditional(ed__,noted__) noted__
 #endif
+
+//node scripting macros
+/*
+	"prop"
+	node_func(createStructure) = {
+		params ["_itm","_pos"];
+	};
+
+	class(ScriptedGameClass)
+		node_method("propfield")
+		var(test_string,"123");
+	endclass
+
+
+*/
+//указывает путь узлов для регистрации функций
+#define node_setModulePath(path) __node_int_mpath__ = 'path';
+//регистрация функции в библиотеке
+#define node_func(functionname,data) call nodegen_addFunctionToLib; functionname
+//регистрация метода класса в библиотеке
+#define node_method(data) __next_nodemethod__ = data;
