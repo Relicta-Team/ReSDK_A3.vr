@@ -48,6 +48,11 @@ class(WoodenSmallFence) extends(SmallFence)
 endclass
 
 editor_attribute("EditorGenerated")
+class(WoodenSmallFence3) extends(WoodenSmallFence)
+	var(model,"metro_ob\model\tunnels_props_wood_tupik_small_02.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(WoodenSmallFence2) extends(WoodenSmallFence)
 	var(model,"ml\ml_object_new\model_24\ykritie.p3d");
 endclass
@@ -85,6 +90,11 @@ endclass
 editor_attribute("EditorGenerated")
 class(SmallSteelRustyFence) extends(SmallFence)
 	var(model,"metro_ob\model\fence01.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(RustyWindowFrameMeduim) extends(SmallSteelRustyFence)
+	var(model,"ml\ml_object_new\ml_object_2\l01_props\guardroom_window.p3d");
 endclass
 
 editor_attribute("EditorGenerated")

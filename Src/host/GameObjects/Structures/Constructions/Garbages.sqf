@@ -53,3 +53,9 @@ class(BigPileBurntGarbage) extends(SmallGarbage)
 	var(model,"a3\props_f_enoch\military\garbage\burntgarbage_01_f.p3d");
 	var(name,"Куча мусора");
 endclass
+
+editor_attribute("EditorGenerated")
+class(SmallRuinedWoodenBuilding) extends(SmallGarbage)
+	var(model,"a3\structures_f\households\slum\slum_house02_ruins_f.p3d");
+	var(name,"Руины");
+endclass

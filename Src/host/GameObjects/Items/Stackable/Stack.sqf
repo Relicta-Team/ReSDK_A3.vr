@@ -12,7 +12,7 @@
 
 //Любой предмет который можно стакать
 class(Stack) extends(Item)
-
+	
 	/*
 	public class DeclensionGenerator
     {
@@ -37,7 +37,10 @@ class(Stack) extends(Item)
 	getterconst_func(isStack,true);
 	var_str(stackName); //множественное количество
 	var_num(stackMaxAmount); //максимальное количество
+	editor_attribute("EditorVisible" arg "type:int" arg "range:1:10") editor_attribute("Tooltip" arg "Начальное количество предметов в стаке")
+	editor_attribute("alias" arg "Количество в стаке")
 	var(stackCount,1); //количество предметов в стаке
+	getter_func(canDisentegrate,false); //распадается ли стак на отдельные штучки при броске
 
 	#ifdef EXPERIMENTAL_STACK_CHANGE_MODEL
 	getterconst_func(getMultiModel,"a3\structures_f_epa\items\food\canteen_f.p3d");
@@ -152,7 +155,7 @@ class(Stack) extends(Item)
 		objParams_1(_count);
 
 		private _classname = callSelf(getClassName);
-		_newItem = instantiate(_classname);
+		private _newItem = instantiate(_classname);
 
 		setSelf(stackCount,getSelf(stackCount) - _count);
 		setVar(_newItem,stackCount,_count);
@@ -311,6 +314,35 @@ class(Stack) extends(Item)
 			};
 		};
 
+	};
+
+	func(onDrop)
+	{
+		objParams_2(_usr,_isDropFromFly);
+		super();
+		if (_isDropFromFly) then {
+			if callSelf(canDisentegrate) then {
+				callSelf(stackDisentegrateProcess);
+			};
+		};
+	};
+
+	func(stackDisentegrateProcess)
+	{
+		objParams();
+		private _itm = null;
+		private _defPos = callSelf(getPos);
+		private _curcount = getSelf(stackCount);
+		
+		if (_curcount <= 1) exitwith {};
+		
+		for "_i" from 2 to _curcount do {
+			_itm = callSelfParams(removeFromStack,1);
+			callFuncParams(_itm,loadModel,[_defPos arg null arg rand(0.25,0.7)] call noe_visual_getRelRadiusPos arg null arg 0);
+			if (_i%5==0) then {
+				callFuncAfterParams(_itm,playEventSound,rand(0.001,0.2), "drop");
+			};
+		};
 	};
 
 endclass

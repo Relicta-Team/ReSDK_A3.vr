@@ -115,6 +115,8 @@ _postInit = {
 	call Core_setWindowVisual;
 
 	call Core_onPostInitCheckPerFrame;
+
+	call classValidator_init;
 };
 if (!isNull(__FLAG_SKIP_OBJECT_BUILD__) && isNull(goasm_builder_isBuildedClasses)) then {
 	//без объектов нельзя пропустить только редактора

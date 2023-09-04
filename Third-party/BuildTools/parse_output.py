@@ -76,6 +76,10 @@ def parse_line(ln):
             if llf == "":
                 llf = path
             handle_error(llf,path,line,message)
+        
+        if (message.find("[Error]")!=-1 or message.find("[Critical]")!=-1) and message.find("[OOP_init]")!=-1:
+            log(f"::error file={path}::{message}")
+
 
 def handle_error(errored_file,catched_path,catched_line,error_message):
     global hasErrors

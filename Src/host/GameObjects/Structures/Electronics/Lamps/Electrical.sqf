@@ -67,6 +67,11 @@ class(LampCeiling) extends(StreetLampEnabled)
 	var(model,"atmobjects\lamps\data\model\lamp_tarelka.p3d")
 endclass
 
+editor_attribute("EditorGenerated")
+class(Chandelier) extends(LampCeiling)
+	var(model,"ml\ml_object_new\shabbat\lustra.p3d");
+endclass
+
 //для бара свет
 class(LampCeiling_Red) extends(LampCeiling)
 	var(light,LIGHT_LAMP_CEILING_REDLIGHT);

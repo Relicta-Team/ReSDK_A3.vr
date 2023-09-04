@@ -26,6 +26,11 @@ class(LongRottenBoards) extends(SmallFloor)
 endclass
 
 editor_attribute("EditorGenerated")
+class(ShortRottenBoards) extends(LongRottenBoards)
+	var(model,"a3\structures_f_exp\civilian\accessories\plank_01_4m_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(SmallOldWell) extends(SmallFloor)
 	var(model,"a3\structures_f_enoch\civilian\accessories\stonewell_01_f.p3d");
 	var(name,"Старый колодец");
@@ -39,6 +44,16 @@ endclass
 editor_attribute("EditorGenerated")
 class(ConcreteSmallFloor) extends(SmallFloor)
 	var(model,"apalon\metro_a3\redgates\concrete_slub3.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ConcreteSmallFloor2) extends(ConcreteSmallFloor)
+	var(model,"ml_shabut\exoduss\concrete_slub.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ConcreteSmallFloor1) extends(ConcreteSmallFloor)
+	var(model,"apalon\metro_a3\redgates\concrete_slub2.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -65,6 +80,11 @@ endclass
 editor_attribute("EditorGenerated")
 class(MediumConcreteFloor) extends(SmallFloor)
 	var(model,"csa_constr\csa_obj\plita_3x6.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(WhiteConcreteFloorBig) extends(MediumConcreteFloor)
+	var(model,"ml_shabut\exoduss\concreteplat.p3d");
 endclass
 
 editor_attribute("EditorGenerated")

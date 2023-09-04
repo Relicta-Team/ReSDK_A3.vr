@@ -2909,7 +2909,7 @@ Replaced value:
 ```sqf
 setSelf(name,getVar(_item,name))
 ```
-File: [host\GameObjects\Items\Item.sqf at line 700](../../../Src/host/GameObjects/Items/Item.sqf#L700)
+File: [host\GameObjects\Items\Item.sqf at line 727](../../../Src/host/GameObjects/Items/Item.sqf#L727)
 ## methodReference(name__,parm,refparam)
 
 Type: constant
@@ -2923,7 +2923,7 @@ Replaced value:
 ```sqf
 func(name__) {parm; callFuncParams(getSelf(object),name__,refparam)}
 ```
-File: [host\GameObjects\Items\Item.sqf at line 1097](../../../Src/host/GameObjects/Items/Item.sqf#L1097)
+File: [host\GameObjects\Items\Item.sqf at line 1124](../../../Src/host/GameObjects/Items/Item.sqf#L1124)
 ## generateItemSize
 
 Type: function
@@ -2933,7 +2933,7 @@ Description:
 - Param: _bmax
 - Param: _radius
 
-File: [host\GameObjects\Items\Item.sqf at line 145](../../../Src/host/GameObjects/Items/Item.sqf#L145)
+File: [host\GameObjects\Items\Item.sqf at line 172](../../../Src/host/GameObjects/Items/Item.sqf#L172)
 # Item_HandAnim.hpp
 
 ## ANIM_INDEX_HANDED
@@ -4543,6 +4543,18 @@ Initial value:
 [...
 ```
 File: [host\GameObjects\Mobs\Mob_Skills.sqf at line 618](../../../Src/host/GameObjects/Mobs/Mob_Skills.sqf#L618)
+## skills_internal_list_otherSkillsSystemNames_withCategories
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\GameObjects\Mobs\Mob_Skills.sqf at line 630](../../../Src/host/GameObjects/Mobs/Mob_Skills.sqf#L630)
 # Mob_WoundSystem.sqf
 
 ## usesimplog

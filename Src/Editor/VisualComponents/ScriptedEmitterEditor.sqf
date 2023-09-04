@@ -116,16 +116,17 @@ function(vcom_emit_openMainContextMenuSettings)
 
 	_setText = ifcheck(call rendering_isNightEnabled,"Включить","Выключить");
 	_stackMenu pushBack [_setText+" глобальное освещение",{
-		_oldMode = call rendering_isNightEnabled;
-		(!_oldMode) call rendering_setNight
+		call vcom_emit_opt_switchNight;
 	},null,"Переключает глобальное освещение"];
-	_stackMenu pushBack [ifcheck(call rendering_isInGameHDREnabled,"Отключить","Включить") + " собственный рендер",{(!call rendering_isInGameHDREnabled) call rendering_setInGameHDR},null,"Собственный рендер, это HDR режим, активируемый в симуляции на клиенте"];
+	_stackMenu pushBack [ifcheck(call rendering_isInGameHDREnabled,"Отключить","Включить") + " собственный рендер",{
+		call vcom_emit_opt_switchRender;
+	},null,"Собственный рендер, это HDR режим, активируемый в симуляции на клиенте"];
 
 	if !isNullReference(vcom_emit_envObject_ground) then {
 		_stackMenu pushBack [
 			"<t size='1'>"+ifcheck(isObjectHidden vcom_emit_envObject_ground,"Включить","Выключить") + " показ пола</t>",
 			{
-				_newval = !(isObjectHidden vcom_emit_envObject_ground);
+				call vcom_emit_opt_switchFloor;	_newval = !(isObjectHidden vcom_emit_envObject_ground);
 				vcom_emit_envObject_ground hideObject _newval;
 				{
 					_x hideObject _newval;
@@ -150,6 +151,26 @@ function(vcom_emit_openMainContextMenuSettings)
 		[]
 	] call dcm_create;
 }
+
+	function(vcom_emit_opt_switchNight)
+	{
+		private _oldMode = call rendering_isNightEnabled;
+		(!_oldMode) call rendering_setNight
+	}
+
+	function(vcom_emit_opt_switchRender)
+	{
+		(!call rendering_isInGameHDREnabled) call rendering_setInGameHDR
+	}
+
+	function(vcom_emit_opt_switchFloor)
+	{
+		private _newval = !(isObjectHidden vcom_emit_envObject_ground);
+		vcom_emit_envObject_ground hideObject _newval;
+		{
+			_x hideObject _newval;
+		} foreach vcom_emit_envObject_groundAreaList;
+	}
 
 function(vcom_emit_createEmitterObject)
 {
@@ -210,6 +231,16 @@ function(vcom_emit_createVisualWindow)
 
 	call vcom_emit_io_readConfigs;
 
+	//reditor config check
+	if (cfg_emed_enableFloorByDefault) then {
+		call vcom_emit_opt_switchFloor;
+	};
+	if (cfg_emed_enableCustomRenderByDefault) then {
+		call vcom_emit_opt_switchRender;
+	};
+	if (cfg_emed_enableNightByDefault) then {
+		call vcom_emit_opt_switchNight;
+	};
 
 	["Редактор загружен",10] call showInfo;
 	// {
@@ -557,9 +588,11 @@ function(vcom_emit_createEmitter)
 	private _defPos = [0,0,0]; private _defOrient = [0,0,0];
 	_o setvariable ["pos",_defPos];
 	_o setvariable ["orient",_defOrient];
+	
+	//! THIS DOSEN'T WORK. FUCK BIS
 	(_o call vcom_emit_getEmitterVisual) attachto [vcom_logicObject,_defPos];
 	[_o call vcom_emit_getEmitterVisual,_defOrient] call BIS_fnc_setObjectRotation;
-	(_o call vcom_emit_getEmitterVisual) attachto [vcom_logicObject,_defPos];
+	//(_o call vcom_emit_getEmitterVisual) attachto [vcom_logicObject,_defPos];
 
 	//unical id
 	private _unicalIdStorage = ["_ctgMaker","_list"] call vcom_emit_getVarInSets;
@@ -587,7 +620,10 @@ function(vcom_emit_createEmitter)
 	//update list
 	call vcom_emit_reloadEmitterList;
 
-	_o
+	//sync position (ебал рот чехов кстати)
+	[0,0,_o getvariable "index"] call vcom_emit_relpos_updatePositionAtAxis;
+	
+	_o //return value not used?!
 }
 
 function(vcom_emit_reloadEmitterList)

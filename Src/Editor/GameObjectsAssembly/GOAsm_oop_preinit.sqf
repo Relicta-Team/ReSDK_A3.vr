@@ -96,7 +96,7 @@ oop_getSimpleTypeSize = {
 
 // object istypeof gameobject (from base to childs) (!!!Slower)
 oop_isTypeOf = {
-	params ["_type","_searched"];
+	params ["_searched","_type"];
 	if (_type == _searched) exitwith {true};
 
 	private _findedClass = false;

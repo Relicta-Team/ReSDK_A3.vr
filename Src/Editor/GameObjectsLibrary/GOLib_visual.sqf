@@ -48,12 +48,17 @@ function(golib_internal_initTreeStateSaver)
 		_map = call golib_internal_getTreeSaverStorage;
 		_curname = _tree tvText _path;
 		_map set [_curname,_path];
+		//["Tree expanded %1 %3 (saved %2)",_path,_curname in _map,_curname] call printTrace;
 	}];
 	_tree ctrlAddEventHandler ["TreeCollapsed",{
 		params ["_tree","_path"];
 		_map = call golib_internal_getTreeSaverStorage;
 		_curname = _tree tvText _path;
-		_map deleteAt [_curname,_path];
+		_map deleteAt _curname;
+		// TODO: при сворачивании ветки в _map могут храниться дочки.
+		// Они не раскрываются при перезгрузке (иногда всё же бывает проблема)
+		//! Нужно удалять из карты дочерние ветки для работы нативной логике дерева.
+		//["Tree collapsed %1 %3 (saved %2)",_path,_curname in _map,_curname] call printTrace;
 	}];
 }
 
@@ -405,16 +410,42 @@ function(golib_vis_onPressSettingsObject)
 	
 	[
 		[
+			["Отмена",{}],
 			["Создать новый тип из "+_class,{["TODO implement (use virtual object)"] call showInfo}],
 			["Выделить в сцене",
 				[
-					["Все объекты "+_class,{},null,"Выделяет все объекты типа "+_class],
-					["Наследников от "+_class,{},null,"Выделяет типы, унаследованные от "+_class],
+					["Все объекты "+_class,{
+						(call contextMenu_getContextParams) params ["_class"];
+						[_class,{_x == _class}] call golib_selectObjectsBy;
+					},null,"Выделяет все объекты типа "+_class],
+					["Дочерние от "+_class,{
+						(call contextMenu_getContextParams) params ["_class"];
+						[_class,{
+							_curItem = _x;
+							(([_class,false] call oop_getinhlist) findif {_curItem == _x}) !=-1
+						}] call golib_selectObjectsBy;
+					},null,"Выделяет типы, унаследованные от "+_class],
 					//! 2 тултипа не показываются изза прекрытия другой категорией
 					//TODO исправить
-					["Всех от "+_class,{},null,"Выделяет все типы, унаследованные от "+_class+" (глубокое наследование)"],
-					["Объекты "+_class + " и наследн.",{},null,"Выделяет типы "+_class+", и унаследованные от "+_class],
-					["Объекты "+_class + " и всех наследн.",{},null,"Выделяет все типы, которые являются типами "+_class+" или наследниками от "+_class]
+					["Всех от "+_class,{
+						(call contextMenu_getContextParams) params ["_class"];
+						[_class,{
+							_curItem = _x;
+							(([_class,true] call oop_getinhlist) findif {_curItem == _x})!=-1
+						}] call golib_selectObjectsBy;
+					},null,"Выделяет все типы, унаследованные от "+_class+" (глубокое наследование)"],
+					["Объекты "+_class + " и дочерние",{
+						(call contextMenu_getContextParams) params ["_class"];
+						[_class,{
+							_curItem = _x;
+							_x == _class || 
+							(([_class,false] call oop_getinhlist) findif {_curItem == _x})!=-1
+						}] call golib_selectObjectsBy;
+					},null,"Выделяет типы "+_class+", и унаследованные от "+_class],
+					["Объекты "+_class + " и всех наследн.",{
+						(call contextMenu_getContextParams) params ["_class"];
+						[_class,{[_x,_class] call oop_isTypeOf}] call golib_selectObjectsBy;
+					},null,"Выделяет все типы, которые являются типами "+_class+" или наследниками от "+_class]
 				]
 			],
 			["Подробная информация о типе",{}],
@@ -613,7 +644,7 @@ function(golib_vis_switchLockCameraOnSelected)
 
 function(golib_vis_jumpToObjects)
 {
-	_this call golib_setSelectedObjects;
+	[_this] call golib_setSelectedObjects;
 	call golib_vis_jumpToSelected;
 }
 

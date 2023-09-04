@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: 1.4';__metaInfoVersion__ = 3;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.13';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -58,26 +58,26 @@ _4052_544194007_642334_10439 = ['TeleportBase',[4052.54,4007.64,4.10439],277.851
 ['TeleportExit',[4053.63,4016.99,4.31423],255.482,[0,0,1], {go_editor_globalRefs set ['tp_main',_thisObj];
 }] call InitStruct; 
 _4072_994874042_888184_53377 = ['TeleportBase',[4072.99,4042.89,4.53377],0,[0,0,1]] call InitStruct; 
-_4034_460454002_918219_31756 = ['LampWall',[4034.46,4002.92,14.3047,true],156.996,[0.969658,0.0125973,0.244142], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
-_4006_545174019_7182611_18008 = ['LampWall',[4006.55,4019.72,16.1657,true],292.182,[-0.431516,-0.901254,0.0391875], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
-_4020_542974020_298589_83190 = ['LampWall',[4020.54,4020.3,14.8166,true],18.7499,[-0.965691,0.254814,-0.0500989], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4034_460454002_918219_31756 = ['LampWall',[4034.46,4002.92,14.3047,true],[0.216314,-0.509493,-0.832842],[0.969658,0.0125973,0.244142], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4006_545174019_7182611_18008 = ['LampWall',[4006.55,4019.72,16.1657,true],[-0.510444,0.20812,-0.834346],[-0.431516,-0.901254,0.0391875], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4020_542974020_298589_83190 = ['LampWall',[4020.54,4020.3,14.8166,true],[0.188643,0.555728,-0.809679],[-0.965691,0.254814,-0.0500989], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 _4011_509774007_692144_30183 = ['LampWall',[4011.51,4007.69,4.30183],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
-_4018_418954003_066168_34225 = ['LampWall',[4018.42,4003.07,13.3269,true],188.852,[0.995118,-0.08503,-0.0500995], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4018_418954003_066168_34225 = ['LampWall',[4018.42,4003.07,13.3269,true],[-0.0903129,-0.579884,-0.809678],[0.995118,-0.08503,-0.0500995], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 _4052_792974007_779306_28485 = ['LampWall',[4052.79,4007.78,11.2696,true],92.5038,[-0.0255269,0.998418,-0.050099], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_POINTLIGHT_var];}] call InitStruct; 
-_4027_155764020_753918_18947 = ['LampWall',[4027.16,4020.75,13.1766,true],333.374,[-0.966927,-0.0738237,0.244138], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
-_4030_172364011_237068_56621 = ['LampWall',[4030.17,4011.24,13.5401,true],180,[1,0,1.19249e-008], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
-_4037_536874011_193126_70353 = ['LampWall',[4037.54,4011.19,11.6774,true],180,[1,0,1.19249e-008], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
-_4048_760254018_9414110_02974 = ['LampWall',[4048.76,4018.94,15.0036,true],180,[1,0,1.19249e-008], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
-_4019_863534010_298349_98452 = ['LampWall',[4019.86,4010.3,14.9584,true],180,[1,0,1.19249e-008], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4027_155764020_753918_18947 = ['LampWall',[4027.16,4020.75,13.1766,true],[-0.248061,0.494812,-0.832842],[-0.966927,-0.0738237,0.244138], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4030_172364011_237068_56621 = ['LampWall',[4030.17,4011.24,13.5401,true],[-1.04251e-015,-1,8.74228e-008],[1,0,1.19249e-008], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4037_536874011_193126_70353 = ['LampWall',[4037.54,4011.19,11.6774,true],[-1.04251e-015,-1,8.74228e-008],[1,0,1.19249e-008], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4048_760254018_9414110_02974 = ['LampWall',[4048.76,4018.94,15.0036,true],[-1.04251e-015,-1,8.74228e-008],[1,0,1.19249e-008], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4019_863534010_298349_98452 = ['LampWall',[4019.86,4010.3,14.9584,true],[-1.04251e-015,-1,8.74228e-008],[1,0,1.19249e-008], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 ['BlockDirt',[4076.4,4046.91,4.45789],0,[0,0,1]] call InitDecor; 
 ['BlockDirt',[4076.81,4037.05,11.8332],0,[0,0,1]] call InitDecor; 
 ['BlockDirt',[4067.13,4047.16,12.259],0,[0,0,1]] call InitDecor; 
 ['BlockDirt',[4086.56,4046.95,12.007],0,[0,0,1]] call InitDecor; 
 ['BlockDirt',[4076.86,4056.31,11.7679],0,[0,0,1]] call InitDecor; 
-_4076_094734047_1113310_85253 = ['LampWall',[4076.09,4047.11,15.8264,true],180,[1,0,1.19249e-008], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4076_094734047_1113310_85253 = ['LampWall',[4076.09,4047.11,15.8264,true],[-1.04251e-015,-1,8.74228e-008],[1,0,1.19249e-008], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 _4073_305664043_026126_03741 = ['LampWall',[4073.31,4043.03,11.0221,true],92.5038,[-0.0255269,0.998418,-0.050099], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_POINTLIGHT_var];}] call InitStruct; 
-_4039_448004018_080577_97911 = ['LampWall',[4039.45,4018.08,12.953,true],349.06,[-0.981629,-0.190252,-0.014421], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
-_4027_218264007_087408_35834 = ['LampWall',[4027.22,4007.09,13.3327,true],350.837,[-0.986574,-0.162475,-0.016522], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4039_448004018_080577_97911 = ['LampWall',[4039.45,4018.08,12.953,true],[-0.189667,0.981237,-0.0346478],[-0.981629,-0.190252,-0.014421], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
+_4027_218264007_087408_35834 = ['LampWall',[4027.22,4007.09,13.3327,true],[-0.156157,0.968125,-0.195832],[-0.986574,-0.162475,-0.016522], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 _4076_875984049_953134_56122 = ['IStruct',[4076.88,4049.95,9.97233,true],176.437,[0.0400344,-0.0237284,0.998917], {_thisObj setvariable ['model','a3\structures_f\civ\camping\campingtable_f.p3d']; go_editor_globalRefs set ['table_box',_thisObj];
 }] call InitStruct; // !!! realocated model !!!
 ['Candle',[4077.33,4049.91,10.442,true],0,[0.0400458,-0.0237298,0.998916], {go_editor_globalRefs set ['candle_target',_thisObj];
@@ -89,14 +89,14 @@ _4037_524904010_855714_03957 = ['IStruct',[4037.52,4010.86,9.45068,true],87.5654
 ['ChairLibrary',[4017.03,4014.29,4.4526],346.692,[0,0,1]] call InitItem; 
 _4036_612064008_184084_12800 = ['SteelGreenDoor',[4036.61,4008.18,4.128],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"keymain;keymaster"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['BetonTrapeciaSmall',[4034.96,4007.7,4.78337],273.858,[0,0,1]] call InitStruct; 
-['BetonTrapeciaSmall',[4038.14,4007.65,10.3463,true],87.2918,[-0.0895523,-0.00130586,0.995981]] call InitStruct; 
+['BetonTrapeciaSmall',[4038.14,4007.65,10.3463,true],[0.994873,0.0470595,0.0895144],[-0.0895523,-0.00130586,0.995981]] call InitStruct; 
 _4034_712894004_802984_20000 = ['SteelGreenDoor',[4034.71,4004.8,4.2],275.485,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"keyback;keymaster"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['BetonTrapeciaSmall',[4035.38,4006.42,4.88616],0.939378,[0,0,1]] call InitStruct; 
-['BetonTrapeciaSmall',[4035.12,4003.12,10.7132,true],182.922,[0,0.0861225,0.996285]] call InitStruct; 
-['ConcretePanel',[4038.78,4005.42,9.9939,true],355.413,[0.835988,0.0749653,0.543602]] call InitStruct; 
-['ConcretePanel',[4038.46,4001.86,9.99901,true],12.067,[0.822403,-0.16777,0.543605]] call InitStruct; 
-['BetonTrapeciaSmall',[4036.45,4003.07,10.6655,true],182.922,[0,0.0861225,0.996285]] call InitStruct; 
-['BetonTrapeciaSmall',[4037.89,4003.07,10.3688,true],90.907,[-0.0860692,-0.003026,0.996285]] call InitStruct; 
+['BetonTrapeciaSmall',[4035.12,4003.12,10.7132,true],[-0.0507909,-0.994999,0.0860113],[0,0.0861225,0.996285]] call InitStruct; 
+['ConcretePanel',[4038.78,4005.42,9.9939,true],[-0.0799719,0.996692,-0.0144623],[0.835988,0.0749653,0.543602]] call InitStruct; 
+['ConcretePanel',[4038.46,4001.86,9.99901,true],[0.209033,0.977802,-0.0144654],[0.822403,-0.16777,0.543605]] call InitStruct; 
+['BetonTrapeciaSmall',[4036.45,4003.07,10.6655,true],[-0.0507909,-0.994999,0.0860113],[0,0.0861225,0.996285]] call InitStruct; 
+['BetonTrapeciaSmall',[4037.89,4003.07,10.3688,true],[0.996169,-0.0157713,0.0860113],[-0.0860692,-0.003026,0.996285]] call InitStruct; 
 _4037_181404004_369144_11875 = ['IStruct',[4037.18,4004.37,9.51643,true],87.5645,[-0.0384802,0.0395592,0.998476], {_thisObj setvariable ['model','a3\structures_f_heli\furniture\rattantable_01_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['LampKerosene',[4036.87,4004.08,4.91473],302.836,[0,0,1]] call InitItem; 
 _4037_229004004_448004_91524 = ['Key',[4037.23,4004.45,9.91817,true],51.8121,[0.0462523,0.00517806,0.998916], {_thisObj setvariable ['preinit@__keytypesstr',"keymaster"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 

@@ -12,7 +12,6 @@ scriptError_internal_handleStack = {
 	{
 		_valInfo = _y;
 		_cleanString = true;
-		_isCode = false;
 		if equalTypes(_valInfo,[]) then {
 			_valInfo = str _valInfo;
 			_cleanString = false;
