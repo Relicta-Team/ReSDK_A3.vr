@@ -179,8 +179,7 @@ gm_startRound = {
 	call gm_startMainThread;
 
 	//вызываем событие при старте раунда
-	//! Вызывается ниже
-	//callFunc(gm_currentMode,onRoundBegin);
+	callFunc(gm_currentMode,onRoundBegin);
 
 	//Спец методы
 	trace("ROUND STARTED");
