@@ -609,16 +609,18 @@ class(GMStationIdeologyCavecity) extends(GMStationIdeology)
 		private _maxDist = 78;
 		private _genPos = callFunc(_gen,getPos);
 		private _pos = 0;
+		private _nospawnpos = [3808.05,3742.8,22.8545];
 		{
 			//create dirt
 			//SmallDirtBrown/SmallDirtGrey
 
-			_pos = callFunc(_x,getPos);
+			_pos = callFunc(_x,getPos) vectorAdd [rand(-4,4),rand(-4,4),rand(-0.3,0.2)];
 			if (_pos distance _genPos >= _maxDist) then {continue};
 			if ((_pos select 2) >= 24.469) then {continue};
+			if (_nospawnpos distance2d _pos <= 8) then {continue};
 
 			for "_i" from 1 to randInt(2,5) do {
-				[pick["SmallDirtBrown","SmallDirtGrey"],callFunc(_x,getPos) vectorAdd [rand(-5,5),rand(-5,5),rand(-0.3,0.2)],null,false]
+				[pick["SmallDirtBrown","SmallDirtGrey"],_pos,null,false]
 					call createStructure;
 			};
 		} foreach ((["BlockBrick",false] call getAllObjectsInWorldTypeOf)
@@ -761,6 +763,10 @@ class(GMStationIdeologyCavecity) extends(GMStationIdeology)
 				};
 				continue;
 			};
+		};
+
+		for "_x" from 1 to randInt(8,13) do {
+			["CampfireCreator",[3772.32,3783.69,24.2922] vectorAdd [rand(-.05,.05),rand(-.05,.05),0],null,false] call createItemInWorld;
 		};
 	};
 

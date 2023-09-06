@@ -418,12 +418,13 @@ class(Pie) extends(IFoodItem)
 
 				//transfering reagents
 				private _reagentsPerItem = callSelf(getFilledSpace) / _count;
-
+				assert(!isNullVar(_reagentsPerItem));
 				for "_i" from 1 to _count do {
-					_itm = ["PiePiece",_pos,null,false] call createItemInWorld;
+					_itm = ["PiePiece",_pos vectorAdd [rand(-0.01,0.01),rand(-0.01,0.01),rand(-0.001,0.001)],null,false] call createItemInWorld;
 					setVar(_itm,weight,_wperitem);
-					setVar(_itm,reagents,[[] arg _reagentsPerItem]newReagents);
-					callSelfParams(transferTo,_itm arg _reagentsPerItem);
+					private _reagents = vec2(_itm,_reagentsPerItem) call ms_create;
+					setVar(_itm,reagents,_reagents);
+					callSelfParams(transferReagents,_itm arg _reagentsPerItem);
 				};
 
 
