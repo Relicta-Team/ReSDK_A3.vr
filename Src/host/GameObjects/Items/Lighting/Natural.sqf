@@ -246,18 +246,21 @@ class(Sigarette) extends(Torch)
 	getterconst_func(getHandAnim,ITEM_HANDANIM_LOWERONLYHAND);
 
 	var(canRestoreLight,true); //можно ли восстановить после тушения (нужно для расходников без восстановления)
+	
+	getter_func(fuelEmptyModel,"relicta_models2\misc\s_cigarette_end\s_cigarette_end.p3d");
 
 	func(onFuelEmpty)
 	{
 		objParams();
 		setSelf(canRestoreLight,false);
 		//nextFrameParams({delete(_this)},this);
+		private _oldName = getSelf(name);
 		setSelf(name,"Окурок");
-		callSelfParams(setModel,"relicta_models2\misc\s_cigarette_end\s_cigarette_end.p3d");
+		callSelfParams(setModel,callSelf(fuelEmptyModel));
 		if !callSelf(isInWorld) then {
 			private _loc = getSelf(loc);
 			if callFunc(_loc,isMob) then {
-				callFuncParams(_mob,localSay,"Сигарета кончилась..." arg "mind");
+				callFuncParams(_mob,localSay,_oldName + " кончилась..." arg "mind");
 			};
 		};
 		
@@ -280,6 +283,16 @@ class(Sigarette) extends(Torch)
 endclass
 
 class(SigaretteDisabled) extends(Sigarette)
+	var(lightIsEnabled,false);
+endclass
+
+class(Samokrutka) extends(Sigarette)
+	var(name,"Грибная самокрутка");
+	var(model,"relicta_models2\misc\s_joint\s_joint.p3d");
+	getter_func(fuelEmptyModel,"relicta_models2\misc\s_joint_end\s_joint_end.p3d");
+endclass
+
+class(SamokrutkaDisabled) extends(Samokrutka)
 	var(lightIsEnabled,false);
 endclass
 

@@ -1,6 +1,6 @@
 
-#define PATHSOUNDCFG(var) \sounds\##var
-#define PATHMUSICCFG(var) music\##var
+#define PATHSOUNDCFG(var) \resources\sounds\##var
+#define PATHMUSICCFG(var) resources\music\##var
 
 #define regSound(cls,path)  class cls { \
 	name = #cls; \

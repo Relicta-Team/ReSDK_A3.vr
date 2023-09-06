@@ -40,6 +40,19 @@ class(Cloth) extends(Container)
 		getVar(_usr,owner) forceAddUniform getSelf(armaClass);
 	};
 
+	func(setUniformClass)
+	{
+		objParams_1(_class);
+		setSelf(armaClass,_class);
+		if callSelf(isInWorld) exitwith {};
+		private _loc = getSelf(loc);
+		if !isTypeOf(_loc,BasicMob) exitwith {};
+
+		if (getSelf(slot) in getSelf(allowedSlots)) then {
+			callSelfParams(armaItemAddImpl,_loc);
+		};
+	};
+
 	func(armaItemRemoveImpl)
 	{
 		objParams_1(_usr);
@@ -433,6 +446,19 @@ class(HatUshanka) extends(Cloth)
 	};
 endclass
 
+editor_attribute("InterfaceClass")
+class(HatProxy) extends(HatUshanka)
+	func(armaItemAddImpl)
+	{
+		objParams_1(_usr);
+	};
+
+	func(armaItemRemoveImpl)
+	{
+		objParams_1(_usr);
+	};
+endclass
+
 class(HatBeret) extends(HatUshanka)
 	var(armaClass,"H_Beret_Colonel");
 	var(name,"Берет");
@@ -489,6 +515,16 @@ endclass
 class(HoodChemicalProt) extends(HatUshanka)
 	var(armaClass,"Skyline_HeadGear_NBC_Hazmat_01_F");
 	var(name,"Капюшон");
+endclass
+
+class(Crown1) extends(HatProxy)
+	var(name,"Корона");
+	var(model,"relicta_models\models\interier\props\treasure\crown\crown1.p3d");
+endclass
+
+class(Crown2) extends(HatProxy)
+	var(name,"Корона");
+	var(model,"relicta_models\models\interier\props\treasure\crown\crown2.p3d");
 endclass
 
 //combat headgears
