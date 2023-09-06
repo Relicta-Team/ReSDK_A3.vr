@@ -538,7 +538,7 @@ class(GMOldNewOrder) extends(GMExtended)
 			1
 			#endif
 		) exitwith {
-			4
+			callSelf(escapeRoundResult);
 		};
 
 		// Победа НА
@@ -549,7 +549,7 @@ class(GMOldNewOrder) extends(GMExtended)
 				INC(_countSuccess);
 			};
 		} foreach getSelf(objectives);
-		if (count getSelf(objectives) == _countSuccess) exitWith {4};
+		if (count getSelf(objectives) == _countSuccess) exitWith {5};
 
 		0
 	};
@@ -568,7 +568,7 @@ class(GMOldNewOrder) extends(GMExtended)
 		_tasks + "</t>";
 	};
 
-
+	getterconst_func(escapeRoundResult,4);
 	func(getResultTextOnFinish)
 	{
 		objParams();
@@ -576,7 +576,7 @@ class(GMOldNewOrder) extends(GMExtended)
 		if(_fr == 1) exitWith {"Все Агенты Новой Армии погибли." + sbr + callSelf(getTaskTextSuccessInfo)};
 		if(_fr == 2) exitWith {"Агенты Новой Армии не успели выполнить свои цели." + sbr + callSelf(getTaskTextSuccessInfo)};
 		if(_fr == 3) exitWith {"Агенты Новой Армии скрылись." + sbr + callSelf(getTaskTextSuccessInfo)};
-		if (_fr == 4) exitwith {
+		if (_fr == callSelf(escapeRoundResult)) exitwith {
 			private _ref = ("escaper_location" call getObjectByRef);
 			if isNullReference(_ref) exitwith {"Врата были открыты"};
 			private _cntMob = ["Mob",getposatl getVar(_ref,loc),15,true,true] call getMobsOnPosition;
@@ -587,6 +587,16 @@ class(GMOldNewOrder) extends(GMExtended)
 			_t + sbr + callSelf(getTaskTextSuccessInfo)
 		};
 		"Агентам Новой Армии удалось выполнить свои цели." + sbr + callSelf(getTaskTextSuccessInfo)
+	};
+
+	func(getEndSong)
+	{
+		objParams_1(_usr);
+		private _fr = getSelf(finishResult);
+		private _rez = super();
+		if (_fr == 5) exitwith {"round\end_newarmy"};
+		if (_rez!="") exitWith {_rez};
+		""
 	};
 
 	func(onFinish)

@@ -6,6 +6,26 @@
 
 #ifdef DEBUG
 	
+	addCommand("showthreads",PUBLIC_COMMAND)
+	{
+		_t = "Active threads: ";
+		{
+			_delay = _x select 1;
+			_startedAt = _x select 3;
+			_code = (toString (_x select 0)) splitString ";";
+			if (count _code > 0 && {[_code select 0,"private ___fn___ = ",false] call stringStartWith}) then {
+				_code = _code select 0;
+				_code = _code select [count "private ___fn___ = ",count _code];
+
+				modvar(_t) + sbr + (format["%1 (per %2s, started %3s ago)",_code,_delay,tickTime - _startedAt]);
+			} else {
+				modvar(_t) + sbr + (format["Unk thread %1",_x select 5]);
+			};
+		} foreach cba_common_perFrameHandlerArray;
+
+		callFuncParams(thisClient,ShowMessageBox,"Text" arg _t);
+	};
+
 	addCommand("jumpclass",PUBLIC_COMMAND)
 	{
 		private _item = ["target",""] call oop_getdata select 0;

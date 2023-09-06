@@ -843,7 +843,7 @@ Initial value:
 ```sqf
 "0.7.687"
 ```
-File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 19](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L19)
+File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 39](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L39)
 ## cmd_internal_debug_protomaker_listmodels
 
 Type: Variable
@@ -855,7 +855,7 @@ Initial value:
 ```sqf
 hashSet_createEmpty()
 ```
-File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 20](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L20)
+File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 40](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L40)
 ## cmd_internal_debug_tobjmarker_versionrequired
 
 Type: Variable
@@ -867,7 +867,7 @@ Initial value:
 ```sqf
 "0.7.655"
 ```
-File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 95](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L95)
+File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 115](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L115)
 # Reflect.sqf
 
 ## isvar(x)

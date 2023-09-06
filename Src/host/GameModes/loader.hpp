@@ -19,6 +19,7 @@ load("GMTemplate\GM_Template.sqf");
 load("Detective\GM_Detective.sqf");
 	load("Detective\DetectiveModeRoles.sqf");
 load("Dirtpit\GM_Extended.sqf");
+	load("Dirtpit\BaseGamemode.sqf");
 	load("Dirtpit\StationRoles.sqf");
 	load("Dirtpit\GM_OldNewOrder.sqf");
 	load("Dirtpit\GM_Revolution.sqf");
