@@ -163,7 +163,7 @@ endclass
 
 class(Omlet) extends(IFoodItem)
 	var(name,"Омлетик");
-	var(model,"ca\misc2\skeetmachine\skeetdisk.p3d");
+	var(model,"relicta_models2\food\s_omlette\s_omlette.p3d");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(randInt(60,90)));
 	getterconst_func(getBiteSize,10);
@@ -370,6 +370,7 @@ endclass
 
 class(PepperShaker) extends(SaltShaker)
 	var(name,"Перец");
+	var(model,"relicta_models2\food\s_pepper\s_pepper.p3d");
 	var(reagents,[vec2("Pepper",30)]newReagentsFood);
 endclass
 
@@ -388,7 +389,7 @@ endclass
 
 class(Pie) extends(IFoodItem)
 	var(name,"Пирог");
-	var(model,"ml\ml_object_new\model_05\hleb.p3d");
+	var(model,"relicta_models2\food\s_pie\s_pie.p3d");
 	var(size,ITEM_SIZE_MEDIUM);
 	var(weight,gramm(randInt(300,400)));
 	var(reagents,[[vec2("Nutriment",50)] arg 100]newReagents);
@@ -436,7 +437,7 @@ endclass
 
 class(PiePiece) extends(IFoodItem)
 	var(name,"Кусок пирога");
-	var(model,"ml_exodusnew\becondry.p3d");
+	var(model,"relicta_models2\food\s_pie_piece\s_pie_piece.p3d");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(10));
 	var(reagents,null); //created only from pie

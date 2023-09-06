@@ -12,6 +12,7 @@ model("\relicta_models\models\interier\props\cigarette.p3d") [[5,[[-0.041,0.027,
 model("\relicta_models2\misc\s_joint\s_joint.p3d") [[5,[[-0.041,0.027,0.053],proxIt_vec]],[INV_HAND_L,[[-0.061,0.035,-0.011],[-85,-1,0]]],[INV_HAND_R,[[-0.013,-0.028,0.019],[85,0,0]]]]
 model("\a3\structures_f_epa\items\food\canteen_f.p3d") [[INV_HAND_L,[[0.046,-0.034,-0.002],[56,-29,-75]]],[INV_HAND_R,[[-0.081,-0.081,0.014],[119,28,-75]]],[INV_BELT,[[-0.183,-0.018,-0.065],[68,-12,-6]]]]
 model("\a3\structures_f\civ\camping\pillow_grey_f.p3d") [[INV_HAND_L,[[0.03,-0.018,-0.081],[39,79,-3]]],[INV_HAND_R,[[-0.034,-0.034,-0.083],[119,-75,-1]]],[INV_BELT,[[-0.143,-0.034,-0.002],[80,85,0]]]]
+model("\relicta_models2\misc\s_clothes\s_clothes.p3d") [[INV_HAND_L,[[0.03,-0.018,-0.081],[39,79,-3]]],[INV_HAND_R,[[-0.034,-0.034,-0.083],[119,-75,-1]]],[INV_BELT,[[-0.143,-0.034,-0.002],[80,85,0]]]]
 model("\relicta_models\models\medical\distilation.p3d") [[INV_HAND_L,[[-0.034,0.018,-0.12],[57,-29,2]]],[INV_HAND_R,[[-0.002,-0.065,-0.097],[-69,-46,-1]]]]
 model("\ml_shabut\meshok\meshok1.p3d") [[INV_BACKPACK,[[0,-0.208,-0.192],[-180,22,0]]],[INV_BACK,[[0.062,-0.272,-0.192],[-195,34,22]]],[INV_HAND_L,[[-0.176,-0.129,-0.272],[45,-29,2]]],[INV_HAND_R,[[0.252,-0.145,-0.145],[-69,-46,-1]]]]
 model("\ml_shabut\meshok\meshok2.p3d") [[INV_BACKPACK,[[0,-0.208,-0.192],[-180,22,0]]],[INV_BACK,[[0.062,-0.272,-0.192],[-195,34,22]]],[INV_HAND_L,[[-0.176,-0.129,-0.272],[45,-29,2]]],[INV_HAND_R,[[0.252,-0.145,-0.145],[-69,-46,-1]]]]

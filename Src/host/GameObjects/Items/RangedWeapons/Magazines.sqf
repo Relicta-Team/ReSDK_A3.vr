@@ -12,6 +12,7 @@ class(MagazinePBM) extends(IMagazineBase)
 	var(name,"Магазин ПБМ");
 	var(weight,gramm(15.2));
 	getterconst_func(getBulletType,"AmmoPBM");
+	var(model,"relicta_models2\magazine\s_pistol_magazine\s_pistol_magazine.p3d");
 endclass
 
 	class(MagazinePBMLoaded) extends(MagazinePBM)
@@ -26,7 +27,7 @@ endclass
 
 class(MagazineRevolver) extends(IMagazineBase)
 	getterconst_func(getBulletType,"AmmoRevolver");
-
+	var(model,"relicta_models2\magazine\s_pistol_magazine\s_pistol_magazine.p3d");
 	var(maxCount,6);
 	autoref var(content,[]);
 	var(currentIndex,0); //на каком индексе патрон
@@ -316,6 +317,7 @@ endclass
 
 class(MagazineSVT) extends(IMagazineBase)
 	var(name,"Магазин СВТ");
+	var(model,"relicta_models2\magazine\s_svt_magazine\s_svt_magazine.p3d");
 	var(weight,gramm(32.7));
 	getterconst_func(getBulletType,"AmmoRifle");
 	var(maxCount,6);
@@ -327,6 +329,7 @@ endclass
 
 class(MagazineAuto) extends(IMagazineBase)
 	var(name,"Магазин ""Товарища""");
+	var(model,"relicta_models2\magazine\s_rifleauto_magazine\s_rifleauto_magazine.p3d");
 	var(weight,gramm(230));
 	getterconst_func(getBulletType,"AmmoRifle");
 	var(maxCount,30);
@@ -338,6 +341,7 @@ endclass
 
 class(MagazineBastard) extends(IMagazineBase)
 	var(name,"Магазин ""Мерзавца""");
+	var(model,"relicta_models2\magazine\s_bastard_magazine\s_bastard_magazine.p3d");
 	var(weight,gramm(180));
 	getterconst_func(getBulletType,"AmmoRifle");
 	var(maxCount,20);
@@ -348,6 +352,7 @@ endclass
 
 class(MagazinePistolHandmade) extends(IMagazineBase)
 	var(name,"Магазин ""Дудатрёпа""");
+	var(model,"relicta_models2\magazine\s_pistol_magazine\s_pistol_magazine.p3d");
 	var(weight,gramm(47));
 	getterconst_func(getBulletType,"AmmoPistolHandmade");
 	var(maxCount,7);
