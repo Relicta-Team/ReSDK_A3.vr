@@ -15,7 +15,7 @@ class(Cloth) extends(Container)
 	var(name,"Одежда");
 	var(desc,"Обычная одежда");
 	var(size,ITEM_SIZE_MEDIUM);
-	var(model,"a3\structures_f\civ\camping\pillow_grey_f.p3d");
+	var(model,"relicta_models2\misc\s_clothes\s_clothes.p3d");
 	//var(model,"ml\ml_object_new\model_05\podyshka.p3d");
 	//var(icon,null); //в одежде иконка получается по методу getIcon
 
