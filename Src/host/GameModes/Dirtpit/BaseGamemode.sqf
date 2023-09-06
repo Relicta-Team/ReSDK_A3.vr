@@ -15,6 +15,26 @@ class(GMStationBase) extends(GMBase)
 		objParams();
 	};
 
+	var(__songIndex,str randInt(1,2));
+	func(getStartSong)
+	{
+		objParams_1(_usr);
+		"round\start_" + getSelf(__songIndex) 
+	};
+
+	//результат раунда когда был расход
+	getterconst_func(escapeRoundResult,1);
+
+	func(getEndSong)
+	{
+		objParams_1(_usr);
+		private _fr = getSelf(finishResult);
+		if (callSelf(escapeRoundResult) == _fr) exitwith {
+			"round\rashod"	
+		};
+		""
+	};
+
 	//стандартизированное событие начала раунда
 	//!!! Не рекомендуется к использованию
 	func(onRoundBegin)
@@ -87,6 +107,7 @@ class(GMStationBase) extends(GMBase)
 	};
 	
 	var(possibleIdeologies,[]);
+	var(ideologyTimeoutStamp,0);
 	getterconst_func(ideologySelectionTimeout,t_asMin(2));
 	func(processInitIdeology)
 	{
@@ -105,6 +126,7 @@ class(GMStationBase) extends(GMBase)
 
 		setSelf(possibleIdeologies,_ideologies);
 		callSelfAfter(_onIdeologyTimeout,callSelf(ideologySelectionTimeout));
+		setSelf(ideologyTimeoutStamp,tickTime + callSelf(ideologySelectionTimeout));
 		
 		["Mob","setSleep",{
 			objParams_1(_mode);
@@ -115,7 +137,8 @@ class(GMStationBase) extends(GMBase)
 				if isTypeOf(getSelf(basicRole),RHead) exitwith {
 					callFuncParams(gm_currentMode,openPickIdeology,this);
 				};
-				callSelfParams(localSay,"<t size='1.7'>Время ещё не пришло. Наш правитель ещё не определился</t>" arg "error");
+				private _tleft = [getVar(gm_currentMode,ideologyTimeoutStamp) - tickTime,["секунда","секунды","секунд"],true] call toNumeralString;
+				callSelfParams(localSay,"<t size='1.7'>Время ещё не пришло. Наш правитель не определился. Осталось "+_tleft+"</t>" arg "error");
 			};
 			
 		},"begin",true] call oop_injectToMethod;
@@ -181,7 +204,8 @@ class(GMStationBase) extends(GMBase)
 		};
 
 		[format["Selected ideology: %1 (passed %2)",callFunc(_idObject,getClassName),_selected]] call gameLog;
-
+		private _t = format["<t size='2'>Наш путь - %1</t>",getVar(_idObject,name)];
+		[_t,"system"] call cm_sendOOSMessage;
 		setSelf(ideology,_idObject);
 
 		callFunc(_idObject,onStarted);
@@ -196,7 +220,7 @@ class(GMStationBase) extends(GMBase)
 		super();
 		private _ideology = getSelf(ideology);
 		if isNullReference(_ideology) exitwith {};
-		private _t = format["Идеология: %1%2%3",getVar(_ideology,name),sbr,getVar(_ideology,desc)];
+		private _t = format["Идеология: %1",getVar(_ideology,name)];
 		[_t,"system"] call cm_sendOOSMessage;
 	};
 
@@ -620,19 +644,124 @@ class(GMStationIdeologyCavecity) extends(GMStationIdeology)
 		//gen disable
 		private _gen = nullPtr;
 		private _itm = nullPtr;
+		private _intItm = nullPtr;
 		{
 			_gen = _x;
 			
 			{
 				_itm = _x;
 				if (getVar(_itm,name) != "Администрация") then {
-					//callFuncParams(_x,setEnable,false);
+					callFuncParams(_x,setEnable,false);
 					callFuncParams(_gen,removeConnection,_itm);
+					// {
+					// 	_intItm = _x;
+					// 	if isTypeOf(_intItm,ElectricalShield) then {
+					// 		callFunc(_intItm,__randomizeWires);
+					// 	} else {
+					// 		//callFuncParams(_itm,removeConnection,_intItm);
+					// 	};
+					// } foreach array_copy(getVar(_itm,edConnected));
 				} else {
 					
 				};
 			} foreach array_copy(getVar(_gen,edConnected));
+
 		} foreach (["PowerGenerator",false] call getAllObjectsInWorldTypeOf);
+		
+		//disable all shields
+		//заебало блядь
+		// {
+		// 	{
+		// 		//_x is button or shield...
+		// 		_itm = _x;
+				
+		// 		{
+		// 			//_x is lamp, button or shield...
+		// 			_cls = callFunc(_x,getClassName);
+					
+		// 			if (_cls == "ElectricalShield" || _cls == "ElectricalShieldSmall") then {
+		// 				if (prob(50) && getVar(_itm,name)!="Администрация") then {
+		// 					callFuncParams(_itm,removeConnection,_x);
+		// 				};
+						
+		// 			} else {
+		// 				callFuncParams(_itm,removeConnection,_x);
+		// 			}
+		// 		} foreach array_copy(getVar(_itm,edConnected));
+		// 	} foreach array_copy(getVar(_x,edConnected));
+		// } foreach (["PowerGenerator",false] call getAllObjectsInWorldTypeOf);
+
+		// {
+		// 	_itm = getVar(_x,edOwner);
+		// 	if (getVar(_itm,name) != "Администрация") then {
+		// 		callFunc(_x,__disableAllWires);
+		// 	};
+		// } foreach (["ElectricalShield",true] call getAllObjectsInWorldTypeOf);
+
+		_listDel = (["IRangedWeapon",true] call getAllItemsTypeOf)
+			+ (["IAmmoBase",true] call getAllItemsTypeOf)
+			+ (["IMagazineBase",true] call getAllItemsTypeOf)
+			+ (["AmmoBoxBase",true] call getAllItemsTypeOf);
+
+		{
+			if prob(80) then {
+				delete(_x);
+			};
+		} foreach _listDel;
+
+		//товары склада
+		private _objectsSpawnPos = [3772.53,3783.79,24.2916];
+		private _cont = nullPtr;
+		private _spawnposcont = null;
+		for "_i" from 1 to 20 do {
+			_spawnposcont = _objectsSpawnPos vectorAdd [rand(-1.5,1.5),rand(-1.5,1.5),0];
+			if (_i == 1) then {
+				_cont = ["ShuttleBag",_spawnposcont,null,false] call createItemInWorld;
+				setVar(_cont,name,"Пищевой мешок");
+				for "_x" from 1 to randInt(2,5) do {
+					["Zhivoglot",_cont] call createItemInContainer;
+				};
+				for "_x" from 1 to randInt(2,8) do {
+					["MeatFlower",_cont] call createItemInContainer;
+				};
+				continue;
+			};
+			if (_i == 2) then {
+				_cont = ["ShuttleBag",_spawnposcont,null,false] call createItemInWorld;
+				setVar(_cont,name,"Светочный мешок");
+				for "_x" from 1 to randInt(20,25) do {
+					["TorchDisabled",_cont] call createItemInContainer;
+				};
+				for "_x" from 1 to randInt(25,30) do {
+					["Candle",_cont] call createItemInContainer;
+				};
+				continue;
+			};
+			if (_i == 3) then {
+				_cont = ["ShuttleBag",_spawnposcont,null,false] call createItemInWorld;
+				setVar(_cont,name,"Бойкий мешок");
+				for "_x" from 1 to randInt(10,20) do {
+					["Trap",_cont] call createItemInContainer;
+				};
+				for "_x" from 1 to randInt(2,4) do {
+					["CaveAxe",_cont] call createItemInContainer;
+				};
+				continue;
+			};
+			if (_i == 4) then {
+				_cont = ["ShuttleBag",_spawnposcont,null,false] call createItemInWorld;
+				setVar(_cont,name,"Вещичный мешок");
+				for "_x" from 1 to randInt(5,15) do {
+					["NomadCloth" + (str randInt(1,23)),_cont] call createItemInContainer;
+				};
+				for "_x" from 1 to randInt(10,15) do {
+					[
+						pick ["HatOldUshanka","HatUshanka","WorkerCap","WorkerCoolCap","HatGrayOldUshanka"],
+					_cont] call createItemInContainer;
+				};
+				continue;
+			};
+		};
 	};
 
 	func(onApplyToMob)
@@ -653,7 +782,14 @@ class(GMStationIdeologyCavecity) extends(GMStationIdeology)
 		if (_class == "RHead") then {
 			["WoolCoat",_mob,INV_BACK] call createItemInInventory;
 		};
-
+		if (_class == "RCaretaker" || _class == "RVeteran" || _class == "RStreak") then {
+			private _belt = callFuncParams(_mob,getItemInSlot,INV_BELT);
+			if !isNullReference(_belt) then {
+				delete(_belt);
+			};
+			private _weap = pick["CaveAxe","CombatKnife","HalfHandedSword","TwoHandedSword"];
+			[_weap,_mob] call createItemInInventory;
+		};
 		if prob(80) then {
 			["Torch",_mob] call createItemInInventory;
 		} else {

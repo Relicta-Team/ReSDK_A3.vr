@@ -284,6 +284,17 @@ class(ElectricalShield) extends(ElectronicDeviceNode)
 		} foreach (_list select [0,_prec]);
 	};
 
+	//! См. выше
+	func(__disableAllWires)
+	{
+		objParams();
+		for "_i" from 0 to (count getSelf(wiresState)) - 1 do {
+			if ((getSelf(wiresState) select _i) == 1) then {
+				callSelfParams(onWireChangeState,_i);
+			};
+		};
+	};
+
 endclass
 
 class(ElectricalShieldSmall) extends(ElectricalShield)
