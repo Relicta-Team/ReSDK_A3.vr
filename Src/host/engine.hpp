@@ -626,7 +626,7 @@ _ret} \
 #define __assert_static_runtime_expr2(expr,message) if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__,message] call sys_static_assert_}
 #define __assert_static_compile_expr1(expr) __EVAL(__assert_static_runtime_expr1(expr))
 #define __assert_static_compile_expr2(expr,message) __EVAL(__assert_static_runtime_expr2(expr,message))
-#define __assert_runtime_expr1(expr) if !([expr] call sys_int_evalassert)exitWith {['(expr)',__assert_runtime_file__,__LINE__] call sys_assert_}
+#define __assert_runtime_expr1(expr) if !([expr] call sys_int_evalassert)exitWith {[toString {expr},__assert_runtime_file__,__LINE__] call sys_assert_}
 
 //called at compile/build; Only simple expressions without macros
 #define static_assert(expr) __assert_static_runtime_expr1(expr)
