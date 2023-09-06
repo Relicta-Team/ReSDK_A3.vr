@@ -733,7 +733,7 @@ class(GMStationIdeologyCavecity) extends(GMStationIdeology)
 					["TorchDisabled",_cont] call createItemInContainer;
 				};
 				for "_x" from 1 to randInt(25,30) do {
-					["Candle",_cont] call createItemInContainer;
+					["CandleDisabled",_cont] call createItemInContainer;
 				};
 				continue;
 			};
