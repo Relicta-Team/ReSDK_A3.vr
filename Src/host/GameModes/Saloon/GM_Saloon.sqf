@@ -20,6 +20,28 @@ class(GMSaloon) extends(GMBase)
 		]
 	};
 
+	
+	func(getStartSong)
+	{
+		objParams_1(_usr);
+		private _mob = callFunc(_usr,getActorMob);
+		private _banditTheme = false;
+		if !isNullReference(_mob) then {
+			_banditTheme = isTypeOf(getVar(_mob,basicRole),RBanditMainSaloon) || 
+			isTypeOf(getVar(_mob,basicRole),RBanditMiniSaloon)
+		};
+		if (_banditTheme) exitwith {
+			"round\start_zlachnik_bandit"
+		};
+		"round\start_zlachnik"
+	};
+	func(getEndSong)
+	{
+		objParams_1(_usr);
+		if (getSelf(finishResult) > 0) exitwith {"round\kingpin"};
+		"events\Floating"
+	};
+
 	getterconst_func(getLobbySoundName,"lobby\Dark_Water.ogg");
 	getterconst_func(getLobbyBackground,PATH_PICTURE("lobby\zlachnik.paa"));
 	getterconst_func(getReqPlayersMin,4);
