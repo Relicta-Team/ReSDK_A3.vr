@@ -186,6 +186,14 @@ class(Stack) extends(Item)
 		//testvar = _added;
 	};
 
+	func(setStackCount)
+	{
+		objParams_1(_count);
+		_count = clamp(_count,1,getSelf(stackMaxAmount));
+		setSelf(stackCount,_count);
+		callSelf(onWeightChanged);
+	};
+
 	func(canAddToStack)
 	{
 		objParams_1(_fromItem);

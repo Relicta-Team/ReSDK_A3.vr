@@ -178,7 +178,7 @@ Description:
 
 Replaced value:
 ```sqf
-[ #a , b ]
+[ a , b ]
 ```
 File: [client\SoundSystem\Music.hpp at line 33](../../../Src/client/SoundSystem/Music.hpp#L33)
 ## MUSIC_MAP_INTERNAL_ALLCHANNELS
@@ -191,12 +191,12 @@ Description:
 Replaced value:
 ```sqf
 [ \
-chm(MUSIC_CHANNEL_BASE,0), \
-chm(MUSIC_CHANNEL_LOBBY,1), \
-chm(MUSIC_CHANNEL_AMBIENT,2), \
-chm(MUSIC_CHANNEL_AMBIENT_LOCAL,3), \
-chm(MUSIC_CHANNEL_COMBATAMBIENT,4), \
-chm(MUSIC_CHANNEL_EVENT_GLOBAL,5) \
+chm("MUSIC_CHANNEL_BASE",0), \
+chm("MUSIC_CHANNEL_LOBBY",1), \
+chm("MUSIC_CHANNEL_AMBIENT",2), \
+chm("MUSIC_CHANNEL_AMBIENT_LOCAL",3), \
+chm("MUSIC_CHANNEL_COMBATAMBIENT",4), \
+chm("MUSIC_CHANNEL_EVENT_GLOBAL",5) \
 ]
 ```
 File: [client\SoundSystem\Music.hpp at line 34](../../../Src/client/SoundSystem/Music.hpp#L34)

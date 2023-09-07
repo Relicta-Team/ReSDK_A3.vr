@@ -28,7 +28,12 @@ class(IMeleeWeapon) extends(Item)
 
 endclass
 
-class(CaveAxe) extends(IMeleeWeapon)
+editor_attribute("InterfaceClass")
+class(AxeBase) extends(IMeleeWeapon)
+
+endclass
+
+class(CaveAxe) extends(AxeBase)
 	var(name,"Топорчик");
 	var(desc,"Им обычно пользуются кочевники и прочие пещерные обитатели.");
 	var(icon,invicon(axe));

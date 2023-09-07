@@ -88,4 +88,3 @@ h_d3d_recomp = addMissionEventHandler ["Draw3d", {
 			}];*/
 	};
 }];
-	

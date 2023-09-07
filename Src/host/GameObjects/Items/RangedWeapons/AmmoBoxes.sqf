@@ -198,6 +198,7 @@ endclass
 class(AmmoBoxPBM) extends(AmmoBoxBase)
 	getter_func(createdType,"AmmoPBM");
 	getter_func(initialCount,16);
+	var(model,"relicta_models2\ammo_box\s_ammo_box_pistol\s_ammo_box_pistol.p3d");
 endclass
 
 	class(AmmoBoxPBM_BB) extends(AmmoBoxPBM)
@@ -213,11 +214,13 @@ endclass
 class(AmmoBoxRevolver) extends(AmmoBoxBase)
 	getter_func(createdType,"AmmoRevolver");
 	getter_func(initialCount,16);
+	var(model,"relicta_models2\ammo_box\s_ammo_box_revolver\s_ammo_box_revolver.p3d");
 endclass
 
 class(AmmoBoxShotgun) extends(AmmoBoxBase)
 	getter_func(createdType,"AmmoShotgun");
 	getter_func(initialCount,25);
+	var(model,"relicta_models2\ammo_box\s_ammo_box_shotgun\s_ammo_box_shotgun.p3d");
 endclass
 
 	class(AmmoBoxShotgunNonLethal) extends(AmmoBoxShotgun)
@@ -229,14 +232,17 @@ endclass
 class(AmmoBoxShotgunMini) extends(AmmoBoxShotgun)
 	getter_func(createdType,"AmmoShotgunMini");
 	getter_func(initialCount,25);
+	var(model,"relicta_models2\ammo_box\s_ammo_box_shotgun\s_ammo_box_shotgun.p3d");
 endclass
 
 class(AmmoBoxPistolHandmade) extends(AmmoBoxBase)
 	getter_func(createdType,"AmmoPistolHandmade");
 	getter_func(initialCount,16);
+	var(model,"relicta_models2\ammo_box\s_ammo_box_pistol\s_ammo_box_pistol.p3d");
 endclass
 
 class(AmmoBoxRifle) extends(AmmoBoxBase)
 	getter_func(createdType,"AmmoRifle");
 	getter_func(initialCount,20);
+	var(model,"relicta_models2\ammo_box\s_ammo_box_rifle\s_ammo_box_rifle.p3d");
 endclass

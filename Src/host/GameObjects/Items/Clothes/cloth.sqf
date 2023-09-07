@@ -15,7 +15,7 @@ class(Cloth) extends(Container)
 	var(name,"Одежда");
 	var(desc,"Обычная одежда");
 	var(size,ITEM_SIZE_MEDIUM);
-	var(model,"a3\structures_f\civ\camping\pillow_grey_f.p3d");
+	var(model,"relicta_models2\misc\s_clothes\s_clothes.p3d");
 	//var(model,"ml\ml_object_new\model_05\podyshka.p3d");
 	//var(icon,null); //в одежде иконка получается по методу getIcon
 
@@ -38,6 +38,19 @@ class(Cloth) extends(Container)
 	{
 		objParams_1(_usr);
 		getVar(_usr,owner) forceAddUniform getSelf(armaClass);
+	};
+
+	func(setUniformClass)
+	{
+		objParams_1(_class);
+		setSelf(armaClass,_class);
+		if callSelf(isInWorld) exitwith {};
+		private _loc = getSelf(loc);
+		if !isTypeOf(_loc,BasicMob) exitwith {};
+
+		if (getSelf(slot) in getSelf(allowedSlots)) then {
+			callSelfParams(armaItemAddImpl,_loc);
+		};
 	};
 
 	func(armaItemRemoveImpl)
@@ -433,6 +446,19 @@ class(HatUshanka) extends(Cloth)
 	};
 endclass
 
+editor_attribute("InterfaceClass")
+class(HatProxy) extends(HatUshanka)
+	func(armaItemAddImpl)
+	{
+		objParams_1(_usr);
+	};
+
+	func(armaItemRemoveImpl)
+	{
+		objParams_1(_usr);
+	};
+endclass
+
 class(HatBeret) extends(HatUshanka)
 	var(armaClass,"H_Beret_Colonel");
 	var(name,"Берет");
@@ -489,6 +515,16 @@ endclass
 class(HoodChemicalProt) extends(HatUshanka)
 	var(armaClass,"Skyline_HeadGear_NBC_Hazmat_01_F");
 	var(name,"Капюшон");
+endclass
+
+class(Crown1) extends(HatProxy)
+	var(name,"Корона");
+	var(model,"relicta_models\models\interier\props\treasure\crown\crown1.p3d");
+endclass
+
+class(Crown2) extends(HatProxy)
+	var(name,"Корона");
+	var(model,"relicta_models\models\interier\props\treasure\crown\crown2.p3d");
 endclass
 
 //combat headgears

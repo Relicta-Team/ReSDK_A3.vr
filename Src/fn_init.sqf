@@ -207,14 +207,20 @@ if (!isMultiplayer) then {
 
 //init database
 [call db_init] call db_checkSystemReturn;
-
-project_version = preprocessFile "src\VERSION";
+private __revision = preprocessFile "src\REVISION";
+private __sha = __revision;
+if (__sha != "Unrevisioned") then {
+	__sha = __sha select [0,7];
+};
+project_version = (preprocessFile "src\VERSION") + "+" + (__sha);
 netSetGlobal(relicta_version,project_version);
+
 #ifdef DISABLETEAMSPEAK
 vs_serverdisabled = true;
 netSetGlobal(vs_serverdisabled,vs_serverdisabled);
 #endif
 progLog("Project loaded! Version " + project_version);
+progLog("Revision: " + __revision);
 
 #ifdef RELEASE
 	_release = true;

@@ -40,3 +40,13 @@ class(Baton) extends(Baseballbat)
 		};
 	};
 endclass
+
+class(Scepter) extends(Baseballbat)
+	var(name,"Скипетр");
+	var(model,"relicta_models\models\interier\props\treasure\scepter\scepter.p3d");
+	var(weight,gramm(1200));
+	getterconst_func(getHandAnim,ITEM_HANDANIM_TORCH);
+	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
+	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_SWORD);
+	var(allowedSlots,[INV_BACK arg INV_BACKPACK]);
+endclass

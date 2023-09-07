@@ -30,12 +30,12 @@
 //музыка конца раунда, или любого важного события
 #define MUSIC_CHANNEL_EVENT_GLOBAL 5
 
-#define chm(a,b) [ #a , b ]
+#define chm(a,b) [ a , b ]
 #define MUSIC_MAP_INTERNAL_ALLCHANNELS [ \
-chm(MUSIC_CHANNEL_BASE,0), \
-chm(MUSIC_CHANNEL_LOBBY,1), \
-chm(MUSIC_CHANNEL_AMBIENT,2), \
-chm(MUSIC_CHANNEL_AMBIENT_LOCAL,3), \
-chm(MUSIC_CHANNEL_COMBATAMBIENT,4), \
-chm(MUSIC_CHANNEL_EVENT_GLOBAL,5) \
+chm("MUSIC_CHANNEL_BASE",0), \
+chm("MUSIC_CHANNEL_LOBBY",1), \
+chm("MUSIC_CHANNEL_AMBIENT",2), \
+chm("MUSIC_CHANNEL_AMBIENT_LOCAL",3), \
+chm("MUSIC_CHANNEL_COMBATAMBIENT",4), \
+chm("MUSIC_CHANNEL_EVENT_GLOBAL",5) \
 ]
