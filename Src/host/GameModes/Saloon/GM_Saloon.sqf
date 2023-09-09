@@ -38,7 +38,7 @@ class(GMSaloon) extends(GMBase)
 	func(getEndSong)
 	{
 		objParams_1(_usr);
-		if (getSelf(finishResult) > 0) exitwith {"round\kingpin"};
+		//if (getSelf(finishResult) > 0) exitwith {"round\kingpin"};
 		"events\Floating"
 	};
 
