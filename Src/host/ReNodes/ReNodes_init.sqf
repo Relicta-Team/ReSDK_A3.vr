@@ -57,8 +57,26 @@ nodegen_map_library = createHashMap;
 
 nodegen_internal_generatedLib = ""; //сюда записывается сгенерированный json файл
 
+//регистратор функции
 nodegen_addFunctionToLib = {
+    private _ctx = _this;
+    _ctx call nodegen_commonAdd;
+};
 
+//регистратор метода
+nodegen_addClassMethod = {
+    private _ctx = _this;
+    _ctx call nodegen_commonAdd;
+};
+
+nodegen_addClassField = {
+    private _ctx = _this;
+    _ctx call nodegen_commonAdd;
+};
+
+nodegen_commonAdd = {
+    private _ctx = _this;
+    //! TODO: add semicolons
 };
 
 nodegen_generateLib = {
