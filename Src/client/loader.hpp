@@ -13,7 +13,8 @@ _sha = LoadFile "src\REVISION";
 if (_sha != "Unrevisioned") then {
 	_sha = _sha select [0,7];
 };
-_ctx = compile format["client_version = '%1+%3'; client_compiledDate = '%2'; client_isLocked = false;",LoadFile "src\VERSION",__DATE_STR__,_sha];
+_prepversion = ((LoadFile "src\VERSION") splitString endl) select 0;
+_ctx = compile format["client_version = '%1+%3'; client_compiledDate = '%2'; client_isLocked = false;",_prepversion,__DATE_STR__,_sha];
 if !isNullVar(_canCallClientCode) then {call _ctx};
 allClientContents pushback _ctx;
 
