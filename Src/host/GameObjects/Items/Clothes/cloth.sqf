@@ -50,6 +50,7 @@ class(Cloth) extends(Container)
 
 		if (getSelf(slot) in getSelf(allowedSlots)) then {
 			callSelfParams(armaItemAddImpl,_loc);
+			callFuncAfter(_loc,requestSMDUpdate,0.2);
 		};
 	};
 
@@ -409,9 +410,12 @@ class(WoolCoat) extends(Cloth)
 	var(armaClass,"Coat_Desert");
 	var(name,"Накидка");
 
+	//! Требуется https://github.com/Relicta-Team/ReSDK_A3.vr/issues/169
+
 	func(armaItemAddImpl)
 	{
 		objParams_1(_usr);
+		//! ТРЕБУЕТСЯ ИСПРАВЛЕНИЕ
 		if !callFuncParams(_usr,isEmptySlot,INV_BACKPACK) exitWith {};
 		getVar(_usr,owner) addBackpackGlobal getSelf(armaClass);
 	};
@@ -419,6 +423,7 @@ class(WoolCoat) extends(Cloth)
 	func(armaItemRemoveImpl)
 	{
 		objParams_1(_usr);
+		//!ТРЕБУЕТСЯ ИСПРАВЛЕНИЕ
 		if !callFuncParams(_usr,isEmptySlot,INV_BACKPACK) exitWith {};
 		removeBackpackGlobal getVar(_usr,owner);
 	};
