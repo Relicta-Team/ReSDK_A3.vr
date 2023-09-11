@@ -9,7 +9,7 @@
 
 
 #include "LogVariables.sqf"
-
+#include "DevbuildWidget_init.sqf"
 
 #ifdef EDITOR
 	_aftCheck = {
