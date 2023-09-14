@@ -8,15 +8,13 @@ _hrc_unicalNumber = "";
 	_hrc_unicalNumber = 'client_hrc_ver = ''__RAND_UINT64__'';';
 #endif
 
-#define ptx_ (pick ["a","b","c","d","e","f","0","1","2","3","4","5","6","7","8","9"])
-_cd_versioning_hash = "";
-for "_i" from 1 to 8 do {
-	MOD(_cd_versioning_hash, + ptx_)
-};
-_hrc_unicalNumber = _hrc_unicalNumber + (format[" cd_versioning_hash='%1';",_cd_versioning_hash]);
-
 //just save client version
-_ctx = compile format["client_version = '%1'; client_compiledDate = '%2'; client_isLocked = false; %3",LoadFile "src\VERSION",__DATE_STR__,_hrc_unicalNumber];
+_sha = LoadFile "src\REVISION";
+if (_sha != "Unrevisioned") then {
+	_sha = _sha select [0,7];
+};
+_prepversion = ((LoadFile "src\VERSION") splitString endl) select 0;
+_ctx = compile format["client_version = '%1+%3'; client_compiledDate = '%2'; client_isLocked = false;",_prepversion,__DATE_STR__,_sha];
 if !isNullVar(_canCallClientCode) then {call _ctx};
 allClientContents pushback _ctx;
 

@@ -1026,6 +1026,7 @@ endclass
 
 class(Arm) extends(ITwoSidedBodyPart)
 	var(name,"Рука");
+	var(model,"relicta_models2\body_parts\s_arm\s_arm.p3d");
 	var(desc,"Сколько всего интересного могла бы сделать эта рука, но ей не повезло");
 	var(slotedWeap,weaponModule(Fists));
 	func(onBodyPartUnlinked)
@@ -1049,6 +1050,7 @@ endclass
 
 class(Leg) extends(ITwoSidedBodyPart)
 	var(name,"Нога");
+	var(model,"relicta_models2\body_parts\s_leg\s_leg.p3d");
 	var(desc,"Даже теперь она остаётся хорошим оружием.");
 	var(slotedWeap,weaponModule(Punch));
 	

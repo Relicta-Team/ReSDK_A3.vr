@@ -101,7 +101,7 @@ if (!isMultiplayer) then {
 			_wid ctrlShow false;
 
 			_ver = (findDisplay 49 displayCtrl 1005);
-			_ver ctrlSetText (format["Platform ver: %1, Project ver: %2",ctrlText _ver,project_version]);
+			_ver ctrlSetText (format["Platform v%1, Relicta v%2",ctrlText _ver,project_version]);
 
 			_colorize = {
 				_bt setBackgroundColor (_this call color_HTMLtoRGBA);

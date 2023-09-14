@@ -36,7 +36,7 @@ class(DirtpitEnegryLowEvent) extends(InfluenceEventDirtpit)
 					_refData pushback _struct;
 				};
 				
-			} foreach getVar(_x,edConnected);
+			} foreach array_copy(getVar(_x,edConnected));
 
 		} foreach (["PowerGenerator",true] call getAllObjectsInWorldTypeOf);
 

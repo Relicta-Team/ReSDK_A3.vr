@@ -3467,7 +3467,7 @@ Replaced value:
 ```sqf
 ;
 ```
-File: [host\GameObjects\Items\Clothes\cloth.sqf at line 171](../../../Src/host/GameObjects/Items/Clothes/cloth.sqf#L171)
+File: [host\GameObjects\Items\Clothes\cloth.sqf at line 185](../../../Src/host/GameObjects/Items/Clothes/cloth.sqf#L185)
 # Books.sqf
 
 ## gv(func)
@@ -5409,7 +5409,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\Structures\Electronics\GeneratorParts.sqf at line 46](../../../Src/host/GameObjects/Structures/Electronics/GeneratorParts.sqf#L46)
+File: [host\GameObjects\Structures\Electronics\GeneratorParts.sqf at line 51](../../../Src/host/GameObjects/Structures/Electronics/GeneratorParts.sqf#L51)
 # Buttons.sqf
 
 ## OVERRIDE_ENABLE_AS_ACTIVATOR()

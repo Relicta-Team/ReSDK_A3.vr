@@ -44,6 +44,8 @@ class(GMExtended) extends(GMStationBase)
 		["Forceps",[3789.82,3751.22,25.3659],null,false] call createItemInWorld;
 	};
 	
+	getterconst_func(escapeRoundResult,3);
+
 	func(checkFinish)
 	{
 		objParams();
@@ -60,9 +62,20 @@ class(GMExtended) extends(GMStationBase)
 			1
 			#endif
 		) exitwith {
-			3
+			callSelf(escapeRoundResult);
 		};
 		0
+	};
+
+	var(__commonEndResult,str randInt(1,2));
+
+	func(getEndSong)
+	{
+		objParams_1(_usr);
+		private _fr = getSelf(finishResult);
+		private _rez = super();
+		if (_rez!="") exitWith {_rez};
+		"round\endround" + getSelf(__commonEndResult);
 	};
 	
 	func(getResultTextOnFinish)
@@ -71,7 +84,7 @@ class(GMExtended) extends(GMStationBase)
 		if(getSelf(finishResult) == 1)exitWith{
 			"Сегодня в Грязноямске ничего не произошло. Может это и к лучшему...."
 		};
-		if (getSelf(finishResult) == 3) exitwith {
+		if (getSelf(finishResult) == callSelf(escapeRoundResult)) exitwith {
 			private _ref = ("escaper_location" call getObjectByRef);
 			if isNullReference(_ref) exitwith {"Врата были открыты"};
 			private _cntMob = ["Mob",getposatl getVar(_ref,loc),15,true,true] call getMobsOnPosition;

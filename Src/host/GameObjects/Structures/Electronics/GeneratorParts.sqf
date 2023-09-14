@@ -26,18 +26,23 @@ class(PowerGenerator) extends(ElectronicDeviceNode)
 	func(addConnection)
 	{
 		objParams_1(_obj);
-		callSuper(ElectronicDeviceNode,addConnection);
-		getSelf(edConnectedND) pushBackUnique _obj;
+		private _resultConnection = super();
+		assert(_resultConnection);
+		if (_resultConnection) then {
+			getSelf(edConnectedND) pushBackUnique _obj;
+		};
+		_resultConnection
 	};
 
 	func(removeConnection)
 	{
 		objParams_1(_obj);
-		private _r = callSuper(ElectronicDeviceNode,removeConnection);
+		private _r = super();
 		if (_r) then {
 			private _edcnd = getSelf(edConnectedND);
 			_edcnd deleteAt (_edcnd find _obj);
 		};
+		assert(_r);
 		_r
 	};
 

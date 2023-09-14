@@ -104,6 +104,12 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		objParams();
 	};
 
+	//!Устаревший метод. Используйте postSetup
+	func(onRoundBegin)
+	{
+		objParams();
+	};
+
 	//Проверка финиша. Должен возвращать больше 0
 	func(checkFinish)
 	{
@@ -406,79 +412,23 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		]
 	};
 
-endclass
-
-editor_attribute("HiddenClass")
-class(GMStationBase) extends(GMBase)
-	getterconst_func(isPlayableGamemode,false);
-	var(headSecondNames,vec2("","")); //фамилия головы для мужского и женского варианта
-
-	func(preSetup)
+region(Sound Helpers)
+	
+	//Получение стартовой композиции. Пустая строка или null - без проигрыша
+	func(getStartSong)
 	{
-		objParams();
+		objParams_1(_usr);
+		""
 	};
 
-	func(postSetup)
+	//Получение композиции в конце. Пустая строка или null - без проигрыша. Внутри этого метода можно получить finishResult
+	func(getEndSong)
 	{
-		objParams();
+		objParams_1(_usr);
+		""
 	};
 
-	//стандартизированное событие начала раунда
-	//!!! Не рекомендуется к использованию
-	func(onRoundBegin)
-	{
-		objParams();
-		//init bank money
-		private _bank = ["SteelGreenCabinet",[3753.97,3772.06,29.788],4,false] call getGameObjectOnPosition;
-		if !isNullReference(_bank) then {
-
-			private _pap = ["Paper",_bank] call createItemInContainer;
-			setVar(_pap,name,"Напоминание");
-
-
-			private _count = randInt(300,1200);
-
-			if ("MoreMoneyInBankAspect" call gm_isAspectSetup) then {
-				_count = 3000;
-			};
-
-			if ("NoMoneyInBankAspect" call gm_isAspectSetup) exitwith {
-				setVar(_pap,name,"Смятая записка");
-				setVar(_pap,content,"Тебя развели дуда! Спасибо за эту кучу звяков. Мы богачи а ты - сюсявый бибовед.");
-			};
-
-			private _mCnttxt = format["В казне на сегодня %1",[_count,["звяк","звяка","звяков"],true] call toNumeralString];
-			setVar(_pap,content,"Для размена бряков на звяки обращаться к торгашу." +sbr+_mCnttxt);
-
-			callFuncParams(_bank,initMoney,_count arg true);
-		};
-
-		//start generator
-		private _gen = ["PowerGenerator",[3827.37,3728.61,17.0241],4,false] call getGameObjectOnPosition;
-		if !isNullReference(_gen) then {
-			callFunc(_gen,beginUpdateGenerator);
-		};
-
-		if (count cm_allClients >= 30) then {	
-			setSelf(duration,60* (60*3));
-			setSelf(deadThreshold,35);
-		};
-
-		_ladders = ["LadderBase"] call getAllObjectsInWorldTypeOf;
-		_sewercover = ["SewercoverBase"] call getAllObjectsInWorldTypeOf;
-		if (count _ladders == count _sewercover) then {
-			_sewercover = array_shuffle(_sewercover);
-			{
-				private _curlad = _ladders select _forEachIndex;
-				private _cursew = _x;
-				
-				setVar(_curlad,pointTo,_cursew);
-				setVar(_cursew,pointTo,_curlad);
-			} foreach _sewercover;
-		} else {
-			errorformat("Collectors initialize error; Count ladders %1; sewercover %2",count _ladders arg count _sewercover);
-		};
-	};
+endregion
 
 endclass
 

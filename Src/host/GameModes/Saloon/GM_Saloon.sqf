@@ -20,6 +20,28 @@ class(GMSaloon) extends(GMBase)
 		]
 	};
 
+	
+	func(getStartSong)
+	{
+		objParams_1(_usr);
+		private _mob = callFunc(_usr,getActorMob);
+		private _banditTheme = false;
+		if !isNullReference(_mob) then {
+			_banditTheme = isTypeOf(getVar(_mob,basicRole),RBanditMainSaloon) || 
+			isTypeOf(getVar(_mob,basicRole),RBanditMiniSaloon)
+		};
+		if (_banditTheme) exitwith {
+			"round\start_zlachnik_bandit"
+		};
+		"round\start_zlachnik"
+	};
+	func(getEndSong)
+	{
+		objParams_1(_usr);
+		//if (getSelf(finishResult) > 0) exitwith {"round\kingpin"};
+		"events\Floating"
+	};
+
 	getterconst_func(getLobbySoundName,"lobby\Dark_Water.ogg");
 	getterconst_func(getLobbyBackground,PATH_PICTURE("lobby\zlachnik.paa"));
 	getterconst_func(getReqPlayersMin,4);
@@ -130,22 +152,22 @@ class(GMSaloon) extends(GMBase)
 		
 		private _extMagsLoc = [3365.29,3705.12,21.8288];
 		for "_i" from 1 to randInt(2,4) do {
-			private _m = ["MagazineFinisherLoadedExtendedSaloon",_extMagsLoc vectorAdd [rand(-.1,.1),rand(-.1,.1),0],null,false] call createItemInWorld;
+			private _m = ["MagazineFinisherLoadedExtendedSaloon",_extMagsLoc vectorAdd [rand(-.2,.2),rand(-.2,.2),0],null,false] call createItemInWorld;
 		};
 		
 		_otherItemsLoc = [3364.92,3705.61,21.8288];
 		for "_i" from 2 to 2 + randInt(1,5) do {
-			[pick["BalaclavaMask","BalaclavaMask2"],_otherItemsLoc vectorAdd [rand(-.1,.1),rand(-.1,.1),0],null,false] call createItemInWorld;
+			[pick["BalaclavaMask","BalaclavaMask2"],_otherItemsLoc vectorAdd [rand(-.2,.2),rand(-.2,.2),rand(-0.01,0.01)],null,false] call createItemInWorld;
 		};
 		
 		["Crowbar",_otherItemsLoc vectorAdd [rand(-.1,.1),rand(-.1,.1),0],null,false] call createItemInWorld;
 		for "_i" from 1 to randInt(3,5) do {
-			["Lockpick",_otherItemsLoc vectorAdd [rand(-.1,.1),rand(-.1,.1),0],null,false] call createItemInWorld;
+			["Lockpick",_otherItemsLoc vectorAdd [rand(-.1,.1),rand(-.1,.1),rand(-0.01,0.01)],null,false] call createItemInWorld;
 		};
 
 		["CombatKnife",_otherItemsLoc vectorAdd [rand(-.1,.1),rand(-.1,.1),0],null,false] call createItemInWorld;
 		for "_i" from 1 to randInt(2,6) do {
-			["RopeItem",_otherItemsLoc vectorAdd [rand(-.1,.1),rand(-.1,.1),0],null,false] call createItemInWorld;
+			["RopeItem",_otherItemsLoc vectorAdd [rand(-.1,.1),rand(-.1,.1),rand(-0.01,0.01)],null,false] call createItemInWorld;
 		};
 		
 		//reg cages
@@ -249,10 +271,15 @@ class(GMSaloon) extends(GMBase)
 		private _items = array_shuffle(_items);
 		
 		private _worldObj = getVar(_polki,loc);
+		private _dirRand = [90,270];
 		{
+			_dirRand = [90,270];
+			if ("AmmoBox" in _x) then {
+				_dirRand = [90];
+			};
 			[_x,
 			_worldObj modelToWorld [rand(-_polkiX,_polkiX),rand(-_polkiY,_polkiY),pick _polkiLevels]
-			,(pick[90,270])+rand(-2,2),false] call createItemInWorld;
+			,(pick _dirRand)+rand(-2,2),false] call createItemInWorld;
 		} foreach _toSpawn;
 		
 	};
