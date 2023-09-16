@@ -714,25 +714,31 @@ ACRE_IS_ERRORED = false; _ret;}*/
 	#define editor_conditional(ed__,noted__) noted__
 #endif
 
-//node scripting macros
+//--------------node scripting macros--------------
 /*
-	"prop:val1; prop2:val2"
+	"NODEVALUES"
 	node_func(createStructure) = {
 		params ["_itm","_pos"];
 	};
 
 	class(ScriptedGameClass)
-		"propfield:value;profield2:value2" 
-		node_method var(test_string,"123");
+		"NODEVALUES" 
+		node_var var(test_string,"123");
+
+		"NODEVALUES"
+		node_meth func(test_func)
+		{
+			objParams();
+		};
 	endclass
 
 
 */
-//указывает путь узлов для регистрации функций
+//указывает путь узлов для регистрации функций. Должен быть указан в заголовке инициализатора модуля
 #define node_setModulePath(path) __node_int_mpath__ = 'path';
 //регистрация функции в библиотеке
 #define node_func(functionname) call nodegen_addFunctionToLib; functionname
 //регистрация метода класса в библиотеке
-#define node_method call nodegen_addClassMethod;
+#define node_meth call nodegen_addClassMethod;
 //регистрация поля класса в библиотеке
 #define node_var call nodegen_addClassField;

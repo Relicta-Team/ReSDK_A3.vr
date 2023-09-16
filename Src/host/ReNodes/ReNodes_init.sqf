@@ -50,6 +50,7 @@
 
 
 */
+
 //текущая версия библиотеки для генерации
 nodegen_const_libversion = 1;
 //карта рабочих узлов. Ключ - системное название узла, значение - данные типа хэшкарты
@@ -76,7 +77,13 @@ nodegen_addClassField = {
 
 nodegen_commonAdd = {
     private _ctx = _this;
-    //! TODO: add semicolons
+    private _arr = null;
+    call {
+        _arr = parseSimpleArray _ctx;
+    };
+    assert(!isNullVar(_arr));
+    private _map = createHashMapFromArray _arr;
+    
 };
 
 nodegen_generateLib = {
