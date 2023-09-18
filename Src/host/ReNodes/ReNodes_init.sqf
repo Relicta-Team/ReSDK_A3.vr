@@ -137,6 +137,14 @@ nodegen_generateLib = {
     
     modvar(_output) + "}" + endl + "$ENDREGION:CLASSMEM" + endl;
 
+    ["Generating class metadata"] call printLog;
+    modvar(_output) + "$REGION:CLASSMETA" + endl + "{" + endl + """object"" : [""object""]" + endl;
+    {
+        modvar(_output) + format[",%1 : %2",str _x,str([_x,"__inhlist"] call oop_getTypeValue)] + endl;
+    } foreach (["object",true] call oop_getinhlist);
+    
+    modvar(_output) + "}" + endl + "$ENDREGION:CLASSMETA" + endl;
+
     nodegen_str_outputJsonData = _output;
 
     [nodegen_objlibPath,nodegen_str_outputJsonData] call file_write;
