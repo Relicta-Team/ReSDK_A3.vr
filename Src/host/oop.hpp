@@ -53,6 +53,7 @@
 	call pc_oop_declareClassAttr; \
 	_editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
 	_classmet_declinfo = createHashMap; \
+	_last_node_info_ = null; \
 	pt_##name = createObj; private _pt_obj = pt_##name;
 
 //создание типа по строке. Нужно для генерации классов

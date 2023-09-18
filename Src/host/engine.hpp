@@ -735,10 +735,7 @@ ACRE_IS_ERRORED = false; _ret;}*/
 
 */
 //указывает путь узлов для регистрации функций. Должен быть указан в заголовке инициализатора модуля
-#define node_setModulePath(path) __node_int_mpath__ = 'path';
-//регистрация функции в библиотеке
-#define node_func(functionname) call nodegen_addFunctionToLib; functionname
 //регистрация метода класса в библиотеке
-#define node_meth call nodegen_addClassMethod;
+#define node_func call nodegen_addClassMethod;
 //регистрация поля класса в библиотеке
 #define node_var call nodegen_addClassField;

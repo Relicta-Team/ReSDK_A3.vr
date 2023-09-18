@@ -1,0 +1,33 @@
+{
+	"internal": {
+		"backdrop": {
+			"name": "Группа",
+			"path": "Системные"
+		}
+	},
+	"@sect_control_operators":{
+		"path":"Операторы",
+		"name":"Тест имя",
+		"cat": "operators",
+		"in": {
+			"Вход": {
+				"type":"Flow"
+			},
+			"test1":1,
+			"test2":1,
+			"test3":1,
+			"Выход": {
+				"type":"Flow"
+			}
+		},
+		"list": {
+			"if_branch": {
+				"name": "Ветка",
+				"desc": "Ветка"
+			},
+			"while": {
+				"desc": "Цикл"
+			}
+		}
+	}
+}

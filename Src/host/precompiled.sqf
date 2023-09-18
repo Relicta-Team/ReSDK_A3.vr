@@ -96,6 +96,10 @@ pc_oop_postInitClass = {
 
 //обработчик атрибутов поля
 pc_oop_handleAttrF = {
+	if (!isnil '_last_node_info_') then {
+		["f",_class,_mem_name,_last_node_info_] call nodegen_registerMember;
+		_last_node_info_ = nil;
+	};
 	if (!isnil '_netuse') then {(_fields select _lastIndex) set [2,"netuse"]; _netuse = nil};
 	if (!isnil '_isAutoRefUse') then {_autoref pushBack _mem_name; _isAutoRefUse = nil};
 	if (!isnil '_isConstant') then {_pt_obj setvariable ['cst_##var',val]; _isAutoRefUse = nil};
@@ -105,6 +109,10 @@ pc_oop_handleAttrF = {
 
 //обработчик атрибутов метода
 pc_oop_handleAttrM = {
+	if (!isnil '_last_node_info_') then {
+		["m",_class,_mem_name,_last_node_info_] call nodegen_registerMember;
+		_last_node_info_ = nil;
+	};
 	if (isnil '_editor_next_attr') exitwith {};
 	__on_editor_attribute(_mem_name,_editor_attrs_m);
 };
