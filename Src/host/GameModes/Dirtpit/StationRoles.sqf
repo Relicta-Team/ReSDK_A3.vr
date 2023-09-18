@@ -1087,9 +1087,12 @@ class(REaterStation) extends(RPreyEater)
 	func(canVisibleAfterStart)
 	{
 		objParams_1(_cliObj);
-		#ifdef EDITOR
-		if (true) exitwith {true};
-		#endif
+		// #ifdef EDITOR
+		// if (true) exitwith {true};
+		// #endif
+		if (isTypeOf(getVar(gm_currentMode,ideology),GMStationIdeologyCavecity)
+			&& gm_roundDuration >= t_asMin(10)
+		) exitwith {true};
 		getVar(gm_currentMode,countDead) >= 6
 	};
 	func(getInitialPos)

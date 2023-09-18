@@ -3467,7 +3467,7 @@ Replaced value:
 ```sqf
 ;
 ```
-File: [host\GameObjects\Items\Clothes\cloth.sqf at line 184](../../../Src/host/GameObjects/Items/Clothes/cloth.sqf#L184)
+File: [host\GameObjects\Items\Clothes\cloth.sqf at line 185](../../../Src/host/GameObjects/Items/Clothes/cloth.sqf#L185)
 # Books.sqf
 
 ## gv(func)

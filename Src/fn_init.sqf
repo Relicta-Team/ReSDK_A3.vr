@@ -212,7 +212,7 @@ private __sha = __revision;
 if (__sha != "Unrevisioned") then {
 	__sha = __sha select [0,7];
 };
-project_version = (preprocessFile "src\VERSION") + "+" + (__sha);
+project_version = (((preprocessFile "src\VERSION") splitString endl) select 0) + "+" + (__sha);
 netSetGlobal(relicta_version,project_version);
 
 #ifdef DISABLETEAMSPEAK

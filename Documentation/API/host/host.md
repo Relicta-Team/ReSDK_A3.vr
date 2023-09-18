@@ -3413,7 +3413,7 @@ Description:
 
 Replaced value:
 ```sqf
-if !([expr] call sys_int_evalassert)exitWith {['(expr)',__assert_runtime_file__,__LINE__] call sys_assert_}
+if !([expr] call sys_int_evalassert)exitWith {[toString {expr},__assert_runtime_file__,__LINE__] call sys_assert_}
 ```
 File: [host\engine.hpp at line 629](../../../Src/host/engine.hpp#L629)
 ## static_assert(expr)
