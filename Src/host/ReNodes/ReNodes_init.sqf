@@ -112,7 +112,6 @@ nodegen_registerMember = {
     nodegen_map_library set [format["%1.%3_%2",_class,_memname,_t],_context];
 };
 
-
 nodegen_generateLib = {
     if (!is3DEN) exitwith {
         setLastError("NodeGen cannot generate library outside ReEditor");
@@ -152,308 +151,31 @@ nodegen_generateLib = {
     true
 };
 
-//https://github.com/CBATeam/CBA_A3/blob/7ff35f7544493ca93c4d0047245333a720245163/addons/hashes/fnc_encodeJSON.sqf
-nodegen_toJson = {
-    params ["_object"];
 
-    if (isNil "_object") exitWith { "null" };
-
-    switch (typeName _object) do {
-        case "SCALAR";
-        case "BOOL": {
-            str _object;
-        };
-
-        case "STRING": {
-            {
-                _object = [_object, _x select 0, _x select 1] call CBA_fnc_replace;
-            } forEach [
-                ["\", "\\"],
-                ["""", "\"""],
-                [toString [8], "\b"],
-                [toString [12], "\f"],
-                [endl, "\n"],
-                [toString [10], "\n"],
-                [toString [13], "\r"],
-                [toString [9], "\t"]
-            ];
-            // Stringify without escaping inter string quote marks.
-            """" + _object + """"
-        };
-
-        case "ARRAY": {
-            if ([_object] call CBA_fnc_isHash) then {
-                private _json = (([_object] call CBA_fnc_hashKeys) apply {
-                    private _name = _x;
-                    private _value = [_object, _name] call CBA_fnc_hashGet;
-
-                    format ["%1: %2", [_name] call nodegen_toJson, [_value] call nodegen_toJson]
-                }) joinString ", ";
-                "{" + _json + "}"
-            } else {
-                private _json = (_object apply {[_x] call nodegen_toJson}) joinString ", ";
-                "[" + _json + "]"
-            };
-        };
-
-        case "HASHMAP": {
-            private _json = ((_object toArray false) apply {
-                _x params ["_key", ["_value", objNull]];
-
-                if !(_key isEqualType "") then {
-                    _key = str _key;
-                };
-
-                format ["%1: %2", [_key] call nodegen_toJson, [_value] call nodegen_toJson]
-            }) joinString ", ";
-            "{" + _json + "}"
-        };
-
-        default {
-            if !(typeName _object in (supportInfo "u:allVariables*" apply {_x splitString " " select 1})) exitWith {
-                [str _object] call nodegen_toJson
-            };
-
-            if (isNull _object) exitWith { "null" };
-
-            private _json = ((allVariables _object) apply {
-                private _name = _x;
-                private _value = _object getVariable [_name, objNull];
-
-                format ["%1: %2", [_name] call nodegen_toJson, [_value] call nodegen_toJson]
-            }) joinString ", ";
-            "{" + _json + "}"
-        };
-    };
+nodegen_const_addNodeModif = {
+    params ["_type"];
 };
 
-//https://github.com/CBATeam/CBA_A3/blob/7ff35f7544493ca93c4d0047245333a720245163/addons/hashes/fnc_parseJSON.sqf
-nodegen_fromJson = {
-    params ["_json"];
+nodegen_const_getNodePortColor = {
+    params ["_portName"];
+    private _tempMap = createHashMapFromArray [
+        ["flow","color:C7C7C7"],
+        ["bool","color:A60C0C"],
+        ["number","color:128500"],
+        ["string","color:D95A00"],
+        ["object","color:B502AF"],
+        ["vector","color:D4A004"],
+        ["array","color:1698B5"],
+        ["hashmap","color:4C27C2"],
+        ["hashset","color:871BC2"],
+        ["handle","color:03CC00"],
+        ["model","color:AB0330"]
+    ];
 
-    // Wrappers for creating "objects" and setting values on them
-    // private _createObject = { createHashMap };
-    // private _objectSet = {
-    //         params ["_obj", "_key", "_val"];
-    //         _obj set [_key, _val];
-    // };
-    
-
-    //ordered dict
-    private _createObject = CBA_fnc_hashCreate;
-    private _objectSet = CBA_fnc_hashSet;
-
-    // Handles escaped characters, except for unicode escapes (\uXXXX)
-    private _unescape = {
-        params ["_char"];
-
-        switch (_char) do {
-            case """": { """" };
-            case "\": { "\" };
-            case "/": { "/" };
-            case "b": { toString [8] };
-            case "f": { toString [12] };
-            case "n": { endl };
-            case "r": { toString [13] };
-            case "t": { toString [9] };
-            default { "" };
-        };
-    };
-
-    // Splits the input string into tokens
-    // Tokens can be numbers, strings, null, true, false and symbols
-    // Strings are prefixed with $ to distinguish them from symbols
-    private _tokenize = {
-        params ["_input"];
-
-        // Split string into chars, works with unicode unlike splitString
-        _input = toArray _input apply {toString [_x]};
-
-        private _tokens  = [];
-        private _numeric = "+-.0123456789eE" splitString "";
-        private _symbols = "{}[]:," splitString "";
-        private _consts  = "tfn" splitString "";
-
-        while {count _input > 0} do {
-            private _c = _input deleteAt 0;
-
-            switch (true) do {
-                // Symbols ({}[]:,) are passed directly into the tokens
-                case (_c in _symbols): {
-                    _tokens pushBack _c;
-                };
-
-                // Number parsing
-                // This can fail with some invalid JSON numbers, like e10
-                // Those would require some additional logic or regex
-                // Valid numbers are all parsed correctly though
-                case (_c in _numeric): {
-                    private _numStr = _c;
-                    while { _c = _input deleteAt 0; !isNil "_c" && {_c in _numeric} } do {
-                        _numStr = _numStr + _c;
-                    };
-                    _tokens pushBack parseNumber _numStr;
-
-                    if (!isNil "_c") then {
-                        _input = [_c] + _input;
-                    };
-                };
-
-                // true, false and null
-                // Only check first char and assume JSON is valid
-                case (_c in _consts): {
-                    switch (_c) do {
-                        case "t": {
-                            _input deleteRange [0, 3];
-                            _tokens pushBack true;
-                        };
-                        case "f": {
-                            _input deleteRange [0, 4];
-                            _tokens pushBack false;
-                        };
-                        case "n": {
-                            _input deleteRange [0, 3];
-                            _tokens pushBack objNull;
-                        };
-                    };
-                };
-
-                // String parsing
-                case (_c == """"): {
-                    private _str = "$";
-
-                    while {true} do {
-                        _c = _input deleteAt 0;
-
-                        if (_c == """") exitWith {};
-
-                        if (_c == "\") then {
-                            _str = _str + ((_input deleteAt 0) call _unescape);
-                        } else {
-                            _str = _str + _c;
-                        };
-                    };
-
-                    _tokens pushBack _str;
-                };
-            };
-        };
-
-        _tokens
-    };
-
-    // Appends the next token to the parsing stack
-    // Returns true unless no more tokens left
-    private _shift = {
-        params ["_parseStack", "_tokens"];
-
-        if (count _tokens > 0) then {
-            _parseStack pushBack (_tokens deleteAt 0);
-            true
-        } else {
-            false
-        };
-    };
-
-    // Tries to reduce the current parsing stack (collect arrays or objects)
-    // Returns true if parsing stack could be reduced
-    private _reduce = {
-        params ["_parseStack", "_tokens"];
-
-        // Nothing to reduce
-        if (count _parseStack == 0) exitWith { false };
-
-        // Check top of stack
-        switch (_parseStack#(count _parseStack - 1)) do {
-
-            // Reached end of array, time to collect elements
-            case "]": {
-                private _array = [];
-
-                // Empty arrays need special handling
-                if (_parseStack#(count _parseStack - 2) isNotEqualTo "[") then {
-                    // Get next token, if [ beginning is reached, otherwise assume
-                    // valid JSON and that the token is a comma
-                    while {_parseStack deleteAt (count _parseStack - 1) != "["} do {
-                        private _element = _parseStack deleteAt (count _parseStack - 1);
-
-                        // Remove $ prefix from string
-                        if (_element isEqualType "") then {
-                            _element = _element select [1];
-                        };
-
-                        _array pushBack _element;
-                    };
-
-                    reverse _array;
-                } else {
-                    _parseStack resize (count _parseStack - 2);
-                };
-
-                _parseStack pushBack _array;
-                true
-            };
-
-            // Reached end of array, time to collect elements
-            // Works very similar to arrays
-            case "}": {
-                private _object = [] call _createObject;
-               
-                // Empty objects need special handling
-                if (_parseStack#(count _parseStack - 2) isNotEqualTo "{") then {
-                    // Get next token, if { beginning is reached, otherwise assume
-                    // valid JSON and that token is comma
-                    while {_parseStack deleteAt (count _parseStack - 1) != "{"} do {
-                        private _value = _parseStack deleteAt (count _parseStack - 1);
-                        private _colon = _parseStack deleteAt (count _parseStack - 1);
-                        private _name  = _parseStack deleteAt (count _parseStack - 1);
-                        ["checkkeyp %1 -> %2",_name,typename _value] call printWarning;
-                        // Remove $ prefix from strings
-                        if (_value isEqualType "") then {
-                            _value = _value select [1];
-                        };
-                        _name = _name select [1];
-
-                        [_object, _name, _value] call _objectSet;
-
-                        reverse (_object select 1);
-                        reverse (_object select 2);
-                    };
-                } else {
-                    _parseStack resize (count _parseStack - 2);
-                };
-
-                _parseStack pushBack _object;
-                true
-            };
-
-            default {
-                false
-            };
-        };
-    };
-
-    // Simple shift-reduce parser
-    private _parse = {
-        params ["_tokens"];
-        private _parseStack = [];
-        private _params = [_parseStack, _tokens];
-
-        while { _params call _reduce || {_params call _shift} } do {};
-
-        if (count _parseStack != 1) then {
-            nil
-        } else {
-            private _object = _parseStack#0;
-
-            // If JSON is just a string, remove $ prefix from it
-            if (_object isEqualType "") then {
-                _object = _object select [1];
-            };
-
-            _object
-        };
-    };
-
-    [_json call _tokenize] call _parse
+    private _data = _tempMap getOrDefault [_portName,""];
+    {
+        (_x splitString ":")params [["_k",""],["_v",""]];
+        assert(_k!="");
+        assert(_v!="");
+    } foreach (_data splitString ";");
 };
