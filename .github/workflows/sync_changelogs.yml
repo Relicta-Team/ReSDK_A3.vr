@@ -1,4 +1,4 @@
-name: sync_changelogs
+name: Sync changelogs on deploy release
 
 on:
   workflow_dispatch:
