@@ -1,0 +1,32 @@
+name: Sync changelogs on deploy release
+
+on:
+  workflow_dispatch:
+    inputs:
+      changelog:
+        description: 'Changelog'
+        required: true
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Replace Changelog File
+      run: |
+        echo "$INPUT_CHANGELOG" > Src/CHANGELOGS.txt
+      env:
+        INPUT_CHANGELOG: ${{ github.event.inputs.changelog }}
+    
+    - name: Commit and Push Changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add Src/CHANGELOGS.txt
+        git commit -m "Update CHANGELOGS.txt"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}

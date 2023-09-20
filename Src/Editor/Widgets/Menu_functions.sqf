@@ -301,6 +301,19 @@ init_function(menu_internal_initialize)
 	//TODO custom objectlist tree view
 	// Исходное дерево не имеет данных и не дает заменять названия
 
+	//Создание плашки девбилд
+	_w = getEdenDisplay getVariable ["menu_internal_devbuildwidget",widgetNull];
+	if !isNullReference(_w) then {
+		[_w,true] call deleteWidget;
+	};
+	_w = [getEdenDisplay,BACKGROUND,[0,95,100,5]] call createWidget;
+	[_w,"<t align='center'>DEVELOPMENT BUILD</t>"] call widgetSetText;
+	_w ctrlSetBackgroundColor [0.9,0.1,0.1,.7];
+	getEdenDisplay setVariable ["menu_internal_devbuildwidget",_w];
+	if (!ISDEVBUILD) then {
+		_w ctrlShow false;
+	};
+
 	//play button
 	
 	_w = getEdenDisplay getVariable ["menu_internal_objlibWidget",widgetNull];
@@ -326,6 +339,7 @@ init_function(menu_internal_initialize)
 	//дополнительные айди тут:
 	//https://community.bistudio.com/wiki/Arma_3:_Display3DEN_IDCs
 	//call menu_internal_debug_setTooltipInfoToAllElements;
+
 }
 
 function(menu_getButtonObjLib) {menu_internal_widget_refButtonObjLib select 0};
