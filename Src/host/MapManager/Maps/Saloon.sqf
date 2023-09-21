@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: 1.13';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.14-path.1';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -77,7 +77,7 @@ _3356_850103673_9499518_76740 = ['Decor',[3356.85,3673.95,18.7674],3.63802,[0,0,
 _3359_500003654_8898947_76220 = ['Decor',[3359.5,3654.89,52.7622,true],[-0.999927,-0.0120452,-3.26479e-005],[-0.000248011,0.0232982,-0.999729], {_thisObj setvariable ['model','a3\structures_f_enoch\industrial\farms\barn_04_ruins_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['BlockBrick',[3351.5,3684.59,18.8453],270.646,[0,0,1]] call InitDecor; 
 ['BlockBrick',[3351.69,3695.45,18.8988],270.646,[0,0,1]] call InitDecor; 
-_3355_129883698_5000018_85340 = ['Decor',[3355.13,3698.5,18.8534],179.73,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\dominants\castle\castle_01_tower_f.p3d'];}] call InitDecor; // !!! realocated model !!!
+_3354_619873698_5000018_85340 = ['Decor',[3354.62,3698.5,18.8534],179.73,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\dominants\castle\castle_01_tower_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['StreetLamp',[3351.74,3682.81,18.2456],80.3326,[0,0,1], {go_editor_globalRefs set ['Imported StreetLamp541131',_thisObj];
 }] call InitStruct; 
 _3350_350103687_2700218_18980 = ['IStruct',[3350.35,3687.27,18.1898],0.727256,[0,0,1], {_thisObj setvariable ['model','ml\ml_object\l04_catacombs\l04_catacombs_00.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -216,15 +216,14 @@ _3376_020023693_6799318_63460 = ['Decor',[3376.02,3693.68,18.6346],326.075,[0,0,
 _3377_750003696_7900418_89340 = ['Decor',[3377.75,3696.79,18.8934],271.138,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v2_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3367_649903694_7500018_71780 = ['Decor',[3367.65,3694.75,18.7178],83.4957,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v2_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3369_800053692_7299818_63850 = ['Decor',[3369.8,3692.73,18.6385],2.40577,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v2_f.p3d'];}] call InitDecor; // !!! realocated model !!!
-['Candle',[3365.01,3705.48,21.8339],0,[0,0,1]] call InitItem; 
-['LampKerosene',[3365.01,3705.9,21.8034],319.633,[0,0,1]] call InitItem; 
+['Candle',[3365.14,3705.43,21.7906],0,[0,0,1]] call InitItem; 
+['LampKerosene',[3359.61,3708.15,21.977],319.633,[0,0,1]] call InitItem; 
 _3365_070073705_4899920_96930 = ['IStruct',[3365.07,3705.49,20.9693],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_epa\civ\camping\woodentable_small_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['SmallSheetMetalHouse',[3391.35,3683.74,24.4693,true],89.4004,[0.000121895,0.00933483,0.999956]] call InitStruct; 
 _3387_629883702_7199719_22734 = ['Decor',[3387.63,3702.72,26.5506,true],0,[0,-0.174799,0.984604], {_thisObj setvariable ['model','ca\buildings2\houseblocks\houseblock_c\houseblock_c1_ruins.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['TorchHolderCharged',[3387.69,3680.06,18.6897],353.723,[0,0,1]] call InitStruct; 
 ['TorchHolderCharged',[3367.1,3696.9,21.159],173.395,[0,0,1]] call InitStruct; 
 _3370_120123698_3200718_96520 = ['Decor',[3370.12,3698.32,18.9652],179.283,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\slum\slum_house01_f.p3d'];}] call InitDecor; // !!! realocated model !!!
-_3363_040043703_4799820_74440 = ['Decor',[3363.04,3703.48,20.7444],2.14221,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\u_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3371_110113693_1999550_13620 = ['Decor',[3371.11,3693.2,55.1362,true],[-3.48871e-005,1,-3.57096e-005],[0.0232979,-3.48871e-005,-0.999729], {_thisObj setvariable ['model','a3\structures_f_enoch\industrial\farms\barn_04_ruins_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3383_169923727_6699236_82115 = ['Decor',[3383.17,3727.67,43.37,true],[-0.367198,0.930143,-0.000182107],[0.925197,0.365265,0.102922], {_thisObj setvariable ['model','a3\rocks_f\water\w_sharprock_wallv.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3411_219973514_370120_00000 = ['PowerGenerator',[3411.22,3514.37,0],0,[0,0,1], {go_editor_globalRefs set ['_gen',_thisObj];
@@ -339,7 +338,6 @@ _3418_280033652_97998_2_15282 = ['Decor',[3418.28,3652.98,-2.15282],272.602,[0,0
 _3393_050053675_85010_2_48341 = ['Decor',[3393.05,3675.85,-2.48341],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\industrial\surfacemine_01\sm_01_shelter_wide_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3408_550053672_61011_2_40358 = ['Decor',[3408.55,3672.61,-2.40358],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\industrial\surfacemine_01\sm_01_shelter_wide_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3402_949953674_7600119_47610 = ['Decor',[3402.95,3674.76,19.4761],91.6803,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\u_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
-_3400_093993657_6064520_23419 = ['Decor',[3400.09,3657.61,20.2342],270,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\u_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3412_458253674_6484419_43110 = ['Decor',[3412.46,3674.65,19.4311],90.9186,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\u_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3423_179933651_409913_91490 = ['Decor',[3423.18,3651.41,8.22907,true],[-0.391017,0.903125,0.177398],[0.413153,0,0.910662], {_thisObj setvariable ['model','a3\structures_f\ind\pipes\indpipe1_90degr_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3411_820073656_530033_25901 = ['Decor',[3411.82,3656.53,3.25901],40.9989,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\ind\pipes\indpipe1_90degr_f.p3d'];}] call InitDecor; // !!! realocated model !!!
@@ -372,7 +370,7 @@ _3402_350103678_570071_42775 = ['Decor',[3402.35,3678.57,6.65141,true],[0.136434
 ['BlockStone',[3418.71,3711.39,0.623241],0,[0,0,1]] call InitDecor; 
 ['BlockStone',[3408.21,3711.38,0.699294],0,[0,0,1]] call InitDecor; 
 ['BlockBrick',[3422.41,3683.23,17.638],270.646,[0,0,1]] call InitDecor; 
-['Golovinskaya',[3402.66,3703.8,19.9445],271.021,[0,0,1]] call InitDecor; 
+['Golovinskaya',[3402.66,3703.8,19.9445],271.021,[0,0,1]] call InitStruct; 
 _3397_750003680_760010_94319 = ['ElectricalShield',[3397.75,3680.76,0.943189],180.391,[0,0,1], {go_editor_globalRefs set ['_sw_ulica',_thisObj];
 }] call InitStruct; 
 ['LampCeiling_Red',[3419.9,3692.66,29.3637],0,[0,0,1], {go_editor_globalRefs set ['Imported LampCeiling_Red54736',_thisObj];
@@ -405,13 +403,12 @@ _3420_110113714_449954_07531 = ['IStruct',[3420.11,3714.45,4.07531],0.0561839,[0
 _3411_330083714_449954_06682 = ['IStruct',[3411.33,3714.45,4.06682],0.0561839,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\walls\canal_wallsmall_10m_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3414_280034031_8100610_87760 = ['Decor',[3414.28,4031.81,10.8776],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_shop01\u_shop_01_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3423_750004043_189947_20215 = ['Decor',[3423.75,4043.19,7.20215],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_shop01\d_shop_01_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
-['Golovinskaya',[3418.19,4045.74,7.20215],0,[0,0,1]] call InitDecor; 
+['Golovinskaya',[3418.19,4045.74,7.20215],0,[0,0,1]] call InitStruct; 
 _3419_330084039_659917_20215 = ['Decor',[3419.33,4039.66,7.20215],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\ruins\houseruin_small_01_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3411_100104051_189947_20215 = ['Decor',[3411.1,4051.19,7.20215],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_shop02\d_shop_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3393_979984066_179937_20215 = ['Decor',[3393.98,4066.18,7.20215],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\wip\unfinished_building_02_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3393_850104089_510017_20215 = ['Decor',[3393.85,4089.51,7.20215],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\dominants\castle\castle_01_tower_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3405_399904070_620128_85249 = ['Decor',[3405.4,4070.62,8.85249],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\stone_big\i_stone_housebig_v3_f.p3d'];}] call InitDecor; // !!! realocated model !!!
-_3431_149903566_7700230_43924 = ['Decor',[3431.15,3566.77,36.9881,true],[-0.270602,-0.962691,-0.000188649],[-0.957584,0.269147,0.102922], {_thisObj setvariable ['model','a3\rocks_f\water\w_sharprock_wallv.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['BlockBrick',[3432.64,3612.58,18.0953],0,[0,0,1]] call InitDecor; 
 ['BlockBrick',[3432.67,3601.85,18.2136],0,[0,0,1]] call InitDecor; 
 ['BlockBrick',[3432.48,3592.08,18.2791],0,[0,0,1]] call InitDecor; 
@@ -451,7 +448,6 @@ _3453_540043603_4299322_73860 = ['Decor',[3453.54,3603.43,22.7386],90,[0,0,1], {
 _3435_250003595_4099146_02350 = ['Decor',[3435.25,3595.41,51.0235,true],[-3.48871e-005,1,-3.57096e-005],[0.0232979,-3.48871e-005,-0.999729], {_thisObj setvariable ['model','a3\structures_f_enoch\industrial\farms\barn_04_ruins_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3449_760013592_0200223_99652 = ['IStruct',[3449.76,3592.02,30.3677,true],270.785,[0.0184295,0.0171443,0.999683], {_thisObj setvariable ['model','a3\structures_f\households\addons\metal_shed_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3451_409913605_6499022_26560 = ['Decor',[3451.41,3605.65,22.2656],180.382,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x6.p3d'];}] call InitDecor; // !!! realocated model !!!
-_3451_429933605_7399917_58750 = ['Decor',[3451.43,3605.74,17.5875],180.382,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x6.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3448_479983609_1298817_58585 = ['Decor',[3448.48,3609.13,24.0035,true],89.944,[0.0119729,-0.00356058,0.999922], {_thisObj setvariable ['model','ca\structures_e\wall\wall_l\wall_l3_5m_ep1.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3448_550053614_2800317_52505 = ['Decor',[3448.55,3614.28,23.9427,true],89.944,[0.0119729,-0.00356058,0.999922], {_thisObj setvariable ['model','ca\structures_e\wall\wall_l\wall_l3_5m_ep1.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3449_989993595_6201217_54225 = ['Decor',[3449.99,3595.62,23.9599,true],228.437,[-0.0113197,-0.00527042,0.999922], {_thisObj setvariable ['model','ca\structures_e\wall\wall_l\wall_l3_5m_ep1.p3d'];}] call InitDecor; // !!! realocated model !!!
@@ -573,7 +569,6 @@ _3451_879884025_479980_00995 = ['Decor',[3451.88,4025.48,0.00994873],0,[0,0,1], 
 _3434_919924049_300057_20215 = ['Decor',[3434.92,4049.3,7.20215],0,[0,0,1], {_thisObj setvariable ['model','ca\buildings2\houseblocks\houseblock_c\houseblock_c1_ruins.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3428_469974034_2500013_78320 = ['Decor',[3428.47,4034.25,13.7832],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\u_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3434_699954050_7900421_18530 = ['Decor',[3434.7,4050.79,21.1853],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\d_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
-_3443_479984057_479980_00000 = ['Decor',[3443.48,4057.48,4.29153e-006],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\industrial\surfacemine_01\sm_01_shelter_wide_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3465_760013592_7800348_60596 = ['Decor',[3465.76,3592.78,49.4209,true],[0.995763,-0.0886925,-0.0243019],[-0.0914547,-0.982779,-0.160566], {_thisObj setvariable ['model','a3\rocks_f\water\w_sharprock_wallv.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3476_540043604_9099122_61960 = ['SteelBrownDoor',[3476.54,3604.91,22.6196],0.695868,[0,0,1]] call InitStruct; 
 _3478_090093603_1499022_57690 = ['SteelBrownDoor',[3478.09,3603.15,22.5769],89.1837,[0,0,1]] call InitStruct; 
@@ -619,7 +614,6 @@ _3478_090093603_1499022_57690 = ['SteelBrownDoor',[3478.09,3603.15,22.5769],89.1
 _3475_110113609_5900918_08230 = ['IStruct',[3475.11,3609.59,18.0823],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3463_649903590_5100118_07720 = ['IStruct',[3463.65,3590.51,18.0772],3.88077,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3481_040043604_9799822_71740 = ['IStruct',[3481.04,3604.98,22.7174],179.234,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
-_3472_060063587_8000518_09020 = ['IStruct',[3472.06,3587.8,18.0902],90,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3459_129883610_6398922_73410 = ['IStruct',[3459.13,3610.64,22.7341],179.234,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3471_000003604_9099122_69380 = ['IStruct',[3471,3604.91,22.6938],359.615,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3471_971443599_4499518_08210 = ['IStruct',[3471.97,3599.45,18.0821],90,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -649,8 +643,7 @@ _3483_899903596_1499022_71740 = ['IStruct',[3483.9,3596.15,22.7174],90,[0,0,1], 
 _3483_899903590_1599122_72290 = ['IStruct',[3483.9,3590.16,22.7229],90,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3469_050053607_9099122_73410 = ['IStruct',[3469.05,3607.91,22.7341],90,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3471_959963610_7299818_08210 = ['IStruct',[3471.96,3610.73,18.0821],90,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
-_3469_580083590_2099618_07720 = ['IStruct',[3469.58,3590.21,18.0772],1.92087,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
-_3471_979493593_6001018_07720 = ['IStruct',[3471.98,3593.6,18.0772],90,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
+_3470_882813590_2099618_07720 = ['IStruct',[3470.88,3590.21,18.0772],1.92087,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3474_899903600_6699218_11010 = ['IStruct',[3474.9,3600.67,18.1101],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3477_025393603_5500518_11010 = ['IStruct',[3477.03,3603.55,18.1101],90,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3472_060063597_4199222_71740 = ['IStruct',[3472.06,3597.42,22.7174],90,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -674,7 +667,6 @@ _3460_760013594_2299822_68540 = ['IStruct',[3460.76,3594.23,22.6854],0,[0,0,1], 
 _3457_040043609_5800822_68280 = ['IStruct',[3457.04,3609.58,22.6828],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_epa\civ\camping\woodentable_small_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3460_830083589_0200222_71180 = ['IStruct',[3460.83,3589.02,22.7118],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_epa\civ\camping\woodentable_small_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3463_332523606_4126022_68940 = ['IStruct',[3463.33,3606.41,22.6894],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_epa\civ\camping\woodentable_small_f.p3d'];}] call InitStruct; // !!! realocated model !!!
-_3478_820073601_1398922_70650 = ['IStruct',[3478.82,3601.14,22.7065],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_epa\civ\camping\woodentable_small_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3483_120123596_8701222_67280 = ['IStruct',[3483.12,3596.87,22.6728],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_epa\civ\camping\woodentable_small_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3461_199953596_2900422_73200 = ['Decor',[3461.2,3596.29,22.732],3.13084,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena_m.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3460_040043598_8999022_73410 = ['IStruct',[3460.04,3598.9,22.7341],89.593,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena_m.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -710,13 +702,12 @@ _3461_020023608_8200718_55550 = ['IStruct',[3461.02,3608.82,18.5555],275.644,[0,
 _3460_610113593_1499018_54190 = ['IStruct',[3460.61,3593.15,18.5419],268.888,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\walls\brick\brickwall_01_l_pole_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3458_780033598_9399417_75060 = ['IStruct',[3458.78,3598.94,17.7506],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\civilian\sheds\shed_14_ruins_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3465_550053599_0400417_82230 = ['IStruct',[3465.55,3599.04,17.8223],240.763,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\civilian\sheds\shed_14_ruins_f.p3d'];}] call InitStruct; // !!! realocated model !!!
-_3470_699953590_7399919_49632 = ['IStruct',[3470.7,3590.74,24.4801,true],[-0.447955,0.691833,-0.566306],[-0.307793,0.475358,0.824195], {_thisObj setvariable ['model','a3\structures_f_enoch\civilian\sheds\shed_14_ruins_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3469_149903607_6001018_23740 = ['Shotgun',[3469.15,3607.6,18.2374],0,[0,0,1]] call InitItem; 
-if ((random 1) < 0.4) then {
-	['AmmoBoxShotgun',[3469.16,3607.41,18.6406],0,[0,0,1]] call InitItem; 
+_3469_159913607_4099118_64060 = if ((random 1) < 0.4) then {
+	['AmmoBoxShotgun',[3469.16,3607.41,18.6406],0,[0,0,1], {_thisObj setvariable ['model','ml\ml_object_new\model_24\patroni.p3d'];}] call InitItem; // !!! realocated model !!!
 };
-if ((random 1) < 0.2) then {
-	['AmmoBoxShotgun',[3469.15,3607.7,19.0956],112.531,[0,0,1]] call InitItem; 
+_3469_149903607_6999519_09560 = if ((random 1) < 0.2) then {
+	['AmmoBoxShotgun',[3469.15,3607.7,19.0956],112.531,[0,0,1], {_thisObj setvariable ['model','ml\ml_object_new\model_24\patroni.p3d'];}] call InitItem; // !!! realocated model !!!
 };
 ['PenRed',[3478.34,3607.87,28.5198,true],37.1508,[0.00952927,0.000300902,0.999955]] call InitItem; 
 ['PenBlack',[3477.89,3608.13,23.5028],26.3344,[0,0,1]] call InitItem; 
@@ -888,7 +879,7 @@ _3467_939943601_7299822_44850 = ['IStruct',[3467.94,3601.73,22.4485],180.65,[0,0
 ['SteelDoorThinSmall',[3460.25,3604.81,22.6518],0,[0,0,1]] call InitStruct; 
 ['MeatGrinder',[3474.61,3601.63,18.8769],179.006,[0,0,1]] call InitStruct; 
 ['BlackSmallStove',[3472.04,3602.26,18.1299],179.901,[0,0,1], {_thisObj setvariable ['lightisenabled',false];}] call InitStruct; 
-['SmallStoveGrill',[3475.32,3601.34,17.9226],346.023,[0,0,1]] call InitStruct; 
+['SmallStoveGrill',[3475.32,3601.34,17.9226],128.034,[0,0,1]] call InitStruct; 
 ['FabricBagBig2',[3475.46,3615.91,18.2895,true],[0.960805,0.235253,-0.146661],[0.189559,-0.171477,0.96678]] call InitItem; 
 ['FabricBagBig2',[3473.89,3615.05,18.1338,true],[0.0613514,0.840246,0.538723],[0,-0.53974,0.841832]] call InitItem; 
 ['FabricBagBig2',[3475.14,3615.23,18.8924,true],[-0.70061,0.658268,0.27537],[0.168783,-0.222082,0.960308]] call InitItem; 
@@ -903,19 +894,15 @@ _3467_939943601_7299822_44850 = ['IStruct',[3467.94,3601.73,22.4485],180.65,[0,0
 ['WoodenChair',[3478.83,3605.48,22.7174],181.478,[0,0,1]] call InitItem; 
 ['WoodenChair',[3457.04,3608.54,24.3864,true],[-0.0837306,-0.996488,1.49496e-005],[1.25567e-006,-1.51078e-005,-1]] call InitItem; 
 ['WoodenChair',[3479.37,3605.49,22.7174],178.073,[0,0,1]] call InitItem; 
-_3464_659913594_3701231_18490 = ['Decor',[3464.66,3594.37,31.1849],115.815,[0,0,1], {_thisObj setvariable ['model','ca\buildings2\houseblocks\houseblock_b\houseblock_b6_ruins.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3482_010253600_5271023_85200 = ['RifleAuto',[3482.01,3600.53,23.852],89.5424,[0,0,1]] call InitItem; 
 _3463_429933605_6599122_22910 = ['Decor',[3463.43,3605.66,22.2291],0.147562,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18_2.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3463_169923587_7800322_22700 = ['Decor',[3463.17,3587.78,22.227],271.599,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18_2.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3480_830083587_5500522_21790 = ['Decor',[3480.83,3587.55,22.2179],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18.p3d'];}] call InitDecor; // !!! realocated model !!!
-_3463_159913588_0600617_57220 = ['Decor',[3463.16,3588.06,17.5722],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18.p3d'];}] call InitDecor; // !!! realocated model !!!
-_3462_459963603_4599627_15890 = ['Decor',[3462.46,3603.46,27.1589],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18.p3d'];}] call InitDecor; // !!! realocated model !!!
+_3462_459963603_4599627_14600 = ['Decor',[3462.46,3603.46,27.146],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3481_030033588_0700717_58520 = ['Decor',[3481.03,3588.07,17.5852],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18.p3d'];}] call InitDecor; // !!! realocated model !!!
-_3480_330083584_3898927_14490 = ['Decor',[3480.33,3584.39,27.1449],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3480_310063602_3000527_14000 = ['Decor',[3480.31,3602.3,27.14],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18.p3d'];}] call InitDecor; // !!! realocated model !!!
-_3462_449953585_4899927_16190 = ['Decor',[3462.45,3585.49,27.1619],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3463_000003605_7600117_57710 = ['Decor',[3463,3605.76,17.5771],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18.p3d'];}] call InitDecor; // !!! realocated model !!!
-['MagazineAutoLoaded',[3482.21,3600.53,23.7179],321.858,[0,0,1]] call InitItem; 
+_3482_210213600_5271023_71790 = ['MagazineAutoLoaded',[3482.21,3600.53,23.7179],321.858,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_epb\items\military\magazine_rifle_f.p3d'];}] call InitItem; // !!! realocated model !!!
 _3467_350103644_7900447_15800 = ['Decor',[3467.35,3644.79,52.158,true],[-3.48871e-005,1,-3.57096e-005],[0.0232979,-3.48871e-005,-0.999729], {_thisObj setvariable ['model','a3\structures_f_enoch\industrial\farms\barn_04_ruins_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3470_429933646_5000022_78650 = ['Decor',[3470.43,3646.5,22.7865],187.743,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\industrial\farms\barn_04_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3461_860113675_3100618_00290 = ['Decor',[3461.86,3675.31,18.0029],12.426,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\d_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
@@ -1226,7 +1213,6 @@ _3461_320563605_0075724_16239 = ['RedButton',[3461.32,3605.01,29.164,true],[-0.9
 ['LargeClothCabinet',[3480.31,3599.65,22.6489],358.169,[0,0,1]] call InitStruct; 
 ['BrownOldSofa',[3467.88,3607.37,22.7341],265.784,[0,0,1]] call InitStruct; 
 ['GreenArmChair',[3461.63,3606.5,22.6723],93.0314,[0,0,1]] call InitStruct; 
-['GreenArmChair',[3480.35,3601.07,22.6423],95.1177,[0,0,1]] call InitStruct; 
 ['SmallTrashCan',[3474.73,3605.28,22.7291],270.654,[0,0,1]] call InitStruct; 
 ['ChestCabinet',[3472.8,3610.28,22.6968],90.1602,[0,0,1]] call InitStruct; 
 _3474_260013607_9299322_71740 = ['Decor',[3474.26,3607.93,22.7174],269.541,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena_1d.p3d'];}] call InitDecor; // !!! realocated model !!!
@@ -1241,7 +1227,6 @@ _3476_330083603_6008317_57690 = ['Decor',[3476.33,3603.6,17.5769],180.148,[0,0,1
 ['MediumConcreteFloor',[3473.44,3612.49,18.0723],0,[0,0,1]] call InitStruct; 
 ['ThickConcreteFloorMedium',[3474.93,3621.55,17.5767],180,[0,0,1]] call InitStruct; 
 ['LargeConcreteWallWithReinforcement',[3476.24,3618.44,15.0982],90,[0,0,1]] call InitStruct; 
-['LargeConcreteWallWithReinforcement',[3466.6,3614.25,15.0982],1.36604e-005,[0,0,1]] call InitStruct; 
 ['LargeConcreteWallWithReinforcement',[3469.36,3618.47,15.3667],90,[0,0,1]] call InitStruct; 
 ['BedOld',[3473.62,3619.68,12.653],358.484,[0,0,1]] call InitStruct; 
 _3472_654053620_2065412_81608 = ['Decor',[3472.65,3620.21,12.8161],268.654,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_epa\civ\camping\woodentable_small_f.p3d'];}] call InitDecor; // !!! realocated model !!!
@@ -1309,7 +1294,6 @@ _3401_500243666_0800819_07231 = ['Decor',[3401.5,3666.08,19.0723],268.777,[0,0,1
 ['MediumWoodenWall',[3403.93,3669.6,19.3388],89.1626,[0,0,1]] call InitStruct; 
 ['BarrelCampfireBig',[3412.65,3650.16,17.7176],0,[0,0,1]] call InitStruct; 
 ['WoodenDoor',[3403.97,3667.46,19.3548],84.2679,[0,0,1]] call InitStruct; 
-['SmallPileOfGarbageAndBoards',[3394.85,3669.56,24.8567,true],63.7149,[0.000414197,-0.000835721,1]] call InitStruct; 
 ['WoodenChair',[3411.53,3649.35,22.6803,true],229.415,[0.00157339,0.0088058,0.99996]] call InitItem; 
 ['WoodenChair',[3413.72,3649.55,22.7082,true],114.553,[-0.00865173,-0.00227091,0.99996]] call InitItem; 
 ['Melteshonok',[3412.73,3650.2,23.8066,true],[-0.986272,-0.141646,0.0848757],[-0.165095,0.835507,-0.524091]] call InitItem; 
@@ -1332,8 +1316,7 @@ _3395_530033652_6298820_88860 = ['Decor',[3395.53,3652.63,20.8886],0,[0,0,1], {_
 ['SmallWhiteConcretePillar',[3413.53,3667.16,22.979,true],357.515,[0.00366908,0.00305131,0.999989]] call InitStruct; 
 ['SmallWhiteConcretePillar',[3413.53,3667.16,25.6354,true],[0.0299234,-0.999527,-0.00716806],[0.00546244,0.00733468,-0.999958]] call InitStruct; 
 ['ThickLightConcreteColumn',[3413.54,3667.19,23.4353,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
-_3473_259523612_1315912_30964 = ['Decor',[3473.26,3612.13,12.3096],180.148,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18_2.p3d'];}] call InitDecor; // !!! realocated model !!!
-['SmallWoodenTable',[3472.82,3604.04,18.0387],0,[0,0,1]] call InitStruct; 
+_3472_376463612_1315912_30964 = ['Decor',[3472.38,3612.13,12.3096],180.148,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18_2.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['SoupPlate',[3473.1,3604.46,18.9033],0,[0,0,1]] call InitItem; 
 ['BlockBrick',[3412.11,3647.8,17.7291],0,[0,0,1]] call InitDecor; 
 ['SmallTrashCan',[3424.39,3659.56,17.739],180.03,[0,0,1]] call InitStruct; 
@@ -1343,10 +1326,120 @@ _3473_259523612_1315912_30964 = ['Decor',[3473.26,3612.13,12.3096],180.148,[0,0,
 ['SaltShaker',[3476.31,3606.6,18.3952],0,[0,0,1]] call InitItem; 
 ['SugarShaker',[3476.38,3607.92,18.3951],0,[0,0,1]] call InitItem; 
 ['SaltShaker',[3476.3,3606.83,18.3935],0,[0,0,1]] call InitItem; 
-['PepperShaker',[3476.11,3608.19,18.4036],0,[0,0,1]] call InitItem; 
-['PepperShaker',[3476.2,3607.64,18.3977],0,[0,0,1]] call InitItem; 
-['PepperShaker',[3476.3,3607.24,18.4005],0,[0,0,1]] call InitItem; 
+_3476_110113608_1899418_40361 = ['PepperShaker',[3476.11,3608.19,18.4036],0,[0,0,1], {_thisObj setvariable ['model','relicta_models2\food\s_salt\s_salt.p3d'];}] call InitItem; // !!! realocated model !!!
+_3476_199953607_6398918_39770 = ['PepperShaker',[3476.2,3607.64,18.3977],0,[0,0,1], {_thisObj setvariable ['model','relicta_models2\food\s_salt\s_salt.p3d'];}] call InitItem; // !!! realocated model !!!
+_3476_300053607_2399918_40052 = ['PepperShaker',[3476.3,3607.24,18.4005],0,[0,0,1], {_thisObj setvariable ['model','relicta_models2\food\s_salt\s_salt.p3d'];}] call InitItem; // !!! realocated model !!!
 ['SugarShaker',[3476.36,3608.39,18.3942],0,[0,0,1]] call InitItem; 
+['MediumWoodenTable',[3420.92,3673.69,19.2016],270,[0,0,1]] call InitStruct; 
+_3360_139163699_1950720_85440 = ['WoodenDoor',[3360.14,3699.2,20.8544],180,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"BanditKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['Key',[3359.53,3707.9,21.9639],45.8999,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"BanditKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
+['BrownLeatherChair',[3366.5,3707.72,21.0037],231.888,[0,0,1]] call InitStruct; 
+['BrownLeatherChair',[3366.55,3703.65,21.0037],313.079,[0,0,1]] call InitStruct; 
+['SofaBrown',[3367.33,3705.7,21.0037],268.051,[0,0,1]] call InitStruct; 
+['CaseBedroomMedium',[3363.48,3703.53,20.987],0,[0,0,1]] call InitStruct; 
+['BoardWoodenBox',[3359.31,3704.16,20.9512],340.869,[0,0,1]] call InitStruct; 
+['SquareWoodenBox',[3359.51,3708.17,21.0037],343.62,[0,0,1]] call InitStruct; 
+['SmallWhiteConcretePillar',[3363.4,3701.92,21.7017],2.2144,[0,0,1]] call InitStruct; 
+['BigClothCabinet',[3363.45,3708.36,21.0037],2.81438,[0,0,1]] call InitStruct; 
+['GlassBottle',[3359.25,3704.64,21.7395],0,[0,0,1]] call InitItem; 
+['GlassBottle',[3359.51,3704.03,26.7812,true],[-4.36985e-006,1,2.71382e-006],[-0.997733,-4.17732e-006,-0.0672934]] call InitItem; 
+['GlassBottle',[3359.29,3703.52,21.7419],0,[0,0,1]] call InitItem; 
+['GlassBottle',[3359.01,3705.12,21.0037],0,[0,0,1]] call InitItem; 
+['GlassBottle',[3359.19,3704.94,21.0037],0,[0,0,1]] call InitItem; 
+['GlassBottle',[3358.85,3704.85,21.0037],0,[0,0,1]] call InitItem; 
+_3363_040043703_4799820_74440 = ['Decor',[3363.04,3703.48,20.7444],2.14221,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\u_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
+['ShortPipeBlueMetal',[3359.36,3707.96,23.3117],309.988,[0,0,1]] call InitStruct; 
+['WoodenDoor',[3467.22,3590.41,18.0722],0,[0,0,1]] call InitStruct; 
+_3458_695563579_2695318_07720 = ['Decor',[3458.7,3579.27,18.0772],1.74808,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\u_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
+_3443_479984057_479980_00000 = ['Decor',[3443.48,4057.48,4.29153e-006],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\industrial\surfacemine_01\sm_01_shelter_wide_f.p3d'];}] call InitDecor; // !!! realocated model !!!
+_3471_979493593_8208018_07720 = ['IStruct',[3471.98,3593.82,18.0772],90,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
+['BrickThinWall',[3463.17,3587.42,18.0722],90,[0,0,1]] call InitStruct; 
+['BrickThinWallSmall',[3471.98,3591.55,18.077],90,[0,0,1]] call InitStruct; 
+_3478_820073601_1398922_70650 = ['IStruct',[3478.82,3601.14,22.7065],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_epa\civ\camping\woodentable_small_f.p3d'];}] call InitStruct; // !!! realocated model !!!
+['GreenArmChair',[3480.33,3601.11,22.5569],90,[0,0,1]] call InitStruct; 
+_3451_429933605_7399917_58750 = ['Decor',[3451.43,3605.74,17.5875],180.382,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x6.p3d'];}] call InitDecor; // !!! realocated model !!!
+_3471_850343571_1120646_02350 = ['Decor',[3471.85,3571.11,51.0235,true],[-3.48871e-005,1,-3.57096e-005],[0.0232979,-3.48871e-005,-0.999729], {_thisObj setvariable ['model','a3\structures_f_enoch\industrial\farms\barn_04_ruins_f.p3d'];}] call InitDecor; // !!! realocated model !!!
+['ThickConcreteFloorSmall',[3466.79,3576.11,17.5723],0,[0,0,1]] call InitStruct; 
+_3477_280033573_7209520_61378 = ['Decor',[3477.28,3573.72,20.6138],91.7481,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\u_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
+['ThickConcreteFloorSmall',[3472.74,3576.1,17.5682],0,[0,0,1]] call InitStruct; 
+['OldBrickWallMedium1',[3470.68,3578.82,22.7267],0.960963,[0,0,1]] call InitStruct; 
+['OldBrickWallMedium1',[3466.33,3578.8,21.229],0.767747,[0,0,1]] call InitStruct; 
+['OldBrickWallMedium1',[3471.3,3578.69,26.9796,true],1.66456,[0,-0.002868,0.999996]] call InitStruct; 
+['ThickConcreteFloorSmall',[3460.83,3571.87,17.575],0,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorSmall',[3460.82,3565.89,17.5731],0,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorSmall',[3472.62,3570.17,17.575],0,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorSmall',[3466.79,3570.19,17.5741],0,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorSmall',[3451.18,3593.78,17.573],0,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorSmall',[3453.4,3587.83,17.5742],0,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorSmall',[3452,3581.85,17.5738],0,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorSmall',[3451.59,3577.31,17.5742],0,[0,0,1]] call InitStruct; 
+_3451_921143591_1445318_07720 = ['IStruct',[3451.92,3591.14,18.0772],2.93696,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
+['ThickConcreteFloorSmall',[3453.07,3587.99,22.2277],0,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorSmall',[3450.98,3582.52,22.2259],2.7322,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorSmall',[3450.79,3577.98,22.2455],0,[0,0,1]] call InitStruct; 
+['BigStoneWall',[3447.43,3563.83,30.4155,true],84.8454,[-0.0212227,-0.0123387,0.999699]] call InitDecor; 
+['ThickConcreteFloorMedium',[3451.07,3571.87,17.5725],0,[0,0,1]] call InitStruct; 
+_3449_617193580_1208522_64485 = ['IStruct',[3449.62,3580.12,29.0161,true],269.012,[0.0178817,0.0177067,0.999683], {_thisObj setvariable ['model','a3\structures_f\households\addons\metal_shed_f.p3d'];}] call InitStruct; // !!! realocated model !!!
+['ThickConcreteFloorMedium',[3466.63,3565.9,17.5743],90.0001,[0,0,1]] call InitStruct; 
+_3463_159913588_0600617_57220 = ['Decor',[3463.16,3588.06,17.5722],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x18.p3d'];}] call InitDecor; // !!! realocated model !!!
+['MetalAndConcreteRuins',[3473.54,3587.19,24.4255,true],0,[-0.707107,8.64267e-007,0.707107]] call InitStruct; 
+['SmallPileOfGarbageAndBoards',[3473.06,3581.38,24.0526,true],0,[-0.707107,0,0.707107]] call InitStruct; 
+['WoodenSmallFloor',[3474.72,3583.26,23.8366,true],0,[-1,0,-4.37114e-008]] call InitStruct; 
+['WoodenSmallFloor',[3474.74,3580.39,23.9489,true],0,[-1,0,-4.37114e-008]] call InitStruct; 
+_3476_915283590_1638218_09020 = ['IStruct',[3476.92,3590.16,18.0902],181.921,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\kr_stena.p3d'];}] call InitStruct; // !!! realocated model !!!
+['ThickConcreteFloorMedium',[3480.31,3590.33,27.14],90,[0,0,1]] call InitStruct; 
+['SmallPileOfGarbageAndBoards',[3394.85,3669.56,24.8567,true],63.7149,[0.000414197,-0.000835721,1]] call InitStruct; 
+_3400_093993657_6064520_23419 = ['Decor',[3400.09,3657.61,20.2342],270,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\u_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
+['ThickConcreteFloorMedium',[3462.63,3591.53,27.145],90.0001,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorMedium',[3462.4,3585.54,27.146],90.0001,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorMedium',[3480.2,3584.38,27.145],90.0001,[0,0,1]] call InitStruct; 
+['SmallWoodenTable',[3472.82,3604.04,18.0387],0,[0,0,1]] call InitStruct; 
+['LargeConcreteWallWithReinforcement',[3466.6,3614.25,15.0982],1.36604e-005,[0,0,1]] call InitStruct; 
+['MetalAndConcreteRuins',[3459.95,3578.78,31.8128,true],[-0.99201,-0.126161,1.07288e-006],[0.0630807,-0.495999,0.866029]] call InitStruct; 
+['MetalAndConcreteRuins',[3456.7,3578.3,31.4716,true],[-1,4.23281e-007,2.44381e-007],[0,-0.499999,0.866026]] call InitStruct; 
+['LongSteelPipe',[3472.69,3579.17,41.0231,true],[0,1.44244e-006,1],[0,-1,1.44244e-006]] call InitStruct; 
+['SmallBrickHouseRuins',[3466.33,3581.05,32.4437,true],0,[0,-0.707107,0.707107]] call InitStruct; 
+['SmallRuinedWoodenBuilding',[3470.62,3581.59,25.3089],269.668,[0,0,1]] call InitStruct; 
+['OldBrickWallMedium1',[3465.72,3578.91,22.727],0.960963,[0,0,1]] call InitStruct; 
+_3431_149903566_7700230_43924 = ['Decor',[3431.15,3566.77,36.9881,true],[-0.270602,-0.962691,-0.000188649],[-0.957584,0.269147,0.102922], {_thisObj setvariable ['model','a3\rocks_f\water\w_sharprock_wallv.p3d'];}] call InitDecor; // !!! realocated model !!!
+_3464_659913595_4235831_18490 = ['Decor',[3464.66,3595.42,31.1849],115.815,[0,0,1], {_thisObj setvariable ['model','ca\buildings2\houseblocks\houseblock_b\houseblock_b6_ruins.p3d'];}] call InitDecor; // !!! realocated model !!!
+['SteelThinWallMedium',[3457.38,3578.86,21.6972],0,[0,0,1]] call InitStruct; 
+['SteelThinWallMedium',[3482.73,3577.27,24.2299],270.124,[0,0,1]] call InitStruct; 
+['SteelThinWallMedium',[3482.52,3574.09,20.8138],270.659,[0,0,1]] call InitStruct; 
+['MediumWoodenWall',[3482.74,3576.42,20.6941],270.701,[0,0,1]] call InitStruct; 
+['MediumWoodenWall',[3482.66,3573.29,24.2299],271.08,[0,0,1]] call InitStruct; 
+['MediumWoodenWall',[3482.58,3570.04,24.1738],268.589,[0,0,1]] call InitStruct; 
+['MediumWoodenWall',[3480.35,3568.59,24.2299],0,[0,0,1]] call InitStruct; 
+['SteelThinWallSmall',[3476.11,3555.31,22.3085],0,[0,0,1]] call InitStruct; 
+['BrickThinWallSmall',[3473.05,3555.18,22.3046],0,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorMedium',[3484.54,3567.07,17.5813],90,[0,0,1]] call InitStruct; 
+_3475_885993559_5647018_49126 = ['Decor',[3475.89,3559.56,18.4913],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\u_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
+['BrickThinWall',[3481.13,3565.56,18.0813],270,[0,0,1]] call InitStruct; 
+['BrickThinWall',[3481.1,3565.54,20.5281],270,[0,0,1]] call InitStruct; 
+['SmallBrickHouseRuins',[3482.62,3565.95,30.6656,true],[0.482963,0.0380164,0.874815],[-0.875,-0.0172593,0.483815]] call InitStruct; 
+_3493_566893554_4638747_16818 = ['Decor',[3493.57,3554.46,52.1682,true],[-3.48871e-005,1,-3.57096e-005],[0.0232979,-3.48871e-005,-0.999729], {_thisObj setvariable ['model','a3\structures_f_enoch\industrial\farms\barn_04_ruins_f.p3d'];}] call InitDecor; // !!! realocated model !!!
+['ThickConcreteFloorMedium',[3462.52,3559.87,17.5739],90.0001,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorMedium',[3463.06,3553.91,17.5741],270,[0,0,1]] call InitStruct; 
+['ThickConcreteFloorMedium',[3455.21,3566.13,17.5732],0,[0,0,1]] call InitStruct; 
+['BigSmoothStone',[3466.95,3544.91,17.5111],0,[0,0,1]] call InitDecor; 
+['MediumWoodenWall',[3480.97,3561.65,18.9512],270,[0,0,1]] call InitStruct; 
+['MediumWoodenWall',[3480.9,3562,22.7663],270,[0,0,1]] call InitStruct; 
+['StreetLamp',[3468.33,3561.95,18.0789],332.674,[0,0,1], {go_editor_globalRefs set ['StreetLamp G:oNY70Wu+yPw',_thisObj];
+}] call InitStruct; 
+['BarrelCampfireBig',[3464.76,3587.43,18.0772],0,[0,0,1]] call InitStruct; 
+_3470_706793588_5212418_07720 = ['IStruct',[3470.71,3588.52,18.0772],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\civ\garbage\garbagepallet_f.p3d'];}] call InitStruct; // !!! realocated model !!!
+['SmallPileOfGarbageAndBoards',[3471.54,3587.12,17.5237],0,[0,0,1]] call InitStruct; 
+['MetalAndConcreteRuins',[3471.76,3582.32,18.0772],0,[0,0,1]] call InitStruct; 
+_3469_904053585_7421918_07720 = ['IStruct',[3469.9,3585.74,18.0772],66.5556,[0,0,1], {_thisObj setvariable ['model','ca\misc\garbage_paleta.p3d'];}] call InitStruct; // !!! realocated model !!!
+['BrownLeatherChair',[3472.31,3582.01,24.0706,true],[-0.947796,0.0823879,-0.308049],[-0.3091,0,0.95103]] call InitStruct; 
+_3460_227053562_9338418_54708 = ['Decor',[3460.23,3562.93,18.5471],62.2714,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\slum\slum_house01_f.p3d'];}] call InitDecor; // !!! realocated model !!!
+['BigStoneWall',[3460.64,3557.6,20.0834,true],357.255,[0.0346032,-0.0113377,0.999337]] call InitDecor; 
+['SmallSheetMetalHouse',[3456.68,3567.69,24.8002,true],207.086,[0.0253076,-0.0137413,0.999585]] call InitStruct; 
+['MediumWoodenTable',[3479.82,3573.58,20.873],345.262,[0,0,1]] call InitStruct; 
+['ChairBigCasual',[3481.19,3569.76,26.1532,true],[-0.473359,0.878461,0.0650917],[-0.879892,-0.475022,0.0120324]] call InitItem; 
+['ChairBigCasual',[3481.83,3576.91,26.4418,true],0,[0.880148,0,0.474699]] call InitItem; 
+['StripedChair',[3479.56,3575.18,20.873],183.502,[0,0,1]] call InitItem; 
+['BigClothCabinetNew',[3479.96,3559.79,18.7505],173.638,[0,0,1]] call InitStruct; 
 
 
 
@@ -1489,6 +1582,7 @@ if (!isNil'_3445_040043616_5300318_02900') then {
 	[_3445_040043616_5300318_02900,go_editor_globalRefs get '_room2f_glob'] call (_3445_040043616_5300318_02900 getvariable 'proto' getvariable 'addConnection');
 	[_3445_040043616_5300318_02900,go_editor_globalRefs get 'StationSpeaker G:0GQk9evz1s0'] call (_3445_040043616_5300318_02900 getvariable 'proto' getvariable 'addConnection');
 	[_3445_040043616_5300318_02900,go_editor_globalRefs get '_sw_barkitchen (1)'] call (_3445_040043616_5300318_02900 getvariable 'proto' getvariable 'addConnection');
+	[_3445_040043616_5300318_02900,go_editor_globalRefs get 'StreetLamp G:oNY70Wu+yPw'] call (_3445_040043616_5300318_02900 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3424_040043670_3898919_06720') then {
 	_3424_040043670_3898919_06720 setvariable ['keytypes',["torg"]];
@@ -1723,4 +1817,7 @@ if (!isNil'_3461_320563605_0075724_16239') then {
 };
 if (!isNil'_3473_605713614_7971214_36978') then {
 	[_3473_605713614_7971214_36978,go_editor_globalRefs get 'Imported LampCeiling570303 (1)'] call (_3473_605713614_7971214_36978 getvariable 'proto' getvariable 'addConnection');
+};
+if (!isNil'_3360_139163699_1950720_85440') then {
+	_3360_139163699_1950720_85440 setvariable ['islocked',true];
 };
