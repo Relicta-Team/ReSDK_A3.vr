@@ -48,6 +48,21 @@ region(Low level inventory api)
 		callSelfParams(sendInfo,"updateSlotListInfo" arg _data);
 	};
 
+	func(syncGermsVisual)
+	{
+		objParams();
+		private _stack = [];//key lh,rh,ts,hd
+		private _ret = null;
+		{
+			_ret = callFunc(_x,getGermOpacityData);
+			if !isNullVar(_ret) then {
+				_stack pushBack _ret;
+			};
+		} foreach (values getSelf(bodyParts));
+
+		callSelfParams(sendInfo,"updateGermsInv" arg _stack);
+	};
+
 region(Getters and checkers)
 	//Проверяет нет ли предметов в обеих руках
 	func(isEmptyHands)

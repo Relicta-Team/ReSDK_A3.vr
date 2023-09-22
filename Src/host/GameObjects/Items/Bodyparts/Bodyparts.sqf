@@ -65,6 +65,8 @@ class(BodyPart) extends(Item)
 			};
 		};
 		
+		callFunc(_mob,syncGermsVisual);
+
 		if (_doDelete) exitWith {
 			delete(this);
 		};
@@ -592,6 +594,33 @@ class(BodyPart) extends(Item)
 		};
 	};
 
+	var(partGermKey,"");//bd,lh,rh,hd
+	func(getGermOpacityData)
+	{
+		objParams();
+		if (getSelf(partGermKey)=="") exitwith {
+			null
+		};
+
+		[
+			getSelf(partGermKey),
+			GERM_CONV_VALUE_TO_OPACITY(getSelf(germs))
+		]
+	};
+
+	func(updateGermsAt)
+	{
+		objParams_1(_p);
+		super();
+		if getSelf(isAttached) then {
+			private _mob = getSelf(loc);
+			if isNullReference(_mob) exitwith {};
+			if !isTypeOf(_mob,BasicMob) exitwith {};
+			
+			callFunc(_mob,syncGermsVisual);
+		};
+	};
+
 endclass
 
 class(Body) extends(BodyPart)
@@ -601,6 +630,7 @@ class(Body) extends(BodyPart)
 	var(isVital,true);
 	
 	var(bodyPartIndex,BP_INDEX_TORSO);
+	var(partGermKey,"bd");
 	
 	var(organs,null);
 	
@@ -904,7 +934,8 @@ class(Head) extends(BodyPart)
 	var(isVital,true);
 	
 	var(bodyPartIndex,BP_INDEX_HEAD);
-	
+	var(partGermKey,"hd");
+
 	var(name,"Голова");
 	var(desc,"Эта голова уже никому ничего не расскажет. Кто знает, может быть это и к лучшему.");
 	//Правила как для почек -1 и 1 (left,right)
@@ -1044,6 +1075,9 @@ class(Arm) extends(ITwoSidedBodyPart)
 		objParams();
 		private _idx = [BP_INDEX_ARM_L,BP_INDEX_ARM_R] select sideToIndex(getSelf(side));
 		setSelf(bodyPartIndex,_idx);
+
+		private _hkey = ["lh","rh"] select sideToIndex(getSelf(side));
+		setSelf(partGermKey,_hkey);
 	};
 	
 endclass

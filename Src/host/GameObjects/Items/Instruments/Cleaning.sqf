@@ -42,6 +42,9 @@ class(BrushCleaner) extends(Item)
 		setVar(_part,germs,(getVar(_part,germs) - randInt(20,40)) max 0);
 		callFuncParams(_usr,meSay,"чистит "+ifcheck(equals(_targ,_usr),"себе",callFuncParams(_targ,getNameEx,"кому"))+" "+callFunc(_part,getName));
 		callFuncParams(_usr,playSound,"UNCATEGORIZED\clean" arg getRandomPitchInRange(0.9,1.3));
+		
+		callFunc(_targ,syncGermsVisual);
+		
 	};
 
 endclass
