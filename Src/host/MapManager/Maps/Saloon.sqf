@@ -1329,7 +1329,7 @@ _3476_300053607_2399918_40052 = ['PepperShaker',[3476.3,3607.24,18.4005],0,[0,0,
 ['SugarShaker',[3476.36,3608.39,18.3942],0,[0,0,1]] call InitItem; 
 ['MediumWoodenTable',[3420.92,3673.69,19.314],270,[0,0,1]] call InitStruct; 
 _3360_139163699_1950720_85440 = ['WoodenDoor',[3360.14,3699.2,20.8544],180,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"BanditKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-_3359_526863707_8989321_96394 = ['Key',[3359.53,3707.9,21.9639],45.8999,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"BanditKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
+_3359_579833707_9011221_98672 = ['Key',[3359.58,3707.9,21.9867],45.8999,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"BanditKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
 ['BrownLeatherChair',[3366.5,3707.72,21.0037],231.888,[0,0,1]] call InitStruct; 
 ['BrownLeatherChair',[3366.55,3703.65,21.0037],313.079,[0,0,1]] call InitStruct; 
 ['SofaBrown',[3367.33,3705.7,21.0037],268.051,[0,0,1]] call InitStruct; 
@@ -1478,7 +1478,6 @@ _3471_403083612_5422412_57822 = ['SteelGridDoor',[3471.4,3612.54,12.5782],87.850
 ['BigConcretePipe',[3475.13,3601.9,12.9186],89.843,[0,0,1]] call InitStruct; 
 ['BigConcretePipe',[3477.79,3601.9,18.6386,true],[0.975924,0.0027395,-0.218093],[0.218093,0,0.975928]] call InitStruct; 
 ['BigConcreteWallDestroyed',[3468.3,3603.45,16.1026],354.29,[0,0,1]] call InitStruct; 
-['BigConcreteWallDestroyed',[3470.23,3598.97,16.6739],76.3323,[0,0,1]] call InitStruct; 
 ['SmallDirtGrey',[3470.46,3600.58,12.5124],70.0234,[0,0,1]] call InitStruct; 
 ['ShortPipeBlueMetal',[3471.55,3601.92,20.3796,true],[-0.998868,0.0464286,0.0103446],[0,-0.217474,0.976066]] call InitStruct; 
 ['LargeConcreteWallWithReinforcement',[3479.21,3602.12,15.0055],273.565,[0,0,1]] call InitStruct; 
@@ -1509,7 +1508,6 @@ _3453_998543592_8413112_71210 = ['IStruct',[3454,3592.84,12.7121],2.93696,[0,0,1
 ['LampCeiling',[3469.66,3603.1,15.7245],0,[0,0,1], {go_editor_globalRefs set ['Imported LampCeiling631376 (1)',_thisObj];
 }] call InitStruct; 
 ['MediumBetonWall',[3467.63,3600.74,15.0183],242.397,[0,0,1]] call InitStruct; 
-['MediumBetonWall',[3467.02,3597.12,14.0285],196.91,[0,0,1]] call InitStruct; 
 ['ShortPipeBlueMetal',[3456.59,3591.91,14.3905],291.172,[0,0,1]] call InitStruct; 
 ['MediumRuinedPipe',[3458.61,3589.15,20.1903,true],[-0.0274234,-0.998722,-0.0424573],[-0.609048,0.0503728,-0.791532]] call InitStruct; 
 ['LampCeiling',[3455.2,3589.11,14.8364],0,[0,0,1], {go_editor_globalRefs set ['Imported LampCeiling631376 (2)',_thisObj];
@@ -1520,6 +1518,19 @@ _3453_998543592_8413112_71210 = ['IStruct',[3454,3592.84,12.7121],2.93696,[0,0,1
 ['SmallPileOfConcreteFragments',[3445.97,3591.48,18.2292],343.795,[0,0,1]] call InitStruct; 
 ['LampCeiling',[3452.58,3587.22,20.3975],0,[0,0,1], {go_editor_globalRefs set ['Imported LampCeiling631376 (3)',_thisObj];
 }] call InitStruct; 
+['SteelThinWallSmall',[3472.21,3578.18,24.0815],4.59423,[0,0,1]] call InitStruct; 
+['SteelThinWallMedium',[3471.48,3576.81,24.2038],270.495,[0,0,1]] call InitStruct; 
+['SmallSteelRustyFence',[3472.15,3601.79,12.7903],356.626,[0,0,1]] call InitStruct; 
+['SmallSteelRustyFence',[3472.11,3601.78,14.0757],356.626,[0,0,1]] call InitStruct; 
+['LargeConcreteWallWithReinforcement',[3473.78,3600.28,15.5764],180.164,[0,0,1]] call InitStruct; 
+['MediumBetonWall',[3467.02,3597.12,14.0285],196.91,[0,0,1]] call InitStruct; 
+['Candle',[3363.59,3703.64,21.6887],0,[0,0,1]] call InitItem; 
+['SingleWhiteBedMetal',[3362.77,3700.1,24.3207],0,[0,0,1]] call InitStruct; 
+['SingleWhiteBedMetal',[3359.18,3701.8,24.3644],270.512,[0,0,1]] call InitStruct; 
+['Candle',[3362.83,3699.35,25.2568],0,[0,0,1]] call InitItem; 
+['SmallRedseatChair',[3358.82,3701.17,20.9444],286.997,[0,0,1]] call InitItem; 
+['SmallRedseatChair',[3360.47,3702.53,24.3644],6.03817,[0,0,1]] call InitItem; 
+['Candle',[3363.38,3701.32,20.9888],0,[0,0,1]] call InitItem; 
 
 
 
@@ -1904,8 +1915,8 @@ if (!isNil'_3473_605713614_7971214_36978') then {
 if (!isNil'_3360_139163699_1950720_85440') then {
 	_3360_139163699_1950720_85440 setvariable ['islocked',true];
 };
-if (!isNil'_3359_526863707_8989321_96394') then {
-	_3359_526863707_8989321_96394 setvariable ['name',"Ключ Пахана"];
+if (!isNil'_3359_579833707_9011221_98672') then {
+	_3359_579833707_9011221_98672 setvariable ['name',"Ключ Пахана"];
 };
 if (!isNil'_3467_223143590_4074718_07220') then {
 	_3467_223143590_4074718_07220 setvariable ['islocked',true];
