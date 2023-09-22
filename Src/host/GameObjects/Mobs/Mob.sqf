@@ -283,6 +283,7 @@ region(Connect control events)
 			]);
 
 		callSelfParams(syncSlotInfoList, INV_LIST_ALL);
+		callSelf(syncGermsVisual);
 		callSelfParams(syncSmdVar,"face" arg getSelf(face));
 		
 		if callSelf(canEnableHumanPostprocessOnConnection) then {

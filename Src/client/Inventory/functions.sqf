@@ -27,7 +27,7 @@ inventory_init = {
 
 	startUpdate(inventory_onUpdate,0);
 
-
+	rpcAdd("updateGermsInv",inventory_syncGerms);
 	rpcAdd("updateslotinfo",inventory_onSlotUpdate);
 	rpcAdd("updateslotlistinfo",inventory_onSlotListUpdate);
 	rpcAdd("onContainerOpen",inventory_onContainerOpen);
@@ -174,11 +174,12 @@ createWidget_invSlot = {
 	private _background = [_display,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
 
 	_background setBackgroundColor BACKGROUND_COLOR;
-
 	private _pic = [_display,PICTURE,[0,0,100,100],_ctg] call createWidget;
+	private _dirtOverlay = [_display,PICTURE,WIDGET_FULLSIZE,_ctg] call createWidget;
 
 	_ctg setvariable ['background',_background];
 	_ctg setVariable ["icon",_pic];
+	_ctg setvariable ["dirtOverlay",_dirtOverlay];
 	_pic setVariable ["text",[_display,TEXT,WIDGET_FULLSIZE,_ctg] call createWidget]; //внутри пикчи создали текст и зареферили на него
 
 	#ifdef INVENTORY_USE_NEW_RENDER_ICONS
@@ -189,6 +190,8 @@ createWidget_invSlot = {
 
 
 	if (!_isDragger) then {
+
+		[_dirtOverlay,inventory_const_dirtOverlayIcon] call widgetSetPicture;
 
 		if (isEmptySlot(_slotId)) then {
 			#ifndef INVENTORY_USE_NEW_RENDER_ICONS
@@ -442,6 +445,10 @@ inventory_onPrepareSlots = {
 			_slotObj = (_x call inventoryGetWidgetById);
 			setslotpos(_slotObj,_xMap,_yMap);
 		} foreach [INV_HAND_L,INV_HAND_R];
+
+		//germs sync
+		invenotry_commitNowAllGerms = true;
+		inventory_slotdataDirt call inventory_syncGerms;
 
 	} else {
 
@@ -878,6 +885,42 @@ inventory_onSlotUpdate = {
 			call inventory_unloadVerbMenu;
 		};
 	};
+};
+
+inventory_syncGerms = {
+	private _data = _this;
+
+	assert(!isNullVar(_data)); //notnull struct
+	assert(count _data > 0);//nonempty struct
+	assert(({(count _x) == 2} count _data) == (count _data));//correct struct
+
+	inventory_slotdataDirt = _data;
+
+	{
+		_x call inventory_internal_syncGermsBodyPartKey;
+	} foreach inventory_slotdataDirt;
+
+	if (invenotry_commitNowAllGerms) then {
+		invenotry_commitNowAllGerms = false;
+	};
+};
+
+inventory_internal_syncGermsBodyPartKey = {
+	params ["_partKey","_opacity"];
+	private _idx = inventory_const_partkeyToSlots findif {_x select 0 == _partKey};
+	if (_idx == -1) exitwith {
+		errorformat("inventory_internal_syncGermsBodyPartKey - Cant find partKey '%1'",_partKey);
+	};
+	private _partData = inventory_const_partkeyToSlots select _idx select 1;
+	if not_equalTypes(_partData,[]) then {_partData = [_partData]};
+
+	private _wid = widgetNull;
+	{
+		_wid = _x call inventoryGetWidgetById;
+		_wid = getSlotDirtOverlay(_wid);
+		_wid setFade _opacity;
+		_wid commit ifcheck(invenotry_commitNowAllGerms,0,0.1);
+	} foreach _partData;
 };
 
 #ifdef INVENTORY_USE_NEW_RENDER_ICONS

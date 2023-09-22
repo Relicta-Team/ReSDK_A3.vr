@@ -63,6 +63,8 @@
 
 #define getSlotIcon(wid) (wid getVariable "icon")
 
+#define getSlotDirtOverlay(wid) (wid getvariable "dirtOverlay")
+
 //Вот это раскомментить для текстовых названий иконок (но нужно доделывать)
 //#define widgetSetPicture inventory_widgetSetPicture
 

@@ -155,12 +155,30 @@ region(Declaration of verbs methods)
 				setVar(_obj,lastHandshakeTarget,nullPtr);
 				setVar(_obj,lastHandshakeTime,0);
 
+				private _myHand = callSelfParams(getActiveHandPart,false);
+				private _himHand = callFuncParams(_obj,getActiveHandPart,false);
+
+				if isNullReference(_himHand) exitwith {
+					callFuncParams(_obj,localSay,"Нечем это сделать" arg "error");
+				};
+				callFuncParams(_himHand,updateGermsAt,_myHand);
+
 				callFuncParams(_obj,meSay,"пожимает руку " + callFuncParams(this,getNameEx,"кому")+".");
 				//TODO known system process
 			} else {
 				setSelf(lastHandshakeTarget,_obj);
 				setSelf(lastHandshakeTime,tickTime);
 				callSelfParams(meSay,"протягивает руку " + callFuncParams(_obj,getNameEx,"кому")+".");
+
+				//отладочная ответка пожатия руки
+				//! игрок должен стоят передь целью
+				#ifdef EDITOR
+					if isNullVar(__EDITOR_DEBUG_FLAG_HANDSHAKE) exitwith {
+						private __EDITOR_DEBUG_FLAG_HANDSHAKE = true;
+						[_obj,"emt_handshake"] call ie_action_call;
+					};
+
+				#endif
 			};
 		};
 		if (["slap"] call ie_action_check) exitWith {
