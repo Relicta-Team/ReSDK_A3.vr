@@ -221,14 +221,14 @@ db_NickToUid = {
 	_r select 0 select 0
 };
 
-db_getLockedSettings = {
+db_getClientLockedSettings = {
 	params ["_nick"];
 	private _r = [text format["select LockedSettings from Accounts where Name='%1' COLLATE NOCASE",_nick],"string"] call db_query;
 	if (count _r == 0) exitwith {[]};
 	parseSimpleArray (_r select 0 select 0)
 };
 
-db_updateLockedSettings = {
+db_updateClientLockedSettings = {
 	params ["_nick",["_lockedSettings",""]];
 	if not_equalTypes(_lockedSettings,"") then {
 		_lockedSettings = str _lockedSettings;

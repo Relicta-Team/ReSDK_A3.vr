@@ -475,9 +475,9 @@ addCommandWithDescription("bancharsetting",ACCESS_ADMIN,"Забанить чел
 			private _newidx = getVar(_cli,lockedSettings) pushBackUnique _setting;
 			callFuncParams(thisClient,localSay,"Выполнено - " + (str(_newidx!=-1)) arg "system");
 		} else {
-			private _curlocklist = [_userName] call db_getLockedSettings;
+			private _curlocklist = [_userName] call db_getClientLockedSettings;
 			if ((_curlocklist pushBackUnique _setting)!=-1) then {
-				[_userName,_curlocklist] call db_updateLockedSettings;
+				[_userName,_curlocklist] call db_updateClientLockedSettings;
 			};
 		};
 	};
@@ -539,7 +539,7 @@ addCommandWithDescription("getbancharsettings",ACCESS_ADMIN,"Получить з
 	if !isNullReference(_cli) then {
 		_list = array_copy(getVar(_cli,lockedSettings));
 	} else {
-		_list = ([args] call db_getLockedSettings);
+		_list = ([args] call db_getClientLockedSettings);
 	};
 	callFuncParams(thisClient,ShowMessageBox,"Text" arg "Заблокированные роли "+args+": "+sbr+(_list joinString sbr));
 };
