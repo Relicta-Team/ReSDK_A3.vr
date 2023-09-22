@@ -1411,7 +1411,7 @@ _3464_659913595_4235831_18490 = ['Decor',[3464.66,3595.42,31.1849],115.815,[0,0,
 ['MediumWoodenWall',[3482.58,3570.04,24.1738],268.589,[0,0,1]] call InitStruct; 
 ['MediumWoodenWall',[3480.35,3568.59,24.2299],0,[0,0,1]] call InitStruct; 
 ['SteelThinWallSmall',[3476.11,3555.31,22.3085],0,[0,0,1]] call InitStruct; 
-['BrickThinWallSmall',[3473.05,3555.18,22.3046],0,[0,0,1]] call InitStruct; 
+['BrickThinWallSmall',[3473.05,3555.18,21.9313],0,[0,0,1]] call InitStruct; 
 ['ThickConcreteFloorMedium',[3484.54,3567.07,17.5813],90,[0,0,1]] call InitStruct; 
 _3475_885993559_5647018_49126 = ['Decor',[3475.89,3559.56,18.4913],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\households\house_big02\u_house_big_02_v1_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['BrickThinWall',[3481.13,3565.56,18.0813],270,[0,0,1]] call InitStruct; 
@@ -1440,6 +1440,7 @@ _3460_227053562_9338418_54708 = ['Decor',[3460.23,3562.93,18.5471],62.2714,[0,0,
 ['ChairBigCasual',[3481.83,3576.91,26.4418,true],0,[0.880148,0,0.474699]] call InitItem; 
 ['StripedChair',[3479.56,3575.18,20.873],183.502,[0,0,1]] call InitItem; 
 ['BigClothCabinetNew',[3479.96,3559.79,18.7505],173.638,[0,0,1]] call InitStruct; 
+['BrickThinWallSmall',[3450.02,3566.66,18.0775],0,[0,0,1]] call InitStruct; 
 
 
 
