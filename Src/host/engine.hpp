@@ -15,6 +15,18 @@
 #define PLATFORM_VERSION_MIN __GAME_VER_MIN__
 #define PLATFORM_VERSION_BUILD __GAME_BUILD__
 
+#ifdef EDITOR
+	#define ISDEVBUILD (0 call{ \
+		private _file = ".git\head"; \
+		if (FILEEXISTS _file) then { \
+			"refs/heads/development" in (LOADFILE _file) \
+		} else { \
+			false \
+		}; \
+	})
+#else
+	#define ISDEVBUILD false
+#endif
 
 //external override
 #ifdef RELEASE
