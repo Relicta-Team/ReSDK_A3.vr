@@ -221,6 +221,27 @@ db_NickToUid = {
 	_r select 0 select 0
 };
 
+db_getClientLockedSettings = {
+	params ["_nick"];
+	private _r = [text format["select LockedSettings from Accounts where Name='%1' COLLATE NOCASE",_nick],"string"] call db_query;
+	if (count _r == 0) exitwith {[]};
+	parseSimpleArray (_r select 0 select 0)
+};
+
+db_updateClientLockedSettings = {
+	params ["_nick",["_lockedSettings",""]];
+	if not_equalTypes(_lockedSettings,"") then {
+		_lockedSettings = str _lockedSettings;
+	};
+
+	if !([_nick]call db_isNickRegistered) exitwith {false};
+	private _r = [text format["Update Accounts set LockedSettings='%1',CharSettings='[%3]' where Name='%2' COLLATE NOCASE",
+		_lockedSettings regexReplace["""/g",""""""],_nick,
+		"nil,nil,nil,nil"//reset saved settings
+	],"string"] call db_query;
+	true
+};
+
 //Регистрация аккаунта по юиду и имени
 db_registerAccount = {
 	params ['_uid',"_name"];
@@ -346,8 +367,16 @@ db_saveClient = {
 		MOD(_usrSet, + str _x);
 	} foreach getSelf(clientSettings);
 
+	private _lockSettings = "";
+	{
+		if !isNullVar(_x) then {
+			if (_forEachIndex > 0) then {_lockSettings = _lockSettings + ","};
+			_lockSettings = _lockSettings + str _x;
+		};
+	} foreach getSelf(lockedSettings);
+
 	[
-		text format["UPDATE Accounts SET Name='%2',Access='%3',Points=%4,CharSettings='[%5]',ClientSettings='[%6]',PlayedRounds=%7 where uid=%1",
+		text format["UPDATE Accounts SET Name='%2',Access='%3',Points=%4,CharSettings='[%5]',ClientSettings='[%6]',PlayedRounds=%7,LockedSettings='[%8]' where uid=%1",
 		getSelf(uid),
 		getSelf(name),
 		[getSelf(access)] call cm_accessNumToType,
@@ -355,7 +384,8 @@ db_saveClient = {
 		_cliSet
 			regexReplace["""/g",""""""], //экранируем двойные кавычки для правильной выгрузки из бд
 		_usrSet regexReplace["""/g",""""""],
-		getSelf(playedRounds)
+		getSelf(playedRounds),
+		_lockSettings regexReplace["""/g",""""""]
 		]
 	] call db_query;
 
@@ -364,11 +394,26 @@ db_saveClient = {
 	};
 };
 
+//TODO implement
+// db_updateAccountInfo = {
+// 	params ["_nick","_kvargs"];
+// 	if !([_nick] call db_isNickRegistered) exitwith {false};
+// 	private _struct = "Update Accounts SET ";
+
+// 	assert(count _kvargs > 0);
+// 	if (count _kvargs == 0) exitWith {false};
+// 	private _sdat = [];
+// 	{
+// 		_x params ["_k","_v"];
+// 		_sdat pushBack [format["%1='%2'",_k,_v]];
+// 	} foreach _kvargs;
+// };
+
 db_loadClient = {
 	params ['this'];
 
-	([text format["select Name,Access,Points,ClientSettings,CharSettings,FirstJoin,LastJoin,PlayedRounds from accounts where uid=%1",getSelf(uid)],"string|string|int|string|string|DateTime|DateTime|int",true] call db_query)
-	params ["_name","_access","_points","_cliSet","_charSet","_firstJoin","_lastJoin","_playedRounds"];
+	([text format["select Name,Access,Points,ClientSettings,CharSettings,FirstJoin,LastJoin,PlayedRounds,LockedSettings from accounts where uid=%1",getSelf(uid)],"string|string|int|string|string|DateTime|DateTime|int|string",true] call db_query)
+	params ["_name","_access","_points","_cliSet","_charSet","_firstJoin","_lastJoin","_playedRounds","_lockedSettings"];
 
 	setSelf(name,_name);
 	private _accessNum = [_access] call cm_accessTypeToNum;
@@ -396,6 +441,10 @@ db_loadClient = {
 	setSelf(firstJoin,[_firstJoin arg true] call dateTime_toString);
 	setSelf(prevDayLastJoin,[_lastJoin arg true] call dateTime_toString);
 	setSelf(_firstJoinDB,_firstJoin);
+
+	//locked player settings
+	private _lockSets = parseSimpleArray _lockedSettings;
+	setSelf(lockedSettings,_lockSets);
 
 	//parse cliset
 	private _cliSetList = (parseSimpleArray _cliSet) params ["_keyboard","_graph","_usrsets"];
