@@ -6,7 +6,7 @@ Count modules: 30
  - [ClientInit](client//ClientInit.md) - 1 files
  - [ClientMenus](client//ClientMenus.md) - 1 files
  - [ClientRpc](client//ClientRpc.md) - 2 files
- - [ClientStatistic](client//ClientStatistic.md) - 2 files
+ - [ClientStatistic](client//ClientStatistic.md) - 3 files
  - [ColorThemes](client//ColorThemes.md) - 4 files
  - [CraftMenu](client//CraftMenu.md) - 2 files
  - [DiscordRPC](client//DiscordRPC.md) - 3 files

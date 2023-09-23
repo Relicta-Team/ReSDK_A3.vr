@@ -909,6 +909,10 @@ class(RCitizen) extends(IRStationRole)
 	{
 		objParams();
 		private _homes = callSelf(Homes);
+		if (count _homes == 0) exitwith {
+			setSelf(lastHome,[]);
+		};
+
 		private _randIdx = randInt(0,count _homes - 1);
 		setSelf(lastHome,_homes deleteAt _randIdx);
 	};
@@ -917,7 +921,10 @@ class(RCitizen) extends(IRStationRole)
 	{
 		objParams_2(_mob,_usr);
 
-		callSelf(pickHome);
+		if getSelf(firstPick) then {
+			setSelf(firstPick,false);
+		};
+		callSelf(pickHome); //init next home
 
 		private _cloth = getSelf(lastCloth);
 		private _keyRef = getSelf(lastHome) select 1;
@@ -936,8 +943,14 @@ class(RCitizen) extends(IRStationRole)
 	func(getInitialPos)
 	{
 		objParams();
+		if getSelf(firstPick) then {
+			callSelf(pickHome);
+		};
+		assert(count getSelf(lastHome) > 0);
 		getSelf(lastHome) select 0
 	};
+
+	var(firstPick,true);
 
 	var(__homesRef,null);
 
@@ -975,8 +988,10 @@ class(RCitizen) extends(IRStationRole)
 	func(canVisibleAfterStart)
 	{
 		objParams_1(_cliObj);
+		private _existsHomes = !isNull(getSelf(__homesRef)) && {count getSelf(__homesRef) > 0};
 		!array_exists(getSelf(clients),_cliObj)
 		&& super()
+		&& _existsHomes
 	};
 
 endclass
@@ -1004,8 +1019,10 @@ class(RBum) extends(BasicRole)
 	func(canVisibleAfterStart)
 	{
 		objParams_1(_cliObj);
+		private _hasBums = count callSelf(Poses) > 0;
 		gm_roundDuration >=
 		ifcheck(!callFuncParams(_cliObj,hasDiscordRole,"Forsaken"),1,t_asMin(5))
+		&& _hasBums
 	};
 
 	func(getEquipment)
@@ -1043,7 +1060,7 @@ class(RBum) extends(BasicRole)
 			private _dat = [
 				[3824,3850.29,24.0271],
 				[3833.33,3868.98,24.204],
-				[3822.57,3883.1,23.9169],
+				[3817.43,3854.08,24.4883], //[3822.57,3883.1,23.9169],!broken pos
 				[3839.97,3861.5,24.0861],
 				[3832.68,3859.35,24.7087],
 				[3850.02,3849.9,24.2201],

@@ -868,6 +868,18 @@ Replaced value:
 (GERM_LIST_HUMAN_COLOR select (GERM_LIST_COUNTS findif {val <= _x}))
 ```
 File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 14](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L14)
+## GERM_CONV_VALUE_TO_OPACITY(val)
+
+Type: constant
+
+Description: 
+- Param: val
+
+Replaced value:
+```sqf
+linearConversion [0,GERM_COUNT_MAX,val,1,0,true]
+```
+File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 15](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L15)
 ## GERM_COUNT_INFECTION
 
 Type: constant
@@ -879,7 +891,7 @@ Replaced value:
 ```sqf
 25
 ```
-File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 17](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L17)
+File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 18](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L18)
 ## GERM_MIN_WOUND_SIZE
 
 Type: constant
@@ -891,7 +903,7 @@ Replaced value:
 ```sqf
 WOUND_SIZE_MINOR
 ```
-File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 19](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L19)
+File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 20](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L20)
 ## INFECTION_MAX_LEVEL
 
 Type: constant
@@ -903,7 +915,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 21](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L21)
+File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 22](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L22)
 ## INFECTION_MIN_LEVEL
 
 Type: constant
@@ -915,7 +927,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 22](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L22)
+File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 23](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L23)
 ## INFECTION_LEVEL_TOSMELL
 
 Type: constant
@@ -927,7 +939,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 24](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L24)
+File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 25](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L25)
 ## INFECTION_LEVEL_TO_CAN_HEAL
 
 Type: constant
@@ -939,7 +951,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 27](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L27)
+File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 28](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L28)
 ## INFECTION_LIST_DELAY_NEXTLEVEL
 
 Type: constant
@@ -951,7 +963,7 @@ Replaced value:
 ```sqf
 [0, 60*5, 60*6, 60*10, 60*15]
 ```
-File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 29](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L29)
+File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 30](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L30)
 ## INFECTION_LIST_DELAY_NEXTLEVEL
 
 Type: constant
@@ -965,7 +977,7 @@ Replaced value:
 ```sqf
 [0, 30, 30, 30, 60]
 ```
-File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 32](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L32)
+File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 33](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L33)
 # item_clothing.h
 
 ## HEAD
@@ -3431,7 +3443,7 @@ Replaced value:
 ```sqf
 [t,hashMapNew]
 ```
-File: [host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 218](../../../Src/host/GameObjects/Items/Bodyparts/Bodyparts.sqf#L218)
+File: [host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 220](../../../Src/host/GameObjects/Items/Bodyparts/Bodyparts.sqf#L220)
 # CaptiveBase.sqf
 
 ## server_handcuff_internal_random
@@ -3675,7 +3687,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 310](../../../Src/host/GameObjects/Mobs/Mob.sqf#L310)
+File: [host\GameObjects\Mobs\Mob.sqf at line 311](../../../Src/host/GameObjects/Mobs/Mob.sqf#L311)
 # MobGhost.sqf
 
 ## hasBP(idx)
@@ -3971,7 +3983,7 @@ Replaced value:
 ```sqf
 ["emt", #t___ ,"onActEmote"] call ie_actions_regNew
 ```
-File: [host\GameObjects\Mobs\Mob_Emotes.sqf at line 1006](../../../Src/host/GameObjects/Mobs/Mob_Emotes.sqf#L1006)
+File: [host\GameObjects\Mobs\Mob_Emotes.sqf at line 1024](../../../Src/host/GameObjects/Mobs/Mob_Emotes.sqf#L1024)
 # Mob_Events.sqf
 
 ## use_protect_log
@@ -4175,7 +4187,7 @@ Replaced value:
 ```sqf
 _oth = getSelf(prevname); setSelf(prevname,getSelf(nextname)); setSelf(nextname,_oth)
 ```
-File: [host\GameObjects\Mobs\Mob_Inventory.sqf at line 154](../../../Src/host/GameObjects/Mobs/Mob_Inventory.sqf#L154)
+File: [host\GameObjects\Mobs\Mob_Inventory.sqf at line 169](../../../Src/host/GameObjects/Mobs/Mob_Inventory.sqf#L169)
 # Mob_Life.sqf
 
 ## checktime_nextcall

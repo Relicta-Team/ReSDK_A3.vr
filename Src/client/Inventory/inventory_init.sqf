@@ -30,6 +30,18 @@ inventory_sloticons_default = [
 	PIC_PATH("hand_r")
 ];
 
+inventory_const_dirtOverlayIcon = PIC_PATH("dirt_overlay");
+inventory_const_partkeyToSlots = [
+	["bd",[INV_BACKPACK,INV_BACK,INV_CLOTH,INV_BELT,INV_ARMOR]],
+	["hd",[INV_HEAD,INV_FACE]],
+	["lh",INV_HAND_L],
+	["rh",INV_HAND_R]
+];
+
+inventory_slotdataDirt = inventory_const_partkeyToSlots apply {[_x select 0,1]};
+
+invenotry_commitNowAllGerms = false;//используется для быстрого применения грязи при открытии инвентаря
+
 inventory_openModeSlotsId = [INV_BACKPACK,INV_ARMOR,INV_HEAD,INV_BACK,INV_CLOTH,INV_FACE,INV_BELT];
 
 private _invSize = count inventory_sloticons_default;

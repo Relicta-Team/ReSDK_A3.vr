@@ -103,7 +103,9 @@ _onClientChangeCharSetting = {
 	if equals(_client,nullPtr) exitWith {
 		errorformat("cm::onClientChangeCharSetting<RPC>() - Cant find client with id %1",_owner);
 	};
-
+	if (_settingName in getVar(_client,lockedSettings)) exitwith {
+		callFuncParams(_client,localSay,"Вам запрещено изменять это!" arg "error");
+	};
 	callFuncParams(_client,setCharSetting,_settingName arg _value)
 
 }; rpcAdd("onClientChangeCharSetting",_onClientChangeCharSetting);

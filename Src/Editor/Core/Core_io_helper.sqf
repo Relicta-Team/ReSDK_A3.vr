@@ -370,8 +370,12 @@ function(winapi_setWinHeader)
 	if (cfg_debug_devMode) then {
 		_debugText = " [DEVELOPMENT MODE]";
 	};
+	private _devflag = "";
+	if ISDEVBUILD then {
+		_devflag = "    [DEVELOPMENT BRANCH]";
+	};
 	["WorkspaceHelper","init",[
-		format["%1%3, Build time %2",Core_version_name,__DATE_STR__,_debugText],
+		format["%1%3, Build time %2",Core_version_name + _devflag,__DATE_STR__,_debugText],
 		getMissionPath core_path_icon],
 	true] call rescript_callCommand;
 }
