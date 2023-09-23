@@ -93,14 +93,14 @@ cd_openSendCommandWindow = {
 	ctrlSetFocus _input;
 
 	//commands history
-	_d setVariable ["_input",_input];
-	_d displayAddEventHandler ["KeyDown",{
+	_d setVariable ["_input_cmdhandler",_input];
+	private _handle_rem = _d displayAddEventHandler ["KeyDown",{
 		_wid = _this select 0;
 		_key = _this select 1;
 		_shift = _this select 2;
 		_locked = false;
 		_backjump = false; _changed = false;
-		_input = _wid getvariable "_input";
+		_input = _wid getvariable "_input_cmdhandler";
 		_send = _input getvariable "send";
 		_selectedCmd = _input getvariable ["selectedCmd",""];
 		
@@ -171,6 +171,7 @@ cd_openSendCommandWindow = {
 			true
 		} else {trace("nonlocked finalized"); false};
 	}];
+	_d setvariable ["_handle_rem_onpress",_handle_rem];
 
 	//list commands
 	#ifdef EDITOR
@@ -251,6 +252,12 @@ cd_openSendCommandWindow = {
 
 cd_closeSendCommandWindow = {
 	if (getDisplay getVariable ["cd_sendCommand_isLobbyContext",false]) exitWith {
+
+		private _handle_rem = getDisplay getvariable ["_handle_rem_onpress",-1];
+		if (_handle_rem != -1) then {
+			getDisplay displayRemoveEventHandler ["KeyDown",_handle_rem];
+		};
+
 		getDisplay setVariable ["cd_sendCommand_isLobbyContext",false];
 		[getDisplay getVariable ["cd_sendCommand_lobbyModeCtg",widgetNull]] call deleteWidget;
 		[false] call lobby_sysSetEnable;

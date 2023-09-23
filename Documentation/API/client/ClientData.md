@@ -1565,7 +1565,7 @@ Replaced value:
 ```sqf
 _cd_map_dataCode = []; cd_commands_localCommandsList set [name,_cd_map_dataCode]; _cd_map_dataCode pushBack
 ```
-File: [client\ClientData\SendCommand.sqf at line 284](../../../Src/client/ClientData/SendCommand.sqf#L284)
+File: [client\ClientData\SendCommand.sqf at line 291](../../../Src/client/ClientData/SendCommand.sqf#L291)
 ## arguments
 
 Type: constant
@@ -1577,7 +1577,7 @@ Replaced value:
 ```sqf
 _args
 ```
-File: [client\ClientData\SendCommand.sqf at line 286](../../../Src/client/ClientData/SendCommand.sqf#L286)
+File: [client\ClientData\SendCommand.sqf at line 293](../../../Src/client/ClientData/SendCommand.sqf#L293)
 ## cd_commandHistoryBuffer
 
 Type: Variable
@@ -1601,7 +1601,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\ClientData\SendCommand.sqf at line 282](../../../Src/client/ClientData/SendCommand.sqf#L282)
+File: [client\ClientData\SendCommand.sqf at line 289](../../../Src/client/ClientData/SendCommand.sqf#L289)
 ## cd_openSendCommandWindow
 
 Type: function
@@ -1617,7 +1617,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\SendCommand.sqf at line 252](../../../Src/client/ClientData/SendCommand.sqf#L252)
+File: [client\ClientData\SendCommand.sqf at line 253](../../../Src/client/ClientData/SendCommand.sqf#L253)
 ## cd_openAhelp
 
 Type: function
@@ -1625,7 +1625,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\SendCommand.sqf at line 261](../../../Src/client/ClientData/SendCommand.sqf#L261)
+File: [client\ClientData\SendCommand.sqf at line 268](../../../Src/client/ClientData/SendCommand.sqf#L268)
 # VersionViewer.sqf
 
 ## versionviewer_timeout_init_clientname

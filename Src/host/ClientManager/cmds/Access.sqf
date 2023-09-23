@@ -427,3 +427,119 @@ addCommandWithDescription("kick",ACCESS_ADMIN,"Кикает игрока с се
 	callFunc(_cli,getOwner) call cm_serverKickById;
 	callFuncParams(thisClient,localSay,"Выполнено" arg "system");
 };
+
+addCommandWithDescription("bancharsetting",ACCESS_ADMIN,"Забанить человеку определенную настройку персонажа. В параметрах указывается имя аккаунта")
+{
+	private _uid = [args,""] call db_NickToUid;
+	if (_uid == "") exitwith {
+		callFuncParams(thisClient,localSay,"Неизвестное имя" arg "system");
+	};
+
+	private _dat = ["Выберите какую настройку баним для '"+args+"':"];
+	
+	_dat pushback ("Имя|name,"+args);
+	_dat pushBack ("Пол|gender,"+args);
+	_dat pushBack ("Лицо|face,"+args);
+	
+	private _handler = {
+		private thisClient = ifcheck(isTypeOf(this,ServerClient),this,getSelf(client));
+		callSelf(CloseMessageBox);
+		(_value splitString ",") params ["_setting",["_userName",""]];
+
+		if (_userName=="") exitwith {
+			callFuncParams(thisClient,localSay,"Ошибка имени" arg "system");
+		};
+
+		private _cli = _userName call cm_findClientByName;
+		if !isNullReference(_cli) then {
+			if callFunc(_cli,isInLobby) then {
+				callFuncParams(_cli,forceDisconnect,"Вам заблокировали одну из настроек персонажа. Перезайдите на сервер.");
+			};
+			
+			if (_setting == "name") then {
+				callFuncParams(_cli,setCharSetting,"r-name");
+			};
+			if (_setting == "gender") then {
+				callFuncParams(_cli,setCharSetting,_setting arg 0); //reset to man
+			};
+			if (_setting == "face") then {
+				callFuncParams(_cli,setCharSetting,_setting arg "rand"); //set face to random
+			};
+
+			//удаляем всех персонажей...
+			{
+				getVar(_cli,charSettingsTemplates) set [_foreachIndex,null];
+			} foreach array_copy(getVar(_cli,charSettingsTemplates));
+
+			//обновляем значение
+			private _newidx = getVar(_cli,lockedSettings) pushBackUnique _setting;
+			callFuncParams(thisClient,localSay,"Выполнено - " + (str(_newidx!=-1)) arg "system");
+		} else {
+			private _curlocklist = [_userName] call db_getClientLockedSettings;
+			if ((_curlocklist pushBackUnique _setting)!=-1) then {
+				[_userName,_curlocklist] call db_updateClientLockedSettings;
+			};
+		};
+	};
+
+	if (count _dat == 1) exitWith {
+		callFuncParams(thisClient,localSay,"Пустой список" arg "error");
+	};
+	callFuncParams(thisClient,ShowMessageBox,"Listbox" arg _dat arg _handler);
+};
+
+addCommandWithDescription("unbancharsetting",ACCESS_ADMIN,"Разбанить человеку определенную настройку персонажа")
+{
+	private _uid = [args,""] call db_NickToUid;
+	if (_uid == "") exitwith {
+		callFuncParams(thisClient,localSay,"Неизвестное имя" arg "system");
+	};
+	private _cli = args call cm_findClientByName;
+	if isNullReference(_cli) exitwith {
+		callFuncParams(thisClient,localSay,"Не найден клиент на сервере - " + args arg "system");
+	};
+	private _dat = ["Выберите какую настройку разбаним для '"+args+"':"];
+	{
+		_dat pushBack (format["%1|%1,%2",_x,args]);
+	} foreach getVar(_cli,lockedSettings);
+
+	private _handler = {
+		private thisClient = ifcheck(isTypeOf(this,ServerClient),this,getSelf(client));
+		callSelf(CloseMessageBox);
+		(_value splitString ",") params ["_setting",["_userName",""]];
+
+		if (_userName=="") exitwith {
+			callFuncParams(thisClient,localSay,"Ошибка имени" arg "system");
+		};
+		private _cli = _userName call cm_findClientByName;
+		if !isNullReference(_cli) then {
+			private _remsetidx = getVar(_cli,lockedSettings) find _setting;
+			if (_remsetidx!=-1) then {
+				getVar(_cli,lockedSettings) deleteAt _remsetidx;
+				callFuncParams(thisClient,localSay,"Выполнено удаление заблокированной настройки для "+_userName arg "system");
+			} else {
+				callFuncParams(thisClient,localSay,"Настройка "+_setting+" не найдена для "+_userName arg "system");
+			};
+		} else {
+			callFuncParams(thisClient,localSay,"Не найден клиент на сервере - " + _userName arg "system");
+		};
+	};
+
+	if (count _dat == 1) exitWith {
+		callFuncParams(thisClient,localSay,"Пустой список" arg "error");
+	};
+	callFuncParams(thisClient,ShowMessageBox,"Listbox" arg _dat arg _handler);
+};
+
+
+addCommandWithDescription("getbancharsettings",ACCESS_ADMIN,"Получить заблокированные настройки аккаунта. В параметрах указывается имя аккаунта")
+{
+	private _list = [];
+	private _cli = args call cm_findClientByName;
+	if !isNullReference(_cli) then {
+		_list = array_copy(getVar(_cli,lockedSettings));
+	} else {
+		_list = ([args] call db_getClientLockedSettings);
+	};
+	callFuncParams(thisClient,ShowMessageBox,"Text" arg "Заблокированные роли "+args+": "+sbr+(_list joinString sbr));
+};

@@ -166,7 +166,6 @@ class(ServerClient) /*extends(NetObject)*/
 			[this,false] call gm_removeClientFromEmbark;
 		};
 
-
 		[format["Disconnected - %1 (netid: %2; uid: %3)",getSelf(name),getSelf(id),getSelf(uid)]] call discLog;
 	};
 
@@ -242,8 +241,8 @@ class(ServerClient) /*extends(NetObject)*/
 		setSelf(state,_newState);
 	};
 
-	getter_func(isInLobby,getSelf(state) == "lobby");
-	getter_func(isInGame,getSelf(state) == "ingame");
+	getter_func(isInLobby,getSelf(state) == "lobby" && callSelf(isConnected));
+	getter_func(isInGame,getSelf(state) == "ingame" && callSelf(isConnected));
 
 	func(onConnected)
 	{
@@ -417,7 +416,9 @@ class(ServerClient) /*extends(NetObject)*/
 		]);
 		//antag - 0 none; 1 hide, 2 unical, 3 all
 
-	var(charSettingsTemplates,[null arg null arg null arg null arg null]);
+	var(charSettingsTemplates,[null arg null arg null arg null arg null]); //заготовленные шаблоны персонажей
+
+	var(lockedSettings,[]);//locked char settings (this settings current client can't change)
 
 	func(setCharSetting) {
 		objParams_2(_settingName,_value);
@@ -433,8 +434,10 @@ class(ServerClient) /*extends(NetObject)*/
 			private _newName = ([_gender] call naming_getRandomName) joinString " ";
 			_hashSettings set [_settingName,_newName];
 
-			private _owner = callSelf(getOwner);
-			rpcSendToClient(_owner,"onCharSettingCallback",["name" arg _newName])
+			if callSelf(isInLobby) then {
+				private _owner = callSelf(getOwner);
+				rpcSendToClient(_owner,"onCharSettingCallback",["name" arg _newName])
+			};
 		};
 		
 		//Ограничение на отыгранные раунды
@@ -485,8 +488,10 @@ class(ServerClient) /*extends(NetObject)*/
 			if (_result) then {
 				_hashSettings set [_settingName,_value];
 
-				private _owner = callSelf(getOwner);
-				rpcSendToClient(_owner,"onCharSettingCallback",[_settingName arg _value])
+				if callSelf(isInLobby) then {
+					private _owner = callSelf(getOwner);
+					rpcSendToClient(_owner,"onCharSettingCallback",[_settingName arg _value])
+				};
 			};
 		};
 
@@ -498,20 +503,26 @@ class(ServerClient) /*extends(NetObject)*/
 		_hashSettings set [_settingName,_value];
 
 		private _owner = callSelf(getOwner);
-		rpcSendToClient(_owner,"onCharSettingCallback",[_settingName arg _value]);
+		if callSelf(isInLobby) then {
+			rpcSendToClient(_owner,"onCharSettingCallback",[_settingName arg _value]);
+		};
 
 		//При смене пола устанавливаем лицо на рандомное
 		//И имя тоже
 		if (_settingName == "gender") then {
 			private _newFace = ["face","rand"];
 			_hashSettings set _newFace;
-			rpcSendToClient(_owner,"onCharSettingCallback",_newFace);
+			if callSelf(isInLobby) then {
+				rpcSendToClient(_owner,"onCharSettingCallback",_newFace);
+			};
 
 			private _gender = _hashSettings get "gender";
 			private _newName = ([_gender] call naming_getRandomName) joinString " ";
 			_hashSettings set ["name",_newName];
 
-			rpcSendToClient(_owner,"onCharSettingCallback",["name" arg _newName]);
+			if callSelf(isInLobby) then {
+				rpcSendToClient(_owner,"onCharSettingCallback",["name" arg _newName]);
+			};
 		};
 	};
 
