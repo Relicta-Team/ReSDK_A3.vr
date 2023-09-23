@@ -18,10 +18,19 @@
 #ifdef EDITOR
 	#define ISDEVBUILD (0 call{ \
 		private _file = ".git\head"; \
-		if (FILEEXISTS _file) then { \
-			"refs/heads/development" in (LOADFILE _file) \
+		private _pattern = "refs/heads/development"; \
+		if (is3DEN) then { \
+			if ([_file] call file_exists) then { \
+				_pattern in ([_file] call file_read) \
+			} else { \
+				false \
+			};\
 		} else { \
-			false \
+			if (FILEEXISTS _file) then { \
+				_pattern in (LOADFILE _file) \
+			} else { \
+				false \
+			}; \
 		}; \
 	})
 #else
