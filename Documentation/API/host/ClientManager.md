@@ -368,7 +368,7 @@ Replaced value:
 ```sqf
 cm_findClientBy##by_func = { \
 	params ["_id",["_checkInDisconnected",false]]; \
-	private _rez = cm_allClients findif {getVar(_x,var) isequalto _id}; \
+	private _rez = cm_allClients findif {getVar(_x,var) comparer _id}; \
 	if (_rez == -1) exitWith { \
 		if (!_checkInDisconnected) exitWith {nullPtr}; \
 		private _listDisc = values cm_disconnectedClients; \
