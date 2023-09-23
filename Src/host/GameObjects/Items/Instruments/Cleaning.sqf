@@ -38,10 +38,20 @@ class(BrushCleaner) extends(Item)
 		if isNullReference(_part) exitWith {
 			callFuncParams(_usr,localSay,"Нет такой части тела" arg "error");
 		};
+		private _ahp = callFuncParams(_usr,getActiveHandPart,false);
+		if isNullReference(_ahp) exitwith {
+			callFuncParams(_usr,localSay,"Нечем чистить..." arg "error");
+		};
+		if (equals(_targ,_usr) && equals(_part,_ahp)) exitwith {
+			callFuncParams(_usr,localSay,"Не достать." arg "error");
+		};
 
 		setVar(_part,germs,(getVar(_part,germs) - randInt(20,40)) max 0);
 		callFuncParams(_usr,meSay,"чистит "+ifcheck(equals(_targ,_usr),"себе",callFuncParams(_targ,getNameEx,"кому"))+" "+callFunc(_part,getName));
 		callFuncParams(_usr,playSound,"UNCATEGORIZED\clean" arg getRandomPitchInRange(0.9,1.3));
+		
+		callFunc(_targ,syncGermsVisual);
+		
 	};
 
 endclass

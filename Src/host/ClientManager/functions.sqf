@@ -60,7 +60,7 @@ cm_forsakens = ["76561198096453655","76561198072294284","76561198156220735","765
 #define __compare_equality_soft ==
 #define protoFind(by_func,var,comparer) cm_findClientBy##by_func = { \
 	params ["_id",["_checkInDisconnected",false]]; \
-	private _rez = cm_allClients findif {getVar(_x,var) isequalto _id}; \
+	private _rez = cm_allClients findif {getVar(_x,var) comparer _id}; \
 	if (_rez == -1) exitWith { \
 		if (!_checkInDisconnected) exitWith {nullPtr}; \
 		private _listDisc = values cm_disconnectedClients; \

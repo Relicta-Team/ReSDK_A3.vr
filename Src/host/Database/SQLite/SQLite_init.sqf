@@ -11,7 +11,7 @@
 #include "SQLite_manager.sqf"
 
 //!версия базы данных (не расширения)
-db_version = "1.0";
+db_version = "2.0";
 //true будет выводить каждый запрос в дебаг консоль
 db_canUseQueryLogToStdout = false;
 
@@ -47,6 +47,10 @@ db_init = {
 		if (_ver != db_version) exitwith {
 			errorformat("Database version mismatch. Expected: %1, found: %2", db_version arg _ver);
 			["Database version mismatch. Expected: %1, found: %2", db_version, _ver] call logCritical;
+			#ifdef EDITOR
+			["Версия базы данных отличается от используемой в '%3'.%4%4Текущая версия: %1; Используемая %2;%4%4Обновите БД через ReMaker, либо скопируйте базу вручную, взяв её из 'ReMaker\Deploy\db'",
+			_ver,db_version,DB_PATH,endl] call messageBox;
+			#endif
 			appExit(APPEXIT_REASON_CRITICAL);
 		};
 		["Database version - %1",_ver] call logInfo;
