@@ -272,9 +272,9 @@ regex_isMatch = {
 };
 
 regex_getFirstMatch = {
-	params ["_txt","_pattern"];
+	params ["_txt","_pattern",["_optMath",0]];
 	private _out = _txt regexfind [_pattern,0];
-	if (count _out > 0) exitWith {_out select 0 select 0 select 0};
+	if (count _out > 0) exitWith {_out select 0 select _optMath select 0};
 	""
 };
 
