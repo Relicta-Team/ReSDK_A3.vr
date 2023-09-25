@@ -381,6 +381,7 @@ Type: function
 Description: 
 - Param: _txt
 - Param: _pattern
+- Param: _optMath (optional, default 0)
 
 File: [host\CommonComponents\!PreInit.sqf at line 274](../../../Src/host/CommonComponents/!PreInit.sqf#L274)
 ## regex_replace
