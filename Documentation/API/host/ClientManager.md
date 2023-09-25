@@ -828,46 +828,6 @@ Description:
 
 
 File: [host\ClientManager\cmds\Common.sqf at line 164](../../../Src/host/ClientManager/cmds/Common.sqf#L164)
-# EditorAndDebug.sqf
-
-## cmd_internal_debug_protomaker_versionrequired
-
-Type: Variable
-
-> Exists if **DEBUG** defined
-
-Description: 
-
-
-Initial value:
-```sqf
-"0.7.687"
-```
-File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 39](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L39)
-## cmd_internal_debug_protomaker_listmodels
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-hashSet_createEmpty()
-```
-File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 40](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L40)
-## cmd_internal_debug_tobjmarker_versionrequired
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-"0.7.655"
-```
-File: [host\ClientManager\cmds\EditorAndDebug.sqf at line 115](../../../Src/host/ClientManager/cmds/EditorAndDebug.sqf#L115)
 # Reflect.sqf
 
 ## isvar(x)
