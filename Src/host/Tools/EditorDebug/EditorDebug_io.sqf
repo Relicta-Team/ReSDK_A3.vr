@@ -3,17 +3,22 @@
 // sdk.relicta.ru
 // ======================================================
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+    Описание:
+        Переписанные функции файловой системы, доступные в симуляции и на сервере
+    
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 file_const_defaultDelimeter = "";
 
 file_const_defaultAsyncWriteTimeout = 5;
 
 #define PRINT_FILEWRITE_ERROR_REASON
-#define EXTENDED_LOGGING_ASYNCWRITE
-#define EXTENDED_LOGGING_ASYNCCOPY
-#define EXTENDED_LOGGING_ASYNCUNLOCK
+// #define EXTENDED_LOGGING_ASYNCWRITE
+// #define EXTENDED_LOGGING_ASYNCCOPY
+// #define EXTENDED_LOGGING_ASYNCUNLOCK
 
-function(file_open)
-{
+file_open = {
 	params ["_path",["_isRelative",true],["_args",""]];
 	
 	if (_isRelative) then {_path = getMissionPath _path};
@@ -31,10 +36,9 @@ function(file_open)
 	};
 
 	true
-}
+};
 
-function(file_openReturn)
-{
+file_openReturn = {
 	params ["_path",["_isRelative",true],["_args",""]];
 
 	if (_isRelative) then {_path = getMissionPath _path};
@@ -47,12 +51,11 @@ function(file_openReturn)
 		_args = _args regexReplace["""/g",file_const_defaultDelimeter];
 		parseNumber(["FileManager","OpenReturn",[_path,_args,file_const_defaultDelimeter],true] call rescript_callCommand);
 	};
-}
+};
 
 // Example: ["temp.txt","temp2.txt",true] call file_copy
 // this cannot copy directory
-function(file_copy)
-{
+file_copy = {
 	params ["_path","_dest","_relInfo",["_canOverride",true]];
 	
 	if isNullVar(_relInfo) then {_relInfo = true};
@@ -65,10 +68,9 @@ function(file_copy)
 	(["FileManager","Copy",[
 		_path,_dest,_canOverride
 	],true] call rescript_callCommand)=="true";
-}
+};
 
-function(file_move)
-{
+file_move = {
 	params ["_path","_dest","_relInfo"];
 	
 	if isNullVar(_relInfo) then {_relInfo = true};
@@ -81,15 +83,13 @@ function(file_move)
 	(["FileManager","Move",[
 		_path,_dest
 	],true] call rescript_callCommand)=="true";
-}
+};
 
-function(dir_move)
-{
+dir_move = {
 	_this call file_move;
-}
+};
 
-function(file_getFileList)
-{
+file_getFileList = {
 	params ["_path",["_isRelative",true],["_searchOption","*.*"],["_useDeepSearch",false]];
 
 	if (_isRelative) then {_path = getMissionPath _path};
@@ -103,19 +103,17 @@ function(file_getFileList)
 	};
 	
 	_retList
-}
+};
 
-function(file_read)
-{
+file_read = {
 	params ["_path",["_isRelative",true]];
 	if (_isRelative) then {_path = getMissionPath _path};
 
 	private _data = ["FileManager","Read",[_path,file_const_defaultDelimeter],true] call rescript_callCommand;
 	(_data regexReplace [file_const_defaultDelimeter+ "/g",""""])
-}
+};
 
-function(file_write)
-{
+file_write = {
 	params ["_path","_data",["_isRelative",true]];
 	
 	if (_isRelative) then {_path = getMissionPath _path};
@@ -123,7 +121,7 @@ function(file_write)
 	//before check
 	if ([_path,false] call file_isLocked) exitwith {
 		#ifdef PRINT_FILEWRITE_ERROR_REASON
-		["%1 - Cant write to %2 - locked",__FUNC__,_path] call printError;
+        errorformat("%1 - Cant write to %2 - locked","file_write" arg _path);
 		#endif
 		
 		false
@@ -133,10 +131,9 @@ function(file_write)
 	["FileManager","Write",[_path,_data,file_const_defaultDelimeter]] call rescript_callCommandVoid;
 
 	true
-}
+};
 
-function(file_delete)
-{
+file_delete = {
 	params ["_path"]; //здесь обязательная защита от удаления файлов за директорией sdk
 	_path = getMissionPath _path;
 	if ([_path,false] call file_exists) then {
@@ -145,10 +142,9 @@ function(file_delete)
 	} else {
 		false
 	};
-}
+};
 
-function(folder_delete)
-{
+folder_delete = {
 	params ["_path"]; //обязательная защита
 	_path = getMissionPath _path;
 	if ([_path,false] call folder_exists) then {
@@ -157,39 +153,35 @@ function(folder_delete)
 	} else {
 		false
 	}
-}
+};
 
-function(file_exists)
-{
+file_exists = {
 	params ["_path",["_isRelative",true]];
 	if (_isRelative) then {_path = getMissionPath _path};
 	(["FileManager","Exists",[_path],true] call rescript_callCommand)=="true"
-}
+};
 
-function(folder_exists)
-{
+folder_exists = {
 	params ["_path",["_isRelative",true]];
 	if (_isRelative) then {_path = getMissionPath _path};
 	(["FileManager","ExistsDir",[_path],true] call rescript_callCommand)=="true"
-}
+};
 
 
-function(file_isLocked)
-{
+file_isLocked = {
 	params ["_path",["_isRelative",true]];
 	if (_isRelative) then {_path = getMissionPath _path};
 
 	(["WorkspaceHelper","checkfilelock",[_path],true] call rescript_callCommand)=="false"
-}
+};
 
-function(file_clearFileLock)
-{
+file_clearFileLock = {
 	["FileManager","FreeFileLock",[]] call rescript_callCommandVoid;
-}
+};
 
-// async functions
-function(file_writeAsync)
-{
+//! async functions - do not use
+/*
+file_writeAsync = {
 	params ["_path","_data",["_isRelative",true],["_onWrite",{}],["_onTimeout",{}]];
 	if ([_path,_isRelative] call file_isLocked) then {
 		startAsyncInvoke
@@ -237,10 +229,9 @@ function(file_writeAsync)
 		[_path,_data,_isRelative] call file_write;
 		[true,_path] call _onWrite;
 	};
-}
+};
 
-function(file_copyAsync)
-{
+file_copyAsync = {
 	private _thisParams = array_copy(_this);
 	params ["_path","_dest","_relInfo",["_onCopy",{}],["_onTimeout",{}]];
 
@@ -311,10 +302,9 @@ function(file_copyAsync)
 	};
 
 	true
-}
+};
 
-function(file_unlockAsync)
-{
+file_unlockAsync = {
 	params ["_path","_ctx",["_isRelative",true],["_onUnlocked",{}],["_onTimeout",{}]];
 	if ([_path,_isRelative] call file_isLocked) then {
 		startAsyncInvoke
@@ -360,22 +350,5 @@ function(file_unlockAsync)
 	} else {
 		_ctx call _onUnlocked;
 	};
-}
-
-//window helper
-
-function(winapi_setWinHeader)
-{
-	private _debugText = "";
-	if (cfg_debug_devMode) then {
-		_debugText = " [DEVELOPMENT MODE]";
-	};
-	private _devflag = "";
-	if ISDEVBUILD then {
-		_devflag = "; [--------- DEVELOPMENT BRANCH ---------] ";
-	};
-	["WorkspaceHelper","init",[
-		format["%1%3, Build time %2%4",Core_version_name,__DATE_STR__,_debugText,_devflag],
-		getMissionPath core_path_icon],
-	true] call rescript_callCommand;
-}
+};
+*/
