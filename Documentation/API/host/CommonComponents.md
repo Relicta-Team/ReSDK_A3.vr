@@ -137,7 +137,7 @@ if !(value) exitWith { \
 		setLastError(_format); \
 	};
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 392](../../../Src/host/CommonComponents/!PreInit.sqf#L392)
+File: [host\CommonComponents\!PreInit.sqf at line 409](../../../Src/host/CommonComponents/!PreInit.sqf#L409)
 ## cprint_usestdout
 
 Type: Variable
@@ -414,6 +414,16 @@ Description:
 - Param: _casesense (optional, default true)
 
 File: [host\CommonComponents\!PreInit.sqf at line 342](../../../Src/host/CommonComponents/!PreInit.sqf#L342)
+## stringReplace
+
+Type: function
+
+Description: 
+- Param: _string (optional, default "")
+- Param: _find (optional, default "")
+- Param: _replace (optional, default "")
+
+File: [host\CommonComponents\!PreInit.sqf at line 349](../../../Src/host/CommonComponents/!PreInit.sqf#L349)
 ## selectBest
 
 Type: function
@@ -423,7 +433,7 @@ Description: Выбирает лучший случай [[1,2,3],{_x > 2}] call 
 - Param: _criteria
 - Param: _return
 
-File: [host\CommonComponents\!PreInit.sqf at line 351](../../../Src/host/CommonComponents/!PreInit.sqf#L351)
+File: [host\CommonComponents\!PreInit.sqf at line 368](../../../Src/host/CommonComponents/!PreInit.sqf#L368)
 ## searchInList
 
 Type: function
@@ -433,7 +443,7 @@ Description:
 - Param: _lambda
 - Param: _defaultReturn
 
-File: [host\CommonComponents\!PreInit.sqf at line 367](../../../Src/host/CommonComponents/!PreInit.sqf#L367)
+File: [host\CommonComponents\!PreInit.sqf at line 384](../../../Src/host/CommonComponents/!PreInit.sqf#L384)
 ## functionalitests_preinit
 
 Type: function
@@ -443,7 +453,7 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 391](../../../Src/host/CommonComponents/!PreInit.sqf#L391)
+File: [host\CommonComponents\!PreInit.sqf at line 408](../../../Src/host/CommonComponents/!PreInit.sqf#L408)
 # Animator.sqf
 
 ## addAnim(name)
