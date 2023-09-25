@@ -88,18 +88,41 @@ ND_INIT(Paper)
 	_txt = [_txt,"Ё","Е"] call stringReplace;
 	_formatedText = "<t font='KursivC' shadow='0' size='1.4' color='#000000'>" + (_txt) + "</t>";
 	[lastNDWidget,_formatedText] call widgetSetText;
-	_hTxt = lastNDWidget call widgetGetTextHeight;
-	[lastNDWidget,[0,0,98,_hTxt + 100]] call widgetSetPosition;
-
+	
+	[lastNDWidget,[0,0,98,100]] call widgetSetPosition;
+	_baseTextH = ctrlTextHeight lastNDWidget;
 
 	regNDWidget(WIDGETGROUP_H,vec4(0,5,100,100-5),_ctg,null);
 	_ctgInside = lastNDWidget;
 	_ctg setVariable ["writewidget",_ctgInside];
 
-	regNDWidget(INPUTMULTI,vec4(0,0,100,70),_ctgInside,null);
+	//ctg textsection (writemode)
+	regNDWidget(WIDGETGROUP_H,vec4(0,0,100,70),_ctgInside,null);
+	_ctgTextSection = lastNDWidget;
+	
+	//readprop (inside writemode)
+	regNDWidget(TEXT,vec4(0,0,98,100),_ctgTextSection,null);
+	[lastNDWidget,_formatedText + format["<t size='1' color='#A600A6'>***конец текста***</t>"]] call widgetSetText;
+	lastNDWidget ctrlSetPositionH (_baseTextH);
+	lastNDWidget ctrlcommit 0;
+
+	//writeprop (inside writemode)
+	regNDWidget(INPUTMULTI,vec4(0,0,98,70),_ctgTextSection,null);
+	lastNDWidget ctrlSetPositionY (_baseTextH);
+	lastNDWidget ctrlcommit 0;
 	_input = lastNDWidget;
 	_ctgInside setVariable ["input",lastNDWidget];
+	//добавление в инпут переноса строки если newline не имеет переноса
+	_replaceCaret = false;
+	if (_bufferedText=="" && !([_txt,sbr+"</t>"] call stringEndWith) && _txt!="") then {
+		_bufferedText = endl+"";
+		_replaceCaret = true;
+	};
 	lastNDWidget ctrlSetText _bufferedText;
+	lastNDWidget setBackgroundColor [0.1,0.1,0.1,.8];
+	if (_replaceCaret) then {
+		lastNDWidget ctrlSetTextSelection [2,0];
+	};
 	lastNDWidget ctrlAddEventHandler ["KeyUp",{
 		params ["_w","_key"];
 		if (_key == KEY_BACKSPACE) exitWith {
