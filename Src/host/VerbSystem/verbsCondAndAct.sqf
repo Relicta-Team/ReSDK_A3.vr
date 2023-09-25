@@ -51,6 +51,7 @@ VERB(undress)
 	cond
 		skipCond(!callFunc(src,isMob));
 		skipCond(!isTypeOf(usr,Mob));
+		skipCond(isImplementFunc(src,onEaterSniff)); //жрунов нельзя раздеть/одеть
 		skipCond(callFunc(src,isActive) && !callFunc(src,isHandcuffed));
 		skipCond(equals(usr,src));
 	act
