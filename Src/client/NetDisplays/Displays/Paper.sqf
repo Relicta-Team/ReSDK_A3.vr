@@ -83,8 +83,11 @@ ND_INIT(Paper)
 
 	regNDWidget(TEXT,WIDGET_FULLSIZE,_ctgInside,null);
 	_txt = ctxParams deleteAt 0;
-	_txt = _txt regexReplace ["ё","е"];
-	[lastNDWidget,"<t font='KursivC' shadow='0' size='1.4' color='#000000'>" + (_txt) + "</t>"] call widgetSetText;
+	//fix 190
+	_txt = [_txt,"ё","е"] call stringReplace;
+	_txt = [_txt,"Ё","Е"] call stringReplace;
+	_formatedText = "<t font='KursivC' shadow='0' size='1.4' color='#000000'>" + (_txt) + "</t>";
+	[lastNDWidget,_formatedText] call widgetSetText;
 	_hTxt = lastNDWidget call widgetGetTextHeight;
 	[lastNDWidget,[0,0,98,_hTxt + 100]] call widgetSetPosition;
 
