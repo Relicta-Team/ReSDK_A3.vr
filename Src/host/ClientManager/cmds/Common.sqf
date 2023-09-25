@@ -74,7 +74,7 @@ addCommandWithDescription("whovoted",PUBLIC_COMMAND,"Узнать кто про�
 
 addCommandWithDescription("getid",PUBLIC_COMMAND,"Получить айди раунда")
 {
-	if (["<","GAME_STATE_PLAY"] call gm_checkState) exitWith {
+	if (["<","GAME_STATE_LOBBY"] call gm_checkState) exitWith {
 		callFuncParams(thisClient,localSay,"Ещё не пришло время" arg "error");
 	};
 	callFuncParams(thisClient,localSay,"Айди смены:" + str gm_currentModeId arg "system");
