@@ -120,7 +120,7 @@ _4040_997073639_7851626_55978 = ['WoodenBucket',[4041,3639.79,31.791,true],0,[-0
 ['WireCutters',[4070.79,3645.61,34.2894,true],45,[-0.00568157,0.00421738,0.999975]] call InitItem; 
 ['Screwdriver',[4070.79,3645.49,34.2872,true],55,[-0.00486291,0.00513991,0.999975]] call InitItem; 
 ['ToolStraigthPipe',[4068.94,3645.84,29.2528],85,[0,0,1]] call InitItem; 
-['BoneStraightener',[4069.99,3641.7,29.6007],330,[0,0,1]] call InitItem; 
+['BoneStraightener',[4070.42,3645.7,29.6323],340,[0,0,1]] call InitItem; 
 ['Calculator',[4069.28,3641.98,29.5011],120,[0,0,1]] call InitItem; 
 ['Egg',[4076.31,3645.05,34.3232,true],0,[0.00129158,-0.00226384,0.999997]] call InitItem; 
 ['Muka',[4076.3,3645.31,29.6632],0,[0,0,1]] call InitItem; 
@@ -140,6 +140,52 @@ _4075_738533647_1945828_68387 = ['FabricBagBig2',[4075.74,3647.19,28.6839],335,[
 ['MilkBottle',[4076.3,3645.79,34.8118,true],0,[0.00129158,-0.00226384,0.999997]] call InitItem; 
 ['MilkBottle',[4076.25,3645.87,34.8132,true],0,[0.00129158,-0.00226384,0.999997]] call InitItem; 
 ['Egg',[4076.26,3645.43,34.3424,true],0,[0.00129158,-0.00226384,0.999997]] call InitItem; 
+['RopeItem',[4069.03,3646.28,29.9326],285,[0,0,1]] call InitItem; 
+['Zhivoglot',[4076.27,3646.91,29.2264],0,[0,0,1]] call InitItem; 
+['Zhivoglot',[4076.25,3646.62,29.211],0,[0,0,1]] call InitItem; 
+['Butter',[4076.27,3646.14,29.2264],30,[0,0,1]] call InitItem; 
+['Butter',[4076.28,3646.29,29.2264],0,[0,0,1]] call InitItem; 
+['CampfireCreator',[4076.21,3644.07,29.8091],355,[0,0,1]] call InitItem; 
+['CampfireCreator',[4076.2,3643.95,29.8091],20,[0,0,1]] call InitItem; 
+['CampfireCreator',[4076.2,3643.81,29.8091],330,[0,0,1]] call InitItem; 
+['CampfireCreator',[4076.2,3643.67,29.8091],0,[0,0,1]] call InitItem; 
+['CampfireCreator',[4076.2,3643.54,29.8091],315,[0,0,1]] call InitItem; 
+['CuttingBoard',[4070.44,3646.23,29.9801],20,[0,0,1]] call InitItem; 
+['Bread',[4076.3,3645.87,29.2271],120,[0,0,1]] call InitItem; 
+['Bread',[4076.2,3645.64,29.2271],0,[0,0,1]] call InitItem; 
+['LampKeroseneDisabled',[4076.12,3644.76,30.14],0,[0,0,1]] call InitItem; 
+['LampKeroseneDisabled',[4076.14,3644.41,30.1569],40,[0,0,1]] call InitItem; 
+['Rag',[4068.99,3647.1,29.9326],285,[0,0,1]] call InitItem; 
+['Rag',[4069,3646.77,29.9326],310,[0,0,1]] call InitItem; 
+['AmmoBoxPBMNonLethal',[4068.98,3645.57,29.9251],35,[0,0,1]] call InitItem; 
+['AmmoBoxPBMNonLethal',[4068.98,3645.58,30.0481],25,[0,0,1]] call InitItem; 
+['AmmoBoxShotgunNonLethal',[4069.02,3645.91,29.9326],0,[0,0,1]] call InitItem; 
+['AmmoBoxShotgunNonLethal',[4069.02,3645.92,30.0562],10,[0,0,1]] call InitItem; 
+['SaltShaker',[4076.27,3645.68,29.6771],0,[0,0,1]] call InitItem; 
+['SaltShaker',[4076.33,3645.58,29.6771],0,[0,0,1]] call InitItem; 
+['SaltShaker',[4076.23,3645.57,29.6771],0,[0,0,1]] call InitItem; 
+['TorchDisabled',[4076.16,3644.69,29.8091],314.036,[0,0,1]] call InitItem; 
+['TorchDisabled',[4076.19,3644.56,29.8091],313.581,[0,0,1]] call InitItem; 
+['TorchDisabled',[4076.2,3644.45,29.8091],310,[0,0,1]] call InitItem; 
+['RopeItem',[4069,3646.49,29.9326],315,[0,0,1]] call InitItem; 
+['SigaretteDisabled',[4068.79,3641.48,30.2483],0,[0,0,1]] call InitItem; 
+['SamokrutkaDisabled',[4068.82,3641.52,30.2467],0,[0,0,1]] call InitItem; 
+['SamokrutkaDisabled',[4068.85,3641.52,30.2471],20,[0,0,1]] call InitItem; 
+['MatchBox',[4068.74,3641.45,30.2483],0,[0,0,1]] call InitItem; 
+['KitchenKnife',[4072.37,3643.39,38.0105,true],[-0.965926,-0.258819,-1.46198e-006],[-0.258819,0.965926,7.29254e-008]] call InitItem; 
+['MetalCup',[4072.45,3642.7,32.9876],325,[0,0,1]] call InitItem; 
+['MilkBottle',[4072.22,3642.73,32.9968],0,[0,0,1]] call InitItem; 
+['SoupPlate',[4072.18,3642.99,33.0005],0,[0,0,1]] call InitItem; 
+['Candle',[4072.2,3643.48,38.0823,true],0.143542,[0.00934808,0.00640142,0.999936]] call InitItem; 
+['TorchDisabled',[4072.65,3643.98,32.7517],70,[0,0,1]] call InitItem; 
+['BrushCleaner',[4072.17,3643.69,32.7501],290,[0,0,1]] call InitItem; 
+['CuttingBoard',[4072.46,3643.07,32.9973],350,[0,0,1]] call InitItem; 
+['BreadChopped',[4072.46,3643,33.0204],215,[0,0,1]] call InitItem; 
+_4067_638923641_8388729_59827 = ['ContainerGreen',[4067.64,3641.84,29.5983],330,[0,0,1]] call InitStruct; 
+['LampKeroseneDisabled',[4073.62,3641.56,32.171],130,[0,0,1]] call InitItem; 
+if ((random 1) < 0.3) then {
+	['Melteshonok',[4075.96,3647.13,32.6437],215.116,[0,0,1]] call InitItem; 
+};
 ['BigConcretePanel',[4064.7,3644.24,31.4772,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
 ['ConcreteWallWithNetfence',[4066.9,3645.16,29.1987],90,[0,0,1]] call InitStruct; 
 ['ConcreteWallWithNetfence',[4066.9,3645.16,36.3032,true],[-1,-9.65598e-007,4.06129e-007],[-4.06126e-007,-2.94845e-006,-1]] call InitStruct; 
@@ -161,33 +207,26 @@ _4074_545413642_7612328_64822 = ['SquareWoodenBox',[4074.55,3642.76,28.6482],0,[
 ['MediumWoodenWall',[4074.72,3647.7,28.0416],9.39151e-006,[0,0,1]] call InitStruct; 
 ['WoodenChair',[4070.35,3640.45,28.6821],150,[0,0,1]] call InitItem; 
 ['WoodenChair',[4072.79,3642.87,32.1916],115,[0,0,1]] call InitItem; 
-['MetalCup',[4072.45,3642.7,32.9876],325,[0,0,1]] call InitItem; 
-['BrushCleaner',[4072.17,3643.69,32.7501],290,[0,0,1]] call InitItem; 
 ['OrangeCarpet1',[4073.76,3643.74,32.1858],270,[0,0,1]] call InitStruct; 
 ['WoodenSmallShelf',[4076.24,3644.17,28.739],180,[0,0,1]] call InitStruct; 
 ['SingleWhiteBed',[4073.16,3646.8,32.1895],270,[0,0,1]] call InitStruct; 
 _4075_711913642_8584028_66160 = ['BoardWoodenBox',[4075.71,3642.86,28.6616],270,[0,0,1]] call InitStruct; 
-['MilkBottle',[4072.22,3642.73,32.9968],0,[0,0,1]] call InitItem; 
 ['BrickThinWallSmall',[4066.89,3642.29,35.0449,true],90,[-0.00702907,0.000811576,0.999975]] call InitStruct; 
 ['BrickThinWallDoorwayWindow',[4071.87,3644.25,32.1938],270.001,[0,0,1]] call InitStruct; 
 ['BrickThinWallWindow2',[4068.96,3641,28.5707],180,[0,0,1]] call InitStruct; 
 _4072_404543643_8090832_18891 = ['CaseBedroomSmall',[4072.4,3643.81,32.1889],180,[0,0,1]] call InitStruct; 
-['CaseBedroom',[4074.71,3647.28,32.1778],270,[0,0,1]] call InitStruct; 
+_4074_708253647_2775932_17781 = ['CaseBedroom',[4074.71,3647.28,32.1778],270,[0,0,1]] call InitStruct; 
 ['OldBrickWallMedium1',[4073.98,3640.98,32.684],0,[0,0,1]] call InitStruct; 
 ['ChairBigCasual',[4069.92,3642.66,28.6482],180,[0,0,1]] call InitItem; 
 ['SmallConcretePipe',[4066.18,3640.96,33.9312,true],[-0.00367724,0.00816095,-0.99996],[-0.918529,-0.395353,0.000151197]] call InitStruct; 
-['CuttingBoard',[4072.46,3643.07,32.9973],350,[0,0,1]] call InitItem; 
-['LampKeroseneDisabled',[4073.62,3641.56,32.171],130,[0,0,1]] call InitItem; 
-['KitchenKnife',[4072.37,3643.39,38.0105,true],[-0.965926,-0.258819,-1.46198e-006],[-0.258819,0.965926,7.29254e-008]] call InitItem; 
-['BreadChopped',[4072.46,3643,33.0204],215,[0,0,1]] call InitItem; 
 ['SteelSmallShelf',[4070.62,3646.39,28.7282],0,[0,0,1]] call InitStruct; 
 ['SteelSmallShelf',[4068.81,3646.38,28.6733],0,[0,0,1]] call InitStruct; 
 ['SmallSteelTable',[4072.34,3643.06,32.1963],270,[0,0,1]] call InitStruct; 
-['Candle',[4072.2,3643.48,38.0823,true],0.143542,[0.00934808,0.00640142,0.999936]] call InitItem; 
-['SoupPlate',[4072.18,3642.99,33.0005],0,[0,0,1]] call InitItem; 
-['TorchDisabled',[4072.65,3643.98,32.7517],70,[0,0,1]] call InitItem; 
 ['SmallChair',[4075.94,3647.09,32.1806],0,[0,0,1]] call InitItem; 
 _4072_700683641_5449232_18802 = ['BigClothCabinet',[4072.7,3641.54,32.188],180,[0,0,1]] call InitStruct; 
+_4068_626463641_3669428_68726 = ['OfficeCabinet',[4068.63,3641.37,28.6873],180,[0,0,1]] call InitStruct; 
+_4067_588873641_8234928_63380 = ['SquareWoodenBox',[4067.59,3641.82,28.6338],0,[0,0,1]] call InitStruct; 
+_4072_279053646_0761728_63388 = ['OldWoodenBox',[4072.28,3646.08,28.6339],25,[0,0,1]] call InitStruct; 
 ['MediumRuinedWhiteConcreteWall',[4069.94,3652.94,33.1278,true],0,[-0.0069996,-0.00103597,0.999975]] call InitStruct; 
 ['LargeConcreteWallWithReinforcement',[4074.12,3657.25,33.2644,true],270,[0.00692726,-0.0154569,0.999857]] call InitStruct; 
 ['MediumWhiteConcreteWall',[4070.25,3669.96,31.5297,true],0,[-0.0069996,-0.00103597,0.999975]] call InitStruct; 
@@ -2374,29 +2413,6 @@ _4318_327643711_6948229_87771 = ['IStruct',[4318.33,3711.69,37.2116,true],0,[-0.
 ['BattleAxe',[4278.25,3686.21,35.9907,true],270,[0.00103313,-0.00699735,0.999975]] call InitItem; 
 ['CombatKnife',[4278.57,3685.66,35.9734,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
 _4043_146483629_1452630_30890 = ['SpawnPoint',[4043.15,3629.15,30.3089],60,[0,0,1]] call InitStruct; 
-['AmmoBoxPBMNonLethal',[4068.98,3645.57,29.9251],35,[0,0,1]] call InitItem; 
-['AmmoBoxPBMNonLethal',[4068.98,3645.58,30.0481],25,[0,0,1]] call InitItem; 
-['AmmoBoxShotgunNonLethal',[4069.02,3645.91,29.9326],0,[0,0,1]] call InitItem; 
-['AmmoBoxShotgunNonLethal',[4069.02,3645.92,30.0562],10,[0,0,1]] call InitItem; 
-['Rag',[4068.99,3647.1,29.9326],285,[0,0,1]] call InitItem; 
-['Rag',[4069,3646.77,29.9326],310,[0,0,1]] call InitItem; 
-['CuttingBoard',[4070.44,3646.23,29.9801],20,[0,0,1]] call InitItem; 
-['RopeItem',[4069,3646.49,29.9326],315,[0,0,1]] call InitItem; 
-['RopeItem',[4069.03,3646.28,29.9326],285,[0,0,1]] call InitItem; 
-['Bread',[4076.3,3645.87,29.2271],120,[0,0,1]] call InitItem; 
-['Bread',[4076.2,3645.64,29.2271],0,[0,0,1]] call InitItem; 
-['Butter',[4076.27,3646.14,29.2264],30,[0,0,1]] call InitItem; 
-['Butter',[4076.28,3646.29,29.2264],0,[0,0,1]] call InitItem; 
-['Zhivoglot',[4076.27,3646.91,29.2264],0,[0,0,1]] call InitItem; 
-['Zhivoglot',[4076.25,3646.62,29.211],0,[0,0,1]] call InitItem; 
-['SaltShaker',[4076.27,3645.68,29.6771],0,[0,0,1]] call InitItem; 
-['SaltShaker',[4076.33,3645.58,29.6771],0,[0,0,1]] call InitItem; 
-['SaltShaker',[4076.23,3645.57,29.6771],0,[0,0,1]] call InitItem; 
-['TorchDisabled',[4076.16,3644.69,29.8091],314.036,[0,0,1]] call InitItem; 
-['TorchDisabled',[4076.19,3644.56,29.8091],313.581,[0,0,1]] call InitItem; 
-['TorchDisabled',[4076.2,3644.45,29.8091],310,[0,0,1]] call InitItem; 
-['LampKeroseneDisabled',[4076.12,3644.76,30.14],0,[0,0,1]] call InitItem; 
-['LampKeroseneDisabled',[4076.14,3644.41,30.1569],40,[0,0,1]] call InitItem; 
 
 
 
@@ -2404,8 +2420,13 @@ if (!isNil'_4040_997073639_7851626_55978') then {
 	_4040_997073639_7851626_55978 setvariable ['icon',"gen\ca+structures_e+misc+misc_interier+bucket_ep1+p3d"];
 };
 if (!isNil'_4075_738533647_1945828_68387') then {
-	_4075_738533647_1945828_68387 setvariable ['countslots',50];
-	[_4075_738533647_1945828_68387,'TorchDisabled',5,100] call (_4075_738533647_1945828_68387 getvariable 'proto' getvariable 'createItemInContainer');
+	_4075_738533647_1945828_68387 setvariable ['countslots',100];
+	[_4075_738533647_1945828_68387,'TorchDisabled',12,100] call (_4075_738533647_1945828_68387 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4067_638923641_8388729_59827') then {
+	[_4067_638923641_8388729_59827,'Kastrula',1,100] call (_4067_638923641_8388729_59827 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4067_638923641_8388729_59827,'GlassBottle',8,100] call (_4067_638923641_8388729_59827 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4067_638923641_8388729_59827,'Mug',1,100] call (_4067_638923641_8388729_59827 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_4074_545413642_7612328_64822') then {
 	[_4074_545413642_7612328_64822,'Castoffs1',1,100] call (_4074_545413642_7612328_64822 getvariable 'proto' getvariable 'createItemInContainer');
@@ -2428,12 +2449,40 @@ if (!isNil'_4072_404543643_8090832_18891') then {
 	[_4072_404543643_8090832_18891,'TorchDisabled',2,100] call (_4072_404543643_8090832_18891 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4072_404543643_8090832_18891,'CandleDisabled',1,100] call (_4072_404543643_8090832_18891 getvariable 'proto' getvariable 'createItemInContainer');
 };
+if (!isNil'_4074_708253647_2775932_17781') then {
+	[_4074_708253647_2775932_17781,'Rag',1,100] call (_4074_708253647_2775932_17781 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4074_708253647_2775932_17781,'RopeItem',1,100] call (_4074_708253647_2775932_17781 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4074_708253647_2775932_17781,'CuttingBoard',1,100] call (_4074_708253647_2775932_17781 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4074_708253647_2775932_17781,'Wrench',1,100] call (_4074_708253647_2775932_17781 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4074_708253647_2775932_17781,'Egg',1,50] call (_4074_708253647_2775932_17781 getvariable 'proto' getvariable 'createItemInContainer');
+};
 if (!isNil'_4072_700683641_5449232_18802') then {
 	[_4072_700683641_5449232_18802,'ItemMask',1,100] call (_4072_700683641_5449232_18802 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4072_700683641_5449232_18802,'BrownBandannaMask',1,100] call (_4072_700683641_5449232_18802 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4072_700683641_5449232_18802,'BlackBandannaMask',1,100] call (_4072_700683641_5449232_18802 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4072_700683641_5449232_18802,'FaceCoverMask',1,100] call (_4072_700683641_5449232_18802 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4072_700683641_5449232_18802,'WoolCoat',2,100] call (_4072_700683641_5449232_18802 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4068_626463641_3669428_68726') then {
+	[_4068_626463641_3669428_68726,'MatchBox',4,100] call (_4068_626463641_3669428_68726 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4068_626463641_3669428_68726,'SigaretteDisabled',5,100] call (_4068_626463641_3669428_68726 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4068_626463641_3669428_68726,'SamokrutkaDisabled',10,100] call (_4068_626463641_3669428_68726 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4067_588873641_8234928_63380') then {
+	[_4067_588873641_8234928_63380,'SoupPlate',6,100] call (_4067_588873641_8234928_63380 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4067_588873641_8234928_63380,'MetalCup',2,100] call (_4067_588873641_8234928_63380 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4067_588873641_8234928_63380,'WoodenCup',8,100] call (_4067_588873641_8234928_63380 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4067_588873641_8234928_63380,'OlderWoodenCup',6,100] call (_4067_588873641_8234928_63380 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4072_279053646_0761728_63388') then {
+	[_4072_279053646_0761728_63388,'Polovnik',1,71] call (_4072_279053646_0761728_63388 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4072_279053646_0761728_63388,'NeedleWithThreads',2,100] call (_4072_279053646_0761728_63388 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4072_279053646_0761728_63388,'Key',1,100] call (_4072_279053646_0761728_63388 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4072_279053646_0761728_63388,'Tooth',1,100] call (_4072_279053646_0761728_63388 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4072_279053646_0761728_63388,'Muka',1,60] call (_4072_279053646_0761728_63388 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4072_279053646_0761728_63388,'FryingPan',1,100] call (_4072_279053646_0761728_63388 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4072_279053646_0761728_63388,'Forceps',1,100] call (_4072_279053646_0761728_63388 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4072_279053646_0761728_63388,'Crowbar',1,56] call (_4072_279053646_0761728_63388 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_4072_284183653_4399430_34573') then {
 	_4072_284183653_4399430_34573 setvariable ['name',"Косторуб"];
