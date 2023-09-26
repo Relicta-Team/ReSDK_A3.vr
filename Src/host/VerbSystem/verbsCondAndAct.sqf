@@ -58,6 +58,35 @@ VERB(undress)
 		callFuncParams(usr,startUndress,src);
 ENDVERB
 
+VERB(transitem)
+	cond
+		skipCond(!callFunc(src,isMob));
+		skipCond(!isTypeOf(usr,Mob));
+		skipCond(isNullReference(callFunc(usr,getItemInActiveHandRedirect)));
+		skipCond(!callFunc(src,isActive));
+		skipCond(equals(usr,src));
+	act
+		private _it = callFunc(usr,getItemInActiveHandRedirect);
+		if isNullReference(_it) exitwith {
+			callFuncParams(usr,localSay,"Что-то не вышло." arg "error");
+		};
+		private _stackCheck = [getVar(usr,activeHand),callFunc(usr,getNotActiveHand)];
+		private _stackSlot = -1;
+		{
+			_stackSlot = _x;
+			if callFuncParams(usr,transferItemToTarget,_it arg src arg _stackSlot) exitWith {
+				callFuncParams(usr,meSay,"отдаёт " + callFunc(_it,getName) + " " + callFuncParams(src,getNameEx,"кому"));
+			};
+		} foreach _stackCheck;
+		
+	name
+		private _it = callFunc(usr,getItemInActiveHandRedirect);
+		if !isNullReference(_it) then {
+			setName("Передать " + callFunc(_it,getName));
+		};
+
+ENDVERB
+
 VERB(pickup)
 	act
 		callFunc(usr,generateLastInteractOnServer);
