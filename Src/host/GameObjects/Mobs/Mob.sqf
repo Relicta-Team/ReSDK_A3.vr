@@ -76,7 +76,7 @@ class(Mob) extends(BasicMob)
 	#include "Mob_Emotes.sqf"
 	#include "Mob_Communication.sqf"
 
-	verbList("undress standupfromchair showOrgans",BasicMob);
+	verbList("transitem undress standupfromchair showOrgans",BasicMob);
 
 	var_str(face); //лицо
 	var_str(faceAnim); //текущая лицевая анимация
