@@ -815,7 +815,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""missionName"",""test_govna""],[""version"",4]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""missionName"",""Truba""],[""version"",4]]}";
 			};
 			id=2205;
 			type="Land_Orange_01_F";

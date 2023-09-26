@@ -104,7 +104,7 @@ _4040_997073639_7851626_55978 = ['WoodenBucket',[4041,3639.79,31.791,true],0,[-0
 ['Shelves',[4041.28,3630.48,30.2968],240,[0,0,1]] call InitStruct; 
 ['WoodenChair',[4039.51,3635.03,30.228],190,[0,0,1]] call InitItem; 
 ['LargeClothCabinet',[4046.74,3630.74,30.294],60,[0,0,1]] call InitStruct; 
-['SingleWhiteBed',[4044.09,3629.59,30.2582],150,[0,0,1], {go_editor_globalRefs set ['RChiefBed',_thisObj];
+['SingleWhiteBed',[4044.09,3629.59,30.2582],150,[0,0,1], {go_editor_globalRefs set ['RChief',_thisObj];
 }] call InitStruct; 
 ['SingleWhiteBed',[4045.07,3630.15,30.2574],150,[0,0,1]] call InitStruct; 
 ['ChairLibrary',[4045.58,3632.92,30.309],240,[0,0,1]] call InitItem; 
@@ -2342,6 +2342,7 @@ _4318_327643711_6948229_87771 = ['IStruct',[4318.33,3711.69,37.2116,true],0,[-0.
 ['SwordScimitar',[4278.69,3686.85,35.9693,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
 ['ArmorLite',[4280.95,3680.59,30.8824],0,[0,0,1]] call InitItem; 
 ['CaretakerCloth',[4281.31,3680.58,30.8824],0,[0,0,1]] call InitItem; 
+['IStruct',[4052.25,3651.98,31.6559,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
 _4043_146483629_1452630_30890 = ['SpawnPoint',[4043.15,3629.15,30.3089],60,[0,0,1]] call InitStruct; 
 
 
