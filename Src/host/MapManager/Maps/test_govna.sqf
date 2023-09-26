@@ -104,7 +104,8 @@ _4040_997073639_7851626_55978 = ['WoodenBucket',[4041,3639.79,31.791,true],0,[-0
 ['Shelves',[4041.28,3630.48,30.2968],240,[0,0,1]] call InitStruct; 
 ['WoodenChair',[4039.51,3635.03,30.228],190,[0,0,1]] call InitItem; 
 ['LargeClothCabinet',[4046.74,3630.74,30.294],60,[0,0,1]] call InitStruct; 
-['SingleWhiteBed',[4044.09,3629.59,30.2582],150,[0,0,1]] call InitStruct; 
+['SingleWhiteBed',[4044.09,3629.59,30.2582],150,[0,0,1], {go_editor_globalRefs set ['RChiefBed',_thisObj];
+}] call InitStruct; 
 ['SingleWhiteBed',[4045.07,3630.15,30.2574],150,[0,0,1]] call InitStruct; 
 ['ChairLibrary',[4045.58,3632.92,30.309],240,[0,0,1]] call InitItem; 
 ['BrownOldSofa',[4044.16,3634.54,30.2997],240,[0,0,1]] call InitStruct; 
@@ -504,6 +505,24 @@ _4057_000003635_926034_15413 = ['IStruct',[4057,3635.93,4.15413],180,[0,0,1], {_
 ['SmallPileOfBricks',[4035.81,3667.61,31.9537,true],269.998,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
 ['Bench3',[4066.31,3643.81,26.4569],270,[0,0,1]] call InitStruct; 
 ['DirtCraterLong',[4059.41,3647.98,31.4267,true],329.999,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['IndustrialPipes',[4032.54,3645.96,27.7123],0,[0,0,1]] call InitStruct; 
+['IndustrialPipes',[4032.54,3663.89,27.7202],0,[0,0,1]] call InitStruct; 
+['IndustrialPipes',[4032.55,3681.78,27.7183],0,[0,0,1]] call InitStruct; 
+['MetalTruss',[4068.61,3626.63,26.1412],0,[0,0,1]] call InitStruct; 
+['SmallConcreteBlockDestyoed',[4077.51,3637.6,26.9976],0,[0,0,1]] call InitStruct; 
+['ConcreteSlabsStack',[4038.7,3635.29,32.1668,true],59.9999,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
+['SmallDirtGrey',[4077.67,3639.97,27.0111],0,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[4077.63,3645.35,31.3535,true],0,[-0.173648,0,0.984808]] call InitStruct; 
+['BigIndustrialPipesWithLadder',[4078.14,3647.52,35.6372,true],0,[-0.0871557,0,0.996195]] call InitStruct; 
+['BigIndustrialPipesWithLadder',[4079.6,3673.17,27.0082],0,[0,0,1]] call InitStruct; 
+['MetalAndConcreteRuins',[4079.99,3644.21,32.4674,true],[0.0151344,0.996195,-0.0858317],[-0.172987,0.0871557,0.98106]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[4034.8,3642.21,26.7504],265,[0,0,1]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[4058.75,3616.65,32.285,true],0,[-0.996195,0,0.0871556]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[4058.94,3616.03,35.1977,true],[0.0151344,0.984808,0.172987],[-0.996195,1.47151e-008,0.0871556]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[4059.12,3615.08,38.0226,true],[0.0225575,0.965926,0.257834],[-0.996195,1.41935e-008,0.0871556]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[4056.86,3649.26,26.8282],0,[0,0,1]] call InitStruct; 
+['MediumConcreteBlockDestroyed',[4060.41,3648.97,32.3796,true],0,[0.258819,0,0.965926]] call InitStruct; 
+['MetalFanSmall',[4079.51,3643.14,33.1778,true],[0.422618,6.84243e-008,-0.906308],[0,1,7.54979e-008]] call InitStruct; 
 _4044_029053623_8239726_52570 = ['PowerGenerator',[4044.03,3623.82,32.2459,true],331,[-0.00498531,-0.00460838,0.999977], {_thisObj setvariable ['model','ml_shabut\exoduss\generator2.p3d']; go_editor_globalRefs set ['PowerGenerator G:Bcka19rnowQ',_thisObj];
 }] call InitStruct; // !!! realocated model !!!
 _4047_006103623_4106426_53120 = ['ElectricalShieldSmall',[4047.01,3623.41,26.5312],351.001,[0,0,1], {go_editor_globalRefs set ['ElectricalShieldSmall G:Z0g+3iT528o',_thisObj];
@@ -2294,8 +2313,36 @@ _4292_562013691_2605029_99189 = ['IStruct',[4292.56,3691.26,29.9919],0,[0,0,1], 
 _4285_030763693_1774931_02557 = ['IStruct',[4285.03,3693.18,36.1218,true],0,[0.00566271,-0.00693096,0.99996], {_thisObj setvariable ['model','relicta_models\models\weapons\tnt.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['PistolPBM',[4278.53,3688.51,30.9483],0,[0,0,1]] call InitItem; 
 ['PistolPBM',[4278.11,3688.48,36.0191,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
-['ConcreteSlabsStack',[4038.7,3635.29,32.1668,true],59.9999,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
-_4051_581793640_1008357_00200 = ['IStruct',[4051.58,3640.1,64.3359,true],0,[-0.00659628,-0.0016196,0.999977], {_thisObj setvariable ['model','ml_shabut\redforresttun\rftnew.p3d'];}] call InitStruct; // !!! realocated model !!!
+_4318_327643711_6948229_87771 = ['IStruct',[4318.33,3711.69,37.2116,true],0,[-0.00659628,-0.0016196,0.999977], {_thisObj setvariable ['model','ml_shabut\redforresttun\rftnew.p3d'];}] call InitStruct; // !!! realocated model !!!
+['BrushCleaner',[4278.63,3685.96,36.0184,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['BoneStraightener',[4278.41,3685.88,30.9595],0,[0,0,1]] call InitItem; 
+['Crutch',[4278.25,3684.07,35.9604,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['Forceps',[4278.56,3684.55,35.9634,true],0,[0.00566271,-0.00693096,0.99996]] call InitItem; 
+['NeedleWithThreads',[4278.69,3684.83,35.9861,true],0,[-0.0348,-0.366374,0.929817]] call InitItem; 
+['NeedleWithThreads',[4278.69,3684.86,35.9861,true],0,[-0.0348,-0.366374,0.929817]] call InitItem; 
+['NeedleWithThreads',[4278.68,3684.89,35.9861,true],0,[-0.0348,-0.366374,0.929817]] call InitItem; 
+['NeedleWithThreads',[4278.68,3684.92,35.9886,true],0,[0.00566271,-0.00693096,0.99996]] call InitItem; 
+['CetalinBox',[4278.7,3685.1,36.002,true],0,[-0.0168716,0.0321326,0.999341]] call InitItem; 
+['PainkillerBox',[4278.7,3685.22,36.0012,true],0,[0.0211755,-0.193585,0.980855]] call InitItem; 
+['KoradizinBox',[4278.69,3685.37,35.9775,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['Stethoscope',[4278.45,3685.14,35.9753,true],0,[-0.0168716,0.0321326,0.999341]] call InitItem; 
+['SurgicalExpander',[4278.41,3684.64,30.9595],0,[0,0,1]] call InitItem; 
+['SurgicalSaw',[4278.19,3684.61,30.9595],0,[0,0,1]] call InitItem; 
+['LiqDemitolin',[4278.68,3684.33,36.0965,true],0,[0.00566271,-0.00693096,0.99996]] call InitItem; 
+['LiqPainkiller',[4278.71,3684.46,36.0965,true],0,[0.00566271,-0.00693096,0.99996]] call InitItem; 
+['LiqTovimin',[4278.72,3684.58,36.0965,true],0,[0.00566271,-0.00693096,0.99996]] call InitItem; 
+['Syringe',[4278.69,3684.68,35.9696,true],0,[0.00566271,-0.00693096,0.99996]] call InitItem; 
+['Syringe',[4278.74,3684.7,35.9696,true],0,[0.00566271,-0.00693096,0.99996]] call InitItem; 
+['BattleAxe',[4278.25,3686.21,35.9907,true],270,[0.00103313,-0.00699735,0.999975]] call InitItem; 
+['WorkingAxe',[4278.28,3685.86,35.9867,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['KitchenKnife',[4278.65,3685.61,35.9851,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['SurgeryScalpel',[4278.74,3686.11,35.9756,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['CombatKnife',[4278.57,3685.66,35.9734,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['ShortSword',[4278.27,3685.32,36.0095,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['SwordScimitar',[4278.69,3686.85,35.9693,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
+['ArmorLite',[4280.95,3680.59,30.8824],0,[0,0,1]] call InitItem; 
+['CaretakerCloth',[4281.31,3680.58,30.8824],0,[0,0,1]] call InitItem; 
+_4043_146483629_1452630_30890 = ['SpawnPoint',[4043.15,3629.15,30.3089],60,[0,0,1]] call InitStruct; 
 
 
 
@@ -2480,4 +2527,7 @@ if (!isNil'_4278_313483680_5686030_00000') then {
 	[_4278_313483680_5686030_00000,go_editor_globalRefs get 'StreetLampEnabled G:80hjW+sfXjs'] call (_4278_313483680_5686030_00000 getvariable 'proto' getvariable 'addConnection');
 	[_4278_313483680_5686030_00000,go_editor_globalRefs get 'StreetLampEnabled G:5tLXjLDNYVo'] call (_4278_313483680_5686030_00000 getvariable 'proto' getvariable 'addConnection');
 	[_4278_313483680_5686030_00000,go_editor_globalRefs get 'StreetLampEnabled G:5tLXjLDNYVo (1)'] call (_4278_313483680_5686030_00000 getvariable 'proto' getvariable 'addConnection');
+};
+if (!isNil'_4043_146483629_1452630_30890') then {
+	_4043_146483629_1452630_30890 setvariable ['spawnpointname',"RChief"];
 };
