@@ -4201,7 +4201,7 @@ Replaced value:
 ```sqf
 randInt(3,4)
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 732](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L732)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 733](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L733)
 ## hasBP(idx)
 
 Type: constant
@@ -4213,7 +4213,7 @@ Replaced value:
 ```sqf
 !isNullObject(_bpArray getOrDefault [idx arg nullPtr])
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 761](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L761)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 762](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L762)
 ## AMOUNT_REGEN_STAMINA
 
 Type: constant
@@ -4225,7 +4225,7 @@ Replaced value:
 ```sqf
 3.3
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 903](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L903)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 904](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L904)
 ## AMOUNT_LESS_STAMINA
 
 Type: constant
@@ -4237,7 +4237,7 @@ Replaced value:
 ```sqf
 0.5
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 904](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L904)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 905](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L905)
 ## UNC_TO_STAMINALOSS_MIN
 
 Type: constant
@@ -4249,7 +4249,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1159](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1159)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1160](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1160)
 ## UNC_TO_STAMINALOSS_MAX
 
 Type: constant
@@ -4261,7 +4261,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1160](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1160)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1161](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1161)
 ## __dmgAndHp
 
 Type: constant
@@ -4273,7 +4273,7 @@ Replaced value:
 ```sqf
 _dmg arg _hp
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1196](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1196)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1197](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1197)
 ## log_performance
 
 Type: constant
@@ -4285,7 +4285,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1197](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1197)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1198](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1198)
 ## lifelog(mes,fmt)
 
 Type: constant
@@ -4298,7 +4298,7 @@ Replaced value:
 ```sqf
 "debug_console" callExtension (format["[LOG::LIFE]" + (mes) + "#1011",fmt])
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1199](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1199)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1200](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1200)
 ## std_check_dam(low,up)
 
 Type: constant
@@ -4311,7 +4311,7 @@ Replaced value:
 ```sqf
 if (_dmg >= (low) && _dmg < (up)) exitWith
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1267](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1267)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1268](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1268)
 # Mob_Skills.sqf
 
 ## skill_def
