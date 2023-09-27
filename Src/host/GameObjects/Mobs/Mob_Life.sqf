@@ -366,7 +366,8 @@ region(Status effects)
 		objParams();
 
 		if callSelf(isConnected) exitWith {};
-
+		if !callSelf(isActive) exitWith {};
+		
 		//Положить моба и заблокировать управление
 		if (callSelf(getStance) != STANCE_DOWN) then {
 			//error("KNOCK DOWN - switchAction is not MP-func");
