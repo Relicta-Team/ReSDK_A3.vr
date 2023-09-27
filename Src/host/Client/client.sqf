@@ -943,13 +943,20 @@ region(Reputation helpers)
 	};
 
 
-region(rpc messaging)
+region(rpc and networking messaging)
 	//отправка сообщения с обработкой на клиенте
 	func(sendInfo)
 	{
 		objParams_2(_mes,_data);
 		private _own = getSelf(id);
 		rpcSendToClient(_own,_mes,_data);
+	};
+
+	func(fastSendInfo)
+	{
+		objParams_2(_varname,_data);
+		private _own = getSelf(id);
+		netSendVar(_varname,_data,_own);
 	};
 
 region(Clientside music manager and local sounds)
