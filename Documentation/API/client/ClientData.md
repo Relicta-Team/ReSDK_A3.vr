@@ -525,6 +525,30 @@ Initial value:
 false
 ```
 File: [client\ClientData\ClientData_forceWalk.sqf at line 20](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L20)
+## cd_sp_enabled
+
+Type: Variable
+
+Description: sprint sync
+
+
+Initial value:
+```sqf
+true
+```
+File: [client\ClientData\ClientData_forceWalk.sqf at line 31](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L31)
+## cd_sp_lockedSetting
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\ClientData\ClientData_forceWalk.sqf at line 32](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L32)
 ## cd_fw_isForceWalk
 
 Type: function
@@ -541,6 +565,14 @@ Description:
 - Param: _mob
 
 File: [client\ClientData\ClientData_forceWalk.sqf at line 22](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L22)
+## cd_sp_canSprint
+
+Type: function
+
+Description: 
+
+
+File: [client\ClientData\ClientData_forceWalk.sqf at line 33](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L33)
 # EscapeMenu.sqf
 
 ## ESC_MENU_SIZE_X
@@ -1565,7 +1597,7 @@ Replaced value:
 ```sqf
 _cd_map_dataCode = []; cd_commands_localCommandsList set [name,_cd_map_dataCode]; _cd_map_dataCode pushBack
 ```
-File: [client\ClientData\SendCommand.sqf at line 291](../../../Src/client/ClientData/SendCommand.sqf#L291)
+File: [client\ClientData\SendCommand.sqf at line 294](../../../Src/client/ClientData/SendCommand.sqf#L294)
 ## arguments
 
 Type: constant
@@ -1577,10 +1609,12 @@ Replaced value:
 ```sqf
 _args
 ```
-File: [client\ClientData\SendCommand.sqf at line 293](../../../Src/client/ClientData/SendCommand.sqf#L293)
+File: [client\ClientData\SendCommand.sqf at line 296](../../../Src/client/ClientData/SendCommand.sqf#L296)
 ## cd_commandHistoryBuffer
 
 Type: Variable
+
+> Exists if **EDITOR** not defined
 
 Description: 
 
@@ -1589,7 +1623,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\ClientData\SendCommand.sqf at line 12](../../../Src/client/ClientData/SendCommand.sqf#L12)
+File: [client\ClientData\SendCommand.sqf at line 20](../../../Src/client/ClientData/SendCommand.sqf#L20)
 ## cd_commands_localCommandsList
 
 Type: Variable
@@ -1601,7 +1635,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\ClientData\SendCommand.sqf at line 289](../../../Src/client/ClientData/SendCommand.sqf#L289)
+File: [client\ClientData\SendCommand.sqf at line 292](../../../Src/client/ClientData/SendCommand.sqf#L292)
 ## cd_openSendCommandWindow
 
 Type: function
@@ -1609,7 +1643,7 @@ Type: function
 Description: Открывает окно отправки сообщения на сервер
 - Param: _isLobbyContext (optional, default false)
 
-File: [client\ClientData\SendCommand.sqf at line 21](../../../Src/client/ClientData/SendCommand.sqf#L21)
+File: [client\ClientData\SendCommand.sqf at line 24](../../../Src/client/ClientData/SendCommand.sqf#L24)
 ## cd_closeSendCommandWindow
 
 Type: function
@@ -1617,7 +1651,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\SendCommand.sqf at line 253](../../../Src/client/ClientData/SendCommand.sqf#L253)
+File: [client\ClientData\SendCommand.sqf at line 256](../../../Src/client/ClientData/SendCommand.sqf#L256)
 ## cd_openAhelp
 
 Type: function
@@ -1625,7 +1659,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\SendCommand.sqf at line 268](../../../Src/client/ClientData/SendCommand.sqf#L268)
+File: [client\ClientData\SendCommand.sqf at line 271](../../../Src/client/ClientData/SendCommand.sqf#L271)
 # VersionViewer.sqf
 
 ## versionviewer_timeout_init_clientname

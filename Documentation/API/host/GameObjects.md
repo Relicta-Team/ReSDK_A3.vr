@@ -3687,7 +3687,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 311](../../../Src/host/GameObjects/Mobs/Mob.sqf#L311)
+File: [host\GameObjects\Mobs\Mob.sqf at line 315](../../../Src/host/GameObjects/Mobs/Mob.sqf#L315)
 # MobGhost.sqf
 
 ## hasBP(idx)
@@ -3854,7 +3854,7 @@ Replaced value:
 ```sqf
 _d = D6 <= 3; [p1,p2] select _d
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 672](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L672)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 681](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L681)
 ## debuginfo(mes)
 
 Type: constant
@@ -3868,7 +3868,7 @@ Replaced value:
 ```sqf
 breakpoint("("+getSelf(name)+")::EVENT::("+_mode+") " + mes)
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 937](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L937)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 946](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L946)
 ## debuginfo(mes)
 
 Type: constant
@@ -3882,7 +3882,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 939](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L939)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 948](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L948)
 ## __isZoneIn(zones,modif)
 
 Type: constant
@@ -3895,7 +3895,7 @@ Replaced value:
 ```sqf
 if (_attTargetZone in [zones]) exitWith {MOD(_mod,modif)}
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1334](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1334)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1351](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1351)
 ## go_static_internal_map_redirzones
 
 Type: Variable
@@ -3907,7 +3907,7 @@ Initial value:
 ```sqf
 createHashMapFromArray[...
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 702](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L702)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 711](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L711)
 # Mob_combat_attdam_enum.hpp
 
 ## COMBAT_ATTDAM_ATTACK
@@ -4172,7 +4172,7 @@ Replaced value:
 ```sqf
 'v'
 ```
-File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 1309](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L1309)
+File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 1314](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L1314)
 # Mob_Inventory.sqf
 
 ## __switchVars(prevname,nextname)

@@ -794,6 +794,28 @@ Initial value:
 (count allPlayers) max cm_maxClients
 ```
 File: [host\ClientManager\OnConnected.sqf at line 9](../../../Src/host/ClientManager/OnConnected.sqf#L9)
+# Access.sqf
+
+## commands_internal_list_charsettings
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\ClientManager\cmds\Access.sqf at line 431](../../../Src/host/ClientManager/cmds/Access.sqf#L431)
+## commands_internal_convertSettingsToRuName
+
+Type: function
+
+Description: 
+- Param: _setlist
+
+File: [host\ClientManager\cmds\Access.sqf at line 439](../../../Src/host/ClientManager/cmds/Access.sqf#L439)
 # Common.sqf
 
 ## system_internal_list_allJoiners
