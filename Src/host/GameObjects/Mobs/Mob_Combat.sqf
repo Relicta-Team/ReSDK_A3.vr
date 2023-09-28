@@ -29,6 +29,7 @@ var(otherCombatStyle,COMBAT_STYLE_NO);
 var(otherSpecialAction,SPECIAL_ACTION_NO);
 	var(otherLastCombatActionTime,0); //для второй руки
 
+getter_func(isFailCombat,array_exists(getVar(getSelf(client),lockedSettings),"combat"));
 
 func(setCombatMode)
 {
@@ -164,6 +165,10 @@ func(attackOtherMob)
 	#ifdef __performace_attacklog
 		private __log_perf = tickTime;
 	#endif
+
+	if callSelf(isFailCombat) exitWith {
+		callSelf(applyFailCombat);
+	};
 
 	private _caller = this; //Должен быть объявлен раньше onMiss() -> exref
 	private _attTargetZone = getSelf(curTargZone);
@@ -439,6 +444,10 @@ func(attackSelf)
 	private _target = this;
 
 	//метод скопирован из attackOtherMob
+
+	if callSelf(isFailCombat) exitWith {
+		callSelf(applyFailCombat);
+	};
 
 	private _attTargetZone = getSelf(curTargZone);
 	private _attIsRandomTargetZone = false;
@@ -1160,6 +1169,10 @@ region(shooting)
 	{
 		objParams();
 
+		if callSelf(isFailCombat) exitWith {
+			callSelf(applyFailCombat);
+		};
+
 		private _item = callSelfParams(getItemInSlot,getSelf(activeHand));
 		if isTypeOf(_item,SystemHandItem) then {_item = getVar(_item,object)};
 
@@ -1224,6 +1237,10 @@ region(shooting)
 	func(shootOtherMob)
 	{
 		objParams_1(_target);
+
+		if callSelf(isFailCombat) exitWith {
+			callSelf(applyFailCombat);
+		};
 
 		/*
 			Попадание:

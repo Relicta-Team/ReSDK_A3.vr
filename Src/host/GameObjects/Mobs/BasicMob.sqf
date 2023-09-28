@@ -1628,4 +1628,36 @@ region(Local effects)
 		(tolower _name) in getSelf(__lcfmap)
 	};
 
+region(banned combat setting)
+
+	getter_func(isFailCombat,false);
+
+	func(applyFailCombat)
+	{
+		objParams();
+		private _parts = [getSelf(bodyParts) get BP_INDEX_ARM_R];
+		_parts pushBack (getSelf(bodyParts) get BP_INDEX_ARM_L);
+		_parts pushBack (getSelf(bodyParts) get BP_INDEX_LEG_R);
+		_parts pushBack (getSelf(bodyParts) get BP_INDEX_LEG_L);
+		private _existsParts = [];
+		{
+			if isNullVar(_x) then {continue};
+			if isNullReference(_x) then {continue};
+			_existsParts pushBack _x;
+		} foreach _parts;
+
+		if (prob(40) && (count _existsParts > 0)) then {
+			private _limb = pick _existsParts;
+			callSelfParams(lossLimb, getVar(_limb,bodyPartIndex));
+		} else {
+			callSelf(KnockDown);
+			private _timer = randInt(5,10);
+			#ifdef EDITOR
+			_timer = 1;
+			#endif
+			callSelfParams(Stun,_timer arg true arg true);
+			callSelfParams(adjustPain,BP_INDEX_TORSO arg randInt(200,500));
+		};
+	};
+
 endclass

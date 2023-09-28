@@ -152,6 +152,7 @@ class(GMPreyMobEater) extends(Mob)
 	var(name,"Жрун");
 	var(__listactions,[]);
 	var(voiceType,"eater");
+	getter_func(isFailCombat,false);
 	
 	["eater","sniff","onEaterSniff"] call ie_actions_regNew;
 	["eater","regen","onEaterRegen"] call ie_actions_regNew;
