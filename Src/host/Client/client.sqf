@@ -271,6 +271,10 @@ class(ServerClient) /*extends(NetObject)*/
 		server_privateLaunch_list_awaitCheck pushBackUnique this;
 		#endif
 
+		if array_exists(getSelf(lockedSettings),"run") then {
+			callSelfParams(fastSendInfo,"cd_sp_lockedSetting" arg true);
+		};
+
 		private _postCheck = {
 			
 			if (rep_system_enable) then {

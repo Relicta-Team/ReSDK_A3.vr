@@ -492,7 +492,7 @@ addCommandWithDescription("bancharsetting",ACCESS_ADMIN,"Забанить чел
 
 			if (_setting == "run") then {
 				callFuncParams(_cli,fastSendInfo,"cd_sp_lockedSetting" arg true);
-				callFuncParams(_cli,sendInfo,"spr_sync" arg []);//Пусть синхронизация происходит только при заходе за след.персонажа
+				//!callFuncParams(_cli,sendInfo,"spr_sync" arg []);//Пусть синхронизация происходит только при заходе за след.персонажа
 			};
 
 			//удаляем всех персонажей...
@@ -550,6 +550,9 @@ addCommandWithDescription("unbancharsetting",ACCESS_ADMIN,"Разбанить ч
 			if (_remsetidx!=-1) then {
 				getVar(_cli,lockedSettings) deleteAt _remsetidx;
 				callFuncParams(thisClient,localSay,"Выполнено удаление заблокированной настройки для "+_userName arg "system");
+				if (_setting == "run") then {
+					callFuncParams(_cli,fastSendInfo,"cd_sp_lockedSetting" arg false);
+				};
 			} else {
 				callFuncParams(thisClient,localSay,"Настройка "+_setting+" не найдена для "+_userName arg "system");
 			};

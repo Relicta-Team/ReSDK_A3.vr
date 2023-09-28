@@ -293,6 +293,10 @@ region(Connect control events)
 		callSelfParams(playMusic,"!ambient" arg "MUSIC_CHANNEL_AMBIENT" arg "stdlist");
 
 		callSelfParams(localEffectUpdate,"GenericAmbSound");
+
+		if array_exists(getVar(getSelf(client),lockedSettings),"run") then {
+			callSelfParams(sendInfo,"spr_sync" arg []);
+		};
 	};
 
 	// Вызывается при отключении клиента от моба

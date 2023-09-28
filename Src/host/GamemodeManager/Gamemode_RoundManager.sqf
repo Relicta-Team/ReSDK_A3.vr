@@ -904,6 +904,10 @@ gm_internal_assignToImpl = {
 	callSelfParams(getEquipment,_mob);
 	callSelfParams(initWelcome,_mob);
 	
+	if array_exists(getVar(_usr,lockedSettings),"run") then {
+		callFuncParams(_usr,localSay,setstyle("Суровая жизнь в Сети пошатнула моё здоровье...",style_redbig) arg "info");
+	};
+
 	//here adding game aspect info
 	callFuncParams(_mob,addFirstJoinMessage,callFunc(gm_currentAspect,getAspectText));
 
