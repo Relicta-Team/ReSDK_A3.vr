@@ -7,27 +7,99 @@
 	},
 	"@sect_control_operators":{
 		"path":"Операторы",
-		"name":"Тест имя",
 		"cat": "operators",
 		"in": {
 			"Вход": {
-				"type":"Flow"
-			},
-			"test1":1,
-			"test2":1,
-			"test3":1,
+				"type":"Exec","allowtypes": ["Exec"],"mutliconnect": true,"display_name": false
+			}
+		},
+		"out": {
 			"Выход": {
-				"type":"Flow"
+				"type":"Exec","allowtypes": ["Exec"],"display_name": false
 			}
 		},
 		"list": {
 			"if_branch": {
 				"name": "Ветка",
-				"desc": "Ветка"
+				"desc": "Ветка",
+				"out": {
+					"Истина": {
+						"type":"Exec",
+						"allowtypes": ["Exec"],
+						"display_name": true
+					},
+					"Ложь": {
+						"type":"Exec",
+						"allowtypes": ["Exec"],
+						"display_name": true
+					}
+				},
+				"in": {
+					"Вход": {
+						"type":"Exec","allowtypes": ["Exec"],"mutliconnect": true,"display_name": false
+					},
+					"Условие": {
+						"type":"bool","allowtypes": ["bool"],"mutliconnect": false
+					}
+				}
+				
 			},
 			"while": {
 				"desc": "Цикл"
 			}
+		}
+	},
+	"@sect_typing_bool": {
+		"path": "Базовые типы.Булево",
+		"cat": "types",
+		"in": {
+			"Вход": {
+				"type":"Exec","allowtypes": ["Exec"],"mutliconnect": true,"display_name": false
+			}
+		},
+		"out": {
+			"Выход": {
+				"type":"Exec","allowtypes": ["Exec"],"display_name": false
+			}
+		},
+		"list": {
+			"bool.create": {
+				"name": "Создать булево",
+				"options": {
+					"Значение": {
+						"type":"bool",
+						"default": true
+					}
+				},
+				"in": {
+					"Назначить": {
+						"type": "bool", "allowtypes": ["bool"]
+					}
+				},
+				"out": {
+					"Получить": {
+						"type": "bool", "allowtypes": ["bool"]
+					}
+				}
+			}
+		}
+	},
+
+	"@sect_control_math[различные математические операторы, сложение и вычитание]":{
+		"path":"Математика",
+		"cat": "math",
+		"in": {
+			"Вход": {
+				"type":"Exec","allowtypes": ["Exec"],"mutliconnect": true,"display_name": false
+			}
+		},
+		"out": {
+			"Выход": {
+				"type":"Exec","allowtypes": ["Exec"],"display_name": false
+			}
+		},
+		"list": {
+
 		}
 	}
 }

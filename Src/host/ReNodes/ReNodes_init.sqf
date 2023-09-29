@@ -81,6 +81,8 @@ nodegen_internal_generatedLibPath = ""; //сюда записывается сг
 nodegen_bindingsPath = "src\host\ReNodes\ReNodes_bindings.json";
 nodegen_objlibPath = "src\host\ReNodes\lib_obj.json";
 
+nodegen_debug_copyobjlibPath = "P:\Project\ReNodes\lib_obj.json";
+
 //регистратор метода
 nodegen_addClassMethod = {
     private _ctx = _this;
@@ -147,6 +149,10 @@ nodegen_generateLib = {
     nodegen_str_outputJsonData = _output;
 
     [nodegen_objlibPath,nodegen_str_outputJsonData] call file_write;
+    
+    if (!isNull(nodegen_debug_copyobjlibPath) && {nodegen_debug_copyobjlibPath!=""}) then {
+        [nodegen_debug_copyobjlibPath,nodegen_str_outputJsonData,false] call file_write;
+    };
 
     true
 };
