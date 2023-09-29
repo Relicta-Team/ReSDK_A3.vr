@@ -877,7 +877,7 @@ Description:
 
 Replaced value:
 ```sqf
-linearConversion [0,GERM_COUNT_MAX,val,1,0,true]
+linearConversion [0,GERM_COUNT_MAX,val,1,0.5,true]
 ```
 File: [host\GameObjects\ConstantAndDefines\Cleanable.h at line 15](../../../Src/host/GameObjects/ConstantAndDefines/Cleanable.h#L15)
 ## GERM_COUNT_INFECTION
