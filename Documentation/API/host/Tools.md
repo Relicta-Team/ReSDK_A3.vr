@@ -122,7 +122,7 @@ Initial value:
 ```sqf
 true //global mode
 ```
-File: [host\Tools\EditorDebug\EditorDebug.sqf at line 15](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L15)
+File: [host\Tools\EditorDebug\EditorDebug.sqf at line 16](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L16)
 ## editorDebug_handlerUpdate
 
 Type: Variable
@@ -134,7 +134,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [host\Tools\EditorDebug\EditorDebug.sqf at line 17](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L17)
+File: [host\Tools\EditorDebug\EditorDebug.sqf at line 18](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L18)
 # EditorDebug_datahandler.sqf
 
 ## metstart(val)
@@ -239,6 +239,174 @@ Description: общий обработчик данных
 
 
 File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 223](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L223)
+# EditorDebug_io.sqf
+
+## PRINT_FILEWRITE_ERROR_REASON
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 16](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L16)
+## file_const_defaultDelimeter
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+""
+```
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 12](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L12)
+## file_const_defaultAsyncWriteTimeout
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+5
+```
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 14](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L14)
+## file_open
+
+Type: function
+
+Description: #define EXTENDED_LOGGING_ASYNCUNLOCK
+- Param: _path
+- Param: _isRelative (optional, default true)
+- Param: _args (optional, default "")
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 21](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L21)
+## file_openReturn
+
+Type: function
+
+Description: 
+- Param: _path
+- Param: _isRelative (optional, default true)
+- Param: _args (optional, default "")
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 41](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L41)
+## file_copy
+
+Type: function
+
+Description: this cannot copy directory
+- Param: _path
+- Param: _dest
+- Param: _relInfo
+- Param: _canOverride (optional, default true)
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 58](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L58)
+## file_move
+
+Type: function
+
+Description: 
+- Param: _path
+- Param: _dest
+- Param: _relInfo
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 73](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L73)
+## dir_move
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 88](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L88)
+## file_getFileList
+
+Type: function
+
+Description: 
+- Param: _path
+- Param: _isRelative (optional, default true)
+- Param: _searchOption (optional, default "*.*")
+- Param: _useDeepSearch (optional, default false)
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 92](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L92)
+## file_read
+
+Type: function
+
+Description: 
+- Param: _path
+- Param: _isRelative (optional, default true)
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 108](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L108)
+## file_write
+
+Type: function
+
+Description: 
+- Param: _path
+- Param: _data
+- Param: _isRelative (optional, default true)
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 116](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L116)
+## file_delete
+
+Type: function
+
+Description: 
+- Param: _path
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 136](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L136)
+## folder_delete
+
+Type: function
+
+Description: 
+- Param: _path
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 147](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L147)
+## file_exists
+
+Type: function
+
+Description: 
+- Param: _path
+- Param: _isRelative (optional, default true)
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 158](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L158)
+## folder_exists
+
+Type: function
+
+Description: 
+- Param: _path
+- Param: _isRelative (optional, default true)
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 164](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L164)
+## file_isLocked
+
+Type: function
+
+Description: 
+- Param: _path
+- Param: _isRelative (optional, default true)
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 171](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L171)
+## file_clearFileLock
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 178](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L178)
 # EditorDebug_shared.sqf
 
 ## checkdata(cachevalue)
@@ -252,7 +420,7 @@ Replaced value:
 ```sqf
 if !(cachevalue in _cache) exitwith {cachevalue}
 ```
-File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 57](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L57)
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 62](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L62)
 ## checkempty(cachevalue)
 
 Type: constant
@@ -264,7 +432,7 @@ Replaced value:
 ```sqf
 if (_cache get cachevalue == "") exitwith {cachevalue}
 ```
-File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 58](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L58)
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 63](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L63)
 ## editorDebug_serializePlayerSettings
 
 Type: function
@@ -272,7 +440,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 3](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L3)
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 8](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L8)
 ## editorDebug_getPlayerSettings
 
 Type: function
@@ -280,7 +448,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 38](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L38)
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 43](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L43)
 ## editorDebug_updatePosAndDirInCache
 
 Type: function
@@ -289,7 +457,7 @@ Description: only for 3den
 - Param: _pos
 - Param: _dir (optional, default 0)
 
-File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 43](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L43)
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 48](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L48)
 ## editorDebug_internal_validateValuesCanStart
 
 Type: function
@@ -297,7 +465,7 @@ Type: function
 Description: 
 - Param: _cache
 
-File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 55](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L55)
+File: [host\Tools\EditorDebug\EditorDebug_shared.sqf at line 60](../../../Src/host/Tools/EditorDebug/EditorDebug_shared.sqf#L60)
 # EditorDebug_visual.sqf
 
 ## editorDebug_handlerWidgets

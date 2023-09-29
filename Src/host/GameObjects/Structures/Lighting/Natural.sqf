@@ -24,7 +24,9 @@ class(TorchHolder) extends(IStruct)
 	func(onInteractWith)
 	{
 		objParams_2(_with,_usr);
-		if !isTypeStringOf(_with,callSelf(getAttachedItemName)) exitWith {};
+		private _classWith = callFunc(_with,getClassName);
+		private _attName = callSelf(getAttachedItemName);
+		if (_classWith != _attName && _classWith != (_attName+"Disabled")) exitWith {};
 		if !isNullObject(getSelf(torch)) exitWith {};
 
 		callFuncParams(_usr,removeItem,_with arg this);

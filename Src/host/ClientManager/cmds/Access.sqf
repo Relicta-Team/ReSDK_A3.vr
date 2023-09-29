@@ -428,6 +428,29 @@ addCommandWithDescription("kick",ACCESS_ADMIN,"Кикает игрока с се
 	callFuncParams(thisClient,localSay,"Выполнено" arg "system");
 };
 
+commands_internal_list_charsettings = [
+	["Имя","name"],
+	["Пол","gender"],
+	["Лицо","face"],
+	["Бег","run"], //spr_sync/ cd_sp_lockedSetting
+	["Комбат","combat"]
+];
+
+commands_internal_convertSettingsToRuName = {
+	private _setlist = _this;
+	private _out = [];
+	{
+		private _curset = _x;
+		private _fnd = commands_internal_list_charsettings findif {_x select 1 == _curset};
+		if (_fnd == -1) then {
+			_out pushback (format["Unk::%1",_curset]);
+		} else {
+			_out pushBack (commands_internal_list_charsettings select _fnd select 0);
+		};
+	} foreach _setlist;
+	_out
+};
+
 addCommandWithDescription("bancharsetting",ACCESS_ADMIN,"Забанить человеку определенную настройку персонажа. В параметрах указывается имя аккаунта")
 {
 	private _uid = [args,""] call db_NickToUid;
@@ -437,9 +460,10 @@ addCommandWithDescription("bancharsetting",ACCESS_ADMIN,"Забанить чел
 
 	private _dat = ["Выберите какую настройку баним для '"+args+"':"];
 	
-	_dat pushback ("Имя|name,"+args);
-	_dat pushBack ("Пол|gender,"+args);
-	_dat pushBack ("Лицо|face,"+args);
+	{
+		_x params ["_runame","_setname"];
+		_dat pushback (format["%1|%2,%3",_runame,_setname,args]);
+	} foreach commands_internal_list_charsettings;
 	
 	private _handler = {
 		private thisClient = ifcheck(isTypeOf(this,ServerClient),this,getSelf(client));
@@ -455,7 +479,7 @@ addCommandWithDescription("bancharsetting",ACCESS_ADMIN,"Забанить чел
 			if callFunc(_cli,isInLobby) then {
 				callFuncParams(_cli,forceDisconnect,"Вам заблокировали одну из настроек персонажа. Перезайдите на сервер.");
 			};
-			
+			private _delChars = _setting in ["name","gender","face"];
 			if (_setting == "name") then {
 				callFuncParams(_cli,setCharSetting,"r-name");
 			};
@@ -466,10 +490,18 @@ addCommandWithDescription("bancharsetting",ACCESS_ADMIN,"Забанить чел
 				callFuncParams(_cli,setCharSetting,_setting arg "rand"); //set face to random
 			};
 
+			if (_setting == "run") then {
+				callFuncParams(_cli,fastSendInfo,"cd_sp_lockedSetting" arg true);
+				//!callFuncParams(_cli,sendInfo,"spr_sync" arg []);//Пусть синхронизация происходит только при заходе за след.персонажа
+			};
+
 			//удаляем всех персонажей...
-			{
-				getVar(_cli,charSettingsTemplates) set [_foreachIndex,null];
-			} foreach array_copy(getVar(_cli,charSettingsTemplates));
+			if (_delChars) then {
+				{
+					getVar(_cli,charSettingsTemplates) set [_foreachIndex,null];
+				} foreach array_copy(getVar(_cli,charSettingsTemplates));
+			};
+
 
 			//обновляем значение
 			private _newidx = getVar(_cli,lockedSettings) pushBackUnique _setting;
@@ -499,8 +531,9 @@ addCommandWithDescription("unbancharsetting",ACCESS_ADMIN,"Разбанить ч
 		callFuncParams(thisClient,localSay,"Не найден клиент на сервере - " + args arg "system");
 	};
 	private _dat = ["Выберите какую настройку разбаним для '"+args+"':"];
+	private _lockRu = getVar(_cli,lockedSettings) call commands_internal_convertSettingsToRuName;
 	{
-		_dat pushBack (format["%1|%1,%2",_x,args]);
+		_dat pushBack (format["%3|%1,%2",_x,args,_lockRu select _foreachIndex]);
 	} foreach getVar(_cli,lockedSettings);
 
 	private _handler = {
@@ -517,6 +550,9 @@ addCommandWithDescription("unbancharsetting",ACCESS_ADMIN,"Разбанить ч
 			if (_remsetidx!=-1) then {
 				getVar(_cli,lockedSettings) deleteAt _remsetidx;
 				callFuncParams(thisClient,localSay,"Выполнено удаление заблокированной настройки для "+_userName arg "system");
+				if (_setting == "run") then {
+					callFuncParams(_cli,fastSendInfo,"cd_sp_lockedSetting" arg false);
+				};
 			} else {
 				callFuncParams(thisClient,localSay,"Настройка "+_setting+" не найдена для "+_userName arg "system");
 			};
@@ -541,5 +577,8 @@ addCommandWithDescription("getbancharsettings",ACCESS_ADMIN,"Получить з
 	} else {
 		_list = ([args] call db_getClientLockedSettings);
 	};
-	callFuncParams(thisClient,ShowMessageBox,"Text" arg "Заблокированные роли "+args+": "+sbr+(_list joinString sbr));
+	
+	_list = _list call commands_internal_convertSettingsToRuName;
+
+	callFuncParams(thisClient,ShowMessageBox,"Text" arg "Заблокированные настройки для "+args+": "+sbr+(_list joinString sbr));
 };

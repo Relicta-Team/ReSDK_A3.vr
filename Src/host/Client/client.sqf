@@ -271,6 +271,10 @@ class(ServerClient) /*extends(NetObject)*/
 		server_privateLaunch_list_awaitCheck pushBackUnique this;
 		#endif
 
+		if array_exists(getSelf(lockedSettings),"run") then {
+			callSelfParams(fastSendInfo,"cd_sp_lockedSetting" arg true);
+		};
+
 		private _postCheck = {
 			
 			if (rep_system_enable) then {
@@ -884,9 +888,20 @@ region(system actions)
 	{
 		objParams();
 		if (serverclient_internal_string_changelogs == "") then {
-			_t = preprocessFile "src\CHANGELOGS.txt";
-			_t = _t splitString (toString[10,13]) joinString sbr;
-			serverclient_internal_string_changelogs = format[_t,relicta_version];
+			forceUnicode 0;
+			_t = LOADFILE "src\CHANGELOGS.txt";
+			//_t = _t splitString (toString[10,13]) joinString sbr;
+
+			//replace task number and feature author
+			_t = [_t,"\(\#\d+\)\s*\*\*\w+\*\*",""] call regex_replace;
+
+			//replace 1lvl headers
+			_t = [_t,"\#\s*([\w ]{3,})","<t size='1.5'>$1</t>"+sbr] call regex_replace;
+			
+			//replace 2lvl headers
+			_t = [_t,"\#\#\s*\*\*([\w ]{3,})\**","<t size='1.3'>$1</t>"] call regex_replace;
+
+			serverclient_internal_string_changelogs = _t;
 		};
 		if (rep_system_enable && equals(getSelf(testResult),"")) exitwith {};
 		if getSelf(isMBOpened) exitwith {};
@@ -932,13 +947,20 @@ region(Reputation helpers)
 	};
 
 
-region(rpc messaging)
+region(rpc and networking messaging)
 	//отправка сообщения с обработкой на клиенте
 	func(sendInfo)
 	{
 		objParams_2(_mes,_data);
 		private _own = getSelf(id);
 		rpcSendToClient(_own,_mes,_data);
+	};
+
+	func(fastSendInfo)
+	{
+		objParams_2(_varname,_data);
+		private _own = getSelf(id);
+		netSendVar(_varname,_data,_own);
 	};
 
 region(Clientside music manager and local sounds)

@@ -308,7 +308,7 @@ init_function(menu_internal_initialize)
 	};
 	_w = [getEdenDisplay,BACKGROUND,[0,95,100,5]] call createWidget;
 	[_w,"<t align='center'>DEVELOPMENT BUILD</t>"] call widgetSetText;
-	_w ctrlSetBackgroundColor [0.9,0.1,0.1,.7];
+	_w ctrlSetBackgroundColor [0.9,0.1,0.1,.4];
 	getEdenDisplay setVariable ["menu_internal_devbuildwidget",_w];
 	if (!ISDEVBUILD) then {
 		_w ctrlShow false;

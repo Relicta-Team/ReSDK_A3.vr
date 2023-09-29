@@ -26,3 +26,13 @@ cd_fw_syncForceWalk = {
 	};
 	_mob forceWalk (call cd_fw_isForceWalk)
 };
+
+//sprint sync
+cd_sp_enabled = true;
+cd_sp_lockedSetting = false;
+cd_sp_canSprint = {
+	cd_sp_enabled && !cd_sp_lockedSetting
+};
+_spr_sync = {
+	player allowSprint (call cd_sp_canSprint)
+}; rpcAdd("spr_sync",_spr_sync);
