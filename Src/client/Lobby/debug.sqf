@@ -16,14 +16,20 @@ lobby_internal_rttcamera campreparefov 0.16;
 lobby_internal_rttcamera camcommitprepared 1;
 
 private _rttlt = lobby_internal_rttlight;
-_rttlt setPosAtl (_campos vectoradd [1,0.2,1.7]);
+_rttlt setPosAtl (_campos vectoradd [0.2,0.4,1.50]);
 private _ps = -90;
 [_rttlt,[0,_ps,0]] call BIS_fnc_setObjectRotation;
 [_rttlt,[0,_ps,0]] call BIS_fnc_setObjectRotation;
 
 _rttlt setLightConePars [122.52,30.46,2];
 _rttlt setLightColor [0.18,0.28,0.25];
-lobby_internal_backwallObject setposatl (_campos vectoradd [0,-1,0]);
+// _optData = "black";
+// _obj = lobby_internal_backwallObjects get _optData;
+// _obj setposatl (_campos vectoradd [0,-1.3,0]);
+// _obj setdir 0;
+// {
+// 	_y hideObject (_optData != _x);
+// } foreach lobby_internal_backwallObjects;
 
 //lobby_internal_rttcamera campreparetarget (_campos vectoradd [-0.05,10.5,0.1]);
 //lobby_internal_rttcamera camcommitprepared 0;

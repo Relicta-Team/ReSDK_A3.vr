@@ -396,7 +396,7 @@ lobby_setFace = {
 
 		{
 			_newItem = _list tvAdd [[_raceCatId],format["%1 %2",ifcheck(_isWomanMode,_womanCatName,_manCatName),_foreachIndex + 1]];
-			_list tvSetData [[_raceCatId,_newItem],format["['%1','select']",_x]];
+			_list tvSetData [[_raceCatId,_newItem],format["['%1','select','%2']",_x,_catSys]];
 
 			if (_x == _curValue) then {_defaultIndex = [_raceCatId,_newItem]};
 		} foreach (_mapFaces getOrDefault [_catSys,[]]);
@@ -405,6 +405,9 @@ lobby_setFace = {
 
 	//reset cam r2t
 	lobby_internal_rttcamera cameraEffect ["terminate", "back"];
+
+	//sync render lighting
+	call render_hdr_init;
 
 	//creating camera, using for lobby_glob_dummy_man
 	lobby_internal_rttcamera cameraEffect ["INTERNAL", "BACK", "lobby_face_rtt"];
@@ -415,13 +418,28 @@ lobby_setFace = {
 	lobby_internal_rttcamera camcommitprepared 0;
 
 	//adding wall
-	deletevehicle lobby_internal_backwallObject;
-	lobby_internal_backwallObject = createSimpleObject [
-		//"a3\structures_f_enoch\walls\brick\brickwall_01_l_5m_f.p3d"
-		"a3\structures_f\walls\stone_4m_f.p3d"
-		,[0,0,0]];
-	lobby_internal_backwallObject setposatl (_campos vectoradd [0,-1,0]);
+	// deletevehicle lobby_internal_backwallObject;
+	// lobby_internal_backwallObject = createSimpleObject [
+	// 	//"a3\structures_f_enoch\walls\brick\brickwall_01_l_5m_f.p3d"
+	// 	"a3\structures_f\walls\stone_4m_f.p3d"
+	// 	,[0,0,0]];
+	// lobby_internal_backwallObject setposatl (_campos vectoradd [0,-1,0]);
+	{
+		_y params ["_initData"];
+		_initData params ["_model","_pos",["_dir",0]];
+		private _o = createSimpleObject [_model,[0,0,0],true];
+		_o setposatl (_campos vectoradd _pos);
+		_o setdir _dir;
+		if !isNullReference(lobby_internal_backwallObjects get _x) then {
+			deletevehicle (lobby_internal_backwallObjects get _x);
+		};
+		lobby_internal_backwallObjects set [_x,_o];
+		_o hideObject true;
+	} foreach lobby_internal_backwallSettings;
 
+	if !isNullReference(lobby_internal_rttlight) then {
+		deletevehicle lobby_internal_rttlight;
+	};
 	private _rttlt = "#lightreflector" createVehicleLocal [0,0,0];
 	_rttlt setPosAtl (_campos vectoradd [1,0.2,1.7]);
 	private _ps = -90;
@@ -439,7 +457,8 @@ lobby_setFace = {
 	addWidToList(_ctg);
 	_startPos = 90;
 	_pic = [getDisplay,PICTURE,
-		WIDGET_FULLSIZE
+		[-30/2,0,100+30,100]
+		//WIDGET_FULLSIZE
 		//[-_startPos / 2,-_startPos / 2,100 + _startPos,100 + _startPos]
 	,_ctg] call createWidget;
 	_pic ctrlSetText "#(argb,512,512,1)r2t(lobby_face_rtt,1)";
@@ -447,6 +466,9 @@ lobby_setFace = {
 	_pic ctrlAddEventHandler ["Destroy",{
 		lobby_internal_rttcamera cameraEffect ["terminate", "back"];
 		deletevehicle lobby_internal_rttlight;
+		{
+			deletevehicle _y;
+		} foreach lobby_internal_backwallObjects;
 	}];
 	
 	//TODO rotate camera around player preview
@@ -483,7 +505,7 @@ lobby_setFace = {
 	_onTreeSelChanged = {
 		params ["_list", "_selectedPath"];
 		(parseSimpleArray (_list tvData _selectedPath)) params ["_config","_optionName",["_optData",""]];
-		traceformat("changed cat %1; cfg:%2; opt:%3",_selectedPath arg _config arg _optionName)
+		traceformat("changed cat %1; cfg:%2; opt:%3; optData:%4",_selectedPath arg _config arg _optionName arg _optData)
 		
 		_pic = _list getVariable "pic";
 		_text = _list getVariable "text";
@@ -501,6 +523,18 @@ lobby_setFace = {
 			lobby_glob_dummy_man setFace _config;
 			_text setFade 1;
 			_text commit 0.2;
+			//_optData here is category (white,black,asian etc...)
+			{
+				_y hideObject (_optData != _x);
+				if (_optData == _x) then {
+					((lobby_internal_backwallSettings get _x) select 1)
+					params ["_color",["_biasPos",[1,0.2,1.7]]];
+					private _rttlt = lobby_internal_rttlight;
+					private _campos = (lobby_glob_dummy_man modeltoworldvisual (lobby_glob_dummy_man selectionPosition "head"));
+					_rttlt setPosAtl (_campos vectoradd _biasPos);
+					_rttlt setLightColor _color;
+				};
+			} foreach lobby_internal_backwallObjects;
 		};
 		if (_optionName == "rand") exitwith {
 			private _newText = if (_config == "") then {

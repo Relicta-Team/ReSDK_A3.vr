@@ -44,6 +44,37 @@ lobby_charData = createLocation ["cba_namespacedummy",[100,100,100],0,0];
 
 lobby_internal_rttcamera = "camera" camCreate [0,0,0];
 lobby_internal_backwallObject = objnull;
+lobby_internal_backwallSettings = createHashMapFromArray [
+	["white",[
+		//back
+		["ca\structures_e\wall\wall_l\wall_l1_2m5_ep1.p3d",[0,-0.7,0],0]
+		//light:color,bias
+		,[[0.96,0.94,0.9] ]
+		]
+	],
+	["persian",[
+		["ca\structures\wall\wall_cbrk_5.p3d",[0,-0.7,0],0]
+		,[[0.48,0.86,0.78] ,[0.2,0.1,0.7]]
+		]
+	],
+	["asian",[
+		["a3\structures_f\walls\stone_4m_f.p3d",[0,-1.3,0],0]
+		,[[0.82,0.61,0.36] ,[0.2,0.1,1.0]]
+		]
+	],
+	["black",[
+		["a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v1_f.p3d",[0,-1.5,-1.3],0]
+		,[[0.37,0.72,0.93] ,[0.2,0.1,1.0]]
+		]
+	]
+];
+//хранилище объектов
+lobby_internal_backwallObjects = createHashMapFromArray ((keys lobby_internal_backwallSettings) apply {[_x,objNull]});
+if (!isNull(lobby_internal_rttlight)) then {
+	deletevehicle lobby_internal_rttlight;
+};
+lobby_internal_rttlight = objnull;
+
 
 //net variables
 lobby_roleList = []; //Содержит список ролей с описанием, названием и айди
