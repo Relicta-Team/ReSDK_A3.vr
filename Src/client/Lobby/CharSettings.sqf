@@ -364,6 +364,11 @@ lobby_setTrait = {
 	rpcSendToServer("onClientPressedTrait",[clientOwner]);
 };
 
+lobby_face_internal_relpos = {
+	params ["_posI",["_dirPos",0],["_dropRad",2]];
+	[(_posI select 0) + (sin _dirPos) * _dropRad, (_posI select 1) + (cos _dirPos) * _dropRad, _posI select 2];
+};
+
 lobby_setFace = {
 	onPressParams();
 
@@ -371,175 +376,154 @@ lobby_setFace = {
 
 	false call lobby_setEnableCharSetting;
 
-	_list = [getDisplay,LISTBOX,[0,0,50,100],getMainCtg] call createWidget;
+	_list = [getDisplay,"RscTree",[0,0,50,100],getMainCtg] call createWidget;
 	addWidToList(_list);
-	_listFaces = if (_isWomanMode) then {faces_list_woman} else {faces_list_man}; //if in profile setted woman gender then select from faces_list_woman
+	_mapFaces = if (_isWomanMode) then {faces_map_woman} else {faces_map_man};
 
-	private _cfgFaces = configfile >> "CfgFaces" >> "Man_A3";
-	/*    private _allFacesForType = [];
-    for "_i" from 0 to (count _cfgFaces - 1) do {
-        _face = _cfgFaces select _i;
-
-        if (isclass _face) then {
-            //if (getnumber(_face >> "disabled") == 0) then {
-
-                //_allFacesForType pushback [(configname _face),getText(_face >> "texture")];
-                _ind = _list lbAdd getText(_face >> "displayName");
-				_list lbSetData [_ind,str [getText(_face >> "texture"),(configname _face)]];
-            //};
-        };
-    };*/
-
-	_list lbAdd "Случайно";
-	_list lbSetData [0,"['nontext','rand']"];
-	_defaultIndex = 0;
+	//полный случайный выбор
+	private _id = _list tvAdd [[],"Случайно"];
+	_list tvSetData [[_id],"['','rand']"];
+	_defaultIndex = [_id];
 	_curValue = getCurrentCharData("face");
 	{
-		_face = _cfgFaces >> _x; //(configname _face);//
-		_ind = _list lbAdd ([getText(_face >> "displayName"),"Female","Цаца "] call cba_fnc_replace); //временная замена имён цац
-		_configName = configName _face;
-		_list lbSetData [_ind,
-			if (_isWomanMode) then {
-				_mapWoman = [
-					"women\data\baker_co1.paa",
-					"women\data\europ_co1.paa|women\data\hair\enslerhair_ca.paa",
-					"women\data\baker_co1.paa|women\data\hair\rockerhair_co.paa",
-					"women\data\europ_co1.paa",
-					"women\data\baker_co1.paa|women\data\hair\rockerhair_v2_co.paa",
-					"women\data2\hooker1_co.paa",
-					"women\data2\hooker3_co.paa",
-					"women\data2\hooker2_co.paa",
-					"women\data3\sportswoman1_co.paa",
-					"women\data3\sportswoman2_co.paa",
-					"women\data3\sportswoman5_co.paa",
-					"women\data\baker_co1.paa|women\data4\hair1.paa",
-					"women\data\baker_co1.paa|women\data4\hair1_bis.paa",
-					"women\data\baker_co1.paa|women\data4\hair.paa",
-					"women\data5\valentinafit_co.paa"
-				];
-				_ind = parseNumber (_x select [10,2]); //"max_femaleNN"
-				str [_mapWoman select (_ind - 1),_configName]
-			} else {
-				str [getText(_face >> "texture"),_configName]
-			}
+		_x params ["_catSys","_manCatName","_womanCatName","_catCommonName"];
+		private _raceCatId = _list tvAdd [[],_catCommonName];
+		_list tvSetData [[_raceCatId],format["['%1','cat']",_catSys]];
+		
+		//выбор из категории случайного лица
+		private _newItem = _list tvAdd [[_raceCatId],format["Случайн%1 %2",ifcheck(_isWomanMode,"ая","ый"),ifcheck(_isWomanMode,_womanCatName,_manCatName)]];
+		_list tvSetData [[_raceCatId,_newItem],format["['%1','rand','%2']",_catSys,ifcheck(_isWomanMode,_womanCatName,_manCatName)]];
 
-		];
+		{
+			_newItem = _list tvAdd [[_raceCatId],format["%1 %2",ifcheck(_isWomanMode,_womanCatName,_manCatName),_foreachIndex + 1]];
+			_list tvSetData [[_raceCatId,_newItem],format["['%1','select']",_x]];
 
-		if (_configName == _curValue) then {_defaultIndex = _ind};
-	} foreach _listFaces;
+			if (_x == _curValue) then {_defaultIndex = [_raceCatId,_newItem]};
+		} foreach (_mapFaces getOrDefault [_catSys,[]]);
+		
+	} foreach face_list_category;
 
+	//reset cam r2t
+	lobby_internal_rttcamera cameraEffect ["terminate", "back"];
+
+	//creating camera, using for lobby_glob_dummy_man
+	lobby_internal_rttcamera cameraEffect ["INTERNAL", "BACK", "lobby_face_rtt"];
+	private _campos = (lobby_glob_dummy_man modeltoworldvisual (lobby_glob_dummy_man selectionPosition "head"));
+	lobby_internal_rttcamera setposatl (_campos vectoradd [0,1,0.15]);
+	lobby_internal_rttcamera campreparetarget (_camPos vectoradd [-0.05,0,0.11]);
+	lobby_internal_rttcamera camSetFov 0.16;
+	lobby_internal_rttcamera camcommitprepared 0;
+
+	//adding wall
+	deletevehicle lobby_internal_backwallObject;
+	lobby_internal_backwallObject = createSimpleObject [
+		//"a3\structures_f_enoch\walls\brick\brickwall_01_l_5m_f.p3d"
+		"a3\structures_f\walls\stone_4m_f.p3d"
+		,[0,0,0]];
+	lobby_internal_backwallObject setposatl (_campos vectoradd [0,-1,0]);
+
+	private _rttlt = "#lightreflector" createVehicleLocal [0,0,0];
+	_rttlt setPosAtl (_campos vectoradd [1,0.2,1.7]);
+	private _ps = -90;
+	[_rttlt,[0,_ps,0]] call BIS_fnc_setObjectRotation;
+	[_rttlt,[0,_ps,0]] call BIS_fnc_setObjectRotation;
+	_rttlt setLightColor [0.48,0.48,0.45];
+	_rttlt setLightAmbient [0.03,0.03,0.04];
+	_rttlt setLightIntensity 1000;
+	_rttlt setLightAttenuation [1,0,0,0,5,7];
+	_rttlt setLightConePars [122.52,30.46,2];
+
+	lobby_internal_rttlight = _rttlt;
 
 	_ctg = [getDisplay,WIDGETGROUP,[50,0,50,50],getMainCtg] call createWidget;
 	addWidToList(_ctg);
 	_startPos = 90;
-	_pic = [getDisplay,PICTURE,[-_startPos / 2,-_startPos / 2,100 + _startPos,100 + _startPos],_ctg] call createWidget;
+	_pic = [getDisplay,PICTURE,
+		WIDGET_FULLSIZE
+		//[-_startPos / 2,-_startPos / 2,100 + _startPos,100 + _startPos]
+	,_ctg] call createWidget;
+	_pic ctrlSetText "#(argb,512,512,1)r2t(lobby_face_rtt,1)";
+
+	_pic ctrlAddEventHandler ["Destroy",{
+		lobby_internal_rttcamera cameraEffect ["terminate", "back"];
+		deletevehicle lobby_internal_rttlight;
+	}];
+	
+	//TODO rotate camera around player preview
+		// _pic ctrladdeventhandler ["MouseButtonDown",{
+		// 	params ["_w","_b"];
+		// 	_w setvariable ["moving",true];
+		// }];
+		// _pic ctrladdeventhandler ["MouseExit",{
+		// 	params ["_w"];
+		// 	_w setvariable ["moving",false];
+		// }];
+		// _pic ctrladdeventhandler ["MouseButtonUp",{
+		// 	params ["_w","_b"];
+		// 	_w setvariable ["moving",false];
+		// }];
+		// _pic ctrladdeventhandler ["MouseMoving",{
+		// 	params ["_w","_x","_y"];
+		// 	if (_w getvariable ["moving",false]) then {
+		// 		private _campos = (lobby_glob_dummy_man modeltoworldvisual (lobby_glob_dummy_man selectionPosition "head"));
+		// 		lobby_internal_rttcamera setposatl (_campos vectoradd [0+(_x*10),1+(_y*10),0]);
+		// 	};
+		// }];
+
 	addWidToList(_pic);
 	_list setvariable ["pic",_pic];
 
-	if (_isWomanMode) then {
+	_text = [getDisplay,TEXT,WIDGET_FULLSIZE,_ctg] call createWidget;
+	_text setBackgroundColor [0,0,0,1];
+	_text setFade 0;
+	_text commit 0;
+	_list setvariable ["text",_text];
 
-		[_pic,[-75,-50,500,500]] call widgetSetPosition;
 
-		_startPos = 90;
-		_pic = [getDisplay,PICTURE,[-35,-135,170,170],_ctg] call createWidget;
-		addWidToList(_pic);
-		_pic setFade 0.5;
-		_pic commit 0;
-		_list setvariable ["picHair",_pic];
-	};
-
-	_onLbSelChanged = {
-		params ["_list", "_selectedIndex"];
-
-		(parseSimpleArray (_list lbData _selectedIndex)) params ["_texture","_config"];
-
+	_onTreeSelChanged = {
+		params ["_list", "_selectedPath"];
+		(parseSimpleArray (_list tvData _selectedPath)) params ["_config","_optionName",["_optData",""]];
+		traceformat("changed cat %1; cfg:%2; opt:%3",_selectedPath arg _config arg _optionName)
+		
 		_pic = _list getVariable "pic";
-
-		_handleRand = (_pic getvariable ["__handleRandFace",-1]);
-		if (_handleRand != -1) then {stopUpdate(_handleRand)};
-
-		//traceformat("updated pic %1 -> %2",_texture arg _config);
-
-		if (_texture == "nontext") then {
-			_updrandFace = {
-				(_this select 0) params ["_pic","_list"];
-				if (equals(_pic,widgetNull) || equals(_list,widgetNull)) exitWith {
-					stopThisUpdate();
-				};
-				_lastInd = lbSize _list - 1;
-				_randIndex = randInt(1,_lastInd);
-				(parseSimpleArray (_list lbData _randIndex)) params ["_texture","_config"];
-
-				[_pic,_texture] call widgetSetPicture;
-			};
-			_hrand = startUpdateParams(_updrandFace,RANDFACE_UPD_TIME,[_pic arg _list]);
-			_pic setVariable ["__handleRandFace",_hrand];
-		} else {
-			[_pic,_texture] call widgetSetPicture;
+		_text = _list getVariable "text";
+		if (!isPiPEnabled) exitwith {
+			[_text,"<t color='#ff0000'>Включите PIP (картинка в картинке) в настройках графики Arma 3</t>"] call widgetSetText;
+			_text setFade 0;
+			_text commit 0;
 		};
-
-	};
-	if (_isWomanMode) then {
-		_onLbSelChanged = {
-			params ["_list", "_selectedIndex"];
-
-			(parseSimpleArray (_list lbData _selectedIndex)) params ["_texture","_config"];
-
-			_pic = _list getVariable "pic";
-			_picHair = _list getVariable "picHair";
-
-			_handleRand = (_pic getvariable ["__handleRandFace",-1]);
-			if (_handleRand != -1) then {stopUpdate(_handleRand)};
-
-			if (_texture == "nontext") then {
-				_updrandFace = {
-					(_this select 0) params ["_pic","_picHair","_list"];
-					if (equals(_pic,widgetNull) || equals(_list,widgetNull)) exitWith {
-						stopThisUpdate();
-					};
-					_lastInd = lbSize _list - 1;
-					_randIndex = randInt(1,_lastInd);
-					(parseSimpleArray (_list lbData _randIndex)) params ["_texture","_config"];
-
-					if ("|" in _texture) then {
-						_listTex = _texture splitString "|";
-						_face = _listTex select 0;
-						_hairs = _listTex select 1;
-
-						[_pic,_face] call widgetSetPicture;
-						[_picHair,_hairs] call widgetSetPicture;
-
-					} else {
-						[_pic,_texture] call widgetSetPicture;
-						[_picHair,""] call widgetSetPicture;
-					};
-				};
-				_hrand = startUpdateParams(_updrandFace,RANDFACE_UPD_TIME,[_pic arg _picHair arg _list]);
-				_pic setVariable ["__handleRandFace",_hrand];
-
+		if (_optionName == "cat") exitwith {
+			[_text,format["Категория: %1",_list tvText _selectedPath]] call widgetSetText;
+			_text setFade 0;
+			_text commit 0.1;
+		};
+		if (_optionName == "select") exitwith {
+			lobby_glob_dummy_man setFace _config;
+			_text setFade 1;
+			_text commit 0.2;
+		};
+		if (_optionName == "rand") exitwith {
+			private _newText = if (_config == "") then {
+				"Будет случайно выбран один из всех возможных лиц и народностей"
 			} else {
-
-				if ("|" in _texture) then {
-					_listTex = _texture splitString "|";
-					_face = _listTex select 0;
-					_hairs = _listTex select 1;
-
-					[_pic,_face] call widgetSetPicture;
-					[_picHair,_hairs] call widgetSetPicture;
-
-				} else {
-					[_pic,_texture] call widgetSetPicture;
-					[_picHair,""] call widgetSetPicture;
-				};
+				format["Будет случайно выбран %1",
+					_optData
+				]
 			};
+			[_text,_newText] call widgetSetText;
+			_text setFade 0;
+			_text commit 0.1;
 		};
-	};
 
-	_list ctrlAddEventHandler ["LBSelChanged",_onLbSelChanged];
+		assert(!isNullVar(_optionName));
+	};
+	
+
+	_list ctrlAddEventHandler ["TreeSelChanged",_onTreeSelChanged];
 	setMainWid("currentControl",_list);
 
-	[_list,_defaultIndex] call _onLbSelChanged;
-	_list lbSetCurSel _defaultIndex;
+	[_list,_defaultIndex] call _onTreeSelChanged;
+	_list tvSetCurSel _defaultIndex;
 
 	_w = [getDisplay,BUTTON,[52,52,50 - 4,20],getMainCtg] call createWidget;
 	addWidToList(_w);
@@ -557,15 +541,27 @@ lobby_setFace = {
 
 lobby_onSetFace = {
 	onPressParams();
-	_faceIndex = lbCurSel getMainWid("currentControl");
+	_faceIndex = tvCurSel getMainWid("currentControl");
 
-	if (_faceIndex < 0) exitWith {
+	if (_faceIndex isequalto [] || _faceIndex isequalto [-1]) exitWith {
 		["Ошибочка. Лицо не то.","error"] call chatPrint;
 		call lobby_onCloseSetting;
 	};
 
-	_faceData = getMainWid("currentControl") lbData _faceIndex;
-	(parseSimpleArray _faceData) params ["_texture","_config"];
+	_faceData = getMainWid("currentControl") tvData _faceIndex;
+	(parseSimpleArray _faceData) params ["_config","_cat"];
+
+	if (_cat == "cat") exitwith {}; //пропускаем если выбрана сама категория
+
+	if (_cat == "rand") then {
+		if (_config == "") then {
+			_config = _cat;
+		} else {
+			private _isWomanMode = getCurrentCharData('gender') != 0;
+			private _mapSearched = ifcheck(_isWomanMode,faces_map_woman,faces_map_man);
+			_config = pick (_mapSearched getOrDefault [_config,_mapSearched get "white"]);
+		};
+	};
 
 	["face",_config] call lobby_sendToServerSetting;
 
@@ -578,14 +574,32 @@ lobby_onSetFaceCode = {
 	_text = if (_val == "rand") then {
 		"Случайно"
 	} else {
-		_rez = getText(configfile >> "CfgFaces" >> "Man_A3" >> _val >> "displayName");
+		//поиск категории
+		private _idx = -1;
+		private _isman = null;
+		{
+			private _arr = _x;
+			_idx = _arr findif {_x == _val};
+			if (_idx != -1) exitwith {
+				_isman = _foreachIndex == 0;
+			};
+		} foreach [faces_list_man,faces_list_woman];
 
-		if ("Female" in _rez) then {
-			forceUnicode 0;
-			[_rez,"Female","Цаца "] call cba_fnc_replace //временная замена имён цац
-		} else {
-			_rez
-		}
+		if (_idx == -1) exitwith {"НЕИЗВЕСТНО"};
+
+		private _mapSearched = ifcheck(_isman,faces_map_man,faces_map_woman);
+		private _foundedText = null;
+		{
+			_x params ["_cat","_mName","_wName"];
+			{
+				if (_x == _val) exitwith {
+					_foundedText = format["%1 %2",ifcheck(_isman,_mName,_wName),_foreachIndex + 1];
+				};
+			} foreach (_mapSearched get _cat);
+		} foreach face_list_category;
+		
+		if isNullVar(_foundedText) exitwith {"ОШИБКА"};
+		_foundedText
 	};
 
 	[_wid,("Лицо: " + _text)] call widgetSetText;

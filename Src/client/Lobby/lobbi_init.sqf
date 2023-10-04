@@ -42,6 +42,9 @@ lobby_listResizingName = [];
 
 lobby_charData = createLocation ["cba_namespacedummy",[100,100,100],0,0];
 
+lobby_internal_rttcamera = "camera" camCreate [0,0,0];
+lobby_internal_backwallObject = objnull;
+
 //net variables
 lobby_roleList = []; //Содержит список ролей с описанием, названием и айди
 

@@ -734,7 +734,6 @@ gm_spawnClientToRole = {
 
 	//устанавливаем женскую одежду
 	if equals(getSelf(gender),gender_female) then {
-		setSelf(defaultUniform,"max_femaleBasicBody");
 		callSelf(onApplyDefaultUniform);
 	};
 
@@ -1532,3 +1531,28 @@ gm_createMob = {
 	_mob setPosAtl _pos;
 	_mob
 };
+
+lobby_createDummy = {
+	params ["_pos",["_isWoman",false]];
+	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
+	_mob disableAI "MOVE";
+	_mob disableAI "TARGET";
+	_mob disableAI "AUTOTARGET";
+	_mob disableAI "FSM";
+	_mob disableAI "ANIM";
+	
+
+	removeUniform _mob;
+	_mob setPosAtl _pos;
+	if (_isWoman) then {
+		_mob forceAddUniform getFieldBaseValue("MobWoman","defaultUniform");
+	};
+
+	_mob ENABLESIMULATIONGLOBAL false;
+	_mob
+};
+
+private _dummyMobPos = [50,50,0];
+private _dummyMan = [_dummyMobPos arg false] call lobby_createDummy;
+netSetGlobal(lobby_glob_dummy_man,_dummyMan);
+assert(!isNullReference(_dummyMan));
