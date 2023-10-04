@@ -1,17 +1,43 @@
-# FacesHelpers.sqf
+# FaceList.sqf
 
-## wrongName(var)
+## man_list_camo_pre
 
-Type: constant
+Type: Variable
 
 Description: 
-- Param: var
 
-Replaced value:
+
+Initial value:
 ```sqf
-(var in _name || var in _class)
+"PersianHead_A3_04_a PersianHead_A3_04_l PersianHead_A3_04_sa WhiteHead_22_a WhiteHead_22_l WhiteHead_22_sa GreekHead_A3_10_a GreekHead_A3_10_l GreekHead_A3_10_sa"
 ```
-File: [host\Namings\FacesHelpers.sqf at line 67](../../../Src/host/Namings/FacesHelpers.sqf#L67)
+File: [host\Namings\FaceList.sqf at line 1](../../../Src/host/Namings/FaceList.sqf#L1)
+## man_facelist_pre
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\Namings\FaceList.sqf at line 4](../../../Src/host/Namings/FaceList.sqf#L4)
+## woman_facelist_pre
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\Namings\FaceList.sqf at line 54](../../../Src/host/Namings/FaceList.sqf#L54)
+# FacesHelpers.sqf
+
 ## facesys_generatedConfig
 
 Type: Variable
@@ -59,7 +85,7 @@ Type: function
 Description: 
 
 
-File: [host\Namings\FacesHelpers.sqf at line 79](../../../Src/host/Namings/FacesHelpers.sqf#L79)
+File: [host\Namings\FacesHelpers.sqf at line 97](../../../Src/host/Namings/FacesHelpers.sqf#L97)
 # Naming_init.sqf
 
 ## naming_parseNames
@@ -191,14 +217,14 @@ File: [host\Namings\ParseNaming.sqf at line 78](../../../Src/host/Namings/ParseN
 
 Type: Variable
 
-Description: replicate mp vars
+Description: список всех лиц без категорий
 
 
 Initial value:
 ```sqf
 [false] call facesys_prepManFaces
 ```
-File: [host\Namings\PrepareFaces.sqf at line 14](../../../Src/host/Namings/PrepareFaces.sqf#L14)
+File: [host\Namings\PrepareFaces.sqf at line 28](../../../Src/host/Namings/PrepareFaces.sqf#L28)
 ## faces_list_woman
 
 Type: Variable
@@ -210,4 +236,40 @@ Initial value:
 ```sqf
 call facesys_prepWomanFaces
 ```
-File: [host\Namings\PrepareFaces.sqf at line 15](../../../Src/host/Namings/PrepareFaces.sqf#L15)
+File: [host\Namings\PrepareFaces.sqf at line 29](../../../Src/host/Namings/PrepareFaces.sqf#L29)
+## faces_map_man
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //key: en-name, value : listfaces
+```
+File: [host\Namings\PrepareFaces.sqf at line 16](../../../Src/host/Namings/PrepareFaces.sqf#L16)
+## faces_map_woman
+
+Type: Variable
+
+Description: key: en-name, value : listfaces
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\Namings\PrepareFaces.sqf at line 17](../../../Src/host/Namings/PrepareFaces.sqf#L17)
+## face_list_category
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\Namings\PrepareFaces.sqf at line 21](../../../Src/host/Namings/PrepareFaces.sqf#L21)

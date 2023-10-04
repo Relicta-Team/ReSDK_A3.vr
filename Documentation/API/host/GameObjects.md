@@ -3675,7 +3675,7 @@ Replaced value:
 ```sqf
 getSelf(name)
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 248](../../../Src/host/GameObjects/Mobs/Mob.sqf#L248)
+File: [host\GameObjects\Mobs\Mob.sqf at line 249](../../../Src/host/GameObjects/Mobs/Mob.sqf#L249)
 ## PIC_PREP
 
 Type: constant
@@ -3687,7 +3687,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 315](../../../Src/host/GameObjects/Mobs/Mob.sqf#L315)
+File: [host\GameObjects\Mobs\Mob.sqf at line 316](../../../Src/host/GameObjects/Mobs/Mob.sqf#L316)
 # MobGhost.sqf
 
 ## hasBP(idx)

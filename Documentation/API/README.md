@@ -16,7 +16,7 @@ Count modules: 30
  - [Interactions](client//Interactions.md) - 21 files
  - [Inventory](client//Inventory.md) - 7 files
  - [LightEngine](client//LightEngine.md) - 29 files
- - [Lobby](client//Lobby.md) - 7 files
+ - [Lobby](client//Lobby.md) - 8 files
  - [LocalEffects](client//LocalEffects.md) - 3 files
  - [NetDisplays](client//NetDisplays.md) - 16 files
  - [NOEngineClient](client//NOEngineClient.md) - 9 files
@@ -57,7 +57,7 @@ Count modules: 48
  - [MapManager](host//MapManager.md) - 10 files
  - [MatterSystem](host//MatterSystem.md) - 11 files
  - [Medals](host//Medals.md) - 3 files
- - [Namings](host//Namings.md) - 4 files
+ - [Namings](host//Namings.md) - 5 files
  - [Networking](host//Networking.md) - 2 files
  - [NOEngine](host//NOEngine.md) - 11 files
  - [ObjectiveSystem](host//ObjectiveSystem.md) - 3 files
