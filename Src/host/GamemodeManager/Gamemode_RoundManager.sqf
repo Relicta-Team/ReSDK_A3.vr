@@ -1551,8 +1551,18 @@ lobby_createDummy = {
 	_mob ENABLESIMULATIONGLOBAL false;
 	_mob
 };
+private _canCreateDummy = true;
+#ifdef __VM_VALIDATE
+	_canCreateDummy = false;
+#endif
+#ifdef __VM_BUILD
+	_canCreateDummy = false;
+#endif
 
-private _dummyMobPos = [50,50,0];
-private _dummyMan = [_dummyMobPos arg false] call lobby_createDummy;
-netSetGlobal(lobby_glob_dummy_man,_dummyMan);
-assert(!isNullReference(_dummyMan));
+if (_canCreateDummy) then {
+	private _dummyMobPos = [50,50,0];
+	private _dummyMan = [_dummyMobPos arg false] call lobby_createDummy;
+	netSetGlobal(lobby_glob_dummy_man,_dummyMan);
+	assert(!isNullReference(_dummyMan));
+};
+
