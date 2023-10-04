@@ -54,6 +54,7 @@
 #include <MobSkills_idx.hpp>
 
 class(MobWoman) extends(Mob)
+	var(defaultUniform,"max_femaleBasicBody");
 	var(gender,gender_female);
 	getter_func(getRetchSounds,["mob\female_retch1" arg "mob\female_retch2" arg "mob\female_retch3"]); //подавиться
 	getter_func(getPainSounds,["mob\female_pain1" arg "mob\female_pain2"]); //боль

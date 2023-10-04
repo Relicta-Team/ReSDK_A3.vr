@@ -7,12 +7,28 @@
 	This common component. Included in preinit
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-faces_list_man = [];
+#include "FaceList.sqf"
+
+//список всех лиц без категорий
+faces_list_man = []; 
 faces_list_woman = [];
+
+faces_map_man = createHashMap; //key: en-name, value : listfaces
+faces_map_woman = createHashMap;
+
 private ___skippedmanclasses = 0;
-//replicate mp vars
+
+face_list_category = [
+	["white","Корняк","Корнячка","Корняки"],
+	["persian","Вахатец","Вахатка","Вахатцы"],
+	["asian","Тегинец","Тегинка","Тегинцы"],
+	["black","Углярец","Углярка","Углярцы"]
+];
+
 faces_list_man = [false] call facesys_prepManFaces;
 faces_list_woman = call facesys_prepWomanFaces;
+
+
 
 
 //just logged this
