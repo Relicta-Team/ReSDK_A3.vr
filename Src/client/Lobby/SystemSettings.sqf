@@ -24,9 +24,19 @@ lobby_sys_buttonActions = createHashMapFromArray [
 		["Персонажи",{call lobby_sys_bc_charachters}],
 		["Кто в сети?!","system_whoonline"],
 		["Список изменений","system_whatnews"],
-		["<t colorLink='#ffffff'><a href='https://relicta.ru/wiki'>На вики</a></t>",{}],//font='Ringbear' colorLink='#77DE4E'
+		//["ref:https://relicta.ru/wiki@На вики",{}],// for references use this
+		//["<t colorLink='#ffffff'><a href='https://relicta.ru/wiki'>На вики</a></t>",{}],//font='Ringbear' colorLink='#77DE4E'
 		["<t colorLink='#ffffff'><a href='https://relicta.ru/wiki/%D0%9F%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0%23%D0%9F%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D0%BA%D0%B0_%D0%B4%D0%B8%D1%81%D0%BA%D0%BE%D1%80%D0%B4%D0%B0_%D0%BA_%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%BC%D1%83_%D0%B0%D0%BA%D0%BA%D0%B0%D1%83%D0%BD%D1%82%D1%83'>Инструкция по привязке к Discord</a></t>",{}],
 		["Обучение",{["Ждите в грядущих обновлениях...","event"] call chatPrint}]
+	]],
+	["wiki",[
+		["ref:https://relicta.ru/wiki@Главная страница",{}]
+		,["ref:https://relicta.ru/wiki/Подготовка@Лобби",{}]
+		,["ref:https://relicta.ru/wiki/Управление@Управление",{}]
+		,["ref:https://relicta.ru/wiki/Советы@Рекомендации по отыгрышу",{}]
+		,["ref:https://relicta.ru/wiki/Словарь@Словарь",{}]
+		,["ref:https://relicta.ru/wiki/Мировидение@Религии",{}]
+		,["ref:https://relicta.ru/wiki/Население@Национальности",{}]
 	]],
 	//рестарты, время раунда, глобальное сообщение и тд и тд
 	["server",[
@@ -41,8 +51,8 @@ lobby_sys_buttonActions = createHashMapFromArray [
 		
 	]]
 ];
-lobby_sys_buttonActions_sortedList = ["system","endgame","server","admin"];
-lobby_sys_buttonActions_sortedListName = [["Система","55780E"],["Конец раунда","55780E"],["Сервер","C4AD68"],["Админ","8F3140"]];
+lobby_sys_buttonActions_sortedList = ["system","wiki","endgame","server","admin"];
+lobby_sys_buttonActions_sortedListName = [["Система","55780E"],["Вики страницы","04B810"],["Конец раунда","55780E"],["Сервер","C4AD68"],["Админ","8F3140"]];
 
 //загружает окно системных настроек
 lobby_sysLoadMenu = {
@@ -140,7 +150,7 @@ lobby_sysLoadMenu = {
 
 lobby_sysLoadSettings = {
 	params ["_cat"];
-	
+	FORCEUnicode 1;
 	private _d = getDisplay;
 	
 	private _ctg = _d getVariable "ctgSystemSettings";
@@ -160,9 +170,20 @@ lobby_sysLoadSettings = {
 			_x params ["_name","_code"];
 			_but = [_d,TEXT,[0,_forEachIndex * _hsize,100,_hsize - 4],_ctg] call createWidget;
 			_but setBackgroundColor [0.149,0.592,0.176,0.12];
+			private _isRefButton = false; private _refLink = "";
+			if ([_name,"ref:"] call stringStartWith) then {
+				_isRefButton = true;
+				
+				_name = _name select [4,count _name];
+				(_name splitString "@") params ["_newref","_newname"];
+				_refLink = _newref;
+				_name = _newname;
+			};
+
 			[_but,format["<t align='center'>%1</t>",_name]] call widgetSetText;
 			_but setVariable ["code",_code];
 			lobby_sys_listWidgets pushBack _but;
+			
 			_but ctrlAddEventHandler ["MouseButtonUp",{
 				params ["_ct","_bt"];
 				if (_bt == MOUSE_LEFT) then {
@@ -175,8 +196,21 @@ lobby_sysLoadSettings = {
 					};
 				};	
 			}];
+			
 			//фикс чтобы бэкграунд не наслаивался поверх кнопок
 			ctrlSetFocus _but;
+
+			if (_isRefButton) then {
+				_but ctrlEnable false;
+				_but = [_d,BUTTON,[0,_forEachIndex * _hsize,100,_hsize - 4],_ctg] call createWidget;
+				_but setFade 1;
+				_but commit 0;
+				_but ctrlSetUrl _refLink;
+				lobby_sys_listWidgets pushBack _but;
+				ctrlSetFocus _but;
+			};
+
+			
 		} foreach _listButtons;
 		
 		[_backCtg,[0,0,100,((count _listButtons) * _hsize)max 100]] call widgetSetPosition;
