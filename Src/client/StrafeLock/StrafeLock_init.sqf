@@ -42,6 +42,9 @@ strafeLock_onUpdate = {
 strafeLock_handleKeyUp = {
     params ["","_key","_shift","_ctrl","_alt"];
     if (call strafeLock_isEnabled) then {
+
+        if (player call anim_isWalking) exitWith {};
+
         if (_key in strafeLock_const_lrButtons) then {
             [_key in RIGHT_MOVE_BUTTONS] call strafeLock_incrementBackMovePress;
         };
