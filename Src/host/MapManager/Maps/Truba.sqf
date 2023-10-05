@@ -39,7 +39,7 @@ go_editor_globalRefs getOrDefault [_m,locationnull];
 ['WoodenSmallBench',[4056.95,3632.04,26.5074],100.473,[0,0,1]] call InitStruct; 
 ['WoodenSmallBench',[4057.02,3634.72,26.5074],75.9297,[0,0,1]] call InitStruct; 
 ['SmallGrayPillar',[4053.16,3629.19,31.9688,true],[-0.0871597,-0.996174,-0.00641203],[-0.415871,0.030536,0.908911]] call InitStruct; 
-_4042_080083630_3049328_48035 = ['IStruct',[4042.08,3630.3,33.5662,true],0,[-0.00567329,0.00693103,0.99996], {_thisObj setvariable ['model','ml_shabut\exodus\ashtray.p3d'];}] call InitStruct; // !!! realocated model !!!
+_4041_948493630_9582528_48035 = ['IStruct',[4041.95,3630.96,33.5662,true],0,[-0.00567329,0.00693103,0.99996], {_thisObj setvariable ['model','ml_shabut\exodus\ashtray.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['StationTea',[4054.46,3632.95,26.9873],69.2112,[0,0,1]] call InitStruct; 
 ['SmallConcretePipe',[4051.63,3626.27,31.6437,true],231.712,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
 ['InfoBoard',[4053.47,3642.75,26.9172],140,[0,0,1]] call InitStruct; 
@@ -93,14 +93,12 @@ _4039_958983632_9201728_68727 = ['IStruct',[4039.96,3632.92,28.6873],60,[0,0,1],
 ['ClayWallSmall',[4036.81,3634.52,26.5015],254.998,[0,0,1]] call InitStruct; 
 ['NormalClayWall',[4042.5,3624.02,27.3857],60.0004,[0,0,1]] call InitStruct; 
 ['PlywoodThinWall',[4046.01,3622.47,26.3228],75,[0,0,1]] call InitStruct; 
-['Torch',[4042.55,3630.06,28.483],34.998,[0,0,1]] call InitItem; 
-['Sigarette',[4042.37,3630.13,28.5005],330,[0,0,1]] call InitItem; 
-['Sigarette',[4042.27,3630.12,28.4984],9.99886,[0,0,1]] call InitItem; 
-['MatchBox',[4042.36,3630,33.4948,true],0,[0.00129158,-0.00226384,0.999997]] call InitItem; 
-['KitchenKnife',[4042.1,3629.95,33.5094,true],0,[0.00129158,-0.00226384,0.999997]] call InitItem; 
+['MatchBox',[4042.52,3630.06,33.4948,true],0,[0.00129158,-0.00226384,0.999997]] call InitItem; 
+['KitchenKnife',[4042.14,3630.44,33.5258,true],[-0.766046,-0.642782,0.00225532],[-0.642785,0.766046,-0.00129157]] call InitItem; 
 _4040_997073639_7851626_55978 = ['WoodenBucket',[4041,3639.79,31.791,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
 ['Bucket',[4041.1,3640.61,31.5916,true],0,[0.00566271,-0.00693096,0.99996]] call InitItem; 
-['FabricBagBig2',[4044.9,3636.37,26.4592],330,[0,0,1]] call InitItem; 
+_4044_898193636_3740226_45916 = ['FabricBagBig2',[4044.9,3636.37,26.4592],330,[0,0,1]] call InitItem; 
+_4040_605963632_3127427_46178 = ['FabricBagBig2',[4040.61,3632.31,27.4618],330,[0,0,1]] call InitItem; 
 ['Shelves',[4041.28,3630.48,30.2968],240,[0,0,1]] call InitStruct; 
 ['WoodenChair',[4039.51,3635.03,30.228],190,[0,0,1]] call InitItem; 
 ['LargeClothCabinet',[4046.74,3630.74,30.294],60,[0,0,1]] call InitStruct; 
@@ -114,6 +112,7 @@ _4040_997073639_7851626_55978 = ['WoodenBucket',[4041,3639.79,31.791,true],0,[-0
 ['SmallRoundWoodenTable',[4042.84,3633.8,30.2686],330,[0,0,1]] call InitStruct; 
 ['ContainerGreen',[4040.6,3631.85,30.2847],330,[0,0,1]] call InitStruct; 
 ['WoodenDoor',[4043.19,3627.63,27.4458],330,[0,0,1]] call InitStruct; 
+_4045_488283633_1135327_46415 = ['ContainerGreen',[4045.49,3633.11,27.4641],150,[0,0,1]] call InitStruct; 
 ['Meat',[4076.24,3646.82,29.7845],160,[0,0,1]] call InitItem; 
 ['Muka',[4076.28,3645.11,29.6638],295,[0,0,1]] call InitItem; 
 ['Shovel',[4070.8,3645.93,28.9314],0,[0,0,1]] call InitItem; 
@@ -2413,11 +2412,35 @@ _4318_327643711_6948229_87771 = ['IStruct',[4318.33,3711.69,37.2116,true],0,[-0.
 ['BattleAxe',[4278.25,3686.21,35.9907,true],270,[0.00103313,-0.00699735,0.999975]] call InitItem; 
 ['CombatKnife',[4278.57,3685.66,35.9734,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
 _4043_146483629_1452630_30890 = ['SpawnPoint',[4043.15,3629.15,30.3089],60,[0,0,1]] call InitStruct; 
+['TorchDisabled',[4042.6,3629.98,28.476],190,[0,0,1]] call InitItem; 
+['CuttingBoard',[4042.24,3630.41,28.4927],320,[0,0,1]] call InitItem; 
+['SamokrutkaDisabled',[4042.31,3630.37,28.5158],0,[0,0,1]] call InitItem; 
+['SamokrutkaDisabled',[4042.24,3630.4,28.5158],50,[0,0,1]] call InitItem; 
+['Kastrula',[4041.35,3630.6,28.476],0,[0,0,1]] call InitItem; 
+['SoupPlate',[4042.04,3629.85,28.4862],0,[0,0,1]] call InitItem; 
+['MetalCup',[4041.8,3630.68,28.476],0,[0,0,1]] call InitItem; 
 
 
 
 if (!isNil'_4040_997073639_7851626_55978') then {
 	_4040_997073639_7851626_55978 setvariable ['icon',"gen\ca+structures_e+misc+misc_interier+bucket_ep1+p3d"];
+};
+if (!isNil'_4044_898193636_3740226_45916') then {
+	[_4044_898193636_3740226_45916,'Wrench',1,100] call (_4044_898193636_3740226_45916 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4044_898193636_3740226_45916,'MatchBox',1,100] call (_4044_898193636_3740226_45916 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4044_898193636_3740226_45916,'TorchDisabled',1,100] call (_4044_898193636_3740226_45916 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4040_605963632_3127427_46178') then {
+	[_4040_605963632_3127427_46178,'CuttingBoard',1,100] call (_4040_605963632_3127427_46178 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4040_605963632_3127427_46178,'FryingPan',1,100] call (_4040_605963632_3127427_46178 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4040_605963632_3127427_46178,'SoupPlate',1,100] call (_4040_605963632_3127427_46178 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4045_488283633_1135327_46415') then {
+	[_4045_488283633_1135327_46415,'TorchDisabled',1,100] call (_4045_488283633_1135327_46415 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4045_488283633_1135327_46415,'MatchBox',1,100] call (_4045_488283633_1135327_46415 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4045_488283633_1135327_46415,'HatGrayOldUshanka',1,100] call (_4045_488283633_1135327_46415 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4045_488283633_1135327_46415,'WoolCoat',1,100] call (_4045_488283633_1135327_46415 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4045_488283633_1135327_46415,'NomadCloth23',1,100] call (_4045_488283633_1135327_46415 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_4075_738533647_1945828_68387') then {
 	_4075_738533647_1945828_68387 setvariable ['countslots',100];
