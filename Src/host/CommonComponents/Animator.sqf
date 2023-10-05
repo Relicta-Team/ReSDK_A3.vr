@@ -71,6 +71,10 @@ _anim = {
 
 anim_getUnitAnim = {animationState _this};
 
+anim_isSprinting = { private _anm = _this call anim_getUnitAnim; "evas" in _anm || "sprs" in _anm };
+anim_isRunning = { private _anm = _this call anim_getUnitAnim; "tacs" in _anm || "runs" in _anm};
+anim_isWalking = { "wlks" in (_this call anim_getUnitAnim)};
+
 anim_syncAnim = {
 	params ["_mob"];
 	
