@@ -72,7 +72,7 @@ dynamicDisplayOpen = {
 
 	//antistrafe handler
 	_display displayAddEventHandler ["keyUp",{
-		_this call strafeLock_handleKeyUp
+		_this call strafeLock_onKeyUp
 	}];
 
 	_display

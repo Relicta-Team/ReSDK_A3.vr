@@ -19,7 +19,7 @@ strafeLock_setEnable = {
 
 	if (_mode) then {
 		if (strafeLock_handleKeyUp == -1) then {
-			strafeLock_handleKeyUp = (findDisplay 46) displayAddEventHandler ["KeyUp",strafeLock_handleKeyUp];
+			strafeLock_handleKeyUp = (findDisplay 46) displayAddEventHandler ["KeyUp",strafeLock_onKeyUp];
 		};
 		strafeLock_handle = startUpdate(strafeLock_onUpdate,STRAFELOCK_CHECKDELAY);
 	} else {
@@ -39,7 +39,7 @@ strafeLock_onUpdate = {
 	strafeLock_lrButtonsCountPress = [0,0];
 };
 
-strafeLock_handleKeyUp = {
+strafeLock_onKeyUp = {
 	params ["","_key","_shift","_ctrl","_alt"];
 	if (call strafeLock_isEnabled) then {
 
