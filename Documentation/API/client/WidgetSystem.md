@@ -116,6 +116,30 @@ Replaced value:
 (forkey in FORBIDDEN_BUTTONS_SCROLL)
 ```
 File: [client\WidgetSystem\blockedButtons.hpp at line 34](../../../Src/client/WidgetSystem/blockedButtons.hpp#L34)
+## LEFT_MOVE_BUTTONS
+
+Type: constant
+
+Description: strafelock check
+
+
+Replaced value:
+```sqf
+( ACT(TurnLeft) )
+```
+File: [client\WidgetSystem\blockedButtons.hpp at line 38](../../../Src/client/WidgetSystem/blockedButtons.hpp#L38)
+## RIGHT_MOVE_BUTTONS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+( ACT(TurnRight) )
+```
+File: [client\WidgetSystem\blockedButtons.hpp at line 39](../../../Src/client/WidgetSystem/blockedButtons.hpp#L39)
 ## CAN_MOVE_BUTTONS
 
 Type: constant
@@ -128,7 +152,7 @@ Replaced value:
 (ACT(MoveForward) + ACT(MoveBack) + ACT(TurnLeft) + ACT(TurnRight) + \
  ACT(MoveFastForward) + ACT(MoveSlowForward) + ACT(turbo) + ACT(TurboToggle) + ACT(MoveLeft) + ACT(MoveRight) + ACT(GetOver))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 39](../../../Src/client/WidgetSystem/blockedButtons.hpp#L39)
+File: [client\WidgetSystem\blockedButtons.hpp at line 42](../../../Src/client/WidgetSystem/blockedButtons.hpp#L42)
 ## CHANGE_STANCE_BUTTONS
 
 Type: constant
@@ -140,7 +164,7 @@ Replaced value:
 ```sqf
 (ACT(AdjustUp) + ACT(AdjustDown) + ACT(Crouch) + ACT(Stand) + ACT(MoveUp) + ACT(MoveDown))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 42](../../../Src/client/WidgetSystem/blockedButtons.hpp#L42)
+File: [client\WidgetSystem\blockedButtons.hpp at line 45](../../../Src/client/WidgetSystem/blockedButtons.hpp#L45)
 ## FAST_DROP_BUTTONS
 
 Type: constant
@@ -152,7 +176,7 @@ Replaced value:
 ```sqf
 (ACT(Crouch) + ACT(MoveDown))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 44](../../../Src/client/WidgetSystem/blockedButtons.hpp#L44)
+File: [client\WidgetSystem\blockedButtons.hpp at line 47](../../../Src/client/WidgetSystem/blockedButtons.hpp#L47)
 ## SIDEWAYS_MOVEMENT_BUTTONS
 
 Type: constant
@@ -164,7 +188,7 @@ Replaced value:
 ```sqf
 (ACT(TurnLeft) + ACT(TurnRight))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 46](../../../Src/client/WidgetSystem/blockedButtons.hpp#L46)
+File: [client\WidgetSystem\blockedButtons.hpp at line 49](../../../Src/client/WidgetSystem/blockedButtons.hpp#L49)
 ## ADDRULE_FORBIDDEN_BUTTONS(forkey)
 
 Type: constant
@@ -178,7 +202,7 @@ Replaced value:
 ```sqf
 (forkey in GROUP_ACTIONS || forkey in GROUP_COMMA_MENU || forkey in SIMPLE_PLAYER_INTERACTION)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 50](../../../Src/client/WidgetSystem/blockedButtons.hpp#L50)
+File: [client\WidgetSystem\blockedButtons.hpp at line 53](../../../Src/client/WidgetSystem/blockedButtons.hpp#L53)
 # defines.sqf
 
 ## HEIGHT_WINDOW_DRAGGER
@@ -312,7 +336,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\WidgetSystem\functions.sqf at line 87](../../../Src/client/WidgetSystem/functions.sqf#L87)
+File: [client\WidgetSystem\functions.sqf at line 92](../../../Src/client/WidgetSystem/functions.sqf#L92)
 ## INDEX_CUSTOM
 
 Type: constant
@@ -324,7 +348,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\WidgetSystem\functions.sqf at line 88](../../../Src/client/WidgetSystem/functions.sqf#L88)
+File: [client\WidgetSystem\functions.sqf at line 93](../../../Src/client/WidgetSystem/functions.sqf#L93)
 ## precent_to_real(proc_val)
 
 Type: constant
@@ -336,7 +360,7 @@ Replaced value:
 ```sqf
 (proc_val / 100)
 ```
-File: [client\WidgetSystem\functions.sqf at line 498](../../../Src/client/WidgetSystem/functions.sqf#L498)
+File: [client\WidgetSystem\functions.sqf at line 503](../../../Src/client/WidgetSystem/functions.sqf#L503)
 ## STARTX
 
 Type: constant
@@ -348,7 +372,7 @@ Replaced value:
 ```sqf
 (0 * safezoneW + safezoneX)
 ```
-File: [client\WidgetSystem\functions.sqf at line 525](../../../Src/client/WidgetSystem/functions.sqf#L525)
+File: [client\WidgetSystem\functions.sqf at line 530](../../../Src/client/WidgetSystem/functions.sqf#L530)
 ## STARTY
 
 Type: constant
@@ -360,7 +384,7 @@ Replaced value:
 ```sqf
 (0 * safezoneH + safezoneY)
 ```
-File: [client\WidgetSystem\functions.sqf at line 526](../../../Src/client/WidgetSystem/functions.sqf#L526)
+File: [client\WidgetSystem\functions.sqf at line 531](../../../Src/client/WidgetSystem/functions.sqf#L531)
 ## DIAPAZONX
 
 Type: constant
@@ -372,7 +396,7 @@ Replaced value:
 ```sqf
 ((1 * safezoneW + safezoneX) - STARTX)
 ```
-File: [client\WidgetSystem\functions.sqf at line 527](../../../Src/client/WidgetSystem/functions.sqf#L527)
+File: [client\WidgetSystem\functions.sqf at line 532](../../../Src/client/WidgetSystem/functions.sqf#L532)
 ## DIAPAZONY
 
 Type: constant
@@ -384,7 +408,7 @@ Replaced value:
 ```sqf
 ((1 * safezoneH + safezoneY) - STARTY)
 ```
-File: [client\WidgetSystem\functions.sqf at line 528](../../../Src/client/WidgetSystem/functions.sqf#L528)
+File: [client\WidgetSystem\functions.sqf at line 533](../../../Src/client/WidgetSystem/functions.sqf#L533)
 ## checkRange(numberToCheck,bottom,top)
 
 Type: constant
@@ -398,7 +422,7 @@ Replaced value:
 ```sqf
 (numberToCheck >= bottom && numberToCheck <= top)
 ```
-File: [client\WidgetSystem\functions.sqf at line 638](../../../Src/client/WidgetSystem/functions.sqf#L638)
+File: [client\WidgetSystem\functions.sqf at line 643](../../../Src/client/WidgetSystem/functions.sqf#L643)
 ## low_protect
 
 Type: constant
@@ -410,7 +434,7 @@ Replaced value:
 ```sqf
 0.9
 ```
-File: [client\WidgetSystem\functions.sqf at line 639](../../../Src/client/WidgetSystem/functions.sqf#L639)
+File: [client\WidgetSystem\functions.sqf at line 644](../../../Src/client/WidgetSystem/functions.sqf#L644)
 ## max_protect
 
 Type: constant
@@ -422,7 +446,7 @@ Replaced value:
 ```sqf
 1.1
 ```
-File: [client\WidgetSystem\functions.sqf at line 640](../../../Src/client/WidgetSystem/functions.sqf#L640)
+File: [client\WidgetSystem\functions.sqf at line 645](../../../Src/client/WidgetSystem/functions.sqf#L645)
 ## setwt(wid,_t,_sz)
 
 Type: constant
@@ -436,7 +460,7 @@ Replaced value:
 ```sqf
 [wid,format["<t align='center' size='%2'>%1</t>",_t,_sz]] call widgetSetText
 ```
-File: [client\WidgetSystem\functions.sqf at line 673](../../../Src/client/WidgetSystem/functions.sqf#L673)
+File: [client\WidgetSystem\functions.sqf at line 678](../../../Src/client/WidgetSystem/functions.sqf#L678)
 ## hasEnabledBlackScreen
 
 Type: Variable
@@ -448,7 +472,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\WidgetSystem\functions.sqf at line 584](../../../Src/client/WidgetSystem/functions.sqf#L584)
+File: [client\WidgetSystem\functions.sqf at line 589](../../../Src/client/WidgetSystem/functions.sqf#L589)
 ## displayOpen
 
 Type: function
@@ -472,7 +496,7 @@ Type: function
 Description: Закрыть дисплей
 
 
-File: [client\WidgetSystem\functions.sqf at line 77](../../../Src/client/WidgetSystem/functions.sqf#L77)
+File: [client\WidgetSystem\functions.sqf at line 82](../../../Src/client/WidgetSystem/functions.sqf#L82)
 ## createWidget
 
 Type: function
@@ -483,7 +507,7 @@ Description: Создать виджет
 - Param: _pos
 - Param: _parent
 
-File: [client\WidgetSystem\functions.sqf at line 82](../../../Src/client/WidgetSystem/functions.sqf#L82)
+File: [client\WidgetSystem\functions.sqf at line 87](../../../Src/client/WidgetSystem/functions.sqf#L87)
 ## deleteWidget
 
 Type: function
@@ -492,7 +516,7 @@ Description: Удалить виджет
 - Param: _widget
 - Param: _nextFrame (optional, default false)
 
-File: [client\WidgetSystem\functions.sqf at line 149](../../../Src/client/WidgetSystem/functions.sqf#L149)
+File: [client\WidgetSystem\functions.sqf at line 154](../../../Src/client/WidgetSystem/functions.sqf#L154)
 ## widgetSetPosition
 
 Type: function
@@ -502,7 +526,7 @@ Description: Устанавливает новую позицию виджету
 - Param: _posarray
 - Param: _time (optional, default -1)
 
-File: [client\WidgetSystem\functions.sqf at line 167](../../../Src/client/WidgetSystem/functions.sqf#L167)
+File: [client\WidgetSystem\functions.sqf at line 172](../../../Src/client/WidgetSystem/functions.sqf#L172)
 ## widgetPosPrecentToSafezone
 
 Type: function
@@ -512,7 +536,7 @@ Description: Преобразовать позицию виджета из пр�
 - Param: _prec
 - Param: _index
 
-File: [client\WidgetSystem\functions.sqf at line 209](../../../Src/client/WidgetSystem/functions.sqf#L209)
+File: [client\WidgetSystem\functions.sqf at line 214](../../../Src/client/WidgetSystem/functions.sqf#L214)
 ## widgetSetPositionOnly
 
 Type: function
@@ -522,7 +546,7 @@ Description: Устанавливает новую позицию виджету
 - Param: _posarray
 - Param: _time (optional, default -1)
 
-File: [client\WidgetSystem\functions.sqf at line 245](../../../Src/client/WidgetSystem/functions.sqf#L245)
+File: [client\WidgetSystem\functions.sqf at line 250](../../../Src/client/WidgetSystem/functions.sqf#L250)
 ## widgetGetPosition
 
 Type: function
@@ -533,7 +557,7 @@ Description: Получает позицию виджета
 - Param: _wp
 - Param: _hp
 
-File: [client\WidgetSystem\functions.sqf at line 285](../../../Src/client/WidgetSystem/functions.sqf#L285)
+File: [client\WidgetSystem\functions.sqf at line 290](../../../Src/client/WidgetSystem/functions.sqf#L290)
 ## isMouseInsideWidget
 
 Type: function
@@ -541,7 +565,7 @@ Type: function
 Description: Проверяет находится ли мышь внутри контрола
 - Param: _wid
 
-File: [client\WidgetSystem\functions.sqf at line 317](../../../Src/client/WidgetSystem/functions.sqf#L317)
+File: [client\WidgetSystem\functions.sqf at line 322](../../../Src/client/WidgetSystem/functions.sqf#L322)
 ## isMouseInsidePosition
 
 Type: function
@@ -552,7 +576,7 @@ Description: Проверяет находится ли мышь внутри п
 - Param: _xe2
 - Param: _ye2
 
-File: [client\WidgetSystem\functions.sqf at line 380](../../../Src/client/WidgetSystem/functions.sqf#L380)
+File: [client\WidgetSystem\functions.sqf at line 385](../../../Src/client/WidgetSystem/functions.sqf#L385)
 ## getMousePositionInWidget
 
 Type: function
@@ -560,7 +584,7 @@ Type: function
 Description: Получает позицию мыши внутри виджета
 
 
-File: [client\WidgetSystem\functions.sqf at line 396](../../../Src/client/WidgetSystem/functions.sqf#L396)
+File: [client\WidgetSystem\functions.sqf at line 401](../../../Src/client/WidgetSystem/functions.sqf#L401)
 ## widgetSetText
 
 Type: function
@@ -569,7 +593,7 @@ Description: Устанавливает текст в виджет
 - Param: _obj
 - Param: _text
 
-File: [client\WidgetSystem\functions.sqf at line 445](../../../Src/client/WidgetSystem/functions.sqf#L445)
+File: [client\WidgetSystem\functions.sqf at line 450](../../../Src/client/WidgetSystem/functions.sqf#L450)
 ## widgetSetPicture
 
 Type: function
@@ -578,7 +602,7 @@ Description: Устанавливает картинку в виджет
 - Param: _obj
 - Param: _text
 
-File: [client\WidgetSystem\functions.sqf at line 458](../../../Src/client/WidgetSystem/functions.sqf#L458)
+File: [client\WidgetSystem\functions.sqf at line 463](../../../Src/client/WidgetSystem/functions.sqf#L463)
 ## widgetGetTextHeight
 
 Type: function
@@ -586,7 +610,7 @@ Type: function
 Description: Получает высоту текста виджета
 
 
-File: [client\WidgetSystem\functions.sqf at line 465](../../../Src/client/WidgetSystem/functions.sqf#L465)
+File: [client\WidgetSystem\functions.sqf at line 470](../../../Src/client/WidgetSystem/functions.sqf#L470)
 ## widgetWGScrolldown
 
 Type: function
@@ -594,7 +618,7 @@ Type: function
 Description: скроллинг контрол группы WIDGETGROUP_H
 - Param: _wid
 
-File: [client\WidgetSystem\functions.sqf at line 484](../../../Src/client/WidgetSystem/functions.sqf#L484)
+File: [client\WidgetSystem\functions.sqf at line 489](../../../Src/client/WidgetSystem/functions.sqf#L489)
 ## mouseSetPosition
 
 Type: function
@@ -603,7 +627,7 @@ Description: Устанавливает позицию мыши в процен�
 - Param: _xpos
 - Param: _ypos
 
-File: [client\WidgetSystem\functions.sqf at line 496](../../../Src/client/WidgetSystem/functions.sqf#L496)
+File: [client\WidgetSystem\functions.sqf at line 501](../../../Src/client/WidgetSystem/functions.sqf#L501)
 ## mouseGetPosition
 
 Type: function
@@ -612,7 +636,7 @@ Description: Получает позицию мыши (значения в пр�
 - Param: _mX
 - Param: _mY
 
-File: [client\WidgetSystem\functions.sqf at line 503](../../../Src/client/WidgetSystem/functions.sqf#L503)
+File: [client\WidgetSystem\functions.sqf at line 508](../../../Src/client/WidgetSystem/functions.sqf#L508)
 ## convertScreenCoords
 
 Type: function
@@ -620,7 +644,7 @@ Type: function
 Description: Преобразует позицию мыши в координаты экранного пространства
 
 
-File: [client\WidgetSystem\functions.sqf at line 520](../../../Src/client/WidgetSystem/functions.sqf#L520)
+File: [client\WidgetSystem\functions.sqf at line 525](../../../Src/client/WidgetSystem/functions.sqf#L525)
 ## positionWorldToScreen
 
 Type: function
@@ -628,7 +652,7 @@ Type: function
 Description: Конвертация мировой позиции в экранные координаты. Всегда возвращает vec2
 
 
-File: [client\WidgetSystem\functions.sqf at line 537](../../../Src/client/WidgetSystem/functions.sqf#L537)
+File: [client\WidgetSystem\functions.sqf at line 542](../../../Src/client/WidgetSystem/functions.sqf#L542)
 ## getScreenPointToWorld
 
 Type: function
@@ -637,7 +661,7 @@ Description: screenToWorld scripted alternative (ray to distance, not surface)
 - Param: _screenPos (optional, default getMousePosition)
 - Param: _mulDist (optional, default 1000)
 
-File: [client\WidgetSystem\functions.sqf at line 542](../../../Src/client/WidgetSystem/functions.sqf#L542)
+File: [client\WidgetSystem\functions.sqf at line 547](../../../Src/client/WidgetSystem/functions.sqf#L547)
 ## isPointInScreenPosition
 
 Type: function
@@ -646,7 +670,7 @@ Description: Проверяет находится ли позиция внут�
 - Param: _point
 - Param: _sp
 
-File: [client\WidgetSystem\functions.sqf at line 558](../../../Src/client/WidgetSystem/functions.sqf#L558)
+File: [client\WidgetSystem\functions.sqf at line 563](../../../Src/client/WidgetSystem/functions.sqf#L563)
 ## canSeeScreenPoint
 
 Type: function
@@ -654,7 +678,7 @@ Type: function
 Description: Можно ли видеть точку на экране
 
 
-File: [client\WidgetSystem\functions.sqf at line 573](../../../Src/client/WidgetSystem/functions.sqf#L573)
+File: [client\WidgetSystem\functions.sqf at line 578](../../../Src/client/WidgetSystem/functions.sqf#L578)
 ## hasObjectInScene
 
 Type: function
@@ -663,7 +687,7 @@ Description: видно ли объект в сцене. Лучше всего �
 - Param: _xPos
 - Param: _yPos
 
-File: [client\WidgetSystem\functions.sqf at line 578](../../../Src/client/WidgetSystem/functions.sqf#L578)
+File: [client\WidgetSystem\functions.sqf at line 583](../../../Src/client/WidgetSystem/functions.sqf#L583)
 ## setBlackScreenGUI
 
 Type: function
@@ -672,7 +696,7 @@ Description: Устанавливает режим черного экрана
 - Param: _mode
 - Param: _time (optional, default 0.001)
 
-File: [client\WidgetSystem\functions.sqf at line 587](../../../Src/client/WidgetSystem/functions.sqf#L587)
+File: [client\WidgetSystem\functions.sqf at line 592](../../../Src/client/WidgetSystem/functions.sqf#L592)
 ## setVisibleHUD
 
 Type: function
@@ -680,7 +704,7 @@ Type: function
 Description: Устанавливает режим видимости HUD-а
 - Param: _mode
 
-File: [client\WidgetSystem\functions.sqf at line 601](../../../Src/client/WidgetSystem/functions.sqf#L601)
+File: [client\WidgetSystem\functions.sqf at line 606](../../../Src/client/WidgetSystem/functions.sqf#L606)
 ## widget_antiGammaCheck
 
 Type: function
@@ -688,7 +712,7 @@ Type: function
 Description: false is not allowed values
 
 
-File: [client\WidgetSystem\functions.sqf at line 628](../../../Src/client/WidgetSystem/functions.sqf#L628)
+File: [client\WidgetSystem\functions.sqf at line 633](../../../Src/client/WidgetSystem/functions.sqf#L633)
 ## widget_createDisconnectMessage
 
 Type: function
@@ -696,7 +720,7 @@ Type: function
 Description: Создание сообщения отключения от сервера
 - Param: _args
 
-File: [client\WidgetSystem\functions.sqf at line 651](../../../Src/client/WidgetSystem/functions.sqf#L651)
+File: [client\WidgetSystem\functions.sqf at line 656](../../../Src/client/WidgetSystem/functions.sqf#L656)
 ## widget_registerInput
 
 Type: function
@@ -705,7 +729,7 @@ Description: специальная функция регистрации пер
 - Param: _w
 - Param: _key
 
-File: [client\WidgetSystem\functions.sqf at line 687](../../../Src/client/WidgetSystem/functions.sqf#L687)
+File: [client\WidgetSystem\functions.sqf at line 692](../../../Src/client/WidgetSystem/functions.sqf#L692)
 ## widgetModel_objectHelper
 
 Type: function
@@ -715,7 +739,7 @@ Description: Внутренняя функция для расчетов раз�
 - Param: _array
 - Param: _scale (optional, default 1)
 
-File: [client\WidgetSystem\functions.sqf at line 726](../../../Src/client/WidgetSystem/functions.sqf#L726)
+File: [client\WidgetSystem\functions.sqf at line 731](../../../Src/client/WidgetSystem/functions.sqf#L731)
 # widgets.hpp
 
 ## widgetNull

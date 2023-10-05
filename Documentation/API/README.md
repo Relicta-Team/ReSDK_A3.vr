@@ -1,5 +1,5 @@
 # Side: client
-Count modules: 30
+Count modules: 31
  - [client](client//client.md) - 2 files
  - [Chat](client//Chat.md) - 6 files
  - [ClientData](client//ClientData.md) - 13 files
@@ -26,6 +26,7 @@ Count modules: 30
  - [Rendering](client//Rendering.md) - 11 files
  - [SoundSystem](client//SoundSystem.md) - 6 files
  - [StaminaControl](client//StaminaControl.md) - 4 files
+ - [StrafeLock](client//StrafeLock.md) - 1 files
  - [SyncMobData](client//SyncMobData.md) - 3 files
  - [Traps](client//Traps.md) - 1 files
  - [VoiceSystem](client//VoiceSystem.md) - 12 files

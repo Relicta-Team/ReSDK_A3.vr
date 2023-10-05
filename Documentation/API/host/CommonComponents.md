@@ -479,7 +479,7 @@ Replaced value:
 ```sqf
 ((_anims select idx) == "nl" && ((_blender select idx) == 1))
 ```
-File: [host\CommonComponents\Animator.sqf at line 215](../../../Src/host/CommonComponents/Animator.sqf#L215)
+File: [host\CommonComponents\Animator.sqf at line 219](../../../Src/host/CommonComponents/Animator.sqf#L219)
 ## anim_assocList_keyString
 
 Type: Variable
@@ -520,6 +520,30 @@ Description:
 
 
 File: [host\CommonComponents\Animator.sqf at line 72](../../../Src/host/CommonComponents/Animator.sqf#L72)
+## anim_isSprinting
+
+Type: function
+
+Description: 
+- Param: _anm
+
+File: [host\CommonComponents\Animator.sqf at line 74](../../../Src/host/CommonComponents/Animator.sqf#L74)
+## anim_isRunning
+
+Type: function
+
+Description: 
+- Param: _anm
+
+File: [host\CommonComponents\Animator.sqf at line 75](../../../Src/host/CommonComponents/Animator.sqf#L75)
+## anim_isWalking
+
+Type: function
+
+Description: 
+
+
+File: [host\CommonComponents\Animator.sqf at line 76](../../../Src/host/CommonComponents/Animator.sqf#L76)
 ## anim_syncAnim
 
 Type: function
@@ -527,7 +551,7 @@ Type: function
 Description: 
 - Param: _mob
 
-File: [host\CommonComponents\Animator.sqf at line 74](../../../Src/host/CommonComponents/Animator.sqf#L74)
+File: [host\CommonComponents\Animator.sqf at line 78](../../../Src/host/CommonComponents/Animator.sqf#L78)
 ## anim_doAttack
 
 Type: function
@@ -537,7 +561,7 @@ Description:
 - Param: _slotIdx
 - Param: _enumAtt
 
-File: [host\CommonComponents\Animator.sqf at line 229](../../../Src/host/CommonComponents/Animator.sqf#L229)
+File: [host\CommonComponents\Animator.sqf at line 233](../../../Src/host/CommonComponents/Animator.sqf#L233)
 ## anim_doDodge
 
 Type: function
@@ -546,7 +570,7 @@ Description:
 - Param: _mob
 - Param: _side
 
-File: [host\CommonComponents\Animator.sqf at line 277](../../../Src/host/CommonComponents/Animator.sqf#L277)
+File: [host\CommonComponents\Animator.sqf at line 281](../../../Src/host/CommonComponents/Animator.sqf#L281)
 ## anim_doParry
 
 Type: function
@@ -556,7 +580,7 @@ Description:
 - Param: _idxHand
 - Param: _enumParry
 
-File: [host\CommonComponents\Animator.sqf at line 297](../../../Src/host/CommonComponents/Animator.sqf#L297)
+File: [host\CommonComponents\Animator.sqf at line 301](../../../Src/host/CommonComponents/Animator.sqf#L301)
 # Assert.sqf
 
 ## __vmthrow_assert(res)
