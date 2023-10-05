@@ -70,6 +70,11 @@ dynamicDisplayOpen = {
 			if (_key == KEY_ESCAPE || {ADDRULE_FORBIDDEN_BUTTONS(_key) || {[_key] call input_movementCheck}}) then {true;} else {false;}
 		}];
 
+	//antistrafe handler
+	_display displayAddEventHandler ["keyUp",{
+		_this call strafeLock_handleKeyUp
+	}];
+
 	_display
 };
 

@@ -33,7 +33,10 @@ ACT(SelectGroupUnit8) + ACT(SelectGroupUnit9) + ACT(SelectGroupUnit0) + ACT(sele
 #define ADDRULE_FORBIDDEN_BUTTONS(forkey) (forkey in FORBIDDEN_BUTTONS)
 #define ADDRULE_FORBIDDEN_SCROLL(forkey) (forkey in FORBIDDEN_BUTTONS_SCROLL)
 
-
+//TurnLeft, TurnRight, MoveForward, MoveBack
+//strafelock check
+#define LEFT_MOVE_BUTTONS (Act(TurnLeft) )
+#define RIGHT_MOVE_BUTTONS (Act(TurnRight) )
 
 //movement actions 
 #define CAN_MOVE_BUTTONS (ACT(MoveForward) + ACT(MoveBack) + ACT(TurnLeft) + ACT(TurnRight) + \

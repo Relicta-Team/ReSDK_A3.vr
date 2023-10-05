@@ -298,6 +298,9 @@ region(Connect control events)
 		if array_exists(getVar(getSelf(client),lockedSettings),"run") then {
 			callSelfParams(sendInfo,"spr_sync" arg []);
 		};
+		
+		//anti strafe
+		callSelfParams(sendInfo, "strafeLock" arg [true]);
 	};
 
 	// Вызывается при отключении клиента от моба
@@ -308,6 +311,8 @@ region(Connect control events)
 		if callSelf(hasOpenedContainer) then {
 			callFuncParams(getSelf(openedContainer),onContainerClose,this);
 		};
+		
+		callSelfParams(sendInfo, "strafeLock" arg [false]);
 	};
 
 	func(getDescFor)
