@@ -21,7 +21,7 @@ strafeLock_setEnable = {
         if (strafeLock_handleKeyUp == -1) then {
             strafeLock_handleKeyUp = (findDisplay 46) displayAddEventHandler ["KeyUp",strafeLock_handleKeyUp];
         };
-        strafeLock_handle = startUpdate(strafeLock_onUpdate,strafeLock_CHECKDELAY);
+        strafeLock_handle = startUpdate(strafeLock_onUpdate,STRAFELOCK_CHECKDELAY);
     } else {
         stopUpdate(strafeLock_handle);
         strafeLock_handle = -1;
@@ -33,7 +33,7 @@ strafeLock_isEnabled = { strafeLock_handle != -1 };
 strafeLock_lrButtonsCountPress = [0,0];
 strafeLock_handleKeyUp = -1;
 strafeLock_handle = -1;
-strafeLock_const_lrButtons = LEFT_MOVE_BUTTONS + RIGHT_MOVE_BUTTONS;
+strafeLock_const_lrButtons = (LEFT_MOVE_BUTTONS + RIGHT_MOVE_BUTTONS);
 
 strafeLock_onUpdate = {
     strafeLock_lrButtonsCountPress = [0,0];
