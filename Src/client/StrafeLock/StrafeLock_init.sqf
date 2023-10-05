@@ -8,10 +8,10 @@
 #include <..\ClientRpc\clientRpc.hpp>
 #include <..\WidgetSystem\blockedButtons.hpp>
 
-#define STRAFELOCK_CHECKDELAY 0.5
+#define STRAFELOCK_CHECKDELAY 2.4
 
 //check with left and right buttons
-#define STRAFELOCK_MAXPRESS 3
+#define STRAFELOCK_MAXPRESS 2
 
 strafeLock_setEnable = {
 	params ["_mode"];
@@ -34,9 +34,11 @@ strafeLock_lrButtonsCountPress = [0,0];
 strafeLock_handleKeyUp = -1;
 strafeLock_handle = -1;
 strafeLock_const_lrButtons = LEFT_MOVE_BUTTONS + RIGHT_MOVE_BUTTONS;
+strafeLock_catched = false;
 
 strafeLock_onUpdate = {
 	strafeLock_lrButtonsCountPress = [0,0];
+	strafeLock_catched = false;
 };
 
 strafeLock_onKeyUp = {
@@ -44,6 +46,7 @@ strafeLock_onKeyUp = {
 	if (call strafeLock_isEnabled) then {
 
 		if (player call anim_isWalking) exitWith {};
+		if (abs speed player == 0) exitWith {};
 
 		if (_key in strafeLock_const_lrButtons) then {
 			[_key in RIGHT_MOVE_BUTTONS] call strafeLock_incrementBackMovePress;
@@ -54,13 +57,19 @@ strafeLock_onKeyUp = {
 strafeLock_incrementBackMovePress = {
 	params ["_sideIndex"];
 
-	MODARR(strafeLock_lrButtonsCountPress,_sideIndex, + 1);
+	MODARR(strafeLock_lrButtonsCountPress,boolToInt(_sideIndex), + 1);
 
 	call strafeLock_checkConditions;
 };
 
 strafeLock_checkConditions = {
-	if (({_x>=STRAFELOCK_MAXPRESS} count strafeLock_lrButtonsCountPress) == 2) then {
+	if (strafeLock_catched) exitWith {};
+
+	if (
+		({_x>=STRAFELOCK_MAXPRESS} count strafeLock_lrButtonsCountPress) == 2
+		|| ({_x>=(STRAFELOCK_MAXPRESS*2.5)}count strafeLock_lrButtonsCountPress) == 1
+	) then {
 		rpcSendToServer("onStrafeCatch",[player]);
+		strafeLock_catched = true;
 	};
 };
