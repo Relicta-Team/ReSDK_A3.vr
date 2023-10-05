@@ -35,8 +35,8 @@ ACT(SelectGroupUnit8) + ACT(SelectGroupUnit9) + ACT(SelectGroupUnit0) + ACT(sele
 
 //TurnLeft, TurnRight, MoveForward, MoveBack
 //strafelock check
-#define LEFT_MOVE_BUTTONS ( Act(TurnLeft) )
-#define RIGHT_MOVE_BUTTONS ( Act(TurnRight) )
+#define LEFT_MOVE_BUTTONS ( ACT(TurnLeft) )
+#define RIGHT_MOVE_BUTTONS ( ACT(TurnRight) )
 
 //movement actions 
 #define CAN_MOVE_BUTTONS (ACT(MoveForward) + ACT(MoveBack) + ACT(TurnLeft) + ACT(TurnRight) + \
