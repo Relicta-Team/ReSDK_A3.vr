@@ -374,7 +374,7 @@ inventory_onContainerOpen = {
 				RETURN(0);
 			};
 		};
-		if (inventory_isOpenContainer && !isNullReference(getContainerSlotsCtg)) then {
+		if (inventory_isOpenContainer) then {
 			call inventory_loadContainerSlots;
 		} else {
 			call inventory_openContainer;
@@ -408,7 +408,7 @@ inventory_onContainerContentUpdate = {
 			call openInventory;
 		};
 		
-		if (inventory_isOpenContainer && !isNullReference(getContainerSlotsCtg)) then {
+		if (inventory_isOpenContainer) then {
 			call inventory_loadContainerSlots;
 		} else {
 			call inventory_openContainer;
