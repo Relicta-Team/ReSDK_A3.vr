@@ -49,5 +49,6 @@ importClient("src\client\VoiceSystem\VoiceSystem_init.sqf"); cmplog("Voice")//tf
 importClient("src\client\DiscordRPC\DiscordRPC_init.sqf");cmplog("Discord")
 importClient("src\client\Traps\TrapsInit.sqf"); cmplog("traps") //система ловушек
 importClient("src\client\OneSync\OneSync_init.sqf"); cmplog("OSync")//оптимизированная синхронизация
+importClient("src\client\StrafeLock\StrafeLock_init.sqf"); cmplog("Strafe") //протект стрейфа
 
 importClient("src\client\ClientInit\ClientInit.sqf"); cmplog("EntryPoint")//только в самом конце инитим клиента

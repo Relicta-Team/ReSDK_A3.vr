@@ -3675,7 +3675,7 @@ Replaced value:
 ```sqf
 getSelf(name)
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 248](../../../Src/host/GameObjects/Mobs/Mob.sqf#L248)
+File: [host\GameObjects\Mobs\Mob.sqf at line 249](../../../Src/host/GameObjects/Mobs/Mob.sqf#L249)
 ## PIC_PREP
 
 Type: constant
@@ -3687,7 +3687,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 315](../../../Src/host/GameObjects/Mobs/Mob.sqf#L315)
+File: [host\GameObjects\Mobs\Mob.sqf at line 321](../../../Src/host/GameObjects/Mobs/Mob.sqf#L321)
 # MobGhost.sqf
 
 ## hasBP(idx)
@@ -4122,7 +4122,7 @@ Description: replicator common
 - Param: _method
 - Param: _ctx
 
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 560](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L560)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 576](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L576)
 # Mob_Interact.sqf
 
 ## thcheck(r)
