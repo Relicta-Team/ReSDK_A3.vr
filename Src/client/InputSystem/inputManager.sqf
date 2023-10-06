@@ -64,7 +64,6 @@ onGameKeyInputs = {
 	};
 	#endif*/
 	if isPressed(input_act_inventory) exitWith {
-		if (["inventory",0.15] call input_spamProtect) exitWith {};
 		call openInventory;
 	};
 
