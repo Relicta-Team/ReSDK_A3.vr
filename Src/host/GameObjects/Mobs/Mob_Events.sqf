@@ -538,6 +538,22 @@ __onUpdateImplMethod(onUpdateAttackType,setAttackType);
 __onUpdateImplMethodNoParams(onUpdateActiveHand,switchActiveHand);
 __onUpdateImplMethodNoParams(switchTwoHands,switchTwoHands);
 
+// ---- antistrafe event -----
+_onStrafeCatch = {
+	params ["_mobObj"];
+	
+	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
+
+	if (callSelf(isActive)) then {
+		if (callSelf(getStance) > STANCE_DOWN) then {
+			callSelf(KnockDown);
+			callSelfParams(Stun,randInt(5,10) arg true arg true);
+			private _mRand = pick ["неуклюже","неумело","глупо","смешно","безумно"];
+			callSelfParams(meSay,_mRand + " падает");
+		};
+	};
+}; rpcAdd("onStrafeCatch",_onStrafeCatch);
+
 /**************************************************************************
 |					ONE SYNC SERVER EVENTS								  |
 **************************************************************************/
