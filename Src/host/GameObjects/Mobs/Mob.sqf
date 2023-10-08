@@ -54,6 +54,7 @@
 #include <MobSkills_idx.hpp>
 
 class(MobWoman) extends(Mob)
+	var(defaultUniform,"max_femaleBasicBody");
 	var(gender,gender_female);
 	getter_func(getRetchSounds,["mob\female_retch1" arg "mob\female_retch2" arg "mob\female_retch3"]); //подавиться
 	getter_func(getPainSounds,["mob\female_pain1" arg "mob\female_pain2"]); //боль
@@ -76,7 +77,7 @@ class(Mob) extends(BasicMob)
 	#include "Mob_Emotes.sqf"
 	#include "Mob_Communication.sqf"
 
-	verbList("undress standupfromchair showOrgans",BasicMob);
+	verbList("transitem undress standupfromchair showOrgans",BasicMob);
 
 	var_str(face); //лицо
 	var_str(faceAnim); //текущая лицевая анимация
@@ -293,6 +294,13 @@ region(Connect control events)
 		callSelfParams(playMusic,"!ambient" arg "MUSIC_CHANNEL_AMBIENT" arg "stdlist");
 
 		callSelfParams(localEffectUpdate,"GenericAmbSound");
+
+		if array_exists(getVar(getSelf(client),lockedSettings),"run") then {
+			callSelfParams(sendInfo,"spr_sync" arg []);
+		};
+		
+		//anti strafe
+		callSelfParams(sendInfo, "strafeLock" arg [true]);
 	};
 
 	// Вызывается при отключении клиента от моба
@@ -303,6 +311,8 @@ region(Connect control events)
 		if callSelf(hasOpenedContainer) then {
 			callFuncParams(getSelf(openedContainer),onContainerClose,this);
 		};
+		
+		callSelfParams(sendInfo, "strafeLock" arg [false]);
 	};
 
 	func(getDescFor)

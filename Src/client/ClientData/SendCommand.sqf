@@ -8,13 +8,16 @@
 #define SC_SIZE_W 40
 #define SC_SIZE_H 30
 #define CD_MAX_COMMANDS_HISTORY_COUNT 100
+#ifdef EDITOR
+	if isNull(cd_commandHistoryBuffer) then {
+		cd_commandHistoryBuffer = [];
 
-cd_commandHistoryBuffer = [];
-
-#ifdef DEBUG
-for "_i" from 1 to 20 do {
-	cd_commandHistoryBuffer pushBack ("command " + (str _i));
-};
+		for "_i" from 1 to 20 do {
+			cd_commandHistoryBuffer pushBack ("command " + (str _i));
+		};
+	};
+#else
+	cd_commandHistoryBuffer = [];
 #endif
 
 //Открывает окно отправки сообщения на сервер

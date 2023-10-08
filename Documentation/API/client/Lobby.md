@@ -129,6 +129,16 @@ Description:
 
 
 File: [client\Lobby\CharSettings.sqf at line 363](../../../Src/client/Lobby/CharSettings.sqf#L363)
+## lobby_face_internal_relpos
+
+Type: function
+
+Description: 
+- Param: _posI
+- Param: _dirPos (optional, default 0)
+- Param: _dropRad (optional, default 2)
+
+File: [client\Lobby\CharSettings.sqf at line 367](../../../Src/client/Lobby/CharSettings.sqf#L367)
 ## lobby_setFace
 
 Type: function
@@ -136,7 +146,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\CharSettings.sqf at line 367](../../../Src/client/Lobby/CharSettings.sqf#L367)
+File: [client\Lobby\CharSettings.sqf at line 372](../../../Src/client/Lobby/CharSettings.sqf#L372)
 ## lobby_onSetFace
 
 Type: function
@@ -144,7 +154,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\CharSettings.sqf at line 558](../../../Src/client/Lobby/CharSettings.sqf#L558)
+File: [client\Lobby\CharSettings.sqf at line 576](../../../Src/client/Lobby/CharSettings.sqf#L576)
 ## lobby_onSetFaceCode
 
 Type: function
@@ -153,7 +163,7 @@ Description:
 - Param: _wid
 - Param: _val
 
-File: [client\Lobby\CharSettings.sqf at line 575](../../../Src/client/Lobby/CharSettings.sqf#L575)
+File: [client\Lobby\CharSettings.sqf at line 605](../../../Src/client/Lobby/CharSettings.sqf#L605)
 ## lobby_setVice
 
 Type: function
@@ -162,7 +172,7 @@ Description:
 - Param: _class
 - Param: _name
 
-File: [client\Lobby\CharSettings.sqf at line 595](../../../Src/client/Lobby/CharSettings.sqf#L595)
+File: [client\Lobby\CharSettings.sqf at line 643](../../../Src/client/Lobby/CharSettings.sqf#L643)
 ## lobby_onSetVice
 
 Type: function
@@ -170,7 +180,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\CharSettings.sqf at line 633](../../../Src/client/Lobby/CharSettings.sqf#L633)
+File: [client\Lobby\CharSettings.sqf at line 681](../../../Src/client/Lobby/CharSettings.sqf#L681)
 ## lobby_onSetViceCode
 
 Type: function
@@ -179,7 +189,7 @@ Description:
 - Param: _wid
 - Param: _val
 
-File: [client\Lobby\CharSettings.sqf at line 649](../../../Src/client/Lobby/CharSettings.sqf#L649)
+File: [client\Lobby\CharSettings.sqf at line 697](../../../Src/client/Lobby/CharSettings.sqf#L697)
 ## lobby_setBlood
 
 Type: function
@@ -187,7 +197,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\CharSettings.sqf at line 670](../../../Src/client/Lobby/CharSettings.sqf#L670)
+File: [client\Lobby\CharSettings.sqf at line 718](../../../Src/client/Lobby/CharSettings.sqf#L718)
 ## lobby_onSetBlood
 
 Type: function
@@ -195,7 +205,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\CharSettings.sqf at line 718](../../../Src/client/Lobby/CharSettings.sqf#L718)
+File: [client\Lobby\CharSettings.sqf at line 766](../../../Src/client/Lobby/CharSettings.sqf#L766)
 ## lobby_onSetBloodCode
 
 Type: function
@@ -204,7 +214,7 @@ Description:
 - Param: _wid
 - Param: _val
 
-File: [client\Lobby\CharSettings.sqf at line 740](../../../Src/client/Lobby/CharSettings.sqf#L740)
+File: [client\Lobby\CharSettings.sqf at line 788](../../../Src/client/Lobby/CharSettings.sqf#L788)
 ## lobby_onSetGender
 
 Type: function
@@ -212,7 +222,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\CharSettings.sqf at line 759](../../../Src/client/Lobby/CharSettings.sqf#L759)
+File: [client\Lobby\CharSettings.sqf at line 807](../../../Src/client/Lobby/CharSettings.sqf#L807)
 ## lobby_onSetGenderCode
 
 Type: function
@@ -221,7 +231,7 @@ Description:
 - Param: _wid
 - Param: _val
 
-File: [client\Lobby\CharSettings.sqf at line 782](../../../Src/client/Lobby/CharSettings.sqf#L782)
+File: [client\Lobby\CharSettings.sqf at line 830](../../../Src/client/Lobby/CharSettings.sqf#L830)
 ## lobby_onSetFamily
 
 Type: function
@@ -229,7 +239,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\CharSettings.sqf at line 795](../../../Src/client/Lobby/CharSettings.sqf#L795)
+File: [client\Lobby\CharSettings.sqf at line 843](../../../Src/client/Lobby/CharSettings.sqf#L843)
 ## lobby_onSetFamilyCode
 
 Type: function
@@ -238,7 +248,7 @@ Description:
 - Param: _wid
 - Param: _val
 
-File: [client\Lobby\CharSettings.sqf at line 826](../../../Src/client/Lobby/CharSettings.sqf#L826)
+File: [client\Lobby\CharSettings.sqf at line 874](../../../Src/client/Lobby/CharSettings.sqf#L874)
 ## lobby_onSetMainHand
 
 Type: function
@@ -246,7 +256,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\CharSettings.sqf at line 845](../../../Src/client/Lobby/CharSettings.sqf#L845)
+File: [client\Lobby\CharSettings.sqf at line 893](../../../Src/client/Lobby/CharSettings.sqf#L893)
 ## lobby_onSetMainHandCode
 
 Type: function
@@ -255,7 +265,7 @@ Description:
 - Param: _wid
 - Param: _val
 
-File: [client\Lobby\CharSettings.sqf at line 859](../../../Src/client/Lobby/CharSettings.sqf#L859)
+File: [client\Lobby\CharSettings.sqf at line 907](../../../Src/client/Lobby/CharSettings.sqf#L907)
 ## lobby_onSetRole
 
 Type: function
@@ -263,7 +273,7 @@ Type: function
 Description: событие при выборе
 
 
-File: [client\Lobby\CharSettings.sqf at line 868](../../../Src/client/Lobby/CharSettings.sqf#L868)
+File: [client\Lobby\CharSettings.sqf at line 916](../../../Src/client/Lobby/CharSettings.sqf#L916)
 ## lobby_onSetRoleCode
 
 Type: function
@@ -272,7 +282,7 @@ Description: событие вызывается когда сервер под�
 - Param: _wid
 - Param: _val
 
-File: [client\Lobby\CharSettings.sqf at line 891](../../../Src/client/Lobby/CharSettings.sqf#L891)
+File: [client\Lobby\CharSettings.sqf at line 939](../../../Src/client/Lobby/CharSettings.sqf#L939)
 ## lobby_resizingByRoleChanged
 
 Type: function
@@ -282,7 +292,7 @@ Description: вызывается когда установлена новая �
 - Param: _y
 - Param: _w
 
-File: [client\Lobby\CharSettings.sqf at line 926](../../../Src/client/Lobby/CharSettings.sqf#L926)
+File: [client\Lobby\CharSettings.sqf at line 974](../../../Src/client/Lobby/CharSettings.sqf#L974)
 ## lobby_setRole
 
 Type: function
@@ -290,7 +300,7 @@ Type: function
 Description: Событие при выборе роли
 
 
-File: [client\Lobby\CharSettings.sqf at line 938](../../../Src/client/Lobby/CharSettings.sqf#L938)
+File: [client\Lobby\CharSettings.sqf at line 986](../../../Src/client/Lobby/CharSettings.sqf#L986)
 ## lobby_setEnableCharSetting
 
 Type: function
@@ -298,7 +308,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\Lobby\CharSettings.sqf at line 989](../../../Src/client/Lobby/CharSettings.sqf#L989)
+File: [client\Lobby\CharSettings.sqf at line 1037](../../../Src/client/Lobby/CharSettings.sqf#L1037)
 ## lobby_createInput
 
 Type: function
@@ -306,7 +316,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\CharSettings.sqf at line 1003](../../../Src/client/Lobby/CharSettings.sqf#L1003)
+File: [client\Lobby\CharSettings.sqf at line 1051](../../../Src/client/Lobby/CharSettings.sqf#L1051)
 ## lobby_createColorize
 
 Type: function
@@ -314,7 +324,7 @@ Type: function
 Description: создаёт выборку цвета
 
 
-File: [client\Lobby\CharSettings.sqf at line 1008](../../../Src/client/Lobby/CharSettings.sqf#L1008)
+File: [client\Lobby\CharSettings.sqf at line 1056](../../../Src/client/Lobby/CharSettings.sqf#L1056)
 ## lobby_initReadyButton
 
 Type: function
@@ -322,7 +332,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\CharSettings.sqf at line 1016](../../../Src/client/Lobby/CharSettings.sqf#L1016)
+File: [client\Lobby\CharSettings.sqf at line 1064](../../../Src/client/Lobby/CharSettings.sqf#L1064)
 ## lobby_switchReady
 
 Type: function
@@ -331,7 +341,7 @@ Description: переключение режима готовности моба
 - Param: _wid
 - Param: _butt
 
-File: [client\Lobby\CharSettings.sqf at line 1065](../../../Src/client/Lobby/CharSettings.sqf#L1065)
+File: [client\Lobby\CharSettings.sqf at line 1113](../../../Src/client/Lobby/CharSettings.sqf#L1113)
 ## lobby_onSwitchReadyCallback
 
 Type: function
@@ -339,7 +349,7 @@ Type: function
 Description: 
 - Param: _newMode
 
-File: [client\Lobby\CharSettings.sqf at line 1096](../../../Src/client/Lobby/CharSettings.sqf#L1096)
+File: [client\Lobby\CharSettings.sqf at line 1144](../../../Src/client/Lobby/CharSettings.sqf#L1144)
 # Events.sqf
 
 ## lobby_sendToServerSetting
@@ -778,6 +788,66 @@ Initial value:
 createLocation ["cba_namespacedummy",[100,100,100],0,0]
 ```
 File: [client\Lobby\lobbi_init.sqf at line 43](../../../Src/client/Lobby/lobbi_init.sqf#L43)
+## lobby_internal_rttcamera
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"camera" camCreate [0,0,0]
+```
+File: [client\Lobby\lobbi_init.sqf at line 45](../../../Src/client/Lobby/lobbi_init.sqf#L45)
+## lobby_internal_backwallObject
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+objnull
+```
+File: [client\Lobby\lobbi_init.sqf at line 46](../../../Src/client/Lobby/lobbi_init.sqf#L46)
+## lobby_internal_backwallSettings
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
+File: [client\Lobby\lobbi_init.sqf at line 47](../../../Src/client/Lobby/lobbi_init.sqf#L47)
+## lobby_internal_backwallObjects
+
+Type: Variable
+
+Description: хранилище объектов
+
+
+Initial value:
+```sqf
+createHashMapFromArray ((keys lobby_internal_backwallSettings) apply ...
+```
+File: [client\Lobby\lobbi_init.sqf at line 72](../../../Src/client/Lobby/lobbi_init.sqf#L72)
+## lobby_internal_rttlight
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+objnull
+```
+File: [client\Lobby\lobbi_init.sqf at line 76](../../../Src/client/Lobby/lobbi_init.sqf#L76)
 ## lobby_roleList
 
 Type: Variable
@@ -789,7 +859,7 @@ Initial value:
 ```sqf
 [] //Содержит список ролей с описанием, названием и айди
 ```
-File: [client\Lobby\lobbi_init.sqf at line 46](../../../Src/client/Lobby/lobbi_init.sqf#L46)
+File: [client\Lobby\lobbi_init.sqf at line 80](../../../Src/client/Lobby/lobbi_init.sqf#L80)
 ## lobby_timeLeft
 
 Type: Variable
@@ -801,7 +871,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\Lobby\lobbi_init.sqf at line 49](../../../Src/client/Lobby/lobbi_init.sqf#L49)
+File: [client\Lobby\lobbi_init.sqf at line 83](../../../Src/client/Lobby/lobbi_init.sqf#L83)
 ## lobby_RoleContenders
 
 Type: Variable
@@ -813,7 +883,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\Lobby\lobbi_init.sqf at line 50](../../../Src/client/Lobby/lobbi_init.sqf#L50)
+File: [client\Lobby\lobbi_init.sqf at line 84](../../../Src/client/Lobby/lobbi_init.sqf#L84)
 ## lobby_isReadyToPlay
 
 Type: Variable
@@ -825,7 +895,7 @@ Initial value:
 ```sqf
 false //готовность к игре в лобби до начала раунда
 ```
-File: [client\Lobby\lobbi_init.sqf at line 51](../../../Src/client/Lobby/lobbi_init.sqf#L51)
+File: [client\Lobby\lobbi_init.sqf at line 85](../../../Src/client/Lobby/lobbi_init.sqf#L85)
 ## lobby_isSelectedEmbarkRole
 
 Type: Variable
@@ -837,7 +907,7 @@ Initial value:
 ```sqf
 false //выбранная роль эмбарковая (только во время прогресса раунда)
 ```
-File: [client\Lobby\lobbi_init.sqf at line 52](../../../Src/client/Lobby/lobbi_init.sqf#L52)
+File: [client\Lobby\lobbi_init.sqf at line 86](../../../Src/client/Lobby/lobbi_init.sqf#L86)
 ## lobby_faithDesc_map
 
 Type: Variable
@@ -849,7 +919,7 @@ Initial value:
 ```sqf
 createHashMap //клиентские описания вероисповеданий
 ```
-File: [client\Lobby\lobbi_init.sqf at line 54](../../../Src/client/Lobby/lobbi_init.sqf#L54)
+File: [client\Lobby\lobbi_init.sqf at line 88](../../../Src/client/Lobby/lobbi_init.sqf#L88)
 ## lobby_loading_allHints
 
 Type: Variable
@@ -861,7 +931,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [client\Lobby\lobbi_init.sqf at line 73](../../../Src/client/Lobby/lobbi_init.sqf#L73)
+File: [client\Lobby\lobbi_init.sqf at line 107](../../../Src/client/Lobby/lobbi_init.sqf#L107)
 # lobby.hpp
 
 ## FAST_INIT_LOBBY
@@ -1532,7 +1602,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [client\Lobby\SystemSettings.sqf at line 410](../../../Src/client/Lobby/SystemSettings.sqf#L410)
+File: [client\Lobby\SystemSettings.sqf at line 445](../../../Src/client/Lobby/SystemSettings.sqf#L445)
 ## lobby_sys_listWidgets
 
 Type: Variable
@@ -1602,9 +1672,9 @@ Description:
 
 Initial value:
 ```sqf
-["system","endgame","server","admin"]
+["system","wiki","endgame","server","admin"]
 ```
-File: [client\Lobby\SystemSettings.sqf at line 44](../../../Src/client/Lobby/SystemSettings.sqf#L44)
+File: [client\Lobby\SystemSettings.sqf at line 55](../../../Src/client/Lobby/SystemSettings.sqf#L55)
 ## lobby_sys_buttonActions_sortedListName
 
 Type: Variable
@@ -1614,9 +1684,9 @@ Description:
 
 Initial value:
 ```sqf
-[["Система","55780E"],["Конец раунда","55780E"],["Сервер","C4AD68"],["Админ","8F3140"]]
+[["Система","55780E"],["Вики страницы","04B810"],["Конец раунда","55780E"],["Сервер","C4AD68"],["Админ","8F3140"]]
 ```
-File: [client\Lobby\SystemSettings.sqf at line 45](../../../Src/client/Lobby/SystemSettings.sqf#L45)
+File: [client\Lobby\SystemSettings.sqf at line 56](../../../Src/client/Lobby/SystemSettings.sqf#L56)
 ## lobby_sys_isActive
 
 Type: Variable
@@ -1628,7 +1698,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Lobby\SystemSettings.sqf at line 187](../../../Src/client/Lobby/SystemSettings.sqf#L187)
+File: [client\Lobby\SystemSettings.sqf at line 222](../../../Src/client/Lobby/SystemSettings.sqf#L222)
 ## lobby_sys_bc_widgets
 
 Type: Variable
@@ -1640,7 +1710,7 @@ Initial value:
 ```sqf
 [widgetNull,widgetNull] //виджеты контрольных групп
 ```
-File: [client\Lobby\SystemSettings.sqf at line 260](../../../Src/client/Lobby/SystemSettings.sqf#L260)
+File: [client\Lobby\SystemSettings.sqf at line 295](../../../Src/client/Lobby/SystemSettings.sqf#L295)
 ## lobby_sys_bc_slots
 
 Type: Variable
@@ -1652,7 +1722,7 @@ Initial value:
 ```sqf
 [] //виджеты слотов персонажей
 ```
-File: [client\Lobby\SystemSettings.sqf at line 261](../../../Src/client/Lobby/SystemSettings.sqf#L261)
+File: [client\Lobby\SystemSettings.sqf at line 296](../../../Src/client/Lobby/SystemSettings.sqf#L296)
 ## lobby_sys_bc_isAskingData
 
 Type: Variable
@@ -1664,7 +1734,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\Lobby\SystemSettings.sqf at line 263](../../../Src/client/Lobby/SystemSettings.sqf#L263)
+File: [client\Lobby\SystemSettings.sqf at line 298](../../../Src/client/Lobby/SystemSettings.sqf#L298)
 ## lobby_sysLoadMenu
 
 Type: function
@@ -1672,7 +1742,7 @@ Type: function
 Description: загружает окно системных настроек
 - Param: _b
 
-File: [client\Lobby\SystemSettings.sqf at line 48](../../../Src/client/Lobby/SystemSettings.sqf#L48)
+File: [client\Lobby\SystemSettings.sqf at line 59](../../../Src/client/Lobby/SystemSettings.sqf#L59)
 ## lobby_sysLoadSettings
 
 Type: function
@@ -1680,7 +1750,7 @@ Type: function
 Description: 
 - Param: _cat
 
-File: [client\Lobby\SystemSettings.sqf at line 141](../../../Src/client/Lobby/SystemSettings.sqf#L141)
+File: [client\Lobby\SystemSettings.sqf at line 152](../../../Src/client/Lobby/SystemSettings.sqf#L152)
 ## lobby_sysSetEnable
 
 Type: function
@@ -1688,7 +1758,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\Lobby\SystemSettings.sqf at line 189](../../../Src/client/Lobby/SystemSettings.sqf#L189)
+File: [client\Lobby\SystemSettings.sqf at line 224](../../../Src/client/Lobby/SystemSettings.sqf#L224)
 ## lobby_thread_textRender
 
 Type: function
@@ -1696,7 +1766,7 @@ Type: function
 Description: 
 - Param: _textRender
 
-File: [client\Lobby\SystemSettings.sqf at line 218](../../../Src/client/Lobby/SystemSettings.sqf#L218)
+File: [client\Lobby\SystemSettings.sqf at line 253](../../../Src/client/Lobby/SystemSettings.sqf#L253)
 ## lobby_sys_bc_isAsking
 
 Type: function
@@ -1704,7 +1774,7 @@ Type: function
 Description: виджеты слотов персонажей
 
 
-File: [client\Lobby\SystemSettings.sqf at line 262](../../../Src/client/Lobby/SystemSettings.sqf#L262)
+File: [client\Lobby\SystemSettings.sqf at line 297](../../../Src/client/Lobby/SystemSettings.sqf#L297)
 ## lobby_sys_bc_restoreAfterAsking
 
 Type: function
@@ -1712,7 +1782,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\SystemSettings.sqf at line 264](../../../Src/client/Lobby/SystemSettings.sqf#L264)
+File: [client\Lobby\SystemSettings.sqf at line 299](../../../Src/client/Lobby/SystemSettings.sqf#L299)
 ## lobby_sys_bc_charachters
 
 Type: function
@@ -1720,7 +1790,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\SystemSettings.sqf at line 272](../../../Src/client/Lobby/SystemSettings.sqf#L272)
+File: [client\Lobby\SystemSettings.sqf at line 307](../../../Src/client/Lobby/SystemSettings.sqf#L307)
 ## lobby_sys_ba_action
 
 Type: function
@@ -1729,4 +1799,4 @@ Description:
 - Param: _action
 - Param: _ctxParams
 
-File: [client\Lobby\SystemSettings.sqf at line 319](../../../Src/client/Lobby/SystemSettings.sqf#L319)
+File: [client\Lobby\SystemSettings.sqf at line 354](../../../Src/client/Lobby/SystemSettings.sqf#L354)

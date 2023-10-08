@@ -137,7 +137,7 @@ if !(value) exitWith { \
 		setLastError(_format); \
 	};
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 392](../../../Src/host/CommonComponents/!PreInit.sqf#L392)
+File: [host\CommonComponents\!PreInit.sqf at line 409](../../../Src/host/CommonComponents/!PreInit.sqf#L409)
 ## cprint_usestdout
 
 Type: Variable
@@ -381,6 +381,7 @@ Type: function
 Description: 
 - Param: _txt
 - Param: _pattern
+- Param: _optMath (optional, default 0)
 
 File: [host\CommonComponents\!PreInit.sqf at line 274](../../../Src/host/CommonComponents/!PreInit.sqf#L274)
 ## regex_replace
@@ -413,6 +414,16 @@ Description:
 - Param: _casesense (optional, default true)
 
 File: [host\CommonComponents\!PreInit.sqf at line 342](../../../Src/host/CommonComponents/!PreInit.sqf#L342)
+## stringReplace
+
+Type: function
+
+Description: 
+- Param: _string (optional, default "")
+- Param: _find (optional, default "")
+- Param: _replace (optional, default "")
+
+File: [host\CommonComponents\!PreInit.sqf at line 349](../../../Src/host/CommonComponents/!PreInit.sqf#L349)
 ## selectBest
 
 Type: function
@@ -422,7 +433,7 @@ Description: Выбирает лучший случай [[1,2,3],{_x > 2}] call 
 - Param: _criteria
 - Param: _return
 
-File: [host\CommonComponents\!PreInit.sqf at line 351](../../../Src/host/CommonComponents/!PreInit.sqf#L351)
+File: [host\CommonComponents\!PreInit.sqf at line 368](../../../Src/host/CommonComponents/!PreInit.sqf#L368)
 ## searchInList
 
 Type: function
@@ -432,7 +443,7 @@ Description:
 - Param: _lambda
 - Param: _defaultReturn
 
-File: [host\CommonComponents\!PreInit.sqf at line 367](../../../Src/host/CommonComponents/!PreInit.sqf#L367)
+File: [host\CommonComponents\!PreInit.sqf at line 384](../../../Src/host/CommonComponents/!PreInit.sqf#L384)
 ## functionalitests_preinit
 
 Type: function
@@ -442,7 +453,7 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 391](../../../Src/host/CommonComponents/!PreInit.sqf#L391)
+File: [host\CommonComponents\!PreInit.sqf at line 408](../../../Src/host/CommonComponents/!PreInit.sqf#L408)
 # Animator.sqf
 
 ## addAnim(name)
@@ -468,7 +479,7 @@ Replaced value:
 ```sqf
 ((_anims select idx) == "nl" && ((_blender select idx) == 1))
 ```
-File: [host\CommonComponents\Animator.sqf at line 215](../../../Src/host/CommonComponents/Animator.sqf#L215)
+File: [host\CommonComponents\Animator.sqf at line 219](../../../Src/host/CommonComponents/Animator.sqf#L219)
 ## anim_assocList_keyString
 
 Type: Variable
@@ -509,6 +520,30 @@ Description:
 
 
 File: [host\CommonComponents\Animator.sqf at line 72](../../../Src/host/CommonComponents/Animator.sqf#L72)
+## anim_isSprinting
+
+Type: function
+
+Description: 
+- Param: _anm
+
+File: [host\CommonComponents\Animator.sqf at line 74](../../../Src/host/CommonComponents/Animator.sqf#L74)
+## anim_isRunning
+
+Type: function
+
+Description: 
+- Param: _anm
+
+File: [host\CommonComponents\Animator.sqf at line 75](../../../Src/host/CommonComponents/Animator.sqf#L75)
+## anim_isWalking
+
+Type: function
+
+Description: 
+
+
+File: [host\CommonComponents\Animator.sqf at line 76](../../../Src/host/CommonComponents/Animator.sqf#L76)
 ## anim_syncAnim
 
 Type: function
@@ -516,7 +551,7 @@ Type: function
 Description: 
 - Param: _mob
 
-File: [host\CommonComponents\Animator.sqf at line 74](../../../Src/host/CommonComponents/Animator.sqf#L74)
+File: [host\CommonComponents\Animator.sqf at line 78](../../../Src/host/CommonComponents/Animator.sqf#L78)
 ## anim_doAttack
 
 Type: function
@@ -526,7 +561,7 @@ Description:
 - Param: _slotIdx
 - Param: _enumAtt
 
-File: [host\CommonComponents\Animator.sqf at line 229](../../../Src/host/CommonComponents/Animator.sqf#L229)
+File: [host\CommonComponents\Animator.sqf at line 233](../../../Src/host/CommonComponents/Animator.sqf#L233)
 ## anim_doDodge
 
 Type: function
@@ -535,7 +570,7 @@ Description:
 - Param: _mob
 - Param: _side
 
-File: [host\CommonComponents\Animator.sqf at line 277](../../../Src/host/CommonComponents/Animator.sqf#L277)
+File: [host\CommonComponents\Animator.sqf at line 281](../../../Src/host/CommonComponents/Animator.sqf#L281)
 ## anim_doParry
 
 Type: function
@@ -545,7 +580,7 @@ Description:
 - Param: _idxHand
 - Param: _enumParry
 
-File: [host\CommonComponents\Animator.sqf at line 297](../../../Src/host/CommonComponents/Animator.sqf#L297)
+File: [host\CommonComponents\Animator.sqf at line 301](../../../Src/host/CommonComponents/Animator.sqf#L301)
 # Assert.sqf
 
 ## __vmthrow_assert(res)

@@ -572,6 +572,11 @@ region(Throwing)
 	func(onThrow)
 	{
 		objParams_2(_item,_isKicking);
+		
+		if callSelf(isFailCombat) exitWith {
+			callSelf(applyFailCombat);
+		};
+
 		if isNullVar(_isKicking) then {_isKicking = false};
 
 		if isNullReference(_item) exitWith {}; //нечего метать

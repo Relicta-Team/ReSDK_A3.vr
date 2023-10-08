@@ -23,6 +23,7 @@ verb(craft,"Создать",noargs)
 verb(pickup,"Взять",noargs)
 verb(undress,"Раздеть",noargs)
 verb(twohands,"Двумя руками",noargs)
+verb(transitem,"Отдать предмет",noargs)
 verb(mainact,"Действие",noargs)
 verb(wpnopnmode,"Оружие",noargs) //пример: разломить, соеденить
 	verb(spinrev,"Крутить барабан",noargs)

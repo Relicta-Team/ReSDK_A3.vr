@@ -734,7 +734,6 @@ gm_spawnClientToRole = {
 
 	//устанавливаем женскую одежду
 	if equals(getSelf(gender),gender_female) then {
-		setSelf(defaultUniform,"max_femaleBasicBody");
 		callSelf(onApplyDefaultUniform);
 	};
 
@@ -904,6 +903,16 @@ gm_internal_assignToImpl = {
 	callSelfParams(getEquipment,_mob);
 	callSelfParams(initWelcome,_mob);
 	
+	if array_exists(getVar(_usr,lockedSettings),"run") then {
+		callFuncParams(_usr,localSay,setstyle("Суровая жизнь в Сети пошатнула моё здоровье...",style_redbig) arg "info");
+	};
+	
+	if array_exists(getVar(_usr,lockedSettings),"combat") then {
+		if ("lockedSettings" in (toString getFunc(_mob,isFailCombat))) then {
+			callFuncParams(_usr,localSay,setstyle("Я страдаю редкой болезнью - Небойка. Из-за неё я не могу постоять за себя и проявлять агрессию...",style_redbig) arg "info");
+		};
+	};
+
 	//here adding game aspect info
 	callFuncParams(_mob,addFirstJoinMessage,callFunc(gm_currentAspect,getAspectText));
 
@@ -1522,3 +1531,38 @@ gm_createMob = {
 	_mob setPosAtl _pos;
 	_mob
 };
+
+lobby_createDummy = {
+	params ["_pos",["_isWoman",false]];
+	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
+	_mob disableAI "MOVE";
+	_mob disableAI "TARGET";
+	_mob disableAI "AUTOTARGET";
+	_mob disableAI "FSM";
+	_mob disableAI "ANIM";
+	
+
+	removeUniform _mob;
+	_mob setPosAtl _pos;
+	if (_isWoman) then {
+		_mob forceAddUniform getFieldBaseValue("MobWoman","defaultUniform");
+	};
+
+	_mob ENABLESIMULATIONGLOBAL false;
+	_mob
+};
+private _canCreateDummy = true;
+#ifdef __VM_VALIDATE
+	_canCreateDummy = false;
+#endif
+#ifdef __VM_BUILD
+	_canCreateDummy = false;
+#endif
+
+if (_canCreateDummy) then {
+	private _dummyMobPos = [50,50,0];
+	private _dummyMan = [_dummyMobPos arg false] call lobby_createDummy;
+	netSetGlobal(lobby_glob_dummy_man,_dummyMan);
+	assert(!isNullReference(_dummyMan));
+};
+
