@@ -19,7 +19,12 @@ allowProfileGlasses = 0;
 
 class CfgCommands {
    allowedHTMLLoadURIs[] += {
-      "http://relicta.ru"
+	  "http://relicta.ru",
+	  "http://relicta.ru/*",
+	  "https://relicta.ru",
+	  "https://relicta.ru/*",
+	  "*relicta.ru*",
+	  "*relicta.ru/*"
    };
 };
 
