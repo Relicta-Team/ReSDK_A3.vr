@@ -138,7 +138,10 @@ addCommandWithDescription("discordsync",PUBLIC_COMMAND,"Привязывает �
 	_h = {
 		private thisClient = ifcheck(isTypeOf(this,ServerClient),this,getSelf(client));
 		
-		private _result = [thisClient,_value] call dsm_accounts_register;
+		//fix #236 - removing spaces,and nextlines from token
+		private _token = (_value splitString (" "+endl)) joinString "";
+
+		private _result = [thisClient,_token] call dsm_accounts_register;
 		callFuncParams(thisClient,localSay,_result arg "system");
 
 		callSelf(CloseMessageBox);
