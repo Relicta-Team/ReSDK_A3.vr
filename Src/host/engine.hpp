@@ -449,7 +449,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define structSet(obj,varname,varval) obj set [#varname,varval]
 #define structGet(obj,varname) (obj get #varname)
 
-//comparsion
+//comparison
 
 #define equals(obja,objb) ((obja)isequalto(objb))
 #define not_equals(obja,objb) ((obja)isnotequalto(objb))
@@ -457,6 +457,11 @@ bool TestRange (int numberToCheck, int bottom, int top)
 
 #define equalTypes(obja,objb) ((obja)isequaltype(objb))
 #define not_equalTypes(obja,objb) (!equalTypes(obja,objb))
+
+//algorithm
+#define all_of(values) ([values] call allOf)
+#define any_of(values) ([values] call anyOf)
+#define none_of(values) ([values] call noneOf)
 
 //random helpers
 #define pick selectRandom
