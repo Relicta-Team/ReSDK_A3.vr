@@ -213,31 +213,32 @@ nodegen_generateLib = {
         _methods = [_x,"__methods"] call oop_getTypeValue;
         _decl = [_x,"__decl_info__"] call oop_getTypeValue;
         _defPath = [_decl select 0,_missionPath] call stringReplace;
+        _defPath = [_defPath,"\","\\"] call stringReplace;
         
         _el = str(_x) + ": {" + endl + //start defclass
         
         //baselist
-        format["    'baseList' : %1,",str([_x,"__inhlist"] call oop_getTypeValue)] + endl +
+        format["    ""baseList"" : %1,",str([_x,"__inhlist"] call oop_getTypeValue)] + endl +
         
         //declare info (file,path)
-        format["    'defined' : {'file':%1,'line':%2},",str(_defPath),(_decl select 1)] + endl +
+        format["    ""defined"" : {""file"":%1,""line"":%2},",str(_defPath),(_decl select 1)] + endl +
         //fields info
-        "   'fields': {" + endl +
+        "   ""fields"": {" + endl +
             //all members in lowercase
-                "       'defined': {" + (
+                "       ""defined"": {" + (
                 (_fields apply {format['%1:%2',str(_x select 0),str((_x select 1) call _calculateFieldValue)]})
                     joinString ","
                 ) + "}," + endl +
             //all members in lowercase
-                "       'all':" + (str([_x,"__allfields"] call oop_getTypeValue)) + endl +
+                "       ""all"":" + (str([_x,"__allfields"] call oop_getTypeValue)) + endl +
         "   }," + endl +
 
         //methods info
-        "   'methods': {" + endl +
+        "   ""methods"": {" + endl +
             //with case sensitivity
-            "       'defined':" +(str(_methods apply {_x select 0})) + "," + endl +
+            "       ""defined"":" +(str(_methods apply {_x select 0})) + "," + endl +
             //all members in lowercase
-            "       'all':" + (str([_x,"__allmethods"] call oop_getTypeValue)) + endl +
+            "       ""all"":" + (str([_x,"__allmethods"] call oop_getTypeValue)) + endl +
         "   }" + endl +
         
         "}"+ endl; //end defclass
