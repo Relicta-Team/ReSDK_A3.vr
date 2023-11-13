@@ -84,7 +84,6 @@ if isNull(nodegen_list_library) then {
 nodegen_str_outputJsonData = ""; //сгенерированный json
 nodegen_internal_generatedLibPath = ""; //сюда записывается сгенерированный json файл
 
-nodegen_bindingsPath = "src\host\ReNodes\ReNodes_bindings.json";
 nodegen_objlibPath = "src\host\ReNodes\lib.obj";
 
 nodegen_debug_copyobjlibPath = "P:\Project\ReNodes\lib.obj";
@@ -174,9 +173,9 @@ nodegen_generateLib = {
 
     private _output = "v" + (str nodegen_const_libversion)+endl;
     
-    //!Регистрация функций: не реализовано 
+    //Регистрация функций и узлов общего назначения
     ["Generating functions"] call printLog;
-    private _data = "" + endl;//([nodegen_bindingsPath] call file_read);
+    private _data = "" + endl;
     modvar(_output) + "$REGION:FUNCTIONS" + endl;
     
     private _funcdata = [];
