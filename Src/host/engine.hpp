@@ -736,27 +736,45 @@ ACRE_IS_ERRORED = false; _ret;}*/
 #endif
 
 //--------------node scripting macros--------------
-/*
-	"NODEVALUES"
-	node_func(createStructure) = {
-		params ["_itm","_pos"];
-	};
-
-	class(ScriptedGameClass)
-		"NODEVALUES" 
-		node_var var(test_string,"123");
-
-		"NODEVALUES"
-		node_meth func(test_func)
-		{
-			objParams();
-		};
-	endclass
-
-
-*/
 //указывает путь узлов для регистрации функций. Должен быть указан в заголовке инициализатора модуля
-//регистрация метода класса в библиотеке
-#define node_func call nodegen_addClassMethod;
+
 //регистрация поля класса в библиотеке
+/*
+	опции:
+	name - имя переменной
+	desc - описание переменной
+	return - явное указание типа переменной. если не указано - будет вычислено на этапе компиляции библиотеки
+	override - можно ли переопределить переменную
+	prop - тип свойства (дефолт all, доступные: all,get,set)
+	classprop - видимость свойства в инспекторе класса (дефолт-0)
+*/
 #define node_var call nodegen_addClassField;
+
+//регистрация метода класса в библиотеке
+/*
+	опции:
+	name - имя метода
+	namelib - имя, видимое в дереве. если не указано - используется значение из name
+	desc - описание метода
+	type - тип метода (дефолт method, доступные: method,event,get,const)
+		const - добавляет новый элемент в classprop
+	return - возвращаемое значение и описание (опционально)
+		return:int:Результат вызова:описание
+		return:int:Результат вызова
+	exec - дефолтные входы и выходы (дефолт - all, доступные: all,in,out,none)
+		exec:all
+	in - номер параметра для input-ов
+		in:type:name(:desc)
+		options (указывается на следующей строке):
+			mul - мультивход/выход (дефолт 0)
+			dname - показывать имя порта (дефолт 1,выключается если есть опция)
+			allowtypes - массив доступных входов. (дефолт этот тип)
+		
+		in1:int:Вход 1:Описание входного значения
+		mul=1,dname=1,allowtypes=[]
+*/
+#define node_met call nodegen_addClassMethod;
+// регистрация метода
+#define node_func call nodegen_addFunction;
+//регистрация класса в библиотеке
+#define node_class call nodegen_addClass;

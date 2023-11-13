@@ -85,10 +85,7 @@ class(GameObject) extends(ManagedObject)
 	};
 
 	getterconst_func(getChunkType,-1);
-	'
-		"name": "Является предметом",
-		"desc": "Проверяет, является ли этот объект предметом"
-	' node_func
+	
 	getterconst_func(isItem,false);
 	getterconst_func(isMob,false);
 	getterconst_func(isDecor,false);

@@ -7,6 +7,7 @@
 #include "..\oop.hpp"
 
 /*
+    !Устаревшая информация
     Компонент ReNodes API для генерации библиотеки узлов графа, вызова функций  
 
     Общие параметры регистрации
@@ -69,19 +70,23 @@
 	}
 */
 
+/*
+    Компонент ReNodes API для генерации библиотеки узлов графа, вызова функций  
+*/
+
 //текущая версия библиотеки для генерации
 nodegen_const_libversion = 1;
 //карта рабочих узлов. Ключ - системное название узла, значение - данные типа хэшкарты
-if isNull(nodegen_map_library) then {
-    nodegen_map_library = createHashMap;
+if isNull(nodegen_list_library) then {
+    nodegen_list_library = [];
 };
 nodegen_str_outputJsonData = ""; //сгенерированный json
 nodegen_internal_generatedLibPath = ""; //сюда записывается сгенерированный json файл
 
 nodegen_bindingsPath = "src\host\ReNodes\ReNodes_bindings.json";
-nodegen_objlibPath = "src\host\ReNodes\lib_obj.json";
+nodegen_objlibPath = "src\host\ReNodes\lib.obj";
 
-nodegen_debug_copyobjlibPath = "P:\Project\ReNodes\lib_obj.json";
+nodegen_debug_copyobjlibPath = "P:\Project\ReNodes\lib.obj";
 
 //регистратор метода
 nodegen_addClassMethod = {
@@ -90,6 +95,11 @@ nodegen_addClassMethod = {
 };
 
 nodegen_addClassField = {
+    private _ctx = _this;
+    _ctx call nodegen_commonAdd;
+};
+
+nodegen_addClassFunction = {
     private _ctx = _this;
     _ctx call nodegen_commonAdd;
 };
@@ -103,15 +113,21 @@ nodegen_commonAdd = {
     if (!is3DEN) exitwith {};
 
     private _ctx = _this;
-    _last_node_info_ = _ctx;
+    if isNullVar(_last_node_info_) then {
+        _last_node_info_ = [];
+    };
+    _last_node_info_ pushBack _ctx;
+};
+
+nodegen_registerFunctions = {
+    //Сюда вставляются пути до функций, которые должны быть регистрированы в библиотеке
+    //внутри файлов с функциями составляются определения через node_func
+
 };
 
 nodegen_registerMember = {
-    params ["_t","_class","_memname","_context"];
-    _context = "{" + _context;
-
-    _context = _context + "}";
-    nodegen_map_library set [format["%1.%3_%2",_class,_memname,_t],_context];
+    params ["_t","_class","_memname","_contextList"];
+    nodegen_list_library pushBack [_t,format["%1.%2",_class,_memname],_contextList];
 };
 
 nodegen_generateLib = {
@@ -119,31 +135,123 @@ nodegen_generateLib = {
         setLastError("NodeGen cannot generate library outside ReEditor");
         false
     };
-
-    ["Start generating library (ver %1)",nodegen_const_libversion] call printLog;
+    //промежуточная библиотека
+    ["Starting generating intermediate library (ver %1)",nodegen_const_libversion] call printLog;
 
     private _output = "v" + (str nodegen_const_libversion)+endl;
-
+    
+    //!Регистрация функций: не реализовано 
     ["Generating functions"] call printLog;
-    private _data = ([nodegen_bindingsPath] call file_read);
+    private _data = "" + endl;//([nodegen_bindingsPath] call file_read);
     modvar(_output) + "$REGION:FUNCTIONS" + endl;
     modvar(_output) + _data + endl;
     modvar(_output) + "$ENDREGION:FUNCTIONS" + endl;
 
+    //Регистрация членов классов
     ["Generating class members"] call printLog;
-    modvar(_output) + "$REGION:CLASSMEM" + endl + "{" + endl;
+    modvar(_output) + "$REGION:CLASSMEM" + endl;
     {
-        modvar(_output) + format["%1 : %2",str _x,_y];
-    } foreach nodegen_map_library;
+        _x params ["_type","_member","_dataList"];
+        {
+            modvar(_output) + format["def:%1:%2_%3%4%5",_type,_member,_foreachIndex,endl,_x] + endl;
+        } foreach _dataList;
+    } foreach nodegen_list_library;
     
-    modvar(_output) + "}" + endl + "$ENDREGION:CLASSMEM" + endl;
-
+    modvar(_output) + endl + "$ENDREGION:CLASSMEM" + endl;
+    //Сбор мета-данных о классе
+    /*
+        Сюда попадают словари, содержащие информацию о классах
+        Также тут вычисляются типы данных
+    */
     ["Generating class metadata"] call printLog;
-    modvar(_output) + "$REGION:CLASSMETA" + endl + "{" + endl + """object"" : [""object""]" + endl;
-    {
-        modvar(_output) + format[",%1 : %2",str _x,str([_x,"__inhlist"] call oop_getTypeValue)] + endl;
-    } foreach (["object",true] call oop_getinhlist);
+    private _typeList = (["object",true] call oop_getinhlist) + ["object"];
+    private _lastIndex = count _typeList - 1;
+    private _missionPath = getMIssionPath "";
+    private _calculateFieldValue = {
+        private _val = _this;
+        private _ntype = null;
+        if not_equalTypes(_val,"") then {
+            ["Field %1 in class %2 not serialized",_x select 0,_class] call printWarning;
+            _ntype = _val;
+        } else {
+            if ([_val,"\bcall\b"] call regex_isMatch) exitWith {
+                if ('"__instance"' in _val) exitWith {
+                    "object"
+                };
+                "runtime_error_type"
+            };
+            _ntype = call compile _val;
+        };
+
+        if equalTypes(_ntype,0) exitWith {
+            if (floor _ntype == _ntype) exitWith {"float"};
+            "int"
+        };
+        if isNullVar(_ntype) exitWith {"null"};
+        if equalTypes(_ntype,true) exitwith {"bool"};
+        if equalTypes(_ntype,"") exitwith {"string"};
+        if equalTypes(_ntype,[]) exitwith {"null_array"};
+        if equalTypes(_ntype,objNull) exitwith {"model"};
+        if equalTypes(_ntype,locationNull) exitWith {"object"};
+
+        if (typename _ntype == "hashmap") exitwith {"null_hashmap"};
+
+        // _estring = "Unknown type for "+ (_class) + " " + typeName _ntype;
+        // stackval = format["%1 val",_ntype];
+        // [_estring] call printError;
+        
+        "unknown_type"
+    };
     
+    private ["_decl","_allfields","_fields","_methods","_defPath","_class"];
+    modvar(_output) + "$REGION:CLASSMETA" + endl + "{" + endl ;//+ """object"" : [""object""]" + endl;
+    _tempList = [];
+    _el = "";
+    {
+        _class = _x;
+        _fields = [_x,"__fields"] call oop_getTypeValue;
+        _methods = [_x,"__methods"] call oop_getTypeValue;
+        _decl = [_x,"__decl_info__"] call oop_getTypeValue;
+        _defPath = [_decl select 0,_missionPath] call stringReplace;
+        
+        _el = str(_x) + ": {" + endl + //start defclass
+        
+        //baselist
+        format["    'baseList' : %1,",str([_x,"__inhlist"] call oop_getTypeValue)] + endl +
+        
+        //declare info (file,path)
+        format["    'defined' : {'file':%1,'line':%2},",str(_defPath),(_decl select 1)] + endl +
+        //fields info
+        "   'fields': {" + endl +
+            //all members in lowercase
+                "       'defined': {" + (
+                (_fields apply {format['%1:%2',str(_x select 0),str((_x select 1) call _calculateFieldValue)]})
+                    joinString ","
+                ) + "}," + endl +
+            //all members in lowercase
+                "       'all':" + (str([_x,"__allfields"] call oop_getTypeValue)) + endl +
+        "   }," + endl +
+
+        //methods info
+        "   'methods': {" + endl +
+            //with case sensitivity
+            "       'defined':" +(str(_methods apply {_x select 0})) + "," + endl +
+            //all members in lowercase
+            "       'all':" + (str([_x,"__allmethods"] call oop_getTypeValue)) + endl +
+        "   }" + endl +
+        
+        "}"+ endl; //end defclass
+        if (_foreachIndex != _lastIndex) then {
+            modvar(_el) + ",";
+        };
+        _tempList pushBack _el;
+        if (_foreachIndex % 200 == 0) then {
+            ["Generated %1/%2",_foreachIndex+1,_lastIndex+1] call printLog;
+        };
+    } foreach (_typeList);
+    
+    modvar(_output) + (_tempList joinString "");
+
     modvar(_output) + "}" + endl + "$ENDREGION:CLASSMETA" + endl;
 
     nodegen_str_outputJsonData = _output;
@@ -157,31 +265,3 @@ nodegen_generateLib = {
     true
 };
 
-
-nodegen_const_addNodeModif = {
-    params ["_type"];
-};
-
-nodegen_const_getNodePortColor = {
-    params ["_portName"];
-    private _tempMap = createHashMapFromArray [
-        ["flow","color:C7C7C7"],
-        ["bool","color:A60C0C"],
-        ["number","color:128500"],
-        ["string","color:D95A00"],
-        ["object","color:B502AF"],
-        ["vector","color:D4A004"],
-        ["array","color:1698B5"],
-        ["hashmap","color:4C27C2"],
-        ["hashset","color:871BC2"],
-        ["handle","color:03CC00"],
-        ["model","color:AB0330"]
-    ];
-
-    private _data = _tempMap getOrDefault [_portName,""];
-    {
-        (_x splitString ":")params [["_k",""],["_v",""]];
-        assert(_k!="");
-        assert(_v!="");
-    } foreach (_data splitString ";");
-};

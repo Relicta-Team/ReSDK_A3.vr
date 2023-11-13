@@ -70,6 +70,9 @@ function(goasm_builder_buildImplMain)
 	//disable fws update
 	call fileWatcher_guardSafeRebuild;
 
+	//restore nodegen library
+	nodegen_list_library = [];
+
 	goasm_isbuilded = false;
 	call goasm_builder_cleanup;
 
