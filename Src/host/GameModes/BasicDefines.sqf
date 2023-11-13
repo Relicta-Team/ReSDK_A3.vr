@@ -339,7 +339,7 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		namelib:Получить имя карты
 		desc:Отвечает за имя загружаемой в режим карты. Если это пустая строка, то карта не будет загружена
 		type:const
-	" node_func
+	" node_met
 	//имя загружаемой карты
 	getterconst_func(getMapName,"Minimap");
 
@@ -348,7 +348,7 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		namelib:Получить путь до лобби-темы
 		desc:Отвечает за музыку, которая играет в лобби. Если это пустая строка, то лобби-тема не будет загружена
 		type:const
-	" node_func
+	" node_met
 	//имя лобби звука
 	getterconst_func(getLobbySoundName,"lobby\First_Steps.ogg");
 	//дефолтный бэкграунд

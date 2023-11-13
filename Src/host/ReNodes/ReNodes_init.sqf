@@ -79,6 +79,7 @@ nodegen_const_libversion = 1;
 //карта рабочих узлов. Ключ - системное название узла, значение - данные типа хэшкарты
 if isNull(nodegen_list_library) then {
     nodegen_list_library = [];
+    nodegen_list_functions = [];
 };
 nodegen_str_outputJsonData = ""; //сгенерированный json
 nodegen_internal_generatedLibPath = ""; //сюда записывается сгенерированный json файл
@@ -99,9 +100,18 @@ nodegen_addClassField = {
     _ctx call nodegen_commonAdd;
 };
 
-nodegen_addClassFunction = {
+nodegen_addClass = {
+    //!NOT IMPLEMENTED
+};
+
+nodegen_addFunction = {
     private _ctx = _this;
-    _ctx call nodegen_commonAdd;
+    _ctx call nodegen_commonSysAdd;
+};
+
+nodegen_addSystemNode = {
+    private _ctx = _this;
+    _ctx call nodegen_commonSysAdd;
 };
 
 nodegen_commonAdd = {
@@ -119,9 +129,27 @@ nodegen_commonAdd = {
     _last_node_info_ pushBack _ctx;
 };
 
+nodegen_commonSysAdd = {
+    #ifdef _SQFVM
+    if (true) exitwith {};
+    #endif
+
+    if (!is3DEN) exitwith {};
+
+    private _ctx = _this;
+    private _gadd = "system";
+    if !isNullVar(__nsys_grp) then {
+        _gadd = __nsys_grp;
+    };
+    nodegen_list_functions pushBack [_gadd,_ctx];
+};
+
 nodegen_registerFunctions = {
     //Сюда вставляются пути до функций, которые должны быть регистрированы в библиотеке
     //внутри файлов с функциями составляются определения через node_func
+    
+    //тут зарегистрированы узлы общего назначения (работа с типами, операторы)
+    #include "_systemNodes.sqf"
 
 };
 
@@ -135,8 +163,14 @@ nodegen_generateLib = {
         setLastError("NodeGen cannot generate library outside ReEditor");
         false
     };
+    
     //промежуточная библиотека
     ["Starting generating intermediate library (ver %1)",nodegen_const_libversion] call printLog;
+
+    ["Generating common nodes"] call printLog;
+    nodegen_list_functions = [];
+    call nodegen_registerFunctions;
+    ["Common nodes generated!"] call printLog;
 
     private _output = "v" + (str nodegen_const_libversion)+endl;
     
@@ -144,7 +178,15 @@ nodegen_generateLib = {
     ["Generating functions"] call printLog;
     private _data = "" + endl;//([nodegen_bindingsPath] call file_read);
     modvar(_output) + "$REGION:FUNCTIONS" + endl;
-    modvar(_output) + _data + endl;
+    
+    private _funcdata = [];
+    private _tempfunc = "";
+    {
+        _x params ["_cat","_data"];
+        _tempfunc = format['def:node:%1',_cat] + endl + _data + endl;
+        _funcdata pushBack _tempfunc;
+    } foreach nodegen_list_functions;
+    modvar(_output) + (_funcdata joinString endl);
     modvar(_output) + "$ENDREGION:FUNCTIONS" + endl;
 
     //Регистрация членов классов
