@@ -90,6 +90,7 @@ node_system_group("variable")
 	desc:Получает значение переменной
 	libvisible:0
 	code:RUNTIME
+	defcode:var(@thisName,@propvalue);
 	option:""nameid""\: {""type""\: ""hidden""}
 "
 node_system
