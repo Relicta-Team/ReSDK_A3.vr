@@ -119,7 +119,7 @@
 #define __internal_flag_processor(flagname,act) if (!isnil 'flagname') then {act; flagname = nil}
 
 #define var(name,value) \
-	_mem_name = tolower #name ; \
+	_mem_name = #name ; \
 	_lastIndex = _fields pushback [_mem_name,'value']; \
 	call pc_oop_handleAttrF;
 
@@ -132,18 +132,18 @@
 */
 #define pair(key,val) [key,val]
 #define varpair(name,value) \
-	_mem_name = tolower #name ; \
+	_mem_name = #name ; \
 	_lastIndex = _fields pushback [_mem_name,"createHashMapFromArray [" + ('value' splitString (";"+toString[9,13,10]) joinString ",") + "]"]; \
 	call pc_oop_handleAttrF;
 
 #define __var_noStrName(name,value) \
-	_mem_name = tolower name ; \
+	_mem_name = name ; \
 	_lastIndex = _fields pushback [_mem_name,'value']; \
 	call pc_oop_handleAttrF;
 
 //Вычисляет значения поля на этапе компиляции
 #define var_inlinevalue(name,value) \
-	_mem_name = tolower #name ; \
+	_mem_name = #name ; \
 	_lastIndex = _fields pushback [_mem_name,value]; \
 	call pc_oop_handleAttrF;
 
