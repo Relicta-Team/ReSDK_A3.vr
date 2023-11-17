@@ -71,7 +71,7 @@ _attr_ex_init_list = [];
 
 	//inheritance process
 	_mot = _pObj;
-	_inheritance_list = [tolower _x];
+	_inheritance_list = [_x];
 	_counter = 0;
 
 	while {!((_mot) isequalto NULLCLASS)} do {
@@ -127,7 +127,7 @@ _attr_ex_init_list = [];
 		_motTypeName = _mot;
 
 		if (_mot == TYPE_SUPER_BASE) exitWith {};
-		_inheritance_list pushback (tolower _mot);
+		_inheritance_list pushback (_mot);
 
 		_mot = missionnamespace getvariable ['pt_' + _mot,NULLCLASS];
 		if equals(_mot,NULLCLASS) exitWith {
@@ -148,6 +148,8 @@ _attr_ex_init_list = [];
 	#ifndef __VM_VALIDATE
 	_pObj setvariable ['__instance',compile _shell_data];
 	#endif
+	_pObj setvariable ["__inhlistCase",_inheritance_list];
+	_inheritance_list = _inheritance_list apply {tolower _x};
 	_pObj setvariable ["__inhlist",_inheritance_list];
 
 	#ifndef __VM_VALIDATE

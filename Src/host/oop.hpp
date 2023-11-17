@@ -80,6 +80,7 @@
 	_pt_obj setvariable ['__motherClass',_mother]; \
 	_pt_obj setVariable ['__motherObject',nullPtr]; \
 	_pt_obj setVariable ['__childList',[]]; \
+	_pt_obj setVariable ['__inhlistCase',[]]; \
 	_pt_obj setvariable ['__inhlist',[]]; \
 	_pt_obj setvariable ['__instances',0];\
 	_pt_obj setvariable ["classname",_class]; \
