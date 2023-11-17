@@ -246,8 +246,8 @@ nodegen_generateLib = {
         };
 
         if equalTypes(_ntype,0) exitWith {
-            if (floor _ntype == _ntype) exitWith {"float"};
-            "int"
+            if (floor _ntype == _ntype) exitWith {"int"};
+            "float"
         };
         if isNullVar(_ntype) exitWith {"null"};
         if equalTypes(_ntype,true) exitwith {"bool"};
