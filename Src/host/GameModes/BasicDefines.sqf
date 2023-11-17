@@ -11,16 +11,19 @@ class(IGameEvent) extends(object)
 endclass
 
 
-"
-	name:Базовый режим
-	desc:Базовый игровой режим
-"
-node_class
+
 //Базовый игрвой режим
 editor_attribute("ColorClass" arg "C7007D")
 editor_attribute("InterfaceClass")
 class(GMBase) extends(IGameEvent) attribute(Story)
-	
+
+	"
+		name:Базовый режим
+		desc:Базовый игровой режим
+		path:Игровая логика.Режим
+	"
+	node_class
+
 	"
 		name:Название режима
 		desc:Название режима, показываемое в конце раунда и при выборе администратором

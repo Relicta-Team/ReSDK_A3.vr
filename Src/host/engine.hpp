@@ -785,6 +785,10 @@ ACRE_IS_ERRORED = false; _ret;}*/
 #define node_met call nodegen_addClassMethod;
 
 //регистрация класса в библиотеке
+/*
+	path - Путь для членов класса, path:Объекты.Логика
+	Путь наследуется для членов но может быть переопределен
+*/
 #define node_class call nodegen_addClass;
 
 // регистрация метода

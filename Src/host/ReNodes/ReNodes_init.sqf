@@ -88,6 +88,11 @@ nodegen_objlibPath = "src\host\ReNodes\lib.obj";
 
 nodegen_debug_copyobjlibPath = "P:\Project\ReNodes\lib.obj";
 
+//вызывается перед компиляцией классов
+nodegen_cleanupClassData = {
+    nodegen_list_library = [];
+};
+
 //регистратор метода
 nodegen_addClassMethod = {
     private _ctx = _this;
@@ -100,7 +105,13 @@ nodegen_addClassField = {
 };
 
 nodegen_addClass = {
-    //!NOT IMPLEMENTED
+    #ifdef _SQFVM
+    if (true) exitwith {};
+    #endif
+    if (!is3DEN) exitwith {};
+
+    private _ctx = _this;
+    ["c",_class,_ctx] call nodegen_registerClass;
 };
 
 nodegen_addFunction = {
@@ -157,6 +168,11 @@ nodegen_registerMember = {
     nodegen_list_library pushBack [_t,format["%1.%2",_class,_memname],_contextList];
 };
 
+nodegen_registerClass = {
+    params ["_t","_class","_data"];
+    nodegen_list_library pushBack [_t,_class,_data];
+};
+
 nodegen_generateLib = {
     if (!is3DEN) exitwith {
         setLastError("NodeGen cannot generate library outside ReEditor");
@@ -193,9 +209,14 @@ nodegen_generateLib = {
     modvar(_output) + "$REGION:CLASSMEM" + endl;
     {
         _x params ["_type","_member","_dataList"];
-        {
-            modvar(_output) + format["def:%1:%2_%3%4%5",_type,_member,_foreachIndex,endl,_x] + endl;
-        } foreach _dataList;
+        if equalTypes(_dataList,[]) then {
+            {
+                modvar(_output) + format["def:%1:%2_%3%4%5",_type,_member,_foreachIndex,endl,_x] + endl;
+            } foreach _dataList;
+        } else {
+            modvar(_output) + format["def:%1:%2%3%4",_type,_member,endl,_dataList] + endl
+        };
+
     } foreach nodegen_list_library;
     
     modvar(_output) + endl + "$ENDREGION:CLASSMEM" + endl;
@@ -212,7 +233,7 @@ nodegen_generateLib = {
         private _val = _this;
         private _ntype = null;
         if not_equalTypes(_val,"") then {
-            ["Field %1 in class %2 not serialized",_x select 0,_class] call printWarning;
+            //["Field %1 in class %2 not serialized; Value type: %3",_x select 0,_class,typename _val] call printWarning;
             _ntype = _val;
         } else {
             if ([_val,"\bcall\b"] call regex_isMatch) exitWith {
@@ -249,17 +270,17 @@ nodegen_generateLib = {
     _tempList = [];
     _el = "";
     {
-        _class = _x;
+        _class = [_x,"classname"] call oop_getTypeValue;
         _fields = [_x,"__fields"] call oop_getTypeValue;
         _methods = [_x,"__methods"] call oop_getTypeValue;
         _decl = [_x,"__decl_info__"] call oop_getTypeValue;
         _defPath = [_decl select 0,_missionPath] call stringReplace;
         _defPath = [_defPath,"\","\\"] call stringReplace;
         
-        _el = str(_x) + ": {" + endl + //start defclass
+        _el = str(_class) + ": {" + endl + //start defclass
         
         //baselist
-        format["    ""baseList"" : %1,",str([_x,"__inhlist"] call oop_getTypeValue)] + endl +
+        format["    ""baseList"" : %1,",str([_x,"__inhlistCase"] call oop_getTypeValue)] + endl +
         
         //declare info (file,path)
         format["    ""defined"" : {""file"":%1,""line"":%2},",str(_defPath),(_decl select 1)] + endl +
