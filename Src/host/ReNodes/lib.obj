@@ -189,6 +189,7 @@ def:f:GMBase.finishResult_0
 
 		name:Результат конца раунда
 		namelib:Получить результат конца раунда
+		desc:Результат конца раунда это число, которое отражает исход раунда. Обычно положительные числа являются положительным исходом, а отрицательные - негативным.\nЛюбое значение, отличное от 0 немедленно завершит раунд.
 		prop:get
 	
 def:m:GMBase.preSetup_0
@@ -216,7 +217,8 @@ def:m:GMBase.checkFinish_0
 def:m:GMBase.setFinishResult_0
 
 		name:Установить результат конца раунда
-		desc:Устанавливает результат конца раунда. Любое число, отличное от 0 является концом раунда. Соответственно 0 означает, что раунд должен продолжаться\nЕсли результат уже установлен, то эта функция перезапишет его.
+		namelib:Завершить раунд
+		desc:Устанавливает результат конца раунда. Любое число, отличное от 0 является концом раунда. Соответственно 0 означает, что раунд будет продолжаться\nЕсли результат уже установлен, то эта функция перезапишет его.
 		in:int:Результат:Результат конца раунда
 	
 def:m:GMBase.onFinish_0
@@ -296,7 +298,7 @@ $REGION:CLASSMETA
 }
 ,"IGamemodeSpecificClass": {
     "baseList" : ["IGamemodeSpecificClass","object"],
-    "defined" : {"file":"src\\host\\GameModes\\BasicDefines.sqf","line":563},
+    "defined" : {"file":"src\\host\\GameModes\\BasicDefines.sqf","line":566},
    "fields": {
        "defined": {},
        "all":[]
@@ -355,7 +357,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Castoffs2": {
-    "baseList" : ["Castoffs2","Castoffs1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Castoffs2","Castoffs1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":195},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -367,7 +369,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Castoffs3": {
-    "baseList" : ["Castoffs3","Castoffs1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Castoffs3","Castoffs1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":196},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -379,7 +381,7 @@ $REGION:CLASSMETA
    }
 }
 ,"GreatcoatBrown": {
-    "baseList" : ["GreatcoatBrown","GreatcoatBlack","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["GreatcoatBrown","GreatcoatBlack","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":292},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -391,7 +393,7 @@ $REGION:CLASSMETA
    }
 }
 ,"GreatcoatWhiteBrown": {
-    "baseList" : ["GreatcoatWhiteBrown","GreatcoatBlack","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["GreatcoatWhiteBrown","GreatcoatBlack","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":297},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -403,7 +405,7 @@ $REGION:CLASSMETA
    }
 }
 ,"WomanBasicCloth": {
-    "baseList" : ["WomanBasicCloth","GreatcoatBlack","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["WomanBasicCloth","GreatcoatBlack","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":302},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -415,7 +417,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ZnatCloth": {
-    "baseList" : ["ZnatCloth","GreatcoatBlack","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ZnatCloth","GreatcoatBlack","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":307},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -427,7 +429,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CleanerCloth": {
-    "baseList" : ["CleanerCloth","NomadCloth16","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CleanerCloth","NomadCloth16","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":374},
    "fields": {
        "defined": {"name":"string"},
@@ -439,7 +441,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth2": {
-    "baseList" : ["NomadCloth2","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth2","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":210},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -451,7 +453,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth3": {
-    "baseList" : ["NomadCloth3","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth3","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":211},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -463,7 +465,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth4": {
-    "baseList" : ["NomadCloth4","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth4","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":212},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -475,7 +477,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth5": {
-    "baseList" : ["NomadCloth5","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth5","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":213},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -487,7 +489,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth6": {
-    "baseList" : ["NomadCloth6","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth6","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":214},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -499,7 +501,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth7": {
-    "baseList" : ["NomadCloth7","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth7","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":215},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -511,7 +513,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth8": {
-    "baseList" : ["NomadCloth8","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth8","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":216},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -523,7 +525,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth9": {
-    "baseList" : ["NomadCloth9","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth9","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":217},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -535,7 +537,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth10": {
-    "baseList" : ["NomadCloth10","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth10","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":218},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -547,7 +549,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth11": {
-    "baseList" : ["NomadCloth11","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth11","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":219},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -559,7 +561,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth12": {
-    "baseList" : ["NomadCloth12","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth12","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":221},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -571,7 +573,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth13": {
-    "baseList" : ["NomadCloth13","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth13","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":222},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -583,7 +585,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth14": {
-    "baseList" : ["NomadCloth14","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth14","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":223},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -595,7 +597,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth15": {
-    "baseList" : ["NomadCloth15","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth15","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":224},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -607,7 +609,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth16": {
-    "baseList" : ["NomadCloth16","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth16","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":225},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -619,7 +621,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth17": {
-    "baseList" : ["NomadCloth17","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth17","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":226},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -631,7 +633,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth18": {
-    "baseList" : ["NomadCloth18","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth18","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":227},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -643,7 +645,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth19": {
-    "baseList" : ["NomadCloth19","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth19","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":228},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -655,7 +657,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth20": {
-    "baseList" : ["NomadCloth20","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth20","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":229},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -667,7 +669,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth21": {
-    "baseList" : ["NomadCloth21","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth21","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":230},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -679,7 +681,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth22": {
-    "baseList" : ["NomadCloth22","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth22","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":231},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -691,7 +693,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth23": {
-    "baseList" : ["NomadCloth23","NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth23","NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":232},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -703,7 +705,7 @@ $REGION:CLASSMETA
    }
 }
 ,"VeteranCloth": {
-    "baseList" : ["VeteranCloth","ArmyCloth2","ArmyCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["VeteranCloth","ArmyCloth2","ArmyCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":395},
    "fields": {
        "defined": {"name":"string"},
@@ -715,7 +717,7 @@ $REGION:CLASSMETA
    }
 }
 ,"StreakCloth": {
-    "baseList" : ["StreakCloth","ArmyCloth4","ArmyCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["StreakCloth","ArmyCloth4","ArmyCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":399},
    "fields": {
        "defined": {"name":"string"},
@@ -727,7 +729,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ROkopovoArmyCloth5IsCMD": {
-    "baseList" : ["ROkopovoArmyCloth5IsCMD","ArmyCloth5","ArmyCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ROkopovoArmyCloth5IsCMD","ArmyCloth5","ArmyCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameModes\\Okopovo\\OkopovoRoles.sqf","line":35},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -739,7 +741,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmyCloth2": {
-    "baseList" : ["ArmyCloth2","ArmyCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmyCloth2","ArmyCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":243},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -751,7 +753,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmyCloth3": {
-    "baseList" : ["ArmyCloth3","ArmyCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmyCloth3","ArmyCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":244},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -763,7 +765,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmyCloth4": {
-    "baseList" : ["ArmyCloth4","ArmyCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmyCloth4","ArmyCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":245},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -775,7 +777,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmyCloth5": {
-    "baseList" : ["ArmyCloth5","ArmyCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmyCloth5","ArmyCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":246},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -787,7 +789,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmyCloth6": {
-    "baseList" : ["ArmyCloth6","ArmyCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmyCloth6","ArmyCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":247},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -799,7 +801,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth2": {
-    "baseList" : ["CitizenCloth2","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth2","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":259},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -811,7 +813,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth3": {
-    "baseList" : ["CitizenCloth3","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth3","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":260},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -823,7 +825,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth4": {
-    "baseList" : ["CitizenCloth4","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth4","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":261},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -835,7 +837,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth5": {
-    "baseList" : ["CitizenCloth5","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth5","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":262},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -847,7 +849,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth6": {
-    "baseList" : ["CitizenCloth6","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth6","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":263},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -859,7 +861,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth7": {
-    "baseList" : ["CitizenCloth7","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth7","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":264},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -871,7 +873,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth8": {
-    "baseList" : ["CitizenCloth8","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth8","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":265},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -883,7 +885,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth9": {
-    "baseList" : ["CitizenCloth9","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth9","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":266},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -895,7 +897,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth10": {
-    "baseList" : ["CitizenCloth10","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth10","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":268},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -907,7 +909,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth11": {
-    "baseList" : ["CitizenCloth11","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth11","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":269},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -919,7 +921,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth12": {
-    "baseList" : ["CitizenCloth12","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth12","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":270},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -931,7 +933,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth13": {
-    "baseList" : ["CitizenCloth13","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth13","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":271},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -943,7 +945,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth14": {
-    "baseList" : ["CitizenCloth14","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth14","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":272},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -955,7 +957,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth15": {
-    "baseList" : ["CitizenCloth15","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth15","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":273},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -967,7 +969,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth16": {
-    "baseList" : ["CitizenCloth16","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth16","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":274},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -979,7 +981,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth17": {
-    "baseList" : ["CitizenCloth17","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth17","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":275},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -991,7 +993,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth18": {
-    "baseList" : ["CitizenCloth18","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth18","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":276},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1003,7 +1005,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth19": {
-    "baseList" : ["CitizenCloth19","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth19","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":277},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1015,7 +1017,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth20": {
-    "baseList" : ["CitizenCloth20","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth20","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":278},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1027,7 +1029,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth21": {
-    "baseList" : ["CitizenCloth21","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth21","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":279},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1039,7 +1041,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth22": {
-    "baseList" : ["CitizenCloth22","CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth22","CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":280},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1051,7 +1053,7 @@ $REGION:CLASSMETA
    }
 }
 ,"TorgashPalthCloth": {
-    "baseList" : ["TorgashPalthCloth","HeadCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["TorgashPalthCloth","HeadCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":282},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1063,7 +1065,7 @@ $REGION:CLASSMETA
    }
 }
 ,"BrightRedCloth": {
-    "baseList" : ["BrightRedCloth","HeadCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["BrightRedCloth","HeadCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":329},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1075,7 +1077,7 @@ $REGION:CLASSMETA
    }
 }
 ,"WhiteRobeCloth": {
-    "baseList" : ["WhiteRobeCloth","CliricCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["WhiteRobeCloth","CliricCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":287},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1087,7 +1089,7 @@ $REGION:CLASSMETA
    }
 }
 ,"MerchantClothSaloon": {
-    "baseList" : ["MerchantClothSaloon","MerchantCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["MerchantClothSaloon","MerchantCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":281},
    "fields": {
        "defined": {"armaClass":"string","name":"string","desc":"string"},
@@ -1099,7 +1101,7 @@ $REGION:CLASSMETA
    }
 }
 ,"RDetClothThief": {
-    "baseList" : ["RDetClothThief","GromilaCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["RDetClothThief","GromilaCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":820},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1111,7 +1113,7 @@ $REGION:CLASSMETA
    }
 }
 ,"BanditSaloonCloth": {
-    "baseList" : ["BanditSaloonCloth","CaretakerCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["BanditSaloonCloth","CaretakerCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":417},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1123,7 +1125,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Bandit2SaloonCloth": {
-    "baseList" : ["Bandit2SaloonCloth","CaretakerCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Bandit2SaloonCloth","CaretakerCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":422},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1135,7 +1137,7 @@ $REGION:CLASSMETA
    }
 }
 ,"BanditCommanderSaloonCloth": {
-    "baseList" : ["BanditCommanderSaloonCloth","CaretakerCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["BanditCommanderSaloonCloth","CaretakerCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":427},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1147,7 +1149,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Crown1": {
-    "baseList" : ["Crown1","HatProxy","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Crown1","HatProxy","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":525},
    "fields": {
        "defined": {"name":"string","model":"string"},
@@ -1159,7 +1161,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Crown2": {
-    "baseList" : ["Crown2","HatProxy","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Crown2","HatProxy","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":530},
    "fields": {
        "defined": {"name":"string","model":"string"},
@@ -1171,7 +1173,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HatGrayOldUshanka": {
-    "baseList" : ["HatGrayOldUshanka","HatOldUshanka","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HatGrayOldUshanka","HatOldUshanka","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":486},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1183,7 +1185,7 @@ $REGION:CLASSMETA
    }
 }
 ,"WorkerCoolCap": {
-    "baseList" : ["WorkerCoolCap","WorkerCap","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["WorkerCoolCap","WorkerCap","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":495},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1195,7 +1197,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HoodAssasinSaloon": {
-    "baseList" : ["HoodAssasinSaloon","HoodBrown","HoodClirik","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HoodAssasinSaloon","HoodBrown","HoodClirik","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":237},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1207,7 +1209,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HoodBrown": {
-    "baseList" : ["HoodBrown","HoodClirik","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HoodBrown","HoodClirik","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":516},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1219,7 +1221,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HatProxy": {
-    "baseList" : ["HatProxy","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HatProxy","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":455},
    "fields": {
        "defined": {},
@@ -1231,7 +1233,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HatBeret": {
-    "baseList" : ["HatBeret","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HatBeret","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":467},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1243,7 +1245,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HatArmyCap": {
-    "baseList" : ["HatArmyCap","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HatArmyCap","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":472},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1255,7 +1257,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HatShemag": {
-    "baseList" : ["HatShemag","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HatShemag","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":477},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1267,7 +1269,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HatOldUshanka": {
-    "baseList" : ["HatOldUshanka","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HatOldUshanka","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":482},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1279,7 +1281,7 @@ $REGION:CLASSMETA
    }
 }
 ,"WorkerCap": {
-    "baseList" : ["WorkerCap","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["WorkerCap","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":490},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1291,7 +1293,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CookerCap": {
-    "baseList" : ["CookerCap","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CookerCap","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":500},
    "fields": {
        "defined": {"armaClass":"string","name":"string","desc":"string"},
@@ -1303,7 +1305,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HoodAbbat": {
-    "baseList" : ["HoodAbbat","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HoodAbbat","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":506},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1315,7 +1317,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HoodClirik": {
-    "baseList" : ["HoodClirik","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HoodClirik","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":511},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1327,7 +1329,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HoodChemicalProt": {
-    "baseList" : ["HoodChemicalProt","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HoodChemicalProt","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":520},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1339,7 +1341,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CombatHat": {
-    "baseList" : ["CombatHat","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CombatHat","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":536},
    "fields": {
        "defined": {"name":"string","weight":"float","bodyPartsCovered":"int","dr":"int","coverage":"int","armaClass":"string"},
@@ -1351,7 +1353,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HatRedSaloon": {
-    "baseList" : ["HatRedSaloon","HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HatRedSaloon","HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":287},
    "fields": {
        "defined": {"armaClass":"string","name":"string","desc":"string"},
@@ -1363,7 +1365,7 @@ $REGION:CLASSMETA
    }
 }
 ,"BlackBandannaMask": {
-    "baseList" : ["BlackBandannaMask","BrownBandannaMask","ItemMask","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["BlackBandannaMask","BrownBandannaMask","ItemMask","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":592},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1375,7 +1377,7 @@ $REGION:CLASSMETA
    }
 }
 ,"FaceCoverMask": {
-    "baseList" : ["FaceCoverMask","ItemMask","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["FaceCoverMask","ItemMask","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":572},
    "fields": {
        "defined": {"name":"string"},
@@ -1387,7 +1389,7 @@ $REGION:CLASSMETA
    }
 }
 ,"BalaclavaMask": {
-    "baseList" : ["BalaclavaMask","ItemMask","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["BalaclavaMask","ItemMask","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":576},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1399,7 +1401,7 @@ $REGION:CLASSMETA
    }
 }
 ,"BalaclavaMask2": {
-    "baseList" : ["BalaclavaMask2","ItemMask","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["BalaclavaMask2","ItemMask","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":582},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1411,7 +1413,7 @@ $REGION:CLASSMETA
    }
 }
 ,"BrownBandannaMask": {
-    "baseList" : ["BrownBandannaMask","ItemMask","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["BrownBandannaMask","ItemMask","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":587},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1423,7 +1425,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Gasmask": {
-    "baseList" : ["Gasmask","ItemMask","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Gasmask","ItemMask","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":616},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1435,7 +1437,7 @@ $REGION:CLASSMETA
    }
 }
 ,"RespiratorMask": {
-    "baseList" : ["RespiratorMask","ItemMask","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["RespiratorMask","ItemMask","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":621},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1447,7 +1449,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmorStrong": {
-    "baseList" : ["ArmorStrong","ArmorCeramic","ArmorVST","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmorStrong","ArmorCeramic","ArmorVST","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":86},
    "fields": {
        "defined": {"armaClass":"int"},
@@ -1459,7 +1461,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmorSteel": {
-    "baseList" : ["ArmorSteel","ArmorCeramic","ArmorVST","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmorSteel","ArmorCeramic","ArmorVST","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":90},
    "fields": {
        "defined": {"armaClass":"int"},
@@ -1471,7 +1473,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Breastplate": {
-    "baseList" : ["Breastplate","ArmorVST","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Breastplate","ArmorVST","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":55},
    "fields": {
        "defined": {"name":"string","desc":"string","icon":"string","weight":"int","size":"int","allowedSlots":"null_array","canUseContainer":"bool","armaClass":"int","bodyPartsCovered":"int","dr":"int","coverage":"int","notes":"string"},
@@ -1483,7 +1485,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmorCeramic": {
-    "baseList" : ["ArmorCeramic","ArmorVST","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmorCeramic","ArmorVST","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":71},
    "fields": {
        "defined": {"name":"string","desc":"string","armaClass":"int","weight":"int","size":"int","allowedSlots":"null_array","canUseContainer":"bool","bodyPartsCovered":"int","dr":"int","coverage":"int"},
@@ -1495,7 +1497,7 @@ $REGION:CLASSMETA
    }
 }
 ,"TacticalVestShoter": {
-    "baseList" : ["TacticalVestShoter","TacticalVest","Bandolier","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["TacticalVestShoter","TacticalVest","Bandolier","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":139},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1507,7 +1509,7 @@ $REGION:CLASSMETA
    }
 }
 ,"TacticalVest": {
-    "baseList" : ["TacticalVest","Bandolier","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["TacticalVest","Bandolier","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":134},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1519,7 +1521,7 @@ $REGION:CLASSMETA
    }
 }
 ,"PockedVestBlack": {
-    "baseList" : ["PockedVestBlack","Bandolier","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["PockedVestBlack","Bandolier","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":143},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1531,7 +1533,7 @@ $REGION:CLASSMETA
    }
 }
 ,"PockedVestGreen": {
-    "baseList" : ["PockedVestGreen","Bandolier","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["PockedVestGreen","Bandolier","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":148},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1543,7 +1545,7 @@ $REGION:CLASSMETA
    }
 }
 ,"PockedVestBrown": {
-    "baseList" : ["PockedVestBrown","Bandolier","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["PockedVestBrown","Bandolier","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":153},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1555,7 +1557,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmorMedium": {
-    "baseList" : ["ArmorMedium","ArmorLite","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmorMedium","ArmorLite","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":117},
    "fields": {
        "defined": {"name":"string","armaClass":"string","weight":"float","bodyPartsCovered":"int","dr":"int"},
@@ -1567,7 +1569,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmorHeavy": {
-    "baseList" : ["ArmorHeavy","ArmorLite","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmorHeavy","ArmorLite","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":125},
    "fields": {
        "defined": {"name":"string","armaClass":"string","weight":"float","bodyPartsCovered":"int","dr":"int"},
@@ -1579,7 +1581,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmorVST": {
-    "baseList" : ["ArmorVST","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmorVST","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":35},
    "fields": {
        "defined": {"armaClass":"int"},
@@ -1591,7 +1593,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Bandolier": {
-    "baseList" : ["Bandolier","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Bandolier","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":94},
    "fields": {
        "defined": {"name":"string","desc":"string","armaClass":"string","canUseContainer":"bool","weight":"float","size":"int","allowedSlots":"null_array","countSlots":"int"},
@@ -1603,7 +1605,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmorLite": {
-    "baseList" : ["ArmorLite","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmorLite","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":105},
    "fields": {
        "defined": {"name":"string","canUseContainer":"bool","weight":"float","allowedSlots":"null_array","countSlots":"int","armaClass":"string","bodyPartsCovered":"int","dr":"int","coverage":"int"},
@@ -1615,7 +1617,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmorCityNew": {
-    "baseList" : ["ArmorCityNew","Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmorCityNew","Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":159},
    "fields": {
        "defined": {"name":"string","desc":"string","armaClass":"string","allowedSlots":"null_array"},
@@ -1627,7 +1629,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Castoffs1": {
-    "baseList" : ["Castoffs1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Castoffs1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":187},
    "fields": {
        "defined": {"name":"string","desc":"string","armaClass":"string","countSlots":"int","canUseContainer":"bool"},
@@ -1639,7 +1641,7 @@ $REGION:CLASSMETA
    }
 }
 ,"GreatcoatBlack": {
-    "baseList" : ["GreatcoatBlack","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["GreatcoatBlack","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":198},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1651,7 +1653,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NomadCloth1": {
-    "baseList" : ["NomadCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NomadCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":203},
    "fields": {
        "defined": {"name":"string","desc":"string","armaClass":"string","countSlots":"int"},
@@ -1663,7 +1665,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ArmyCloth1": {
-    "baseList" : ["ArmyCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ArmyCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":235},
    "fields": {
        "defined": {"name":"string","desc":"string","armaClass":"string","countSlots":"int"},
@@ -1675,7 +1677,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CitizenCloth1": {
-    "baseList" : ["CitizenCloth1","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CitizenCloth1","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":250},
    "fields": {
        "defined": {"name":"string","desc":"string","countSlots":"int","armaClass":"string"},
@@ -1687,7 +1689,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HeadCloth": {
-    "baseList" : ["HeadCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HeadCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":319},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1699,7 +1701,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CliricCloth": {
-    "baseList" : ["CliricCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CliricCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":343},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1711,7 +1713,7 @@ $REGION:CLASSMETA
    }
 }
 ,"LeatherJacketCloth": {
-    "baseList" : ["LeatherJacketCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["LeatherJacketCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":313},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1723,7 +1725,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ChemicalProtectionSuit": {
-    "baseList" : ["ChemicalProtectionSuit","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ChemicalProtectionSuit","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":315},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1735,7 +1737,7 @@ $REGION:CLASSMETA
    }
 }
 ,"NewArmyStdCloth": {
-    "baseList" : ["NewArmyStdCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["NewArmyStdCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":317},
    "fields": {
        "defined": {"armaClass":"string"},
@@ -1747,7 +1749,7 @@ $REGION:CLASSMETA
    }
 }
 ,"KnutCloth": {
-    "baseList" : ["KnutCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["KnutCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":324},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1759,7 +1761,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CookerCloth": {
-    "baseList" : ["CookerCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CookerCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":334},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1771,7 +1773,7 @@ $REGION:CLASSMETA
    }
 }
 ,"AbbatCloth": {
-    "baseList" : ["AbbatCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["AbbatCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":339},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1783,7 +1785,7 @@ $REGION:CLASSMETA
    }
 }
 ,"BrigadirCloth": {
-    "baseList" : ["BrigadirCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["BrigadirCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":349},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1795,7 +1797,7 @@ $REGION:CLASSMETA
    }
 }
 ,"GriblanCloth": {
-    "baseList" : ["GriblanCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["GriblanCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":354},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1807,7 +1809,7 @@ $REGION:CLASSMETA
    }
 }
 ,"BarmenCloth": {
-    "baseList" : ["BarmenCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["BarmenCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":359},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1819,7 +1821,7 @@ $REGION:CLASSMETA
    }
 }
 ,"DoctorCloth": {
-    "baseList" : ["DoctorCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["DoctorCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":364},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1831,7 +1833,7 @@ $REGION:CLASSMETA
    }
 }
 ,"WatchmanCloth": {
-    "baseList" : ["WatchmanCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["WatchmanCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":369},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1843,7 +1845,7 @@ $REGION:CLASSMETA
    }
 }
 ,"MerchantCloth": {
-    "baseList" : ["MerchantCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["MerchantCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":380},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1855,7 +1857,7 @@ $REGION:CLASSMETA
    }
 }
 ,"GromilaCloth": {
-    "baseList" : ["GromilaCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["GromilaCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":385},
    "fields": {
        "defined": {"armaClass":"string","name":"string"},
@@ -1867,7 +1869,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CaretakerCloth": {
-    "baseList" : ["CaretakerCloth","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CaretakerCloth","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":390},
    "fields": {
        "defined": {"name":"string","armaClass":"string"},
@@ -1879,7 +1881,7 @@ $REGION:CLASSMETA
    }
 }
 ,"WoolCoat": {
-    "baseList" : ["WoolCoat","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["WoolCoat","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":407},
    "fields": {
        "defined": {"canUseContainer":"bool","allowedSlots":"null_array","armaClass":"string","name":"string"},
@@ -1891,7 +1893,7 @@ $REGION:CLASSMETA
    }
 }
 ,"HatUshanka": {
-    "baseList" : ["HatUshanka","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["HatUshanka","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":433},
    "fields": {
        "defined": {"canUseContainer":"bool","allowedSlots":"null_array","armaClass":"string","weight":"float","maxSize":"int","countSlots":"int","name":"string"},
@@ -1903,7 +1905,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ItemMask": {
-    "baseList" : ["ItemMask","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ItemMask","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":546},
    "fields": {
        "defined": {"canUseContainer":"bool","allowedSlots":"null_array","armaClass":"string","weight":"float","maxSize":"int","countSlots":"int","name":"string"},
@@ -1915,7 +1917,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Armor": {
-    "baseList" : ["Armor","Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Armor","Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\Armors.sqf","line":12},
    "fields": {
        "defined": {"countSlots":"int","maxSize":"int"},
@@ -1927,7 +1929,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Suitcase_Saloon": {
-    "baseList" : ["Suitcase_Saloon","Suitcase","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Suitcase_Saloon","Suitcase","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":446},
    "fields": {
        "defined": {"canUseContainer":"bool","name":"string","desc":"string","weight":"float","isLockedSaloon":"bool","timerCount":"int","timerCountMax":"int","__bufferedStealerName":"string"},
@@ -1939,7 +1941,7 @@ $REGION:CLASSMETA
    }
 }
 ,"SteelBrownContainer": {
-    "baseList" : ["SteelBrownContainer","SteelMedicalBox","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["SteelBrownContainer","SteelMedicalBox","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":66},
    "fields": {
        "defined": {"name":"string","model":"string"},
@@ -1951,7 +1953,7 @@ $REGION:CLASSMETA
    }
 }
 ,"FabricBagBig2": {
-    "baseList" : ["FabricBagBig2","FabricBagBig1","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["FabricBagBig2","FabricBagBig1","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Backpacks.sqf","line":72},
    "fields": {
        "defined": {"model":"string"},
@@ -1963,7 +1965,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Cloth": {
-    "baseList" : ["Cloth","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Cloth","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":13},
    "fields": {
        "defined": {"name":"string","desc":"string","size":"int","model":"string","dr":"int","bodyPartsCovered":"int","coverage":"int","armaClass":"string","notes":"string","allowedSlots":"null_array","armaClass":"string","countSlots":"int","maxSize":"int","weight":"float"},
@@ -1975,7 +1977,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Briefcase": {
-    "baseList" : ["Briefcase","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Briefcase","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":14},
    "fields": {
        "defined": {"name":"string","icon":"string","model":"string","weight":"float","countSlots":"int","size":"int","maxSize":"int"},
@@ -1987,7 +1989,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Suitcase": {
-    "baseList" : ["Suitcase","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Suitcase","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":25},
    "fields": {
        "defined": {"name":"string","icon":"string","model":"string","weight":"float","countSlots":"int","size":"int","maxSize":"int"},
@@ -1999,7 +2001,7 @@ $REGION:CLASSMETA
    }
 }
 ,"ShuttleBag": {
-    "baseList" : ["ShuttleBag","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["ShuttleBag","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":35},
    "fields": {
        "defined": {"name":"string","icon":"string","model":"string","weight":"float","countSlots":"int","size":"int","maxSize":"int"},
@@ -2011,7 +2013,7 @@ $REGION:CLASSMETA
    }
 }
 ,"MedicalBag": {
-    "baseList" : ["MedicalBag","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["MedicalBag","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":45},
    "fields": {
        "defined": {"name":"string","icon":"string","model":"string","weight":"float","countSlots":"int","size":"int","maxSize":"int"},
@@ -2023,7 +2025,7 @@ $REGION:CLASSMETA
    }
 }
 ,"SteelMedicalBox": {
-    "baseList" : ["SteelMedicalBox","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["SteelMedicalBox","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":55},
    "fields": {
        "defined": {"name":"string","icon":"string","model":"string","weight":"float","countSlots":"int","size":"int","maxSize":"int"},
@@ -2035,7 +2037,7 @@ $REGION:CLASSMETA
    }
 }
 ,"CoinBag": {
-    "baseList" : ["CoinBag","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["CoinBag","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Backpacks.sqf","line":11},
    "fields": {
        "defined": {"name":"string","desc":"string","model":"string","icon":"string","weight":"float","allowedSlots":"null_array","countSlots":"int","size":"int","maxSize":"int"},
@@ -2047,7 +2049,7 @@ $REGION:CLASSMETA
    }
 }
 ,"SmallBackpack": {
-    "baseList" : ["SmallBackpack","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["SmallBackpack","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Backpacks.sqf","line":27},
    "fields": {
        "defined": {"name":"string","desc":"string","model":"string","weight":"float","allowedSlots":"null_array","countSlots":"int","size":"int","maxSize":"int","icon":"string"},
@@ -2059,7 +2061,7 @@ $REGION:CLASSMETA
    }
 }
 ,"FabricBagBig1": {
-    "baseList" : ["FabricBagBig1","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["FabricBagBig1","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Backpacks.sqf","line":61},
    "fields": {
        "defined": {"name":"string","allowedSlots":"null_array","countSlots":"int","maxSize":"int","size":"int","model":"string","icon":"string"},
@@ -2071,7 +2073,7 @@ $REGION:CLASSMETA
    }
 }
 ,"FoodPlate": {
-    "baseList" : ["FoodPlate","Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["FoodPlate","Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\ReagentContainers\\Kitchen.sqf","line":211},
    "fields": {
        "defined": {"name":"string","desc":"string","model":"string"},
@@ -5167,7 +5169,7 @@ $REGION:CLASSMETA
    }
 }
 ,"Container": {
-    "baseList" : ["Container","item","IDestructible","GameObject","ManagedObject","object"],
+    "baseList" : ["Container","Item","IDestructible","GameObject","ManagedObject","object"],
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Container.sqf","line":15},
    "fields": {
        "defined": {"content":"null_array","currentsize":"int","openedBy":"null_array","canUseContainer":"bool","countSlots":"int","maxSize":"int"},
