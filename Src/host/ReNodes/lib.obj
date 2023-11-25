@@ -246,6 +246,12 @@ def:m:GMBase.getLobbySoundName_0
 		type:const
 		return:string:Путь до лобби-темы
 	
+def:c:ServerClient
+
+		name:Клиент
+		desc:Класс клиента, создаваемый на стороне сервера, когда пользователь подключился к серверу.
+		path:Клиенты
+	
 
 $ENDREGION:CLASSMEM
 $REGION:CLASSMETA
@@ -320,6 +326,162 @@ $REGION:CLASSMETA
    "methods": {
        "defined":["isMainRole","canStoreNameAndFaceForValidate","showInGameDesc","canAddAfterStart","getSkills","getOtherSkills","onStarted","canVisibleAfterStart","canTakeInLobby","needDiscordRoles","isAllowedRoleToClient","roleAccess","canBeFullAntag","canBeHiddenAntag","getBasicMobs","getMobs","isEmbarkRole","getEmbarkCountRange","canEmbark","onEmbarkSpawned","getInitialPos","getInitialDir","spawnLocation","useRandomDirOnSpawn","connectedTo","initLocation","knownRoles","initWelcome","getEquipment","isLateAssigned","onAssigned","onDead","onDeadBasic","onEndgame","onEndgameBasic","addPoints","getReputationRequirement"],
        "all":["ismainrole","canstorenameandfaceforvalidate","showingamedesc","canaddafterstart","getskills","getotherskills","onstarted","canvisibleafterstart","cantakeinlobby","needdiscordroles","isallowedroletoclient","roleaccess","canbefullantag","canbehiddenantag","getbasicmobs","getmobs","isembarkrole","getembarkcountrange","canembark","onembarkspawned","getinitialpos","getinitialdir","spawnlocation","userandomdironspawn","connectedto","initlocation","knownroles","initwelcome","getequipment","islateassigned","onassigned","ondead","ondeadbasic","onendgame","onendgamebasic","addpoints","getreputationrequirement","getclassname","constructor","destructor"]
+   }
+}
+,"WeaponModuleBase": {
+    "baseList" : ["WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\MeeleWeapon.sqf","line":15},
+   "fields": {
+       "defined": {"isCommon":"bool"},
+       "all":["iscommon"]
+   },
+   "methods": {
+       "defined":["Copy","copyIfCommon"],
+       "all":["copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"DataObjectBase": {
+    "baseList" : ["DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":14},
+   "fields": {
+       "defined": {},
+       "all":[]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"ReagentBase": {
+    "baseList" : ["ReagentBase","object"],
+    "defined" : {"file":"Reagents\\Reagent.sqf","line":9},
+   "fields": {
+       "defined": {"name":"string","holder":"object","data":"null","volume":"int","reagentState":"int","data":"null_array","isFirstLife":"bool","isOverdosed":"bool","chilling_products":"null_array","chilling_point":"null","chilling_message":"string","heating_products":"null_array","heating_point":"null","heating_message":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["getId","getName","getDesc","getNutrimentFactor","getMetabolizeRate","getOverdose","getColor","constructor","destructor","reactionOnMob","reactionOnObj","onMob","onNew","onMerge","onRemove","onOverdose"],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"ReagentHolder": {
+    "baseList" : ["ReagentHolder","object"],
+    "defined" : {"file":"Reagents\\Holder.sqf","line":10},
+   "fields": {
+       "defined": {"reagentList":"null_hashmap","maxVolume":"int","loc":"object","lastTick":"int","_needRegenerateMS":"bool"},
+       "all":["reagentlist","maxvolume","loc","lasttick","_needregeneratems"]
+   },
+   "methods": {
+       "defined":["constructor","destructor","reagentsToMap","processReaction","addReagent","removeReagent","getTotalVolume","getLeftVolume","deleteReagent","isolateReagent","getMasterReagent","getRandomReagent","transferTo","removeReagents","hasReagent","getReagentAmount","transferIdTo","copyData","clearReagents","reaction","metabolize","handleReactions","removeAny"],
+       "all":["constructor","destructor","reagentstomap","processreaction","addreagent","removereagent","gettotalvolume","getleftvolume","deletereagent","isolatereagent","getmasterreagent","getrandomreagent","transferto","removereagents","hasreagent","getreagentamount","transferidto","copydata","clearreagents","reaction","metabolize","handlereactions","removeany","getclassname"]
+   }
+}
+,"ReagentReaction": {
+    "baseList" : ["ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":10},
+   "fields": {
+       "defined": {"name":"string","result":"null","result_amount":"int","required_reagents":"null_array","required_items":"null_array","catalysts":"null_array","inhibitors":"null_array","reaction_type":"int","minimum_temperature":"int","maximum_temperature":"unknown_type"},
+       "all":["name","result","result_amount","required_reagents","required_items","catalysts","inhibitors","reaction_type","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":["onReaction"],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"SEBase": {
+    "baseList" : ["SEBase","object"],
+    "defined" : {"file":"..\\..\\host\\StatusEffects\\StatusEffects_init.sqf","line":14},
+   "fields": {
+       "defined": {"name":"string","startTime":"int","loc":"object"},
+       "all":["name","starttime","loc"]
+   },
+   "methods": {
+       "defined":["isOnetimeStatus","destructor","onCreate","onRecreate","onDestroy","onUpdate"],
+       "all":["isonetimestatus","destructor","oncreate","onrecreate","ondestroy","onupdate","getclassname","constructor"]
+   }
+}
+,"SymptomBase": {
+    "baseList" : ["SymptomBase","object"],
+    "defined" : {"file":"Symptoms.sqf","line":9},
+   "fields": {
+       "defined": {"name":"string","stealth":"int","resistance":"int","stageSpeed":"int","transmittable":"bool","level":"int"},
+       "all":["name","stealth","resistance","stagespeed","transmittable","level"]
+   },
+   "methods": {
+       "defined":["onStart","onEnd","onActivate"],
+       "all":["onstart","onend","onactivate","getclassname","constructor","destructor"]
+   }
+}
+,"PerkBase": {
+    "baseList" : ["PerkBase","object"],
+    "defined" : {"file":"..\\..\\host\\Perks\\Perks_init.sqf","line":12},
+   "fields": {
+       "defined": {"name":"string","desc":"string","meInfo":"string"},
+       "all":["name","desc","meinfo"]
+   },
+   "methods": {
+       "defined":["onGetPerk","onLossPerk"],
+       "all":["ongetperk","onlossperk","getclassname","constructor","destructor"]
+   }
+}
+,"TraitBase": {
+    "baseList" : ["TraitBase","object"],
+    "defined" : {"file":"..\\..\\host\\Traits\\TraitClasses\\TraitBase.sqf","line":12},
+   "fields": {
+       "defined": {"desc":"string","descRestricted":"string","reward":"int"},
+       "all":["desc","descrestricted","reward"]
+   },
+   "methods": {
+       "defined":["getInfo","canTake","onAdd"],
+       "all":["getinfo","cantake","onadd","getclassname","constructor","destructor"]
+   }
+}
+,"TraitStrongHuman": {
+    "baseList" : ["TraitStrongHuman","object"],
+    "defined" : {"file":"..\\..\\host\\Traits\\TraitClasses\\TraitBase.sqf","line":48},
+   "fields": {
+       "defined": {"desc":"string","descRestricted":"string"},
+       "all":["desc","descrestricted"]
+   },
+   "methods": {
+       "defined":["canTake","onAdd"],
+       "all":["cantake","onadd","getclassname","constructor","destructor"]
+   }
+}
+,"ServerClient": {
+    "baseList" : ["ServerClient","object"],
+    "defined" : {"file":"..\\..\\host\\Client\\client.sqf","line":26},
+   "fields": {
+       "defined": {"loadedChunks":"null","lastDeadTime":"int","deadTimeout":"int","lastCharData":"null_array","reputation":"int","testResult":"string","isFirstJoin":"bool","votingData":"null","id":"int","uid":"string","name":"string","access":"int","points":"int","clientSettings":"null_array","nickColor":"string","mesColor":"string","prevDayLastJoin":"string","firstJoin":"string","_firstJoinDB":"string","playedRounds":"int","state":"string","isReady":"bool","isInEmbark":"bool","embarkRole":"object","actor":"model","lastMob":"object","__internal_destrMob":"object","charSettings":"null","charSettingsTemplates":"null_array","lockedSettings":"null_array","_getBannedRoles_lastGet":"int","_bannedRolesCache":"null_array","traitObject":"object","isMBOpened":"bool","delegate_messageBoxInput":"unknown_type","delegate_messageBoxClose":"unknown_type","__mbHandler":"unknown_type","delegate_onRequestNextMob":"unknown_type","ctxOnRequestNextMob":"null_array","reputationCustom":"string","discordId":"string","arrivedInCity":"int","hasFirstLoadedRoles":"bool","_getDiscordRoles_lastGet":"int","_discordRolesCache":"null_array"},
+       "all":["loadedchunks","lastdeadtime","deadtimeout","lastchardata","reputation","testresult","isfirstjoin","votingdata","id","uid","name","access","points","clientsettings","nickcolor","mescolor","prevdaylastjoin","firstjoin","_firstjoindb","playedrounds","state","isready","isinembark","embarkrole","actor","lastmob","__internal_destrmob","charsettings","charsettingstemplates","lockedsettings","_getbannedroles_lastget","_bannedrolescache","traitobject","ismbopened","delegate_messageboxinput","delegate_messageboxclose","__mbhandler","delegate_onrequestnextmob","ctxonrequestnextmob","reputationcustom","discordid","arrivedincity","hasfirstloadedroles","_getdiscordroles_lastget","_discordrolescache"]
+   },
+   "methods": {
+       "defined":["setDeadTimeout","getDeadTimeout","isConnected","constructor","isNeedToVote","destructor","unsubAllChunks","onFinalize","forceDisconnect","sendClientSettings","onChangeState","isInLobby","isInGame","onConnected","tryConnectToMob","collectClientSettings","getActorMob","getOwner","setCharSetting","addDefaultRoles","removeDefaultRoles","resetAllRoles","getPriorityForRoles","flushBannedRolesLastGet","getBannedRoles","localSay","sayLobby","sayOOC","addPoints","removePoints","hasTrait","handlePressTrait","playSystemAction","addSystemAction","removeSystemAction","initSystemMessagesOnConnect","ShowMessageBox","UpdateMessageBox","CloseMessageBox","onClosedMessageBox","handleMessageBoxInput","__updateMBHandler","showChangelogs","__rep_customToName","reputationToString","isAllowedRoleByReputation","sendInfo","fastSendInfo","playSound","playMusic","pauseMusic","stopMusic","isDiscordAccountRegistered","requestDiscordRoles","updateDiscordRoles","hasDiscordRole","flushDiscordRolesLastGet","getDiscordRoles","addDiscordRole","removeDiscordRole"],
+       "all":["setdeadtimeout","getdeadtimeout","isconnected","constructor","isneedtovote","destructor","unsuballchunks","onfinalize","forcedisconnect","sendclientsettings","onchangestate","isinlobby","isingame","onconnected","tryconnecttomob","collectclientsettings","getactormob","getowner","setcharsetting","adddefaultroles","removedefaultroles","resetallroles","getpriorityforroles","flushbannedroleslastget","getbannedroles","localsay","saylobby","sayooc","addpoints","removepoints","hastrait","handlepresstrait","playsystemaction","addsystemaction","removesystemaction","initsystemmessagesonconnect","showmessagebox","updatemessagebox","closemessagebox","onclosedmessagebox","handlemessageboxinput","__updatembhandler","showchangelogs","__rep_customtoname","reputationtostring","isallowedrolebyreputation","sendinfo","fastsendinfo","playsound","playmusic","pausemusic","stopmusic","isdiscordaccountregistered","requestdiscordroles","updatediscordroles","hasdiscordrole","flushdiscordroleslastget","getdiscordroles","adddiscordrole","removediscordrole","getclassname"]
+   }
+}
+,"HumanNaming": {
+    "baseList" : ["HumanNaming","object"],
+    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":10},
+   "fields": {
+       "defined": {"кто":"string","кого":"string","кому":"string","вин":"string","кем":"string","ком":"string"},
+       "all":["кто","кого","кому","вин","кем","ком"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"Gender_base": {
+    "baseList" : ["Gender_base","object"],
+    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":48},
+   "fields": {
+       "defined": {"Он":"string","Его":"string","Него":"string","Ему":"string","Нему":"string","кто":"string","кого":"string","кому":"string","вин":"string","кем":"string","ком":"string","пол":"string","пол_целиком":"string"},
+       "all":["он","его","него","ему","нему","кто","кого","кому","вин","кем","ком","пол","пол_целиком"]
+   },
+   "methods": {
+       "defined":["ageText","getAgeIndex","isMiddleAge","getAgeText"],
+       "all":["agetext","getageindex","ismiddleage","getagetext","getclassname","constructor","destructor"]
    }
 }
 ,"RadioBaikal": {
@@ -12262,6 +12424,174 @@ $REGION:CLASSMETA
        "all":["getabstractname","getname","getdesc","getverbs","isinworld","isflying","stopflying","onstopflying","getchunktype","isitem","ismob","isdecor","isstruct","isdoor","iscontainer","isstack","canlight","isfirelight","isreagentcontainer","isdrink","isfood","isseat","canuseascraftspace","getallowedcraftcategories","constructor","__handlepreinitvars__","getallobjects","destructor","onmoveinitem","canmoveinitem","canmoveoutitem","onmoveoutitem","getnamefor","geticon","getdescfor","startupdatemethod","stopupdatemethod","getweight","onweightchanged","gettextweight","gettextsize","canusemainaction","getmainactionname","onmainaction","onextraaction","oninteractwith","onclick","onitemclick","onitemselfclick","oncrushingcontact","getbasicloc","getdistanceto","getsourceloc","getmodelposition","getmodeldirection","getpos","getdir","getsectorpos","getsectordistto","getinheritfrom","getnearclients","getnearitems","getnearstructs","getneardecors","getnearmobs","getnearmob","getnearobjects","getobjectplace","getviewers","playsound","worldsay","unloadmodel","loadmodel","replicateobject","setmodel","dosmell","getsmellinfo","onthrowhit","onbulletact","hasupdate","doupdateaction","resetupdateaction","enableautorefgc","getclassname"]
    }
 }
+,"CFryingPan_Bibki": {
+    "baseList" : ["CFryingPan_Bibki","CFryingPan","CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":119},
+   "fields": {
+       "defined": {"name":"string","reqItems":"null_array","resultItem":"string","resultAmount":"int"},
+       "all":["name","reqitems","resultitem","resultamount","collectnearitemsdistance","dostartcooking","iscustomgiver","categoryname","categoryid","desc","recipeid","__reqitemsname","__resultitemname","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["hasvisible","cancraft","getcookingtime","oncraftsuccess","constructor","collectitems","collectnearitems","handleadditionalitems","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"CFryingPan_Pancakes": {
+    "baseList" : ["CFryingPan_Pancakes","CFryingPan","CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":126},
+   "fields": {
+       "defined": {"name":"string","reqItems":"null_array","resultItem":"string","resultAmount":"int"},
+       "all":["name","reqitems","resultitem","resultamount","collectnearitemsdistance","dostartcooking","iscustomgiver","categoryname","categoryid","desc","recipeid","__reqitemsname","__resultitemname","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["hasvisible","cancraft","getcookingtime","oncraftsuccess","constructor","collectitems","collectnearitems","handleadditionalitems","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"CFryingPan_Cutlets": {
+    "baseList" : ["CFryingPan_Cutlets","CFryingPan","CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":134},
+   "fields": {
+       "defined": {"name":"string","reqItems":"null_array","resultItem":"string","resultAmount":"int","haveSalt":"bool"},
+       "all":["name","reqitems","resultitem","resultamount","havesalt","collectnearitemsdistance","dostartcooking","iscustomgiver","categoryname","categoryid","desc","recipeid","__reqitemsname","__resultitemname","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":["canCraft","conditionalDeleteSTD","onCraftFail"],
+       "all":["cancraft","conditionaldeletestd","oncraftfail","hasvisible","getcookingtime","oncraftsuccess","constructor","collectitems","collectnearitems","handleadditionalitems","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"CKastrula_Nekachsoup": {
+    "baseList" : ["CKastrula_Nekachsoup","CKastrula","CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":186},
+   "fields": {
+       "defined": {"name":"string","desc":"string","reqItems":"null_array"},
+       "all":["name","desc","reqitems","categoryname","categoryid","recipeid","__reqitemsname","resultitem","__resultitemname","resultamount","collectnearitemsdistance","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":["handleAdditionalItems"],
+       "all":["handleadditionalitems","hasvisible","constructor","collectitems","collectnearitems","cancraft","oncraftsuccess","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"CFoodBaker_Shavirma": {
+    "baseList" : ["CFoodBaker_Shavirma","CFoodBaker","CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":210},
+   "fields": {
+       "defined": {"reqItems":"null_array","resultItem":"string"},
+       "all":["reqitems","resultitem","categoryname","categoryid","name","desc","recipeid","__reqitemsname","__resultitemname","resultamount","collectnearitemsdistance","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["hasvisible","collectitems","oncraftsuccess","constructor","collectnearitems","handleadditionalitems","cancraft","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"CFoodBaker_Pie": {
+    "baseList" : ["CFoodBaker_Pie","CFoodBaker","CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":215},
+   "fields": {
+       "defined": {"reqItems":"null_array","resultItem":"string","desc":"string","mainIngredient":"object"},
+       "all":["reqitems","resultitem","desc","mainingredient","categoryname","categoryid","name","recipeid","__reqitemsname","__resultitemname","resultamount","collectnearitemsdistance","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":["canCraft","handleAdditionalItems","onCraftSuccess"],
+       "all":["cancraft","handleadditionalitems","oncraftsuccess","hasvisible","collectitems","constructor","collectnearitems","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"CFoodBaker_Bread": {
+    "baseList" : ["CFoodBaker_Bread","CFoodBaker","CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":274},
+   "fields": {
+       "defined": {"reqItems":"null_array","resultItem":"string"},
+       "all":["reqitems","resultitem","categoryname","categoryid","name","desc","recipeid","__reqitemsname","__resultitemname","resultamount","collectnearitemsdistance","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["hasvisible","collectitems","oncraftsuccess","constructor","collectnearitems","handleadditionalitems","cancraft","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"CFoodBaker_Omlet": {
+    "baseList" : ["CFoodBaker_Omlet","CFoodBaker","CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":279},
+   "fields": {
+       "defined": {"reqItems":"null_array","resultItem":"string"},
+       "all":["reqitems","resultitem","categoryname","categoryid","name","desc","recipeid","__reqitemsname","__resultitemname","resultamount","collectnearitemsdistance","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["hasvisible","collectitems","oncraftsuccess","constructor","collectnearitems","handleadditionalitems","cancraft","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"CFoodBaker_LepFromTesto": {
+    "baseList" : ["CFoodBaker_LepFromTesto","CFoodBaker","CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":284},
+   "fields": {
+       "defined": {"reqItems":"null_array","resultItem":"string"},
+       "all":["reqitems","resultitem","categoryname","categoryid","name","desc","recipeid","__reqitemsname","__resultitemname","resultamount","collectnearitemsdistance","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["hasvisible","collectitems","oncraftsuccess","constructor","collectnearitems","handleadditionalitems","cancraft","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"CFryingPan": {
+    "baseList" : ["CFryingPan","CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":14},
+   "fields": {
+       "defined": {"collectNearItemsDistance":"float","doStartCooking":"bool","isCustomGiver":"bool"},
+       "all":["collectnearitemsdistance","dostartcooking","iscustomgiver","categoryname","categoryid","name","desc","recipeid","reqitems","__reqitemsname","resultitem","__resultitemname","resultamount","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":["hasVisible","canCraft","getCookingTime","onCraftSuccess"],
+       "all":["hasvisible","cancraft","getcookingtime","oncraftsuccess","constructor","collectitems","collectnearitems","handleadditionalitems","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"CKastrula": {
+    "baseList" : ["CKastrula","CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":68},
+   "fields": {
+       "defined": {},
+       "all":["categoryname","categoryid","name","desc","recipeid","reqitems","__reqitemsname","resultitem","__resultitemname","resultamount","collectnearitemsdistance","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":["hasVisible"],
+       "all":["hasvisible","constructor","collectitems","collectnearitems","handleadditionalitems","cancraft","oncraftsuccess","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"CFoodBaker": {
+    "baseList" : ["CFoodBaker","CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":84},
+   "fields": {
+       "defined": {},
+       "all":["categoryname","categoryid","name","desc","recipeid","reqitems","__reqitemsname","resultitem","__resultitemname","resultamount","collectnearitemsdistance","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":["hasVisible","collectItems","onCraftSuccess"],
+       "all":["hasvisible","collectitems","oncraftsuccess","constructor","collectnearitems","handleadditionalitems","cancraft","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"CFoodBase": {
+    "baseList" : ["CFoodBase","Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"Food.sqf","line":9},
+   "fields": {
+       "defined": {"categoryName":"string","categoryID":"int"},
+       "all":["categoryname","categoryid","name","desc","recipeid","reqitems","__reqitemsname","resultitem","__resultitemname","resultamount","collectnearitemsdistance","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["constructor","hasvisible","collectitems","collectnearitems","handleadditionalitems","cancraft","oncraftsuccess","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
+,"Craft_Base": {
+    "baseList" : ["Craft_Base","RefCounterObject","object"],
+    "defined" : {"file":"..\\..\\host\\CraftSystem\\Crafts\\Basic.sqf","line":29},
+   "fields": {
+       "defined": {"name":"string","desc":"string","categoryName":"string","categoryID":"null","recipeId":"int","reqItems":"null_array","__reqItemsName":"null_array","resultItem":"string","__resultItemName":"string","resultAmount":"int","collectNearItemsDistance":"int","allReqItemsAmount":"int"},
+       "all":["name","desc","categoryname","categoryid","recipeid","reqitems","__reqitemsname","resultitem","__resultitemname","resultamount","collectnearitemsdistance","allreqitemsamount"]
+   },
+   "methods": {
+       "defined":["constructor","hasVisible","collectItems","collectNearItems","handleAdditionalItems","canCraft","onCraftSuccess","onCraftFail","conditionalDeleteSTD","CreateItemSTD","DeleteItemSTD"],
+       "all":["constructor","hasvisible","collectitems","collectnearitems","handleadditionalitems","cancraft","oncraftsuccess","oncraftfail","conditionaldeletestd","createitemstd","deleteitemstd","getreflist","getreflistfromtype","destructor","getclassname"]
+   }
+}
 ,"GMOldNewOrder": {
     "baseList" : ["GMOldNewOrder","GMExtended","GMStationBase","GMBase","IGameEvent","object"],
     "defined" : {"file":"src\\host\\GameModes\\Dirtpit\\GM_OldNewOrder.sqf","line":9},
@@ -12932,6 +13262,234 @@ $REGION:CLASSMETA
    "methods": {
        "defined":["onActivate","getAspectText","printAspectInfo","onRoundBegin","onRoundEnd","onMob"],
        "all":["onactivate","getaspecttext","printaspectinfo","onroundbegin","onroundend","onmob","constructor","canactivateonmobafterstart","canupdate","onupdate","_onupdateimpl","getclassname","destructor"]
+   }
+}
+,"MoneyHigherEvent": {
+    "baseList" : ["MoneyHigherEvent","MoneyLowerEvent","InfluenceEventAllMaps","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"Common.sqf","line":207},
+   "fields": {
+       "defined": {"name":"string","desc":"string","classFrom":"string","classTo":"string"},
+       "all":["name","desc","classfrom","classto","descroleplay","allowedmodes","allowedmaps","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["canplayonmobatstart","onmob","canplay","ismultiplay","isallowedmob","updatedelay","onupdate","activatedelay","onactivate","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"RatsEatWiresEvent": {
+    "baseList" : ["RatsEatWiresEvent","InfluenceEventAllMaps","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"Common.sqf","line":7},
+   "fields": {
+       "defined": {"name":"string","desc":"string","descRoleplay":"string"},
+       "all":["name","desc","descroleplay","allowedmodes","allowedmaps","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["isMultiplay","onActivate"],
+       "all":["ismultiplay","onactivate","canplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"WindFireDisablerEvent": {
+    "baseList" : ["WindFireDisablerEvent","InfluenceEventAllMaps","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"Common.sqf","line":27},
+   "fields": {
+       "defined": {"name":"string","desc":"string","descRoleplay":"string","nextCallWorld":"int","nextCallMobs":"int","stopAt":"int"},
+       "all":["name","desc","descroleplay","nextcallworld","nextcallmobs","stopat","allowedmodes","allowedmaps","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["isMultiplay","updateDelay","constructor","onUpdate"],
+       "all":["ismultiplay","updatedelay","constructor","onupdate","canplay","canplayonmobatstart","onmob","isallowedmob","activatedelay","onactivate","ishidden","_onupdateimpl","terminateupdate","canstartupdate","playnotification","getclassname","destructor"]
+   }
+}
+,"GlobalHungerEvent": {
+    "baseList" : ["GlobalHungerEvent","InfluenceEventAllMaps","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"Common.sqf","line":94},
+   "fields": {
+       "defined": {"name":"string","desc":"string"},
+       "all":["name","desc","descroleplay","allowedmodes","allowedmaps","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["isMultiplay","canPlayOnMobAtStart","onMob"],
+       "all":["ismultiplay","canplayonmobatstart","onmob","canplay","isallowedmob","updatedelay","onupdate","activatedelay","onactivate","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"DustSmokeEvent": {
+    "baseList" : ["DustSmokeEvent","InfluenceEventAllMaps","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"Common.sqf","line":112},
+   "fields": {
+       "defined": {"name":"string","desc":"string","descRoleplay":"string","allObjects":"null_array"},
+       "all":["name","desc","descroleplay","allobjects","allowedmodes","allowedmaps","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["isMultiplay","onActivate"],
+       "all":["ismultiplay","onactivate","canplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"DoorsUnlockEvent": {
+    "baseList" : ["DoorsUnlockEvent","InfluenceEventAllMaps","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"Common.sqf","line":150},
+   "fields": {
+       "defined": {"name":"string","desc":"string"},
+       "all":["name","desc","descroleplay","allowedmodes","allowedmaps","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["isMultiplay","onActivate"],
+       "all":["ismultiplay","onactivate","canplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"MoneyLowerEvent": {
+    "baseList" : ["MoneyLowerEvent","InfluenceEventAllMaps","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"Common.sqf","line":175},
+   "fields": {
+       "defined": {"name":"string","desc":"string","classFrom":"string","classTo":"string"},
+       "all":["name","desc","classfrom","classto","descroleplay","allowedmodes","allowedmaps","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["canPlayOnMobAtStart","onMob"],
+       "all":["canplayonmobatstart","onmob","canplay","ismultiplay","isallowedmob","updatedelay","onupdate","activatedelay","onactivate","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"HumansShuffleEvent": {
+    "baseList" : ["HumansShuffleEvent","InfluenceEventAllMaps","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"Common.sqf","line":214},
+   "fields": {
+       "defined": {"name":"string","desc":"string"},
+       "all":["name","desc","descroleplay","allowedmodes","allowedmaps","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["onActivate"],
+       "all":["onactivate","canplay","ismultiplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"FoodToShitEvent": {
+    "baseList" : ["FoodToShitEvent","InfluenceEventAllMaps","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"Common.sqf","line":248},
+   "fields": {
+       "defined": {"name":"string","desc":"string","weight":"float"},
+       "all":["name","desc","weight","descroleplay","allowedmodes","allowedmaps","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["onActivate"],
+       "all":["onactivate","canplay","ismultiplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"CrazyMessagesEvent": {
+    "baseList" : ["CrazyMessagesEvent","InfluenceEventAllMaps","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"Common.sqf","line":271},
+   "fields": {
+       "defined": {"name":"string","desc":"string","mobList":"null_array","mobNextCall":"null_array","stopAt":"int"},
+       "all":["name","desc","moblist","mobnextcall","stopat","descroleplay","allowedmodes","allowedmaps","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["canPlayOnMobAtStart","onMob","getCrazyMessage","updateDelay","onUpdate"],
+       "all":["canplayonmobatstart","onmob","getcrazymessage","updatedelay","onupdate","canplay","ismultiplay","isallowedmob","activatedelay","onactivate","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"ChairPainEvent": {
+    "baseList" : ["ChairPainEvent","InfluenceEventAllMaps","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"Common.sqf","line":378},
+   "fields": {
+       "defined": {"name":"string","desc":"string","weight":"float"},
+       "all":["name","desc","weight","descroleplay","allowedmodes","allowedmaps","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["onActivate"],
+       "all":["onactivate","canplay","ismultiplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"GateBreakEvent": {
+    "baseList" : ["GateBreakEvent","GateUnlockEvent","InfluenceEventDirtpit","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"DirtpitEvents.sqf","line":113},
+   "fields": {
+       "defined": {"name":"string","desc":"string"},
+       "all":["name","desc","gatelist","allowedmaps","descroleplay","allowedmodes","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["isMultiplay","constructor"],
+       "all":["ismultiplay","constructor","canplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","onactivate","ishidden","_onupdateimpl","terminateupdate","canstartupdate","playnotification","getclassname","destructor"]
+   }
+}
+,"DirtpitEnegryLowEvent": {
+    "baseList" : ["DirtpitEnegryLowEvent","InfluenceEventDirtpit","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"DirtpitEvents.sqf","line":7},
+   "fields": {
+       "defined": {"name":"string","desc":"string","descRoleplay":"string","disconnectedData":"null_array"},
+       "all":["name","desc","descroleplay","disconnecteddata","allowedmaps","allowedmodes","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["isMultiplay","onActivate","restoreConnections"],
+       "all":["ismultiplay","onactivate","restoreconnections","canplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"EscapeDirtpitEvent": {
+    "baseList" : ["EscapeDirtpitEvent","InfluenceEventDirtpit","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"DirtpitEvents.sqf","line":64},
+   "fields": {
+       "defined": {"name":"string","desc":"string","descRoleplay":"string"},
+       "all":["name","desc","descroleplay","allowedmaps","allowedmodes","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["isMultiplay","canPlay","onActivate"],
+       "all":["ismultiplay","canplay","onactivate","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"GateUnlockEvent": {
+    "baseList" : ["GateUnlockEvent","InfluenceEventDirtpit","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"DirtpitEvents.sqf","line":92},
+   "fields": {
+       "defined": {"name":"string","desc":"string","gateList":"null"},
+       "all":["name","desc","gatelist","allowedmaps","descroleplay","allowedmodes","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["isMultiplay","constructor"],
+       "all":["ismultiplay","constructor","canplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","onactivate","ishidden","_onupdateimpl","terminateupdate","canstartupdate","playnotification","getclassname","destructor"]
+   }
+}
+,"MerchantConsoleMoneyLoseEvent": {
+    "baseList" : ["MerchantConsoleMoneyLoseEvent","InfluenceEventDirtpit","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"DirtpitEvents.sqf","line":129},
+   "fields": {
+       "defined": {"name":"string","desc":"string"},
+       "all":["name","desc","allowedmaps","descroleplay","allowedmodes","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["onActivate"],
+       "all":["onactivate","canplay","ismultiplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"MoneyInTrashEvent": {
+    "baseList" : ["MoneyInTrashEvent","InfluenceEventDirtpit","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"DirtpitEvents.sqf","line":142},
+   "fields": {
+       "defined": {"name":"string","desc":"string"},
+       "all":["name","desc","allowedmaps","descroleplay","allowedmodes","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":["onActivate"],
+       "all":["onactivate","canplay","ismultiplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"InfluenceEventAllMaps": {
+    "baseList" : ["InfluenceEventAllMaps","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"BaseEvent.sqf","line":7},
+   "fields": {
+       "defined": {},
+       "all":["name","desc","descroleplay","allowedmodes","allowedmaps","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["canplay","ismultiplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","onactivate","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
+   }
+}
+,"InfluenceEventDirtpit": {
+    "baseList" : ["InfluenceEventDirtpit","BaseProgressInfluenceEvent","IGameEvent","object"],
+    "defined" : {"file":"BaseEvent.sqf","line":10},
+   "fields": {
+       "defined": {"allowedMaps":"null_array"},
+       "all":["allowedmaps","name","desc","descroleplay","allowedmodes","weight","update_handle","rounddurationcreated","ticktimecreated"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["canplay","ismultiplay","canplayonmobatstart","onmob","isallowedmob","updatedelay","onupdate","activatedelay","onactivate","ishidden","_onupdateimpl","terminateupdate","canstartupdate","constructor","playnotification","getclassname","destructor"]
    }
 }
 ,"GMBase": {
@@ -15128,6 +15686,1650 @@ $REGION:CLASSMETA
    "methods": {
        "defined":["getInitialPos","getInitialDir","canTakeInLobby","canVisibleAfterStart","onDeadBasic","onAssigned","getSkills","getOtherSkills","getEquipment","createDocsInCloth"],
        "all":["getinitialpos","getinitialdir","cantakeinlobby","canvisibleafterstart","ondeadbasic","onassigned","getskills","getotherskills","getequipment","createdocsincloth","ismainrole","canstorenameandfaceforvalidate","showingamedesc","canaddafterstart","onstarted","needdiscordroles","isallowedroletoclient","roleaccess","canbefullantag","canbehiddenantag","getbasicmobs","getmobs","isembarkrole","getembarkcountrange","canembark","onembarkspawned","spawnlocation","userandomdironspawn","connectedto","initlocation","knownroles","initwelcome","islateassigned","ondead","onendgame","onendgamebasic","addpoints","getreputationrequirement","getclassname","constructor","destructor"]
+   }
+}
+,"Punch": {
+    "baseList" : ["Punch","Fists","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\NaturalWeapons.sqf","line":199},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","reqSkills":"null_hashmap","closeCombat":"bool","parryCapability":"int","attackType":"null_hashmap","dmgType":"null_hashmap","notes":"null_hashmap"},
+       "all":["attackedby","defenceby","reqskills","closecombat","parrycapability","attacktype","dmgtype","notes","reach","dmgbonus","attacksoundlist","misssoundlist","parrybonus","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText"],
+       "all":["getmissattackweapontext","oncritfailattack","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"Bite": {
+    "baseList" : ["Bite","Fists","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\NaturalWeapons.sqf","line":212},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","reqSkills":"null_hashmap","reach":"float","closeCombat":"bool","parryCapability":"int","attackType":"null_hashmap","dmgBonus":"null_hashmap","dmgType":"null_hashmap","attackSoundList":"null_array"},
+       "all":["attackedby","defenceby","reqskills","reach","closecombat","parrycapability","attacktype","dmgbonus","dmgtype","attacksoundlist","notes","misssoundlist","parrybonus","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText"],
+       "all":["getmissattackweapontext","oncritfailattack","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"Claws": {
+    "baseList" : ["Claws","Fists","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\NaturalWeapons.sqf","line":228},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","dmgBonus":"null_hashmap","dmgType":"null_hashmap","attackSoundList":"null_array"},
+       "all":["attackedby","defenceby","dmgbonus","dmgtype","attacksoundlist","reqskills","closecombat","parrycapability","attacktype","reach","notes","misssoundlist","parrybonus","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText","getAttackSoundData"],
+       "all":["getmissattackweapontext","getattacksounddata","oncritfailattack","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapWorkingAxe": {
+    "baseList" : ["WeapWorkingAxe","WeapAxe","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\AxesWeapons.sqf","line":34},
+   "fields": {
+       "defined": {"reqST":"int","dmgBonus":"null_hashmap","notes":"null_hashmap","parryCapability":"int","reach":"float"},
+       "all":["reqst","dmgbonus","notes","parrycapability","reach","attackedby","defenceby","reqskills","closecombat","parrybonus","attacktype","dmgtype","attacksoundlist","misssoundlist","turnstorecharge","unreadyafterattack","reqtwohands","canblock","iscommon"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapBattleAxe": {
+    "baseList" : ["WeapBattleAxe","WeapAxe","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\AxesWeapons.sqf","line":42},
+   "fields": {
+       "defined": {"reqST":"int","reqTwoHands":"bool","reach":"float","attackedBy":"null_hashmap","defenceBy":"string","parryCapability":"int","notes":"null_hashmap","attackType":"null_hashmap","dmgType":"null_hashmap","dmgBonus":"null_hashmap","missSoundList":"null_array"},
+       "all":["reqst","reqtwohands","reach","attackedby","defenceby","parrycapability","notes","attacktype","dmgtype","dmgbonus","misssoundlist","reqskills","closecombat","parrybonus","attacksoundlist","turnstorecharge","unreadyafterattack","canblock","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText","getAttackSoundData"],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapHalfHandedSword": {
+    "baseList" : ["WeapHalfHandedSword","WeapSword","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\Swords.sqf","line":35},
+   "fields": {
+       "defined": {"dmgBonus":"null_hashmap","reqST":"int","reach":"float","reqTwoHands":"bool"},
+       "all":["dmgbonus","reqst","reach","reqtwohands","attackedby","defenceby","reqskills","closecombat","parrycapability","parrybonus","attacktype","dmgtype","attacksoundlist","misssoundlist","turnstorecharge","unreadyafterattack","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapTwoHandedSword": {
+    "baseList" : ["WeapTwoHandedSword","WeapSword","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\Swords.sqf","line":42},
+   "fields": {
+       "defined": {"dmgBonus":"null_hashmap","reqST":"int","reach":"float","reqTwoHands":"bool"},
+       "all":["dmgbonus","reqst","reach","reqtwohands","attackedby","defenceby","reqskills","closecombat","parrycapability","parrybonus","attacktype","dmgtype","attacksoundlist","misssoundlist","turnstorecharge","unreadyafterattack","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"GeneratedWeapHandyItem": {
+    "baseList" : ["GeneratedWeapHandyItem","WeapHandyItem","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\NonWeapons.sqf","line":24},
+   "fields": {
+       "defined": {"attackSoundList":"null_array"},
+       "all":["attacksoundlist","attackedby","defenceby","reqskills","closecombat","attacktype","dmgtype","dmgbonus","parrycapability","parrybonus","misssoundlist","reach","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapGrabbedHuman": {
+    "baseList" : ["WeapGrabbedHuman","WeapHandyItem","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\NonWeapons.sqf","line":28},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","dmgBonus":"null_hashmap","reqSkills":"null_hashmap"},
+       "all":["attackedby","dmgbonus","reqskills","defenceby","closecombat","attacktype","dmgtype","parrycapability","parrybonus","attacksoundlist","misssoundlist","reach","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapShovel": {
+    "baseList" : ["WeapShovel","WeapHandyItem","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\ImprovisedItems.sqf","line":11},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","reqSkills":"null_hashmap","closeCombat":"bool","dmgBonus":"null_hashmap","attackType":"null_hashmap","dmgType":"null_hashmap","notes":"null_hashmap","attackSoundList":"null_array","missSoundList":"null_array"},
+       "all":["attackedby","defenceby","reqskills","closecombat","dmgbonus","attacktype","dmgtype","notes","attacksoundlist","misssoundlist","parrycapability","parrybonus","reach","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText"],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapCrowbar": {
+    "baseList" : ["WeapCrowbar","WeapHandyItem","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\ImprovisedItems.sqf","line":27},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","reqSkills":"null_hashmap","closeCombat":"bool","dmgBonus":"null_hashmap","attackType":"null_hashmap","dmgType":"null_hashmap","notes":"null_hashmap","attackSoundList":"null_array","missSoundList":"null_array"},
+       "all":["attackedby","defenceby","reqskills","closecombat","dmgbonus","attacktype","dmgtype","notes","attacksoundlist","misssoundlist","parrycapability","parrybonus","reach","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText"],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapBaton": {
+    "baseList" : ["WeapBaton","WeapHandyItem","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\ImprovisedItems.sqf","line":43},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","reqSkills":"null_hashmap","closeCombat":"bool","reach":"float","reqST":"int","attackType":"null_hashmap","dmgType":"null_hashmap","dmgBonus":"null_hashmap","parryCapability":"int","parryBonus":"int","attackSoundList":"null_array","missSoundList":"null_array"},
+       "all":["attackedby","defenceby","reqskills","closecombat","reach","reqst","attacktype","dmgtype","dmgbonus","parrycapability","parrybonus","attacksoundlist","misssoundlist","turnstorecharge","unreadyafterattack","reqtwohands","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText"],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapLittleKnife": {
+    "baseList" : ["WeapLittleKnife","WeapKnife","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\Knifes.sqf","line":32},
+   "fields": {
+       "defined": {"dmgBonus":"null_hashmap","reqST":"int"},
+       "all":["dmgbonus","reqst","attackedby","defenceby","reqskills","closecombat","parrycapability","parrybonus","attacktype","reach","dmgtype","attacksoundlist","misssoundlist","turnstorecharge","unreadyafterattack","reqtwohands","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapDaggerKnife": {
+    "baseList" : ["WeapDaggerKnife","WeapKnife","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\Knifes.sqf","line":37},
+   "fields": {
+       "defined": {"reqST":"int","dmgType":"null_hashmap","dmgBonus":"null_hashmap"},
+       "all":["reqst","dmgtype","dmgbonus","attackedby","defenceby","reqskills","closecombat","parrycapability","parrybonus","attacktype","reach","attacksoundlist","misssoundlist","turnstorecharge","unreadyafterattack","reqtwohands","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapLongRangeButt": {
+    "baseList" : ["WeapLongRangeButt","WeapLongRangeHandle","WeapPistolHandle","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\Handles.sqf","line":36},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string"},
+       "all":["attackedby","defenceby","reqskills","closecombat","parrycapability","attacktype","dmgtype","dmgbonus","attacksoundlist","misssoundlist","parrybonus","reach","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText"],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapLongRangeHandle": {
+    "baseList" : ["WeapLongRangeHandle","WeapPistolHandle","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\Handles.sqf","line":24},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","reqSkills":"null_hashmap","closeCombat":"bool","parryCapability":"int","attackType":"null_hashmap","dmgType":"null_hashmap","dmgBonus":"null_hashmap"},
+       "all":["attackedby","defenceby","reqskills","closecombat","parrycapability","attacktype","dmgtype","dmgbonus","attacksoundlist","misssoundlist","parrybonus","reach","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText"],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"Fists": {
+    "baseList" : ["Fists","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\NaturalWeapons.sqf","line":11},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","reqSkills":"null_hashmap","closeCombat":"bool","parryCapability":"int","attackType":"null_hashmap","reach":"float","dmgBonus":"null_hashmap","dmgType":"null_hashmap","notes":"null_hashmap"},
+       "all":["attackedby","defenceby","reqskills","closecombat","parrycapability","attacktype","reach","dmgbonus","dmgtype","notes","attacksoundlist","misssoundlist","parrybonus","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText","onCritFailAttack"],
+       "all":["getmissattackweapontext","oncritfailattack","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapAxe": {
+    "baseList" : ["WeapAxe","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\AxesWeapons.sqf","line":12},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","reqST":"int","reqSkills":"null_hashmap","closeCombat":"bool","parryCapability":"int","parryBonus":"int","attackType":"null_hashmap","reach":"float","dmgBonus":"null_hashmap","dmgType":"null_hashmap","notes":"null_hashmap","attackSoundList":"null_array","missSoundList":"null_array"},
+       "all":["attackedby","defenceby","reqst","reqskills","closecombat","parrycapability","parrybonus","attacktype","reach","dmgbonus","dmgtype","notes","attacksoundlist","misssoundlist","turnstorecharge","unreadyafterattack","reqtwohands","canblock","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText"],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapSword": {
+    "baseList" : ["WeapSword","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\Swords.sqf","line":12},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","reqST":"int","reqSkills":"null_hashmap","closeCombat":"bool","parryCapability":"int","parryBonus":"int","attackType":"null_hashmap","reach":"float","dmgBonus":"null_hashmap","dmgType":"null_hashmap","attackSoundList":"null_array","missSoundList":"null_array"},
+       "all":["attackedby","defenceby","reqst","reqskills","closecombat","parrycapability","parrybonus","attacktype","reach","dmgbonus","dmgtype","attacksoundlist","misssoundlist","turnstorecharge","unreadyafterattack","reqtwohands","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText"],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapHandyItem": {
+    "baseList" : ["WeapHandyItem","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\NonWeapons.sqf","line":11},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","reqSkills":"null_hashmap","closeCombat":"bool","attackType":"null_hashmap","dmgType":"null_hashmap","dmgBonus":"null_hashmap","parryCapability":"int","parryBonus":"int"},
+       "all":["attackedby","defenceby","reqskills","closecombat","attacktype","dmgtype","dmgbonus","parrycapability","parrybonus","attacksoundlist","misssoundlist","reach","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText"],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapKnife": {
+    "baseList" : ["WeapKnife","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\Knifes.sqf","line":11},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","reqST":"int","reqSkills":"null_hashmap","closeCombat":"bool","parryCapability":"int","parryBonus":"int","attackType":"null_hashmap","reach":"int","dmgBonus":"null_hashmap","dmgType":"null_hashmap","attackSoundList":"null_array","missSoundList":"null_array"},
+       "all":["attackedby","defenceby","reqst","reqskills","closecombat","parrycapability","parrybonus","attacktype","reach","dmgbonus","dmgtype","attacksoundlist","misssoundlist","turnstorecharge","unreadyafterattack","reqtwohands","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText"],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"WeapPistolHandle": {
+    "baseList" : ["WeapPistolHandle","MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\Handles.sqf","line":11},
+   "fields": {
+       "defined": {"attackedBy":"null_hashmap","defenceBy":"string","reqSkills":"null_hashmap","closeCombat":"bool","parryCapability":"int","attackType":"null_hashmap","dmgType":"null_hashmap","dmgBonus":"null_hashmap"},
+       "all":["attackedby","defenceby","reqskills","closecombat","parrycapability","attacktype","dmgtype","dmgbonus","attacksoundlist","misssoundlist","parrybonus","reach","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText"],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"MeleeWeapon": {
+    "baseList" : ["MeleeWeapon","WeaponModuleBase","object"],
+    "defined" : {"file":"src\\host\\CombatSystem\\MeeleWeapon.sqf","line":53},
+   "fields": {
+       "defined": {"defenceBy":"string","attackSoundList":"null_array","missSoundList":"null_array","reqSkills":"null_hashmap","closeCombat":"bool","parryCapability":"int","parryBonus":"int","attackType":"null_hashmap","attackedBy":"null_hashmap","reach":"float","dmgBonus":"null_hashmap","dmgType":"null_hashmap","turnsToRecharge":"int","unreadyAfterAttack":"bool","reqSt":"int","reqTwoHands":"bool","canBlock":"bool","notes":"null_hashmap"},
+       "all":["defenceby","attacksoundlist","misssoundlist","reqskills","closecombat","parrycapability","parrybonus","attacktype","attackedby","reach","dmgbonus","dmgtype","turnstorecharge","unreadyafterattack","reqst","reqtwohands","canblock","notes","iscommon"]
+   },
+   "methods": {
+       "defined":["getMissAttackWeaponText","getAttackSoundData","getMissSoundData","getReach","canAttackWithWeapon","getMaxReqSkill","rollAttack","attackModifier","rollDefenseBlock","rollDefenseParry","getAttackWeaponText","getFeintWeaponText","getDmgBonus","getDmgType","onCritiSuccessAttack","onDamage","onCritFailAttack","onMiss"],
+       "all":["getmissattackweapontext","getattacksounddata","getmisssounddata","getreach","canattackwithweapon","getmaxreqskill","rollattack","attackmodifier","rolldefenseblock","rolldefenseparry","getattackweapontext","getfeintweapontext","getdmgbonus","getdmgtype","oncritisuccessattack","ondamage","oncritfailattack","onmiss","copy","copyifcommon","getclassname","constructor","destructor"]
+   }
+}
+,"DamageInfoFalling": {
+    "baseList" : ["DamageInfoFalling","DamageInfoBase","DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":99},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"DamageInfoCrushingContact": {
+    "baseList" : ["DamageInfoCrushingContact","DamageInfoBase","DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":104},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"DamageInfoOrganDamage": {
+    "baseList" : ["DamageInfoOrganDamage","DamageInfoBase","DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":109},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"DamageInfoBodyPartVitalLoss": {
+    "baseList" : ["DamageInfoBodyPartVitalLoss","DamageInfoBase","DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":114},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"DamageInfoBodyPartVitalRotten": {
+    "baseList" : ["DamageInfoBodyPartVitalRotten","DamageInfoBase","DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":119},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"DamageInfoBloodLoss": {
+    "baseList" : ["DamageInfoBloodLoss","DamageInfoBase","DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":124},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"DamageInfoPartDamage": {
+    "baseList" : ["DamageInfoPartDamage","DamageInfoBase","DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":129},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"DamageInfoTrapDamage": {
+    "baseList" : ["DamageInfoTrapDamage","DamageInfoBase","DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":134},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"DamageInfoHPLoss": {
+    "baseList" : ["DamageInfoHPLoss","DamageInfoBase","DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":139},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"DamageInfoGrenade": {
+    "baseList" : ["DamageInfoGrenade","DamageInfoBase","DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":144},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"DODamageInfo": {
+    "baseList" : ["DODamageInfo","DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":25},
+   "fields": {
+       "defined": {"loc":"object","lastUpdateTime":"int","lastAttacker":"object","lastAttackOptionalData":"null","lastAttackerTime":"int","damageInfo":"object","damageInfoData":"null"},
+       "all":["loc","lastupdatetime","lastattacker","lastattackoptionaldata","lastattackertime","damageinfo","damageinfodata"]
+   },
+   "methods": {
+       "defined":["updateDamageInfo","updateLastAttacker","getDamagetInfoFull"],
+       "all":["updatedamageinfo","updatelastattacker","getdamagetinfofull","getclassname","constructor","destructor"]
+   }
+}
+,"DamageInfoBase": {
+    "baseList" : ["DamageInfoBase","DataObjectBase","object"],
+    "defined" : {"file":"..\\..\\host\\DataObjects\\DataObjects_init.sqf","line":95},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getclassname","constructor","destructor"]
+   }
+}
+,"Spirt": {
+    "baseList" : ["Spirt","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":6},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["getOverdose","onMob","onOverdosed"],
+       "all":["getoverdose","onmob","onoverdosed","getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getcolor","constructor","destructor","reactiononmob","reactiononobj","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Water": {
+    "baseList" : ["Water","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":29},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Blood": {
+    "baseList" : ["Blood","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":32},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Burda": {
+    "baseList" : ["Burda","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":35},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Nutriment": {
+    "baseList" : ["Nutriment","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":41},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["getMetabolizeRate","onMob"],
+       "all":["getmetabolizerate","onmob","getid","getname","getdesc","getnutrimentfactor","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Milk": {
+    "baseList" : ["Milk","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":53},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["onMob"],
+       "all":["onmob","getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Salt": {
+    "baseList" : ["Salt","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":63},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["getOverdose","getMetabolizeRate","onMob","onOverdosed"],
+       "all":["getoverdose","getmetabolizerate","onmob","onoverdosed","getid","getname","getdesc","getnutrimentfactor","getcolor","constructor","destructor","reactiononmob","reactiononobj","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Sugar": {
+    "baseList" : ["Sugar","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":86},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Pepper": {
+    "baseList" : ["Pepper","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":89},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Alvitin": {
+    "baseList" : ["Alvitin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":97},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Celicin": {
+    "baseList" : ["Celicin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":98},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Bodrin": {
+    "baseList" : ["Bodrin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":99},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Imunit": {
+    "baseList" : ["Imunit","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":100},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Kenazin": {
+    "baseList" : ["Kenazin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":101},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Rebuliy": {
+    "baseList" : ["Rebuliy","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":102},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Askadiy": {
+    "baseList" : ["Askadiy","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":103},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Toniy": {
+    "baseList" : ["Toniy","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":104},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Ceriy": {
+    "baseList" : ["Ceriy","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":105},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Karbidin": {
+    "baseList" : ["Karbidin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":107},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Stomacin": {
+    "baseList" : ["Stomacin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":108},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Feronin": {
+    "baseList" : ["Feronin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":109},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Pariliy": {
+    "baseList" : ["Pariliy","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":110},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Opirin": {
+    "baseList" : ["Opirin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":111},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Muteliy": {
+    "baseList" : ["Muteliy","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":112},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Paradol": {
+    "baseList" : ["Paradol","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":113},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Radoniy": {
+    "baseList" : ["Radoniy","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":114},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Fadiy": {
+    "baseList" : ["Fadiy","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":115},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Vodiy": {
+    "baseList" : ["Vodiy","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":116},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Neyrizin": {
+    "baseList" : ["Neyrizin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":119},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Metaficin": {
+    "baseList" : ["Metaficin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":120},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Sepivitin": {
+    "baseList" : ["Sepivitin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":121},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Demitolin": {
+    "baseList" : ["Demitolin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":123},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["onMob"],
+       "all":["onmob","getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Demidrocin": {
+    "baseList" : ["Demidrocin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":134},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Cetalin": {
+    "baseList" : ["Cetalin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":136},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["onMob"],
+       "all":["onmob","getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Tamidin": {
+    "baseList" : ["Tamidin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":151},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["onMob"],
+       "all":["onmob","getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Kodizin": {
+    "baseList" : ["Kodizin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":165},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Todizin": {
+    "baseList" : ["Todizin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":166},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Ipamitin": {
+    "baseList" : ["Ipamitin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":168},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Detoklomin": {
+    "baseList" : ["Detoklomin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":169},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Tovimin": {
+    "baseList" : ["Tovimin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":172},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["getMetabolizeRate","onMob"],
+       "all":["getmetabolizerate","onmob","getid","getname","getdesc","getnutrimentfactor","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Koradizin": {
+    "baseList" : ["Koradizin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":189},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["onMob"],
+       "all":["onmob","getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Procerin": {
+    "baseList" : ["Procerin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":204},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Getomizitin": {
+    "baseList" : ["Getomizitin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":205},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Somniy": {
+    "baseList" : ["Somniy","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":209},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["onMob"],
+       "all":["onmob","getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Komatin": {
+    "baseList" : ["Komatin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":221},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["onMob"],
+       "all":["onmob","getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Sulfanid": {
+    "baseList" : ["Sulfanid","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":232},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Pemidil": {
+    "baseList" : ["Pemidil","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":233},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Onicid": {
+    "baseList" : ["Onicid","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":235},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Hloritin": {
+    "baseList" : ["Hloritin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":236},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Paraneyrin": {
+    "baseList" : ["Paraneyrin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":237},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Mertvin": {
+    "baseList" : ["Mertvin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":238},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Gribicin": {
+    "baseList" : ["Gribicin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":241},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Zhivognilin": {
+    "baseList" : ["Zhivognilin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":242},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Psihodin": {
+    "baseList" : ["Psihodin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":243},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Verbin": {
+    "baseList" : ["Verbin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":244},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Psihobadin": {
+    "baseList" : ["Psihobadin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":245},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Chistin": {
+    "baseList" : ["Chistin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":247},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Bumilin": {
+    "baseList" : ["Bumilin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":248},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"Mutacin": {
+    "baseList" : ["Mutacin","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":250},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onmob","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"VenomDead": {
+    "baseList" : ["VenomDead","ReagentBase","object"],
+    "defined" : {"file":"Reagents\\ReagentsAll.sqf","line":255},
+   "fields": {
+       "defined": {"name":"string"},
+       "all":["name","holder","data","volume","reagentstate","isfirstlife","isoverdosed","chilling_products","chilling_point","chilling_message","heating_products","heating_point","heating_message"]
+   },
+   "methods": {
+       "defined":["onMob"],
+       "all":["onmob","getid","getname","getdesc","getnutrimentfactor","getmetabolizerate","getoverdose","getcolor","constructor","destructor","reactiononmob","reactiononobj","onnew","onmerge","onremove","onoverdose","getclassname"]
+   }
+}
+,"react_gen_1": {
+    "baseList" : ["react_gen_1","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":48},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_2": {
+    "baseList" : ["react_gen_2","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":54},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_3": {
+    "baseList" : ["react_gen_3","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":60},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_4": {
+    "baseList" : ["react_gen_4","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":66},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_5": {
+    "baseList" : ["react_gen_5","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":72},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_6": {
+    "baseList" : ["react_gen_6","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":80},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_7": {
+    "baseList" : ["react_gen_7","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":86},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_8": {
+    "baseList" : ["react_gen_8","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":94},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_9": {
+    "baseList" : ["react_gen_9","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":100},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_10": {
+    "baseList" : ["react_gen_10","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":106},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_11": {
+    "baseList" : ["react_gen_11","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":112},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_12": {
+    "baseList" : ["react_gen_12","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":120},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_13": {
+    "baseList" : ["react_gen_13","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":126},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_14": {
+    "baseList" : ["react_gen_14","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":133},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_15": {
+    "baseList" : ["react_gen_15","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":139},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_16": {
+    "baseList" : ["react_gen_16","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":146},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_17": {
+    "baseList" : ["react_gen_17","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":152},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_18": {
+    "baseList" : ["react_gen_18","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":159},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_19": {
+    "baseList" : ["react_gen_19","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":165},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_20": {
+    "baseList" : ["react_gen_20","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":171},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_21": {
+    "baseList" : ["react_gen_21","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":177},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_22": {
+    "baseList" : ["react_gen_22","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":183},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_23": {
+    "baseList" : ["react_gen_23","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":189},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_24": {
+    "baseList" : ["react_gen_24","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":195},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_25": {
+    "baseList" : ["react_gen_25","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":201},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_26": {
+    "baseList" : ["react_gen_26","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":208},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_27": {
+    "baseList" : ["react_gen_27","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":214},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_28": {
+    "baseList" : ["react_gen_28","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":220},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_29": {
+    "baseList" : ["react_gen_29","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":226},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"react_gen_30": {
+    "baseList" : ["react_gen_30","ReagentReaction","object"],
+    "defined" : {"file":"Reactions\\Reaction.sqf","line":232},
+   "fields": {
+       "defined": {"reaction_type":"int","required_reagents":"null_array","result":"string","result_amount":"int"},
+       "all":["reaction_type","required_reagents","result","result_amount","name","required_items","catalysts","inhibitors","minimum_temperature","maximum_temperature"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["onreaction","getclassname","constructor","destructor"]
+   }
+}
+,"SEDiseaseInfection": {
+    "baseList" : ["SEDiseaseInfection","SEDiseaseBase","SEMedicalBase","SEBase","object"],
+    "defined" : {"file":"Diseases.sqf","line":129},
+   "fields": {
+       "defined": {"name":"string","isCurable":"bool","cureProb":"int","stage":"int","maxStages":"int","contagiousPeriod":"int","stageMinimumAge":"int","stageProb":"int","bodyPartTarget":"object","bodyPartIndex":"int","lastMessage":"int"},
+       "all":["name","iscurable","cureprob","stage","maxstages","contagiousperiod","stageminimumage","stageprob","bodyparttarget","bodypartindex","lastmessage","desc","spreadclass","spreadtype","spreadairrange","isremissive","age","longevity","affectedmobtypes","__triggers","__cures","starttime","loc"]
+   },
+   "methods": {
+       "defined":["isOnetimeStatus","cures","canCure","onCreate","onStage","transferInfection"],
+       "all":["isonetimestatus","cures","cancure","oncreate","onstage","transferinfection","constructor","destructor","dospread","contactdisease","copyto","onupdate","getcuremessage","triggers","gettriggers","getcures","canmanifest","cure","onrecreate","ondestroy","getclassname"]
+   }
+}
+,"SEDiseaseAdvanceBase": {
+    "baseList" : ["SEDiseaseAdvanceBase","SEDiseaseBase","SEMedicalBase","SEBase","object"],
+    "defined" : {"file":"DiseaseAdvances.sqf","line":9},
+   "fields": {
+       "defined": {"name":"string","desc":"string","affectedMobTypes":"null_array","symptoms":"null_array","isProcessing":"bool"},
+       "all":["name","desc","affectedmobtypes","symptoms","isprocessing","spreadclass","spreadtype","spreadairrange","stage","maxstages","stageprob","contagiousperiod","cureprob","iscurable","isremissive","stageminimumage","age","longevity","__triggers","__cures","starttime","loc"]
+   },
+   "methods": {
+       "defined":["constructor","Mix","hasSymptom","generateSymptoms","generateProperties","assignProperties"],
+       "all":["constructor","mix","hassymptom","generatesymptoms","generateproperties","assignproperties","destructor","onstage","dospread","contactdisease","copyto","onupdate","getcuremessage","triggers","cures","gettriggers","getcures","canmanifest","cancure","cure","isonetimestatus","oncreate","onrecreate","ondestroy","getclassname"]
+   }
+}
+,"SEAlcoholHangover": {
+    "baseList" : ["SEAlcoholHangover","SEMedicalBase","SEBase","object"],
+    "defined" : {"file":"Common.sqf","line":14},
+   "fields": {
+       "defined": {"name":"string","size":"int","lastMessage":"int"},
+       "all":["name","size","lastmessage","__triggers","__cures","starttime","loc"]
+   },
+   "methods": {
+       "defined":["triggers","cures","isOnetimeStatus","getCureMessage","onCreate","onRecreate","canCure","onDestroy","onUpdate"],
+       "all":["triggers","cures","isonetimestatus","getcuremessage","oncreate","onrecreate","cancure","ondestroy","onupdate","gettriggers","getcures","canmanifest","cure","destructor","getclassname","constructor"]
+   }
+}
+,"SEDiseaseBase": {
+    "baseList" : ["SEDiseaseBase","SEMedicalBase","SEBase","object"],
+    "defined" : {"file":"Diseases.sqf","line":8},
+   "fields": {
+       "defined": {"name":"string","desc":"null","spreadClass":"null","spreadType":"string","spreadAirRange":"int","stage":"int","maxStages":"int","stageProb":"int","contagiousPeriod":"int","cureProb":"int","isCurable":"bool","isRemissive":"bool","stageMinimumAge":"int","age":"int","longevity":"int","affectedMobTypes":"null_array"},
+       "all":["name","desc","spreadclass","spreadtype","spreadairrange","stage","maxstages","stageprob","contagiousperiod","cureprob","iscurable","isremissive","stageminimumage","age","longevity","affectedmobtypes","__triggers","__cures","starttime","loc"]
+   },
+   "methods": {
+       "defined":["constructor","destructor","onStage","doSpread","contactDisease","copyTo","onUpdate"],
+       "all":["constructor","destructor","onstage","dospread","contactdisease","copyto","onupdate","getcuremessage","triggers","cures","gettriggers","getcures","canmanifest","cancure","cure","isonetimestatus","oncreate","onrecreate","ondestroy","getclassname"]
+   }
+}
+,"SEMedicalBase": {
+    "baseList" : ["SEMedicalBase","SEBase","object"],
+    "defined" : {"file":"..\\..\\host\\StatusEffects\\StatusEffects_init.sqf","line":85},
+   "fields": {
+       "defined": {"name":"string","__triggers":"null","__cures":"null"},
+       "all":["name","__triggers","__cures","starttime","loc"]
+   },
+   "methods": {
+       "defined":["getCureMessage","triggers","cures","getTriggers","getCures","canManifest","canCure","Cure","onUpdate"],
+       "all":["getcuremessage","triggers","cures","gettriggers","getcures","canmanifest","cancure","cure","onupdate","isonetimestatus","destructor","oncreate","onrecreate","ondestroy","getclassname","constructor"]
+   }
+}
+,"SETest": {
+    "baseList" : ["SETest","SEBase","object"],
+    "defined" : {"file":"..\\..\\host\\StatusEffects\\StatusEffects_init.sqf","line":59},
+   "fields": {
+       "defined": {"counter":"int"},
+       "all":["counter","name","starttime","loc"]
+   },
+   "methods": {
+       "defined":["onCreate","onUpdate","onDestroy"],
+       "all":["oncreate","onupdate","ondestroy","isonetimestatus","destructor","onrecreate","getclassname","constructor"]
+   }
+}
+,"PerkSeeInDark": {
+    "baseList" : ["PerkSeeInDark","PerkBase","object"],
+    "defined" : {"file":"..\\..\\host\\Perks\\Perks_init.sqf","line":28},
+   "fields": {
+       "defined": {"name":"string","desc":"string","meInfo":"string"},
+       "all":["name","desc","meinfo"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["ongetperk","onlossperk","getclassname","constructor","destructor"]
+   }
+}
+,"PerkSignLang": {
+    "baseList" : ["PerkSignLang","PerkBase","object"],
+    "defined" : {"file":"..\\..\\host\\Perks\\Perks_init.sqf","line":35},
+   "fields": {
+       "defined": {"name":"string","desc":"string","meInfo":"string"},
+       "all":["name","desc","meinfo"]
+   },
+   "methods": {
+       "defined":["onGetPerk","onLossPerk"],
+       "all":["ongetperk","onlossperk","getclassname","constructor","destructor"]
+   }
+}
+,"PerkOneHandShooter": {
+    "baseList" : ["PerkOneHandShooter","PerkBase","object"],
+    "defined" : {"file":"..\\..\\host\\Perks\\Perks_init.sqf","line":55},
+   "fields": {
+       "defined": {"name":"string","desc":"string","meInfo":"string"},
+       "all":["name","desc","meinfo"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["ongetperk","onlossperk","getclassname","constructor","destructor"]
+   }
+}
+,"Gender_male": {
+    "baseList" : ["Gender_male","Gender_base","object"],
+    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":92},
+   "fields": {
+       "defined": {},
+       "all":["он","его","него","ему","нему","кто","кого","кому","вин","кем","ком","пол","пол_целиком"]
+   },
+   "methods": {
+       "defined":[],
+       "all":["agetext","getageindex","ismiddleage","getagetext","getclassname","constructor","destructor"]
+   }
+}
+,"Gender_female": {
+    "baseList" : ["Gender_female","Gender_base","object"],
+    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":96},
+   "fields": {
+       "defined": {"Он":"string","Его":"string","Него":"string","Ему":"string","Нему":"string","кто":"string","кого":"string","кому":"string","вин":"string","кем":"string","ком":"string","пол":"string","пол_целиком":"string"},
+       "all":["он","его","него","ему","нему","кто","кого","кому","вин","кем","ком","пол","пол_целиком"]
+   },
+   "methods": {
+       "defined":["ageText"],
+       "all":["agetext","getageindex","ismiddleage","getagetext","getclassname","constructor","destructor"]
+   }
+}
+,"Gender_neuter": {
+    "baseList" : ["Gender_neuter","Gender_base","object"],
+    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":118},
+   "fields": {
+       "defined": {"Он":"string","Его":"string","Него":"string","Ему":"string","Нему":"string","пол":"string","пол_целиком":"string","кто":"string","кого":"string","кому":"string","вин":"string","кем":"string","ком":"string"},
+       "all":["он","его","него","ему","нему","пол","пол_целиком","кто","кого","кому","вин","кем","ком"]
+   },
+   "methods": {
+       "defined":["ageText"],
+       "all":["agetext","getageindex","ismiddleage","getagetext","getclassname","constructor","destructor"]
    }
 }
 ,"object": {
