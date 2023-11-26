@@ -285,23 +285,24 @@ nodegen_generateLib = {
         //declare info (file,path)
         format["    ""defined"" : {""file"":%1,""line"":%2},",str(_defPath),(_decl select 1)] + endl +
         //fields info
-        "   ""fields"": {" + endl +
-            //all members in lowercase
-                "       ""defined"": {" + (
-                (_fields apply {format['%1:%2',str(_x select 0),str((_x select 1) call _calculateFieldValue)]})
-                    joinString ","
-                ) + "}," + endl +
-            //all members in lowercase
-                "       ""all"":" + (str([_x,"__allfields"] call oop_getTypeValue)) + endl +
-        "   }," + endl +
+        "   ""fields"": { ""defined"": {" + endl +
+            //all members case sensitivity
+
+                (_fields apply {
+                    format['%1:{"return": %2}',str(_x select 0),str((_x select 1) call _calculateFieldValue)]
+                    })
+                    joinString "," +
+        "}   }," + endl + //close defined, close fields
 
         //methods info
-        "   ""methods"": {" + endl +
+        "   ""methods"": { ""defined"": {" + endl +
             //with case sensitivity
-            "       ""defined"":" +(str(_methods apply {_x select 0})) + "," + endl +
-            //all members in lowercase
-            "       ""all"":" + (str([_x,"__allmethods"] call oop_getTypeValue)) + endl +
-        "   }" + endl +
+                ((_methods apply {
+                    format['%1:{"return":0}',str(_x select 0)]
+                })
+                    joinString ","
+                ) + endl +
+        "}   }" + endl + //close defined, close methods
         
         "}"+ endl; //end defclass
         if (_foreachIndex != _lastIndex) then {
