@@ -235,7 +235,9 @@ nodegen_generateLib = {
         if not_equalTypes(_val,"") then {
             //["Field %1 in class %2 not serialized; Value type: %3",_x select 0,_class,typename _val] call printWarning;
             _ntype = _val;
+            //__VAL = str _val;
         } else {
+            //__VAL = str _val;
             if ([_val,"\bcall\b"] call regex_isMatch) exitWith {
                 if ('"__instance"' in _val) exitWith {
                     "object"
@@ -244,6 +246,7 @@ nodegen_generateLib = {
             };
             _ntype = call compile _val;
         };
+       // __VAL = [__VAL,"""","'"] call regex_replace;
 
         if equalTypes(_ntype,0) exitWith {
             if (floor _ntype == _ntype) exitWith {"int"};
@@ -251,7 +254,9 @@ nodegen_generateLib = {
         };
         if isNullVar(_ntype) exitWith {"null"};
         if equalTypes(_ntype,true) exitwith {"bool"};
-        if equalTypes(_ntype,"") exitwith {"string"};
+        if equalTypes(_ntype,"") exitwith {
+            //__VAL = _val; 
+            "string"};
         if equalTypes(_ntype,[]) exitwith {"null_array"};
         if equalTypes(_ntype,objNull) exitwith {"model"};
         if equalTypes(_ntype,locationNull) exitWith {"object"};
@@ -268,6 +273,7 @@ nodegen_generateLib = {
     private ["_decl","_allfields","_fields","_methods","_defPath","_class"];
     modvar(_output) + "$REGION:CLASSMETA" + endl + "{" + endl ;//+ """object"" : [""object""]" + endl;
     _tempList = [];
+    //__VAL = """null""";
     _el = "";
     {
         _class = [_x,"classname"] call oop_getTypeValue;
@@ -288,17 +294,18 @@ nodegen_generateLib = {
         "   ""fields"": { ""defined"": {" + endl +
             //all members case sensitivity
 
-                (_fields apply {
+                ((_fields apply {
+                    //__VAL = """null"""; emplace "value": %3
                     format['%1:{"return": %2}',str(_x select 0),str((_x select 1) call _calculateFieldValue)]
                     })
-                    joinString "," +
+                    joinString ",") +
         "}   }," + endl + //close defined, close fields
 
         //methods info
         "   ""methods"": { ""defined"": {" + endl +
             //with case sensitivity
                 ((_methods apply {
-                    format['%1:{"return":0}',str(_x select 0)]
+                    format['%1:{"return": "<undefined>"}',str(_x select 0)]
                 })
                     joinString ","
                 ) + endl +
