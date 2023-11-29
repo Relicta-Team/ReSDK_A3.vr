@@ -91,7 +91,7 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		namelib:Обработчик полных антагонистов
 		desc:Возвращает строковое название класса полного (уникального) антагониста, которое переопределит роль зашедшего игрока. Срабатывает при старте раунда для игроков, которые выбрали полных или любых антагонистов и чьи роли могут стать полными антагонистами.\n"+
 		"
-		defcode:func(@thisName) { @thisParams; @genvar.out.4 = _countInGame; @genvar.out.5 = _countProbFullAntags; @out.1 };
+		code:func(@thisName) { @thisParams; @genvar.out.4 = _countInGame; @genvar.out.5 = _countProbFullAntags; @out.1 };
 		return:string:Название класса полного антагониста. Если возвращается пустая строка - значит игрок не станет антагонистом и его роль не переопределится.
 		type:event
 		out:ServerClient^:Клиент:Объект проверяемого клиента, зашедший в игру на старте раунда.
@@ -115,7 +115,7 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		namelib:Обработчик скрытых антагонистов
 		desc:Возвращает строковое название класса скрытого антагониста, которое переопределит роль зашедшего игрока. "+
 			"Срабатывает при старте раунда, когда все игроки распределены по ролям и загрузились в игру.
-		defcode:func(@thisName) { @thisParams; @genvar.out.4 = _countInGame; @genvar.out.5 = _countProbHiddenAntags; @out.1};
+		code:func(@thisName) { @thisParams; @genvar.out.4 = _countInGame; @genvar.out.5 = _countProbHiddenAntags; @out.1};
 		return:string:Название класса скрытого антагониста. Если возвращается пустая строка - значит игрок не станет скрытым антагонистом и его роль не переопределится.
 		type:event
 		out:ServerClient^:Клиент:Объект проверяемого клиента, зашедший в игру на старте раунда.
@@ -201,7 +201,7 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		desc:Данное событие срабатывает раз в секунду после начала раунда. Чтобы завершить раунд с нужным исходом, используйте узел 'Получить результат конца раунда'.\n"+
 		"Для установки нужного конца раунда используйте узел 'Установить результат конца раунда'.
 		type:event
-		defcode:func(@thisName) {@thisParams; @out.1; getSelf(finishResult)};
+		code:func(@thisName) {@thisParams; @out.1; getSelf(finishResult)};
 	" node_met
 	//Проверка финиша. Должен возвращать больше 0
 	func(checkFinish)
@@ -355,6 +355,7 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		namelib:Получить путь до музыки в лобби
 		desc:Отвечает за музыку, которая играет в лобби у всех игроков. Если это пустая строка, то лобби-тема не будет загружена.
 		type:const
+		defcode:func(@thisName) {PATH_PICTURE(@propvalue)};
 		return:string:Путь до лобби-темы
 	" node_met
 	//имя лобби звука
