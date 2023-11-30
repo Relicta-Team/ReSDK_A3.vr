@@ -94,6 +94,14 @@ pc_oop_postInitClass = {
 	_editor_next_attr = []; \
 };
 
+//регистратор переменной в классе. используется в генераторе узлов
+pc_oop_regvar = {
+	params ["_f","_v"];
+	_mem_name = _f ; \
+	_lastIndex = _fields pushback [_mem_name,_v]; \
+	call pc_oop_handleAttrF;
+};
+
 //обработчик атрибутов поля
 pc_oop_handleAttrF = {
 	if (!isnil '_last_node_info_') then {

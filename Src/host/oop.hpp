@@ -119,6 +119,7 @@
 
 #define __internal_flag_processor(flagname,act) if (!isnil 'flagname') then {act; flagname = nil}
 
+//Регистратор переменной
 #define var(name,value) \
 	_mem_name = #name ; \
 	_lastIndex = _fields pushback [_mem_name,'value']; \
@@ -137,12 +138,14 @@
 	_lastIndex = _fields pushback [_mem_name,"createHashMapFromArray [" + ('value' splitString (";"+toString[9,13,10]) joinString ",") + "]"]; \
 	call pc_oop_handleAttrF;
 
+//Регистратор переменной со строковым именем
 #define __var_noStrName(name,value) \
 	_mem_name = name ; \
 	_lastIndex = _fields pushback [_mem_name,'value']; \
 	call pc_oop_handleAttrF;
 
 //Вычисляет значения поля на этапе компиляции
+//! Внимание ! - при изменении этого макроса выполнить правки в pc_oop_regvar
 #define var_inlinevalue(name,value) \
 	_mem_name = #name ; \
 	_lastIndex = _fields pushback [_mem_name,value]; \
