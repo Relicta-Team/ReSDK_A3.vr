@@ -166,6 +166,20 @@ function(mm_handleObjectSave)
 	
 	private _customProps = _hash getOrDefault ["customProps",[]];
 
+	//get native preinit vars
+	private _sysvars = [];
+	{
+		_arrAdd = ([_x,"__handleNativePreInitVars__"] call oop_getTypeValue);
+		if !isNullVar(_arrAdd) then {
+			if equalTypes(_arrAdd,{}) then {
+				_sysvars append (call _arrAdd);
+			};
+		};
+		if (_x == "gameobject") then {break};
+	} foreach ([_class,"__inhlist"] call oop_getTypeValue);
+	_sysvars = _sysvars apply {tolower _x};
+	_sysvars = _sysvars arrayintersect _sysvars;
+	
 	{
 		[_x,_y] params ["_name","_val"];
 
@@ -224,6 +238,11 @@ function(mm_handleObjectSave)
 			_initCodeArgs pushBackUnique (format["%1 setvariable ['%2',%3];",'_thisObj',_name,_val]);
 			continue;
 		};
+		if (tolower _x in _sysvars) then {
+			_addPreInitHandler = true;
+			_initCodeArgs pushBackUnique (format["%1 setvariable ['%2',%3];",'_thisObj',_name,_val]);
+			continue;
+		};
 		if (_x == "lightIsEnabled" || _x == "light") then {
 			_initCodeArgs pushBackUnique (format["%1 setvariable ['%2',%3];",'_thisObj',_name,_val]);
 			continue;
@@ -270,7 +289,7 @@ function(mm_handleObjectSave)
 	if !isNullVar(_edConnected) then {
 		{
 			INC(_counterNotNeedLvar);
-			_objcustomdata pushBackUnique (format["[%1,go_editor_globalRefs get '%2'] call (%1 getvariable '"+PROTOTYPE_VAR_NAME+"' getvariable 'addConnection');","%1",_x]);
+			_objcustomdata pushBackUnique (format["[%1,go_editor_globalRefs get ""%2""] call (%1 getvariable '"+PROTOTYPE_VAR_NAME+"' getvariable 'addConnection');","%1",_x]);
 		} foreach _edConnected;
 	};
 
@@ -327,7 +346,7 @@ function(mm_handleObjectSave)
 	};
 	if ("mark" in _hash) then {
 		_registeredMark = _hash get "mark";
-		_initCodeArgs pushBackUnique format["go_editor_globalRefs set ['%1',%2];",_registeredMark,"_thisObj"] + endl;
+		_initCodeArgs pushBackUnique format["go_editor_globalRefs set [""%1"",%2];",_registeredMark,"_thisObj"] + endl;
 	};
 
 	if not_equals(_vup,[0 arg 0 arg 1]) then {
