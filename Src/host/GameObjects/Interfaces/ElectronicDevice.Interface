@@ -20,7 +20,9 @@
 
 	func(__handleNativePreInitVars__)
 	{
-		["edIsEnabled","edUsePower"]
+		//["edIsEnabled","edUsePower"]
+		//TODO: fix with https://github.com/Relicta-Team/ReSDK_A3.vr/issues/248
+		[]
 	};
 
 	func(collectNodesInfo)
