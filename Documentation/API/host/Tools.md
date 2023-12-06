@@ -172,7 +172,7 @@ Replaced value:
 ```sqf
 ###dat
 ```
-File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 224](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L224)
+File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 225](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L225)
 ## bcol(button)
 
 Type: constant
@@ -184,7 +184,7 @@ Replaced value:
 ```sqf
 <t color=''symb__(ff0000)''>button</t> 
 ```
-File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 225](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L225)
+File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 226](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L226)
 ## editorDebug_internal_const_typemapColors
 
 Type: Variable
@@ -238,7 +238,7 @@ Type: function
 Description: общий обработчик данных
 
 
-File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 223](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L223)
+File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 224](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L224)
 # EditorDebug_io.sqf
 
 ## PRINT_FILEWRITE_ERROR_REASON
