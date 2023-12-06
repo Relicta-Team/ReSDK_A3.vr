@@ -132,6 +132,11 @@ class(GameObject) extends(ManagedObject)
 	{
 		objParams();
 	};
+	//массив с именами переменных (константная функция)
+	func(__handleNativePreInitVars__)
+	{
+		[]
+	};
 
 	//Получает список всех объектов данного типа
 	func(getAllObjects)

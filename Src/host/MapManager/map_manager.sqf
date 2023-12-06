@@ -123,7 +123,7 @@ mapManager_load = {
 		false
 	};
 
-	call compile preprocessFile _fullpath;
+	call compile preprocessFileLineNumbers _fullpath;
 
 	_timing = diag_ticktime - _timing;
 
