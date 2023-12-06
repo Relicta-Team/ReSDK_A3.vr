@@ -148,7 +148,11 @@ class(GMStationBase) extends(GMBase)
 	{
 		objParams_1(_mob);
 		private _handler = {
-			callFuncParams(gm_currentMode,pickIdeology,_value);
+			if !callFunc(gm_currentMode,isPickedIdeology) then {
+				callFuncParams(gm_currentMode,pickIdeology,_value);
+			} else {
+				callFuncParams(this,localSay,"Слишком поздно." arg "error");
+			};
 			callSelf(CloseMessageBox);
 
 			if callFunc(this,isSleep) then {

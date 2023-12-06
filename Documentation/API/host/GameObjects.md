@@ -313,7 +313,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\GameObject.sqf at line 190](../../../Src/host/GameObjects/GameObject.sqf#L190)
+File: [host\GameObjects\GameObject.sqf at line 195](../../../Src/host/GameObjects/GameObject.sqf#L195)
 ## startSectorIndex
 
 Type: constant
@@ -325,7 +325,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 467](../../../Src/host/GameObjects/GameObject.sqf#L467)
+File: [host\GameObjects\GameObject.sqf at line 472](../../../Src/host/GameObjects/GameObject.sqf#L472)
 ## sectorSize
 
 Type: constant
@@ -337,7 +337,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 468](../../../Src/host/GameObjects/GameObject.sqf#L468)
+File: [host\GameObjects\GameObject.sqf at line 473](../../../Src/host/GameObjects/GameObject.sqf#L473)
 ## flyingObject
 
 Type: Variable
@@ -361,7 +361,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\GameObject.sqf at line 232](../../../Src/host/GameObjects/GameObject.sqf#L232)
+File: [host\GameObjects\GameObject.sqf at line 237](../../../Src/host/GameObjects/GameObject.sqf#L237)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
