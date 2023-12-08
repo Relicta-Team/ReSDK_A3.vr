@@ -75,13 +75,13 @@ dsm_accounts_register = {
 	if (!call dsm_accounts_canUse) exitwith {"Функционал отключен"};
 
 	if (!(_token in dsm_accounts_mapRegister)) exitwith {
-		"Неверный токен."
+		format["Неверный токен - '%1'.",_token]
 	};
 
 	(dsm_accounts_mapRegister get _token) params ["_chanId","_nick","_discordUserId"];
 
 	if ([_nick] call db_da_isSynced) exitwith {
-		"Ошибка. Ник уже привязан."
+		format["Ошибка. Ник '%1' уже привязан.",_nick]
 	};
 
 	if ([_discordUserId] call db_da_isSyncedAsDiscordId) exitwith {
@@ -94,7 +94,7 @@ dsm_accounts_register = {
 
 	//не может выпасть по логике...
 	if (!([_nick] call db_isNickRegistered)) exitWith {
-		"Никнейм не зарегистрирован в базе."
+		format["Никнейм '%1' не зарегистрирован в базе.",_nick]
 	};
 
 	[_nick,_discordUserId] call db_da_register;

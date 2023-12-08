@@ -1602,7 +1602,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [client\Lobby\SystemSettings.sqf at line 410](../../../Src/client/Lobby/SystemSettings.sqf#L410)
+File: [client\Lobby\SystemSettings.sqf at line 445](../../../Src/client/Lobby/SystemSettings.sqf#L445)
 ## lobby_sys_listWidgets
 
 Type: Variable
@@ -1672,9 +1672,9 @@ Description:
 
 Initial value:
 ```sqf
-["system","endgame","server","admin"]
+["system","wiki","endgame","server","admin"]
 ```
-File: [client\Lobby\SystemSettings.sqf at line 44](../../../Src/client/Lobby/SystemSettings.sqf#L44)
+File: [client\Lobby\SystemSettings.sqf at line 55](../../../Src/client/Lobby/SystemSettings.sqf#L55)
 ## lobby_sys_buttonActions_sortedListName
 
 Type: Variable
@@ -1684,9 +1684,9 @@ Description:
 
 Initial value:
 ```sqf
-[["Система","55780E"],["Конец раунда","55780E"],["Сервер","C4AD68"],["Админ","8F3140"]]
+[["Система","55780E"],["Вики страницы","04B810"],["Конец раунда","55780E"],["Сервер","C4AD68"],["Админ","8F3140"]]
 ```
-File: [client\Lobby\SystemSettings.sqf at line 45](../../../Src/client/Lobby/SystemSettings.sqf#L45)
+File: [client\Lobby\SystemSettings.sqf at line 56](../../../Src/client/Lobby/SystemSettings.sqf#L56)
 ## lobby_sys_isActive
 
 Type: Variable
@@ -1698,7 +1698,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Lobby\SystemSettings.sqf at line 187](../../../Src/client/Lobby/SystemSettings.sqf#L187)
+File: [client\Lobby\SystemSettings.sqf at line 222](../../../Src/client/Lobby/SystemSettings.sqf#L222)
 ## lobby_sys_bc_widgets
 
 Type: Variable
@@ -1710,7 +1710,7 @@ Initial value:
 ```sqf
 [widgetNull,widgetNull] //виджеты контрольных групп
 ```
-File: [client\Lobby\SystemSettings.sqf at line 260](../../../Src/client/Lobby/SystemSettings.sqf#L260)
+File: [client\Lobby\SystemSettings.sqf at line 295](../../../Src/client/Lobby/SystemSettings.sqf#L295)
 ## lobby_sys_bc_slots
 
 Type: Variable
@@ -1722,7 +1722,7 @@ Initial value:
 ```sqf
 [] //виджеты слотов персонажей
 ```
-File: [client\Lobby\SystemSettings.sqf at line 261](../../../Src/client/Lobby/SystemSettings.sqf#L261)
+File: [client\Lobby\SystemSettings.sqf at line 296](../../../Src/client/Lobby/SystemSettings.sqf#L296)
 ## lobby_sys_bc_isAskingData
 
 Type: Variable
@@ -1734,7 +1734,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\Lobby\SystemSettings.sqf at line 263](../../../Src/client/Lobby/SystemSettings.sqf#L263)
+File: [client\Lobby\SystemSettings.sqf at line 298](../../../Src/client/Lobby/SystemSettings.sqf#L298)
 ## lobby_sysLoadMenu
 
 Type: function
@@ -1742,7 +1742,7 @@ Type: function
 Description: загружает окно системных настроек
 - Param: _b
 
-File: [client\Lobby\SystemSettings.sqf at line 48](../../../Src/client/Lobby/SystemSettings.sqf#L48)
+File: [client\Lobby\SystemSettings.sqf at line 59](../../../Src/client/Lobby/SystemSettings.sqf#L59)
 ## lobby_sysLoadSettings
 
 Type: function
@@ -1750,7 +1750,7 @@ Type: function
 Description: 
 - Param: _cat
 
-File: [client\Lobby\SystemSettings.sqf at line 141](../../../Src/client/Lobby/SystemSettings.sqf#L141)
+File: [client\Lobby\SystemSettings.sqf at line 152](../../../Src/client/Lobby/SystemSettings.sqf#L152)
 ## lobby_sysSetEnable
 
 Type: function
@@ -1758,7 +1758,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\Lobby\SystemSettings.sqf at line 189](../../../Src/client/Lobby/SystemSettings.sqf#L189)
+File: [client\Lobby\SystemSettings.sqf at line 224](../../../Src/client/Lobby/SystemSettings.sqf#L224)
 ## lobby_thread_textRender
 
 Type: function
@@ -1766,7 +1766,7 @@ Type: function
 Description: 
 - Param: _textRender
 
-File: [client\Lobby\SystemSettings.sqf at line 218](../../../Src/client/Lobby/SystemSettings.sqf#L218)
+File: [client\Lobby\SystemSettings.sqf at line 253](../../../Src/client/Lobby/SystemSettings.sqf#L253)
 ## lobby_sys_bc_isAsking
 
 Type: function
@@ -1774,7 +1774,7 @@ Type: function
 Description: виджеты слотов персонажей
 
 
-File: [client\Lobby\SystemSettings.sqf at line 262](../../../Src/client/Lobby/SystemSettings.sqf#L262)
+File: [client\Lobby\SystemSettings.sqf at line 297](../../../Src/client/Lobby/SystemSettings.sqf#L297)
 ## lobby_sys_bc_restoreAfterAsking
 
 Type: function
@@ -1782,7 +1782,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\SystemSettings.sqf at line 264](../../../Src/client/Lobby/SystemSettings.sqf#L264)
+File: [client\Lobby\SystemSettings.sqf at line 299](../../../Src/client/Lobby/SystemSettings.sqf#L299)
 ## lobby_sys_bc_charachters
 
 Type: function
@@ -1790,7 +1790,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\SystemSettings.sqf at line 272](../../../Src/client/Lobby/SystemSettings.sqf#L272)
+File: [client\Lobby\SystemSettings.sqf at line 307](../../../Src/client/Lobby/SystemSettings.sqf#L307)
 ## lobby_sys_ba_action
 
 Type: function
@@ -1799,4 +1799,4 @@ Description:
 - Param: _action
 - Param: _ctxParams
 
-File: [client\Lobby\SystemSettings.sqf at line 319](../../../Src/client/Lobby/SystemSettings.sqf#L319)
+File: [client\Lobby\SystemSettings.sqf at line 354](../../../Src/client/Lobby/SystemSettings.sqf#L354)
