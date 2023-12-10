@@ -643,7 +643,7 @@ _4057_000003635_926034_15413 = ['IStruct',[4057,3635.93,4.15413],180,[0,0,1], {_
 ['MediumConcreteBlockDestroyed',[4056.86,3649.26,26.8282],0,[0,0,1]] call InitStruct; 
 ['MediumConcreteBlockDestroyed',[4060.41,3648.97,32.3796,true],0,[0.258819,0,0.965926]] call InitStruct; 
 ['MetalFanSmall',[4079.51,3643.14,33.1778,true],[0.422618,6.84243e-008,-0.906308],[0,1,7.54979e-008]] call InitStruct; 
-['OldGreenToiletBowl',[4063.2,3626.16,32.6519,true],[-0.640346,-0.766041,0.0560228],[0.153335,-0.056023,0.986585]] call InitStruct; 
+['OldGreenToiletBowl',[4063.2,3626.16,26.5388],210,[0,0,1]] call InitStruct; 
 _4041_326423691_3061528_74892 = ['IStruct',[4041.33,3691.31,28.7489],175,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\infrastructure\bridges\bridgesea_01_pillar_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4057_155763634_9748525_44140 = ['IStruct',[4057.16,3634.97,25.4414],305,[0,0,1], {_thisObj setvariable ['model','ca\structures_e\misc\misc_cables\misc_cable_rugs1_ep1.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4061_278813649_3908724_58532 = ['IStruct',[4061.28,3649.39,35.8955,true],[-0.996195,-0.087097,0.00303953],[-0.0151354,0.207251,0.978171], {_thisObj setvariable ['model','ca\structures_e\misc\misc_cables\misc_cable_rugs1_ep1.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -955,6 +955,18 @@ _4036_867683673_8217827_45319 = ['SquareWoodenBox',[4036.87,3673.82,27.4532],0,[
 ['OlderWoodenCup',[4037.73,3673.72,28.3244],0,[0,0,1]] call InitItem; 
 ['Candle',[4036.87,3673.79,28.4005],0,[0,0,1]] call InitItem; 
 ['TorchDisabled',[4037.11,3673.64,28.4265],28.0449,[0,0,1]] call InitItem; 
+['Statue7',[4058.95,3648.39,25.6172],5,[0,0,1]] call InitStruct; 
+['ShortRottenBoards',[4060.2,3645.45,31.713,true],[-0.495584,0.858393,0.132506],[0.0662502,-0.114755,0.991182]] call InitStruct; 
+['SmallMushroom',[4057.56,3648.26,32.6655,true],338.246,[-0.101306,-0.221664,0.969846]] call InitStruct; 
+['Tumannik',[4057.95,3647.25,32.4171,true],[0,0.988538,0.150975],[0.0671642,-0.150634,0.986305]] call InitItem; 
+['Tumannik',[4059.86,3647.05,32.0676,true],[0.0173834,0.915868,0.401104],[0.237145,-0.393494,0.888214]] call InitItem; 
+['ThickLightConcreteColumn',[4058.87,3647.62,25.4263],5,[0,0,1]] call InitStruct; 
+['TreeRoots1',[4058.76,3649.64,23.6565],105,[0,0,1]] call InitStruct; 
+['Candle',[4058.58,3647.92,32.6071,true],0,[0.0197062,-0.120385,0.992532]] call InitItem; 
+['SmallMushroom1',[4060.97,3647.16,32.5148,true],[0.0449434,0.984808,0.167731],[0.254886,-0.173648,0.951251]] call InitStruct; 
+['TreeRoots2',[4056.87,3649.3,29.5122,true],[0.707107,0.707107,5.96046e-007],[0.298835,-0.298836,0.906308]] call InitStruct; 
+['AncientMonument3',[4059.25,3646.74,31.5509,true],[-0.489623,0.855649,0.167731],[0.0470834,-0.166141,0.984977]] call InitStruct; 
+['AncientMonument2',[4060.17,3648.05,26.0648],15,[0,0,1]] call InitStruct; 
 ['BlockStone',[4053.51,3650.98,26.5],0,[0,0,1]] call InitDecor; 
 ['BlockDirt',[4041.68,3758.95,15.6558],180.93,[0,0,1]] call InitDecor; 
 ['BlockStone',[4043.37,3641.43,26.5],0,[0,0,1]] call InitDecor; 
@@ -1246,6 +1258,36 @@ _4036_867683673_8217827_45319 = ['SquareWoodenBox',[4036.87,3673.82,27.4532],0,[
 ['BlockDirt',[4032.74,3749.36,15.6558],179.93,[0,0,1]] call InitDecor; 
 ['BlockDirt',[4024.31,3749.14,15.5632],179.93,[0,0,1]] call InitDecor; 
 ['BlockStone',[4052.77,3680.3,26.4872],0,[0,0,1]] call InitDecor; 
+['BlockStone',[4064.94,3764.04,16.4668],335,[0,0,1]] call InitDecor; 
+['BlockStone',[4073.4,3768.88,16.4329],335,[0,0,1]] call InitDecor; 
+['BlockStone',[4080.03,3769.78,16.589],10,[0,0,1]] call InitDecor; 
+['BlockStone',[4086.33,3766.01,16.6021],40,[0,0,1]] call InitDecor; 
+['BlockStone',[4091.8,3760.28,16.6851],65,[0,0,1]] call InitDecor; 
+['BlockStone',[4095.9,3751.61,16.6869],65,[0,0,1]] call InitDecor; 
+['BlockStone',[4085.24,3629.43,26.8327],120,[0,0,1]] call InitDecor; 
+['BlockStone',[4093.84,3624.41,26.8253],120,[0,0,1]] call InitDecor; 
+['BlockStone',[4101.32,3622.6,26.8334],90,[0,0,1]] call InitDecor; 
+['BlockStone',[4106.51,3624.8,26.8345],45,[0,0,1]] call InitDecor; 
+['BlockStone',[4109.57,3630.79,26.826],10,[0,0,1]] call InitDecor; 
+['BlockStone',[4111.34,3640.64,26.8175],10,[0,0,1]] call InitDecor; 
+['BlockStone',[4113.02,3650.64,26.7638],10,[0,0,1]] call InitDecor; 
+['BlockStone',[4116.23,3655.46,26.9005],325,[0,0,1]] call InitDecor; 
+['BlockStone',[4122.27,3659.77,24.8118,true],[-0.573576,0.819152,-6.70552e-007],[0.346188,0.242404,0.906308]] call InitDecor; 
+['BlockStone',[4129.28,3664.87,20.7778,true],[-0.573576,0.819152,-6.70552e-007],[0.346188,0.242404,0.906308]] call InitDecor; 
+['BlockStone',[4137.22,3670.46,19.0129,true],325,[-1.73277e-006,5.47618e-007,1]] call InitDecor; 
+['BlockStone',[4142.54,3676.47,18.975,true],300,[-1.73277e-006,5.47618e-007,1]] call InitDecor; 
+['BlockStone',[4146.99,3684.28,18.9842,true],300,[-1.73277e-006,5.47618e-007,1]] call InitDecor; 
+['BlockStone',[4151.62,3692.41,18.933,true],300,[-1.73277e-006,5.47618e-007,1]] call InitDecor; 
+['BlockStone',[4155.57,3699.54,19.1244,true],300,[-1.73277e-006,5.47618e-007,1]] call InitDecor; 
+['BlockStone',[4147.02,3704.41,19.097,true],300,[-1.81482e-006,4.17233e-007,1]] call InitDecor; 
+['BlockStone',[4139,3708.97,19.0596,true],300,[-1.81482e-006,4.17233e-007,1]] call InitDecor; 
+['BlockStone',[4130.37,3713.97,18.9935,true],300,[-1.81482e-006,4.17233e-007,1]] call InitDecor; 
+['BlockStone',[4121.78,3719.08,19.1101,true],300,[-1.81482e-006,4.17233e-007,1]] call InitDecor; 
+['BlockStone',[4100.02,3742.8,16.6657],65,[0,0,1]] call InitDecor; 
+['BlockStone',[4114.2,3723.43,18.3364,true],[-0.852866,0.492407,-0.17365],[-0.150385,0.0868249,0.984807]] call InitDecor; 
+['BlockStone',[4103.93,3734.51,16.881,true],[0.906308,0.422618,1.49012e-008],[-0.0733868,0.157379,0.984808]] call InitDecor; 
+['BlockStone',[4108.2,3728.35,17.7691,true],45.0701,[-0.00161614,0.0438048,0.999039]] call InitDecor; 
+['BigSmoothStone',[4064.4,3762.83,1.17854],160,[0,0,1]] call InitDecor; 
 ['BigGreenRock',[4040.28,3756.8,43.4917,true],[0.0755065,0.0171058,-0.996999],[0.962078,-0.264077,0.068331]] call InitDecor; 
 ['BigGreenRock',[4024.01,3762.37,42.5696,true],[0.565306,-0.0971229,-0.819144],[0.807318,-0.138686,0.573588]] call InitDecor; 
 ['BigGreenRock',[4042.32,3731.15,37.1374,true],[-0.00418664,0.000243954,-0.999991],[-0.998412,0.0561844,0.00419373]] call InitDecor; 
@@ -1317,8 +1359,14 @@ _4036_867683673_8217827_45319 = ['SquareWoodenBox',[4036.87,3673.82,27.4532],0,[
 ['BigGreenRock',[3912.66,3675.36,26.7301,true],[-0.0871537,4.86902e-007,0.996195],[0,-1,4.88762e-007]] call InitDecor; 
 ['BigGreenRock',[3912.85,3658.73,28.5771,true],[-0.0871537,4.86902e-007,0.996195],[0,-1,4.88762e-007]] call InitDecor; 
 ['BigGreenRock',[3913.36,3642.22,26.7301,true],[0.0871504,2.41355e-008,0.996195],[-1.13994e-006,1,7.54979e-008]] call InitDecor; 
+['BigGreenRock',[4088.5,3752.16,33.1985,true],[6.39488e-014,9.65599e-007,1],[-0.866026,-0.5,4.82799e-007]] call InitDecor; 
+['BigGreenRock',[4113.99,3726.02,34.4715,true],[4.9738e-014,9.65599e-007,1],[-0.573576,-0.819152,7.90973e-007]] call InitDecor; 
+['BigGreenRock',[4145.82,3704.58,35.6096,true],[4.9738e-014,9.65599e-007,1],[-0.573576,-0.819152,7.90973e-007]] call InitDecor; 
+['BigGreenRock',[4145.75,3677.27,35.9899,true],[-1.2809e-006,-1.07036e-006,1],[-0.819152,0.573576,-4.35325e-007]] call InitDecor; 
+['BigGreenRock',[4115.88,3649.91,42.1177,true],[0.111618,0.133022,0.984808],[-0.766045,0.642787,-7.17733e-007]] call InitDecor; 
+['BigGreenRock',[4101.39,3628.29,41.0231,true],[1.67539e-007,9.65599e-007,1],[-1.86265e-007,-1,9.65599e-007]] call InitDecor; 
 ['BigGreenRock',[4088.5,3651.54,24.6513],270.001,[0,0,1]] call InitDecor; 
-['BigGreenRock',[4074.8,3619,25.3586],310.001,[0,0,1]] call InitDecor; 
+['BigGreenRock',[4069.81,3613.06,25.3586],310.001,[0,0,1]] call InitDecor; 
 ['BigGreenRock',[4042.79,3609.88,25.8139],15.0009,[0,0,1]] call InitDecor; 
 ['MediumPileGreenStones',[4084.03,3669.88,31.8197,true],[0.751612,-0.658277,0.0418535],[-0.0970308,-0.0475804,0.994143]] call InitDecor; 
 ['MediumPileGreenStones',[4083.22,3655.38,31.2977,true],[0.0152361,-0.999008,0.0418545],[-0.100345,0.0401203,0.994143]] call InitDecor; 
@@ -1338,13 +1386,13 @@ _4036_867683673_8217827_45319 = ['SquareWoodenBox',[4036.87,3673.82,27.4532],0,[
 ['LargeHighRock',[3988.94,3651.76,-3.8258],100,[0,0,1]] call InitDecor; 
 ['LargeHighRock',[3897.66,3672.83,-15],295,[0,0,1]] call InitDecor; 
 ['BigGreenRock',[4038.32,3782.93,16.6824],171.158,[0,0,1]] call InitDecor; 
-['BigGreenRock',[4061.42,3768.47,17.2426],242.795,[0,0,1]] call InitDecor; 
-['BigGreenRock',[4063.16,3751.99,16.7795],309.131,[0,0,1]] call InitDecor; 
+['BigGreenRock',[4050.21,3783.29,17.2426],232.795,[0,0,1]] call InitDecor; 
+['BigGreenRock',[4062.42,3750.54,16.7795],309.131,[0,0,1]] call InitDecor; 
 ['MediumPileGreenStones',[4017.14,3754.07,21.2089,true],[-0.52371,0.850868,0.0418487],[0.106772,0.0168231,0.994141]] call InitDecor; 
 ['MediumPileGreenStones',[4018.55,3762.05,19.8737,true],[0.249753,0.967405,0.0418459],[0.0861698,-0.0652487,0.994142]] call InitDecor; 
 ['MediumPileGreenStones',[4024.28,3774.81,22.0719,true],[0.629884,0.775561,0.0418465],[0.0511726,-0.0952009,0.994142]] call InitDecor; 
 ['MediumPileGreenStones',[4050.72,3775.59,21.5017,true],[0.991433,-0.123734,0.0418404],[-0.0536624,-0.093809,0.994143]] call InitDecor; 
-['MediumPileGreenStones',[4055.65,3754.76,20.9747,true],[-0.176127,-0.983477,0.0418505],[-0.0908247,0.0585698,0.994143]] call InitDecor; 
+['MediumPileGreenStones',[4063.46,3757.36,22.802,true],[-0.189223,-0.958366,0.213846],[-0.0588608,0.228459,0.971773]] call InitDecor; 
 ['BigGreenRock',[4013.65,3764.54,18.3706],99.7482,[0,0,1]] call InitDecor; 
 ['BigGreenRock',[4050.57,3725.5,19.5349],273.221,[0,0,1]] call InitDecor; 
 ['MediumPileGreenStones',[4049.1,3743.43,21.0498,true],[-0.103436,-0.943656,0.314347],[-0.222997,0.329998,0.917264]] call InitDecor; 
@@ -1464,6 +1512,22 @@ _4036_867683673_8217827_45319 = ['SquareWoodenBox',[4036.87,3673.82,27.4532],0,[
 ['MediumPileGreenStones',[4046.77,3701.05,26.712,true],[-0.00574883,0.99315,0.116701],[-0.703268,-0.0869811,0.705583]] call InitDecor; 
 ['MediumPileGreenStones',[4044.13,3691.56,27.4578,true],[0.0738617,0.997078,0.0194822],[-0.831311,0.0507673,0.553484]] call InitDecor; 
 ['ConcreteArch',[3911.35,3486.38,4.67257],270,[0,0,1]] call InitDecor; 
+['BigGreenRock',[4098.91,3618.3,21.2257],190.001,[0,0,1]] call InitDecor; 
+['BigGreenRock',[4101.53,3648.91,24.9365],285.001,[0,0,1]] call InitDecor; 
+['BigGreenRock',[4115.07,3632.12,25.9975],285.001,[0,0,1]] call InitDecor; 
+['BigGreenRock',[4131.79,3654.09,32.3696,true],[-0.642774,0.766056,-4.76837e-007],[0.198269,0.166362,0.965926]] call InitDecor; 
+['BigGreenRock',[4120,3667.07,30.4735,true],[-0.642768,0.766061,-2.5034e-006],[0.198269,0.166362,0.965926]] call InitDecor; 
+['BigGreenRock',[4155.71,3685.37,30.2192,true],295.001,[-1.12684e-006,6.22123e-007,1]] call InitDecor; 
+['BigGreenRock',[4134.84,3684.57,30.7178,true],300.001,[-1.12684e-006,6.22123e-007,1]] call InitDecor; 
+['BigGreenRock',[4153.53,3709.12,30.9221,true],210.001,[-1.12684e-006,6.22123e-007,1]] call InitDecor; 
+['BigGreenRock',[4126.04,3705.81,29.2202,true],210.001,[-1.12684e-006,6.22123e-007,1]] call InitDecor; 
+['BigGreenRock',[4126.08,3727.3,30.9547,true],210.001,[-1.12684e-006,6.22123e-007,1]] call InitDecor; 
+['BigGreenRock',[4104.6,3750.69,27.9503,true],240.002,[-1.12684e-006,6.22123e-007,1]] call InitDecor; 
+['BigGreenRock',[4082.21,3774.31,27.7767,true],195.001,[-1.12684e-006,6.22123e-007,1]] call InitDecor; 
+['BigGreenRock',[4084.41,3748.02,28.1399,true],240.001,[-1.12684e-006,6.22123e-007,1]] call InitDecor; 
+['BigGreenRock',[4103.67,3721.63,29.661,true],220.002,[-1.12684e-006,6.22123e-007,1]] call InitDecor; 
+['MediumPileGreenStones',[4063.04,3762.39,26.6338,true],[0.111282,-0.98192,-0.15313],[-0.993721,-0.108145,-0.0286906]] call InitDecor; 
+['MediumPileGreenStones',[4059.78,3762.05,30.6273,true],[-0.176124,-0.983478,0.0418462],[-0.803438,0.11906,-0.583362]] call InitDecor; 
 ['FarmGarden',[4048.41,3762.68,21.5018,true],105,[0.00454359,0.0050348,0.999977]] call InitStruct; 
 ['SmallSheetMetalHouse',[4037.3,3771.4,17.1619],350.406,[0,0,1]] call InitStruct; 
 ['SmallClothShelter',[4025.01,3763.6,15.9812],112.411,[0,0,1]] call InitStruct; 
@@ -2546,6 +2610,442 @@ _4318_327643711_6948229_87771 = ['IStruct',[4318.33,3711.69,37.2116,true],0,[-0.
 _4314_129393676_2775931_09864 = ['IStruct',[4314.13,3676.28,37.8331,true],0,[-0.0154596,-0.00693072,0.999856], {_thisObj setvariable ['model','ml\ml_object_new\model_14_10\monorail.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4301_362303680_7480529_31699 = ['IStruct',[4301.36,3680.75,36.9653,true],0.000273107,[-0.0154592,-0.00692596,0.999857], {_thisObj setvariable ['model','ml\ml_object_new\model_14_10\poezdgruz.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4043_146483629_1452630_30890 = ['SpawnPoint',[4043.15,3629.15,30.3089],60,[0,0,1]] call InitStruct; 
+['DirtCraterLong',[4089.8,3625.13,32.2429,true],[-0.984805,-0.173625,0.00368819],[-0.042447,0.261245,0.964339]] call InitStruct; 
+['DirtCraterLong',[4103.19,3624.5,32.3764,true],[-0.426921,-0.877395,0.2189],[-0.0424471,0.261245,0.964339]] call InitStruct; 
+['DirtCraterLong',[4109.27,3637.6,31.9125,true],14.9997,[-0.00677459,-0.000345047,0.999977]] call InitStruct; 
+['DirtCraterLong',[4111.1,3643.94,31.8878,true],0,[0.00438099,-0.00781217,0.99996]] call InitStruct; 
+['DirtCraterLong',[4119.62,3655.76,31.862,true],[0.704854,0.704815,-0.0801071],[0.056514,0.0567745,0.996786]] call InitStruct; 
+['DirtCraterLong',[4126.47,3660.51,29.9648,true],[0.766634,0.48194,-0.424272],[0.440163,0.0866098,0.893731]] call InitStruct; 
+['DirtCraterLong',[4137.78,3669.66,24.5523,true],[0.501613,0.862774,-0.0632916],[-0.00281778,0.0747908,0.997195]] call InitStruct; 
+['DirtCraterLong',[4146.75,3686.38,24.7291,true],24.9939,[-0.0419105,-0.0202314,0.998917]] call InitStruct; 
+['DirtCraterLong',[4150.15,3693.22,24.702,true],14.9995,[0.00883598,0.00142352,0.99996]] call InitStruct; 
+['DirtCraterLong',[4150.73,3700.6,24.6281,true],320,[-0.00258374,-0.00658726,0.999975]] call InitStruct; 
+['DirtCraterLong',[4125.49,3717.95,24.4143,true],315,[-0.00258374,-0.00658726,0.999975]] call InitStruct; 
+['DirtCraterLong',[4119.05,3723.59,24.6422,true],300.002,[0.00883598,0.00142351,0.99996]] call InitStruct; 
+['DirtCraterLong',[4111.22,3727.3,24.0836,true],[-0.838769,0.482607,-0.252105],[-0.2156,0.130788,0.967683]] call InitStruct; 
+['DirtCraterLong',[4086.16,3763.06,21.7049,true],299.999,[-0.00603968,0.0037025,0.999975]] call InitStruct; 
+['DirtCraterLong',[4073.09,3768.74,21.8281,true],249.998,[0.00806735,-0.00389068,0.99996]] call InitStruct; 
+['DirtCraterLong',[4094.95,3749.04,22.7421,true],[-0.763452,0.642562,-0.0652271],[-0.0630126,0.026406,0.997663]] call InitStruct; 
+['Grave',[4122.5,3661,31.5327,true],[-0.813799,-0.469845,0.342019],[0.296198,0.17101,0.939693]] call InitStruct; 
+['Grave',[4124.84,3663.01,30.5964,true],[-0.907675,-0.330363,0.258817],[0.180123,0.250352,0.951252]] call InitStruct; 
+['BigPileBurntGarbage',[4099.58,3743,16.5385],335,[0,0,1]] call InitStruct; 
+['BigPileBurntGarbage',[4092.48,3755.04,16.1442],320,[0,0,1]] call InitStruct; 
+['MediumPileOfDirtAndStones',[4104.62,3631.33,31.1664,true],[-0.881028,0.404637,0.245069],[0.208242,-0.133425,0.968934]] call InitStruct; 
+['MediumPileOfDirtAndStones',[4142.23,3706.21,24.2358,true],[-0.516086,-0.741793,0.428251],[0.250402,0.347474,0.903637]] call InitStruct; 
+['MediumPileOfDirtAndStones',[4134.01,3710.66,24.5215,true],[0.398014,0.853878,-0.335375],[0.142115,0.303776,0.942084]] call InitStruct; 
+['MediumPileOfDirtAndStones',[4121.88,3717.3,25.7754,true],45.0009,[-0.0018911,-0.00651432,0.999977]] call InitStruct; 
+['MediumPileOfDirtAndStones',[4101.56,3734.47,23.7681,true],[0.786798,0.362226,-0.49974],[0.363973,0.381609,0.849646]] call InitStruct; 
+['MediumPileOfDirtAndStones',[4077.92,3768.55,20.9317,true],24.9995,[-0.00677459,-0.000345047,0.999977]] call InitStruct; 
+['MediumDirt',[4109.33,3629.6,22.5971],0,[0,0,1]] call InitStruct; 
+['SmallDirtBrown',[4084.85,3628.85,26.5989],315,[0,0,1]] call InitStruct; 
+['SmallDirtBrown',[4097.45,3626.21,26.7862],285,[0,0,1]] call InitStruct; 
+['SmallDirtBrown',[4109.15,3648.73,32.3142,true],[0.370291,0.925417,0.0805548],[0.275875,-0.192363,0.941748]] call InitStruct; 
+['SmallDirtBrown',[4131.33,3663.07,26.3263,true],[0.582563,0.694272,-0.422618],[0.400548,0.207207,0.892539]] call InitStruct; 
+['SmallDirtBrown',[4154.61,3699.17,24.7041,true],[-0.34202,0.939693,-3.91155e-007],[-0.163176,-0.0593907,0.984808]] call InitStruct; 
+['SmallDirtBrown',[4146.22,3707.04,24.3571,true],[-0.866025,0.5,7.45058e-009],[-0.0868241,-0.150384,0.984808]] call InitStruct; 
+['SmallDirtBrown',[4135.78,3713.5,19.2987],300,[0,0,1]] call InitStruct; 
+['SmallDirtBrown',[4104.14,3735.13,22.1519,true],[-0.564862,0.806707,-0.173648],[-0.0996005,0.142244,0.984808]] call InitStruct; 
+['SmallDirtBrown',[4090.14,3757.77,17.1289],0,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[4091.04,3629.31,31.9699,true],[-0.996194,0.0871581,1.24797e-007],[-0.0298097,-0.340718,0.939693]] call InitStruct; 
+['SmallDirtGrey',[4115.5,3652.01,26.8043],35,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[4141.69,3669.32,19.5276],20,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[4140.51,3678.04,24.9465,true],0,[0,-0.173648,0.984808]] call InitStruct; 
+['SmallDirtGrey',[4142.26,3682.01,24.7932,true],15,[0.0669867,0.25,0.965926]] call InitStruct; 
+['SmallDirtGrey',[4131.09,3716.09,19.3339],305,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[4127.67,3713.33,24.4474,true],[-0.866025,0.500001,-7.82311e-007],[0.043577,0.0754791,0.996195]] call InitStruct; 
+['SmallDirtGrey',[4091.82,3760.86,16.919],310,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[4095.48,3754.88,17.405],330,[0,0,1]] call InitStruct; 
+['SmallDirtGrey',[4098.94,3746.82,17.8177],0,[0,0,1]] call InitStruct; 
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4106.92,3730.8,18.0946],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4107.74,3729.49,23.2339,true],295,[-0.0418557,0.115683,0.992404]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4117.64,3724.81,19.8255],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4122.62,3721.11,19.5609],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4123.58,3720.26,19.5209],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4124.77,3719.21,19.5603],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4126.15,3717.38,19.5595],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4128.29,3715.97,19.4349],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4130.23,3714.48,19.4729],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4138.06,3710.92,19.5005],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4139.63,3709.87,19.4982],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4141.86,3708.58,19.4937],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4143.87,3706.71,19.5426],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4146.12,3706.12,24.8821,true],[-0.819151,0.573578,1.3411e-007],[-0.32899,-0.469845,0.819152]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4146.64,3704.74,24.6413,true],0,[0.00883598,0.00142352,0.99996]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4148.27,3703.72,19.7689],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4149.94,3702.11,19.7569],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4151.34,3696.78,19.8419],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4140.15,3673.36,24.5133,true],0,[0.0871556,0.0868241,0.992404]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4135.96,3667.88,24.7557,true],0,[-0.0871557,0,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4112.89,3649.23,31.7922,true],0,[0.080405,-0.000343938,0.996762]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4112.11,3649.63,26.769],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4110.85,3644.35,27.0819],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4107.05,3632.91,26.8288],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4104.68,3628.19,26.8356],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4101.11,3627.04,26.8202],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4093.68,3627.17,31.9163,true],0,[-0.00884306,-0.00142313,0.99996]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4089.38,3627.8,26.7893],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4088.41,3627.89,26.8107],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4106.44,3732.91,23.0251,true],0,[0,0.173648,0.984808]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4102.12,3733.09,25.2495,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4105.91,3728.61,25.3179,true],0,[0,0.34202,0.939693]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4107.82,3731.4,18.0848],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4105.63,3731.72,23.1219,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4116.09,3723.19,20.3281],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4119.1,3720.62,26.6696,true],[3.72529e-009,0.984808,-0.173648],[-0.34202,0.163176,0.925417]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4118.55,3725.41,25.29,true],0,[0,-0.258819,0.965926]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4127.71,3713.52,20.2994],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4133.2,3713.21,19.4473],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4135.02,3713.19,24.7619,true],359.563,[-0.0868241,-0.0871558,0.992404]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4137.07,3709.87,25.5184,true],[1.86265e-009,0.965926,-0.258819],[0.0871556,0.257834,0.96225]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4141.84,3706.8,25.5326,true],[0.00759611,0.906142,-0.422905],[0.173317,0.415324,0.89301]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4145.64,3703.57,25.2846,true],0,[0.34202,0,0.939693]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4150.15,3698.44,25.1945,true],[-0.0593911,0.984808,-0.163176],[0.336824,0.173648,0.925417]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4152.71,3698.64,24.8398,true],[0,0.996195,0.0871556],[0.173648,-0.0858315,0.98106]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4151.5,3699.74,19.7567],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4141.71,3679.93,20.959],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4142.08,3673.54,19.4693],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4140.9,3672.37,24.9317,true],0,[0,0.34202,0.939693]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4133.67,3666.43,24.728,true],[-0.0742389,0.965983,-0.247719],[0.332898,0.258161,0.906936]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4134.37,3664.42,25.0192,true],[-0.136142,0.965812,-0.220617],[0.325682,0.253945,0.910738]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4121.04,3656.76,26.91],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4110.99,3650.34,27.9838],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4108.8,3648.8,28.1056],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4106.73,3630.03,26.8778],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4105.42,3630.58,26.8337],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4105.8,3629.31,26.8234],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4103.82,3626.15,27.1334],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4107.89,3633.54,26.8328],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4106.83,3634.96,27.1438],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4091.93,3625.77,27.437],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4090.37,3628.45,32.2996,true],0,[0,-0.573576,0.819152]] call InitItem; 
+};
+['MetalAndConcreteRuins',[4088.53,3765.07,16.7151],305,[0,0,1]] call InitStruct; 
+['SmallPileOfBricks',[4143.51,3677.82,24.9814,true],295.002,[0.00883598,0.00142351,0.99996]] call InitStruct; 
+['MediumPileOfDirtAndStones',[4064.79,3769.66,22.7895,true],310,[-0.00142165,-0.00663019,0.999977]] call InitStruct; 
+['MetalAndConcreteRuins',[4069.67,3772.31,22.1333,true],[-0.852869,-0.499999,0.150384],[0.173648,0,0.984808]] call InitStruct; 
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4092.76,3754.45,22.2998,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4088.23,3761.23,21.928,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4085.38,3763.93,21.9027,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4081.07,3765.61,21.6356,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4069.61,3767.8,22.0687,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4068.33,3769.91,22.5084,true],0,[0,-0.258819,0.965926]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4092.21,3757.67,22.2312,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4092.83,3750.97,22.7974,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4097,3752.4,22.7809,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4099.6,3742.3,22.7033,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4109.93,3728.51,23.8277,true],[0.0225576,0.996195,-0.084186],[-0.257834,0.0871557,0.96225]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4110.49,3727.13,24.2016,true],0,[0,0.173648,0.984808]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4112.23,3726.09,24.7095,true],0,[0,0.34202,0.939693]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4113.48,3727.19,24.8795,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4114.08,3725.39,25.1231,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4115.1,3724.02,25.2954,true],[0.0151344,0.995965,0.0884593],[-0.172987,-0.0845273,0.98129]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4106.47,3731.92,23.1004,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4106.01,3730.05,23.1892,true],[-0.0151341,0.996195,-0.0858317],[0.172987,0.0871557,0.98106]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4104.73,3734.65,23.3419,true],[0.00759612,0.984837,-0.173318],[-0.0868241,0.173318,0.981031]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4121.49,3722.96,24.9204,true],[-0.0151341,0.996195,-0.0858317],[0.172987,0.0871557,0.98106]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4120.88,3722.11,24.7755,true],[-0.0151341,0.996195,0.0858312],[-0.172987,-0.0871553,0.98106]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4125.77,3719.74,25.0693,true],0,[0,-0.173648,0.984808]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4121.79,3719.05,26.5571,true],[-0.0222667,0.967119,-0.253348],[0.341679,0.245514,0.907181]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4129.81,3716.02,24.7359,true],[-0.0151343,0.984808,0.172987],[-0.0858317,-0.173648,0.98106]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4128.67,3714.08,24.9215,true],[0.409576,0.79823,-0.441675],[0.286788,0.346941,0.892964]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4127.88,3717.12,24.6822,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4132.31,3712.22,25.3081,true],[-0.0593907,0.965473,-0.253643],[0.163176,0.260063,0.951704]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4134.37,3713.83,24.7522,true],[-0.0151341,0.996195,0.0858312],[-0.172987,-0.0871553,0.98106]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4135.42,3712.15,24.6083,true],[-0.902857,0.421013,-0.0871558],[-0.0789899,0.0368336,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4136.35,3713.1,25.096,true],0.436905,[-0.0868241,-0.0864975,0.992462]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4134.83,3711.22,25.6142,true],[-0.0449429,0.965926,-0.254887],[0.167731,0.258819,0.951251]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4141.51,3682.43,26.3611,true],[-0.0449898,0.994777,0.0916243],[0.340595,-0.0709478,0.93753]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4141.92,3681.1,26.0869,true],0.43688,[-0.0868241,0.0871557,0.992404]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4142.54,3678.5,26.4463,true],359.563,[0.086824,-0.0864975,0.992462]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4139.02,3673.55,24.9319,true],[-0.0298085,0.983447,0.178725],[0.340718,-0.158099,0.926777]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4139.17,3671.23,24.717,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4134.09,3667.82,24.5071,true],0,[0,-0.0871556,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4110.54,3641.68,32.0701,true],0,[0,0.0871557,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4108.14,3635.66,27.0027],0,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4097.96,3626.19,32.6047,true],359.563,[-0.0868243,-0.0871553,0.992404]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4090.77,3627.57,31.8358,true],359.563,[-0.0868243,-0.0871553,0.992404]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4086.33,3627.34,32.0437,true],[0.0225581,0.966442,0.255892],[0.257833,-0.252923,0.932498]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4104.75,3626.63,31.9973,true],[-0.0151913,0.996137,-0.0864878],[4.11669e-006,0.0864979,0.996252]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4111.24,3638.81,32.6016,true],359.563,[-0.0868243,-0.0871553,0.992404]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4108.8,3640.27,32.6102,true],[0.0225578,0.996195,0.0841846],[0.257833,-0.0871544,0.962251]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4109.62,3643.01,32.5329,true],[0.0225579,0.996195,0.0841841],[0.257833,-0.087154,0.962251]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4112.24,3647.12,32.5165,true],359.563,[-0.0868243,-0.0871553,0.992404]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4111.17,3646.07,32.162,true],2.88446e-005,[-1.86265e-007,-0.0871551,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4109.63,3637.91,32.2011,true],358.696,[0.0868335,0.0864979,0.992461]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4109.65,3635.84,32.3232,true],2.88446e-005,[-1.86265e-007,-0.0871551,0.996195]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4112.34,3651.34,32.7752,true],358.694,[-0.000323482,-0.00032932,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4114.93,3651.06,32.6292,true],[-0.0151337,0.996195,0.0858313],[-0.172988,-0.0871553,0.98106]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4118.8,3654.89,32.1633,true],359.563,[-0.0868243,-0.0871553,0.992404]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4119.08,3657.33,32.6687,true],[0.571662,0.820392,-0.012638],[0.0530569,-0.0215913,0.998358]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4125.64,3661.82,31.1413,true],0.436931,[0.0868235,0.0864984,0.992461]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4136.52,3666.46,24.8787,true],0.436931,[0.0868235,0.0864984,0.992461]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4137.35,3671.61,25.253,true],0.436931,[0.0868235,0.0864984,0.992461]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4137.7,3670.09,24.7579,true],0.436931,[0.0868235,0.0864984,0.992461]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4139.96,3669.75,25.2617,true],0.436931,[0.0868235,0.0864984,0.992461]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4139.96,3676.72,25.619,true],1.29915,[-0.0868346,-0.000329026,0.996223]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4142.88,3684.33,26.1929,true],[0.351096,0.918292,-0.182952],[0.333186,0.0600765,0.940945]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4145.32,3684.69,24.778,true],359.997,[-0.0871538,-0.0874836,0.992346]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4144.99,3682.64,24.6634,true],[-0.0151332,0.996195,0.0858304],[-0.172988,-0.0871543,0.98106]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4146.82,3693.24,24.3978,true],0.435254,[-0.000333495,-0.00032932,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['TrapEnabled',[4149.28,3691.5,24.869,true],359.563,[-0.0868247,-0.0871544,0.992404]] call InitItem; 
+};
+if ((random 1) < 0.49) then {
+	['TrapEnabled',[4089.23,3763.13,22.1751,true],[-0.0176392,0.979305,0.20162],[-0.0658921,-0.202352,0.977094]] call InitItem; 
+};
+['TorchHolderCharged',[4059.71,3648.6,27.2427],165,[0,0,1]] call InitStruct; 
+['TorchHolderCharged',[4058.07,3648.67,27.2821],205,[0,0,1]] call InitStruct; 
 
 
 
