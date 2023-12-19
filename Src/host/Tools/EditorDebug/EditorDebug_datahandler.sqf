@@ -169,7 +169,7 @@ editorDebug_internal_const_typemapColors = createHashMapFromArray[
 
 //обработчик игрового объекта
 editorDebug_handler_gameObject = {
-	_ret = "";
+	_ret = [];
 	//_varlist = allVariables _this;
 	//_varlist sort true;
 
@@ -208,7 +208,8 @@ editorDebug_handler_gameObject = {
 		// 	]
 		// };
 		
-		modvar(_ret) + ([_x,_v,_newvalue] call editorDebug_handler_gameObject_valueToText) + sbr;
+		_ret pushBack ([_x,_v,_newvalue] call editorDebug_handler_gameObject_valueToText);
+		_ret pushBack sbr;
 	} foreach _varlist;
 
 	_wid setvariable ["lastpointer",_this];
@@ -216,7 +217,7 @@ editorDebug_handler_gameObject = {
 	//_wid setvariable ["storedstrings",_storedstrings];
 
 	//_storedstrings joinString sbr;
-	_ret
+	(_ret joinString "")
 };
 
 //общий обработчик данных

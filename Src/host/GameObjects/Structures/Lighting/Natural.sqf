@@ -21,6 +21,11 @@ class(TorchHolder) extends(IStruct)
 	getter_func(getAttachedItemName,"Torch");
 	getter_func(holderNameStr,"TorchAsStruct");
 
+	editor_attribute("EditorVisible" arg "type:bool") 
+	editor_attribute("alias" arg "Держатель включен")
+	editor_attribute("Tooltip" arg "Будет ли включен источник света (работает только если это charged вариант)")
+	var(preinit@__enableChanged,true);
+
 	func(onInteractWith)
 	{
 		objParams_2(_with,_usr);
@@ -107,6 +112,9 @@ class(TorchHolderCharged) extends(TorchHolder)
 		objParams();
 
 		private _tor = new(Torch);
+		if !getSelf(preinit@__enableChanged) then {
+			setVar(_tor,lightIsEnabled,false);
+		};
 		setVar(_tor,loc,this);
 		setVar(_tor,slot,-1);
 		callSelfParams(setTorchOnHolder,_tor);
@@ -128,6 +136,9 @@ class(LampKeroseneHolderCharged) extends(LampKeroseneHolder)
 		objParams();
 
 		private _tor = new(LampKerosene);
+		if !getSelf(preinit@__enableChanged) then {
+			setVar(_tor,lightIsEnabled,false);
+		};
 		setVar(_tor,loc,this);
 		setVar(_tor,slot,-1);
 		callSelfParams(setTorchOnHolder,_tor);

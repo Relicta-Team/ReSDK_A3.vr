@@ -18,6 +18,13 @@
 	editor_attribute("EditorVisible" arg "type:int" arg "range:0:999999") editor_attribute("Tooltip" arg "Сколько энергии расходует источник")
 	var_num(edReqPower);
 
+	func(__handleNativePreInitVars__)
+	{
+		//["edIsEnabled","edUsePower"]
+		//TODO: fix with https://github.com/Relicta-Team/ReSDK_A3.vr/issues/248
+		[]
+	};
+
 	func(collectNodesInfo)
 	{
 		objParams_1(_ref);
@@ -180,4 +187,20 @@
 		objParams_1(_owner);
 		
 		callFuncParams(_owner,removeConnection,this);
+	};
+
+	//инициализатор энергии при создании объекта
+	func(__preInitEDInterface)
+	{
+		objParams();
+		if (!getSelf(edIsEnabled)) then {
+			setSelf(edIsUsePower,false);
+		};
+	};
+
+	func(__handlePreInitVars__)
+	{
+		objParams();
+		//TODO fix on https://github.com/Relicta-Team/ReSDK_A3.vr/issues/248
+		//callSelf(__preInitEDInterface);
 	};
