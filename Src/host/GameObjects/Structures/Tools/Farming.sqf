@@ -250,7 +250,7 @@ class(FarmGarden) extends(IStruct)
 		callSuper(IStruct,getDescFor) + (
 			if (callSelf(isGrowthStarted)) then {
 				sbr +
-				pick["Расти ещё где-то ","Выростет примерно через ","Можно грибланить вроде ещё "] +
+				pick["Расти ещё где-то ","Вырастет примерно через ","Можно грибланить вроде ещё "] +
 				([getSelf(timeLeft)+randInt(1,20),["секундочку","секундочки","секундочек"],true] call toNumeralString);
 			} else {""}
 			)
