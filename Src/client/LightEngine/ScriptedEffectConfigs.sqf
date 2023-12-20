@@ -115,3 +115,68 @@ regScriptEmit(SLIGHT_TEMPLATE_POINTLIGHT)
 		["setLightAttenuation",[3,0,10,8,5,8]]
 	]
 endScriptEmit
+
+regScriptEmit(SLIGHT_LIGHTKOPILKA)
+	[
+		"ltd",
+		null,
+		_emitAlias("Направленный свет 2")
+		["linkToSrc",[0,0,3.221]],
+		["setOrient",[0,-237.539,0]],
+		["setLightColor",[1,1,0.5922]],
+		["setLightIntensity",6763.21],
+		["setLightUseFlare",true],
+		["setLightFlareSize",3.639],
+		["setLightFlareMaxDistance",42.6],
+		["setLightConePars",[151.05,0,0]]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_LIGHTCELLKOPILKA)
+	[
+		"ltd",
+		null,
+		_emitAlias("Направленный свет 2")
+		["linkToSrc",[0,0,0]],
+		["setOrient",[0,-266.987,0]],
+		["setLightColor",[1,1,0.6588]],
+		["setLightIntensity",2000],
+		["setLightUseFlare",true],
+		["setLightFlareSize",1.886],
+		["setLightFlareMaxDistance",17.47],
+		["setLightConePars",[155.62,6.55,0]]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_KOPILKAREDLIGHT)
+	[
+		"ltd",
+		null,
+		_emitAlias("Направленный свет 1")
+		["linkToSrc",[-0.02,0,0.0360003]],
+		["setOrient",[-90,0,0]],
+		["setLightColor",[0.6588,0,0]],
+		["setLightAmbient",[0.28,0.0667,0.0667]],
+		["setLightIntensity",16892.6],
+		["setLightUseFlare",true],
+		["setLightFlareSize",3.054],
+		["setLightFlareMaxDistance",100],
+		["setLightConePars",[140.39,66.25,2.9]]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_LIGHTKOPILKAMEDIUM)
+	[
+		"ltd",
+		null,
+		_emitAlias("Направленный свет 2")
+		["linkToSrc",[0,0,3.493]],
+		["setOrient",[-5.23499,-221.18,0]],
+		["setLightColor",[1,1,0.749]],
+		["setLightIntensity",4425.74],
+		["setLightUseFlare",true],
+		["setLightFlareSize",3.054],
+		["setLightFlareMaxDistance",38.31],
+		["setLightConePars",[155.62,23.14,0]]
+	]
+endScriptEmit
