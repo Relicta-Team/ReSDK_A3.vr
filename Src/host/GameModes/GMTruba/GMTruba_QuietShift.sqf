@@ -13,7 +13,7 @@ class(GMTruba_QuietShift) extends(GMBase) //GMBase - базовый режим, 
     // -----------------------------------------------------------------//
 
     // Текстовые данные режима GMTruba_QuietShift
-	var(name,"Труба");
+	var(name,"Тихая смена в Трубе");
 	var(desc,"Город Труба");
 	var(descExtended,"Всё закончилось.");
 
