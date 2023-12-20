@@ -192,6 +192,16 @@ class(GMTruba_QuietShift) extends(GMBase) //GMBase - базовый режим, 
 			setVar(_gen,energyleft, 244*60*5); // Энергии осталось на 5 минут
 			callFunc(_gen,beginUpdateGenerator);
 		};
+
+		{
+			private _trubaButton = _x call getObjectByRef;
+			callFuncParams(_trubaButton,setEnable,false);
+		}foreach[
+		"PowerSwitcher G:0vc4AH3Oo4A", 
+		"PowerSwitcher G:cinaXUzLPTY", 
+		"PowerSwitcher G:ZVqY6L9rsN4"
+		]
+
 	};
 
 	// Проверка режима. Выполняется каждую секунду
