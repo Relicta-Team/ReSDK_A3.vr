@@ -1,0 +1,2 @@
+
+load("GMTruba\loader.sqf");
