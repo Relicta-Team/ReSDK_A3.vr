@@ -452,7 +452,7 @@ _4070_687013663_7902827_70009 = ['WallmountedMedicalCabinet',[4070.69,3663.79,27
 ['Candle',[4071.07,3656.95,30.5029],0,[0,0,1]] call InitItem; 
 ['SoupPlate',[4070.96,3656.58,35.5352,true],0,[0,1.86265e-007,1]] call InitItem; 
 _4066_504883650_6106026_52761 = ['Wicket',[4066.5,3650.61,26.5276],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RChiefKey, RCaveDoctorKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-['Torch',[4071.91,3653.67,30.3368],220,[0,0,1]] call InitItem; 
+['Torch',[4071.91,3653.67,30.3368],220,[0,0,1], {_thisObj setvariable ['lightisenabled',false];}] call InitItem; 
 ['Umivalnik',[4067.61,3662.14,26.6175],90,[0,0,1]] call InitStruct; 
 ['WoodenSmallFence2',[4066.5,3648.36,26.5292],0,[0,0,1]] call InitStruct; 
 ['WoodenSmallFence2',[4075.67,3652.23,26.7011],310,[0,0,1]] call InitStruct; 
@@ -867,7 +867,7 @@ _4043_844483652_6879931_27249 = ['WoodenDoor',[4043.84,3652.69,31.2725],270,[0,0
 ['TorchDisabled',[4036.2,3656.45,37.1423,true],[-0.706969,-0.706968,-0.0197762],[0.0229103,-0.0508402,0.998444]] call InitItem; 
 ['TorchDisabled',[4036.39,3646.65,32.1054],165,[0,0,1]] call InitItem; 
 _4038_859623646_8256831_23959 = ['BigClothCabinet',[4038.86,3646.83,31.2396],90,[0,0,1]] call InitStruct; 
-['ChairCasual',[4046.41,3680.04,28.5481],215,[0,0,1]] call InitItem; 
+['ChairCasual',[4043.15,3679.57,29.0416],260,[0,0,1]] call InitItem; 
 ['DBShotgun',[4049.82,3671,32.434,true],[-0.996195,-0.087153,0.000494782],[0.0856625,-0.97808,0.189794]] call InitItem; 
 ['RopeItem',[4050.75,3670.88,32.4408,true],265,[-0.00160071,-0.0247342,0.999693]] call InitItem; 
 ['Candle',[4050.42,3676.09,32.6434,true],0,[-0.00890352,-0.000488087,0.99996]] call InitItem; 
@@ -888,7 +888,7 @@ _4038_859623646_8256831_23959 = ['BigClothCabinet',[4038.86,3646.83,31.2396],90,
 ['WoodenBucket',[4049.38,3673.59,29.7231],0,[0,0,1]] call InitItem; 
 _4051_091313675_8081129_72641 = ['WoodenDoor',[4051.09,3675.81,29.7264],15.0005,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RChiefKey, RGuardKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SmallWoodenTable',[4049.52,3674.01,29.7231],10,[0,0,1]] call InitStruct; 
-['ShortRottenBoards',[4048.67,3678.81,33.9756,true],[-0.849853,0.490677,-0.192318],[-0.105709,0.198791,0.974324]] call InitStruct; 
+['ShortRottenBoards',[4048.67,3678.81,34.2111,true],[-0.856268,0.513702,-0.0539979],[0.0100366,0.121066,0.992594]] call InitStruct; 
 ['WoodenSmallFence1',[4051.28,3672.96,29.7231],0,[0,0,1]] call InitStruct; 
 ['WoodenSmallFence1',[4051.69,3674.84,29.7157],265.885,[0,0,1]] call InitStruct; 
 ['SleepingMatras',[4051.04,3674.21,29.8438],90,[0,0,1], {go_editor_globalRefs set ["RGuardHelperBed",_thisObj];
@@ -901,7 +901,7 @@ _4043_787113680_7160626_62354 = ['WoodenDoor',[4043.79,3680.72,26.6235],175,[0,0
 _4042_403813680_7534226_62016 = ['WoodenDoor',[4042.4,3680.75,26.6202],5,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RChiefKey, RGuardKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SmallWoodenTable',[4050.43,3676.61,32.1392,true],12.2199,[-0.00890397,-0.000502392,0.99996]] call InitStruct; 
 ['CampfireDisabled',[4049.95,3669.18,31.5571,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
-['SteelRustyStairs',[4046.69,3675.24,22.7857],0,[0,0,1]] call InitStruct; 
+['SteelRustyStairs',[4046.69,3675.35,23.2978],0,[0,0,1]] call InitStruct; 
 ['SteelCanopySmall',[4051.49,3677.2,27.1816],188.205,[0,0,1]] call InitStruct; 
 ['SmallFenceMadeOfSticks',[4045.15,3671.64,32.1278,true],89.9689,[-0.0168716,0.0321326,0.999341]] call InitStruct; 
 ['SmallFenceMadeOfSticks',[4045.16,3671.65,32.8571,true],89.9689,[-0.0168716,0.0321326,0.999341]] call InitStruct; 
@@ -929,8 +929,8 @@ _4050_391113676_8361827_67648 = ['IStruct',[4050.39,3676.84,32.6765,true],250,[0
 ['SmallDirtGrey',[4049.13,3678.76,26.226],0,[0,0,1]] call InitStruct; 
 ['MediumClayHouse',[4050.23,3675.63,26.4976],100,[0,0,1]] call InitStruct; 
 ['RustyCell',[4052.5,3668.67,26.5313],358.931,[0,0,1]] call InitStruct; 
-['SmallSteelPlate2',[4046.97,3679.71,28.2832],180,[0,0,1]] call InitStruct; 
-['NormalClayWall',[4049.32,3680.48,31.9705,true],0,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
+['SmallSteelPlate2',[4046.97,3679.84,28.7953],180,[0,0,1]] call InitStruct; 
+['NormalClayWall',[4049.32,3680.48,32.4551,true],0,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
 ['NormalClayWall',[4054.28,3680.31,32.0236,true],4.9999,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
 ['NormalClayWall',[4057.55,3674.52,32.8962,true],95.0007,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
 ['ClayWallSmall',[4057.23,3678.44,31.8365,true],249.998,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
@@ -953,6 +953,9 @@ _4045_197753674_1162126_49900 = ['Wicket',[4045.2,3674.12,26.499],180.001,[0,0,1
 ['WoodenSmallFence',[4050.98,3678.68,28.0423],6.57406e-005,[0,0,1]] call InitStruct; 
 ['SleepingMatras',[4037.58,3671.95,27.5471],180,[0,0,1], {go_editor_globalRefs set ["RLighterBed",_thisObj];
 }] call InitStruct; 
+['SmallSteelPlate2',[4043.59,3679.84,28.7976],0.000295406,[0,0,1]] call InitStruct; 
+['SmallSteelPlate2',[4040.23,3679.83,28.7947],0.000311627,[0,0,1]] call InitStruct; 
+['SmallSteelPlate2',[4036.88,3679.83,28.7929],0.000311627,[0,0,1]] call InitStruct; 
 ['MediumConcreteWall',[4037.91,3671.08,28.7514],0,[0,0,1]] call InitStruct; 
 ['MediumConcreteWall',[4036.11,3672.83,28.7577],270,[0,0,1]] call InitStruct; 
 ['MediumConcreteWall',[4037.9,3674.55,28.7562],180,[0,0,1]] call InitStruct; 
