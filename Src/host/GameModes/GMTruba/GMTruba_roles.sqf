@@ -9,6 +9,15 @@
 // Пример: RCaveExplorer_GMTruba
 
 class(GMTruba_BasicRole) extends(BasicRole) // BasicRole - базовая роль, от которой унаследованы все возможные роли.
+
+	func(onDeadBasic)
+	{
+		objParams_2(_mob,_usr);
+		callFuncParams(_usr,setDeadTimeout,300);
+		// Установка таймера призраку (в секундах)
+		// работает если returnInLobbyAfterDead возвращает false
+	};
+	
 endclass
 
 class(GMTruba_SettelmentsRole) extends(GMTruba_BasicRole) // Поселенцы
@@ -529,7 +538,7 @@ class(REaterTruba) extends(RPreyEater)
 	func(canVisibleAfterStart)
 	{
 		objParams_1(_cliObj);
-		getVar(gm_currentMode,countDead) >= 1
+		getVar(gm_currentMode,countDead) >= 10
 	};
 
 	getter_func(spawnLocation,"rpos:REaterTruba");
