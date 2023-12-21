@@ -336,6 +336,13 @@ class(CookerCloth) extends(Cloth)
 	var(name,"Кухарская одежка");
 endclass
 
+class(GreenWorkerCloth) extends(Cloth)
+	var(armaClass,"rds_uniform_Villager3");
+	var(name,"Зелёная рабочая рубашка");
+endclass
+
+
+
 class(AbbatCloth) extends(Cloth)
 	var(armaClass,"U_TIOW_Priest_Red");
 	var(name,"Роба Аббата");
@@ -479,6 +486,11 @@ class(HatShemag) extends(HatUshanka)
 	var(name,"Головная повязка");
 endclass
 
+class(HatBandana) extends(HatUshanka)
+	var(armaClass,"H_Bandanna_gry");
+	var(name,"Чёрная повязка на голову");
+endclass
+
 class(HatOldUshanka) extends(HatUshanka)
 	var(armaClass,"rds_Woodlander_cap3");
 endclass
@@ -494,6 +506,7 @@ endclass
 
 class(WorkerCoolCap) extends(WorkerCap)
 	var(armaClass,"rds_worker_cap4");
+	var(name,"Коричневая шапка");
 endclass
 
 
