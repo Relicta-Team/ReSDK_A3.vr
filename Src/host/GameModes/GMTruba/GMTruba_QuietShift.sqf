@@ -17,7 +17,7 @@ class(GMTruba_QuietShift) extends(GMBase) //GMBase - базовый режим, 
 	var(desc,"Город Труба");
 	var(descExtended,"Всё закончилось.");
 
-	var(deadThreshold,12);//порог смертности для завершения раунда
+	var(deadThreshold,9);//порог смертности для завершения раунда
 
 	// Длительность игры в режиме GMTruba_QuietShift.
 	var(duration,t_asMin(120)); // 30 минут

@@ -410,6 +410,11 @@ class(RLordTruba) extends(GMTruba_ScarsRole)
 		setVar(_cloth,name,"Везучая куртейка");
 		["HatBandana",_mob,INV_HEAD] call createItemInInventory;
 		["ToolStraigthPipe",_mob,INV_HAND_R] call createItemInInventory;
+		private _OneShot = ["PistolOneShoot",_mob,INV_BELT] call createItemInInventory;
+		callFuncParams(_OneShot,createAmmoInMagazine,"AmmoRevolver");
+		_ammo = ["AmmoRevolver",_cloth] call createItemInContainer;
+		callFuncParams(_ammo,initCount,randInt(5,8));
+
 		private _keyOwn = ["RLordTrubaKey"];
 		regKeyInUniform(_cloth,_keyOwn,"Ключ от калитки");
 	};
@@ -538,7 +543,7 @@ class(REaterTruba) extends(RPreyEater)
 	func(canVisibleAfterStart)
 	{
 		objParams_1(_cliObj);
-		getVar(gm_currentMode,countDead) >= 10
+		getVar(gm_currentMode,countDead) >= 5
 	};
 
 	getter_func(spawnLocation,"rpos:REaterTruba");
