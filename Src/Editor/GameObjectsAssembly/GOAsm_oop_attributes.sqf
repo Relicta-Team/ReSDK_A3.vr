@@ -55,6 +55,9 @@ init_function(goasm_attributes_main_init)
 	// Режимы, помеченные данным атрибутом не могут быть отредактированы
 	["CodeOnyGamemode",{!_isInherited}] call goasm_attributes_bindAttribute;
 
+	//Классы, помеченные данным атрибутом не собираются в библиотеку узлов и являются автосгенерированными
+	["NodeClass"] call goasm_attributes_bindAttribute;
+
 	//TODO нужно больше атрибутов
 }
 

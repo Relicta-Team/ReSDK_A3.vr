@@ -270,13 +270,19 @@ nodegen_generateLib = {
         "unknown_type"
     };
     
-    private ["_decl","_allfields","_fields","_methods","_defPath","_class"];
+    private ["_decl","_allfields","_fields","_methods","_defPath","_class","_motherClass"];
     modvar(_output) + "$REGION:CLASSMETA" + endl + "{" + endl ;//+ """object"" : [""object""]" + endl;
     _tempList = [];
     //__VAL = """null""";
     _el = "";
     {
         _class = [_x,"classname"] call oop_getTypeValue;
+        _motherClass = [_class,"__motherClass"] call oop_getTypeValue;
+
+        if ([_class,"NodeClass"] call goasm_attributes_hasAttributeClass) then {
+            continue;
+        };
+
         _fields = [_x,"__fields"] call oop_getTypeValue;
         _methods = [_x,"__methods"] call oop_getTypeValue;
         _decl = [_x,"__decl_info__"] call oop_getTypeValue;
@@ -286,8 +292,12 @@ nodegen_generateLib = {
         _el = str(_class) + ": {" + endl + //start defclass
         
         //baselist
-        format["    ""baseList"" : %1,",str([_x,"__inhlistCase"] call oop_getTypeValue)] + endl +
+        //!Собирается внутри редактора
+        //format["    ""baseList"" : %1,",str([_x,"__inhlistCase"] call oop_getTypeValue)] + endl +
         
+        //baseclass ref
+        format["    ""baseClass"" : %1,",str(_motherClass)] + endl +
+
         //declare info (file,path)
         format["    ""defined"" : {""file"":%1,""line"":%2},",str(_defPath),(_decl select 1)] + endl +
         //fields info
