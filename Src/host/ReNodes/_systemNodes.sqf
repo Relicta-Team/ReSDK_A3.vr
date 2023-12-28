@@ -190,7 +190,7 @@ node_system_group("control")
 		name:Вызов базового метода
 		namelib:Вызов базового метода
 		desc:Вызов базового метода.
-		icon:data\\icons\\icon_Blueprint_Node_16x
+		icon:data\\icons\\icon_Blueprint_OverrideableFunction_16x
 		runtimeports:1
 		autocoloricon:0
 		code:private @genvar.out.2 = super(); @out.1
@@ -199,41 +199,63 @@ node_system_group("control")
 			opt:typeget=ANY;@type
 	" node_system
 
-node_system_group("array")
+	"
+		node:castto
+		name:Преобразовать тип
+		namelib:Преобразование типа
+		desc:Преобразует входной тип к другому указанному типу.
+		icon:data\\icons\\icon_Blueprint_Cast_16x
+		code: if !((tolower (object)) in ((@in.2) getvariable PROTOTYPE_VAR_NAME getvariable (""__inhlist_map""))) then {@out.2}; @out.1 
+		runtimeports:1
+		autocoloricon:0
+		exec:in
+		in:auto:Входной объект:Объект, который будет преобразован.
+			opt:typeget=value;@type
+		out:Exec:Успешное преобразование:Выполняется если преобразование прошло успешно.
+		out:Exec:Невозможное преобразование:Выполняется если преобразование не удалось.
+		out:auto:Объект:Объект, преобразованный к новому типу.
+			opt:typeget=value;@type
+	" node_system
 
-"
-	node:get
-	name:Получить элемент
-	namelib:Получение элемента массива
-	desc:Получает элемент массива
-	icon:data\\icons\\ArrayPin.png
-	runtimeports:1
-	autocoloricon:0
-	code:(@in.1) select (@in.2)
-	in:auto:Массив
-		opt:typeget=array;@type
-	in:int:Индекс:Индекс элемента массива. Отсчет начинается с 0. Для получения первого элемента массива используется индекс 0, а для последнего - количество элементов минус 1.
-	out:auto:Элемент
-		opt:typeget=array;@value.1
-"
-node_system
+	"
+		node:callafter
+		name:Таймер
+		namelib:Вызов по таймеру
+		desc:Выполняет код через указанный промежуток времени
+		code: __callafterCode = {@decomposeparams; @out.1}; invokeAfterDelayParams(__callafterCode,@in.2,@allparams); 
+		in:Exec:Вход
+		in:float:Время:Время в секундах, через которое будет вызван код таймера.
+		out:Exec:Вызов:Код, который будет вызван через указанный промежуток времени.
+	" node_system
 
-"
-	node:set
-	name:Установить элемент
-	namelib:Установка элемента массива
-	desc:Получает элемент массива
-	icon:data\\icons\\ArrayPin.png
-	runtimeports:1
-	autocoloricon:0
-	code:(@in.1) set [@in.2,@in.3]
-	exec:all
-	in:auto:Массив
-		opt:typeget=array;@type
-	in:int:Индекс:Индекс элемента массива. Отсчет начинается с 0. Для получения первого элемента массива используется индекс 0, а для последнего - количество элементов минус 1.
-	in:auto:Элемент
-		opt:typeget=array;@value.1
-" node_system
+	"
+		node:callaftercond
+		name:Условный таймер
+		namelib:Вызов по таймеру с условием
+		desc:Выполняет код через указанный промежуток времени, если условие истино.
+		code: startAsyncInvoke {@decomposeparams; @in.2}, {@decomposeparams; @out.2 },@allparams,@in.3,{@decomposeparams; @out.3} endAsyncInvoke
+		in:Exec:Вход
+		in:bool:Условие:Оцениваемое условие
+		in:float:Таймаут:Время в секундах, через которое будет вызван код по таймауту
+		out:Exec:Вызов:Код, который будет вызван, если условие истино.
+		out:Exec:При таймауте:Код, который будет вызван при таймауте.
+	" node_system
+
+	"
+		node:messageBox
+		name:Сообщение в окне
+		namelib:Сообщение в окне
+		desc:Выводит сообщение в окне (только в режиме отладки).
+		code: \n#ifdef DEBUG\n[@in.2,@in.3] call messageBox_Node;\n#endif\n @out.1
+		runtimeports:1
+		autocoloricon:0
+		exec:all
+		in:string:Сообщение:Выводимое сообщение. Для вывода данных в строке сообщения укажите %1.
+		in:auto:Данные:Дополнительные данные для вывода.
+			opt:typeget=ANY;@type:require=0
+	" node_system
+
+
 
 //регистратор сравнений
 private __comparator = {

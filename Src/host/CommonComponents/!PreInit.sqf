@@ -388,6 +388,44 @@ searchInList = {
 	_list select _idx
 };
 
+arrayDeleteItem = {
+	params["_a","_it"];
+	private _ix = _a findif {_it isequalto _x}; 
+	if (_ix != -1) then {_a deleteAt _ix}; 
+	_ix != -1
+};
+
+stringLength = {
+	params ["_str",["_unicode",true]];
+	if (_unicode) then {
+		forceUnicode 1;
+		count _str
+	} else {
+		count _str
+	};
+};
+
+stringSelect = {
+	params ["_s","_i","_c"];
+	forceUnicode 1;
+	_s select [_i,_c];
+};
+
+randomFloat = {
+	params ["_beg","_end"];
+	rand(_beg,_end)
+};
+
+randomInt = {
+	params ["_beg","_end"];
+	randInt(_beg,_end)
+};
+
+clampNumber = {
+	params ["_v","_mi","_ma"];
+	clamp(_v,_mi,_ma)	
+};
+
 missionNamespace setVariable ["pushFront",
 {
 	params ["_list","_element"];

@@ -789,6 +789,7 @@ ACRE_IS_ERRORED = false; _ret;}*/
 			pathes - доступные пути с разделителем | (опция allowed_pathes)
 			
 			typeget - специальный модификатор для разрешения типов при включенных автопорах
+			require - требует ли порт обязательного подключения
 		in:int:Вход 1:Описание входного значения
 		opt:custom=1:mul=1:dname=1:allowtypes=int|bool|float
 */
