@@ -50,3 +50,35 @@ format["
 (["stringToBool","(trim(@in.1)==""true"")","string:Строка","bool:Булево","Преобразование строки в логическое значение"] call _convFunc) node_system
 //boolToString -> use valueToString
 //(["boolToString","str(@in.1)","bool:Булево","string:Строка","Преобразование логического значения в строку"] call _convFunc) node_system
+
+//handleToInt
+(["handleToInt","@in.1","handle:Объект","int:Целое число","Преобразование handle в целое число"] call _convFunc) node_system
+
+//vector3ToArray
+(["vector3ToArray","@in.1","vector3:Вектор","array[float]:Массив","Преобразование трехмерного вектора в массив"] call _convFunc) node_system
+//vector2ToArray
+(["vector2ToArray","@in.1","vector2:Вектор","array[float]:Массив","Преобразование двухмерного вектора в массив"] call _convFunc) node_system
+//arrayToVector3
+(["arrayToVector3","(@in.1)select[0,3]","array[float]:Массив","vector3:Вектор","Преобразование массива в трехмерный вектор"] call _convFunc) node_system
+//arrayToVector2
+(["arrayToVector2","(@in.1)select[0,2]","array[float]:Массив","vector2:Вектор","Преобразование массива в двухмерный вектор"] call _convFunc) node_system
+
+
+//colorToArray
+(["colorToArray","@in.1","color:Цвет","array[float]:Массив","Преобразование цвета в массив"] call _convFunc) node_system
+//arrayToColor
+(["arrayToColor","(@in.1)select[0,4]","array[float]:Массив","color:Цвет","Преобразование массива в цвет"] call _convFunc) node_system
+//colorToString
+//!(["colorToString","@in.1","color:Цвет","string:Строка","Преобразование цвета в html-строку"] call _convFunc) node_system
+
+
+//voidToValue
+(
+    (["voidToValue","@in.1","void:Любое","auto:Значение
+        opt:typeget=ANY;@type","Преобразование любого значения в значение"] call _convFunc)
+) node_system
+//valueToVoid
+(
+    (["valueToVoid","@in.1","auto:Значение
+        opt:typeget=ANY;@type","void:Любое","Преобразование значения в любое значение"] call _convFunc)
+) node_system

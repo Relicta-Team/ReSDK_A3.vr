@@ -428,9 +428,13 @@ clampNumber = {
 
 missionNamespace setVariable ["pushFront",
 {
-	params ["_list","_element"];
+	params ["_list","_element",["_unique",false]];
 	reverse _list;
-	_list pushBack _element;
+	if (_unique) then {
+		_list pushBackUnique _element;
+	} else {
+		_list pushBack _element;
+	};
 	reverse _list;
 }
 ];

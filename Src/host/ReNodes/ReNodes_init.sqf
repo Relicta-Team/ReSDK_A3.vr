@@ -165,7 +165,8 @@ nodegen_registerFunctions = {
     #include "_conversions.sqf"
     #include "_math.sqf"
     #include "_logical.sqf"
-
+    #include "_model.sqf"
+    #include "_hashmap.sqf"
 };
 
 nodegen_registerMember = {
