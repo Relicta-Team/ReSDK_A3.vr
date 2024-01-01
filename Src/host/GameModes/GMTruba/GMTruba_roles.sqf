@@ -37,6 +37,13 @@ class(RChief) extends(GMTruba_SettelmentsRole)
 	getter_func(spawnLocation,"pos:RChief");  // Позиция спавна
 	getter_func(connectedTo,"ref:RChiefBed"); // Точка привязки (кровать или стул)
 	getter_func(needDiscordRoles,["Forsaken"]);
+	
+	func(onAssigned)
+	{
+		objParams_2(_mob,_usr);
+		super();
+		setVar(gm_currentMode,leaderTruba,_mob);
+	};
 
 	// Навыки
 	getter_func(getSkills,"st:11-14; dx:12-13; iq:12-13; ht:10-14");
@@ -74,6 +81,7 @@ class(RChiefSon) extends(GMTruba_SettelmentsRole)
 	getter_func(isMainRole,true);
 	getter_func(spawnLocation,"pos:RChiefSon");
 	getter_func(connectedTo,"ref:RChiefSonBed");
+	getter_func(needDiscordRoles,["Forsaken"]);
 	
 	getter_func(getSkills,"st:10-12; dx:10-12; iq:10-12; ht:10-12");
 	func(getOtherSkills) {
@@ -382,6 +390,47 @@ class(RWorkerTruba) extends(GMTruba_SettelmentsRole)
 	};
 endclass
 
+class(RScoutTruba) extends(GMTruba_SettelmentsRole)
+	var(name,"Лазутчик");
+	var(desc,"В прошлую смену вождь отправил тебя на вылазку в ближайшие пещеры за припасами. Сейчас ты уже на подходе обратно в поселение. Что же тебе удалось найти?");
+	var(count,10);
+	getter_func(spawnLocation,"rpos:RScoutTruba");
+
+	getter_func(getSkills,"st:8-9; dx:8-9; iq:6-7; ht:7-8");
+
+	func(getEquipment)
+	{
+		objParams_1(_mob);
+		private _cloth = ["NomadCloth" + str randInt(1,15),_mob,INV_CLOTH] call createItemInInventory;
+		setVar(_cloth,name,"Рабочая одежда");
+		["CaveAxe",_mob,INV_BELT] call createItemInInventory;
+		["Torch",_mob,INV_HAND_R] call createItemInInventory;
+
+		private _bag = ["FabricBagBig1",_mob,INV_BACKPACK] call createItemInInventory;
+
+		//Создат 7-8 объектов item1 или item2 (выбирается случайно)
+		for "_i" from 1 to randInt(3,6) do {
+		private _itemName = pick["Melteshonok","Egg","Zhivoglot","Yaichnik","Gnilokornik","Bone","CampfireCreator","MatchBox","Rag","Forceps"];
+    	[_itemName,_bag] call createItemInContainer;
+		};
+
+		if prob(60) then {
+			[
+			pick["HatOldUshanka","HatUshanka","WorkerCap","WorkerCoolCap","HatGrayOldUshanka"],
+			_mob,INV_HEAD
+			] call createItemInInventory;
+		};
+
+	};
+
+	func(canVisibleAfterStart)
+	{
+		objParams_1(_usr);
+		gm_roundDuration >= t_asMin(10);
+	};
+
+endclass
+
 // ---- Роли рубцов ---- //
 class(RLordTruba) extends(GMTruba_ScarsRole)
 	var(name,"Владыка"); 
@@ -393,6 +442,13 @@ class(RLordTruba) extends(GMTruba_ScarsRole)
 	getter_func(spawnLocation,"pos:RLordTruba");
 	getter_func(connectedTo,"ref:RLordTrubaBed");
 	getter_func(needDiscordRoles,["Forsaken"]);
+
+	func(onAssigned)
+	{
+		objParams_2(_mob,_usr);
+		super();
+		setVar(gm_currentMode,leaderScars,_mob);
+	};
 
 	getter_func(getSkills,"st:11-13; dx:11-13; iq:7-8; ht:8-12");
 	func(getOtherSkills) {
@@ -532,7 +588,7 @@ class(REaterTruba) extends(RPreyEater)
 		skillrand(fight,5,8) arg
 		skillrand(stealth,3,7)
 	]};
-	var(count,4);
+	var(count,10);
 	func(onAssigned)
 	{
 		objParams_2(_mob,_usr);
@@ -543,7 +599,7 @@ class(REaterTruba) extends(RPreyEater)
 	func(canVisibleAfterStart)
 	{
 		objParams_1(_cliObj);
-		getVar(gm_currentMode,countDead) >= 5
+		getVar(gm_currentMode,countDead) >= 6
 	};
 
 	getter_func(spawnLocation,"rpos:REaterTruba");
