@@ -17,7 +17,10 @@ class(GMTruba_QuietShift) extends(GMBase) //GMBase - базовый режим, 
 	var(desc,"Город Труба");
 	var(descExtended,"Всё закончилось.");
 
-	var(deadThreshold,12);//порог смертности для завершения раунда
+	var(deadThreshold,10);//порог смертности для завершения раунда
+	
+	var(leaderTruba,nullPtr);
+	var(leaderScars,nullPtr);
 
 	// Длительность игры в режиме GMTruba_QuietShift.
 	var(duration,t_asMin(120)); // 30 минут
@@ -61,6 +64,7 @@ class(GMTruba_QuietShift) extends(GMBase) //GMBase - базовый режим, 
 			"RGuardHelper",
 			"RCaveDoctorHelper",
 			"RCleanerTruba",
+			"RLighter",
 
 			// Роли Рубцов
 			"RLordTruba",
@@ -77,8 +81,8 @@ class(GMTruba_QuietShift) extends(GMBase) //GMBase - базовый режим, 
 	{
 		[
 			// Доп. роли поселения
-			"RLighter",
 			"RWorkerTruba",
+			"RScoutTruba",
 			
 			// Доп. роли Рубцов
 			"RLazyTruba",
@@ -212,6 +216,7 @@ class(GMTruba_QuietShift) extends(GMBase) //GMBase - базовый режим, 
 		objParams();
 		if (getSelf(countDead) >= getSelf(deadThreshold)) exitWith {1};
 		if (gm_roundDuration >= getSelf(duration)) exitWith {2};
+		if (getVar(getSelf(leaderTruba),isDead) && getVar(getSelf(leaderScars),isDead)) exitWith {3};
 		0
 	};
 	
@@ -226,6 +231,10 @@ class(GMTruba_QuietShift) extends(GMBase) //GMBase - базовый режим, 
 		if (getSelf(finishResult) == 2) exitWith {
 			"Смена снова прошла относительно тихо, ничего и не случилось вроде..."
 		};
+
+		if (getSelf(finishResult) == 3) exitWith {
+			"Начальство сдохло"
+		};		
 		
 		"Неизвестная причина."
 	};
