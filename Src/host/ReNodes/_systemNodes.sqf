@@ -221,11 +221,16 @@ node_system_group("control")
 		node:callafter
 		name:Таймер
 		namelib:Вызов по таймеру
+		color:Operator
+		icon:data\\icons\\icon_Blueprint_Timeline_16x
 		desc:Выполняет код через указанный промежуток времени
-		code: __callafterCode = {@decomposeparams; @out.1}; invokeAfterDelayParams(__callafterCode,@in.2,@allparams); 
+		code: __callafterCode = {SCOPENAME ""exec""; @context.alloc; @out.1}; __prs = @context.get; invokeAfterDelayParams(__callafterCode,@in.2,__prs); 
+		exec:none
 		in:Exec:Вход
+			opt:mul=1
 		in:float:Время:Время в секундах, через которое будет вызван код таймера.
 		out:Exec:Вызов:Код, который будет вызван через указанный промежуток времени.
+			opt:mul=0
 	" node_system
 
 	"
@@ -233,12 +238,18 @@ node_system_group("control")
 		name:Условный таймер
 		namelib:Вызов по таймеру с условием
 		desc:Выполняет код через указанный промежуток времени, если условие истино.
-		code: startAsyncInvoke {@decomposeparams; @in.2}, {@decomposeparams; @out.2 },@allparams,@in.3,{@decomposeparams; @out.3} endAsyncInvoke
+		color:Operator
+		icon:data\\icons\\icon_ClockwiseRotation_16x
+		code: startAsyncInvoke {@context.alloc; @in.2}, {SCOPENAME ""exec""; @context.alloc; @out.1 },@context.get,@in.3,{SCOPENAME ""exec""; @context.alloc; @out.2} endAsyncInvoke
+		exec:none
 		in:Exec:Вход
+			opt:mul=1
 		in:bool:Условие:Оцениваемое условие
 		in:float:Таймаут:Время в секундах, через которое будет вызван код по таймауту
 		out:Exec:Вызов:Код, который будет вызван, если условие истино.
+			opt:mul=0
 		out:Exec:При таймауте:Код, который будет вызван при таймауте.
+			opt:mul=0
 	" node_system
 
 	"
