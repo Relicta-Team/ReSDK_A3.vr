@@ -547,7 +547,7 @@ _onStrafeCatch = {
 	if (callSelf(isActive)) then {
 		if (callSelf(getStance) > STANCE_DOWN) then {
 			callSelf(KnockDown);
-			callSelfParams(Stun,randInt(5,10) arg true arg true);
+			//callSelfParams(Stun,randInt(5,10) arg true arg true); //По запросу https://github.com/Relicta-Team/ReSDK_A3.vr/issues/257
 			private _mRand = pick ["неуклюже","неумело","глупо","смешно","безумно"];
 			callSelfParams(meSay,_mRand + " падает");
 		};
