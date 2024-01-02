@@ -233,7 +233,7 @@ class(GMTruba_QuietShift) extends(GMBase) //GMBase - базовый режим, 
 		};
 
 		if (getSelf(finishResult) == 3) exitWith {
-			"Начальство сдохло"
+			"Вождь и Владыка погибли. В трубе настали тяжёлые времена..."
 		};		
 		
 		"Неизвестная причина."
