@@ -7,15 +7,14 @@ node_system_group("array")
     name:Создать массив
     namelib:Создание массива
     desc:Создает массив из указанных элементов
-    icon:data\\icons\\ArrayPin.png
-    runtimeports:1
-    autocoloricon:0
+    icon:data\\icons\\icon_Blueprint_MakeArray_16x.png
     exec:pure
-    code:[ @genport.in.( ,) ]
-    in:auto:Элемент
+    code:[ @genport.in.1(,) ]
+    in:auto:[0]
         opt:typeget=array;@value.1
     out:auto:Массив
         opt:typeget=array;@type
+    option:""makeport_in""\: {""type""\: ""makeport_in"",""src""\:""[0]"",""text_format""\:""[{index}]""}
 " node_system
 
 "
