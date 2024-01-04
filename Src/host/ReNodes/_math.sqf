@@ -151,4 +151,4 @@ _opSingle = {
 //atan
 (["atan","Арктангенс:Atan","atan(@in.1)","float","Арктангенс числа"] call _opSingle) node_system
 //atan2
-(["atan2","Арктангенс:Atan2","(@in.1)atan2(@in.2)","float","a = atan (L1/L2) -> a = L1 atan2 L2. Подробнее <a href=\""https\://community.bistudio.com/wiki/atan2"">по ссылке</a>"""] call _op) node_system
+(["atan2","Арктангенс:Atan2","(@in.1)atan2(@in.2)","float","a = atan (L1/L2) -> a = L1 atan2 L2. Подробнее [community.bistudio.com/wiki/atan2 по ссылке]"] call _op) node_system
