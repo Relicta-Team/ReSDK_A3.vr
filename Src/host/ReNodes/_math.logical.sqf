@@ -13,6 +13,11 @@ node_system_group("math.logical")
     icon:data\\icons\\icon_BluePrintEditor_Function_16px
     color:PureFunction
     exec:pure
+    code:@in.1
+    in:bool:Значение
+        opt:dname=0
+    out:bool:Значение
+        opt:dname=0
 " node_system
 
 "
