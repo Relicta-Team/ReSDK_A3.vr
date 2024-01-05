@@ -43,6 +43,22 @@ node_system_group("operators")
 	node_system
 
 	"
+		node:sequence
+		name:Последовательность
+		desc:Этот узел позволяет одному импульсу выполнения запускать последовательность событий по порядку. Узел может иметь любое количество выходов, все из которых вызываются, как только узел Sequence получает входные данные. Они всегда вызываются по порядку, но без каких-либо задержек.
+		icon:data\\icons\\icon_Blueprint_Sequence_16x
+		exec:none
+		color:Operator
+		code:@genport.out.1(; )
+		runtimeports:1
+		in:Exec:Вход
+			opt:dname=0
+		out:Exec:Действие 1
+			opt:mul=0
+		option:""makeport_out""\: {""type""\: ""makeport_out"",""src""\:""Действие 1"",""text_format""\:""Действие {value}""}
+	" node_system
+
+	"
 		node:while
 		color:Operator
 		name:Цикл
