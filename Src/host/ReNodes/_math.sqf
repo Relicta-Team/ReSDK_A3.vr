@@ -1,3 +1,9 @@
+// ======================================================
+// Copyright (c) 2017-2024 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+
 node_system_group("math")
 
 _op = {
@@ -9,15 +15,16 @@ _op = {
         name:%2
         namelib:%3 (%2)
         path:Математика
+        rendertype:NoHeaderText
         exec:pure
         desc:%4
         code:%5
         in:%7:Число 1
-            opt:typeget=value;@type:allowtypes=int|float:dname=0
+            opt:typeget=value;@type:allowtypes=int|float
         in:%7:Число 2
-            opt:typeget=value;@type:allowtypes=int|float:dname=0
+            opt:typeget=value;@type:allowtypes=int|float
         out:%6:Результат
-            opt:typeget=value;@type:allowtypes=int|float:dname=0
+            opt:typeget=value;@type:allowtypes=int|float
     ",_sysname,_nlTex,_nlDesc,_desc,_code,_rez,_rvvals]
 };
 
@@ -39,11 +46,12 @@ _op = {
     name:Абсолютное значение
     desc:Абсолютное значение числа. -3 будет 3, -3.5 будет 3.5, 3 будет 3
     exec:pure
+    rendertype:NoHeaderText
     code:abs(@in.1)
     in:auto:Число
-        opt:typeget=value;@type:allowtypes=int|float:dname=0
+        opt:typeget=value;@type:allowtypes=int|float
     out:auto:Абсолютное значение
-        opt:typeget=value;@type:allowtypes=int|float:dname=0
+        opt:typeget=value;@type:allowtypes=int|float
 " node_system
 
 //comp operations
@@ -82,17 +90,18 @@ _op = {
         node:clamp
         name:Ограничение
         namelib:Ограничение числа
+        rendertype:NoHeaderText
         exec:pure
         desc:Ограничивает входное число диапазоном между нижней и верхней границей
         code:[@in.1,@in.2,@in.3]call clampNumber
         in:auto:Число
-            opt:typeget=value;@type:allowtypes=int|float:dname=0
+            opt:typeget=value;@type:allowtypes=int|float
         in:auto:Нижняя граница
-            opt:typeget=value;@type:allowtypes=int|float:dname=0
+            opt:typeget=value;@type:allowtypes=int|float:def=0
         in:auto:Верхняя граница
-            opt:typeget=value;@type:allowtypes=int|float:dname=0
+            opt:typeget=value;@type:allowtypes=int|float:def=1
         out:float:Результат
-            opt:typeget=value;@type:allowtypes=int|float:dname=0
+            opt:typeget=value;@type:allowtypes=int|float
 " node_system
 
 // single operation
@@ -105,13 +114,14 @@ _opSingle = {
         name:%2
         namelib:%3 (%2)
         path:Математика
+        rendertype:NoHeaderText
         exec:pure
         desc:%4
         code:%5
         in:%7:Число
-            opt:typeget=value;@type:allowtypes=int|float:dname=0
+            opt:typeget=value;@type:allowtypes=int|float
         out:%6:Результат
-            opt:typeget=value;@type:allowtypes=int|float:dname=0
+            opt:typeget=value;@type:allowtypes=int|float
     ",_sysname,_nlTex,_nlDesc,_desc,_code,_rez,_val]
 };
 

@@ -158,13 +158,15 @@ nodegen_registerFunctions = {
     //Сюда вставляются пути до функций, которые должны быть регистрированы в библиотеке
     //внутри файлов с функциями составляются определения через node_func
     
+    #include "ReNodes_bindingHelpers.sqf"
+
     //тут зарегистрированы узлы общего назначения (работа с типами, операторы)
     #include "_systemNodes.sqf"
     #include "_array.sqf"
     #include "_string.sqf"
     #include "_conversions.sqf"
     #include "_math.sqf"
-    #include "_logical.sqf"
+    #include "_math.logical.sqf"
     #include "_model.sqf"
     #include "_hashmap.sqf"
 };

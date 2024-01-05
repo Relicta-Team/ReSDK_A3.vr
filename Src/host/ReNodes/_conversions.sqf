@@ -1,3 +1,9 @@
+// ======================================================
+// Copyright (c) 2017-2024 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+
 node_system_group("conversion")
 
 //toString
@@ -6,7 +12,7 @@ node_system_group("conversion")
     name:В строку
     path:Преобразования
     desc:Преобразует значение в строку
-    icon:data\\icons\\pill_16x.png
+    rendertype:NoHeaderText
     exec:pure
     code:format[""%1"",@in.1]
     in:auto:Значение
@@ -20,12 +26,14 @@ _convFunc = {
     (_out splitString ":")params ["_outtype","_outname"];
 format["
     node:%1
-    name:%3 -> %4
+    name:•
+    namelib:%3 -> %4
     desc:%5
-    icon:data\\icons\\pill_16x.png
+    rendertype:NoHeaderText
     exec:pure
     code:%2
     in:%6
+        opt:custom=0
     out:%7
 " ,_name,_code,_inname,_outname,_desc,_in,_out]
 };
@@ -39,13 +47,13 @@ format["
 (["intToFloat","@in.1","int:Целое число","float:Число","Преобразование целого числа в дробное число."] call _convFunc) node_system
 
 //intToBool
-(["intToBool","(@in.1) > 0","int:Целое число","bool:Булево","Преобразование целого числа в логическое значение"] call _convFunc) node_system
+(["intToBool","(@in.1)==0","int:Целое число","bool:Булево","Преобразование целого числа в логическое значение"] call _convFunc) node_system
 //floatToBool
-(["floatToBool","(@in.1) > 0","float:Число","bool:Булево","Преобразование дробного числа в логическое значение"] call _convFunc) node_system
+(["floatToBool","(@in.1)==0","float:Число","bool:Булево","Преобразование дробного числа в логическое значение"] call _convFunc) node_system
 //boolToInt
-(["boolToInt","if(@in.1)then{1}else{0}","bool:Булево","int:Целое число","Преобразование логического значения в целое число"] call _convFunc) node_system
+(["boolToInt","[0,1]select(@in.1)","bool:Булево","int:Целое число","Преобразование логического значения в целое число"] call _convFunc) node_system
 //boolToFloat
-(["boolToFloat","if(@in.1)then{1}else{0}","bool:Булево","float:Число","Преобразование логического значения в дробное число"] call _convFunc) node_system
+(["boolToFloat","[0,1]select(@in.1)","bool:Булево","float:Число","Преобразование логического значения в дробное число"] call _convFunc) node_system
 //stringToBool
 (["stringToBool","(trim(@in.1)==""true"")","string:Строка","bool:Булево","Преобразование строки в логическое значение"] call _convFunc) node_system
 //boolToString -> use valueToString

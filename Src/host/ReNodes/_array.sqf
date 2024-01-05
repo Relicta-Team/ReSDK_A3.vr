@@ -1,3 +1,7 @@
+// ======================================================
+// Copyright (c) 2017-2024 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
 
 node_system_group("array")
 
@@ -19,9 +23,12 @@ node_system_group("array")
 
 "
     node:clearArray
-    name:Очистить массив
+    name:Очистить
+    namelib:Очистить массив
     desc:Удаляет все элементы из массива, делая его пустым.
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:all
     code:(@in.2) resize 0; @out.1
     in:auto:Массив:Ссылка на массив, который будет очищен.
@@ -31,13 +38,16 @@ node_system_group("array")
 "
     node:pick
     name:Случайный элемент
+    namelib:Случайный элемент
     desc:Выбирает случайный элемент из массива
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:pure
     code:SelectRandom(@in.1)
-    in:auto:Массив
+    in:auto:Массив:Массив, из которого будет выбран случайный элемент.
         opt:typeget=array;@type
-    out:auto:Элемент
+    out:auto:Элемент:Случайный элемент из массива. Размер массива должен быть больше 0, иначе вернется null-значение а поведение станет неопределенным.
         opt:typeget=array;@value.1
 " node_system
 
@@ -45,16 +55,16 @@ node_system_group("array")
 	node:get
 	name:Получить элемент
 	namelib:Получение элемента массива
-	desc:Получает элемент массива
+	desc:Получает элемент массива по указанному индексу.
 	icon:data\\icons\\ArrayPin.png
-	runtimeports:1
-	autocoloricon:0
+    rendertype:NoHeader
+    autocoloricon:1
     exec:pure
 	code:(@in.1)select(@in.2)
-	in:auto:Массив
+	in:auto:Массив:Ссылка на массив, из которого будет выбран элемент.
 		opt:typeget=array;@type
 	in:int:Индекс:Индекс элемента массива. Отсчет начинается с 0. Для получения первого элемента массива используется индекс 0, а для последнего - количество элементов минус 1.
-	out:auto:Элемент
+	out:auto:Элемент:Элемент массива, хранящийся по заданному индексу. Если вы не уверены, что ваш элемент существует по указанному индексу, сделайте предварительную проверку возможности получения элемента по этому индексу.
 		opt:typeget=array;@value.1
 "
 node_system
@@ -63,16 +73,15 @@ node_system
 	node:set
 	name:Установить элемент
 	namelib:Установка элемента массива
-	desc:Получает элемент массива
+	desc:Устанавливает элемент массива по указанному индексу.
 	icon:data\\icons\\ArrayPin.png
-	runtimeports:1
-	autocoloricon:0
+
 	exec:all
 	code:(@in.2)set[@in.3,@in.4]; @out.1
-	in:auto:Массив
+	in:auto:Массив:Ссылка на массив, в котором будет установлен элемент по указанному индексу.
 		opt:typeget=array;@type
-	in:int:Индекс:Индекс элемента массива. Отсчет начинается с 0. Для получения первого элемента массива используется индекс 0, а для последнего - количество элементов минус 1.
-	in:auto:Элемент
+	in:int:Индекс:Индекс элемента массива, по которому будет записан элемент. Отсчет начинается с 0. Для установки первого элемента массива используется индекс 0, а для последнего - количество элементов минус 1. Если в массиве по указанному индексу уже хранится элемент - он будет перезаписан.
+	in:auto:Элемент:Элемент, который будет записан по указанному индексу. При установке элемента по индексу, который больше размера массива, он будет расширён а все промежуточные элементы будут заполнены null-значениями. Для избежания такой проблемы выполните проверку можно ли поместить элемент по заданному индексу в массив.
 		opt:typeget=array;@value.1
 " node_system
 
@@ -80,12 +89,14 @@ node_system
 "
     node:count
     name:Количество элементов
-    namelib:Получить количество элементов массива
-    desc:Получает количество элементов массива
+    namelib:Количество элементов массива
+    desc:Получает количество элементов массива. Если массив пустой, возвращает 0.
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:pure
     code:count(@in.1)
-    in:auto:Массив
+    in:auto:Массив:Ссылка на массив с элементами.
         opt:typeget=array;@type
     out:int:Количество элементов
 " node_system
@@ -93,38 +104,38 @@ node_system
 //in
 "
     node:in
-    name:Элемент в массиве
-    namelib:Проверка наличия элемента в массиве
+    name:Содержит элемент
     desc:Проверяет наличие элемента в массиве.
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:pure
-    runtimeports:1
-    autocoloricon:0
     code:(@in.2)in(@in.1)
-    in:auto:Массив
+    in:auto:Массив:Проверяемый массив
         opt:typeget=array;@type
-    in:auto:Элемент
+    in:auto:Элемент:Сравниваемый элемент
         opt:typeget=array;@value.1
-    out:bool:Результат:Истина, если элемент в массиве, иначе ложь
+    out:bool:Результат:Истина, если такой элемент присутствует в массиве, иначе ложь.
 " node_system
 //find
 "
     node:find
     name:Найти элемент
     namelib:Поиск элемента
-    desc:Поиск элемента в массиве
+    desc:Поиск элемента в массиве.
     icon:data\\icons\\ArrayPin.png
     exec:pure
-    runtimeports:1
+    rendertype:NoHeader
+    autocoloricon:1
     code:(@in.1)find(@in.2)
-    in:auto:Массив
+    in:auto:Массив:Ссылка на массив
         opt:typeget=array;@type
-    in:auto:Элемент
+    in:auto:Элемент:Искомый элемент. Первый элемент хранится по индексу 0, второй - по индексу 1 и т.д.
         opt:typeget=array;@value.1
     out:int:Индекс:Возвращает -1 если элемент не найден, иначе возвращает индекс элемента в массиве.
 " node_system
 
-//findif
+//findif //!Нужны генераторы локальных функций
 // "
 //     node:findif
 //     name:Найти элемент по условию
@@ -132,9 +143,9 @@ node_system
 //     desc:Поиск элемента в массиве по условию
 //     icon:data\\icons\\ArrayPin.png
 //     exec:pure
-//     runtimeports:1
-//     autocoloricon:0
-//     code:call{__fi = 0; (@in.1) findif {__fi = _x; (@out.2)}}
+//     rendertype:NoHeader
+//     autocoloricon:1
+//     code:(@in.1) findif {@genvar.out.2.internal(_x) (@out.2)}
 //     in:auto:Массив
 //         opt:typeget=array;@type
 //     out:bool:Условие
@@ -152,38 +163,44 @@ node_system
     desc:Изменяет размер исходного массива.
     icon:data\\icons\\ArrayPin.png
     exec:all
-    code: (@in.1)resize(@in.2); @out.1
+    rendertype:NoHeader
+    autocoloricon:1
+    code: (@in.2)resize(@in.3); @out.1
     in:auto:Массив:Ссылка на массив, размер которого будет изменён
         opt:typeget=array;@type
-    in:int:Размер:Новый размер массива
+    in:int:Размер:Новый размер массива. Если указанный размер меньше текущего, то массив будет уменьшён. Если указанный размер больше текущего, то размер будет увеличен, а по новым индексам будут помещены null-значения.
 " node_system
 //pushback
 "
     node:pushBack
-    name:Добавить в конец
-    namelib:Добавить элемент в конец массива
-    desc:Добавляет элемент в конец массива
+    name:Добавить
+    namelib:Добавить элемент в массив
+    desc:Добавляет элемент в конец массива.
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:all
-    code:(@in.1)pushback(@in.2); @out.1
-    in:auto:Массив
+    code:(@in.2)pushback(@in.3); @out.1
+    in:auto:Массив:Ссылка на массив, в который будет добавлен новый элемент.
         opt:typeget=array;@type
-    in:auto:Элемент
+    in:auto:Элемент:Добавляемый элемент
         opt:typeget=array;@value.1
 " node_system
 
 //pushbackunique
 "
     node:pushBackUnique
-    name:Добавить в конец (уникальный)
-    namelib:Добавить уникальный элемент в конец массива
+    name:Добавить уникальный
+    namelib:Добавить уникальный элемент в массив
     desc:Добавляет элемент в конец массива если в нем нет такого элемента.
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:all
-    code:(@in.1)pushbackunique(@in.2); @out.1
-    in:auto:Массив
+    code:(@in.2)pushbackunique(@in.3); @out.1
+    in:auto:Массив:Ссылка на массив, в который будет добавлен новый элемент.
         opt:typeget=array;@type
-    in:auto:Элемент
+    in:auto:Элемент:Добавляемый элемент.
         opt:typeget=array;@value.1
 " node_system
 
@@ -194,24 +211,30 @@ node_system
     namelib:Добавить элемент в начало массива
     desc:Добавляет элемент в начало массива. Новый элемент будет доступен по индексу 0
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:all
-    code:[@in.1,@in.2,@in.3] call pushFront; @out.1
-    in:auto:Массив
+    code:[@in.2,@in.3,@in.4] call pushFront; @out.1
+    in:auto:Массив:Ссылка на массив, в который будет добавлен новый элемент.
         opt:typeget=array;@type
-    in:auto:Элемент
+    in:auto:Элемент:Добавляемый элемент
         opt:typeget=array;@value.1
     in:bool:Уникальный:Если true то добавляется только уникальный элемент (если такого элемента нет в массиве).
+        opt:def=False
 " node_system
 
 //reverse
 "
     node:reverse
-    name:Отразить массив
+    name:Развернуть
+    namelib:Развернуть массив
     desc:Инвертирует (отражает) порядок элементов массива. Первый элемент станет последним, последний первым и тд.
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:all
-    code:reverse(@in.1); @out.1
-    in:auto:Массив
+    code:reverse(@in.2); @out.1
+    in:auto:Массив:Ссылка на массив, который будет развёрнут.
         opt:typeget=array;@type
 " node_system
 
@@ -222,9 +245,11 @@ node_system
     namelib:Удалить элемент из массива по индексу
     desc:Удаляет элемент из массива по указанному индексу
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:all
-    code:(@in.1) deleteAt (@in.2); @out.1
-    in:auto:Массив
+    code:(@in.2) deleteAt (@in.3); @out.1
+    in:auto:Массив:Ссылка на массив
         opt:typeget=array;@type
     in:int:Индекс:Индекс удаляемого элемента
 " node_system
@@ -236,9 +261,11 @@ node_system
     namelib:Удалить элемент из массива
     desc:Удаляет элемент из массива если он есть в массиве.
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:all
     code:private @genvar.out.2 = [@in.2,@in.3] call arrayDeleteItem; @out.1
-    in:auto:Массив
+    in:auto:Массив:Ссылка на массив
         opt:typeget=array;@type
     in:auto:Элемент:Удаляемый элемент
     out:bool:Удалён:Возвращает true если элемент был удалён
@@ -250,10 +277,12 @@ node_system
     name:Удалить диапазон
     namelib:Удалить диапазон элементов
     desc:Удаляет диапазон элементов из массива. Например, при для удаления последних трех элементов массива [3,4,5,6,7,8,9]"+
-    " нужно в индексе указать 4, а в количестве указать 3.
+    " нужно в индексе указать 4, а в количестве указать 3. В итоге получится [3,4,5,6]
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:all
-    code:(@in.1) deleteRange [@in.2,@in.3]; @out.1
+    code:(@in.2) deleteRange [@in.3,@in.4]; @out.1
     in:auto:Массив
         opt:typeget=array;@type
     in:int:Индекс:Индекс, с которого начинается удаление элементов массива
@@ -265,16 +294,19 @@ node_system
     node:sort
     name:Сортировать
     namelib:Сортировать массив
-    desc:Изменяет исходных массив, сортируя его элементы. Допускается сортировка массивов чисел и строк.
+    desc:Изменяет исходный массив, сортируя его элементы. Допускается сортировка массивов чисел и строк.
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:all
-    code:(@in.1) sort (@in.2); @out.1
-    in:auto:Массив
-        opt:typeget=array;@type
+    code:(@in.2) sort (@in.3); @out.1
+    in:auto:Массив:Массив чисел или строк, который будет отсортирован
+        opt:typeget=array;@type:allowtypes=array[string]|array[int]|array[float]
     in:bool:По возрастанию:Порядок сортировки. При true элементы массива сортируются по возрастанию, а при false - по убыванию.
+        opt:def=true
 " node_system
 
-//parseSimpleArray
+//parseSimpleArray //!Unsafe node
 // "
 //     node:parseSimpleArray
 //     name:Строку в массив
@@ -292,13 +324,15 @@ node_system
     node:selectMax
     name:Максимальный элемент
     namelib:Найти максимальный элемент
-    desc:Находит наибольший элемент массива
+    desc:Находит наибольший элемент массива. Допускаются только массивы чисел.
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:pure
-    code:selectMax (@in.1)
-    in:auto:Массив
-        opt:typeget=array;@type
-    out:auto:Элемент
+    code:selectMax(@in.1)
+    in:auto:Массив:Ссылка на массив
+        opt:typeget=array;@type:allowtypes=array[int]|array[float]
+    out:auto:Элемент:Наибольший элемент
         opt:typeget=array;@value.1
 " node_system
 
@@ -307,12 +341,14 @@ node_system
     node:selectMin
     name:Минимальный элемент
     namelib:Найти минимальный элемент
-    desc:Находит наименьший элемент массива
+    desc:Находит наименьший элемент массива. Допускаются только массивы чисел.
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:pure
-    code:selectMin (@in.1)
+    code:selectMin(@in.1)
     in:auto:Массив
-        opt:typeget=array;@type
+        opt:typeget=array;@type:allowtypes=array[int]|array[float]
     out:auto:Элемент
         opt:typeget=array;@value.1
 " node_system
@@ -322,56 +358,62 @@ node_system
     node:append
     name:Объединить
     namelib:Объединить массивы
-    desc:Изменяет первый массив, добавляя к нему второй
+    desc:Изменяет первый массив, добавляя к нему второй. 
     icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
     exec:all
-    code:(@in.1) append (@in.2); @out.1
-    in:auto:Массив источник
+    code:(@in.2) append (@in.3); @out.1
+    in:auto:Источник:Первый массив, к котрому будут добавлены все элементы из второго.
         opt:typeget=array;@type
-    in:auto:Добавляемый массив
+    in:auto:Добавляемый:Второй массив, элементы которого будут добавлены в первый массив.
         opt:typeget=array;@type
 " node_system
 
-//apply
-"
-    node:apply
-    name:Применить к массиву
-    namelib:Применить к массиву
-    desc:Применяет операцию к каждому элементу массива и возвращает новый массив с обновленными элементами
-    icon:data\\icons\\ArrayPin.png
-    exec:all
-    code:private @genvar.out.2 = (@in.1) apply {@in.2}; @out.1
-    in:auto:Массив
-        opt:typeget=array;@type
-    in:Exec:Функция элемента:Обработчик элемента массива
-    in:auto:Элемент
-        opt:typeget=array;@value.1
-    out:Новый массив
-        opt:typeget=array;@type
-" node_system
+//apply //!unsafe
+// "
+//     node:apply
+//     name:Применить к массиву
+//     namelib:Применить к массиву
+//     desc:Применяет операцию к каждому элементу массива и возвращает новый массив с обновленными элементами
+//     icon:data\\icons\\ArrayPin.png
+//     rendertype:NoHeader
+//     autocoloricon:1
+//     exec:all
+//     code:private @genvar.out.2 = (@in.1) apply {@in.2}; @out.1
+//     in:auto:Массив
+//         opt:typeget=array;@type
+//     in:Exec:Функция элемента:Обработчик элемента массива
+//     in:auto:Элемент
+//         opt:typeget=array;@value.1
+//     out:Новый массив
+//         opt:typeget=array;@type
+// " node_system
 
 //abstract array
+//! not really need now...
+// "
+//     node:listToArray
+//     name:Лист в массив
+//     desc:Преобразует лист (абстрактный массив) в массив
+//     icon:data\\icons\\ArrayPin.png
+//     rendertype:NoHeader
+//     autocoloricon:1
+//     exec:pure
+//     code:@in.1
+//     in:list:Лист:Лист со значениями
+//     option:""Тип""\:{""type""\: ""typeselect""}
+// " node_system
 
-"
-    node:listToArray
-    name:Лист в массив
-    desc:Преобразует лист (абстрактный массив) в массив
-    icon:data\\icons\\ArrayPin.png
-    exec:pure
-    code:@in.1
-    in:list:Лист:Лист со значениями
-    option:""Тип""\:{""type""\: ""typeselect""}
-" node_system
-
-"
-    node:arrayToList
-    name:Массив в лист
-    desc:Преобразует массив в лист (абстрактный массив)
-    icon:data\\icons\\ArrayPin.png
-    exec:pure
-    code:@in.1
-    runtimeports:1
-    in:auto:Массив
-        opt:typeget=array;@type
-    out:list:Лист
-" node_system
+// "
+//     node:arrayToList
+//     name:Массив в лист
+//     desc:Преобразует массив в лист (абстрактный массив)
+//     icon:data\\icons\\ArrayPin.png
+//     exec:pure
+//     code:@in.1
+//     runtimeports:1
+//     in:auto:Массив
+//         opt:typeget=array;@type
+//     out:list:Лист
+// " node_system
