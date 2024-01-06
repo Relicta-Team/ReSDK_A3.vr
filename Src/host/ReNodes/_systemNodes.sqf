@@ -28,7 +28,8 @@ node_system_group("operators")
 		node:if_branch
 		name:Ветка
 		color:Operator
-		desc:Оценивает условие ветки.
+		desc:Оценивает условие ветки. "+
+		"После выполнения узел просматривает входное значение логического значения ""Условие"" и выводит импульс выполнения на соответствующий выход.
 		icon:data\\icons\\icon_Blueprint_Branch_16x
 		code:if (@in.2) then {@out.1} else {@out.2};
 		in:Exec:Вход
@@ -39,6 +40,7 @@ node_system_group("operators")
 			opt:mul=0
 		out:Exec:Ложь:Выполняет подключенный узел, если условие является ложью
 			opt:mul=0
+		out:Exec:После условия:Всегда выполняется после выполнения ветки ""Истина"" или ""Ложь"" (зависит от результата порта ""Условие"")
 	"
 	node_system
 
@@ -59,7 +61,7 @@ node_system_group("operators")
 	" node_system
 
 	"
-		node:while
+		node:while_loop
 		color:Operator
 		name:Цикл
 		desc:Выполнение кода несколько раз пока условие истинно.\n"+
@@ -68,11 +70,11 @@ node_system_group("operators")
 		code:while {@in.2} do {@out.1}; @out.2
 		in:Exec:Вход
 			opt:mul=1:dname=0
-		in:bool:Условие:Оцениваемое условие. Пока это условие возвращает истину - цикл будет выполняться
+		in:bool:Условие:Оцениваемое условие. Пока это условие возвращает истину - тело цикла будет выполняться.
 			opt:custom=1:def=true
-		out:Exec:Тело цикла:Узел, подключенный к этому порту будет выполнен пока выполняется цикл (т.е. условие - истина)
+		out:Exec:Тело цикла:Узел, подключенный к этому порту будет выполнен пока выполняется цикл (т.е. условие - истина).
 			opt:mul=0
-		out:Exec:При завершении:Узел, подключенный к этому порту будет выполнен когда цикл завершится
+		out:Exec:При завершении:Узел, подключенный к этому порту будет выполнен когда цикл завершится.
 			opt:mul=0
 	"
 	node_system
@@ -107,7 +109,7 @@ node_system_group("operators")
 		namelib:Цикл по списку (перебор коллекции)
 		desc:Цикл для перебора коллекций (например, массивов).
 		icon:data\\icons\\icon_Blueprint_ForEach_16x
-		code:private @genvar.out.2 = NIL; private @genvar.out.3 = NIL; {@locvar.out.2 = _x; @locvar.out.3 = _foreachindex; @out.1} foreach (@in.2); @out.4
+		code:{@genvar.out.2.internal(_x)@genvar.out.3.internal(_foreachindex) @out.1} foreach (@in.2); @out.4
 		runtimeports:1
 		autocoloricon:0
 		in:Exec:Вход
