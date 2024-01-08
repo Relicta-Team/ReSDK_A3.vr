@@ -34,7 +34,7 @@ class(BasicRole) extends(object) attribute(Role)
 		OBSOLETE(BasicRole::showInGameDesc);
 		private _desc = getSelf(descInGame);
 
-		if isNullVar(_desc) exitWith {
+		if (isNullVar(_desc) || {_desc == ""}) exitWith {
 			_desc = getSelf(desc);
 			callFuncParams(_mob,localSay,format vec3("Вы - %1! %2",getSelf(name),_desc) arg "info");
 		};

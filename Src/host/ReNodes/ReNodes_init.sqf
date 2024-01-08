@@ -116,12 +116,35 @@ nodegen_addClass = {
 
 nodegen_addFunction = {
     private _ctx = _this;
-    _ctx call nodegen_commonSysAdd;
+    [_ctx,"func"] call nodegen_commonSysAdd;
 };
 
 nodegen_addSystemNode = {
     private _ctx = _this;
-    _ctx call nodegen_commonSysAdd;
+    [_ctx,"node"] call nodegen_commonSysAdd;
+};
+
+nodegen_addEnumerator = {
+    params ["_nodename","_members",["_pdata",'']];
+    
+    assert(equalTypes(_members,[]));
+
+    private _map = createHashMap;
+    private _iter = 0;
+    {
+        (_x splitString ":") params ["_k",["_v",_iter]];
+        if not_equalTypes(_v,0) then {_v = parseNumber _v};
+        _map set [str _v,_k];
+        _iter = _v + 1;
+    } foreach _members;
+    missionNamespace setvariable ['enum_vToK_'+_nodename,_map];
+    
+    private _ctx = [];
+    _ctx pushBack ('node:'+_nodename);
+    _ctx pushBack (_pdata);
+    {_ctx pushBack ("eval:"+_x)} foreach _members;
+    ctxdata = _ctx;
+    [_ctx joinstring endl,"enum"] call nodegen_commonSysAdd;
 };
 
 nodegen_commonAdd = {
@@ -146,12 +169,12 @@ nodegen_commonSysAdd = {
 
     if (!is3DEN) exitwith {};
 
-    private _ctx = _this;
+    params ["_ctx","_nseg"];
     private _gadd = "system";
     if !isNullVar(__nsys_grp) then {
         _gadd = __nsys_grp;
     };
-    nodegen_list_functions pushBack [_gadd,_ctx];
+    nodegen_list_functions pushBack [_gadd,_ctx,_nseg];
 };
 
 nodegen_registerFunctions = {
@@ -169,6 +192,9 @@ nodegen_registerFunctions = {
     #include "_math.logical.sqf"
     #include "_model.sqf"
     #include "_hashmap.sqf"
+
+    //типы стандартных перечислений
+    #include "_enums.sqf"
 };
 
 nodegen_registerMember = {
@@ -205,8 +231,8 @@ nodegen_generateLib = {
     private _funcdata = [];
     private _tempfunc = "";
     {
-        _x params ["_cat","_data"];
-        _tempfunc = format['def:node:%1',_cat] + endl + _data + endl;
+        _x params ["_cat","_data","_ncat"]; //_ncat - enum,node etc...
+        _tempfunc = format['def:%2:%1',_cat,_ncat] + endl + _data + endl;
         _funcdata pushBack _tempfunc;
     } foreach nodegen_list_functions;
     modvar(_output) + (_funcdata joinString endl);

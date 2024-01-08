@@ -21,7 +21,7 @@ node_system_group("conversion")
 " node_system
 
 _convFunc = {
-    params ["_name","_code","_in","_out",["_desc","Преобразование"]]
+    params ["_name","_code","_in","_out",["_desc","Преобразование"]];
     (_in splitString ":")params ["_intype","_inname"];
     (_out splitString ":")params ["_outtype","_outname"];
 format["

@@ -243,6 +243,7 @@ node_system_group("control")
 		namelib:Вернуть значение (выход из функции)
 		desc:Возвращает значение из функции. При поступлении импульса на этот порт, выполнение функции прерывается.
 		icon:data\\icons\\icon_Blueprint_Node_16x
+		color:Operator
 		runtimeports:1
 		autocoloricon:0
 		code:(@in.2) BREAKOUT ""exec""
@@ -258,6 +259,7 @@ node_system_group("control")
 		desc:Вызов базового метода. Этот узел вызывает функцию из родительского класса. "+
 		"Например, в некотором классе ""А"" есть функция ""Действие"". При создании собственного класса ""Б"", унаследованного от ""А"" и переопределяющего логику функции ""Действие"" мы можем выполнить ""Действие"" от родительского класса ""А"" с помощью этого узла ""Вызов базового метода"".
 		icon:data\\icons\\icon_Blueprint_OverrideableFunction_16x
+		color:Operator
 		runtimeports:1
 		autocoloricon:0
 		code:private @genvar.out.2 = super(); @out.1
@@ -303,6 +305,7 @@ node_system_group("control")
 		namelib:Сообщение в окне
 		desc:Выводит сообщение в окне (только в режиме отладки).
 		code: \n#ifdef DEBUG\n[@in.2,@in.3] call messageBox_Node;\n#endif\n @out.1
+		color:Function
 		runtimeports:1
 		autocoloricon:0
 		exec:all

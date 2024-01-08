@@ -25,33 +25,69 @@ def:node:operators
 		node:if_branch
 		name:Ветка
 		color:Operator
-		desc:Оценивает условие ветки.
+		desc:Оценивает условие ветки. После выполнения узел просматривает входное значение логического значения порта "Условие" и выводит импульс выполнения на соответствующий выходной порт.
 		icon:data\\icons\\icon_Blueprint_Branch_16x
 		code:if (@in.2) then {@out.1} else {@out.2};
 		in:Exec:Вход
 			opt:mul=1
 		in:bool:Условие:Условие, оцениваемое веткой
-		out:Exec:Истина:Выполняет подключенный узел, если условие является истиной
+			opt:def=true
+		out:Exec:Истина:Выполняет подключенный узел, если условие является истиной.
 			opt:mul=0
-		out:Exec:Ложь:Выполняет подключенный узел, если условие является ложью
+		out:Exec:Ложь:Выполняет подключенный узел, если условие является ложью.
 			opt:mul=0
 	
 
 def:node:operators
 
-		node:while
+		node:sequence
+		name:Последовательность
+		desc:Этот узел позволяет одному импульсу выполнения запускать последовательность событий по порядку. Узел может иметь любое количество выходов, все из которых вызываются, как только узел последовательности получает входные импульс выполнения. Они всегда вызываются по порядку, но без каких-либо задержек.
+		icon:data\\icons\\icon_Blueprint_Sequence_16x
+		exec:none
+		color:Operator
+		code:@genport.out.1(; )
+		runtimeports:1
+		in:Exec:Вход
+			opt:dname=0
+		out:Exec:Действие 1
+			opt:mul=0
+		option:"makeport_out"\: {"type"\: "makeport_out","src"\:"Действие 1","text_format"\:"Действие {value}"}
+	
+
+def:node:operators
+
+		node:flipflop
+		name:Переключатель
+		desc:Узел принимает входные данные выполнения и переключается между двумя выходными данными выполнения. При первом вызове выполняется выход A. Во второй раз Б. Потом А, потом Б и так далее. Узел также имеет логический выход, позволяющий отслеживать, когда был вызван выход A.
+		icon:data\\icons\\icon_Blueprint_FlipFlop_16x
+		exec:none
+		color:Operator
+		code:private @genvar.out.3 = this getvariable ['@thisClass_@thisName_@ff@nodeStackId',true]; this setvariable ['@thisClass_@thisName_@ff@nodeStackId',!@locvar.out.3]; if (@locvar.out.3) then {@out.1} else {@out.2};
+		in:Exec:Вход
+			opt:dname=0
+		out:Exec:A:Выполняет подключенный узел в первый раз, третий, пятый и т.д. через 1.
+			opt:mul=0
+		out:Exec:B:Выполняет подключенный узел во второй раз, четвертый, шестой и т.д. через 1.
+			opt:mul=0
+		out:bool:Импульс А:Возвращает истину, если подан импульс выполнения на порт A, а если подан импульс выполнения на порт B, то возвращается ложь.
+	
+
+def:node:operators
+
+		node:while_loop
 		color:Operator
 		name:Цикл
-		desc:Выполнение кода несколько раз пока условие истинно.\nОбратите внимание, что этот цикл может выполняться только 10000 раз. При достижении лимита выполнения цикл остановится.
+		desc:Выполнение кода несколько раз пока условие истинно. При поступлении входного имульса выполняется проверка условия. Если оно истнно - выполняется тело цикла. В ином случае выполняется узел, подключенный к выходному порту "При завершении", если таковой подключен.\n<span style='color:red'>Примечание: </span>Обратите внимание, что узел цикла может выполнить тело цикла только 10000 раз. При достижении лимита выполнения цикл остановится. Данное ограничение является особенностью платформы.
 		icon:data\\icons\\icon_Blueprint_Loop_16x
 		code:while {@in.2} do {@out.1}; @out.2
 		in:Exec:Вход
 			opt:mul=1:dname=0
-		in:bool:Условие:Оцениваемое условие. Пока это условие возвращает истину - цикл будет выполняться
-			opt:custom=1
-		out:Exec:Тело цикла:Узел, подключенный к этому порту будет выполнен пока выполняется цикл (т.е. условие - истина)
+		in:bool:Условие:Оцениваемое условие. Пока это условие возвращает истину - тело цикла будет выполняться.
+			opt:custom=1:def=true
+		out:Exec:Тело цикла:Посылает импульс выполнения на подключенный узел пока выполняется цикл (т.е. условие - истина).
 			opt:mul=0
-		out:Exec:При завершении:Узел, подключенный к этому порту будет выполнен когда цикл завершится
+		out:Exec:При завершении:Посылает импульс выполнения, когда цикл завершится.
 			opt:mul=0
 	
 
@@ -61,18 +97,20 @@ def:node:operators
 		color:Operator
 		name:Цикл в диапазоне
 		namelib:Цикл в диапазоне
-		desc:Вызывается несколько раз. Диапазон задается входными параметрами "Первый индекс" и "Последний индекс"
+		desc:Вызывается несколько раз в зависимости от указанного диапазона значений. Диапазон задается входными числовыми параметрами "Первый индекс" и "Последний индекс".
 		icon:data\\icons\\icon_Blueprint_Loop_16x
 		code:for "@genvar.out.2" from (@in.2) to (@in.3) do {@out.1}; @out.3
 		in:Exec:Вход
 			opt:mul=1:dname=0
-		in:int:Первый индекс:Начальное число, с которого начинается цикл
-		in:int:Последний индекс:Конечное число, до которого цикл будет выполняться
-		out:Exec:Тело цикла:Этот порт вызывается пока индекс находится в диапазоне между первым и последним индексом
+		in:int:Первый индекс:Начальное число, с которого начинается цикл.
+			opt:def=0
+		in:int:Последний индекс:Конечное число, до которого цикл будет выполняться. Если это число меньше первого индекса - имульс не будет послан на порт "Тело цикла".
+			opt:def=10
+		out:Exec:Тело цикла:Посылает импульс выполнения пока индекс находится в диапазоне между первым и последним индексом.
 			opt:mul=0
-		out:int:Индекс:Этот порт владеет значением в каждой итерации цикла. Например, при диапазоне от 0 до 10 индекс при использовании в теле цикла впервые будет равен 0 а в последний раз 10.
+		out:int:Индекс:Этот порт владеет значением в каждой итерации цикла и увеличивает его после каждой итерации выполнения тела цикла. Например, при диапазоне от 0 до 10 индекс при использовании в теле цикла впервые будет равен 0 а в последний раз 10. Данный порт не может быть подключен к узлам, не находящимся в теле этого цикла.
 			opt:mul=1:pathes=Тело цикла
-		out:Exec:При завершении:Узел, подключенный к этому порту будет выполнен когда цикл завершится
+		out:Exec:При завершении:Посылает импульс выполнения, когда цикл завершится.
 			opt:mul=0:pathes=
 	
 
@@ -84,7 +122,7 @@ def:node:operators
 		namelib:Цикл по списку (перебор коллекции)
 		desc:Цикл для перебора коллекций (например, массивов).
 		icon:data\\icons\\icon_Blueprint_ForEach_16x
-		code:private @genvar.out.2 = NIL; private @genvar.out.3 = NIL; {@locvar.out.2 = _x; @locvar.out.3 = _foreachindex; @out.1} foreach (@in.2); @out.4
+		code:{@genvar.out.2.internal(_x)@genvar.out.3.internal(_foreachindex) @out.1} foreach (@in.2); @out.4
 		runtimeports:1
 		autocoloricon:0
 		in:Exec:Вход
@@ -107,7 +145,7 @@ def:node:operators
 		color:Operator
 		name:Пропустить итерацию цикла
 		namelib:Пропуск итерации цикла
-		desc:Пропускает текущую итерацию цикла
+		desc:Пропускает текущую итерацию цикла. При поступлении импульса на этот порт, цикл продолжается с следующей итерацией, если таковая возможна.
 		code:continue
 		exec:in
 	
@@ -118,7 +156,7 @@ def:node:operators
 		color:Operator
 		name:Прервать цикл
 		namelib:Прерывание цикла
-		desc:Останавливает выполнение цикла
+		desc:Останавливает выполнение цикла. При поступлении импульса на этот порт, цикл прерывается.
 		code:break
 		exec:in
 	
@@ -128,7 +166,7 @@ def:node:variable
 		node:get
 		name:Получить {}
 		namelib:Получение значения переменной
-		desc:Получает значение переменной
+		desc:Получает значение переменной, созданной пользователем.
 		libvisible:0
 		code:RUNTIME
 		defcode:var(@thisName,@propvalue);
@@ -140,7 +178,7 @@ def:node:variable
 		node:set
 		name:Установить {}
 		namelib:Установка значения переменной
-		desc:Устанавливает значение переменной
+		desc:Устанавливает значение переменной, созданной пользователем.
 		libvisible:0
 		code:RUNTIME
 		option:"nameid"\: {"type"\: "hidden"}	
@@ -169,17 +207,18 @@ def:node:function
 
 def:node:control
 
-	node:return
-	name:Вернуть значение
-	namelib:Вернуть значение (выход из функции)
-	desc:Возвращает значение из функции
-	icon:data\\icons\\icon_Blueprint_Node_16x
-	runtimeports:1
-	autocoloricon:0
-	code:(@in.2) BREAKOUT "exec"
-	exec:in
-	in:auto:Возвращаемое значение:Значение, которое вернет функция.
-    	opt:typeget=ANY;@type
+		node:return
+		name:Вернуть значение
+		namelib:Вернуть значение (выход из функции)
+		desc:Возвращает значение из функции. При поступлении импульса на этот порт, выполнение функции прерывается.
+		icon:data\\icons\\icon_Blueprint_Node_16x
+		color:Operator
+		runtimeports:1
+		autocoloricon:0
+		code:(@in.2) BREAKOUT "exec"
+		exec:in
+		in:auto:Возвращаемое значение:Значение, которое вернет функция.
+			opt:typeget=ANY;@type
 	
 
 def:node:control
@@ -187,30 +226,169 @@ def:node:control
 		node:supercall
 		name:Вызов базового метода
 		namelib:Вызов базового метода
-		desc:Вызов базового метода.
-		icon:data\\icons\\icon_Blueprint_Node_16x
+		desc:Вызов базового метода. Этот узел вызывает функцию из родительского класса. Например, в некотором классе "А" есть функция "Действие". При создании собственного класса "Б", унаследованного от "А" и переопределяющего логику функции "Действие" мы можем выполнить "Действие" от родительского класса "А" с помощью этого узла "Вызов базового метода".
+		icon:data\\icons\\icon_Blueprint_OverrideableFunction_16x
+		color:Operator
 		runtimeports:1
 		autocoloricon:0
 		code:private @genvar.out.2 = super(); @out.1
 		exec:all
-		out:auto:Значение:Значение, которое может вернуть базовый метод. Если базовый метод не возвращает значений, то оставьте этот порт пустым.
+		out:auto:Значение:Значение, которое возвращает базовый метод. Если базовый метод не возвращает значений, то оставьте этот порт пустым.
 			opt:typeget=ANY;@type
 	
+
+def:node:control
+
+		node:castto
+		name:Преобразовать тип
+		namelib:Преобразование типа
+		desc:Преобразует входной тип к другому указанному типу.
+		icon:data\\icons\\icon_Blueprint_Cast_16x
+		code: if !((tolower (object)) in ((@in.2) getvariable PROTOTYPE_VAR_NAME getvariable ("__inhlist_map"))) then {@out.2}; @out.1 
+		runtimeports:1
+		autocoloricon:0
+		exec:in
+		in:auto:Входной объект:Объект, который будет преобразован.
+			opt:typeget=value;@type
+		out:Exec:Успешное преобразование:Выполняется если преобразование прошло успешно.
+		out:Exec:Невозможное преобразование:Выполняется если преобразование не удалось.
+		out:auto:Объект:Объект, преобразованный к новому типу.
+			opt:typeget=value;@type
+	
+
+def:node:control
+
+		node:null_check
+		name:Объект существует
+		namelib:Объект существует (не null)
+		desc:Проверяет существование (валидность) объекта. Если ссылка на объект пригоден для использования (не удален и существует) - возвращает ИСТИНУ.
+		rendertype:NoHeaderText
+		exec:pure
+		code:(!ISNULL(@in.1))
+		in:object^:Объект:Ссылка на проверяемый объект.
+		out:bool:Результат:Возвращает ИСТИНУ, если объект существует. Если ссылка на объект не существует или объект был удален - возвращает ЛОЖЬ.
+	
+
+def:node:control
+
+		node:messageBox
+		path:Операторы
+		name:Сообщение в окне
+		namelib:Сообщение в окне
+		desc:Выводит сообщение в окне (только в режиме отладки).
+		code: \n#ifdef DEBUG\n[@in.2,@in.3] call messageBox_Node;\n#endif\n @out.1
+		color:Function
+		runtimeports:1
+		autocoloricon:0
+		exec:all
+		in:string:Сообщение:Выводимое сообщение. Для вывода данных в строке сообщения укажите %1.
+		in:auto:Данные:Дополнительные данные для вывода.
+			opt:typeget=ANY;@type:require=0
+	
+
+def:node:control
+
+		node:callafter
+		path:Операторы.Асинхронные
+		name:Таймер
+		namelib:Вызов по таймеру
+		color:Operator
+		icon:data\\icons\\icon_Blueprint_Timeline_16x
+		desc:Узел "Таймер" предназначен для исполнения задержек (пауз) между действиями внутри функции. При поступлении входного импульса выполнение приостанавливается на время, указанное во входном порту "Пауза" и после этого пошлёт импульс на выходной порт "Вызов". Данный узел имеет некоторые накладные расходы при выполнении, поэтому не гарантируется задежрка с указанной точностью времени до миллисекунды.
+		code: __callafterCode = {SCOPENAME "exec"; @context.alloc; @out.1}; __prs = @context.get; invokeAfterDelayParams(__callafterCode,@in.2,__prs); 
+		exec:none
+		in:Exec:Вход
+			opt:mul=1
+		in:float:Пауза:Время в секундах, через которое будет послан импульс на выходной порт "Вызов".
+		out:Exec:Вызов:Исполняетя один раз после истечения времени, указанного во входном порту "Пауза".
+			opt:mul=0
+	
+
+def:node:control
+
+		node:callaftercond
+		name:Условный таймер
+		namelib:Вызов по таймеру с условием
+		desc:Узел "Условный таймер" предназначен для исполнения задержек (пауз) между действиями внутри функции. При поступлении входного импульса выполнение приостанавливается до тех пор, пока условие, вычисляемое каждый кадр не будет истинно. Как только условие станет истинно таймер будет остановлен и пошлётся импульс на 
+		color:Operator
+		icon:data\\icons\\icon_ClockwiseRotation_16x
+		code: startAsyncInvoke {@context.alloc; @in.2}, {SCOPENAME "exec"; @context.alloc; @out.1 },@context.get,@in.3,{SCOPENAME "exec"; @context.alloc; @out.2} endAsyncInvoke
+		exec:none
+		in:Exec:Вход
+			opt:mul=1
+		in:bool:Условие:Оцениваемое условие. Каждый кадр вычисляет результат условия. Если оно истинно, то посылается импульс на выходной порт "Вызов".
+		in:float:Таймаут:Время в секундах, через которое будет послан импульс на выходной порт "При таймауте". Если указано значение -1, то таймаута не будет.
+			opt:def=-1
+		out:Exec:Вызов:Когда условие стало истинным, посылается импульс выполнения на этот порт и таймер завершается.
+			opt:mul=0
+		out:Exec:При таймауте:Если прошло время таймаута и условие не стало истинным, посылается импульс выполнения на этот порт и таймер завершается.
+			opt:mul=0
+	
+
+def:node:array
+
+    node:makeArray
+    path:Массивы
+    name:Создать массив
+    namelib:Создание массива
+    desc:Создает массив из указанных элементов
+    icon:data\\icons\\icon_Blueprint_MakeArray_16x.png
+    exec:pure
+    code:[ @genport.in.1(,) ]
+    in:auto:[0]
+        opt:typeget=array;@value.1
+    out:auto:Массив
+        opt:typeget=array;@type
+    option:"makeport_in"\: {"type"\: "makeport_in","src"\:"[0]","text_format"\:"[{index}]"}
+
+
+def:node:array
+
+    node:clearArray
+    name:Очистить
+    namelib:Очистить массив
+    desc:Удаляет все элементы из массива, делая его пустым.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:all
+    code:(@in.2) resize 0; @out.1
+    in:auto:Массив:Ссылка на массив, который будет очищен.
+        opt:typeget=array;@type
+
+
+def:node:array
+
+    node:pick
+    name:Случайный элемент
+    namelib:Случайный элемент
+    desc:Выбирает случайный элемент из массива
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:pure
+    code:SelectRandom(@in.1)
+    in:auto:Массив:Массив, из которого будет выбран случайный элемент.
+        opt:typeget=array;@type
+    out:auto:Элемент:Случайный элемент из массива. Размер массива должен быть больше 0, иначе вернется null-значение а поведение станет неопределенным.
+        opt:typeget=array;@value.1
+
 
 def:node:array
 
 	node:get
 	name:Получить элемент
 	namelib:Получение элемента массива
-	desc:Получает элемент массива
+	desc:Получает элемент массива по указанному индексу.
 	icon:data\\icons\\ArrayPin.png
-	runtimeports:1
-	autocoloricon:0
-	code:(@in.1) select (@in.2)
-	in:auto:Массив
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:pure
+	code:(@in.1)select(@in.2)
+	in:auto:Массив:Ссылка на массив, из которого будет выбран элемент.
 		opt:typeget=array;@type
 	in:int:Индекс:Индекс элемента массива. Отсчет начинается с 0. Для получения первого элемента массива используется индекс 0, а для последнего - количество элементов минус 1.
-	out:auto:Элемент
+	out:auto:Элемент:Элемент массива, хранящийся по заданному индексу. Если вы не уверены, что ваш элемент существует по указанному индексу, сделайте предварительную проверку возможности получения элемента по этому индексу.
 		opt:typeget=array;@value.1
 
 
@@ -219,25 +397,1352 @@ def:node:array
 	node:set
 	name:Установить элемент
 	namelib:Установка элемента массива
-	desc:Получает элемент массива
+	desc:Устанавливает элемент массива по указанному индексу.
 	icon:data\\icons\\ArrayPin.png
-	runtimeports:1
-	autocoloricon:0
-	code:(@in.1) set [@in.2,@in.3]
+
 	exec:all
-	in:auto:Массив
+	code:(@in.2)set[@in.3,@in.4]; @out.1
+	in:auto:Массив:Ссылка на массив, в котором будет установлен элемент по указанному индексу.
 		opt:typeget=array;@type
-	in:int:Индекс:Индекс элемента массива. Отсчет начинается с 0. Для получения первого элемента массива используется индекс 0, а для последнего - количество элементов минус 1.
-	in:auto:Элемент
+	in:int:Индекс:Индекс элемента массива, по которому будет записан элемент. Отсчет начинается с 0. Для установки первого элемента массива используется индекс 0, а для последнего - количество элементов минус 1. Если в массиве по указанному индексу уже хранится элемент - он будет перезаписан.
+	in:auto:Элемент:Элемент, который будет записан по указанному индексу. При установке элемента по индексу, который больше размера массива, он будет расширён а все промежуточные элементы будут заполнены null-значениями. Для избежания такой проблемы выполните проверку можно ли поместить элемент по заданному индексу в массив.
 		opt:typeget=array;@value.1
 
+
+def:node:array
+
+    node:count
+    name:Количество элементов
+    namelib:Количество элементов массива
+    desc:Получает количество элементов массива. Если массив пустой, возвращает 0.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:pure
+    code:count(@in.1)
+    in:auto:Массив:Ссылка на массив с элементами.
+        opt:typeget=array;@type
+    out:int:Количество элементов
+
+
+def:node:array
+
+    node:in
+    name:Содержит элемент
+    desc:Проверяет наличие элемента в массиве.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:pure
+    code:(@in.2)in(@in.1)
+    in:auto:Массив:Проверяемый массив
+        opt:typeget=array;@type
+    in:auto:Элемент:Сравниваемый элемент
+        opt:typeget=array;@value.1
+    out:bool:Результат:Истина, если такой элемент присутствует в массиве, иначе ложь.
+
+
+def:node:array
+
+    node:find
+    name:Найти элемент
+    namelib:Поиск элемента
+    desc:Поиск элемента в массиве.
+    icon:data\\icons\\ArrayPin.png
+    exec:pure
+    rendertype:NoHeader
+    autocoloricon:1
+    code:(@in.1)find(@in.2)
+    in:auto:Массив:Ссылка на массив
+        opt:typeget=array;@type
+    in:auto:Элемент:Искомый элемент. Первый элемент хранится по индексу 0, второй - по индексу 1 и т.д.
+        opt:typeget=array;@value.1
+    out:int:Индекс:Возвращает -1 если элемент не найден, иначе возвращает индекс элемента в массиве.
+
+
+def:node:array
+
+    node:resize
+    name:Изменить размер
+    namelib:Изменить размер массива
+    desc:Изменяет размер исходного массива.
+    icon:data\\icons\\ArrayPin.png
+    exec:all
+    rendertype:NoHeader
+    autocoloricon:1
+    code: (@in.2)resize(@in.3); @out.1
+    in:auto:Массив:Ссылка на массив, размер которого будет изменён
+        opt:typeget=array;@type
+    in:int:Размер:Новый размер массива. Если указанный размер меньше текущего, то массив будет уменьшён. Если указанный размер больше текущего, то размер будет увеличен, а по новым индексам будут помещены null-значения.
+
+
+def:node:array
+
+    node:pushBack
+    name:Добавить
+    namelib:Добавить элемент в массив
+    desc:Добавляет элемент в конец массива.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:all
+    code:(@in.2)pushback(@in.3); @out.1
+    in:auto:Массив:Ссылка на массив, в который будет добавлен новый элемент.
+        opt:typeget=array;@type
+    in:auto:Элемент:Добавляемый элемент
+        opt:typeget=array;@value.1
+
+
+def:node:array
+
+    node:pushBackUnique
+    name:Добавить уникальный
+    namelib:Добавить уникальный элемент в массив
+    desc:Добавляет элемент в конец массива если в нем нет такого элемента.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:all
+    code:(@in.2)pushbackunique(@in.3); @out.1
+    in:auto:Массив:Ссылка на массив, в который будет добавлен новый элемент.
+        opt:typeget=array;@type
+    in:auto:Элемент:Добавляемый элемент.
+        opt:typeget=array;@value.1
+
+
+def:node:array
+
+    node:pushFront
+    name:Добавить в начало
+    namelib:Добавить элемент в начало массива
+    desc:Добавляет элемент в начало массива. Новый элемент будет доступен по индексу 0
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:all
+    code:[@in.2,@in.3,@in.4] call pushFront; @out.1
+    in:auto:Массив:Ссылка на массив, в который будет добавлен новый элемент.
+        opt:typeget=array;@type
+    in:auto:Элемент:Добавляемый элемент
+        opt:typeget=array;@value.1
+    in:bool:Уникальный:Если true то добавляется только уникальный элемент (если такого элемента нет в массиве).
+        opt:def=False
+
+
+def:node:array
+
+    node:reverse
+    name:Развернуть
+    namelib:Развернуть массив
+    desc:Инвертирует (отражает) порядок элементов массива. Первый элемент станет последним, последний первым и тд.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:all
+    code:reverse(@in.2); @out.1
+    in:auto:Массив:Ссылка на массив, который будет развёрнут.
+        opt:typeget=array;@type
+
+
+def:node:array
+
+    node:deleteAt
+    name:Удалить по индексу
+    namelib:Удалить элемент из массива по индексу
+    desc:Удаляет элемент из массива по указанному индексу
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:all
+    code:(@in.2) deleteAt (@in.3); @out.1
+    in:auto:Массив:Ссылка на массив
+        opt:typeget=array;@type
+    in:int:Индекс:Индекс удаляемого элемента
+
+
+def:node:array
+
+    node:deleteArrayItem
+    name:Удалить элемент
+    namelib:Удалить элемент из массива
+    desc:Удаляет элемент из массива если он есть в массиве.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:all
+    code:private @genvar.out.2 = [@in.2,@in.3] call arrayDeleteItem; @out.1
+    in:auto:Массив:Ссылка на массив
+        opt:typeget=array;@type
+    in:auto:Элемент:Удаляемый элемент
+    out:bool:Удалён:Возвращает true если элемент был удалён
+
+
+def:node:array
+
+    node:deleteRange
+    name:Удалить диапазон
+    namelib:Удалить диапазон элементов
+    desc:Удаляет диапазон элементов из массива. Например, при для удаления последних трех элементов массива [3,4,5,6,7,8,9] нужно в индексе указать 4, а в количестве указать 3. В итоге получится [3,4,5,6]
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:all
+    code:(@in.2) deleteRange [@in.3,@in.4]; @out.1
+    in:auto:Массив
+        opt:typeget=array;@type
+    in:int:Индекс:Индекс, с которого начинается удаление элементов массива
+    int:int:Количество:Количество элементов для удаления
+
+
+def:node:array
+
+    node:sort
+    name:Сортировать
+    namelib:Сортировать массив
+    desc:Изменяет исходный массив, сортируя его элементы. Допускается сортировка массивов чисел и строк.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:all
+    code:(@in.2) sort (@in.3); @out.1
+    in:auto:Массив:Массив чисел или строк, который будет отсортирован
+        opt:typeget=array;@type:allowtypes=array[string]|array[int]|array[float]
+    in:bool:По возрастанию:Порядок сортировки. При true элементы массива сортируются по возрастанию, а при false - по убыванию.
+        opt:def=true
+
+
+def:node:array
+
+    node:selectMax
+    name:Максимальный элемент
+    namelib:Найти максимальный элемент
+    desc:Находит наибольший элемент массива. Допускаются только массивы чисел.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:pure
+    code:selectMax(@in.1)
+    in:auto:Массив:Ссылка на массив
+        opt:typeget=array;@type:allowtypes=array[int]|array[float]
+    out:auto:Элемент:Наибольший элемент
+        opt:typeget=array;@value.1
+
+
+def:node:array
+
+    node:selectMin
+    name:Минимальный элемент
+    namelib:Найти минимальный элемент
+    desc:Находит наименьший элемент массива. Допускаются только массивы чисел.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:pure
+    code:selectMin(@in.1)
+    in:auto:Массив
+        opt:typeget=array;@type:allowtypes=array[int]|array[float]
+    out:auto:Элемент
+        opt:typeget=array;@value.1
+
+
+def:node:array
+
+    node:append
+    name:Объединить
+    namelib:Объединить массивы
+    desc:Изменяет первый массив, добавляя к нему второй. 
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:all
+    code:(@in.2) append (@in.3); @out.1
+    in:auto:Источник:Первый массив, к котрому будут добавлены все элементы из второго.
+        opt:typeget=array;@type
+    in:auto:Добавляемый:Второй массив, элементы которого будут добавлены в первый массив.
+        opt:typeget=array;@type
+
+
+def:node:string
+
+    node:stringMake
+    path:Строки
+    name:Создать строку
+    desc:Создает строку 
+    icon:data\\icons\\pill_16x.png
+    runtimeports:1
+    exec:pure
+    code:[ @genport.in.1(,) ] joinString ""
+    in:string:Строка 1
+    option:"makeport_in"\: {"type"\: "makeport_in","src"\:"Строка 1","text_format"\:"Строка {value}"}
+    out:string:Новая строка, объединённая строками, переданными входным портам.
+
+
+def:node:string
+
+    node:makeLiteralString
+    name:Создать буквальную строку
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:@in.1
+    in:string:Строка
+    out:string:Строка
+
+
+def:node:string
+
+    node:splitString
+    name:Разбить строку
+    desc:Разбивает строку на массив строк с указанным разделителем.
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:(@in.1) splitString (@in.2)
+    in:string:Строка
+    in:string:Разделитель
+    out:array[string]:Массив строк
+
+
+def:node:string
+
+    node:joinString
+    name:Объединить строки
+    desc:Объединяет массив строк с указанным разделителем.
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:(@in.1) joinString (@in.2)
+    in:array[string]:Массив строк
+    in:string:Разделитель:Строка, которая будет объединять соседние элементы массива строк.
+    out:string:Строка:Результат объединения
+
+
+def:node:string
+
+    node:stringCount
+    name:Количество символов
+    desc:Возвращает количество символов в строке.
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code: [@in.1,@in.2] call stringLength
+    in:string:Строка
+    in:bool:Как количество:При флаге false символы кириллицы (русские буквы) считаются как 2 символа, так как занимают 2 байта. Иными словами, с флагом true считается количество символов в строке, а с false считается количество байт в строке.
+        opt:def=true
+    out:int:Размер:Количество символов в строке, либо количество байт в строке (в зависимости от флага "Как количество")
+
+
+def:node:string
+
+    node:stringToCharArray
+    name:Строка в массив
+    desc:Преобразует строку в массив чисел. Каждый элемент массива является номером символа в [ru.wikipedia.org/wiki/Юникод Юникоде].
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:toArray(@in.1)
+    in:string:Строка
+    out:array[int]:Массив 
+
+
+def:node:string
+
+    node:charArrayToString
+    name:Массив в строку
+    desc:Преобразует массив чисел в строку. Каждое число будет преобразоввано по [symbl.cc/ru/unicode/table/#cyrillic таблице символов Юникода]. Например, русская заглавная буква "А" имеет код 1040 (0x0410 в x16).
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:toString(@in.1)
+    in:array[int]:Массив
+    out:string:Строка
+
+
+def:node:string
+
+    node:selectString
+    name:Выбрать подстроку
+    desc:Выбирает подстроку из строки
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:[@in.1,@in.2,@in.3] call stringSelect
+    in:string:Строка
+    in:int:Старт:Стартовый индекс, с которого начинается подстрока
+    in:int:Длина:Длина подстроки
+    out:string:Подстрока
+
+
+def:node:string
+
+    node:stringToUpper
+    name:Верхний регистр
+    desc:Преобразует строку в верхний регистр
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:toUpper(@in.1)
+    in:string:Строка
+    out:string:Строка
+
+
+def:node:string
+
+    node:stringToLower
+    name:Нижний регистр
+    desc:Преобразует строку в нижний регистр
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:toLower(@in.1)
+    in:string:Строка
+    out:string:Строка
+
+
+def:node:string
+
+    node:stringEndl
+    name:Новая строка
+    namelib:Новая строка (перенос строки)
+    desc:Возвращает символ новой строки.
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:endl
+    out:string:Новая строка
+
+
+def:node:string
+
+    node:stringFormat
+    name:Форматировать строку
+    desc:Форматирует строку. Указанные элементы внутри строки можно получить с помощью %1, %2 и т.д.
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:format([@in.1]+ (@in.2)call{if(_this isequaltype[])then {_this}else{[_this]}})
+    in:string:Строка
+    in:auto:Элемент:Если элемент массив, то каждый из его элементов доступен с помощью %1, %2 и т.д. В ином случае элемент доступен только с помощью %1.
+
+
+def:node:conversion
+
+    node:valueToString
+    name:В строку
+    path:Преобразования
+    desc:Преобразует значение в строку
+    rendertype:NoHeaderText
+    exec:pure
+    code:format["%1",@in.1]
+    in:auto:Значение
+        opt:typeget=ANY;@type
+    out:string:Строка
+
+
+def:node:conversion
+
+    node:stringToInt
+    name:•
+    namelib:Строка -> Целое число
+    desc:Операция преобразования строки в целое число. Дробная часть будет отброшена при наличии.
+    rendertype:NoHeaderText
+    exec:pure
+    code:floor parseNumber (@in.1)
+    in:string:Строка
+        opt:custom=0
+    out:int:Целое число
+
+
+def:node:conversion
+
+    node:stringToFloat
+    name:•
+    namelib:Строка -> Число
+    desc:Операция преобразования строки в дробное число.
+    rendertype:NoHeaderText
+    exec:pure
+    code:parseNumber (@in.1)
+    in:string:Строка
+        opt:custom=0
+    out:float:Число
+
+
+def:node:conversion
+
+    node:floatToInt
+    name:•
+    namelib:Число -> Целое число
+    desc:Преобразование дробного числа в целое число. Дробная часть будет отброшена.
+    rendertype:NoHeaderText
+    exec:pure
+    code:floor (@in.1)
+    in:float:Число
+        opt:custom=0
+    out:int:Целое число
+
+
+def:node:conversion
+
+    node:intToFloat
+    name:•
+    namelib:Целое число -> Число
+    desc:Преобразование целого числа в дробное число.
+    rendertype:NoHeaderText
+    exec:pure
+    code:@in.1
+    in:int:Целое число
+        opt:custom=0
+    out:float:Число
+
+
+def:node:conversion
+
+    node:intToBool
+    name:•
+    namelib:Целое число -> Булево
+    desc:Преобразование целого числа в логическое значение
+    rendertype:NoHeaderText
+    exec:pure
+    code:(@in.1)==0
+    in:int:Целое число
+        opt:custom=0
+    out:bool:Булево
+
+
+def:node:conversion
+
+    node:floatToBool
+    name:•
+    namelib:Число -> Булево
+    desc:Преобразование дробного числа в логическое значение
+    rendertype:NoHeaderText
+    exec:pure
+    code:(@in.1)==0
+    in:float:Число
+        opt:custom=0
+    out:bool:Булево
+
+
+def:node:conversion
+
+    node:boolToInt
+    name:•
+    namelib:Булево -> Целое число
+    desc:Преобразование логического значения в целое число
+    rendertype:NoHeaderText
+    exec:pure
+    code:[0,1]select(@in.1)
+    in:bool:Булево
+        opt:custom=0
+    out:int:Целое число
+
+
+def:node:conversion
+
+    node:boolToFloat
+    name:•
+    namelib:Булево -> Число
+    desc:Преобразование логического значения в дробное число
+    rendertype:NoHeaderText
+    exec:pure
+    code:[0,1]select(@in.1)
+    in:bool:Булево
+        opt:custom=0
+    out:float:Число
+
+
+def:node:conversion
+
+    node:stringToBool
+    name:•
+    namelib:Строка -> Булево
+    desc:Преобразование строки в логическое значение
+    rendertype:NoHeaderText
+    exec:pure
+    code:(trim(@in.1)=="true")
+    in:string:Строка
+        opt:custom=0
+    out:bool:Булево
+
+
+def:node:conversion
+
+    node:handleToInt
+    name:•
+    namelib:Объект -> Целое число
+    desc:Преобразование handle в целое число
+    rendertype:NoHeaderText
+    exec:pure
+    code:@in.1
+    in:handle:Объект
+        opt:custom=0
+    out:int:Целое число
+
+
+def:node:conversion
+
+    node:vector3ToArray
+    name:•
+    namelib:Вектор -> Массив
+    desc:Преобразование трехмерного вектора в массив
+    rendertype:NoHeaderText
+    exec:pure
+    code:@in.1
+    in:vector3:Вектор
+        opt:custom=0
+    out:array[float]:Массив
+
+
+def:node:conversion
+
+    node:vector2ToArray
+    name:•
+    namelib:Вектор -> Массив
+    desc:Преобразование двухмерного вектора в массив
+    rendertype:NoHeaderText
+    exec:pure
+    code:@in.1
+    in:vector2:Вектор
+        opt:custom=0
+    out:array[float]:Массив
+
+
+def:node:conversion
+
+    node:arrayToVector3
+    name:•
+    namelib:Массив -> Вектор
+    desc:Преобразование массива в трехмерный вектор
+    rendertype:NoHeaderText
+    exec:pure
+    code:(@in.1)select[0,3]
+    in:array[float]:Массив
+        opt:custom=0
+    out:vector3:Вектор
+
+
+def:node:conversion
+
+    node:arrayToVector2
+    name:•
+    namelib:Массив -> Вектор
+    desc:Преобразование массива в двухмерный вектор
+    rendertype:NoHeaderText
+    exec:pure
+    code:(@in.1)select[0,2]
+    in:array[float]:Массив
+        opt:custom=0
+    out:vector2:Вектор
+
+
+def:node:conversion
+
+    node:colorToArray
+    name:•
+    namelib:Цвет -> Массив
+    desc:Преобразование цвета в массив
+    rendertype:NoHeaderText
+    exec:pure
+    code:@in.1
+    in:color:Цвет
+        opt:custom=0
+    out:array[float]:Массив
+
+
+def:node:conversion
+
+    node:arrayToColor
+    name:•
+    namelib:Массив -> Цвет
+    desc:Преобразование массива в цвет
+    rendertype:NoHeaderText
+    exec:pure
+    code:(@in.1)select[0,4]
+    in:array[float]:Массив
+        opt:custom=0
+    out:color:Цвет
+
+
+def:node:conversion
+
+    node:voidToValue
+    name:•
+    namelib:Любое -> Значение
+        opt
+    desc:Преобразование любого значения в значение
+    rendertype:NoHeaderText
+    exec:pure
+    code:@in.1
+    in:void:Любое
+        opt:custom=0
+    out:auto:Значение
+        opt:typeget=ANY;@type
+
+
+def:node:conversion
+
+    node:valueToVoid
+    name:•
+    namelib:Значение
+        opt -> Любое
+    desc:Преобразование значения в любое значение
+    rendertype:NoHeaderText
+    exec:pure
+    code:@in.1
+    in:auto:Значение
+        opt:typeget=ANY;@type
+        opt:custom=0
+    out:void:Любое
+
+
+def:node:math
+
+        node:add
+        name:Сложение
+        namelib:+ (Сложение)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Сложение двух чисел
+        code:(@in.1)+(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:auto:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:sub
+        name:Вычитание
+        namelib:- (Вычитание)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Вычитание двух чисел
+        code:(@in.1)-(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:auto:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:mul
+        name:Умножение
+        namelib:* (Умножение)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Умножение двух чисел
+        code:(@in.1)*(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:div
+        name:Деление
+        namelib:/ (Деление)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Деление двух чисел
+        code:(@in.1)/(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:mod
+        name:Остаток от деления
+        namelib:% (Остаток от деления)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Остаток от деления двух чисел
+        code:(@in.1)%(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:int:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:pow
+        name:Степень
+        namelib:^ (Степень)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Возведение числа 1 в степень числа 2
+        code:(@in.1)^(@in.2)
+        in:int:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:int:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+    node:absnum
+    name:Абсолютное значение
+    desc:Абсолютное значение числа. -3 будет 3, -3.5 будет 3.5, 3 будет 3
+    exec:pure
+    rendertype:NoHeaderText
+    code:abs(@in.1)
+    in:auto:Число
+        opt:typeget=value;@type:allowtypes=int|float
+    out:auto:Абсолютное значение
+        opt:typeget=value;@type:allowtypes=int|float
+
+
+def:node:math
+
+        node:lessthannum
+        name:Меньше
+        namelib:< (Меньше)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Сравнение двух чисел
+        code:(@in.1)<(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:bool:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:greaterthannum
+        name:Больше
+        namelib:> (Больше)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Сравнение двух чисел
+        code:(@in.1)>(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:bool:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:lessthanorequalnum
+        name:Меньше или равно
+        namelib:<= (Меньше или равно)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Сравнение двух чисел
+        code:(@in.1)<=(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:bool:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:greaterthanorequalnum
+        name:Больше или равно
+        namelib:>= (Больше или равно)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Сравнение двух чисел
+        code:(@in.1)>=(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:bool:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:equalnum
+        name:Равно
+        namelib:== (Равно)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Сравнение двух чисел
+        code:(@in.1)==(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:bool:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:notequalnum
+        name:Не равно
+        namelib:!= (Не равно)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Сравнение двух чисел
+        code:(@in.1)!=(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:bool:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:min
+        name:Минимум
+        namelib:Min (Минимум)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Выбирает меньшее из двух чисел
+        code:(@in.1)Min(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:auto:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:max
+        name:Максимум
+        namelib:Max (Максимум)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Выбирает большее из двух чисел
+        code:(@in.1)Max(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:auto:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:random
+        name:Случайное число
+        namelib:Rand (Случайное число)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Случайное число в диапазоне
+        code:[@in.1,@in.2]call randomFloat
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:randomInt
+        name:Случайное целое число
+        namelib:RandInt (Случайное целое число)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Случайное целое число в диапазоне
+        code:[@in.1,@in.2]call randomInt
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:int:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:clamp
+        name:Ограничение
+        namelib:Ограничение числа
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Ограничивает входное число диапазоном между нижней и верхней границей
+        code:[@in.1,@in.2,@in.3]call clampNumber
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Нижняя граница
+            opt:typeget=value;@type:allowtypes=int|float:def=0
+        in:auto:Верхняя граница
+            opt:typeget=value;@type:allowtypes=int|float:def=1
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+
+
+def:node:math
+
+        node:floor
+        name:Целое вниз
+        namelib:Округление вниз (Целое вниз)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Округление числа вниз до целого
+        code:floor(@in.1)
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        out:int:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:ceil
+        name:Целое вверх
+        namelib:Округление вверх (Целое вверх)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Округление числа вверх до целого
+        code:ceil(@in.1)
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        out:int:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:round
+        name:Целое
+        namelib:Округление (Целое)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Округление числа до целого
+        code:round(@in.1)
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        out:int:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+    node:piNumber
+    name:Число Пи
+    exec:pure
+    desc:Постоянное число Пи (3.141592653589...)
+    code:PI
+    out:float:Число Пи
+
+
+def:node:math
+
+        node:sqrt
+        name:Квадратный корень
+        namelib:Квадратный корень (Квадратный корень)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Квадратный корень числа
+        code:sqrt(@in.1)
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:sin
+        name:Синус
+        namelib:Sin (Синус)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Синус числа
+        code:sin(@in.1)
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:cos
+        name:Косинус
+        namelib:Cos (Косинус)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Косинус числа
+        code:cos(@in.1)
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:tg
+        name:Тангенс
+        namelib:Tg (Тангенс)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Тангенс числа
+        code:tg(@in.1)
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:rad
+        name:Градусы в радианы
+        namelib:Rad (Градусы в радианы)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Градусы в радианы
+        code:rad(@in.1)
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:deg
+        name:Радианы в градусы
+        namelib:Deg (Радианы в градусы)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Радианы в градусы
+        code:deg(@in.1)
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:acos
+        name:Арккосинус
+        namelib:Acos (Арккосинус)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Арккосинус числа
+        code:acos(@in.1)
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:asin
+        name:Арксинус
+        namelib:Asin (Арксинус)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Арксинус числа
+        code:asin(@in.1)
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:atan
+        name:Арктангенс
+        namelib:Atan (Арктангенс)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Арктангенс числа
+        code:atan(@in.1)
+        in:auto:Число
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math
+
+        node:atan2
+        name:Арктангенс
+        namelib:Atan2 (Арктангенс)
+        path:Математика
+        rendertype:NoHeaderText
+        exec:pure
+        desc:a = atan (L1/L2) -> a = L1 atan2 L2. Подробнее [community.bistudio.com/wiki/atan2 по ссылке]
+        code:(@in.1)atan2(@in.2)
+        in:auto:Число 1
+            opt:typeget=value;@type:allowtypes=int|float
+        in:auto:Число 2
+            opt:typeget=value;@type:allowtypes=int|float
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+    
+
+def:node:math.logical
+
+    node:makeLiteralBool
+    name:Создать буквальное булево
+    path:Математика.Логические
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:@in.1
+    in:bool:Значение
+        opt:dname=0
+    out:bool:Значение
+        opt:dname=0
+
+
+def:node:math.logical
+
+    node:notBool
+    name:НЕ
+    namelib:Отрицание
+    desc:Логическое отрицание. Не ИСТИНА - ЛОЖЬ. НЕ ЛОЖЬ - ИСТИНА
+    rendertype:NoHeaderText
+    exec:pure
+    code:!(@in.1)
+    in:bool:Значение
+    out:bool:Равно
+
+
+def:node:math.logical
+
+    node:boolAnd
+    name:И
+    desc:Логическое "И". Возвращает ЛОЖЬ, если хотя бы одно из значений является ложью. В противоположных случаях возвращает ИСТИНА.\nИСТИНА И ЛОЖЬ = ЛОЖЬ, ЛОЖЬ И ЛОЖЬ = ЛОЖЬ, ИСТИНА И ИСТИНА = ИСТИНА, ЛОЖЬ И ИСТИНА = ЛОЖЬ
+    rendertype:NoHeaderText
+    exec:pure
+    code:(@in.1)&&(@in.2)
+    in:bool:Значение 1
+    in:bool:Значение 2
+    out:bool:Результат
+
+
+def:node:math.logical
+
+    node:boolOr
+    name:ИЛИ
+    desc:Логическое "ИЛИ". Возвращает ИСТИНА, если хотя бы одно из значений является истиной. В противоположных случая возвращает ЛОЖЬ.\nИСТИНА ИЛИ ЛОЖЬ = ИСТИНА, ЛОЖЬ ИЛИ ЛОЖЬ = ЛОЖЬ, ИСТИНА ИЛИ ИСТИНА = ИСТИНА, ЛОЖЬ ИЛИ ИСТИНА = ИСТИНА
+    rendertype:NoHeaderText
+    exec:pure
+    code:(@in.1)||(@in.2)
+    in:bool:Значение 1
+    in:bool:Значение 2
+    out:bool:Результат
+
+
+def:node:math.logical
+
+    node:valuesEqual
+    name:==
+    namelib:Равны
+    desc:Сравнивает два значения. Если они равны - возвращает ИСТИНУ. В иных случая возвращает ЛОЖЬ.
+    rendertype:NoHeaderText
+    exec:pure
+    code:(@in.1)isequalto(@in.2)
+    in:auto:Значение 1
+    in:auto:Значение 2
+    out:bool:Равно
+
+
+def:node:math.logical
+
+    node:valuesNotEqual
+    name:!=
+    namelib:Не равны
+    desc:Сравнивает два значения. Если они не равны - возвращает ИСТИНУ. В инных случая возвращает ЛОЖЬ.
+    rendertype:NoHeaderText
+    exec:pure
+    code:(@in.1)isnotequalto(@in.2)
+    in:auto:Значение 1
+    in:auto:Значение 2
+    out:bool:Равно
+
+
+def:node:math.logical
+
+    node:equalRefs
+    name:Ссылки равны
+    desc:Сравнивает два значения. Если их ссылки равны - возвращает ИСТИНУ. В иных случая возвращает ЛОЖЬ.
+    rendertype:NoHeaderText
+    exec:pure
+    code:(@in.1)isEqualRef(@in.2)
+    in:auto:Значение 1
+    in:auto:Значение 2
+    out:bool:Результат
+
+
+def:enum:enums
+node:SpawnPointType
+
+eval:Спавнпоинт:0:Точка спавна является единственной с уникальным именем.
+eval:Случайный спавнпоинт:1:Точка спавна является множественной. Случайные спавнпоинты имеют общие имена и при выборе точки спавна для случайных выбирается одна из точек с одинаковым именем.
 $ENDREGION:FUNCTIONS
 $REGION:CLASSMEM
 def:c:ScriptedGamemode
 
 		name:Пользовательский режим
 		desc:Базовый игровой режим от котрого создаются пользовательские режимы
-		path:Игровая логика.Режим
+		path:Игровая логика.Режимы
 	
 def:f:ScriptedGamemode.name_0
 
@@ -281,28 +1786,32 @@ def:m:ScriptedGamemode.getAntagRoleFull_0
 		name:Получить тип полного антагониста
 		namelib:Обработчик полных антагонистов
 		desc:Возвращает строковое название класса полного (уникального) антагониста, которое переопределит роль зашедшего игрока. Срабатывает при старте раунда для игроков, которые выбрали полных или любых антагонистов и чьи роли могут стать полными антагонистами.\n
-		code:func(@thisName) { @thisParams; @genvar.out.4 = _countInGame; @genvar.out.5 = _countProbFullAntags; @out.1 };
+		code:func(@thisName) { @thisParams;@genvar.out.4.internal(_countInGame)@genvar.out.5.internal(_countProbFullAntags) @out.1 };
 		return:string:Название класса полного антагониста. Если возвращается пустая строка - значит игрок не станет антагонистом и его роль не переопределится.
 		type:event
 		out:ServerClient^:Клиент:Объект проверяемого клиента, зашедший в игру на старте раунда.
 			opt:mul=1
 		out:int:Номер клиента:Порядковый номер проверяемого клиента. Отсчет ведется с 1. Для первого клиента это значение будет 1, для второго - 2 и т.д.
 		out:int:Всего игроков:Отражает количество игроков, зашедших в игру на старте раунда. Данное число удобно, когда нам нужно определить антагониста от процентного соотношения всех игроков.
+			opt:gen_param=0
 		out:int:Полных антагонистов:Отражает количество игроков, которые выбрали полных антагонистов. Если никто не выбрал полных антагонистов - на полных антагонистов будут проверены все, исключая игроков, чьи роли не могут быть полными антагонистами.
+			opt:gen_param=0
 	
 def:m:ScriptedGamemode.handleAntagRoleHidden_0
 
 		name:Получить тип скрытого антагониста
 		namelib:Обработчик скрытых антагонистов
 		desc:Возвращает строковое название класса скрытого антагониста, которое переопределит роль зашедшего игрока. Срабатывает при старте раунда, когда все игроки распределены по ролям и загрузились в игру.
-		code:func(@thisName) { @thisParams; @genvar.out.4 = _countInGame; @genvar.out.5 = _countProbHiddenAntags; @out.1};
+		code:func(@thisName) { @thisParams;@genvar.out.4.internal(_countInGame)@genvar.out.5.internal(_countProbHiddenAntags); @out.1};
 		return:string:Название класса скрытого антагониста. Если возвращается пустая строка - значит игрок не станет скрытым антагонистом и его роль не переопределится.
 		type:event
 		out:ServerClient^:Клиент:Объект проверяемого клиента, зашедший в игру на старте раунда.
 			opt:mul=1
 		out:int:Номер клиента:Порядковый номер проверяемого клиента. Отсчет ведется с 1. Для первого клиента это значение будет 1, для второго - 2 и т.д.
 		out:int:Всего игроков:Отражает количество игроков, зашедших в игру на старте раунда. Данное число удобно, когда нам нужно вычислить антагониста от процентного соотношения всех игроков.
+			opt:gen_param=0
 		out:int:Скрытых антагонистов:Отражает количество игроков, которые выбрали скрытых антагонистов. Если никто не выбрал скрытых антагонистов - на скрытых антагонистов будут проверены все, исключая игроков, чьи роли не могут быть скрытыми антагонистами.
+			opt:gen_param=0
 	
 def:f:ScriptedGamemode.finishResult_0
 
@@ -410,20 +1919,218 @@ def:m:ScriptedGamemode.isPlayableGamemode_0
 		return:bool:Истина, если режим игровый
 		defval:true
 	
+def:m:ScriptedGamemode.getCandidatesCount_0
+
+		name:Кандидаты на роль
+		namelib:Получить количество кандидатов на роль
+		desc:Возвращает количество клиентов, которые выбрали указанную роль. Функция предназначена для подсчета игроков, занявших указанную роль до начала раунда.
+		type:method
+		lockoverride:1
+		in:classname:Роль:Название роли
+		return:int:Количество кандидатов, занявших эту роль.
+	
+def:c:ReNode_AbstractEnum
+
+		name:Абстрактное перечисление
+		desc:Абстрактный тип для работы перечислений
+		path:Системные объекты
+	
 def:c:ScriptedRole
 
 		name:Пользовательская роль
 		desc:Базовая игровая роль, от которой создаются пользовательские роли.
 		path:Игровая логика.Роли
 	
-def:f:ScriptedRole.__allowedToGamemodes_0
+def:m:ScriptedRole.__allowedToGamemodes_0
 
 		name:Доступна в режимах
 		namelib:Доступ роли на режимы
 		desc:Отвечает за имя загружаемой в режим карты. Если это пустая строка, то карта не будет загружена
-		prop:none
+		type:const
+		return:array[classname]:Список названий режимов, в которых доступна данная роль
+	
+def:f:ScriptedRole.name_0
+
+		name:Имя роли
+		desc:Отображаемое имя роли.
+		prop:get
 		classprop:1
-		return:array[string]:Список режимов, в которых доступна данная роль
+		return:string:Имя роли
+	
+def:f:ScriptedRole.desc_0
+
+		name:Описание роли
+		desc:Описание роли для лобби.
+		prop:get
+		classprop:1
+		return:string:Описание роли
+	
+def:f:ScriptedRole.descInGame_0
+
+		name:Игровое описание роли
+		namelib:Описание роли в игре
+		desc:Описание роли для игры. Если не определено то для игру будет взято описание из "Описание роли".
+		prop:get
+		classprop:1
+		return:string:Описание роли для игры
+	
+def:m:ScriptedRole.isMainRole_0
+
+		name:Ключевая роль
+		desc:Внутрення информация о ключевой роли. Ключевые роли не могут быть полными или скрытыми антагонистами.
+		type:const
+		return:bool:Является ли эта роль ключевой.
+		defval:false
+	
+def:f:ScriptedRole.returnInLobbyAfterDead_0
+
+		name:В лобби после смерти
+		namelib:Возврат в лобби после смерти
+		desc:Опция отвечает за автоматический возврат в лобби после смерти персонажа. Если она включена - возвращает игрока в лобби сразу после смерти, иначе позволяет покинуть тело и в роли призрака наблюдать за остальными.
+		prop:get
+		return:bool:Нужно ли вернуть владельца роли в лобби после смерти
+		defval:true
+	
+def:m:ScriptedRole.canStoreNameAndFaceForValidate_0
+
+		name:Требование смены лица
+		desc:Требование смены лица при смерти. Если включено (ИСТИНА), то после смерти при попытке зайти за новую роль с предыдущим лицом и именем игрока не пустит в игру. Чащще всего для ролей монстров включено, а для обычных людей выключено.
+		type:const
+		return:bool:Требовать смену лица и имени при заходе за новую роль после смерти за предыдущего персонажа.
+		defval:true
+	
+def:f:ScriptedRole.count_0
+
+		name:Количество заходов
+		namelib:Количество заходов за роль
+		desc:Это число отвечает за количество возможных заходов за роль. Когда каждый игрок заходит за эту роль, то количество уменьшается на 1.
+		prop:get
+		return:int:Количество заходов
+		defval:1
+	
+def:m:ScriptedRole.canVisibleAfterStart_0
+
+		name:Видимость роли после старта
+		desc:Будет ли видна эта роль в списке ролей после старта. С помощью входного параметра "Клиент" можно настроить ограничения для конкретных клиентов.
+		type:event
+		out:ServerClient^:Клиент:Объект клиента, который запрашивает видимость роли.
+		return:bool:Видимость роли после старта
+	
+def:m:ScriptedRole.canTakeInLobby_0
+
+		name:Видимость роли в лобби
+		desc:Будет ли видна эта роль в списке ролей до старта раунда из лобби. С помощью входного параметра "Клиент" можно настроить ограничения для конкретных клиентов.
+		type:event
+		out:ServerClient^:Клиент:Объект клиента, который запрашивает видимость роли.
+		out:bool:Вывод ошибок:Этот параметр принимает значение ИСТИНА, когда запрос осуществляется с возможностью вывода ошибки. Например, если настроить ограничение на пол для роли, то при включенном флаге можно отправить клиенту сообщение о том, что пол его персонажа не подходит.
+		return:bool:Видимость роли в лобби
+	
+def:m:ScriptedRole.needDiscordRoles_0
+
+		name:Нужные роли дискорда
+		desc:Список названий ролей из [discord.relicta.ru дискорда], которые необходимы клиенту для возможности взятия этой роли. Если список пуст - роль могут взять все. Если указано несколько ролей, то клиенту требуется хотя бы одна роль из этого списка.
+		type:const
+		return:array[string]:Список ролей дискорда
+		defval=[]
+	
+def:m:ScriptedRole.canBeFullAntag_0
+
+		name:Полный антагонист
+		namelib:Может быть полным антагонистом
+		desc:Отвечает за то, может ли клиент, взявший эту роль быть полным антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль. Полным антагонистам выполняется замена роли, а выбор этих ролей происходит в логике игрового режима.
+		type:event
+		out:ServerClient^:Клиент:Объект клиента, который проверяется на полного антагониста
+		return:bool:Полный антагонист
+	
+def:m:ScriptedRole.canBeHiddenAntag_0
+
+		name:Скрытый антагонист
+		namelib:Может быть скрытым антагонистом
+		desc:Отвечает за то, может ли клиент, взявший эту роль быть скрытым антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль. Скрытые антагонисты получают свои особые задачи без смены роли, в отличии от полных антагонистов. Выбор таких ролей происходит в логике игрового режима.
+		type:event
+		out:ServerClient^:Клиент:Объект клиента, который проверяется на скрытого антагониста
+		return:bool:Скрытый антагонист
+	
+def:m:ScriptedRole.getBasicMobs_0
+
+		name:Базовые владельцы роли
+		desc:Возвращает список сущностей мобов, игроки которых зашли за эту роль.
+		type:method
+		exec:pure
+		lockoverride:1
+		return:array[BasicMob^]:Список мобов, зашедших за эту роль
+	
+def:m:ScriptedRole.getMobs_0
+
+		name:Владельцы роли
+		desc:Возвращает список сущностей мобов, которые владеют этой ролью в данный момент. От базовых владельцев этот список может отличаться, так как некоторые персонажи во время игры могут быть назначены на другие роли.
+		type:method
+		exec:pure
+		lockoverride:1
+		return:array[BasicMob^]:Список мобов, владеющих этой ролью
+	
+def:m:ScriptedRole.spawnLocation_0
+
+		name:Позиция появления
+		namelib:Точка появления (спавна) роли
+		desc:Позиция появления роли. Может быть точкой спавна или рандомной точкой спавна.
+		type:event
+		out:StructSpawnLocation:Точка спавна:Рандомная или конечная точка спавна, на которой появится персонаж при заходе за эту роль.
+	
+def:m:ScriptedRole.getEquipment_0
+
+		name:Выдача снаряжения
+		namelib:Событие выдачи снаряжения
+		desc:Событие, которое вызывается единожды при заходе клиента за роль. Используйте его для реализации выдачи снаряжения персонажу.
+		type:event
+		out:BasicMob^:Моб:Объект моба, которому будет выдано снаряжение
+
+	
+def:m:ScriptedRole.onAssigned_impl_0
+
+		name:При назначении
+		namelib:Событие при назначении за роль
+		desc:Событие, которое вызывается единожды при заходе клиента за роль. Оно вызывается когда клиент уже подключился к сущности и получил экипировку (если таковая создавалась).
+		type:event
+		out:BasicMob^:Моб:Объект моба, для которого вызывалось данное событие.
+		out:ServerClient^:Клиент:Объект клиента (владельца моба), для которого вызвалось данное событие.
+		out:bool:Позднее назначение:Этот порт отвечает за позднее назначение (после старта раунда). Когда возвращает ИСТИНУ - клиент зашёл на старте раунда, а когда ЛОЖЬ - уже после старта раунда.
+	
+def:m:ScriptedRole.onDead_0
+
+		name:При смерти
+		namelib:Событие при смерти на роли
+		desc:Вызывается когда персонаж умирает, будучи назначенным на эту роль. Клиент мог зайти за другую роль и быть назначенным на другую роль, для которой и вызовется данное событие.
+		type:event
+		out:BasicMob^:Моб:Объект моба, для которого вызывалось данное событие.
+		out:ServerClient^:Клиент:Объект клиента (владельца моба), для которого вызвалось данное событие. Может быть null ссылкой, если моб умер, когда за него не играл клиент.
+	
+def:m:ScriptedRole.onDeadBasic_0
+
+		name:При смерти за роль
+		namelib:Событие при смерти за роль
+		desc:Вызывается когда персонаж заходил за эту роль и умер. Событие вызывается для той роли, за которую клиент заходил из лобби или за роль полного антагониста, если он его получил.
+		type:event
+		out:BasicMob^:Моб:Объект моба, для которого вызывалось данное событие.
+		out:ServerClient^:Клиент:Объект клиента (владельца моба), для которого вызвалось данное событие. Может быть null ссылкой, если моб умер, когда за него не играл клиент.
+	
+def:m:ScriptedRole.onEndgame_0
+
+		name:При конце раунда
+		namelib:Событие при конце раунда на роли
+		desc:Вызывается для персонажа, который имеет эту роль в данный момент в момент конца раунда. Событие вызывается только для мобов, за которых играют клиенты в момент завершения раунда.
+		type:event
+		out:BasicMob^:Моб:Объект моба, для которого вызывалось данное событие.
+		out:ServerClient^:Клиент:Объект клиента (владельца моба), для которого вызвалось данное событие.
+	
+def:m:ScriptedRole.onEndgameBasic_0
+
+		name:При конце раунда за роль
+		namelib:Событие при конце раунда за роль
+		desc:Вызывается когда персонаж заходил за эту роль и выжил до конца раунда на ней. Событие вызывается для той роли, за которую клиент заходил из лобби или за роль полного антагониста, если он его получил.
+		type:event
+		out:BasicMob^:Моб:Объект моба, для которого вызывалось данное событие.
+		out:ServerClient^:Клиент:Объект клиента (владельца моба), для которого вызвалось данное событие.
 	
 def:c:GMBase
 
@@ -471,6 +2178,15 @@ $REGION:CLASSMETA
 ,"IGameEvent": {
     "baseClass" : "object",
     "defined" : {"file":"src\\host\\GameModes\\BasicDefines.sqf","line":9},
+   "fields": { "defined": {
+}   },
+   "methods": { "defined": {
+
+}   }
+}
+,"ReNode_AbstractEnum": {
+    "baseClass" : "object",
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":337},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -695,7 +2411,7 @@ $REGION:CLASSMETA
 }
 ,"CleanerCloth": {
     "baseClass" : "NomadCloth16",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":374},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":381},
    "fields": { "defined": {
 "name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -902,7 +2618,7 @@ $REGION:CLASSMETA
 }
 ,"VeteranCloth": {
     "baseClass" : "ArmyCloth2",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":395},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":402},
    "fields": { "defined": {
 "name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -911,7 +2627,7 @@ $REGION:CLASSMETA
 }
 ,"StreakCloth": {
     "baseClass" : "ArmyCloth4",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":399},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":406},
    "fields": { "defined": {
 "name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1235,7 +2951,7 @@ $REGION:CLASSMETA
 }
 ,"Crown1": {
     "baseClass" : "HatProxy",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":525},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":538},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1244,7 +2960,7 @@ $REGION:CLASSMETA
 }
 ,"Crown2": {
     "baseClass" : "HatProxy",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":530},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":543},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1253,7 +2969,7 @@ $REGION:CLASSMETA
 }
 ,"HatGrayOldUshanka": {
     "baseClass" : "HatOldUshanka",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":486},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":498},
    "fields": { "defined": {
 "armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1262,9 +2978,9 @@ $REGION:CLASSMETA
 }
 ,"WorkerCoolCap": {
     "baseClass" : "WorkerCap",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":495},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":507},
    "fields": { "defined": {
-"armaClass":{"return": "string"}}   },
+"armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
 
 }   }
@@ -1280,7 +2996,7 @@ $REGION:CLASSMETA
 }
 ,"HoodBrown": {
     "baseClass" : "HoodClirik",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":516},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":529},
    "fields": { "defined": {
 "armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1289,7 +3005,7 @@ $REGION:CLASSMETA
 }
 ,"HatProxy": {
     "baseClass" : "HatUshanka",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":455},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":462},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -1298,7 +3014,7 @@ $REGION:CLASSMETA
 }
 ,"HatBeret": {
     "baseClass" : "HatUshanka",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":467},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":474},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1307,7 +3023,7 @@ $REGION:CLASSMETA
 }
 ,"HatArmyCap": {
     "baseClass" : "HatUshanka",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":472},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":479},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1316,7 +3032,16 @@ $REGION:CLASSMETA
 }
 ,"HatShemag": {
     "baseClass" : "HatUshanka",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":477},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":484},
+   "fields": { "defined": {
+"armaClass":{"return": "string"},"name":{"return": "string"}}   },
+   "methods": { "defined": {
+
+}   }
+}
+,"HatBandana": {
+    "baseClass" : "HatUshanka",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":489},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1325,7 +3050,7 @@ $REGION:CLASSMETA
 }
 ,"HatOldUshanka": {
     "baseClass" : "HatUshanka",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":482},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":494},
    "fields": { "defined": {
 "armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1334,7 +3059,7 @@ $REGION:CLASSMETA
 }
 ,"WorkerCap": {
     "baseClass" : "HatUshanka",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":490},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":502},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1343,7 +3068,7 @@ $REGION:CLASSMETA
 }
 ,"CookerCap": {
     "baseClass" : "HatUshanka",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":500},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":513},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1352,7 +3077,7 @@ $REGION:CLASSMETA
 }
 ,"HoodAbbat": {
     "baseClass" : "HatUshanka",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":506},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":519},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1361,7 +3086,7 @@ $REGION:CLASSMETA
 }
 ,"HoodClirik": {
     "baseClass" : "HatUshanka",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":511},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":524},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1370,7 +3095,7 @@ $REGION:CLASSMETA
 }
 ,"HoodChemicalProt": {
     "baseClass" : "HatUshanka",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":520},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":533},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1379,7 +3104,7 @@ $REGION:CLASSMETA
 }
 ,"CombatHat": {
     "baseClass" : "HatUshanka",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":536},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":549},
    "fields": { "defined": {
 "name":{"return": "string"},"weight":{"return": "float"},"bodyPartsCovered":{"return": "int"},"dr":{"return": "int"},"coverage":{"return": "int"},"armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1397,7 +3122,7 @@ $REGION:CLASSMETA
 }
 ,"BlackBandannaMask": {
     "baseClass" : "BrownBandannaMask",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":592},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":605},
    "fields": { "defined": {
 "armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1406,7 +3131,7 @@ $REGION:CLASSMETA
 }
 ,"FaceCoverMask": {
     "baseClass" : "ItemMask",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":572},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":585},
    "fields": { "defined": {
 "name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1415,7 +3140,7 @@ $REGION:CLASSMETA
 }
 ,"BalaclavaMask": {
     "baseClass" : "ItemMask",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":576},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":589},
    "fields": { "defined": {
 "name":{"return": "string"},"armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1424,7 +3149,7 @@ $REGION:CLASSMETA
 }
 ,"BalaclavaMask2": {
     "baseClass" : "ItemMask",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":582},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":595},
    "fields": { "defined": {
 "armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1433,7 +3158,7 @@ $REGION:CLASSMETA
 }
 ,"BrownBandannaMask": {
     "baseClass" : "ItemMask",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":587},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":600},
    "fields": { "defined": {
 "name":{"return": "string"},"armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1442,7 +3167,7 @@ $REGION:CLASSMETA
 }
 ,"Gasmask": {
     "baseClass" : "ItemMask",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":616},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":629},
    "fields": { "defined": {
 "name":{"return": "string"},"armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1451,7 +3176,7 @@ $REGION:CLASSMETA
 }
 ,"RespiratorMask": {
     "baseClass" : "ItemMask",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":621},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":634},
    "fields": { "defined": {
 "name":{"return": "string"},"armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1649,7 +3374,7 @@ $REGION:CLASSMETA
 }
 ,"CliricCloth": {
     "baseClass" : "Cloth",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":343},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":350},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1701,7 +3426,7 @@ $REGION:CLASSMETA
 
 }   }
 }
-,"AbbatCloth": {
+,"GreenWorkerCloth": {
     "baseClass" : "Cloth",
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":339},
    "fields": { "defined": {
@@ -1710,9 +3435,18 @@ $REGION:CLASSMETA
 
 }   }
 }
+,"AbbatCloth": {
+    "baseClass" : "Cloth",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":346},
+   "fields": { "defined": {
+"armaClass":{"return": "string"},"name":{"return": "string"}}   },
+   "methods": { "defined": {
+
+}   }
+}
 ,"BrigadirCloth": {
     "baseClass" : "Cloth",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":349},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":356},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1721,7 +3455,7 @@ $REGION:CLASSMETA
 }
 ,"GriblanCloth": {
     "baseClass" : "Cloth",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":354},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":361},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1730,7 +3464,7 @@ $REGION:CLASSMETA
 }
 ,"BarmenCloth": {
     "baseClass" : "Cloth",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":359},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":366},
    "fields": { "defined": {
 "name":{"return": "string"},"armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1739,7 +3473,7 @@ $REGION:CLASSMETA
 }
 ,"DoctorCloth": {
     "baseClass" : "Cloth",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":364},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":371},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1748,7 +3482,7 @@ $REGION:CLASSMETA
 }
 ,"WatchmanCloth": {
     "baseClass" : "Cloth",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":369},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":376},
    "fields": { "defined": {
 "name":{"return": "string"},"armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1757,7 +3491,7 @@ $REGION:CLASSMETA
 }
 ,"MerchantCloth": {
     "baseClass" : "Cloth",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":380},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":387},
    "fields": { "defined": {
 "name":{"return": "string"},"armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1766,7 +3500,7 @@ $REGION:CLASSMETA
 }
 ,"GromilaCloth": {
     "baseClass" : "Cloth",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":385},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":392},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1775,7 +3509,7 @@ $REGION:CLASSMETA
 }
 ,"CaretakerCloth": {
     "baseClass" : "Cloth",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":390},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":397},
    "fields": { "defined": {
 "name":{"return": "string"},"armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1784,7 +3518,7 @@ $REGION:CLASSMETA
 }
 ,"WoolCoat": {
     "baseClass" : "Cloth",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":407},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":414},
    "fields": { "defined": {
 "canUseContainer":{"return": "bool"},"allowedSlots":{"return": "null_array"},"armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1793,7 +3527,7 @@ $REGION:CLASSMETA
 }
 ,"HatUshanka": {
     "baseClass" : "Cloth",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":433},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":440},
    "fields": { "defined": {
 "canUseContainer":{"return": "bool"},"allowedSlots":{"return": "null_array"},"armaClass":{"return": "string"},"weight":{"return": "float"},"maxSize":{"return": "int"},"countSlots":{"return": "int"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -1802,7 +3536,7 @@ $REGION:CLASSMETA
 }
 ,"ItemMask": {
     "baseClass" : "Cloth",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":546},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Clothes\\cloth.sqf","line":559},
    "fields": { "defined": {
 "canUseContainer":{"return": "bool"},"allowedSlots":{"return": "null_array"},"armaClass":{"return": "string"},"weight":{"return": "float"},"maxSize":{"return": "int"},"countSlots":{"return": "int"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -3955,14 +5689,14 @@ $REGION:CLASSMETA
     "baseClass" : "IFoodItem",
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Food\\Foods\\Food.sqf","line":385},
    "fields": { "defined": {
-"name":{"return": "string"},"reagents":{"return": "null"}}   },
+"name":{"return": "string"},"model":{"return": "string"},"reagents":{"return": "null"}}   },
    "methods": { "defined": {
 
 }   }
 }
 ,"Pie": {
     "baseClass" : "IFoodItem",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Food\\Foods\\Food.sqf","line":390},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Food\\Foods\\Food.sqf","line":391},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"size":{"return": "int"},"weight":{"return": "float"},"reagents":{"return": "null"},"__isLockedByPiecing":{"return": "bool"}}   },
    "methods": { "defined": {
@@ -3971,7 +5705,7 @@ $REGION:CLASSMETA
 }
 ,"PiePiece": {
     "baseClass" : "IFoodItem",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Food\\Foods\\Food.sqf","line":439},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Food\\Foods\\Food.sqf","line":440},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"size":{"return": "int"},"weight":{"return": "float"},"reagents":{"return": "null"}}   },
    "methods": { "defined": {
@@ -3980,7 +5714,7 @@ $REGION:CLASSMETA
 }
 ,"Poo": {
     "baseClass" : "IFoodItem",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Food\\Foods\\Food.sqf","line":450},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Food\\Foods\\Food.sqf","line":451},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"size":{"return": "int"},"weight":{"return": "float"},"reagents":{"return": "null"}}   },
    "methods": { "defined": {
@@ -9810,6 +11544,15 @@ $REGION:CLASSMETA
 "isVoteSystemEnabled":{"return": "<undefined>"},"getProbability":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"canPlayEvents":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"getUnsleepGameInfo":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"onLightZoneOff":{"return": "<undefined>"},"onAcceptAllRoles":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"creppyAreaCheck":{"return": "<undefined>"},"lightDisableCheck":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"onFinish":{"return": "<undefined>"},"addMobInSide":{"return": "<undefined>"},"removeMobInSide":{"return": "<undefined>"},"generateBasePos":{"return": "<undefined>"},"isMobInCreepy":{"return": "<undefined>"},"isMobInBase":{"return": "<undefined>"},"isItemInBase":{"return": "<undefined>"},"getActiveMobsInSide":{"return": "<undefined>"},"generateTasks":{"return": "<undefined>"},"getOptimalSquad":{"return": "<undefined>"}
 }   }
 }
+,"GMTruba_QuietShift": {
+    "baseClass" : "GMBase",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_QuietShift.sqf","line":9},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"deadThreshold":{"return": "int"},"leaderTruba":{"return": "object"},"leaderScars":{"return": "object"},"duration":{"return": "int"},"canAddAspect":{"return": "bool"}}   },
+   "methods": { "defined": {
+"getMapName":{"return": "<undefined>"},"getProbability":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"isVotable":{"return": "<undefined>"},"canPlayEvents":{"return": "<undefined>"},"getMinPlayEventTime":{"return": "<undefined>"},"getMaxPlayEventTime":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"getUnsleepGameInfo":{"return": "<undefined>"},"getUnsleepMessagesCount":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"onFinish":{"return": "<undefined>"},"getMinFullAntags":{"return": "<undefined>"},"getMinHiddenAntags":{"return": "<undefined>"},"getAntagRoleFull":{"return": "<undefined>"},"handleAntagRoleHidden":{"return": "<undefined>"}
+}   }
+}
 ,"ItemSaveTask": {
     "baseClass" : "ItemGetTask",
     "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":381},
@@ -10755,6 +12498,15 @@ $REGION:CLASSMETA
 "getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"}
 }   }
 }
+,"REaterTruba": {
+    "baseClass" : "RPreyEater",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":582},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"}}   },
+   "methods": { "defined": {
+"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"}
+}   }
+}
 ,"RTEmbNomadHunter": {
     "baseClass" : "RTEmbNomadBase",
     "defined" : {"file":"src\\host\\GameModes\\Dirtpit\\StationRoles.sqf","line":1236},
@@ -11142,13 +12894,202 @@ $REGION:CLASSMETA
 "canVisibleAfterStart":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"}
 }   }
 }
-,"ScriptedRole": {
-    "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":306},
+,"RChief": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":31},
    "fields": { "defined": {
-"__allowedToGamemodes":{"return": "null_array"}}   },
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"isMainRole":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RChiefSon": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":77},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"isMainRole":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RStorekeeper": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":104},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"isMainRole":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RKitchener": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":134},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RKitchenerHelper": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":159},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RCaveDoctor": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":184},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RGuard": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":211},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RFarmerTruba": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":239},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RGuardHelper": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":264},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RCaveDoctorHelper": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":288},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RLighter": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":317},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RCleanerTruba": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":339},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RWorkerTruba": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":359},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RScoutTruba": {
+    "baseClass" : "GMTruba_SettelmentsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":393},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"}
+}   }
+}
+,"RLordTruba": {
+    "baseClass" : "GMTruba_ScarsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":435},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"isMainRole":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RRoistererTruba": {
+    "baseClass" : "GMTruba_ScarsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":479},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RFistTruba": {
+    "baseClass" : "GMTruba_ScarsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":507},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RBatonTruba": {
+    "baseClass" : "GMTruba_ScarsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":528},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"RLazyTruba": {
+    "baseClass" : "GMTruba_ScarsRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":551},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+}   }
+}
+,"GMTruba_SettelmentsRole": {
+    "baseClass" : "GMTruba_BasicRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":23},
+   "fields": { "defined": {
+}   },
    "methods": { "defined": {
 
+}   }
+}
+,"GMTruba_ScarsRole": {
+    "baseClass" : "GMTruba_BasicRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":26},
+   "fields": { "defined": {
+}   },
+   "methods": { "defined": {
+
+}   }
+}
+,"ScriptedRole": {
+    "baseClass" : "BasicRole",
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":355},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"},"descInGame":{"return": "null"},"classMan":{"return": "string"},"classWoman":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"count":{"return": "int"}}   },
+   "methods": { "defined": {
+"__allowedToGamemodes":{"return": "<undefined>"},"isMainRole":{"return": "<undefined>"},"canStoreNameAndFaceForValidate":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"roleAccess":{"return": "<undefined>"},"canBeFullAntag":{"return": "<undefined>"},"canBeHiddenAntag":{"return": "<undefined>"},"getBasicMobs":{"return": "<undefined>"},"getMobs":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"useRandomDirOnSpawn":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"onAssigned_impl":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"onDead":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"},"onEndgame":{"return": "<undefined>"},"onEndgameBasic":{"return": "<undefined>"}
 }   }
 }
 ,"GhostRole": {
@@ -11365,6 +13306,15 @@ $REGION:CLASSMETA
 "name":{"return": "string"},"classMan":{"return": "string"},"count":{"return": "int"},"deadTimeout":{"return": "int"}}   },
    "methods": { "defined": {
 "getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"createDocsInCloth":{"return": "<undefined>"}
+}   }
+}
+,"GMTruba_BasicRole": {
+    "baseClass" : "BasicRole",
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":11},
+   "fields": { "defined": {
+}   },
+   "methods": { "defined": {
+"onDeadBasic":{"return": "<undefined>"}
 }   }
 }
 ,"GMDet_Evidence_Loskut": {
