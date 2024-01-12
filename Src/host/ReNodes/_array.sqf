@@ -85,6 +85,21 @@ node_system
 		opt:typeget=array;@value.1
 " node_system
 
+"
+    node:copy
+    name:Скопировать
+    namelib:Скопировать массив
+    desc:Данный узел делает полную (глубокую) копию переданного массива. После копирования при изменении копии не будет изменять исходный массив из которого выполнена копия.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    exec:pure
+    code:+(@in.1)
+    in:auto:Массив:Ссылка на массив, который будет скопирован.
+        opt:typeget=array;@type
+    out:auto:Массив:Скопированный массив. Любые изменения в этой копии не будут влиять на исходный массив.
+        opt:typeget=array;@value.1
+" node_system
+
 //count
 "
     node:count
