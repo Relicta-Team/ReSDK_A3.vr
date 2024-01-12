@@ -12,3 +12,26 @@ node_system_group("enums")
 	]
 ]
 node_enum
+
+
+//enum helper
+nodeModule_register("enumhelper")
+nodeModule_setPath("Перечисления.Преобразования")
+nodeModule_setRenderType("NoHeaderText")
+
+[
+	"enumGetNames","Имена перечислений:Получить имена перечислений",
+	"values enum_vToK_@gettype.in.1.clear_type()","auto:Перечисление",
+	"list[string]:Массив имён:Массив имён перечисления",
+	"Этот узел позволяет получать список имен, хранящихся в перечислении."
+] reg_unary
+
+[
+	"enumGetValues","Значения перечислений:Получить значения перечислений",
+	"(+enum_values_@gettype.in.1.clear_type())",
+	"auto:Перечисление"
+		opt "typeget=value;@type:allowtypes=*enum",
+	"auto:Массив значений:Массив значений перечисления"
+		opt "typeget=array;@type",
+	"Этот узел позволяет получать список значений перечислений, хранящихся в перечислении."
+] reg_unary

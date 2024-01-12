@@ -29,7 +29,7 @@ if ((count __prvd_path_splited)-_lvl > 0) then { \
 #define reg_unary call _reg_unary_function;
 #define reg_nular call _reg_nular_function;
 
-#define opt + endl + "    opt:"
+#define opt + endl + "    opt:"+
 
 private __nodemodule_common_path__ = "";
 private __nodemodule_common_icon__ = "";

@@ -138,13 +138,32 @@ nodegen_addEnumerator = {
         _iter = _v + 1;
     } foreach _members;
     missionNamespace setvariable ['enum_vToK_'+_nodename,_map];
+    missionNamespace setvariable ["enum_values_"+_nodename,(keys _map) apply {parseNumber _x}];
     
     private _ctx = [];
     _ctx pushBack ('node:'+_nodename);
+    _ctx pushBack ("path:Перечисления");
     _ctx pushBack (_pdata);
     {_ctx pushBack ("eval:"+_x)} foreach _members;
-    ctxdata = _ctx;
     [_ctx joinstring endl,"enum"] call nodegen_commonSysAdd;
+};
+
+nodegen_addStruct = {
+    params ["_nodename","_members","_pdata"];
+
+    assert(equalTypes(_members,[]));
+
+    private _map = createHashMap;
+    {
+        (_x splitString ":") params ["_ptype","_pname","_pval"];
+    } foreach _members;
+
+    private _ctx = [];
+    _ctx pushBack ('node:'+_nodename);
+    _ctx pushBack ("path:Структуры");
+    _ctx pushBack (_pdata);
+    {_ctx pushback ("eval:"+_x)} foreach _members;
+    [_ctx joinstring endl,"struct"] call nodegen_commonSysAdd;
 };
 
 nodegen_commonAdd = {
