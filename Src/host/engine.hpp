@@ -653,6 +653,7 @@ _ret} \
 #define __assert_static_compile_expr1(expr) __EVAL(__assert_static_runtime_expr1(expr))
 #define __assert_static_compile_expr2(expr,message) __EVAL(__assert_static_runtime_expr2(expr,message))
 #define __assert_runtime_expr1(expr) if !([expr] call sys_int_evalassert)exitWith {[toString {expr},__assert_runtime_file__,__LINE__] call sys_assert_}
+#define __assert_runtime_expr2(expr,message) if !([expr] call sys_int_evalassert)exitWith {[toString {expr},__assert_runtime_file__,__LINE__,message] call sys_assert_}
 
 //called at compile/build; Only simple expressions without macros
 #define static_assert(expr) __assert_static_runtime_expr1(expr)
@@ -661,6 +662,7 @@ _ret} \
 
 //called at runtime; Only simple expressions without macros
 #define assert(expr) __assert_runtime_expr1(expr)
+#define assert_str(expr,message) __assert_runtime_expr2(expr,message)
 
 #ifdef __VM_BUILD
 	//called at compile/build; Only simple expressions without macros
@@ -684,6 +686,7 @@ _ret} \
 
 #ifdef DISABLE_ASSERT
 	#define assert(a)
+	#define assert_str(a,b)
 	#define static_assert(a)
 	#define static_assert_str(a,b)
 	#define __THIS_FILE_REPLACE__
@@ -692,6 +695,7 @@ _ret} \
 //Вне дебага все ассерты выключаются
 #ifndef DEBUG
 	#define assert(a)
+	#define assert_str(a,b)
 	#define static_assert(a)
 	#define static_assert_str(a,b)
 	
