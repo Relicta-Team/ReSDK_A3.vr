@@ -17,7 +17,7 @@ node_system_group("string")
     code:[ @genport.in.1(,) ] joinString """"
     in:string:Строка 1
     option:""makeport_in""\: {""type""\: ""makeport_in"",""src""\:""Строка 1"",""text_format""\:""Строка {value}""}
-    out:string:Новая строка, объединённая строками, переданными входным портам.
+    out:string:Строка:Новая строка, объединённая строками, переданными входным портам.
 " node_system
 
 "
