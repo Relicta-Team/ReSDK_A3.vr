@@ -411,6 +411,22 @@ def:node:array
 
 def:node:array
 
+    node:copy
+    name:Скопировать
+    namelib:Скопировать массив
+    desc:Данный узел делает полную (глубокую) копию переданного массива. После копирования при изменении копии не будет изменять исходный массив из которого выполнена копия.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    exec:pure
+    code:+(@in.1)
+    in:auto:Массив:Ссылка на массив, который будет скопирован.
+        opt:typeget=array;@type
+    out:auto:Массив:Скопированный массив. Любые изменения в этой копии не будут влиять на исходный массив.
+        opt:typeget=array;@value.1
+
+
+def:node:array
+
     node:count
     name:Количество элементов
     namelib:Количество элементов массива
@@ -674,7 +690,7 @@ def:node:string
     code:[ @genport.in.1(,) ] joinString ""
     in:string:Строка 1
     option:"makeport_in"\: {"type"\: "makeport_in","src"\:"Строка 1","text_format"\:"Строка {value}"}
-    out:string:Новая строка, объединённая строками, переданными входным портам.
+    out:string:Строка:Новая строка, объединённая строками, переданными входным портам.
 
 
 def:node:string
@@ -1065,6 +1081,50 @@ def:node:conversion
 
 def:node:conversion
 
+    node:enumToInt
+    name:•
+    namelib:Перечилсение -> Число
+    desc:Преобразование значения перечисления в целое число
+    rendertype:NoHeaderText
+    exec:pure
+    code:@in.1
+    in:auto:Перечилсение
+        opt:custom=0
+    out:int:Число
+
+
+def:node:conversion
+
+    node:enumToString
+    name:•
+    namelib:Перечисление -> Имя
+    desc:Преобразование значения перечисления в его название
+    rendertype:NoHeaderText
+    exec:pure
+    code:enum_vToK_@gettype.in.1 get str(@in.1)
+    in:auto:Перечисление
+        opt:custom=0
+    out:string:Имя
+
+
+def:node:conversion
+
+    node:structToList
+    name:•
+    namelib:Структура
+opt -> Лист
+    desc:Преобразование
+    rendertype:NoHeaderText
+    exec:pure
+    code:@in.1
+    in:auto:Структура
+opt:allowtypes=*struct
+        opt:custom=0
+    out:list:Лист
+
+
+def:node:conversion
+
     node:voidToValue
     name:•
     namelib:Любое -> Значение
@@ -1228,11 +1288,11 @@ def:node:math
         desc:Сравнение двух чисел
         code:(@in.1)<(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
         out:bool:Результат
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
     
 
 def:node:math
@@ -1246,11 +1306,11 @@ def:node:math
         desc:Сравнение двух чисел
         code:(@in.1)>(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
         out:bool:Результат
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
     
 
 def:node:math
@@ -1264,11 +1324,11 @@ def:node:math
         desc:Сравнение двух чисел
         code:(@in.1)<=(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
         out:bool:Результат
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
     
 
 def:node:math
@@ -1282,11 +1342,11 @@ def:node:math
         desc:Сравнение двух чисел
         code:(@in.1)>=(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
         out:bool:Результат
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
     
 
 def:node:math
@@ -1300,11 +1360,11 @@ def:node:math
         desc:Сравнение двух чисел
         code:(@in.1)==(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
         out:bool:Результат
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
     
 
 def:node:math
@@ -1318,11 +1378,11 @@ def:node:math
         desc:Сравнение двух чисел
         code:(@in.1)!=(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
         out:bool:Результат
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float|*enum
     
 
 def:node:math
@@ -1733,9 +1793,139 @@ def:node:math.logical
 
 def:enum:enums
 node:SpawnPointType
-
+path:Перечисления
+name:Тип спавнпоинта
+desc:Тип точки спавна. Точки спавна бывают случайные и уникальные
 eval:Спавнпоинт:0:Точка спавна является единственной с уникальным именем.
 eval:Случайный спавнпоинт:1:Точка спавна является множественной. Случайные спавнпоинты имеют общие имена и при выборе точки спавна для случайных выбирается одна из точек с одинаковым именем.
+
+def:enum:enums
+node:SpawnLocationConnectionType
+path:Перечисления
+name:Точка привязки
+desc:Точка привязки персонажа к объекту. Эта структура предназначена для расположения заспавненных персонажей на стульях или кроватях.
+eval:Глобальная ссылка:0:Уникальное имя объекта для спавна
+eval:Тип объекта:1:Тип искомого объекта для спавна
+eval:Не определено:2:Не использовать привязку к объекту при спавне
+
+def:enum:enums
+node:SkillType
+path:Перечисления
+
+	name:Вторичный атрибут
+	namelib:Перечисление вторичных атрибутов
+	desc:Перечисление вторичных атрибутов, содержащее все возможные вторичные атрибуты, которыми может владеть персонаж.
+	
+eval:Усталость:0
+eval:Воля:1
+eval:Восприятие:2
+eval:Жизнь:3
+eval:Рукопашный бой:4
+eval:Щиты:5
+eval:Фехтование:6
+eval:Топоры:7
+eval:Дубины:8
+eval:Копья:9
+eval:Мечи:10
+eval:Ножи:11
+eval:Кнуты:12
+eval:Пистолеты:13
+eval:Винтовки:14
+eval:Дробовики:15
+eval:Луки:16
+eval:Метание:17
+eval:Химичество:18
+eval:Грибничество:19
+eval:Инженерия:20
+eval:Ловушки:21
+eval:Ремонт:22
+eval:Кузнечество:23
+eval:Создание:24
+eval:Воровство:25
+eval:Скрытность:26
+eval:Акробатика:27
+eval:Взлом:28
+eval:Первая помощь:29
+eval:Хирургия:30
+eval:Знание пещер:31
+eval:Готовка:32
+eval:Фермерство:33
+
+def:node:enumhelper
+node:enumGetNames
+name:Имена перечислений
+namelib:Получить имена перечислений
+path:Перечисления.Преобразования
+code:values enum_vToK_@gettype.in.1.clear_type()
+desc:Этот узел позволяет получать список имен, хранящихся в перечислении.
+rendertype:NoHeaderText
+in:auto:Перечисление
+out:list[string]:Массив имён:Массив имён перечисления
+
+def:node:enumhelper
+node:enumGetValues
+name:Значения перечислений
+namelib:Получить значения перечислений
+path:Перечисления.Преобразования
+code:(+enum_values_@gettype.in.1.clear_type())
+desc:Этот узел позволяет получать список значений перечислений, хранящихся в перечислении.
+rendertype:NoHeaderText
+in:auto:Перечисление
+    opt:typeget=value;@type:allowtypes=*enum
+out:auto:Массив значений:Массив значений перечисления
+    opt:typeget=array;@type
+
+def:struct:structs
+node:SpawnPoint
+path:Структуры
+
+name:Точка спавна
+desc:Данная структура предназначена для появления персонажей на указанных точках
+eval:enum.SpawnPointType:Тип спавна::Тип точки спавна
+eval:string:Имя спавна::Имя точки спавна
+
+def:struct:structs
+node:SpawnLocationConnection
+path:Структуры
+
+name:Точка привязки
+desc:Данная структура предназначена для привязки персонажей к объектам (стульям или кроватям). Работает совместно со структурой точки спавна. Когда указан тип привязки "Глобальная ссылка" будет осуществлён поиск объекта по по глобальной ссылке, а когда указан "Тип объекта" поиск выполнится по указанному типу. При привязке по типу в указанной точке спавна будет выполнен поиск объекта по указанному типу. Если объект по ссылке или по типу не найден - привязки не произойдёт и персонаж появится сразу на точке спавна.
+
+eval:enum.SpawnLocationConnectionType:Тип привязки::Тип поиска объекта для привязки персонажа. Если указан тип привязки "Не определено" - привязка не будет выполнена.
+eval:string:Глобальная ссылка::Уникальное имя объекта на карте для привязки (если выбран тип привязки "Глобальная ссылка").
+eval:classname:Тип объекта:GameObject:Тип объекта для привязки (если выбран тип привязки "Тип объекта"). При выборе привязки по типу на точке спана в небольшом радиусе будет выполнен поиск объекта с указанным типом.
+eval:int:Индекс сиденья:-1:Индекс места для посадки. Предназначено для двухместных и более сидений (например двухспальных кроватей). Значение, равное -1 игнорирует это свойство при привязке.
+
+def:struct:structs
+node:BaseSkillsDef
+path:Структуры
+
+name:Определение базовых атрибутов
+namelib:Структура определения базовых атрибутов
+desc:Структура четырех базовых атрибутов персонажа. Среднее значение каждого атрибута для обычного человека в "современном мире" равно 10. Каждый навык указывается в диапазоне от меньшего к большему. Например, сила от 7 до 10 означает, что персонаж может получить навык силы от 7 до 10 (выбирается случайное число).
+
+eval:vector2:Сила:[10,10]:Физический показатель персонажа. Все силовые действия зависят от этого базового навыка.
+eval:vector2:Интеллект:[10,10]:Интеллектуальные способности персонажа. Все действия умственного труда зависят от этого базового навыка.
+eval:vector2:Ловкость:[10,10]:Общая ловкость и проворность персонажа. Этот навык влияет на скорость и проворность персонажа.
+eval:vector2:Здоровье:[10,10]:Жизненная сила и общее состояние персонажа.
+
+def:struct:structs
+node:SkillDef
+path:Структуры
+
+    name:Навык
+    namelib:Определение вторичного навыка
+    desc:Определение вторичного навыка. Такими например могут быть скрытность, хирургия, владение холодным оружием и т.д.
+    
+eval:enum.SkillType:Тип навыка::Тип навыка для выдачи персонажу.
+eval:vector2:Диапазон навыка:[0,1]:Диапазон значений навыка для выдачи персонажу.
+
+def:struct:structs
+node:ConditionToStartGamemode
+path:Структуры
+name:Условие запуска
+eval:bool:Запуск:false:Указывает можно ли запустить раунд
+eval:string:Причина задержки:Без описания:Указываемая причина невозможности старта раунда при флаге запуска, равном ИСТИНЕ
 $ENDREGION:FUNCTIONS
 $REGION:CLASSMEM
 def:c:ScriptedGamemode
@@ -1994,7 +2184,7 @@ def:f:ScriptedRole.returnInLobbyAfterDead_0
 def:m:ScriptedRole.canStoreNameAndFaceForValidate_0
 
 		name:Требование смены лица
-		desc:Требование смены лица при смерти. Если включено (ИСТИНА), то после смерти при попытке зайти за новую роль с предыдущим лицом и именем игрока не пустит в игру. Чащще всего для ролей монстров включено, а для обычных людей выключено.
+		desc:Требование смены лица при смерти. Если включено (ИСТИНА), то после смерти при попытке зайти за новую роль с предыдущим лицом и именем игрока не пустит в игру. Чаще всего для ролей монстров включено, а для обычных людей выключено.
 		type:const
 		return:bool:Требовать смену лица и имени при заходе за новую роль после смерти за предыдущего персонажа.
 		defval:true
@@ -2007,6 +2197,40 @@ def:f:ScriptedRole.count_0
 		prop:get
 		return:int:Количество заходов
 		defval:1
+	
+def:f:ScriptedRole._currentBaseSkills_0
+
+		name:Базовые атрибуты
+		desc:Определение диапазона четырех базовых атрибутов.
+		prop:get
+		classprop:1
+		return:struct.BaseSkillsDef:Базовые атрибуты
+		defval:[[10,10],[10,10],[10,10],[10,10]]
+	
+def:m:ScriptedRole._getSkillsWrapper_0
+
+		name:Определение базовых атрибутов
+		namelib:Событие определения базовых атрибутов
+		desc:Данное событие позволяет переопределить логику получения базовых атрибутов для роли.
+		type:event
+		return:struct.BaseSkillsDef:Базовые атрибуты
+	
+def:f:ScriptedRole._currentOtherSkills_0
+
+		name:Навыки
+		desc:Определение дополнительных навыков.
+		prop:get
+		classprop:1
+		return:array[struct.SkillDef]:Базовые атрибуты
+		defval:[]
+	
+def:m:ScriptedRole._getOtherSkillsWrapper_0
+
+		name:Навыки
+		namelib:Событие определения навыков
+		desc:Данное событие позволяет переопределить логику получения дополнительных навыков для роли.
+		type:event
+		return:array[struct.SkillDef]:Массив навыков
 	
 def:m:ScriptedRole.canVisibleAfterStart_0
 
@@ -2069,13 +2293,47 @@ def:m:ScriptedRole.getMobs_0
 		lockoverride:1
 		return:array[BasicMob^]:Список мобов, владеющих этой ролью
 	
-def:m:ScriptedRole.spawnLocation_0
+def:m:ScriptedRole._spawnLocationWrapper_0
 
 		name:Позиция появления
-		namelib:Точка появления (спавна) роли
-		desc:Позиция появления роли. Может быть точкой спавна или рандомной точкой спавна.
+		namelib:Событие точки появления роли
+		desc:Позиция появления роли (спавна персонажа). Может быть точкой спавна или рандомной точкой спавна.
 		type:event
-		out:StructSpawnLocation:Точка спавна:Рандомная или конечная точка спавна, на которой появится персонаж при заходе за эту роль.
+		return:struct.SpawnPoint:Точка спавна:Рандомная или конечная точка спавна, на которой появится персонаж при заходе за эту роль.
+	
+def:f:ScriptedRole._currentSpawnLocation_0
+
+		name:Точка спавна
+		desc:Позиция спавна персонажа. Можно настроить кастомную логику выбора точки спавна с помощью события точки появления.
+		prop:get
+		classprop:1
+		return:struct.SpawnPoint:Точка спавна
+		defval:[0,'']
+	
+def:m:ScriptedRole.useRandomDirOnSpawn_0
+
+		name:Случайное направление спавна
+		desc:Указывает будет ли включено случайное направление при спавне персонажа. ИСТИНА - персонаж будет появляться на точке всегда со случайным направлением. ЛОЖЬ - направление при появлении будет учитываться из направления точки спавна.
+		type:const
+		return:bool:Истина, если нужно использовать случайное направление при спавне.
+		defval:false
+	
+def:f:ScriptedRole._currentConnectedTo_0
+
+		name:Точка привязки
+		desc:Позиция спавна персонажа. Можно настроить кастомную логику выбора точки спавна с помощью события точки появления.
+		prop:get
+		classprop:1
+		return:struct.SpawnLocationConnection:Точка привязки рядом с позицией спавна
+		defval:[0,'','GameObject',-1]
+	
+def:m:ScriptedRole._connectedToWrapper_0
+
+		name:Точка привязки
+		namelib:Событие точки привязки
+		desc:Событие для настройки расширенной логики определения точки привязки.
+		type:event
+		return:struct.SpawnLocationConnection:Точка привязки:Искомый объект привязки.
 	
 def:m:ScriptedRole.getEquipment_0
 
@@ -2084,7 +2342,6 @@ def:m:ScriptedRole.getEquipment_0
 		desc:Событие, которое вызывается единожды при заходе клиента за роль. Используйте его для реализации выдачи снаряжения персонажу.
 		type:event
 		out:BasicMob^:Моб:Объект моба, которому будет выдано снаряжение
-
 	
 def:m:ScriptedRole.onAssigned_impl_0
 
@@ -13085,16 +13342,16 @@ $REGION:CLASSMETA
 }
 ,"ScriptedRole": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":355},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":347},
    "fields": { "defined": {
-"name":{"return": "string"},"desc":{"return": "string"},"descInGame":{"return": "null"},"classMan":{"return": "string"},"classWoman":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"count":{"return": "int"}}   },
+"name":{"return": "string"},"desc":{"return": "string"},"descInGame":{"return": "null"},"classMan":{"return": "string"},"classWoman":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"count":{"return": "int"},"_currentBaseSkills":{"return": "null_array"},"_currentOtherSkills":{"return": "null_array"},"_currentSpawnLocation":{"return": "null_array"},"_currentConnectedTo":{"return": "null_array"}}   },
    "methods": { "defined": {
-"__allowedToGamemodes":{"return": "<undefined>"},"isMainRole":{"return": "<undefined>"},"canStoreNameAndFaceForValidate":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"roleAccess":{"return": "<undefined>"},"canBeFullAntag":{"return": "<undefined>"},"canBeHiddenAntag":{"return": "<undefined>"},"getBasicMobs":{"return": "<undefined>"},"getMobs":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"useRandomDirOnSpawn":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"onAssigned_impl":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"onDead":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"},"onEndgame":{"return": "<undefined>"},"onEndgameBasic":{"return": "<undefined>"}
+"__allowedToGamemodes":{"return": "<undefined>"},"isMainRole":{"return": "<undefined>"},"canStoreNameAndFaceForValidate":{"return": "<undefined>"},"_getSkillsWrapper":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"_getOtherSkillsWrapper":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"roleAccess":{"return": "<undefined>"},"canBeFullAntag":{"return": "<undefined>"},"canBeHiddenAntag":{"return": "<undefined>"},"getBasicMobs":{"return": "<undefined>"},"getMobs":{"return": "<undefined>"},"_spawnLocationWrapper":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"useRandomDirOnSpawn":{"return": "<undefined>"},"_connectedToWrapper":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"onAssigned_impl":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"onDead":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"},"onEndgame":{"return": "<undefined>"},"onEndgameBasic":{"return": "<undefined>"}
 }   }
 }
 ,"GhostRole": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\BasicRole.sqf","line":425},
+    "defined" : {"file":"src\\host\\GameModes\\BasicRole.sqf","line":426},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"},"lastSpawnpos":{"return": "null_array"},"classMan":{"return": "string"},"classWoman":{"return": "string"}}   },
    "methods": { "defined": {
@@ -13103,7 +13360,7 @@ $REGION:CLASSMETA
 }
 ,"AdminObserverRole": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\BasicRole.sqf","line":438},
+    "defined" : {"file":"src\\host\\GameModes\\BasicRole.sqf","line":439},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"},"spawnPosition":{"return": "null_array"},"classMan":{"return": "string"},"classWoman":{"return": "string"}}   },
    "methods": { "defined": {
@@ -13112,7 +13369,7 @@ $REGION:CLASSMETA
 }
 ,"TOMMonsterRole": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\BasicRole.sqf","line":452},
+    "defined" : {"file":"src\\host\\GameModes\\BasicRole.sqf","line":453},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -13121,7 +13378,7 @@ $REGION:CLASSMETA
 }
 ,"BlessedPiligrimRole": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\BasicRole.sqf","line":457},
+    "defined" : {"file":"src\\host\\GameModes\\BasicRole.sqf","line":458},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -13130,7 +13387,7 @@ $REGION:CLASSMETA
 }
 ,"TheEssenseRole": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\BasicRole.sqf","line":462},
+    "defined" : {"file":"src\\host\\GameModes\\BasicRole.sqf","line":463},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -13139,7 +13396,7 @@ $REGION:CLASSMETA
 }
 ,"BasicRole_SimulationReSDK": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\BasicRole.sqf","line":469},
+    "defined" : {"file":"src\\host\\GameModes\\BasicRole.sqf","line":470},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"},"returnInLobbyAfterDead":{"return": "bool"}}   },
    "methods": { "defined": {

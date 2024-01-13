@@ -132,11 +132,14 @@ nodegen_addEnumerator = {
 
     private _map = createHashMap;
     private _iter = 0;
+    private _delIter = 0;
     {
-        (_x splitString ":") params ["_k",["_v",_iter]];
+        _delIter = (_x splitString ":");
+        _delIter params ["_k",["_v",_iter]];
         if not_equalTypes(_v,0) then {_v = parseNumber _v};
         _map set [str _v,_k];
         _iter = _v + 1;
+        //TODO check if member not contain enumval
     } foreach _members;
     missionNamespace setvariable ['enum_vToK_'+_nodename,_map];
     missionNamespace setvariable ["enum_values_"+_nodename,(keys _map) apply {parseNumber _x}];
