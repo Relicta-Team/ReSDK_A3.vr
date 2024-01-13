@@ -83,6 +83,7 @@ format["
 (["enumToInt","@in.1","auto:Перечилсение"/*TODO +endl+"opt:allowtypes=>enum."*/,"int:Число","Преобразование значения перечисления в целое число"] call _convFunc) node_system
 (["enumToString","enum_vToK_@gettype.in.1 get str(@in.1)","auto:Перечисление","string:Имя","Преобразование значения перечисления в его название"] call _convFunc) node_system
 
+(["structToList","@in.1","auto:Структура"+endl+"opt:allowtypes=*struct","list:Лист"]call _convFunc) node_system
 
 //voidToValue
 (

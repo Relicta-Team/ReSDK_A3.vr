@@ -5,6 +5,7 @@
 
 #include "..\engine.hpp"
 #include "..\oop.hpp"
+#include "..\text.hpp"
 
 /*
     !Устаревшая информация
@@ -214,6 +215,8 @@ nodegen_registerFunctions = {
 
     //типы стандартных перечислений
     #include "_enums.sqf"
+    //структуры
+    #include "_structures.sqf"
 };
 
 nodegen_registerMember = {

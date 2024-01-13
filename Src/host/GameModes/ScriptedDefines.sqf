@@ -444,11 +444,91 @@ class(ScriptedRole) extends(BasicRole)
 			разделитель названия навыка и значения:	=
 			разделитель минимального и максимального значения навыка:	-
 	*/
-	getter_func(getSkills,vec4(10,10,10,10));
+	"
+		name:Базовые атрибуты
+		desc:Определение диапазона четырех базовых атрибутов.
+		prop:get
+		classprop:1
+		return:struct.BaseSkillsDef:Базовые атрибуты
+		defval:[[10,10],[10,10],[10,10],[10,10]]
+	" node_var
+	var(_currentBaseSkills,vec4(vec2(10,10),vec2(10,10),vec2(10,10),vec2(10,10)));
+	"
+		name:Определение базовых атрибутов
+		namelib:Событие определения базовых атрибутов
+		desc:Данное событие позволяет переопределить логику получения базовых атрибутов для роли.
+		type:event
+		return:struct.BaseSkillsDef:Базовые атрибуты
+	" node_met
+	func(_getSkillsWrapper)
+	{
+		objParams();
+		getSelf(_currentGetSkills);
+	};
+
+	func(getSkills)
+	{
+		objParams();
+		private _vec4Base = callSelf(_getSkillsWrapper);
+		private _fmtError = format["Class %1 (%2)",callSelf(getClassname),getSelf(name)];
+		private _sb = [];
+		{
+			(_vec4Base select _foreachIndex) params ["_min","_max"];
+			assert_str(_min <= _max,format["Skill '%1' error - min > max; %2" arg  _x arg _f]);
+			assert_str(_min <= 0,format["Minimum value for skill '%1' must be > 0; %2" arg _x arg _f]);
+			assert_str(_max <= 0,format["Maximum value for skill '%1' must be > 0; %2" arg _x arg _f]);
+			
+			_sb pushBack [_x + "=" + ifcheck(_min == _max,str _min,(_vec4Base select _foreachIndex) joinString "-")];
+		} foreach ["st","iq","dx","ht"];
+		
+		_sb joinString ";"
+	};
 
 	//настройки дополнительных навыков определяются так же как и в getSkills при использовании через строку
 	//список всех навыков в skills_internal_list_otherSkillsSystemNames
-	getter_func(getOtherSkills,[]);
+	
+	"
+		name:Навыки
+		desc:Определение дополнительных навыков.
+		prop:get
+		classprop:1
+		return:array[struct.SkillDef]:Базовые атрибуты
+		defval:[]
+	" node_var
+	var(_currentOtherSkills,[]);
+
+	"
+		name:Навыки
+		namelib:Событие определения навыков
+		desc:Данное событие позволяет переопределить логику получения дополнительных навыков для роли.
+		type:event
+		return:array[struct.SkillDef]:Массив навыков
+	" node_met
+	func(_getOtherSkillsWrapper)
+	{
+		objParams();
+		getSelf(_currentOtherSkills);
+	};
+	
+	func(getOtherSkills)
+	{
+		objParams();
+		private _oskills = callFunc(_getOtherSkillsWrapper);
+		private _ret = [];
+		private _minIndex = skills_nodes_allowedMinSkillDefIndex;
+		private _skDataList = skills_nodes_listKinds;//list(vec2(string,string))
+		private _existsSkills = [];
+		{
+			_x params ['_skIndex',"_skRange"];
+			
+			assert_str(!array_exists(_existsSkills,_skIndex),"Duplicate skill: " + ((_skDataList select _skIndex) joinString " - "));
+			assert_str(_skIndex < _minIndex,"Unsupported skill: " + ((_skDataList select _skIndex) joinString " - "));
+
+			_ret pushBack [(_skDataList select _skIndex) select 0,_skRange];
+			_existsSkills pushBack _skIndex;
+		} foreach _oskills;
+		_ret;
+	};
 
 
 	"
@@ -541,45 +621,85 @@ class(ScriptedRole) extends(BasicRole)
 		return:array[BasicMob^]:Список мобов, владеющих этой ролью
 	" node_met
 	getter_func(getMobs,array_copy(getSelf(mobs)));
-
-	//TODO spawn location ---------------------
-		//Стартовая точка спавна. 
-	/*
-		Может быть:
-		- точкой спавна (pos:spawnpointname)
-		- рандомной точкой спавна (rpos:randomspawnpointname)
-
-		если не указан тип, он будет вычислен автоматически.
-		Но если есть тип рандомной точки и обычной с одинаковым выбранным названием то будет по умолчанию применен префикс pos
-	*/
+	
 	"
 		name:Позиция появления
-		namelib:Точка появления (спавна) роли
-		desc:Позиция появления роли. Может быть точкой спавна или рандомной точкой спавна.
+		namelib:Событие точки появления роли
+		desc:Позиция появления роли (спавна персонажа). Может быть точкой спавна или рандомной точкой спавна.
 		type:event
-		out:StructSpawnLocation:Точка спавна:Рандомная или конечная точка спавна, на которой появится персонаж при заходе за эту роль.
+		return:struct.SpawnPoint:Точка спавна:Рандомная или конечная точка спавна, на которой появится персонаж при заходе за эту роль.
 	" node_met
+	func(_spawnLocationWrapper)
+	{
+		objParams();
+		getSelf(_currentSpawnLocation)
+	};
+
 	func(spawnLocation)
 	{
 		objParams();
-		null
+		private _slocStruct = callSelf(_spawnLocationWrapper);
+		assert_str(!isNullVar(_slocStruct),"Null return spawn location");
+		assert_str(_slocStruct select 1 != "","Empty string point name");
+		
+		_slocStruct params ["_spType","_spName"];
+
+		(["pos","rpos"] select _spType)+":"+_spName
 	};
 
-	// Работает в связке с spawnLocation. 
-	// false - берет направление от стартовой точки
-	// true - задает случайное направление
+	"
+		name:Точка спавна
+		desc:Позиция спавна персонажа. Можно настроить кастомную логику выбора точки спавна с помощью события точки появления.
+		prop:get
+		classprop:1
+		return:struct.SpawnPoint:Точка спавна
+		defval:[0,'']
+	" node_var
+	var(_currentSpawnLocation,[0 arg ""]);
+
+	"
+		name:Случайное направление спавна
+		desc:Указывает будет ли включено случайное направление при спавне персонажа. ИСТИНА - персонаж будет появляться на точке всегда со случайным направлением. ЛОЖЬ - направление при появлении будет учитываться из направления точки спавна.
+		type:const
+		return:bool:Истина, если нужно использовать случайное направление при спавне.
+		defval:false
+	" node_met
 	getter_func(useRandomDirOnSpawn,false);
 
-	//Точка привязки (кровать или стул)
-	/*
-		Может быть:
-			- глобальной ссылкой на объект: ref:objectglobalreference (for getObjectByRef)
-			- именем типа: type:IChair
-		
-		!!! Указать только connectedTo без spawnLocation невозможно, так как при вставании со стула/кровати
-		система должна знать куда поместить персонажа.
-	*/
-	getter_func(connectedTo,null);
+	// --------- connection object --------
+
+	"
+		name:Точка привязки
+		desc:Позиция спавна персонажа. Можно настроить кастомную логику выбора точки спавна с помощью события точки появления.
+		prop:get
+		classprop:1
+		return:struct.SpawnLocationConnection:Точка привязки рядом с позицией спавна
+		defval:[0,'','GameObject',-1]
+	" node_var
+	var(_currentConnectedTo,[0 arg "" arg "GameObject" arg -1]);
+
+	"
+		name:Точка привязки
+		namelib:Событие точки привязки
+		desc:Событие для настройки расширенной логики определения точки привязки.
+		type:event
+		return:struct.SpawnLocationConnection:Точка привязки:Искомый объект привязки.
+	" node_met
+	func(_connectedToWrapper)
+	{
+		objParams();
+		getSelf(_currentConnectedTo);
+	};
+	func(connectedTo)
+	{
+		objParams();
+		private _conStruct = callSelf(_connectedToWrapper);
+		_conStruct params ["_ctype","_ref","_type","_optDist"];
+		if equals(_ctype,2) exitWith {null}; //do not connect to 
+		private _retString = ifcheck(_ctype==0,"ref:"+_ref,"type:"+_type);
+		if (_optDist >= 0) then {_retString = format["%1:%2",_retString,_optDist]};
+		_retString
+	};
 	//-------------------------------------------------
 
 	"
@@ -588,7 +708,6 @@ class(ScriptedRole) extends(BasicRole)
 		desc:Событие, которое вызывается единожды при заходе клиента за роль. Используйте его для реализации выдачи снаряжения персонажу.
 		type:event
 		out:BasicMob^:Моб:Объект моба, которому будет выдано снаряжение
-
 	" node_met
 	func(getEquipment)
 	{

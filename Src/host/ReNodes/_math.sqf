@@ -7,7 +7,7 @@
 node_system_group("math")
 
 _op = {
-    params ["_sysname","_namelib","_code","_rez","_desc",["_rvvals","auto"]];
+    params ["_sysname","_namelib","_code","_rez","_desc",["_rvvals","auto"],["_alwTps","int|float"]];
     (_namelib splitString ":")params ["_nlTex","_nlDesc"];
 
     format["
@@ -20,12 +20,12 @@ _op = {
         desc:%4
         code:%5
         in:%7:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=%8
         in:%7:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=%8
         out:%6:Результат
-            opt:typeget=value;@type:allowtypes=int|float
-    ",_sysname,_nlTex,_nlDesc,_desc,_code,_rez,_rvvals]
+            opt:typeget=value;@type:allowtypes=%8
+    ",_sysname,_nlTex,_nlDesc,_desc,_code,_rez,_rvvals,_alwTps]
 };
 
 // +
@@ -57,17 +57,17 @@ _op = {
 //comp operations
 
 // <
-(["lessthannum","Меньше:<","(@in.1)<(@in.2)","bool","Сравнение двух чисел"] call _op) node_system
+(["lessthannum","Меньше:<","(@in.1)<(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
 // >
-(["greaterthannum","Больше:>","(@in.1)>(@in.2)","bool","Сравнение двух чисел"] call _op) node_system
+(["greaterthannum","Больше:>","(@in.1)>(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
 // <=
-(["lessthanorequalnum","Меньше или равно:<=","(@in.1)<=(@in.2)","bool","Сравнение двух чисел"] call _op) node_system
+(["lessthanorequalnum","Меньше или равно:<=","(@in.1)<=(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
 // >=
-(["greaterthanorequalnum","Больше или равно:>=","(@in.1)>=(@in.2)","bool","Сравнение двух чисел"] call _op) node_system
+(["greaterthanorequalnum","Больше или равно:>=","(@in.1)>=(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
 // ==
-(["equalnum","Равно:==","(@in.1)==(@in.2)","bool","Сравнение двух чисел"] call _op) node_system
+(["equalnum","Равно:==","(@in.1)==(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
 // !=
-(["notequalnum","Не равно:!=","(@in.1)!=(@in.2)","bool","Сравнение двух чисел"] call _op) node_system
+(["notequalnum","Не равно:!=","(@in.1)!=(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
 
 // others
 
