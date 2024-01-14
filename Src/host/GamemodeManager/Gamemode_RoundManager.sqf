@@ -418,7 +418,7 @@ SL20Func(gm_handleDefineFullAntags) = {
 	{
 		_struct = _x call __findClientVec2;
 		if !isNullVar(_struct) then {
-			
+			//!critical section: do not change name _struct and _struct select 1 (_prevRoleObj)
 			private _newRole = callFuncParams(gm_currentMode,getAntagRoleFull,_struct select 0 arg _indx);
 			if (!isNullVar(_newRole) && {not_equals(_newRole,"")}) then {
 				//TODO если он может взять роль
