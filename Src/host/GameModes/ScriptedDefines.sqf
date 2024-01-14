@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -748,7 +748,7 @@ class(ScriptedRole) extends(BasicRole)
 		out:ServerClient^:Клиент:Объект клиента (владельца моба), для которого вызвалось данное событие.
 		out:bool:Позднее назначение:Этот порт отвечает за позднее назначение (после старта раунда). Когда возвращает ИСТИНУ - клиент зашёл на старте раунда, а когда ЛОЖЬ - уже после старта раунда.
 	" node_met
-	func(onAssigned_impl)
+	func(_onAssignedWrapper)
 	{
 		objParams_3(_mob,_usr,_lateAssign);
 	};
@@ -757,7 +757,7 @@ class(ScriptedRole) extends(BasicRole)
 		{
 			objParams_2(_mob,_usr);
 			private _lateAssign = callSelf(isLateAssigned);
-			callSelfParams(onAssigned_impl,_mob arg _usr arg _lateAssign);
+			callSelfParams(_onAssignedWrapper,_mob arg _usr arg _lateAssign);
 		};
 
 	//!NOT USED
