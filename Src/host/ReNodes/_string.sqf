@@ -13,6 +13,7 @@ node_system_group("string")
     desc:Создает строку 
     icon:data\\icons\\pill_16x.png
     runtimeports:1
+    color:PureFunction
     exec:pure
     code:[ @genport.in.1(,) ] joinString """"
     in:string:Строка 1
