@@ -271,6 +271,21 @@ class(ScriptedGamemode) extends(GMBase)
 		super();
 	};
 
+	"
+		name:Доступные роли
+		desc:Список ролей, доступных для этого режима. Сюда входят как роли, доступные в лобби, так и роли, видимые после старта раунда. Настройка видимости роли на разных стадиях игры настраивается внутри самих ролей.
+		type:const
+		return:array[classname]:Список ролей, доступных в режиме.
+		defval:[]
+	" node_met
+	func(_getRolesWrapper)
+	{
+		objParams();
+		[]
+	};
+	getter_func(getLobbyRoles,callSelf(_getRolesWrapper));
+	getter_func(getLateRoles,[]);
+
 	region(backend code)
 
 		func(onRoundCode)
@@ -285,46 +300,6 @@ class(ScriptedGamemode) extends(GMBase)
 		{
 			objParams();
 			getSelf(__startRoundStructure) select 1
-		};
-
-		//В эти списки добавляются доступные роли
-		var(__roles_lobby,[]);
-		var(__roles_late,[]);
-		var(__initialized_roles_lobby,false);
-		var(__initialized_roles_late,false);
-
-		func(getLobbyRoles)
-		{
-			objParams();
-			if !getSelf(__initialized_roles_lobby) then {
-				private _robj = 0;
-				private _curClass = tolower callSelf(getClassName);
-				private _refLobbyList = getSelf(__roles_lobby);
-				{
-					_robj = _x call gm_getRoleObject;
-					if !isNullReference(_robj) then {
-						if isImplementFunc(_robj,__allowedToGamemodes) then {
-							private _gmlist = callFunc(_robj,__allowedToGamemodes);
-							if (array_count(_gmlist) > 0) then {
-								_gmlist = _gmlist apply {tolower _x};
-								if (_curClass in _gmlist) then {
-									_refLobbyList pushBackUnique _x;
-								};
-							};
-						};
-					};
-				} foreach getAllObjectsTypeOf(BasicRole);
-
-				setSelf(__initialized_roles_lobby,true);
-			};
-			array_copy(getSelf(__roles_lobby));
-		};
-
-		func(getLateRoles)
-		{
-			objParams();
-			//!Сюда копируются роли после старта
-			array_copy(getSelf(__roles_late));
 		};
 
 	endregion
@@ -348,15 +323,6 @@ class(ScriptedRole) extends(BasicRole)
 		path:Игровая логика.Роли
 	"
 	node_class
-
-	"
-		name:Доступна в режимах
-		namelib:Доступ роли на режимы
-		desc:Отвечает за имя загружаемой в режим карты. Если это пустая строка, то карта не будет загружена
-		type:const
-		return:array[classname]:Список названий режимов, в которых доступна данная роль
-	" node_met
-	getterconst_func(__allowedToGamemodes,[]);
 
 	"
 		name:Имя роли
