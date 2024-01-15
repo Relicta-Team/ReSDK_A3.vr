@@ -5,6 +5,7 @@
 
 #include <GameMode.h>
 
+editor_attribute("InterfaceClass")
 class(ScriptedGamemode) extends(GMBase)
 	
 	"
@@ -232,6 +233,7 @@ class(ScriptedGamemode) extends(GMBase)
 		objParams();
 		private _sCond = callSelf(_conditionToStartWrapper);
 		assert_str(!isNullVar(_sCond),"Неопределенная структура запуска раунда");
+		getSelf(__startRoundStructure) set [1,_sCond select 1];
 		_sCond select 0
 	};
 
@@ -291,6 +293,7 @@ class(ScriptedGamemode) extends(GMBase)
 		func(onRoundCode)
 		{
 			super();
+			this = gm_currentMode;
 			callSelf(onTick);
 		};
 
@@ -314,7 +317,7 @@ class(ReNode_AbstractEnum) extends(object)
 endclass
 
 
-
+editor_attribute("InterfaceClass")
 class(ScriptedRole) extends(BasicRole)
 
 	"
