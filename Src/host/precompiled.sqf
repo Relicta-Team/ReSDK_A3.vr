@@ -125,6 +125,6 @@ pc_oop_handleAttrM = {
 	__on_editor_attribute(_mem_name,_editor_attrs_m);
 };
 
-//------------------ initializer renodes component --------------------
+//------------------ initializer renode component --------------------
 //!nothrow load module
-call compile preprocessFile "src\host\ReNodes\ReNodes_init.sqf";
+call compile preprocessFile "src\host\ReNode\ReNode_init.sqf";

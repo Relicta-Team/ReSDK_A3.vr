@@ -27,7 +27,7 @@ if isNull(nodegen_list_library) then {
 nodegen_str_outputJsonData = ""; //сгенерированный json
 nodegen_internal_generatedLibPath = ""; //сюда записывается сгенерированный json файл
 
-nodegen_objlibPath = "src\host\ReNodes\lib.obj"; //!deprecated
+nodegen_objlibPath = "src\host\ReNode\lib.obj"; //!deprecated
 nodegen_debug_copyobjlibPath = "P:\Project\ReNodes\lib.obj";
 
 //вызывается перед компиляцией классов
@@ -145,7 +145,7 @@ nodegen_registerFunctions = {
     //Сюда вставляются пути до функций, которые должны быть регистрированы в библиотеке
     //внутри файлов с функциями составляются определения через node_func
     
-    #include "ReNodes_bindingHelpers.sqf"
+    #include "ReNode_bindingHelpers.sqf"
 
     //тут зарегистрированы узлы общего назначения (работа с типами, операторы)
     #include "_systemNodes.sqf"
