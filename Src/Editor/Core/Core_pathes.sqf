@@ -15,4 +15,4 @@ core_path_data = core_path_bin + "/Data";
 
 core_path_icon = core_path_data + "/icon.ico";
 
-
+core_path_renode = "ReNode/ReNode.exe"

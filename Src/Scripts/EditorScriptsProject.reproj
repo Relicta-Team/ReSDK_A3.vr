@@ -6,3 +6,4 @@ FileWatcher.cs
 WorkspaceHelper.cs
 // Скрипты Reditor
 Reditor\OOPBuilder.cs
+Reditor\VisualScripting.cs

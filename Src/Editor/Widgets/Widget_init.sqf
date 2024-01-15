@@ -157,7 +157,10 @@ menu_structureLayout = [
 			"text:Проверка нагрузки сцены игровыми объектами;act:['Не реализовано'] call showWarning;"
 		],
 		"",
-		"text:Создать режим;act:call gm_filegen_openWindow",
+		"text:Редактор ReNode;act:call vs_openEditor",
+		["text:Кодогенерация",
+			"text:Создать режим из шаблона;act:call gm_filegen_openWindow"
+		],
 		// "text:Менеджер режимов;act:call gm_createGamemode",
 		// "",
 		"text:Просмотр моделей;act:call golib_modelViewerContextOpen",

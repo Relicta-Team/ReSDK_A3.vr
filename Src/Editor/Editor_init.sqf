@@ -128,6 +128,8 @@ componentInit(Maps_manager)
 #include "MapsManager\Maps_manager_init.sqf"
 componentInit(Viusal_components)
 #include "VisualComponents\VisualComponents_init.sqf"
+componentInit(Visual_scripting)
+#include "VisualScripting\VisualScripting_init.sqf"
 
 componentInit(Core_postInit)
 #include "Core\Core_postInit.sqf"
