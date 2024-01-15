@@ -28,6 +28,33 @@ _op = {
     ",_sysname,_nlTex,_nlDesc,_desc,_code,_rez,_rvvals,_alwTps]
 };
 
+"
+    node:makeLiteralInt
+    name:Создать буквальное целое число
+    path:Математика
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:@in.1
+    in:int:Значение
+        opt:dname=0
+    out:int:Значение
+        opt:dname=0
+" node_system
+
+"
+    node:makeLiteralFloat
+    name:Создать буквальное число
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:@in.1
+    in:float:Значение
+        opt:dname=0
+    out:float:Значение
+        opt:dname=0
+" node_system
+
 // +
 (["add","Сложение:+","(@in.1)+(@in.2)","auto","Сложение двух чисел"] call _op) node_system
 // -
@@ -136,14 +163,15 @@ _opSingle = {
 "
     node:piNumber
     name:Число Пи
+    rendertype:NoHeaderText
     exec:pure
-    desc:Постоянное число Пи (3.141592653589...)
+    desc:Константное (постоянное) число Пи (3.141592653589...)
     code:PI
     out:float:Число Пи
 " node_system
 
 //sqrt
-(["sqrt","Квадратный корень:Квадратный корень","sqrt(@in.1)","float","Квадратный корень числа"] call _opSingle) node_system
+(["sqrt","Квадратный корень:√","sqrt(@in.1)","float","Квадратный корень числа"] call _opSingle) node_system
 //sin
 (["sin","Синус:Sin","sin(@in.1)","float","Синус числа"] call _opSingle) node_system
 //cos
