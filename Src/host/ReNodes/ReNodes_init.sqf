@@ -8,11 +8,17 @@
 #include "..\text.hpp"
 
 /*
-    Компонент ReNode API для генерации библиотеки узлов графа, вызова функций  
+    Компонент ReNode API для генерации библиотеки узлов графа, вызова функций.
+    Это прекомпилируемый файл, работающий как в редакторе, так и в симуляции
 */
 
 //текущая версия библиотеки для генерации
 nodegen_const_libversion = 1;
+
+//Пути загрузчика скриптов
+nodegen_scriptClassesFolder = "ReNode\compiled";
+nodegen_scriptClassesLoader = nodegen_scriptClassesFolder + "\script_list.hpp";
+
 //карта рабочих узлов. Ключ - системное название узла, значение - данные типа хэшкарты
 if isNull(nodegen_list_library) then {
     nodegen_list_library = [];
@@ -22,7 +28,6 @@ nodegen_str_outputJsonData = ""; //сгенерированный json
 nodegen_internal_generatedLibPath = ""; //сюда записывается сгенерированный json файл
 
 nodegen_objlibPath = "src\host\ReNodes\lib.obj"; //!deprecated
-
 nodegen_debug_copyobjlibPath = "P:\Project\ReNodes\lib.obj";
 
 //вызывается перед компиляцией классов
@@ -364,3 +369,20 @@ nodegen_generateLib = {
     true
 };
 
+nodegen_loadClasses = {
+    //['start'] call messagebox;
+    private _logger = ifcheck(is3DEN,printLog,cprint);
+    //['log %1',_logger] call messagebox;
+    if (!fileEXISTS nodegen_scriptClassesLoader) exitwith {
+        ["Scripted class loader not found: %1",nodegen_scriptClassesLoader] call _logger;
+    };
+    private _pathes = preprocessFile nodegen_scriptClassesLoader splitString endl;
+    //['info %1',_pathes] call messagebox;
+    {
+        private _pts = (_x splitString "\/");
+        private _filename = _pts select -1;
+        ["  Loading scripted class ""%1""",_filename] call _logger;
+        private _fullname = nodegen_scriptClassesFolder + "\" + _filename;
+        call compile preprocessFileLineNumbers _fullname;
+    } foreach _pathes;
+};

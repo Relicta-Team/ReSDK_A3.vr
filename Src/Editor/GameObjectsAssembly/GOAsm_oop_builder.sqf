@@ -417,5 +417,8 @@ function(goasm_builder_makeClassTable)
 
 	call compile preprocessFileLineNumbers "src\Editor\GameObjectsAssembly\__GOAsm_loader.sqf";
 
+	//загружаем нодовые классы
+	call nodegen_loadClasses;
+
 	1
 }
