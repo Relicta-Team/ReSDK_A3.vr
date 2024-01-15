@@ -28,19 +28,23 @@ class VisualScripting : IScript
 				output.Append("already");
 				return;
 			}
-
-			startEditor(exePath);
+			string argsCli = "";
+			if (ScriptContext.GetArgsCount() > 1)
+			{
+				argsCli = ScriptContext.GetArg(1);
+			}
+			startEditor(exePath,argsCli);
 
 			output.Append("ok");
 		}
 	}
 
-	private void startEditor(string path)
+	private void startEditor(string path,string arguments="")
 	{
 		System.Diagnostics.Process process = new System.Diagnostics.Process();
 		System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 		startInfo.FileName = path;
-		startInfo.Arguments = $"";
+		startInfo.Arguments = arguments;
 		startInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(path);
 		process.StartInfo = startInfo;
 		process.Start();

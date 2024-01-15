@@ -143,6 +143,7 @@ menu_structureLayout = [
 				"text:Только отсутствующие;act:[false] call systools_imageProcessor;",
 				"text:Генерация по указанным;act:[true,true] call systools_imageProcessor;"
 			],
+			"text:Создать объектную библиотеку (ReNode);act:call vs_generateLib",
 			"text:Запустить импорт старой карты;act:call mm_doImportOldMap"
 		],
 		["text:Валидаторы",

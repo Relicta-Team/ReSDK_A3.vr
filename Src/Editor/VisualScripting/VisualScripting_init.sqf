@@ -4,11 +4,15 @@
 // ======================================================
 
 
-vs_openEditor = {
+function(vs_openEditor) 
+{
 	private _exepath = getMissionPath core_path_renode;
+	private _cli = "";
+	if !([core_path_renode_lib_json] call file_exists) then {
+		_cli = "-genlib_run";
+	};
 
-
-	private _result = ["VisualScripting","run",[_exepath],true] call rescript_callCommand;
+	private _result = ["VisualScripting","run",[_exepath,_cli],true] call rescript_callCommand;
 	if (_result != "ok") exitwith {
 		private _reason = _result;
 		if (_result == "already") then {
@@ -19,4 +23,10 @@ vs_openEditor = {
 	};
 
 	["Редактор запускается...",10] call showInfo;
-};
+}
+
+function(vs_generateLib)
+{
+	private _rez = [core_path_renode_lib_obj] call nodegen_generateLib;
+	[format["Результат сборки '%1' - %2",core_path_renode_lib_obj,_rez]] call showInfo;
+}

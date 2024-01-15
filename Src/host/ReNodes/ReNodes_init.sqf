@@ -8,70 +8,6 @@
 #include "..\text.hpp"
 
 /*
-    !Устаревшая информация
-    Компонент ReNodes API для генерации библиотеки узлов графа, вызова функций  
-
-    Общие параметры регистрации
-    cat - категория, например operators, По умолчанию: functions
-    path - путь до узла в поисковике, По умолчанию: NoCategory
-    name - выводимое имя узла, По умолчанию: имя функции или имя метода
-    desc - выводимое описание, По умолчанию: -
-    color - цвет узла; html, type. По умолчанию: определяется из категории
-    disabled - выключает доступность узла в генерацию
-    
-    __basename - проброшенное имя узла (дефолтное имя)
-
-    in - список точек входа
-    out - список точек выхода
-        name - имя точки, по умолчанию -
-        showname - показывать имя точки, по умолчанию да
-        multi - указывает что узел мультиконнектный, по умолчанию выходы только один, входы мульти
-        types - типы ReNodes которые могут объединять эти узлы. От первого типа указывается стиль и цвет коннектора
-
-    opt - спиcок опций
-        type - тип опции: bool,input,spin,fspin,edit,list,vec2,vec3,rgb,rgba,file
-        text - стандартное текстовое описание опции, по умолчанию нет
-        label (для bool) - вписанный текст в чекбокс (по умолчанию нет)
-        default - значение по умолчанию (по умолчанию нет)
-        range (для spin,fspin) - 2 значения с нижним и верхним пределом
-        fspindata (для fspin) - 2 значения: размер шага и количество символов после запятой
-        values (для list) - список элементов
-
-        title (для file) - плейсхолдер текст инпута пути
-        ext (для file) - GLOB-паттерн файлов
-        root (для file) - дочерняя директория, которая открывается при выборе файла
-
-    inout: Создает вход и выход по типу: ["in","name:Flow","types:Flow"],["out","name:Flow","types:Flow"]
-
-    Минимальный пример: ["cat:functions","name:Тестовая функция","inout:Flow"]
-
-    Порядок сборки:
-    1. Запускается симуляция
-    2. Гененрируется библиотека lib.json (для редактора) и bindings.nodes (для платформы)
-
-    Генерация биндинга
-        Для генерации вызываемой функции в неё должны подставиться параметры
-
-    Регистрация функций:
-        В файле биндингов есть общие свойства. Раздел общих свойств с префиксом @
-
-        "@sect_control_operators":{
-		"path":"Операторы", //общее
-		"name":"Тест имя", //общее
-		"cat": "operators", //общее
-		"list": { //список узлов в категории operators
-			"if_branch": {
-				"name": "Ветка", //переопределенное свойство
-				"desc": "Ветка"
-			},
-			"while": {
-				"desc": "Цикл"
-			}
-		}
-	}
-*/
-
-/*
     Компонент ReNode API для генерации библиотеки узлов графа, вызова функций  
 */
 
@@ -85,7 +21,7 @@ if isNull(nodegen_list_library) then {
 nodegen_str_outputJsonData = ""; //сгенерированный json
 nodegen_internal_generatedLibPath = ""; //сюда записывается сгенерированный json файл
 
-nodegen_objlibPath = "src\host\ReNodes\lib.obj";
+nodegen_objlibPath = "src\host\ReNodes\lib.obj"; //!deprecated
 
 nodegen_debug_copyobjlibPath = "P:\Project\ReNodes\lib.obj";
 
@@ -238,12 +174,29 @@ nodegen_generateLib = {
         false
     };
     
+    params [["_savePath",""]];
+
+    if (_savePath == "") exitwith {
+        ["Save path not defined"] call printError;
+        false
+    };
+
     //промежуточная библиотека
     ["Starting generating intermediate library (ver %1)",nodegen_const_libversion] call printLog;
 
     ["Generating common nodes"] call printLog;
     nodegen_list_functions = [];
     call nodegen_registerFunctions;
+
+    if (count nodegen_list_functions == 0) exitwith {
+        ["Empty function list"] call printError;
+        false
+    };
+    if (count nodegen_list_library == 0) exitwith {
+        ["Empty class list"] call printError;
+        false
+    };
+
     ["Common nodes generated!"] call printLog;
 
     private _output = "v" + (str nodegen_const_libversion)+endl;
@@ -396,11 +349,17 @@ nodegen_generateLib = {
 
     nodegen_str_outputJsonData = _output;
 
-    [nodegen_objlibPath,nodegen_str_outputJsonData] call file_write;
+    [_savePath,nodegen_str_outputJsonData] call file_write;
     
-    if (!isNull(nodegen_debug_copyobjlibPath) && {nodegen_debug_copyobjlibPath!=""}) then {
-        [nodegen_debug_copyobjlibPath,nodegen_str_outputJsonData,false] call file_write;
+    if ([nodegen_debug_copyobjlibPath,false] call file_exists) then {
+        if (!isNull(nodegen_debug_copyobjlibPath) && {nodegen_debug_copyobjlibPath!=""}) then {
+            ["Copy object lib for debugger directory: " + nodegen_debug_copyobjlibPath] call printLog;
+            [nodegen_debug_copyobjlibPath,nodegen_str_outputJsonData,false] call file_write;
+        };
+    } else {
+        ["Skip copy object lib for debugger directory"] call printLog;
     };
+    
 
     true
 };
