@@ -10,7 +10,7 @@ node_system_group("string")
     node:stringMake
     path:Строки
     name:Создать строку
-    desc:Создает строку 
+    desc:Создает строку из нескольких строк.
     icon:data\\icons\\pill_16x.png
     runtimeports:1
     color:PureFunction
@@ -24,6 +24,7 @@ node_system_group("string")
 "
     node:makeLiteralString
     name:Создать буквальную строку
+    desc:Создает значение типа строка
     icon:data\\icons\\icon_BluePrintEditor_Function_16px
     color:PureFunction
     exec:pure

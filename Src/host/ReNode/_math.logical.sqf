@@ -9,6 +9,7 @@ node_system_group("math.logical")
 "
     node:makeLiteralBool
     name:Создать буквальное булево
+    desc:Создает значение типа булево
     path:Математика.Логические
     icon:data\\icons\\icon_BluePrintEditor_Function_16px
     color:PureFunction

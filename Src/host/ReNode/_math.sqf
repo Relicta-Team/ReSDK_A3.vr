@@ -31,6 +31,7 @@ _op = {
 "
     node:makeLiteralInt
     name:Создать буквальное целое число
+    desc:Создает значение типа целое число
     path:Математика
     icon:data\\icons\\icon_BluePrintEditor_Function_16px
     color:PureFunction
@@ -45,6 +46,7 @@ _op = {
 "
     node:makeLiteralFloat
     name:Создать буквальное число
+    desc:Создает значение типа дробное число
     icon:data\\icons\\icon_BluePrintEditor_Function_16px
     color:PureFunction
     exec:pure
