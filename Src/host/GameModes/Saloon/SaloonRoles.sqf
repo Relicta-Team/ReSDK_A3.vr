@@ -47,6 +47,10 @@ class(RBarmenSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialPos,vec3(3470.38,3607.12,22.7355));
 	getter_func(getInitialDir,91);
 
+	//Новая точка спавна барника
+	getter_func(spawnLocation,"pos:RBarmenSaloon");
+	getter_func(connectedTo,"ref:RBarmenSaloonBed");	
+
 	getter_func(getSkills,vec4(randInt(10,13),randInt(9,10),randInt(9,10),randInt(7,10)));
 	func(getOtherSkills) {[
 		skillrand(cooking,2,6) arg
@@ -71,6 +75,10 @@ class(RGromilaSaloon) extends(BasicRoleSaloon)
 	var(count,1);
 	getter_func(getInitialPos,vec3(3482.18,3603.51,22.7188));
 	getter_func(getInitialDir,270);
+
+	//новая точка спавна вышыбалы
+	getter_func(spawnLocation,"pos:RGromilaSaloon");
+	getter_func(connectedTo,"ref:RGromilaSaloonBed");
 	
 	var(randomHunger,vec2(60,80));
 	
@@ -107,6 +115,10 @@ class(RCookSaloon) extends(BasicRoleSaloon)
 	var(count,3);
 	getter_func(getInitialPos,vec3(3473.81,3616.92,12.8096) vectorAdd vec3(rand(-0.1,0.1),rand(-0.1,0.1),0));
 	getter_func(getInitialDir,354);
+
+	//Новые точки спавна работников бара
+	getter_func(spawnLocation,"rpos:RCookSaloon");
+
 	var(randomHunger,vec2(80,100));
 	getter_func(canTakeInLobby,true);
 	getter_func(canVisibleAfterStart,false);
@@ -138,6 +150,9 @@ class(RCitizenSaloon) extends(BasicRoleSaloon)
 	var(canStealMoneyBank,true);
 	getter_func(getInitialDir,callFuncParams(gm_currentMode,handleRandomDir,357));
 	getter_func(getInitialPos,callFuncParams(gm_currentMode,handleRandomPos,vec3(3441.08,3591.36,18.3334)));
+		
+	//Новые точки спавна работяг	
+	getter_func(spawnLocation,"rpos:RCitizenSaloon");
 
 	getter_func(canTakeInLobby,true);
 	getter_func(canVisibleAfterStart,true);
@@ -188,6 +203,10 @@ class(RAssasinSaloon) extends(BasicRoleSaloon)
 	var(canStealMoneyBank,true);
 	getter_func(getInitialPos,callFuncParams(gm_currentMode,handleRandomPos,vec3(3444.87,3669.56,17.7313)));
 	getter_func(getInitialDir,callFuncParams(gm_currentMode,handleRandomDir,267));
+
+	//Новые точки спавна наёмного убийцы
+	getter_func(spawnLocation,"rpos:RAssasinSaloon");
+
 	var(randomHunger,vec2(60,80));
 	getter_func(getSkills,vec4(randInt(13,14),randInt(10,12),randInt(14,15),randInt(11,13)));
 	func(getOtherSkills) {[
@@ -246,6 +265,11 @@ class(RTorgSaloon) extends(BasicRoleSaloon)
 	var(isKeyRole,true);
 	getter_func(getInitialPos,vec3(3421.8,3674.8,19.4215));
 	getter_func(getInitialDir,181);
+
+	//Новая точка спавна торгаша
+	getter_func(spawnLocation,"pos:RTorgSaloon");
+	getter_func(connectedTo,"ref:RTorgSaloonBed");
+
 	var(randomHunger,vec2(70,100));
 	getter_func(getSkills,vec4(randInt(9,12),randInt(11,13),randInt(8,11),randInt(8,12)));
 	func(getOtherSkills) {[
@@ -298,6 +322,10 @@ class(RTrampSaloon) extends(BasicRoleSaloon)
 	var(canStealMoneyBank,true);
 	getter_func(getInitialPos,callFuncParams(gm_currentMode,handleRandomPos,vec3(3437.66,3712.57,17.7246)));
 	getter_func(getInitialDir,callFuncParams(gm_currentMode,handleRandomDir,174));
+
+	//Новые точки спавна бродяг
+	getter_func(spawnLocation,"rpos:RTrampSaloon");
+
 	var(randomHunger,vec2(30,50));
 	getter_func(getSkills,vec4(randInt(13,14),randInt(10,12),randInt(14,15),randInt(11,13)));
 	func(getOtherSkills) {[
@@ -358,6 +386,11 @@ class(RBanditMainSaloon) extends(BasicRoleSaloon)
 	var(count,1);
 	getter_func(getInitialPos,vec3(3367.15,3705.29,21.0036));
 	getter_func(getInitialDir,272);
+
+	//Новая точка спавна пахана
+	getter_func(spawnLocation,"pos:RBanditMainSaloon");
+	getter_func(connectedTo,"ref:RBanditMainSaloonChair");
+
 	var(randomHunger,vec2(60,70));
 	getter_func(getSkills,vec4(randInt(10,13),randInt(11,12),randInt(10,13),randInt(9,12)));
 	func(getOtherSkills) {[
@@ -446,6 +479,28 @@ class(RBanditMiniSaloon) extends(BasicRoleSaloon)
 		};
 	};
 	getter_func(getInitialDir,ifcheck(getVar(gm_currentMode,isSBSCommandirSpawned),88,272));
+
+//Новые точки спавна шестёрок в общаке
+	func(spawnLocation)
+	{
+		objParams();
+		if(getSelf(count)==3) exitWith{"pos:RBanditMiniSaloon4"};
+		if(getSelf(count)==2) exitWith{"pos:RBanditMiniSaloon3"};
+		if(getSelf(count)==1) exitWith{"pos:RBanditMiniSaloon2"};
+		"pos:RBanditMiniSaloon2"
+	};
+
+	func(connectedTo)
+	{
+		objParams();
+		if(getSelf(count)==3) exitWith{"ref:RBanditMiniSaloonBed4"};
+		if(getSelf(count)==2) exitWith{"ref:RBanditMiniSaloonBed3"};
+		if(getSelf(count)==1) exitWith{"ref:RBanditMiniSaloonBed2"};
+		"ref:RBanditMiniSaloonBed2"	
+	};
+
+//Новая точка спавна шестерок если заспавнен командин СБС
+	getter_func(spawnLocation,"rpos:RBanditMiniSaloonJail");
 
 	getter_func(getSkills,vec4(randInt(10,13),randInt(11,12),randInt(10,13),randInt(9,12)));
 	func(getOtherSkills) {[
@@ -560,6 +615,10 @@ class(RSBSComannderSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialPos,vec3(3352.27,3629.16,23.8996));
 	getter_func(getInitialDir,85);
 
+	//Новая точка спавна начальника ополчения
+	getter_func(spawnLocation,"pos:RSBSComannderSaloon");
+	getter_func(connectedTo,"ref:RSBSComannderSaloonChair");
+
 	getter_func(getSkills,vec4(randInt(12,14),randInt(10,12),randInt(12,15),randInt(13,15)));
 	func(getOtherSkills) {[
 		skillrand(pistol,2,5) arg
@@ -608,6 +667,31 @@ class(RSBSRookieSaloon) extends(BasicRoleSaloon)
 	var(reputationNeed,rolerep(1,7,6));
 	getter_func(getInitialPos,vec3(3363.56,3629.32,23.8653));
 	getter_func(getInitialDir,85);
+
+	//Новые точки спавна ополченцев
+	func(spawnLocation)
+	{
+		objParams();
+		if(getSelf(count)==6) exitWith{"pos:RSBSRookieSaloon1"};
+		if(getSelf(count)==5) exitWith{"pos:RSBSRookieSaloon1"};
+		if(getSelf(count)==4) exitWith{"pos:RSBSRookieSaloon2"};
+		if(getSelf(count)==3) exitWith{"pos:RSBSRookieSaloon2"};
+		if(getSelf(count)==2) exitWith{"pos:RSBSRookieSaloon3"};
+		if(getSelf(count)==1) exitWith{"pos:RSBSRookieSaloon3"};		
+		"pos:RSBSRookieSaloon4"
+	};
+
+	func(connectedTo)
+	{
+		objParams();
+		if(getSelf(count)==6) exitWith{"ref:RSBSRookieSaloonBed1"};
+		if(getSelf(count)==5) exitWith{"ref:RSBSRookieSaloonBed1"};
+		if(getSelf(count)==4) exitWith{"ref:RSBSRookieSaloonBed2"};
+		if(getSelf(count)==3) exitWith{"ref:RSBSRookieSaloonBed2"};
+		if(getSelf(count)==2) exitWith{"ref:RSBSRookieSaloonBed3"};
+		if(getSelf(count)==1) exitWith{"ref:RSBSRookieSaloonBed3"};
+		"ref:RSBSRookieSaloonBed4"	
+	};	
 
 	getter_func(getSkills,vec4(randInt(12,14),randInt(10,12),randInt(12,15),randInt(13,15)));
 	func(getOtherSkills) {[
