@@ -426,6 +426,22 @@ clampNumber = {
 	clamp(_v,_mi,_ma)	
 };
 
+stringFormat = {
+	params ["_fmt","_val",["_breakArr",false]];
+	private _eval = if equalTypes(_val,[]) then {
+		if (_breakArr) then {
+			private _rval = [_fmt];
+			_rval append _val;
+			_rval
+		} else {
+			[_fmt,_val]
+		};
+	} else {
+		[_fmt,_val]
+	};
+	format _eval
+};
+
 missionNamespace setVariable ["pushFront",
 {
 	params ["_list","_element",["_unique",false]];

@@ -316,7 +316,7 @@ node_system_group("control")
 		path:"+_baseOpPath+"
 		name:Сообщение в окне
 		namelib:Сообщение в окне
-		desc:Выводит сообщение в окне (только в режиме отладки).
+		desc:Выводит сообщение в отдельном окне поверх окна Платформы. Пока открыто окно сообщения симуляция не будет выполняться. Данный узел работает только для режима отладки.
 		code: \n#ifdef DEBUG\n[@in.2,@in.3] call messageBox_Node;\n#endif\n @out.1
 		color:Function
 		runtimeports:1
