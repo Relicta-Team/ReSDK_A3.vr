@@ -1596,6 +1596,30 @@ Replaced value:
 2103
 ```
 File: [client\LightEngine\ScriptedEffects.hpp at line 9](../../../Src/client/LightEngine/ScriptedEffects.hpp#L9)
+## SLIGHT_STREET_LAMP
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+2104
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 10](../../../Src/client/LightEngine/ScriptedEffects.hpp#L10)
+## SLIGHT_SHIT_SMELL
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+2105
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 11](../../../Src/client/LightEngine/ScriptedEffects.hpp#L11)
 ## SLIGHT_MAGICSTORM_DEBUG_var
 
 Type: Variable
@@ -1609,7 +1633,7 @@ Initial value:
 ```sqf
 2100
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 13](../../../Src/client/LightEngine/ScriptedEffects.hpp#L13)
+File: [client\LightEngine\ScriptedEffects.hpp at line 15](../../../Src/client/LightEngine/ScriptedEffects.hpp#L15)
 ## SLIGHT_SET123_DEBUG_var
 
 Type: Variable
@@ -1621,7 +1645,7 @@ Initial value:
 ```sqf
 2101
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 14](../../../Src/client/LightEngine/ScriptedEffects.hpp#L14)
+File: [client\LightEngine\ScriptedEffects.hpp at line 16](../../../Src/client/LightEngine/ScriptedEffects.hpp#L16)
 ## SLIGHT_TEMPLATE_DIRECTLIGHT_var
 
 Type: Variable
@@ -1633,7 +1657,7 @@ Initial value:
 ```sqf
 2102
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 15](../../../Src/client/LightEngine/ScriptedEffects.hpp#L15)
+File: [client\LightEngine\ScriptedEffects.hpp at line 17](../../../Src/client/LightEngine/ScriptedEffects.hpp#L17)
 ## SLIGHT_TEMPLATE_POINTLIGHT_var
 
 Type: Variable
@@ -1645,7 +1669,31 @@ Initial value:
 ```sqf
 2103
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 16](../../../Src/client/LightEngine/ScriptedEffects.hpp#L16)
+File: [client\LightEngine\ScriptedEffects.hpp at line 18](../../../Src/client/LightEngine/ScriptedEffects.hpp#L18)
+## SLIGHT_STREET_LAMP_var
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+2104
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 19](../../../Src/client/LightEngine/ScriptedEffects.hpp#L19)
+## SLIGHT_SHIT_SMELL_var
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+2105
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 20](../../../Src/client/LightEngine/ScriptedEffects.hpp#L20)
 # ScriptedEffects.sqf
 
 ## le_se_map
