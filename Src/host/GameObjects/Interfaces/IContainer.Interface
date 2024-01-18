@@ -346,6 +346,9 @@ func(createItemInContainer)
 				};
 			} foreach _attrMethods;
 
+			// fix preinit props for items in container (generated from editor)
+			callFunc(_o,__handlePreInitVars__);
+			
 			//fixed after 0.5.158 (update names,icons if attr changed)
 			if (count _attrMethods > 0) then {
 				callSelf(onContainerContentUpdate);
@@ -360,8 +363,8 @@ func(createItemInContainer)
 			if !prob(_chance) then {continue};
 
 			_o = [_type,this] call createItemInContainer;
-			_listObj pushBack _o;
 			if !isNullObject(_o) then {
+			_listObj pushBack _o;
 				{
 					_x params ["_t","_m","_d"];
 					call {
@@ -382,6 +385,9 @@ func(createItemInContainer)
 						errorformat("%1::createItemInContainer() - Unknown attribute '%2'",callSelf(getClassName) arg _t);
 					};
 				} foreach _attrMethods;
+
+				// fix preinit props for items in container (generated from editor)
+				callFunc(_o,__handlePreInitVars__);
 			};
 		};
 
