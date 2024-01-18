@@ -5,6 +5,9 @@
 
 #include <..\GameMode.h>
 
+#define __isOldGM (callFunc(gm_currentMode,getClassName)=="GMSaloon")
+#define __skipIfOldGM if __isOldGM exitWith {null};
+
 class(BasicRoleSaloon) extends(BasicRole)
 	var(isKeyRole,false);
 	var(canStealMoneyBank,false);
@@ -48,7 +51,7 @@ class(RBarmenSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,91);
 
 	//Новая точка спавна барника
-	getter_func(spawnLocation,"pos:RBarmenSaloon");
+	getter_func(spawnLocation,	__skipIfOldGM	"pos:RBarmenSaloon");
 	getter_func(connectedTo,"ref:RBarmenSaloonBed");	
 
 	getter_func(getSkills,vec4(randInt(10,13),randInt(9,10),randInt(9,10),randInt(7,10)));
@@ -77,7 +80,7 @@ class(RGromilaSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,270);
 
 	//новая точка спавна вышыбалы
-	getter_func(spawnLocation,"pos:RGromilaSaloon");
+	getter_func(spawnLocation,	__skipIfOldGM	"pos:RGromilaSaloon");
 	getter_func(connectedTo,"ref:RGromilaSaloonBed");
 	
 	var(randomHunger,vec2(60,80));
@@ -117,7 +120,7 @@ class(RCookSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,354);
 
 	//Новые точки спавна работников бара
-	getter_func(spawnLocation,"rpos:RCookSaloon");
+	getter_func(spawnLocation,	__skipIfOldGM	"rpos:RCookSaloon");
 
 	var(randomHunger,vec2(80,100));
 	getter_func(canTakeInLobby,true);
@@ -152,7 +155,7 @@ class(RCitizenSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialPos,callFuncParams(gm_currentMode,handleRandomPos,vec3(3441.08,3591.36,18.3334)));
 		
 	//Новые точки спавна работяг	
-	getter_func(spawnLocation,"rpos:RCitizenSaloon");
+	getter_func(spawnLocation,	__skipIfOldGM	"rpos:RCitizenSaloon");
 
 	getter_func(canTakeInLobby,true);
 	getter_func(canVisibleAfterStart,true);
@@ -205,7 +208,7 @@ class(RAssasinSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,callFuncParams(gm_currentMode,handleRandomDir,267));
 
 	//Новые точки спавна наёмного убийцы
-	getter_func(spawnLocation,"rpos:RAssasinSaloon");
+	getter_func(spawnLocation,	__skipIfOldGM	"rpos:RAssasinSaloon");
 
 	var(randomHunger,vec2(60,80));
 	getter_func(getSkills,vec4(randInt(13,14),randInt(10,12),randInt(14,15),randInt(11,13)));
@@ -267,7 +270,7 @@ class(RTorgSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,181);
 
 	//Новая точка спавна торгаша
-	getter_func(spawnLocation,"pos:RTorgSaloon");
+	getter_func(spawnLocation,	__skipIfOldGM	"pos:RTorgSaloon");
 	getter_func(connectedTo,"ref:RTorgSaloonBed");
 
 	var(randomHunger,vec2(70,100));
@@ -324,7 +327,7 @@ class(RTrampSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,callFuncParams(gm_currentMode,handleRandomDir,174));
 
 	//Новые точки спавна бродяг
-	getter_func(spawnLocation,"rpos:RTrampSaloon");
+	getter_func(spawnLocation,	__skipIfOldGM	"rpos:RTrampSaloon");
 
 	var(randomHunger,vec2(30,50));
 	getter_func(getSkills,vec4(randInt(13,14),randInt(10,12),randInt(14,15),randInt(11,13)));
@@ -388,7 +391,7 @@ class(RBanditMainSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,272);
 
 	//Новая точка спавна пахана
-	getter_func(spawnLocation,"pos:RBanditMainSaloon");
+	getter_func(spawnLocation,	__skipIfOldGM	"pos:RBanditMainSaloon");
 	getter_func(connectedTo,"ref:RBanditMainSaloonChair");
 
 	var(randomHunger,vec2(60,70));
@@ -484,6 +487,7 @@ class(RBanditMiniSaloon) extends(BasicRoleSaloon)
 	func(spawnLocation)
 	{
 		objParams();
+			__skipIfOldGM	
 		if getVar(gm_currentMode,isSBSCommandirSpawned) then {
 			//Новая точка спавна шестерок если заспавнен командин СБС
 			"rpos:RBanditMiniSaloonJail"
@@ -622,7 +626,7 @@ class(RSBSComannderSaloon) extends(BasicRoleSaloon)
 	getter_func(getInitialDir,85);
 
 	//Новая точка спавна начальника ополчения
-	getter_func(spawnLocation,"pos:RSBSComannderSaloon");
+	getter_func(spawnLocation,	__skipIfOldGM	"pos:RSBSComannderSaloon");
 	getter_func(connectedTo,"ref:RSBSComannderSaloonChair");
 
 	getter_func(getSkills,vec4(randInt(12,14),randInt(10,12),randInt(12,15),randInt(13,15)));
@@ -678,6 +682,7 @@ class(RSBSRookieSaloon) extends(BasicRoleSaloon)
 	func(spawnLocation)
 	{
 		objParams();
+			__skipIfOldGM	
 		if(getSelf(count)==6) exitWith{"pos:RSBSRookieSaloon1"};
 		if(getSelf(count)==5) exitWith{"pos:RSBSRookieSaloon1"};
 		if(getSelf(count)==4) exitWith{"pos:RSBSRookieSaloon2"};

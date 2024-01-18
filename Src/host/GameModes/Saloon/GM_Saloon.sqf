@@ -914,28 +914,6 @@ class(GMSaloonV2) extends(GMBase)
 		#endif
 	};
 	
-	func(handleRandomPos)
-	{
-		objParams_1(_def);
-		if (gm_roundDuration <= 2) exitWith {_def};
-		pick [
-			[3373.75,3674.44,23.5393],
-			[3390.23,3672.52,23.2097],
-			[3400.7,3676.27,23.0975],
-			[3391.32,3640.42,24.3761],
-			[3413.28,3642.9,22.1226],
-			[3419.38,3644.09,22.3054],
-			[3419.96,3649.81,22.3102],
-			[3453.82,3677.13,22.9341],
-			[3399.36,3682.16,21.3214]
-		];
-	};
-	func(handleRandomDir)
-	{
-		objParams_1(_def);
-		if (gm_roundDuration <= 2) exitWith {_def};
-		random 360
-	};
 	
 	func(getResultTextOnFinish)
 	{
