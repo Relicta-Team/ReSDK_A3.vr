@@ -347,7 +347,7 @@ func(createItemInContainer)
 			} foreach _attrMethods;
 
 			// fix preinit props for items in container (generated from editor)
-			callFunc(__handlePreInitVars__);
+			callFunc(_o,__handlePreInitVars__);
 			
 			//fixed after 0.5.158 (update names,icons if attr changed)
 			if (count _attrMethods > 0) then {
