@@ -484,23 +484,29 @@ class(RBanditMiniSaloon) extends(BasicRoleSaloon)
 	func(spawnLocation)
 	{
 		objParams();
-		if(getSelf(count)==3) exitWith{"pos:RBanditMiniSaloon4"};
-		if(getSelf(count)==2) exitWith{"pos:RBanditMiniSaloon3"};
-		if(getSelf(count)==1) exitWith{"pos:RBanditMiniSaloon2"};
-		"pos:RBanditMiniSaloon2"
+		if getVar(gm_currentMode,isSBSCommandirSpawned) then {
+			//Новая точка спавна шестерок если заспавнен командин СБС
+			"rpos:RBanditMiniSaloonJail"
+		} else {
+			if(getSelf(count)==3) exitWith{"pos:RBanditMiniSaloon4"};
+			if(getSelf(count)==2) exitWith{"pos:RBanditMiniSaloon3"};
+			if(getSelf(count)==1) exitWith{"pos:RBanditMiniSaloon2"};
+			"pos:RBanditMiniSaloon2"
+		};
 	};
 
 	func(connectedTo)
 	{
 		objParams();
+		if getVar(gm_currentMode,isSBSCommandirSpawned) then {
+		null}
+		else {
 		if(getSelf(count)==3) exitWith{"ref:RBanditMiniSaloonBed4"};
 		if(getSelf(count)==2) exitWith{"ref:RBanditMiniSaloonBed3"};
 		if(getSelf(count)==1) exitWith{"ref:RBanditMiniSaloonBed2"};
-		"ref:RBanditMiniSaloonBed2"	
+		"ref:RBanditMiniSaloonBed2"
+		}	
 	};
-
-//Новая точка спавна шестерок если заспавнен командин СБС
-	getter_func(spawnLocation,"rpos:RBanditMiniSaloonJail");
 
 	getter_func(getSkills,vec4(randInt(10,13),randInt(11,12),randInt(10,13),randInt(9,12)));
 	func(getOtherSkills) {[
