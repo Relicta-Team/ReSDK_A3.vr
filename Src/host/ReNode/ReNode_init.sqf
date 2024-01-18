@@ -16,7 +16,7 @@
 nodegen_const_libversion = 1;
 
 //Пути загрузчика скриптов
-nodegen_scriptClassesFolder = "ReNode\compiled";
+nodegen_scriptClassesFolder = "src\host\ReNode\compiled";
 nodegen_scriptClassesLoader = nodegen_scriptClassesFolder + "\script_list.hpp";
 
 //карта рабочих узлов. Ключ - системное название узла, значение - данные типа хэшкарты
@@ -381,8 +381,12 @@ nodegen_loadClasses = {
     {
         private _pts = (_x splitString "\/");
         private _filename = _pts select -1;
-        ["  Loading scripted class ""%1""",_filename] call _logger;
         private _fullname = nodegen_scriptClassesFolder + "\" + _filename;
+        if (_fullname != _x) then {
+            ["!!! ERROR ON LOADING - Pathes not valid: ""%1"" (%2);",_x,_filename] call _logger;
+            continue;
+        };
+        ["  Loading scripted class ""%1""",_filename] call _logger;
         call compile preprocessFileLineNumbers _fullname;
     } foreach _pathes;
 };
