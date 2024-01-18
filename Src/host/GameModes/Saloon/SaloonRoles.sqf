@@ -317,6 +317,35 @@ endclass
 		var(desc,"Такие только у самых крутых!");
 	endclass
 
+class(RDoctorSaloon) extends(BasicRoleSaloon)
+	var(name,"Лекарь"); 
+	var(desc,"Помогает побитым и покалеченым"+comma+" но только за звяки");
+	getter_func(spawnLocation,"pos:RDoctorSaloon");
+	getter_func(connectedTo,"ref:RDoctorSaloonBed");
+
+	getter_func(getSkills,"st:7-8; dx:9-11; iq:12-14; ht:9-11");
+	func(getOtherSkills) {
+		"healing:5;" 
+		+"surgery:5;"
+		+"chemistry:5;"
+	};
+
+	func(getEquipment)
+	{
+		objParams_1(_mob);
+		private _cloth = ["DoctorCloth",_mob,INV_CLOTH] call createItemInInventory;
+		setVar(_cloth,name,"Лекарские одеяния");
+		["Rag",_cloth] call createItemInContainer;
+		["HatGrayOldUshanka",_mob,INV_HEAD] call createItemInInventory;
+		private _keyOwn = ["RDoctorSaloonKey"];
+		regKeyInUniform(_cloth,_keyOwn,"Лекарский ключ");
+		private _shot = ["Revolver",_mob,INV_BELT] call createItemInInventory; // Оружие на слоте пояса
+		callFuncParams(_shot,createAmmoInMagazine,"AmmoRevolver"); // Вызов метода, создающий патроны в "магазине" дробовика
+		_ammo = ["AmmoRevolver",_cloth] call createItemInContainer; // Патроны в инвентаре
+		callFuncParams(_ammo,initCount,randInt(4,10));
+	};
+endclass
+
 class(RTrampSaloon) extends(BasicRoleSaloon)
 	var(name,"Бродяга");
 	var(desc,"Нелёгкая судьба занесла тебя в этот ужасный район. Ну хоть сходи в местный бар. Говорят"+comma+" там отличная выпивка.");

@@ -690,7 +690,8 @@ class(GMSaloonV2) extends(GMBase)
 		"RTrampSaloon",
 		"RBanditMainSaloon",
 		"RBanditMiniSaloon",
-		"RTorgSaloon"
+		"RTorgSaloon",
+		"RDoctorSaloon"
 		]
 	};
 	func(getLateRoles)
@@ -708,8 +709,9 @@ class(GMSaloonV2) extends(GMBase)
 	getterconst_func(getMapName,"SaloonV2");
 	
 	var(task,nullPtr);
-	var(taskList,["Saloon_Task_PortfelV2" arg "Saloon_Task_DocsV2" arg "Saloon_Task_KillV2"]);
-	
+	var(taskList,["Saloon_Task_PortfelV2"]);
+	//var(taskList,["Saloon_Task_PortfelV2" arg "Saloon_Task_DocsV2" arg "Saloon_Task_KillV2"]);
+
 	var(protectedWalls,[]);//защитные стены убираются когда спавнится командир охров
 	var(countDoors,0);
 	func(preSetup)
@@ -1048,7 +1050,7 @@ endclass
 			
 			private _usr = callSelf(getSourceLoc);
 			if !callFunc(_usr,isMob) exitWith {false};
-			if (callFunc(_usr,getPos) select 2 >= 3) exitWith {setSelf(timerCount,0);false};
+			if (callFunc(_usr,getPos) select 2 >= 10) exitWith {setSelf(timerCount,0);false};
 			if getVar(getVar(_usr,basicRole),canStealMoneyBank) then {
 				private _name = callFuncParams(_usr,getNameEx,"кто");
 				if (getSelf(__bufferedStealerName)!=_name) then {
