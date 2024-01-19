@@ -2667,6 +2667,8 @@ _3768_633303370_200933_22122 = ['IStruct',[3768.63,3370.2,11.1312,true],184.098,
 ['LargeConcreteWallWithReinforcement',[3748.64,3449.67,8.32353],275,[0,0,1]] call InitStruct; 
 ['LargeConcreteWallWithReinforcement',[3747.63,3449.92,12.9968],275,[0,0,1]] call InitStruct; 
 ['LongRottenBoards',[3895.82,3565.82,11.1478,true],0,[0,-0.542609,0.839986]] call InitStruct; 
+['ShortPipeBlueMetal',[3895.81,3575.71,13.3418,true],6.06071e-013,[1,0,1.19249e-008]] call InitStruct; 
+['ShortPipeBlueMetal',[3895.82,3575.72,9.40919,true],6.06071e-013,[1,0,1.19249e-008]] call InitStruct; 
 ['SmallMushroom2',[3999.82,3690.38,18.2808,true],0,[0.288415,0,0.957505]] call InitStruct; 
 ['SmallMushroom2',[3864.8,3505.49,5.7437],0,[0,0,1]] call InitStruct; 
 ['SmallMushroom2',[3840.44,3428.4,5.46928],0,[0,0,1]] call InitStruct; 
@@ -3860,7 +3862,7 @@ _4285_030763693_1774931_02557 = ['IStruct',[4285.03,3693.18,36.1218,true],0,[0.0
 _4318_327643711_6948229_87771 = ['IStruct',[4318.33,3711.69,37.2116,true],0,[-0.00659628,-0.0016196,0.999977], {_thisObj setvariable ['model','ml_shabut\redforresttun\rftnew.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4318_306643698_8793931_09864 = ['IStruct',[4318.31,3698.88,37.8331,true],0,[-0.0154596,-0.00693072,0.999856], {_thisObj setvariable ['model','ml\ml_object_new\model_14_10\monorail.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4324_699713700_3879429_31699 = ['IStruct',[4324.7,3700.39,36.9653,true],0.000273107,[-0.0154592,-0.00692596,0.999857], {_thisObj setvariable ['model','ml\ml_object_new\model_14_10\poezdgruz.p3d'];}] call InitStruct; // !!! realocated model !!!
-['WoodenChair1',[4286.21,3694.99,29.9409],0,[0,0,1]] call InitItem; 
+_4286_210453694_9914629_94093 = ['IStruct',[4286.21,3694.99,29.9409],0,[0,0,1], {_thisObj setvariable ['model','ml_exodusnew\taburetko.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4341_750003699_3791529_83511 = ['IStruct',[4341.75,3699.38,36.0469,true],0,[-0.00659628,-0.0016196,0.999977], {_thisObj setvariable ['model','a3\structures_f_enoch\military\barracks\guardhouse_03_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4043_146483629_1452630_30890 = ['SpawnPoint',[4043.15,3629.15,30.3089],60,[0,0,1]] call InitStruct; 
 _4045_276863630_8151927_48070 = ['SpawnPoint',[4045.28,3630.82,27.4807],60,[0,0,1]] call InitStruct; 
@@ -4328,8 +4330,6 @@ _4071_219243768_6071817_22151 = ['CollectionSpawnPoint',[4071.22,3768.61,17.2215
 _4147_897463688_5910620_04749 = ['CollectionSpawnPoint',[4147.9,3688.59,20.0475],210,[0,0,1]] call InitStruct; 
 _4079_958253668_8855027_07249 = ['CollectionSpawnPoint',[4079.96,3668.89,27.0725],235,[0,0,1]] call InitStruct; 
 _4099_658693625_2885727_30774 = ['CollectionSpawnPoint',[4099.66,3625.29,27.3077],285,[0,0,1]] call InitStruct; 
-['ShortPipeBlueMetal',[3895.81,3575.71,13.3418,true],6.06071e-013,[1,0,1.19249e-008]] call InitStruct; 
-['ShortPipeBlueMetal',[3895.82,3575.72,9.40919,true],6.06071e-013,[1,0,1.19249e-008]] call InitStruct; 
 
 
 
