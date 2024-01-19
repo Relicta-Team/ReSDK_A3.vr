@@ -12,18 +12,18 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=7846;
+		nextID=7986;
 	};
 	class Camera
 	{
-		pos[]={3903.1157,16.526037,3563.4958};
-		dir[]={-0.41788816,-0.24727756,0.87434614};
-		up[]={-0.10698821,0.96874124,0.22385088};
-		aside[]={0.90238607,7.4344098e-007,0.43129766};
+		pos[]={4050.1665,37.784382,3632.7593};
+		dir[]={0.17638198,-0.37196451,0.91147286};
+		up[]={0.070683084,0.9281916,0.36526027};
+		aside[]={0.98191476,2.0539519e-006,-0.19001369};
 	};
 };
 binarizationWanted=0;
-sourceName="resdk_a3";
+sourceName="ReSDK_A3";
 addons[]=
 {
 	"A3_Characters_F",
@@ -684,7 +684,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=18;
+		items=16;
 		class Item0
 		{
 			dataType="Group";
@@ -31881,6 +31881,7 @@ class Mission
 		{
 			dataType="Layer";
 			name="Перекрёсток";
+			state=1;
 			class Entities
 			{
 				items=4;
@@ -35189,6 +35190,7 @@ class Mission
 		{
 			dataType="Layer";
 			name="Заброшенные руины";
+			state=1;
 			class Entities
 			{
 				items=8;
@@ -42787,7 +42789,7 @@ class Mission
 					name="Конструкции";
 					class Entities
 					{
-						items=132;
+						items=134;
 						class Item0
 						{
 							dataType="Object";
@@ -45130,7 +45132,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3895.8169,11.147781,3565.8245};
-								angles[]={5.7096457,0,-0};
+								angles[]={5.7096457,0,0};
 							};
 							side="Empty";
 							flags=1;
@@ -45142,9 +45144,45 @@ class Mission
 							type="Land_Plank_01_8m_F";
 							atlOffset=0.38001156;
 						};
+						class Item132
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3895.8052,13.341763,3575.7073};
+								angles[]={0,8.8704684e-007,4.712389};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ShortPipeBlueMetal""]]}";
+							};
+							id=12358;
+							type="land_trubaduba1";
+							atlOffset=1.595623;
+						};
+						class Item133
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3895.8159,9.4091911,3575.7156};
+								angles[]={0,8.8704684e-007,4.712389};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ShortPipeBlueMetal""]]}";
+							};
+							id=12359;
+							type="land_trubaduba1";
+							atlOffset=1.601738;
+						};
 					};
 					id=7260;
-					atlOffset=4.6548395;
+					atlOffset=6.0166883;
 				};
 				class Item5
 				{
@@ -52271,7 +52309,7 @@ class Mission
 				};
 			};
 			id=5533;
-			atlOffset=7.1260014;
+			atlOffset=7.2111168;
 		};
 		class Item9
 		{
@@ -59984,7 +60022,7 @@ class Mission
 					flags=1;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenChair1""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\taburetko.p3d""]]],[""class"",""IStruct""]]}";
 					};
 					id=12125;
 					type="land_taburetko";
@@ -60016,7 +60054,7 @@ class Mission
 		{
 			dataType="Layer";
 			name="Spawn points";
-			state=3;
+			state=1;
 			class Entities
 			{
 				items=20;
@@ -63409,7 +63447,7 @@ class Mission
 		{
 			dataType="Layer";
 			name="Spawn points RScout";
-			state=3;
+			state=1;
 			class Entities
 			{
 				items=5;
@@ -63502,6 +63540,7 @@ class Mission
 		{
 			dataType="Layer";
 			name="Spawn points REaterTruba";
+			state=1;
 			class Entities
 			{
 				items=7;
@@ -63628,42 +63667,6 @@ class Mission
 			};
 			id=11167;
 			atlOffset=24.88331;
-		};
-		class Item16
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={3895.8052,13.341763,3575.7073};
-				angles[]={0,8.8704684e-007,4.712389};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ShortPipeBlueMetal""]]}";
-			};
-			id=12358;
-			type="land_trubaduba1";
-			atlOffset=1.595623;
-		};
-		class Item17
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={3895.8159,9.4091911,3575.7156};
-				angles[]={0,8.8704684e-007,4.712389};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ShortPipeBlueMetal""]]}";
-			};
-			id=12359;
-			type="land_trubaduba1";
-			atlOffset=1.601738;
 		};
 	};
 };
