@@ -709,8 +709,8 @@ class(GMSaloonV2) extends(GMBase)
 	getterconst_func(getMapName,"SaloonV2");
 	
 	var(task,nullPtr);
-	var(taskList,["Saloon_Task_PortfelV2"]);
-	//var(taskList,["Saloon_Task_PortfelV2" arg "Saloon_Task_DocsV2" arg "Saloon_Task_KillV2"]);
+	//var(taskList,["Saloon_Task_PortfelV2"]);
+	var(taskList,["Saloon_Task_PortfelV2" arg "Saloon_Task_DocsV2" arg "Saloon_Task_KillV2"]);
 
 	var(protectedWalls,[]);//защитные стены убираются когда спавнится командир охров
 	var(countDoors,0);
