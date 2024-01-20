@@ -422,7 +422,7 @@ Replaced value:
 ```sqf
 (numberToCheck >= bottom && numberToCheck <= top)
 ```
-File: [client\WidgetSystem\functions.sqf at line 643](../../../Src/client/WidgetSystem/functions.sqf#L643)
+File: [client\WidgetSystem\functions.sqf at line 635](../../../Src/client/WidgetSystem/functions.sqf#L635)
 ## low_protect
 
 Type: constant
@@ -434,7 +434,7 @@ Replaced value:
 ```sqf
 0.9
 ```
-File: [client\WidgetSystem\functions.sqf at line 644](../../../Src/client/WidgetSystem/functions.sqf#L644)
+File: [client\WidgetSystem\functions.sqf at line 636](../../../Src/client/WidgetSystem/functions.sqf#L636)
 ## max_protect
 
 Type: constant
@@ -446,7 +446,7 @@ Replaced value:
 ```sqf
 1.1
 ```
-File: [client\WidgetSystem\functions.sqf at line 645](../../../Src/client/WidgetSystem/functions.sqf#L645)
+File: [client\WidgetSystem\functions.sqf at line 637](../../../Src/client/WidgetSystem/functions.sqf#L637)
 ## setwt(wid,_t,_sz)
 
 Type: constant
@@ -460,7 +460,7 @@ Replaced value:
 ```sqf
 [wid,format["<t align='center' size='%2'>%1</t>",_t,_sz]] call widgetSetText
 ```
-File: [client\WidgetSystem\functions.sqf at line 678](../../../Src/client/WidgetSystem/functions.sqf#L678)
+File: [client\WidgetSystem\functions.sqf at line 715](../../../Src/client/WidgetSystem/functions.sqf#L715)
 ## hasEnabledBlackScreen
 
 Type: Variable
@@ -473,6 +473,18 @@ Initial value:
 false
 ```
 File: [client\WidgetSystem\functions.sqf at line 589](../../../Src/client/WidgetSystem/functions.sqf#L589)
+## widget_antiGamma_lastError
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+""
+```
+File: [client\WidgetSystem\functions.sqf at line 631](../../../Src/client/WidgetSystem/functions.sqf#L631)
 ## displayOpen
 
 Type: function
@@ -720,7 +732,7 @@ Type: function
 Description: Создание сообщения отключения от сервера
 - Param: _args
 
-File: [client\WidgetSystem\functions.sqf at line 656](../../../Src/client/WidgetSystem/functions.sqf#L656)
+File: [client\WidgetSystem\functions.sqf at line 693](../../../Src/client/WidgetSystem/functions.sqf#L693)
 ## widget_registerInput
 
 Type: function
@@ -729,7 +741,7 @@ Description: специальная функция регистрации пер
 - Param: _w
 - Param: _key
 
-File: [client\WidgetSystem\functions.sqf at line 692](../../../Src/client/WidgetSystem/functions.sqf#L692)
+File: [client\WidgetSystem\functions.sqf at line 729](../../../Src/client/WidgetSystem/functions.sqf#L729)
 ## widgetModel_objectHelper
 
 Type: function
@@ -739,7 +751,7 @@ Description: Внутренняя функция для расчетов раз�
 - Param: _array
 - Param: _scale (optional, default 1)
 
-File: [client\WidgetSystem\functions.sqf at line 731](../../../Src/client/WidgetSystem/functions.sqf#L731)
+File: [client\WidgetSystem\functions.sqf at line 768](../../../Src/client/WidgetSystem/functions.sqf#L768)
 # widgets.hpp
 
 ## widgetNull
