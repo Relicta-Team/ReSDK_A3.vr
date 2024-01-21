@@ -58,7 +58,23 @@ nodegen_addClass = {
 
 nodegen_addFunction = {
     private _ctx = _this;
-    [_ctx,"func"] call nodegen_commonSysAdd;
+    private _buf = [_ctx];
+
+    _buf pushBack (format["path:%1",__nodemodule_common_path__]);
+
+    //other registers
+    if (__nodemodule_common_icon__ != "") then {
+        _buf pushBack (format["icon:%1",__nodemodule_common_icon__]);
+    };
+    if (__nodemodule_common_clrstyle__ != "") then {
+        _buf pushBack (format["color:%1",__nodemodule_common_clrstyle__]);
+    };
+    if (__nodemodule_common_renderType__ != "") then {
+        _buf pushBack (format["rendertype:%1",__nodemodule_common_renderType__]);
+    };
+
+
+    [_buf joinstring endl,"func"] call nodegen_commonSysAdd;
 };
 
 nodegen_addSystemNode = {
@@ -149,6 +165,8 @@ nodegen_registerFunctions = {
     //Сюда вставляются пути до функций, которые должны быть регистрированы в библиотеке
     //внутри файлов с функциями составляются определения через node_func
     
+    #include "compiled\resdk_graph.h"
+
     #include "ReNode_bindingHelpers.sqf"
 
     //тут зарегистрированы узлы общего назначения (работа с типами, операторы)
@@ -165,6 +183,17 @@ nodegen_registerFunctions = {
     #include "_enums.sqf"
     //структуры
     #include "_structures.sqf"
+
+    nodeModule_register("native_functions")
+    
+    //objects management
+    nodeModule_setPath("Игровые объекты")
+    LoadFile "src\host\NOEngine\NOEngine_ObjectManager.sqf";
+
+    //gamemode control (get all clients, game duration, gamestate (with enums: LOBBY, PLAY, END))
+    nodeModule_setPath("gamestates")
+
+    //
 };
 
 nodegen_registerMember = {
@@ -374,20 +403,19 @@ nodegen_generateLib = {
 };
 
 nodegen_loadClasses = {
-    //['start'] call messagebox;
     private _logger = ifcheck(is3DEN,printLog,cprint);
-    //['log %1',_logger] call messagebox;
     if (!fileEXISTS nodegen_scriptClassesLoader) exitwith {
         ["Scripted class loader not found: %1",nodegen_scriptClassesLoader] call _logger;
     };
+
     private _pathes = preprocessFile nodegen_scriptClassesLoader splitString endl;
-    //['info %1',_pathes] call messagebox;
+    
     {
         private _pts = (_x splitString "\/");
         private _filename = _pts select -1;
         private _fullname = nodegen_scriptClassesFolder + "\" + _filename;
         if (_fullname != _x) then {
-            ["!!! ERROR ON LOADING - Pathes not valid: ""%1"" (%2);",_x,_filename] call _logger;
+            ["!!! ERROR ON LOADING - Invalid path: ""%1"" (%2);",_x,_filename] call _logger;
             continue;
         };
         ["  Loading scripted class ""%1""",_filename] call _logger;

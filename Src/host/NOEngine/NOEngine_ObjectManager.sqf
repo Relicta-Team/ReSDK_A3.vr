@@ -6,6 +6,89 @@
 
 #include <..\..\client\Inventory\inventory.hpp>
 
+//common function for creating items,structures, decorations in gameworld
+"
+	name:Создать объект
+	desc:Создает новый игровой объект в мире на указанной позиции
+	in:classname:Тип объекта
+		opt:def=IDestructible
+	in:vector3:Позиция:Позиция объекта в мире
+	in:auto:Направление:Направление создаваемого объекта. Если не указано, то направление будет случайным, т.е. объект будет направлен в случайную сторону.
+		opt:require=0:allowtypes=int|float|vector3
+	in:bool:На поверхности:При включении этого параметра создаваемый объект будет установлен на ближайшую поверхность, так как если бы он упал с воздуха если позиция находится над землёй, но без получения повреждений объекту.
+		opt:require=0:def=true
+	in:vector3:Вектор:Вектор направления создаваемого объекта. По умолчанию направлен вверх (0,0,1). [community.bistudio.com/wiki/vectorUp Подробнее по ссылке]
+		opt:def=[0,0,1]:require=0
+	return:IDestructible:Созданный объект
+"
+node_func(createGameObjectInWorld) = {
+	params ["_name_str","_pos","_dir",["_emulDrop",false],["_vec",[0,0,1]]];
+	private _type = missionnamespace getVariable ["pt_" + _name_str,"NAN"];
+	if (_type isEqualTo "NAN") exitWith {
+		errorformat("Cant instantiate object with class %1 (not found)",_name_str);
+		nullPtr
+	};
+
+	//alloc type
+	private _chT = call (_type getVariable "getChunkType");
+
+	//default checks
+	assert_str(!isNullVar(_name_str),"Null name for creating object");
+	assert_str(!isNullVar(_chT),"Unknown chunk type for object " + _name_str);
+
+	private this = call (_type getvariable '__instance');
+
+	if (_emulDrop) then {
+
+		private _posI = [0,0,0];
+		private _posI = (ATLToASL _pos) vectorAdd [0,0,0.1];
+
+		private _dirPos = random 360;
+
+		private _itsc = lineIntersectsSurfaces [_posI,_posI vectorDiff [0,0,1000],objNull,objNull,true,1,"VIEW","FIRE"];
+
+		if ((count _itsc) == 0) then {
+			_pos = ASLToATL _posI;
+		} else {
+			(_itsc select 0) params ["_posIn","_vecup","_targ"];
+			_pos = ASLToATL _posIn;
+			_vec = _vecUp
+		};
+	};
+
+	private _visObj = callSelfParams(InitModel,_pos arg _dir arg _vec);
+
+	[[_pos,_chT] call noe_posToChunk,_chT,_visObj] call noe_registerObject;
+
+	this
+};
+
+
+"
+	name:Удалить объект
+	desc:Удаляет указанный объект из мира
+	in:IDestructible:Объект
+	return:bool:Удаление прошло успешно
+"
+node_func(deleteGameObject) = {
+	params ["_obj"];
+	FHEADER;
+
+	if equalTypes(_obj,"") then {
+		private _vObj = pointer_get(_obj);
+		if !pointer_isValidResult(_vObj) exitWith {errorformat("Game object not found - %1",_obj); RETURN(false)};
+		_obj = _vObj;
+	};
+	private _chT = callFunc(_obj,getChunkType);
+	if (_chT == CHUNK_TYPE_ITEM) exitwith {[_obj] call deleteItem};
+	if (_chT == CHUNK_TYPE_STRUCTURE) exitwith {[_obj] call deleteStructure};
+	if (_chT == CHUNK_TYPE_DECOR) exitwith {[_obj] call deleteDecor};
+	
+	assert_str(false,"Unknown chunk type for object " + str _obj);
+	
+	false
+};
+
 // Создание предмета в 3д пространстве
 createItemInWorld = {
 	params ['_name_str',"_pos",["_dir",random 360],["_emulDrop",true],["_vec",[0,0,1]],["_probStackSize",1]];
@@ -24,7 +107,7 @@ createItemInWorld = {
 	// вместо нуля можно передавать параметры
 	private this = 0 call (_type getvariable '__instance');
 
-	private _vec = [0,0,1];
+	//private _vec = [0,0,1];
 
 	if (_emulDrop) then {
 
@@ -56,7 +139,15 @@ createItemInWorld = {
 };
 
 // Создание предмета в контейнере
-createItemInContainer = {
+"
+	name:Создать предмет в контейнере
+	desc:Создает новый игровый предмет в указанном контейнере. Если предмет слишком большой или в контейнере нет места - предмет не будет создан.
+	in:classname:Тип предмета
+		opt:def=Item:typeset=out.1|as_is
+	in:IDestructible:Контейнер:Контейнер, в котором будет создан предмет.
+	return:Item:Созданный предмет в контейнере. Может вернуть null-значение, если создание невозможно по причине нехватки места или сликом большого размера предмета.
+"
+node_func(createItemInContainer) = {
 	params ["_name_str","_container",["_probStackSize",1],["_ignoreMode",""]]; 
 	//ignoremode = all,maxsize,countslots,none
 	//specifiers:resize,insert(by default)
@@ -117,7 +208,16 @@ createItemInContainer = {
 };
 
 // Создание предмета в инвентаре
-createItemInInventory = {
+"
+	name:Создать предмет в инвентаре
+	desc:Создает новый игровой предмет в инвентаре персонажа. Если предмет не получилось создать в слоте персонажа - он будет создан под ним.
+	in:classname:Тип предмета
+		opt:def=Item
+	in:Mob:Персонаж:Персонаж, которому будет выдан предмет
+	in:enum.InventorySlot:Слот:Слот, в котором будет создан предмет
+	return:Item:Созданный предмет
+"
+node_func(createItemInInventory) = {
 	params ["_name_str","_mob","_slot",["_probStackSize",1]];
 
 	if (_mob isEqualType objnull) then {
@@ -306,6 +406,23 @@ deleteItem = {
 
 //Получить игровой объект по позиции. Параметр _retAsList позволяет вернуть несколько объектов в этой позиции
 //_retChild - опциональный параметр для возврата всех дочерних типов
+"
+	name:Получить объекты в позиции
+	desc:Получает массив игровых объектов в заданной позиции
+	in:classname:Тип объекта:Тип искомых объектов
+		opt:def=GameObject
+	in:vector3:Позиция:Точка в которой будет производиться поиск
+	in:float:Радиус:Радиус поиска в метрах от позиции поиска
+		opt:def=3
+	in:bool:Глубокий поиск:При включении этого параметра будет производиться глубокий поиск при котором искомыми объектами будут являться родительские типы, найденные в указанной позиции.
+		opt:def=false
+	return:array[GameObject]:Массив игровых объектов
+"
+node_func(getGameObjectOnPosition_Node) = {
+	params ["_t","_v","_d","_rch"];
+	[_t,_v,_d,true,_rch] call getGameObjectOnPosition;
+};
+
 getGameObjectOnPosition = {
 	params ["_type","_vecPos",["_dist",3],["_retAsList",false],["_retChild",false]];
 	FHEADER;
@@ -346,7 +463,16 @@ getGameObjectOnPosition = {
 };
 
 //возвращает все объекты в мире. очень затратно по ресурсам
-getAllObjectsInWorldTypeOf = {
+"
+	name:Все объекты в мире
+	desc:Возвращает все объекты в мире указанного типа. Данная операция требует много ресурсов и может занять время при большом количестве объектов в мире.
+	in:classname:Тип объекта:Тип искомых объектов
+		opt:def=GameObject
+	in:bool:Глубокий поиск:При включении этого параметра будет производиться глубокий поиск при котором искомыми объектами будут являться родительские типы, найденные в мире. 
+		opt:def=false
+	return:array[GameObject]:Массив игровых объектов
+"
+node_func(getAllObjectsInWorldTypeOf) = {
 	params ["_type",["_retChild",true]];
 	private _mid = worldSize/2;
 	[_type,[_mid,_mid,0],10000,true,_retChild] call getGameObjectOnPosition;

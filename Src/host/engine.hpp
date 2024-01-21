@@ -814,6 +814,14 @@ ACRE_IS_ERRORED = false; _ret;}*/
 // регистрация статической функции по имени
 /*
 	"name:test function" node_func(test_function) = {};
+
+	возможные опциональные дланные opt:
+
+		! NOT IMPLEMENTED
+		typeset - при изменении задаёт тип порта. Если были подключения - отключает
+			typeset=out.1|as_is при изменении задаёт тип порта
+				as_is - берет подключенное значение 
+
 */
 #define node_func(name) + endl+ 'node:name' call nodegen_addFunction; name
 

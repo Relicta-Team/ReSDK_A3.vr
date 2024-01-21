@@ -90,6 +90,18 @@ _capArr = [];
 ]
 node_enum
 
+_capArr = [];
+{
+	_capArr pushBack ((INV_LIST_SLOTNAMES select _foreachIndex)+":"+(INV_LIST_ALL select _foreachIndex));
+} foreach INV_LIST_VARNAME;
+["InventorySlot",_capArr,
+	"name:Тип слота
+	namelib:Тип слота инвентаря
+	desc:Перечисление типов инвентарных слотов. Содержит все слоты, в которые могут быть назначены предметы игровым персонажам
+	"
+]
+node_enum
+
 //enum helper
 nodeModule_register("enumhelper")
 nodeModule_setPath("Перечисления.Преобразования")
