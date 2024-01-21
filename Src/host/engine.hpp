@@ -747,6 +747,9 @@ ACRE_IS_ERRORED = false; _ret;}*/
 //--------------node scripting macros--------------
 //указывает путь узлов для регистрации функций. Должен быть указан в заголовке инициализатора модуля
 
+//макрос проверки разрешения инициализации модуля (для генератора биндингов)
+#define IS_INIT_MODULE isNullVar(__FUNCITONS_LOAD_ONLY__)
+
 //регистрация поля класса в библиотеке
 /*
 	опции:
@@ -809,7 +812,10 @@ ACRE_IS_ERRORED = false; _ret;}*/
 #define node_class call nodegen_addClass;
 
 // регистрация статической функции по имени
-#define node_func(name) + #name call nodegen_addFunction; name
+/*
+	"name:test function" node_func(test_function) = {};
+*/
+#define node_func(name) + endl+ 'node:name' call nodegen_addFunction; name
 
 //Регистрация системного узла
 #define node_system call nodegen_addSystemNode;
