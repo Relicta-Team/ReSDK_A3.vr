@@ -395,6 +395,31 @@ arrayDeleteItem = {
 	_ix != -1
 };
 
+arrayIsValidIndex = {
+	params ["_a","_ix"];
+	count _a > 0 && {_ix < count _a}
+};
+
+//shuffle array elements, return alter array
+arrayShuffleOrig = {
+	params ["_array"]
+	private _tempArray = + _array;
+
+    for "_size" from (count _tempArray) to 1 step -1 do {
+        _array set [_size - 1, (_tempArray deleteAt (floor random _size))];
+    };
+
+    _array
+};
+
+//swap 2 elements in array
+arraySwap = {
+	params ["_a","_is","_id"];
+	private _t = _a select _is;
+	_a set [_is,_a select _id];
+	_a set [_id,_t];
+};
+
 stringLength = {
 	params ["_str",["_unicode",true]];
 	if (_unicode) then {
