@@ -9,7 +9,8 @@
 //common function for creating items,structures, decorations in gameworld
 "
 	name:Создать объект
-	desc:Создает новый игровой объект в мире на указанной позиции
+	namelib:Создать объект GameObject
+	desc:Создает новый игровой объект в мире на указанной позиции.
 	in:classname:Тип объекта
 		opt:def=IDestructible
 	in:vector3:Позиция:Позиция объекта в мире
@@ -24,6 +25,9 @@
 node_func(createGameObjectInWorld) = {
 	params ["_name_str","_pos","_dir",["_emulDrop",false],["_vec",[0,0,1]]];
 	private _type = missionnamespace getVariable ["pt_" + _name_str,"NAN"];
+	
+	assert_str(equalTypes(_type,nullPtr),"Unknown object type " + _name_str);
+
 	if (_type isEqualTo "NAN") exitWith {
 		errorformat("Cant instantiate object with class %1 (not found)",_name_str);
 		nullPtr
