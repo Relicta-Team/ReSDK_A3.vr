@@ -10,7 +10,7 @@
 "
 	name:Создать объект
 	namelib:Создать объект GameObject
-	desc:Создает новый игровой объект в мире на указанной позиции.
+	desc:Создает новый игровой объект типа GameObject в мире на указанной позиции.
 	in:classname:Тип объекта
 		opt:def=IDestructible
 	in:vector3:Позиция:Позиция объекта в мире
@@ -20,7 +20,7 @@
 		opt:require=0:def=true
 	in:vector3:Вектор:Вектор направления создаваемого объекта. По умолчанию направлен вверх (0,0,1). [community.bistudio.com/wiki/vectorUp Подробнее по ссылке]
 		opt:def=[0,0,1]:require=0
-	return:IDestructible:Созданный объект
+	out:IDestructible:Объект:Созданный объект
 "
 node_func(createGameObjectInWorld) = {
 	params ["_name_str","_pos","_dir",["_emulDrop",false],["_vec",[0,0,1]]];
@@ -70,9 +70,9 @@ node_func(createGameObjectInWorld) = {
 
 "
 	name:Удалить объект
-	desc:Удаляет указанный объект из мира
+	desc:Удаляет указанный объект из мира. После удаления все ссылки на этот объект станут невалидными.
 	in:IDestructible:Объект
-	return:bool:Удаление прошло успешно
+	out:bool:Удалён:Было ли успешно удаление объекта.
 "
 node_func(deleteGameObject) = {
 	params ["_obj"];
@@ -149,7 +149,7 @@ createItemInWorld = {
 	in:classname:Тип предмета
 		opt:def=Item:typeset=out.1|as_is
 	in:IDestructible:Контейнер:Контейнер, в котором будет создан предмет.
-	return:Item:Созданный предмет в контейнере. Может вернуть null-значение, если создание невозможно по причине нехватки места или сликом большого размера предмета.
+	out:Item:Предмет:Созданный предмет в контейнере. Может вернуть null-значение, если создание невозможно по причине нехватки места или сликом большого размера предмета.
 "
 node_func(createItemInContainer) = {
 	params ["_name_str","_container",["_probStackSize",1],["_ignoreMode",""]]; 
@@ -219,7 +219,7 @@ node_func(createItemInContainer) = {
 		opt:def=Item
 	in:Mob:Персонаж:Персонаж, которому будет выдан предмет
 	in:enum.InventorySlot:Слот:Слот, в котором будет создан предмет
-	return:Item:Созданный предмет
+	out:Item:Предмет:Созданный предмет
 "
 node_func(createItemInInventory) = {
 	params ["_name_str","_mob","_slot",["_probStackSize",1]];
@@ -420,7 +420,7 @@ deleteItem = {
 		opt:def=3
 	in:bool:Глубокий поиск:При включении этого параметра будет производиться глубокий поиск при котором искомыми объектами будут являться родительские типы, найденные в указанной позиции.
 		opt:def=false
-	return:array[GameObject]:Массив игровых объектов
+	out:array[GameObject]:Массив:Массив найденных игровых объектов указанного типа
 "
 node_func(getGameObjectOnPosition_Node) = {
 	params ["_t","_v","_d","_rch"];
@@ -474,7 +474,7 @@ getGameObjectOnPosition = {
 		opt:def=GameObject
 	in:bool:Глубокий поиск:При включении этого параметра будет производиться глубокий поиск при котором искомыми объектами будут являться родительские типы, найденные в мире. 
 		opt:def=false
-	return:array[GameObject]:Массив игровых объектов
+	out:array[GameObject]:Массив:Массив всех игровых объектов указанного типа
 "
 node_func(getAllObjectsInWorldTypeOf) = {
 	params ["_type",["_retChild",true]];
@@ -483,14 +483,33 @@ node_func(getAllObjectsInWorldTypeOf) = {
 };
 
 //Возвращает все итемы определенного типа
-getAllItemsTypeOf = {
+"
+	name:Все предметы в мире
+	desc:Возвращает массив всех предметов определенного типа, найденные в мире, инвентарях персонажей и контейнерах. Данная операция требует много ресурсов и может занять время при большом количестве объектов в мире.
+	in:classname:Тип предмета:Тип искомых предметов
+		opt:def=Item
+	in:bool:Глубокий поиск:При включении этого параметра будет производиться глубокий поиск при котором искомыми объектами будут являться родительские типы, найденные в мире. 
+		opt:def=false
+	out:array[Item]:Массив:Массив всех найденных предметов указанного типа в мире, инвентарях и контейнерах.
+"
+node_func(getAllItemsTypeOf) = {
 	params ["_type",["_retChild",true]];
 	private _mid = worldSize/2;
 	[_type,[_mid,_mid,0],10000,_retChild] call getAllItemsOnPosition;
 };
 
 //Получает все итемы в инвентаре сущности
-getAllItemsInInventory = {
+"
+	name:Все предметы в инвентаре
+	desc:Возвращает все итемы в инвентаре сущности.
+	in:Mob:Сущность:Моб, у которого будет выполнен поиск и получение предметов
+	in:classname:Тип предмета:Тип искомых предметов
+		opt:def=Item
+	in:bool:Глубокий поиск:При включении этого параметра будет производиться глубокий поиск при котором искомыми объектами будут являться родительские типы, найденные в мире. 
+		opt:def=false
+	out:array[Item]:Массив:Массив всех итемов в инвентаре сущности указанного типа.
+"
+node_func(getAllItemsInInventory) = {
 	params ["_mob","_type",["_retChild",true]];
 	private _objRet = [];
 	private _algGet = ifcheck(_retChild,{isTypeStringOf(_this,_type)},{callFunc(_this,getClassName) == _type});
@@ -519,7 +538,19 @@ getAllItemsInInventory = {
 };
 
 //Собирает все игровые объекты на позиции возвращая их в листе. Включает предметы на мобах и в контейнерах
-getAllItemsOnPosition = {
+"
+	name:Все предметы в позиции
+	desc:Возвращает все предметы в мире, инвентарях и контейнерах в указанном радиусе от указанной позиции.
+	in:classname:Тип предмета:Тип искомых предметов
+		opt:def=Item
+	in:vector3:Позиция:Точка поиска предметов.
+	in:float:Радиус:Радиус поиска
+		opt:def=3
+	in:bool:Глубокий поиск:При включении этого параметра будет производиться глубокий поиск при котором искомыми объектами будут являться родительские типы, найденные в мире. 
+		opt:def=false
+	out:array[Item]:Массив:Массив всех найденных предметов в мире, инвентарях и контейнерах в указанной точке и радиусе от этой точки.
+"
+node_func(getAllItemsOnPosition) = {
 	params ["_type","_vecPos",["_dist",3],["_retChild",false]];
 	FHEADER;
 	if !isTypeNameOf(_type,Item) exitWith {
@@ -582,6 +613,23 @@ getAllItemsOnPosition = {
 };
 
 //Возвращает всех мобов в радиусе _dist на позиции _vecPos
+"
+	name:Все мобы в позиции
+	desc:Возвращает все мобы в мире в указанном радиусе от указанной позиции.
+	in:classname:Тип моба:Тип искомых мобов
+		opt:def=BasicMob
+	in:vector3:Позиция:Точка поиска мобов.
+	in:float:Радиус:Радиус поиска
+		opt:def=3
+	in:bool:Глубокий поиск:При включении этого параметра будет производиться глубокий поиск при котором искомыми объектами будут являться родительские типы, найденные в мире. 
+		opt:def=false
+	out:array[BasicMob]:Массив:Массив всех искомых мобов в мире в указанной точке и радиусе от этой точки.
+"
+node_func(getMobsOnPosition_Node) = {
+	params ["_type","_vecPos","_dist",["_retChild",false]];
+	[_type,_vecPos,_dist,null,_retChild] call getMobsOnPosition;
+};
+
 getMobsOnPosition = {
 	params ["_type","_vecPos",["_dist",3],["_retAsList",false],["_retChild",false]];
 	FHEADER;
@@ -603,7 +651,16 @@ getMobsOnPosition = {
 };
 
 //Возвращает список всех мобов в мире
-getAllMobsInWorld = {
+"
+	name:Все мобы в мире
+	desc:Возвращает список всех мобов в мире.
+	in:classname:Тип моба:Тип искомых мобов
+		opt:def=BasicMob
+	in:bool:Глубокий поиск:При включении этого параметра будет производиться глубокий поиск при котором искомыми объектами будут являться родительские типы, найденные в мире. 
+		opt:def=false
+	out:array[BasicMob]:Массив:Массив всех искомых мобов в мире.
+"
+node_func(getAllMobsInWorld) = {
 	params ["_type",["_retChild",false]];
 	private _list = cm_allInGameMobs apply {_x getvariable "LINK"};
 	private _algGet = ifcheck(_retChild,{isTypeStringOf(_this,_type)},{callFunc(_this,getClassName) == _type});
@@ -617,12 +674,19 @@ getAllMobsInWorld = {
 };
 
 //Получает игровой объект по ссылке
-getObjectByRef = {
+"
+	name:Объект по ссылке
+	desc:Получает игровой объект по глобальной ссылке, указанной в редакторе.
+	in:string:Ссылка:Глобальная ссылка на объект.
+	out:GameObject:Объект:Объект по ссылке. Может возвращать null, если объекта с такой ссылкой не существует.
+"
+node_func(getObjectByRef) = {
 	params [["_name",""],["_def",nullPtr]];
 	go_editor_globalRefs getOrDefault [_name,_def];
 };
 
 //получить зону по имени
+//TODO implement
 getZoneByName = {
 	zoneLocations_map_all getOrDefault [_this,nullPtr];
 };

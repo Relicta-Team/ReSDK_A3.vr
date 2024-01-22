@@ -56,6 +56,11 @@ format["
 (["boolToFloat","[0,1]select(@in.1)","bool:Булево","float:Число","Преобразование логического значения в дробное число"] call _convFunc) node_system
 //stringToBool
 (["stringToBool","(trim(@in.1)==""true"")","string:Строка","bool:Булево","Преобразование строки в логическое значение"] call _convFunc) node_system
+//arrayToBool
+(["arrayToBool","(count (@in.1) > 0)","auto:Массив" opt "typeget=array;@type","bool:Булево","Преобразование массива в логическое значение. Пустой массив является ЛОЖЬЮ, не пустой - ИСТИНОЙ."] call _convFunc) node_system
+//objectToBool
+(["objectToBool","!ISNULL(@in.1)","object^:Объект","bool:Булево","Преобразование объекта в логическое значение. Валидный (существующий) объект является ИСТИНОЙ, несуществующий (удаленный) - ЛОЖЬЮ."] call _convFunc) node_system
+
 //boolToString -> use valueToString
 //(["boolToString","str(@in.1)","bool:Булево","string:Строка","Преобразование логического значения в строку"] call _convFunc) node_system
 
@@ -63,9 +68,9 @@ format["
 (["handleToInt","@in.1","handle:Объект","int:Целое число","Преобразование handle в целое число"] call _convFunc) node_system
 
 //vector3ToArray
-(["vector3ToArray","@in.1","vector3:Вектор","array[float]:Массив","Преобразование трехмерного вектора в массив"] call _convFunc) node_system
+(["vector3ToArray","@in.1","vector3:Вектор","array[float]:Массив","Преобразование трехмерного вектора в массив из трех элементов."] call _convFunc) node_system
 //vector2ToArray
-(["vector2ToArray","@in.1","vector2:Вектор","array[float]:Массив","Преобразование двухмерного вектора в массив"] call _convFunc) node_system
+(["vector2ToArray","@in.1","vector2:Вектор","array[float]:Массив","Преобразование двухмерного вектора в массив из двух элементов."] call _convFunc) node_system
 //arrayToVector3
 (["arrayToVector3","(@in.1)select[0,3]","array[float]:Массив","vector3:Вектор","Преобразование массива в трехмерный вектор"] call _convFunc) node_system
 //arrayToVector2
