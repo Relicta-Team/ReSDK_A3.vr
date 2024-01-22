@@ -188,7 +188,7 @@ nodegen_registerFunctions = {
     
     //objects management
     nodeModule_setPath("Игровые объекты")
-    LoadFile "src\host\NOEngine\NOEngine_ObjectManager.sqf";
+    loadfunc("src\host\NOEngine\NOEngine_ObjectManager.sqf")
 
     //gamemode control (get all clients, game duration, gamestate (with enums: LOBBY, PLAY, END))
     nodeModule_setPath("gamestates")
