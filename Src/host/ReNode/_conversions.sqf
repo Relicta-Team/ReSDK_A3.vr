@@ -84,6 +84,20 @@ format["
 //colorToString
 //!(["colorToString","@in.1","color:Цвет","string:Строка","Преобразование цвета в html-строку"] call _convFunc) node_system
 
+//string to classname
+"
+    node:stringToClassname
+    name:Строку в имя класса
+    path:Преобразования
+    desc:Преобразует строку в имя класса. Если 
+    color:Function
+    exec:all
+    code:"+'private @genvar.out.2 = [@in.1,@in.2] call oop_checkTypeSafe; @out.1'+"
+    in:string:Строка:Строчное представление имени класса, которое будет преобразовано
+    in:classname:По умолчанию:Возвращаемое значение в случае возникновения ошибки (когда указанный класс не найден)
+    out:classname:Имя класса:Имя класса полученное из строки или из значения по умолчанию в случае ошибки.
+" node_system
+
 //enum helpers
 (["enumToInt","@in.1","auto:Перечилсение"/*TODO +endl+"opt:allowtypes=>enum."*/,"int:Число","Преобразование значения перечисления в целое число"] call _convFunc) node_system
 (["enumToString","enum_vToK_@gettype.in.1 get str(@in.1)","auto:Перечисление","string:Имя","Преобразование значения перечисления в его название"] call _convFunc) node_system

@@ -108,10 +108,33 @@ _capArr = [];
 	(_x splitString ":") params ["_mName","_mDesc"];
 	_capArr pushBack (_mName +":"+ (str _forEachIndex)+":"+_mDesc);
 } foreach go_internal_chatMesMapText;
-["ChatMessageChannel",_capArr
+["ChatMessageChannel",_capArr,
 	"name:Тип сообщения чата
 	namelib:Тип сообщения чата
 	desc:Перечисление типов сообщений чата отвечает за накладываемый стиль на текст, который будет выведен в чате игрока.
+	"
+]
+node_enum
+
+//access
+_capArr = [];
+{
+	(_x splitstring ":") params ["_acclvlStr","_accName",["_desc",""]];
+	private _val = _accName + ":" + _acclvlStr;
+	if (_desc != "") then {_val = _val + ":" + _desc};
+	_capArr pushBack _val;
+} foreach ACCESS_LIST_NODE_BINDING;
+["AccessLevel",_capArr,
+	"
+	name:Уровень доступа
+	desc:Перечисление уровней доступа. Содержит все доступные уровни доступа."
+]
+node_enum
+
+
+["MusicChannel",MUSIC_LIST_NODE_ENUM_DEF,
+	"name:Музыкальный канал
+	desc:Канал для воспроизведения музыки. Каждый канал имеет свой приоритет, где базовый канал является каналом с самым низким приоритетом.
 	"
 ]
 node_enum

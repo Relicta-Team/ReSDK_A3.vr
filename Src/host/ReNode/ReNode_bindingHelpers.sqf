@@ -69,7 +69,7 @@ _reg_function_common_provider = {
     };
 };
 
-// ["systemNodeName","Имя:Библиотечное имя","nil","void:Любое значение" opt "dname=0:mul=1"] reg_unary
+// ["systemNodeName","Имя:Библиотечное имя","nil","void:Любое значение" opt "dname=0:mul=1"] reg_nular
 _reg_nular_function = {
     params ["_sysname","_text","_code","_rezInfo",["_desc",""]];
     private _paramsContext = [];
@@ -97,7 +97,7 @@ _reg_unary_function = {
     (_paramsContext joinString endl) node_system
 };
 
-// ["systemNodeName","Имя:Библиотечное имя","nil","void:Входное знач.1","void:Входное знач.2","void:Выходное знач."] reg_unary
+// ["systemNodeName","Имя:Библиотечное имя","nil","void:Входное знач.1","void:Входное знач.2","void:Выходное знач."] reg_binary
 _reg_binary_function = {
     params ["_sysname","_text","_code","_inInfo1","_inInfo2","_rezInfo",["_desc",""]];
     private _paramsContext = [];

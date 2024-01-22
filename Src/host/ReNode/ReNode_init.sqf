@@ -170,6 +170,13 @@ nodegen_registerFunctions = {
     
     #include "compiled\resdk_graph.h"
 
+    //common headers region
+    #include "..\NOEngine\NOEngine.h"
+    #include "..\NOEngine\NOEngine.hpp"
+    #include "..\ClientManager\Client.hpp"
+    #include "..\ClientManager\ClientManager.h"
+    //end common headers region
+
     #include "ReNode_bindingHelpers.sqf"
 
     //тут зарегистрированы узлы общего назначения (работа с типами, операторы)
@@ -193,8 +200,13 @@ nodegen_registerFunctions = {
     nodeModule_setPath("Игровые объекты.Утилиты")
     #include "..\NOEngine\NOEngine_ObjectManager.sqf"
 
+    nodeModule_register("clients")
+    nodeModule_setPath("Клиенты")
+    #include "..\ClientManager\functions.sqf"
+
     //gamemode control (get all clients, game duration, gamestate (with enums: LOBBY, PLAY, END))
-    nodeModule_setPath("gamestates")
+    nodeModule_register("gamemode")
+    nodeModule_setPath("Контроль игры")
     //host\GamemodeManager\GamemodeFunctions.sqf
     #include "..\GamemodeManager\GamemodeFunctions.sqf"
 
