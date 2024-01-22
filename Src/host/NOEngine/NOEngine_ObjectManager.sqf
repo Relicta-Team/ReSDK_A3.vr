@@ -9,7 +9,7 @@
 //common function for creating items,structures, decorations in gameworld
 "
 	name:Создать объект
-	namelib:Создать объект GameObject
+	namelib:Создать объект GameObject (спавн объекта)
 	desc:Создает новый игровой объект типа GameObject в мире на указанной позиции.
 	in:classname:Тип объекта
 		opt:def=IDestructible
@@ -32,6 +32,8 @@ node_func(createGameObjectInWorld) = {
 		errorformat("Cant instantiate object with class %1 (not found)",_name_str);
 		nullPtr
 	};
+
+	assert_str(!isTypeNameOf(_name_str,BasicMob),"BasicMob not supported in createGameObjectInWorld");
 
 	//alloc type
 	private _chT = call (_type getVariable "getChunkType");

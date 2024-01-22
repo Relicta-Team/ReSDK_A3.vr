@@ -269,19 +269,6 @@ node_system_group("control")
 	" node_system
 
 	"
-		node:thisObject
-		name:Этот объект
-		namelib:Объект этого графа (этот объект)
-		desc:Возвращает ссылку на экземпляр текущего графа.
-		icon:data\\icons\\pill_16x
-		color:PureFunction
-		code:this
-		exec:pure
-		out:object:Объект:Владелец
-			opt:typeget=ANY;@type
-	" node_system
-
-	"
 		node:castto
 		name:Преобразовать тип
 		namelib:Преобразование типа

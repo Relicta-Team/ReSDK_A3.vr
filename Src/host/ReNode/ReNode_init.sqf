@@ -72,6 +72,9 @@ nodegen_addFunction = {
     if (__nodemodule_common_renderType__ != "") then {
         _buf pushBack (format["rendertype:%1",__nodemodule_common_renderType__]);
     };
+    if (__nodemodule_common_exectype__ != "") then {
+        _buf pushBack (format["exec:%1",__nodemodule_common_exectype__]);
+    };
 
 
     [_buf joinstring endl,"func"] call nodegen_commonSysAdd;
@@ -187,11 +190,13 @@ nodegen_registerFunctions = {
     nodeModule_register("native_functions")
     
     //objects management
-    nodeModule_setPath("Игровые объекты")
-    loadfunc("src\host\NOEngine\NOEngine_ObjectManager.sqf")
+    nodeModule_setPath("Игровые объекты.Утилиты")
+    #include "..\NOEngine\NOEngine_ObjectManager.sqf"
 
     //gamemode control (get all clients, game duration, gamestate (with enums: LOBBY, PLAY, END))
     nodeModule_setPath("gamestates")
+    //host\GamemodeManager\GamemodeFunctions.sqf
+    #include "..\GamemodeManager\GamemodeFunctions.sqf"
 
     //
 };

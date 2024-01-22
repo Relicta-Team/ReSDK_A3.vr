@@ -778,6 +778,12 @@ gm_isRoleExists = {
 	true
 };
 
+//!UNSAFE ROLE GETTER. Use this from scripted gamemode (need write code for getting roles)
+// node_func(gm_getRoleObject_Node) = {
+// 	params ["_roleClass"];
+// 	assert_str(_roleClass!="","Role class cannot be empty");
+// 	assert_str(!isNullReference(gm_currentMode),"Gamemode must be selected");
+// };
 gm_getRoleObject = {getRoleObject(_this)};
 
 //Получаем объект игрового режима

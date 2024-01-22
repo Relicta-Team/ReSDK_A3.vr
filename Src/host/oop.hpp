@@ -342,7 +342,8 @@
 #define getConst(obj,constvar) callFunc(obj,constvar)
 #define getSelfConst(constvar) callSelf(constvar)
 
-//type accessing (extended reflection)
+//type accessing (extended reflection) 
+//!OBSOLETE use object.getType class for accessing type
 #define typeGet(typ) (missionNamespace getvariable ['pt_'+ 'typ',nullPtr])
 #define typeGetFromObject(obj) (obj getVariable PROTOTYPE_VAR_NAME)
 #define typeGetFromString(strvar) (missionNamespace getvariable ['pt_'+ (strvar),nullPtr])
@@ -372,7 +373,7 @@
 #define getFieldBaseValueWithMethod(strt,varx,prp) ([strt,varx,true,prp] call oop_getFieldBaseValue)
 // NON USABLE #define isTypeStringOf(obj,type) ((tolower type) in ((obj) getVariable PROTOTYPE_VAR_NAME getVariable "__inhlist_map"))
 
-
+//!deprecated
 #define isNullObject(obj) ((obj) isequalto nullPtr)
 
 

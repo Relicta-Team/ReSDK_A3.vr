@@ -92,7 +92,7 @@ node_enum
 
 _capArr = [];
 {
-	_capArr pushBack ((INV_LIST_SLOTNAMES select _foreachIndex)+":"+(INV_LIST_ALL select _foreachIndex));
+	_capArr pushBack ((INV_LIST_SLOTNAMES select _foreachIndex)+":"+(str(INV_LIST_ALL select _foreachIndex)));
 } foreach INV_LIST_VARNAME;
 ["InventorySlot",_capArr,
 	"name:Тип слота
@@ -101,6 +101,21 @@ _capArr = [];
 	"
 ]
 node_enum
+
+assert_str(!isNull(go_internal_chatMesMapText),"go_internal_chatMesMap is null. Cant generate enum ChatMessageChannel");
+_capArr = [];
+{
+	(_x splitString ":") params ["_mName","_mDesc"];
+	_capArr pushBack (_mName +":"+ (str _forEachIndex)+":"+_mDesc);
+} foreach go_internal_chatMesMapText;
+["ChatMessageChannel",_capArr
+	"name:Тип сообщения чата
+	namelib:Тип сообщения чата
+	desc:Перечисление типов сообщений чата отвечает за накладываемый стиль на текст, который будет выведен в чате игрока.
+	"
+]
+node_enum
+
 
 //enum helper
 nodeModule_register("enumhelper")

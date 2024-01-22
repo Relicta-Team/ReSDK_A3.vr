@@ -11,8 +11,6 @@ __nodemodule_common_renderType__ = ""; \
 __nodemodule_common_exectype__ = ""; \
 __nodemodule_common_data__ = "";
 
-#define loadfunc(path) call compile preprocessFileLineNumbers (path);
-
 #define nodeModule_setPath(_path) __nodemodule_common_path__ = _path;
 #define nodeModule_addPath(_path) __nodemodule_common_path__ = __nodemodule_common_path__ + "." + _path;
 #define nodeModule_popPath(_lvl) __prvd_path_splited = (__nodemodule_common_path__ splitString "."); \
