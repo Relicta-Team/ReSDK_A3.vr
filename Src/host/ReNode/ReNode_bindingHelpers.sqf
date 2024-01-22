@@ -8,6 +8,7 @@ __nodemodule_common_path__ = "undefined."+_name; \
 __nodemodule_common_icon__ = ""; \
 __nodemodule_common_clrstyle__ = ""; \
 __nodemodule_common_renderType__ = ""; \
+__nodemodule_common_exectype__ = ""; \
 __nodemodule_common_data__ = "";
 
 #define loadfunc(path) call compile preprocessFileLineNumbers (path);
@@ -25,6 +26,7 @@ if ((count __prvd_path_splited)-_lvl > 0) then { \
 #define nodeModule_setIcon(_icoPath) __nodemodule_common_icon__ = _icoPath;
 #define nodeModule_setColorStyle(_clr) __nodemodule_common_clrstyle__ = _clr;
 #define nodeModule_setRenderType(_rndr) __nodemodule_common_renderType__ = _rndr;
+#define nodeModule_setExecType(_et) __nodemodule_common_exectype__ = _et;
 
 #define reg_binary call _reg_binary_function;
 #define reg_unary call _reg_unary_function;
@@ -64,6 +66,9 @@ _reg_function_common_provider = {
     if (__nodemodule_common_renderType__ != "") then {
         _pCtx pushBack (format["rendertype:%1",__nodemodule_common_renderType__]);
     };
+    if (__nodemodule_common_exectype__ != "") then {
+        _pCtx pushBack (format["exec:%1",__nodemodule_common_exectype__]);
+    };
 };
 
 // ["systemNodeName","Имя:Библиотечное имя","nil","void:Любое значение" opt "dname=0:mul=1"] reg_unary
@@ -80,13 +85,16 @@ _reg_nular_function = {
 
 // ["systemNodeName","Имя:Библиотечное имя","nil","void:Входное знач.","void:Выходное знач."] reg_unary
 _reg_unary_function = {
-    params ["_sysname","_text","_code","_inInfo","_rezInfo",["_desc",""]];
+    params ["_sysname","_text","_code","_inInfo",["_rezInfo",""],["_desc",""]];
     private _paramsContext = [];
     
     [_paramsContext,_sysname,_text,_code,_desc] call _reg_function_common_provider;
 
     _paramsContext pushBack (format["in:%1",_inInfo]);
-    _paramsContext pushBack (format["out:%1",_rezInfo]);
+    //optional output
+    if (_rezInfo != "") then {
+        _paramsContext pushBack (format["out:%1",_rezInfo]);
+    };
     
     (_paramsContext joinString endl) node_system
 };

@@ -70,6 +70,64 @@ node_system_group("array")
 node_system
 
 "
+    node:isValidIndex
+    name:Индекс существует
+    desc:Проверяет является ли индекс существующим (валидным), возвращая ИСТИНУ, если он находится в диапазоне размера массива. Для массива [5,6,7] индекс 4 будет инвалиден, а индекс 2 - валиден.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:pure
+    code:[@in.1,@in.2] call arrayIsValidIndex
+    in:auto:Массив:Ссылка на массив
+        opt:typeget=array;@type
+    in:int:Индекс:Проверяемый индекс
+    out:bool:Существует:Возвращает true, если индекс существует для массива, иначе false
+"
+node_system
+
+"
+    node:lastIndex
+    name:Последний индекс
+    desc:Возвращает индекс последнего элемента массива. Если массив пустой - возвращает -1.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:pure
+    code:count(@in.1)-1
+    in:auto:Массив:Ссылка на массив
+        opt:typeget=array;@type
+    out:int:Индекс:Индекс последнего элемента массива. -1 если массив пустой
+" node_system
+
+"
+    node:shuffle
+    name:Перемешать
+    desc:Перемешивает элементы массива в случайном порядке.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    autocoloricon:1
+    exec:all
+    code:[@in.1] call arrayShuffleOrig; @out.1
+    in:auto:Массив:Ссылка на массив
+        opt:typeget=array;@type
+" node_system
+
+"
+    node:swap
+    name:Заменить
+    desc:Заменяет два элемента массива местами.
+    icon:data\\icons\\ArrayPin.png
+    rendertype:NoHeader
+    exec:all
+    code:[@in.1,@in.2,@in.3] call arraySwap; @out.1
+    in:auto:Массив:Ссылка на массив
+        opt:typeget=array;@type
+    in:int:Индекс 1:Индекс первого элемента
+    in:int:Индекс 2:Индекс второго элемента
+"
+node_system
+
+"
 	node:set
 	name:Установить элемент
 	namelib:Установка элемента массива

@@ -178,7 +178,7 @@ nodegen_registerFunctions = {
     #include "_math.logical.sqf"
     #include "_model.sqf"
     #include "_hashmap.sqf"
-
+    #include "_objects.sqf"
     //типы стандартных перечислений
     #include "_enums.sqf"
     //структуры
