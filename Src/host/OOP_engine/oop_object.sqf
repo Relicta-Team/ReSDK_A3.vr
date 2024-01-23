@@ -19,12 +19,11 @@ class(object) basic()
 	node_class
 
 	"
-		name:Получить имя
-		namelib:Получить имя объекта
-		desc:Получает имя объекта. Данное имя эквивалентно имени класса.
-		type:method
+		name:Получить класснейм
+		namelib:Получить имя класса объекта
+		desc:Получает класснейм объекта.
+		type:get
 		lockoverride:1
-		color:PureFunction
 		return:classname:Имя класса
 	" node_met
 	func(getClassName)
@@ -36,10 +35,9 @@ class(object) basic()
 	"
 		name:Получить класс
 		namelib:Получить класс объекта
-		desc:Получает класс объекта.
-		type:method
+		desc:Получает класс объекта. Класс объекта - это специальный тип, содержащий информацию о самом классе а не о его экземплярах.
+		type:get
 		lockoverride:1
-		color:PureFunction
 		return:class:Объект типа (класс)
 	" node_met
 	getter_func(getType,typeGetFromObject(this));

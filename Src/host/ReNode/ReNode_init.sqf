@@ -75,6 +75,9 @@ nodegen_addFunction = {
     if (__nodemodule_common_exectype__ != "") then {
         _buf pushBack (format["exec:%1",__nodemodule_common_exectype__]);
     };
+    if (__nodemodule_common_data__ != "") then {
+        _buf pushBack (endl+__nodemodule_common_data__)
+    };
 
 
     [_buf joinstring endl,"func"] call nodegen_commonSysAdd;

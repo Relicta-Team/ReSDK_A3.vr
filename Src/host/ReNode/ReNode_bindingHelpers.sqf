@@ -25,6 +25,7 @@ if ((count __prvd_path_splited)-_lvl > 0) then { \
 #define nodeModule_setColorStyle(_clr) __nodemodule_common_clrstyle__ = _clr;
 #define nodeModule_setRenderType(_rndr) __nodemodule_common_renderType__ = _rndr;
 #define nodeModule_setExecType(_et) __nodemodule_common_exectype__ = _et;
+#define nodeModule_commonData __nodemodule_common_data__ = 
 
 #define reg_binary call _reg_binary_function;
 #define reg_unary call _reg_unary_function;
@@ -66,6 +67,9 @@ _reg_function_common_provider = {
     };
     if (__nodemodule_common_exectype__ != "") then {
         _pCtx pushBack (format["exec:%1",__nodemodule_common_exectype__]);
+    };
+    if (__nodemodule_common_data__ != "") then {
+        _pCtx pushBack (endl+__nodemodule_common_data__)
     };
 };
 

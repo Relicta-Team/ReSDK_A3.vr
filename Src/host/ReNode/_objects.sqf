@@ -31,7 +31,9 @@ nodeModule_setExecType("all")
 nodeModule_setColorStyle("PureFunction")
 nodeModule_setExecType("pure")
 
+
 ["thisObject","Этот объект:Объект этого графа (этот объект)",'this',"self:Объект","Возвращает ссылку на экземпляр текущего графа."] reg_nular
+
 
 ["isTypeOf","Унаследован от",'isTypeOf(@in.1,@in.2)',"object^:Объект","classname:Имя класса","bool:Результат","Проверяет, является ли проверяемый объект дочерним типом от указанного класса."] reg_binary
 
