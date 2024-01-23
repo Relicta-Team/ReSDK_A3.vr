@@ -171,10 +171,7 @@ nodegen_registerFunctions = {
     #include "compiled\resdk_graph.h"
 
     //common headers region
-    #include "..\NOEngine\NOEngine.h"
-    #include "..\NOEngine\NOEngine.hpp"
-    #include "..\ClientManager\Client.hpp"
-    #include "..\ClientManager\ClientManager.h"
+    #include "..\ServerRpc\serverRpc.hpp"
     //end common headers region
 
     #include "ReNode_bindingHelpers.sqf"
@@ -198,16 +195,23 @@ nodegen_registerFunctions = {
     
     //objects management
     nodeModule_setPath("Игровые объекты.Утилиты")
+    #include "..\NOEngine\NOEngine.h"
+    #include "..\NOEngine\NOEngine.hpp"
+    #include "..\PointerSystem\pointers.hpp"
     #include "..\NOEngine\NOEngine_ObjectManager.sqf"
 
     nodeModule_register("clients")
     nodeModule_setPath("Клиенты")
+    #include "..\ClientManager\Client.hpp"
+    #include "..\ClientManager\ClientManager.h"
     #include "..\ClientManager\functions.sqf"
 
     //gamemode control (get all clients, game duration, gamestate (with enums: LOBBY, PLAY, END))
     nodeModule_register("gamemode")
     nodeModule_setPath("Контроль игры")
     //host\GamemodeManager\GamemodeFunctions.sqf
+    #include "..\GamemodeManager\GamemodeManager.h"
+    #include "..\GamemodeManager\GamemodeManager.hpp"
     #include "..\GamemodeManager\GamemodeFunctions.sqf"
 
     //

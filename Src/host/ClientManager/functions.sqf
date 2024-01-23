@@ -356,7 +356,7 @@ cm_checkClientInJIPMemory = {
 	true
 };
 
-if IS_INIT_MODULE {
+if IS_INIT_MODULE then {
 
 	_onOOCMessage = {
 		params ["_owner","_text"];
