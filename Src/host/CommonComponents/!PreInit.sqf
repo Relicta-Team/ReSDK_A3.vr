@@ -402,7 +402,7 @@ arrayIsValidIndex = {
 
 //shuffle array elements, return alter array
 arrayShuffleOrig = {
-	params ["_array"]
+	params ["_array"];
 	private _tempArray = + _array;
 
     for "_size" from (count _tempArray) to 1 step -1 do {

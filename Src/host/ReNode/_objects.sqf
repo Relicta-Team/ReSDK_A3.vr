@@ -9,6 +9,7 @@ nodeModule_setExecType("all")
     node:null_check
     name:Объект существует
     namelib:Объект существует (не null)
+    path:Объекты
     desc:Проверяет существование (валидность) объекта. Если ссылка на объект пригоден для использования (не удален и существует) - возвращает ИСТИНУ.
     icon:data\\icons\\icon_BluePrintEditor_Function_16px
     color:PureFunction

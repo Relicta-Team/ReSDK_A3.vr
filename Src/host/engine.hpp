@@ -822,6 +822,8 @@ ACRE_IS_ERRORED = false; _ret;}*/
 			typeset=out.1|as_is при изменении задаёт тип порта
 				as_is - берет подключенное значение 
 
+	для установки параметров функции в автоматическом режиме используйте @cfParams
+
 */
 #define node_func(name) + endl+ 'node:name' call nodegen_addFunction; name
 

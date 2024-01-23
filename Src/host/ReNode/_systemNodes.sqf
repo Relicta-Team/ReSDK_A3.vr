@@ -19,7 +19,7 @@ node_system_group("internal")
 		desc:Стикер для различных пользовательских заметок
 		icon:data\\icons\\icon_Blueprint_Comment_16x.png
 		path:Системные
-		option:""text""\: {""type""\: ""edit""}
+		option:""text""\: {""type""\: ""edit"", ""font_size""\:15}
 	" node_system
 
 node_system_group("operators")
