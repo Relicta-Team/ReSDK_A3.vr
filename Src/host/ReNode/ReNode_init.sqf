@@ -88,7 +88,9 @@ nodegen_addSystemNode = {
 nodegen_addEnumerator = {
     params ["_nodename","_members",["_pdata",'']];
     
+    assert(!isNullVar(_members));
     assert(equalTypes(_members,[]));
+    assert(count _members > 0);
 
     private _map = createHashMap;
     private _iter = 0;

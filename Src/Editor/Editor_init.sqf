@@ -56,6 +56,9 @@
 
 #include <..\client\Inventory\inventory.hpp>
 
+//assertion
+call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
+
 //встраиваемые предварительные функции
 #include <..\host\precompiled.sqf>
 
