@@ -22,3 +22,4 @@ musicdef_pathes.txt
 Third-party/SoundConfigCreator/soundConfigCreator.au3
 ReNode/config.ini
 ReNode/visual.ini
+ReNode/lib.json

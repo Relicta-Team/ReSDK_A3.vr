@@ -437,6 +437,7 @@ class(ScriptedRole) extends(BasicRole)
 		desc:Это число отвечает за количество возможных заходов за роль. Когда каждый игрок заходит за эту роль, то количество уменьшается на 1. Когда это число становится равным нулю, то больше не получится зайти за эту роль.
 		prop:get
 		return:int:Количество заходов
+		classprop:1
 		defval:1
 	" node_var
 	var(count,1);
@@ -537,8 +538,17 @@ class(ScriptedRole) extends(BasicRole)
 	func(canTakeInLobby)
 	{
 		objParams_2(_cliObj,_canPrintErrors);
-		true
+		callSelf(_canTakeInLobbyConst);
 	};
+
+	"
+		name:Доступность в лобби
+		namelib:Можно ли взять в лобби (Доступность в лобби)
+		desc:Указывает можно ли взять роль из лобби
+		type:const
+		return:bool:Возможность взятия роли в лобби
+	" node_met
+	getterconst_func(_canTakeInLobbyConst,true);
 
 	"
 		name:Видимость роли после старта
@@ -550,8 +560,17 @@ class(ScriptedRole) extends(BasicRole)
 	func(canVisibleAfterStart)
 	{
 		objParams_1(_cliObj);
-		true
+		callSelf(_canVisibleAfterStartConst);
 	};
+
+	"
+		name:Доступность в игре
+		namelib:Можно ли взять в игре (Доступность в игре)
+		desc:Указывает можно ли взять роль после старта раунда
+		type:const
+		return:bool:Возможность взятия роли в игре
+	" node_met
+	getterconst_func(_canVisibleAfterStartConst,true);
 
 	"
 		name:Нужные роли дискорда

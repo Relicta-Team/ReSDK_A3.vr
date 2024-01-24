@@ -750,6 +750,17 @@ class(ServerClient) /*extends(NetObject)*/
 		in:string:Сообщение:Текст сообщения.
 		in:enum.ChatMessageChannel:Тип:Тип сообщения.
 	" node_met
+	func(_localSayWrapper)
+	{
+		assert_str(count _this > 2,"Param count error");
+		private _ch = _this select 2;
+		assert_str(!isNullVar(_ch),"Channel param cannot be null");
+		assert_str(equalTypes(_ch,0),"Channel param type error. Must be integer - not " + typename _ch);
+		assert_str(inRange(_ch,0,count go_internal_chatMesMap - 1),"Channel index out of range: " + str _ch);
+		_this set [2,go_internal_chatMesMap select _ch];
+		_this call getSelfFunc(localSay)
+	};
+
 	func(localSay)
 	{
 		objParams_2(_mes,_categ);
