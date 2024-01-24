@@ -21,3 +21,4 @@ Third-party/ImageConverter/icon_output/*
 musicdef_pathes.txt
 Third-party/SoundConfigCreator/soundConfigCreator.au3
 ReNode/config.ini
+ReNode/visual.ini
