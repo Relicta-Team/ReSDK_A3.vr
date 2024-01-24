@@ -394,7 +394,13 @@ nodegen_loadClasses = {
 
     {
         private _pts = (_x splitString "\/");
-        private _filename = _pts select -1;
+        
+        #ifdef __VM_VALIDATE
+            private _filename = _pts select ((count _pts) - 1);
+        #else
+            private _filename = _pts select -1;
+        #endif
+
         private _fullname = nodegen_scriptClassesFolder + "\" + _filename;
         // if (_fullname != _x) then {
         //     ["!!! ERROR ON LOADING - Invalid path: ""%1"" (%2);",_x,_filename] call _logger;
