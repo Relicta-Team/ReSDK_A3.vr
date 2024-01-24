@@ -57,6 +57,10 @@ nodegen_addClass = {
 };
 
 nodegen_addFunction = {
+    #ifdef _SQFVM
+    if (true) exitwith {};
+    #endif
+
     private _ctx = _this;
     private _buf = [_ctx];
 
@@ -84,6 +88,10 @@ nodegen_addFunction = {
 };
 
 nodegen_addSystemNode = {
+    #ifdef _SQFVM
+    if (true) exitwith {};
+    #endif
+
     private _ctx = _this;
     [_ctx,"node"] call nodegen_commonSysAdd;
 };
