@@ -50,12 +50,12 @@ Count modules: 48
  - [Family](host//Family.md) - 2 files
  - [GameEvents](host//GameEvents.md) - 4 files
  - [GamemodeManager](host//GamemodeManager.md) - 11 files
- - [GameModes](host//GameModes.md) - 34 files
+ - [GameModes](host//GameModes.md) - 37 files
  - [GameObjects](host//GameObjects.md) - 139 files
  - [Gender](host//Gender.md) - 1 files
  - [GURPS](host//GURPS.md) - 3 files
  - [Logger](host//Logger.md) - 1 files
- - [MapManager](host//MapManager.md) - 10 files
+ - [MapManager](host//MapManager.md) - 11 files
  - [MatterSystem](host//MatterSystem.md) - 11 files
  - [Medals](host//Medals.md) - 3 files
  - [Namings](host//Namings.md) - 5 files

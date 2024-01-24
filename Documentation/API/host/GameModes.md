@@ -445,3 +445,29 @@ Replaced value:
 	
 ```
 File: [host\GameModes\Prey\GM_Prey.sqf at line 312](../../../Src/host/GameModes/Prey/GM_Prey.sqf#L312)
+# SaloonRoles.sqf
+
+## __isOldGM
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+(callFunc(gm_currentMode,getClassName)=="GMSaloon")
+```
+File: [host\GameModes\Saloon\SaloonRoles.sqf at line 8](../../../Src/host/GameModes/Saloon/SaloonRoles.sqf#L8)
+## __skipIfOldGM
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+if __isOldGM exitWith {null};
+```
+File: [host\GameModes\Saloon\SaloonRoles.sqf at line 9](../../../Src/host/GameModes/Saloon/SaloonRoles.sqf#L9)

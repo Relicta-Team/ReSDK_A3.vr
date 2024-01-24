@@ -569,7 +569,25 @@ init_function(ContextMenu_mouseArea_init)
 
 			_screenToWorldPos = screenToWorld getMousePosition;
 			([_screenToWorldPos] call golib_om_getRayCastData) params ["_obj","_atlPos"];
-			if isNullReference(_obj) exitwith _errDraw;
+			private _mobj = get3DENMouseOver;
+			if (count _mobj > 1) then {_mobj = _mobj select 1} else {_mobj = objNull};
+			_allNulls = isNullReference(_obj) && isNullReference(_mobj);
+			if _allNulls exitwith _errDraw;
+			//get not null
+			if (isNullReference(_obj) || isNullReference(_mobj)) then {
+				if isNullReference(_obj) then {
+					_obj = _mobj;
+				};
+			} else {
+				//all not null
+				_d1 = _obj distance cameraOn;
+				_d2 = _mobj distance cameraOn;
+				if (_d1 < _d2) then {
+					_obj = _obj;
+				} else {
+					_obj = _mobj;
+				};
+			};
 
 			contextMenu_internal_energy_toObject = _obj;
 

@@ -76,6 +76,11 @@ editor_attribute("EditorGenerated")
 class(MediumWoodenTable) extends(TableBase)
 	var(model,"a3\structures_f_epa\civ\camping\woodentable_large_f.p3d");
 endclass
+
+editor_attribute("EditorGenerated")
+class(MediumWoodenTable1) extends(MediumWoodenTable)
+	var(model,"a3\props_f_orange\furniture\tablebig_01_f.p3d");
+endclass
 editor_attribute("EditorGenerated")
 class(SmallWoodenTable) extends(MediumWoodenTable)
 	var(model,"a3\structures_f_epa\civ\camping\woodentable_small_f.p3d");

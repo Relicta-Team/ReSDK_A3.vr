@@ -48,7 +48,7 @@ esc_openMenu = {
 	if (!(call widget_antiGammaCheck)) exitWith {
         error("Brightness or gamma is out of the acceptable range. Set the brightness and gamma value to 1");
         //endMission "LOSER";
-        rpcCall("clientDisconnect",vec2("Вы были отключены от сервера","На сервере запрещается изменение яркости и гаммы. Установите свои значения яркости и гаммы на значения стандартные"));
+        rpcCall("clientDisconnect",vec2("Вы были отключены от сервера","На сервере запрещается изменение яркости и гаммы. " + widget_antiGamma_lastError));
     };
 	
 	esc_isMenuOpened = true;
@@ -167,7 +167,7 @@ esc_closeMenu = {
 	if (!(call widget_antiGammaCheck)) exitWith {
 		error("Brightness or gamma is out of the acceptable range. Set the brightness and gamma value to 1");
 		//endMission "LOSER";
-		rpcCall("clientDisconnect",vec2("Вы были отключены от сервера","На сервере запрещается изменение яркости и гаммы. Установите свои значения яркости и гаммы на значения стандартные"));
+		rpcCall("clientDisconnect",vec2("Вы были отключены от сервера","На сервере запрещается изменение яркости и гаммы. " + widget_antiGamma_lastError));
 	};
 	
 	esc_isMenuOpened = false;

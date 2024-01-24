@@ -384,6 +384,7 @@ endclass
 
 class(Shavirma) extends(IFoodItem)
 	var(name,"Шавирма");
+	var(model,"ml_exodusnew\beconfried.p3d");
 	var(reagents,[[vec2("Nutriment",40)] arg 100]newReagents);
 endclass
 
