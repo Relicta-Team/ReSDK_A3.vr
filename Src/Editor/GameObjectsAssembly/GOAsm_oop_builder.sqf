@@ -147,6 +147,8 @@ function(goasm_builder_buildImplMain)
 			private _isInherAtr = not_equals(_mot,_pObj);
 			{
 				_x params ["_mem_name","_atrlist"];
+				_mem_name = tolower _mem_name; //fix fields inspector attributes
+				
 				//Член не имеет атрибутов. проводим регистрацию
 				if !(_mem_name in _refArr) then {
 					private _list = [];
