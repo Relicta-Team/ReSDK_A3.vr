@@ -23,7 +23,7 @@
 	out:IDestructible:Объект:Созданный объект
 "
 node_func(createGameObjectInWorld) = {
-	params ["_name_str","_pos","_dir",["_emulDrop",false],["_vec",[0,0,1]]];
+	params ["_name_str","_pos",["_dir",random 360],["_emulDrop",false],["_vec",[0,0,1]]];
 	private _type = missionnamespace getVariable ["pt_" + _name_str,"NAN"];
 	
 	assert_str(equalTypes(_type,nullPtr),"Unknown object type " + _name_str);
