@@ -12,7 +12,7 @@
 #include "..\..\GameConstants.hpp"
 
 editor_attribute("InterfaceClass")
-class(Container) extends(item)
+class(Container) extends(Item)
 
 	#include "..\..\Interfaces\IContainer.Interface"
 

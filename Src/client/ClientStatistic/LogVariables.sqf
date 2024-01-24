@@ -20,6 +20,9 @@ clistat_widgets = [_ctg,_back,_text];
 
 #define colortext(clr,txt) "<t color='#"+'clr'+"'>"+txt+"</t>"
 
+clistat_internal_allch_buffer = [];
+clistat_internal_allch_buffer_frame = 0;
+
 clistat_buffer = [
 	[colortext(CC5460,"fps: "),{
 		format["cur:%1; min:%2; dt:%3;",round diag_fps,round diag_fpsmin,diag_deltaTime]
@@ -47,11 +50,43 @@ clistat_buffer = [
 	[colortext(D3C857,"NOE objs: "),{
 		_ppos = getPosATL player; _buf = [];
 		{
-			_buf pushBack (count((noe_client_cs get _x get (str([_ppos,_x] call noe_posToChunk))) select 2))
-		} foreach noe_client_allChunkTypes;
+			_iCtr = _buf pushBack (count((noe_client_cs get _x get (str([_ppos,_x] call noe_posToChunk))) select 2));
+			clistat_internal_allch_buffer_frame = clistat_internal_allch_buffer_frame + 1;
+			if (clistat_internal_allch_buffer_frame > 10) then {
+				if (_iCtr == -1) then {continue};
 
+				_curBuf = _buf select _iCtr;
+				_chT = _x;
+				{
+					_curBuf = _curBuf + (count((noe_client_cs get _chT get (str(
+						([_ppos,_chT] call noe_posToChunk) vectorAdd _x
+					))) select 2) );
+				} foreach [ 
+					[1,0],
+					[0,1],
+					[1,1],
+					[-1,0],
+					[0,-1],
+					[-1,-1],
+					[1,-1],
+					[-1,1]
+				];
+				if !(finite _curBuf) then {_curBuf = 0.1};
+				clistat_internal_allch_buffer set [_foreachIndex,_curBuf];
+				clistat_internal_allch_buffer_frame = 0;
+			};
+
+		} foreach noe_client_allChunkTypes;
+		
 		_dt = ["{%1,%2,%3}"]+_buf;
 		format(_dt)
+	}],
+	[colortext(D3C857,"NOE all: "),{
+		_all = 0;
+		{_all = _all + _x; true} count clistat_internal_allch_buffer;
+		_dt = (["{%1,%2,%3}=%4"]+clistat_internal_allch_buffer);
+		_dt pushBack _all;
+		format _dt
 	}],
 	[colortext(5D56DB,"Receiver in world:"),{count vs_allWorldRadios}],
 	[colortext(5D56DB,"TF local transport:"),{count vs_processingRadiosList}],
@@ -80,6 +115,9 @@ clistat_buffer = [
 ];
 
 clistat_onupdate = {
+	
+	if (!clistat_isEnabled) exitwith {};
+
 	_text = "";
 
 	{

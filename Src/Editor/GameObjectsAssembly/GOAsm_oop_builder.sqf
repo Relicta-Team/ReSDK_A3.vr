@@ -70,6 +70,9 @@ function(goasm_builder_buildImplMain)
 	//disable fws update
 	call fileWatcher_guardSafeRebuild;
 
+	//restore nodegen library
+	call nodegen_cleanupClassData;
+
 	goasm_isbuilded = false;
 	call goasm_builder_cleanup;
 
@@ -144,6 +147,8 @@ function(goasm_builder_buildImplMain)
 			private _isInherAtr = not_equals(_mot,_pObj);
 			{
 				_x params ["_mem_name","_atrlist"];
+				_mem_name = tolower _mem_name; //fix fields inspector attributes
+				
 				//Член не имеет атрибутов. проводим регистрацию
 				if !(_mem_name in _refArr) then {
 					private _list = [];
@@ -199,7 +204,7 @@ function(goasm_builder_buildImplMain)
 
 		//inheritance process
 		_mot = _pObj;
-		_inheritance_list = [tolower _x];
+		_inheritance_list = [_x];
 		_counter = 0;
 
 		while {!((_mot) isequalto NULLCLASS)} do {
@@ -260,7 +265,7 @@ function(goasm_builder_buildImplMain)
 			_motTypeName = _mot;
 
 			if (_mot == TYPE_SUPER_BASE) exitWith {};
-			_inheritance_list pushback (tolower _mot);
+			_inheritance_list pushback (_mot);
 
 			_mot = missionnamespace getvariable ['pt_' + _mot,NULLCLASS];
 			if equals(_mot,NULLCLASS) exitWith {
@@ -278,6 +283,8 @@ function(goasm_builder_buildImplMain)
 		//_shell_data = _shell_data + '{this call (_x getvariable "constructor")} foreach (this getvariable "proto" getvariable "__ctors"); this';
 
 		//_pObj setvariable ['__instance',compile _shell_data];
+		_pObj setvariable ["__inhlistCase",_inheritance_list];
+		_inheritance_list = _inheritance_list apply {tolower _x};
 		_pObj setvariable ["__inhlist",_inheritance_list];
 
 		//make hashset for isTypeOf faster algorithm
@@ -411,6 +418,9 @@ function(goasm_builder_makeClassTable)
 	//#include "GOAsm_test_objects.sqf"
 
 	call compile preprocessFileLineNumbers "src\Editor\GameObjectsAssembly\__GOAsm_loader.sqf";
+
+	//загружаем нодовые классы
+	call nodegen_loadClasses;
 
 	1
 }

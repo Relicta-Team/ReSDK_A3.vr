@@ -16,10 +16,20 @@ endclass
 editor_attribute("ColorClass" arg "C7007D")
 editor_attribute("InterfaceClass")
 class(GMBase) extends(IGameEvent) attribute(Story)
+
+	"
+		name:Базовый режим
+		desc:Базовый игровой режим
+		path:Игровая логика.Режим
+	"
+	node_class
+
 	editor_attribute("GMField" arg "type:string") editor_attribute("Tooltip" arg "Название режима")
 	var(name,"История"); //Название истории
+	
 	editor_attribute("GMField" arg "type:string") editor_attribute("Tooltip" arg "Краткое описание режима")
 	var(desc,""); //Описание краткое для голосований например
+	
 	editor_attribute("GMField" arg "type:string") editor_attribute("Tooltip" arg "Расширенное описание режима для конца раунда")
 	var(descExtended,"");//Расширенное описание для конца раунда
 	
@@ -115,6 +125,12 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 	{
 		objParams();
 		0
+	};
+
+	func(setFinishResult)
+	{
+		objParams_1(_index);
+		setSelf(finishResult,_index);
 	};
 
 	var(bufferedFinishText,"");
@@ -230,6 +246,7 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 	//данные режима
 	//имя загружаемой карты
 	getterconst_func(getMapName,"Minimap");
+
 	//имя лобби звука
 	getterconst_func(getLobbySoundName,"lobby\First_Steps.ogg");
 	//дефолтный бэкграунд

@@ -34,7 +34,7 @@ class(BasicRole) extends(object) attribute(Role)
 		OBSOLETE(BasicRole::showInGameDesc);
 		private _desc = getSelf(descInGame);
 
-		if isNullVar(_desc) exitWith {
+		if (isNullVar(_desc) || {_desc == ""}) exitWith {
 			_desc = getSelf(desc);
 			callFuncParams(_mob,localSay,format vec3("Вы - %1! %2",getSelf(name),_desc) arg "info");
 		};
@@ -315,7 +315,8 @@ class(BasicRole) extends(object) attribute(Role)
 				if !isNullReference(_objRefTest) then {_objRef = _objRefTest};
 			};
 			if (!isNullReference(_objRef)) then {
-				if !isNullReference(_optConnection) then {
+				if !isNullVar(_optConnection) then {
+					if equals(_optConnection,-1) then {_optConnection = null};
 					if not_equalTypes(_optConnection,0) then {_optConnection = null};
 				};
 

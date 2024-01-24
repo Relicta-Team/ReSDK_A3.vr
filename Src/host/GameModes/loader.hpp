@@ -4,7 +4,7 @@
 // ======================================================
 
 #include <GameMode.h>
-
+load("ScriptedDefines.sqf");
 load("BasicDefines.sqf");
 load("BasicRole.sqf");
 load("BasicTask.sqf");

@@ -13,7 +13,7 @@
 	var(edIsNode,false);
 	editor_attribute("EditorVisible" arg "custom_provider:edOwner") editor_attribute("Tooltip" arg "Куда подключен источник")
 	editor_attribute("alias" arg "Владелец")
-	var_obj(edOwner);
+	var_vobj(edOwner);
 
 	editor_attribute("EditorVisible" arg "type:int" arg "range:0:999999") editor_attribute("Tooltip" arg "Сколько энергии расходует источник")
 	var_num(edReqPower);

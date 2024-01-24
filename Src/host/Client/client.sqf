@@ -25,6 +25,13 @@
 
 class(ServerClient) /*extends(NetObject)*/
 
+	"
+		name:Клиент
+		desc:Класс клиента, создаваемый на стороне сервера, когда пользователь подключился к серверу.
+		path:Клиенты
+	"
+	node_class
+
 	//список всех чанков на которые подписан клиент
 	var(loadedChunks,null);
 	
@@ -45,10 +52,24 @@ class(ServerClient) /*extends(NetObject)*/
 	};
 	var(lastCharData,vec2("",""));//последние данные которые проверяются для возможности захода
 	
+	"
+		name:Подключен к серверу
+		desc:Возвращает ИСТИНУ, если клиент подключен к серверу. Объекты отключенных клиентов не удаляются а остаются в кеше до перезапуска сервера.
+		type:get
+		lockoverride:1
+		return:bool:Подключен ли клиент к серверу
+	" node_met
 	getter_func(isConnected,this in cm_allClients); //подключен ли клиент к игре
 	
 	var(reputation,0); //репутация игрока
 	var(testResult,""); //прошел ли тест игрок
+
+	"
+		name:Первое подключение
+		desc:Возвращает ИСТИНУ, когда клиент впервые подключился к серверу с момента его запуска. При повторных подключениях в рамках одной игровой сессии возвращает ЛОЖЬ.
+		prop:get
+		classprop:0
+	" node_var
 	var(isFirstJoin,true); //первый ли вход игрока в игру
 
 	func(constructor)
@@ -170,6 +191,15 @@ class(ServerClient) /*extends(NetObject)*/
 	};
 
 	//Принудительно отключение клиента
+
+	"
+		name:Принудительно отключить
+		desc:Незамедлительно отключает клиента от сервера с указанной причиной.
+		type:method
+		lockoverride:1
+		in:string:Причина:Отображаемая клиенту причина отключения от сервера.
+		return:bool:Было ли выполнено отключение клиента.
+	" node_met
 	func(forceDisconnect)
 	{
 		objParams_1(_reason);
@@ -177,10 +207,45 @@ class(ServerClient) /*extends(NetObject)*/
 		[getSelf(id) arg _reason] call cm_serverKickById;
 	};
 
+	"
+		name:Идентификатор клиента
+		desc:Сетевой идентификатор клиента. Это уникальное число, идентифицирующее клиента на сервере. На сервере никогда не может быть клиентов с одинаковыми сетевыми идентификаторами. 
+		prop:get
+		classprop:0
+		return:int:Идентификатор клиента
+	" node_var
 	var_num(id); //айди клиента
+	"
+		name:SteamID клиента
+		desc:Уникальный 16-ти значный SteamID клиента.
+		prop:get
+		classprop:0
+		return:string:Строчное представление SteamID
+	" node_var
 	var_str(uid); //стим-айди клиента
+	"
+		name:Никнейм клиента
+		desc:Уникальное имя клиента, выводимое в чате, лобби и служащее идентификатором игрока.
+		prop:get
+		classprop:0
+		return:string:Имя клиента (никнейм) 
+	" node_var
 	var_str(name); //имя клиента
+	"
+		name:Доступ клиента
+		desc:Уровень доступа клиента
+		prop:get
+		classprop:0
+		return:enum.AccessLevel:Текущий уровень доступа
+	" node_var
 	var_num(access); //уровень доступа
+	"
+		name:Очки клиента
+		desc:Количество очков клиента. Может быть как отрицательным, так и положительным
+		prop:get
+		classprop:0
+		return:int:Количество очков
+	" node_var
 	var_num(points); //Очки
 	var(clientSettings,[createHashMap arg createHashMap arg createHashMap]); //настройки аккаунта. управление,графика и игра. Порядок фиксирован
 	//Цвета ника и сообщений
@@ -241,7 +306,21 @@ class(ServerClient) /*extends(NetObject)*/
 		setSelf(state,_newState);
 	};
 
+	"
+		name:Клиент в лобби
+		desc:Возвращает ИСТИНУ, если проверяемый клиент находится в лобби в данный момент
+		type:get
+		lockoverride:1
+		return:bool:Находится ли клиент в лобби
+	" node_met
 	getter_func(isInLobby,getSelf(state) == "lobby" && callSelf(isConnected));
+	"
+		name:Клиент в игре
+		desc:Возвращает ИСТИНУ, если проверяемый клиент находится в игре в данный момент
+		type:get
+		lockoverride:1
+		return:bool:Находится ли клиент в игре
+	" node_met
 	getter_func(isInGame,getSelf(state) == "ingame" && callSelf(isConnected));
 
 	func(onConnected)
@@ -379,11 +458,25 @@ class(ServerClient) /*extends(NetObject)*/
 		_sets
 	};
 
+	"
+		name:Готовность к игре
+		desc:Возвращает ИСТИНУ, если клиент нажал кнопку готовности в лобби
+		prop:get
+		classprop:0
+		return:bool:Готов ли клиент к игре
+	" node_var
 	var(isReady,false);//готов ли клиент к игре
 	var(isInEmbark,false); //находится ли в эмбарке
 		var(embarkRole,nullPtr);//ссылка на эмбарковую роль
 
 	var_obj(actor); //целевой объект клиента
+	"
+		name:Получить моба
+		desc:Получает объект моба клиента, за которого он играет
+		type:get
+		lockoverride:1
+		return:BasicMob:Моб, за которого играет клиент
+	" node_met
 	func(getActorMob) //Получает моба актора. Если нет актора то nullPtr
 	{
 		objParams();
@@ -391,6 +484,13 @@ class(ServerClient) /*extends(NetObject)*/
 		if isNullReference(_act) exitwith {nullPtr};
 		_act getvariable vec2("link",nullPtr)
 	};
+	"
+		name:Последний моб
+		desc:Последний моб, за которого заходил клиент
+		prop:get
+		classprop:0
+		return:BasicMob:Последний моб
+	" node_var
 	var(lastMob,nullPtr); //последняя сущность за которую играл клиент
 	var(__internal_destrMob,nullPtr); //системная переменная. используется при удалении моба к которому был подключен игрок
 
@@ -642,6 +742,25 @@ class(ServerClient) /*extends(NetObject)*/
 	};
 
 	//Отсылает личное сообщение клиенту
+	"
+		name:Локальное сообщение в чат
+		desc:Отправляет клиенту в чат переданный текст. Другие игроки не увидят это сообщение. Данный узел предназначен для оповещения клиентов, находящихся в лобби.
+		type:method
+		lockoverride:1
+		in:string:Сообщение:Текст сообщения.
+		in:enum.ChatMessageChannel:Тип:Тип сообщения.
+	" node_met
+	func(_localSayWrapper)
+	{
+		assert_str(count _this > 2,"Param count error");
+		private _ch = _this select 2;
+		assert_str(!isNullVar(_ch),"Channel param cannot be null");
+		assert_str(equalTypes(_ch,0),"Channel param type error. Must be integer - not " + typename _ch);
+		assert_str(inRange(_ch,0,count go_internal_chatMesMap - 1),"Channel index out of range: " + str _ch);
+		_this set [2,go_internal_chatMesMap select _ch];
+		_this call getSelfFunc(localSay)
+	};
+
 	func(localSay)
 	{
 		objParams_2(_mes,_categ);
@@ -650,6 +769,13 @@ class(ServerClient) /*extends(NetObject)*/
 	};
 
 	//Отсылает в лобби всем сообщение с поддержкой цвета текста и ника
+	"
+		name:Сообщение в лобби
+		desc:Отправляет сообщение в лобби от лица клиента. Если клиент в игре, то он не увидит собственное сообщение.
+		type:method
+		lockoverride:1
+		in:string:Сообщение:Текст сообщения.
+	" node_met
 	func(sayLobby)
 	{
 		objParams_1(_text);
@@ -965,6 +1091,19 @@ region(rpc and networking messaging)
 
 region(Clientside music manager and local sounds)
 
+	"
+		name:Проиграть звук клиенту
+		desc:Воспроизводит звук у конечного клиента в формате ogg по указанному пути
+		type:method
+		lockoverride:1
+		in:string:Путь:Путь до файла звука, например: ""fire\\torch_on""
+		in:float:Тон:Тон звука. 2 - максимальный возможный, 0.5 - минимальный возможный
+			opt:def=1
+		in:float:Громкость:Громкость звука. Не рекомендуется менять это значение
+			opt:def=1
+		in:bool:В канал эффектов:При влкючении данного параметра проигрываемый звук воспроизводится на канале эффектов.
+			opt:def=true
+	" node_met
 	func(playSound)
 	{
 		params['this',"_path",["_pitch",1],["_vol",1],"_isEffect"];
@@ -975,7 +1114,7 @@ region(Clientside music manager and local sounds)
 
 		callSelfParams(sendInfo,"sui_p" arg _ctx);
 	};
-
+	//todo use enum.MusicChannel
 	func(playMusic)
 	{
 		params ['this',"_pathOrArray","_chan","_ctx"];

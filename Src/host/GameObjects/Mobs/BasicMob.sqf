@@ -42,6 +42,8 @@ class(BasicMob) extends(GameObject)
 	var_num(age);
 	#endif
 	
+	getter_func(isInWorld,true);//always in world
+
 	//some getters
 	getter_func(isChild,getSelf(age)<=18);
 	getter_func(isMale,equals(getSelf(gender),gender_male));
