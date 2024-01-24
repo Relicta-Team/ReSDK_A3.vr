@@ -38,6 +38,26 @@ class(Grave) extends(SmallDirtPile)
 endclass
 
 editor_attribute("EditorGenerated")
+class(Grave4) extends(Grave)
+	var(model,"ca\buildings\misc\hrobecek.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(Grave3) extends(Grave)
+	var(model,"a3\structures_f_epb\civ\dead\grave_rocks_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(Grave2) extends(Grave)
+	var(model,"a3\structures_f_epb\civ\dead\grave_dirt_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(Grave1) extends(Grave)
+	var(model,"a3\structures_f_epb\civ\dead\grave_forest_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(DirtCraterLong) extends(SmallDirtPile)
 	var(model,"a3\structures_f_enoch\military\training\craterlong_02_f.p3d");
 endclass
