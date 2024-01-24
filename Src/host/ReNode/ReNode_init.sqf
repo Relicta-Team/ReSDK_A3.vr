@@ -377,7 +377,8 @@ nodegen_generateLib = {
 
 nodegen_loadClasses = {
     private _logger = ifcheck(is3DEN,printLog,cprint);
-    if (!fileEXISTS nodegen_scriptClassesLoader) exitwith {
+    private _fEx = compile "fileEXISTS _this";
+    if (!(nodegen_scriptClassesLoader call _fEx)) exitwith {
         ["Scripted class loader not found: %1",nodegen_scriptClassesLoader] call _logger;
     };
 
