@@ -275,15 +275,17 @@ node_system_group("control")
 		desc:Преобразует входной тип к другому указанному типу.
 		icon:data\\icons\\icon_Blueprint_Cast_16x
 		color:Operator
-		code: if !((tolower (object)) in ((@in.2) getvariable PROTOTYPE_VAR_NAME getvariable (""__inhlist_map""))) then {@out.2}; @out.1 
-		runtimeports:1
-		autocoloricon:0
+		code:if "+'!isTypeStringOf(@in.2,(@in.3)getvariable "classname")'+" exitWith {@out.2}; private @genvar.out.3 = @in.2; @out.1
 		exec:in
-		in:auto:Входной объект:Объект, который будет преобразован.
+		in:object:Входной объект:Объект, который будет преобразован.
 			opt:typeget=value;@type
+		in:class:Преобразование:Тип к которому будет преобразован объект
+			opt:custom=1:def=object
 		out:Exec:Успешное преобразование:Выполняется если преобразование прошло успешно.
+			opt:mul=0
 		out:Exec:Невозможное преобразование:Выполняется если преобразование не удалось.
-		out:auto:Объект:Объект, преобразованный к новому типу.
+			opt:mul=0
+		out:self:Объект:Объект, преобразованный к новому типу.
 			opt:typeget=value;@type
 	" node_system
 

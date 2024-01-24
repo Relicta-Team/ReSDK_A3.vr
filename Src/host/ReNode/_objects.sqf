@@ -29,7 +29,7 @@ nodeModule_setColorStyle("PureFunction")
 nodeModule_setExecType("pure")
 
 
-["thisObject","Этот объект:Объект этого графа (этот объект)",'this',"self:Объект","Возвращает ссылку на экземпляр текущего графа."] reg_nular
+["thisObject","Этот объект:Объект этого графа (этот объект)",'this',"thisClassname:thisName","Возвращает ссылку на экземпляр текущего графа."] reg_nular
 
 ["getChildTypes","Унаследованные классы","[@in.1,@in.2] call oop_getinhlist","classname:Тип","bool:Глобально:Выполняет глобальный поиск не только прямых наследников, а вообщех всех объектов прямо или косвенно унаследовавших свойства проверяемого типа"
     opt "def=false", "array[classname]:Массив типов",

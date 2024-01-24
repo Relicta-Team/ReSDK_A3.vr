@@ -872,5 +872,8 @@ ACRE_IS_ERRORED = false; _ret;}*/
 	option - пользовательский словарь опции
 	libvisible - видимость в библиотеке (по умолчанию истина)
 	icon - указанная картинка
+
+	в портах можно указывать вместо типа thisClassname для указания автотипа текущего графа
+	thisName - для указания имени текущего графа
 */
 #define node_system_group(gname) __nsys_grp = gname;

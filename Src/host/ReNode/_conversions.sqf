@@ -90,12 +90,25 @@ format["
     name:Строку в имя класса
     path:Преобразования
     desc:Преобразует строку в имя класса. Если 
-    color:Function
-    exec:all
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
     code:"+'private @genvar.out.2 = [@in.1,@in.2] call oop_checkTypeSafe; @out.1'+"
     in:string:Строка:Строчное представление имени класса, которое будет преобразовано
     in:classname:По умолчанию:Возвращаемое значение в случае возникновения ошибки (когда указанный класс не найден)
     out:classname:Имя класса:Имя класса полученное из строки или из значения по умолчанию в случае ошибки.
+" node_system
+
+"
+    node:classnameToType
+    name:Имя класса в класс
+    desc:Получает класс по имени. Если имя класса не существует - функция вернет null объект.
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:missionnamespace getvariable [@in.1,nullPtr]
+    in:classname:Имя
+    out:class:Тип
 " node_system
 
 //enum helpers
