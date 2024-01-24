@@ -570,7 +570,7 @@ init_function(ContextMenu_mouseArea_init)
 			_screenToWorldPos = screenToWorld getMousePosition;
 			([_screenToWorldPos] call golib_om_getRayCastData) params ["_obj","_atlPos"];
 			private _mobj = get3DENMouseOver;
-			if (count _mobj > 1) then {_mobj = _mobj select 1};
+			if (count _mobj > 1) then {_mobj = _mobj select 1} else {_mobj = objNull};
 			_allNulls = isNullReference(_obj) && isNullReference(_mobj);
 			if _allNulls exitwith _errDraw;
 			//get not null

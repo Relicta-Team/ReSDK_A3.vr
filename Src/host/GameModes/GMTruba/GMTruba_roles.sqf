@@ -30,9 +30,9 @@ endclass
 
 class(RChief) extends(GMTruba_SettelmentsRole)
 	var(name,"Вождь");
-	var(desc,"Ты вождь в пятом поколении. 
-	Твоя задача управлять поселением" pcomma " молись Живчику" pcomma "
-	 чтобы хоть как-то твои тупоголовые хвосты не навредили всему" pcomma " что ты тут построил...");
+	var(desc,"Ты вождь в пятом поколении. Твоя задача управлять поселением. 
+	Поддерживай порядок" pcomma " устраивай сборы" pcomma " проводи молитвы. 
+	Славься мудрый вождь!");
 	getter_func(isMainRole,true); // Ключевая роль
 	getter_func(spawnLocation,"pos:RChief");  // Позиция спавна
 	getter_func(connectedTo,"ref:RChiefBed"); // Точка привязки (кровать или стул)
@@ -76,8 +76,8 @@ endclass
 
 class(RChiefSon) extends(GMTruba_SettelmentsRole)
 	var(name,"Сын вождя"); 
-	var(desc,"Ты" pcomma " мальчишка" pcomma " уже подрос" pcomma " и скоро тебе свернут вождевые инструкции от твоего старого. 
-	Пока что тебе придется слушать его советы" pcomma " ведь он считает" pcomma " что тебя еще можно научить хоть чему-то полезному!");
+	var(desc,"Ты уже совсем вырос" pcomma " и скоро тебе придётся взять на себя бремя вождя.
+	Помогай своему отцу в делах управления и прислушивайся к его советам.");
 	getter_func(isMainRole,true);
 	getter_func(spawnLocation,"pos:RChiefSon");
 	getter_func(connectedTo,"ref:RChiefSonBed");
@@ -134,7 +134,7 @@ endclass
 class(RKitchener) extends(GMTruba_SettelmentsRole)
 	var(name,"Кухарь"); 
 	var(desc,"Твоя работа - управлять столовой. 
-	Всю тяжёлую работу отдавай поварешке" pcomma " старайся хоть как-то держать кухню в порядке. Это племя вечно хочет жрать" pcomma " и им все мало. 
+	Всю тяжёлую работу отдавай поварешке" pcomma " старайся держать кухню в порядке. Племя всё время хочет жрать.
 	А ты" pcomma " кажется" pcomma " в прошлый раз так вообще всю нашу еду испортил! 
 	Похоже" pcomma " тебе снова придётся идти к Кладовому" pcomma " ведь без припасов ты" pcomma " вероятно" pcomma " ничего толком и не сваришь.");
 	getter_func(spawnLocation,"pos:RKitchener");
@@ -158,8 +158,8 @@ endclass
 
 class(RKitchenerHelper) extends(GMTruba_SettelmentsRole)
 	var(name,"Поварёшка"); 
-	var(desc,"Твоя ничтожная задача - варить эту жратву и слушать приказы Кухаря. 
-	Если в эту смену ты снова решишь напиться браги" pcomma " то тебя обоссут и вышвырнут к червям в эту пещеру напротив.
+	var(desc,"Твоя задача - варить жратву и слушать приказы Кухаря. 
+	Если в эту смену ты снова решишь напиться браги" pcomma " то тебя вышвырнут в Рукав.
 	Но тебе ведь не хочется этого" pcomma " верно?");
 	getter_func(spawnLocation,"pos:RKitchenerHelper");
 	getter_func(connectedTo,"ref:RKitchenerHelperBed");
@@ -184,8 +184,7 @@ endclass
 class(RCaveDoctor) extends(GMTruba_SettelmentsRole)
 	var(name,"Пещерный лекарь"); 
 	var(desc,"Ты" pcomma " видимо" pcomma " здесь для того" pcomma " чтобы делать вид" pcomma " будто ты знаешь хоть какой-то толк в лекарском деле. 
-	Ну" pcomma " грибы лекарственные тут выращивать" pcomma " как будто это гриблан не может делать... 
-	Если бы ты умел хоть что-то на самом деле" pcomma " то" pcomma " возможно" pcomma " эти постоянно пьяные хвосты" pcomma " не ходили тут без рук!");
+	Но в любом случае" pcomma "ты должен хотя бы постараться помочь всем этим бедолагам. Ведь кроме тебя это сделать некому.");
 	getter_func(spawnLocation,"pos:RCaveDoctor");
 	getter_func(connectedTo,"ref:RCaveDoctorBed");
 
@@ -210,10 +209,8 @@ endclass
 
 class(RGuard) extends(GMTruba_SettelmentsRole)
 	var(name,"Сторож"); 
-	var(desc,"Ты" pcomma " видимо" pcomma " считаешь" pcomma " что твоя работа что-то значит. 
-	Простой сторож" pcomma " чья главная задача - не допустить хвостов в поселение. 
-	Лежи на животе и вытирай слюни - вот твой великий вклад в дело. 
-	Никто и не заметит" pcomma " что ты тут вообще есть.");
+	var(desc,"Твоя работа несложная" pcomma " но важная! Следи за воротами и порядком в Трубе.
+	Если всё спокойно - можно лечь на пузо и пускать слюни" pcomma " а часть работы смело свалить на помощника.");
 	getter_func(spawnLocation,"pos:RGuard");
 	getter_func(connectedTo,"ref:RGuardBed");
 	getter_func(needDiscordRoles,["Forsaken"]);
@@ -263,8 +260,8 @@ endclass
 //Обдумать, кому из них давать доступ к игре только после начала раунда что бы долбаёбы занимали только полезные роли а не ебланские
 class(RGuardHelper) extends(GMTruba_SettelmentsRole)
 	var(name,"Помощник сторожа"); 
-	var(desc,"Никто не понял" pcomma " зачем сторожу помощник" pcomma " 
-	поэтому либо ты изо всех сил докажешь свою пользу" pcomma " либо вылетитишь из поселения.");
+	var(desc,"Сторож не всегда может справиться в одиночку.
+	Сделай всё возможное" pcomma " чтобы помочь ему" pcomma " и тебя похвалят.");
 	getter_func(spawnLocation,"pos:RGuardHelper");
 	getter_func(connectedTo,"ref:RGuardHelperBed");
 
@@ -316,7 +313,8 @@ endclass
 
 class(RLighter) extends(GMTruba_SettelmentsRole)
 	var(name,"Светоч"); 
-	var(desc,"Следить за светом твоя работа и под ногами не мешай" pcomma " пыль.");
+	var(desc,"Тебе дана задача следить за факелами" pcomma " светляками и кострами.
+	Если хорошо сделаешь свою работу" pcomma " то сможешь хорошо поесть.");
 	getter_func(spawnLocation,"pos:RLighter");
 	getter_func(connectedTo,"ref:RLighterBed");
 	
@@ -338,9 +336,8 @@ endclass
 
 class(RCleanerTruba) extends(GMTruba_SettelmentsRole)
 	var(name,"Уходник"); 
-	var(desc,"Взял щетку и пошел делать дело" pcomma " пожрать дадут - уже хорошо. 
-	“Мым" pcomma " Мымыы”" pcomma " утопят тебя" pcomma " и не жалко будет. 
-	Таких" pcomma " вон" pcomma " на улице полно. Урод ты мой урод.");
+	var(desc,"Бери щётку в руки и начинай тут везде чистить" pcomma "потому что везде порядок нужен. 
+	Пойди лекарю помоги" pcomma "и вообще" pcomma "пользу приноси!");
 	getter_func(spawnLocation,"pos:RCleanerTruba");
 	getter_func(connectedTo,"ref:RCleanerTrubaBed");
 	
@@ -358,7 +355,7 @@ endclass
 
 class(RWorkerTruba) extends(GMTruba_SettelmentsRole)
 	var(name,"Работник"); 
-	var(desc,"Обыкновенный" pcomma " практически бесполезный житель поселения. 
+	var(desc,"Обыкновенный житель поселения. 
 	Случись что" pcomma " за тебя никто не спохватится даже. 
 	Но жрать то надо? Значит придётся работать.");
 	var(count,2);
@@ -434,10 +431,13 @@ endclass
 // ---- Роли рубцов ---- //
 class(RLordTruba) extends(GMTruba_ScarsRole)
 	var(name,"Владыка"); 
-	var(desc,"Тебе выпала удача возглавить сброд этих поганых червей. 
-	Может быть" pcomma " конечно" pcomma " не все они такие" pcomma " но с этим уж тебе разбираться. 
-	Этот сраный Вождь прогнал тебя с позором. 
-	Ты должен как-то доказать" pcomma " что они все должны жить в поселении. Живы будем - не порвём!");
+	var(desc,"Несколько смен назад тебя и других" pcomma " таких же бедолаг" pcomma " изгнали в Рукав. 
+	Тебе выпала ""удача"" возглавить сброд этих преступников.
+
+	Прошло уже много смен" pcomma " и ты устал жить в этих невыносимых условиях. 
+	Ты должен как-то доказать" pcomma " что все вы достойны жить в поселении.
+
+	Надо как-то выкручиваться из этой ситуации" pcomma " как говорится: ""Живы будем - не порвём!""");
 	getter_func(isMainRole,true);
 	getter_func(spawnLocation,"pos:RLordTruba");
 	getter_func(connectedTo,"ref:RLordTrubaBed");
@@ -479,9 +479,9 @@ endclass
 class(RRoistererTruba) extends(GMTruba_ScarsRole)
 	var(name,"Бражник"); 
 	var(desc,"Любитель задобриться бражкой" pcomma " пещерный самогонщик. 
-	Рецепт вкуснейшей" pcomma " тебе достался от деда" pcomma " 
-	она так манит пощекотать бурчак" pcomma " что невозможно устоять. 
-	И почему же тебя изгнали?");
+	Рецепт вкуснейшей" pcomma " тебе достался от деда" pcomma " она так манит пощекотать бурчак" pcomma " что невозможно устоять...
+	
+	Вари бражку" pcomma " выращивай грибочки" pcomma " крути грибные самокрутки" pcomma " следи за хозяйством в рукаве. ");
 	getter_func(spawnLocation,"pos:RRoistererTruba");
 	getter_func(connectedTo,"ref:RRoistererTrubaBed");
 
@@ -506,9 +506,11 @@ endclass
 
 class(RFistTruba) extends(GMTruba_ScarsRole)
 	var(name,"Кулак"); 
-	var(desc,"Обычный подзаборный хвост. Твой начальник - Владыка. 
-	Единственное" pcomma " что ты умеешь делать хорошо - драться на кулаках. 
-	Когда в племени устраивали бои за мельтешат - ты всегда выигрывал.");
+	var(desc,"Ты специалист в кулачных боях. Когда в племени устраивали бои за мельтешат" pcomma " ты всегда выигрывал. Но какая теперь разница?
+	
+	Твой начальник - Владыка. Подчиняйся его приказам и выполняй работу" pcomma " которую требуется выполнить.
+	
+	Делай нормально" pcomma " и получишь мясо три раза!");
 	getter_func(spawnLocation,"pos:RFistTruba");
 	getter_func(connectedTo,"ref:RFistTrubaBed");
 
@@ -528,8 +530,9 @@ endclass
 class(RBatonTruba) extends(GMTruba_ScarsRole)
 	var(name,"Дубина"); 
 	var(desc,"Ты хорошо управляешься со своей дубиной" pcomma " и от тебя не так сильно воняет говнелином. 
-	Но вот беда" pcomma " вроде как" pcomma " у тебя больше ничего не получается. 
-	Хотя" pcomma " ты всегда можешь поднимать что-то тяжелое руками.");
+	Но вот беда," pcomma " кажется" pcomma " у тебя больше ничего не получается. Хотя" pcomma " ты всегда можешь поднимать что-то тяжелое руками.
+	
+	Держись Кулака" pcomma " и выполняй работу" pcomma " которую тебе даёт Владыка" pcomma " и тогда обязательно всё наладится.");
 	getter_func(spawnLocation,"pos:RBatonTruba");
 	getter_func(connectedTo,"ref:RBatonTrubaBed");
 
@@ -550,7 +553,7 @@ endclass
 // ---- Дополнительные роли рубцов ---- //
 class(RLazyTruba) extends(GMTruba_ScarsRole)
 	var(name,"Хвост"); 
-	var(desc,"Владыка сказал что если ты не будешь доставлять проблем" pcomma " то можешь жить в их пещере");
+	var(desc,"Владыка сказал" pcomma " что если ты не будешь доставлять проблем и будешь помогать по хозяйству" pcomma " то можешь жить в Рукве.");
 	var(count,2);
 
 	func(spawnLocation)
