@@ -88,9 +88,8 @@ class(GameObject) extends(ManagedObject)
 	"
 		name:В мире
 		desc:Возвращает ИСТИНУ, если игровой объект находится в мире.
-		type:method
+		type:get
 		lockoverride:1
-		color:PureFunction
 		return:bool:Находится ли объект в мире
 	" node_met
 	editor_attribute("Tooltip" arg "Находится ли игровой объект в мире (для всех кроме мобов)") getter_func(isInWorld,equalTypes(getSelf(loc),objNull));
@@ -117,36 +116,32 @@ class(GameObject) extends(ManagedObject)
 	"
 		name:Это предмет
 		desc:Возвращает ИСТИНУ, если игровой объект является предметом.
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект предметом
 	" node_met
 	getterconst_func(isItem,false);
 	"
 		name:Это моб
 		desc:Возвращает ИСТИНУ, если игровой объект является мобом (сущностью).
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект мобом
 	" node_met
 	getterconst_func(isMob,false);
 	"
 		name:Это декор
 		desc:Возвращает ИСТИНУ, если игровой объект является декорацией.
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект декорацией
 	" node_met
 	getterconst_func(isDecor,false);
 	"
 		name:Это структура
 		desc:Возвращает ИСТИНУ, если игровой объект является структурой.
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект структурой
 	" node_met
 	getterconst_func(isStruct,false);
@@ -154,9 +149,8 @@ class(GameObject) extends(ManagedObject)
 	"
 		name:Это дверь
 		desc:Возвращает ИСТИНУ, если игровой объект является дверью.
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект дверью
 	" node_met
 	getterconst_func(isDoor,false);
@@ -164,9 +158,8 @@ class(GameObject) extends(ManagedObject)
 	"
 		name:Это контейнер
 		desc:Возвращает ИСТИНУ, если игровой объект является контейнером.
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект контейнером
 	" node_met
 	getterconst_func(isContainer,false); //является ли объект контейнером
@@ -174,63 +167,56 @@ class(GameObject) extends(ManagedObject)
 	"
 		name:Это стак
 		desc:Возвращает ИСТИНУ, если игровой объект является стакуемым итемом.
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект стаком
 	" node_met
 	getterconst_func(isStack,false); //является ли предмет стакуемым
 	"
 		name:Может светить
 		desc:Возвращает ИСТИНУ, если игровой объект может светиться, используя конфиги освещения и частиц.
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект дверью
 	" node_met
 	getterconst_func(canLight,false); //является ли предмет источником света
 	"
 		name:Это огненный источник света
 		desc:Возвращает ИСТИНУ, если игровой объект является огненным источником света. В будущем такие объекты смогут поджигать окружение.
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект огненным источником света
 	" node_met
 		getterconst_func(isFireLight,false); //огненный источник света
 	"
 		name:Это хранилище реагентов
 		desc:Возвращает ИСТИНУ, если игровой объект является хранилищем реагентов (например, бутыки, шприцы).
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект дверью
 	" node_met
 	getterconst_func(isReagentContainer,false); // реагент-контейнер
 	"
 		name:Это питьё
 		desc:Возвращает ИСТИНУ, если игровой объект является выпиваемым предметом.
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект питьём
 	" node_met
 		getterconst_func(isDrink,false); //является водой
 	"
 		name:Это пища
 		desc:Возвращает ИСТИНУ, если игровой объект является съедаемым предметом.
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект едой
 	" node_met
 		getterconst_func(isFood,false);// является пищей
 	"
 		name:Это сиденье
 		desc:Возвращает ИСТИНУ, если игровой объект является сиденьем, таким как стул, кровать или любой объект привязки персонажа.
-		type:method
-		lockoverride:1
-		color:PureFunction
+		type:const
+		classprop:0
 		return:bool:Является ли объект сиденьем
 	" node_met
 	getterconst_func(isSeat,false); //это сиденье (стул, лавка)
@@ -283,9 +269,8 @@ class(GameObject) extends(ManagedObject)
 	"
 		name:Все объекты
 		desc:Возвращает список всех объектов данного типа.
-		type:method
+		type:get
 		lockoverride:1
-		color:PureFunction
 		return:array[GameObject]:Список всех объектов данного типа
 	" node_met
 	func(getAllObjects)
@@ -327,7 +312,7 @@ class(GameObject) extends(ManagedObject)
 	"
 		name:Получить имя для моба
 		desc:Получает имя игрового объекта для указанного моба. Данный метод можно переопределить и реализовать, к примеру, разные названия в зависимости от навыков моба.
-		type:method
+		type:get
 		in:BasicMob:Моб:Сущность, для которой будет получено имя данного игрового объекта.
 		return:string:Имя игрового объекта
 	" node_met
@@ -567,10 +552,8 @@ class(GameObject) extends(ManagedObject)
 	"
 		name:Получить модель
 		desc:Получает исходную модель игрового объекта. Если объект в контейнере возвращает модель контейнера в мире. Если в инвентаре моба - возвращает модель моба. В ином случае возвращает модель этого игрового объекта.
-		type:method
+		type:get
 		lockoverride:1
-		color:PureFunction
-		exec:pure
 		return:model:Модель-владелец игрового объекта
 	" node_met
 	func(getBasicLoc)
@@ -599,7 +582,7 @@ class(GameObject) extends(ManagedObject)
 	"
 		name:Дистанция до
 		desc:Получает расстояние до цели в метрах
-		type:method
+		type:get
 		lockoverride:1
 		in:GameObject:Цель:Объект, до которого расчитывается расстояние
 		in:bool:2d расстояние:При включении данной опции расстояние будет вычислено только по двум координатам, т.е. высота не будет учитываться.
@@ -618,10 +601,8 @@ class(GameObject) extends(ManagedObject)
 	"
 		name:Получить источник
 		desc:Получает объект, который владеет этим игровым объектом. Для объекта в контейнере владельцем будет контейнер, для объекта в инвентаре моба - моб. Если объектом никто не владеет возвращает null.
-		type:method
+		type:get
 		lockoverride:1
-		color:PureFunction
-		exec:pure
 		return:GameObject:Источник
 	" node_met
 	func(getSourceLoc)
@@ -718,7 +699,7 @@ region(Nearest game objects)
 		name:Ближайшие предметы
 		namelib:Ближайшие предметы в радиусе
 		desc:Получает все игровые предметы, находящиеся в мире в радиусе от этого игрового объекта. Предметы в контейнерах или инвентарях других мобов не учитываются.
-		type:method
+		type:get
 		lockoverride:1
 		in:float:Радиус:Радиус в метрах
 			opt:def=5
@@ -746,7 +727,7 @@ region(Nearest game objects)
 		name:Ближайшие структуры
 		namelib:Ближайшие структуры в радиусе
 		desc:Получает все структуры, в радиусе от этого игрового объекта.
-		type:method
+		type:get
 		lockoverride:1
 		in:float:Радиус:Радиус в метрах
 			opt:def=5
@@ -774,7 +755,7 @@ region(Nearest game objects)
 		name:Ближайшие декорации
 		namelib:Ближайшие декорации в радиусе
 		desc:Получает все декорации, в радиусе от этого игрового объекта.
-		type:method
+		type:get
 		lockoverride:1
 		in:float:Радиус:Радиус в метрах
 			opt:def=5
@@ -802,7 +783,7 @@ region(Nearest game objects)
 		name:Ближайшие мобы
 		namelib:Ближайшие мобы в радиусе
 		desc:Получает всех мобов, в радиусе от этого игрового объекта.
-		type:method
+		type:get
 		lockoverride:1
 		in:float:Радиус:Радиус в метрах
 			opt:def=5
@@ -835,7 +816,7 @@ region(Nearest game objects)
 	"
 		name:Ближайший моб
 		desc:Получает первого ближайшего моба к этому игровому объекту.
-		type:method
+		type:get
 		lockoverride:1
 		in:float:Радиус:Радиус в метрах
 			opt:def=5

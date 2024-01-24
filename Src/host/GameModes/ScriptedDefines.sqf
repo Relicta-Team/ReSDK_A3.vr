@@ -262,7 +262,7 @@ class(ScriptedGamemode) extends(GMBase)
 		name:Кандидаты на роль
 		namelib:Получить количество кандидатов на роль
 		desc:Возвращает количество клиентов, которые выбрали указанную роль. Функция предназначена для подсчета игроков, занявших указанную роль до начала раунда.
-		type:method
+		type:get
 		lockoverride:1
 		in:classname:Роль:Название роли
 		return:int:Количество кандидатов, занявших эту роль.
@@ -599,8 +599,7 @@ class(ScriptedRole) extends(BasicRole)
 	"
 		name:Базовые владельцы роли
 		desc:Возвращает список сущностей мобов, игроки которых заходили за эту роль.
-		type:method
-		exec:pure
+		type:get
 		lockoverride:1
 		return:array[BasicMob^]:Список мобов, зашедших за эту роль
 	" node_met
@@ -609,8 +608,7 @@ class(ScriptedRole) extends(BasicRole)
 	// "
 	// 	name:Владельцы роли
 	// 	desc:Возвращает список сущностей мобов, которые владеют этой ролью в данный момент. От базовых владельцев этот список может отличаться, так как некоторые персонажи во время игры могут быть назначены на другие роли.
-	// 	type:method
-	// 	exec:pure
+	// 	type:get
 	// 	lockoverride:1
 	// 	return:array[BasicMob^]:Список мобов, владеющих этой ролью
 	// " node_met

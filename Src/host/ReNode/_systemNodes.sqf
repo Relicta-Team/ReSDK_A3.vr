@@ -271,9 +271,10 @@ node_system_group("control")
 	"
 		node:castto
 		name:Преобразовать тип
-		namelib:Преобразование типа
+		namelib:Преобразование типа объекта
 		desc:Преобразует входной тип к другому указанному типу.
 		icon:data\\icons\\icon_Blueprint_Cast_16x
+		color:Operator
 		code: if !((tolower (object)) in ((@in.2) getvariable PROTOTYPE_VAR_NAME getvariable (""__inhlist_map""))) then {@out.2}; @out.1 
 		runtimeports:1
 		autocoloricon:0
@@ -289,11 +290,12 @@ node_system_group("control")
 	"
 		node:messageBox
 		path:"+_baseOpPath+"
-		name:Сообщение в окне
-		namelib:Сообщение в окне
+		name:Сообщение на экране
+		namelib:Сообщение на экране (Message box)
 		desc:Выводит сообщение в отдельном окне поверх окна Платформы. Пока открыто окно сообщения симуляция не будет выполняться. Данный узел работает только для режима отладки.
 		code: \n#ifdef DEBUG\n[@in.2,@in.3] call messageBox_Node;\n#endif\n @out.1
 		color:Function
+		icon:data\\icons\\icon_BluePrintEditor_Function_16px
 		runtimeports:1
 		autocoloricon:0
 		exec:all
@@ -301,6 +303,15 @@ node_system_group("control")
 		in:auto:Данные:Дополнительные данные для вывода.
 			opt:typeget=ANY;@type:require=0
 	" node_system
+
+	//todo implement
+	// "
+	// 	node:consolePrint
+	// 	path:"+_baseOpPath+"
+	// 	name:Сообщение в консоли
+	// 	desc:Выводит сообщение в консоли.
+
+	// " node_system
 
 	"
 		node:callafter

@@ -55,9 +55,8 @@ class(ServerClient) /*extends(NetObject)*/
 	"
 		name:Подключен к серверу
 		desc:Возвращает ИСТИНУ, если клиент подключен к серверу. Объекты отключенных клиентов не удаляются а остаются в кеше до перезапуска сервера.
-		type:method
+		type:get
 		lockoverride:1
-		color:PureFunction
 		return:bool:Подключен ли клиент к серверу
 	" node_met
 	getter_func(isConnected,this in cm_allClients); //подключен ли клиент к игре
@@ -198,7 +197,6 @@ class(ServerClient) /*extends(NetObject)*/
 		desc:Незамедлительно отключает клиента от сервера с указанной причиной.
 		type:method
 		lockoverride:1
-		color:Function
 		in:string:Причина:Отображаемая клиенту причина отключения от сервера.
 		return:bool:Было ли выполнено отключение клиента.
 	" node_met
@@ -311,16 +309,16 @@ class(ServerClient) /*extends(NetObject)*/
 	"
 		name:Клиент в лобби
 		desc:Возвращает ИСТИНУ, если проверяемый клиент находится в лобби в данный момент
-		type:const
-		classprop:0
+		type:get
+		lockoverride:1
 		return:bool:Находится ли клиент в лобби
 	" node_met
 	getter_func(isInLobby,getSelf(state) == "lobby" && callSelf(isConnected));
 	"
 		name:Клиент в игре
 		desc:Возвращает ИСТИНУ, если проверяемый клиент находится в игре в данный момент
-		type:const
-		classprop:0
+		type:get
+		lockoverride:1
 		return:bool:Находится ли клиент в игре
 	" node_met
 	getter_func(isInGame,getSelf(state) == "ingame" && callSelf(isConnected));
@@ -475,10 +473,8 @@ class(ServerClient) /*extends(NetObject)*/
 	"
 		name:Получить моба
 		desc:Получает объект моба клиента, за которого он играет
-		type:method
+		type:get
 		lockoverride:1
-		color:PureFunction
-		exec:pure
 		return:BasicMob:Моб, за которого играет клиент
 	" node_met
 	func(getActorMob) //Получает моба актора. Если нет актора то nullPtr

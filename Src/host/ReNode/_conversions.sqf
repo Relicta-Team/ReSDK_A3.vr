@@ -68,13 +68,13 @@ format["
 (["handleToInt","@in.1","handle:Объект","int:Целое число","Преобразование handle в целое число"] call _convFunc) node_system
 
 //vector3ToArray
-(["vector3ToArray","@in.1","vector3:Вектор","array[float]:Массив","Преобразование трехмерного вектора в массив из трех элементов."] call _convFunc) node_system
+(["vector3ToArray","@in.1","vector3:Вектор 3D","array[float]:Массив","Преобразование трехмерного вектора в массив из трех элементов."] call _convFunc) node_system
 //vector2ToArray
-(["vector2ToArray","@in.1","vector2:Вектор","array[float]:Массив","Преобразование двухмерного вектора в массив из двух элементов."] call _convFunc) node_system
+(["vector2ToArray","@in.1","vector2:Вектор 2D","array[float]:Массив","Преобразование двухмерного вектора в массив из двух элементов."] call _convFunc) node_system
 //arrayToVector3
-(["arrayToVector3","(@in.1)select[0,3]","array[float]:Массив","vector3:Вектор","Преобразование массива в трехмерный вектор"] call _convFunc) node_system
+(["arrayToVector3","(@in.1)select[0,3]","array[float]:Массив","vector3:Вектор 3D","Преобразование массива в трехмерный вектор."] call _convFunc) node_system
 //arrayToVector2
-(["arrayToVector2","(@in.1)select[0,2]","array[float]:Массив","vector2:Вектор","Преобразование массива в двухмерный вектор"] call _convFunc) node_system
+(["arrayToVector2","(@in.1)select[0,2]","array[float]:Массив","vector2:Вектор 2D","Преобразование массива в двухмерный вектор"] call _convFunc) node_system
 
 
 //colorToArray
