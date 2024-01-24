@@ -295,7 +295,7 @@ node_system_group("control")
 		name:Сообщение на экране
 		namelib:Сообщение на экране (Message box)
 		desc:Выводит сообщение в отдельном окне поверх окна Платформы. Пока открыто окно сообщения симуляция не будет выполняться. Данный узел работает только для режима отладки.
-		code: \n#ifdef DEBUG\n[@in.2,@in.3] call messageBox_Node;\n#endif\n @out.1
+		code: @IFDEF_DEBUG [@in.2,@in.3] call messageBox_Node; @ENDIF @out.1
 		color:Function
 		icon:data\\icons\\icon_BluePrintEditor_Function_16px
 		runtimeports:1

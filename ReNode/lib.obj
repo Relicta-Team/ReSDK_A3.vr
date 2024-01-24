@@ -266,7 +266,7 @@ def:node:control
 		name:Сообщение на экране
 		namelib:Сообщение на экране (Message box)
 		desc:Выводит сообщение в отдельном окне поверх окна Платформы. Пока открыто окно сообщения симуляция не будет выполняться. Данный узел работает только для режима отладки.
-		code: \n#ifdef DEBUG\n[@in.2,@in.3] call messageBox_Node;\n#endif\n @out.1
+		code: @IFDEF_DEBUG [@in.2,@in.3] call messageBox_Node; @ENDIF @out.1
 		color:Function
 		icon:data\\icons\\icon_BluePrintEditor_Function_16px
 		runtimeports:1
@@ -4124,7 +4124,7 @@ $REGION:CLASSMETA
 }
 ,"MerchantClothSaloon": {
     "baseClass" : "MerchantCloth",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":281},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":308},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -4142,7 +4142,7 @@ $REGION:CLASSMETA
 }
 ,"BanditSaloonCloth": {
     "baseClass" : "CaretakerCloth",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":417},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":482},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -4151,7 +4151,7 @@ $REGION:CLASSMETA
 }
 ,"Bandit2SaloonCloth": {
     "baseClass" : "CaretakerCloth",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":422},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":487},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -4160,7 +4160,7 @@ $REGION:CLASSMETA
 }
 ,"BanditCommanderSaloonCloth": {
     "baseClass" : "CaretakerCloth",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":427},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":492},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -4205,7 +4205,7 @@ $REGION:CLASSMETA
 }
 ,"HoodAssasinSaloon": {
     "baseClass" : "HoodBrown",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":237},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":259},
    "fields": { "defined": {
 "armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -4331,7 +4331,7 @@ $REGION:CLASSMETA
 }
 ,"HatRedSaloon": {
     "baseClass" : "HatUshanka",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":287},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":314},
    "fields": { "defined": {
 "armaClass":{"return": "string"},"name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -4773,6 +4773,15 @@ $REGION:CLASSMETA
 ,"Suitcase_Saloon": {
     "baseClass" : "Suitcase",
     "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":446},
+   "fields": { "defined": {
+"canUseContainer":{"return": "bool"},"name":{"return": "string"},"desc":{"return": "string"},"weight":{"return": "float"},"isLockedSaloon":{"return": "bool"},"timerCount":{"return": "int"},"timerCountMax":{"return": "int"},"__bufferedStealerName":{"return": "string"}}   },
+   "methods": { "defined": {
+"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"isStolenSaloon":{"return": "<undefined>"},"getStealerName":{"return": "<undefined>"}
+}   }
+}
+,"Suitcase_SaloonV2": {
+    "baseClass" : "Suitcase",
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":1017},
    "fields": { "defined": {
 "canUseContainer":{"return": "bool"},"name":{"return": "string"},"desc":{"return": "string"},"weight":{"return": "float"},"isLockedSaloon":{"return": "bool"},"timerCount":{"return": "int"},"timerCountMax":{"return": "int"},"__bufferedStealerName":{"return": "string"}}   },
    "methods": { "defined": {
@@ -5249,7 +5258,7 @@ $REGION:CLASSMETA
 }
 ,"MagazineFinisherLoadedExtendedSaloon": {
     "baseClass" : "MagazineFinisherLoaded",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":412},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":477},
    "fields": { "defined": {
 "maxCount":{"return": "int"},"name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -7059,6 +7068,15 @@ $REGION:CLASSMETA
 ,"PaperSaloonOwnerBar": {
     "baseClass" : "Paper",
     "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":574},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"canWrite":{"return": "<undefined>"},"canRead":{"return": "<undefined>"},"doBurn":{"return": "<undefined>"}
+}   }
+}
+,"PaperSaloonOwnerBarV2": {
+    "baseClass" : "Paper",
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":1146},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -9459,9 +9477,18 @@ $REGION:CLASSMETA
 
 }   }
 }
+,"MediumWoodenTable1": {
+    "baseClass" : "MediumWoodenTable",
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Tables.sqf","line":81},
+   "fields": { "defined": {
+"model":{"return": "string"}}   },
+   "methods": { "defined": {
+
+}   }
+}
 ,"SmallWoodenTable": {
     "baseClass" : "MediumWoodenTable",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Tables.sqf","line":80},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Tables.sqf","line":85},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -9975,6 +10002,15 @@ $REGION:CLASSMETA
 ,"OfficeCabinet_Saloon": {
     "baseClass" : "OfficeCabinet",
     "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":549},
+   "fields": { "defined": {
+"canUseContainer":{"return": "bool"},"isContainsBlank":{"return": "bool"},"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"onMainAction":{"return": "<undefined>"},"onSearchingBlank":{"return": "<undefined>"}
+}   }
+}
+,"OfficeCabinet_SaloonV2": {
+    "baseClass" : "OfficeCabinet",
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":1121},
    "fields": { "defined": {
 "canUseContainer":{"return": "bool"},"isContainsBlank":{"return": "bool"},"name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -12089,16 +12125,25 @@ $REGION:CLASSMETA
 }
 ,"BigStoneWall1": {
     "baseClass" : "BigStoneWall",
-    "defined" : {"file":"src\\host\\GameObjects\\Decors\\BigWalls.sqf","line":27},
+    "defined" : {"file":"src\\host\\GameObjects\\Decors\\BigWalls.sqf","line":33},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
 
 }   }
 }
-,"ConcreteArch": {
+,"StoneArch": {
     "baseClass" : "BigWall",
     "defined" : {"file":"src\\host\\GameObjects\\Decors\\BigWalls.sqf","line":16},
+   "fields": { "defined": {
+"model":{"return": "string"},"name":{"return": "string"}}   },
+   "methods": { "defined": {
+
+}   }
+}
+,"ConcreteArch": {
+    "baseClass" : "BigWall",
+    "defined" : {"file":"src\\host\\GameObjects\\Decors\\BigWalls.sqf","line":22},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -12107,7 +12152,7 @@ $REGION:CLASSMETA
 }
 ,"BigStoneWall": {
     "baseClass" : "BigWall",
-    "defined" : {"file":"src\\host\\GameObjects\\Decors\\BigWalls.sqf","line":22},
+    "defined" : {"file":"src\\host\\GameObjects\\Decors\\BigWalls.sqf","line":28},
    "fields": { "defined": {
 "model":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -12742,6 +12787,15 @@ $REGION:CLASSMETA
 "name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"duration":{"return": "int"},"task":{"return": "object"},"taskList":{"return": "null_array"},"protectedWalls":{"return": "null_array"},"countDoors":{"return": "int"},"banditBasePos":{"return": "null_array"},"cages":{"return": "null_array"},"allAliveBandits":{"return": "null_array"},"keyRolesList":{"return": "null_array"},"countAliveBandits":{"return": "int"},"deadMobs":{"return": "int"},"isSBSCommandirSpawned":{"return": "bool"}}   },
    "methods": { "defined": {
 "getUnsleepGameInfo":{"return": "<undefined>"},"getStartSong":{"return": "<undefined>"},"getEndSong":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"onRoundBegin":{"return": "<undefined>"},"isBlockedInSBSCage":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"handleRandomPos":{"return": "<undefined>"},"handleRandomDir":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"getLeadingRolesInfo":{"return": "<undefined>"}
+}   }
+}
+,"GMSaloonV2": {
+    "baseClass" : "GMBase",
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":642},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"duration":{"return": "int"},"task":{"return": "object"},"taskList":{"return": "null_array"},"protectedWalls":{"return": "null_array"},"countDoors":{"return": "int"},"banditBasePos":{"return": "null_array"},"cages":{"return": "null_array"},"allAliveBandits":{"return": "null_array"},"keyRolesList":{"return": "null_array"},"countAliveBandits":{"return": "int"},"deadMobs":{"return": "int"},"isSBSCommandirSpawned":{"return": "bool"}}   },
+   "methods": { "defined": {
+"getUnsleepGameInfo":{"return": "<undefined>"},"getStartSong":{"return": "<undefined>"},"getEndSong":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"onRoundBegin":{"return": "<undefined>"},"isBlockedInSBSCage":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"getLeadingRolesInfo":{"return": "<undefined>"}
 }   }
 }
 ,"GMHunt": {
@@ -13718,7 +13772,7 @@ $REGION:CLASSMETA
 }
 ,"REaterTruba": {
     "baseClass" : "RPreyEater",
-    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":582},
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":585},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"}}   },
    "methods": { "defined": {
@@ -13817,101 +13871,110 @@ $REGION:CLASSMETA
 }
 ,"RBarmenSaloon": {
     "baseClass" : "BasicRoleSaloon",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":37},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":40},
    "fields": { "defined": {
 "isKeyRole":{"return": "bool"},"name":{"return": "string"},"desc":{"return": "string"},"reputationNeed":{"return": "null_array"},"count":{"return": "int"}}   },
    "methods": { "defined": {
-"isMainRole":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+"isMainRole":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
 }   }
 }
 ,"RGromilaSaloon": {
     "baseClass" : "BasicRoleSaloon",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":67},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":74},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"reputationNeed":{"return": "null_array"},"count":{"return": "int"},"randomHunger":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
 }   }
 }
 ,"RCookSaloon": {
     "baseClass" : "BasicRoleSaloon",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":103},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":114},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"reputationNeed":{"return": "null_array"},"count":{"return": "int"},"randomHunger":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
 }   }
 }
 ,"RCitizenSaloon": {
     "baseClass" : "BasicRoleSaloon",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":133},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":148},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"reputationNeed":{"return": "null_array"},"count":{"return": "int"},"canStealMoneyBank":{"return": "bool"},"randomHunger":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getInitialDir":{"return": "<undefined>"},"getInitialPos":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
+"getInitialDir":{"return": "<undefined>"},"getInitialPos":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
 }   }
 }
 ,"RAssasinSaloon": {
     "baseClass" : "BasicRoleSaloon",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":183},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":201},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"},"reputationNeed":{"return": "null_array"},"canStealMoneyBank":{"return": "bool"},"randomHunger":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"}
+"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"}
 }   }
 }
 ,"RTorgSaloon": {
     "baseClass" : "BasicRoleSaloon",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":241},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":263},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"},"reputationNeed":{"return": "null_array"},"isKeyRole":{"return": "bool"},"randomHunger":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"}
+"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"}
+}   }
+}
+,"RDoctorSaloon": {
+    "baseClass" : "BasicRoleSaloon",
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":320},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"}
 }   }
 }
 ,"RTrampSaloon": {
     "baseClass" : "BasicRoleSaloon",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":293},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":349},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"},"reputationNeed":{"return": "null_array"},"canStealMoneyBank":{"return": "bool"},"randomHunger":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"}
+"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"}
 }   }
 }
 ,"RBanditMainSaloon": {
     "baseClass" : "BasicRoleSaloon",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":352},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":412},
    "fields": { "defined": {
 "isKeyRole":{"return": "bool"},"name":{"return": "string"},"desc":{"return": "string"},"reputationNeed":{"return": "null_array"},"count":{"return": "int"},"randomHunger":{"return": "null_array"}}   },
    "methods": { "defined": {
-"isMainRole":{"return": "<undefined>"},"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"onDead":{"return": "<undefined>"}
+"isMainRole":{"return": "<undefined>"},"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"onDead":{"return": "<undefined>"}
 }   }
 }
 ,"RBanditMiniSaloon": {
     "baseClass" : "BasicRoleSaloon",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":432},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":497},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"},"reputationNeed":{"return": "null_array"},"randomHunger":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"onDead":{"return": "<undefined>"}
+"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"onDead":{"return": "<undefined>"}
 }   }
 }
 ,"RSBSComannderSaloon": {
     "baseClass" : "BasicRoleSaloon",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":554},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":648},
    "fields": { "defined": {
 "isKeyRole":{"return": "bool"},"name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"},"reputationNeed":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"}
+"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"}
 }   }
 }
 ,"RSBSRookieSaloon": {
     "baseClass" : "BasicRoleSaloon",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":604},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":702},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"},"reputationNeed":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"}
+"getInitialPos":{"return": "<undefined>"},"getInitialDir":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"}
 }   }
 }
 ,"RHuntHunterLate": {
@@ -14168,7 +14231,7 @@ $REGION:CLASSMETA
 }
 ,"RGuard": {
     "baseClass" : "GMTruba_SettelmentsRole",
-    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":211},
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":210},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14177,7 +14240,7 @@ $REGION:CLASSMETA
 }
 ,"RFarmerTruba": {
     "baseClass" : "GMTruba_SettelmentsRole",
-    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":239},
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":236},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14186,7 +14249,7 @@ $REGION:CLASSMETA
 }
 ,"RGuardHelper": {
     "baseClass" : "GMTruba_SettelmentsRole",
-    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":264},
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":261},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14195,7 +14258,7 @@ $REGION:CLASSMETA
 }
 ,"RCaveDoctorHelper": {
     "baseClass" : "GMTruba_SettelmentsRole",
-    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":288},
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":285},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14204,7 +14267,7 @@ $REGION:CLASSMETA
 }
 ,"RLighter": {
     "baseClass" : "GMTruba_SettelmentsRole",
-    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":317},
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":314},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14213,7 +14276,7 @@ $REGION:CLASSMETA
 }
 ,"RCleanerTruba": {
     "baseClass" : "GMTruba_SettelmentsRole",
-    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":339},
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":337},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14222,7 +14285,7 @@ $REGION:CLASSMETA
 }
 ,"RWorkerTruba": {
     "baseClass" : "GMTruba_SettelmentsRole",
-    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":359},
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":356},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"}}   },
    "methods": { "defined": {
@@ -14231,7 +14294,7 @@ $REGION:CLASSMETA
 }
 ,"RScoutTruba": {
     "baseClass" : "GMTruba_SettelmentsRole",
-    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":393},
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":390},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"}}   },
    "methods": { "defined": {
@@ -14240,7 +14303,7 @@ $REGION:CLASSMETA
 }
 ,"RLordTruba": {
     "baseClass" : "GMTruba_ScarsRole",
-    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":435},
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":432},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14267,7 +14330,7 @@ $REGION:CLASSMETA
 }
 ,"RBatonTruba": {
     "baseClass" : "GMTruba_ScarsRole",
-    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":528},
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":530},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14276,7 +14339,7 @@ $REGION:CLASSMETA
 }
 ,"RLazyTruba": {
     "baseClass" : "GMTruba_ScarsRole",
-    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":551},
+    "defined" : {"file":"src\\host\\GameModes\\GMTruba\\GMTruba_roles.sqf","line":554},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"count":{"return": "int"}}   },
    "methods": { "defined": {
@@ -14465,7 +14528,7 @@ $REGION:CLASSMETA
 }
 ,"BasicRoleSaloon": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":8},
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\SaloonRoles.sqf","line":11},
    "fields": { "defined": {
 "isKeyRole":{"return": "bool"},"canStealMoneyBank":{"return": "bool"},"randomHunger":{"return": "null"}}   },
    "methods": { "defined": {
@@ -15093,6 +15156,33 @@ $REGION:CLASSMETA
 "onTaskInit":{"return": "<undefined>"},"getDesc":{"return": "<undefined>"},"getFinishDesc":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"}
 }   }
 }
+,"Saloon_Task_PortfelV2": {
+    "baseClass" : "Saloon_Task_BaseV2",
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":976},
+   "fields": { "defined": {
+"portfel":{"return": "object"},"portfelClass":{"return": "string"}}   },
+   "methods": { "defined": {
+"onTaskInit":{"return": "<undefined>"},"getDesc":{"return": "<undefined>"},"getFinishDesc":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"}
+}   }
+}
+,"Saloon_Task_DocsV2": {
+    "baseClass" : "Saloon_Task_BaseV2",
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":1076},
+   "fields": { "defined": {
+"docs":{"return": "object"},"destroyedPapers":{"return": "bool"}}   },
+   "methods": { "defined": {
+"onTaskInit":{"return": "<undefined>"},"getDesc":{"return": "<undefined>"},"getFinishDesc":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"}
+}   }
+}
+,"Saloon_Task_KillV2": {
+    "baseClass" : "Saloon_Task_BaseV2",
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":1159},
+   "fields": { "defined": {
+"target":{"return": "object"}}   },
+   "methods": { "defined": {
+"onTaskInit":{"return": "<undefined>"},"getDesc":{"return": "<undefined>"},"getFinishDesc":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"}
+}   }
+}
 ,"ROkopovoTaskDefend": {
     "baseClass" : "ROkopovoTask",
     "defined" : {"file":"src\\host\\GameModes\\Okopovo\\Tasks.sqf","line":47},
@@ -15177,6 +15267,15 @@ $REGION:CLASSMETA
 ,"Saloon_Task_Base": {
     "baseClass" : "IGamemodeSpecificClass",
     "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":384},
+   "fields": { "defined": {
+"needFreeBratok":{"return": "bool"},"bratki":{"return": "null_array"}}   },
+   "methods": { "defined": {
+"onTaskInit":{"return": "<undefined>"},"getDesc":{"return": "<undefined>"},"getFinishDesc":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"isAllBanditsInCages":{"return": "<undefined>"}
+}   }
+}
+,"Saloon_Task_BaseV2": {
+    "baseClass" : "IGamemodeSpecificClass",
+    "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":955},
    "fields": { "defined": {
 "needFreeBratok":{"return": "bool"},"bratki":{"return": "null_array"}}   },
    "methods": { "defined": {
