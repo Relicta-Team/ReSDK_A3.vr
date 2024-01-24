@@ -97,8 +97,8 @@ pc_oop_postInitClass = {
 //регистратор переменной в классе. используется в генераторе узлов
 pc_oop_regvar = {
 	params ["_f","_v"];
-	_mem_name = _f ; \
-	_lastIndex = _fields pushback [_mem_name,_v]; \
+	_mem_name = _f;
+	_lastIndex = _fields pushback [_mem_name,_v];
 	call pc_oop_handleAttrF;
 };
 

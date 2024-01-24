@@ -388,10 +388,10 @@ nodegen_loadClasses = {
         private _pts = (_x splitString "\/");
         private _filename = _pts select -1;
         private _fullname = nodegen_scriptClassesFolder + "\" + _filename;
-        if (_fullname != _x) then {
-            ["!!! ERROR ON LOADING - Invalid path: ""%1"" (%2);",_x,_filename] call _logger;
-            continue;
-        };
+        // if (_fullname != _x) then {
+        //     ["!!! ERROR ON LOADING - Invalid path: ""%1"" (%2);",_x,_filename] call _logger;
+        //     continue;
+        // };
         ["  Loading scripted class ""%1""",_filename] call _logger;
         call compile preprocessFileLineNumbers _fullname;
     } foreach _pathes;

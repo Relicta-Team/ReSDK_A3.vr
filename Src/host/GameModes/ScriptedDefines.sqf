@@ -461,7 +461,7 @@ class(ScriptedRole) extends(BasicRole)
 	func(_getSkillsWrapper)
 	{
 		objParams();
-		getSelf(_currentGetSkills);
+		getSelf(_currentBaseSkills);
 	};
 
 	func(getSkills)
@@ -472,11 +472,12 @@ class(ScriptedRole) extends(BasicRole)
 		private _sb = [];
 		{
 			(_vec4Base select _foreachIndex) params ["_min","_max"];
+			private _f = (_vec4Base select _foreachIndex);
 			assert_str(_min <= _max,format["Skill '%1' error - min > max; %2" arg  _x arg _f]);
-			assert_str(_min <= 0,format["Minimum value for skill '%1' must be > 0; %2" arg _x arg _f]);
-			assert_str(_max <= 0,format["Maximum value for skill '%1' must be > 0; %2" arg _x arg _f]);
+			assert_str(_min > 0,format["Minimum value for skill '%1' must be > 0; %2" arg _x arg _f]);
+			assert_str(_max > 0,format["Maximum value for skill '%1' must be > 0; %2" arg _x arg _f]);
 			
-			_sb pushBack [_x + "=" + ifcheck(_min == _max,str _min,(_vec4Base select _foreachIndex) joinString "-")];
+			_sb pushBack (_x + "=" + ifcheck(_min == _max,str _min,(_vec4Base select _foreachIndex) joinString "-"));
 		} foreach ["st","iq","dx","ht"];
 		
 		_sb joinString ";"
@@ -506,11 +507,14 @@ class(ScriptedRole) extends(BasicRole)
 		getSelf(_currentOtherSkills);
 	};
 	
+	#include "ScriptedSkillsDecl.hpp"
+
 	func(getOtherSkills)
 	{
 		objParams();
-		private _oskills = callFunc(_getOtherSkillsWrapper);
+		private _oskills = callSelf(_getOtherSkillsWrapper);
 		private _ret = [];
+		assert_str(!isNull(skills_nodes_listKinds) && !isNull(skills_nodes_allowedMinSkillDefIndex),"Internal skill constans getting error");
 		private _minIndex = skills_nodes_allowedMinSkillDefIndex;
 		private _skDataList = skills_nodes_listKinds;//list(vec2(string,string))
 		private _existsSkills = [];
@@ -518,7 +522,7 @@ class(ScriptedRole) extends(BasicRole)
 			_x params ['_skIndex',"_skRange"];
 			
 			assert_str(!array_exists(_existsSkills,_skIndex),"Duplicate skill: " + ((_skDataList select _skIndex) joinString " - "));
-			assert_str(_skIndex < _minIndex,"Unsupported skill: " + ((_skDataList select _skIndex) joinString " - "));
+			assert_str(_skIndex >= _minIndex,"Unsupported skill: " + ((_skDataList select _skIndex) joinString " - "));
 
 			_ret pushBack [(_skDataList select _skIndex) select 0,_skRange];
 			_existsSkills pushBack _skIndex;
