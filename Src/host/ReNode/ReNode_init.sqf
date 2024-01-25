@@ -29,6 +29,7 @@ nodegen_internal_generatedLibPath = ""; //сюда записывается сг
 
 nodegen_objlibPath = "src\host\ReNode\lib.obj"; //!deprecated
 nodegen_debug_copyobjlibPath = "P:\Project\ReNodes\lib.obj";
+nodegen_debug_ReNodePath = "P:\Project\ReNodes\ReNode.exe";
 
 //вызывается перед компиляцией классов
 nodegen_cleanupClassData = {
@@ -369,11 +370,18 @@ nodegen_generateLib = {
     nodegen_str_outputJsonData = _output;
 
     [_savePath,nodegen_str_outputJsonData] call file_write;
+    //sign code
+    private _retCode = [core_path_renode,true,"-sign_lib"] call file_openReturn;
+    ["Library guid generated result: %1",_retCode] call printLog;
+    if (_retCode != 0) exitWith {false};
     
     if ([nodegen_debug_copyobjlibPath,false] call file_exists) then {
         if (!isNull(nodegen_debug_copyobjlibPath) && {nodegen_debug_copyobjlibPath!=""}) then {
             ["Copy object lib for debugger directory: " + nodegen_debug_copyobjlibPath] call printLog;
             [nodegen_debug_copyobjlibPath,nodegen_str_outputJsonData,false] call file_write;
+
+            _retCode = [nodegen_debug_ReNodePath,false,"-sign_lib"] call file_openReturn;
+            ["Debug sign result: %1",_retCode] call printLog;
         };
     } else {
         ["Skip copy object lib for debugger directory"] call printLog;
