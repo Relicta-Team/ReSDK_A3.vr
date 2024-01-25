@@ -551,6 +551,7 @@ class(ScriptedRole) extends(BasicRole)
 		desc:Указывает можно ли взять роль из лобби
 		type:const
 		return:bool:Возможность взятия роли в лобби
+		defval:true
 	" node_met
 	getterconst_func(_canTakeInLobbyConst,true);
 
@@ -573,6 +574,7 @@ class(ScriptedRole) extends(BasicRole)
 		desc:Указывает можно ли взять роль после старта раунда
 		type:const
 		return:bool:Возможность взятия роли в игре
+		defval:true
 	" node_met
 	getterconst_func(_canVisibleAfterStartConst,true);
 
@@ -581,7 +583,7 @@ class(ScriptedRole) extends(BasicRole)
 		desc:Список названий ролей из [discord.relicta.ru дискорда], которые необходимы клиенту для возможности взятия этой роли. Если список пуст - роль могут взять все. Если указано несколько ролей, то клиенту требуется хотя бы одна роль из этого списка.
 		type:const
 		return:array[string]:Список ролей дискорда
-		defval=[]
+		defval:[]
 	" node_met
 	getter_func(needDiscordRoles,[]);
 
