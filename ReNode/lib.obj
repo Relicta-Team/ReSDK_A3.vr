@@ -2736,6 +2736,21 @@ def:c:IDestructible
 		desc:Разрушаемый игровой объект. Все игровые объекты кроме мобов наследуются от данного класса.
 		path:Игровые объекты
 	
+def:c:Key
+
+		name:Ключ
+		desc:Ключ, открывающий и запирающий двери или наручники.
+		path:Игровые объекты
+	
+def:f:Key.keyOwner_0
+
+		name:Типы ключа
+		namelib:Типы ключа
+		desc:Тип или типы ключей, которые подходят к совместимым дверям (с учетом регистра). Указанные типы ключа будут проверяться при открытии двери или наручников. Если в типах двери и типах ключа есть хотя-бы один элемент с одинаковым названием, то доступ предоставляется (происходит отпирание или запирание)
+		prop:all
+		return:array[string]:Имена замков, которые можно открыть этим ключом
+		defval:[]
+	
 def:c:ScriptedGamemode
 
 		name:Пользовательский режим
@@ -3077,6 +3092,7 @@ def:m:ScriptedRole._canTakeInLobbyConst_0
 		desc:Указывает можно ли взять роль из лобби
 		type:const
 		return:bool:Возможность взятия роли в лобби
+		defval:true
 	
 def:m:ScriptedRole.canVisibleAfterStart_0
 
@@ -3093,6 +3109,7 @@ def:m:ScriptedRole._canVisibleAfterStartConst_0
 		desc:Указывает можно ли взять роль после старта раунда
 		type:const
 		return:bool:Возможность взятия роли в игре
+		defval:true
 	
 def:m:ScriptedRole.needDiscordRoles_0
 
@@ -3100,7 +3117,7 @@ def:m:ScriptedRole.needDiscordRoles_0
 		desc:Список названий ролей из [discord.relicta.ru дискорда], которые необходимы клиенту для возможности взятия этой роли. Если список пуст - роль могут взять все. Если указано несколько ролей, то клиенту требуется хотя бы одна роль из этого списка.
 		type:const
 		return:array[string]:Список ролей дискорда
-		defval=[]
+		defval:[]
 	
 def:m:ScriptedRole.canBeFullAntag_0
 
@@ -3525,7 +3542,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "loadedChunks":{"return": "null"},"lastDeadTime":{"return": "int"},"deadTimeout":{"return": "int"},"lastCharData":{"return": "null_array"},"reputation":{"return": "int"},"testResult":{"return": "string"},"isFirstJoin":{"return": "bool"},"votingData":{"return": "null"},"id":{"return": "int"},"uid":{"return": "string"},"name":{"return": "string"},"access":{"return": "int"},"points":{"return": "int"},"clientSettings":{"return": "null_array"},"nickColor":{"return": "string"},"mesColor":{"return": "string"},"prevDayLastJoin":{"return": "string"},"firstJoin":{"return": "string"},"_firstJoinDB":{"return": "string"},"playedRounds":{"return": "int"},"state":{"return": "string"},"isReady":{"return": "bool"},"isInEmbark":{"return": "bool"},"embarkRole":{"return": "object"},"actor":{"return": "model"},"lastMob":{"return": "object"},"__internal_destrMob":{"return": "object"},"charSettings":{"return": "null"},"charSettingsTemplates":{"return": "null_array"},"lockedSettings":{"return": "null_array"},"_getBannedRoles_lastGet":{"return": "int"},"_bannedRolesCache":{"return": "null_array"},"traitObject":{"return": "object"},"isMBOpened":{"return": "bool"},"delegate_messageBoxInput":{"return": "unknown_type"},"delegate_messageBoxClose":{"return": "unknown_type"},"__mbHandler":{"return": "unknown_type"},"delegate_onRequestNextMob":{"return": "unknown_type"},"ctxOnRequestNextMob":{"return": "null_array"},"reputationCustom":{"return": "string"},"discordId":{"return": "string"},"arrivedInCity":{"return": "int"},"hasFirstLoadedRoles":{"return": "bool"},"_getDiscordRoles_lastGet":{"return": "int"},"_discordRolesCache":{"return": "null_array"}}   },
    "methods": { "defined": {
-"setDeadTimeout":{"return": "<undefined>"},"getDeadTimeout":{"return": "<undefined>"},"isConnected":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"isNeedToVote":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"unsubAllChunks":{"return": "<undefined>"},"onFinalize":{"return": "<undefined>"},"forceDisconnect":{"return": "<undefined>"},"sendClientSettings":{"return": "<undefined>"},"onChangeState":{"return": "<undefined>"},"isInLobby":{"return": "<undefined>"},"isInGame":{"return": "<undefined>"},"onConnected":{"return": "<undefined>"},"tryConnectToMob":{"return": "<undefined>"},"collectClientSettings":{"return": "<undefined>"},"getActorMob":{"return": "<undefined>"},"getOwner":{"return": "<undefined>"},"setCharSetting":{"return": "<undefined>"},"addDefaultRoles":{"return": "<undefined>"},"removeDefaultRoles":{"return": "<undefined>"},"resetAllRoles":{"return": "<undefined>"},"getPriorityForRoles":{"return": "<undefined>"},"flushBannedRolesLastGet":{"return": "<undefined>"},"getBannedRoles":{"return": "<undefined>"},"_localSayWrapper":{"return": "<undefined>"},"localSay":{"return": "<undefined>"},"sayLobby":{"return": "<undefined>"},"sayOOC":{"return": "<undefined>"},"addPoints":{"return": "<undefined>"},"removePoints":{"return": "<undefined>"},"hasTrait":{"return": "<undefined>"},"handlePressTrait":{"return": "<undefined>"},"playSystemAction":{"return": "<undefined>"},"addSystemAction":{"return": "<undefined>"},"removeSystemAction":{"return": "<undefined>"},"initSystemMessagesOnConnect":{"return": "<undefined>"},"ShowMessageBox":{"return": "<undefined>"},"UpdateMessageBox":{"return": "<undefined>"},"CloseMessageBox":{"return": "<undefined>"},"onClosedMessageBox":{"return": "<undefined>"},"handleMessageBoxInput":{"return": "<undefined>"},"__updateMBHandler":{"return": "<undefined>"},"showChangelogs":{"return": "<undefined>"},"__rep_customToName":{"return": "<undefined>"},"reputationToString":{"return": "<undefined>"},"isAllowedRoleByReputation":{"return": "<undefined>"},"sendInfo":{"return": "<undefined>"},"fastSendInfo":{"return": "<undefined>"},"playSound":{"return": "<undefined>"},"playMusic":{"return": "<undefined>"},"pauseMusic":{"return": "<undefined>"},"stopMusic":{"return": "<undefined>"},"isDiscordAccountRegistered":{"return": "<undefined>"},"requestDiscordRoles":{"return": "<undefined>"},"updateDiscordRoles":{"return": "<undefined>"},"hasDiscordRole":{"return": "<undefined>"},"flushDiscordRolesLastGet":{"return": "<undefined>"},"getDiscordRoles":{"return": "<undefined>"},"addDiscordRole":{"return": "<undefined>"},"removeDiscordRole":{"return": "<undefined>"}
+"setDeadTimeout":{"return": "<undefined>"},"getDeadTimeout":{"return": "<undefined>"},"isConnected":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"isNeedToVote":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"unsubAllChunks":{"return": "<undefined>"},"onFinalize":{"return": "<undefined>"},"forceDisconnect":{"return": "<undefined>"},"sendClientSettings":{"return": "<undefined>"},"onChangeState":{"return": "<undefined>"},"isInLobby":{"return": "<undefined>"},"isInGame":{"return": "<undefined>"},"onConnected":{"return": "<undefined>"},"tryConnectToMob":{"return": "<undefined>"},"collectClientSettings":{"return": "<undefined>"},"getActorMob":{"return": "<undefined>"},"getOwner":{"return": "<undefined>"},"_getCharSettingNameWrapper":{"return": "<undefined>"},"_getCharSettingAgeWrapper":{"return": "<undefined>"},"_getCharSettingGenderWrapper":{"return": "<undefined>"},"setCharSetting":{"return": "<undefined>"},"addDefaultRoles":{"return": "<undefined>"},"removeDefaultRoles":{"return": "<undefined>"},"resetAllRoles":{"return": "<undefined>"},"getPriorityForRoles":{"return": "<undefined>"},"flushBannedRolesLastGet":{"return": "<undefined>"},"getBannedRoles":{"return": "<undefined>"},"_localSayWrapper":{"return": "<undefined>"},"localSay":{"return": "<undefined>"},"sayLobby":{"return": "<undefined>"},"sayOOC":{"return": "<undefined>"},"addPoints":{"return": "<undefined>"},"removePoints":{"return": "<undefined>"},"hasTrait":{"return": "<undefined>"},"handlePressTrait":{"return": "<undefined>"},"playSystemAction":{"return": "<undefined>"},"addSystemAction":{"return": "<undefined>"},"removeSystemAction":{"return": "<undefined>"},"initSystemMessagesOnConnect":{"return": "<undefined>"},"ShowMessageBox":{"return": "<undefined>"},"UpdateMessageBox":{"return": "<undefined>"},"CloseMessageBox":{"return": "<undefined>"},"onClosedMessageBox":{"return": "<undefined>"},"handleMessageBoxInput":{"return": "<undefined>"},"__updateMBHandler":{"return": "<undefined>"},"showChangelogs":{"return": "<undefined>"},"__rep_customToName":{"return": "<undefined>"},"reputationToString":{"return": "<undefined>"},"isAllowedRoleByReputation":{"return": "<undefined>"},"sendInfo":{"return": "<undefined>"},"fastSendInfo":{"return": "<undefined>"},"playSound":{"return": "<undefined>"},"playMusic":{"return": "<undefined>"},"pauseMusic":{"return": "<undefined>"},"stopMusic":{"return": "<undefined>"},"isDiscordAccountRegistered":{"return": "<undefined>"},"requestDiscordRoles":{"return": "<undefined>"},"updateDiscordRoles":{"return": "<undefined>"},"hasDiscordRole":{"return": "<undefined>"},"flushDiscordRolesLastGet":{"return": "<undefined>"},"getDiscordRoles":{"return": "<undefined>"},"addDiscordRole":{"return": "<undefined>"},"removeDiscordRole":{"return": "<undefined>"}
 }   }
 }
 ,"HumanNaming": {
@@ -7391,7 +7408,7 @@ $REGION:CLASSMETA
 }
 ,"Lockpick": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Instruments\\Keys.sqf","line":45},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Instruments\\Keys.sqf","line":60},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"icon":{"return": "string"},"weight":{"return": "float"},"lockpickBonus":{"return": "int"}}   },
    "methods": { "defined": {

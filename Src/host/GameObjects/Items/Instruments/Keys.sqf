@@ -10,11 +10,26 @@
 
 
 class(Key) extends(Item)
+	"
+		name:Ключ
+		desc:Ключ, открывающий и запирающий двери или наручники.
+		path:Игровые объекты
+	" node_class
+
 	var(name,"Ключ");
 	var(model,"relicta_models\models\interier\props\key.p3d");
 	var(icon,invicon(key));
 	var(weight,gramm(10));
 
+	"
+		name:Типы ключа
+		namelib:Типы ключа
+		desc:Тип или типы ключей, которые подходят к совместимым дверям (с учетом регистра). Указанные типы ключа будут проверяться при открытии двери или наручников. "+
+		"Если в типах двери и типах ключа есть хотя-бы один элемент с одинаковым названием, то доступ предоставляется (происходит отпирание или запирание)
+		prop:all
+		return:array[string]:Имена замков, которые можно открыть этим ключом
+		defval:[]
+	" node_var
 	var_array(keyOwner); //что можно открыть этим ключом
 
 	getter_func(getDropSound,"dropping\keydrop");

@@ -524,6 +524,13 @@ class(ServerClient) /*extends(NetObject)*/
 
 	var(lockedSettings,[]);//locked char settings (this settings current client can't change)
 
+	//TODO enum: family, blood type, antag, gender, mainhand
+	getter_func(_getCharSettingNameWrapper,getSelf(charSettings) get "name");
+	getter_func(_getCharSettingAgeWrapper,getSelf(charSettings) get "age");
+	getter_func(_getCharSettingGenderWrapper,getSelf(charSettings) get "gender");
+	//todo дописать
+
+
 	func(setCharSetting) {
 		objParams_2(_settingName,_value);
 
