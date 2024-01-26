@@ -525,10 +525,47 @@ class(ServerClient) /*extends(NetObject)*/
 	var(lockedSettings,[]);//locked char settings (this settings current client can't change)
 
 	//TODO enum: family, blood type, antag, gender, mainhand
+	"
+		name:Имя персонажа клиента
+		desc:Получает введенное имя персонажа, устанавливаемое через лобби.
+		type:get
+		lockoverride:1
+		return:string
+	" node_met
 	getter_func(_getCharSettingNameWrapper,getSelf(charSettings) get "name");
+	"
+		name:Возраст персонажа клиента
+		desc:Получает возраст персонажа, устанавливаемый через лобби.
+		type:get
+		lockoverride:1
+		return:int
+	" node_met
 	getter_func(_getCharSettingAgeWrapper,getSelf(charSettings) get "age");
+	"
+		name:Пол персонажа клиента
+		desc:Получает пол персонажа, устанавливаемый через лобби.
+		type:get
+		lockoverride:1
+		return:enum.Gender
+	" node_met
 	getter_func(_getCharSettingGenderWrapper,getSelf(charSettings) get "gender");
-	//todo дописать
+	"
+		name:Лицо персонажа клиента
+		desc:Получает лицо персонажа, устанавливаемое через лобби.
+		type:get
+		lockoverride:1
+		return:string
+	" node_met
+	getter_func(_getCharSettingFaceWrapper,getSelf(charSettings) get "face");
+	"
+		name:Роль 1 персонажа клиента
+		desc:Получает заданную роль персонажа, устанавливаемую через лобби.
+		type:get
+		lockoverride:1
+		return:classname
+	" node_met
+	getter_func(_getCharSettingRole1Wrapper,getSelf(charSettings) get "role1");
+	
 
 
 	func(setCharSetting) {
@@ -1122,6 +1159,11 @@ region(Clientside music manager and local sounds)
 		callSelfParams(sendInfo,"sui_p" arg _ctx);
 	};
 	//todo use enum.MusicChannel
+	//need new struct music params
+	// "
+	// 	name:Запустить музыку клиенту
+	// 	desc:Запускает музыкальную композицию клиенту для воспроизведения.
+	// " node_met
 	func(playMusic)
 	{
 		params ['this',"_pathOrArray","_chan","_ctx"];

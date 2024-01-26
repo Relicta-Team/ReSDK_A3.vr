@@ -2134,6 +2134,72 @@ eval:Локальный эмбиент:3:Локационный и ситуат�
 eval:Сражение:4:Боевой эмбиент. Пока не задан
 eval:Глобальное событие:5:Музыка конца раунда, или любого важного события. Имеет на текущий момент наивысший приоритет воспроизведения.
 
+def:enum:enums
+node:Gender
+path:Перечисления
+name:Пол сущности
+eval:Мужчина:0
+eval:Женщина:1
+eval:Общий:2
+
+def:enum:enums
+node:NamingDeclension
+path:Перечисления
+name:Склонение имён
+	desc:Склонения имён сущностей.
+eval:Им. (кто):0:Имя в именительном падеже - Человек
+eval:Род. (кого):1:Имя в родительном падеже - Человека
+eval:Дат. (кому):2:Имя в дательном падеже - Человеку
+eval:Вин. (кого,что):3:Имя в винительном падеже - Человека
+eval:Твор. (кем):4:Имя в творительном падеже - Человеком
+eval:Предл. (О ком):5:Имя в предложном падеже - Человеке
+
+def:enum:enums
+node:DirectionSide
+path:Перечисления
+name:Направление
+	desc:Перечисление направлений. Содержит 4 основных направления.
+	
+eval:Спереди:0
+eval:Слева:1
+eval:Справа:2
+eval:Сзади:3
+
+def:enum:enums
+node:EntityStance
+path:Перечисления
+name:Положение моба
+	desc:Перечисление активных положений тела мобов. Существует всего 3 активных положения: Стоя, сидя и лежа.
+	
+eval:В полный рост:2
+eval:В присяди:1
+eval:Лежа:0
+
+def:enum:enums
+node:EntitySpeedMode
+path:Перечисления
+
+	name:Режим движения
+	desc:Перечисления состяний движения сущности.
+
+eval:Без движения:0
+eval:Ходьба:1
+eval:Бег:2
+eval:Спринт:3
+
+def:enum:enums
+node:LightMode
+path:Перечисления
+
+		name:Освещённость
+		desc:Перечисление состояний освещённости объектов.
+	
+eval:Нет света:0
+eval:Слабый свет:1
+eval:Средний свет:2
+eval:Большой свет:3
+eval:Полный свет:4
+
 def:node:enumhelper
 node:enumGetNames
 name:Имена перечислений
@@ -2441,7 +2507,7 @@ def:c:GameObject
 
 		name:Игровой объект
 		desc:Базовый игровой объект, от которого унаследованы все сущности, объекты и предметы.
-		path:Игровые объекты
+		path:Игровые объекты.Базовые
 	
 def:f:GameObject.name_0
 
@@ -2621,6 +2687,22 @@ def:m:GameObject.getSourceLoc_0
 		lockoverride:1
 		return:GameObject:Источник
 	
+def:m:GameObject.getPos_0
+
+		name:Позиция игрового объекта
+		desc:Получает позицию игрового объекта. Если игровым объектом является предмет в контейнере, либо в инвентаре моба, то будет возвращена позиция объекта владельца (моба или контейнера).
+		type:get
+		lockoverride:1
+		return:vector3:Позиция
+	
+def:m:GameObject.getDir_0
+
+		name:Направление игрового объекта
+		desc:Получает направление игрового объекта. Если игровым объектом является предмет в контейнере, либо в инвентаре моба, то будет возвращено направление объекта владельца (моба или контейнера).
+		type:get
+		lockoverride:1
+		return:vector3:Направление
+	
 def:m:GameObject.getNearItems_0
 
 		name:Ближайшие предметы
@@ -2735,6 +2817,272 @@ def:c:IDestructible
 		name:Разрушаемый игровой объект
 		desc:Разрушаемый игровой объект. Все игровые объекты кроме мобов наследуются от данного класса.
 		path:Игровые объекты
+	
+def:c:BasicMob
+
+		name:Базовый моб
+		desc:Базовый моб, от которого унаследованы абсолютно все игровые сущности (персонажи).
+		path:Игровые объекты.Сущности
+	
+def:f:BasicMob.age_0
+
+		name:Возраст
+		desc:Возраст сущности
+		prop:all
+		return:int:Возраст
+		defval:18
+	
+def:m:BasicMob.isChild_0
+
+		name:Это ребенок
+		desc:Возвращает ИСТИНУ, если сущность является ребенком
+		type:get
+		lockoverride:1
+		return:bool:Это ребенок
+	
+def:m:BasicMob.isMale_0
+
+		name:Это мужчина
+		desc:Возвращает ИСТИНУ, если сущность является мужчиной
+		type:get
+		lockoverride:1
+		return:bool:Это мужчина
+	
+def:m:BasicMob.isFemale_0
+
+		name:Это женщина
+		desc:Возвращает ИСТИНУ, если сущность является женщиной
+		type:get
+		lockoverride:1
+		return:bool:Это женщина
+	
+def:m:BasicMob.getLastPlayerClient_0
+
+		name:Последний клиент моба
+		desc:Получает последнего клиента, который играл или играет в данный момент за моба.
+		type:get
+		lockoverride:1
+		return:ServerClient:Клиент сущности, либо null ссылка, если за сущность ещё никто не заходил.
+	
+def:m:BasicMob.isPlayer_0
+
+		name:Это игрок
+		desc:Возвращает ИСТИНУ, если за сущность подключен какой-либо клиент (игрок)
+		type:get
+		lockoverride:1
+		return:bool:Подключен ли к мобу клиент
+	
+def:m:BasicMob.setPos_0
+
+		name:Установить позицию моба
+		desc:Устанавливает позицию моба, незамедлительно телепортируя его на новую позицию. Если моб был схвачен, то он освобождается.
+		type:method
+		lockoverride:1
+		in:vector3:Позиция:Новая позиция, на которую будет телепортирована сущность
+	
+def:m:BasicMob.isTouchingGround_0
+
+		name:Моб касается земли
+		namelib:Моб касается поверхности (стоит на земле)
+		desc:Возвращает true, если моб находится на земле. Если он падает - возваращет ложь. Этот узел не гарантирует точность возвращаемых данных, так как при десинхронизации клиента возможны рывки сущности, при которых узел возвращает ложь.
+		type:get
+		lockoverride:1
+		return:bool:Моб стоит на земле
+	
+def:m:BasicMob.setDir_0
+
+		name:Установить направление моба
+		desc:Устанавливает направление моба. Если моб был схвачен или сидит на стуле - узел не выполнит никаких действий.
+		type:method
+		lockoverride:1
+		in:float:Направление:Направление в градусах от 0 до 360
+	
+def:m:BasicMob.getRealSpeed_0
+
+		name:Скорость моба
+		desc:Получает абсолютную скорость движения моба.
+		type:get
+		lockoverride:1
+		return:float:Скорость моба. Если моб стоит на месте, то возвращает 0
+	
+def:m:BasicMob.getDirTo_0
+
+		name:Направление игрового объекта к мобу
+		desc:Данный узел возвращает направление между мобом и целью. Моб может находится перед целью, за ней, слева и справа от цели. Например, если целью будет другой моб и вызывающий находится за ним, то возвращается направление 'Сзади'.
+		type:method
+		lockoverride:1
+		in:GameObject:Объект-цель:Объект, рядом с которым стоит вызывающий.
+		return:enum.DirectionSide:Направление вызывающего моба к цели.
+	
+def:m:BasicMob.getDirectionTo_0
+
+		name:Направление моба к игровому объекту
+		desc:Данный узел возвращает направление между целью и мобом. Цель может находится перед мобом, за его спиной, слева и справа от него. Например, если цель другой моб, находящийся за вызывающим, то возвращается направление 'Сзади'.
+		type:method
+		lockoverride:1
+		in:GameObject:Объект-цель:Объект, который находится в стороне от вызывающего.
+		return:enum.DirectionSide:Направление цели к вызывающему мобу.
+	
+def:m:BasicMob.getDistanceTo_0
+
+		name:Расстояние от моба до цели
+		desc:Получает расстояние от вызывающего моба до цели в метрах. Целью может быть любой игровой объект, включа сущностей. В случае с расстоянием до сущности за конечную точку берется торс сущности. При проверке расстояния до игровых объектов берется центр модели, который помечается значком в редакторе ReEditor.
+		type:method
+		lockoverride:1
+		in:GameObject:Объект-цель:Объект, до которого измеряется расстояние
+		return:float:Расстояние в метрах
+	
+def:m:BasicMob.getStance_0
+
+		name:Положение моба
+		desc:Получает положение (стройку) моба. Например, стоя, лежа и т.д.
+		type:get
+		lockoverride:1
+		return:enum.EntityStance:Положение моба
+	
+def:m:BasicMob.isWalking_0
+
+		name:Моб идёт шагом
+		desc:Проверяет, идёт ли моб шагом. Если идёт - возвращает истину. При беге и остановке на месте - возвращает ложь.
+		type:get
+		lockoverride:1
+		return:bool:Сущность двигается медленным шагом
+	
+def:m:BasicMob.isRunning_0
+
+		name:Моб бежит
+		desc:Проверяет, бежит ли моб. Если бежит - возвращает истину. При шаге и остановке на месте - возвращает ложь.
+		type:get
+		lockoverride:1
+		return:bool:Сущность бежит
+	
+def:m:BasicMob.isSprinting_0
+
+		name:Моб спринтует
+		desc:Проверяет, спринтует ли моб. Спринт - это быстрый бег с зажатым модификаторм спринта (по умолчанию клавиша shift). Если спринтуер - возвращает истину, во всех остальных случаях возвращает ложь.
+		type:get
+		lockoverride:1
+		return:bool:Сущность в спринте
+	
+def:m:BasicMob.getSpeedMode_0
+
+		name:Режим движения моба
+		desc:Возвращает режим движения моба.
+		type:get
+		lockoverride:1
+		return:enum.EntitySpeedMode
+	
+def:m:BasicMob.getLighting_0
+
+		name:Уровень освещённости моба
+		desc:Возвращает уровень освещённости моба на стороне сервера. Чем больше источников света попадает на моба, тем больше это значение и тем лучше его видно.
+		type:get
+		lockoverride:1
+		return:enum.LightMode:Уровень освещённости
+	
+def:m:BasicMob.getFirstName_0
+
+		name:Первое имя моба
+		namelib:Первое имя моба (Имя)
+		desc:Получает первое имя моба. В большинстве случаев первым именем является имя персонажа.
+		type:get
+		lockoverride:1
+		return:string:Имя
+	
+def:m:BasicMob.getSecondName_0
+
+		name:Второе имя моба
+		namelib:Второе имя моба (Фамилия)
+		desc:Получает второе имя моба. В большинстве случаев вторым именем является фамилия или кличка персонажа.
+		type:get
+		lockoverride:1
+		return:string:Второе имя (фамилия)
+	
+def:m:BasicMob.getNameEx_0
+
+		name:Полное имя моба в склонении
+		desc:Получает вариацию имени и фамилии моба в указанном склонении
+		type:method
+		lockoverride:1
+		in:enum.NamingDeclension:Склонение:Требуемое склонение для полного имени
+		return:string:Полное имя в указанном склонении
+	
+def:m:BasicMob.getFirstNameEx_0
+
+		name:Первое имя моба в склонении
+		namelib:Первое имя моба в склонении (Имя)
+		desc:Получает вариацию первого имени моба в указанном склонении.
+		type:method
+		lockoverride:1
+		in:enum.NamingDeclension:Склонение:Требуемое склонение для имени.
+		return:string:Имя в указанном склонении.
+	
+def:m:BasicMob.getSecondNameEx_0
+
+		name:Второе имя моба в склонении
+		namelib:Второе имя моба в склонении (Фамилия)
+		desc:Получает вариацию второго имени (фамилии) моба в указанном склонении.
+		type:method
+		lockoverride:1
+		in:enum.NamingDeclension:Склонение:Требуемое склонение для фамилии.
+		return:string:Фамилия в указанном склонении.
+	
+def:m:BasicMob._localSayWrapper_0
+
+		name:Локальное сообщение мобу
+		desc:Отправляет мобу-игроку в чат переданный текст. Другие игроки не увидят это сообщение.
+		type:method
+		lockoverride:1
+		in:string:Сообщение:Текст сообщения.
+		in:enum.ChatMessageChannel:Тип:Тип сообщения.
+	
+def:m:BasicMob.meSay_0
+
+		name:Эмоут от моба
+		desc:Отправляет эмоут сообщение от лица вызывающего моба. К сообщению в начало текста автоматически добавляется полное имя моба в именительном падеже.
+		type:method
+		lockoverride:1
+		in:string:Сообщение:Текст эмоута.
+	
+def:m:BasicMob.mindSay_0
+
+		name:Мысль мобу
+		desc:Отправляет вызывающему мобу в чат локальное сообщение категории перечисления "Мысли".
+		type:method
+		lockoverride:1
+		in:string:Сообщение:Текст мысли.
+	
+def:m:BasicMob.getMobFace_0
+
+		name:Лицо моба
+		desc:Получает имя конфигурации лица моба (конфиг из Платформы).
+		type:get
+		lockoverride:1
+		return:string:Лицо моба
+	
+def:m:BasicMob.setMobFace_0
+
+		name:Установить лицо мобу
+		desc:Устанавливает лицо мобу и синхронизирует его между остальными игроками.
+		type:method
+		lockoverride:1
+		in:string:Лицо:Имя конфигурации лица моба (см. узел 'Лицо моба')
+	
+def:m:BasicMob.playSoundLocal_0
+
+		name:Проиграть локальный звук мобу
+		desc:Воспроизводит звук у клиента, играющего за вызывающего моба. Другие игроки не услышат этот звук.
+		type:method
+		lockoverride:1
+		in:string:Путь:Путь до файла звука, например: "fire\\torch_on"
+		in:float:Тон:Тон звука. 2 - максимальный возможный, 0.5 - минимальный возможный
+			opt:def=1
+		in:float:Дистанция:Дистанция в метрах, на которой будет слышно звук.
+			opt:def=50
+		in:float:Громкость:Громкость звука. Не рекомендуется менять это значение
+			opt:def=1
+		in:auto:Источник:Источник звука. Если не указан, то звук воспроизведется из позиции вызывающего моба.
+			opt:require=0:typeget=value;@type:allowtypes=GameObject
 	
 def:c:Key
 
@@ -3223,6 +3571,14 @@ def:m:ScriptedRole.onEndgameBasic_0
 		out:BasicMob^:Моб:Объект моба, для которого вызывалось данное событие.
 		out:ServerClient^:Клиент:Объект клиента (владельца моба), для которого вызвалось данное событие.
 	
+def:m:ScriptedRole.getCurrentGamemode_0
+
+		name:Получить текущий режим
+		desc:Получает объект текущего режима. Данный узел позволяет осуществлять доступ к режиму из ролей, тем самым изменяя его. Однако не рекомендуется изменять состояние игры внутри ролей.
+		type:const
+		classprop:0
+		return:ScriptedGamemode:Текущий режим
+	
 def:c:GMBase
 
 		name:Базовый режим
@@ -3339,6 +3695,46 @@ def:f:ServerClient.lastMob_0
 		classprop:0
 		return:BasicMob:Последний моб
 	
+def:m:ServerClient._getCharSettingNameWrapper_0
+
+		name:Имя персонажа клиента
+		desc:Получает введенное имя персонажа, устанавливаемое через лобби.
+		type:get
+		lockoverride:1
+		return:string
+	
+def:m:ServerClient._getCharSettingAgeWrapper_0
+
+		name:Возраст персонажа клиента
+		desc:Получает возраст персонажа, устанавливаемый через лобби.
+		type:get
+		lockoverride:1
+		return:int
+	
+def:m:ServerClient._getCharSettingGenderWrapper_0
+
+		name:Пол персонажа клиента
+		desc:Получает пол персонажа, устанавливаемый через лобби.
+		type:get
+		lockoverride:1
+		return:enum.Gender
+	
+def:m:ServerClient._getCharSettingFaceWrapper_0
+
+		name:Лицо персонажа клиента
+		desc:Получает лицо персонажа, устанавливаемое через лобби.
+		type:get
+		lockoverride:1
+		return:string
+	
+def:m:ServerClient._getCharSettingRole1Wrapper_0
+
+		name:Роль 1 персонажа клиента
+		desc:Получает заданную роль персонажа, устанавливаемую через лобби.
+		type:get
+		lockoverride:1
+		return:classname
+	
 def:m:ServerClient._localSayWrapper_0
 
 		name:Локальное сообщение в чат
@@ -3369,6 +3765,69 @@ def:m:ServerClient.playSound_0
 			opt:def=1
 		in:bool:В канал эффектов:При влкючении данного параметра проигрываемый звук воспроизводится на канале эффектов.
 			opt:def=true
+	
+def:c:Gender_base
+
+		name:Пол сущности
+		path:Игровая логика.Характеристики.Пол
+	
+def:f:Gender_base.Он_0
+
+		name:Местоимение 'Он'
+		prop:get
+		return:string:'Он'
+		defval:Он
+	
+def:f:Gender_base.Его_0
+
+		name:Местоимение 'Его'
+		prop:get
+		return:string:'Его'
+		defval:Его
+	
+def:f:Gender_base.Него_0
+
+		name:Местоимение 'Него'
+		prop:get
+		return:string:'Него'
+		defval:Него
+	
+def:f:Gender_base.Ему_0
+
+		name:Местоимение 'Ему'
+		prop:get
+		return:string:'Ему'
+		defval:Ему
+	
+def:f:Gender_base.Нему_0
+
+		name:Местоимение 'Нему'
+		prop:get
+		return:string:'Нему'
+		defval:Нему
+	
+def:f:Gender_base.пол_0
+
+		name:Пол сущности (сокращенно)
+		prop:get
+		return:string:Сокращенное имя пола, например 'м' для мужского.
+		defval:м
+	
+def:f:Gender_base.пол_целиком_0
+
+		name:Пол сущности
+		prop:get
+		return:string:Пол сущности
+		defval:мужской
+	
+def:m:Gender_base.getAgeText_0
+
+		name:Описание возраста
+		desc:Данный узел определяет описание возраста сущности.
+		type:get
+		lockoverride:1
+		in:int:Возраст
+		return:string:Описание возраста
 	
 
 $ENDREGION:CLASSMEM
@@ -3542,7 +4001,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "loadedChunks":{"return": "null"},"lastDeadTime":{"return": "int"},"deadTimeout":{"return": "int"},"lastCharData":{"return": "null_array"},"reputation":{"return": "int"},"testResult":{"return": "string"},"isFirstJoin":{"return": "bool"},"votingData":{"return": "null"},"id":{"return": "int"},"uid":{"return": "string"},"name":{"return": "string"},"access":{"return": "int"},"points":{"return": "int"},"clientSettings":{"return": "null_array"},"nickColor":{"return": "string"},"mesColor":{"return": "string"},"prevDayLastJoin":{"return": "string"},"firstJoin":{"return": "string"},"_firstJoinDB":{"return": "string"},"playedRounds":{"return": "int"},"state":{"return": "string"},"isReady":{"return": "bool"},"isInEmbark":{"return": "bool"},"embarkRole":{"return": "object"},"actor":{"return": "model"},"lastMob":{"return": "object"},"__internal_destrMob":{"return": "object"},"charSettings":{"return": "null"},"charSettingsTemplates":{"return": "null_array"},"lockedSettings":{"return": "null_array"},"_getBannedRoles_lastGet":{"return": "int"},"_bannedRolesCache":{"return": "null_array"},"traitObject":{"return": "object"},"isMBOpened":{"return": "bool"},"delegate_messageBoxInput":{"return": "unknown_type"},"delegate_messageBoxClose":{"return": "unknown_type"},"__mbHandler":{"return": "unknown_type"},"delegate_onRequestNextMob":{"return": "unknown_type"},"ctxOnRequestNextMob":{"return": "null_array"},"reputationCustom":{"return": "string"},"discordId":{"return": "string"},"arrivedInCity":{"return": "int"},"hasFirstLoadedRoles":{"return": "bool"},"_getDiscordRoles_lastGet":{"return": "int"},"_discordRolesCache":{"return": "null_array"}}   },
    "methods": { "defined": {
-"setDeadTimeout":{"return": "<undefined>"},"getDeadTimeout":{"return": "<undefined>"},"isConnected":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"isNeedToVote":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"unsubAllChunks":{"return": "<undefined>"},"onFinalize":{"return": "<undefined>"},"forceDisconnect":{"return": "<undefined>"},"sendClientSettings":{"return": "<undefined>"},"onChangeState":{"return": "<undefined>"},"isInLobby":{"return": "<undefined>"},"isInGame":{"return": "<undefined>"},"onConnected":{"return": "<undefined>"},"tryConnectToMob":{"return": "<undefined>"},"collectClientSettings":{"return": "<undefined>"},"getActorMob":{"return": "<undefined>"},"getOwner":{"return": "<undefined>"},"_getCharSettingNameWrapper":{"return": "<undefined>"},"_getCharSettingAgeWrapper":{"return": "<undefined>"},"_getCharSettingGenderWrapper":{"return": "<undefined>"},"setCharSetting":{"return": "<undefined>"},"addDefaultRoles":{"return": "<undefined>"},"removeDefaultRoles":{"return": "<undefined>"},"resetAllRoles":{"return": "<undefined>"},"getPriorityForRoles":{"return": "<undefined>"},"flushBannedRolesLastGet":{"return": "<undefined>"},"getBannedRoles":{"return": "<undefined>"},"_localSayWrapper":{"return": "<undefined>"},"localSay":{"return": "<undefined>"},"sayLobby":{"return": "<undefined>"},"sayOOC":{"return": "<undefined>"},"addPoints":{"return": "<undefined>"},"removePoints":{"return": "<undefined>"},"hasTrait":{"return": "<undefined>"},"handlePressTrait":{"return": "<undefined>"},"playSystemAction":{"return": "<undefined>"},"addSystemAction":{"return": "<undefined>"},"removeSystemAction":{"return": "<undefined>"},"initSystemMessagesOnConnect":{"return": "<undefined>"},"ShowMessageBox":{"return": "<undefined>"},"UpdateMessageBox":{"return": "<undefined>"},"CloseMessageBox":{"return": "<undefined>"},"onClosedMessageBox":{"return": "<undefined>"},"handleMessageBoxInput":{"return": "<undefined>"},"__updateMBHandler":{"return": "<undefined>"},"showChangelogs":{"return": "<undefined>"},"__rep_customToName":{"return": "<undefined>"},"reputationToString":{"return": "<undefined>"},"isAllowedRoleByReputation":{"return": "<undefined>"},"sendInfo":{"return": "<undefined>"},"fastSendInfo":{"return": "<undefined>"},"playSound":{"return": "<undefined>"},"playMusic":{"return": "<undefined>"},"pauseMusic":{"return": "<undefined>"},"stopMusic":{"return": "<undefined>"},"isDiscordAccountRegistered":{"return": "<undefined>"},"requestDiscordRoles":{"return": "<undefined>"},"updateDiscordRoles":{"return": "<undefined>"},"hasDiscordRole":{"return": "<undefined>"},"flushDiscordRolesLastGet":{"return": "<undefined>"},"getDiscordRoles":{"return": "<undefined>"},"addDiscordRole":{"return": "<undefined>"},"removeDiscordRole":{"return": "<undefined>"}
+"setDeadTimeout":{"return": "<undefined>"},"getDeadTimeout":{"return": "<undefined>"},"isConnected":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"isNeedToVote":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"unsubAllChunks":{"return": "<undefined>"},"onFinalize":{"return": "<undefined>"},"forceDisconnect":{"return": "<undefined>"},"sendClientSettings":{"return": "<undefined>"},"onChangeState":{"return": "<undefined>"},"isInLobby":{"return": "<undefined>"},"isInGame":{"return": "<undefined>"},"onConnected":{"return": "<undefined>"},"tryConnectToMob":{"return": "<undefined>"},"collectClientSettings":{"return": "<undefined>"},"getActorMob":{"return": "<undefined>"},"getOwner":{"return": "<undefined>"},"_getCharSettingNameWrapper":{"return": "<undefined>"},"_getCharSettingAgeWrapper":{"return": "<undefined>"},"_getCharSettingGenderWrapper":{"return": "<undefined>"},"_getCharSettingFaceWrapper":{"return": "<undefined>"},"_getCharSettingRole1Wrapper":{"return": "<undefined>"},"setCharSetting":{"return": "<undefined>"},"addDefaultRoles":{"return": "<undefined>"},"removeDefaultRoles":{"return": "<undefined>"},"resetAllRoles":{"return": "<undefined>"},"getPriorityForRoles":{"return": "<undefined>"},"flushBannedRolesLastGet":{"return": "<undefined>"},"getBannedRoles":{"return": "<undefined>"},"_localSayWrapper":{"return": "<undefined>"},"localSay":{"return": "<undefined>"},"sayLobby":{"return": "<undefined>"},"sayOOC":{"return": "<undefined>"},"addPoints":{"return": "<undefined>"},"removePoints":{"return": "<undefined>"},"hasTrait":{"return": "<undefined>"},"handlePressTrait":{"return": "<undefined>"},"playSystemAction":{"return": "<undefined>"},"addSystemAction":{"return": "<undefined>"},"removeSystemAction":{"return": "<undefined>"},"initSystemMessagesOnConnect":{"return": "<undefined>"},"ShowMessageBox":{"return": "<undefined>"},"UpdateMessageBox":{"return": "<undefined>"},"CloseMessageBox":{"return": "<undefined>"},"onClosedMessageBox":{"return": "<undefined>"},"handleMessageBoxInput":{"return": "<undefined>"},"__updateMBHandler":{"return": "<undefined>"},"showChangelogs":{"return": "<undefined>"},"__rep_customToName":{"return": "<undefined>"},"reputationToString":{"return": "<undefined>"},"isAllowedRoleByReputation":{"return": "<undefined>"},"sendInfo":{"return": "<undefined>"},"fastSendInfo":{"return": "<undefined>"},"playSound":{"return": "<undefined>"},"playMusic":{"return": "<undefined>"},"pauseMusic":{"return": "<undefined>"},"stopMusic":{"return": "<undefined>"},"isDiscordAccountRegistered":{"return": "<undefined>"},"requestDiscordRoles":{"return": "<undefined>"},"updateDiscordRoles":{"return": "<undefined>"},"hasDiscordRole":{"return": "<undefined>"},"flushDiscordRolesLastGet":{"return": "<undefined>"},"getDiscordRoles":{"return": "<undefined>"},"addDiscordRole":{"return": "<undefined>"},"removeDiscordRole":{"return": "<undefined>"}
 }   }
 }
 ,"HumanNaming": {
@@ -3551,12 +4010,12 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "кто":{"return": "string"},"кого":{"return": "string"},"кому":{"return": "string"},"вин":{"return": "string"},"кем":{"return": "string"},"ком":{"return": "string"}}   },
    "methods": { "defined": {
-
+"enumNamingToText":{"return": "<undefined>"}
 }   }
 }
 ,"Gender_base": {
     "baseClass" : "object",
-    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":48},
+    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":54},
    "fields": { "defined": {
 "Он":{"return": "string"},"Его":{"return": "string"},"Него":{"return": "string"},"Ему":{"return": "string"},"Нему":{"return": "string"},"кто":{"return": "string"},"кого":{"return": "string"},"кому":{"return": "string"},"вин":{"return": "string"},"кем":{"return": "string"},"ком":{"return": "string"},"пол":{"return": "string"},"пол_целиком":{"return": "string"}}   },
    "methods": { "defined": {
@@ -12556,7 +13015,7 @@ $REGION:CLASSMETA
 }
 ,"IDestructible": {
     "baseClass" : "GameObject",
-    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":1192},
+    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":1206},
    "fields": { "defined": {
 "ht":{"return": "int"},"hp":{"return": "int"},"hpMax":{"return": "int"},"dr":{"return": "int"},"drMax":{"return": "int"},"germs":{"return": "int"},"__statusEffects":{"return": "null"}}   },
    "methods": { "defined": {
@@ -12569,7 +13028,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "Naming":{"return": "null"},"gender":{"return": "null"},"name":{"return": "string"},"age":{"return": "int"},"owner":{"return": "model"},"client":{"return": "object"},"playerClients":{"return": "null_array"},"visionBlock":{"return": "int"},"tasks":{"return": "null_array"},"basicRole":{"return": "object"},"role":{"return": "object"},"location":{"return": "object"},"handleUpdate":{"return": "int"},"__lastinteractdata__":{"return": "null_array"},"_internalND":{"return": "null"},"openedNDisplay":{"return": "object"},"__listactions":{"return": "null_array"},"_initialPos":{"return": "null_array"},"__lightSlots":{"return": "null_hashmap"},"__lastClientLighting":{"return": "int"},"__visualStates":{"return": "null_array"},"__firstLoginMesPool":{"return": "null_array"},"face":{"return": "string"},"voiceType":{"return": "string"},"__originVoiceType":{"return": "null"},"progressData":{"return": "null_array"},"__lcfmap":{"return": "null_hashmap"}}   },
    "methods": { "defined": {
-"isMob":{"return": "<undefined>"},"getNameFor":{"return": "<undefined>"},"isInWorld":{"return": "<undefined>"},"isChild":{"return": "<undefined>"},"isMale":{"return": "<undefined>"},"isFemale":{"return": "<undefined>"},"getLastPlayerClient":{"return": "<undefined>"},"addTask":{"return": "<undefined>"},"onInitRole":{"return": "<undefined>"},"setToRole":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"Destroy":{"return": "<undefined>"},"__destroyImpl":{"return": "<undefined>"},"clickTarget":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"mainAction":{"return": "<undefined>"},"extraAction":{"return": "<undefined>"},"onUpdate":{"return": "<undefined>"},"canSeeObject":{"return": "<undefined>"},"saveLastInteract":{"return": "<undefined>"},"getLastInteractStartPos":{"return": "<undefined>"},"getLastInteractEndPos":{"return": "<undefined>"},"getLastInteractDistance":{"return": "<undefined>"},"getLastInteractVector":{"return": "<undefined>"},"getLastInteractTarget":{"return": "<undefined>"},"getLastInteractNormal":{"return": "<undefined>"},"canInteractWithSavedObject":{"return": "<undefined>"},"getInteractionTarget":{"return": "<undefined>"},"generateLastInteractOnServer":{"return": "<undefined>"},"isOpenedNDisplay":{"return": "<undefined>"},"closeOpenedNetDisplay":{"return": "<undefined>"},"ShowMessageBox":{"return": "<undefined>"},"CloseMessageBox":{"return": "<undefined>"},"UpdateMessageBox":{"return": "<undefined>"},"setMessageBoxContext":{"return": "<undefined>"},"SetMessageBoxEvent":{"return": "<undefined>"},"loadActions":{"return": "<undefined>"},"hasAction":{"return": "<undefined>"},"addAction":{"return": "<undefined>"},"playAction":{"return": "<undefined>"},"removeAction":{"return": "<undefined>"},"setInitialPos":{"return": "<undefined>"},"getInitialPos":{"return": "<undefined>"},"initAsActor":{"return": "<undefined>"},"onChangeLocality":{"return": "<undefined>"},"isPlayer":{"return": "<undefined>"},"onConnected":{"return": "<undefined>"},"onDisconnected":{"return": "<undefined>"},"setPos":{"return": "<undefined>"},"getPos":{"return": "<undefined>"},"isTouchingGround":{"return": "<undefined>"},"setDir":{"return": "<undefined>"},"getDir":{"return": "<undefined>"},"getRealSpeed":{"return": "<undefined>"},"getDirTo":{"return": "<undefined>"},"getDirectionTo":{"return": "<undefined>"},"getDistanceTo":{"return": "<undefined>"},"getStance":{"return": "<undefined>"},"isWalking":{"return": "<undefined>"},"isRunning":{"return": "<undefined>"},"isSprinting":{"return": "<undefined>"},"getSpeedMode":{"return": "<undefined>"},"getAnimation":{"return": "<undefined>"},"sendInfo":{"return": "<undefined>"},"fastSendInfo":{"return": "<undefined>"},"requestSMDUpdate":{"return": "<undefined>"},"syncSmdSlot":{"return": "<undefined>"},"syncSmdVar":{"return": "<undefined>"},"getBodyPartStatusArray":{"return": "<undefined>"},"syncBodyParts":{"return": "<undefined>"},"getLighting":{"return": "<undefined>"},"addVisualState":{"return": "<undefined>"},"removeVisualState":{"return": "<undefined>"},"hasVisualState":{"return": "<undefined>"},"updateVisualState":{"return": "<undefined>"},"generateNaming":{"return": "<undefined>"},"getFirstName":{"return": "<undefined>"},"getSecondName":{"return": "<undefined>"},"getNameEx":{"return": "<undefined>"},"getFirstNameEx":{"return": "<undefined>"},"getSecondNameEx":{"return": "<undefined>"},"getDescFor":{"return": "<undefined>"},"examine":{"return": "<undefined>"},"isFirstJoin":{"return": "<undefined>"},"addFirstJoinMessage":{"return": "<undefined>"},"printFirstJoinMessage":{"return": "<undefined>"},"localSay":{"return": "<undefined>"},"worldSay":{"return": "<undefined>"},"meSay":{"return": "<undefined>"},"addToKnown":{"return": "<undefined>"},"removeFromKnown":{"return": "<undefined>"},"getKnownName":{"return": "<undefined>"},"isKnownTarget":{"return": "<undefined>"},"visibleSay":{"return": "<undefined>"},"mindSay":{"return": "<undefined>"},"applyGlobalAnim":{"return": "<undefined>"},"onChangeAnimCoef":{"return": "<undefined>"},"setCustomAnimState":{"return": "<undefined>"},"getMobFace":{"return": "<undefined>"},"setMobFace":{"return": "<undefined>"},"setMobFaceAnim":{"return": "<undefined>"},"applyVoiceType":{"return": "<undefined>"},"updateVoiceType":{"return": "<undefined>"},"playSoundData":{"return": "<undefined>"},"playSoundLocal":{"return": "<undefined>"},"playMusic":{"return": "<undefined>"},"pauseMusic":{"return": "<undefined>"},"stopMusic":{"return": "<undefined>"},"playSoundUI":{"return": "<undefined>"},"startSelfProgress":{"return": "<undefined>"},"startProgress":{"return": "<undefined>"},"isProgressProcess":{"return": "<undefined>"},"stopProgress":{"return": "<undefined>"},"successProgress":{"return": "<undefined>"},"startSelfContextProgress":{"return": "<undefined>"},"startContextProgress":{"return": "<undefined>"},"isSuccessContextProgress":{"return": "<undefined>"},"localEffectUpdate":{"return": "<undefined>"},"localEffectRemove":{"return": "<undefined>"},"localEffectClearAll":{"return": "<undefined>"},"localEffectSyncAll":{"return": "<undefined>"},"localEffectExists":{"return": "<undefined>"},"isFailCombat":{"return": "<undefined>"},"applyFailCombat":{"return": "<undefined>"}
+"isMob":{"return": "<undefined>"},"getNameFor":{"return": "<undefined>"},"isInWorld":{"return": "<undefined>"},"isChild":{"return": "<undefined>"},"isMale":{"return": "<undefined>"},"isFemale":{"return": "<undefined>"},"getLastPlayerClient":{"return": "<undefined>"},"addTask":{"return": "<undefined>"},"onInitRole":{"return": "<undefined>"},"setToRole":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"Destroy":{"return": "<undefined>"},"__destroyImpl":{"return": "<undefined>"},"clickTarget":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"mainAction":{"return": "<undefined>"},"extraAction":{"return": "<undefined>"},"onUpdate":{"return": "<undefined>"},"canSeeObject":{"return": "<undefined>"},"saveLastInteract":{"return": "<undefined>"},"getLastInteractStartPos":{"return": "<undefined>"},"getLastInteractEndPos":{"return": "<undefined>"},"getLastInteractDistance":{"return": "<undefined>"},"getLastInteractVector":{"return": "<undefined>"},"getLastInteractTarget":{"return": "<undefined>"},"getLastInteractNormal":{"return": "<undefined>"},"canInteractWithSavedObject":{"return": "<undefined>"},"getInteractionTarget":{"return": "<undefined>"},"generateLastInteractOnServer":{"return": "<undefined>"},"isOpenedNDisplay":{"return": "<undefined>"},"closeOpenedNetDisplay":{"return": "<undefined>"},"ShowMessageBox":{"return": "<undefined>"},"CloseMessageBox":{"return": "<undefined>"},"UpdateMessageBox":{"return": "<undefined>"},"setMessageBoxContext":{"return": "<undefined>"},"SetMessageBoxEvent":{"return": "<undefined>"},"loadActions":{"return": "<undefined>"},"hasAction":{"return": "<undefined>"},"addAction":{"return": "<undefined>"},"playAction":{"return": "<undefined>"},"removeAction":{"return": "<undefined>"},"setInitialPos":{"return": "<undefined>"},"getInitialPos":{"return": "<undefined>"},"initAsActor":{"return": "<undefined>"},"onChangeLocality":{"return": "<undefined>"},"isPlayer":{"return": "<undefined>"},"onConnected":{"return": "<undefined>"},"onDisconnected":{"return": "<undefined>"},"setPos":{"return": "<undefined>"},"getPos":{"return": "<undefined>"},"isTouchingGround":{"return": "<undefined>"},"setDir":{"return": "<undefined>"},"getDir":{"return": "<undefined>"},"getRealSpeed":{"return": "<undefined>"},"getDirTo":{"return": "<undefined>"},"getDirectionTo":{"return": "<undefined>"},"getDistanceTo":{"return": "<undefined>"},"getStance":{"return": "<undefined>"},"isWalking":{"return": "<undefined>"},"isRunning":{"return": "<undefined>"},"isSprinting":{"return": "<undefined>"},"getSpeedMode":{"return": "<undefined>"},"getAnimation":{"return": "<undefined>"},"sendInfo":{"return": "<undefined>"},"fastSendInfo":{"return": "<undefined>"},"requestSMDUpdate":{"return": "<undefined>"},"syncSmdSlot":{"return": "<undefined>"},"syncSmdVar":{"return": "<undefined>"},"getBodyPartStatusArray":{"return": "<undefined>"},"syncBodyParts":{"return": "<undefined>"},"getLighting":{"return": "<undefined>"},"addVisualState":{"return": "<undefined>"},"removeVisualState":{"return": "<undefined>"},"hasVisualState":{"return": "<undefined>"},"updateVisualState":{"return": "<undefined>"},"generateNaming":{"return": "<undefined>"},"getFirstName":{"return": "<undefined>"},"getSecondName":{"return": "<undefined>"},"getNameEx":{"return": "<undefined>"},"getFirstNameEx":{"return": "<undefined>"},"getSecondNameEx":{"return": "<undefined>"},"getDescFor":{"return": "<undefined>"},"examine":{"return": "<undefined>"},"isFirstJoin":{"return": "<undefined>"},"addFirstJoinMessage":{"return": "<undefined>"},"printFirstJoinMessage":{"return": "<undefined>"},"_localSayWrapper":{"return": "<undefined>"},"localSay":{"return": "<undefined>"},"worldSay":{"return": "<undefined>"},"meSay":{"return": "<undefined>"},"addToKnown":{"return": "<undefined>"},"removeFromKnown":{"return": "<undefined>"},"getKnownName":{"return": "<undefined>"},"isKnownTarget":{"return": "<undefined>"},"visibleSay":{"return": "<undefined>"},"mindSay":{"return": "<undefined>"},"applyGlobalAnim":{"return": "<undefined>"},"onChangeAnimCoef":{"return": "<undefined>"},"setCustomAnimState":{"return": "<undefined>"},"getMobFace":{"return": "<undefined>"},"setMobFace":{"return": "<undefined>"},"setMobFaceAnim":{"return": "<undefined>"},"applyVoiceType":{"return": "<undefined>"},"updateVoiceType":{"return": "<undefined>"},"playSoundData":{"return": "<undefined>"},"playSoundLocal":{"return": "<undefined>"},"playMusic":{"return": "<undefined>"},"pauseMusic":{"return": "<undefined>"},"stopMusic":{"return": "<undefined>"},"playSoundUI":{"return": "<undefined>"},"startSelfProgress":{"return": "<undefined>"},"startProgress":{"return": "<undefined>"},"isProgressProcess":{"return": "<undefined>"},"stopProgress":{"return": "<undefined>"},"successProgress":{"return": "<undefined>"},"startSelfContextProgress":{"return": "<undefined>"},"startContextProgress":{"return": "<undefined>"},"isSuccessContextProgress":{"return": "<undefined>"},"localEffectUpdate":{"return": "<undefined>"},"localEffectRemove":{"return": "<undefined>"},"localEffectClearAll":{"return": "<undefined>"},"localEffectSyncAll":{"return": "<undefined>"},"localEffectExists":{"return": "<undefined>"},"isFailCombat":{"return": "<undefined>"},"applyFailCombat":{"return": "<undefined>"}
 }   }
 }
 ,"GameObject": {
@@ -14387,7 +14846,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descInGame":{"return": "string"},"classMan":{"return": "string"},"classWoman":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"_deadTimeout":{"return": "int"},"count":{"return": "int"},"_currentBaseSkills":{"return": "null_array"},"_currentOtherSkills":{"return": "null_array"},"_currentSpawnLocation":{"return": "null_array"},"_currentConnectedTo":{"return": "null_array"}}   },
    "methods": { "defined": {
-"isMainRole":{"return": "<undefined>"},"_getDeadTimeout":{"return": "<undefined>"},"canStoreNameAndFaceForValidate":{"return": "<undefined>"},"_getSkillsWrapper":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"_getOtherSkillsWrapper":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"_canTakeInLobbyConst":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"_canVisibleAfterStartConst":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"roleAccess":{"return": "<undefined>"},"canBeFullAntag":{"return": "<undefined>"},"canBeHiddenAntag":{"return": "<undefined>"},"getBasicMobs":{"return": "<undefined>"},"_spawnLocationWrapper":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"useRandomDirOnSpawn":{"return": "<undefined>"},"_connectedToWrapper":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"_onAssignedWrapper":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"_onDeadBasicWrapper":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"},"onEndgameBasic":{"return": "<undefined>"}
+"isMainRole":{"return": "<undefined>"},"_getDeadTimeout":{"return": "<undefined>"},"canStoreNameAndFaceForValidate":{"return": "<undefined>"},"_getSkillsWrapper":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"_getOtherSkillsWrapper":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"_canTakeInLobbyConst":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"_canVisibleAfterStartConst":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"roleAccess":{"return": "<undefined>"},"canBeFullAntag":{"return": "<undefined>"},"canBeHiddenAntag":{"return": "<undefined>"},"getBasicMobs":{"return": "<undefined>"},"_spawnLocationWrapper":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"useRandomDirOnSpawn":{"return": "<undefined>"},"_connectedToWrapper":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"_onAssignedWrapper":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"_onDeadBasicWrapper":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"},"onEndgameBasic":{"return": "<undefined>"},"getCurrentGamemode":{"return": "<undefined>"}
 }   }
 }
 ,"GhostRole": {
@@ -16525,7 +16984,7 @@ $REGION:CLASSMETA
 }
 ,"Gender_male": {
     "baseClass" : "Gender_base",
-    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":92},
+    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":152},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -16534,7 +16993,7 @@ $REGION:CLASSMETA
 }
 ,"Gender_female": {
     "baseClass" : "Gender_base",
-    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":96},
+    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":156},
    "fields": { "defined": {
 "Он":{"return": "string"},"Его":{"return": "string"},"Него":{"return": "string"},"Ему":{"return": "string"},"Нему":{"return": "string"},"кто":{"return": "string"},"кого":{"return": "string"},"кому":{"return": "string"},"вин":{"return": "string"},"кем":{"return": "string"},"ком":{"return": "string"},"пол":{"return": "string"},"пол_целиком":{"return": "string"}}   },
    "methods": { "defined": {
@@ -16543,7 +17002,7 @@ $REGION:CLASSMETA
 }
 ,"Gender_neuter": {
     "baseClass" : "Gender_base",
-    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":118},
+    "defined" : {"file":"..\\..\\host\\Gender\\Genders.sqf","line":178},
    "fields": { "defined": {
 "Он":{"return": "string"},"Его":{"return": "string"},"Него":{"return": "string"},"Ему":{"return": "string"},"Нему":{"return": "string"},"пол":{"return": "string"},"пол_целиком":{"return": "string"},"кто":{"return": "string"},"кого":{"return": "string"},"кому":{"return": "string"},"вин":{"return": "string"},"кем":{"return": "string"},"ком":{"return": "string"}}   },
    "methods": { "defined": {
