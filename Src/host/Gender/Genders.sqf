@@ -15,6 +15,12 @@ class(HumanNaming) attributeParams(initGlobalSingleton,"naming_default")
 	var(вин,"Человека");
 	var(кем,"Человеком");
 	var(ком,"Человеке");
+
+	func(enumNamingToText)
+	{
+		objParams_1(_eval);
+		["кто","кого","кому","вин","кем","ком"] select _eval
+	};
 	
 endclass
 
@@ -45,11 +51,45 @@ gender_objectToEnum = {
 */
 
 class(Gender_base)
-	
+	"
+		name:Пол сущности
+		path:Игровая логика.Характеристики.Пол
+	"
+	node_class
+	"
+		name:Местоимение 'Он'
+		prop:get
+		return:string:'Он'
+		defval:Он
+	" node_var
 	var(Он,"Он"); //и
+	"
+		name:Местоимение 'Его'
+		prop:get
+		return:string:'Его'
+		defval:Его
+	" node_var
 	var(Его,"Его"); //р
+	"
+		name:Местоимение 'Него'
+		prop:get
+		return:string:'Него'
+		defval:Него
+	" node_var
 	var(Него,"Него"); //рп
+	"
+		name:Местоимение 'Ему'
+		prop:get
+		return:string:'Ему'
+		defval:Ему
+	" node_var
 	var(Ему,"Ему"); //д
+	"
+		name:Местоимение 'Нему'
+		prop:get
+		return:string:'Нему'
+		defval:Нему
+	" node_var
 	var(Нему,"Нему"); //дп
 	
 	var(кто,"Мужчина");
@@ -59,7 +99,19 @@ class(Gender_base)
 	var(кем,"Мужчиной");
 	var(ком,"Мужчине");
 	
-	var(пол,"м")
+	"
+		name:Пол сущности (сокращенно)
+		prop:get
+		return:string:Сокращенное имя пола, например 'м' для мужского.
+		defval:м
+	" node_var
+	var(пол,"м");
+	"
+		name:Пол сущности
+		prop:get
+		return:string:Пол сущности
+		defval:мужской
+	" node_var
 	var(пол_целиком,"мужской");
 	
 	getterconst_func(ageText,["дитя" arg "юноша" arg "взрослый" arg "зрелый" arg "пожилой" arg "старик"]);
@@ -81,6 +133,14 @@ class(Gender_base)
 		callSelfParams(getAgeIndex,_num) == 2
 	};
 	
+	"
+		name:Описание возраста
+		desc:Данный узел определяет описание возраста сущности.
+		type:get
+		lockoverride:1
+		in:int:Возраст
+		return:string:Описание возраста
+	" node_met
 	func(getAgeText)
 	{
 		objParams_1(_num);

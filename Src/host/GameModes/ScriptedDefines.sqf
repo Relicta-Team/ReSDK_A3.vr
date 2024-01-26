@@ -828,4 +828,13 @@ class(ScriptedRole) extends(BasicRole)
 		objParams_2(_mob,_usr);
 	};
 
+	"
+		name:Получить текущий режим
+		desc:Получает объект текущего режима. Данный узел позволяет осуществлять доступ к режиму из ролей, тем самым изменяя его. Однако не рекомендуется изменять состояние игры внутри ролей.
+		type:const
+		classprop:0
+		return:ScriptedGamemode:Текущий режим
+	" node_met
+	getterconst_func(getCurrentGamemode,gm_currentMode);
+
 endclass

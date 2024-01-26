@@ -10,6 +10,7 @@
 #define DIR_RIGHT 2
 #define DIR_BACK 3
 #define DIR_RANDOM (selectRandom[DIR_FRONT,DIR_BACK,DIR_RIGHT,DIR_LEFT])
+#define NODE_DIR_LIST_ALL ['Спереди:DIR_FRONT','Слева:DIR_LEFT','Справа:DIR_RIGHT','Сзади:DIR_BACK']
 
 #define BONE_STATUS_OK 0
 #define BONE_STATUS_CRACK 1
@@ -22,11 +23,13 @@
 #define STANCE_UP 2
 #define STANCE_MIDDLE 1
 #define STANCE_DOWN 0
+#define NODE_STANCE_LIST_ALL ['В полный рост:STANCE_UP','В присяди:STANCE_MIDDLE','Лежа:STANCE_DOWN']
 
 #define SPEED_MODE_STOP 0
 #define SPEED_MODE_WALK 1
 #define SPEED_MODE_RUN 2
 #define SPEED_MODE_SPRINT 3
+#define NODE_SPEED_MODE_LIST_ALL ['Без движения:SPEED_MODE_STOP','Ходьба:SPEED_MODE_WALK','Бег:SPEED_MODE_RUN','Спринт:SPEED_MODE_SPRINT']
 
 #define LIGHT_NO 0
 #define LIGHT_LOW 1
@@ -34,6 +37,7 @@
 #define LIGHT_LARGE 3
 #define LIGHT_FULL 4
 #define LIGHT_GET_MODIF_STEALTH(val) ([+5,+3,0,-3,-8]select(val))
+#define NODE_LIGHT_LIST_ALL ['Нет света:LIGHT_NO','Слабый свет:LIGHT_LOW','Средний свет:LIGHT_MEDIUM','Большой свет:LIGHT_LARGE','Полный свет:LIGHT_FULL']
 
 #define VIEW_MODE_NONE 0
 //одного глаза нет например. ухудшенное зрение

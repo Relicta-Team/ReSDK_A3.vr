@@ -630,7 +630,21 @@ class(GameObject) extends(ManagedObject)
 	getter_func(getModelPosition,getPosATL callSelf(getBasicLoc));
 	getter_func(getModelDirection,getDir callSelf(getBasicLoc));
 
+	"
+		name:Позиция игрового объекта
+		desc:Получает позицию игрового объекта. Если игровым объектом является предмет в контейнере, либо в инвентаре моба, то будет возвращена позиция объекта владельца (моба или контейнера).
+		type:get
+		lockoverride:1
+		return:vector3:Позиция
+	" node_met
 	getter_func(getPos,callSelf(getModelPosition));
+	"
+		name:Направление игрового объекта
+		desc:Получает направление игрового объекта. Если игровым объектом является предмет в контейнере, либо в инвентаре моба, то будет возвращено направление объекта владельца (моба или контейнера).
+		type:get
+		lockoverride:1
+		return:vector3:Направление
+	" node_met
 	getter_func(getDir,callSelf(getModelDirection));
 
 	#define startSectorIndex 1
