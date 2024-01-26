@@ -9,6 +9,7 @@ variable_define
 	fileWatcher_list_checkedPathsForReloadRequest = [
 		"\Src\host\GameObjects\"
 		,"\Src\host\GameModes\"
+		,"\Src\host\ReNode\compiled"
 		,"\Src\Editor"
 	];
 	fileWatcher_list_ignoredPathParts = [
