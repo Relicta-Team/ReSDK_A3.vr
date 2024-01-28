@@ -361,6 +361,8 @@
 #define isTypeOf(obj,type) ((tolower #type) in ((obj) getvariable PROTOTYPE_VAR_NAME getvariable ("__inhlist_map")))
 #define isTypeStringOf(obj,type) ((tolower (type)) in ((obj) getvariable PROTOTYPE_VAR_NAME getvariable ("__inhlist_map")))
 #define isTypeNameOf(obj,type) ((tolower #type) in (typeGetFromString(obj) getvariable ("__inhlist_map")))
+//TODO remove this macro
+#define isTypeNameStringOf(obj,type) ((tolower (type)) in (typeGetFromString(obj) getvariable ("__inhlist_map")))
 //проверка существования класса
 #define isImplementClass(strname) (!isNullReference(typeGetFromString(strname)))
 //проверка наличия членов
