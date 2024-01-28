@@ -548,7 +548,7 @@ class(IMagazineBase) extends(Item)
 	{
 		objParams_2(_ammo,_count);
 		
-		if !callSelfParams(canLoadAmmoInMagazine,_ammo) exitWith {};
+		if !isTypeNameOf(_ammo,callSelf(getBulletType)) exitwith {};
 
 		if isNullVar(_count) then {_count = getSelf(maxCount)};
 		_count = clamp(_count,1,getSelf(maxCount));
