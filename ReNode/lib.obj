@@ -3084,11 +3084,58 @@ def:m:BasicMob.playSoundLocal_0
 		in:auto:Источник:Источник звука. Если не указан, то звук воспроизведется из позиции вызывающего моба.
 			opt:require=0:typeget=value;@type:allowtypes=GameObject
 	
+def:c:IRangedWeapon
+
+		name:Дистанционное оружие
+		desc:Оружие для дальнего боя (огнестрельное оружие)
+		path:Игровые объекты.Оружие.Дистанционное
+	
+def:m:IRangedWeapon.createAmmoInMagazine_0
+
+		name:Создать боеприпасы в магазине
+		desc:Создает боеприпасы указанного типа в оружии. Если количество не указано - будет создано максимальное количество. Если типы патронов не совместимы с магазином или в оружии нет магазина - создание не произойдёт.
+		type:method
+		lockoverride:1
+		in:classname:Тип патронов:Тип боеприпасов, создаваемых в оружии
+		in:int:Количество:Сколько боеприпасов будет создано в магазине.
+			opt:require=0
+	
+def:c:Stack
+
+		name:Стак
+		desc:Игровой объект с возможность объединения в группу (деньги, боеприпасы)
+		path:Игровые объекты.Объединяемые
+	
+def:f:Stack.stackCount_0
+
+		name:Количество в стаке
+		desc:Отображает количество предметов в стаке
+		prop:get
+		return:int
+		defval:1
+	
+def:m:Stack.canDisentegrate_0
+
+		name:Распадаемость стака при броске
+		desc:Указывается будет ли распадаться стак на отдельные штучные предметы при броске
+		type:const
+		lockoverride:1
+		return:bool
+		defval:false
+	
+def:m:Stack.setStackCount_0
+
+		name:Задать количество в стаке
+		desc:Задает количество предметов в стаке.
+		type:method
+		lockoverride:1
+		in:int:Количество:Новое количество предметов. Значение строго фиксируется между единицей и максимальным размером стака внутри этой функции.
+	
 def:c:Key
 
 		name:Ключ
 		desc:Ключ, открывающий и запирающий двери или наручники.
-		path:Игровые объекты
+		path:Игровые объекты.Ключи
 	
 def:f:Key.keyOwner_0
 
@@ -3098,6 +3145,14 @@ def:f:Key.keyOwner_0
 		prop:all
 		return:array[string]:Имена замков, которые можно открыть этим ключом
 		defval:[]
+	
+def:m:Key._setKeyOwnerWrapper_0
+
+		name:Задать типы ключа
+		desc:Устанавливает ключу типы, которые подходят к совместимым дверям (с учетом регистра). Типы указываются с разделителями, которые могут быть комбинированы\: ';' '|' ',' ' '\nПример\: 'замок_1;замок_2' или 'lockhouse lockbar lockbar2' или 'Парадный_вход,Задний_вход|Дверь_второй_этаж'
+		type:method
+		lockoverride:1
+		in:string:Типы:Типы ключа с указанными разделителями.
 	
 def:c:ScriptedGamemode
 
@@ -5554,7 +5609,7 @@ $REGION:CLASSMETA
 }
 ,"TestPistol": {
     "baseClass" : "PistolPBM",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":784},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":803},
    "fields": { "defined": {
 "shootCount":{"return": "int"}}   },
    "methods": { "defined": {
@@ -5563,7 +5618,7 @@ $REGION:CLASSMETA
 }
 ,"TestRifle": {
     "baseClass" : "RifleAuto",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":798},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":817},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -5572,7 +5627,7 @@ $REGION:CLASSMETA
 }
 ,"TestShotgun": {
     "baseClass" : "Shotgun",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":810},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":829},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -5788,7 +5843,7 @@ $REGION:CLASSMETA
 }
 ,"TestFullmag": {
     "baseClass" : "IMagazineBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":779},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":798},
    "fields": { "defined": {
 "maxCount":{"return": "int"}}   },
    "methods": { "defined": {
@@ -6058,7 +6113,7 @@ $REGION:CLASSMETA
 }
 ,"IAmmoBase": {
     "baseClass" : "Stack",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":686},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":705},
    "fields": { "defined": {
 "name":{"return": "string"},"stackName":{"return": "string"},"stackCount":{"return": "int"},"stackMaxAmount":{"return": "int"},"size":{"return": "int"},"weight":{"return": "float"},"model":{"return": "string"},"isFlyingFromWeapon":{"return": "bool"},"additionalAccuracy":{"return": "int"},"additionalDamage":{"return": "int"},"shotedFrom":{"return": "object"},"shooter":{"return": "object"}}   },
    "methods": { "defined": {
@@ -6067,7 +6122,7 @@ $REGION:CLASSMETA
 }
 ,"BulletCase": {
     "baseClass" : "Stack",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":741},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":760},
    "fields": { "defined": {
 "name":{"return": "string"},"stackName":{"return": "string"},"model":{"return": "string"},"stackCount":{"return": "int"},"stackMaxAmount":{"return": "int"},"size":{"return": "int"},"weight":{"return": "float"},"shootedTime":{"return": "int"}}   },
    "methods": { "defined": {
@@ -7723,7 +7778,7 @@ $REGION:CLASSMETA
 }
 ,"IMagazineBase": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":475},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":491},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"maxCount":{"return": "int"},"weight":{"return": "int"},"size":{"return": "int"},"content":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -7862,12 +7917,12 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"icon":{"return": "string"},"weight":{"return": "float"},"keyOwner":{"return": "null_array"},"preinit@__keyTypesStr":{"return": "string"}}   },
    "methods": { "defined": {
-"getDropSound":{"return": "<undefined>"},"getPickupSound":{"return": "<undefined>"},"getPutdownSound":{"return": "<undefined>"},"__handlePreInitVars__":{"return": "<undefined>"}
+"_setKeyOwnerWrapper":{"return": "<undefined>"},"getDropSound":{"return": "<undefined>"},"getPickupSound":{"return": "<undefined>"},"getPutdownSound":{"return": "<undefined>"},"__handlePreInitVars__":{"return": "<undefined>"}
 }   }
 }
 ,"Lockpick": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Instruments\\Keys.sqf","line":60},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Instruments\\Keys.sqf","line":77},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"icon":{"return": "string"},"weight":{"return": "float"},"lockpickBonus":{"return": "int"}}   },
    "methods": { "defined": {

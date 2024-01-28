@@ -13,7 +13,7 @@ class(Key) extends(Item)
 	"
 		name:Ключ
 		desc:Ключ, открывающий и запирающий двери или наручники.
-		path:Игровые объекты
+		path:Игровые объекты.Ключи
 	" node_class
 
 	var(name,"Ключ");
@@ -31,6 +31,23 @@ class(Key) extends(Item)
 		defval:[]
 	" node_var
 	var_array(keyOwner); //что можно открыть этим ключом
+
+	"
+		name:Задать типы ключа
+		desc:Устанавливает ключу типы, которые подходят к совместимым дверям (с учетом регистра). Типы указываются с разделителями, которые могут быть комбинированы\: ';' '|' ',' ' '\n"+
+		"Пример\: 'замок_1;замок_2' или 'lockhouse lockbar lockbar2' или 'Парадный_вход,Задний_вход|Дверь_второй_этаж'
+		type:method
+		lockoverride:1
+		in:string:Типы:Типы ключа с указанными разделителями.
+	" node_met
+	func(_setKeyOwnerWrapper)
+	{
+		objParams_1(_kt);
+		assert_str(!isNullVar(_kt),"Null param");
+		assert_str(equalTypes(_kt,""),"Type missmatch");
+
+		setSelf(keyOwner,_kt splitString ";| ,");
+	};
 
 	getter_func(getDropSound,"dropping\keydrop");
 	getter_func(getPickupSound,"updown\keyring_up");
