@@ -424,6 +424,7 @@ class(IRangedWeapon) extends(Item)
 		type:method
 		lockoverride:1
 		in:classname:Тип патронов:Тип боеприпасов, создаваемых в оружии
+			opt:require=0:def=IAmmoBase
 		in:int:Количество:Сколько боеприпасов будет создано в магазине.
 			opt:require=0
 	" node_met
@@ -548,6 +549,7 @@ class(IMagazineBase) extends(Item)
 	{
 		objParams_2(_ammo,_count);
 		
+		if isNullVar(_ammo) then {_ammo = callSelf(getBulletType)};
 		if !isTypeNameStringOf(_ammo,callSelf(getBulletType)) exitwith {};
 
 		if isNullVar(_count) then {_count = getSelf(maxCount)};

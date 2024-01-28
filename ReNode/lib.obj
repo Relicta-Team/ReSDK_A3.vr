@@ -3097,6 +3097,7 @@ def:m:IRangedWeapon.createAmmoInMagazine_0
 		type:method
 		lockoverride:1
 		in:classname:Тип патронов:Тип боеприпасов, создаваемых в оружии
+			opt:require=0:def=IAmmoBase
 		in:int:Количество:Сколько боеприпасов будет создано в магазине.
 			opt:require=0
 	
@@ -5609,7 +5610,7 @@ $REGION:CLASSMETA
 }
 ,"TestPistol": {
     "baseClass" : "PistolPBM",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":803},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":805},
    "fields": { "defined": {
 "shootCount":{"return": "int"}}   },
    "methods": { "defined": {
@@ -5618,7 +5619,7 @@ $REGION:CLASSMETA
 }
 ,"TestRifle": {
     "baseClass" : "RifleAuto",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":817},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":819},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -5627,7 +5628,7 @@ $REGION:CLASSMETA
 }
 ,"TestShotgun": {
     "baseClass" : "Shotgun",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":829},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":831},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -5843,7 +5844,7 @@ $REGION:CLASSMETA
 }
 ,"TestFullmag": {
     "baseClass" : "IMagazineBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":798},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":800},
    "fields": { "defined": {
 "maxCount":{"return": "int"}}   },
    "methods": { "defined": {
@@ -6113,7 +6114,7 @@ $REGION:CLASSMETA
 }
 ,"IAmmoBase": {
     "baseClass" : "Stack",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":705},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":707},
    "fields": { "defined": {
 "name":{"return": "string"},"stackName":{"return": "string"},"stackCount":{"return": "int"},"stackMaxAmount":{"return": "int"},"size":{"return": "int"},"weight":{"return": "float"},"model":{"return": "string"},"isFlyingFromWeapon":{"return": "bool"},"additionalAccuracy":{"return": "int"},"additionalDamage":{"return": "int"},"shotedFrom":{"return": "object"},"shooter":{"return": "object"}}   },
    "methods": { "defined": {
@@ -6122,7 +6123,7 @@ $REGION:CLASSMETA
 }
 ,"BulletCase": {
     "baseClass" : "Stack",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":760},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":762},
    "fields": { "defined": {
 "name":{"return": "string"},"stackName":{"return": "string"},"model":{"return": "string"},"stackCount":{"return": "int"},"stackMaxAmount":{"return": "int"},"size":{"return": "int"},"weight":{"return": "float"},"shootedTime":{"return": "int"}}   },
    "methods": { "defined": {
@@ -7778,7 +7779,7 @@ $REGION:CLASSMETA
 }
 ,"IMagazineBase": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":491},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":492},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"maxCount":{"return": "int"},"weight":{"return": "int"},"size":{"return": "int"},"content":{"return": "null_array"}}   },
    "methods": { "defined": {
