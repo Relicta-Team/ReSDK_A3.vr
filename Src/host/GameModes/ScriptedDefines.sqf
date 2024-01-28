@@ -288,6 +288,24 @@ class(ScriptedGamemode) extends(GMBase)
 	getter_func(getLobbyRoles,callSelf(_getRolesWrapper));
 	getter_func(getLateRoles,[]);
 
+	"
+		name:Время игры
+		namelib:Текущее время игры
+		desc:Возвращает время, прошедшее с начала раунда в секундах. Если раунд ещё не начался возвращает 0
+		type:get
+		lockoverride:1
+		return:int:Текущая длительность игры
+	" node_met
+	getter_func(_getDurationWrapper,gm_roundDuration);
+
+	"
+		name:Умершие мобы
+		desc:Получает количество умерших сущностей с начала раунда
+		prop:get
+		return:int:Количество умерших мобов
+	" node_var
+	var(countDead,0);
+
 	region(backend code)
 
 		func(onRoundCode)

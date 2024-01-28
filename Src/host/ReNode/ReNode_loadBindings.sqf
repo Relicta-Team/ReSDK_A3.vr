@@ -28,6 +28,7 @@ private __FUNCITONS_LOAD_ONLY__ = true;
 #include "_model.sqf"
 #include "_hashmap.sqf"
 #include "_objects.sqf"
+#include "_system.sqf"
 //типы стандартных перечислений
 #include "_enums.sqf"
 //структуры

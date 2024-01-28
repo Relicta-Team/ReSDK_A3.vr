@@ -426,7 +426,7 @@ class(IRangedWeapon) extends(Item)
 		in:classname:Тип патронов:Тип боеприпасов, создаваемых в оружии
 			opt:require=0:def=IAmmoBase
 		in:int:Количество:Сколько боеприпасов будет создано в магазине.
-			opt:require=0
+			opt:require=0:def=1
 	" node_met
 	func(createAmmoInMagazine)
 	{
