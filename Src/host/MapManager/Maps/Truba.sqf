@@ -969,9 +969,9 @@ _4038_859623646_8256831_23959 = ['BigClothCabinet',[4038.86,3646.83,31.2396],90,
 ['Shovel',[4050.11,3677.58,32.2435,true],[0.173471,0.0871514,-0.980975],[0.984549,0.0088201,0.174886]] call InitItem; 
 ['SmallChair',[4050.05,3675.59,31.7101,true],200.611,[-0.00649613,0.00207156,0.999977]] call InitItem; 
 ['ChairCasual',[4051.38,3676.75,26.7098],178.397,[0,0,1]] call InitItem; 
-['TorchDisabled',[4049.78,3673.67,30.5876],290,[0,0,1]] call InitItem; 
-['Candle',[4049.64,3673.57,30.5876],0,[0,0,1]] call InitItem; 
-['OlderWoodenCup',[4049.66,3674.47,30.5769],0,[0,0,1]] call InitItem; 
+['TorchDisabled',[4049.75,3673.73,30.5876],290,[0,0,1]] call InitItem; 
+['Candle',[4049.61,3673.57,30.5876],0,[0,0,1]] call InitItem; 
+['OlderWoodenCup',[4049.65,3674.39,30.5769],0,[0,0,1]] call InitItem; 
 ['FabricBagBig2',[4049.39,3674.57,34.8908,true],[0,0.0871558,-0.996195],[0,0.996195,0.0871558]] call InitItem; 
 ['WoodenBucket',[4049.38,3673.59,29.7231],0,[0,0,1]] call InitItem; 
 _4051_091313675_8081129_72641 = ['WoodenDoor',[4051.09,3675.81,29.7264],15.0005,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RChiefKey, RGuardKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 

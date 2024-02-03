@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=7986;
+		nextID=8266;
 	};
 	class Camera
 	{
-		pos[]={4050.1665,37.784382,3632.7593};
-		dir[]={0.17638198,-0.37196451,0.91147286};
-		up[]={0.070683084,0.9281916,0.36526027};
-		aside[]={0.98191476,2.0539519e-006,-0.19001369};
+		pos[]={4047.6316,38.215832,3674.7488};
+		dir[]={0.55188084,-0.70568877,-0.44451666};
+		up[]={0.54960483,0.70848912,-0.44268152};
+		aside[]={-0.62732947,6.4665255e-007,-0.77884763};
 	};
 };
 binarizationWanted=0;
@@ -15530,7 +15530,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Сторожка и ворота";
-					state=1;
 					class Entities
 					{
 						items=11;
@@ -15789,7 +15788,7 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={4049.7773,35.612129,3673.665};
+										position[]={4049.7532,35.612129,3673.7317};
 										angles[]={0,5.0614552,0};
 									};
 									side="Empty";
@@ -15806,7 +15805,7 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={4049.6448,35.671787,3673.5662};
+										position[]={4049.6079,35.671787,3673.5737};
 									};
 									side="Empty";
 									flags=4;
@@ -15822,7 +15821,7 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={4049.6606,35.643604,3674.4744};
+										position[]={4049.6499,35.643604,3674.3918};
 									};
 									side="Empty";
 									flags=1;
