@@ -10,6 +10,16 @@
 setDetailMapBlendPars [1000, 1000];
 setHorizonParallaxCoef 500;
 
+//fix render distance #276
+private _hasErrorRenderDistance = false;
+if ((ceil(getVideoOptions get "objectVisibility") < 60) || (ceil(getVideoOptions get "overallVisibility") < 60)) then {
+    _hasErrorRenderDistance = true;
+};
+if (_hasErrorRenderDistance) exitWith {
+    rpcCall("clientDisconnect",vec2("Вы были отключены от сервера","Увеличьте дистанцию прорисовки игровых объектов до 60 и выше."));
+    endMission "LOSER";
+};
+
 if (!isMultiplayer && !cam_isEnabled) then {
     player switchcamera "Internal";
 };
