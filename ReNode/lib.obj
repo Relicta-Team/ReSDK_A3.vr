@@ -1303,17 +1303,17 @@ def:node:math
 def:node:math
 
         node:add
-        name:Сложение
-        namelib:+ (Сложение)
+        name:+
+        namelib:Сложение (+)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Сложение двух чисел
         code:(@in.1)+(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         out:auto:Результат
             opt:typeget=value;@type:allowtypes=int|float
     
@@ -1321,17 +1321,17 @@ def:node:math
 def:node:math
 
         node:sub
-        name:Вычитание
-        namelib:- (Вычитание)
+        name:-
+        namelib:Вычитание (-)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Вычитание двух чисел
         code:(@in.1)-(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         out:auto:Результат
             opt:typeget=value;@type:allowtypes=int|float
     
@@ -1339,17 +1339,17 @@ def:node:math
 def:node:math
 
         node:mul
-        name:Умножение
-        namelib:* (Умножение)
+        name:*
+        namelib:Умножение (*)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Умножение двух чисел
         code:(@in.1)*(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         out:float:Результат
             opt:typeget=value;@type:allowtypes=int|float
     
@@ -1357,17 +1357,17 @@ def:node:math
 def:node:math
 
         node:div
-        name:Деление
-        namelib:/ (Деление)
+        name:/
+        namelib:Деление (/)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Деление двух чисел
         code:(@in.1)/(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         out:float:Результат
             opt:typeget=value;@type:allowtypes=int|float
     
@@ -1375,17 +1375,17 @@ def:node:math
 def:node:math
 
         node:mod
-        name:Остаток от деления
-        namelib:% (Остаток от деления)
+        name:MOD
+        namelib:Остаток от деления (MOD)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
-        desc:Остаток от деления двух чисел
+        desc:Остаток от деления двух чисел. 5 % 2 равно 1 (2 * 2 + 1)
         code:(@in.1)%(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         out:int:Результат
             opt:typeget=value;@type:allowtypes=int|float
     
@@ -1393,8 +1393,8 @@ def:node:math
 def:node:math
 
         node:pow
-        name:Степень
-        namelib:^ (Степень)
+        name:POW
+        namelib:Степень (POW)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
@@ -1411,7 +1411,7 @@ def:node:math
 def:node:math
 
     node:absnum
-    name:Абсолютное значение
+    name:ABS
     desc:Абсолютное значение числа. -3 будет 3, -3.5 будет 3.5, 3 будет 3
     exec:pure
     rendertype:NoHeaderText
@@ -1425,17 +1425,17 @@ def:node:math
 def:node:math
 
         node:lessthannum
-        name:Меньше
-        namelib:< (Меньше)
+        name:&lt;
+        namelib:Меньше (<)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Сравнение двух чисел
         code:(@in.1)<(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float|*enum
+            opt:typeget=value;@type:allowtypes=int|float|*enum:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float|*enum
+            opt:typeget=value;@type:allowtypes=int|float|*enum:custom=1:custom_type=float:require=-1
         out:bool:Результат
             opt:typeget=value;@type:allowtypes=int|float|*enum
     
@@ -1443,17 +1443,17 @@ def:node:math
 def:node:math
 
         node:greaterthannum
-        name:Больше
-        namelib:> (Больше)
+        name:&gt;
+        namelib:Больше (>)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Сравнение двух чисел
         code:(@in.1)>(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float|*enum
+            opt:typeget=value;@type:allowtypes=int|float|*enum:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float|*enum
+            opt:typeget=value;@type:allowtypes=int|float|*enum:custom=1:custom_type=float:require=-1
         out:bool:Результат
             opt:typeget=value;@type:allowtypes=int|float|*enum
     
@@ -1461,17 +1461,17 @@ def:node:math
 def:node:math
 
         node:lessthanorequalnum
-        name:Меньше или равно
-        namelib:<= (Меньше или равно)
+        name:&lt;=
+        namelib:Меньше или равно (<=)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Сравнение двух чисел
         code:(@in.1)<=(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float|*enum
+            opt:typeget=value;@type:allowtypes=int|float|*enum:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float|*enum
+            opt:typeget=value;@type:allowtypes=int|float|*enum:custom=1:custom_type=float:require=-1
         out:bool:Результат
             opt:typeget=value;@type:allowtypes=int|float|*enum
     
@@ -1479,17 +1479,17 @@ def:node:math
 def:node:math
 
         node:greaterthanorequalnum
-        name:Больше или равно
-        namelib:>= (Больше или равно)
+        name:&gt;=
+        namelib:Больше или равно (>=)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Сравнение двух чисел
         code:(@in.1)>=(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float|*enum
+            opt:typeget=value;@type:allowtypes=int|float|*enum:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float|*enum
+            opt:typeget=value;@type:allowtypes=int|float|*enum:custom=1:custom_type=float:require=-1
         out:bool:Результат
             opt:typeget=value;@type:allowtypes=int|float|*enum
     
@@ -1497,17 +1497,17 @@ def:node:math
 def:node:math
 
         node:equalnum
-        name:Равно
-        namelib:== (Равно)
+        name:==
+        namelib:Равно (==)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Сравнение двух чисел
         code:(@in.1)==(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float|*enum
+            opt:typeget=value;@type:allowtypes=int|float|*enum:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float|*enum
+            opt:typeget=value;@type:allowtypes=int|float|*enum:custom=1:custom_type=float:require=-1
         out:bool:Результат
             opt:typeget=value;@type:allowtypes=int|float|*enum
     
@@ -1515,17 +1515,17 @@ def:node:math
 def:node:math
 
         node:notequalnum
-        name:Не равно
-        namelib:!= (Не равно)
+        name:!=
+        namelib:Не равно (!=)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Сравнение двух чисел
         code:(@in.1)!=(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float|*enum
+            opt:typeget=value;@type:allowtypes=int|float|*enum:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float|*enum
+            opt:typeget=value;@type:allowtypes=int|float|*enum:custom=1:custom_type=float:require=-1
         out:bool:Результат
             opt:typeget=value;@type:allowtypes=int|float|*enum
     
@@ -1533,17 +1533,17 @@ def:node:math
 def:node:math
 
         node:min
-        name:Минимум
-        namelib:Min (Минимум)
+        name:MIN
+        namelib:Меньшее из двух (MIN)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Выбирает меньшее из двух чисел
         code:(@in.1)Min(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         out:auto:Результат
             opt:typeget=value;@type:allowtypes=int|float
     
@@ -1551,17 +1551,17 @@ def:node:math
 def:node:math
 
         node:max
-        name:Максимум
-        namelib:Max (Максимум)
+        name:MAX
+        namelib:Большее из двух (MAX)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Выбирает большее из двух чисел
         code:(@in.1)Max(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         out:auto:Результат
             opt:typeget=value;@type:allowtypes=int|float
     
@@ -1569,17 +1569,17 @@ def:node:math
 def:node:math
 
         node:random
-        name:Случайное число
-        namelib:Rand (Случайное число)
+        name:Rand
+        namelib:Случайное число (Rand)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Случайное число в диапазоне
         code:[@in.1,@in.2]call randomFloat
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         out:float:Результат
             opt:typeget=value;@type:allowtypes=int|float
     
@@ -1587,17 +1587,17 @@ def:node:math
 def:node:math
 
         node:randomInt
-        name:Случайное целое число
-        namelib:RandInt (Случайное целое число)
+        name:RandInt
+        namelib:Случайное целое число (RandInt)
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:Случайное целое число в диапазоне
         code:[@in.1,@in.2]call randomInt
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         out:int:Результат
             opt:typeget=value;@type:allowtypes=int|float
     
@@ -1835,9 +1835,9 @@ def:node:math
         desc:a = atan (L1/L2) -> a = L1 atan2 L2. Подробнее [community.bistudio.com/wiki/atan2 по ссылке]
         code:(@in.1)atan2(@in.2)
         in:auto:Число 1
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         in:auto:Число 2
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:custom=1:custom_type=float:require=-1
         out:float:Результат
             opt:typeget=value;@type:allowtypes=int|float
     
@@ -2014,6 +2014,78 @@ exec:pure
 in:object^:Объект
 in:classname:Имя класса
 out:bool:Результат
+
+def:node:system
+node:tickTime
+name:Время работы Платформы
+path:Система.Время
+code:diag_tickTime
+desc:Получает время в секундах, прошедшее с момента запуска платформы
+icon:data\\icons\\icon_BluePrintEditor_Function_16px
+color:PureFunction
+exec:pure
+out:float:Значение
+    opt:dname=0:mul=1
+
+def:node:system
+node:netTickTime
+name:Время симуляции
+path:Система.Время
+code:CBA_missionTime
+desc:Получает время в секундах, прошедшее с момента начала симуляции
+icon:data\\icons\\icon_BluePrintEditor_Function_16px
+color:PureFunction
+exec:pure
+out:float:Значение
+    opt:dname=0:mul=1
+
+def:node:system
+node:deltaTime
+name:Время карда
+path:Система.Время
+code:diag_deltaTime
+desc:Возвращает длительность предыдущего кадра в секундах
+icon:data\\icons\\icon_BluePrintEditor_Function_16px
+color:PureFunction
+exec:pure
+out:float:Значение
+    opt:dname=0:mul=1
+
+def:node:system
+node:frameNumber
+name:Номер кадра
+path:Система.Время
+code:diag_frameNo
+desc:Возвращает номер кадра, отображаемого в данный момент.
+icon:data\\icons\\icon_BluePrintEditor_Function_16px
+color:PureFunction
+exec:pure
+out:float:Значение
+    opt:dname=0:mul=1
+
+def:node:system
+node:fps
+name:Средний FPS
+path:Система.Время
+code:diag_fps
+desc:Возвращает среднюю частоту кадров, рассчитанную за последние 16 кадров..
+icon:data\\icons\\icon_BluePrintEditor_Function_16px
+color:PureFunction
+exec:pure
+out:float:Значение
+    opt:dname=0:mul=1
+
+def:node:system
+node:fpsMin
+name:Минимальный FPS
+path:Система.Время
+code:diag_fpsMin
+desc:Возвращает минимальную частоту кадров. Рассчитывается по самому длинному кадру за последние 16 кадров..
+icon:data\\icons\\icon_BluePrintEditor_Function_16px
+color:PureFunction
+exec:pure
+out:float:Значение
+    opt:dname=0:mul=1
 
 def:enum:enums
 node:SpawnPointType
@@ -3099,7 +3171,7 @@ def:m:IRangedWeapon.createAmmoInMagazine_0
 		in:classname:Тип патронов:Тип боеприпасов, создаваемых в оружии
 			opt:require=0:def=IAmmoBase
 		in:int:Количество:Сколько боеприпасов будет создано в магазине.
-			opt:require=0
+			opt:require=0:def=1
 	
 def:c:Stack
 
@@ -3335,6 +3407,22 @@ def:m:ScriptedGamemode._getRolesWrapper_0
 		type:const
 		return:array[classname]:Список ролей, доступных в режиме.
 		defval:[]
+	
+def:m:ScriptedGamemode._getDurationWrapper_0
+
+		name:Время игры
+		namelib:Текущее время игры
+		desc:Возвращает время, прошедшее с начала раунда в секундах. Если раунд ещё не начался возвращает 0
+		type:get
+		lockoverride:1
+		return:int:Текущая длительность игры
+	
+def:f:ScriptedGamemode.countDead_0
+
+		name:Умершие мобы
+		desc:Получает количество умерших сущностей с начала раунда
+		prop:get
+		return:int:Количество умерших мобов
 	
 def:c:ReNode_AbstractEnum
 
@@ -3936,7 +4024,7 @@ $REGION:CLASSMETA
 }
 ,"ReNode_AbstractEnum": {
     "baseClass" : "object",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":313},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":331},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -13271,9 +13359,9 @@ $REGION:CLASSMETA
     "baseClass" : "GMBase",
     "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":9},
    "fields": { "defined": {
-"name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"canAddAspect":{"return": "bool"},"duration":{"return": "int"},"_currentFinishResult":{"return": "null_array"},"finishResult":{"return": "int"},"__rtf_buf":{"return": "string"},"__startRoundStructure":{"return": "null_array"}}   },
+"name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"canAddAspect":{"return": "bool"},"duration":{"return": "int"},"_currentFinishResult":{"return": "null_array"},"finishResult":{"return": "int"},"__rtf_buf":{"return": "string"},"countDead":{"return": "int"},"__startRoundStructure":{"return": "null_array"}}   },
    "methods": { "defined": {
-"_getAntagRoleFullWrapper":{"return": "<undefined>"},"getAntagRoleFull":{"return": "<undefined>"},"handleAntagRoleHidden":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"_checkFinishWrapper":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"onFinish":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"_conditionToStartWrapper":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onTick":{"return": "<undefined>"},"isPlayableGamemode":{"return": "<undefined>"},"getCandidatesCount":{"return": "<undefined>"},"_getRolesWrapper":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"onRoundCode":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"}
+"_getAntagRoleFullWrapper":{"return": "<undefined>"},"getAntagRoleFull":{"return": "<undefined>"},"handleAntagRoleHidden":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"_checkFinishWrapper":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"onFinish":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"_conditionToStartWrapper":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onTick":{"return": "<undefined>"},"isPlayableGamemode":{"return": "<undefined>"},"getCandidatesCount":{"return": "<undefined>"},"_getRolesWrapper":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"_getDurationWrapper":{"return": "<undefined>"},"onRoundCode":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"}
 }   }
 }
 ,"GMTemplate": {
@@ -14898,7 +14986,7 @@ $REGION:CLASSMETA
 }
 ,"ScriptedRole": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":323},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":341},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descInGame":{"return": "string"},"classMan":{"return": "string"},"classWoman":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"_deadTimeout":{"return": "int"},"count":{"return": "int"},"_currentBaseSkills":{"return": "null_array"},"_currentOtherSkills":{"return": "null_array"},"_currentSpawnLocation":{"return": "null_array"},"_currentConnectedTo":{"return": "null_array"}}   },
    "methods": { "defined": {

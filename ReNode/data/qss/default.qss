@@ -26,6 +26,7 @@
 	background: #191919;
 	color: #DDDDDD;
 	border: 1px solid #5A5A5A;
+	font-size: $CONST_FONT_SIZE_GLOBALpt
 	
 }
 
@@ -214,6 +215,15 @@ QTabBar::tab:selected {
 QTabBar::tab {
     min-width: 200px;  /* Минимальная ширина вкладки */
 }
+
+QTabBar::tab:selected {
+	background: #353535;
+	border-radius: 20px;
+	padding: 8px;
+	margin: 0px;
+	min-width: 200px;
+}
+
 QTabBar::close-button {
     image: url(./data/icons/close_tab.png);  /* Замените путь на вашу иконку */
     background-color: #353535;
