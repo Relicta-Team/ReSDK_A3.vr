@@ -10,22 +10,35 @@ _op = {
     params ["_sysname","_namelib","_code","_rez","_desc",["_rvvals","auto"],["_alwTps","int|float"]];
     (_namelib splitString ":")params ["_nlTex","_nlDesc"];
 
+    _ctypes = "";
+    if (_rvvals == "auto") then {
+        _ctypes = ":custom=1:custom_type=float:require=-1"; //require=-1 for off nil emplace for non-connected ports
+    };
+    
+    _nlDesc = format["%1 (%2)",_nlDesc,_nlTex];
+    if ("&lt;" in _nlTex) then {
+        _nlDesc = [_nlDesc,"&lt;","<"] call stringReplace;
+    };
+    if ("&gt;" in _nlTex) then {
+        _nlDesc = [_nlDesc,"&gt;",">"] call stringReplace;
+    };
+
     format["
         node:%1
         name:%2
-        namelib:%3 (%2)
+        namelib:%3
         path:Математика
         rendertype:NoHeaderText
         exec:pure
         desc:%4
         code:%5
         in:%7:Число 1
-            opt:typeget=value;@type:allowtypes=%8
+            opt:typeget=value;@type:allowtypes=%8%9
         in:%7:Число 2
-            opt:typeget=value;@type:allowtypes=%8
+            opt:typeget=value;@type:allowtypes=%8%9
         out:%6:Результат
             opt:typeget=value;@type:allowtypes=%8
-    ",_sysname,_nlTex,_nlDesc,_desc,_code,_rez,_rvvals,_alwTps]
+    ",_sysname,_nlTex,_nlDesc,_desc,_code,_rez,_rvvals,_alwTps,_ctypes]
 };
 
 "
@@ -58,21 +71,21 @@ _op = {
 " node_system
 
 // +
-(["add","Сложение:+","(@in.1)+(@in.2)","auto","Сложение двух чисел"] call _op) node_system
+(["add","+:Сложение","(@in.1)+(@in.2)","auto","Сложение двух чисел"] call _op) node_system
 // -
-(["sub","Вычитание:-","(@in.1)-(@in.2)","auto","Вычитание двух чисел"] call _op) node_system
+(["sub","-:Вычитание","(@in.1)-(@in.2)","auto","Вычитание двух чисел"] call _op) node_system
 // *
-(["mul","Умножение:*","(@in.1)*(@in.2)","float","Умножение двух чисел"] call _op) node_system
+(["mul","*:Умножение","(@in.1)*(@in.2)","float","Умножение двух чисел"] call _op) node_system
 // /
-(["div","Деление:/","(@in.1)/(@in.2)","float","Деление двух чисел"] call _op) node_system
+(["div","/:Деление","(@in.1)/(@in.2)","float","Деление двух чисел"] call _op) node_system
 // %
-(["mod","Остаток от деления:%","(@in.1)%(@in.2)","int","Остаток от деления двух чисел"] call _op) node_system
+(["mod","MOD:Остаток от деления","(@in.1)%(@in.2)","int","Остаток от деления двух чисел. 5 % 2 равно 1 (2 * 2 + 1)"] call _op) node_system
 // ^ (pow)
-(["pow","Степень:^","(@in.1)^(@in.2)","float","Возведение числа 1 в степень числа 2","int"] call _op) node_system
+(["pow","POW:Степень","(@in.1)^(@in.2)","float","Возведение числа 1 в степень числа 2","int"] call _op) node_system
 // abs
 "
     node:absnum
-    name:Абсолютное значение
+    name:ABS
     desc:Абсолютное значение числа. -3 будет 3, -3.5 будет 3.5, 3 будет 3
     exec:pure
     rendertype:NoHeaderText
@@ -86,34 +99,29 @@ _op = {
 //comp operations
 
 // <
-(["lessthannum","Меньше:<","(@in.1)<(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
+(["lessthannum","&lt;:Меньше","(@in.1)<(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
 // >
-(["greaterthannum","Больше:>","(@in.1)>(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
+(["greaterthannum","&gt;:Больше","(@in.1)>(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
 // <=
-(["lessthanorequalnum","Меньше или равно:<=","(@in.1)<=(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
+(["lessthanorequalnum","&lt;=:Меньше или равно","(@in.1)<=(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
 // >=
-(["greaterthanorequalnum","Больше или равно:>=","(@in.1)>=(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
+(["greaterthanorequalnum","&gt;=:Больше или равно","(@in.1)>=(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
 // ==
-(["equalnum","Равно:==","(@in.1)==(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
+(["equalnum","==:Равно","(@in.1)==(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
 // !=
-(["notequalnum","Не равно:!=","(@in.1)!=(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
+(["notequalnum","!=:Не равно","(@in.1)!=(@in.2)","bool","Сравнение двух чисел",nil,"int|float|*enum"] call _op) node_system
 
 // others
 
 //min
-(["min","Минимум:Min","(@in.1)Min(@in.2)","auto","Выбирает меньшее из двух чисел"] call _op) node_system
+(["min","MIN:Меньшее из двух","(@in.1)Min(@in.2)","auto","Выбирает меньшее из двух чисел"] call _op) node_system
 //max
-(["max","Максимум:Max","(@in.1)Max(@in.2)","auto","Выбирает большее из двух чисел"] call _op) node_system
-
-/*
-#define rand(_beg,_end) (linearConversion [0,1,random 1,_beg,_end])
-#define randInt(_beg,_end) (FLOOR linearConversion [0,1,random 1,(_beg)min(_end),(_end)max(_beg)+1])
-*/
+(["max","MAX:Большее из двух","(@in.1)Max(@in.2)","auto","Выбирает большее из двух чисел"] call _op) node_system
 
 //random
-(["random","Случайное число:Rand","[@in.1,@in.2]call randomFloat","float","Случайное число в диапазоне"] call _op) node_system
+(["random","Rand:Случайное число","[@in.1,@in.2]call randomFloat","float","Случайное число в диапазоне"] call _op) node_system
 //random int
-(["randomInt","Случайное целое число:RandInt","[@in.1,@in.2]call randomInt","int","Случайное целое число в диапазоне"] call _op) node_system
+(["randomInt","RandInt:Случайное целое число","[@in.1,@in.2]call randomInt","int","Случайное целое число в диапазоне"] call _op) node_system
 //clamp
 "
         node:clamp
