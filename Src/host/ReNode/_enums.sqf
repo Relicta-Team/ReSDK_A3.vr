@@ -143,7 +143,21 @@ node_enum
 	"
 ] node_enum
 
-//enum helper
+#include "..\GameObjects\GameConstants.hpp"
+["SideIndex",NODE_SIDE_LIST_ALL,
+	"name:Сторона
+	desc:Данное перечисление содержит 2 значения\: левая сторона и правая. Перечисление может быть использовано например для определения частей тела с разных сторон.\n"+
+	"Для преобразования стороны в индекс используйте формулу\: ABS CEIL (side * 0.1)
+	"
+] node_enum
+
+#include "..\..\client\Inventory\inventory.hpp"
+["HandType",INV_LIST_HANDS apply {format["%1:%2",INV_LIST_SLOTNAMES select _x,_x]},
+	"name:Тип руки
+	desc:Перечисление типа руки."
+]
+
+//!!! enum helper
 nodeModule_register("enumhelper")
 nodeModule_setPath("Перечисления.Преобразования")
 nodeModule_setRenderType("NoHeaderText")

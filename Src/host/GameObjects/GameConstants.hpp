@@ -102,6 +102,7 @@
 #define sideToIndex(_side) (abs ceil ((_side)*.1))
 #define SIDE_LEFT -1
 #define SIDE_RIGHT 1
+#define NODE_SIDE_LIST_ALL ['Лево:SIDE_LEFT','Право:SIDE_RIGHT']
 
 //fast declaration object class
 //not implemented yet
