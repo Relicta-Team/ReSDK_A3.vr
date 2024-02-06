@@ -146,8 +146,8 @@ class(ScriptedGamemode) extends(GMBase)
 	"
 		name:Проверка конца раунда
 		namelib:Обработка конца раунда
-		desc:Данное событие срабатывает раз в секунду после начала раунда. Чтобы завершить раунд с нужным исходом, используйте узел 'Получить результат конца раунда'.\n"+
-		"Для установки нужного конца раунда используйте узел 'Установить результат конца раунда'.
+		desc:Данное событие срабатывает раз в секунду после начала раунда.\n"+
+		"Для установки нужного конца раунда используйте узел 'Завершить раунд'.
 		type:event
 	" node_met
 	func(_checkFinishWrapper)
@@ -155,11 +155,44 @@ class(ScriptedGamemode) extends(GMBase)
 		objParams();
 	};
 
+	"
+		name:Завершить раунд
+		namelib:Установить результат конца раунда (завершить раунд)
+		desc:Устанавливает результат раунда и описание результата.
+		in:int:Исход:Число, отражающее один из концов раунда.
+		in:string:Описание:Текстовое описание, которое будет выведено при завершении раунда.
+	" node_met
+	func(setEndgameScriptedMode)
+	{
+		objParams_2(_irez,_desc);
+		if (_irez == 0) exitwith {};
+		setSelf(_currentFinishResult,vec2(_irez,_desc));
+	};
+
+	"
+		name:Автопроверка длительности режима
+		desc:При включении этой опции режим будет автоматически сверять текущее время игры с длительностью режима. Когда время игры превысит длительность режима - раунд будет завершен автоматически."+
+		"Результат конца раунда при автоматическом завершении по таймеру будет -999.\nПри отключении данной опции вы должны реализовать проверку по длительности самостоятельно, иначе раунд никогда не завершится.
+		classprop:1
+		prop:get
+		return:bool
+		defval:false
+	" node_var
+	var(__stdCheckDuration,false);
+
 	func(checkFinish)
 	{
 		objParams();
 		callSelf(_checkFinishWrapper);
 		getSelf(_currentFinishResult) params ["_fr","_fdes"];
+		if (_fr == 0 && {getSelf(__stdCheckDuration)}) then {
+			if (gm_roundDuration >= getSelf(duration)) then {
+				_fr = -999;
+				_fdes = "Смена завершена.";
+				callSelfParams(setEndgameScriptedMode,_fr arg _fdes);
+
+			};
+		};
 		if (_fr != 0) exitWith {
 			setSelf(__rtf_buf,_fdes);
 			_fr
