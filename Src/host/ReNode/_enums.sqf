@@ -155,7 +155,7 @@ node_enum
 ["HandType",INV_LIST_HANDS apply {format["%1:%2",INV_LIST_SLOTNAMES select _x,_x]},
 	"name:Тип руки
 	desc:Перечисление типа руки."
-]
+] node_enum
 
 //!!! enum helper
 nodeModule_register("enumhelper")

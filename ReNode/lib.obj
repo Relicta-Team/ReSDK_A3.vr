@@ -2272,6 +2272,23 @@ eval:Средний свет:2
 eval:Большой свет:3
 eval:Полный свет:4
 
+def:enum:enums
+node:SideIndex
+path:Перечисления
+name:Сторона
+	desc:Данное перечисление содержит 2 значения\: левая сторона и правая. Перечисление может быть использовано например для определения частей тела с разных сторон.\nДля преобразования стороны в индекс используйте формулу\: ABS CEIL (side * 0.1)
+	
+eval:Левая сторона:-1
+eval:Правая сторона:1
+
+def:enum:enums
+node:HandType
+path:Перечисления
+name:Тип руки
+	desc:Перечисление типа руки.
+eval:Левая рука:6
+eval:Правая рука:8
+
 def:node:enumhelper
 node:enumGetNames
 name:Имена перечислений
@@ -3156,6 +3173,72 @@ def:m:BasicMob.playSoundLocal_0
 		in:auto:Источник:Источник звука. Если не указан, то звук воспроизведется из позиции вызывающего моба.
 			opt:require=0:typeget=value;@type:allowtypes=GameObject
 	
+def:c:MobWoman
+
+		name:Игровой женский персонаж
+		desc:Игровая сущность, которым могут управлять клиенты.
+		path:Игровые объекты.Сущности
+	
+def:c:Mob
+
+		name:Игровой персонаж
+		desc:Игровая сущность, которым могут управлять клиенты.
+		path:Игровые объекты.Сущности
+	
+def:f:Mob.hunger_0
+
+	name:Голод
+	desc:Текущее значение голода персонажа. Начальное значение 100. Минимум - 0, максимум - 100+
+	prop:get
+	return:float
+	defval:100
+
+def:m:Mob.adjustHunger_0
+
+		name:Изменить голод
+		desc:Добавляет и отнимает указанное количество единиц голода из текущих. Положительное число для насыщения, а отрицательное для голодания.
+		type:method
+		lockoverride:1
+		in:float:Голод:Положительное число насыщает, отрицательное - добавляет голод
+	
+def:m:Mob.setHunger_0
+
+		name:Установить голод
+		desc:Перезаписывает и устанавливает новое значение голода.
+		type:method
+		lockoverride:1
+		in:float:Голод:Новое значение голода
+	
+def:f:Mob.activeHand_0
+
+		name:Активная рука
+		desc:Текущая активная рука, которой персонаж будет производить действия
+		prop:get
+		return:enum.HandType
+	
+def:f:Mob.mainHand_0
+
+		name:Основная рука
+		desc:Текущая основная рука персонажа (левша или правша).
+		prop:get
+		return:enum.HandType
+	
+def:m:Mob.isConnected_0
+
+		name:Привязан к объекту
+		desc:Возвращает ИСТИНУ, если сущность присоединена к объекту (сидит на стуле, лежит на кровати)
+		type:get
+		lockoverride:1
+		return:bool
+	
+def:m:Mob.isHandcuffed_0
+
+		name:Связан
+		desc:Возвращает ИСТИНУ, если руки сущности скованы веревкой, наручниками или подобным предметом.
+		type:get
+		lockoverride:1
+		return:bool
+	
 def:c:IRangedWeapon
 
 		name:Дистанционное оружие
@@ -3327,8 +3410,25 @@ def:m:ScriptedGamemode._checkFinishWrapper_0
 
 		name:Проверка конца раунда
 		namelib:Обработка конца раунда
-		desc:Данное событие срабатывает раз в секунду после начала раунда. Чтобы завершить раунд с нужным исходом, используйте узел 'Получить результат конца раунда'.\nДля установки нужного конца раунда используйте узел 'Установить результат конца раунда'.
+		desc:Данное событие срабатывает раз в секунду после начала раунда.\nДля установки нужного конца раунда используйте узел 'Завершить раунд'.
 		type:event
+	
+def:m:ScriptedGamemode.setEndgameScriptedMode_0
+
+		name:Завершить раунд
+		namelib:Установить результат конца раунда (завершить раунд)
+		desc:Устанавливает результат раунда и описание результата.
+		in:int:Исход:Число, отражающее один из концов раунда.
+		in:string:Описание:Текстовое описание, которое будет выведено при завершении раунда.
+	
+def:f:ScriptedGamemode.__stdCheckDuration_0
+
+		name:Автопроверка длительности режима
+		desc:При включении этой опции режим будет автоматически сверять текущее время игры с длительностью режима. Когда время игры превысит длительность режима - раунд будет завершен автоматически.Результат конца раунда при автоматическом завершении по таймеру будет -999.\nПри отключении данной опции вы должны реализовать проверку по длительности самостоятельно, иначе раунд никогда не завершится.
+		classprop:1
+		prop:get
+		return:bool
+		defval:false
 	
 def:m:ScriptedGamemode.onFinish_0
 
@@ -4024,7 +4124,7 @@ $REGION:CLASSMETA
 }
 ,"ReNode_AbstractEnum": {
     "baseClass" : "object",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":331},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":364},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -13141,7 +13241,7 @@ $REGION:CLASSMETA
 }
 ,"Mob": {
     "baseClass" : "BasicMob",
-    "defined" : {"file":"src\\host\\GameObjects\\Mobs\\Mob.sqf","line":67},
+    "defined" : {"file":"src\\host\\GameObjects\\Mobs\\Mob.sqf","line":73},
    "fields": { "defined": {
 "isCombatModeEnable":{"return": "bool"},"curAttackType":{"return": "string"},"curDefType":{"return": "string"},"curEncumbranceLevel":{"return": "int"},"encumbrance":{"return": "int"},"curTargZone":{"return": "int"},"curCombatStyle":{"return": "string"},"isReadyAttack":{"return": "bool"},"otherAttackType":{"return": "string"},"otherTargZone":{"return": "int"},"otherCombatStyle":{"return": "string"},"otherSpecialAction":{"return": "int"},"otherLastCombatActionTime":{"return": "int"},"penaltySupressFire":{"return": "int"},"__lasttime_message_unreadyweap__":{"return": "int"},"__eventClick":{"return": "null_array"},"lastInteractToBodyPart":{"return": "object"},"grabber":{"return": "object"},"specHandAct":{"return": "null"},"grabResistTimeout":{"return": "int"},"voiceTypeTembre":{"return": "string"},"isStealthEnabled":{"return": "bool"},"stealthLastCheck":{"return": "int"},"slots":{"return": "null_array"},"defaultUniform":{"return": "string"},"damageInfo":{"return": "null"},"isDead":{"return": "bool"},"hunger":{"return": "int"},"thirst":{"return": "int"},"oxygen":{"return": "int"},"toxin":{"return": "int"},"urine":{"return": "int"},"feces":{"return": "int"},"lastFartTime":{"return": "int"},"reagents":{"return": "null"},"vessel":{"return": "object"},"bloodLossValue":{"return": "int"},"bloodPoolLastCheck":{"return": "int"},"bodyParts":{"return": "null_hashmap"},"bodyArtery":{"return": "null_hashmap"},"painAmount":{"return": "int"},"painNextMoan":{"return": "int"},"internalPain":{"return": "int"},"stunned":{"return": "int"},"unconscious":{"return": "int"},"sleepiness":{"return": "int"},"sleepTimeStart":{"return": "int"},"sleepStrength":{"return": "int"},"sleepIsChangeState":{"return": "bool"},"isCloseEyes":{"return": "bool"},"lastDamageTime":{"return": "int"},"internalTimer":{"return": "int"},"timeBonus":{"return": "null_array"},"_shockHandle":{"return": "int"},"__isFirstUnsleep":{"return": "bool"},"_lastcheckunsleep":{"return": "int"},"internalReagentTimer":{"return": "int"},"__smellLastCheck":{"return": "int"},"isHoldedBreath":{"return": "bool"},"__tab_nextcheck":{"return": "int"},"__hungernextmes":{"return": "float"},"__thirstnextmes":{"return": "float"},"vomitAmount":{"return": "int"},"isOnGround":{"return": "bool"},"fallingStartPos":{"return": "null_array"},"__isfallsound":{"return": "bool"},"inAgony":{"return": "bool"},"agonyLastTime":{"return": "int"},"painSupress":{"return": "int"},"__brokenlegtimeout":{"return": "int"},"ST":{"return": "null_array"},"IQ":{"return": "null_array"},"DX":{"return": "null_array"},"HT":{"return": "null_array"},"fp":{"return": "null_array"},"will":{"return": "null_array"},"per":{"return": "null_array"},"hp":{"return": "null_array"},"bl":{"return": "null_array"},"bs":{"return": "null_array"},"move":{"return": "null_array"},"animCoef":{"return": "int"},"rta":{"return": "int"},"lastActionTime":{"return": "int"},"lastCombatActionTime":{"return": "int"},"height":{"return": "int"},"weight":{"return": "int"},"stamina":{"return": "int"},"staminaMax":{"return": "int"},"perks":{"return": "null_hashmap"},"fight":{"return": "int"},"shield":{"return": "int"},"fencing":{"return": "int"},"axe":{"return": "int"},"baton":{"return": "int"},"spear":{"return": "int"},"sword":{"return": "int"},"knife":{"return": "int"},"whip":{"return": "int"},"pistol":{"return": "int"},"rifle":{"return": "int"},"shotgun":{"return": "int"},"crossbow":{"return": "int"},"throw":{"return": "int"},"chemistry":{"return": "int"},"alchemy":{"return": "int"},"engineering":{"return": "int"},"traps":{"return": "int"},"repair":{"return": "int"},"blacksmithing":{"return": "int"},"craft":{"return": "int"},"theft":{"return": "int"},"stealth":{"return": "int"},"agility":{"return": "int"},"lockpicking":{"return": "int"},"healing":{"return": "int"},"surgery":{"return": "int"},"cavelore":{"return": "int"},"cooking":{"return": "int"},"farming":{"return": "int"},"__learnStatus":{"return": "null_hashmap"},"__allStatusEffects":{"return": "null_array"},"__gameinfo":{"return": "null_array"},"lastEmoteActionString":{"return": "string"},"__listactions":{"return": "null_array"},"face":{"return": "string"},"faceAnim":{"return": "string"},"specialAction":{"return": "int"},"activeHand":{"return": "int"},"mainHand":{"return": "int"},"connectedTo":{"return": "object"},"handcuffObject":{"return": "object"},"handleFallingUpdate":{"return": "int"},"openedContainer":{"return": "object"},"knownMobsList":{"return": "null_array"},"lastHandshakeTarget":{"return": "object"},"lastHandshakeTime":{"return": "int"},"_internalEquipmentND":{"return": "null"}}   },
    "methods": { "defined": {
@@ -13359,9 +13459,9 @@ $REGION:CLASSMETA
     "baseClass" : "GMBase",
     "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":9},
    "fields": { "defined": {
-"name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"canAddAspect":{"return": "bool"},"duration":{"return": "int"},"_currentFinishResult":{"return": "null_array"},"finishResult":{"return": "int"},"__rtf_buf":{"return": "string"},"countDead":{"return": "int"},"__startRoundStructure":{"return": "null_array"}}   },
+"name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"canAddAspect":{"return": "bool"},"duration":{"return": "int"},"_currentFinishResult":{"return": "null_array"},"finishResult":{"return": "int"},"__stdCheckDuration":{"return": "bool"},"__rtf_buf":{"return": "string"},"countDead":{"return": "int"},"__startRoundStructure":{"return": "null_array"}}   },
    "methods": { "defined": {
-"_getAntagRoleFullWrapper":{"return": "<undefined>"},"getAntagRoleFull":{"return": "<undefined>"},"handleAntagRoleHidden":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"_checkFinishWrapper":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"onFinish":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"_conditionToStartWrapper":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onTick":{"return": "<undefined>"},"isPlayableGamemode":{"return": "<undefined>"},"getCandidatesCount":{"return": "<undefined>"},"_getRolesWrapper":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"_getDurationWrapper":{"return": "<undefined>"},"onRoundCode":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"}
+"_getAntagRoleFullWrapper":{"return": "<undefined>"},"getAntagRoleFull":{"return": "<undefined>"},"handleAntagRoleHidden":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"_checkFinishWrapper":{"return": "<undefined>"},"setEndgameScriptedMode":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"onFinish":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"_conditionToStartWrapper":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onTick":{"return": "<undefined>"},"isPlayableGamemode":{"return": "<undefined>"},"getCandidatesCount":{"return": "<undefined>"},"_getRolesWrapper":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"_getDurationWrapper":{"return": "<undefined>"},"onRoundCode":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"}
 }   }
 }
 ,"GMTemplate": {
@@ -14986,7 +15086,7 @@ $REGION:CLASSMETA
 }
 ,"ScriptedRole": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":341},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":374},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descInGame":{"return": "string"},"classMan":{"return": "string"},"classWoman":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"_deadTimeout":{"return": "int"},"count":{"return": "int"},"_currentBaseSkills":{"return": "null_array"},"_currentOtherSkills":{"return": "null_array"},"_currentSpawnLocation":{"return": "null_array"},"_currentConnectedTo":{"return": "null_array"}}   },
    "methods": { "defined": {

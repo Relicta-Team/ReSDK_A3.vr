@@ -54,6 +54,12 @@
 #include <MobSkills_idx.hpp>
 
 class(MobWoman) extends(Mob)
+	"
+		name:Игровой женский персонаж
+		desc:Игровая сущность, которым могут управлять клиенты.
+		path:Игровые объекты.Сущности
+	" node_class
+
 	var(defaultUniform,"max_femaleBasicBody");
 	var(gender,gender_female);
 	getter_func(getRetchSounds,["mob\female_retch1" arg "mob\female_retch2" arg "mob\female_retch3"]); //подавиться
@@ -67,7 +73,7 @@ endclass
 class(Mob) extends(BasicMob)
 
 	"
-		name:Игровой моб
+		name:Игровой персонаж
 		desc:Игровая сущность, которым могут управлять клиенты.
 		path:Игровые объекты.Сущности
 	" node_class
@@ -109,6 +115,7 @@ class(Mob) extends(BasicMob)
 		name:Привязан к объекту
 		desc:Возвращает ИСТИНУ, если сущность присоединена к объекту (сидит на стуле, лежит на кровати)
 		type:get
+		lockoverride:1
 		return:bool
 	" node_met
 	getter_func(isConnected,not_equals(getSelf(connectedTo),nullPtr)); //подключен ли к чему-либо
@@ -140,6 +147,7 @@ class(Mob) extends(BasicMob)
 		name:Связан
 		desc:Возвращает ИСТИНУ, если руки сущности скованы веревкой, наручниками или подобным предметом.
 		type:get
+		lockoverride:1
 		return:bool
 	" node_met
 	getter_func(isHandcuffed,!isNullReference(getSelf(handcuffObject)));
