@@ -169,6 +169,33 @@ Description:
 - Param: _attributeParams (optional, default [])
 
 File: [host\OOP_engine\oop_attributes.sqf at line 11](../../../Src/host/OOP_engine/oop_attributes.sqf#L11)
+# oop_doll.sqf
+
+## doll_initComponent
+
+Type: function
+
+Description: 
+
+
+File: [host\OOP_engine\oop_doll.sqf at line 15](../../../Src/host/OOP_engine/oop_doll.sqf#L15)
+## doll_loadAssembly
+
+Type: function
+
+Description: 
+- Param: _asmName
+- Param: _flags (optional, default "")
+
+File: [host\OOP_engine\oop_doll.sqf at line 22](../../../Src/host/OOP_engine/oop_doll.sqf#L22)
+## doll_unloadAssembly
+
+Type: function
+
+Description: 
+- Param: _asmName
+
+File: [host\OOP_engine\oop_doll.sqf at line 26](../../../Src/host/OOP_engine/oop_doll.sqf#L26)
 # oop_init.sqf
 
 ## NULLCLASS
@@ -339,6 +366,18 @@ Initial value:
 0 //bytes
 ```
 File: [host\OOP_engine\oop_logging.sqf at line 13](../../../Src/host/OOP_engine/oop_logging.sqf#L13)
+# oop_main_loader.sqf
+
+## oop_loadTypes
+
+Type: function
+
+Description: Данный файл предназначен для общей загрузки модулей в среде симуляции и редакторе
+- Param: _typemap
+- Param: _inh_struct
+- Param: _options
+
+File: [host\OOP_engine\oop_main_loader.sqf at line 9](../../../Src/host/OOP_engine/oop_main_loader.sqf#L9)
 # oop_object.sqf
 
 ## basic()
@@ -443,6 +482,15 @@ Description:
 
 
 File: [host\OOP_engine\oop_preinit.sqf at line 108](../../../Src/host/OOP_engine/oop_preinit.sqf#L108)
+## oop_checkTypeSafe
+
+Type: function
+
+Description: проверка типа
+- Param: _typename
+- Param: _defaultRet (optional, default "object")
+
+File: [host\OOP_engine\oop_preinit.sqf at line 123](../../../Src/host/OOP_engine/oop_preinit.sqf#L123)
 ## oop_getinhlist
 
 Type: function
@@ -452,7 +500,16 @@ Description:
 - Param: _recurs
 - Param: _refarr
 
-File: [host\OOP_engine\oop_preinit.sqf at line 123](../../../Src/host/OOP_engine/oop_preinit.sqf#L123)
+File: [host\OOP_engine\oop_preinit.sqf at line 134](../../../Src/host/OOP_engine/oop_preinit.sqf#L134)
+## oop_getinhlist_Node
+
+Type: function
+
+Description: 
+- Param: _typename
+- Param: _global (optional, default false)
+
+File: [host\OOP_engine\oop_preinit.sqf at line 162](../../../Src/host/OOP_engine/oop_preinit.sqf#L162)
 ## oop_getFieldBaseValue
 
 Type: function
@@ -463,7 +520,7 @@ Description: _altMethodNameIfNil - возвращает альтернативн
 - Param: _doCompile (optional, default false)
 - Param: _altMethodNameIfNil (optional, default "")
 
-File: [host\OOP_engine\oop_preinit.sqf at line 154](../../../Src/host/OOP_engine/oop_preinit.sqf#L154)
+File: [host\OOP_engine\oop_preinit.sqf at line 169](../../../Src/host/OOP_engine/oop_preinit.sqf#L169)
 ## oop_getData
 
 Type: function
@@ -471,7 +528,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [host\OOP_engine\oop_preinit.sqf at line 176](../../../Src/host/OOP_engine/oop_preinit.sqf#L176)
+File: [host\OOP_engine\oop_preinit.sqf at line 191](../../../Src/host/OOP_engine/oop_preinit.sqf#L191)
 ## oop_injectToMethod
 
 Type: function
@@ -483,4 +540,4 @@ Description:
 - Param: _sect (optional, default "end")
 - Param: _overrideChild (optional, default false)
 
-File: [host\OOP_engine\oop_preinit.sqf at line 230](../../../Src/host/OOP_engine/oop_preinit.sqf#L230)
+File: [host\OOP_engine\oop_preinit.sqf at line 245](../../../Src/host/OOP_engine/oop_preinit.sqf#L245)

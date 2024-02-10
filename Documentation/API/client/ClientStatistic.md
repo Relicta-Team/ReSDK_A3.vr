@@ -49,6 +49,30 @@ Initial value:
 [_ctg,_back,_text]
 ```
 File: [client\ClientStatistic\LogVariables.sqf at line 19](../../../Src/client/ClientStatistic/LogVariables.sqf#L19)
+## clistat_internal_allch_buffer
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\ClientStatistic\LogVariables.sqf at line 23](../../../Src/client/ClientStatistic/LogVariables.sqf#L23)
+## clistat_internal_allch_buffer_frame
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\ClientStatistic\LogVariables.sqf at line 24](../../../Src/client/ClientStatistic/LogVariables.sqf#L24)
 ## clistat_buffer
 
 Type: Variable
@@ -60,7 +84,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [client\ClientStatistic\LogVariables.sqf at line 23](../../../Src/client/ClientStatistic/LogVariables.sqf#L23)
+File: [client\ClientStatistic\LogVariables.sqf at line 26](../../../Src/client/ClientStatistic/LogVariables.sqf#L26)
 ## clistat_onupdate
 
 Type: function
@@ -68,7 +92,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientStatistic\LogVariables.sqf at line 82](../../../Src/client/ClientStatistic/LogVariables.sqf#L82)
+File: [client\ClientStatistic\LogVariables.sqf at line 117](../../../Src/client/ClientStatistic/LogVariables.sqf#L117)
 ## clistat_setLogVars
 
 Type: function
@@ -76,4 +100,4 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\ClientStatistic\LogVariables.sqf at line 93](../../../Src/client/ClientStatistic/LogVariables.sqf#L93)
+File: [client\ClientStatistic\LogVariables.sqf at line 131](../../../Src/client/ClientStatistic/LogVariables.sqf#L131)

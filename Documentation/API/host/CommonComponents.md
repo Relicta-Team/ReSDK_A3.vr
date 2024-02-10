@@ -137,7 +137,7 @@ if !(value) exitWith { \
 		setLastError(_format); \
 	};
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 409](../../../Src/host/CommonComponents/!PreInit.sqf#L409)
+File: [host\CommonComponents\!PreInit.sqf at line 492](../../../Src/host/CommonComponents/!PreInit.sqf#L492)
 ## cprint_usestdout
 
 Type: Variable
@@ -444,6 +444,99 @@ Description:
 - Param: _defaultReturn
 
 File: [host\CommonComponents\!PreInit.sqf at line 384](../../../Src/host/CommonComponents/!PreInit.sqf#L384)
+## arrayDeleteItem
+
+Type: function
+
+Description: 
+- Param: _a
+- Param: _it
+
+File: [host\CommonComponents\!PreInit.sqf at line 391](../../../Src/host/CommonComponents/!PreInit.sqf#L391)
+## arrayIsValidIndex
+
+Type: function
+
+Description: 
+- Param: _a
+- Param: _ix
+
+File: [host\CommonComponents\!PreInit.sqf at line 398](../../../Src/host/CommonComponents/!PreInit.sqf#L398)
+## arrayShuffleOrig
+
+Type: function
+
+Description: shuffle array elements, return alter array
+- Param: _array
+
+File: [host\CommonComponents\!PreInit.sqf at line 404](../../../Src/host/CommonComponents/!PreInit.sqf#L404)
+## arraySwap
+
+Type: function
+
+Description: swap 2 elements in array
+- Param: _a
+- Param: _is
+- Param: _id
+
+File: [host\CommonComponents\!PreInit.sqf at line 416](../../../Src/host/CommonComponents/!PreInit.sqf#L416)
+## stringLength
+
+Type: function
+
+Description: 
+- Param: _str
+- Param: _unicode (optional, default true)
+
+File: [host\CommonComponents\!PreInit.sqf at line 423](../../../Src/host/CommonComponents/!PreInit.sqf#L423)
+## stringSelect
+
+Type: function
+
+Description: 
+- Param: _s
+- Param: _i
+- Param: _c
+
+File: [host\CommonComponents\!PreInit.sqf at line 433](../../../Src/host/CommonComponents/!PreInit.sqf#L433)
+## randomFloat
+
+Type: function
+
+Description: 
+- Param: _beg
+- Param: _end
+
+File: [host\CommonComponents\!PreInit.sqf at line 439](../../../Src/host/CommonComponents/!PreInit.sqf#L439)
+## randomInt
+
+Type: function
+
+Description: 
+- Param: _beg
+- Param: _end
+
+File: [host\CommonComponents\!PreInit.sqf at line 444](../../../Src/host/CommonComponents/!PreInit.sqf#L444)
+## clampNumber
+
+Type: function
+
+Description: 
+- Param: _v
+- Param: _mi
+- Param: _ma
+
+File: [host\CommonComponents\!PreInit.sqf at line 449](../../../Src/host/CommonComponents/!PreInit.sqf#L449)
+## stringFormat
+
+Type: function
+
+Description: 
+- Param: _fmt
+- Param: _val
+- Param: _breakArr (optional, default false)
+
+File: [host\CommonComponents\!PreInit.sqf at line 454](../../../Src/host/CommonComponents/!PreInit.sqf#L454)
 ## functionalitests_preinit
 
 Type: function
@@ -453,7 +546,7 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 408](../../../Src/host/CommonComponents/!PreInit.sqf#L408)
+File: [host\CommonComponents\!PreInit.sqf at line 491](../../../Src/host/CommonComponents/!PreInit.sqf#L491)
 # Algorithm.sqf
 
 ## allOf

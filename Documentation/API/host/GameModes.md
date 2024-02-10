@@ -13,7 +13,7 @@ Replaced value:
 ```sqf
 (if (getSelf(var__) val__ ) then {text__ + (str getSelf(var__)) + sbr} else {""})
 ```
-File: [host\GameModes\BasicDefines.sqf at line 201](../../../Src/host/GameModes/BasicDefines.sqf#L201)
+File: [host\GameModes\BasicDefines.sqf at line 217](../../../Src/host/GameModes/BasicDefines.sqf#L217)
 ## printInfoIf_Handled(val__,text__,var__,__hnd)
 
 Type: constant
@@ -28,7 +28,7 @@ Replaced value:
 ```sqf
 (if (getSelf(var__) val__ ) then {text__ + (__hnd) + sbr} else {""})
 ```
-File: [host\GameModes\BasicDefines.sqf at line 202](../../../Src/host/GameModes/BasicDefines.sqf#L202)
+File: [host\GameModes\BasicDefines.sqf at line 218](../../../Src/host/GameModes/BasicDefines.sqf#L218)
 # BasicTask.sqf
 
 ## editor_task_test
@@ -262,6 +262,45 @@ Replaced value:
 2
 ```
 File: [host\GameModes\GameMode.h at line 23](../../../Src/host/GameModes/GameMode.h#L23)
+# ScriptedSkillsDecl.hpp
+
+## _r(v1,v2)
+
+Type: constant
+
+Description: Тут определеены константы для навыков
+- Param: v1
+- Param: v2
+
+Replaced value:
+```sqf
+[v1,v2]
+```
+File: [host\GameModes\ScriptedSkillsDecl.hpp at line 3](../../../Src/host/GameModes/ScriptedSkillsDecl.hpp#L3)
+## skills_nodes_allowedMinSkillDefIndex
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+4
+```
+File: [host\GameModes\ScriptedSkillsDecl.hpp at line 4](../../../Src/host/GameModes/ScriptedSkillsDecl.hpp#L4)
+## skills_nodes_listKinds
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\GameModes\ScriptedSkillsDecl.hpp at line 5](../../../Src/host/GameModes/ScriptedSkillsDecl.hpp#L5)
 # PublicTasks.sqf
 
 ## taskSystem_internal_list_generator
