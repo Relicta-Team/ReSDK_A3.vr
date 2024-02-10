@@ -52,9 +52,29 @@ flyingObject setName "<INTERNAL>flyingObject";
 
 editor_attribute("HiddenClass")
 class(GameObject) extends(ManagedObject)
+	"
+		name:Игровой объект
+		desc:Базовый игровой объект, от которого унаследованы все сущности, объекты и предметы.
+		path:Игровые объекты.Базовые
+	"
+	node_class
 
 	//сохранено для обратной совместимости
+	"
+		name:Имя
+		desc:Имя игрового объекта
+		prop:all
+		classprop:1
+		return:string
+	" node_var
 	editor_attribute("EditorVisible" arg "type:string") editor_attribute("Tooltip" arg "Имя игрового объекта") var(name,null);
+	"
+		name:Описание
+		desc:Описание игрового объекта
+		prop:all
+		classprop:1
+		return:string
+	" node_var
 	editor_attribute("EditorVisible" arg "type:string") editor_attribute("Tooltip" arg "Описание игрового объекта") var(desc,null);
 	editor_attribute("Tooltip" arg "Обобщённое название объекта")
 	getter_func(getAbstractName,"Что-то");
@@ -65,6 +85,13 @@ class(GameObject) extends(ManagedObject)
 
 	verbListOverride("description mainact"); //список действий которые можно сделать с ЭТИМ объектом
 
+	"
+		name:В мире
+		desc:Возвращает ИСТИНУ, если игровой объект находится в мире.
+		type:get
+		lockoverride:1
+		return:bool:Находится ли объект в мире
+	" node_met
 	editor_attribute("Tooltip" arg "Находится ли игровой объект в мире (для всех кроме мобов)") getter_func(isInWorld,equalTypes(getSelf(loc),objNull));
 
 	//летит ли объект
@@ -85,25 +112,125 @@ class(GameObject) extends(ManagedObject)
 	};
 
 	getterconst_func(getChunkType,-1);
+	
+	"
+		name:Это предмет
+		desc:Возвращает ИСТИНУ, если игровой объект является предметом.
+		type:const
+		classprop:0
+		return:bool:Является ли объект предметом
+	" node_met
 	getterconst_func(isItem,false);
+	"
+		name:Это моб
+		desc:Возвращает ИСТИНУ, если игровой объект является мобом (сущностью).
+		type:const
+		classprop:0
+		return:bool:Является ли объект мобом
+	" node_met
 	getterconst_func(isMob,false);
+	"
+		name:Это декор
+		desc:Возвращает ИСТИНУ, если игровой объект является декорацией.
+		type:const
+		classprop:0
+		return:bool:Является ли объект декорацией
+	" node_met
 	getterconst_func(isDecor,false);
+	"
+		name:Это структура
+		desc:Возвращает ИСТИНУ, если игровой объект является структурой.
+		type:const
+		classprop:0
+		return:bool:Является ли объект структурой
+	" node_met
 	getterconst_func(isStruct,false);
 
+	"
+		name:Это дверь
+		desc:Возвращает ИСТИНУ, если игровой объект является дверью.
+		type:const
+		classprop:0
+		return:bool:Является ли объект дверью
+	" node_met
 	getterconst_func(isDoor,false);
 
+	"
+		name:Это контейнер
+		desc:Возвращает ИСТИНУ, если игровой объект является контейнером.
+		type:const
+		classprop:0
+		return:bool:Является ли объект контейнером
+	" node_met
 	getterconst_func(isContainer,false); //является ли объект контейнером
+
+	"
+		name:Это стак
+		desc:Возвращает ИСТИНУ, если игровой объект является стакуемым итемом.
+		type:const
+		classprop:0
+		return:bool:Является ли объект стаком
+	" node_met
 	getterconst_func(isStack,false); //является ли предмет стакуемым
+	"
+		name:Может светить
+		desc:Возвращает ИСТИНУ, если игровой объект может светиться, используя конфиги освещения и частиц.
+		type:const
+		classprop:0
+		return:bool:Является ли объект дверью
+	" node_met
 	getterconst_func(canLight,false); //является ли предмет источником света
+	"
+		name:Это огненный источник света
+		desc:Возвращает ИСТИНУ, если игровой объект является огненным источником света. В будущем такие объекты смогут поджигать окружение.
+		type:const
+		classprop:0
+		return:bool:Является ли объект огненным источником света
+	" node_met
 		getterconst_func(isFireLight,false); //огненный источник света
+	"
+		name:Это хранилище реагентов
+		desc:Возвращает ИСТИНУ, если игровой объект является хранилищем реагентов (например, бутыки, шприцы).
+		type:const
+		classprop:0
+		return:bool:Является ли объект дверью
+	" node_met
 	getterconst_func(isReagentContainer,false); // реагент-контейнер
+	"
+		name:Это питьё
+		desc:Возвращает ИСТИНУ, если игровой объект является выпиваемым предметом.
+		type:const
+		classprop:0
+		return:bool:Является ли объект питьём
+	" node_met
 		getterconst_func(isDrink,false); //является водой
+	"
+		name:Это пища
+		desc:Возвращает ИСТИНУ, если игровой объект является съедаемым предметом.
+		type:const
+		classprop:0
+		return:bool:Является ли объект едой
+	" node_met
 		getterconst_func(isFood,false);// является пищей
+	"
+		name:Это сиденье
+		desc:Возвращает ИСТИНУ, если игровой объект является сиденьем, таким как стул, кровать или любой объект привязки персонажа.
+		type:const
+		classprop:0
+		return:bool:Является ли объект сиденьем
+	" node_met
 	getterconst_func(isSeat,false); //это сиденье (стул, лавка)
 
 	getter_func(canUseAsCraftSpace,false);//для пукнта в verb-меню (позволяет открывать крафт от этого объекта)
 	getter_func(getAllowedCraftCategories,[]); //доступные категории для крафт меню
 
+	"
+		name:Вес
+		desc:Вес объекта в граммах. 1 кг = 1000 грамм.
+		prop:all
+		classprop:1
+		return:float:Вес игрового объекта
+	" node_var
 	editor_attribute("EditorVisible" arg "custom_provider:weight")
 	editor_attribute("Tooltip" arg "Вес объекта в граммах или килограммах")
 	var(weight,gramm(1000));//вес в граммах
@@ -139,6 +266,13 @@ class(GameObject) extends(ManagedObject)
 	};
 
 	//Получает список всех объектов данного типа
+	"
+		name:Все объекты
+		desc:Возвращает список всех объектов данного типа.
+		type:get
+		lockoverride:1
+		return:array[GameObject]:Список всех объектов данного типа
+	" node_met
 	func(getAllObjects)
 	{
 		objParams();
@@ -175,6 +309,13 @@ class(GameObject) extends(ManagedObject)
 	};
 
 	// получить название для юзера
+	"
+		name:Получить имя для моба
+		desc:Получает имя игрового объекта для указанного моба. Данный метод можно переопределить и реализовать, к примеру, разные названия в зависимости от навыков моба.
+		type:get
+		in:BasicMob:Моб:Сущность, для которой будет получено имя данного игрового объекта.
+		return:string:Имя игрового объекта
+	" node_met
 	func(getNameFor)
 	{
 		objParams_1(_usr);
@@ -408,6 +549,13 @@ class(GameObject) extends(ManagedObject)
 	};
 
 	//Находит базовый объект (моб или игровой объект)
+	"
+		name:Получить модель
+		desc:Получает исходную модель игрового объекта. Если объект в контейнере возвращает модель контейнера в мире. Если в инвентаре моба - возвращает модель моба. В ином случае возвращает модель этого игрового объекта.
+		type:get
+		lockoverride:1
+		return:model:Модель-владелец игрового объекта
+	" node_met
 	func(getBasicLoc)
 	{
 		objParams();
@@ -431,6 +579,15 @@ class(GameObject) extends(ManagedObject)
 		_curLoc;
 	};
 
+	"
+		name:Дистанция до
+		desc:Получает расстояние до цели в метрах
+		type:get
+		lockoverride:1
+		in:GameObject:Объект-цель:Объект, до которого расчитывается расстояние
+		in:bool:2d расстояние:При включении данной опции расстояние будет вычислено только по двум координатам, т.е. высота не будет учитываться.
+		return:float:Расстояние до цели
+	" node_met
 	func(getDistanceTo)
 	{
 		params ['this',"_targ",["_is2dDist",false]];
@@ -441,6 +598,13 @@ class(GameObject) extends(ManagedObject)
 	};
 
 	//Находит конечного владельца как GameObject
+	"
+		name:Получить источник
+		desc:Получает объект, который владеет этим игровым объектом. Для объекта в контейнере владельцем будет контейнер, для объекта в инвентаре моба - моб. Если объектом никто не владеет возвращает null.
+		type:get
+		lockoverride:1
+		return:GameObject:Источник
+	" node_met
 	func(getSourceLoc)
 	{
 		objParams();
@@ -466,7 +630,21 @@ class(GameObject) extends(ManagedObject)
 	getter_func(getModelPosition,getPosATL callSelf(getBasicLoc));
 	getter_func(getModelDirection,getDir callSelf(getBasicLoc));
 
+	"
+		name:Позиция игрового объекта
+		desc:Получает позицию игрового объекта. Если игровым объектом является предмет в контейнере, либо в инвентаре моба, то будет возвращена позиция объекта владельца (моба или контейнера).
+		type:get
+		lockoverride:1
+		return:vector3:Позиция
+	" node_met
 	getter_func(getPos,callSelf(getModelPosition));
+	"
+		name:Направление игрового объекта
+		desc:Получает направление игрового объекта. Если игровым объектом является предмет в контейнере, либо в инвентаре моба, то будет возвращено направление объекта владельца (моба или контейнера).
+		type:get
+		lockoverride:1
+		return:vector3:Направление
+	" node_met
 	getter_func(getDir,callSelf(getModelDirection));
 
 	#define startSectorIndex 1
@@ -475,7 +653,7 @@ class(GameObject) extends(ManagedObject)
 	func(getSectorPos)
 	{
 		objParams();
-
+		setLastError("GameObject::getSectorPos() - Obsoleted");
 		callSelf(getModelPosition) params ["_x","_y","_z"];
 
 		[
@@ -488,7 +666,7 @@ class(GameObject) extends(ManagedObject)
 	func(getSectorDistTo)
 	{
 		objParams_1(_otherPos);
-
+		setLastError("GameObject::getSectorDistTo() - Obsoleted");
 		private _other = [
 			floor((_otherPos select 0) / sectorSize) + startSectorIndex,
 			floor((_otherPos select 1) / sectorSize) + startSectorIndex,
@@ -500,6 +678,7 @@ class(GameObject) extends(ManagedObject)
 
 	//возвращает массив от чего унаследован данный объект
 	//возвращает строки
+	//?нигде не используется
 	func(getInheritFrom)
 	{
 		objParams();
@@ -508,6 +687,7 @@ class(GameObject) extends(ManagedObject)
 	};
 
 	//возвращает игроков в радиусе
+	//?нигде не используется
 	func(getNearClients)
 	{
 		//objParams_2(_radius,_includeOwner);
@@ -528,43 +708,107 @@ class(GameObject) extends(ManagedObject)
 	};
 
 region(Nearest game objects)
+	
+	"
+		name:Ближайшие предметы
+		namelib:Ближайшие предметы в радиусе
+		desc:Получает все игровые предметы, находящиеся в мире в радиусе от этого игрового объекта. Предметы в контейнерах или инвентарях других мобов не учитываются.
+		type:get
+		lockoverride:1
+		in:float:Радиус:Радиус в метрах
+			opt:def=5
+		in:bool:Исключить себя:Если ИСТИНА, то игровой объект, который вызывает этот метод будет исключён из результата.
+			opt:def=true
+		return:array[Item]:Массив игровых объектов
+	" node_met
 	//нерестит все предметы в радиусе _radius
 	func(getNearItems)
 	{
-		params ['this',"_radius"];
+		params ['this',"_radius",["_excludeThis",true]];
 		private _ownerObj = callSelf(getBasicLoc);
 		private _list = [];
 		{
 			_x = _x getVariable "link";
 			if (callFunc(_x,isItem)) then {_list pushBack _x};
 		} foreach (_ownerObj nearObjects _radius);
+		if (_excludeThis) then {
+			_list = _list - [this];
+		};
 		_list;
 	};
+
+	"
+		name:Ближайшие структуры
+		namelib:Ближайшие структуры в радиусе
+		desc:Получает все структуры, в радиусе от этого игрового объекта.
+		type:get
+		lockoverride:1
+		in:float:Радиус:Радиус в метрах
+			opt:def=5
+		in:bool:Исключить себя:Если ИСТИНА, то игровой объект, который вызывает этот метод будет исключён из результата.
+			opt:def=true
+		return:array[IStruct]:Массив игровых объектов
+	" node_met
 	//нерестит все структуры в радиусе _radius
 	func(getNearStructs)
 	{
-		params ['this',"_radius"];
+		params ['this',"_radius",["_excludeThis",true]];
 		private _ownerObj = callSelf(getBasicLoc);
 		private _list = [];
 		{
 			_x = _x getVariable "link";
 			if (callFunc(_x,isStruct)) then {_list pushBack _x};
 		} foreach (_ownerObj nearObjects _radius);
+		if (_excludeThis) then {
+			_list = _list - [this];
+		};
 		_list;
 	};
+
+	"
+		name:Ближайшие декорации
+		namelib:Ближайшие декорации в радиусе
+		desc:Получает все декорации, в радиусе от этого игрового объекта.
+		type:get
+		lockoverride:1
+		in:float:Радиус:Радиус в метрах
+			opt:def=5
+		in:bool:Исключить себя:Если ИСТИНА, то игровой объект, который вызывает этот метод будет исключён из результата.
+			opt:def=true
+		return:array[Decor]:Массив игровых объектов
+	" node_met
 	//нерестит все декорации в радиусе _radius
 	func(getNearDecors)
 	{
-		params ['this',"_radius"];
+		params ['this',"_radius",["_excludeThis",true]];
 		private _ownerObj = callSelf(getBasicLoc);
 		private _list = [];
 		{
 			_x = _x getVariable "link";
 			if (callFunc(_x,isDecor)) then {_list pushBack _x};
 		} foreach (_ownerObj nearObjects _radius);
+		if (_excludeThis) then {
+			_list = _list - [this];
+		};
 		_list;
 	};
 
+	"
+		name:Ближайшие мобы
+		namelib:Ближайшие мобы в радиусе
+		desc:Получает всех мобов, в радиусе от этого игрового объекта.
+		type:get
+		lockoverride:1
+		in:float:Радиус:Радиус в метрах
+			opt:def=5
+		in:bool:Исключить себя:Если ИСТИНА, то игровой объект, который вызывает этот метод будет исключён из результата.
+			opt:def=true
+		in:bool:Поиск по типу:Если ИСТИНА, то будет осуществлён поиск ближайших мобов по типу. В ином случае поиск будет осуществлён по всем мобам.
+			opt:def=false
+		in:classname:Тип мобов:Тип мобов, которые будут искаться. Используется только если включен поиск по типу.
+			opt:def=BasicMob
+		return:array[BasicMob]:Массив игровых объектов
+	" node_met
 	//Собираем мобов на дистанции
 	func(getNearMobs)
 	{
@@ -583,6 +827,19 @@ region(Nearest game objects)
 	};
 
 	//Параметр _retByType - будет делать проверку не по функции isMob, а по сопоставлению типа, указанного в _checkedType
+	"
+		name:Ближайший моб
+		desc:Получает первого ближайшего моба к этому игровому объекту.
+		type:get
+		lockoverride:1
+		in:float:Радиус:Радиус в метрах
+			opt:def=5
+		in:bool:Поиск по типу:Если ИСТИНА, то будет осуществлён поиск ближайших мобов по типу. В ином случае поиск будет осуществлён по всем мобам.
+			opt:def=false
+		in:classname:Тип мобов:Тип мобов, которые будут искаться. Используется только если включен поиск по типу.
+			opt:def=BasicMob
+		return:BasicMob:Массив игровых объектов
+	" node_met
 	func(getNearMob)
 	{
 		params ['this',"_radius",["_retByType",false],["_checkedType","BasicMob"]];
@@ -609,6 +866,7 @@ region(Nearest game objects)
 	//Возвращает вообще все игровые объекты в радиусе
 	func(getNearObjects)
 	{
+		//TODO remove this function
 		params ['this',"_type","_dist",["_retChild",false],["_retAsList",true],["_excludeThis",true]];
 		private _pos = getPosATL callSelf(getBasicLoc);
 		private _ret = [_type,_pos,_dist,_retAsList,_retChild] call getGameObjectOnPosition;
@@ -635,6 +893,22 @@ endregion
 	};
 
 	//Проигрывание звука. Если параметр _hasRTProcess = false, то звук воспроизведется на сервере без симуляции гашения от стен
+	"
+		name:Проиграть звук
+		desc:Воспроизводит звук в формате ogg по указанному пути
+		type:method
+		lockoverride:1
+		in:string:Путь:Путь до файла звука, например: ""fire\\torch_on""
+		in:float:Тон:Тон звука. 2 - максимальный возможный, 0.5 - минимальный возможный
+			opt:def=1
+		in:float:Расстояние:Расстояние, на которое будет слышно данный звук.
+			opt:def=50
+		in:float:Громкость:Громкость звука. Не рекомендуется менять это значение
+			opt:def=1
+		in:void:Источник:Источник звука. Можно указать 3д вектор или модель сущности.
+		in:bool:Симуляция:Использовать симуляцию гашения звука от стен.
+			opt:def=true
+	" node_met
 	func(playSound)
 	{
 		params ['this',"_path",["_pitch",1],["_maxDist",50],["_vol",1],"_atPos",["_hasRTProcess",true]];
@@ -669,6 +943,42 @@ endregion
 		} count _nearMobs;
 	};
 
+	"
+		name:Сказать в чат
+		desc:Выводит сообщение в чат всем игрокам от данного игрового объекта.
+		type:method
+		lockoverride:1
+		in:string:Текст:Текст сообщения
+		in:enum.ChatMessageChannel:Тип сообщения:Тип сообщения чата
+		in:float:Расстояние:Расстояние, на которое будет видно данное сообщение.
+			opt:def="+'DISTANCE_WORLDSAY'+"
+		in:bool:Только при видимости:При включении будет показывать сообщение только тем персонажам, которые явно видят источник сообщения.
+			opt:def=true
+	" node_met
+	func(_worldSayWrapper)
+	{
+		assert_str(count _this > 2,"Param count error");
+		private _ch = _this select 2;
+		assert_str(!isNullVar(_ch),"Channel param cannot be null");
+		assert_str(equalTypes(_ch,0),"Channel param type error. Must be integer - not " + typename _ch);
+		assert_str(inRange(_ch,0,count go_internal_chatMesMap - 1),"Channel index out of range: " + str _ch);
+		_this set [2,go_internal_chatMesMap select _ch];
+		_this call getSelfFunc(worldSay)
+	};
+
+	//!do not replace. Used in enum generator (renode)
+	go_internal_chatMesMap = ["emote","log","act","combat","info","mind","event","system","error","default"];
+	go_internal_chatMesMapText = ["Эмоут:Кастомное пользовательское действие",
+		"Лог:Логируемое сообщение",
+		"Действие:Пользовательские действия",
+		"Бой:Атака, защита и получение повреждений",
+		"Информация:Информационное сообщение общего назначения",
+		"Мысли:Внутренее состояние персонажа и его мысли",
+		"Событие:Игровое событие, эвент",
+		"Система:Системные сообщения",
+		"Ошибка:Сообщение ошибки. Добавляет префиксный текст в начало сообщения.",
+		"По умолчанию:Сообщение по умолчанию"
+	];
 
 	func(worldSay)
 	{
@@ -754,6 +1064,14 @@ endregion
 	};
 
 	// Замена модели объекта
+	"
+		name:Установить модель
+		desc:Заменяет модель игрового объекта
+		type:method
+		lockoverride:1
+		in:string:Путь:Путь до модели
+		return:bool:Успешно ли заменилась модель
+	" node_met
 	func(setModel)
 	{
 		objParams_1(_newmodel);
@@ -798,6 +1116,7 @@ endregion
 			callFuncParams(_loc,syncSlotInfo,getSelf(slot)); //for update icon
 			callFuncParams(_loc,syncSmdSlot,getSelf(slot)); //for update render in proxy
 		};
+		true
 	};
 
 region(smelling)
@@ -881,6 +1200,14 @@ endclass
 editor_attribute("InterfaceClass")
 editor_attribute("HiddenClass")
 class(IDestructible) extends(GameObject)
+
+	"
+		name:Разрушаемый игровой объект
+		desc:Разрушаемый игровой объект. Все игровые объекты кроме мобов наследуются от данного класса.
+		path:Игровые объекты
+	"
+	node_class
+
 	//all info for this system in baisc set: B 557
 	//Повреждения оружия на B 485
 
@@ -1110,6 +1437,13 @@ class(IDestructible) extends(GameObject)
 		
 		true;
 	};
+
+	// "
+	// 	name:Установка света
+	// 	desc:Включает или выключает освещение для данного объекта
+	// "
+	// node_met
+	// func(lightSetMode) {objParams_1(_m); setLastError("Установка света не поддерживается для класса " + callSelf(getClassName));};
 
 
 endclass

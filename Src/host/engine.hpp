@@ -653,6 +653,7 @@ _ret} \
 #define __assert_static_compile_expr1(expr) __EVAL(__assert_static_runtime_expr1(expr))
 #define __assert_static_compile_expr2(expr,message) __EVAL(__assert_static_runtime_expr2(expr,message))
 #define __assert_runtime_expr1(expr) if !([expr] call sys_int_evalassert)exitWith {[toString {expr},__assert_runtime_file__,__LINE__] call sys_assert_}
+#define __assert_runtime_expr2(expr,message) if !([expr] call sys_int_evalassert)exitWith {[toString {expr},__assert_runtime_file__,__LINE__,message] call sys_assert_}
 
 //called at compile/build; Only simple expressions without macros
 #define static_assert(expr) __assert_static_runtime_expr1(expr)
@@ -661,6 +662,7 @@ _ret} \
 
 //called at runtime; Only simple expressions without macros
 #define assert(expr) __assert_runtime_expr1(expr)
+#define assert_str(expr,message) __assert_runtime_expr2(expr,message)
 
 #ifdef __VM_BUILD
 	//called at compile/build; Only simple expressions without macros
@@ -684,6 +686,7 @@ _ret} \
 
 #ifdef DISABLE_ASSERT
 	#define assert(a)
+	#define assert_str(a,b)
 	#define static_assert(a)
 	#define static_assert_str(a,b)
 	#define __THIS_FILE_REPLACE__
@@ -692,6 +695,7 @@ _ret} \
 //Вне дебага все ассерты выключаются
 #ifndef DEBUG
 	#define assert(a)
+	#define assert_str(a,b)
 	#define static_assert(a)
 	#define static_assert_str(a,b)
 	
@@ -739,3 +743,136 @@ ACRE_IS_ERRORED = false; _ret;}*/
 	#define editor_only(any) 
 	#define editor_conditional(ed__,noted__) noted__
 #endif
+
+//--------------node scripting macros--------------
+//указывает путь узлов для регистрации функций. Должен быть указан в заголовке инициализатора модуля
+
+//макрос проверки разрешения инициализации модуля (для генератора биндингов)
+#define IS_INIT_MODULE isNullVar(__FUNCITONS_LOAD_ONLY__)
+
+//регистрация поля класса в библиотеке
+/*
+	опции:
+	name - имя переменной
+	desc - описание переменной
+	return - явное указание типа переменной. если не указано - будет вычислено на этапе компиляции библиотеки
+	!override - можно ли переопределить переменную
+	prop - тип свойства (дефолт all, доступные: all,get,set)
+	classprop - видимость свойства в инспекторе класса (дефолт-0)
+*/
+#define node_var call nodegen_addClassField;
+
+//регистрация метода класса в библиотеке
+/*
+	опции:
+	name - имя метода
+	namelib - имя, видимое в дереве. если не указано - используется значение из name
+	desc - описание метода
+	type - тип метода (дефолт method, доступные: method,event,get,const)
+		const - добавляет новый элемент в classprop
+	return - возвращаемое значение и описание (опционально)
+		return:int:Результат вызова:описание
+		return:int:Результат вызова
+	classprop - автоматическое свойств для констант или методов геттеров (требует возвращаемый тип)
+	defcode - код помещаемый при компиляции (дефайне класса). дефолт (вычисляемый) func(@thisName) {objParams();}
+		доступные замены в коде
+		@thisName - имя этого метода,поля
+		@thisParams - структура параметров. По умолчанию генерирует переменные для всех параметров. Используйте @thisParams.2-4 для указания диапазона портов
+
+		дефкоды помещаются в переменные (геттеры) и допустимые методы
+	lockoverride - флаг указывает что переопределение заблокировано (не может быть выполнено)
+	code - вызываемый код
+		!обратите внимание, что для методов типа event помещается определение
+	exec - дефолтные входы и выходы (дефолт - all, доступные: all,in,out,none|pure)
+		exec:all
+	defval - значение по умолчанию для инспектора
+	in - номер параметра для input-ов
+		in:type:name(:desc)
+		opt (указывается на следующей строке):
+			mul - мультивход/выход (дефолт 0)
+			dname - показывать имя порта (дефолт 1,выключается если есть опция)
+			allowtypes - список доступных входов. (дефолт этот тип)
+			custom - добавить кастомную настройку (дефолт 1, вычисляется от типа входа. Если тип неизвестне то ничего не добавится)
+			pathes - доступные пути с разделителем | (опция allowed_pathes)
+			
+			typeget - специальный модификатор для разрешения типов при включенных автопорах
+			require - требует ли порт обязательного подключения
+			gen_param - будет ли сгенерирован параметр для порта. По умолчанию 1
+			def - значение по умолчанию. реальное json значение для подстановки в параметры
+
+			custom_type - кастомный тип для автопортов (работает вместе с use_custom)
+
+			typeset_out - указывает имя порта для автозамены типа
+		in:int:Вход 1:Описание входного значения
+		opt:custom=1:mul=1:dname=1:allowtypes=int|bool|float
+*/
+#define node_met call nodegen_addClassMethod;
+
+//регистрация класса в библиотеке
+/*
+	path - Путь для членов класса, path:Объекты.Логика
+	Путь наследуется для членов но может быть переопределен
+*/
+#define node_class call nodegen_addClass;
+
+// регистрация статической функции по имени
+/*
+	"name:test function" node_func(test_function) = {};
+
+	возможные опциональные дланные opt:
+
+	для установки параметров функции в автоматическом режиме используйте @cfParams
+
+*/
+#define node_func(name) + endl+ 'node:name' call nodegen_addFunction; name
+
+//Регистрация системного узла
+#define node_system call nodegen_addSystemNode;
+
+//Регистрация перечисления
+/*
+В перечислении надо указать токен eval. Порядок токенов соответствует расположению на узле:
+	eval:Первое число:3
+	eval:Второе число:4
+	eval:Третье число:5
+	При регистрации перечисление пишет член enum_vToK_NAME - который содержит имена (карту), где NAME системное имя перечисления. 
+		В этих перечислениях ключи - числа в строке (значения нумератора), значения - строки (названия элементов нумератора) 
+	При регистрации перечисления пишет член enum_values_NAME - который содержит массив чисел
+	Все ключи в строках, так как этот член - словарь, который не может нормально работать с циферками
+
+	Фактическое добавление делается так:
+	["TestEnum",["Первое число:3:тест описание"]] node_enum
+	Доступ из системы получается по имени enum.TestEnum
+*/
+//! Этот макрос нельзя вырезать из компиляции. Он генерирует статические члены
+#define node_enum call nodegen_addEnumerator;
+
+//Регистратор структуры
+/*
+	Структуры как и перечисления должны компилировать имена членов и сопоставлялки типов
+	используйте eval для регистрации членов структуры (они упорядочены)
+		eval:string:Строка:"empty":Описание параметра
+		eval:int:Число:0
+		eval:bool:Логическое:false
+	Каждая зарегистрированная структура делает 2 узла: breakStruct, makeStruct
+
+	! Пока неизвестно какие глобальные члены должна писать структура.
+	TODO Нужно придумать и реализовать
+*/
+#define node_struct call nodegen_addStruct;
+
+/*
+
+	В дополнении к обработчикам метода
+	node: указывает классовое имя узла
+	runtimeports - указывает могут ли быть рантайм порты в этом узле
+	autocoloricon - при включенных runtimeports указывает может ли узел менять цвет (включается при runtimeports). По умолчанию 0
+	rendertype - тип рендеринга (по умолчанию Default (полный))
+	option - пользовательский словарь опции
+	libvisible - видимость в библиотеке (по умолчанию истина)
+	icon - указанная картинка
+
+	в портах можно указывать вместо типа thisClassname для указания автотипа текущего графа
+	thisName - для указания имени текущего графа
+*/
+#define node_system_group(gname) __nsys_grp = gname;

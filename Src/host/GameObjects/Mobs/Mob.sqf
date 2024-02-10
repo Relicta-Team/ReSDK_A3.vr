@@ -54,6 +54,12 @@
 #include <MobSkills_idx.hpp>
 
 class(MobWoman) extends(Mob)
+	"
+		name:Игровой женский персонаж
+		desc:Игровая сущность, которым могут управлять клиенты.
+		path:Игровые объекты.Сущности
+	" node_class
+
 	var(defaultUniform,"max_femaleBasicBody");
 	var(gender,gender_female);
 	getter_func(getRetchSounds,["mob\female_retch1" arg "mob\female_retch2" arg "mob\female_retch3"]); //подавиться
@@ -65,6 +71,12 @@ class(MobWoman) extends(Mob)
 endclass
 
 class(Mob) extends(BasicMob)
+
+	"
+		name:Игровой персонаж
+		desc:Игровая сущность, которым могут управлять клиенты.
+		path:Игровые объекты.Сущности
+	" node_class
 
 	#include "Mob_Combat.sqf"
 	#include "Mob_Events.sqf"
@@ -83,10 +95,30 @@ class(Mob) extends(BasicMob)
 	var_str(faceAnim); //текущая лицевая анимация
 
 	var(specialAction,SPECIAL_ACTION_NO); //особое действие (пинать, кусать)
+	"
+		name:Активная рука
+		namelib:Активная рука (активный слот)
+		desc:Текущая активная рука, которой персонаж будет производить действия.
+		prop:get
+		return:enum.InventorySlot
+	" node_var
 	var(activeHand,INV_HAND_L); //индекс активной руки
+	"
+		name:Основная рука
+		desc:Текущая основная рука персонажа (левша или правша).
+		prop:get
+		return:enum.InventorySlot
+	" node_var
 	var(mainHand,INV_HAND_L); //индекс ОСНОВНОЙ РУКИ
 
 	var(connectedTo,nullPtr); //к чему приаттачен моб в данный момент (кровать, стул)
+	"
+		name:Привязан к объекту
+		desc:Возвращает ИСТИНУ, если сущность присоединена к объекту (сидит на стуле, лежит на кровати)
+		type:get
+		lockoverride:1
+		return:bool
+	" node_met
 	getter_func(isConnected,not_equals(getSelf(connectedTo),nullPtr)); //подключен ли к чему-либо
 	
 	// Высокоуровневые абстракции лежит ли персонаж на кровати или сидит на стуле
@@ -112,6 +144,13 @@ class(Mob) extends(BasicMob)
 	//объект наручников
 	var(handcuffObject,nullPtr);
 	//связана ли сущность
+	"
+		name:Связан
+		desc:Возвращает ИСТИНУ, если руки сущности скованы веревкой, наручниками или подобным предметом.
+		type:get
+		lockoverride:1
+		return:bool
+	" node_met
 	getter_func(isHandcuffed,!isNullReference(getSelf(handcuffObject)));
 
 	func(disconnectFromSeat)

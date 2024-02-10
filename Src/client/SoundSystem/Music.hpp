@@ -39,3 +39,13 @@ chm("MUSIC_CHANNEL_AMBIENT_LOCAL",3), \
 chm("MUSIC_CHANNEL_COMBATAMBIENT",4), \
 chm("MUSIC_CHANNEL_EVENT_GLOBAL",5) \
 ]
+
+#define MUSIC_LIST_NODE_ENUM_DEF [ \
+'Базовый:MUSIC_CHANNEL_BASE:Базовый начальный канал. Имеет самый низший приоритет воспроизведения.', \
+'Лобби:MUSIC_CHANNEL_LOBBY:Канал лобби. В нем играет музыка для лобби', \
+'Эмбиент:MUSIC_CHANNEL_AMBIENT:Основной канал для эмбиентов', \
+'Локальный эмбиент:MUSIC_CHANNEL_AMBIENT_LOCAL:Локационный и ситуативный эмбиент', \
+'Сражение:MUSIC_CHANNEL_COMBATAMBIENT:Боевой эмбиент. Пока не задан', \
+'Глобальное событие:MUSIC_CHANNEL_EVENT_GLOBAL:Музыка конца раунда, или любого важного события. Имеет на текущий момент наивысший приоритет воспроизведения.' \
+]
+

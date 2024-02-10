@@ -56,8 +56,11 @@
 
 #include <..\client\Inventory\inventory.hpp>
 
+//assertion
+call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
+
 //встраиваемые предварительные функции
-#include <..\host\precomiled.sqf>
+#include <..\host\precompiled.sqf>
 
 
 //Отладчик
@@ -128,6 +131,8 @@ componentInit(Maps_manager)
 #include "MapsManager\Maps_manager_init.sqf"
 componentInit(Viusal_components)
 #include "VisualComponents\VisualComponents_init.sqf"
+componentInit(Visual_scripting)
+#include "VisualScripting\VisualScripting_init.sqf"
 
 componentInit(Core_postInit)
 #include "Core\Core_postInit.sqf"

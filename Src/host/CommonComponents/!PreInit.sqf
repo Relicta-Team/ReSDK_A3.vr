@@ -388,11 +388,94 @@ searchInList = {
 	_list select _idx
 };
 
+arrayDeleteItem = {
+	params["_a","_it"];
+	private _ix = _a findif {_it isequalto _x}; 
+	if (_ix != -1) then {_a deleteAt _ix}; 
+	_ix != -1
+};
+
+arrayIsValidIndex = {
+	params ["_a","_ix"];
+	count _a > 0 && {_ix < count _a}
+};
+
+//shuffle array elements, return alter array
+arrayShuffleOrig = {
+	params ["_array"];
+	private _tempArray = + _array;
+
+    for "_size" from (count _tempArray) to 1 step -1 do {
+        _array set [_size - 1, (_tempArray deleteAt (floor random _size))];
+    };
+
+    _array
+};
+
+//swap 2 elements in array
+arraySwap = {
+	params ["_a","_is","_id"];
+	private _t = _a select _is;
+	_a set [_is,_a select _id];
+	_a set [_id,_t];
+};
+
+stringLength = {
+	params ["_str",["_unicode",true]];
+	if (_unicode) then {
+		forceUnicode 1;
+		count _str
+	} else {
+		count _str
+	};
+};
+
+stringSelect = {
+	params ["_s","_i","_c"];
+	forceUnicode 1;
+	_s select [_i,_c];
+};
+
+randomFloat = {
+	params ["_beg","_end"];
+	rand(_beg,_end)
+};
+
+randomInt = {
+	params ["_beg","_end"];
+	randInt(_beg,_end)
+};
+
+clampNumber = {
+	params ["_v","_mi","_ma"];
+	clamp(_v,_mi,_ma)	
+};
+
+stringFormat = {
+	params ["_fmt","_val",["_breakArr",false]];
+	private _eval = if equalTypes(_val,[]) then {
+		if (_breakArr) then {
+			private _rval = [_fmt];
+			_rval append _val;
+			_rval
+		} else {
+			[_fmt,_val]
+		};
+	} else {
+		[_fmt,_val]
+	};
+	format _eval
+};
+
 missionNamespace setVariable ["pushFront",
 {
-	params ["_list","_element"];
+	params ["_list","_element",["_unique",false]];
 	reverse _list;
-	_list pushBack _element;
+	if (_unique) then {
+		_list pushBackUnique _element;
+	} else {
+		_list pushBack _element;
+	};
 	reverse _list;
 }
 ];

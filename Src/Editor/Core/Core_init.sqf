@@ -271,4 +271,4 @@ function(Core_invokeEvent)
 ["FileManager"] call rescript_initScript;
 ["WorkspaceHelper"] call rescript_initScript;
 ["FileWatcher"] call rescript_initScript;
-
+["VisualScripting"] call rescript_initScript;

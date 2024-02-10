@@ -53,6 +53,7 @@
 	call pc_oop_declareClassAttr; \
 	_editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
 	_classmet_declinfo = createHashMap; \
+	_last_node_info_ = null; \
 	pt_##name = createObj; private _pt_obj = pt_##name;
 
 //создание типа по строке. Нужно для генерации классов
@@ -79,6 +80,7 @@
 	_pt_obj setvariable ['__motherClass',_mother]; \
 	_pt_obj setVariable ['__motherObject',nullPtr]; \
 	_pt_obj setVariable ['__childList',[]]; \
+	_pt_obj setVariable ['__inhlistCase',[]]; \
 	_pt_obj setvariable ['__inhlist',[]]; \
 	_pt_obj setvariable ['__instances',0];\
 	_pt_obj setvariable ["classname",_class]; \
@@ -117,8 +119,9 @@
 
 #define __internal_flag_processor(flagname,act) if (!isnil 'flagname') then {act; flagname = nil}
 
+//Регистратор переменной
 #define var(name,value) \
-	_mem_name = tolower #name ; \
+	_mem_name = #name ; \
 	_lastIndex = _fields pushback [_mem_name,'value']; \
 	call pc_oop_handleAttrF;
 
@@ -131,18 +134,20 @@
 */
 #define pair(key,val) [key,val]
 #define varpair(name,value) \
-	_mem_name = tolower #name ; \
+	_mem_name = #name ; \
 	_lastIndex = _fields pushback [_mem_name,"createHashMapFromArray [" + ('value' splitString (";"+toString[9,13,10]) joinString ",") + "]"]; \
 	call pc_oop_handleAttrF;
 
+//Регистратор переменной со строковым именем
 #define __var_noStrName(name,value) \
-	_mem_name = tolower name ; \
+	_mem_name = name ; \
 	_lastIndex = _fields pushback [_mem_name,'value']; \
 	call pc_oop_handleAttrF;
 
 //Вычисляет значения поля на этапе компиляции
+//! Внимание ! - при изменении этого макроса выполнить правки в pc_oop_regvar
 #define var_inlinevalue(name,value) \
-	_mem_name = tolower #name ; \
+	_mem_name = #name ; \
 	_lastIndex = _fields pushback [_mem_name,value]; \
 	call pc_oop_handleAttrF;
 
@@ -337,7 +342,8 @@
 #define getConst(obj,constvar) callFunc(obj,constvar)
 #define getSelfConst(constvar) callSelf(constvar)
 
-//type accessing (extended reflection)
+//type accessing (extended reflection) 
+//!OBSOLETE use object.getType class for accessing type
 #define typeGet(typ) (missionNamespace getvariable ['pt_'+ 'typ',nullPtr])
 #define typeGetFromObject(obj) (obj getVariable PROTOTYPE_VAR_NAME)
 #define typeGetFromString(strvar) (missionNamespace getvariable ['pt_'+ (strvar),nullPtr])
@@ -355,6 +361,8 @@
 #define isTypeOf(obj,type) ((tolower #type) in ((obj) getvariable PROTOTYPE_VAR_NAME getvariable ("__inhlist_map")))
 #define isTypeStringOf(obj,type) ((tolower (type)) in ((obj) getvariable PROTOTYPE_VAR_NAME getvariable ("__inhlist_map")))
 #define isTypeNameOf(obj,type) ((tolower #type) in (typeGetFromString(obj) getvariable ("__inhlist_map")))
+//TODO remove this macro
+#define isTypeNameStringOf(obj,type) ((tolower (type)) in (typeGetFromString(obj) getvariable ("__inhlist_map")))
 //проверка существования класса
 #define isImplementClass(strname) (!isNullReference(typeGetFromString(strname)))
 //проверка наличия членов
@@ -367,7 +375,7 @@
 #define getFieldBaseValueWithMethod(strt,varx,prp) ([strt,varx,true,prp] call oop_getFieldBaseValue)
 // NON USABLE #define isTypeStringOf(obj,type) ((tolower type) in ((obj) getVariable PROTOTYPE_VAR_NAME getVariable "__inhlist_map"))
 
-
+//!deprecated
 #define isNullObject(obj) ((obj) isequalto nullPtr)
 
 

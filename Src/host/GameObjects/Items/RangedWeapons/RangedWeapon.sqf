@@ -10,6 +10,13 @@
 
 editor_attribute("InterfaceClass")
 class(IRangedWeapon) extends(Item)
+
+	"
+		name:Дистанционное оружие
+		desc:Оружие для дальнего боя (огнестрельное оружие)
+		path:Игровые объекты.Оружие.Дистанционное
+	" node_class
+
 	//TODO implement verbs
 	verbList("cockweapon safemodeweapon",Item);
 
@@ -411,6 +418,16 @@ class(IRangedWeapon) extends(Item)
 		_itm
 	};
 
+	"
+		name:Создать боеприпасы в магазине
+		desc:Создает боеприпасы указанного типа в оружии. Если количество не указано - будет создано максимальное количество. Если типы патронов не совместимы с магазином или в оружии нет магазина - создание не произойдёт.
+		type:method
+		lockoverride:1
+		in:classname:Тип патронов:Тип боеприпасов, создаваемых в оружии
+			opt:require=0:def=IAmmoBase
+		in:int:Количество:Сколько боеприпасов будет создано в магазине.
+			opt:require=0:def=1
+	" node_met
 	func(createAmmoInMagazine)
 	{
 		objParams_2(_type,_count);
@@ -531,6 +548,10 @@ class(IMagazineBase) extends(Item)
 	func(createAmmoInside)
 	{
 		objParams_2(_ammo,_count);
+		
+		if isNullVar(_ammo) then {_ammo = callSelf(getBulletType)};
+		if !isTypeNameStringOf(_ammo,callSelf(getBulletType)) exitwith {};
+
 		if isNullVar(_count) then {_count = getSelf(maxCount)};
 		_count = clamp(_count,1,getSelf(maxCount));
 		private _itm = nullPtr;

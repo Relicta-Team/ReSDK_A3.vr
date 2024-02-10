@@ -9,6 +9,13 @@ autoref var(damageInfo,new(DODamageInfo));
 var(isDead,false);
 //var(isSleep,false);//deprecated
 
+"
+	name:Голод
+	desc:Текущее значение голода персонажа. Начальное значение 100. Минимум - 0, максимум - 100+
+	prop:get
+	return:float
+	defval:100
+" node_var
 var(hunger,100); //hud_hunger
 var(thirst,100); //hud_thirst
 var(oxygen,100); //hud_oxy
@@ -996,6 +1003,13 @@ region(Status effects)
 	};
 
 	//добавить _amount единиц голода
+	"
+		name:Изменить голод
+		desc:Добавляет и отнимает указанное количество единиц голода из текущих. Положительное число для насыщения, а отрицательное для голодания.
+		type:method
+		lockoverride:1
+		in:float:Голод:Положительное число насыщает, отрицательное - добавляет голод
+	" node_met
 	func(adjustHunger)
 	{
 		objParams_1(_amount);
@@ -1032,6 +1046,14 @@ region(Status effects)
 		setSelf(hunger,_curhung);
 		callSelfParams(fastSendInfo,"hud_hunger" arg _curhung);
 	};
+
+	"
+		name:Установить голод
+		desc:Перезаписывает и устанавливает новое значение голода.
+		type:method
+		lockoverride:1
+		in:float:Голод:Новое значение голода
+	" node_met
 	func(setHunger)
 	{
 		objParams_1(_newval);

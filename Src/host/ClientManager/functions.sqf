@@ -7,20 +7,24 @@
 #include "..\engine.hpp"
 #include <..\Networking\Network.hpp>
 
+if (IS_INIT_MODULE) then {
 
-//закрыт ли сервер
-cm_isServerLocked = false;
 
-//список клиентов на ожидание кика. Только значимые типы в массивах
-cm_preAwaitClientData = [];
+	//закрыт ли сервер
+	cm_isServerLocked = false;
 
-cm_allClients = []; //список зарегистрированных объектов клиентов
-cm_disconnectedClients = hashMapNew; //список дисконнектнутых клиентов. Отсюда берутся все jip-ам
-cm_allInGameMobs = []; //список всех мобов в игре. Этот массив требуется в основном потоке обработчика карты
-	netSetGlobal(smd_allInGameMobs,cm_allInGameMobs);
-cm_allAwaitMobs = allUnits; //список нераспределённых мобов
+	//список клиентов на ожидание кика. Только значимые типы в массивах
+	cm_preAwaitClientData = [];
 
-cm_maxClients = 0; //сколько максимально клиентов подключалось
+	cm_allClients = []; //список зарегистрированных объектов клиентов
+	cm_disconnectedClients = hashMapNew; //список дисконнектнутых клиентов. Отсюда берутся все jip-ам
+	cm_allInGameMobs = []; //список всех мобов в игре. Этот массив требуется в основном потоке обработчика карты
+		netSetGlobal(smd_allInGameMobs,cm_allInGameMobs);
+	cm_allAwaitMobs = allUnits; //список нераспределённых мобов
+
+	cm_maxClients = 0; //сколько максимально клиентов подключалось
+
+}; //IS_INIT_MODULE
 
 #ifndef __VM_VALIDATE
 //Быренько раскидываем указатели мобов
@@ -354,102 +358,106 @@ cm_checkClientInJIPMemory = {
 	true
 };
 
-_onOOCMessage = {
-	params ["_owner","_text"];
+if IS_INIT_MODULE then {
 
-	_client = _owner call cm_findClientById;
-	if equals(_client,nullPtr) exitWith {
-		warningformat("Cant find client %1 for sending OOC message: %2",_owner arg _text);
-	};
+	_onOOCMessage = {
+		params ["_owner","_text"];
 
-	_text = format["%1: %2",getVar(_client,name),_text];
-
-	[_text] call cm_sendOOSMessage;
-
-};	rpcAdd("onSendOOCMessage",_onOOCMessage);
-
-//Отправляет всем клиентам сообщение в чат
-cm_sendOOSMessage = {
-	params ["_text",["_type",null],["_groups",""]];
-
-	[format["[CHAT:OOS]:	%1",_text]] call discLog;
-
-	{
-		rpcSendToClient(callFunc(_x,getOwner),"chatPrint",[_text arg _type]);
-	} foreach cm_allClients;
-};
-
-//Отправляет сообщение всем клиентам в лобби
-cm_sendLobbyMessage = {
-	params ["_text",["_type",null],["_groups",""]];
-
-	[format["[CHAT:LOBBY]:	%1",_text]] call discLog;
-
-	{
-		if callFunc(_x,isInLobby) then {
-			rpcSendToClient(callFunc(_x,getOwner),"chatPrint",[_text arg _type]);
+		_client = _owner call cm_findClientById;
+		if equals(_client,nullPtr) exitWith {
+			warningformat("Cant find client %1 for sending OOC message: %2",_owner arg _text);
 		};
-	} foreach (call cm_getAllClientsInLobby);
-};
 
-_onLobbyMessage = {
-	params ["_owner","_text"];
+		_text = format["%1: %2",getVar(_client,name),_text];
 
-	_client = _owner call cm_findClientById;
-	if equals(_client,nullPtr) exitWith {
-		warningformat("Cant find client %1 for sending OOC message: %2",_owner arg _text);
+		[_text] call cm_sendOOSMessage;
+
+	};	rpcAdd("onSendOOCMessage",_onOOCMessage);
+
+	//Отправляет всем клиентам сообщение в чат
+	cm_sendOOSMessage = {
+		params ["_text",["_type",null],["_groups",""]];
+
+		[format["[CHAT:OOS]:	%1",_text]] call discLog;
+
+		{
+			rpcSendToClient(callFunc(_x,getOwner),"chatPrint",[_text arg _type]);
+		} foreach cm_allClients;
 	};
 
-	if (rep_system_enable && equals(getVar(_client,testResult),"")) exitWith {
-		callFuncParams(_client,localSay,"Доступ к чату только у тех" pcomma " кто прошёл тест" arg "system");
+	//Отправляет сообщение всем клиентам в лобби
+	cm_sendLobbyMessage = {
+		params ["_text",["_type",null],["_groups",""]];
+
+		[format["[CHAT:LOBBY]:	%1",_text]] call discLog;
+
+		{
+			if callFunc(_x,isInLobby) then {
+				rpcSendToClient(callFunc(_x,getOwner),"chatPrint",[_text arg _type]);
+			};
+		} foreach (call cm_getAllClientsInLobby);
 	};
 
-	_textDisc = format["%1: %2",getVar(_client,name),_text];
-	[format["[CHAT:LOBBY]:	%1",_textDisc]] call discLog;
+	_onLobbyMessage = {
+		params ["_owner","_text"];
 
-	callFuncParams(_client,sayLobby,_text);
-};
-rpcAdd("onSendLobbyMessage",_onLobbyMessage);
+		_client = _owner call cm_findClientById;
+		if equals(_client,nullPtr) exitWith {
+			warningformat("Cant find client %1 for sending OOC message: %2",_owner arg _text);
+		};
 
+		if (rep_system_enable && equals(getVar(_client,testResult),"")) exitWith {
+			callFuncParams(_client,localSay,"Доступ к чату только у тех" pcomma " кто прошёл тест" arg "system");
+		};
 
-_onHandleMBInput = {
-	params ["_owner","_ctx"];
-	_client = _owner call cm_findClientById;
-	if equals(_client,nullPtr) exitWith {
-		warningformat("Cant find client %1 for handling input: %2",_owner arg _ctx);
+		_textDisc = format["%1: %2",getVar(_client,name),_text];
+		[format["[CHAT:LOBBY]:	%1",_textDisc]] call discLog;
+
+		callFuncParams(_client,sayLobby,_text);
 	};
-	callFuncParams(_client,handleMessageBoxInput,_ctx);
-}; rpcAdd("onHandleMBInput",_onHandleMBInput);
+	rpcAdd("onSendLobbyMessage",_onLobbyMessage);
 
-_playLobbySystemAction = {
-	params ["_owner",["_ctx",""]];
-	_client = _owner call cm_findClientById;
-	if equals(_client,nullPtr) exitWith {
-		warningformat("Cant find client %1 for playing system action: %2",_owner arg _ctx);
-	};
-	if not_equalTypes(_ctx,"") exitWith {
-		warningformat("Wrong datatype on playing lobby action %1 %2",_owner arg _ctx);
-	};
-	callFuncParams(_client,playSystemAction,_ctx);
-}; rpcAdd("playLobbySystemAction",_playLobbySystemAction);
 
-_onClosedNDLobby = {
-	params ["_owner"];
-	_client = _owner call cm_findClientById;
-	if equals(_client,nullPtr) exitWith {
-		warningformat("Cant find client %1 for playing system action: %2",_owner arg _ctx);
-	};
-	callFunc(_client,onClosedMessageBox);
-}; rpcAdd("onClosedNDLobby",_onClosedNDLobby);
+	_onHandleMBInput = {
+		params ["_owner","_ctx"];
+		_client = _owner call cm_findClientById;
+		if equals(_client,nullPtr) exitWith {
+			warningformat("Cant find client %1 for handling input: %2",_owner arg _ctx);
+		};
+		callFuncParams(_client,handleMessageBoxInput,_ctx);
+	}; rpcAdd("onHandleMBInput",_onHandleMBInput);
 
-#ifdef EDITOR
-_testmb = {
-	params ["_owner","_ctx"];
-	_client = _owner call cm_findClientById;
-	_event = {
-		callSelf(CloseMessageBox);
-		callSelfParams(addSystemAction,"system" arg "sysact_test" arg "Кнопочка прикольчик");
-	};
-	callFuncParams(_client,ShowMessageBox,"MessageBox" arg vec2("приветик!","Жмяк") arg _event);
-}; rpcAdd("testmessagebox",_testmb);
-#endif
+	_playLobbySystemAction = {
+		params ["_owner",["_ctx",""]];
+		_client = _owner call cm_findClientById;
+		if equals(_client,nullPtr) exitWith {
+			warningformat("Cant find client %1 for playing system action: %2",_owner arg _ctx);
+		};
+		if not_equalTypes(_ctx,"") exitWith {
+			warningformat("Wrong datatype on playing lobby action %1 %2",_owner arg _ctx);
+		};
+		callFuncParams(_client,playSystemAction,_ctx);
+	}; rpcAdd("playLobbySystemAction",_playLobbySystemAction);
+
+	_onClosedNDLobby = {
+		params ["_owner"];
+		_client = _owner call cm_findClientById;
+		if equals(_client,nullPtr) exitWith {
+			warningformat("Cant find client %1 for playing system action: %2",_owner arg _ctx);
+		};
+		callFunc(_client,onClosedMessageBox);
+	}; rpcAdd("onClosedNDLobby",_onClosedNDLobby);
+
+	#ifdef EDITOR
+	_testmb = {
+		params ["_owner","_ctx"];
+		_client = _owner call cm_findClientById;
+		_event = {
+			callSelf(CloseMessageBox);
+			callSelfParams(addSystemAction,"system" arg "sysact_test" arg "Кнопочка прикольчик");
+		};
+		callFuncParams(_client,ShowMessageBox,"MessageBox" arg vec2("приветик!","Жмяк") arg _event);
+	}; rpcAdd("testmessagebox",_testmb);
+	#endif
+
+}; //IS_INIT_MODULE

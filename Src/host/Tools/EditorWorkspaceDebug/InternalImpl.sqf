@@ -69,6 +69,12 @@ messageBox = {
 	["Breakpoint","Relicta Message Box",[format _d,""],true] call rescript_callCommand
 };
 
+messageBox_Node = {
+	params ["_mes",["_opt",[]]];
+	if not_equalTypes(_opt,[]) then {_opt = [_opt]};
+	([_mes] + _opt) call messageBox
+};
+
 messageBoxRet = {
 	private _d = _this;
 	if not_equalTypes(_d,[]) then {_d = [_d]};

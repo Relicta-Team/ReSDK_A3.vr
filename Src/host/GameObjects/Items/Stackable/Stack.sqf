@@ -12,7 +12,11 @@
 
 //Любой предмет который можно стакать
 class(Stack) extends(Item)
-	
+	"
+		name:Стак
+		desc:Игровой объект с возможность объединения в группу (деньги, боеприпасы)
+		path:Игровые объекты.Объединяемые
+	" node_class
 	/*
 	public class DeclensionGenerator
     {
@@ -31,7 +35,7 @@ class(Stack) extends(Item)
         }
     }
 	*/
-
+	
 	getterconst_func(stackNames,vec3("Штучка","Штучки","Штучек"));//множественное название
 
 	getterconst_func(isStack,true);
@@ -39,7 +43,22 @@ class(Stack) extends(Item)
 	var_num(stackMaxAmount); //максимальное количество
 	editor_attribute("EditorVisible" arg "type:int" arg "range:1:10") editor_attribute("Tooltip" arg "Начальное количество предметов в стаке")
 	editor_attribute("alias" arg "Количество в стаке")
+	"
+		name:Количество в стаке
+		desc:Отображает количество предметов в стаке
+		prop:get
+		return:int
+		defval:1
+	" node_var
 	var(stackCount,1); //количество предметов в стаке
+	"
+		name:Распадаемость стака при броске
+		desc:Указывается будет ли распадаться стак на отдельные штучные предметы при броске
+		type:const
+		lockoverride:1
+		return:bool
+		defval:false
+	" node_met
 	getter_func(canDisentegrate,false); //распадается ли стак на отдельные штучки при броске
 
 	#ifdef EXPERIMENTAL_STACK_CHANGE_MODEL
@@ -186,6 +205,13 @@ class(Stack) extends(Item)
 		//testvar = _added;
 	};
 
+	"
+		name:Задать количество в стаке
+		desc:Задает количество предметов в стаке.
+		type:method
+		lockoverride:1
+		in:int:Количество:Новое количество предметов. Значение строго фиксируется между единицей и максимальным размером стака внутри этой функции.
+	" node_var
 	func(setStackCount)
 	{
 		objParams_1(_count);

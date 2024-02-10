@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-#include <precomiled.sqf>
+#include <precompiled.sqf>
 #include <engine.hpp>
 allClientContents = [];
 client_isLocked = false;

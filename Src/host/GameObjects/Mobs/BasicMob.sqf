@@ -28,23 +28,61 @@
 //Содержит основные методы для манипуляции персонажем (подключение, отключение, трансформация и т.д.)
 editor_attribute("HiddenClass" arg "allChild")
 class(BasicMob) extends(GameObject)
-	
+	"
+		name:Базовый моб
+		desc:Базовый моб, от которого унаследованы абсолютно все игровые сущности (персонажи).
+		path:Игровые объекты.Сущности
+	" node_class
+
 	getterconst_func(isMob,true);
 
+	
 	var(Naming,naming_default); //система склонения имён
+	
+
 	var(gender,gender_male); // половая принадлежность. Получать значения поля только с маленьких букв
 	var(name,"Существо");
 	func(getNameFor) {objParams_1(_usr); callFunc(this,getName)}; //метод с помощью которого можно узнать имя цели или не узнать
 	
+	"
+		name:Возраст
+		desc:Возраст сущности
+		prop:all
+		return:int:Возраст
+		defval:18
+	" node_var
 	#ifdef EDITOR
 	var(age,randInt(15,90));
 	#else
 	var_num(age);
 	#endif
 	
+	getter_func(isInWorld,true);//always in world
+
 	//some getters
+	"
+		name:Это ребенок
+		desc:Возвращает ИСТИНУ, если сущность является ребенком
+		type:get
+		lockoverride:1
+		return:bool:Это ребенок
+	" node_met
 	getter_func(isChild,getSelf(age)<=18);
+	"
+		name:Это мужчина
+		desc:Возвращает ИСТИНУ, если сущность является мужчиной
+		type:get
+		lockoverride:1
+		return:bool:Это мужчина
+	" node_met
 	getter_func(isMale,equals(getSelf(gender),gender_male));
+	"
+		name:Это женщина
+		desc:Возвращает ИСТИНУ, если сущность является женщиной
+		type:get
+		lockoverride:1
+		return:bool:Это женщина
+	" node_met
 	getter_func(isFemale,equals(getSelf(gender),gender_female));
 
 	var_obj(owner); // к кому привязан виртуальный моб
@@ -53,6 +91,13 @@ class(BasicMob) extends(GameObject)
 	var(visionBlock,0); //закрытые глаза, бессознанка, всё это влияет на эту переменную. Всё что больше 0 вызовет черный экран на клиенте
 
 	//Получает последнего активного клиента, который заходил за сущность
+	"
+		name:Последний клиент моба
+		desc:Получает последнего клиента, который играл или играет в данный момент за моба.
+		type:get
+		lockoverride:1
+		return:ServerClient:Клиент сущности, либо null ссылка, если за сущность ещё никто не заходил.
+	" node_met
 	func(getLastPlayerClient)
 	{
 		objParams();
@@ -199,6 +244,7 @@ region(raycast)
 		private _dist = _raypos distance _pos;//TODO remove: callSelfParams(getSectorDistTo,callFunc(_targ,getModelPosition));
 		setSelf(__lastinteractdata__,[_raypos arg _pos arg _dist arg _vec arg _targ arg _normal]);
 	};
+
 	getter_func(getLastInteractStartPos,getSelf(__lastinteractdata__) select 0);
 	getter_func(getLastInteractEndPos,getSelf(__lastinteractdata__) select 1); //конечная точка пересечения
 	getter_func(getLastInteractDistance,getSelf(__lastinteractdata__) select 2); //дистанция от начаьной до конечной точки
@@ -540,6 +586,13 @@ region(Connect control events)
 	};
 
 	// Подключен ли к актору какой-нибудь игрок
+	"
+		name:Это игрок
+		desc:Возвращает ИСТИНУ, если за сущность подключен какой-либо клиент (игрок)
+		type:get
+		lockoverride:1
+		return:bool:Подключен ли к мобу клиент
+	" node_met
 	getter_func(isPlayer,isPlayer getSelf(owner));
 	//Вызывется при подключении клиента к мобу
 	func(onConnected)
@@ -567,6 +620,14 @@ region(Connect control events)
 	};
 
 region(Mob location info: position; direction; speed)
+	
+	"
+		name:Установить позицию моба
+		desc:Устанавливает позицию моба, незамедлительно телепортируя его на новую позицию. Если моб был схвачен, то он освобождается.
+		type:method
+		lockoverride:1
+		in:vector3:Позиция:Новая позиция, на которую будет телепортирована сущность
+	" node_met
 	func(setPos)
 	{
 		objParams_1(_pos);
@@ -575,7 +636,8 @@ region(Mob location info: position; direction; speed)
 			errorformat("Cant set mob pos %1, because owner mob is null reference",_pos);
 		};
 
-		_mob setPosAtl _pos;
+		//_mob setPosAtl _pos;
+		[this,_pos,callSelf(getDir)] call teleportMobToPoint;
 	};
 
 	func(getPos)
@@ -589,8 +651,23 @@ region(Mob location info: position; direction; speed)
 		getPosATL _mob
 	};
 
+	"
+		name:Моб касается земли
+		namelib:Моб касается поверхности (стоит на земле)
+		desc:Возвращает true, если моб находится на земле. Если он падает - возваращет ложь. Этот узел не гарантирует точность возвращаемых данных, так как при десинхронизации клиента возможны рывки сущности, при которых узел возвращает ложь.
+		type:get
+		lockoverride:1
+		return:bool:Моб стоит на земле
+	" node_met
 	getter_func(isTouchingGround,isTouchingGround getSelf(owner));
 
+	"
+		name:Установить направление моба
+		desc:Устанавливает направление моба. Если моб был схвачен или сидит на стуле - узел не выполнит никаких действий.
+		type:method
+		lockoverride:1
+		in:float:Направление:Направление в градусах от 0 до 360
+	" node_met
 	func(setDir)
 	{
 		objParams_1(_dir);
@@ -611,12 +688,28 @@ region(Mob location info: position; direction; speed)
 		getDir _mob
 	};
 
+	"
+		name:Скорость моба
+		desc:Получает абсолютную скорость движения моба.
+		type:get
+		lockoverride:1
+		return:float:Скорость моба. Если моб стоит на месте, то возвращает 0
+	" node_met
 	func(getRealSpeed)
 	{
 		objParams();
 		abs speed getSelf(owner)
 	};
 
+	"
+		name:Направление игрового объекта к мобу
+		desc:Данный узел возвращает направление между мобом и целью. Моб может находится перед целью, за ней, слева и справа от цели. " + 
+		"Например, если целью будет другой моб и вызывающий находится за ним, то возвращается направление 'Сзади'.
+		type:method
+		lockoverride:1
+		in:GameObject:Объект-цель:Объект, рядом с которым стоит вызывающий.
+		return:enum.DirectionSide:Направление вызывающего моба к цели.
+	" node_met
 	//где стоти this по отношению к цели (this спереди _target, this за спиной у target)
 	func(getDirTo)
 	{
@@ -635,6 +728,15 @@ region(Mob location info: position; direction; speed)
 	};
 
 	//Где предмет относительно меня
+	"
+		name:Направление моба к игровому объекту
+		desc:Данный узел возвращает направление между целью и мобом. Цель может находится перед мобом, за его спиной, слева и справа от него. "+
+		"Например, если цель другой моб, находящийся за вызывающим, то возвращается направление 'Сзади'.
+		type:method
+		lockoverride:1
+		in:GameObject:Объект-цель:Объект, который находится в стороне от вызывающего.
+		return:enum.DirectionSide:Направление цели к вызывающему мобу.
+	" node_met
 	func(getDirectionTo)
 	{
 		objParams_1(_target);
@@ -647,12 +749,28 @@ region(Mob location info: position; direction; speed)
 		DIR_FRONT
 	};
 
+	"
+		name:Расстояние от моба до цели
+		desc:Получает расстояние от вызывающего моба до цели в метрах. Целью может быть любой игровой объект, включа сущностей. "+
+		"В случае с расстоянием до сущности за конечную точку берется торс сущности. При проверке расстояния до игровых объектов берется центр модели, который помечается значком в редакторе ReEditor.
+		type:method
+		lockoverride:1
+		in:GameObject:Объект-цель:Объект, до которого измеряется расстояние
+		return:float:Расстояние в метрах
+	" node_met
 	func(getDistanceTo)
 	{
 		objParams_1(_target);
 		getSelf(owner) distance callFunc(_target,getBasicLoc)
 	};
 
+	"
+		name:Положение моба
+		desc:Получает положение (стройку) моба. Например, стоя, лежа и т.д.
+		type:get
+		lockoverride:1
+		return:enum.EntityStance:Положение моба
+	" node_met
 	func(getStance)
 	{
 		objParams();
@@ -667,6 +785,13 @@ region(Mob location info: position; direction; speed)
 
 	#define __animget_impl__() (getSelf(owner) call anim_getUnitAnim)
 	//Идёт ли медленным шагом
+	"
+		name:Моб идёт шагом
+		desc:Проверяет, идёт ли моб шагом. Если идёт - возвращает истину. При беге и остановке на месте - возвращает ложь.
+		type:get
+		lockoverride:1
+		return:bool:Сущность двигается медленным шагом
+	" node_met
 	func(isWalking)
 	{
 		objParams();
@@ -674,6 +799,13 @@ region(Mob location info: position; direction; speed)
 		"wlks" in __animget_impl__()
 	};
 	//бежит ли
+	"
+		name:Моб бежит
+		desc:Проверяет, бежит ли моб. Если бежит - возвращает истину. При шаге и остановке на месте - возвращает ложь.
+		type:get
+		lockoverride:1
+		return:bool:Сущность бежит
+	" node_met
 	func(isRunning)
 	{
 		objParams();
@@ -681,6 +813,13 @@ region(Mob location info: position; direction; speed)
 		private _anm = __animget_impl__();
 		"tacs" in _anm || "runs" in _anm
 	};
+	"
+		name:Моб спринтует
+		desc:Проверяет, спринтует ли моб. Спринт - это быстрый бег с зажатым модификаторм спринта (по умолчанию клавиша shift). Если спринтуер - возвращает истину, во всех остальных случаях возвращает ложь.
+		type:get
+		lockoverride:1
+		return:bool:Сущность в спринте
+	" node_met
 	//на шифте
 	func(isSprinting)
 	{
@@ -690,6 +829,13 @@ region(Mob location info: position; direction; speed)
 		"evas" in _anm || "sprs" in _anm /*для лежачего спринта*/
 	};
 
+	"
+		name:Режим движения моба
+		desc:Возвращает режим движения моба.
+		type:get
+		lockoverride:1
+		return:enum.EntitySpeedMode
+	" node_met
 	func(getSpeedMode)
 	{
 		objParams();
@@ -858,6 +1004,13 @@ region(lighting helper)
 	var(__lastClientLighting,0);
 
 	//Получает уровень освещённости сущности
+	"
+		name:Уровень освещённости моба
+		desc:Возвращает уровень освещённости моба на стороне сервера. Чем больше источников света попадает на моба, тем больше это значение и тем лучше его видно.
+		type:get
+		lockoverride:1
+		return:enum.LightMode:Уровень освещённости
+	" node_met
 	func(getLighting)
 	{
 		objParams();
@@ -955,6 +1108,14 @@ region(Messaging and chat managers)
 		[this,_f,_s] call naming_generateName;
 	};
 
+	"
+		name:Первое имя моба
+		namelib:Первое имя моба (Имя)
+		desc:Получает первое имя моба. В большинстве случаев первым именем является имя персонажа.
+		type:get
+		lockoverride:1
+		return:string:Имя
+	" node_met
 	func(getFirstName)
 	{
 		objParams();
@@ -963,6 +1124,15 @@ region(Messaging and chat managers)
 		if isNullVar(_el) exitwith {""};
 		_el
 	};
+
+	"
+		name:Второе имя моба
+		namelib:Второе имя моба (Фамилия)
+		desc:Получает второе имя моба. В большинстве случаев вторым именем является фамилия или кличка персонажа.
+		type:get
+		lockoverride:1
+		return:string:Второе имя (фамилия)
+	" node_met
 	func(getSecondName)
 	{
 		objParams();
@@ -973,16 +1143,36 @@ region(Messaging and chat managers)
 	};
 	
 	//Получает актуальное имя персонажа со склонением
+	"
+		name:Полное имя моба в склонении
+		desc:Получает вариацию имени и фамилии моба в указанном склонении
+		type:method
+		lockoverride:1
+		in:enum.NamingDeclension:Склонение:Требуемое склонение для полного имени
+		return:string:Полное имя в указанном склонении
+	" node_met
 	func(getNameEx)
 	{
 		objParams_1(_sklon);
 		if isNullVar(_sklon) then {_sklon = "кто"};
 		private _namingObj = getSelf(Naming);
+		if equalTypes(_sklon,0) then {
+			_sklon = callFuncParams(_namingObj,enumNamingToText,_sklon);
+		};
 		private _skCtx = getVarReflect(_namingObj,_sklon);
 		if (isNullVar(_skCtx)) exitWith {"Ошибочка"};
 		_skCtx
 	};
 
+	"
+		name:Первое имя моба в склонении
+		namelib:Первое имя моба в склонении (Имя)
+		desc:Получает вариацию первого имени моба в указанном склонении.
+		type:method
+		lockoverride:1
+		in:enum.NamingDeclension:Склонение:Требуемое склонение для имени.
+		return:string:Имя в указанном склонении.
+	" node_met
 	func(getFirstNameEx)
 	{
 		objParams_1(_sk);
@@ -991,6 +1181,16 @@ region(Messaging and chat managers)
 		if isNullVar(_el) exitwith {""};
 		_el
 	};
+
+	"
+		name:Второе имя моба в склонении
+		namelib:Второе имя моба в склонении (Фамилия)
+		desc:Получает вариацию второго имени (фамилии) моба в указанном склонении.
+		type:method
+		lockoverride:1
+		in:enum.NamingDeclension:Склонение:Требуемое склонение для фамилии.
+		return:string:Фамилия в указанном склонении.
+	" node_met
 	func(getSecondNameEx)
 	{
 		objParams_1(_sk);
@@ -1034,13 +1234,32 @@ region(Messaging and chat managers)
 		callSelfParams(ShowMessageBox,"Text" arg getSelf(__firstLoginMesPool) joinString sbr);
 	};
 
+	"
+		name:Локальное сообщение мобу
+		desc:Отправляет мобу-игроку в чат переданный текст. Другие игроки не увидят это сообщение.
+		type:method
+		lockoverride:1
+		in:string:Сообщение:Текст сообщения.
+		in:enum.ChatMessageChannel:Тип:Тип сообщения.
+	" node_met
+	func(_localSayWrapper)
+	{
+		assert_str(count _this > 2,"Param count error");
+		private _ch = _this select 2;
+		assert_str(!isNullVar(_ch),"Channel param cannot be null");
+		assert_str(equalTypes(_ch,0),"Channel param type error. Must be integer - not " + typename _ch);
+		assert_str(inRange(_ch,0,count go_internal_chatMesMap - 1),"Channel index out of range: " + str _ch);
+		_this set [2,go_internal_chatMesMap select _ch];
+		_this call getSelfFunc(localSay)
+	};
+	
 	func(localSay)
 	{
 		objParams_2(_text,_channel);
 		if !callSelf(isPlayer) exitWith {};
 		rpcSendToObject(getSelf(owner),"chatPrint",[_text arg _channel]);
 	};
-
+	
 	func(worldSay)
 	{
 		params ['this',"_text","_channel",["_dist",DISTANCE_WORLDSAY]];
@@ -1057,6 +1276,13 @@ region(Messaging and chat managers)
 	};
 
 	//действие от лица персонажа.
+	"
+		name:Эмоут от моба
+		desc:Отправляет эмоут сообщение от лица вызывающего моба. К сообщению в начало текста автоматически добавляется полное имя моба в именительном падеже.
+		type:method
+		lockoverride:1
+		in:string:Сообщение:Текст эмоута.
+	" node_met
 	func(meSay)
 	{
 		objParams_1(_mes);
@@ -1195,6 +1421,13 @@ region(Messaging and chat managers)
 	};
 
 	//проигрывает мысль персонажа
+	"
+		name:Мысль мобу
+		desc:Отправляет вызывающему мобу в чат локальное сообщение категории перечисления ""Мысли"".
+		type:method
+		lockoverride:1
+		in:string:Сообщение:Текст мысли.
+	" node_met
 	func(mindSay)
 	{
 		objParams_1(_mes);
@@ -1302,11 +1535,26 @@ region(Animator)
 	};
 	
 region(Face and voice helpers)
+
+	"
+		name:Лицо моба
+		desc:Получает имя конфигурации лица моба (конфиг из Платформы).
+		type:get
+		lockoverride:1
+		return:string:Лицо моба
+	" node_met
 	getter_func(getMobFace,getSelf(face));
 
 	var(face,""); //no face by default
 
 	//Устанавливает лицо персонажу как smd переменную
+	"
+		name:Установить лицо мобу
+		desc:Устанавливает лицо мобу и синхронизирует его между остальными игроками.
+		type:method
+		lockoverride:1
+		in:string:Лицо:Имя конфигурации лица моба (см. узел 'Лицо моба')
+	" node_met
 	func(setMobFace)
 	{
 		objParams_1(_face);
@@ -1394,6 +1642,21 @@ region(Sound helpers)
 
 	};
 
+	"
+		name:Проиграть локальный звук мобу
+		desc:Воспроизводит звук у клиента, играющего за вызывающего моба. Другие игроки не услышат этот звук.
+		type:method
+		lockoverride:1
+		in:string:Путь:Путь до файла звука, например: ""fire\\torch_on""
+		in:float:Тон:Тон звука. 2 - максимальный возможный, 0.5 - минимальный возможный
+			opt:def=1
+		in:float:Дистанция:Дистанция в метрах, на которой будет слышно звук.
+			opt:def=50
+		in:float:Громкость:Громкость звука. Не рекомендуется менять это значение
+			opt:def=1
+		in:auto:Источник:Источник звука. Если не указан, то звук воспроизведется из позиции вызывающего моба.
+			opt:require=0:typeget=value;@type:allowtypes=GameObject
+	" node_met
 	func(playSoundLocal)
 	{
 		params ['this',"_path",["_pitch",1],["_maxDist",50],["_vol",1],"_atPos"];

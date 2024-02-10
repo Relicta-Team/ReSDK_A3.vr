@@ -11,19 +11,55 @@
 //basic object for all oop system
 editor_attribute("HiddenClass")
 class(object) basic()
+	"
+		name:Объект
+		desc:Базовый объект, от которого унаследованы абсолютно все другие объекты. Является корневым типом в объектной системе.
+		path:Объекты.Библиотека
+	"
+	node_class
 
+	"
+		name:Получить класснейм
+		namelib:Получить имя класса объекта
+		desc:Получает класснейм объекта.
+		type:get
+		lockoverride:1
+		return:classname:Имя класса
+	" node_met
 	func(getClassName)
 	{
 		objParams();
 		this getVariable PROTOTYPE_VAR_NAME getVariable "classname"
 	};
 
+	"
+		name:Получить класс
+		namelib:Получить класс объекта
+		desc:Получает класс объекта. Класс объекта - это специальный тип, содержащий информацию о самом классе а не о его экземплярах.
+		type:get
+		lockoverride:1
+		return:class:Объект типа (класс)
+	" node_met
+	getter_func(getType,typeGetFromObject(this));
+
+	"
+		name:При создании
+		namelib:При создании (Конструктор объекта)
+		desc:Конструктор объекта. Вызывается как самое первое событие при создании объекта.
+		type:event
+	" node_met
 	func(constructor)
 	{
 		INC(oop_cao);
 		INC(oop_cco);
 	};
 
+	"
+		name:При удалении
+		namelib:При удалении (Деструктор объекта)
+		desc:Деструктор объекта. Вызывается при удалении объекта непосредственно перед удалением.
+		type:event
+	" node_met
 	func(destructor)
 	{
 		DEC(oop_cao);
@@ -31,8 +67,50 @@ class(object) basic()
 
 endclass
 
-class(ManagedObject) extends(object)
+class(Type) extends(object)
+	"
+		name:Класс
+		desc:Предоставляет интерфейс для работы с типами объектов.
+		path:Объекты.Библиотека
+	"
+	node_class
 
+	var(_srcType,nullPtr); //TODO auto alloc type objects
+
+	func(getMember)
+	{
+		objParams_1(_name);
+		typeGetVar(getSelf(_srcType),_name);
+	};
+
+	func(setMember)
+	{
+		objParams_2(_name,val);
+		typeSetVar(getSelf(_srcType),_name,_val)
+	};
+
+	func(hasMember)
+	{
+		objParams_1(_name);
+		typeHasVar(getSelf(_srcType),_name);
+	};
+
+	func(getVarDefaultValue)
+	{
+		params ['this',"_name",["_serialized",true]];
+		private _srcObj = getSelf(_srcType);
+		ifcheck(_serialized,typeGetDefaultFieldValueSerialized(_srcObj,_name),typeGetDefaultFieldValue(_srcObj,_name))
+	};
+
+endclass
+
+class(ManagedObject) extends(object)
+	"
+		name:Управляемый объект
+		desc:Управляемый системой объект, поддерживающий логику обновления (симуляции)
+		path:Объекты.Библиотека
+	"
+	node_class
 	var(handleUpdate,-1);
 	
 	// Указывает может ли быть использована функция обновления
@@ -102,6 +180,7 @@ class(ManagedObject) extends(object)
 endclass
 
 //Объект с системой подсчёта ссылок созданных экземпляров
+//TODO refactoing with type object
 editor_attribute("HiddenClass")
 class(RefCounterObject)
 

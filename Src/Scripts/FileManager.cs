@@ -74,7 +74,13 @@ class FileManager : IScript
 					string readedTextOpenRet = ScriptContext.GetArg(1);
 					string cdelim = ScriptContext.GetArg(2);
 					readedTextOpenRet = readedTextOpenRet.Replace(cdelim, "\"");
-					procH = Process.Start(ScriptContext.GetArg(0), readedTextOpenRet);
+					string fp_ = ScriptContext.GetArg(0);
+					ProcessStartInfo psi_ = new ProcessStartInfo();
+
+					psi_.FileName = fp_;
+					psi_.Arguments = readedTextOpenRet;
+					psi_.WorkingDirectory = Path.GetDirectoryName(fp_);
+					procH = Process.Start(psi_);
 				}
 				procH.WaitForExit();
 				output.Append(procH.ExitCode.ToString());
