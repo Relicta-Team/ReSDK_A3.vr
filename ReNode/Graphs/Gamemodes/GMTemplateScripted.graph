@@ -5,7 +5,20 @@
     "pipe_collision":false,
     "pipe_slicing":true,
     "pipe_style":1,
-    "variables":{},
+    "variables":{
+      "classvar":{
+        "0x278a69a0990_202421021187754851":{
+          "name":"Погиб поздний приключенец",
+          "type":"bool",
+          "value":false,
+          "category":"classvar",
+          "group":"",
+          "systemname":"Pogib_pozdniy_priklyuchenets",
+          "reprType":"bool (Булево)",
+          "reprDataType":"value (Значение)"
+        }
+      }
+    },
     "info":{
       "type":"gamemode",
       "name":"GMTemplateScripted",
@@ -24,23 +37,25 @@
           "getMapName":"Template",
           "isPlayableGamemode":false,
           "_getRolesWrapper":[
-            "RAdventurerGMTemplateScripted"
+            "RAdventurerGMTemplateScripted",
+            "RLateAdventurerGMTemplateScripted"
           ]
         }
       },
-      "compiledGUID":"01249a63-09b4-4094-97fa-abfefc8bc800",
-      "compileStatus":"Compiled"
+      "compiledGUID":"2c378d8f-050c-4dac-9808-f0e045ba436e",
+      "compileStatus":"Warnings",
+      "graphVersion":1
     },
     "mpos":[
-      156.63362115111613,
-      200.86753773009556,
-      947.2422140037596,
-      891.5220837682442
+      373.8634615051351,
+      145.65367838338898,
+      1564.5365533992965,
+      1472.50499143463
     ],
-    "mzoom":-0.39
+    "mzoom":-0.55
   },
   "nodes":{
-    "0x1dc22528990":{
+    "0x278a5099ab0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При выборе режима",
@@ -64,8 +79,8 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":245.0,
-      "height":81.9,
+      "width":284.0,
+      "height":108.55000000000001,
       "pos":[
         83.34714704175832,
         386.3688562678738
@@ -75,7 +90,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedGamemode.preSetup_0"
     },
-    "0x1dc24c3ae50":{
+    "0x278a509b610":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При начале раунда",
@@ -99,8 +114,8 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":245.0,
-      "height":81.9,
+      "width":284.0,
+      "height":108.55000000000001,
       "pos":[
         83.34714704175832,
         519.2188562678739
@@ -110,7 +125,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedGamemode.postSetup_0"
     },
-    "0x1dc24c3a250":{
+    "0x278a509b7c0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"В каждую секунду",
@@ -134,8 +149,8 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":245.0,
-      "height":81.9,
+      "width":284.0,
+      "height":108.55000000000001,
       "pos":[
         83.34714704175832,
         652.0688562678738
@@ -145,7 +160,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedGamemode.onTick_0"
     },
-    "0x1dc24c39610":{
+    "0x278a509b970":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Проверка конца раунда",
@@ -169,8 +184,8 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":245.0,
-      "height":81.9,
+      "width":284.0,
+      "height":108.55000000000001,
       "pos":[
         83.34714704175832,
         784.9188562678739
@@ -180,7 +195,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedGamemode._checkFinishWrapper_0"
     },
-    "0x1dc28b45e10":{
+    "0x278a509bb20":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При завершении раунда",
@@ -204,8 +219,8 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":245.0,
-      "height":81.9,
+      "width":284.0,
+      "height":108.55000000000001,
       "pos":[
         83.34714704175832,
         917.7688562678738
@@ -214,6 +229,492 @@
       "port_deletion_allowed":false,
       "subgraph_session":{},
       "class_":"methods.ScriptedGamemode.onFinish_0"
+    },
+    "0x278aac81ba0":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
+      "name":"Завершить раунд",
+      "color":[
+        0,
+        69,
+        104
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":542.0,
+      "height":195.70000000000002,
+      "pos":[
+        1585.3596157949535,
+        743.8466627473002
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Этот GMTemplateScripted",
+        "Исход":1,
+        "Описание":"Многие погибли"
+      },
+      "class_":"methods.ScriptedGamemode.setEndgameScriptedMode_0"
+    },
+    "0x278aac81960":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":[
+        "data\\icons\\pill_16x.png",
+        "#2e8b57"
+      ],
+      "name":"Умершие мобы",
+      "color":[
+        46,
+        139,
+        87,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":447.0,
+      "height":112.75,
+      "pos":[
+        520.1460631113821,
+        888.4385552408165
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Этот GMTemplateScripted"
+      },
+      "class_":"fields.ScriptedGamemode.countDead_0.get"
+    },
+    "0x278aac82c20":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_Blueprint_Branch_16x",
+      "name":"Ветка",
+      "color":[
+        119,
+        119,
+        119,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":192.0,
+      "height":82.55000000000001,
+      "pos":[
+        1250.920997685978,
+        816.9876493544015
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Условие":true
+      },
+      "class_":"operators.if_branch"
+    },
+    "0x278aac82440":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\node_base.png",
+      "name":"&gt;=",
+      "color":[
+        13,
+        18,
+        23,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":200.0,
+      "height":81.8,
+      "pos":[
+        1007.092495348191,
+        885.1398884896213
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":true,
+      "subgraph_session":{},
+      "input_ports":[
+        {
+          "name":"Число 1",
+          "multi_connection":false,
+          "display_name":false,
+          "color":[
+            46,
+            139,
+            87,
+            255
+          ],
+          "type":"int"
+        },
+        {
+          "name":"Число 2",
+          "multi_connection":false,
+          "display_name":false,
+          "color":[
+            46,
+            139,
+            87,
+            255
+          ],
+          "type":"int"
+        }
+      ],
+      "output_ports":[
+        {
+          "name":"Результат",
+          "multi_connection":true,
+          "display_name":false,
+          "color":[
+            128,
+            0,
+            0,
+            255
+          ],
+          "type":"bool"
+        }
+      ],
+      "custom":{
+        "autoportdata":{
+          "color":[
+            255,
+            255,
+            255,
+            255
+          ],
+          "border_color":[
+            255,
+            255,
+            255,
+            255
+          ]
+        },
+        "Число 1":0.0,
+        "Число 2":2.0
+      },
+      "class_":"math.greaterthanorequalnum"
+    },
+    "0x278a6e28f70":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_Blueprint_Branch_16x",
+      "name":"Ветка",
+      "color":[
+        119,
+        119,
+        119,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":192.0,
+      "height":82.55000000000001,
+      "pos":[
+        1631.0279920863468,
+        1251.8990944951172
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Условие":true
+      },
+      "class_":"operators.if_branch"
+    },
+    "0x278aac81cf0":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":[
+        "data\\icons\\pill_16x.png",
+        "#800000"
+      ],
+      "name":"Погиб поздний приключенец",
+      "color":[
+        128,
+        0,
+        0,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":473.0,
+      "height":86.1,
+      "pos":[
+        1078.5830270248416,
+        1278.205997593284
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Этот GMTemplateScripted"
+      },
+      "class_":"fields.GMTemplateScripted.Pogib_pozdniy_priklyuchenets_0.get"
+    },
+    "0x278a545cbb0":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
+      "name":"Завершить раунд",
+      "color":[
+        0,
+        69,
+        104
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":542.0,
+      "height":195.70000000000002,
+      "pos":[
+        1864.6951901935936,
+        1225.5921913969507
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Этот GMTemplateScripted",
+        "Исход":-1,
+        "Описание":"Погиб поздний приключенец"
+      },
+      "class_":"methods.ScriptedGamemode.setEndgameScriptedMode_0"
+    },
+    "0x278a545d420":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\node_base.png",
+      "name":"Заметка",
+      "color":[
+        42,
+        179,
+        4,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":333.0,
+      "height":82.55000000000001,
+      "pos":[
+        1575.945464031522,
+        1137.5059203124886
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "text":"Проверка конца раунда на смерть определенной роли"
+      },
+      "class_":"internal.sticker"
+    },
+    "0x278aad73010":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\node_base.png",
+      "name":"Заметка",
+      "color":[
+        42,
+        179,
+        4,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":333.0,
+      "height":82.55000000000001,
+      "pos":[
+        1175.1520580065094,
+        718.1429356299464
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "text":"Проверка конца раунда по количеству погибших"
+      },
+      "class_":"internal.sticker"
     }
-  }
+  },
+  "connections":[
+    {
+      "out":[
+        "0x278a509b970",
+        "Выход"
+      ],
+      "in":[
+        "0x278aac82c20",
+        "Вход"
+      ]
+    },
+    {
+      "in":[
+        "0x278aac81ba0",
+        "Вход"
+      ],
+      "out":[
+        "0x278aac82c20",
+        "Истина"
+      ]
+    },
+    {
+      "out":[
+        "0x278aac81960",
+        "Значение"
+      ],
+      "in":[
+        "0x278aac82440",
+        "Число 1"
+      ]
+    },
+    {
+      "in":[
+        "0x278aac82c20",
+        "Условие"
+      ],
+      "out":[
+        "0x278aac82440",
+        "Результат"
+      ]
+    },
+    {
+      "out":[
+        "0x278aac82c20",
+        "Ложь"
+      ],
+      "in":[
+        "0x278a6e28f70",
+        "Вход"
+      ]
+    },
+    {
+      "in":[
+        "0x278a6e28f70",
+        "Условие"
+      ],
+      "out":[
+        "0x278aac81cf0",
+        "Значение"
+      ]
+    },
+    {
+      "out":[
+        "0x278a6e28f70",
+        "Истина"
+      ],
+      "in":[
+        "0x278a545cbb0",
+        "Вход"
+      ]
+    }
+  ]
 }
