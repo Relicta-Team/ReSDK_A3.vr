@@ -801,6 +801,8 @@ ACRE_IS_ERRORED = false; _ret;}*/
 			def - значение по умолчанию. реальное json значение для подстановки в параметры
 
 			custom_type - кастомный тип для автопортов (работает вместе с use_custom)
+
+			typeset_out - указывает имя порта для автозамены типа
 		in:int:Вход 1:Описание входного значения
 		opt:custom=1:mul=1:dname=1:allowtypes=int|bool|float
 */
@@ -818,11 +820,6 @@ ACRE_IS_ERRORED = false; _ret;}*/
 	"name:test function" node_func(test_function) = {};
 
 	возможные опциональные дланные opt:
-
-		! NOT IMPLEMENTED
-		typeset - при изменении задаёт тип порта. Если были подключения - отключает
-			typeset=out.1|as_is при изменении задаёт тип порта
-				as_is - берет подключенное значение 
 
 	для установки параметров функции в автоматическом режиме используйте @cfParams
 
