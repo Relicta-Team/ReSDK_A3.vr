@@ -19,22 +19,24 @@
         "fields":{
           "name":"Опоздавший приключенец"
         },
-        "methods":{}
+        "methods":{
+          "_canTakeInLobbyConst":false
+        }
       },
-      "compiledGUID":"7a99703e-a6e5-4662-b14a-df13c2ae7566",
-      "compileStatus":"Warnings",
+      "compiledGUID":"f2c6f03b-f835-4f0a-9d03-bade924ccc1b",
+      "compileStatus":"Compiled",
       "graphVersion":1
     },
     "mpos":[
-      637.6420215882764,
-      -101.81521236287841,
-      955.8265525730745,
-      899.6014612452467
+      -98.03971784741842,
+      198.92703350853895,
+      959.8553312893847,
+      903.3932529782445
     ],
-    "mzoom":-0.26
+    "mzoom":-0.5
   },
   "nodes":{
-    "0x278a545d690":{
+    "0x279137ceed0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -69,77 +71,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x278a545d8d0":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"При назначении",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":243.0,
-      "height":147.4,
-      "pos":[
-        328.06161788626287,
-        404.3871722953074
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedRole._onAssignedWrapper_0"
-    },
-    "0x278a545dc90":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"При конце раунда за роль",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":295.0,
-      "height":111.3,
-      "pos":[
-        328.06161788626287,
-        599.3871722953074
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedRole.onEndgameBasic_0"
-    },
-    "0x278a545df90":{
+    "0x27913a90490":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",
@@ -174,7 +106,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onDeadBasicWrapper_0"
     },
-    "0x278aa0efcd0":{
+    "0x27913a912d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_OverrideableFunction_16x",
       "name":"Вызов базового метода",
@@ -255,7 +187,7 @@
       },
       "class_":"control.supercall"
     },
-    "0x278aa0eee90":{
+    "0x27913a92390":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в инвентаре",
@@ -294,7 +226,7 @@
       },
       "class_":"func.createItemInInventory"
     },
-    "0x278a69a38e0":{
+    "0x27913b01bd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -336,46 +268,7 @@
       },
       "class_":"fields.Mob.activeHand_0.get"
     },
-    "0x278a6e2a500":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\node_base.png",
-      "name":"Заметка",
-      "color":[
-        42,
-        179,
-        4,
-        255
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":333.0,
-      "height":97.25,
-      "pos":[
-        1165.0212046648776,
-        368.8972034721802
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "custom":{
-        "text":"TODO: cast handIndex -> inventorySlot\nИли возможно изменить тип члена активная рука на активный слот"
-      },
-      "class_":"internal.sticker"
-    },
-    "0x278a545fe50":{
+    "0x27913b02d50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Cast_16x",
       "name":"Преобразовать тип",
@@ -414,7 +307,7 @@
       },
       "class_":"control.castto"
     },
-    "0x278a545ecb0":{
+    "0x27913b72650":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка",
@@ -453,7 +346,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x278a545c8b0":{
+    "0x27913b73310":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\Icon_Sequencer_Key_Part_24x",
       "name":"Получить текущий режим",
@@ -491,7 +384,7 @@
       },
       "class_":"methods.ScriptedRole.getCurrentGamemode_0"
     },
-    "0x278a545c5b0":{
+    "0x27913b73b50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -538,81 +431,91 @@
   "connections":[
     {
       "out":[
-        "0x278a545d690",
+        "0x279137ceed0",
         "Выход"
       ],
       "in":[
-        "0x278a545fe50",
+        "0x27913b02d50",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x278a545d690",
+        "0x279137ceed0",
         "Моб"
       ],
       "in":[
-        "0x278a545fe50",
+        "0x27913b02d50",
         "Входной объект"
       ]
     },
     {
       "out":[
-        "0x278a545df90",
+        "0x27913a90490",
         "Выход"
       ],
       "in":[
-        "0x278a545c5b0",
+        "0x27913b73b50",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x278aa0efcd0",
+        "0x27913a912d0",
         "Вход"
       ],
       "out":[
-        "0x278a545fe50",
+        "0x27913b02d50",
         "Успешное преобразование"
       ]
     },
     {
       "out":[
-        "0x278aa0efcd0",
+        "0x27913a912d0",
         "Выход"
       ],
       "in":[
-        "0x278aa0eee90",
+        "0x27913a92390",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x278aa0eee90",
+        "0x27913a92390",
         "Персонаж"
       ],
       "out":[
-        "0x278a545fe50",
+        "0x27913b02d50",
         "Объект"
       ]
     },
     {
       "in":[
-        "0x278a69a38e0",
+        "0x27913a92390",
+        "Слот"
+      ],
+      "out":[
+        "0x27913b01bd0",
+        "Значение"
+      ]
+    },
+    {
+      "in":[
+        "0x27913b01bd0",
         "Цель"
       ],
       "out":[
-        "0x278a545fe50",
+        "0x27913b02d50",
         "Объект"
       ]
     },
     {
       "out":[
-        "0x278a545c8b0",
+        "0x27913b73310",
         "Результат"
       ],
       "in":[
-        "0x278a545c5b0",
+        "0x27913b73b50",
         "Цель"
       ]
     }

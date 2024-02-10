@@ -97,16 +97,17 @@ class(Mob) extends(BasicMob)
 	var(specialAction,SPECIAL_ACTION_NO); //особое действие (пинать, кусать)
 	"
 		name:Активная рука
-		desc:Текущая активная рука, которой персонаж будет производить действия
+		namelib:Активная рука (активный слот)
+		desc:Текущая активная рука, которой персонаж будет производить действия.
 		prop:get
-		return:enum.HandType
+		return:enum.InventorySlot
 	" node_var
 	var(activeHand,INV_HAND_L); //индекс активной руки
 	"
 		name:Основная рука
 		desc:Текущая основная рука персонажа (левша или правша).
 		prop:get
-		return:enum.HandType
+		return:enum.InventorySlot
 	" node_var
 	var(mainHand,INV_HAND_L); //индекс ОСНОВНОЙ РУКИ
 

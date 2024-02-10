@@ -208,10 +208,16 @@ class(ScriptedGamemode) extends(GMBase)
 		desc:Данное событие срабатывает когда раунд завершается. Для вызова логики рестарта раунда и вывода сообщений со статистикой используйте узел 'Вызов базового метода'
 		type:event
 	" node_met
+	func(_onFinishWrapper)
+	{
+		objParams();
+	};
+
 	func(onFinish)
 	{
 		objParams();
 		super();
+		callSelf(_onFinishWrapper);
 	};
 
 	"
@@ -318,8 +324,30 @@ class(ScriptedGamemode) extends(GMBase)
 		objParams();
 		[]
 	};
-	getter_func(getLobbyRoles,callSelf(_getRolesWrapper));
-	getter_func(getLateRoles,[]);
+
+	func(_getRolesWrapperInternal)
+	{
+		objParams_1(_getMode);
+		private _rlist = callSelf(_getRolesWrapper);
+		private _robj = nullPtr;
+		private _lobby = [];
+		private _late = [];
+		{
+			_robj = _x call gm_getRoleObject;
+			if !isNullReference(_robj) then {
+				if callFunc(_robj,_canTakeInLobbyConst) then {
+					_lobby pushBackUnique _x;
+				};
+				if callFunc(_robj,_canVisibleAfterStartConst) then {
+					_late pushBackUnique _x;
+				};
+			};
+		} foreach _rlist;
+
+		ifcheck(_getMode==0,_lobby,_late)
+	};
+	getter_func(getLobbyRoles,callSelfParams(_getRolesWrapperInternal,0));
+	getter_func(getLateRoles,callSelfParams(_getRolesWrapperInternal,1));
 
 	"
 		name:Время игры
@@ -583,12 +611,12 @@ class(ScriptedRole) extends(BasicRole)
 
 
 	"
-		name:Видимость роли в лобби
-		desc:Будет ли видна эта роль в списке ролей до старта раунда из лобби. С помощью выходного параметра ""Клиент"" можно настроить ограничения для конкретных клиентов.
+		name:Доступность роли в лобби
+		desc:Будет ли доступна эта роль запрашиваемому клиенту из лобби до старта игры. С помощью выходного параметра ""Клиент"" можно настроить ограничения для конкретных клиентов.
 		type:event
 		out:ServerClient^:Клиент:Объект клиента, который запрашивает видимость роли.
 		out:bool:Вывод ошибок:Этот параметр принимает значение ИСТИНА, когда запрос осуществляется с возможностью вывода ошибки. Например, если настроить ограничение на пол для роли, то при включенном флаге можно отправить клиенту сообщение о том, что пол его персонажа не подходит.
-		return:bool:Видимость роли в лобби
+		return:bool:Доступность роли в лобби
 	" node_met
 	func(canTakeInLobby)
 	{
@@ -597,18 +625,18 @@ class(ScriptedRole) extends(BasicRole)
 	};
 
 	"
-		name:Доступность в лобби
-		namelib:Можно ли взять в лобби (Доступность в лобби)
-		desc:Указывает можно ли взять роль из лобби
+		name:Видимость в лобби
+		namelib:Видно ли роль в лобби (Видимость в лобби)
+		desc:Указывает будет ли отображаться эта роль в списке ролей до старта раунда.
 		type:const
-		return:bool:Возможность взятия роли в лобби
+		return:bool:Видимость роли в лобби
 		defval:true
 	" node_met
 	getterconst_func(_canTakeInLobbyConst,true);
 
 	"
-		name:Видимость роли после старта
-		desc:Будет ли видна эта роль в списке ролей после старта. С помощью выходного параметра ""Клиент"" можно настроить ограничения для конкретных клиентов.
+		name:Доступность роли после старта
+		desc:Будет ли доступна эта роль запрашиваемому клиенту из лобби после старта раунда. С помощью выходного параметра ""Клиент"" можно настроить ограничения для конкретных клиентов.
 		type:event
 		out:ServerClient^:Клиент:Объект клиента, который запрашивает видимость роли.
 		return:bool:Видимость роли после старта
@@ -620,9 +648,9 @@ class(ScriptedRole) extends(BasicRole)
 	};
 
 	"
-		name:Доступность в игре
-		namelib:Можно ли взять в игре (Доступность в игре)
-		desc:Указывает можно ли взять роль после старта раунда
+		name:Видимость в игре
+		namelib:Видно ли роль в игре (Видимость в игре)
+		desc:Указывает будет ли отображаться эта роль в списке ролей после старта раунда.
 		type:const
 		return:bool:Возможность взятия роли в игре
 		defval:true
