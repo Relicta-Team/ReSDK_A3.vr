@@ -42,11 +42,18 @@ function(pertest_showRenderingChunks)
 function(pertest_showRendeing_onUpdate)
 {
 		_colorSide = [0,0,0,1];
+		_allColors = [
+			[((["Item","Class","ColorClass"] call goasm_attributes_getValues) select 0)] call color_HTMLtoRGBA,
+			[((["IStruct","Class","ColorClass"] call goasm_attributes_getValues) select 0)] call color_HTMLtoRGBA,
+			[((["Decor","Class","ColorClass"] call goasm_attributes_getValues) select 0)] call color_HTMLtoRGBA
+		];
+		
+
 		{
 			_chunk = [getPosATL get3DENCamera, _x] call noe_posToChunk;
 			_pos = [_chunk,_x] call noe_chunkToPos;
 
-			_colorSide set [_forEachIndex,1];
+			_colorSide = _allColors select _foreachIndex;
 
 			[_chunk,_x,_colorSide] call pertest_drawChunkSquad;
 
@@ -95,6 +102,7 @@ function(pertest_drawChunkSquad)
 	];
 	_basicPos set [2,(_basicPos select 2)+(_forEachIndex * 0.1)];
 	drawIcon3D ["", _color, _basicPos, 0.5, 0.5, 0,_tRender,1, 0.03, "TahomaB"];
+	_upside = _size;
 
 	drawLine3D [_linePos,_linePos vectorAdd [_size,0,0],_color];
 	drawLine3D [_linePos,_linePos vectorAdd [0,_size,0],_color];
@@ -102,10 +110,10 @@ function(pertest_drawChunkSquad)
 	drawLine3D [_linePos vectorAdd [_size,_size,0],_linePos vectorAdd [0,_size,0],_color];
 	//to up
 	
-	drawLine3D [_linePos vectorAdd [0,0,0],_linePos vectorAdd [0,0,upside],_color];
-	drawLine3D [_linePos vectorAdd [_size,0,0],_linePos vectorAdd [_size,0,upside],_color];
-	drawLine3D [_linePos vectorAdd [0,_size,0],_linePos vectorAdd [0,_size,upside],_color];
-	drawLine3D [_linePos vectorAdd [_size,_size,0],_linePos vectorAdd [_size,_size,upside],_color];
+	drawLine3D [_linePos vectorAdd [0,0,0],_linePos vectorAdd [0,0,_upside],_color];
+	drawLine3D [_linePos vectorAdd [_size,0,0],_linePos vectorAdd [_size,0,_upside],_color];
+	drawLine3D [_linePos vectorAdd [0,_size,0],_linePos vectorAdd [0,_size,_upside],_color];
+	drawLine3D [_linePos vectorAdd [_size,_size,0],_linePos vectorAdd [_size,_size,_upside],_color];
 	
 }
 
