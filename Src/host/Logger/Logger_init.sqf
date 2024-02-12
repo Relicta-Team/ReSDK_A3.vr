@@ -48,6 +48,7 @@ logger_internal_map = hashMapNew;
 })
 
 #define __log_prefix(typo) '(typo)	'
+#define __log_prefix_DEBUG "(DEBUG)	"
 
 #define isImplementedLoggerFunction(cat) !isNull( missionNamespace getvariable vec2(cat + "log",nil))
 
@@ -121,7 +122,7 @@ logger_internal_registerLogCategory = {
 	};
 	logDebug = {
 		#ifdef DEBUG
-		[__log_prefix(DEBUG) + format _this,"system","debug"] call systemLog;
+		[__log_prefix_DEBUG + format _this,"system","debug"] call systemLog;
 		#endif
 	};
 	logTrace = {
