@@ -52,7 +52,7 @@ init_function(vcom_emit_initialize)
 	vcom_emit_widgets = [widgetNull,widgetNull];
 
 	//насколько каждая точка может быть от начала координат (для любой оси)
-	vcom_emit_maxPointDistance = 10;
+	vcom_emit_maxPointDistance = 50;
 	vcom_emit_sliderPosChangeDelta = 0.001;
 
 	vcom_emit_emitterTypeAssoc = createHashMapFromArray [
