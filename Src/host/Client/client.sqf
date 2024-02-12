@@ -154,6 +154,9 @@ class(ServerClient) /*extends(NetObject)*/
 
 		//удаляем из претендентов
 		if getSelf(isReady) then {
+			
+			setSelf(isReady,false);
+			
 			if (call gm_isRoundLobby) then {
 				/*_setList = getSelf(charSettingsValues);
 
@@ -178,8 +181,6 @@ class(ServerClient) /*extends(NetObject)*/
 				};*/
 				callSelf(removeDefaultRoles); //Функционал убирания игрока из претендентов
 			};
-
-			setSelf(isReady,false);
 
 		};
 		if getSelf(isInEmbark) then {
@@ -714,7 +715,7 @@ class(ServerClient) /*extends(NetObject)*/
 				} else {
 
 					private _oldContenders =  getVarReflect(_oldData,"contenders_"+str (_forEachIndex+1));
-					private _oldClientIndex = _oldContenders findif {equals(_x,_client)};
+					private _oldClientIndex = _oldContenders findif {equals(_x,this)};
 					if (_oldClientIndex == -1) then {
 						warningformat("ServerClient::removeDefaultRoles() - Cant find client for remove in role %1",_role);
 					} else {
