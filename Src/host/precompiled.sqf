@@ -143,7 +143,7 @@ pc_oop_postInitClass = {
 				#ifdef EDITOR
 					_methods set [_forEachIndex,[_name,compile __sc]]
 				#endif 
-			};true
+			};
 		
 		} foreach _methods;
 

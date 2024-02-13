@@ -5,6 +5,18 @@
 #include "..\engine.hpp"
 #include "..\oop.hpp"
 
+#define TRACE_OOP_MODULE_RELOAD
+
+#ifdef TRACE_OOP_MODULE_RELOAD
+    #define mlog(text) trace(text)
+    #define mlogformat(text,fmt) traceformat(text,fmt)
+#else
+    #define mlog(text) 
+    #define mlogformat(text,fmt)
+#endif
+
+oop_lastTypeLoadTime = 0;
+
 #define NULLCLASS "<NAN_CLASS>"
 #define EXIT_IF_ERROR(mes) if (_iserror || server_isLocked) exitWith {error(mes); [mes] call logCritical; false}
 #define shell_init(__name__system,__value__system) format["_thisobj setvariable ['%1',%2]; ",__name__system,__value__system]
@@ -48,7 +60,7 @@ oop_loadTypes = {
 
     private _iserror = false;
     private _oop_initTime = diag_ticktime;
-
+    
     _attr_ex_init_list = [];
     {
         _pObj = missionnamespace getvariable ['pt_' + _x,NULLCLASS];
@@ -90,6 +102,7 @@ oop_loadTypes = {
         } else {
             format['private ctxParams = _this; private this = createObj; private _pt = pt_%2; allocName; this setvariable ["%1",_pt]; ',PROTOTYPE_VAR_NAME,_x];
         };
+        _shell_data = [_shell_data];
 
         //attributes and autoref init
         private _attrs = [];
@@ -134,7 +147,7 @@ oop_loadTypes = {
 
                     //reg new field
                     if (_isSim) then {
-                        _shell_data = _shell_data + shell_init(_name,_value);
+                        _shell_data pushBack shell_init(_name,_value);
                     };
                 };
             } foreach (_mot getvariable '__fields');
@@ -199,13 +212,13 @@ oop_loadTypes = {
 
         //calling ctors
         if (_isSim) then {
-            _shell_data = _shell_data + '{this call (_x getvariable "constructor")} foreach (this getvariable "proto" getvariable "__ctors"); this';
+            _shell_data pushBack '{this call (_x getvariable "constructor")} foreach (this getvariable "proto" getvariable "__ctors"); this';
         };
 
         #ifndef __VM_VALIDATE
         
         if (_isSim) then {
-            _pObj setvariable ['__instance',compile _shell_data];
+            _pObj setvariable ['__instance',compile (_shell_data joinString "")];
         };
 
         #endif
@@ -299,11 +312,13 @@ oop_loadTypes = {
 
     EXIT_IF_ERROR("Class compilation was terminated");
 
+    oop_lastTypeLoadTime = diag_ticktime - _oop_initTime;
+
     logoop("--------------------------------------------------");
-    logoop("Classes loaded in " + str (diag_ticktime - _oop_initTime) + " sec");
+    logoop("Classes loaded in " + str (oop_lastTypeLoadTime) + " sec");
 
     if (_isEditor) then {
-        goasm_build_lastTime = diag_ticktime - _oop_initTime;
+        goasm_build_lastTime = oop_lastTypeLoadTime;
     };
 
     true
@@ -314,14 +329,14 @@ oop_loadTypes = {
 
 //Общий метод обработки атрибутов членов класса
 oop_init_handleMemberAttributes = {
-    params ["_memberNameStr","_refArr","_flag"];
+    params ["_memberNameStr","_refDict","_flag"];
     private _isInherAtr = not_equals(_mot,_pObj);
     {
         _x params ["_mem_name","_atrlist"];
         _mem_name = tolower _mem_name; //fix fields inspector attributes
         
         //Член не имеет атрибутов. проводим регистрацию
-        if !(_mem_name in _refArr) then {
+        if !(_mem_name in _refDict) then {
             private _list = [];
 
             {
@@ -331,11 +346,11 @@ oop_init_handleMemberAttributes = {
             } foreach _atrlist;
 
             if (count _list > 0) then {
-                _refArr set [_mem_name,_list];
+                _refDict set [_mem_name,_list];
             };
         } else {
             //Получаем список атрибутов
-            _curAtList = _refArr get _mem_name;
+            _curAtList = _refDict get _mem_name;
             //Если атрибут есть в списке наследования - пропускаем
             {
                 _atName = _x select 0;
@@ -351,23 +366,26 @@ oop_init_handleMemberAttributes = {
 };
 
 oop_init_handleClassAttributes = {
-    params ["_memberNameStr","_refArr","_flag"];
+    params ["_memberNameStr","_refDict","_flag"];
     private _isInherAtr = not_equals(_mot,_pObj);
+    private _atdata = null;
+    private _atName = null;
+
     {
         //если атрибут не в классе
         _atName = _x select 0;
-        if !(_atName in _refArr) then {
-            private _atdata = _x select [1,(count _x) - 1];
+        if !(_atName in _refDict) then {
+            _atdata = _x select [1,(count _x) - 1];
             if ([_atName,_mot,_flag,_atdata,_isInherAtr] call goasm_attributes_canAddAttribute) then {
-                _refArr set [_atName,_atdata];
+                _refDict set [_atName,_atdata];
             };
         } else {
-            private _atdata = _x select [1,(count _x) - 1];
+            _atdata = _x select [1,(count _x) - 1];
             if ([_atName,_mot,_flag,_atdata,_isInherAtr] call goasm_attributes_canAddAttribute) then {
                 //fix upper inheritance attributes. Editor 1.4
                 //Так как наследование идёт сверху вниз нам не нужно переопределять дочерними свойствами значения атрибута при наличии
-                if (_atName in _refArr) exitwith {};
-                _refArr set [_atName,_atdata];
+                if (_atName in _refDict) exitwith {};
+                _refDict set [_atName,_atdata];
             };
         };
     } foreach (_mot getVariable [_memberNameStr,[]]);
@@ -385,7 +403,7 @@ oop_reloadModule = {
         false
     };
 
-    traceformat("Start reload module %1",_filepath)
+    mlogformat("Start reload module %1",_filepath)
     
     //safeguard reload gamemodule
     pc_oop_intList_loadObjectPool = [];
@@ -403,11 +421,11 @@ oop_reloadModule = {
         || {_x getvariable ["classname",""] == ""}
     } == -1;
     
-    traceformat("Check classes ready %1",_allReady)
-    traceformat("Object list: %1",_classObjectList)
+    mlogformat("Check classes ready %1",_allReady)
+    mlogformat("Object list: %1",_classObjectList)
 
     if (_allReady) then {
-        traceformat("Start reloading %1 classes",count _classObjectList)
+        mlogformat("Start reloading %1 classes",count _classObjectList)
 
         //pathing process
         private _tempClass = nullPtr;
@@ -417,35 +435,46 @@ oop_reloadModule = {
             private _tObj = typeGetFromString(_clsext);
             private _curMethods = _tObj getvariable "__methods";
             private _curFields = _tObj getvariable "__fields";
-            private _excludedMethods = [];
 
-            traceformat("   Processing %1",_clsext)
+            mlogformat("   Processing %1",_clsext)
 
-            trace("   Check methods")
+            mlog("   Check methods")
             {
                 _x params ["_metName","_oldCode"];
                 if (_metName in _mMap && _classname != _clsext) then {
-                    traceformat("       Overriden method - %1",_metName)
+                    mlogformat("       Overriden method - %1",_metName)
                     //overriden. exclude method from childs
-                    //_excludedMethods pushBack _metName;
                     _mMap deleteAt _metName;
                 } else {
-                    traceformat("       Update method - %1",_metName)
+                    mlogformat("       Update method - %1",_metName)
                     //not overriden. update value
                     _tObj setvariable [_metName,_mMap get _metName];
                 };
             } foreach _curMethods;
 
+            // mlog(" Check fields")
+            // //Существующие поля перезаписываются если отличаются 
+            // {
+            //     _x params ["_fldName","_oldSerVal"];
+            //     if (_fldName in _fmap && _classname != _clsext) then {
+            //         mlogformat("       Override field - %1",_fldName)
+
+            //         _fMap deleteAt _fldName;
+            //     } else {
+            //         mlogformat("       Update field - %1",_fldName)
+            //     };
+            // } foreach _curFields;
+
             //exclude inherited members process
             
 
             //collect childs
-            traceformat("   Child process %1: %2",_clsext arg _tObj getvariable "__childList")
+            mlogformat("   Child process %1: %2",_clsext arg _tObj getvariable "__childList")
             {
                 [_x,_fMap,_mMap] call _baseToChilds;
             } foreach (_tObj getvariable "__childList");
 
-            traceformat("   =========== end process %1",_clsext)
+            mlogformat("   =========== end process %1",_clsext)
         };
 
         {
@@ -460,9 +489,9 @@ oop_reloadModule = {
                 */
                 private _fieldsMap = createHashMapFromArray (_tempClass getvariable "__fields");
                 private _methodsMap = createHashMapFromArray (_tempClass getvariable "__methods");
-                traceformat("---- BEGIN RELOAD %1",_classname)
+                mlogformat("---- BEGIN RELOAD %1",_classname)
                 [_classname,_fieldsMap,_methodsMap] call _baseToChilds;
-                traceformat("------ END RELOAD %1",_classname)
+                mlogformat("------ END RELOAD %1",_classname)
 
             } else {
                 errorformat("Cant path class %1 - not exists",_classname);
