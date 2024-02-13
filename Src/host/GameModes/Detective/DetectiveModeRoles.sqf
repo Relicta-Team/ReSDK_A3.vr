@@ -641,7 +641,7 @@ class(RDetectiveHelper) extends(RDetectiveModeRole)
 	#ifdef EDITOR
 	getter_func(canVisibleAfterStart,gm_roundDuration >= 5);
 	#else
-	getter_func(canVisibleAfterStart,gm_roundDuration >= (60 * 25));
+	getter_func(canVisibleAfterStart,gm_roundDuration >= (60 * 2));
 	#endif
 	getter_func(getInitialPos,vec3(3632,3667.2,13.3369));
 	getter_func(getInitialDir,92.3);
