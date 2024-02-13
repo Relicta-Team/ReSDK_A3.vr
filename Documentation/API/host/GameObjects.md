@@ -4256,7 +4256,7 @@ Replaced value:
 ```sqf
 'v'
 ```
-File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 1314](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L1314)
+File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 1315](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L1315)
 # Mob_Inventory.sqf
 
 ## __switchVars(prevname,nextname)

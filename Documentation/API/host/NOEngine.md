@@ -1075,7 +1075,6 @@ File: [host\NOEngine\NOEngine_Shared.sqf at line 22](../../../Src/host/NOEngine/
 Type: function
 
 Description: 
-- Param: _mobClient
 - Param: _loadList
 - Param: _chunk
 - Param: _chunkType
