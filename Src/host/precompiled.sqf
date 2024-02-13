@@ -11,6 +11,9 @@
 */
 #include <engine.hpp>
 
+pc_oop_flag_reloadModule = false;
+pc_oop_intList_loadObjectPool = [];
+
 /* ------------------------------------------------------
 	Region: generic class info
 ------------------------------------------------------ */
@@ -34,13 +37,21 @@ pc_oop_classBegin = {
 
 pc_oop_regClassTable = {
 	params ["_class"];
+	if (pc_oop_flag_reloadModule) exitWith {};
+
 	p_table_allclassnames pushback _class;
 };
 
 pc_oop_newTypeObj = {
 	params ["_class"];
 	private _obj = createObj;
-	missionNamespace setVariable ["pt_"+_class,_obj];
+	
+	if (pc_oop_flag_reloadModule) then {
+		pc_oop_intList_loadObjectPool pushBack _obj;
+	} else { 
+		missionNamespace setVariable ["pt_"+_class,_obj];
+	};
+
 	_obj
 };
 
@@ -60,20 +71,29 @@ pc_oop_declareEOC = {
 		_pt_obj setvariable ["__decl_info_end__",_this];
 	};
 
-	p_table_inheritance pushback [_class,_mother];
 	_pt_obj setName format[pc_oop_carr_tntps select is3DEN,_class];
-	_pt_obj setvariable ['__fields',_fields];
-	_pt_obj setvariable ['__methods',_methods];
-	_pt_obj setvariable ['__motherClass',_mother];
-	_pt_obj setVariable ['__motherObject',nullPtr];
-	_pt_obj setVariable ['__childList',[]];
-	_pt_obj setVariable ['__inhlistCase',[]];
-	_pt_obj setvariable ['__inhlist',[]];
+	
+	if (!pc_oop_flag_reloadModule) then {
+		p_table_inheritance pushback [_class,_mother];
+	} else {
+		_pt_obj setName ("<TEMP_OBJECT> "+(name _pt_obj));
+	};
+
+	_pt_obj setvariable ['__fields',_fields]; //члены, определенные в этом классе; vec2(name:str,value:serialized)
+	_pt_obj setvariable ['__methods',_methods]; //методы, определенные в этом классе; vec2(name:str,method:code)
+	
+	_pt_obj setvariable ['__motherClass',_mother]; //класс-родитель
+	//!not used: _pt_obj setVariable ['__motherObject',nullPtr];
+	_pt_obj setVariable ['__childList',[]]; //прямые наследники
+	_pt_obj setvariable ['__inhlist',[]]; //родители (нижний регистр)
+	_pt_obj setVariable ['__inhlistCase',[]]; //родители (фактические имена)
 	_pt_obj setvariable ['__instances',0];
 	_pt_obj setvariable ["classname",_class];
-	_pt_obj setvariable ["__attributes",_attributes];
-	_pt_obj setvariable ["__autoref",_autoref];
+	_pt_obj setvariable ["__attributes",_attributes]; //классовые атрибуты
+	_pt_obj setvariable ["__autoref",_autoref]; //имена членов (регистрозависимые). Если не пусто то создает ссылку по __autoref_list
 	_pt_obj setvariable ["__decl_info__",_decl_info___];
+	//при компиляции реализует __allfields, __allmethods (все члены, нижний регистр)
+	//__instance - скомпилированный конструктор
 	call pc_oop_declareMemAttrs;
 
 	call pc_oop_postInitClass;

@@ -8,16 +8,16 @@
 
 fileWatcher_enableSystem = true;
 
-fileWatcher_autoReloadObjects = !true;
+fileWatcher_autoReloadObjects = true;
 
 fileWatcher_list_checkedPathsForReloadRequest = [
 	"\Src\host\GameObjects\"
 	,"\Src\host\GameModes\"
-	,"\Src\host\ReNode\compiled"
+	,"\Src\host\ReNode\compiled\"
 ];
 fileWatcher_list_ignoredPathParts = [
 	"\GameModes\scripted_loader.hpp",
-	"\Src\host\ReNode\compile\script_list.hpp",
+	"\Src\host\ReNode\compiled\script_list.hpp",
 	"\Src\Editor\Bin\Maps",
 	".txt"
 ];
@@ -48,7 +48,7 @@ fileWatcher_init = {
 	["FileWatcher","init",[getMissionPath "Src","*.*",false]] call rescript_callCommand;
 
 	fileWatcher_internal_lastTickTime = 0;
-		fileWatcher_internal_const_updateDelay = 1;
+		fileWatcher_internal_const_updateDelay = 0.001;
 	fileWatcher_internal_hasAnyUpdate = false;
 	fileWatcher_internal_lastEvent = []; //editor, host
 	fileWatcher_internal_preparedLastEvent = [];
@@ -63,16 +63,18 @@ fileWatcher_onFrame = {
 		fileWatcher_internal_lastTickTime = tickTime + fileWatcher_internal_const_updateDelay;
 		if (fileWatcher_internal_hasAnyUpdate) then {
 			fileWatcher_internal_hasAnyUpdate = false;
+			{
+				_x params ["_lowerPath","_event"];
 
-			fileWatcher_internal_preparedLastEvent params ["_lowerPath","_event"];
+				if (fileWatcher_list_ignoredPathParts findif {_x in _lowerPath}!=-1) then {continue};
+				if (fileWatcher_list_checkedPathsForReloadRequest findif {_x in _lowerPath}==-1) then {continue};
 
-			if (fileWatcher_list_ignoredPathParts findif {_x in _lowerPath}!=-1) exitwith {};
-			if (fileWatcher_list_checkedPathsForReloadRequest findif {_x in _lowerPath}==-1) exitwith {};
-
-			if (_event == "Changed") then {
-				[_lowerPath] call FileWatcher_onChangeFile;
-			};
-
+				if (_event == "Changed") then {
+					[_lowerPath] call FileWatcher_onChangeFile;
+				};
+			} foreach fileWatcher_internal_preparedLastEvent;
+			
+			fileWatcher_internal_preparedLastEvent = [];
 			//["TODO: filewatcher update"] call showInfo;
 		};
 	};
@@ -84,9 +86,11 @@ FileWatcher_handleCallbackExtension = {
 		//double shot
 	};
 
+	fileWatcher_internal_lastEvent = _this;
+
 	(parseSimpleArray (_this)) params ["_path","_mode","_strmode"];
 	private _lowerPath = toLower _path;
-	fileWatcher_internal_preparedLastEvent = [_lowerPath,_mode];
+	fileWatcher_internal_preparedLastEvent pushBack [_lowerPath,_mode];
 
 	["(%2) callback fws: %1",_path,_mode] call printTrace;
 	fileWatcher_internal_hasAnyUpdate = true;
@@ -95,8 +99,9 @@ FileWatcher_handleCallbackExtension = {
 FileWatcher_onChangeFile = {
 	params ["_filepath"];
 	
-	["Perform %1","FileWatcher_onChangeFile"] call printTrace;
 	private _relpath = _filepath splitString "\";
+	
+
 	{
 		if (_x == "src") exitwith {};
 		_relpath set [_foreachIndex,objnull];
@@ -104,6 +109,8 @@ FileWatcher_onChangeFile = {
 
 	_relpath = _relpath - [objnull];
 	_relpath = _relpath joinString "\";
+
+	["Perform %1 (%2)","FileWatcher_onChangeFile",_relpath] call printTrace;
 
 	if (
 		(fileWatcher_clientChangedPath in _relpath)
@@ -120,6 +127,8 @@ FileWatcher_onChangeFile = {
 			call _recompAct;
 		};
 	};
+
+	if !([_relpath,".sqf"] call stringEndWith) exitWith {}; //is not a file
 
 	if (fileWatcher_autoReloadObjects) exitwith {
 		nextFrameParams(oop_reloadModule,[_relpath]);

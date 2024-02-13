@@ -28,11 +28,19 @@ oop_loadTypes = {
         Порядок выполнения:
         Если _typemap не ссылка от p_table_allclassnames
         то в этот лист будут добавлены новые типы
+        Данная опция позволяет сделать пакетную загрузку классов (doll)
     */
     //inheritance
     private _isEditor = is3DEN;
     private _isSim = !_isEditor;
     private _printError = ifcheck(_isSim,logCritical,printError);
+
+
+    private _typeLoadedList = if isNullVar(_typemap) then {
+        p_table_allclassnames
+    } else {
+        []
+    };
 
     if (_isSim) then {
         logoop("Starting class compilation");
@@ -217,15 +225,16 @@ oop_loadTypes = {
         _pObj setvariable ['__ctors',_ctor_objects];
         _pObj setvariable ['__dtors',_dtor_objects];
 
-        //added mother object
-        if !((_pObj getVariable ['__motherClass',TYPE_SUPER_BASE]) isEqualTo TYPE_SUPER_BASE) then {
-            _pObj setvariable ['__motherObject',
-                missionNamespace getVariable [
-                    'pt_' +
-                    (_pObj getVariable ['__motherClass',TYPE_SUPER_BASE])
-                ,TYPE_SUPER_BASE]
-            ];
-        };
+        //!not used anywhere
+        //added mother object 
+        // if !((_pObj getVariable ['__motherClass',TYPE_SUPER_BASE]) isEqualTo TYPE_SUPER_BASE) then {
+        //     _pObj setvariable ['__motherObject',
+        //         missionNamespace getVariable [
+        //             'pt_' +
+        //             (_pObj getVariable ['__motherClass',TYPE_SUPER_BASE])
+        //         ,TYPE_SUPER_BASE]
+        //     ];
+        // };
 
         //adding reflect info: field and method names
         _pObj setVariable ["__allfields",_exist_fields];
@@ -257,7 +266,7 @@ oop_loadTypes = {
         //log("shell object <" + _x + "> is > " + _shell_data);
         //logoop("Class loaded - " + _x);
 
-    } forEach p_table_allclassnames;
+    } forEach _typeLoadedList;
 
     private _errorAttr = {
         ["Cant find attribute <%1> in class <%2>",_name arg _pObj getVariable ["classname" arg "UNKNOWN_CLASS"]] call _printError;
@@ -362,4 +371,106 @@ oop_init_handleClassAttributes = {
             };
         };
     } foreach (_mot getVariable [_memberNameStr,[]]);
+};
+
+oop_reloadModule = {
+    params ["_filepath"];
+    
+    if !([_filepath,".sqf"] call stringEndWith) exitWith {
+        warningformat("Reloaded module is not a script file: %1",_filepath);
+        false
+    };
+    
+    traceformat("Start reload module %1",_filepath)
+    
+    //safeguard reload gamemodule
+    pc_oop_intList_loadObjectPool = [];
+    pc_oop_flag_reloadModule = true;
+    call compile preprocessFileLineNumbers _filepath;
+    pc_oop_flag_reloadModule = false;
+
+    private _classObjectList = pc_oop_intList_loadObjectPool;
+    pc_oop_intList_loadObjectPool = []; //cleanup pool storage
+    //firstpass: check ready classes
+    private _allReady = _classObjectList findif {
+        isNullVar(_x)
+        || {isNullReference(_x)}
+        || {not_equalTypes(_x,nullPtr)}
+        || {_x getvariable ["classname",""] == ""}
+    } == -1;
+    
+    traceformat("Check classes ready %1",_allReady)
+    traceformat("Object list: %1",_classObjectList)
+
+    if (_allReady) then {
+        traceformat("Start reloading %1 classes",count _classObjectList)
+
+        //pathing process
+        private _tempClass = nullPtr;
+        private _baseToChilds = {
+            params ["_clsext","_fMap","_mMap"];
+
+            private _tObj = typeGetFromString(_clsext);
+            private _curMethods = _tObj getvariable "__methods";
+            private _curFields = _tObj getvariable "__fields";
+            private _excludedMethods = [];
+
+            traceformat("   Processing %1",_clsext)
+
+            trace("   Check methods")
+            {
+                _x params ["_metName","_oldCode"];
+                if (_metName in _mMap && _classname != _clsext) then {
+                    traceformat("       Overriden method - %1",_metName)
+                    //overriden. exclude method from childs
+                    //_excludedMethods pushBack _metName;
+                    _mMap deleteAt _metName;
+                } else {
+                    traceformat("       Update method - %1",_metName)
+                    //not overriden. update value
+                    _tObj setvariable [_metName,_mMap get _metName];
+                };
+            } foreach _curMethods;
+
+            //exclude inherited members process
+            
+
+            //collect childs
+            traceformat("   Child process %1: %2",_clsext arg _tObj getvariable "__childList")
+            {
+                [_x,_fMap,_mMap] call _baseToChilds;
+            } foreach (_tObj getvariable "__childList");
+
+            traceformat("   =========== end process %1",_clsext)
+        };
+
+        {
+            _tempClass = _x;
+            _classname = _tempClass getvariable "classname";
+            if isImplementClass(_classname) then {
+                /*
+                    Наследование снизу вверх (от базовых к дочерним) __childList
+                    Если метод есть в дочернем - выход
+                    иначе
+                    патчим методы
+                */
+                private _fieldsMap = createHashMapFromArray (_tempClass getvariable "__fields");
+                private _methodsMap = createHashMapFromArray (_tempClass getvariable "__methods");
+                traceformat("---- BEGIN RELOAD %1",_classname)
+                [_classname,_fieldsMap,_methodsMap] call _baseToChilds;
+                traceformat("------ END RELOAD %1",_classname)
+
+            } else {
+                errorformat("Cant path class %1 - not exists",_classname);
+            };
+            
+            deleteObj _tempClass;
+        } foreach _classObjectList;
+    } else {
+        
+        //cleanup temporary objects on error
+        {deleteObj _x;} foreach _classObjectList;
+    };
+
+
 };
