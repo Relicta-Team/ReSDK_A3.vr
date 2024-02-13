@@ -196,8 +196,6 @@
 	#define getObjectsTypeOfStr(type) ([type,false] call oop_getinhlist)
 	#define getAllObjectsTypeOfStr(type) ([type,true] call oop_getinhlist)
 
-//вызывает базовый класс получая доступ
-//NOT WORK! ERROR RECURSION -> #define call Base(metname) call (this getVariable PROTOTYPE_VAR_NAME getVariable ("__motherObject") getvariable #metname)
 //вызывает базовый класс по пользовательскому пути
 //При переопределении изменить и в крафтовых классах
 #define callSuper(superclass,metname) call ( pt_##superclass getVariable #metname )

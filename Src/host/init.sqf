@@ -79,6 +79,7 @@ if (!isMultiplayer) then {
 	loadFile("src\host\Tools\ProxyItemsEditor\ProxyItemsEditor.sqf");
 	loadFile("src\host\Tools\IconGenerator\IconGenerator.sqf");
 	loadFile("src\host\Tools\EditorDebug\EditorDebug.sqf");
+	loadFile("src\host\Tools\HotReload\HotReload_init.sqf");
 
 	loadFile("src\host\ServerSceneTest\serverscrene_init.sqf"); //for testing only
 };
