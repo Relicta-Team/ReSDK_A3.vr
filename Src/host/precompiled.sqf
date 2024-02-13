@@ -14,6 +14,35 @@
 /* ------------------------------------------------------
 	Region: generic class info
 ------------------------------------------------------ */
+pc_oop_classBegin = {
+	// params ["_className","_definedIn"];
+	// _decl_info___ = _definedIn;
+	// __testSyntaxClass
+	// _class = _className; _mother = "object";
+	// p_table_allclassnames pushback _class;
+	// private _fields = []; 
+	// private _methods = []; 
+	// private _attributes = []; 
+	// private _autoref = [];
+	// private _editor_attrs_cls = [];
+	// call pc_oop_declareClassAttr;
+	// _editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
+	// _classmet_declinfo = createHashMap; \
+	// missionNamespace setVariable ["pt_"+_class,createObj]; private _pt_obj = missionNamespace getVariable ("pt_"+_class);
+
+};
+
+pc_oop_regClassTable = {
+	params ["_class"];
+	p_table_allclassnames pushback _class;
+};
+
+pc_oop_newTypeObj = {
+	params ["_class"];
+	private _obj = createObj;
+	missionNamespace setVariable ["pt_"+_class,_obj];
+	_obj
+};
 
 //функция декларатор атрибутов класса
 pc_oop_declareClassAttr = {
@@ -30,6 +59,24 @@ pc_oop_declareEOC = {
 	if (is3DEN) then {
 		_pt_obj setvariable ["__decl_info_end__",_this];
 	};
+
+	p_table_inheritance pushback [_class,_mother];
+	_pt_obj setName format[pc_oop_carr_tntps select is3DEN,_class];
+	_pt_obj setvariable ['__fields',_fields];
+	_pt_obj setvariable ['__methods',_methods];
+	_pt_obj setvariable ['__motherClass',_mother];
+	_pt_obj setVariable ['__motherObject',nullPtr];
+	_pt_obj setVariable ['__childList',[]];
+	_pt_obj setVariable ['__inhlistCase',[]];
+	_pt_obj setvariable ['__inhlist',[]];
+	_pt_obj setvariable ['__instances',0];
+	_pt_obj setvariable ["classname",_class];
+	_pt_obj setvariable ["__attributes",_attributes];
+	_pt_obj setvariable ["__autoref",_autoref];
+	_pt_obj setvariable ["__decl_info__",_decl_info___];
+	call pc_oop_declareMemAttrs;
+
+	call pc_oop_postInitClass;
 };
 
 //константные типы объектов. 0 - обычные называния типов, 1 - названия в редакторе

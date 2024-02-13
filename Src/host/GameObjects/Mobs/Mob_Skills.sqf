@@ -105,15 +105,15 @@ region(Skilldef macros)
 		getBonus - получает бонусное значение скилла
 		initSkill - устанавливает базовое значение скилла и производит рекалькуляцию (если надо)
 	*/
-	#define defFuncSkill(name,recalc,ismod) __func_noStrName('get' + 'name') {objParams(); private _##name = getSelf(name); ((_##name select SKILL_BASE) + (_##name select SKILL_MOD)) ismod}; \
-	__func_noStrName('add' + 'name') {objParams_1(_val); \
+	#define defFuncSkill(name,recalc,ismod) func_runtime('get' + 'name') {objParams(); private _##name = getSelf(name); ((_##name select SKILL_BASE) + (_##name select SKILL_MOD)) ismod}; \
+	func_runtime('add' + 'name') {objParams_1(_val); \
 		private _ref = getSelf(name); MODARR(_ref,SKILL_MOD,+_val); \
 		warningformat('Added %1 ed on stat <name>. Now is %2 (%3)',_val arg _ref arg _get_skill_byref(_ref)); \
 		recalc \
 	}; \
-	__func_noStrName('getBase' + 'name') {objParams(); getSelf(name) select SKILL_BASE}; \
-	__func_noStrName('getBonus' + 'name') {objParams(); getSelf(name) select SKILL_MOD}; \
-	__func_noStrName('init' + 'name') {objParams_1(_val); \
+	func_runtime('getBase' + 'name') {objParams(); getSelf(name) select SKILL_BASE}; \
+	func_runtime('getBonus' + 'name') {objParams(); getSelf(name) select SKILL_MOD}; \
+	func_runtime('init' + 'name') {objParams_1(_val); \
 		private _ref = getSelf(name); _ref set [SKILL_BASE,_val]; \
 		recalc \
 	}
@@ -121,31 +121,31 @@ region(Skilldef macros)
 		Отличие этого макроса от вышнего лишь в том,
 		что при инициализации устанавливается значение модификатора
 	*/
-	#define defFuncATTRIBUTE(name,recalc) __func_noStrName('get' + 'name') {objParams(); private _##name = getSelf(name); (_##name select SKILL_BASE) + (_##name select SKILL_MOD)}; \
-	__func_noStrName('add' + 'name') {objParams_1(_val); \
+	#define defFuncATTRIBUTE(name,recalc) func_runtime('get' + 'name') {objParams(); private _##name = getSelf(name); (_##name select SKILL_BASE) + (_##name select SKILL_MOD)}; \
+	func_runtime('add' + 'name') {objParams_1(_val); \
 		private _ref = getSelf(name); MODARR(_ref,SKILL_MOD,+_val); \
 		recalc \
 	}; \
-	__func_noStrName('getBase' + 'name') {objParams(); getSelf(name) select SKILL_BASE}; \
-	__func_noStrName('getBonus' + 'name') {objParams(); getSelf(name) select SKILL_MOD}; \
-	__func_noStrName('init' + 'name') {objParams_1(_val); \
+	func_runtime('getBase' + 'name') {objParams(); getSelf(name) select SKILL_BASE}; \
+	func_runtime('getBonus' + 'name') {objParams(); getSelf(name) select SKILL_MOD}; \
+	func_runtime('init' + 'name') {objParams_1(_val); \
 		private _ref = getSelf(name); _ref set [SKILL_MOD,_val]; \
 		recalc \
 	}
 
 	//common skills macros
 	// накопленный опыт скилла как сама переменная скилла
-	#define defFuncCommonSkill(name,basev) __func_noStrName('get' + 'name') { \
+	#define defFuncCommonSkill(name,basev) func_runtime('get' + 'name') { \
 		objParams(); \
 		basev + getSelf(name) \
 	}; \
-	 _csl = 'name'; __var_noStrName(_csl,0)
+	 _csl = 'name'; var_runtime(_csl,0)
 
-	#define defFuncCommonSkillOverride(name) __func_noStrName('get' + 'name') { \
+	#define defFuncCommonSkillOverride(name) func_runtime('get' + 'name') { \
 		objParams(); \
 		getSelf(name) \
 	}; \
-	_csl = 'name'; __var_noStrName(_csl,0)
+	_csl = 'name'; var_runtime(_csl,0)
 
 region(Skill functions)
 	// =================== СИЛА ======================
