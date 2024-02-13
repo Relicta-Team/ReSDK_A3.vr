@@ -852,7 +852,7 @@ region(Kill info)
 			"Жертве воткнули нож в спину.",
 			"Жертве воткнули нож в голову"
 		];
-		var_inlinevalue(killProcessText,str pick _t);
+		var_inlinevalue(killProcessText,pick _t);
 	endclass
 	
 	class(GMDet_KillInfo_Melee_Crowbar) extends(GMDet_KillInfo)
@@ -862,7 +862,7 @@ region(Kill info)
 			"Жертве пронзили голову.",
 			"Жертве снесли голову ломом."
 		];
-		var_inlinevalue(killProcessText,str pick _t);
+		var_inlinevalue(killProcessText,pick _t);
 	endclass
 
 	class(GMDet_KillInfo_Melee_Axe) extends(GMDet_KillInfo)
@@ -871,7 +871,7 @@ region(Kill info)
 			"Жертве отрубили голову топором.",
 			"Жертву изрубили на куски топором."
 		];
-		var_inlinevalue(killProcessText,str pick _t);
+		var_inlinevalue(killProcessText,pick _t);
 	endclass
 	
 	class(GMDet_KillInfo_Venom) extends(GMDet_KillInfo)
@@ -879,7 +879,7 @@ region(Kill info)
 			"Жертву отравили неизвестным веществом.",
 			"Жертву отравили химикатами."
 		];
-		var_inlinevalue(killProcessText,str pick _t);
+		var_inlinevalue(killProcessText,pick _t);
 	endclass
 	
 	class(GMDet_KillInfo_Forced) extends(GMDet_KillInfo)
@@ -890,7 +890,7 @@ region(Kill info)
 			"Жертве сломали шею.",
 			"Жертву задушили."
 		];
-		var_inlinevalue(killProcessText,str pick _t);
+		var_inlinevalue(killProcessText,pick _t);
 	endclass
 
 region(murder reason)
