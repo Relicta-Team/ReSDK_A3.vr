@@ -341,7 +341,7 @@ Replaced value:
 ```sqf
 (_curEvid == lvl && gm_roundDuration >= (time) && othrcond)
 ```
-File: [host\GameModes\Detective\DetectiveModeRoles.sqf at line 348](../../../Src/host/GameModes/Detective/DetectiveModeRoles.sqf#L348)
+File: [host\GameModes\Detective\DetectiveModeRoles.sqf at line 355](../../../Src/host/GameModes/Detective/DetectiveModeRoles.sqf#L355)
 ## evidCheck(lvl,time,othrcond)
 
 Type: constant
@@ -357,7 +357,7 @@ Replaced value:
 ```sqf
 (_curEvid == lvl && gm_roundDuration >= ((time)*60) && othrcond)
 ```
-File: [host\GameModes\Detective\DetectiveModeRoles.sqf at line 350](../../../Src/host/GameModes/Detective/DetectiveModeRoles.sqf#L350)
+File: [host\GameModes\Detective\DetectiveModeRoles.sqf at line 357](../../../Src/host/GameModes/Detective/DetectiveModeRoles.sqf#L357)
 # StationRoles.sqf
 
 ## regKeyInUniform(cloth,owners,name__)

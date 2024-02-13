@@ -3629,7 +3629,7 @@ Replaced value:
 ```sqf
 (getSelf(owner) call anim_getUnitAnim)
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 786](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L786)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 794](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L794)
 ## __data_light_slot__
 
 Type: constant
@@ -3641,7 +3641,7 @@ Replaced value:
 ```sqf
 [[INV_BACKPACK,null], [INV_ARMOR,null], [INV_HEAD,null], [INV_BACK,null],[INV_CLOTH,null],[INV_FACE,null],[INV_HAND_R,null],[INV_HAND_L,null],[INV_BELT,null]]
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 896](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L896)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 904](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L904)
 ## debug_internal_getinteractiontarget_spheres
 
 Type: Variable
@@ -4545,15 +4545,15 @@ Description:
 
 Replaced value:
 ```sqf
-__func_noStrName('get' + 'name') {objParams(); private _##name = getSelf(name); ((_##name select SKILL_BASE) + (_##name select SKILL_MOD)) ismod}; \
-	__func_noStrName('add' + 'name') {objParams_1(_val); \
+func_runtime('get' + 'name') {objParams(); private _##name = getSelf(name); ((_##name select SKILL_BASE) + (_##name select SKILL_MOD)) ismod}; \
+	func_runtime('add' + 'name') {objParams_1(_val); \
 		private _ref = getSelf(name); MODARR(_ref,SKILL_MOD,+_val); \
 		warningformat('Added %1 ed on stat <name>. Now is %2 (%3)',_val arg _ref arg _get_skill_byref(_ref)); \
 		recalc \
 	}; \
-	__func_noStrName('getBase' + 'name') {objParams(); getSelf(name) select SKILL_BASE}; \
-	__func_noStrName('getBonus' + 'name') {objParams(); getSelf(name) select SKILL_MOD}; \
-	__func_noStrName('init' + 'name') {objParams_1(_val); \
+	func_runtime('getBase' + 'name') {objParams(); getSelf(name) select SKILL_BASE}; \
+	func_runtime('getBonus' + 'name') {objParams(); getSelf(name) select SKILL_MOD}; \
+	func_runtime('init' + 'name') {objParams_1(_val); \
 		private _ref = getSelf(name); _ref set [SKILL_BASE,_val]; \
 		recalc \
 	}
@@ -4569,14 +4569,14 @@ Description:
 
 Replaced value:
 ```sqf
-__func_noStrName('get' + 'name') {objParams(); private _##name = getSelf(name); (_##name select SKILL_BASE) + (_##name select SKILL_MOD)}; \
-	__func_noStrName('add' + 'name') {objParams_1(_val); \
+func_runtime('get' + 'name') {objParams(); private _##name = getSelf(name); (_##name select SKILL_BASE) + (_##name select SKILL_MOD)}; \
+	func_runtime('add' + 'name') {objParams_1(_val); \
 		private _ref = getSelf(name); MODARR(_ref,SKILL_MOD,+_val); \
 		recalc \
 	}; \
-	__func_noStrName('getBase' + 'name') {objParams(); getSelf(name) select SKILL_BASE}; \
-	__func_noStrName('getBonus' + 'name') {objParams(); getSelf(name) select SKILL_MOD}; \
-	__func_noStrName('init' + 'name') {objParams_1(_val); \
+	func_runtime('getBase' + 'name') {objParams(); getSelf(name) select SKILL_BASE}; \
+	func_runtime('getBonus' + 'name') {objParams(); getSelf(name) select SKILL_MOD}; \
+	func_runtime('init' + 'name') {objParams_1(_val); \
 		private _ref = getSelf(name); _ref set [SKILL_MOD,_val]; \
 		recalc \
 	}
@@ -4592,11 +4592,11 @@ Description: накопленный опыт скилла как сама пер
 
 Replaced value:
 ```sqf
-__func_noStrName('get' + 'name') { \
+func_runtime('get' + 'name') { \
 		objParams(); \
 		basev + getSelf(name) \
 	}; \
-	 _csl = 'name'; __var_noStrName(_csl,0)
+	 _csl = 'name'; var_runtime(_csl,0)
 ```
 File: [host\GameObjects\Mobs\Mob_Skills.sqf at line 138](../../../Src/host/GameObjects/Mobs/Mob_Skills.sqf#L138)
 ## defFuncCommonSkillOverride(name)
@@ -4608,11 +4608,11 @@ Description:
 
 Replaced value:
 ```sqf
-__func_noStrName('get' + 'name') { \
+func_runtime('get' + 'name') { \
 		objParams(); \
 		getSelf(name) \
 	}; \
-	_csl = 'name'; __var_noStrName(_csl,0)
+	_csl = 'name'; var_runtime(_csl,0)
 ```
 File: [host\GameObjects\Mobs\Mob_Skills.sqf at line 144](../../../Src/host/GameObjects/Mobs/Mob_Skills.sqf#L144)
 ## skills_internal_map_nameAssoc

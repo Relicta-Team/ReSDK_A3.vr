@@ -749,6 +749,146 @@ Description:
 
 
 File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 193](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L193)
+# HotReload_init.sqf
+
+## printTrace
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+fws_printTrace
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 28](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L28)
+## fileWatcher_enableSystem
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+true
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 9](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L9)
+## fileWatcher_autoReloadObjects
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+true
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 11](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L11)
+## fileWatcher_list_checkedPathsForReloadRequest
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 13](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L13)
+## fileWatcher_list_ignoredPathParts
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 18](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L18)
+## fileWatcher_hostChangedPath
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+tolower "Src\host\"
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 25](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L25)
+## fileWatcher_clientChangedPath
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+tolower "Src\client"
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 26](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L26)
+## fws_autorecompSources
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 29](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L29)
+## fws_printTrace
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\HotReload\HotReload_init.sqf at line 31](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L31)
+## fileWatcher_init
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\HotReload\HotReload_init.sqf at line 40](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L40)
+## fileWatcher_onFrame
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\HotReload\HotReload_init.sqf at line 59](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L59)
+## FileWatcher_handleCallbackExtension
+
+Type: function
+
+Description: 
+- Param: _path
+- Param: _func
+- Param: _args
+
+File: [host\Tools\HotReload\HotReload_init.sqf at line 83](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L83)
+## FileWatcher_onChangeFile
+
+Type: function
+
+Description: 
+- Param: _filepath
+
+File: [host\Tools\HotReload\HotReload_init.sqf at line 99](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L99)
 # IconGenerator.sqf
 
 ## main_ExitIfError()
