@@ -253,7 +253,7 @@ func(seatDisconnect)
 	private _anim = callSelfReflect(_method);
 	if equalTypes(_anim,[]) then {_anim = pick _anim};
 	
-	callFuncParams(_usr,setPos,_restPos);
+	callFuncParams(_usr,setPosServer,_restPos);
 	callFuncParams(_usr,setDir,_restDir);
 	
 	if (callFunc(_usr,isUnconscious) || callFunc(_usr,isSleep)) then {
