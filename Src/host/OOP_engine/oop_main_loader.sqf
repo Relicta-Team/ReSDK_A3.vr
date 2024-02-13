@@ -377,10 +377,14 @@ oop_reloadModule = {
     params ["_filepath"];
     
     if !([_filepath,".sqf"] call stringEndWith) exitWith {
-        warningformat("Reloaded module is not a script file: %1",_filepath);
+        warningformat("[oop_reloadModule]: Reloaded module is not a script file: %1",_filepath);
         false
     };
-    
+    if !([_filepath,true] call file_exists) exitWith {
+        warningformat("[oop_reloadModule]: File not found %1",_filepath);
+        false
+    };
+
     traceformat("Start reload module %1",_filepath)
     
     //safeguard reload gamemodule
@@ -472,5 +476,5 @@ oop_reloadModule = {
         {deleteObj _x;} foreach _classObjectList;
     };
 
-
+    _allReady
 };
