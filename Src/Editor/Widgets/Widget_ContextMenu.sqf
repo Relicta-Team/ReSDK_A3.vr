@@ -580,8 +580,8 @@ init_function(ContextMenu_mouseArea_init)
 				};
 			} else {
 				//all not null
-				_d1 = _obj distance cameraOn;
-				_d2 = _mobj distance cameraOn;
+				_d1 = _obj distance get3DENCamera;
+				_d2 = _mobj distance get3DENCamera;
 				if (_d1 < _d2) then {
 					_obj = _obj;
 				} else {
