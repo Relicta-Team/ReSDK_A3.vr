@@ -15,6 +15,7 @@ variable_define
 	fileWatcher_list_ignoredPathParts = [
 		"\GameModes\scripted_loader.hpp",
 		"\Src\host\ReNode\compile\script_list.hpp",
+		"\Src\Editor\Bin\Maps",
 		".txt"
 	];
 

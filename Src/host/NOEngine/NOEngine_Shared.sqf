@@ -30,11 +30,9 @@ noe_chunkToPos = {
 
 
 noe_collectAroundChunks = {
-	params ["_mobClient","_loadList","_chunk","_chunkType"];
+	params ["_loadList","_chunk","_chunkType"];
 
 	_loadList pushBackUnique [_chunk,_chunkType];
-
-	//if (!isPlayer _mobClient) exitWith {};
 
 	{
 		_loadList pushBackUnique [(_chunk vectorAdd _x) select [0,2],_chunkType];

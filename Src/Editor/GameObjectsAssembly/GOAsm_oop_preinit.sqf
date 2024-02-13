@@ -95,6 +95,7 @@ oop_getSimpleTypeSize = {
 */
 
 // object istypeof gameobject (from base to childs) (!!!Slower)
+//TODO replace by oop_isTypeOfBase
 oop_isTypeOf = {
 	params ["_searched","_type"];
 	if (_type == _searched) exitwith {true};
@@ -105,6 +106,13 @@ oop_isTypeOf = {
 		if (_x == _searched) exitwith {_findedClass = true};
 	} foreach _list;
 	_findedClass
+};
+
+// дочерний является подтипом родительского item istypeofbase gameobject, torch istypeofbase item
+oop_isTypeOfBase = {
+	params ["_class","_base"];
+	if (_class == _base) exitwith {true};
+	(tolower _base) in ([_class,"__inhlist_map"] call oop_getTypeValue)
 };
 
 oop_isImplementClass = {

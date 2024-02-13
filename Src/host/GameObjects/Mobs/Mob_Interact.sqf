@@ -1164,6 +1164,7 @@ region(stealing handler)
 		if equals(_targ,this) exitWith {
 			callSelfParams(localSay,"У себя не украсть." arg "error");
 		};
+		if !callFunc(_targ,isMob) exitwith {};
 		if !callSelf(isEmptyActiveHand) exitWith {
 			callSelfParams(localSay,"Руку надо освободить." arg "error");
 		};

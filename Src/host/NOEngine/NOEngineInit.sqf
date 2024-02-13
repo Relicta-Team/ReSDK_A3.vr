@@ -50,8 +50,8 @@ noe_onMainThread = {
 	_chunk = [getPosATL _mob,_chunkType] call noe_posToChunk;
 	_prevChunk = _mob getVariable [variable_name_prevchunk + str _chunkType,_chunk];
 
-	[_mob,_chunksToLoad,_chunk,_chunkType] call noe_collectAroundChunks;
-	[_mob,_chunksToUnload,_prevChunk,_chunkType] call noe_collectAroundChunks;
+	[_chunksToLoad,_chunk,_chunkType] call noe_collectAroundChunks;
+	[_chunksToUnload,_prevChunk,_chunkType] call noe_collectAroundChunks;
 
 	_mob setvariable [variable_name_prevchunk + str _chunkType,_chunk];
 
@@ -80,8 +80,8 @@ noe_onMainThread = {
 		_chunk = [getPosATL _x,_chunkType] call noe_posToChunk;
 		_prevChunk = _x getVariable ["prevChunk" + str _chunkType,_chunk];
 
-		[_x,_chunksToLoad,_chunk,_chunkType] call noe_collectAroundChunks;
-		[_x,_chunksToUnload,_prevChunk,_chunkType] call noe_collectAroundChunks;
+		[_chunksToLoad,_chunk,_chunkType] call noe_collectAroundChunks;
+		[_chunksToUnload,_prevChunk,_chunkType] call noe_collectAroundChunks;
 
 		_x setvariable ["prevChunk" + str _chunkType,_chunk];
 	} foreach cm_allInGameMobs;
