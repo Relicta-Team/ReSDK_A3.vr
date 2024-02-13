@@ -127,7 +127,8 @@
 //! Внимание ! - при изменении этого макроса выполнить правки в pc_oop_regvar
 #define var_inlinevalue(name,value) \
 	_mem_name = #name ; \
-	_lastIndex = _fields pushback [_mem_name,value]; \
+	__iv_r = value; if equalTypes(__iv_r,"") then {__iv_r = str __iv_r}; \
+	_lastIndex = _fields pushback [_mem_name,format["%1",__iv_r]]; \
 	call pc_oop_handleAttrF;
 
 #define net_use _netuse = true;
