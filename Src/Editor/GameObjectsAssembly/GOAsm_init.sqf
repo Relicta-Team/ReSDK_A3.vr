@@ -17,6 +17,8 @@ goasm_builder_postInit_delegate = {}; //то что выполнится пос�
 goasm_builder_onError_delegate = {}; //пользовательский код, выполняющийся при ошибке компиляции
 	goasm_builder_postInit_customSetup = false; //это значение отвечает за пользователькое выполнение постбилд кода (смотрите goasm_builder_setPostBuildCode)
 
+#include "..\..\host\OOP_engine\oop_main_loader.sqf"
+
 #include "GOAsm_oop_preinit.sqf"
 #include "GOAsm_oop_builder.sqf"
 #include "GOAsm_oop_attributes.sqf"

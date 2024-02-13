@@ -44,7 +44,7 @@ call nodegen_loadClasses;
 call cs_runtime_internal_makeAll;
 
 //OOP INIT ZONE
-loadFile("src\host\OOP_engine\oop_init.sqf"); //обязательная пост инициализация классов после всего остального
+[] call oop_loadTypes;
 //end classes
 
 //another loaded files...
