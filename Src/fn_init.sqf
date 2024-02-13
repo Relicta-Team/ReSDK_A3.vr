@@ -91,6 +91,7 @@ if (__EDITOR_MACRO_VALIDATE__ == "EDITOR_MACRO") exitWith {
 
 //Обязательно инитим ооп перед всеми приколами
 #include "host\OOP_engine\oop_preinit.sqf"
+loadFile("src\host\OOP_engine\oop_main_loader.sqf");
 loadFile("src\host\Discord\Discord.sqf"); //Предварительная инициализация дискорд бота
 if (canSuspend) then {
 	warning("Server side code process init runs in the scheduler");

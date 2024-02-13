@@ -19,7 +19,7 @@ teleportMobToPoint = {
 		private _params = [_pos,_dir];
 		callFuncParams(_usr,sendInfo,"tpLoad" arg _params);
 	} else {
-		callFuncParams(_usr,setPos,_pos);
+		callFuncParams(_usr,setPosServer,_pos);
 		if !isNullVar(_dir) then {
 			callFuncParams(_usr,setDir,_dir); 
 		};

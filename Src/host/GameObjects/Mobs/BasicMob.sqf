@@ -640,6 +640,14 @@ region(Mob location info: position; direction; speed)
 		[this,_pos,callSelf(getDir)] call teleportMobToPoint;
 	};
 
+	func(setPosServer)
+	{
+		objParams_1(_pos);
+		private _mob = getSelf(owner);
+		assert(!isNullReference(_mob));
+		_mob setPosAtl _pos;
+	};
+
 	func(getPos)
 	{
 		objParams();

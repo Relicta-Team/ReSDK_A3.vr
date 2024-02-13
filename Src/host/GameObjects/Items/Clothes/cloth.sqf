@@ -174,7 +174,7 @@ U_FRITH_RUIN_SDR_snip_hawk
 
 */
 
-//__var_noStrName
+//var_runtime
 //getArray(configFile >> "cfgVehicles" >> "FRITH_RUIN_SDR_Tshirt_wht" >> "hiddenSelectionsTextures")
 #define generateSmartPicture() ___val = call compile((_fields select ((count _fields) - 1)) select 1); \
 ___cfg__ = ___val select [2,count ___val]; \

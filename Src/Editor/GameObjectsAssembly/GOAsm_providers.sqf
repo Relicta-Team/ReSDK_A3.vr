@@ -1292,7 +1292,7 @@ function(golib_attributes_container_content_validateAdd)
 		_curData get "countslots"
 	} else {
 		//! ТУТ нельзя ставить true для компиляции результата. Я не помню почему числовые поля сразу возвращаются...
-		[_curClass,"countslots"] call oop_getFieldBaseValue
+		[_curClass,"countslots",true] call oop_getFieldBaseValue
 	};
 
 	//now start check

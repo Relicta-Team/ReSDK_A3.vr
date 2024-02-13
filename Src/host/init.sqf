@@ -44,7 +44,7 @@ call nodegen_loadClasses;
 call cs_runtime_internal_makeAll;
 
 //OOP INIT ZONE
-loadFile("src\host\OOP_engine\oop_init.sqf"); //обязательная пост инициализация классов после всего остального
+[] call oop_loadTypes;
 //end classes
 
 //another loaded files...
@@ -79,6 +79,7 @@ if (!isMultiplayer) then {
 	loadFile("src\host\Tools\ProxyItemsEditor\ProxyItemsEditor.sqf");
 	loadFile("src\host\Tools\IconGenerator\IconGenerator.sqf");
 	loadFile("src\host\Tools\EditorDebug\EditorDebug.sqf");
+	loadFile("src\host\Tools\HotReload\HotReload_init.sqf");
 
 	loadFile("src\host\ServerSceneTest\serverscrene_init.sqf"); //for testing only
 };

@@ -11,9 +11,49 @@
 */
 #include <engine.hpp>
 
+pc_oop_flag_reloadModule = false;
+pc_oop_intList_loadObjectPool = [];
+
 /* ------------------------------------------------------
 	Region: generic class info
 ------------------------------------------------------ */
+pc_oop_classBegin = {
+	// params ["_className","_definedIn"];
+	// _decl_info___ = _definedIn;
+	// __testSyntaxClass
+	// _class = _className; _mother = "object";
+	// p_table_allclassnames pushback _class;
+	// private _fields = []; 
+	// private _methods = []; 
+	// private _attributes = []; 
+	// private _autoref = [];
+	// private _editor_attrs_cls = [];
+	// call pc_oop_declareClassAttr;
+	// _editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
+	// _classmet_declinfo = createHashMap; \
+	// missionNamespace setVariable ["pt_"+_class,createObj]; private _pt_obj = missionNamespace getVariable ("pt_"+_class);
+
+};
+
+pc_oop_regClassTable = {
+	params ["_class"];
+	if (pc_oop_flag_reloadModule) exitWith {};
+
+	p_table_allclassnames pushback _class;
+};
+
+pc_oop_newTypeObj = {
+	params ["_class"];
+	private _obj = createObj;
+	
+	if (pc_oop_flag_reloadModule) then {
+		pc_oop_intList_loadObjectPool pushBack _obj;
+	} else { 
+		missionNamespace setVariable ["pt_"+_class,_obj];
+	};
+
+	_obj
+};
 
 //функция декларатор атрибутов класса
 pc_oop_declareClassAttr = {
@@ -30,6 +70,33 @@ pc_oop_declareEOC = {
 	if (is3DEN) then {
 		_pt_obj setvariable ["__decl_info_end__",_this];
 	};
+
+	_pt_obj setName format[pc_oop_carr_tntps select is3DEN,_class];
+	
+	if (!pc_oop_flag_reloadModule) then {
+		p_table_inheritance pushback [_class,_mother];
+	} else {
+		_pt_obj setName ("<TEMP_OBJECT> "+(name _pt_obj));
+	};
+
+	_pt_obj setvariable ['__fields',_fields]; //члены, определенные в этом классе; vec2(name:str,value:serialized)
+	_pt_obj setvariable ['__methods',_methods]; //методы, определенные в этом классе; vec2(name:str,method:code)
+	
+	_pt_obj setvariable ['__motherClass',_mother]; //класс-родитель
+	//!not used: _pt_obj setVariable ['__motherObject',nullPtr];
+	_pt_obj setVariable ['__childList',[]]; //прямые наследники
+	_pt_obj setvariable ['__inhlist',[]]; //родители (нижний регистр)
+	_pt_obj setVariable ['__inhlistCase',[]]; //родители (фактические имена)
+	_pt_obj setvariable ['__instances',0];
+	_pt_obj setvariable ["classname",_class];
+	_pt_obj setvariable ["__attributes",_attributes]; //классовые атрибуты
+	_pt_obj setvariable ["__autoref",_autoref]; //имена членов (регистрозависимые). Если не пусто то создает ссылку по __autoref_list
+	_pt_obj setvariable ["__decl_info__",_decl_info___];
+	//при компиляции реализует __allfields, __allmethods (все члены, нижний регистр)
+	//__instance - скомпилированный конструктор
+	call pc_oop_declareMemAttrs;
+
+	call pc_oop_postInitClass;
 };
 
 //константные типы объектов. 0 - обычные называния типов, 1 - названия в редакторе
@@ -76,7 +143,7 @@ pc_oop_postInitClass = {
 				#ifdef EDITOR
 					_methods set [_forEachIndex,[_name,compile __sc]]
 				#endif 
-			};true
+			};
 		
 		} foreach _methods;
 

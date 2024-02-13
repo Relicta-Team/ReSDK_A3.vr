@@ -297,6 +297,12 @@ endclass
 		var(evidenceFinded,0);//сколько нашёл улик
 		var(lastEvidenceTime,0);
 		var(evidencesList,[]);//какие объекты улик нашёл наш чел
+
+		#ifdef EDITOR
+		var(timeoutBeforeNextEvidence,10);
+		#else
+		var(timeoutBeforeNextEvidence,60*3);
+		#endif
 		
 		var(pointersSearched,hashSet_createEmpty());//по каким указателям он искал
 		
@@ -312,8 +318,9 @@ endclass
 			if callFunc(_target,isMob) exitWith {
 				callSelfParams(localSay,"Нужно осматривать предметы"+comma+"а не людей..." arg "error");
 			};
-			if (getSelf(lastEvidenceTime)+30 >= tickTime) exitWith {
-				private _m = format["Надо обдумать и подождать %1",[round((getSelf(lastEvidenceTime)+30)-tickTime),["секунду","секунды","секунд"],true] call toNumeralString];
+			private _evTime = getSelf(timeoutBeforeNextEvidence);
+			if (getSelf(lastEvidenceTime)+_evTime >= tickTime) exitWith {
+				private _m = format["Надо обдумать и подождать %1",[round((getSelf(lastEvidenceTime)+_evTime)-tickTime),["секунду","секунды","секунд"],true] call toNumeralString];
 				callSelfParams(localSay,_m arg "error");
 			};
 			if (callSelf(getLastInteractDistance) > 2) exitWith {
@@ -634,7 +641,7 @@ class(RDetectiveHelper) extends(RDetectiveModeRole)
 	#ifdef EDITOR
 	getter_func(canVisibleAfterStart,gm_roundDuration >= 5);
 	#else
-	getter_func(canVisibleAfterStart,gm_roundDuration >= (60 * 25));
+	getter_func(canVisibleAfterStart,gm_roundDuration >= (60 * 2));
 	#endif
 	getter_func(getInitialPos,vec3(3632,3667.2,13.3369));
 	getter_func(getInitialDir,92.3);

@@ -42,56 +42,35 @@
 	#define vm_throw(ctx)
 #endif
 
-//if you want edit this macro - modify macro in craft class list
-//TODO update craft class list
-#define class(name) _decl_info___ = [__FILE__,__LINE__ + 1]; __testSyntaxClass \
+//определение класса
+#define class(name) __class_beginDefine__(__className_toString__(name))
+
+//создание типа по строке. Нужно для генерации классов
+#define class_runtime(name) __class_beginDefine__(name)
+
+#define __className_toString__(name) #name
+
+//common class begin define
+#define __class_beginDefine__(name) _decl_info___ = [__FILE__,__LINE__ + 1]; \
+	__testSyntaxClass \
 	private ["_class","_mother","_mem_name","_lastIndex","_fields","_methods"]; \
-	_class = #name; _mother = "object"; \
-	p_table_allclassnames pushback _class; \
+	_class = name; _mother = "object"; \
+	[_class] call pc_oop_regClassTable; \
 	_fields = []; _methods = []; _attributes = []; _autoref = []; \
 	_editor_attrs_cls = []; \
 	call pc_oop_declareClassAttr; \
 	_editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
 	_classmet_declinfo = createHashMap; \
 	_last_node_info_ = null; \
-	pt_##name = createObj; private _pt_obj = pt_##name;
+	private _pt_obj = [_class] call pc_oop_newTypeObj;
 
-//создание типа по строке. Нужно для генерации классов
-#define __class_noStrName(name) _decl_info___ = [__FILE__,__LINE__ + 1]; __testSyntaxClass \
-	private ["_class","_mother","_mem_name","_lastIndex","_fields","_methods"]; \
-	_class = name; _mother = "object"; \
-	p_table_allclassnames pushback _class;\
-	_fields = []; _methods = []; _attributes = []; _autoref = []; \
-	_editor_attrs_cls = []; \
-	call pc_oop_declareClassAttr; \
-	_editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
-	_classmet_declinfo = createHashMap; \
-	missionNamespace setVariable ["pt_"+_class,createObj]; private _pt_obj = missionNamespace getVariable ("pt_"+_class);
-
-#define static_class(name) class(name) _decl_info___ = [__FILE__,__LINE__ + 1]; \
-	name = _pt_obj;
 
 //
 #define endclass [__FILE__,__LINE__] call pc_oop_declareEOC; \
-			p_table_inheritance pushback [_class,_mother]; __postclassVM \
-	_pt_obj setName format[pc_oop_carr_tntps select is3DEN,_class]; \
-	_pt_obj setvariable ['__fields',_fields]; \
-	_pt_obj setvariable ['__methods',_methods]; \
-	_pt_obj setvariable ['__motherClass',_mother]; \
-	_pt_obj setVariable ['__motherObject',nullPtr]; \
-	_pt_obj setVariable ['__childList',[]]; \
-	_pt_obj setVariable ['__inhlistCase',[]]; \
-	_pt_obj setvariable ['__inhlist',[]]; \
-	_pt_obj setvariable ['__instances',0];\
-	_pt_obj setvariable ["classname",_class]; \
-	_pt_obj setvariable ["__attributes",_attributes]; \
-	_pt_obj setvariable ["__autoref",_autoref]; \
-	call pc_oop_declareMemAttrs; \
-	_pt_obj setvariable ["__decl_info__",_decl_info___]; \
-	call pc_oop_postInitClass;
+	__postclassVM \
 
 #define extends(child) _mother = #child;
-#define __extends_noStrName(child) _mother = child;
+#define extends_runtime(child) _mother = child;
 
 //attributes system
 
@@ -139,7 +118,7 @@
 	call pc_oop_handleAttrF;
 
 //Регистратор переменной со строковым именем
-#define __var_noStrName(name,value) \
+#define var_runtime(name,value) \
 	_mem_name = name ; \
 	_lastIndex = _fields pushback [_mem_name,'value']; \
 	call pc_oop_handleAttrF;
@@ -148,7 +127,8 @@
 //! Внимание ! - при изменении этого макроса выполнить правки в pc_oop_regvar
 #define var_inlinevalue(name,value) \
 	_mem_name = #name ; \
-	_lastIndex = _fields pushback [_mem_name,value]; \
+	__iv_r = value; if equalTypes(__iv_r,"") then {__iv_r = str __iv_r}; \
+	_lastIndex = _fields pushback [_mem_name,format["%1",__iv_r]]; \
 	call pc_oop_handleAttrF;
 
 #define net_use _netuse = true;
@@ -170,7 +150,7 @@
 	call pc_oop_handleAttrM; \
 	(_methods select _lastIndex) pushback
 
-#define __func_noStrName(name) _mem_name = name; _classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LINE__)]; \
+#define func_runtime(name) _mem_name = name; _classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LINE__)]; \
 	_lastIndex = _methods pushback [_mem_name]; \
 	call pc_oop_handleAttrM; \
 	(_methods select _lastIndex) pushback
@@ -186,7 +166,7 @@
 //нет траты памяти на параметризацию. Нужно для константных значений (массивов и строк)
 #define getterconst_func(name,do) func(name) { do }
 
-#define getset_func(name,getcode,setcode) _getcode = getcode; _setcode = setcode; __func_noStrName('get' + 'name') _getcode; __func_noStrName('set' + 'name') _setcode
+#define getset_func(name,getcode,setcode) _getcode = getcode; _setcode = setcode; func_runtime('get' + 'name') _getcode; func_runtime('set' + 'name') _setcode
 
 #define simpleGet(getcode) {objParams(); getcode }
 #define simpleSet(setcode) {objParams_1(_value); setcode }
@@ -217,8 +197,6 @@
 	#define getObjectsTypeOfStr(type) ([type,false] call oop_getinhlist)
 	#define getAllObjectsTypeOfStr(type) ([type,true] call oop_getinhlist)
 
-//вызывает базовый класс получая доступ
-//NOT WORK! ERROR RECURSION -> #define call Base(metname) call (this getVariable PROTOTYPE_VAR_NAME getVariable ("__motherObject") getvariable #metname)
 //вызывает базовый класс по пользовательскому пути
 //При переопределении изменить и в крафтовых классах
 #define callSuper(superclass,metname) call ( pt_##superclass getVariable #metname )
