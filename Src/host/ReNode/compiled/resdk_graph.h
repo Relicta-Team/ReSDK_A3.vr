@@ -14,22 +14,26 @@
     REGION: graph macrohelpers
 */
 
-#define __THIS_GRAPH__ "UNRESOLVED_GRAPH_PATH"
+#define __THIS_GRAPH__ UNRESOLVED_GRAPH_PATH
 
-#define __bp_send_signal(id__) [ #id__ , __THIS_GRAPH__ ] call nbp_sigsend;
+#define __bp_serialize(value__) #value__
+
+#define __bp_preser_sig(id__,toid__,graph__) __bp_serialize(id__@toid__@graph__)
+
+#define __bp_send_signal(id__,toid__) __bp_preser_sig(id__,toid__,__THIS_GRAPH__) call nbp_sigsend;
 
 //execution signal
-#define BP_EXEC(id__) __bp_send_signal(id__)
+#define BP_EXEC(id__,toid__) __bp_send_signal(id__,toid__)
 
 //pure signal
-#define BP_PS(id__) call{ __bp_send_signal(id__)
+#define BP_PS(id__,toid__) call{ __bp_send_signal(id__,toid__)
 
 #define BP_PE }
 
 
 //disable graph debugger outside editor
 #ifndef EDITOR
-    #define BP_EXEC(id__)
-    #define BP_PS(id__)
+    #define BP_EXEC(id__,toid__)
+    #define BP_PS(id__,toid__)
     #define BP_PE
 #endif

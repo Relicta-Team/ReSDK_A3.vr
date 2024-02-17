@@ -118,8 +118,8 @@ public class ReNodeDebugger : IScript
                 stopClient();
                 break;
             case "nlink":
-                if (ScriptContext.GetArgsCount() == 2) {
-                    string message = $"nlink@{ScriptContext.GetArg(0)}@{ScriptContext.GetArg(1)}";
+                if (ScriptContext.GetArgsCount() == 1) {
+                    string message = $"nlink@{ScriptContext.GetArg(0)}";
                     SendMessage(message);
                 }
                 break;

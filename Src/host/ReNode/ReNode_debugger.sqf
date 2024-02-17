@@ -4,8 +4,11 @@
 // ======================================================
 
 nbp_sigsend = {
-    params ["_id","_gpath"];
-    ["nlink",[_id,_gpath]] call nbp_send;
+    //params ["_id","_gpath"];
+    //["nlink",[_id,_gpath]] call nbp_send;
+    
+    //faster sending
+    ["ReNodeDebugger","nlink",[_this]] call rescript_callCommandVoid;
 };
 
 nbp_sendRet = {
