@@ -4,3 +4,4 @@ Scripts\TestScript.cs
 ..\..\..\Scripts\WorkspaceHelper.cs
 ..\..\..\Scripts\FileManager.cs
 ..\..\..\Scripts\FileWatcher.cs
+..\..\..\Scripts\ReNodeDebugger.cs

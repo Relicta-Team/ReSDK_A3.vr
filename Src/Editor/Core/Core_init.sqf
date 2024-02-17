@@ -272,3 +272,4 @@ function(Core_invokeEvent)
 ["WorkspaceHelper"] call rescript_initScript;
 ["FileWatcher"] call rescript_initScript;
 ["VisualScripting"] call rescript_initScript;
+call nbp_initDebugger;

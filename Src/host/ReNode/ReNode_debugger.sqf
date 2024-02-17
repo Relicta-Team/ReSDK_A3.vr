@@ -5,20 +5,29 @@
 
 nbp_sigsend = {
     params ["_id","_gpath"];
-    ["nlink",[_id,_gpath]] call nbp_transfer;
+    ["nlink",[_id,_gpath]] call nbp_send;
 };
 
-nbp_transfer = {
+nbp_sendRet = {
+    params ["_name",["_data",[]],["_retAsString",true]];
+    ["ReNodeDebugger",_name,_data,_retAsString] call rescript_callCommand
+};
+
+nbp_send = {
     params ["_name","_data"];
-    ["ReNodeDebugger",_name,_data] call rescript_callCommand;
+    ["ReNodeDebugger",_name,_data] call rescript_callCommandVoid;
 };
 
 nbp_initDebugger = {
     ["ReNodeDebugger"] call rescript_initScript;
+    if (call nbp_isEditorConnected) then {
+        ["stop"] call nbp_send;
+    };
+    ["start"] call nbp_send;
 };
 
 nbp_isEditorConnected = {
-    (["ReNodeDebugger","editor_connected",[],true] call rescript_callCommand)=="true"
+    (["connected"] call nbp_sendRet)=="true"
 };
 
 

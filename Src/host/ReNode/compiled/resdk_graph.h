@@ -16,13 +16,13 @@
 
 #define __THIS_GRAPH__ "UNRESOLVED_GRAPH_PATH"
 
-#define __bp_send_signal(id__) [ #id__ , __THIS_GRAPH__ ] call bp_sigsend
+#define __bp_send_signal(id__) [ #id__ , __THIS_GRAPH__ ] call nbp_sigsend;
 
 //execution signal
 #define BP_EXEC(id__) __bp_send_signal(id__)
 
 //pure signal
-#define BP_PS(id__) call{ __bp_
+#define BP_PS(id__) call{ __bp_send_signal(id__)
 
 #define BP_PE }
 

@@ -79,6 +79,9 @@ call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
 	cba_common_waitUntilAndExecArray = [];
 };
 
+//renode отладчик
+#include "..\host\ReNode\ReNode_debugger.sqf"
+
 #include <EditorEngine.h>
 
 //Строковое название версии. Пишется в пользовательском интерфейсе редактора
