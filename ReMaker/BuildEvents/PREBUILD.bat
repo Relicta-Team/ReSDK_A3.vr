@@ -1,6 +1,7 @@
 echo COMMAND - [%1]
 
-set workdir=%cd%\..
+set workdir=%cd%
+
 echo Work directory: %workdir%
 
 set renode_wd=%workdir%\ReNode
