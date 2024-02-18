@@ -4027,7 +4027,7 @@ Initial value:
 ```sqf
 1
 ```
-File: [host\init.sqf at line 92](../../../Src/host/init.sqf#L92)
+File: [host\init.sqf at line 91](../../../Src/host/init.sqf#L91)
 # keyboard.hpp
 
 ## KEY_ESCAPE
@@ -6620,7 +6620,7 @@ Replaced value:
 	call pc_oop_handleAttrF;
 ```
 File: [host\oop.hpp at line 121](../../../Src/host/oop.hpp#L121)
-## var_inlinevalue(name,value)
+## var_exprval(name,value)
 
 Type: constant
 

@@ -385,7 +385,7 @@ Initial value:
 ```sqf
 ["emote","log","act","combat","info","mind","event","system","error","default"]
 ```
-File: [host\GameObjects\GameObject.sqf at line 970](../../../Src/host/GameObjects/GameObject.sqf#L970)
+File: [host\GameObjects\GameObject.sqf at line 972](../../../Src/host/GameObjects/GameObject.sqf#L972)
 ## go_internal_chatMesMapText
 
 Type: Variable
@@ -397,7 +397,7 @@ Initial value:
 ```sqf
 ["Эмоут:Кастомное пользовательское действие",...
 ```
-File: [host\GameObjects\GameObject.sqf at line 971](../../../Src/host/GameObjects/GameObject.sqf#L971)
+File: [host\GameObjects\GameObject.sqf at line 973](../../../Src/host/GameObjects/GameObject.sqf#L973)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
@@ -5335,8 +5335,8 @@ Description:
 
 Replaced value:
 ```sqf
-var_inlinevalue(tradelist,_global_merchantconsole_tradelist); \
-	var_inlinevalue(tradecats,_global_merchantconsole_catnames);
+var_exprval(tradelist,_global_merchantconsole_tradelist); \
+	var_exprval(tradecats,_global_merchantconsole_catnames);
 ```
 File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1115](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1115)
 ## regCat(cat,namestr)
