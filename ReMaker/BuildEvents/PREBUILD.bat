@@ -1,19 +1,24 @@
 echo COMMAND - [%1]
 
+echo Current work dir: %cd%
+
 set workdir=%cd%
+rem temp fix
 
-echo Work directory: %workdir%
+exit /b 0
 
-set renode_wd=%workdir%\ReNode
-set renode_exe=%renode_wd%\ReNode.exe
+REM echo Work directory: %workdir%
 
-echo RENODE: "%renode_exe%"
+REM set renode_wd=%workdir%\ReNode
+REM set renode_exe=%renode_wd%\ReNode.exe
 
-if not exist "%renode_exe%" (
-	echo ReNode executable not found: %renode_exe%
-	exit /b -10201
-)
+REM echo RENODE: "%renode_exe%"
 
-start "renode_build" /d "%renode_wd%" /i /b /wait "%renode_exe%" -prep_code -nosplash -noapp
+REM if not exist "%renode_exe%" (
+	REM echo ReNode executable not found: %renode_exe%
+	REM exit /b -10201
+REM )
 
-exit /b %errorlevel%
+REM start "renode_build" /d "%renode_wd%" /i /b /wait "%renode_exe%" -prep_code -nosplash -noapp
+
+REM exit /b %errorlevel%
