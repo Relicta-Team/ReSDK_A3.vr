@@ -1105,12 +1105,14 @@ class(MerchantConsole) extends(ElectronicDevice)
 
 	var(curCat,MC_CAT_CLOTH);
 
+	//TODO remove this macros, replace with methods
 	#define regConsole \
 	___s = []; \
 	___s resize (MC_CATSYS_LAST_INDEX+1); \
 	_global_merchantconsole_tradelist = ___s apply {[]}; \
-	_global_merchantconsole_catnames = []; \
-	var_inlinevalue(tradelist,_global_merchantconsole_tradelist); \
+	_global_merchantconsole_catnames = [];
+
+	#define endRegConsole var_inlinevalue(tradelist,_global_merchantconsole_tradelist); \
 	var_inlinevalue(tradecats,_global_merchantconsole_catnames);
 
 	#define regCat(cat,namestr) _global_merchantconsole_catnames pushBack [cat,namestr];
@@ -1220,6 +1222,8 @@ class(MerchantConsole) extends(ElectronicDevice)
 	regEnergyCount(MC_CAT_ENEGRY,"Энергия (10 минут)",regEnProvider(10),_randEnergyPricePerMin * 10,randInt(0,10));
 	regEnergyCount(MC_CAT_ENEGRY,"Энергия (30 минут)",regEnProvider(30),_randEnergyPricePerMin * 30,randInt(0,5));
 	regEnergyCount(MC_CAT_ENEGRY,"Энергия (1 час)",regEnProvider(60),_randEnergyPricePerMin * 60,randInt(0,2));
+
+	endRegConsole;
 
 	func(getNDInfo)
 	{
@@ -1598,5 +1602,7 @@ class(MerchantConsoleOkopovo) extends(MerchantConsole)
 	regItemDef(MC_CAT_CONTAINERS,"MedicalBag",7,7,1,5)
 	regItemDef(MC_CAT_CONTAINERS,"SteelMedicalBox",5,5,1,5)
 	regItemDef(MC_CAT_CONTAINERS,"SteelBrownContainer",5,5,1,5)
+
+	endRegConsole;
 
 endclass
