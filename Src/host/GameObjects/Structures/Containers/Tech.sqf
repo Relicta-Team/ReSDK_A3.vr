@@ -1125,8 +1125,6 @@ class(MerchantConsole) extends(ElectronicDevice)
 	#define regItemCustomName(cat,name,typename,minpr,maxpr,minc,maxc) _ctbuf = _global_merchantconsole_tradelist select cat; \
 	_ctbuf pushBack [name,typename,{typename},randInt(minpr,maxpr),randInt(minc,maxc),0];
 
-	regConsole;
-
 	regCat(MC_CAT_CLOTH,"Экипировка")
 	regCat(MC_CAT_WEAPONS,"Оружие")
 	regCat(MC_CAT_AMMO,"Боеприпасы")
@@ -1220,6 +1218,8 @@ class(MerchantConsole) extends(ElectronicDevice)
 	regEnergyCount(MC_CAT_ENEGRY,"Энергия (10 минут)",regEnProvider(10),_randEnergyPricePerMin * 10,randInt(0,10));
 	regEnergyCount(MC_CAT_ENEGRY,"Энергия (30 минут)",regEnProvider(30),_randEnergyPricePerMin * 30,randInt(0,5));
 	regEnergyCount(MC_CAT_ENEGRY,"Энергия (1 час)",regEnProvider(60),_randEnergyPricePerMin * 60,randInt(0,2));
+
+	regConsole;
 
 	func(getNDInfo)
 	{
@@ -1518,8 +1518,6 @@ class(MerchantConsoleOkopovo) extends(MerchantConsole)
 			super();
 		};
 	};
-	
-	regConsole
 
 	regCat(MC_CAT_CLOTH,"Снаряжение")
 	regCat(MC_CAT_WEAPONS,"Оружие")
@@ -1598,5 +1596,7 @@ class(MerchantConsoleOkopovo) extends(MerchantConsole)
 	regItemDef(MC_CAT_CONTAINERS,"MedicalBag",7,7,1,5)
 	regItemDef(MC_CAT_CONTAINERS,"SteelMedicalBox",5,5,1,5)
 	regItemDef(MC_CAT_CONTAINERS,"SteelBrownContainer",5,5,1,5)
+
+	regConsole
 
 endclass
