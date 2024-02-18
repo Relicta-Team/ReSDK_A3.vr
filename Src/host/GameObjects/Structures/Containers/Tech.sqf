@@ -1105,12 +1105,14 @@ class(MerchantConsole) extends(ElectronicDevice)
 
 	var(curCat,MC_CAT_CLOTH);
 
+	//TODO remove this macros, replace with methods
 	#define regConsole \
 	___s = []; \
 	___s resize (MC_CATSYS_LAST_INDEX+1); \
 	_global_merchantconsole_tradelist = ___s apply {[]}; \
-	_global_merchantconsole_catnames = []; \
-	var_inlinevalue(tradelist,_global_merchantconsole_tradelist); \
+	_global_merchantconsole_catnames = [];
+
+	#define endRegConsole var_inlinevalue(tradelist,_global_merchantconsole_tradelist); \
 	var_inlinevalue(tradecats,_global_merchantconsole_catnames);
 
 	#define regCat(cat,namestr) _global_merchantconsole_catnames pushBack [cat,namestr];
@@ -1124,6 +1126,8 @@ class(MerchantConsole) extends(ElectronicDevice)
 	#define regItemDef(cat,typename,minpr,maxpr,minc,maxc) regItem(cat,typename,typename,minpr,maxpr,minc,maxc)
 	#define regItemCustomName(cat,name,typename,minpr,maxpr,minc,maxc) _ctbuf = _global_merchantconsole_tradelist select cat; \
 	_ctbuf pushBack [name,typename,{typename},randInt(minpr,maxpr),randInt(minc,maxc),0];
+
+	regConsole;
 
 	regCat(MC_CAT_CLOTH,"Экипировка")
 	regCat(MC_CAT_WEAPONS,"Оружие")
@@ -1219,7 +1223,7 @@ class(MerchantConsole) extends(ElectronicDevice)
 	regEnergyCount(MC_CAT_ENEGRY,"Энергия (30 минут)",regEnProvider(30),_randEnergyPricePerMin * 30,randInt(0,5));
 	regEnergyCount(MC_CAT_ENEGRY,"Энергия (1 час)",regEnProvider(60),_randEnergyPricePerMin * 60,randInt(0,2));
 
-	regConsole;
+	endRegConsole;
 
 	func(getNDInfo)
 	{
@@ -1518,6 +1522,8 @@ class(MerchantConsoleOkopovo) extends(MerchantConsole)
 			super();
 		};
 	};
+	
+	regConsole
 
 	regCat(MC_CAT_CLOTH,"Снаряжение")
 	regCat(MC_CAT_WEAPONS,"Оружие")
@@ -1597,6 +1603,6 @@ class(MerchantConsoleOkopovo) extends(MerchantConsole)
 	regItemDef(MC_CAT_CONTAINERS,"SteelMedicalBox",5,5,1,5)
 	regItemDef(MC_CAT_CONTAINERS,"SteelBrownContainer",5,5,1,5)
 
-	regConsole
+	endRegConsole;
 
 endclass
