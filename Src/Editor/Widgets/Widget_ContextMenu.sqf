@@ -296,6 +296,12 @@ function(ContextMenu_loadMouseObject)
 					private _curGamemode = [_x,"classname"] call oop_getTypeValue;
 					private _roles = ([_curGamemode,"",true,"getLobbyRoles"] call oop_getFieldBaseValue) 
 						+ ([_curGamemode,"",true,"getLateRoles"] call oop_getFieldBaseValue);
+						
+						//fix #294
+						if (count _roles == 1 && {(_roles select 0) == "___SCRITED_GAMEMODE___"}) then {
+							_roles = [_curGamemode,"",true,"_getRolesWrapper"] call oop_getFieldBaseValue;
+						};
+
 						{
 							if !array_exists(_uniqueRoles,_x) then {
 								_uniqueRoles pushBack _x;

@@ -346,8 +346,22 @@ class(ScriptedGamemode) extends(GMBase)
 
 		ifcheck(_getMode==0,_lobby,_late)
 	};
-	getter_func(getLobbyRoles,callSelfParams(_getRolesWrapperInternal,0));
-	getter_func(getLateRoles,callSelfParams(_getRolesWrapperInternal,1));
+
+
+	if (is3DEN) then {
+		func(getLobbyRoles)
+		{
+			["___SCRITED_GAMEMODE___"] //специальное имя для взятия ролей из скриптового режима
+		};
+
+		func(getLateRoles)
+		{
+			[]
+		};
+	} else {
+		getter_func(getLobbyRoles,callSelfParams(_getRolesWrapperInternal,0));
+		getter_func(getLateRoles,callSelfParams(_getRolesWrapperInternal,1));
+	};
 
 	"
 		name:Время игры
