@@ -17,7 +17,7 @@ class(CoinBag) extends(Container)
 	var(weight,gramm(130));
 	var(allowedSlots,[INV_BELT]);
 
-	var_inlinevalue(countSlots,BASE_STORAGE_CAPACITY(1.4));
+	var_exprval(countSlots,BASE_STORAGE_CAPACITY(1.4));
 	var(size,ITEM_SIZE_MEDIUM);
 	var(maxSize,ITEM_SIZE_SMALL);
 
@@ -31,7 +31,7 @@ class(SmallBackpack) extends(Container)
 	var(weight,gramm(600));
 	var(allowedSlots,[INV_BACKPACK]);
 
-	var_inlinevalue(countSlots,DEFAULT_BACKPACK_STORAGE);
+	var_exprval(countSlots,DEFAULT_BACKPACK_STORAGE);
 	var(size,ITEM_SIZE_LARGE);
 	var(maxSize,ITEM_SIZE_LARGE);
 
@@ -61,7 +61,7 @@ endclass
 class(FabricBagBig1) extends(Container)
 	var(name,"Мешок");
 	var(allowedSlots,[INV_BACKPACK]);
-	var_inlinevalue(countSlots,DEFAULT_BOX_STORAGE);
+	var_exprval(countSlots,DEFAULT_BOX_STORAGE);
 	var(maxSize,ITEM_SIZE_BIG);
 	var(size,ITEM_SIZE_HUGE);
 	var(model,"ml_shabut\meshok\meshok1.p3d");

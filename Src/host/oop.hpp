@@ -125,7 +125,7 @@
 
 //Вычисляет значения поля на этапе компиляции
 //! Внимание ! - при изменении этого макроса выполнить правки в pc_oop_regvar
-#define var_inlinevalue(name,value) \
+#define var_exprval(name,value) \
 	_mem_name = #name ; \
 	__iv_r = value; if equalTypes(__iv_r,"") then {__iv_r = str __iv_r}; \
 	_lastIndex = _fields pushback [_mem_name,format["%1",__iv_r]]; \
