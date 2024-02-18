@@ -803,6 +803,8 @@ class(ServerClient) /*extends(NetObject)*/
 		assert_str(equalTypes(_ch,0),"Channel param type error. Must be integer - not " + typename _ch);
 		assert_str(inRange(_ch,0,count go_internal_chatMesMap - 1),"Channel index out of range: " + str _ch);
 		_this set [2,go_internal_chatMesMap select _ch];
+
+		private this = _this select 0;
 		_this call getSelfFunc(localSay)
 	};
 

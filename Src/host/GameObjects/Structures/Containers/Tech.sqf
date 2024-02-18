@@ -1112,8 +1112,8 @@ class(MerchantConsole) extends(ElectronicDevice)
 	_global_merchantconsole_tradelist = ___s apply {[]}; \
 	_global_merchantconsole_catnames = [];
 
-	#define endRegConsole var_inlinevalue(tradelist,_global_merchantconsole_tradelist); \
-	var_inlinevalue(tradecats,_global_merchantconsole_catnames);
+	#define endRegConsole var_exprval(tradelist,_global_merchantconsole_tradelist); \
+	var_exprval(tradecats,_global_merchantconsole_catnames);
 
 	#define regCat(cat,namestr) _global_merchantconsole_catnames pushBack [cat,namestr];
 

@@ -28,7 +28,7 @@ class(Cloth) extends(Container)
 	var(allowedSlots,[INV_CLOTH]);
 	var(armaClass,"U_I_pilotCoveralls");
 
-	var_inlinevalue(countSlots,DEFAULT_CLOTH_STORAGE);
+	var_exprval(countSlots,DEFAULT_CLOTH_STORAGE);
 	var(maxSize,ITEM_SIZE_SMALL);
 	var(weight,gramm(520));
 
@@ -179,7 +179,7 @@ U_FRITH_RUIN_SDR_snip_hawk
 #define generateSmartPicture() ___val = call compile((_fields select ((count _fields) - 1)) select 1); \
 ___cfg__ = ___val select [2,count ___val]; \
 ___val = getArray(configFile >> "cfgVehicles" >> ___cfg__ >> "hiddenSelectionsTextures"); \
-var_inlinevalue(icon,str (___val select 0))
+var_exprval(icon,str (___val select 0))
 
 //Шмоткам теперь вручную всё пишется
 #define generateSmartPicture() ;

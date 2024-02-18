@@ -64,7 +64,7 @@ endclass
 class(SquareWoodenBox) extends(SContainer)
 	var(name,"Деревянная коробка");
 	var(desc,"Крупная и пахнет странно");
-	var_inlinevalue(countSlots,DEFAULT_LARGEBOX_STORAGE);
+	var_exprval(countSlots,DEFAULT_LARGEBOX_STORAGE);
 	var(model,"a3\props_f_enoch\industrial\supplies\woodenbox_02_f.p3d");
 endclass
 

@@ -107,37 +107,50 @@ endclass
 class(ManagedObject) extends(object)
 	"
 		name:Управляемый объект
-		desc:Управляемый системой объект, поддерживающий логику обновления (симуляции)
+		desc:Управляемый системой объект, поддерживающий логику обновления (симуляции) и горячую перезагрузку полей
 		path:Объекты.Библиотека
 	"
 	node_class
-	var(handleUpdate,-1);
+	var(__handleUpdateNative__,-1);
+
+	getter_func(isUpdateActive,getSelf(__handleUpdateNative__)!=-1);
 	
-	// Указывает может ли быть использована функция обновления
-	getterconst_func(hasUpdate,false);
-	// Указывает есть ли какие-нибудь действия в методе обновления
-	var_bool(haveUpdateActions);
-	getter_func(doUpdateAction,setSelf(haveUpdateActions,true));
-	getter_func(resetUpdateAction,setSelf(haveUpdateActions,false));
+	// Указывает будет ли запущена функция обновления при создании объекта
+	getterconst_func(startUpdateOnConstruct,false);
+
+	//включена ли подсистема автоочистки autoref переменных
+	getter_func(enableAutoRefGC,true);
 
 	func(constructor)
 	{
-		if (callSelf(hasUpdate)) then {
-			setSelf(handleUpdate,startUpdateParams(getSelfFunc(onUpdate),1,[this]));
-			INC(oop_upd);
+		objParams();
+		if (callSelf(startUpdateOnConstruct)) then {
+			callSelfParams(setUpdate,true);
 		};
 	};
 
-	getter_func(enableAutoRefGC,true);
+	//set update mode
+	func(setUpdate)
+	{
+		objParams_1(_mode);
+		if (callSelf(isUpdateActive) == _mode) exitWith {};
+		if (_mode) then {
+			setSelf(__handleUpdateNative__,startUpdateParams(getSelfFunc(onUpdate),1,[this]));
+			INC(oop_upd);
+		} else {
+			private _hnd = getSelf(__handleUpdateNative__);
+			if (_hnd > -1) then {
+				stopUpdate(_hnd);
+				setSelf(__handleUpdateNative__,-1);
+				DEC(oop_upd);
+			};
+		};
+	};
 
 	func(destructor)
 	{
-		
-		private _hnd = getSelf(handleUpdate);
-		if (_hnd > -1) then {
-			stopUpdate(_hnd);
-			DEC(oop_upd);
-		};
+		objParams();
+		callSelfParams(setUpdate,false);
 		
 		if (!callSelf(enableAutoRefGC)) exitWith {};
 
@@ -153,7 +166,7 @@ class(ManagedObject) extends(object)
 				call {
 					if equalTypes(_ptr,_Tarray) exitWith { //cleanup array
 						{
-							if (!isNullObject(_x)) then {
+							if (!isNullReference(_x)) then {
 								delete(_x);
 							}
 						} foreach _ptr;
@@ -162,7 +175,7 @@ class(ManagedObject) extends(object)
 						_ptr set [0,"<AUTOREF_NAN>"];
 					};
 					if equalTypes(_ptr,nullPtr) exitWith { //cleanup object links
-						if (!isNullObject(_ptr)) then {
+						if (!isNullReference(_ptr)) then {
 							delete(_ptr);
 						}
 					};
@@ -175,6 +188,17 @@ class(ManagedObject) extends(object)
 
 			} foreach _refList;
 		};
+	};
+
+	//-----------------------------------------
+	// HotReload helpers
+	//-----------------------------------------
+
+	//событие, вызываемое при перезагрузке класса объекта
+	func(onReloadClass)
+	{
+		objParams();
+		//TODO implement with refcount
 	};
 
 endclass

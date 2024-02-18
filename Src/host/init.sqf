@@ -8,7 +8,6 @@
 server_loadingState = 0;
 
 loadFile("src\host\ScriptErrorHandler\ScriptErrorHandler_init.sqf");
-loadFile("src\host\ReNode\ReNode_init.sqf");
 loadFile("src\host\Curl\Curl.sqf");
 loadFile("src\host\Networking\Network.sqf");
 loadFile("src\public_loader.sqf");

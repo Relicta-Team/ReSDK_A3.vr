@@ -49,7 +49,7 @@ editor_attribute("InterfaceClass")
 class(IWritableContentItem) extends(IPaperItemBase)
 	#include "..\..\Interfaces\INetDisplay.Interface"
 	var(ndName,"Book");
-	var_inlinevalue(ndInteractDistance,INTERACT_DISTANCE);
+	var_exprval(ndInteractDistance,INTERACT_DISTANCE);
 
 	var(content,""); //text in book
 	getterconst_func(getMaxLen,1024*3);
@@ -102,7 +102,7 @@ class(Paper) extends(IWritableContentItem)
 	var(model,"a3\weapons_f_orange\ammo\leaflet_05_old_f.p3d");
 	var(content,"");
 	var(ndName,"Paper");
-	var_inlinevalue(ndInteractDistance,INTERACT_DISTANCE);
+	var_exprval(ndInteractDistance,INTERACT_DISTANCE);
 	var(weight,gramm(5));
 
 	getter_func(getPickupSound,vec2("updown\paper_up"+str randInt(1,3),getRandomPitchInRange(.85,1.3)));
