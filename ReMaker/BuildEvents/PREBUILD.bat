@@ -1,3 +1,5 @@
+echo off
+
 echo COMMAND - [%1]
 
 echo Current work dir: %cd%
