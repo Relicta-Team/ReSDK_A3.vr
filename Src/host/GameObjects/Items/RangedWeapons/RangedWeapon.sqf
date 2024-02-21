@@ -256,7 +256,19 @@ class(IRangedWeapon) extends(Item)
 	};
 
 	//mag loading
+	"
+		name:Магазин вставлен
+		desc:Возвращает ИСТИНУ, если магазин заряжен в оружие. Для дробовиков, револьверов или однозарядных пистолетов всегда возвращает ИСТИНУ.
+		type:get
+		return:bool:Вставлен ли магазин в оружие
+	" node_met
 	getter_func(hasMagazine,!isNullReference(getSelf(magazine)));
+	"
+		name:Допустимый тип магазина
+		desc:Возвращает имя класса магазина, который можно зарядить в оружие. Дочерние типы от этого магазина также могут быть заряжены в оружие.
+		type:const
+		return:classname:Имя класса магазина
+	" node_met
 	getter_func(getReqMagazineType,"IMagazineBase");
 	func(onInteractWith)
 	{
@@ -410,12 +422,40 @@ class(IRangedWeapon) extends(Item)
 	func(createMagazine)
 	{
 		objParams_1(_type);
-		if callSelf(hasMagazine) exitWith {};
+		if callSelf(hasMagazine) exitWith {nullPtr};
 		private _itm = instantiate(_type);
 		setVar(_itm,loc,this);
 		setSelf(magazine,_itm);
 		callSelf(onWeightChanged);
 		_itm
+	};
+
+	"
+		name:Создать магазин
+		desc:Создает магазин в оружии. Если магазин уже заряжен в оружии или указан несовместимый тип магазина - создание не произойдёт.
+		type:method
+		lockoverride:1
+		in:classname:Тип магазина:Тип создаваемого магазина
+			opt:def=IMagazineBase
+		in:classname:Тип патронов:Тип боеприпасов, создаваемых в оружии
+			opt:require=0:def=IAmmoBase
+		in:int:Количество:Сколько боеприпасов будет создано в магазине.
+			opt:require=0:def=0
+		return:IMagazineBase:Созданный магазин. Возвращает null-ссылку если создание не произошло.
+	" node_met
+	func(createMagazineWithAmmo)
+	{
+		objParams_3(_itm,_ammo,_ammoCount);
+		
+		if callSelf(hasMagazine) exitWith {nullPtr};
+		if !isTypeNameStringOf(_itm,callSelf(getReqMagazineType)) exitWith {nullPtr};
+		private _mag = callSelfParams(createMagazine,_itm);
+		
+		if (!isNullReference(_mag) ) then {
+			callSelfParams(createAmmoInMagazine,_ammo arg _ammoCount);
+		};
+
+		_mag
 	};
 
 	"

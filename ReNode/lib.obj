@@ -2323,7 +2323,7 @@ desc:Данная структура предназначена для прив�
 eval:enum.SpawnLocationConnectionType:Тип привязки:Не определено:Тип поиска объекта для привязки персонажа. Если указан тип привязки "Не определено" - привязка не будет выполнена.
 eval:string:Глобальная ссылка::Уникальное имя объекта на карте для привязки (если выбран тип привязки "Глобальная ссылка").
 eval:classname:Тип объекта:GameObject:Тип объекта для привязки (если выбран тип привязки "Тип объекта"). При выборе привязки по типу на точке спана в небольшом радиусе будет выполнен поиск объекта с указанным типом.
-eval:int:Индекс сиденья:-1:Индекс места для посадки. Предназначено для двухместных и более сидений (например двухспальных кроватей). Значение, равное -1 игнорирует это свойство при привязке.
+eval:int:Номер сиденья:-1:Индекс (номер) места для посадки. Предназначено для двухместных и более сидений (например двухспальных кроватей). Значение, равное -1 игнорирует это свойство при привязке.
 
 def:struct:structs
 node:BaseSkillsDef
@@ -2580,7 +2580,7 @@ def:c:Type
 def:c:ManagedObject
 
 		name:Управляемый объект
-		desc:Управляемый системой объект, поддерживающий логику обновления (симуляции)
+		desc:Управляемый системой объект, поддерживающий логику обновления (симуляции) и горячую перезагрузку полей
 		path:Объекты.Библиотека
 	
 def:c:GameObject
@@ -2898,6 +2898,74 @@ def:c:IDestructible
 		desc:Разрушаемый игровой объект. Все игровые объекты кроме мобов наследуются от данного класса.
 		path:Игровые объекты
 	
+def:m:IDestructible.isSingleSeat_0
+
+		name:Одноместное сиденье
+		namelib:Одноместное сиденье (одноместная кровать)
+		desc:Возвращает истину, если объект является одноместным сиденьем, стулом или кроватью.
+		type:const
+		return:bool:Одноместное сиденье
+	
+path:Игровые объекты.Сиденья
+def:m:IDestructible.getSeatMaxIndex_0
+
+		name:Макс. номер сиденья
+		desc:Возвращает максимальный номер (индекс) сиденья. Отсчет начинается с 0. Например, если проверяемый объект одноместное сиденье - возвращается ноль. Если двухместное - один, трехместное - два и т.д.
+		type:const
+		return:int:Максимальный номер сиденья
+	
+path:Игровые объекты.Сиденья
+def:m:IDestructible.canSeat_0
+
+		name:Сиденье свободно
+		desc:Возвращает истину, если сиденье по указанному номеру (индексу) никем не занято. Если указано число вне диапазона допустимых мест - вернет ЛОЖЬ.
+		type:get
+		lockoverride:1
+		return:bool:Место свободно
+	
+path:Игровые объекты.Сиденья
+def:m:IDestructible.getSeatOwner_0
+
+		name:Владелец места сиденья
+		desc:Возвращает сущность, которая заняла место на кровати или стуле. Если место свободно или не сущетсвует - возвращает null-ссылку.
+		type:get
+		lockoverride:1
+		return:Mob:Сущность, занявшая место, либо null-ссылка, если место не занято.
+	
+path:Игровые объекты.Сиденья
+def:m:IDestructible.getNearFreeSeatIndex_0
+
+		name:Ближайшее свободное сиденье
+		desc:Возвращает номер (индекс) ближайшего незанятого сиденья от цели. Если ближайшего места не найдено - возвращает -1. Данная функция полезна, когда вам нужно выбрать ближайшее свободное место для посадки вашего персонажа.
+		type:method
+		lockoverride:1
+		in:Mob:Проверяющий:Сущность от которой будет получено ближайшее место.
+		return:Mob:Сущность, занявшая место, либо null-ссылка, если место не занято.
+	
+path:Игровые объекты.Сиденья
+def:m:IDestructible.seatConnect_0
+
+		name:Занять место
+		desc:Производит попытку посадить сущность на сиденье по указанному номеру (индексу).
+		type:method
+		lockoverride:1
+		in:Mob:Сущность:Сущность, которая пытается сесть на сиденье или кровать.
+		in:int:Место:Номер сиденья (индекс), на который пытается сесть сущность.
+			opt:require=0:def=-1
+		return:bool:Была ли посажена сущность
+	
+path:Игровые объекты.Сиденья
+def:m:IDestructible.seatDisconnect_0
+
+		name:Освободить место
+		desc:Производит попытку освободить место, занятого сущностью.
+		type:method
+		lockoverride:1
+		in:int:Место:Номер сиденья (индекс), с которого должна встать сущность.
+			opt:require=0:def=-1
+		return:bool:Была ли сущность поднята с сиденья. Если место не было занято - возвращает ЛОЖЬ.
+	
+path:Игровые объекты.Сиденья
 def:c:BasicMob
 
 		name:Базовый моб
@@ -3236,6 +3304,34 @@ def:c:IRangedWeapon
 		name:Дистанционное оружие
 		desc:Оружие для дальнего боя (огнестрельное оружие)
 		path:Игровые объекты.Оружие.Дистанционное
+	
+def:m:IRangedWeapon.hasMagazine_0
+
+		name:Магазин вставлен
+		desc:Возвращает ИСТИНУ, если магазин заряжен в оружие. Для дробовиков, револьверов или однозарядных пистолетов всегда возвращает ИСТИНУ.
+		type:get
+		return:bool:Вставлен ли магазин в оружие
+	
+def:m:IRangedWeapon.getReqMagazineType_0
+
+		name:Допустимый тип магазина
+		desc:Возвращает имя класса магазина, который можно зарядить в оружие. Дочерние типы от этого магазина также могут быть заряжены в оружие.
+		type:const
+		return:classname:Имя класса магазина
+	
+def:m:IRangedWeapon.createMagazineWithAmmo_0
+
+		name:Создать магазин
+		desc:Создает магазин в оружии. Если магазин уже заряжен в оружии или указан несовместимый тип магазина - создание не произойдёт.
+		type:method
+		lockoverride:1
+		in:classname:Тип магазина:Тип создаваемого магазина
+			opt:def=IMagazineBase
+		in:classname:Тип патронов:Тип боеприпасов, создаваемых в оружии
+			opt:require=0:def=IAmmoBase
+		in:int:Количество:Сколько боеприпасов будет создано в магазине.
+			opt:require=0:def=0
+		return:IMagazineBase:Созданный магазин. Возвращает null-ссылку если создание не произошло.
 	
 def:m:IRangedWeapon.createAmmoInMagazine_0
 
@@ -4082,14 +4178,14 @@ $REGION:CLASSMETA
     "baseClass" : "object",
     "defined" : {"file":"..\\..\\host\\OOP_engine\\oop_object.sqf","line":107},
    "fields": { "defined": {
-"handleUpdate":{"return": "int"},"haveUpdateActions":{"return": "bool"}}   },
+"__handleUpdateNative__":{"return": "int"}}   },
    "methods": { "defined": {
-"hasUpdate":{"return": "<undefined>"},"doUpdateAction":{"return": "<undefined>"},"resetUpdateAction":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"enableAutoRefGC":{"return": "<undefined>"},"destructor":{"return": "<undefined>"}
+"isUpdateActive":{"return": "<undefined>"},"startUpdateOnConstruct":{"return": "<undefined>"},"enableAutoRefGC":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"setUpdate":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"onReloadClass":{"return": "<undefined>"}
 }   }
 }
 ,"RefCounterObject": {
     "baseClass" : "object",
-    "defined" : {"file":"..\\..\\host\\OOP_engine\\oop_object.sqf","line":186},
+    "defined" : {"file":"..\\..\\host\\OOP_engine\\oop_object.sqf","line":210},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -4116,7 +4212,7 @@ $REGION:CLASSMETA
 }
 ,"ReNode_AbstractEnum": {
     "baseClass" : "object",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":392},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":406},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -4845,7 +4941,7 @@ $REGION:CLASSMETA
 }
 ,"RDetClothThief": {
     "baseClass" : "GromilaCloth",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":820},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":827},
    "fields": { "defined": {
 "name":{"return": "string"},"armaClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -5790,7 +5886,7 @@ $REGION:CLASSMETA
 }
 ,"TestPistol": {
     "baseClass" : "PistolPBM",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":805},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":845},
    "fields": { "defined": {
 "shootCount":{"return": "int"}}   },
    "methods": { "defined": {
@@ -5799,7 +5895,7 @@ $REGION:CLASSMETA
 }
 ,"TestRifle": {
     "baseClass" : "RifleAuto",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":819},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":859},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -5808,7 +5904,7 @@ $REGION:CLASSMETA
 }
 ,"TestShotgun": {
     "baseClass" : "Shotgun",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":831},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":871},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -6024,7 +6120,7 @@ $REGION:CLASSMETA
 }
 ,"TestFullmag": {
     "baseClass" : "IMagazineBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":800},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":840},
    "fields": { "defined": {
 "maxCount":{"return": "int"}}   },
    "methods": { "defined": {
@@ -6294,7 +6390,7 @@ $REGION:CLASSMETA
 }
 ,"IAmmoBase": {
     "baseClass" : "Stack",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":707},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":747},
    "fields": { "defined": {
 "name":{"return": "string"},"stackName":{"return": "string"},"stackCount":{"return": "int"},"stackMaxAmount":{"return": "int"},"size":{"return": "int"},"weight":{"return": "float"},"model":{"return": "string"},"isFlyingFromWeapon":{"return": "bool"},"additionalAccuracy":{"return": "int"},"additionalDamage":{"return": "int"},"shotedFrom":{"return": "object"},"shooter":{"return": "object"}}   },
    "methods": { "defined": {
@@ -6303,7 +6399,7 @@ $REGION:CLASSMETA
 }
 ,"BulletCase": {
     "baseClass" : "Stack",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":762},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":802},
    "fields": { "defined": {
 "name":{"return": "string"},"stackName":{"return": "string"},"model":{"return": "string"},"stackCount":{"return": "int"},"stackMaxAmount":{"return": "int"},"size":{"return": "int"},"weight":{"return": "float"},"shootedTime":{"return": "int"}}   },
    "methods": { "defined": {
@@ -7734,7 +7830,7 @@ $REGION:CLASSMETA
 }
 ,"RDetectWorkDoc": {
     "baseClass" : "Paper",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":457},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":464},
    "fields": { "defined": {
 "name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -7743,7 +7839,7 @@ $REGION:CLASSMETA
 }
 ,"RDetectCheckMurder": {
     "baseClass" : "Paper",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":463},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":470},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"checkedMurder":{"return": "object"}}   },
    "methods": { "defined": {
@@ -7752,7 +7848,7 @@ $REGION:CLASSMETA
 }
 ,"RDetectMilkDoc": {
     "baseClass" : "Paper",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":761},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":768},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -7954,12 +8050,12 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "basicDistance":{"return": "int"},"halfDistance":{"return": "int"},"basicAccuracy":{"return": "int"},"basicDamage":{"return": "null_array"},"shootSpeed":{"return": "int"},"rateOfFire":{"return": "float"},"shootCount":{"return": "int"},"bullet":{"return": "object"},"magazine":{"return": "object"},"isSafeMode":{"return": "bool"},"reloadTime":{"return": "float"},"isShootMode":{"return": "bool"},"isJammed":{"return": "bool"}}   },
    "methods": { "defined": {
-"getVerbs":{"return": "<undefined>"},"isCocked":{"return": "<undefined>"},"getReqST":{"return": "<undefined>"},"getBasicDistance":{"return": "<undefined>"},"getHalfDistance":{"return": "<undefined>"},"getBasicAccuracy":{"return": "<undefined>"},"getBasicDamage":{"return": "<undefined>"},"getShootSpeed":{"return": "<undefined>"},"getLevelDown":{"return": "<undefined>"},"getPrecDown":{"return": "<undefined>"},"getShootDamageData":{"return": "<undefined>"},"getUsingSkill":{"return": "<undefined>"},"getShootDamageType":{"return": "<undefined>"},"getHandAnim":{"return": "<undefined>"},"getCombAnim":{"return": "<undefined>"},"getAmmoLoadType":{"return": "<undefined>"},"getLoadMagazineSound":{"return": "<undefined>"},"getUnloadMagazineSound":{"return": "<undefined>"},"getBoltSound":{"return": "<undefined>"},"getShootSound":{"return": "<undefined>"},"getDescFor":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"canShoot":{"return": "<undefined>"},"onCantShoot":{"return": "<undefined>"},"getRofCoef":{"return": "<undefined>"},"doJamWeapon":{"return": "<undefined>"},"tryUnjam":{"return": "<undefined>"},"doUnjamWeapon":{"return": "<undefined>"},"onCasingProcess":{"return": "<undefined>"},"getBullet":{"return": "<undefined>"},"canPrepareBulletAfterProj":{"return": "<undefined>"},"prepareProjectile":{"return": "<undefined>"},"getAttackVisualData":{"return": "<undefined>"},"getShootSoundDistance":{"return": "<undefined>"},"playShootSound":{"return": "<undefined>"},"playTriggerSound":{"return": "<undefined>"},"hasMagazine":{"return": "<undefined>"},"getReqMagazineType":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"getAmmoCaliber":{"return": "<undefined>"},"onAmmoInteract":{"return": "<undefined>"},"onBulletCaseInteract":{"return": "<undefined>"},"onItemClick":{"return": "<undefined>"},"onItemSelfClick":{"return": "<undefined>"},"handlePreCockProcess":{"return": "<undefined>"},"playBoltSound":{"return": "<undefined>"},"cockProcess":{"return": "<undefined>"},"prepareBullet":{"return": "<undefined>"},"loadMagazine":{"return": "<undefined>"},"unloadMagazine":{"return": "<undefined>"},"canMoveInItem":{"return": "<undefined>"},"onMoveInItem":{"return": "<undefined>"},"canMoveOutItem":{"return": "<undefined>"},"removeLoadedBullet":{"return": "<undefined>"},"onMoveOutItem":{"return": "<undefined>"},"createMagazine":{"return": "<undefined>"},"createAmmoInMagazine":{"return": "<undefined>"},"onPostShoot":{"return": "<undefined>"},"onPickup":{"return": "<undefined>"},"destructor":{"return": "<undefined>"}
+"getVerbs":{"return": "<undefined>"},"isCocked":{"return": "<undefined>"},"getReqST":{"return": "<undefined>"},"getBasicDistance":{"return": "<undefined>"},"getHalfDistance":{"return": "<undefined>"},"getBasicAccuracy":{"return": "<undefined>"},"getBasicDamage":{"return": "<undefined>"},"getShootSpeed":{"return": "<undefined>"},"getLevelDown":{"return": "<undefined>"},"getPrecDown":{"return": "<undefined>"},"getShootDamageData":{"return": "<undefined>"},"getUsingSkill":{"return": "<undefined>"},"getShootDamageType":{"return": "<undefined>"},"getHandAnim":{"return": "<undefined>"},"getCombAnim":{"return": "<undefined>"},"getAmmoLoadType":{"return": "<undefined>"},"getLoadMagazineSound":{"return": "<undefined>"},"getUnloadMagazineSound":{"return": "<undefined>"},"getBoltSound":{"return": "<undefined>"},"getShootSound":{"return": "<undefined>"},"getDescFor":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"canShoot":{"return": "<undefined>"},"onCantShoot":{"return": "<undefined>"},"getRofCoef":{"return": "<undefined>"},"doJamWeapon":{"return": "<undefined>"},"tryUnjam":{"return": "<undefined>"},"doUnjamWeapon":{"return": "<undefined>"},"onCasingProcess":{"return": "<undefined>"},"getBullet":{"return": "<undefined>"},"canPrepareBulletAfterProj":{"return": "<undefined>"},"prepareProjectile":{"return": "<undefined>"},"getAttackVisualData":{"return": "<undefined>"},"getShootSoundDistance":{"return": "<undefined>"},"playShootSound":{"return": "<undefined>"},"playTriggerSound":{"return": "<undefined>"},"hasMagazine":{"return": "<undefined>"},"getReqMagazineType":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"getAmmoCaliber":{"return": "<undefined>"},"onAmmoInteract":{"return": "<undefined>"},"onBulletCaseInteract":{"return": "<undefined>"},"onItemClick":{"return": "<undefined>"},"onItemSelfClick":{"return": "<undefined>"},"handlePreCockProcess":{"return": "<undefined>"},"playBoltSound":{"return": "<undefined>"},"cockProcess":{"return": "<undefined>"},"prepareBullet":{"return": "<undefined>"},"loadMagazine":{"return": "<undefined>"},"unloadMagazine":{"return": "<undefined>"},"canMoveInItem":{"return": "<undefined>"},"onMoveInItem":{"return": "<undefined>"},"canMoveOutItem":{"return": "<undefined>"},"removeLoadedBullet":{"return": "<undefined>"},"onMoveOutItem":{"return": "<undefined>"},"createMagazine":{"return": "<undefined>"},"createMagazineWithAmmo":{"return": "<undefined>"},"createAmmoInMagazine":{"return": "<undefined>"},"onPostShoot":{"return": "<undefined>"},"onPickup":{"return": "<undefined>"},"destructor":{"return": "<undefined>"}
 }   }
 }
 ,"IMagazineBase": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":492},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\RangedWeapon.sqf","line":532},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"maxCount":{"return": "int"},"weight":{"return": "int"},"size":{"return": "int"},"content":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -8179,7 +8275,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "seatListOwners":{"return": "null_array"},"_seatListDummy":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"}
+"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"}
 }   }
 }
 ,"IReagentItem": {
@@ -8407,6 +8503,42 @@ $REGION:CLASSMETA
 
 }   }
 }
+,"Grave4": {
+    "baseClass" : "Grave",
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":41},
+   "fields": { "defined": {
+"model":{"return": "string"}}   },
+   "methods": { "defined": {
+
+}   }
+}
+,"Grave3": {
+    "baseClass" : "Grave",
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":46},
+   "fields": { "defined": {
+"model":{"return": "string"}}   },
+   "methods": { "defined": {
+
+}   }
+}
+,"Grave2": {
+    "baseClass" : "Grave",
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":51},
+   "fields": { "defined": {
+"model":{"return": "string"}}   },
+   "methods": { "defined": {
+
+}   }
+}
+,"Grave1": {
+    "baseClass" : "Grave",
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":56},
+   "fields": { "defined": {
+"model":{"return": "string"}}   },
+   "methods": { "defined": {
+
+}   }
+}
 ,"MediumPileOfLightMud": {
     "baseClass" : "SmallDirtPile",
     "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":17},
@@ -8445,7 +8577,7 @@ $REGION:CLASSMETA
 }
 ,"DirtCraterLong": {
     "baseClass" : "SmallDirtPile",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":41},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":61},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8454,7 +8586,7 @@ $REGION:CLASSMETA
 }
 ,"MediumDirt": {
     "baseClass" : "SmallDirtPile",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":46},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":66},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8463,7 +8595,7 @@ $REGION:CLASSMETA
 }
 ,"SmallDirtBrown": {
     "baseClass" : "SmallDirtPile",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":51},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":71},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8472,7 +8604,7 @@ $REGION:CLASSMETA
 }
 ,"SmallDirtGrey": {
     "baseClass" : "SmallDirtPile",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":55},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\DirtPiles.sqf","line":75},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -10758,7 +10890,7 @@ $REGION:CLASSMETA
 }
 ,"RDetMailBox": {
     "baseClass" : "LongWeaponContainer",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":495},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":502},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"canUseContainer":{"return": "bool"}}   },
    "methods": { "defined": {
@@ -11050,7 +11182,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"seatListOwners":{"return": "null_array"},"_seatListDummy":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"},"getChairOffsetPos":{"return": "<undefined>"},"getChairOffsetDir":{"return": "<undefined>"}
+"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"},"getChairOffsetPos":{"return": "<undefined>"},"getChairOffsetDir":{"return": "<undefined>"}
 }   }
 }
 ,"IContainerStruct": {
@@ -12279,7 +12411,7 @@ $REGION:CLASSMETA
 }
 ,"MerchantConsoleOkopovo": {
     "baseClass" : "MerchantConsole",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Tech.sqf","line":1504},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Tech.sqf","line":1508},
    "fields": { "defined": {
 "money":{"return": "int"},"pipeside":{"return": "string"},"tradelist":{"return": "null_array"},"tradecats":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -12344,7 +12476,7 @@ $REGION:CLASSMETA
     "baseClass" : "ElectronicDevice",
     "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Tech.sqf","line":1086},
    "fields": { "defined": {
-"name":{"return": "string"},"model":{"return": "string"},"printer":{"return": "object"},"edIsEnabled":{"return": "bool"},"ndOpenedBy":{"return": "null_array"},"ndCurrentDisplay":{"return": "int"},"ndIsLockedInput":{"return": "bool"},"ndName":{"return": "string"},"ndInteractDistance":{"return": "float"},"dispMode":{"return": "int"},"curCat":{"return": "int"},"tradelist":{"return": "null_array"},"tradecats":{"return": "null_array"},"requestCart":{"return": "null_array"},"maxRequestCount":{"return": "int"},"money":{"return": "int"},"pipe":{"return": "object"},"dispModeCached":{"return": "int"}}   },
+"name":{"return": "string"},"model":{"return": "string"},"printer":{"return": "object"},"edIsEnabled":{"return": "bool"},"ndOpenedBy":{"return": "null_array"},"ndCurrentDisplay":{"return": "int"},"ndIsLockedInput":{"return": "bool"},"ndName":{"return": "string"},"ndInteractDistance":{"return": "float"},"dispMode":{"return": "int"},"curCat":{"return": "int"},"tradelist":{"return": "null"},"tradecats":{"return": "null_array"},"requestCart":{"return": "null_array"},"maxRequestCount":{"return": "int"},"money":{"return": "int"},"pipe":{"return": "object"},"dispModeCached":{"return": "int"}}   },
    "methods": { "defined": {
 "updateNDisplay":{"return": "<undefined>"},"handleNDInput":{"return": "<undefined>"},"openNDisplayImplBackend":{"return": "<undefined>"},"closeNDisplayImplBackend":{"return": "<undefined>"},"openNDisplay":{"return": "<undefined>"},"getNDPointer":{"return": "<undefined>"},"openNDisplayInternal":{"return": "<undefined>"},"closeNDisplay":{"return": "<undefined>"},"closeNDisplayServer":{"return": "<undefined>"},"closeNDisplayForAllMobs":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"getNDInfo":{"return": "<undefined>"},"linkPipe":{"return": "<undefined>"},"addTask":{"return": "<undefined>"},"onChangeEnergyState":{"return": "<undefined>"},"onChangeUsePower":{"return": "<undefined>"},"onChangeEnable":{"return": "<undefined>"},"setDispMode":{"return": "<undefined>"}
 }   }
@@ -13179,9 +13311,9 @@ $REGION:CLASSMETA
 }
 ,"MobWoman_Detective": {
     "baseClass" : "MobWoman",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":453},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":460},
    "fields": { "defined": {
-"evidenceFinded":{"return": "int"},"lastEvidenceTime":{"return": "int"},"evidencesList":{"return": "null_array"},"pointersSearched":{"return": "null_hashmap"},"const_timePerEvidence":{"return": "null_array"}}   },
+"evidenceFinded":{"return": "int"},"lastEvidenceTime":{"return": "int"},"evidencesList":{"return": "null_array"},"timeoutBeforeNextEvidence":{"return": "int"},"pointersSearched":{"return": "null_hashmap"},"const_timePerEvidence":{"return": "null_array"}}   },
    "methods": { "defined": {
 "constructor":{"return": "<undefined>"},"onDetectiveCheckEvidence":{"return": "<undefined>"},"onDetectiveCheckEvidenceProcess":{"return": "<undefined>"},"onDetectiveMind":{"return": "<undefined>"},"onDetectiveMindProcess":{"return": "<undefined>"}
 }   }
@@ -13197,9 +13329,9 @@ $REGION:CLASSMETA
 }
 ,"Mob_Detective": {
     "baseClass" : "Mob",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":449},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":456},
    "fields": { "defined": {
-"evidenceFinded":{"return": "int"},"lastEvidenceTime":{"return": "int"},"evidencesList":{"return": "null_array"},"pointersSearched":{"return": "null_hashmap"},"const_timePerEvidence":{"return": "null_array"}}   },
+"evidenceFinded":{"return": "int"},"lastEvidenceTime":{"return": "int"},"evidencesList":{"return": "null_array"},"timeoutBeforeNextEvidence":{"return": "int"},"pointersSearched":{"return": "null_hashmap"},"const_timePerEvidence":{"return": "null_array"}}   },
    "methods": { "defined": {
 "constructor":{"return": "<undefined>"},"onDetectiveCheckEvidence":{"return": "<undefined>"},"onDetectiveCheckEvidenceProcess":{"return": "<undefined>"},"onDetectiveMind":{"return": "<undefined>"},"onDetectiveMindProcess":{"return": "<undefined>"}
 }   }
@@ -13251,11 +13383,11 @@ $REGION:CLASSMETA
 }
 ,"IDestructible": {
     "baseClass" : "GameObject",
-    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":1206},
+    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":1208},
    "fields": { "defined": {
-"ht":{"return": "int"},"hp":{"return": "int"},"hpMax":{"return": "int"},"dr":{"return": "int"},"drMax":{"return": "int"},"germs":{"return": "int"},"__statusEffects":{"return": "null"}}   },
+"ht":{"return": "int"},"hp":{"return": "int"},"hpMax":{"return": "int"},"dr":{"return": "int"},"drMax":{"return": "int"},"germs":{"return": "int"},"__statusEffects":{"return": "null"},"seatListOwners":{"return": "null_array"},"_seatListDummy":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getDamageSound":{"return": "<undefined>"},"canApplyDamage":{"return": "<undefined>"},"objectHealthType":{"return": "<undefined>"},"onDestroyed":{"return": "<undefined>"},"applyDamage":{"return": "<undefined>"},"onChangeObjectHP":{"return": "<undefined>"},"onAffectDamageToPos":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getObjectPlace":{"return": "<undefined>"},"addStatusEffect":{"return": "<undefined>"},"removeStatusEffect":{"return": "<undefined>"}
+"getDamageSound":{"return": "<undefined>"},"canApplyDamage":{"return": "<undefined>"},"objectHealthType":{"return": "<undefined>"},"onDestroyed":{"return": "<undefined>"},"applyDamage":{"return": "<undefined>"},"onChangeObjectHP":{"return": "<undefined>"},"onAffectDamageToPos":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getObjectPlace":{"return": "<undefined>"},"addStatusEffect":{"return": "<undefined>"},"removeStatusEffect":{"return": "<undefined>"},"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"}
 }   }
 }
 ,"BasicMob": {
@@ -13264,7 +13396,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "Naming":{"return": "null"},"gender":{"return": "null"},"name":{"return": "string"},"age":{"return": "int"},"owner":{"return": "model"},"client":{"return": "object"},"playerClients":{"return": "null_array"},"visionBlock":{"return": "int"},"tasks":{"return": "null_array"},"basicRole":{"return": "object"},"role":{"return": "object"},"location":{"return": "object"},"handleUpdate":{"return": "int"},"__lastinteractdata__":{"return": "null_array"},"_internalND":{"return": "null"},"openedNDisplay":{"return": "object"},"__listactions":{"return": "null_array"},"_initialPos":{"return": "null_array"},"__lightSlots":{"return": "null_hashmap"},"__lastClientLighting":{"return": "int"},"__visualStates":{"return": "null_array"},"__firstLoginMesPool":{"return": "null_array"},"face":{"return": "string"},"voiceType":{"return": "string"},"__originVoiceType":{"return": "null"},"progressData":{"return": "null_array"},"__lcfmap":{"return": "null_hashmap"}}   },
    "methods": { "defined": {
-"isMob":{"return": "<undefined>"},"getNameFor":{"return": "<undefined>"},"isInWorld":{"return": "<undefined>"},"isChild":{"return": "<undefined>"},"isMale":{"return": "<undefined>"},"isFemale":{"return": "<undefined>"},"getLastPlayerClient":{"return": "<undefined>"},"addTask":{"return": "<undefined>"},"onInitRole":{"return": "<undefined>"},"setToRole":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"Destroy":{"return": "<undefined>"},"__destroyImpl":{"return": "<undefined>"},"clickTarget":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"mainAction":{"return": "<undefined>"},"extraAction":{"return": "<undefined>"},"onUpdate":{"return": "<undefined>"},"canSeeObject":{"return": "<undefined>"},"saveLastInteract":{"return": "<undefined>"},"getLastInteractStartPos":{"return": "<undefined>"},"getLastInteractEndPos":{"return": "<undefined>"},"getLastInteractDistance":{"return": "<undefined>"},"getLastInteractVector":{"return": "<undefined>"},"getLastInteractTarget":{"return": "<undefined>"},"getLastInteractNormal":{"return": "<undefined>"},"canInteractWithSavedObject":{"return": "<undefined>"},"getInteractionTarget":{"return": "<undefined>"},"generateLastInteractOnServer":{"return": "<undefined>"},"isOpenedNDisplay":{"return": "<undefined>"},"closeOpenedNetDisplay":{"return": "<undefined>"},"ShowMessageBox":{"return": "<undefined>"},"CloseMessageBox":{"return": "<undefined>"},"UpdateMessageBox":{"return": "<undefined>"},"setMessageBoxContext":{"return": "<undefined>"},"SetMessageBoxEvent":{"return": "<undefined>"},"loadActions":{"return": "<undefined>"},"hasAction":{"return": "<undefined>"},"addAction":{"return": "<undefined>"},"playAction":{"return": "<undefined>"},"removeAction":{"return": "<undefined>"},"setInitialPos":{"return": "<undefined>"},"getInitialPos":{"return": "<undefined>"},"initAsActor":{"return": "<undefined>"},"onChangeLocality":{"return": "<undefined>"},"isPlayer":{"return": "<undefined>"},"onConnected":{"return": "<undefined>"},"onDisconnected":{"return": "<undefined>"},"setPos":{"return": "<undefined>"},"getPos":{"return": "<undefined>"},"isTouchingGround":{"return": "<undefined>"},"setDir":{"return": "<undefined>"},"getDir":{"return": "<undefined>"},"getRealSpeed":{"return": "<undefined>"},"getDirTo":{"return": "<undefined>"},"getDirectionTo":{"return": "<undefined>"},"getDistanceTo":{"return": "<undefined>"},"getStance":{"return": "<undefined>"},"isWalking":{"return": "<undefined>"},"isRunning":{"return": "<undefined>"},"isSprinting":{"return": "<undefined>"},"getSpeedMode":{"return": "<undefined>"},"getAnimation":{"return": "<undefined>"},"sendInfo":{"return": "<undefined>"},"fastSendInfo":{"return": "<undefined>"},"requestSMDUpdate":{"return": "<undefined>"},"syncSmdSlot":{"return": "<undefined>"},"syncSmdVar":{"return": "<undefined>"},"getBodyPartStatusArray":{"return": "<undefined>"},"syncBodyParts":{"return": "<undefined>"},"getLighting":{"return": "<undefined>"},"addVisualState":{"return": "<undefined>"},"removeVisualState":{"return": "<undefined>"},"hasVisualState":{"return": "<undefined>"},"updateVisualState":{"return": "<undefined>"},"generateNaming":{"return": "<undefined>"},"getFirstName":{"return": "<undefined>"},"getSecondName":{"return": "<undefined>"},"getNameEx":{"return": "<undefined>"},"getFirstNameEx":{"return": "<undefined>"},"getSecondNameEx":{"return": "<undefined>"},"getDescFor":{"return": "<undefined>"},"examine":{"return": "<undefined>"},"isFirstJoin":{"return": "<undefined>"},"addFirstJoinMessage":{"return": "<undefined>"},"printFirstJoinMessage":{"return": "<undefined>"},"_localSayWrapper":{"return": "<undefined>"},"localSay":{"return": "<undefined>"},"worldSay":{"return": "<undefined>"},"meSay":{"return": "<undefined>"},"addToKnown":{"return": "<undefined>"},"removeFromKnown":{"return": "<undefined>"},"getKnownName":{"return": "<undefined>"},"isKnownTarget":{"return": "<undefined>"},"visibleSay":{"return": "<undefined>"},"mindSay":{"return": "<undefined>"},"applyGlobalAnim":{"return": "<undefined>"},"onChangeAnimCoef":{"return": "<undefined>"},"setCustomAnimState":{"return": "<undefined>"},"getMobFace":{"return": "<undefined>"},"setMobFace":{"return": "<undefined>"},"setMobFaceAnim":{"return": "<undefined>"},"applyVoiceType":{"return": "<undefined>"},"updateVoiceType":{"return": "<undefined>"},"playSoundData":{"return": "<undefined>"},"playSoundLocal":{"return": "<undefined>"},"playMusic":{"return": "<undefined>"},"pauseMusic":{"return": "<undefined>"},"stopMusic":{"return": "<undefined>"},"playSoundUI":{"return": "<undefined>"},"startSelfProgress":{"return": "<undefined>"},"startProgress":{"return": "<undefined>"},"isProgressProcess":{"return": "<undefined>"},"stopProgress":{"return": "<undefined>"},"successProgress":{"return": "<undefined>"},"startSelfContextProgress":{"return": "<undefined>"},"startContextProgress":{"return": "<undefined>"},"isSuccessContextProgress":{"return": "<undefined>"},"localEffectUpdate":{"return": "<undefined>"},"localEffectRemove":{"return": "<undefined>"},"localEffectClearAll":{"return": "<undefined>"},"localEffectSyncAll":{"return": "<undefined>"},"localEffectExists":{"return": "<undefined>"},"isFailCombat":{"return": "<undefined>"},"applyFailCombat":{"return": "<undefined>"}
+"isMob":{"return": "<undefined>"},"getNameFor":{"return": "<undefined>"},"isInWorld":{"return": "<undefined>"},"isChild":{"return": "<undefined>"},"isMale":{"return": "<undefined>"},"isFemale":{"return": "<undefined>"},"getLastPlayerClient":{"return": "<undefined>"},"addTask":{"return": "<undefined>"},"onInitRole":{"return": "<undefined>"},"setToRole":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"Destroy":{"return": "<undefined>"},"__destroyImpl":{"return": "<undefined>"},"clickTarget":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"mainAction":{"return": "<undefined>"},"extraAction":{"return": "<undefined>"},"onUpdate":{"return": "<undefined>"},"canSeeObject":{"return": "<undefined>"},"saveLastInteract":{"return": "<undefined>"},"getLastInteractStartPos":{"return": "<undefined>"},"getLastInteractEndPos":{"return": "<undefined>"},"getLastInteractDistance":{"return": "<undefined>"},"getLastInteractVector":{"return": "<undefined>"},"getLastInteractTarget":{"return": "<undefined>"},"getLastInteractNormal":{"return": "<undefined>"},"canInteractWithSavedObject":{"return": "<undefined>"},"getInteractionTarget":{"return": "<undefined>"},"generateLastInteractOnServer":{"return": "<undefined>"},"isOpenedNDisplay":{"return": "<undefined>"},"closeOpenedNetDisplay":{"return": "<undefined>"},"ShowMessageBox":{"return": "<undefined>"},"CloseMessageBox":{"return": "<undefined>"},"UpdateMessageBox":{"return": "<undefined>"},"setMessageBoxContext":{"return": "<undefined>"},"SetMessageBoxEvent":{"return": "<undefined>"},"loadActions":{"return": "<undefined>"},"hasAction":{"return": "<undefined>"},"addAction":{"return": "<undefined>"},"playAction":{"return": "<undefined>"},"removeAction":{"return": "<undefined>"},"setInitialPos":{"return": "<undefined>"},"getInitialPos":{"return": "<undefined>"},"initAsActor":{"return": "<undefined>"},"onChangeLocality":{"return": "<undefined>"},"isPlayer":{"return": "<undefined>"},"onConnected":{"return": "<undefined>"},"onDisconnected":{"return": "<undefined>"},"setPos":{"return": "<undefined>"},"setPosServer":{"return": "<undefined>"},"getPos":{"return": "<undefined>"},"isTouchingGround":{"return": "<undefined>"},"setDir":{"return": "<undefined>"},"getDir":{"return": "<undefined>"},"getRealSpeed":{"return": "<undefined>"},"getDirTo":{"return": "<undefined>"},"getDirectionTo":{"return": "<undefined>"},"getDistanceTo":{"return": "<undefined>"},"getStance":{"return": "<undefined>"},"isWalking":{"return": "<undefined>"},"isRunning":{"return": "<undefined>"},"isSprinting":{"return": "<undefined>"},"getSpeedMode":{"return": "<undefined>"},"getAnimation":{"return": "<undefined>"},"sendInfo":{"return": "<undefined>"},"fastSendInfo":{"return": "<undefined>"},"requestSMDUpdate":{"return": "<undefined>"},"syncSmdSlot":{"return": "<undefined>"},"syncSmdVar":{"return": "<undefined>"},"getBodyPartStatusArray":{"return": "<undefined>"},"syncBodyParts":{"return": "<undefined>"},"getLighting":{"return": "<undefined>"},"addVisualState":{"return": "<undefined>"},"removeVisualState":{"return": "<undefined>"},"hasVisualState":{"return": "<undefined>"},"updateVisualState":{"return": "<undefined>"},"generateNaming":{"return": "<undefined>"},"getFirstName":{"return": "<undefined>"},"getSecondName":{"return": "<undefined>"},"getNameEx":{"return": "<undefined>"},"getFirstNameEx":{"return": "<undefined>"},"getSecondNameEx":{"return": "<undefined>"},"getDescFor":{"return": "<undefined>"},"examine":{"return": "<undefined>"},"isFirstJoin":{"return": "<undefined>"},"addFirstJoinMessage":{"return": "<undefined>"},"printFirstJoinMessage":{"return": "<undefined>"},"_localSayWrapper":{"return": "<undefined>"},"localSay":{"return": "<undefined>"},"worldSay":{"return": "<undefined>"},"meSay":{"return": "<undefined>"},"addToKnown":{"return": "<undefined>"},"removeFromKnown":{"return": "<undefined>"},"getKnownName":{"return": "<undefined>"},"isKnownTarget":{"return": "<undefined>"},"visibleSay":{"return": "<undefined>"},"mindSay":{"return": "<undefined>"},"applyGlobalAnim":{"return": "<undefined>"},"onChangeAnimCoef":{"return": "<undefined>"},"setCustomAnimState":{"return": "<undefined>"},"getMobFace":{"return": "<undefined>"},"setMobFace":{"return": "<undefined>"},"setMobFaceAnim":{"return": "<undefined>"},"applyVoiceType":{"return": "<undefined>"},"updateVoiceType":{"return": "<undefined>"},"playSoundData":{"return": "<undefined>"},"playSoundLocal":{"return": "<undefined>"},"playMusic":{"return": "<undefined>"},"pauseMusic":{"return": "<undefined>"},"stopMusic":{"return": "<undefined>"},"playSoundUI":{"return": "<undefined>"},"startSelfProgress":{"return": "<undefined>"},"startProgress":{"return": "<undefined>"},"isProgressProcess":{"return": "<undefined>"},"stopProgress":{"return": "<undefined>"},"successProgress":{"return": "<undefined>"},"startSelfContextProgress":{"return": "<undefined>"},"startContextProgress":{"return": "<undefined>"},"isSuccessContextProgress":{"return": "<undefined>"},"localEffectUpdate":{"return": "<undefined>"},"localEffectRemove":{"return": "<undefined>"},"localEffectClearAll":{"return": "<undefined>"},"localEffectSyncAll":{"return": "<undefined>"},"localEffectExists":{"return": "<undefined>"},"isFailCombat":{"return": "<undefined>"},"applyFailCombat":{"return": "<undefined>"}
 }   }
 }
 ,"GameObject": {
@@ -14187,7 +14319,7 @@ $REGION:CLASSMETA
 }
 ,"RButler": {
     "baseClass" : "RDetectiveModeRole",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":516},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":523},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"reputationNeed":{"return": "null_array"},"count":{"return": "int"}}   },
    "methods": { "defined": {
@@ -14196,7 +14328,7 @@ $REGION:CLASSMETA
 }
 ,"RDetectiveTrader": {
     "baseClass" : "RDetectiveModeRole",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":545},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":552},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"reputationNeed":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -14205,7 +14337,7 @@ $REGION:CLASSMETA
 }
 ,"RStorozh": {
     "baseClass" : "RDetectiveModeRole",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":593},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":600},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"reputationNeed":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -14214,7 +14346,7 @@ $REGION:CLASSMETA
 }
 ,"RDetectiveHelper": {
     "baseClass" : "RDetectiveModeRole",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":629},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":636},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"reputationNeed":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -14223,7 +14355,7 @@ $REGION:CLASSMETA
 }
 ,"RDetectiveFriend": {
     "baseClass" : "RDetectiveModeRole",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":682},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":689},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"reputationNeed":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -14232,7 +14364,7 @@ $REGION:CLASSMETA
 }
 ,"RDetectiveMilker": {
     "baseClass" : "RDetectiveModeRole",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":717},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":724},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"reputationNeed":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -14241,7 +14373,7 @@ $REGION:CLASSMETA
 }
 ,"RDetectiveThief": {
     "baseClass" : "RDetectiveModeRole",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":768},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\DetectiveModeRoles.sqf","line":775},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"reputationNeed":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -15078,7 +15210,7 @@ $REGION:CLASSMETA
 }
 ,"ScriptedRole": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":402},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":416},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descInGame":{"return": "string"},"classMan":{"return": "string"},"classWoman":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"_deadTimeout":{"return": "int"},"count":{"return": "int"},"_currentBaseSkills":{"return": "null_array"},"_currentOtherSkills":{"return": "null_array"},"_currentSpawnLocation":{"return": "null_array"},"_currentConnectedTo":{"return": "null_array"}}   },
    "methods": { "defined": {

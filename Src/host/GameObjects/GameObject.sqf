@@ -1447,5 +1447,10 @@ class(IDestructible) extends(GameObject)
 	// node_met
 	// func(lightSetMode) {objParams_1(_m); setLastError("Установка света не поддерживается для класса " + callSelf(getClassName));};
 
+	__iseat_node_init__ = true;
+	__iseat_node_postfix = endl + "path:Игровые объекты.Сиденья";
+	#include "Interfaces\ISeat.Interface"
+	__iseat_node_init__ = null;
+	__iseat_node_postfix = null;
 
 endclass
