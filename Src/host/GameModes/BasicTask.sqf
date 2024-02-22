@@ -12,6 +12,10 @@ taskSystem_checkedOnEndRound = [];
 
 taskSystem_map_tags = createHashMap; //map of all tagged tasks
 
+//register tasksystem functions
+#include "taskSystem_functions.sqf"
+
+
 #ifdef EDITOR
 	#define editor_task_test
 #endif
@@ -35,27 +39,113 @@ taskSystem_map_tags = createHashMap; //map of all tagged tasks
 	ReagentTask - получить определенный реагент
 */
 
+class(TaskParamsProvider)
+	"
+		name:Параметры задачи
+		desc:Специальный объект, предоставляющий указание параметров для разных типов задач.
+		path:Игровая логика.Задачи
+	" node_class
+
+	var(itemRefList,[]);
+	var(itemGRefList,[]);
+	var(itemTypeList,[]);
+	
+endclass
+
 editor_attribute("ColorClass" arg "1370A2")
 class(TBase) extends(IGameEvent)
+
+	"
+		name:Задача
+		desc:Базовая игровая задача для персонажа
+		path:Игровая логика.Задачи
+	" node_class
+
+	"
+		name:Тэг задачи
+		desc:Тэг созданной задачи. По умолчанию пустая строка
+		prop:get
+	" node_var
 	var(tag,"");//системный тэг задачи
 	
+	"
+		name:Название задачи
+		desc:Название задачи
+		prop:all
+		defval:Задача
+	" node_var
 	var(name,"Задача");
+
+	"
+		name:Описание задачи
+		desc:Системное описание задачи
+		prop:all
+		defval:Сделать дело
+	" node_var
 	var(desc,"Сделать дело");
+
+	"
+		name:Ролевое описание задачи
+		desc:Ролевое описание задачи
+		prop:all
+		defval:Нужно сделать дело...
+	" node_var
 	var(descRoleplay,"Нужно сделать дело...");
 
+	"
+		name:Получить описание задачи
+		desc:Функция получения системного описания задачи. По умолчанию возвращает значение свойства описания задачи
+		type:get
+		lockoverride:1
+		return:string:Описание задачи
+	" node_met
 	getter_func(getDesc,getSelf(getDesc));
+
+	"
+		name:Получить ролевое описание задачи
+		desc:Функция получения ролевого описания задачи. По умолчанию возвращает значение свойства ролевого описания задачи
+		type:get
+		lockoverride:1
+		return:string:Ролевое описание задачи
+	" node_met
 	getter_func(getDescRoleplay,getSelf(descRoleplay));
 	
 	autoref var(_handle,-1); //хандлер для цикла
 
 	var(mob,nullPtr); //владелец этой задачи
 	
+	"
+		name:Задача завершена
+		desc:Возвращает ИСТИНУ, если задача завершила выполнение. Провал задачи также считается завершением.
+		prop:get
+		return:bool:Завершено ли выполнение задачи
+		defval:false
+	" node_var
 	var(isDone,false); //завершена ли задача
+	"
+		name:Результат задачи
+		desc:Возвращает числовое значение результата задачи. Если результат равен нулю, то считается что задача не выполнена.
+		prop:get
+		return:int:Результат выполнения задачи
+		defval:0
+	" node_var
 	var(result,0); //всё что отлично от 0 является результатом задачи. Принимается правило, что отрицательные значения - провал, положительные - успех
 	
 	// Если false проверка успеха каждые checkDelay сек а при выполнении условия остановка проверки
 	// В ином случае проверка будет осуществлена только в конце раунда
+	"
+		name:Проверка задачи в конце раунда
+		desc:Значение, отвечающее за то когда будет проверен результат выполнения задачи. Если ИСТИНА - задача проверяется с момента получения до выполнения. Если ЛОЖЬ - полученная задача будет проверена только в конце раунда.
+	" node_var
 	getterconst_func(checkOnlyAfterEndRound,false);
+
+	"
+		name:Частота проверки задачи
+		desc:Время, через которое выполняется проверка условия выполнения задачи
+		type:const
+		return:int:Частота проверки условия задачи
+		defval:2
+	" node_var
 	getterconst_func(checkDelay,2);
 
 	// Останавливает процесс проверки результата по выполнению задачи. Работает вкупе с checkOnlyAfterEndRound
@@ -83,6 +173,8 @@ class(TBase) extends(IGameEvent)
 
 		taskSystem_allTasks pushBack this;
 
+		callSelfParams(setTag,getSelf(tag));
+
 		if callSelf(checkOnlyAfterEndRound) then {
 			taskSystem_checkedOnEndRound pushBack this;
 		} else {
@@ -103,6 +195,13 @@ class(TBase) extends(IGameEvent)
 	};
 
 	//Установить тэг задачи
+	"
+		name:Установить тэг задачи
+		desc:Устанавливает тэг задачи. Может быть несколько задач с одинаковым тэгом.
+		type:method
+		lockoverride:1
+		in:string:Тэг:Новый тэг задачи
+	" node_met
 	func(setTag)
 	{
 		objParams_1(_tagName);
@@ -125,6 +224,23 @@ class(TBase) extends(IGameEvent)
 	func(handleTaskAddedParams)
 	{
 		objParams_1(_ctx);
+	};
+
+	func(processTaskParamsProvider)
+	{
+		objParams_1(_tpar);
+		if (equalTypes(_tpar,nullPtr) && {isTypeOf(_tpar,TaskParamsProvider)}) exitWith {
+			private _params = callSelfParams(unpackTaskParamsProvider,_tpar);
+			delete(_tpar);
+			_params
+		};
+		_tpar
+	};
+
+	func(unpackTaskParamsProvider)
+	{
+		objParams_1(_t);
+		null
 	};
 
 	//внутренняя реализация и обработка условий каждые checkDelay секунд
@@ -239,6 +355,9 @@ class(ConditionalTask) extends(TBase)
 	func(handleTaskAddedParams)
 	{
 		objParams_1(_ctx);
+		
+		_ctx = callSelfParams(processTaskParamsProvider,_ctx);
+
 		if (isNullVar(_ctx) && !isNull(getSelf(condition))) then {
 			_ctx = getSelf(condition);
 		};
@@ -270,6 +389,7 @@ endclass
 
 //задача получения предмета. выполнено когда сущность имеет в наличии предмет
 class(ItemGetTask) extends(TBase)
+
 	var(name,"Добыть предмет");
 	var(desc,"Нужно заполучить определенные вещи: %1");
 	var(descRoleplay,"Мне очень нужно достать кое-что: %1");
@@ -311,6 +431,8 @@ class(ItemGetTask) extends(TBase)
 	{
 		objParams_1(_ctx);
 		
+		_ctx = callSelfParams(processTaskParamsProvider,_ctx);
+
 		if (isNullVar(_ctx) && isNull(getSelf(item))) exitwith {
 			taskError("items data not setted");
 		};
@@ -405,6 +527,8 @@ class(TargetSaveTask) extends(TBase)
 	{
 		objParams_1(_ctx);
 
+		_ctx = callSelfParams(processTaskParamsProvider,_ctx);
+
 		if (isNullVar(_ctx) && isNullReference(getSelf(target))) exitwith {
 			taskError("Null context");
 		};
@@ -435,6 +559,9 @@ class(SelfSafeTask) extends(TargetSaveTask)
 	func(handleTaskAddedParams)
 	{
 		objParams_1(_ctx);
+
+		_ctx = callSelfParams(processTaskParamsProvider,_ctx);
+
 		setSelf(target,getSelf(mob));
 	};
 endclass
@@ -479,6 +606,8 @@ class(LocationTask) extends(TBase)
 	func(handleTaskAddedParams)
 	{
 		objParams_1(_ctx);
+		
+		_ctx = callSelfParams(processTaskParamsProvider,_ctx);
 		
 		if (isNullVar(_ctx) && !isNull(getSelf(pos))) then {
 			_ctx = getSelf(pos);
@@ -531,53 +660,6 @@ class(LocationTask) extends(TBase)
 	};
 endclass
 
-//кастомная задача. контекст является кодом с параметрами, которые обрабатываются самостоятельно
-//! OBSOLETED. Do not use this in new code
-class(CustomTask) extends(TBase)
-
-	func(constructor)
-	{
-		objParams();
-	};
-
-	var(checkOnlyAfterEndRound,false);
-	var(checkDelay,2);
-	var(stopOnSuccess,false);
-
-	var(eventCheckCondition,{});
-	var(eventHandleTaskAddedParams,{});
-	var(eventOnSuccess,{});
-	var(eventOnFail,{});
-
-	getterconst_func(checkOnlyAfterEndRound,getSelf(checkOnlyAfterEndRound));
-	getterconst_func(checkDelay,getSelf(checkDelay));
-	getter_func(stopOnSuccess,getSelf(stopOnSuccess));
-	func(handleTaskAddedParams)
-	{
-		objParams_1(_ctx);
-		
-		vec2(this,_ctx) call getSelf(eventHandleTaskAddedParams);
-	};
-
-	func(checkCondition)
-	{
-		objParams();
-		this call getSelf(eventCheckCondition);
-	};
-
-	func(onSuccess)
-	{
-		objParams();
-		call getSelf(eventOnSuccess);
-	};
-
-	func(onFail)
-	{
-		objParams();
-		call getSelf(eventOnFail);
-	};
-endclass
-
 //задача скопить денег. считается выполненным когда нужная сумма собрана
 //TODO MoneySaveTask
 class(MoneyGetTask) extends(TBase)
@@ -601,6 +683,8 @@ class(MoneyGetTask) extends(TBase)
 	func(handleTaskAddedParams)
 	{
 		objParams_1(_ctx);
+
+		_ctx = callSelfParams(processTaskParamsProvider,_ctx);
 
 		if (isNullVar(_ctx) && !isNull(getSelf(amount))) then {
 			_ctx = getSelf(amount);
@@ -659,6 +743,8 @@ class(RoleGetTask) extends(TBase)
 	{
 		objParams_1(_ctx);
 		
+		_ctx = callSelfParams(processTaskParamsProvider,_ctx);
+
 		if (isNullVar(_ctx) && getSelf(roleClass)!="") then {
 			_ctx = getSelf(roleClass);
 		};	
@@ -701,6 +787,8 @@ class(StatusEffectGetTask) extends(TBase)
 	{
 		objParams_1(_ctx);
 		
+		_ctx = callSelfParams(processTaskParamsProvider,_ctx);
+
 		if (isNullVar(_ctx) || {isNullReference(typeGetFromString(_ctx))}) exitwith {
 			taskError("null context or wrong status effect type");
 		};
@@ -720,4 +808,53 @@ endclass
 //задача на получение реагента
 class(ReagentTask) extends(TBase)
 	getterconst_func(checkDelay,1); //с реагентами ситуация как и в случае StatusEffectTask
+endclass
+
+
+
+//кастомная задача. контекст является кодом с параметрами, которые обрабатываются самостоятельно
+//! OBSOLETED. Do not use this in new code
+class(CustomTask) extends(TBase)
+
+	func(constructor)
+	{
+		objParams();
+	};
+
+	var(checkOnlyAfterEndRound,false);
+	var(checkDelay,2);
+	var(stopOnSuccess,false);
+
+	var(eventCheckCondition,{});
+	var(eventHandleTaskAddedParams,{});
+	var(eventOnSuccess,{});
+	var(eventOnFail,{});
+
+	getterconst_func(checkOnlyAfterEndRound,getSelf(checkOnlyAfterEndRound));
+	getterconst_func(checkDelay,getSelf(checkDelay));
+	getter_func(stopOnSuccess,getSelf(stopOnSuccess));
+	func(handleTaskAddedParams)
+	{
+		objParams_1(_ctx);
+		
+		vec2(this,_ctx) call getSelf(eventHandleTaskAddedParams);
+	};
+
+	func(checkCondition)
+	{
+		objParams();
+		this call getSelf(eventCheckCondition);
+	};
+
+	func(onSuccess)
+	{
+		objParams();
+		call getSelf(eventOnSuccess);
+	};
+
+	func(onFail)
+	{
+		objParams();
+		call getSelf(eventOnFail);
+	};
 endclass

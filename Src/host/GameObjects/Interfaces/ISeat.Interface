@@ -80,6 +80,20 @@ func(constructor)
 	_l resize _count;
 	setSelf(seatListOwners,_l apply {nullPtr});
 	setSelf(_seatListDummy,_l apply {objNUll});
+
+	//validate getChairOffsetPos
+	#ifdef EDITOR
+	private _chofs = callSelf(getChairOffsetPos);
+	if (count _chofs == 1 && {not_equalTypes(_chofs select 0,0)}) then {
+		private _m = format["Ошибка при определении getChairOffsetPos для класса '%1'. Если ваше сиденье одноместное, то массив не должен быть вложен;%4%4    Получено: %2%4    Ожидается: %3",
+		callSelf(getClassName),
+		_chofs,
+		_chofs select 0,
+		endl
+		];
+		setLastError(_m);
+	};
+	#endif
 };
 
 if !isNullVar(__iseat_node_init__) then {

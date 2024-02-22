@@ -108,11 +108,24 @@ class(BasicMob) extends(GameObject)
 	
 	var(tasks,[]);
 
+	"
+		name:Добавить задачу
+		desc:Добавляет персонажу новую задачу. Возвращает результат добавления задачи. Если она была добавлена для персонажа - возвращает ИСТИНУ.
+		type:method
+		lockoverride:1
+		in:TBase:Задача:Добавляемая задача для персонажа
+		in:TaskParamsProvider:Параметры задачи:Параметры выполнения задачи
+		return:bool:Была ли задача успешно добавлена.
+	" node_met
 	func(addTask)
 	{
 		objParams_2(_v,_ctx);
 		if (equalTypes(_v,"") && {!isTypeNameOf(_v,TBase)}) exitwith {
 			errorformat("Cant add task %1 for %2 <%3> - task does not exists",_v arg getSelf(pointer) arg callSelf(getClassName));
+			false
+		};
+		if (equalTypes(_v,nullPtr) && {!isTypeOf(_v,TBase)}) exitWith {
+			errorformat("Cant add task object %1 for %2 <%3>",_v arg getSelf(pointer) arg callSelf(getClassName));
 			false
 		};
 		private _t = ifcheck(equalTypes(_v,""),instantiate(_v),_v);

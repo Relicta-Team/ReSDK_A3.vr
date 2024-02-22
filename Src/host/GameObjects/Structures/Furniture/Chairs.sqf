@@ -23,14 +23,14 @@ editor_attribute("EditorGenerated")
 class(OldGreenToiletBowl) extends(IChair)
 	var(model,"ml\ml_object_new\model_24\tolchek.p3d");
 	var(name,"Туалет");
-	getter_func(getChairOffsetPos,[[-0.0479994 arg -0.0999994 arg -1.1]]);
+	getter_func(getChairOffsetPos,[-0.0479994 arg -0.0999994 arg -1.1]);
 	getterconst_func(getChairOffsetDir,180);
 endclass
 
 editor_attribute("EditorGenerated")
 class(BrownOldArmchair) extends(IChair)
 	var(model,"ml\ml_object_new\model_14_10\kreslo.p3d");
-	getter_func(getChairOffsetPos,[[0 arg 0.3 arg -0.5]]);
+	getter_func(getChairOffsetPos,[0 arg 0.3 arg -0.5]);
 endclass
 
 

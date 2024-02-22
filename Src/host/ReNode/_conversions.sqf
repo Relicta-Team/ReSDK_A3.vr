@@ -89,7 +89,7 @@ format["
     node:stringToClassname
     name:Строку в имя класса
     path:Преобразования
-    desc:Преобразует строку в имя класса. Если 
+    desc:Преобразует строку в имя класса. Если полученная строка не является валидным именем класса - вернет имя класса по умолчанию.
     icon:data\\icons\\icon_BluePrintEditor_Function_16px
     color:PureFunction
     exec:pure

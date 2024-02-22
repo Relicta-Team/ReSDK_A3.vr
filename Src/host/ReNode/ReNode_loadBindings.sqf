@@ -61,4 +61,9 @@ nodeModule_setPath("Контроль игры")
 #include "..\GamemodeManager\GamemodeManager.hpp"
 #include "..\GamemodeManager\GamemodeFunctions.sqf"
 
+nodeModule_register("taskSystem")
+nodeModule_setPath("Игровая логика.Задачи")
+
+#include "..\GameModes\taskSystem_functions.sqf"
+
 //

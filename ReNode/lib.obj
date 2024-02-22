@@ -1169,7 +1169,7 @@ def:node:conversion
     node:stringToClassname
     name:Строку в имя класса
     path:Преобразования
-    desc:Преобразует строку в имя класса. Если 
+    desc:Преобразует строку в имя класса. Если полученная строка не является валидным именем класса - вернет имя класса по умолчанию.
     icon:data\\icons\\icon_BluePrintEditor_Function_16px
     color:PureFunction
     exec:pure
@@ -2531,6 +2531,56 @@ def:func:native_functions
 
 node:getObjectByRef
 path:Игровые объекты.Утилиты
+
+def:func:taskSystem
+
+	name:Есть задача с тэгом
+	desc:Возвращает ИСТИНУ, если с указанным тегом существует хотя бы одна задача
+	in:string:Тэг:Проверяемый тэг задач
+	out:bool:Существует:Возвращает результат - существует ли одна или несколько задач с таким тэгом
+
+node:taskSystem_hasTaskByTag
+path:Игровая логика.Задачи
+
+def:func:taskSystem
+
+	name:Все задачи с тэгом
+	desc:Возвращает список задач с указанным тэгом. Если задач с таким тэгом не найдено - возвращается пустой массив.
+	in:string:Тэг:Проверяемый тэг задач
+	out:array[TBase]:Задачи:Список задач с указанным тэгом.
+
+node:taskSystem_getAllTasksByTag
+path:Игровая логика.Задачи
+
+def:func:taskSystem
+
+	name:Первая задача с тэгом
+	desc:Возвращает первую задачу с указанным тэгом. Если задач с указанным тэгом не существует - возвращает null-объект.
+	in:string:Тэг:Проверяемый тэг задач
+	out:TBase:Задача:Первая задача с указанным тэгом.
+
+node:taskSystem_getFirstTaskByTag
+path:Игровая логика.Задачи
+
+def:func:taskSystem
+
+	name:Любая задача с тэгом выполнена
+	desc:Возвращает ИСТИНУ, если хотя бы одна задача с указанным тэгом успешно выполнена. Успешным выполнением является результат задачи больше нуля.
+	in:string:Тэг:Проверяемый тэг задач
+	out:bool:Выполнена:Есть ли выполненная задача с указанным тэгом. Если задач с указанным тэгом не существует - возвращает ЛОЖЬ.
+
+node:taskSystem_hasAnySuccessTaskByTag
+path:Игровая логика.Задачи
+
+def:func:taskSystem
+
+	name:Все задачи с тэгом выполнены
+	desc:Возвращает ИСТИНУ, если все задачи с указанным тэгом успешно выполнена. Успешным выполнением является результат задачи больше нуля.
+	in:string:Тэг:Проверяемый тэг задач
+	out:bool:Выполнены:Выполнены ли все задачи с указанным тэгом. Если задач с указанным тэгом не существует - возвращает ЛОЖЬ.
+
+node:taskSystem_hasAllSuccessTaskByTag
+path:Игровая логика.Задачи
 $ENDREGION:FUNCTIONS
 $REGION:CLASSMEM
 def:c:object
@@ -2915,12 +2965,14 @@ def:m:IDestructible.getSeatMaxIndex_0
 		return:int:Максимальный номер сиденья
 	
 path:Игровые объекты.Сиденья
-def:m:IDestructible.canSeat_0
+def:m:IDestructible.isSeatIndexFree_0
 
 		name:Сиденье свободно
 		desc:Возвращает истину, если сиденье по указанному номеру (индексу) никем не занято. Если указано число вне диапазона допустимых мест - вернет ЛОЖЬ.
 		type:get
 		lockoverride:1
+		in:int:Номер:Номер сиденья для проверки. -1 означает что выполняется поиск наличия хотя бы одного свободного сиденья.
+			opt:require=0:def=-1
 		return:bool:Место свободно
 	
 path:Игровые объекты.Сиденья
@@ -3011,6 +3063,16 @@ def:m:BasicMob.getLastPlayerClient_0
 		type:get
 		lockoverride:1
 		return:ServerClient:Клиент сущности, либо null ссылка, если за сущность ещё никто не заходил.
+	
+def:m:BasicMob.addTask_0
+
+		name:Добавить задачу
+		desc:Добавляет персонажу новую задачу. Возвращает результат добавления задачи. Если она была добавлена для персонажа - возвращает ИСТИНУ.
+		type:method
+		lockoverride:1
+		in:TBase:Задача:Добавляемая задача для персонажа
+		in:TaskParamsProvider:Параметры задачи:Параметры выполнения задачи
+		return:bool:Была ли задача успешно добавлена.
 	
 def:m:BasicMob.isPlayer_0
 
@@ -3917,6 +3979,98 @@ def:c:GMBase
 		desc:Базовый игровой режим
 		path:Игровая логика.Режим
 	
+def:c:TaskParamsProvider
+
+		name:Параметры задачи
+		desc:Специальный объект, предоставляющий указание параметров для разных типов задач.
+		path:Игровая логика.Задачи
+	
+def:c:TBase
+
+		name:Задача
+		desc:Базовая игровая задача для персонажа
+		path:Игровая логика.Задачи
+	
+def:f:TBase.tag_0
+
+		name:Тэг задачи
+		desc:Тэг созданной задачи. По умолчанию пустая строка
+		prop:get
+	
+def:f:TBase.name_0
+
+		name:Название задачи
+		desc:Название задачи
+		prop:all
+		defval:Задача
+	
+def:f:TBase.desc_0
+
+		name:Описание задачи
+		desc:Системное описание задачи
+		prop:all
+		defval:Сделать дело
+	
+def:f:TBase.descRoleplay_0
+
+		name:Ролевое описание задачи
+		desc:Ролевое описание задачи
+		prop:all
+		defval:Нужно сделать дело...
+	
+def:m:TBase.getDesc_0
+
+		name:Получить описание задачи
+		desc:Функция получения системного описания задачи. По умолчанию возвращает значение свойства описания задачи
+		type:get
+		lockoverride:1
+		return:string:Описание задачи
+	
+def:m:TBase.getDescRoleplay_0
+
+		name:Получить ролевое описание задачи
+		desc:Функция получения ролевого описания задачи. По умолчанию возвращает значение свойства ролевого описания задачи
+		type:get
+		lockoverride:1
+		return:string:Ролевое описание задачи
+	
+def:f:TBase.isDone_0
+
+		name:Задача завершена
+		desc:Возвращает ИСТИНУ, если задача завершила выполнение. Провал задачи также считается завершением.
+		prop:get
+		return:bool:Завершено ли выполнение задачи
+		defval:false
+	
+def:f:TBase.result_0
+
+		name:Результат задачи
+		desc:Возвращает числовое значение результата задачи. Если результат равен нулю, то считается что задача не выполнена.
+		prop:get
+		return:int:Результат выполнения задачи
+		defval:0
+	
+def:m:TBase.checkOnlyAfterEndRound_0
+
+		name:Проверка задачи в конце раунда
+		desc:Значение, отвечающее за то когда будет проверен результат выполнения задачи. Если ИСТИНА - задача проверяется с момента получения до выполнения. Если ЛОЖЬ - полученная задача будет проверена только в конце раунда.
+	
+def:m:TBase.checkDelay_0
+
+		name:Частота проверки задачи
+		desc:Время, через которое выполняется проверка условия выполнения задачи
+		type:const
+		return:int:Частота проверки условия задачи
+		defval:2
+	
+def:m:TBase.setTag_0
+
+		name:Установить тэг задачи
+		desc:Устанавливает тэг задачи. Может быть несколько задач с одинаковым тэгом.
+		type:method
+		lockoverride:1
+		in:string:Тэг:Новый тэг задачи
+	
 def:c:ServerClient
 
 		name:Клиент
@@ -4212,7 +4366,7 @@ $REGION:CLASSMETA
 }
 ,"ReNode_AbstractEnum": {
     "baseClass" : "object",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":406},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":407},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -4233,6 +4387,15 @@ $REGION:CLASSMETA
     "defined" : {"file":"src\\host\\GameModes\\BasicDefines.sqf","line":456},
    "fields": { "defined": {
 }   },
+   "methods": { "defined": {
+
+}   }
+}
+,"TaskParamsProvider": {
+    "baseClass" : "object",
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":43},
+   "fields": { "defined": {
+"itemRefList":{"return": "null_array"},"itemGRefList":{"return": "null_array"},"itemTypeList":{"return": "null_array"}}   },
    "methods": { "defined": {
 
 }   }
@@ -8275,7 +8438,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "seatListOwners":{"return": "null_array"},"_seatListDummy":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"}
+"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"}
 }   }
 }
 ,"IReagentItem": {
@@ -11182,7 +11345,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"seatListOwners":{"return": "null_array"},"_seatListDummy":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"},"getChairOffsetPos":{"return": "<undefined>"},"getChairOffsetDir":{"return": "<undefined>"}
+"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"},"getChairOffsetPos":{"return": "<undefined>"},"getChairOffsetDir":{"return": "<undefined>"}
 }   }
 }
 ,"IContainerStruct": {
@@ -13387,7 +13550,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "ht":{"return": "int"},"hp":{"return": "int"},"hpMax":{"return": "int"},"dr":{"return": "int"},"drMax":{"return": "int"},"germs":{"return": "int"},"__statusEffects":{"return": "null"},"seatListOwners":{"return": "null_array"},"_seatListDummy":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getDamageSound":{"return": "<undefined>"},"canApplyDamage":{"return": "<undefined>"},"objectHealthType":{"return": "<undefined>"},"onDestroyed":{"return": "<undefined>"},"applyDamage":{"return": "<undefined>"},"onChangeObjectHP":{"return": "<undefined>"},"onAffectDamageToPos":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getObjectPlace":{"return": "<undefined>"},"addStatusEffect":{"return": "<undefined>"},"removeStatusEffect":{"return": "<undefined>"},"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"}
+"getDamageSound":{"return": "<undefined>"},"canApplyDamage":{"return": "<undefined>"},"objectHealthType":{"return": "<undefined>"},"onDestroyed":{"return": "<undefined>"},"applyDamage":{"return": "<undefined>"},"onChangeObjectHP":{"return": "<undefined>"},"onAffectDamageToPos":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getObjectPlace":{"return": "<undefined>"},"addStatusEffect":{"return": "<undefined>"},"removeStatusEffect":{"return": "<undefined>"},"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"}
 }   }
 }
 ,"BasicMob": {
@@ -13671,7 +13834,7 @@ $REGION:CLASSMETA
 }
 ,"ItemSaveTask": {
     "baseClass" : "ItemGetTask",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":381},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":503},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -13680,7 +13843,7 @@ $REGION:CLASSMETA
 }
 ,"SelfSafeTask": {
     "baseClass" : "TargetSaveTask",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":430},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":554},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -13689,7 +13852,7 @@ $REGION:CLASSMETA
 }
 ,"TargetDeadTask": {
     "baseClass" : "TargetSaveTask",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":443},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":570},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -13698,7 +13861,7 @@ $REGION:CLASSMETA
 }
 ,"ConditionalTask": {
     "baseClass" : "TBase",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":229},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":345},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"handledObject":{"return": "object"},"condition":{"return": "null"}}   },
    "methods": { "defined": {
@@ -13707,7 +13870,7 @@ $REGION:CLASSMETA
 }
 ,"ItemGetTask": {
     "baseClass" : "TBase",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":272},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":391},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"item":{"return": "null"},"__serializedItems":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -13716,7 +13879,7 @@ $REGION:CLASSMETA
 }
 ,"TargetSaveTask": {
     "baseClass" : "TBase",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":391},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":513},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"target":{"return": "object"}}   },
    "methods": { "defined": {
@@ -13725,25 +13888,16 @@ $REGION:CLASSMETA
 }
 ,"LocationTask": {
     "baseClass" : "TBase",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":464},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":591},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"pos":{"return": "null"},"maxDistance":{"return": "int"}}   },
    "methods": { "defined": {
 "stopOnSuccess":{"return": "<undefined>"},"handleTaskAddedParams":{"return": "<undefined>"},"checkCondition":{"return": "<undefined>"}
 }   }
 }
-,"CustomTask": {
-    "baseClass" : "TBase",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":536},
-   "fields": { "defined": {
-"checkOnlyAfterEndRound":{"return": "bool"},"checkDelay":{"return": "int"},"stopOnSuccess":{"return": "bool"},"eventCheckCondition":{"return": "unknown_type"},"eventHandleTaskAddedParams":{"return": "unknown_type"},"eventOnSuccess":{"return": "unknown_type"},"eventOnFail":{"return": "unknown_type"}}   },
-   "methods": { "defined": {
-"constructor":{"return": "<undefined>"},"checkOnlyAfterEndRound":{"return": "<undefined>"},"checkDelay":{"return": "<undefined>"},"stopOnSuccess":{"return": "<undefined>"},"handleTaskAddedParams":{"return": "<undefined>"},"checkCondition":{"return": "<undefined>"},"onSuccess":{"return": "<undefined>"},"onFail":{"return": "<undefined>"}
-}   }
-}
 ,"MoneyGetTask": {
     "baseClass" : "TBase",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":583},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":665},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"amount":{"return": "int"}}   },
    "methods": { "defined": {
@@ -13752,7 +13906,7 @@ $REGION:CLASSMETA
 }
 ,"RoleGetTask": {
     "baseClass" : "TBase",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":642},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":726},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"roleClass":{"return": "string"}}   },
    "methods": { "defined": {
@@ -13761,7 +13915,7 @@ $REGION:CLASSMETA
 }
 ,"StatusEffectGetTask": {
     "baseClass" : "TBase",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":683},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":769},
    "fields": { "defined": {
 "statusEffectName":{"return": "string"},"name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -13770,11 +13924,20 @@ $REGION:CLASSMETA
 }
 ,"ReagentTask": {
     "baseClass" : "TBase",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":721},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":809},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
 "checkDelay":{"return": "<undefined>"}
+}   }
+}
+,"CustomTask": {
+    "baseClass" : "TBase",
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":817},
+   "fields": { "defined": {
+"checkOnlyAfterEndRound":{"return": "bool"},"checkDelay":{"return": "int"},"stopOnSuccess":{"return": "bool"},"eventCheckCondition":{"return": "unknown_type"},"eventHandleTaskAddedParams":{"return": "unknown_type"},"eventOnSuccess":{"return": "unknown_type"},"eventOnFail":{"return": "unknown_type"}}   },
+   "methods": { "defined": {
+"constructor":{"return": "<undefined>"},"checkOnlyAfterEndRound":{"return": "<undefined>"},"checkDelay":{"return": "<undefined>"},"stopOnSuccess":{"return": "<undefined>"},"handleTaskAddedParams":{"return": "<undefined>"},"checkCondition":{"return": "<undefined>"},"onSuccess":{"return": "<undefined>"},"onFail":{"return": "<undefined>"}
 }   }
 }
 ,"CannotCloseCombatAspect": {
@@ -14247,11 +14410,11 @@ $REGION:CLASSMETA
 }
 ,"TBase": {
     "baseClass" : "IGameEvent",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":39},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":56},
    "fields": { "defined": {
 "tag":{"return": "string"},"name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"_handle":{"return": "int"},"mob":{"return": "object"},"isDone":{"return": "bool"},"result":{"return": "int"},"showTaskResultOnEndRound":{"return": "bool"},"onFail":{"return": "null_array"},"onSuccess":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getDesc":{"return": "<undefined>"},"getDescRoleplay":{"return": "<undefined>"},"checkOnlyAfterEndRound":{"return": "<undefined>"},"checkDelay":{"return": "<undefined>"},"stopOnSuccess":{"return": "<undefined>"},"taskResultMessage":{"return": "<undefined>"},"onTaskAdded":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"setTag":{"return": "<undefined>"},"handleTaskAddedParams":{"return": "<undefined>"},"updateMethod":{"return": "<undefined>"},"taskDone":{"return": "<undefined>"},"checkCondition":{"return": "<undefined>"},"onSuccess":{"return": "<undefined>"},"onFail":{"return": "<undefined>"}
+"getDesc":{"return": "<undefined>"},"getDescRoleplay":{"return": "<undefined>"},"checkOnlyAfterEndRound":{"return": "<undefined>"},"checkDelay":{"return": "<undefined>"},"stopOnSuccess":{"return": "<undefined>"},"taskResultMessage":{"return": "<undefined>"},"onTaskAdded":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"setTag":{"return": "<undefined>"},"handleTaskAddedParams":{"return": "<undefined>"},"processTaskParamsProvider":{"return": "<undefined>"},"unpackTaskParamsProvider":{"return": "<undefined>"},"updateMethod":{"return": "<undefined>"},"taskDone":{"return": "<undefined>"},"checkCondition":{"return": "<undefined>"},"onSuccess":{"return": "<undefined>"},"onFail":{"return": "<undefined>"}
 }   }
 }
 ,"IInfluenceEvent": {
@@ -15210,7 +15373,7 @@ $REGION:CLASSMETA
 }
 ,"ScriptedRole": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":416},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":417},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descInGame":{"return": "string"},"classMan":{"return": "string"},"classWoman":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"_deadTimeout":{"return": "int"},"count":{"return": "int"},"_currentBaseSkills":{"return": "null_array"},"_currentOtherSkills":{"return": "null_array"},"_currentSpawnLocation":{"return": "null_array"},"_currentConnectedTo":{"return": "null_array"}}   },
    "methods": { "defined": {
