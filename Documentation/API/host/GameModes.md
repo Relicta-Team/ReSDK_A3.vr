@@ -44,7 +44,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameModes\BasicTask.sqf at line 16](../../../Src/host/GameModes/BasicTask.sqf#L16)
+File: [host\GameModes\BasicTask.sqf at line 20](../../../Src/host/GameModes/BasicTask.sqf#L20)
 ## __mbx__(message)
 
 Type: constant
@@ -56,7 +56,7 @@ Replaced value:
 ```sqf
 ["[TASKS][%1]: %2",callSelf(getClassName) arg message] call messageBox;
 ```
-File: [host\GameModes\BasicTask.sqf at line 219](../../../Src/host/GameModes/BasicTask.sqf#L219)
+File: [host\GameModes\BasicTask.sqf at line 335](../../../Src/host/GameModes/BasicTask.sqf#L335)
 ## __mbx__(message)
 
 Type: constant
@@ -70,7 +70,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameModes\BasicTask.sqf at line 222](../../../Src/host/GameModes/BasicTask.sqf#L222)
+File: [host\GameModes\BasicTask.sqf at line 338](../../../Src/host/GameModes/BasicTask.sqf#L338)
 ## taskError(message)
 
 Type: constant
@@ -82,7 +82,7 @@ Replaced value:
 ```sqf
 errorformat("[TASKS][%1]: %2",callSelf(getClassName) arg message); __mbx__(message) nextFrameParams({delete(_this)},this)
 ```
-File: [host\GameModes\BasicTask.sqf at line 225](../../../Src/host/GameModes/BasicTask.sqf#L225)
+File: [host\GameModes\BasicTask.sqf at line 341](../../../Src/host/GameModes/BasicTask.sqf#L341)
 ## taskSystem_allTasks
 
 Type: Variable
