@@ -110,9 +110,21 @@ if !isNullVar(__iseat_node_init__) then {
 		desc:Возвращает истину, если сиденье по указанному номеру (индексу) никем не занято. Если указано число вне диапазона допустимых мест - вернет ЛОЖЬ.
 		type:get
 		lockoverride:1
+		in:int:Номер:Номер сиденья для проверки. -1 означает что выполняется поиск наличия хотя бы одного свободного сиденья.
+			opt:require=0:def=-1
 		return:bool:Место свободно
 	" +__iseat_node_postfix node_met
 };
+func(isSeatIndexFree)
+{
+	objParams_1(_index);
+	if (isNullVar(_index) || {_index == -1}) then {
+		_index = getSelf(seatListOwners) find nullPtr;
+	};
+	if !inRange(_index,0,(count getSelf(seatListOwners)) - 1) exitwith {false};
+	callSelfParams(isSeatFree,_index);
+};
+
 func(canSeat)
 {
 	objParams_2(_usr,_index);
