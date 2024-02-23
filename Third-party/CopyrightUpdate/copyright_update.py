@@ -49,23 +49,23 @@ try:
 
     currentYear = datetime.datetime.now().year
     srcCopyrightTemplate = "template.txt"
-    serachDir = ".\\..\\..\\src"
-    relativeDir = ".\\..\\.."
-    noErrorFiles = ["src\\changelogs.txt"]
+    serachDir = "./../../src"
+    relativeDir = "./../.."
+    noErrorFiles = ["src/changelogs.txt"]
     ignoreDirs = [
-        'src\host\GameModes\scripted_loader.hpp',
-        'src\\host\\MapManager\\Maps\\',
-        'src\\Scripts\\vs_studio_project\\vs_studio_project',
-        'src\\host\\ReNode\\compiled\\',
-        'src\\Editor\\Bin\\Maps\\',
-        'src\\Editor\\Bin\\ProtoMap\\',
-        'src\\version.hpp'
+        'src/host/GameModes/scripted_loader.hpp',
+        'src/host/MapManager/Maps/',
+        'src/Scripts/vs_studio_project/vs_studio_project',
+        'src/host/ReNode/compiled/',
+        'src/Editor/Bin/Maps/',
+        'src/Editor/Bin/ProtoMap/',
+        'src/version.hpp'
     ]
     
 
     curDir = os.getcwd()
-    if curDir.split('\\')[-1].lower() == 'src':
-        curDir = os.chdir(os.path.join(curDir,'..\\third-party\\copyrightupdate'))
+    if curDir.split('/')[-1].lower() == 'src':
+        curDir = os.chdir(os.path.join(curDir,'../third-party/opyrightupdate'))
 
     content = []
     includeExtensions = ["sqf","cpp","hpp","h",'interface','cs']
