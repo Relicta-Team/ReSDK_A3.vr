@@ -122,6 +122,7 @@ try:
             continue
         oldYear = yearsParts[1]
 
+        hasAnyUpdate = False
         for i in range(4):
             curContent = content[i]
             curLList = llist[i]
@@ -130,10 +131,12 @@ try:
             replCont = content[i].format(CURRENT_YEAR=currentYear)
             if curContent == curLList and replCont != curLList:
                 llist[i] = replCont
-            
-        # with open(file,mode='w+',encoding='utf-8') as fh:
-        #     fh.writelines(llist)
-        #     log(f"Updated {oldYear} -> {currentYear} in {fileName}",fileName)
+                hasAnyUpdate = True
+        
+        if hasAnyUpdate:
+            with open(file,mode='w+',encoding='utf-8') as fh:
+                fh.writelines(llist)
+                log(f"Updated {oldYear} -> {currentYear} in {fileName}",fileName)
 
         pass
     
