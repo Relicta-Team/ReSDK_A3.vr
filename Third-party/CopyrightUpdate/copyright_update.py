@@ -105,7 +105,7 @@ try:
             warn("Copyright header not found. Creating header...",fileName)
             #emplacing copyright
             for i in range(3,-1,-1):
-                elCont = content[i].format(CURRENT_YEAR=2017)
+                elCont = content[i].format(CURRENT_YEAR=2000)
                 llist.insert(0,elCont)
             if llist[4] != '\n': #add next line after copyright header
                 llist.insert(4,'\n')
