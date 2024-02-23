@@ -8,6 +8,7 @@ timestamp = int(time.time()*1000.0)
 
 try:
     prettyPrint = 'pretty' in sys.argv
+    skipUpdate = 'nosave' in sys.argv
     errorCount = 0
     warnCount = 0
     def error(mes,file=None):
@@ -135,7 +136,8 @@ try:
         
         if hasAnyUpdate:
             with open(file,mode='w+',encoding='utf-8') as fh:
-                fh.writelines(llist)
+                if not skipUpdate:
+                    fh.writelines(llist)
                 log(f"Updated {oldYear} -> {currentYear} in {fileName}",fileName)
 
         pass
