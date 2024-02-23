@@ -13,7 +13,7 @@ env:
 jobs:
   CopyrightCheck:
     name: Process
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     steps:
       - name: Setup Python
@@ -26,9 +26,11 @@ jobs:
             python ${{ env.copyright_check_script }} pretty nosave
         working-directory: ${{ github.workspace }}/${{ env.copyright_check_script_folder }}      
       - name: Push changes
-        uses: devops-infra/action-commit-push@v0.9.2
+        uses: actions-x/commit@v6
         with:
-          commit_message: Update copyright
-          github_token: ${{ secrets.TOKEN }}
+          email: info@relicta.ru
+          name: CopyrightBot
+          message: Update copyright
+          token: ${{ secrets.TOKEN }}
         
   
