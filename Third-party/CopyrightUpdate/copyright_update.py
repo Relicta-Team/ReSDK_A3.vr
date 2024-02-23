@@ -79,8 +79,8 @@ try:
             curLList = llist[i]
             if i==1:
                 curContent = curContent.format(CURRENT_YEAR=oldYear)
-            if curContent != curLList:
-                replCont = content[i].format(CURRENT_YEAR=currentYear)
+            replCont = content[i].format(CURRENT_YEAR=currentYear)
+            if curContent == curLList and replCont != curLList:
                 llist[i] = replCont
             
         with open(file,mode='w+',encoding='utf-8') as fh:
