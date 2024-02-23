@@ -83,7 +83,7 @@ try:
                 replCont = content[i].format(CURRENT_YEAR=currentYear)
                 llist[i] = replCont
             
-        with open(file,mode='w',encoding='utf-8') as fh:
+        with open(file,mode='w+',encoding='utf-8') as fh:
             fh.writelines(llist)
             log(f"Updated from {oldYear} to {currentYear} for {fileName}",fileName)
 
