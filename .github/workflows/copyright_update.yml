@@ -25,8 +25,8 @@ jobs:
       - name: Run py scipt
         run: |
             python -V
-            python ${{ env.copyright_check_script }} pretty
-        working-directory: ${{ github.workspace }}/${{ env.copyright_check_script_folder }}      
+            python ${{ copyright_check_script_folder }}/${{ env.copyright_check_script }} pretty
+        working-directory: ${{ github.workspace }}    
       - name: Push changes
         uses: actions-x/commit@v6
         with:
