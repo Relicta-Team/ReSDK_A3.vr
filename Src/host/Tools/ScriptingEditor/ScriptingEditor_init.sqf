@@ -22,6 +22,7 @@
 ["WorkspaceHelper"] call rescript_initScript;
 ["FileManager"] call rescript_initScript;
 ["FileWatcher"] call rescript_initScript; //for hot reload
+call nbp_initDebugger;
 
 //Вызовем некоторую команду, определённую в скрипте
 ["TestScript","test",diag_stacktrace] call rescript_callCommandVoid;

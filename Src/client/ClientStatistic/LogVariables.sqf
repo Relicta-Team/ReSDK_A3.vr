@@ -24,6 +24,11 @@ clistat_internal_allch_buffer = [];
 clistat_internal_allch_buffer_frame = 0;
 
 clistat_buffer = [
+	#ifdef EDITOR
+	[colortext(CC5460,"ReNode:"),{
+		ifcheck(call nbp_isEditorConnected,"CONNECTED","off")
+	}],
+	#endif
 	[colortext(CC5460,"fps: "),{
 		format["cur:%1; min:%2; dt:%3;",round diag_fps,round diag_fpsmin,diag_deltaTime]
 	}],

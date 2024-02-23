@@ -385,7 +385,7 @@ Initial value:
 ```sqf
 ["emote","log","act","combat","info","mind","event","system","error","default"]
 ```
-File: [host\GameObjects\GameObject.sqf at line 970](../../../Src/host/GameObjects/GameObject.sqf#L970)
+File: [host\GameObjects\GameObject.sqf at line 972](../../../Src/host/GameObjects/GameObject.sqf#L972)
 ## go_internal_chatMesMapText
 
 Type: Variable
@@ -397,7 +397,7 @@ Initial value:
 ```sqf
 ["Эмоут:Кастомное пользовательское действие",...
 ```
-File: [host\GameObjects\GameObject.sqf at line 971](../../../Src/host/GameObjects/GameObject.sqf#L971)
+File: [host\GameObjects\GameObject.sqf at line 973](../../../Src/host/GameObjects/GameObject.sqf#L973)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
@@ -3605,7 +3605,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 255](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L255)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 268](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L268)
 ## INTERACT_DIST_DEFAULT
 
 Type: constant
@@ -3617,7 +3617,7 @@ Replaced value:
 ```sqf
 1.1
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 286](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L286)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 299](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L299)
 ## __animget_impl__()
 
 Type: constant
@@ -3629,7 +3629,7 @@ Replaced value:
 ```sqf
 (getSelf(owner) call anim_getUnitAnim)
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 794](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L794)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 807](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L807)
 ## __data_light_slot__
 
 Type: constant
@@ -3641,7 +3641,7 @@ Replaced value:
 ```sqf
 [[INV_BACKPACK,null], [INV_ARMOR,null], [INV_HEAD,null], [INV_BACK,null],[INV_CLOTH,null],[INV_FACE,null],[INV_HAND_R,null],[INV_HAND_L,null],[INV_BELT,null]]
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 904](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L904)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 917](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L917)
 ## debug_internal_getinteractiontarget_spheres
 
 Type: Variable
@@ -3655,7 +3655,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 257](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L257)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 270](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L270)
 # Mob.sqf
 
 ## __performace_attacklog
@@ -5314,7 +5314,7 @@ File: [host\GameObjects\Structures\Containers\Tech.sqf at line 462](../../../Src
 
 Type: constant
 
-Description: 
+Description: TODO remove this macros, replace with methods
 
 
 Replaced value:
@@ -5323,11 +5323,22 @@ Replaced value:
 	___s = []; \
 	___s resize (MC_CATSYS_LAST_INDEX+1); \
 	_global_merchantconsole_tradelist = ___s apply {[]}; \
-	_global_merchantconsole_catnames = []; \
-	var_inlinevalue(tradelist,_global_merchantconsole_tradelist); \
-	var_inlinevalue(tradecats,_global_merchantconsole_catnames);
+	_global_merchantconsole_catnames = [];
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1108](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1108)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1109](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1109)
+## endRegConsole
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+var_exprval(tradelist,_global_merchantconsole_tradelist); \
+	var_exprval(tradecats,_global_merchantconsole_catnames);
+```
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1115](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1115)
 ## regCat(cat,namestr)
 
 Type: constant
@@ -5340,7 +5351,7 @@ Replaced value:
 ```sqf
 _global_merchantconsole_catnames pushBack [cat,namestr];
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1116](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1116)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1118](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1118)
 ## regItem(cat,typename_std,typename_compiled,minprice,maxprice,mincount,maxcount)
 
 Type: constant
@@ -5359,7 +5370,7 @@ Replaced value:
 _ctbuf = _global_merchantconsole_tradelist select cat; \
 	_ctbuf pushBack ["",typename_std,{typename_compiled},randInt(minprice,maxprice),randInt(mincount,maxcount),0];
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1118](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1118)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1120](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1120)
 ## regEnergyCount(cat,strname,__code,price,count__)
 
 Type: constant
@@ -5376,7 +5387,7 @@ Replaced value:
 _ctbuf = _global_merchantconsole_tradelist select cat; \
 	_ctbuf pushBack [strname,"<NULLOBJ>",__code,price,count__,0];
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1121](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1121)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1123](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1123)
 ## regItemDef(cat,typename,minpr,maxpr,minc,maxc)
 
 Type: constant
@@ -5393,7 +5404,7 @@ Replaced value:
 ```sqf
 regItem(cat,typename,typename,minpr,maxpr,minc,maxc)
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1124](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1124)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1126](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1126)
 ## regItemCustomName(cat,name,typename,minpr,maxpr,minc,maxc)
 
 Type: constant
@@ -5412,7 +5423,7 @@ Replaced value:
 _ctbuf = _global_merchantconsole_tradelist select cat; \
 	_ctbuf pushBack [name,typename,{typename},randInt(minpr,maxpr),randInt(minc,maxc),0];
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1125](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1125)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1127](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1127)
 ## regEnProvider(__GENERATED_TIME__)
 
 Type: constant
@@ -5429,7 +5440,7 @@ Replaced value:
 		}; \
 	}
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1213](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1213)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1215](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1215)
 ## checkMode(m__)
 
 Type: constant
@@ -5441,7 +5452,7 @@ Replaced value:
 ```sqf
 if (_mode == m__) exitWith
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1315](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1315)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1319](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1319)
 ## compareInput(t__)
 
 Type: constant
@@ -5453,7 +5464,7 @@ Replaced value:
 ```sqf
 if (_userInput == t__) exitWith
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1316](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1316)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1320](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1320)
 # DoorStatic.sqf
 
 ## struct_door_initOpenMode

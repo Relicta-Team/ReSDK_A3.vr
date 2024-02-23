@@ -68,6 +68,7 @@ _rb_log("ReBridge initialization start...");
 if !isNull(ReBridge_callbackHandle) then {
 	removeMissionEventHandler ["ExtensionCallback", ReBridge_callbackHandle];
 	if (call ReBridge_isLoaded) then {
+		_rb_log("Unload previous ReBridge assembly...");
 		call ReBridge_stop;
 	};
 };

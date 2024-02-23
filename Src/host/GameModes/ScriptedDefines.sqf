@@ -312,6 +312,7 @@ class(ScriptedGamemode) extends(GMBase)
 		super();
 	};
 
+
 	"
 		name:Доступные роли
 		desc:Список ролей, доступных для этого режима. Сюда входят как роли, доступные в лобби, так и роли, видимые после старта раунда. Настройка видимости роли на разных стадиях игры настраивается внутри самих ролей.
@@ -346,8 +347,22 @@ class(ScriptedGamemode) extends(GMBase)
 
 		ifcheck(_getMode==0,_lobby,_late)
 	};
-	getter_func(getLobbyRoles,callSelfParams(_getRolesWrapperInternal,0));
-	getter_func(getLateRoles,callSelfParams(_getRolesWrapperInternal,1));
+
+
+	if (is3DEN) then {
+		func(getLobbyRoles)
+		{
+			["___SCRITED_GAMEMODE___"] //специальное имя для взятия ролей из скриптового режима
+		};
+
+		func(getLateRoles)
+		{
+			[]
+		};
+	} else {
+		getter_func(getLobbyRoles,callSelfParams(_getRolesWrapperInternal,0));
+		getter_func(getLateRoles,callSelfParams(_getRolesWrapperInternal,1));
+	};
 
 	"
 		name:Время игры

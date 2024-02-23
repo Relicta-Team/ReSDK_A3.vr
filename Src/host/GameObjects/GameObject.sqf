@@ -963,6 +963,8 @@ endregion
 		assert_str(equalTypes(_ch,0),"Channel param type error. Must be integer - not " + typename _ch);
 		assert_str(inRange(_ch,0,count go_internal_chatMesMap - 1),"Channel index out of range: " + str _ch);
 		_this set [2,go_internal_chatMesMap select _ch];
+		
+		private this = _this select 0;
 		_this call getSelfFunc(worldSay)
 	};
 
@@ -1445,5 +1447,10 @@ class(IDestructible) extends(GameObject)
 	// node_met
 	// func(lightSetMode) {objParams_1(_m); setLastError("Установка света не поддерживается для класса " + callSelf(getClassName));};
 
+	__iseat_node_init__ = true;
+	__iseat_node_postfix = endl + "path:Игровые объекты.Сиденья";
+	#include "Interfaces\ISeat.Interface"
+	__iseat_node_init__ = null;
+	__iseat_node_postfix = null;
 
 endclass

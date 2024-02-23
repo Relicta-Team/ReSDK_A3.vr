@@ -1,3 +1,8 @@
+// ======================================================
+// Copyright (c) 2017-2024 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
 #include "..\engine.hpp"
 #include "..\oop.hpp"
 #include "..\text.hpp"
@@ -55,5 +60,10 @@ nodeModule_setPath("Контроль игры")
 #include "..\GamemodeManager\GamemodeManager.h"
 #include "..\GamemodeManager\GamemodeManager.hpp"
 #include "..\GamemodeManager\GamemodeFunctions.sqf"
+
+nodeModule_register("taskSystem")
+nodeModule_setPath("Игровая логика.Задачи")
+
+#include "..\GameModes\taskSystem_functions.sqf"
 
 //

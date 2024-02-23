@@ -89,11 +89,11 @@ format["
     node:stringToClassname
     name:Строку в имя класса
     path:Преобразования
-    desc:Преобразует строку в имя класса. Если 
+    desc:Преобразует строку в имя класса. Если полученная строка не является валидным именем класса - вернет имя класса по умолчанию.
     icon:data\\icons\\icon_BluePrintEditor_Function_16px
     color:PureFunction
     exec:pure
-    code:"+'private @genvar.out.2 = [@in.1,@in.2] call oop_checkTypeSafe; @out.1'+"
+    code:"+'[@in.1,@in.2] call oop_checkTypeSafe'+"
     in:string:Строка:Строчное представление имени класса, которое будет преобразовано
     in:classname:По умолчанию:Возвращаемое значение в случае возникновения ошибки (когда указанный класс не найден)
     out:classname:Имя класса:Имя класса полученное из строки или из значения по умолчанию в случае ошибки.

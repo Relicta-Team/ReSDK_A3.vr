@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: 1.13';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.14-path.2';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -53,9 +53,9 @@ _4039_718024018_101564_38732 = ['CollectionSpawnPoint',[4039.72,4018.1,4.38732],
 ['BlockStone',[4060.56,4017.06,13.7728],0,[0,0,1]] call InitDecor; 
 ['BlockStone',[4051.1,4026.85,13.6006],0,[0,0,1]] call InitDecor; 
 _4052_544194007_642334_10439 = ['TeleportBase',[4052.54,4007.64,4.10439],277.851,[0,0,1]] call InitStruct; 
-['TeleportExit',[4075.14,4044.56,4.54877],40.8528,[0,0,1], {go_editor_globalRefs set ['tp_box',_thisObj];
+['TeleportExit',[4075.14,4044.56,4.54877],40.8528,[0,0,1], {go_editor_globalRefs set ["tp_box",_thisObj];
 }] call InitStruct; 
-['TeleportExit',[4053.63,4016.99,4.31423],255.482,[0,0,1], {go_editor_globalRefs set ['tp_main',_thisObj];
+['TeleportExit',[4053.63,4016.99,4.31423],255.482,[0,0,1], {go_editor_globalRefs set ["tp_main",_thisObj];
 }] call InitStruct; 
 _4072_994874042_888184_53377 = ['TeleportBase',[4072.99,4042.89,4.53377],0,[0,0,1]] call InitStruct; 
 _4034_460454002_918219_31756 = ['LampWall',[4034.46,4002.92,14.3047,true],[0.216314,-0.509493,-0.832842],[0.969658,0.0125973,0.244142], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
@@ -78,11 +78,11 @@ _4076_094734047_1113310_85253 = ['LampWall',[4076.09,4047.11,15.8264,true],[-1.0
 _4073_305664043_026126_03741 = ['LampWall',[4073.31,4043.03,11.0221,true],92.5038,[-0.0255269,0.998418,-0.050099], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_POINTLIGHT_var];}] call InitStruct; 
 _4039_448004018_080577_97911 = ['LampWall',[4039.45,4018.08,12.953,true],[-0.189667,0.981237,-0.0346478],[-0.981629,-0.190252,-0.014421], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
 _4027_218264007_087408_35834 = ['LampWall',[4027.22,4007.09,13.3327,true],[-0.156157,0.968125,-0.195832],[-0.986574,-0.162475,-0.016522], {_thisObj setvariable ['light',SLIGHT_TEMPLATE_DIRECTLIGHT_var];}] call InitStruct; 
-_4076_875984049_953134_56122 = ['IStruct',[4076.88,4049.95,9.97233,true],176.437,[0.0400344,-0.0237284,0.998917], {_thisObj setvariable ['model','a3\structures_f\civ\camping\campingtable_f.p3d']; go_editor_globalRefs set ['table_box',_thisObj];
+_4076_875984049_953134_56122 = ['IStruct',[4076.88,4049.95,9.97233,true],176.437,[0.0400344,-0.0237284,0.998917], {_thisObj setvariable ['model','a3\structures_f\civ\camping\campingtable_f.p3d']; go_editor_globalRefs set ["table_box",_thisObj];
 }] call InitStruct; // !!! realocated model !!!
-['Candle',[4077.33,4049.91,10.442,true],0,[0.0400458,-0.0237298,0.998916], {go_editor_globalRefs set ['candle_target',_thisObj];
+['Candle',[4077.33,4049.91,10.442,true],0,[0.0400458,-0.0237298,0.998916], {go_editor_globalRefs set ["candle_target",_thisObj];
 }] call InitItem; 
-_4037_524904010_855714_03957 = ['IStruct',[4037.52,4010.86,9.45068,true],87.5654,[0.024512,0.0395593,0.998917], {_thisObj setvariable ['model','a3\structures_f\civ\camping\campingtable_f.p3d']; go_editor_globalRefs set ['table_target',_thisObj];
+_4037_524904010_855714_03957 = ['IStruct',[4037.52,4010.86,9.45068,true],87.5654,[0.024512,0.0395593,0.998917], {_thisObj setvariable ['model','a3\structures_f\civ\camping\campingtable_f.p3d']; go_editor_globalRefs set ["table_target",_thisObj];
 }] call InitStruct; // !!! realocated model !!!
 ['Campfire',[4017.82,4010.49,9.32876,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
 ['HospitalBed',[4015.69,4014.17,10.0549,true],0,[-0.0154596,-0.00693025,0.999856]] call InitStruct; 

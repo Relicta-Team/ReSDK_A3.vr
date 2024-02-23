@@ -99,7 +99,7 @@ class(Bandolier) extends(Armor)
 	var(weight,gramm(760));
 	var(size,ITEM_SIZE_MEDIUM);
 	var(allowedSlots,[INV_ARMOR]);
-	var_inlinevalue(countSlots,DEFAULT_BACKPACK_STORAGE);
+	var_exprval(countSlots,DEFAULT_BACKPACK_STORAGE);
 endclass
 
 class(ArmorLite) extends(Armor)
@@ -107,7 +107,7 @@ class(ArmorLite) extends(Armor)
 	var(canUseContainer,true);
 	var(weight,2.8);
 	var(allowedSlots,[INV_ARMOR]);
-	var_inlinevalue(countSlots,BASE_STORAGE_CAPACITY(2));
+	var_exprval(countSlots,BASE_STORAGE_CAPACITY(2));
 	var(armaClass,"FRITH_ruin_vestia_lite_ltr");
 	var(bodyPartsCovered,UPPER_TORSO + LOWER_TORSO);
 	var(dr,7);
