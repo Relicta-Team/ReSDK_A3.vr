@@ -752,7 +752,7 @@ class(ScriptedRole) extends(BasicRole)
 		private _slocStruct = callSelf(_spawnLocationWrapper);
 		assert_str(!isNullVar(_slocStruct),"Null return spawn location");
 		assert_str(equalTypes(_slocStruct,[]),"Invalid spawn location datatype");
-		assert_str(equalTypes(_slocStruct select 0,"") && equalTypes(_slocStruct select 1,""),"Invalid spawn location data");
+		assert_str(equalTypes(_slocStruct select 0,0) && equalTypes(_slocStruct select 1,""),"Invalid spawn location data");
 		assert_str((_slocStruct select 1) != "","Empty string point name");
 		
 		_slocStruct params ["_spType","_spName"];
