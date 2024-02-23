@@ -1,0 +1,37 @@
+
+name: Copyright check
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+env:
+  copyright_check_script: Third-party/CopyrightUpdate/copyright_update.py
+
+jobs:
+  CopyrightCheck:
+    name: Process
+    runs-on: windows-latest
+    if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v3.1.4
+      - uses: actions/checkout@v3
+      
+      - name: Run scipt
+        run: |
+            python -V
+            python ${{ env.copyright_check_script }} pretty nosave
+        working-directory: ${{ github.workspace }}
+      
+      - name: Push changes
+        uses: test-room-7/action-update-file@v1
+        with:
+          committer-name: Copyrighter
+          file-path: |
+            src/**
+          commit-msg: Copyright update
+          github-token: ${{secrets.TOKEN}}
+      
+  
