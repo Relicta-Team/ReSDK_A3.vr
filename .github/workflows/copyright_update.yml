@@ -26,11 +26,9 @@ jobs:
             python ${{ env.copyright_check_script }} pretty nosave
         working-directory: ${{ github.workspace }}/${{ env.copyright_check_script_folder }}      
       - name: Push changes
-        uses: actions-x/commit@v6
+        uses: devops-infra/action-commit-push@v0.9.2
         with:
-          email: info@relicta.ru
-          name: CopyrightBot
-          message: Update copyright
-          token: ${{ secrets.TOKEN }}
+          commit_message: Update copyright
+          github_token: ${{ secrets.TOKEN }}
         
   
