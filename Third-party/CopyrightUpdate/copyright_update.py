@@ -49,23 +49,26 @@ try:
 
     currentYear = datetime.datetime.now().year
     srcCopyrightTemplate = "template.txt"
-    serachDir = ".\\..\\..\\src"
-    relativeDir = ".\\..\\.."
-    noErrorFiles = ["src\\changelogs.txt"]
+    serachDir = "./../../Src"
+    relativeDir = "./../.."
+    noErrorFiles = ["src/changelogs.txt"]
     ignoreDirs = [
-        'src\host\GameModes\scripted_loader.hpp',
-        'src\\host\\MapManager\\Maps\\',
-        'src\\Scripts\\vs_studio_project\\vs_studio_project',
-        'src\\host\\ReNode\\compiled\\',
-        'src\\Editor\\Bin\\Maps\\',
-        'src\\Editor\\Bin\\ProtoMap\\',
-        'src\\version.hpp'
+        'src/host/GameModes/scripted_loader.hpp',
+        'src/host/MapManager/Maps/',
+        'src/Scripts/vs_studio_project/vs_studio_project',
+        'src/host/ReNode/compiled/',
+        'src/Editor/Bin/Maps/',
+        'src/Editor/Bin/ProtoMap/',
+        'src/version.hpp'
     ]
     
 
     curDir = os.getcwd()
-    if curDir.split('\\')[-1].lower() == 'src':
-        curDir = os.chdir(os.path.join(curDir,'..\\third-party\\copyrightupdate'))
+    print(f'CWD: {curDir}')
+    if curDir.split('/')[-1].lower() == 'src':
+        curDir = os.chdir(os.path.join(curDir,'../third-party/opyrightupdate'))
+
+    print(f'CWD final: {os.getcwd()}')
 
     content = []
     includeExtensions = ["sqf","cpp","hpp","h",'interface','cs']
@@ -83,8 +86,13 @@ try:
     with open(srcCopyrightTemplate,'r+',encoding='utf-8') as f:
         content = f.readlines()
 
-    for file in find_files(serachDir,relToRootDir=False):
+    print("Content count: {}".format(len(content)))
+    print("Search directory: {}".format(serachDir))
+
+    flistGlob = find_files(serachDir,relToRootDir=False)
+    for file in flistGlob:
         fileName = os.path.relpath(file,relativeDir)
+        print(f'Check file: {fileName} ({file})')
         if not [ext for ext in includeExtensions if file.lower().endswith(ext)]:
             #print(f"\t\t--- SKIPPED: {fileName}")
             continue
@@ -114,7 +122,7 @@ try:
         
         l2 = llist[1] #this line need checks
 
-        yearsParts = re.findall("\d+",l2)
+        yearsParts = re.findall(r"\d+",l2)
         if len(yearsParts)!=3:
             error(f"Damaged copyright; Numbers get {len(yearsParts)}, need 3: {l2}",fileName)
             continue
@@ -142,6 +150,9 @@ try:
 
         pass
     
+    if not flistGlob:
+        raise Exception("Empty filelist")
+
     timeDiff = int(time.time()*1000.0) - timestamp
     log(f'Done at {timeDiff} ms')
     log(f'Warnings: {warnCount}')
