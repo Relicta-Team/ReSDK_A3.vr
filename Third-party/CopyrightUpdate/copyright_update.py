@@ -83,7 +83,8 @@ try:
     with open(srcCopyrightTemplate,'r+',encoding='utf-8') as f:
         content = f.readlines()
 
-    for file in find_files(serachDir,relToRootDir=False):
+    flistGlob = find_files(serachDir,relToRootDir=False)
+    for file in flistGlob:
         fileName = os.path.relpath(file,relativeDir)
         print(f'Check file: {fileName} ({file})')
         if not [ext for ext in includeExtensions if file.lower().endswith(ext)]:
@@ -143,6 +144,9 @@ try:
 
         pass
     
+    if not flistGlob:
+        raise Exception("Empty filelist")
+
     timeDiff = int(time.time()*1000.0) - timestamp
     log(f'Done at {timeDiff} ms')
     log(f'Warnings: {warnCount}')
