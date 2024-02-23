@@ -23,7 +23,7 @@ jobs:
         run: |
             python -V
             python ${{ env.copyright_check_script }} pretty nosave
-        working-directory: ${{ github.workspace }}
+        working-directory: ${{ github.workspace }}/Third-party/CopyrightUpdate
       
       - name: Push changes
         uses: test-room-7/action-update-file@v1
