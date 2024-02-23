@@ -28,7 +28,7 @@ on:
 env:
   map_validator_path: Third-party/BuildTools/map_validator.py
   graph_validator_path: ReNode
-  graph_validator_path_app: ReNode/ReNode.exe
+  graph_validator_path_app: ReNode.exe
   graph_validator_args: -prep_code -nosplash -noapp
   validate_source_path: Third-party/BuildTools/Validate.bat
   parse_source_out_path: Third-party/BuildTools/parse_output.py
