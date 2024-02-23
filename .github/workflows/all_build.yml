@@ -77,6 +77,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Check graphs
+        shell: cmd
         run: ${{ env.graph_validator_path_app }} ${{ env.graph_validator_args }}
         working-directory: ${{ env.graph_validator_path }}
   checkclient:
