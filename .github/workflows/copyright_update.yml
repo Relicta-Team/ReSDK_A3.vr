@@ -24,15 +24,13 @@ jobs:
         run: |
             python -V
             python ${{ env.copyright_check_script }} pretty nosave
-        working-directory: ${{ github.workspace }}/${{ env.copyright_check_script_folder }}
-      
+        working-directory: ${{ github.workspace }}/${{ env.copyright_check_script_folder }}      
       - name: Push changes
-        uses: test-room-7/action-update-file@v1
+        uses: actions-x/commit@v6
         with:
-          committer-name: Copyrighter
-          file-path: |
-            src/**
-          commit-msg: Copyright update
-          github-token: ${{secrets.TOKEN}}
-      
+          email: info@relicta.ru
+          name: CopyrightBot
+          message: Update copyright
+          token: ${{ secrets.TOKEN }}
+        
   
