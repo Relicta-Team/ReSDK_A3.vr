@@ -49,7 +49,7 @@ try:
 
     currentYear = datetime.datetime.now().year
     srcCopyrightTemplate = "template.txt"
-    serachDir = "./../../src"
+    serachDir = "./../../Src"
     relativeDir = "./../.."
     noErrorFiles = ["src/changelogs.txt"]
     ignoreDirs = [
