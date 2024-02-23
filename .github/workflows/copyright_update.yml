@@ -8,6 +8,7 @@ on:
 
 env:
   copyright_check_script: copyright_update.py
+  copyright_check_script_folder: Third-party/CopyrightUpdate
 
 jobs:
   CopyrightCheck:
@@ -23,10 +24,10 @@ jobs:
         run: |
             python -V
             python ${{ env.copyright_check_script }} pretty nosave
-        working-directory: ${{ github.workspace }}/Third-party/CopyrightUpdate
+        working-directory: ${{ github.workspace }}/${{ env.copyright_check_script_folder }}
       
       - name: Push changes
-        uses: test-room-7/action-update-file@v1.8.0
+        uses: test-room-7/action-update-file@v1
         with:
           committer-name: Copyrighter
           file-path: |
