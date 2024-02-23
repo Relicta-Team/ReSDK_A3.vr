@@ -26,7 +26,7 @@ jobs:
         working-directory: ${{ github.workspace }}/Third-party/CopyrightUpdate
       
       - name: Push changes
-        uses: test-room-7/action-update-file@v1
+        uses: test-room-7/action-update-file@v1.8.0
         with:
           committer-name: Copyrighter
           file-path: |
