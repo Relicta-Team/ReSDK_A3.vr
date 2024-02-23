@@ -23,7 +23,7 @@ jobs:
       - name: Run scipt
         run: |
             python -V
-            python ${{ env.copyright_check_script }} pretty nosave
+            python ${{ env.copyright_check_script }} pretty
         working-directory: ${{ github.workspace }}/${{ env.copyright_check_script_folder }}      
       - name: Push changes
         uses: actions-x/commit@v6
