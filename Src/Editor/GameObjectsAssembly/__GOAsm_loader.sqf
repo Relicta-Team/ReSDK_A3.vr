@@ -1,3 +1,8 @@
+// ======================================================
+// Copyright (c) 2017-2024 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
 #include "..\..\host\engine.hpp"
 #include "..\..\host\oop.hpp"
 #include "..\..\host\text.hpp"

@@ -1,3 +1,8 @@
+// ======================================================
+// Copyright (c) 2017-2024 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
 variable_define
 	//all pathes are relative
 	gm_filegen_internal_path_gamemodes = "src\host\GameModes";
