@@ -85,6 +85,7 @@ try:
 
     for file in find_files(serachDir,relToRootDir=False):
         fileName = os.path.relpath(file,relativeDir)
+        print(f'Check file: {fileName} ({file})')
         if not [ext for ext in includeExtensions if file.lower().endswith(ext)]:
             #print(f"\t\t--- SKIPPED: {fileName}")
             continue
