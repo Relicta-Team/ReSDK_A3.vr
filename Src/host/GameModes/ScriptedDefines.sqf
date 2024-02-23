@@ -751,7 +751,7 @@ class(ScriptedRole) extends(BasicRole)
 		objParams();
 		private _slocStruct = callSelf(_spawnLocationWrapper);
 		assert_str(!isNullVar(_slocStruct),"Null return spawn location");
-		assert_str(_slocStruct select 1 != "","Empty string point name");
+		assert_str((_slocStruct select 1) != "","Empty string point name");
 		
 		_slocStruct params ["_spType","_spName"];
 
