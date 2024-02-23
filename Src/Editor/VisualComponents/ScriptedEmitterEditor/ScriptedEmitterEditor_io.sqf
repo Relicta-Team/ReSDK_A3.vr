@@ -360,7 +360,7 @@ function(vcom_emit_io_saveAllConfigs)
 
 	} foreach vcom_emit_io_list_allConfigsNames;
 
-	private _copyright = ["src\Editor\Bin\copyright.txt"] call file_read;
+	private _copyright = ["src\Editor\Bin\copyright.sqf"] call file_read;
 
 	//preare evaluated id
 
