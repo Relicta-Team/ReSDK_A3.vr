@@ -64,8 +64,11 @@ try:
     
 
     curDir = os.getcwd()
+    print(f'CWD: {curDir}')
     if curDir.split('/')[-1].lower() == 'src':
         curDir = os.chdir(os.path.join(curDir,'../third-party/opyrightupdate'))
+
+    print(f'CWD final: {os.getcwd()}')
 
     content = []
     includeExtensions = ["sqf","cpp","hpp","h",'interface','cs']
@@ -82,6 +85,9 @@ try:
     #load template
     with open(srcCopyrightTemplate,'r+',encoding='utf-8') as f:
         content = f.readlines()
+
+    print("Content count: {}".format(len(content)))
+    print("Search directory: {}".format(serachDir))
 
     flistGlob = find_files(serachDir,relToRootDir=False)
     for file in flistGlob:
@@ -116,7 +122,7 @@ try:
         
         l2 = llist[1] #this line need checks
 
-        yearsParts = re.findall("\d+",l2)
+        yearsParts = re.findall(r"\d+",l2)
         if len(yearsParts)!=3:
             error(f"Damaged copyright; Numbers get {len(yearsParts)}, need 3: {l2}",fileName)
             continue
