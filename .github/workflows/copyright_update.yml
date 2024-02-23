@@ -7,8 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  copyright_check_script: copyright_update.py
-  copyright_check_script_folder: Third-party/CopyrightUpdate
+  copyright_check_script: Third-party/CopyrightUpdate/copyright_update.py
 
 jobs:
   CopyrightCheck:
@@ -25,7 +24,7 @@ jobs:
       - name: Run py scipt
         run: |
             python -V
-            python ${{ copyright_check_script_folder }}/${{ env.copyright_check_script }} pretty
+            python ${{ env.copyright_check_script }} pretty
         working-directory: ${{ github.workspace }}    
       - name: Push changes
         uses: actions-x/commit@v6
