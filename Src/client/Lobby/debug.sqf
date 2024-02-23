@@ -1,8 +1,3 @@
-// ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
-// sdk.relicta.ru
-// ======================================================
-
 //call call compile preprocessfile "src\client\Lobby\debug.sqf"
 if (isnull lobby_internal_rttcamera) exitwith {
 	["CAMNULL"] call messageBox;
