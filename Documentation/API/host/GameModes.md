@@ -276,7 +276,7 @@ Replaced value:
 ```sqf
 [v1,v2]
 ```
-File: [host\GameModes\ScriptedSkillsDecl.hpp at line 3](../../../Src/host/GameModes/ScriptedSkillsDecl.hpp#L3)
+File: [host\GameModes\ScriptedSkillsDecl.hpp at line 8](../../../Src/host/GameModes/ScriptedSkillsDecl.hpp#L8)
 ## skills_nodes_allowedMinSkillDefIndex
 
 Type: Variable
@@ -288,7 +288,7 @@ Initial value:
 ```sqf
 4
 ```
-File: [host\GameModes\ScriptedSkillsDecl.hpp at line 4](../../../Src/host/GameModes/ScriptedSkillsDecl.hpp#L4)
+File: [host\GameModes\ScriptedSkillsDecl.hpp at line 9](../../../Src/host/GameModes/ScriptedSkillsDecl.hpp#L9)
 ## skills_nodes_listKinds
 
 Type: Variable
@@ -300,7 +300,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [host\GameModes\ScriptedSkillsDecl.hpp at line 5](../../../Src/host/GameModes/ScriptedSkillsDecl.hpp#L5)
+File: [host\GameModes\ScriptedSkillsDecl.hpp at line 10](../../../Src/host/GameModes/ScriptedSkillsDecl.hpp#L10)
 # PublicTasks.sqf
 
 ## taskSystem_internal_list_generator
