@@ -1,3 +1,8 @@
+// ======================================================
+// Copyright (c) 2017-2024 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
 man_list_camo_pre = "PersianHead_A3_04_a PersianHead_A3_04_l PersianHead_A3_04_sa WhiteHead_22_a WhiteHead_22_l WhiteHead_22_sa GreekHead_A3_10_a GreekHead_A3_10_l GreekHead_A3_10_sa";
 
 
