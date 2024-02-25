@@ -150,6 +150,7 @@ function(lsim_setMode)
 	};
 
 	lsim_mode = _mode;
+	_mode call rendering_setInGameHDR;
 }
 
 function(lsim_internal_collectLightObjects)

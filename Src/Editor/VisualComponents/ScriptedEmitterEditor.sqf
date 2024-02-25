@@ -108,6 +108,9 @@ function(vcom_emit_closeVisualWindowHandled)
 		if !(call rendering_isNightEnabled) then {
 			true call rendering_setNight;
 		};
+		if (!call rendering_isInGameHDREnabled) then {
+			true call rendering_setInGameHDR;
+		};
 	};
 
 	if (call rendering_isNightEnabled) then {
@@ -244,10 +247,11 @@ function(vcom_emit_createVisualWindow)
 	if (cfg_emed_enableFloorByDefault) then {
 		call vcom_emit_opt_switchFloor;
 	};
-	if (cfg_emed_enableCustomRenderByDefault) then {
-		call vcom_emit_opt_switchRender;
-	};
+
 	if (!lsim_mode) then {
+		if (cfg_emed_enableCustomRenderByDefault) then {
+			call vcom_emit_opt_switchRender;
+		};
 		if (cfg_emed_enableNightByDefault) then {
 			call vcom_emit_opt_switchNight;
 		};

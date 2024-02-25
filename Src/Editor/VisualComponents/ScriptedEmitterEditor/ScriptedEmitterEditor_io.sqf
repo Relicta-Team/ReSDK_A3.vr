@@ -388,10 +388,16 @@ function(vcom_emit_io_saveAllConfigs)
 				call lsim_internal_buildScriptedConfigs;
 				call lsim_internal_rebuildAllLights;
 			};
-		},{["Cannot save %1",vcom_emit_io_configNames] call printError}] call file_writeAsync;
+		},{
+			["Cannot save %1",vcom_emit_io_configNames] call printError;
+			["Cannot save file " + vcom_emit_io_configNames] call showError;	
+		}] call file_writeAsync;
 
 
-	},{["Cannot save %1",vcom_emit_io_configPath] call printError}] call file_writeAsync;
+	},{
+		["Cannot save %1",vcom_emit_io_configPath] call printError;
+		["Cannot save file " + vcom_emit_io_configPath] call showError;	
+	}] call file_writeAsync;
 
 	
 	
