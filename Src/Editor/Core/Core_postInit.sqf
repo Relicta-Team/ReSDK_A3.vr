@@ -105,6 +105,9 @@ projectEditor_isCompileProcess = false;
 
 if (Core_catchedInitError) exitWith {};
 
+//init object creation event
+call Core_initObjects;
+
 //main loader gameobjects
 _postInit = {
 	call core_settings_init;
