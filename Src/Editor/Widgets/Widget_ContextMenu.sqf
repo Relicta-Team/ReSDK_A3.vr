@@ -516,7 +516,20 @@ function(ContextMenu_loadMouseObject)
 	_stackMenu pushBack ["<t size='0.9'>Открыть редактор позиций модели</t>",{nextFrameParams(vcom_relposEditorOpen,(call contextMenu_getContextParams) select 0)}];
 	_stackMenu pushBack ["Открыть редактор эмиттеров",{
 		private _obj = (call contextMenu_getContextParams) select 0;
-		nextFrameParams(vcom_emit_createVisualWindow,_obj);
+		private _params = [_obj];
+		private _cfg = [_obj] call lsim_resolveObjectConfig;
+		if (_cfg != "") then {
+			_params pushBack _cfg;
+		};
+		private _code = {
+			params ["_obj",["_cfg",""]];
+			[_obj] call vcom_emit_createVisualWindow;
+			
+			if (_cfg != "") then {
+				[_cfg] call vcom_emit_io_loadConfigCheck;
+			};
+		};
+		nextFrameParams(_code,_params);
 	}];
 
 	// _stackMenu pushBack ["Добавить комментарий",{

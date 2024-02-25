@@ -54,6 +54,7 @@ function(fileWatcher_guardSafeRebuild)
 function(fileWatcher_onFrame)
 {
 	if (!isGameFocused) exitwith {};
+	if (call isDisplayOpened) exitWith {};
 
 	if (tickTime >= fileWatcher_internal_lastTickTime) then {
 		fileWatcher_internal_lastTickTime = tickTime + fileWatcher_internal_const_updateDelay;

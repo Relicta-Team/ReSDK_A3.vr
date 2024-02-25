@@ -80,7 +80,7 @@ add3DENEventHandler ["OnMissionSave",{["onSaving",[false]] call Core_invokeEvent
 add3DENEventHandler ["OnMissionAutosave",{["onSaving",[true]] call Core_invokeEvent}];
 add3DENEventHandler ["onUndo",{["onUndo",[]] call Core_invokeEvent}];
 add3DENEventHandler ["onRedo",{["onRedo",[]] call Core_invokeEvent}];
-add3DENEventHandler ["OnPaste",{["onPaste",[]] call Core_invokeEvent}];
+add3DENEventHandler ["OnPaste",{["onPaste",[flatten get3denselected ""]] call Core_invokeEvent}];
 add3DENEventHandler ["onConnectingStart",{["onConnectingStart",[_this select 1]] call Core_invokeEvent}];
 add3DENEventHandler ["onConnectingEnd",{["onConnectingEnd",[_this select 1,_this select 2]] call Core_invokeEvent}];
 //add3DENEventHandler ["OnModeChange",{["changed to %1",_this] call printWarning}];
@@ -119,9 +119,13 @@ Core_internal_map_events = createHashMapFromArray [
 	//отмена и повторение
 	["onUndo",[]],
 	["onRedo",[]],
-	["onPaste",[]],
+	["onPaste",[]], // params ["_listObjects"]
 	["onConnectingStart",[]],
 	["onConnectingEnd",[]],
+
+	//события добавления и удаления объектов // params ["_obj"]
+	["onObjectAdded",[]], 
+	["onObjectRemoved",[]],
 
 	["onMouseAreaPressed",[]] //событие при отпускании мыши по зоне 52(MouseArea)
 ];
@@ -130,6 +134,50 @@ function(compileEditorOnly)
 {
 	private __FLAG_SKIP_OBJECT_BUILD__ = true;
 	call compileEditor;
+}
+
+function(Core_initObjects)
+{
+	{
+		[_x] call Core_initObjectEvents	
+	} foreach (all3DENEntities select 0);
+
+	//register paste events
+	["onPaste",{
+		params ["_objList"];
+		{
+			[_x,true] call Core_initObjectEvents;
+		} foreach _objList;
+	}] call Core_addEventHandler;
+}
+
+function(Core_initObjectEvents)
+{
+	params ["_obj",["_callOnCreate",false]];
+	//unload events if exists
+	private _evh = _obj getvariable ["__handlerObjAdd__",null];
+	if !isNullVar(_evh) then {
+		_obj RemoveEventHandler ["RegisteredToWorld3DEN",_evh];	
+	};
+	_evh = _obj getvariable ["__handlerObjRemove__",null];
+	if !isNullVar(_evh) then {
+		_obj RemoveEventHandler ["UnregisteredFromWorld3DEN",_evh];
+	};
+
+	//register events
+	private _onCreate = {
+		["created %1",_this select 0] call printTrace;
+		["onObjectAdded",[_this select 0]] call Core_invokeEvent;
+	};
+	_obj setVariable ["__handlerObjAdd__",_obj AddEventHandler ["RegisteredToWorld3DEN",_onCreate]];
+	_obj setVariable ["__handlerObjRemove__",_obj AddEventHandler ["UnregisteredFromWorld3DEN",{
+		["deleted %1",_this select 0] call printTrace;
+		["onObjectRemoved",[_this select 0]] call Core_invokeEvent;
+	}]];
+
+	if (_callOnCreate) then {
+		[_obj] call _onCreate;
+	};
 }
 
 function(Core_reloadEditorFull)

@@ -100,10 +100,19 @@ function(vcom_emit_closeVisualWindowHandled)
 	call vcom_emit_io_saveAllConfigs;
 
 	call displayClose;
+	false call rendering_setInGameHDR;
+
+	if (lsim_mode) exitWith {
+		// call lsim_internal_buildScriptedConfigs
+		// call lsim_internal_rebuildAllLights;
+		if !(call rendering_isNightEnabled) then {
+			true call rendering_setNight;
+		};
+	};
+
 	if (call rendering_isNightEnabled) then {
 		false call rendering_setNight;
 	};
-	false call rendering_setInGameHDR;
 }
 
 function(vcom_emit_openMainContextMenuSettings)
@@ -238,8 +247,10 @@ function(vcom_emit_createVisualWindow)
 	if (cfg_emed_enableCustomRenderByDefault) then {
 		call vcom_emit_opt_switchRender;
 	};
-	if (cfg_emed_enableNightByDefault) then {
-		call vcom_emit_opt_switchNight;
+	if (!lsim_mode) then {
+		if (cfg_emed_enableNightByDefault) then {
+			call vcom_emit_opt_switchNight;
+		};
 	};
 
 	["Редактор загружен",10] call showInfo;
