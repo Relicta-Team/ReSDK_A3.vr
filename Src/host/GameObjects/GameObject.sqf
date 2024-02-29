@@ -806,7 +806,7 @@ region(Nearest game objects)
 		in:bool:Поиск по типу:Если ИСТИНА, то будет осуществлён поиск ближайших мобов по типу. В ином случае поиск будет осуществлён по всем мобам.
 			opt:def=false
 		in:classname:Тип мобов:Тип мобов, которые будут искаться. Используется только если включен поиск по типу.
-			opt:def=BasicMob
+			opt:def=BasicMob:typeset_out=Результат|array[{typename}]
 		return:array[BasicMob]:Массив игровых объектов
 	" node_met
 	//Собираем мобов на дистанции
@@ -837,8 +837,8 @@ region(Nearest game objects)
 		in:bool:Поиск по типу:Если ИСТИНА, то будет осуществлён поиск ближайших мобов по типу. В ином случае поиск будет осуществлён по всем мобам.
 			opt:def=false
 		in:classname:Тип мобов:Тип мобов, которые будут искаться. Используется только если включен поиск по типу.
-			opt:def=BasicMob
-		return:BasicMob:Массив игровых объектов
+			opt:def=BasicMob:typeset_out=Результат
+		return:BasicMob:Ближайшая сущность
 	" node_met
 	func(getNearMob)
 	{

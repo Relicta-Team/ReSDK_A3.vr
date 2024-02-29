@@ -164,7 +164,7 @@ node_system_group("operators")
 		namelib:Цикл по списку (перебор коллекции)
 		desc:Цикл для перебора коллекций (например, массивов).
 		icon:data\\icons\\icon_Blueprint_ForEach_16x
-		code:{@genvar.out.2.internal(_x)@genvar.out.3.internal(_foreachindex) @out.1} foreach (@in.2); @out.4
+		code:{@genvar.out.2.iterator(_x)@genvar.out.3.iterator(_foreachindex) @out.1} foreach (@in.2); @out.4
 		runtimeports:1
 		autocoloricon:0
 		in:Exec:Вход

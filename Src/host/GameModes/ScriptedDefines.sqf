@@ -304,6 +304,7 @@ class(ScriptedGamemode) extends(GMBase)
 		type:get
 		lockoverride:1
 		in:classname:Роль:Название роли
+			opt:def=ScriptedRole
 		return:int:Количество кандидатов, занявших эту роль.
 	" node_met
 	func(getCandidatesCount)
@@ -319,6 +320,7 @@ class(ScriptedGamemode) extends(GMBase)
 		type:const
 		return:array[classname]:Список ролей, доступных в режиме.
 		defval:[]
+		restr:ScriptedRole
 	" node_met
 	func(_getRolesWrapper)
 	{
@@ -457,6 +459,7 @@ class(ScriptedRole) extends(BasicRole)
 		classprop:1
 		return:classname:Класс для мужского персонажа
 		defval:Mob
+		restr:Mob
 	" node_var
 	var(classMan,"Mob");
 
@@ -467,6 +470,7 @@ class(ScriptedRole) extends(BasicRole)
 		classprop:1
 		return:classname:Класс для женского персонажа
 		defval:MobWoman
+		restr:Mob
 	" node_var
 	var(classWoman,"MobWoman");
 	
