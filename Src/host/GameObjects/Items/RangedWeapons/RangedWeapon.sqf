@@ -436,7 +436,7 @@ class(IRangedWeapon) extends(Item)
 		type:method
 		lockoverride:1
 		in:classname:Тип магазина:Тип создаваемого магазина
-			opt:def=IMagazineBase
+			opt:def=IMagazineBase:typeset_out=Результат
 		in:classname:Тип патронов:Тип боеприпасов, создаваемых в оружии
 			opt:require=0:def=IAmmoBase
 		in:int:Количество:Сколько боеприпасов будет создано в магазине.
