@@ -108,18 +108,20 @@ class(BasicMob) extends(GameObject)
 	
 	var(tasks,[]);
 
-	"
-		name:Добавить задачу
-		desc:Добавляет персонажу новую задачу. Возвращает результат добавления задачи. Если она была добавлена для персонажа - возвращает ИСТИНУ.
-		type:method
-		lockoverride:1
-		in:TBase:Задача:Добавляемая задача для персонажа
-		in:TaskParamsProvider:Параметры задачи:Параметры выполнения задачи
-		return:bool:Была ли задача успешно добавлена.
-	" node_met
+	// "
+	// 	name:Добавить задачу
+	// 	desc:Добавляет персонажу новую задачу. Возвращает результат добавления задачи. Если она была добавлена для персонажа - возвращает ИСТИНУ.
+	// 	type:method
+	// 	lockoverride:1
+	// 	in:TBase:Задача:Добавляемая задача для персонажа
+	// 	in:TaskParamsProvider:Параметры задачи:Параметры выполнения задачи
+	// 	return:bool:Была ли задача успешно добавлена.
+	// " node_met
 	func(addTask)
 	{
 		objParams_2(_v,_ctx);
+		setLastError("Task system TODO rewrite");
+
 		if (equalTypes(_v,"") && {!isTypeNameOf(_v,TBase)}) exitwith {
 			errorformat("Cant add task %1 for %2 <%3> - task does not exists",_v arg getSelf(pointer) arg callSelf(getClassName));
 			false
@@ -133,6 +135,12 @@ class(BasicMob) extends(GameObject)
 		callFuncParams(_t,onTaskAdded,this);
 		callFuncParams(_t,handleTaskAddedParams,_ctx);
 		true
+	};
+
+	// Новая функция регистрации задачи
+	func(registerTask)
+	{
+		objParams_1(_tObj);
 	};
 
 region(roles management)

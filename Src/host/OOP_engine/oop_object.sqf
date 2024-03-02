@@ -135,6 +135,8 @@ class(ManagedObject) extends(object)
 		objParams_1(_mode);
 		if (callSelf(isUpdateActive) == _mode) exitWith {};
 		if (_mode) then {
+			if (!isImplementFunc(this,onUpdate)) exitWith {};
+
 			setSelf(__handleUpdateNative__,startUpdateParams(getSelfFunc(onUpdate),1,[this]));
 			INC(oop_upd);
 		} else {
