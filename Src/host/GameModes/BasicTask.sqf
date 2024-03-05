@@ -133,10 +133,30 @@ class(TaskBase) extends(IGameEvent)
 	" node_var
 	var(descRoleplay,"Нужно сделать дело...");
 
-	//TODO реализовать удобные модели получения описания
+	"
+		name:Обработчик описания задачи
+		desc:Вызываемая функция вывода описания задачи
+		prop:all
+		return:function[event=string=BasicTask^]:Описание задачи
+	" node_var
+	var(_taskDescDelegate,{getSelf(descRoleplay)});
+	func(getTaskDescription)
+	{
+		objParams();
+		[this] call getSelf(_taskDescDelegate)
+	};
 
-	//! TODO сделать так, что задачи можно вешать на нескольких владельцев
-	var(mob,nullPtr); //владелец этой задачи
+
+	var(owners,[]); //кто владеет данной задачей
+
+	"
+		name:Владельцы задачи
+		desc:Получает список владельцев задачи
+		type:get
+		lockoverride:1
+		return:array[Mob^]:Владельцы задачи
+	" node_met
+	getter_func(getOwners,getSelf(owners));
 
 	"
 		name:Задача завершена
@@ -175,11 +195,21 @@ class(TaskBase) extends(IGameEvent)
 		taskSystem_allTasks pushBack this;
 		callSelfParams(setTag,getSelf(tag));
 
+		getSelf(owners) pushBackUnique _mob;
+
+		callSelf(onTaskRegistered);
+
 		if callSelf(checkCompleteOnEnd) then {
 			taskSystem_checkedOnEndRound pushBack this;
 		} else {
 			setSelf(_taskHandle__,startUpdateParams(getSelfFunc(updateMethod),getSelf(checkDelay),this));
 		};
+	};
+
+	func(onTaskRegistered)
+	{
+		objParams();
+		//virtual function
 	};
 
 	var(_taskHandle__,-1);
@@ -196,13 +226,134 @@ class(TaskBase) extends(IGameEvent)
 	func(updateMethod)
 	{
 		updateParams();
-		callSelf(onTaskCheck);
+		{
+			callSelfParams(onTaskCheck,_x);
+		} foreach getSelf(owners);
 	};
 
 	func(onTaskCheck)
 	{
-		objParams();
+		objParams_1(_owner);
 	};
+
+	func(setTaskResult)
+	{
+		objParams_1(_tr);
+		if getSelf(isDone) exitWith {}; //task already done - exit
+		setSelf(result,_tr);
+		if !callSelf(checkCompleteOnEnd) then {
+			if (_tr != 0) then {
+				callSelf(onTaskDone);
+			};
+		};
+	};
+
+	//вызывается автоматически при задаче с checkCompleteOnEnd, либо при пользовательской проверке на завершение
+	func(onTaskDone)
+	{
+		objParams();
+		setSelf(isDone,true);
+		private _tr = getSelf(result);
+		if (_tr > 0) then {
+			{
+				_x params ["_mob"];
+				[this,_mob] call getSelf(_taskOnSuccessDeletage);
+			} foreach getSelf(owners);
+		} else {
+			{
+				_x params ["_mob"];
+				[this,_mob] call getSelf(_taskOnFailDeletage);
+			} foreach getSelf(owners);
+		};
+	};
+
+	// обработчики успешного выполнения и провала
+	"
+		name:Обработчик успешного выполнения задачи
+		desc:Вызывается при успешном выполнении задачи.
+		prop:all
+		return:function[event=null=BasicTask^@Mob^]:Обработчик успешного выполнения задачи
+	" node_var
+	var(_taskOnSuccessDeletage,{});
+	"
+		name:Обработчик провала задачи
+		desc:Вызывается при провале задачи.
+		prop:all
+		return:function[event=null=BasicTask^@Mob^]:Обработчик провала задачи
+	" node_var
+	var(_taskOnFailDeletage,{});
+
+
+
+endclass
+
+
+class(ItemKindTask) extends(BasicTask)
+	var(name,"Item task");
+
+	"
+		name:Глобальные ссылки
+		desc:Список глобальных ссылок на игровые предметы, обрабатываемые задачей.
+		prop:all
+		return:array[string]:Массив глобальных ссылок
+		defval:[]
+	" node_var
+	var(__globalRefs,[]);
+	"
+		name:Список предметов
+		desc:Список ссылок на игровые объекты (предметы), обрабатываемые задачей.
+		prop:all
+		return:array[Item^]:Массив ссылок на игровые объекты
+	" node_var
+	var(__objRefs,[]);
+	"
+		name:Список типов
+		desc:Список типов, обрабатываемых задачей.
+		prop:all
+		return:array[classname]:Массив типов
+	" node_var
+	var(__typeList,[]); //!набор типов. Как будем обрабатывать???
+
+	func(onTaskRegistered)
+	{
+		objParams();
+		//getting all references 
+		callSelf(__convertGlobalRefsToObjects);
+		callSelf(__validateInputs);
+	};
+
+	func(__convertGlobalRefsToObjects)
+	{
+		objParams();
+		private _lvals = [];
+		private _refto = null;
+		{
+			_refto = [_x] call getObjectByRef;
+			assert_str(!isNullReference(_refto),format vec2("Invalid global reference: %1",_x));
+
+			_lvals pushBack _refto;
+		} foreach getSelf(__globalRefs);
+
+		getSelf(__objRefs) append _lvals;
+	};
+
+	func(__validateInputs)
+	{
+		objParams();
+		{
+			assert_str(!isNullReference(_x),"Null reference item");
+			assert_str(isTypeOf(_x,Item),format vec2("Invalid global reference. Object must be of type Item, not %1",callFunc(_x,getClassName)));
+		} forEach getSelf(__objRefs);
+	};
+
+	func(processObjectCheck)
+	{
+		objParams_1(_funcref);
+		{
+			[_x] call _funcref;
+		} foreach getSelf(__objRefs);
+	};
+
 
 
 endclass
