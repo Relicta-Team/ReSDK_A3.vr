@@ -41,6 +41,7 @@ taskSystem_map_tags = createHashMap; //map of all tagged tasks
 		- входные параметры: ссылка объекта
 	GameObjectKindTask - задача относящаяся к работе с игровыми объектами
 		- входные параметры: ссылка объекта, глобальная ссылка, ... (как в ItemKindTask)
+		TODO inherit from item (or item inherit from this)
 	CounterKindTask - задача для работы с подсчетом значений
 		- входные параметры: int - счетчик
 	LocationKindTask - задача относящаяся к работе с локациями (прибытие и нахождение в локации)
@@ -228,6 +229,10 @@ class(TaskBase) extends(IGameEvent)
 		updateParams();
 		{
 			callSelfParams(onTaskCheck,_x);
+
+			//останавливаем проверку после выполнения задачи
+			if (getSelf(isDone) || getSelf(result)!=0) exitWith {};
+
 		} foreach getSelf(owners);
 	};
 
@@ -238,10 +243,12 @@ class(TaskBase) extends(IGameEvent)
 
 	func(setTaskResult)
 	{
-		objParams_1(_tr);
+		params ['this',"_tr",["_endroundCheck",false]];
+
 		if getSelf(isDone) exitWith {}; //task already done - exit
 		setSelf(result,_tr);
-		if !callSelf(checkCompleteOnEnd) then {
+
+		if (!callSelf(checkCompleteOnEnd) || _endroundCheck) then {
 			if (_tr != 0) then {
 				callSelf(onTaskDone);
 			};
@@ -257,12 +264,12 @@ class(TaskBase) extends(IGameEvent)
 		if (_tr > 0) then {
 			{
 				_x params ["_mob"];
-				[this,_mob] call getSelf(_taskOnSuccessDeletage);
+				[this,_mob,_foreachindex] call getSelf(_taskOnSuccessDeletage);
 			} foreach getSelf(owners);
 		} else {
 			{
 				_x params ["_mob"];
-				[this,_mob] call getSelf(_taskOnFailDeletage);
+				[this,_mob,_foreachindex] call getSelf(_taskOnFailDeletage);
 			} foreach getSelf(owners);
 		};
 	};
@@ -272,23 +279,52 @@ class(TaskBase) extends(IGameEvent)
 		name:Обработчик успешного выполнения задачи
 		desc:Вызывается при успешном выполнении задачи.
 		prop:all
-		return:function[event=null=BasicTask^@Mob^]:Обработчик успешного выполнения задачи
+		return:function[event=null=BasicTask^@Mob^@int]:Обработчик успешного выполнения задачи
 	" node_var
 	var(_taskOnSuccessDeletage,{});
 	"
 		name:Обработчик провала задачи
 		desc:Вызывается при провале задачи.
 		prop:all
-		return:function[event=null=BasicTask^@Mob^]:Обработчик провала задачи
+		return:function[event=null=BasicTask^@Mob^@int]:Обработчик провала задачи
 	" node_var
 	var(_taskOnFailDeletage,{});
 
-
+	"
+		name:Копировать задачу
+		desc:Создает копию задачи. Тэг и владельцы задачи не копируются.
+		type:method
+		lockoverride:1
+	" node_met
+	func(copyTask)
+	{
+		objParams();
+		private _class = callSelf(getClassName);
+		private _instance = instantiate(_class);
+		private _fvals = (allVariables _instance) apply {tolower _x};
+		private _excludedVars = ["_taskHandle__","owners","tag"] apply {tolower _x};
+		private _fnamesUpdate = _fvals - _excludedVars;
+		private _temp = null;
+		{
+			_temp = getSelfReflect(_x);
+			if equalTypes(_temp,[]) then {
+				_temp = array_copy(_temp);
+			};
+			setVarReflect(_instance,_x,_temp);
+		} foreach _fnamesUpdate;
+	};
 
 endclass
 
 
 class(ItemKindTask) extends(BasicTask)
+
+	"
+		name:Предметная задача
+		desc:Задача, относящаяся к игровым предметам. Например: получение, сохранение и т.д.
+		path:Игровая логика.Задачи
+	" node_class
+
 	var(name,"Item task");
 
 	"
@@ -305,14 +341,14 @@ class(ItemKindTask) extends(BasicTask)
 		prop:all
 		return:array[Item^]:Массив ссылок на игровые объекты
 	" node_var
-	var(__objRefs,[]);
+	var(__objRefs,[]); //сюда добавляются глобальные ссылки
 	"
 		name:Список типов
 		desc:Список типов, обрабатываемых задачей.
 		prop:all
 		return:array[classname]:Массив типов
 	" node_var
-	var(__typeList,[]); //!набор типов. Как будем обрабатывать???
+	var(__typeList,[]);
 
 	func(onTaskRegistered)
 	{
@@ -344,16 +380,295 @@ class(ItemKindTask) extends(BasicTask)
 			assert_str(!isNullReference(_x),"Null reference item");
 			assert_str(isTypeOf(_x,Item),format vec2("Invalid global reference. Object must be of type Item, not %1",callFunc(_x,getClassName)));
 		} forEach getSelf(__objRefs);
+
+		{
+			assert_str(isTypeNameOf(_x,Item),format vec2("Invalid typename %1, must be of type Item",_x));
+		} foreach getSelf(__typeList);
 	};
 
 	func(processObjectCheck)
 	{
-		objParams_1(_funcref);
+		objParams_3(_owner,_funcref,_functypes);
+
+		private _foundNull = false;
+		private _counter = 0;
 		{
-			[_x] call _funcref;
+			if isNullReference(_x) then {
+				_foundNull = true;
+				continue;
+			};
+
+			_counter = _counter + ([_owner,_x] call _funcref);
 		} foreach getSelf(__objRefs);
+
+		{
+			_counter = _counter + ([_owner,_x] call _functypes);
+		} foreach getSelf(__typeList);
+
+		if (getSelf(failTaskOnItemDestroy) && _foundNull) exitWith {
+			callSelfParams(setTaskResult,getSelf(failResultOnItemDestroy));
+		};
+
+		if (_counter >= ((count getSelf(__typeList)) + (count getSelf(__objRefs)))) then {
+			callSelfParams(setTaskResult,1);
+		};
 	};
 
+	"
+		name:Провал при удалении предметов
+		namelib:Провалить задачу при удалении предметов
+		desc:При включении этой опции задача будет автоматически провалена если один или несколько предметов, относящихся к этой задаче были удалены или уничтожены.
+		prop:all
+		return:bool:Провалить задачу при удалении предметов
+	" node_var
+	var(failTaskOnItemDestroy,false);
+
+	"
+		name:Результат провала при удалении предметов
+		namelib:Результат провала при удалении предметов
+		desc:Результат провала задачи, устанавливаемый при удалении одного или нескольких предметов, относящихся к этой задаче.
+		prop:all
+		return:int:Результат провала при удалении предметов
+	" node_var
+	var(failResultOnItemDestroy,-100);
+
+	"
+		name:Список предметов
+		desc:Список названий предметов, необходимых для выполнения задачи
+		type:get
+		lockoverride:1
+		return:array[string]:Список названий предметов	
+	" node_met
+	func(getRequiredItemsNames)
+	{
+		objParams();
+		private _names = [];
+		{
+			_names pushBack callFunc(_x,getName);
+		} foreach getSelf(__objRefs);
+
+		{
+			_names pushBack getFieldBaseValueWithMethod(_x,"name","getName");
+		} foreach getSelf(__typeList);
+		_names
+	};
+
+endclass
 
 
+class(TaskItemGet) extends(ItemKindTask)
+	var(name,"Добыча");
+	var(desc,"Получить предметы");
+	var(descRoleplay,"Мне нужно получить %1: %2");
+	
+	_tDelegate = {
+		private _names = callSelf(getRequiredItemsNames);
+		private _origDesc = getSelf(descRoleplay);
+
+		if (count _names == 0) exitWith {
+			format[_origDesc,"","ничего"];
+		};
+		private _itmCnt = "предметы";
+		if (count _names == 1) then {_itmCnt="предмет"};
+		format[_origDesc,_itmCnt,_names joinString ", "]
+	};
+	var_exprval(_taskDescDelegate,_tDelegate);
+
+	func(onTaskCheck)
+	{
+		objParams_1(_owner);
+		//params ["_owner","_typeOrReference"]
+		
+		private _fnRefs = {
+			params ["_owner","_it"];
+			callFuncParams(_owner,hasItem,_it arg true)
+		};
+		private _fnTypes = {
+			params ["_owner","_it"];
+			callFuncParams(_owner,hasItem,_it arg true)
+		};
+
+		callSelfParams(processObjectCheck,_owner arg _fnRefs arg _fnTypes);
+	};
+
+endclass
+
+class(TaskItemSave) extends(TaskItemGet)
+	var(name,"Сохранение");
+	var(desc,"Сохранить предметы до конца раунда");
+	var(descRoleplay,"Мне нужно сохранить %1: %2");
+
+	getterconst_func(checkCompleteOnEnd,true);
+endclass
+
+//----GOBJ TASKS----
+
+class(GameObjectKindTask) extends(TaskBase)
+	var(name,"Game object task");
+endclass
+
+
+
+//-----------------------------------------------------------
+
+class(MobKindTask) extends(TaskBase)
+	"
+		name:Сущностная задача
+		desc:Задача, относящаяся к сущностям (мобам)
+		path:Игровая логика.Задачи
+	" node_class
+	
+	var(name,"Mob task");
+
+	"
+		name:Цель
+		desc:Цель задачи
+		prop:all
+		return:Mob:Сущность - цель задачи
+	" node_var
+	var(target,nullPtr);
+
+	func(onTaskCheck)
+	{
+		objParams_1(_owner);
+
+		if isNullReference(getSelf(target)) exitWith {};
+		if callSelf(checkEntityState) then {
+			callSelfParams(setTaskResult,1);
+		};
+	};
+
+	func(checkEntityState)
+	{
+		objParams();
+		true
+	};
+
+	private _tDelegate = {
+		objParams();
+		private _targ = getSelf(target);
+		format[getSelf(descRoleplay),callFuncParams(_targ,getNameEx,"кто"),callFuncParams(_targ,getNameEx,"вин")]
+	};
+	var_exprval(_taskDescDelegate,_tDelegate);
+endclass
+
+class(TaskMobKill) extends(MobKindTask)
+	//TODO name,desc
+	func(checkEntityState)
+	{
+		objParams();
+		getVar(getSelf(target),isDead)
+	};
+endclass
+
+class(TaskMobSave) extends(MobKindTask)
+	
+	getterconst_func(checkCompleteOnEnd,true);
+
+	func(checkEntityState)
+	{
+		objParams();
+		!getVar(getSelf(target),isDead)
+	};
+endclass
+
+class(TaskSelfSave) extends(TaskMobSave)
+	
+	func(onTaskCheck)
+	{
+		objParams_1(_owner);
+		setSelf(target,_owner);
+		super();
+	};
+
+endclass
+
+//---------
+
+class(CounterKindTask) extends(TaskBase)
+	"
+		name:Количественная задача
+		desc:Тип задачи, работающий с количеством чего-либо
+		path:Игровая логика.Задачи
+	" node_class
+	
+	var(name,"Counter task");
+
+	"
+		name:Требуемое количество
+		desc:Требуемое количество чего-либо (счетчик задачи)
+		prop:all
+		defval:1
+	" node_var
+	var(counter,1);
+
+	var(numeralString,vec3("предмет","предмета","предметов"));
+
+	func(getNumeralText)
+	{
+		objParams();
+		[getSelf(counter),getSelf(numeralString),true] call toNumeralString
+	};
+endclass
+
+class(TaskMoneyGet) extends(CounterKindTask)
+	
+	func(onTaskCheck)
+	{
+		objParams_1(_owner);
+
+		private _mon = callSelf(getCurrentCountValue);
+		if (_mon >= getSelf(counter)) then {
+			callSelfParams(setTaskResult,1);
+		};
+	};
+
+	func(getCurrentCountValue)
+	{
+		objParams();
+		[getSelf(mob),"Zvak",true] call getAllItemsInInventory;
+	};
+
+endclass
+
+
+class(LocationKindTask) extends(TaskBase)
+	"
+		name:Локационная задача
+		desc:Задача, относящаяся к локациям
+		path:Игровая логика.Задачи
+	" node_class
+	
+	var(name,"Location task");
+
+	"
+		name:Позиция
+		desc:Позиция задачи
+		prop:all
+		return:vector3:Позиция
+	" node_var
+	var(position,vec3(0,0,0));
+
+	"
+		name:Радиус
+		desc:Радиус задачи
+		prop:all
+		defval:1
+		return:float:Радиус
+	" node_var
+	var(radius,1);
+
+endclass
+
+
+class(TaskLocationEnter) extends(LocationKindTask)
+	func(onTaskCheck)
+	{
+		objParams_1(_owner);
+		if (
+			(callFunc(_owner,getPos) distance getSelf(position)) <= getSelf(radius)
+		) then {
+			callSelfParams(setTaskResult,1);
+		};
+	};
 endclass
