@@ -33,6 +33,20 @@ class(object) basic()
 	};
 
 	"
+		name:Получить класснейм родителя
+		namelib:Получить имя класса родителя
+		desc:Получает имя родительского класса, от которого унаследован объект. Не рекомендуется использовать этот узел для объектов типа object.
+		type:get
+		lockoverride:1
+		return:classname:Имя класса
+	" node_met
+	func(getParentClassName)
+	{
+		objParams();
+		this getVariable PROTOTYPE_VAR_NAME getVariable "__motherClass"
+	};
+
+	"
 		name:Получить класс
 		namelib:Получить класс объекта
 		desc:Получает класс объекта. Класс объекта - это специальный тип, содержащий информацию о самом классе а не о его экземплярах.
