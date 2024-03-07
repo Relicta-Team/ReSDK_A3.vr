@@ -49,20 +49,6 @@ taskSystem_map_tags = createHashMap; //map of all tagged tasks
 	RoleKindTask - задача на работу с ролями
 	TODO ReagentTask - 
 	TODO StatusEffectGetTask -
-
-
-	Список задач:
-	!TODO global refactoring required
-	ItemGetTask - получение предмета
-	ItemSaveTask - сохранение предмета
-	TargetSaveTask - сохранение цели до конца раунда (не должна умереть)
-	SelfSafeTask - владелец цели не долен умереть
-	TargetDeadTask - цель дожна умереть
-	LocationTask - посетить определнную локацию (позицию)
-	MoneyGetTask - получить определенное количество денег
-	RoleGetTask - получить определенную роль
-	StatusEffectGetTask - получить определенный статус эффект
-	ReagentTask - получить определенный реагент
 */
 
 //todo remove legacy task
@@ -70,6 +56,11 @@ taskSystem_map_tags = createHashMap; //map of all tagged tasks
 
 editor_attribute("ColorClass" arg "1370A2")
 class(TaskBase) extends(IGameEvent)
+
+	func(constructor)
+	{
+		assert_str(callSelf(getParentClassName)!="TaskBase","Abstract task cannot be created");
+	};
 
 	"
 		name:Задача
@@ -192,6 +183,11 @@ class(TaskBase) extends(IGameEvent)
 	func(onRegisterInTarget)
 	{
 		objParams_1(_mob);
+		if getSelf(taskRegistered) exitWith {
+			getSelf(owners) pushBackUnique _mob;
+		};
+
+		setSelf(taskRegistered,true);
 
 		taskSystem_allTasks pushBack this;
 		callSelfParams(setTag,getSelf(tag));
@@ -206,6 +202,9 @@ class(TaskBase) extends(IGameEvent)
 			setSelf(_taskHandle__,startUpdateParams(getSelfFunc(updateMethod),getSelf(checkDelay),this));
 		};
 	};
+
+	// Флаг, указывающий, что задача уже зарегистрирована
+	var(taskRegistered,false);
 
 	func(onTaskRegistered)
 	{
@@ -227,6 +226,11 @@ class(TaskBase) extends(IGameEvent)
 	func(updateMethod)
 	{
 		updateParams();
+		callSelf(updateMethodInternal);
+	};
+	func(updateMethodInternal)
+	{
+		objParams();
 		{
 			callSelfParams(onTaskCheck,_x);
 
@@ -235,6 +239,14 @@ class(TaskBase) extends(IGameEvent)
 
 		} foreach getSelf(owners);
 	};
+
+	"
+		name:Дополнительные условия
+		desc:Дополнительные условия, которые должны быть выполнены для проверки задачи.
+		prop:all
+		return:function[event=bool=BasicTask^]:Условие проверки задачи
+	" node_var
+	var(_customCondition,{false});//TODO add in all tasks types
 
 	func(onTaskCheck)
 	{
@@ -316,8 +328,182 @@ class(TaskBase) extends(IGameEvent)
 
 endclass
 
+class(GameObjectKindTask) extends(TaskBase)
 
-class(ItemKindTask) extends(BasicTask)
+	"
+		name:Объектная задача
+		desc:Задача, относящаяся к игровым объектам. Например: получение, сохранение и т.д.
+		path:Игровая логика.Задачи
+	" node_class
+
+	var(name,"GameObject task");
+
+	"
+		name:Глобальные ссылки
+		desc:Список глобальных ссылок на игровые объекты, обрабатываемые задачей.
+		prop:all
+		return:array[string]:Массив глобальных ссылок
+		defval:[]
+	" node_var
+	var(__globalRefs,[]);
+	"
+		name:Список объектов
+		desc:Список ссылок на игровые объекты, обрабатываемые задачей.
+		prop:all
+		return:array[GameObject]:Массив ссылок на игровые объекты
+	" node_var
+	var(__objRefs,[]); //сюда добавляются глобальные ссылки
+	"
+		name:Список типов
+		desc:Список типов объектов, обрабатываемых задачей.
+		prop:all
+		return:array[classname]:Массив типов
+	" node_var
+	var(__typeList,[]);
+
+	func(onTaskRegistered)
+	{
+		objParams();
+		//getting all references 
+		callSelf(__convertGlobalRefsToObjects);
+		callSelf(__validateInputs);
+	};
+
+	func(__convertGlobalRefsToObjects)
+	{
+		objParams();
+		private _lvals = [];
+		private _refto = null;
+		{
+			_refto = [_x] call getObjectByRef;
+			assert_str(!isNullReference(_refto),format vec2("Null reference: %1",_x));
+			_lvals pushBack _refto;
+		} foreach getSelf(__globalRefs);
+
+		getSelf(__objRefs) append _lvals;
+	};
+
+	func(__validateInputs)
+	{
+		objParams();
+		{
+			assert_str(!isNullReference(_x),"Null reference game object");
+			assert_str(isTypeOf(_x,GameObject),format vec2("Invalid global reference. Object must be of type GameObject, not %1",callFunc(_x,getClassName)));
+		} forEach getSelf(__objRefs);
+
+		{
+			assert_str(isTypeNameOf(_x,GameObject),format vec2("Invalid typename %1, must be of type GameObject",_x));
+		} foreach getSelf(__typeList);
+	};
+
+	func(processObjectCheck)
+	{
+		objParams_3(_owner,_funcref,_functypes);
+
+		private _foundNull = false;
+		private _counter = 0;
+		{
+			if isNullReference(_x) then {
+				_foundNull = true;
+				continue;
+			};
+			_counter = _counter + ([_owner,_x] call _funcref);
+		} foreach getSelf(__objRefs);
+
+		{
+			_counter = _counter + ([_owner,_x] call _functypes);
+		} foreach getSelf(__typeList);
+
+		if (getSelf(failTaskOnItemDestroy) && _foundNull) then {
+			callSelfParams(setTaskResult,getSelf(failResultOnItemDestroy));
+		};
+
+		if (_counter >= ((count getSelf(__typeList)) + (count getSelf(__objRefs)))) then {
+			callSelfParams(setTaskResult,1);
+		};
+	};
+
+	"
+		name:Провал при удалении
+		desc:При включении этой опции задача будет автоматически провалена если один или несколько игровых объектов, относящихся к этой задаче были удалены или уничтожены.
+		prop:all
+		return:bool:Провалить задачу при удалении игровых объектов
+	" node_var
+	var(failTaskOnItemDestroy,false);
+
+	"
+		name:Результат провала при удалении
+		desc:Результат провалки задачи, устанавливаемый при удалении одного или нескольких задачей в конце раунда.
+		prop:all
+		return:int:Результат провалки задачи
+		defval:-100
+	" node_var
+	var(failResultOnItemDestroy,-100);
+
+	"
+		name:Имена игровых объектов
+		desc:Возвращает массив имен игровых объектов, относящихся к выполнению задачи
+		type:get
+		lockoverride:1
+		return:array[string]:Массив имен игровых объектов
+	" node_met
+	func(getObjectNames)
+	{
+		objParams();
+		private _names = [];
+		private _allItems = createHashMap;
+		private _cur = null;
+		private _curCount = 0;
+
+		//first pass: get count of each item
+		{
+			_cur = callFunc(_x,getName);
+			if isNullReference(_cur) then {continue};
+			_allItems set [_cur,(_allItems getOrDefault [_cur,0]) + 1];
+		} foreach getSelf(__objRefs);
+
+		{
+			_cur = getFieldBaseValueWithMethod(_x,"name","getName");
+			_allItems set [_cur,(_allItems getOrDefault [_cur,0]) + 1];
+		} foreach getSelf(__objRefs);
+
+		//second pass: get names of items with count postfix
+		{
+			_cur = callFunc(_x,getName);
+			if !(_cur in _allItems) then {continue};
+
+			_curCount = _allItems get _cur;
+
+			if (_curCount > 1) then {
+				_names pushBack format["%1 (x%2)",_cur,_curCount];
+				_allItems deleteAt _cur;
+			} else {
+				_names pushBack _cur;
+			};
+		} foreach getSelf(__objRefs);
+
+		{
+			_cur = getFieldBaseValueWithMethod(_x,"name","getName");
+			if !(_cur in _allItems) then {continue};
+
+			_curCount = _allItems get _cur;
+
+			if (_curCount > 1) then {
+				_names pushBack format["%1 (x%2)",_cur,_curCount];
+				_allItems deleteAt _cur;
+			} else {
+				_names pushBack _cur;
+			};
+		} foreach getSelf(__typeList);
+		assert_str(count _allItems == 0,"Logic error: Unknown game object in task: " + str _allItems);
+		_names
+	};
+
+
+endclass
+
+//Унаследовано от базовой задачи а не от GameObjectKindTask, потому что __objRefs имеет несовместимый тип
+class(ItemKindTask) extends(TaskBase)
 
 	"
 		name:Предметная задача
@@ -443,24 +629,54 @@ class(ItemKindTask) extends(BasicTask)
 	{
 		objParams();
 		private _names = [];
+		private _allItems = createHashMap;
+		private _cur = null;
+		private _curCount = 0;
+
+		//first pass: get count of each item
 		{
-			_names pushBack callFunc(_x,getName);
+			_cur = callFunc(_x,getName);
+			if isNullReference(_cur) then {continue};
+			_allItems set [_cur,(_allItems getOrDefault [_cur,0]) + 1];
 		} foreach getSelf(__objRefs);
 
 		{
-			_names pushBack getFieldBaseValueWithMethod(_x,"name","getName");
+			_cur = getFieldBaseValueWithMethod(_x,"name","getName");
+			_allItems set [_cur,(_allItems getOrDefault [_cur,0]) + 1];
+		} foreach getSelf(__objRefs);
+
+		//second pass: get names of items with count postfix
+		{
+			_cur = callFunc(_x,getName);
+			if !(_cur in _allItems) then {continue};
+
+			_curCount = _allItems get _cur;
+
+			if (_curCount > 1) then {
+				_names pushBack format["%1 (x%2)",_cur,_curCount];
+				_allItems deleteAt _cur;
+			} else {
+				_names pushBack _cur;
+			};
+		} foreach getSelf(__objRefs);
+
+		{
+			_cur = getFieldBaseValueWithMethod(_x,"name","getName");
+			if !(_cur in _allItems) then {continue};
+
+			_curCount = _allItems get _cur;
+
+			if (_curCount > 1) then {
+				_names pushBack format["%1 (x%2)",_cur,_curCount];
+				_allItems deleteAt _cur;
+			} else {
+				_names pushBack _cur;
+			};
 		} foreach getSelf(__typeList);
+		assert_str(count _allItems == 0,"Logic error: Unknown item in task: " + str _allItems);
 		_names
 	};
 
-endclass
-
-
-class(TaskItemGet) extends(ItemKindTask)
-	var(name,"Добыча");
-	var(desc,"Получить предметы");
-	var(descRoleplay,"Мне нужно получить %1: %2");
-	
 	_tDelegate = {
 		private _names = callSelf(getRequiredItemsNames);
 		private _origDesc = getSelf(descRoleplay);
@@ -470,10 +686,24 @@ class(TaskItemGet) extends(ItemKindTask)
 		};
 		private _itmCnt = "предметы";
 		if (count _names == 1) then {_itmCnt="предмет"};
-		format[_origDesc,_itmCnt,_names joinString ", "]
+		private _arr = [_origDesc,_itmCnt,_names joinString ", "];
+		
+		if isTypeOf(this,TaskItemPlace) then {
+			_arr pushBack (getSelf(placeName));
+		};
+
+		format _arr
 	};
 	var_exprval(_taskDescDelegate,_tDelegate);
 
+endclass
+
+
+class(TaskItemGet) extends(ItemKindTask)
+	var(name,"Добыча");
+	var(desc,"Получить предметы");
+	var(descRoleplay,"Мне нужно получить %1: %2");
+	
 	func(onTaskCheck)
 	{
 		objParams_1(_owner);
@@ -501,12 +731,69 @@ class(TaskItemSave) extends(TaskItemGet)
 	getterconst_func(checkCompleteOnEnd,true);
 endclass
 
-//----GOBJ TASKS----
 
-class(GameObjectKindTask) extends(TaskBase)
-	var(name,"Game object task");
+class(TaskItemPlace) extends(ItemKindTask)
+	var(name,"Доставка");
+	var(desc,"Поместить предметы в места");
+	var(descRoleplay,"Мне нужно поместить %1 в %3: %2");
+	
+	"
+		name:Название месте
+		desc:Название места, в которое нужно поместить предметы. Выводится в описании задачи
+		prop:all
+		return:string:Название места
+		defval:Неизвестное место
+	" node_var
+	var(placeName,"Неизвестное место");
+
+	"
+		name:Местоположение предметов
+		desc:Требуемое местоположение предметов для успешного выполнения задачи.
+		prop:all
+		return:vector3:Местоположение
+	" node_var
+	var(location,vec3(0,0,0));
+
+	"
+		name:Радиус
+		desc:Радиус, в котором нужно поместить предметы относительно указанного местоположения.
+		prop:all
+		return:float:Радиус
+		defval:1
+	" node_var
+	var(radius,1);
+	
+	func(onTaskCheck)
+	{
+		objParams_1(_owner);
+		//params ["_owner","_typeOrReference"]
+		private _origPos = getSelf(location);
+		private _rad = getSelf(radius);
+		private _alreadyCollected = []; //убираем повторы объектов
+
+		private _fnRefs = {
+			params ["_owner","_it"];
+			(calFunc(_it,getPos) distance _origPos) <= _rad
+		};
+		private _fnTypes = {
+			params ["_owner","_it"];
+			private _olist = [_it,_origPos,_rad,true] call getAllItemsOnPosition;
+			if (count _olist == 0) exitWith {false};
+			private _fsearch = nullPtr;
+			{
+				if !array_exists(_alreadyCollected,_x) exitWith {
+					_alreadyCollected pushBack _x;
+					_fsearch = _x;
+				};
+			} foreach _olist;
+
+			!isNullReference(_fsearch) && {(callFunc(_fsearch,getPos) distance _origPos) <= _rad}
+		};
+
+		callSelfParams(processObjectCheck,_owner arg _fnRefs arg _fnTypes);
+	};
+
 endclass
-
 
 
 //-----------------------------------------------------------
@@ -553,7 +840,10 @@ class(MobKindTask) extends(TaskBase)
 endclass
 
 class(TaskMobKill) extends(MobKindTask)
-	//TODO name,desc
+	var(name,"Убийство");
+	var(desc,"Убийство цели");
+	var(descRoleplay,"Нужно устранить %2");
+
 	func(checkEntityState)
 	{
 		objParams();
@@ -562,7 +852,10 @@ class(TaskMobKill) extends(MobKindTask)
 endclass
 
 class(TaskMobSave) extends(MobKindTask)
-	
+	var(name,"Сохранить жизнь");
+	var(desc,"Сохранить жизнь цели");
+	var(descRoleplay,"Нужно сохранить жизнь %2");
+
 	getterconst_func(checkCompleteOnEnd,true);
 
 	func(checkEntityState)
@@ -573,7 +866,10 @@ class(TaskMobSave) extends(MobKindTask)
 endclass
 
 class(TaskSelfSave) extends(TaskMobSave)
-	
+	var(name,"Выжить");
+	var(desc,"Выживание");
+	var(descRoleplay,"Нужно выжить");
+
 	func(onTaskCheck)
 	{
 		objParams_1(_owner);
@@ -602,6 +898,7 @@ class(CounterKindTask) extends(TaskBase)
 	" node_var
 	var(counter,1);
 
+	
 	var(numeralString,vec3("предмет","предмета","предметов"));
 
 	func(getNumeralText)
@@ -613,6 +910,8 @@ endclass
 
 class(TaskMoneyGet) extends(CounterKindTask)
 	
+	var(numeralString,vec3("звяк","предмета","предметов"));
+
 	func(onTaskCheck)
 	{
 		objParams_1(_owner);
@@ -626,7 +925,19 @@ class(TaskMoneyGet) extends(CounterKindTask)
 	func(getCurrentCountValue)
 	{
 		objParams();
-		[getSelf(mob),"Zvak",true] call getAllItemsInInventory;
+		private _monObjs = [getSelf(mob),"Zvak",true] call getAllItemsInInventory;
+		private _collected = 0;
+		{
+			_stackCount = getVar(_x,stackCount);
+			if isTypeOf(_x,Bryak) then {
+				// увеличиваем цену в 10 раз
+				modvar(_stackCount) * 10;
+			};
+
+			modvar(_collected) + _stackCount;
+		} foreach _monObjs;
+
+		_collected
 	};
 
 endclass
@@ -662,12 +973,109 @@ endclass
 
 
 class(TaskLocationEnter) extends(LocationKindTask)
+
+	var(name,"Вход в локацию");
+	var(desc,"Посетить локацию");
+
+	
 	func(onTaskCheck)
 	{
 		objParams_1(_owner);
 		if (
 			(callFunc(_owner,getPos) distance getSelf(position)) <= getSelf(radius)
 		) then {
+			callSelfParams(setTaskResult,1);
+		};
+	};
+
+endclass
+
+class(RoleKindTask) extends(TaskBase)
+	"
+		name:Ролевая задача
+		desc:Задача, относящаяся к ролям
+		path:Игровая логика.Задачи
+	" node_class
+	
+	var(name,"Role task");
+
+	"
+		name:Тип роли
+		desc:Тип роли задачи
+		prop:all
+		return:classname:Тип роли
+		restr:ScriptedRole
+	" node_var
+	var(roleClass,"");
+
+	"
+		name:Проверять дочерние роли
+		desc:При включении этой опции будет учитываться не только указанный тип роли но и все дочерние роли, унаследованные от указанной роли.
+		prop:all
+		return:bool:Проверять дочерние роли
+		defval:false
+	" node_var
+	var(checkChildRoles,false);
+
+	_tDelegate = {
+		private _role = getSelf(roleClass);
+		private _robj = _role call gm_getRoleObject;
+		assert_str(!isNullReference(_robj),"Role object not registered in gamemode " + str gm_currentMode);
+		format[getSelf(descRoleplay),getVar(_robj,name)]
+	};
+	var_exprval(_taskDescDelegate,_tDelegate);
+
+endclass
+
+class(TaskGetRole) extends(RoleKindTask)
+	"
+		name:Получить роль
+		desc:Задача на получение роли
+		path:Игровая логика.Задачи
+	" node_class
+	
+	var(name,"Получить роль");
+	var(descRoleplay,"Получить роль - %1");
+
+	func(onTaskCheck)
+	{
+		objParams_1(_owner);
+		private _robj = getVar(_owner,role);
+
+		if ifcheck(getSelf(checkChildRoles),isTypeStringOf(_robj,getSelf(roleClass)),callFunc(_robj,getClassName) == getSelf(roleClass)) then {
+			callSelfParams(setTaskResult,1);
+		};
+	};
+endclass
+
+class(TaskRoleDead) extends(RoleKindTask)
+	var(name,"Убийство ролей");
+	var(desc,"Убийство ролей");
+	var(descRoleplay,"Устранить - %1");
+
+	"
+		name:Нужно погибших на роли
+		desc:Количество персонажей, занимавших роль, которые должны погибнуть
+		prop:all
+		return:int:Количество
+		defval:1
+	" node_var
+	var(countDeadNeed,1);
+
+	func(onTaskCheck)
+	{
+		objParams_1(_owner);
+		private _role = getSelf(roleClass);
+		private _robj = _role call gm_getRoleObject;
+		if isNullReference(_robj) exitWith {};
+		private _count = 0;
+		{
+			if callFunc(_x,isDead) then {
+				INC(_count);
+			};
+		} foreach getVar(_robj,basicMobs);
+
+		if (_count >= getSelf(countDeadNeed)) then {
 			callSelfParams(setTaskResult,1);
 		};
 	};

@@ -1211,7 +1211,7 @@ gm_endRound = {
 
 	//Обрабатываем все задачи
 	{
-		callFunc(_x,updateMethod);
+		callFunc(_x,updateMethodInternal);
 	} foreach taskSystem_checkedOnEndRound;
 
 	//обрабатываем все незавершенные задачи как проваленные
