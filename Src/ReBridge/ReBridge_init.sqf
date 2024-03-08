@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -68,6 +68,7 @@ _rb_log("ReBridge initialization start...");
 if !isNull(ReBridge_callbackHandle) then {
 	removeMissionEventHandler ["ExtensionCallback", ReBridge_callbackHandle];
 	if (call ReBridge_isLoaded) then {
+		_rb_log("Unload previous ReBridge assembly...");
 		call ReBridge_stop;
 	};
 };

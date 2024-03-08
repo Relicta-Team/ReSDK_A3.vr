@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -27,6 +27,8 @@ scriptErrHndlGlobal = addMissionEventHandler ["ScriptError",
 	*/
 	params ["_errorMsg","_file","_line","_offset","_content","_stack"];
 	
+	if !isNullReference(findDisplay 316000) exitWith {};
+
 	#ifdef DEBUG
 		if !isNullReference(findDisplay 49) exitwith {};
 	#endif

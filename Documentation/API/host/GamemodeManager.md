@@ -201,10 +201,10 @@ File: [host\GamemodeManager\GamemodeFunctions.sqf at line 772](../../../Src/host
 
 Type: function
 
-Description: 
+Description: };
 
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 781](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L781)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 787](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L787)
 ## gm_getGameModeObject
 
 Type: function
@@ -212,7 +212,7 @@ Type: function
 Description: Получаем объект игрового режима
 
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 784](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L784)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 790](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L790)
 ## gm_prepDesc
 
 Type: function
@@ -220,7 +220,7 @@ Type: function
 Description: Подготавливает описание роли, заменяя куски текста на \n
 - Param: _sourceText
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 787](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L787)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 793](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L793)
 ## gm_printRoleNamesEx
 
 Type: function
@@ -228,7 +228,7 @@ Type: function
 Description: 
 - Param: _name
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 801](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L801)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 807](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L807)
 # GamemodeManager.h
 
 ## IS_ENABLE_GAMEMODEMANAGER

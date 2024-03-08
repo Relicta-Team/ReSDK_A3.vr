@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -67,6 +67,12 @@ messageBox = {
 	private _d = _this;
 	if not_equalTypes(_d,[]) then {_d = [_d]};
 	["Breakpoint","Relicta Message Box",[format _d,""],true] call rescript_callCommand
+};
+
+messageBox_Node = {
+	params ["_mes",["_opt",[]]];
+	if not_equalTypes(_opt,[]) then {_opt = [_opt]};
+	([_mes] + _opt) call messageBox
 };
 
 messageBoxRet = {

@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -21,6 +21,8 @@
 ["ScriptContext"] call rescript_initScript;
 ["WorkspaceHelper"] call rescript_initScript;
 ["FileManager"] call rescript_initScript;
+["FileWatcher"] call rescript_initScript; //for hot reload
+call nbp_initDebugger;
 
 //Вызовем некоторую команду, определённую в скрипте
 ["TestScript","test",diag_stacktrace] call rescript_callCommandVoid;

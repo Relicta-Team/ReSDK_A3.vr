@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -296,6 +296,12 @@ function(ContextMenu_loadMouseObject)
 					private _curGamemode = [_x,"classname"] call oop_getTypeValue;
 					private _roles = ([_curGamemode,"",true,"getLobbyRoles"] call oop_getFieldBaseValue) 
 						+ ([_curGamemode,"",true,"getLateRoles"] call oop_getFieldBaseValue);
+						
+						//fix #294
+						if (count _roles == 1 && {(_roles select 0) == "___SCRITED_GAMEMODE___"}) then {
+							_roles = [_curGamemode,"",true,"_getRolesWrapper"] call oop_getFieldBaseValue;
+						};
+
 						{
 							if !array_exists(_uniqueRoles,_x) then {
 								_uniqueRoles pushBack _x;
@@ -510,7 +516,20 @@ function(ContextMenu_loadMouseObject)
 	_stackMenu pushBack ["<t size='0.9'>Открыть редактор позиций модели</t>",{nextFrameParams(vcom_relposEditorOpen,(call contextMenu_getContextParams) select 0)}];
 	_stackMenu pushBack ["Открыть редактор эмиттеров",{
 		private _obj = (call contextMenu_getContextParams) select 0;
-		nextFrameParams(vcom_emit_createVisualWindow,_obj);
+		private _params = [_obj];
+		private _cfg = [_obj] call lsim_resolveObjectConfig;
+		if (_cfg != "") then {
+			_params pushBack _cfg;
+		};
+		private _code = {
+			params ["_obj",["_cfg",""]];
+			[_obj] call vcom_emit_createVisualWindow;
+			
+			if (_cfg != "") then {
+				[_cfg] call vcom_emit_io_loadConfigCheck;
+			};
+		};
+		nextFrameParams(_code,_params);
 	}];
 
 	// _stackMenu pushBack ["Добавить комментарий",{
@@ -570,7 +589,7 @@ init_function(ContextMenu_mouseArea_init)
 			_screenToWorldPos = screenToWorld getMousePosition;
 			([_screenToWorldPos] call golib_om_getRayCastData) params ["_obj","_atlPos"];
 			private _mobj = get3DENMouseOver;
-			if (count _mobj > 1) then {_mobj = _mobj select 1};
+			if (count _mobj > 1) then {_mobj = _mobj select 1} else {_mobj = objNull};
 			_allNulls = isNullReference(_obj) && isNullReference(_mobj);
 			if _allNulls exitwith _errDraw;
 			//get not null
@@ -580,8 +599,8 @@ init_function(ContextMenu_mouseArea_init)
 				};
 			} else {
 				//all not null
-				_d1 = _obj distance cameraOn;
-				_d2 = _mobj distance cameraOn;
+				_d1 = _obj distance get3DENCamera;
+				_d2 = _mobj distance get3DENCamera;
 				if (_d1 < _d2) then {
 					_obj = _obj;
 				} else {

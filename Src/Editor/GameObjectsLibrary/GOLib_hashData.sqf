@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -428,6 +428,8 @@ function(golib_internal_handleVersionUpdate)
 
 		   	//add object to layer
 			[_objNew,"Effects"] call layer_addObject;
+
+			[_objNew,true] call Core_initObjectEvents;
 
 			["Updated object %1",_objNew] call printLog;
 		};

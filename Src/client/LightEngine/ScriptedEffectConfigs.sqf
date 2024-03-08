@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -113,5 +113,35 @@ regScriptEmit(SLIGHT_TEMPLATE_POINTLIGHT)
 		["setLightColor",[0.17,0.82,0.33]],
 		["setLightIntensity",1000],
 		["setLightAttenuation",[3,0,10,8,5,8]]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_STREET_LAMP)
+	[
+		"ltd",
+		null,
+		_emitAlias("Направленный свет 1")
+		["linkToSrc",[0,0,3.4]],
+		["setOrient",[0,-90,0]],
+		["setLightColor",[0.7,0.55,0.5]],
+		["setLightIntensity",8000],
+		["setLightUseFlare",true],
+		["setLightFlareSize",0.5],
+		["setLightFlareMaxDistance",30],
+		["setLightAttenuation",[0,0,0,0,12,14]],
+		["setLightConePars",[360,50,5]]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_SHIT_SMELL)
+	[
+		"pt",
+		null,
+		_emitAlias("Частицы 1")
+		["linkToSrc",[0,0,0.6]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,12,13,0],"","Billboard",1,10,[0,0,0],[0,0,0],0,0.0511,0.04,0.1,[0.2,0.5,1,1.5,2,2.5,3],[[0.1,0.1,0.1,0.05],[0.1,0.2,0.1,0.06],[0.2,0.3,0.1,0.07],[0.3,0.4,0.1,0.08],[0.3,0.5,0.1,0.09],[0.4,0.6,0.3,0.1],[0.5,0.7,0.4,0.1]],[1000],0.1,0.01,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.2,[0.2,0.2,0.2],[0.01,0.01,0.01],5,0.2,[0,0,0,0],0,0,0,0]],
+		["setParticleCircle",[0.03,[0.1,0.1,0]]],
+		["setDropInterval",0.5]
 	]
 endScriptEmit

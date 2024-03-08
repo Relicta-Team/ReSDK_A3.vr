@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -22,8 +22,8 @@ private _chunksToUnload = [];
 _chunk = [getPosATL _mob,_chunkType] call noe_posToChunk;
 _prevChunk = _mob getVariable [variable_name_prevchunk + str _chunkType,_chunk];
 
-[_mob,_chunksToLoad,_chunk,_chunkType] call noe_collectAroundChunks;
-[_mob,_chunksToUnload,_prevChunk,_chunkType] call noe_collectAroundChunks;
+[_chunksToLoad,_chunk,_chunkType] call noe_collectAroundChunks;
+[_chunksToUnload,_prevChunk,_chunkType] call noe_collectAroundChunks;
 
 _mob setvariable [variable_name_prevchunk + str _chunkType,_chunk];
 

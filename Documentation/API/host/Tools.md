@@ -577,7 +577,7 @@ Replaced value:
 ```sqf
 (toString [9])
 ```
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 81](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L81)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 87](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L87)
 ## relicta_debug_internal_isEntryPointInitialized
 
 Type: Variable
@@ -601,7 +601,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 85](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L85)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 91](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L91)
 ## relicta_debug_internal_canShowStackVariables
 
 Type: Variable
@@ -613,7 +613,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 87](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L87)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 93](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L93)
 ## relicta_debug_internal_lastErrorName
 
 Type: Variable
@@ -625,7 +625,7 @@ Initial value:
 ```sqf
 ""
 ```
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 89](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L89)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 95](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L95)
 ## relicta_debug_internal_lastErrorFileLine
 
 Type: Variable
@@ -637,7 +637,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 90](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L90)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 96](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L96)
 ## relicta_debug_internal_postCompileProcess
 
 Type: function
@@ -673,6 +673,15 @@ Description:
 - Param: _d
 
 File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 66](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L66)
+## messageBox_Node
+
+Type: function
+
+Description: 
+- Param: _mes
+- Param: _opt (optional, default [])
+
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 72](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L72)
 ## messageBoxRet
 
 Type: function
@@ -680,7 +689,7 @@ Type: function
 Description: 
 - Param: _d
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 72](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L72)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 78](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L78)
 ## relicta_debug_onPostErrorHandle
 
 Type: function
@@ -692,7 +701,7 @@ Description:
 - Param: _stack
 - Param: _offset
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 83](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L83)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 89](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L89)
 ## relicta_debug_internal_handleError
 
 Type: function
@@ -704,7 +713,7 @@ Description:
 - Param: _stack
 - Param: _offset
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 92](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L92)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 98](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L98)
 ## relicta_debug_internal_serializeStackTrace
 
 Type: function
@@ -715,7 +724,7 @@ Description:
 - Param: _scope
 - Param: _varmap
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 139](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L139)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 145](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L145)
 ## relicta_debug_setlasterror
 
 Type: function
@@ -723,7 +732,7 @@ Type: function
 Description: used on halt system call
 - Param: _name
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 175](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L175)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 181](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L181)
 ## relicta_debug_internal_testErrorInternal
 
 Type: function
@@ -731,7 +740,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 180](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L180)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 186](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L186)
 ## relicta_debug_internal_testError
 
 Type: function
@@ -739,7 +748,147 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 187](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L187)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 193](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L193)
+# HotReload_init.sqf
+
+## printTrace
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+fws_printTrace
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 28](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L28)
+## fileWatcher_enableSystem
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+true
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 9](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L9)
+## fileWatcher_autoReloadObjects
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+true
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 11](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L11)
+## fileWatcher_list_checkedPathsForReloadRequest
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 13](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L13)
+## fileWatcher_list_ignoredPathParts
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 18](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L18)
+## fileWatcher_hostChangedPath
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+tolower "Src\host\"
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 25](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L25)
+## fileWatcher_clientChangedPath
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+tolower "Src\client"
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 26](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L26)
+## fws_autorecompSources
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [host\Tools\HotReload\HotReload_init.sqf at line 29](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L29)
+## fws_printTrace
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\HotReload\HotReload_init.sqf at line 31](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L31)
+## fileWatcher_init
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\HotReload\HotReload_init.sqf at line 40](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L40)
+## fileWatcher_onFrame
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\HotReload\HotReload_init.sqf at line 59](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L59)
+## FileWatcher_handleCallbackExtension
+
+Type: function
+
+Description: 
+- Param: _path
+- Param: _func
+- Param: _args
+
+File: [host\Tools\HotReload\HotReload_init.sqf at line 83](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L83)
+## FileWatcher_onChangeFile
+
+Type: function
+
+Description: 
+- Param: _filepath
+
+File: [host\Tools\HotReload\HotReload_init.sqf at line 99](../../../Src/host/Tools/HotReload/HotReload_init.sqf#L99)
 # IconGenerator.sqf
 
 ## main_ExitIfError()

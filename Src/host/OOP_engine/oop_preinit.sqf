@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -119,6 +119,17 @@ oop_getSimpleTypeSize = {
 	GROUP:	TYPES MANAGMENT
 --------------------------------------------------------------------------------
 */
+//проверка типа
+oop_checkTypeSafe = {
+	params ["_typename",["_defaultRet","object"]];
+	#ifdef EDITOR
+	if !isImplementClass(_typename) exitwith {
+		assert_str(false,"Указанный тип не существует: " + _typename);
+		_defaultRet
+	};
+	#endif
+	_typename
+};
 
 oop_getinhlist = {
 	params ["_typename","_recurs","_refarr"];
@@ -146,6 +157,10 @@ oop_getinhlist = {
 	} else {
 		_childs
 	};
+};
+
+oop_getinhlist_Node = {
+	params ["_typename",["_global",false]];
 };
 
 //Небезопасный контекст получения значения переменной от типа

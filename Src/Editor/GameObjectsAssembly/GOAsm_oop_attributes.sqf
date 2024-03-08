@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -54,6 +54,9 @@ init_function(goasm_attributes_main_init)
 
 	// Режимы, помеченные данным атрибутом не могут быть отредактированы
 	["CodeOnyGamemode",{!_isInherited}] call goasm_attributes_bindAttribute;
+
+	//Классы, помеченные данным атрибутом не собираются в библиотеку узлов и являются автосгенерированными
+	["NodeClass"] call goasm_attributes_bindAttribute;
 
 	//TODO нужно больше атрибутов
 }

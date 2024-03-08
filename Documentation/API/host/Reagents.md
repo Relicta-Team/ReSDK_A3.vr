@@ -419,7 +419,7 @@ Description:
 Replaced value:
 ```sqf
 INC(reagentsystem_reactions_counter); _reactionName = "react_gen_" + str reagentsystem_reactions_counter; \
-__class_noStrName(_reactionName) extends(ReagentReaction)
+class_runtime(_reactionName) extends(ReagentReaction)
 ```
 File: [host\Reagents\Reactions\Reaction.sqf at line 36](../../../Src/host/Reagents/Reactions/Reaction.sqf#L36)
 ## reactgen_first

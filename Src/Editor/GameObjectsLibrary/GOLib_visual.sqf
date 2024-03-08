@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -129,8 +129,15 @@ function(golib_vis_onCreateExpand)
 		"hasmethod:[name] - поиск всех типов, имеющих метод [name] (без учёта регистра)\n"+
 		"\n\nРежимы могут быть скомбинированы через точку с запятой: Пример: typeof:GameObject;hasfield:name"
 	);
-	_search ctrlAddEventHandler ["KillFocus",{
-		params ["_b"];
+	// _search ctrlAddEventHandler ["KillFocus",{
+	// 	params ["_b"];
+	// 	(ctrlText _b) call golib_vis_doSearchInLib;
+	// }];
+	_search ctrlAddEventHandler ["EditChanged",{
+		params ["_b","_ntext"];
+		if (_ntext== "") exitwith {
+			call golib_vis_loadObjList;
+		};
 		(ctrlText _b) call golib_vis_doSearchInLib;
 	}];
 	

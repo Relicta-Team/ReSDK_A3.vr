@@ -1,12 +1,14 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
 //#define DSM_DISABLE
 
 dsm_onlineUpdateHandle = -1;
-dsm_callbackExtensionHandle = -1;
+if isNull(dsm_callbackExtensionHandle) then {
+	dsm_callbackExtensionHandle = -1;
+};
 dsm_isFirstLoad = false;
 
 dsm_connectedToManager = false;
@@ -61,7 +63,10 @@ dsm_initialize = {
 	};
 	#endif
 	log("dsm::initialize() - start");
-	removeAllMissionEventHandlers "ExtensionCallback";
+	if !isNull(dsm_callbackExtensionHandle) then {
+		removeMissionEventHandler ["ExtensionCallback",dsm_callbackExtensionHandle];
+		dsm_callbackExtensionHandle = -1;
+	};
 
 	dsm_isFirstLoad = !(call dsm_isLoaded);
 

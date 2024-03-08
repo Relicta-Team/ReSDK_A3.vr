@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -10,6 +10,13 @@
 
 editor_attribute("InterfaceClass")
 class(IRangedWeapon) extends(Item)
+
+	"
+		name:Дистанционное оружие
+		desc:Оружие для дальнего боя (огнестрельное оружие)
+		path:Игровые объекты.Оружие.Дистанционное
+	" node_class
+
 	//TODO implement verbs
 	verbList("cockweapon safemodeweapon",Item);
 
@@ -249,7 +256,19 @@ class(IRangedWeapon) extends(Item)
 	};
 
 	//mag loading
+	"
+		name:Магазин вставлен
+		desc:Возвращает ИСТИНУ, если магазин заряжен в оружие. Для дробовиков, револьверов или однозарядных пистолетов всегда возвращает ИСТИНУ.
+		type:get
+		return:bool:Вставлен ли магазин в оружие
+	" node_met
 	getter_func(hasMagazine,!isNullReference(getSelf(magazine)));
+	"
+		name:Допустимый тип магазина
+		desc:Возвращает имя класса магазина, который можно зарядить в оружие. Дочерние типы от этого магазина также могут быть заряжены в оружие.
+		type:const
+		return:classname:Имя класса магазина
+	" node_met
 	getter_func(getReqMagazineType,"IMagazineBase");
 	func(onInteractWith)
 	{
@@ -403,7 +422,7 @@ class(IRangedWeapon) extends(Item)
 	func(createMagazine)
 	{
 		objParams_1(_type);
-		if callSelf(hasMagazine) exitWith {};
+		if callSelf(hasMagazine) exitWith {nullPtr};
 		private _itm = instantiate(_type);
 		setVar(_itm,loc,this);
 		setSelf(magazine,_itm);
@@ -411,6 +430,44 @@ class(IRangedWeapon) extends(Item)
 		_itm
 	};
 
+	"
+		name:Создать магазин
+		desc:Создает магазин в оружии. Если магазин уже заряжен в оружии или указан несовместимый тип магазина - создание не произойдёт.
+		type:method
+		lockoverride:1
+		in:classname:Тип магазина:Тип создаваемого магазина
+			opt:def=IMagazineBase:typeset_out=Результат
+		in:classname:Тип патронов:Тип боеприпасов, создаваемых в оружии
+			opt:require=0:def=IAmmoBase
+		in:int:Количество:Сколько боеприпасов будет создано в магазине.
+			opt:require=0:def=0
+		return:IMagazineBase:Созданный магазин. Возвращает null-ссылку если создание не произошло.
+	" node_met
+	func(createMagazineWithAmmo)
+	{
+		objParams_3(_itm,_ammo,_ammoCount);
+		
+		if callSelf(hasMagazine) exitWith {nullPtr};
+		if !isTypeNameStringOf(_itm,callSelf(getReqMagazineType)) exitWith {nullPtr};
+		private _mag = callSelfParams(createMagazine,_itm);
+		
+		if (!isNullReference(_mag) ) then {
+			callSelfParams(createAmmoInMagazine,_ammo arg _ammoCount);
+		};
+
+		_mag
+	};
+
+	"
+		name:Создать боеприпасы в магазине
+		desc:Создает боеприпасы указанного типа в оружии. Если количество не указано - будет создано максимальное количество. Если типы патронов не совместимы с магазином или в оружии нет магазина - создание не произойдёт.
+		type:method
+		lockoverride:1
+		in:classname:Тип патронов:Тип боеприпасов, создаваемых в оружии
+			opt:require=0:def=IAmmoBase
+		in:int:Количество:Сколько боеприпасов будет создано в магазине.
+			opt:require=0:def=1
+	" node_met
 	func(createAmmoInMagazine)
 	{
 		objParams_2(_type,_count);
@@ -531,6 +588,10 @@ class(IMagazineBase) extends(Item)
 	func(createAmmoInside)
 	{
 		objParams_2(_ammo,_count);
+		
+		if isNullVar(_ammo) then {_ammo = callSelf(getBulletType)};
+		if !isTypeNameStringOf(_ammo,callSelf(getBulletType)) exitwith {};
+
 		if isNullVar(_count) then {_count = getSelf(maxCount)};
 		_count = clamp(_count,1,getSelf(maxCount));
 		private _itm = nullPtr;

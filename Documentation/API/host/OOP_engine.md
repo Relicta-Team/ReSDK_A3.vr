@@ -169,6 +169,33 @@ Description:
 - Param: _attributeParams (optional, default [])
 
 File: [host\OOP_engine\oop_attributes.sqf at line 11](../../../Src/host/OOP_engine/oop_attributes.sqf#L11)
+# oop_doll.sqf
+
+## doll_initComponent
+
+Type: function
+
+Description: 
+
+
+File: [host\OOP_engine\oop_doll.sqf at line 15](../../../Src/host/OOP_engine/oop_doll.sqf#L15)
+## doll_loadAssembly
+
+Type: function
+
+Description: 
+- Param: _asmName
+- Param: _flags (optional, default "")
+
+File: [host\OOP_engine\oop_doll.sqf at line 22](../../../Src/host/OOP_engine/oop_doll.sqf#L22)
+## doll_unloadAssembly
+
+Type: function
+
+Description: 
+- Param: _asmName
+
+File: [host\OOP_engine\oop_doll.sqf at line 26](../../../Src/host/OOP_engine/oop_doll.sqf#L26)
 # oop_init.sqf
 
 ## NULLCLASS
@@ -339,6 +366,232 @@ Initial value:
 0 //bytes
 ```
 File: [host\OOP_engine\oop_logging.sqf at line 13](../../../Src/host/OOP_engine/oop_logging.sqf#L13)
+# oop_main_loader.sqf
+
+## TRACE_OOP_MODULE_RELOAD
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 8](../../../Src/host/OOP_engine/oop_main_loader.sqf#L8)
+## mlog(text)
+
+Type: constant
+
+> Exists if **TRACE_OOP_MODULE_RELOAD** defined
+
+Description: 
+- Param: text
+
+Replaced value:
+```sqf
+
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 12](../../../Src/host/OOP_engine/oop_main_loader.sqf#L12)
+## mlogformat(text,fmt)
+
+Type: constant
+
+> Exists if **TRACE_OOP_MODULE_RELOAD** defined
+
+Description: 
+- Param: text
+- Param: fmt
+
+Replaced value:
+```sqf
+traceformat(text,fmt)
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 12](../../../Src/host/OOP_engine/oop_main_loader.sqf#L12)
+## mlogformat(text,fmt)
+
+Type: constant
+
+> Exists if **TRACE_OOP_MODULE_RELOAD** not defined
+
+Description: 
+- Param: text
+- Param: fmt
+
+Replaced value:
+```sqf
+
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 15](../../../Src/host/OOP_engine/oop_main_loader.sqf#L15)
+## NULLCLASS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"<NAN_CLASS>"
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 20](../../../Src/host/OOP_engine/oop_main_loader.sqf#L20)
+## EXIT_IF_ERROR(mes)
+
+Type: constant
+
+Description: 
+- Param: mes
+
+Replaced value:
+```sqf
+if (_iserror || server_isLocked) exitWith {error(mes); [mes] call logCritical; false}
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 21](../../../Src/host/OOP_engine/oop_main_loader.sqf#L21)
+## shell_init(__name__system,__value__system)
+
+Type: constant
+
+Description: 
+- Param: __name__system
+- Param: __value__system
+
+Replaced value:
+```sqf
+format["_thisobj setvariable ['%1',%2]; ",__name__system,__value__system]
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 22](../../../Src/host/OOP_engine/oop_main_loader.sqf#L22)
+## logoop(mes)
+
+Type: constant
+
+Description: 
+- Param: mes
+
+Replaced value:
+```sqf
+"debug_console" callExtension ("[OOP]:    " + (mes) + "#0111"); ["(OOP_init)	%1",mes] call logInfo
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 23](../../../Src/host/OOP_engine/oop_main_loader.sqf#L23)
+## logoop(mes)
+
+Type: constant
+
+> Exists if **__VM_VALIDATE** defined
+
+Description: 
+- Param: mes
+
+Replaced value:
+```sqf
+diag_log format["[OOP_init]: %1",mes]
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 26](../../../Src/host/OOP_engine/oop_main_loader.sqf#L26)
+## EXIT_IF_ERROR(mes)
+
+Type: constant
+
+> Exists if **__VM_VALIDATE** defined
+
+Description: 
+- Param: mes
+
+Replaced value:
+```sqf
+if (_iserror || server_isLocked) exitWith { diag_log format["[OOP_init]: [Critical]: %1",mes]; exitcode__ -10000; };
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 27](../../../Src/host/OOP_engine/oop_main_loader.sqf#L27)
+## error(mes)
+
+Type: constant
+
+> Exists if **__VM_VALIDATE** defined
+
+Description: 
+- Param: mes
+
+Replaced value:
+```sqf
+diag_log format["[OOP_init]: [Error]: %1",mes];
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 28](../../../Src/host/OOP_engine/oop_main_loader.sqf#L28)
+## errorformat(mes,fmt)
+
+Type: constant
+
+> Exists if **__VM_VALIDATE** defined
+
+Description: 
+- Param: mes
+- Param: fmt
+
+Replaced value:
+```sqf
+diag_log format["[OOP_init]: [Error]: %1",format[mes,fmt]];
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 29](../../../Src/host/OOP_engine/oop_main_loader.sqf#L29)
+## allocName
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+this setName "%2"
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 32](../../../Src/host/OOP_engine/oop_main_loader.sqf#L32)
+## oop_lastTypeLoadTime
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [host\OOP_engine\oop_main_loader.sqf at line 18](../../../Src/host/OOP_engine/oop_main_loader.sqf#L18)
+## oop_loadTypes
+
+Type: function
+
+Description: Данный файл предназначен для общей загрузки модулей в среде симуляции и редакторе
+- Param: _typemap
+- Param: _inh_struct
+- Param: _options
+
+File: [host\OOP_engine\oop_main_loader.sqf at line 37](../../../Src/host/OOP_engine/oop_main_loader.sqf#L37)
+## oop_init_handleMemberAttributes
+
+Type: function
+
+Description: Общий метод обработки атрибутов членов класса
+- Param: _memberNameStr
+- Param: _refDict
+- Param: _flag
+
+File: [host\OOP_engine\oop_main_loader.sqf at line 331](../../../Src/host/OOP_engine/oop_main_loader.sqf#L331)
+## oop_init_handleClassAttributes
+
+Type: function
+
+Description: 
+- Param: _memberNameStr
+- Param: _refDict
+- Param: _flag
+
+File: [host\OOP_engine\oop_main_loader.sqf at line 368](../../../Src/host/OOP_engine/oop_main_loader.sqf#L368)
+## oop_reloadModule
+
+Type: function
+
+Description: 
+- Param: _filepath
+
+File: [host\OOP_engine\oop_main_loader.sqf at line 394](../../../Src/host/OOP_engine/oop_main_loader.sqf#L394)
 # oop_object.sqf
 
 ## basic()
@@ -443,6 +696,15 @@ Description:
 
 
 File: [host\OOP_engine\oop_preinit.sqf at line 108](../../../Src/host/OOP_engine/oop_preinit.sqf#L108)
+## oop_checkTypeSafe
+
+Type: function
+
+Description: проверка типа
+- Param: _typename
+- Param: _defaultRet (optional, default "object")
+
+File: [host\OOP_engine\oop_preinit.sqf at line 123](../../../Src/host/OOP_engine/oop_preinit.sqf#L123)
 ## oop_getinhlist
 
 Type: function
@@ -452,7 +714,16 @@ Description:
 - Param: _recurs
 - Param: _refarr
 
-File: [host\OOP_engine\oop_preinit.sqf at line 123](../../../Src/host/OOP_engine/oop_preinit.sqf#L123)
+File: [host\OOP_engine\oop_preinit.sqf at line 134](../../../Src/host/OOP_engine/oop_preinit.sqf#L134)
+## oop_getinhlist_Node
+
+Type: function
+
+Description: 
+- Param: _typename
+- Param: _global (optional, default false)
+
+File: [host\OOP_engine\oop_preinit.sqf at line 162](../../../Src/host/OOP_engine/oop_preinit.sqf#L162)
 ## oop_getFieldBaseValue
 
 Type: function
@@ -463,7 +734,7 @@ Description: _altMethodNameIfNil - возвращает альтернативн
 - Param: _doCompile (optional, default false)
 - Param: _altMethodNameIfNil (optional, default "")
 
-File: [host\OOP_engine\oop_preinit.sqf at line 154](../../../Src/host/OOP_engine/oop_preinit.sqf#L154)
+File: [host\OOP_engine\oop_preinit.sqf at line 169](../../../Src/host/OOP_engine/oop_preinit.sqf#L169)
 ## oop_getData
 
 Type: function
@@ -471,7 +742,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [host\OOP_engine\oop_preinit.sqf at line 176](../../../Src/host/OOP_engine/oop_preinit.sqf#L176)
+File: [host\OOP_engine\oop_preinit.sqf at line 191](../../../Src/host/OOP_engine/oop_preinit.sqf#L191)
 ## oop_injectToMethod
 
 Type: function
@@ -483,4 +754,4 @@ Description:
 - Param: _sect (optional, default "end")
 - Param: _overrideChild (optional, default false)
 
-File: [host\OOP_engine\oop_preinit.sqf at line 230](../../../Src/host/OOP_engine/oop_preinit.sqf#L230)
+File: [host\OOP_engine\oop_preinit.sqf at line 245](../../../Src/host/OOP_engine/oop_preinit.sqf#L245)

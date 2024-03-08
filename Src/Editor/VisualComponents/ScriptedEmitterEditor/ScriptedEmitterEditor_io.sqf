@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -360,28 +360,46 @@ function(vcom_emit_io_saveAllConfigs)
 
 	} foreach vcom_emit_io_list_allConfigsNames;
 
-	private _copyright = ["src\Editor\Bin\copyright.txt"] call file_read;
+	private _copyright = ["src\Editor\Bin\copyright.sqf"] call file_read;
 
 	//preare evaluated id
 
 	//["Запуск процедуры сохранения конфигураций",5] call showInfo;
 	["Start saving config files"] call printLog;
+	
+	vcom_emit_internal_str_cfgNamesContent = _copyright + _indexesOuptut + endl + endl + 
+		"#ifdef SCRIPT_EMIT_EVAL_SERVER" + endl +
+		_postIndexesOutput + endl +
+		"#endif"
+	;
 
 	[vcom_emit_io_configPath,
 		_copyright + _output,null,{
 		["Config saved"] call printLog;
-	},{["Cannot save %1",vcom_emit_io_configPath] call printError}] call file_writeAsync;
 
-	[vcom_emit_io_configNames,_copyright + _indexesOuptut + endl + endl + 
-		"#ifdef SCRIPT_EMIT_EVAL_SERVER" + endl +
-		_postIndexesOutput + endl +
-		"#endif"
-	,null,{
-		["Config names saved"] call printLog;
-		
-		//reload enums
-		call vcom_emit_io_loadEnumAssoc;
-	},{["Cannot save %1",vcom_emit_io_configNames] call printError}] call file_writeAsync;
+		[vcom_emit_io_configNames,vcom_emit_internal_str_cfgNamesContent
+		,null,{
+			["Config names saved"] call printLog;
+			
+			//reload enums
+			call vcom_emit_io_loadEnumAssoc;
+
+			if (lsim_mode) then {
+				call lsim_internal_buildScriptedConfigs;
+				call lsim_internal_rebuildAllLights;
+			};
+		},{
+			["Cannot save %1",vcom_emit_io_configNames] call printError;
+			["Cannot save file " + vcom_emit_io_configNames] call showError;	
+		}] call file_writeAsync;
+
+
+	},{
+		["Cannot save %1",vcom_emit_io_configPath] call printError;
+		["Cannot save file " + vcom_emit_io_configPath] call showError;	
+	}] call file_writeAsync;
+
+	
 	
 }
 

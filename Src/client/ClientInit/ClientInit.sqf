@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -9,6 +9,16 @@
 //disable world map effects
 setDetailMapBlendPars [1000, 1000];
 setHorizonParallaxCoef 500;
+
+//fix render distance #276
+private _hasErrorRenderDistance = false;
+if ((ceil(getVideoOptions get "objectVisibility") < 60) || (ceil(getVideoOptions get "overallVisibility") < 60)) then {
+    _hasErrorRenderDistance = true;
+};
+if (_hasErrorRenderDistance) exitWith {
+    rpcCall("clientDisconnect",vec2("Вы были отключены от сервера","Увеличьте дистанцию прорисовки игровых объектов до 60 и выше."));
+    endMission "LOSER";
+};
 
 if (!isMultiplayer && !cam_isEnabled) then {
     player switchcamera "Internal";
@@ -27,7 +37,7 @@ if (isMultiplayer) then {
         _canload_ = false;
         error("Brightness or gamma is out of the acceptable range. Set the brightness and gamma value to 1");
         //endMission "LOSER";
-        rpcCall("clientDisconnect",vec2("Вы были отключены от сервера","На сервере запрещается изменение яркости и гаммы. Установите свои значения яркости и гаммы на значения стандартные"));
+        rpcCall("clientDisconnect",vec2("Вы были отключены от сервера","На сервере запрещается изменение яркости и гаммы. " + widget_antiGamma_lastError));
     };
     
     {

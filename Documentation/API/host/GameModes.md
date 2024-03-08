@@ -13,7 +13,7 @@ Replaced value:
 ```sqf
 (if (getSelf(var__) val__ ) then {text__ + (str getSelf(var__)) + sbr} else {""})
 ```
-File: [host\GameModes\BasicDefines.sqf at line 201](../../../Src/host/GameModes/BasicDefines.sqf#L201)
+File: [host\GameModes\BasicDefines.sqf at line 217](../../../Src/host/GameModes/BasicDefines.sqf#L217)
 ## printInfoIf_Handled(val__,text__,var__,__hnd)
 
 Type: constant
@@ -28,7 +28,7 @@ Replaced value:
 ```sqf
 (if (getSelf(var__) val__ ) then {text__ + (__hnd) + sbr} else {""})
 ```
-File: [host\GameModes\BasicDefines.sqf at line 202](../../../Src/host/GameModes/BasicDefines.sqf#L202)
+File: [host\GameModes\BasicDefines.sqf at line 218](../../../Src/host/GameModes/BasicDefines.sqf#L218)
 # BasicTask.sqf
 
 ## editor_task_test
@@ -44,7 +44,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameModes\BasicTask.sqf at line 16](../../../Src/host/GameModes/BasicTask.sqf#L16)
+File: [host\GameModes\BasicTask.sqf at line 20](../../../Src/host/GameModes/BasicTask.sqf#L20)
 ## __mbx__(message)
 
 Type: constant
@@ -56,7 +56,7 @@ Replaced value:
 ```sqf
 ["[TASKS][%1]: %2",callSelf(getClassName) arg message] call messageBox;
 ```
-File: [host\GameModes\BasicTask.sqf at line 219](../../../Src/host/GameModes/BasicTask.sqf#L219)
+File: [host\GameModes\BasicTask.sqf at line 335](../../../Src/host/GameModes/BasicTask.sqf#L335)
 ## __mbx__(message)
 
 Type: constant
@@ -70,7 +70,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameModes\BasicTask.sqf at line 222](../../../Src/host/GameModes/BasicTask.sqf#L222)
+File: [host\GameModes\BasicTask.sqf at line 338](../../../Src/host/GameModes/BasicTask.sqf#L338)
 ## taskError(message)
 
 Type: constant
@@ -82,7 +82,7 @@ Replaced value:
 ```sqf
 errorformat("[TASKS][%1]: %2",callSelf(getClassName) arg message); __mbx__(message) nextFrameParams({delete(_this)},this)
 ```
-File: [host\GameModes\BasicTask.sqf at line 225](../../../Src/host/GameModes/BasicTask.sqf#L225)
+File: [host\GameModes\BasicTask.sqf at line 341](../../../Src/host/GameModes/BasicTask.sqf#L341)
 ## taskSystem_allTasks
 
 Type: Variable
@@ -262,6 +262,45 @@ Replaced value:
 2
 ```
 File: [host\GameModes\GameMode.h at line 23](../../../Src/host/GameModes/GameMode.h#L23)
+# ScriptedSkillsDecl.hpp
+
+## _r(v1,v2)
+
+Type: constant
+
+Description: Тут определеены константы для навыков
+- Param: v1
+- Param: v2
+
+Replaced value:
+```sqf
+[v1,v2]
+```
+File: [host\GameModes\ScriptedSkillsDecl.hpp at line 8](../../../Src/host/GameModes/ScriptedSkillsDecl.hpp#L8)
+## skills_nodes_allowedMinSkillDefIndex
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+4
+```
+File: [host\GameModes\ScriptedSkillsDecl.hpp at line 9](../../../Src/host/GameModes/ScriptedSkillsDecl.hpp#L9)
+## skills_nodes_listKinds
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\GameModes\ScriptedSkillsDecl.hpp at line 10](../../../Src/host/GameModes/ScriptedSkillsDecl.hpp#L10)
 # PublicTasks.sqf
 
 ## taskSystem_internal_list_generator
@@ -302,7 +341,7 @@ Replaced value:
 ```sqf
 (_curEvid == lvl && gm_roundDuration >= (time) && othrcond)
 ```
-File: [host\GameModes\Detective\DetectiveModeRoles.sqf at line 348](../../../Src/host/GameModes/Detective/DetectiveModeRoles.sqf#L348)
+File: [host\GameModes\Detective\DetectiveModeRoles.sqf at line 355](../../../Src/host/GameModes/Detective/DetectiveModeRoles.sqf#L355)
 ## evidCheck(lvl,time,othrcond)
 
 Type: constant
@@ -318,7 +357,7 @@ Replaced value:
 ```sqf
 (_curEvid == lvl && gm_roundDuration >= ((time)*60) && othrcond)
 ```
-File: [host\GameModes\Detective\DetectiveModeRoles.sqf at line 350](../../../Src/host/GameModes/Detective/DetectiveModeRoles.sqf#L350)
+File: [host\GameModes\Detective\DetectiveModeRoles.sqf at line 357](../../../Src/host/GameModes/Detective/DetectiveModeRoles.sqf#L357)
 # StationRoles.sqf
 
 ## regKeyInUniform(cloth,owners,name__)
@@ -445,3 +484,29 @@ Replaced value:
 	
 ```
 File: [host\GameModes\Prey\GM_Prey.sqf at line 312](../../../Src/host/GameModes/Prey/GM_Prey.sqf#L312)
+# SaloonRoles.sqf
+
+## __isOldGM
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+(callFunc(gm_currentMode,getClassName)=="GMSaloon")
+```
+File: [host\GameModes\Saloon\SaloonRoles.sqf at line 8](../../../Src/host/GameModes/Saloon/SaloonRoles.sqf#L8)
+## __skipIfOldGM
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+if __isOldGM exitWith {null};
+```
+File: [host\GameModes\Saloon\SaloonRoles.sqf at line 9](../../../Src/host/GameModes/Saloon/SaloonRoles.sqf#L9)

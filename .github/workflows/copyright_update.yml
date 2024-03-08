@@ -1,0 +1,39 @@
+
+name: Copyright check
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+env:
+  copyright_check_script: copyright_update.py
+  copyright_check_script_folder: Third-party/CopyrightUpdate
+
+jobs:
+  CopyrightCheck:
+    name: Process
+    runs-on: ubuntu-latest
+    if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v3.1.4
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.TOKEN }}
+      
+      - name: Run py scipt
+        run: |
+            python -V
+            python ${{ env.copyright_check_script }} pretty
+        working-directory: ${{ github.workspace }}/${{ env.copyright_check_script_folder }}      
+      - name: Push changes
+        uses: actions-x/commit@v6
+        with:
+          email: info@relicta.ru
+          name: CopyrightBot
+          message: Update copyright
+          token: ${{ secrets.TOKEN }}
+          files: .
+        
+  

@@ -1,9 +1,9 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
-#include <precomiled.sqf>
+#include <precompiled.sqf>
 #include <engine.hpp>
 allClientContents = [];
 client_isLocked = false;

@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -102,6 +102,7 @@
 #define sideToIndex(_side) (abs ceil ((_side)*.1))
 #define SIDE_LEFT -1
 #define SIDE_RIGHT 1
+#define NODE_SIDE_LIST_ALL ['Левая сторона:SIDE_LEFT','Правая сторона:SIDE_RIGHT']
 
 //fast declaration object class
 //not implemented yet

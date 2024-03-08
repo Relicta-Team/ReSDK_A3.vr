@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -119,6 +119,7 @@ newAttribute(hasField)
 			Use vars:
 				_exist_fields, _exists_methods
 			in src\host\OOP_engine\oop_init.sqf at line 28
+			! replaced by oop_loadTypes
 
 		*/
 		if (!((tolower _x) in _fieldList)) exitWith {
@@ -242,5 +243,5 @@ newAttribute(GenerateWeaponModule)
 	_wmName = "wm_"+ getClassName + "generated";
 	missionNamespace setVariable [_wmName,_obj];
 	setMember(getGeneratedWeaponModule,compile(_wmName));
-	errorformat("INITIALIZED CLASS %1 with wm: %2 %3 %4",getClassName arg _wmName arg _obj arg pt_GeneratedWeapHandyItem);
+	logformat("INITIALIZED CLASS %1 with wm: %2 %3 %4",getClassName arg _wmName arg _obj arg pt_GeneratedWeapHandyItem);
 endAttribute

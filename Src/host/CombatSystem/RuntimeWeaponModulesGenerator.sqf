@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -46,7 +46,7 @@ cs_runtime_internal_makeAll = {
 		(cs_runtime_map_modules get _x)params ["_file__","_line__","_inherited___","_initcode___"];
 
 		//iterate class creator
-		__class_noStrName(_x) __extends_noStrName(_inherited___)
+		class_runtime(_x) extends_runtime(_inherited___)
 			_decl_info___ = [_file__,_line__];
 			call _initcode___;
 		endclass

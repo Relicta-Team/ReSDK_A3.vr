@@ -27,6 +27,9 @@ on:
 
 env:
   map_validator_path: Third-party/BuildTools/map_validator.py
+  graph_validator_path: ReNode
+  graph_validator_path_app: ReNode.exe
+  graph_validator_args: -prep_code -nosplash -noapp
   validate_source_path: Third-party/BuildTools/Validate.bat
   parse_source_out_path: Third-party/BuildTools/parse_output.py
   source_out_path: ./Third-party/BuildTools/output.txt
@@ -67,6 +70,16 @@ jobs:
           python -V
           python ${{ env.map_validator_path }} map_cfg_light_check ${{ github.workspace }}
         working-directory: ${{ github.workspace }}
+  checkgraphs:
+    name: Validate graphs
+    runs-on: windows-latest
+    needs: [ValidatePR]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check graphs
+        shell: cmd
+        run: ${{ env.graph_validator_path_app }} ${{ env.graph_validator_args }}
+        working-directory: ${{ env.graph_validator_path }}
   checkclient:
     name: Check client
     runs-on: windows-latest

@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -165,7 +165,7 @@ class(MobGhost) extends(BasicMob)
 	params ["_rayPosStart","_rayVector",["_retVirtual",false],
 			 */
 			(_doorObj worldToModel callFunc(this,getPos))params["_x","_y","_z"];
-			callFuncParams(this,setPos,_doorObj modelToWorld vec3(0,-_y,_z));
+			callFuncParams(this,setPosServer,_doorObj modelToWorld vec3(0,-_y,_z));
 		};
 	};
 	func(mainAction)

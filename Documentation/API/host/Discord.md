@@ -427,7 +427,7 @@ Replaced value:
 ```sqf
 "dsm_ext"
 ```
-File: [host\Discord\ServerManager.sqf at line 14](../../../Src/host/Discord/ServerManager.sqf#L14)
+File: [host\Discord\ServerManager.sqf at line 16](../../../Src/host/Discord/ServerManager.sqf#L16)
 ## DSM_CHANNEL_CHANGELOG
 
 Type: constant
@@ -441,7 +441,7 @@ Replaced value:
 ```sqf
 "781280820912062556"
 ```
-File: [host\Discord\ServerManager.sqf at line 17](../../../Src/host/Discord/ServerManager.sqf#L17)
+File: [host\Discord\ServerManager.sqf at line 19](../../../Src/host/Discord/ServerManager.sqf#L19)
 ## DSM_CHANNEL_CHANGELOG
 
 Type: constant
@@ -455,7 +455,7 @@ Replaced value:
 ```sqf
 "847850893076201522"
 ```
-File: [host\Discord\ServerManager.sqf at line 19](../../../Src/host/Discord/ServerManager.sqf#L19)
+File: [host\Discord\ServerManager.sqf at line 21](../../../Src/host/Discord/ServerManager.sqf#L21)
 ## dsm_onlineUpdateHandle
 
 Type: Variable
@@ -468,18 +468,6 @@ Initial value:
 -1
 ```
 File: [host\Discord\ServerManager.sqf at line 8](../../../Src/host/Discord/ServerManager.sqf#L8)
-## dsm_callbackExtensionHandle
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
--1
-```
-File: [host\Discord\ServerManager.sqf at line 9](../../../Src/host/Discord/ServerManager.sqf#L9)
 ## dsm_isFirstLoad
 
 Type: Variable
@@ -491,7 +479,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Discord\ServerManager.sqf at line 10](../../../Src/host/Discord/ServerManager.sqf#L10)
+File: [host\Discord\ServerManager.sqf at line 12](../../../Src/host/Discord/ServerManager.sqf#L12)
 ## dsm_connectedToManager
 
 Type: Variable
@@ -503,7 +491,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Discord\ServerManager.sqf at line 12](../../../Src/host/Discord/ServerManager.sqf#L12)
+File: [host\Discord\ServerManager.sqf at line 14](../../../Src/host/Discord/ServerManager.sqf#L14)
 ## dsm_internal_virtualClient
 
 Type: Variable
@@ -515,7 +503,7 @@ Initial value:
 ```sqf
 nullPtr
 ```
-File: [host\Discord\ServerManager.sqf at line 163](../../../Src/host/Discord/ServerManager.sqf#L163)
+File: [host\Discord\ServerManager.sqf at line 168](../../../Src/host/Discord/ServerManager.sqf#L168)
 ## dsm_stdCall
 
 Type: function
@@ -524,7 +512,7 @@ Description:
 - Param: _func
 - Param: _args (optional, default [])
 
-File: [host\Discord\ServerManager.sqf at line 27](../../../Src/host/Discord/ServerManager.sqf#L27)
+File: [host\Discord\ServerManager.sqf at line 29](../../../Src/host/Discord/ServerManager.sqf#L29)
 ## dsm_isErrorReturn
 
 Type: function
@@ -532,7 +520,7 @@ Type: function
 Description: 
 
 
-File: [host\Discord\ServerManager.sqf at line 32](../../../Src/host/Discord/ServerManager.sqf#L32)
+File: [host\Discord\ServerManager.sqf at line 34](../../../Src/host/Discord/ServerManager.sqf#L34)
 ## dsm_deserializeStringList
 
 Type: function
@@ -540,7 +528,7 @@ Type: function
 Description: 
 
 
-File: [host\Discord\ServerManager.sqf at line 36](../../../Src/host/Discord/ServerManager.sqf#L36)
+File: [host\Discord\ServerManager.sqf at line 38](../../../Src/host/Discord/ServerManager.sqf#L38)
 ## dsm_sendToChannel
 
 Type: function
@@ -549,7 +537,7 @@ Description:
 - Param: _chanId
 - Param: _content
 
-File: [host\Discord\ServerManager.sqf at line 40](../../../Src/host/Discord/ServerManager.sqf#L40)
+File: [host\Discord\ServerManager.sqf at line 42](../../../Src/host/Discord/ServerManager.sqf#L42)
 ## dsm_sendOnline
 
 Type: function
@@ -557,7 +545,7 @@ Type: function
 Description: 
 - Param: _num
 
-File: [host\Discord\ServerManager.sqf at line 48](../../../Src/host/Discord/ServerManager.sqf#L48)
+File: [host\Discord\ServerManager.sqf at line 50](../../../Src/host/Discord/ServerManager.sqf#L50)
 ## dsm_onOnlineUpdate
 
 Type: function
@@ -565,7 +553,7 @@ Type: function
 Description: 
 
 
-File: [host\Discord\ServerManager.sqf at line 53](../../../Src/host/Discord/ServerManager.sqf#L53)
+File: [host\Discord\ServerManager.sqf at line 55](../../../Src/host/Discord/ServerManager.sqf#L55)
 ## dsm_initialize
 
 Type: function
@@ -573,7 +561,7 @@ Type: function
 Description: 
 
 
-File: [host\Discord\ServerManager.sqf at line 57](../../../Src/host/Discord/ServerManager.sqf#L57)
+File: [host\Discord\ServerManager.sqf at line 59](../../../Src/host/Discord/ServerManager.sqf#L59)
 ## dsm_deinitialize
 
 Type: function
@@ -581,7 +569,7 @@ Type: function
 Description: 
 
 
-File: [host\Discord\ServerManager.sqf at line 92](../../../Src/host/Discord/ServerManager.sqf#L92)
+File: [host\Discord\ServerManager.sqf at line 97](../../../Src/host/Discord/ServerManager.sqf#L97)
 ## dsm_callbackHandle
 
 Type: function
@@ -591,7 +579,7 @@ Description:
 - Param: _function
 - Param: _data
 
-File: [host\Discord\ServerManager.sqf at line 98](../../../Src/host/Discord/ServerManager.sqf#L98)
+File: [host\Discord\ServerManager.sqf at line 103](../../../Src/host/Discord/ServerManager.sqf#L103)
 ## dsm_isLoaded
 
 Type: function
@@ -599,7 +587,7 @@ Type: function
 Description: 
 
 
-File: [host\Discord\ServerManager.sqf at line 156](../../../Src/host/Discord/ServerManager.sqf#L156)
+File: [host\Discord\ServerManager.sqf at line 161](../../../Src/host/Discord/ServerManager.sqf#L161)
 ## dsm_callServerCommand
 
 Type: function
@@ -608,4 +596,4 @@ Description:
 - Param: _cmd
 - Param: _executorName
 
-File: [host\Discord\ServerManager.sqf at line 165](../../../Src/host/Discord/ServerManager.sqf#L165)
+File: [host\Discord\ServerManager.sqf at line 170](../../../Src/host/Discord/ServerManager.sqf#L170)

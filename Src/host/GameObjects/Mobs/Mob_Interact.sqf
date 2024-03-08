@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -1164,6 +1164,7 @@ region(stealing handler)
 		if equals(_targ,this) exitWith {
 			callSelfParams(localSay,"У себя не украсть." arg "error");
 		};
+		if !callFunc(_targ,isMob) exitwith {};
 		if !callSelf(isEmptyActiveHand) exitWith {
 			callSelfParams(localSay,"Руку надо освободить." arg "error");
 		};

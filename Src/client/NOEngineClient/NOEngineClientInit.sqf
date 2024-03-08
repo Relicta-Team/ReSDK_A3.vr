@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -90,7 +90,7 @@ noe_client_unloadAllChunks = {
 		_chunkList = [];
 		_chunkType = _x;
 		_chunk = [getPosATL _mob,_chunkType] call noe_posToChunk;
-		[_mob,_chunkList,_chunk,_chunkType] call noe_collectAroundChunks;
+		[_chunkList,_chunk,_chunkType] call noe_collectAroundChunks;
 		
 		//выгружаем
 		{

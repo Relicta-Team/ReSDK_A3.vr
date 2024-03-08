@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -628,28 +628,65 @@ setVisibleHUD = {
 	(hud_zone select 0) ctrlShow _mode;
 };
 
-
+widget_antiGamma_lastError = "";
 // false is not allowed values
 widget_antiGammaCheck = {
-	(findDisplay 46) createDisplay  "RscDisplayInterrupt";
-	ctrlActivate (findDisplay 49 displayCtrl 301);
-	_sets = (findDisplay 5);
-	(findDisplay 5) displayAddEventHandler ["Unload",{(findDisplay 49) closeDisplay 0}];
-	//{_x ctrlsettooltip (str ctrlidc _x)} foreach (allcontrols _sets);
-
-	_bri = _sets displayCtrl 112;
-	_gam = _sets displayCtrl 110;
 
 	#define checkRange(numberToCheck,bottom,top) (numberToCheck >= bottom && numberToCheck <= top)
 	#define low_protect 0.9
 	#define max_protect 1.1
-	//datdeb = [sliderPosition _bri,sliderPosition _gam];
-	_brival = sliderPosition _bri;
-	_gam = sliderPosition _gam;
 
-	_sets closeDisplay 0;
+	private _vOpts = getVideoOptions;
+	//all values in range 0-2 (mid 1)
 
-	checkRange(_brival,low_protect,max_protect) && checkRange(_gam,low_protect,max_protect)
+	//яркость (вкладка изображение)
+	private _brightness = _vOpts get "brightness";
+	//гамма (вкладка изображение)
+	private _gamma = _vOpts get "gamma";
+	//яркость (вкладка AA&PP)
+	private _ppBrightness = _vOpts get "ppBrightness";
+	//контраст (вкладка AA&PP)
+	private _ppContrast = _vOpts get "ppContrast";
+
+	private _errMesDef = "Восстановите значение опции ""%1"" в настройках (вкладка %2). Ваше значение %3, требуется от %4 до %5";
+
+	if !checkRange(_brightness,low_protect,max_protect) exitWith {
+		widget_antiGamma_lastError = format[_errMesDef,"Яркость","Изображение",_brightness tofixed 2,low_protect,max_protect];
+		false
+	};
+	if !checkRange(_gamma,low_protect,max_protect) exitWith {
+		widget_antiGamma_lastError = format[_errMesDef,"Гамма","Изображение",_gamma tofixed 2,low_protect,max_protect];
+		false
+	};
+	if !checkRange(_ppBrightness,low_protect,max_protect) exitWith {
+		widget_antiGamma_lastError = format[_errMesDef,"Яркость","AA & PP",_ppBrightness*100 tofixed 0,low_protect*100,max_protect*100];
+		false
+	};
+	if !checkRange(_ppContrast,low_protect,max_protect) exitWith {
+		widget_antiGamma_lastError = format[_errMesDef,"Контраст","AA & PP",_ppContrast*100 tofixed 0,low_protect*100,max_protect*100];
+		false
+	};
+	
+	widget_antiGamma_lastError = "";
+
+	true
+
+	//obsolete after platform 2.14
+	// (findDisplay 46) createDisplay  "RscDisplayInterrupt";
+	// ctrlActivate (findDisplay 49 displayCtrl 301);
+	// _sets = (findDisplay 5);
+	// (findDisplay 5) displayAddEventHandler ["Unload",{(findDisplay 49) closeDisplay 0}];
+	// //{_x ctrlsettooltip (str ctrlidc _x)} foreach (allcontrols _sets);
+
+	// _bri = _sets displayCtrl 112;
+	// _gam = _sets displayCtrl 110;
+
+	// _brival = sliderPosition _bri;
+	// _gam = sliderPosition _gam;
+
+	// _sets closeDisplay 0;
+
+	// checkRange(_brival,low_protect,max_protect) && checkRange(_gam,low_protect,max_protect)
 };
 
 // Создание сообщения отключения от сервера

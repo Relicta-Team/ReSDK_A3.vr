@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -15,7 +15,7 @@ init_function(vcom_relpos_initialize)
 	vcom_relpos_dataVar = createHashMap;
 
 	//насколько каждая точка может быть от начала координат (для любой оси)
-	vcom_relpos_maxPointDistance = 10;
+	vcom_relpos_maxPointDistance = 50;
 	vcom_relpos_sliderPosChangeDelta = 0.001;
 }
 

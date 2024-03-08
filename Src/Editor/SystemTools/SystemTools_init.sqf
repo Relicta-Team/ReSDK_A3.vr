@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -16,3 +16,4 @@
 #include "GeometryCursor.sqf"
 #include "ClassValidator.sqf"
 #include "LightConfigValidator.sqf"
+#include "LigthSimulation.sqf"

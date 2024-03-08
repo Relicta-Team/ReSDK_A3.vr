@@ -69,7 +69,7 @@ def parameters_to_string(argList,retAsMarkdown = False):
     return '\n'.join(retval)
 
 def parse_sqf_functions(code):
-    function_pattern = r"\s*\b([a-zA-Z]\w+)\s*=\s*\{"
+    function_pattern = r"\s*\b([a-zA-Z]\w+|node_func\([a-zA-Z]\w+\))\s*=\s*\{"  #old pattern r"\s*\b([a-zA-Z]\w+)\s*=\s*\{"
     macros_pattern = r"[ \t]*#define[ \t]+((\w+)(\([^\)]*\))?)[ \t]*((?:.*\\\r?\n)*.*)" #g2 full,g3 params, g4 value
     param_pattern = r"params\s*(\[.+?\]);"
     contextParam_pattern =r"private\s+(\_\w+)\s*=\s*_this"
@@ -243,7 +243,7 @@ def parse_sqf_functions(code):
             condit = None
 
     for function_name in functions:
-        function_signature = re.search(rf"{function_name}\s*=\s*{{(.+?)}}", code, re.DOTALL)
+        function_signature = re.search(rf"{function_name}\)?\s*=\s*{{(.+?)}}", code, re.DOTALL)
         if function_signature:
             #find function start line in liest (search in string)
             start_line = -1

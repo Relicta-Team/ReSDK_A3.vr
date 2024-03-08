@@ -11,7 +11,7 @@ Initial value:
 ```sqf
 "PersianHead_A3_04_a PersianHead_A3_04_l PersianHead_A3_04_sa WhiteHead_22_a WhiteHead_22_l WhiteHead_22_sa GreekHead_A3_10_a GreekHead_A3_10_l GreekHead_A3_10_sa"
 ```
-File: [host\Namings\FaceList.sqf at line 1](../../../Src/host/Namings/FaceList.sqf#L1)
+File: [host\Namings\FaceList.sqf at line 6](../../../Src/host/Namings/FaceList.sqf#L6)
 ## man_facelist_pre
 
 Type: Variable
@@ -23,7 +23,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [host\Namings\FaceList.sqf at line 4](../../../Src/host/Namings/FaceList.sqf#L4)
+File: [host\Namings\FaceList.sqf at line 9](../../../Src/host/Namings/FaceList.sqf#L9)
 ## woman_facelist_pre
 
 Type: Variable
@@ -35,7 +35,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [host\Namings\FaceList.sqf at line 54](../../../Src/host/Namings/FaceList.sqf#L54)
+File: [host\Namings\FaceList.sqf at line 59](../../../Src/host/Namings/FaceList.sqf#L59)
 # FacesHelpers.sqf
 
 ## facesys_generatedConfig

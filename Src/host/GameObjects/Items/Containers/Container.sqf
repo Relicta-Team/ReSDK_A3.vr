@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -12,7 +12,7 @@
 #include "..\..\GameConstants.hpp"
 
 editor_attribute("InterfaceClass")
-class(Container) extends(item)
+class(Container) extends(Item)
 
 	#include "..\..\Interfaces\IContainer.Interface"
 

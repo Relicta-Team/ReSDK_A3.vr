@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -524,6 +524,23 @@ function(goasm_attributes_handleProvider_scriptedlight)
 			};
 		};
 	} call _setSyncValCode;
+	_input ctrlSetTooltip "ПКМ - для открытия редактирования этого конфига";
+	{
+		if (_key == MOUSE_RIGHT) then {
+			_postcode = {
+				params ["_obj","_text"];
+				if isNullVar(_text) exitWith {};
+				if equals(_text,"") exitWith {};
+				if ("deprecated" in _text) exitWith {};
+
+				_obj call vcom_emit_createVisualWindow;
+				
+				[_text] call vcom_emit_io_loadConfigCheck;
+			};
+			nextFrameParams(_postcode,[_objWorld arg ctrlText _wid]);
+		};
+	} call _setOnPressCode;
+
 	[BUTTON,[10,_optimalSizeH],_offsetMemX + 40,true] call _createElement;
 	_wid ctrlSetText "+";
 	_wid ctrlSetTooltip "ЛКМ - меню выбора света\nПКМ - сброс на стандартное значение";
@@ -565,6 +582,9 @@ function(goasm_attributes_handleProvider_scriptedlight)
 							};
 							[_objWorld,_data,true] call golib_setHashData;
 							call (_wid getVariable "_onSync");	
+
+							[_objWorld] call lsim_reloadLightOnObject;
+
 						} call Core_callContext;
 						call Core_popContext;
 					},
@@ -587,6 +607,7 @@ function(goasm_attributes_handleProvider_scriptedlight)
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 			
+			[_objWorld] call lsim_reloadLightOnObject;
 		};
 	} call _setOnPressCode;
 }
@@ -1292,7 +1313,7 @@ function(golib_attributes_container_content_validateAdd)
 		_curData get "countslots"
 	} else {
 		//! ТУТ нельзя ставить true для компиляции результата. Я не помню почему числовые поля сразу возвращаются...
-		[_curClass,"countslots"] call oop_getFieldBaseValue
+		[_curClass,"countslots",true] call oop_getFieldBaseValue
 	};
 
 	//now start check

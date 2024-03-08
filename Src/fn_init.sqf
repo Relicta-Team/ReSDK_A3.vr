@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -7,7 +7,7 @@
 #include "host\oop.hpp"
 #include <host\Networking\Network.hpp>
 
-#include <host\precomiled.sqf>
+#include <host\precompiled.sqf>
 
 //server password and crypt key if exists
 if (fileExists("src\private.h")) then {
@@ -91,6 +91,7 @@ if (__EDITOR_MACRO_VALIDATE__ == "EDITOR_MACRO") exitWith {
 
 //Обязательно инитим ооп перед всеми приколами
 #include "host\OOP_engine\oop_preinit.sqf"
+loadFile("src\host\OOP_engine\oop_main_loader.sqf");
 loadFile("src\host\Discord\Discord.sqf"); //Предварительная инициализация дискорд бота
 if (canSuspend) then {
 	warning("Server side code process init runs in the scheduler");

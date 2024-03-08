@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -34,7 +34,7 @@ endclass
 
 
 #define reactgen_common INC(reagentsystem_reactions_counter); _reactionName = "react_gen_" + str reagentsystem_reactions_counter; \
-__class_noStrName(_reactionName) extends(ReagentReaction)
+class_runtime(_reactionName) extends(ReagentReaction)
 
 #define reactgen_first reactgen_common
 

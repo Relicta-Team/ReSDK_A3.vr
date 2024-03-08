@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -143,6 +143,7 @@ menu_structureLayout = [
 				"text:Только отсутствующие;act:[false] call systools_imageProcessor;",
 				"text:Генерация по указанным;act:[true,true] call systools_imageProcessor;"
 			],
+			"text:Создать объектную библиотеку (ReNode);act:call vs_generateLib",
 			"text:Запустить импорт старой карты;act:call mm_doImportOldMap"
 		],
 		["text:Валидаторы",
@@ -154,10 +155,14 @@ menu_structureLayout = [
 			"text:Проверка несуществующих конфигов света на карте;act:call lightValidator_process",
 			"text:Проверка путей классов;act:call systools_checkClassPathes",
 			"text:Проверка классов с одинаковыми моделями;act:call classValidator_validateModels",
-			"text:Проверка нагрузки сцены игровыми объектами;act:['Не реализовано'] call showWarning;"
+			"",
+			"text:Проверка нагрузки сцены игровыми объектами;act:call pertest_chunkPerformanceToggle;"
 		],
 		"",
-		"text:Создать режим;act:call gm_filegen_openWindow",
+		"text:Редактор ReNode;act:call vs_openEditor",
+		["text:Кодогенерация",
+			"text:Создать режим из шаблона;act:call gm_filegen_openWindow"
+		],
 		// "text:Менеджер режимов;act:call gm_createGamemode",
 		// "",
 		"text:Просмотр моделей;act:call golib_modelViewerContextOpen",
@@ -182,7 +187,7 @@ menu_structureLayout = [
 		"text:Запуск симуляции с последним режимом и ролью;act:call sim_startSimFromCache",
 		"text:Настроить симуляцию и запустить;act:call sim_openDetaliSetup",
 		"",
-		"text:Запуск симуляции частиц;act:['Не реализовано. Тут можно будет прямо в редакторе посмотреть как выглядит карта ночью с частицами']call showWarning"
+		"text:Запуск/остановка симуляции частиц и освещения;act:[!lsim_mode] call lsim_setMode"
 	],
 	["text:Информация",
 		"text:Версия редактора "+str Core_version_name + ";ena:false",

@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -115,7 +115,7 @@ function(golib_om_placeObjectAtMouse)
 		[_obj,_gameObject] call golib_initHashData;
 		
 		[_obj] call golib_om_internal_handleTransformEvent;
-		
+		[_obj,true] call Core_initObjectEvents;
 		if (_flagEffect) then {
 			[_obj,_gameObject] call goasm_iapi_effect_preparModel;
 		};
@@ -389,6 +389,7 @@ function(golib_om_replaceObject)
 			[_obj,_rot] call golib_om_setRotation;
 			
 			[_obj] call golib_om_internal_handleTransformEvent;
+			[_obj,true] call Core_initObjectEvents;
 			
 			call golib_cs_syncMarks;
 

@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2023 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -19,13 +19,13 @@ endclass
 
 editor_attribute("InterfaceClass")
 class(SContainer) extends(IContainerStruct)
-	var_inlinevalue(countSlots,DEFAULT_BOX_STORAGE); //количество слотов (доступный объём контейнера)
+	var_exprval(countSlots,DEFAULT_BOX_STORAGE); //количество слотов (доступный объём контейнера)
 	var(maxSize,ITEM_SIZE_BIG); //максимальный допустимый объем предмета для укладки в контейнер
 endclass
 
 //virtual
 class(Virt_ChemBlender) extends(IContainerStruct)
-	var_inlinevalue(countSlots,DEFAULT_ITEMBAG_STORAGE);
+	var_exprval(countSlots,DEFAULT_ITEMBAG_STORAGE);
 	var(name,"Раздатчик таблеток");
 	var(chemBlender,nullPtr);//reference to electical device
 	
