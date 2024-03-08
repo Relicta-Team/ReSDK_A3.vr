@@ -138,6 +138,15 @@ class(TaskBase) extends(IGameEvent)
 		[this] call getSelf(_taskDescDelegate)
 	};
 
+	"
+		name:Единоразовая проверка условий
+		desc:При включении этой опции задача будет выполнять проверку для всех её владельцев. В выключенном состоянии проверка осуществляется только для первого владельца задачи. "+
+		"Это свойство не влияет на вызов событий при выполнении или провале задачи - успех и провал выполняется ко всем владельцам задачи.
+		prop:all
+		return:bool:Проверка условий
+		defval:false
+	" node_var
+	var(isTaskSingleCheck,false); //проверка только для первого владельца
 
 	var(owners,[]); //кто владеет данной задачей
 
@@ -231,28 +240,38 @@ class(TaskBase) extends(IGameEvent)
 	func(updateMethodInternal)
 	{
 		objParams();
+		private _singleCheck = getSelf(isTaskSingleCheck);
 		{
 			callSelfParams(onTaskCheck,_x);
 
 			//останавливаем проверку после выполнения задачи
 			if (getSelf(isDone) || getSelf(result)!=0) exitWith {};
 
+			if (_singleCheck && _foreachindex <= 0) exitWith {};
 		} foreach getSelf(owners);
 	};
 
 	"
 		name:Дополнительные условия
-		desc:Дополнительные условия, которые должны быть выполнены для проверки задачи.
+		desc:Дополнительные условия, которые должны быть выполнены для проверки задачи. Первый параметр - вызывающий событие объект (Задача), второй параметр - владелец задачи (Моб).
 		prop:all
-		return:function[event=bool=BasicTask^]:Условие проверки задачи
+		return:function[event=null=BasicTask^@Mob^]:Условие проверки задачи
 	" node_var
-	var(_customCondition,{false});//TODO add in all tasks types
+	var(_customCondition,{true});
 
 	func(onTaskCheck)
 	{
 		objParams_1(_owner);
 	};
 
+	"
+		name:Установить результат задачи
+		desc:Устанавливает результат задачи. Если результат не равен нулю, то задача завершается с указанным результатом. Положительный результат считается успешным выполнением задачи, а отрицательный - провалом. "+
+		"Если задача помечена как выполненная - ничего не произойдёт.
+		type:method
+		lockoverride:1
+		in:int:Результат:Результат выполнения задачи
+	" node_met
 	func(setTaskResult)
 	{
 		params ['this',"_tr",["_endroundCheck",false]];
@@ -289,14 +308,14 @@ class(TaskBase) extends(IGameEvent)
 	// обработчики успешного выполнения и провала
 	"
 		name:Обработчик успешного выполнения задачи
-		desc:Вызывается при успешном выполнении задачи.
+		desc:Вызывается при успешном выполнении задачи для каждого владцельца.
 		prop:all
 		return:function[event=null=BasicTask^@Mob^@int]:Обработчик успешного выполнения задачи
 	" node_var
 	var(_taskOnSuccessDeletage,{});
 	"
 		name:Обработчик провала задачи
-		desc:Вызывается при провале задачи.
+		desc:Вызывается при провале задачи для каждого владельца.
 		prop:all
 		return:function[event=null=BasicTask^@Mob^@int]:Обработчик провала задачи
 	" node_var
@@ -333,7 +352,7 @@ class(GameObjectKindTask) extends(TaskBase)
 	"
 		name:Объектная задача
 		desc:Задача, относящаяся к игровым объектам. Например: получение, сохранение и т.д.
-		path:Игровая логика.Задачи
+		path:Игровая логика.Задачи.Объектные
 	" node_class
 
 	var(name,"GameObject task");
@@ -417,8 +436,10 @@ class(GameObjectKindTask) extends(TaskBase)
 		if (getSelf(failTaskOnItemDestroy) && _foundNull) then {
 			callSelfParams(setTaskResult,getSelf(failResultOnItemDestroy));
 		};
+		
+		private _custom = [this,_owner] call getSelf(_customCondition);
 
-		if (_counter >= ((count getSelf(__typeList)) + (count getSelf(__objRefs)))) then {
+		if (_counter >= ((count getSelf(__typeList)) + (count getSelf(__objRefs))) && _custom) then {
 			callSelfParams(setTaskResult,1);
 		};
 	};
@@ -503,12 +524,13 @@ class(GameObjectKindTask) extends(TaskBase)
 endclass
 
 //Унаследовано от базовой задачи а не от GameObjectKindTask, потому что __objRefs имеет несовместимый тип
+//! Если это единственная причина почему нельзя использовать наследование то лучше разделить ссылки на предметы и объекты на отдельные хранилища
 class(ItemKindTask) extends(TaskBase)
 
 	"
 		name:Предметная задача
 		desc:Задача, относящаяся к игровым предметам. Например: получение, сохранение и т.д.
-		path:Игровая логика.Задачи
+		path:Игровая логика.Задачи.Предметные
 	" node_class
 
 	var(name,"Item task");
@@ -595,7 +617,9 @@ class(ItemKindTask) extends(TaskBase)
 			callSelfParams(setTaskResult,getSelf(failResultOnItemDestroy));
 		};
 
-		if (_counter >= ((count getSelf(__typeList)) + (count getSelf(__objRefs)))) then {
+		private _custom = [this,_owner] call getSelf(_customCondition);
+
+		if (_counter >= ((count getSelf(__typeList)) + (count getSelf(__objRefs))) && _custom) then {
 			callSelfParams(setTaskResult,1);
 		};
 	};
@@ -700,6 +724,12 @@ endclass
 
 
 class(TaskItemGet) extends(ItemKindTask)
+	"
+		name:Задача получения предметов
+		desc:Задача, относящаяся к получение предметов персонажем.
+		path:Игровая логика.Задачи.Предметные
+	" node_class
+
 	var(name,"Добыча");
 	var(desc,"Получить предметы");
 	var(descRoleplay,"Мне нужно получить %1: %2");
@@ -724,6 +754,12 @@ class(TaskItemGet) extends(ItemKindTask)
 endclass
 
 class(TaskItemSave) extends(TaskItemGet)
+	"
+		name:Задача сохранения предметов
+		desc:Задача, относящаяся к сохранению предметов персонажем. Под сохранением подразумевается, что перечисленные предметы находятся в инвентаре персонажа до конца раунда.
+		path:Игровая логика.Задачи.Предметные
+	" node_class
+
 	var(name,"Сохранение");
 	var(desc,"Сохранить предметы до конца раунда");
 	var(descRoleplay,"Мне нужно сохранить %1: %2");
@@ -733,6 +769,12 @@ endclass
 
 
 class(TaskItemPlace) extends(ItemKindTask)
+	"
+		name:Задача доставки предметов
+		desc:Задача, относящаяся к доставке предметов. Для выполнения задачи необходимо доставить предметы в указанную точку.
+		path:Игровая логика.Задачи.Предметные
+	" node_class
+
 	var(name,"Доставка");
 	var(desc,"Поместить предметы в места");
 	var(descRoleplay,"Мне нужно поместить %1 в %3: %2");
@@ -800,18 +842,18 @@ endclass
 
 class(MobKindTask) extends(TaskBase)
 	"
-		name:Сущностная задача
+		name:Задача персонажей
 		desc:Задача, относящаяся к сущностям (мобам)
-		path:Игровая логика.Задачи
+		path:Игровая логика.Задачи.Персонажи
 	" node_class
 	
 	var(name,"Mob task");
 
 	"
 		name:Цель
-		desc:Цель задачи
+		desc:Цель задачи. Это моб, являющейся целью задачи. Например убийства, спасения и т.д.
 		prop:all
-		return:Mob:Сущность - цель задачи
+		return:Mob^:Сущность - цель задачи
 	" node_var
 	var(target,nullPtr);
 
@@ -820,7 +862,7 @@ class(MobKindTask) extends(TaskBase)
 		objParams_1(_owner);
 
 		if isNullReference(getSelf(target)) exitWith {};
-		if callSelf(checkEntityState) then {
+		if (callSelf(checkEntityState) && [this,_owner] call getSelf(_customCondition)) then {
 			callSelfParams(setTaskResult,1);
 		};
 	};
@@ -983,6 +1025,7 @@ class(TaskLocationEnter) extends(LocationKindTask)
 		objParams_1(_owner);
 		if (
 			(callFunc(_owner,getPos) distance getSelf(position)) <= getSelf(radius)
+			&& [this,_owner] call getSelf(_customCondition)
 		) then {
 			callSelfParams(setTaskResult,1);
 		};
@@ -1042,7 +1085,10 @@ class(TaskGetRole) extends(RoleKindTask)
 		objParams_1(_owner);
 		private _robj = getVar(_owner,role);
 
-		if ifcheck(getSelf(checkChildRoles),isTypeStringOf(_robj,getSelf(roleClass)),callFunc(_robj,getClassName) == getSelf(roleClass)) then {
+		if (
+			ifcheck(getSelf(checkChildRoles),isTypeStringOf(_robj,getSelf(roleClass)),callFunc(_robj,getClassName) == getSelf(roleClass))
+			&& [this,_owner] call getSelf(_customCondition)
+		) then {
 			callSelfParams(setTaskResult,1);
 		};
 	};
@@ -1075,7 +1121,7 @@ class(TaskRoleDead) extends(RoleKindTask)
 			};
 		} foreach getVar(_robj,basicMobs);
 
-		if (_count >= getSelf(countDeadNeed)) then {
+		if (_count >= getSelf(countDeadNeed) && [this,_owner] call getSelf(_customCondition)) then {
 			callSelfParams(setTaskResult,1);
 		};
 	};
