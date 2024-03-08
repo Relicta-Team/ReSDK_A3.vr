@@ -146,7 +146,9 @@ _4024_659424036_3610816_91418 = ['LargeConcreteWallWithReinforcement',[4024.66,4
 ['ConcreteArch',[3985.91,3962.77,14.5404],90,[0,0,1]] call InitDecor; 
 _3961_923103957_5639615_57771 = ['BigStoneWall',[3961.92,3957.56,15.5777],93.3499,[0,0,1], {_thisObj setvariable ['model','ca\structures\castle\a_castle_bergfrit_dam.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['ConcreteArch',[3986.53,3971.62,14.5245],90,[0,0,1]] call InitDecor; 
-_4033_915284000_8601114_63878 = ['PowerGenerator',[4033.92,4000.86,20.3024,true],267.703,[-0.0246084,-0.0394964,0.998917], {go_editor_globalRefs set ["PowerGenerator G:6zjrUq/qWew",_thisObj];
+['BigStoneWall',[3934.01,3961.13,15.8802],180,[0,0,1]] call InitDecor; 
+_3961_562503966_8620615_30469 = ['BigStoneWall',[3961.56,3966.86,15.3047],93.3499,[0,0,1], {_thisObj setvariable ['model','ca\structures\castle\a_castle_bergfrit_dam.p3d'];}] call InitDecor; // !!! realocated model !!!
+_3960_084233943_2519529_24751 = ['PowerGenerator',[3960.08,3943.25,34.9112,true],267.703,[-0.0246067,-0.0394921,0.998917], {go_editor_globalRefs set ["PowerGenerator G:6zjrUq/qWew",_thisObj];
 }] call InitStruct; 
 ['LampWall',[4034.44,3992.99,21.9201],86.0245,[0,0,1], {go_editor_globalRefs set ["LampWall G:+WLVHg1VIhE",_thisObj];
 }] call InitStruct; 
@@ -444,10 +446,9 @@ _3944_218753982_6584515_90193 = ['BlockBrick',[3944.22,3982.66,15.9019],180,[0,0
 _3926_009523973_6928720_32041 = ['BlockBrick',[3926.01,3973.69,20.3204],0,[0,0,1], {_thisObj setvariable ['model','Land_pod_18x6'];}] call InitDecor; // !!! realocated model !!!
 ['MediumConcreteWall',[3924.32,3966.94,22.2622,true],[0.699611,0.714524,8.05414e-008],[-0.714524,0.699611,-1.97381e-007]] call InitStruct; 
 ['BrickThinWall',[3951.36,3979.61,16.0083],0,[0,0,1]] call InitStruct; 
-['ConcreteWall',[3954.23,3975.41,16.4724],90,[0,0,1]] call InitStruct; 
-['ConcreteWall',[3954.21,3967.39,16.6203],90,[0,0,1]] call InitStruct; 
-_3949_459963962_4694815_48650 = ['BlockBrick',[3949.46,3962.47,15.4865],0,[0,0,1], {_thisObj setvariable ['model','Land_pod_18x6'];}] call InitDecor; // !!! realocated model !!!
-_3938_090823964_2150920_32361 = ['BlockBrick',[3938.09,3964.22,20.3236],270,[0,0,1], {_thisObj setvariable ['model','Land_pod_18x6'];}] call InitDecor; // !!! realocated model !!!
+['ConcreteWall',[3954.23,3975.41,16.5759],90,[0,0,1]] call InitStruct; 
+['ConcreteWall',[3954.21,3971.72,16.6203],90,[0,0,1]] call InitStruct; 
+_3938_090823968_2614720_32361 = ['BlockBrick',[3938.09,3968.26,20.3236],270,[0,0,1], {_thisObj setvariable ['model','Land_pod_18x6'];}] call InitDecor; // !!! realocated model !!!
 _3975_776614005_0830111_51417 = ['ConcreteWall',[3975.78,4005.08,11.5142],270,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\walls\mil_wallbig_4m_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3975_784423990_8193411_75848 = ['ConcreteWall',[3975.78,3990.82,11.7585],270,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\walls\mil_wallbig_4m_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['RustyCell',[3989.33,4017.65,14.9203],90,[0,0,1]] call InitStruct; 
@@ -925,7 +926,7 @@ _3985_958253913_9597216_34719 = ['BigStoneWall',[3985.96,3913.96,16.3472],180,[0
 _3976_577643933_7199716_42530 = ['TinFence',[3976.58,3933.72,16.4253],90,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\walls\new_wiredfence_10m_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['BlockBrick',[3969.91,3916.33,23.2939],12.397,[0,0,1]] call InitDecor; 
 ['BlockBrick',[3962.75,3926.91,22.6715],0,[0,0,1]] call InitDecor; 
-['BlockBrick',[3962.75,3937.12,22.7964],0,[0,0,1]] call InitDecor; 
+['BlockBrick',[3962.75,3937.12,22.4455],0,[0,0,1]] call InitDecor; 
 ['TinFence',[3976.24,3926.6,16.4253],90,[0,0,1]] call InitStruct; 
 ['BetonTrapeciaSmall',[3986.38,3946.74,16.4253],0,[0,0,1]] call InitStruct; 
 ['SmallCornerFenceMadeOfJunk',[3977.28,3920.94,16.4253],180,[0,0,1]] call InitStruct; 
@@ -986,37 +987,79 @@ _4006_803963950_6040028_67234 = ['BigBrickUnfinishedTwoStoreyHouse',[4006.8,3950
 ['GateCity',[3985.91,3962.58,14.8158],0,[0,0,1]] call InitStruct; 
 ['GateCity',[3983.43,4014.09,15.1583],0,[0,0,1]] call InitStruct; 
 _3961_321533992_041998_98567 = ['StoneBigLadderDouble',[3961.32,3992.04,8.98567],270,[0,0,1], {_thisObj setvariable ['model','cup\terrains\cup_terrains_buildings\platform\platform_stairs_30.p3d'];}] call InitStruct; // !!! realocated model !!!
+['StreetLampEnabled',[3981.7,3947.57,16.4253],130.378,[0,0,1], {go_editor_globalRefs set ["StreetLampEnabled G:M+OfxVPiulw",_thisObj];
+}] call InitStruct; 
+['StreetLampEnabled',[3979.4,3930.98,16.4253],48.388,[0,0,1], {go_editor_globalRefs set ["StreetLampEnabled G:OG91g6RU+7Y",_thisObj];
+}] call InitStruct; 
+['StreetLampEnabled',[3978.92,3925.47,25.0397,true],[0.917738,-0.395876,0.0322438],[-0.12199,-0.203683,0.971407], {go_editor_globalRefs set ["StreetLampEnabled G:CPmzPDOemEA",_thisObj];
+}] call InitStruct; 
+['LampWall',[3985.98,3919.97,24.5726],90,[0,0,1], {go_editor_globalRefs set ["LampWall G:UpANTbOdePs",_thisObj];
+}] call InitStruct; 
+['BarrelCampfireBig1',[3977.19,3939.92,16.4253],0,[0,0,1]] call InitStruct; 
+['StreetLampEnabled',[3969.54,3952.61,12.9248],102.855,[0,0,1], {go_editor_globalRefs set ["StreetLampEnabled G:fnxi19qz9zE",_thisObj];
+}] call InitStruct; 
+['StreetLampEnabled',[3988.47,3958.41,23.437,true],[-0.873679,-0.462237,-0.151728],[0,-0.311876,0.950123], {go_editor_globalRefs set ["StreetLampEnabled G:dbSjBDjCOjk",_thisObj];
+}] call InitStruct; 
+['BarrelCampfireBig',[3994.49,3958.68,13.9159],0,[0,0,1]] call InitStruct; 
+['StreetLampEnabled',[4005.02,3941.77,28.3137],236.391,[0,0,1], {go_editor_globalRefs set ["StreetLampEnabled G:BingONHRAgE",_thisObj];
+}] call InitStruct; 
+['StreetLampEnabled',[3966.79,3920.58,23.4192],74.6288,[0,0,1], {go_editor_globalRefs set ["StreetLampEnabled G:rMgJWlB8nT0",_thisObj];
+}] call InitStruct; 
+['SmallStoveGrill',[3978,3909.57,16.7343],293.821,[0,0,1]] call InitStruct; 
+['BigStoneWall1',[3967.93,3930.21,22.8123,true],[-0.989056,-0.000305717,0.147541],[0.147541,-0.00204948,0.989054]] call InitDecor; 
+['BlockStone',[3963.12,3947.87,12.4218],0,[0,0,1]] call InitDecor; 
+['BlockStone',[3953.67,3948.01,12.4507],0,[0,0,1]] call InitDecor; 
+_3943_365723962_9228514_48542 = ['BigStoneWall1',[3943.37,3962.92,14.4854],0,[0,0,1], {_thisObj setvariable ['model','ca\structures\castle\a_castle_wall2_corner.p3d'];}] call InitDecor; // !!! realocated model !!!
+_3953_347903960_9453112_48730 = ['BlockStone',[3953.35,3960.95,12.4873],0,[0,0,1], {_thisObj setvariable ['model','Land_Platform_Stairs_30'];}] call InitDecor; // !!! realocated model !!!
+['BlockStone',[3949.92,3959.05,12.5758],0,[0,0,1]] call InitDecor; 
+_3947_368653965_0764215_57861 = ['BlockStone',[3947.37,3965.08,15.5786],180,[0,0,1], {_thisObj setvariable ['model','Land_Canal_Wall_10m_F'];}] call InitDecor; // !!! realocated model !!!
+['LongMetalBeams',[3961.35,3951.79,22.556],180,[0,0,1]] call InitStruct; 
+['LampWall',[3989.07,3962.79,30.2251],0,[0,0,1], {go_editor_globalRefs set ["LampWall G:cqysaa1+NRs",_thisObj];
+}] call InitStruct; 
+['LampWall',[3983.37,3963.44,30.2251],180,[0,0,1], {go_editor_globalRefs set ["LampWall G:bHAkmu31BQg",_thisObj];
+}] call InitStruct; 
+_3990_596683968_7324228_58224 = ['BigStoneWall',[3990.6,3968.73,28.5822],93.3499,[0,0,1], {_thisObj setvariable ['model','ca\structures\castle\a_castle_bergfrit.p3d'];}] call InitDecor; // !!! realocated model !!!
 
 
 
-if (!isNil'_4033_915284000_8601114_63878') then {
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLampEnabled G:BDN+S1yZ/S0"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "LampWall G:4wwgg1i6mtk"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "LampWall G:+WLVHg1VIhE"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "LampWall G:+WLVHg1VIhE (2)"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "LampWall G:+WLVHg1VIhE (1)"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLampEnabled G:BDN+S1yZ/S0 (2)"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLampEnabled G:BDN+S1yZ/S0 (1)"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "SignMedical G:AWj2J0DzUCc"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "LampCeiling G:fiII7rSwbxE"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "LampCeiling G:fiII7rSwbxE (2)"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "LampCeiling G:fiII7rSwbxE (1)"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLamp G:1kvNhbAfrpE"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLamp G:loLVB7dlQQU"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLamp G:eujg7oZpIt0"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLamp G:6OC3P8vxg5Y"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLampEnabled G:pe3nqu3eIqg"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLampEnabled G:+je8RsggFvI"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLampEnabled G:c+XgTKTuZHw"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLampEnabled G:brBhM3LeOlQ"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLampEnabled G:gdtwXSAif4I"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLampEnabled G:TygTXYkSpuk"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "LampWall G:hYsWB5zbxqs"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLampEnabled G:+T36BqxSb38"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLampEnabled G:p9IkvilpQIk"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLamp G:nMExxZB58aI"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "StreetLampEnabled G:2IPxqL5WI3M"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
-	[_4033_915284000_8601114_63878,go_editor_globalRefs get "Tumbler_Activator G:CH5kCljWQV0"] call (_4033_915284000_8601114_63878 getvariable 'proto' getvariable 'addConnection');
+if (!isNil'_3960_084233943_2519529_24751') then {
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:BDN+S1yZ/S0"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "LampWall G:4wwgg1i6mtk"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "LampWall G:+WLVHg1VIhE"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "LampWall G:+WLVHg1VIhE (2)"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "LampWall G:+WLVHg1VIhE (1)"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:BDN+S1yZ/S0 (2)"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:BDN+S1yZ/S0 (1)"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "SignMedical G:AWj2J0DzUCc"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "LampCeiling G:fiII7rSwbxE"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "LampCeiling G:fiII7rSwbxE (2)"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "LampCeiling G:fiII7rSwbxE (1)"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLamp G:1kvNhbAfrpE"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLamp G:loLVB7dlQQU"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLamp G:eujg7oZpIt0"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLamp G:6OC3P8vxg5Y"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:pe3nqu3eIqg"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:+je8RsggFvI"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:c+XgTKTuZHw"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:brBhM3LeOlQ"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:gdtwXSAif4I"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:TygTXYkSpuk"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "LampWall G:hYsWB5zbxqs"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:+T36BqxSb38"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:p9IkvilpQIk"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLamp G:nMExxZB58aI"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:2IPxqL5WI3M"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "Tumbler_Activator G:CH5kCljWQV0"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:dbSjBDjCOjk"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:fnxi19qz9zE"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:M+OfxVPiulw"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:OG91g6RU+7Y"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:CPmzPDOemEA"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:rMgJWlB8nT0"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "LampWall G:UpANTbOdePs"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "StreetLampEnabled G:BingONHRAgE"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "LampWall G:cqysaa1+NRs"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
+	[_3960_084233943_2519529_24751,go_editor_globalRefs get "LampWall G:bHAkmu31BQg"] call (_3960_084233943_2519529_24751 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3971_842294008_6291513_51128') then {
 	_3971_842294008_6291513_51128 setvariable ['desc',"Сосуд, содержащий алкоголь."];
