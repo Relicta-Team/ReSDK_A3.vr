@@ -437,6 +437,9 @@ nodegen_loadClasses = {
 
 //call delegate; _fref - vec2: vec2:(object,context), code(params:args,context)
 renode_invokeDelegate = {
+    //! NOT IMPLEMENTED
+    setLastError("invoke delegate not implemented yet on ReNode editor side");
+    
     //param input example: [[nullPtr,[]],{}]
     params ["_fref__","_args"];
     assert_str(count _fref__ == 2,"Invalid function ref datastructure");

@@ -127,7 +127,7 @@ class(TaskBase) extends(IGameEvent)
 
 	"
 		name:Обработчик описания задачи
-		desc:Вызываемая функция вывода описания задачи
+		desc:Вызываемая функция вывода описания задачи. Обычно в этой функции вычисляются форматируемые значения (например, список объектов). Чтобы посмотреть исходную строку выведите в консоли 'Ролевое описание задачи'.
 		prop:all
 		return:function[event=string=BasicTask^]:Описание задачи
 	" node_var
@@ -402,16 +402,26 @@ class(GameObjectKindTask) extends(TaskBase)
 		getSelf(__objRefs) append _lvals;
 	};
 
+	//type checkers and outputs
+	getterconst_func(__onerr_requiredTypeStr,"GameObject");
+	func(checkTypeReference) { objParams_1(_o); isTypeOf(_o,GameObject) };
+	func(checkTypeName) { objParams_1(_o); isTypeNameOf(_o,GameObject) };
+
 	func(__validateInputs)
 	{
 		objParams();
 		{
-			assert_str(!isNullReference(_x),"Null reference game object");
-			assert_str(isTypeOf(_x,GameObject),format vec2("Invalid global reference. Object must be of type GameObject, not %1",callFunc(_x,getClassName)));
+			assert_str(!isNullReference(_x),"Null reference " + callSelf(__onerr_requiredTypeStr));
+			
+			if !callSelfParams(checkTypeReference,_x) then {
+				assert_str(false,format vec2("Invalid global reference. Object must be of type %2, not %1",callFunc(_x,getClassName) arg callSelf(__onerr_requiredTypeStr)));
+			};
 		} forEach getSelf(__objRefs);
 
 		{
-			assert_str(isTypeNameOf(_x,GameObject),format vec2("Invalid typename %1, must be of type GameObject",_x));
+			if !callSelfParams(checkTypeName,_x) then {
+				assert_str(false,format vec2("Invalid typename %1, must be of type %2",_x arg callSelf(__onerr_requiredTypeStr)));
+			};
 		} foreach getSelf(__typeList);
 	};
 
@@ -523,9 +533,7 @@ class(GameObjectKindTask) extends(TaskBase)
 
 endclass
 
-//Унаследовано от базовой задачи а не от GameObjectKindTask, потому что __objRefs имеет несовместимый тип
-//! Если это единственная причина почему нельзя использовать наследование то лучше разделить ссылки на предметы и объекты на отдельные хранилища
-class(ItemKindTask) extends(TaskBase)
+class(ItemKindTask) extends(GameObjectKindTask)
 
 	"
 		name:Предметная задача
@@ -535,171 +543,9 @@ class(ItemKindTask) extends(TaskBase)
 
 	var(name,"Item task");
 
-	"
-		name:Глобальные ссылки
-		desc:Список глобальных ссылок на игровые предметы, обрабатываемые задачей.
-		prop:all
-		return:array[string]:Массив глобальных ссылок
-		defval:[]
-	" node_var
-	var(__globalRefs,[]);
-	"
-		name:Список предметов
-		desc:Список ссылок на игровые объекты (предметы), обрабатываемые задачей.
-		prop:all
-		return:array[Item^]:Массив ссылок на игровые объекты
-	" node_var
-	var(__objRefs,[]); //сюда добавляются глобальные ссылки
-	"
-		name:Список типов
-		desc:Список типов, обрабатываемых задачей.
-		prop:all
-		return:array[classname]:Массив типов
-	" node_var
-	var(__typeList,[]);
-
-	func(onTaskRegistered)
-	{
-		objParams();
-		//getting all references 
-		callSelf(__convertGlobalRefsToObjects);
-		callSelf(__validateInputs);
-	};
-
-	func(__convertGlobalRefsToObjects)
-	{
-		objParams();
-		private _lvals = [];
-		private _refto = null;
-		{
-			_refto = [_x] call getObjectByRef;
-			assert_str(!isNullReference(_refto),format vec2("Invalid global reference: %1",_x));
-
-			_lvals pushBack _refto;
-		} foreach getSelf(__globalRefs);
-
-		getSelf(__objRefs) append _lvals;
-	};
-
-	func(__validateInputs)
-	{
-		objParams();
-		{
-			assert_str(!isNullReference(_x),"Null reference item");
-			assert_str(isTypeOf(_x,Item),format vec2("Invalid global reference. Object must be of type Item, not %1",callFunc(_x,getClassName)));
-		} forEach getSelf(__objRefs);
-
-		{
-			assert_str(isTypeNameOf(_x,Item),format vec2("Invalid typename %1, must be of type Item",_x));
-		} foreach getSelf(__typeList);
-	};
-
-	func(processObjectCheck)
-	{
-		objParams_3(_owner,_funcref,_functypes);
-
-		private _foundNull = false;
-		private _counter = 0;
-		{
-			if isNullReference(_x) then {
-				_foundNull = true;
-				continue;
-			};
-
-			_counter = _counter + ([_owner,_x] call _funcref);
-		} foreach getSelf(__objRefs);
-
-		{
-			_counter = _counter + ([_owner,_x] call _functypes);
-		} foreach getSelf(__typeList);
-
-		if (getSelf(failTaskOnItemDestroy) && _foundNull) exitWith {
-			callSelfParams(setTaskResult,getSelf(failResultOnItemDestroy));
-		};
-
-		private _custom = [this,_owner] call getSelf(_customCondition);
-
-		if (_counter >= ((count getSelf(__typeList)) + (count getSelf(__objRefs))) && _custom) then {
-			callSelfParams(setTaskResult,1);
-		};
-	};
-
-	"
-		name:Провал при удалении предметов
-		namelib:Провалить задачу при удалении предметов
-		desc:При включении этой опции задача будет автоматически провалена если один или несколько предметов, относящихся к этой задаче были удалены или уничтожены.
-		prop:all
-		return:bool:Провалить задачу при удалении предметов
-	" node_var
-	var(failTaskOnItemDestroy,false);
-
-	"
-		name:Результат провала при удалении предметов
-		namelib:Результат провала при удалении предметов
-		desc:Результат провала задачи, устанавливаемый при удалении одного или нескольких предметов, относящихся к этой задаче.
-		prop:all
-		return:int:Результат провала при удалении предметов
-	" node_var
-	var(failResultOnItemDestroy,-100);
-
-	"
-		name:Список предметов
-		desc:Список названий предметов, необходимых для выполнения задачи
-		type:get
-		lockoverride:1
-		return:array[string]:Список названий предметов	
-	" node_met
-	func(getRequiredItemsNames)
-	{
-		objParams();
-		private _names = [];
-		private _allItems = createHashMap;
-		private _cur = null;
-		private _curCount = 0;
-
-		//first pass: get count of each item
-		{
-			_cur = callFunc(_x,getName);
-			if isNullReference(_cur) then {continue};
-			_allItems set [_cur,(_allItems getOrDefault [_cur,0]) + 1];
-		} foreach getSelf(__objRefs);
-
-		{
-			_cur = getFieldBaseValueWithMethod(_x,"name","getName");
-			_allItems set [_cur,(_allItems getOrDefault [_cur,0]) + 1];
-		} foreach getSelf(__objRefs);
-
-		//second pass: get names of items with count postfix
-		{
-			_cur = callFunc(_x,getName);
-			if !(_cur in _allItems) then {continue};
-
-			_curCount = _allItems get _cur;
-
-			if (_curCount > 1) then {
-				_names pushBack format["%1 (x%2)",_cur,_curCount];
-				_allItems deleteAt _cur;
-			} else {
-				_names pushBack _cur;
-			};
-		} foreach getSelf(__objRefs);
-
-		{
-			_cur = getFieldBaseValueWithMethod(_x,"name","getName");
-			if !(_cur in _allItems) then {continue};
-
-			_curCount = _allItems get _cur;
-
-			if (_curCount > 1) then {
-				_names pushBack format["%1 (x%2)",_cur,_curCount];
-				_allItems deleteAt _cur;
-			} else {
-				_names pushBack _cur;
-			};
-		} foreach getSelf(__typeList);
-		assert_str(count _allItems == 0,"Logic error: Unknown item in task: " + str _allItems);
-		_names
-	};
+	getterconst_func(__onerr_requiredTypeStr,"Item");
+	func(checkTypeReference) { objParams_1(_o); isTypeOf(_o,Item) };
+	func(checkTypeName) { objParams_1(_o); isTypeNameOf(_o,Item) };
 
 	_tDelegate = {
 		private _names = callSelf(getRequiredItemsNames);
