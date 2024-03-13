@@ -108,32 +108,32 @@ class(BasicMob) extends(GameObject)
 	
 	var(tasks,[]);
 
-	// "
-	// 	name:Добавить задачу
-	// 	desc:Добавляет персонажу новую задачу. Возвращает результат добавления задачи. Если она была добавлена для персонажа - возвращает ИСТИНУ.
-	// 	type:method
-	// 	lockoverride:1
-	// 	in:TBase:Задача:Добавляемая задача для персонажа
-	// 	in:TaskParamsProvider:Параметры задачи:Параметры выполнения задачи
-	// 	return:bool:Была ли задача успешно добавлена.
-	// " node_met
+	"
+		name:Добавить задачу
+		desc:Добавляет персонажу новую задачу. Возвращает результат добавления задачи. Если она была добавлена для персонажа - возвращает ИСТИНУ.
+		type:method
+		lockoverride:1
+		in:TaskBase:Задача:Добавляемая задача для персонажа
+		return:bool:Была ли задача успешно добавлена.
+	" node_met
 	func(addTask)
 	{
-		objParams_2(_v,_ctx);
-		setLastError("Task system TODO rewrite");
+		objParams_1(_v);
 
-		if (equalTypes(_v,"") && {!isTypeNameOf(_v,TBase)}) exitwith {
-			errorformat("Cant add task %1 for %2 <%3> - task does not exists",_v arg getSelf(pointer) arg callSelf(getClassName));
-			false
-		};
-		if (equalTypes(_v,nullPtr) && {!isTypeOf(_v,TBase)}) exitWith {
+		if isNullReference(_v) exitWith {
+			setLastError("Task reference is null");
 			errorformat("Cant add task object %1 for %2 <%3>",_v arg getSelf(pointer) arg callSelf(getClassName));
 			false
 		};
-		private _t = ifcheck(equalTypes(_v,""),instantiate(_v),_v);
+
+		if !isTypeOf(_v,TaskBase) exitWith {
+			assert_str(false,format vec2("Invalid task type %1 for mob %2",callFunc(_v,getClassName) arg this));
+			false;
+		};
+		
 		getSelf(tasks) pushBack _t;
-		callFuncParams(_t,onTaskAdded,this);
-		callFuncParams(_t,handleTaskAddedParams,_ctx);
+		callFuncParams(_t,onRegisterInTarget,this);
+		
 		true
 	};
 

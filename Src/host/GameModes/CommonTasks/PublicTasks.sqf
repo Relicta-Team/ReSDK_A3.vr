@@ -3,6 +3,22 @@
 // sdk.relicta.ru
 // ======================================================
 
+//! кастомная задача для обратной совместимости
+editor_attribute("NodeClass") //internal attribute - no collect to renode
+class(TaskCustom) extends(TaskBase)
+	var(checkCompleteOnEnd,false);
+	getter_func(checkCompleteOnEnd,getSelf(checkCompleteOnEnd));
+
+	func(onTaskCheck)
+	{
+		objParams_1(_owner);
+		if ([this,_owner] call getSelf(_customCondition)) then {
+			callSelfParams(setTaskResult,1);
+		};
+	};
+
+endclass
+
 
 class(GameObjectKindTask) extends(TaskBase)
 

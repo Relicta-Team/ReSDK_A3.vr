@@ -61,7 +61,7 @@ class(TaskBase) extends(IGameEvent)
 	func(constructor)
 	{
 		objParams();
-		assert_str(callSelf(getParentClassName)!="TaskBase","Abstract task cannot be created");
+		//assert_str(callSelf(getParentClassName)!="TaskBase","Abstract task cannot be created");
 		private _nf = {
 			objParams();
 			if (count getSelf(owners) == 0) exitWith {
@@ -257,6 +257,13 @@ class(TaskBase) extends(IGameEvent)
 	{
 		objParams();
 		private _singleCheck = getSelf(isTaskSingleCheck);
+		private _failOnDead = getSelf(failTaskOnDeadOwner);
+		private _ownerLen = count getSelf(owners);
+		if (_failOnDead && {{getVar(_x,isDead)}count getSelf(owners) >= ifcheck(_singleCheck,1,_ownerLen)}) exitWith {
+			if (getSelf(isDone) || getSelf(result)!=0) exitWith {};	
+			callSelfParams(setTaskResult,-5);
+		};
+
 		{
 			callSelfParams(onTaskCheck,_x);
 
@@ -278,6 +285,7 @@ class(TaskBase) extends(IGameEvent)
 	func(onTaskCheck)
 	{
 		objParams_1(_owner);
+
 	};
 
 	"
@@ -301,6 +309,14 @@ class(TaskBase) extends(IGameEvent)
 			};
 		};
 	};
+
+	"
+		name:Провал при смерти владельцев
+		desc:Задача, в котоой это значение ИСТИНА - будет автоматически провалена с результатом -5, если погибли все её владельцы. Обратите внимание, что со значением ИСТИНА узла 'Единоразовая проверка условий' для провала задачи должен погибнуть хотя бы один её владелец.
+		prop:all
+		return:bool:Провал при смерти владельцев
+	" node_var
+	var(failTaskOnDeadOwner,true);
 
 	//вызывается автоматически при задаче с checkCompleteOnEnd, либо при пользовательской проверке на завершение
 	func(onTaskDone)
