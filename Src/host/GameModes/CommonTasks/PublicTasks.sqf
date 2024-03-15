@@ -344,7 +344,7 @@ class(TaskItemPlace) extends(ItemKindTask)
 
 		private _fnRefs = {
 			params ["_owner","_it"];
-			(calFunc(_it,getPos) distance _origPos) <= _rad
+			(callFunc(_it,getPos) distance _origPos) <= _rad
 		};
 		private _fnTypes = {
 			params ["_owner","_it"];

@@ -451,7 +451,7 @@ renode_invokeDelegate = {
     if (isNullReference(_oct__ select 0 select 0)) exitWith {null};
     
     //args: [[obj],ctx]
-    private _p__ = [[_oct__ select 0],_oct__ select 1]
+    private _p__ = [[_oct__ select 0],_oct__ select 1];
     //args: [[obj,...],ctx]
     (_p__ select 0) apply _args;
     //call code and return
