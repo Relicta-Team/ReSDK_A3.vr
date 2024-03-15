@@ -371,37 +371,39 @@ func(seatDisconnect)
 	true
 };
 
-getter_func(canUseMainAction,isTypeOf(_usr,Mob));
-getter_func(getMainActionName,"Сесть");
-func(onMainAction) {
-	objParams_1(_usr);
-	
-	callSelfParams(seatConnect,_usr);
-};
-
-func(onClick)
-{
-	objParams_1(_usr);
-	if callFunc(_usr,isGrabbedInActiveHand) exitWith {
-		private _m = callFunc(_usr,getGrabbedInActiveHand);
-		if isNullReference(_m) exitWith {};
-		private _idx = callSelfParams(getNearFreeSeatIndex,_usr);
-		callSelfParams(seatConnect,_m arg _idx);
+if isNullVar(__iseat_node_init__) then {
+	getter_func(canUseMainAction,isTypeOf(_usr,Mob));
+	getter_func(getMainActionName,"Сесть");
+	func(onMainAction) {
+		objParams_1(_usr);
+		
+		callSelfParams(seatConnect,_usr);
 	};
-	super();
-};
 
-
-func(getSeatRestPos)
-{
-	objParams_1(_usr);
-	
-	if equalTypes(_usr,nullPtr) then {
-		_usr = getSelf(seatListOwners) find _usr;
+	func(onClick)
+	{
+		objParams_1(_usr);
+		if callFunc(_usr,isGrabbedInActiveHand) exitWith {
+			private _m = callFunc(_usr,getGrabbedInActiveHand);
+			if isNullReference(_m) exitWith {};
+			private _idx = callSelfParams(getNearFreeSeatIndex,_usr);
+			callSelfParams(seatConnect,_m arg _idx);
+		};
+		super();
 	};
-	if (_usr == -1) exitWith {null};
-	
-	private _rplObj = getSelf(_seatListDummy) select _usr;
-	private _restPos = _rplObj getVariable "_restPos";
-	_restPos
+
+
+	func(getSeatRestPos)
+	{
+		objParams_1(_usr);
+		
+		if equalTypes(_usr,nullPtr) then {
+			_usr = getSelf(seatListOwners) find _usr;
+		};
+		if (_usr == -1) exitWith {null};
+		
+		private _rplObj = getSelf(_seatListDummy) select _usr;
+		private _restPos = _rplObj getVariable "_restPos";
+		_restPos
+	};
 };
