@@ -39,6 +39,112 @@ node_system_group("internal")
 
 node_system_group("operators")
 	
+// lambdas and local functions
+	"
+		node:lambda
+		name:Создать функцию
+		color:Operator
+		icon:data\\icons\\icon_BluePrintEditor_Function_16px
+		desc:Создаёт анонимную функцию, которую можно вызывать из любого места в графе. Для создания параметров и установки возвращаемого значения нажмите ПКМ по функции.
+		path:Локальные функции и события
+		exec:pure
+		runtimeports:1
+		out:function[anon=null]:lambda_ref:Ссылка на функцию
+			opt:dname=1
+		out:Exec:Выполнение:Действия, выполняемые создаваемой функцией
+			opt:dname=0:mul=0
+		code:{@genport.out.3(paramGen) @out.2}
+	" node_system
+
+	//! not implemented, context passing is not supported
+	// "
+	// 	node:lambda_obj
+	// 	name:Создать делегат
+	// 	namelib:Создать объектную функцию (делегат)
+	// 	color:Operator
+	// 	icon:data\\icons\\icon_BluePrintEditor_Function_16px
+	// 	desc:Создает объектную функцию. Эта функция может использовать контекст из места определения. Для добавления параметров, установки возвращаемого значения и источника (цели) функции нажмите ПКМ по функции.
+	// 	exec:pure
+	// 	runtimeports:1
+	// 	in:auto:Объект:Владелец вызываемой функции
+	// 		opt:typeget=value;@type:allowtypes=object^
+	// 	out:function[obj=null=object^]:lambda_ref:Ссылка на функцию
+	// 		opt:dname=1
+	// 	out:Exec:Выполнение:Действия, выполняемые создаваемой функцией
+	// 		opt:dname=0:mul=0
+	// 	out:auto:Цель:Выполняющий владелец функции
+	// 	code:[[@in.1,@context.get],{params[""_p"",""_ct""];_p @genport.out.4(paramGen) _ct @context.alloc; @out.2}]
+	// " node_system
+
+	"
+		node:lambda_event
+		name:Создать функцию-действие
+		color:Operator
+		icon:data\\icons\\icon_BluePrintEditor_Function_16px
+		desc:Создает выполняемое действие над объектом. Для добавления параметров и установки возвращаемого значения нажмите ПКМ по функции.
+		exec:pure
+		runtimeports:1
+		out:function[event=null=object^]:lambda_ref:Ссылка на функцию
+			opt:dname=1
+		out:Exec:Выполнение:Действия, выполняемые создаваемой функцией
+			opt:dname=0:mul=0
+		out:object^:Цель:Выполняющий владелец функции
+		code:{@genport.out.3(paramGen) @out.2}
+	" node_system
+
+	"
+		node:lambda_eventlist
+		name:Создать событие
+		color:Operator
+		icon:data\\icons\\icon_BluePrintEditor_Function_16px
+		desc:Создает выполняемое событие. Для добавления параметров и уст
+		exec:pure
+		runtimeports:1
+		out:function[eventlist=null=object^]:lambda_ref:Ссылка на функцию
+			opt:dname=1
+		out:Exec:Выполнение:Действия, выполняемые создаваемой функцией
+			opt:dname=0:mul=0
+		out:object^:Цель:Выполняющий владелец функции
+		code:{@genport.out.3(paramGen) @out.2}
+	" node_system
+
+// call localfunctions
+	"
+		name:Вызвать функцию
+		desc:Вызывает анонимную функцию, объектную или событие.
+		color:Operator
+		icon:data\\icons\\icon_BluePrintEditor_Function_16px
+		path:Локальные функции и события.Выполнение
+		exec:pure
+		runtimeports:1
+		code:[@genport.in.2(,)]call(@in.1)
+		in:function_ref:Функция
+	" node_system
+
+	"
+		node:call_lambda_list
+		name:Вызвать событие
+		desc:Вызывает пользовательское событие.
+		color:Operator
+		icon:data\\icons\\icon_BluePrintEditor_Function_16px
+		exec:all
+		runtimeports:1
+		code:_pcl__=[@genport.in.3(,)];{_pcl__ call _x} foreach (@in.2); @out.1
+		in:function_ref:Функция
+	" node_system
+
+	"
+		node:call_lambda_delegate
+		name:Вызывать делегат
+		desc:Вызывает делегат и возвращает значение при наличии. Если объект-владелец делегата не существует - ничего не произойдёт. В случае если делегат должен возвращать значение и объект-владелец не существует - возвращается null-значение.
+		color:Operator
+		icon:data\\icons\\icon_BluePrintEditor_Function_16px
+		exec:pure
+		runtimeports:1
+		code:[@in.1,[@genport.in.2(,)]] call renode_invokeDelegate
+		in:function_ref:Делегат
+	" node_system
+
 	_baseOpPath = "Операторы";
 	//!not need=> out:Exec:После условия:Всегда посылает импульс после выполнения ветки вне зависимости от условия ""Истина"" или ""Ложь"".
 	"
@@ -201,7 +307,6 @@ node_system_group("operators")
 		code:break
 		exec:in
 	" node_system
-	
 
 //variables
 node_system_group("variable")

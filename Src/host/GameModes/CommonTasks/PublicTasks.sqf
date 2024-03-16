@@ -456,7 +456,7 @@ class(CounterKindTask) extends(TaskBase)
 	"
 		name:Количественная задача
 		desc:Тип задачи, работающий с количеством чего-либо
-		path:Игровая логика.Задачи
+		path:Игровая логика.Задачи.Количественные
 	" node_class
 	
 	var(name,"Counter task");
@@ -518,7 +518,7 @@ class(LocationKindTask) extends(TaskBase)
 	"
 		name:Локационная задача
 		desc:Задача, относящаяся к локациям
-		path:Игровая логика.Задачи
+		path:Игровая логика.Задачи.Локационные
 	" node_class
 	
 	var(name,"Location task");
@@ -566,7 +566,7 @@ class(RoleKindTask) extends(TaskBase)
 	"
 		name:Ролевая задача
 		desc:Задача, относящаяся к ролям
-		path:Игровая логика.Задачи
+		path:Игровая логика.Задачи.Ролевые
 	" node_class
 	
 	var(name,"Role task");
@@ -624,6 +624,11 @@ class(TaskGetRole) extends(RoleKindTask)
 endclass
 
 class(TaskRoleDead) extends(RoleKindTask)
+	"
+		name:Убийство ролей
+		desc:Задача на убийство ролей
+		path:Игровая логика.Задачи
+	" node_class
 	var(name,"Убийство ролей");
 	var(desc,"Убийство ролей");
 	var(descRoleplay,"Устранить - %1");

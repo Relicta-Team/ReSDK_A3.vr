@@ -52,9 +52,6 @@ taskSystem_map_tags = createHashMap; //map of all tagged tasks
 	TODO StatusEffectGetTask -
 */
 
-//todo remove legacy task
-#include "__old_tasks.sqf"
-
 editor_attribute("ColorClass" arg "1370A2")
 class(TaskBase) extends(IGameEvent)
 
@@ -81,7 +78,7 @@ class(TaskBase) extends(IGameEvent)
 	"
 		name:Задача
 		desc:Базовая игровая задача для персонажа
-		path:Игровая логика.Задачи
+		path:Игровая логика.Задачи.Общее
 	" node_class
 
 	"
@@ -358,6 +355,7 @@ class(TaskBase) extends(IGameEvent)
 		desc:Создает копию задачи. Тэг и владельцы задачи не копируются.
 		type:method
 		lockoverride:1
+		return:BasicTask:Копия задачи
 	" node_met
 	func(copyTask)
 	{
@@ -375,6 +373,8 @@ class(TaskBase) extends(IGameEvent)
 			};
 			setVarReflect(_instance,_x,_temp);
 		} foreach _fnamesUpdate;
+
+		_instance
 	};
 
 endclass

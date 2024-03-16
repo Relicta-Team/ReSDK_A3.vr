@@ -42,7 +42,7 @@ node_func(taskSystem_hasTaskByTag) = {
 	desc:Возвращает список задач с указанным тэгом. Если задач с таким тэгом не найдено - возвращается пустой массив.
 	exec:pure
 	in:string:Тэг:Проверяемый тэг задач
-	out:array[TBase]:Задачи:Список задач с указанным тэгом.
+	out:array[TaskBase]:Задачи:Список задач с указанным тэгом.
 "
 node_func(taskSystem_getAllTasksByTag) = {
 	params ["_tag"];
@@ -55,7 +55,7 @@ node_func(taskSystem_getAllTasksByTag) = {
 	desc:Возвращает первую задачу с указанным тэгом. Если задач с указанным тэгом не существует - возвращает null-объект.
 	exec:pure
 	in:string:Тэг:Проверяемый тэг задач
-	out:TBase:Задача:Первая задача с указанным тэгом.
+	out:TaskBase:Задача:Первая задача с указанным тэгом.
 "
 node_func(taskSystem_getFirstTaskByTag) = {
 	params ["_tag"];
@@ -87,4 +87,19 @@ node_func(taskSystem_hasAllSuccessTaskByTag) = {
 	params ["_tag"];
 	if isNullReference(gm_currentMode) exitWith {false};
 	callFuncParams(gm_currentMode,hasAllSuccessTaskByTag,_tag);
+};
+
+"
+	name:Создать задачу
+	desc:Создает настраиваемый объект задачи, который можно присваивать определенным персонажам
+	exec:all
+	in:classname:Тип:Тип создаваемой задачи
+		opt:def=TaskBase:typeset_out=Задача
+	out:TaskBase:Задача:Созданная задача
+" 
+node_func(taskSystem_createTask) = {
+	params ["_typename"];
+	private _instance = instantiate(_typename);
+
+	_instance;
 };
