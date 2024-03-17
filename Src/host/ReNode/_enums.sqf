@@ -158,8 +158,10 @@ nodeModule_setRenderType("NoHeaderText")
 
 [
 	"enumGetNames","Имена перечислений:Получить имена перечислений",
-	"values enum_vToK_@gettype.in.1.clear_type()","auto:Перечисление",
-	"list[string]:Массив имён:Массив имён перечисления",
+	"values enum_vToK_@gettype.in.1.clear_type()",
+	"auto:Перечисление"
+		opt "typeget=value;@type:allowtypes=*enum",
+	"array[string]:Массив имён:Массив имён перечисления",
 	"Этот узел позволяет получать список имен, хранящихся в перечислении."
 ] reg_unary
 
@@ -168,7 +170,6 @@ nodeModule_setRenderType("NoHeaderText")
 	"(+enum_values_@gettype.in.1.clear_type())",
 	"auto:Перечисление"
 		opt "typeget=value;@type:allowtypes=*enum",
-	"auto:Массив значений:Массив значений перечисления"
-		opt "typeget=array;@type",
+	"array[int]:Массив значений:Массив значений перечисления",
 	"Этот узел позволяет получать список значений перечислений, хранящихся в перечислении."
 ] reg_unary

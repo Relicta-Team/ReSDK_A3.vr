@@ -132,11 +132,11 @@ _op = {
         desc:Ограничивает входное число диапазоном между нижней и верхней границей
         code:[@in.1,@in.2,@in.3]call clampNumber
         in:auto:Число
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:def=0:custom=1:custom_type=float:require=0
         in:auto:Нижняя граница
-            opt:typeget=value;@type:allowtypes=int|float:def=0
+            opt:typeget=value;@type:allowtypes=int|float:def=0:custom=1:custom_type=float:require=0
         in:auto:Верхняя граница
-            opt:typeget=value;@type:allowtypes=int|float:def=1
+            opt:typeget=value;@type:allowtypes=int|float:def=1:custom=1:custom_type=float:require=0
         out:float:Результат
             opt:typeget=value;@type:allowtypes=int|float
 " node_system
