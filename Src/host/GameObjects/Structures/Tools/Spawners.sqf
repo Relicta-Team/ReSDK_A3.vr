@@ -49,6 +49,7 @@ getSpawnPosByName = {
 		errorformat("getSpawnPosByName() - cant find spawnpos '%1'",_name);
 		_def
 	};
+	
 	getPosAtl getVar(_obj,loc)
 };
 
@@ -59,6 +60,7 @@ getSpawnDirByName = {
 		errorformat("getSpawnPosByName() - cant find spawnpos '%1'",_name);
 		_def
 	};
+
 	getDir getVar(_obj,loc)
 };
 
@@ -67,6 +69,7 @@ getRandomSpawnPosByName = {
 
 	private _wobj = [_pos] call getRandomSpawnObjectByName;
 	if isNullReference(_wobj) exitWith {_defpos};
+
 	getPosAtl getVar(_wobj,loc)
 
 };
@@ -75,6 +78,7 @@ getRandomSpawnDirByName = {
 
 	private _wobj = [_pos] call getRandomSpawnObjectByName;
 	if isNullReference(_wobj) exitWith {_dir};
+
 	getDir getVar(_wobj,loc)
 };
 
@@ -102,13 +106,12 @@ getRandomSpawnObjectByName = {
 	private _posList = spawnPos_internal_map_equalCollections get _name;
 	if isNullVar(_posList) exitWith {
 		errorformat("getRandomSpawnObjectByName() - cant find spawnpos '%1'",_name);
-		if (_returnList) exitWith {[]};
 		
+		if (_returnList) exitWith {[]};
 		nullPtr
 	};
 	
 	if (_returnList) exitWith {array_copy(_posList)};
-
 	pick _posList
 };
 
