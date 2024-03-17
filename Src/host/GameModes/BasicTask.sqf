@@ -142,7 +142,7 @@ class(TaskBase) extends(IGameEvent)
 		name:Обработчик описания задачи
 		desc:Вызываемая функция вывода описания задачи. Обычно в этой функции вычисляются форматируемые значения (например, список объектов). Чтобы посмотреть исходную строку выведите в консоли 'Ролевое описание задачи'.
 		prop:all
-		return:function[event=string=BasicTask^]:Описание задачи
+		return:function[event=string=TaskBase^]:Описание задачи
 	" node_var
 	var(_taskDescDelegate,{getSelf(descRoleplay)});
 	func(getTaskDescription)
@@ -275,7 +275,7 @@ class(TaskBase) extends(IGameEvent)
 		name:Дополнительные условия
 		desc:Дополнительные условия, которые должны быть выполнены для проверки задачи. Первый параметр - вызывающий событие объект (Задача), второй параметр - владелец задачи (Моб).
 		prop:all
-		return:function[event=bool=BasicTask^@Mob^]:Условие проверки задачи
+		return:function[event=bool=TaskBase^@Mob^]:Условие проверки задачи
 	" node_var
 	var(_customCondition,{true});
 
@@ -339,14 +339,14 @@ class(TaskBase) extends(IGameEvent)
 		name:Обработчик успешного выполнения задачи
 		desc:Вызывается при успешном выполнении задачи для каждого владцельца.
 		prop:all
-		return:function[event=null=BasicTask^@Mob^@int]:Обработчик успешного выполнения задачи
+		return:function[event=null=TaskBase^@Mob^@int]:Обработчик успешного выполнения задачи
 	" node_var
 	var(_taskOnSuccessDeletage,{});
 	"
 		name:Обработчик провала задачи
 		desc:Вызывается при провале задачи для каждого владельца.
 		prop:all
-		return:function[event=null=BasicTask^@Mob^@int]:Обработчик провала задачи
+		return:function[event=null=TaskBase^@Mob^@int]:Обработчик провала задачи
 	" node_var
 	var(_taskOnFailDeletage,{});
 
@@ -355,7 +355,7 @@ class(TaskBase) extends(IGameEvent)
 		desc:Создает копию задачи. Тэг и владельцы задачи не копируются.
 		type:method
 		lockoverride:1
-		return:BasicTask:Копия задачи
+		return:TaskBase:Копия задачи
 	" node_met
 	func(copyTask)
 	{
