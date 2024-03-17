@@ -1691,7 +1691,15 @@ region(Sound helpers)
 	func(playSoundLocal)
 	{
 		params ['this',"_path",["_pitch",1],["_maxDist",50],["_vol",1],"_atPos"];
-		private _source = ifcheck(!isNullVar(_atPos),_atPos,callSelf(getBasicLoc));
+		private _source = if(!isNullVar(_atPos)) then {
+			if equalTypes(_atPos,nullPtr) then {
+				callFunc(_atPos,getBasicLoc)
+			} else {
+				_atPos
+			};
+		} else {
+			callSelf(getBasicLoc)
+		};
 
 		private _data = [_path arg _source arg _vol arg _pitch arg _maxDist];
 		callSelfParams(sendInfo,"sl_p" arg _data);
