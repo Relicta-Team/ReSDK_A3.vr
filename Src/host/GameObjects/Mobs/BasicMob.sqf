@@ -1686,7 +1686,7 @@ region(Sound helpers)
 		in:float:Громкость:Громкость звука. Не рекомендуется менять это значение
 			opt:def=1
 		in:auto:Источник:Источник звука. Если не указан, то звук воспроизведется из позиции вызывающего моба.
-			opt:require=0:typeget=value;@type:allowtypes=GameObject
+			opt:require=0:typeget=value;@type:allowtypes=GameObject^|vector3
 	" node_met
 	func(playSoundLocal)
 	{
