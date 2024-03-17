@@ -110,6 +110,7 @@ node_system_group("operators")
 
 // call localfunctions
 	"
+		node:call_lambda
 		name:Вызвать функцию
 		desc:Вызывает анонимную функцию, объектную или событие.
 		color:Operator
@@ -133,17 +134,18 @@ node_system_group("operators")
 		in:function_ref:Функция
 	" node_system
 
-	"
-		node:call_lambda_delegate
-		name:Вызывать делегат
-		desc:Вызывает делегат и возвращает значение при наличии. Если объект-владелец делегата не существует - ничего не произойдёт. В случае если делегат должен возвращать значение и объект-владелец не существует - возвращается null-значение.
-		color:Operator
-		icon:data\\icons\\icon_BluePrintEditor_Function_16px
-		exec:pure
-		runtimeports:1
-		code:[@in.1,[@genport.in.2(,)]] call renode_invokeDelegate
-		in:function_ref:Делегат
-	" node_system
+	// delegate call is not supported
+	// "
+	// 	node:call_lambda_delegate
+	// 	name:Вызвать делегат
+	// 	desc:Вызывает делегат и возвращает значение при наличии. Если объект-владелец делегата не существует - ничего не произойдёт. В случае если делегат должен возвращать значение и объект-владелец не существует - возвращается null-значение.
+	// 	color:Operator
+	// 	icon:data\\icons\\icon_BluePrintEditor_Function_16px
+	// 	exec:pure
+	// 	runtimeports:1
+	// 	code:[@in.1,[@genport.in.2(,)]] call renode_invokeDelegate
+	// 	in:function_ref:Делегат
+	// " node_system
 
 	_baseOpPath = "Операторы";
 	//!not need=> out:Exec:После условия:Всегда посылает импульс после выполнения ветки вне зависимости от условия ""Истина"" или ""Ложь"".
