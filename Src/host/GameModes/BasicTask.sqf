@@ -236,12 +236,18 @@ class(TaskBase) extends(IGameEvent)
 
 	var(_taskHandle__,-1);
 
-	func(destructor)
+	func(terminateUpdateProcess)
 	{
+		objParams();
 		if (getSelf(_taskHandle__)!=-1) then {
 			stopUpdate(getSelf(_taskHandle__));
 			setSelf(_taskHandle__,-1);
 		};
+	};
+
+	func(destructor)
+	{
+		callSelf(terminateUpdateProcess);
 		array_remove(taskSystem_allTasks,this);
 	};
 
@@ -320,6 +326,11 @@ class(TaskBase) extends(IGameEvent)
 	{
 		objParams();
 		setSelf(isDone,true);
+
+		if !callSelf(checkCompleteOnEnd) then {
+			callSelf(terminateUpdateProcess);
+		};
+
 		private _tr = getSelf(result);
 		if (_tr > 0) then {
 			{
@@ -337,14 +348,22 @@ class(TaskBase) extends(IGameEvent)
 	// обработчики успешного выполнения и провала
 	"
 		name:Обработчик успешного выполнения задачи
-		desc:Вызывается при успешном выполнении задачи для каждого владцельца.
+		desc:Вызывается при успешном выполнении задачи для каждого владцельца этой задачи."+
+		"\nПараметры функции-действия\:"+
+		"\n - @[TaskBase^ Объект задачи] - владелец функции-действия"+
+		"\n - @[Mob^ Моб] - тот, кому назначена задача."+
+		"\n - @[int Индекс] - номер владельца задачи. Первому мобу, которому была добавлена эта задача индекс будет равен 0, второму - 1 и т.д.
 		prop:all
 		return:function[event=null=TaskBase^@Mob^@int]:Обработчик успешного выполнения задачи
 	" node_var
 	var(_taskOnSuccessDeletage,{});
 	"
 		name:Обработчик провала задачи
-		desc:Вызывается при провале задачи для каждого владельца.
+		desc:Вызывается при провале задачи для каждого владельца этой задачи."+
+		"\nПараметры функции-действия\:"+
+		"\n - @[TaskBase^ Объект задачи] - владелец функции-действия"+
+		"\n - @[Mob^ Моб] - тот, кому назначена задача."+
+		"\n - @[int Индекс] - номер владельца задачи. Первому мобу, которому была добавлена эта задача индекс будет равен 0, второму - 1 и т.д.
 		prop:all
 		return:function[event=null=TaskBase^@Mob^@int]:Обработчик провала задачи
 	" node_var

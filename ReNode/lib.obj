@@ -2926,7 +2926,7 @@ def:m:GameObject.getDistanceTo_0
 
 		name:Дистанция до
 		desc:Получает расстояние до цели в метрах
-		type:method
+		type:get
 		lockoverride:1
 		in:GameObject:Объект-цель:Объект, до которого расчитывается расстояние
 		in:bool:2d расстояние:При включении данной опции расстояние будет вычислено только по двум координатам, т.е. высота не будет учитываться.
@@ -4396,7 +4396,7 @@ def:f:TaskBase.failTaskOnDeadOwner_0
 def:f:TaskBase._taskOnSuccessDeletage_0
 
 		name:Обработчик успешного выполнения задачи
-		desc:Вызывается при успешном выполнении задачи для каждого владцельца.
+		desc:Вызывается при успешном выполнении задачи для каждого владцельца.\nПараметры функции-действия\:\n - @[TaskBase^ Объект задачи] - владелец функции-действия\n - @[Mob^ Моб] - тот, кому назначена задача\n - @[int Индекс] - номер владельца задачи. Первому мобу, которому была добавлена эта задача индекс будет равен 0, второму - 1 и т.д.
 		prop:all
 		return:function[event=null=TaskBase^@Mob^@int]:Обработчик успешного выполнения задачи
 	
@@ -14785,7 +14785,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "tag":{"return": "string"},"name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"_taskDescDelegate":{"return": "unknown_type"},"isTaskSingleCheck":{"return": "bool"},"owners":{"return": "null_array"},"isDone":{"return": "bool"},"checkDelay":{"return": "int"},"result":{"return": "int"},"taskRegistered":{"return": "bool"},"_taskHandle__":{"return": "int"},"_customCondition":{"return": "unknown_type"},"failTaskOnDeadOwner":{"return": "bool"},"_taskOnSuccessDeletage":{"return": "unknown_type"},"_taskOnFailDeletage":{"return": "unknown_type"}}   },
    "methods": { "defined": {
-"constructor":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"setTag":{"return": "<undefined>"},"getTaskDescription":{"return": "<undefined>"},"getOwners":{"return": "<undefined>"},"checkCompleteOnEnd":{"return": "<undefined>"},"onRegisterInTarget":{"return": "<undefined>"},"onTaskRegistered":{"return": "<undefined>"},"updateMethod":{"return": "<undefined>"},"updateMethodInternal":{"return": "<undefined>"},"onTaskCheck":{"return": "<undefined>"},"setTaskResult":{"return": "<undefined>"},"onTaskDone":{"return": "<undefined>"},"copyTask":{"return": "<undefined>"}
+"constructor":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"setTag":{"return": "<undefined>"},"getTaskDescription":{"return": "<undefined>"},"getOwners":{"return": "<undefined>"},"checkCompleteOnEnd":{"return": "<undefined>"},"onRegisterInTarget":{"return": "<undefined>"},"onTaskRegistered":{"return": "<undefined>"},"terminateUpdateProcess":{"return": "<undefined>"},"updateMethod":{"return": "<undefined>"},"updateMethodInternal":{"return": "<undefined>"},"onTaskCheck":{"return": "<undefined>"},"setTaskResult":{"return": "<undefined>"},"onTaskDone":{"return": "<undefined>"},"copyTask":{"return": "<undefined>"}
 }   }
 }
 ,"IInfluenceEvent": {
