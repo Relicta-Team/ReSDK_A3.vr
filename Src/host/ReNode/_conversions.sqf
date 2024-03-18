@@ -57,9 +57,9 @@ format["
 //stringToBool
 (["stringToBool","(trim(@in.1)==""true"")","string:Строка","bool:Булево","Преобразование строки в логическое значение"] call _convFunc) node_system
 //arrayToBool
-(["arrayToBool","(count (@in.1) > 0)","auto:Массив" opt "typeget=array;@type","bool:Булево","Преобразование массива в логическое значение. Пустой массив является ЛОЖЬЮ, не пустой - ИСТИНОЙ."] call _convFunc) node_system
+(["arrayToBool","(count (@in.1) > 0)","auto:Массив" opt "typeget=array;@type","bool:Булево","Преобразование массива в логическое значение. Пустой массив является @[bool ЛОЖЬЮ], не пустой - @[bool ИСТИНОЙ]."] call _convFunc) node_system
 //objectToBool
-(["objectToBool","!ISNULL(@in.1)","object^:Объект","bool:Булево","Преобразование объекта в логическое значение. Валидный (существующий) объект является ИСТИНОЙ, несуществующий (удаленный) - ЛОЖЬЮ."] call _convFunc) node_system
+(["objectToBool","!ISNULL(@in.1)","object^:Объект","bool:Булево","Преобразование объекта в логическое значение. Валидный (существующий) объект является @[bool ИСТИНОЙ], несуществующий (удаленный) - @[bool ЛОЖЬЮ]."] call _convFunc) node_system
 
 //boolToString -> use valueToString
 //(["boolToString","str(@in.1)","bool:Булево","string:Строка","Преобразование логического значения в строку"] call _convFunc) node_system

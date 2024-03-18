@@ -62,7 +62,7 @@ class(BasicMob) extends(GameObject)
 	//some getters
 	"
 		name:Это ребенок
-		desc:Возвращает ИСТИНУ, если сущность является ребенком
+		desc:Возвращает @[bool ИСТИНУ], если сущность является ребенком
 		type:get
 		lockoverride:1
 		return:bool:Это ребенок
@@ -70,7 +70,7 @@ class(BasicMob) extends(GameObject)
 	getter_func(isChild,getSelf(age)<=18);
 	"
 		name:Это мужчина
-		desc:Возвращает ИСТИНУ, если сущность является мужчиной
+		desc:Возвращает @[bool ИСТИНУ], если сущность является мужчиной
 		type:get
 		lockoverride:1
 		return:bool:Это мужчина
@@ -78,7 +78,7 @@ class(BasicMob) extends(GameObject)
 	getter_func(isMale,equals(getSelf(gender),gender_male));
 	"
 		name:Это женщина
-		desc:Возвращает ИСТИНУ, если сущность является женщиной
+		desc:Возвращает @[bool ИСТИНУ], если сущность является женщиной
 		type:get
 		lockoverride:1
 		return:bool:Это женщина
@@ -110,7 +110,7 @@ class(BasicMob) extends(GameObject)
 
 	"
 		name:Добавить задачу
-		desc:Добавляет персонажу новую задачу. Возвращает результат добавления задачи. Если она была добавлена для персонажа - возвращает ИСТИНУ.
+		desc:Добавляет персонажу новую задачу. Возвращает результат добавления задачи. Если она была добавлена для персонажа - возвращает @[bool ИСТИНУ].
 		type:method
 		lockoverride:1
 		in:TaskBase:Задача:Добавляемая задача для персонажа
@@ -612,7 +612,7 @@ region(Connect control events)
 	// Подключен ли к актору какой-нибудь игрок
 	"
 		name:Это игрок
-		desc:Возвращает ИСТИНУ, если за сущность подключен какой-либо клиент (игрок)
+		desc:Возвращает @[bool ИСТИНУ], если за сущность подключен какой-либо клиент (игрок)
 		type:get
 		lockoverride:1
 		return:bool:Подключен ли к мобу клиент
