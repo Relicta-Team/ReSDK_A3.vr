@@ -72,6 +72,7 @@ def:node:operators
 
 def:node:operators
 
+		node:call_lambda
 		name:Вызвать функцию
 		desc:Вызывает анонимную функцию, объектную или событие.
 		color:Operator
@@ -94,19 +95,6 @@ def:node:operators
 		runtimeports:1
 		code:_pcl__=[@genport.in.3(,)];{_pcl__ call _x} foreach (@in.2); @out.1
 		in:function_ref:Функция
-	
-
-def:node:operators
-
-		node:call_lambda_delegate
-		name:Вызывать делегат
-		desc:Вызывает делегат и возвращает значение при наличии. Если объект-владелец делегата не существует - ничего не произойдёт. В случае если делегат должен возвращать значение и объект-владелец не существует - возвращается null-значение.
-		color:Operator
-		icon:data\\icons\\icon_BluePrintEditor_Function_16px
-		exec:pure
-		runtimeports:1
-		code:[@in.1,[@genport.in.2(,)]] call renode_invokeDelegate
-		in:function_ref:Делегат
 	
 
 def:node:operators
@@ -168,7 +156,7 @@ def:node:operators
 		node:while_loop
 		color:Operator
 		name:Цикл
-		desc:Выполнение кода несколько раз пока условие истинно. При поступлении входного имульса выполняется проверка условия. Если оно истнно - выполняется тело цикла. В ином случае выполняется узел, подключенный к выходному порту "При завершении", если таковой подключен.\n<span style='color:red'>Примечание: </span>Обратите внимание, что узел цикла может выполнить тело цикла только 10000 раз. При достижении лимита выполнения цикл остановится. Данное ограничение является особенностью платформы.
+		desc:Выполнение кода несколько раз пока условие истинно. При поступлении входного имульса выполняется проверка условия. Если оно истнно - выполняется тело цикла. В ином случае выполняется узел, подключенный к выходному порту "При завершении", если таковой подключен.\n<span style="color\:red">Примечание\: </span>Обратите внимание, что узел цикла может выполнить тело цикла только 10000 раз. При достижении лимита выполнения цикл остановится. Данное ограничение является особенностью платформы.
 		icon:data\\icons\\icon_Blueprint_Loop_16x
 		code:while {@in.2} do {@out.1}; @out.2
 		in:Exec:Вход
@@ -424,6 +412,20 @@ def:node:array
 
 def:node:array
 
+    node:makeArrayEmpty
+    path:Массивы
+    name:Создать пустой массив
+    namelib:Создание пустого массива
+    desc:Создает пустой массив для возможности заполнения пользователем.
+    icon:data\\icons\\icon_Blueprint_MakeArray_16x.png
+    exec:pure
+    code:[]
+    out:auto:Массив
+        opt:typeget=array;@type
+
+
+def:node:array
+
     node:clearArray
     name:Очистить
     namelib:Очистить массив
@@ -562,7 +564,7 @@ def:node:array
     in:auto:Массив:Ссылка на массив, который будет скопирован.
         opt:typeget=array;@type
     out:auto:Массив:Скопированный массив. Любые изменения в этой копии не будут влиять на исходный массив.
-        opt:typeget=array;@value.1
+        opt:typeget=array;@type
 
 
 def:node:array
@@ -1286,12 +1288,14 @@ def:node:conversion
 
     node:enumToInt
     name:•
-    namelib:Перечилсение -> Число
+    namelib:Перечилсение
+    opt -> Число
     desc:Преобразование значения перечисления в целое число
     rendertype:NoHeaderText
     exec:pure
     code:@in.1
     in:auto:Перечилсение
+    opt:allowtypes=*enum
         opt:custom=0
     out:int:Число
 
@@ -1300,12 +1304,14 @@ def:node:conversion
 
     node:enumToString
     name:•
-    namelib:Перечисление -> Имя
+    namelib:Перечисление
+    opt -> Имя
     desc:Преобразование значения перечисления в его название
     rendertype:NoHeaderText
     exec:pure
     code:enum_vToK_@gettype.in.1 get str(@in.1)
     in:auto:Перечисление
+    opt:allowtypes=*enum
         opt:custom=0
     out:string:Имя
 
@@ -1701,11 +1707,11 @@ def:node:math
         desc:Ограничивает входное число диапазоном между нижней и верхней границей
         code:[@in.1,@in.2,@in.3]call clampNumber
         in:auto:Число
-            opt:typeget=value;@type:allowtypes=int|float
+            opt:typeget=value;@type:allowtypes=int|float:def=0:custom=1:custom_type=float:require=0
         in:auto:Нижняя граница
-            opt:typeget=value;@type:allowtypes=int|float:def=0
+            opt:typeget=value;@type:allowtypes=int|float:def=0:custom=1:custom_type=float:require=0
         in:auto:Верхняя граница
-            opt:typeget=value;@type:allowtypes=int|float:def=1
+            opt:typeget=value;@type:allowtypes=int|float:def=1:custom=1:custom_type=float:require=0
         out:float:Результат
             opt:typeget=value;@type:allowtypes=int|float
 
@@ -2380,7 +2386,8 @@ code:values enum_vToK_@gettype.in.1.clear_type()
 desc:Этот узел позволяет получать список имен, хранящихся в перечислении.
 rendertype:NoHeaderText
 in:auto:Перечисление
-out:list[string]:Массив имён:Массив имён перечисления
+    opt:typeget=value;@type:allowtypes=*enum
+out:array[string]:Массив имён:Массив имён перечисления
 
 def:node:enumhelper
 node:enumGetValues
@@ -2392,8 +2399,7 @@ desc:Этот узел позволяет получать список знач
 rendertype:NoHeaderText
 in:auto:Перечисление
     opt:typeget=value;@type:allowtypes=*enum
-out:auto:Массив значений:Массив значений перечисления
-    opt:typeget=array;@type
+out:array[int]:Массив значений:Массив значений перечисления
 
 def:struct:structs
 node:SpawnPoint
@@ -3408,7 +3414,7 @@ def:m:BasicMob.playSoundLocal_0
 		in:float:Громкость:Громкость звука. Не рекомендуется менять это значение
 			opt:def=1
 		in:auto:Источник:Источник звука. Если не указан, то звук воспроизведется из позиции вызывающего моба.
-			opt:require=0:typeget=value;@type:allowtypes=GameObject
+			opt:require=0:typeget=value;@type:allowtypes=GameObject^|vector3
 	
 def:c:MobWoman
 
@@ -4102,7 +4108,7 @@ def:c:GMBase
 def:c:GameObjectKindTask
 
 		name:Объектная задача
-		desc:Задача, относящаяся к игровым объектам. Например: получение, сохранение и т.д.
+		desc:Задача, относящаяся к игровым объектам. Например\: получение, сохранение и т.д.
 		path:Игровая логика.Задачи.Объектные
 	
 def:f:GameObjectKindTask.__globalRefs_0
@@ -4153,7 +4159,7 @@ def:m:GameObjectKindTask.getObjectNames_0
 def:c:ItemKindTask
 
 		name:Предметная задача
-		desc:Задача, относящаяся к игровым предметам. Например: получение, сохранение и т.д.
+		desc:Задача, относящаяся к игровым предметам. Например\: получение, сохранение и т.д.
 		path:Игровая логика.Задачи.Предметные
 	
 def:c:TaskItemGet
@@ -4176,7 +4182,7 @@ def:c:TaskItemPlace
 	
 def:f:TaskItemPlace.placeName_0
 
-		name:Название месте
+		name:Название места
 		desc:Название места, в которое нужно поместить предметы. Выводится в описании задачи
 		prop:all
 		return:string:Название места
@@ -4270,13 +4276,13 @@ def:c:TaskGetRole
 
 		name:Получить роль
 		desc:Задача на получение роли
-		path:Игровая логика.Задачи
+		path:Игровая логика.Задачи.Ролевые
 	
 def:c:TaskRoleDead
 
 		name:Убийство ролей
 		desc:Задача на убийство ролей
-		path:Игровая логика.Задачи
+		path:Игровая логика.Задачи.Ролевые
 	
 def:f:TaskRoleDead.countDeadNeed_0
 
@@ -4332,7 +4338,7 @@ def:f:TaskBase._taskDescDelegate_0
 		name:Обработчик описания задачи
 		desc:Вызываемая функция вывода описания задачи. Обычно в этой функции вычисляются форматируемые значения (например, список объектов). Чтобы посмотреть исходную строку выведите в консоли 'Ролевое описание задачи'.
 		prop:all
-		return:function[event=string=BasicTask^]:Описание задачи
+		return:function[event=string=TaskBase^]:Описание задачи
 	
 def:f:TaskBase.isTaskSingleCheck_0
 
@@ -4379,7 +4385,7 @@ def:f:TaskBase._customCondition_0
 		name:Дополнительные условия
 		desc:Дополнительные условия, которые должны быть выполнены для проверки задачи. Первый параметр - вызывающий событие объект (Задача), второй параметр - владелец задачи (Моб).
 		prop:all
-		return:function[event=bool=BasicTask^@Mob^]:Условие проверки задачи
+		return:function[event=bool=TaskBase^@Mob^]:Условие проверки задачи
 	
 def:m:TaskBase.setTaskResult_0
 
@@ -4401,14 +4407,14 @@ def:f:TaskBase._taskOnSuccessDeletage_0
 		name:Обработчик успешного выполнения задачи
 		desc:Вызывается при успешном выполнении задачи для каждого владцельца.
 		prop:all
-		return:function[event=null=BasicTask^@Mob^@int]:Обработчик успешного выполнения задачи
+		return:function[event=null=TaskBase^@Mob^@int]:Обработчик успешного выполнения задачи
 	
 def:f:TaskBase._taskOnFailDeletage_0
 
 		name:Обработчик провала задачи
 		desc:Вызывается при провале задачи для каждого владельца.
 		prop:all
-		return:function[event=null=BasicTask^@Mob^@int]:Обработчик провала задачи
+		return:function[event=null=TaskBase^@Mob^@int]:Обработчик провала задачи
 	
 def:m:TaskBase.copyTask_0
 
@@ -4416,7 +4422,7 @@ def:m:TaskBase.copyTask_0
 		desc:Создает копию задачи. Тэг и владельцы задачи не копируются.
 		type:method
 		lockoverride:1
-		return:BasicTask:Копия задачи
+		return:TaskBase:Копия задачи
 	
 def:c:ServerClient
 
@@ -12984,7 +12990,7 @@ $REGION:CLASSMETA
 }
 ,"CollectionSpawnPoint": {
     "baseClass" : "SpawnPoint",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Tools\\Spawners.sqf","line":136},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Tools\\Spawners.sqf","line":151},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -13011,7 +13017,7 @@ $REGION:CLASSMETA
 }
 ,"SpawnPoint": {
     "baseClass" : "IStructNonReplicated",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Tools\\Spawners.sqf","line":104},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Tools\\Spawners.sqf","line":119},
    "fields": { "defined": {
 "model":{"return": "string"},"name":{"return": "null"},"desc":{"return": "null"},"weight":{"return": "null"},"spawnPointName":{"return": "string"}}   },
    "methods": { "defined": {
