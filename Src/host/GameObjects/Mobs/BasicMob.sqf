@@ -125,14 +125,17 @@ class(BasicMob) extends(GameObject)
 			errorformat("Cant add task object %1 for %2 <%3>",_v arg getSelf(pointer) arg callSelf(getClassName));
 			false
 		};
-
+		if (callFunc(_v,getClassName)=="TaskBase") exitWith {
+			setLastError("Задача должна быть наследником от TaskBase");
+			false
+		};
 		if !isTypeOf(_v,TaskBase) exitWith {
 			assert_str(false,format vec2("Invalid task type %1 for mob %2",callFunc(_v,getClassName) arg this));
 			false;
 		};
 		
-		getSelf(tasks) pushBack _t;
-		callFuncParams(_t,onRegisterInTarget,this);
+		getSelf(tasks) pushBack _v;
+		callFuncParams(_v,onRegisterInTarget,this);
 		
 		true
 	};
@@ -778,15 +781,16 @@ region(Mob location info: position; direction; speed)
 		DIR_FRONT
 	};
 
-	"
-		name:Расстояние от моба до цели
-		desc:Получает расстояние от вызывающего моба до цели в метрах. Целью может быть любой игровой объект, включа сущностей. "+
-		"В случае с расстоянием до сущности за конечную точку берется торс сущности. При проверке расстояния до игровых объектов берется центр модели, который помечается значком в редакторе ReEditor.
-		type:method
-		lockoverride:1
-		in:GameObject:Объект-цель:Объект, до которого измеряется расстояние
-		return:float:Расстояние в метрах
-	" node_met
+	//already implemented in GameObject::getDistanceTo
+	// "
+	// 	name:Расстояние от моба до цели
+	// 	desc:Получает расстояние от вызывающего моба до цели в метрах. Целью может быть любой игровой объект, включа сущностей. "+
+	// 	"В случае с расстоянием до сущности за конечную точку берется торс сущности. При проверке расстояния до игровых объектов берется центр модели, который помечается значком в редакторе ReEditor.
+	// 	type:method
+	// 	lockoverride:1
+	// 	in:GameObject:Объект-цель:Объект, до которого измеряется расстояние
+	// 	return:float:Расстояние в метрах
+	// " node_met
 	func(getDistanceTo)
 	{
 		objParams_1(_target);
