@@ -282,6 +282,10 @@ class(GMOldNewOrder) extends(GMExtended)
 				[3824.77,3889.32,24.2702],
 				[3815.28,3829.42,24.4165]
 			];
+			
+			#ifdef EDITOR
+			_stationers = [getSelf(antags) select 0];
+			#endif
 
 			setSelf(hostageNeedPos,["kochevniki"] call getSpawnPosByName);
 			setSelf(hostage,pick _stationers);
@@ -298,7 +302,7 @@ class(GMOldNewOrder) extends(GMExtended)
 			setVar(_t,isTaskSingleCheck,true);
 			setVar(_t,name,"Похищение");
 			setVar(_t,desc,"Выкрасть человека из города.");
-			setVar(_t,descRoleplay,format["Нужно похитить %1. Цель должна выведена из города в ближайшие пещеры." arg callFuncParams(getSelf(hostage),getNameEx,"кого")]);
+			setVar(_t,descRoleplay,format["Нужно похитить %1. Цель должна выведена из города в ближайшие пещеры." arg callFuncParams(getSelf(hostage),getNameEx,"вин")]);
 			setVar(_t,_customCondition,_eventCheck);
 			callFuncParams(_t,setTag,"GMOldNewOrder_task");
 			{
@@ -331,6 +335,10 @@ class(GMOldNewOrder) extends(GMExtended)
 				if (count (getVar(_x call gm_getRoleObject,basicMobs) arrayIntersect getSelf(antags)) > 0) then {_listRolesStr set [_forEachIndex,objnull]};
 			} foreach _listRolesStr;
 			_listRolesStr = _listRolesStr - [objnull];
+
+			#ifdef EDITOR
+			_listRolesStr = ["RAbbat","RKnut","RCaretaker"]; //tests
+			#endif
 
 			private _listRoles = [];
 			{
