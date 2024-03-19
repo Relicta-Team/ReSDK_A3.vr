@@ -385,7 +385,7 @@ Initial value:
 ```sqf
 ["emote","log","act","combat","info","mind","event","system","error","default"]
 ```
-File: [host\GameObjects\GameObject.sqf at line 973](../../../Src/host/GameObjects/GameObject.sqf#L973)
+File: [host\GameObjects\GameObject.sqf at line 974](../../../Src/host/GameObjects/GameObject.sqf#L974)
 ## go_internal_chatMesMapText
 
 Type: Variable
@@ -397,7 +397,7 @@ Initial value:
 ```sqf
 ["Эмоут:Кастомное пользовательское действие",...
 ```
-File: [host\GameObjects\GameObject.sqf at line 974](../../../Src/host/GameObjects/GameObject.sqf#L974)
+File: [host\GameObjects\GameObject.sqf at line 975](../../../Src/host/GameObjects/GameObject.sqf#L975)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
