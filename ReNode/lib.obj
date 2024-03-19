@@ -2464,6 +2464,16 @@ desc:Данная структура предназначена для полу�
 eval:int:Результат:0:Результат конца раунда. Число, равное 0 означает, что раунд не завершен.
 eval:string:Описание:Без описания:Текстовое описание результата конца раунда.
 
+def:struct:structs
+node:NumeralString
+path:Структуры
+name:Слова числительного
+desc:Группа слов для определения количественного числительного. Представляет слова в падеже, зависимом от заданного числа и отвечающим на вопрос 'сколько'?
+
+eval:string:Им.падеж:Штука:Именительный падеж слова. Например 'день'
+eval:string:Род.падеж:Штуки:Родительный падеж слова. Например 'дня'
+eval:string:Предметов:Штук:Множественное число слова. Например 'дней'
+
 def:func:native_functions
 
 	name:Создать объект
@@ -2935,7 +2945,7 @@ def:m:GameObject.getDistanceTo_0
 def:m:GameObject.getSourceLoc_0
 
 		name:Получить источник
-		desc:Получает объект, который владеет этим игровым объектом. Для объекта в контейнере владельцем будет контейнер, для объекта в инвентаре моба - моб. Если объектом никто не владеет возвращает null.
+		desc:Получает объект, который владеет этим игровым объектом. Для объекта в контейнере владельцем будет контейнер, для объекта в инвентаре моба - моб. Если объектом никто не владеет возвращает @[object^ null-ссылку].
 		type:get
 		lockoverride:1
 		return:GameObject:Источник
@@ -3195,6 +3205,15 @@ def:m:BasicMob.addTask_0
 		lockoverride:1
 		in:TaskBase:Задача:Добавляемая задача для персонажа
 		return:bool:Была ли задача успешно добавлена.
+	
+def:m:BasicMob.setToRole_0
+
+		name:Установить роль мобу
+		desc:Устанавливает новую роль для моба.
+		type:method
+		lockoverride:1
+		in:classname:Роль:Новая роль моба
+			opt:def=ScriptedRole
 	
 def:m:BasicMob.isPlayer_0
 
@@ -4220,6 +4239,14 @@ def:f:CounterKindTask.counter_0
 		prop:all
 		defval:1
 	
+def:f:CounterKindTask.numeralString_0
+
+		name:Количественные названия
+		desc:Количественные названия чего-либо.
+		prop:all
+		defval:['предмет','предмета','предметов']
+		return:struct.NumeralString
+	
 def:c:LocationKindTask
 
 		name:Локационная задача
@@ -4253,6 +4280,7 @@ def:f:RoleKindTask.roleClass_0
 		desc:Тип роли задачи
 		prop:all
 		return:classname:Тип роли
+		defval:ScriptedRole
 		restr:ScriptedRole
 	
 def:f:RoleKindTask.checkChildRoles_0
@@ -4327,7 +4355,7 @@ def:f:TaskBase.descRoleplay_0
 def:f:TaskBase._taskDescDelegate_0
 
 		name:Обработчик описания задачи
-		desc:Вызываемая функция вывода описания задачи. Обычно в этой функции вычисляются форматируемые значения (например, список объектов). Чтобы посмотреть исходную строку выведите в консоли 'Ролевое описание задачи'.\nПараметры функции-действия:\n - @[TaskBase^ Задача] - объект задачи, который производит проверку (вызов функции)\n Возврат: @[string Описание] - текст описания задачи. 
+		desc:Вызываемая функция вывода описания задачи. Обычно в этой функции вычисляются форматируемые значения (например, список объектов). Чтобы посмотреть исходную строку выведите в консоли 'Ролевое описание задачи'.\nПараметры функции-действия\:\n - @[TaskBase^ Задача] - объект задачи, который производит проверку (вызов функции)\n Возврат\: @[string Описание] - текст описания задачи. 
 		prop:all
 		return:function[event=string=TaskBase^]:Описание задачи
 	
@@ -4374,7 +4402,7 @@ def:f:TaskBase.result_0
 def:f:TaskBase._customCondition_0
 
 		name:Дополнительные условия
-		desc:Дополнительные условия, которые должны быть выполнены для проверки задачи. При успешном завершении задачи вызывается событие, определенное в обработчике успешного выполнения задачи.\nПараметры функции-действия:\n - @[TaskBase^ Задача] - объект задачи, который производит проверку (вызов функции)\n - @[Mob^ Владелец] - владелец задачи, которому она назначена\n Возврат: @[bool Булево] - результат проверки условия. Если условие @[bool ИСТИНА], то задача помечается как успешно завершенная.
+		desc:Дополнительные условия, которые должны быть выполнены для проверки задачи. При успешном завершении задачи вызывается событие, определенное в обработчике успешного выполнения задачи.\nПараметры функции-действия\:\n - @[TaskBase^ Задача] - объект задачи, который производит проверку (вызов функции)\n - @[Mob^ Владелец] - владелец задачи, которому она назначена\n Возврат\: @[bool Булево] - результат проверки условия. Если условие @[bool ИСТИНА], то задача помечается как успешно завершенная.
 		prop:all
 		return:function[event=bool=TaskBase^@Mob^]:Условие проверки задачи
 	
@@ -13881,7 +13909,7 @@ $REGION:CLASSMETA
 }
 ,"IDestructible": {
     "baseClass" : "GameObject",
-    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":1208},
+    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":1209},
    "fields": { "defined": {
 "ht":{"return": "int"},"hp":{"return": "int"},"hpMax":{"return": "int"},"dr":{"return": "int"},"drMax":{"return": "int"},"germs":{"return": "int"},"__statusEffects":{"return": "null"},"seatListOwners":{"return": "null_array"},"_seatListDummy":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -14169,7 +14197,7 @@ $REGION:CLASSMETA
 }
 ,"TaskItemSave": {
     "baseClass" : "TaskItemGet",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":285},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":302},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14178,7 +14206,7 @@ $REGION:CLASSMETA
 }
 ,"TaskItemGet": {
     "baseClass" : "ItemKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":255},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":272},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14187,7 +14215,7 @@ $REGION:CLASSMETA
 }
 ,"TaskItemPlace": {
     "baseClass" : "ItemKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":300},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":317},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"placeName":{"return": "string"},"location":{"return": "null_array"},"radius":{"return": "int"}}   },
    "methods": { "defined": {
@@ -14196,16 +14224,16 @@ $REGION:CLASSMETA
 }
 ,"ItemKindTask": {
     "baseClass" : "GameObjectKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":219},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":222},
    "fields": { "defined": {
 "name":{"return": "string"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
-"__onerr_requiredTypeStr":{"return": "<undefined>"},"checkTypeReference":{"return": "<undefined>"},"checkTypeName":{"return": "<undefined>"}
+"__onerr_requiredTypeStr":{"return": "<undefined>"},"checkTypeReference":{"return": "<undefined>"},"checkTypeName":{"return": "<undefined>"},"getRequiredItemsNames":{"return": "<undefined>"}
 }   }
 }
 ,"TaskSelfSave": {
     "baseClass" : "TaskMobSave",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":439},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":455},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14214,7 +14242,7 @@ $REGION:CLASSMETA
 }
 ,"TaskMobKill": {
     "baseClass" : "MobKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":413},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":429},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14223,7 +14251,7 @@ $REGION:CLASSMETA
 }
 ,"TaskMobSave": {
     "baseClass" : "MobKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":425},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":441},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14232,16 +14260,16 @@ $REGION:CLASSMETA
 }
 ,"TaskMoneyGet": {
     "baseClass" : "CounterKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":482},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":509},
    "fields": { "defined": {
-"numeralString":{"return": "null_array"}}   },
+"name":{"return": "string"},"descRoleplay":{"return": "string"},"numeralString":{"return": "null_array"}}   },
    "methods": { "defined": {
 "onTaskCheck":{"return": "<undefined>"},"getCurrentCountValue":{"return": "<undefined>"}
 }   }
 }
 ,"TaskLocationEnter": {
     "baseClass" : "LocationKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":546},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":576},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14250,7 +14278,7 @@ $REGION:CLASSMETA
 }
 ,"TaskGetRole": {
     "baseClass" : "RoleKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":602},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":633},
    "fields": { "defined": {
 "name":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14259,7 +14287,7 @@ $REGION:CLASSMETA
 }
 ,"TaskRoleDead": {
     "baseClass" : "RoleKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":626},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":657},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"countDeadNeed":{"return": "int"}}   },
    "methods": { "defined": {
@@ -14277,7 +14305,7 @@ $REGION:CLASSMETA
 }
 ,"MobKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":372},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":389},
    "fields": { "defined": {
 "name":{"return": "string"},"target":{"return": "object"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
@@ -14286,16 +14314,16 @@ $REGION:CLASSMETA
 }
 ,"CounterKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":455},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":471},
    "fields": { "defined": {
-"name":{"return": "string"},"counter":{"return": "int"},"numeralString":{"return": "null_array"}}   },
+"name":{"return": "string"},"descRoleplay":{"return": "string"},"counter":{"return": "int"},"numeralString":{"return": "null_array"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
 "getNumeralText":{"return": "<undefined>"}
 }   }
 }
 ,"LocationKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":517},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":547},
    "fields": { "defined": {
 "name":{"return": "string"},"position":{"return": "null_array"},"radius":{"return": "int"}}   },
    "methods": { "defined": {
@@ -14304,7 +14332,7 @@ $REGION:CLASSMETA
 }
 ,"RoleKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":565},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":595},
    "fields": { "defined": {
 "name":{"return": "string"},"roleClass":{"return": "string"},"checkChildRoles":{"return": "bool"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {

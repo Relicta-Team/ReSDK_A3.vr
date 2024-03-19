@@ -167,6 +167,14 @@ region(roles management)
 	};
 
 	//Устанавливает новую текущую роль персонажу
+	"
+		name:Установить роль мобу
+		desc:Устанавливает новую роль для моба.
+		type:method
+		lockoverride:1
+		in:classname:Роль:Новая роль моба
+			opt:def=ScriptedRole
+	" node_met
 	func(setToRole)
 	{
 		objParams_1(_roleObj);

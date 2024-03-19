@@ -420,7 +420,6 @@ class(MobKindTask) extends(TaskBase)
 	};
 
 	private _tDelegate = {
-		objParams();
 		private _targ = getSelf(target);
 		format[getSelf(descRoleplay),callFuncParams(_targ,getNameEx,"кто"),callFuncParams(_targ,getNameEx,"вин")]
 	};
@@ -487,8 +486,8 @@ class(CounterKindTask) extends(TaskBase)
 	var(counter,1);
 
 	"
-		name:Текущее количество
-		desc:Текущее количество чего-либо.
+		name:Количественные названия
+		desc:Количественные названия чего-либо.
 		prop:all
 		defval:['предмет','предмета','предметов']
 		return:struct.NumeralString
@@ -502,31 +501,33 @@ class(CounterKindTask) extends(TaskBase)
 	};
 
 	_tDelegate = {
-		objParams();
 		format[getSelf(descRoleplay),callSelf(getNumeralText)]
 	};
 	var_exprval(_taskDescDelegate,_tDelegate);
 endclass
 
 class(TaskMoneyGet) extends(CounterKindTask)
-	
-	var(numeralString,vec3("звяк","предмета","предметов"));
+	var(name,"Заработать");
+	var(descRoleplay,"Нужно накопить %1");
+
+	var(numeralString,vec3("звяк","звяка","звяков"));
 
 	func(onTaskCheck)
 	{
 		objParams_1(_owner);
 
-		private _mon = callSelf(getCurrentCountValue);
-		if (_mon >= getSelf(counter)) then {
+		private _mon = callSelfParams(getCurrentCountValue,_owner);
+		if (_mon >= getSelf(counter) && [this,_owner] call getSelf(_customCondition)) then {
 			callSelfParams(setTaskResult,1);
 		};
 	};
 
 	func(getCurrentCountValue)
 	{
-		objParams();
-		private _monObjs = [getSelf(mob),"Zvak",true] call getAllItemsInInventory;
+		objParams_1(_m);
+		private _monObjs = [_m,"Zvak",true] call getAllItemsInInventory;
 		private _collected = 0;
+		private _stackCount = 0;
 		{
 			_stackCount = getVar(_x,stackCount);
 			if isTypeOf(_x,Bryak) then {
@@ -605,9 +606,10 @@ class(RoleKindTask) extends(TaskBase)
 		desc:Тип роли задачи
 		prop:all
 		return:classname:Тип роли
+		defval:ScriptedRole
 		restr:ScriptedRole
 	" node_var
-	var(roleClass,"");
+	var(roleClass,"ScriptedRole");
 
 	"
 		name:Проверять дочерние роли
