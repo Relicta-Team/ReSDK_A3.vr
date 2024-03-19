@@ -313,7 +313,15 @@ class(TaskBase) extends(IGameEvent)
 		if getSelf(isDone) exitWith {}; //task already done - exit
 		setSelf(result,_tr);
 
-		if (!callSelf(checkCompleteOnEnd) || _endroundCheck) then {
+		private _conditEnd = false;
+		if callSelf(checkCompleteOnEnd) then {
+			//задача проверяется в конце. результат выполняется если: раунд закончен или задача провалена
+			_conditEnd = call gm_isRoundEnding || _tr < 0;
+		} else {
+			_conditEnd = true; //рантайм задачи завершаются при любом раскладе
+		};
+
+		if (_conditEnd || _endroundCheck) then {
 			if (_tr != 0) then {
 				callSelf(onTaskDone);
 			};
@@ -359,7 +367,7 @@ class(TaskBase) extends(IGameEvent)
 		"\nПараметры функции-действия\:"+
 		"\n - @[TaskBase^ Объект задачи] - владелец функции-действия"+
 		"\n - @[Mob^ Моб] - тот, кому назначена задача."+
-		"\n - @[int Индекс] - номер владельца задачи. Первому мобу, которому была добавлена эта задача индекс будет равен 0, второму - 1 и т.д.
+		"\n - @[int Индекс] - номер владельца задачи. Первому мобу, которому была добавлена эта задача индекс будет равен 0, второму 1 и т.д.
 		prop:all
 		return:function[event=null=TaskBase^@Mob^@int]:Обработчик успешного выполнения задачи (функция-действие)
 	" node_var
@@ -370,7 +378,7 @@ class(TaskBase) extends(IGameEvent)
 		"\nПараметры функции-действия\:"+
 		"\n - @[TaskBase^ Объект задачи] - владелец функции-действия"+
 		"\n - @[Mob^ Моб] - тот, кому назначена задача."+
-		"\n - @[int Индекс] - номер владельца задачи. Первому мобу, которому была добавлена эта задача индекс будет равен 0, второму - 1 и т.д.
+		"\n - @[int Индекс] - номер владельца задачи. Первому мобу, которому была добавлена эта задача индекс будет равен 0, второму 1 и т.д.
 		prop:all
 		return:function[event=null=TaskBase^@Mob^@int]:Обработчик провала задачи (функция-действие)
 	" node_var

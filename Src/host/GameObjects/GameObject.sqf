@@ -600,7 +600,7 @@ class(GameObject) extends(ManagedObject)
 	//Находит конечного владельца как GameObject
 	"
 		name:Получить источник
-		desc:Получает объект, который владеет этим игровым объектом. Для объекта в контейнере владельцем будет контейнер, для объекта в инвентаре моба - моб. Если объектом никто не владеет возвращает null.
+		desc:Получает объект, который владеет этим игровым объектом. Для объекта в контейнере владельцем будет контейнер, для объекта в инвентаре моба - моб. Если объектом никто не владеет возвращает @[object^ null-ссылку].
 		type:get
 		lockoverride:1
 		return:GameObject:Источник
@@ -617,7 +617,8 @@ class(GameObject) extends(ManagedObject)
 
 			_curLoc = _probNewLoc;
 		};
-		assert_str(!isNullVar(_probNewLoc) && !isNullReference(_probNewLoc),"Null reference in getSourceLoc() for object " + callSelf(getClassName));
+		
+		if isNullVar(_curLoc) exitWith {nullPtr};
 		//is a normal. not warning
 		/*if equals(_curLoc,this) then {
 			warningformat("%1:getSourceLoc() returns this object",callSelf(getClassName));

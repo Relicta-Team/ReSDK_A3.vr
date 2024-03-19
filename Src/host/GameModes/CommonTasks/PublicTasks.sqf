@@ -109,11 +109,15 @@ class(GameObjectKindTask) extends(TaskBase)
 				_foundNull = true;
 				continue;
 			};
-			_counter = _counter + ([_owner,_x] call _funcref);
+			if ([_owner,_x] call _funcref) then {
+				_counter = _counter + 1;
+			};
 		} foreach getSelf(__objRefs);
 
 		{
-			_counter = _counter + ([_owner,_x] call _functypes);
+			if ([_owner,_x] call _functypes) then {
+				_counter = _counter + 1;
+			};
 		} foreach getSelf(__typeList);
 
 		if (getSelf(failTaskOnItemDestroy) && _foundNull) then {
@@ -121,7 +125,6 @@ class(GameObjectKindTask) extends(TaskBase)
 		};
 		
 		private _custom = [this,_owner] call getSelf(_customCondition);
-
 		if (_counter >= ((count getSelf(__typeList)) + (count getSelf(__objRefs))) && _custom) then {
 			callSelfParams(setTaskResult,1);
 		};
@@ -229,6 +232,20 @@ class(ItemKindTask) extends(GameObjectKindTask)
 	getterconst_func(__onerr_requiredTypeStr,"Item");
 	func(checkTypeReference) { objParams_1(_o); isTypeOf(_o,Item) };
 	func(checkTypeName) { objParams_1(_o); isTypeNameOf(_o,Item) };
+
+	func(getRequiredItemsNames)
+	{
+		objParams();
+		private _names = [];
+		{
+			_names pushBack callFunc(_x,getName);
+		} foreach getSelf(__objRefs);
+
+		{
+			_names pushBack getFieldBaseValueWithMethod(_x,"name","getName");
+		} foreach getSelf(__typeList);
+		_names
+	};
 
 	_tDelegate = {
 		private _names = callSelf(getRequiredItemsNames);
@@ -460,7 +477,7 @@ class(CounterKindTask) extends(TaskBase)
 	" node_class
 	
 	var(name,"Counter task");
-
+	var(descRoleplay,"Нужно накопить %1");
 	"
 		name:Требуемое количество
 		desc:Требуемое количество чего-либо (счетчик задачи)
@@ -469,7 +486,13 @@ class(CounterKindTask) extends(TaskBase)
 	" node_var
 	var(counter,1);
 
-	
+	"
+		name:Текущее количество
+		desc:Текущее количество чего-либо.
+		prop:all
+		defval:['предмет','предмета','предметов']
+		return:struct.NumeralString
+	" node_var
 	var(numeralString,vec3("предмет","предмета","предметов"));
 
 	func(getNumeralText)
@@ -477,6 +500,12 @@ class(CounterKindTask) extends(TaskBase)
 		objParams();
 		[getSelf(counter),getSelf(numeralString),true] call toNumeralString
 	};
+
+	_tDelegate = {
+		objParams();
+		format[getSelf(descRoleplay),callFuncParams(getSelf,getNumeralText)]
+	};
+	var_exprval(_taskDescDelegate,_tDelegate);
 endclass
 
 class(TaskMoneyGet) extends(CounterKindTask)
