@@ -30,9 +30,17 @@ region(Memories)
 
 		if (count getSelf(tasks) > 0) then {
 			_txt = _txt + sbr + "<t size='1.4'>Мои задачи:";
+			private _tpref = "";
 			{
-				//error("Mob::getMemories() - probably error at getting tasks");
-				modvar(_txt) + sbr + format["    %1: %2",getVar(_x,name),callFunc(_x,getDescRoleplay)]
+				_tpref = "";
+				if getVar(_x,isDone) then {
+					if (getVar(_x,result) > 0) then {
+						_tpref = "<t color='#00ff00'>[выполнено] </t>";
+					} else {
+						_tpref = "<t color='#ff0000'>[не выполнено] </t>";
+					};
+				};
+				modvar(_txt) + sbr + format["    %3%1: %2",getVar(_x,name),callFunc(_x,getTaskDescription),_tpref];
 			} foreach getSelf(tasks);
 			
 			modvar(_txt) +"</t>";

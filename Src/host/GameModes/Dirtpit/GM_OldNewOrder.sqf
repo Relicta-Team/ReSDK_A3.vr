@@ -134,26 +134,25 @@ class(GMOldNewOrder) extends(GMExtended)
 
 
 			private _eventCheck = {
-				if (getVar(gm_currentMode,isBlownUp) && !getVar(getSelf(mob),isDead))	then {
-					callSelfParams(taskDone,1);
-				};
+				params ['_task','_mob'];
+				getVar(gm_currentMode,isBlownUp)
 			};
+
+			private _t = new(TaskCustom);
+			setVar(_t,checkCompleteOnEnd,true);
+			setVar(_t,isTaskSingleCheck,true);
+			setVar(_t,name,"Взорвать генератор");
+			setVar(_t,desc,"Взорвать генератор.");
+			setVar(_t,descRoleplay,"Нужно подорвать генератор взрывчаткой"+comma+" которую мы запрятали в земле и между камнями.");
+			setVar(_t,_customCondition,_eventCheck);
+			//setVar(_t,eventOnSuccess,_onSuccess);
+			callFuncParams(_t,setTag,"GMOldNewOrder_task");
 
 			{
 				callFuncParams(_x,addFirstJoinMessage,"Части бомбы мы запрятали в земле"+comma+" серых каменных стенах и зелёном кирпиче..." + sbr +"После добычи и сборки бомб их нужно активировать кусачками.");
 				callFuncParams(_x,addEventClick,"GM_OldNewOrder_getBombPartEvent" arg _handleBombPart);
 
-				private _t = new(CustomTask);
-				setVar(_t,checkOnlyAfterEndRound,true);
-				setVar(_t,stopOnSuccess,true);
-				setVar(_t,name,"Взорвать генератор");
-				setVar(_t,desc,"Взорвать генератор.");
-				setVar(_t,descRoleplay,"Нужно подорвать генератор взрывчаткой"+comma+" которую мы запрятали в земле и между камнями.");
-				setVar(_t,eventCheckCondition,_eventCheck);
-				setVar(_t,eventOnSuccess,_onSuccess);
-				setVar(_t,tag,"GMOldNewOrder_task");
 				callFuncParams(_x,addTask,_t);
-
 			} foreach getSelf(antags);
 		}];
 
@@ -283,29 +282,31 @@ class(GMOldNewOrder) extends(GMExtended)
 				[3824.77,3889.32,24.2702],
 				[3815.28,3829.42,24.4165]
 			];
+			
+			#ifdef EDITOR
+			_stationers = [getSelf(antags) select 0];
+			#endif
 
 			setSelf(hostageNeedPos,["kochevniki"] call getSpawnPosByName);
 			setSelf(hostage,pick _stationers);
 
 			private _eventCheck = {
 				__host = getVar(gm_currentMode,hostage);
-				if (!getVar(__host,isDead) && {!getVar(getSelf(mob),isDead)} && {callFunc(__host,getBasicLoc) distance getVar(gm_currentMode,hostageNeedPos) <= getVar(gm_currentMode,hostageLocationDistance)}) exitwith {
-					callSelfParams(taskDone,1);
-				};
+				(!getVar(__host,isDead) 
+				//&& {!getVar(getSelf(mob),isDead)} 
+				&& {callFunc(__host,getBasicLoc) distance getVar(gm_currentMode,hostageNeedPos) <= getVar(gm_currentMode,hostageLocationDistance)})
 			};
 
+			private _t = new(TaskCustom);
+			setVar(_t,checkCompleteOnEnd,true);
+			setVar(_t,isTaskSingleCheck,true);
+			setVar(_t,name,"Похищение");
+			setVar(_t,desc,"Выкрасть человека из города.");
+			setVar(_t,descRoleplay,format["Нужно похитить %1. Цель должна выведена из города в ближайшие пещеры." arg callFuncParams(getSelf(hostage),getNameEx,"вин")]);
+			setVar(_t,_customCondition,_eventCheck);
+			callFuncParams(_t,setTag,"GMOldNewOrder_task");
 			{
-
-				private _t = new(CustomTask);
-				setVar(_t,checkOnlyAfterEndRound,true);
-				setVar(_t,stopOnSuccess,true);
-				setVar(_t,name,"Похищение");
-				setVar(_t,desc,"Выкрасть человека из города.");
-				setVar(_t,descRoleplay,format["Нужно похитить %1. Цель должна выведена из города в ближайшие пещеры." arg callFuncParams(getSelf(hostage),getNameEx,"кого")]);
-				setVar(_t,eventCheckCondition,_eventCheck);
-				setVar(_t,tag,"GMOldNewOrder_task");
 				callFuncParams(_x,addTask,_t);
-
 			} foreach getSelf(antags);
 
 		}];
@@ -335,6 +336,10 @@ class(GMOldNewOrder) extends(GMExtended)
 			} foreach _listRolesStr;
 			_listRolesStr = _listRolesStr - [objnull];
 
+			#ifdef EDITOR
+			_listRolesStr = ["RAbbat","RKnut","RCaretaker"]; //tests
+			#endif
+
 			private _listRoles = [];
 			{
 				_pickedRole = _x call gm_getRoleObject;
@@ -350,9 +355,7 @@ class(GMOldNewOrder) extends(GMExtended)
 			private _eventCheck = {
 				private _need = getVar(gm_currentMode,needRole);
 				//роль одного из антагов указана текущей
-				if equals(getVar(getVar(gm_currentMode,antags) select 0,role),_need) then {
-					callSelfParams(taskDone,1);
-				};
+				equals(getVar(getVar(gm_currentMode,antags) select 0,role),_need)
 			};
 
 			private _rDesc = "Возьмите на себя роль " + (getSelf(needRole) call {
@@ -363,16 +366,17 @@ class(GMOldNewOrder) extends(GMExtended)
 				if isTypeOf(_this,RCaretaker) exitWith {"смотрителя"};
 				"непонятно кого..."
 			});
+			
+			private _t = new(TaskCustom);
+			//setVar(_t,checkCompleteOnEnd,true);
+			setVar(_t,isTaskSingleCheck,false); //любой может быть занявшим роль
+			setVar(_t,name,"Занять роль");
+			setVar(_t,desc,"Нужно вступить в новую должность.");
+			setVar(_t,descRoleplay,_rDesc);
+			setVar(_t,_customCondition,_eventCheck);
+			callFuncParams(_t,setTag,"GMOldNewOrder_task");
+			
 			{
-
-				private _t = new(CustomTask);
-				setVar(_t,checkOnlyAfterEndRound,true);
-				setVar(_t,stopOnSuccess,true);
-				setVar(_t,name,"Занять роль");
-				setVar(_t,desc,"Нужно вступить в новую должность.");
-				setVar(_t,descRoleplay,_rDesc);
-				setVar(_t,eventCheckCondition,_eventCheck);
-				setVar(_t,tag,"GMOldNewOrder_task");
 				callFuncParams(_x,addTask,_t);
 
 			} foreach [getSelf(antags) select 0];
@@ -395,24 +399,23 @@ class(GMOldNewOrder) extends(GMExtended)
 		},{
 
 			private _eventCheck = {
+				params ['this',"_mob"];
 				private _kochPos = ["kochevniki"] call getSpawnPosByName;
-				if (!getVar(getSelf(mob),isDead) && {
-					callFunc(getSelf(mob),getPos) distance (_kochPos) <= 40
-				}) exitwith {
-					callSelfParams(taskDone,1);
-				};
+				!getVar(_mob,isDead) && {
+					callFunc(_mob,getPos) distance (_kochPos) <= 40
+				}
 			};
 
-			{
+			private _t = new(TaskCustom);
+			setVar(_t,checkCompleteOnEnd,true);
+			setVar(_t,isTaskSingleCheck,false);
+			setVar(_t,name,"Побег");
+			setVar(_t,desc,"Покинуть город через пещеры.");
+			setVar(_t,descRoleplay,"Нужно сбежать из Грязноямска. Точка сбора - пещеры на выходе из Бомжграда");
+			setVar(_t,_customCondition,_eventCheck);
+			setVar(_t,tag,"GMOldNewOrder_task");
 
-				private _t = new(CustomTask);
-				setVar(_t,checkOnlyAfterEndRound,true);
-				setVar(_t,stopOnSuccess,true);
-				setVar(_t,name,"Побег");
-				setVar(_t,desc,"Покинуть город через пещеры.");
-				setVar(_t,descRoleplay,"Нужно сбежать из Грязноямска. Точка сбора - пещеры на выходе из Бомжграда");
-				setVar(_t,eventCheckCondition,_eventCheck);
-				setVar(_t,tag,"GMOldNewOrder_task");
+			{
 				callFuncParams(_x,addTask,_t);
 
 			} foreach getSelf(antags);

@@ -258,7 +258,7 @@ class(IRangedWeapon) extends(Item)
 	//mag loading
 	"
 		name:Магазин вставлен
-		desc:Возвращает ИСТИНУ, если магазин заряжен в оружие. Для дробовиков, револьверов или однозарядных пистолетов всегда возвращает ИСТИНУ.
+		desc:Возвращает @[bool ИСТИНУ], если магазин заряжен в оружие. Для дробовиков, револьверов или однозарядных пистолетов всегда возвращает @[bool ИСТИНУ].
 		type:get
 		return:bool:Вставлен ли магазин в оружие
 	" node_met
@@ -441,7 +441,7 @@ class(IRangedWeapon) extends(Item)
 			opt:require=0:def=IAmmoBase
 		in:int:Количество:Сколько боеприпасов будет создано в магазине.
 			opt:require=0:def=0
-		return:IMagazineBase:Созданный магазин. Возвращает null-ссылку если создание не произошло.
+		return:IMagazineBase:Созданный магазин. Возвращает @[object^ null-ссылку] если создание не произошло.
 	" node_met
 	func(createMagazineWithAmmo)
 	{

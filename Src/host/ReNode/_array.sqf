@@ -22,6 +22,19 @@ node_system_group("array")
 " node_system
 
 "
+    node:makeArrayEmpty
+    path:Массивы
+    name:Создать пустой массив
+    namelib:Создание пустого массива
+    desc:Создает пустой массив для возможности заполнения пользователем.
+    icon:data\\icons\\icon_Blueprint_MakeArray_16x.png
+    exec:pure
+    code:[]
+    out:auto:Массив
+        opt:typeget=array;@type
+" node_system
+
+"
     node:clearArray
     name:Очистить
     namelib:Очистить массив
@@ -72,7 +85,7 @@ node_system
 "
     node:isValidIndex
     name:Индекс существует
-    desc:Проверяет является ли индекс существующим (валидным), возвращая ИСТИНУ, если он находится в диапазоне размера массива. Для массива [5,6,7] индекс 4 будет инвалиден, а индекс 2 - валиден.
+    desc:Проверяет является ли индекс существующим (валидным), возвращая @[bool ИСТИНУ], если он находится в диапазоне размера массива. Для массива [5,6,7] индекс 4 будет инвалиден, а индекс 2 - валиден.
     icon:data\\icons\\ArrayPin.png
     rendertype:NoHeader
     autocoloricon:1
@@ -155,7 +168,7 @@ node_system
     in:auto:Массив:Ссылка на массив, который будет скопирован.
         opt:typeget=array;@type
     out:auto:Массив:Скопированный массив. Любые изменения в этой копии не будут влиять на исходный массив.
-        opt:typeget=array;@value.1
+        opt:typeget=array;@type
 " node_system
 
 //count

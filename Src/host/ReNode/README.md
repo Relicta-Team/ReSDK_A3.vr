@@ -50,7 +50,7 @@ nodeModule_setIcon("data\\icons\\icon_bp_function_x16")
     "doAction",
     "Выполнение действия","[@in.1] call internalSDKFunction",
     "float:Входное число" opt "custom=0",
-    "bool:Результат:Результат выполнения операции - ИСТИНА, если успешно."
+    "bool:Результат:Результат выполнения операции - @[bool ИСТИНА], если успешно."
 ] reg_unary
 
 [

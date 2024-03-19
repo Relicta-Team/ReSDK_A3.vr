@@ -1211,15 +1211,15 @@ gm_endRound = {
 
 	//Обрабатываем все задачи
 	{
-		callFunc(_x,checkCondition);
+		callFunc(_x,updateMethodInternal);
 	} foreach taskSystem_checkedOnEndRound;
 
-	//обрабатываем задачи как проваленные
+	//обрабатываем все незавершенные задачи как проваленные
 	{
 		if !getVar(_x,isDone) then {
-			callFuncParams(_x,taskDone,-1);
+			callFuncParams(_x,setTaskResult,-1 arg true);
 		};
-	} foreach (taskSystem_allTasks - taskSystem_checkedOnEndRound);
+	} foreach taskSystem_allTasks;
 
 	setVar(gm_currentMode,finishResult,_endgameState);
 

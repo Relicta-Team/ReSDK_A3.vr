@@ -35,44 +35,55 @@ spawnPos_internal_list_rnd = [];
 isExistsSpawn = { private _name = _this; (spawnPos_internal_list_all findif {getVar(_x,spawnPointName) == _name}) != -1 };
 isExistsRandomSpawn = { private _name = _this; equalTypes(vec2(_name,"NOT_FOUND") call getRandomSpawnDirByName,0) };
 
+getSpawnObjectByName = {
+	params ["_name"];
+	private _ind = spawnPos_internal_list_all findif {getVar(_x,spawnPointName) == _name};
+	if (_ind == -1) exitWith {nullPtr};
+	spawnPos_internal_list_all select _ind
+};
+
 getSpawnPosByName = {
 	params ["_name",["_def",[0,0,0]]];
-	private _ind = spawnPos_internal_list_all findif {getVar(_x,spawnPointName) == _name};
-	if (_ind == -1) exitWith {
+	private _obj = [_name] call getSpawnObjectByName;
+	if isNullReference(_obj) exitWith {
 		errorformat("getSpawnPosByName() - cant find spawnpos '%1'",_name);
 		_def
 	};
-	getPosAtl getVar(spawnPos_internal_list_all select _ind,loc)
+	
+	getPosAtl getVar(_obj,loc)
 };
 
 getSpawnDirByName = {
 	params ["_name",["_def",random 360]];
-	private _ind = spawnPos_internal_list_all findif {getVar(_x,spawnPointName) == _name};
-	if (_ind == -1) exitWith {
+	private _obj = [_name] call getSpawnObjectByName;
+	if isNullReference(_obj) exitWith {
 		errorformat("getSpawnPosByName() - cant find spawnpos '%1'",_name);
 		_def
 	};
-	getDir getVar(spawnPos_internal_list_all select _ind,loc)
+
+	getDir getVar(_obj,loc)
 };
 
 getRandomSpawnPosByName = {
 	params ["_pos",["_defpos",0]];
 
-	private _wobj = [_pos,_defpos] call getRandomSpawnByNameProvider;
+	private _wobj = [_pos] call getRandomSpawnObjectByName;
 	if isNullReference(_wobj) exitWith {_defpos};
-	getPosAtl _wobj
+
+	getPosAtl getVar(_wobj,loc)
 
 };
 getRandomSpawnDirByName = {
 	params ["_pos",["_dir",0]];
 
-	private _wobj = [_pos,_dir] call getRandomSpawnByNameProvider;
+	private _wobj = [_pos] call getRandomSpawnObjectByName;
 	if isNullReference(_wobj) exitWith {_dir};
-	getDir _wobj
+
+	getDir getVar(_wobj,loc)
 };
 
-getRandomSpawnByNameProvider = {
-	params ["_name","_def"];
+getRandomSpawnObjectByName = {
+	params ["_name",["_returnList",false]];
 
 	if (count spawnPos_internal_map_equalCollections == 0) then {
 		//generate collection of spawnmaps
@@ -94,10 +105,14 @@ getRandomSpawnByNameProvider = {
 
 	private _posList = spawnPos_internal_map_equalCollections get _name;
 	if isNullVar(_posList) exitWith {
-		errorformat("getRandomSpawnPosByName() - cant find spawnpos '%1'",_name);
-		objnull
+		errorformat("getRandomSpawnObjectByName() - cant find spawnpos '%1'",_name);
+		
+		if (_returnList) exitWith {[]};
+		nullPtr
 	};
-	getVar(pick _posList,loc)
+	
+	if (_returnList) exitWith {array_copy(_posList)};
+	pick _posList
 };
 
 editor_attribute("EffectClass" arg "type:spawnpoint")

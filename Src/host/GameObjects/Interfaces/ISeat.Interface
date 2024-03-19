@@ -72,29 +72,32 @@ var(_seatListDummy,[objNUll]);
 //название мест (нужно дописать логику)
 getter_func(seatListName,["Сиденье"]);
 
-func(constructor)
-{
-	objParams();
-	private _count = count callSelf(seatListOffsetPos);
-	private _l = getSelf(seatListOwners);
-	_l resize _count;
-	setSelf(seatListOwners,_l apply {nullPtr});
-	setSelf(_seatListDummy,_l apply {objNUll});
+if isNullVar(__iseat_node_init__) then {
+	func(constructor)
+	{
+		objParams();
+		private _count = count callSelf(seatListOffsetPos);
+		private _l = getSelf(seatListOwners);
+		_l resize _count;
+		setSelf(seatListOwners,_l apply {nullPtr});
+		setSelf(_seatListDummy,_l apply {objNUll});
 
-	//validate getChairOffsetPos
-	#ifdef EDITOR
-	private _chofs = callSelf(getChairOffsetPos);
-	if (count _chofs == 1 && {not_equalTypes(_chofs select 0,0)}) then {
-		private _m = format["Ошибка при определении getChairOffsetPos для класса '%1'. Если ваше сиденье одноместное, то массив не должен быть вложен;%4%4    Получено: %2%4    Ожидается: %3",
-		callSelf(getClassName),
-		_chofs,
-		_chofs select 0,
-		endl
-		];
-		setLastError(_m);
+		//validate getChairOffsetPos
+		#ifdef EDITOR
+		private _chofs = callSelf(getChairOffsetPos);
+		if (count _chofs == 1 && {not_equalTypes(_chofs select 0,0)}) then {
+			private _m = format["Ошибка при определении getChairOffsetPos для класса '%1'. Если ваше сиденье одноместное, то массив не должен быть вложен;%4%4    Получено: %2%4    Ожидается: %3",
+			callSelf(getClassName),
+			_chofs,
+			_chofs select 0,
+			endl
+			];
+			setLastError(_m);
+		};
+		#endif
 	};
-	#endif
 };
+
 
 if !isNullVar(__iseat_node_init__) then {
 	"
@@ -121,7 +124,7 @@ func(isSeatFree)
 if !isNullVar(__iseat_node_init__) then {
 	"
 		name:Сиденье свободно
-		desc:Возвращает истину, если сиденье по указанному номеру (индексу) никем не занято. Если указано число вне диапазона допустимых мест - вернет ЛОЖЬ.
+		desc:Возвращает истину, если сиденье по указанному номеру (индексу) никем не занято. Если указано число вне диапазона допустимых мест - вернет @[bool ЛОЖЬ].
 		type:get
 		lockoverride:1
 		in:int:Номер:Номер сиденья для проверки. -1 означает что выполняется поиск наличия хотя бы одного свободного сиденья.
@@ -150,7 +153,7 @@ func(canSeat)
 if !isNullVar(__iseat_node_init__) then {
 	"
 		name:Владелец места сиденья
-		desc:Возвращает сущность, которая заняла место на кровати или стуле. Если место свободно или не сущетсвует - возвращает null-ссылку.
+		desc:Возвращает сущность, которая заняла место на кровати или стуле. Если место свободно или не сущетсвует - возвращает @[object^ null-ссылку].
 		type:get
 		lockoverride:1
 		return:Mob:Сущность, занявшая место, либо null-ссылка, если место не занято.
@@ -326,7 +329,7 @@ if !isNullVar(__iseat_node_init__) then {
 		lockoverride:1
 		in:int:Место:Номер сиденья (индекс), с которого должна встать сущность.
 			opt:require=0:def=-1
-		return:bool:Была ли сущность поднята с сиденья. Если место не было занято - возвращает ЛОЖЬ.
+		return:bool:Была ли сущность поднята с сиденья. Если место не было занято - возвращает @[bool ЛОЖЬ].
 	" +__iseat_node_postfix node_met
 };
 func(seatDisconnect)
@@ -371,37 +374,39 @@ func(seatDisconnect)
 	true
 };
 
-getter_func(canUseMainAction,isTypeOf(_usr,Mob));
-getter_func(getMainActionName,"Сесть");
-func(onMainAction) {
-	objParams_1(_usr);
-	
-	callSelfParams(seatConnect,_usr);
-};
-
-func(onClick)
-{
-	objParams_1(_usr);
-	if callFunc(_usr,isGrabbedInActiveHand) exitWith {
-		private _m = callFunc(_usr,getGrabbedInActiveHand);
-		if isNullReference(_m) exitWith {};
-		private _idx = callSelfParams(getNearFreeSeatIndex,_usr);
-		callSelfParams(seatConnect,_m arg _idx);
+if isNullVar(__iseat_node_init__) then {
+	getter_func(canUseMainAction,isTypeOf(_usr,Mob));
+	getter_func(getMainActionName,"Сесть");
+	func(onMainAction) {
+		objParams_1(_usr);
+		
+		callSelfParams(seatConnect,_usr);
 	};
-	super();
-};
 
-
-func(getSeatRestPos)
-{
-	objParams_1(_usr);
-	
-	if equalTypes(_usr,nullPtr) then {
-		_usr = getSelf(seatListOwners) find _usr;
+	func(onClick)
+	{
+		objParams_1(_usr);
+		if callFunc(_usr,isGrabbedInActiveHand) exitWith {
+			private _m = callFunc(_usr,getGrabbedInActiveHand);
+			if isNullReference(_m) exitWith {};
+			private _idx = callSelfParams(getNearFreeSeatIndex,_usr);
+			callSelfParams(seatConnect,_m arg _idx);
+		};
+		super();
 	};
-	if (_usr == -1) exitWith {null};
-	
-	private _rplObj = getSelf(_seatListDummy) select _usr;
-	private _restPos = _rplObj getVariable "_restPos";
-	_restPos
+
+
+	func(getSeatRestPos)
+	{
+		objParams_1(_usr);
+		
+		if equalTypes(_usr,nullPtr) then {
+			_usr = getSelf(seatListOwners) find _usr;
+		};
+		if (_usr == -1) exitWith {null};
+		
+		private _rplObj = getSelf(_seatListDummy) select _usr;
+		private _restPos = _rplObj getVariable "_restPos";
+		_restPos
+	};
 };

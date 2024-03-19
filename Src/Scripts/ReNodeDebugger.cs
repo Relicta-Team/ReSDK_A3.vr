@@ -131,6 +131,8 @@ public class ReNodeDebugger : IScript
 
     private void SendMessage(string message)
     {
+        if (!clientConnected) return;
+        
         try
         {
             if (tcpClient.Connected)

@@ -62,7 +62,7 @@ class(BasicMob) extends(GameObject)
 	//some getters
 	"
 		name:Это ребенок
-		desc:Возвращает ИСТИНУ, если сущность является ребенком
+		desc:Возвращает @[bool ИСТИНУ], если сущность является ребенком
 		type:get
 		lockoverride:1
 		return:bool:Это ребенок
@@ -70,7 +70,7 @@ class(BasicMob) extends(GameObject)
 	getter_func(isChild,getSelf(age)<=18);
 	"
 		name:Это мужчина
-		desc:Возвращает ИСТИНУ, если сущность является мужчиной
+		desc:Возвращает @[bool ИСТИНУ], если сущность является мужчиной
 		type:get
 		lockoverride:1
 		return:bool:Это мужчина
@@ -78,7 +78,7 @@ class(BasicMob) extends(GameObject)
 	getter_func(isMale,equals(getSelf(gender),gender_male));
 	"
 		name:Это женщина
-		desc:Возвращает ИСТИНУ, если сущность является женщиной
+		desc:Возвращает @[bool ИСТИНУ], если сущность является женщиной
 		type:get
 		lockoverride:1
 		return:bool:Это женщина
@@ -110,29 +110,40 @@ class(BasicMob) extends(GameObject)
 
 	"
 		name:Добавить задачу
-		desc:Добавляет персонажу новую задачу. Возвращает результат добавления задачи. Если она была добавлена для персонажа - возвращает ИСТИНУ.
+		desc:Добавляет персонажу новую задачу. Возвращает результат добавления задачи. Если она была добавлена для персонажа - возвращает @[bool ИСТИНУ].
 		type:method
 		lockoverride:1
-		in:TBase:Задача:Добавляемая задача для персонажа
-		in:TaskParamsProvider:Параметры задачи:Параметры выполнения задачи
+		in:TaskBase:Задача:Добавляемая задача для персонажа
 		return:bool:Была ли задача успешно добавлена.
 	" node_met
 	func(addTask)
 	{
-		objParams_2(_v,_ctx);
-		if (equalTypes(_v,"") && {!isTypeNameOf(_v,TBase)}) exitwith {
-			errorformat("Cant add task %1 for %2 <%3> - task does not exists",_v arg getSelf(pointer) arg callSelf(getClassName));
-			false
-		};
-		if (equalTypes(_v,nullPtr) && {!isTypeOf(_v,TBase)}) exitWith {
+		objParams_1(_v);
+
+		if isNullReference(_v) exitWith {
+			setLastError("Task reference is null");
 			errorformat("Cant add task object %1 for %2 <%3>",_v arg getSelf(pointer) arg callSelf(getClassName));
 			false
 		};
-		private _t = ifcheck(equalTypes(_v,""),instantiate(_v),_v);
-		getSelf(tasks) pushBack _t;
-		callFuncParams(_t,onTaskAdded,this);
-		callFuncParams(_t,handleTaskAddedParams,_ctx);
+		if (callFunc(_v,getClassName)=="TaskBase") exitWith {
+			setLastError("Задача должна быть наследником от TaskBase");
+			false
+		};
+		if !isTypeOf(_v,TaskBase) exitWith {
+			assert_str(false,format vec2("Invalid task type %1 for mob %2",callFunc(_v,getClassName) arg this));
+			false;
+		};
+		
+		getSelf(tasks) pushBack _v;
+		callFuncParams(_v,onRegisterInTarget,this);
+		
 		true
+	};
+
+	// Новая функция регистрации задачи
+	func(registerTask)
+	{
+		objParams_1(_tObj);
 	};
 
 region(roles management)
@@ -156,6 +167,14 @@ region(roles management)
 	};
 
 	//Устанавливает новую текущую роль персонажу
+	"
+		name:Установить роль мобу
+		desc:Устанавливает новую роль для моба.
+		type:method
+		lockoverride:1
+		in:classname:Роль:Новая роль моба
+			opt:def=ScriptedRole
+	" node_met
 	func(setToRole)
 	{
 		objParams_1(_roleObj);
@@ -601,7 +620,7 @@ region(Connect control events)
 	// Подключен ли к актору какой-нибудь игрок
 	"
 		name:Это игрок
-		desc:Возвращает ИСТИНУ, если за сущность подключен какой-либо клиент (игрок)
+		desc:Возвращает @[bool ИСТИНУ], если за сущность подключен какой-либо клиент (игрок)
 		type:get
 		lockoverride:1
 		return:bool:Подключен ли к мобу клиент
@@ -770,15 +789,16 @@ region(Mob location info: position; direction; speed)
 		DIR_FRONT
 	};
 
-	"
-		name:Расстояние от моба до цели
-		desc:Получает расстояние от вызывающего моба до цели в метрах. Целью может быть любой игровой объект, включа сущностей. "+
-		"В случае с расстоянием до сущности за конечную точку берется торс сущности. При проверке расстояния до игровых объектов берется центр модели, который помечается значком в редакторе ReEditor.
-		type:method
-		lockoverride:1
-		in:GameObject:Объект-цель:Объект, до которого измеряется расстояние
-		return:float:Расстояние в метрах
-	" node_met
+	//already implemented in GameObject::getDistanceTo
+	// "
+	// 	name:Расстояние от моба до цели
+	// 	desc:Получает расстояние от вызывающего моба до цели в метрах. Целью может быть любой игровой объект, включа сущностей. "+
+	// 	"В случае с расстоянием до сущности за конечную точку берется торс сущности. При проверке расстояния до игровых объектов берется центр модели, который помечается значком в редакторе ReEditor.
+	// 	type:method
+	// 	lockoverride:1
+	// 	in:GameObject:Объект-цель:Объект, до которого измеряется расстояние
+	// 	return:float:Расстояние в метрах
+	// " node_met
 	func(getDistanceTo)
 	{
 		objParams_1(_target);
@@ -1678,12 +1698,20 @@ region(Sound helpers)
 		in:float:Громкость:Громкость звука. Не рекомендуется менять это значение
 			opt:def=1
 		in:auto:Источник:Источник звука. Если не указан, то звук воспроизведется из позиции вызывающего моба.
-			opt:require=0:typeget=value;@type:allowtypes=GameObject
+			opt:require=0:typeget=value;@type:allowtypes=GameObject^|vector3
 	" node_met
 	func(playSoundLocal)
 	{
 		params ['this',"_path",["_pitch",1],["_maxDist",50],["_vol",1],"_atPos"];
-		private _source = ifcheck(!isNullVar(_atPos),_atPos,callSelf(getBasicLoc));
+		private _source = if(!isNullVar(_atPos)) then {
+			if equalTypes(_atPos,nullPtr) then {
+				callFunc(_atPos,getBasicLoc)
+			} else {
+				_atPos
+			};
+		} else {
+			callSelf(getBasicLoc)
+		};
 
 		private _data = [_path arg _source arg _vol arg _pitch arg _maxDist];
 		callSelfParams(sendInfo,"sl_p" arg _data);
