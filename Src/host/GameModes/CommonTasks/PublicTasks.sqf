@@ -224,7 +224,7 @@ class(ItemKindTask) extends(GameObjectKindTask)
 	"
 		name:Предметная задача
 		desc:Задача, относящаяся к игровым предметам. Например\: получение, сохранение и т.д.
-		path:Игровая логика.Задачи.Предметные
+		path:Игровая логика.Задачи.Объектные
 	" node_class
 
 	var(name,"Item task");
@@ -273,7 +273,7 @@ class(TaskItemGet) extends(ItemKindTask)
 	"
 		name:Задача получения предметов
 		desc:Задача, относящаяся к получение предметов персонажем.
-		path:Игровая логика.Задачи.Предметные
+		path:Игровая логика.Задачи.Объектные
 	" node_class
 
 	var(name,"Добыча");
@@ -303,7 +303,7 @@ class(TaskItemSave) extends(TaskItemGet)
 	"
 		name:Задача сохранения предметов
 		desc:Задача, относящаяся к сохранению предметов персонажем. Под сохранением подразумевается, что перечисленные предметы находятся в инвентаре персонажа до конца раунда.
-		path:Игровая логика.Задачи.Предметные
+		path:Игровая логика.Задачи.Объектные
 	" node_class
 
 	var(name,"Сохранение");
@@ -318,7 +318,7 @@ class(TaskItemPlace) extends(ItemKindTask)
 	"
 		name:Задача доставки предметов
 		desc:Задача, относящаяся к доставке предметов. Для выполнения задачи необходимо доставить предметы в указанную точку.
-		path:Игровая логика.Задачи.Предметные
+		path:Игровая логика.Задачи.Объектные
 	" node_class
 
 	var(name,"Доставка");
@@ -660,34 +660,42 @@ class(TaskRoleDead) extends(RoleKindTask)
 		desc:Задача на убийство ролей
 		path:Игровая логика.Задачи.Ролевые
 	" node_class
-	var(name,"Убийство ролей");
-	var(desc,"Убийство ролей");
+	var(name,"Убийство должностного лица");
+	var(desc,"Убийство роли");
 	var(descRoleplay,"Устранить - %1");
-
-	"
-		name:Нужно погибших на роли
-		desc:Количество персонажей, занимавших роль, которые должны погибнуть
-		prop:all
-		return:int:Количество
-		defval:1
-	" node_var
-	var(countDeadNeed,1);
 
 	func(onTaskCheck)
 	{
 		objParams_1(_owner);
 		private _role = getSelf(roleClass);
-		private _robj = _role call gm_getRoleObject;
-		if isNullReference(_robj) exitWith {};
-		private _count = 0;
-		{
-			if callFunc(_x,isDead) then {
-				INC(_count);
-			};
-		} foreach getVar(_robj,basicMobs);
+		private _robj = nullPtr;
+		private _found = false;
 
-		if (_count >= getSelf(countDeadNeed) && [this,_owner] call getSelf(_customCondition)) then {
-			callSelfParams(setTaskResult,1);
+		private _arrRoles = [_role];
+		if getSelf(checkChildRoles) then {
+			_arrRoles = getAllObjectsTypeOfStr(_role);
+			_arrRoles pushBackUnique _role;
 		};
+		
+		{
+			_robj = _x call gm_getRoleObject;
+			if isNullReference(_robj) then {continue};
+
+			{
+				if getVar(_x,isDead) exitWith {_found = true;};
+			} foreach getVar(_robj,basicMobs);
+
+			if (!_found) then {
+				{
+					if getVar(_x,isDead) exitWith {_found = true};
+				} foreach getVar(_robj,mobs);
+			};
+
+			if (_found) exitWith {};
+		} foreach _arrRoles;
+
+		if (_found && [this,_owner] call getSelf(_customCondition)) then {
+			callSelfParams(setTaskResult,1);
+		};		
 	};
 endclass
