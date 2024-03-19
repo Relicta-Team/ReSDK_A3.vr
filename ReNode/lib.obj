@@ -3050,6 +3050,7 @@ def:m:GameObject.playSound_0
 		in:float:Громкость:Громкость звука. Не рекомендуется менять это значение
 			opt:def=1
 		in:void:Источник:Источник звука. Можно указать 3д вектор или модель сущности.
+			opt:require=0
 		in:bool:Симуляция:Использовать симуляцию гашения звука от стен.
 			opt:def=true
 	
@@ -8375,7 +8376,7 @@ $REGION:CLASSMETA
 }
 ,"Item_OldNewOrder_distanceCheckCaptive": {
     "baseClass" : "Paper",
-    "defined" : {"file":"src\\host\\GameModes\\Dirtpit\\GM_OldNewOrder.sqf","line":616},
+    "defined" : {"file":"src\\host\\GameModes\\Dirtpit\\GM_OldNewOrder.sqf","line":624},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8942,7 +8943,7 @@ $REGION:CLASSMETA
 }
 ,"Item_OldNewOrder_BombPart1": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameModes\\Dirtpit\\GM_OldNewOrder.sqf","line":661},
+    "defined" : {"file":"src\\host\\GameModes\\Dirtpit\\GM_OldNewOrder.sqf","line":669},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"size":{"return": "int"},"weight":{"return": "float"}}   },
    "methods": { "defined": {
@@ -8951,7 +8952,7 @@ $REGION:CLASSMETA
 }
 ,"Item_OldNewOrder_BombPart2": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameModes\\Dirtpit\\GM_OldNewOrder.sqf","line":678},
+    "defined" : {"file":"src\\host\\GameModes\\Dirtpit\\GM_OldNewOrder.sqf","line":686},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"size":{"return": "int"},"weight":{"return": "float"}}   },
    "methods": { "defined": {
@@ -8960,7 +8961,7 @@ $REGION:CLASSMETA
 }
 ,"Item_OldNewOrder_Bomb": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameModes\\Dirtpit\\GM_OldNewOrder.sqf","line":696},
+    "defined" : {"file":"src\\host\\GameModes\\Dirtpit\\GM_OldNewOrder.sqf","line":704},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"model":{"return": "string"},"size":{"return": "int"},"weight":{"return": "int"},"isEnabled":{"return": "bool"},"detonateAfter":{"return": "int"},"isActivated":{"return": "bool"},"handleupd":{"return": "int"}}   },
    "methods": { "defined": {
@@ -13901,7 +13902,7 @@ $REGION:CLASSMETA
 }
 ,"IDestructible": {
     "baseClass" : "GameObject",
-    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":1209},
+    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":1210},
    "fields": { "defined": {
 "ht":{"return": "int"},"hp":{"return": "int"},"hpMax":{"return": "int"},"dr":{"return": "int"},"drMax":{"return": "int"},"germs":{"return": "int"},"__statusEffects":{"return": "null"},"seatListOwners":{"return": "null_array"},"_seatListDummy":{"return": "null_array"}}   },
    "methods": { "defined": {
