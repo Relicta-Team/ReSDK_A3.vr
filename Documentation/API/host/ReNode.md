@@ -441,6 +441,14 @@ Description:
 
 
 File: [host\ReNode\ReNode_init.sqf at line 398](../../../Src/host/ReNode/ReNode_init.sqf#L398)
+## renode_invokeDelegate
+
+Type: function
+
+Description: call delegate; _fref - vec2: vec2:(object,context), code(params:args,context)
+
+
+File: [host\ReNode\ReNode_init.sqf at line 439](../../../Src/host/ReNode/ReNode_init.sqf#L439)
 # resdk_graph.h
 
 ## __THIS_GRAPH__

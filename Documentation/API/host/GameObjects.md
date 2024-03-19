@@ -337,7 +337,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 650](../../../Src/host/GameObjects/GameObject.sqf#L650)
+File: [host\GameObjects\GameObject.sqf at line 651](../../../Src/host/GameObjects/GameObject.sqf#L651)
 ## sectorSize
 
 Type: constant
@@ -349,7 +349,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 651](../../../Src/host/GameObjects/GameObject.sqf#L651)
+File: [host\GameObjects\GameObject.sqf at line 652](../../../Src/host/GameObjects/GameObject.sqf#L652)
 ## flyingObject
 
 Type: Variable
@@ -385,7 +385,7 @@ Initial value:
 ```sqf
 ["emote","log","act","combat","info","mind","event","system","error","default"]
 ```
-File: [host\GameObjects\GameObject.sqf at line 972](../../../Src/host/GameObjects/GameObject.sqf#L972)
+File: [host\GameObjects\GameObject.sqf at line 973](../../../Src/host/GameObjects/GameObject.sqf#L973)
 ## go_internal_chatMesMapText
 
 Type: Variable
@@ -397,7 +397,7 @@ Initial value:
 ```sqf
 ["Эмоут:Кастомное пользовательское действие",...
 ```
-File: [host\GameObjects\GameObject.sqf at line 973](../../../Src/host/GameObjects/GameObject.sqf#L973)
+File: [host\GameObjects\GameObject.sqf at line 974](../../../Src/host/GameObjects/GameObject.sqf#L974)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
@@ -3605,7 +3605,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 268](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L268)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 287](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L287)
 ## INTERACT_DIST_DEFAULT
 
 Type: constant
@@ -3617,7 +3617,7 @@ Replaced value:
 ```sqf
 1.1
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 299](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L299)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 318](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L318)
 ## __animget_impl__()
 
 Type: constant
@@ -3629,7 +3629,7 @@ Replaced value:
 ```sqf
 (getSelf(owner) call anim_getUnitAnim)
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 807](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L807)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 827](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L827)
 ## __data_light_slot__
 
 Type: constant
@@ -3641,7 +3641,7 @@ Replaced value:
 ```sqf
 [[INV_BACKPACK,null], [INV_ARMOR,null], [INV_HEAD,null], [INV_BACK,null],[INV_CLOTH,null],[INV_FACE,null],[INV_HAND_R,null],[INV_HAND_L,null],[INV_BELT,null]]
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 917](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L917)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 937](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L937)
 ## debug_internal_getinteractiontarget_spheres
 
 Type: Variable
@@ -3655,7 +3655,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 270](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L270)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 289](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L289)
 # Mob.sqf
 
 ## __performace_attacklog
@@ -5871,6 +5871,14 @@ Description:
 - Param: _name
 
 File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 36](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L36)
+## getSpawnObjectByName
+
+Type: function
+
+Description: 
+- Param: _name
+
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 38](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L38)
 ## getSpawnPosByName
 
 Type: function
@@ -5879,7 +5887,7 @@ Description:
 - Param: _name
 - Param: _def (optional, default ['0', '0', '0'])
 
-File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 38](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L38)
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 45](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L45)
 ## getSpawnDirByName
 
 Type: function
@@ -5888,7 +5896,7 @@ Description:
 - Param: _name
 - Param: _def (optional, default random 360)
 
-File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 48](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L48)
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 56](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L56)
 ## getRandomSpawnPosByName
 
 Type: function
@@ -5897,7 +5905,7 @@ Description:
 - Param: _pos
 - Param: _defpos (optional, default 0)
 
-File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 58](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L58)
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 67](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L67)
 ## getRandomSpawnDirByName
 
 Type: function
@@ -5906,13 +5914,13 @@ Description:
 - Param: _pos
 - Param: _dir (optional, default 0)
 
-File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 66](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L66)
-## getRandomSpawnByNameProvider
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 76](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L76)
+## getRandomSpawnObjectByName
 
 Type: function
 
 Description: 
 - Param: _name
-- Param: _def
+- Param: _returnList (optional, default false)
 
-File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 74](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L74)
+File: [host\GameObjects\Structures\Tools\Spawners.sqf at line 85](../../../Src/host/GameObjects/Structures/Tools/Spawners.sqf#L85)
