@@ -503,7 +503,7 @@ class(CounterKindTask) extends(TaskBase)
 
 	_tDelegate = {
 		objParams();
-		format[getSelf(descRoleplay),callFuncParams(getSelf,getNumeralText)]
+		format[getSelf(descRoleplay),callSelf(getNumeralText)]
 	};
 	var_exprval(_taskDescDelegate,_tDelegate);
 endclass
