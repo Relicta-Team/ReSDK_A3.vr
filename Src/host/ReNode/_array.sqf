@@ -221,23 +221,24 @@ node_system
     out:int:Индекс:Возвращает -1 если элемент не найден, иначе возвращает индекс элемента в массиве.
 " node_system
 
-//findif //!Нужны генераторы локальных функций
+//! всё ещё не оптимизировано. в локальной функции параметр не итерируемый
+//findif
 // "
 //     node:findif
 //     name:Найти элемент по условию
-//     namelib:Поиск элемента по условию
-//     desc:Поиск элемента в массиве по условию
-//     icon:data\\icons\\ArrayPin.png
+//     namelib:Найти элемент по условию
+//     desc:Поиск элемента в массиве по условию."+
+//     "\nПараметры анонимной функции\:"+
+//     " Вход - любое значение. Выход - @[bool Условие] - был ли найден искомый элемент
+//     icon:data\\icons\\icon_BluePrintEditor_Function_16px
 //     exec:pure
 //     rendertype:NoHeader
-//     autocoloricon:1
-//     code:(@in.1) findif {@genvar.out.2.internal(_x) (@out.2)}
+//     code:(((@in.1) findif (@in.2))!=-1)
 //     in:auto:Массив
 //         opt:typeget=array;@type
-//     out:bool:Условие
-//     out:auto:Проверяемый элемент
-//         opt:typeget=array;@value.1
-//     out:bool:Результат:Истина, если элемент найден в массиве, иначе ложь
+//     in:auto:Функция
+//         opt:typeget=function;@value.1;function[anon=bool={}]
+//     out:bool:Результат:@[bool ИСТИНА], если элемент найден в массиве, иначе @[bool ЛОЖЬ]
 
 // " node_system
     
@@ -461,7 +462,7 @@ node_system
 //     node:apply
 //     name:Применить к массиву
 //     namelib:Применить к массиву
-//     desc:Применяет операцию к каждому элементу массива и возвращает новый массив с обновленными элементами
+//     desc:Применяет операцию (анонимную функцию) к каждому элементу массива и возвращает новый массив с обновленными элементами
 //     icon:data\\icons\\ArrayPin.png
 //     rendertype:NoHeader
 //     autocoloricon:1
