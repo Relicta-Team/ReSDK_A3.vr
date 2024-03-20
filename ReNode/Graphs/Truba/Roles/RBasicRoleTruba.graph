@@ -32,20 +32,20 @@
         },
         "methods":{}
       },
-      "compiledGUID":"e37d2f10-7824-42e1-9003-eb0c9a5d21bd",
+      "compiledGUID":"e03dc357-5367-423a-bed5-65183cba0522",
       "compileStatus":"Compiled",
       "graphVersion":2
     },
     "mpos":[
-      763.6513688399583,
-      -410.14453892417004,
-      1763.1933119465607,
-      1659.4760583026405
+      525.6332796099183,
+      -172.07874379011608,
+      1797.6655786085905,
+      1691.9205445727862
     ],
-    "mzoom":-0.4
+    "mzoom":-0.24
   },
   "nodes":{
-    "0x23512c58490":{
+    "0x1c5e858cad0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка",
@@ -84,7 +84,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x23519798090":{
+    "0x1c5f6e3bcd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать буквальное булево",
@@ -123,7 +123,7 @@
       },
       "class_":"math.logical.makeLiteralBool"
     },
-    "0x235197990d0":{
+    "0x1c5f6e40cd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать буквальное булево",
@@ -162,7 +162,7 @@
       },
       "class_":"math.logical.makeLiteralBool"
     },
-    "0x23519798390":{
+    "0x1c5f6e42050":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Switch_16x",
       "name":"Выбрать из Пол сущности",
@@ -200,7 +200,7 @@
       },
       "class_":"enum.Gender"
     },
-    "0x2351979b990":{
+    "0x1c5f6e43490":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Локальное сообщение в чат",
@@ -240,7 +240,7 @@
       },
       "class_":"methods.ServerClient._localSayWrapper_0"
     },
-    "0x235198227d0":{
+    "0x1c5f6e49290":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Видимость роли в лобби",
@@ -275,7 +275,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.canTakeInLobby_0"
     },
-    "0x23519823950":{
+    "0x1c5f6e43e50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Node_16x",
       "name":"Вернуть значение",
@@ -355,7 +355,7 @@
       },
       "class_":"control.return"
     },
-    "0x23519822950":{
+    "0x1c5f6e4ab10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\FIB_VarGet",
       "name":"Пол персонажа клиента",
@@ -393,7 +393,7 @@
       },
       "class_":"methods.ServerClient._getCharSettingGenderWrapper_0"
     },
-    "0x23519822fd0":{
+    "0x1c5f6e4a050":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Node_16x",
       "name":"Вернуть значение",
@@ -473,7 +473,7 @@
       },
       "class_":"control.return"
     },
-    "0x2351857efd0":{
+    "0x1c5f6e4bbd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Branch_16x",
       "name":"Ветка",
@@ -512,7 +512,7 @@
       },
       "class_":"operators.if_branch"
     },
-    "0x23512c5f5d0":{
+    "0x1c5f6e4b810":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -554,7 +554,7 @@
       },
       "class_":"fields.RBasicRoleTruba.Mozhno_li_vybrat_zhenskogo_personazha_0.get"
     },
-    "0x23512c5ecd0":{
+    "0x1c5f6e4b4d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка 1",
@@ -597,131 +597,131 @@
   "connections":[
     {
       "out":[
-        "0x23519798090",
+        "0x1c5f6e3bcd0",
         "Значение"
       ],
       "in":[
-        "0x23519822fd0",
+        "0x1c5f6e4a050",
         "Возвращаемое значение"
       ]
     },
     {
       "out":[
-        "0x235197990d0",
+        "0x1c5f6e40cd0",
         "Значение"
       ],
       "in":[
-        "0x23519823950",
+        "0x1c5f6e43e50",
         "Возвращаемое значение"
       ]
     },
     {
       "in":[
-        "0x23519798390",
+        "0x1c5f6e42050",
         "Вход"
       ],
       "out":[
-        "0x2351857efd0",
+        "0x1c5f6e4bbd0",
         "Ложь"
       ]
     },
     {
       "in":[
-        "0x23519798390",
+        "0x1c5f6e42050",
         "Пол сущности"
       ],
       "out":[
-        "0x23519822950",
+        "0x1c5f6e4ab10",
         "Результат"
       ]
     },
     {
       "out":[
-        "0x23519798390",
+        "0x1c5f6e42050",
         "Мужчина"
       ],
       "in":[
-        "0x23519823950",
+        "0x1c5f6e43e50",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x23519798390",
+        "0x1c5f6e42050",
         "Женщина"
       ],
       "in":[
-        "0x2351979b990",
+        "0x1c5f6e43490",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x23519798390",
+        "0x1c5f6e42050",
         "Общий"
       ],
       "in":[
-        "0x23519823950",
+        "0x1c5f6e43e50",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x2351979b990",
+        "0x1c5f6e43490",
         "Цель"
       ],
       "out":[
-        "0x235198227d0",
+        "0x1c5f6e49290",
         "Клиент"
       ]
     },
     {
       "out":[
-        "0x2351979b990",
+        "0x1c5f6e43490",
         "Выход"
       ],
       "in":[
-        "0x23519822fd0",
+        "0x1c5f6e4a050",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x235198227d0",
+        "0x1c5f6e49290",
         "Выход"
       ],
       "in":[
-        "0x2351857efd0",
+        "0x1c5f6e4bbd0",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x235198227d0",
+        "0x1c5f6e49290",
         "Клиент"
       ],
       "in":[
-        "0x23519822950",
+        "0x1c5f6e4ab10",
         "Цель"
       ]
     },
     {
       "in":[
-        "0x23519823950",
+        "0x1c5f6e43e50",
         "Вход"
       ],
       "out":[
-        "0x2351857efd0",
+        "0x1c5f6e4bbd0",
         "Истина"
       ]
     },
     {
       "in":[
-        "0x2351857efd0",
+        "0x1c5f6e4bbd0",
         "Условие"
       ],
       "out":[
-        "0x23512c5f5d0",
+        "0x1c5f6e4b810",
         "Значение"
       ]
     }

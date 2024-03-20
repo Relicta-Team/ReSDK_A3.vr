@@ -8,7 +8,7 @@
     "variables":{},
     "info":{
       "type":"role",
-      "name":"Помощние лекаря",
+      "name":"Помощник лекаря",
       "classname":"RCaveDoctorHelperTruba",
       "parent":"RSettelmentsRoleTruba",
       "desc":"",

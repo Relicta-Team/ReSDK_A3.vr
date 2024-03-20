@@ -17,20 +17,20 @@
         "fields":{},
         "methods":{}
       },
-      "compiledGUID":"714351d9-0984-42e4-ba33-24b6b0c6691c",
+      "compiledGUID":"2503e5de-5e8f-4287-94e4-0febb28bbcee",
       "compileStatus":"Compiled",
       "graphVersion":2
     },
     "mpos":[
-      -147.5027845089919,
-      -389.7774368727827,
-      1106.4964508240216,
-      1041.408424304961
+      -94.56515980684782,
+      -339.95379009429416,
+      1000.6212014197334,
+      941.761130747984
     ],
-    "mzoom":-0.04
+    "mzoom":0.37
   },
   "nodes":{
-    "0x23512c044d0":{
+    "0x1c5eb3baf10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка",
