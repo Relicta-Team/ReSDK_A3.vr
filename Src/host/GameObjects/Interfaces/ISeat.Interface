@@ -4,6 +4,81 @@
 // ======================================================
 
 
+if !isNullVar(__iseat_node_init__) then {
+
+	"
+		name:Одноместное сиденье
+		namelib:Одноместное сиденье (одноместная кровать)
+		desc:Возвращает истину, если объект является одноместным сиденьем, стулом или кроватью.
+		type:const
+		return:bool:Одноместное сиденье
+	"+__iseat_node_postfix node_met
+	func(isSingleSeat) {params['this']; setLastError("'isSingleSeat' - not implemented for class " + callSelf(getClassName))};
+
+
+	"
+		name:Макс. номер сиденья
+		desc:Возвращает максимальный номер (индекс) сиденья. Отсчет начинается с 0. Например, если проверяемый объект одноместное сиденье - возвращается ноль. Если двухместное - один, трехместное - два и т.д.
+		type:const
+		return:int:Максимальный номер сиденья
+	" +__iseat_node_postfix node_met
+	func(getSeatMaxIndex) {params['this']; setLastError("'getSeatMaxIndex' - not implemented for class " + callSelf(getClassName))};
+
+	"
+		name:Сиденье свободно
+		desc:Возвращает истину, если сиденье по указанному номеру (индексу) никем не занято. Если указано число вне диапазона допустимых мест - вернет ЛОЖЬ.
+		type:get
+		lockoverride:1
+		in:int:Номер:Номер сиденья для проверки. -1 означает что выполняется поиск наличия хотя бы одного свободного сиденья.
+			opt:require=0:def=-1
+		return:bool:Место свободно
+	" +__iseat_node_postfix node_met
+	func(isSeatIndexFree) {params['this']; setLastError("'isSeatIndexFree' - not implemented for class " + callSelf(getClassName))};
+
+	"
+		name:Владелец места сиденья
+		desc:Возвращает сущность, которая заняла место на кровати или стуле. Если место свободно или не сущетсвует - возвращает null-ссылку.
+		type:get
+		lockoverride:1
+		return:Mob:Сущность, занявшая место, либо null-ссылка, если место не занято.
+	" +__iseat_node_postfix node_met
+	func(getSeatOwner) {params['this']; setLastError("'getSeatOwner' - not implemented for class " + callSelf(getClassName))};
+
+	"
+		name:Ближайшее свободное сиденье
+		desc:Возвращает номер (индекс) ближайшего незанятого сиденья от цели. Если ближайшего места не найдено - возвращает -1. Данная функция полезна, когда вам нужно выбрать ближайшее свободное место для посадки вашего персонажа.
+		type:method
+		lockoverride:1
+		in:Mob:Проверяющий:Сущность от которой будет получено ближайшее место.
+		return:Mob:Сущность, занявшая место, либо null-ссылка, если место не занято.
+	" +__iseat_node_postfix node_met
+	func(getNearFreeSeatIndex) {params['this']; setLastError("'getNearFreeSeatIndex' - not implemented for class " + callSelf(getClassName))};
+
+	"
+		name:Занять место
+		desc:Производит попытку посадить сущность на сиденье по указанному номеру (индексу).
+		type:method
+		lockoverride:1
+		in:Mob:Сущность:Сущность, которая пытается сесть на сиденье или кровать.
+		in:int:Место:Номер сиденья (индекс), на который пытается сесть сущность.
+			opt:require=0:def=-1
+		return:bool:Была ли посажена сущность
+	" +__iseat_node_postfix node_met
+	func(seatConnect) {params['this']; setLastError("'seatConnect' - not implemented for class " + callSelf(getClassName))};
+
+	"
+		name:Освободить место
+		desc:Производит попытку освободить место, занятого сущностью.
+		type:method
+		lockoverride:1
+		in:int:Место:Номер сиденья (индекс), с которого должна встать сущность.
+			opt:require=0:def=-1
+		return:bool:Была ли сущность поднята с сиденья. Если место не было занято - возвращает ЛОЖЬ.
+	" +__iseat_node_postfix node_met
+	func(seatDisconnect) {params['this']; setLastError("'seatDisconnect' - not implemented for class " + callSelf(getClassName))};
+
+} else {
+
 //набор анимации в слоте
 /*getter_func(getChairSitdownAnimation,["re_HubSittingChairA_move1" arg "re_HubSittingChairB_idle1" arg "re_HubSittingChairB_idle2" arg "re_HubSittingChairB_idle3" arg
 "re_HubSittingChairUA_idle1" arg "re_HubSittingChairUA_idle2" arg "re_HubSittingChairUA_idle3" arg "re_HubSittingChairUA_move1" arg
@@ -27,16 +102,6 @@ getter_func(getChairStandupCombatAnimation,"amovpknlmstpsraswpstdnon_amovpercmst
 //константа для стула/кровати или любого объекта на который можно сесть
 getterconst_func(isSeat,true); 
 
-
-if !isNullVar(__iseat_node_init__) then {
-	"
-		name:Одноместное сиденье
-		namelib:Одноместное сиденье (одноместная кровать)
-		desc:Возвращает истину, если объект является одноместным сиденьем, стулом или кроватью.
-		type:const
-		return:bool:Одноместное сиденье
-	"+__iseat_node_postfix node_met
-};
 //одноместное ли сиденье
 func(isSingleSeat)
 {
@@ -63,7 +128,6 @@ func(seatListOffsetDir)
 	}
 };
 
-
 //сюда вписываются мобы которые заняли данные места
 var(seatListOwners,[nullPtr]);
 //это ссылка на объекты-заглушки для репликации
@@ -72,41 +136,30 @@ var(_seatListDummy,[objNUll]);
 //название мест (нужно дописать логику)
 getter_func(seatListName,["Сиденье"]);
 
-if isNullVar(__iseat_node_init__) then {
-	func(constructor)
-	{
-		objParams();
-		private _count = count callSelf(seatListOffsetPos);
-		private _l = getSelf(seatListOwners);
-		_l resize _count;
-		setSelf(seatListOwners,_l apply {nullPtr});
-		setSelf(_seatListDummy,_l apply {objNUll});
+func(constructor)
+{
+	objParams();
+	private _count = count callSelf(seatListOffsetPos);
+	private _l = getSelf(seatListOwners);
+	_l resize _count;
+	setSelf(seatListOwners,_l apply {nullPtr});
+	setSelf(_seatListDummy,_l apply {objNUll});
 
-		//validate getChairOffsetPos
-		#ifdef EDITOR
-		private _chofs = callSelf(getChairOffsetPos);
-		if (count _chofs == 1 && {not_equalTypes(_chofs select 0,0)}) then {
-			private _m = format["Ошибка при определении getChairOffsetPos для класса '%1'. Если ваше сиденье одноместное, то массив не должен быть вложен;%4%4    Получено: %2%4    Ожидается: %3",
-			callSelf(getClassName),
-			_chofs,
-			_chofs select 0,
-			endl
-			];
-			setLastError(_m);
-		};
-		#endif
+	//validate getChairOffsetPos
+	#ifdef EDITOR
+	private _chofs = callSelf(getChairOffsetPos);
+	if (count _chofs == 1 && {not_equalTypes(_chofs select 0,0)}) then {
+		private _m = format["Ошибка при определении getChairOffsetPos для класса '%1'. Если ваше сиденье одноместное, то массив не должен быть вложен;%4%4    Получено: %2%4    Ожидается: %3",
+		callSelf(getClassName),
+		_chofs,
+		_chofs select 0,
+		endl
+		];
+		setLastError(_m);
 	};
+	#endif
 };
 
-
-if !isNullVar(__iseat_node_init__) then {
-	"
-		name:Макс. номер сиденья
-		desc:Возвращает максимальный номер (индекс) сиденья. Отсчет начинается с 0. Например, если проверяемый объект одноместное сиденье - возвращается ноль. Если двухместное - один, трехместное - два и т.д.
-		type:const
-		return:int:Максимальный номер сиденья
-	" +__iseat_node_postfix node_met
-};
 func(getSeatMaxIndex)
 {
 	objParams();
@@ -121,17 +174,7 @@ func(isSeatFree)
 };
 
 //public function with indexoutofrange check
-if !isNullVar(__iseat_node_init__) then {
-	"
-		name:Сиденье свободно
-		desc:Возвращает истину, если сиденье по указанному номеру (индексу) никем не занято. Если указано число вне диапазона допустимых мест - вернет @[bool ЛОЖЬ].
-		type:get
-		lockoverride:1
-		in:int:Номер:Номер сиденья для проверки. -1 означает что выполняется поиск наличия хотя бы одного свободного сиденья.
-			opt:require=0:def=-1
-		return:bool:Место свободно
-	" +__iseat_node_postfix node_met
-};
+
 func(isSeatIndexFree)
 {
 	objParams_1(_index);
@@ -150,15 +193,7 @@ func(canSeat)
 };
 
 // Получить владельца конкретного сиденья. Если сиденье только 1 - передайте аргументом 0 или null
-if !isNullVar(__iseat_node_init__) then {
-	"
-		name:Владелец места сиденья
-		desc:Возвращает сущность, которая заняла место на кровати или стуле. Если место свободно или не сущетсвует - возвращает @[object^ null-ссылку].
-		type:get
-		lockoverride:1
-		return:Mob:Сущность, занявшая место, либо null-ссылка, если место не занято.
-	" +__iseat_node_postfix node_met
-};
+
 func(getSeatOwner)
 {
 	objParams_1(_idx);
@@ -171,16 +206,6 @@ func(getSeatOwner)
 	_listSeats select _idx;
 };
 
-if !isNullVar(__iseat_node_init__) then {
-	"
-		name:Ближайшее свободное сиденье
-		desc:Возвращает номер (индекс) ближайшего незанятого сиденья от цели. Если ближайшего места не найдено - возвращает -1. Данная функция полезна, когда вам нужно выбрать ближайшее свободное место для посадки вашего персонажа.
-		type:method
-		lockoverride:1
-		in:Mob:Проверяющий:Сущность от которой будет получено ближайшее место.
-		return:Mob:Сущность, занявшая место, либо null-ссылка, если место не занято.
-	" +__iseat_node_postfix node_met
-};
 func(getNearFreeSeatIndex)
 {
 	objParams_1(_usr);
@@ -205,18 +230,6 @@ func(getNearFreeSeatIndex)
 };
 
 //стандартная процедура присоединения
-if !isNullVar(__iseat_node_init__) then {
-	"
-		name:Занять место
-		desc:Производит попытку посадить сущность на сиденье по указанному номеру (индексу).
-		type:method
-		lockoverride:1
-		in:Mob:Сущность:Сущность, которая пытается сесть на сиденье или кровать.
-		in:int:Место:Номер сиденья (индекс), на который пытается сесть сущность.
-			opt:require=0:def=-1
-		return:bool:Была ли посажена сущность
-	" +__iseat_node_postfix node_met
-};
 func(seatConnect)
 {
 	objParams_2(_usr,_optIdx);
@@ -320,18 +333,6 @@ func(seatApplySeatAnim)
 	callFuncParams(_usr,applyGlobalAnim,"switchmove" arg _anim);
 };
 
-
-if !isNullVar(__iseat_node_init__) then {
-	"
-		name:Освободить место
-		desc:Производит попытку освободить место, занятого сущностью.
-		type:method
-		lockoverride:1
-		in:int:Место:Номер сиденья (индекс), с которого должна встать сущность.
-			opt:require=0:def=-1
-		return:bool:Была ли сущность поднята с сиденья. Если место не было занято - возвращает @[bool ЛОЖЬ].
-	" +__iseat_node_postfix node_met
-};
 func(seatDisconnect)
 {
 	objParams_1(_usrOrIndex);
@@ -374,39 +375,39 @@ func(seatDisconnect)
 	true
 };
 
-if isNullVar(__iseat_node_init__) then {
-	getter_func(canUseMainAction,isTypeOf(_usr,Mob));
-	getter_func(getMainActionName,"Сесть");
-	func(onMainAction) {
-		objParams_1(_usr);
-		
-		callSelfParams(seatConnect,_usr);
-	};
-
-	func(onClick)
-	{
-		objParams_1(_usr);
-		if callFunc(_usr,isGrabbedInActiveHand) exitWith {
-			private _m = callFunc(_usr,getGrabbedInActiveHand);
-			if isNullReference(_m) exitWith {};
-			private _idx = callSelfParams(getNearFreeSeatIndex,_usr);
-			callSelfParams(seatConnect,_m arg _idx);
-		};
-		super();
-	};
-
-
-	func(getSeatRestPos)
-	{
-		objParams_1(_usr);
-		
-		if equalTypes(_usr,nullPtr) then {
-			_usr = getSelf(seatListOwners) find _usr;
-		};
-		if (_usr == -1) exitWith {null};
-		
-		private _rplObj = getSelf(_seatListDummy) select _usr;
-		private _restPos = _rplObj getVariable "_restPos";
-		_restPos
-	};
+getter_func(canUseMainAction,isTypeOf(_usr,Mob));
+getter_func(getMainActionName,"Сесть");
+func(onMainAction) {
+	objParams_1(_usr);
+	
+	callSelfParams(seatConnect,_usr);
 };
+
+func(onClick)
+{
+	objParams_1(_usr);
+	if callFunc(_usr,isGrabbedInActiveHand) exitWith {
+		private _m = callFunc(_usr,getGrabbedInActiveHand);
+		if isNullReference(_m) exitWith {};
+		private _idx = callSelfParams(getNearFreeSeatIndex,_usr);
+		callSelfParams(seatConnect,_m arg _idx);
+	};
+	super();
+};
+
+func(getSeatRestPos)
+{
+	objParams_1(_usr);
+	
+	if equalTypes(_usr,nullPtr) then {
+		_usr = getSelf(seatListOwners) find _usr;
+	};
+	if (_usr == -1) exitWith {null};
+	
+	private _rplObj = getSelf(_seatListDummy) select _usr;
+	private _restPos = _rplObj getVariable "_restPos";
+	_restPos
+};
+
+
+}; //end __iseat_node_init__

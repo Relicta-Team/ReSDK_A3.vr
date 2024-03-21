@@ -1082,7 +1082,7 @@ endregion
 
 		if isTypeOf(this,BasicMob) exitwith {false};
 		
-		assert(!callSelf(isSeat));
+		assert_str(!callSelf(isSeat),"Seat " + callSelf(getClassName) + " cannot change model");
 
 		if callSelf(isInWorld) then {
 			//update modelpath
