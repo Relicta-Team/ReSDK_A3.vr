@@ -10,6 +10,11 @@
 #define GAME_STATE_PLAY 2
 #define GAME_STATE_END 3
 
+#define GAME_STATE_LIST_NODE_BINDING ['GAME_STATE_PRELOAD:Выбор режима:', \
+    'GAME_STATE_LOBBY:Подготовка:', \
+    'GAME_STATE_PLAY:Игра:', \
+    'GAME_STATE_END:Конец раунда:']
+
 //регистратор структуры роли
 //#define addRole(roleclass,rolename,countSlots) [roleclass,rolename,countSlots,[]]
 #define ROLE_NAME 0

@@ -103,14 +103,17 @@ _reg_unary_function = {
 
 // ["systemNodeName","Имя:Библиотечное имя","nil","void:Входное знач.1","void:Входное знач.2","void:Выходное знач."] reg_binary
 _reg_binary_function = {
-    params ["_sysname","_text","_code","_inInfo1","_inInfo2","_rezInfo",["_desc",""]];
+    params ["_sysname","_text","_code","_inInfo1","_inInfo2",["_rezInfo",""],["_desc",""]];
     private _paramsContext = [];
 
     [_paramsContext,_sysname,_text,_code,_desc] call _reg_function_common_provider;
 
     _paramsContext pushBack (format["in:%1",_inInfo1]);
     _paramsContext pushBack (format["in:%1",_inInfo2]);
-    _paramsContext pushBack (format["out:%1",_rezInfo]);
+    //optional output
+    if (_rezInfo != "") then {
+        _paramsContext pushBack (format["out:%1",_rezInfo]);
+    };
     
     (_paramsContext joinString endl) node_system
 };
