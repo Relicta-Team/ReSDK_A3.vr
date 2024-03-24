@@ -122,12 +122,12 @@ oop_getSimpleTypeSize = {
 //проверка типа
 oop_checkTypeSafe = {
 	params ["_typename",["_defaultRet","object"]];
-	#ifdef EDITOR
+	
 	if !isImplementClass(_typename) exitwith {
 		assert_str(false,"Указанный тип не существует: " + _typename);
 		_defaultRet
 	};
-	#endif
+	
 	_typename
 };
 
