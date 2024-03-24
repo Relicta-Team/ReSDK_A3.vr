@@ -5,7 +5,7 @@
 #define RENODE_MSG_TYPE_ERROR 2
 #define RENODE_MSG_TYPE_TRACE 3
 
-#define RENODE_MSG_CONSOLE_TYPE_LIST_NODE_BINDING ['RENODE_MSG_TYPE_LOG:Лог:', \
-    'RENODE_MSG_TYPE_WARNING:Предупреждение:', \
-    'RENODE_MSG_TYPE_ERROR:Ошибка:', \
-    'RENODE_MSG_TYPE_TRACE:Трассировка:']
+#define RENODE_MSG_CONSOLE_TYPE_LIST_NODE_BINDING ['Лог:RENODE_MSG_TYPE_LOG:', \
+    'Предупреждение:RENODE_MSG_TYPE_WARNING:', \
+    'Ошибка:RENODE_MSG_TYPE_ERROR:', \
+    'Трассировка:RENODE_MSG_TYPE_TRACE:']

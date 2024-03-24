@@ -16,7 +16,7 @@ __nodemodule_common_data__ = "";
 #define nodeModule_popPath(_lvl) __prvd_path_splited = (__nodemodule_common_path__ splitString "."); \
 if ((count __prvd_path_splited)-_lvl > 0) then { \
     reverse __prvd_path_splited; \
-    for "_i__" from 0 to _lvl do {__prvd_path_splited deleteAt 0}; \
+    for "_i__" from 1 to _lvl do {__prvd_path_splited deleteAt 0}; \
     reverse __prvd_path_splited; \
     __nodemodule_common_path__ = __prvd_path_splited joinString "."; \
 };

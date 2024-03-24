@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-node_system_group("clients")
+nodeModule_register("clients")
 
 nodeModule_setPath("Клиенты.Утилиты")
 nodeModule_setIcon("data\\icons\\icon_BluePrintEditor_Function_16px")
@@ -23,10 +23,10 @@ nodeModule_setExecType("pure")
 
 ["getGameState","Состояние игры","gm_state","enum.GameState:Состояние игры","Получает текущий статус игры: выбор режима, подготовка, игра, конец"] reg_nular
 
-["isGameStatePreload","Статус 'Выбора режима'","call gm_isRoundPreload","bool:Предзагрузка","Проверяет, является ли текущий статус игры выбором режима."] reg_nular
-["isGameStateLobby","Статус 'Подготовка'","call gm_isRoundLobby","bool:Подготовка","Проверяет, является ли текущий статус игры подготовкой, когда раунд ещё не начался и клиенты распеределяются по ролям."] reg_nular
-["isGameStateGame","Статус 'Игра'","call gm_isRoundPlaying","bool:Игра","Проверяет, является ли текущий статус игры процессом раунда."] reg_nular
-["isGameStateEnd","Статус 'Конец раунда'","call gm_isRoundEnding","bool:Конец","Проверяет, является ли текущий статус игры концом раунда."] reg_nular
+["isGameStatePreload","Статус ""Выбора режима""","call gm_isRoundPreload","bool:Предзагрузка","Проверяет, является ли текущий статус игры выбором режима."] reg_nular
+["isGameStateLobby","Статус ""Подготовка""","call gm_isRoundLobby","bool:Подготовка","Проверяет, является ли текущий статус игры подготовкой, когда раунд ещё не начался и клиенты распеределяются по ролям."] reg_nular
+["isGameStateGame","Статус ""Игра""","call gm_isRoundPlaying","bool:Игра","Проверяет, является ли текущий статус игры процессом раунда."] reg_nular
+["isGameStateEnd","Статус ""Конец раунда""","call gm_isRoundEnding","bool:Конец","Проверяет, является ли текущий статус игры концом раунда."] reg_nular
 
 ["getAllClientsByAccessLevel","Клиенты с уровнем доступа","[@in.1,@in.2] call cm_getAllClientsByAccessLevel",
     "enum.AccessLevel:Уровень доступа",
