@@ -91,13 +91,37 @@ region(Memories)
 		callSelfParams(ShowMessageBox,"Text" arg _txt);
 	};
 
+	"
+		name:Добавить воспоминание
+		desc:Добавляет мобу сообщение, отображаемое в его воспоминаниях. Если у персонажа нет головы или мозга - воспоминание не будет добавлено.
+		type:method
+		lockoverride:1
+		in:string:Воспоминание:Текст воспоминания
+		return:int:Индекс добавленного сообщения для возможности последующего удаления.
+	" node_met
 	func(addMemory)
 	{
 		objParams_1(_txt);
 
-		if !callSelf(hasBrain) exitWith {};
+		if !callSelf(hasBrain) exitWith {-1};
 		private _mem = getVar(callSelf(getBrain),memories);
 		callFuncParams(_mem,addMemory,_txt);
+	};
+
+	"
+		name:Удалить воспоминание
+		desc:Удаляет воспоминание моба. Если у персонажа нет головы или мозга - воспоминание не будет удалено.
+		type:method
+		lockoverride:1
+		in:int:Индекс воспоминания для удаления
+		return:bool:Удалено ли воспоминание. Если у персонажа нет мозга или индекс принимает недопустимое значение - возвращает @[bool ЛОЖЬ]
+	" node_met
+	func(removeMemory)
+	{
+		objParams_1(_h);
+		if !callSelf(hasBrain) exitWith {false};
+		private _mem = getVar(callSelf(getBrain),memories);
+		callFuncParams(_mem,removeMemory,_h);
 	};
 
 endregion

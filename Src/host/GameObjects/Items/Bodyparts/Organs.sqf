@@ -383,6 +383,16 @@ endclass
 			getSelf(messages) pushBack _mem;
 		};
 
+		func(removeMemory)
+		{
+			objParams_1(_mind);
+			private _marr = getSelf(messages);
+			if (_mind < 0 || _mind >= count _marr) exitWith {false};
+			if (count _marr == 0) exitWith {false};
+			_marr deleteAt _mind;
+			true
+		};
+
 		func(constructor)
 		{
 			objParams();
