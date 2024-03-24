@@ -60,7 +60,7 @@ class(ScriptedGamemode) extends(GMBase)
 	"
 		name:Получить тип полного антагониста
 		namelib:Обработчик полных антагонистов
-		desc:Возвращает строковое название класса полного (уникального) антагониста, которое переопределит роль зашедшего игрока. Срабатывает при старте раунда для игроков, которые выбрали полных или любых антагонистов и чьи роли могут стать полными антагонистами.\n"+
+		desc:Возвращает @[classname класс] полного (уникального) антагониста, которое переопределит роль зашедшего игрока. Срабатывает при старте раунда для игроков, которые выбрали полных или любых антагонистов и чьи роли могут стать полными антагонистами.\n"+
 		"
 		code:func(@thisName) { @thisParams;@genvar.out.5.internal(_countInGame)@genvar.out.6.internal(_countProbFullAntags) @out.1 };
 		return:classname:Название класса полного антагониста.
@@ -93,11 +93,14 @@ class(ScriptedGamemode) extends(GMBase)
 	"
 		name:Обработчик скрытых антагонистов
 		namelib:Обработчик скрытых антагонистов
-		desc:Возвращает строковое название класса скрытого антагониста, которое переопределит роль зашедшего игрока. "+
-			"Срабатывает при старте раунда, когда все игроки распределены по ролям и загрузились в игру.
-		code:func(@thisName) { @thisParams;@genvar.out.4.internal(_countInGame)@genvar.out.5.internal(_countProbHiddenAntags); @out.1};
+		desc:Обработчик скрытых антагонистов (персонажей, которые получают задачи оставаясь на своей роли).\n"+
+			"Срабатывает при старте раунда, когда все игроки распределены по ролям и загрузились в игру. "+
+		"В этом обработчике вы самостоятельно решаете кто станет скрытым антагонистом и как вы будете их хранить.
+		code:func(@thisName) { @thisParams;@genvar.out.5.internal(_countInGame)@genvar.out.6.internal(_countProbHiddenAntags); @out.1};
 		type:event
 		out:ServerClient^:Клиент:Объект проверяемого клиента, зашедший в игру на старте раунда.
+			opt:mul=1
+		out:Mob^:Моб:Объект проверяемого моба, зашедшего в игру на старте раунда.
 			opt:mul=1
 		out:int:Номер клиента:Порядковый номер проверяемого клиента. Отсчет ведется с 1. Для первого клиента это значение будет 1, для второго - 2 и т.д.
 		out:int:Всего игроков:Отражает количество игроков, зашедших в игру на старте раунда. Данное число удобно, когда нам нужно вычислить антагониста от процентного соотношения всех игроков.
@@ -937,4 +940,43 @@ class(ScriptedRole) extends(BasicRole)
 	" node_met
 	getterconst_func(getCurrentGamemode,gm_currentMode);
 
+endclass
+
+class(ScriptedEater) extends(ScriptedRole)
+	"
+		name:Жрун
+		desc:Базовая роль монстра типа ""Жрун"".
+		path:Игровая логика.Роли
+	" node_class
+
+	var(name,"Жрун");
+
+	var(returnInLobbyAfterDead,true);
+	getter_func(canStoreNameAndFaceForValidate,false);
+	
+	getterconst_func(_canTakeInLobbyConst,true);
+	getter_func(_canVisibleAfterStartConst,true);
+	var(count,1);
+	var(classMan,"GMPreyMobEater");
+	var(classWoman,"GMPreyMobEater");
+	
+	func(getEquipment)
+	{
+		objParams_1(_mob);
+		["Castoffs" + str randInt(1,3),_mob,INV_CLOTH] call createItemInInventory;
+	};
+	
+	func(onAssigned)
+	{
+		objParams_2(_mob,_usr);
+		super();
+		callFuncParams(_mob,setMobFace,"");//reset face
+		callFuncParams(_mob,generateNaming,callFunc(_mob,getRandomNamePrefix) arg "жрун");
+	};
+	func(onDeadBasic)
+	{
+		objParams_2(_mob,_usr);
+		super();
+		callFuncParams(_usr,setDeadTimeout,30);
+	};
 endclass

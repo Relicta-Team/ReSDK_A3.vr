@@ -25,6 +25,17 @@ nodeModule_setExecType("all")
     out:bool:Результат:Возвращает @[bool ИСТИНУ], если объект существует. Если ссылка на объект не существует или объект был удален - возвращает @[bool ЛОЖЬ].
 " node_system
 
+"
+    node:makeLiteralClassName
+    name:Создать буквальное имя класса
+    desc:Создает значение типа @[classname]
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:PureFunction
+    exec:pure
+    code:@in.1
+    in:classname:Имя класса:Класснейм
+    out:classname:Имя класса:Возвращаемое значение
+" node_system
 
 
 //TODO fix bug - stackgen error
@@ -35,7 +46,7 @@ nodeModule_setColorStyle("PureFunction")
 nodeModule_setExecType("pure")
 
 
-["thisObject","Этот объект:Объект этого графа (этот объект)",'this',"thisClassname:thisName","Возвращает ссылку на экземпляр текущего графа."] reg_nular
+["thisObject","Этот объект:Объект этого графа (этот объект)",'this',"thisClassname:thisName","Возвращает ссылку на экземпляр (объект) текущего графа."] reg_nular
 
 ["getChildTypes","Унаследованные классы","[@in.1,@in.2] call oop_getinhlist","classname:Тип","bool:Глобально:Выполняет глобальный поиск не только прямых наследников, а вообщех всех объектов прямо или косвенно унаследовавших свойства проверяемого типа"
     opt "def=false", "array[classname]:Массив типов",
@@ -47,5 +58,6 @@ nodeModule_setExecType("pure")
 //istypeof
 
 //TODO reflection category (e.g. reflection, injection, member info, attributes, etc.)
+//!injection not must be added
 //["createObjectByString","Создать объект",'instantiate(@in.1)']
 

@@ -16,7 +16,7 @@ __nodemodule_common_data__ = "";
 #define nodeModule_popPath(_lvl) __prvd_path_splited = (__nodemodule_common_path__ splitString "."); \
 if ((count __prvd_path_splited)-_lvl > 0) then { \
     reverse __prvd_path_splited; \
-    for "_i__" from 0 to _lvl do {__prvd_path_splited deleteAt 0}; \
+    for "_i__" from 1 to _lvl do {__prvd_path_splited deleteAt 0}; \
     reverse __prvd_path_splited; \
     __nodemodule_common_path__ = __prvd_path_splited joinString "."; \
 };
@@ -103,14 +103,17 @@ _reg_unary_function = {
 
 // ["systemNodeName","Имя:Библиотечное имя","nil","void:Входное знач.1","void:Входное знач.2","void:Выходное знач."] reg_binary
 _reg_binary_function = {
-    params ["_sysname","_text","_code","_inInfo1","_inInfo2","_rezInfo",["_desc",""]];
+    params ["_sysname","_text","_code","_inInfo1","_inInfo2",["_rezInfo",""],["_desc",""]];
     private _paramsContext = [];
 
     [_paramsContext,_sysname,_text,_code,_desc] call _reg_function_common_provider;
 
     _paramsContext pushBack (format["in:%1",_inInfo1]);
     _paramsContext pushBack (format["in:%1",_inInfo2]);
-    _paramsContext pushBack (format["out:%1",_rezInfo]);
+    //optional output
+    if (_rezInfo != "") then {
+        _paramsContext pushBack (format["out:%1",_rezInfo]);
+    };
     
     (_paramsContext joinString endl) node_system
 };

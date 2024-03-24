@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-node_system_group("system")
+nodeModule_register("system")
 
 nodeModule_setPath("Система")
 nodeModule_setIcon("data\\icons\\icon_BluePrintEditor_Function_16px")
@@ -21,9 +21,32 @@ nodeModule_addPath("Время")
 
 nodeModule_popPath(1)
 nodeModule_addPath("Отладка")
-//TODO iseditor, isrelease, isdebug
 
 
-// nodeModule_setExecType("all")
-// nodeModule_setColorStyle("Function")
-// ["assert","Утверждение",'assert_str(@in.1,@in.2); @out.1',"float:Значение" opt 'dname=0:mul=1',"Проверяет выражение"] reg_binary
+["isEditor","Это редактор","\n#ifdef EDITOR\ntrue\n#else\nfalse\n#endif\n","bool:Редактор" opt "mul=1","Возвращает @[bool ИСТИНУ], если текущий граф выполняется в редакторе."] reg_nular
+["isDebug","Это дебаг","\n#ifdef DEBUG\ntrue\n#else\nfalse\n#endif\n","bool:Дебаг" opt "mul=1","Возвращает @[bool ИСТИНУ], если текущий граф выполняется в отладочной сборке."] reg_nular
+["isRelease","Это релиз","\n#ifdef RELEASE\ntrue\n#else\nfalse\n#endif\n","bool:Релиз" opt "mul=1","Возвращает @[bool ИСТИНУ], если текущий граф выполняется в релизной сборке."] reg_nular
+
+nodeModule_setExecType("all")
+nodeModule_setColorStyle("Function")
+["assert","Утверждение",'assert_str(@in.1,@in.2); @out.1',"bool:Значение:Проверяемое выражение, которое должно возвращать истину.",
+"string:Сообщение:Текст сообщение при неудачной проверке.",
+null, //noreturn
+"Проверяет выражение. Если оно не истинно - выдает исключение. Утверждения автоматически выключаются в режиме сервера (не редактор и не отладка)."] reg_binary
+
+nodeModule_popPath(1)
+nodeModule_addPath("Консоль")
+
+nodeModule_setExecType("all")
+nodeModule_setColorStyle("Function")
+
+["consoleLogGeneric","Лог в консоль","[@in.1,@in.2,[@genport.in.3(,)]] call renode_print; @out.1",
+	"string:Сообщение:Текст сообщения. Для отображения данных используйте '%1' в сообщении. Например, для переменной, подключенной в данные 3 вставьте в строку '%3'.",
+	"enum.ConsoleLogType:Тип:Тип сообщения, характеризующий внешний вид сообщения - цвет, префикс. Обратите внимание, что в релизной сборке трассировочные сообщения не выводятся в консоли." + endl +
+	"in:void:Данные 1:Любые дополнительные данные для вывода." 
+		opt "typeget=ANY;@type:require=0" + endl +
+	"option:""makeport_in""\: {""type""\: ""makeport_in"",""src""\:""Данные 1"",""text_format""\:""Данные {value}""}"+endl+
+	"runtimeports:1"
+	,
+	null, "Выводит сообщение в консоль."
+] reg_binary

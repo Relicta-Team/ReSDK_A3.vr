@@ -12,6 +12,7 @@ node_system_group("array")
     namelib:Создание массива
     desc:Создает массив из указанных элементов
     icon:data\\icons\\icon_Blueprint_MakeArray_16x.png
+    color:PureFunction
     exec:pure
     code:[ @genport.in.1(,) ]
     in:auto:[0]
@@ -28,6 +29,7 @@ node_system_group("array")
     namelib:Создание пустого массива
     desc:Создает пустой массив для возможности заполнения пользователем.
     icon:data\\icons\\icon_Blueprint_MakeArray_16x.png
+    color:PureFunction
     exec:pure
     code:[]
     out:auto:Массив
@@ -129,8 +131,8 @@ node_system
     node:swap
     name:Заменить
     desc:Заменяет два элемента массива местами.
-    icon:data\\icons\\ArrayPin.png
-    rendertype:NoHeader
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:Function
     exec:all
     code:[@in.1,@in.2,@in.3] call arraySwap; @out.1
     in:auto:Массив:Ссылка на массив
@@ -145,8 +147,8 @@ node_system
 	name:Установить элемент
 	namelib:Установка элемента массива
 	desc:Устанавливает элемент массива по указанному индексу.
-	icon:data\\icons\\ArrayPin.png
-
+	icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:Function
 	exec:all
 	code:(@in.2)set[@in.3,@in.4]; @out.1
 	in:auto:Массив:Ссылка на массив, в котором будет установлен элемент по указанному индексу.
@@ -221,23 +223,24 @@ node_system
     out:int:Индекс:Возвращает -1 если элемент не найден, иначе возвращает индекс элемента в массиве.
 " node_system
 
-//findif //!Нужны генераторы локальных функций
+//! всё ещё не оптимизировано. в локальной функции параметр не итерируемый
+//findif
 // "
 //     node:findif
 //     name:Найти элемент по условию
-//     namelib:Поиск элемента по условию
-//     desc:Поиск элемента в массиве по условию
-//     icon:data\\icons\\ArrayPin.png
+//     namelib:Найти элемент по условию
+//     desc:Поиск элемента в массиве по условию."+
+//     "\nПараметры анонимной функции\:"+
+//     " Вход - любое значение. Выход - @[bool Условие] - был ли найден искомый элемент
+//     icon:data\\icons\\icon_BluePrintEditor_Function_16px
 //     exec:pure
 //     rendertype:NoHeader
-//     autocoloricon:1
-//     code:(@in.1) findif {@genvar.out.2.internal(_x) (@out.2)}
+//     code:(((@in.1) findif (@in.2))!=-1)
 //     in:auto:Массив
 //         opt:typeget=array;@type
-//     out:bool:Условие
-//     out:auto:Проверяемый элемент
-//         opt:typeget=array;@value.1
-//     out:bool:Результат:Истина, если элемент найден в массиве, иначе ложь
+//     in:auto:Функция
+//         opt:typeget=function;@value.1;function[anon=bool={}]
+//     out:bool:Результат:@[bool ИСТИНА], если элемент найден в массиве, иначе @[bool ЛОЖЬ]
 
 // " node_system
     
@@ -372,7 +375,7 @@ node_system
     in:auto:Массив
         opt:typeget=array;@type
     in:int:Индекс:Индекс, с которого начинается удаление элементов массива
-    int:int:Количество:Количество элементов для удаления
+    in:int:Количество:Количество элементов для удаления
 " node_system
 
 //sort
@@ -461,7 +464,7 @@ node_system
 //     node:apply
 //     name:Применить к массиву
 //     namelib:Применить к массиву
-//     desc:Применяет операцию к каждому элементу массива и возвращает новый массив с обновленными элементами
+//     desc:Применяет операцию (анонимную функцию) к каждому элементу массива и возвращает новый массив с обновленными элементами
 //     icon:data\\icons\\ArrayPin.png
 //     rendertype:NoHeader
 //     autocoloricon:1

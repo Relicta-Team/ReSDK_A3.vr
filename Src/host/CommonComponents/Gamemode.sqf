@@ -40,6 +40,7 @@ _provider_checkState = {
 	
 	if (_idx == -1) exitWith {
 		errorformat("[GAMEMODE:COMMON]: Unknown game state str <%1>",_stateStr);
+		false
 	};
 	if equals(_comparer,"==") exitWith {gm_state == _idx};
 	if equals(_comparer,"!=") exitWith {gm_state != _idx};

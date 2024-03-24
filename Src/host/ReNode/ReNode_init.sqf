@@ -7,6 +7,7 @@
 #include "..\oop.hpp"
 #include "..\text.hpp"
 
+#include "ReNode.h"
 #include "ReNode_debugger.sqf"
 
 /*
@@ -456,4 +457,18 @@ renode_invokeDelegate = {
     (_p__ select 0) apply _args;
     //call code and return
     _p__ call _cd__
+};
+
+//generic function for print messages into console
+renode_print = {
+    params ["_m","_ch","_ft"];
+    private _msg = [_m];
+    if not_equalTypes(_ft,[]) then {_ft = [_ft]};
+    _msg append _ft;
+    _msg = format _msg;
+
+    if (_ch == RENODE_MSG_TYPE_LOG) exitWith {log(_msg)};
+    if (_ch == RENODE_MSG_TYPE_WARNING) exitWith {warning(_msg)};
+    if (_ch == RENODE_MSG_TYPE_ERROR) exitWith {error(_msg)};
+    if (_ch == RENODE_MSG_TYPE_TRACE) exitWith {trace(_msg)};
 };

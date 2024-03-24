@@ -10,7 +10,8 @@ node_system_group("string")
     node:stringMake
     path:Строки
     name:Создать строку
-    desc:Создает строку из нескольких строк.
+    namelib:Создать строку (сложить строки)
+    desc:Создает строку из нескольких строк. Строки добавляются последовательно, начиная с порта 'Строка 1'.
     icon:data\\icons\\pill_16x.png
     runtimeports:1
     color:PureFunction

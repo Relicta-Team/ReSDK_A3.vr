@@ -151,6 +151,23 @@ node_enum
 	"
 ] node_enum
 
+
+#include "..\GamemodeManager\GamemodeManager.hpp"
+["GameState",GAME_STATE_LIST_NODE_BINDING,
+"
+	name:Состояние игры
+	desc:Перечисление состояний игровой сессии. Существует 4 состояния: ожидание установки режима, расстановка по ролям в лобби, процесс игры, конец раудна. "+
+	"Вы можете использовать математические операторы сравнения для определения состояний игры.
+"
+] node_enum
+
+#include "ReNode.h"
+["ConsoleLogType",RENODE_MSG_CONSOLE_TYPE_LIST_NODE_BINDING,
+"
+	name:Тип сообщения консоли
+	desc:Типы сообщений, которые можно вывести в консоль.
+"] node_enum
+
 //!!! enum helper
 nodeModule_register("enumhelper")
 nodeModule_setPath("Перечисления.Преобразования")

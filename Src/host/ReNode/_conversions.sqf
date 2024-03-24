@@ -20,6 +20,19 @@ node_system_group("conversion")
     out:string:Строка
 " node_system
 
+"
+    node:anyToBool
+    name:В булево
+    path:Преобразования
+    desc:Преобразует любое значение в булево. Любые числа, равные нулю, инвалидные объекты (null-ссылки) преобразуются в @[bool ЛОЖЬ]. Во всех остальных случаях выполняется преобразование в @[bool ИСТИНА].
+    rendertype:NoHeaderText
+    exec:pure
+    code:[@in.1]call rv_cppcheck
+    in:auto:Значение
+        opt:typeget=ANY;@type
+    out:bool:Результат
+" node_system
+
 _convFunc = {
     params ["_name","_code","_in","_out",["_desc","Преобразование"]];
     (_in splitString ":")params ["_intype","_inname"];
