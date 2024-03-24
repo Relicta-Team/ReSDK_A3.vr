@@ -424,6 +424,21 @@ Replaced value:
 3
 ```
 File: [host\GamemodeManager\GamemodeManager.hpp at line 11](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L11)
+## GAME_STATE_LIST_NODE_BINDING
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+['Выбор режима:GAME_STATE_PRELOAD:В этот момент режим ещё не выбран.', \
+    'Подготовка:GAME_STATE_LOBBY:На этом моменте раунд ещё не запущен, но режим уже выбран.', \
+    'Игра:GAME_STATE_PLAY:На этом моменте режим выбран и раунд запущен. Идёт процесс игры.', \
+    'Конец раунда:GAME_STATE_END:На этом моменте процесс игры завершен. Условия режима привели к его завершению.']
+```
+File: [host\GamemodeManager\GamemodeManager.hpp at line 13](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L13)
 ## ROLE_NAME
 
 Type: constant
@@ -435,7 +450,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 15](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L15)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 20](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L20)
 ## ROLE_DESC
 
 Type: constant
@@ -447,7 +462,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 16](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L16)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 21](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L21)
 ## ROLE_COUNT
 
 Type: constant
@@ -459,7 +474,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 17](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L17)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 22](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L22)
 ## ROLE_CONDITION_ADD_TO_LATE
 
 Type: constant
@@ -471,7 +486,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 18](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L18)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 23](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L23)
 ## ROLE_CONTENDERS
 
 Type: constant
@@ -483,7 +498,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 19](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L19)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 24](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L24)
 ## ROLE_INDEX
 
 Type: constant
@@ -495,7 +510,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 21](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L21)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 26](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L26)
 ## __addRoleToLateGame(roleName)
 
 Type: constant
@@ -507,7 +522,7 @@ Replaced value:
 ```sqf
 [roleName,__internal_isDefaultRole] call gm_addRoleToLateGame
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 23](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L23)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 28](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L28)
 ## __addRoleToLateGameWithArgs(args)
 
 Type: constant
@@ -519,7 +534,7 @@ Replaced value:
 ```sqf
 args call gm_addRoleToLateGame
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 24](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L24)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 29](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L29)
 ## __arrayArgs_LateGameCondition
 
 Type: constant
@@ -531,7 +546,7 @@ Replaced value:
 ```sqf
 [__internal_roleName,__internal_isDefaultRole]
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 25](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L25)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 30](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L30)
 ## LATERULE_AFTERSTART
 
 Type: constant
@@ -543,7 +558,7 @@ Replaced value:
 ```sqf
 {__addRoleToLateGame(__internal_roleName)}
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 27](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L27)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 32](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L32)
 ## LATERULE_BYCONDITION(cond)
 
 Type: constant
@@ -555,7 +570,7 @@ Replaced value:
 ```sqf
 {if (cond) then {__addRoleToLateGame(__internal_roleName)}}
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 28](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L28)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 33](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L33)
 ## LATERULE_DISABLE
 
 Type: constant
@@ -567,7 +582,7 @@ Replaced value:
 ```sqf
 LATERULE_BYCONDITION(false)
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 29](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L29)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 34](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L34)
 ## LATERULE_AFTERCONDITION(cond)
 
 Type: constant
@@ -579,7 +594,7 @@ Replaced value:
 ```sqf
 {asyncInvoke({cond},{__addRoleToLateGameWithArgs(_this)},__arrayArgs_LateGameCondition,-1,{})}
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 30](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L30)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 35](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L35)
 ## LATERULE_AFTERDELAY(delay)
 
 Type: constant
@@ -591,7 +606,7 @@ Replaced value:
 ```sqf
 {invokeAfterDelayParams({__addRoleToLateGameWithArgs(_this)},delay,__arrayArgs_LateGameCondition)}
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 31](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L31)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 36](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L36)
 ## setGameModeName(name)
 
 Type: constant
@@ -603,7 +618,7 @@ Replaced value:
 ```sqf
 gm_gameModeName = name;
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 34](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L34)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 39](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L39)
 ## addPreStartRole(type)
 
 Type: constant
@@ -618,7 +633,7 @@ errorformat("Cant load pre start role <%2> in game mode %1: Null reference",gm_g
 } else {gm_preStartRoles pushBackUnique __refroletype; \
 if callFunc(__refroletype,isMainRole) then {gm_preStartMainRoles pushBackUnique __refroletype}}
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 37](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L37)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 42](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L42)
 ## addLateRole(type)
 
 Type: constant
@@ -632,7 +647,7 @@ __refroletype = missionNamespace getVariable [("role_")+ (type),nullPtr]; if isN
 errorformat("Cant load late role <%2> in game mode %1: Null reference",gm_gameModeName arg type); \
 } else {gm_roundProgressRoles pushBackUnique __refroletype}
 ```
-File: [host\GamemodeManager\GamemodeManager.hpp at line 43](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L43)
+File: [host\GamemodeManager\GamemodeManager.hpp at line 48](../../../Src/host/GamemodeManager/GamemodeManager.hpp#L48)
 # GamemodeManager.sqf
 
 ## gm_currentMode
