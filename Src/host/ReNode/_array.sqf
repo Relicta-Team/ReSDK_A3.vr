@@ -12,6 +12,7 @@ node_system_group("array")
     namelib:Создание массива
     desc:Создает массив из указанных элементов
     icon:data\\icons\\icon_Blueprint_MakeArray_16x.png
+    color:PureFunction
     exec:pure
     code:[ @genport.in.1(,) ]
     in:auto:[0]
@@ -28,6 +29,7 @@ node_system_group("array")
     namelib:Создание пустого массива
     desc:Создает пустой массив для возможности заполнения пользователем.
     icon:data\\icons\\icon_Blueprint_MakeArray_16x.png
+    color:PureFunction
     exec:pure
     code:[]
     out:auto:Массив
@@ -129,8 +131,8 @@ node_system
     node:swap
     name:Заменить
     desc:Заменяет два элемента массива местами.
-    icon:data\\icons\\ArrayPin.png
-    rendertype:NoHeader
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:Function
     exec:all
     code:[@in.1,@in.2,@in.3] call arraySwap; @out.1
     in:auto:Массив:Ссылка на массив
@@ -145,8 +147,8 @@ node_system
 	name:Установить элемент
 	namelib:Установка элемента массива
 	desc:Устанавливает элемент массива по указанному индексу.
-	icon:data\\icons\\ArrayPin.png
-
+	icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:Function
 	exec:all
 	code:(@in.2)set[@in.3,@in.4]; @out.1
 	in:auto:Массив:Ссылка на массив, в котором будет установлен элемент по указанному индексу.
@@ -373,7 +375,7 @@ node_system
     in:auto:Массив
         opt:typeget=array;@type
     in:int:Индекс:Индекс, с которого начинается удаление элементов массива
-    int:int:Количество:Количество элементов для удаления
+    in:int:Количество:Количество элементов для удаления
 " node_system
 
 //sort

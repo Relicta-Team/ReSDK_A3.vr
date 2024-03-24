@@ -161,6 +161,13 @@ node_enum
 "
 ] node_enum
 
+#include "ReNode.h"
+["ConsoleLogType",RENODE_MSG_CONSOLE_TYPE_LIST_NODE_BINDING,
+"
+	name:Тип сообщения консоли
+	desc:Типы сообщений, которые можно вывести в консоль.
+"] node_enum
+
 //!!! enum helper
 nodeModule_register("enumhelper")
 nodeModule_setPath("Перечисления.Преобразования")

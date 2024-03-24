@@ -26,6 +26,7 @@ private __FUNCITONS_LOAD_ONLY__ = true;
 //тут зарегистрированы узлы общего назначения (работа с типами, операторы)
 #include "_systemNodes.sqf"
 #include "_array.sqf"
+#include "_clients.sqf"
 #include "_string.sqf"
 #include "_conversions.sqf"
 #include "_math.sqf"
