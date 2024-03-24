@@ -4425,6 +4425,12 @@ def:m:ScriptedRole.getCurrentGamemode_0
 		classprop:0
 		return:ScriptedGamemode:Текущий режим
 	
+def:c:ScriptedEater
+
+		name:Жрун
+		desc:Базовая роль монстра типа "Жрун".
+		path:Игровая логика.Роли
+	
 def:c:GMBase
 
 		name:Базовый режим
@@ -15140,6 +15146,15 @@ $REGION:CLASSMETA
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"allowedModes":{"return": "null_array"},"allowedMaps":{"return": "null_array"},"weight":{"return": "int"},"update_handle":{"return": "int"},"roundDurationCreated":{"return": "int"},"tickTimeCreated":{"return": "int"}}   },
    "methods": { "defined": {
 "canPlay":{"return": "<undefined>"},"isMultiplay":{"return": "<undefined>"},"canPlayOnMobAtStart":{"return": "<undefined>"},"onMob":{"return": "<undefined>"},"isAllowedMob":{"return": "<undefined>"},"updateDelay":{"return": "<undefined>"},"onUpdate":{"return": "<undefined>"},"activateDelay":{"return": "<undefined>"},"onActivate":{"return": "<undefined>"},"isHidden":{"return": "<undefined>"},"_onUpdateImpl":{"return": "<undefined>"},"terminateUpdate":{"return": "<undefined>"},"canStartUpdate":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"playNotification":{"return": "<undefined>"}
+}   }
+}
+,"ScriptedEater": {
+    "baseClass" : "ScriptedRole",
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":947},
+   "fields": { "defined": {
+"name":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"count":{"return": "int"},"classMan":{"return": "string"},"classWoman":{"return": "string"}}   },
+   "methods": { "defined": {
+"canStoreNameAndFaceForValidate":{"return": "<undefined>"},"_canTakeInLobbyConst":{"return": "<undefined>"},"_canVisibleAfterStartConst":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"}
 }   }
 }
 ,"GMTemplate_RAdventurerLate": {

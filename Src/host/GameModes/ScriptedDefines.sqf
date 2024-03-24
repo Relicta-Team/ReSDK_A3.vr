@@ -941,3 +941,42 @@ class(ScriptedRole) extends(BasicRole)
 	getterconst_func(getCurrentGamemode,gm_currentMode);
 
 endclass
+
+class(ScriptedEater) extends(ScriptedRole)
+	"
+		name:Жрун
+		desc:Базовая роль монстра типа ""Жрун"".
+		path:Игровая логика.Роли
+	" node_class
+
+	var(name,"Жрун");
+
+	var(returnInLobbyAfterDead,true);
+	getter_func(canStoreNameAndFaceForValidate,false);
+	
+	getterconst_func(_canTakeInLobbyConst,true);
+	getter_func(_canVisibleAfterStartConst,true);
+	var(count,1);
+	var(classMan,"GMPreyMobEater");
+	var(classWoman,"GMPreyMobEater");
+	
+	func(getEquipment)
+	{
+		objParams_1(_mob);
+		["Castoffs" + str randInt(1,3),_mob,INV_CLOTH] call createItemInInventory;
+	};
+	
+	func(onAssigned)
+	{
+		objParams_2(_mob,_usr);
+		super();
+		callFuncParams(_mob,setMobFace,"");//reset face
+		callFuncParams(_mob,generateNaming,callFunc(_mob,getRandomNamePrefix) arg "жрун");
+	};
+	func(onDeadBasic)
+	{
+		objParams_2(_mob,_usr);
+		super();
+		callFuncParams(_usr,setDeadTimeout,30);
+	};
+endclass
