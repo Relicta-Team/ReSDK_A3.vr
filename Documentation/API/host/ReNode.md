@@ -11,7 +11,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\ReNode\ReNode.h at line 3](../../../Src/host/ReNode/ReNode.h#L3)
+File: [host\ReNode\ReNode.h at line 7](../../../Src/host/ReNode/ReNode.h#L7)
 ## RENODE_MSG_TYPE_WARNING
 
 Type: constant
@@ -23,7 +23,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\ReNode\ReNode.h at line 4](../../../Src/host/ReNode/ReNode.h#L4)
+File: [host\ReNode\ReNode.h at line 8](../../../Src/host/ReNode/ReNode.h#L8)
 ## RENODE_MSG_TYPE_ERROR
 
 Type: constant
@@ -35,7 +35,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\ReNode\ReNode.h at line 5](../../../Src/host/ReNode/ReNode.h#L5)
+File: [host\ReNode\ReNode.h at line 9](../../../Src/host/ReNode/ReNode.h#L9)
 ## RENODE_MSG_TYPE_TRACE
 
 Type: constant
@@ -47,7 +47,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\ReNode\ReNode.h at line 6](../../../Src/host/ReNode/ReNode.h#L6)
+File: [host\ReNode\ReNode.h at line 10](../../../Src/host/ReNode/ReNode.h#L10)
 ## RENODE_MSG_CONSOLE_TYPE_LIST_NODE_BINDING
 
 Type: constant
@@ -62,7 +62,7 @@ Replaced value:
     'Ошибка:RENODE_MSG_TYPE_ERROR:', \
     'Трассировка:RENODE_MSG_TYPE_TRACE:']
 ```
-File: [host\ReNode\ReNode.h at line 8](../../../Src/host/ReNode/ReNode.h#L8)
+File: [host\ReNode\ReNode.h at line 12](../../../Src/host/ReNode/ReNode.h#L12)
 # ReNode_bindingHelpers.sqf
 
 ## nodeModule_register(_name)
