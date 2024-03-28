@@ -211,6 +211,13 @@ node_enum
 "
 ] node_enum
 
+#include "..\SpecialActions\SpecialActions.hpp"
+["SpecialActionType",SPECIAL_ACTION_LIST_NODE_BINDING,
+"
+	name:Специальное действие
+	desc:Специальное действие, производимое персонажем. По умолчанию вызывается через кнопку ""F"".
+"] node_enum
+
 //!!! enum helper
 nodeModule_register("enumhelper")
 nodeModule_setPath("Перечисления.Преобразования")

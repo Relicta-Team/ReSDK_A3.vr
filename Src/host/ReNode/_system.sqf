@@ -40,7 +40,7 @@ nodeModule_addPath("Консоль")
 nodeModule_setExecType("all")
 nodeModule_setColorStyle("Function")
 
-["consoleLogGeneric","Лог в консоль","[@in.1,@in.2,[@genport.in.3(,)]] call renode_print; @out.1",
+["consoleLogGeneric","Лог в консоль","[@in.2,@in.3,[@genport.in.4(,)]] call renode_print; @out.1",
 	"string:Сообщение:Текст сообщения. Для отображения данных используйте '%1' в сообщении. Например, для переменной, подключенной в данные 3 вставьте в строку '%3'.",
 	"enum.ConsoleLogType:Тип:Тип сообщения, характеризующий внешний вид сообщения - цвет, префикс. Обратите внимание, что в релизной сборке трассировочные сообщения не выводятся в консоли." + endl +
 	"in:void:Данные 1:Любые дополнительные данные для вывода." 
