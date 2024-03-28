@@ -366,6 +366,11 @@ region(Connect control events)
 		private _commonInfo = "";
 		private _age = getSelf(age);
 
+		private _baseDesc = callSelf(getDesc);
+		if (!isNullVar(_baseDesc) && {_baseDesc != ""}) then {
+			modvar(_commonInfo) + sbr + _baseDesc;
+		};
+
 		if (
 		#ifdef EDITOR
 		true
