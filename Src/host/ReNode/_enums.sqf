@@ -168,6 +168,16 @@ node_enum
 	desc:Типы сообщений, которые можно вывести в консоль.
 "] node_enum
 
+
+#include "..\CombatSystem\CombatSystem.hpp"
+["DamageType",DAMAGE_TYPE_LIST_NODE_BINDING,
+"
+	name:Тип урона
+	desc:Перечисление типов урона.
+	enumtype:string
+"
+] node_enum
+
 //!!! enum helper
 nodeModule_register("enumhelper")
 nodeModule_setPath("Перечисления.Преобразования")
