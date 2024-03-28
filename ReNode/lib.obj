@@ -2453,6 +2453,25 @@ eval:Провал:-1
 eval:Крилический успех:2
 eval:Критический провал:-2
 
+def:enum:enums
+node:SpecialActionType
+path:Перечисления
+
+	name:Специальное действие
+	desc:Специальное действие, производимое персонажем. По умолчанию вызывается через кнопку "F".
+
+eval:Без действия:-1:Спец.действие не определено
+eval:Пинок:0:Специальное действие пинания персонажей или объектов
+eval:Схватить:1:Специальное действие хватания персонажей
+eval:Кусать:2:Специальное действие укуса
+eval:Прыжок:3:Специальное действие прыжка
+eval:Красть:4:Специальное действие воровства предметов
+eval:Прятаться:5:Специальное действие скрытности
+eval:Глаза:6:Специальное действие для открытия и закрытия глаз
+eval:Сон:7:Специальное действие для засыпания и пробуждения
+eval:Бросать:8:Специальное действие для броска предметов
+eval:Дыхание:9:Специальное действие для задержания дыхания
+
 def:node:enumhelper
 node:enumGetNames
 name:Имена перечислений
@@ -2872,7 +2891,7 @@ def:node:system
 node:consoleLogGeneric
 name:Лог в консоль
 path:Система.Консоль
-code:[@in.1,@in.2,[@genport.in.3(,)]] call renode_print; @out.1
+code:[@in.2,@in.3,[@genport.in.4(,)]] call renode_print; @out.1
 desc:Выводит сообщение в консоль.
 icon:data\\icons\\icon_BluePrintEditor_Function_16px
 color:Function
@@ -3546,6 +3565,22 @@ def:c:IDestructible
 		desc:Разрушаемый игровой объект. Все игровые объекты кроме мобов наследуются от данного класса.
 		path:Игровые объекты
 	
+def:f:IDestructible.__script_0
+
+		name:Скрипт
+		desc:Возвращает ссылку на скрипт, привязанный к игровому объекту.
+		type:get
+		classprop:0
+		return:object^:Ссылка на скрипт
+	
+def:m:IDestructible.isScriptedObject_0
+
+		name:Это скриптовый объект
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является скриптовым объектом.
+		type:get
+		classprop:0
+		return:bool:Является ли объект скриптовым объектом
+	
 def:m:IDestructible.isSingleSeat_0
 
 		name:Одноместное сиденье
@@ -3616,6 +3651,146 @@ def:m:IDestructible.seatDisconnect_0
 		return:bool:Была ли сущность поднята с сиденья. Если место не было занято - возвращает ЛОЖЬ.
 	
 path:Игровые объекты.Сиденья
+def:c:ScriptedGameObject
+
+		name:Скрипт игрового объекта
+		desc:Базовый скрипт игрового объекта для реализации пользовательской логики.
+		path:Игровые объекты.Скриптовые
+	
+def:f:ScriptedGameObject.name_0
+
+		name:Название скрипта
+		desc:Внутреннее название скрипта для игрового объекта.
+		prop:all
+		classprop:1
+		return:string:Название скрипта
+		defval:Скрипт игрового объекта
+	
+def:f:ScriptedGameObject.src_0
+
+		name:Владелец скрипта
+		desc:Игровой объект, к которому привязан скрипт.
+		prop:get
+		return:IDestructible^:Игровой объект.
+	
+def:m:ScriptedGameObject.getRestrictions_0
+
+		name:Ограничения типов
+		desc:Какие типы игровых объектов могут владеть этим скриптом. При указании класса для ограничения используется наследование. Например, указав класс Item все типы, унаследованные от него (например, свеча) могут так же использовать этот скрипт.
+		type:const
+		classprop:1
+		return:array[classname]:Список ролей, доступных в режиме.
+		defval:["IDestructible"]
+		restr:IDestructible
+	
+def:m:ScriptedGameObject.onScriptAssigned_0
+
+		name:Скрипт присвоен
+		desc:Выполняется когда скрипт присваивается игровому объекту.
+		type:event
+		out:IDestructible^:Объект:Игровой объект, к которому привязан скрипт.
+	
+def:m:ScriptedGameObject.onMainAction_0
+
+		name:При основном действии
+		namelib:При основном действии
+		desc:Срабатывает при исполнении персонажем основного действия с объектом (при нажатии кнопки "Е").
+		type:event
+		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+		return:bool:Результат выполнения основного действия. Возвращает @[bool ИСТИНУ], если основное действие успешно выполнено.
+	
+def:m:ScriptedGameObject.callBaseMainAction_0
+
+		name:Основное действие
+		desc:Базовая логика основного действия, определенная в игровом объекте.
+		type:method
+		lockoverride:1
+		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+		return:bool:Результат выполнения основного действия. Возвращает @[bool ИСТИНУ], если основное действие успешно выполнено.
+	
+def:m:ScriptedGameObject.onExtraAction_0
+
+		name:При особом действии
+		namelib:При особом действии
+		desc:Срабатывает при исполнении персонажем особого действия с объектом (при нажатии кнопки "F" с включенным спец.действием).
+		type:event
+		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+		out:enum.SpecialActionType:Тип действия:Тип специального действия		
+	
+def:m:ScriptedGameObject.onInteractWith_0
+
+		name:При взаимодействии предметом
+		namelib:При взаимодействии предметом
+		desc:Срабатывает при исполнении персонажем взаимодействия с объектом с помощью предмета в активной руке. (ЛКМ по объекту с предметом в руке)
+		type:event
+		out:Item:Предмет:Предмет, которым выполняется взаимодействие с объектом.
+		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
+	
+def:m:ScriptedGameObject.callBaseInteractWith_0
+
+		name:Взаимодействие предметом
+		desc:Базовая логика взаимодействия с помощью предмета, определенная в игровом объекте.
+		type:method
+		lockoverride:1
+		in:Item:Предмет:Предмет, которым выполняется взаимодействие с объектом.
+		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
+	
+def:m:ScriptedGameObject.onClick_0
+
+		name:При нажатии по объекту
+		namelib:При нажатии по объекту
+		desc:Срабатывает при нажатии ЛКМ пустой рукой по объекту в мире.
+		type:event
+		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
+	
+def:m:ScriptedGameObject.callBaseClick_0
+
+		name:Нажатие по объекту
+		desc:Базовая логика нажатия по объекту, определенная в игровом объекте.
+		type:method
+		lockoverride:1
+		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
+	
+def:m:ScriptedGameObject.onItemClick_0
+
+		name:При нажатии по предмету в инвентаре
+		namelib:При нажатии по предмету в инвентаре
+		desc:Срабатывает при нажатии персонажем по предмету в слоте собственного инвентаря.
+		type:event
+		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
+	
+def:m:ScriptedGameObject.callBaseItemClick_0
+
+		name:Нажатие по предмету в инвентаре
+		desc:Базовая логика нажатия по предмету, определенная в игровом объекте.
+		type:method
+		lockoverride:1
+		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
+	
+def:m:ScriptedGameObject.onItemSelfClick_0
+
+		name:При нажатии по предмету в активной руке
+		namelib:При нажатии по предмету в активной руке
+		desc:Срабатывает при нажатии персонажем по предмету в активной руке через инвентарь.
+		type:event
+		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
+	
+def:m:ScriptedGameObject.callBaseItemSelfClick_0
+
+		name:Нажатие по предмету в активной руке
+		desc:Базовая логика нажатия по предмету, определенная в игровом объекте.
+		type:method
+		lockoverride:1
+		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
+	
 def:c:BasicMob
 
 		name:Базовый моб
@@ -5360,6 +5535,15 @@ $REGION:CLASSMETA
 }   },
    "methods": { "defined": {
 "getRefList":{"return": "<undefined>"},"getRefListFromType":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"destructor":{"return": "<undefined>"}
+}   }
+}
+,"ScriptedGameObject": {
+    "baseClass" : "object",
+    "defined" : {"file":"src\\host\\GameObjects\\ScriptedGameObject.sqf","line":9},
+   "fields": { "defined": {
+"name":{"return": "string"},"src":{"return": "object"}}   },
+   "methods": { "defined": {
+"getRestrictions":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"callBaseInteractWith":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"callBaseClick":{"return": "<undefined>"},"onItemClick":{"return": "<undefined>"},"callBaseItemClick":{"return": "<undefined>"},"onItemSelfClick":{"return": "<undefined>"},"callBaseItemSelfClick":{"return": "<undefined>"}
 }   }
 }
 ,"VirtualMemoryStorage": {
@@ -14553,11 +14737,11 @@ $REGION:CLASSMETA
 }
 ,"IDestructible": {
     "baseClass" : "GameObject",
-    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":1210},
+    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":1212},
    "fields": { "defined": {
-"ht":{"return": "int"},"hp":{"return": "int"},"hpMax":{"return": "int"},"dr":{"return": "int"},"drMax":{"return": "int"},"germs":{"return": "int"},"__statusEffects":{"return": "null"}}   },
+"__script":{"return": "object"},"ht":{"return": "int"},"hp":{"return": "int"},"hpMax":{"return": "int"},"dr":{"return": "int"},"drMax":{"return": "int"},"germs":{"return": "int"},"__statusEffects":{"return": "null"}}   },
    "methods": { "defined": {
-"getDamageSound":{"return": "<undefined>"},"canApplyDamage":{"return": "<undefined>"},"objectHealthType":{"return": "<undefined>"},"onDestroyed":{"return": "<undefined>"},"applyDamage":{"return": "<undefined>"},"onChangeObjectHP":{"return": "<undefined>"},"onAffectDamageToPos":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getObjectPlace":{"return": "<undefined>"},"addStatusEffect":{"return": "<undefined>"},"removeStatusEffect":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"}
+"isScriptedObject":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"getDamageSound":{"return": "<undefined>"},"canApplyDamage":{"return": "<undefined>"},"objectHealthType":{"return": "<undefined>"},"onDestroyed":{"return": "<undefined>"},"applyDamage":{"return": "<undefined>"},"onChangeObjectHP":{"return": "<undefined>"},"onAffectDamageToPos":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getObjectPlace":{"return": "<undefined>"},"addStatusEffect":{"return": "<undefined>"},"removeStatusEffect":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"}
 }   }
 }
 ,"BasicMob": {
@@ -14575,7 +14759,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "null"},"desc":{"return": "null"},"weight":{"return": "int"},"pointer":{"return": "null"},"_update_handle_auto":{"return": "int"}}   },
    "methods": { "defined": {
-"getAbstractName":{"return": "<undefined>"},"getName":{"return": "<undefined>"},"getDesc":{"return": "<undefined>"},"getVerbs":{"return": "<undefined>"},"isInWorld":{"return": "<undefined>"},"isFlying":{"return": "<undefined>"},"stopFlying":{"return": "<undefined>"},"onStopFlying":{"return": "<undefined>"},"getChunkType":{"return": "<undefined>"},"isItem":{"return": "<undefined>"},"isMob":{"return": "<undefined>"},"isDecor":{"return": "<undefined>"},"isStruct":{"return": "<undefined>"},"isDoor":{"return": "<undefined>"},"isContainer":{"return": "<undefined>"},"isStack":{"return": "<undefined>"},"canLight":{"return": "<undefined>"},"isFireLight":{"return": "<undefined>"},"isReagentContainer":{"return": "<undefined>"},"isDrink":{"return": "<undefined>"},"isFood":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"canUseAsCraftSpace":{"return": "<undefined>"},"getAllowedCraftCategories":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"__handlePreInitVars__":{"return": "<undefined>"},"__handleNativePreInitVars__":{"return": "<undefined>"},"getAllObjects":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"onMoveInItem":{"return": "<undefined>"},"canMoveInItem":{"return": "<undefined>"},"canMoveOutItem":{"return": "<undefined>"},"onMoveOutItem":{"return": "<undefined>"},"getNameFor":{"return": "<undefined>"},"getIcon":{"return": "<undefined>"},"getDescFor":{"return": "<undefined>"},"startUpdateMethod":{"return": "<undefined>"},"stopUpdateMethod":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"onWeightChanged":{"return": "<undefined>"},"getTextWeight":{"return": "<undefined>"},"getTextSize":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"onItemClick":{"return": "<undefined>"},"onItemSelfClick":{"return": "<undefined>"},"onCrushingContact":{"return": "<undefined>"},"getBasicLoc":{"return": "<undefined>"},"getDistanceTo":{"return": "<undefined>"},"getSourceLoc":{"return": "<undefined>"},"getModelPosition":{"return": "<undefined>"},"getModelDirection":{"return": "<undefined>"},"getPos":{"return": "<undefined>"},"getDir":{"return": "<undefined>"},"getSectorPos":{"return": "<undefined>"},"getSectorDistTo":{"return": "<undefined>"},"getInheritFrom":{"return": "<undefined>"},"getNearClients":{"return": "<undefined>"},"getNearItems":{"return": "<undefined>"},"getNearStructs":{"return": "<undefined>"},"getNearDecors":{"return": "<undefined>"},"getNearMobs":{"return": "<undefined>"},"getNearMob":{"return": "<undefined>"},"getNearObjects":{"return": "<undefined>"},"getObjectPlace":{"return": "<undefined>"},"getViewers":{"return": "<undefined>"},"playSound":{"return": "<undefined>"},"_worldSayWrapper":{"return": "<undefined>"},"worldSay":{"return": "<undefined>"},"unloadModel":{"return": "<undefined>"},"loadModel":{"return": "<undefined>"},"replicateObject":{"return": "<undefined>"},"setModel":{"return": "<undefined>"},"doSmell":{"return": "<undefined>"},"getSmellInfo":{"return": "<undefined>"},"onThrowHit":{"return": "<undefined>"},"onBulletAct":{"return": "<undefined>"}
+"getAbstractName":{"return": "<undefined>"},"getName":{"return": "<undefined>"},"getDesc":{"return": "<undefined>"},"getVerbs":{"return": "<undefined>"},"isInWorld":{"return": "<undefined>"},"isFlying":{"return": "<undefined>"},"stopFlying":{"return": "<undefined>"},"onStopFlying":{"return": "<undefined>"},"getChunkType":{"return": "<undefined>"},"isItem":{"return": "<undefined>"},"isMob":{"return": "<undefined>"},"isDecor":{"return": "<undefined>"},"isStruct":{"return": "<undefined>"},"isDoor":{"return": "<undefined>"},"isContainer":{"return": "<undefined>"},"isStack":{"return": "<undefined>"},"canLight":{"return": "<undefined>"},"isFireLight":{"return": "<undefined>"},"isReagentContainer":{"return": "<undefined>"},"isDrink":{"return": "<undefined>"},"isFood":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"canUseAsCraftSpace":{"return": "<undefined>"},"getAllowedCraftCategories":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"__handlePreInitVars__":{"return": "<undefined>"},"__handleNativePreInitVars__":{"return": "<undefined>"},"getAllObjects":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"onMoveInItem":{"return": "<undefined>"},"canMoveInItem":{"return": "<undefined>"},"canMoveOutItem":{"return": "<undefined>"},"onMoveOutItem":{"return": "<undefined>"},"getNameFor":{"return": "<undefined>"},"getIcon":{"return": "<undefined>"},"getDescFor":{"return": "<undefined>"},"isScriptedObject":{"return": "<undefined>"},"startUpdateMethod":{"return": "<undefined>"},"stopUpdateMethod":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"onWeightChanged":{"return": "<undefined>"},"getTextWeight":{"return": "<undefined>"},"getTextSize":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"onItemClick":{"return": "<undefined>"},"onItemSelfClick":{"return": "<undefined>"},"onCrushingContact":{"return": "<undefined>"},"getBasicLoc":{"return": "<undefined>"},"getDistanceTo":{"return": "<undefined>"},"getSourceLoc":{"return": "<undefined>"},"getModelPosition":{"return": "<undefined>"},"getModelDirection":{"return": "<undefined>"},"getPos":{"return": "<undefined>"},"getDir":{"return": "<undefined>"},"getSectorPos":{"return": "<undefined>"},"getSectorDistTo":{"return": "<undefined>"},"getInheritFrom":{"return": "<undefined>"},"getNearClients":{"return": "<undefined>"},"getNearItems":{"return": "<undefined>"},"getNearStructs":{"return": "<undefined>"},"getNearDecors":{"return": "<undefined>"},"getNearMobs":{"return": "<undefined>"},"getNearMob":{"return": "<undefined>"},"getNearObjects":{"return": "<undefined>"},"getObjectPlace":{"return": "<undefined>"},"getViewers":{"return": "<undefined>"},"playSound":{"return": "<undefined>"},"_worldSayWrapper":{"return": "<undefined>"},"worldSay":{"return": "<undefined>"},"unloadModel":{"return": "<undefined>"},"loadModel":{"return": "<undefined>"},"replicateObject":{"return": "<undefined>"},"setModel":{"return": "<undefined>"},"doSmell":{"return": "<undefined>"},"getSmellInfo":{"return": "<undefined>"},"onThrowHit":{"return": "<undefined>"},"onBulletAct":{"return": "<undefined>"}
 }   }
 }
 ,"CFryingPan_Bibki": {
