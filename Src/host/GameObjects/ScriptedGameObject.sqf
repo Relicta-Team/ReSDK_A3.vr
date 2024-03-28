@@ -43,6 +43,12 @@ class(ScriptedGameObject) extends(object)
 	" node_met
 	getter_func(getRestrictions,["IDestructible"]);
 
+	// ------------------------------ common setup -------------------------------
+	//TODO functions
+	//auto add script to all objects - когда создается первый объект такого скрипта он апллаится ко всем объектам указанного типа
+
+	// ------------------------------------------- logic -------------------------------------------
+
 	func(assignScript)
 	{
 		objParams_1(_src);
@@ -95,10 +101,16 @@ class(ScriptedGameObject) extends(object)
 		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
 		return:bool:Результат выполнения основного действия. Возвращает @[bool ИСТИНУ], если основное действие успешно выполнено.
 	" node_met
-	func(onMainAction)
+	func(_onMainActionWrapper)
 	{
 		objParams_1(_usr);
 		callSelfParams(callBaseMainAction,_usr);
+	};
+
+	func(onMainAction)
+	{
+		objParams_1(_usr);
+		callSelfParams(_onMainActionWrapper,_usr);
 	};
 	
 	"
@@ -106,12 +118,12 @@ class(ScriptedGameObject) extends(object)
 		desc:Базовая логика основного действия, определенная в игровом объекте.
 		type:method
 		lockoverride:1
-		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
 		return:bool:Результат выполнения основного действия. Возвращает @[bool ИСТИНУ], если основное действие успешно выполнено.
 	" node_met
 	func(callBaseMainAction)
 	{
-		objParams_1(_usr);
+		params ['this'];
+
 		private _r = callFuncParams(_usr,mainAction,getSelf(src));
 		if isNullVar(_r) then {_r = true};
 		if not_equalTypes(_r,true) then {_r = true};
@@ -126,16 +138,32 @@ class(ScriptedGameObject) extends(object)
 		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
 		out:enum.SpecialActionType:Тип действия:Тип специального действия		
 	" node_met
+	func(_onExtraActionWrapper)
+	{
+		objParams_2(_usr,_act);
+		callSelfParams(callBaseExtraAction,_usr arg _act);
+	};
+
 	func(onExtraAction)
 	{
 		objParams_2(_usr,_act);
-		callSelfParams(callBaseExtraAction,_usr,_act);
+		callSelfParams(_onExtraActionWrapper,_usr arg _act);
 	};
 
+	"
+		name:Особое действие
+		desc:Базовая логика особого действия, определенная в игровом объекте.
+		type:method
+		lockoverride:1
+		return:bool:Результат выполнения особого действия. Возвращает @[bool ИСТИНУ], если особое действие успешно выполнено.
+	" node_met
 	func(callBaseExtraAction)
 	{
-		objParams_1(_usr);
-		callFuncParams(_usr,extraAction,getSelf(src));
+		params ['this'];
+		private _r = callFuncParams(_usr,extraAction,getSelf(src));
+		if isNullVar(_r) then {_r = true};
+		if not_equalTypes(_r,true) then {_r = true};
+		_r
 	};
 
 
@@ -148,10 +176,16 @@ class(ScriptedGameObject) extends(object)
 		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
 		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
 	" node_met
-	func(onInteractWith)
+	func(_onInteractWithWrapper)
 	{
 		objParams_2(_with,_usr);
 		callSelfParams(callBaseInteractWith,_with,_usr);
+	};
+
+	func(onInteractWith)
+	{
+		objParams_2(_with,_usr);
+		callSelfParams(_onInteractWithWrapper,_with,_usr);
 	};
 
 	"
@@ -165,7 +199,7 @@ class(ScriptedGameObject) extends(object)
 	" node_met
 	func(callBaseInteractWith)
 	{
-		objParams_2(_with,_usr);
+		params ['this'];
 		private _r = callFuncParams(getSelf(src),onInteractWith,_with,_usr);
 		if isNullVar(_r) then {_r = true};
 		if not_equalTypes(_r,true) then {_r = true};
@@ -180,10 +214,16 @@ class(ScriptedGameObject) extends(object)
 		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
 		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
 	" node_met
-	func(onClick)
+	func(_onClickWrapper)
 	{
 		objParams_1(_usr);
 		callSelfParams(callBaseClick,_usr);
+	};
+
+	func(onClick)
+	{
+		objParams_1(_usr);
+		callSelfParams(_onClickWrapper,_usr);
 	};
 
 	"
@@ -196,13 +236,18 @@ class(ScriptedGameObject) extends(object)
 	" node_met
 	func(callBaseClick)
 	{
-		objParams_1(_usr);
+		params ['this'];
 		private _r = callFuncParams(getSelf(src),onClick,_usr);
 		if isNullVar(_r) then {_r = true};
 		if not_equalTypes(_r,true) then {_r = true};
 		_r
 	};
 
+
+
+endclass
+
+/* TODO replace to item script
 	"
 		name:При нажатии по предмету в инвентаре
 		namelib:При нажатии по предмету в инвентаре
@@ -227,7 +272,7 @@ class(ScriptedGameObject) extends(object)
 	" node_met
 	func(callBaseItemClick)
 	{
-		objParams_1(_usr);
+		params ['this'];
 		private _r = callFuncParams(getSelf(src),onItemClick,_usr);
 		if isNullVar(_r) then {_r = true};
 		if not_equalTypes(_r,true) then {_r = true};
@@ -258,11 +303,10 @@ class(ScriptedGameObject) extends(object)
 	" node_met
 	func(callBaseItemSelfClick)
 	{
-		objParams_1(_usr);
+		params ['this'];
 		private _r = callFuncParams(getSelf(src),onItemSelfClick,_usr);
 		if isNullVar(_r) then {_r = true};
 		if not_equalTypes(_r,true) then {_r = true};
 		_r
 	};
-
-endclass
+*/
