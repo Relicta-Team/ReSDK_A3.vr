@@ -131,12 +131,58 @@ class(ScriptedGameObject) extends(object)
 	};
 
 	"
+		name:Текст основного действия
+		desc:Название основного действия, выводимого в окне при нажатии ""ПКМ"" по объекту.
+		prop:all
+		classprop:1
+		return:string:Текст основного действия
+		defval:Основное действие
+	" node_var
+	var(mainActionName,"Основное действие");
+
+	"
+		name:Получить текст основного действия
+		desc:Данный узел предоставляет возможность гибкой настройки отображаемого названия основного действия при нажатии ""ПКМ"". Например, с помощью этого узла можно выводить ""Включить лампочку"" или ""Выключить лампочку"" в зависимости от состояния игрового объекта, на который назначен скрипт (в этом примере таким объектом является лампочка). "+
+		"По умолчанию возвращает значение свойства ""Текст основного действия"".
+		type:event
+		out:BasicMob:Персонаж:Тот, кто запрашивает текст основного действия.
+		return:string:Текст основного действия
+	" node_met
+	func(_getMainActionNameWrapper)
+	{
+		objParams_1(_usr);
+		getSelf(mainActionName)
+	};
+
+	func(getMainActionName)
+	{
+		objParams_1(_usr);
+		callSelfParams(_getMainActionNameWrapper,_usr);
+	};
+
+	"
+		name:Текст основного действия объекта
+		desc:Возвращает текстовое название основного действия, предоставляемое логикой игрового объекта и выводимого в окне при нажатии ""ПКМ"" по объекту.
+		type:method
+		lockoverride:1
+		return:string:Текст основного действия игрового объекта
+	" node_met
+	func(callBaseGetMainActionName)
+	{
+		objParams();
+		private _r = callFunc(getSelf(src),getMainActionName);
+		if isNullVar(_r) then {_r = ""};
+		if not_equalTypes(_r,"") then {_r = ""};
+		_r
+	};
+
+	"
 		name:При особом действии
 		namelib:При особом действии
 		desc:Срабатывает при исполнении персонажем особого действия с объектом (при нажатии кнопки ""F"" с включенным спец.действием).
 		type:event
 		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		out:enum.SpecialActionType:Тип действия:Тип специального действия		
+		out:enum.SpecialActionType:Тип действия:Тип специального действия
 	" node_met
 	func(_onExtraActionWrapper)
 	{
@@ -147,6 +193,9 @@ class(ScriptedGameObject) extends(object)
 	func(onExtraAction)
 	{
 		objParams_2(_usr,_act);
+		if isNullVar(_act) then {
+			_act = getVar(_usr,specialAction);
+		};
 		callSelfParams(_onExtraActionWrapper,_usr arg _act);
 	};
 
@@ -155,7 +204,6 @@ class(ScriptedGameObject) extends(object)
 		desc:Базовая логика особого действия, определенная в игровом объекте.
 		type:method
 		lockoverride:1
-		return:bool:Результат выполнения особого действия. Возвращает @[bool ИСТИНУ], если особое действие успешно выполнено.
 	" node_met
 	func(callBaseExtraAction)
 	{
