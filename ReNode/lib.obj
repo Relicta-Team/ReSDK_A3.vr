@@ -2292,6 +2292,17 @@ eval:Справа:2
 eval:Сзади:3
 
 def:enum:enums
+node:BoneStatus
+path:Перечисления
+
+	name:Состояние костей
+	desc:Перечисление состояния костей для части тела.
+
+eval:В порядке:0:Кости в порядке
+eval:Трещина:1:Образовались трещины в костях
+eval:Сломаны:2:Открытый или закрытый перелом
+
+def:enum:enums
 node:EntityStance
 path:Перечисления
 name:Положение моба
@@ -2358,6 +2369,64 @@ eval:Лог:0:
 eval:Предупреждение:1:
 eval:Ошибка:2:
 eval:Трассировка:3:
+
+def:enum:enums
+node:DamageType
+path:Перечисления
+
+	name:Тип урона
+	desc:Перечисление типов урона.
+	enumtype:string
+
+eval:Дробящий:dt_crushing:Ущерб через тупой удар, как дубинкой или взрывчаткой.
+eval:Режущий:dt_cutting:Ущерб через острые предметы.
+eval:Проникающий:dt_impaling:Колотые раны, полученные например копьем или стрелой.
+eval:Малый пробивной:dt_pi-:Низкоэнергетический снаряд или атака, оставляющая небольшой раневой канал, например бронебойная пуля.
+eval:Обычный пробивной атака:dt_pi:Большинство обычных винтовочных и пистолетных пуль.
+eval:Большой пробивной:dt_pi+:Крупнокалиберные твердые пули или атака, которая оставляет большой канал, такой как пуля с полой точкой или рикошетом.
+eval:Огромный пронзительный:dt_pi++:
+eval:Огненный:dt_burn
+eval:Разъедающий:dt_cor
+eval:Токсический:dt_tox
+eval:Изнуряющий:dt_fat
+eval:Воздействующий:dt_aff
+eval:Специализированный:dt_spec
+
+def:enum:enums
+node:TargetZone
+path:Перечисления
+
+	name:Целевая зона
+	desc:Целевая зона персонажа (например, для повреждений) 
+
+eval:Торс:0 
+eval:Живот:1 
+eval:Голова:3 
+eval:Левый глаз:4
+eval:Правый глаз:5
+eval:Лицо:6 
+eval:Шея:7 
+eval:Пах:8 
+eval:Левая рука:9
+eval:Правая рука:10
+eval:Левая нога:11
+eval:Правая нога:12
+eval:Рот:20
+eval:Случайно:19
+
+def:enum:enums
+node:BodyPart
+path:Перечисления
+
+	name:Часть тела
+	desc:Часть тела персонажа для ссылки на объекты частей тела. 
+
+eval:Голова:0
+eval:Туловище:1
+eval:Правая рука:2
+eval:Левая рука:3
+eval:Правая нога:4
+eval:Левая нога:5
 
 def:node:enumhelper
 node:enumGetNames
@@ -3742,6 +3811,73 @@ def:f:Mob.hunger_0
 	return:float
 	defval:100
 
+def:m:Mob.KnockDown_0
+
+		name:Упасть
+		desc:Заставляет моба упасть. Не действует на мобов, сидящих на стульях или находящихся в положении лёжа. Не наносит урон при падении.
+		type:method
+		lockoverride:1
+	
+def:m:Mob.Stun_0
+
+		name:Стан
+		desc:Станит моба. При стане моб не может производить никаких действий, включая движение. Смотрите описание портов для подробной информации.
+		type:method
+		lockoverride:1
+		in:int:Время стана:Время в секундах, на которое моб не сможет выполнять действия.
+		in:bool:Выронить предметы:При включении этого флага моб выронит все предметы из рук.
+			opt:def=false:require=-1
+		in:bool:Применение:При включении этого флага указанное время стана добавляется к существующему времени. Если флаг выключен, то время стана установится только в том случае, если в момент применения оставшееся время меньше установленного времени стана. 
+			opt:def=false:require=-1
+	
+def:m:Mob.isStunned_0
+
+		name:В стане
+		desc:Возвращает статус находится ли моб в стане.
+		type:get
+		lockoverride:1
+		return:bool:Моб в стане
+	
+def:m:Mob.isActive_0
+
+		name:Активен
+		desc:Возвращает @[bool ИСТИНУ], если моб находится в активном состоянии. Моб активен, если он в сознании, жив и не спит.
+		type:get
+		lockoverride:1
+		return:bool:Моб активен
+	
+def:m:Mob.isSleep_0
+
+		name:Спит
+		desc:Возвращает @[bool ИСТИНУ], если моб спит.
+		type:get
+		lockoverride:1
+		return:bool:Моб спит
+	
+def:m:Mob.setSleep_0
+
+		name:Заснуть
+		desc:Заставляет моба лечь спать или проснуться. Попытка усыпления моба, находящегося в состоянии сна не даст результата. То же правило действует попытаться разбудить не спящего моба.
+		type:method
+		lockoverride:1
+		in:bool:Заснуть:При указании значения @[bool ИСТИНА] моб заснёт. В ином случае он проснётся.
+	
+def:m:Mob.setUnconscious_0
+
+		name:Потерять сознание
+		desc:Заставляет моба потерять сознание на указанное время. Если моб уже без сознания то указанное время добавляется к текущему, которое осталось до пробуждения моба.
+		type:method
+		lockoverride:1
+		in:int:Время:Время в секундах, на которое моб упадет в бессознательное состояние, либо время бессознательного состояния, добавленное к текущему времени.
+	
+def:m:Mob.isUnconscious_0
+
+		name:Без сознания
+		desc:Проверяет находится ли моб без сознания. Данная проверка отвечает только за бессознательное состояние, не учитывая смерть и сон.
+		type:get
+		lockoverride:1
+		return:bool:Возвращает @[bool ИСТИНУ], если моб без сознания.
+	
 def:m:Mob.adjustHunger_0
 
 		name:Изменить голод
@@ -3757,6 +3893,97 @@ def:m:Mob.setHunger_0
 		type:method
 		lockoverride:1
 		in:float:Голод:Новое значение голода
+	
+def:m:Mob.applyDamage_0
+
+		name:Нанести повреждение
+		desc:Наносит урон персонажу по выбранной зоне.
+		type:method
+		lockoverride:1
+		in:int:Урон:Количество урона. Должно быть больше 0 для ощутимого эффекта. Обратите внимание, что фактический урон возможно будет меньше от защищающей брони на персонаже.
+		in:enum.DamageType:Тип повреждения:Природа повреждения. Отвечает за модификатор повреждения, последствия повреждения и т.д.
+		in:enum.TargetZone:Зона:Место, в которое пришёлся урон.
+		in:enum.DirectionSide:Направление:С какой стороны нанесено повреждение.
+	
+def:m:Mob.lossLimb_0
+
+		name:Оторвать конечность
+		desc:Отрывает конечность персонажа. Если конечности не существует - ничего не произойдёт. Оторванная конечность появится под персонажем.
+		type:method
+		lockoverride:1
+		in:enum.BodyPart:Часть тела:Часть тела, которая будет оторвана.
+	
+def:m:Mob.lossTeeth_0
+
+		name:Лишить зубов
+		desc:Заставляет выпасть несколько зубов персонажа.
+		type:method
+		lockoverride:1
+		in:int:Количество:Сколько зубов должо выпасть. Значение не может быть меньше 1.
+			opt:def=1
+	
+def:m:Mob.hasTeeth_0
+
+		name:Наличие зубов
+		desc:Проверяет, есть ли хотя бы один зуб у персонажа. Если есть зубы - возвращает @[bool ИСТИНУ], в остальных случаях - @[bool ЛОЖЬ].
+		type:get
+		lockoverride:1
+		return:bool:Есть ли зубы
+	
+def:m:Mob.destroyLimb_0
+
+		name:Уничтожить конечность
+		desc:Уничтожает конечность персонажа. Если конечности не существует - ничего не произойдёт.
+		type:method
+		lockoverride:1
+		in:enum.BodyPart:Часть тела:Часть тела, которая будет уничтожена.
+	
+def:m:Mob.lossEye_0
+
+		name:Лишить глаза
+		desc:Заставляет выпасть глаз персонажа. Если у персонажа не останется глаз - он не сможет видеть.
+		type:method
+		lockoverride:1
+		in:enum.SideIndex:Сторона:Сторона, с которой выпадет глаз.
+
+	
+def:m:Mob.setDamageArtery_0
+
+		name:Повреждение артерии
+		desc:Повреждает или залечивает артерию на части тела персонажа.
+		type:method
+		lockoverride:1
+		in:enum.BodyPart:Часть тела:Часть тела, которая будет повреждена.
+		in:bool:Повредить:При включении данной опции артерия будет повреждена, при отключении - залечиваться.
+	
+def:m:Mob.isArteryDamaged_0
+
+		name:Артерия повреждена
+		desc:Проверяет, повреждена ли артерия на части тела персонажа.
+		type:get
+		lockoverride:1
+		in:enum.BodyPart:Часть тела:Проверяемая часть тела.
+		return:bool:Повреждена ли артерия на проверяемой части тела.
+	
+def:m:Mob.adjustPain_0
+
+		name:Добавить боль
+		desc:Добавляет или устанавливает значение боли для указанной части тела персонажа, если такова существует.
+		in:enum.BodyPart:Часть тела:Часть тела, для которой будет добавлена боль
+		in:int:Количество:Количество единиц боли, добавляемое к части тела персонажа
+		in:bool:Установить:При включении данной опции будет выполнена установка нового указанного количества вместо добавления к текущему значению боли.
+			opt:def=false:require=-1
+		in:bool:Подавить приступ:При включении данной опции не будет производиться приступ при получении боли или агонии.
+			opt:def=false:require=-1
+	
+def:m:Mob.setBoneStatus_0
+
+		name:Установить состояние костей
+		desc:Устанавливает состояние костей в части тела персонажа. Если части тела не существует - ничего не произойдёт.
+		type:method
+		lockoverride:1
+		in:enum.BodyPart:Часть тела:Часть тела, для которой будет установлено состояние костей.
+		in:enum.BoneStatus:Состояние костей:Новое состояние костей для части тела.
 	
 def:m:Mob.addMemory_0
 
@@ -14209,7 +14436,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "isCombatModeEnable":{"return": "bool"},"curAttackType":{"return": "string"},"curDefType":{"return": "string"},"curEncumbranceLevel":{"return": "int"},"encumbrance":{"return": "int"},"curTargZone":{"return": "int"},"curCombatStyle":{"return": "string"},"isReadyAttack":{"return": "bool"},"otherAttackType":{"return": "string"},"otherTargZone":{"return": "int"},"otherCombatStyle":{"return": "string"},"otherSpecialAction":{"return": "int"},"otherLastCombatActionTime":{"return": "int"},"penaltySupressFire":{"return": "int"},"__lasttime_message_unreadyweap__":{"return": "int"},"__eventClick":{"return": "null_array"},"lastInteractToBodyPart":{"return": "object"},"grabber":{"return": "object"},"specHandAct":{"return": "null"},"grabResistTimeout":{"return": "int"},"voiceTypeTembre":{"return": "string"},"isStealthEnabled":{"return": "bool"},"stealthLastCheck":{"return": "int"},"slots":{"return": "null_array"},"defaultUniform":{"return": "string"},"damageInfo":{"return": "null"},"isDead":{"return": "bool"},"hunger":{"return": "int"},"thirst":{"return": "int"},"oxygen":{"return": "int"},"toxin":{"return": "int"},"urine":{"return": "int"},"feces":{"return": "int"},"lastFartTime":{"return": "int"},"reagents":{"return": "null"},"vessel":{"return": "object"},"bloodLossValue":{"return": "int"},"bloodPoolLastCheck":{"return": "int"},"bodyParts":{"return": "null_hashmap"},"bodyArtery":{"return": "null_hashmap"},"painAmount":{"return": "int"},"painNextMoan":{"return": "int"},"internalPain":{"return": "int"},"stunned":{"return": "int"},"unconscious":{"return": "int"},"sleepiness":{"return": "int"},"sleepTimeStart":{"return": "int"},"sleepStrength":{"return": "int"},"sleepIsChangeState":{"return": "bool"},"isCloseEyes":{"return": "bool"},"lastDamageTime":{"return": "int"},"internalTimer":{"return": "int"},"timeBonus":{"return": "null_array"},"_shockHandle":{"return": "int"},"__isFirstUnsleep":{"return": "bool"},"_lastcheckunsleep":{"return": "int"},"internalReagentTimer":{"return": "int"},"__smellLastCheck":{"return": "int"},"isHoldedBreath":{"return": "bool"},"__tab_nextcheck":{"return": "int"},"__hungernextmes":{"return": "float"},"__thirstnextmes":{"return": "float"},"vomitAmount":{"return": "int"},"isOnGround":{"return": "bool"},"fallingStartPos":{"return": "null_array"},"__isfallsound":{"return": "bool"},"inAgony":{"return": "bool"},"agonyLastTime":{"return": "int"},"painSupress":{"return": "int"},"__brokenlegtimeout":{"return": "int"},"ST":{"return": "null_array"},"IQ":{"return": "null_array"},"DX":{"return": "null_array"},"HT":{"return": "null_array"},"fp":{"return": "null_array"},"will":{"return": "null_array"},"per":{"return": "null_array"},"hp":{"return": "null_array"},"bl":{"return": "null_array"},"bs":{"return": "null_array"},"move":{"return": "null_array"},"animCoef":{"return": "int"},"rta":{"return": "int"},"lastActionTime":{"return": "int"},"lastCombatActionTime":{"return": "int"},"height":{"return": "int"},"weight":{"return": "int"},"stamina":{"return": "int"},"staminaMax":{"return": "int"},"perks":{"return": "null_hashmap"},"fight":{"return": "int"},"shield":{"return": "int"},"fencing":{"return": "int"},"axe":{"return": "int"},"baton":{"return": "int"},"spear":{"return": "int"},"sword":{"return": "int"},"knife":{"return": "int"},"whip":{"return": "int"},"pistol":{"return": "int"},"rifle":{"return": "int"},"shotgun":{"return": "int"},"crossbow":{"return": "int"},"throw":{"return": "int"},"chemistry":{"return": "int"},"alchemy":{"return": "int"},"engineering":{"return": "int"},"traps":{"return": "int"},"repair":{"return": "int"},"blacksmithing":{"return": "int"},"craft":{"return": "int"},"theft":{"return": "int"},"stealth":{"return": "int"},"agility":{"return": "int"},"lockpicking":{"return": "int"},"healing":{"return": "int"},"surgery":{"return": "int"},"cavelore":{"return": "int"},"cooking":{"return": "int"},"farming":{"return": "int"},"__learnStatus":{"return": "null_hashmap"},"__allStatusEffects":{"return": "null_array"},"__gameinfo":{"return": "null_array"},"lastEmoteActionString":{"return": "string"},"__listactions":{"return": "null_array"},"face":{"return": "string"},"faceAnim":{"return": "string"},"specialAction":{"return": "int"},"activeHand":{"return": "int"},"mainHand":{"return": "int"},"connectedTo":{"return": "object"},"handcuffObject":{"return": "object"},"handleFallingUpdate":{"return": "int"},"openedContainer":{"return": "object"},"knownMobsList":{"return": "null_array"},"lastHandshakeTarget":{"return": "object"},"lastHandshakeTime":{"return": "int"},"_internalEquipmentND":{"return": "null"}}   },
    "methods": { "defined": {
-"isFailCombat":{"return": "<undefined>"},"setCombatMode":{"return": "<undefined>"},"getDataForApplyDamage":{"return": "<undefined>"},"GetDodge":{"return": "<undefined>"},"getDefenceBasicModif":{"return": "<undefined>"},"canAttack":{"return": "<undefined>"},"attackOtherObj":{"return": "<undefined>"},"attackOtherMob":{"return": "<undefined>"},"attackSelf":{"return": "<undefined>"},"defenceReturn":{"return": "<undefined>"},"rollDefenseDodge":{"return": "<undefined>"},"onDodge":{"return": "<undefined>"},"onParry":{"return": "<undefined>"},"pickRandomTargZone":{"return": "<undefined>"},"pickRandomTargZoneTorsoHeadNeck":{"return": "<undefined>"},"redirectZoneInExistingParts":{"return": "<undefined>"},"getDmg":{"return": "<undefined>"},"getDmgByAttackType":{"return": "<undefined>"},"getAttackerWeapon":{"return": "<undefined>"},"getDefenceWeapon":{"return": "<undefined>"},"hasTargetZoneForAttack":{"return": "<undefined>"},"onDamageMessage":{"return": "<undefined>"},"onMissMessage":{"return": "<undefined>"},"setAttackType":{"return": "<undefined>"},"onChangeAttackType":{"return": "<undefined>"},"getAttackTypeForWeapon":{"return": "<undefined>"},"applyDamageVisualEffects":{"return": "<undefined>"},"applyDodgeVisualEffects":{"return": "<undefined>"},"applyParryVisualEffects":{"return": "<undefined>"},"applyPointVisualEffects":{"return": "<undefined>"},"applyAttackVisualEffects":{"return": "<undefined>"},"shootSelf":{"return": "<undefined>"},"shootOtherMob":{"return": "<undefined>"},"setCombatStyle":{"return": "<undefined>"},"handlePenaltySupressFireAdd":{"return": "<undefined>"},"penaltySupressFireRemove":{"return": "<undefined>"},"onDoubleAttackProcess":{"return": "<undefined>"},"onAimedAttackProcess":{"return": "<undefined>"},"syncAttackDelayProcess":{"return": "<undefined>"},"checkReadyWeapon":{"return": "<undefined>"},"resetEventClick":{"return": "<undefined>"},"addEventClick":{"return": "<undefined>"},"removeEventClick":{"return": "<undefined>"},"callEventClick":{"return": "<undefined>"},"clickTarget":{"return": "<undefined>"},"altClickTarget":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"getLastinteractToBodyPart":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"mainAction":{"return": "<undefined>"},"extraAction":{"return": "<undefined>"},"startUndress":{"return": "<undefined>"},"canThrow":{"return": "<undefined>"},"canThrowOneHand":{"return": "<undefined>"},"getItemThrowDistance":{"return": "<undefined>"},"onThrow":{"return": "<undefined>"},"onThrowHit":{"return": "<undefined>"},"onBulletAct":{"return": "<undefined>"},"onTwoHand":{"return": "<undefined>"},"isHoldedTwoHands":{"return": "<undefined>"},"isGrabbed":{"return": "<undefined>"},"isGrabAny":{"return": "<undefined>"},"isGrabbedInActiveHand":{"return": "<undefined>"},"getGrabbedInActiveHand":{"return": "<undefined>"},"stopAllGrab":{"return": "<undefined>"},"onGrabImpl":{"return": "<undefined>"},"onGrab":{"return": "<undefined>"},"tryReleaseFromGrab":{"return": "<undefined>"},"setPreStealth":{"return": "<undefined>"},"setStealth":{"return": "<undefined>"},"changeStealth":{"return": "<undefined>"},"handle_stealth":{"return": "<undefined>"},"onSteal":{"return": "<undefined>"},"onStealProcess":{"return": "<undefined>"},"canSeeObject":{"return": "<undefined>"},"getSlotInfoForInventory":{"return": "<undefined>"},"syncSlotInfo":{"return": "<undefined>"},"syncSlotInfoList":{"return": "<undefined>"},"syncGermsVisual":{"return": "<undefined>"},"isEmptyHands":{"return": "<undefined>"},"isEmptyHand":{"return": "<undefined>"},"isEmptyActiveHand":{"return": "<undefined>"},"getItemInSlot":{"return": "<undefined>"},"isEmptySlot":{"return": "<undefined>"},"hasSlot":{"return": "<undefined>"},"getItemInActiveHand":{"return": "<undefined>"},"getNotActiveHand":{"return": "<undefined>"},"getItemInActiveHandRedirect":{"return": "<undefined>"},"getItemInSlotRedirect":{"return": "<undefined>"},"getItemInNotActiveHandRedirect":{"return": "<undefined>"},"setActiveHand":{"return": "<undefined>"},"switchActiveHand":{"return": "<undefined>"},"switchTwoHands":{"return": "<undefined>"},"hasPart":{"return": "<undefined>"},"hasPartSocket":{"return": "<undefined>"},"hasPartForSlot":{"return": "<undefined>"},"canSetItemOnSlot":{"return": "<undefined>"},"hasItem":{"return": "<undefined>"},"_makeSlots":{"return": "<undefined>"},"_onDelete_Inventory":{"return": "<undefined>"},"onApplyDefaultUniform":{"return": "<undefined>"},"canMoveInItem":{"return": "<undefined>"},"canMoveOutItem":{"return": "<undefined>"},"onMoveOutItem":{"return": "<undefined>"},"onMoveInItem":{"return": "<undefined>"},"transferItemToTarget":{"return": "<undefined>"},"setItemOnSlot":{"return": "<undefined>"},"removeItemOnSlot":{"return": "<undefined>"},"pickupItem":{"return": "<undefined>"},"dropItem":{"return": "<undefined>"},"dropItemFromSlot":{"return": "<undefined>"},"putdownItem":{"return": "<undefined>"},"transferItem":{"return": "<undefined>"},"addItem":{"return": "<undefined>"},"removeItem":{"return": "<undefined>"},"dropAllItemsInHands":{"return": "<undefined>"},"getRetchSounds":{"return": "<undefined>"},"getPainSounds":{"return": "<undefined>"},"getMoanSounds":{"return": "<undefined>"},"_makeBodyParts":{"return": "<undefined>"},"_onDelete_bodyParts":{"return": "<undefined>"},"Die":{"return": "<undefined>"},"__postDieCheckAnim":{"return": "<undefined>"},"getPart":{"return": "<undefined>"},"hasBodyOrgan":{"return": "<undefined>"},"hasBodyOrganSocket":{"return": "<undefined>"},"getBodyOrgan":{"return": "<undefined>"},"getAllInternalOrgans":{"return": "<undefined>"},"getBrain":{"return": "<undefined>"},"hasBrain":{"return": "<undefined>"},"isShock":{"return": "<undefined>"},"onUpdate":{"return": "<undefined>"},"addTimeBouns":{"return": "<undefined>"},"applyShock":{"return": "<undefined>"},"KnockDown":{"return": "<undefined>"},"Stun":{"return": "<undefined>"},"isStunned":{"return": "<undefined>"},"handle_stunned":{"return": "<undefined>"},"isActive":{"return": "<undefined>"},"isSleep":{"return": "<undefined>"},"setSleep":{"return": "<undefined>"},"onSleepStop":{"return": "<undefined>"},"addSleepStrength":{"return": "<undefined>"},"__onSleepRest":{"return": "<undefined>"},"setUnconscious":{"return": "<undefined>"},"isInUnconsciousAnim":{"return": "<undefined>"},"setUnconsciousAnim":{"return": "<undefined>"},"handle_unconscious":{"return": "<undefined>"},"isUnconscious":{"return": "<undefined>"},"changeVisionBlock":{"return": "<undefined>"},"setCloseEyes":{"return": "<undefined>"},"getViewMode":{"return": "<undefined>"},"addDeaf":{"return": "<undefined>"},"getHearing":{"return": "<undefined>"},"getHearingDistance":{"return": "<undefined>"},"getViewDistance":{"return": "<undefined>"},"handle_blood":{"return": "<undefined>"},"healBodyPart":{"return": "<undefined>"},"getBodyPartStatusArray":{"return": "<undefined>"},"handle_organs":{"return": "<undefined>"},"handle_healing":{"return": "<undefined>"},"handle_infections":{"return": "<undefined>"},"getSmellRange":{"return": "<undefined>"},"handle_smell":{"return": "<undefined>"},"canRottenSmell":{"return": "<undefined>"},"getMaxInfectionPart":{"return": "<undefined>"},"handle_stamina":{"return": "<undefined>"},"adjustOxyLoss":{"return": "<undefined>"},"setHoldBreath":{"return": "<undefined>"},"canBreath":{"return": "<undefined>"},"adjustToxin":{"return": "<undefined>"},"handle_toxin":{"return": "<undefined>"},"adjustHunger":{"return": "<undefined>"},"setHunger":{"return": "<undefined>"},"adjustThirst":{"return": "<undefined>"},"setThirst":{"return": "<undefined>"},"handle_food":{"return": "<undefined>"},"Weaken":{"return": "<undefined>"},"addStaminaLoss":{"return": "<undefined>"},"addStaminaRegen":{"return": "<undefined>"},"applyDamage":{"return": "<undefined>"},"onDrProtectProcess":{"return": "<undefined>"},"getProtectedArmors":{"return": "<undefined>"},"onPostDamage":{"return": "<undefined>"},"lossLimb":{"return": "<undefined>"},"lossTeeth":{"return": "<undefined>"},"hasTeeth":{"return": "<undefined>"},"destroyLimb":{"return": "<undefined>"},"lossEye":{"return": "<undefined>"},"setDamageArtery":{"return": "<undefined>"},"isArteryDamaged":{"return": "<undefined>"},"syncDamageVisual":{"return": "<undefined>"},"recalcBloodLoss":{"return": "<undefined>"},"getMedicalExamineInfoFor":{"return": "<undefined>"},"hasActiveHand":{"return": "<undefined>"},"getActiveHandPart":{"return": "<undefined>"},"canUseActivePart":{"return": "<undefined>"},"onHPUpdate":{"return": "<undefined>"},"feed":{"return": "<undefined>"},"consume":{"return": "<undefined>"},"onConsumingFood":{"return": "<undefined>"},"adjustVomit":{"return": "<undefined>"},"handle_vomit":{"return": "<undefined>"},"vomit":{"return": "<undefined>"},"vomitBlood":{"return": "<undefined>"},"handle_falling":{"return": "<undefined>"},"onFalling":{"return": "<undefined>"},"hasPain":{"return": "<undefined>"},"hasPainWithSuppress":{"return": "<undefined>"},"canRegenPain":{"return": "<undefined>"},"handle_pain":{"return": "<undefined>"},"doMoan":{"return": "<undefined>"},"updateMoanTime":{"return": "<undefined>"},"doAgony":{"return": "<undefined>"},"updateAgonyTime":{"return": "<undefined>"},"canFeelPain":{"return": "<undefined>"},"addPainSupress":{"return": "<undefined>"},"adjustPain":{"return": "<undefined>"},"addPainLevel":{"return": "<undefined>"},"setPainLevel":{"return": "<undefined>"},"removePainLevel":{"return": "<undefined>"},"onSyncPain":{"return": "<undefined>"},"onSyncBones":{"return": "<undefined>"},"handle_brokenLegs":{"return": "<undefined>"},"handle_attachedParts":{"return": "<undefined>"},"getSmellInfo":{"return": "<undefined>"},"addPerk":{"return": "<undefined>"},"hasPerk":{"return": "<undefined>"},"removePerk":{"return": "<undefined>"},"getPerksTextInfo":{"return": "<undefined>"},"getST":{"return": "<undefined>"},"addST":{"return": "<undefined>"},"getBaseST":{"return": "<undefined>"},"getBonusST":{"return": "<undefined>"},"initST":{"return": "<undefined>"},"onRecST":{"return": "<undefined>"},"getIQ":{"return": "<undefined>"},"addIQ":{"return": "<undefined>"},"getBaseIQ":{"return": "<undefined>"},"getBonusIQ":{"return": "<undefined>"},"initIQ":{"return": "<undefined>"},"onRecIQ":{"return": "<undefined>"},"getDX":{"return": "<undefined>"},"addDX":{"return": "<undefined>"},"getBaseDX":{"return": "<undefined>"},"getBonusDX":{"return": "<undefined>"},"initDX":{"return": "<undefined>"},"onRecDX":{"return": "<undefined>"},"getHT":{"return": "<undefined>"},"addHT":{"return": "<undefined>"},"getBaseHT":{"return": "<undefined>"},"getBonusHT":{"return": "<undefined>"},"initHT":{"return": "<undefined>"},"onRecHT":{"return": "<undefined>"},"getBL":{"return": "<undefined>"},"addBL":{"return": "<undefined>"},"getBaseBL":{"return": "<undefined>"},"getBonusBL":{"return": "<undefined>"},"initBL":{"return": "<undefined>"},"onRecBL":{"return": "<undefined>"},"getHP":{"return": "<undefined>"},"addHP":{"return": "<undefined>"},"getBaseHP":{"return": "<undefined>"},"getBonusHP":{"return": "<undefined>"},"initHP":{"return": "<undefined>"},"onRecHP":{"return": "<undefined>"},"getWill":{"return": "<undefined>"},"addWill":{"return": "<undefined>"},"getBaseWill":{"return": "<undefined>"},"getBonusWill":{"return": "<undefined>"},"initWill":{"return": "<undefined>"},"onRecWill":{"return": "<undefined>"},"getPer":{"return": "<undefined>"},"addPer":{"return": "<undefined>"},"getBasePer":{"return": "<undefined>"},"getBonusPer":{"return": "<undefined>"},"initPer":{"return": "<undefined>"},"onRecPer":{"return": "<undefined>"},"getFp":{"return": "<undefined>"},"addFp":{"return": "<undefined>"},"getBaseFp":{"return": "<undefined>"},"getBonusFp":{"return": "<undefined>"},"initFp":{"return": "<undefined>"},"onRecFp":{"return": "<undefined>"},"getbs":{"return": "<undefined>"},"addbs":{"return": "<undefined>"},"getBasebs":{"return": "<undefined>"},"getBonusbs":{"return": "<undefined>"},"initbs":{"return": "<undefined>"},"onRecBs":{"return": "<undefined>"},"getMove":{"return": "<undefined>"},"calculateCommonSkillsBasicValues":{"return": "<undefined>"},"getfight":{"return": "<undefined>"},"getshield":{"return": "<undefined>"},"getfencing":{"return": "<undefined>"},"getaxe":{"return": "<undefined>"},"getbaton":{"return": "<undefined>"},"getspear":{"return": "<undefined>"},"getsword":{"return": "<undefined>"},"getknife":{"return": "<undefined>"},"getwhip":{"return": "<undefined>"},"getpistol":{"return": "<undefined>"},"getrifle":{"return": "<undefined>"},"getshotgun":{"return": "<undefined>"},"getcrossbow":{"return": "<undefined>"},"getthrow":{"return": "<undefined>"},"getchemistry":{"return": "<undefined>"},"getalchemy":{"return": "<undefined>"},"getengineering":{"return": "<undefined>"},"gettraps":{"return": "<undefined>"},"getrepair":{"return": "<undefined>"},"getblacksmithing":{"return": "<undefined>"},"getcraft":{"return": "<undefined>"},"gettheft":{"return": "<undefined>"},"getstealth":{"return": "<undefined>"},"getagility":{"return": "<undefined>"},"getlockpicking":{"return": "<undefined>"},"gethealing":{"return": "<undefined>"},"getsurgery":{"return": "<undefined>"},"getcavelore":{"return": "<undefined>"},"getcooking":{"return": "<undefined>"},"getfarming":{"return": "<undefined>"},"checkSkill":{"return": "<undefined>"},"doSkillCompetition":{"return": "<undefined>"},"updateSkillLevel":{"return": "<undefined>"},"learnSkill":{"return": "<undefined>"},"getSkillName":{"return": "<undefined>"},"getSkillLearnProgressToText":{"return": "<undefined>"},"postCheckLearning":{"return": "<undefined>"},"getSkillLevelText":{"return": "<undefined>"},"getLearnedSkillsInfo":{"return": "<undefined>"},"getMemories":{"return": "<undefined>"},"getMemoriesUNSLEEP":{"return": "<undefined>"},"getSkillsInfoText":{"return": "<undefined>"},"addMemory":{"return": "<undefined>"},"removeMemory":{"return": "<undefined>"},"handle_statuseffects":{"return": "<undefined>"},"addStatusEffect":{"return": "<undefined>"},"hasStatusEffect":{"return": "<undefined>"},"getStatusEffect":{"return": "<undefined>"},"removeStatusEffect":{"return": "<undefined>"},"__generateGameInfo":{"return": "<undefined>"},"__hasGameInfoMessages":{"return": "<undefined>"},"__showGameInfo":{"return": "<undefined>"},"addUnsleepInfo":{"return": "<undefined>"},"getScreamSounds":{"return": "<undefined>"},"getTortureScreamSounds":{"return": "<undefined>"},"onActEmote":{"return": "<undefined>"},"playEmoteSound":{"return": "<undefined>"},"onActWorld":{"return": "<undefined>"},"actworld_dosearch":{"return": "<undefined>"},"onActPerception":{"return": "<undefined>"},"checkHearing":{"return": "<undefined>"},"checkSmell":{"return": "<undefined>"},"checkSee":{"return": "<undefined>"},"handleVoiceUpdate":{"return": "<undefined>"},"getVerbs":{"return": "<undefined>"},"isConnected":{"return": "<undefined>"},"isHandcuffed":{"return": "<undefined>"},"disconnectFromSeat":{"return": "<undefined>"},"hasOpenedContainer":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"initAsActor":{"return": "<undefined>"},"initMainHand":{"return": "<undefined>"},"onChangeLocality":{"return": "<undefined>"},"canEnableHumanPostprocessOnConnection":{"return": "<undefined>"},"onConnected":{"return": "<undefined>"},"onDisconnected":{"return": "<undefined>"},"getDescFor":{"return": "<undefined>"},"mindSay":{"return": "<undefined>"}
+"isFailCombat":{"return": "<undefined>"},"setCombatMode":{"return": "<undefined>"},"getDataForApplyDamage":{"return": "<undefined>"},"GetDodge":{"return": "<undefined>"},"getDefenceBasicModif":{"return": "<undefined>"},"canAttack":{"return": "<undefined>"},"attackOtherObj":{"return": "<undefined>"},"attackOtherMob":{"return": "<undefined>"},"attackSelf":{"return": "<undefined>"},"defenceReturn":{"return": "<undefined>"},"rollDefenseDodge":{"return": "<undefined>"},"onDodge":{"return": "<undefined>"},"onParry":{"return": "<undefined>"},"pickRandomTargZone":{"return": "<undefined>"},"pickRandomTargZoneTorsoHeadNeck":{"return": "<undefined>"},"redirectZoneInExistingParts":{"return": "<undefined>"},"getDmg":{"return": "<undefined>"},"getDmgByAttackType":{"return": "<undefined>"},"getAttackerWeapon":{"return": "<undefined>"},"getDefenceWeapon":{"return": "<undefined>"},"hasTargetZoneForAttack":{"return": "<undefined>"},"onDamageMessage":{"return": "<undefined>"},"onMissMessage":{"return": "<undefined>"},"setAttackType":{"return": "<undefined>"},"onChangeAttackType":{"return": "<undefined>"},"getAttackTypeForWeapon":{"return": "<undefined>"},"applyDamageVisualEffects":{"return": "<undefined>"},"applyDodgeVisualEffects":{"return": "<undefined>"},"applyParryVisualEffects":{"return": "<undefined>"},"applyPointVisualEffects":{"return": "<undefined>"},"applyAttackVisualEffects":{"return": "<undefined>"},"shootSelf":{"return": "<undefined>"},"shootOtherMob":{"return": "<undefined>"},"setCombatStyle":{"return": "<undefined>"},"handlePenaltySupressFireAdd":{"return": "<undefined>"},"penaltySupressFireRemove":{"return": "<undefined>"},"onDoubleAttackProcess":{"return": "<undefined>"},"onAimedAttackProcess":{"return": "<undefined>"},"syncAttackDelayProcess":{"return": "<undefined>"},"checkReadyWeapon":{"return": "<undefined>"},"resetEventClick":{"return": "<undefined>"},"addEventClick":{"return": "<undefined>"},"removeEventClick":{"return": "<undefined>"},"callEventClick":{"return": "<undefined>"},"clickTarget":{"return": "<undefined>"},"altClickTarget":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"getLastinteractToBodyPart":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"mainAction":{"return": "<undefined>"},"extraAction":{"return": "<undefined>"},"startUndress":{"return": "<undefined>"},"canThrow":{"return": "<undefined>"},"canThrowOneHand":{"return": "<undefined>"},"getItemThrowDistance":{"return": "<undefined>"},"onThrow":{"return": "<undefined>"},"onThrowHit":{"return": "<undefined>"},"onBulletAct":{"return": "<undefined>"},"onTwoHand":{"return": "<undefined>"},"isHoldedTwoHands":{"return": "<undefined>"},"isGrabbed":{"return": "<undefined>"},"isGrabAny":{"return": "<undefined>"},"isGrabbedInActiveHand":{"return": "<undefined>"},"getGrabbedInActiveHand":{"return": "<undefined>"},"stopAllGrab":{"return": "<undefined>"},"onGrabImpl":{"return": "<undefined>"},"onGrab":{"return": "<undefined>"},"tryReleaseFromGrab":{"return": "<undefined>"},"setPreStealth":{"return": "<undefined>"},"setStealth":{"return": "<undefined>"},"changeStealth":{"return": "<undefined>"},"handle_stealth":{"return": "<undefined>"},"onSteal":{"return": "<undefined>"},"onStealProcess":{"return": "<undefined>"},"canSeeObject":{"return": "<undefined>"},"getSlotInfoForInventory":{"return": "<undefined>"},"syncSlotInfo":{"return": "<undefined>"},"syncSlotInfoList":{"return": "<undefined>"},"syncGermsVisual":{"return": "<undefined>"},"isEmptyHands":{"return": "<undefined>"},"isEmptyHand":{"return": "<undefined>"},"isEmptyActiveHand":{"return": "<undefined>"},"getItemInSlot":{"return": "<undefined>"},"isEmptySlot":{"return": "<undefined>"},"hasSlot":{"return": "<undefined>"},"getItemInActiveHand":{"return": "<undefined>"},"getNotActiveHand":{"return": "<undefined>"},"getItemInActiveHandRedirect":{"return": "<undefined>"},"getItemInSlotRedirect":{"return": "<undefined>"},"getItemInNotActiveHandRedirect":{"return": "<undefined>"},"setActiveHand":{"return": "<undefined>"},"switchActiveHand":{"return": "<undefined>"},"switchTwoHands":{"return": "<undefined>"},"hasPart":{"return": "<undefined>"},"hasPartSocket":{"return": "<undefined>"},"hasPartForSlot":{"return": "<undefined>"},"canSetItemOnSlot":{"return": "<undefined>"},"hasItem":{"return": "<undefined>"},"_makeSlots":{"return": "<undefined>"},"_onDelete_Inventory":{"return": "<undefined>"},"onApplyDefaultUniform":{"return": "<undefined>"},"canMoveInItem":{"return": "<undefined>"},"canMoveOutItem":{"return": "<undefined>"},"onMoveOutItem":{"return": "<undefined>"},"onMoveInItem":{"return": "<undefined>"},"transferItemToTarget":{"return": "<undefined>"},"setItemOnSlot":{"return": "<undefined>"},"removeItemOnSlot":{"return": "<undefined>"},"pickupItem":{"return": "<undefined>"},"dropItem":{"return": "<undefined>"},"dropItemFromSlot":{"return": "<undefined>"},"putdownItem":{"return": "<undefined>"},"transferItem":{"return": "<undefined>"},"addItem":{"return": "<undefined>"},"removeItem":{"return": "<undefined>"},"dropAllItemsInHands":{"return": "<undefined>"},"getRetchSounds":{"return": "<undefined>"},"getPainSounds":{"return": "<undefined>"},"getMoanSounds":{"return": "<undefined>"},"_makeBodyParts":{"return": "<undefined>"},"_onDelete_bodyParts":{"return": "<undefined>"},"Die":{"return": "<undefined>"},"__postDieCheckAnim":{"return": "<undefined>"},"getPart":{"return": "<undefined>"},"hasBodyOrgan":{"return": "<undefined>"},"hasBodyOrganSocket":{"return": "<undefined>"},"getBodyOrgan":{"return": "<undefined>"},"getAllInternalOrgans":{"return": "<undefined>"},"getBrain":{"return": "<undefined>"},"hasBrain":{"return": "<undefined>"},"isShock":{"return": "<undefined>"},"onUpdate":{"return": "<undefined>"},"addTimeBouns":{"return": "<undefined>"},"applyShock":{"return": "<undefined>"},"KnockDown":{"return": "<undefined>"},"Stun":{"return": "<undefined>"},"isStunned":{"return": "<undefined>"},"handle_stunned":{"return": "<undefined>"},"isActive":{"return": "<undefined>"},"isSleep":{"return": "<undefined>"},"setSleep":{"return": "<undefined>"},"onSleepStop":{"return": "<undefined>"},"addSleepStrength":{"return": "<undefined>"},"__onSleepRest":{"return": "<undefined>"},"setUnconscious":{"return": "<undefined>"},"isInUnconsciousAnim":{"return": "<undefined>"},"setUnconsciousAnim":{"return": "<undefined>"},"handle_unconscious":{"return": "<undefined>"},"isUnconscious":{"return": "<undefined>"},"changeVisionBlock":{"return": "<undefined>"},"setCloseEyes":{"return": "<undefined>"},"getViewMode":{"return": "<undefined>"},"addDeaf":{"return": "<undefined>"},"getHearing":{"return": "<undefined>"},"getHearingDistance":{"return": "<undefined>"},"getViewDistance":{"return": "<undefined>"},"handle_blood":{"return": "<undefined>"},"healBodyPart":{"return": "<undefined>"},"getBodyPartStatusArray":{"return": "<undefined>"},"handle_organs":{"return": "<undefined>"},"handle_healing":{"return": "<undefined>"},"handle_infections":{"return": "<undefined>"},"getSmellRange":{"return": "<undefined>"},"handle_smell":{"return": "<undefined>"},"canRottenSmell":{"return": "<undefined>"},"getMaxInfectionPart":{"return": "<undefined>"},"handle_stamina":{"return": "<undefined>"},"adjustOxyLoss":{"return": "<undefined>"},"setHoldBreath":{"return": "<undefined>"},"canBreath":{"return": "<undefined>"},"adjustToxin":{"return": "<undefined>"},"handle_toxin":{"return": "<undefined>"},"adjustHunger":{"return": "<undefined>"},"setHunger":{"return": "<undefined>"},"adjustThirst":{"return": "<undefined>"},"setThirst":{"return": "<undefined>"},"handle_food":{"return": "<undefined>"},"Weaken":{"return": "<undefined>"},"addStaminaLoss":{"return": "<undefined>"},"addStaminaRegen":{"return": "<undefined>"},"applyDamage":{"return": "<undefined>"},"onDrProtectProcess":{"return": "<undefined>"},"getProtectedArmors":{"return": "<undefined>"},"onPostDamage":{"return": "<undefined>"},"lossLimb":{"return": "<undefined>"},"lossTeeth":{"return": "<undefined>"},"hasTeeth":{"return": "<undefined>"},"destroyLimb":{"return": "<undefined>"},"lossEye":{"return": "<undefined>"},"setDamageArtery":{"return": "<undefined>"},"isArteryDamaged":{"return": "<undefined>"},"syncDamageVisual":{"return": "<undefined>"},"recalcBloodLoss":{"return": "<undefined>"},"getMedicalExamineInfoFor":{"return": "<undefined>"},"hasActiveHand":{"return": "<undefined>"},"getActiveHandPart":{"return": "<undefined>"},"canUseActivePart":{"return": "<undefined>"},"onHPUpdate":{"return": "<undefined>"},"feed":{"return": "<undefined>"},"consume":{"return": "<undefined>"},"onConsumingFood":{"return": "<undefined>"},"adjustVomit":{"return": "<undefined>"},"handle_vomit":{"return": "<undefined>"},"vomit":{"return": "<undefined>"},"vomitBlood":{"return": "<undefined>"},"handle_falling":{"return": "<undefined>"},"onFalling":{"return": "<undefined>"},"hasPain":{"return": "<undefined>"},"hasPainWithSuppress":{"return": "<undefined>"},"canRegenPain":{"return": "<undefined>"},"handle_pain":{"return": "<undefined>"},"doMoan":{"return": "<undefined>"},"updateMoanTime":{"return": "<undefined>"},"doAgony":{"return": "<undefined>"},"updateAgonyTime":{"return": "<undefined>"},"canFeelPain":{"return": "<undefined>"},"addPainSupress":{"return": "<undefined>"},"adjustPain":{"return": "<undefined>"},"addPainLevel":{"return": "<undefined>"},"setPainLevel":{"return": "<undefined>"},"removePainLevel":{"return": "<undefined>"},"onSyncPain":{"return": "<undefined>"},"setBoneStatus":{"return": "<undefined>"},"onSyncBones":{"return": "<undefined>"},"handle_brokenLegs":{"return": "<undefined>"},"handle_attachedParts":{"return": "<undefined>"},"getSmellInfo":{"return": "<undefined>"},"addPerk":{"return": "<undefined>"},"hasPerk":{"return": "<undefined>"},"removePerk":{"return": "<undefined>"},"getPerksTextInfo":{"return": "<undefined>"},"getST":{"return": "<undefined>"},"addST":{"return": "<undefined>"},"getBaseST":{"return": "<undefined>"},"getBonusST":{"return": "<undefined>"},"initST":{"return": "<undefined>"},"onRecST":{"return": "<undefined>"},"getIQ":{"return": "<undefined>"},"addIQ":{"return": "<undefined>"},"getBaseIQ":{"return": "<undefined>"},"getBonusIQ":{"return": "<undefined>"},"initIQ":{"return": "<undefined>"},"onRecIQ":{"return": "<undefined>"},"getDX":{"return": "<undefined>"},"addDX":{"return": "<undefined>"},"getBaseDX":{"return": "<undefined>"},"getBonusDX":{"return": "<undefined>"},"initDX":{"return": "<undefined>"},"onRecDX":{"return": "<undefined>"},"getHT":{"return": "<undefined>"},"addHT":{"return": "<undefined>"},"getBaseHT":{"return": "<undefined>"},"getBonusHT":{"return": "<undefined>"},"initHT":{"return": "<undefined>"},"onRecHT":{"return": "<undefined>"},"getBL":{"return": "<undefined>"},"addBL":{"return": "<undefined>"},"getBaseBL":{"return": "<undefined>"},"getBonusBL":{"return": "<undefined>"},"initBL":{"return": "<undefined>"},"onRecBL":{"return": "<undefined>"},"getHP":{"return": "<undefined>"},"addHP":{"return": "<undefined>"},"getBaseHP":{"return": "<undefined>"},"getBonusHP":{"return": "<undefined>"},"initHP":{"return": "<undefined>"},"onRecHP":{"return": "<undefined>"},"getWill":{"return": "<undefined>"},"addWill":{"return": "<undefined>"},"getBaseWill":{"return": "<undefined>"},"getBonusWill":{"return": "<undefined>"},"initWill":{"return": "<undefined>"},"onRecWill":{"return": "<undefined>"},"getPer":{"return": "<undefined>"},"addPer":{"return": "<undefined>"},"getBasePer":{"return": "<undefined>"},"getBonusPer":{"return": "<undefined>"},"initPer":{"return": "<undefined>"},"onRecPer":{"return": "<undefined>"},"getFp":{"return": "<undefined>"},"addFp":{"return": "<undefined>"},"getBaseFp":{"return": "<undefined>"},"getBonusFp":{"return": "<undefined>"},"initFp":{"return": "<undefined>"},"onRecFp":{"return": "<undefined>"},"getbs":{"return": "<undefined>"},"addbs":{"return": "<undefined>"},"getBasebs":{"return": "<undefined>"},"getBonusbs":{"return": "<undefined>"},"initbs":{"return": "<undefined>"},"onRecBs":{"return": "<undefined>"},"getMove":{"return": "<undefined>"},"calculateCommonSkillsBasicValues":{"return": "<undefined>"},"getfight":{"return": "<undefined>"},"getshield":{"return": "<undefined>"},"getfencing":{"return": "<undefined>"},"getaxe":{"return": "<undefined>"},"getbaton":{"return": "<undefined>"},"getspear":{"return": "<undefined>"},"getsword":{"return": "<undefined>"},"getknife":{"return": "<undefined>"},"getwhip":{"return": "<undefined>"},"getpistol":{"return": "<undefined>"},"getrifle":{"return": "<undefined>"},"getshotgun":{"return": "<undefined>"},"getcrossbow":{"return": "<undefined>"},"getthrow":{"return": "<undefined>"},"getchemistry":{"return": "<undefined>"},"getalchemy":{"return": "<undefined>"},"getengineering":{"return": "<undefined>"},"gettraps":{"return": "<undefined>"},"getrepair":{"return": "<undefined>"},"getblacksmithing":{"return": "<undefined>"},"getcraft":{"return": "<undefined>"},"gettheft":{"return": "<undefined>"},"getstealth":{"return": "<undefined>"},"getagility":{"return": "<undefined>"},"getlockpicking":{"return": "<undefined>"},"gethealing":{"return": "<undefined>"},"getsurgery":{"return": "<undefined>"},"getcavelore":{"return": "<undefined>"},"getcooking":{"return": "<undefined>"},"getfarming":{"return": "<undefined>"},"checkSkill":{"return": "<undefined>"},"doSkillCompetition":{"return": "<undefined>"},"updateSkillLevel":{"return": "<undefined>"},"learnSkill":{"return": "<undefined>"},"getSkillName":{"return": "<undefined>"},"getSkillLearnProgressToText":{"return": "<undefined>"},"postCheckLearning":{"return": "<undefined>"},"getSkillLevelText":{"return": "<undefined>"},"getLearnedSkillsInfo":{"return": "<undefined>"},"getMemories":{"return": "<undefined>"},"getMemoriesUNSLEEP":{"return": "<undefined>"},"getSkillsInfoText":{"return": "<undefined>"},"addMemory":{"return": "<undefined>"},"removeMemory":{"return": "<undefined>"},"handle_statuseffects":{"return": "<undefined>"},"addStatusEffect":{"return": "<undefined>"},"hasStatusEffect":{"return": "<undefined>"},"getStatusEffect":{"return": "<undefined>"},"removeStatusEffect":{"return": "<undefined>"},"__generateGameInfo":{"return": "<undefined>"},"__hasGameInfoMessages":{"return": "<undefined>"},"__showGameInfo":{"return": "<undefined>"},"addUnsleepInfo":{"return": "<undefined>"},"getScreamSounds":{"return": "<undefined>"},"getTortureScreamSounds":{"return": "<undefined>"},"onActEmote":{"return": "<undefined>"},"playEmoteSound":{"return": "<undefined>"},"onActWorld":{"return": "<undefined>"},"actworld_dosearch":{"return": "<undefined>"},"onActPerception":{"return": "<undefined>"},"checkHearing":{"return": "<undefined>"},"checkSmell":{"return": "<undefined>"},"checkSee":{"return": "<undefined>"},"handleVoiceUpdate":{"return": "<undefined>"},"getVerbs":{"return": "<undefined>"},"isConnected":{"return": "<undefined>"},"isHandcuffed":{"return": "<undefined>"},"disconnectFromSeat":{"return": "<undefined>"},"hasOpenedContainer":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"initAsActor":{"return": "<undefined>"},"initMainHand":{"return": "<undefined>"},"onChangeLocality":{"return": "<undefined>"},"canEnableHumanPostprocessOnConnection":{"return": "<undefined>"},"onConnected":{"return": "<undefined>"},"onDisconnected":{"return": "<undefined>"},"getDescFor":{"return": "<undefined>"},"mindSay":{"return": "<undefined>"}
 }   }
 }
 ,"MobGhost": {

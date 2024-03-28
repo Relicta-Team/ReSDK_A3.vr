@@ -16,6 +16,11 @@
 #define BONE_STATUS_CRACK 1
 #define BONE_STATUS_BROKEN 2
 
+#define BONE_STATUS_LIST_NODE_BINDING [ 'В порядке:BONE_STATUS_OK:Кости в порядке' \
+	,'Трещина:BONE_STATUS_CRACK:Образовались трещины в костях' \
+	,'Сломаны:BONE_STATUS_BROKEN:Открытый или закрытый перелом' \
+]
+
 #define ORGAN_STATUS_OK 0
 #define ORGAN_STATUS_DAMAGED 1
 #define ORGAN_STATUS_DESTROYED 2
