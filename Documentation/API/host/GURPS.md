@@ -173,6 +173,23 @@ Replaced value:
 -2
 ```
 File: [host\GURPS\gurps.hpp at line 30](../../../Src/host/GURPS/gurps.hpp#L30)
+## DICE_RESULT_LIST_NODE_BINDING
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+[ \
+	'Успех:DICE_SUCCESS' \
+	,'Провал:DICE_FAIL' \
+	,'Крилический успех:DICE_CRITSUCCESS' \
+	,'Критический провал:DICE_CRITFAIL' \
+]
+```
+File: [host\GURPS\gurps.hpp at line 32](../../../Src/host/GURPS/gurps.hpp#L32)
 ## DICE_ISSUCCESS(v)
 
 Type: constant
@@ -184,7 +201,7 @@ Replaced value:
 ```sqf
 ((v) > 0)
 ```
-File: [host\GURPS\gurps.hpp at line 32](../../../Src/host/GURPS/gurps.hpp#L32)
+File: [host\GURPS\gurps.hpp at line 39](../../../Src/host/GURPS/gurps.hpp#L39)
 ## DICE_ISFAIL(v)
 
 Type: constant
@@ -196,7 +213,7 @@ Replaced value:
 ```sqf
 ((v) < 0)
 ```
-File: [host\GURPS\gurps.hpp at line 33](../../../Src/host/GURPS/gurps.hpp#L33)
+File: [host\GURPS\gurps.hpp at line 40](../../../Src/host/GURPS/gurps.hpp#L40)
 ## SKILL_BASE
 
 Type: constant
@@ -208,7 +225,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GURPS\gurps.hpp at line 35](../../../Src/host/GURPS/gurps.hpp#L35)
+File: [host\GURPS\gurps.hpp at line 42](../../../Src/host/GURPS/gurps.hpp#L42)
 ## SKILL_MOD
 
 Type: constant
@@ -220,7 +237,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GURPS\gurps.hpp at line 36](../../../Src/host/GURPS/gurps.hpp#L36)
+File: [host\GURPS\gurps.hpp at line 43](../../../Src/host/GURPS/gurps.hpp#L43)
 # Gurps.sqf
 
 ## AMOUNT
@@ -234,7 +251,7 @@ Replaced value:
 ```sqf
 _skill - _d
 ```
-File: [host\GURPS\Gurps.sqf at line 56](../../../Src/host/GURPS/Gurps.sqf#L56)
+File: [host\GURPS\Gurps.sqf at line 94](../../../Src/host/GURPS/Gurps.sqf#L94)
 ## RET(type)
 
 Type: constant
@@ -246,7 +263,7 @@ Replaced value:
 ```sqf
 [AMOUNT,type,_d]
 ```
-File: [host\GURPS\Gurps.sqf at line 57](../../../Src/host/GURPS/Gurps.sqf#L57)
+File: [host\GURPS\Gurps.sqf at line 95](../../../Src/host/GURPS/Gurps.sqf#L95)
 ## initWPart(part,val)
 
 Type: constant
@@ -259,7 +276,7 @@ Replaced value:
 ```sqf
 setVar(_selections get part,weight,val)
 ```
-File: [host\GURPS\Gurps.sqf at line 208](../../../Src/host/GURPS/Gurps.sqf#L208)
+File: [host\GURPS\Gurps.sqf at line 229](../../../Src/host/GURPS/Gurps.sqf#L229)
 ## wToPrec(val)
 
 Type: constant
@@ -271,7 +288,7 @@ Replaced value:
 ```sqf
 _w * (val) / 100
 ```
-File: [host\GURPS\Gurps.sqf at line 209](../../../Src/host/GURPS/Gurps.sqf#L209)
+File: [host\GURPS\Gurps.sqf at line 230](../../../Src/host/GURPS/Gurps.sqf#L230)
 ## initWOrg(part,val)
 
 Type: constant
@@ -284,7 +301,7 @@ Replaced value:
 ```sqf
 setVar(_borgans get part,weight,val)
 ```
-File: [host\GURPS\Gurps.sqf at line 225](../../../Src/host/GURPS/Gurps.sqf#L225)
+File: [host\GURPS\Gurps.sqf at line 246](../../../Src/host/GURPS/Gurps.sqf#L246)
 ## __ex_ini(part,wei)
 
 Type: constant
@@ -297,7 +314,7 @@ Replaced value:
 ```sqf
 MOD(_bodyLeft,- wei); _orgWeight = wToPrec(wei); initWOrg(part,_orgWeight)
 ```
-File: [host\GURPS\Gurps.sqf at line 246](../../../Src/host/GURPS/Gurps.sqf#L246)
+File: [host\GURPS\Gurps.sqf at line 267](../../../Src/host/GURPS/Gurps.sqf#L267)
 ## skill_alloc(basicval)
 
 Type: constant
@@ -309,7 +326,7 @@ Replaced value:
 ```sqf
 basicval
 ```
-File: [host\GURPS\Gurps.sqf at line 304](../../../Src/host/GURPS/Gurps.sqf#L304)
+File: [host\GURPS\Gurps.sqf at line 325](../../../Src/host/GURPS/Gurps.sqf#L325)
 ## leadToZero(value)
 
 Type: constant
@@ -321,15 +338,15 @@ Replaced value:
 ```sqf
 (value) max 0
 ```
-File: [host\GURPS\Gurps.sqf at line 339](../../../Src/host/GURPS/Gurps.sqf#L339)
+File: [host\GURPS\Gurps.sqf at line 360](../../../Src/host/GURPS/Gurps.sqf#L360)
 ## gurps_throwdices
 
 Type: function
 
-Description: #define log_onEncumbranceRecalculate
+Description: 
 
 
-File: [host\GURPS\Gurps.sqf at line 15](../../../Src/host/GURPS/Gurps.sqf#L15)
+File: [host\GURPS\Gurps.sqf at line 28](../../../Src/host/GURPS/Gurps.sqf#L28)
 ## gurps_rollstd
 
 Type: function
@@ -337,7 +354,7 @@ Type: function
 Description: 
 - Param: _skill
 
-File: [host\GURPS\Gurps.sqf at line 23](../../../Src/host/GURPS/Gurps.sqf#L23)
+File: [host\GURPS\Gurps.sqf at line 49](../../../Src/host/GURPS/Gurps.sqf#L49)
 ## gurps_rollnocrit
 
 Type: function
@@ -345,7 +362,7 @@ Type: function
 Description: 
 - Param: _skill
 
-File: [host\GURPS\Gurps.sqf at line 53](../../../Src/host/GURPS/Gurps.sqf#L53)
+File: [host\GURPS\Gurps.sqf at line 91](../../../Src/host/GURPS/Gurps.sqf#L91)
 ## gurps_getDamageByStrength
 
 Type: function
@@ -353,7 +370,7 @@ Type: function
 Description: вычисляет силу удара с руки
 - Param: _st
 
-File: [host\GURPS\Gurps.sqf at line 69](../../../Src/host/GURPS/Gurps.sqf#L69)
+File: [host\GURPS\Gurps.sqf at line 140](../../../Src/host/GURPS/Gurps.sqf#L140)
 ## gurps_getFallingSpeedByDistance
 
 Type: function
@@ -361,7 +378,7 @@ Type: function
 Description: Высчитывает скорость из дистанции по системе
 - Param: _dist
 
-File: [host\GURPS\Gurps.sqf at line 137](../../../Src/host/GURPS/Gurps.sqf#L137)
+File: [host\GURPS\Gurps.sqf at line 158](../../../Src/host/GURPS/Gurps.sqf#L158)
 ## gurps_calculateCharHeight
 
 Type: function
@@ -369,7 +386,7 @@ Type: function
 Description: расчёт роста
 
 
-File: [host\GURPS\Gurps.sqf at line 150](../../../Src/host/GURPS/Gurps.sqf#L150)
+File: [host\GURPS\Gurps.sqf at line 171](../../../Src/host/GURPS/Gurps.sqf#L171)
 ## gurps_calculateCharWeight
 
 Type: function
@@ -377,7 +394,7 @@ Type: function
 Description: расчёт веса (Выполняться должен только после создания всех нужных частей тела)
 
 
-File: [host\GURPS\Gurps.sqf at line 172](../../../Src/host/GURPS/Gurps.sqf#L172)
+File: [host\GURPS\Gurps.sqf at line 193](../../../Src/host/GURPS/Gurps.sqf#L193)
 ## gurps_getEncumbrance
 
 Type: function
@@ -385,7 +402,7 @@ Type: function
 Description: 
 
 
-File: [host\GURPS\Gurps.sqf at line 261](../../../Src/host/GURPS/Gurps.sqf#L261)
+File: [host\GURPS\Gurps.sqf at line 282](../../../Src/host/GURPS/Gurps.sqf#L282)
 ## gurps_recalcuateEncumbrance
 
 Type: function
@@ -393,7 +410,7 @@ Type: function
 Description: 
 
 
-File: [host\GURPS\Gurps.sqf at line 273](../../../Src/host/GURPS/Gurps.sqf#L273)
+File: [host\GURPS\Gurps.sqf at line 294](../../../Src/host/GURPS/Gurps.sqf#L294)
 ## gurps_initSkills
 
 Type: function
@@ -405,7 +422,7 @@ Description:
 - Param: _dx
 - Param: _ht
 
-File: [host\GURPS\Gurps.sqf at line 301](../../../Src/host/GURPS/Gurps.sqf#L301)
+File: [host\GURPS\Gurps.sqf at line 322](../../../Src/host/GURPS/Gurps.sqf#L322)
 ## gurps_initPeacefullSkills
 
 Type: function
@@ -413,7 +430,7 @@ Type: function
 Description: 
 
 
-File: [host\GURPS\Gurps.sqf at line 338](../../../Src/host/GURPS/Gurps.sqf#L338)
+File: [host\GURPS\Gurps.sqf at line 359](../../../Src/host/GURPS/Gurps.sqf#L359)
 ## gurps_getDistanceModificator
 
 Type: function
@@ -422,7 +439,7 @@ Description: модификатор дистанции для стрельбы
 - Param: _dist (optional, default 0)
 - Param: _speed (optional, default 0)
 
-File: [host\GURPS\Gurps.sqf at line 354](../../../Src/host/GURPS/Gurps.sqf#L354)
+File: [host\GURPS\Gurps.sqf at line 375](../../../Src/host/GURPS/Gurps.sqf#L375)
 # Gurps_init.sqf
 
 ## vd(a,b,c,d)
@@ -450,7 +467,7 @@ Description:
 
 Replaced value:
 ```sqf
-obj_gurps_combat setvariable [str val,data]
+obj_gurps_combat set [str val,data]
 ```
 File: [host\GURPS\Gurps_init.sqf at line 10](../../../Src/host/GURPS/Gurps_init.sqf#L10)
 ## allocSTVal_inArr(vals,data)
@@ -489,6 +506,6 @@ Description:
 
 Initial value:
 ```sqf
-createObj
+createHashMap
 ```
 File: [host\GURPS\Gurps_init.sqf at line 7](../../../Src/host/GURPS/Gurps_init.sqf#L7)
