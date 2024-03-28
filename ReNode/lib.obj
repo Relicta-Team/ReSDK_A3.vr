@@ -3563,7 +3563,7 @@ def:c:IDestructible
 
 		name:Разрушаемый игровой объект
 		desc:Разрушаемый игровой объект. Все игровые объекты кроме мобов наследуются от данного класса.
-		path:Игровые объекты
+		path:Игровые объекты.Базовые
 	
 def:f:IDestructible.__script_0
 
@@ -3578,6 +3578,7 @@ def:m:IDestructible.isScriptedObject_0
 		name:Это скриптовый объект
 		desc:Возвращает @[bool ИСТИНУ], если игровой объект является скриптовым объектом.
 		type:get
+		lockoverride:1
 		classprop:0
 		return:bool:Является ли объект скриптовым объектом
 	
@@ -3690,7 +3691,7 @@ def:m:ScriptedGameObject.onScriptAssigned_0
 		type:event
 		out:IDestructible^:Объект:Игровой объект, к которому привязан скрипт.
 	
-def:m:ScriptedGameObject.onMainAction_0
+def:m:ScriptedGameObject._onMainActionWrapper_0
 
 		name:При основном действии
 		namelib:При основном действии
@@ -3705,10 +3706,9 @@ def:m:ScriptedGameObject.callBaseMainAction_0
 		desc:Базовая логика основного действия, определенная в игровом объекте.
 		type:method
 		lockoverride:1
-		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
 		return:bool:Результат выполнения основного действия. Возвращает @[bool ИСТИНУ], если основное действие успешно выполнено.
 	
-def:m:ScriptedGameObject.onExtraAction_0
+def:m:ScriptedGameObject._onExtraActionWrapper_0
 
 		name:При особом действии
 		namelib:При особом действии
@@ -3717,7 +3717,15 @@ def:m:ScriptedGameObject.onExtraAction_0
 		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
 		out:enum.SpecialActionType:Тип действия:Тип специального действия		
 	
-def:m:ScriptedGameObject.onInteractWith_0
+def:m:ScriptedGameObject.callBaseExtraAction_0
+
+		name:Особое действие
+		desc:Базовая логика особого действия, определенная в игровом объекте.
+		type:method
+		lockoverride:1
+		return:bool:Результат выполнения особого действия. Возвращает @[bool ИСТИНУ], если особое действие успешно выполнено.
+	
+def:m:ScriptedGameObject._onInteractWithWrapper_0
 
 		name:При взаимодействии предметом
 		namelib:При взаимодействии предметом
@@ -3737,7 +3745,7 @@ def:m:ScriptedGameObject.callBaseInteractWith_0
 		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
 		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
 	
-def:m:ScriptedGameObject.onClick_0
+def:m:ScriptedGameObject._onClickWrapper_0
 
 		name:При нажатии по объекту
 		namelib:При нажатии по объекту
@@ -3750,42 +3758,6 @@ def:m:ScriptedGameObject.callBaseClick_0
 
 		name:Нажатие по объекту
 		desc:Базовая логика нажатия по объекту, определенная в игровом объекте.
-		type:method
-		lockoverride:1
-		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	
-def:m:ScriptedGameObject.onItemClick_0
-
-		name:При нажатии по предмету в инвентаре
-		namelib:При нажатии по предмету в инвентаре
-		desc:Срабатывает при нажатии персонажем по предмету в слоте собственного инвентаря.
-		type:event
-		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	
-def:m:ScriptedGameObject.callBaseItemClick_0
-
-		name:Нажатие по предмету в инвентаре
-		desc:Базовая логика нажатия по предмету, определенная в игровом объекте.
-		type:method
-		lockoverride:1
-		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	
-def:m:ScriptedGameObject.onItemSelfClick_0
-
-		name:При нажатии по предмету в активной руке
-		namelib:При нажатии по предмету в активной руке
-		desc:Срабатывает при нажатии персонажем по предмету в активной руке через инвентарь.
-		type:event
-		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	
-def:m:ScriptedGameObject.callBaseItemSelfClick_0
-
-		name:Нажатие по предмету в активной руке
-		desc:Базовая логика нажатия по предмету, определенная в игровом объекте.
 		type:method
 		lockoverride:1
 		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
@@ -5543,7 +5515,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"src":{"return": "object"}}   },
    "methods": { "defined": {
-"getRestrictions":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"callBaseInteractWith":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"callBaseClick":{"return": "<undefined>"},"onItemClick":{"return": "<undefined>"},"callBaseItemClick":{"return": "<undefined>"},"onItemSelfClick":{"return": "<undefined>"},"callBaseItemSelfClick":{"return": "<undefined>"}
+"getRestrictions":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onInteractWithWrapper":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"callBaseInteractWith":{"return": "<undefined>"},"_onClickWrapper":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"callBaseClick":{"return": "<undefined>"}
 }   }
 }
 ,"VirtualMemoryStorage": {

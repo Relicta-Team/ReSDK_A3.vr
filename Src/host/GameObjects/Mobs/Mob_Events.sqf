@@ -91,6 +91,9 @@ _iact = {
 
 	};
 	if (_type == INTERACT_RPC_MAIN) exitWith {
+		if callFunc(_target,isScriptedObject) exitWith {
+			callFuncParams(getVar(_target,__script),onMainAction,this)
+		};
 		callSelfParams(mainAction,_target);
 	};
 	if (_type == INTERACT_RPC_EXAMINE) exitWith {
@@ -322,6 +325,8 @@ _onMainAction = {
 	};
 	if callSelf(isHandcuffed) exitwith {};
 	if (isTypeOf(_item,StolenItem)) exitWith {callFuncParams(_item,onStolen,this);};
+
+	if callFunc(_item,isScriptedObject) exitWith {callFuncParams(getVar(_item,__script),onMainAction,this)};
 
 	callFuncParams(_item,onMainAction,this);
 }; rpcAdd("onMainAction",_onMainAction);
