@@ -206,8 +206,8 @@ node_enum
 #include "..\GURPS\gurps.hpp"
 ["DiceResult",DICE_RESULT_LIST_NODE_BINDING,
 "
-	name:Результат костей
-	desc:Результат броска костей.
+	name:Результат броска кубиков
+	desc:Результат броска кубиков. Успех, провал, крит.успех или крит.провал.
 "
 ] node_enum
 
