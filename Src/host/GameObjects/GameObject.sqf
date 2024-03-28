@@ -1210,7 +1210,7 @@ class(IDestructible) extends(GameObject)
 	"
 		name:Разрушаемый игровой объект
 		desc:Разрушаемый игровой объект. Все игровые объекты кроме мобов наследуются от данного класса.
-		path:Игровые объекты
+		path:Игровые объекты.Базовые
 	"
 	node_class
 
@@ -1226,6 +1226,7 @@ class(IDestructible) extends(GameObject)
 		name:Это скриптовый объект
 		desc:Возвращает @[bool ИСТИНУ], если игровой объект является скриптовым объектом.
 		type:get
+		lockoverride:1
 		classprop:0
 		return:bool:Является ли объект скриптовым объектом
 	" node_met
