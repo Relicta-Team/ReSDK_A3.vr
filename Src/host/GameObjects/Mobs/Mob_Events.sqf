@@ -100,6 +100,9 @@ _iact = {
 
 	};
 	if (_type == INTERACT_RPC_EXTRA) exitWith {
+		if callFunc(_target,isScriptedObject) exitWith {
+			callFuncParams(getVar(_target,__script),onExtraAction,this)
+		};
 		callSelfParams(extraAction,_target);
 	};
 

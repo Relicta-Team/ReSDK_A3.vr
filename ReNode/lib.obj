@@ -2747,7 +2747,7 @@ def:node:clients
 node:cm_sendLobbyMessage
 name:Сообщение в лобби
 path:Клиенты.Утилиты
-code:[@in.1,@in.2]call cm_sendLobbyMessage
+code:[@in.2,@in.3]call cm_sendLobbyMessage
 desc:Отправляет сообщение в лобби. Данный узел предназначен для оповещения клиентов, находящихся в лобби.
 icon:data\\icons\\icon_BluePrintEditor_Function_16px
 color:Function
@@ -2759,7 +2759,7 @@ def:node:clients
 node:cm_sendOOSMessage
 name:Сообщение в чат
 path:Клиенты.Утилиты
-code:[@in.1,@in.2]call cm_sendOOSMessage
+code:[@in.2,@in.3]call cm_sendOOSMessage
 desc:Отправляет сообщение в чат всем клиентам, находящимся на сервере.
 icon:data\\icons\\icon_BluePrintEditor_Function_16px
 color:Function
@@ -3708,6 +3708,31 @@ def:m:ScriptedGameObject.callBaseMainAction_0
 		lockoverride:1
 		return:bool:Результат выполнения основного действия. Возвращает @[bool ИСТИНУ], если основное действие успешно выполнено.
 	
+def:f:ScriptedGameObject.mainActionName_0
+
+		name:Текст основного действия
+		desc:Название основного действия, выводимого в окне при нажатии "ПКМ" по объекту.
+		prop:all
+		classprop:1
+		return:string:Текст основного действия
+		defval:Основное действие
+	
+def:m:ScriptedGameObject._getMainActionNameWrapper_0
+
+		name:Получить текст основного действия
+		desc:Данный узел предоставляет возможность гибкой настройки отображаемого названия основного действия при нажатии "ПКМ". Например, с помощью этого узла можно выводить "Включить лампочку" или "Выключить лампочку" в зависимости от состояния игрового объекта, на который назначен скрипт (в этом примере таким объектом является лампочка). По умолчанию возвращает значение свойства "Текст основного действия".
+		type:event
+		out:BasicMob:Персонаж:Тот, кто запрашивает текст основного действия.
+		return:string:Текст основного действия
+	
+def:m:ScriptedGameObject.callBaseGetMainActionName_0
+
+		name:Текст основного действия объекта
+		desc:Возвращает текстовое название основного действия, предоставляемое логикой игрового объекта и выводимого в окне при нажатии "ПКМ" по объекту.
+		type:method
+		lockoverride:1
+		return:string:Текст основного действия игрового объекта
+	
 def:m:ScriptedGameObject._onExtraActionWrapper_0
 
 		name:При особом действии
@@ -3715,7 +3740,7 @@ def:m:ScriptedGameObject._onExtraActionWrapper_0
 		desc:Срабатывает при исполнении персонажем особого действия с объектом (при нажатии кнопки "F" с включенным спец.действием).
 		type:event
 		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		out:enum.SpecialActionType:Тип действия:Тип специального действия		
+		out:enum.SpecialActionType:Тип действия:Тип специального действия
 	
 def:m:ScriptedGameObject.callBaseExtraAction_0
 
@@ -4250,7 +4275,7 @@ def:m:Mob.removeMemory_0
 		desc:Удаляет воспоминание моба. Если у персонажа нет головы или мозга - воспоминание не будет удалено.
 		type:method
 		lockoverride:1
-		in:int:Индекс воспоминания для удаления
+		in:int:Индекс:Индекс воспоминания для удаления
 		return:bool:Удалено ли воспоминание. Если у персонажа нет мозга или индекс принимает недопустимое значение - возвращает @[bool ЛОЖЬ]
 	
 def:f:Mob.activeHand_0
@@ -5513,9 +5538,9 @@ $REGION:CLASSMETA
     "baseClass" : "object",
     "defined" : {"file":"src\\host\\GameObjects\\ScriptedGameObject.sqf","line":9},
    "fields": { "defined": {
-"name":{"return": "string"},"src":{"return": "object"}}   },
+"name":{"return": "string"},"src":{"return": "object"},"mainActionName":{"return": "string"}}   },
    "methods": { "defined": {
-"getRestrictions":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onInteractWithWrapper":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"callBaseInteractWith":{"return": "<undefined>"},"_onClickWrapper":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"callBaseClick":{"return": "<undefined>"}
+"getRestrictions":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_getMainActionNameWrapper":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"callBaseGetMainActionName":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onInteractWithWrapper":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"callBaseInteractWith":{"return": "<undefined>"},"_onClickWrapper":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"callBaseClick":{"return": "<undefined>"}
 }   }
 }
 ,"VirtualMemoryStorage": {

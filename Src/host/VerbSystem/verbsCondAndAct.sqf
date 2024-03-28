@@ -148,7 +148,12 @@ VERB(mainact)
 		};
 		callFuncParams(src,onMainAction,usr);
 	name
-		_t = callFunc(src,getMainActionName);
+		_t = "";
+		if callFunc(src,isScriptedObject) then {
+			_t = callFuncParams(getVar(src,__script),getMainActionName,usr);
+		} else {
+			_t = callFunc(src,getMainActionName);
+		};
 		if (_t!="")then{setName(_t)};
 ENDVERB
 
