@@ -52,6 +52,9 @@ nodeModule_setPath("Игровые объекты.Утилиты")
 #include "..\PointerSystem\pointers.hpp"
 #include "..\NOEngine\NOEngine_ObjectManager.sqf"
 
+nodeModule_setPath("Игровая логика.Ролевая система")
+#include "..\GURPS\Gurps.sqf"
+
 nodeModule_register("clients")
 nodeModule_setPath("Клиенты")
 #include "..\ClientManager\ClientManager.h"

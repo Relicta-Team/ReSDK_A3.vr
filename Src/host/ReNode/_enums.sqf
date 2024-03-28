@@ -196,6 +196,21 @@ node_enum
 	desc:Часть тела персонажа для ссылки на объекты частей тела. 
 "] node_enum
 
+["AttackType",ATTACK_TYPE_LIST_NODE_BINDING,
+"
+	name:Тип атаки
+	desc:Тип атаки. Отвечает за то как будет производиться атака.
+	enumtype:string
+"] node_enum
+
+#include "..\GURPS\gurps.hpp"
+["DiceResult",DICE_RESULT_LIST_NODE_BINDING,
+"
+	name:Результат костей
+	desc:Результат броска костей.
+"
+] node_enum
+
 //!!! enum helper
 nodeModule_register("enumhelper")
 nodeModule_setPath("Перечисления.Преобразования")

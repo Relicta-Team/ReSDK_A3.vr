@@ -39,6 +39,13 @@
 #define ATTACK_TYPE_HANDLE "at_handle" /*рукоятка?*/
 //Тут можно добавить массу типов атаки
 
+#define ATTACK_TYPE_LIST_NODE_BINDING [ 'Прямая:'+ATTACK_TYPE_THRUST+':Прямые или точечные атаки' \
+	,'Амплитудная:'+ATTACK_TYPE_SWING+':Амплитудные или размашистые атаки.' \
+	,'Рукоятью:'+ATTACK_TYPE_HANDLE+':Атаки рукоятью.' \
+	,'Специальная:'+ATTACK_TYPE_SPECIAL+':Специальная атака.' \
+]
+
+
 //Парировательная способность
 #define WEAPON_PARRY_UNABLE 0 /*не парировательное */
 #define WEAPON_PARRY_UNBALANCED 1 /*несбалансированное*/
