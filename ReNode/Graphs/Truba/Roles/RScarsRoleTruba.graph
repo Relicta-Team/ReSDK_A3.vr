@@ -6,7 +6,22 @@
     "pipe_slicing":true,
     "pipe_style":1,
     "variables":{
-      "localvar":{}
+      "localvar":{
+        "0x2e5d38773f0_2024325124735865409":{
+          "name":"Тест воспоминания",
+          "type":"array[string]",
+          "value":[
+            "Изнасиловал и убил дочь сторожа",
+            "Откурамозил гриблана",
+            "Испортил воду в родничке"
+          ],
+          "category":"localvar",
+          "group":"",
+          "systemname":"Test_vospominaniya",
+          "reprType":"string (Строка)",
+          "reprDataType":"array (Массив)"
+        }
+      }
     },
     "info":{
       "type":"role",
@@ -19,20 +34,20 @@
         "fields":{},
         "methods":{}
       },
-      "compiledGUID":"0f5f01f6-fe4d-4dc8-987a-4584f5a1e855",
+      "compiledGUID":"51b50b08-d2d6-48d7-a500-2b3dee8efc17",
       "compileStatus":"Compiled",
       "graphVersion":2
     },
     "mpos":[
-      -612.6449143093481,
-      -487.25397628106543,
-      1366.4847763719263,
-      1286.1033189382838
+      -106.68501045728101,
+      -272.9957346075705,
+      2209.113314428611,
+      2079.1654724033956
     ],
-    "mzoom":-0.01
+    "mzoom":-0.48
   },
   "nodes":{
-    "0x1f94e831e90":{
+    "0x2e5c99bf990":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка",
@@ -71,7 +86,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x1f94ab13c10":{
+    "0x2e5d37f7850":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Cast_16x",
       "name":"Преобразовать тип",
@@ -110,7 +125,7 @@
       },
       "class_":"control.castto"
     },
-    "0x1f952ce1910":{
+    "0x2e5cf282b50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Rand",
@@ -191,7 +206,7 @@
       },
       "class_":"math.random"
     },
-    "0x1f953087c10":{
+    "0x2e5cf2815d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Установить голод",
@@ -230,7 +245,7 @@
       },
       "class_":"methods.Mob.setHunger_0"
     },
-    "0x1f9531b5290":{
+    "0x2e5cf280bd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -264,57 +279,466 @@
       "port_deletion_allowed":false,
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
+    },
+    "0x2e5d22a84d0":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
+      "name":"Добавить воспоминание",
+      "color":[
+        0,
+        69,
+        104
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":347.0,
+      "height":171.8,
+      "pos":[
+        824.5726231521251,
+        455.1351498091628
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Объект Mob",
+        "Воспоминание":"Я туопй!!!"
+      },
+      "class_":"methods.Mob.addMemory_0"
+    },
+    "0x2e5cf39e4d0":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":[
+        "data\\icons\\ArrayPin.png",
+        "#ff87ff"
+      ],
+      "name":"Получить <b>Тест воспоминания</b>",
+      "color":[
+        255,
+        0,
+        255,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":292.0,
+      "height":65.5,
+      "pos":[
+        360.4162141494078,
+        784.4352896192994
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":true,
+      "subgraph_session":{},
+      "input_ports":[],
+      "output_ports":[
+        {
+          "name":"Значение",
+          "multi_connection":true,
+          "display_name":true,
+          "color":[
+            255,
+            0,
+            255,
+            255
+          ],
+          "type":"array[string]"
+        }
+      ],
+      "custom":{
+        "nameid":"0x2e5d38773f0_2024325124735865409"
+      },
+      "class_":"variable.get"
+    },
+    "0x2e5c5768850":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":[
+        "data\\icons\\ArrayPin.png",
+        "#ff00ff"
+      ],
+      "name":"Случайный элемент",
+      "color":[
+        13,
+        18,
+        23,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":406.0,
+      "height":60,
+      "pos":[
+        309.7694912460597,
+        707.87628988168
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":true,
+      "subgraph_session":{},
+      "input_ports":[
+        {
+          "name":"Массив",
+          "multi_connection":false,
+          "display_name":false,
+          "color":[
+            255,
+            0,
+            255,
+            255
+          ],
+          "type":"array[string]"
+        }
+      ],
+      "output_ports":[
+        {
+          "name":"Элемент",
+          "multi_connection":true,
+          "display_name":false,
+          "color":[
+            255,
+            0,
+            255,
+            255
+          ],
+          "type":"string"
+        }
+      ],
+      "custom":{
+        "autoportdata":{
+          "color":[
+            255,
+            255,
+            255,
+            255
+          ],
+          "border_color":[
+            255,
+            255,
+            255,
+            255
+          ]
+        }
+      },
+      "class_":"array.pick"
+    },
+    "0x2e5cf26df10":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
+      "name":"Сообщение на экране",
+      "color":[
+        0,
+        69,
+        104,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":324.0,
+      "height":141.10000000000002,
+      "pos":[
+        1391.6551538935673,
+        480.4089818836359
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":true,
+      "subgraph_session":{},
+      "input_ports":[
+        {
+          "name":"Вход",
+          "multi_connection":true,
+          "display_name":true,
+          "color":[
+            255,
+            255,
+            255,
+            255
+          ],
+          "type":"Exec",
+          "style":1
+        },
+        {
+          "name":"Сообщение",
+          "multi_connection":false,
+          "display_name":true,
+          "color":[
+            255,
+            0,
+            255,
+            255
+          ],
+          "type":"string"
+        },
+        {
+          "name":"Данные",
+          "multi_connection":false,
+          "display_name":true,
+          "color":[
+            46,
+            139,
+            87,
+            255
+          ],
+          "type":"int"
+        }
+      ],
+      "output_ports":[
+        {
+          "name":"Выход",
+          "multi_connection":false,
+          "display_name":true,
+          "color":[
+            255,
+            255,
+            255,
+            255
+          ],
+          "type":"Exec",
+          "style":1
+        }
+      ],
+      "custom":{
+        "autoportdata":{
+          "color":[
+            255,
+            255,
+            255,
+            255
+          ],
+          "border_color":[
+            255,
+            255,
+            255,
+            255
+          ]
+        },
+        "Сообщение":"%1"
+      },
+      "class_":"control.messageBox"
+    },
+    "0x2e5cd098b10":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":[
+        "data\\icons\\pill_16x.png",
+        "#ff00ff"
+      ],
+      "name":"Описание",
+      "color":[
+        255,
+        0,
+        255,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":383.0,
+      "height":177.3,
+      "pos":[
+        1912.205460940004,
+        670.0304937730801
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Объект GameObject",
+        "Значение":"Описание"
+      },
+      "class_":"fields.GameObject.desc_0.set"
     }
   },
   "connections":[
     {
       "in":[
-        "0x1f94ab13c10",
+        "0x2e5d37f7850",
         "Вход"
       ],
       "out":[
-        "0x1f9531b5290",
+        "0x2e5cf280bd0",
         "Выход"
       ]
     },
     {
       "in":[
-        "0x1f94ab13c10",
+        "0x2e5d37f7850",
         "Входной объект"
       ],
       "out":[
-        "0x1f9531b5290",
+        "0x2e5cf280bd0",
         "Моб"
       ]
     },
     {
       "out":[
-        "0x1f94ab13c10",
+        "0x2e5d37f7850",
         "Успешное преобразование"
       ],
       "in":[
-        "0x1f953087c10",
+        "0x2e5cf2815d0",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1f94ab13c10",
+        "0x2e5d37f7850",
         "Объект"
       ],
       "in":[
-        "0x1f953087c10",
+        "0x2e5cf2815d0",
         "Цель"
       ]
     },
     {
       "out":[
-        "0x1f952ce1910",
+        "0x2e5d37f7850",
+        "Объект"
+      ],
+      "in":[
+        "0x2e5d22a84d0",
+        "Цель"
+      ]
+    },
+    {
+      "out":[
+        "0x2e5d37f7850",
+        "Объект"
+      ],
+      "in":[
+        "0x2e5cd098b10",
+        "Цель"
+      ]
+    },
+    {
+      "out":[
+        "0x2e5cf282b50",
         "Результат"
       ],
       "in":[
-        "0x1f953087c10",
+        "0x2e5cf2815d0",
         "Голод"
+      ]
+    },
+    {
+      "out":[
+        "0x2e5cf2815d0",
+        "Выход"
+      ],
+      "in":[
+        "0x2e5d22a84d0",
+        "Вход"
+      ]
+    },
+    {
+      "in":[
+        "0x2e5d22a84d0",
+        "Воспоминание"
+      ],
+      "out":[
+        "0x2e5c5768850",
+        "Элемент"
+      ]
+    },
+    {
+      "out":[
+        "0x2e5d22a84d0",
+        "Выход"
+      ],
+      "in":[
+        "0x2e5cf26df10",
+        "Вход"
+      ]
+    },
+    {
+      "out":[
+        "0x2e5d22a84d0",
+        "Результат"
+      ],
+      "in":[
+        "0x2e5cf26df10",
+        "Данные"
+      ]
+    },
+    {
+      "out":[
+        "0x2e5cf39e4d0",
+        "Значение"
+      ],
+      "in":[
+        "0x2e5c5768850",
+        "Массив"
+      ]
+    },
+    {
+      "out":[
+        "0x2e5cf26df10",
+        "Выход"
+      ],
+      "in":[
+        "0x2e5cd098b10",
+        "Вход"
       ]
     }
   ]
