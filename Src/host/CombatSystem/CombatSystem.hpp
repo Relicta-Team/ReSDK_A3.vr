@@ -39,6 +39,13 @@
 #define ATTACK_TYPE_HANDLE "at_handle" /*рукоятка?*/
 //Тут можно добавить массу типов атаки
 
+#define ATTACK_TYPE_LIST_NODE_BINDING [ 'Прямая:'+ATTACK_TYPE_THRUST+':Прямые или точечные атаки' \
+	,'Амплитудная:'+ATTACK_TYPE_SWING+':Амплитудные или размашистые атаки.' \
+	,'Рукоятью:'+ATTACK_TYPE_HANDLE+':Атаки рукоятью.' \
+	,'Специальная:'+ATTACK_TYPE_SPECIAL+':Специальная атака.' \
+]
+
+
 //Парировательная способность
 #define WEAPON_PARRY_UNABLE 0 /*не парировательное */
 #define WEAPON_PARRY_UNBALANCED 1 /*несбалансированное*/
@@ -86,6 +93,21 @@
 #define DAMAGE_TYPE_AFFLICTION "dt_aff"
 //по условиям оружия
 #define DAMAGE_TYPE_SPEC "dt_spec"
+
+#define DAMAGE_TYPE_LIST_NODE_BINDING [ "Дробящий:"+DAMAGE_TYPE_CRUSHING+":Ущерб через тупой удар, как дубинкой или взрывчаткой." \
+	,"Режущий:"+DAMAGE_TYPE_CUTTING + ":Ущерб через острые предметы." \
+	,"Проникающий:"+DAMAGE_TYPE_IMPALING + ":Колотые раны, полученные например копьем или стрелой." \
+	,"Малый пробивной:"+DAMAGE_TYPE_PIERCING_SM +":Низкоэнергетический снаряд или атака, оставляющая небольшой раневой канал, например бронебойная пуля." \
+	,"Обычный пробивной атака:"+DAMAGE_TYPE_PIERCING_NO +":Большинство обычных винтовочных и пистолетных пуль." \
+	,"Большой пробивной:"+DAMAGE_TYPE_PIERCING_LA +":Крупнокалиберные твердые пули или атака, которая оставляет большой канал, такой как пуля с полой точкой или рикошетом." \
+	,"Огромный пронзительный:"+DAMAGE_TYPE_PIERCING_HU +":" \
+	,"Огненный:"+DAMAGE_TYPE_BURN \
+	,"Разъедающий:"+DAMAGE_TYPE_CORROSION \
+	,"Токсический:"+DAMAGE_TYPE_TOXIC \
+	,"Изнуряющий:"+DAMAGE_TYPE_FATIGUE \
+	,"Воздействующий:"+DAMAGE_TYPE_AFFLICTION \
+	,"Специализированный:"+DAMAGE_TYPE_SPEC \
+]
 
 /*
 ================================================================================
@@ -136,6 +158,14 @@
 //#define LIMB_INDEX_FOOT_L 8
 #define BP_INDEX_ALL [BP_INDEX_HEAD,BP_INDEX_TORSO,BP_INDEX_ARM_R,BP_INDEX_ARM_L,BP_INDEX_LEG_R,BP_INDEX_LEG_L]
 
+#define BODY_PART_LIST_NODE_BINDING [ 'Голова:BP_INDEX_HEAD' \
+	,'Туловище:BP_INDEX_TORSO' \
+	,'Правая рука:BP_INDEX_ARM_R' \
+	,'Левая рука:BP_INDEX_ARM_L' \
+	,'Правая нога:BP_INDEX_LEG_R' \
+	,'Левая нога:BP_INDEX_LEG_L' \
+]
+
 //Зоны для ассоциации органов в массиве
 #define BO_INDEX_HEART 0
 #define BO_INDEX_LIVER 1
@@ -169,6 +199,22 @@
 //#define TARGET_ZONE_WEAPON 17 /*обдумать*/
 //#define TARGET_ZONE_LARGEAREA 18 /*не нужное*/
 #define TARGET_ZONE_RANDOM 19
+
+#define TARGET_ZONE_LIST_NODE_BINDING [ 'Торс:TARGET_ZONE_TORSO' \
+	,'Живот:TARGET_ZONE_ABDOMEN' \
+	,'Голова:TARGET_ZONE_HEAD' \
+	,'Левый глаз:TARGET_ZONE_EYE_L' \
+	,'Правый глаз:TARGET_ZONE_EYE_R' \
+	,'Лицо:TARGET_ZONE_FACE' \
+	,'Шея:TARGET_ZONE_NECK' \
+	,'Пах:TARGET_ZONE_GROIN' \
+	,'Левая рука:TARGET_ZONE_ARM_L' \
+	,'Правая рука:TARGET_ZONE_ARM_R' \
+	,'Левая нога:TARGET_ZONE_LEG_L' \
+	,'Правая нога:TARGET_ZONE_LEG_R' \
+	,'Рот:TARGET_ZONE_MOUTH' \
+	,'Случайно:TARGET_ZONE_RANDOM' \
+]
 
 
 #define TARGET_ZONE_LIST_HEAD [TARGET_ZONE_HEAD,TARGET_ZONE_FACE,TARGET_ZONE_NECK,TARGET_ZONE_MOUTH,TARGET_ZONE_EYE_R,TARGET_ZONE_EYE_L]

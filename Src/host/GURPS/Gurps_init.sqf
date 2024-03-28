@@ -4,10 +4,10 @@
 // ======================================================
 
 
-obj_gurps_combat = createObj;
+obj_gurps_combat = createHashMap;
 
 #define vd(a,b,c,d) [a,b,c,d]
-#define allocSTVal(val,data) obj_gurps_combat setvariable [str val,data]
+#define allocSTVal(val,data) obj_gurps_combat set [str val,data]
 #define allocSTVal_inArr(vals,data) {allocSTVal(_x,data)} foreach [vals]
 #define allocSTVal_inRange_excludeUp(low,up,data) for "_i" from low to (up - 1) do {allocSTVal(_i,data)}
 

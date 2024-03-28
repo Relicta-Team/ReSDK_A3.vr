@@ -12,12 +12,38 @@
 #include "Gurps_init.sqf"
 //#define log_onEncumbranceRecalculate
 
+"
+	name:Бросить кубики
+	desc:Бросает несколько 6-гранных костей и возвращает их сумму.
+	in:int:Кубиков:Количество костей. По умолчанию 1.
+		opt:def=1
+	out:int:Результат:Выпавшее число
+"
+node_func(gurps_throwdices_node) = {
+	params ["_cnt"];
+	_cnt = _cnt max 1;
+	_cnt call gurps_throwdices
+};
+
 gurps_throwdices = {
 	private _amount = 0;
 	for "_i" from 1 to _this do {
 		MOD(_amount, + D6);
 	};
 	_amount
+};
+
+"
+	name:Бросить 3d6
+	desc:Бросает три 6-гранных кубика против значения.
+	in:int:Значение
+		opt:def=1
+	out:struct.RollResult:Результат:Структура результата броска
+"
+node_func(gurps_rollstd_node) = {
+	params ['_skill'];
+	_skill = _skill max 1;
+	_skill call gurps_rollstd
 };
 
 gurps_rollstd = {
@@ -50,6 +76,18 @@ gurps_rollstd = {
     errorformat("No return. skill:%1; dices:%2",_skill arg _d);
 };
 
+"
+	name:Бросить 3d6 на действие
+	desc:Бросает три 6-гранных кости против значения. Возвращает успешность действия или неудачу. Этот узел не возвращает крилические успехи и провалы и предназначен для проверки успешности совершенного действия.
+	in:int:Значение
+		opt:def=1
+	out:enum.DiceResult:Результат:Успех или провал действия.
+" node_func(gurps_rollnocrit_node) = {
+	params ['_skill'];
+	_skill = _skill max 1;
+	_skill call gurps_rollnocrit
+};
+
 gurps_rollnocrit = {
 	private _skill = _this;
 	private _d = _3D6;
@@ -65,65 +103,48 @@ gurps_rollnocrit = {
 	errorformat("No return. skill:%1; dices:%2",_skill arg _d);
 };
 
+"
+	name:Размер повреждения от силы
+	desc:Получает количество кубиков и модификаторы для атаки персонажа с указанной силой и типом атаки.
+	in:int:Сила:Сила персонажа
+	in:enum.AttackType:Тип удара:Тип удара должен быть прямой или амплитудный. При указании других значений вы получите 0 кубиков и 0 модификаторов.
+	out:struct.Dices:Кубиков:Количество кубиков и модификаторов для указанной силы и типа удара.
+" node_func(gurps_getDamageByStrength_node) = {
+	params ['_st',"_dt"];
+	
+	_st = _st max 1;
+	private _v4Struct = _st call gurps_getDamageByStrength;
+	if (_dt == ATTACK_TYPE_THRUST) exitWith {
+		_v4Struct select [0,2]
+	};
+	if (_dt == ATTACK_TYPE_SWING) exitWith {
+		_v4Struct select [2,2]
+	};
+	setLastError("Unexpected attack type: " + str _dt);
+	[0,0]
+};
+
+"
+	name:Бросить кубики с модификатором
+	desc:Бросает несколько кубиков. К выпавшему числу добавляется модификатор.
+	in:struct.Dices:Кубики:Количество кубиков с модификатором
+	out:int:Результат:Выпавший результат
+" node_func(gurps_throwDpM_node) = {
+	params ["_struct"];
+	assert_str(count _struct == 2,"gurps::throwDpM() - Corrupted parameter: Structure must have 2 elements");
+	_struct params ["_d","_m"];
+	(_d call gurps_throwdices) + _m
+};
+
 //вычисляет силу удара с руки
 gurps_getDamageByStrength = {
 	private _st = _this;
-
-	//TODO give byref values
-
-/*	if (_st in [1,2]) exitWith {[1,-6,1,-5]};
-    if (_st in [3,4]) exitWith {[1,-5,1,-4]};
-    if (_st in [5,6]) exitWith {[1,-4,1,-3]};
-    if (_st in [7,8]) exitWith {[1,-3,1,-2]};
-
-    if (_st == 9) exitWith {[1,-2,1,-1]};
-    if (_st == 10) exitWith {[1,-2,1,0]};
-    if (_st == 11) exitWith {[1,-1,1,1]};
-    if (_st == 12) exitWith {[1,-1,1,2]};
-    if (_st == 13) exitWith {[1,0,2,-1]};
-    if (_st == 14) exitWith {[1,0,2,0]};
-    if (_st == 15) exitWith {[1,1,2,1]};
-    if (_st == 16) exitWith {[1,1,2,2]};
-    if (_st == 17) exitWith {[1,2,3,-1]};
-    if (_st == 18) exitWith {[1,2,3,0]};
-    if (_st == 19) exitWith {[2,-1,3,1]};
-    if (_st == 20) exitWith {[2,-1,3,2]};
-    if (_st == 21) exitWith {[2,0,4,-1]};
-    if (_st == 22) exitWith {[2,0,4,0]};
-    if (_st == 23) exitWith {[2,1,4,1]};
-    if (_st == 24) exitWith {[2,1,4,2]};
-    if (_st == 25) exitWith {[2,2,5,-1]};
-    if (_st == 26) exitWith {[2,2,5,0]};
-
-    if (_st in [27,28]) exitWith {[3,-1,5,1]};
-    if (_st in [29,30]) exitWith {[3,0,5,2]};
-    if (_st in [31,32]) exitWith {[3,1,6,-1]};
-    if (_st in [33,34]) exitWith {[3,2,6,0]};
-    if (_st in [35,36]) exitWith {[4,-1,6,1]};
-    if (_st in [37,38]) exitWith {[4,0,6,2]};
-
-    if (_st == 39) exitWith {[4,1,7,-1]};
-
-    if (_st >= 40 && _st < 45) exitWith {[4,1,7,-1]};
-    if (_st >= 45 && _st < 50) exitWith {[5,0,7,1]};
-    if (_st >= 50 && _st < 55) exitWith {[5,2,8,-1]};
-    if (_st >= 55 && _st < 60) exitWith {[6,0,8,1]};
-    if (_st >= 60 && _st < 65) exitWith {[7,-1,9,0]};
-    if (_st >= 65 && _st < 70) exitWith {[7,1,9,2]};
-    if (_st >= 70 && _st < 75) exitWith {[8,0,10,0]};
-    if (_st >= 75 && _st < 80) exitWith {[8,2,10,2]};
-    if (_st >= 80 && _st < 85) exitWith {[9,0,11,0]};
-    if (_st >= 85 && _st < 90) exitWith {[9,2,11,2]};
-    if (_st >= 90 && _st < 95) exitWith {[10,0,12,0]};
-    if (_st >= 95 && _st < 100) exitWith {[10,2,12,2]};
-    if (_st == 100) exitWith {[11,0,13,0]};*/
-
 
 	if (_st > 100) then {
     	private _o_st = floor((_st - 100) / 10);
     	[(11 + _o_st),0,(13 + _o_st),0]
     } else {
-		private _o_st = obj_gurps_combat getVariable (str _st);
+		private _o_st = obj_gurps_combat get (str _st);
 		if (isNullVar(_o_st)) exitWith {
 			errorformat("gurps::calucateCharDamage() - Cant find value for st %1. Returns by default vec4<zero>",_st);
 			[0,0,0,0]

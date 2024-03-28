@@ -123,6 +123,12 @@ node_enum
 ]
 node_enum
 
+["BoneStatus",BONE_STATUS_LIST_NODE_BINDING,
+"
+	name:Состояние костей
+	desc:Перечисление состояния костей для части тела.
+"] node_enum
+
 ["EntityStance",NODE_STANCE_LIST_ALL,
 	"name:Положение моба
 	desc:Перечисление активных положений тела мобов. Существует всего 3 активных положения: Стоя, сидя и лежа.
@@ -167,6 +173,43 @@ node_enum
 	name:Тип сообщения консоли
 	desc:Типы сообщений, которые можно вывести в консоль.
 "] node_enum
+
+
+#include "..\CombatSystem\CombatSystem.hpp"
+["DamageType",DAMAGE_TYPE_LIST_NODE_BINDING,
+"
+	name:Тип урона
+	desc:Перечисление типов урона.
+	enumtype:string
+"
+] node_enum
+
+["TargetZone",TARGET_ZONE_LIST_NODE_BINDING,
+"
+	name:Целевая зона
+	desc:Целевая зона персонажа (например, для повреждений) 
+"] node_enum
+
+["BodyPart",BODY_PART_LIST_NODE_BINDING,
+"
+	name:Часть тела
+	desc:Часть тела персонажа для ссылки на объекты частей тела. 
+"] node_enum
+
+["AttackType",ATTACK_TYPE_LIST_NODE_BINDING,
+"
+	name:Тип атаки
+	desc:Тип атаки. Отвечает за то как будет производиться атака.
+	enumtype:string
+"] node_enum
+
+#include "..\GURPS\gurps.hpp"
+["DiceResult",DICE_RESULT_LIST_NODE_BINDING,
+"
+	name:Результат броска кубиков
+	desc:Результат броска кубиков. Успех, провал, крит.успех или крит.провал.
+"
+] node_enum
 
 //!!! enum helper
 nodeModule_register("enumhelper")

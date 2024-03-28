@@ -368,6 +368,12 @@ region(Status effects)
 	};
 
 	//упал
+	"
+		name:Упасть
+		desc:Заставляет моба упасть. Не действует на мобов, сидящих на стульях или находящихся в положении лёжа. Не наносит урон при падении.
+		type:method
+		lockoverride:1
+	" node_met
 	func(KnockDown)
 	{
 		objParams();
@@ -384,6 +390,18 @@ region(Status effects)
 		};
 		//callSelfParams(Weaken,1);
 	};
+
+	"
+		name:Стан
+		desc:Станит моба. При стане моб не может производить никаких действий, включая движение. Смотрите описание портов для подробной информации.
+		type:method
+		lockoverride:1
+		in:int:Время стана:Время в секундах, на которое моб не сможет выполнять действия.
+		in:bool:Выронить предметы:При включении этого флага моб выронит все предметы из рук.
+			opt:def=false:require=-1
+		in:bool:Применение:При включении этого флага указанное время стана добавляется к существующему времени. Если флаг выключен, то время стана установится только в том случае, если в момент применения оставшееся время меньше установленного времени стана. 
+			opt:def=false:require=-1
+	" node_met
 	// Желательно добавлять только Int32 числа
 	func(Stun)
 	{
@@ -416,6 +434,14 @@ region(Status effects)
 		callSelfParams(stopProgress,true);
 		callSelf(closeOpenedNetDisplay);
 	};
+
+	"
+		name:В стане
+		desc:Возвращает статус находится ли моб в стане.
+		type:get
+		lockoverride:1
+		return:bool:Моб в стане
+	" node_met
 	//Является ли моб оглушённым в данный момент
 	func(isStunned)
 	{
@@ -437,14 +463,35 @@ region(Status effects)
 
 	//активен ли моб. спящий или без сознания не будет активным и не сможет к примеру уклониться
 	//Мёртвые, спящие или без сознания. Одним словом - активные
+	"
+		name:Активен
+		desc:Возвращает @[bool ИСТИНУ], если моб находится в активном состоянии. Моб активен, если он в сознании, жив и не спит.
+		type:get
+		lockoverride:1
+		return:bool:Моб активен
+	" node_met
 	func(isActive)
 	{
 		objParams();
 		!callSelf(isUnconscious) && !callSelf(isSleep) && !getSelf(isDead)
 	};
 
+	"
+		name:Спит
+		desc:Возвращает @[bool ИСТИНУ], если моб спит.
+		type:get
+		lockoverride:1
+		return:bool:Моб спит
+	" node_met
 	getter_func(isSleep,getSelf(sleepStrength) != 0);
 
+	"
+		name:Заснуть
+		desc:Заставляет моба лечь спать или проснуться. Попытка усыпления моба, находящегося в состоянии сна не даст результата. То же правило действует попытаться разбудить не спящего моба.
+		type:method
+		lockoverride:1
+		in:bool:Заснуть:При указании значения @[bool ИСТИНА] моб заснёт. В ином случае он проснётся.
+	" node_met
 	func(setSleep)
 	{
 		objParams_1(_mode);
@@ -532,6 +579,13 @@ region(Status effects)
 	};
 	var(_lastcheckunsleep,0);
 
+	"
+		name:Потерять сознание
+		desc:Заставляет моба потерять сознание на указанное время. Если моб уже без сознания то указанное время добавляется к текущему, которое осталось до пробуждения моба.
+		type:method
+		lockoverride:1
+		in:int:Время:Время в секундах, на которое моб упадет в бессознательное состояние, либо время бессознательного состояния, добавленное к текущему времени.
+	" node_met
 	//Установить мобу бессознанку с применением эффектов, анимаций и синхронизаций
 	func(setUnconscious)
 	{
@@ -602,6 +656,13 @@ region(Status effects)
 		};
 	};
 
+	"
+		name:Без сознания
+		desc:Проверяет находится ли моб без сознания. Данная проверка отвечает только за бессознательное состояние, не учитывая смерть и сон.
+		type:get
+		lockoverride:1
+		return:bool:Возвращает @[bool ИСТИНУ], если моб без сознания.
+	" node_met
 	func(isUnconscious)
 	{
 		objParams();
@@ -1221,7 +1282,16 @@ region(Log macros)
 
 	#define lifelog(mes,fmt) "debug_console" callExtension (format["[LOG::LIFE]" + (mes) + "#1011",fmt])
 
-
+	"
+		name:Нанести повреждение
+		desc:Наносит урон персонажу по выбранной зоне.
+		type:method
+		lockoverride:1
+		in:int:Урон:Количество урона. Должно быть больше 0 для ощутимого эффекта. Обратите внимание, что фактический урон возможно будет меньше от защищающей брони на персонаже.
+		in:enum.DamageType:Тип повреждения:Природа повреждения. Отвечает за модификатор повреждения, последствия повреждения и т.д.
+		in:enum.TargetZone:Зона:Место, в которое пришёлся урон.
+		in:enum.DirectionSide:Направление:С какой стороны нанесено повреждение.
+	" node_met
 	func(applyDamage)
 	{
 		// количество урона, тип повреждений, хитзона, причина урона
@@ -1553,6 +1623,13 @@ region(Log macros)
 	};
 
 	//отрываем конечность по параметру BP_INDEX_...
+	"
+		name:Оторвать конечность
+		desc:Отрывает конечность персонажа. Если конечности не существует - ничего не произойдёт. Оторванная конечность появится под персонажем.
+		type:method
+		lockoverride:1
+		in:enum.BodyPart:Часть тела:Часть тела, которая будет оторвана.
+	" node_met
 	func(lossLimb)
 	{
 		objParams_1(_bpIndex);
@@ -1576,10 +1653,19 @@ region(Log macros)
 	};
 
 	//Событие выбивания зубов (выпадания)
+	"
+		name:Лишить зубов
+		desc:Заставляет выпасть несколько зубов персонажа.
+		type:method
+		lockoverride:1
+		in:int:Количество:Сколько зубов должо выпасть. Значение не может быть меньше 1.
+			opt:def=1
+	" node_met
 	func(lossTeeth)
 	{
 		objParams_1(_amount);
 		if !callSelf(hasTeeth) exitWith {};
+		_amount = _amount max 1;
 		private _head = callSelfParams(getPart,BP_INDEX_HEAD);
 		private _teethCount = getVar(_head,teeth);
 		private _lossCount = (_teethCount - _amount) max 0;
@@ -1597,6 +1683,13 @@ region(Log macros)
 		modVar(gm_currentMode,teethLoss, + _amount);
 	};
 
+	"
+		name:Наличие зубов
+		desc:Проверяет, есть ли хотя бы один зуб у персонажа. Если есть зубы - возвращает @[bool ИСТИНУ], в остальных случаях - @[bool ЛОЖЬ].
+		type:get
+		lockoverride:1
+		return:bool:Есть ли зубы
+	" node_met
 	func(hasTeeth)
 	{
 		objParams();
@@ -1608,6 +1701,13 @@ region(Log macros)
 	};
 
 	//Функция вызывается при уничтожении конечности
+	"
+		name:Уничтожить конечность
+		desc:Уничтожает конечность персонажа. Если конечности не существует - ничего не произойдёт.
+		type:method
+		lockoverride:1
+		in:enum.BodyPart:Часть тела:Часть тела, которая будет уничтожена.
+	" node_met
 	func(destroyLimb)
 	{
 		objParams_1(_bpIndex);
@@ -1636,6 +1736,14 @@ region(Log macros)
 		};
 	};
 
+	"
+		name:Лишить глаза
+		desc:Заставляет выпасть глаз персонажа. Если у персонажа не останется глаз - он не сможет видеть.
+		type:method
+		lockoverride:1
+		in:enum.SideIndex:Сторона:Сторона, с которой выпадет глаз.
+
+	" node_met
 	func(lossEye)
 	{
 		objParams_1(_side);
@@ -1657,6 +1765,15 @@ region(Log macros)
 		};
 	};
 
+	"
+		name:Повреждение артерии
+		desc:Повреждает или залечивает артерию на части тела персонажа.
+		type:method
+		lockoverride:1
+		in:enum.BodyPart:Часть тела:Часть тела, которая будет повреждена.
+		in:bool:Повредить:При включении данной опции артерия будет повреждена, при отключении - залечиваться.
+			opt:def=true
+	" node_met
 	func(setDamageArtery)
 	{
 		objParams_2(_bpIndex,_mode);
@@ -1672,6 +1789,15 @@ region(Log macros)
 		};
 		breakpoint(_p)
 	};
+
+	"
+		name:Артерия повреждена
+		desc:Проверяет, повреждена ли артерия на части тела персонажа.
+		type:get
+		lockoverride:1
+		in:enum.BodyPart:Часть тела:Проверяемая часть тела.
+		return:bool:Повреждена ли артерия на проверяемой части тела.
+	" node_met
 	func(isArteryDamaged)
 	{
 		objParams_1(_bpIndex);
@@ -2458,6 +2584,18 @@ region(Handle pain)
 	};
 
 	//добавить немного боли. _amount временное значение
+	"
+		name:Изменить боль
+		desc:Добавляет или устанавливает значение боли для указанной части тела персонажа, если такова существует.
+		type:method
+		lockoverride:1
+		in:enum.BodyPart:Часть тела:Часть тела, для которой будет добавлена боль
+		in:int:Количество:Количество единиц боли, добавляемое к части тела персонажа
+		in:bool:Установить:При включении данной опции будет выполнена установка нового указанного количества вместо добавления к текущему значению боли.
+			opt:def=false:require=-1
+		in:bool:Подавить приступ:При включении данной опции не будет производиться приступ при получении боли или агонии.
+			opt:def=false:require=-1
+	" node_met
 	func(adjustPain)
 	{
 		params ['this',["_bpIdx",BP_INDEX_TORSO],"_amount",["_isSet",false],["_suppressMessage",false]]; //_isSet установит боль в текущее значение. нужно например для обнуления
@@ -2470,7 +2608,7 @@ region(Handle pain)
 
 		if (_isSet) exitWith {
 			private _newLevel = clamp(PAIN_LIST_RESTORE_TIME findif {_x>=_amount},PAIN_LEVEL_NO,PAIN_LEVEL_MAX);
-			callSelfParams(setPainLevel,_bpIdx arg _newLevel);
+			callSelfParams(setPainLevel,_bpIdx arg _newLevel arg _suppressMessage);
 			setVar(_part,painTime,_amount);
 		};
 
@@ -2513,7 +2651,7 @@ region(Handle pain)
 
 		//если уровень отличается от предыдущего - синхронизируем
 		if (_newLvlCalc!=_curLvl) then {
-			callSelfParams(setPainLevel,_bpIdx arg _newLvlCalc);
+			callSelfParams(setPainLevel,_bpIdx arg _newLvlCalc arg _suppressMessage);
 		};
 		setVar(_part,painTime,_allPain);
 	};
@@ -2651,6 +2789,24 @@ region(Handle pain)
 	};
 
 region(Bones sub-system)
+
+	"
+		name:Установить состояние костей
+		desc:Устанавливает состояние костей в части тела персонажа. Если части тела не существует - ничего не произойдёт.
+		type:method
+		lockoverride:1
+		in:enum.BodyPart:Часть тела:Часть тела, для которой будет установлено состояние костей.
+		in:enum.BoneStatus:Состояние костей:Новое состояние костей для части тела.
+	" node_met
+	func(setBoneStatus)
+	{
+		objParams_2(_bpIdx,_status);
+		private _pt = callSelfParams(getPart,_bpIdx);
+		if isNullReference(_pt) exitWith {};
+
+		callFuncParams(_pt,setBoneStatus,_status);
+	};
+
 	//отдаёт клиенту инфу может ли он двигаться от сломанных ног
 	func(onSyncBones)
 	{

@@ -46,6 +46,20 @@ region(Memories)
 			modvar(_txt) +"</t>";
 		};
 
+		private _mobDesc = callSelf(getDesc);
+		if (!isNullVar(_mobDesc) && {_mobDesc!=""}) then {
+			modvar(_txt) + sbr + _mobDesc;
+		};
+
+		private _mpool = [];
+		{
+			_mpool pushBack _x;
+		} foreach getVar(_mem,messages);
+
+		if (count _mpool > 0) then {
+			modvar(_txt) + sbr + "<t color='#5A71A3'>" + (_mpool joinString sbr) + "</t>";
+		};
+
 		{
 			modvar(_txt) + sbr + _x;
 		} foreach getSelf(__firstLoginMesPool);
