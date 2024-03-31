@@ -64,6 +64,7 @@ nodegen_addFunction = {
     #ifdef _SQFVM
     if (true) exitwith {};
     #endif
+    if (!is3DEN) exitwith {};
 
     private _ctx = _this;
     private _buf = [_ctx];
@@ -121,6 +122,9 @@ nodegen_addEnumerator = {
     missionNamespace setvariable ['enum_vToK_'+_nodename,_map];
     missionNamespace setvariable ["enum_values_"+_nodename,(keys _map) apply {parseNumber _x}];
     
+    //выход из нумераторов только после выполнения действий
+    if (!is3DEN) exitwith {};
+
     private _ctx = [];
     _ctx pushBack ('node:'+_nodename);
     _ctx pushBack ("path:Перечисления");
@@ -131,7 +135,7 @@ nodegen_addEnumerator = {
 
 nodegen_addStruct = {
     params ["_nodename","_members","_pdata"];
-
+    if (!is3DEN) exitwith {};
     assert(equalTypes(_members,[]));
 
     private _map = createHashMap;
