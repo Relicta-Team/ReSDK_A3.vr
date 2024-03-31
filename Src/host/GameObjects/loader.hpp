@@ -4,6 +4,7 @@
 // ======================================================
 
 loadFile("src\host\GameObjects\GameObject.sqf");
+loadFile("src\host\GameObjects\ScriptedGameObject.sqf");
 
 //mobs
 loadFile("src\host\GameObjects\Mobs\BasicMob.sqf");

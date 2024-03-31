@@ -44,15 +44,16 @@ nodeModule_setExecType("pure")
 
 nodeModule_setColorStyle("Function")
 nodeModule_setExecType("all")
+//! это impure функции. не забывать про оффсет портов из-за exec-ов
 
-["cm_sendLobbyMessage","Сообщение в лобби","[@in.1,@in.2]call cm_sendLobbyMessage",
+["cm_sendLobbyMessage","Сообщение в лобби","[@in.2,@in.3]call cm_sendLobbyMessage",
 "string:Сообщение:Сообщение, которое будет выведено в лобби",
 "enum.ChatMessageChannel:Тип:Тип сообщения чата",
 nil,
 "Отправляет сообщение в лобби. Данный узел предназначен для оповещения клиентов, находящихся в лобби."
 ] reg_binary
 
-["cm_sendOOSMessage","Сообщение в чат","[@in.1,@in.2]call cm_sendOOSMessage",
+["cm_sendOOSMessage","Сообщение в чат","[@in.2,@in.3]call cm_sendOOSMessage",
 "string:Сообщение:Сообщение, которое будет выведено в чат",
 "enum.ChatMessageChannel:Тип:Тип сообщения чата",
 nil,

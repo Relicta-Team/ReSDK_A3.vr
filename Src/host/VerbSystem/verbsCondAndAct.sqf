@@ -138,13 +138,22 @@ ENDVERB
 
 VERB(mainact)
 	cond
-		skipCond("*UNDECL*" in (toString getFunc(src,onMainAction)));
+		_isScript = callFunc(src,isScriptedObject);
+		skipCond("*UNDECL*" in (toString getFunc(src,onMainAction)) && !_isScript);
 		skipCond(!callFunc(src,canUseMainAction));
 		skipCond(isTypeOf(usr,Mob) && callFunc(usr,isHandcuffed)); //защита от вебрдействий в наручниках
 	act
+		if callFunc(src,isScriptedObject) exitWith {
+			callFuncParams(getVar(src,__script),onMainAction,usr);
+		};
 		callFuncParams(src,onMainAction,usr);
 	name
-		_t = callFunc(src,getMainActionName);
+		_t = "";
+		if callFunc(src,isScriptedObject) then {
+			_t = callFuncParams(getVar(src,__script),getMainActionName,usr);
+		} else {
+			_t = callFunc(src,getMainActionName);
+		};
 		if (_t!="")then{setName(_t)};
 ENDVERB
 

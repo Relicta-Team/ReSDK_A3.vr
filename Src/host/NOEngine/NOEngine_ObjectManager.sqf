@@ -69,6 +69,18 @@ node_func(createGameObjectInWorld) = {
 	this
 };
 
+createGameObjectScript = {
+	params ["_name_str","_gobj"];
+	if isNullReference(_gobj) exitWith {false};
+	private _script = instantiate(_name_str);
+	assert_str(!isNullVar(_script),"Internal script creating error for type " + _name_str);
+	if !isTypeOf(_script,ScriptedGameObject) exitWith {
+		setLastError("Created object is not ScriptedGameObject: " + callFunc(_script,getClassName));
+		false
+	};
+	callFuncParams(_script,assignScript,_gobj);
+	true
+};
 
 "
 	name:Удалить объект

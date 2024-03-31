@@ -377,6 +377,10 @@ if IS_INIT_MODULE then {
 	//Отправляет всем клиентам сообщение в чат
 	cm_sendOOSMessage = {
 		params ["_text",["_type",null],["_groups",""]];
+		
+		if (!isNullVar(_type) && {equalTypes(_type,0)}) then {
+			_type = go_internal_chatMesMap select _type
+		};
 
 		[format["[CHAT:OOS]:	%1",_text]] call discLog;
 
@@ -388,6 +392,10 @@ if IS_INIT_MODULE then {
 	//Отправляет сообщение всем клиентам в лобби
 	cm_sendLobbyMessage = {
 		params ["_text",["_type",null],["_groups",""]];
+		
+		if (!isNullVar(_type) && {equalTypes(_type,0)}) then {
+			_type = go_internal_chatMesMap select _type
+		};
 
 		[format["[CHAT:LOBBY]:	%1",_text]] call discLog;
 

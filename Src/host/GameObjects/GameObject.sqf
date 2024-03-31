@@ -380,6 +380,8 @@ class(GameObject) extends(ManagedObject)
 	editor_attribute("InternalImpl")
 	var(_update_handle_auto,-1);
 
+	getter_func(isScriptedObject,false);
+
 	// запускает метод в цикле
 	func(startUpdateMethod)
 	{
@@ -1208,9 +1210,36 @@ class(IDestructible) extends(GameObject)
 	"
 		name:Разрушаемый игровой объект
 		desc:Разрушаемый игровой объект. Все игровые объекты кроме мобов наследуются от данного класса.
-		path:Игровые объекты
+		path:Игровые объекты.Базовые
 	"
 	node_class
+
+	"
+		name:Скрипт
+		desc:Возвращает ссылку на скрипт, привязанный к игровому объекту.
+		type:get
+		classprop:0
+		return:object^:Ссылка на скрипт
+	" node_var
+	var(__script,nullPtr);
+	"
+		name:Это скриптовый объект
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является скриптовым объектом.
+		type:get
+		lockoverride:1
+		classprop:0
+		return:bool:Является ли объект скриптовым объектом
+	" node_met
+	getter_func(isScriptedObject,!isNullReference(getSelf(__script)));
+
+	func(destructor)
+	{
+		objParams();
+		private _script = getSelf(__script);
+		if !isNullReference(_srcipt) then {
+			delete(_script);
+		};
+	};
 
 	//all info for this system in baisc set: B 557
 	//Повреждения оружия на B 485
