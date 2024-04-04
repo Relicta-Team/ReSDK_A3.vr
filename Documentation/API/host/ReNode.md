@@ -424,7 +424,7 @@ Type: function
 Description: 
 
 
-File: [host\ReNode\ReNode_init.sqf at line 95](../../../Src/host/ReNode/ReNode_init.sqf#L95)
+File: [host\ReNode\ReNode_init.sqf at line 94](../../../Src/host/ReNode/ReNode_init.sqf#L94)
 ## nodegen_addEnumerator
 
 Type: function
@@ -434,7 +434,7 @@ Description:
 - Param: _members
 - Param: _pdata (optional, default '')
 
-File: [host\ReNode\ReNode_init.sqf at line 104](../../../Src/host/ReNode/ReNode_init.sqf#L104)
+File: [host\ReNode\ReNode_init.sqf at line 103](../../../Src/host/ReNode/ReNode_init.sqf#L103)
 ## nodegen_addStruct
 
 Type: function
@@ -444,7 +444,7 @@ Description:
 - Param: _members
 - Param: _pdata
 
-File: [host\ReNode\ReNode_init.sqf at line 136](../../../Src/host/ReNode/ReNode_init.sqf#L136)
+File: [host\ReNode\ReNode_init.sqf at line 132](../../../Src/host/ReNode/ReNode_init.sqf#L132)
 ## nodegen_commonAdd
 
 Type: function
@@ -452,7 +452,7 @@ Type: function
 Description: 
 
 
-File: [host\ReNode\ReNode_init.sqf at line 154](../../../Src/host/ReNode/ReNode_init.sqf#L154)
+File: [host\ReNode\ReNode_init.sqf at line 150](../../../Src/host/ReNode/ReNode_init.sqf#L150)
 ## nodegen_commonSysAdd
 
 Type: function
@@ -460,7 +460,7 @@ Type: function
 Description: 
 
 
-File: [host\ReNode\ReNode_init.sqf at line 169](../../../Src/host/ReNode/ReNode_init.sqf#L169)
+File: [host\ReNode\ReNode_init.sqf at line 165](../../../Src/host/ReNode/ReNode_init.sqf#L165)
 ## nodegen_registerFunctions
 
 Type: function
@@ -468,7 +468,7 @@ Type: function
 Description: 
 
 
-File: [host\ReNode\ReNode_init.sqf at line 184](../../../Src/host/ReNode/ReNode_init.sqf#L184)
+File: [host\ReNode\ReNode_init.sqf at line 180](../../../Src/host/ReNode/ReNode_init.sqf#L180)
 ## nodegen_registerMember
 
 Type: function
@@ -479,7 +479,7 @@ Description:
 - Param: _memname
 - Param: _contextList
 
-File: [host\ReNode\ReNode_init.sqf at line 188](../../../Src/host/ReNode/ReNode_init.sqf#L188)
+File: [host\ReNode\ReNode_init.sqf at line 184](../../../Src/host/ReNode/ReNode_init.sqf#L184)
 ## nodegen_registerClass
 
 Type: function
@@ -489,7 +489,7 @@ Description:
 - Param: _class
 - Param: _data
 
-File: [host\ReNode\ReNode_init.sqf at line 193](../../../Src/host/ReNode/ReNode_init.sqf#L193)
+File: [host\ReNode\ReNode_init.sqf at line 189](../../../Src/host/ReNode/ReNode_init.sqf#L189)
 ## nodegen_generateLib
 
 Type: function
@@ -497,7 +497,7 @@ Type: function
 Description: 
 
 
-File: [host\ReNode\ReNode_init.sqf at line 198](../../../Src/host/ReNode/ReNode_init.sqf#L198)
+File: [host\ReNode\ReNode_init.sqf at line 194](../../../Src/host/ReNode/ReNode_init.sqf#L194)
 ## nodegen_loadClasses
 
 Type: function
@@ -505,7 +505,7 @@ Type: function
 Description: 
 
 
-File: [host\ReNode\ReNode_init.sqf at line 403](../../../Src/host/ReNode/ReNode_init.sqf#L403)
+File: [host\ReNode\ReNode_init.sqf at line 399](../../../Src/host/ReNode/ReNode_init.sqf#L399)
 ## renode_invokeDelegate
 
 Type: function
@@ -513,7 +513,7 @@ Type: function
 Description: call delegate; _fref - vec2: vec2:(object,context), code(params:args,context)
 
 
-File: [host\ReNode\ReNode_init.sqf at line 444](../../../Src/host/ReNode/ReNode_init.sqf#L444)
+File: [host\ReNode\ReNode_init.sqf at line 440](../../../Src/host/ReNode/ReNode_init.sqf#L440)
 ## renode_print
 
 Type: function
@@ -523,7 +523,7 @@ Description: generic function for print messages into console
 - Param: _ch
 - Param: _ft
 
-File: [host\ReNode\ReNode_init.sqf at line 467](../../../Src/host/ReNode/ReNode_init.sqf#L467)
+File: [host\ReNode\ReNode_init.sqf at line 463](../../../Src/host/ReNode/ReNode_init.sqf#L463)
 # resdk_graph.h
 
 ## __THIS_GRAPH__

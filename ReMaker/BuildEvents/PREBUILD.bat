@@ -18,6 +18,6 @@ if not exist "%renode_exe%" (
 	exit /b -10201
 )
 
-start "renode_build" /d "%renode_wd%" /i /b /wait "%renode_exe%" -prep_code -nosplash -noapp
+start "renode_build" /d "%renode_wd%" /i /b /wait "%renode_exe%" -prep_code -nosplash -noapp -noerrwin
 
 exit /b %errorlevel%

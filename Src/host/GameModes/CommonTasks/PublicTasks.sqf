@@ -347,9 +347,9 @@ class(TaskItemPlace) extends(ItemKindTask)
 		desc:Радиус, в котором нужно поместить предметы относительно указанного местоположения.
 		prop:all
 		return:float:Радиус
-		defval:1
+		defval:10
 	" node_var
-	var(radius,1);
+	var(radius,10);
 	
 	func(onTaskCheck)
 	{
