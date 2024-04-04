@@ -135,9 +135,6 @@ sdk_temp_internal_forcedAspect = null;
 if ("startAtNight" call sdk_hasSystemFlag) then {
 	invokeAfterDelay({call setNight;call setNight;[]spawn setNight},0.3);
 };
-if ("disableRayCastSphere" call sdk_hasSystemFlag) then {
-	invokeAfterDelay({si_internal_rayObject hideObject true},1);
-};
 
 //apply logic
 //isImplementClass(_startupMode)

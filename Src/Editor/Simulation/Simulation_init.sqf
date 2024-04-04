@@ -139,9 +139,6 @@ function(sim_internal_processLaunchSim)
 	if (cfg_sim_startWithLogVars) then {
 		__systemFlags pushBack "enableLogVars";
 	};
-	if (cfg_sim_disableRayCastSphere) then {
-		__systemFlags pushBack "disableRayCastSphere";
-	};
 
 	{
 		__systemFlags pushBackUnique _x;

@@ -361,13 +361,6 @@ core_settings_list_default = [
 				[true,"check"],validate_check
 			]
 		],
-		["sim_disableRayCastSphere",
-			[
-				"Выключить отображение сферы при взаимодействии с миром",
-				"Отключает отображение сферы при взаимодействии с миром в режиме симуляции.",
-				[false,"check"],validate_check
-			]
-		],
 	["region","Map",""],
 		
 		["map_autosaveBinary",
