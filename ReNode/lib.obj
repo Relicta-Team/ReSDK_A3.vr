@@ -3748,7 +3748,6 @@ def:m:ScriptedGameObject.callBaseExtraAction_0
 		desc:Базовая логика особого действия, определенная в игровом объекте.
 		type:method
 		lockoverride:1
-		return:bool:Результат выполнения особого действия. Возвращает @[bool ИСТИНУ], если особое действие успешно выполнено.
 	
 def:m:ScriptedGameObject._onInteractWithWrapper_0
 
@@ -5035,7 +5034,7 @@ def:f:TaskItemPlace.radius_0
 		desc:Радиус, в котором нужно поместить предметы относительно указанного местоположения.
 		prop:all
 		return:float:Радиус
-		defval:1
+		defval:10
 	
 def:c:MobKindTask
 
