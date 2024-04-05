@@ -695,7 +695,7 @@ region(Status effects)
 	{
 		objParams_1(_mode);
 		if (_mode) then {
-			if (getSelf(isCloseEyes) || callSelf(isUnconscious)) exitWith {};
+			if (getSelf(isCloseEyes) || !callSelf(isActive)) exitWith {};
 
 			//apply close eyes anim
 			//callSelfParams(applyGlobalAnim, "setMimic" arg UNC_MIMIC);
@@ -704,7 +704,7 @@ region(Status effects)
 			setSelf(isCloseEyes,_mode);
 		} else {
 			// if eyes closed or mob in unconscious state - exit
-			if (!getSelf(isCloseEyes) || callSelf(isUnconscious)) exitWith {};
+			if (!getSelf(isCloseEyes) || !callSelf(isActive)) exitWith {};
 
 			//callSelfParams(applyGlobalAnim, "setMimic" arg DEFAULT_MIMIC);
 

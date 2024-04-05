@@ -91,17 +91,16 @@ _iact = {
 
 	};
 	if (_type == INTERACT_RPC_MAIN) exitWith {
-		if callFunc(_target,isScriptedObject) exitWith {
-			callFuncParams(getVar(_target,__script),onMainAction,this)
-		};
 		callSelfParams(mainAction,_target);
 	};
 	if (_type == INTERACT_RPC_EXAMINE) exitWith {
 
 	};
 	if (_type == INTERACT_RPC_EXTRA) exitWith {
-		if callFunc(_target,isScriptedObject) exitWith {
-			callFuncParams(getVar(_target,__script),onExtraAction,this)
+		//скриптовая проверка с защитой переполнения стека
+		if (callFunc(_target,isScriptedObject) && {isNullVar(__SCRIPT_EXACT_ACTION__)}) exitWith {
+			private __SCRIPT_EXACT_ACTION__ = true;
+			callFuncParams(getVar(_target,__script),onExtraAction,this);
 		};
 		callSelfParams(extraAction,_target);
 	};

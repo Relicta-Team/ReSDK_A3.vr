@@ -65,6 +65,8 @@ node_func(createGameObjectInWorld) = {
 	private _visObj = callSelfParams(InitModel,_pos arg _dir arg _vec);
 
 	[[_pos,_chT] call noe_posToChunk,_chT,_visObj] call noe_registerObject;
+	
+	[this] call createGameObjectScriptInternal;
 
 	this
 };
@@ -72,14 +74,59 @@ node_func(createGameObjectInWorld) = {
 createGameObjectScript = {
 	params ["_name_str","_gobj"];
 	if isNullReference(_gobj) exitWith {false};
+	if !isNullReference(getVar(_gobj,__script)) exitWith {false};
+
+	//create script instance
 	private _script = instantiate(_name_str);
+
 	assert_str(!isNullVar(_script),"Internal script creating error for type " + _name_str);
 	if !isTypeOf(_script,ScriptedGameObject) exitWith {
 		setLastError("Created object is not ScriptedGameObject: " + callFunc(_script,getClassName));
 		false
 	};
+
 	callFuncParams(_script,assignScript,_gobj);
+
+	//apply script to all exists objects
+	if callFunc(_script,addScriptToAllObjects) then {
+		private _tobj = typeGetFromObject(_script);
+		if !typeHasVar(_tobj,__internalInitAllScript__) then {
+			assert_str(equalTypes(pointerList,hashMapNull),"Internal script creating error; Pointer list is not a hashmap");
+
+			typeSetVar(_tobj,__internalInitAllScript__,true);
+
+			private _objPtr = null;
+			private _allowedClassesList = (0 call typeGetVar(_tobj,getRestrictions));
+			private _scrRef = null;
+			{
+				_objPtr = _x;
+				_scrRef = getVar(_objPtr,__script);
+				if isNullVar(_scrRef) then {continue};
+				if !isNullReference(_scrRef) then {continue};
+
+				if ((_allowedClassesList findif {isTypeStringOf(_objPtr,_x)})!=-1) then {
+					_scrRef = instantiate(_name_str);
+					callFuncParams(_scrRef,assignScript,_objPtr);
+
+					//update logic for all next objects of this type
+					private _tgobj = typeGetFromObject(_gobj);
+					if !typeHasVar(_tgobj,__internal_scriptInstancer__) then {
+						typeSetVar(_tgobj,__internal_scriptInstancer__,_name_str);
+					};
+				};
+			} foreach (values pointerList);
+		};
+	};
 	true
+};
+
+createGameObjectScriptInternal = {
+	params ["_obj"];
+	//initialize script instance if defined
+	private _scriptName = typeGetVar(typeGetFromObject(_obj),__internal_scriptInstancer__);
+	if !isNullVar(_scriptName) then {
+		callFuncParams(instantiate(_scriptName),assignScript,_obj)
+	};
 };
 
 "
@@ -153,6 +200,8 @@ createItemInWorld = {
 
 	[[_pos,CHUNK_TYPE_ITEM] call noe_posToChunk,CHUNK_TYPE_ITEM,_visObj] call noe_registerObject;
 
+	[this] call createGameObjectScriptInternal;
+
 	this
 };
 
@@ -222,6 +271,8 @@ node_func(createItemInContainer) = {
 		nullPtr;
 	};
 
+	[_item] call createGameObjectScriptInternal;
+
 	_item
 };
 
@@ -275,6 +326,8 @@ node_func(createItemInInventory) = {
 
 	callFuncParams(_mob,setItemOnSlot,_item arg _slot);
 
+	[_item] call createGameObjectScriptInternal;
+
 	_item
 };
 
@@ -317,6 +370,8 @@ createStructure = {
 
 	[[_pos,CHUNK_TYPE_STRUCTURE] call noe_posToChunk,CHUNK_TYPE_STRUCTURE,_visObj] call noe_registerObject;
 
+	[this] call createGameObjectScriptInternal;
+
 	this
 };
 
@@ -358,6 +413,8 @@ createDecoration = {
 	private _visObj = callSelfParams(InitModel,_pos arg _dir arg _vec);
 
 	[[_pos,CHUNK_TYPE_DECOR] call noe_posToChunk,CHUNK_TYPE_DECOR,_visObj] call noe_registerObject;
+
+	[this] call createGameObjectScriptInternal;
 
 	this
 };
