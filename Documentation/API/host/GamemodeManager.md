@@ -1201,7 +1201,7 @@ Type: function
 Description: 
 
 
-File: [host\GamemodeManager\GamemodeManager.sqf at line 233](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L233)
+File: [host\GamemodeManager\GamemodeManager.sqf at line 236](../../../Src/host/GamemodeManager/GamemodeManager.sqf#L236)
 # Gamemode_AllowedModes.sqf
 
 ## gm_allowedModes
