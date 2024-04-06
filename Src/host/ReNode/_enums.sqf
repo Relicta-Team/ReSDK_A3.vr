@@ -115,6 +115,15 @@ node_enum
 ]
 node_enum
 
+#include "..\Namings\FaceList_categories.h"
+["Nation",face_list_category apply {format["%1:%2:",_x select 3,_x select 0]},
+	"name:Национальность
+	desc:Перечисление национальностей. Содержит все типы национальностей для людей.
+	enumtype:string
+	"
+]
+node_enum
+
 #include "..\GameObjects\ConstantAndDefines\Mobs.h"
 ["DirectionSide",NODE_DIR_LIST_ALL,
 	"name:Направление
