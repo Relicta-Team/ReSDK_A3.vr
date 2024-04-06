@@ -18,12 +18,7 @@ faces_map_woman = createHashMap;
 
 private ___skippedmanclasses = 0;
 
-face_list_category = [
-	["white","Корняк","Корнячка","Корняки"],
-	["persian","Вахатец","Вахатка","Вахатцы"],
-	["asian","Тегинец","Тегинка","Тегинцы"],
-	["black","Углярец","Углярка","Углярцы"]
-];
+#include "FaceList_categories.h"
 
 faces_list_man = [false] call facesys_prepManFaces;
 faces_list_woman = call facesys_prepWomanFaces;
@@ -36,6 +31,7 @@ if (isServer) then {
 	_cman = count (faces_list_man);
 	_cwman = count (faces_list_woman);
 	logformat("Faces lists loaded. Counts: %1/%2 (man/woman); Skipped man faces %3",_cman arg _cwman arg ___skippedmanclasses);
+	#include "Naming_nodes.sqf"
 } else {
 	facesys_prepManFaces = null;
 	facesys_prepWomanFaces = null;

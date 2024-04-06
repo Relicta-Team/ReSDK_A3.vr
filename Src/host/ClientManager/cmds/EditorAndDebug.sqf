@@ -256,3 +256,16 @@ addCommandWithDescription("playtarget",ACCESS_OWNERS,"Перейти за дру
 
 
 #endif
+
+#ifdef EDITOR
+addCommandWithDescription("rcsphere",PUBLIC_COMMAND,"Скрыть или показать желтую сферу при интеракциях")
+{
+	if (parseNumber args == 0) then {
+		si_internal_rayObject hideObject true;
+		["Курсор выключен","system"] call chatPrint;
+	} else {
+		si_internal_rayObject hideObject false;
+		["Курсор включен","system"] call chatPrint;
+	};
+};
+#endif

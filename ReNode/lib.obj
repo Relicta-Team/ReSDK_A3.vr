@@ -2281,6 +2281,18 @@ eval:Твор. (кем):4:Имя в творительном падеже - Че
 eval:Предл. (О ком):5:Имя в предложном падеже - Человеке
 
 def:enum:enums
+node:Nation
+path:Перечисления
+name:Национальность
+	desc:Перечисление национальностей. Содержит все типы национальностей для людей.
+	enumtype:string
+	
+eval:Корняки:white:
+eval:Вахатцы:persian:
+eval:Тегинцы:asian:
+eval:Углярцы:black:
+
+def:enum:enums
 node:DirectionSide
 path:Перечисления
 name:Направление
@@ -3188,6 +3200,29 @@ def:func:taskSystem
 
 node:taskSystem_createTask
 path:Игровая логика.Задачи.Утилиты
+
+def:func:namingSystem
+
+	name:Получить национальность по лицу
+	desc:Получает национальность персонажа по его лицу.
+	exec:all
+	in:string:Лицо:Лицо персонажа.
+	out:enum.Nation:Национальность:Национальность персонажа.
+
+node:getNationByFace_Node
+path:Игровая логика.Характеристики.Национальности
+
+def:func:namingSystem
+
+	name:Получить лица национальности
+	desc:Получает массив всех лиц указанной национальности. При ошибках будет получен массив лиц.
+	exec:all
+	in:enum.Nation:Национальность:Национальность персонажа.
+	in:enum.Gender:Пол:Пол персонажа.
+	out:array[string]:Лица:Лица, указанного пола и национальности.
+
+node:getNationAllFaces_Node
+path:Игровая логика.Характеристики.Национальности
 $ENDREGION:FUNCTIONS
 $REGION:CLASSMEM
 def:c:object
@@ -3684,6 +3719,15 @@ def:m:ScriptedGameObject.getRestrictions_0
 		defval:["IDestructible"]
 		restr:IDestructible
 	
+def:m:ScriptedGameObject.addScriptToAllObjects_0
+
+		name:Применить ко всем объектам
+		desc:Создает экземпляры скрипта для всех игровых объектов, являющихся типами (или их наследниками), указанных в ограничениях типов. Применение происходит когда хотя бы один игровой объект получил созданный скрипт, либо скрипт указан в объектах карты.
+		type:const
+		classprop:1
+		return:bool:Автоприменение скрипта
+		defval:false
+	
 def:m:ScriptedGameObject.onScriptAssigned_0
 
 		name:Скрипт присвоен
@@ -3695,10 +3739,9 @@ def:m:ScriptedGameObject._onMainActionWrapper_0
 
 		name:При основном действии
 		namelib:При основном действии
-		desc:Срабатывает при исполнении персонажем основного действия с объектом (при нажатии кнопки "Е").
+		desc:Срабатывает при исполнении персонажем основного действия с объектом (при нажатии кнопки "Е"). Основное действие выполняется, если персонаж может его выполнить. Для этого он должен быть в сознании и у него должна быть рука, которой производится действие.
 		type:event
 		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения основного действия. Возвращает @[bool ИСТИНУ], если основное действие успешно выполнено.
 	
 def:m:ScriptedGameObject.callBaseMainAction_0
 
@@ -3706,7 +3749,6 @@ def:m:ScriptedGameObject.callBaseMainAction_0
 		desc:Базовая логика основного действия, определенная в игровом объекте.
 		type:method
 		lockoverride:1
-		return:bool:Результат выполнения основного действия. Возвращает @[bool ИСТИНУ], если основное действие успешно выполнено.
 	
 def:f:ScriptedGameObject.mainActionName_0
 
@@ -3749,43 +3791,13 @@ def:m:ScriptedGameObject.callBaseExtraAction_0
 		type:method
 		lockoverride:1
 	
-def:m:ScriptedGameObject._onInteractWithWrapper_0
+def:m:ScriptedGameObject._onAttackWithWrapper_0
 
-		name:При взаимодействии предметом
-		namelib:При взаимодействии предметом
-		desc:Срабатывает при исполнении персонажем взаимодействия с объектом с помощью предмета в активной руке. (ЛКМ по объекту с предметом в руке)
+		name:При атаке предметом
+		desc:Срабатывает при атаке цели объектом.
 		type:event
-		out:Item:Предмет:Предмет, которым выполняется взаимодействие с объектом.
-		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	
-def:m:ScriptedGameObject.callBaseInteractWith_0
-
-		name:Взаимодействие предметом
-		desc:Базовая логика взаимодействия с помощью предмета, определенная в игровом объекте.
-		type:method
-		lockoverride:1
-		in:Item:Предмет:Предмет, которым выполняется взаимодействие с объектом.
-		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	
-def:m:ScriptedGameObject._onClickWrapper_0
-
-		name:При нажатии по объекту
-		namelib:При нажатии по объекту
-		desc:Срабатывает при нажатии ЛКМ пустой рукой по объекту в мире.
-		type:event
-		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	
-def:m:ScriptedGameObject.callBaseClick_0
-
-		name:Нажатие по объекту
-		desc:Базовая логика нажатия по объекту, определенная в игровом объекте.
-		type:method
-		lockoverride:1
-		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
+		out:Item:Предмет:Предмет, которым выполняется атака
+		out:BasicMob:Персонаж:Тот, кто атакует цель.
 	
 def:c:BasicMob
 
@@ -3841,6 +3853,24 @@ def:m:BasicMob.addTask_0
 		lockoverride:1
 		in:TaskBase:Задача:Добавляемая задача для персонажа
 		return:bool:Была ли задача успешно добавлена.
+	
+def:f:BasicMob.basicRole_0
+
+		name:Базовая роль
+		desc:Базовая роль персонажа, с которой он появился в мире. Тут хранится объект роли, которую выбрал игрок при входе, либо получил в результате успешной проверки на полного антагониста. Базовая роль не меняется до самого конца раунда.
+		prop:get
+		classprop:0
+		return:ScriptedRole:Базовая роль моба
+		restr:ScriptedRole
+	
+def:f:BasicMob.role_0
+
+		name:Текущая роль
+		desc:Текущая роль моба. Можно переназначить с помощью узла "Установить роль мобу". Если вы ни разу не изменяли роль моба, то значение текущей роли эквиваленто базовой роли.
+		prop:get
+		classprop:0
+		return:ScriptedRole:Текущая роль моба
+		restr:ScriptedRole
 	
 def:m:BasicMob.setToRole_0
 
@@ -5539,7 +5569,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"src":{"return": "object"},"mainActionName":{"return": "string"}}   },
    "methods": { "defined": {
-"getRestrictions":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_getMainActionNameWrapper":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"callBaseGetMainActionName":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onInteractWithWrapper":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"callBaseInteractWith":{"return": "<undefined>"},"_onClickWrapper":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"callBaseClick":{"return": "<undefined>"}
+"getRestrictions":{"return": "<undefined>"},"addScriptToAllObjects":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_getMainActionNameWrapper":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"callBaseGetMainActionName":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onAttackWithWrapper":{"return": "<undefined>"},"onAttackWith":{"return": "<undefined>"},"attackWithBase":{"return": "<undefined>"}
 }   }
 }
 ,"VirtualMemoryStorage": {

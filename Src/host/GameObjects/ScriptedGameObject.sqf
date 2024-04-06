@@ -44,8 +44,16 @@ class(ScriptedGameObject) extends(object)
 	getter_func(getRestrictions,["IDestructible"]);
 
 	// ------------------------------ common setup -------------------------------
-	//TODO functions
 	//auto add script to all objects - когда создается первый объект такого скрипта он апллаится ко всем объектам указанного типа
+	"
+		name:Применить ко всем объектам
+		desc:Создает экземпляры скрипта для всех игровых объектов, являющихся типами (или их наследниками), указанных в ограничениях типов. Применение происходит когда хотя бы один игровой объект получил созданный скрипт, либо скрипт указан в объектах карты.
+		type:const
+		classprop:1
+		return:bool:Автоприменение скрипта
+		defval:false
+	" node_met
+	getterconst_func(addScriptToAllObjects,false);
 
 	// ------------------------------------------- logic -------------------------------------------
 
@@ -57,6 +65,8 @@ class(ScriptedGameObject) extends(object)
 		assert_str(!isNullReference(_src),"Source object is null reference");
 		assert_str(isTypeOf(_src,IDestructible),"Script must be assigned to IDestructible instance");
 		assert_str(!isTypeOf(_src,BasicMob),"Script cannot be assigned to mob or entity");
+
+		assert_str(isNullReference(getVar(_src,__script)),"Script already assigned to object " + str _src);
 
 		if isNullReference(_src) exitWith {};
 		if !isTypeOf(_src,IDestructible) exitWith {};
@@ -96,10 +106,11 @@ class(ScriptedGameObject) extends(object)
 	"
 		name:При основном действии
 		namelib:При основном действии
-		desc:Срабатывает при исполнении персонажем основного действия с объектом (при нажатии кнопки ""Е"").
+		desc:Срабатывает при исполнении персонажем основного действия с объектом (при нажатии кнопки ""Е""). "+
+		"Основное действие выполняется, если персонаж может его выполнить. "+
+		"Для этого он должен быть в сознании и у него должна быть рука, которой производится действие.
 		type:event
 		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения основного действия. Возвращает @[bool ИСТИНУ], если основное действие успешно выполнено.
 	" node_met
 	func(_onMainActionWrapper)
 	{
@@ -118,16 +129,12 @@ class(ScriptedGameObject) extends(object)
 		desc:Базовая логика основного действия, определенная в игровом объекте.
 		type:method
 		lockoverride:1
-		return:bool:Результат выполнения основного действия. Возвращает @[bool ИСТИНУ], если основное действие успешно выполнено.
 	" node_met
 	func(callBaseMainAction)
 	{
 		params ['this'];
-
-		private _r = callFuncParams(_usr,mainAction,getSelf(src));
-		if isNullVar(_r) then {_r = true};
-		if not_equalTypes(_r,true) then {_r = true};
-		_r
+		assert_str(!isNullVar(_usr),"Internal error on call base main action - user not defined");
+		callFuncParams(getSelf(src),onMainAction,_usr);
 	};
 
 	"
@@ -208,88 +215,114 @@ class(ScriptedGameObject) extends(object)
 	func(callBaseExtraAction)
 	{
 		params ['this'];
-		private _r = callFuncParams(_usr,extraAction,getSelf(src));
-		if isNullVar(_r) then {_r = true};
-		if not_equalTypes(_r,true) then {_r = true};
-		_r
+		assert_str(!isNullVar(_usr),"Internal error on call base extra action - user not defined");
+		callFuncParams(_usr,extraAction,getSelf(src));
 	};
 
+	// --------------- generic interactions -----------------------
 
 	"
-		name:При взаимодействии предметом
-		namelib:При взаимодействии предметом
-		desc:Срабатывает при исполнении персонажем взаимодействия с объектом с помощью предмета в активной руке. (ЛКМ по объекту с предметом в руке)
+		name:При атаке предметом
+		desc:Срабатывает при атаке цели объектом.
 		type:event
-		out:Item:Предмет:Предмет, которым выполняется взаимодействие с объектом.
-		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
+		out:Item:Предмет:Предмет, которым выполняется атака
+		out:BasicMob:Персонаж:Тот, кто атакует цель.
 	" node_met
-	func(_onInteractWithWrapper)
+	func(_onAttackWithWrapper)
 	{
-		objParams_2(_with,_usr);
-		callSelfParams(callBaseInteractWith,_with,_usr);
+		objParams_3(_with,_usr,_isSelf);
+		callSelf(attackWithBase);
 	};
 
-	func(onInteractWith)
+	func(onAttackWith)
 	{
-		objParams_2(_with,_usr);
-		callSelfParams(_onInteractWithWrapper,_with,_usr);
+		objParams_3(_with,_usr,_isSelf);
+		callSelfParams(_onAttackWithWrapper,_with arg _usr arg _isSelf);
 	};
 
-	"
-		name:Взаимодействие предметом
-		desc:Базовая логика взаимодействия с помощью предмета, определенная в игровом объекте.
-		type:method
-		lockoverride:1
-		in:Item:Предмет:Предмет, которым выполняется взаимодействие с объектом.
-		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	" node_met
-	func(callBaseInteractWith)
+	func(attackWithBase)
 	{
 		params ['this'];
-		private _r = callFuncParams(getSelf(src),onInteractWith,_with,_usr);
-		if isNullVar(_r) then {_r = true};
-		if not_equalTypes(_r,true) then {_r = true};
-		_r
+		callFuncParams(_usr,clickTarget,_targ);
 	};
 
-	"
-		name:При нажатии по объекту
-		namelib:При нажатии по объекту
-		desc:Срабатывает при нажатии ЛКМ пустой рукой по объекту в мире.
-		type:event
-		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	" node_met
-	func(_onClickWrapper)
-	{
-		objParams_1(_usr);
-		callSelfParams(callBaseClick,_usr);
-	};
 
-	func(onClick)
-	{
-		objParams_1(_usr);
-		callSelfParams(_onClickWrapper,_usr);
-	};
+	// "
+	// 	name:При взаимодействии предметом
+	// 	namelib:При взаимодействии предметом
+	// 	desc:Срабатывает при исполнении персонажем взаимодействия с объектом с помощью предмета в активной руке. (ЛКМ по объекту с предметом в руке)
+	// 	type:event
+	// 	out:Item:Предмет:Предмет, которым выполняется взаимодействие с объектом.
+	// 	out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+	// " node_met
+	// func(_onInteractWithWrapper)
+	// {
+	// 	objParams_2(_with,_usr);
+	// 	callSelfParams(callBaseInteractWith,_with arg _usr);
+	// };
 
-	"
-		name:Нажатие по объекту
-		desc:Базовая логика нажатия по объекту, определенная в игровом объекте.
-		type:method
-		lockoverride:1
-		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	" node_met
-	func(callBaseClick)
-	{
-		params ['this'];
-		private _r = callFuncParams(getSelf(src),onClick,_usr);
-		if isNullVar(_r) then {_r = true};
-		if not_equalTypes(_r,true) then {_r = true};
-		_r
-	};
+	// func(onInteractWith)
+	// {
+	// 	objParams_2(_with,_usr);
+	// 	callSelfParams(_onInteractWithWrapper,_with arg _usr);
+	// };
+
+	// "
+	// 	name:Взаимодействие предметом
+	// 	desc:Базовая логика взаимодействия с помощью предмета, определенная в игровом объекте.
+	// 	type:method
+	// 	lockoverride:1
+	// 	in:Item:Предмет:Предмет, которым выполняется взаимодействие с объектом.
+	// 	in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+	// " node_met
+	// func(callBaseInteractWith)
+	// {
+	// 	params ['this'];
+	// 	//standard checks
+	// 	assert_str(!isNullVar(_usr),"Internal error on call base interact with - user not defined");
+	// 	assert_str(!isNullVar(_with),"Internal error on call base interact with - item not defined");
+	// 	assert_str(!isNullReference(_usr),"Internal error on call base interact with - user null reference");
+	// 	assert_str(!isNullReference(_with),"Internal error on call base interact with - item null reference");
+		
+	// 	callFuncParams(getSelf(src),onInteractWith,_with arg _usr);
+	// };
+
+	// "
+	// 	name:При нажатии по объекту
+	// 	namelib:При нажатии по объекту
+	// 	desc:Срабатывает при нажатии ЛКМ пустой рукой по объекту в мире.
+	// 	type:event
+	// 	out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+	// 	return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
+	// " node_met
+	// func(_onClickWrapper)
+	// {
+	// 	objParams_1(_usr);
+	// 	callSelfParams(callBaseClick,_usr);
+	// };
+
+	// func(onClick)
+	// {
+	// 	objParams_1(_usr);
+	// 	callSelfParams(_onClickWrapper,_usr);
+	// };
+
+	// "
+	// 	name:Нажатие по объекту
+	// 	desc:Базовая логика нажатия по объекту, определенная в игровом объекте.
+	// 	type:method
+	// 	lockoverride:1
+	// 	in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
+	// 	return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
+	// " node_met
+	// func(callBaseClick)
+	// {
+	// 	params ['this'];
+	// 	private _r = callFuncParams(getSelf(src),onClick,_usr);
+	// 	if isNullVar(_r) then {_r = true};
+	// 	if not_equalTypes(_r,true) then {_r = true};
+	// 	_r
+	// };
 
 
 
