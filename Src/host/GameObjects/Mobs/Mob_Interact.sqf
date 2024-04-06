@@ -60,6 +60,19 @@ func(clickTarget)
 	traceformat("ptrs: %1",vec3(getVar(this,pointer),getVar(_targ,pointer),getVar(_item,pointer)))
 	//private _isInventoryAction =
 
+	private _handcuffed = callSelf(isHandcuffed);
+	private _isCombatAction = callSelf(isCombatModeEnable);
+
+	private _scriptOut = nullPtr;
+	private __scriptRedirect = {
+		private _script = getVar(_targ,__script);
+		if isNullVar(_script) exitWith {false};
+		if isNullReference(_script) exitWith {false};
+		_scriptOut = _script;
+		true
+	};
+
+	//на мобов нельзя вешать скрипты
 	if callFunc(_targ,isMob) exitWith {
 		if getSelf(isCombatModeEnable) then {
 			
@@ -67,6 +80,7 @@ func(clickTarget)
 			callSelfParams(setStealth,false);
 			
 			private _deleg_melee_attack = {
+
 				if equals(_targ,this) then {
 					callSelf(attackSelf);
 				} else {
@@ -371,6 +385,11 @@ func(mainAction)
 		!callFunc(_item,isSeat)
 	}) exitwith {};
 
+	//here main action event scriptedgameobject perform
+	if callFunc(_item,isScriptedObject) exitWith {
+		callFuncParams(getVar(_item,__script),onMainAction,this)
+	};
+
 	callFuncParams(_item,onMainAction,this);
 };
 
@@ -379,9 +398,9 @@ func(extraAction)
 	objParams_1(_targ);
 
 	//полюбому выключаем стелс если не ворушка
-	if (_exact != SPECIAL_ACTION_STEAL) then {
-		callFuncParams(this,setStealth,false);
-	};
+	// if (_exact != SPECIAL_ACTION_STEAL) then {
+	// 	callFuncParams(this,setStealth,false);
+	// };
 
 	private _exact = getSelf(specialAction);
 
@@ -401,6 +420,8 @@ func(extraAction)
 	if (callSelf(getLastInteractDistance)>_maxDist)exitWith {
 		//далеко для интеракции
 	};
+	
+	//выполнение специальных действий
 
 	if (_exact == SPECIAL_ACTION_GRAB) exitWith {
 		if equals(_targ,this) exitWith {
@@ -981,6 +1002,9 @@ region(stealth system)
 		objParams_1(_mode);
 		if equals(_mode,getSelf(isStealthEnabled)) exitWith {};
 		if (_mode) then {
+			//только неактивный может юзать стелс
+			if !callSelf(isActive) exitWith {};
+
 			//флаг для возможности войти в стелс жруну в режиме редактора
 			#ifdef EDITOR
 			private __MOB_SETPRESTEALTH_FLAG_EDITOR__ = true;
