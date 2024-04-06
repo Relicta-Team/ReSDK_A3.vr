@@ -74,6 +74,8 @@ func(clickTarget)
 		_scriptOut = _script;
 		true
 	};
+	
+	#define callScriptedEvent(action__) if (call __scriptRedirect) exitWith {action__}
 
 	//на мобов нельзя вешать скрипты
 	if callFunc(_targ,isMob) exitWith {
@@ -127,10 +129,11 @@ func(clickTarget)
 		if (_hasItemInActHand) then {
 			if (_itemIsTarget) exitWith {
 				trace("onItemSelfClick() INV SELF CLICK (COMBAT)")
+				callScriptedEvent(callFuncParams(_scriptOut,onItemSelfClick,this));
 				callFuncParams(_item,onItemSelfClick,this);
 			};
 
-			if equals(_targLoc,getVar(_item,loc)) exitWith {
+			if equals(_targLoc,getVar(_item,loc)) exitWith { //inventory interact (combat)
 				trace("onInteractWith() interact (COMBAT)")
 				callFuncParams(_targ,onInteractWith,_item arg this);
 			};
@@ -198,6 +201,8 @@ func(clickTarget)
 			};
 		};
 	};
+
+	#undef callScriptedEvent
 };
 
 //Устаревший метод. Будет удалён в будущем
