@@ -2281,6 +2281,18 @@ eval:Твор. (кем):4:Имя в творительном падеже - Че
 eval:Предл. (О ком):5:Имя в предложном падеже - Человеке
 
 def:enum:enums
+node:Nation
+path:Перечисления
+name:Национальность
+	desc:Перечисление национальностей. Содержит все типы национальностей для людей.
+	enumtype:string
+	
+eval:Корняки:white:
+eval:Вахатцы:persian:
+eval:Тегинцы:asian:
+eval:Углярцы:black:
+
+def:enum:enums
 node:DirectionSide
 path:Перечисления
 name:Направление
@@ -3188,6 +3200,29 @@ def:func:taskSystem
 
 node:taskSystem_createTask
 path:Игровая логика.Задачи.Утилиты
+
+def:func:namingSystem
+
+	name:Получить национальность по лицу
+	desc:Получает национальность персонажа по его лицу.
+	exec:all
+	in:string:Лицо:Лицо персонажа.
+	out:enum.Nation:Национальность:Национальность персонажа.
+
+node:getNationByFace_Node
+path:Игровая логика.Характеристики.Национальности
+
+def:func:namingSystem
+
+	name:Получить лица национальности
+	desc:Получает массив всех лиц указанной национальности. При ошибках будет получен массив лиц.
+	exec:all
+	in:enum.Nation:Национальность:Национальность персонажа.
+	in:enum.Gender:Пол:Пол персонажа.
+	out:array[string]:Лица:Лица, указанного пола и национальности.
+
+node:getNationAllFaces_Node
+path:Игровая логика.Характеристики.Национальности
 $ENDREGION:FUNCTIONS
 $REGION:CLASSMEM
 def:c:object
@@ -3818,6 +3853,24 @@ def:m:BasicMob.addTask_0
 		lockoverride:1
 		in:TaskBase:Задача:Добавляемая задача для персонажа
 		return:bool:Была ли задача успешно добавлена.
+	
+def:f:BasicMob.basicRole_0
+
+		name:Базовая роль
+		desc:Базовая роль персонажа, с которой он появился в мире. Тут хранится объект роли, которую выбрал игрок при входе, либо получил в результате успешной проверки на полного антагониста. Базовая роль не меняется до самого конца раунда.
+		prop:get
+		classprop:0
+		return:ScriptedRole:Базовая роль моба
+		restr:ScriptedRole
+	
+def:f:BasicMob.role_0
+
+		name:Текущая роль
+		desc:Текущая роль моба. Можно переназначить с помощью узла "Установить роль мобу". Если вы ни разу не изменяли роль моба, то значение текущей роли эквиваленто базовой роли.
+		prop:get
+		classprop:0
+		return:ScriptedRole:Текущая роль моба
+		restr:ScriptedRole
 	
 def:m:BasicMob.setToRole_0
 
