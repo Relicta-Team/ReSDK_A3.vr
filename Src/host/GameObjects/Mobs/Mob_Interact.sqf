@@ -49,19 +49,22 @@ func(clickTarget)
 
 	private _activeHand = getSelf(activeHand);
 	private _activeHandIndexPart = if (_activeHand == INV_HAND_L) then {BP_INDEX_ARM_L} else {BP_INDEX_ARM_R};
+	private _handcuffed = callSelf(isHandcuffed);
+	private _isCombatAction = callSelf(isCombatModeEnable);
+
 	//Не срабатывает и не нужно. на случай атаки какой-то другой частью(зубы, нога)
 	//private _isSA = !isNullVar(__GLOBAL_FLAG_SPECACT_BITE__) || !isNullVar(__GLOBAL_FLAG_SPECACT_KICK__);
 	if (!callSelfParams(hasPart,_activeHandIndexPart)) exitWith {}; //no acthand part
 
 	private _item = callSelf(getItemInActiveHandRedirect);
 	private _hasItemInActHand = not_equals(_item,nullPtr);
+	private _itemIsTarget = equals(_item,_targ);
 	private _isSelf = equals(_targ,this);
 	traceformat("clickTarget logic: %1",vec3(this,_targ,_item))
 	traceformat("ptrs: %1",vec3(getVar(this,pointer),getVar(_targ,pointer),getVar(_item,pointer)))
 	//private _isInventoryAction =
 
-	private _handcuffed = callSelf(isHandcuffed);
-	private _isCombatAction = callSelf(isCombatModeEnable);
+	if (_handcuffed) exitwith {};
 
 	private _scriptOut = nullPtr;
 	private __scriptRedirect = {
@@ -74,13 +77,15 @@ func(clickTarget)
 
 	//на мобов нельзя вешать скрипты
 	if callFunc(_targ,isMob) exitWith {
+		
+		assert_str(!(call __scriptRedirect),"Mob as target - cant have script");
+
 		if getSelf(isCombatModeEnable) then {
 			
-			if callSelf(isHandcuffed) exitwith {trace("MOB some combat action locked because handcuffed")};
 			callSelfParams(setStealth,false);
 			
 			private _deleg_melee_attack = {
-
+				
 				if equals(_targ,this) then {
 					callSelf(attackSelf);
 				} else {
@@ -102,10 +107,6 @@ func(clickTarget)
 			if (getSelf(lastActionTime) > tickTime) exitWith {};
 			setSelf(lastActionTime,tickTime + 0.3);
 
-			if callSelf(isHandcuffed) exitwith {
-				trace("MOB some interact locked because handcuffed")
-			};
-
 			if (_hasItemInActHand) then {
 				trace("MOB:onInteractWith() interact")
 				callFuncParams(_targ,onInteractWith,_item arg this);
@@ -116,19 +117,20 @@ func(clickTarget)
 		};
 	};
 
+	// here is target as item
+	assert_str(!isTypeOf(_targ,BasicMob),"BasicMob condition missmatch");
+
+	private _targLoc = getVar(_targ,loc);
+
 	if getSelf(isCombatModeEnable) then {
 
-		if callSelf(isHandcuffed) exitwith {
-			trace("on some interact locked because combat and handcuffed")
-		};
-
 		if (_hasItemInActHand) then {
-			if equals(_targ,_item) exitWith {
+			if (_itemIsTarget) exitWith {
 				trace("onItemSelfClick() INV SELF CLICK (COMBAT)")
 				callFuncParams(_item,onItemSelfClick,this);
 			};
 
-			if equals(getVar(_targ,loc),getVar(_item,loc)) exitWith {
+			if equals(_targLoc,getVar(_item,loc)) exitWith {
 				trace("onInteractWith() interact (COMBAT)")
 				callFuncParams(_targ,onInteractWith,_item arg this);
 			};
@@ -146,7 +148,7 @@ func(clickTarget)
 			};
 		} else {
 			//предмета нет
-			if equals(getVar(_targ,loc),this) then {
+			if equals(_targLoc,this) then {
 				trace("onItemClick() INV CLICK (COMBAT)")
 				callFuncParams(_targ,onItemClick,this);
 			};
@@ -154,21 +156,23 @@ func(clickTarget)
 
 	} else {
 		if (_hasItemInActHand) then {
-			if equals(_targ,_item) then {
+			if (_itemIsTarget) then {
 				trace("onItemSelfClick() INV SELF CLICK")
-				if (callSelf(isHandcuffed) && {isTypeOf(_targ,IRangedWeapon)}) exitwith {};
+				if (isTypeOf(_targ,IRangedWeapon)) exitwith {};
 				callFuncParams(_item,onItemSelfClick,this);
+
 			} else {
 				private _cantInteractByDistance = callSelf(getLastInteractDistance)>INTERACT_ITEM_DISTANCE;
-				if equals(getVar(_targ,loc),this) then {
-					_cantInteractByDistance = false;//hand interact with
-				};
-				if (_cantInteractByDistance)exitWith {
-					//далеко для интеракции
-				};
+				//hand interact with
+				if equals(getVar(_targ,loc),this) then {_cantInteractByDistance = false;};
+				//далеко для интеракции
+				if (_cantInteractByDistance)exitWith {};
+
 				trace("onInteractWith() interact ")
-				if callSelf(isHandcuffed) exitwith {};
+				
 				if callSelfParams(callEventClick,_targ arg _item) exitwith {};
+
+
 				private _isRedirAct = callFunc(_item,isRedirectedInteractWith);
 				if (!isNullVar(_isRedirAct) && {_isRedirAct}) then {
 					callFuncParams(_item,onInteractWith,_targ arg this);
@@ -179,14 +183,16 @@ func(clickTarget)
 		} else {
 			if equals(getVar(_targ,loc),this) then {
 				trace("onItemClick() INV CLICK")
-				if (callSelf(isHandcuffed) && {isTypeOf(_targ,IRangedWeapon)}) exitwith {};
+				
+				if (isTypeOf(_targ,IRangedWeapon)) exitwith {};
 				callFuncParams(_targ,onItemClick,this);
 			} else {
-				if (callSelf(getLastInteractDistance)>INTERACT_ITEM_DISTANCE)exitWith {
-					//далеко для интеракции
-				};
+				//далеко для интеракции
+				if (callSelf(getLastInteractDistance)>INTERACT_ITEM_DISTANCE)exitWith {};
+
 				trace("onClick() CLICK")
-				if (callSelf(isHandcuffed) && {!isTypeOf(_targ,Item)}) exitwith {};
+
+				if (!isTypeOf(_targ,Item)) exitwith {};
 				if callSelfParams(callEventClick,_targ) exitwith {};
 				callFuncParams(_targ,onClick,this);
 			};
