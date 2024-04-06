@@ -58,7 +58,7 @@ Count modules: 49
  - [MapManager](host//MapManager.md) - 11 files
  - [MatterSystem](host//MatterSystem.md) - 11 files
  - [Medals](host//Medals.md) - 3 files
- - [Namings](host//Namings.md) - 5 files
+ - [Namings](host//Namings.md) - 7 files
  - [Networking](host//Networking.md) - 2 files
  - [NOEngine](host//NOEngine.md) - 11 files
  - [ObjectiveSystem](host//ObjectiveSystem.md) - 3 files
