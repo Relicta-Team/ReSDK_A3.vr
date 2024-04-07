@@ -3620,7 +3620,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 287](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L287)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 303](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L303)
 ## INTERACT_DIST_DEFAULT
 
 Type: constant
@@ -3632,7 +3632,7 @@ Replaced value:
 ```sqf
 1.1
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 318](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L318)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 334](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L334)
 ## __animget_impl__()
 
 Type: constant
@@ -3644,7 +3644,7 @@ Replaced value:
 ```sqf
 (getSelf(owner) call anim_getUnitAnim)
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 827](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L827)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 843](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L843)
 ## __data_light_slot__
 
 Type: constant
@@ -3656,7 +3656,7 @@ Replaced value:
 ```sqf
 [[INV_BACKPACK,null], [INV_ARMOR,null], [INV_HEAD,null], [INV_BACK,null],[INV_CLOTH,null],[INV_FACE,null],[INV_HAND_R,null],[INV_HAND_L,null],[INV_BELT,null]]
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 937](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L937)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 953](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L953)
 ## debug_internal_getinteractiontarget_spheres
 
 Type: Variable
@@ -3670,7 +3670,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 289](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L289)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 305](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L305)
 # Mob.sqf
 
 ## __performace_attacklog

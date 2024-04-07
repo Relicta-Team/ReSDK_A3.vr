@@ -36,6 +36,20 @@ Initial value:
 [...
 ```
 File: [host\Namings\FaceList.sqf at line 59](../../../Src/host/Namings/FaceList.sqf#L59)
+# FaceList_categories.h
+
+## face_list_category
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [host\Namings\FaceList_categories.h at line 6](../../../Src/host/Namings/FaceList_categories.h#L6)
 # FacesHelpers.sqf
 
 ## facesys_generatedConfig
@@ -224,7 +238,7 @@ Initial value:
 ```sqf
 [false] call facesys_prepManFaces
 ```
-File: [host\Namings\PrepareFaces.sqf at line 28](../../../Src/host/Namings/PrepareFaces.sqf#L28)
+File: [host\Namings\PrepareFaces.sqf at line 23](../../../Src/host/Namings/PrepareFaces.sqf#L23)
 ## faces_list_woman
 
 Type: Variable
@@ -236,7 +250,7 @@ Initial value:
 ```sqf
 call facesys_prepWomanFaces
 ```
-File: [host\Namings\PrepareFaces.sqf at line 29](../../../Src/host/Namings/PrepareFaces.sqf#L29)
+File: [host\Namings\PrepareFaces.sqf at line 24](../../../Src/host/Namings/PrepareFaces.sqf#L24)
 ## faces_map_man
 
 Type: Variable
@@ -261,15 +275,3 @@ Initial value:
 createHashMap
 ```
 File: [host\Namings\PrepareFaces.sqf at line 17](../../../Src/host/Namings/PrepareFaces.sqf#L17)
-## face_list_category
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-[...
-```
-File: [host\Namings\PrepareFaces.sqf at line 21](../../../Src/host/Namings/PrepareFaces.sqf#L21)

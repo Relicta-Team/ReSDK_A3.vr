@@ -149,7 +149,23 @@ class(BasicMob) extends(GameObject)
 region(roles management)
 	//! tasks already defined in Mob
 	//var_array(tasks); //задачи для человека
+	"
+		name:Базовая роль
+		desc:Базовая роль персонажа, с которой он появился в мире. Тут хранится объект роли, которую выбрал игрок при входе, либо получил в результате успешной проверки на полного антагониста. Базовая роль не меняется до самого конца раунда.
+		prop:get
+		classprop:0
+		return:ScriptedRole:Базовая роль моба
+		restr:ScriptedRole
+	" node_var
 	var(basicRole,nullPtr); //объект роли человека, выдаваемой при старте
+	"
+		name:Текущая роль
+		desc:Текущая роль моба. Можно переназначить с помощью узла ""Установить роль мобу"". Если вы ни разу не изменяли роль моба, то значение текущей роли эквиваленто базовой роли.
+		prop:get
+		classprop:0
+		return:ScriptedRole:Текущая роль моба
+		restr:ScriptedRole
+	" node_var
 	var(role,nullPtr); //текущая роль. возможно переназначать персонажей на другие роли
 	
 	var(location,nullPtr); //местоположение (тип ZoneBase)
