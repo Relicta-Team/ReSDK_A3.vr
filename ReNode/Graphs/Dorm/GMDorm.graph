@@ -6,7 +6,18 @@
     "pipe_slicing":true,
     "pipe_style":1,
     "variables":{
-      "classvar":{},
+      "classvar":{
+        "0x23532155110_2024482846189456":{
+          "name":"Воспоминания для братьев",
+          "type":"int",
+          "value":0,
+          "category":"classvar",
+          "group":"",
+          "systemname":"Vospominaniya_dlya_bratev",
+          "reprType":"int (Целое число)",
+          "reprDataType":"value (Значение)"
+        }
+      },
       "localvar":{
         "0x127419ea880_202446204959397193":{
           "name":"Кого не хватает для старта",
@@ -64,21 +75,22 @@
             "RTorgDorm",
             "RUchastDorm",
             "RLekarDorm",
-            "RPriyatelDorm"
+            "RPriyatelDorm",
+            "RRostDorm"
           ]
         }
       },
       "compiledGUID":"3db91139-a6c7-4aa1-88e1-7558933134cd",
-      "compileStatus":"Compiled",
+      "compileStatus":"NotCompiled",
       "graphVersion":2
     },
     "mpos":[
-      2715.646356092525,
-      191.1220715939454,
-      2126.00793760004,
-      2000.9486471529758
+      -182.54165707814695,
+      3360.4149907975807,
+      2313.4737281000803,
+      2177.3870382118357
     ],
-    "mzoom":-0.38
+    "mzoom":-0.43
   },
   "nodes":{
     "0x2353527da10":{
@@ -5993,6 +6005,165 @@
         "Цель":"Объект TaskBase"
       },
       "class_":"fields.TaskBase._taskDescDelegate_0.set"
+    },
+    "0x235484541d0":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":[
+        "data\\icons\\pill_16x.png",
+        "#2e8b57"
+      ],
+      "name":"Воспоминания для братьев",
+      "color":[
+        46,
+        139,
+        87,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":366.0,
+      "height":167.60000000000002,
+      "pos":[
+        408.6232815855619,
+        4808.90697476037
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Этот Dorm",
+        "Значение":0
+      },
+      "class_":"fields.GMDorm.Vospominaniya_dlya_bratev_0.set"
+    },
+    "0x23548454750":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_Blueprint_Event_16x",
+      "name":"При выборе режима",
+      "color":[
+        255,
+        0,
+        0
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":331.0,
+      "height":131.10000000000002,
+      "pos":[
+        -54.80991105926414,
+        4789.418992855112
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "class_":"methods.ScriptedGamemode.preSetup_0"
+    },
+    "0x23544f2f790":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\node_base.png",
+      "name":"RandInt",
+      "color":[
+        13,
+        18,
+        23,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":209.0,
+      "height":102.80000000000001,
+      "pos":[
+        171.71444854166936,
+        5033.520868683026
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":true,
+      "subgraph_session":{},
+      "input_ports":[
+        {
+          "name":"Число 1",
+          "multi_connection":false,
+          "display_name":false,
+          "color":[
+            255,
+            255,
+            255,
+            255
+          ],
+          "type":""
+        },
+        {
+          "name":"Число 2",
+          "multi_connection":false,
+          "display_name":false,
+          "color":[
+            255,
+            255,
+            255,
+            255
+          ],
+          "type":""
+        }
+      ],
+      "output_ports":[
+        {
+          "name":"Результат",
+          "multi_connection":true,
+          "display_name":false,
+          "color":[
+            46,
+            139,
+            87,
+            255
+          ],
+          "type":"int"
+        }
+      ],
+      "custom":{
+        "autoportdata":{},
+        "Число 1":0.0,
+        "Число 2":9.0
+      },
+      "class_":"math.randomInt"
     }
   },
   "connections":[
@@ -7194,6 +7365,26 @@
       "in":[
         "0x23536e4b510",
         "Значение 2"
+      ]
+    },
+    {
+      "in":[
+        "0x235484541d0",
+        "Вход"
+      ],
+      "out":[
+        "0x23548454750",
+        "Выход"
+      ]
+    },
+    {
+      "in":[
+        "0x235484541d0",
+        "Значение"
+      ],
+      "out":[
+        "0x23544f2f790",
+        "Результат"
       ]
     }
   ]

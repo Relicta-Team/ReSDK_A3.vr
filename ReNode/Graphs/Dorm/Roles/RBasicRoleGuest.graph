@@ -5,7 +5,9 @@
     "pipe_collision":false,
     "pipe_slicing":true,
     "pipe_style":1,
-    "variables":{},
+    "variables":{
+      "classvar":{}
+    },
     "info":{
       "type":"role",
       "name":"Базовая роль Гости",
@@ -17,19 +19,19 @@
         "fields":{},
         "methods":{}
       },
-      "compileStatus":"Compiled",
+      "compileStatus":"Warnings",
       "graphVersion":2
     },
     "mpos":[
-      2.39355230485603,
-      2.2527551104527674,
-      845.2128953902879,
-      795.4944897790945
+      157.70516965145043,
+      -459.0349053494531,
+      1945.3126616821687,
+      1830.8825051126291
     ],
-    "mzoom":0.6
+    "mzoom":-0.32
   },
   "nodes":{
-    "0x235483f5990":{
+    "0x23531b37850":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -51,7 +53,7 @@
         180
       ],
       "disabled":false,
-      "selected":true,
+      "selected":false,
       "visible":true,
       "width":279.0,
       "height":131.10000000000002,
@@ -64,7 +66,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x235483f4b90":{
+    "0x2353fe50550":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -86,7 +88,7 @@
         180
       ],
       "disabled":false,
-      "selected":true,
+      "selected":false,
       "visible":true,
       "width":279.0,
       "height":158.4,
@@ -99,7 +101,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x235464b1090":{
+    "0x2353fe518d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При конце раунда за роль",
@@ -121,7 +123,7 @@
         180
       ],
       "disabled":false,
-      "selected":true,
+      "selected":false,
       "visible":true,
       "width":339.0,
       "height":119.3,
@@ -134,7 +136,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.onEndgameBasic_0"
     },
-    "0x235464b0590":{
+    "0x2353fe52f50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",
@@ -156,7 +158,7 @@
         180
       ],
       "disabled":false,
-      "selected":true,
+      "selected":false,
       "visible":true,
       "width":279.0,
       "height":135.3,
