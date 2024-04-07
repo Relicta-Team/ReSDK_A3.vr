@@ -49,7 +49,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [host\Namings\FaceList_categories.h at line 1](../../../Src/host/Namings/FaceList_categories.h#L1)
+File: [host\Namings\FaceList_categories.h at line 6](../../../Src/host/Namings/FaceList_categories.h#L6)
 # FacesHelpers.sqf
 
 ## facesys_generatedConfig

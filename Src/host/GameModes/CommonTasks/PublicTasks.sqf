@@ -53,13 +53,7 @@ class(GameObjectKindTask) extends(TaskBase)
 	" node_var
 	var(__typeList,[]);
 
-	func(onTaskRegistered)
-	{
-		objParams();
-		//getting all references 
-		callSelf(__convertGlobalRefsToObjects);
-		callSelf(__validateInputs);
-	};
+	var(__requireValidation,true); //флаг требования валидации. Ресетится когда передаются новые глобальные ссылки
 
 	func(__convertGlobalRefsToObjects)
 	{
@@ -72,7 +66,11 @@ class(GameObjectKindTask) extends(TaskBase)
 			_lvals pushBack _refto;
 		} foreach getSelf(__globalRefs);
 
-		getSelf(__objRefs) append _lvals;
+		if (count _lvars > 0) then {
+			getSelf(__objRefs) append _lvals;
+			setSelf(__requireValidation,true);
+		};
+
 	};
 
 	//type checkers and outputs
@@ -96,11 +94,21 @@ class(GameObjectKindTask) extends(TaskBase)
 				assert_str(false,format vec2("Invalid typename %1, must be of type %2",_x arg callSelf(__onerr_requiredTypeStr)));
 			};
 		} foreach getSelf(__typeList);
+
+		setSelf(__requireValidation,false);
 	};
 
 	func(processObjectCheck)
 	{
 		objParams_3(_owner,_funcref,_functypes);
+
+		//validation process
+		if (count getSelf(__globalRefs) > 0) then {
+			callSelf(__convertGlobalRefsToObjects);
+		};
+		if getSelf(__requireValidation) then {
+			callSelf(__validateInputs);
+		};
 
 		private _foundNull = false;
 		private _counter = 0;
