@@ -224,49 +224,26 @@ region(Common interactions)
 
 	// --------------- generic interactions -----------------------
 
-	"
-		name:При клике предметом
-		desc:Срабатывает при клике цели объектом.
-		type:event
-		out:Item:Предмет:Предмет, которым выполняется атака
-		out:BasicMob:Персонаж:Тот, кто атакует цель.
-	" node_met
-	func(_onAttackWithWrapper)
-	{
-		objParams_3(_with,_usr,_isSelf);
-		callSelf(attackWithBase);
-	};
-
-	func(onAttackWith)
-	{
-		objParams_3(_with,_usr,_isSelf);
-		callSelfParams(_onAttackWithWrapper,_with arg _usr arg _isSelf);
-	};
-
-	func(attackWithBase)
-	{
-		params ['this'];
-		callFuncParams(_usr,clickTarget,_targ);
-	};
-
 region(InteractWith)
 	"
 		name:При взаимодействии предметом
-		desc:Срабатывает при взаимодействии персонажа с объектом с помощью предмета.
+		desc:Срабатывает при взаимодействии персонажа с объектом при помощью другого предмета. 
 		type:event
-		out:Item:Предмет:Предмет, используемый для взаимодействия.
+		out:Item:Предмет:Предмет, используемый для взаимодействия с владельцем этого скрипта.
 		out:BasicMob:Персонаж:Персонаж, выполняющий взаимодействие.
+		out:bool:Боевой режим:Возвращает истину, если взаимодействие произведено в боевом режиме.
+		out:bool:В инвентаре:Возвращает истину, если взаимодействие применено к объекту, находящемуся в инвентаре.
 	" node_met
 	func(_onInteractWithWrapper)
 	{
-		objParams_2(_with,_usr);
-		callSelfParams(callBaseInteractWith,_with arg _usr);
+		objParams_4(_with,_usr,_combat,_inventory);
+		callSelf(callBaseInteractWith);
 	};
 
 	func(onInteractWith)
 	{
-		objParams_2(_with,_usr);
-		callSelfParams(_onInteractWithWrapper,_with arg _usr);
+		objParams_4(_with,_usr,_combat,_inventory);
+		callSelfParams(_onInteractWithWrapper,_with arg _usr arg _combat arg _inventory);
 	};
 
 	"
@@ -274,38 +251,40 @@ region(InteractWith)
 		desc:Основная логика взаимодействия с объектом с помощью предмета.
 		type:method
 		lockoverride:1
-		in:Item:Предмет:Предмет, используемый для взаимодействия.
-		in:BasicMob:Персонаж:Персонаж, выполняющий взаимодействие.
 	" node_met
 	func(callBaseInteractWith)
 	{
 		params ['this'];
-		// Проверки
-		assert_str(!isNullVar(_usr),"Internal error on call base interact with - user not defined");
-		assert_str(!isNullVar(_with),"Internal error on call base interact with - item not defined");
-		assert_str(!isNullReference(_usr),"Internal error on call base interact with - user null reference");
-		assert_str(!isNullReference(_with),"Internal error on call base interact with - item null reference");
-		
-		callFuncParams(getSelf(src),onInteractWith,_with arg _usr);
+		callSelf(callBaseClickTarget);
+	};
+
+region(redirected interact)
+	//Этот раздел предназначен для вызова действий на объекте (работает по аналогии с interactTo)
+
+	func(_interactToWrapper)
+	{
+		//TODO implement
 	};
 
 region(OnClick)
 	"
 		name:При нажатии
-		desc:Срабатывает при нажатии персонажа по объекту.
+		desc:Срабатывает при взаимодействии персонажа по объекту пустой рукой (при нажатии ""ЛКМ"").
 		type:event
 		out:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
+		out:bool:Боевой режим:Возвращает истину, если нажатие произведено в боевом режиме.
+		out:bool:В инвентаре:Возвращает истину, если нажатие произведено по предмету в инвентаре.
 	" node_met
 	func(_onClickWrapper)
 	{
-		objParams_1(_usr);
-		callSelfParams(callBaseOnClick,_usr);
+		objParams_3(_usr,_isCombatAction,_isInventoryAction);
+		callSelf(callBaseOnClick);
 	};
 
 	func(onClick)
 	{
-		objParams_1(_usr);
-		callSelfParams(_onClickWrapper,_usr);
+		objParams_3(_usr,_isInventoryAction,_isCombatAction);
+		callSelfParams(_onClickWrapper,_usr arg _isCombatAction arg _isInventoryAction );
 	};
 
 	"
@@ -313,22 +292,17 @@ region(OnClick)
 		desc:Основная логика нажатия на объект.
 		type:method
 		lockoverride:1
-		in:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
 	" node_met
 	func(callBaseOnClick)
 	{
 		params ['this'];
-		// Проверки
-		assert_str(!isNullVar(_usr),"Internal error on call base onClick - user not defined");
-		assert_str(!isNullReference(_usr),"Internal error on call base onClick - user null reference");
-		
-		callFuncParams(getSelf(src),onClick,_usr);
+		callSelf(callBaseClickTarget);
 	};
 
 region(ItemClick)
 	"
-		name:При нажатии предметом на себя
-		desc:Срабатывает при нажатии персонажем по предмету в инвентаре.
+		name:При нажатии в активной руке
+		desc:Срабатывает при нажатии персонажем по предмету в инвентаре, находящемуся в активной руке.
 		type:event
 		out:Item:Предмет:Предмет, которым выполняется нажатие.
 		out:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
@@ -347,167 +321,25 @@ region(ItemClick)
 	};
 
 	"
-		name:Нажатие предметом на себя
-		desc:Основная логика нажатия предметом на себя.
+		name:Нажатие в активной руке
+		desc:Основная логика нажатия по предмету в активной руке.
 		type:method
 		lockoverride:1
-		in:Item:Предмет:Предмет, которым выполняется нажатие.
-		in:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
 	" node_met
 	func(callBaseItemSelfClick)
 	{
 		params ['this'];
-		// Проверки
-		assert_str(!isNullVar(_usr),"Internal error on call base item self click - user not defined");
-		assert_str(!isNullVar(_with),"Internal error on call base item self click - item not defined");
-		assert_str(!isNullReference(_usr),"Internal error on call base item self click - user null reference");
-		assert_str(!isNullReference(_with),"Internal error on call base item self click - item null reference");
-		
-		callFuncParams(getSelf(src),onItemSelfClick,_with arg _usr);
+		callSelf(callBaseClickTarget);
 	};
 
+	func(callBaseClickTarget)
+	{
+		objParams();
+		assert_str(!isNullVar(_usr),"Internal error - user reference not defined");
+		assert_str(!isNullReference(_usr),"Internal error - user reference null");
+		assert_str(!isNullVar(_targ),"Internal error - target reference not defined");
 
-	// "
-	// 	name:При взаимодействии предметом
-	// 	namelib:При взаимодействии предметом
-	// 	desc:Срабатывает при исполнении персонажем взаимодействия с объектом с помощью предмета в активной руке. (ЛКМ по объекту с предметом в руке)
-	// 	type:event
-	// 	out:Item:Предмет:Предмет, которым выполняется взаимодействие с объектом.
-	// 	out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-	// " node_met
-	// func(_onInteractWithWrapper)
-	// {
-	// 	objParams_2(_with,_usr);
-	// 	callSelfParams(callBaseInteractWith,_with arg _usr);
-	// };
-
-	// func(onInteractWith)
-	// {
-	// 	objParams_2(_with,_usr);
-	// 	callSelfParams(_onInteractWithWrapper,_with arg _usr);
-	// };
-
-	// "
-	// 	name:Взаимодействие предметом
-	// 	desc:Базовая логика взаимодействия с помощью предмета, определенная в игровом объекте.
-	// 	type:method
-	// 	lockoverride:1
-	// 	in:Item:Предмет:Предмет, которым выполняется взаимодействие с объектом.
-	// 	in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-	// " node_met
-	// func(callBaseInteractWith)
-	// {
-	// 	params ['this'];
-	// 	//standard checks
-	// 	assert_str(!isNullVar(_usr),"Internal error on call base interact with - user not defined");
-	// 	assert_str(!isNullVar(_with),"Internal error on call base interact with - item not defined");
-	// 	assert_str(!isNullReference(_usr),"Internal error on call base interact with - user null reference");
-	// 	assert_str(!isNullReference(_with),"Internal error on call base interact with - item null reference");
-		
-	// 	callFuncParams(getSelf(src),onInteractWith,_with arg _usr);
-	// };
-
-	// "
-	// 	name:При нажатии по объекту
-	// 	namelib:При нажатии по объекту
-	// 	desc:Срабатывает при нажатии ЛКМ пустой рукой по объекту в мире.
-	// 	type:event
-	// 	out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-	// 	return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	// " node_met
-	// func(_onClickWrapper)
-	// {
-	// 	objParams_1(_usr);
-	// 	callSelfParams(callBaseClick,_usr);
-	// };
-
-	// func(onClick)
-	// {
-	// 	objParams_1(_usr);
-	// 	callSelfParams(_onClickWrapper,_usr);
-	// };
-
-	// "
-	// 	name:Нажатие по объекту
-	// 	desc:Базовая логика нажатия по объекту, определенная в игровом объекте.
-	// 	type:method
-	// 	lockoverride:1
-	// 	in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-	// 	return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	// " node_met
-	// func(callBaseClick)
-	// {
-	// 	params ['this'];
-	// 	private _r = callFuncParams(getSelf(src),onClick,_usr);
-	// 	if isNullVar(_r) then {_r = true};
-	// 	if not_equalTypes(_r,true) then {_r = true};
-	// 	_r
-	// };
-
-
+		callFuncParams(_usr,clickTarget,_targ);
+	};
 
 endclass
-
-/* TODO replace to item script
-	"
-		name:При нажатии по предмету в инвентаре
-		namelib:При нажатии по предмету в инвентаре
-		desc:Срабатывает при нажатии персонажем по предмету в слоте собственного инвентаря.
-		type:event
-		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	" node_met
-	func(onItemClick)
-	{
-		objParams_1(_usr);
-		callSelfParams(callBaseItemClick,_usr);
-	};
-
-	"
-		name:Нажатие по предмету в инвентаре
-		desc:Базовая логика нажатия по предмету, определенная в игровом объекте.
-		type:method
-		lockoverride:1
-		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	" node_met
-	func(callBaseItemClick)
-	{
-		params ['this'];
-		private _r = callFuncParams(getSelf(src),onItemClick,_usr);
-		if isNullVar(_r) then {_r = true};
-		if not_equalTypes(_r,true) then {_r = true};
-		_r
-	};
-
-	"
-		name:При нажатии по предмету в активной руке
-		namelib:При нажатии по предмету в активной руке
-		desc:Срабатывает при нажатии персонажем по предмету в активной руке через инвентарь.
-		type:event
-		out:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	" node_met
-	func(onItemSelfClick)
-	{
-		objParams_1(_usr);
-		callSelfParams(callBaseItemSelfClick,_usr);
-	};
-
-	"
-		name:Нажатие по предмету в активной руке
-		desc:Базовая логика нажатия по предмету, определенная в игровом объекте.
-		type:method
-		lockoverride:1
-		in:BasicMob:Персонаж:Тот, кто выполняет действие по отношению к объекту.
-		return:bool:Результат выполнения действия. Возвращает @[bool ИСТИНУ], если действие успешно выполнено.
-	" node_met
-	func(callBaseItemSelfClick)
-	{
-		params ['this'];
-		private _r = callFuncParams(getSelf(src),onItemSelfClick,_usr);
-		if isNullVar(_r) then {_r = true};
-		if not_equalTypes(_r,true) then {_r = true};
-		_r
-	};
-*/

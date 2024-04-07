@@ -82,7 +82,7 @@ func(clickTarget)
 		
 		assert_str(!(call __scriptRedirect),"Mob as target - cant have script");
 
-		if getSelf(isCombatModeEnable) then {
+		if (_isCombatAction) then {
 			
 			callSelfParams(setStealth,false);
 			
@@ -124,17 +124,18 @@ func(clickTarget)
 
 	private _targLoc = getVar(_targ,loc);
 
-	if getSelf(isCombatModeEnable) then {
+	if (_isCombatAction) then {
 
 		if (_hasItemInActHand) then {
 			if (_itemIsTarget) exitWith {
 				trace("onItemSelfClick() INV SELF CLICK (COMBAT)")
-				callScriptedEvent(callFuncParams(_scriptOut,onItemSelfClick,this));
+				callScriptedEvent(callFuncParams(_scriptOut,onItemSelfClick,this arg _isCombatAction));
 				callFuncParams(_item,onItemSelfClick,this);
 			};
 
 			if equals(_targLoc,getVar(_item,loc)) exitWith { //inventory interact (combat)
 				trace("onInteractWith() interact (COMBAT)")
+				callScriptedEvent(callFuncParams(_scriptOut,onInteractWith,_item arg this arg _isCombatAction arg equals(_targLoc,this)));
 				callFuncParams(_targ,onInteractWith,_item arg this);
 			};
 
@@ -147,12 +148,14 @@ func(clickTarget)
 				};
 			} else {
 				//melee attack other objects
+				callScriptedEvent(callFuncParams(_scriptOut,onInteractWith,_item arg this arg _isCombatAction arg equals(_targLoc,this)));
 				callSelfParams(attackOtherObj,_targ);
 			};
 		} else {
 			//предмета нет
 			if equals(_targLoc,this) then {
 				trace("onItemClick() INV CLICK (COMBAT)")
+				callScriptedEvent(callFuncParams(_scriptOut,onClick,this arg _isCombatAction arg equals(_targLoc,this)));
 				callFuncParams(_targ,onItemClick,this);
 			};
 		};
@@ -162,12 +165,13 @@ func(clickTarget)
 			if (_itemIsTarget) then {
 				trace("onItemSelfClick() INV SELF CLICK")
 				if (isTypeOf(_targ,IRangedWeapon)) exitwith {};
+				callScriptedEvent(callFuncParams(_scriptOut,onItemSelfClick,this arg _isCombatAction));
 				callFuncParams(_item,onItemSelfClick,this);
 
 			} else {
 				private _cantInteractByDistance = callSelf(getLastInteractDistance)>INTERACT_ITEM_DISTANCE;
 				//hand interact with
-				if equals(getVar(_targ,loc),this) then {_cantInteractByDistance = false;};
+				if equals(_targLoc,this) then {_cantInteractByDistance = false;};
 				//далеко для интеракции
 				if (_cantInteractByDistance)exitWith {};
 
@@ -184,10 +188,11 @@ func(clickTarget)
 				};
 			};
 		} else {
-			if equals(getVar(_targ,loc),this) then {
+			if equals(_targLoc,this) then {
 				trace("onItemClick() INV CLICK")
 				
 				if (isTypeOf(_targ,IRangedWeapon)) exitwith {};
+				callScriptedEvent(callFuncParams(_scriptOut,onClick,this arg _isCombatAction arg equals(_targLoc,this)));
 				callFuncParams(_targ,onItemClick,this);
 			} else {
 				//далеко для интеракции
@@ -197,6 +202,7 @@ func(clickTarget)
 
 				if (!isTypeOf(_targ,Item)) exitwith {};
 				if callSelfParams(callEventClick,_targ) exitwith {};
+				callScriptedEvent(callFuncParams(_scriptOut,onClick,this arg _isCombatAction arg equals(_targLoc,this)));
 				callFuncParams(_targ,onClick,this);
 			};
 		};
