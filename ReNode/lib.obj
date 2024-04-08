@@ -4106,6 +4106,24 @@ def:c:Mob
 		desc:Игровая сущность, которым могут управлять клиенты.
 		path:Игровые объекты.Сущности
 	
+def:m:Mob.isEmptySlot_0
+
+		name:Слот пустой
+		desc:Возвращает @[bool ИСТИНУ], если проверяемый слот инвентаря персонажа пустой.
+		type:get
+		lockoverride:1
+		in:enum.InventorySlot:Слот:Проверяемый на наличие предмета слот инвентаря.
+		return:bool:Слот пустой
+	
+def:m:Mob.getItemInSlotRedirect_0
+
+		name:Получить предмет в слоте
+		desc:Возвращает предмет, находящийся в слоте. Если предмета нет или слот пустой - вернет @[object^ null-ссылку].
+		type:get
+		lockoverride:1
+		in:enum.InventorySlot:Слот:Проверяемый на наличие предмета слот инвентаря.
+		return:Item:Предмет в слоте
+	
 def:f:Mob.hunger_0
 
 	name:Голод
