@@ -3990,6 +3990,16 @@ def:m:BasicMob.getLighting_0
 		lockoverride:1
 		return:enum.LightMode:Уровень освещённости
 	
+def:m:BasicMob.generateNaming_0
+
+		name:Установить имена моба
+		desc:Устанавливает первое и второе имя моба. Генерирует имена во всех склонениях.
+		type:method
+		lockoverride:1
+		in:string:Первое имя:Первое имя моба.
+		in:string:Второе имя:Второе имя моба. Чаще всего представлено в виде фамилии.
+			opt:require=-1
+	
 def:m:BasicMob.getFirstName_0
 
 		name:Первое имя моба
@@ -5281,9 +5291,9 @@ def:f:TaskBase.descRoleplay_0
 def:f:TaskBase._taskDescDelegate_0
 
 		name:Обработчик описания задачи
-		desc:Вызываемая функция вывода описания задачи. Обычно в этой функции вычисляются форматируемые значения (например, список объектов). Чтобы посмотреть исходную строку выведите в консоли 'Ролевое описание задачи'.\nПараметры функции-действия\:\n - @[TaskBase^ Задача] - объект задачи, который производит проверку (вызов функции)\n - @[Mob^ Владелец] - владелец задачи, который запрашивает описание\n Возврат\: @[string Описание] - текст описания задачи. 
+		desc:Вызываемая функция вывода описания задачи. Обычно в этой функции вычисляются форматируемые значения (например, список объектов). Чтобы посмотреть исходную строку выведите в консоли 'Ролевое описание задачи'.\nПараметры функции-действия\:\n - @[TaskBase^ Задача] - объект задачи, который производит проверку (вызов функции)\n - @[BasicMob^ Владелец] - владелец задачи, который запрашивает описание\n Возврат\: @[string Описание] - текст описания задачи. 
 		prop:all
-		return:function[event=string=TaskBase^@Mob^]:Описание задачи
+		return:function[event=string=TaskBase^@BasicMob^]:Описание задачи
 	
 def:f:TaskBase.isTaskSingleCheck_0
 
@@ -15132,7 +15142,7 @@ $REGION:CLASSMETA
 }
 ,"TaskItemSave": {
     "baseClass" : "TaskItemGet",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":310},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":311},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15141,7 +15151,7 @@ $REGION:CLASSMETA
 }
 ,"TaskItemGet": {
     "baseClass" : "ItemKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":280},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":281},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15150,7 +15160,7 @@ $REGION:CLASSMETA
 }
 ,"TaskItemPlace": {
     "baseClass" : "ItemKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":325},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":326},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"placeName":{"return": "string"},"location":{"return": "null_array"},"radius":{"return": "int"}}   },
    "methods": { "defined": {
@@ -15159,7 +15169,7 @@ $REGION:CLASSMETA
 }
 ,"ItemKindTask": {
     "baseClass" : "GameObjectKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":230},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":231},
    "fields": { "defined": {
 "name":{"return": "string"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
@@ -15168,7 +15178,7 @@ $REGION:CLASSMETA
 }
 ,"TaskSelfSave": {
     "baseClass" : "TaskMobSave",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":463},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":464},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15177,7 +15187,7 @@ $REGION:CLASSMETA
 }
 ,"TaskMobKill": {
     "baseClass" : "MobKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":437},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":438},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15186,7 +15196,7 @@ $REGION:CLASSMETA
 }
 ,"TaskMobSave": {
     "baseClass" : "MobKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":449},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":450},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15195,7 +15205,7 @@ $REGION:CLASSMETA
 }
 ,"TaskMoneyGet": {
     "baseClass" : "CounterKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":517},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":518},
    "fields": { "defined": {
 "name":{"return": "string"},"descRoleplay":{"return": "string"},"numeralString":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -15204,7 +15214,7 @@ $REGION:CLASSMETA
 }
 ,"TaskLocationEnter": {
     "baseClass" : "LocationKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":584},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":585},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15213,7 +15223,7 @@ $REGION:CLASSMETA
 }
 ,"TaskGetRole": {
     "baseClass" : "RoleKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":641},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":642},
    "fields": { "defined": {
 "name":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15222,7 +15232,7 @@ $REGION:CLASSMETA
 }
 ,"TaskRoleDead": {
     "baseClass" : "RoleKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":665},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":666},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15240,7 +15250,7 @@ $REGION:CLASSMETA
 }
 ,"MobKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":397},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":398},
    "fields": { "defined": {
 "name":{"return": "string"},"target":{"return": "object"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
@@ -15249,7 +15259,7 @@ $REGION:CLASSMETA
 }
 ,"CounterKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":479},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":480},
    "fields": { "defined": {
 "name":{"return": "string"},"descRoleplay":{"return": "string"},"counter":{"return": "int"},"numeralString":{"return": "null_array"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
@@ -15258,7 +15268,7 @@ $REGION:CLASSMETA
 }
 ,"LocationKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":555},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":556},
    "fields": { "defined": {
 "name":{"return": "string"},"position":{"return": "null_array"},"radius":{"return": "int"}}   },
    "methods": { "defined": {
@@ -15267,7 +15277,7 @@ $REGION:CLASSMETA
 }
 ,"RoleKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":603},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":604},
    "fields": { "defined": {
 "name":{"return": "string"},"roleClass":{"return": "string"},"checkChildRoles":{"return": "bool"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
