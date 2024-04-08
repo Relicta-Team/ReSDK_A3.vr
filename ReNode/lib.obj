@@ -4439,6 +4439,67 @@ def:m:Key._setKeyOwnerWrapper_0
 		lockoverride:1
 		in:string:Типы:Типы ключа с указанными разделителями.
 	
+def:c:IWritableContentItem
+
+		name:Хранящий текст предмет
+		desc:Базовый класс для любого, хранящего текст предмета. Обычно от этого класса унаследованы листки бумаги, книги, документы и т.д.
+		path:Игровые объекты.Текстовые
+	
+def:f:IWritableContentItem.content_0
+
+		name:Текстовое содержимое
+		desc:Текст, содержащийся в книге, бумаге или любом другом предмете, способном хранить текст.
+		prop:get
+		classprop:1
+		return:string:Текстовое содержимое
+	
+def:m:IWritableContentItem.getMaxLen_0
+
+		name:Максимальная длина текста
+		desc:Максимальная допустимая длина текста в книге или листке бумаги. На данный момент константна и равна 3072 символам.
+		type:get
+		lockoverride:1
+		return:int:Максимальная длина текста
+	
+def:m:IWritableContentItem.canWrite_0
+
+		name:Можно записать
+		desc:Возвращает истину, если в хранилище текста можно добавить дополнительные данные.
+		type:get
+		lockoverride:1
+		return:bool:Можно записать
+	
+def:m:IWritableContentItem.canRead_0
+
+		name:Можно прочитать
+		desc:Возвращает истину, если есть возможность открыть хранилище текста для чтения персонажем.
+		type:get
+		lockoverride:1
+		return:bool:Можно прочитать
+	
+def:m:IWritableContentItem.appendText_0
+
+		name:Добавить текст
+		desc:Добавляет текст в хранилище текста.
+		type:method
+		lockoverride:1
+		in:string:Текст:Добавляемый текст
+		in:ItemWritter:Писатель:Объект, которым пишется текст (например, ручка). Обычно отвечает за то, какой будет стиль и цвет текста. Если параметр не указан - добавленный текст будет добавлен стандартным черным цветом.
+			opt:require=-1
+		return:bool:Возвращает истину, если текст добавлен.
+	
+def:c:Book
+
+		name:Книга
+		desc:Базовый класс для книги.
+		path:Игровые объекты.Текстовые
+	
+def:c:Paper
+
+		name:Листок
+		desc:Базовый класс для листа бумаги.
+		path:Игровые объекты.Текстовые
+	
 def:c:ScriptedGamemode
 
 		name:Пользовательский режим
@@ -9149,7 +9210,7 @@ $REGION:CLASSMETA
 }
 ,"Folder": {
     "baseClass" : "Book",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":260},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":334},
    "fields": { "defined": {
 "name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -9158,7 +9219,7 @@ $REGION:CLASSMETA
 }
 ,"BookChemReactions": {
     "baseClass" : "Book",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":302},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":376},
    "fields": { "defined": {
 "ndName":{"return": "string"}}   },
    "methods": { "defined": {
@@ -9167,7 +9228,7 @@ $REGION:CLASSMETA
 }
 ,"Notepad": {
     "baseClass" : "Paper",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":256},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":330},
    "fields": { "defined": {
 "name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -9284,7 +9345,7 @@ $REGION:CLASSMETA
 }
 ,"Book": {
     "baseClass" : "IWritableContentItem",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":83},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":146},
    "fields": { "defined": {
 "name":{"return": "string"},"ndName":{"return": "string"},"model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -9293,7 +9354,7 @@ $REGION:CLASSMETA
 }
 ,"Paper": {
     "baseClass" : "IWritableContentItem",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":99},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":167},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"model":{"return": "string"},"content":{"return": "string"},"ndName":{"return": "string"},"ndInteractDistance":{"return": "float"},"weight":{"return": "float"},"usrsWithWriters":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -9306,12 +9367,12 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "ndOpenedBy":{"return": "null_array"},"ndCurrentDisplay":{"return": "int"},"ndIsLockedInput":{"return": "bool"},"ndName":{"return": "string"},"ndInteractDistance":{"return": "float"},"content":{"return": "string"}}   },
    "methods": { "defined": {
-"updateNDisplay":{"return": "<undefined>"},"handleNDInput":{"return": "<undefined>"},"openNDisplayImplBackend":{"return": "<undefined>"},"closeNDisplayImplBackend":{"return": "<undefined>"},"openNDisplay":{"return": "<undefined>"},"getNDPointer":{"return": "<undefined>"},"openNDisplayInternal":{"return": "<undefined>"},"closeNDisplay":{"return": "<undefined>"},"closeNDisplayServer":{"return": "<undefined>"},"closeNDisplayForAllMobs":{"return": "<undefined>"},"getMaxLen":{"return": "<undefined>"},"canWrite":{"return": "<undefined>"},"canApplyText":{"return": "<undefined>"},"getContent":{"return": "<undefined>"},"onChangeLoc":{"return": "<undefined>"}
+"updateNDisplay":{"return": "<undefined>"},"handleNDInput":{"return": "<undefined>"},"openNDisplayImplBackend":{"return": "<undefined>"},"closeNDisplayImplBackend":{"return": "<undefined>"},"openNDisplay":{"return": "<undefined>"},"getNDPointer":{"return": "<undefined>"},"openNDisplayInternal":{"return": "<undefined>"},"closeNDisplay":{"return": "<undefined>"},"closeNDisplayServer":{"return": "<undefined>"},"closeNDisplayForAllMobs":{"return": "<undefined>"},"getMaxLen":{"return": "<undefined>"},"canWrite":{"return": "<undefined>"},"canRead":{"return": "<undefined>"},"canApplyText":{"return": "<undefined>"},"getContent":{"return": "<undefined>"},"onChangeLoc":{"return": "<undefined>"},"appendText":{"return": "<undefined>"}
 }   }
 }
 ,"PaperHolder": {
     "baseClass" : "IPaperItemBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":265},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":339},
    "fields": { "defined": {
 "model":{"return": "string"},"name":{"return": "string"},"countBlanks":{"return": "int"},"weight":{"return": "int"}}   },
    "methods": { "defined": {
