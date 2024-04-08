@@ -815,10 +815,12 @@ def:node:array
     rendertype:NoHeader
     autocoloricon:1
     exec:all
-    code:(@in.2) append (@in.3); @out.1
+    code:private @genvar.out.2 = (@in.2); @locvar.out.2 append (@in.3); @out.1
     in:auto:Источник:Первый массив, к котрому будут добавлены все элементы из второго.
         opt:typeget=array;@type
     in:auto:Добавляемый:Второй массив, элементы которого будут добавлены в первый массив.
+        opt:typeget=array;@type
+    out:auto:Источник:Ссылка на массив-источник
         opt:typeget=array;@type
 
 
@@ -15051,7 +15053,7 @@ $REGION:CLASSMETA
 }
 ,"TaskItemSave": {
     "baseClass" : "TaskItemGet",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":302},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":310},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15060,7 +15062,7 @@ $REGION:CLASSMETA
 }
 ,"TaskItemGet": {
     "baseClass" : "ItemKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":272},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":280},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15069,7 +15071,7 @@ $REGION:CLASSMETA
 }
 ,"TaskItemPlace": {
     "baseClass" : "ItemKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":317},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":325},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"placeName":{"return": "string"},"location":{"return": "null_array"},"radius":{"return": "int"}}   },
    "methods": { "defined": {
@@ -15078,7 +15080,7 @@ $REGION:CLASSMETA
 }
 ,"ItemKindTask": {
     "baseClass" : "GameObjectKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":222},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":230},
    "fields": { "defined": {
 "name":{"return": "string"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
@@ -15087,7 +15089,7 @@ $REGION:CLASSMETA
 }
 ,"TaskSelfSave": {
     "baseClass" : "TaskMobSave",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":455},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":463},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15096,7 +15098,7 @@ $REGION:CLASSMETA
 }
 ,"TaskMobKill": {
     "baseClass" : "MobKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":429},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":437},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15105,7 +15107,7 @@ $REGION:CLASSMETA
 }
 ,"TaskMobSave": {
     "baseClass" : "MobKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":441},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":449},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15114,7 +15116,7 @@ $REGION:CLASSMETA
 }
 ,"TaskMoneyGet": {
     "baseClass" : "CounterKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":509},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":517},
    "fields": { "defined": {
 "name":{"return": "string"},"descRoleplay":{"return": "string"},"numeralString":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -15123,7 +15125,7 @@ $REGION:CLASSMETA
 }
 ,"TaskLocationEnter": {
     "baseClass" : "LocationKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":576},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":584},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15132,7 +15134,7 @@ $REGION:CLASSMETA
 }
 ,"TaskGetRole": {
     "baseClass" : "RoleKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":633},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":641},
    "fields": { "defined": {
 "name":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15141,7 +15143,7 @@ $REGION:CLASSMETA
 }
 ,"TaskRoleDead": {
     "baseClass" : "RoleKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":657},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":665},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15152,14 +15154,14 @@ $REGION:CLASSMETA
     "baseClass" : "TaskBase",
     "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":23},
    "fields": { "defined": {
-"name":{"return": "string"},"__globalRefs":{"return": "null_array"},"__objRefs":{"return": "null_array"},"__typeList":{"return": "null_array"},"failTaskOnItemDestroy":{"return": "bool"},"failResultOnItemDestroy":{"return": "int"}}   },
+"name":{"return": "string"},"__globalRefs":{"return": "null_array"},"__objRefs":{"return": "null_array"},"__typeList":{"return": "null_array"},"__requireValidation":{"return": "bool"},"failTaskOnItemDestroy":{"return": "bool"},"failResultOnItemDestroy":{"return": "int"}}   },
    "methods": { "defined": {
-"onTaskRegistered":{"return": "<undefined>"},"__convertGlobalRefsToObjects":{"return": "<undefined>"},"__onerr_requiredTypeStr":{"return": "<undefined>"},"checkTypeReference":{"return": "<undefined>"},"checkTypeName":{"return": "<undefined>"},"__validateInputs":{"return": "<undefined>"},"processObjectCheck":{"return": "<undefined>"},"onTaskCheck":{"return": "<undefined>"},"getObjectNames":{"return": "<undefined>"}
+"__convertGlobalRefsToObjects":{"return": "<undefined>"},"__onerr_requiredTypeStr":{"return": "<undefined>"},"checkTypeReference":{"return": "<undefined>"},"checkTypeName":{"return": "<undefined>"},"__validateInputs":{"return": "<undefined>"},"processObjectCheck":{"return": "<undefined>"},"onTaskCheck":{"return": "<undefined>"},"getObjectNames":{"return": "<undefined>"}
 }   }
 }
 ,"MobKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":389},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":397},
    "fields": { "defined": {
 "name":{"return": "string"},"target":{"return": "object"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
@@ -15168,7 +15170,7 @@ $REGION:CLASSMETA
 }
 ,"CounterKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":471},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":479},
    "fields": { "defined": {
 "name":{"return": "string"},"descRoleplay":{"return": "string"},"counter":{"return": "int"},"numeralString":{"return": "null_array"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
@@ -15177,7 +15179,7 @@ $REGION:CLASSMETA
 }
 ,"LocationKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":547},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":555},
    "fields": { "defined": {
 "name":{"return": "string"},"position":{"return": "null_array"},"radius":{"return": "int"}}   },
    "methods": { "defined": {
@@ -15186,7 +15188,7 @@ $REGION:CLASSMETA
 }
 ,"RoleKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":595},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":603},
    "fields": { "defined": {
 "name":{"return": "string"},"roleClass":{"return": "string"},"checkChildRoles":{"return": "bool"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
