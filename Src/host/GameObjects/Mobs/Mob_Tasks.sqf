@@ -40,7 +40,7 @@ region(Memories)
 						_tpref = "<t color='#ff0000'>[не выполнено] </t>";
 					};
 				};
-				modvar(_txt) + sbr + format["    %3%1: %2",getVar(_x,name),callFunc(_x,getTaskDescription),_tpref];
+				modvar(_txt) + sbr + format["    %3%1: %2",getVar(_x,name),callFuncParams(_x,getTaskDescription,this),_tpref];
 			} foreach getSelf(tasks);
 			
 			modvar(_txt) +"</t>";

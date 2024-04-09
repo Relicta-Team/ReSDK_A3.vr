@@ -1158,6 +1158,15 @@ region(Visual states)
 
 region(Messaging and chat managers)
 	
+	"
+		name:Установить имена моба
+		desc:Устанавливает первое и второе имя моба. Генерирует имена во всех склонениях.
+		type:method
+		lockoverride:1
+		in:string:Первое имя:Первое имя моба.
+		in:string:Второе имя:Второе имя моба. Чаще всего представлено в виде фамилии.
+			opt:require=-1
+	" node_met
 	func(generateNaming)
 	{
 		objParams_2(_f,_s);

@@ -815,10 +815,12 @@ def:node:array
     rendertype:NoHeader
     autocoloricon:1
     exec:all
-    code:(@in.2) append (@in.3); @out.1
+    code:private @genvar.out.2 = (@in.2); @locvar.out.2 append (@in.3); @out.1
     in:auto:Источник:Первый массив, к котрому будут добавлены все элементы из второго.
         opt:typeget=array;@type
     in:auto:Добавляемый:Второй массив, элементы которого будут добавлены в первый массив.
+        opt:typeget=array;@type
+    out:auto:Источник:Ссылка на массив-источник
         opt:typeget=array;@type
 
 
@@ -1731,6 +1733,37 @@ def:node:math
             opt:typeget=value;@type:allowtypes=int|float:def=1:custom=1:custom_type=float:require=0
         out:float:Результат
             opt:typeget=value;@type:allowtypes=int|float
+
+
+def:node:math
+
+        node:percentage
+        name:Процент от
+        namelib:Процент от числа
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Получает процент от числа. Например, 50 процентов от числа 42 равно 21.
+        code:[@in.1,@in.2] call getPrecentage
+        in:auto:Число:Базовое число, от которого получаем процент.
+            opt:typeget=value;@type:allowtypes=int|float:def=1:custom=1:custom_type=float:require=0
+        in:auto:Процент:Процент от базового числа
+            opt:typeget=value;@type:allowtypes=int|float:def=100:custom=1:custom_type=float:require=0
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+
+
+def:node:math
+
+        node:probably
+        name:Prob
+        namelib:Вероятность (Prob)
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Случайная вероятность в процентах. Если выпало значение, меньше указанной вероятности - возвращает истину.
+        code:[@in.1] call randomProbably
+        in:auto:Число:Значение процентов для вероятности. Значения, выше 100 всегда будут возвращать истину.
+            opt:typeget=value;@type:allowtypes=int|float:def=50:custom=1:custom_type=float:require=0
+        out:bool:Результат:Сработала ли вероятность
 
 
 def:node:math
@@ -3988,6 +4021,16 @@ def:m:BasicMob.getLighting_0
 		lockoverride:1
 		return:enum.LightMode:Уровень освещённости
 	
+def:m:BasicMob.generateNaming_0
+
+		name:Установить имена моба
+		desc:Устанавливает первое и второе имя моба. Генерирует имена во всех склонениях.
+		type:method
+		lockoverride:1
+		in:string:Первое имя:Первое имя моба.
+		in:string:Второе имя:Второе имя моба. Чаще всего представлено в виде фамилии.
+			opt:require=-1
+	
 def:m:BasicMob.getFirstName_0
 
 		name:Первое имя моба
@@ -4103,6 +4146,24 @@ def:c:Mob
 		name:Игровой персонаж
 		desc:Игровая сущность, которым могут управлять клиенты.
 		path:Игровые объекты.Сущности
+	
+def:m:Mob.isEmptySlot_0
+
+		name:Слот пустой
+		desc:Возвращает @[bool ИСТИНУ], если проверяемый слот инвентаря персонажа пустой.
+		type:get
+		lockoverride:1
+		in:enum.InventorySlot:Слот:Проверяемый на наличие предмета слот инвентаря.
+		return:bool:Слот пустой
+	
+def:m:Mob.getItemInSlotRedirect_0
+
+		name:Получить предмет в слоте
+		desc:Возвращает предмет, находящийся в слоте. Если предмета нет или слот пустой - вернет @[object^ null-ссылку].
+		type:get
+		lockoverride:1
+		in:enum.InventorySlot:Слот:Проверяемый на наличие предмета слот инвентаря.
+		return:Item:Предмет в слоте
 	
 def:f:Mob.hunger_0
 
@@ -4436,6 +4497,67 @@ def:m:Key._setKeyOwnerWrapper_0
 		type:method
 		lockoverride:1
 		in:string:Типы:Типы ключа с указанными разделителями.
+	
+def:c:IWritableContentItem
+
+		name:Хранящий текст предмет
+		desc:Базовый класс для любого, хранящего текст предмета. Обычно от этого класса унаследованы листки бумаги, книги, документы и т.д.
+		path:Игровые объекты.Текстовые
+	
+def:f:IWritableContentItem.content_0
+
+		name:Текстовое содержимое
+		desc:Текст, содержащийся в книге, бумаге или любом другом предмете, способном хранить текст.
+		prop:get
+		classprop:1
+		return:string:Текстовое содержимое
+	
+def:m:IWritableContentItem.getMaxLen_0
+
+		name:Максимальная длина текста
+		desc:Максимальная допустимая длина текста в книге или листке бумаги. На данный момент константна и равна 3072 символам.
+		type:get
+		lockoverride:1
+		return:int:Максимальная длина текста
+	
+def:m:IWritableContentItem.canWrite_0
+
+		name:Можно записать
+		desc:Возвращает истину, если в хранилище текста можно добавить дополнительные данные.
+		type:get
+		lockoverride:1
+		return:bool:Можно записать
+	
+def:m:IWritableContentItem.canRead_0
+
+		name:Можно прочитать
+		desc:Возвращает истину, если есть возможность открыть хранилище текста для чтения персонажем.
+		type:get
+		lockoverride:1
+		return:bool:Можно прочитать
+	
+def:m:IWritableContentItem.appendText_0
+
+		name:Добавить текст
+		desc:Добавляет текст в хранилище текста.
+		type:method
+		lockoverride:1
+		in:string:Текст:Добавляемый текст
+		in:ItemWritter:Писатель:Объект, которым пишется текст (например, ручка). Обычно отвечает за то, какой будет стиль и цвет текста. Если параметр не указан - добавленный текст будет добавлен стандартным черным цветом.
+			opt:require=-1
+		return:bool:Возвращает истину, если текст добавлен.
+	
+def:c:Book
+
+		name:Книга
+		desc:Базовый класс для книги.
+		path:Игровые объекты.Текстовые
+	
+def:c:Paper
+
+		name:Листок
+		desc:Базовый класс для листа бумаги.
+		path:Игровые объекты.Текстовые
 	
 def:c:ScriptedGamemode
 
@@ -5200,9 +5322,9 @@ def:f:TaskBase.descRoleplay_0
 def:f:TaskBase._taskDescDelegate_0
 
 		name:Обработчик описания задачи
-		desc:Вызываемая функция вывода описания задачи. Обычно в этой функции вычисляются форматируемые значения (например, список объектов). Чтобы посмотреть исходную строку выведите в консоли 'Ролевое описание задачи'.\nПараметры функции-действия\:\n - @[TaskBase^ Задача] - объект задачи, который производит проверку (вызов функции)\n Возврат\: @[string Описание] - текст описания задачи. 
+		desc:Вызываемая функция вывода описания задачи. Обычно в этой функции вычисляются форматируемые значения (например, список объектов). Чтобы посмотреть исходную строку выведите в консоли 'Ролевое описание задачи'.\nПараметры функции-действия\:\n - @[TaskBase^ Задача] - объект задачи, который производит проверку (вызов функции)\n - @[Mob^ Владелец] - владелец задачи, который запрашивает описание\n Возврат\: @[string Описание] - текст описания задачи. 
 		prop:all
-		return:function[event=string=TaskBase^]:Описание задачи
+		return:function[event=string=TaskBase^@Mob^]:Описание задачи
 	
 def:f:TaskBase.isTaskSingleCheck_0
 
@@ -9147,7 +9269,7 @@ $REGION:CLASSMETA
 }
 ,"Folder": {
     "baseClass" : "Book",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":260},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":334},
    "fields": { "defined": {
 "name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -9156,7 +9278,7 @@ $REGION:CLASSMETA
 }
 ,"BookChemReactions": {
     "baseClass" : "Book",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":302},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":376},
    "fields": { "defined": {
 "ndName":{"return": "string"}}   },
    "methods": { "defined": {
@@ -9165,7 +9287,7 @@ $REGION:CLASSMETA
 }
 ,"Notepad": {
     "baseClass" : "Paper",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":256},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":330},
    "fields": { "defined": {
 "name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -9282,7 +9404,7 @@ $REGION:CLASSMETA
 }
 ,"Book": {
     "baseClass" : "IWritableContentItem",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":83},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":146},
    "fields": { "defined": {
 "name":{"return": "string"},"ndName":{"return": "string"},"model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -9291,7 +9413,7 @@ $REGION:CLASSMETA
 }
 ,"Paper": {
     "baseClass" : "IWritableContentItem",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":99},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":167},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"model":{"return": "string"},"content":{"return": "string"},"ndName":{"return": "string"},"ndInteractDistance":{"return": "float"},"weight":{"return": "float"},"usrsWithWriters":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -9304,12 +9426,12 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "ndOpenedBy":{"return": "null_array"},"ndCurrentDisplay":{"return": "int"},"ndIsLockedInput":{"return": "bool"},"ndName":{"return": "string"},"ndInteractDistance":{"return": "float"},"content":{"return": "string"}}   },
    "methods": { "defined": {
-"updateNDisplay":{"return": "<undefined>"},"handleNDInput":{"return": "<undefined>"},"openNDisplayImplBackend":{"return": "<undefined>"},"closeNDisplayImplBackend":{"return": "<undefined>"},"openNDisplay":{"return": "<undefined>"},"getNDPointer":{"return": "<undefined>"},"openNDisplayInternal":{"return": "<undefined>"},"closeNDisplay":{"return": "<undefined>"},"closeNDisplayServer":{"return": "<undefined>"},"closeNDisplayForAllMobs":{"return": "<undefined>"},"getMaxLen":{"return": "<undefined>"},"canWrite":{"return": "<undefined>"},"canApplyText":{"return": "<undefined>"},"getContent":{"return": "<undefined>"},"onChangeLoc":{"return": "<undefined>"}
+"updateNDisplay":{"return": "<undefined>"},"handleNDInput":{"return": "<undefined>"},"openNDisplayImplBackend":{"return": "<undefined>"},"closeNDisplayImplBackend":{"return": "<undefined>"},"openNDisplay":{"return": "<undefined>"},"getNDPointer":{"return": "<undefined>"},"openNDisplayInternal":{"return": "<undefined>"},"closeNDisplay":{"return": "<undefined>"},"closeNDisplayServer":{"return": "<undefined>"},"closeNDisplayForAllMobs":{"return": "<undefined>"},"getMaxLen":{"return": "<undefined>"},"canWrite":{"return": "<undefined>"},"canRead":{"return": "<undefined>"},"canApplyText":{"return": "<undefined>"},"getContent":{"return": "<undefined>"},"onChangeLoc":{"return": "<undefined>"},"appendText":{"return": "<undefined>"}
 }   }
 }
 ,"PaperHolder": {
     "baseClass" : "IPaperItemBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":265},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":339},
    "fields": { "defined": {
 "model":{"return": "string"},"name":{"return": "string"},"countBlanks":{"return": "int"},"weight":{"return": "int"}}   },
    "methods": { "defined": {
@@ -15051,7 +15173,7 @@ $REGION:CLASSMETA
 }
 ,"TaskItemSave": {
     "baseClass" : "TaskItemGet",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":302},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":311},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15060,7 +15182,7 @@ $REGION:CLASSMETA
 }
 ,"TaskItemGet": {
     "baseClass" : "ItemKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":272},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":281},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15069,7 +15191,7 @@ $REGION:CLASSMETA
 }
 ,"TaskItemPlace": {
     "baseClass" : "ItemKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":317},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":326},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"placeName":{"return": "string"},"location":{"return": "null_array"},"radius":{"return": "int"}}   },
    "methods": { "defined": {
@@ -15078,7 +15200,7 @@ $REGION:CLASSMETA
 }
 ,"ItemKindTask": {
     "baseClass" : "GameObjectKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":222},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":231},
    "fields": { "defined": {
 "name":{"return": "string"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
@@ -15087,7 +15209,7 @@ $REGION:CLASSMETA
 }
 ,"TaskSelfSave": {
     "baseClass" : "TaskMobSave",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":455},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":464},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15096,7 +15218,7 @@ $REGION:CLASSMETA
 }
 ,"TaskMobKill": {
     "baseClass" : "MobKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":429},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":438},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15105,7 +15227,7 @@ $REGION:CLASSMETA
 }
 ,"TaskMobSave": {
     "baseClass" : "MobKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":441},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":450},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15114,7 +15236,7 @@ $REGION:CLASSMETA
 }
 ,"TaskMoneyGet": {
     "baseClass" : "CounterKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":509},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":518},
    "fields": { "defined": {
 "name":{"return": "string"},"descRoleplay":{"return": "string"},"numeralString":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -15123,7 +15245,7 @@ $REGION:CLASSMETA
 }
 ,"TaskLocationEnter": {
     "baseClass" : "LocationKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":576},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":585},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15132,7 +15254,7 @@ $REGION:CLASSMETA
 }
 ,"TaskGetRole": {
     "baseClass" : "RoleKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":633},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":642},
    "fields": { "defined": {
 "name":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15141,7 +15263,7 @@ $REGION:CLASSMETA
 }
 ,"TaskRoleDead": {
     "baseClass" : "RoleKindTask",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":657},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":666},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -15152,14 +15274,14 @@ $REGION:CLASSMETA
     "baseClass" : "TaskBase",
     "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":23},
    "fields": { "defined": {
-"name":{"return": "string"},"__globalRefs":{"return": "null_array"},"__objRefs":{"return": "null_array"},"__typeList":{"return": "null_array"},"failTaskOnItemDestroy":{"return": "bool"},"failResultOnItemDestroy":{"return": "int"}}   },
+"name":{"return": "string"},"__globalRefs":{"return": "null_array"},"__objRefs":{"return": "null_array"},"__typeList":{"return": "null_array"},"__requireValidation":{"return": "bool"},"failTaskOnItemDestroy":{"return": "bool"},"failResultOnItemDestroy":{"return": "int"}}   },
    "methods": { "defined": {
-"onTaskRegistered":{"return": "<undefined>"},"__convertGlobalRefsToObjects":{"return": "<undefined>"},"__onerr_requiredTypeStr":{"return": "<undefined>"},"checkTypeReference":{"return": "<undefined>"},"checkTypeName":{"return": "<undefined>"},"__validateInputs":{"return": "<undefined>"},"processObjectCheck":{"return": "<undefined>"},"onTaskCheck":{"return": "<undefined>"},"getObjectNames":{"return": "<undefined>"}
+"__convertGlobalRefsToObjects":{"return": "<undefined>"},"__onerr_requiredTypeStr":{"return": "<undefined>"},"checkTypeReference":{"return": "<undefined>"},"checkTypeName":{"return": "<undefined>"},"__validateInputs":{"return": "<undefined>"},"processObjectCheck":{"return": "<undefined>"},"onTaskCheck":{"return": "<undefined>"},"getObjectNames":{"return": "<undefined>"}
 }   }
 }
 ,"MobKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":389},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":398},
    "fields": { "defined": {
 "name":{"return": "string"},"target":{"return": "object"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
@@ -15168,7 +15290,7 @@ $REGION:CLASSMETA
 }
 ,"CounterKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":471},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":480},
    "fields": { "defined": {
 "name":{"return": "string"},"descRoleplay":{"return": "string"},"counter":{"return": "int"},"numeralString":{"return": "null_array"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
@@ -15177,7 +15299,7 @@ $REGION:CLASSMETA
 }
 ,"LocationKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":547},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":556},
    "fields": { "defined": {
 "name":{"return": "string"},"position":{"return": "null_array"},"radius":{"return": "int"}}   },
    "methods": { "defined": {
@@ -15186,7 +15308,7 @@ $REGION:CLASSMETA
 }
 ,"RoleKindTask": {
     "baseClass" : "TaskBase",
-    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":595},
+    "defined" : {"file":"CommonTasks\\PublicTasks.sqf","line":604},
    "fields": { "defined": {
 "name":{"return": "string"},"roleClass":{"return": "string"},"checkChildRoles":{"return": "bool"},"_taskDescDelegate":{"return": "null"}}   },
    "methods": { "defined": {
