@@ -141,6 +141,37 @@ _op = {
             opt:typeget=value;@type:allowtypes=int|float
 " node_system
 
+//precentage
+"
+        node:percentage
+        name:Процент от
+        namelib:Процент от числа
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Получает процент от числа. Например, 50 процентов от числа 42 равно 21.
+        code:[@in.1,@in.2] call getPrecentage
+        in:auto:Число:Базовое число, от которого получаем процент.
+            opt:typeget=value;@type:allowtypes=int|float:def=1:custom=1:custom_type=float:require=0
+        in:auto:Процент:Процент от базового числа
+            opt:typeget=value;@type:allowtypes=int|float:def=100:custom=1:custom_type=float:require=0
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+" node_system
+
+//вероятность
+"
+        node:probably
+        name:Prob
+        namelib:Вероятность (Prob)
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Случайная вероятность в процентах. Если выпало значение, меньше указанной вероятности - возвращает истину.
+        code:[@in.1] call randomProbably
+        in:auto:Число:Значение процентов для вероятности. Значения, выше 100 всегда будут возвращать истину.
+            opt:typeget=value;@type:allowtypes=int|float:def=50:custom=1:custom_type=float:require=0
+        out:bool:Результат:Сработала ли вероятность
+" node_system
+
 // single operation
 _opSingle = {
     params ["_sysname","_namelib","_code","_rez","_desc",["_val","auto"]];
@@ -168,6 +199,7 @@ _opSingle = {
 (["ceil","Целое вверх:Округление вверх","ceil(@in.1)","int","Округление числа вверх до целого"] call _opSingle) node_system
 //round
 (["round","Целое:Округление","round(@in.1)","int","Округление числа до целого"] call _opSingle) node_system
+
 
 //pi
 "

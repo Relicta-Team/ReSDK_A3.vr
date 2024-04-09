@@ -446,6 +446,16 @@ randomInt = {
 	randInt(_beg,_end)
 };
 
+randomProbably = {
+	params ["_v"];
+	prob(_v)
+};
+
+getPrecentage = {
+	params ["_checkedval","_pval"];
+	precentage(_checkedval,_pval)
+};
+
 clampNumber = {
 	params ["_v","_mi","_ma"];
 	clamp(_v,_mi,_ma)	

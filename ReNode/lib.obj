@@ -1737,6 +1737,37 @@ def:node:math
 
 def:node:math
 
+        node:percentage
+        name:Процент от
+        namelib:Процент от числа
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Получает процент от числа. Например, 50 процентов от числа 42 равно 21.
+        code:[@in.1,@in.2] call getPrecentage
+        in:auto:Число:Базовое число, от которого получаем процент.
+            opt:typeget=value;@type:allowtypes=int|float:def=1:custom=1:custom_type=float:require=0
+        in:auto:Процент:Процент от базового числа
+            opt:typeget=value;@type:allowtypes=int|float:def=100:custom=1:custom_type=float:require=0
+        out:float:Результат
+            opt:typeget=value;@type:allowtypes=int|float
+
+
+def:node:math
+
+        node:probably
+        name:Prob
+        namelib:Вероятность (Prob)
+        rendertype:NoHeaderText
+        exec:pure
+        desc:Случайная вероятность в процентах. Если выпало значение, меньше указанной вероятности - возвращает истину.
+        code:[@in.1] call randomProbably
+        in:auto:Число:Значение процентов для вероятности. Значения, выше 100 всегда будут возвращать истину.
+            opt:typeget=value;@type:allowtypes=int|float:def=50:custom=1:custom_type=float:require=0
+        out:bool:Результат:Сработала ли вероятность
+
+
+def:node:math
+
         node:floor
         name:Целое вниз
         namelib:Округление вниз (Целое вниз)
@@ -5291,9 +5322,9 @@ def:f:TaskBase.descRoleplay_0
 def:f:TaskBase._taskDescDelegate_0
 
 		name:Обработчик описания задачи
-		desc:Вызываемая функция вывода описания задачи. Обычно в этой функции вычисляются форматируемые значения (например, список объектов). Чтобы посмотреть исходную строку выведите в консоли 'Ролевое описание задачи'.\nПараметры функции-действия\:\n - @[TaskBase^ Задача] - объект задачи, который производит проверку (вызов функции)\n - @[BasicMob^ Владелец] - владелец задачи, который запрашивает описание\n Возврат\: @[string Описание] - текст описания задачи. 
+		desc:Вызываемая функция вывода описания задачи. Обычно в этой функции вычисляются форматируемые значения (например, список объектов). Чтобы посмотреть исходную строку выведите в консоли 'Ролевое описание задачи'.\nПараметры функции-действия\:\n - @[TaskBase^ Задача] - объект задачи, который производит проверку (вызов функции)\n - @[Mob^ Владелец] - владелец задачи, который запрашивает описание\n Возврат\: @[string Описание] - текст описания задачи. 
 		prop:all
-		return:function[event=string=TaskBase^@BasicMob^]:Описание задачи
+		return:function[event=string=TaskBase^@Mob^]:Описание задачи
 	
 def:f:TaskBase.isTaskSingleCheck_0
 
