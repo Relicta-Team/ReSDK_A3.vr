@@ -66,9 +66,10 @@ class(GameObjectKindTask) extends(TaskBase)
 			_lvals pushBack _refto;
 		} foreach getSelf(__globalRefs);
 
-		if (count _lvars > 0) then {
+		if (count _lvals > 0) then {
 			getSelf(__objRefs) append _lvals;
 			setSelf(__requireValidation,true);
+			setSelf(__globalRefs,[]); //reset globalrefs
 		};
 
 	};

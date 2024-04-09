@@ -93,6 +93,14 @@ region(Getters and checkers)
 	};
 
 	// Проверяет пустой ли слот. даже если его нет вернёт nullPtr
+	"
+		name:Слот пустой
+		desc:Возвращает @[bool ИСТИНУ], если проверяемый слот инвентаря персонажа пустой.
+		type:get
+		lockoverride:1
+		in:enum.InventorySlot:Слот:Проверяемый на наличие предмета слот инвентаря.
+		return:bool:Слот пустой
+	" node_met
 	func(isEmptySlot)
 	{
 		objParams_1(_slot);
@@ -126,6 +134,14 @@ region(Getters and checkers)
 		_probItem
 	};
 	//Возврат передмета с редиректом
+	"
+		name:Получить предмет в слоте
+		desc:Возвращает предмет, находящийся в слоте. Если предмета нет или слот пустой - вернет @[object^ null-ссылку].
+		type:get
+		lockoverride:1
+		in:enum.InventorySlot:Слот:Проверяемый на наличие предмета слот инвентаря.
+		return:Item:Предмет в слоте
+	" node_met
 	func(getItemInSlotRedirect)
 	{
 		objParams_1(_slot);

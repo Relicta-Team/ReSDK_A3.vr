@@ -3594,7 +3594,7 @@ Replaced value:
 ```sqf
 _y get #func
 ```
-File: [host\GameObjects\Items\Office\Books.sqf at line 312](../../../Src/host/GameObjects/Items/Office/Books.sqf#L312)
+File: [host\GameObjects\Items\Office\Books.sqf at line 386](../../../Src/host/GameObjects/Items/Office/Books.sqf#L386)
 # BasicMob.sqf
 
 ## emulate_mp_in_sp
@@ -4286,7 +4286,7 @@ Replaced value:
 ```sqf
 _oth = getSelf(prevname); setSelf(prevname,getSelf(nextname)); setSelf(nextname,_oth)
 ```
-File: [host\GameObjects\Mobs\Mob_Inventory.sqf at line 169](../../../Src/host/GameObjects/Mobs/Mob_Inventory.sqf#L169)
+File: [host\GameObjects\Mobs\Mob_Inventory.sqf at line 185](../../../Src/host/GameObjects/Mobs/Mob_Inventory.sqf#L185)
 # Mob_Life.sqf
 
 ## checktime_nextcall

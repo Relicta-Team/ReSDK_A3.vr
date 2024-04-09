@@ -137,7 +137,7 @@ if !(value) exitWith { \
 		setLastError(_format); \
 	};
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 492](../../../Src/host/CommonComponents/!PreInit.sqf#L492)
+File: [host\CommonComponents\!PreInit.sqf at line 502](../../../Src/host/CommonComponents/!PreInit.sqf#L502)
 ## cprint_usestdout
 
 Type: Variable
@@ -517,6 +517,23 @@ Description:
 - Param: _end
 
 File: [host\CommonComponents\!PreInit.sqf at line 444](../../../Src/host/CommonComponents/!PreInit.sqf#L444)
+## randomProbably
+
+Type: function
+
+Description: 
+- Param: _v
+
+File: [host\CommonComponents\!PreInit.sqf at line 449](../../../Src/host/CommonComponents/!PreInit.sqf#L449)
+## getPrecentage
+
+Type: function
+
+Description: 
+- Param: _checkedval
+- Param: _pval
+
+File: [host\CommonComponents\!PreInit.sqf at line 454](../../../Src/host/CommonComponents/!PreInit.sqf#L454)
 ## clampNumber
 
 Type: function
@@ -526,7 +543,7 @@ Description:
 - Param: _mi
 - Param: _ma
 
-File: [host\CommonComponents\!PreInit.sqf at line 449](../../../Src/host/CommonComponents/!PreInit.sqf#L449)
+File: [host\CommonComponents\!PreInit.sqf at line 459](../../../Src/host/CommonComponents/!PreInit.sqf#L459)
 ## stringFormat
 
 Type: function
@@ -536,7 +553,7 @@ Description:
 - Param: _val
 - Param: _breakArr (optional, default false)
 
-File: [host\CommonComponents\!PreInit.sqf at line 454](../../../Src/host/CommonComponents/!PreInit.sqf#L454)
+File: [host\CommonComponents\!PreInit.sqf at line 464](../../../Src/host/CommonComponents/!PreInit.sqf#L464)
 ## functionalitests_preinit
 
 Type: function
@@ -546,7 +563,7 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 491](../../../Src/host/CommonComponents/!PreInit.sqf#L491)
+File: [host\CommonComponents\!PreInit.sqf at line 501](../../../Src/host/CommonComponents/!PreInit.sqf#L501)
 # Algorithm.sqf
 
 ## allOf
