@@ -47,14 +47,52 @@ endclass
 
 editor_attribute("InterfaceClass")
 class(IWritableContentItem) extends(IPaperItemBase)
+	"
+		name:Хранящий текст предмет
+		desc:Базовый класс для любого, хранящего текст предмета. Обычно от этого класса унаследованы листки бумаги, книги, документы и т.д.
+		path:Игровые объекты.Текстовые
+	" node_class
+	
 	#include "..\..\Interfaces\INetDisplay.Interface"
 	var(ndName,"Book");
 	var_exprval(ndInteractDistance,INTERACT_DISTANCE);
 
+
+	"
+		name:Текстовое содержимое
+		desc:Текст, содержащийся в книге, бумаге или любом другом предмете, способном хранить текст.
+		prop:get
+		classprop:1
+		return:string:Текстовое содержимое
+	" node_var
 	var(content,""); //text in book
+
+	"
+		name:Максимальная длина текста
+		desc:Максимальная допустимая длина текста в книге или листке бумаги. На данный момент константна и равна 3072 символам.
+		type:get
+		lockoverride:1
+		return:int:Максимальная длина текста
+	" node_met
 	getterconst_func(getMaxLen,1024*3);
 
+	"
+		name:Можно записать
+		desc:Возвращает истину, если в хранилище текста можно добавить дополнительные данные.
+		type:get
+		lockoverride:1
+		return:bool:Можно записать
+	" node_met
 	getter_func(canWrite,forceUnicode 0; (count getSelf(content))<callSelf(getMaxLen));
+
+	"
+		name:Можно прочитать
+		desc:Возвращает истину, если есть возможность открыть хранилище текста для чтения персонажем.
+		type:get
+		lockoverride:1
+		return:bool:Можно прочитать
+	" node_met
+	getter_func(canRead,true);
 
 	func(canApplyText)
 	{
@@ -78,9 +116,39 @@ class(IWritableContentItem) extends(IPaperItemBase)
 		callSelf(closeNDisplayForAllMobs);
 	};
 
+	"
+		name:Добавить текст
+		desc:Добавляет текст в хранилище текста.
+		type:method
+		lockoverride:1
+		in:string:Текст:Добавляемый текст
+		in:ItemWritter:Писатель:Объект, которым пишется текст (например, ручка). Обычно отвечает за то, какой будет стиль и цвет текста. Если параметр не указан - добавленный текст будет добавлен стандартным черным цветом.
+			opt:require=-1
+		return:bool:Возвращает истину, если текст добавлен.
+	" node_met
+	func(appendText)
+	{
+		objParams_2(_data,_writter);
+
+		if !callSelfParams(canApplyText,_data) exitWith {false};
+
+		if (!isNullVar(_writter) && {!isNullReference(_writter)}) then {
+			_data = callFuncParams(_writter,applyColorToText,_data);
+		};
+
+		//write data
+		modSelf(content, + _data);
+		callSelf(updateNDisplay);
+	};
+
 endclass
 
 class(Book) extends(IWritableContentItem)
+	"
+		name:Книга
+		desc:Базовый класс для книги.
+		path:Игровые объекты.Текстовые
+	" node_class
 	var(name,"Книга");
 	var(ndName,"Book");
 	var(model,"relicta_models\models\interier\props\book6.p3d");
@@ -97,6 +165,12 @@ endclass
 */
 
 class(Paper) extends(IWritableContentItem)
+	"
+		name:Листок
+		desc:Базовый класс для листа бумаги.
+		path:Игровые объекты.Текстовые
+	" node_class
+
 	var(name,"Листок");
 	var(desc,"");
 	var(model,"a3\weapons_f_orange\ammo\leaflet_05_old_f.p3d");
