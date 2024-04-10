@@ -50,7 +50,7 @@ func(clickTarget)
 	private _activeHand = getSelf(activeHand);
 	private _activeHandIndexPart = if (_activeHand == INV_HAND_L) then {BP_INDEX_ARM_L} else {BP_INDEX_ARM_R};
 	private _handcuffed = callSelf(isHandcuffed);
-	private _isCombatAction = callSelf(isCombatModeEnable);
+	private _isCombatAction = getSelf(isCombatModeEnable);
 
 	//Не срабатывает и не нужно. на случай атаки какой-то другой частью(зубы, нога)
 	//private _isSA = !isNullVar(__GLOBAL_FLAG_SPECACT_BITE__) || !isNullVar(__GLOBAL_FLAG_SPECACT_KICK__);
@@ -65,18 +65,20 @@ func(clickTarget)
 	//private _isInventoryAction =
 
 	if (_handcuffed) exitwith {};
-
+	
 	private _scriptOut = nullPtr;
 	private __scriptRedirect = {
+		if !isNullVar(__SKIP_CLICK_TARGET_FLAG__) exitWith {false};
 		private _script = getVar(_targ,__script);
 		if isNullVar(_script) exitWith {false};
 		if isNullReference(_script) exitWith {false};
 		_scriptOut = _script;
+		traceformat("Script redirect success for %1 (%2)",_targ arg _script)
 		true
 	};
 	
 	#define callScriptedEvent(action__) if (call __scriptRedirect) exitWith {action__}
-
+	
 	//на мобов нельзя вешать скрипты
 	if callFunc(_targ,isMob) exitWith {
 		

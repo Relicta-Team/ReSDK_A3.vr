@@ -338,7 +338,7 @@ region(ItemClick)
 		assert_str(!isNullVar(_usr),"Internal error - user reference not defined");
 		assert_str(!isNullReference(_usr),"Internal error - user reference null");
 		assert_str(!isNullVar(_targ),"Internal error - target reference not defined");
-
+		private __SKIP_CLICK_TARGET_FLAG__ = true;
 		callFuncParams(_usr,clickTarget,_targ);
 	};
 

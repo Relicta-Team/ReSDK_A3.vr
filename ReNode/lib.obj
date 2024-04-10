@@ -2969,6 +2969,18 @@ path:Игровые объекты.Утилиты
 
 def:func:native_functions
 
+	name:Создать скрипт
+	desc:Создает и назачает скрипт на указанном игровом объекте. Возвращает @[bool ИСТИНУ], если скрипт успешно создан и назначен игровому объекту. Если скрипт уже существует на игровом объекте - просто возвращает @[bool ЛОЖЬ].\n\nОбратите внимание, что у скриптов игровых объектов существует ограничения на допустимые типы объектов. Если ваш скрипт не может быть назначен игровому объекту из-за ограничений, то создания скрипта не произойдёт.
+	in:classname:Тип:Тип создаваемого скрипта.
+		opt:def=ScriptedGameObject
+	in:IDestructible:Объект:Игровой объект, для которого создается скрипт.
+	out:bool:Результат:Результат создания и назначения скрипта. При успешном выполнеии возвращает @[bool ИСТИНУ].
+
+node:createGameObjectScript
+path:Игровые объекты.Утилиты
+
+def:func:native_functions
+
 	name:Удалить объект
 	desc:Удаляет указанный объект из мира. После удаления все ссылки на этот объект станут невалидными.
 	in:IDestructible:Объект
@@ -3824,13 +3836,54 @@ def:m:ScriptedGameObject.callBaseExtraAction_0
 		type:method
 		lockoverride:1
 	
-def:m:ScriptedGameObject._onAttackWithWrapper_0
+def:m:ScriptedGameObject._onInteractWithWrapper_0
 
-		name:При атаке предметом
-		desc:Срабатывает при атаке цели объектом.
+		name:При взаимодействии предметом
+		desc:Срабатывает при взаимодействии персонажа с объектом при помощью другого предмета. 
 		type:event
-		out:Item:Предмет:Предмет, которым выполняется атака
-		out:BasicMob:Персонаж:Тот, кто атакует цель.
+		out:Item:Предмет:Предмет, используемый для взаимодействия с владельцем этого скрипта.
+		out:BasicMob:Персонаж:Персонаж, выполняющий взаимодействие.
+		out:bool:Боевой режим:Возвращает истину, если взаимодействие произведено в боевом режиме.
+		out:bool:В инвентаре:Возвращает истину, если взаимодействие применено к объекту, находящемуся в инвентаре.
+	
+def:m:ScriptedGameObject.callBaseInteractWith_0
+
+		name:Взаимодействие предметом
+		desc:Основная логика взаимодействия с объектом с помощью предмета.
+		type:method
+		lockoverride:1
+	
+def:m:ScriptedGameObject._onClickWrapper_0
+
+		name:При нажатии
+		desc:Срабатывает при взаимодействии персонажа по объекту пустой рукой (при нажатии "ЛКМ").
+		type:event
+		out:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
+		out:bool:Боевой режим:Возвращает истину, если нажатие произведено в боевом режиме.
+		out:bool:В инвентаре:Возвращает истину, если нажатие произведено по предмету в инвентаре.
+	
+def:m:ScriptedGameObject.callBaseOnClick_0
+
+		name:Нажатие
+		desc:Основная логика нажатия на объект.
+		type:method
+		lockoverride:1
+	
+def:m:ScriptedGameObject._onItemSelfClickWrapper_0
+
+		name:При нажатии в активной руке
+		desc:Срабатывает при нажатии персонажем по предмету в инвентаре, находящемуся в активной руке.
+		type:event
+		out:Item:Предмет:Предмет, которым выполняется нажатие.
+		out:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
+		out:bool:Боевой режим:Возвращает истину, если нажатие произведено в боевом режиме.
+	
+def:m:ScriptedGameObject.callBaseItemSelfClick_0
+
+		name:Нажатие в активной руке
+		desc:Основная логика нажатия по предмету в активной руке.
+		type:method
+		lockoverride:1
 	
 def:c:BasicMob
 
@@ -5687,11 +5740,11 @@ $REGION:CLASSMETA
 }
 ,"ScriptedGameObject": {
     "baseClass" : "object",
-    "defined" : {"file":"src\\host\\GameObjects\\ScriptedGameObject.sqf","line":9},
+    "defined" : {"file":"src\\host\\GameObjects\\ScriptedGameObject.sqf","line":10},
    "fields": { "defined": {
 "name":{"return": "string"},"src":{"return": "object"},"mainActionName":{"return": "string"}}   },
    "methods": { "defined": {
-"getRestrictions":{"return": "<undefined>"},"addScriptToAllObjects":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_getMainActionNameWrapper":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"callBaseGetMainActionName":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onAttackWithWrapper":{"return": "<undefined>"},"onAttackWith":{"return": "<undefined>"},"attackWithBase":{"return": "<undefined>"}
+"getRestrictions":{"return": "<undefined>"},"addScriptToAllObjects":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_getMainActionNameWrapper":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"callBaseGetMainActionName":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onInteractWithWrapper":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"callBaseInteractWith":{"return": "<undefined>"},"_interactToWrapper":{"return": "<undefined>"},"_onClickWrapper":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"callBaseOnClick":{"return": "<undefined>"},"_onItemSelfClickWrapper":{"return": "<undefined>"},"onItemSelfClick":{"return": "<undefined>"},"callBaseItemSelfClick":{"return": "<undefined>"},"callBaseClickTarget":{"return": "<undefined>"}
 }   }
 }
 ,"VirtualMemoryStorage": {
