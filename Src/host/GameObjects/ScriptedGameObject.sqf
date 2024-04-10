@@ -260,11 +260,40 @@ region(InteractWith)
 
 region(redirected interact)
 	//Этот раздел предназначен для вызова действий на объекте (работает по аналогии с interactTo)
+	//!NOT IMPLEMENTED NOW...
+	// "
+	// 	name:Перенаправлять взаимодействие
+	// 	desc:При включении данного свойства при взаимодействии с объектами будет вызвано событие ""При взаимодействии с целью"" вместо ""При взаимодействии предметом"".
+	// 	prop:all
+	// 	classprop:1
+	// 	return:bool:Выполнять перенаправление взаиомдействия.
+	// 	defval:false
+	// " node_var
+	// var(redirectInteractTarget,false);
 
-	func(_interactToWrapper)
-	{
-		//TODO implement
-	};
+	// "
+	// 	name:При взаимодействии с целью
+	// 	desc:Вызывается при взаимодействии с целью с помощью предмета в активной руке (""ЛКМ"" с предметом по цели). Для работы этой точки входа вместо ""При взаимодействии с целью"" включите свойство ""Перенаправлять взаимодействие"".
+	// 	type:event
+	// 	out:GameObject:Цель:Игровой объект, к которому применено действие
+	// 	out:BasicMob:Персонаж:Тот, кто инициировал действие по отношению к цели.
+	// " node_met
+	// func(_interactToWrapper)
+	// {
+	// 	objParams_2(_target,_usr);
+	// };
+
+	// func(interactTo)
+	// {
+	// 	objParams_2(_target,_usr);
+	// 	callSelfParams(_interactToWrapper,_target arg _usr);
+	// };
+
+	// func(callBaseInteractTo)
+	// {
+	// 	objParams();
+	// 	callSelf(callBaseClickTarget);
+	// };
 
 region(OnClick)
 	"

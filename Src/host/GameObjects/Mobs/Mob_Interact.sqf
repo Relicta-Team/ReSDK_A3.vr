@@ -181,7 +181,8 @@ func(clickTarget)
 				
 				if callSelfParams(callEventClick,_targ arg _item) exitwith {};
 
-
+				callScriptedEvent(callFuncParams(_scriptOut,onInteractWith,_item arg this arg _isCombatAction arg equals(_targLoc,this)));
+				
 				private _isRedirAct = callFunc(_item,isRedirectedInteractWith);
 				if (!isNullVar(_isRedirAct) && {_isRedirAct}) then {
 					callFuncParams(_item,onInteractWith,_targ arg this);
