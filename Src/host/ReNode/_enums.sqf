@@ -158,6 +158,12 @@ node_enum
 	"
 ] node_enum
 
+["VisibilityMode",NODE_VISIBILITY_MODE_LIST_ALL,
+"
+	name:Видимость
+	desc:Видимость физического тела. Используется в проверках возможности видимости объектов.
+"] node_enum
+
 #include "..\GameObjects\GameConstants.hpp"
 ["SideIndex",NODE_SIDE_LIST_ALL,
 	"name:Сторона
