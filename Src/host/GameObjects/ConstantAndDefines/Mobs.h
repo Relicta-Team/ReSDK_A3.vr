@@ -56,6 +56,11 @@
 #define VISIBILITY_MODE_MEDIUM 2
 #define VISIBILITY_MODE_FULL 3
 
+#define NODE_VISIBILITY_MODE_LIST_ALL ['Не видно:VISIBILITY_MODE_NONE:Цель не видно' \
+,'Плохо видно:VISIBILITY_MODE_LOW:Видно менее 50 процентов цели' \
+,'Видно:VISIBILITY_MODE_MEDIUM:Цель видима. Имеется прямой зрительный контакт по 50+ процентам площади её тела.' \
+,'Полностью видно:VISIBILITY_MODE_FULL:Вся площадь цели находится в видимом пространстве.']
+
 #define UNC_ANIM_LIST ["Acts_StaticDeath_04","Acts_StaticDeath_05","Acts_StaticDeath_06","Acts_StaticDeath_10","Acts_StaticDeath_13"]
 #define UNC_ANIM 'Incapacitated'
 #define DEUNC_ANIM 'amovppnemstpsnonwnondnon'

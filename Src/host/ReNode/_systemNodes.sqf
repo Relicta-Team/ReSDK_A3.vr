@@ -147,6 +147,63 @@ node_system_group("operators")
 	// 	in:function_ref:Делегат
 	// " node_system
 
+	"
+		node:switch_on_int
+		name:Выбрать из целых чисел
+		namelib:Выбрать из перечисления целых чисел
+		color:EnumSwitch
+		icon:data\\icons\\icon_Blueprint_Switch_16x
+		desc:Перечисление по целым числам.
+		path:Перечисления.Базовые
+		exec:pure
+		runtimeports:1
+		in:Exec:Вход
+			opt:mul=1
+		in:int:Число
+			opt:mul=0:custom=1:def=0
+		out:Exec:По умолчанию:Выполняется, если не найдено ни одно из вхождений.
+			opt:mul=0
+		code:private __sv = @in.2; @gen_switch_on(__sv)
+	" node_system
+
+	"
+		node:switch_on_float
+		name:Выбрать из дробных чисел
+		namelib:Выбрать из перечисления дробных чисел
+		color:EnumSwitch
+		icon:data\\icons\\icon_Blueprint_Switch_16x
+		desc:Перечисление по дробным числам.
+		path:Перечисления.Базовые
+		exec:pure
+		runtimeports:1
+		in:Exec:Вход
+			opt:mul=1
+		in:float:Число
+			opt:mul=0:custom=1:def=0
+		out:Exec:По умолчанию:Выполняется, если не найдено ни одно из вхождений.
+			opt:mul=0
+		code:private __sv = @in.2; @gen_switch_on(__sv)
+	" node_system
+
+	"
+		node:switch_on_string
+		name:Выбрать из строк
+		namelib:Выбрать из перечисления строк
+		color:EnumSwitch
+		icon:data\\icons\\icon_Blueprint_Switch_16x
+		desc:Перечисление по строкам.
+		path:Перечисления.Базовые
+		exec:pure
+		runtimeports:1
+		in:Exec:Вход
+			opt:mul=1
+		in:string:Строка
+			opt:mul=0:custom=1
+		out:Exec:По умолчанию:Выполняется, если не найдено ни одно из вхождений.
+			opt:mul=0
+		code:private __sv = @in.2; @gen_switch_on(__sv)
+	" node_system
+
 	_baseOpPath = "Операторы";
 	//!not need=> out:Exec:После условия:Всегда посылает импульс после выполнения ветки вне зависимости от условия ""Истина"" или ""Ложь"".
 	"

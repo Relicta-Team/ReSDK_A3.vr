@@ -6,6 +6,13 @@
 
 autoref var(damageInfo,new(DODamageInfo));
 
+"
+	name:Мертв
+	desc:Возвращает @[bool ИСТИНУ], если моб мертв.
+	prop:get
+	return:bool
+	defval:false
+" node_var
 var(isDead,false);
 //var(isSleep,false);//deprecated
 

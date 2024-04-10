@@ -1298,6 +1298,15 @@ region(stealing handler)
 region(viewing object)
 	//может ли моб видеть этот объект.
 	//_ref_viewmode - возвращает информацию насколько хорошо видно объект. Принимает значения от VISIBILITY_MODE_NONE до VISIBILITY_MODE_FULL
+	
+	"
+		name:Цель видно
+		desc:Возвращает @[bool ИСТИНУ], если цель видно. Даже маленький кусочек модели цели в поле зрения вызывающего моба считается как истина. Видимость проверяется на стороне сервера.
+		type:get
+		lockoverride:1
+		in:GameObject:Объект:Цель, для которой проверяется видимость.
+		return:bool:Видно ли цель
+	" node_met
 	func(canSeeObject)
 	{
 		objParams_2(_gobj,_ref_viewmode);
@@ -1417,4 +1426,35 @@ region(viewing object)
 			refset(_ref_viewmode,_viewmode);
 		};
 		_retval
+	};
+
+
+	"
+		name:Получить результат видимости
+		desc:Получает структуру результата видимости цели (видно ли её и насколько хорошо). Видимость проверяется на стороне сервера.
+		type:method
+		lockoverride:1
+		in:GameObject:Объект:Цель, для которой проверяется видимость.
+		return:struct.VisibilityResult:Результат видимости цели.
+	" node_met
+	func(canSeeObject_WrapStruct)
+	{
+		objParams_1(_targ);
+		private _rdat = refcreate(VISIBILITY_MODE_NONE);
+		private _rsee = callSelfParams(canSeeObject,_targ arg _rdat);
+		[_rsee,refget(_rdat)]
+	};
+
+	"
+		name:Видимость объекта
+		desc:Получает уровень видимости игрового объекта. Видимость проверяется на стороне сервера.
+		type:get
+		lockoverride:1
+		in:GameObject:Объект:Цель, для которой проверяется видимость.
+		return:enum.VisibilityMode:Уровень видимости
+	" node_met
+	func(getObjectVisibility)
+	{
+		objParams_1(_targ);
+		callSelfParams(canSeeObject_WrapStruct,_targ) select 1
 	};
