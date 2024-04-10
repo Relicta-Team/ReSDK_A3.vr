@@ -40,7 +40,14 @@ region(Memories)
 						_tpref = "<t color='#ff0000'>[не выполнено] </t>";
 					};
 				};
-				modvar(_txt) + sbr + format["    %3%1: %2",getVar(_x,name),callFuncParams(_x,getTaskDescription,this),_tpref];
+				if getVar(_x,customTaskInfo) then {
+					private _tdescEx = callFuncParams(_x,getTaskDescription,this);
+					if (_tdescEx != "") then {
+						modvar(_txt) + sbr + format["    %1%2",_tdescEx,_tpref];
+					};
+				} else {
+					modvar(_txt) + sbr + format["    %3%1: %2",getVar(_x,name),callFuncParams(_x,getTaskDescription,this),_tpref];
+				};
 			} foreach getSelf(tasks);
 			
 			modvar(_txt) +"</t>";
