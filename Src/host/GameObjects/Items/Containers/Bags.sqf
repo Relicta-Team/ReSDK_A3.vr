@@ -32,6 +32,16 @@ class(Suitcase) extends(Container)
 	var(maxSize,ITEM_SIZE_MEDIUM);
 endclass
 
+class(Suitcase1) extends(Suitcase)
+	var(name,"Чемодан");
+	var(icon,invicon(suitcase));
+	var(model,"metro_ob\model\case_6.p3d");
+	var(weight,gramm(480));	
+	var_exprval(countSlots,DEFAULT_ITEMBAG_STORAGE);
+	var(size,ITEM_SIZE_BIG);
+	var(maxSize,ITEM_SIZE_MEDIUM);
+endclass
+
 class(ShuttleBag) extends(Container)
 	var(name,"Челночный баул");
 	var(icon,invicon(baul));
