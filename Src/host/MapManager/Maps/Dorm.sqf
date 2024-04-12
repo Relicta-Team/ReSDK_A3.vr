@@ -445,7 +445,7 @@ _4047_125004025_6250010_12500 = ['WoodenDoor',[4047.13,4025.63,10.125],0,[0,0,1]
 _4049_000004021_5000010_12500 = ['WoodenDoor',[4049,4021.5,10.125],90,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; SortirDorm"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4033_000004031_1250010_00000 = ['WoodenDoor',[4033,4031.13,10],90,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; RZavZhilDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4026_375004033_3750010_00000 = ['WoodenDoor',[4026.38,4033.38,10],90,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; RZavZhilDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-_4038_500004025_6250013_00000 = ['WoodenDoor',[4038.5,4025.63,13],0,[0,0,1]] call InitStruct; 
+_4038_500004025_6250013_00000 = ['WoodenDoor',[4038.5,4025.63,13],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"key201"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4044_750004025_6250013_00000 = ['WoodenDoor',[4044.75,4025.63,13],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RCherDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4026_625004027_3750010_00000 = ['WoodenDoor',[4026.63,4027.38,10],90,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; KitchenDorm"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4025_625004023_3750010_00000 = ['WoodenDoor',[4025.63,4023.38,10],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; PodsobDorm"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
@@ -1305,6 +1305,7 @@ if (!isNil'_4029_571534030_3750010_50000') then {
 	[_4029_571534030_3750010_50000,'Key',2,100,[["var","name","Ключ от туалетов"],["var","preinit@__keytypesstr","SortirDorm"]]] call (_4029_571534030_3750010_50000 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4029_571534030_3750010_50000,'Key',2,100,[["var","name","Ключ от подсобки"],["var","preinit@__keytypesstr","PodsobDorm"]]] call (_4029_571534030_3750010_50000 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4029_571534030_3750010_50000,'Key',2,100,[["var","name","Площадка"],["var","preinit@__keytypesstr","PloshadkaDorm"]]] call (_4029_571534030_3750010_50000 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4029_571534030_3750010_50000,'Key',2,100,[["var","name","Ключ от комнаты 201"],["var","desc","key201"]]] call (_4029_571534030_3750010_50000 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_4045_883304034_7033714_16785') then {
 	_4045_883304034_7033714_16785 setvariable ['desc',"Важные звяковые документы с фабрики"];

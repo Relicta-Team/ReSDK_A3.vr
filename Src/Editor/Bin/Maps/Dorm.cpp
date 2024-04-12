@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=1096;
+		nextID=1132;
 	};
 	class Camera
 	{
-		pos[]={4034.7559,17.027983,4030.4949};
-		dir[]={0.24454597,-0.41042325,0.87854522};
-		up[]={0.11005795,0.91189581,0.39539278};
-		aside[]={0.9634223,1.7066486e-007,-0.26817241};
+		pos[]={4035.259,19.562868,4026.0942};
+		dir[]={-0.89117122,-0.4009161,0.21284953};
+		up[]={-0.38996118,0.91609877,0.093139671};
+		aside[]={0.23233663,8.6817636e-007,0.97275925};
 	};
 };
 binarizationWanted=0;
@@ -1914,7 +1914,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Комендант";
-					state=1;
 					class Entities
 					{
 						items=20;
@@ -2001,7 +2000,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""KeyHolder""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от кухни""""],[""""preinit@__keytypesstr"""",""""KitchenDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от туалетов""""],[""""preinit@__keytypesstr"""",""""SortirDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от подсобки""""],[""""preinit@__keytypesstr"""",""""PodsobDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Площадка""""],[""""preinit@__keytypesstr"""",""""PloshadkaDorm""""]]],[""""class"""",""""Key""""]]}"",2]]]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""KeyHolder""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от кухни""""],[""""preinit@__keytypesstr"""",""""KitchenDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от туалетов""""],[""""preinit@__keytypesstr"""",""""SortirDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от подсобки""""],[""""preinit@__keytypesstr"""",""""PodsobDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Площадка""""],[""""preinit@__keytypesstr"""",""""PloshadkaDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от комнаты 201""""],[""""desc"""",""""key201""""]]],[""""class"""",""""Key""""]]}"",2]]]]}";
 							};
 							id=2730;
 							type="sdaykey";
@@ -7697,7 +7696,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""desc"",""Комната 201""],[""islocked"",true]]],[""class"",""WoodenDoor""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""desc"",""Комната 201""],[""islocked"",true],[""preinit@__keytypesstr"",""key201""]]],[""class"",""WoodenDoor""]]}";
 									};
 									id=2540;
 									type="Land_xlamdoor";
@@ -20662,7 +20661,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4082.3315,16.531534,4069.8232};
-				angles[]={0,3.7252903e-008,-0};
+				angles[]={0,3.7252903e-008,0};
 			};
 			side="Empty";
 			flags=1;
@@ -20697,7 +20696,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4035.9114,16.134941,4029.1912};
-				angles[]={0,4.7123895,-0};
+				angles[]={0,4.7123895,0};
 			};
 			side="Empty";
 			flags=1;
