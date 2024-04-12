@@ -132,6 +132,40 @@ Description:
 - Param: _o
 
 File: [host\MapManager\Maps\detective.sqf at line 22](../../../Src/host/MapManager/Maps/detective.sqf#L22)
+# Dorm.sqf
+
+## reditor_binding_fc
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\Dorm.sqf at line 3](../../../Src/host/MapManager/Maps/Dorm.sqf#L3)
+## reditor_binding_gv
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\Dorm.sqf at line 12](../../../Src/host/MapManager/Maps/Dorm.sqf#L12)
+## reditor_binding_sv
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\Dorm.sqf at line 17](../../../Src/host/MapManager/Maps/Dorm.sqf#L17)
+## reditor_binding_gref
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\Dorm.sqf at line 22](../../../Src/host/MapManager/Maps/Dorm.sqf#L22)
 # Hunt.sqf
 
 ## reditor_binding_fc
