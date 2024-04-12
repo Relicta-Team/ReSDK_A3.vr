@@ -145,3 +145,185 @@ regScriptEmit(SLIGHT_SHIT_SMELL)
 		["setDropInterval",0.5]
 	]
 endScriptEmit
+
+regScriptEmit(SLIGHT_WEAK_FIRE)
+	[
+		"lt",
+		null,
+		_emitAlias("Точечный свет 2")
+		["linkToSrc",[0,0,0]],
+		["setLightColor",[1,0.5,0.2]],
+		["setLightAmbient",[0.1,0.05,0.02]],
+		["setLightIntensity",255],
+		["setLightAttenuation",[0,0,0,5,0,0]]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Искры")
+		["linkToLight",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,13,2,0],"","Billboard",1,0.7,[0,0,0],[0,0,0.005],0.4,1.2,1,0.17,[0.1,0.1],[[1,0.3,0.3,-6.5]],[1000,100],0.5,0.05,"","","",0,false,-1,[]]],
+		["setParticleRandom",[2.5,[0,0,0.2],[0.2,0.2,1],2,0.04,[0,0.15,0.15,0],0.3,0.15,360,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.06]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Дым")
+		["linkToLight",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,7,48,1],"","Billboard",1,1.2,[0,0,0],[0,0,0.6],0,0.05,0.04,0.22,[0.14,0.4],[[0.1,0.1,0.1,0.03],[0.2,0.2,0.2,0.05],[0.2,0.2,0.2,0.025],[0.3,0.3,0.3,0.01],[0.4,0.4,0.4,0.005]],[1.5,0.5],0.4,0.02,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.5,[0.03,0.03,0.03],[0.25,0.25,0.5],0,0.1,[0,0,0,0],0.1,0.01,1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.01]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Огонь")
+		["linkToLight",[-0.0499992,3.8147e-006,0.0840034]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,10,32,1],"","Billboard",3,0.4,[0,0,0],[0,0,0.5],0,0.05,0.04,0.16,[0.2],[[1,1,0.6,-80]],[0.2],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.15,[0.15,0.15,0.15],[0.03,0.03,0.09],0,0.02,[0.1,0.1,0.1,0],0,0,1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.01]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Рефракт")
+		["linkToLight",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1,0],"","Billboard",1,2,[0,0,0],[0,0,0.6],0,0.05,0.04,0.05,[0.5,0.8,2.6],[[0.6,0.6,0.6,0.2],[0.7,0.7,0.7,0.2],[0.8,0.8,0.8,0.1],[1,1,1,0]],[1.5,0.5],0.4,0.09,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.3,[0.1,0.1,0.2],[0.05,0.05,0.5],0,0.3,[0,0,0,0.1],0.2,0.05,1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.1]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_SPOT_LAMP)
+	[
+		"ltd",
+		null,
+		_emitAlias("Направленный свет 3")
+		["linkToSrc",[0,0,0.100002]],
+		["setOrient",[0,-90,0]],
+		["setLightColor",[1000,1000,1000]],
+		["setLightAmbient",[10,10,10]],
+		["setLightIntensity",5],
+		["setLightFlareSize",0.1],
+		["setLightFlareMaxDistance",250],
+		["setLightAttenuation",[0,20,0,0.1,0.005,3]],
+		["setLightConePars",[90,0,0]]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_LAMP_HOUSE)
+	[
+		"ltd",
+		null,
+		_emitAlias("Направленный свет 1")
+		["linkToSrc",[0,0,-0.15]],
+		["setOrient",[0,-90,0]],
+		["setLightColor",[1,0.7,0.3]],
+		["setLightAmbient",[1,0.6,0.3]],
+		["setLightIntensity",600],
+		["setLightUseFlare",true],
+		["setLightFlareSize",0.2],
+		["setLightFlareMaxDistance",100],
+		["setLightAttenuation",[0,0,0,0,0.01,10]],
+		["setLightConePars",[230,0,4]]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_LIGHT_STOVE)
+	[
+		"lt",
+		null,
+		_emitAlias("Точечный свет 1")
+		["linkToSrc",[0,0,0]],
+		["setLightColor",[1,0.5,0.2]],
+		["setLightAmbient",[0.1,0.05,0.02]],
+		["setLightIntensity",1000],
+		["setLightAttenuation",[0,0,0,5,0.1,2]]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Огонь")
+		["linkToLight",[0,0,-0.1]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,10,32,1],"","Billboard",3,0.25,[0,0,0],[0,0,0.7],0,0.05,0.04,0.05,[0.24,0],[[1,1,1,-100],[1,1,1,-100],[0,0,0,0]],[1],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.15,[0.01,0.01,0.15],[0.04,0.04,0.2],0,0.04,[0.1,0.1,0.1,0],0,0,1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.022]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Рефракт")
+		["linkToLight",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1,0],"","Billboard",1,2,[0,0,0],[0,0,0.6],0,0.05,0.04,0.05,[0.2,0.8,2.6],[[0.6,0.6,0.6,0.2],[0.7,0.7,0.7,0.2],[0.8,0.8,0.8,0.1],[1,1,1,0]],[1.5,0.5],0.4,0.09,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.3,[0.1,0.1,0.2],[0.05,0.05,0.5],0,0.3,[0,0,0,0.1],0.2,0.05,1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.1]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Дым")
+		["linkToLight",[0,0,0.3]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal_02.p3d",8,0,40,1],"","Billboard",1,2,[0,0,0],[0,0,0.08],1,1.26,1,0,[0.2,0.25],[[1,1,1,0.06],[1,1,1,0.04],[1,1,1,0.02],[1,1,1,0.01],[1,1,1,0.001]],[0.8,0.3,0.25],0.3,0.04,"","","",0,false,-1,[]]],
+		["setParticleRandom",[1,[0.08,0.08,0.01],[0.05,0.05,0.05],9,0,[0,0,0,0],0,0,0.5,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.01]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Искры")
+		["linkToLight",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,13,2,0],"","Billboard",1,1,[0,0,0],[0,0,0.05],1,1.2,1,0.17,[0.1,0.1,0.1,0.1,0.1,0.08,0.08,0.08,0.08,0],[[1,0.3,0.3,-6.5],[1,0.3,0.3,-6],[1,0.3,0.3,-5.5],[1,0.3,0.3,-4.5]],[100],0.5,0.001,"","","",0,false,-1,[]]],
+		["setParticleRandom",[2.5,[0,0,0],[0.2,0.2,1],2,0.04,[0,0.15,0.15,0],0.01,0.01,360,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.1]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_LIGHT_BAKE)
+	[
+		"lt",
+		null,
+		_emitAlias("Точечный свет")
+		["linkToSrc",[-0.799999,0.600002,-3.3]],
+		["setLightColor",[1,0.5,0.2]],
+		["setLightAmbient",[0.1,0.05,0.02]],
+		["setLightIntensity",2000],
+		["setLightAttenuation",[0,0,0,5,0.05,3]]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Огонь")
+		["linkToLight",[-0.8,0.8,-3.6]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,10,32,1],"","Billboard",3,0.25,[0,0,0],[0,0,0.7],0,0.07,0.04,0.05,[0.24,0],[[1,1,1,-100],[1,1,1,-100],[0,0,0,0]],[1],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.15,[0.01,0.01,0.15],[0.04,0.04,0.2],0,0.04,[0.1,0.1,0.1,0],0,0,1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.022]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_STREET_LAMP_DORM)
+	[
+		"ltd",
+		null,
+		_emitAlias("Направленный свет 1")
+		["linkToSrc",[0,0,3.298]],
+		["setOrient",[0,-90,0]],
+		["setLightColor",[1,0.5,0.2]],
+		["setLightAmbient",[0.1,0.05,0.02]],
+		["setLightIntensity",7000],
+		["setLightUseFlare",true],
+		["setLightFlareSize",0.2],
+		["setLightFlareMaxDistance",30],
+		["setLightAttenuation",[0,0,0,0,0.1,20]],
+		["setLightConePars",[360,90,0]]
+	]
+endScriptEmit

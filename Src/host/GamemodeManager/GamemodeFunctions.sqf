@@ -345,8 +345,11 @@ gm_initGameMode = {
 		addLateRole(_x);
 	} foreach callFunc(gm_currentMode,getLateRoles);
 	
-	
-	netSetGlobal(lobby_background,callFunc(gm_currentMode,getLobbyBackground));
+	private _pic = callFunc(gm_currentMode,getLobbyBackground);
+	if isTypeOf(gm_currentMode,ScriptedGamemode) then {
+		_pic = PATH_PICTURE(_pic);
+	};
+	netSetGlobal(lobby_background,_pic);
 	[callFunc(gm_currentMode,getLobbySoundName)] call gm_setLobbySound;
 	
 	["    Наполняем местность жизнью...","system"] call cm_sendLobbyMessage;

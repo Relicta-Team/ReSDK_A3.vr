@@ -7213,6 +7213,15 @@ $REGION:CLASSMETA
 "armaItemAddImpl":{"return": "<undefined>"},"armaItemRemoveImpl":{"return": "<undefined>"},"getDropSound":{"return": "<undefined>"},"getPickupSound":{"return": "<undefined>"},"getPutdownSound":{"return": "<undefined>"}
 }   }
 }
+,"Suitcase1": {
+    "baseClass" : "Suitcase",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":35},
+   "fields": { "defined": {
+"name":{"return": "string"},"icon":{"return": "string"},"model":{"return": "string"},"weight":{"return": "float"},"countSlots":{"return": "int"},"size":{"return": "int"},"maxSize":{"return": "int"}}   },
+   "methods": { "defined": {
+
+}   }
+}
 ,"Suitcase_Saloon": {
     "baseClass" : "Suitcase",
     "defined" : {"file":"src\\host\\GameModes\\Saloon\\GM_Saloon.sqf","line":446},
@@ -7233,7 +7242,7 @@ $REGION:CLASSMETA
 }
 ,"SteelBrownContainer": {
     "baseClass" : "SteelMedicalBox",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":66},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":76},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -7278,7 +7287,7 @@ $REGION:CLASSMETA
 }
 ,"ShuttleBag": {
     "baseClass" : "Container",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":35},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":45},
    "fields": { "defined": {
 "name":{"return": "string"},"icon":{"return": "string"},"model":{"return": "string"},"weight":{"return": "float"},"countSlots":{"return": "int"},"size":{"return": "int"},"maxSize":{"return": "int"}}   },
    "methods": { "defined": {
@@ -7287,7 +7296,7 @@ $REGION:CLASSMETA
 }
 ,"MedicalBag": {
     "baseClass" : "Container",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":45},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":55},
    "fields": { "defined": {
 "name":{"return": "string"},"icon":{"return": "string"},"model":{"return": "string"},"weight":{"return": "float"},"countSlots":{"return": "int"},"size":{"return": "int"},"maxSize":{"return": "int"}}   },
    "methods": { "defined": {
@@ -7296,7 +7305,7 @@ $REGION:CLASSMETA
 }
 ,"SteelMedicalBox": {
     "baseClass" : "Container",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":55},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Bags.sqf","line":65},
    "fields": { "defined": {
 "name":{"return": "string"},"icon":{"return": "string"},"model":{"return": "string"},"weight":{"return": "float"},"countSlots":{"return": "int"},"size":{"return": "int"},"maxSize":{"return": "int"}}   },
    "methods": { "defined": {
@@ -9402,7 +9411,7 @@ $REGION:CLASSMETA
 }
 ,"Folder": {
     "baseClass" : "Book",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":334},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":345},
    "fields": { "defined": {
 "name":{"return": "string"}}   },
    "methods": { "defined": {
@@ -9411,7 +9420,7 @@ $REGION:CLASSMETA
 }
 ,"BookChemReactions": {
     "baseClass" : "Book",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":376},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":387},
    "fields": { "defined": {
 "ndName":{"return": "string"}}   },
    "methods": { "defined": {
@@ -9422,7 +9431,25 @@ $REGION:CLASSMETA
     "baseClass" : "Paper",
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":330},
    "fields": { "defined": {
-"name":{"return": "string"}}   },
+"model":{"return": "string"},"name":{"return": "string"}}   },
+   "methods": { "defined": {
+
+}   }
+}
+,"Documents": {
+    "baseClass" : "Paper",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":335},
+   "fields": { "defined": {
+"model":{"return": "string"},"name":{"return": "string"}}   },
+   "methods": { "defined": {
+
+}   }
+}
+,"Documents1": {
+    "baseClass" : "Paper",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":340},
+   "fields": { "defined": {
+"model":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
 
 }   }
@@ -9564,7 +9591,7 @@ $REGION:CLASSMETA
 }
 ,"PaperHolder": {
     "baseClass" : "IPaperItemBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":339},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":350},
    "fields": { "defined": {
 "model":{"return": "string"},"name":{"return": "string"},"countBlanks":{"return": "int"},"weight":{"return": "int"}}   },
    "methods": { "defined": {
