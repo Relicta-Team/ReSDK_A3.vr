@@ -45,7 +45,23 @@
             "GameObject",
             -1
           ],
-          "Rol_NE_dostupna_esli_malo_igrokov":true
+          "Rol_NE_dostupna_esli_malo_igrokov":true,
+          "_currentOtherSkills":[
+            [
+              "Хирургия",
+              [
+                4.0,
+                5.0
+              ]
+            ],
+            [
+              "Первая помощь",
+              [
+                4.0,
+                5.0
+              ]
+            ]
+          ]
         },
         "methods":{}
       },
@@ -53,15 +69,15 @@
       "graphVersion":2
     },
     "mpos":[
-      -1093.2371380694997,
-      332.3117471702506,
-      1008.4926091645157,
-      949.1695145077799
+      -1221.9548444767092,
+      9.766643085120734,
+      911.6480836060388,
+      858.0217257468604
     ],
-    "mzoom":0.34
+    "mzoom":0.45
   },
   "nodes":{
-    "0x1a15c2fef90":{
+    "0x2296146afd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Sequence_16x",
       "name":"Последовательность",
@@ -157,7 +173,7 @@
       },
       "class_":"operators.sequence"
     },
-    "0x1a15c2ae3d0":{
+    "0x2296394cf10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в контейнере",
@@ -195,7 +211,7 @@
       },
       "class_":"func.createItemInContainer"
     },
-    "0x1a16ac8b610":{
+    "0x22963e06c10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -238,7 +254,7 @@
       },
       "class_":"fields.GameObject.name_0.set"
     },
-    "0x1a16ac8ce50":{
+    "0x22963e0c490":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в инвентаре",
@@ -277,7 +293,7 @@
       },
       "class_":"func.createItemInInventory"
     },
-    "0x1a16acf29d0":{
+    "0x22963e72010":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Сообщение на экране",
@@ -384,7 +400,7 @@
       },
       "class_":"control.messageBox"
     },
-    "0x1a16acf2ed0":{
+    "0x22963e72110":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в контейнере",
@@ -422,7 +438,7 @@
       },
       "class_":"func.createItemInContainer"
     },
-    "0x1a1698f9150":{
+    "0x22963ed8650":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Задать типы ключа",
@@ -461,7 +477,7 @@
       },
       "class_":"methods.Key._setKeyOwnerWrapper_0"
     },
-    "0x1a1698fa290":{
+    "0x22963ed9990":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -504,7 +520,7 @@
       },
       "class_":"fields.GameObject.name_0.set"
     },
-    "0x1a1698fb690":{
+    "0x22963edaf90":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -539,7 +555,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x1a1698fb990":{
+    "0x22963edbcd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Cast_16x",
       "name":"Преобразовать тип",
@@ -578,7 +594,7 @@
       },
       "class_":"control.castto"
     },
-    "0x1a16992cf10":{
+    "0x22963f60510":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -621,7 +637,7 @@
       },
       "class_":"fields.GameObject.desc_0.set"
     },
-    "0x1a16992e750":{
+    "0x22963f61e90":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -656,7 +672,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x1a16992f750":{
+    "0x22963f62dd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_OverrideableFunction_16x",
       "name":"Вызов базового метода",
@@ -754,191 +770,191 @@
   "connections":[
     {
       "in":[
-        "0x1a15c2fef90",
+        "0x2296146afd0",
         "Вход"
       ],
       "out":[
-        "0x1a16ac8ce50",
+        "0x22963e0c490",
         "Выход"
       ]
     },
     {
       "out":[
-        "0x1a15c2fef90",
+        "0x2296146afd0",
         "Действие 1"
       ],
       "in":[
-        "0x1a1698fa290",
+        "0x22963ed9990",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1a15c2fef90",
+        "0x2296146afd0",
         "Действие 2"
       ],
       "in":[
-        "0x1a16acf2ed0",
+        "0x22963e72110",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1a15c2fef90",
+        "0x2296146afd0",
         "Действие 3"
       ],
       "in":[
-        "0x1a15c2ae3d0",
+        "0x2296394cf10",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x1a15c2ae3d0",
+        "0x2296394cf10",
         "Контейнер"
       ],
       "out":[
-        "0x1a16ac8ce50",
+        "0x22963e0c490",
         "Предмет"
       ]
     },
     {
       "in":[
-        "0x1a16ac8b610",
+        "0x22963e06c10",
         "Вход"
       ],
       "out":[
-        "0x1a1698f9150",
+        "0x22963ed8650",
         "Выход"
       ]
     },
     {
       "in":[
-        "0x1a16ac8b610",
+        "0x22963e06c10",
         "Цель"
       ],
       "out":[
-        "0x1a16acf2ed0",
+        "0x22963e72110",
         "Предмет"
       ]
     },
     {
       "in":[
-        "0x1a16ac8ce50",
+        "0x22963e0c490",
         "Вход"
       ],
       "out":[
-        "0x1a1698fb990",
+        "0x22963edbcd0",
         "Успешное преобразование"
       ]
     },
     {
       "in":[
-        "0x1a16ac8ce50",
+        "0x22963e0c490",
         "Персонаж"
       ],
       "out":[
-        "0x1a1698fb990",
+        "0x22963edbcd0",
         "Объект"
       ]
     },
     {
       "out":[
-        "0x1a16ac8ce50",
+        "0x22963e0c490",
         "Предмет"
       ],
       "in":[
-        "0x1a16acf2ed0",
+        "0x22963e72110",
         "Контейнер"
       ]
     },
     {
       "out":[
-        "0x1a16ac8ce50",
+        "0x22963e0c490",
         "Предмет"
       ],
       "in":[
-        "0x1a16992cf10",
+        "0x22963f60510",
         "Цель"
       ]
     },
     {
       "out":[
-        "0x1a16ac8ce50",
+        "0x22963e0c490",
         "Предмет"
       ],
       "in":[
-        "0x1a1698fa290",
+        "0x22963ed9990",
         "Цель"
       ]
     },
     {
       "in":[
-        "0x1a16acf29d0",
+        "0x22963e72010",
         "Вход"
       ],
       "out":[
-        "0x1a1698fb990",
+        "0x22963edbcd0",
         "Невозможное преобразование"
       ]
     },
     {
       "out":[
-        "0x1a16acf2ed0",
+        "0x22963e72110",
         "Выход"
       ],
       "in":[
-        "0x1a1698f9150",
+        "0x22963ed8650",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1a16acf2ed0",
+        "0x22963e72110",
         "Предмет"
       ],
       "in":[
-        "0x1a1698f9150",
+        "0x22963ed8650",
         "Цель"
       ]
     },
     {
       "out":[
-        "0x1a1698fa290",
+        "0x22963ed9990",
         "Выход"
       ],
       "in":[
-        "0x1a16992cf10",
+        "0x22963f60510",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1a1698fb690",
+        "0x22963edaf90",
         "Выход"
       ],
       "in":[
-        "0x1a1698fb990",
+        "0x22963edbcd0",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1a1698fb690",
+        "0x22963edaf90",
         "Моб"
       ],
       "in":[
-        "0x1a1698fb990",
+        "0x22963edbcd0",
         "Входной объект"
       ]
     },
     {
       "out":[
-        "0x1a16992e750",
+        "0x22963f61e90",
         "Выход"
       ],
       "in":[
-        "0x1a16992f750",
+        "0x22963f62dd0",
         "Вход"
       ]
     }
