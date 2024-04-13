@@ -2970,7 +2970,7 @@ def:node:system
 node:isEditor
 name:Это редактор
 path:Система.Отладка
-code:\n#ifdef EDITOR\ntrue\n#else\nfalse\n#endif\n
+code:__GLOBAL_MACRO_RESDK_EDITOR__
 desc:Возвращает @[bool ИСТИНУ], если текущий граф выполняется в редакторе.
 icon:data\\icons\\icon_BluePrintEditor_Function_16px
 color:PureFunction
@@ -2982,7 +2982,7 @@ def:node:system
 node:isDebug
 name:Это дебаг
 path:Система.Отладка
-code:\n#ifdef DEBUG\ntrue\n#else\nfalse\n#endif\n
+code:__GLOBAL_MACRO_RESDK_DEBUG__
 desc:Возвращает @[bool ИСТИНУ], если текущий граф выполняется в отладочной сборке.
 icon:data\\icons\\icon_BluePrintEditor_Function_16px
 color:PureFunction
@@ -2994,7 +2994,7 @@ def:node:system
 node:isRelease
 name:Это релиз
 path:Система.Отладка
-code:\n#ifdef RELEASE\ntrue\n#else\nfalse\n#endif\n
+code:__GLOBAL_MACRO_RESDK_RELEASE__
 desc:Возвращает @[bool ИСТИНУ], если текущий граф выполняется в релизной сборке.
 icon:data\\icons\\icon_BluePrintEditor_Function_16px
 color:PureFunction

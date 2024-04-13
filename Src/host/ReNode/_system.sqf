@@ -23,9 +23,9 @@ nodeModule_popPath(1)
 nodeModule_addPath("Отладка")
 
 
-["isEditor","Это редактор","\n#ifdef EDITOR\ntrue\n#else\nfalse\n#endif\n","bool:Редактор" opt "mul=1","Возвращает @[bool ИСТИНУ], если текущий граф выполняется в редакторе."] reg_nular
-["isDebug","Это дебаг","\n#ifdef DEBUG\ntrue\n#else\nfalse\n#endif\n","bool:Дебаг" opt "mul=1","Возвращает @[bool ИСТИНУ], если текущий граф выполняется в отладочной сборке."] reg_nular
-["isRelease","Это релиз","\n#ifdef RELEASE\ntrue\n#else\nfalse\n#endif\n","bool:Релиз" opt "mul=1","Возвращает @[bool ИСТИНУ], если текущий граф выполняется в релизной сборке."] reg_nular
+["isEditor","Это редактор","__GLOBAL_MACRO_RESDK_EDITOR__","bool:Редактор" opt "mul=1","Возвращает @[bool ИСТИНУ], если текущий граф выполняется в редакторе."] reg_nular
+["isDebug","Это дебаг","__GLOBAL_MACRO_RESDK_DEBUG__","bool:Дебаг" opt "mul=1","Возвращает @[bool ИСТИНУ], если текущий граф выполняется в отладочной сборке."] reg_nular
+["isRelease","Это релиз","__GLOBAL_MACRO_RESDK_RELEASE__","bool:Релиз" opt "mul=1","Возвращает @[bool ИСТИНУ], если текущий граф выполняется в релизной сборке."] reg_nular
 
 nodeModule_setExecType("all")
 nodeModule_setColorStyle("Function")
