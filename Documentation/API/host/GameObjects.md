@@ -3020,7 +3020,7 @@ Replaced value:
 ```sqf
 setSelf(name,getVar(_item,name))
 ```
-File: [host\GameObjects\Items\Item.sqf at line 727](../../../Src/host/GameObjects/Items/Item.sqf#L727)
+File: [host\GameObjects\Items\Item.sqf at line 739](../../../Src/host/GameObjects/Items/Item.sqf#L739)
 ## methodReference(name__,parm,refparam)
 
 Type: constant
@@ -3034,7 +3034,7 @@ Replaced value:
 ```sqf
 func(name__) {parm; callFuncParams(getSelf(object),name__,refparam)}
 ```
-File: [host\GameObjects\Items\Item.sqf at line 1124](../../../Src/host/GameObjects/Items/Item.sqf#L1124)
+File: [host\GameObjects\Items\Item.sqf at line 1136](../../../Src/host/GameObjects/Items/Item.sqf#L1136)
 ## generateItemSize
 
 Type: function
@@ -3044,7 +3044,7 @@ Description:
 - Param: _bmax
 - Param: _radius
 
-File: [host\GameObjects\Items\Item.sqf at line 172](../../../Src/host/GameObjects/Items/Item.sqf#L172)
+File: [host\GameObjects\Items\Item.sqf at line 177](../../../Src/host/GameObjects/Items/Item.sqf#L177)
 # Item_HandAnim.hpp
 
 ## ANIM_INDEX_HANDED
@@ -3594,7 +3594,7 @@ Replaced value:
 ```sqf
 _y get #func
 ```
-File: [host\GameObjects\Items\Office\Books.sqf at line 386](../../../Src/host/GameObjects/Items/Office/Books.sqf#L386)
+File: [host\GameObjects\Items\Office\Books.sqf at line 397](../../../Src/host/GameObjects/Items/Office/Books.sqf#L397)
 # BasicMob.sqf
 
 ## emulate_mp_in_sp

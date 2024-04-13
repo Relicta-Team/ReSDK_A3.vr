@@ -328,7 +328,18 @@ class(Paper) extends(IWritableContentItem)
 endclass
 
 class(Notepad) extends(Paper)
+	var(model,"a3\structures_f\items\documents\notepad_f.p3d")
 	var(name,"Блокнот");
+endclass
+
+class(Documents) extends(Paper)
+	var(model,"a3\structures_f\items\documents\file2_f.p3d")
+	var(name,"Документы");
+endclass
+
+class(Documents1) extends(Paper)
+	var(model,"a3\structures_f\items\documents\file1_f.p3d")
+	var(name,"Документы");
 endclass
 
 class(Folder) extends(Book)
