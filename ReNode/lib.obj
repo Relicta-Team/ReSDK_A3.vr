@@ -4516,6 +4516,20 @@ def:m:Mob.isHandcuffed_0
 		lockoverride:1
 		return:bool
 	
+def:c:Item
+
+		name:Предмет
+		desc:Базовый игровой предмет
+		path:Игровые объекты.Предметы
+	
+def:m:Item.isInContainer_0
+
+		name:В контейнере
+		desc:Возвращает @[bool ИСТИНУ], если предмет находится в контейнере.
+		type:get
+		lockoverride:1
+		return:bool:Находится ли предмет находится в контейнере.
+	
 def:c:IRangedWeapon
 
 		name:Дистанционное оружие
@@ -6000,7 +6014,7 @@ $REGION:CLASSMETA
 }
 ,"SystemHandItem": {
     "baseClass" : "SystemItem",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":844},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":856},
    "fields": { "defined": {
 "model":{"return": "string"},"object":{"return": "object"},"part":{"return": "null"},"side":{"return": "int"},"mode":{"return": "string"}}   },
    "methods": { "defined": {
@@ -6009,7 +6023,7 @@ $REGION:CLASSMETA
 }
 ,"SystemMessageBoxND": {
     "baseClass" : "SystemInternalND",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":1189},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":1201},
    "fields": { "defined": {
 "ndInteractDistance":{"return": "int"},"delegate_handleInput":{"return": "unknown_type"},"delegate_handleData":{"return": "unknown_type"},"event_inputHandler":{"return": "unknown_type"},"bufferedCtx":{"return": "null"},"event_onClose":{"return": "unknown_type"}}   },
    "methods": { "defined": {
@@ -9654,7 +9668,7 @@ $REGION:CLASSMETA
 }
 ,"ItemRadio": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":647},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":659},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"radioIsEnabled":{"return": "bool"},"radioSettings":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -9663,7 +9677,7 @@ $REGION:CLASSMETA
 }
 ,"SystemItem": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":712},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":724},
    "fields": { "defined": {
 "weight":{"return": "int"}}   },
    "methods": { "defined": {
@@ -9672,7 +9686,7 @@ $REGION:CLASSMETA
 }
 ,"StolenItem": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":720},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":732},
    "fields": { "defined": {
 "suppressDelete":{"return": "bool"}}   },
    "methods": { "defined": {
@@ -9681,7 +9695,7 @@ $REGION:CLASSMETA
 }
 ,"SystemInternalND": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":1146},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":1158},
    "fields": { "defined": {
 "name":{"return": "null"},"desc":{"return": "null"},"ndOpenedBy":{"return": "null_array"},"ndCurrentDisplay":{"return": "int"},"ndIsLockedInput":{"return": "bool"},"ndName":{"return": "string"},"ndInteractDistance":{"return": "float"}}   },
    "methods": { "defined": {
@@ -15972,7 +15986,7 @@ $REGION:CLASSMETA
 }
 ,"ScriptedEater": {
     "baseClass" : "ScriptedRole",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":962},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":974},
    "fields": { "defined": {
 "name":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"count":{"return": "int"},"classMan":{"return": "string"},"classWoman":{"return": "string"}}   },
    "methods": { "defined": {
@@ -16921,7 +16935,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descInGame":{"return": "string"},"classMan":{"return": "string"},"classWoman":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"_deadTimeout":{"return": "int"},"count":{"return": "int"},"_currentBaseSkills":{"return": "null_array"},"_currentOtherSkills":{"return": "null_array"},"_currentSpawnLocation":{"return": "null_array"},"_currentConnectedTo":{"return": "null_array"}}   },
    "methods": { "defined": {
-"isMainRole":{"return": "<undefined>"},"_getDeadTimeout":{"return": "<undefined>"},"canStoreNameAndFaceForValidate":{"return": "<undefined>"},"_getSkillsWrapper":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"_getOtherSkillsWrapper":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"_canTakeInLobbyConst":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"_canVisibleAfterStartConst":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"roleAccess":{"return": "<undefined>"},"canBeFullAntag":{"return": "<undefined>"},"canBeHiddenAntag":{"return": "<undefined>"},"getBasicMobs":{"return": "<undefined>"},"_spawnLocationWrapper":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"useRandomDirOnSpawn":{"return": "<undefined>"},"_connectedToWrapper":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"_onAssignedWrapper":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"_onDeadBasicWrapper":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"},"onEndgameBasic":{"return": "<undefined>"},"getCurrentGamemode":{"return": "<undefined>"}
+"isMainRole":{"return": "<undefined>"},"_getDeadTimeout":{"return": "<undefined>"},"canStoreNameAndFaceForValidate":{"return": "<undefined>"},"_getSkillsWrapper":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"_getOtherSkillsWrapper":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"_canTakeInLobbyConst":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"_canVisibleAfterStartConst":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"roleAccess":{"return": "<undefined>"},"canBeFullAntag":{"return": "<undefined>"},"canBeHiddenAntag":{"return": "<undefined>"},"getBasicMobs":{"return": "<undefined>"},"_spawnLocationWrapper":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"useRandomDirOnSpawn":{"return": "<undefined>"},"_connectedToWrapper":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"_onAssignedWrapper":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"_onDeadBasicWrapper":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"},"onEndgameBasic":{"return": "<undefined>"},"getCurrentGamemode":{"return": "<undefined>"},"constructor":{"return": "<undefined>"}
 }   }
 }
 ,"GhostRole": {
