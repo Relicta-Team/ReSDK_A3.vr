@@ -659,3 +659,87 @@ Replaced value:
 
 ```
 File: [host\ReNode\compiled\resdk_graph.h at line 38](../../../Src/host/ReNode/compiled/resdk_graph.h#L38)
+## __GLOBAL_MACRO_RESDK_EDITOR__
+
+Type: constant
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+true
+```
+File: [host\ReNode\compiled\resdk_graph.h at line 44](../../../Src/host/ReNode/compiled/resdk_graph.h#L44)
+## __GLOBAL_MACRO_RESDK_EDITOR__
+
+Type: constant
+
+> Exists if **EDITOR** not defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+false
+```
+File: [host\ReNode\compiled\resdk_graph.h at line 46](../../../Src/host/ReNode/compiled/resdk_graph.h#L46)
+## __GLOBAL_MACRO_RESDK_RELEASE__
+
+Type: constant
+
+> Exists if **RELEASE** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+true
+```
+File: [host\ReNode\compiled\resdk_graph.h at line 50](../../../Src/host/ReNode/compiled/resdk_graph.h#L50)
+## __GLOBAL_MACRO_RESDK_RELEASE__
+
+Type: constant
+
+> Exists if **RELEASE** not defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+false
+```
+File: [host\ReNode\compiled\resdk_graph.h at line 52](../../../Src/host/ReNode/compiled/resdk_graph.h#L52)
+## __GLOBAL_MACRO_RESDK_DEBUG__
+
+Type: constant
+
+> Exists if **DEBUG** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+true
+```
+File: [host\ReNode\compiled\resdk_graph.h at line 56](../../../Src/host/ReNode/compiled/resdk_graph.h#L56)
+## __GLOBAL_MACRO_RESDK_DEBUG__
+
+Type: constant
+
+> Exists if **DEBUG** not defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+false
+```
+File: [host\ReNode\compiled\resdk_graph.h at line 58](../../../Src/host/ReNode/compiled/resdk_graph.h#L58)
