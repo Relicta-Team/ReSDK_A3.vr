@@ -435,7 +435,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		desc:Возвращает @[bool ИСТИНУ], если предмет находится в контейнере.
 		type:get
 		lockoverride:1
-		return:bool:Находится ли предмет находится в контейнере.
+		return:bool:Находится ли предмет в контейнере.
 	" node_met
 	func(isInContainer)
 	{
