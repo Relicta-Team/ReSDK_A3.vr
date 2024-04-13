@@ -20,6 +20,11 @@
 editor_attribute("InterfaceClass")
 editor_attribute("ColorClass" arg "44C242")
 class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
+	"
+		name:Предмет
+		desc:Базовый игровой предмет
+		path:Игровые объекты.Предметы
+	" node_class
 
 	getter_func(getAbstractName,"Предмет");
 
@@ -425,6 +430,13 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		true
 	};
 
+	"
+		name:В контейнере
+		desc:Возвращает @[bool ИСТИНУ], если предмет находится в контейнере.
+		type:get
+		lockoverride:1
+		return:bool:Находится ли предмет в контейнере.
+	" node_met
 	func(isInContainer)
 	{
 		objParams();

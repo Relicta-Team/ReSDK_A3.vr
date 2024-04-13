@@ -37,3 +37,23 @@
     #define BP_PS(id__,toid__)
     #define BP_PE
 #endif
+
+// ---------------- utility macros ---------------------
+
+#ifdef EDITOR
+    #define __GLOBAL_MACRO_RESDK_EDITOR__ true
+#else
+    #define __GLOBAL_MACRO_RESDK_EDITOR__ false
+#endif
+
+#ifdef RELEASE
+    #define __GLOBAL_MACRO_RESDK_RELEASE__ true
+#else
+    #define __GLOBAL_MACRO_RESDK_RELEASE__ false
+#endif
+
+#ifdef DEBUG
+    #define __GLOBAL_MACRO_RESDK_DEBUG__ true
+#else
+    #define __GLOBAL_MACRO_RESDK_DEBUG__ false
+#endif

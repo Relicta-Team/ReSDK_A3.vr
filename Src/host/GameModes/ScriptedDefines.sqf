@@ -955,6 +955,18 @@ class(ScriptedRole) extends(BasicRole)
 	" node_met
 	getterconst_func(getCurrentGamemode,gm_currentMode);
 
+
+	func(constructor)
+	{
+		objParams();
+		if (!is3DEN) then {
+			{
+				assert_str(_x!="",format vec2("Empty string in property needDiscordRoles for class %1",callSelf(getClassName)));
+				
+			} foreach callSelf(needDiscordRoles);
+		};
+	};
+
 endclass
 
 class(ScriptedEater) extends(ScriptedRole)
