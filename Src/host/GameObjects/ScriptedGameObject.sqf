@@ -88,6 +88,11 @@ class(ScriptedGameObject) extends(object)
 		setVar(_src,__script,this);
 		setSelf(src,_src);
 
+		if getSelf(tickMode) then {
+			setSelf(tickMode,false); //bypass validation inside setTickMode
+			callSelfParams(setTickMode,true);
+		};
+
 		callSelfParams(onScriptAssigned,_src);
 	};
 
@@ -101,6 +106,58 @@ class(ScriptedGameObject) extends(object)
 	{
 		objParams_1(_obj);
 	};
+
+region(Updates)
+	"
+		name:В каждую секунду
+		desc:Событие, вызываемое каждую секунду.
+		type:event
+	" node_met
+	func(_onTickWrapper)
+	{
+		objParams();
+	};
+
+	func(onTick)
+	{
+		updateParams();
+		callSelf(_onTickWrapper);
+	};
+
+	"
+		name:Переключить ежесекундное событие
+		desc:Запускает или останавливает ежесекундное событие ""В каждую секунду"".
+		type:method
+		lockoverride:1
+		in:bool:Включить:Если указана @[bool ИСТИНА], то событие будет запущено. В ином случае - остановлено. При попытке включения уже рабочего процесса обновления или выключения нерабочего - ничего не произойдёт.
+	" node_met
+	func(setTickMode)
+	{
+		objParams_1(_tickMode);
+		if equals(_tickMode,getSelf(tickMode)) exitWith {};
+		
+		if (_tickMode) then {
+			setSelf(__tickHandle__,startSelfUpdate(onTick))
+		} else {
+			stopUpdate(getSelf(__tickHandle__));
+			setSelf(__tickHandle__,-1);
+		};
+
+		setSelf(tickMode,_tickMode);
+	};
+
+	"
+		name:Выполнять ежесекундное событие
+		desc:Отвечает за то, будет ли выполняться событие ""В каждую секунду"".
+		prop:get
+		classprop:1
+		defval:false
+		return:bool
+	"
+	var(tickMode,false);
+
+	var(__tickHandle__,-1);
+
 
 	//Действия персонажа к объекту
 region(Main action)
@@ -260,40 +317,31 @@ region(InteractWith)
 
 region(redirected interact)
 	//Этот раздел предназначен для вызова действий на объекте (работает по аналогии с interactTo)
-	//!NOT IMPLEMENTED NOW...
-	// "
-	// 	name:Перенаправлять взаимодействие
-	// 	desc:При включении данного свойства при взаимодействии с объектами будет вызвано событие ""При взаимодействии с целью"" вместо ""При взаимодействии предметом"".
-	// 	prop:all
-	// 	classprop:1
-	// 	return:bool:Выполнять перенаправление взаиомдействия.
-	// 	defval:false
-	// " node_var
-	// var(redirectInteractTarget,false);
+	
 
-	// "
-	// 	name:При взаимодействии с целью
-	// 	desc:Вызывается при взаимодействии с целью с помощью предмета в активной руке (""ЛКМ"" с предметом по цели). Для работы этой точки входа вместо ""При взаимодействии с целью"" включите свойство ""Перенаправлять взаимодействие"".
-	// 	type:event
-	// 	out:GameObject:Цель:Игровой объект, к которому применено действие
-	// 	out:BasicMob:Персонаж:Тот, кто инициировал действие по отношению к цели.
-	// " node_met
-	// func(_interactToWrapper)
-	// {
-	// 	objParams_2(_target,_usr);
-	// };
+	"
+		name:При взаимодействии с целью
+		desc:Вызывается при взаимодействии с целью с помощью предмета в активной руке (""ЛКМ"" с предметом по цели). Для работы этой точки входа вместо ""При взаимодействии с целью"" включите свойство ""Перенаправлять взаимодействие"".
+		type:event
+		out:GameObject:Цель:Игровой объект, к которому применено действие.
+		out:BasicMob:Персонаж:Тот, кто инициировал действие по отношению к цели.
+	" node_met
+	func(_interactToWrapper)
+	{
+		objParams_2(_target,_usr);
+	};
 
-	// func(interactTo)
-	// {
-	// 	objParams_2(_target,_usr);
-	// 	callSelfParams(_interactToWrapper,_target arg _usr);
-	// };
+	func(interactTo)
+	{
+		objParams_2(_target,_usr);
+		callSelfParams(_interactToWrapper,_target arg _usr);
+	};
 
-	// func(callBaseInteractTo)
-	// {
-	// 	objParams();
-	// 	callSelf(callBaseClickTarget);
-	// };
+	func(callBaseInteractTo)
+	{
+		objParams();
+		callSelf(callBaseClickTarget);
+	};
 
 region(OnClick)
 	"
