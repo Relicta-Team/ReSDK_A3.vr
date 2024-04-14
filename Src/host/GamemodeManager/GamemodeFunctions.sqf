@@ -219,7 +219,7 @@ gm_setLobbySound = {
 gm_onChangeState = {
 	params ["_newState"];
 
-	[format["gm::onChangeState() - new state is %1",_newState]] call gameLog;
+	[format["gm::onChangeState() - new state is %1 (%2)",_newState,_newState call gm_getState]] call gameLog;
 
 	private _oldState = gm_state;
 	netSetGlobal(gm_state,_newState);
