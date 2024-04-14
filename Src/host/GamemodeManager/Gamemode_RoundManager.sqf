@@ -402,11 +402,11 @@ gm_spawnPreparedClients = {
 };
 
 gm_handleDefineHiddenAntags = {
-	private _index = 0;
 	private _countInGame = count gm_preparedClients;
 	private _countProbHiddenAntags = count gm_antagClientsHidden;
 	private _curClient = nullPtr;
 	private _mob = nullPtr;
+	private _index = 1;
 	
 	{
 		_curClient = _x;
