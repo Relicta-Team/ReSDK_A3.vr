@@ -133,9 +133,6 @@ gm_startRound = {
 	//Запускаем основной поток проверки финиша
 	call gm_startMainThread;
 
-	//вызываем событие при старте раунда
-	callFunc(gm_currentMode,onRoundBegin);
-
 	//Спец методы
 	trace("ROUND STARTED");
 

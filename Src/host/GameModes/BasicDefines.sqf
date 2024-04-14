@@ -97,12 +97,6 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		objParams();
 	};
 
-	//!Устаревший метод. Используйте postSetup
-	func(onRoundBegin)
-	{
-		objParams();
-	};
-
 	//Проверка финиша. Должен возвращать больше 0
 	func(checkFinish)
 	{
