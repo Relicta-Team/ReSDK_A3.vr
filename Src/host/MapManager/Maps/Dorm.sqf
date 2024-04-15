@@ -57,7 +57,7 @@ _4044_447754020_6936011_23363 = ['IStruct',[4044.45,4020.69,11.2336],0,[0,0,1], 
 ['BoardWoodenBox',[4018,4026.59,9.9849],355,[0,0,1]] call InitStruct; 
 ['CaseBedroomSmall',[4018.01,4025.54,9.96996],180,[0,0,1]] call InitStruct; 
 ['CaseBedroomSmall',[4018.03,4027.52,9.99531],180,[0,0,1]] call InitStruct; 
-['WallmountedMedicalCabinet',[4026.81,4028.2,10.9557],90,[0,0,1]] call InitStruct; 
+_4026_811774028_2036110_95566 = ['WallmountedMedicalCabinet',[4026.81,4028.2,10.9557],90,[0,0,1]] call InitStruct; 
 ['MeatGrinder',[4020.11,4020.51,10.784],265,[0,0,1]] call InitStruct; 
 ['MeatGrinder',[4023.26,4020.61,10.8025],255.001,[0,0,1]] call InitStruct; 
 ['SteelGreenCabinet',[4017.96,4028.32,9.99137],0,[0,0,1]] call InitStruct; 
@@ -117,6 +117,7 @@ _4029_571534030_3750010_50000 = ['KeyHolder',[4029.57,4030.38,10.5],180,[0,0,1]]
 ['ButterPiece',[4026.95,4031.81,15.7439,true],335,[-0.00590623,-0.00389598,0.999975]] call InitItem; 
 ['ButterPiece',[4026.95,4031.86,15.7449,true],45.0002,[-0.00567777,0.00421856,0.999975]] call InitItem; 
 ['FoodPlate',[4026.93,4031.83,15.7495,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+_4032_423834032_4235810_38512 = ['SteelMedicalBox',[4032.42,4032.42,15.3813,true],[4.25984e-008,4.85035e-007,1],[-0.0871557,-0.996195,4.86902e-007]] call InitItem; 
 ['LuxuryDoubleBed',[4044.56,4033.86,13.0485],0.000122943,[0,0,1], {go_editor_globalRefs set ["RCexDormBed",_thisObj];
 }] call InitStruct; 
 ['Shelves',[4048.72,4030.74,13.0454],90,[0,0,1]] call InitStruct; 
@@ -1459,6 +1460,10 @@ if (!isNil'_4044_447754020_6936011_23363') then {
 	_4044_447754020_6936011_23363 setvariable ['name',"Мытьё"];
 	_4044_447754020_6936011_23363 setvariable ['desc',"Так сделано, что сверху течёт струя прямо на голову"];
 };
+if (!isNil'_4026_811774028_2036110_95566') then {
+	[_4026_811774028_2036110_95566,'Rag',3,100] call (_4026_811774028_2036110_95566 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4026_811774028_2036110_95566,'CetalinBox',1,100] call (_4026_811774028_2036110_95566 getvariable 'proto' getvariable 'createItemInContainer');
+};
 if (!isNil'_4037_618654032_218759_84451') then {
 	_4037_618654032_218759_84451 setvariable ['name',"Камин"];
 	_4037_618654032_218759_84451 setvariable ['desc',"Тепло и уютно согревает комнату, на огонь приятно смотреть"];
@@ -1473,6 +1478,15 @@ if (!isNil'_4029_571534030_3750010_50000') then {
 	[_4029_571534030_3750010_50000,'Key',2,100,[["var","name","Ключ от подсобки"],["var","preinit@__keytypesstr","PodsobDorm"]]] call (_4029_571534030_3750010_50000 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4029_571534030_3750010_50000,'Key',2,100,[["var","name","Площадка"],["var","preinit@__keytypesstr","PloshadkaDorm"]]] call (_4029_571534030_3750010_50000 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4029_571534030_3750010_50000,'Key',2,100,[["var","name","Ключ от комнаты 201"],["var","preinit@__keytypesstr","key201"]]] call (_4029_571534030_3750010_50000 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4032_423834032_4235810_38512') then {
+	[_4032_423834032_4235810_38512,'Bandage',1,100] call (_4032_423834032_4235810_38512 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4032_423834032_4235810_38512,'Bandage',1,50] call (_4032_423834032_4235810_38512 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4032_423834032_4235810_38512,'Rag',1,100] call (_4032_423834032_4235810_38512 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4032_423834032_4235810_38512,'NeedleWithThreads',1,100] call (_4032_423834032_4235810_38512 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4032_423834032_4235810_38512,'NeedleWithThreads',1,50] call (_4032_423834032_4235810_38512 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4032_423834032_4235810_38512,'CetalinBox',1,100] call (_4032_423834032_4235810_38512 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4032_423834032_4235810_38512,'KoradizinBox',1,100] call (_4032_423834032_4235810_38512 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_4045_883304034_7033714_16785') then {
 	_4045_883304034_7033714_16785 setvariable ['desc',"Важные звяковые документы с фабрики"];
