@@ -71,6 +71,28 @@ _4017_960214028_317639_99137 = ['SteelGreenCabinet',[4017.96,4028.32,9.99137],0,
 ['SmallRedseatChair',[4022.47,4027.29,10.0007],249.998,[0,0,1]] call InitItem; 
 ['MatchBox',[4019.49,4021.14,10.7991],330,[0,0,1]] call InitItem; 
 ['KitchenKnife',[4018.07,4025.56,15.5368,true],[-0.766707,0.641998,1.04215e-006],[-0.641982,-0.766688,-0.00699091]] call InitItem; 
+['MetalCup',[4017.84,4027.49,10.5581],0,[0,0,1]] call InitItem; 
+['GlassLargeBowl',[4025.53,4028.96,10.648],0,[0,0,1]] call InitItem; 
+['Bucket',[4023.56,4022.09,15.0009,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['WoodenBucket',[4018.57,4028.88,15.2523,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
+['WoodenBucket',[4023.51,4021.56,15.2306,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['GlassBottle',[4025.2,4028.99,10.2],0,[0,0,1]] call InitItem; 
+['GlassBottle',[4025.89,4028.93,10.2],0,[0,0,1]] call InitItem; 
+['GlassBottle',[4025.9,4028.94,10.65],0,[0,0,1]] call InitItem; 
+['Mug',[4023.67,4022.95,10.9055],0,[0,0,1]] call InitItem; 
+['GlassLargeBreaker',[4025.85,4028.98,11.55],0,[0,0,1]] call InitItem; 
+['CuttingBoard',[4018.96,4021.05,10.81],280,[0,0,1]] call InitItem; 
+['CuttingBoard',[4025.19,4028.95,11.1],95,[0,0,1]] call InitItem; 
+['CuttingBoard',[4022.54,4020.7,10.8222],280,[0,0,1]] call InitItem; 
+['Kastrula',[4025.18,4028.95,11.55],0,[0,0,1]] call InitItem; 
+['Kastrula',[4023.43,4022.64,15.8675,true],0.43688,[-0.0868241,0.0871557,0.992404]] call InitItem; 
+['OlderWoodenCup',[4018.12,4027.42,10.5581],0,[0,0,1]] call InitItem; 
+['Polovnik',[4023.43,4022.54,15.9891,true],0,[-0.00659628,0.705945,0.708235]] call InitItem; 
+['FoodPlate',[4022.87,4020.94,10.8311],0,[0,0,1]] call InitItem; 
+['SoupPlate',[4020.55,4027.76,10.8459],0,[0,0,1]] call InitItem; 
+['SoupPlate',[4019.35,4020.52,10.81],0,[0,0,1]] call InitItem; 
+['SoupPlate',[4023.42,4022.9,15.8317,true],0,[0,-0.34202,0.939693]] call InitItem; 
+['WoodenCup',[4018.09,4027.63,15.6322,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
 ['SmallWoodenTable',[4046.2,4032.16,10.0848],0,[0,0,1]] call InitStruct; 
 ['OldGraveFence',[4038.03,4032.23,10.2757],0,[0,0,1]] call InitStruct; 
 ['OldGraveFence4',[4037.68,4032.23,17.2522,true],180,[0,-1.91609e-005,-1]] call InitStruct; 
@@ -177,6 +199,7 @@ if ((random 1) < 0.5) then {
 	['Bread',[4042.44,4024.05,10.65],200,[0,0,1]] call InitItem; 
 };
 ['Shelves',[4042.43,4023.99,10.1],90,[0,0,1]] call InitStruct; 
+_4037_090334021_7871110_83532 = ['KeyHolder',[4037.09,4021.79,10.8353],180,[0,0,1]] call InitStruct; 
 ['BloodPoolSmall',[4034.53,4030.24,13.0431],0,[0,0,1]] call InitItem; 
 ['WoodenTableHandmade',[4035.17,4034.53,13.0528],182,[0,0,1]] call InitStruct; 
 ['SquareWoodenBox',[4032.51,4030.15,13.0528],345,[0,0,1], {go_editor_globalRefs set ["KoldyrAlkoBox",_thisObj];
@@ -444,7 +467,7 @@ _4047_938724023_2272913_02483 = ['IStruct',[4047.94,4023.23,18.0248,true],[0.258
 ['TorchDisabled',[4031.31,4020.63,11.0925],0,[0,0,1]] call InitItem; 
 ['SquareWoodenBox',[4032.88,4022.45,10.1],0,[0,0,1]] call InitStruct; 
 ['WoodenDoor',[4032.75,4035.13,13],0,[0,0,1]] call InitStruct; 
-_4034_250004029_3750013_00000 = ['WoodenDoor',[4034.25,4029.38,13],180,[0,0,1]] call InitStruct; 
+_4034_250004029_3750013_00000 = ['WoodenDoor',[4034.25,4029.38,13],180,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKoldyrDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4040_250004029_3750013_00000 = ['WoodenDoor',[4040.25,4029.38,13],180,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RSlesarDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4044_750004025_6250010_12500 = ['WoodenDoor',[4044.75,4025.63,10.125],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; SortirDorm"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4047_125004025_6250010_12500 = ['WoodenDoor',[4047.13,4025.63,10.125],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; SortirDorm"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
@@ -1441,28 +1464,6 @@ _4067_344484054_055669_90783 = ['IStruct',[4067.34,4054.06,9.90783],90.0006,[0,0
 ['SmallChair',[4067.14,4054.85,10.0274],0,[0,0,1]] call InitItem; 
 _4068_585944055_1311012_67509 = ['IStruct',[4068.59,4055.13,17.976,true],[-4.37114e-008,6.71544e-007,1],[-1,0,-4.37114e-008], {_thisObj setvariable ['model','ml_shabut\exoduss\zhelstenabig.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['BrickThinWall',[4071.63,4056.23,10],270,[0,0,1]] call InitStruct; 
-['CuttingBoard',[4018.96,4021.05,10.81],280,[0,0,1]] call InitItem; 
-['FoodPlate',[4022.87,4020.94,10.8311],0,[0,0,1]] call InitItem; 
-['CuttingBoard',[4025.19,4028.95,11.1],95,[0,0,1]] call InitItem; 
-['GlassLargeBowl',[4025.53,4028.96,10.648],0,[0,0,1]] call InitItem; 
-['GlassLargeBreaker',[4025.85,4028.98,11.55],0,[0,0,1]] call InitItem; 
-['GlassBottle',[4025.2,4028.99,10.2],0,[0,0,1]] call InitItem; 
-['GlassBottle',[4025.89,4028.93,10.2],0,[0,0,1]] call InitItem; 
-['GlassBottle',[4025.9,4028.94,10.65],0,[0,0,1]] call InitItem; 
-['Kastrula',[4025.18,4028.95,11.55],0,[0,0,1]] call InitItem; 
-['SoupPlate',[4020.55,4027.76,10.8459],0,[0,0,1]] call InitItem; 
-['SoupPlate',[4019.35,4020.52,10.81],0,[0,0,1]] call InitItem; 
-['SoupPlate',[4023.42,4022.9,15.8317,true],0,[0,-0.34202,0.939693]] call InitItem; 
-['Kastrula',[4023.43,4022.64,15.8675,true],0.43688,[-0.0868241,0.0871557,0.992404]] call InitItem; 
-['Mug',[4023.67,4022.95,10.9055],0,[0,0,1]] call InitItem; 
-['CuttingBoard',[4022.54,4020.7,10.8222],280,[0,0,1]] call InitItem; 
-['MetalCup',[4017.84,4027.49,10.5581],0,[0,0,1]] call InitItem; 
-['WoodenCup',[4018.09,4027.63,15.6322,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
-['OlderWoodenCup',[4018.12,4027.42,10.5581],0,[0,0,1]] call InitItem; 
-['WoodenBucket',[4018.57,4028.88,15.2523,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
-['Bucket',[4023.56,4022.09,15.0009,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
-['WoodenBucket',[4023.51,4021.56,15.2306,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
-['Polovnik',[4023.43,4022.54,15.9891,true],0,[-0.00659628,0.705945,0.708235]] call InitItem; 
 
 
 
@@ -1538,6 +1539,13 @@ if (!isNil'_4032_423834032_4235810_38512') then {
 if (!isNil'_4045_883304034_7033714_16785') then {
 	_4045_883304034_7033714_16785 setvariable ['desc',"Важные звяковые документы с фабрики"];
 };
+if (!isNil'_4037_090334021_7871110_83532') then {
+	[_4037_090334021_7871110_83532,'Key',1,100,[["var","name","Дубликат ключа от комнаты 202"],["var","preinit@__keytypesstr","RCherDormKey"]]] call (_4037_090334021_7871110_83532 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4037_090334021_7871110_83532,'Key',1,100,[["var","name","Дубликат ключа от комнаты 203"],["var","preinit@__keytypesstr","RCexDormKey"]]] call (_4037_090334021_7871110_83532 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4037_090334021_7871110_83532,'Key',1,100,[["var","name","Дубликат ключа от комнаты 204"],["var","preinit@__keytypesstr","RSlesarDormKey"]]] call (_4037_090334021_7871110_83532 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4037_090334021_7871110_83532,'Key',1,100,[["var","name","Ключ от комнаты 205"],["var","desc","Колдырь потерял его по пьяни"],["var","preinit@__keytypesstr","RKoldyrDormKey"]]] call (_4037_090334021_7871110_83532 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4037_090334021_7871110_83532,'Key',1,100,[["var","name","Дубликат ключа от комнаты 206"],["var","preinit@__keytypesstr","RMolDormKey"]]] call (_4037_090334021_7871110_83532 getvariable 'proto' getvariable 'createItemInContainer');
+};
 if (!isNil'_4027_207034034_2902813_15587') then {
 	_4027_207034034_2902813_15587 setvariable ['initialcategory',"milk"];
 };
@@ -1577,11 +1585,9 @@ if (!isNil'_4040_250004029_3750013_00000') then {
 };
 if (!isNil'_4044_750004025_6250010_12500') then {
 	_4044_750004025_6250010_12500 setvariable ['desc',"Умывальная"];
-	_4044_750004025_6250010_12500 setvariable ['islocked',true];
 };
 if (!isNil'_4047_125004025_6250010_12500') then {
 	_4047_125004025_6250010_12500 setvariable ['desc',"Туалет"];
-	_4047_125004025_6250010_12500 setvariable ['islocked',true];
 };
 if (!isNil'_4049_000004021_5000010_12500') then {
 	_4049_000004021_5000010_12500 setvariable ['desc',"Запасный выход"];
@@ -1605,7 +1611,6 @@ if (!isNil'_4044_750004025_6250013_00000') then {
 };
 if (!isNil'_4026_625004027_3750010_00000') then {
 	_4026_625004027_3750010_00000 setvariable ['desc',"Кухня"];
-	_4026_625004027_3750010_00000 setvariable ['islocked',true];
 };
 if (!isNil'_4025_625004023_3750010_00000') then {
 	_4025_625004023_3750010_00000 setvariable ['islocked',true];
