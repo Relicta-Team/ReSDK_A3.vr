@@ -53,14 +53,14 @@ _4044_447754020_6936011_23363 = ['IStruct',[4044.45,4020.69,11.2336],0,[0,0,1], 
 ['WoodenChair',[4023.21,4026.57,9.99191],169.998,[0,0,1]] call InitItem; 
 ['WoodenChair',[4022.45,4028.51,9.93962],269.998,[0,0,1]] call InitItem; 
 ['ChairLibrary',[4023.97,4028.63,9.98945],350,[0,0,1]] call InitItem; 
-['RedSteelBox',[4017.91,4028.29,11.5449],85,[0,0,1]] call InitStruct; 
-['BoardWoodenBox',[4018,4026.59,9.9849],355,[0,0,1]] call InitStruct; 
-['CaseBedroomSmall',[4018.01,4025.54,9.96996],180,[0,0,1]] call InitStruct; 
-['CaseBedroomSmall',[4018.03,4027.52,9.99531],180,[0,0,1]] call InitStruct; 
+_4017_911874028_2924811_54493 = ['RedSteelBox',[4017.91,4028.29,11.5449],85,[0,0,1]] call InitStruct; 
+_4017_999274026_593519_98490 = ['BoardWoodenBox',[4018,4026.59,9.9849],355,[0,0,1]] call InitStruct; 
+_4018_009774025_542729_96996 = ['CaseBedroomSmall',[4018.01,4025.54,9.96996],180,[0,0,1]] call InitStruct; 
+_4018_027594027_522719_99531 = ['CaseBedroomSmall',[4018.03,4027.52,9.99531],180,[0,0,1]] call InitStruct; 
 _4026_811774028_2036110_95566 = ['WallmountedMedicalCabinet',[4026.81,4028.2,10.9557],90,[0,0,1]] call InitStruct; 
 ['MeatGrinder',[4020.11,4020.51,10.784],265,[0,0,1]] call InitStruct; 
 ['MeatGrinder',[4023.26,4020.61,10.8025],255.001,[0,0,1]] call InitStruct; 
-['SteelGreenCabinet',[4017.96,4028.32,9.99137],0,[0,0,1]] call InitStruct; 
+_4017_960214028_317639_99137 = ['SteelGreenCabinet',[4017.96,4028.32,9.99137],0,[0,0,1]] call InitStruct; 
 ['FryingPan',[4021.27,4021.01,10.7477],145,[0,0,1]] call InitItem; 
 ['ContainerGreen',[4019.71,4020.91,15.2652,true],[-0.996195,9.65599e-007,0.0871556],[0.0871556,0,0.996195]] call InitStruct; 
 ['CandleDisabled',[4023.15,4027.95,10.8307],0,[0,0,1]] call InitItem; 
@@ -1441,6 +1441,28 @@ _4067_344484054_055669_90783 = ['IStruct',[4067.34,4054.06,9.90783],90.0006,[0,0
 ['SmallChair',[4067.14,4054.85,10.0274],0,[0,0,1]] call InitItem; 
 _4068_585944055_1311012_67509 = ['IStruct',[4068.59,4055.13,17.976,true],[-4.37114e-008,6.71544e-007,1],[-1,0,-4.37114e-008], {_thisObj setvariable ['model','ml_shabut\exoduss\zhelstenabig.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['BrickThinWall',[4071.63,4056.23,10],270,[0,0,1]] call InitStruct; 
+['CuttingBoard',[4018.96,4021.05,10.81],280,[0,0,1]] call InitItem; 
+['FoodPlate',[4022.87,4020.94,10.8311],0,[0,0,1]] call InitItem; 
+['CuttingBoard',[4025.19,4028.95,11.1],95,[0,0,1]] call InitItem; 
+['GlassLargeBowl',[4025.53,4028.96,10.648],0,[0,0,1]] call InitItem; 
+['GlassLargeBreaker',[4025.85,4028.98,11.55],0,[0,0,1]] call InitItem; 
+['GlassBottle',[4025.2,4028.99,10.2],0,[0,0,1]] call InitItem; 
+['GlassBottle',[4025.89,4028.93,10.2],0,[0,0,1]] call InitItem; 
+['GlassBottle',[4025.9,4028.94,10.65],0,[0,0,1]] call InitItem; 
+['Kastrula',[4025.18,4028.95,11.55],0,[0,0,1]] call InitItem; 
+['SoupPlate',[4020.55,4027.76,10.8459],0,[0,0,1]] call InitItem; 
+['SoupPlate',[4019.35,4020.52,10.81],0,[0,0,1]] call InitItem; 
+['SoupPlate',[4023.42,4022.9,15.8317,true],0,[0,-0.34202,0.939693]] call InitItem; 
+['Kastrula',[4023.43,4022.64,15.8675,true],0.43688,[-0.0868241,0.0871557,0.992404]] call InitItem; 
+['Mug',[4023.67,4022.95,10.9055],0,[0,0,1]] call InitItem; 
+['CuttingBoard',[4022.54,4020.7,10.8222],280,[0,0,1]] call InitItem; 
+['MetalCup',[4017.84,4027.49,10.5581],0,[0,0,1]] call InitItem; 
+['WoodenCup',[4018.09,4027.63,15.6322,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
+['OlderWoodenCup',[4018.12,4027.42,10.5581],0,[0,0,1]] call InitItem; 
+['WoodenBucket',[4018.57,4028.88,15.2523,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
+['Bucket',[4023.56,4022.09,15.0009,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['WoodenBucket',[4023.51,4021.56,15.2306,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['Polovnik',[4023.43,4022.54,15.9891,true],0,[-0.00659628,0.705945,0.708235]] call InitItem; 
 
 
 
@@ -1460,9 +1482,34 @@ if (!isNil'_4044_447754020_6936011_23363') then {
 	_4044_447754020_6936011_23363 setvariable ['name',"Мытьё"];
 	_4044_447754020_6936011_23363 setvariable ['desc',"Так сделано, что сверху течёт струя прямо на голову"];
 };
+if (!isNil'_4017_911874028_2924811_54493') then {
+	[_4017_911874028_2924811_54493,'Kastrula',1,100] call (_4017_911874028_2924811_54493 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4017_911874028_2924811_54493,'GlassBottle',1,100] call (_4017_911874028_2924811_54493 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4017_999274026_593519_98490') then {
+	[_4017_999274026_593519_98490,'WoodenCup',2,100] call (_4017_999274026_593519_98490 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4017_999274026_593519_98490,'Cup',1,100] call (_4017_999274026_593519_98490 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4017_999274026_593519_98490,'MetalCup',1,100] call (_4017_999274026_593519_98490 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4017_999274026_593519_98490,'OlderWoodenCup',2,100] call (_4017_999274026_593519_98490 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4018_009774025_542729_96996') then {
+	[_4018_009774025_542729_96996,'Rag',1,100] call (_4018_009774025_542729_96996 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4018_009774025_542729_96996,'CuttingBoard',1,100] call (_4018_009774025_542729_96996 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4018_027594027_522719_99531') then {
+	[_4018_027594027_522719_99531,'MatchBox',1,100] call (_4018_027594027_522719_99531 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4018_027594027_522719_99531,'Polovnik',1,100] call (_4018_027594027_522719_99531 getvariable 'proto' getvariable 'createItemInContainer');
+};
 if (!isNil'_4026_811774028_2036110_95566') then {
 	[_4026_811774028_2036110_95566,'Rag',3,100] call (_4026_811774028_2036110_95566 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4026_811774028_2036110_95566,'CetalinBox',1,100] call (_4026_811774028_2036110_95566 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4017_960214028_317639_99137') then {
+	[_4017_960214028_317639_99137,'GlassLargeBowl',1,100] call (_4017_960214028_317639_99137 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4017_960214028_317639_99137,'Mug',1,100] call (_4017_960214028_317639_99137 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4017_960214028_317639_99137,'GlassGoblet',1,100] call (_4017_960214028_317639_99137 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4017_960214028_317639_99137,'SoupPlate',4,100] call (_4017_960214028_317639_99137 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4017_960214028_317639_99137,'FoodPlate',5,100] call (_4017_960214028_317639_99137 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_4037_618654032_218759_84451') then {
 	_4037_618654032_218759_84451 setvariable ['name',"Камин"];
