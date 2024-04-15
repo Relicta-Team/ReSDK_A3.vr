@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=1204;
+		nextID=1312;
 	};
 	class Camera
 	{
-		pos[]={4025.6863,20.336472,4036.4363};
-		dir[]={0.8928473,-0.30552417,0.33089343};
-		up[]={0.28648469,0.95218247,0.10617247};
-		aside[]={0.34750918,1.1220254e-007,-0.93767977};
+		pos[]={4031.0256,17.217941,4032.1006};
+		dir[]={0.1696111,-0.62144011,-0.76489311};
+		up[]={0.13453408,0.78346229,-0.60670698};
+		aside[]={-0.97629488,1.0419171e-007,-0.21648744};
 	};
 };
 binarizationWanted=0;
@@ -788,6 +788,7 @@ class Mission
 				{
 					dataType="Layer";
 					name="Сортир и мытьё";
+					state=1;
 					class Entities
 					{
 						items=9;
@@ -869,7 +870,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4045.5151,15.946254,4022.7898};
-								angles[]={0,4.7123909,-0};
+								angles[]={0,4.7123909,0};
 							};
 							side="Empty";
 							flags=5;
@@ -1591,6 +1592,7 @@ class Mission
 				{
 					dataType="Layer";
 					name="Комната отдыха";
+					state=1;
 					class Entities
 					{
 						items=18;
@@ -1999,7 +2001,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""KeyHolder""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от кухни""""],[""""preinit@__keytypesstr"""",""""KitchenDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от туалетов""""],[""""preinit@__keytypesstr"""",""""SortirDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от подсобки""""],[""""preinit@__keytypesstr"""",""""PodsobDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Площадка""""],[""""preinit@__keytypesstr"""",""""PloshadkaDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от комнаты 201""""],[""""desc"""",""""key201""""]]],[""""class"""",""""Key""""]]}"",2]]]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""KeyHolder""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от кухни""""],[""""preinit@__keytypesstr"""",""""KitchenDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от туалетов""""],[""""preinit@__keytypesstr"""",""""SortirDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от подсобки""""],[""""preinit@__keytypesstr"""",""""PodsobDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Площадка""""],[""""preinit@__keytypesstr"""",""""PloshadkaDorm""""]]],[""""class"""",""""Key""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от комнаты 201""""],[""""preinit@__keytypesstr"""",""""key201""""]]],[""""class"""",""""Key""""]]}"",2]]]]}";
 							};
 							id=2730;
 							type="sdaykey";
@@ -7742,7 +7744,7 @@ class Mission
 									class PositionInfo
 									{
 										position[]={4025.625,16.091955,4023.375};
-										angles[]={0,3.2288635,-0};
+										angles[]={0,3.2288635,0};
 									};
 									side="Empty";
 									flags=1;
@@ -9840,11 +9842,11 @@ class Mission
 									};
 									id=4402;
 									type="Land_kr_stena_3x3";
-									atlOffset=8.0955582;
+									atlOffset=8.0955572;
 								};
 							};
 							id=2448;
-							atlOffset=0.43069172;
+							atlOffset=0.43069077;
 						};
 						class Item4
 						{
@@ -10490,7 +10492,7 @@ class Mission
 						};
 					};
 					id=3758;
-					atlOffset=0.47275352;
+					atlOffset=0.47275257;
 				};
 				class Item15
 				{
@@ -20730,7 +20732,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3969.2244,16.809484,4063.7415};
-				angles[]={0,4.7123899,-0};
+				angles[]={0,4.7123899,0};
 			};
 			side="Empty";
 			flags=1;
@@ -20748,7 +20750,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4090.0918,17.237005,4049.8984};
-				angles[]={0,1.5707963,-0};
+				angles[]={0,1.5707963,0};
 			};
 			side="Empty";
 			flags=1;

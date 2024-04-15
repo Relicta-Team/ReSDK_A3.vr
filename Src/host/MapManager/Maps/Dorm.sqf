@@ -1333,7 +1333,7 @@ if (!isNil'_4029_571534030_3750010_50000') then {
 	[_4029_571534030_3750010_50000,'Key',2,100,[["var","name","Ключ от туалетов"],["var","preinit@__keytypesstr","SortirDorm"]]] call (_4029_571534030_3750010_50000 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4029_571534030_3750010_50000,'Key',2,100,[["var","name","Ключ от подсобки"],["var","preinit@__keytypesstr","PodsobDorm"]]] call (_4029_571534030_3750010_50000 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4029_571534030_3750010_50000,'Key',2,100,[["var","name","Площадка"],["var","preinit@__keytypesstr","PloshadkaDorm"]]] call (_4029_571534030_3750010_50000 getvariable 'proto' getvariable 'createItemInContainer');
-	[_4029_571534030_3750010_50000,'Key',2,100,[["var","name","Ключ от комнаты 201"],["var","desc","key201"]]] call (_4029_571534030_3750010_50000 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4029_571534030_3750010_50000,'Key',2,100,[["var","name","Ключ от комнаты 201"],["var","preinit@__keytypesstr","key201"]]] call (_4029_571534030_3750010_50000 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_4045_883304034_7033714_16785') then {
 	_4045_883304034_7033714_16785 setvariable ['desc',"Важные звяковые документы с фабрики"];
