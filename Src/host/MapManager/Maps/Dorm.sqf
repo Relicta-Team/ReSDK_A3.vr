@@ -1218,14 +1218,13 @@ _3977_916754034_9587417_78314 = ['WallmountedMedicalCabinet',[3977.92,4034.96,22
 ['BigClothCabinet',[3974.65,4031.7,21.4196,true],269.185,[-4.5079e-005,0.00257916,0.999997]] call InitStruct; 
 ['LargeTwoStoreyStoneHouse',[3979.5,4033,16.25],180,[0,0,1]] call InitStruct; 
 _3981_826424029_5366216_32000 = ['SteelBrownDoor',[3981.83,4029.54,16.32],270,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RUchastDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-['SteelThinWallSmall',[3976.61,4034.8,16.32],0,[0,0,1]] call InitStruct; 
 ['SteelThinWallSmall',[3974.26,4031.5,19.24],90,[0,0,1]] call InitStruct; 
 ['SteelThinWallSmall',[3974.19,4029.71,19.2],270,[0,0,1]] call InitStruct; 
 ['SteelThinWallSmall',[3976.56,4034.79,19.2],0,[0,0,1]] call InitStruct; 
 ['SmallDirtGrey',[3983.47,4030,14.8975],0,[0,0,1]] call InitStruct; 
-['LuxuryClayWall',[3982.63,4027,21.064,true],0,[0.00699926,0.00103578,0.999975]] call InitStruct; 
-['LuxuryClayWall',[3983.88,4035,21.064,true],0,[0.00699926,0.00103578,0.999975]] call InitStruct; 
 ['Briefcase',[3978.46,4034.19,17.2271],0,[0,0,1]] call InitItem; 
+['SmallDirtGrey',[3977.05,4037.02,14.6765],90,[0,0,1]] call InitStruct; 
+_3976_581054034_8132316_43925 = ['SteelBrownDoor',[3976.58,4034.81,16.4392],0.000475552,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RUchastDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['HouseWithGarageSmall1',[3992.13,4035.06,15],180,[0,0,1]] call InitStruct; 
 ['MediumWoodenTable',[3987.24,4035.65,15.0733],0,[0,0,1]] call InitStruct; 
 ['SmallWoodenTable',[3993.71,4036.88,15.0593],0,[0,0,1]] call InitStruct; 
@@ -1301,6 +1300,34 @@ _4121_199224026_6320810_12870 = ['IStruct',[4121.2,4026.63,15.1384,true],0,[0.00
 ['LargeConcreteWallWithReinforcement',[3969.22,4063.74,13.3088],270,[0,0,1]] call InitStruct; 
 ['LargeConcreteWallWithReinforcement',[4090.09,4049.9,13.7363],90,[0,0,1]] call InitStruct; 
 ['ToolStraigthPipe',[4067.14,4068.09,15.6197,true],6.51908e-009,[-0.939693,0,0.34202]] call InitItem; 
+['TinBigFence',[3980.55,4024.88,14.9597],270,[0,0,1]] call InitStruct; 
+['TinBigFence',[3980.52,4024.89,16.625],270,[0,0,1]] call InitStruct; 
+_3980_522714022_0053714_74117 = ['Wicket',[3980.52,4022.01,14.7412],0,[0,0,1]] call InitStruct; 
+['MediumPileOfDirtAndStones',[3977.95,4019.35,21.328,true],0,[-0.00566278,0.505982,0.862525]] call InitStruct; 
+['SquareWoodenBox',[3974.74,4026.31,14.7477],5,[0,0,1]] call InitStruct; 
+_3976_703864026_4978014_74382 = ['RDetMailBox',[3976.7,4026.5,19.7438,true],0,[0.00659634,0.00161941,0.999977]] call InitStruct; 
+['WoodenWeaponBox',[3974.79,4024.93,14.7316],75,[0,0,1]] call InitStruct; 
+['SteelCanopySmall',[3976.38,4025.62,15.2201],0,[0,0,1]] call InitStruct; 
+['SquareWoodenBox',[3979.85,4023.65,14.723],5,[0,0,1]] call InitStruct; 
+_3974_891364021_7397514_77565 = ['WoodenToiletSmall',[3974.89,4021.74,14.7757],80,[0,0,1]] call InitStruct; 
+['SquareWoodenBox',[3978.08,4034,19.2385],355,[0,0,1]] call InitStruct; 
+['RedSteelBox',[3978.07,4034.06,20.191],310,[0,0,1]] call InitStruct; 
+['SmallWoodenTableHandmade',[3981.18,4031.95,19.2],85,[0,0,1]] call InitStruct; 
+['WoodenChair',[3980.56,4031.55,19.2],225,[0,0,1]] call InitItem; 
+['WoodenChair',[3981.18,4032.64,25.6755,true],[-0.0871615,0.996194,7.53972e-006],[-3.02838e-006,7.30355e-006,-1]] call InitItem; 
+['Lockpick',[3981.13,4032.65,20.1581],25,[0,0,1]] call InitItem; 
+['Lockpick',[3981.11,4032.59,20.1581],315,[0,0,1]] call InitItem; 
+if ((random 1) < 0.5) then {
+	['Crowbar',[3980.93,4029.9,24.2795,true],65,[0.00109178,-0.00233871,0.999997]] call InitItem; 
+};
+['SteelGreenCabinet',[3978.35,4029.78,19.2469],265,[0,0,1]] call InitStruct; 
+['SteelGreenCabinet',[3981.25,4034.06,16.3623],170,[0,0,1]] call InitStruct; 
+['CaseBedroomSmall',[3974.84,4034.26,19.2],205,[0,0,1]] call InitStruct; 
+_3981_222414031_8877020_15811 = ['CoinBag',[3981.22,4031.89,20.1581],0,[0,0,1]] call InitItem; 
+['LampKeroseneDisabled',[3981.27,4031.62,20.1555],5,[0,0,1]] call InitItem; 
+['MatchBox',[3981.04,4031.48,20.1573],0,[0,0,1]] call InitItem; 
+_3979_617684033_8132319_25614 = ['IStruct',[3979.62,4033.81,19.2561],175,[0,0,1], {_thisObj setvariable ['model','ca\structures_e\misc\misc_interier\carpet_2_ep1.p3d'];}] call InitStruct; // !!! realocated model !!!
+_3979_621344034_0034219_29673 = ['Key',[3979.62,4034,24.3009,true],120,[-0.00128955,-0.0022338,0.999997], {_thisObj setvariable ['preinit@__keytypesstr',"RUchastDormKletKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
 
 
 
@@ -1691,6 +1718,9 @@ if (!isNil'_3977_916754034_9587417_78314') then {
 if (!isNil'_3981_826424029_5366216_32000') then {
 	_3981_826424029_5366216_32000 setvariable ['islocked',true];
 };
+if (!isNil'_3976_581054034_8132316_43925') then {
+	_3976_581054034_8132316_43925 setvariable ['islocked',true];
+};
 if (!isNil'_3991_640634031_6001015_05929') then {
 	_3991_640634031_6001015_05929 setvariable ['islocked',true];
 };
@@ -1753,4 +1783,25 @@ if (!isNil'_4082_726324071_6984910_09816') then {
 };
 if (!isNil'_4075_615974070_1220710_18600') then {
 	_4075_615974070_1220710_18600 setvariable ['spawnpointname',"RBrodDorm"];
+};
+if (!isNil'_3980_522714022_0053714_74117') then {
+	_3980_522714022_0053714_74117 setvariable ['desc',"Замок стырен"];
+};
+if (!isNil'_3976_703864026_4978014_74382') then {
+	_3976_703864026_4978014_74382 setvariable ['name',"Длинный ящик"];
+	_3976_703864026_4978014_74382 setvariable ['desc',"Туда и человек влезет наверное"];
+};
+if (!isNil'_3974_891364021_7397514_77565') then {
+	_3974_891364021_7397514_77565 setvariable ['name',"Сортир"];
+	_3974_891364021_7397514_77565 setvariable ['desc',"Обыкновенный уличный сортир"];
+};
+if (!isNil'_3981_222414031_8877020_15811') then {
+	_3981_222414031_8877020_15811 setvariable ['name',"Мешочек c зубами"];
+	_3981_222414031_8877020_15811 setvariable ['desc',"Можно сыграть и отлично провести время"];
+	_3981_222414031_8877020_15811 setvariable ['countslots',16];
+	[_3981_222414031_8877020_15811,'Tooth',16,100] call (_3981_222414031_8877020_15811 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3979_621344034_0034219_29673') then {
+	_3979_621344034_0034219_29673 setvariable ['name',"Дубликат ключа от участка"];
+	_3979_621344034_0034219_29673 setvariable ['desc',"Если ты каким-то чудом его нашёл - молчи о нём и не говори никому!"];
 };
