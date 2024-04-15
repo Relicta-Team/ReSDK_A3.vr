@@ -110,6 +110,13 @@ _4029_571534030_3750010_50000 = ['KeyHolder',[4029.57,4030.38,10.5],180,[0,0,1]]
 ['Briefcase',[4026.74,4031.73,11.0808],95,[0,0,1]] call InitItem; 
 ['LuxuryRedCurtain',[4029.2,4034,6.86464],265,[0,0,1]] call InitStruct; 
 ['Notepad',[4032.46,4032.79,10.9329],0,[0,0,1]] call InitItem; 
+['Baton',[4026.93,4031.66,11.0688],280,[0,0,1]] call InitItem; 
+['WoodenChair',[4033.49,4033.84,10.067],20,[0,0,1]] call InitItem; 
+['BreadChopped',[4026.95,4031.38,15.7333,true],25,[-0.00678136,0.00201983,0.999975]] call InitItem; 
+['BreadChopped',[4026.85,4031.46,15.7321,true],335,[-0.00590623,-0.00389598,0.999975]] call InitItem; 
+['ButterPiece',[4026.95,4031.81,15.7439,true],335,[-0.00590623,-0.00389598,0.999975]] call InitItem; 
+['ButterPiece',[4026.95,4031.86,15.7449,true],45.0002,[-0.00567777,0.00421856,0.999975]] call InitItem; 
+['FoodPlate',[4026.93,4031.83,15.7495,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
 ['LuxuryDoubleBed',[4044.56,4033.86,13.0485],0.000122943,[0,0,1], {go_editor_globalRefs set ["RCexDormBed",_thisObj];
 }] call InitStruct; 
 ['Shelves',[4048.72,4030.74,13.0454],90,[0,0,1]] call InitStruct; 
@@ -435,15 +442,13 @@ _4047_938724023_2272913_02483 = ['IStruct',[4047.94,4023.23,18.0248,true],[0.258
 ['TorchDisabled',[4031.47,4020.57,11.0925],0,[0,0,1]] call InitItem; 
 ['TorchDisabled',[4031.31,4020.63,11.0925],0,[0,0,1]] call InitItem; 
 ['SquareWoodenBox',[4032.88,4022.45,10.1],0,[0,0,1]] call InitStruct; 
-['SteelGridDoorElectronic',[4034.9,4035.18,9.86502],180,[0,0,1], {go_editor_globalRefs set ["SteelGridDoorElectronic G:WlgXnagTMgc",_thisObj];
-}] call InitStruct; 
 ['WoodenDoor',[4032.75,4035.13,13],0,[0,0,1]] call InitStruct; 
 _4034_250004029_3750013_00000 = ['WoodenDoor',[4034.25,4029.38,13],180,[0,0,1]] call InitStruct; 
 _4040_250004029_3750013_00000 = ['WoodenDoor',[4040.25,4029.38,13],180,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RSlesarDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4044_750004025_6250010_12500 = ['WoodenDoor',[4044.75,4025.63,10.125],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; SortirDorm"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4047_125004025_6250010_12500 = ['WoodenDoor',[4047.13,4025.63,10.125],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; SortirDorm"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4049_000004021_5000010_12500 = ['WoodenDoor',[4049,4021.5,10.125],90,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; SortirDorm"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-_4033_000004031_1250010_00000 = ['WoodenDoor',[4033,4031.13,10],90,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; RZavZhilDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+_4032_871834031_1250010_00000 = ['WoodenDoor',[4032.87,4031.13,10],270,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; RZavZhilDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4026_375004033_3750010_00000 = ['WoodenDoor',[4026.38,4033.38,10],90,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; RZavZhilDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4038_500004025_6250013_00000 = ['WoodenDoor',[4038.5,4025.63,13],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"key201"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4044_750004025_6250013_00000 = ['WoodenDoor',[4044.75,4025.63,13],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RCherDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
@@ -456,9 +461,7 @@ _4041_039794028_960949_97046 = ['SteelGreenDoor',[4041.04,4028.96,9.97046],0.000
 _4026_375004027_5000013_00000 = ['SteelDoorThinSmall',[4026.38,4027.5,13],90.0001,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RZavZhilDormKey; PloshadkaDorm"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4018_500004029_2500013_12500 = ['Wicket',[4018.5,4029.25,13.125],90.0003,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RZavZhilDormKey; PloshadkaDorm"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4028_250004029_3750013_00000 = ['WoodenDoor',[4028.25,4029.38,13],180,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RMolDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-['SteelGridDoorElectronic',[4035.8,4029.19,9.34093],180,[0,0,1], {go_editor_globalRefs set ["SteelGridDoorElectronic G:WlgXnagTMgc (1)",_thisObj];
-}] call InitStruct; 
-['RustyCell',[4035.91,4029.19,9.34332],270,[0,0,1]] call InitStruct; 
+_4034_987794035_302499_87321 = ['SteelGridDoor',[4034.99,4035.3,9.87321],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RKomendantDormKey; RZavZhilDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['StoneBigLadderDouble',[4035.25,4022.75,9.75],180,[0,0,1]] call InitStruct; 
 _4026_750004031_750002_41766 = ['IStruct',[4026.75,4031.75,10.993,true],180,[0.00699831,0.00103626,0.999975], {_thisObj setvariable ['model','ca\structures\castle\a_castle_stairs_a.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4047_125004033_5000015_70017 = ['IStruct',[4047.13,4033.5,21.001,true],[0,4.88762e-007,1],[0,-1,4.88762e-007], {_thisObj setvariable ['model','ml_shabut\exoduss\zhelstenabig.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -541,7 +544,6 @@ _4018_375004019_8750013_25000 = ['IStruct',[4018.38,4019.88,13.25],180,[0,0,1], 
 ['RustyWindowFrameMeduim',[4036.13,4035.13,18.8692,true],180,[-1.13994e-006,-2.47161e-006,-1]] call InitStruct; 
 ['RustyWindowFrameMeduim',[4029.25,4035.13,18.9942,true],[-3.25841e-007,1,-8.02679e-007],[3.01992e-007,-8.02679e-007,-1]] call InitStruct; 
 ['RustyWindowFrameMeduim',[4039.63,4019.88,15.8692,true],[-3.25841e-007,1,-8.02679e-007],[3.01992e-007,-8.02679e-007,-1]] call InitStruct; 
-['RustyWindowFrameMeduim',[4030.88,4035.25,16.6192,true],[-4.85579e-006,1,1.34309e-006],[-1.04008e-006,1.34309e-006,-1]] call InitStruct; 
 ['PlywoodThinWall',[4043,4035.13,10],270,[0,0,1]] call InitStruct; 
 ['SmallSteelRustyFence',[4017.5,4024.25,10.75],0,[0,0,1]] call InitStruct; 
 _4017_500004019_8750010_50009 = ['IStruct',[4017.5,4019.88,15.973,true],0,[0.00566319,-0.00693144,0.99996], {_thisObj setvariable ['model','a3\structures_f_argo\walls\city\wallcity_01_pillar_grey_f.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -562,12 +564,13 @@ _4044_026864029_4978013_04632 = ['IStruct',[4044.03,4029.5,13.0463],178.768,[0,0
 _4044_025394031_7478013_04701 = ['IStruct',[4044.03,4031.75,13.047],178.768,[0,0,1], {_thisObj setvariable ['model','ml_shabut\sbs\plitkastenka2.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['ConcreteWallWithNetfence',[4021.23,4019.89,13.25],180,[0,0,1]] call InitStruct; 
 ['ConcreteWallWithNetfence',[4021.38,4029.25,13.252],0.000313335,[0,0,1]] call InitStruct; 
-['SteelThinWallSmall',[4033.1,4033.66,17.3092,true],[-1,1.42203e-016,1.19249e-008],[0,-1,1.19249e-008]] call InitStruct; 
 ['SteelThinWallSmall',[4045.32,4031.09,13.011],270,[0,0,1]] call InitStruct; 
 _4033_625004023_2500013_62500 = ['IStruct',[4033.63,4023.25,13.625],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_argo\walls\city\wallcity_01_pillar_grey_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['BrickThinWallWindow2',[4026.38,4021.38,13.0578],90.0001,[0,0,1]] call InitStruct; 
 ['BrickThinWallWindow2',[4026.38,4032.25,13],270,[0,0,1]] call InitStruct; 
 ['BrickThinWallSmall',[4031.48,4029.32,8.09556],0,[0,0,1]] call InitStruct; 
+_4029_868414035_2363310_11038 = ['IStruct',[4029.87,4035.24,10.1104],0,[0,0,1], {_thisObj setvariable ['model','ca\buildings\misc\plot_rust_vrata.p3d'];}] call InitStruct; // !!! realocated model !!!
+_4034_017584034_3103012_52373 = ['IStruct',[4034.02,4034.31,16.675,true],[1,1.2358e-006,-7.17937e-012],[0,-5.80947e-006,-1], {_thisObj setvariable ['model','ca\buildings\misc\plot_green_vrat_r.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4046_000004032_2500012_75000 = ['IStruct',[4046,4032.25,12.75],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\plita_6x6.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4040_000004032_2500012_75000 = ['IStruct',[4040,4032.25,12.75],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\plita_6x6.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4046_000004022_7500012_75000 = ['IStruct',[4046,4022.75,12.75],0,[0,0,1], {_thisObj setvariable ['model','csa_constr\csa_obj\plita_6x6.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -652,9 +655,9 @@ _4016_060794021_374769_98744 = ['ElectricalShield',[4016.06,4021.37,9.98744],6.5
 ['SignWelcome',[4036.82,4031.88,11.2777],268.53,[0,0,1]] call InitStruct; 
 _4037_375004028_9318811_51462 = ['RedButton',[4037.38,4028.93,16.5148,true],[-1,6.70552e-007,1.19249e-008],[-6.70552e-007,-1,1.19249e-008], {go_editor_globalRefs set ["RedButton G:TaTtSnTBX9c",_thisObj];
 }] call InitStruct; 
-_4032_815924029_8940411_66473 = ['RedButton',[4032.82,4029.89,16.6649,true],0,[-1,0,-4.37114e-008], {go_editor_globalRefs set ["RedButton G:/bk1HSzuyiI",_thisObj];
+_4032_815924032_0000011_66473 = ['RedButton',[4032.82,4032,16.6649,true],0,[-1,0,-4.37114e-008], {go_editor_globalRefs set ["RedButton G:/bk1HSzuyiI",_thisObj];
 }] call InitStruct; 
-_4032_817144030_1743211_66430 = ['RedButton',[4032.82,4030.17,16.6644,true],0,[-1,0,-4.37114e-008], {go_editor_globalRefs set ["RedButton G:ji1Yi/feNFc",_thisObj];
+_4032_817144032_2802711_66430 = ['RedButton',[4032.82,4032.28,16.6644,true],0,[-1,0,-4.37114e-008], {go_editor_globalRefs set ["RedButton G:ji1Yi/feNFc",_thisObj];
 }] call InitStruct; 
 _4046_375004029_5481014_55445 = ['RedButton',[4046.38,4029.55,19.5542,true],[0,7.54979e-008,-1],[0,1,7.54979e-008], {go_editor_globalRefs set ["RedButton G:HfqsSe3iRaU",_thisObj];
 }] call InitStruct; 
@@ -707,8 +710,6 @@ _4026_437994022_4606911_22338 = ['RedButton',[4026.44,4022.46,16.2235,true],0,[-
 ['LampCeiling',[4019.89,4022.9,12.5],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_LAMP_HOUSE_var]; go_editor_globalRefs set ["LampCeiling G:BQuGl8InN4c",_thisObj];
 }] call InitStruct; 
 ['LampCeiling',[4030.55,4021.61,12.5],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_LAMP_HOUSE_var]; go_editor_globalRefs set ["LampCeiling G:WmdD2F4ypQg",_thisObj];
-}] call InitStruct; 
-_4032_834474031_8884311_20341 = ['PowerSwitcher_Activator',[4032.83,4031.89,11.2034],270,[0,0,1], {go_editor_globalRefs set ["PowerSwitcher_Activator G:A69wEPfRIxs",_thisObj];
 }] call InitStruct; 
 _4027_875004023_7500010_62500 = ['ElectricalShieldSmall',[4027.88,4023.75,10.625],0,[0,0,1], {go_editor_globalRefs set ["ElectricalShieldSmall G:l2Y+w3c5mwI",_thisObj];
 }] call InitStruct; 
@@ -805,8 +806,6 @@ _4067_310794068_1237811_49136 = ['RedButton',[4067.31,4068.12,16.4915,true],0,[-
 ['LampCeiling',[4045.63,4022.38,15.875],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_LAMP_HOUSE_var]; go_editor_globalRefs set ["LampCeiling G:KRZfyWUeOck",_thisObj];
 }] call InitStruct; 
 _4045_506104025_4533714_50724 = ['RedButton',[4045.51,4025.45,19.5074,true],[0,4.88762e-007,1],[0,-1,4.88762e-007], {go_editor_globalRefs set ["RedButton G:8n4vmOZcVYg",_thisObj];
-}] call InitStruct; 
-_4032_832284032_4072311_20730 = ['PowerSwitcher_Activator',[4032.83,4032.41,11.2073],270,[0,0,1], {go_editor_globalRefs set ["PowerSwitcher_Activator G:A69wEPfRIxs (1)",_thisObj];
 }] call InitStruct; 
 ['StreetLamp',[4078.03,4014.96,2.31931],175,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_DORM_var]; go_editor_globalRefs set ["StreetLamp G:zVA/rLuMkaA",_thisObj];
 }] call InitStruct; 
@@ -1527,9 +1526,9 @@ if (!isNil'_4049_000004021_5000010_12500') then {
 	_4049_000004021_5000010_12500 setvariable ['desc',"Запасный выход"];
 	_4049_000004021_5000010_12500 setvariable ['islocked',true];
 };
-if (!isNil'_4033_000004031_1250010_00000') then {
-	_4033_000004031_1250010_00000 setvariable ['desc',"Кабинет 101"];
-	_4033_000004031_1250010_00000 setvariable ['islocked',true];
+if (!isNil'_4032_871834031_1250010_00000') then {
+	_4032_871834031_1250010_00000 setvariable ['desc',"Кабинет 101"];
+	_4032_871834031_1250010_00000 setvariable ['islocked',true];
 };
 if (!isNil'_4026_375004033_3750010_00000') then {
 	_4026_375004033_3750010_00000 setvariable ['desc',"Запасный выход"];
@@ -1574,6 +1573,11 @@ if (!isNil'_4018_500004029_2500013_12500') then {
 if (!isNil'_4028_250004029_3750013_00000') then {
 	_4028_250004029_3750013_00000 setvariable ['desc',"Комната 206"];
 	_4028_250004029_3750013_00000 setvariable ['islocked',true];
+};
+if (!isNil'_4034_987794035_302499_87321') then {
+	_4034_987794035_302499_87321 setvariable ['name',"Такая дверь"];
+	_4034_987794035_302499_87321 setvariable ['desc',"23 звяка, 3 цикла, 8-й смены, 28-го плана смена рождения. 8-й смены, 8-го плана в конце смены сгнила. Ебаный врот."];
+	_4034_987794035_302499_87321 setvariable ['islocked',true];
 };
 if (!isNil'_4007_750004056_3750014_00003') then {
 	[_4007_750004056_3750014_00003,go_editor_globalRefs get "Tumbler G:fLGwpoBP83c"] call (_4007_750004056_3750014_00003 getvariable 'proto' getvariable 'addConnection');
@@ -1625,13 +1629,13 @@ if (!isNil'_4037_375004028_9318811_51462') then {
 	[_4037_375004028_9318811_51462,go_editor_globalRefs get "LampCeiling G:zuAmqwZUMgw"] call (_4037_375004028_9318811_51462 getvariable 'proto' getvariable 'addConnection');
 	[_4037_375004028_9318811_51462,go_editor_globalRefs get "LampCeiling G:OxG+WAr+YSE (1)"] call (_4037_375004028_9318811_51462 getvariable 'proto' getvariable 'addConnection');
 };
-if (!isNil'_4032_815924029_8940411_66473') then {
-	[_4032_815924029_8940411_66473,go_editor_globalRefs get "LampCeiling G:qlQj1u5GQKs"] call (_4032_815924029_8940411_66473 getvariable 'proto' getvariable 'addConnection');
-	[_4032_815924029_8940411_66473,go_editor_globalRefs get "LampCeiling G:DwTizfFKITc"] call (_4032_815924029_8940411_66473 getvariable 'proto' getvariable 'addConnection');
-	[_4032_815924029_8940411_66473,go_editor_globalRefs get "LampCeiling G:NjkDlY9gWRQ"] call (_4032_815924029_8940411_66473 getvariable 'proto' getvariable 'addConnection');
+if (!isNil'_4032_815924032_0000011_66473') then {
+	[_4032_815924032_0000011_66473,go_editor_globalRefs get "LampCeiling G:qlQj1u5GQKs"] call (_4032_815924032_0000011_66473 getvariable 'proto' getvariable 'addConnection');
+	[_4032_815924032_0000011_66473,go_editor_globalRefs get "LampCeiling G:DwTizfFKITc"] call (_4032_815924032_0000011_66473 getvariable 'proto' getvariable 'addConnection');
+	[_4032_815924032_0000011_66473,go_editor_globalRefs get "LampCeiling G:NjkDlY9gWRQ"] call (_4032_815924032_0000011_66473 getvariable 'proto' getvariable 'addConnection');
 };
-if (!isNil'_4032_817144030_1743211_66430') then {
-	[_4032_817144030_1743211_66430,go_editor_globalRefs get "LampCeiling G:jbNZsX9IGL8"] call (_4032_817144030_1743211_66430 getvariable 'proto' getvariable 'addConnection');
+if (!isNil'_4032_817144032_2802711_66430') then {
+	[_4032_817144032_2802711_66430,go_editor_globalRefs get "LampCeiling G:jbNZsX9IGL8"] call (_4032_817144032_2802711_66430 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_4046_375004029_5481014_55445') then {
 	[_4046_375004029_5481014_55445,go_editor_globalRefs get "LampCeiling G:Kq7SLbsTC+k"] call (_4046_375004029_5481014_55445 getvariable 'proto' getvariable 'addConnection');
@@ -1661,15 +1665,10 @@ if (!isNil'_4026_452394026_6794411_47483') then {
 if (!isNil'_4026_437994022_4606911_22338') then {
 	[_4026_437994022_4606911_22338,go_editor_globalRefs get "LampCeiling G:WmdD2F4ypQg"] call (_4026_437994022_4606911_22338 getvariable 'proto' getvariable 'addConnection');
 };
-if (!isNil'_4032_834474031_8884311_20341') then {
-	[_4032_834474031_8884311_20341,go_editor_globalRefs get "SteelGridDoorElectronic G:WlgXnagTMgc (1)"] call (_4032_834474031_8884311_20341 getvariable 'proto' getvariable 'addConnection');
-};
 if (!isNil'_4027_875004023_7500010_62500') then {
 	_4027_875004023_7500010_62500 setvariable ['name',"Первый этаж. Входная группа."];
 	[_4027_875004023_7500010_62500,go_editor_globalRefs get "RedButton G:/bk1HSzuyiI"] call (_4027_875004023_7500010_62500 getvariable 'proto' getvariable 'addConnection');
-	[_4027_875004023_7500010_62500,go_editor_globalRefs get "PowerSwitcher_Activator G:A69wEPfRIxs"] call (_4027_875004023_7500010_62500 getvariable 'proto' getvariable 'addConnection');
 	[_4027_875004023_7500010_62500,go_editor_globalRefs get "RedButton G:ji1Yi/feNFc"] call (_4027_875004023_7500010_62500 getvariable 'proto' getvariable 'addConnection');
-	[_4027_875004023_7500010_62500,go_editor_globalRefs get "PowerSwitcher_Activator G:A69wEPfRIxs (1)"] call (_4027_875004023_7500010_62500 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_4047_835454025_9511713_81793') then {
 	_4047_835454025_9511713_81793 setvariable ['name',"Второй этаж. Левое крыло."];
@@ -1760,9 +1759,6 @@ if (!isNil'_4067_310794068_1237811_49136') then {
 };
 if (!isNil'_4045_506104025_4533714_50724') then {
 	[_4045_506104025_4533714_50724,go_editor_globalRefs get "LampCeiling G:KRZfyWUeOck"] call (_4045_506104025_4533714_50724 getvariable 'proto' getvariable 'addConnection');
-};
-if (!isNil'_4032_832284032_4072311_20730') then {
-	[_4032_832284032_4072311_20730,go_editor_globalRefs get "SteelGridDoorElectronic G:WlgXnagTMgc"] call (_4032_832284032_4072311_20730 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_4016_250004051_1250014_12500') then {
 	_4016_250004051_1250014_12500 setvariable ['islocked',true];
