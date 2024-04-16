@@ -236,28 +236,31 @@ _4037_090334021_7871110_83532 = ['KeyHolder',[4037.09,4021.79,10.8353],180,[0,0,
 ['SquareWoodenBox',[4031.02,4030.12,13.0518],11.2096,[0,0,1]] call InitStruct; 
 ['SquareWoodenBox',[4031.1,4031.25,13.0568],359.266,[0,0,1]] call InitStruct; 
 ['SquareWoodenBox',[4031.09,4030.61,14.0088],353.296,[0,0,1]] call InitStruct; 
-_4027_207034034_2902813_15587 = ['RatCage',[4027.21,4034.29,13.1559],357.01,[0,0,1]] call InitStruct; 
-_4027_194094032_9877913_15587 = ['RatCage',[4027.19,4032.99,13.1559],1.97399,[0,0,1]] call InitStruct; 
+_4027_207034034_2902813_04602 = ['RatCage',[4027.21,4034.29,13.046],357.01,[0,0,1]] call InitStruct; 
+_4027_194094032_9877913_04602 = ['RatCage',[4027.19,4032.99,13.046],1.97399,[0,0,1]] call InitStruct; 
 ['WoodenChair',[4029.5,4033.6,13.0784],170.001,[0,0,1]] call InitItem; 
-['RedSteelBox',[4027.02,4030.14,13.0518],240,[0,0,1]] call InitStruct; 
+['RedSteelBox',[4027.06,4030.11,13.0518],240,[0,0,1]] call InitStruct; 
 ['Bucket',[4029.14,4034.14,13.0662],0,[0,0,1]] call InitItem; 
-['Bucket',[4026.99,4031.65,13.0506],0,[0,0,1]] call InitItem; 
-['WoodenBucket',[4026.83,4031.01,13.0518],0,[0,0,1]] call InitItem; 
+['Bucket',[4026.87,4031.04,13.0506],0,[0,0,1]] call InitItem; 
+['WoodenBucket',[4026.72,4030.71,13.0518],0,[0,0,1]] call InitItem; 
 ['GlassBottle',[4029,4034.71,13.8946],0,[0,0,1]] call InitItem; 
 ['GlassBottle',[4029.15,4034.75,13.8982],0,[0,0,1]] call InitItem; 
 ['MilkBottle',[4030.15,4034.5,13.9006],0,[0,0,1]] call InitItem; 
-_4027_889654032_9790013_04359 = ['Grave4',[4027.89,4032.98,13.0436],0,[0,0,1]] call InitStruct; 
-_4028_081794034_1320813_04353 = ['Grave4',[4028.08,4034.13,13.0435],0,[0,0,1]] call InitStruct; 
-_4027_262454032_2961413_04263 = ['Grave4',[4027.26,4032.3,13.0426],261.992,[0,0,1]] call InitStruct; 
-_4028_240724033_2297413_04332 = ['Grave4',[4028.24,4033.23,13.0433],3.95068,[0,0,1]] call InitStruct; 
-_4027_640384033_1296413_13015 = ['Grave4',[4027.64,4033.13,13.1302],356.923,[0,0,1]] call InitStruct; 
-_4027_655274034_0390613_12721 = ['Grave4',[4027.66,4034.04,13.1272],4.39725,[0,0,1]] call InitStruct; 
 ['SteelBlueCase',[4029.64,4029.8,13.0568],180,[0,0,1]] call InitStruct; 
 ['BedOld2',[4030.59,4033.94,13.0518],2.8042,[0,0,1], {go_editor_globalRefs set ["RMolDormBed",_thisObj];
 }] call InitStruct; 
 ['Candle',[4029.7,4034.7,13.8954],0,[0,0,1], {_thisObj setvariable ['lightisenabled',false];}] call InitItem; 
-['ConcretePanelDamaged',[4029.65,4033.02,12.9862],4,[0,0,1]] call InitStruct; 
+['ConcretePanelDamaged',[4029.74,4032.84,12.9862],4,[0,0,1]] call InitStruct; 
 ['MatchBox',[4030.14,4034.14,13.9024],0,[0,0,1]] call InitItem; 
+['RatShitMedium',[4027.51,4034.31,13.067],0,[0,0,1]] call InitItem; 
+['RatShitMedium',[4027.46,4033.38,13.0695],0,[0,0,1]] call InitItem; 
+['RatShitMedium',[4026.81,4033.33,13.7694],0,[0,0,1]] call InitItem; 
+['RatShitMedium',[4026.73,4034.21,13.7694],0,[0,0,1]] call InitItem; 
+['RatShitMedium',[4026.83,4033.35,13.0759],0,[0,0,1]] call InitItem; 
+['RatShitMedium',[4027.99,4034.15,13.0518],0,[0,0,1]] call InitItem; 
+['RatShitMedium',[4027.76,4032.71,13.0518],20,[0,0,1]] call InitItem; 
+['RatShitMedium',[4027.28,4032.18,13.0518],260,[0,0,1]] call InitItem; 
+['RatShitMedium',[4028.26,4033.47,13.0518],8.53774e-007,[0,0,1]] call InitItem; 
 ['SmallBattery',[4041.17,4034.84,14.0461],0,[0,0,1]] call InitItem; 
 ['SmallBattery',[4041.31,4034.78,14.0461],0,[0,0,1]] call InitItem; 
 ['Wrench',[4042.22,4033.47,14.0386],30,[0,0,1]] call InitItem; 
@@ -1546,35 +1549,11 @@ if (!isNil'_4037_090334021_7871110_83532') then {
 	[_4037_090334021_7871110_83532,'Key',1,100,[["var","name","Ключ от комнаты 205"],["var","desc","Колдырь потерял его по пьяни"],["var","preinit@__keytypesstr","RKoldyrDormKey"]]] call (_4037_090334021_7871110_83532 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4037_090334021_7871110_83532,'Key',1,100,[["var","name","Дубликат ключа от комнаты 206"],["var","preinit@__keytypesstr","RMolDormKey"]]] call (_4037_090334021_7871110_83532 getvariable 'proto' getvariable 'createItemInContainer');
 };
-if (!isNil'_4027_207034034_2902813_15587') then {
-	_4027_207034034_2902813_15587 setvariable ['initialcategory',"milk"];
+if (!isNil'_4027_207034034_2902813_04602') then {
+	_4027_207034034_2902813_04602 setvariable ['initialcategory',"milk"];
 };
-if (!isNil'_4027_194094032_9877913_15587') then {
-	_4027_194094032_9877913_15587 setvariable ['initialcategory',"food"];
-};
-if (!isNil'_4027_889654032_9790013_04359') then {
-	_4027_889654032_9790013_04359 setvariable ['name',"Говно"];
-	_4027_889654032_9790013_04359 setvariable ['desc',"Кучка мельтешиного говна"];
-};
-if (!isNil'_4028_081794034_1320813_04353') then {
-	_4028_081794034_1320813_04353 setvariable ['name',"Говно"];
-	_4028_081794034_1320813_04353 setvariable ['desc',"Кучка мельтешиного говна"];
-};
-if (!isNil'_4027_262454032_2961413_04263') then {
-	_4027_262454032_2961413_04263 setvariable ['name',"Говно"];
-	_4027_262454032_2961413_04263 setvariable ['desc',"Кучка мельтешиного говна"];
-};
-if (!isNil'_4028_240724033_2297413_04332') then {
-	_4028_240724033_2297413_04332 setvariable ['name',"Говно"];
-	_4028_240724033_2297413_04332 setvariable ['desc',"Кучка мельтешиного говна"];
-};
-if (!isNil'_4027_640384033_1296413_13015') then {
-	_4027_640384033_1296413_13015 setvariable ['name',"Говно"];
-	_4027_640384033_1296413_13015 setvariable ['desc',"Кучка мельтешиного говна"];
-};
-if (!isNil'_4027_655274034_0390613_12721') then {
-	_4027_655274034_0390613_12721 setvariable ['name',"Говно"];
-	_4027_655274034_0390613_12721 setvariable ['desc',"Кучка мельтешиного говна"];
+if (!isNil'_4027_194094032_9877913_04602') then {
+	_4027_194094032_9877913_04602 setvariable ['initialcategory',"food"];
 };
 if (!isNil'_4034_250004029_3750013_00000') then {
 	_4034_250004029_3750013_00000 setvariable ['desc',"Комната 205"];
