@@ -8,7 +8,7 @@ class EditorData
 	toggles=42;
 	class ItemIDProvider
 	{
-		nextID=4712;
+		nextID=4723;
 	};
 	class LayerIndexProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={4029.6558,19.789093,4031.1707};
-		dir[]={-0.84630239,-0.51251119,0.14610521};
-		up[]={-0.5051592,0.8585856,0.087216161};
-		aside[]={0.17014337,-4.6793139e-007,0.98551637};
+		pos[]={4046.7285,20.203739,4028.3157};
+		dir[]={-0.76893103,-0.38354635,-0.51174355};
+		up[]={-0.319516,0.92330641,-0.21264569};
+		aside[]={-0.55406493,-2.6428606e-006,0.83250451};
 	};
 };
 binarizationWanted=0;
@@ -33,6 +33,9 @@ addons[]=
 	"metro_life_lines",
 	"model_05",
 	"SMG_Metro_building",
+	"A3_Weapons_F_Orange",
+	"A3_Props_F_Orange_Items_Tools",
+	"A3_Structures_F_EPB_Furniture",
 	"pechka",
 	"A3_Structures_F_EPA_Civ_Camping",
 	"A3_Props_F_Orange_Furniture",
@@ -54,8 +57,6 @@ addons[]=
 	"carpet",
 	"CUP_A1_EditorObjects",
 	"A3_Structures_F_Exp_Walls_Net",
-	"A3_Structures_F_EPB_Furniture",
-	"A3_Weapons_F_Orange",
 	"A3_Structures_F_Items_Stationery",
 	"chto_to",
 	"A3_Structures_F_Items_Documents",
@@ -73,7 +74,6 @@ addons[]=
 	"A3_Structures_F_Enoch_Infrastructure_Roads",
 	"A3_Structures_F_EPA_Items_Electronics",
 	"A3_Structures_F_Items_Tools",
-	"A3_Props_F_Orange_Items_Tools",
 	"A3_Structures_F_Bootcamp_Training",
 	"stelazh_ot_seregi",
 	"meshok",
@@ -174,113 +174,113 @@ class AddonsMetaData
 		};
 		class Item6
 		{
-			className="pechka";
-			name="pechka";
+			className="A3_Weapons_F_Orange";
+			name="Arma 3 Orange - Weapons and Accessories";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
 		};
 		class Item7
-		{
-			className="A3_Structures_F_EPA";
-			name="Arma 3 Survive Episode - Buildings and Structures";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item8
-		{
-			className="A3_Props_F_Enoch";
-			name="Arma 3 Contact Platform - Decorative and Mission Objects";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item9
-		{
-			className="A3_Structures_F";
-			name="Arma 3 - Buildings and Structures";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item10
-		{
-			className="furniture";
-			name="furniture";
-		};
-		class Item11
-		{
-			className="ml_exonew";
-			name="ml_exonew";
-		};
-		class Item12
-		{
-			className="CUP_A2_EditorObjects";
-			name="CUP_A2_EditorObjects";
-			author="MemphisBelle";
-		};
-		class Item13
-		{
-			className="Model_14_10";
-			name="Model_14_10";
-		};
-		class Item14
-		{
-			className="exodus";
-			name="exodus";
-		};
-		class Item15
-		{
-			className="RELICTA_models";
-			name="RELICTA_models";
-			author="Yodes and Alien";
-		};
-		class Item16
-		{
-			className="CUP_Editor_Buildings_Config";
-			name="CUP_Editor_Buildings_Config";
-		};
-		class Item17
-		{
-			className="A3_Structures_F_Enoch_Cultural";
-			name="Arma 3 Contact Platform - Cultural Buildings";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item18
-		{
-			className="sbs";
-			name="sbs";
-		};
-		class Item19
-		{
-			className="plakats3";
-			name="plakats3";
-		};
-		class Item20
-		{
-			className="carpet";
-			name="carpet";
-		};
-		class Item21
-		{
-			className="CUP_A1_EditorObjects";
-			name="CUP_A1_EditorObjects";
-			author="NeoArmageddon";
-		};
-		class Item22
-		{
-			className="A3_Structures_F_Exp";
-			name="Arma 3 Apex - Buildings and Structures";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item23
 		{
 			className="A3_Structures_F_EPB";
 			name="Arma 3 Adapt Episode - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item8
+		{
+			className="pechka";
+			name="pechka";
+		};
+		class Item9
+		{
+			className="A3_Structures_F_EPA";
+			name="Arma 3 Survive Episode - Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item10
+		{
+			className="A3_Props_F_Enoch";
+			name="Arma 3 Contact Platform - Decorative and Mission Objects";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item11
+		{
+			className="A3_Structures_F";
+			name="Arma 3 - Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item12
+		{
+			className="furniture";
+			name="furniture";
+		};
+		class Item13
+		{
+			className="ml_exonew";
+			name="ml_exonew";
+		};
+		class Item14
+		{
+			className="CUP_A2_EditorObjects";
+			name="CUP_A2_EditorObjects";
+			author="MemphisBelle";
+		};
+		class Item15
+		{
+			className="Model_14_10";
+			name="Model_14_10";
+		};
+		class Item16
+		{
+			className="exodus";
+			name="exodus";
+		};
+		class Item17
+		{
+			className="RELICTA_models";
+			name="RELICTA_models";
+			author="Yodes and Alien";
+		};
+		class Item18
+		{
+			className="CUP_Editor_Buildings_Config";
+			name="CUP_Editor_Buildings_Config";
+		};
+		class Item19
+		{
+			className="A3_Structures_F_Enoch_Cultural";
+			name="Arma 3 Contact Platform - Cultural Buildings";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item20
+		{
+			className="sbs";
+			name="sbs";
+		};
+		class Item21
+		{
+			className="plakats3";
+			name="plakats3";
+		};
+		class Item22
+		{
+			className="carpet";
+			name="carpet";
+		};
+		class Item23
+		{
+			className="CUP_A1_EditorObjects";
+			name="CUP_A1_EditorObjects";
+			author="NeoArmageddon";
+		};
 		class Item24
 		{
-			className="A3_Weapons_F_Orange";
-			name="Arma 3 Orange - Weapons and Accessories";
+			className="A3_Structures_F_Exp";
+			name="Arma 3 Apex - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -821,7 +821,7 @@ class Mission
 					state=1;
 					class Entities
 					{
-						items=9;
+						items=18;
 						class Item0
 						{
 							dataType="Object";
@@ -980,9 +980,162 @@ class Mission
 							type="SMG_UrnaMetall";
 							atlOffset=0.19118309;
 						};
+						class Item9
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4046.5442,16.073893,4024.4712};
+								angles[]={0,6.0213804,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
+							};
+							id=4715;
+							type="Leaflet_05_Old_F";
+							atlOffset=0.95042419;
+						};
+						class Item10
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4046.6482,15.734669,4024.5901};
+								angles[]={6.2821498,0,0.0069996584};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
+							};
+							id=4716;
+							type="Leaflet_05_Old_F";
+							atlOffset=0.61033916;
+						};
+						class Item11
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4046.4895,15.73366,4024.3831};
+								angles[]={0.00081159692,0.26180586,0.0070291315};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
+							};
+							id=4717;
+							type="Leaflet_05_Old_F";
+							atlOffset=0.61066628;
+						};
+						class Item12
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4046.6738,15.158018,4023.4136};
+								angles[]={0,0.52359873,-0};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
+							};
+							id=4718;
+							type="Leaflet_05_Old_F";
+						};
+						class Item13
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4047.1157,15.158018,4020.3391};
+								angles[]={0,5.3232546,-0};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
+							};
+							id=4719;
+							type="Leaflet_05_Old_F";
+						};
+						class Item14
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4048.634,15.695839,4023.3035};
+								angles[]={0,5.3232546,-0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
+							};
+							id=4722;
+							type="Leaflet_05_Old_F";
+							atlOffset=0.53982067;
+						};
+						class Item15
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4046.8538,15.721704,4021.8489};
+								angles[]={1.6577325,3.0546567,0.0075965808};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""prob"",30],[""class"",""Crowbar""]]}";
+							};
+							id=4720;
+							type="Land_Crowbar_01_F";
+							atlOffset=0.54281139;
+						};
+						class Item16
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4046.5452,15.604761,4024.52};
+								angles[]={6.2821498,0,0.0069996584};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallShelf1""]]}";
+							};
+							id=4713;
+							type="Land_ShelvesWooden_F";
+							atlOffset=10.102972;
+						};
+						class Item17
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4046.5496,16.146595,4024.2209};
+								angles[]={6.2762976,0,0.0069996584};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PaperHolder""]]}";
+							};
+							id=4714;
+							type="Leaflet_05_Stack_F";
+							atlOffset=0.95022678;
+						};
 					};
 					id=2559;
-					atlOffset=0.24094772;
+					atlOffset=0.55510807;
 				};
 				class Item1
 				{
@@ -11377,7 +11530,7 @@ class Mission
 				};
 			};
 			id=2447;
-			atlOffset=2.0145903;
+			atlOffset=2.0145998;
 		};
 		class Item4
 		{

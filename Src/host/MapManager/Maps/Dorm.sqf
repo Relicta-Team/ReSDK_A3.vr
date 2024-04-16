@@ -35,6 +35,17 @@ _4043_284424023_7231410_15535 = ['Umivalnik',[4043.28,4023.72,10.1553],90,[0,0,1
 _4044_447754020_6936011_23363 = ['IStruct',[4044.45,4020.69,11.2336],0,[0,0,1], {_thisObj setvariable ['model','ml\ml_object_new\model_05\dysh.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['TrashCan',[4048.42,4025.21,10.1],285,[0,0,1], {go_editor_globalRefs set ["KoldyrTrash",_thisObj];
 }] call InitStruct; 
+['Paper',[4046.54,4024.47,11.0712],345,[0,0,1]] call InitItem; 
+['Paper',[4046.65,4024.59,15.7347,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
+['Paper',[4046.49,4024.38,15.7337,true],15,[-0.00702907,0.000811577,0.999975]] call InitItem; 
+['Paper',[4046.67,4023.41,10.1553],30,[0,0,1]] call InitItem; 
+['Paper',[4047.12,4020.34,10.1553],305,[0,0,1]] call InitItem; 
+['Paper',[4048.63,4023.3,10.6932],305,[0,0,1]] call InitItem; 
+if ((random 1) < 0.3) then {
+	['Crowbar',[4046.85,4021.85,15.7217,true],[0.0868239,0.0871559,0.992404],[-0.00759651,0.996195,-0.0868242]] call InitItem; 
+};
+['WoodenSmallShelf1',[4046.55,4024.52,15.6048,true],0,[-0.0069996,-0.00103549,0.999975]] call InitStruct; 
+['PaperHolder',[4046.55,4024.22,16.1466,true],0,[-0.0069996,-0.00688752,0.999952]] call InitItem; 
 ['SmallStoveGrill',[4018,4023.6,9.82862],5.00015,[0,0,1], {_thisObj setvariable ['lightisenabled',false]; _thisObj setvariable ['light',SLIGHT_LIGHT_STOVE_var];}] call InitStruct; 
 ['SmallStoveGrill',[4018,4024.73,9.84219],0,[0,0,1], {_thisObj setvariable ['lightisenabled',false]; _thisObj setvariable ['light',SLIGHT_LIGHT_STOVE_var];}] call InitStruct; 
 ['SmallStoveGrill',[4018,4022.48,9.84639],350,[0,0,1], {_thisObj setvariable ['lightisenabled',false]; _thisObj setvariable ['light',SLIGHT_LIGHT_STOVE_var];}] call InitStruct; 
