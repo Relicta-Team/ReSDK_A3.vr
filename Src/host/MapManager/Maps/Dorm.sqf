@@ -1310,7 +1310,7 @@ if ((random 1) < 0.4) then {
 _3981_222414032_2087420_15811 = ['CoinBag',[3981.22,4032.21,20.1581],0,[0,0,1]] call InitItem; 
 ['RedSteelBox',[3978.32,4029.84,20.191],310,[0,0,1]] call InitStruct; 
 _3979_617684033_8132319_25614 = ['IStruct',[3979.62,4033.81,19.2561],175,[0,0,1], {_thisObj setvariable ['model','ca\structures_e\misc\misc_interier\carpet_2_ep1.p3d'];}] call InitStruct; // !!! realocated model !!!
-['CaseBedroomSmall',[3974.84,4034.26,19.2],205,[0,0,1]] call InitStruct; 
+_3976_000004034_2500019_31000 = ['CaseBedroomSmall',[3976,4034.25,19.31],265.001,[0,0,1]] call InitStruct; 
 ['MediumPileOfDirtAndStones',[3977.95,4019.35,21.328,true],0,[-0.00566278,0.505982,0.862525]] call InitStruct; 
 ['LampKeroseneDisabled',[3981.27,4031.94,20.1555],5,[0,0,1]] call InitItem; 
 _3979_621344034_0034219_29673 = if ((random 1) < 0.5) then {
@@ -1324,6 +1324,9 @@ _3974_891364021_7397514_77565 = ['WoodenToiletSmall',[3974.89,4021.74,14.7757],8
 _3980_522714022_0053714_74117 = ['Wicket',[3980.52,4022.01,14.7412],0,[0,0,1]] call InitStruct; 
 _3977_878424034_2717319_17873 = ['IStruct',[3977.88,4034.27,24.5264,true],335,[-0.0080614,0.00388847,0.99996], {_thisObj setvariable ['model','ca\structures_e\misc\misc_interier\vase_loam_ep1.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['Baton',[3978.38,4032.87,17.2271],195,[0,0,1]] call InitItem; 
+['BedOld',[3974.63,4033.5,19.25],0,[0,0,1], {go_editor_globalRefs set ["RUchastHelperDormBed",_thisObj];
+}] call InitStruct; 
+['RopeItem',[3976.01,4034.19,19.8713],50,[0,0,1]] call InitItem; 
 ['HouseWithGarageSmall1',[3992.13,4035.06,15],180,[0,0,1]] call InitStruct; 
 ['MediumWoodenTable',[3987.24,4035.65,15.0733],0,[0,0,1]] call InitStruct; 
 ['SmallWoodenTable',[3993.71,4036.88,15.0593],0,[0,0,1]] call InitStruct; 
@@ -1374,6 +1377,7 @@ _4056_398684055_7150911_03584 = ['CollectionSpawnPoint',[4056.4,4055.72,11.0358]
 _4077_467534076_2241210_12971 = ['CollectionSpawnPoint',[4077.47,4076.22,10.1297],340,[0,0,1]] call InitStruct; 
 _4082_726324071_6984910_09816 = ['CollectionSpawnPoint',[4082.73,4071.7,10.0982],90,[0,0,1]] call InitStruct; 
 _4075_615974070_1220710_18600 = ['CollectionSpawnPoint',[4075.62,4070.12,10.186],310,[0,0,1]] call InitStruct; 
+_3976_000004033_0000019_31000 = ['SpawnPoint',[3976,4033,19.31],320,[0,0,1]] call InitStruct; 
 _4168_332524015_042970_00000 = ['IStruct',[4168.33,4015.04,5.13837,true],0,[0.00161916,-0.00659633,0.999977], {_thisObj setvariable ['model','a3\structures_f\items\vessels\bucket_painted_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4167_253424015_064450_10824 = ['IStruct',[4167.25,4015.06,0.108239],0,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\items\documents\file2_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4164_668464014_947510_01640 = ['IStruct',[4164.67,4014.95,5.54687,true],0,[0.00103599,-0.00699973,0.999975], {_thisObj setvariable ['model','metro_ob\model\big_box.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -1478,6 +1482,36 @@ _4067_344484054_055669_90783 = ['IStruct',[4067.34,4054.06,9.90783],90.0006,[0,0
 ['SmallChair',[4067.14,4054.85,10.0274],0,[0,0,1]] call InitItem; 
 _4068_585944055_1311012_67509 = ['IStruct',[4068.59,4055.13,17.976,true],[-4.37114e-008,6.71544e-007,1],[-1,0,-4.37114e-008], {_thisObj setvariable ['model','ml_shabut\exoduss\zhelstenabig.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['BrickThinWall',[4071.63,4056.23,10],270,[0,0,1]] call InitStruct; 
+['SquareWoodenBox',[4176.88,3985,0],0,[0,0,1], {go_editor_globalRefs set ["SquareWoodenBox",_thisObj];
+}] call InitStruct; 
+['OfficeCabinet',[4150,3984.63,0],0,[0,0,1]] call InitStruct; 
+['WoodenMedicalBox',[4191.13,3984.88,0],180,[0,0,1]] call InitStruct; 
+['WoodenWeaponBox',[4195,3984.75,0],180,[0,0,1]] call InitStruct; 
+['LargeClothCabinet',[4163.5,3984.88,0],0,[0,0,1]] call InitStruct; 
+['Bookcase',[4145.25,3984.63,0],0,[0,0,1]] call InitStruct; 
+['ContainerGreen3',[4182.88,3984.75,0],180,[0,0,1]] call InitStruct; 
+['RedSteelBox',[4186.88,3984.63,0],0,[0,0,1]] call InitStruct; 
+['BoardWoodenBox',[4180,3984.75,0],270,[0,0,1]] call InitStruct; 
+['ContainerGreen4',[4184.25,3984.75,0],90.0004,[0,0,1]] call InitStruct; 
+['BigClothCabinetNew',[4167.75,3984.88,0],0,[0,0,1]] call InitStruct; 
+['CaseBedroomSmall',[4160.13,3984.75,0],270,[0,0,1]] call InitStruct; 
+['CaseBedroom',[4158.88,3984.88,0],270,[0,0,1]] call InitStruct; 
+['ClothCabinet',[4167.25,3984.88,1.375],180,[0,0,1]] call InitStruct; 
+['ChestCabinet',[4157.63,3984.75,0],270,[0,0,1]] call InitStruct; 
+['SmallBookcase',[4148.88,3984.63,0],0,[0,0,1]] call InitStruct; 
+['BigFileCabinet',[4147.38,3984.63,0],270,[0,0,1]] call InitStruct; 
+['LuxuryCabinet',[4154.75,3984.5,0],180,[0,0,1]] call InitStruct; 
+['WallmountedMedicalCabinet',[4192.5,3985.13,0],0,[0,0,1]] call InitStruct; 
+['SteelBlueCase',[4171.88,3984.75,0],0,[0,0,1]] call InitStruct; 
+['SmallTrashCan',[4200.75,3984.75,0],90,[0,0,1]] call InitStruct; 
+['SteelGreenCabinet',[4171,3984.75,0],90,[0,0,1]] call InitStruct; 
+['TrashCan',[4201.38,3984.63,0],90,[0,0,1]] call InitStruct; 
+['ContainerGreen',[4172.75,3984.75,0],90,[0,0,1]] call InitStruct; 
+['OldWoodenBox',[4178.13,3984.5,0],0,[0,0,1]] call InitStruct; 
+['BigClothCabinet',[4165,3984.88,0],0,[0,0,1]] call InitStruct; 
+['ContainerGreen2',[4185.63,3984.75,0],2.56132e-006,[0,0,1]] call InitStruct; 
+['CaseBedroomMedium',[4159.5,3984.75,0],180,[0,0,1]] call InitStruct; 
+['LongWeaponContainer',[4196.89,3984.88,0],0,[0,0,1]] call InitStruct; 
 
 
 
@@ -1897,6 +1931,9 @@ if (!isNil'_3981_222414032_2087420_15811') then {
 	_3981_222414032_2087420_15811 setvariable ['countslots',16];
 	[_3981_222414032_2087420_15811,'Tooth',16,100] call (_3981_222414032_2087420_15811 getvariable 'proto' getvariable 'createItemInContainer');
 };
+if (!isNil'_3976_000004034_2500019_31000') then {
+	[_3976_000004034_2500019_31000,'RopeItem',1,100] call (_3976_000004034_2500019_31000 getvariable 'proto' getvariable 'createItemInContainer');
+};
 if (!isNil'_3979_621344034_0034219_29673') then {
 	_3979_621344034_0034219_29673 setvariable ['name',"Дубликат ключа от участка"];
 	_3979_621344034_0034219_29673 setvariable ['desc',"Если ты каким-то чудом его нашёл - молчи о нём и не говори никому!"];
@@ -1974,6 +2011,9 @@ if (!isNil'_4082_726324071_6984910_09816') then {
 };
 if (!isNil'_4075_615974070_1220710_18600') then {
 	_4075_615974070_1220710_18600 setvariable ['spawnpointname',"RBrodDorm"];
+};
+if (!isNil'_3976_000004033_0000019_31000') then {
+	_3976_000004033_0000019_31000 setvariable ['spawnpointname',"RUchastHelperDorm"];
 };
 if (!isNil'_4087_000004011_00000_3_00000') then {
 	[_4087_000004011_00000_3_00000,"govnelin"] call (_4087_000004011_00000_3_00000 getvariable 'proto' getvariable 'setEffectType');
