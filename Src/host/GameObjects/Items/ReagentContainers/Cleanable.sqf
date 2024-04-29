@@ -66,3 +66,9 @@ class(BloodPoolBig) extends(BloodPoolMedium)
 	var(model,"BloodPool_01_Large_New_F");
 	getterconst_func(canIncrease,false);
 endclass
+
+class(RatShitMedium) extends(CleanableItem)
+	var(name,"Мельтешиное говно");
+	var(desc,"Просто мельтешиное говно.");
+	var(model,"ca\buildings\misc\hrobecek.p3d");
+endclass
