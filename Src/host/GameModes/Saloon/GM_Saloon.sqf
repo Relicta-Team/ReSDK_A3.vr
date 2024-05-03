@@ -284,7 +284,7 @@ class(GMSaloon) extends(GMBase)
 		
 	};
 	
-	func(onRoundBegin)
+	func(postSetup)
 	{
 		objParams();
 		//start generator
@@ -871,7 +871,7 @@ class(GMSaloonV2) extends(GMBase)
 		
 	};
 	
-	func(onRoundBegin)
+	func(postSetup)
 	{
 		objParams();
 		//start generator

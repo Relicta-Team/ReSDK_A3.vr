@@ -221,7 +221,7 @@ class(GMDetective) extends(GMBase)
 	};
 	
 	//get attach
-	func(onRoundBegin)
+	func(postSetup)
 	{
 		objParams();
 		//init bank money

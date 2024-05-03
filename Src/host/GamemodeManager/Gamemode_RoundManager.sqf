@@ -103,73 +103,28 @@ gm_startRound = {
 
 	private _sortedList = call gm_prepareReadyClients;
 	
-#ifdef GM_STARTLOGIC_2_0
 	//! сделать так, чтобы полные и скрытые не моги перемешаться
 
 	// 1. распределяем на роли по vec2
 	{
-		_x call SL20Func(gm_prepareToRole);
+		_x call gm_prepareToRole;
 	} foreach _sortedList;
 	// 2. распределяем безролевых
-	call SL20Func(gm_prepareNoRoleClients);
+	call gm_prepareNoRoleClients;
 	
 	// 3. обрабатываем возможных антагов. пустые листы - регеним на всех доступных
-	call SL20Func(gm_handlePreListAntags);
+	call gm_handlePreListAntags;
 	// 4. хандлим антагов полных
-	call SL20Func(gm_handleDefineFullAntags);
+	call gm_handleDefineFullAntags;
 	// 5. спавн
-	call SL20Func(gm_spawnPreparedClients);
-	call SL20Func(gm_internal_resetContenders);
+	call gm_spawnPreparedClients;
+	call gm_internal_resetContenders;
 
 	// 6. хандлим скрытых
-	call SL20Func(gm_handleDefineHiddenAntags);
+	call gm_handleDefineHiddenAntags;
 
 	[format["Hidden antags: %1",gm_antagClientsHidden apply {getVar(_x,name)}]] call gameLog;
 	[format["Full antags: %1",gm_antagClientsFull apply {getVar(_x,name)}]] call gameLog;
-
-#else 
-//not GM_STARTLOGIC_2_0
-
-	{
-		_x call gm_processSpawnRole;
-	} foreach _sortedList;
-
-	//Перемешиваем клиентов
-	gm_noRoleClients = array_shuffle(gm_noRoleClients);
-	private _newVec = null;
-	private _bn = [];
-	{
-		_client = _x;
-		_bn = callFunc(_client,getBannedRoles);
-		// Сначала обрабатываются ключевые роли, потом дополнительные
-		_newVec = array_shuffle(gm_preStartMainRoles) + array_shuffle(gm_preStartRoles - gm_preStartMainRoles);
-		{
-			// 	доп проверка можно ли взять роль со старта раунда для нераспределённых клиентов
-			if ((getVar(_x,count) > 0) && {callFuncParams(_x,canTakeInLobby,_client arg false)} && {callFuncParams(_x,isAllowedRoleToClient,_client arg _bn)}) exitWith {
-				[_client,callFunc(_x,getClassName),true] call gm_spawnClientToRole;
-			};
-		} foreach _newVec;
-	} foreach gm_noRoleClients;
-
-	//process copy from gm_preStartRoles to gm_roundProgressRoles
-	trace("Start checking default roles");
-	{
-		//cleanup contenders
-		setVar(_x,contenders_1,[]);
-		setVar(_x,contenders_2,[]);
-		setVar(_x,contenders_3,[]);
-		//check canadd
-		if (getVar(_x,count) > 0 && {callFunc(_x,canAddAfterStart)}) then {
-			gm_roundProgressRoles pushBackUnique _x;
-			callFunc(_x,onStarted);
-		};
-	} foreach gm_preStartRoles;
-
-	//new selector for antags
-	call gm_handleAntagsImpl;
-
-#endif
-//GM_STARTLOGIC_2_0
 
 	//trace("Start checking gamemode roles");
 
@@ -177,9 +132,6 @@ gm_startRound = {
 
 	//Запускаем основной поток проверки финиша
 	call gm_startMainThread;
-
-	//вызываем событие при старте раунда
-	callFunc(gm_currentMode,onRoundBegin);
 
 	//Спец методы
 	trace("ROUND STARTED");
@@ -226,9 +178,7 @@ gm_startRound = {
 	call db_onGamemodeSessionStart;
 };
 
-#ifdef GM_STARTLOGIC_2_0
-
-SL20Func(gm_prepareToRole) = {
+gm_prepareToRole = {
 	params ["_client"];
 	
 	private _roleClass = "";
@@ -237,7 +187,8 @@ SL20Func(gm_prepareToRole) = {
 	private _isSpawned = false;
 	private _contenders	= null;
 	
-	private _isAntag = array_exists(gm_antagClients,_client);
+	//? performance issue
+	//private _isAntag = array_exists(gm_antagClientsFull,_client) || array_exists(gm_antagClientsHidden,_client);
 	private _bn = callFunc(_client,getBannedRoles);
 
 	for "_i" from 1 to 3 do {
@@ -267,7 +218,7 @@ SL20Func(gm_prepareToRole) = {
 
 };
 
-SL20Func(gm_prepareNoRoleClients) = {
+gm_prepareNoRoleClients = {
 	gm_noRoleClients = array_shuffle(gm_noRoleClients);
 	private _newVec = null;
 	private _bn = [];
@@ -291,7 +242,7 @@ SL20Func(gm_prepareNoRoleClients) = {
 	} foreach gm_noRoleClients;
 };
 
-SL20Func(gm_internal_resetContenders) = {
+gm_internal_resetContenders = {
 	{
 		//cleanup contenders
 		setVar(_x,contenders_1,[]);
@@ -305,7 +256,7 @@ SL20Func(gm_internal_resetContenders) = {
 	} foreach gm_preStartRoles;
 };
 
-SL20Func(gm_handlePreListAntags) = {
+gm_handlePreListAntags = {
 	private _antag = 0;
 
 	//TODO
@@ -399,7 +350,7 @@ SL20Func(gm_handlePreListAntags) = {
 	};
 };
 
-SL20Func(gm_handleDefineFullAntags) = {
+gm_handleDefineFullAntags = {
 	private __findClientVec2 = {
 		private _cli = _this;
 		private _idx = gm_preparedClients findif {equals(_x select 0,_cli)};
@@ -436,7 +387,7 @@ SL20Func(gm_handleDefineFullAntags) = {
 	} foreach array_shuffle(gm_antagClientsFull);
 };
 
-SL20Func(gm_spawnPreparedClients) = {
+gm_spawnPreparedClients = {
 	private _newMob = 0;
 	private _indexAntag = 0;
 
@@ -447,12 +398,12 @@ SL20Func(gm_spawnPreparedClients) = {
 	} foreach gm_preparedClients;
 };
 
-SL20Func(gm_handleDefineHiddenAntags) = {
-	private _index = 0;
+gm_handleDefineHiddenAntags = {
 	private _countInGame = count gm_preparedClients;
 	private _countProbHiddenAntags = count gm_antagClientsHidden;
 	private _curClient = nullPtr;
 	private _mob = nullPtr;
+	private _index = 1;
 	
 	{
 		_curClient = _x;
@@ -465,98 +416,6 @@ SL20Func(gm_handleDefineHiddenAntags) = {
 		//};
 		INC(_index);
 	} foreach gm_antagClientsHidden;
-};
-
-#endif
-
-gm_processSpawnRole = {
-	params ["_client","_priority"];
-
-	//traceformat("Processing spawn role %1 with 		%2%3",_client arg _priority * 100 arg "%%");
-
-	//выключает полных антагов (подмена ролей)
-	//! ПЕРЕД УБИРАНИЕМ ЭТОГО ФЛАГА ВНИМАТЕЛЬНО СМОТРЕТЬ УСЛОВИЯ. Нужна проверка возможности взятия роли
-	#define gm_processSpawnRole_disabledFullAntags
-
-	private _roleClass = "";
-	private _defaultRole = null;
-	private _settings = getVar(_client,charSettings);
-	private _isSpawned = false;
-	private _contenders	= null;
-
-	private _isAntag = array_exists(gm_antagClients,_client);
-	private _bn = callFunc(_client,getBannedRoles);
-
-	for "_i" from 1 to 3 do {
-		_roleClass = _settings get ("role" + str _i);		
-		_defaultRole = getRoleObject(_roleClass);
-		if (_roleClass != "none") then {
-			_contenders = getVarReflect(_defaultRole,"contenders_"+str _i);
-			_contenders deleteAt (_contenders find _client); //убираем клиента из претендентов
-
-			//TODO handle full antag spawn
-			#ifndef gm_processSpawnRole_disabledFullAntags
-			if (_isAntag && !_isSpawned) exitWith {
-				_isSpawned = true;
-				INC(gm_antagClientsCounter);
-				gm_antagClients deleteAt (gm_antagClients find _client);
-				_roleClass = callSelfParams(getAntagRoleFull,_client arg gm_antagClientsCounter);
-
-				[_client,_roleClass,true] call gm_spawnClientToRole;
-			};
-			#endif
-			//Исправление 0.7.606 - Иногда клиента могло пустить за забаненную роль
-			private _canTakeStd = getVar(_defaultRole,count) > 0 && !_isSpawned;
-			if (_canTakeStd &&
-				{callFuncParams(_defaultRole,canTakeInLobby,_client arg true)} &&
-				{callFuncParams(_defaultRole,isAllowedRoleToClient,_client arg _bn)}
-			) then {
-				//modVar(_defaultRole,count, - 1);
-				_isSpawned = true;
-
-				[_client,_roleClass,true] call gm_spawnClientToRole;
-			};
-		} else {
-			#ifndef gm_processSpawnRole_disabledFullAntags
-			if (_isAntag && !_isSpawned) exitWith {
-				_isSpawned = true;
-				INC(gm_antagClientsCounter);
-				gm_antagClients deleteAt (gm_antagClients find _client);
-				_roleClass = callSelfParams(getAntagRoleFull,_client arg gm_antagClientsCounter);
-
-				[_client,_roleClass,true] call gm_spawnClientToRole;
-			};
-			#endif
-		};
-	};
-
-
-	//TODO: предлагается собирать всех невыбранных клиентов в отдельный список и распределять принудительно
-	//Использовав метод getRoleForPostClient(ServerClient client,int index)
-	if (!_isSpawned) then {
-		traceformat("Client %1 not spawned on role...",getVar(_client,name));
-		gm_noRoleClients pushBack _client;
-
-		//todo: randomization default roles
-		/*_roleClass = "Citizen";
-
-		_defaultRole = getRoleObject(_roleClass);
-
-		if isNullReference(_defaultRole) exitWith {
-			errorformat("Cant spawn client %1 to role %2. Null reference",getVar(_client,name) arg _roleClass);
-		};
-
-		if (getVar(_defaultRole,count) > 0) then {
-			modVar(_defaultRole,count, - 1);
-			_isSpawned = true;
-
-			[_client,_roleClass,true] call gm_spawnClientToRole;
-		} else {
-			errorformat("Cant spawn client %1 to role %2. Amount less than zero",getVar(_client,name) arg _roleClass);
-		};*/
-
-	};
-
 };
 
 //Готовит структуру с приоритетами на роли
