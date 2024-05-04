@@ -10,6 +10,7 @@
 
 taskSystem_allTasks = [];
 taskSystem_checkedOnEndRound = [];
+taskSystem_increment = 0;
 
 taskSystem_map_tags = createHashMap; //map of all tagged tasks
 
@@ -64,7 +65,13 @@ class(TaskBase) extends(IGameEvent)
 				_etext = format["Задача %1 (%2) не была назначена ни одному из владельцев.",getSelf(name),callSelf(getClassName)];
 				setLastError(_etext);
 			};
+			[format["(TaskBase::constructor): Task %1 [%3:%2] created",
+				callSelf(getClassName),getSelf(__id),getSelf(tag)
+				]
+			] call gameLog;
 		}; nextFrameParams(_nf,this);
+
+		INC(taskSystem_increment);
 	};
 
 	func(destructor)
@@ -86,6 +93,8 @@ class(TaskBase) extends(IGameEvent)
 		prop:get
 	" node_var
 	var(tag,"");//системный тэг задачи
+
+	var(__id,taskSystem_increment);
 
 	//Установить тэг задачи
 	"
@@ -109,6 +118,12 @@ class(TaskBase) extends(IGameEvent)
 		} else {
 			taskSystem_map_tags set [_tagName,[this]];
 		};
+
+		[format["(TaskBase::setTag): Task %1 [%3:%2] tag changed from %4 to %5",
+				callSelf(getClassName),getSelf(__id),getSelf(tag),
+				_oldTag,_tagName
+				]
+			] call gameLog;
 
 		setSelf(tag,_tagName);
 	};
@@ -220,6 +235,13 @@ class(TaskBase) extends(IGameEvent)
 	func(onRegisterInTarget)
 	{
 		objParams_1(_mob);
+
+		[format["(TaskBase::onRegisterInTarget): Task %1 [%3:%2] added to %4",
+			callSelf(getClassName),getSelf(__id),getSelf(tag),
+				[_mob] call logger_formatMob
+			]
+		] call gameLog;
+
 		if getSelf(taskRegistered) exitWith {
 			getSelf(owners) pushBackUnique _mob;
 		};
@@ -353,6 +375,12 @@ class(TaskBase) extends(IGameEvent)
 	{
 		objParams();
 		setSelf(isDone,true);
+
+		[format["(TaskBase::onTaskDone): Task %1 [%3:%2] done with result %4",
+			callSelf(getClassName),getSelf(__id),getSelf(tag),
+				getSelf(result)
+			]
+		] call gameLog;
 
 		if !callSelf(checkCompleteOnEnd) then {
 			callSelf(terminateUpdateProcess);
