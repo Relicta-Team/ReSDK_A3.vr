@@ -44,7 +44,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameModes\BasicTask.sqf at line 21](../../../Src/host/GameModes/BasicTask.sqf#L21)
+File: [host\GameModes\BasicTask.sqf at line 22](../../../Src/host/GameModes/BasicTask.sqf#L22)
 ## taskSystem_allTasks
 
 Type: Variable
@@ -69,6 +69,18 @@ Initial value:
 []
 ```
 File: [host\GameModes\BasicTask.sqf at line 12](../../../Src/host/GameModes/BasicTask.sqf#L12)
+## taskSystem_increment
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [host\GameModes\BasicTask.sqf at line 13](../../../Src/host/GameModes/BasicTask.sqf#L13)
 ## taskSystem_map_tags
 
 Type: Variable
@@ -80,7 +92,7 @@ Initial value:
 ```sqf
 createHashMap //map of all tagged tasks
 ```
-File: [host\GameModes\BasicTask.sqf at line 14](../../../Src/host/GameModes/BasicTask.sqf#L14)
+File: [host\GameModes\BasicTask.sqf at line 15](../../../Src/host/GameModes/BasicTask.sqf#L15)
 # CommonGameAspects.sqf
 
 ## DEFAULT_WEIGHT

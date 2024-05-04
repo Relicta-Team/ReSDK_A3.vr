@@ -28,7 +28,7 @@ Replaced value:
 	if not_equalTypes(_this,"") then {str _this} else {_this} \
 })
 ```
-File: [host\Logger\Logger_init.sqf at line 43](../../../Src/host/Logger/Logger_init.sqf#L43)
+File: [host\Logger\Logger_init.sqf at line 50](../../../Src/host/Logger/Logger_init.sqf#L50)
 ## __log_prefix(typo)
 
 Type: constant
@@ -40,7 +40,7 @@ Replaced value:
 ```sqf
 '(typo)	'
 ```
-File: [host\Logger\Logger_init.sqf at line 50](../../../Src/host/Logger/Logger_init.sqf#L50)
+File: [host\Logger\Logger_init.sqf at line 57](../../../Src/host/Logger/Logger_init.sqf#L57)
 ## __log_prefix_DEBUG
 
 Type: constant
@@ -52,7 +52,7 @@ Replaced value:
 ```sqf
 "(DEBUG)	"
 ```
-File: [host\Logger\Logger_init.sqf at line 51](../../../Src/host/Logger/Logger_init.sqf#L51)
+File: [host\Logger\Logger_init.sqf at line 58](../../../Src/host/Logger/Logger_init.sqf#L58)
 ## isImplementedLoggerFunction(cat)
 
 Type: constant
@@ -64,7 +64,7 @@ Replaced value:
 ```sqf
 !isNull( missionNamespace getvariable vec2(cat + "log",nil))
 ```
-File: [host\Logger\Logger_init.sqf at line 53](../../../Src/host/Logger/Logger_init.sqf#L53)
+File: [host\Logger\Logger_init.sqf at line 60](../../../Src/host/Logger/Logger_init.sqf#L60)
 ## decl_std_logger_type(type)
 
 Type: constant
@@ -76,7 +76,7 @@ Replaced value:
 ```sqf
 type##Log = { [format _this, 'type'] call logger_action};
 ```
-File: [host\Logger\Logger_init.sqf at line 55](../../../Src/host/Logger/Logger_init.sqf#L55)
+File: [host\Logger\Logger_init.sqf at line 62](../../../Src/host/Logger/Logger_init.sqf#L62)
 ## logger_internal_map
 
 Type: Variable
@@ -88,7 +88,7 @@ Initial value:
 ```sqf
 hashMapNew
 ```
-File: [host\Logger\Logger_init.sqf at line 41](../../../Src/host/Logger/Logger_init.sqf#L41)
+File: [host\Logger\Logger_init.sqf at line 48](../../../Src/host/Logger/Logger_init.sqf#L48)
 ## Log
 
 Type: function
@@ -96,7 +96,7 @@ Type: function
 Description: 
 
 
-File: [host\Logger\Logger_init.sqf at line 55](../../../Src/host/Logger/Logger_init.sqf#L55)
+File: [host\Logger\Logger_init.sqf at line 62](../../../Src/host/Logger/Logger_init.sqf#L62)
 ## logger_internal_init
 
 Type: function
@@ -104,7 +104,7 @@ Type: function
 Description: 
 
 
-File: [host\Logger\Logger_init.sqf at line 68](../../../Src/host/Logger/Logger_init.sqf#L68)
+File: [host\Logger\Logger_init.sqf at line 75](../../../Src/host/Logger/Logger_init.sqf#L75)
 ## logger_internal_registerLogCategory
 
 Type: function
@@ -112,7 +112,7 @@ Type: function
 Description: 
 - Param: _logCategory
 
-File: [host\Logger\Logger_init.sqf at line 85](../../../Src/host/Logger/Logger_init.sqf#L85)
+File: [host\Logger\Logger_init.sqf at line 92](../../../Src/host/Logger/Logger_init.sqf#L92)
 ## logCritical
 
 Type: function
@@ -120,7 +120,7 @@ Type: function
 Description: 
 
 
-File: [host\Logger\Logger_init.sqf at line 111](../../../Src/host/Logger/Logger_init.sqf#L111)
+File: [host\Logger\Logger_init.sqf at line 118](../../../Src/host/Logger/Logger_init.sqf#L118)
 ## logError
 
 Type: function
@@ -128,7 +128,7 @@ Type: function
 Description: 
 
 
-File: [host\Logger\Logger_init.sqf at line 114](../../../Src/host/Logger/Logger_init.sqf#L114)
+File: [host\Logger\Logger_init.sqf at line 121](../../../Src/host/Logger/Logger_init.sqf#L121)
 ## logWarn
 
 Type: function
@@ -136,7 +136,7 @@ Type: function
 Description: 
 
 
-File: [host\Logger\Logger_init.sqf at line 117](../../../Src/host/Logger/Logger_init.sqf#L117)
+File: [host\Logger\Logger_init.sqf at line 124](../../../Src/host/Logger/Logger_init.sqf#L124)
 ## logInfo
 
 Type: function
@@ -144,7 +144,7 @@ Type: function
 Description: 
 
 
-File: [host\Logger\Logger_init.sqf at line 120](../../../Src/host/Logger/Logger_init.sqf#L120)
+File: [host\Logger\Logger_init.sqf at line 127](../../../Src/host/Logger/Logger_init.sqf#L127)
 ## logDebug
 
 Type: function
@@ -152,7 +152,7 @@ Type: function
 Description: 
 
 
-File: [host\Logger\Logger_init.sqf at line 123](../../../Src/host/Logger/Logger_init.sqf#L123)
+File: [host\Logger\Logger_init.sqf at line 130](../../../Src/host/Logger/Logger_init.sqf#L130)
 ## logTrace
 
 Type: function
@@ -160,7 +160,7 @@ Type: function
 Description: 
 
 
-File: [host\Logger\Logger_init.sqf at line 128](../../../Src/host/Logger/Logger_init.sqf#L128)
+File: [host\Logger\Logger_init.sqf at line 135](../../../Src/host/Logger/Logger_init.sqf#L135)
 ## logToFile
 
 Type: function
@@ -168,7 +168,7 @@ Type: function
 Description: 
 - Param: _cat
 
-File: [host\Logger\Logger_init.sqf at line 134](../../../Src/host/Logger/Logger_init.sqf#L134)
+File: [host\Logger\Logger_init.sqf at line 141](../../../Src/host/Logger/Logger_init.sqf#L141)
 ## logger_action
 
 Type: function
@@ -178,7 +178,7 @@ Description:
 - Param: _cat (optional, default "")
 - Param: _lvl (optional, default "")
 
-File: [host\Logger\Logger_init.sqf at line 140](../../../Src/host/Logger/Logger_init.sqf#L140)
+File: [host\Logger\Logger_init.sqf at line 147](../../../Src/host/Logger/Logger_init.sqf#L147)
 ## logger_timeStampToString
 
 Type: function
@@ -192,4 +192,12 @@ Description:
 - Param: _second
 - Param: _millisecond
 
-File: [host\Logger\Logger_init.sqf at line 167](../../../Src/host/Logger/Logger_init.sqf#L167)
+File: [host\Logger\Logger_init.sqf at line 178](../../../Src/host/Logger/Logger_init.sqf#L178)
+## logger_formatMob
+
+Type: function
+
+Description: 
+- Param: _mob
+
+File: [host\Logger\Logger_init.sqf at line 185](../../../Src/host/Logger/Logger_init.sqf#L185)
