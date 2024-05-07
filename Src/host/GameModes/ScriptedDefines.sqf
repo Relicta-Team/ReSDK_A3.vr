@@ -316,6 +316,21 @@ class(ScriptedGamemode) extends(GMBase)
 		super();
 	};
 
+	"
+		name:Получить роль
+		desc:Получает объект роли.
+		in:classname:Тип роли:Тип роли, которую необходимо получить.
+			opt:def=ScriptedRole:typeset_out=Результат
+		return:ScriptedRole:@[ScriptedRole^ Объект роли] или любой тип, являющийся её (прямым или косвенным) наследником.
+	" node_met
+	func(getRole)
+	{
+		objParams_1(_classname);
+		private _robj = _classname call gm_getRoleObject;
+		assert_str(!isNullReference(_robj),format vec2("Role object %1 not found",_classname));
+		_robj
+	};
+
 
 	"
 		name:Доступные роли
