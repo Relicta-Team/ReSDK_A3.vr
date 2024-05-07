@@ -63,8 +63,6 @@ func(clickTarget)
 	traceformat("clickTarget logic: %1",vec3(this,_targ,_item))
 	traceformat("ptrs: %1",vec3(getVar(this,pointer),getVar(_targ,pointer),getVar(_item,pointer)))
 	//private _isInventoryAction =
-
-	if (_handcuffed) exitwith {};
 	
 	private _scriptOut = nullPtr;
 	private __scriptRedirect = {
@@ -81,6 +79,7 @@ func(clickTarget)
 	
 	//на мобов нельзя вешать скрипты
 	if callFunc(_targ,isMob) exitWith {
+		if (_handcuffed) exitwith {};
 		
 		assert_str(!(call __scriptRedirect),"Mob as target - cant have script");
 
@@ -127,6 +126,8 @@ func(clickTarget)
 	private _targLoc = getVar(_targ,loc);
 
 	if (_isCombatAction) then {
+		
+		if (_handcuffed) exitwith {}; //no combat actions on handcuffed
 
 		if (_hasItemInActHand) then {
 			if (_itemIsTarget) exitWith {
@@ -171,7 +172,7 @@ func(clickTarget)
 		if (_hasItemInActHand) then {
 			if (_itemIsTarget) then {
 				trace("onItemSelfClick() INV SELF CLICK")
-				if (isTypeOf(_targ,IRangedWeapon)) exitwith {};
+				if (_handcuffed && {isTypeOf(_targ,IRangedWeapon)}) exitwith {};
 				callScriptedEvent(callFuncParams(_scriptOut,onItemSelfClick,this arg _isCombatAction));
 				callFuncParams(_item,onItemSelfClick,this);
 
@@ -181,7 +182,7 @@ func(clickTarget)
 				if equals(_targLoc,this) then {_cantInteractByDistance = false;};
 				//далеко для интеракции
 				if (_cantInteractByDistance)exitWith {};
-
+				if (_handcuffed) exitWith {};
 				trace("onInteractWith() interact ")
 				
 				if callSelfParams(callEventClick,_targ arg _item) exitwith {};
@@ -199,7 +200,7 @@ func(clickTarget)
 			if equals(_targLoc,this) then {
 				trace("onItemClick() INV CLICK")
 				
-				if (isTypeOf(_targ,IRangedWeapon)) exitwith {};
+				if (_handcuffed && {isTypeOf(_targ,IRangedWeapon)}) exitwith {};
 				callScriptedEvent(callFuncParams(_scriptOut,onClick,this arg _isCombatAction arg equals(_targLoc,this)));
 				callFuncParams(_targ,onItemClick,this);
 			} else {
@@ -208,7 +209,7 @@ func(clickTarget)
 
 				trace("onClick() CLICK")
 
-				if (!isTypeOf(_targ,Item)) exitwith {};
+				if (_handcuffed && {!isTypeOf(_targ,Item)}) exitwith {};
 				if callSelfParams(callEventClick,_targ) exitwith {};
 				callScriptedEvent(callFuncParams(_scriptOut,onClick,this arg _isCombatAction arg equals(_targLoc,this)));
 				callFuncParams(_targ,onClick,this);
