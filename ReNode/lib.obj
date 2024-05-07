@@ -3051,6 +3051,18 @@ path:Игровые объекты.Утилиты
 
 def:func:native_functions
 
+	name:Создать скрипт
+	desc:Создает и назачает скрипт на указанном игровом объекте. Возвращает @[bool ИСТИНУ], если скрипт успешно создан и назначен игровому объекту. Если скрипт уже существует на игровом объекте - просто возвращает @[bool ЛОЖЬ].\n\nОбратите внимание, что у скриптов игровых объектов существует ограничения на допустимые типы объектов. Если ваш скрипт не может быть назначен игровому объекту из-за ограничений, то создания скрипта не произойдёт.
+	in:classname:Тип:Тип создаваемого скрипта.
+		opt:def=ScriptedGameObject
+	in:IDestructible:Объект:Игровой объект, для которого создается скрипт.
+	out:bool:Результат:Результат создания и назначения скрипта. При успешном выполнеии возвращает @[bool ИСТИНУ].
+
+node:createGameObjectScript
+path:Игровые объекты.Утилиты
+
+def:func:native_functions
+
 	name:Удалить объект
 	desc:Удаляет указанный объект из мира. После удаления все ссылки на этот объект станут невалидными.
 	in:IDestructible:Объект
@@ -3850,6 +3862,29 @@ def:m:ScriptedGameObject.onScriptAssigned_0
 		type:event
 		out:IDestructible^:Объект:Игровой объект, к которому привязан скрипт.
 	
+def:m:ScriptedGameObject._onTickWrapper_0
+
+		name:В каждую секунду
+		desc:Событие, вызываемое каждую секунду.
+		type:event
+	
+def:m:ScriptedGameObject.setTickMode_0
+
+		name:Переключить ежесекундное событие
+		desc:Запускает или останавливает ежесекундное событие "В каждую секунду".
+		type:method
+		lockoverride:1
+		in:bool:Включить:Если указана @[bool ИСТИНА], то событие будет запущено. В ином случае - остановлено. При попытке включения уже рабочего процесса обновления или выключения нерабочего - ничего не произойдёт.
+	
+def:f:ScriptedGameObject.tickMode_0
+
+		name:Выполнять ежесекундное событие
+		desc:Отвечает за то, будет ли выполняться событие "В каждую секунду".
+		prop:get
+		classprop:1
+		defval:false
+		return:bool
+	
 def:m:ScriptedGameObject._onMainActionWrapper_0
 
 		name:При основном действии
@@ -3906,13 +3941,63 @@ def:m:ScriptedGameObject.callBaseExtraAction_0
 		type:method
 		lockoverride:1
 	
-def:m:ScriptedGameObject._onAttackWithWrapper_0
+def:m:ScriptedGameObject._onInteractWithWrapper_0
 
-		name:При атаке предметом
-		desc:Срабатывает при атаке цели объектом.
+		name:При взаимодействии предметом
+		desc:Срабатывает при взаимодействии персонажа с объектом при помощью другого предмета. 
 		type:event
-		out:Item:Предмет:Предмет, которым выполняется атака
-		out:BasicMob:Персонаж:Тот, кто атакует цель.
+		out:Item:Предмет:Предмет, используемый для взаимодействия с владельцем этого скрипта.
+		out:BasicMob:Персонаж:Персонаж, выполняющий взаимодействие.
+		out:bool:Боевой режим:Возвращает истину, если взаимодействие произведено в боевом режиме.
+		out:bool:В инвентаре:Возвращает истину, если взаимодействие применено к объекту, находящемуся в инвентаре.
+	
+def:m:ScriptedGameObject.callBaseInteractWith_0
+
+		name:Взаимодействие предметом
+		desc:Основная логика взаимодействия с объектом с помощью предмета.
+		type:method
+		lockoverride:1
+	
+def:m:ScriptedGameObject._canSeeVerb_0
+
+		name:Можно видеть ПКМ действия
+		desc:Обработчик видимости базовых действий, получаемых из ПКМ меню объекта.
+		type:event
+		out:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
+		out:string:Действие:Тип действия. Например "pickup", "twohands" и т.д. Полный список зарегистрированных ПКМ действий можно посмотреть в "src\\host\\VerbSystem\\verbsDefine.sqf"
+		return:bool:Будет ли видно действие в ПКМ меню
+	
+def:m:ScriptedGameObject._onClickWrapper_0
+
+		name:При нажатии
+		desc:Срабатывает при взаимодействии персонажа по объекту пустой рукой (при нажатии "ЛКМ").
+		type:event
+		out:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
+		out:bool:Боевой режим:Возвращает истину, если нажатие произведено в боевом режиме.
+		out:bool:В инвентаре:Возвращает истину, если нажатие произведено по предмету в инвентаре.
+	
+def:m:ScriptedGameObject.callBaseOnClick_0
+
+		name:Нажатие
+		desc:Основная логика нажатия на объект.
+		type:method
+		lockoverride:1
+	
+def:m:ScriptedGameObject._onItemSelfClickWrapper_0
+
+		name:При нажатии в активной руке
+		desc:Срабатывает при нажатии персонажа по предмету в инвентаре, находящемуся в активной руке.
+		type:event
+		out:Item:Предмет:Предмет, по которому выполняется нажатие (Он же владелец скрипта).
+		out:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
+		out:bool:Боевой режим:Возвращает истину, если нажатие произведено в боевом режиме.
+	
+def:m:ScriptedGameObject.callBaseItemSelfClick_0
+
+		name:Нажатие в активной руке
+		desc:Основная логика нажатия по предмету в активной руке.
+		type:method
+		lockoverride:1
 	
 def:c:BasicMob
 
@@ -5852,11 +5937,11 @@ $REGION:CLASSMETA
 }
 ,"ScriptedGameObject": {
     "baseClass" : "object",
-    "defined" : {"file":"src\\host\\GameObjects\\ScriptedGameObject.sqf","line":9},
+    "defined" : {"file":"src\\host\\GameObjects\\ScriptedGameObject.sqf","line":10},
    "fields": { "defined": {
-"name":{"return": "string"},"src":{"return": "object"},"mainActionName":{"return": "string"}}   },
+"name":{"return": "string"},"src":{"return": "object"},"tickMode":{"return": "bool"},"__tickHandle__":{"return": "int"},"mainActionName":{"return": "string"}}   },
    "methods": { "defined": {
-"getRestrictions":{"return": "<undefined>"},"addScriptToAllObjects":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_getMainActionNameWrapper":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"callBaseGetMainActionName":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onAttackWithWrapper":{"return": "<undefined>"},"onAttackWith":{"return": "<undefined>"},"attackWithBase":{"return": "<undefined>"}
+"getRestrictions":{"return": "<undefined>"},"addScriptToAllObjects":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onTickWrapper":{"return": "<undefined>"},"onTick":{"return": "<undefined>"},"setTickMode":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_getMainActionNameWrapper":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"callBaseGetMainActionName":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onInteractWithWrapper":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"callBaseInteractWith":{"return": "<undefined>"},"_canSeeVerb":{"return": "<undefined>"},"canSeeVerb":{"return": "<undefined>"},"_onClickWrapper":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"callBaseOnClick":{"return": "<undefined>"},"_onItemSelfClickWrapper":{"return": "<undefined>"},"onItemSelfClick":{"return": "<undefined>"},"callBaseItemSelfClick":{"return": "<undefined>"},"callBaseClickTarget":{"return": "<undefined>"}
 }   }
 }
 ,"VirtualMemoryStorage": {
@@ -5879,7 +5964,7 @@ $REGION:CLASSMETA
 }
 ,"ReNode_AbstractEnum": {
     "baseClass" : "object",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":427},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":437},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -9978,7 +10063,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "seatListOwners":{"return": "null_array"},"_seatListDummy":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"}
+"getChairSitdownAnimation":{"return": "<undefined>"},"getChairUncAnimations":{"return": "<undefined>"},"canUseSeatUncAnimations":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"}
 }   }
 }
 ,"IReagentItem": {
@@ -12885,7 +12970,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"seatListOwners":{"return": "null_array"},"_seatListDummy":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"},"getChairOffsetPos":{"return": "<undefined>"},"getChairOffsetDir":{"return": "<undefined>"}
+"getChairSitdownAnimation":{"return": "<undefined>"},"getChairUncAnimations":{"return": "<undefined>"},"canUseSeatUncAnimations":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"},"getChairOffsetPos":{"return": "<undefined>"},"getChairOffsetDir":{"return": "<undefined>"}
 }   }
 }
 ,"IContainerStruct": {
@@ -15286,7 +15371,7 @@ $REGION:CLASSMETA
     "baseClass" : "GMBase",
     "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":9},
    "fields": { "defined": {
-"name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"canAddAspect":{"return": "bool"},"duration":{"return": "int"},"_currentFinishResult":{"return": "null_array"},"finishResult":{"return": "int"},"__stdCheckDuration":{"return": "bool"},"__rtf_buf":{"return": "string"},"countDead":{"return": "int"},"__startRoundStructure":{"return": "null_array"}}   },
+"name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"canAddAspect":{"return": "bool"},"duration":{"return": "int"},"_currentFinishResult":{"return": "null_array"},"finishResult":{"return": "int"},"__stdCheckDuration":{"return": "bool"},"__rtf_buf":{"return": "string"},"___roleFirstInit__":{"return": "bool"},"countDead":{"return": "int"},"__startRoundStructure":{"return": "null_array"}}   },
    "methods": { "defined": {
 "_getAntagRoleFullWrapper":{"return": "<undefined>"},"getAntagRoleFull":{"return": "<undefined>"},"handleAntagRoleHidden":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"_checkFinishWrapper":{"return": "<undefined>"},"setEndgameScriptedMode":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"_onFinishWrapper":{"return": "<undefined>"},"onFinish":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"_conditionToStartWrapper":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onTick":{"return": "<undefined>"},"isPlayableGamemode":{"return": "<undefined>"},"getCandidatesCount":{"return": "<undefined>"},"getRole":{"return": "<undefined>"},"_getRolesWrapper":{"return": "<undefined>"},"_getRolesWrapperInternal":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"_getDurationWrapper":{"return": "<undefined>"},"onRoundCode":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"}
 }   }
@@ -15986,9 +16071,9 @@ $REGION:CLASSMETA
 }
 ,"TaskBase": {
     "baseClass" : "IGameEvent",
-    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":56},
+    "defined" : {"file":"src\\host\\GameModes\\BasicTask.sqf","line":57},
    "fields": { "defined": {
-"tag":{"return": "string"},"name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"_taskDescDelegate":{"return": "unknown_type"},"customTaskInfo":{"return": "bool"},"isTaskSingleCheck":{"return": "bool"},"owners":{"return": "null_array"},"isDone":{"return": "bool"},"checkDelay":{"return": "int"},"result":{"return": "int"},"taskRegistered":{"return": "bool"},"_taskHandle__":{"return": "int"},"_customCondition":{"return": "unknown_type"},"failTaskOnDeadOwner":{"return": "bool"},"_taskOnSuccessDeletage":{"return": "unknown_type"},"_taskOnFailDeletage":{"return": "unknown_type"}}   },
+"tag":{"return": "string"},"__id":{"return": "int"},"name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"_taskDescDelegate":{"return": "unknown_type"},"customTaskInfo":{"return": "bool"},"isTaskSingleCheck":{"return": "bool"},"owners":{"return": "null_array"},"isDone":{"return": "bool"},"checkDelay":{"return": "int"},"result":{"return": "int"},"taskRegistered":{"return": "bool"},"_taskHandle__":{"return": "int"},"_customCondition":{"return": "unknown_type"},"failTaskOnDeadOwner":{"return": "bool"},"_taskOnSuccessDeletage":{"return": "unknown_type"},"_taskOnFailDeletage":{"return": "unknown_type"}}   },
    "methods": { "defined": {
 "constructor":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"setTag":{"return": "<undefined>"},"getTaskDescription":{"return": "<undefined>"},"getOwners":{"return": "<undefined>"},"checkCompleteOnEnd":{"return": "<undefined>"},"onRegisterInTarget":{"return": "<undefined>"},"onTaskRegistered":{"return": "<undefined>"},"terminateUpdateProcess":{"return": "<undefined>"},"updateMethod":{"return": "<undefined>"},"updateMethodInternal":{"return": "<undefined>"},"onTaskCheck":{"return": "<undefined>"},"setTaskResult":{"return": "<undefined>"},"onTaskDone":{"return": "<undefined>"},"copyTask":{"return": "<undefined>"}
 }   }
@@ -16013,7 +16098,7 @@ $REGION:CLASSMETA
 }
 ,"ScriptedEater": {
     "baseClass" : "ScriptedRole",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":995},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":1010},
    "fields": { "defined": {
 "name":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"count":{"return": "int"},"classMan":{"return": "string"},"classWoman":{"return": "string"}}   },
    "methods": { "defined": {
@@ -16958,11 +17043,11 @@ $REGION:CLASSMETA
 }
 ,"ScriptedRole": {
     "baseClass" : "BasicRole",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":437},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":447},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descInGame":{"return": "string"},"classMan":{"return": "string"},"classWoman":{"return": "string"},"__canBeFullAntag":{"return": "bool"},"__canBeHiddenAntag":{"return": "bool"},"returnInLobbyAfterDead":{"return": "bool"},"_deadTimeout":{"return": "int"},"count":{"return": "int"},"_currentBaseSkills":{"return": "null_array"},"_currentOtherSkills":{"return": "null_array"},"_currentSpawnLocation":{"return": "null_array"},"_currentConnectedTo":{"return": "null_array"}}   },
    "methods": { "defined": {
-"isMainRole":{"return": "<undefined>"},"_getDeadTimeout":{"return": "<undefined>"},"canStoreNameAndFaceForValidate":{"return": "<undefined>"},"_getSkillsWrapper":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"_getOtherSkillsWrapper":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"_canTakeInLobbyConst":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"_canVisibleAfterStartConst":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"roleAccess":{"return": "<undefined>"},"canBeFullAntag":{"return": "<undefined>"},"canBeHiddenAntag":{"return": "<undefined>"},"getBasicMobs":{"return": "<undefined>"},"_spawnLocationWrapper":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"useRandomDirOnSpawn":{"return": "<undefined>"},"_connectedToWrapper":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"_onAssignedWrapper":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"_onDeadBasicWrapper":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"},"onEndgameBasic":{"return": "<undefined>"},"getCurrentGamemode":{"return": "<undefined>"},"constructor":{"return": "<undefined>"}
+"isMainRole":{"return": "<undefined>"},"_getDeadTimeout":{"return": "<undefined>"},"canStoreNameAndFaceForValidate":{"return": "<undefined>"},"_getSkillsWrapper":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"_getOtherSkillsWrapper":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"_canTakeInLobbyConst":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"_canVisibleAfterStartConst":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"roleAccess":{"return": "<undefined>"},"canBeFullAntag":{"return": "<undefined>"},"canBeHiddenAntag":{"return": "<undefined>"},"getBasicMobs":{"return": "<undefined>"},"_spawnLocationWrapper":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"useRandomDirOnSpawn":{"return": "<undefined>"},"_connectedToWrapper":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"_onAssignedWrapper":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"_onDeadBasicWrapper":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"},"onEndgameBasic":{"return": "<undefined>"},"getCurrentGamemode":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"onRegisteredInGamemode":{"return": "<undefined>"}
 }   }
 }
 ,"GhostRole": {

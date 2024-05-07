@@ -193,7 +193,7 @@ func(Die)
 	};
 };
 
-func(__postDieCheckAnim)
+func(__postDieCheckAnim) //very bad code... refactoring needed
 {
 	objParams();
 	if !callSelf(isInUnconsciousAnim) then {
@@ -615,7 +615,7 @@ region(Status effects)
 			callSelf(closeOpenedNetDisplay);
 
 			//switch off combat mode
-			//callSelfParams(setCombatMode,false);
+			callSelfParams(setCombatMode,false);
 
 			//callSelfParams(setCloseEyes,true);
 			callSelfParams(setUnconsciousAnim,true);
@@ -629,12 +629,21 @@ region(Status effects)
 	};
 
 	
-	getter_func(isInUnconsciousAnim,callSelf(getAnimation) in (UNC_ANIM_LIST apply {tolower _x}));
+	func(isInUnconsciousAnim)
+	{
+		objParams();
+		if callSelf(isConnected) exitWith {
+			true //temporary fix...
+		};
+		callSelf(getAnimation) in (UNC_ANIM_LIST apply {tolower _x})
+	};
 	func(setUnconsciousAnim)
 	{
 		objParams_1(_mode);
 
-		if callSelf(isConnected) exitWith {};
+		if callSelf(isConnected) exitWith {
+			callFuncParams(getSelf(connectedTo),seatApplySeatAnim,this arg true);
+		};
 
 		if (_mode) then {
 			callSelfParams(applyGlobalAnim, "switchmove" arg pick UNC_ANIM_LIST);
@@ -652,6 +661,7 @@ region(Status effects)
 		if callSelf(isUnconscious) then {
 			private _old = getSelf(unconscious);
 			DEC(_old);
+			setSelf(unconscious,_old max 0); //сначала ставим значение так как ниже в setUnconsciousAnim проверка смены анимации на стуле
 			if (_old <= 0) then {
 				callSelfParams(setUnconsciousAnim,false);
 				callSelfParams(changeVisionBlock,-1 arg "deunc");
@@ -659,7 +669,6 @@ region(Status effects)
 
 				callFunc(getSelf(_internalEquipmentND),closeNDisplayForAllMobs);
 			};
-			setSelf(unconscious,_old max 0);
 		};
 	};
 

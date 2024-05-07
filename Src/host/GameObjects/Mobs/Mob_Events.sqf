@@ -293,6 +293,7 @@ _onInteractInventoryWith = {
 		_withItem = callFunc(_withItem,rewriteSystemItem);
 	};
 
+	//emplace item into container
 	if callFunc(_item,isContainer) then {
 		callFuncParams(_item,onInteractWith,_withItem arg this);
 	};

@@ -93,6 +93,30 @@ getter_func(getChairSitdownAnimation,[ \
 	"re_HubSittingChairUC_idle1" arg "re_HubSittingChairUC_idle2" arg "re_HubSittingChairUC_idle3"]
 );
 
+//набор анимаций в бессознанке
+/*
+	arg "KIA_Truck_Cargo02" \
+	arg "KIA_Truck_Cargo04" \
+	arg "KIA_Truck_Cargo03" \
+*/
+getter_func(getChairUncAnimations, [ \
+	"KIA_Passenger_Van_02_Medevac_Back" \
+	arg "KIA_passenger_VAN_codriver01" \
+	arg "KIA_passenger_VAN_codriver02" \
+	arg "KIA_pilot_Heli_Transport_04" \
+	arg "KIA_passenger_quadbike" \
+	arg "KIA_passenger_MRAP_03exgunner" \
+	arg "KIA_passenger_MRAP_01_back" \
+	arg "KIA_passenger_mantisrear" \
+	arg "KIA_Truck_Cargo01" \
+]);
+
+func(canUseSeatUncAnimations)
+{
+	objParams();
+	!isTypeOf(this,BedBase)
+};
+
 //набор анимаций при вставании
 //для мирной стоийки - amovpknlmstpsnonwnondnon_amovpercmstpsnonwnondnon
 //для комбата - amovpknlmstpsraswpstdnon_amovpercmstpsraswpstdnon
@@ -254,13 +278,16 @@ func(seatConnect)
 	private _offsetPos = callSelf(seatListOffsetPos) select _index;
 	private _offsetDir = callSelf(seatListOffsetDir) select _index;
 	
+	private _uncSeatOffsetZ = 0.48;
+
 	traceformat("sitting data %1 %2",_offsetPos arg _offsetDir)
 	
 	//Создаём репликатор
 	private _rplObj = "C_Quadbike_01_F" createVehicle [0,0,0];
-
+	
 	if isTypeOf(this,BedBase) then {
 		_rplObj setvariable ["sitmode","bed",true];
+		_uncSeatOffsetZ = 0;
 	};
 
 	_rplObj allowDamage false; 
@@ -274,10 +301,14 @@ func(seatConnect)
 	_rplObj setPosAtl _pos;
 	_rplObj setDir (getDir _origObj + _offsetDir);
 	private _pfh_onReplicate = {
-		(_this select 0) params ["_o","_p"];
+		(_this select 0) params ["_o"];
 		if isNullReference(_o) exitWith {stopThisUpdate()};
-		_o setPosAtl _p;
-	}; startUpdateParams(_pfh_onReplicate,0,vec2(_rplObj,_pos));
+		_o setPosAtl (_o getvariable "__posSeat");
+	}; startUpdateParams(_pfh_onReplicate,0,[_rplObj]);
+
+	_rplObj setVariable ["__posSeat",_pos]; //current mode
+	_rplObj setVariable ["__posSeatActive",_pos];
+	_rplObj setVariable ["__posSeatUnc",_pos vectorAdd [0,0,_uncSeatOffsetZ]];
 	
 	
 	private _usrPos = callFunc(_usr,getPos);
@@ -296,8 +327,7 @@ func(seatConnect)
 	_restDir = _usrDir + 180;
 	
 	_rplObj setVariable ["_restDir",_restDir];
-	_rplObj setVariable ["_restPos",_usrPos];
-	
+	_rplObj setVariable ["_restPos",_usrPos];	
 
 	getSelf(seatListOwners) set [_index,_usr];
 	setVar(_usr,connectedTo,this);
@@ -308,7 +338,7 @@ func(seatConnect)
 	[_mobUsr,"seatConnect",[_mobUsr,_factDir,_rplObj]] call repl_doLocal;
 	
 	//apply anim after connect to seat
-	callSelfParams(seatApplySeatAnim,_usr);
+	callSelfParams(seatApplySeatAnim,_usr arg true);
 
 	callSelfParams(onSeat,_usr arg _index);
 };
@@ -327,10 +357,27 @@ func(onStand)
 
 func(seatApplySeatAnim)
 {
-	objParams_1(_usr);
-	private _anim = callSelf(getChairSitdownAnimation);
+	objParams_2(_usr,_doSyncPos);
+	if isNullVar(_doSyncPos) then {_doSyncPos = false};
+
+	private _chSeatList = callSelf(getChairSitdownAnimation);
+	private _chSeatUncList = ifcheck(callSelf(canUseSeatUncAnimations),callSelf(getChairUncAnimations),_chSeatList);
+	private _anim = ifcheck(callFunc(_usr,isActive),callSelf(getChairSitdownAnimation),_chSeatUncList);
 	if equalTypes(_anim,[]) then {_anim = pick _anim};
 	callFuncParams(_usr,applyGlobalAnim,"switchmove" arg _anim);
+
+	//sync pos
+	if (_doSyncPos) then {
+		private _uInd = (getSelf(seatListOwners) find _usr);
+		if (_uInd==-1) exitWith {};
+
+		private _vName = if ((tolower _anim) in (callSelf(getChairUncAnimations) apply {tolower _x})) 
+			then {"__posSeatUnc"} else {"__posSeatActive"};
+		private _rplObj = getSelf(_seatListDummy) select _uInd;
+		if isNullReference(_rplObj) exitWith {};
+
+		_rplObj setVariable ["__posSeat",_rplObj getvariable _vName];
+	};
 };
 
 func(seatDisconnect)
