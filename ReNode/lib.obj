@@ -3876,21 +3876,13 @@ def:m:ScriptedGameObject.callBaseInteractWith_0
 		type:method
 		lockoverride:1
 	
-def:m:ScriptedGameObject._interactToWrapper_0
-
-		name:При взаимодействии с целью
-		desc:Вызывается при взаимодействии с целью с помощью предмета в активной руке ("ЛКМ" с предметом по цели). Для работы этой точки входа вместо "При взаимодействии с целью" включите свойство "Перенаправлять взаимодействие".
-		type:event
-		out:GameObject:Цель:Игровой объект, к которому применено действие.
-		out:BasicMob:Персонаж:Тот, кто инициировал действие по отношению к цели.
-	
 def:m:ScriptedGameObject._canSeeVerb_0
 
 		name:Можно видеть ПКМ действия
 		desc:Обработчик видимости базовых действий, получаемых из ПКМ меню объекта.
 		type:event
 		out:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
-		out:string:Действие:Тип действия. Например "pickup", "twohands" и т.д. Полный список действий можно посмотреть в "src\\host\\VerbSystem\\verbsDefine.sqf"
+		out:string:Действие:Тип действия. Например "pickup", "twohands" и т.д. Полный список зарегистрированных ПКМ действий можно посмотреть в "src\\host\\VerbSystem\\verbsDefine.sqf"
 		return:bool:Будет ли видно действие в ПКМ меню
 	
 def:m:ScriptedGameObject._onClickWrapper_0
@@ -3914,7 +3906,7 @@ def:m:ScriptedGameObject._onItemSelfClickWrapper_0
 		name:При нажатии в активной руке
 		desc:Срабатывает при нажатии персонажа по предмету в инвентаре, находящемуся в активной руке.
 		type:event
-		out:Item:Предмет:Предмет, которым выполняется нажатие.
+		out:Item:Предмет:Предмет, по которому выполняется нажатие (Он же владелец скрипта).
 		out:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
 		out:bool:Боевой режим:Возвращает истину, если нажатие произведено в боевом режиме.
 	
@@ -5816,7 +5808,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"src":{"return": "object"},"tickMode":{"return": "bool"},"__tickHandle__":{"return": "int"},"mainActionName":{"return": "string"}}   },
    "methods": { "defined": {
-"getRestrictions":{"return": "<undefined>"},"addScriptToAllObjects":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onTickWrapper":{"return": "<undefined>"},"onTick":{"return": "<undefined>"},"setTickMode":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_getMainActionNameWrapper":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"callBaseGetMainActionName":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onInteractWithWrapper":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"callBaseInteractWith":{"return": "<undefined>"},"_interactToWrapper":{"return": "<undefined>"},"interactTo":{"return": "<undefined>"},"callBaseInteractTo":{"return": "<undefined>"},"_canSeeVerb":{"return": "<undefined>"},"canSeeVerb":{"return": "<undefined>"},"_onClickWrapper":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"callBaseOnClick":{"return": "<undefined>"},"_onItemSelfClickWrapper":{"return": "<undefined>"},"onItemSelfClick":{"return": "<undefined>"},"callBaseItemSelfClick":{"return": "<undefined>"},"callBaseClickTarget":{"return": "<undefined>"}
+"getRestrictions":{"return": "<undefined>"},"addScriptToAllObjects":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onTickWrapper":{"return": "<undefined>"},"onTick":{"return": "<undefined>"},"setTickMode":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_getMainActionNameWrapper":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"callBaseGetMainActionName":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onInteractWithWrapper":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"callBaseInteractWith":{"return": "<undefined>"},"_canSeeVerb":{"return": "<undefined>"},"canSeeVerb":{"return": "<undefined>"},"_onClickWrapper":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"callBaseOnClick":{"return": "<undefined>"},"_onItemSelfClickWrapper":{"return": "<undefined>"},"onItemSelfClick":{"return": "<undefined>"},"callBaseItemSelfClick":{"return": "<undefined>"},"callBaseClickTarget":{"return": "<undefined>"}
 }   }
 }
 ,"VirtualMemoryStorage": {
@@ -9938,7 +9930,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "seatListOwners":{"return": "null_array"},"_seatListDummy":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"}
+"getChairSitdownAnimation":{"return": "<undefined>"},"getChairUncAnimations":{"return": "<undefined>"},"canUseSeatUncAnimations":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"}
 }   }
 }
 ,"IReagentItem": {
@@ -12845,7 +12837,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"seatListOwners":{"return": "null_array"},"_seatListDummy":{"return": "null_array"}}   },
    "methods": { "defined": {
-"getChairSitdownAnimation":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"},"getChairOffsetPos":{"return": "<undefined>"},"getChairOffsetDir":{"return": "<undefined>"}
+"getChairSitdownAnimation":{"return": "<undefined>"},"getChairUncAnimations":{"return": "<undefined>"},"canUseSeatUncAnimations":{"return": "<undefined>"},"getChairStandupAnimation":{"return": "<undefined>"},"getChairStandupCombatAnimation":{"return": "<undefined>"},"isSeat":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"seatListOffsetPos":{"return": "<undefined>"},"seatListOffsetDir":{"return": "<undefined>"},"seatListName":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatFree":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"canSeat":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"onSeat":{"return": "<undefined>"},"onStand":{"return": "<undefined>"},"seatApplySeatAnim":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"getSeatRestPos":{"return": "<undefined>"},"getChairOffsetPos":{"return": "<undefined>"},"getChairOffsetDir":{"return": "<undefined>"}
 }   }
 }
 ,"IContainerStruct": {

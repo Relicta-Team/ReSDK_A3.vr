@@ -319,29 +319,29 @@ region(redirected interact)
 	//Этот раздел предназначен для вызова действий на объекте (работает по аналогии с interactTo)
 	// interactTo (_target,_usr,_combat,_inventory) - нелогично
 
-	"
-		name:При взаимодействии с целью
-		desc:Вызывается при взаимодействии с целью с помощью предмета в активной руке (""ЛКМ"" с предметом по цели). Для работы этой точки входа вместо ""При взаимодействии с целью"" включите свойство ""Перенаправлять взаимодействие"".
-		type:event
-		out:GameObject:Цель:Игровой объект, к которому применено действие.
-		out:BasicMob:Персонаж:Тот, кто инициировал действие по отношению к цели.
-	" node_met
-	func(_interactToWrapper)
-	{
-		objParams_2(_target,_usr);
-	};
+	// "
+	// 	name:При взаимодействии с целью
+	// 	desc:Вызывается при взаимодействии с целью с помощью предмета в активной руке (""ЛКМ"" с предметом по цели). Для работы этой точки входа вместо ""При взаимодействии с целью"" включите свойство ""Перенаправлять взаимодействие"".
+	// 	type:event
+	// 	out:GameObject:Цель:Игровой объект, к которому применено действие.
+	// 	out:BasicMob:Персонаж:Тот, кто инициировал действие по отношению к цели.
+	// " node_met
+	// func(_interactToWrapper)
+	// {
+	// 	objParams_2(_target,_usr);
+	// };
 
-	func(interactTo)
-	{
-		objParams_2(_target,_usr);
-		callSelfParams(_interactToWrapper,_target arg _usr);
-	};
+	// func(interactTo)
+	// {
+	// 	objParams_2(_target,_usr);
+	// 	callSelfParams(_interactToWrapper,_target arg _usr);
+	// };
 
-	func(callBaseInteractTo)
-	{
-		objParams();
-		callSelf(callBaseClickTarget);
-	};
+	// func(callBaseInteractTo)
+	// {
+	// 	objParams();
+	// 	callSelf(callBaseClickTarget);
+	// };
 
 region(Verbs visible)
 
