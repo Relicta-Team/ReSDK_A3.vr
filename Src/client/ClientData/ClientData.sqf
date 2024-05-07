@@ -512,7 +512,9 @@ _authResult = {
 
 //client side animator
 _anim = {
-	(_this select 0) switchmove (_this select 1)
+	(_this select 0) switchmove (_this select 1);
+	//! enable if ready...
+	//(_this select 0) playMoveNow (_this select 1); //fix???
 }; rpcAdd("switchMove",_anim);
 
 //Плавная смена анимации
