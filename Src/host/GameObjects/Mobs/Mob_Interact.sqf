@@ -155,10 +155,15 @@ func(clickTarget)
 			};
 		} else {
 			//предмета нет
+			
 			if equals(_targLoc,this) then {
 				trace("onItemClick() INV CLICK (COMBAT)")
 				callScriptedEvent(callFuncParams(_scriptOut,onClick,this arg _isCombatAction arg equals(_targLoc,this)));
 				callFuncParams(_targ,onItemClick,this);
+			} else {
+				trace("onAttackObject() hand attack")
+				callScriptedEvent(callFuncParams(_scriptOut,onClick,this arg _isCombatAction arg equals(_targLoc,this)));
+				callSelfParams(attackOtherObj,_targ);
 			};
 		};
 

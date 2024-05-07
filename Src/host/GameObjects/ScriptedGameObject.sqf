@@ -153,7 +153,7 @@ region(Updates)
 		classprop:1
 		defval:false
 		return:bool
-	"
+	" node_var
 	var(tickMode,false);
 
 	var(__tickHandle__,-1);
@@ -317,7 +317,7 @@ region(InteractWith)
 
 region(redirected interact)
 	//Этот раздел предназначен для вызова действий на объекте (работает по аналогии с interactTo)
-	
+	// interactTo (_target,_usr,_combat,_inventory) - нелогично
 
 	"
 		name:При взаимодействии с целью
@@ -343,6 +343,27 @@ region(redirected interact)
 		callSelf(callBaseClickTarget);
 	};
 
+region(Verbs visible)
+
+	"
+		name:Можно видеть ПКМ действия
+		desc:Обработчик видимости базовых действий, получаемых из ПКМ меню объекта.
+		type:event
+		out:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
+		out:string:Действие:Тип действия. Например ""pickup"", ""twohands"" и т.д. Полный список зарегистрированных ПКМ действий можно посмотреть в ""src\\host\\VerbSystem\\verbsDefine.sqf""
+		return:bool:Будет ли видно действие в ПКМ меню
+	" node_met
+	func(_canSeeVerb)
+	{
+		objParams_2(_usr,_verbClass);
+		true
+	};
+	func(canSeeVerb)
+	{
+		objParams_2(_usr,_verbClass);
+		callSelfParams(_canSeeVerb,_usr arg _verbClass)
+	};
+
 region(OnClick)
 	"
 		name:При нажатии
@@ -360,7 +381,7 @@ region(OnClick)
 
 	func(onClick)
 	{
-		objParams_3(_usr,_isInventoryAction,_isCombatAction);
+		objParams_3(_usr,_isCombatAction,_isInventoryAction);
 		callSelfParams(_onClickWrapper,_usr arg _isCombatAction arg _isInventoryAction );
 	};
 
@@ -379,22 +400,23 @@ region(OnClick)
 region(ItemClick)
 	"
 		name:При нажатии в активной руке
-		desc:Срабатывает при нажатии персонажем по предмету в инвентаре, находящемуся в активной руке.
+		desc:Срабатывает при нажатии персонажа по предмету в инвентаре, находящемуся в активной руке.
 		type:event
-		out:Item:Предмет:Предмет, которым выполняется нажатие.
+		out:Item:Предмет:Предмет, по которому выполняется нажатие (Он же владелец скрипта).
 		out:BasicMob:Персонаж:Персонаж, выполняющий нажатие.
 		out:bool:Боевой режим:Возвращает истину, если нажатие произведено в боевом режиме.
 	" node_met
 	func(_onItemSelfClickWrapper)
 	{
-		objParams_2(_usr,_combat);
-		callSelfParams(callBaseItemSelfClick,_with arg _usr);
+		objParams_3(_src,_usr,_combat);
+		callSelf(callBaseItemSelfClick);
 	};
 
 	func(onItemSelfClick)
 	{
 		objParams_2(_usr,_combat);
-		callSelfParams(_onItemSelfClickWrapper,_usr arg _combat);
+		private _src = getSelf(src);
+		callSelfParams(_onItemSelfClickWrapper,_src arg _usr arg _combat);
 	};
 
 	"
