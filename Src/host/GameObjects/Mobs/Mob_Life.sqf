@@ -2447,7 +2447,7 @@ region(Handle pain)
 	var(agonyLastTime,0);
 	getter_func(hasPain,getSelf(painAmount) > 0);
 	//с подавлением боли не будет срабатывать
-	getter_func(hasPainWithSuppress,if callSelf(canFeelPain) then {callSelf(hasPain)} else {0});
+	getter_func(hasPainWithSuppress,if callSelf(canFeelPain) then {callSelf(hasPain)} else {false});
 	getter_func(canRegenPain,callSelf(isSleep));
 	func(handle_pain)
 	{

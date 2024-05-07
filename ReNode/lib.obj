@@ -4982,6 +4982,24 @@ def:m:ScriptedRole.isMainRole_0
 		return:bool:Является ли эта роль ключевой.
 		defval:false
 	
+def:f:ScriptedRole.__canBeFullAntag_0
+
+		name:Может быть полным антагонистом
+		desc:Определяет, может ли роль быть полным антагонистом.
+		prop:get
+		classprop:1
+		return:bool:Может ли роль быть полным антагонистом
+		defval:true
+	
+def:f:ScriptedRole.__canBeHiddenAntag_0
+
+		name:Может быть скрытым антагонистом
+		desc:Определяет, может ли роль быть скрытым антагонистом.
+		prop:get
+		classprop:1
+		return:bool:Может ли роль быть скрытым антагонистом
+		defval:true
+	
 def:f:ScriptedRole.returnInLobbyAfterDead_0
 
 		name:В лобби после смерти
@@ -5109,7 +5127,7 @@ def:m:ScriptedRole.canBeFullAntag_0
 
 		name:Полный антагонист
 		namelib:Может быть полным антагонистом
-		desc:Отвечает за то, может ли клиент, взявший эту роль быть полным антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль - в этом событии не требуется проверять является ли роль ключевой. Полным антагонистам выполняется замена роли, а выбор этих ролей происходит в логике игрового режима.
+		desc:Отвечает за то, может ли клиент, взявший эту роль быть полным антагонистом. Данный узел позволяет реализовать специальную логику по решению будет ли эта роль полным антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль - в этом событии не требуется проверять является ли роль ключевой. Полным антагонистам выполняется замена роли, а выбор этих ролей происходит в логике игрового режима.
 		type:event
 		out:ServerClient^:Клиент:Объект клиента, который проверяется на полного антагониста.
 		return:bool:Полный антагонист
@@ -5118,7 +5136,7 @@ def:m:ScriptedRole.canBeHiddenAntag_0
 
 		name:Скрытый антагонист
 		namelib:Может быть скрытым антагонистом
-		desc:Отвечает за то, может ли клиент, взявший эту роль быть скрытым антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль. Скрытые антагонисты получают свои особые задачи без смены роли, в отличии от полных антагонистов. Выбор таких ролей происходит в логике игрового режима.
+		desc:Отвечает за то, может ли клиент, взявший эту роль быть скрытым антагонистом. Данный узел позволяет реализовать специальную логику по решению будет ли эта роль скрытым антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль. Скрытые антагонисты получают свои особые задачи без смены роли, в отличии от полных антагонистов. Выбор таких ролей происходит в логике игрового режима.
 		type:event
 		out:ServerClient^:Клиент:Объект клиента, который проверяется на скрытого антагониста.
 		return:bool:Скрытый антагонист
@@ -5879,7 +5897,7 @@ $REGION:CLASSMETA
 }
 ,"IGamemodeSpecificClass": {
     "baseClass" : "object",
-    "defined" : {"file":"src\\host\\GameModes\\BasicDefines.sqf","line":456},
+    "defined" : {"file":"src\\host\\GameModes\\BasicDefines.sqf","line":433},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -8845,6 +8863,15 @@ $REGION:CLASSMETA
 "name":{"return": "string"},"desc":{"return": "string"},"model":{"return": "string"},"incrLeft":{"return": "int"}}   },
    "methods": { "defined": {
 "canIncrease":{"return": "<undefined>"},"getIncreaseType":{"return": "<undefined>"},"increasePool":{"return": "<undefined>"}
+}   }
+}
+,"RatShitMedium": {
+    "baseClass" : "CleanableItem",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\ReagentContainers\\Cleanable.sqf","line":70},
+   "fields": { "defined": {
+"name":{"return": "string"},"desc":{"return": "string"},"model":{"return": "string"}}   },
+   "methods": { "defined": {
+
 }   }
 }
 ,"KoradizinBox": {
@@ -15252,7 +15279,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "canAddAspect":{"return": "bool"},"name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"duration":{"return": "int"},"deadSideCount":{"return": "int"},"deadNA":{"return": "int"},"deadCity":{"return": "int"},"mobsNA":{"return": "null_array"},"mobsCity":{"return": "null_array"},"posBaseNA":{"return": "null_array"},"posBaseCity":{"return": "null_array"},"gates":{"return": "null_array"},"gatesIsOpen":{"return": "bool"},"isStarted":{"return": "bool"},"side":{"return": "bool"},"listBoxes":{"return": "null_array"},"stage":{"return": "int"},"timer":{"return": "int"},"playedTime":{"return": "int"}}   },
    "methods": { "defined": {
-"canPlayEvents":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"isVoteSystemEnabled":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"handleCheckFinish":{"return": "<undefined>"},"killAllMobs":{"return": "<undefined>"},"updateStage":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"sendEventMes":{"return": "<undefined>"},"switchGates":{"return": "<undefined>"},"onRoundBegin":{"return": "<undefined>"},"spawnTraps":{"return": "<undefined>"},"onRoundCode":{"return": "<undefined>"},"getCurRoleName":{"return": "<undefined>"},"getCurRoleDesc":{"return": "<undefined>"},"getSpawnPos":{"return": "<undefined>"},"getSpawnDir":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"allocClothType":{"return": "<undefined>"},"pickBackUniform":{"return": "<undefined>"},"pickHeadUniform":{"return": "<undefined>"},"pickFaceUniform":{"return": "<undefined>"},"pickFirstWeapon":{"return": "<undefined>"},"setEquipment":{"return": "<undefined>"},"onSpawnedMob":{"return": "<undefined>"},"onKilledMob":{"return": "<undefined>"}
+"canPlayEvents":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"isVoteSystemEnabled":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"handleCheckFinish":{"return": "<undefined>"},"killAllMobs":{"return": "<undefined>"},"updateStage":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"sendEventMes":{"return": "<undefined>"},"switchGates":{"return": "<undefined>"},"spawnTraps":{"return": "<undefined>"},"onRoundCode":{"return": "<undefined>"},"getCurRoleName":{"return": "<undefined>"},"getCurRoleDesc":{"return": "<undefined>"},"getSpawnPos":{"return": "<undefined>"},"getSpawnDir":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"allocClothType":{"return": "<undefined>"},"pickBackUniform":{"return": "<undefined>"},"pickHeadUniform":{"return": "<undefined>"},"pickFaceUniform":{"return": "<undefined>"},"pickFirstWeapon":{"return": "<undefined>"},"setEquipment":{"return": "<undefined>"},"onSpawnedMob":{"return": "<undefined>"},"onKilledMob":{"return": "<undefined>"}
 }   }
 }
 ,"ScriptedGamemode": {
@@ -15279,7 +15306,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"duration":{"return": "int"},"lawyers":{"return": "null_array"},"grabTimer":{"return": "int"},"thiefTask":{"return": "null_array"},"milkDoc":{"return": "object"},"generator":{"return": "object"},"lastRoomNumber":{"return": "int"},"listRooms":{"return": "null_array"},"murder":{"return": "object"},"target":{"return": "object"},"detective":{"return": "object"},"murderFinded":{"return": "bool"},"suspicions":{"return": "null_array"},"allEvidences":{"return": "null_array"},"killInfo":{"return": "object"},"killPlace":{"return": "object"},"prevTarget":{"return": "null_array"},"lastPointerInt":{"return": "int"},"leftItems":{"return": "null"},"farmOwnerDoc":{"return": "object"}}   },
    "methods": { "defined": {
-"getMapName":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getUnsleepGameInfo":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"getLeadingRolesInfo":{"return": "<undefined>"},"getTaskTextSuccessInfo":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"onRoundBegin":{"return": "<undefined>"},"onRoundCode":{"return": "<undefined>"},"getMurderPos":{"return": "<undefined>"},"getMurderPosName":{"return": "<undefined>"},"getMurderKillProcess":{"return": "<undefined>"},"getMurderKillReason":{"return": "<undefined>"},"processEvidence":{"return": "<undefined>"},"pickMurder":{"return": "<undefined>"},"doKnownLateMobMurder":{"return": "<undefined>"},"checkMurder":{"return": "<undefined>"}
+"getMapName":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getUnsleepGameInfo":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"getLeadingRolesInfo":{"return": "<undefined>"},"getTaskTextSuccessInfo":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"onRoundCode":{"return": "<undefined>"},"getMurderPos":{"return": "<undefined>"},"getMurderPosName":{"return": "<undefined>"},"getMurderKillProcess":{"return": "<undefined>"},"getMurderKillReason":{"return": "<undefined>"},"processEvidence":{"return": "<undefined>"},"pickMurder":{"return": "<undefined>"},"doKnownLateMobMurder":{"return": "<undefined>"},"checkMurder":{"return": "<undefined>"}
 }   }
 }
 ,"GMStationBase": {
@@ -15288,7 +15315,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "headSecondNames":{"return": "null_array"},"__songIndex":{"return": "string"},"possibleIdeologies":{"return": "null_array"},"ideologyTimeoutStamp":{"return": "int"},"ideology":{"return": "object"}}   },
    "methods": { "defined": {
-"isPlayableGamemode":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"getStartSong":{"return": "<undefined>"},"escapeRoundResult":{"return": "<undefined>"},"getEndSong":{"return": "<undefined>"},"onRoundBegin":{"return": "<undefined>"},"ideologySelectionTimeout":{"return": "<undefined>"},"processInitIdeology":{"return": "<undefined>"},"openPickIdeology":{"return": "<undefined>"},"isPickedIdeology":{"return": "<undefined>"},"_onIdeologyTimeout":{"return": "<undefined>"},"pickIdeology":{"return": "<undefined>"},"printRoundStatistic":{"return": "<undefined>"}
+"isPlayableGamemode":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"getStartSong":{"return": "<undefined>"},"escapeRoundResult":{"return": "<undefined>"},"getEndSong":{"return": "<undefined>"},"ideologySelectionTimeout":{"return": "<undefined>"},"processInitIdeology":{"return": "<undefined>"},"openPickIdeology":{"return": "<undefined>"},"isPickedIdeology":{"return": "<undefined>"},"_onIdeologyTimeout":{"return": "<undefined>"},"pickIdeology":{"return": "<undefined>"},"printRoundStatistic":{"return": "<undefined>"}
 }   }
 }
 ,"GMPrey": {
@@ -15306,7 +15333,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"duration":{"return": "int"},"task":{"return": "object"},"taskList":{"return": "null_array"},"protectedWalls":{"return": "null_array"},"countDoors":{"return": "int"},"banditBasePos":{"return": "null_array"},"cages":{"return": "null_array"},"allAliveBandits":{"return": "null_array"},"keyRolesList":{"return": "null_array"},"countAliveBandits":{"return": "int"},"deadMobs":{"return": "int"},"isSBSCommandirSpawned":{"return": "bool"}}   },
    "methods": { "defined": {
-"getUnsleepGameInfo":{"return": "<undefined>"},"getStartSong":{"return": "<undefined>"},"getEndSong":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"onRoundBegin":{"return": "<undefined>"},"isBlockedInSBSCage":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"handleRandomPos":{"return": "<undefined>"},"handleRandomDir":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"getLeadingRolesInfo":{"return": "<undefined>"}
+"getUnsleepGameInfo":{"return": "<undefined>"},"getStartSong":{"return": "<undefined>"},"getEndSong":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"isBlockedInSBSCage":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"handleRandomPos":{"return": "<undefined>"},"handleRandomDir":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"getLeadingRolesInfo":{"return": "<undefined>"}
 }   }
 }
 ,"GMSaloonV2": {
@@ -15315,7 +15342,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"duration":{"return": "int"},"task":{"return": "object"},"taskList":{"return": "null_array"},"protectedWalls":{"return": "null_array"},"countDoors":{"return": "int"},"banditBasePos":{"return": "null_array"},"cages":{"return": "null_array"},"allAliveBandits":{"return": "null_array"},"keyRolesList":{"return": "null_array"},"countAliveBandits":{"return": "int"},"deadMobs":{"return": "int"},"isSBSCommandirSpawned":{"return": "bool"}}   },
    "methods": { "defined": {
-"getUnsleepGameInfo":{"return": "<undefined>"},"getStartSong":{"return": "<undefined>"},"getEndSong":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"onRoundBegin":{"return": "<undefined>"},"isBlockedInSBSCage":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"getLeadingRolesInfo":{"return": "<undefined>"}
+"getUnsleepGameInfo":{"return": "<undefined>"},"getStartSong":{"return": "<undefined>"},"getEndSong":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"isBlockedInSBSCage":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"getLeadingRolesInfo":{"return": "<undefined>"}
 }   }
 }
 ,"GMHunt": {
@@ -15954,7 +15981,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descExtended":{"return": "string"},"canAddAspect":{"return": "bool"},"duration":{"return": "int"},"finishResult":{"return": "int"},"bufferedFinishText":{"return": "string"},"bufferedLeadingRolesText":{"return": "string"},"countDead":{"return": "int"},"countDeadCity":{"return": "int"},"countDeadCave":{"return": "int"},"bloodLoss":{"return": "int"},"teethLoss":{"return": "int"},"headsLoss":{"return": "int"},"notesCreated":{"return": "int"}}   },
    "methods": { "defined": {
-"getProbability":{"return": "<undefined>"},"isVotable":{"return": "<undefined>"},"isPlayableGamemode":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getMinFullAntags":{"return": "<undefined>"},"getMinHiddenAntags":{"return": "<undefined>"},"canPlayEvents":{"return": "<undefined>"},"getMinPlayEventTime":{"return": "<undefined>"},"getMaxPlayEventTime":{"return": "<undefined>"},"getAntagRoleFull":{"return": "<undefined>"},"handleAntagRoleHidden":{"return": "<undefined>"},"handleAntagRoleFull":{"return": "<undefined>"},"getRoleForPostClient":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"onRoundBegin":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"setFinishResult":{"return": "<undefined>"},"onFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"getDelayRoundStatistic":{"return": "<undefined>"},"getDelayLeadingRoles":{"return": "<undefined>"},"getLeadingRolesInfo":{"return": "<undefined>"},"getCreditsInfo":{"return": "<undefined>"},"__clientOwnersToString":{"return": "<undefined>"},"printLeadingRolesInfo":{"return": "<undefined>"},"printRoundStatistic":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"getCandidatesCount":{"return": "<undefined>"},"hasTaskByTag":{"return": "<undefined>"},"getAllTasksByTag":{"return": "<undefined>"},"getFirstTaskByTag":{"return": "<undefined>"},"hasAnySuccessTaskByTag":{"return": "<undefined>"},"hasAllSuccessTaskByTag":{"return": "<undefined>"},"onRoundCode":{"return": "<undefined>"},"onKnownMobsProcess":{"return": "<undefined>"},"onModeSetup":{"return": "<undefined>"},"isVoteSystemEnabled":{"return": "<undefined>"},"getUnsleepMessagesCount":{"return": "<undefined>"},"getUnsleepGameInfo":{"return": "<undefined>"},"getStartSong":{"return": "<undefined>"},"getEndSong":{"return": "<undefined>"}
+"getProbability":{"return": "<undefined>"},"isVotable":{"return": "<undefined>"},"isPlayableGamemode":{"return": "<undefined>"},"getReqPlayersMin":{"return": "<undefined>"},"getReqPlayersMax":{"return": "<undefined>"},"getMinFullAntags":{"return": "<undefined>"},"getMinHiddenAntags":{"return": "<undefined>"},"canPlayEvents":{"return": "<undefined>"},"getMinPlayEventTime":{"return": "<undefined>"},"getMaxPlayEventTime":{"return": "<undefined>"},"getAntagRoleFull":{"return": "<undefined>"},"handleAntagRoleHidden":{"return": "<undefined>"},"preSetup":{"return": "<undefined>"},"postSetup":{"return": "<undefined>"},"checkFinish":{"return": "<undefined>"},"setFinishResult":{"return": "<undefined>"},"onFinish":{"return": "<undefined>"},"getResultTextOnFinish":{"return": "<undefined>"},"getDelayRoundStatistic":{"return": "<undefined>"},"getDelayLeadingRoles":{"return": "<undefined>"},"getLeadingRolesInfo":{"return": "<undefined>"},"getCreditsInfo":{"return": "<undefined>"},"__clientOwnersToString":{"return": "<undefined>"},"printLeadingRolesInfo":{"return": "<undefined>"},"printRoundStatistic":{"return": "<undefined>"},"getMapName":{"return": "<undefined>"},"getLobbySoundName":{"return": "<undefined>"},"getLobbyBackground":{"return": "<undefined>"},"getLobbyRoles":{"return": "<undefined>"},"getLateRoles":{"return": "<undefined>"},"conditionToStart":{"return": "<undefined>"},"onFailReasonToStart":{"return": "<undefined>"},"getCandidatesCount":{"return": "<undefined>"},"hasTaskByTag":{"return": "<undefined>"},"getAllTasksByTag":{"return": "<undefined>"},"getFirstTaskByTag":{"return": "<undefined>"},"hasAnySuccessTaskByTag":{"return": "<undefined>"},"hasAllSuccessTaskByTag":{"return": "<undefined>"},"onRoundCode":{"return": "<undefined>"},"onKnownMobsProcess":{"return": "<undefined>"},"onModeSetup":{"return": "<undefined>"},"isVoteSystemEnabled":{"return": "<undefined>"},"getUnsleepMessagesCount":{"return": "<undefined>"},"getUnsleepGameInfo":{"return": "<undefined>"},"getStartSong":{"return": "<undefined>"},"getEndSong":{"return": "<undefined>"}
 }   }
 }
 ,"TaskBase": {
@@ -15986,7 +16013,7 @@ $REGION:CLASSMETA
 }
 ,"ScriptedEater": {
     "baseClass" : "ScriptedRole",
-    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":974},
+    "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":995},
    "fields": { "defined": {
 "name":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"count":{"return": "int"},"classMan":{"return": "string"},"classWoman":{"return": "string"}}   },
    "methods": { "defined": {
@@ -16933,7 +16960,7 @@ $REGION:CLASSMETA
     "baseClass" : "BasicRole",
     "defined" : {"file":"src\\host\\GameModes\\ScriptedDefines.sqf","line":437},
    "fields": { "defined": {
-"name":{"return": "string"},"desc":{"return": "string"},"descInGame":{"return": "string"},"classMan":{"return": "string"},"classWoman":{"return": "string"},"returnInLobbyAfterDead":{"return": "bool"},"_deadTimeout":{"return": "int"},"count":{"return": "int"},"_currentBaseSkills":{"return": "null_array"},"_currentOtherSkills":{"return": "null_array"},"_currentSpawnLocation":{"return": "null_array"},"_currentConnectedTo":{"return": "null_array"}}   },
+"name":{"return": "string"},"desc":{"return": "string"},"descInGame":{"return": "string"},"classMan":{"return": "string"},"classWoman":{"return": "string"},"__canBeFullAntag":{"return": "bool"},"__canBeHiddenAntag":{"return": "bool"},"returnInLobbyAfterDead":{"return": "bool"},"_deadTimeout":{"return": "int"},"count":{"return": "int"},"_currentBaseSkills":{"return": "null_array"},"_currentOtherSkills":{"return": "null_array"},"_currentSpawnLocation":{"return": "null_array"},"_currentConnectedTo":{"return": "null_array"}}   },
    "methods": { "defined": {
 "isMainRole":{"return": "<undefined>"},"_getDeadTimeout":{"return": "<undefined>"},"canStoreNameAndFaceForValidate":{"return": "<undefined>"},"_getSkillsWrapper":{"return": "<undefined>"},"getSkills":{"return": "<undefined>"},"_getOtherSkillsWrapper":{"return": "<undefined>"},"getOtherSkills":{"return": "<undefined>"},"canTakeInLobby":{"return": "<undefined>"},"_canTakeInLobbyConst":{"return": "<undefined>"},"canVisibleAfterStart":{"return": "<undefined>"},"_canVisibleAfterStartConst":{"return": "<undefined>"},"needDiscordRoles":{"return": "<undefined>"},"roleAccess":{"return": "<undefined>"},"canBeFullAntag":{"return": "<undefined>"},"canBeHiddenAntag":{"return": "<undefined>"},"getBasicMobs":{"return": "<undefined>"},"_spawnLocationWrapper":{"return": "<undefined>"},"spawnLocation":{"return": "<undefined>"},"useRandomDirOnSpawn":{"return": "<undefined>"},"_connectedToWrapper":{"return": "<undefined>"},"connectedTo":{"return": "<undefined>"},"getEquipment":{"return": "<undefined>"},"_onAssignedWrapper":{"return": "<undefined>"},"onAssigned":{"return": "<undefined>"},"_onDeadBasicWrapper":{"return": "<undefined>"},"onDeadBasic":{"return": "<undefined>"},"onEndgameBasic":{"return": "<undefined>"},"getCurrentGamemode":{"return": "<undefined>"},"constructor":{"return": "<undefined>"}
 }   }

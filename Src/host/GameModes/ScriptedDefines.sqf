@@ -330,6 +330,8 @@ class(ScriptedGamemode) extends(GMBase)
 		objParams();
 		[]
 	};
+	
+	var(___roleFirstInit__,false);
 
 	func(_getRolesWrapperInternal)
 	{
@@ -338,9 +340,17 @@ class(ScriptedGamemode) extends(GMBase)
 		private _robj = nullPtr;
 		private _lobby = [];
 		private _late = [];
+		private _isFirstInit = !getSelf(___roleFirstInit__);
+		if (_isFirstInit) then {
+			setSelf(___roleFirstInit__,true);
+		};
 		{
 			_robj = _x call gm_getRoleObject;
+			
 			if !isNullReference(_robj) then {
+				if (_isFirstInit) then {
+					callFuncParams(_robj,onRegisteredInGamemode,this);
+				};
 				if callFunc(_robj,_canTakeInLobbyConst) then {
 					_lobby pushBackUnique _x;
 				};
@@ -485,6 +495,25 @@ class(ScriptedRole) extends(BasicRole)
 		defval:false
 	" node_met
 	getter_func(isMainRole,false); //ключевые роли управляют условием начала старта. Так же они заносятся в 
+
+	"
+		name:Может быть полным антагонистом
+		desc:Определяет, может ли роль быть полным антагонистом.
+		prop:get
+		classprop:1
+		return:bool:Может ли роль быть полным антагонистом
+		defval:true
+	" node_var
+	var(__canBeFullAntag,true);
+	"
+		name:Может быть скрытым антагонистом
+		desc:Определяет, может ли роль быть скрытым антагонистом.
+		prop:get
+		classprop:1
+		return:bool:Может ли роль быть скрытым антагонистом
+		defval:true
+	" node_var
+	var(__canBeHiddenAntag,true);
 
 	"
 		name:В лобби после смерти
@@ -694,7 +723,8 @@ class(ScriptedRole) extends(BasicRole)
 	"
 		name:Полный антагонист
 		namelib:Может быть полным антагонистом
-		desc:Отвечает за то, может ли клиент, взявший эту роль быть полным антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль - в этом событии не требуется проверять является ли роль ключевой. "+
+		desc:Отвечает за то, может ли клиент, взявший эту роль быть полным антагонистом. "+
+		"Данный узел позволяет реализовать специальную логику по решению будет ли эта роль полным антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль - в этом событии не требуется проверять является ли роль ключевой. "+
 		"Полным антагонистам выполняется замена роли, а выбор этих ролей происходит в логике игрового режима.
 		type:event
 		out:ServerClient^:Клиент:Объект клиента, который проверяется на полного антагониста.
@@ -703,13 +733,14 @@ class(ScriptedRole) extends(BasicRole)
 	func(canBeFullAntag)
 	{
 		objParams_1(_client);
-		true
+		getSelf(__canBeFullAntag)
 	};
 
 	"
 		name:Скрытый антагонист
 		namelib:Может быть скрытым антагонистом
-		desc:Отвечает за то, может ли клиент, взявший эту роль быть скрытым антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль. "+
+		desc:Отвечает за то, может ли клиент, взявший эту роль быть скрытым антагонистом. "+
+		"Данный узел позволяет реализовать специальную логику по решению будет ли эта роль скрытым антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль. "+
 		"Скрытые антагонисты получают свои особые задачи без смены роли, в отличии от полных антагонистов. Выбор таких ролей происходит в логике игрового режима.
 		type:event
 		out:ServerClient^:Клиент:Объект клиента, который проверяется на скрытого антагониста.
@@ -718,7 +749,7 @@ class(ScriptedRole) extends(BasicRole)
 	func(canBeHiddenAntag)
 	{
 		objParams_1(_client);
-		true
+		getSelf(__canBeHiddenAntag)
 	};
 
 	//safe copy mobs
@@ -944,6 +975,11 @@ class(ScriptedRole) extends(BasicRole)
 	func(constructor)
 	{
 		objParams();
+	};
+
+	func(onRegisteredInGamemode)
+	{
+		objParams_1(_gmObj);
 		if (!is3DEN) then {
 			{
 				assert_str(_x!="",format vec2("Empty string in property needDiscordRoles for class %1",callSelf(getClassName)));

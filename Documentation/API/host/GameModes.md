@@ -13,7 +13,7 @@ Replaced value:
 ```sqf
 (if (getSelf(var__) val__ ) then {text__ + (str getSelf(var__)) + sbr} else {""})
 ```
-File: [host\GameModes\BasicDefines.sqf at line 217](../../../Src/host/GameModes/BasicDefines.sqf#L217)
+File: [host\GameModes\BasicDefines.sqf at line 194](../../../Src/host/GameModes/BasicDefines.sqf#L194)
 ## printInfoIf_Handled(val__,text__,var__,__hnd)
 
 Type: constant
@@ -28,7 +28,7 @@ Replaced value:
 ```sqf
 (if (getSelf(var__) val__ ) then {text__ + (__hnd) + sbr} else {""})
 ```
-File: [host\GameModes\BasicDefines.sqf at line 218](../../../Src/host/GameModes/BasicDefines.sqf#L218)
+File: [host\GameModes\BasicDefines.sqf at line 195](../../../Src/host/GameModes/BasicDefines.sqf#L195)
 # BasicTask.sqf
 
 ## editor_task_test
@@ -44,7 +44,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameModes\BasicTask.sqf at line 21](../../../Src/host/GameModes/BasicTask.sqf#L21)
+File: [host\GameModes\BasicTask.sqf at line 22](../../../Src/host/GameModes/BasicTask.sqf#L22)
 ## taskSystem_allTasks
 
 Type: Variable
@@ -69,6 +69,18 @@ Initial value:
 []
 ```
 File: [host\GameModes\BasicTask.sqf at line 12](../../../Src/host/GameModes/BasicTask.sqf#L12)
+## taskSystem_increment
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [host\GameModes\BasicTask.sqf at line 13](../../../Src/host/GameModes/BasicTask.sqf#L13)
 ## taskSystem_map_tags
 
 Type: Variable
@@ -80,7 +92,7 @@ Initial value:
 ```sqf
 createHashMap //map of all tagged tasks
 ```
-File: [host\GameModes\BasicTask.sqf at line 14](../../../Src/host/GameModes/BasicTask.sqf#L14)
+File: [host\GameModes\BasicTask.sqf at line 15](../../../Src/host/GameModes/BasicTask.sqf#L15)
 # CommonGameAspects.sqf
 
 ## DEFAULT_WEIGHT

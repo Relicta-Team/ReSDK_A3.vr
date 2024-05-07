@@ -205,7 +205,7 @@ class(GMTVTGame) extends(GMStationBase)
 		setSelf(gatesIsOpen,!getSelf(gatesIsOpen));
 	};
 	
-	func(onRoundBegin)
+	func(postSetup)
 	{
 		objParams();
 		private _b = ["OldWoodenBox",[3876.64,3607.87,8.7706],273.159,false] call createStructure;
