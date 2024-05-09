@@ -338,6 +338,7 @@ if ((random 1) < 0.5) then {
 	['Egg',[4040.81,4034.78,13.1461],0,[0,0,1]] call InitItem; 
 };
 ['ButterPiece',[4041.11,4034.73,13.1461],335,[0,0,1]] call InitItem; 
+['Bucket',[4037.69,4031.55,13.0457],0,[0,0,1]] call InitItem; 
 ['Wheelchair',[4042,4026.29,13.0528],103.822,[0,0,1]] call InitStruct; 
 _4044_676274026_0610413_01668 = ['IStruct',[4044.68,4026.06,18.0167,true],[-1,4.20091e-012,8.59499e-006],[0,-1,4.88762e-007], {_thisObj setvariable ['model','ca\structures_e\misc\misc_interier\cloth_2_ep1.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4046_006104026_0744613_05520 = ['IStruct',[4046.01,4026.07,18.1252,true],270,[-1.11674e-006,-0.00119335,0.999999], {_thisObj setvariable ['model','ca\structures_e\misc\misc_interier\boots_ep1.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -1580,7 +1581,6 @@ _4068_585944055_1311012_67509 = ['IStruct',[4068.59,4055.13,17.976,true],[-4.371
 ['ContainerGreen2',[4185.63,3984.75,0],2.56132e-006,[0,0,1]] call InitStruct; 
 ['CaseBedroomMedium',[4159.5,3984.75,0],180,[0,0,1]] call InitStruct; 
 ['LongWeaponContainer',[4196.89,3984.88,0],0,[0,0,1]] call InitStruct; 
-['Bucket',[4040.85,4032.5,13.0528],0,[0,0,1]] call InitItem; 
 
 
 

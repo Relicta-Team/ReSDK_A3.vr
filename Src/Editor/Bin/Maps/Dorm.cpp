@@ -5,7 +5,7 @@ class EditorData
 	angleGridStep=0.08726646;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=46;
+	toggles=42;
 	class ItemIDProvider
 	{
 		nextID=4850;
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={4039.5686,20.184906,4032.3157};
-		dir[]={-0.1859944,-0.61763316,-0.76430249};
-		up[]={-0.14603928,0.78647345,-0.6001178};
-		aside[]={-0.97175145,4.331232e-007,0.23647664};
+		pos[]={4040.7065,20.460613,4032.4934};
+		dir[]={-0.86501276,-0.49662358,0.073336788};
+		up[]={-0.49484241,0.86790466,0.041954555};
+		aside[]={0.0844694,-7.1875984e-006,0.99650919};
 	};
 };
 binarizationWanted=0;
@@ -649,7 +649,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=18;
+		items=17;
 		class Item0
 		{
 			dataType="Group";
@@ -4840,9 +4840,10 @@ class Mission
 				{
 					dataType="Layer";
 					name="Слесарь";
+					state=1;
 					class Entities
 					{
-						items=57;
+						items=58;
 						class Item0
 						{
 							dataType="Object";
@@ -5823,9 +5824,25 @@ class Mission
 							type="S_Butter_Piece";
 							atlOffset=0.08836937;
 						};
+						class Item57
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4037.6904,18.045679,4031.552};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bucket""]]}";
+							};
+							id=4849;
+							type="CUP_A2_bucket";
+							atlOffset=2.6334352;
+						};
 					};
 					id=2955;
-					atlOffset=0.17632675;
+					atlOffset=0.082120895;
 				};
 				class Item9
 				{
@@ -11530,7 +11547,7 @@ class Mission
 				};
 			};
 			id=2447;
-			atlOffset=2.0145998;
+			atlOffset=2.0142317;
 		};
 		class Item4
 		{
@@ -25547,22 +25564,6 @@ class Mission
 			};
 			id=4756;
 			atlOffset=2.0980835e-005;
-		};
-		class Item17
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4040.8499,18.052765,4032.4956};
-			};
-			side="Empty";
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bucket""]]}";
-			};
-			id=4849;
-			type="CUP_A2_bucket";
-			atlOffset=2.9473658;
 		};
 	};
 };
