@@ -295,7 +295,7 @@ _4042_386234031_3793913_33303 = ['IStruct',[4042.39,4031.38,13.333],350,[0,0,1],
 ['FabricBagBig2',[4040.56,4034.37,13.0528],270,[0,0,1]] call InitItem; 
 ['GreenBed',[4038.18,4030.1,13.0497],265.883,[0,0,1], {go_editor_globalRefs set ["RSlesarDormBed",_thisObj];
 }] call InitStruct; 
-_4042_342044031_5063514_87343 = ['IStruct',[4042.34,4031.51,14.8734],340,[0,0,1], {_thisObj setvariable ['model','ml\ml_object_new\model_14_10\benzin.p3d'];}] call InitStruct; // !!! realocated model !!!
+['Canister',[4042.34,4031.51,14.8734],340,[0,0,1]] call InitItem; 
 ['SteelBrownContainer',[4038.16,4030.37,13.0528],10.0001,[0,0,1]] call InitItem; 
 ['ShuttleBag',[4039.94,4034.13,13.0528],0,[0,0,1]] call InitItem; 
 ['PowerSwitcherBig',[4042.58,4033.1,19.2983,true],90,[0,1,7.54979e-008]] call InitStruct; 
@@ -324,7 +324,7 @@ _4039_493414029_6389213_85558 = ['Intercom',[4039.49,4029.64,13.8556],90,[0,0,1]
 _4037_408944034_6401413_01779 = ['IStruct',[4037.41,4034.64,13.0178],354.781,[0,0,1], {_thisObj setvariable ['model','ml_shabut\exodus\baloonexo.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['Workbench',[4037.65,4032.42,13.0492],270,[0,0,1]] call InitStruct; 
 ['Hammer',[4037.6,4032.41,18.8894,true],[-0.906308,-0.422618,1.69645e-008],[0.422618,-0.906308,1.08076e-008]] call InitItem; 
-_4027_182624025_6872610_09802 = ['IStruct',[4027.18,4025.69,10.098],340,[0,0,1], {_thisObj setvariable ['model','ml\ml_object_new\model_14_10\benzin.p3d'];}] call InitStruct; // !!! realocated model !!!
+['Canister',[4027.18,4025.69,10.098],340,[0,0,1]] call InitItem; 
 ['Butter',[4041.02,4034.78,13.1461],325,[0,0,1]] call InitItem; 
 if ((random 1) < 0.5) then {
 	['Butter',[4041.22,4034.81,13.1461],15,[0,0,1]] call InitItem; 
@@ -1580,6 +1580,7 @@ _4068_585944055_1311012_67509 = ['IStruct',[4068.59,4055.13,17.976,true],[-4.371
 ['ContainerGreen2',[4185.63,3984.75,0],2.56132e-006,[0,0,1]] call InitStruct; 
 ['CaseBedroomMedium',[4159.5,3984.75,0],180,[0,0,1]] call InitStruct; 
 ['LongWeaponContainer',[4196.89,3984.88,0],0,[0,0,1]] call InitStruct; 
+['Bucket',[4040.85,4032.5,13.0528],0,[0,0,1]] call InitItem; 
 
 
 

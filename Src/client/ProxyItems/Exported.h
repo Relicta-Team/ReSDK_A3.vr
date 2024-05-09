@@ -42,3 +42,4 @@ model("\relicta_models2\medicine\s_crutch\s_crutch.p3d") [[INV_BACKPACK,[[-0.038
 model("\relicta_models\models\interier\props\treasure\crown\crown1.p3d") [[INV_HEAD,[[-0.05,-0.071,0.207],[187,0,0]]],[INV_HAND_L,[[-0.05,-0.016,-0.066],[48,72,-6]]],[INV_HAND_R,[[0.013,-0.066,-0.05],[-108,54,-12]]]]
 model("\relicta_models\models\interier\props\treasure\crown\crown2.p3d") [[INV_HEAD,[[-0.05,-0.071,0.207],[187,0,0]]],[INV_HAND_L,[[-0.05,-0.016,-0.066],[48,72,-6]]],[INV_HAND_R,[[0.013,-0.066,-0.05],[-108,54,-12]]]]
 model("\metro_ob\model\case_6.p3d") [[INV_HAND_L,[[-0.108,-0.051,-0.183],[61,-36,6]]],[INV_HAND_R,[[0.082,-0.084,-0.175],[-69,-39,-4]]]]
+model("\ml\ml_object_new\model_14_10\benzin.p3d") [[INV_CLOTH,[[0.196,0.087,-0.708],[-360,0,0]]],[INV_HAND_L,[[-0.223,-0.122,-0.191],[-33,13,13]]],[INV_HAND_R,[[0.227,-0.064,-0.19],[197,-23,15]]]]

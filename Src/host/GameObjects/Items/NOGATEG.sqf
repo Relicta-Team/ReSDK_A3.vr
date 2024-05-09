@@ -156,3 +156,10 @@
 		var(reagents,vec2(this,200) call ms_create);
 	endclass
 
+	class(Canister) extends(IGlassReagentCont)
+		var(name,"Канистра");
+		var(weight,gramm(5000));
+		var(model,"ml\ml_object_new\model_14_10\benzin.p3d");
+		var(reagents,vec2(this,1000) call ms_create);
+	endclass
+

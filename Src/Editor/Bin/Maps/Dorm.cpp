@@ -8,7 +8,7 @@ class EditorData
 	toggles=46;
 	class ItemIDProvider
 	{
-		nextID=4849;
+		nextID=4850;
 	};
 	class LayerIndexProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={4035.7781,20.897789,4028.4006};
-		dir[]={0.80277759,-0.45520565,-0.38518617};
-		up[]={0.41041917,0.89038455,-0.19692531};
-		aside[]={-0.43260545,-1.2140663e-007,-0.90160656};
+		pos[]={4039.5686,20.184906,4032.3157};
+		dir[]={-0.1859944,-0.61763316,-0.76430249};
+		up[]={-0.14603928,0.78647345,-0.6001178};
+		aside[]={-0.97175145,4.331232e-007,0.23647664};
 	};
 };
 binarizationWanted=0;
@@ -649,7 +649,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=17;
+		items=18;
 		class Item0
 		{
 			dataType="Group";
@@ -4840,7 +4840,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Слесарь";
-					state=1;
 					class Entities
 					{
 						items=57;
@@ -5230,7 +5229,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\benzin.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Canister""]]}";
 							};
 							id=2928;
 							type="benzin";
@@ -5702,7 +5701,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\benzin.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Canister""]]}";
 							};
 							id=3706;
 							type="benzin";
@@ -25548,6 +25547,22 @@ class Mission
 			};
 			id=4756;
 			atlOffset=2.0980835e-005;
+		};
+		class Item17
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4040.8499,18.052765,4032.4956};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bucket""]]}";
+			};
+			id=4849;
+			type="CUP_A2_bucket";
+			atlOffset=2.9473658;
 		};
 	};
 };
