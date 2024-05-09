@@ -8,22 +8,22 @@ class EditorData
 	toggles=46;
 	class ItemIDProvider
 	{
-		nextID=4848;
+		nextID=4849;
 	};
 	class LayerIndexProvider
 	{
-		nextID=1562;
+		nextID=1606;
 	};
 	class Camera
 	{
-		pos[]={4032.3823,19.880798,4040.4531};
-		dir[]={-0.91667992,-0.28525299,0.28030655};
-		up[]={-0.27285671,0.95839649,0.083436891};
-		aside[]={0.29245409,4.2238389e-007,0.95639253};
+		pos[]={4035.7781,20.897789,4028.4006};
+		dir[]={0.80277759,-0.45520565,-0.38518617};
+		up[]={0.41041917,0.89038455,-0.19692531};
+		aside[]={-0.43260545,-1.2140663e-007,-0.90160656};
 	};
 };
 binarizationWanted=0;
-sourceName="resdk_a3";
+sourceName="ReSDK_A3";
 addons[]=
 {
 	"A3_Characters_F",
@@ -5475,7 +5475,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StationSpeaker""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StationSpeaker""],[""mark"",""StationSpeaker G:Q54X59FAgzQ""]]}";
 							};
 							id=2943;
 							type="speaker";
@@ -5493,7 +5493,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Intercom""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Intercom""],[""edConnected"",[""StationSpeaker G:Q54X59FAgzQ""]],[""mark"",""Intercom G:4/wwqSRELj8""]]}";
 							};
 							id=2940;
 							type="speeker";
@@ -5599,7 +5599,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\virusbratan.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Wheelchair""]]}";
 							};
 							id=2939;
 							type="land_VirusBratan";
@@ -5848,7 +5848,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\virusbratan.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Wheelchair""]]}";
 							};
 							id=2935;
 							type="land_VirusBratan";
@@ -12302,7 +12302,7 @@ class Mission
 					flags=1;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Второй этаж. Левое крыло.""]]],[""class"",""ElectricalShieldSmall""],[""edConnected"",[""RedButton G:HfqsSe3iRaU"",""RedButton G:AjebpdJbUNU"",""RedButton G:bd1e0L0glps"",""RedButton G:QtralcJPWoA"",""RedButton G:8n4vmOZcVYg""]],[""mark"",""ElectricalShieldSmall G:y2vQzELsluA""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Второй этаж. Левое крыло.""]]],[""class"",""ElectricalShieldSmall""],[""edConnected"",[""RedButton G:HfqsSe3iRaU"",""RedButton G:AjebpdJbUNU"",""RedButton G:bd1e0L0glps"",""RedButton G:QtralcJPWoA"",""RedButton G:8n4vmOZcVYg"",""Intercom G:4/wwqSRELj8""]],[""mark"",""ElectricalShieldSmall G:y2vQzELsluA""]]}";
 					};
 					id=3031;
 					type="transformator";
@@ -15870,7 +15870,7 @@ class Mission
 					side="Empty";
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_18x6.p3d""]]],[""class"",""IStruct""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorMedium""]]}";
 					};
 					id=3815;
 					type="Land_pod_18x6";
@@ -16029,7 +16029,7 @@ class Mission
 					flags=4;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_epa\civ\camping\woodentable_small_f.p3d""]]],[""class"",""Decor""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallWoodenTable""]]}";
 					};
 					id=3910;
 					type="Land_WoodenTable_small_F";
@@ -17280,7 +17280,7 @@ class Mission
 					side="Empty";
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\ind\pipes\indpipe1_uup_f.p3d""]]],[""class"",""Decor""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumSteelUpperPipe""]]}";
 					};
 					id=3853;
 					type="Land_IndPipe1_Uup_F";
@@ -23182,7 +23182,7 @@ class Mission
 					side="Empty";
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\items\documents\file2_f.p3d""]]],[""class"",""IStruct""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Documents""]]}";
 					};
 					id=4271;
 					type="Land_File2_F";
@@ -23290,7 +23290,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""metro_ob\model\case_6.p3d""]]],[""class"",""IStruct""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Suitcase1""]]}";
 					};
 					id=4260;
 					type="case_6";
@@ -23396,7 +23396,7 @@ class Mission
 					side="Empty";
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\items\documents\notepad_f.p3d""]]],[""class"",""IStruct""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Notepad""]]}";
 					};
 					id=4252;
 					type="Land_Notepad_F";
@@ -23538,7 +23538,7 @@ class Mission
 					flags=4;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\ruins\rubble_bricks_03.p3d""]]],[""class"",""IStruct""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallPileOfBricks""]]}";
 					};
 					id=4630;
 					type="CUP_A2_rubble_bricks_03";
