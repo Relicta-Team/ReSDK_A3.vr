@@ -1924,6 +1924,9 @@ _3434_323973656_9838925_12475 = ['SteelGridDoorElectronic',[3434.32,3656.98,25.1
 ['BoneStraightener',[3433.17,3654.79,26.5677],340,[0,0,1]] call InitItem; 
 ['SmallDirtGrey',[3428.71,3658.13,24.9973],270,[0,0,1]] call InitStruct; 
 ['SmallPileOfBricksAndPlanks',[3439.09,3654.78,29.6514,true],250,[0.00457125,0.00768903,0.99996]] call InitStruct; 
+_3426_750003657_1250027_00000 = ['IStruct',[3426.75,3657.13,32,true],0,[-1,0,-4.37114e-008], {_thisObj setvariable ['model','a3\structures_f_epa\walls\invisiblebarrier_f.p3d'];}] call InitStruct; // !!! realocated model !!!
+_3427_750003657_1250027_00000 = ['IStruct',[3427.75,3657.13,32,true],0,[-1,0,-4.37114e-008], {_thisObj setvariable ['model','a3\structures_f_epa\walls\invisiblebarrier_f.p3d'];}] call InitStruct; // !!! realocated model !!!
+_3428_750003657_1250027_00000 = ['IStruct',[3428.75,3657.13,32,true],0,[-1,0,-4.37114e-008], {_thisObj setvariable ['model','a3\structures_f_epa\walls\invisiblebarrier_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3474_233893647_5815430_09101 = ['SpawnPoint',[3474.23,3647.58,30.091],115,[0,0,1]] call InitStruct; 
 _3485_112553643_2619630_09301 = ['SpawnPoint',[3485.11,3643.26,30.093],225,[0,0,1]] call InitStruct; 
 _3483_443363655_4079620_31553 = ['CollectionSpawnPoint',[3483.44,3655.41,20.3155],178.654,[0,0,1]] call InitStruct; 
