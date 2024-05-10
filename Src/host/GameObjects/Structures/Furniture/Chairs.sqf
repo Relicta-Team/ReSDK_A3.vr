@@ -20,6 +20,15 @@ class(IChair) extends(Furniture)
 endclass
 
 editor_attribute("EditorGenerated")
+class(Wheelchair) extends(IChair)
+	var(model,"ml_exodusnew\virusbratan.p3d");
+	var(name,"Коляска");
+	var(desc,"Поговаривают если долго на ней сидеть, то можно подцепить вирус...");
+	getter_func(getChairOffsetPos,[0 arg -0.05 arg -0.65]);
+	getterconst_func(getChairOffsetDir,180);
+endclass
+
+editor_attribute("EditorGenerated")
 class(OldGreenToiletBowl) extends(IChair)
 	var(model,"ml\ml_object_new\model_24\tolchek.p3d");
 	var(name,"Туалет");

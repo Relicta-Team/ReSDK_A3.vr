@@ -1,25 +1,25 @@
 version=54;
 class EditorData
 {
-	moveGridStep=0.5;
+	moveGridStep=0.125;
 	angleGridStep=0.08726646;
 	scaleGridStep=100;
 	autoGroupingDist=10;
-	toggles=42;
+	toggles=46;
 	class ItemIDProvider
 	{
-		nextID=8521;
+		nextID=8537;
 	};
 	class LayerIndexProvider
 	{
-		nextID=1538;
+		nextID=1596;
 	};
 	class Camera
 	{
-		pos[]={3474.2573,32.474949,3645.1328};
-		dir[]={0.78885633,-0.31238422,0.52927136};
-		up[]={0.25940797,0.94995564,0.1740458};
-		aside[]={0.55715352,4.1103704e-008,-0.83041263};
+		pos[]={3424.2424,38.4842,3670.0034};
+		dir[]={0.70040441,-0.28190359,-0.65586305};
+		up[]={0.20584029,0.95941186,-0.19275095};
+		aside[]={-0.68357742,1.3237259e-006,-0.72999871};
 	};
 };
 binarizationWanted=0;
@@ -131,6 +131,7 @@ addons[]=
 	"A3_Structures_F_EPA_Items_Medical",
 	"A3_Structures_F_Argo_Industrial_Agriculture",
 	"rabochiystol",
+	"A3_Structures_F_EPA_Walls",
 	"A3_Structures_F_Bootcamp_VR_Helpers",
 	"A3_Structures_F_Bootcamp_VR_Blocks"
 };
@@ -6578,7 +6579,7 @@ class Mission
 											class PositionInfo
 											{
 												position[]={3478.6001,32.308475,3649.3447};
-												angles[]={1.6406178e-005,0,-0};
+												angles[]={1.6406178e-005,0,0};
 											};
 											side="Empty";
 											flags=1;
@@ -6596,7 +6597,7 @@ class Mission
 											class PositionInfo
 											{
 												position[]={3478.6001,32.308514,3647.1304};
-												angles[]={1.6406178e-005,0,-0};
+												angles[]={1.6406178e-005,0,0};
 											};
 											side="Empty";
 											flags=1;
@@ -9624,7 +9625,7 @@ class Mission
 											class PositionInfo
 											{
 												position[]={3479.4907,31.441751,3650.4744};
-												angles[]={0,2.7925315,-0};
+												angles[]={0,2.7925315,0};
 											};
 											side="Empty";
 											flags=1;
@@ -29766,7 +29767,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3434.7917,30.130449,3689.7297};
-								angles[]={0,1.3089969,-0};
+								angles[]={0,1.3089969,0};
 							};
 							side="Empty";
 							flags=5;
@@ -29874,7 +29875,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3406.1831,35.75301,3686.9963};
-								angles[]={0,1.9198622,-0};
+								angles[]={0,1.9198622,0};
 							};
 							side="Empty";
 							flags=5;
@@ -29892,7 +29893,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3418.9377,30.108009,3668.697};
-								angles[]={0,0.15777083,-0};
+								angles[]={0,0.15777083,0};
 							};
 							side="Empty";
 							flags=5;
@@ -29931,7 +29932,7 @@ class Mission
 					state=1;
 					class Entities
 					{
-						items=55;
+						items=58;
 						class Item0
 						{
 							dataType="Object";
@@ -30870,13 +30871,64 @@ class Mission
 							type="CUP_A2_shed_w03_ruins_ep1";
 							atlOffset=0.040586472;
 						};
+						class Item55
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3426.75,32,3657.125};
+								angles[]={0,0,1.5707964};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_epa\walls\invisiblebarrier_f.p3d""]]],[""class"",""IStruct""]]}";
+							};
+							id=8534;
+							type="Land_InvisibleBarrier_F";
+							atlOffset=1.1876717;
+						};
+						class Item56
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3427.75,32,3657.125};
+								angles[]={0,0,1.5707964};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_epa\walls\invisiblebarrier_f.p3d""]]],[""class"",""IStruct""]]}";
+							};
+							id=8535;
+							type="Land_InvisibleBarrier_F";
+							atlOffset=1.1876717;
+						};
+						class Item57
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3428.75,32,3657.125};
+								angles[]={0,0,1.5707964};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_epa\walls\invisiblebarrier_f.p3d""]]],[""class"",""IStruct""]]}";
+							};
+							id=8536;
+							type="Land_InvisibleBarrier_F";
+							atlOffset=1.1876717;
+						};
 					};
 					id=8458;
-					atlOffset=0.085792542;
+					atlOffset=0.96467018;
 				};
 			};
 			id=6175;
-			atlOffset=1.6244545;
+			atlOffset=2.4319611;
 		};
 		class Item4
 		{
@@ -31250,7 +31302,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3434.7856,31.165287,3689.7825};
-						angles[]={0,6.02279,-0};
+						angles[]={0,6.02279,0};
 					};
 					side="Empty";
 					flags=5;
@@ -31338,7 +31390,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3418.7832,31.146545,3668.7402};
-						angles[]={0,1.7528644,-0};
+						angles[]={0,1.7528644,0};
 					};
 					side="Empty";
 					flags=5;
@@ -31406,7 +31458,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3406.2283,36.791607,3687.1118};
-						angles[]={0,3.4906592,-0};
+						angles[]={0,3.4906592,0};
 					};
 					side="Empty";
 					flags=5;
