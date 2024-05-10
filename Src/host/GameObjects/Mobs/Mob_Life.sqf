@@ -633,7 +633,11 @@ region(Status effects)
 	{
 		objParams();
 		if callSelf(isConnected) exitWith {
-			true //temporary fix...
+			private _uInd = getVar(getSelf(connectedTo),seatListOwners) find this;
+			if (_uInd==-1) exitWith {};
+			private _rplObj = getVar(getSelf(connectedTo),_seatListDummy) select _uInd;
+			if isNullReference(_rplObj) exitWith {};
+			equals(_rplObj getvariable "__posSeatUnc",_rplObj getvariable "__posSeat")
 		};
 		callSelf(getAnimation) in (UNC_ANIM_LIST apply {tolower _x})
 	};
