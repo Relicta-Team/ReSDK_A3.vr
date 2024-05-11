@@ -11,7 +11,7 @@ Replaced value:
 ```sqf
 __catprefix = #catpref;
 ```
-File: [host\VerbSystem\ActionsPseudonames.sqf at line 48](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L48)
+File: [host\VerbSystem\ActionsPseudonames.sqf at line 50](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L50)
 ## reg(name,method)
 
 Type: constant
@@ -25,7 +25,7 @@ Replaced value:
 _ps = format[__catprefix +"_"+ 'name']; _met = #method ; \
 ie_actions_map set [_ps,_met]; ie_actions_mapinverted set [_met,_ps];
 ```
-File: [host\VerbSystem\ActionsPseudonames.sqf at line 49](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L49)
+File: [host\VerbSystem\ActionsPseudonames.sqf at line 51](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L51)
 ## ie_actions_map
 
 Type: Variable
@@ -66,6 +66,14 @@ Description:
 - Param: _n
 
 File: [host\VerbSystem\ActionsPseudonames.sqf at line 21](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L21)
+## ie_action_getCalledActionName
+
+Type: function
+
+Description: 
+
+
+File: [host\VerbSystem\ActionsPseudonames.sqf at line 26](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L26)
 ## ie_action_call
 
 Type: function
@@ -74,7 +82,7 @@ Description:
 - Param: _mob
 - Param: _act
 
-File: [host\VerbSystem\ActionsPseudonames.sqf at line 26](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L26)
+File: [host\VerbSystem\ActionsPseudonames.sqf at line 28](../../../Src/host/VerbSystem/ActionsPseudonames.sqf#L28)
 # loadBeforeOOPInit.sqf
 
 ## ie_actions_list_preInitActions
