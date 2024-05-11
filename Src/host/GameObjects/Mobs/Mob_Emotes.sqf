@@ -1181,8 +1181,10 @@ region(Emotes subsystem)
 	{
 		objParams();
 		if (tickTime < getSelf(___lastCustomAnimTime)) exitWith {};
-		private _isSeat = [call ie_action_getCalledActionName,"anms_seat"] call stringStartWith;
+		if (!callSelf(isActive)) exitWith {};
 		
+		private _isSeat = [call ie_action_getCalledActionName,"anms_seat"] call stringStartWith;
+
 		if getSelf(isCombatModeEnable) exitWith {
 			callSelfParams(localSay,"Я настороже... Надо успокоиться." arg "error");
 		};
