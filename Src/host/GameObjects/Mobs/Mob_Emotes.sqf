@@ -1192,6 +1192,7 @@ region(Emotes subsystem)
 		if (callSelf(getStance)!= ifcheck(_isSeat,STANCE_MIDDLE,STANCE_UP) && {!callSelf(isCustomAnimState)}) exitWith {
 			callSelfParams(localSay,ifcheck(_isSeat,"Нужно на корточки присесть","Нужно встать") arg "error");
 		};
+		if (!callSelf(isActive)) exitWith {};
 		
 		"anms" call ie_action_setPrefix;
 		private _changeMethod = "switchmove_force";
