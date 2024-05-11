@@ -1154,7 +1154,9 @@ region(Emotes subsystem)
 
 			"Руки за спину:anms_stand21" arg
 			"Опереться слева:anms_stand22" arg
-			"Опереться на стол:anms_stand23"
+			"Опереться на стол:anms_stand23" arg 
+
+			"Руки вверх:anms_stand24"
 		]
 	]);
 
@@ -1179,7 +1181,8 @@ region(Emotes subsystem)
 	{
 		objParams();
 		if (tickTime < getSelf(___lastCustomAnimTime)) exitWith {};
-		private _isSeat = [call ie_action_getCalledActionName,"seat"] call stringStartWith;
+		private _isSeat = [call ie_action_getCalledActionName,"anms_seat"] call stringStartWith;
+		
 		if getSelf(isCombatModeEnable) exitWith {
 			callSelfParams(localSay,"Я настороже... Надо успокоиться." arg "error");
 		};
@@ -1237,7 +1240,7 @@ region(Emotes subsystem)
 		if (["stand22"] call ie_action_check) then {_changeMethod = "switchmove_force";_anim="InBaseMoves_Lean1"};
 		if (["stand23"] call ie_action_check) then {_changeMethod = "switchmove_force";_anim="InBaseMoves_table1"};
 
-
+		if (["stand24"] call ie_action_check) then {_anim="Acts_JetsShooterNavigate_stop"};
 
 
 		if (_anim!="") then {
