@@ -1194,7 +1194,7 @@ region(Emotes subsystem)
 		};
 		
 		"anms" call ie_action_setPrefix;
-		private _changeMethod = "switchmove";
+		private _changeMethod = "switchmove_force";
 		private _anim = "";
 		private _anmState = CUSTOM_ANIM_STAND;
 		if (_isSeat) then {
