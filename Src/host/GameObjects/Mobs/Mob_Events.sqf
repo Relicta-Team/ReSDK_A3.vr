@@ -562,6 +562,12 @@ _onStrafeCatch = {
 	};
 }; rpcAdd("onStrafeCatch",_onStrafeCatch);
 
+__resetCustomAnim = {
+	params ["_mobObj"];
+	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
+	callSelfParams(setCustomAnimState,CUSTOM_ANIM_NONE arg true);
+}; rpcAdd("__resetCustomAnim",__resetCustomAnim);
+
 /**************************************************************************
 |					ONE SYNC SERVER EVENTS								  |
 **************************************************************************/

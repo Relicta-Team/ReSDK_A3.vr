@@ -151,6 +151,11 @@ input_movementCheck = {
 		true
 	};
 
+	if ((_isMov || _isCS) && {call cd_isCustomAnimEnabled}) exitWith {
+		call cd_handleRestCustomAnim;
+		true
+	};
+
 	(player getVariable ["smd_bodyParts",[true,true,true,true]]) params ["_ra","_la","_rl","_ll","_canStand"];
 	_hasNoLegs = !_rl && !_ll;
 	//флаг если персонаж с костылями

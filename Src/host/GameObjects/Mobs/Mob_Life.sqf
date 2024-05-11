@@ -388,6 +388,8 @@ region(Status effects)
 		if callSelf(isConnected) exitWith {};
 		if !callSelf(isActive) exitWith {};
 		
+		callSelfParams(setCustomAnimState,CUSTOM_ANIM_NONE);
+
 		//Положить моба и заблокировать управление
 		if (callSelf(getStance) != STANCE_DOWN) then {
 			//error("KNOCK DOWN - switchAction is not MP-func");
@@ -613,6 +615,9 @@ region(Status effects)
 			callSelfParams(stopProgress,true);
 
 			callSelf(closeOpenedNetDisplay);
+
+			//disable custom anim
+			callSelfParams(setCustomAnimState,CUSTOM_ANIM_NONE);
 
 			//switch off combat mode
 			callSelfParams(setCombatMode,false);

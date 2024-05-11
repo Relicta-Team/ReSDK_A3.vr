@@ -23,6 +23,8 @@ ie_action_check = {
 	__thisAction__ == (__thisActionPref__+_n)
 };
 
+ie_action_getCalledActionName = { __thisAction__ };
+
 ie_action_call = {
 	params ["_mob","_act"];
 	

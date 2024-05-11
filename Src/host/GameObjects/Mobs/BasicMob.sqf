@@ -1529,7 +1529,7 @@ region(Animator)
 		private _mob = getSelf(owner);
 
 		//changed after 0.4.75
-		if (_method == "switchmove") then {
+		if (_method == "switchmove" || _method == "switchmove_force") then {
 			
 			
 			//На сервере тоже вызываем метод
