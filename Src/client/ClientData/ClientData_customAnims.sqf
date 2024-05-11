@@ -25,7 +25,9 @@ cd_handleRestCustomAnim = {
 	};
 	private _idxStance = _stances find _stance;
 	if (_idxStance == -1) then {_idxStance = 0};
-	_mob switchmove (_curAnimlist select _idxStance);
+	private _anim_name = (_curAnimlist select _idxStance);
+
+	["switchmove",[_mob,_anim_name]] call CBA_fnc_globalEvent;
 
 	cd_customAnim = CUSTOM_ANIM_NONE;
 	rpcSendToServer("__resetCustomAnim",[_mob]);
