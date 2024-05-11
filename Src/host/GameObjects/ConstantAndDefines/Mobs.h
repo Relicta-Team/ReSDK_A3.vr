@@ -68,6 +68,10 @@
 #define UNC_MIMIC 'unconscious'
 #define DEFAULT_MIMIC 'neutral'
 
+#define CUSTOM_ANIM_NONE 0
+#define CUSTOM_ANIM_SEAT 1
+#define CUSTOM_ANIM_STAND 2
+
 //hunger and thirst coefs
 
 //1.8h for non-activity

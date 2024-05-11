@@ -335,6 +335,7 @@ func(seatConnect)
 	private _factDir = getdir _origObj + _offsetDir;
 	private _mobUsr = getVar(_usr,owner);
 	//sync new location
+	_rplObj setvariable ["__replicatedInfo",[_mobUsr,_factDir,_rplObj]];
 	[_mobUsr,"seatConnect",[_mobUsr,_factDir,_rplObj]] call repl_doLocal;
 	
 	//apply anim after connect to seat
@@ -364,7 +365,6 @@ func(seatApplySeatAnim)
 	private _chSeatUncList = ifcheck(callSelf(canUseSeatUncAnimations),callSelf(getChairUncAnimations),_chSeatList);
 	private _anim = ifcheck(callFunc(_usr,isActive),callSelf(getChairSitdownAnimation),_chSeatUncList);
 	if equalTypes(_anim,[]) then {_anim = pick _anim};
-	callFuncParams(_usr,applyGlobalAnim,"switchmove" arg _anim);
 
 	//sync pos
 	if (_doSyncPos) then {
@@ -377,7 +377,16 @@ func(seatApplySeatAnim)
 		if isNullReference(_rplObj) exitWith {};
 
 		_rplObj setVariable ["__posSeat",_rplObj getvariable _vName];
+
+		private _rinf = (_rplObj getVariable "__replicatedInfo");
+		[_rinf select 0,"seatConnectUpdate",_rinf] call repl_doLocal;
 	};
+
+	callFuncParams(_usr,applyGlobalAnim,"switchmove" arg _anim);
+	
+	//fix sync bodyparts on seat dead anims
+	callFunc(_usr,syncBodyParts);
+	
 };
 
 func(seatDisconnect)

@@ -388,6 +388,8 @@ region(Status effects)
 		if callSelf(isConnected) exitWith {};
 		if !callSelf(isActive) exitWith {};
 		
+		callSelfParams(setCustomAnimState,CUSTOM_ANIM_NONE);
+
 		//Положить моба и заблокировать управление
 		if (callSelf(getStance) != STANCE_DOWN) then {
 			//error("KNOCK DOWN - switchAction is not MP-func");
@@ -614,6 +616,9 @@ region(Status effects)
 
 			callSelf(closeOpenedNetDisplay);
 
+			//disable custom anim
+			callSelfParams(setCustomAnimState,CUSTOM_ANIM_NONE);
+
 			//switch off combat mode
 			callSelfParams(setCombatMode,false);
 
@@ -633,7 +638,11 @@ region(Status effects)
 	{
 		objParams();
 		if callSelf(isConnected) exitWith {
-			true //temporary fix...
+			private _uInd = getVar(getSelf(connectedTo),seatListOwners) find this;
+			if (_uInd==-1) exitWith {};
+			private _rplObj = getVar(getSelf(connectedTo),_seatListDummy) select _uInd;
+			if isNullReference(_rplObj) exitWith {};
+			equals(_rplObj getvariable "__posSeatUnc",_rplObj getvariable "__posSeat")
 		};
 		callSelf(getAnimation) in (UNC_ANIM_LIST apply {tolower _x})
 	};

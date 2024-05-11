@@ -38,6 +38,7 @@ func(setCombatMode)
 	if equals(getSelf(isCombatModeEnable),_mode) exitWith {
 		errorformat("Mob::setCombatMode() - combat mode already setted on %1",_mode);
 	};
+	if callSelf(isCustomAnimState) exitWith {};
 
 	setSelf(isCombatModeEnable,_mode);
 	if (_mode) then {

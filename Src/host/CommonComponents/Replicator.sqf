@@ -15,6 +15,12 @@ repl_map_funcs = createHashMapFromArray [
 		_mob setDir _dir;
 		_mob attachTo [_attSource,[0,0,0]];
 	}],
+	["seatConnectUpdate",{
+		params ["_mob","_dir","_attSource"];
+		detach _mob;
+		_mob setDir _dir;
+		_mob attachTo [_attSource,[0,0,0]];
+	}],
 	["setDir",{
 		(_this select 0) setDir (_this select 1)
 	}],
