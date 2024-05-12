@@ -512,7 +512,7 @@ Initial value:
 ```sqf
 CUSTOM_ANIM_NONE
 ```
-File: [client\ClientData\ClientData_customAnims.sqf at line 3](../../../Src/client/ClientData/ClientData_customAnims.sqf#L3)
+File: [client\ClientData\ClientData_customAnims.sqf at line 8](../../../Src/client/ClientData/ClientData_customAnims.sqf#L8)
 ## cd_isCustomAnimEnabled
 
 Type: function
@@ -520,7 +520,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\ClientData_customAnims.sqf at line 5](../../../Src/client/ClientData/ClientData_customAnims.sqf#L5)
+File: [client\ClientData\ClientData_customAnims.sqf at line 10](../../../Src/client/ClientData/ClientData_customAnims.sqf#L10)
 ## cd_handleRestCustomAnim
 
 Type: function
@@ -528,7 +528,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\ClientData_customAnims.sqf at line 9](../../../Src/client/ClientData/ClientData_customAnims.sqf#L9)
+File: [client\ClientData\ClientData_customAnims.sqf at line 14](../../../Src/client/ClientData/ClientData_customAnims.sqf#L14)
 # ClientData_forceWalk.sqf
 
 ## cd_fw_forceWalk
