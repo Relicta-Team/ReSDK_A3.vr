@@ -91,6 +91,8 @@ ND_INIT(Paper)
 	
 	[lastNDWidget,[0,0,98,100]] call widgetSetPosition;
 	_baseTextH = ctrlTextHeight lastNDWidget;
+	lastNDWidget ctrlSetPositionH _baseTextH;
+	lastNDWidget ctrlcommit 0;
 
 	regNDWidget(WIDGETGROUP_H,vec4(0,5,100,100-5),_ctg,null);
 	_ctgInside = lastNDWidget;
