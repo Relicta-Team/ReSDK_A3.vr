@@ -47,8 +47,16 @@ interactEmote_load = {
 	//create emote input
 	private _input = [_d,INPUT,[5,5,75,15],_ctg] call createWidget;
 	_input ctrlSetText interactEmote_inputText;
+	_t = [_d,BACKGROUND,[82,5,8+5,15],_ctg] call createWidget;
+	_t setBackgroundColor [0,0.3,0,0.8]; //костыльный фон для кнопки
 	private _buttonSend = [_d,BUTTON,[82,5,8+5,15],_ctg] call createWidget;
 	_buttonSend ctrlSetText "Действие";
+	private _zCol = [0,0.0,0,0.0];
+	_buttonSend setBackgroundColor _zCol;
+	// ничего из строк ниже не работает для кнопок...
+	// _buttonSend ctrlsetactivecolor _zCol;
+	// _buttonSend ctrlsetforegroundcolor _zCol;
+	// _buttonSend ctrlSetTextColorSecondary _zCol;
 
 	_ctg setVariable ["input",_input];
 
@@ -116,25 +124,31 @@ interactEmote_load = {
 
 	private _allevs = [];
 	_t = [_d,TEXT,[0,0,30,100],_ctgCategs] call createWidget;
-	[_t,"<t align='center'>" + slt +"</t>"] call widgetSetText;
-	_t setBackgroundColor [1,0.25,0,0.3];
+	//[_t,"<t align='center'>" + slt +"</t>"] call widgetSetText;
+	[_t,"<t align='center' color='#235423'><img size='1.4' image='a3\ui_f\data\gui\rsccommon\rschtml\arrow_left_ca.paa'/></t>"] call widgetSetText;
+	[_t,[0,0.25,0,0.4],[0,0.35,0,0.5]] call widgetSetMouseMoveColors;
 	_t setvariable ["actionmode",-1];
 	_allevs pushBack _t;
 
 	_t = [_d,TEXT,[100-30,0,30,100],_ctgCategs] call createWidget;
-	[_t,"<t align='center'>" + sgt +"</t>"] call widgetSetText;
-	_t setBackgroundColor [1,0.25,0,0.3];
+	//[_t,"<t align='center'>" + sgt +"</t>"] call widgetSetText;
+	[_t,"<t align='center' color='#235423'><img size='1.4' image='a3\ui_f\data\gui\rsccommon\rschtml\arrow_right_ca.paa'/></t>"] call widgetSetText;
+	[_t,[0,0.25,0,0.4],[0,0.35,0,0.5]] call widgetSetMouseMoveColors;
 	_t setvariable ["actionmode",1];
 	_allevs pushBack _t;
+	
+	_t = [_d,BACKGROUND,[30,0,40,100],_ctgCategs] call createWidget;
+	//<img image='%2' size='1.4'/>
+	private _icntxt = "a3\3den\data\controls\ctrltree\expandedtexture_ca.paa";
+	[_t,format["   <img image='%1' size='1.4'/>",_icntxt]] call widgetSetText;
 
 	_t = [_d,TEXT,[30,0,40,100],_ctgCategs] call createWidget;
 	[_t,"<t align='center'>Категория</t>"] call widgetSetText;
-	_t setBackgroundColor [0,0.15,0,0.3];
+	[_t,[0,0.15,0,0.3],[0,0.25,0,0.5]] call widgetSetMouseMoveColors;
 	_t setvariable ["actionmode",0];
 	_ctg setVariable ["ctgCatAct",_t];
 	_ctg setVariable ["categsGroup",_ctgCategs];
 	_allevs pushBack _t;
-
 	{
 		_x ctrlAddEventHandler ["MouseButtonUp",{
 			params ["_w","_b"];
@@ -185,12 +199,19 @@ interactEmote_onListCategoryes = {
 		_b setBackgroundColor [0,0.15,0,0.3];
 
 		_lastSizeY = 0;
+		_butSize = 20;
 		//Подгрузка кнопок
 		for "_i" from 0 to (count interactEmote_actions) - 1 do {
 			//_txt = str rand(1,1000) + " категория";
 			_txt = interactEmote_actions select _i select 0;
-			_lastSizeY = 30 * _i;
-			_wt = [_d,TEXT,[0,_lastSizeY,100,30],_ctg] call createWidget;
+			_lastSizeY = _butSize * _i;
+			_wt = [_d,TEXT,[0,_lastSizeY,100,_butSize],_ctg] call createWidget;
+			if (_i == interactEmote_curTabIdx) then {
+				[_wt,[0,0.2,0,0.4],[0.25,0.25,0.25,0.45]] call widgetSetMouseMoveColors;
+				_txt = format['[ %1 ]',_txt];
+			} else {
+				[_wt,[0,0,0,0],[0.2,0.2,0.2,0.4]] call widgetSetMouseMoveColors;
+			};
 			_wt setVariable ["idx",_i];
 			[_wt,format["<t align='center'>%1</t>",_txt]] call widgetSetText;
 			_wt ctrlAddEventHandler ["MouseButtonUp",{
@@ -200,7 +221,7 @@ interactEmote_onListCategoryes = {
 				[_idx,true] call interactEmote_switchActionMenu;
 			}];
 		};
-		[_b,[0,0,100,(_lastSizeY+30)max 100]] call widgetSetPosition;
+		[_b,[0,0,100,(_lastSizeY+_butSize)max 100]] call widgetSetPosition;
 
 		[_ctg,[_x,_y,_w,0]] call widgetSetPosition;
 		[_ctg,[_x,_y,_w,50+_h],0.2] call widgetSetPosition;
@@ -363,7 +384,11 @@ interactEmote_loadActions = {
 
 	//rename cat
 	private _namecat = _acts deleteAt 0;
-	[_d getVariable "ieMenuCtg" getVariable "ctgCatAct",format["<t align='center'>%1</t>",_namecat]] call widgetSetText;
+	
+	//"a3\ui_f\data\igui\cfg\simpletasks\types\documents_ca.paa"
+	//"a3\ui_f\data\gui\rsccommon\rsctree\expandedtexture_ca.paa"
+	private _aTxt = format["<t align='center'>%1</t>",_namecat];
+	[_d getVariable "ieMenuCtg" getVariable "ctgCatAct",_aTxt] call widgetSetText;
 
 
 	private _sizeH = 20;
@@ -379,6 +404,7 @@ interactEmote_loadActions = {
 	private _itmPerLine = 1;
 
 	private _backButtons = ["0C3604"] call color_HTMLtoRGBA;
+	private _backButtonsFocused = ["1A6B0A"] call color_HTMLtoRGBA;
 
 	_eventOnAction = {
 		params ["_w","_key"];
@@ -401,7 +427,7 @@ interactEmote_loadActions = {
 		((_acts select _i)splitString ":" )params ["_actname","_actcode"];
 
 		[_txt,format["<t align='center'>%1</t>",_actname]] call widgetSetText;
-		_txt setBackgroundColor _backButtons;
+		[_txt,_backButtons,_backButtonsFocused] call widgetSetMouseMoveColors;
 		_txt setVariable ["act",_actcode];
 		_txt ctrlAddEventHandler ["MouseButtonUp",_eventOnAction];
 
