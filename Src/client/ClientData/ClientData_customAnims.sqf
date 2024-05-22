@@ -5,10 +5,10 @@
 
 #include "..\..\host\GameObjects\ConstantAndDefines\Mobs.h"
 
-cd_customAnim = CUSTOM_ANIM_NONE;
+cd_customAnim = CUSTOM_ANIM_ACTION_NONE;
 
 cd_isCustomAnimEnabled = {
-	cd_customAnim != CUSTOM_ANIM_NONE && ([] call interact_isActive)
+	cd_customAnim != CUSTOM_ANIM_ACTION_NONE && ([] call interact_isActive)
 };
 
 cd_handleRestCustomAnim = {
@@ -22,10 +22,10 @@ cd_handleRestCustomAnim = {
 		_curAnimlist = _wpnAnims;
 	};
 	private _stance = stance _mob;
-	if (cd_customAnim == CUSTOM_ANIM_SEAT) then {
+	if (cd_customAnim == CUSTOM_ANIM_ACTION_SEAT) then {
 		_stance = "CROUCH";
 	};
-	if (cd_customAnim == CUSTOM_ANIM_STAND) then {
+	if (cd_customAnim == CUSTOM_ANIM_ACTION_STAND) then {
 		_stance = "STAND";
 	};
 	private _idxStance = _stances find _stance;
@@ -34,6 +34,6 @@ cd_handleRestCustomAnim = {
 
 	["switchmove",[_mob,_anim_name]] call CBA_fnc_globalEvent;
 
-	cd_customAnim = CUSTOM_ANIM_NONE;
+	cd_customAnim = CUSTOM_ANIM_ACTION_NONE;
 	rpcSendToServer("__resetCustomAnim",[_mob]);
 };

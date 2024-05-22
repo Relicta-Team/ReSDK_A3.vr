@@ -388,7 +388,7 @@ region(Status effects)
 		if callSelf(isConnected) exitWith {};
 		if !callSelf(isActive) exitWith {};
 		
-		callSelfParams(setCustomAnimState,CUSTOM_ANIM_NONE);
+		callSelfParams(setCustomActionState,CUSTOM_ANIM_ACTION_NONE);
 
 		//Положить моба и заблокировать управление
 		if (callSelf(getStance) != STANCE_DOWN) then {
@@ -617,7 +617,7 @@ region(Status effects)
 			callSelf(closeOpenedNetDisplay);
 
 			//disable custom anim
-			callSelfParams(setCustomAnimState,CUSTOM_ANIM_NONE);
+			callSelfParams(setCustomActionState,CUSTOM_ANIM_ACTION_NONE);
 
 			//switch off combat mode
 			callSelfParams(setCombatMode,false);

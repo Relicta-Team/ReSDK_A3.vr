@@ -350,6 +350,8 @@ region(Connect control events)
 		if callSelf(hasOpenedContainer) then {
 			callFuncParams(getSelf(openedContainer),onContainerClose,this);
 		};
+
+		callSelfParams(setCustomActionState,CUSTOM_ANIM_ACTION_NONE arg true);
 		
 		callSelfParams(sendInfo, "strafeLock" arg [false]);
 	};

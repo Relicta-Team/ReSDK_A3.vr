@@ -1161,21 +1161,21 @@ region(Emotes subsystem)
 	]);
 
 
-	var(customAnimationState,CUSTOM_ANIM_NONE);
-	func(setCustomAnimState)
+	var(customActionState,CUSTOM_ANIM_ACTION_NONE);
+	func(setCustomActionState)
 	{
 		objParams_2(_state,_onlySetVar);
 		if isNullVar(_onlySetVar) then {_onlySetVar = false};
 		
 		if (_onlySetVar) exitWith {
-			setSelf(customAnimationState,_state);
+			setSelf(customActionState,_state);
 		};
 
-		setSelf(customAnimationState,_state);
+		setSelf(customActionState,_state);
 		callSelfParams(fastSendInfo,"cd_customAnim" arg _state);
 	};
 
-	getter_func(isCustomAnimState,getSelf(customAnimationState)!=CUSTOM_ANIM_NONE);
+	getter_func(isCustomAnimState,getSelf(customActionState)!=CUSTOM_ANIM_ACTION_NONE);
 	var(___lastCustomAnimTime,0);
 	func(setSeatAnim)
 	{
@@ -1198,9 +1198,9 @@ region(Emotes subsystem)
 		"anms" call ie_action_setPrefix;
 		private _changeMethod = "switchmove_force";
 		private _anim = "";
-		private _anmState = CUSTOM_ANIM_STAND;
+		private _anmState = CUSTOM_ANIM_ACTION_STAND;
 		if (_isSeat) then {
-			_anmState = CUSTOM_ANIM_SEAT;
+			_anmState = CUSTOM_ANIM_ACTION_SEAT;
 		};
 
 	region(seat anims)
@@ -1247,7 +1247,7 @@ region(Emotes subsystem)
 
 		if (_anim!="") then {
 			callSelfParams(applyGlobalAnim,_changeMethod arg _anim);
-			callSelfParams(setCustomAnimState,_anmState);
+			callSelfParams(setCustomActionState,_anmState);
 			setSelf(___lastCustomAnimTime,tickTime + 1);
 		};
 	};
