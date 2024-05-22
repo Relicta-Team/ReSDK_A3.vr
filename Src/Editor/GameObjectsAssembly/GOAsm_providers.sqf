@@ -167,7 +167,8 @@ function(goasm_attributes_handleProvider_inputGeneric)
 				_props = _data get "customProps";
 				private _base = ctrlText _wid;//[_objWorld,_memberName] call golib_getActualDataValue;
 				//["base %1",_base] call printTrace;
-				if ([_ref,"Изменение поля " + format["%1::%2",_data get "class",_memberName],"Введите текст",_base,true] call widget_winapi_openTextBox) then {
+				_maxlen = (_wid getVariable "_rangeValues_InputGeneric");
+				if ([_ref,"Изменение поля " + format["%1::%2",_data get "class",_memberName,_maxlen],"Введите текст",_base,true,_maxlen] call widget_winapi_openTextBox) then {
 					private _newvalue = refget(_ref);
 					_props set [_memberName,_newvalue];
 					private _changedData = true;
