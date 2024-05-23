@@ -38,10 +38,11 @@ hasSuccessMessage = False
 
 log(f"Start processing logfile {path}")
 
-def parse_line(ln):
+def parse_line(ln:str):
     global last_loaded_file 
     pattern_sysInfo = r"\[(\w+)\] \[L(\d+)\|.*\|([\w\/\\\.]+)\]\s+(.*$)"
     match = re.search(pattern_sysInfo,ln,re.DOTALL)
+    
     # if finded vm log message
     if match and match.groups().__len__() == 4:
         cat = match.group(1)
@@ -77,15 +78,16 @@ def parse_line(ln):
                 llf = path
             handle_error(llf,path,line,message)
         
-        if message.find(r"EXCEPTION OCCURRED: '")!=-1:
-            message = re.search(r"EXCEPTION OCCURRED: '([\s\w\W]*)'",message,re.DOTALL).group(1)
-            llf = last_loaded_file
-            if llf == "":
-                llf = path
-            handle_error(llf,path,line,message)
 
         if (message.find("[Error]")!=-1 or message.find("[Critical]")!=-1) and message.find("[OOP_init]")!=-1:
             log(f"::error file={path}::{message}")
+    
+    if ln.find("EXCEPTION OCCURRED:")!=-1:
+        message = re.search(r"EXCEPTION OCCURRED: '([\S\w\W]*)",ln,re.DOTALL).group(1)
+        llf = last_loaded_file
+        if llf == "":
+            llf = last_loaded_file
+        handle_error(llf,last_loaded_file,1,message)
 
 
 def handle_error(errored_file,catched_path,catched_line,error_message):

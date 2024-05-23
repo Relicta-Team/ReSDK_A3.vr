@@ -167,6 +167,45 @@
 			}
 		},
 		{
+			"label": "Validate server (output enable)",
+			"type": "process",
+			"command": "third-party\\BuildTools\\Validate.bat",
+			"args": [
+				"server",
+				"outputon"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}\\.."
+			},
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"clear": true,
+				"focus": true,
+				"group": "Validate"
+			}
+		},
+		{
+			"label": "Parse output (post validate server)",
+			"type": "process",
+			"command": "python",
+			"args": [
+				"${workspaceFolder}\\..\\third-party\\BuildTools\\parse_output.py",
+				"${workspaceFolder}\\..\\third-party\\BuildTools\\output.txt",
+				"${workspaceFolder}\\..\\third-party\\BuildTools"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}\\..\\third-party\\BuildTools"
+			},
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"clear": true,
+				"focus": true,
+				"group": "Validate"
+			}
+		},
+		{
 			"label": "BUILD PROJECT",
 			"type": "process",
 			"command": "ReMaker\\ReMaker.exe",
