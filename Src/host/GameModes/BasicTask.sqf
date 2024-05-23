@@ -79,6 +79,9 @@ class(TaskBase) extends(IGameEvent)
 		objParams();
 		private _ctx = format["%1 (%2)",getSelf(name),callSelf(getClassName)];
 		setLastError("Ручное удаление задачи не допускается: " + _ctx);
+
+		callSelf(terminateUpdateProcess);
+		array_remove(taskSystem_allTasks,this);
 	};
 
 	"
@@ -280,12 +283,6 @@ class(TaskBase) extends(IGameEvent)
 			stopUpdate(getSelf(_taskHandle__));
 			setSelf(_taskHandle__,-1);
 		};
-	};
-
-	func(destructor)
-	{
-		callSelf(terminateUpdateProcess);
-		array_remove(taskSystem_allTasks,this);
 	};
 
 	func(updateMethod)

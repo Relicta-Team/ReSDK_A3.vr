@@ -17,7 +17,7 @@ class(GMExtended) extends(GMStationBase)
 	var(duration,60* (60*2)); //2 часа 
 	
 	getterconst_func(getProbability,30);
-	getterconst_func(getReqPlayersMax,6);
+	getterconst_func(getReqPlayersMin,6);
 	getterconst_func(getReqPlayersMax,30);
 
 	//var(canAddAspect,false); //выключена система аспектов

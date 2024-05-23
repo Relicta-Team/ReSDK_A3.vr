@@ -187,6 +187,8 @@ class(GMTVTGame) extends(GMStationBase)
 		};
 		_mS = format["Врата откроются через %1 мин.",floor (getSelf(timer)/60)];
 		callSelfParams(sendEventMes,_mS);
+
+		callSelf(__spawnItems);
 	};
 	
 	func(sendEventMes)
@@ -205,7 +207,7 @@ class(GMTVTGame) extends(GMStationBase)
 		setSelf(gatesIsOpen,!getSelf(gatesIsOpen));
 	};
 	
-	func(postSetup)
+	func(__spawnItems)
 	{
 		objParams();
 		private _b = ["OldWoodenBox",[3876.64,3607.87,8.7706],273.159,false] call createStructure;
