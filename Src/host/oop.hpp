@@ -146,7 +146,7 @@
 #define __check_method_duplicate 
 
 #ifdef __VM_VALIDATE
-	#define __check_method_duplicate vm_throw(format ["Duplicate method %1::%2 in %3 at line %4" arg _class arg _mem_name arg __FILE__ arg __LINE__ - 3]);
+	#define __check_method_duplicate vm_throw(format ["Duplicate method %1::%2 in %3 at line %4" arg _class arg _mem_name arg __FILE__ arg __LINE__]);
 #endif
 
 #define func(name) _mem_name = #name; _classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LINE__)]; \

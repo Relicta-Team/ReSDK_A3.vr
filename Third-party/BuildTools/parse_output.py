@@ -77,6 +77,13 @@ def parse_line(ln):
                 llf = path
             handle_error(llf,path,line,message)
         
+        if message.find(r"EXCEPTION OCCURRED: '")!=-1:
+            message = re.search(r"EXCEPTION OCCURRED: '([\s\w\W]*)'",message,re.DOTALL).group(1)
+            llf = last_loaded_file
+            if llf == "":
+                llf = path
+            handle_error(llf,path,line,message)
+
         if (message.find("[Error]")!=-1 or message.find("[Critical]")!=-1) and message.find("[OOP_init]")!=-1:
             log(f"::error file={path}::{message}")
 
