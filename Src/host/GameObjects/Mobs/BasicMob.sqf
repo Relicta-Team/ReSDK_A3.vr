@@ -1526,6 +1526,8 @@ region(Animator)
 	_anim = {
 		(_this select 0) setMimic (_this select 1)
 	}; rpcAdd("setMimic",_anim);
+	
+	debug_responeAnimationStatus = false; //TODO remove after 0.13.2
 
 	func(applyGlobalAnim)
 	{
@@ -1536,21 +1538,45 @@ region(Animator)
 		//changed after 0.4.75
 		if (_method == "switchmove" || _method == "switchmove_force") then {
 			
-			
 			//На сервере тоже вызываем метод
 			rpcCall(_method,[_mob arg _type]);
 
+			//server handler
+			//TODO remove after 0.13.2
+			private __handleStr = hashValue randInt(-999999,999999);
+			private _args = [__handleStr,_type];
+			private _code = {
+				params ["_hndl","_anm"];
+				_aneq = animationState player == _anm;
+				if (!_aneq) then {
+					
+					//send reply to server
+					[[_hndl,player,_anm,animationState player],
+					{
+						params ["_hndl","_usr","_srvAnm","_locAnm"];
+						["[applyGlobalAnim]: Handl %1 not synced for %2 (owner %3). Server: %4, Client %5"
+						,_hndl,_usr,owner _usr,_srvAnm,_locAnm] call logWarn;
+					}] remoteExecCall ["call",remoteExecutedOwner];
+				};
+			};
+
 			{
 				rpcSendToObject(_x,_method,[_mob arg _type]);
+
+				if (debug_responeAnimationStatus) then {
+					[_args,_code] remoteExecCall ["call",owner _x];
+				};
 			} foreach allPlayers;
 			
 			//Отладочная информация. Будет убрано после отлова ошибки синхронизации
-			["[applyGlobalAnim]: local - %1; Count: %2; Serversync: %3; Owner: %4; State %5",
-				isPlayer _mob,
+			["[applyGlobalAnim]: local - %1 (player=%6); Count: %2; Serversync: %3; Owner: %4; State %5; Handl: %7",
+				local _mob,
 				count allPlayers,
 				animationState _mob == _type,
 				owner _mob,
-				_type
+				_type,
+				isPlayer _mob,
+				__handleStr
 			] call logInfo;
 
 			// //Тестовое исправление синхронизации по сети
