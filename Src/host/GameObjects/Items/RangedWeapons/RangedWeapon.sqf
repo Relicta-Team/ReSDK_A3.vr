@@ -91,8 +91,6 @@ class(IRangedWeapon) extends(Item)
 		]
 	};
 
-	getter_func(getReqST,0); //необходимая сила для использования
-
 	getter_func(getUsingSkill,"pistol");
 
 	var(isSafeMode,false);//предохранитель для огнестрела
