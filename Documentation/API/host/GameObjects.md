@@ -3734,6 +3734,18 @@ Initial value:
 []
 ```
 File: [host\GameObjects\Mobs\BasicMob.sqf at line 305](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L305)
+## debug_responeAnimationStatus
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false //TODO remove after 0.13.2
+```
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 1530](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1530)
 # Mob.sqf
 
 ## __performace_attacklog
