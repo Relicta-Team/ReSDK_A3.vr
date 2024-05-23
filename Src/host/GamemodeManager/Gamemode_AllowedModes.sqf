@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
+//!this define is deprecated
 gm_allowedModes = [
 	//тестовый режим существует только в редакторе
 	#ifdef EDITOR
@@ -18,6 +19,7 @@ gm_allowedModes = [
 	
 ];
 
+//actual define
 call {
 	//TODO replace class generator
 	

@@ -565,7 +565,7 @@ _onStrafeCatch = {
 __resetCustomAnim = {
 	params ["_mobObj"];
 	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
-	callSelfParams(setCustomAnimState,CUSTOM_ANIM_NONE arg true);
+	callSelfParams(setCustomActionState,CUSTOM_ANIM_ACTION_NONE arg true);
 }; rpcAdd("__resetCustomAnim",__resetCustomAnim);
 
 /**************************************************************************

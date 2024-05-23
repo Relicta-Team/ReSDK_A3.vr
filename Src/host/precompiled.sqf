@@ -149,6 +149,7 @@ pc_oop_postInitClass = {
 
 		_class = nil;
 	};
+	__interface_header_flag__ = null;
 };
 
 

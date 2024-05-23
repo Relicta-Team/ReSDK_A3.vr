@@ -15,11 +15,6 @@ class(GMStationBase) extends(GMBase)
 		objParams();
 	};
 
-	func(postSetup)
-	{
-		objParams();
-	};
-
 	var(__songIndex,str randInt(1,2));
 	func(getStartSong)
 	{

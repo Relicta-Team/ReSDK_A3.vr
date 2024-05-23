@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
+interfaceHeader
 
 if !isNullVar(__iseat_node_init__) then {
 

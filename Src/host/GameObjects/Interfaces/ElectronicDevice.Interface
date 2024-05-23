@@ -2,7 +2,7 @@
 // Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
-
+	interfaceHeader
 
 	editor_attribute("EditorVisible" arg "type:bool") editor_attribute("Tooltip" arg "Включен ли источник")
 	var(edIsEnabled,false);

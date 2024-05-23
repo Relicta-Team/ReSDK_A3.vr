@@ -33,14 +33,20 @@
 		}; \
 	})
 
-	#define vm_throw(ctx) vm_lastError = ctx; throw vm_lastError;
+	#define __vm_throw_prep_ctx(ctx) ((ctx) splitSTring ENDl joinSTring "\n")
+
+	#define vm_throw(ctx) vm_lastError = __vm_throw_prep_ctx(ctx); throw vm_lastError;
+	#define vm_throw_flinf(ctx) vm_lastError = __vm_throw_prep_ctx(ctx) + "|CTX:" + __FILE__ + "+" + str(__LINE__) ; throw vm_lastError;
 
 	#define setName ;
 	
 #else
 	#define __postclassVM
 	#define vm_throw(ctx)
+	#define vm_throw_flinf(ctx)
 #endif
+
+#define interfaceHeader __interface_header_flag__ = true;
 
 //определение класса
 #define class(name) __class_beginDefine__(__className_toString__(name))
@@ -62,6 +68,7 @@
 	_editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
 	_classmet_declinfo = createHashMap; \
 	_last_node_info_ = null; \
+	__interface_header_flag__ = null; \
 	private _pt_obj = [_class] call pc_oop_newTypeObj;
 
 
@@ -143,10 +150,17 @@
 
 //#define var_multi(defaultvalue)
 
+#define __check_method_duplicate 
+
+#ifdef __VM_VALIDATE
+	#define __check_method_duplicate if (isnil'__interface_header_flag__') then {vm_throw_flinf(format ["Duplicate method '%1::%2'" arg _class arg _mem_name])};
+#endif
+
 #define func(name) _mem_name = #name; _classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LINE__)]; \
-	_lastIndex = _methods pushback [_mem_name]; \
 	_propOverride = _methods findIf {(_x select 0) == _mem_name}; \
-	if (_propOverride != -1) then {_methods deleteAt _lastIndex; _methods set [_propOverride,[_mem_name]]; _lastIndex = _propOverride}; \
+	if (_propOverride != -1) then {__check_method_duplicate _methods deleteAt _lastIndex; _methods set [_propOverride,[_mem_name]]; _lastIndex = _propOverride} else { \
+		_lastIndex = _methods pushback [_mem_name]; \
+	}; \
 	call pc_oop_handleAttrM; \
 	(_methods select _lastIndex) pushback
 

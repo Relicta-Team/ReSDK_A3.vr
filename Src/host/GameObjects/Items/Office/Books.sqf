@@ -67,6 +67,8 @@ class(IWritableContentItem) extends(IPaperItemBase)
 	" node_var
 	var(content,""); //text in book
 
+	#define __CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__ 1024*3
+
 	"
 		name:Максимальная длина текста
 		desc:Максимальная допустимая длина текста в книге или листке бумаги. На данный момент константна и равна 3072 символам.
@@ -74,7 +76,7 @@ class(IWritableContentItem) extends(IPaperItemBase)
 		lockoverride:1
 		return:int:Максимальная длина текста
 	" node_met
-	getterconst_func(getMaxLen,1024*3);
+	getterconst_func(getMaxLen,__CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__);
 
 	"
 		name:Можно записать
@@ -139,6 +141,23 @@ class(IWritableContentItem) extends(IPaperItemBase)
 		//write data
 		modSelf(content, + _data);
 		callSelf(updateNDisplay);
+	};
+
+	//editor paper data
+	editor_attribute("alias" arg "Содержимое")
+	editor_attribute("Tooltip" arg "Данные записанные в объекте, способном хранить текст.")
+	editor_attribute("EditorVisible" arg "type:string" arg "stringmaxsize:"+str(__CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__))
+	var(preinit@__content,""); //системная переменная для установки ключей через редактор
+
+	func(__handlePreInitVars__)
+	{
+		objParams();
+		super();
+		private _ct = getSelf(preinit@__content);
+		if (_ct!="") then {
+			callSelfParams(appendText,_ct);
+			setSelf(preinit@__content,null);
+		};
 	};
 
 endclass
