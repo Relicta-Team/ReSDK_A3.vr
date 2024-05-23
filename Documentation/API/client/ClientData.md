@@ -510,7 +510,7 @@ Description:
 
 Initial value:
 ```sqf
-CUSTOM_ANIM_NONE
+CUSTOM_ANIM_ACTION_NONE
 ```
 File: [client\ClientData\ClientData_customAnims.sqf at line 8](../../../Src/client/ClientData/ClientData_customAnims.sqf#L8)
 ## cd_isCustomAnimEnabled

@@ -1136,14 +1136,14 @@ File: [host\GamemodeManager\GamemodeManager.sqf at line 205](../../../Src/host/G
 
 Type: Variable
 
-Description: 
+Description: !this define is deprecated
 
 
 Initial value:
 ```sqf
 [...
 ```
-File: [host\GamemodeManager\Gamemode_AllowedModes.sqf at line 6](../../../Src/host/GamemodeManager/Gamemode_AllowedModes.sqf#L6)
+File: [host\GamemodeManager\Gamemode_AllowedModes.sqf at line 7](../../../Src/host/GamemodeManager/Gamemode_AllowedModes.sqf#L7)
 # Gamemode_internal_auto.sqf
 
 ## gm_internal_auto_timeLoad
