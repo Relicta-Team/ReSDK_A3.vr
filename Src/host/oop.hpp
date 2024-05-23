@@ -143,10 +143,16 @@
 
 //#define var_multi(defaultvalue)
 
+#define __check_method_duplicate 
+
+#ifdef __VM_VALIDATE
+	#define __check_method_duplicate vm_throw(format ["Duplicate method %1::%2 in %3 at line %4" arg _class arg _mem_name arg __FILE__ arg __LINE__ - 3]);
+#endif
+
 #define func(name) _mem_name = #name; _classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LINE__)]; \
 	_lastIndex = _methods pushback [_mem_name]; \
 	_propOverride = _methods findIf {(_x select 0) == _mem_name}; \
-	if (_propOverride != -1) then {_methods deleteAt _lastIndex; _methods set [_propOverride,[_mem_name]]; _lastIndex = _propOverride}; \
+	if (_propOverride != -1) then {__check_method_duplicate _methods deleteAt _lastIndex; _methods set [_propOverride,[_mem_name]]; _lastIndex = _propOverride}; \
 	call pc_oop_handleAttrM; \
 	(_methods select _lastIndex) pushback
 
