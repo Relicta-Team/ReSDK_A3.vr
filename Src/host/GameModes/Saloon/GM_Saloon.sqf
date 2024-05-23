@@ -7,7 +7,7 @@
 
 editor_attribute("CodeOnyGamemode")
 class(GMSaloon) extends(GMBase)
-	
+	getterconst_func(isPlayableGamemode,false);
 	var(name,"Переполох"); //Название истории
 	var(desc,"Потасовка в небольшом районе большого города."); //Описание краткое для голосований например
 	var(descExtended,"Криминальный мир Злачника - неблагоприятного района Канавы"+comma+" пытается установить свои порядки.");
