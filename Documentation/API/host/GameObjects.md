@@ -2122,7 +2122,7 @@ Replaced value:
 'neutral'
 ```
 File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 69](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L69)
-## CUSTOM_ANIM_NONE
+## CUSTOM_ANIM_ACTION_NONE
 
 Type: constant
 
@@ -2134,7 +2134,7 @@ Replaced value:
 0
 ```
 File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 71](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L71)
-## CUSTOM_ANIM_SEAT
+## CUSTOM_ANIM_ACTION_SEAT
 
 Type: constant
 
@@ -2146,7 +2146,7 @@ Replaced value:
 1
 ```
 File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 72](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L72)
-## CUSTOM_ANIM_STAND
+## CUSTOM_ANIM_ACTION_STAND
 
 Type: constant
 
@@ -3632,6 +3632,18 @@ Replaced value:
 File: [host\GameObjects\Items\Clothes\cloth.sqf at line 185](../../../Src/host/GameObjects/Items/Clothes/cloth.sqf#L185)
 # Books.sqf
 
+## __CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__
+
+Type: constant
+
+Description: text in book
+
+
+Replaced value:
+```sqf
+1024*3
+```
+File: [host\GameObjects\Items\Office\Books.sqf at line 70](../../../Src/host/GameObjects/Items/Office/Books.sqf#L70)
 ## gv(func)
 
 Type: constant
@@ -3645,7 +3657,7 @@ Replaced value:
 ```sqf
 _y get #func
 ```
-File: [host\GameObjects\Items\Office\Books.sqf at line 397](../../../Src/host/GameObjects/Items/Office/Books.sqf#L397)
+File: [host\GameObjects\Items\Office\Books.sqf at line 416](../../../Src/host/GameObjects/Items/Office/Books.sqf#L416)
 # BasicMob.sqf
 
 ## emulate_mp_in_sp
@@ -3837,7 +3849,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 360](../../../Src/host/GameObjects/Mobs/Mob.sqf#L360)
+File: [host\GameObjects\Mobs\Mob.sqf at line 362](../../../Src/host/GameObjects/Mobs/Mob.sqf#L362)
 # MobGhost.sqf
 
 ## hasBP(idx)

@@ -752,6 +752,27 @@ Description: Внутренняя функция для расчетов раз�
 - Param: _scale (optional, default 1)
 
 File: [client\WidgetSystem\functions.sqf at line 768](../../../Src/client/WidgetSystem/functions.sqf#L768)
+## widgetSetMouseMoveColors
+
+Type: function
+
+Description: 
+- Param: _w
+- Param: _out
+- Param: _in
+
+File: [client\WidgetSystem\functions.sqf at line 816](../../../Src/client/WidgetSystem/functions.sqf#L816)
+## fn_iconViewer
+
+Type: function
+
+> Exists if **EDITOR** defined
+
+Description: https://gist.github.com/HallyG/fa7a6cda10abcb630b1dc325f0523553
+- Param: _mode (optional, default "", expected types: ['""'])
+- Param: _args (optional, default [], expected types: [[]])
+
+File: [client\WidgetSystem\functions.sqf at line 830](../../../Src/client/WidgetSystem/functions.sqf#L830)
 # widgets.hpp
 
 ## widgetNull
