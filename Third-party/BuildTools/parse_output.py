@@ -83,11 +83,14 @@ def parse_line(ln:str):
             log(f"::error file={path}::{message}")
     
     if ln.find("EXCEPTION OCCURRED:")!=-1:
-        message = re.search(r"EXCEPTION OCCURRED: '([\S\w\W]*)",ln,re.DOTALL).group(1)
+        errGrp = re.search(r"EXCEPTION OCCURRED: '\"([\S\w\W]*)\|(CTX:([\w\/\\\.]+)\+(\d+))",ln,re.DOTALL)
+        message = errGrp.group(1)
+        file = errGrp.group(3)
+        line = int(errGrp.group(4))
         llf = last_loaded_file
         if llf == "":
             llf = last_loaded_file
-        handle_error(llf,last_loaded_file,1,message)
+        handle_error(llf,file,line,message)
 
 
 def handle_error(errored_file,catched_path,catched_line,error_message):

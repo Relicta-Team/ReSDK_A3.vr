@@ -33,13 +33,17 @@
 		}; \
 	})
 
-	#define vm_throw(ctx) vm_lastError = ctx; throw vm_lastError;
+	#define __vm_throw_prep_ctx(ctx) ((ctx) splitSTring ENDl joinSTring "\n")
+
+	#define vm_throw(ctx) vm_lastError = __vm_throw_prep_ctx(ctx); throw vm_lastError;
+	#define vm_throw_flinf(ctx) vm_lastError = __vm_throw_prep_ctx(ctx) + "|CTX:" + __FILE__ + "+" + str(__LINE__) ; throw vm_lastError;
 
 	#define setName ;
 	
 #else
 	#define __postclassVM
 	#define vm_throw(ctx)
+	#define vm_throw_flinf(ctx)
 #endif
 
 //определение класса
@@ -146,7 +150,7 @@
 #define __check_method_duplicate 
 
 #ifdef __VM_VALIDATE
-	#define __check_method_duplicate vm_throw(format ["Duplicate method %1::%2 in %3 at line %4" arg _class arg _mem_name arg __FILE__ arg __LINE__]);
+	#define __check_method_duplicate vm_throw_flinf(format ["Duplicate method '%1::%2'" arg _class arg _mem_name]);
 #endif
 
 #define func(name) _mem_name = #name; _classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LINE__)]; \
