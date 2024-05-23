@@ -46,6 +46,8 @@
 	#define vm_throw_flinf(ctx)
 #endif
 
+#define interfaceHeader __interface_header_flag__ = true;
+
 //определение класса
 #define class(name) __class_beginDefine__(__className_toString__(name))
 
@@ -66,6 +68,7 @@
 	_editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
 	_classmet_declinfo = createHashMap; \
 	_last_node_info_ = null; \
+	__interface_header_flag__ = null; \
 	private _pt_obj = [_class] call pc_oop_newTypeObj;
 
 
@@ -150,7 +153,7 @@
 #define __check_method_duplicate 
 
 #ifdef __VM_VALIDATE
-	#define __check_method_duplicate vm_throw_flinf(format ["Duplicate method '%1::%2'" arg _class arg _mem_name]);
+	#define __check_method_duplicate if (isnil'__interface_header_flag__') then {vm_throw_flinf(format ["Duplicate method '%1::%2'" arg _class arg _mem_name])};
 #endif
 
 #define func(name) _mem_name = #name; _classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LINE__)]; \
