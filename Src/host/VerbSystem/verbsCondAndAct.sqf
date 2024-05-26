@@ -109,7 +109,7 @@ VERB(doempty)
 		FLAGS(F_INUSR);
 		skipCond(!isTypeOf(usr,Mob));
 		skipCond(callSelf(getFilledSpace) == 0);
-		skipCond(!callSelf(isTrasferize));
+		skipCond(!callSelf(isTransferize));
 	act
 		callSelf(pourOutReagents);
 ENDVERB
