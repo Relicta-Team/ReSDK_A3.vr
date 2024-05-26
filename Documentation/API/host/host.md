@@ -6481,7 +6481,7 @@ Replaced value:
 ```sqf
 _decl_info___ = [__FILE__,__LINE__ + 1]; \
 	__testSyntaxClass \
-	private ["_class","_mother","_mem_name","_lastIndex","_fields","_methods"]; \
+	private ["_class","_mother","_mem_name","_lastIndex","_lastIndexF","_fields","_methods"]; \
 	_class = name; _mother = "object"; \
 	[_class] call pc_oop_regClassTable; \
 	_fields = []; _methods = []; _attributes = []; _autoref = []; \
@@ -6647,7 +6647,7 @@ Replaced value:
 ```sqf
 \
 	_mem_name = #name ; \
-	_lastIndex = _fields pushback [_mem_name,'value']; \
+	_lastIndexF = _fields pushback [_mem_name,'value']; \
 	call pc_oop_handleAttrF;
 ```
 File: [host\oop.hpp at line 109](../../../Src/host/oop.hpp#L109)
@@ -6676,7 +6676,7 @@ Replaced value:
 ```sqf
 \
 	_mem_name = #name ; \
-	_lastIndex = _fields pushback [_mem_name,"createHashMapFromArray [" + ('value' splitString (";"+toString[9,13,10]) joinString ",") + "]"]; \
+	_lastIndexF = _fields pushback [_mem_name,"createHashMapFromArray [" + ('value' splitString (";"+toString[9,13,10]) joinString ",") + "]"]; \
 	call pc_oop_handleAttrF;
 ```
 File: [host\oop.hpp at line 122](../../../Src/host/oop.hpp#L122)
@@ -6692,7 +6692,7 @@ Replaced value:
 ```sqf
 \
 	_mem_name = name ; \
-	_lastIndex = _fields pushback [_mem_name,'value']; \
+	_lastIndexF = _fields pushback [_mem_name,'value']; \
 	call pc_oop_handleAttrF;
 ```
 File: [host\oop.hpp at line 128](../../../Src/host/oop.hpp#L128)
@@ -6709,7 +6709,7 @@ Replaced value:
 \
 	_mem_name = #name ; \
 	__iv_r = value; if equalTypes(__iv_r,"") then {__iv_r = str __iv_r}; \
-	_lastIndex = _fields pushback [_mem_name,format["%1",__iv_r]]; \
+	_lastIndexF = _fields pushback [_mem_name,format["%1",__iv_r]]; \
 	call pc_oop_handleAttrF;
 ```
 File: [host\oop.hpp at line 135](../../../Src/host/oop.hpp#L135)
@@ -6846,7 +6846,7 @@ Replaced value:
 ```sqf
 _mem_name = #name; _classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LINE__)]; \
 	_propOverride = _methods findIf {(_x select 0) == _mem_name}; \
-	if (_propOverride != -1) then {__check_method_duplicate _methods deleteAt _lastIndex; _methods set [_propOverride,[_mem_name]]; _lastIndex = _propOverride} else { \
+	if (_propOverride != -1) then {__check_method_duplicate (_methods select _propOverride) deleteAt 1; _lastIndex = _propOverride} else { \
 		_lastIndex = _methods pushback [_mem_name]; \
 	}; \
 	call pc_oop_handleAttrM; \
