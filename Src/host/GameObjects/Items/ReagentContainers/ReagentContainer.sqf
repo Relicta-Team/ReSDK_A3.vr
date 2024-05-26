@@ -25,7 +25,7 @@ class(IReagentItem) extends(Item)
 	var(reagents,vec2(this,INFINITY) call ms_create);
 	
 	//Можно ли перелить из контейнера
-	getter_func(isTrasferize,!isNull(callSelf(transferAmount)));
+	getter_func(isTransferize,!isNull(callSelf(transferAmount)));
 	getterconst_func(transferAmount,null); //если не null то указывает по сколько можно перемещать
 	var(curTransferSize,0);
 	
@@ -55,7 +55,7 @@ class(IReagentItem) extends(Item)
 	func(constructor)
 	{
 		objParams();
-		if callSelf(isTrasferize) then {
+		if callSelf(isTransferize) then {
 			if (getSelf(curTransferSize) == 0) then {
 				setSelf(curTransferSize,callSelf(transferAmount) select 0);
 			};
