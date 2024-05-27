@@ -64,6 +64,7 @@ endclass
 
 class(SteelMedicalBox) extends(Container)
 	var(name,"Стальная коробка");
+	var(material,"MatMetal");
 	var(icon,invicon(medcase2));
 	var(model,"ml_exodusnew\medbox.p3d");
 	var(weight,gramm(780));	

@@ -14,6 +14,7 @@ class(BodyPart) extends(Item)
 	var(germs,-1);//без микробов на старте
 	var(size,ITEM_SIZE_BIG);
 	var(model,"ml\ml_object_new\model_24\okorok.p3d");
+	var(material,"MatFlesh");
 
 	//var_num(hp);
 	//var_bool(isBleeding);

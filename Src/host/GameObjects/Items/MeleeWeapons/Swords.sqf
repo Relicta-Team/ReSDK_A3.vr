@@ -9,6 +9,7 @@
 
 class(Sword) extends(IMeleeWeapon)
 	var(name,"Меч");
+	var(material,"MatMetal");
 	var(attachedWeap,weaponModule(WeapSword));
 	getter_func(getDropSound,"dropping\axe");
 	getter_func(getPutdownSound,"updown\sword_unsheath_0" + str randInt(1,2));

@@ -10,9 +10,26 @@
 
 // medical
 
+class(IReagentItemBag) extends(IReagentNDItem)
+	var(reagents,vec2(this,120) call ms_create);
+	getterconst_func(transferAmount,[0.2 arg 1 arg 2]);
+	var(model,"a3\structures_f_epa\items\medical\bloodbag_f.p3d");
+endclass
+
+class(BloodPack) extends(IReagentItemBag)
+	var(name,"Пакет крови");
+endclass
+
+class(IVBag) extends(IReagentItemBag)
+	//for empty: "a3\props_f_orange\humanitarian\camps\intravenbag_01_empty_f.p3d"
+	var(model,"a3\props_f_orange\humanitarian\camps\intravenbag_01_full_f.p3d");
+	var(name,"Пакет для внутреннего переливания");
+endclass
+
 class(Syringe) extends(IReagentNDItem)
 	var(name,"Шприц");
 	var(model,"relicta_models\models\medical\syringe.p3d");
+	var(material,"MatSynt");
 	var(reagents,vec2(this,15) call ms_create);
 	getterconst_func(transferAmount,[1 arg 2 arg 3 arg 5 arg 10 arg 15]);
 

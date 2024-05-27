@@ -11,6 +11,7 @@ editor_attribute("InterfaceClass")
 class(ItemWritter) extends(Item)
 	var(name,"Писало");
 	var(color,"000000");
+	var(material,"MatSynt");
 	
 	func(applyColorToText)
 	{

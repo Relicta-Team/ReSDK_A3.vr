@@ -35,6 +35,7 @@ class(BloodPoolSmall) extends(CleanableItem)
 	var(name,"Кровь");
 	var(desc,"Просто лужица крови.");
 	var(model,"BloodSplatter_01_Small_New_F");
+	var(material,"MatOrganic");
 	getter_func(canIncrease,getSelf(incrLeft) <= 0);
 	getterconst_func(getIncreaseType,"BloodPoolMedium");
 	var(incrLeft,3); //сколько раз прокнет  предже чем увеличит лужу

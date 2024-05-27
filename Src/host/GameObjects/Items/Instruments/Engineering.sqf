@@ -9,6 +9,7 @@
 
 class(EngineeringToolItem) extends(Item)
 	var(icon,invicon(tool_base));
+	var(material,"MatSynt");
 endclass
 
 
@@ -33,6 +34,7 @@ class(Gloves) extends(EngineeringToolItem)
 	var(weight,gramm(15));
 	var(model,"a3\structures_f\items\tools\gloves_f.p3d");
 	var(size,ITEM_SIZE_SMALL);
+	var(material,"MatCloth");
 endclass
 
 class(Multimeter) extends(EngineeringToolItem)
@@ -47,6 +49,7 @@ endclass
 class(Wrench) extends(EngineeringToolItem)
 	var(name,"Гаечный ключ");
 	var(model,"a3\structures_f\items\tools\wrench_f.p3d");
+	var(material,"MatMetal");
 	var(weight,gramm(62));
 	var(size,ITEM_SIZE_SMALL);
 endclass
@@ -54,6 +57,7 @@ endclass
 class(Hammer) extends(EngineeringToolItem)
 	var(name,"Мотолок");
 	var(model,"a3\structures_f\items\tools\hammer_f.p3d");
+	var(material,"MatMetal");
 	var(weight,gramm(800));
 	var(size,ITEM_SIZE_MEDIUM);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
@@ -65,6 +69,7 @@ class(Crowbar) extends(EngineeringToolItem)
 	var(desc,null);
 	getterconst_func(getDesc,"Против лома нет приёма!");
 	var(model,"a3\props_f_orange\items\tools\crowbar_01_f.p3d");
+	var(material,"MatMetal");
 	var(attachedWeap,weaponModule(WeapCrowbar));
 	var(weight,5.2);
 	var(size,ITEM_SIZE_LARGE);

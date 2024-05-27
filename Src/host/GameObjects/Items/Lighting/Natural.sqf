@@ -125,6 +125,7 @@ class(Torch) extends(ILightible)
 	var(name,"Факел");
 	var(desc,"Самый популярный источник освещения");
 	var(model,"relicta_models\models\weapons\melee\torch.p3d");
+	var(material,"MatWood");
 	var(allowedSlots,[INV_BELT]);
 	var(size,ITEM_SIZE_LARGE);
 	var(weight,gramm(560));
@@ -241,6 +242,7 @@ class(Sigarette) extends(Torch)
 	var(size,ITEM_SIZE_TINY);
 	var(weight,gramm(1.08));
 	var(model,"relicta_models\models\interier\props\cigarette.p3d");
+	var(material,"MatPaper");
 	var(icon,invicon(sigarette));
 	var(fuelLeft,60 * 6);
 	getterconst_func(getHandAnim,ITEM_HANDANIM_LOWERONLYHAND);
@@ -302,6 +304,7 @@ class(Candle) extends(Sigarette)
 	var_array(allowedSlots); //override but inherite from sigarette
 	var(icon,invicon(candle));
 	var(model,"relicta_models\models\interier\props\svecha.p3d");
+	var(material,"MatSynt");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(25));
 	var(light,LIGHT_CANDLE);
@@ -326,6 +329,7 @@ class(LampKerosene) extends(Torch)
 	var(icon,invicon(kerosene));
 	var(allowedSlots,[]);
 	var(model,"ml_shabut\exoduss\keroslampa.p3d");
+	var(material,"MatGlass");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(360));
 	var(light,LIGHT_LAMP_KEROSENE);
@@ -342,6 +346,7 @@ class(Match) extends(Sigarette)
 	var(name,"Спичка");
 	var(desc,"");
 	var(model,"relicta_models\models\interier\props\spichka.p3d");
+	var(material,"MatWood");
 	var(weight,gramm(5));
 	var(size,ITEM_SIZE_TINY);
 	var(light,LIGHT_MATCH);
@@ -370,6 +375,7 @@ class(MatchBox) extends(Item)
 	var(name,"Коробок спичек");
 	var(countLeft,15);
 	var(model,"a3\structures_f_epa\items\tools\matches_f.p3d");
+	var(material,"MatWood");
 
 	func(onItemClick)
 	{

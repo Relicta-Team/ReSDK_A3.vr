@@ -13,7 +13,7 @@
 
 editor_attribute("InterfaceClass")
 class(Container) extends(Item)
-
+	var(material,"MatCloth");
 	#include "..\..\Interfaces\IContainer.Interface"
 
 	editor_attribute("EditorVisible" arg "type:int" arg "range:1:100") editor_attribute("Tooltip" arg "Общее количество слотов в контейнере")

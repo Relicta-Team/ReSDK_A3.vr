@@ -21,6 +21,8 @@
 
 editor_attribute("InterfaceClass")
 class(IPaperItemBase) extends(Item)
+	var(material,"MatPaper");
+	
 	func(doBurn)
 	{
 		objParams_2(_srcFire,_usr);

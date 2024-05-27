@@ -13,12 +13,14 @@ class(SurgicalSaw) extends(Item)
 	var(name,"Хирургическая пила");
 	var(desc,"Для отрезания лишних конечностей.");
 	var(model,"ml_shabut\rabochiystol\pila.p3d");
+	var(material,"MatMetal");
 	
 endclass
 
 class(SurgicalExpander) extends(Item)
 	var(name,"Хирургический расширитель");
 	var(model,"ml_shabut\rabochiystol\lobzik.p3d");
+	var(material,"MatMetal");
 	
 	getterconst_func(canUseInteractToMethod,true);
 	func(interactTo)
@@ -45,6 +47,7 @@ class(Stethoscope) extends(Item)
 	var(weight,gramm(60));
 	var(size,ITEM_SIZE_TINY);
 	var(model,"a3\props_f_orange\humanitarian\camps\stethoscope_01_f.p3d");
+	var(material,"MatSynt");
 endclass
 
 class(BoneStraightener) extends(Item)
@@ -53,6 +56,7 @@ class(BoneStraightener) extends(Item)
 	var(weight,gramm(170));
 	var(size,ITEM_SIZE_SMALL);
 	var(model,"ml_shabut\rabochiystol\kleshni.p3d");
+	var(material,"MatMetal");
 	
 	func(straightBone)
 	{
@@ -87,6 +91,7 @@ class(Forceps) extends(Item)
 	var(name,"Щипцы");
 	var(desc,"Лекарский инструмент для сшивания орагнов и конечностей.");
 	var(model,"a3\structures_f\items\tools\pliers_f.p3d");
+	var(material,"MatMetal");
 	var(weight,gramm(40));
 	var(size,ITEM_SIZE_TINY);
 	getterconst_func(canUseInteractToMethod,true);
@@ -129,6 +134,7 @@ class(Crutch) extends(Item)
 	var(name,"Костыль");
 	var(desc,"Безногим?!");
 	var(model,"relicta_models2\medicine\s_crutch\s_crutch.p3d");
+	var(material,"MatWood");
 	var(weight,gramm(800));
 	var(size,ITEM_SIZE_MEDIUM);
 	var(allowedSlots,[INV_BACK arg INV_BACKPACK]);

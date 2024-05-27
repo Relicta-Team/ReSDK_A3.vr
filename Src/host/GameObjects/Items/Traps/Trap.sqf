@@ -142,6 +142,7 @@ endclass
 class(Trap) extends(ITrapItem)
 	var(name,"Капкан");
 	var(model,"relicta_models\models\weapons\kapkan\kapkan.p3d");
+	var(material,"MatMetal");
 	var(desc,"Стальной капкан. Используется кочевниками для поимки монстров... и иногда людей.");
 	var(size,ITEM_SIZE_LARGE);
 	var(weight,1.35);

@@ -11,4 +11,5 @@
 class(RadioBaikal) extends(ItemRadio)
 	getterconst_func(name,"Рация");
 	var(model,"ml_exodusnew\ratziya.p3d");
+	var(material,"MatSynt");
 endclass

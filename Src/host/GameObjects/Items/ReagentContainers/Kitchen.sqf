@@ -23,6 +23,7 @@ class(Kastrula) extends(IReagentNDItem)
 	var(name,"Кастрюля");
 	//"ml\ml_object_new\shabbat\kostrylya_2.p3d" CHANGE MODEL AND REMOVE OTHERS
 	var(model,"relicta_models\models\interier\props\kitchen\kastryla.p3d");
+	var(material,"MatMetal");
 	var(allowedSlots,[INV_HEAD]);
 	var(size,ITEM_SIZE_BIG);
 	var(weight,gramm(700));
@@ -179,6 +180,7 @@ class(SoupPlate) extends(IReagentNDItem)
 	var(name,"Тарелка");
 	var(desc,"Глубокая тарелка для супов и похлёбок.");
 	var(model,"ml_exodusnew\tarelochka.p3d");
+	var(material,"MatMetal");
 	var(soupName,"");
 	
 	func(getName)
@@ -212,6 +214,7 @@ class(FoodPlate) extends(Container)
 	var(name,"Тарелка");
 	var(desc,"Эта тарелка предназначена для вторых блюд.");
 	var(model,"relicta_models\models\interier\props\kitchen\plate.p3d");
+	var(material,"MatGlass");
 endclass
 
 // Cups
@@ -219,6 +222,7 @@ endclass
 class(Cup) extends(IReagentNDItem)
 	var(name,"Чашка");
 	var(model,"relicta_models\models\interier\props\cup.p3d");
+	var(material,"MatSynt");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(200));
 	
@@ -231,6 +235,7 @@ class(WoodenCup) extends(Cup)
 	var(name,"Деревянная кружка");
 	
 	var(model,"relicta_models\models\interier\props\kitchen\woodcup.p3d");
+	var(material,"MatWood");
 endclass
 
 class(OlderWoodenCup) extends(WoodenCup)
@@ -240,4 +245,5 @@ endclass
 class(MetalCup) extends(Cup)
 	var(name,"Стальная чашка");
 	var(model,"ml_shabut\furniture\chashka_rja.p3d");
+	var(material,"MatMetal");
 endclass

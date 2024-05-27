@@ -11,6 +11,7 @@
 class(Calculator) extends(Item)
 	var(name,"Счёты");
 	var(model,"ml_exodusnew\gershtele.p3d");
+	var(material,"MatWood");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(140));
 	

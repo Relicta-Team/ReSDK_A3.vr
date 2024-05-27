@@ -12,6 +12,7 @@ class(CuttingBoard) extends(Item)
 	var(name,"Доска");
 	var(desc,"Доска для резки всякого съедобного...");
 	var(model,"ml_exodusnew\doskarez.p3d");
+	var(material,"MatWood");
 	var(weight,gramm(150));
 	var(size,ITEM_SIZE_MEDIUM);
 endclass
@@ -29,7 +30,8 @@ class(FryingPan) extends(Item)
 	var(weight,1.45);
 	var(size,ITEM_SIZE_MEDIUM);
 	var(model,"ml_exodusnew\skovoroda.p3d");//"relicta_models\models\interier\props\kitchen\pan.p3d"
-	
+	var(material,"MatMetal");
+
 	var_num(cookingTime); //через сколько приготовится
 	var_bool(isCookingProcess); //запущен ли процесс готовки
 	var_bool(isCooked); //означате что блюдо готово и находится в источнике
@@ -187,7 +189,7 @@ endclass
 class(Polovnik) extends(Item)
 	var(name,"Половник");
 	var(model,"relicta_models\models\interier\props\kitchen\ladle.p3d");
-	
+	var(material,"MatMetal");
 	
 	#include "..\..\Interfaces\INetDisplay.Interface"
 

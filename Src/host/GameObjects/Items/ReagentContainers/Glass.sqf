@@ -24,10 +24,16 @@ class(IGlassReagentItem) extends(IReagentNDItem)
 	};
 endclass
 
+class(IGlassReagentCont) extends(IReagentNDItem)
+	var(material,"MatGlass");
+	getterconst_func(transferAmount,[5 arg 10 arg 15 arg 25 arg 30 arg 60]);
+endclass
+
 class(GlassBottle) extends(IGlassReagentItem)
 	var(name,"Стеклянная бутылка");
 	//var(model,"ml\ml_object_new\model_14_10\bottledef.p3d"); //nogeom
 	var(model,"relicta_models\models\interier\props\kitchen\buhlo1.p3d");
+	var(material,"MatGlass");
 	var(reagents,vec2(this,60) call ms_create);
 	getterconst_func(transferAmount,[5 arg 10 arg 15 arg 25 arg 30 arg 60]);
 	var_str(bottleName); //подписанное название

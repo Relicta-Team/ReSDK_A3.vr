@@ -18,6 +18,7 @@ class(Key) extends(Item)
 
 	var(name,"Ключ");
 	var(model,"relicta_models\models\interier\props\key.p3d");
+	var(material,"MatMetal");
 	var(icon,invicon(key));
 	var(weight,gramm(10));
 

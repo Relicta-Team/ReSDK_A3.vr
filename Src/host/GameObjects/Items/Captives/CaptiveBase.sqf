@@ -243,6 +243,7 @@ endclass
 
 class(HandcuffItem) extends(CaptiveItemBase)
 	var(name,"Наручники");
+	var(material,"MatMetal");
 	var(desc,"Собраны по архивным чертежам на Веселой Ферме.");
 	var(weight,gramm(380));
 	var(allowedSlots,[INV_BELT]);
@@ -445,6 +446,7 @@ class(RopeItem) extends(CaptiveItemBase)
 	var(desc,"Простая веревка. Из чего она сделана неизвестно.");
 	var(weight,gramm(57));
 	var(model,"a3\structures_f_heli\items\tools\rope_01_f.p3d");
+	var(material,"MatCloth");
 	
 	var(captiveItemST,3);
 

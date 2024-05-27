@@ -9,7 +9,7 @@
 
 editor_attribute("InterfaceClass")
 class(IFoodItem) extends(Item)
-
+	var(material,"MatOrganic");
 	#include "..\..\..\Interfaces\IReagentContainer.Interface"
 	
 	/*

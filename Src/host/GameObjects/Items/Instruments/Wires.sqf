@@ -11,6 +11,7 @@
 class(Wire) extends(Item)
 	var(name,"Провод");
 	var(model,"a3\structures_f_heli\items\electronics\hdmicable_01_f.p3d");
+	var(material,"MatSynt");
 	
 	var(wireColor,null);
 	

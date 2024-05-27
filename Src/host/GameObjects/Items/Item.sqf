@@ -13,10 +13,6 @@
 
 #define DEBUG_TARG
 
-//NOCATEGITEMS
-//не расскоменитровывать пока не будет структурировано
-//#include "NOGATEG.sqf"
-
 editor_attribute("InterfaceClass")
 editor_attribute("ColorClass" arg "44C242")
 class(Item) extends(IDestructible) attribute(GenerateWeaponModule)

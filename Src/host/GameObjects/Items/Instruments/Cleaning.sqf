@@ -13,6 +13,7 @@ class(BrushCleaner) extends(Item)
 	getterconst_func(getDesc,"Для оттирания крови от пола в самый раз.");
 	//var(model,"a3\props_f_enoch\military\decontamination\brush_01_f.p3d"); //желтая
 	var(model,"Brush_01_green_F");
+	var(material,"MatSynt");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(230));
 	

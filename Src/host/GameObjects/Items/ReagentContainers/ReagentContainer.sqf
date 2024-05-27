@@ -18,6 +18,8 @@ editor_attribute("InterfaceClass")
 class(IReagentItem) extends(Item)
 
 	verbList("doempty",Item);
+
+	var(material,"MatSynt");
 	
 	getterconst_func(isDrink,true);
 	

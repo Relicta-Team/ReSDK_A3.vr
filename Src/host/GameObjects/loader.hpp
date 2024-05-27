@@ -52,7 +52,6 @@ loadFile("src\host\GameObjects\Items\ReagentContainers\ReagentContainer.sqf");
 	loadFile("src\host\GameObjects\Items\ReagentContainers\Chemical.sqf");
 	loadFile("src\host\GameObjects\Items\ReagentContainers\Cleanable.sqf");
 	loadFile("src\host\GameObjects\Items\ReagentContainers\Pills.sqf");
-loadFile("src\host\GameObjects\Items\NOGATEG.sqf");
 loadFile("src\host\GameObjects\Items\Bodyparts\Bodyparts.sqf");
 	loadFile("src\host\GameObjects\Items\Bodyparts\NonOrganicBodyParts.sqf");
 	loadFile("src\host\GameObjects\Items\Bodyparts\Organs.sqf");

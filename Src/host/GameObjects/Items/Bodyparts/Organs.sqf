@@ -10,6 +10,7 @@
 
 editor_attribute("InterfaceClass")
 class(Organ) extends(Item)
+	var(material,"MatFlesh");
 	var(germs,-1);//без микробов на старте
 	var_bool(isVital);
 	getterconst_func(getOrganBodyPart,BP_INDEX_TORSO);

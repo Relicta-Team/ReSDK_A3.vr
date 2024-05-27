@@ -11,7 +11,7 @@
 
 editor_attribute("InterfaceClass")
 class(Cloth) extends(Container)
-
+	var(material,"MatCloth");
 	var(name,"Одежда");
 	var(desc,"Обычная одежда");
 	var(size,ITEM_SIZE_MEDIUM);

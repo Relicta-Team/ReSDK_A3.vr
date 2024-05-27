@@ -12,4 +12,5 @@ class(ArmHook) extends(Arm)
 	getterconst_func(isOrganic,false);
 	var(name,"Крюк");
 	var(model,"relicta_models\models\weapons\melee\sickle2\sickle2.p3d");
+	var(material,"MatMetal");
 endclass

@@ -12,6 +12,7 @@
 class(Bandage) extends(Item)
 	var(name,"Бинт");
 	var(model,"a3\structures_f_epa\items\medical\bandage_f.p3d");
+	var(material,"MatCloth");
 	var(allowedSlots,[INV_FACE]);
 
 	func(bandageProcess)
@@ -196,6 +197,7 @@ endclass
 class(Rag) extends(Bandage)
 	var(name,"Тряпка");
 	var(model,"relicta_models\models\cloth\littlerag.p3d");
+	var(material,"MatCloth");
 endclass
 
 
@@ -204,6 +206,7 @@ class(NeedleWithThreads) extends(Item)
 	var(desc,"Только не урони её...");
 	var(weight,gramm(0.15));
 	var(model,"relicta_models\models\interier\props\spichka.p3d");
+	var(material,"MatMetal");
 	var(allowedSlots,[INV_FACE]);
 	var(countUses,10);
 
