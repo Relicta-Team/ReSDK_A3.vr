@@ -72,6 +72,8 @@ endclass
 
 class(MatDirt) extends(MatBase)
 	var(name,"Земля");
+	var(damageEffect,SLIGHT_DAM_DIRT);
+	var(damageSounds,["damage\cloth_1" arg "damage\cloth_2" arg "damage\cloth_3"]);
 endclass
 
 class(MatWood) extends(MatBase)
@@ -96,18 +98,21 @@ class(MatGlass) extends(MatBase)
 
 	var(name,"Стекло");
 	var(damageEffect,SLIGHT_DAM_GLASS);
+	var(damageSounds,["damage\glass_1" arg "damage\glass_2" arg "damage\glass_3"]);
 endclass
 
 class(MatCloth) extends(MatBase)
 
 	var(name,"Ткань");
 	var(damageEffect,SLIGHT_DAM_CLOTH);
+	var(damageSounds,["damage\cloth_1" arg "damage\cloth_2" arg "damage\cloth_3"]);
 endclass
 
 class(MatPaper) extends(MatBase)
 
 	var(name,"Бумага");
 	var(damageEffect,SLIGHT_DAM_PAPER);
+	var(damageSounds,["damage\paper_1" arg "damage\paper_2" arg "damage\paper_3"]);
 
 endclass
 
@@ -115,6 +120,7 @@ class(MatFlesh) extends(MatBase)
 
 	var(name,"Плоть");
 	var(damageEffect,SLIGHT_DAM_FLESH);
+	var(damageSounds,["damage\flesh_1" arg "damage\flesh_2" arg "damage\flesh_3"]);
 
 endclass
 
@@ -122,6 +128,7 @@ class(MatOrganic) extends(MatBase)
 
 	var(name,"Органика");
 	var(damageEffect,SLIGHT_DAM_ORGANIC);
+	var(damageSounds,["damage\organic_1" arg "damage\organic_2"]);
 
 endclass
 
@@ -130,6 +137,7 @@ class(MatSynt) extends(MatBase)
 	var(name,"Синтетика");
 
 	var(damageEffect,SLIGHT_DAM_SYNT);
+	var(damageSounds,["damage\synt_1" arg "damage\synt_2" arg "damage\synt_3"]);
 
 endclass
 
