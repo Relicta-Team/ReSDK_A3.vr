@@ -334,8 +334,8 @@ regScriptEmit(SLIGHT_DAM_METAL)
 		null,
 		_emitAlias("Частицы 1")
 		["linkToSrc",[0,0,0]],
-		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,13,2,0],"","Billboard",0.07,1.3,[0,0,0],[0,0,0],0,15,9.9,0.3,[0.06,0.09],[[1,0.268,0.017,1],[1,1,0.721,0.196]],[100,100],0,0,"","","",0,false,-1,[]]],
-		["setParticleRandom",[1,[0,0,0],[1.5,1.5,1.3],0,0.3,[0,0,0,0],100,100,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,13,2,0],"","Billboard",0.07,1.3,[0,0,0],[0,0,0],0,45,1.9,0.3,[0.06,0.09],[[1,0.268,0.017,1],[1,1,0.721,0.196]],[100,100],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[1,[0,0,0],[3.5,3.5,3.3],0,0.3,[0,0,0,0],100,100,0,0]],
 		["setParticleCircle",[0,[14.809,13.986,0]]],
 		["setDropInterval",0.002]
 	]
@@ -348,6 +348,16 @@ regScriptEmit(SLIGHT_DAM_METAL)
 		["setParticleRandom",[0.5,[0,0,0],[1.2,1.2,1.2],2,0.2,[0,0,0,0],0,0,0.3,0]],
 		["setParticleCircle",[0,[0,0,0]]],
 		["setDropInterval",0.8]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Частицы 3")
+		["linkToLight",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\SparksBall.p3d",16,2,8,0],"","SpaceObject",1,0.1,[0,0,0],[0,0,0],0,15,10,0,[0.4,0.9],[[1,1,0.6,-50]],[1000,10],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0,[0,0,0],[-0.1,-0.1,0],0,0.1,[0,0,0,0],0,0,0,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.07]
 	]
 endScriptEmit
 
@@ -393,6 +403,140 @@ regScriptEmit(SLIGHT_DAM_WOOD)
 		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,7,48,1],"","BillBoard",0.01,1,[0,0,0],[0,0,0.0820007],0,1.4,1.11,0,[0.58,0.3,0.1],[[0.6196,0.5804,0.5451,0.008]],[14,0.5,0.3,0.25,0.25],1,0,"","","",0,false,-1,[]]],
 		["setParticleRandom",[2,[0,0,0],[1,1,1],20,0,[0,0,0,0],2,1.5,0,0]],
 		["setParticleCircle",[0,[50,50,50]]],
+		["setDropInterval",0.01]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_DAM_BETON)
+	[
+		"pt",
+		null,
+		_emitAlias("Частицы 1")
+		["linkToSrc",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\pstone\pstone.p3d",1,0,1,0],"","SpaceObject",1,3,[0,0,0],[0,0,0],1.1,20,0.9,0.5,[0.4],[[1,1,1,1]],[1],0,0.4,"","","",0,false,-1,[]]],
+		["setParticleRandom",[1.5,[0,0,0],[3.889,3.866,2.166],1,0.6,[0,0,0,0],0.01,0.1,257.706,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.02]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Частицы 2")
+		["linkToLight",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,12,13,0],"","Billboard",1,7,[0,0,0],[0,0,0],0,1.276,1,0.03,[0.8,1.3,1,2,2,3],[[0.2,0.2,0.2,0.2],[0.2,0.2,0.2,0.16],[0.2,0.2,0.2,0.12],[0.2,0.2,0.2,0.1],[0.2,0.2,0.2,0.8],[0.2,0.2,0.2,0.6]],[1000],0.1,0.02,"","","",0,false,-1,[]]],
+		["setParticleRandom",[3,[0,0,0],[3.4,3.4,3.4],30,0.3,[0,0,0,0],0,0,1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.03]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_DAM_DIRT)
+	[
+		"pt",
+		null,
+		_emitAlias("Частицы 1")
+		["linkToSrc",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,12,13,0],"","Billboard",1,3,[0,0,0],[0,0,0],1,1.677,1,2.5,[0.08,0.5,1.1],[[0.25,0.25,0.2,0.2],[0.25,0.25,0.2,0.4],[0.25,0.25,0.2,0.3]],[1000],0.1,0.12,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.3,[0,0,0],[3.05,3.05,3.05],5,1.5,[0,0,0,0],0,0,0.1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.01]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Частицы 2")
+		["linkToLight",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,12,9,0],"","BillBoard",1,1,[0,0,0],[0,0,3],0,2,0.01,2.5,[0.1,0.2],[[0.5,0.5,0.5,1],[0.5,0.5,0.5,0]],[1000],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.5,[0,0,0],[4,4,4],20,0.01,[0.1,0.1,0.1,0.1],0,0,1,0]],
+		["setParticleCircle",[0,[1.5,1.5,1]]],
+		["setDropInterval",0.008]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_DAM_GLASS)
+	[
+		"pt",
+		null,
+		_emitAlias("Частицы 1")
+		["linkToSrc",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\GlassParts_01.p3d",1,0,1,0],"","SpaceObject",3,0.8,[0,0,0],[0,0,0],0,5,1,0,[0.05],[[1,1,1,1]],[1000],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.1,[0,0,0],[3.4,3.4,3.4],1,0.255,[0.1,0.1,0.1,0],0,0,1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.008]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_DAM_CLOTH)
+	[
+		"pt",
+		null,
+		_emitAlias("Частицы 2")
+		["linkToSrc",[0,0,0]],
+		["setParticleParams",[["\a3\Data_f\ParticleEffects\Universal\Hay.p3d",1,0,1,0],"","SpaceObject",3,0.8,[0,0,0],[0,0,0],0,2,1,3,[0.47],[[1,1,1,1]],[1000],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.1,[0,0,0],[3.5,3.5,3.5],1,0.18,[0.1,0.1,0.1,0],0,0,1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.0008]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_DAM_PAPER)
+	[
+		"pt",
+		null,
+		_emitAlias("Частицы 3")
+		["linkToSrc",[0,0,0]],
+		["setParticleParams",[["\a3\Weapons_F_Orange\Ammo\leaflet_05_f.p3d",1,0,1,0],"","SpaceObject",3,2.8,[0,0,0],[0,0,0],0,1.6,1,1.5,[0.3],[[1,1,1,1]],[1000],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.1,[0,0,0],[3.5,3.5,3.5],1,0.18,[0.1,0.1,0.1,0],0,0,1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.04]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_DAM_FLESH)
+	[
+		"pt",
+		null,
+		_emitAlias("Частицы 1")
+		["linkToSrc",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Meat_ca.p3d",1,0,1,0],"","SpaceObject",1,0.7,[0,0,0],[0,0,0],1,54,1,10,[2],[[1,1,1,-50]],[1000],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.6,[0,0,0],[5,5,5],2,0,[0,0,0,0],200,0,187.802,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.005]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_DAM_ORGANIC)
+	[
+		"pt",
+		null,
+		_emitAlias("Частицы 2")
+		["linkToSrc",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,12,9,0],"","BillBoard",1,2,[0,0,0],[0,0,1.4],0,5,0.01,2.5,[0.1,0.2],[[0.948,0.797,0.381,-1],[0.5,0.5,0.5,0]],[1000],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.05,[0,0,0],[2,2,2],20,0.01,[0.277,0.022,0,1],0,0,1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.001]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_DAM_SYNT)
+	[
+		"pt",
+		null,
+		_emitAlias("Частицы 3")
+		["linkToSrc",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\AmmoBelt_Links.p3d",1,0,1,0],"","SpaceObject",1,0.7,[0,0,0],[0,0,0],46.897,5,1,5,[0.5],[[1,1,1,-50]],[1000],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.6,[0,0,0],[5,5,5],2,0,[0,0,0,0],200,0,187.802,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.0005]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Частицы 4")
+		["linkToLight",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,7,48,1],"","Billboard",1,4.2,[0,0,0],[0,0,0],0,0.05,0.04,0.22,[0.14,0.4],[[0.1,0.1,0.1,0.03],[0.2,0.2,0.2,0.05],[0.2,0.2,0.2,0.025],[0.3,0.3,0.3,0.01],[0.4,0.4,0.4,0.005]],[1.5,0.5],0.4,0.02,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.5,[0.03,0.03,0.03],[1.25,1.25,1.5],0,0.1,[0,0,0,0],0.1,0.01,1,0]],
+		["setParticleCircle",[0,[0,0,0]]],
 		["setDropInterval",0.01]
 	]
 endScriptEmit

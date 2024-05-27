@@ -66,6 +66,7 @@ endclass
 class(MatBeton) extends(MatStone)
 
 	var(name,"Бетон");
+	var(damageEffect,SLIGHT_DAM_BETON);
 
 endclass
 
@@ -94,36 +95,41 @@ endclass
 class(MatGlass) extends(MatBase)
 
 	var(name,"Стекло");
-
+	var(damageEffect,SLIGHT_DAM_GLASS);
 endclass
 
 class(MatCloth) extends(MatBase)
 
 	var(name,"Ткань");
-
+	var(damageEffect,SLIGHT_DAM_CLOTH);
 endclass
 
 class(MatPaper) extends(MatBase)
 
 	var(name,"Бумага");
+	var(damageEffect,SLIGHT_DAM_PAPER);
 
 endclass
 
 class(MatFlesh) extends(MatBase)
 
 	var(name,"Плоть");
+	var(damageEffect,SLIGHT_DAM_FLESH);
 
 endclass
 
 class(MatOrganic) extends(MatBase)
 
 	var(name,"Органика");
+	var(damageEffect,SLIGHT_DAM_ORGANIC);
 
 endclass
 
 class(MatSynt) extends(MatBase)
 	//это пластик и прочая хрень
 	var(name,"Синтетика");
+
+	var(damageEffect,SLIGHT_DAM_SYNT);
 
 endclass
 
