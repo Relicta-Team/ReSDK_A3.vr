@@ -44,6 +44,14 @@ class(MatBase) attribute(staticInit)
 		if (count _list == 0) exitWith {""};
 		pick _list
 	};
+
+	//TODO implement step sounds
+	func(getStepSoundMode)
+	{
+		objParams();
+		""
+	};
+
 endclass
 
 class(MatStone) extends(MatBase)
