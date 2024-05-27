@@ -17,6 +17,8 @@
 #include "ScriptedEffectConfigs.sqf"
 //prepare cfgs
 call le_se_doSorting;
+//create drop emitter map
+call le_se_internal_createDropEmitterMap;
 
 #include "LightConfigs.sqf"
 #include "FireLightConfigs.sqf"

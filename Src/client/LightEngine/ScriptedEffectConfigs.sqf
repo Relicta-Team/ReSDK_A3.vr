@@ -327,3 +327,72 @@ regScriptEmit(SLIGHT_STREET_LAMP_DORM)
 		["setLightConePars",[360,90,0]]
 	]
 endScriptEmit
+
+regScriptEmit(SLIGHT_DAM_METAL)
+	[
+		"pt",
+		null,
+		_emitAlias("Частицы 1")
+		["linkToSrc",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,13,2,0],"","Billboard",0.07,1.3,[0,0,0],[0,0,0],0,15,9.9,0.3,[0.06,0.09],[[1,0.268,0.017,1],[1,1,0.721,0.196]],[100,100],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[1,[0,0,0],[1.5,1.5,1.3],0,0.3,[0,0,0,0],100,100,0,0]],
+		["setParticleCircle",[0,[14.809,13.986,0]]],
+		["setDropInterval",0.002]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Частицы 7")
+		["linkToLight",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal_02.p3d",8,0,40,1],"","Billboard",1,3,[0,0,0],[0,0,0],1,1.275,1,0.5,[0.4,2.6],[[1,1,1,0.064],[1,1,1,0.111]],[0.8,0.3],0.3,0.1,"","","",0,false,-1,[]]],
+		["setParticleRandom",[0.5,[0,0,0],[1.2,1.2,1.2],2,0.2,[0,0,0,0],0,0,0.3,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.8]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_DAM_STONE)
+	[
+		"pt",
+		null,
+		_emitAlias("Частицы 1")
+		["linkToSrc",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Shard\shard4.p3d",16,13,2,0],"","SpaceObject",1,0.3,[0,0,0],[0,0,0.800003],0,2.55,1,0.17,[0.3,0.3,0.3,0.3,0.3,0.18,0.18,0.18,0.18,0],[[1,0.3,0.3,-6.5],[1,0.3,0.3,-6],[1,0.3,0.3,-5.5],[1,0.3,0.3,-4.5]],[1000],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[1.5,[0,0,0],[1.4,1.4,1.4],1.7,0.04,[0,0,0,0],2.2,0.1,209.772,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.008]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Частицы 2")
+		["linkToLight",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal_02.p3d",8,0,40,1],"","Billboard",1,2,[0,0,0],[0,0,0],0.594,1.275,1,10,[0.1,0.5,0.8,1.6],[[1,1,1,0.442],[1,1,1,0.319],[1,1,1,0.215],[1,1,1,0.168]],[0.8,0.3,0.25],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[2.5,[0,0,0],[0.5,0.5,0.5],0.01,0.2,[0,0,0,0],0,0,0,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.2]
+	]
+endScriptEmit
+
+regScriptEmit(SLIGHT_DAM_WOOD)
+	[
+		"pt",
+		null,
+		_emitAlias("Частицы 1")
+		["linkToSrc",[0,0,0]],
+		["setParticleParams",[["\ca\buildings\particle_effects\dum_door_piece_b.p3d",16,13,2,0],"","SpaceObject",1,0.3,[0,0,0],[0,0,0],0,1.55,1,0.13,[0.05,0.05,0.05,0.05,0.05,0.01,0.01],[[1,0.3,0.3,-6.5],[1,0.3,0.3,-6],[1,0.3,0.3,-5.5],[1,0.3,0.3,-4.5]],[1000],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[1.5,[0,0,0],[2,2,2],1.7,0.04,[0,0,0,0],2.2,3.1,359.999,0]],
+		["setParticleCircle",[0,[0,0,0]]],
+		["setDropInterval",0.005]
+	]
+	,[
+		"pt",
+		null,
+		_emitAlias("Частицы 9")
+		["linkToLight",[0,0,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,7,48,1],"","BillBoard",0.01,1,[0,0,0],[0,0,0.0820007],0,1.4,1.11,0,[0.58,0.3,0.1],[[0.6196,0.5804,0.5451,0.008]],[14,0.5,0.3,0.25,0.25],1,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[2,[0,0,0],[1,1,1],20,0,[0,0,0,0],2,1.5,0,0]],
+		["setParticleCircle",[0,[50,50,50]]],
+		["setDropInterval",0.01]
+	]
+endScriptEmit
