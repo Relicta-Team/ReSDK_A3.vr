@@ -1269,6 +1269,9 @@ class(IDestructible) extends(GameObject)
 	{
 		// количество урона, тип повреждений, мировая позиция по которой пришлись повреждения, (опциональная) причина урона
 		objParams_4(_amount,_type,_worldPos,_cause);
+
+		callSelfParams(sendDamageVisualOnPos,_worldPos);
+
 		if !callSelf(canApplyDamage) exitWith {};
 
 		//сначала проходим через СП, потом мод. повр.
@@ -1363,6 +1366,12 @@ class(IDestructible) extends(GameObject)
 	{
 		objParams();
 
+		private _mat = getSelf(material);
+		if equalTypes(_mat,"") then {
+			_mat = _mat call mat_getByClass;
+			setSelf(material,_mat);
+		};
+
 		//germs
 		if isTypeOf(this,Item) then {
 			if isTypeOf(this,SystemItem) exitWith {};
@@ -1403,6 +1412,20 @@ class(IDestructible) extends(GameObject)
 
 			};
 		};
+	};
+
+	var(material,null);//string|object
+
+	func(sendDamageVisualOnPos)
+	{
+		objParams_1(_pos);
+		private _mat = getSelf(material);
+		if isNullVar(_mat) exitWith {};
+
+		private _emt = callFunc(_mat,getDamageEffect);
+		{
+			callFuncParams(_x,sendInfo,"do_fe" arg [_pos arg _emt]);
+		} foreach callSelfParams(getNearMobs,20);
 	};
 	
 	
