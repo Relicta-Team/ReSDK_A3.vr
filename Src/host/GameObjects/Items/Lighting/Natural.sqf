@@ -375,7 +375,7 @@ class(MatchBox) extends(Item)
 	var(name,"Коробок спичек");
 	var(countLeft,15);
 	var(model,"a3\structures_f_epa\items\tools\matches_f.p3d");
-	var(material,"MatWood");
+	var(material,"MatPaper");
 
 	func(onItemClick)
 	{
