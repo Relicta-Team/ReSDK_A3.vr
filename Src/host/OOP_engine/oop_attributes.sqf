@@ -14,9 +14,9 @@
 #define thisParams _attributeParams
 #define hasParams not_equals(thisParams,[])
 #define getClassName (thisClass getVariable 'classname')
-#define getMemeber(name) (thisClass getVariable 'name')
+#define getMember(name) (thisClass getVariable 'name')
 #define getMemberReflect(name) (thisClass getVariable (name))
-#define hasMember(name) !isNull(getMemeber(name))
+#define hasMember(name) !isNull(getMember(name))
 #define setMember(name,value) thisClass setVariable ['name',value]
 #define setMemberReflect(name,value) thisClass setVariable [name,value]
 #define endAttribute }; ["(OOP) Attribute '" + _oop_attr_last_name + "' loaded."] call logInfo;
@@ -35,7 +35,7 @@
 	newAttribute(PrintHelloworld)
 
 		//override method
-		_ctor = str getMemeber(constructor); //get ctor code as string
+		_ctor = str getMember(constructor); //get ctor code as string
 		_ctor = "call " + _ctor + "; " + 'log("Hello world! " + callSelf(getClassName))';
 		setMember(constructor,compile _ctor); //update ctor
 
@@ -108,7 +108,7 @@ newAttribute(hasField)
 		appExit(APPEXIT_REASON_COMPILATIOEXCEPTION);
 	};
 
-	private _fieldList = getMemeber(__allfields);
+	private _fieldList = getMember(__allfields);
 	{
 		if not_equalTypes(_x,"") exitWith {
 			_iserror = true;
@@ -244,4 +244,14 @@ newAttribute(GenerateWeaponModule)
 	missionNamespace setVariable [_wmName,_obj];
 	setMember(getGeneratedWeaponModule,compile(_wmName));
 	logformat("INITIALIZED CLASS %1 with wm: %2 %3 %4",getClassName arg _wmName arg _obj arg pt_GeneratedWeapHandyItem);
+endAttribute
+
+
+newAttribute(staticInit)
+	private _func = getMember(staticInit);
+	if isNullVar(_func) exitWith {
+		setLastError("Cant find staticInit function in class " + getClassName);
+	};
+
+	[getClassName,thisClass] call _func
 endAttribute
