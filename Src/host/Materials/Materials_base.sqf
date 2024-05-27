@@ -61,6 +61,10 @@ class(MatBeton) extends(MatStone)
 
 endclass
 
+class(MatDirt) extends(MatBase)
+	var(name,"Земля");
+endclass
+
 class(MatWood) extends(MatBase)
 
 	var(name,"Дерево");
@@ -106,6 +110,12 @@ endclass
 class(MatOrganic) extends(MatBase)
 
 	var(name,"Органика");
+
+endclass
+
+class(MatSynt) extends(MatBase)
+	//это пластик и прочая хрень
+	var(name,"Синтетика");
 
 endclass
 
