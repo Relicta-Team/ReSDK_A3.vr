@@ -30,6 +30,7 @@ class(MatBase) attribute(staticInit)
 			if not_equalTypes(_list,"") exitWith {""};
 			_list;
 		};
+		if (count _list == 0) exitWith {""};
 		pick _list
 	};
 	func(getDamageSoundBlocked)
@@ -40,6 +41,7 @@ class(MatBase) attribute(staticInit)
 			if not_equalTypes(_list,"") exitWith {""};
 			_list;
 		};
+		if (count _list == 0) exitWith {""};
 		pick _list
 	};
 endclass
@@ -50,6 +52,12 @@ class(MatStone) extends(MatBase)
 
 	var(damageEffect,SLIGHT_DAM_STONE);
 	var(damageSounds,["damage\stone_1" arg "damage\stone_2" arg "damage\stone_3"]);
+
+endclass
+
+class(MatBeton) extends(MatStone)
+
+	var(name,"Бетон");
 
 endclass
 
@@ -69,4 +77,36 @@ class(MatMetal) extends(MatBase)
 	var(damageSounds,["damage\metal_1" arg "damage\metal_2"]);
 
 endclass
+
+
+class(MatGlass) extends(MatBase)
+
+	var(name,"Стекло");
+
+endclass
+
+class(MatCloth) extends(MatBase)
+
+	var(name,"Ткань");
+
+endclass
+
+class(MatPaper) extends(MatBase)
+
+	var(name,"Бумага");
+
+endclass
+
+class(MatFlesh) extends(MatBase)
+
+	var(name,"Плоть");
+
+endclass
+
+class(MatOrganic) extends(MatBase)
+
+	var(name,"Органика");
+
+endclass
+
 
