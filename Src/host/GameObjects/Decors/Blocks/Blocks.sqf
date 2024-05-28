@@ -12,6 +12,7 @@
 class(BlockDirt) extends(Decor)
 	var(name,"Земля");
 	var(model,"block_dirt");
+	var(material,"MatDirt");
 	
 	func(onInteractWith)
 	{
@@ -48,9 +49,11 @@ endclass
 class(BlockBrick) extends(Decor)
 	var(name,"Кирпич");
 	var(model,"block_brick");
+	var(material,"MatStone");
 endclass
 
 class(BlockStone) extends(Decor)
 	var(name,"Камень");
 	var(model,"block_strongstone");
+	var(material,"MatStone");
 endclass

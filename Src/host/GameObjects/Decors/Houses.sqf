@@ -9,7 +9,11 @@
 //большое здание
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(BigHouse) extends(BigConstructions) var(name,"Большое здание"); editor_only(var(desc,"Крупное здание выполняющее роль декорации и являющееся нерушимой конструкцией");) endclass
+class(BigHouse) extends(BigConstructions) 
+	var(name,"Большое здание"); 
+	var(material,"MatBeton");
+	editor_only(var(desc,"Крупное здание выполняющее роль декорации и являющееся нерушимой конструкцией");) 
+endclass
 
 editor_attribute("EditorGenerated")
 class(FactoryWithTanks) extends(BigHouse)

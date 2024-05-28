@@ -15,6 +15,7 @@ class(BigStoneDecor) extends(BigConstructions) var(name,"Камень"); editor_
 editor_attribute("EditorGenerated")
 class(MediumPileGreenStones) extends(BigStoneDecor)
 	var(model,"a3\rocks_f_exp\cliff\cliff_boulder_f.p3d");
+	var(material,"MatStone");
 	var(name,"Камень");
 endclass
 

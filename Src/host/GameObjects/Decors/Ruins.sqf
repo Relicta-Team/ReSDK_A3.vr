@@ -10,7 +10,11 @@
 //руины
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(BigRuins) extends(BigConstructions) var(name,"Крупные руины"); editor_only(var(desc,"Остатки разрушенного здания для декорации. Не разрушаемы");) endclass
+class(BigRuins) extends(BigConstructions) 
+	var(name,"Крупные руины");
+	var(material,"MatBeton"); 
+	editor_only(var(desc,"Остатки разрушенного здания для декорации. Не разрушаемы");) 
+endclass
 
 editor_attribute("EditorGenerated")
 class(MediumStoneHouseRuins) extends(BigRuins)
