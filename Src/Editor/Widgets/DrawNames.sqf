@@ -86,7 +86,7 @@ function(drawNames_internal_onFrame)
 		if (_extendedInfo) then {
 			_extInfo params ["_txt","_color"];
 			_color = [_color] call color_HTMLtoRGBA;
-			drawIcon3D ["",_color, (getposatl _obj)vectorAdd (boundingCenter _obj vectoradd[0,0,-0.5]), 0, 0, 0, _txt, 1, _distSize, "EtelkaMonospaceProBold"];
+			drawIcon3D ["",_color vectormultiply 1.2, (getposatl _obj)vectorAdd (boundingCenter _obj vectoradd[0,0,-0.5]), 0, 0, 0, _txt, 1, _distSize, "EtelkaMonospaceProBold"];
 		};
 	} foreach drawNames_internal_list_collectedOjbects;
 }
