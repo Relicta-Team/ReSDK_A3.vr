@@ -133,7 +133,7 @@ os_steps_doFootStep = {
 	if (!vst_human_stealth_allowStepsounds) exitWith {};
 
 	private _soundPath = format["steps\%1%2",os_steps_currentSoundName, randInt(1,os_steps_currentSoundCount)];
-	[_soundPath,getPosATL player,1,getRandomPitch,10] call soundGlobal_play;
+	[_soundPath,getPosATL player,rand(1.3,1.35),getRandomPitch,10] call soundGlobal_play;
 };
 
 os_steps_onUpdateSoundData = {
