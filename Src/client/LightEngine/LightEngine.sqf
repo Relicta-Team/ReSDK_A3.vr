@@ -347,6 +347,13 @@ le_debug_lightRender = {
 	}; startUpdateParams(_evlight,0.01,[lightObject arg sourceObject arg _renderMode]);
 };
 
+//render damage effect for objects
+_dofe = {
+	params ["_pos","_type"];
+	[_type,_pos] call le_se_fireEmit;
+};
+rpcAdd("do_fe",_dofe);
+
 
 //OBSOLETE
 
