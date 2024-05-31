@@ -9,10 +9,10 @@ regScriptEmit(SLIGHT_DAM_WOOD)
 		null,
 		_emitAlias("Частицы 1")
 		["linkToSrc",[0,0,0]],
-		["setParticleParams",[["\ca\buildings\particle_effects\dum_door_piece_b.p3d",16,13,2,0],"","SpaceObject",1,0.3,[0,0,0],[0,0,0],0,1.55,1,0.13,[0.05,0.05,0.05,0.05,0.05,0.01,0.01],[[1,0.3,0.3,-6.5],[1,0.3,0.3,-6],[1,0.3,0.3,-5.5],[1,0.3,0.3,-4.5]],[1000],0,0,"","","",0,false,-1,[]]],
-		["setParticleRandom",[1.5,[0,0,0],[2,2,2],1.7,0.04,[0,0,0,0],2.2,3.1,359.999,0]],
+		["setParticleParams",[["\ca\buildings\particle_effects\dum_door_piece_b.p3d",16,13,2,0],"","SpaceObject",1,0.3,[0,0,0],[0,0,0],0,10.55,1,8.13,[0.05,0.05,0.05,0.05,0.05,0.01,0.01],[[1,0.3,0.3,-6.5],[1,0.3,0.3,-6],[1,0.3,0.3,-5.5],[1,0.3,0.3,-4.5]],[1000],0,0,"","","",0,false,-1,[]]],
+		["setParticleRandom",[1.5,[0,0,0],[5,5,2],1.7,1.2,[0,0,0,0],0,3.1,359.999,0]],
 		["setParticleCircle",[0,[0,0,0]]],
-		["setDropInterval",0.005]
+		["setDropInterval",0.002]
 	]
 	,[
 		"pt",
