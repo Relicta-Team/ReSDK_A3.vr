@@ -33,11 +33,16 @@
 
 //активирует трассировочные сообщения чтения/записи конфигов
 //#define ENABLE_TRACE_MESSAGES_IOCFG
+//Активирует трассировочные сообщения чтения файла конфигурации
+#define ENABLE_TRACE_MESSAGES_CFGLOADER
 
 init_function(vcom_emit_io_initialize)
 {
 	vcom_emit_io_configPath = "src\client\LightEngine\ScriptedEffectConfigs.sqf";
 	vcom_emit_io_configNames = "src\client\LightEngine\ScriptedEffects.hpp";
+	vcom_emit_io_configFilesFormatter = "src\client\LightEngine\%1";
+	vcom_emit_io_configFileNamePathFormatter = "src\client\LightEngine\ScriptedConfigs\%1.sqf";
+	vcom_emit_io_configIncludePattern = "#include ""ScriptedConfigs\%1.sqf""";
 
 	vcom_emit_io_map_configs = createHashMap;
 		//ключ в верхнем регистре, знач. массив элементов: type, typeshort, customEvents, alias, settings
@@ -118,6 +123,42 @@ function(vcom_emit_io_parseConfigName)
 	};
 }
 
+//Возвращает массив с файлами загрузчика
+function(vcom_emit_io_readConfigLoader)
+{
+	params ["_cfgPathes"];
+	#ifdef ENABLE_TRACE_MESSAGES_CFGLOADER
+	["Start %1",__FUNC__] call printTrace;
+	#endif
+	private _list = _cfgPathes splitString endl;
+	private _flist = [];
+	private _output = [];
+	{
+		if ([_x,"#include",false] call stringStartWith) then {
+			_path = [_x,'"(.*)"',1] call regex_getFirstMatch;
+			_flist pushBack _path;
+			#ifdef ENABLE_TRACE_MESSAGES_CFGLOADER
+			["Added cfgloader path: %1",_path] call printTrace;
+			#endif
+		};
+	} foreach _list;
+
+	{
+		_fp = format[vcom_emit_io_configFilesFormatter,_x];
+		private _content = [_fp] call file_read;
+		if (_content=="") exitWith {
+			setLastError("Cannot load file " + _fp);
+		};
+		_output append (_content splitString endl);
+	} foreach _flist;
+
+	#ifdef ENABLE_TRACE_MESSAGES_CFGLOADER
+	["End %1; Count: %2",__FUNC__,count _output] call printTrace;
+	#endif
+
+	_output;
+}
+
 //безблокировочное чтение конфигов
 function(vcom_emit_io_readConfigs)
 {
@@ -132,7 +173,17 @@ function(vcom_emit_io_readConfigs)
 	};
 
 	//read line by line
-	private _cfgData = ([vcom_emit_io_configPath] call file_read) splitString endl;
+	private _cfgData = ([vcom_emit_io_configPath] call file_read);
+	if (_cfgData == "") exitWith {
+		setLastError("Config data is empty: " + vcom_emit_io_configPath);
+	};
+	if ([_cfgData,"regScriptEmit"] call regex_isMatch) exitWith {
+		setLastError("Config version is obsoleted. Use ""src\client\lightengine\export_scripted_configs.exe"" for update configs");
+	};
+
+	//_cfgData = _cfgData splitString endl;
+	_cfgData = [_cfgData] call vcom_emit_io_readConfigLoader;
+
 
 	private _isInMLComment = false;
 	private _isInConfig = false;
@@ -180,6 +231,7 @@ function(vcom_emit_io_readConfigs)
 		};
 		if ([_x,_const_patHeadCfg] call regex_isMatch && !_isReadConfig) then {
 			_isReadConfig = true;
+			_isInConfig = true;
 			_segZoneIdx = 0;
 			_curConfigName = [_x,_const_patHeadCfg,1] call regex_getFirstMatch;
 			if ((tolower _curConfigName) in vcom_emit_io_list_allConfigsNames) exitwith {
@@ -272,6 +324,7 @@ function(vcom_emit_io_readConfigs)
 				_curConfigName = "<NOT_IN_CONFIG>";
 				_configSegments = [];
 				_isReadConfig = false;
+				_isInConfig = false;
 				continue;
 			};
 
@@ -281,7 +334,7 @@ function(vcom_emit_io_readConfigs)
 		#endif
 
 		if (!_isInConfig) then {
-			setLastError("Parsing error. Wrong line: " + _x);
+			[("Parsing error. Wrong line: " + _x)] call printError;
 			continue;
 		};
 
@@ -302,8 +355,10 @@ function(vcom_emit_io_saveAllConfigs)
 	
 	private _tabSim = toString[9];
 	private _output = "";
+	private _outputLoader = "";
 	private _indexesOuptut = "";
 	private _postIndexesOutput = "";
+	private _copyright = ["src\Editor\Bin\copyright.sqf"] call file_read;
 
 	private _checkNeedCommaSetting = {
 		#define __strcomma ","
@@ -325,7 +380,12 @@ function(vcom_emit_io_saveAllConfigs)
 		private _fullName = "SLIGHT_"+_name;
 		
 		if (count _data > 0) then {
-			
+			_output = ""; //cleanup output
+
+			modvar(_outputLoader) + endl + (format[vcom_emit_io_configIncludePattern,_fullName]);
+
+			private _cfgSaveName = format[vcom_emit_io_configFileNamePathFormatter,_fullName];
+
 			modvar(_output) + endl + (format["regScriptEmit(%1)",_fullName]);
 
 			modvar(_indexesOuptut) + endl + format["#define %1 %2",_fullName,_configId];
@@ -354,13 +414,13 @@ function(vcom_emit_io_saveAllConfigs)
 				modvar(_output) + endl + _tabSim + "]";
 			} foreach _data;
 
-			modvar(_output) + endl + "endScriptEmit" + endl;
+			modvar(_output) + endl + "endScriptEmit";
+
+			[_cfgSaveName,_copyright+_output] call file_write;
 		};
 		
 
 	} foreach vcom_emit_io_list_allConfigsNames;
-
-	private _copyright = ["src\Editor\Bin\copyright.sqf"] call file_read;
 
 	//preare evaluated id
 
@@ -374,7 +434,7 @@ function(vcom_emit_io_saveAllConfigs)
 	;
 
 	[vcom_emit_io_configPath,
-		_copyright + _output,null,{
+		_copyright + _outputLoader,null,{
 		["Config saved"] call printLog;
 
 		[vcom_emit_io_configNames,vcom_emit_internal_str_cfgNamesContent
