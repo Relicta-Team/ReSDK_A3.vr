@@ -65,7 +65,7 @@ editor_attribute("EditorGenerated")
 class(MediumJunkShed) extends(SmallHouse)
 	var(model,"a3\structures_f\households\addons\metal_shed_f.p3d");
 	var(name,"Сарай");
-	var(material,"MatWood");
+	var(material,"MatMetal");
 endclass
 
 editor_attribute("EditorGenerated")

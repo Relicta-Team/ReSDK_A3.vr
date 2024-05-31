@@ -23,7 +23,7 @@ endclass
 class(SteelDoorThinSmall) extends(DoorDynamic)
 	var(name,"Стальная дверь");
 	var(model,"Land_door_solar");
-	var(material,"MatWood");
+	var(material,"MatMetal");
 	//"zashelka","zamok"
 	getter_func(animateData,[["door_solar" arg 1.5 arg 3]]);
 	
@@ -37,7 +37,7 @@ class(SteelArmoredDoor) extends(DoorDynamic)
 	var(name,"Бронированная дверь");
 	var(desc,"Эта массивная дверь за долгие годы успела полностью заржаветь. А вот решётка внутри выглядит вроде неплохо");
 	var(model,"Land_doub_bronedwerks");
-	var(material,"MatWood");
+	var(material,"MatMetal");
 	
 	getter_func(anmCount,animObj_count(2));
 	getter_func(animateData,[["plomba5" arg 2.5 arg 5] arg vec3("reshotks",1.78,5)]);

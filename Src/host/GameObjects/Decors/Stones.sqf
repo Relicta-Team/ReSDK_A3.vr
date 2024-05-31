@@ -10,12 +10,15 @@
 //большие камни
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(BigStoneDecor) extends(BigConstructions) var(name,"Камень"); editor_only(var(desc,"Груда камней. Не разрушаема");) endclass
+class(BigStoneDecor) extends(BigConstructions) 
+	var(name,"Камень");
+	editor_only(var(desc,"Груда камней. Не разрушаема");)
+	var(material,"MatStone");
+endclass
 
 editor_attribute("EditorGenerated")
 class(MediumPileGreenStones) extends(BigStoneDecor)
 	var(model,"a3\rocks_f_exp\cliff\cliff_boulder_f.p3d");
-	var(material,"MatStone");
 	var(name,"Камень");
 endclass
 
