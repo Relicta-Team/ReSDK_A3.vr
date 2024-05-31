@@ -358,3 +358,30 @@ class(IStructNonReplicated) extends(IStruct)
 		getSelf(loc) setvariable ["lastUpd",-1];
 	};
 endclass
+
+//Отладочный класс материалов
+class(Struct_DebugMaterial__) extends(IStruct)
+	editor_attribute("EditorVisible" arg "type:string")
+	var(material,"MatStone");
+	var(model,"csa_constr\csa_obj\plita_3x3.p3d");
+
+	func(constructor)
+	{
+		objParams();
+		callSelfAfter(__loadMaterial,2);
+	};
+
+	func(__loadMaterial)
+	{
+		objParams();
+		private _m = getSelf(material);
+		if isNullVar(_m) exitWith {};
+		if equalTypes(_m,"") then {
+			_m = _m call mat_getByClass;
+		};
+		if isNullReference(_m) exitWith {};
+		setSelf(material,_m);
+
+		setSelf(name,getVar(_m,name));
+	};
+endclass
