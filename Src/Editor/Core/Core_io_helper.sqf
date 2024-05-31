@@ -111,6 +111,10 @@ function(file_read)
 	if (_isRelative) then {_path = getMissionPath _path};
 
 	private _data = ["FileManager","Read",[_path,file_const_defaultDelimeter],true] call rescript_callCommand;
+	if equals(_data,"$BUFFER_OVERFLOW$") exitWith {
+		setLastError("Cannot load file because buffer limit is exceeded. Path: " + _path);
+		""
+	};
 	(_data regexReplace [file_const_defaultDelimeter+ "/g",""""])
 }
 

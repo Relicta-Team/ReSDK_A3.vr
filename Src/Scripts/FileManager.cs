@@ -154,6 +154,18 @@ class FileManager : IScript
 					string cdelim = ScriptContext.GetArg(1);
 					readedText = readedText.Replace("\"",cdelim);
 				}
+				if (readedText.Length >= 10240)
+				{
+					MessageBox.Show(
+						"Cannot load file " + ScriptContext.GetArg(0),
+						"Buffer overflow",
+						MessageBoxButtons.OK,
+						MessageBoxIcon.Error
+					);
+					output.Append("$BUFFER_OVERFLOW$");
+					break;
+				};
+				
 				output.Append(readedText);
 				break;
 			case "FreeFileLock":
