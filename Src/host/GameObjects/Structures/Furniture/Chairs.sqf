@@ -12,6 +12,7 @@ editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
 class(IChair) extends(Furniture)
 	var(name,"Сиденье");
+	var(material,"MatWood");
 
 	#include "..\..\Interfaces\ISeat.Interface"
 
@@ -22,6 +23,7 @@ endclass
 editor_attribute("EditorGenerated")
 class(Wheelchair) extends(IChair)
 	var(model,"ml_exodusnew\virusbratan.p3d");
+	var(material,"MatSynt");
 	var(name,"Коляска");
 	var(desc,"Поговаривают если долго на ней сидеть, то можно подцепить вирус...");
 	getter_func(getChairOffsetPos,[0 arg -0.05 arg -0.65]);
@@ -31,6 +33,7 @@ endclass
 editor_attribute("EditorGenerated")
 class(OldGreenToiletBowl) extends(IChair)
 	var(model,"ml\ml_object_new\model_24\tolchek.p3d");
+	var(material,"MatMetal");
 	var(name,"Туалет");
 	getter_func(getChairOffsetPos,[-0.0479994 arg -0.0999994 arg -1.1]);
 	getterconst_func(getChairOffsetDir,180);

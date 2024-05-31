@@ -28,6 +28,7 @@ endclass
 class(CampfireCreator) extends(Item)
 	var(name,"Набор для костра");
 	var(desc,"Собранный местными умельцами"+comma+" набор для разведения костра");
+	var(material,"MatWood");
 	var(weight,gramm(600));
 	var(size,ITEM_SIZE_MEDIUM);
 	getter_func(getMainActionName,"Собрать");
@@ -57,6 +58,7 @@ class(DeliveryPipe) extends(IDeliveryPipeInternal)
 
 	var(name,"Труба доставки");
 	var(model,"ca\structures_e\misc\misc_construction\misc_concoutlet_ep1.p3d");
+	var(material,"MatBeton");
 	var(maxSize,ITEM_SIZE_BIG);
 	var(countSlots,DEFAULT_LARGEBOX_STORAGE);
 
@@ -1091,6 +1093,7 @@ class(MerchantConsole) extends(ElectronicDevice)
 	#include "..\..\Interfaces\INetDisplay.Interface"
 
 	var(ndName,"MerchantConsole");
+	var(material,"MatSynt");
 	var(ndInteractDistance,INTERACT_DISTANCE);
 	getter_func(getMainActionName,"Заказать");
 	func(onMainAction)

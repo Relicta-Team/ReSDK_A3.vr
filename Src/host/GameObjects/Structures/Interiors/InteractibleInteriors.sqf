@@ -8,7 +8,11 @@
 #include <..\..\GameConstants.hpp>
 
 editor_attribute("InterfaceClass")
-class(InteractibleInterior) extends(SmallDecorations) var(name,"Интерактивный интерьер"); var(desc,"Различные интерьеры с функциями взаимодействия"); endclass
+class(InteractibleInterior) extends(SmallDecorations) 
+	var(name,"Интерактивный интерьер"); 
+	var(desc,"Различные интерьеры с функциями взаимодействия");
+	var(material,"MatMetal");
+endclass
 
 
 class(PipeStove) extends(InteractibleInterior)
@@ -21,6 +25,7 @@ endclass
 
 class(Umivalnik) extends(InteractibleInterior)
 	var(model,"metro_ob\model\umivalnik1.p3d");
+	var(material,"MatBeton");
 endclass
 
 class(HoochMachine) extends(InteractibleInterior)
@@ -41,6 +46,7 @@ endclass
 
 class(Gramofon) extends(InteractibleInterior)
 	var(model,"relicta_models\models\interier\props\patefon.p3d");
+	var(material,"MatWood");
 endclass
 
 class(OldEngine) extends(InteractibleInterior)
@@ -74,6 +80,7 @@ endclass
 
 class(WaterBarrel) extends(InteractibleInterior)
 	var(model,"a3\structures_f_epb\items\vessels\barrelwater_grey_f.p3d");
+	var(material,"MatSynt");
 endclass
 
 class(Anvil) extends(InteractibleInterior)

@@ -16,6 +16,7 @@ class(PowerSwitcherBox) extends(ElectronicDeviceNode)
 	var(name,"Выключатель");
 	var(desc,"Одно нажатие и снова что-нибудь перестанет работать!");
 	var(model,"metro_ob\model\rubilnik_5.p3d");
+	var(material,"MatMetal");
 	
 /*	func(constructor)
 	{
@@ -57,6 +58,7 @@ class(RedButton) extends(PowerSwitcherBox)
 	var(desc,"Сочная кнопочка! Она хочет чтобы её нажали!");
 	//NOGEON
 	var(model,"ml\ml_object_new\model_14_10\knopka.p3d");
+	var(material,"MatSynt");
 endclass
 
 	class(RedButton_Activator) extends(RedButton)

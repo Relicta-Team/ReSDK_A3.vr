@@ -11,7 +11,11 @@
 //труба
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(BasicPipe) extends(Constructions) var(name,"Труба"); editor_only(var(desc,"Обычная разрушаемая труба");) endclass
+class(BasicPipe) extends(Constructions) 
+	var(name,"Труба"); 
+	editor_only(var(desc,"Обычная разрушаемая труба");)
+	var(material,"MatMetal");
+endclass
 
 editor_attribute("EditorGenerated")
 class(DestroyedPipeMedium) extends(BasicPipe)

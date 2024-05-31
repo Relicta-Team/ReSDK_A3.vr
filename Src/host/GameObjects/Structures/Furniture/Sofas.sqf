@@ -11,6 +11,7 @@ editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
 class(SofaBase) extends(IChair)
 	var(name,"Диван");
+	var(material,"MatCloth");
 	//диваны
 endclass
 

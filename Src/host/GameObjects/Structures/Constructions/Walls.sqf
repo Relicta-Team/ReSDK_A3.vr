@@ -11,7 +11,11 @@
 //стена
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallWall) extends(Constructions) var(name,"Стена"); editor_only(var(desc,"Маленькие стена" pcomma " которую можно разрушить");) endclass
+class(SmallWall) extends(Constructions) 
+	var(name,"Стена"); 
+	editor_only(var(desc,"Маленькие стена" pcomma " которую можно разрушить");)
+	var(material,"MatBeton");
+endclass
 
 editor_attribute("EditorGenerated")
 class(WhiteBrickWall) extends(SmallWall)
@@ -33,6 +37,7 @@ editor_attribute("EditorGenerated")
 class(StoneWall) extends(SmallWall)
 	var(model,"a3\structures_f\walls\stone_4m_f.p3d");
 	var(name,"Стена");
+	var(material,"MatStone");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -68,11 +73,13 @@ editor_attribute("EditorGenerated")
 class(MediumWoodenWall) extends(SmallWall)
 	var(model,"ml_shabut\sbs\woodstenka.p3d");
 	var(name,"Стена");
+	var(material,"MatWood");
 endclass
 
 editor_attribute("EditorGenerated")
 class(PlywoodThinWall) extends(SmallWall)
 	var(model,"ml_exodusnew\fanerka_vata.p3d");
+	var(material,"MatWood");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -83,11 +90,13 @@ endclass
 editor_attribute("EditorGenerated")
 class(NormalClayWall) extends(SmallWall)
 	var(model,"ca\structures_e\wall\wall_l\wall_l1_5m_ep1.p3d");
+	var(material,"MatDirt");
 endclass
 
 editor_attribute("EditorGenerated")
 class(LuxuryClayWall) extends(SmallWall)
 	var(model,"ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d");
+	var(material,"MatDirt");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -125,6 +134,7 @@ editor_attribute("EditorGenerated")
 class(ClayWallSmall) extends(SmallWall)
 	var(model,"ca\structures_e\wall\wall_l\wall_l_2m5_ep1.p3d");
 	var(name,"Глиняная стена");
+	var(material,"MatDirt");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -178,17 +188,20 @@ editor_attribute("EditorGenerated")
 class(SteelThinWallSmall) extends(SmallWall)
 	var(model,"ml_exodusnew\ganzazhelezo3.p3d");
 	var(name,"Стальная стена");
+	var(material,"MatMetal");
 endclass
 
 editor_attribute("EditorGenerated")
 class(SteelThinWallMedium) extends(SteelThinWallSmall)
 	var(model,"ml_exodusnew\ganzazhelezo2.p3d");
+	var(material,"MatMetal");
 endclass
 
 
 class(Trench) extends(SmallWall)
 	var(name,"Траншея");
 	var(model,"a3\structures_f_exp\military\trenches\trench_01_forest_f.p3d");
+	var(material,"MatDirt");
 	
 	//Размер траншеи. по умолчанию полностью выкопана. при достижении единицы - удаляется
 	var(trenchSize,5);

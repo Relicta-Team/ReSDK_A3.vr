@@ -17,4 +17,5 @@ class(IndustrialDropper) extends(IStructReagentCont)
 	var(name,"Капельница");
 	getterconst_func(transferAmount,[1 arg 2 arg 3 arg 4 arg 5]);
 	var(reagents,vec2(this,80) call ms_create);
+	var(material,"MatMetal");
 endclass

@@ -16,6 +16,7 @@
 class(HeadControlPanel) extends(ElectronicDevice)
 	var(name,"Панель управления");
 	var(model,"ml\ml_object_new\ml_object_2\l01_props\l01_props_jail_panel.p3d");
+	var(material,"MatMetal");
 
 	#include "..\..\..\Interfaces\INetDisplay.Interface"
 	var(ndName,"HeadConsole");
@@ -547,6 +548,7 @@ class(RegistrationPanel) extends(ElectronicDevice)
 	getter_func(getName,"Кроводверь");
 	getter_func(getDesc,"На передней панели выцарапано 'Немного свежей крови и ты часть Грязноямска!'.");
 	var(model,"ml\ml_object_new\model_24\svetofor.p3d");
+	var(material,"MatMetal");
 
 	var(edIsEnabled,true);
 	var(timeout,0);
@@ -609,6 +611,7 @@ class(RegistratorPanelReceiver) extends(ElectronicDevice)
 	getter_func(getName,"Бумагодавилка");
 	getter_func(getDesc,"Бюрократия - наше всё!");
 	var(model,"a3\structures_f\ind\windpowerplant\powergenerator_f.p3d");
+	var(material,"MatMetal");
 	var(edIsEnabled,true);
 
 	var_array(bufferPapers);
@@ -681,6 +684,7 @@ class(RegistrationPaperArchive) extends(IStruct)
 	getter_func(getName,"Архив");
 	getter_func(getDesc,"Сюда попадают все личные дела новоприбывших в поселение.");
 	var(model,"ml_shabut\exoduss\archive_tube.p3d");
+	var(material,"MatWood");
 
 	var(headconsole,nullPtr);
 

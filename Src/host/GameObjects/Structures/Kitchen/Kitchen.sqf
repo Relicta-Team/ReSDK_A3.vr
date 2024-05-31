@@ -13,6 +13,7 @@ class(MeatGrinder) extends(IStruct)
 	var(name,"Мясодавка");
 	var(desc,"Пригодна для создания фарша или лапши.");
 	var(model,"ml\ml_object_new\model_24\press.p3d");
+	var(material,"MatMetal");
 	
 	var(source,[]);
 	getterconst_func(getMaxCountSource,5);
@@ -133,6 +134,7 @@ class(BlackSmallStove) extends(ILightibleStruct)
 	getterconst_func(getName,"Печь");
 	getterconst_func(getDesc,"Используется для приготовления пищи.");
 	var(model,"ml_shabut\pechka\pechechkas.p3d");
+	var(material,"MatMetal");
 	getterconst_func(isFireLight,true);
 	var(light,LIGHT_BAKE);
 	var(lightIsEnabled,true);
@@ -371,6 +373,7 @@ class(SmallStoveGrill) extends(ILightibleStruct)
 	var(name,null);
 	getterconst_func(getName,"Печка");
 	var(model,"ml_shabut\pechka\pechka.p3d");
+	var(material,"MatMetal");
 	
 	getterconst_func(isFireLight,true);
 	var(light,LIGHT_BAKESTOVE);

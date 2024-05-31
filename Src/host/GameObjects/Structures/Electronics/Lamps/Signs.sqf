@@ -17,6 +17,7 @@ class(SignBar) extends(StreetLampEnabled)
 	var(edIsEnabled,true);
 	var(edReqPower,80);
 	var(model,"ca\signs2\sign_bar_ru.p3d");
+	var(material,"MatMetal");
 
 	func(getDescFor)
 	{
@@ -41,12 +42,14 @@ class(SignTableKabak) extends(IStruct)
 	var(name,"Кабак");
 	var(desc,"И кому же пришло в голову назвать заведение Бар ""Кабак""?! В любом случае это лучшее место чтобы расслабиться в ближайшей округе.");
 	var(model,"ca\signs2\signb_pub_ru1.p3d");
+	var(material,"MatWood");
 endclass
 
 
 //крест лекарни
 class(SignMedical) extends(SignBar)
 	var(model,"ca\signs2\signb_pharmacy.p3d");
+	var(material,"MatSynt");
 	var(name,"Лекарня");
 	var(edReqPower,80);
 	var(desc,"Иногда лечат, иногда - калечат...");

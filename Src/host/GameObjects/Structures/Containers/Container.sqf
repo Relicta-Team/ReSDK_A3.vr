@@ -45,11 +45,13 @@ endclass
 class(KeyHolder) extends(SContainer)
 	var(name,"Ключница");
 	var(model,"ml_shabut\exodus\sdaykey.p3d");
+	var(material,"MatSynt");
 endclass
 
 class(InfoBoard) extends(SContainer)
 	var(name,"Доска информации");
 	var(model,"ml_shabut\exodus\infotablicka.p3d");
+	var(material,"MatWood");
 endclass
 
 

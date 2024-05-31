@@ -68,6 +68,7 @@ class(GateCity) extends(ElectronicDeviceDoor)
 	var(desc,null);
 	getterconst_func(getDesc,"Они защищают нормальных людей от тебя.");
 	var(model,"ml\ml_object_new\model_14_10\germodweri.p3d");
+	var(material,"MatMetal");
 	getter_func(animateData,[vec3(0,0,0.95) arg 0]);
 	var(edReqPower,10);
 	
@@ -82,6 +83,7 @@ class(SteelGridDoorElectronic) extends(ElectronicDeviceDoor)
 	var(desc,null);
 	getterconst_func(getDesc,"Управляется удалённо.");
 	var(model,"ml\ml_object_new\ml_object_2\l01_props\reshetka.p3d");
+	var(material,"MatMetal");
 	getter_func(animateData,[vec3(0.55,0.55,-1.76488) arg 90]);
 	
 	var(stBreakBonus,-4);

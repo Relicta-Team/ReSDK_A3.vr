@@ -13,6 +13,7 @@ class(SteelGridDoor) extends(DoorStatic)
 	var(name,"Решётка");
 	//var(model,"reshetka");
 	var(model,"ml\ml_object_new\ml_object_2\l01_props\reshetka.p3d");
+	var(material,"MatMetal");
 	getter_func(animateData,[vec3(0.55,0.55,-1.76488) arg 90]);
 
 	getter_func(getOpenSoundParams,["doors\cage_open" arg getRandomPitchInRange(0.5,1.5) arg null arg 1.5]);

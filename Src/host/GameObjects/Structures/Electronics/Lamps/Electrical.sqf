@@ -13,6 +13,7 @@ class(StreetLamp) extends(ElectronicDeviceLighting)
 	var(lightIsEnabled,false);
 	//var(model,"a3\structures_f_enoch\infrastructure\lamps\lampindustrial_01_f.p3d"); //"Land_LampIndustrial_01_F"
 	var(model,"a3\structures_f\civ\lamps\lampshabby_off_f.p3d"); //"Land_LampShabby_F"
+	var(material,"MatWood");
 	var(edReqPower,12); //сколько требует электричества в 1 сек
 	//getter_func(isEnabled,getSelf(lightIsEnabled));
 	//var(edIsEnabled,false);
@@ -65,6 +66,7 @@ class(LampCeiling) extends(StreetLampEnabled)
 	var(edReqPower,50);
 	var(light,LIGHT_LAMP_CEILING);
 	var(model,"atmobjects\lamps\data\model\lamp_tarelka.p3d")
+	var(material,"MatMetal");
 endclass
 
 editor_attribute("EditorGenerated")
