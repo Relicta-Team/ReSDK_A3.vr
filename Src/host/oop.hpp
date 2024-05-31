@@ -147,6 +147,7 @@
 #define var_obj(name) var(name,objnull)
 #define var_vobj(name) var(name,locationnull)
 #define var_hashmap(name) var(name,createHashMap)
+#define var_handle(name) var(name,-1)
 
 //#define var_multi(defaultvalue)
 

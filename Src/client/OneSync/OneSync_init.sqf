@@ -34,10 +34,9 @@
 #include "OneSync_Falling.sqf"
 #include "OneSync_mobcollision.sqf"
 #include "OneSync_light.sqf"
-//#include "OneSync_steps.sqf"
-//"steps",
+#include "OneSync_steps.sqf"
 
-os_list_services = ["falling","light"/*,"mobcollision" Коллизия сломана*/];
+os_list_services = ["falling","light","steps" /*,"mobcollision" Коллизия сломана*/];
 
 os_isActive = false;
 

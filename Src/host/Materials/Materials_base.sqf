@@ -47,11 +47,11 @@ class(MatBase) attribute(staticInit)
 		pick _list
 	};
 
-	//TODO implement step sounds
-	func(getStepSoundMode)
+	
+	func(getStepSoundNetworkData)
 	{
 		objParams();
-		""
+		getSelf(stepSound)
 	};
 
 endclass
@@ -72,7 +72,7 @@ class(MatBeton) extends(MatStone)
 	var(name,"Бетон");
 	var(damageEffect,SLIGHT_DAM_BETON);
 	var(color,"8C8C8C");
-	var(stepSound,["concrete1" arg 5]);
+	var(stepSound,["concrete" arg 5]);
 
 endclass
 

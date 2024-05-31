@@ -205,6 +205,9 @@ class(Mob) extends(BasicMob)
 	{
 		objParams_1(_linked);
 		super();
+		
+		callSelfParams(setStepSoundSystem,true);//step system
+
 		#ifdef TEXTCHAT
 			callSelf(initializeVoice);
 		#endif
