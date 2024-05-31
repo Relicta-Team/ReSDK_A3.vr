@@ -26,6 +26,8 @@ function(drawNames_internal_onFrame)
 	if (!isGameFocused) exitwith {};
 
 	if (!drawNames_enabled) exitwith {};
+	private _extendedInfo = cfg_system_extendedInfoInClassname;
+
 	if (tickTime >= drawNames_internal_lastUpdate) then {
 		drawNames_internal_lastUpdate = tickTime + drawNames_const_updateDelay;
 		_basepos = positionCameraToWorld[0,0,0];
@@ -33,6 +35,7 @@ function(drawNames_internal_onFrame)
 		drawNames_internal_list_collectedOjbects = [];
 		// sort objects by distance
 		_collected sort true;
+		
 		{
 			_x = _x select 0;
 			if ([_x,false] call golib_hasHashData) then {
@@ -40,6 +43,19 @@ function(drawNames_internal_onFrame)
 				_class = ([_x,false] call golib_getHashData) getOrDefault ["class","<no class>"];
 				if ((tolower _class) in drawNames_internal_listNoShown) exitwith {};
 				_element = [_x,_class];
+				if (_extendedInfo) then {
+					_mat = [_x,"material"] call golib_getActualDataValue;
+					_clr = "ffffff";
+					if !isNullVar(_mat) then {
+						if equalTypes(_mat,"") then {
+							_clr = [_mat,"color",true] call oop_getFieldBaseValue;
+							_mat = [_mat,"name",true] call oop_getFieldBaseValue;
+							
+						};
+					};
+					_ext = format["mat:%1 (hp:%2)",_mat,"0"];
+					_element pushBack [_ext,_clr];
+				};
 				drawNames_internal_list_collectedOjbects pushBack _element;
 			};
 			if (count drawNames_internal_list_collectedOjbects > 400) exitwith {};
@@ -48,7 +64,7 @@ function(drawNames_internal_onFrame)
 
 	_basepos = positionCameraToWorld[0,0,0];
 	{
-		_x params ["_obj","_class"];		
+		_x params ["_obj","_class","_extInfo"];		
 		_t = format["%1",_class];
 		_distObj = _basepos distance _obj;
 		_distSize = linearConversion [1,drawNames_distance,_distObj,0.07,0.0051];
@@ -67,5 +83,10 @@ function(drawNames_internal_onFrame)
 			};
 		};
 		drawIcon3D ["", _clr, (getposatl _obj)vectorAdd (boundingCenter _obj), 0, 0, 0, _t, 1, _distSize, "EtelkaMonospaceProBold"];
+		if (_extendedInfo) then {
+			_extInfo params ["_txt","_color"];
+			_color = [_color] call color_HTMLtoRGBA;
+			drawIcon3D ["",_color, (getposatl _obj)vectorAdd (boundingCenter _obj vectoradd[0,0,-0.5]), 0, 0, 0, _txt, 1, _distSize, "EtelkaMonospaceProBold"];
+		};
 	} foreach drawNames_internal_list_collectedOjbects;
 }
