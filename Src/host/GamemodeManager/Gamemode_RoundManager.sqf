@@ -95,6 +95,8 @@ gm_startRound = {
 	logformat("Started %1 update methods",count go_internal_updateMethodsAfterStart);
 	go_internal_updateMethodsAfterStart = null;
 
+	call atmos_init;
+
 	["Round started"] call discLog;
 
 	//Выбираем объект аспекта
