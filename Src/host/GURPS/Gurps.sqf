@@ -426,7 +426,7 @@ gurps_calculateItemHP = {
 
 	if !isNullVar(_obj) then {
 		_weightGr = getVar(_obj,weight);
-		_objType = getVar(_obj,objectHealthType);
+		_objType = callFunc(_obj,objectHealthType);
 	};
 	
 
@@ -474,5 +474,29 @@ gurps_calculateConstructionHP = {
 	private _hp = 100 * (_weight ^ (1/3));
 
 	round _hp //в спецификации не указано про округление, поэтому просто округляем до целых
+};
+
+//only for editor
+gurps_internal_calculateHP = {
+	params ["_class","_modelPath","_matClass"];
+	if !isNull(core_cfg2model getvariable _modelPath) then {
+		_modelPath = core_cfg2model getvariable _modelPath;
+	};
+	private _bbxDat = core_modelBBX get (tolower _modelPath);
+	assert_str(!isNullVar(_bbxDat),"Null BBX info; " + format vec3("Class: %1 [%2]",_class,_modelPath));
+	private _sizeX = metersToFeet(abs(_bbxDat select 0 select 0) + abs(_bbxDat select 1 select 0));
+	private _sizeY = metersToFeet(abs(_bbxDat select 0 select 1) + abs(_bbxDat select 1 select 1));
+	private _areaFt = _sizeX * _sizeY;
+	
+	if (isNullVar(_matClass)) exitWith {
+		errorformat("gurps::calculateObjectHP:Cant define material for object: %1 [%2]",_class arg _modelPath);
+		0
+	};
+	
+	private _wPer1000sqft = [_matClass,"",true,"getWeightCoefForCalcHP"] call oop_getFieldBaseValue;
+	private _weight = (_areaFt * _wPer1000sqft) / 1000;
+	private _hp = 100 * (_weight ^ (1/3));
+
+	round _hp
 };
 

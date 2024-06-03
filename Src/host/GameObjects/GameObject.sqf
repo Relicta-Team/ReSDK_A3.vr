@@ -1259,8 +1259,6 @@ class(IDestructible) extends(GameObject)
 	/*
 		ЕЖ предмета.
 		количество повреждений, которое объект может вынести, прежде чем сломается или прекратит функционировать
-
-
 	*/
 	var(hp,0);
 		var(hpMax,0);
@@ -1269,9 +1267,6 @@ class(IDestructible) extends(GameObject)
 		Деревянные и пластиковые инструменты, устройства, мебель и т.д. обычно имеют СП 2.
 		Маленькие металлические, деревянно-металлические или композитные объекты, например топоры и пистолеты, обычно имеют СП 4.
 		Цельнометаллическое оружие ближнего боя имеет СП 6
-
-		-- для структур и декораций сп высчитывается по формуле
-
 	*/
 	var(dr,0);
 		var(drMax,0);
@@ -1413,17 +1408,16 @@ class(IDestructible) extends(GameObject)
 		//no damage - no hp
 		if !callSelf(canApplyDamage) exitWith {};
 
-		private _ft = kgToLb(callSelf(getWeight));
 		private _type = callSelf(objectHealthType);
 		private _val = 0;
 
 		if (getSelf(hp)>0) then {
 			setSelf(hpMax,getSelf(hp));
 		} else {
-			_val = if (_type == "complex") then {
-				ceil(4 * (_ft ^ (1/3)))
+			if callSelf(isItem) then {
+				_val = [this] call gurps_calculateItemHP;
 			} else {
-				ceil(8 * (_ft ^ (1/3)))
+				_val = [this] call gurps_calculateConstructionHP;
 			};
 			setSelf(hp,_val);
 			setSelf(hpMax,_val);
