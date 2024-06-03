@@ -41,6 +41,9 @@ class(MatBase) attribute(staticInit)
 		getSelf(stepSound)
 	};
 
+	//коэффициент для вычисления хп с помощью веса объекта
+	getterconst_func(getWeightCoefForCalcHP,1);
+
 endclass
 
 class(MatStone) extends(MatBase)
@@ -52,6 +55,8 @@ class(MatStone) extends(MatBase)
 	var(damageEffect,SLIGHT_DAM_STONE);
 	var(damageSounds,["damage\stone_1" arg "damage\stone_2" arg "damage\stone_3"]);
 
+	getterconst_func(getWeightCoefForCalcHP,150);
+
 endclass
 
 class(MatBeton) extends(MatStone)
@@ -60,6 +65,7 @@ class(MatBeton) extends(MatStone)
 	var(damageEffect,SLIGHT_DAM_BETON);
 	var(color,"8C8C8C");
 	var(stepSound,["concrete" arg 5]);
+	getterconst_func(getWeightCoefForCalcHP,120);
 
 endclass
 
@@ -69,6 +75,7 @@ class(MatDirt) extends(MatBase)
 	var(stepSound,["mud" arg 5]);
 	var(damageEffect,SLIGHT_DAM_DIRT);
 	var(damageSounds,["damage\cloth_1" arg "damage\cloth_2" arg "damage\cloth_3"]);
+	getterconst_func(getWeightCoefForCalcHP,50);
 endclass
 
 class(MatWood) extends(MatBase)
@@ -79,6 +86,7 @@ class(MatWood) extends(MatBase)
 
 	var(damageEffect,SLIGHT_DAM_WOOD);
 	var(damageSounds,["damage\wood_1" arg "damage\wood_2" arg "damage\wood_3"]);
+	getterconst_func(getWeightCoefForCalcHP,50);
 endclass
 
 class(MatMetal) extends(MatBase)
@@ -89,6 +97,7 @@ class(MatMetal) extends(MatBase)
 
 	var(damageEffect,SLIGHT_DAM_METAL);
 	var(damageSounds,["damage\metal_1" arg "damage\metal_2"]);
+	getterconst_func(getWeightCoefForCalcHP,100);
 
 endclass
 
@@ -100,6 +109,7 @@ class(MatGlass) extends(MatBase)
 	var(stepSound,["glass" arg 1]);
 	var(damageEffect,SLIGHT_DAM_GLASS);
 	var(damageSounds,["damage\glass_1" arg "damage\glass_2" arg "damage\glass_3"]);
+	getterconst_func(getWeightCoefForCalcHP,200);
 endclass
 
 class(MatCloth) extends(MatBase)
@@ -109,6 +119,7 @@ class(MatCloth) extends(MatBase)
 	var(damageEffect,SLIGHT_DAM_CLOTH);
 	var(damageSounds,["damage\cloth_1" arg "damage\cloth_2" arg "damage\cloth_3"]);
 	var(stepSound,["capet" arg 7]);
+	getterconst_func(getWeightCoefForCalcHP,20);
 endclass
 
 class(MatPaper) extends(MatBase)
@@ -118,6 +129,7 @@ class(MatPaper) extends(MatBase)
 	var(stepSound,["paper" arg 1]);
 	var(damageEffect,SLIGHT_DAM_PAPER);
 	var(damageSounds,["damage\paper_1" arg "damage\paper_2" arg "damage\paper_3"]);
+	getterconst_func(getWeightCoefForCalcHP,10);
 
 endclass
 
@@ -128,6 +140,7 @@ class(MatFlesh) extends(MatBase)
 	var(stepSound,["flesh" arg 2]);
 	var(damageEffect,SLIGHT_DAM_FLESH);
 	var(damageSounds,["damage\flesh_1" arg "damage\flesh_2" arg "damage\flesh_3"]);
+	getterconst_func(getWeightCoefForCalcHP,30);
 
 endclass
 
@@ -138,6 +151,7 @@ class(MatOrganic) extends(MatBase)
 	var(stepSound,["org" arg 4]);
 	var(damageEffect,SLIGHT_DAM_ORGANIC);
 	var(damageSounds,["damage\organic_1" arg "damage\organic_2"]);
+	getterconst_func(getWeightCoefForCalcHP,25);
 
 endclass
 
@@ -148,6 +162,7 @@ class(MatSynt) extends(MatBase)
 	var(stepSound,["cr_step" arg 2]);
 	var(damageEffect,SLIGHT_DAM_SYNT);
 	var(damageSounds,["damage\synt_1" arg "damage\synt_2" arg "damage\synt_3"]);
+	getterconst_func(getWeightCoefForCalcHP,50);
 
 endclass
 

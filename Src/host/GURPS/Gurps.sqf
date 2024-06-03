@@ -7,6 +7,7 @@
 #include "..\oop.hpp"
 #include "..\text.hpp"
 #include <..\CombatSystem\CombatSystem.hpp>
+#include <..\GameObjects\GameConstants.hpp>
 #include "gurps.hpp"
 
 #include "Gurps_init.sqf"
@@ -418,3 +419,60 @@ gurps_getDistanceModificator = {
 	if (_dist <=700000) exitWith {-33};
 	-34
 };
+
+
+gurps_calculateItemHP = {
+	params ["_obj","_weightGr","_objType"];
+
+	if !isNullVar(_obj) then {
+		_weightGr = getVar(_obj,weight);
+		_objType = getVar(_obj,objectHealthType);
+	};
+	
+
+	private _wLb = kgToLb(_weightGr);
+	private _modifier = 4;
+	if (_objType == OBJECT_TYPE_COMPLEX) then {
+		_modifier = 4;
+	} else {
+		//simple,spread
+		_modifier = 8;
+	};
+
+	// round (4*( _wLb^(1/3) )) for _objType [complex]
+	// round (8*( _wLb^(1/3) )) for _objType [simple, spreaded]
+	round (_modifier * ( _wLb ^ (1/3) ))
+};
+
+//расчетка для построек
+gurps_calculateConstructionHP = {
+	params ["_obj"];
+
+	/*hp - 100 × (куб.корень из веса пустой постройки в тоннах),
+	
+	обычный вес за 1000 кв.футов площади (кв.ф.) постройки 
+		– 50 тонн для деревянного каркаса или глины, 
+		- 100 тонн для стального каркаса или кирпича, 
+		- 150 тонн для камня
+		...
+	*/
+	
+	private _mpath = getVar(_obj,model);
+	private _bbxDat = core_modelBBX get (tolower _mpath);
+	assert_str(!isNullVar(_bbxDat),"Null BBX info; " + format vec4("Obj: %1 (%2) [%3]",_obj,callFunc(_obj,getClassName),_mpath));
+	private _sizeX = metersToFeet(abs(_bbxDat select 0 select 0) + abs(_bbxDat select 1 select 0));
+	private _sizeY = metersToFeet(abs(_bbxDat select 0 select 1) + abs(_bbxDat select 1 select 1));
+	private _areaFt = _sizeX * _sizeY;
+
+	private _mat = getVar(_obj,material);
+	if (isNullVar(_mat) || {not_equalTypes(_mat,nullPtr)} || {isNullReference(_mat)}) exitWith {
+		errorformat("gurps::calculateObjectHP:Cant define material for object: %1",_obj);
+		0
+	};
+	private _wPer1000sqft = callFunc(_mat,getWeightCoefForCalcHP);
+	private _weight = (_areaFt * _wPer1000sqft) / 1000;
+	private _hp = 100 * (_weight ^ (1/3));
+
+	round _hp //в спецификации не указано про округление, поэтому просто округляем до целых
+};
+

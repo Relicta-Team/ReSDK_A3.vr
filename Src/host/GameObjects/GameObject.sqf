@@ -1245,9 +1245,34 @@ class(IDestructible) extends(GameObject)
 	//Повреждения оружия на B 485
 
 	//общие данные. Все значения отличные от нуля сбрасывают инициализацию своих значений
+	/*
+		Здоровье объекта.
+		показывает вероятность того, что объект сломается от давления или нападения.
+
+		Мечи,столы, щиты и другие цельные однородные объекты ЗД 12.
+		Дешёвые, прихотливые или плохо содержащиеся вещи получают от -1 до -3 к ЗД;
+		качественно или грубо сделанные получают +1 или +2 к ЗД.
+		Большинство машин и подобных артефактов в хорошем состоянии имеют ЗД 10.
+	*/
 	var(ht,10); //Статическая переменная "здоровья" объекта. От этого скилла кидаются броски на разрушение
+
+	/*
+		ЕЖ предмета.
+		количество повреждений, которое объект может вынести, прежде чем сломается или прекратит функционировать
+
+
+	*/
 	var(hp,0);
 		var(hpMax,0);
+	/*
+		СП объекта.
+		Деревянные и пластиковые инструменты, устройства, мебель и т.д. обычно имеют СП 2.
+		Маленькие металлические, деревянно-металлические или композитные объекты, например топоры и пистолеты, обычно имеют СП 4.
+		Цельнометаллическое оружие ближнего боя имеет СП 6
+
+		-- для структур и декораций сп высчитывается по формуле
+
+	*/
 	var(dr,0);
 		var(drMax,0);
 	getter_func(canApplyDamage,false);
@@ -1255,7 +1280,7 @@ class(IDestructible) extends(GameObject)
 	//complex - электронику, огнестрельное оружие, автотранспорт,роботов и большинство других механизмов
 	//simple - ткани (плащи, занавески), мебель и контактное оружие, действующее на силе владельца
 	//spreaded - рассеянные объекты например (сеть)
-	getter_func(objectHealthType,"simple");
+	getter_func(objectHealthType,OBJECT_TYPE_SIMPLE);
 
 	//Вызывается при уничтожении игрового объекта
 	func(onDestroyed)
@@ -1275,7 +1300,7 @@ class(IDestructible) extends(GameObject)
 		//сначала проходим через СП, потом мод. повр.
 		_amount = (_amount - getSelf(dr)) max 0;
 
-		if (callSelf(objectHealthType)=="complex")then{
+		if (callSelf(objectHealthType)==OBJECT_TYPE_COMPLEX)then{
 			//DAMAGE_TYPE_IMPALING,DAMAGE_TYPE_PIERCING_HU modif x1
 			if (_type == DAMAGE_TYPE_PIERCING_LA) exitWith {
 				_amount = floor(_amount * 0.5);
@@ -1287,7 +1312,7 @@ class(IDestructible) extends(GameObject)
 				_amount = floor(_amount * 0.2);
 			};
 		} else {
-			if (callSelf(objectHealthType)=="spreaded") then {
+			if (callSelf(objectHealthType)==OBJECT_TYPE_SPREADED) then {
 				if (_type in [DAMAGE_TYPE_IMPALING,DAMAGE_TYPE_PIERCING_SM,DAMAGE_TYPE_PIERCING_NO,DAMAGE_TYPE_PIERCING_LA,DAMAGE_TYPE_PIERCING_HU]) then {
 					_amount = _amount min 1;
 				} else {
@@ -1314,9 +1339,10 @@ class(IDestructible) extends(GameObject)
 			(_amount - getSelf(dr)) max 0
 		//] call gurps_applyDamageType
 		;*/
-		callSelfParams(onAffectDamageToPos,_passed arg _type arg _worldPos arg _cause);
+		
+		callSelfParams(onAffectDamageToPos,_amount arg _type arg _worldPos arg _cause);
 
-		modSelf(hp,- _passed);
+		modSelf(hp,- _amount);
 		private _newhp = getSelf(hp);
 		private _maxhp = getSelf(hpMax);
 
