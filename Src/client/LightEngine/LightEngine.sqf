@@ -349,8 +349,9 @@ le_debug_lightRender = {
 
 //render damage effect for objects
 _dofe = {
-	params ["_pos","_type"];
-	[_type,_pos] call le_se_fireEmit;
+	params ["_pos","_type","_norm"];
+	traceformat("damage effect normal: %1",_norm)
+	[_type,_pos,_norm] call le_se_fireEmit;
 };
 rpcAdd("do_fe",_dofe);
 

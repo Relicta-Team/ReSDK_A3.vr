@@ -21,7 +21,6 @@ class(MatBase) attribute(staticInit)
 
 	var(damageEffect,0);
 	var(damageSounds,[]);
-	var(damageSoundsBlocked,[]);
 
 	getter_func(getDamageEffect,getSelf(damageEffect));
 	func(getDamageSound)
@@ -35,18 +34,6 @@ class(MatBase) attribute(staticInit)
 		if (count _list == 0) exitWith {""};
 		pick _list
 	};
-	func(getDamageSoundBlocked)
-	{
-		objParams();
-		private _list = getSelf(damageSoundsBlocked);
-		if not_equalTypes(_list,[]) exitWith {
-			if not_equalTypes(_list,"") exitWith {""};
-			_list;
-		};
-		if (count _list == 0) exitWith {""};
-		pick _list
-	};
-
 	
 	func(getStepSoundNetworkData)
 	{

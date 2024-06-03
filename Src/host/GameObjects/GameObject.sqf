@@ -1250,8 +1250,6 @@ class(IDestructible) extends(GameObject)
 		var(hpMax,0);
 	var(dr,0);
 		var(drMax,0);
-	//звук повреждений
-	getter_func(getDamageSound,"");
 	getter_func(canApplyDamage,false);
 
 	//complex - электронику, огнестрельное оружие, автотранспорт,роботов и большинство других механизмов
@@ -1424,7 +1422,7 @@ class(IDestructible) extends(GameObject)
 
 		private _emt = callFunc(_mat,getDamageEffect);
 		{
-			callFuncParams(_x,sendInfo,"do_fe" arg [_pos arg _emt]);
+			callFuncParams(_x,sendInfo,"do_fe" arg [_pos arg _emt arg _norm]);
 		} foreach callSelfParams(getNearMobs,20);
 	};
 	
