@@ -123,7 +123,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		//на всякий случай ассертим путь
 		#ifdef EDITOR
 		if (isNullVar(_m) || {not_equalTypes(_m,"")}) exitWith {
-			errorformat("%1 %2 %3",this arg _m arg getSelf(model));
+			errorformat("Constructor error; Cant find model for %1; Model was %2 [%3]",this arg _m arg getSelf(model));
 			appExit(APPEXIT_REASON_COMPILATIOEXCEPTION);
 		};
 		#endif
@@ -197,6 +197,39 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		if (_vlinear < .7)  exitWith {ITEM_SIZE_BIG + _addFromRadius};
 		ITEM_SIZE_HUGE
 	};
+	#ifdef EDITOR
+	generateItemInfoList = {
+		private _data = [];
+		private _sizeConst = ["ITEM_SIZE_TINY","ITEM_SIZE_SMALL","ITEM_SIZE_MEDIUM","ITEM_SIZE_LARGE","ITEM_SIZE_BIG","ITEM_SIZE_HUGE"];
+		_getPathinfo = {
+			params [["_file","unknown_file"],["_line",0]];
+			format["file: %1 at line %2",SHORT_PATH_CUSTOM(_file),_line]
+		};
+		{
+			private _class = _x;
+			traceformat("Process class %1",_class);
+			private _w = getFieldBaseValue(_class,"weight");
+			private _nargs = [null,null,null,null,null,null,null];
+			private _obj = instantiateParams(_class,_nargs);
+			assert_str(!isNullReference(_obj),"Null ref " + _class);
+			private _size = getVar(_obj,size);
+			assert_str(!isNullVar(_size) && {inRange(_size,ITEM_SIZE_TINY,ITEM_SIZE_HUGE)},"cant define size for " + _size);
+			private _name = getVar(_obj,name);
+			
+			_data pushBack (format["%1 (%2)::%3"+
+				"%4decl: %5%3"+
+				"%4size: %6 (%7) (const: %8)%3"+
+				"%4weight: %9 kg (const:%10)",
+				_class, _name,endl,toString[9],
+				(typeGetFromObject(_obj) getvariable "__decl_info__") call _getPathinfo,
+				_sizeConst select (_size-1),_size,([_class,"size",false] call oop_getFieldBaseValue),
+				_w,([_class,"weight",false] call oop_getFieldBaseValue)
+			]);
+		} foreach getAllObjectsTypeOf(Item);
+
+		copytoclipboard (_data joinString endl)
+	};
+	#endif
 
 	func(destructor)
 	{
