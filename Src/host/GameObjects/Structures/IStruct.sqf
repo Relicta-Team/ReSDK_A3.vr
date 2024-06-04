@@ -60,6 +60,10 @@ class(IStruct) extends(IDestructible)
 			modvar(_desc) + sbr + _germText;
 		};
 
+		#ifdef EDITOR
+			modvar(_desc) + sbr + callSelf(getObjectHealth_Editor);
+		#endif
+
 		format[_rand + _postrand,_icon + callSelf(getName)] + _desc
 	};
 

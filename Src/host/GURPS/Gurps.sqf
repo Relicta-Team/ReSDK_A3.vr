@@ -441,7 +441,7 @@ gurps_calculateItemHP = {
 
 	// round (4*( _wLb^(1/3) )) for _objType [complex]
 	// round (8*( _wLb^(1/3) )) for _objType [simple, spreaded]
-	round (_modifier * ( _wLb ^ (1/3) ))
+	(round (_modifier * ( _wLb ^ (1/3) ))) max 1
 };
 
 //расчетка для построек
@@ -473,7 +473,7 @@ gurps_calculateConstructionHP = {
 	private _weight = (_areaFt * _wPer1000sqft) / 1000;
 	private _hp = 100 * (_weight ^ (1/3));
 
-	round _hp //в спецификации не указано про округление, поэтому просто округляем до целых
+	(round _hp ) max 1//в спецификации не указано про округление, поэтому просто округляем до целых
 };
 
 //only for editor
@@ -497,6 +497,6 @@ gurps_internal_calculateHP = {
 	private _weight = (_areaFt * _wPer1000sqft) / 1000;
 	private _hp = 100 * (_weight ^ (1/3));
 
-	round _hp
+	(round _hp) max 1
 };
 

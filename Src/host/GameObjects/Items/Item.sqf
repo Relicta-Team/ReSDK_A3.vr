@@ -32,6 +32,8 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 	getterconst_func(getChunkType,CHUNK_TYPE_ITEM);
 	getter_func(isItem,true);
 
+	getter_func(canApplyDamage,true);
+
 	verbList("pickup twohands",GameObject);
 	editor_attribute("EditorVisible" arg "custom_provider:size") editor_attribute("Tooltip" arg "Размер предмета")
 	var(size,ITEM_SIZE_TINY);//объём предмета
@@ -879,6 +881,8 @@ class(SystemHandItem) extends(SystemItem)
 	var(side,0);
 	var(mode,"none"); //none - нет, grab - объект, человек, twohand - двуручное (object предмет во второй руке)
 
+	getter_func(canApplyDamage,false);
+
 	func(constructor)
 	{
 		objParams();
@@ -1160,6 +1164,7 @@ class(SystemInternalND) extends(Item)
 	{
 		setSelf(loc,ctxParams);
 	};
+	getter_func(canApplyDamage,false);
 
 	var(ndName,"MobInventory");
 	var(ndInteractDistance,INTERACT_DISTANCE);

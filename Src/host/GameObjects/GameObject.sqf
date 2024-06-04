@@ -368,11 +368,27 @@ class(GameObject) extends(ManagedObject)
 			if (_germText != "") then {
 				modvar(_otherText) + sbr + _germText;
 			};
+
+			#ifdef EDITOR
+			modvar(_otherText) + sbr + callSelf(getObjectHealth_Editor)
+			#endif
 		};
 
 		format[_rand + _postrand,_icon + callSelfParams(getNameFor,_usr)] +
 		_desc +
 		_otherText;
+	};
+
+	func(getObjectHealth_Editor)
+	{
+		objParams();
+		private _m = format["HP (%1/%2); DR (%3/%4); HT %5",getSelf(hp),getSelf(hpMax),getSelf(dr),getSelf(drMax),getSelf(ht)];
+		if callSelf(canApplyDamage) then {
+
+		} else {
+			_m = setstyle("БЕЗ УРОНА: ",style_redbig) + _m;
+		};
+		_m
 	};
 
 	go_internal_updateMethodsAfterStart = [];
@@ -1288,9 +1304,16 @@ class(IDestructible) extends(GameObject)
 		// количество урона, тип повреждений, мировая позиция по которой пришлись повреждения, (опциональная) причина урона
 		objParams_4(_amount,_type,_worldPos,_cause);
 
-		callSelfParams(sendDamageVisualOnPos,_worldPos);
+		private _canUseEffect = true;
+		private _canUseSound = true;
+		private _effector = {
+			callSelfParams(sendDamageVisualOnPos,_worldPos arg _canUseEffect arg _canUseSound);
+		};
 
-		if !callSelf(canApplyDamage) exitWith {};
+		if !callSelf(canApplyDamage) exitWith {
+			_canUseEffect = false;
+			call _effector;
+		};
 
 		//сначала проходим через СП, потом мод. повр.
 		_amount = (_amount - getSelf(dr)) max 0;
@@ -1337,6 +1360,9 @@ class(IDestructible) extends(GameObject)
 		
 		callSelfParams(onAffectDamageToPos,_amount arg _type arg _worldPos arg _cause);
 
+		_canUseEffect = _amount > 0;
+		call _effector;
+
 		modSelf(hp,- _amount);
 		private _newhp = getSelf(hp);
 		private _maxhp = getSelf(hpMax);
@@ -1366,7 +1392,7 @@ class(IDestructible) extends(GameObject)
 			callSelf(onDestroyed);
 			delete(this);
 		};
-		errorformat("IDestructible::applyDamage() - no affect damage: hp %1; max hp %2",_newhp arg _maxhp);
+		errorformat("IDestructible::applyDamage() - no affect damage: hp %1; max hp %2; Amount %3",_newhp arg _maxhp arg _amount);
 	};
 
 	func(onChangeObjectHP)
@@ -1436,14 +1462,26 @@ class(IDestructible) extends(GameObject)
 
 	func(sendDamageVisualOnPos)
 	{
-		objParams_1(_pos);
+		objParams_3(_pos,_doEffect,_doSound);
+		if isNullVar(_doEffect) then {_doEffect = true};
+		if isNullVar(_doSound) then {_doSound = false};
+
 		private _mat = getSelf(material);
 		if isNullVar(_mat) exitWith {};
 
-		private _emt = callFunc(_mat,getDamageEffect);
-		{
-			callFuncParams(_x,sendInfo,"do_fe" arg [_pos arg _emt arg _norm]);
-		} foreach callSelfParams(getNearMobs,20);
+		if (_doEffect) then {
+			private _emt = callFunc(_mat,getDamageEffect);
+			{
+				callFuncParams(_x,sendInfo,"do_fe" arg [_pos arg _emt arg _norm]);
+			} foreach callSelfParams(getNearMobs,20);
+		};
+
+
+		if (_doSound) then {
+			private _sound = callFunc(_mat,getDamageSound);
+			if (_sound == stringEmpty) exitWith {};
+			callSelfParams(playSound,_sound arg randInt(0.85,1.15) arg 15 arg null arg _pos);
+		};
 	};
 	
 	
