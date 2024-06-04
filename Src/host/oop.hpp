@@ -196,6 +196,7 @@
 #define new(type) (call (pt_##type getvariable "__instance"))
 #define newParams(type,Params) ((Params) call (pt_##type getvariable "__instance"))
 #define delete(ref) (ref) call oop_deleteObject
+#define isdeleted(ref) (!isNIL{ref getvariable "__del_flag__"})
 #define instantiate(strType) (call ((missionNamespace getVariable ("pt_" + (strType))) getvariable '__instance'))
 #define instantiateParams(strType,Params) ((Params) call ((missionNamespace getVariable ("pt_" + (strType))) getvariable '__instance'))
 
