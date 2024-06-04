@@ -458,6 +458,9 @@ gurps_calculateConstructionHP = {
 	*/
 	
 	private _mpath = getVar(_obj,model);
+	if !isNull(core_cfg2model getvariable _mpath) then {
+		_mpath = core_cfg2model getvariable _mpath;
+	};
 	private _bbxDat = core_modelBBX get (tolower _mpath);
 	assert_str(!isNullVar(_bbxDat),"Null BBX info; " + format vec4("Obj: %1 (%2) [%3]",_obj,callFunc(_obj,getClassName),_mpath));
 	private _sizeX = metersToFeet(abs(_bbxDat select 0 select 0) + abs(_bbxDat select 1 select 0));
