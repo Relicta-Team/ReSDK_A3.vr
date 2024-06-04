@@ -15,6 +15,7 @@ class(BodyPart) extends(Item)
 	var(size,ITEM_SIZE_BIG);
 	var(model,"ml\ml_object_new\model_24\okorok.p3d");
 	var(material,"MatFlesh");
+	var(dr,1);
 
 	//var_num(hp);
 	//var_bool(isBleeding);

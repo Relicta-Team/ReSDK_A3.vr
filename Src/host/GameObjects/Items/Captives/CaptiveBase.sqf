@@ -244,6 +244,8 @@ endclass
 class(HandcuffItem) extends(CaptiveItemBase)
 	var(name,"Наручники");
 	var(material,"MatMetal");
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
+	var(dr,DR_SP_2);
 	var(desc,"Собраны по архивным чертежам на Веселой Ферме.");
 	var(weight,gramm(380));
 	var(allowedSlots,[INV_BELT]);

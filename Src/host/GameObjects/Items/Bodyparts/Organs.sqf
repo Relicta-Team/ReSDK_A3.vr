@@ -11,6 +11,7 @@
 editor_attribute("InterfaceClass")
 class(Organ) extends(Item)
 	var(material,"MatFlesh");
+	var(dr,0);
 	var(germs,-1);//без микробов на старте
 	var_bool(isVital);
 	getterconst_func(getOrganBodyPart,BP_INDEX_TORSO);

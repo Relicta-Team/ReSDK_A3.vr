@@ -16,6 +16,7 @@ editor_attribute("InterfaceClass")
 class(IChairAsItem) extends(ItemBaseChair)
 	var(name,"Стул");
 	var(material,"MatWood");
+	var(dr,2);
 	var(size,ITEM_SIZE_HUGE);
 	func(canPickup)
 	{
