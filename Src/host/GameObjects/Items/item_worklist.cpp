@@ -1,1844 +1,1844 @@
-itemradio (Радио)::
-	decl: file: src\host\GameObjects\Items\Item.sqf at line 690
+ItemRadio (Радио)::
+	decl: file: src\host\GameObjects\Items\Item.sqf at line 691
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-systemitem (any)::
-	decl: file: src\host\GameObjects\Items\Item.sqf at line 755
+	weight: NEED_ALLOC (const:1000 / 1000)
+SystemItem (any)::
+	decl: file: src\host\GameObjects\Items\Item.sqf at line 756
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
 	weight: 0 kg (const:0)
-stolenitem (any)::
-	decl: file: src\host\GameObjects\Items\Item.sqf at line 763
+StolenItem (any)::
+	decl: file: src\host\GameObjects\Items\Item.sqf at line 764
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-systeminternalnd (any)::
-	decl: file: src\host\GameObjects\Items\Item.sqf at line 1191
+	weight: NEED_ALLOC (const:1000 / 1000)
+SystemInternalND (any)::
+	decl: file: src\host\GameObjects\Items\Item.sqf at line 1192
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-container (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Container (any)::
 	decl: file: src\host\GameObjects\Items\Containers\Container.sqf at line 15
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-imeleeweapon (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+IMeleeWeapon (any)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Axes.sqf at line 11
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-irangedweapon (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+IRangedWeapon (any)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\RangedWeapon.sqf at line 12
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-imagazinebase (Магазин)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+IMagazineBase (Магазин)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\RangedWeapon.sqf at line 532
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0 kg (const:0)
-stack (any)::
+Stack (any)::
 	decl: file: src\host\GameObjects\Items\Stackable\Stack.sqf at line 14
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-grenade (Разрывная граната)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Grenade (Разрывная граната)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 11
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.31 kg (const:310 / 1000)
-ammoboxbase (Коробка)::
+AmmoBoxBase (Коробка)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\AmmoBoxes.sqf at line 14
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
 	weight: 0.13 kg (const:130 / 1000)
-bandage (Бинт)::
+Bandage (Бинт)::
 	decl: file: src\host\GameObjects\Items\Medical\Bandages.sqf at line 12
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-needlewiththreads (Иголка с нитками)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+NeedleWithThreads (Иголка с нитками)::
 	decl: file: src\host\GameObjects\Items\Medical\Bandages.sqf at line 204
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.00015 kg (const:0.15 / 1000)
-surgicalsaw (Хирургическая пила)::
+SurgicalSaw (Хирургическая пила)::
 	decl: file: src\host\GameObjects\Items\Medical\Surgery.sqf at line 12
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-surgicalexpander (Хирургический расширитель)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+SurgicalExpander (Хирургический расширитель)::
 	decl: file: src\host\GameObjects\Items\Medical\Surgery.sqf at line 20
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-stethoscope (Стетоскоп)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Stethoscope (Стетоскоп)::
 	decl: file: src\host\GameObjects\Items\Medical\Surgery.sqf at line 44
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.06 kg (const:60 / 1000)
-bonestraightener (Костоправ)::
+BoneStraightener (Костоправ)::
 	decl: file: src\host\GameObjects\Items\Medical\Surgery.sqf at line 53
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
 	weight: 0.17 kg (const:170 / 1000)
-forceps (Щипцы)::
+Forceps (Щипцы)::
 	decl: file: src\host\GameObjects\Items\Medical\Surgery.sqf at line 90
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.04 kg (const:40 / 1000)
-crutch (Костыль)::
+Crutch (Костыль)::
 	decl: file: src\host\GameObjects\Items\Medical\Surgery.sqf at line 133
 	size: ITEM_SIZE_LARGE (4) (const: 3)
 	weight: 0.8 kg (const:800 / 1000)
-ilightible (any)::
+ILightible (any)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 15
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-matchbox (Коробок спичек)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+MatchBox (Коробок спичек)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 374
 	size: ITEM_SIZE_TINY (1) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-smallbattery (Батарейка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+SmallBattery (Батарейка)::
 	decl: file: src\host\GameObjects\Items\Lighting\Electronic.sqf at line 196
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.095 kg (const:95 / 1000)
-key (Ключ)::
+Key (Ключ)::
 	decl: file: src\host\GameObjects\Items\Instruments\Keys.sqf at line 12
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.01 kg (const:10 / 1000)
-lockpick (Отмычка)::
+Lockpick (Отмычка)::
 	decl: file: src\host\GameObjects\Items\Instruments\Keys.sqf at line 78
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.015 kg (const:15 / 1000)
-chemdistiller (Дистилятор)::
+ChemDistiller (Дистилятор)::
 	decl: file: src\host\GameObjects\Items\Instruments\Chemical.sqf at line 11
 	size: ITEM_SIZE_BIG (5) (const: 5)
 	weight: 4.2 kg (const:4200 / 1000)
-engineeringtoolitem (any)::
+EngineeringToolItem (any)::
 	decl: file: src\host\GameObjects\Items\Instruments\Engineering.sqf at line 10
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-wire (Провод)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Wire (Провод)::
 	decl: file: src\host\GameObjects\Items\Instruments\Wires.sqf at line 11
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-cuttingboard (Доска)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+CuttingBoard (Доска)::
 	decl: file: src\host\GameObjects\Items\Instruments\Kitchen.sqf at line 11
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.15 kg (const:150 / 1000)
-fryingpan (Сковородка)::
+FryingPan (Сковородка)::
 	decl: file: src\host\GameObjects\Items\Instruments\Kitchen.sqf at line 23
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 1.45 kg (const:1.45)
-polovnik (Половник)::
+Polovnik (Половник)::
 	decl: file: src\host\GameObjects\Items\Instruments\Kitchen.sqf at line 189
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-brushcleaner (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+BrushCleaner (any)::
 	decl: file: src\host\GameObjects\Items\Instruments\Cleaning.sqf at line 11
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.23 kg (const:230 / 1000)
-itembasechair (any)::
+ItemBaseChair (any)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 11
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-ireagentitem (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+IReagentItem (any)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\ReagentContainer.sqf at line 18
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-pestik (Пестик)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Pestik (Пестик)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Chemical.sqf at line 68
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.08 kg (const:80 / 1000)
-cleanableitem (any)::
+CleanableItem (any)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Cleanable.sqf at line 13
 	size: ITEM_SIZE_BIG (5) (const: 1)
 	weight: -1 kg (const:-1)
-pillbox (Коробка таблеток)::
+PillBox (Коробка таблеток)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Pills.sqf at line 11
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.03 kg (const:30 / 1000)
-bodypart (any)::
+BodyPart (any)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 13
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
-	weight: 1 kg (const:1000 / 1000)
-organ (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Organ (any)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 12
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-bone (Костошка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Bone (Костошка)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Skeletal.sqf at line 10
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
-	weight: 0.467 kg (const:(FLOOR linearConversion [0,1,random 1,(100)min(600),(600)max(100)+1]) / 1000)
-ifooditem (Еда)::
+	weight: 0.151 kg (const:(FLOOR linearConversion [0,1,random 1,(100)min(600),(600)max(100)+1]) / 1000)
+IFoodItem (Еда)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 11
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-muka (Мука)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Muka (Мука)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 211
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
 	weight: 0.08 kg (const:80 / 1000)
-teapacket (Коробка чая)::
+TeaPacket (Коробка чая)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 323
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-ipaperitembase (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+IPaperItemBase (any)::
 	decl: file: src\host\GameObjects\Items\Office\Books.sqf at line 23
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-itemwritter (Писало)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+ItemWritter (Писало)::
 	decl: file: src\host\GameObjects\Items\Office\Writters.sqf at line 11
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-calculator (Счёты)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Calculator (Счёты)::
 	decl: file: src\host\GameObjects\Items\Office\Instruments.sqf at line 11
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
 	weight: 0.14 kg (const:140 / 1000)
-itrapitem (any)::
+ITrapItem (any)::
 	decl: file: src\host\GameObjects\Items\Traps\Trap.sqf at line 13
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-captiveitembase (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+CaptiveItemBase (any)::
 	decl: file: src\host\GameObjects\Items\Captives\CaptiveBase.sqf at line 53
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-campfirecreator (Набор для костра)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+CampfireCreator (Набор для костра)::
 	decl: file: src\host\GameObjects\Structures\Containers\Tech.sqf at line 28
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.6 kg (const:600 / 1000)
-item_oldneworder_bombpart1 (Взрывчатка)::
+Item_OldNewOrder_BombPart1 (Взрывчатка)::
 	decl: file: src\host\GameModes\Dirtpit\GM_OldNewOrder.sqf at line 669
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 3.5 kg (const:3.5)
-item_oldneworder_bombpart2 (Элемент питания бомбы)::
+Item_OldNewOrder_BombPart2 (Элемент питания бомбы)::
 	decl: file: src\host\GameModes\Dirtpit\GM_OldNewOrder.sqf at line 686
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 1.5 kg (const:1.5)
-item_oldneworder_bomb (Бомба)::
+Item_OldNewOrder_Bomb (Бомба)::
 	decl: file: src\host\GameModes\Dirtpit\GM_OldNewOrder.sqf at line 704
 	size: ITEM_SIZE_MEDIUM (3) (const: 4)
 	weight: 5 kg (const:5)
-gmokopovoiteminforock (any)::
+GMOkopovoItemInfoRock (any)::
 	decl: file: src\host\GameModes\Okopovo\System.sqf at line 117
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-radiobaikal (Радио)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+RadioBaikal (Радио)::
 	decl: file: src\host\GameObjects\Items\Instruments\Radios.sqf at line 11
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-systemhanditem (any)::
-	decl: file: src\host\GameObjects\Items\Item.sqf at line 887
+	weight: NEED_ALLOC (const:1000 / 1000)
+SystemHandItem (any)::
+	decl: file: src\host\GameObjects\Items\Item.sqf at line 888
 	size: ITEM_SIZE_HUGE (6) (const: 1)
 	weight: 0 kg (const:0)
-systemmessageboxnd (any)::
-	decl: file: src\host\GameObjects\Items\Item.sqf at line 1235
+SystemMessageBoxND (any)::
+	decl: file: src\host\GameObjects\Items\Item.sqf at line 1236
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-castoffs2 (Обноски)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Castoffs2 (Обноски)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 195
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-castoffs3 (Обноски)::
+Castoffs3 (Обноски)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 196
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-greatcoatbrown (Коричневая шинель)::
+GreatcoatBrown (Коричневая шинель)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 292
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-greatcoatwhitebrown (Светлая коричневая шинель)::
+GreatcoatWhiteBrown (Светлая коричневая шинель)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 297
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-womanbasiccloth (Женская одежда)::
+WomanBasicCloth (Женская одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 302
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-znatcloth (Знатная одежда)::
+ZnatCloth (Знатная одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 307
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-cleanercloth (Одежда Уходника)::
+CleanerCloth (Одежда Уходника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 381
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth2 (Одежда кочевника)::
+NomadCloth2 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 210
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth3 (Одежда кочевника)::
+NomadCloth3 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 211
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth4 (Одежда кочевника)::
+NomadCloth4 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 212
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth5 (Одежда кочевника)::
+NomadCloth5 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 213
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth6 (Одежда кочевника)::
+NomadCloth6 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 214
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth7 (Одежда кочевника)::
+NomadCloth7 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 215
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth8 (Одежда кочевника)::
+NomadCloth8 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 216
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth9 (Одежда кочевника)::
+NomadCloth9 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 217
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth10 (Одежда кочевника)::
+NomadCloth10 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 218
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth11 (Одежда кочевника)::
+NomadCloth11 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 219
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth12 (Одежда кочевника)::
+NomadCloth12 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 221
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth13 (Одежда кочевника)::
+NomadCloth13 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 222
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth14 (Одежда кочевника)::
+NomadCloth14 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 223
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth15 (Одежда кочевника)::
+NomadCloth15 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 224
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth16 (Одежда кочевника)::
+NomadCloth16 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 225
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth17 (Одежда кочевника)::
+NomadCloth17 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 226
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth18 (Одежда кочевника)::
+NomadCloth18 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 227
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth19 (Одежда кочевника)::
+NomadCloth19 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 228
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth20 (Одежда кочевника)::
+NomadCloth20 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 229
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth21 (Одежда кочевника)::
+NomadCloth21 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 230
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth22 (Одежда кочевника)::
+NomadCloth22 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 231
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth23 (Одежда кочевника)::
+NomadCloth23 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 232
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-veterancloth (Униформа ополченца)::
+VeteranCloth (Униформа ополченца)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 402
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-streakcloth (Униформа младшего ополченца)::
+StreakCloth (Униформа младшего ополченца)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 406
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-rokopovoarmycloth5iscmd (Армейская одежда)::
+ROkopovoArmyCloth5IsCMD (Армейская одежда)::
 	decl: file: src\host\GameModes\Okopovo\OkopovoRoles.sqf at line 35
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-armycloth2 (Армейская одежда)::
+ArmyCloth2 (Армейская одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 243
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-armycloth3 (Армейская одежда)::
+ArmyCloth3 (Армейская одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 244
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-armycloth4 (Армейская одежда)::
+ArmyCloth4 (Армейская одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 245
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-armycloth5 (Армейская одежда)::
+ArmyCloth5 (Армейская одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 246
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-armycloth6 (Армейская одежда)::
+ArmyCloth6 (Армейская одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 247
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth2 (Одежда)::
+CitizenCloth2 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 259
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth3 (Одежда)::
+CitizenCloth3 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 260
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth4 (Одежда)::
+CitizenCloth4 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 261
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth5 (Одежда)::
+CitizenCloth5 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 262
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth6 (Одежда)::
+CitizenCloth6 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 263
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth7 (Одежда)::
+CitizenCloth7 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 264
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth8 (Одежда)::
+CitizenCloth8 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 265
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth9 (Одежда)::
+CitizenCloth9 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 266
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth10 (Одежда)::
+CitizenCloth10 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 268
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth11 (Одежда)::
+CitizenCloth11 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 269
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth12 (Одежда)::
+CitizenCloth12 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 270
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth13 (Одежда)::
+CitizenCloth13 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 271
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth14 (Одежда)::
+CitizenCloth14 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 272
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth15 (Одежда)::
+CitizenCloth15 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 273
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth16 (Одежда)::
+CitizenCloth16 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 274
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth17 (Одежда)::
+CitizenCloth17 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 275
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth18 (Одежда)::
+CitizenCloth18 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 276
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth19 (Одежда)::
+CitizenCloth19 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 277
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth20 (Одежда)::
+CitizenCloth20 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 278
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth21 (Одежда)::
+CitizenCloth21 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 279
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth22 (Одежда)::
+CitizenCloth22 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 280
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-torgashpalthcloth (Клетчатое пальто)::
+TorgashPalthCloth (Клетчатое пальто)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 282
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-brightredcloth (Яркое красное пальто)::
+BrightRedCloth (Яркое красное пальто)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 329
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-whiterobecloth (Белая роба)::
+WhiteRobeCloth (Белая роба)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 287
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-merchantclothsaloon (Торгашинские шмотки)::
+MerchantClothSaloon (Торгашинские шмотки)::
 	decl: file: src\host\GameModes\Saloon\SaloonRoles.sqf at line 308
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-rdetcloththief (Куртяйка)::
+RDetClothThief (Куртяйка)::
 	decl: file: src\host\GameModes\Detective\DetectiveModeRoles.sqf at line 827
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-banditsalooncloth (Кожак)::
+BanditSaloonCloth (Кожак)::
 	decl: file: src\host\GameModes\Saloon\SaloonRoles.sqf at line 482
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-bandit2salooncloth (Серьёзная одежда)::
+Bandit2SaloonCloth (Серьёзная одежда)::
 	decl: file: src\host\GameModes\Saloon\SaloonRoles.sqf at line 487
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-banditcommandersalooncloth (Паханка)::
+BanditCommanderSaloonCloth (Паханка)::
 	decl: file: src\host\GameModes\Saloon\SaloonRoles.sqf at line 492
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-crown1 (Корона)::
+Crown1 (Корона)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 538
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-crown2 (Корона)::
+Crown2 (Корона)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 543
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-hatgrayoldushanka (Головной убор)::
+HatGrayOldUshanka (Головной убор)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 498
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-workercoolcap (Коричневая шапка)::
+WorkerCoolCap (Коричневая шапка)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 507
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-hoodassasinsaloon (Капюшон)::
+HoodAssasinSaloon (Капюшон)::
 	decl: file: src\host\GameModes\Saloon\SaloonRoles.sqf at line 259
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-hoodbrown (Капюшон)::
+HoodBrown (Капюшон)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 529
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-hatproxy (Головной убор)::
+HatProxy (Головной убор)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 462
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-hatberet (Берет)::
+HatBeret (Берет)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 474
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-hatarmycap (Фуражка)::
+HatArmyCap (Фуражка)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 479
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-hatshemag (Головная повязка)::
+HatShemag (Головная повязка)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 484
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-hatbandana (Чёрная повязка на голову)::
+HatBandana (Чёрная повязка на голову)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 489
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-hatoldushanka (Головной убор)::
+HatOldUshanka (Головной убор)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 494
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-workercap (Шапка)::
+WorkerCap (Шапка)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 502
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-cookercap (Поварская шапочка)::
+CookerCap (Поварская шапочка)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 513
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-hoodabbat (Капюшон)::
+HoodAbbat (Капюшон)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 519
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-hoodclirik (Капюшон)::
+HoodClirik (Капюшон)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 524
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-hoodchemicalprot (Капюшон)::
+HoodChemicalProt (Капюшон)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 533
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-combathat (Боевая каска)::
+CombatHat (Боевая каска)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 549
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 1.3 kg (const:1.3)
-hatredsaloon (Кепарик)::
+HatRedSaloon (Кепарик)::
 	decl: file: src\host\GameModes\Saloon\SaloonRoles.sqf at line 314
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-blackbandannamask (Бандана)::
+BlackBandannaMask (Бандана)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 605
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.02 kg (const:20 / 1000)
-facecovermask (Тряпичная масочка)::
+FaceCoverMask (Тряпичная масочка)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 585
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.02 kg (const:20 / 1000)
-balaclavamask (Балаклава)::
+BalaclavaMask (Балаклава)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 589
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.02 kg (const:20 / 1000)
-balaclavamask2 (Маска)::
+BalaclavaMask2 (Маска)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 595
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.02 kg (const:20 / 1000)
-brownbandannamask (Бандана)::
+BrownBandannaMask (Бандана)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 600
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.02 kg (const:20 / 1000)
-gasmask (Противогаз)::
+Gasmask (Противогаз)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 629
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.02 kg (const:20 / 1000)
-respiratormask (Респиратор)::
+RespiratorMask (Респиратор)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 634
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.02 kg (const:20 / 1000)
-armorstrong (Керамический бронежилет)::
+ArmorStrong (Керамический бронежилет)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 86
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
 	weight: 10 kg (const:10)
-armorsteel (Керамический бронежилет)::
+ArmorSteel (Керамический бронежилет)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 90
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
 	weight: 10 kg (const:10)
-breastplate (Нагрудник)::
+Breastplate (Нагрудник)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 55
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
 	weight: 18 kg (const:18)
-armorceramic (Керамический бронежилет)::
+ArmorCeramic (Керамический бронежилет)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 71
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
 	weight: 10 kg (const:10)
-tacticalvestshoter (Армейская разгрузка)::
+TacticalVestShoter (Армейская разгрузка)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 139
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.76 kg (const:760 / 1000)
-tacticalvest (Армейская разгрузка)::
+TacticalVest (Армейская разгрузка)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 134
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.76 kg (const:760 / 1000)
-pockedvestblack (Черная жилетка)::
+PockedVestBlack (Черная жилетка)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 143
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.76 kg (const:760 / 1000)
-pockedvestgreen (Зеленая жилетка)::
+PockedVestGreen (Зеленая жилетка)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 148
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.76 kg (const:760 / 1000)
-pockedvestbrown (Коричневая жилетка)::
+PockedVestBrown (Коричневая жилетка)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 153
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.76 kg (const:760 / 1000)
-armormedium (Улучшенный бронежилет)::
+ArmorMedium (Улучшенный бронежилет)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 117
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 3.7 kg (const:3.7)
-armorheavy (Тяжелый бронежилет)::
+ArmorHeavy (Тяжелый бронежилет)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 125
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 5.2 kg (const:5.2)
-armorvst (Одежда)::
+ArmorVST (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 35
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-bandolier (Патронташ)::
+Bandolier (Патронташ)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 94
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.76 kg (const:760 / 1000)
-armorlite (Легкий бронежилет)::
+ArmorLite (Легкий бронежилет)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 105
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 2.8 kg (const:2.8)
-armorcitynew (Городская броня)::
+ArmorCityNew (Городская броня)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 159
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-castoffs1 (Обноски)::
+Castoffs1 (Обноски)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 187
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-greatcoatblack (Черная шинель)::
+GreatcoatBlack (Черная шинель)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 198
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-nomadcloth1 (Одежда кочевника)::
+NomadCloth1 (Одежда кочевника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 203
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-armycloth1 (Армейская одежда)::
+ArmyCloth1 (Армейская одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 235
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-citizencloth1 (Одежда)::
+CitizenCloth1 (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 250
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-headcloth (Роскошное Головинское пальто)::
+HeadCloth (Роскошное Головинское пальто)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 319
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-cliriccloth (Серая роба)::
+CliricCloth (Серая роба)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 350
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-leatherjacketcloth (Одежда)::
+LeatherJacketCloth (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 313
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-chemicalprotectionsuit (Одежда)::
+ChemicalProtectionSuit (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 315
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-newarmystdcloth (Одежда)::
+NewArmyStdCloth (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 317
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-knutcloth (Кнутовка)::
+KnutCloth (Кнутовка)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 324
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-cookercloth (Кухарская одежка)::
+CookerCloth (Кухарская одежка)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 334
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-greenworkercloth (Зелёная рабочая рубашка)::
+GreenWorkerCloth (Зелёная рабочая рубашка)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 339
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-abbatcloth (Роба Аббата)::
+AbbatCloth (Роба Аббата)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 346
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-brigadircloth (Бригадирка)::
+BrigadirCloth (Бригадирка)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 356
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-griblancloth (Грибланский костюм)::
+GriblanCloth (Грибланский костюм)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 361
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-barmencloth (Шмотки Барника)::
+BarmenCloth (Шмотки Барника)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 366
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-doctorcloth (Леканые одеяния)::
+DoctorCloth (Леканые одеяния)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 371
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-watchmancloth (Вахтерская одежда)::
+WatchmanCloth (Вахтерская одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 376
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-merchantcloth (Торговская шинель)::
+MerchantCloth (Торговская шинель)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 387
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-gromilacloth (Громилка)::
+GromilaCloth (Громилка)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 392
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-caretakercloth (Одеяния смотрителя)::
+CaretakerCloth (Одеяния смотрителя)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 397
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-woolcoat (Накидка)::
+WoolCoat (Накидка)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 414
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-hatushanka (Головной убор)::
+HatUshanka (Головной убор)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 440
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.08 kg (const:80 / 1000)
-itemmask (Маска)::
+ItemMask (Маска)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 559
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.02 kg (const:20 / 1000)
-armor (Одежда)::
+Armor (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\Armors.sqf at line 12
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-suitcase1 (Чемодан)::
+Suitcase1 (Чемодан)::
 	decl: file: src\host\GameObjects\Items\Containers\Bags.sqf at line 35
 	size: ITEM_SIZE_LARGE (4) (const: 5)
 	weight: 0.48 kg (const:480 / 1000)
-suitcase_saloon (Лавандос)::
+Suitcase_Saloon (Лавэ)::
 	decl: file: src\host\GameModes\Saloon\GM_Saloon.sqf at line 442
 	size: ITEM_SIZE_LARGE (4) (const: 5)
 	weight: 6.3 kg (const:6.3)
-suitcase_saloonv2 (Бабло)::
+Suitcase_SaloonV2 (Лавандос)::
 	decl: file: src\host\GameModes\Saloon\GM_Saloon.sqf at line 1016
 	size: ITEM_SIZE_LARGE (4) (const: 5)
 	weight: 6.3 kg (const:6.3)
-steelbrowncontainer (Стальной ящичек)::
+SteelBrownContainer (Стальной ящичек)::
 	decl: file: src\host\GameObjects\Items\Containers\Bags.sqf at line 77
 	size: ITEM_SIZE_LARGE (4) (const: 4)
 	weight: 0.78 kg (const:780 / 1000)
-fabricbagbig2 (Мешок)::
+FabricBagBig2 (Мешок)::
 	decl: file: src\host\GameObjects\Items\Containers\Backpacks.sqf at line 72
 	size: ITEM_SIZE_HUGE (6) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-cloth (Одежда)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Cloth (Одежда)::
 	decl: file: src\host\GameObjects\Items\Clothes\cloth.sqf at line 13
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.52 kg (const:520 / 1000)
-briefcase (Портфель)::
+Briefcase (Портфель)::
 	decl: file: src\host\GameObjects\Items\Containers\Bags.sqf at line 14
 	size: ITEM_SIZE_LARGE (4) (const: 4)
 	weight: 0.42 kg (const:420 / 1000)
-suitcase (Чемодан)::
+Suitcase (Чемодан)::
 	decl: file: src\host\GameObjects\Items\Containers\Bags.sqf at line 25
 	size: ITEM_SIZE_LARGE (4) (const: 5)
 	weight: 0.48 kg (const:480 / 1000)
-shuttlebag (Челночный баул)::
+ShuttleBag (Челночный баул)::
 	decl: file: src\host\GameObjects\Items\Containers\Bags.sqf at line 45
 	size: ITEM_SIZE_LARGE (4) (const: 5)
 	weight: 0.55 kg (const:550 / 1000)
-medicalbag (Лекарный саквояж)::
+MedicalBag (Лекарный саквояж)::
 	decl: file: src\host\GameObjects\Items\Containers\Bags.sqf at line 55
 	size: ITEM_SIZE_LARGE (4) (const: 4)
 	weight: 0.3 kg (const:300 / 1000)
-steelmedicalbox (Стальная коробка)::
+SteelMedicalBox (Стальная коробка)::
 	decl: file: src\host\GameObjects\Items\Containers\Bags.sqf at line 65
 	size: ITEM_SIZE_LARGE (4) (const: 4)
 	weight: 0.78 kg (const:780 / 1000)
-coinbag (Мешочек)::
+CoinBag (Мешочек)::
 	decl: file: src\host\GameObjects\Items\Containers\Backpacks.sqf at line 11
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.13 kg (const:130 / 1000)
-smallbackpack (Рюкзак)::
+SmallBackpack (Рюкзак)::
 	decl: file: src\host\GameObjects\Items\Containers\Backpacks.sqf at line 27
 	size: ITEM_SIZE_SMALL (2) (const: 4)
 	weight: 0.6 kg (const:600 / 1000)
-fabricbagbig1 (Мешок)::
+FabricBagBig1 (Мешок)::
 	decl: file: src\host\GameObjects\Items\Containers\Backpacks.sqf at line 61
 	size: ITEM_SIZE_HUGE (6) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-foodplate (Тарелка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+FoodPlate (Тарелка)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Kitchen.sqf at line 213
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-workingaxe (Топор)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+WorkingAxe (Топор)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Axes.sqf at line 63
 	size: ITEM_SIZE_LARGE (4) (const: 4)
 	weight: 1.2 kg (const:1.2)
-battleaxe (Секира)::
+BattleAxe (Секира)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Axes.sqf at line 73
 	size: ITEM_SIZE_LARGE (4) (const: 5)
 	weight: 2.5 kg (const:2.5)
-caveaxe (Топорчик)::
+CaveAxe (Топорчик)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Axes.sqf at line 37
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
 	weight: 1.8 kg (const:1.8)
-swordscimitar (Скимитар)::
+SwordScimitar (Скимитар)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Swords.sqf at line 24
 	size: ITEM_SIZE_LARGE (4) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-shortsword (Короткий меч)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+ShortSword (Короткий меч)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Swords.sqf at line 29
 	size: ITEM_SIZE_LARGE (4) (const: 4)
 	weight: 1.4 kg (const:1.4)
-halfhandedsword (Полуторный меч)::
+HalfHandedSword (Полуторный меч)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Swords.sqf at line 36
 	size: ITEM_SIZE_LARGE (4) (const: 4)
 	weight: 1.6 kg (const:1.6)
-twohandedsword (Двуручный меч)::
+TwoHandedSword (Двуручный меч)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Swords.sqf at line 44
 	size: ITEM_SIZE_LARGE (4) (const: 5)
 	weight: 3.5 kg (const:3.5)
-customknife (Самодельный нож)::
+CustomKnife (Самодельный нож)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Knives.sqf at line 61
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.4 kg (const:400 / 1000)
-gmpreydaggerknife (Кинжал)::
+GMPreyDaggerKnife (Кинжал)::
 	decl: file: src\host\GameModes\Prey\GM_Prey.sqf at line 419
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.2 kg (const:200 / 1000)
-littleknife (Маленький нож)::
+LittleKnife (Маленький нож)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Knives.sqf at line 53
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.13 kg (const:130 / 1000)
-kitchenknife (Кухонный нож)::
+KitchenKnife (Кухонный нож)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Knives.sqf at line 67
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.2 kg (const:200 / 1000)
-combatknife (Боевой нож)::
+CombatKnife (Боевой нож)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Knives.sqf at line 74
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.24 kg (const:240 / 1000)
-daggerknife (Кинжал)::
+DaggerKnife (Кинжал)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Knives.sqf at line 80
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.2 kg (const:200 / 1000)
-surgeryscalpel (Скальпель)::
+SurgeryScalpel (Скальпель)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Knives.sqf at line 86
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.2 kg (const:200 / 1000)
-baton (Дубинка)::
+Baton (Дубинка)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\NonCategory.sqf at line 18
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 1.42 kg (const:1420 / 1000)
-scepter (Скипетр)::
+Scepter (Скипетр)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\NonCategory.sqf at line 46
 	size: ITEM_SIZE_LARGE (4) (const: 1)
 	weight: 1.2 kg (const:1200 / 1000)
-axebase (any)::
+AxeBase (any)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Axes.sqf at line 33
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-sword (Меч)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Sword (Меч)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Swords.sqf at line 10
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-knife (Нож)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Knife (Нож)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\Knives.sqf at line 15
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
 	weight: 0.2 kg (const:200 / 1000)
-baseballbat (Бита)::
+Baseballbat (Бита)::
 	decl: file: src\host\GameObjects\Items\MeleeWeapons\NonCategory.sqf at line 10
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-testpistol (Пистолет "ПБМ 70")::
+	weight: NEED_ALLOC (const:1000 / 1000)
+TestPistol (Пистолет "ПБМ 70")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\RangedWeapon.sqf at line 848
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.73 kg (const:730 / 1000)
-testrifle (Автомат "Товарищ")::
+TestRifle (Автомат "Товарищ")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\RangedWeapon.sqf at line 862
 	size: ITEM_SIZE_MEDIUM (3) (const: 4)
 	weight: 4.8 kg (const:4.8)
-testshotgun (Дробовик)::
+TestShotgun (Дробовик)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\RangedWeapon.sqf at line 874
 	size: ITEM_SIZE_LARGE (4) (const: 4)
 	weight: 3.54 kg (const:3.540)
-gmdetectiveitemweaponmurder (Терпилыч)::
+GMDetectiveItemWeaponMurder (Терпилыч)::
 	decl: file: src\host\GameModes\Detective\GM_Detective.sqf at line 493
 	size: ITEM_SIZE_SMALL (2) (const: 4)
 	weight: 3.1 kg (const:3.1)
-pistoloneshoot (Самопал)::
+PistolOneShoot (Самопал)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Pistols.sqf at line 264
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.51 kg (const:510 / 1000)
-sawedoff (Обрез)::
+SawedOff (Обрез)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Shotguns.sqf at line 17
 	size: ITEM_SIZE_SMALL (2) (const: 4)
 	weight: 3.1 kg (const:3.1)
-shotgunmini (Кроха)::
+ShotgunMini (Кроха)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Shotguns.sqf at line 320
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.45 kg (const:450 / 1000)
-riflefinishersmall (Укороченная винтовка "Навертыш")::
+RifleFinisherSmall (Укороченная винтовка "Навертыш")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Rifles.sqf at line 101
 	size: ITEM_SIZE_LARGE (4) (const: 4)
 	weight: 4.1 kg (const:4.1)
-pistolpbm (Пистолет "ПБМ 70")::
+PistolPBM (Пистолет "ПБМ 70")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Pistols.sqf at line 11
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.73 kg (const:730 / 1000)
-rifleauto (Автомат "Товарищ")::
+RifleAuto (Автомат "Товарищ")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Rifles.sqf at line 147
 	size: ITEM_SIZE_MEDIUM (3) (const: 4)
 	weight: 4.8 kg (const:4.8)
-shotgun (Дробовик)::
+Shotgun (Дробовик)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Shotguns.sqf at line 217
 	size: ITEM_SIZE_LARGE (4) (const: 4)
 	weight: 3.54 kg (const:3.540)
-revolver (Револьвер "Малыш")::
+Revolver (Револьвер "Малыш")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Pistols.sqf at line 34
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.75 kg (const:750 / 1000)
-pistolhandmade (Пистолет "Дудатрёп")::
+PistolHandmade (Пистолет "Дудатрёп")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Pistols.sqf at line 235
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.82 kg (const:820 / 1000)
-dbshotgun (Двустволка)::
+DBShotgun (Двустволка)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Shotguns.sqf at line 30
 	size: ITEM_SIZE_LARGE (4) (const: 5)
 	weight: 3.4 kg (const:3.4)
-riflefinisher (Винтовка "Навертыш")::
+RifleFinisher (Винтовка "Навертыш")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Rifles.sqf at line 12
 	size: ITEM_SIZE_LARGE (4) (const: 5)
 	weight: 4.6 kg (const:4.6)
-riflesvt (Винтовка "СВТ")::
+RifleSVT (Винтовка "СВТ")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Rifles.sqf at line 118
 	size: ITEM_SIZE_LARGE (4) (const: 5)
 	weight: 3.75 kg (const:3.75)
-riflebastard (Автомат "Мерзавец")::
+RifleBastard (Автомат "Мерзавец")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Rifles.sqf at line 184
 	size: ITEM_SIZE_LARGE (4) (const: 5)
 	weight: 4.5 kg (const:4.5)
-magazinepbmloaded (Магазин ПБМ)::
+MagazinePBMLoaded (Магазин ПБМ)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 19
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0.0152 kg (const:15.2 / 1000)
-magazinepbmloaded_bb (Магазин ПБМ)::
+MagazinePBMLoaded_BB (Магазин ПБМ)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 22
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0.0152 kg (const:15.2 / 1000)
-magazinepbmloaded_nonlethal (Магазин ПБМ)::
+MagazinePBMLoaded_NonLethal (Магазин ПБМ)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 25
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0.0152 kg (const:15.2 / 1000)
-magazinefinisherloadedextendedsaloon (Магазин Навертыша (увеличенный))::
+MagazineFinisherLoadedExtendedSaloon (Магазин Навертыша (увеличенный))::
 	decl: file: src\host\GameModes\Saloon\SaloonRoles.sqf at line 477
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.0354 kg (const:35.4 / 1000)
-magazinefinisherloaded (Магазин Навертыша)::
+MagazineFinisherLoaded (Магазин Навертыша)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 316
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.0354 kg (const:35.4 / 1000)
-magazinesvtloaded (Магазин СВТ)::
+MagazineSVTLoaded (Магазин СВТ)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 329
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0.0327 kg (const:32.7 / 1000)
-magazineautoloaded (Магазин "Товарища")::
+MagazineAutoLoaded (Магазин "Товарища")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 341
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.23 kg (const:230 / 1000)
-magazinebastardloaded (Магазин "Мерзавца")::
+MagazineBastardLoaded (Магазин "Мерзавца")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 353
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.18 kg (const:180 / 1000)
-magazinepistolhandmadeloaded (Магазин "Дудатрёпа")::
+MagazinePistolHandmadeLoaded (Магазин "Дудатрёпа")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 366
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0.047 kg (const:47 / 1000)
-testfullmag (Магазин)::
+TestFullmag (Магазин)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\RangedWeapon.sqf at line 843
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0 kg (const:0)
-magazinepbm (Магазин ПБМ)::
+MagazinePBM (Магазин ПБМ)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 11
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0.0152 kg (const:15.2 / 1000)
-magazinerevolver (Магазин)::
+MagazineRevolver (Магазин)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 29
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0 kg (const:0)
-virtualmagazinedbshotgun (Магазин)::
+VirtualMagazineDBShotgun (Магазин)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 117
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0 kg (const:0)
-virtualmagazineshotgun (Магазин)::
+VirtualMagazineShotgun (Магазин)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 176
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0 kg (const:0)
-virtualmagazineshotgunmini (Магазин)::
+VirtualMagazineShotgunMini (Магазин)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 201
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0 kg (const:0)
-virtualmagazinepistoloneshoot (Магазин)::
+VirtualMagazinePistolOneShoot (Магазин)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 260
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0 kg (const:0)
-magazinefinisher (Магазин Навертыша)::
+MagazineFinisher (Магазин Навертыша)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 308
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.0354 kg (const:35.4 / 1000)
-magazinesvt (Магазин СВТ)::
+MagazineSVT (Магазин СВТ)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 320
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0.0327 kg (const:32.7 / 1000)
-magazineauto (Магазин "Товарища")::
+MagazineAuto (Магазин "Товарища")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 333
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.23 kg (const:230 / 1000)
-magazinebastard (Магазин "Мерзавца")::
+MagazineBastard (Магазин "Мерзавца")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 345
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.18 kg (const:180 / 1000)
-magazinepistolhandmade (Магазин "Дудатрёпа")::
+MagazinePistolHandmade (Магазин "Дудатрёпа")::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Magazines.sqf at line 357
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0.047 kg (const:47 / 1000)
-ammopbm_bb (Патрон)::
+AmmoPBM_BB (Патрон)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 16
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0168 kg (const:16.8 / 1000)
-ammopbmnonlethal (Патрон (защитный))::
+AmmoPBMNonLethal (Патрон (защитный))::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 20
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0168 kg (const:16.8 / 1000)
-ammoshotgunnonlethal (Патрон (защитный))::
+AmmoShotgunNonLethal (Патрон (защитный))::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 60
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0168 kg (const:16.8 / 1000)
-ammopbm (Патрон)::
+AmmoPBM (Патрон)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 11
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0168 kg (const:16.8 / 1000)
-ammorevolver (Патрон)::
+AmmoRevolver (Патрон)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 41
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0168 kg (const:16.8 / 1000)
-ammoshotgun (Патрон)::
+AmmoShotgun (Патрон)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 50
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0168 kg (const:16.8 / 1000)
-ammoshotgunmini (Патрон)::
+AmmoShotgunMini (Патрон)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 83
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.05 kg (const:50 / 1000)
-ammorifle (Патрон)::
+AmmoRifle (Патрон)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 100
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0227 kg (const:22.7 / 1000)
-ammopistolhandmade (Патрон)::
+AmmoPistolHandmade (Патрон)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 112
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0168 kg (const:16.8 / 1000)
-bulletcasepbm (Гильза)::
+BulletCasePBM (Гильза)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 36
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0053 kg (const:5.3 / 1000)
-bulletcaserevolver (Гильза)::
+BulletCaseRevolver (Гильза)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 46
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0053 kg (const:5.3 / 1000)
-bulletcaseshotgun (Гильза)::
+BulletCaseShotgun (Гильза)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 76
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0053 kg (const:5.3 / 1000)
-bulletcaseshotgunmini (Гильза)::
+BulletCaseShotgunMini (Гильза)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 94
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0053 kg (const:5.3 / 1000)
-bulletcaserifle (Гильза)::
+BulletCaseRifle (Гильза)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 107
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0053 kg (const:5.3 / 1000)
-bulletcasepistolhandmade (Гильза)::
+BulletCasePistolHandmade (Гильза)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Ammo.sqf at line 118
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0053 kg (const:5.3 / 1000)
-gmpreybryak (Бряк)::
+GMPreyBryak (Бряк)::
 	decl: file: src\host\GameModes\Prey\GM_Prey.sqf at line 411
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.00575 kg (const:5.75 / 1000)
-bryak (Бряк)::
+Bryak (Бряк)::
 	decl: file: src\host\GameObjects\Items\Stackable\Money.sqf at line 36
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.00575 kg (const:5.75 / 1000)
-zvak (Звяк)::
+Zvak (Звяк)::
 	decl: file: src\host\GameObjects\Items\Stackable\Money.sqf at line 17
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.00575 kg (const:5.75 / 1000)
-iammobase (Патрон)::
+IAmmoBase (Патрон)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\RangedWeapon.sqf at line 748
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0168 kg (const:16.8 / 1000)
-bulletcase (Гильза)::
+BulletCase (Гильза)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\RangedWeapon.sqf at line 804
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.0053 kg (const:5.3 / 1000)
-money (Деньги)::
+Money (Деньги)::
 	decl: file: src\host\GameObjects\Items\Stackable\Money.sqf at line 11
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-tooth (Зуб)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Tooth (Зуб)::
 	decl: file: src\host\GameObjects\Items\Stackable\Money.sqf at line 44
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.003 kg (const:3 / 1000)
-grenadefragment (Осколочная граната)::
+GrenadeFragment (Осколочная граната)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 99
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.28 kg (const:280 / 1000)
-ammoboxpbm_bb (Коробка)::
+AmmoBoxPBM_BB (Коробка)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\AmmoBoxes.sqf at line 205
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.13 kg (const:130 / 1000)
-ammoboxpbmnonlethal (Коробка)::
+AmmoBoxPBMNonLethal (Коробка)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\AmmoBoxes.sqf at line 210
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.13 kg (const:130 / 1000)
-ammoboxshotgunnonlethal (Коробка)::
+AmmoBoxShotgunNonLethal (Коробка)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\AmmoBoxes.sqf at line 227
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.13 kg (const:130 / 1000)
-ammoboxshotgunmini (Коробка)::
+AmmoBoxShotgunMini (Коробка)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\AmmoBoxes.sqf at line 233
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.13 kg (const:130 / 1000)
-ammoboxpbm (Коробка)::
+AmmoBoxPBM (Коробка)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\AmmoBoxes.sqf at line 199
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.13 kg (const:130 / 1000)
-ammoboxshotgun (Коробка)::
+AmmoBoxShotgun (Коробка)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\AmmoBoxes.sqf at line 221
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.13 kg (const:130 / 1000)
-ammoboxrevolver (Коробка)::
+AmmoBoxRevolver (Коробка)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\AmmoBoxes.sqf at line 215
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.13 kg (const:130 / 1000)
-ammoboxpistolhandmade (Коробка)::
+AmmoBoxPistolHandmade (Коробка)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\AmmoBoxes.sqf at line 239
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.13 kg (const:130 / 1000)
-ammoboxrifle (Коробка)::
+AmmoBoxRifle (Коробка)::
 	decl: file: src\host\GameObjects\Items\RangedWeapons\AmmoBoxes.sqf at line 245
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.13 kg (const:130 / 1000)
-rag (Тряпка)::
+Rag (Тряпка)::
 	decl: file: src\host\GameObjects\Items\Medical\Bandages.sqf at line 197
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-samokrutkadisabled (Грибная самокрутка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+SamokrutkaDisabled (Грибная самокрутка)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 297
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.00108 kg (const:1.08 / 1000)
-candledisabled (Свеча)::
+CandleDisabled (Свеча)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 322
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.025 kg (const:25 / 1000)
-sigarettedisabled (Сигарета)::
+SigaretteDisabled (Сигарета)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 287
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.00108 kg (const:1.08 / 1000)
-samokrutka (Грибная самокрутка)::
+Samokrutka (Грибная самокрутка)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 291
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.00108 kg (const:1.08 / 1000)
-candle (Свеча)::
+Candle (Свеча)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 301
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.025 kg (const:25 / 1000)
-match (Спичка)::
+Match (Спичка)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 345
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-lampkerosenedisabled (Керосиновая лампа)::
+LampKeroseneDisabled (Керосиновая лампа)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 340
 	size: ITEM_SIZE_LARGE (4) (const: 2)
 	weight: 0.36 kg (const:360 / 1000)
-torchdisabled (Факел)::
+TorchDisabled (Факел)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 119
 	size: ITEM_SIZE_SMALL (2) (const: 4)
 	weight: 0.56 kg (const:560 / 1000)
-sigarette (Сигарета)::
+Sigarette (Сигарета)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 237
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.00108 kg (const:1.08 / 1000)
-lampkerosene (Керосиновая лампа)::
+LampKerosene (Керосиновая лампа)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 326
 	size: ITEM_SIZE_LARGE (4) (const: 2)
 	weight: 0.36 kg (const:360 / 1000)
-flashlightloaded (Фонарик)::
+FlashlightLoaded (Фонарик)::
 	decl: file: src\host\GameObjects\Items\Lighting\Electronic.sqf at line 188
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.315 kg (const:315 / 1000)
-torch (Факел)::
+Torch (Факел)::
 	decl: file: src\host\GameObjects\Items\Lighting\Natural.sqf at line 123
 	size: ITEM_SIZE_SMALL (2) (const: 4)
 	weight: 0.56 kg (const:560 / 1000)
-flashlight (Фонарик)::
+Flashlight (Фонарик)::
 	decl: file: src\host\GameObjects\Items\Lighting\Electronic.sqf at line 14
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.315 kg (const:315 / 1000)
-handcuffkey (Ключ от наручников)::
+HandcuffKey (Ключ от наручников)::
 	decl: file: src\host\GameObjects\Items\Captives\CaptiveBase.sqf at line 416
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.01 kg (const:10 / 1000)
-gmdetectiveitemkeyuniversal (Ключ)::
+GMDetectiveItemKeyUniversal (Ключ)::
 	decl: file: src\host\GameModes\Detective\GM_Detective.sqf at line 489
 	size: ITEM_SIZE_TINY (1) (const: 1)
 	weight: 0.01 kg (const:10 / 1000)
-screwdriver (Отвёртка)::
+Screwdriver (Отвёртка)::
 	decl: file: src\host\GameObjects\Items\Instruments\Engineering.sqf at line 16
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.058 kg (const:58 / 1000)
-wirecutters (Кусачки)::
+WireCutters (Кусачки)::
 	decl: file: src\host\GameObjects\Items\Instruments\Engineering.sqf at line 23
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.06 kg (const:60 / 1000)
-gloves (Перчатки)::
+Gloves (Перчатки)::
 	decl: file: src\host\GameObjects\Items\Instruments\Engineering.sqf at line 32
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.015 kg (const:15 / 1000)
-multimeter (Мультиметр)::
+Multimeter (Мультиметр)::
 	decl: file: src\host\GameObjects\Items\Instruments\Engineering.sqf at line 40
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.08 kg (const:80 / 1000)
-wrench (Гаечный ключ)::
+Wrench (Гаечный ключ)::
 	decl: file: src\host\GameObjects\Items\Instruments\Engineering.sqf at line 49
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0.062 kg (const:62 / 1000)
-hammer (Мотолок)::
+Hammer (Мотолок)::
 	decl: file: src\host\GameObjects\Items\Instruments\Engineering.sqf at line 57
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.8 kg (const:800 / 1000)
-crowbar (Лом)::
+Crowbar (Лом)::
 	decl: file: src\host\GameObjects\Items\Instruments\Engineering.sqf at line 67
 	size: ITEM_SIZE_MEDIUM (3) (const: 4)
 	weight: 5.2 kg (const:5.2)
-shovel (Лопата)::
+Shovel (Лопата)::
 	decl: file: src\host\GameObjects\Items\Instruments\Engineering.sqf at line 83
 	size: ITEM_SIZE_MEDIUM (3) (const: 4)
 	weight: 0.72 kg (const:720 / 1000)
-toolpipe (Труба)::
+ToolPipe (Труба)::
 	decl: file: src\host\GameObjects\Items\Instruments\Engineering.sqf at line 123
 	size: ITEM_SIZE_MEDIUM (3) (const: 4)
 	weight: 3.4 kg (const:3.4)
-toolstraigthpipe (Труба)::
+ToolStraigthPipe (Труба)::
 	decl: file: src\host\GameObjects\Items\Instruments\Engineering.sqf at line 132
 	size: ITEM_SIZE_MEDIUM (3) (const: 4)
 	weight: 3.7 kg (const:3.7)
-smallredseatchair (Стул)::
+SmallRedseatChair (Стул)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 78
 	size: ITEM_SIZE_LARGE (4) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-gmpreychairlibrary (Стул)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+GMPreyChairLibrary (Стул)::
 	decl: file: src\host\GameModes\Prey\GM_Prey.sqf at line 401
 	size: ITEM_SIZE_BIG (5) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-stumpchair (Пенёк)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+StumpChair (Пенёк)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 53
 	size: ITEM_SIZE_LARGE (4) (const: 6)
 	weight: 15 kg (const:15)
-smallchair (Стул)::
+SmallChair (Стул)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 61
 	size: ITEM_SIZE_LARGE (4) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-smallchair2 (Стул)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+SmallChair2 (Стул)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 71
 	size: ITEM_SIZE_LARGE (4) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-chairlibrary (Стул)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+ChairLibrary (Стул)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 84
 	size: ITEM_SIZE_BIG (5) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-stripedchair (Стул)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+StripedChair (Стул)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 91
 	size: ITEM_SIZE_HUGE (6) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-chaircasual (Стул)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+ChairCasual (Стул)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 97
 	size: ITEM_SIZE_HUGE (6) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-chairbigcasual (Стул)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+ChairBigCasual (Стул)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 104
 	size: ITEM_SIZE_HUGE (6) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-redpappedchair (Стул)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+RedPappedChair (Стул)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 111
 	size: ITEM_SIZE_BIG (5) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-rattanchair (Стул)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+RattanChair (Стул)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 118
 	size: ITEM_SIZE_HUGE (6) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-barchair (Стул)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+BarChair (Стул)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 128
 	size: ITEM_SIZE_LARGE (4) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-woodenchair (Стул)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+WoodenChair (Стул)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 137
 	size: ITEM_SIZE_BIG (5) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-ichairasitem (Стул)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+IChairAsItem (Стул)::
 	decl: file: src\host\GameObjects\Items\Chairs\ChairItems.sqf at line 16
 	size: ITEM_SIZE_MEDIUM (3) (const: 6)
-	weight: 1 kg (const:1000 / 1000)
-olderwoodencup (Деревянная кружка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+OlderWoodenCup (Деревянная кружка)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Kitchen.sqf at line 241
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.2 kg (const:200 / 1000)
-gmpreywoodencup (Деревянная кружка)::
+GMPreyWoodenCup (Деревянная кружка)::
 	decl: file: src\host\GameModes\Prey\GM_Prey.sqf at line 415
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.2 kg (const:200 / 1000)
-woodencup (Деревянная кружка)::
+WoodenCup (Деревянная кружка)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Kitchen.sqf at line 234
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.2 kg (const:200 / 1000)
-metalcup (Стальная чашка)::
+MetalCup (Стальная чашка)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Kitchen.sqf at line 245
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.2 kg (const:200 / 1000)
-milkbottle (Стеклянная бутылка)::
+MilkBottle (Стеклянная бутылка)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Glass.sqf at line 67
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-spirtbottle (Стеклянная бутылка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+SpirtBottle (Стеклянная бутылка)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Glass.sqf at line 73
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-gmdetectiveitemglassvenombottle (Стеклянная бутылка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+GMDetectiveItemGlassVenomBottle (Стеклянная бутылка)::
 	decl: file: src\host\GameModes\Detective\GM_Detective.sqf at line 483
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-gmpreyglassbottle (Стеклянная бутылка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+GMPreyGlassBottle (Стеклянная бутылка)::
 	decl: file: src\host\GameModes\Prey\GM_Prey.sqf at line 391
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-mug (Кружка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Mug (Кружка)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Glass.sqf at line 91
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.2 kg (const:200 / 1000)
-glassbottle (Стеклянная бутылка)::
+GlassBottle (Стеклянная бутылка)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Glass.sqf at line 32
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-glassgoblet (Стеклянный бокал)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+GlassGoblet (Стеклянный бокал)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Glass.sqf at line 81
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.2 kg (const:200 / 1000)
-liqpainkiller (Обезболивающее)::
+LiqPainkiller (Обезболивающее)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Medical.sqf at line 133
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-liqdemitolin (Демитолин)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+LiqDemitolin (Демитолин)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Medical.sqf at line 139
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-liqtovimin (Товимин)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+LiqTovimin (Товимин)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Medical.sqf at line 145
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-canister (Канистра)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Canister (Канистра)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Instruments.sqf at line 43
 	size: ITEM_SIZE_BIG (5) (const: 1)
 	weight: 5 kg (const:5000 / 1000)
-glassvial (Флакон)::
+GlassVial (Флакон)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Medical.sqf at line 120
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-glasslargebreaker (Большой стакан)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+GlassLargeBreaker (Большой стакан)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Chemical.sqf at line 10
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.35 kg (const:350 / 1000)
-glasslargebowl (Миска для смешивания)::
+GlassLargeBowl (Миска для смешивания)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Chemical.sqf at line 19
 	size: ITEM_SIZE_SMALL (2) (const: 3)
 	weight: 0.4 kg (const:400 / 1000)
-woodenbucket (Ведро)::
+WoodenBucket (Ведро)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Instruments.sqf at line 36
 	size: ITEM_SIZE_LARGE (4) (const: 4)
-	weight: 1 kg (const:1000 / 1000)
-bloodpack (Пакет крови)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+BloodPack (Пакет крови)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Medical.sqf at line 19
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-ivbag (Пакет для внутреннего переливания)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+IVBag (Пакет для внутреннего переливания)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Medical.sqf at line 23
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
+	weight: NEED_ALLOC (const:1000 / 1000)
 spric_test (Шприц)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Medical.sqf at line 128
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-kastrula (Кастрюля)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Kastrula (Кастрюля)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Kitchen.sqf at line 14
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
 	weight: 0.7 kg (const:700 / 1000)
-soupplate (Тарелка)::
+SoupPlate (Тарелка)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Kitchen.sqf at line 179
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-cup (Чашка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Cup (Чашка)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Kitchen.sqf at line 222
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.2 kg (const:200 / 1000)
-iglassreagentitem (Стеклянная емкость)::
+IGlassReagentItem (Стеклянная емкость)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Glass.sqf at line 11
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-iglassreagentcont (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+IGlassReagentCont (any)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Glass.sqf at line 27
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-bucket (Ведро)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Bucket (Ведро)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Instruments.sqf at line 14
 	size: ITEM_SIZE_MEDIUM (3) (const: 4)
-	weight: 1 kg (const:1000 / 1000)
-ireagentitembag (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+IReagentItemBag (any)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Medical.sqf at line 13
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-syringe (Шприц)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Syringe (Шприц)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Medical.sqf at line 29
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-chembowl (Ступа)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+ChemBowl (Ступа)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Chemical.sqf at line 30
 	size: ITEM_SIZE_SMALL (2) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-internalreagents (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+InternalReagents (any)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\ReagentContainer.sqf at line 13
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-ireagentnditem (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+IReagentNDItem (any)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\ReagentContainer.sqf at line 92
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-bloodpoolbig (Кровь)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+BloodPoolBig (Кровь)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Cleanable.sqf at line 66
 	size: ITEM_SIZE_LARGE (4) (const: 1)
 	weight: -1 kg (const:-1)
-bloodpoolmedium (Кровь)::
+BloodPoolMedium (Кровь)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Cleanable.sqf at line 60
 	size: ITEM_SIZE_LARGE (4) (const: 1)
 	weight: -1 kg (const:-1)
-bloodpoolsmall (Кровь)::
+BloodPoolSmall (Кровь)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Cleanable.sqf at line 34
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
 	weight: -1 kg (const:-1)
-ratshitmedium (Мельтешиное говно)::
+RatShitMedium (Мельтешиное говно)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Cleanable.sqf at line 71
 	size: ITEM_SIZE_HUGE (6) (const: 1)
 	weight: -1 kg (const:-1)
-koradizinbox (Корадизин)::
+KoradizinBox (Корадизин)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Pills.sqf at line 85
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.03 kg (const:30 / 1000)
-pillboxsmall (Коробка таблеток)::
+PillBoxSmall (Коробка таблеток)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Pills.sqf at line 68
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.03 kg (const:30 / 1000)
-painkillerbox (Коробка обезболивающего)::
+PainkillerBox (Коробка обезболивающего)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Pills.sqf at line 73
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.03 kg (const:30 / 1000)
-cetalinbox (Цеталин)::
+CetalinBox (Цеталин)::
 	decl: file: src\host\GameObjects\Items\ReagentContainers\Pills.sqf at line 79
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.03 kg (const:30 / 1000)
-head1 (Голова)::
+Head1 (Голова)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 1019
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
-	weight: 1 kg (const:1000 / 1000)
-head2 (Голова)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Head2 (Голова)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 1023
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
-	weight: 1 kg (const:1000 / 1000)
-head3 (Голова)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Head3 (Голова)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 1027
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
-	weight: 1 kg (const:1000 / 1000)
-gmpreyheadtalking (Голова)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+GMPreyHeadTalking (Голова)::
 	decl: file: src\host\GameModes\Prey\GM_Prey.sqf at line 326
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
-	weight: 1 kg (const:1000 / 1000)
-armhook (Крюк)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+ArmHook (Крюк)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\NonOrganicBodyParts.sqf at line 11
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
-	weight: 1 kg (const:1000 / 1000)
-arm (Рука)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Arm (Рука)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 1060
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
-	weight: 1 kg (const:1000 / 1000)
-leg (Нога)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Leg (Нога)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 1087
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
-	weight: 1 kg (const:1000 / 1000)
-body (Туловище)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Body (Туловище)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 628
 	size: ITEM_SIZE_MEDIUM (3) (const: 4)
-	weight: 1 kg (const:1000 / 1000)
-head (Голова)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Head (Голова)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 935
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
-	weight: 1 kg (const:1000 / 1000)
-itwosidedbodypart (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+ITwoSidedBodyPart (any)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 1032
 	size: ITEM_SIZE_MEDIUM (3) (const: 5)
-	weight: 1 kg (const:1000 / 1000)
-eye (Глаз)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Eye (Глаз)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 417
 	size: ITEM_SIZE_TINY (1) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-kidney (Почка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Kidney (Почка)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 518
 	size: ITEM_SIZE_SMALL (2) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-brain (Мозг)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Brain (Мозг)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 355
 	size: ITEM_SIZE_SMALL (2) (const: 3)
-	weight: 1 kg (const:1000 / 1000)
-heart (Сердце)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Heart (Сердце)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 442
 	size: ITEM_SIZE_SMALL (2) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-lungs (Легкие)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Lungs (Легкие)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 654
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
-	weight: 1 kg (const:1000 / 1000)
-guts (Кишки)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Guts (Кишки)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 553
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
-	weight: 1 kg (const:1000 / 1000)
-stomach (Желудок)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Stomach (Желудок)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 601
 	size: ITEM_SIZE_SMALL (2) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-itwosidedorgan (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+ITwoSidedOrgan (any)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 305
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-vitalorgan (Жизненно важный орган)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+VitalOrgan (Жизненно важный орган)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 334
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-tongue (Язык)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Tongue (Язык)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 410
 	size: ITEM_SIZE_TINY (1) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-liver (Печень)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Liver (Печень)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 478
 	size: ITEM_SIZE_SMALL (2) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-iorgancontainer (any)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+IOrganContainer (any)::
 	decl: file: src\host\GameObjects\Items\Bodyparts\Organs.sqf at line 547
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-lapsha (Лапша)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Lapsha (Лапша)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 75
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.2 kg (const:200 / 1000)
-lepeshka (Лепёшка)::
+Lepeshka (Лепёшка)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 81
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0.2 kg (const:200 / 1000)
-cutlet (Котлетка)::
+Cutlet (Котлетка)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 140
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.15 kg (const:150 / 1000)
-meatminced (Фарш)::
+MeatMinced (Фарш)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 134
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.3 kg (const:300 / 1000)
-gmpreybiba (Пирожок)::
+GMPreyBiba (Пирожок)::
 	decl: file: src\host\GameModes\Prey\GM_Prey.sqf at line 423
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.08 kg (const:80 / 1000)
-gmpreyrottenegg (Яичко)::
+GMPreyRottenEgg (Яичко)::
 	decl: file: src\host\GameModes\Prey\GM_Prey.sqf at line 429
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-sugarshaker (Сахар)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+SugarShaker (Сахар)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 366
 	size: ITEM_SIZE_TINY (1) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-peppershaker (Перец)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+PepperShaker (Перец)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 371
 	size: ITEM_SIZE_TINY (1) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-gmpreymeltesh (Мельтешонок)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+GMPreyMeltesh (Мельтешонок)::
 	decl: file: src\host\GameModes\Prey\GM_Prey.sqf at line 406
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-meatflower (Мясной цветок)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Meatflower (Мясной цветок)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Mushrooms.sqf at line 25
 	size: ITEM_SIZE_HUGE (6) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-blevanton (Блевантон)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Blevanton (Блевантон)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Mushrooms.sqf at line 31
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-gnilokornik (Гнилокорник)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Gnilokornik (Гнилокорник)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Mushrooms.sqf at line 37
 	size: ITEM_SIZE_BIG (5) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-zhivoglot (Живоглот)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Zhivoglot (Живоглот)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Mushrooms.sqf at line 43
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-yaichnik (Яичник)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Yaichnik (Яичник)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Mushrooms.sqf at line 49
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-svetlolik (Светлолик)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Svetlolik (Светлолик)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Mushrooms.sqf at line 55
 	size: ITEM_SIZE_SMALL (2) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-tumannik (Туманник)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Tumannik (Туманник)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Mushrooms.sqf at line 62
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-slimehat (Слизнешляпик)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Slimehat (Слизнешляпик)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Mushrooms.sqf at line 17
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-pill (Таблетка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Pill (Таблетка)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 59
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0.002 kg (const:2 / 1000)
-testo (Тесто)::
+Testo (Тесто)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 68
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.2 kg (const:200 / 1000)
-gribchopped (Нарезанные грибы)::
+GribChopped (Нарезанные грибы)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 87
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.05 kg (const:50 / 1000)
-meat (Мясо)::
+Meat (Мясо)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 94
 	size: ITEM_SIZE_MEDIUM (3) (const: 3)
-	weight: 0.817776 kg (const:(linearConversion [0,1,random 1,800 / 1000,850 / 1000]))
-meatchopped (Кусок мяса)::
+	weight: 0.835808 kg (const:(linearConversion [0,1,random 1,800 / 1000,850 / 1000]))
+MeatChopped (Кусок мяса)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 125
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.3 kg (const:300 / 1000)
-bun (Пирожок)::
+Bun (Пирожок)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 147
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.08 kg (const:80 / 1000)
-pancakes (Блинцы)::
+Pancakes (Блинцы)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 156
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.13 kg (const:130 / 1000)
-omlet (Омлетик)::
+Omlet (Омлетик)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 164
 	size: ITEM_SIZE_SMALL (2) (const: 2)
-	weight: 0.062 kg (const:(FLOOR linearConversion [0,1,random 1,(60)min(90),(90)max(60)+1]) / 1000)
-butter (Брикет масла)::
+	weight: 0.078 kg (const:(FLOOR linearConversion [0,1,random 1,(60)min(90),(90)max(60)+1]) / 1000)
+Butter (Брикет масла)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 173
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.2 kg (const:200 / 1000)
-butterpiece (Кусочек масла)::
+ButterPiece (Кусочек масла)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 204
 	size: ITEM_SIZE_TINY (1) (const: 2)
 	weight: 0.04 kg (const:40 / 1000)
-bread (Хлеб)::
+Bread (Хлеб)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 250
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
 	weight: 0.3 kg (const:300 / 1000)
-breadchopped (Кусок хлеба)::
+BreadChopped (Кусок хлеба)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 281
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.3 kg (const:300 / 1000)
-tea (Чай)::
+Tea (Чай)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 318
 	size: ITEM_SIZE_SMALL (2) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-egg (Яичко)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Egg (Яичко)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 328
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-saltshaker (Соль)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+SaltShaker (Соль)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 335
 	size: ITEM_SIZE_TINY (1) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-melteshonok (Мельтешонок)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Melteshonok (Мельтешонок)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 378
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-shavirma (Шавирма)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Shavirma (Шавирма)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 385
 	size: ITEM_SIZE_SMALL (2) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-pie (Пирог)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Pie (Пирог)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 391
 	size: ITEM_SIZE_SMALL (2) (const: 3)
-	weight: 0.359 kg (const:(FLOOR linearConversion [0,1,random 1,(300)min(400),(400)max(300)+1]) / 1000)
-piepiece (Кусок пирога)::
+	weight: 0.391 kg (const:(FLOOR linearConversion [0,1,random 1,(300)min(400),(400)max(300)+1]) / 1000)
+PiePiece (Кусок пирога)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 440
 	size: ITEM_SIZE_SMALL (2) (const: 2)
 	weight: 0.01 kg (const:10 / 1000)
-poo (Тёплый поезд)::
+Poo (Шмат говна)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Food.sqf at line 451
 	size: ITEM_SIZE_SMALL (2) (const: 2)
-	weight: 0.011 kg (const:(FLOOR linearConversion [0,1,random 1,(6)min(20),(20)max(6)+1]) / 1000)
-mushroom (Еда)::
+	weight: 0.01 kg (const:(FLOOR linearConversion [0,1,random 1,(6)min(20),(20)max(6)+1]) / 1000)
+Mushroom (Еда)::
 	decl: file: src\host\GameObjects\Items\Food\Foods\Mushrooms.sqf at line 10
 	size: ITEM_SIZE_MEDIUM (3) (const: 2)
-	weight: 1 kg (const:1000 / 1000)
-folder (Папка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Folder (Папка)::
 	decl: file: src\host\GameObjects\Items\Office\Books.sqf at line 366
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-bookchemreactions (Книга)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+BookChemReactions (Книга)::
 	decl: file: src\host\GameObjects\Items\Office\Books.sqf at line 408
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-notepad (Блокнот)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Notepad (Блокнот)::
 	decl: file: src\host\GameObjects\Items\Office\Books.sqf at line 351
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-documents (Документы)::
+Documents (Документы)::
 	decl: file: src\host\GameObjects\Items\Office\Books.sqf at line 356
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-documents1 (Документы)::
+Documents1 (Документы)::
 	decl: file: src\host\GameObjects\Items\Office\Books.sqf at line 361
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-identitydocs (Документы )::
+IdentityDocs (Документы )::
 	decl: file: src\host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 725
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-idenitydocsinternal (Лист регистрации )::
+IdenityDocsInternal (Лист регистрации )::
 	decl: file: src\host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 750
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-gmdet_item_brokenpaper (Листок)::
+GMDet_Item_BrokenPaper (Листок)::
 	decl: file: src\host\GameModes\Detective\GM_Detective.sqf at line 620
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-rdetitmfarmownerdoc (Документ владения Калековской Мельтешиной Фермой)::
+RDetItmFarmOwnerDoc (Документ владения Калековской Мельтешиной Фермой)::
 	decl: file: src\host\GameModes\Detective\DetectiveModeRoles.sqf at line 108
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-rdetectworkdoc (Материалы дела)::
+RDetectWorkDoc (Материалы дела)::
 	decl: file: src\host\GameModes\Detective\DetectiveModeRoles.sqf at line 464
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-rdetectcheckmurder (Бланк анализа подозреваемого)::
+RDetectCheckMurder (Бланк анализа подозреваемого)::
 	decl: file: src\host\GameModes\Detective\DetectiveModeRoles.sqf at line 470
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-rdetectmilkdoc (Документы для помещика с КМФ)::
+RDetectMilkDoc (Документы для помещика с КМФ)::
 	decl: file: src\host\GameModes\Detective\DetectiveModeRoles.sqf at line 768
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-item_oldneworder_distancecheckcaptive (Странная бумага)::
+Item_OldNewOrder_distanceCheckCaptive (Странная бумага)::
 	decl: file: src\host\GameModes\Dirtpit\GM_OldNewOrder.sqf at line 624
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-gmpreymap (Карта голодных пещер)::
+GMPreyMap (Карта голодных пещер)::
 	decl: file: src\host\GameModes\Prey\GM_Prey.sqf at line 434
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-papersaloonownerbar (Бумаги владения баром Дыра)::
+PaperSaloonOwnerBar (Бумаги владения баром Дыра)::
 	decl: file: src\host\GameModes\Saloon\GM_Saloon.sqf at line 570
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-papersaloonownerbarv2 (Бумаги владения баром Дыра)::
+PaperSaloonOwnerBarV2 (Бумаги владения баром Дыра)::
 	decl: file: src\host\GameModes\Saloon\GM_Saloon.sqf at line 1145
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-rokopovopaperdocs (Документы)::
+ROkopovoPaperDocs (Документы)::
 	decl: file: src\host\GameModes\Okopovo\Tasks.sqf at line 215
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-book (Книга)::
+Book (Книга)::
 	decl: file: src\host\GameObjects\Items\Office\Books.sqf at line 167
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-paper (Листок)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+Paper (Листок)::
 	decl: file: src\host\GameObjects\Items\Office\Books.sqf at line 188
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.005 kg (const:5 / 1000)
-iwritablecontentitem (any)::
+IWritableContentItem (any)::
 	decl: file: src\host\GameObjects\Items\Office\Books.sqf at line 51
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-paperholder (Стопка бумаги)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+PaperHolder (Стопка бумаги)::
 	decl: file: src\host\GameObjects\Items\Office\Books.sqf at line 371
 	size: ITEM_SIZE_MEDIUM (3) (const: 1)
 	weight: 0 kg (const:0)
-penred (Ручка)::
+PenRed (Ручка)::
 	decl: file: src\host\GameObjects\Items\Office\Writters.sqf at line 30
 	size: ITEM_SIZE_TINY (1) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-penblack (Ручка)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+PenBlack (Ручка)::
 	decl: file: src\host\GameObjects\Items\Office\Writters.sqf at line 23
 	size: ITEM_SIZE_TINY (1) (const: 1)
-	weight: 1 kg (const:1000 / 1000)
-trapenabled (Капкан)::
+	weight: NEED_ALLOC (const:1000 / 1000)
+TrapEnabled (Капкан)::
 	decl: file: src\host\GameObjects\Items\Traps\Trap.sqf at line 255
 	size: ITEM_SIZE_MEDIUM (3) (const: 4)
 	weight: 1.35 kg (const:1.35)
-trap (Капкан)::
+Trap (Капкан)::
 	decl: file: src\host\GameObjects\Items\Traps\Trap.sqf at line 142
 	size: ITEM_SIZE_MEDIUM (3) (const: 4)
 	weight: 1.35 kg (const:1.35)
-handcuffitem (Наручники)::
+HandcuffItem (Наручники)::
 	decl: file: src\host\GameObjects\Items\Captives\CaptiveBase.sqf at line 244
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.38 kg (const:380 / 1000)
-ropeitem (Верёвка)::
+RopeItem (Верёвка)::
 	decl: file: src\host\GameObjects\Items\Captives\CaptiveBase.sqf at line 446
 	size: ITEM_SIZE_SMALL (2) (const: 1)
 	weight: 0.057 kg (const:57 / 1000)
