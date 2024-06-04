@@ -26,6 +26,8 @@ class(IStruct) extends(IDestructible)
 	getterconst_func(getChunkType,CHUNK_TYPE_STRUCTURE);
 	getter_func(isStruct,true);
 
+	getter_func(canApplyDamage,true);
+
 	editor_attribute("EditorVisible" arg "custom_provider:model") editor_attribute("Tooltip" arg "Модель структуры")
 	var(model,"a3\structures_f_epa\items\food\canteen_f.p3d");
 	editor_attribute("ReadOnly")
@@ -331,6 +333,7 @@ endclass
 editor_attribute("HiddenClass")
 class(IStructNonReplicated) extends(IStruct)
 	var(__nonrep_flag,false);
+	getter_func(canApplyDamage,false);
 	func(initModel)
 	{
 		objParams_3(_pos,_dir,_vec);

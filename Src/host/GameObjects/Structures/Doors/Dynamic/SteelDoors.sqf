@@ -79,6 +79,7 @@ endclass
 
 class(GreenAmbarWithDoors) extends(DoorDynamic)
 	getter_func(canUseMainAction,false); //В амбаре нельзя юзать такие дейсвтия
+	getter_func(canApplyDamage,false);
 	var(model,"Land_Barn_W_02");
 	var(material,"MatBeton");
 	var(name,"Амбар");
