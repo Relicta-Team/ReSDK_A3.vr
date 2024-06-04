@@ -1310,7 +1310,7 @@ class(IDestructible) extends(GameObject)
 			callSelfParams(sendDamageVisualOnPos,_worldPos arg _canUseEffect arg _canUseSound);
 		};
 
-		if !callSelf(canApplyDamage) exitWith {
+		if (!callSelf(canApplyDamage) || callSelf(getClassName) == "IStruct") exitWith {
 			_canUseEffect = false;
 			call _effector;
 		};
@@ -1352,11 +1352,6 @@ class(IDestructible) extends(GameObject)
 				};
 			};
 		};
-	/*	//По правилам, описанным на B 380 мы применяем модификатор повреждений в этом методе, вместо стандартного модификатора
-		private _passed = //[
-			(_amount - getSelf(dr)) max 0
-		//] call gurps_applyDamageType
-		;*/
 		
 		callSelfParams(onAffectDamageToPos,_amount arg _type arg _worldPos arg _cause);
 
@@ -1375,8 +1370,7 @@ class(IDestructible) extends(GameObject)
 			callSelfParams(onChangeObjectHP,2);
 			private _rr = (getSelf(ht) call gurps_rollstd);
 			if (getRollType(_rr) in [DICE_FAIL,DICE_CRITFAIL]) then {
-				callSelf(onDestroyed);
-				delete(this);
+				//
 			};
 		};
 		if (_newhp <= (-1*_maxhp) && _newhp > (-5*_maxhp)) exitWith {
