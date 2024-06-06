@@ -691,6 +691,8 @@ class(ItemRadio) extends(Item)
 	var(name,"Радио");
 
 	var(model,"a3\structures_f\items\electronics\portablelongrangeradio_f.p3d");
+	var(weight,gramm(400));
+	var(size,ITEM_SIZE_SMALL);
 
 	getterconst_func(isRadio,true);
 	var(radioIsEnabled,true);

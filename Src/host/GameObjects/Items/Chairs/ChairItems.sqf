@@ -55,12 +55,14 @@ class(StumpChair) extends(IChairAsItem)
 	var(name,"Пенёк");
 	getterconst_func(getChairOffsetPos,vec3(0,-0.1,-0.25));
 	var(weight,15);
+	var(size,ITEM_SIZE_LARGE);
 endclass
 
 
 class(SmallChair) extends(IChairAsItem)
 	var(icon,invicon(brownchair));
 	var(model,"ca\buildings\furniture\ch_mod_d.p3d");
+	var(size,ITEM_SIZE_LARGE);
 	getterconst_func(getChairOffsetPos,vec3(0,0,0.01));
 	getterconst_func(getChairOffsetDir,-180);
 endclass
