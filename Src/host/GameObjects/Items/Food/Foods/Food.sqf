@@ -213,6 +213,7 @@ endclass
 
 class(Muka) extends(Item)
 	var(name,"Мука");
+	var(material,"MatOrganic");
 	var(desc,"Обозначения на пачке вряд-ли скажут о её содержимом.");
 	var(model,"ml_shabut\sovokgoods\risochek.p3d");
 	var(size,ITEM_SIZE_MEDIUM);
@@ -333,6 +334,7 @@ endclass
 
 class(Egg) extends(IFoodItem)
 	var(name,"Яичко");
+	var(weight,gramm(730));
 	var(model,"relicta_models\models\mushroom\egg.p3d");
 	var(reagents,[vec2("Nutriment",15)]newReagentsFood);
 endclass

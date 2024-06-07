@@ -1297,6 +1297,11 @@ class(IDestructible) extends(GameObject)
 	func(onDestroyed)
 	{
 		objParams();
+		private _p = callSelf(getModelPosition);
+		for "_i" from 1 to randInt(3,6) do {
+			private _worldPos = _p vectorAdd [rand(-0.2,0.2),rand(-0.2,0.2),rand(-0.2,0.2)];
+			callSelfParams(sendDamageVisualOnPos,_worldPos arg true arg true arg false);
+		};
 	};
 
 	func(applyDamage)
@@ -1306,8 +1311,9 @@ class(IDestructible) extends(GameObject)
 
 		private _canUseEffect = true;
 		private _canUseSound = true;
+		private _useBlockSound = true;
 		private _effector = {
-			callSelfParams(sendDamageVisualOnPos,_worldPos arg _canUseEffect arg _canUseSound);
+			callSelfParams(sendDamageVisualOnPos,_worldPos arg _canUseEffect arg _canUseSound arg _useBlockSound);
 		};
 
 		if (!callSelf(canApplyDamage) || callSelf(getClassName) == "IStruct") exitWith {
@@ -1356,6 +1362,7 @@ class(IDestructible) extends(GameObject)
 		callSelfParams(onAffectDamageToPos,_amount arg _type arg _worldPos arg _cause);
 
 		_canUseEffect = _amount > 0;
+		_useBlockSound = _amount <= 0;
 		call _effector;
 
 		modSelf(hp,- _amount);
@@ -1463,9 +1470,10 @@ class(IDestructible) extends(GameObject)
 
 	func(sendDamageVisualOnPos)
 	{
-		objParams_3(_pos,_doEffect,_doSound);
+		objParams_4(_pos,_doEffect,_doSound,_useBlockSound);
 		if isNullVar(_doEffect) then {_doEffect = true};
 		if isNullVar(_doSound) then {_doSound = false};
+		if isNullVar(_useBlockSound) then {_useBlockSound = true};
 
 		private _mat = getSelf(material);
 		if isNullVar(_mat) exitWith {};
@@ -1479,7 +1487,7 @@ class(IDestructible) extends(GameObject)
 
 
 		if (_doSound) then {
-			private _sound = callFunc(_mat,getDamageSound);
+			private _sound = ifcheck(_useBlockSound,callFunc(_mat,getResistSound),callFunc(_mat,getDamageSound));
 			if (_sound == stringEmpty) exitWith {};
 			callSelfParams(playSound,_sound arg randInt(0.85,1.15) arg 15 arg null arg _pos);
 		};

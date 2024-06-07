@@ -22,11 +22,25 @@ class(MatBase) attribute(staticInit)
 	var(damageEffect,0);
 	var(damageSounds,[]);
 
+	var(resistSounds,[]);
+
 	getter_func(getDamageEffect,getSelf(damageEffect));
 	func(getDamageSound)
 	{
 		objParams();
 		private _list = getSelf(damageSounds);
+		if not_equalTypes(_list,[]) exitWith {
+			if not_equalTypes(_list,"") exitWith {""};
+			_list;
+		};
+		if (count _list == 0) exitWith {""};
+		pick _list
+	};
+
+	func(getResistSound)
+	{
+		objParams();
+		private _list = getSelf(resistSounds);
 		if not_equalTypes(_list,[]) exitWith {
 			if not_equalTypes(_list,"") exitWith {""};
 			_list;
@@ -54,6 +68,8 @@ class(MatStone) extends(MatBase)
 
 	var(damageEffect,SLIGHT_DAM_STONE);
 	var(damageSounds,["damage\stone_1" arg "damage\stone_2" arg "damage\stone_3"]);
+	var(resistSounds,["damage\block_stone_1" arg "damage\block_stone_2"]);
+	
 
 	getterconst_func(getWeightCoefForCalcHP,150);
 
@@ -65,6 +81,8 @@ class(MatBeton) extends(MatStone)
 	var(damageEffect,SLIGHT_DAM_BETON);
 	var(color,"8C8C8C");
 	var(stepSound,["concrete" arg 5]);
+
+	var(resistSounds,["damage\block_beton_1" arg "damage\block_beton_2" arg "damage\block_beton_3"]);
 	getterconst_func(getWeightCoefForCalcHP,120);
 
 endclass
@@ -86,6 +104,7 @@ class(MatWood) extends(MatBase)
 
 	var(damageEffect,SLIGHT_DAM_WOOD);
 	var(damageSounds,["damage\wood_1" arg "damage\wood_2" arg "damage\wood_3"]);
+	var(resistSounds,["damage\block_wood_1" arg "damage\block_wood_2" arg "damage\block_wood_3"]);
 	getterconst_func(getWeightCoefForCalcHP,50);
 endclass
 
@@ -97,6 +116,7 @@ class(MatMetal) extends(MatBase)
 
 	var(damageEffect,SLIGHT_DAM_METAL);
 	var(damageSounds,["damage\metal_1" arg "damage\metal_2"]);
+	var(resistSounds,["damage\block_metal_1" arg "damage\block_metal_2"]);
 	getterconst_func(getWeightCoefForCalcHP,100);
 
 endclass
@@ -109,6 +129,7 @@ class(MatGlass) extends(MatBase)
 	var(stepSound,["glass" arg 1]);
 	var(damageEffect,SLIGHT_DAM_GLASS);
 	var(damageSounds,["damage\glass_1" arg "damage\glass_2" arg "damage\glass_3"]);
+	var(resistSounds,["steps\glass1"]);
 	getterconst_func(getWeightCoefForCalcHP,200);
 endclass
 
