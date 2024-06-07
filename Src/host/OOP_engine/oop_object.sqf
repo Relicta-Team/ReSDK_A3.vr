@@ -132,6 +132,8 @@ class(ManagedObject) extends(object)
 	// Указывает будет ли запущена функция обновления при создании объекта
 	getterconst_func(startUpdateOnConstruct,false);
 
+	getterconst_func(defaultUpdateDelay,1);
+
 	//включена ли подсистема автоочистки autoref переменных
 	getter_func(enableAutoRefGC,true);
 
@@ -151,7 +153,7 @@ class(ManagedObject) extends(object)
 		if (_mode) then {
 			if (!isImplementFunc(this,onUpdate)) exitWith {};
 
-			setSelf(__handleUpdateNative__,startUpdateParams(getSelfFunc(onUpdate),1,[this]));
+			setSelf(__handleUpdateNative__,startUpdateParams({(_this select 0)params["_p" arg "_c"]; _p call _c},callSelf(defaultUpdateDelay),[this arg getSelfFunc(onUpdate)]));
 			INC(oop_upd);
 		} else {
 			private _hnd = getSelf(__handleUpdateNative__);

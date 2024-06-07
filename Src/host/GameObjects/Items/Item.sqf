@@ -135,14 +135,14 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		
 		setSelf(icon,"gen\"+(_m splitString "\/." joinString "+"));
 		
-		private _bbx = core_modelBBX get _m;
-		if isNullVar(_bbx) exitWith {
-			/////errorformat("Cant get bbx by model path %1",_m);
-		};
-		setSelf(size,_bbx call generateItemSize);
-		#ifdef EDITOR
-			setSelf(bbx,_bbx);
-		#endif
+		// private _bbx = core_modelBBX get _m;
+		// if isNullVar(_bbx) exitWith {
+		// 	/////errorformat("Cant get bbx by model path %1",_m);
+		// };
+		// setSelf(size,_bbx call generateItemSize);
+		// #ifdef EDITOR
+		// 	setSelf(bbx,_bbx);
+		// #endif
 	};
 
 	//процедура синхронизации иконки
@@ -1379,3 +1379,38 @@ class(SystemMessageBoxND) extends(SystemInternalND)
 		call getSelf(delegate_handleInput);
 	};
 endclass
+
+#ifdef EDITOR
+class(Debug_Item_damager) extends(Item)
+
+	var(attachedWeap,weaponModule(WeapDebugger_item));
+	runtimeGenerateWeapon("WeapDebugger_item","WeapHandyItem")
+	{
+		varpair(attackedBy,pair(ATTACK_TYPE_SWING,"бьет отладочным"));
+		var(defenceBy,"отладочного");
+		getter_func(getMissAttackWeaponText,"отладочным");
+		varpair(dmgBonus,pair(ATTACK_TYPE_SWING,+10));
+	};
+
+	getterconst_func(startUpdateOnConstruct,true);
+	getterconst_func(defaultUpdateDelay,0.01);
+	func(onUpdate)
+	{
+		objParams();
+		
+		private _m = callSelf(getSourceLoc);
+		if isNullVar(_m) exitWith {};
+		if isNullReference(_m) exitWith {};
+		if isTypeOf(_m,Mob) then {
+			callFuncParams(_m,addStaminaRegen,1000);
+			setVar(_m,lastCombatActionTime,0);
+			setVar(_m,otherLastCombatActionTime,0);
+			setVar(_m,hunger,100);
+			setVar(_m,thirst,100);
+			
+		};
+		
+	};
+endclass
+
+#endif
