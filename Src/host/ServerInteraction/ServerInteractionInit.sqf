@@ -455,6 +455,7 @@ si_onBulletAct = {
 		#define logshotgun(txt,vars)
 	#endif
 
+	logshotgun("Process bullet damage: ",_dam arg _type arg _selection arg _usr arg _weapon)
 	logshotgun("Distance and half distance info:",_distance arg _halfDistance)
 
 	//половина повреждений при дистанции большей чем 1/2
