@@ -81,6 +81,8 @@ class(Lockpick) extends(Item)
 	var(model,"relicta_models\models\interier\props\spichka.p3d");
 	var(icon,invicon(key));
 	var(weight,gramm(15));
+	var(size,ITEM_SIZE_TINY);
+	var(material,"MatMetal");
 
 	getter_func(getDropSound,"dropping\keydrop");
 	getter_func(getPickupSound,"updown\keyring_up");

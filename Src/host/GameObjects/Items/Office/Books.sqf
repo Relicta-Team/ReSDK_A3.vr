@@ -22,6 +22,8 @@
 editor_attribute("InterfaceClass")
 class(IPaperItemBase) extends(Item)
 	var(material,"MatPaper");
+	var(weight,gramm(10));
+	var(size,ITEM_SIZE_SMALL);
 	
 	func(doBurn)
 	{
@@ -174,6 +176,10 @@ class(Book) extends(IWritableContentItem)
 	var(ndName,"Book");
 	var(model,"relicta_models\models\interier\props\book6.p3d");
 
+	var(size,ITEM_SIZE_MEDIUM);
+	var(weight,gramm(350));
+	var(dr,2);
+
 	//getterconst_func(onePaperSize,256); //length one piper size
 
 endclass
@@ -199,6 +205,7 @@ class(Paper) extends(IWritableContentItem)
 	var(ndName,"Paper");
 	var_exprval(ndInteractDistance,INTERACT_DISTANCE);
 	var(weight,gramm(5));
+	var(size,ITEM_SIZE_SMALL);
 
 	getter_func(getPickupSound,vec2("updown\paper_up"+str randInt(1,3),getRandomPitchInRange(.85,1.3)));
 	getter_func(getDropSound,vec2("updown\paper_down"+str randInt(1,2),getRandomPitchInRange(.85,1.3)));
@@ -351,11 +358,16 @@ endclass
 class(Notepad) extends(Paper)
 	var(model,"a3\structures_f\items\documents\notepad_f.p3d")
 	var(name,"Блокнот");
+	var(dr,1);
+	var(size,ITEM_SIZE_SMALL);
+	var(weight,gramm(100));
 endclass
 
 class(Documents) extends(Paper)
 	var(model,"a3\structures_f\items\documents\file2_f.p3d")
 	var(name,"Документы");
+	var(size,ITEM_SIZE_SMALL);
+	var(weight,gramm(170));
 endclass
 
 class(Documents1) extends(Paper)
@@ -365,6 +377,9 @@ endclass
 
 class(Folder) extends(Book)
 	var(name,"Папка");
+	var(weight,gramm(220));
+	var(size,ITEM_SIZE_MEDIUM);
+	var(dr,1);
 endclass
 
 
@@ -372,7 +387,16 @@ class(PaperHolder) extends(IPaperItemBase)
 	var(model,"a3\weapons_f_orange\ammo\leaflet_05_stack_f.p3d")
 	var(name,"Стопка бумаги");
 	var(countBlanks,20);
-	var(weight,0);
+	var(weight,0.5);
+	var(size,ITEM_SIZE_MEDIUM);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
+
+	func(constructor)
+	{
+		objParams();
+		setSelf(weight,getFieldBaseValue("Paper","weight") * getSelf(countBlanks));
+		callSelf(generateObjectHP);
+	};
 
 	func(getWeight)
 	{

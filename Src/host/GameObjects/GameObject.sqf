@@ -1434,13 +1434,7 @@ class(IDestructible) extends(GameObject)
 		if (getSelf(hp)>0) then {
 			setSelf(hpMax,getSelf(hp));
 		} else {
-			if callSelf(isItem) then {
-				_val = [this] call gurps_calculateItemHP;
-			} else {
-				_val = [this] call gurps_calculateConstructionHP;
-			};
-			setSelf(hp,_val);
-			setSelf(hpMax,_val);
+			callSelf(generateObjectHP);
 		};
 
 		if (getSelf(dr)>0) then {
@@ -1450,6 +1444,19 @@ class(IDestructible) extends(GameObject)
 
 			};
 		};
+	};
+
+	func(generateObjectHP)
+	{
+		objParams();
+		private _val = 1;
+		if callSelf(isItem) then {
+			_val = [this] call gurps_calculateItemHP;
+		} else {
+			_val = [this] call gurps_calculateConstructionHP;
+		};
+		setSelf(hp,_val);
+		setSelf(hpMax,_val);
 	};
 
 	var(material,null);//string|object

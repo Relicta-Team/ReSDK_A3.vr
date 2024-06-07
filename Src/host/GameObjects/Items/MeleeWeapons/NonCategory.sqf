@@ -11,7 +11,10 @@ class(Baseballbat) extends(IMeleeWeapon)
 	var(name,"Бита");
 	var(model,"relicta_models\models\weapons\melee\baseballbite.p3d");
 	var(material,"MatWood");
-	
+	var(dr,4);
+	var(weight,1.1);
+	var(size,ITEM_SIZE_MEDIUM);
+
 	var(allowedSlots,[INV_BELT arg INV_BACK arg INV_BACKPACK]);
 endclass
 

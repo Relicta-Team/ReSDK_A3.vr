@@ -19,18 +19,23 @@ class(Sword) extends(IMeleeWeapon)
 
 	var(allowedSlots,[INV_BELT arg INV_BACK arg INV_BACKPACK]);
 	getter_func(getAttacksTypeAssoc,ATTACK_TYPE_ASSOC_STANDARD);
+
+	var(dr,6);
+	var(weight,1.8);
+	var(size,ITEM_SIZE_LARGE);
 endclass
 
 class(SwordScimitar) extends(Sword)
 	var(model,"relicta_models\models\weapons\melee\swordxach\swordxach.p3d");
 	var(name,"Скимитар");
+	var(size,ITEM_SIZE_LARGE);
+	var(weight,3.5);
 endclass
 
 class(ShortSword) extends(Sword)
 	var(name,"Короткий меч");
 	var(model,"relicta_models\models\weapons\melee\swordefault\swordefault.p3d");
 	var(weight,1.4);
-	var(size,ITEM_SIZE_LARGE);
 endclass
 
 class(HalfHandedSword) extends(Sword)

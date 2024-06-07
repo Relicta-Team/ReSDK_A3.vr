@@ -17,6 +17,8 @@ class(Flashlight) extends(ILightible)
 	var(light,LIGHT_FLASHLIGHT);
 	var(lightIsEnabled,false);
 	var(size,ITEM_SIZE_SMALL);
+	var(dr,2);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 	var(weight,gramm(315));
 	var(model,"relicta_models\models\nocategory\flashlight.p3d");
 	var(material,"MatSynt");

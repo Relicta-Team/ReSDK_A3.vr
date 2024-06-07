@@ -22,6 +22,9 @@ class(IRangedWeapon) extends(Item)
 
 	var(material,"MatMetal");
 
+	var(dr,4);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
+
 	var(basicDistance,100); //базовая дистанция
 	var(halfDistance,100); //1/2 дистанции
 	var(basicAccuracy,0);//точность. чем ниже значение тем лучше
@@ -538,6 +541,7 @@ class(IMagazineBase) extends(Item)
 	var(maxCount,8);
 	var(weight,0);
 	var(size,ITEM_SIZE_SMALL);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 	var(content,[]);
 	getterconst_func(getBulletType,"IAmmoBase"); //какие типы боеприпасов могут быть загружены в оружие
 
@@ -756,6 +760,7 @@ class(IAmmoBase) extends(Stack)
 	getterconst_func(stackNames,vec3("Патрона","Патрона","Патронов"));
 	var(size,ITEM_SIZE_TINY);
 	var(weight,gramm(16.8)); //basic pistol ammo weight
+	var(dr,4);
 	var(model,"\A3\Weapons_f\ammo\cartridge_small");
 	var(material,"MatMetal");
 	getterconst_func(getProjectileModel,"\a3\Weapons_F\data\bullettracer\tracer_white.p3d");
@@ -814,6 +819,7 @@ class(BulletCase) extends(Stack)
 	getterconst_func(stackNames,vec3("Гильзы","Гильзы","Гильз"));
 	var(size,ITEM_SIZE_TINY);
 	var(weight,gramm(5.3));
+	var(dr,4);
 	getter_func(getDropSound,vec2("guns\casingfall"+str randInt(1,3),getRandomPitchInRange(.85,1.3)));
 	var(shootedTime,0);
 	func(getDescFor)

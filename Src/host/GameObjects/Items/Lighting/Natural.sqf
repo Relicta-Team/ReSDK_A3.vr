@@ -126,8 +126,9 @@ class(Torch) extends(ILightible)
 	var(desc,"Самый популярный источник освещения");
 	var(model,"relicta_models\models\weapons\melee\torch.p3d");
 	var(material,"MatWood");
+	var(dr,2);
 	var(allowedSlots,[INV_BELT]);
-	var(size,ITEM_SIZE_LARGE);
+	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(560));
 	var(icon,invicon(torch));
 	var(light,LIGHT_FIRE);
@@ -243,6 +244,7 @@ class(Sigarette) extends(Torch)
 	var(weight,gramm(1.08));
 	var(model,"relicta_models\models\interier\props\cigarette.p3d");
 	var(material,"MatPaper");
+	var(dr,0);
 	var(icon,invicon(sigarette));
 	var(fuelLeft,60 * 6);
 	getterconst_func(getHandAnim,ITEM_HANDANIM_LOWERONLYHAND);
@@ -305,8 +307,9 @@ class(Candle) extends(Sigarette)
 	var(icon,invicon(candle));
 	var(model,"relicta_models\models\interier\props\svecha.p3d");
 	var(material,"MatSynt");
+	var(dr,1);
 	var(size,ITEM_SIZE_SMALL);
-	var(weight,gramm(25));
+	var(weight,gramm(45));
 	var(light,LIGHT_CANDLE);
 	getterconst_func(getHandAnim,ITEM_HANDANIM_TORCH);
 	var(fuelLeft,60 * 30);
@@ -330,8 +333,10 @@ class(LampKerosene) extends(Torch)
 	var(allowedSlots,[]);
 	var(model,"ml_shabut\exoduss\keroslampa.p3d");
 	var(material,"MatGlass");
-	var(size,ITEM_SIZE_SMALL);
-	var(weight,gramm(360));
+	var(dr,1);
+	var(size,ITEM_SIZE_LARGE);
+	var(weight,gramm(520));
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 	var(light,LIGHT_LAMP_KEROSENE);
 	getterconst_func(getHandAnim,ITEM_HANDANIM_LAMP);
 	var(fuelLeft,60 * 60 * 1.3);
@@ -348,6 +353,7 @@ class(Match) extends(Sigarette)
 	var(model,"relicta_models\models\interier\props\spichka.p3d");
 	var(material,"MatWood");
 	var(weight,gramm(5));
+	var(dr,0);
 	var(size,ITEM_SIZE_TINY);
 	var(light,LIGHT_MATCH);
 	var(lightIsEnabled,false);
@@ -376,6 +382,9 @@ class(MatchBox) extends(Item)
 	var(countLeft,15);
 	var(model,"a3\structures_f_epa\items\tools\matches_f.p3d");
 	var(material,"MatPaper");
+	var(weight,gramm(210));
+	var(dr,1);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 
 	func(onItemClick)
 	{

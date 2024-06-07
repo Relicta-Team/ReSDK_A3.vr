@@ -26,6 +26,7 @@ class(IMeleeWeapon) extends(Item)
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_SWORD);
 	var(material,"MatMetal");
+	var(dr,4);
 
 endclass
 
@@ -40,7 +41,7 @@ class(CaveAxe) extends(AxeBase)
 	var(icon,invicon(axe));
 	var(attachedWeap,weaponModule(WeapAxe));
 	var(weight,1.8);
-	var(size,ITEM_SIZE_BIG);
+	var(size,ITEM_SIZE_MEDIUM);
 	var(model,"relicta_models\models\weapons\melee\axehandmade1\axehandmade1.p3d");
 
 	var(allowedSlots,[INV_BELT]);
