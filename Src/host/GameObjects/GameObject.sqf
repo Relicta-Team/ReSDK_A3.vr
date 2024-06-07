@@ -235,6 +235,10 @@ class(GameObject) extends(ManagedObject)
 	editor_attribute("Tooltip" arg "Вес объекта в граммах или килограммах")
 	var(weight,gramm(1000));//вес в граммах
 
+	getterconst_func(canApplyWeightRandomize,false);
+	getterconst_func(getWeightRandomCoeff,vec2(0,0));
+	getterconst_func(getWeightRandomPrecision,2);//сколько знаков после нуля доступно
+
 	editor_attribute("ReadOnly")
 	var(pointer,pointer_new(this)); //unique pointer
 	
@@ -251,6 +255,13 @@ class(GameObject) extends(ManagedObject)
 		} else {
 			private _map = typeGetVar(_t,__mempool_inst__);
 			_map set [getSelf(pointer),this];
+		};
+
+		if callSelf(canApplyWeightRandomize) then {
+			private _oldWeight = getSelf(weight);
+			callSelf(getweightRandomCoeff) params [["_min",0],["_max",0]];
+			private _rval = parseNumber (rand(_min,_max) toFixed callSelf(getWeightRandomPrecision));
+			setSelf(weight,_oldWeight + _rval);
 		};
 	};
 
