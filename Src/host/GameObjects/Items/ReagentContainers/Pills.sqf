@@ -11,8 +11,11 @@
 class(PillBox) extends(Item)
 	var(name,"Коробка таблеток");
 	var(model,"a3\structures_f_epa\items\medical\painkillers_f.p3d");
+	var(material,"MatPaper");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(30));
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
+	var(dr,1);
 
 	getterconst_func(pillName,"Таблетка");
 	getterconst_func(pillContent,[vec2("Nutriment",10)]newReagentsFood);

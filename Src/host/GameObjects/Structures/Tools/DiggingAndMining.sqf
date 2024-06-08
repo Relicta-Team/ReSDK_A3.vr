@@ -14,6 +14,8 @@ class(BunchOfShit) extends(IStruct)
 	getterconst_func(getName,"Кучка");
 	getterconst_func(getDesc,"Куча отходов жизнедеятельности.");
 	var(model,"a3\structures_f_enoch\industrial\agriculture\manurepile_01_f.p3d");
+	var(material,"MatDirt");
+	var(dr,3);
 
 	var(toShitDigsLeft,randInt(2,10));
 

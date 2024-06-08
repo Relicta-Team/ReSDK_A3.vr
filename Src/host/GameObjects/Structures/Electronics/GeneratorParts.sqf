@@ -12,6 +12,8 @@
 class(PowerGenerator) extends(ElectronicDeviceNode)
 	var(name,"Генератор");
 	var(model,"relicta_models\models\interier\controlpanel.p3d");
+	var(material,"MatMetal");
+	var(dr,4);
 	var(desc,"Вырабатывает электричество, которое в наши времена порой дороже сотен бряков.");
 
 	var(edIsEnabled,true);
@@ -161,6 +163,8 @@ endclass
 class(ConvertorForGenerator) extends(IStruct)
 	
 	var(model,"ml_exodusnew\stalker_tun\domen3.p3d");
+	var(material,"MatMetal");
+	var(dr,3);
 	var(name,null);
 	var(desc,null);
 	getterconst_func(getName,"Конвертор");

@@ -13,6 +13,7 @@
 //DO NOT CREATE THIS CLASS
 class(SteelWindowDoor) extends(DoorDynamic)
 	var(model,"Land_traindoor2");
+	var(material,"MatMetal");
 	getter_func(animateData,[["traindoor" arg 1.5 arg 3]]);
 	
 	var(stBreakBonus,-4);
@@ -22,6 +23,7 @@ endclass
 class(SteelDoorThinSmall) extends(DoorDynamic)
 	var(name,"Стальная дверь");
 	var(model,"Land_door_solar");
+	var(material,"MatMetal");
 	//"zashelka","zamok"
 	getter_func(animateData,[["door_solar" arg 1.5 arg 3]]);
 	
@@ -35,6 +37,8 @@ class(SteelArmoredDoor) extends(DoorDynamic)
 	var(name,"Бронированная дверь");
 	var(desc,"Эта массивная дверь за долгие годы успела полностью заржаветь. А вот решётка внутри выглядит вроде неплохо");
 	var(model,"Land_doub_bronedwerks");
+	var(material,"MatMetal");
+	var(dr,4);
 	
 	getter_func(anmCount,animObj_count(2));
 	getter_func(animateData,[["plomba5" arg 2.5 arg 5] arg vec3("reshotks",1.78,5)]);
@@ -76,7 +80,9 @@ endclass
 
 class(GreenAmbarWithDoors) extends(DoorDynamic)
 	getter_func(canUseMainAction,false); //В амбаре нельзя юзать такие дейсвтия
+	getter_func(canApplyDamage,false);
 	var(model,"Land_Barn_W_02");
+	var(material,"MatBeton");
 	var(name,"Амбар");
 	func(onDeanim)
 	{

@@ -11,7 +11,12 @@
 //столб
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallPole) extends(Constructions) var(name,"Столб"); editor_only(var(desc,"Небольшой столб");) endclass
+class(SmallPole) extends(Constructions) 
+	var(name,"Столб"); 
+	editor_only(var(desc,"Небольшой столб");)
+	var(material,"MatBeton");
+	var(dr,2);
+endclass
 
 editor_attribute("EditorGenerated")
 class(ThickConcretePillarDestroyed) extends(SmallPole)

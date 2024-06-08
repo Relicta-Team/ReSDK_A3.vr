@@ -16,7 +16,11 @@ class(SmallDecorations) extends(StructureBasicCategory) endclass
 //картины
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(Picture) extends(SmallDecorations) var(name,"Картина"); editor_only(var(desc,"Просто картина");) endclass
+class(Picture) extends(SmallDecorations) 
+	var(name,"Картина");
+	editor_only(var(desc,"Просто картина");)
+	var(material,"MatCloth");
+endclass
 
 editor_attribute("EditorGenerated")
 class(PictureIcon) extends(Picture)
@@ -52,6 +56,7 @@ endclass
 editor_attribute("EditorGenerated")
 class(PosterLive) extends(Picture)
 	var(model,"metro_ob\model\sovet3.p3d");
+	var(material,"MatCloth");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -102,7 +107,11 @@ endclass
 //ковры
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(Carpet) extends(SmallDecorations) var(name,"Ковер"); editor_only(var(desc,"Красивый ковер");) endclass
+class(Carpet) extends(SmallDecorations) 
+	var(name,"Ковер");
+	editor_only(var(desc,"Красивый ковер");)
+	var(material,"MatCloth");
+endclass
 
 editor_attribute("EditorGenerated")
 class(RedCarpetWall) extends(Carpet)
@@ -126,7 +135,12 @@ endclass
 //таблички
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallSign) extends(SmallDecorations) var(name,"Табличка"); editor_only(var(desc,"Табличка или указатель");) endclass
+class(SmallSign) extends(SmallDecorations) 
+	var(name,"Табличка");
+	editor_only(var(desc,"Табличка или указатель");)
+	var(material,"MatWood");
+	var(dr,1);
+endclass
 
 editor_attribute("EditorGenerated")
 class(WoodenGraveCross) extends(SmallSign)
@@ -201,11 +215,17 @@ endclass
 //Монументы, памятники, могилы
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(MonumentBase) extends(SmallDecorations) var(name,"Монумент"); editor_only(var(desc,"Монументы - памятники - могилы");) endclass
+class(MonumentBase) extends(SmallDecorations) 
+	var(name,"Монумент");
+	editor_only(var(desc,"Монументы - памятники - могилы");)
+	var(material,"MatBeton");
+	var(dr,4);
+endclass
 
 editor_attribute("EditorGenerated")
 class(AncientMonument) extends(MonumentBase)
 	var(model,"a3\structures_f_exp\cultural\ancientrelics\petroglyphwall_01_f.p3d");
+	var(material,"MatStone");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -236,21 +256,25 @@ endclass
 editor_attribute("EditorGenerated")
 class(Statue8) extends(Statue)
 	var(model,"a3\structures_f_exp\cultural\ancientrelics\ancienthead_01_f.p3d");
+	var(material,"MatStone");
 endclass
 
 editor_attribute("EditorGenerated")
 class(Statue7) extends(Statue)
 	var(model,"a3\structures_f_exp\cultural\ancientrelics\ancientstatue_02_f.p3d");
+	var(material,"MatStone");
 endclass
 
 editor_attribute("EditorGenerated")
 class(Statue6) extends(Statue)
 	var(model,"a3\structures_f_exp\cultural\ancientrelics\ancientstatue_01_f.p3d");
+	var(material,"MatStone");
 endclass
 
 editor_attribute("EditorGenerated")
 class(Statue5) extends(Statue)
 	var(model,"a3\structures_f_exp\cultural\totems\palmtotem_02_f.p3d");
+	var(material,"MatStone");
 endclass
 
 editor_attribute("EditorGenerated")

@@ -21,7 +21,7 @@ class(RifleFinisher) extends(IRangedWeapon)
 	var(model,"relicta_models\models\weapons\fireweapon\handmade\premosin\premosin.p3d");
 	var(weight,4.6);
 	getter_func(getReqST,10);
-	var(size,ITEM_SIZE_BIG);
+	var(size,ITEM_SIZE_LARGE);
 	var(basicDistance,1500);
 	var(halfDistance,750);
 	var(shootSpeed,860);
@@ -123,7 +123,7 @@ class(RifleSVT) extends(IRangedWeapon)
 	var(model,"relicta_models\models\weapons\fireweapon\marksman\sks\sks.p3d");
 	var(weight,3.75);
 	getter_func(getReqST,11);
-	var(size,ITEM_SIZE_BIG);
+	var(size,ITEM_SIZE_LARGE);
 	var(basicDistance,900);
 	var(halfDistance,400);
 	var(shootSpeed,735);
@@ -158,8 +158,9 @@ class(RifleAuto) extends(IRangedWeapon)
 	var(name,"Автомат ""Товарищ""");
 	var(model,"relicta_models\models\weapons\fireweapon\handmade\akhandmade\akhandmade.p3d");
 	var(weight,4.8);
+	var(dr,6);
 	getter_func(getReqST,12);
-	var(size,ITEM_SIZE_LARGE);
+	var(size,ITEM_SIZE_MEDIUM);
 	var(basicDistance,800);
 	var(halfDistance,300);
 	var(shootSpeed,715);
@@ -195,8 +196,9 @@ class(RifleBastard) extends(IRangedWeapon)
 	var(name,"Автомат ""Мерзавец""");
 	var(model,"relicta_models\models\weapons\fireweapon\marksman\svd\svd.p3d");
 	var(weight,4.5);
+	var(dr,5);
 	getter_func(getReqST,12);
-	var(size,ITEM_SIZE_BIG);
+	var(size,ITEM_SIZE_LARGE);
 	var(basicDistance,1300);
 	var(halfDistance,450);
 	var(shootSpeed,820);

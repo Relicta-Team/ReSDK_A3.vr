@@ -24,10 +24,19 @@ class(IGlassReagentItem) extends(IReagentNDItem)
 	};
 endclass
 
+class(IGlassReagentCont) extends(IReagentNDItem)
+	var(material,"MatGlass");
+	var(dr,0);
+	getterconst_func(transferAmount,[5 arg 10 arg 15 arg 25 arg 30 arg 60]);
+endclass
+
 class(GlassBottle) extends(IGlassReagentItem)
 	var(name,"Стеклянная бутылка");
 	//var(model,"ml\ml_object_new\model_14_10\bottledef.p3d"); //nogeom
 	var(model,"relicta_models\models\interier\props\kitchen\buhlo1.p3d");
+	var(material,"MatGlass");
+	var(weight,gramm(350));
+	var(size,ITEM_SIZE_SMALL);
 	var(reagents,vec2(this,60) call ms_create);
 	getterconst_func(transferAmount,[5 arg 10 arg 15 arg 25 arg 30 arg 60]);
 	var_str(bottleName); //подписанное название
@@ -77,6 +86,7 @@ class(GlassGoblet) extends(IGlassReagentItem)
 	var(model,"relicta_models\models\interier\props\kitchen\vinecup.p3d");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(200));
+	var(material,"MatGlass");
 	
 	var(reagents,vec2(this,30) call ms_create);
 	getterconst_func(transferAmount,[2 arg 5 arg 10 arg 20 arg 30]);
@@ -84,5 +94,6 @@ endclass
 
 class(Mug) extends(GlassGoblet)
 	var(name,"Кружка");
+	var(weight,gramm(130));
 	var(model,"ml_shabut\exoduss\chashechka.p3d");
 endclass

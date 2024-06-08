@@ -26,6 +26,8 @@ class(IStruct) extends(IDestructible)
 	getterconst_func(getChunkType,CHUNK_TYPE_STRUCTURE);
 	getter_func(isStruct,true);
 
+	getter_func(canApplyDamage,true);
+
 	editor_attribute("EditorVisible" arg "custom_provider:model") editor_attribute("Tooltip" arg "Модель структуры")
 	var(model,"a3\structures_f_epa\items\food\canteen_f.p3d");
 	editor_attribute("ReadOnly")
@@ -39,29 +41,34 @@ class(IStruct) extends(IDestructible)
 		};
 	};
 
-	func(getDescFor) {
-		objParams_1(_usr);
+	//TODO remove in next version
+	// func(getDescFor) {
+	// 	objParams_1(_usr);
 
-		#define PIC_PREP <img size='0.8' image='%2'/>
+	// 	#define PIC_PREP <img size='0.8' image='%2'/>
 
-		private _rand = pick ["Ну а это %1" arg "А это %1" arg "Это %1" arg "Да это же %1" arg "Вот это %1"];
-		private _postrand = pick ["!" arg "." arg "..." arg ", вроде..."]; //очень странные дела с пикингом через препроцессор
+	// 	private _rand = pick ["Ну а это %1" arg "А это %1" arg "Это %1" arg "Да это же %1" arg "Вот это %1"];
+	// 	private _postrand = pick ["!" arg "." arg "..." arg ", вроде..."]; //очень странные дела с пикингом через препроцессор
 
-		private _icon = getSelf(icon);
+	// 	private _icon = getSelf(icon);
 
-		private _desc = callSelf(getDesc);
-		if (_desc != stringEmpty) then {_desc = sbr + _desc;};
+	// 	private _desc = callSelf(getDesc);
+	// 	if (_desc != stringEmpty) then {_desc = sbr + _desc;};
 
-		_icon = if isNullVar(_icon) then {stringEmpty} else {format["<img size='0.8' image='%1'/> ",_icon]};
+	// 	_icon = if isNullVar(_icon) then {stringEmpty} else {format["<img size='0.8' image='%1'/> ",_icon]};
 
-		//collect germ info to ru text with GERM_COUNT_TO_NAME()
-		private _germText = GERM_COUNT_TO_NAME(getSelf(germs));
-		if (_germText != "") then {
-			modvar(_desc) + sbr + _germText;
-		};
+	// 	//collect germ info to ru text with GERM_COUNT_TO_NAME()
+	// 	private _germText = GERM_COUNT_TO_NAME(getSelf(germs));
+	// 	if (_germText != "") then {
+	// 		modvar(_desc) + sbr + _germText;
+	// 	};
 
-		format[_rand + _postrand,_icon + callSelf(getName)] + _desc
-	};
+	// 	#ifdef EDITOR
+	// 		modvar(_desc) + sbr + callSelf(getObjectHealth_Editor);
+	// 	#endif
+
+	// 	format[_rand + _postrand,_icon + callSelf(getName)] + _desc
+	// };
 
 
 	func(InitModel)
@@ -327,6 +334,7 @@ endclass
 editor_attribute("HiddenClass")
 class(IStructNonReplicated) extends(IStruct)
 	var(__nonrep_flag,false);
+	getter_func(canApplyDamage,false);
 	func(initModel)
 	{
 		objParams_3(_pos,_dir,_vec);
@@ -356,5 +364,32 @@ class(IStructNonReplicated) extends(IStruct)
 
 		//!очень хардкоженное логическое объёбывание системы чанков
 		getSelf(loc) setvariable ["lastUpd",-1];
+	};
+endclass
+
+//Отладочный класс материалов
+class(Struct_DebugMaterial__) extends(IStruct)
+	editor_attribute("EditorVisible" arg "type:string")
+	var(material,"MatStone");
+	var(model,"csa_constr\csa_obj\plita_3x3.p3d");
+
+	func(constructor)
+	{
+		objParams();
+		callSelfAfter(__loadMaterial,2);
+	};
+
+	func(__loadMaterial)
+	{
+		objParams();
+		private _m = getSelf(material);
+		if isNullVar(_m) exitWith {};
+		if equalTypes(_m,"") then {
+			_m = _m call mat_getByClass;
+		};
+		if isNullReference(_m) exitWith {};
+		setSelf(material,_m);
+
+		setSelf(name,getVar(_m,name));
 	};
 endclass

@@ -13,10 +13,6 @@
 
 #define DEBUG_TARG
 
-//NOCATEGITEMS
-//не расскоменитровывать пока не будет структурировано
-//#include "NOGATEG.sqf"
-
 editor_attribute("InterfaceClass")
 editor_attribute("ColorClass" arg "44C242")
 class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
@@ -35,6 +31,8 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 	var(model,"a3\structures_f_epa\items\food\canteen_f.p3d");
 	getterconst_func(getChunkType,CHUNK_TYPE_ITEM);
 	getter_func(isItem,true);
+
+	getter_func(canApplyDamage,true);
 
 	verbList("pickup twohands",GameObject);
 	editor_attribute("EditorVisible" arg "custom_provider:size") editor_attribute("Tooltip" arg "Размер предмета")
@@ -125,7 +123,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		//на всякий случай ассертим путь
 		#ifdef EDITOR
 		if (isNullVar(_m) || {not_equalTypes(_m,"")}) exitWith {
-			errorformat("%1 %2 %3",this arg _m arg getSelf(model));
+			errorformat("Constructor error; Cant find model for %1; Model was %2 [%3]",this arg _m arg getSelf(model));
 			appExit(APPEXIT_REASON_COMPILATIOEXCEPTION);
 		};
 		#endif
@@ -137,14 +135,14 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		
 		setSelf(icon,"gen\"+(_m splitString "\/." joinString "+"));
 		
-		private _bbx = core_modelBBX get _m;
-		if isNullVar(_bbx) exitWith {
-			/////errorformat("Cant get bbx by model path %1",_m);
-		};
-		setSelf(size,_bbx call generateItemSize);
-		#ifdef EDITOR
-			setSelf(bbx,_bbx);
-		#endif
+		// private _bbx = core_modelBBX get _m;
+		// if isNullVar(_bbx) exitWith {
+		// 	/////errorformat("Cant get bbx by model path %1",_m);
+		// };
+		// setSelf(size,_bbx call generateItemSize);
+		// #ifdef EDITOR
+		// 	setSelf(bbx,_bbx);
+		// #endif
 	};
 
 	//процедура синхронизации иконки
@@ -199,6 +197,39 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		if (_vlinear < .7)  exitWith {ITEM_SIZE_BIG + _addFromRadius};
 		ITEM_SIZE_HUGE
 	};
+	#ifdef EDITOR
+	generateItemInfoList = {
+		private _data = [];
+		private _sizeConst = ["ITEM_SIZE_TINY","ITEM_SIZE_SMALL","ITEM_SIZE_MEDIUM","ITEM_SIZE_LARGE","ITEM_SIZE_BIG","ITEM_SIZE_HUGE"];
+		_getPathinfo = {
+			params [["_file","unknown_file"],["_line",0]];
+			format["file: %1 at line %2",SHORT_PATH_CUSTOM(_file),_line]
+		};
+		{
+			private _class = _x;
+			traceformat("Process class %1",_class);
+			private _w = getFieldBaseValue(_class,"weight");
+			private _nargs = [null,null,null,null,null,null,null];
+			private _obj = instantiateParams(_class,_nargs);
+			assert_str(!isNullReference(_obj),"Null ref " + _class);
+			private _size = getVar(_obj,size);
+			assert_str(!isNullVar(_size) && {inRange(_size,ITEM_SIZE_TINY,ITEM_SIZE_HUGE)},"cant define size for " + _size);
+			private _name = getVar(_obj,name);
+			
+			_data pushBack (format["%1 (%2)::%3"+
+				"%4decl: %5%3"+
+				"%4size: %6 (%7) (const: %8)%3"+
+				"%4weight: %9 kg (const:%10)",
+				_class, _name,endl,toString[9],
+				(typeGetFromObject(_obj) getvariable "__decl_info__") call _getPathinfo,
+				_sizeConst select (_size-1),_size,([_class,"size",false] call oop_getFieldBaseValue),
+				_w,([_class,"weight",false] call oop_getFieldBaseValue)
+			]);
+		} foreach getAllObjectsTypeOf(Item);
+
+		copytoclipboard (_data joinString endl)
+	};
+	#endif
 
 	func(destructor)
 	{
@@ -660,6 +691,9 @@ class(ItemRadio) extends(Item)
 	var(name,"Радио");
 
 	var(model,"a3\structures_f\items\electronics\portablelongrangeradio_f.p3d");
+	var(weight,gramm(400));
+	var(size,ITEM_SIZE_SMALL);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 
 	getterconst_func(isRadio,true);
 	var(radioIsEnabled,true);
@@ -882,6 +916,8 @@ class(SystemHandItem) extends(SystemItem)
 	var(part,null); //часть тела, за которую схвачен (только если существо)
 	var(side,0);
 	var(mode,"none"); //none - нет, grab - объект, человек, twohand - двуручное (object предмет во второй руке)
+
+	getter_func(canApplyDamage,false);
 
 	func(constructor)
 	{
@@ -1164,6 +1200,7 @@ class(SystemInternalND) extends(Item)
 	{
 		setSelf(loc,ctxParams);
 	};
+	getter_func(canApplyDamage,false);
 
 	var(ndName,"MobInventory");
 	var(ndInteractDistance,INTERACT_DISTANCE);
@@ -1342,3 +1379,39 @@ class(SystemMessageBoxND) extends(SystemInternalND)
 		call getSelf(delegate_handleInput);
 	};
 endclass
+
+#ifdef EDITOR
+class(Debug_Item_damager) extends(Item)
+
+	var(attachedWeap,weaponModule(WeapDebugger_item));
+	runtimeGenerateWeapon("WeapDebugger_item","WeapHandyItem")
+	{
+		varpair(attackedBy,pair(ATTACK_TYPE_SWING,"бьет отладочным"));
+		var(defenceBy,"отладочного");
+		getter_func(getMissAttackWeaponText,"отладочным");
+		varpair(dmgBonus,pair(ATTACK_TYPE_SWING,+10));
+	};
+
+	getterconst_func(startUpdateOnConstruct,true);
+	getterconst_func(defaultUpdateDelay,0.01);
+	getter_func(canApplyDamage,false);
+	func(onUpdate)
+	{
+		objParams();
+		
+		private _m = callSelf(getSourceLoc);
+		if isNullVar(_m) exitWith {};
+		if isNullReference(_m) exitWith {};
+		if isTypeOf(_m,Mob) then {
+			callFuncParams(_m,addStaminaRegen,1000);
+			setVar(_m,lastCombatActionTime,0);
+			setVar(_m,otherLastCombatActionTime,0);
+			setVar(_m,hunger,100);
+			setVar(_m,thirst,100);
+			
+		};
+		
+	};
+endclass
+
+#endif

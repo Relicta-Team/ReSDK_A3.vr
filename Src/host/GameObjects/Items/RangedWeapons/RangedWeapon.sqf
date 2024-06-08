@@ -20,6 +20,11 @@ class(IRangedWeapon) extends(Item)
 	//TODO implement verbs
 	verbList("cockweapon safemodeweapon",Item);
 
+	var(material,"MatMetal");
+
+	var(dr,4);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
+
 	var(basicDistance,100); //базовая дистанция
 	var(halfDistance,100); //1/2 дистанции
 	var(basicAccuracy,0);//точность. чем ниже значение тем лучше
@@ -530,11 +535,13 @@ editor_attribute("InterfaceClass")
 class(IMagazineBase) extends(Item)
 	var(name,"Магазин");
 	var(model,"a3\structures_f_epb\items\military\magazine_rifle_f.p3d");
+	var(material,"MatSynt");
 	//opt metro model: "ml\ml_object_new\model_14_10\patroni.p3d"
 	// or
 	var(maxCount,8);
 	var(weight,0);
 	var(size,ITEM_SIZE_SMALL);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 	var(content,[]);
 	getterconst_func(getBulletType,"IAmmoBase"); //какие типы боеприпасов могут быть загружены в оружие
 
@@ -753,7 +760,9 @@ class(IAmmoBase) extends(Stack)
 	getterconst_func(stackNames,vec3("Патрона","Патрона","Патронов"));
 	var(size,ITEM_SIZE_TINY);
 	var(weight,gramm(16.8)); //basic pistol ammo weight
+	var(dr,4);
 	var(model,"\A3\Weapons_f\ammo\cartridge_small");
+	var(material,"MatMetal");
 	getterconst_func(getProjectileModel,"\a3\Weapons_F\data\bullettracer\tracer_white.p3d");
 
 	getter_func(getDropSound,vec2("guns\casingfall"+str randInt(1,3),getRandomPitchInRange(.85,1.3)));
@@ -802,6 +811,7 @@ class(BulletCase) extends(Stack)
 	var(name,"Гильза");
 	var(stackName,"Гильзы");
 	var(model,"\A3\Weapons_f\ammo\cartridge_small");
+	var(material,"MatMetal");
 	editor_attribute("EditorVisible" arg "type:int" arg "range:1:20")
 	var(stackCount,1);
 	var(stackMaxAmount,20);
@@ -809,6 +819,7 @@ class(BulletCase) extends(Stack)
 	getterconst_func(stackNames,vec3("Гильзы","Гильзы","Гильз"));
 	var(size,ITEM_SIZE_TINY);
 	var(weight,gramm(5.3));
+	var(dr,4);
 	getter_func(getDropSound,vec2("guns\casingfall"+str randInt(1,3),getRandomPitchInRange(.85,1.3)));
 	var(shootedTime,0);
 	func(getDescFor)

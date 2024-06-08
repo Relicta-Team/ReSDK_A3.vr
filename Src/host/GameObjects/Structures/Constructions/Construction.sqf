@@ -10,7 +10,10 @@
 
 //::конструкции
 editor_attribute("InterfaceClass")
-class(Constructions) extends(StructureBasicCategory) endclass
+class(Constructions) extends(StructureBasicCategory) 
+	var(material,"MatBeton");
+	var(dr,3);
+endclass
 
 
 editor_attribute("InterfaceClass")

@@ -11,7 +11,12 @@
 //небольшое здание
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallHouse) extends(Constructions) var(name,"Небольшое здание"); editor_only(var(desc,"Маленькие дома" pcomma " которые можно разрушить");) endclass
+class(SmallHouse) extends(Constructions) 
+	var(name,"Небольшое здание"); 
+	editor_only(var(desc,"Маленькие дома" pcomma " которые можно разрушить");)
+	var(material,"MatBeton");
+	var(dr,4);
+endclass
 
 editor_attribute("EditorGenerated")
 class(SmallBrickHouse) extends(SmallHouse)
@@ -54,28 +59,33 @@ editor_attribute("EditorGenerated")
 class(MediumClothCanopy) extends(SmallHouse)
 	var(model,"a3\structures_f_exp\commercial\market\clothshelter_02_f.p3d");
 	var(name,"Навес");
+	var(material,"MatCloth");
 endclass
 
 editor_attribute("EditorGenerated")
 class(MediumJunkShed) extends(SmallHouse)
 	var(model,"a3\structures_f\households\addons\metal_shed_f.p3d");
 	var(name,"Сарай");
+	var(material,"MatMetal");
 endclass
 
 editor_attribute("EditorGenerated")
 class(MediumDestroyedCanopy) extends(SmallHouse)
 	var(model,"a3\structures_f_exp\commercial\market\metalshelter_01_ruins_f.p3d");
 	var(name,"Навес");
+	var(material,"MatMetal");
 endclass
 
 editor_attribute("EditorGenerated")
 class(SmallClothShelter) extends(SmallHouse)
 	var(model,"a3\structures_f_exp\commercial\market\clothshelter_01_f.p3d");
+	var(material,"MatCloth");
 endclass
 
 editor_attribute("EditorGenerated")
 class(WoodenToiletSmall) extends(SmallHouse)
 	var(model,"metro_ob\model\sartir_kabinka.p3d");
+	var(material,"MatWood");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -87,6 +97,7 @@ endclass
 editor_attribute("EditorGenerated")
 class(SteelCanopy) extends(SmallHouse)
 	var(model,"a3\structures_f_exp\civilian\sheds\shed_06_f.p3d");
+	var(material,"MatMetal");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -103,11 +114,13 @@ editor_attribute("EditorGenerated")
 class(ChurchPrayHouse) extends(ChurchSmallHouse)
 	var(model,"a3\structures_f_enoch\cultural\chapel_02\chapel_02_white_damaged_f.p3d");
 endclass
+
 editor_attribute("EditorGenerated")
 class(SmallSheetMetalHouse) extends(SmallHouse)
 	var(model,"a3\structures_f\households\slum\slum_house03_f.p3d");
 	var(name, "Хижина");
 	var(desc, "Сделана из дерева");
+	var(material,"MatWood");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -128,4 +141,5 @@ editor_attribute("EditorGenerated")
 class(MediumClayHouse) extends(SmallHouse)
 	var(model,"ca\structures_e\housel\house_l_9_ep1.p3d");
 	var(name,"Глиняный барак");
+	var(material,"MatDirt");
 endclass

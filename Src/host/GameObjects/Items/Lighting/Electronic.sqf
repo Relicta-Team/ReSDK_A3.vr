@@ -17,8 +17,11 @@ class(Flashlight) extends(ILightible)
 	var(light,LIGHT_FLASHLIGHT);
 	var(lightIsEnabled,false);
 	var(size,ITEM_SIZE_SMALL);
+	var(dr,2);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 	var(weight,gramm(315));
 	var(model,"relicta_models\models\nocategory\flashlight.p3d");
+	var(material,"MatSynt");
 	var(icon,invicon(flashlight));
 	var(allowedSlots,[INV_BELT]);
 
@@ -198,6 +201,7 @@ class(SmallBattery) extends(Item)
 	var(size,ITEM_SIZE_TINY);
 	var(weight,gramm(95));
 	var(model,"a3\structures_f_epa\items\electronics\battery_f.p3d");
+	var(material,"MatMetal");
 	var(icon,invicon(smallbattery));
 	var(energy,100);
 

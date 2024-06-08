@@ -38,6 +38,7 @@ loadFile("src\host\GameEvents\loader.hpp");
 loadFile("src\host\SpecialActions\SpecialActions.sqf");
 loadFile("src\host\Client\client.sqf");
 loadFile("src\host\Gender\Genders.sqf");
+loadFile("src\host\Materials\Materials_init.sqf");
 call nodegen_loadClasses;
 // start class generator
 call cs_runtime_internal_makeAll;

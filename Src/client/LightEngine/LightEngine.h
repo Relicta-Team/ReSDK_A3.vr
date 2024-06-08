@@ -132,7 +132,7 @@ sourceObject setvariable ["__config",type]; sourceObject setVariable ["__light",
 	sourceObject setvariable ["__config",type]; \
 	private allEmitters = []; \
 	sourceObject setVariable ["__allEmitters",allEmitters]; \
-	(le_se_map get 'type') call le_se_handleConfig; \
+	[(le_se_map get 'type')] call le_se_handleConfig; \
 };	_semDat append [
 
 #define endScriptEmit ] ;

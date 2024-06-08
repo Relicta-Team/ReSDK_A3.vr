@@ -12,8 +12,11 @@
 
 class(BodyPart) extends(Item)
 	var(germs,-1);//без микробов на старте
-	var(size,ITEM_SIZE_BIG);
+	var(size,ITEM_SIZE_MEDIUM);
+	var(weight,1.8);
 	var(model,"ml\ml_object_new\model_24\okorok.p3d");
+	var(material,"MatFlesh");
+	var(dr,1);
 
 	//var_num(hp);
 	//var_bool(isBleeding);
@@ -627,6 +630,7 @@ class(Body) extends(BodyPart)
 	var(name,"Туловище");
 	var(desc,"Остатки человеческой сущности.");
 	var(size,ITEM_SIZE_LARGE);
+	var(weight,randInt(22,25));
 	var(isVital,true);
 	
 	var(bodyPartIndex,BP_INDEX_TORSO);
@@ -945,6 +949,8 @@ class(Head) extends(BodyPart)
 	var(slotedWeap,weaponModule(Bite));
 
 	var(model,"ml_shabut\exoduss\golova_trup1.p3d");
+	var(weight,5.4);
+	var(dr,1);
 
 	var(isAlreadyRenamed,false); //нужно чтобы не переименовывать пересаженную голову сотни раз "Голова Васи Голова Васи Голова Васи..."
 
@@ -1058,6 +1064,7 @@ endclass
 class(Arm) extends(ITwoSidedBodyPart)
 	var(name,"Рука");
 	var(model,"relicta_models2\body_parts\s_arm\s_arm.p3d");
+	var(weight,2.4);
 	var(desc,"Сколько всего интересного могла бы сделать эта рука, но ей не повезло");
 	var(slotedWeap,weaponModule(Fists));
 	func(onBodyPartUnlinked)
@@ -1085,6 +1092,7 @@ endclass
 class(Leg) extends(ITwoSidedBodyPart)
 	var(name,"Нога");
 	var(model,"relicta_models2\body_parts\s_leg\s_leg.p3d");
+	var(weight,4.3);
 	var(desc,"Даже теперь она остаётся хорошим оружием.");
 	var(slotedWeap,weaponModule(Punch));
 	

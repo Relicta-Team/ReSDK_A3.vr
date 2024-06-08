@@ -13,7 +13,10 @@
 class(CleanableItem) extends(Item)
 	getter_func(canPickup,false);
 	var(icon,null);
-	var(weight,-1);
+	var(weight,gramm(400));
+	var(dr,4);
+	getter_func(objectHealthType,OBJECT_TYPE_SPREADED);
+
 	var(model,"WaterSpill_01_Small_New_F");
 	#include "..\..\Interfaces\IReagentContainer.Interface"
 	var(reagents,[[] arg 5000] newReagents);
@@ -35,6 +38,7 @@ class(BloodPoolSmall) extends(CleanableItem)
 	var(name,"Кровь");
 	var(desc,"Просто лужица крови.");
 	var(model,"BloodSplatter_01_Small_New_F");
+	var(material,"MatOrganic");
 	getter_func(canIncrease,getSelf(incrLeft) <= 0);
 	getterconst_func(getIncreaseType,"BloodPoolMedium");
 	var(incrLeft,3); //сколько раз прокнет  предже чем увеличит лужу

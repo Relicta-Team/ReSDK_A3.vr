@@ -10,7 +10,11 @@
 class(Baseballbat) extends(IMeleeWeapon)
 	var(name,"Бита");
 	var(model,"relicta_models\models\weapons\melee\baseballbite.p3d");
-	
+	var(material,"MatWood");
+	var(dr,4);
+	var(weight,1.1);
+	var(size,ITEM_SIZE_MEDIUM);
+
 	var(allowedSlots,[INV_BELT arg INV_BACK arg INV_BACKPACK]);
 endclass
 
@@ -18,6 +22,7 @@ class(Baton) extends(Baseballbat)
 	var(name,"Дубинка");
 	var(desc,"Созданная лучишими умами Сети для сдерживания быдла и хвостов. Обладает особыми свойствами успокаивания буйных и укладывания убегающих.");
 	var(model,"ml_shabut\eft\svd_trubka.p3d");
+	var(material,"MatSynt");
 	var(allowedSlots,[INV_BELT]);
 	var(weight,gramm(1420));
 	var(attachedWeap,weaponModule(WeapBaton));
@@ -44,6 +49,7 @@ endclass
 class(Scepter) extends(Baseballbat)
 	var(name,"Скипетр");
 	var(model,"relicta_models\models\interier\props\treasure\scepter\scepter.p3d");
+	var(material,"MatMetal");
 	var(weight,gramm(1200));
 	getterconst_func(getHandAnim,ITEM_HANDANIM_TORCH);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);

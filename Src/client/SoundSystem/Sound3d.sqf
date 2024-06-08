@@ -146,7 +146,7 @@ arrows=["Sign_Sphere10cm_F" createVehicle [0,0,0],"Sign_Sphere10cm_F" createVehi
 arrowsGround=["Sign_Sphere10cm_F" createVehicle [0,0,0],"Sign_Sphere10cm_F" createVehicle [0,0,0]];
 
 _handler = {
-	
+	assert_str(false,"This handler is obsolete and will be removed in next update");
 	if !isNullReference(attachedTo player) exitWith {};
 	
 	_triggerPos = 0;
@@ -239,7 +239,7 @@ _handler = {
 	};
 	
 };
-startUpdate(_handler,0);
+//startUpdate(_handler,0);
 
 /*
 

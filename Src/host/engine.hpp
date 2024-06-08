@@ -211,9 +211,9 @@
 _ret = __FILE__; \
 }; _ret select [1,count _ret - 1]} \
 
-//TODO fix path
+#define getMissionName (missionname+".vr")
 #define SHORT_PATH_CUSTOM(d__) (d__) call {private _arr = _this splitString "\"; private _ret = ""; if (!isMultiplayer) then \
-{ if ("relicta.vr" in _arr) then {_ret = (_arr select [(_arr find "relicta.vr")+1,count _arr]) joinString "\"} else {_ret = _this}; } else { \
+{ if (getMissionName in _arr) then {_ret = (_arr select [(_arr find getMissionName)+1,count _arr]) joinString "\"} else {_ret = _this}; } else { \
 _ret = _this; \
 }; _ret} \
 

@@ -15,6 +15,8 @@ endclass
 editor_attribute("InterfaceClass")
 class(IChairAsItem) extends(ItemBaseChair)
 	var(name,"Стул");
+	var(material,"MatWood");
+	var(dr,DR_SP_1);
 	var(size,ITEM_SIZE_HUGE);
 	func(canPickup)
 	{
@@ -52,13 +54,16 @@ class(StumpChair) extends(IChairAsItem)
 	var(model,"a3\props_f_enoch\civilian\forest\woodenlog_02_f.p3d");
 	var(name,"Пенёк");
 	getterconst_func(getChairOffsetPos,vec3(0,-0.1,-0.25));
-	var(weight,15);
+	var(weight,35);
+	var(size,ITEM_SIZE_LARGE);
 endclass
 
 
 class(SmallChair) extends(IChairAsItem)
 	var(icon,invicon(brownchair));
 	var(model,"ca\buildings\furniture\ch_mod_d.p3d");
+	var(size,ITEM_SIZE_LARGE);
+	var(weight,3.4);
 	getterconst_func(getChairOffsetPos,vec3(0,0,0.01));
 	getterconst_func(getChairOffsetDir,-180);
 endclass
@@ -66,17 +71,24 @@ endclass
 
 
 //THIS IS EQUAL SmallRedseatChair
+editor_attribute("Deprecated" arg "Заменить на SmallRedseatChair. Будет удален с редактором 1.15")
 class(SmallChair2) extends(IChairAsItem)
 	var(model,"ca\buildings\furniture\ch_mod_e.p3d");
 	var(icon,invicon(redchair));
 	getterconst_func(getChairOffsetPos,vec3(0,0,0));
 	getterconst_func(getChairOffsetDir,180);
+	var(size,ITEM_SIZE_LARGE);
+	var(weight,3.5);
 endclass
 
-	class(SmallRedseatChair) extends(SmallChair2)
-		var(model,"ca\buildings\furniture\ch_mod_e.p3d");
-		getterconst_func(getChairOffsetDir,180);
-	endclass
+class(SmallRedseatChair) extends(IChairAsItem)
+	var(model,"ca\buildings\furniture\ch_mod_e.p3d");
+	var(icon,invicon(redchair));
+	getterconst_func(getChairOffsetPos,vec3(0,0,0));
+	getterconst_func(getChairOffsetDir,180);
+	var(size,ITEM_SIZE_LARGE);
+	var(weight,3.5);
+endclass
 	
 
 class(ChairLibrary) extends(IChairAsItem)
@@ -84,12 +96,16 @@ class(ChairLibrary) extends(IChairAsItem)
 	var(icon,invicon(libchair));
 	getterconst_func(getChairOffsetPos,vec3(0,0,-0.5));
 	getterconst_func(getChairOffsetDir,270);
+	var(size,ITEM_SIZE_BIG);
+	var(weight,5.2);
 endclass
 
 class(StripedChair) extends(IChairAsItem)
 	var(icon,invicon(stripchair));
 	getterconst_func(getChairOffsetPos,vec3(0,0,-0.55));
 	var(model,"ml_shabut\furniture\stulpin.p3d");
+	var(size,ITEM_SIZE_HUGE);
+	var(weight,5.8);
 endclass
 
 class(ChairCasual) extends(IChairAsItem)
@@ -97,6 +113,8 @@ class(ChairCasual) extends(IChairAsItem)
 	getterconst_func(getChairOffsetPos,vec3(0.1,0,-0.45));
 	getterconst_func(getChairOffsetDir,90);
 	var(model,"ml_exodusnew\stulcasual.p3d");
+	var(size,ITEM_SIZE_HUGE);
+	var(weight,5.4);
 endclass
 
 class(ChairBigCasual) extends(IChairAsItem)
@@ -104,6 +122,8 @@ class(ChairBigCasual) extends(IChairAsItem)
 	getterconst_func(getChairOffsetPos,vec3(0,0.05,-0.6));
 	getterconst_func(restBias,vec3(0,0.35,0));
 	var(model,"relicta_models\models\interier\chair2.p3d");
+	var(size,ITEM_SIZE_HUGE);
+	var(weight,5.7);
 endclass
 
 class(RedPappedChair) extends(IChairAsItem)
@@ -111,6 +131,8 @@ class(RedPappedChair) extends(IChairAsItem)
 	getterconst_func(getChairOffsetPos,vec3(0,0,-0.1));
 	var(icon,invicon(redpapchair));
 	var(model,"ca\structures\furniture\chairs\ch_mod_h\ch_mod_h.p3d");
+	var(size,ITEM_SIZE_BIG);
+	var(weight,3.9);
 endclass
 
 class(RattanChair) extends(IChairAsItem)
@@ -118,6 +140,8 @@ class(RattanChair) extends(IChairAsItem)
 	getterconst_func(getChairOffsetDir,180);
 	getterconst_func(getChairOffsetPos,vec3(0, -0, -0.4));
 	var(model,"a3\structures_f_heli\furniture\rattanchair_01_f.p3d");
+	var(size,ITEM_SIZE_HUGE);
+	var(weight,4.2);
 endclass	
 
 
@@ -128,6 +152,8 @@ class(BarChair) extends(IChairAsItem)
 	getterconst_func(getChairOffsetPos,vec3(0,0,-0.1));
 	getterconst_func(getChairOffsetDir,180);
 	var(model,"relicta_models\models\interier\chairbar3.p3d");
+	var(size,ITEM_SIZE_LARGE);
+	var(weight,5.3);
 endclass	
 
 //classForTest = "WoodenChair";
@@ -137,4 +163,6 @@ class(WoodenChair) extends(IChairAsItem)
 	getterconst_func(getChairOffsetPos,vec3(0,-0.05,0.05));
 	getterconst_func(getChairOffsetDir,180);
 	var(model,"a3\structures_f\furniture\chairwood_f.p3d");
+	var(size,ITEM_SIZE_BIG);
+	var(weight,4.4);
 endclass

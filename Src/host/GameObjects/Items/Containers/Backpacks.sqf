@@ -18,7 +18,7 @@ class(CoinBag) extends(Container)
 	var(allowedSlots,[INV_BELT]);
 
 	var_exprval(countSlots,BASE_STORAGE_CAPACITY(1.4));
-	var(size,ITEM_SIZE_MEDIUM);
+	var(size,ITEM_SIZE_SMALL);
 	var(maxSize,ITEM_SIZE_SMALL);
 
 
@@ -64,6 +64,7 @@ class(FabricBagBig1) extends(Container)
 	var_exprval(countSlots,DEFAULT_BOX_STORAGE);
 	var(maxSize,ITEM_SIZE_BIG);
 	var(size,ITEM_SIZE_HUGE);
+	var(weight,gramm(800));
 	var(model,"ml_shabut\meshok\meshok1.p3d");
 	var(icon,invicon(bigsack));
 	

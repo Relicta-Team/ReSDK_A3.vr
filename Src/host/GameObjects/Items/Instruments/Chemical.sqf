@@ -22,5 +22,7 @@ class(ChemDistiller) extends(Item)
 
 	autoref var_num(handle_update);
 
+	var(material,"MatGlass");
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 endclass
 

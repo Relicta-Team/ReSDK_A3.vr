@@ -86,6 +86,13 @@ core_settings_list_default = [
 				}
 			]
 		],
+		["system_extendedInfoInClassname",
+			[
+				"Расширенная информация в имени класса",
+				"Отображает дополнительную информацию вместе с именами классов (материал, хп и т.д.)",
+				[false,"check"],validate_check
+			]
+		],
 		["system_classNamesDrawDistance",
 			[
 				"Расстояние отображения класснеймов объектов",

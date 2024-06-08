@@ -10,6 +10,8 @@
 
 editor_attribute("InterfaceClass")
 class(Organ) extends(Item)
+	var(material,"MatFlesh");
+	var(dr,0);
 	var(germs,-1);//без микробов на старте
 	var_bool(isVital);
 	getterconst_func(getOrganBodyPart,BP_INDEX_TORSO);
@@ -355,7 +357,8 @@ class(Brain) extends(VitalOrgan)
 	var(icon,invicon(brain));
 	var(name,"Мозг");
 	var(desc,"Кто-то решил выбросить все свои знания.");
-	var(size,ITEM_SIZE_MEDIUM);
+	var(size,ITEM_SIZE_SMALL);
+	var(weight,gramm(450));
 	getterconst_func(getOrganBodyPart,BP_INDEX_HEAD);
 	var(memories,new(VirtualMemoryStorage));
 
@@ -409,6 +412,8 @@ class(Tongue) extends(Organ)
 	var(name,"Язык");
 	var(icon,invicon(tongue));
 	var(model,"relicta_models\models\anatomy\tongue.p3d");
+	var(size,ITEM_SIZE_TINY);
+	var(weight,gramm(10));
 	getterconst_func(getOrganBodyPart,BP_INDEX_HEAD);
 endclass
 
@@ -416,6 +421,8 @@ class(Eye) extends(ITwoSidedOrgan)
 	var(name,"Глаз");
 	var(icon,invicon(eye));
 	var(model,"relicta_models\models\anatomy\eye.p3d");
+	var(size,ITEM_SIZE_TINY);
+	var(weight,gramm(5));
 	getterconst_func(getOrganBodyPart,BP_INDEX_HEAD);
 	func(onOrganLinked)
 	{
@@ -444,6 +451,7 @@ class(Heart) extends(VitalOrgan)
 	var(icon,invicon(heart));
 	var(model,"relicta_models\models\anatomy\hearth.p3d");
 	var(size,ITEM_SIZE_SMALL);
+	var(weight,gramm(900));
 	
 	func(onUpdate)
 	{
@@ -479,6 +487,7 @@ class(Liver) extends(Organ)
 	var(name,"Печень");
 	var(icon,invicon(liver));
 	var(model,"relicta_models\models\anatomy\liver\liver.p3d");
+	var(weight,1.4);
 	var(size,ITEM_SIZE_SMALL);
 	var(nextCheckTime,0); //для рвоты кровью
 	
@@ -518,6 +527,7 @@ class(Kidney) extends(ITwoSidedOrgan)
 	getter_func(getOrganSocketName,vec2(BO_INDEX_KIDNEY_L,BO_INDEX_KIDNEY_R) select sideToIndex(getSelf(side)));
 	var(name,"Почка");
 	var(size,ITEM_SIZE_SMALL);
+	var(weight,gramm(750));
 	var(icon,invicon(kidney));
 	var(model,"relicta_models\models\anatomy\kidneyleft.p3d");
 	
@@ -555,6 +565,7 @@ class(Guts) extends(IOrganContainer)
 	var(icon,invicon(guts));
 	var(model,"relicta_models\models\anatomy\kishki.p3d");
 	var(size,ITEM_SIZE_MEDIUM);
+	var(weight,1.7);
 	
 	func(constructor)
 	{
@@ -603,6 +614,7 @@ class(Stomach) extends(IOrganContainer)
 	var(icon,invicon(stomach));
 	var(model,"relicta_models\models\anatomy\stomach.p3d");
 	var(size,ITEM_SIZE_SMALL);
+	var(weight,gramm(500));
 
 	var(countSlots,80);
 	var(maxSize,ITEM_SIZE_MEDIUM);
@@ -657,6 +669,7 @@ class(Lungs) extends(VitalOrgan)
 	var(icon,invicon(lungs));
 	var(model,"relicta_models\models\anatomy\legkie\legkie.p3d");
 	var(size,ITEM_SIZE_MEDIUM);
+	var(weight,1.5);
 
 	func(onUpdate)
 	{

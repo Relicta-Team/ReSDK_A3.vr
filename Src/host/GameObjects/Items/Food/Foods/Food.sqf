@@ -9,7 +9,7 @@
 
 editor_attribute("InterfaceClass")
 class(IFoodItem) extends(Item)
-
+	var(material,"MatOrganic");
 	#include "..\..\..\Interfaces\IReagentContainer.Interface"
 	
 	/*
@@ -63,6 +63,7 @@ class(Pill) extends(IFoodItem)
 	//probably other model can be: "relicta_models\models\medical\tablet2.p3d"
 	getterconst_func(getBiteSize,null);
 	var(weight,gramm(2));
+	var(size,ITEM_SIZE_TINY);
 endclass
 
 class(Testo) extends(IFoodItem)
@@ -82,6 +83,7 @@ class(Lepeshka) extends(Testo)
 	var(name,"Лепёшка");
 	var(model,"relicta_models2\food\s_tortilla\s_tortilla.p3d");
 	var(reagents,[vec2("Nutriment",12)]newReagentsFood);
+	var(size,ITEM_SIZE_TINY);
 endclass
 
 class(GribChopped) extends(IFoodItem)
@@ -205,14 +207,16 @@ class(ButterPiece) extends(IFoodItem)
 	var(name,"Кусочек масла");
 	var(model,"relicta_models2\food\s_butter_piece\s_butter_piece.p3d");
 	var(weight,gramm(40));
+	var(size,ITEM_SIZE_TINY);
 	var(reagents,[vec2("Nutriment",2)]newReagentsFood);
 endclass
 
 class(Muka) extends(Item)
 	var(name,"Мука");
+	var(material,"MatOrganic");
 	var(desc,"Обозначения на пачке вряд-ли скажут о её содержимом.");
 	var(model,"ml_shabut\sovokgoods\risochek.p3d");
-	var(size,ITEM_SIZE_SMALL);
+	var(size,ITEM_SIZE_MEDIUM);
 	var(weight,gramm(80));
 	var(count,5);
 
@@ -251,7 +255,7 @@ class(Bread) extends(IFoodItem)
 	var(name,"Хлеб");
 	var(desc,"Хлеб - наша еда!");
 	var(model,"ml\ml_object_new\model_05\hleb.p3d");
-	var(size,ITEM_SIZE_SMALL);
+	var(size,ITEM_SIZE_MEDIUM);
 	var(weight,gramm(300));
 	var(reagents,[vec2("Nutriment",25)]newReagentsFood);
 
@@ -318,15 +322,19 @@ endclass
 class(Tea) extends(IFoodItem)
 	var(name,"Чай");
 	var(model,"ml_exodusnew\becondry.p3d");
+	var(weight,gramm(10));
 endclass
 
 class(TeaPacket) extends(Item)
 	var(name,"Коробка чая");
 	var(model,"ml_shabut\tzai\tzai.p3d");
+	var(weight,gramm(400));
+	var(size,ITEM_SIZE_MEDIUM);
 endclass
 
 class(Egg) extends(IFoodItem)
 	var(name,"Яичко");
+	var(weight,gramm(730));
 	var(model,"relicta_models\models\mushroom\egg.p3d");
 	var(reagents,[vec2("Nutriment",15)]newReagentsFood);
 endclass
@@ -336,6 +344,10 @@ class(SaltShaker) extends(IFoodItem)
 	var(name,"Соль");
 	var(desc,"Маленькая баночка.");
 	var(model,"relicta_models2\food\s_salt\s_salt.p3d");
+
+	var(size,ITEM_SIZE_TINY);
+	var(weight,gramm(70));
+
 	var(reagents,[vec2("Salt",30)]newReagentsFood);
 	getterconst_func(getBiteSize,2);
 	getter_func(canEat,callSelf(getFilledSpace) > 0);
@@ -380,19 +392,24 @@ class(Melteshonok) extends(IFoodItem)
 	var(model,"relicta_models\models\mutants\rat\rat1.p3d");
 	getterconst_func(getBiteSize,8);
 	var(reagents,[vec2("Nutriment",24)]newReagentsFood);
+
+	var(size,ITEM_SIZE_MEDIUM);
+	var(weight,2.7);
 endclass
 
 class(Shavirma) extends(IFoodItem)
 	var(name,"Шавирма");
 	var(model,"ml_exodusnew\beconfried.p3d");
 	var(reagents,[[vec2("Nutriment",40)] arg 100]newReagents);
+
+	var(weight,1.1);
 endclass
 
 class(Pie) extends(IFoodItem)
 	var(name,"Пирог");
 	var(model,"relicta_models2\food\s_pie\s_pie.p3d");
 	var(size,ITEM_SIZE_MEDIUM);
-	var(weight,gramm(randInt(300,400)));
+	var(weight,gramm(randInt(600,700)));
 	var(reagents,[[vec2("Nutriment",50)] arg 100]newReagents);
 
 	var_bool(__isLockedByPiecing);
@@ -437,11 +454,12 @@ class(Pie) extends(IFoodItem)
 	};
 endclass
 
+editor_attribute("InterfaceClass")
 class(PiePiece) extends(IFoodItem)
 	var(name,"Кусок пирога");
 	var(model,"relicta_models2\food\s_pie_piece\s_pie_piece.p3d");
 	var(size,ITEM_SIZE_SMALL);
-	var(weight,gramm(10));
+	var(weight,gramm(150));
 	var(reagents,null); //created only from pie
 
 endclass

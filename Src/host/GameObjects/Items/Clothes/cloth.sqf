@@ -11,7 +11,7 @@
 
 editor_attribute("InterfaceClass")
 class(Cloth) extends(Container)
-
+	var(material,"MatCloth");
 	var(name,"Одежда");
 	var(desc,"Обычная одежда");
 	var(size,ITEM_SIZE_MEDIUM);
@@ -174,6 +174,13 @@ U_FRITH_RUIN_SDR_snip_hawk
 
 */
 
+editor_attribute("InterfaceClass")
+class(BodyClothBase) extends(Cloth)
+	var(bodyPartsCovered,TORSO+LEGS+ARMS);
+	var(dr,1);
+	var(weight,gramm(340));
+endclass
+
 //var_runtime
 //getArray(configFile >> "cfgVehicles" >> "FRITH_RUIN_SDR_Tshirt_wht" >> "hiddenSelectionsTextures")
 #define generateSmartPicture() ___val = call compile((_fields select ((count _fields) - 1)) select 1); \
@@ -184,27 +191,31 @@ var_exprval(icon,str (___val select 0))
 //Шмоткам теперь вручную всё пишется
 #define generateSmartPicture() ;
 
-class(Castoffs1) extends(Cloth)
+class(Castoffs1) extends(BodyClothBase)
 	var(name,"Обноски");
 	var(desc,"Куча тряпья, частично закрывающее тело");
 	var(armaClass,"u_FRITH_RUIN_undltr_ref"); generateSmartPicture();
 	var(countSlots,0);
+	var(dr,0);
 	var(canUseContainer,false);
+	var(weight,gramm(320));
 endclass
 
 class(Castoffs2) extends(Castoffs1) var(armaClass,"U_FRITH_RUIN_undbld_ref"); generateSmartPicture(); endclass
 class(Castoffs3) extends(Castoffs1) var(armaClass,"U_FRITH_RUIN_undfab_ref"); generateSmartPicture(); endclass
 
-class(GreatcoatBlack) extends(Cloth)
+class(GreatcoatBlack) extends(BodyClothBase)
 	var(name,"Черная шинель");
 	var(armaClass,"mantel_reich");
+	var(weight,gramm(580));
 endclass
 
-class(NomadCloth1) extends(Cloth)
+class(NomadCloth1) extends(BodyClothBase)
 	var(name,"Одежда кочевника");
 	var(desc,"Такая одежда пользуется большой популярностью среди кочевников благодаря её удобности и вместительности");
 	var(armaClass,"U_FRITH_RUIN_sdr_ltr"); generateSmartPicture();
 	var(countSlots,4);
+	var(weight,gramm(650));
 endclass
 
 class(NomadCloth2) extends(NomadCloth1) var(armaClass,"U_FRITH_RUIN_sdr_ltrdrk");generateSmartPicture(); endclass
@@ -232,11 +243,12 @@ class(NomadCloth22) extends(NomadCloth1) var(armaClass,"U_FRITH_RUIN_sdr_fabmtp_
 class(NomadCloth23) extends(NomadCloth1) var(armaClass,"U_FRITH_RUIN_sdr_fabrus_rs");generateSmartPicture(); endclass
 
 
-class(ArmyCloth1) extends(Cloth)
+class(ArmyCloth1) extends(BodyClothBase)
 	var(name,"Армейская одежда");
 	var(desc,"Используется среди военных и стражей закона");
 	var(armaClass,"U_FRITH_RUIN_cofftan");generateSmartPicture();
 	var(countSlots,6);
+	var(weight,gramm(750));
 
 endclass
 
@@ -247,12 +259,13 @@ class(ArmyCloth5) extends(ArmyCloth1) var(armaClass,"U_FRITH_RUIN_coffdpm");gene
 class(ArmyCloth6) extends(ArmyCloth1) var(armaClass,"U_FRITH_RUIN_offdpm");generateSmartPicture(); endclass
 
 
-class(CitizenCloth1) extends(Cloth)
+class(CitizenCloth1) extends(BodyClothBase)
 	var(name,"Одежда");
 	var(desc,"Ничем не примечательная одежда");
 	var(countSlots,2);
 	var(armaClass,"U_FRITH_RUIN_SDR_Tshirt_wht");generateSmartPicture();
 
+	var(weight,gramm(310));
 	//var(icon,"friths_ruin_cloth\data\frith_ruin_offDPM_co.paa");
 endclass
 
@@ -310,18 +323,18 @@ class(ZnatCloth) extends(GreatcoatBlack)
 endclass
 
 //кожанка
-class(LeatherJacketCloth) extends(Cloth) var(armaClass,"Skyline_Character_U_CivilC_06_F"); endclass
+class(LeatherJacketCloth) extends(BodyClothBase) var(armaClass,"Skyline_Character_U_CivilC_06_F"); endclass
 //химза
-class(ChemicalProtectionSuit) extends(Cloth) var(armaClass,"Skyline_Character_U_CivilD_01_F"); endclass
+class(ChemicalProtectionSuit) extends(BodyClothBase) var(armaClass,"Skyline_Character_U_CivilD_01_F"); endclass
 //новоармеец
-class(NewArmyStdCloth) extends(Cloth) var(armaClass,"Skyline_Character_U_Pompier_02_F"); endclass
+class(NewArmyStdCloth) extends(BodyClothBase) var(armaClass,"Skyline_Character_U_Pompier_02_F"); endclass
 //голова
-class(HeadCloth) extends(Cloth)
+class(HeadCloth) extends(BodyClothBase)
 	var(armaClass,"Skyline_Character_U_CivilA_01_F");
 	var(name,"Роскошное Головинское пальто");
 endclass
 //зам головы
-class(KnutCloth) extends(Cloth)
+class(KnutCloth) extends(BodyClothBase)
 	var(armaClass,"Skyline_Character_U_CivilA_07_F");
 	var(name,"Кнутовка");
 endclass
@@ -331,49 +344,51 @@ class(BrightRedCloth) extends(HeadCloth)
 	var(armaClass,"Skyline_Character_U_CivilA_05_F");
 endclass
 
-class(CookerCloth) extends(Cloth)
+class(CookerCloth) extends(BodyClothBase)
 	var(armaClass,"rds_uniform_Villager4");
 	var(name,"Кухарская одежка");
+	var(weight,gramm(250));
 endclass
 
-class(GreenWorkerCloth) extends(Cloth)
+class(GreenWorkerCloth) extends(BodyClothBase)
 	var(armaClass,"rds_uniform_Villager3");
 	var(name,"Зелёная рабочая рубашка");
+	var(weight,gramm(270));
 endclass
 
 
 
-class(AbbatCloth) extends(Cloth)
+class(AbbatCloth) extends(BodyClothBase)
 	var(armaClass,"U_TIOW_Priest_Red");
 	var(name,"Роба Аббата");
 endclass
-class(CliricCloth) extends(Cloth)
+class(CliricCloth) extends(BodyClothBase)
 	var(armaClass,"U_TIOW_Priest_Grey");
 	var(name,"Серая роба");
 endclass
 
 //бригадирка
-class(BrigadirCloth) extends(Cloth)
+class(BrigadirCloth) extends(BodyClothBase)
 	var(armaClass,"rds_uniform_Woodlander1");
 	var(name,"Бригадирка");
 endclass
 //грибланка
-class(GriblanCloth) extends(Cloth)
+class(GriblanCloth) extends(BodyClothBase)
 	var(armaClass,"rds_uniform_Woodlander2");
 	var(name,"Грибланский костюм");
 endclass
 
-class(BarmenCloth) extends(Cloth)
+class(BarmenCloth) extends(BodyClothBase)
 	var(name,"Шмотки Барника");
 	var(armaClass,"norRes1");
 endclass
 
-class(DoctorCloth) extends(Cloth)
+class(DoctorCloth) extends(BodyClothBase)
 	var(armaClass,"rds_uniform_doctor");
 	var(name,"Леканые одеяния");
 endclass
 
-class(WatchmanCloth) extends(Cloth)
+class(WatchmanCloth) extends(BodyClothBase)
 	var(name,"Вахтерская одежда");
 	var(armaClass,"russian_coat");
 endclass
@@ -384,17 +399,17 @@ endclass
 
 
 
-class(MerchantCloth) extends(Cloth)
+class(MerchantCloth) extends(BodyClothBase)
 	var(name,"Торговская шинель");
 	var(armaClass,"nazi_coat");
 endclass
 
-class(GromilaCloth) extends(Cloth)
+class(GromilaCloth) extends(BodyClothBase)
 	var(armaClass,"Skyline_Character_U_CivilC_05_F");
 	var(name,"Громилка");
 endclass
 
-class(CaretakerCloth) extends(Cloth)
+class(CaretakerCloth) extends(BodyClothBase)
 	var(name,"Одеяния смотрителя");
 	var(armaClass,"mantel_hbt");
 endclass
@@ -414,6 +429,9 @@ endclass
 class(WoolCoat) extends(Cloth)
 	var(canUseContainer,false); //в ней ничего нет
 	var(allowedSlots,[INV_BACK]);
+	var(bodyPartsCovered,UPPER_TORSO);
+	var(coverage,70);
+	var(dr,2);
 	var(armaClass,"Coat_Desert");
 	var(name,"Накидка");
 
@@ -436,15 +454,18 @@ class(WoolCoat) extends(Cloth)
 	};
 endclass
 
-//headgears
-class(HatUshanka) extends(Cloth)
-	var(canUseContainer,false);
-	var(allowedSlots,[INV_HEAD]);
-	var(armaClass,"Skyline_HeadGear_Chapka_01_F");
-	var(weight,gramm(80));
-	var(maxSize,ITEM_SIZE_SMALL);
-	var(countSlots,0);
+editor_attribute("InterfaceClass")
+class(HeadgearBase) extends(Cloth)
 	var(name,"Головной убор");
+	var(bodyPartsCovered,HEAD);
+	var(dr,1);
+	var(coverage,70);
+	var(weight,gramm(80));
+	var(allowedSlots,[INV_HEAD]);
+
+	var(canUseContainer,false);
+	var(countSlots,0);
+
 	func(armaItemAddImpl)
 	{
 		objParams_1(_usr);
@@ -458,8 +479,18 @@ class(HatUshanka) extends(Cloth)
 	};
 endclass
 
+//headgears
+class(HatUshanka) extends(HeadgearBase)
+	
+	var(armaClass,"Skyline_HeadGear_Chapka_01_F");
+	var(weight,gramm(170));
+	var(maxSize,ITEM_SIZE_SMALL);
+	
+	
+endclass
+
 editor_attribute("InterfaceClass")
-class(HatProxy) extends(HatUshanka)
+class(HatProxy) extends(HeadgearBase)
 	func(armaItemAddImpl)
 	{
 		objParams_1(_usr);
@@ -471,27 +502,27 @@ class(HatProxy) extends(HatUshanka)
 	};
 endclass
 
-class(HatBeret) extends(HatUshanka)
+class(HatBeret) extends(HeadgearBase)
 	var(armaClass,"H_Beret_Colonel");
 	var(name,"Берет");
 endclass
 
-class(HatArmyCap) extends(HatUshanka)
+class(HatArmyCap) extends(HeadgearBase)
 	var(armaClass,"H_ParadeDressCap_01_US_F");
 	var(name,"Фуражка");
 endclass
 
-class(HatShemag) extends(HatUshanka)
+class(HatShemag) extends(HeadgearBase)
 	var(armaClass,"H_ShemagOpen_tan");
 	var(name,"Головная повязка");
 endclass
 
-class(HatBandana) extends(HatUshanka)
+class(HatBandana) extends(HeadgearBase)
 	var(armaClass,"H_Bandanna_gry");
 	var(name,"Чёрная повязка на голову");
 endclass
 
-class(HatOldUshanka) extends(HatUshanka)
+class(HatOldUshanka) extends(HeadgearBase)
 	var(armaClass,"rds_Woodlander_cap3");
 endclass
 
@@ -499,7 +530,7 @@ class(HatGrayOldUshanka) extends(HatOldUshanka)
 	var(armaClass,"rds_Woodlander_cap1");
 endclass
 
-class(WorkerCap) extends(HatUshanka)
+class(WorkerCap) extends(HeadgearBase)
 	var(armaClass,"rds_worker_cap2");
 	var(name,"Шапка");
 endclass
@@ -510,27 +541,31 @@ class(WorkerCoolCap) extends(WorkerCap)
 endclass
 
 
-class(CookerCap) extends(HatUshanka)
+class(CookerCap) extends(HeadgearBase)
 	var(armaClass,"rds_Villager_cap4");
 	var(name,"Поварская шапочка");
 	var(desc,"С пипкой на макушке!");
+	var(weight,gramm(200));
 endclass
 
-class(HoodAbbat) extends(HatUshanka)
+class(HoodAbbat) extends(HeadgearBase)
 	var(armaClass,"TIOW_Priest_Hood_Red");
 	var(name,"Капюшон");
 endclass
 
-class(HoodClirik) extends(HatUshanka)
+class(HoodClirik) extends(HoodAbbat)
 	var(armaClass,"TIOW_Priest_Hood_Grey");
 	var(name,"Капюшон");
+
+	var(coverage,85);
+	var(weight,gramm(300));
 endclass
 
-class(HoodBrown) extends(HoodClirik)
+class(HoodBrown) extends(HoodAbbat)
 	var(armaClass,"TIOW_Cultist_Hood");
 endclass
 
-class(HoodChemicalProt) extends(HatUshanka)
+class(HoodChemicalProt) extends(HoodAbbat)
 	var(armaClass,"Skyline_HeadGear_NBC_Hazmat_01_F");
 	var(name,"Капюшон");
 endclass
@@ -538,15 +573,16 @@ endclass
 class(Crown1) extends(HatProxy)
 	var(name,"Корона");
 	var(model,"relicta_models\models\interier\props\treasure\crown\crown1.p3d");
+	var(weight,gramm(600));
 endclass
 
-class(Crown2) extends(HatProxy)
+class(Crown2) extends(Crown1)
 	var(name,"Корона");
 	var(model,"relicta_models\models\interier\props\treasure\crown\crown2.p3d");
 endclass
 
 //combat headgears
-class(CombatHat) extends(HatUshanka)
+class(CombatHat) extends(HeadgearBase)
 	var(name,"Боевая каска");
 	var(weight,1.3);
 	var(bodyPartsCovered,HEAD);
@@ -556,6 +592,7 @@ class(CombatHat) extends(HatUshanka)
 endclass
 
 //facewears
+editor_attribute("InterfaceClass")
 class(ItemMask) extends(Cloth)
 	var(canUseContainer,false);
 	var(allowedSlots,[INV_FACE]);
@@ -564,6 +601,11 @@ class(ItemMask) extends(Cloth)
 	var(maxSize,ITEM_SIZE_SMALL);
 	var(countSlots,0);
 	var(name,"Маска");
+
+	var(coverage,40);
+	var(dr,1);
+	var(bodyPartsCovered,FACE);
+
 	func(armaItemAddImpl)
 	{
 		objParams_1(_usr);
@@ -584,15 +626,18 @@ endclass
 
 class(FaceCoverMask) extends(ItemMask)
 	var(name,"Тряпичная масочка");
+	var(weight,gramm(35));
+	var(notes,ARMOR_NOTE_ONLYFRONT);
 endclass
 
 class(BalaclavaMask) extends(ItemMask)
 	var(name,"Балаклава");
 	var(armaClass,"G_Balaclava_blk");
+	var(weight,gramm(70));
 	getter_func(canAccessToMouth,true);
 endclass
 
-class(BalaclavaMask2) extends(ItemMask)
+class(BalaclavaMask2) extends(BalaclavaMask)
 	var(armaClass,"G_Balaclava_oli");
 	getter_func(canAccessToMouth,true);
 endclass
@@ -600,6 +645,8 @@ endclass
 class(BrownBandannaMask) extends(ItemMask)
 	var(name,"Бандана");
 	var(armaClass,"G_Bandanna_khk");
+	var(weight,gramm(40));
+	var(notes,ARMOR_NOTE_ONLYFRONT);
 endclass
 
 class(BlackBandannaMask) extends(BrownBandannaMask)
@@ -625,13 +672,22 @@ endclass
 class(BlindfoldWhiteMask) extends(BlindfoldBlackMask)
 	var(armaClass,"G_Blindfold_01_white_F");
 endclass*/
-
-class(Gasmask) extends(ItemMask)
-	var(name,"Противогаз");
-	var(armaClass,"exoximza_mask_1");
+class(GasmaskBase) extends(ItemMask)
+	var(coverage,90);
+	var(bodyPartsCovered,FACE+EYES);
+	var(notes,ARMOR_NOTE_ONLYFRONT);
+	//TODO implement gas protect
 endclass
 
-class(RespiratorMask) extends(ItemMask)
+class(Gasmask) extends(GasmaskBase)
+	var(name,"Противогаз");
+	var(armaClass,"exoximza_mask_1");
+	var(weight,gramm(600));
+endclass
+
+class(RespiratorMask) extends(GasmaskBase)
 	var(name,"Респиратор");
 	var(armaClass,"exoximza_mask_2");
+	var(bodyPartsCovered,FACE);
+	var(weight,gramm(450));
 endclass

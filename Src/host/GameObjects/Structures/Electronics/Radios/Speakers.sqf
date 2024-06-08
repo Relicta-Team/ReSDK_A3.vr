@@ -76,6 +76,8 @@ class(Intercom) extends(IStructRadioEDLogic)
 
 	var(name,"Интерком");
 	var(model,"ml\ml_object_new\model_05\speeker.p3d");
+	var(material,"MatMetal");
+	var(dr,2);
 endclass
 
 class(IntercomOld) extends(Intercom)
@@ -88,4 +90,6 @@ class(StationSpeaker) extends(IStructRadioEDLogic)
 
 	var(name,"Динамик");
 	var(model,"relicta_models\models\interier\speaker.p3d");
+	var(material,"MatMetal");
+	var(dr,2);
 endclass

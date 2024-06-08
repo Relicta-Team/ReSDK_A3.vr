@@ -13,6 +13,7 @@
 //Динамическая дверь. Открывается через анимацию
 class(DoorDynamic) extends(DynamicStruct)
 	var(name,"Дверь");
+	var(dr,2);
 	getter_func(animateData,[]); //лист аргументов справа от animate (НЕ ДОЛЖНО СОДЕРЖАТЬ ПОКА БОЛЕЕ 1 СТЕЙТА АНИМАЦИИ)
 	var(serializedAnim,[-1 arg -1 arg -1]); //подготовленная анимация (должна совпадать с количеством анимаций)
 

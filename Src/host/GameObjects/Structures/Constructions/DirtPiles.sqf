@@ -11,7 +11,12 @@
 //кучи грязи
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(SmallDirtPile) extends(Constructions) var(name,"Куча грязи"); editor_only(var(desc,"Небольшая куча грязи");) endclass
+class(SmallDirtPile) extends(Constructions) 
+	var(name,"Куча грязи"); 
+	editor_only(var(desc,"Небольшая куча грязи");)
+	var(material,"MatDirt");
+	var(dr,1);
+endclass
 
 editor_attribute("EditorGenerated")
 class(MediumPileOfLightMud) extends(SmallDirtPile)
@@ -29,6 +34,7 @@ editor_attribute("EditorGenerated")
 class(SmallGrayStone) extends(SmallDirtPile)
 	var(model,"ca\rocks2\r2_stone.p3d");
 	var(name,"Маленький камень");
+	var(material,"MatStone");
 endclass
 
 editor_attribute("EditorGenerated")

@@ -13,6 +13,9 @@
 class(TorchHolder) extends(IStruct)
 	var(name,"Держатель для факела");
 	var(model,"a3\structures_f_enoch\walls\net\netfence_03_m_pole_f.p3d");
+	var(material,"MatBeton");
+	var(dr,2);
+	getter_func(canApplyDamage,false);//TODO revert on fixed destroying holders
 	var(torch,nullPtr); //привязанный факел как итем
 	var(attachedTorch,nullPtr); //структура привязанного факела
 
@@ -148,6 +151,7 @@ endclass
 class(LampKeroseneHolder) extends(TorchHolder)
 	var(name,"Длинная железная палка");
 	var(model,"a3\structures_f\walls\net_fence_pole_f.p3d");
+	var(material,"MatMetal");
 	getter_func(getAttachedItemName,"LampKerosene");
 	getter_func(holderNameStr,"LampKeroseneAsStruct");
 	getter_func(attachPos,vec3(0.2,0,0.85));
@@ -176,11 +180,15 @@ class(LampKeroseneHolder) extends(TorchHolder)
 endclass
 
 //специальный декоративный факел
+editor_attribute("HiddenClass")
+editor_attribute("Deprecated" arg "Требуется рефакторинг системы держателей")
 class(TorchAsStruct) extends(Campfire)
 	var(tDistance,0.001);
 	var(name,null);
 	var(desc,"Хорошо закреплённый в специальном держателе для факела. Ходят слухи, что на таких держателях факелы никогад не затухают от пещерных ветров.");
 	var(model,"relicta_models\models\weapons\melee\torch.p3d");
+	var(material,"MatWood");
+	getter_func(canApplyDamage,false); //TODO revert on fixed destroying holders
 	var(holder,nullPtr); //привязан к холдеру
 	var(light,LIGHT_FIRE);
 	getter_func(isFireLight,true);
@@ -232,6 +240,7 @@ endclass
 
 class(LampKeroseneAsStruct) extends(TorchAsStruct)
 	var(model,"ml_shabut\exoduss\keroslampa.p3d");
+	var(material,"MatGlass");
 	var(light,LIGHT_LAMP_KEROSENE);
 	var(name,null);
 	var(desc,"");

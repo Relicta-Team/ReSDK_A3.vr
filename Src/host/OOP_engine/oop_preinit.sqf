@@ -35,7 +35,7 @@ p_table_allclassnames = [];
 //for deleting object
 oop_deleteObject = {
 	private this = _this;
-
+	this setvariable ["__del_flag__",true];
 	{
 		this call (_x getvariable "destructor")
 	} foreach (this getvariable "proto" getvariable "__dtors");

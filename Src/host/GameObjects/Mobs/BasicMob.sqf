@@ -1526,8 +1526,6 @@ region(Animator)
 	_anim = {
 		(_this select 0) setMimic (_this select 1)
 	}; rpcAdd("setMimic",_anim);
-	
-	debug_responeAnimationStatus = false; //TODO remove after 0.13.2
 
 	func(applyGlobalAnim)
 	{
@@ -1541,42 +1539,19 @@ region(Animator)
 			//На сервере тоже вызываем метод
 			rpcCall(_method,[_mob arg _type]);
 
-			//server handler
-			//TODO remove after 0.13.2
-			private __handleStr = hashValue randInt(-999999,999999);
-			private _args = [__handleStr,_type];
-			private _code = {
-				params ["_hndl","_anm"];
-				_aneq = animationState player == _anm;
-				if (!_aneq) then {
-					
-					//send reply to server
-					[[_hndl,player,_anm,animationState player],
-					{
-						params ["_hndl","_usr","_srvAnm","_locAnm"];
-						["[applyGlobalAnim]: Handl %1 not synced for %2 (owner %3). Server: %4, Client %5"
-						,_hndl,_usr,owner _usr,_srvAnm,_locAnm] call logWarn;
-					}] remoteExecCall ["call",remoteExecutedOwner];
-				};
-			};
-
 			{
 				rpcSendToObject(_x,_method,[_mob arg _type]);
 
-				if (debug_responeAnimationStatus) then {
-					[_args,_code] remoteExecCall ["call",owner _x];
-				};
 			} foreach allPlayers;
 			
 			//Отладочная информация. Будет убрано после отлова ошибки синхронизации
-			["[applyGlobalAnim]: local - %1 (player=%6); Count: %2; Serversync: %3; Owner: %4; State %5; Handl: %7",
+			["[applyGlobalAnim]: local - %1 (player=%6); Count: %2; Serversync: %3; Owner: %4; State %5;",
 				local _mob,
 				count allPlayers,
 				animationState _mob == _type,
 				owner _mob,
 				_type,
-				isPlayer _mob,
-				__handleStr
+				isPlayer _mob
 			] call logInfo;
 
 			// //Тестовое исправление синхронизации по сети
@@ -2027,6 +2002,62 @@ region(banned combat setting)
 			#endif
 			callSelfParams(Stun,_timer arg true arg true);
 			callSelfParams(adjustPain,BP_INDEX_TORSO arg randInt(200,500));
+		};
+	};
+
+region(Step sounds component)
+	autoref var_handle(__ssHandle);
+	getter_func(isStepSoundSystemEnabled,getSelf(__ssHandle)!=-1);
+	func(setStepSoundSystem)
+	{
+		objParams_1(_mode);
+		if equals(callSelf(isStepSoundSystemEnabled),_mode) exitWith {false};
+		if (_mode) then {
+			assert_str(!isNullReference(getSelf(owner)),"Mob::setStepSoundSystem() - owner must be not null");
+
+			private __update = {
+				_paramStruct = (_this select 0);
+				this = _paramStruct select 0;
+				_m = _paramStruct select 1;
+				if isNullReference(_m) exitWith {
+					stopThisUpdate();
+				};
+
+				if !callFunc(this,isActive) exitWith {}; //dont send message on inactive mob
+
+				_newpos = getposatl _m;
+				_oldpos = _paramStruct select 2;
+				if (_newpos distance _oldpos > 0.2) then {
+					_paramStruct set [2,_newpos];
+					_p = callFunc(this,getObjectPlace);
+					_obj = (
+						[_newpos vectorAdd [0,0,-0.001],
+						_newpos vectorAdd [0,0,-100],
+						_m
+					] call si_getIntersectData) select 0;
+					_p = [_obj] call si_handleObjectReturnCheckVirtual;
+					if isNullReference(_p) exitWith {};
+					
+					_matObj = getVar(_p,material);
+					if isNullVar(_matObj) exitWith {};
+					if not_equalTypes(_matObj,nullPtr) exitWith {};
+					if isNullReference(_matObj) exitWith {};
+					_oldMat = _paramStruct select 3;
+					if equals(_matObj,_oldMat) exitWith {};
+
+					_paramStruct set [3,_matObj];
+
+					_dat = callFunc(_matObj,getStepSoundNetworkData);
+					callFuncParams(this,sendInfo,"stupd" arg _dat);
+				};
+
+			};
+			private _delay = 0.1;
+			private _p = [this,getSelf(owner),vec3(0,0,0),nullPtr];
+			setSelf(__ssHandle,startUpdateParams(__update,_delay,_p));
+		} else {
+			stopUpdate(getSelf(__ssHandle));
+			setSelf(__ssHandle,-1);
 		};
 	};
 

@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: 1.14-path.2';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.14-path.3';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -104,6 +104,33 @@ _4037_104004004_490974_91924 = ['Key',[4037.1,4004.49,9.92217,true],0,[0.0245368
 _4035_395024008_773444_27704 = ['IStruct',[4035.4,4008.77,9.67472,true],96.4641,[-0.031897,0.0450359,0.998476], {_thisObj setvariable ['model','a3\structures_f_heli\furniture\rattantable_01_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4035_437994008_815925_07424 = ['Key',[4035.44,4008.82,10.0772,true],0,[0.0245368,0.0395618,0.998916], {_thisObj setvariable ['preinit@__keytypesstr',"keymain"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
 ['LampKerosene',[4035.08,4008.58,5.07209],354.914,[0,0,1]] call InitItem; 
+['Struct_DebugMaterial__',[4007.02,4018.88,13.5008,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+_4014_248054015_872317_95713 = ['IStruct',[4014.25,4015.87,12.4596,true],269.512,[0.00108034,-0.00697208,0.999975], {_thisObj setvariable ['model','csa_constr\csa_obj\pod_18x6.p3d'];}] call InitStruct; // !!! realocated model !!!
+['SteelRustyStairs',[4026.9,4015.72,2.87804],268.039,[0,0,1]] call InitStruct; 
+['Struct_DebugMaterial__',[4007.01,4020.17,15.1019,true],[0,1.19249e-008,1],[0,-1,1.19249e-008]] call InitStruct; 
+_4010_558354020_1335410_09438 = ['Struct_DebugMaterial__',[4010.56,4020.13,15.0946,true],[0,1.19249e-008,1],[0,-1,1.19249e-008]] call InitStruct; 
+_4010_563234018_846688_33809 = ['Struct_DebugMaterial__',[4010.56,4018.85,13.4934,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+_4013_859384020_1911610_03752 = ['Struct_DebugMaterial__',[4013.86,4020.19,15.0378,true],[0,1.19249e-008,1],[0,-1,1.19249e-008]] call InitStruct; 
+_4013_864264018_904308_28123 = ['Struct_DebugMaterial__',[4013.86,4018.9,13.4366,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+_4017_062014020_2553710_01001 = ['Struct_DebugMaterial__',[4017.06,4020.26,15.0102,true],[0,1.19249e-008,1],[0,-1,1.19249e-008]] call InitStruct; 
+_4017_066894018_968518_25373 = ['Struct_DebugMaterial__',[4017.07,4018.97,13.4091,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+_4020_218754020_2749010_02121 = ['Struct_DebugMaterial__',[4020.22,4020.27,15.0214,true],[0,1.19249e-008,1],[0,-1,1.19249e-008]] call InitStruct; 
+_4020_223634018_988048_26492 = ['Struct_DebugMaterial__',[4020.22,4018.99,13.4203,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+_4007_353524012_0273410_01050 = ['Struct_DebugMaterial__',[4007.35,4012.03,15.0107,true],[-6.22792e-005,-2.17711e-006,1],[-0.0337258,0.999431,7.5455e-008]] call InitStruct; 
+_4007_305184013_312998_25421 = ['Struct_DebugMaterial__',[4007.31,4013.31,13.4095,true],178.069,[-0.0058902,0.00673509,0.99996]] call InitStruct; 
+_4010_756104013_387218_23076 = ['Struct_DebugMaterial__',[4010.76,4013.39,13.3861,true],178.069,[-0.0058902,0.00673509,0.99996]] call InitStruct; 
+_4010_804444012_101569_98705 = ['Struct_DebugMaterial__',[4010.8,4012.1,14.9873,true],[-6.22792e-005,-2.17711e-006,1],[-0.0337258,0.999431,7.5455e-008]] call InitStruct; 
+_4014_247804013_456058_23109 = ['Struct_DebugMaterial__',[4014.25,4013.46,13.3864,true],178.069,[-0.0058902,0.00673509,0.99996]] call InitStruct; 
+_4014_296144012_170419_98737 = ['Struct_DebugMaterial__',[4014.3,4012.17,14.9876,true],[-6.22792e-005,-2.17711e-006,1],[-0.0337258,0.999431,7.5455e-008]] call InitStruct; 
+_4017_596924013_487798_24267 = ['Struct_DebugMaterial__',[4017.6,4013.49,13.398,true],178.069,[-0.0058902,0.00673509,0.99996]] call InitStruct; 
+_4017_645264012_202159_99895 = ['Struct_DebugMaterial__',[4017.65,4012.2,14.9992,true],[-6.22792e-005,-2.17711e-006,1],[-0.0337258,0.999431,7.5455e-008]] call InitStruct; 
+_4021_116464013_572028_26634 = ['Struct_DebugMaterial__',[4021.12,4013.57,13.4217,true],178.069,[-0.0058902,0.00673509,0.99996]] call InitStruct; 
+_4021_164794012_2863810_02262 = ['Struct_DebugMaterial__',[4021.16,4012.29,15.0229,true],[-6.22792e-005,-2.17711e-006,1],[-0.0337258,0.999431,7.5455e-008]] call InitStruct; 
+_4023_514654018_216068_27771 = ['Struct_DebugMaterial__',[4023.51,4018.22,13.433,true],88.9248,[-0.00680938,-0.00577416,0.99996]] call InitStruct; 
+_4024_802734018_2465810_03400 = ['Struct_DebugMaterial__',[4024.8,4018.25,15.0342,true],[2.42486e-006,-0.000102702,1],[-0.999823,-0.0188028,4.93347e-007]] call InitStruct; 
+['SmallStoveGrill',[4018.56,4014.79,7.37005],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_DORM_var];}] call InitStruct; 
+['SmallStoveGrill',[4008.72,4015.68,7.44443],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_DORM_var];}] call InitStruct; 
+['SmallStoveGrill',[4019.15,4018.22,7.32621],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_DORM_var];}] call InitStruct; 
 
 
 
@@ -197,4 +224,64 @@ if (!isNil'_4035_395024008_773444_27704') then {
 };
 if (!isNil'_4035_437994008_815925_07424') then {
 	_4035_437994008_815925_07424 setvariable ['name',"Ключ от главного входа"];
+};
+if (!isNil'_4010_558354020_1335410_09438') then {
+	_4010_558354020_1335410_09438 setvariable ['material',"MatBeton"];
+};
+if (!isNil'_4010_563234018_846688_33809') then {
+	_4010_563234018_846688_33809 setvariable ['material',"MatBeton"];
+};
+if (!isNil'_4013_859384020_1911610_03752') then {
+	_4013_859384020_1911610_03752 setvariable ['material',"MatDirt"];
+};
+if (!isNil'_4013_864264018_904308_28123') then {
+	_4013_864264018_904308_28123 setvariable ['material',"MatDirt"];
+};
+if (!isNil'_4017_062014020_2553710_01001') then {
+	_4017_062014020_2553710_01001 setvariable ['material',"MatWood"];
+};
+if (!isNil'_4017_066894018_968518_25373') then {
+	_4017_066894018_968518_25373 setvariable ['material',"MatWood"];
+};
+if (!isNil'_4020_218754020_2749010_02121') then {
+	_4020_218754020_2749010_02121 setvariable ['material',"MatMetal"];
+};
+if (!isNil'_4020_223634018_988048_26492') then {
+	_4020_223634018_988048_26492 setvariable ['material',"MatMetal"];
+};
+if (!isNil'_4007_353524012_0273410_01050') then {
+	_4007_353524012_0273410_01050 setvariable ['material',"MatSynt"];
+};
+if (!isNil'_4007_305184013_312998_25421') then {
+	_4007_305184013_312998_25421 setvariable ['material',"MatSynt"];
+};
+if (!isNil'_4010_756104013_387218_23076') then {
+	_4010_756104013_387218_23076 setvariable ['material',"MatOrganic"];
+};
+if (!isNil'_4010_804444012_101569_98705') then {
+	_4010_804444012_101569_98705 setvariable ['material',"MatOrganic"];
+};
+if (!isNil'_4014_247804013_456058_23109') then {
+	_4014_247804013_456058_23109 setvariable ['material',"MatFlesh"];
+};
+if (!isNil'_4014_296144012_170419_98737') then {
+	_4014_296144012_170419_98737 setvariable ['material',"MatFlesh"];
+};
+if (!isNil'_4017_596924013_487798_24267') then {
+	_4017_596924013_487798_24267 setvariable ['material',"MatPaper"];
+};
+if (!isNil'_4017_645264012_202159_99895') then {
+	_4017_645264012_202159_99895 setvariable ['material',"MatPaper"];
+};
+if (!isNil'_4021_116464013_572028_26634') then {
+	_4021_116464013_572028_26634 setvariable ['material',"MatCloth"];
+};
+if (!isNil'_4021_164794012_2863810_02262') then {
+	_4021_164794012_2863810_02262 setvariable ['material',"MatCloth"];
+};
+if (!isNil'_4023_514654018_216068_27771') then {
+	_4023_514654018_216068_27771 setvariable ['material',"MatGlass"];
+};
+if (!isNil'_4024_802734018_2465810_03400') then {
+	_4024_802734018_2465810_03400 setvariable ['material',"MatGlass"];
 };
