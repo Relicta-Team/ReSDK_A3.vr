@@ -1394,6 +1394,7 @@ class(Debug_Item_damager) extends(Item)
 
 	getterconst_func(startUpdateOnConstruct,true);
 	getterconst_func(defaultUpdateDelay,0.01);
+	getter_func(canApplyDamage,false);
 	func(onUpdate)
 	{
 		objParams();
