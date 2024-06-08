@@ -41,33 +41,34 @@ class(IStruct) extends(IDestructible)
 		};
 	};
 
-	func(getDescFor) {
-		objParams_1(_usr);
+	//TODO remove in next version
+	// func(getDescFor) {
+	// 	objParams_1(_usr);
 
-		#define PIC_PREP <img size='0.8' image='%2'/>
+	// 	#define PIC_PREP <img size='0.8' image='%2'/>
 
-		private _rand = pick ["Ну а это %1" arg "А это %1" arg "Это %1" arg "Да это же %1" arg "Вот это %1"];
-		private _postrand = pick ["!" arg "." arg "..." arg ", вроде..."]; //очень странные дела с пикингом через препроцессор
+	// 	private _rand = pick ["Ну а это %1" arg "А это %1" arg "Это %1" arg "Да это же %1" arg "Вот это %1"];
+	// 	private _postrand = pick ["!" arg "." arg "..." arg ", вроде..."]; //очень странные дела с пикингом через препроцессор
 
-		private _icon = getSelf(icon);
+	// 	private _icon = getSelf(icon);
 
-		private _desc = callSelf(getDesc);
-		if (_desc != stringEmpty) then {_desc = sbr + _desc;};
+	// 	private _desc = callSelf(getDesc);
+	// 	if (_desc != stringEmpty) then {_desc = sbr + _desc;};
 
-		_icon = if isNullVar(_icon) then {stringEmpty} else {format["<img size='0.8' image='%1'/> ",_icon]};
+	// 	_icon = if isNullVar(_icon) then {stringEmpty} else {format["<img size='0.8' image='%1'/> ",_icon]};
 
-		//collect germ info to ru text with GERM_COUNT_TO_NAME()
-		private _germText = GERM_COUNT_TO_NAME(getSelf(germs));
-		if (_germText != "") then {
-			modvar(_desc) + sbr + _germText;
-		};
+	// 	//collect germ info to ru text with GERM_COUNT_TO_NAME()
+	// 	private _germText = GERM_COUNT_TO_NAME(getSelf(germs));
+	// 	if (_germText != "") then {
+	// 		modvar(_desc) + sbr + _germText;
+	// 	};
 
-		#ifdef EDITOR
-			modvar(_desc) + sbr + callSelf(getObjectHealth_Editor);
-		#endif
+	// 	#ifdef EDITOR
+	// 		modvar(_desc) + sbr + callSelf(getObjectHealth_Editor);
+	// 	#endif
 
-		format[_rand + _postrand,_icon + callSelf(getName)] + _desc
-	};
+	// 	format[_rand + _postrand,_icon + callSelf(getName)] + _desc
+	// };
 
 
 	func(InitModel)
