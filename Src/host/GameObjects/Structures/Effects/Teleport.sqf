@@ -238,6 +238,8 @@ endclass
 
 class(SewercoverBase) extends(TeleportInteractible)
 	var(name,"Люк");
+	getter_func(canApplyDamage,false);
+	var(material,"MatMetal");
 	var(model,"a3\structures_f_exp\infrastructure\roads\sewercover_03_f.p3d");
 	getter_func(interactMessage,"начинает спускаться вниз");
 endclass
