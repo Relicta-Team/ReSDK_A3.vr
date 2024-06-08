@@ -250,6 +250,7 @@ class(Trap) extends(ITrapItem)
 			private _m = pick["схлопывается","издает леденящий щелчок","сжимается"];
 			callFuncParams(this,worldSay,"<t color='#AD1D1D' size='1.3'>"+callFuncParams(this,getNameFor,_usr) + " " + _m +".</t>");
 		};
+		super();
 	};
 
 endclass
