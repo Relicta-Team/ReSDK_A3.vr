@@ -358,12 +358,13 @@ class(GameObject) extends(ManagedObject)
 		_icon = if (isNullVar(_icon) || {equals(_icon,stringEmpty)}) then {stringEmpty} else {
 			format["<img size='0.8' image='%1'/> ",if (".paa" in _icon) then {_icon} else {PATH_PICTURE_INV(_icon)}]};
 
-		private _otherText = if isTypeOf(this,Decor) then {""} else {
+		private _otherText = if (isTypeOf(this,Decor) || isTypeOf(this,IStruct)) then {""} else {
 			//Вес меньше 0 значит это фиктивный итем
-			if (callSelf(getWeight) < 0) exitWith {""};
+			if (callSelf(getWeight) < 0) exitWith {""}; 
 
 			sbr + callSelf(getTextWeight) + sbr +
 			"Размер: " + callSelf(getTextSize)
+			
 			#ifdef EDITOR
 			+ sbr + (if (isTypeOf(this,Item) && !isNull(getSelf(bbx))) then
 			{
@@ -380,11 +381,38 @@ class(GameObject) extends(ManagedObject)
 				modvar(_otherText) + sbr + _germText;
 			};
 
+			if (callFuncParams(_usr,getDistanceTo,this) < 5) then {
+				modvar(_otherText) + sbr + (
+					if (
+						callSelf(canApplyDamage)
+						&& callSelf(getClassName) != "IStruct" //!temporary fix. remove in next versions
+						) then {
+					private _drTexts = ["Беззащитно","Слабенкьо защищено","Выглядит крепко","Хорошо защищено","Отличная защита"];
+					private _drConv = round (linearConversion [0, 8, getSelf(dr),0,4,true]);
+					
+					format[
+						'Состояние: %1 - %2br_inlineКачество: %3',
+						callSelf(getHPStatusText),
+						_drTexts select _drConv,
+						callSelf(getHTStatusText)
+					]
+				} else {
+					format[
+						"Выглядит %1. Никому %2 разрушить такое...",
+						pick["крайне древне","так старо","очень древне","на сотни колен"],
+						pick["не подвластно","не дозволено","не смочь","не найти сил","не суметь"],
+						pick["такое","это",callSelfParams(getNameFor,_usr)]
+					]
+				});
+			};
+			
+
 			#ifdef EDITOR
 			modvar(_otherText) + sbr + callSelf(getObjectHealth_Editor)
 			#endif
 		};
-
+		
+		//ddat = [_rand,_postrand,_icon,callSelfParams(getNameFor,_usr),_desc,_otherText];
 		format[_rand + _postrand,_icon + callSelfParams(getNameFor,_usr)] +
 		_desc +
 		_otherText;
@@ -1405,7 +1433,11 @@ class(IDestructible) extends(GameObject)
 			callSelfParams(onChangeObjectHP,2);
 			private _rr = (getSelf(ht) call gurps_rollstd);
 			if (getRollType(_rr) in [DICE_FAIL,DICE_CRITFAIL]) then {
-				//
+				//?тест. снижаем dr объекта
+				private _oldDr = getSelf(dr);
+				if (_oldDr>0) then {
+					setSelf(dr,(_oldDr - 1) max 0);
+				};
 			};
 		};
 		if (_newhp <= (-1*_maxhp) && _newhp > (-5*_maxhp)) exitWith {
@@ -1422,6 +1454,40 @@ class(IDestructible) extends(GameObject)
 			delete(this);
 		};
 		errorformat("IDestructible::applyDamage() - no affect damage: hp %1; max hp %2; Amount %3",_newhp arg _maxhp arg _amount);
+	};
+
+	func(getHPStatusText)
+	{
+		objParams();
+		private _hp = getSelf(hp);
+		private _maxhp = getSelf(hpMax);
+		if (_hp < (round(_maxhp/3)) && _hp > 0) exitWith {
+			"Повреждено"
+		};
+		if (_hp <= 0 && _hp > (-1*_maxhp)) exitWith {
+			"Сильно повреждено"
+		};
+		if (_hp <= (-1*_maxhp) && _hp > (-5*_maxhp)) exitWith {
+			//private _idx = round linearConversion [-5*_maxhp,-1*_maxhp,_hp,0,4,true];
+			//["Почти уничтожено",""] select _idx
+			"Почти " + (pick["разрушено","уничтожено","сломано","раздолбано"])
+		};
+		if (_hp > 0) exitWith {"Нормальное"};
+		"Уничтожено"
+	};
+
+	func(getHTStatusText)
+	{
+		objParams();
+		private _ht = getSelf(ht);
+		if (_ht <= 3) exitWith {"Отвратительное"};
+		if (inRange(_ht,4,6)) exitWith {"Ужасное"};
+		if inRange(_ht,7,8) exitWith {"Плохое"};
+		if inRange(_ht,9,10) exitWith {"Обычное"};
+		if inRange(_ht,11,12) exitWith {"Хорошее"};
+		if inRange(_ht,13,14) exitWith {"Отличное"};
+		if inRange(_ht,15,16) exitWith {"Превосходное"};
+		if (_ht > 17) exitWith {"Великолепное"};
 	};
 
 	func(onChangeObjectHP)
