@@ -5,25 +5,25 @@ class EditorData
 	angleGridStep=0.08726646;
 	scaleGridStep=100;
 	autoGroupingDist=10;
-	toggles=46;
+	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=8537;
+		nextID=8539;
 	};
 	class LayerIndexProvider
 	{
-		nextID=1596;
+		nextID=1654;
 	};
 	class Camera
 	{
-		pos[]={3424.2424,38.4842,3670.0034};
-		dir[]={0.70040441,-0.28190359,-0.65586305};
-		up[]={0.20584029,0.95941186,-0.19275095};
-		aside[]={-0.68357742,1.3237259e-006,-0.72999871};
+		pos[]={3428.7092,33.193729,3661.073};
+		dir[]={0.024980459,-0.27774155,-0.96044236};
+		up[]={0.0072240769,0.96061647,-0.27775288};
+		aside[]={-0.99975669,2.1896994e-006,-0.026004422};
 	};
 };
 binarizationWanted=0;
-sourceName="ReSDK_A3";
+sourceName="resdk_fork";
 addons[]=
 {
 	"A3_Characters_F",
@@ -131,7 +131,6 @@ addons[]=
 	"A3_Structures_F_EPA_Items_Medical",
 	"A3_Structures_F_Argo_Industrial_Agriculture",
 	"rabochiystol",
-	"A3_Structures_F_EPA_Walls",
 	"A3_Structures_F_Bootcamp_VR_Helpers",
 	"A3_Structures_F_Bootcamp_VR_Blocks"
 };
@@ -623,7 +622,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=8;
+		items=10;
 		class Item0
 		{
 			dataType="Group";
@@ -29929,10 +29928,9 @@ class Mission
 				{
 					dataType="Layer";
 					name="А Лекарь";
-					state=1;
 					class Entities
 					{
-						items=58;
+						items=55;
 						class Item0
 						{
 							dataType="Object";
@@ -30413,7 +30411,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3429.6064,32.066631,3657.1143};
+								position[]={3429.8557,32.066631,3657.0957};
 							};
 							side="Empty";
 							flags=5;
@@ -30423,7 +30421,7 @@ class Mission
 							};
 							id=8398;
 							type="dooor";
-							atlOffset=0.077768326;
+							atlOffset=0.095144272;
 						};
 						class Item29
 						{
@@ -30870,57 +30868,6 @@ class Mission
 							id=8511;
 							type="CUP_A2_shed_w03_ruins_ep1";
 							atlOffset=0.040586472;
-						};
-						class Item55
-						{
-							dataType="Object";
-							class PositionInfo
-							{
-								position[]={3426.75,32,3657.125};
-								angles[]={0,0,1.5707964};
-							};
-							side="Empty";
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_epa\walls\invisiblebarrier_f.p3d""]]],[""class"",""IStruct""]]}";
-							};
-							id=8534;
-							type="Land_InvisibleBarrier_F";
-							atlOffset=1.1876717;
-						};
-						class Item56
-						{
-							dataType="Object";
-							class PositionInfo
-							{
-								position[]={3427.75,32,3657.125};
-								angles[]={0,0,1.5707964};
-							};
-							side="Empty";
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_epa\walls\invisiblebarrier_f.p3d""]]],[""class"",""IStruct""]]}";
-							};
-							id=8535;
-							type="Land_InvisibleBarrier_F";
-							atlOffset=1.1876717;
-						};
-						class Item57
-						{
-							dataType="Object";
-							class PositionInfo
-							{
-								position[]={3428.75,32,3657.125};
-								angles[]={0,0,1.5707964};
-							};
-							side="Empty";
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_epa\walls\invisiblebarrier_f.p3d""]]],[""class"",""IStruct""]]}";
-							};
-							id=8536;
-							type="Land_InvisibleBarrier_F";
-							atlOffset=1.1876717;
 						};
 					};
 					id=8458;
@@ -34102,6 +34049,42 @@ class Mission
 			id=8239;
 			type="EmptyDetector";
 			atlOffset=1.3671341;
+		};
+		class Item8
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3426.9202,31.94479,3652.2573};
+				angles[]={0,0.016768031,-0};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MedicalCurtainSmall""]]}";
+			};
+			id=8537;
+			type="medzanaves2";
+			atlOffset=0.64410782;
+		};
+		class Item9
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3427.428,30.916199,3657.0876};
+				angles[]={0,3.1396756,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=8538;
+			type="CUP_A2_l_2m5_ep1";
+			atlOffset=0.18465614;
 		};
 	};
 };

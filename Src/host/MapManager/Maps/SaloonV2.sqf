@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: 1.14-path.2';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.14-path.3';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -1897,7 +1897,7 @@ if ((random 1) < 0.5) then {
 ['LiqTovimin',[3434.02,3656.51,26.6042],0,[0,0,1]] call InitItem; 
 ['LiqTovimin',[3436.64,3653.92,27.3369],0,[0,0,1]] call InitItem; 
 ['WoodenOfficeTable3',[3436.24,3656.46,25.7814],180.001,[0,0,1]] call InitStruct; 
-_3429_606453657_1142625_70103 = ['SteelGreenDoor',[3429.61,3657.11,25.701],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RDoctorSaloonKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+_3429_855713657_0957025_70103 = ['SteelGreenDoor',[3429.86,3657.1,25.701],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RDoctorSaloonKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SteelThinWallSmall',[3431.07,3650.6,25.3864],0,[0,0,1]] call InitStruct; 
 ['SteelThinWallSmall',[3435.3,3650.57,25.7814],0,[0,0,1]] call InitStruct; 
 _3436_104003657_1689526_77222 = ['WallmountedMedicalCabinet',[3436.1,3657.17,26.7722],0,[0,0,1]] call InitStruct; 
@@ -1924,9 +1924,6 @@ _3434_323973656_9838925_12475 = ['SteelGridDoorElectronic',[3434.32,3656.98,25.1
 ['BoneStraightener',[3433.17,3654.79,26.5677],340,[0,0,1]] call InitItem; 
 ['SmallDirtGrey',[3428.71,3658.13,24.9973],270,[0,0,1]] call InitStruct; 
 ['SmallPileOfBricksAndPlanks',[3439.09,3654.78,29.6514,true],250,[0.00457125,0.00768903,0.99996]] call InitStruct; 
-_3426_750003657_1250027_00000 = ['IStruct',[3426.75,3657.13,32,true],0,[-1,0,-4.37114e-008], {_thisObj setvariable ['model','a3\structures_f_epa\walls\invisiblebarrier_f.p3d'];}] call InitStruct; // !!! realocated model !!!
-_3427_750003657_1250027_00000 = ['IStruct',[3427.75,3657.13,32,true],0,[-1,0,-4.37114e-008], {_thisObj setvariable ['model','a3\structures_f_epa\walls\invisiblebarrier_f.p3d'];}] call InitStruct; // !!! realocated model !!!
-_3428_750003657_1250027_00000 = ['IStruct',[3428.75,3657.13,32,true],0,[-1,0,-4.37114e-008], {_thisObj setvariable ['model','a3\structures_f_epa\walls\invisiblebarrier_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3474_233893647_5815430_09101 = ['SpawnPoint',[3474.23,3647.58,30.091],115,[0,0,1]] call InitStruct; 
 _3485_112553643_2619630_09301 = ['SpawnPoint',[3485.11,3643.26,30.093],225,[0,0,1]] call InitStruct; 
 _3483_443363655_4079620_31553 = ['CollectionSpawnPoint',[3483.44,3655.41,20.3155],178.654,[0,0,1]] call InitStruct; 
@@ -2015,6 +2012,8 @@ _3424_681403498_129880_80898 = ['IStruct',[3424.68,3498.13,5.80182,true],[-0.006
 _3420_941893497_050291_37144 = ['IStruct',[3420.94,3497.05,1.37144],0,[0,0,1], {_thisObj setvariable ['model','ca\structures\wall\wall_cyel_5.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3420_738043499_405031_46790 = ['IStruct',[3420.74,3499.41,6.66745,true],95.3356,[7.75496e-005,0.000909055,1], {_thisObj setvariable ['model','relicta_models\models\mutants\spider.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3420_746093499_722662_13411 = ['IStruct',[3420.75,3499.72,7.13388,true],0,[-0.00091349,0,1], {_thisObj setvariable ['model','ml_shabut\exoduss\shyrevo.p3d'];}] call InitStruct; // !!! realocated model !!!
+['MedicalCurtainSmall',[3426.92,3652.26,25.75],0.960737,[0,0,1]] call InitStruct; 
+['ClayWallSmall',[3427.4,3657.09,25.7814],179.89,[0,0,1]] call InitStruct; 
 
 
 
@@ -2518,8 +2517,8 @@ if (!isNil'_3445_833013623_8896524_78650') then {
 if (!isNil'_3432_452393652_6057125_78139') then {
 	_3432_452393652_6057125_78139 setvariable ['islocked',true];
 };
-if (!isNil'_3429_606453657_1142625_70103') then {
-	_3429_606453657_1142625_70103 setvariable ['islocked',true];
+if (!isNil'_3429_855713657_0957025_70103') then {
+	_3429_855713657_0957025_70103 setvariable ['islocked',true];
 };
 if (!isNil'_3436_104003657_1689526_77222') then {
 	[_3436_104003657_1689526_77222,'NeedleWithThreads',1,100] call (_3436_104003657_1689526_77222 getvariable 'proto' getvariable 'createItemInContainer');
