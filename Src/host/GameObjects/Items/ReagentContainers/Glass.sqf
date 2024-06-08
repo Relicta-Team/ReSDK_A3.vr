@@ -86,6 +86,7 @@ class(GlassGoblet) extends(IGlassReagentItem)
 	var(model,"relicta_models\models\interier\props\kitchen\vinecup.p3d");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(200));
+	var(material,"MatGlass");
 	
 	var(reagents,vec2(this,30) call ms_create);
 	getterconst_func(transferAmount,[2 arg 5 arg 10 arg 20 arg 30]);
