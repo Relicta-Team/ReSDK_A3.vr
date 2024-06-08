@@ -15,6 +15,7 @@ class(SmallDirtPile) extends(Constructions)
 	var(name,"Куча грязи"); 
 	editor_only(var(desc,"Небольшая куча грязи");)
 	var(material,"MatDirt");
+	var(dr,1);
 endclass
 
 editor_attribute("EditorGenerated")

@@ -59,6 +59,7 @@ class(DeliveryPipe) extends(IDeliveryPipeInternal)
 	var(name,"Труба доставки");
 	var(model,"ca\structures_e\misc\misc_construction\misc_concoutlet_ep1.p3d");
 	var(material,"MatBeton");
+	var(dr,3);
 	var(maxSize,ITEM_SIZE_BIG);
 	var(countSlots,DEFAULT_LARGEBOX_STORAGE);
 
@@ -1020,6 +1021,8 @@ class(PrinterMerchantConsole) extends(ElectronicDevice)
 	};
 
 	var(model,"CBRNContainer_01_closed_olive_F");
+	var(material,"MatSynt");
+	var(dr,3);
 	var(papers,[]);
 	var(maxPaperCount,20);
 	var(edIsEnabled,true);

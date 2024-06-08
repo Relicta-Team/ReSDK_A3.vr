@@ -14,6 +14,7 @@ class(TableBase) extends(Furniture)
 	var(name,"Стол"); 
 	editor_only(var(desc,"Просто стол");)
 	var(material,"MatWood");
+	var(dr,2);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -25,6 +26,7 @@ endclass
 editor_attribute("EditorGenerated")
 class(WoodenTableHandmade) extends(TableBase)
 	var(model,"a3\props_f_exp\commercial\market\woodencounter_01_f.p3d");
+	var(dr,1);
 endclass
 
 editor_attribute("EditorGenerated")

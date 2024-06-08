@@ -17,6 +17,7 @@ class(HeadControlPanel) extends(ElectronicDevice)
 	var(name,"Панель управления");
 	var(model,"ml\ml_object_new\ml_object_2\l01_props\l01_props_jail_panel.p3d");
 	var(material,"MatMetal");
+	var(dr,4);
 
 	#include "..\..\..\Interfaces\INetDisplay.Interface"
 	var(ndName,"HeadConsole");

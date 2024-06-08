@@ -15,6 +15,7 @@ class(BasicPipe) extends(Constructions)
 	var(name,"Труба"); 
 	editor_only(var(desc,"Обычная разрушаемая труба");)
 	var(material,"MatMetal");
+	var(dr,2);
 endclass
 
 editor_attribute("EditorGenerated")

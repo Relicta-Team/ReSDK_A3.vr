@@ -14,6 +14,7 @@ class(ShelfBase) extends(Furniture)
 	var(name,"Полка"); 
 	editor_only(var(desc,"Мебель для складирования предметов на поверхности");)
 	var(material,"MatWood");
+	var(dr,1);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -29,12 +30,14 @@ endclass
 editor_attribute("EditorGenerated")
 class(LongShelf) extends(ShelfBase)
 	var(model,"ml_shabut\stelazh_ot_seregi\stelazh_ot_seregi.p3d");
+	var(dr,2);
 endclass
 
 editor_attribute("EditorGenerated")
 class(SteelSmallShelf) extends(ShelfBase)
 	var(model,"ca\structures\furniture\generalstore\shelf.p3d");
 	var(material,"MatMetal");
+	var(dr,2);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -45,6 +48,5 @@ endclass
 class(Shelves) extends(ShelfBase)
 	var(model,"a3\structures_f\furniture\metal_rack_f.p3d");
 	var(material,"MatMetal");
-	var(name,null);
-	getterconst_func(getName,"Полки");
+	var(name,"Полки");
 endclass

@@ -15,6 +15,7 @@ class(StepsLadder) extends(Constructions)
 	var(name,"Лестница"); 
 	editor_only(var(desc,"Ступенчатые лестницы");)
 	var(material,"MatMetal");
+	var(dr,3);
 endclass
 
 editor_attribute("EditorGenerated")

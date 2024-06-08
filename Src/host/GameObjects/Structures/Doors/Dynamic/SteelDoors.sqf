@@ -38,6 +38,7 @@ class(SteelArmoredDoor) extends(DoorDynamic)
 	var(desc,"Эта массивная дверь за долгие годы успела полностью заржаветь. А вот решётка внутри выглядит вроде неплохо");
 	var(model,"Land_doub_bronedwerks");
 	var(material,"MatMetal");
+	var(dr,4);
 	
 	getter_func(anmCount,animObj_count(2));
 	getter_func(animateData,[["plomba5" arg 2.5 arg 5] arg vec3("reshotks",1.78,5)]);

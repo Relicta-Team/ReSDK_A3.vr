@@ -139,6 +139,7 @@ class(SmallSign) extends(SmallDecorations)
 	var(name,"Табличка");
 	editor_only(var(desc,"Табличка или указатель");)
 	var(material,"MatWood");
+	var(dr,1);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -218,6 +219,7 @@ class(MonumentBase) extends(SmallDecorations)
 	var(name,"Монумент");
 	editor_only(var(desc,"Монументы - памятники - могилы");)
 	var(material,"MatBeton");
+	var(dr,4);
 endclass
 
 editor_attribute("EditorGenerated")

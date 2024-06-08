@@ -15,6 +15,7 @@ class(SmallPole) extends(Constructions)
 	var(name,"Столб"); 
 	editor_only(var(desc,"Небольшой столб");)
 	var(material,"MatBeton");
+	var(dr,2);
 endclass
 
 editor_attribute("EditorGenerated")

@@ -13,6 +13,7 @@ class(WoodenDoor) extends(DoorDynamic)
 	var(name,"Деревянная дверь");
 	var(model,"Land_xlamdoor");
 	var(material,"MatWood");
+	var(dr,2);
 	//var(keyTypes,["test"]);
 
 	getter_func(animateData,[["xlamdoor" arg 0.7 arg 2.5]]);
@@ -26,6 +27,7 @@ class(WoodenGridDoor) extends(WoodenDoor)
 	var(model,"Land_GameProofFence_01_l_gate_F");
 	var(material,"MatWood");
 	var(name,"Калитка");
+	var(dr,1);
 	getter_func(animateData,[["door_1_rot" arg 1.5 arg 2.5]]);
 endclass
 

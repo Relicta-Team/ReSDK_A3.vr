@@ -13,6 +13,7 @@ class(BenchBase) extends(IChair)
 	var(name,"Скамья");
 	editor_only(var(desc,"Многоместное сиденье");)
 	var(material,"MatWood");
+	var(dr,2);
 	//многоместное сидение(лавка)
 endclass
 
@@ -46,12 +47,14 @@ class(WoodenOldBench) extends(BenchBase)
 	var(model,"a3\structures_f_epc\civ\accessories\bench_01_f.p3d");
 	getter_func(getChairOffsetPos,[[0 arg 0 arg -0.55] arg [0.6 arg 0 arg -0.55] arg [-0.6 arg 0 arg -0.55]]);
 	getter_func(getChairOffsetDir,180);
+	var(dr,1);
 endclass
 
 class(WoodenSmallBench) extends(BenchBase)
 	var(model,"a3\structures_f_exp\civilian\accessories\bench_05_f.p3d");
 	getter_func(getChairOffsetPos,[[0.6 arg 0 arg -0.15] arg [0 arg 0 arg -0.15] arg [-0.6 arg 0 arg -0.15]]);
 	getter_func(getChairOffsetDir,180);
+	var(dr,1);
 endclass
 
 class(WoodenAncientBench) extends(BenchBase)

@@ -15,6 +15,7 @@ class(SmallWall) extends(Constructions)
 	var(name,"Стена"); 
 	editor_only(var(desc,"Маленькие стена" pcomma " которую можно разрушить");)
 	var(material,"MatBeton");
+	var(dr,2);
 endclass
 
 editor_attribute("EditorGenerated")

@@ -15,6 +15,7 @@ class(SmallGarbage) extends(Constructions)
 	var(name,"Куча мусора"); 
 	editor_only(var(desc,"Небольшая куча мусора");) 
 	var(material,"MatDirt");
+	var(dr,1);
 endclass
 
 editor_attribute("EditorGenerated")

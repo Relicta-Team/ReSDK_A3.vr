@@ -5,13 +5,15 @@
 
 #include <..\..\..\engine.hpp>
 #include <..\..\..\oop.hpp>
+#include <..\..\..\text.hpp>
 #include <..\..\GameConstants.hpp>
 
 editor_attribute("InterfaceClass")
 class(InteractibleInterior) extends(SmallDecorations) 
-	var(name,"Интерактивный интерьер"); 
-	var(desc,"Различные интерьеры с функциями взаимодействия");
+	var(name,"Штуковина"); 
+	var(desc,"С этим хочется что-то сделать" pcomma " но пока не знаю что...");
 	var(material,"MatMetal");
+	var(dr,2);
 endclass
 
 

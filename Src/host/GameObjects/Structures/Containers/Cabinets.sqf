@@ -14,6 +14,7 @@ class(LuxuryCabinet) extends(SContainer)
 	var_exprval(countSlots,DEFAULT_LARGEBOX_STORAGE);
 	var(model,"ml_shabut\furniture\komodvirus.p3d");
 	var(material,"MatWood");
+	var(dr,1);
 endclass
 
 class(BigClothCabinet) extends(SContainer)
@@ -44,6 +45,7 @@ class(SteelGreenCabinet) extends(SContainer)
 	var(desc,"На ножках!!!");
 	var(model,"ml\ml_object_new\model_14_10\shkafsin.p3d");
 	var(material,"MatMetal");
+	var(dr,3);
 endclass
 
 class(OfficeCabinet) extends(SContainer)
@@ -51,6 +53,7 @@ class(OfficeCabinet) extends(SContainer)
 	var_exprval(countSlots,DEFAULT_LARGEBOX_STORAGE);
 	var(model,"a3\props_f_orange\furniture\officecabinet_02_f.p3d");
 	var(material,"MatWood");
+	var(dr,1);
 endclass
 
 class(LargeClothCabinet) extends(SContainer)

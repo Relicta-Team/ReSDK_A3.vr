@@ -15,6 +15,7 @@ class(RailBase) extends(Constructions)
 	var(name,"Рельсы"); 
 	editor_only(var(desc,"Рельсы");) 
 	var(material,"MatMetal");
+	var(dr,3);
 endclass
 
 editor_attribute("EditorGenerated")

@@ -14,12 +14,14 @@ class(BigFileCabinet) extends(SContainer)
 	var(name,"Картотека");
 	var(model,"ml_shabut\exodus\kartoteka.p3d");
 	var(material,"MatWood");
+	var(dr,1);
 endclass
 
 class(Bookcase) extends(SContainer)
 	var(name,"Книжный шкаф");
 	var(model,"ml_shabut\biblio\biblio.p3d");
 	var(material,"MatWood");
+	var(dr,1);
 endclass
 
 class(SmallBookcase) extends(Bookcase)

@@ -15,6 +15,7 @@ class(Vegetation) extends(Constructions)
 	var(name,"Растительность"); 
 	editor_only(var(desc,"Растительность");) 
 	var(material,"MatOrganic");
+	var(dr,1);
 endclass
 
 editor_attribute("EditorGenerated")

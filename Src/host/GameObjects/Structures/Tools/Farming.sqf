@@ -13,6 +13,7 @@ class(RatCage) extends(IStruct)
 	var(name,"Клеточки для мельтешат");
 	var(model,"a3\structures_f\civ\market\cages_f.p3d");
 	var(material,"MatMetal");
+	var(dr,3);
 
 	var(category,"food");
 
@@ -174,6 +175,7 @@ class(FarmGarden) extends(IStruct)
 	//getterconst_func(getDesc,"")
 	var(model,"a3\structures_f_enoch\military\training\shellcrater_01_f.p3d");
 	var(material,"MatDirt");
+	var(dr,3);
 
 	//ссылки на созданные грибы (объекты)
 	var_array(createdMushroomsWorldObjects);

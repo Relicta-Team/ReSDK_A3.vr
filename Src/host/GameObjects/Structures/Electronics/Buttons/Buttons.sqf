@@ -17,6 +17,7 @@ class(PowerSwitcherBox) extends(ElectronicDeviceNode)
 	var(desc,"Одно нажатие и снова что-нибудь перестанет работать!");
 	var(model,"metro_ob\model\rubilnik_5.p3d");
 	var(material,"MatMetal");
+	var(dr,3);
 	
 /*	func(constructor)
 	{
@@ -59,6 +60,7 @@ class(RedButton) extends(PowerSwitcherBox)
 	//NOGEON
 	var(model,"ml\ml_object_new\model_14_10\knopka.p3d");
 	var(material,"MatSynt");
+	var(dr,1);
 endclass
 
 	class(RedButton_Activator) extends(RedButton)
@@ -70,6 +72,7 @@ class(Tumbler) extends(PowerSwitcherBox)
 	var(desc,"Надо срочно проверить что произойдёт если переключить его.");
 	//NOGEON
 	var(model,"ml\ml_object_new\model_14_10\tumbler.p3d");
+	var(dr,2);
 endclass
 
 	class(Tumbler_Activator) extends(Tumbler)
