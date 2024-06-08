@@ -203,36 +203,37 @@ newAttribute(GenerateWeaponModule)
 		#define ITEM_SIZE_HUGE 6
 	*/
 	_parryBonus = round linearConversion[ITEM_SIZE_TINY,ITEM_SIZE_HUGE,_size,-4,4,true];
-	_dmgBonus = 1;//linearConversion[0.1,50,_weight,0,5,true];
+	//_dmgBonus = 1;//linearConversion[0.1,50,_weight,0,5,true];
+	_dmgBonus = round linearConversion[ITEM_SIZE_TINY,ITEM_SIZE_HUGE,_size,-2,2,true];
 	call {
 
 		if (_size == ITEM_SIZE_TINY) exitWith {
 			_canParry = WEAPON_PARRY_UNABLE;
-			_dmgBonus = -20;
+			//_dmgBonus = -20;
 		};
 		if (_size == ITEM_SIZE_SMALL) exitWith {
 			_canParry = WEAPON_PARRY_UNABLE;
 			
-				_dmgBonus = floor(_dmgBonus * -10);
+			//	_dmgBonus = floor(_dmgBonus * -10);
 			
 		};
 		if (_size == ITEM_SIZE_MEDIUM) exitWith {
 			_canParry = WEAPON_PARRY_ENABLE;
 			
-				_dmgBonus = floor(_dmgBonus * -5);
+			//	_dmgBonus = floor(_dmgBonus * -5);
 			
 		};
 		if (_size == ITEM_SIZE_LARGE) exitWith {
 			_canParry = WEAPON_PARRY_UNBALANCED;
-			_dmgBonus = round(_dmgBonus * -3);
+			//_dmgBonus = round(_dmgBonus * -3);
 		};
 		if (_size == ITEM_SIZE_BIG) exitWith {
 			_canParry = WEAPON_PARRY_UNABLE;
-			_dmgBonus = round(_dmgBonus * -2);
+			//_dmgBonus = round(_dmgBonus * -2);
 		};
 		if (_size == ITEM_SIZE_HUGE) exitWith {
 			_canParry = WEAPON_PARRY_UNABLE;
-			_dmgBonus = round(_dmgBonus * -1);
+			//_dmgBonus = round(_dmgBonus * -1);
 		};
 	};
 	
