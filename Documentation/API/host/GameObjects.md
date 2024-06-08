@@ -11,7 +11,7 @@ Replaced value:
 ```sqf
 'qdel_isdeleted'
 ```
-File: [host\GameObjects\GameConstants.hpp at line 22](../../../Src/host/GameObjects/GameConstants.hpp#L22)
+File: [host\GameObjects\GameConstants.hpp at line 23](../../../Src/host/GameObjects/GameConstants.hpp#L23)
 ## QDEL(object)
 
 Type: constant
@@ -23,7 +23,7 @@ Replaced value:
 ```sqf
 (object) setVariable [__QDEL_VARNAME,true]
 ```
-File: [host\GameObjects\GameConstants.hpp at line 23](../../../Src/host/GameObjects/GameConstants.hpp#L23)
+File: [host\GameObjects\GameConstants.hpp at line 24](../../../Src/host/GameObjects/GameConstants.hpp#L24)
 ## QDELING(object)
 
 Type: constant
@@ -35,7 +35,7 @@ Replaced value:
 ```sqf
 !ISNIL{object getVariable __QDEL_VARNAME}
 ```
-File: [host\GameObjects\GameConstants.hpp at line 24](../../../Src/host/GameObjects/GameConstants.hpp#L24)
+File: [host\GameObjects\GameConstants.hpp at line 25](../../../Src/host/GameObjects/GameConstants.hpp#L25)
 ## ITEM_SIZE_TINY
 
 Type: constant
@@ -47,7 +47,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameConstants.hpp at line 39](../../../Src/host/GameObjects/GameConstants.hpp#L39)
+File: [host\GameObjects\GameConstants.hpp at line 40](../../../Src/host/GameObjects/GameConstants.hpp#L40)
 ## ITEM_SIZE_SMALL
 
 Type: constant
@@ -59,7 +59,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\GameObjects\GameConstants.hpp at line 40](../../../Src/host/GameObjects/GameConstants.hpp#L40)
+File: [host\GameObjects\GameConstants.hpp at line 41](../../../Src/host/GameObjects/GameConstants.hpp#L41)
 ## ITEM_SIZE_MEDIUM
 
 Type: constant
@@ -71,7 +71,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\GameConstants.hpp at line 41](../../../Src/host/GameObjects/GameConstants.hpp#L41)
+File: [host\GameObjects\GameConstants.hpp at line 42](../../../Src/host/GameObjects/GameConstants.hpp#L42)
 ## ITEM_SIZE_LARGE
 
 Type: constant
@@ -83,7 +83,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\GameObjects\GameConstants.hpp at line 42](../../../Src/host/GameObjects/GameConstants.hpp#L42)
+File: [host\GameObjects\GameConstants.hpp at line 43](../../../Src/host/GameObjects/GameConstants.hpp#L43)
 ## ITEM_SIZE_BIG
 
 Type: constant
@@ -95,7 +95,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\GameObjects\GameConstants.hpp at line 43](../../../Src/host/GameObjects/GameConstants.hpp#L43)
+File: [host\GameObjects\GameConstants.hpp at line 44](../../../Src/host/GameObjects/GameConstants.hpp#L44)
 ## ITEM_SIZE_HUGE
 
 Type: constant
@@ -107,7 +107,7 @@ Replaced value:
 ```sqf
 6
 ```
-File: [host\GameObjects\GameConstants.hpp at line 44](../../../Src/host/GameObjects/GameConstants.hpp#L44)
+File: [host\GameObjects\GameConstants.hpp at line 45](../../../Src/host/GameObjects/GameConstants.hpp#L45)
 ## BASE_STORAGE_COST(size_type)
 
 Type: constant
@@ -119,7 +119,7 @@ Replaced value:
 ```sqf
 round (2^(size_type-1))
 ```
-File: [host\GameObjects\GameConstants.hpp at line 47](../../../Src/host/GameObjects/GameConstants.hpp#L47)
+File: [host\GameObjects\GameConstants.hpp at line 48](../../../Src/host/GameObjects/GameConstants.hpp#L48)
 ## BASE_STORAGE_CAPACITY(size_type)
 
 Type: constant
@@ -131,7 +131,7 @@ Replaced value:
 ```sqf
 round (7*(size_type-1))
 ```
-File: [host\GameObjects\GameConstants.hpp at line 50](../../../Src/host/GameObjects/GameConstants.hpp#L50)
+File: [host\GameObjects\GameConstants.hpp at line 51](../../../Src/host/GameObjects/GameConstants.hpp#L51)
 ## DEFAULT_CLOTH_STORAGE
 
 Type: constant
@@ -143,7 +143,7 @@ Replaced value:
 ```sqf
 BASE_STORAGE_CAPACITY(1.8571429)
 ```
-File: [host\GameObjects\GameConstants.hpp at line 53](../../../Src/host/GameObjects/GameConstants.hpp#L53)
+File: [host\GameObjects\GameConstants.hpp at line 54](../../../Src/host/GameObjects/GameConstants.hpp#L54)
 ## DEFAULT_ITEMBAG_STORAGE
 
 Type: constant
@@ -155,7 +155,7 @@ Replaced value:
 ```sqf
 BASE_STORAGE_CAPACITY(3)
 ```
-File: [host\GameObjects\GameConstants.hpp at line 54](../../../Src/host/GameObjects/GameConstants.hpp#L54)
+File: [host\GameObjects\GameConstants.hpp at line 55](../../../Src/host/GameObjects/GameConstants.hpp#L55)
 ## DEFAULT_BACKPACK_STORAGE
 
 Type: constant
@@ -167,7 +167,7 @@ Replaced value:
 ```sqf
 BASE_STORAGE_CAPACITY(4)	
 ```
-File: [host\GameObjects\GameConstants.hpp at line 55](../../../Src/host/GameObjects/GameConstants.hpp#L55)
+File: [host\GameObjects\GameConstants.hpp at line 56](../../../Src/host/GameObjects/GameConstants.hpp#L56)
 ## DEFAULT_BOX_STORAGE
 
 Type: constant
@@ -179,7 +179,7 @@ Replaced value:
 ```sqf
 BASE_STORAGE_CAPACITY(6)
 ```
-File: [host\GameObjects\GameConstants.hpp at line 56](../../../Src/host/GameObjects/GameConstants.hpp#L56)
+File: [host\GameObjects\GameConstants.hpp at line 57](../../../Src/host/GameObjects/GameConstants.hpp#L57)
 ## DEFAULT_LARGEBOX_STORAGE
 
 Type: constant
@@ -191,7 +191,7 @@ Replaced value:
 ```sqf
 BASE_STORAGE_CAPACITY(7)
 ```
-File: [host\GameObjects\GameConstants.hpp at line 57](../../../Src/host/GameObjects/GameConstants.hpp#L57)
+File: [host\GameObjects\GameConstants.hpp at line 58](../../../Src/host/GameObjects/GameConstants.hpp#L58)
 ## DEFAULT_TICK_DELAY
 
 Type: constant
@@ -203,7 +203,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameConstants.hpp at line 86](../../../Src/host/GameObjects/GameConstants.hpp#L86)
+File: [host\GameObjects\GameConstants.hpp at line 87](../../../Src/host/GameObjects/GameConstants.hpp#L87)
 ## invicon(icon)
 
 Type: constant
@@ -215,7 +215,7 @@ Replaced value:
 ```sqf
 #icon
 ```
-File: [host\GameObjects\GameConstants.hpp at line 88](../../../Src/host/GameObjects/GameConstants.hpp#L88)
+File: [host\GameObjects\GameConstants.hpp at line 89](../../../Src/host/GameObjects/GameConstants.hpp#L89)
 ## gramm(amount)
 
 Type: constant
@@ -227,7 +227,7 @@ Replaced value:
 ```sqf
 amount / 1000
 ```
-File: [host\GameObjects\GameConstants.hpp at line 91](../../../Src/host/GameObjects/GameConstants.hpp#L91)
+File: [host\GameObjects\GameConstants.hpp at line 92](../../../Src/host/GameObjects/GameConstants.hpp#L92)
 ## kgToGramm(VL)
 
 Type: constant
@@ -239,7 +239,7 @@ Replaced value:
 ```sqf
 VL * 1000
 ```
-File: [host\GameObjects\GameConstants.hpp at line 94](../../../Src/host/GameObjects/GameConstants.hpp#L94)
+File: [host\GameObjects\GameConstants.hpp at line 95](../../../Src/host/GameObjects/GameConstants.hpp#L95)
 ## kgToLb(val)
 
 Type: constant
@@ -251,7 +251,31 @@ Replaced value:
 ```sqf
 ((val)*2)
 ```
-File: [host\GameObjects\GameConstants.hpp at line 97](../../../Src/host/GameObjects/GameConstants.hpp#L97)
+File: [host\GameObjects\GameConstants.hpp at line 98](../../../Src/host/GameObjects/GameConstants.hpp#L98)
+## inchToMeters(val)
+
+Type: constant
+
+Description: дюймы в метры
+- Param: val
+
+Replaced value:
+```sqf
+((val)/39.37)
+```
+File: [host\GameObjects\GameConstants.hpp at line 101](../../../Src/host/GameObjects/GameConstants.hpp#L101)
+## metersToFeet(val)
+
+Type: constant
+
+Description: метры в футы
+- Param: val
+
+Replaced value:
+```sqf
+((val)*3.289)
+```
+File: [host\GameObjects\GameConstants.hpp at line 103](../../../Src/host/GameObjects/GameConstants.hpp#L103)
 ## DISTANCE_WORLDSAY
 
 Type: constant
@@ -263,7 +287,7 @@ Replaced value:
 ```sqf
 15
 ```
-File: [host\GameObjects\GameConstants.hpp at line 99](../../../Src/host/GameObjects/GameConstants.hpp#L99)
+File: [host\GameObjects\GameConstants.hpp at line 105](../../../Src/host/GameObjects/GameConstants.hpp#L105)
 ## sideToIndex(_side)
 
 Type: constant
@@ -275,7 +299,7 @@ Replaced value:
 ```sqf
 (abs ceil ((_side)*.1))
 ```
-File: [host\GameObjects\GameConstants.hpp at line 102](../../../Src/host/GameObjects/GameConstants.hpp#L102)
+File: [host\GameObjects\GameConstants.hpp at line 108](../../../Src/host/GameObjects/GameConstants.hpp#L108)
 ## SIDE_LEFT
 
 Type: constant
@@ -287,7 +311,7 @@ Replaced value:
 ```sqf
 -1
 ```
-File: [host\GameObjects\GameConstants.hpp at line 103](../../../Src/host/GameObjects/GameConstants.hpp#L103)
+File: [host\GameObjects\GameConstants.hpp at line 109](../../../Src/host/GameObjects/GameConstants.hpp#L109)
 ## SIDE_RIGHT
 
 Type: constant
@@ -299,7 +323,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameConstants.hpp at line 104](../../../Src/host/GameObjects/GameConstants.hpp#L104)
+File: [host\GameObjects\GameConstants.hpp at line 110](../../../Src/host/GameObjects/GameConstants.hpp#L110)
 ## NODE_SIDE_LIST_ALL
 
 Type: constant
@@ -311,7 +335,7 @@ Replaced value:
 ```sqf
 ['Левая сторона:SIDE_LEFT','Правая сторона:SIDE_RIGHT']
 ```
-File: [host\GameObjects\GameConstants.hpp at line 105](../../../Src/host/GameObjects/GameConstants.hpp#L105)
+File: [host\GameObjects\GameConstants.hpp at line 111](../../../Src/host/GameObjects/GameConstants.hpp#L111)
 # GameObject.sqf
 
 ## PIC_PREP
@@ -325,7 +349,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\GameObject.sqf at line 336](../../../Src/host/GameObjects/GameObject.sqf#L336)
+File: [host\GameObjects\GameObject.sqf at line 347](../../../Src/host/GameObjects/GameObject.sqf#L347)
 ## startSectorIndex
 
 Type: constant
@@ -337,7 +361,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 653](../../../Src/host/GameObjects/GameObject.sqf#L653)
+File: [host\GameObjects\GameObject.sqf at line 713](../../../Src/host/GameObjects/GameObject.sqf#L713)
 ## sectorSize
 
 Type: constant
@@ -349,7 +373,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 654](../../../Src/host/GameObjects/GameObject.sqf#L654)
+File: [host\GameObjects\GameObject.sqf at line 714](../../../Src/host/GameObjects/GameObject.sqf#L714)
 ## flyingObject
 
 Type: Variable
@@ -373,7 +397,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\GameObject.sqf at line 378](../../../Src/host/GameObjects/GameObject.sqf#L378)
+File: [host\GameObjects\GameObject.sqf at line 433](../../../Src/host/GameObjects/GameObject.sqf#L433)
 ## go_internal_chatMesMap
 
 Type: Variable
@@ -385,7 +409,7 @@ Initial value:
 ```sqf
 ["emote","log","act","combat","info","mind","event","system","error","default"]
 ```
-File: [host\GameObjects\GameObject.sqf at line 976](../../../Src/host/GameObjects/GameObject.sqf#L976)
+File: [host\GameObjects\GameObject.sqf at line 1036](../../../Src/host/GameObjects/GameObject.sqf#L1036)
 ## go_internal_chatMesMapText
 
 Type: Variable
@@ -397,7 +421,7 @@ Initial value:
 ```sqf
 ["Эмоут:Кастомное пользовательское действие",...
 ```
-File: [host\GameObjects\GameObject.sqf at line 977](../../../Src/host/GameObjects/GameObject.sqf#L977)
+File: [host\GameObjects\GameObject.sqf at line 1037](../../../Src/host/GameObjects/GameObject.sqf#L1037)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
@@ -2926,6 +2950,80 @@ Replaced value:
 5 /*Otherwise, if you have more nutrition than this value, you have seizures and occasionally receive damage*/
 ```
 File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 192](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L192)
+# ObjectsHP.h
+
+## OBJECT_TYPE_COMPLEX
+
+Type: constant
+
+Description: комплексные объекты состоят из нескольких частей. в основном это механизмы и устройства. их гораздо легче разрушить
+
+
+Replaced value:
+```sqf
+"complex"
+```
+File: [host\GameObjects\ConstantAndDefines\ObjectsHP.h at line 7](../../../Src/host/GameObjects/ConstantAndDefines/ObjectsHP.h#L7)
+## OBJECT_TYPE_SIMPLE
+
+Type: constant
+
+Description: простые (однородные) объекты обычно состоят из одного материала. большинство объектов типа постройки - простые
+
+
+Replaced value:
+```sqf
+"simple"
+```
+File: [host\GameObjects\ConstantAndDefines\ObjectsHP.h at line 9](../../../Src/host/GameObjects/ConstantAndDefines/ObjectsHP.h#L9)
+## OBJECT_TYPE_SPREADED
+
+Type: constant
+
+Description: !рассеянные типы не использовать. В них нет смысла на данном этапе
+
+
+Replaced value:
+```sqf
+"spreaded"
+```
+File: [host\GameObjects\ConstantAndDefines\ObjectsHP.h at line 12](../../../Src/host/GameObjects/ConstantAndDefines/ObjectsHP.h#L12)
+## DR_SP_1
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+2
+```
+File: [host\GameObjects\ConstantAndDefines\ObjectsHP.h at line 19](../../../Src/host/GameObjects/ConstantAndDefines/ObjectsHP.h#L19)
+## DR_SP_2
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+4
+```
+File: [host\GameObjects\ConstantAndDefines\ObjectsHP.h at line 20](../../../Src/host/GameObjects/ConstantAndDefines/ObjectsHP.h#L20)
+## DR_SP_3
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+6
+```
+File: [host\GameObjects\ConstantAndDefines\ObjectsHP.h at line 21](../../../Src/host/GameObjects/ConstantAndDefines/ObjectsHP.h#L21)
 # TimeConstants.h
 
 ## TIME_UNCONSCIOUS_ONWOUND
@@ -3071,7 +3169,7 @@ Replaced value:
 ```sqf
 setSelf(name,getVar(_item,name))
 ```
-File: [host\GameObjects\Items\Item.sqf at line 739](../../../Src/host/GameObjects/Items/Item.sqf#L739)
+File: [host\GameObjects\Items\Item.sqf at line 773](../../../Src/host/GameObjects/Items/Item.sqf#L773)
 ## methodReference(name__,parm,refparam)
 
 Type: constant
@@ -3085,7 +3183,7 @@ Replaced value:
 ```sqf
 func(name__) {parm; callFuncParams(getSelf(object),name__,refparam)}
 ```
-File: [host\GameObjects\Items\Item.sqf at line 1136](../../../Src/host/GameObjects/Items/Item.sqf#L1136)
+File: [host\GameObjects\Items\Item.sqf at line 1172](../../../Src/host/GameObjects/Items/Item.sqf#L1172)
 ## generateItemSize
 
 Type: function
@@ -3095,7 +3193,18 @@ Description:
 - Param: _bmax
 - Param: _radius
 
-File: [host\GameObjects\Items\Item.sqf at line 177](../../../Src/host/GameObjects/Items/Item.sqf#L177)
+File: [host\GameObjects\Items\Item.sqf at line 175](../../../Src/host/GameObjects/Items/Item.sqf#L175)
+## generateItemInfoList
+
+Type: function
+
+> Exists if **EDITOR** defined
+
+Description: 
+- Param: _file (optional, default "unknown_file")
+- Param: _line (optional, default 0)
+
+File: [host\GameObjects\Items\Item.sqf at line 201](../../../Src/host/GameObjects/Items/Item.sqf#L201)
 # Item_HandAnim.hpp
 
 ## ANIM_INDEX_HANDED
@@ -3593,7 +3702,7 @@ Replaced value:
 ```sqf
 [t,hashMapNew]
 ```
-File: [host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 220](../../../Src/host/GameObjects/Items/Bodyparts/Bodyparts.sqf#L220)
+File: [host\GameObjects\Items\Bodyparts\Bodyparts.sqf at line 223](../../../Src/host/GameObjects/Items/Bodyparts/Bodyparts.sqf#L223)
 # CaptiveBase.sqf
 
 ## server_handcuff_internal_random
@@ -3629,7 +3738,7 @@ Replaced value:
 ```sqf
 ;
 ```
-File: [host\GameObjects\Items\Clothes\cloth.sqf at line 185](../../../Src/host/GameObjects/Items/Clothes/cloth.sqf#L185)
+File: [host\GameObjects\Items\Clothes\cloth.sqf at line 192](../../../Src/host/GameObjects/Items/Clothes/cloth.sqf#L192)
 # Books.sqf
 
 ## __CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__
@@ -3643,7 +3752,7 @@ Replaced value:
 ```sqf
 1024*3
 ```
-File: [host\GameObjects\Items\Office\Books.sqf at line 70](../../../Src/host/GameObjects/Items/Office/Books.sqf#L70)
+File: [host\GameObjects\Items\Office\Books.sqf at line 74](../../../Src/host/GameObjects/Items/Office/Books.sqf#L74)
 ## gv(func)
 
 Type: constant
@@ -3657,7 +3766,7 @@ Replaced value:
 ```sqf
 _y get #func
 ```
-File: [host\GameObjects\Items\Office\Books.sqf at line 416](../../../Src/host/GameObjects/Items/Office/Books.sqf#L416)
+File: [host\GameObjects\Items\Office\Books.sqf at line 442](../../../Src/host/GameObjects/Items/Office/Books.sqf#L442)
 # BasicMob.sqf
 
 ## emulate_mp_in_sp
@@ -3734,18 +3843,6 @@ Initial value:
 []
 ```
 File: [host\GameObjects\Mobs\BasicMob.sqf at line 305](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L305)
-## debug_responeAnimationStatus
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-false //TODO remove after 0.13.2
-```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 1530](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1530)
 # Mob.sqf
 
 ## __performace_attacklog
@@ -3849,7 +3946,7 @@ Replaced value:
 ```sqf
 getSelf(name)
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 288](../../../Src/host/GameObjects/Mobs/Mob.sqf#L288)
+File: [host\GameObjects\Mobs\Mob.sqf at line 291](../../../Src/host/GameObjects/Mobs/Mob.sqf#L291)
 ## PIC_PREP
 
 Type: constant
@@ -3861,7 +3958,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 362](../../../Src/host/GameObjects/Mobs/Mob.sqf#L362)
+File: [host\GameObjects\Mobs\Mob.sqf at line 365](../../../Src/host/GameObjects/Mobs/Mob.sqf#L365)
 # MobGhost.sqf
 
 ## hasBP(idx)
@@ -4028,7 +4125,7 @@ Replaced value:
 ```sqf
 _d = D6 <= 3; [p1,p2] select _d
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 682](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L682)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 783](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L783)
 ## debuginfo(mes)
 
 Type: constant
@@ -4042,7 +4139,7 @@ Replaced value:
 ```sqf
 breakpoint("("+getSelf(name)+")::EVENT::("+_mode+") " + mes)
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 947](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L947)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1048](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1048)
 ## debuginfo(mes)
 
 Type: constant
@@ -4056,7 +4153,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 949](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L949)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1050](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1050)
 ## __isZoneIn(zones,modif)
 
 Type: constant
@@ -4069,7 +4166,7 @@ Replaced value:
 ```sqf
 if (_attTargetZone in [zones]) exitWith {MOD(_mod,modif)}
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1352](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1352)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1453](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1453)
 ## go_static_internal_map_redirzones
 
 Type: Variable
@@ -4081,7 +4178,7 @@ Initial value:
 ```sqf
 createHashMapFromArray[...
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 712](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L712)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 813](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L813)
 # Mob_combat_attdam_enum.hpp
 
 ## COMBAT_ATTDAM_ATTACK
@@ -5029,20 +5126,6 @@ Description: Открытие артерии
 
 
 File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 358](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L358)
-# IStruct.sqf
-
-## PIC_PREP
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-<img size='0.8' image='%2'/>
-```
-File: [host\GameObjects\Structures\IStruct.sqf at line 45](../../../Src/host/GameObjects/Structures/IStruct.sqf#L45)
 # MerchantConsole.hpp
 
 ## MC_CAT_CLOTH
@@ -5399,7 +5482,7 @@ Replaced value:
 ```sqf
 [#typename,randInt(lowprice,maxprice),ctg,randInt(countslow,countsmax),[ #typename ,"name",true,"getName"] call oop_getFieldBaseValue]
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 461](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L461)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 464](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L464)
 ## rx_pat(txt)
 
 Type: constant
@@ -5411,7 +5494,7 @@ Replaced value:
 ```sqf
 (txt + "\ *\-\ *\d{1,3}[ ]*(шт(ук|уки)?\.?)?")
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 462](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L462)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 465](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L465)
 ## regConsole
 
 Type: constant
@@ -5427,7 +5510,7 @@ Replaced value:
 	_global_merchantconsole_tradelist = ___s apply {[]}; \
 	_global_merchantconsole_catnames = [];
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1109](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1109)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1115](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1115)
 ## endRegConsole
 
 Type: constant
@@ -5440,7 +5523,7 @@ Replaced value:
 var_exprval(tradelist,_global_merchantconsole_tradelist); \
 	var_exprval(tradecats,_global_merchantconsole_catnames);
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1115](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1115)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1121](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1121)
 ## regCat(cat,namestr)
 
 Type: constant
@@ -5453,7 +5536,7 @@ Replaced value:
 ```sqf
 _global_merchantconsole_catnames pushBack [cat,namestr];
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1118](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1118)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1124](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1124)
 ## regItem(cat,typename_std,typename_compiled,minprice,maxprice,mincount,maxcount)
 
 Type: constant
@@ -5472,7 +5555,7 @@ Replaced value:
 _ctbuf = _global_merchantconsole_tradelist select cat; \
 	_ctbuf pushBack ["",typename_std,{typename_compiled},randInt(minprice,maxprice),randInt(mincount,maxcount),0];
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1120](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1120)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1126](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1126)
 ## regEnergyCount(cat,strname,__code,price,count__)
 
 Type: constant
@@ -5489,7 +5572,7 @@ Replaced value:
 _ctbuf = _global_merchantconsole_tradelist select cat; \
 	_ctbuf pushBack [strname,"<NULLOBJ>",__code,price,count__,0];
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1123](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1123)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1129](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1129)
 ## regItemDef(cat,typename,minpr,maxpr,minc,maxc)
 
 Type: constant
@@ -5506,7 +5589,7 @@ Replaced value:
 ```sqf
 regItem(cat,typename,typename,minpr,maxpr,minc,maxc)
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1126](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1126)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1132](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1132)
 ## regItemCustomName(cat,name,typename,minpr,maxpr,minc,maxc)
 
 Type: constant
@@ -5525,7 +5608,7 @@ Replaced value:
 _ctbuf = _global_merchantconsole_tradelist select cat; \
 	_ctbuf pushBack [name,typename,{typename},randInt(minpr,maxpr),randInt(minc,maxc),0];
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1127](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1127)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1133](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1133)
 ## regEnProvider(__GENERATED_TIME__)
 
 Type: constant
@@ -5542,7 +5625,7 @@ Replaced value:
 		}; \
 	}
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1215](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1215)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1221](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1221)
 ## checkMode(m__)
 
 Type: constant
@@ -5554,7 +5637,7 @@ Replaced value:
 ```sqf
 if (_mode == m__) exitWith
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1319](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1319)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1325](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1325)
 ## compareInput(t__)
 
 Type: constant
@@ -5566,7 +5649,7 @@ Replaced value:
 ```sqf
 if (_userInput == t__) exitWith
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1320](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1320)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1326](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1326)
 # DoorStatic.sqf
 
 ## struct_door_initOpenMode
@@ -5618,7 +5701,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\Structures\Electronics\GeneratorParts.sqf at line 51](../../../Src/host/GameObjects/Structures/Electronics/GeneratorParts.sqf#L51)
+File: [host\GameObjects\Structures\Electronics\GeneratorParts.sqf at line 53](../../../Src/host/GameObjects/Structures/Electronics/GeneratorParts.sqf#L53)
 # Buttons.sqf
 
 ## OVERRIDE_ENABLE_AS_ACTIVATOR()
@@ -5649,7 +5732,7 @@ Replaced value:
 ```sqf
 if (_mode == m__) exitWith
 ```
-File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 250](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L250)
+File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 252](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L252)
 ## compareInput(t__)
 
 Type: constant
@@ -5661,7 +5744,7 @@ Replaced value:
 ```sqf
 if (_userInput == t__) exitWith
 ```
-File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 251](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L251)
+File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 253](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L253)
 ## compareInputAndJump(t__,newmode__)
 
 Type: constant
@@ -5674,7 +5757,7 @@ Replaced value:
 ```sqf
 if (_userInput == t__) exitWith {callSelfParams(setDispMode,newmode__)}
 ```
-File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 252](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L252)
+File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 254](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L254)
 ## compareInputAndUseOptData(t__)
 
 Type: constant
@@ -5686,7 +5769,7 @@ Replaced value:
 ```sqf
 if (_userInput == t__) exitWith
 ```
-File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 254](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L254)
+File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 256](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L256)
 ## optData
 
 Type: constant
@@ -5698,7 +5781,7 @@ Replaced value:
 ```sqf
 _optData
 ```
-File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 255](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L255)
+File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 257](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L257)
 ## throwExceptionWithData()
 
 Type: constant
@@ -5710,7 +5793,7 @@ Replaced value:
 ```sqf
 errorformat("HeadControlPanel::onHandleNDInput() - Unhandled input: %1 (mode: %2, optdat: %3) at line %4",_userInput arg _userMode arg _optData arg __LINE__)
 ```
-File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 257](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L257)
+File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 259](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L259)
 # HeadControlPanel.hpp
 
 ## MODE_NOPOWER
@@ -5918,7 +6001,7 @@ Replaced value:
 ```sqf
 equals(callFunc(_item,getClassName),'type')
 ```
-File: [host\GameObjects\Structures\Kitchen\Kitchen.sqf at line 92](../../../Src/host/GameObjects/Structures/Kitchen/Kitchen.sqf#L92)
+File: [host\GameObjects\Structures\Kitchen\Kitchen.sqf at line 94](../../../Src/host/GameObjects/Structures/Kitchen/Kitchen.sqf#L94)
 # Spawners.sqf
 
 ## spawnPos_internal_list_all

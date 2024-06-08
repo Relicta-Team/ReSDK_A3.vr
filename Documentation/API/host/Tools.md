@@ -355,7 +355,7 @@ Description:
 - Param: _data
 - Param: _isRelative (optional, default true)
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 116](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L116)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 120](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L120)
 ## file_delete
 
 Type: function
@@ -363,7 +363,7 @@ Type: function
 Description: 
 - Param: _path
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 136](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L136)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 140](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L140)
 ## folder_delete
 
 Type: function
@@ -371,7 +371,7 @@ Type: function
 Description: 
 - Param: _path
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 147](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L147)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 151](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L151)
 ## file_exists
 
 Type: function
@@ -380,7 +380,7 @@ Description:
 - Param: _path
 - Param: _isRelative (optional, default true)
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 158](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L158)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 162](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L162)
 ## folder_exists
 
 Type: function
@@ -389,7 +389,7 @@ Description:
 - Param: _path
 - Param: _isRelative (optional, default true)
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 164](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L164)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 168](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L168)
 ## file_isLocked
 
 Type: function
@@ -398,7 +398,7 @@ Description:
 - Param: _path
 - Param: _isRelative (optional, default true)
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 171](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L171)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 175](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L175)
 ## file_clearFileLock
 
 Type: function
@@ -406,7 +406,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 178](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L178)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 182](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L182)
 # EditorDebug_shared.sqf
 
 ## checkdata(cachevalue)
@@ -1065,7 +1065,7 @@ Type: function
 Description: system flags is simple flaglist for bool check
 
 
-File: [host\Tools\SDK\SDK_init.sqf at line 53](../../../Src/host/Tools/SDK/SDK_init.sqf#L53)
+File: [host\Tools\SDK\SDK_init.sqf at line 55](../../../Src/host/Tools/SDK/SDK_init.sqf#L55)
 ## sdk_hasSystemFlag
 
 Type: function
@@ -1073,7 +1073,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\SDK\SDK_init.sqf at line 57](../../../Src/host/Tools/SDK/SDK_init.sqf#L57)
+File: [host\Tools\SDK\SDK_init.sqf at line 59](../../../Src/host/Tools/SDK/SDK_init.sqf#L59)
 ## sdk_getSDKPropertyMap
 
 Type: function
@@ -1081,7 +1081,7 @@ Type: function
 Description: sdk property list is simple getter some values from editor
 
 
-File: [host\Tools\SDK\SDK_init.sqf at line 62](../../../Src/host/Tools/SDK/SDK_init.sqf#L62)
+File: [host\Tools\SDK\SDK_init.sqf at line 64](../../../Src/host/Tools/SDK/SDK_init.sqf#L64)
 ## sdk_getPropertyValue
 
 Type: function
@@ -1090,4 +1090,4 @@ Description:
 - Param: _key
 - Param: _def
 
-File: [host\Tools\SDK\SDK_init.sqf at line 66](../../../Src/host/Tools/SDK/SDK_init.sqf#L66)
+File: [host\Tools\SDK\SDK_init.sqf at line 68](../../../Src/host/Tools/SDK/SDK_init.sqf#L68)

@@ -164,7 +164,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 581](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L581)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 582](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L582)
 ## si_throwingProcess
 
 Type: function

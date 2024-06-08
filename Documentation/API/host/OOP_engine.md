@@ -74,7 +74,7 @@ Replaced value:
 (thisClass getVariable 'classname')
 ```
 File: [host\OOP_engine\oop_attributes.sqf at line 16](../../../Src/host/OOP_engine/oop_attributes.sqf#L16)
-## getMemeber(name)
+## getMember(name)
 
 Type: constant
 
@@ -107,7 +107,7 @@ Description:
 
 Replaced value:
 ```sqf
-!isNull(getMemeber(name))
+!isNull(getMember(name))
 ```
 File: [host\OOP_engine\oop_attributes.sqf at line 19](../../../Src/host/OOP_engine/oop_attributes.sqf#L19)
 ## setMember(name,value)

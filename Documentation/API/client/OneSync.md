@@ -94,14 +94,14 @@ File: [client\OneSync\OneSync_Falling.sqf at line 75](../../../Src/client/OneSyn
 
 Type: Variable
 
-Description: "steps",
+Description: 
 
 
 Initial value:
 ```sqf
-["falling","light"/*,"mobcollision" Коллизия сломана*/]
+["falling","light","steps" /*,"mobcollision" Коллизия сломана*/]
 ```
-File: [client\OneSync\OneSync_init.sqf at line 40](../../../Src/client/OneSync/OneSync_init.sqf#L40)
+File: [client\OneSync\OneSync_init.sqf at line 39](../../../Src/client/OneSync/OneSync_init.sqf#L39)
 ## os_isActive
 
 Type: Variable
@@ -113,7 +113,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\OneSync\OneSync_init.sqf at line 42](../../../Src/client/OneSync/OneSync_init.sqf#L42)
+File: [client\OneSync\OneSync_init.sqf at line 41](../../../Src/client/OneSync/OneSync_init.sqf#L41)
 ## os_start
 
 Type: function
@@ -121,7 +121,7 @@ Type: function
 Description: 
 
 
-File: [client\OneSync\OneSync_init.sqf at line 44](../../../Src/client/OneSync/OneSync_init.sqf#L44)
+File: [client\OneSync\OneSync_init.sqf at line 43](../../../Src/client/OneSync/OneSync_init.sqf#L43)
 ## os_stop
 
 Type: function
@@ -129,7 +129,7 @@ Type: function
 Description: 
 
 
-File: [client\OneSync\OneSync_init.sqf at line 62](../../../Src/client/OneSync/OneSync_init.sqf#L62)
+File: [client\OneSync\OneSync_init.sqf at line 61](../../../Src/client/OneSync/OneSync_init.sqf#L61)
 # OneSync_light.sqf
 
 ## OS_LIGHT_UPDATE_DELAY
@@ -332,6 +332,62 @@ Description:
 File: [client\OneSync\OneSync_mobcollision.sqf at line 60](../../../Src/client/OneSync/OneSync_mobcollision.sqf#L60)
 # OneSync_steps.sqf
 
+## distLTG
+
+Type: constant
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+(_leg distance _ground )
+```
+File: [client\OneSync\OneSync_steps.sqf at line 172](../../../Src/client/OneSync/OneSync_steps.sqf#L172)
+## lastDist
+
+Type: constant
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+(_ground getVariable ["lastdistance",distLTG])
+```
+File: [client\OneSync\OneSync_steps.sqf at line 173](../../../Src/client/OneSync/OneSync_steps.sqf#L173)
+## isNegativize
+
+Type: constant
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+(distLTG < lastDist)
+```
+File: [client\OneSync\OneSync_steps.sqf at line 174](../../../Src/client/OneSync/OneSync_steps.sqf#L174)
+## isPositivize
+
+Type: constant
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+(distLTG > lastDist)
+```
+File: [client\OneSync\OneSync_steps.sqf at line 175](../../../Src/client/OneSync/OneSync_steps.sqf#L175)
 ## os_steps_handle
 
 Type: Variable
@@ -344,7 +400,7 @@ Initial value:
 -1
 ```
 File: [client\OneSync\OneSync_steps.sqf at line 9](../../../Src/client/OneSync/OneSync_steps.sqf#L9)
-## os_steps_currentSound
+## os_steps_currentSoundName
 
 Type: Variable
 
@@ -353,10 +409,10 @@ Description:
 
 Initial value:
 ```sqf
-"gen"
+""
 ```
 File: [client\OneSync\OneSync_steps.sqf at line 11](../../../Src/client/OneSync/OneSync_steps.sqf#L11)
-## os_steps_reverbLevel
+## os_steps_currentSoundCount
 
 Type: Variable
 
@@ -365,10 +421,22 @@ Description:
 
 Initial value:
 ```sqf
-1
+0
 ```
 File: [client\OneSync\OneSync_steps.sqf at line 12](../../../Src/client/OneSync/OneSync_steps.sqf#L12)
-## os_steps_soundsType
+## os_steps_lastpos
+
+Type: Variable
+
+Description: os_steps_soundsType = [];
+
+
+Initial value:
+```sqf
+vec3(0,0,0)
+```
+File: [client\OneSync\OneSync_steps.sqf at line 16](../../../Src/client/OneSync/OneSync_steps.sqf#L16)
+## os_steps_const_foots
 
 Type: Variable
 
@@ -377,9 +445,59 @@ Description:
 
 Initial value:
 ```sqf
-[]
+["rightfoot","leftfoot"]
 ```
-File: [client\OneSync\OneSync_steps.sqf at line 14](../../../Src/client/OneSync/OneSync_steps.sqf#L14)
+File: [client\OneSync\OneSync_steps.sqf at line 18](../../../Src/client/OneSync/OneSync_steps.sqf#L18)
+## os_steps_const_foots_inversed
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+["leftfoot","rightfoot"]
+```
+File: [client\OneSync\OneSync_steps.sqf at line 19](../../../Src/client/OneSync/OneSync_steps.sqf#L19)
+## os_steps_debug_arrows
+
+Type: Variable
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+["Sign_Sphere10cm_F" createVehicle [0,0,0],"Sign_Sphere10cm_F" createVehicle [0,0,0]]
+```
+File: [client\OneSync\OneSync_steps.sqf at line 147](../../../Src/client/OneSync/OneSync_steps.sqf#L147)
+## os_steps_debug_arrowsGround
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+["Sign_Sphere10cm_F" createVehicle [0,0,0],"Sign_Sphere10cm_F" createVehicle [0,0,0]]
+```
+File: [client\OneSync\OneSync_steps.sqf at line 148](../../../Src/client/OneSync/OneSync_steps.sqf#L148)
+## os_steps_enable_debugInfo
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\OneSync\OneSync_steps.sqf at line 150](../../../Src/client/OneSync/OneSync_steps.sqf#L150)
 ## os_steps_setEnable
 
 Type: function
@@ -387,24 +505,8 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\OneSync\OneSync_steps.sqf at line 16](../../../Src/client/OneSync/OneSync_steps.sqf#L16)
-## os_steps_onUpdate
-
-Type: function
-
-Description: 
-
-
-File: [client\OneSync\OneSync_steps.sqf at line 25](../../../Src/client/OneSync/OneSync_steps.sqf#L25)
-## os_steps_getReverbLevel
-
-Type: function
-
-Description: 
-
-
-File: [client\OneSync\OneSync_steps.sqf at line 29](../../../Src/client/OneSync/OneSync_steps.sqf#L29)
-## os_steps_getStepObject
+File: [client\OneSync\OneSync_steps.sqf at line 21](../../../Src/client/OneSync/OneSync_steps.sqf#L21)
+## os_steps_updateLastPos
 
 Type: function
 
@@ -412,3 +514,102 @@ Description:
 
 
 File: [client\OneSync\OneSync_steps.sqf at line 33](../../../Src/client/OneSync/OneSync_steps.sqf#L33)
+## os_steps_getFootPos
+
+Type: function
+
+Description: 
+
+
+File: [client\OneSync\OneSync_steps.sqf at line 37](../../../Src/client/OneSync/OneSync_steps.sqf#L37)
+## os_steps_getFootPosVec
+
+Type: function
+
+Description: 
+
+
+File: [client\OneSync\OneSync_steps.sqf at line 41](../../../Src/client/OneSync/OneSync_steps.sqf#L41)
+## os_steps_resetTriggers
+
+Type: function
+
+Description: 
+
+
+File: [client\OneSync\OneSync_steps.sqf at line 45](../../../Src/client/OneSync/OneSync_steps.sqf#L45)
+## os_steps_resetAllVariables
+
+Type: function
+
+Description: 
+
+
+File: [client\OneSync\OneSync_steps.sqf at line 49](../../../Src/client/OneSync/OneSync_steps.sqf#L49)
+## os_steps_getTrigger
+
+Type: function
+
+Description: 
+
+
+File: [client\OneSync\OneSync_steps.sqf at line 56](../../../Src/client/OneSync/OneSync_steps.sqf#L56)
+## os_steps_setTrigger
+
+Type: function
+
+Description: 
+
+
+File: [client\OneSync\OneSync_steps.sqf at line 60](../../../Src/client/OneSync/OneSync_steps.sqf#L60)
+## os_steps_getLastCall
+
+Type: function
+
+Description: 
+
+
+File: [client\OneSync\OneSync_steps.sqf at line 64](../../../Src/client/OneSync/OneSync_steps.sqf#L64)
+## os_steps_setLastCall
+
+Type: function
+
+Description: 
+
+
+File: [client\OneSync\OneSync_steps.sqf at line 68](../../../Src/client/OneSync/OneSync_steps.sqf#L68)
+## os_steps_onUpdate
+
+Type: function
+
+Description: 
+
+
+File: [client\OneSync\OneSync_steps.sqf at line 72](../../../Src/client/OneSync/OneSync_steps.sqf#L72)
+## os_steps_doFootStep
+
+Type: function
+
+Description: 
+
+
+File: [client\OneSync\OneSync_steps.sqf at line 132](../../../Src/client/OneSync/OneSync_steps.sqf#L132)
+## os_steps_onUpdateSoundData
+
+Type: function
+
+Description: 
+- Param: _pattern
+- Param: _count
+
+File: [client\OneSync\OneSync_steps.sqf at line 139](../../../Src/client/OneSync/OneSync_steps.sqf#L139)
+## os_steps_debug_renderInfo
+
+Type: function
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+File: [client\OneSync\OneSync_steps.sqf at line 152](../../../Src/client/OneSync/OneSync_steps.sqf#L152)
