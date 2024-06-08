@@ -9,6 +9,7 @@
 
 class(ElectronicDevice) extends(IStruct)
 	var(name,"Электронное устройство");
+	var(material,"MatSynt");
 
 	#include "..\..\Interfaces\ElectronicDevice.Interface"
 
@@ -16,6 +17,7 @@ endclass
 
 class(BaseElectronicDeviceLighting) extends(ILightibleStruct)
 	var(name,"Источник света");
+	var(material,"MatSynt");
 
 	#include "..\..\Interfaces\ElectronicDevice.Interface"
 

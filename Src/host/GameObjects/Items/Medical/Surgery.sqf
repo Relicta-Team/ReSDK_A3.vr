@@ -13,12 +13,22 @@ class(SurgicalSaw) extends(Item)
 	var(name,"Хирургическая пила");
 	var(desc,"Для отрезания лишних конечностей.");
 	var(model,"ml_shabut\rabochiystol\pila.p3d");
+	var(material,"MatMetal");
+	var(dr,2);
+	var(weight,gramm(480));
+	var(size,ITEM_SIZE_MEDIUM);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 	
 endclass
 
 class(SurgicalExpander) extends(Item)
 	var(name,"Хирургический расширитель");
 	var(model,"ml_shabut\rabochiystol\lobzik.p3d");
+	var(material,"MatMetal");
+	var(dr,2);
+	var(weight,gramm(540));
+	var(size,ITEM_SIZE_MEDIUM);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 	
 	getterconst_func(canUseInteractToMethod,true);
 	func(interactTo)
@@ -43,16 +53,21 @@ class(Stethoscope) extends(Item)
 	var(name,"Стетоскоп");
 	var(desc,"Лекарская прослушка.");
 	var(weight,gramm(60));
-	var(size,ITEM_SIZE_TINY);
+	var(dr,1);
+	var(size,ITEM_SIZE_SMALL);
 	var(model,"a3\props_f_orange\humanitarian\camps\stethoscope_01_f.p3d");
+	var(material,"MatSynt");
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 endclass
 
 class(BoneStraightener) extends(Item)
 	var(name,"Костоправ");
 	var(desc,"Поправит неисправимое.");
 	var(weight,gramm(170));
-	var(size,ITEM_SIZE_SMALL);
+	var(size,ITEM_SIZE_MEDIUM);
 	var(model,"ml_shabut\rabochiystol\kleshni.p3d");
+	var(material,"MatMetal");
+	var(dr,2);
 	
 	func(straightBone)
 	{
@@ -87,8 +102,10 @@ class(Forceps) extends(Item)
 	var(name,"Щипцы");
 	var(desc,"Лекарский инструмент для сшивания орагнов и конечностей.");
 	var(model,"a3\structures_f\items\tools\pliers_f.p3d");
+	var(material,"MatMetal");
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 	var(weight,gramm(40));
-	var(size,ITEM_SIZE_TINY);
+	var(size,ITEM_SIZE_SMALL);
 	getterconst_func(canUseInteractToMethod,true);
 	func(interactTo)
 	{
@@ -129,8 +146,10 @@ class(Crutch) extends(Item)
 	var(name,"Костыль");
 	var(desc,"Безногим?!");
 	var(model,"relicta_models2\medicine\s_crutch\s_crutch.p3d");
+	var(material,"MatWood");
+	var(dr,2);
 	var(weight,gramm(800));
-	var(size,ITEM_SIZE_MEDIUM);
+	var(size,ITEM_SIZE_LARGE);
 	var(allowedSlots,[INV_BACK arg INV_BACKPACK]);
 	
 	getter_func(getHandAnim,ITEM_HANDANIM_LOWERONLYHAND); //анимация в состоянии покоя

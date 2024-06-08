@@ -21,6 +21,10 @@
 
 editor_attribute("InterfaceClass")
 class(IPaperItemBase) extends(Item)
+	var(material,"MatPaper");
+	var(weight,gramm(10));
+	var(size,ITEM_SIZE_SMALL);
+	
 	func(doBurn)
 	{
 		objParams_2(_srcFire,_usr);
@@ -47,14 +51,54 @@ endclass
 
 editor_attribute("InterfaceClass")
 class(IWritableContentItem) extends(IPaperItemBase)
+	"
+		name:Хранящий текст предмет
+		desc:Базовый класс для любого, хранящего текст предмета. Обычно от этого класса унаследованы листки бумаги, книги, документы и т.д.
+		path:Игровые объекты.Текстовые
+	" node_class
+	
 	#include "..\..\Interfaces\INetDisplay.Interface"
 	var(ndName,"Book");
 	var_exprval(ndInteractDistance,INTERACT_DISTANCE);
 
-	var(content,""); //text in book
-	getterconst_func(getMaxLen,1024*3);
 
+	"
+		name:Текстовое содержимое
+		desc:Текст, содержащийся в книге, бумаге или любом другом предмете, способном хранить текст.
+		prop:get
+		classprop:1
+		return:string:Текстовое содержимое
+	" node_var
+	var(content,""); //text in book
+
+	#define __CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__ 1024*3
+
+	"
+		name:Максимальная длина текста
+		desc:Максимальная допустимая длина текста в книге или листке бумаги. На данный момент константна и равна 3072 символам.
+		type:get
+		lockoverride:1
+		return:int:Максимальная длина текста
+	" node_met
+	getterconst_func(getMaxLen,__CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__);
+
+	"
+		name:Можно записать
+		desc:Возвращает истину, если в хранилище текста можно добавить дополнительные данные.
+		type:get
+		lockoverride:1
+		return:bool:Можно записать
+	" node_met
 	getter_func(canWrite,forceUnicode 0; (count getSelf(content))<callSelf(getMaxLen));
+
+	"
+		name:Можно прочитать
+		desc:Возвращает истину, если есть возможность открыть хранилище текста для чтения персонажем.
+		type:get
+		lockoverride:1
+		return:bool:Можно прочитать
+	" node_met
+	getter_func(canRead,true);
 
 	func(canApplyText)
 	{
@@ -78,12 +122,63 @@ class(IWritableContentItem) extends(IPaperItemBase)
 		callSelf(closeNDisplayForAllMobs);
 	};
 
+	"
+		name:Добавить текст
+		desc:Добавляет текст в хранилище текста.
+		type:method
+		lockoverride:1
+		in:string:Текст:Добавляемый текст
+		in:ItemWritter:Писатель:Объект, которым пишется текст (например, ручка). Обычно отвечает за то, какой будет стиль и цвет текста. Если параметр не указан - добавленный текст будет добавлен стандартным черным цветом.
+			opt:require=-1
+		return:bool:Возвращает истину, если текст добавлен.
+	" node_met
+	func(appendText)
+	{
+		objParams_2(_data,_writter);
+
+		if !callSelfParams(canApplyText,_data) exitWith {false};
+
+		if (!isNullVar(_writter) && {!isNullReference(_writter)}) then {
+			_data = callFuncParams(_writter,applyColorToText,_data);
+		};
+
+		//write data
+		modSelf(content, + _data);
+		callSelf(updateNDisplay);
+	};
+
+	//editor paper data
+	editor_attribute("alias" arg "Содержимое")
+	editor_attribute("Tooltip" arg "Данные записанные в объекте, способном хранить текст.")
+	editor_attribute("EditorVisible" arg "type:string" arg "stringmaxsize:"+str(__CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__))
+	var(preinit@__content,""); //системная переменная для установки ключей через редактор
+
+	func(__handlePreInitVars__)
+	{
+		objParams();
+		super();
+		private _ct = getSelf(preinit@__content);
+		if (_ct!="") then {
+			callSelfParams(appendText,_ct);
+			setSelf(preinit@__content,null);
+		};
+	};
+
 endclass
 
 class(Book) extends(IWritableContentItem)
+	"
+		name:Книга
+		desc:Базовый класс для книги.
+		path:Игровые объекты.Текстовые
+	" node_class
 	var(name,"Книга");
 	var(ndName,"Book");
 	var(model,"relicta_models\models\interier\props\book6.p3d");
+
+	var(size,ITEM_SIZE_MEDIUM);
+	var(weight,gramm(350));
+	var(dr,2);
 
 	//getterconst_func(onePaperSize,256); //length one piper size
 
@@ -97,6 +192,12 @@ endclass
 */
 
 class(Paper) extends(IWritableContentItem)
+	"
+		name:Листок
+		desc:Базовый класс для листа бумаги.
+		path:Игровые объекты.Текстовые
+	" node_class
+
 	var(name,"Листок");
 	var(desc,"");
 	var(model,"a3\weapons_f_orange\ammo\leaflet_05_old_f.p3d");
@@ -104,6 +205,7 @@ class(Paper) extends(IWritableContentItem)
 	var(ndName,"Paper");
 	var_exprval(ndInteractDistance,INTERACT_DISTANCE);
 	var(weight,gramm(5));
+	var(size,ITEM_SIZE_SMALL);
 
 	getter_func(getPickupSound,vec2("updown\paper_up"+str randInt(1,3),getRandomPitchInRange(.85,1.3)));
 	getter_func(getDropSound,vec2("updown\paper_down"+str randInt(1,2),getRandomPitchInRange(.85,1.3)));
@@ -254,11 +356,30 @@ class(Paper) extends(IWritableContentItem)
 endclass
 
 class(Notepad) extends(Paper)
+	var(model,"a3\structures_f\items\documents\notepad_f.p3d")
 	var(name,"Блокнот");
+	var(dr,1);
+	var(size,ITEM_SIZE_SMALL);
+	var(weight,gramm(100));
+endclass
+
+class(Documents) extends(Paper)
+	var(model,"a3\structures_f\items\documents\file2_f.p3d")
+	var(name,"Документы");
+	var(size,ITEM_SIZE_SMALL);
+	var(weight,gramm(170));
+endclass
+
+class(Documents1) extends(Paper)
+	var(model,"a3\structures_f\items\documents\file1_f.p3d")
+	var(name,"Документы");
 endclass
 
 class(Folder) extends(Book)
 	var(name,"Папка");
+	var(weight,gramm(220));
+	var(size,ITEM_SIZE_MEDIUM);
+	var(dr,1);
 endclass
 
 
@@ -266,7 +387,16 @@ class(PaperHolder) extends(IPaperItemBase)
 	var(model,"a3\weapons_f_orange\ammo\leaflet_05_stack_f.p3d")
 	var(name,"Стопка бумаги");
 	var(countBlanks,20);
-	var(weight,0);
+	var(weight,0.5);
+	var(size,ITEM_SIZE_MEDIUM);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
+
+	func(constructor)
+	{
+		objParams();
+		setSelf(weight,getFieldBaseValue("Paper","weight") * getSelf(countBlanks));
+		callSelf(generateObjectHP);
+	};
 
 	func(getWeight)
 	{

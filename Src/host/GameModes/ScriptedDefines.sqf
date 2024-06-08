@@ -60,7 +60,7 @@ class(ScriptedGamemode) extends(GMBase)
 	"
 		name:Получить тип полного антагониста
 		namelib:Обработчик полных антагонистов
-		desc:Возвращает строковое название класса полного (уникального) антагониста, которое переопределит роль зашедшего игрока. Срабатывает при старте раунда для игроков, которые выбрали полных или любых антагонистов и чьи роли могут стать полными антагонистами.\n"+
+		desc:Возвращает @[classname класс] полного (уникального) антагониста, которое переопределит роль зашедшего игрока. Срабатывает при старте раунда для игроков, которые выбрали полных или любых антагонистов и чьи роли могут стать полными антагонистами.\n"+
 		"
 		code:func(@thisName) { @thisParams;@genvar.out.5.internal(_countInGame)@genvar.out.6.internal(_countProbFullAntags) @out.1 };
 		return:classname:Название класса полного антагониста.
@@ -93,11 +93,14 @@ class(ScriptedGamemode) extends(GMBase)
 	"
 		name:Обработчик скрытых антагонистов
 		namelib:Обработчик скрытых антагонистов
-		desc:Возвращает строковое название класса скрытого антагониста, которое переопределит роль зашедшего игрока. "+
-			"Срабатывает при старте раунда, когда все игроки распределены по ролям и загрузились в игру.
-		code:func(@thisName) { @thisParams;@genvar.out.4.internal(_countInGame)@genvar.out.5.internal(_countProbHiddenAntags); @out.1};
+		desc:Обработчик скрытых антагонистов (персонажей, которые получают задачи оставаясь на своей роли).\n"+
+			"Срабатывает при старте раунда, когда все игроки распределены по ролям и загрузились в игру. "+
+		"В этом обработчике вы самостоятельно решаете кто станет скрытым антагонистом и как вы будете их хранить.
+		code:func(@thisName) { @thisParams;@genvar.out.5.internal(_countInGame)@genvar.out.6.internal(_countProbHiddenAntags); @out.1};
 		type:event
 		out:ServerClient^:Клиент:Объект проверяемого клиента, зашедший в игру на старте раунда.
+			opt:mul=1
+		out:Mob^:Моб:Объект проверяемого моба, зашедшего в игру на старте раунда.
 			opt:mul=1
 		out:int:Номер клиента:Порядковый номер проверяемого клиента. Отсчет ведется с 1. Для первого клиента это значение будет 1, для второго - 2 и т.д.
 		out:int:Всего игроков:Отражает количество игроков, зашедших в игру на старте раунда. Данное число удобно, когда нам нужно вычислить антагониста от процентного соотношения всех игроков.
@@ -313,6 +316,21 @@ class(ScriptedGamemode) extends(GMBase)
 		super();
 	};
 
+	"
+		name:Получить роль
+		desc:Получает объект роли.
+		in:classname:Тип роли:Тип роли, которую необходимо получить.
+			opt:def=ScriptedRole:typeset_out=Результат
+		return:ScriptedRole:@[ScriptedRole^ Объект роли] или любой тип, являющийся её (прямым или косвенным) наследником.
+	" node_met
+	func(getRole)
+	{
+		objParams_1(_classname);
+		private _robj = _classname call gm_getRoleObject;
+		assert_str(!isNullReference(_robj),format vec2("Role object %1 not found",_classname));
+		_robj
+	};
+
 
 	"
 		name:Доступные роли
@@ -327,6 +345,8 @@ class(ScriptedGamemode) extends(GMBase)
 		objParams();
 		[]
 	};
+	
+	var(___roleFirstInit__,false);
 
 	func(_getRolesWrapperInternal)
 	{
@@ -335,9 +355,17 @@ class(ScriptedGamemode) extends(GMBase)
 		private _robj = nullPtr;
 		private _lobby = [];
 		private _late = [];
+		private _isFirstInit = !getSelf(___roleFirstInit__);
+		if (_isFirstInit) then {
+			setSelf(___roleFirstInit__,true);
+		};
 		{
 			_robj = _x call gm_getRoleObject;
+			
 			if !isNullReference(_robj) then {
+				if (_isFirstInit) then {
+					callFuncParams(_robj,onRegisteredInGamemode,this);
+				};
 				if callFunc(_robj,_canTakeInLobbyConst) then {
 					_lobby pushBackUnique _x;
 				};
@@ -484,6 +512,25 @@ class(ScriptedRole) extends(BasicRole)
 	getter_func(isMainRole,false); //ключевые роли управляют условием начала старта. Так же они заносятся в 
 
 	"
+		name:Может быть полным антагонистом
+		desc:Определяет, может ли роль быть полным антагонистом.
+		prop:get
+		classprop:1
+		return:bool:Может ли роль быть полным антагонистом
+		defval:true
+	" node_var
+	var(__canBeFullAntag,true);
+	"
+		name:Может быть скрытым антагонистом
+		desc:Определяет, может ли роль быть скрытым антагонистом.
+		prop:get
+		classprop:1
+		return:bool:Может ли роль быть скрытым антагонистом
+		defval:true
+	" node_var
+	var(__canBeHiddenAntag,true);
+
+	"
 		name:В лобби после смерти
 		namelib:Возврат в лобби после смерти (разрешить призрака)
 		desc:Опция отвечает за автоматический возврат в лобби после смерти персонажа. Если она включена - возвращает игрока в лобби сразу после смерти, иначе позволяет покинуть тело и в роли призрака наблюдать за остальными.
@@ -521,7 +568,7 @@ class(ScriptedRole) extends(BasicRole)
 
 	"
 		name:Требование смены лица
-		desc:Требование смены лица при смерти. Если включено (ИСТИНА), то после смерти при попытке зайти за новую роль с предыдущим лицом и именем игрока не пустит в игру. "+
+		desc:Требование смены лица при смерти. Если включено (@[bool ИСТИНА]), то после смерти при попытке зайти за новую роль с предыдущим лицом и именем игрока не пустит в игру. "+
 		"Чаще всего для ролей монстров включено, а для обычных людей выключено.
 		type:const
 		return:bool:Требовать смену лица и имени при заходе за новую роль после смерти за предыдущего персонажа.
@@ -634,7 +681,7 @@ class(ScriptedRole) extends(BasicRole)
 		desc:Будет ли доступна эта роль запрашиваемому клиенту из лобби до старта игры. С помощью выходного параметра ""Клиент"" можно настроить ограничения для конкретных клиентов.
 		type:event
 		out:ServerClient^:Клиент:Объект клиента, который запрашивает видимость роли.
-		out:bool:Вывод ошибок:Этот параметр принимает значение ИСТИНА, когда запрос осуществляется с возможностью вывода ошибки. Например, если настроить ограничение на пол для роли, то при включенном флаге можно отправить клиенту сообщение о том, что пол его персонажа не подходит.
+		out:bool:Вывод ошибок:Этот параметр принимает значение @[bool ИСТИНА], когда запрос осуществляется с возможностью вывода ошибки. Например, если настроить ограничение на пол для роли, то при включенном флаге можно отправить клиенту сообщение о том, что пол его персонажа не подходит.
 		return:bool:Доступность роли в лобби
 	" node_met
 	func(canTakeInLobby)
@@ -691,7 +738,8 @@ class(ScriptedRole) extends(BasicRole)
 	"
 		name:Полный антагонист
 		namelib:Может быть полным антагонистом
-		desc:Отвечает за то, может ли клиент, взявший эту роль быть полным антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль - в этом событии не требуется проверять является ли роль ключевой. "+
+		desc:Отвечает за то, может ли клиент, взявший эту роль быть полным антагонистом. "+
+		"Данный узел позволяет реализовать специальную логику по решению будет ли эта роль полным антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль - в этом событии не требуется проверять является ли роль ключевой. "+
 		"Полным антагонистам выполняется замена роли, а выбор этих ролей происходит в логике игрового режима.
 		type:event
 		out:ServerClient^:Клиент:Объект клиента, который проверяется на полного антагониста.
@@ -700,13 +748,14 @@ class(ScriptedRole) extends(BasicRole)
 	func(canBeFullAntag)
 	{
 		objParams_1(_client);
-		true
+		getSelf(__canBeFullAntag)
 	};
 
 	"
 		name:Скрытый антагонист
 		namelib:Может быть скрытым антагонистом
-		desc:Отвечает за то, может ли клиент, взявший эту роль быть скрытым антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль. "+
+		desc:Отвечает за то, может ли клиент, взявший эту роль быть скрытым антагонистом. "+
+		"Данный узел позволяет реализовать специальную логику по решению будет ли эта роль скрытым антагонистом. Эта проверка всегда включает внешнюю проверку на ключевую роль. "+
 		"Скрытые антагонисты получают свои особые задачи без смены роли, в отличии от полных антагонистов. Выбор таких ролей происходит в логике игрового режима.
 		type:event
 		out:ServerClient^:Клиент:Объект клиента, который проверяется на скрытого антагониста.
@@ -715,7 +764,7 @@ class(ScriptedRole) extends(BasicRole)
 	func(canBeHiddenAntag)
 	{
 		objParams_1(_client);
-		true
+		getSelf(__canBeHiddenAntag)
 	};
 
 	//safe copy mobs
@@ -776,7 +825,7 @@ class(ScriptedRole) extends(BasicRole)
 
 	"
 		name:Случайное направление спавна
-		desc:Указывает будет ли включено случайное направление при спавне персонажа. ИСТИНА - персонаж будет появляться на точке всегда со случайным направлением. ЛОЖЬ - направление при появлении будет учитываться из направления точки спавна.
+		desc:Указывает будет ли включено случайное направление при спавне персонажа. @[bool ИСТИНА] - персонаж будет появляться на точке всегда со случайным направлением. @[bool ЛОЖЬ] - направление при появлении будет учитываться из направления точки спавна.
 		type:const
 		return:bool:Истина, если нужно использовать случайное направление при спавне.
 		defval:false
@@ -838,7 +887,7 @@ class(ScriptedRole) extends(BasicRole)
 		type:event
 		out:BasicMob^:Моб:Объект моба, для которого вызывалось данное событие.
 		out:ServerClient^:Клиент:Объект клиента (владельца моба), для которого вызвалось данное событие.
-		out:bool:Позднее назначение:Этот порт отвечает за позднее назначение (после старта раунда). Когда возвращает ИСТИНУ - клиент зашёл на старте раунда, а когда ЛОЖЬ - уже после старта раунда.
+		out:bool:Позднее назначение:Этот порт отвечает за позднее назначение (после старта раунда). Когда возвращает @[bool ИСТИНУ] - клиент зашёл на старте раунда, а когда @[bool ЛОЖЬ] - уже после старта раунда.
 	" node_met
 	func(_onAssignedWrapper)
 	{
@@ -937,4 +986,60 @@ class(ScriptedRole) extends(BasicRole)
 	" node_met
 	getterconst_func(getCurrentGamemode,gm_currentMode);
 
+
+	func(constructor)
+	{
+		objParams();
+	};
+
+	func(onRegisteredInGamemode)
+	{
+		objParams_1(_gmObj);
+		if (!is3DEN) then {
+			{
+				assert_str(_x!="",format vec2("Empty string in property needDiscordRoles for class %1",callSelf(getClassName)));
+				
+			} foreach callSelf(needDiscordRoles);
+		};
+	};
+
+endclass
+
+class(ScriptedEater) extends(ScriptedRole)
+	"
+		name:Жрун
+		desc:Базовая роль монстра типа ""Жрун"".
+		path:Игровая логика.Роли
+	" node_class
+
+	var(name,"Жрун");
+
+	var(returnInLobbyAfterDead,true);
+	getter_func(canStoreNameAndFaceForValidate,false);
+	
+	getterconst_func(_canTakeInLobbyConst,true);
+	getter_func(_canVisibleAfterStartConst,true);
+	var(count,1);
+	var(classMan,"GMPreyMobEater");
+	var(classWoman,"GMPreyMobEater");
+	
+	func(getEquipment)
+	{
+		objParams_1(_mob);
+		["Castoffs" + str randInt(1,3),_mob,INV_CLOTH] call createItemInInventory;
+	};
+	
+	func(onAssigned)
+	{
+		objParams_2(_mob,_usr);
+		super();
+		callFuncParams(_mob,setMobFace,"");//reset face
+		callFuncParams(_mob,generateNaming,callFunc(_mob,getRandomNamePrefix) arg "жрун");
+	};
+	func(onDeadBasic)
+	{
+		objParams_2(_mob,_usr);
+		super();
+		callFuncParams(_usr,setDeadTimeout,30);
+	};
 endclass

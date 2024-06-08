@@ -39,6 +39,171 @@ node_system_group("internal")
 
 node_system_group("operators")
 	
+// lambdas and local functions
+	"
+		node:lambda
+		name:Создать функцию
+		color:Operator
+		icon:data\\icons\\icon_BluePrintEditor_Function_16px
+		desc:Создаёт анонимную функцию, которую можно вызывать из любого места в графе. Для создания параметров и установки возвращаемого значения нажмите ПКМ по функции.
+		path:Локальные функции и события
+		exec:pure
+		runtimeports:1
+		out:function[anon=null]:lambda_ref:Ссылка на функцию
+			opt:dname=1
+		out:Exec:Выполнение:Действия, выполняемые создаваемой функцией
+			opt:dname=0:mul=0
+		code:{@genport.out.3(paramGen) @out.2}
+	" node_system
+
+	//! not implemented, context passing is not supported
+	// "
+	// 	node:lambda_obj
+	// 	name:Создать делегат
+	// 	namelib:Создать объектную функцию (делегат)
+	// 	color:Operator
+	// 	icon:data\\icons\\icon_BluePrintEditor_Function_16px
+	// 	desc:Создает объектную функцию. Эта функция может использовать контекст из места определения. Для добавления параметров, установки возвращаемого значения и источника (цели) функции нажмите ПКМ по функции.
+	// 	exec:pure
+	// 	runtimeports:1
+	// 	in:auto:Объект:Владелец вызываемой функции
+	// 		opt:typeget=value;@type:allowtypes=object^
+	// 	out:function[obj=null=object^]:lambda_ref:Ссылка на функцию
+	// 		opt:dname=1
+	// 	out:Exec:Выполнение:Действия, выполняемые создаваемой функцией
+	// 		opt:dname=0:mul=0
+	// 	out:auto:Цель:Выполняющий владелец функции
+	// 	code:[[@in.1,@context.get],{params[""_p"",""_ct""];_p @genport.out.4(paramGen) _ct @context.alloc; @out.2}]
+	// " node_system
+
+	"
+		node:lambda_event
+		name:Создать функцию-действие
+		color:Operator
+		icon:data\\icons\\icon_BluePrintEditor_Function_16px
+		desc:Создает выполняемое действие над объектом. Для добавления параметров и установки возвращаемого значения нажмите ПКМ по функции.
+		exec:pure
+		runtimeports:1
+		out:function[event=null=object^]:lambda_ref:Ссылка на функцию
+			opt:dname=1
+		out:Exec:Выполнение:Действия, выполняемые создаваемой функцией
+			opt:dname=0:mul=0
+		out:object^:Цель:Выполняющий владелец функции
+		code:{@genport.out.3(paramGen) @out.2}
+	" node_system
+
+	"
+		node:lambda_eventlist
+		name:Создать событие
+		color:Operator
+		icon:data\\icons\\icon_BluePrintEditor_Function_16px
+		desc:Создает выполняемое событие. Для добавления параметров и уст
+		exec:pure
+		runtimeports:1
+		out:function[eventlist=null=object^]:lambda_ref:Ссылка на функцию
+			opt:dname=1
+		out:Exec:Выполнение:Действия, выполняемые создаваемой функцией
+			opt:dname=0:mul=0
+		out:object^:Цель:Выполняющий владелец функции
+		code:{@genport.out.3(paramGen) @out.2}
+	" node_system
+
+// call localfunctions
+	"
+		node:call_lambda
+		name:Вызвать функцию
+		desc:Вызывает анонимную функцию, объектную или событие.
+		color:Operator
+		icon:data\\icons\\icon_BluePrintEditor_Function_16px
+		path:Локальные функции и события.Выполнение
+		exec:pure
+		runtimeports:1
+		code:[@genport.in.2(,)]call(@in.1)
+		in:function_ref:Функция
+	" node_system
+
+	"
+		node:call_lambda_list
+		name:Вызвать событие
+		desc:Вызывает пользовательское событие.
+		color:Operator
+		icon:data\\icons\\icon_BluePrintEditor_Function_16px
+		exec:all
+		runtimeports:1
+		code:_pcl__=[@genport.in.3(,)];{_pcl__ call _x} foreach (@in.2); @out.1
+		in:function_ref:Функция
+	" node_system
+
+	// delegate call is not supported
+	// "
+	// 	node:call_lambda_delegate
+	// 	name:Вызвать делегат
+	// 	desc:Вызывает делегат и возвращает значение при наличии. Если объект-владелец делегата не существует - ничего не произойдёт. В случае если делегат должен возвращать значение и объект-владелец не существует - возвращается null-значение.
+	// 	color:Operator
+	// 	icon:data\\icons\\icon_BluePrintEditor_Function_16px
+	// 	exec:pure
+	// 	runtimeports:1
+	// 	code:[@in.1,[@genport.in.2(,)]] call renode_invokeDelegate
+	// 	in:function_ref:Делегат
+	// " node_system
+
+	"
+		node:switch_on_int
+		name:Выбрать из целых чисел
+		namelib:Выбрать из перечисления целых чисел
+		color:EnumSwitch
+		icon:data\\icons\\icon_Blueprint_Switch_16x
+		desc:Перечисление по целым числам.
+		path:Перечисления.Базовые
+		exec:pure
+		runtimeports:1
+		in:Exec:Вход
+			opt:mul=1
+		in:int:Число
+			opt:mul=0:custom=1:def=0
+		out:Exec:По умолчанию:Выполняется, если не найдено ни одно из вхождений.
+			opt:mul=0
+		code:private __sv = @in.2; @gen_switch_on(__sv)
+	" node_system
+
+	"
+		node:switch_on_float
+		name:Выбрать из дробных чисел
+		namelib:Выбрать из перечисления дробных чисел
+		color:EnumSwitch
+		icon:data\\icons\\icon_Blueprint_Switch_16x
+		desc:Перечисление по дробным числам.
+		path:Перечисления.Базовые
+		exec:pure
+		runtimeports:1
+		in:Exec:Вход
+			opt:mul=1
+		in:float:Число
+			opt:mul=0:custom=1:def=0
+		out:Exec:По умолчанию:Выполняется, если не найдено ни одно из вхождений.
+			opt:mul=0
+		code:private __sv = @in.2; @gen_switch_on(__sv)
+	" node_system
+
+	"
+		node:switch_on_string
+		name:Выбрать из строк
+		namelib:Выбрать из перечисления строк
+		color:EnumSwitch
+		icon:data\\icons\\icon_Blueprint_Switch_16x
+		desc:Перечисление по строкам.
+		path:Перечисления.Базовые
+		exec:pure
+		runtimeports:1
+		in:Exec:Вход
+			opt:mul=1
+		in:string:Строка
+			opt:mul=0:custom=1
+		out:Exec:По умолчанию:Выполняется, если не найдено ни одно из вхождений.
+			opt:mul=0
+		code:private __sv = @in.2; @gen_switch_on(__sv)
+	" node_system
+
 	_baseOpPath = "Операторы";
 	//!not need=> out:Exec:После условия:Всегда посылает импульс после выполнения ветки вне зависимости от условия ""Истина"" или ""Ложь"".
 	"
@@ -120,7 +285,7 @@ node_system_group("operators")
 		color:Operator
 		name:Цикл
 		desc:Выполнение кода несколько раз пока условие истинно. При поступлении входного имульса выполняется проверка условия. Если оно истнно - выполняется тело цикла. В ином случае выполняется узел, подключенный к выходному порту ""При завершении"", если таковой подключен.\n"+
-		"<span style='color:red'>Примечание: </span>Обратите внимание, что узел цикла может выполнить тело цикла только 10000 раз. При достижении лимита выполнения цикл остановится. Данное ограничение является особенностью платформы.
+		"<span style=""color\:red"">Примечание\: </span>Обратите внимание, что узел цикла может выполнить тело цикла только 10000 раз. При достижении лимита выполнения цикл остановится. Данное ограничение является особенностью платформы.
 		icon:data\\icons\\icon_Blueprint_Loop_16x
 		code:while {@in.2} do {@out.1}; @out.2
 		in:Exec:Вход
@@ -201,7 +366,6 @@ node_system_group("operators")
 		code:break
 		exec:in
 	" node_system
-	
 
 //variables
 node_system_group("variable")

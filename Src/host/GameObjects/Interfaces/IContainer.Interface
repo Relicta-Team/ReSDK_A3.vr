@@ -5,7 +5,7 @@
 
 
 #include <..\..\..\client\Inventory\inventory.hpp>
-
+interfaceHeader
 attributeParams(hasField,"countSlots" arg "maxSize")
 
 getter_func(isContainer,true);

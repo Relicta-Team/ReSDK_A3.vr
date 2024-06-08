@@ -52,8 +52,7 @@ function(systools_internal_generateModelData)
 			};
 	};
 	#define searchcmp(m,list) ( (list findif {_x in m})!=-1 )
-	_header = ["FileManager","Read",[getMissionPath "src\Editor\GENERATED\ModelConfig_header.sqf"],true] call rescript_callCommand;
-	
+	_header = ["src\Editor\GENERATED\ModelConfig.sqf"] call file_read;
 	_cfgData = "true" configClasses (configFile >> "CfgVehicles");
 	_countData = (count _cfgData)-1;
 	_stringStream = "";

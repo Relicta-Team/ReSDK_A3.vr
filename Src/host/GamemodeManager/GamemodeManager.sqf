@@ -73,10 +73,7 @@ gm_preStartRoles = []; //роли доступные на престарте (о
 gm_roundProgressRoles = []; //роли доступные после старта. Оставшиеся после престарта с количеством > 0 и возможность добавления перемещаются в этот лист
 gm_embarks = []; //типы эмбарковых ролей. доступны и заполняются только после
 
-//Антаговые определения. Первые 3 переменные не должны быть использованы
-gm_antagClients = []; //массив клиентов для антагов ОСОБЫЕ роли
-gm_antagClientsHidden = []; //массив скрытых 
-gm_antagClientsCounter = 0; //просто счётчик по созданным антагам
+//Антаговые определения.
 	gm_antagClientsFull = []; //лист фулловых антагов (особые + ВСЕ)
 	gm_antagClientsHidden = []; //лист скрытых антагов (скрытые + ВСЕ)
 	gm_preparedClients = []; //vec2 лист: ServerClient, RoleObject
@@ -134,6 +131,9 @@ sdk_temp_internal_forcedAspect = null;
 
 if ("startAtNight" call sdk_hasSystemFlag) then {
 	invokeAfterDelay({call setNight;call setNight;[]spawn setNight},0.3);
+};
+if ("disableRayCastSphere" call sdk_hasSystemFlag) then {
+	invokeAfterDelay({si_internal_rayObject hideObject true},1);
 };
 
 //apply logic
@@ -199,34 +199,6 @@ if (_canAutoSetupGamemode) then {
 
 
 #endif
-
-/* DEPRECATED
-	_autorole = "";
-	#ifdef EDITOR_STARTUP_ROLE
-		_autorole = 'EDITOR_STARTUP_ROLE';
-	#endif
-	_canAutoStart = false;
-	#ifdef EDITOR_CAN_AUTOSTART
-		_canAutoStart = true;
-	#endif
-
-	__startupMode__ = 'EDITOR_GAMEMODE';
-
-	#ifdef EDITOR
-		//apply startup mode
-		__startupMode__ = ["startupMode",__startupMode__] call sdk_getPropertyValue;
-	#endif
-	//TODO add more logic for sdk preferences
-	#ifdef EDITOR_AUTO_PLAY
-		invokeAfterDelayParams({rpcCall("processClientCommand",vec2("setmode "+ _this ,player))},1,__startupMode__);
-		if not_equals(_autorole,"") then {
-			invokeAfterDelayParams({ ["onClientChangeCharSetting" arg ["role1" arg _this arg 0]] call client_sendToServer },1.15,_autorole);
-		};
-		if (_canAutoStart) then {
-			invokeAfterDelay({rpcCall("processClientCommand",vec2("startgame",player))},1.2);
-		};
-	#endif
-*/
 
 
 #ifndef RELEASE

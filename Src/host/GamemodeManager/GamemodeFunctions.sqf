@@ -219,7 +219,7 @@ gm_setLobbySound = {
 gm_onChangeState = {
 	params ["_newState"];
 
-	[format["gm::onChangeState() - new state is %1",_newState]] call gameLog;
+	[format["gm::onChangeState() - new state is %1 (%2)",_newState,_newState call gm_getState]] call gameLog;
 
 	private _oldState = gm_state;
 	netSetGlobal(gm_state,_newState);
@@ -345,8 +345,13 @@ gm_initGameMode = {
 		addLateRole(_x);
 	} foreach callFunc(gm_currentMode,getLateRoles);
 	
-	
-	netSetGlobal(lobby_background,callFunc(gm_currentMode,getLobbyBackground));
+	private _pic = callFunc(gm_currentMode,getLobbyBackground);
+	if isTypeOf(gm_currentMode,ScriptedGamemode) then {
+		if !([_pic,PATH_PICTURE("")] call stringStartWith) then {
+			_pic = PATH_PICTURE(_pic);
+		};
+	};
+	netSetGlobal(lobby_background,_pic);
 	[callFunc(gm_currentMode,getLobbySoundName)] call gm_setLobbySound;
 	
 	["    Наполняем местность жизнью...","system"] call cm_sendLobbyMessage;
@@ -500,94 +505,6 @@ gm_pickMode = {
 	[format["(gm::pickMode) - random gamemode is %1",callFunc(gm_currentMode,getClassName)]] call gameLog;
 	gm_currentMode
 };
-
-//Новый алгоритм выбора антагониста. Осуществляется после назначения режима
-gm_handleAntagsImpl = {
-	
-	// Берем всех клиентов посаженных за свои роли
-	private _fullAntags = [];
-	private _hiddenAntags = [];
-	private _struct = [];
-	private _hashAssoc = createHashMap;
-	private _listClients = call cm_getAllClientsInGame;
-	private _canAntagList = [];
-	
-	//шафлим по приоритетам. статус + очко за фулл антага
-	//если чел не может быть никаким из антагов - вырезаем его.
-	{
-		_roleCli = getVar(getVar(_x,actor) getVariable "link",basicRole); //unsafe context
-		_points = 0;
-		
-		#ifdef EDITOR
-		traceformat("gm::handleAntagsImpl() - check client %1 [F:%2;H:%3] (%4)",getVar(_x,name) arg callFuncParams(_roleCli,canBeHiddenAntag,_x) arg callFuncParams(_roleCli,canBeFullAntag,_x) arg getVar(_x,actor))
-		#endif
-		
-		if callFuncParams(_roleCli,canBeHiddenAntag,_x) then {modvar(_points) + 30; _canAntagList pushBackUnique _x};
-		if callFuncParams(_roleCli,canBeFullAntag,_x) then {modvar(_points) + 70; _canAntagList pushBackUnique _x};
-		if (_points > 0) then {
-			
-			if (getVar(_x,access) >= ACCESS_FORSAKEN) then {modvar(_points) + 10};
-			
-			_struct pushBack _points; //добавляем приоритет
-			_preval = _hashAssoc get _points; //добавляем ассоциацию приоритета клиента
-			if isNullVar(_preval) then {
-				_hashAssoc set [_points,[_x]];
-			} else {
-				_preval pushBack _x;
-			};
-		};
-	} foreach _listClients;
-	
-	traceformat("gm::handleAntagsImpl() - Ingame: %2; Map antags: %1",_hashAssoc arg count _listClients)
-	
-	//Сортируем приоритеты
-	
-	//флатим карту и энумеруем по списку клиентов фулл антагов
-	_struct sort false;
-
-	private _outputList = [];
-	{
-		_keyList = _hashAssoc get _x;
-		if (count _keyList > 1) then {
-			_keyList = _keyList call BIS_fnc_arrayShuffle;
-		};
-		_outputList append _keyList;
-
-	} foreach _struct;
-	
-	//Доп проверка: если антагов нет - шафлим весь лист и энумеруем
-	if (count _outputList == 0) then {
-		_outputList = array_shuffle(_canAntagList);
-		traceformat("gm::handleAntagsImpl() - empty antag list detected. Created new pool from _canAntagList (%1)",_canAntagList)
-	};
-	
-	//внешняя ссылка для использования в GMBase::handleAntagRoleHidden
-	private _countClientsInGame = count _listClients;
-	
-	private _curClient = nullPtr;
-	for "_i" from 0 to (count _outputList)-1 do {
-		_curClient = _outputList select _i;
-		if callFuncParams(gm_currentMode,handleAntagRoleFull,_curClient arg getVar(_curClient,actor) getvariable "link" arg _i + 1) then {
-			_outputList set [_i,objNull];
-		};
-	};
-	
-	//удаляем выбранных антагов
-	_outputList = _outputList - [objNull];
-	
-	traceformat("gm::handleAntagsImpl() - handle post antags: %1",_outputList)
-	
-	//this only need for backward compatibility
-	private _countInGame = _countClientsInGame;
-
-	//оставшихся нумеруем по скрытым
-	for "_i" from 0 to (count _outputList)-1 do {
-		_curClient = _outputList select _i;
-		callFuncParams(gm_currentMode,handleAntagRoleHidden,_curClient arg getVar(_curClient,actor) getvariable "link" arg _i + 1);
-	};
-};
-
-
 
 //синхронизирует со всеми клиентами ролелист
 gm_syncRolelistToAllClients = {
@@ -769,6 +686,7 @@ gm_isPreStartRoleExist = {
 };
 
 //Осуществляет проверку наличия класса роли. Не учитывается статус роли количество и прочие факторы. Просто проверщик
+//! not used anywhere...
 gm_isRoleExists = {
 	params ["_roleClass"];
 	private _probRoleData = missionNamespace getVariable ["role_"+_roleClass,nullPtr];
@@ -778,12 +696,6 @@ gm_isRoleExists = {
 	true
 };
 
-//!UNSAFE ROLE GETTER. Use this from scripted gamemode (need write code for getting roles)
-// node_func(gm_getRoleObject_Node) = {
-// 	params ["_roleClass"];
-// 	assert_str(_roleClass!="","Role class cannot be empty");
-// 	assert_str(!isNullReference(gm_currentMode),"Gamemode must be selected");
-// };
 gm_getRoleObject = {getRoleObject(_this)};
 
 //Получаем объект игрового режима

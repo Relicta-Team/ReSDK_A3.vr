@@ -44,6 +44,8 @@ sdk_internal_loadSDKConfig = {
 
 	
 	private _dat = ["FileManager","Read",[_pathFull,""],true] call rescript_callCommand;
+	assert_str(not_equals(_dat,"$BUFFER_OVERFLOW$"),"Cannot read sdk config file - buffer overflow");
+
 	_dat = call compile (_dat regexReplace ["/g",""""]);
 	sdk_list_systemFlags = _dat select 0;
 	sdk_map_SDKProps = _dat select 1;

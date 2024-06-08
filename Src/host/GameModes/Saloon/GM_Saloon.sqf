@@ -7,7 +7,7 @@
 
 editor_attribute("CodeOnyGamemode")
 class(GMSaloon) extends(GMBase)
-	
+	getterconst_func(isPlayableGamemode,false);
 	var(name,"Переполох"); //Название истории
 	var(desc,"Потасовка в небольшом районе большого города."); //Описание краткое для голосований например
 	var(descExtended,"Криминальный мир Злачника - неблагоприятного района Канавы"+comma+" пытается установить свои порядки.");
@@ -140,6 +140,18 @@ class(GMSaloon) extends(GMBase)
 	func(postSetup)
 	{
 		objParams();
+
+		//start generator
+		private _gen = ["PowerGenerator",[3421,3552.17,7.52494],4,false] call getGameObjectOnPosition;
+		if !isNullReference(_gen) then {
+			callFunc(_gen,beginUpdateGenerator);
+		};
+		setVar(_gen,energyleft,100000000);
+		
+
+		if (count cm_allClients >= 20) then {	
+			setSelf(duration,60* (60*2));
+		};
 		
 		callFunc(getSelf(task),onTaskInit);
 		{
@@ -282,22 +294,6 @@ class(GMSaloon) extends(GMBase)
 			,(pick _dirRand)+rand(-2,2),false] call createItemInWorld;
 		} foreach _toSpawn;
 		
-	};
-	
-	func(onRoundBegin)
-	{
-		objParams();
-		//start generator
-		private _gen = ["PowerGenerator",[3411.22,3514.37,0],4,false] call getGameObjectOnPosition;
-		if !isNullReference(_gen) then {
-			callFunc(_gen,beginUpdateGenerator);
-		};
-		setVar(_gen,energyleft,100000000);
-		
-
-		if (count cm_allClients >= 20) then {	
-			setSelf(duration,60* (60*2));
-		};
 	};
 	
 	var(cages,[]);//2 floor,1 floor
@@ -732,6 +728,18 @@ class(GMSaloonV2) extends(GMBase)
 	{
 		objParams();
 		
+		//start generator
+		private _gen = ["PowerGenerator",[3411.22,3514.37,0],4,false] call getGameObjectOnPosition;
+		if !isNullReference(_gen) then {
+			callFunc(_gen,beginUpdateGenerator);
+		};
+		setVar(_gen,energyleft,100000000);
+		
+
+		if (count cm_allClients >= 20) then {	
+			setSelf(duration,60* (60*2));
+		};
+
 		callFunc(getSelf(task),onTaskInit);
 		{
 			if (getVar(_x,model) == "a3\structures_f_epa\civ\camping\woodentable_small_f.p3d") exitWith {
@@ -774,6 +782,8 @@ class(GMSaloonV2) extends(GMBase)
 
 		//merchant store data
 		private _yashsVerh = ["SquareWoodenBox",[3429.86,3718.16,27.6708],1,false,true] call getGameObjectOnPosition;
+		assert_str(!isNullReference(_yashsVerh),"_yashsVerh is null reference");
+
 			for "_i" from 1 to randInt(1,3) do {["ArmorLite",_yashsVerh] call createItemInContainer};
 			for "_i" from 1 to randInt(0,5) do {["CombatHat",_yashsVerh] call createItemInContainer};
 			for "_i" from 1 to randInt(0,2) do {["ArmorMedium",_yashsVerh] call createItemInContainer};
@@ -781,6 +791,8 @@ class(GMSaloonV2) extends(GMBase)
 			for "_i" from 1 to randInt(1,6) do {[pick["HatOldUshanka","HatUshanka","WorkerCap","WorkerCoolCap","HatGrayOldUshanka"],_yashsVerh] call createItemInContainer};
 		
 		private _yashNiz = ["SquareWoodenBox",[3426.2,3716.2,27.6826],1,false,true] call getGameObjectOnPosition;
+		assert_str(!isNullReference(_yashNiz),"_yashNiz is null reference");
+
 			for "_i" from 1 to randInt(1,2) do {["PaperHolder",_yashNiz] call createItemInContainer};
 			for "_i" from 1 to randInt(0,2) do {["PenRed",_yashNiz] call createItemInContainer};
 			for "_i" from 1 to randInt(0,2) do {["PenBlack",_yashNiz] call createItemInContainer};
@@ -790,11 +802,15 @@ class(GMSaloonV2) extends(GMBase)
 			for "_i" from 1 to randInt(0,10) do {["SigaretteDisabled",_yashNiz] call createItemInContainer};
 		
 		private _meshokleft = ["FabricBagBig2",[3428.48,3709.7,31.0566],1,false] call getGameObjectOnPosition;
+		assert_str(!isNullReference(_meshokleft),"_meshokleft is null reference");
+
 			for "_i" from 1 to randInt(3,6) do {["Egg",_meshokleft] call createItemInContainer};
 			for "_i" from 1 to randInt(1,2) do {["Meat",_meshokleft] call createItemInContainer};
 			for "_i" from 1 to randInt(1,5) do {["Bread",_meshokleft] call createItemInContainer};
 			
 		private _meshokleft2 = ["FabricBagBig2",[3425.11,3713.55,31.0538],1,false] call getGameObjectOnPosition;
+		assert_str(!isNullReference(_meshokleft2),"_meshokleft2 is null reference");
+
 			for "_i" from 1 to randInt(1,4) do {
 				private _item = ["SpirtBottle",_meshokleft2] call createItemInContainer;
 				setVar(_item,bottleName,"Стальное пойло");
@@ -813,16 +829,21 @@ class(GMSaloonV2) extends(GMBase)
 			};
 		
 		private _meshokright = ["FabricBagBig2",[3425.88,3716.19,28.6364],1,false] call getGameObjectOnPosition;
+		assert_str(!isNullReference(_meshokright),"_meshokright is null reference");
+
 			for "_i" from 1 to randInt(1,3) do {["PainkillerBox",_meshokright] call createItemInContainer};
 			for "_i" from 1 to randInt(1,10) do {["Bandage",_meshokright] call createItemInContainer};
 			for "_i" from 1 to randInt(1,4) do {["NeedleWithThreads",_meshokright] call createItemInContainer};
 			
 		private _meshokright2 = ["FabricBagBig2",[3430.05,3716.14,31.0536],1,false] call getGameObjectOnPosition;
+		assert_str(!isNullReference(_meshokright2),"_meshokright2 is null reference");
+
 			for "_i" from 1 to randInt(1,4) do {["Syringe",_meshokright2] call createItemInContainer};
 			for "_i" from 1 to randInt(0,3) do {["LiqPainkiller",_meshokright2] call createItemInContainer};
 			for "_i" from 1 to randInt(0,2) do {["LiqDemitolin",_meshokright2] call createItemInContainer};
 		
 		private _polki = ["Shelves",[3428.01,3718.45,27.683],1,false,true] call getGameObjectOnPosition;
+		assert_str(!isNullReference(_polki),"_polki is null reference");
 		
 		private _polkiLevels = [
 			0.55,
@@ -869,22 +890,6 @@ class(GMSaloonV2) extends(GMBase)
 			,(pick _dirRand)+rand(-2,2),false] call createItemInWorld;
 		} foreach _toSpawn;
 		
-	};
-	
-	func(onRoundBegin)
-	{
-		objParams();
-		//start generator
-		private _gen = ["PowerGenerator",[3421,3552.17,7.52494],4,false] call getGameObjectOnPosition;
-		if !isNullReference(_gen) then {
-			callFunc(_gen,beginUpdateGenerator);
-		};
-		setVar(_gen,energyleft,100000000);
-		
-
-		if (count cm_allClients >= 20) then {	
-			setSelf(duration,60* (60*2));
-		};
 	};
 	
 	var(cages,[]);//2 floor,1 floor

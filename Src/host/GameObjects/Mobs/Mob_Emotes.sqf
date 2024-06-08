@@ -1060,6 +1060,15 @@ region(Emotes subsystem)
 
 	["wrld","inputedsignlang","onActWorld"] call ie_actions_regNew;
 
+	//animations
+	for "_i" from 1 to 15 do {
+		["anms","seat"+(str _i),"setSeatAnim"] call ie_actions_regNew;
+	};
+	for "_i" from 1 to 30 do {
+		["anms","stand"+(str _i),"setSeatAnim"] call ie_actions_regNew;
+	};
+	
+
 	var(__listactions,[
 		["Эмоции" arg		
 			"Краснеть:emt_blush" arg
@@ -1108,8 +1117,141 @@ region(Emotes subsystem)
 
 		["Мир" arg 
 			"Учить:wrld_teach" arg 
-			"Надыбать:wrld_search"]
+			"Надыбать:wrld_search"] arg
+		
+		["Присесть" arg
+			"На кортах:anms_seat1" arg
+			"На колене:anms_seat2" arg
+			"Связан у стены:anms_seat3" arg
+			"Скрестив ноги:anms_seat10" arg
+			"Скрестив ноги 2:anms_seat11" arg
+			"Вытянув ноги:anms_seat12" arg
+			"Упереться ногами:anms_seat13" arg
+			"Упереться ногой:anms_seat14"
+		] arg
+
+		["Стоять" arg
+			"Руки в боках:anms_stand1" arg
+			"Копошиться на столе:anms_stand2" arg
+			"Скрючиться:anms_stand3" arg
+			"Руки в боках 2:anms_stand4" arg
+			"Стоять боком:anms_stand5" arg
+			"Скрестить руки:anms_stand6" arg
+			"Стоять:anms_stand7" arg
+			"Скрестить руки 2:anms_stand8" arg
+			"Скрестить руки 3:anms_stand9" arg
+			"Скорбить:anms_stand10" arg
+			"Стоять (нервно):anms_stand11" arg
+			"Смотреть по сторонам:anms_stand12" arg
+			"Стоять с жестами:anms_stand13" arg
+			"Напуган:anms_stand14" arg
+			"Стоять с жестами 2:anms_stand15" arg
+			"Стоять оживленно:anms_stand16" arg
+			"Стоять возбужденно:anms_stand17" arg
+			"Руки в боках 3:anms_stand18" arg
+			"Руки на поясе:anms_stand19" arg
+			"Рука в бок:anms_stand20" arg
+
+			"Руки за спину:anms_stand21" arg
+			"Опереться слева:anms_stand22" arg
+			"Опереться на стол:anms_stand23" arg 
+
+			"Руки вверх:anms_stand24"
+		]
 	]);
+
+
+	var(customActionState,CUSTOM_ANIM_ACTION_NONE);
+	func(setCustomActionState)
+	{
+		objParams_2(_state,_onlySetVar);
+		if isNullVar(_onlySetVar) then {_onlySetVar = false};
+		
+		if (_onlySetVar) exitWith {
+			setSelf(customActionState,_state);
+		};
+
+		setSelf(customActionState,_state);
+		callSelfParams(fastSendInfo,"cd_customAnim" arg _state);
+	};
+
+	getter_func(isCustomAnimState,getSelf(customActionState)!=CUSTOM_ANIM_ACTION_NONE);
+	var(___lastCustomAnimTime,0);
+	func(setSeatAnim)
+	{
+		objParams();
+		if (tickTime < getSelf(___lastCustomAnimTime)) exitWith {};
+		if (!callSelf(isActive)) exitWith {};
+		
+		private _isSeat = [call ie_action_getCalledActionName,"anms_seat"] call stringStartWith;
+
+		if getSelf(isCombatModeEnable) exitWith {
+			callSelfParams(localSay,"Я настороже... Надо успокоиться." arg "error");
+		};
+		if callSelf(isConnected) exitWith {
+			callSelfParams(localSay,"Нужно встать" arg "error");
+		};
+		if (callSelf(getStance)!= ifcheck(_isSeat,STANCE_MIDDLE,STANCE_UP) && {!callSelf(isCustomAnimState)}) exitWith {
+			callSelfParams(localSay,ifcheck(_isSeat,"Нужно на корточки присесть","Нужно встать") arg "error");
+		};
+		
+		"anms" call ie_action_setPrefix;
+		private _changeMethod = "switchmove_force";
+		private _anim = "";
+		private _anmState = CUSTOM_ANIM_ACTION_STAND;
+		if (_isSeat) then {
+			_anmState = CUSTOM_ANIM_ACTION_SEAT;
+		};
+
+	region(seat anims)
+		if (["seat1"] call ie_action_check) then {_anim="Acts_AidlPercMstpSnonWnonDnon_warmup_4_loop"};
+		if (["seat2"] call ie_action_check) then {_anim="Acts_AidlPercMstpSnonWnonDnon_warmup_5_loop"};
+		if (["seat3"] call ie_action_check) then {_anim="Acts_AidlPsitMstpSsurWnonDnon01"};
+		//if (["seat8"] call ie_action_check) then {_anim="Acts_TreatingWounded_loop"};
+		//if (["seat9"] call ie_action_check) then {_anim="Acts_Waking_Up_Player"};
+		if (["seat10"] call ie_action_check) then {_anim="passenger_boat_4_Idle_Unarmed"};
+		if (["seat11"] call ie_action_check) then {_anim="passenger_flatground_3_Idle_Unarmed"};
+		if (["seat12"] call ie_action_check) then {_anim="passenger_flatground_1_Idle_Unarmed"};
+		if (["seat13"] call ie_action_check) then {_anim="passenger_flatground_2_Idle_Unarmed"};
+		if (["seat14"] call ie_action_check) then {_anim="passenger_flatground_4_Idle_Unarmed"};
+		if (["seat15"] call ie_action_check) then {_anim="Acts_passenger_flatground_leanright"};
+	endregion
+
+		if (["stand1"] call ie_action_check) then {_anim="Acts_AidlPercMstpSloWWpstDnon_warmup_1_loop"};
+		if (["stand2"] call ie_action_check) then {_anim="Acts_Accessing_Computer_Loop"};
+		if (["stand3"] call ie_action_check) then {_anim="Acts_AidlPercMstpSnonWnonDnon_warmup_2_loop"};
+		if (["stand4"] call ie_action_check) then {_anim="Acts_AidlPercMstpSnonWnonDnon_warmup_3_loop"};
+		if (["stand5"] call ie_action_check) then {_anim="Acts_AidlPercMstpSnonWnonDnon_warmup_7_loop"};
+		if (["stand6"] call ie_action_check) then {_anim="Acts_AidlPercMstpSnonWnonDnon_warmup_8_loop"};
+		if (["stand7"] call ie_action_check) then {_anim="Acts_Commenting_On_Fight_loop"};
+		if (["stand8"] call ie_action_check) then {_anim="Acts_Executioner_StandingLoop"};
+		if (["stand9"] call ie_action_check) then {_anim="Acts_Explaining_EW_Idle0"+(str randInt(1,3))};
+		if (["stand10"] call ie_action_check) then {_anim="Acts_Grieving"};
+		if (["stand11"] call ie_action_check) then {_anim="Acts_Hilltop_Calibration_Loop"};
+		if (["stand12"] call ie_action_check) then {_anim="Acts_JetsCrewaidF_idle2"};
+		if (["stand13"] call ie_action_check) then {_anim="Acts_PointingLeftUnarmed"};
+		if (["stand14"] call ie_action_check) then {_anim="Acts_ShockedUnarmed_2_Loop"};
+		if (["stand15"] call ie_action_check) then {_anim="Acts_StandingSpeakingUnarmed"};
+		if (["stand16"] call ie_action_check) then {_anim="Acts_Taking_Cover_From_Jets_in_loop"};
+		if (["stand17"] call ie_action_check) then {_anim="Acts_Watching_Fire_Loop"};
+		if (["stand18"] call ie_action_check) then {_anim=pick["HubBriefing_ext_Contact","HubBriefing_lookAround2"]};
+		if (["stand19"] call ie_action_check) then {_anim="HubStandingUB_idle" + (str randInt(1,3))};
+		if (["stand20"] call ie_action_check) then {_anim="HubStandingUC_idle"+(str randInt(1,3))};
+
+		if (["stand21"] call ie_action_check) then {_changeMethod = "switchmove_force";_anim="InBaseMoves_HandsBehindBack"+(str randInt(1,2))};
+		if (["stand22"] call ie_action_check) then {_changeMethod = "switchmove_force";_anim="InBaseMoves_Lean1"};
+		if (["stand23"] call ie_action_check) then {_changeMethod = "switchmove_force";_anim="InBaseMoves_table1"};
+
+		if (["stand24"] call ie_action_check) then {_anim="Acts_JetsShooterNavigate_stop"};
+
+
+		if (_anim!="") then {
+			callSelfParams(applyGlobalAnim,_changeMethod arg _anim);
+			callSelfParams(setCustomActionState,_anmState);
+			setSelf(___lastCustomAnimTime,tickTime + 1);
+		};
+	};
+
 	/*["Желания" arg
 		"Наложить:emt_poo" arg
 		"Отлить:emt_pee" arg

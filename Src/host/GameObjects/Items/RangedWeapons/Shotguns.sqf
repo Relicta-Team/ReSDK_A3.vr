@@ -19,7 +19,7 @@ class(SawedOff) extends(DBShotgun)
 	var(name,"Обрез");
 	var(weight,3.1);
 	getter_func(getReqST,9);
-	var(size,ITEM_SIZE_LARGE);
+	var(size,ITEM_SIZE_SMALL);
 	var(model,"relicta_models\models\weapons\fireweapon\shotguns\izh43\izh43_sawedoff.p3d");
 	var(basicDistance,135);
 
@@ -33,7 +33,7 @@ class(DBShotgun) extends(IRangedWeapon)
 	var(name,"Двустволка");
 	var(weight,3.4);
 	getter_func(getReqST,10);
-	var(size,ITEM_SIZE_BIG);
+	var(size,ITEM_SIZE_LARGE);
 	var(basicDistance,125);
 	var(halfDistance,50);
 	var(shootSpeed,230);

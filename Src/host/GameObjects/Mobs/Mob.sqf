@@ -114,7 +114,7 @@ class(Mob) extends(BasicMob)
 	var(connectedTo,nullPtr); //к чему приаттачен моб в данный момент (кровать, стул)
 	"
 		name:Привязан к объекту
-		desc:Возвращает ИСТИНУ, если сущность присоединена к объекту (сидит на стуле, лежит на кровати)
+		desc:Возвращает @[bool ИСТИНУ], если сущность присоединена к объекту (сидит на стуле, лежит на кровати)
 		type:get
 		lockoverride:1
 		return:bool
@@ -146,7 +146,7 @@ class(Mob) extends(BasicMob)
 	//связана ли сущность
 	"
 		name:Связан
-		desc:Возвращает ИСТИНУ, если руки сущности скованы веревкой, наручниками или подобным предметом.
+		desc:Возвращает @[bool ИСТИНУ], если руки сущности скованы веревкой, наручниками или подобным предметом.
 		type:get
 		lockoverride:1
 		return:bool
@@ -205,6 +205,9 @@ class(Mob) extends(BasicMob)
 	{
 		objParams_1(_linked);
 		super();
+		
+		callSelfParams(setStepSoundSystem,true);//step system
+
 		#ifdef TEXTCHAT
 			callSelf(initializeVoice);
 		#endif
@@ -350,6 +353,8 @@ region(Connect control events)
 		if callSelf(hasOpenedContainer) then {
 			callFuncParams(getSelf(openedContainer),onContainerClose,this);
 		};
+
+		callSelfParams(setCustomActionState,CUSTOM_ANIM_ACTION_NONE arg true);
 		
 		callSelfParams(sendInfo, "strafeLock" arg [false]);
 	};
@@ -365,6 +370,11 @@ region(Connect control events)
 		private _medMes = "";
 		private _commonInfo = "";
 		private _age = getSelf(age);
+
+		private _baseDesc = callSelf(getDesc);
+		if (!isNullVar(_baseDesc) && {_baseDesc != ""}) then {
+			modvar(_commonInfo) + sbr + _baseDesc;
+		};
 
 		if (
 		#ifdef EDITOR

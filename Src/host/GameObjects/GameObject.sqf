@@ -87,7 +87,7 @@ class(GameObject) extends(ManagedObject)
 
 	"
 		name:В мире
-		desc:Возвращает ИСТИНУ, если игровой объект находится в мире.
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект находится в мире.
 		type:get
 		lockoverride:1
 		return:bool:Находится ли объект в мире
@@ -115,7 +115,7 @@ class(GameObject) extends(ManagedObject)
 	
 	"
 		name:Это предмет
-		desc:Возвращает ИСТИНУ, если игровой объект является предметом.
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является предметом.
 		type:const
 		classprop:0
 		return:bool:Является ли объект предметом
@@ -123,7 +123,7 @@ class(GameObject) extends(ManagedObject)
 	getterconst_func(isItem,false);
 	"
 		name:Это моб
-		desc:Возвращает ИСТИНУ, если игровой объект является мобом (сущностью).
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является мобом (сущностью).
 		type:const
 		classprop:0
 		return:bool:Является ли объект мобом
@@ -131,7 +131,7 @@ class(GameObject) extends(ManagedObject)
 	getterconst_func(isMob,false);
 	"
 		name:Это декор
-		desc:Возвращает ИСТИНУ, если игровой объект является декорацией.
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является декорацией.
 		type:const
 		classprop:0
 		return:bool:Является ли объект декорацией
@@ -139,7 +139,7 @@ class(GameObject) extends(ManagedObject)
 	getterconst_func(isDecor,false);
 	"
 		name:Это структура
-		desc:Возвращает ИСТИНУ, если игровой объект является структурой.
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является структурой.
 		type:const
 		classprop:0
 		return:bool:Является ли объект структурой
@@ -148,7 +148,7 @@ class(GameObject) extends(ManagedObject)
 
 	"
 		name:Это дверь
-		desc:Возвращает ИСТИНУ, если игровой объект является дверью.
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является дверью.
 		type:const
 		classprop:0
 		return:bool:Является ли объект дверью
@@ -157,7 +157,7 @@ class(GameObject) extends(ManagedObject)
 
 	"
 		name:Это контейнер
-		desc:Возвращает ИСТИНУ, если игровой объект является контейнером.
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является контейнером.
 		type:const
 		classprop:0
 		return:bool:Является ли объект контейнером
@@ -166,7 +166,7 @@ class(GameObject) extends(ManagedObject)
 
 	"
 		name:Это стак
-		desc:Возвращает ИСТИНУ, если игровой объект является стакуемым итемом.
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является стакуемым итемом.
 		type:const
 		classprop:0
 		return:bool:Является ли объект стаком
@@ -174,7 +174,7 @@ class(GameObject) extends(ManagedObject)
 	getterconst_func(isStack,false); //является ли предмет стакуемым
 	"
 		name:Может светить
-		desc:Возвращает ИСТИНУ, если игровой объект может светиться, используя конфиги освещения и частиц.
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект может светиться, используя конфиги освещения и частиц.
 		type:const
 		classprop:0
 		return:bool:Является ли объект дверью
@@ -182,7 +182,7 @@ class(GameObject) extends(ManagedObject)
 	getterconst_func(canLight,false); //является ли предмет источником света
 	"
 		name:Это огненный источник света
-		desc:Возвращает ИСТИНУ, если игровой объект является огненным источником света. В будущем такие объекты смогут поджигать окружение.
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является огненным источником света. В будущем такие объекты смогут поджигать окружение.
 		type:const
 		classprop:0
 		return:bool:Является ли объект огненным источником света
@@ -190,7 +190,7 @@ class(GameObject) extends(ManagedObject)
 		getterconst_func(isFireLight,false); //огненный источник света
 	"
 		name:Это хранилище реагентов
-		desc:Возвращает ИСТИНУ, если игровой объект является хранилищем реагентов (например, бутыки, шприцы).
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является хранилищем реагентов (например, бутыки, шприцы).
 		type:const
 		classprop:0
 		return:bool:Является ли объект дверью
@@ -198,7 +198,7 @@ class(GameObject) extends(ManagedObject)
 	getterconst_func(isReagentContainer,false); // реагент-контейнер
 	"
 		name:Это питьё
-		desc:Возвращает ИСТИНУ, если игровой объект является выпиваемым предметом.
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является выпиваемым предметом.
 		type:const
 		classprop:0
 		return:bool:Является ли объект питьём
@@ -206,7 +206,7 @@ class(GameObject) extends(ManagedObject)
 		getterconst_func(isDrink,false); //является водой
 	"
 		name:Это пища
-		desc:Возвращает ИСТИНУ, если игровой объект является съедаемым предметом.
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является съедаемым предметом.
 		type:const
 		classprop:0
 		return:bool:Является ли объект едой
@@ -214,7 +214,7 @@ class(GameObject) extends(ManagedObject)
 		getterconst_func(isFood,false);// является пищей
 	"
 		name:Это сиденье
-		desc:Возвращает ИСТИНУ, если игровой объект является сиденьем, таким как стул, кровать или любой объект привязки персонажа.
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является сиденьем, таким как стул, кровать или любой объект привязки персонажа.
 		type:const
 		classprop:0
 		return:bool:Является ли объект сиденьем
@@ -235,6 +235,10 @@ class(GameObject) extends(ManagedObject)
 	editor_attribute("Tooltip" arg "Вес объекта в граммах или килограммах")
 	var(weight,gramm(1000));//вес в граммах
 
+	getterconst_func(canApplyWeightRandomize,false);
+	getterconst_func(getWeightRandomCoeff,vec2(0,0));
+	getterconst_func(getWeightRandomPrecision,2);//сколько знаков после нуля доступно
+
 	editor_attribute("ReadOnly")
 	var(pointer,pointer_new(this)); //unique pointer
 	
@@ -251,6 +255,13 @@ class(GameObject) extends(ManagedObject)
 		} else {
 			private _map = typeGetVar(_t,__mempool_inst__);
 			_map set [getSelf(pointer),this];
+		};
+
+		if callSelf(canApplyWeightRandomize) then {
+			private _oldWeight = getSelf(weight);
+			callSelf(getweightRandomCoeff) params [["_min",0],["_max",0]];
+			private _rval = parseNumber (rand(_min,_max) toFixed callSelf(getWeightRandomPrecision));
+			setSelf(weight,_oldWeight + _rval);
 		};
 	};
 
@@ -347,12 +358,13 @@ class(GameObject) extends(ManagedObject)
 		_icon = if (isNullVar(_icon) || {equals(_icon,stringEmpty)}) then {stringEmpty} else {
 			format["<img size='0.8' image='%1'/> ",if (".paa" in _icon) then {_icon} else {PATH_PICTURE_INV(_icon)}]};
 
-		private _otherText = if isTypeOf(this,Decor) then {""} else {
+		private _otherText = if (isTypeOf(this,Decor) || isTypeOf(this,IStruct)) then {""} else {
 			//Вес меньше 0 значит это фиктивный итем
-			if (callSelf(getWeight) < 0) exitWith {""};
+			if (callSelf(getWeight) < 0) exitWith {""}; 
 
 			sbr + callSelf(getTextWeight) + sbr +
 			"Размер: " + callSelf(getTextSize)
+			
 			#ifdef EDITOR
 			+ sbr + (if (isTypeOf(this,Item) && !isNull(getSelf(bbx))) then
 			{
@@ -368,17 +380,62 @@ class(GameObject) extends(ManagedObject)
 			if (_germText != "") then {
 				modvar(_otherText) + sbr + _germText;
 			};
-		};
 
+			if (callFuncParams(_usr,getDistanceTo,this) < 5) then {
+				modvar(_otherText) + sbr + (
+					if (
+						callSelf(canApplyDamage)
+						&& callSelf(getClassName) != "IStruct" //!temporary fix. remove in next versions
+						) then {
+					private _drTexts = ["Беззащитно","Слабенкьо защищено","Выглядит крепко","Хорошо защищено","Отличная защита"];
+					private _drConv = round (linearConversion [0, 8, getSelf(dr),0,4,true]);
+					
+					format[
+						'Состояние: %1 - %2br_inlineКачество: %3',
+						callSelf(getHPStatusText),
+						_drTexts select _drConv,
+						callSelf(getHTStatusText)
+					]
+				} else {
+					format[
+						"Выглядит %1. Никому %2 разрушить такое...",
+						pick["крайне древне","так старо","очень древне","на сотни колен"],
+						pick["не подвластно","не дозволено","не смочь","не найти сил","не суметь"],
+						pick["такое","это",callSelfParams(getNameFor,_usr)]
+					]
+				});
+			};
+			
+
+			#ifdef EDITOR
+			modvar(_otherText) + sbr + callSelf(getObjectHealth_Editor)
+			#endif
+		};
+		
+		//ddat = [_rand,_postrand,_icon,callSelfParams(getNameFor,_usr),_desc,_otherText];
 		format[_rand + _postrand,_icon + callSelfParams(getNameFor,_usr)] +
 		_desc +
 		_otherText;
+	};
+
+	func(getObjectHealth_Editor)
+	{
+		objParams();
+		private _m = format["HP (%1/%2); DR (%3/%4); HT %5",getSelf(hp),getSelf(hpMax),getSelf(dr),getSelf(drMax),getSelf(ht)];
+		if callSelf(canApplyDamage) then {
+
+		} else {
+			_m = setstyle("БЕЗ УРОНА: ",style_redbig) + _m;
+		};
+		_m
 	};
 
 	go_internal_updateMethodsAfterStart = [];
 
 	editor_attribute("InternalImpl")
 	var(_update_handle_auto,-1);
+
+	getter_func(isScriptedObject,false);
 
 	// запускает метод в цикле
 	func(startUpdateMethod)
@@ -560,6 +617,11 @@ class(GameObject) extends(ManagedObject)
 	{
 		objParams();
 
+		if callSelf(isFlying) exitWith {
+			assert_str(!isNullVar(__INTERNAL_THROWED_VIRTUAL__),"Object is flying but visual object is null -> __INTERNAL_THROWED_VIRTUAL__");
+			__INTERNAL_THROWED_VIRTUAL__
+		};
+
 		private _curLoc = this;
 		private _probNewLoc = nullPtr;
 		while {true} do {
@@ -575,7 +637,7 @@ class(GameObject) extends(ManagedObject)
 			};
 			_curLoc = _probNewLoc;
 		};
-
+		
 		_curLoc;
 	};
 
@@ -600,7 +662,7 @@ class(GameObject) extends(ManagedObject)
 	//Находит конечного владельца как GameObject
 	"
 		name:Получить источник
-		desc:Получает объект, который владеет этим игровым объектом. Для объекта в контейнере владельцем будет контейнер, для объекта в инвентаре моба - моб. Если объектом никто не владеет возвращает null.
+		desc:Получает объект, который владеет этим игровым объектом. Для объекта в контейнере владельцем будет контейнер, для объекта в инвентаре моба - моб. Если объектом никто не владеет возвращает @[object^ null-ссылку].
 		type:get
 		lockoverride:1
 		return:GameObject:Источник
@@ -617,7 +679,8 @@ class(GameObject) extends(ManagedObject)
 
 			_curLoc = _probNewLoc;
 		};
-
+		
+		if isNullVar(_curLoc) exitWith {nullPtr};
 		//is a normal. not warning
 		/*if equals(_curLoc,this) then {
 			warningformat("%1:getSourceLoc() returns this object",callSelf(getClassName));
@@ -717,7 +780,7 @@ region(Nearest game objects)
 		lockoverride:1
 		in:float:Радиус:Радиус в метрах
 			opt:def=5
-		in:bool:Исключить себя:Если ИСТИНА, то игровой объект, который вызывает этот метод будет исключён из результата.
+		in:bool:Исключить себя:Если @[bool ИСТИНА], то игровой объект, который вызывает этот метод будет исключён из результата.
 			opt:def=true
 		return:array[Item]:Массив игровых объектов
 	" node_met
@@ -745,7 +808,7 @@ region(Nearest game objects)
 		lockoverride:1
 		in:float:Радиус:Радиус в метрах
 			opt:def=5
-		in:bool:Исключить себя:Если ИСТИНА, то игровой объект, который вызывает этот метод будет исключён из результата.
+		in:bool:Исключить себя:Если @[bool ИСТИНА], то игровой объект, который вызывает этот метод будет исключён из результата.
 			opt:def=true
 		return:array[IStruct]:Массив игровых объектов
 	" node_met
@@ -773,7 +836,7 @@ region(Nearest game objects)
 		lockoverride:1
 		in:float:Радиус:Радиус в метрах
 			opt:def=5
-		in:bool:Исключить себя:Если ИСТИНА, то игровой объект, который вызывает этот метод будет исключён из результата.
+		in:bool:Исключить себя:Если @[bool ИСТИНА], то игровой объект, который вызывает этот метод будет исключён из результата.
 			opt:def=true
 		return:array[Decor]:Массив игровых объектов
 	" node_met
@@ -801,9 +864,9 @@ region(Nearest game objects)
 		lockoverride:1
 		in:float:Радиус:Радиус в метрах
 			opt:def=5
-		in:bool:Исключить себя:Если ИСТИНА, то игровой объект, который вызывает этот метод будет исключён из результата.
+		in:bool:Исключить себя:Если @[bool ИСТИНА], то игровой объект, который вызывает этот метод будет исключён из результата.
 			opt:def=true
-		in:bool:Поиск по типу:Если ИСТИНА, то будет осуществлён поиск ближайших мобов по типу. В ином случае поиск будет осуществлён по всем мобам.
+		in:bool:Поиск по типу:Если @[bool ИСТИНА], то будет осуществлён поиск ближайших мобов по типу. В ином случае поиск будет осуществлён по всем мобам.
 			opt:def=false
 		in:classname:Тип мобов:Тип мобов, которые будут искаться. Используется только если включен поиск по типу.
 			opt:def=BasicMob:typeset_out=Результат|array[{typename}]
@@ -834,7 +897,7 @@ region(Nearest game objects)
 		lockoverride:1
 		in:float:Радиус:Радиус в метрах
 			opt:def=5
-		in:bool:Поиск по типу:Если ИСТИНА, то будет осуществлён поиск ближайших мобов по типу. В ином случае поиск будет осуществлён по всем мобам.
+		in:bool:Поиск по типу:Если @[bool ИСТИНА], то будет осуществлён поиск ближайших мобов по типу. В ином случае поиск будет осуществлён по всем мобам.
 			opt:def=false
 		in:classname:Тип мобов:Тип мобов, которые будут искаться. Используется только если включен поиск по типу.
 			opt:def=BasicMob:typeset_out=Результат
@@ -906,6 +969,7 @@ endregion
 		in:float:Громкость:Громкость звука. Не рекомендуется менять это значение
 			opt:def=1
 		in:void:Источник:Источник звука. Можно указать 3д вектор или модель сущности.
+			opt:require=0
 		in:bool:Симуляция:Использовать симуляцию гашения звука от стен.
 			opt:def=true
 	" node_met
@@ -1080,7 +1144,7 @@ endregion
 
 		if isTypeOf(this,BasicMob) exitwith {false};
 		
-		assert(!callSelf(isSeat));
+		assert_str(!callSelf(isSeat),"Seat " + callSelf(getClassName) + " cannot change model");
 
 		if callSelf(isInWorld) then {
 			//update modelpath
@@ -1185,7 +1249,19 @@ region(throwing and bullets functions)
 	func(onThrowHit) //вызывается при попадании в цель
 	{
 		objParams_6(_dam,_type,_sel,_usr,_dist,_throwed);
+		//_p is outref
+		private _drObj = getSelf(dr);
+		callSelfParams(applyDamage,_dam arg _type arg _p arg "throw_hit");
 
+		private _matObj = getVar(_throwed,material);
+		private _thDamModif = 1;
+		if (!isNullVar(_matObj) && !isNullReference(_matObj)) then {
+			_thDamModif = callFunc(_matObj,getDamageCoefOnAttack);
+		};
+
+		private _weapDamage = round(_dam*_thDamModif) - _drObj;
+		//! THIS CAN BE THROWS ERROR BECAUSE _throwed.loc - is flyingObject
+		callFuncParams(_throwed,applyDamage,_weapDamage arg _type arg _p arg "throwed");
 	};
 
 	//Тут обязательно нужно удалить пулю чтобы не вызывать утечек памяти
@@ -1206,44 +1282,105 @@ class(IDestructible) extends(GameObject)
 	"
 		name:Разрушаемый игровой объект
 		desc:Разрушаемый игровой объект. Все игровые объекты кроме мобов наследуются от данного класса.
-		path:Игровые объекты
+		path:Игровые объекты.Базовые
 	"
 	node_class
+
+	"
+		name:Скрипт
+		desc:Возвращает ссылку на скрипт, привязанный к игровому объекту.
+		type:get
+		classprop:0
+		return:object^:Ссылка на скрипт
+	" node_var
+	var(__script,nullPtr);
+	"
+		name:Это скриптовый объект
+		desc:Возвращает @[bool ИСТИНУ], если игровой объект является скриптовым объектом.
+		type:get
+		lockoverride:1
+		classprop:0
+		return:bool:Является ли объект скриптовым объектом
+	" node_met
+	getter_func(isScriptedObject,!isNullReference(getSelf(__script)));
+
+	func(destructor)
+	{
+		objParams();
+		private _script = getSelf(__script);
+		if !isNullReference(_srcipt) then {
+			delete(_script);
+		};
+	};
 
 	//all info for this system in baisc set: B 557
 	//Повреждения оружия на B 485
 
 	//общие данные. Все значения отличные от нуля сбрасывают инициализацию своих значений
+	/*
+		Здоровье объекта.
+		показывает вероятность того, что объект сломается от давления или нападения.
+
+		Мечи,столы, щиты и другие цельные однородные объекты ЗД 12.
+		Дешёвые, прихотливые или плохо содержащиеся вещи получают от -1 до -3 к ЗД;
+		качественно или грубо сделанные получают +1 или +2 к ЗД.
+		Большинство машин и подобных артефактов в хорошем состоянии имеют ЗД 10.
+	*/
 	var(ht,10); //Статическая переменная "здоровья" объекта. От этого скилла кидаются броски на разрушение
+
+	/*
+		ЕЖ предмета.
+		количество повреждений, которое объект может вынести, прежде чем сломается или прекратит функционировать
+	*/
 	var(hp,0);
 		var(hpMax,0);
+	/*
+		СП объекта.
+		Деревянные и пластиковые инструменты, устройства, мебель и т.д. обычно имеют СП 2.
+		Маленькие металлические, деревянно-металлические или композитные объекты, например топоры и пистолеты, обычно имеют СП 4.
+		Цельнометаллическое оружие ближнего боя имеет СП 6
+	*/
 	var(dr,0);
 		var(drMax,0);
-	//звук повреждений
-	getter_func(getDamageSound,"");
 	getter_func(canApplyDamage,false);
 
 	//complex - электронику, огнестрельное оружие, автотранспорт,роботов и большинство других механизмов
 	//simple - ткани (плащи, занавески), мебель и контактное оружие, действующее на силе владельца
 	//spreaded - рассеянные объекты например (сеть)
-	getter_func(objectHealthType,"simple");
+	getter_func(objectHealthType,OBJECT_TYPE_SIMPLE);
 
 	//Вызывается при уничтожении игрового объекта
 	func(onDestroyed)
 	{
 		objParams();
+		private _p = callSelf(getModelPosition);
+		for "_i" from 1 to randInt(3,6) do {
+			private _worldPos = _p vectorAdd [rand(-0.2,0.2),rand(-0.2,0.2),rand(-0.2,0.2)];
+			callSelfParams(sendDamageVisualOnPos,_worldPos arg true arg true arg false);
+		};
 	};
 
 	func(applyDamage)
 	{
 		// количество урона, тип повреждений, мировая позиция по которой пришлись повреждения, (опциональная) причина урона
 		objParams_4(_amount,_type,_worldPos,_cause);
-		if !callSelf(canApplyDamage) exitWith {};
+		traceformat("%1::applyDamage main - count: %2; dt: %3; pos: %4; cause: %5",this arg _amount arg _type arg _worldPos arg _cause);
+		private _canUseEffect = true;
+		private _canUseSound = true;
+		private _useBlockSound = true;
+		private _effector = {
+			callSelfParams(sendDamageVisualOnPos,_worldPos arg _canUseEffect arg _canUseSound arg _useBlockSound);
+		};
+
+		if (!callSelf(canApplyDamage) || callSelf(getClassName) == "IStruct") exitWith {
+			_canUseEffect = false;
+			call _effector;
+		};
 
 		//сначала проходим через СП, потом мод. повр.
 		_amount = (_amount - getSelf(dr)) max 0;
 
-		if (callSelf(objectHealthType)=="complex")then{
+		if (callSelf(objectHealthType)==OBJECT_TYPE_COMPLEX)then{
 			//DAMAGE_TYPE_IMPALING,DAMAGE_TYPE_PIERCING_HU modif x1
 			if (_type == DAMAGE_TYPE_PIERCING_LA) exitWith {
 				_amount = floor(_amount * 0.5);
@@ -1255,7 +1392,7 @@ class(IDestructible) extends(GameObject)
 				_amount = floor(_amount * 0.2);
 			};
 		} else {
-			if (callSelf(objectHealthType)=="spreaded") then {
+			if (callSelf(objectHealthType)==OBJECT_TYPE_SPREADED) then {
 				if (_type in [DAMAGE_TYPE_IMPALING,DAMAGE_TYPE_PIERCING_SM,DAMAGE_TYPE_PIERCING_NO,DAMAGE_TYPE_PIERCING_LA,DAMAGE_TYPE_PIERCING_HU]) then {
 					_amount = _amount min 1;
 				} else {
@@ -1277,14 +1414,14 @@ class(IDestructible) extends(GameObject)
 				};
 			};
 		};
-	/*	//По правилам, описанным на B 380 мы применяем модификатор повреждений в этом методе, вместо стандартного модификатора
-		private _passed = //[
-			(_amount - getSelf(dr)) max 0
-		//] call gurps_applyDamageType
-		;*/
-		callSelfParams(onAffectDamageToPos,_passed arg _type arg _worldPos arg _cause);
+		
+		callSelfParams(onAffectDamageToPos,_amount arg _type arg _worldPos arg _cause);
 
-		modSelf(hp,- _passed);
+		_canUseEffect = _amount > 0;
+		_useBlockSound = _amount <= 0;
+		call _effector;
+
+		modSelf(hp,- _amount);
 		private _newhp = getSelf(hp);
 		private _maxhp = getSelf(hpMax);
 
@@ -1296,8 +1433,11 @@ class(IDestructible) extends(GameObject)
 			callSelfParams(onChangeObjectHP,2);
 			private _rr = (getSelf(ht) call gurps_rollstd);
 			if (getRollType(_rr) in [DICE_FAIL,DICE_CRITFAIL]) then {
-				callSelf(onDestroyed);
-				delete(this);
+				//?тест. снижаем dr объекта
+				private _oldDr = getSelf(dr);
+				if (_oldDr>0) then {
+					setSelf(dr,(_oldDr - 1) max 0);
+				};
 			};
 		};
 		if (_newhp <= (-1*_maxhp) && _newhp > (-5*_maxhp)) exitWith {
@@ -1313,7 +1453,41 @@ class(IDestructible) extends(GameObject)
 			callSelf(onDestroyed);
 			delete(this);
 		};
-		errorformat("IDestructible::applyDamage() - no affect damage: hp %1; max hp %2",_newhp arg _maxhp);
+		errorformat("IDestructible::applyDamage() - no affect damage: hp %1; max hp %2; Amount %3",_newhp arg _maxhp arg _amount);
+	};
+
+	func(getHPStatusText)
+	{
+		objParams();
+		private _hp = getSelf(hp);
+		private _maxhp = getSelf(hpMax);
+		if (_hp < (round(_maxhp/3)) && _hp > 0) exitWith {
+			"Повреждено"
+		};
+		if (_hp <= 0 && _hp > (-1*_maxhp)) exitWith {
+			"Сильно повреждено"
+		};
+		if (_hp <= (-1*_maxhp) && _hp > (-5*_maxhp)) exitWith {
+			//private _idx = round linearConversion [-5*_maxhp,-1*_maxhp,_hp,0,4,true];
+			//["Почти уничтожено",""] select _idx
+			"Почти " + (pick["разрушено","уничтожено","сломано","раздолбано"])
+		};
+		if (_hp > 0) exitWith {"Нормальное"};
+		"Уничтожено"
+	};
+
+	func(getHTStatusText)
+	{
+		objParams();
+		private _ht = getSelf(ht);
+		if (_ht <= 3) exitWith {"Отвратительное"};
+		if (inRange(_ht,4,6)) exitWith {"Ужасное"};
+		if inRange(_ht,7,8) exitWith {"Плохое"};
+		if inRange(_ht,9,10) exitWith {"Обычное"};
+		if inRange(_ht,11,12) exitWith {"Хорошее"};
+		if inRange(_ht,13,14) exitWith {"Отличное"};
+		if inRange(_ht,15,16) exitWith {"Превосходное"};
+		if (_ht > 17) exitWith {"Великолепное"};
 	};
 
 	func(onChangeObjectHP)
@@ -1332,6 +1506,12 @@ class(IDestructible) extends(GameObject)
 	{
 		objParams();
 
+		private _mat = getSelf(material);
+		if equalTypes(_mat,"") then {
+			_mat = _mat call mat_getByClass;
+			setSelf(material,_mat);
+		};
+
 		//germs
 		if isTypeOf(this,Item) then {
 			if isTypeOf(this,SystemItem) exitWith {};
@@ -1349,20 +1529,13 @@ class(IDestructible) extends(GameObject)
 		//no damage - no hp
 		if !callSelf(canApplyDamage) exitWith {};
 
-		private _ft = kgToLb(callSelf(getWeight));
 		private _type = callSelf(objectHealthType);
 		private _val = 0;
 
 		if (getSelf(hp)>0) then {
 			setSelf(hpMax,getSelf(hp));
 		} else {
-			_val = if (_type == "complex") then {
-				ceil(4 * (_ft ^ (1/3)))
-			} else {
-				ceil(8 * (_ft ^ (1/3)))
-			};
-			setSelf(hp,_val);
-			setSelf(hpMax,_val);
+			callSelf(generateObjectHP);
 		};
 
 		if (getSelf(dr)>0) then {
@@ -1371,6 +1544,46 @@ class(IDestructible) extends(GameObject)
 			if (_type == "simple") then {
 
 			};
+		};
+	};
+
+	func(generateObjectHP)
+	{
+		objParams();
+		private _val = 1;
+		if callSelf(isItem) then {
+			_val = [this] call gurps_calculateItemHP;
+		} else {
+			_val = [this] call gurps_calculateConstructionHP;
+		};
+		setSelf(hp,_val);
+		setSelf(hpMax,_val);
+	};
+
+	var(material,null);//string|object
+
+	func(sendDamageVisualOnPos)
+	{
+		objParams_4(_pos,_doEffect,_doSound,_useBlockSound);
+		if isNullVar(_doEffect) then {_doEffect = true};
+		if isNullVar(_doSound) then {_doSound = false};
+		if isNullVar(_useBlockSound) then {_useBlockSound = true};
+
+		private _mat = getSelf(material);
+		if isNullVar(_mat) exitWith {};
+
+		if (_doEffect) then {
+			private _emt = callFunc(_mat,getDamageEffect);
+			{
+				callFuncParams(_x,sendInfo,"do_fe" arg [_pos arg _emt arg _norm]);
+			} foreach callSelfParams(getNearMobs,20);
+		};
+
+
+		if (_doSound) then {
+			private _sound = ifcheck(_useBlockSound,callFunc(_mat,getResistSound),callFunc(_mat,getDamageSound));
+			if (_sound == stringEmpty) exitWith {};
+			callSelfParams(playSound,_sound arg randInt(0.85,1.15) arg 15 arg null arg _pos);
 		};
 	};
 	

@@ -35,7 +35,7 @@ p_table_allclassnames = [];
 //for deleting object
 oop_deleteObject = {
 	private this = _this;
-
+	this setvariable ["__del_flag__",true];
 	{
 		this call (_x getvariable "destructor")
 	} foreach (this getvariable "proto" getvariable "__dtors");
@@ -122,12 +122,12 @@ oop_getSimpleTypeSize = {
 //проверка типа
 oop_checkTypeSafe = {
 	params ["_typename",["_defaultRet","object"]];
-	#ifdef EDITOR
+	
 	if !isImplementClass(_typename) exitwith {
 		assert_str(false,"Указанный тип не существует: " + _typename);
 		_defaultRet
 	};
-	#endif
+	
 	_typename
 };
 

@@ -10,21 +10,29 @@
 // Столы
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(TableBase) extends(Furniture) var(name,"Стол"); editor_only(var(desc,"Просто стол");) endclass
+class(TableBase) extends(Furniture) 
+	var(name,"Стол"); 
+	editor_only(var(desc,"Просто стол");)
+	var(material,"MatWood");
+	var(dr,2);
+endclass
 
 editor_attribute("EditorGenerated")
 class(Workbench) extends(TableBase)
 	var(model,"a3\structures_f_heli\furniture\workbench_01_f.p3d");
+	var(material,"MatMetal");
 endclass
 
 editor_attribute("EditorGenerated")
 class(WoodenTableHandmade) extends(TableBase)
 	var(model,"a3\props_f_exp\commercial\market\woodencounter_01_f.p3d");
+	var(dr,1);
 endclass
 
 editor_attribute("EditorGenerated")
 class(SmallSteelTable) extends(TableBase)
 	var(model,"ca\misc2\smalltable\smalltable.p3d");
+	var(material,"MatMetal");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -35,6 +43,7 @@ endclass
 editor_attribute("EditorGenerated")
 class(SurgeryBlueTable) extends(TableBase)
 	var(model,"ml_shabut\autopsy\autopsy.p3d");
+	var(material,"MatMetal");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -81,6 +90,7 @@ editor_attribute("EditorGenerated")
 class(MediumWoodenTable1) extends(MediumWoodenTable)
 	var(model,"a3\props_f_orange\furniture\tablebig_01_f.p3d");
 endclass
+
 editor_attribute("EditorGenerated")
 class(SmallWoodenTable) extends(MediumWoodenTable)
 	var(model,"a3\structures_f_epa\civ\camping\woodentable_small_f.p3d");

@@ -23,20 +23,20 @@
           "_canTakeInLobbyConst":false
         }
       },
-      "compiledGUID":"f2c6f03b-f835-4f0a-9d03-bade924ccc1b",
+      "compiledGUID":"5ae3a911-826e-4cff-b792-c8e0b5d1938d",
       "compileStatus":"Compiled",
-      "graphVersion":1
+      "graphVersion":2
     },
     "mpos":[
-      -98.03971784741842,
-      198.92703350853895,
-      959.8553312893847,
-      903.3932529782445
+      655.4221993328376,
+      480.7049645412658,
+      730.5415171026684,
+      687.5684866848644
     ],
-    "mzoom":-0.5
+    "mzoom":-0.35
   },
   "nodes":{
-    "0x279137ceed0":{
+    "0x24155e61c50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -71,7 +71,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x27913a90490":{
+    "0x24159ab4990":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",
@@ -106,7 +106,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onDeadBasicWrapper_0"
     },
-    "0x27913a912d0":{
+    "0x24159c15f90":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_OverrideableFunction_16x",
       "name":"Вызов базового метода",
@@ -187,7 +187,7 @@
       },
       "class_":"control.supercall"
     },
-    "0x27913a92390":{
+    "0x24159c36a10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в инвентаре",
@@ -211,7 +211,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":469.0,
+      "width":306.0,
       "height":159.20000000000002,
       "pos":[
         1400.5356085778492,
@@ -226,7 +226,7 @@
       },
       "class_":"func.createItemInInventory"
     },
-    "0x27913b01bd0":{
+    "0x2415b9423d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -254,7 +254,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":427.0,
+      "width":237.0,
       "height":112.75,
       "pos":[
         695.2267084381134,
@@ -264,11 +264,11 @@
       "port_deletion_allowed":false,
       "subgraph_session":{},
       "custom":{
-        "Цель":"Этот LateAdventurer_GMTemplateScripted"
+        "Цель":"Объект Mob"
       },
       "class_":"fields.Mob.activeHand_0.get"
     },
-    "0x27913b02d50":{
+    "0x2415b943550":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Cast_16x",
       "name":"Преобразовать тип",
@@ -293,7 +293,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":438.0,
+      "width":324.0,
       "height":118.25,
       "pos":[
         628.2934207766959,
@@ -307,7 +307,7 @@
       },
       "class_":"control.castto"
     },
-    "0x27913b72650":{
+    "0x2415b9a7310":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка",
@@ -332,7 +332,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":333.0,
+      "width":268.0,
       "height":97.25,
       "pos":[
         1078.4339787587949,
@@ -346,7 +346,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x27913b73310":{
+    "0x2415b9a7d90":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\Icon_Sequencer_Key_Part_24x",
       "name":"Получить текущий режим",
@@ -368,13 +368,13 @@
         180
       ],
       "disabled":false,
-      "selected":false,
+      "selected":true,
       "visible":true,
-      "width":551.0,
+      "width":366.0,
       "height":86.1,
       "pos":[
-        644.5903823560266,
-        898.1496322875441
+        455.81599873495884,
+        939.5879116189979
       ],
       "layout_direction":0,
       "port_deletion_allowed":false,
@@ -384,7 +384,7 @@
       },
       "class_":"methods.ScriptedRole.getCurrentGamemode_0"
     },
-    "0x27913b73b50":{
+    "0x2415b9a7790":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -412,7 +412,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":556.0,
+      "width":399.0,
       "height":123.9,
       "pos":[
         1281.543437906887,
@@ -422,101 +422,160 @@
       "port_deletion_allowed":false,
       "subgraph_session":{},
       "custom":{
-        "Цель":"Этот LateAdventurer_GMTemplateScripted",
+        "Цель":"Объект GMTemplateScripted",
         "Значение":true
       },
       "class_":"fields.GMTemplateScripted.Pogib_pozdniy_priklyuchenets_0.set"
+    },
+    "0x24159803e50":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_Blueprint_Cast_16x",
+      "name":"Преобразовать тип",
+      "color":[
+        119,
+        119,
+        119,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":331.0,
+      "height":118.25,
+      "pos":[
+        859.4606083560805,
+        868.6691148741814
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Преобразование":"GMTemplateScripted"
+      },
+      "class_":"control.castto"
     }
   },
   "connections":[
     {
       "out":[
-        "0x279137ceed0",
+        "0x24155e61c50",
         "Выход"
       ],
       "in":[
-        "0x27913b02d50",
+        "0x2415b943550",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x279137ceed0",
+        "0x24155e61c50",
         "Моб"
       ],
       "in":[
-        "0x27913b02d50",
+        "0x2415b943550",
         "Входной объект"
       ]
     },
     {
       "out":[
-        "0x27913a90490",
+        "0x24159ab4990",
         "Выход"
       ],
       "in":[
-        "0x27913b73b50",
+        "0x24159803e50",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x27913a912d0",
+        "0x24159c15f90",
         "Вход"
       ],
       "out":[
-        "0x27913b02d50",
+        "0x2415b943550",
         "Успешное преобразование"
       ]
     },
     {
       "out":[
-        "0x27913a912d0",
+        "0x24159c15f90",
         "Выход"
       ],
       "in":[
-        "0x27913a92390",
+        "0x24159c36a10",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x27913a92390",
+        "0x24159c36a10",
         "Персонаж"
       ],
       "out":[
-        "0x27913b02d50",
+        "0x2415b943550",
         "Объект"
       ]
     },
     {
       "in":[
-        "0x27913a92390",
+        "0x24159c36a10",
         "Слот"
       ],
       "out":[
-        "0x27913b01bd0",
+        "0x2415b9423d0",
         "Значение"
       ]
     },
     {
       "in":[
-        "0x27913b01bd0",
+        "0x2415b9423d0",
         "Цель"
       ],
       "out":[
-        "0x27913b02d50",
+        "0x2415b943550",
         "Объект"
       ]
     },
     {
       "out":[
-        "0x27913b73310",
+        "0x2415b9a7d90",
         "Результат"
       ],
       "in":[
-        "0x27913b73b50",
+        "0x24159803e50",
+        "Входной объект"
+      ]
+    },
+    {
+      "in":[
+        "0x2415b9a7790",
+        "Вход"
+      ],
+      "out":[
+        "0x24159803e50",
+        "Успешное преобразование"
+      ]
+    },
+    {
+      "in":[
+        "0x2415b9a7790",
         "Цель"
+      ],
+      "out":[
+        "0x24159803e50",
+        "Объект"
       ]
     }
   ]

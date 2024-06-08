@@ -7,6 +7,7 @@
 #include "..\oop.hpp"
 #include "..\text.hpp"
 
+#include "ReNode.h"
 #include "ReNode_debugger.sqf"
 
 /*
@@ -63,6 +64,7 @@ nodegen_addFunction = {
     #ifdef _SQFVM
     if (true) exitwith {};
     #endif
+    if (!is3DEN) exitwith {};
 
     private _ctx = _this;
     private _buf = [_ctx];
@@ -120,6 +122,9 @@ nodegen_addEnumerator = {
     missionNamespace setvariable ['enum_vToK_'+_nodename,_map];
     missionNamespace setvariable ["enum_values_"+_nodename,(keys _map) apply {parseNumber _x}];
     
+    //выход из нумераторов только после выполнения действий
+    if (!is3DEN) exitwith {};
+
     private _ctx = [];
     _ctx pushBack ('node:'+_nodename);
     _ctx pushBack ("path:Перечисления");
@@ -130,7 +135,7 @@ nodegen_addEnumerator = {
 
 nodegen_addStruct = {
     params ["_nodename","_members","_pdata"];
-
+    if (!is3DEN) exitwith {};
     assert(equalTypes(_members,[]));
 
     private _map = createHashMap;
@@ -431,4 +436,43 @@ nodegen_loadClasses = {
     } foreach _pathes;
 
     ["Scripted classes loading done"] call _logger;
+};
+
+//spec-funcs
+
+//call delegate; _fref - vec2: vec2:(object,context), code(params:args,context)
+renode_invokeDelegate = {
+    //! NOT IMPLEMENTED
+    setLastError("invoke delegate not implemented yet on ReNode editor side");
+    
+    //param input example: [[nullPtr,[]],{}]
+    params ["_fref__","_args"];
+    assert_str(count _fref__ == 2,"Invalid function ref datastructure");
+    _fref__ params ["_oct__","_cd__"];
+    assert_str(count _oct__ == 2,"Invalid object ref datastructure");
+    assert_str(equalTypes(_cd__,{}),"Invalid code type instructions");
+    
+    //check nullobject
+    if (isNullReference(_oct__ select 0 select 0)) exitWith {null};
+    
+    //args: [[obj],ctx]
+    private _p__ = [[_oct__ select 0],_oct__ select 1];
+    //args: [[obj,...],ctx]
+    (_p__ select 0) apply _args;
+    //call code and return
+    _p__ call _cd__
+};
+
+//generic function for print messages into console
+renode_print = {
+    params ["_m","_ch","_ft"];
+    private _msg = [_m];
+    if not_equalTypes(_ft,[]) then {_ft = [_ft]};
+    _msg append _ft;
+    _msg = format _msg;
+
+    if (_ch == RENODE_MSG_TYPE_LOG) exitWith {log(_msg)};
+    if (_ch == RENODE_MSG_TYPE_WARNING) exitWith {warning(_msg)};
+    if (_ch == RENODE_MSG_TYPE_ERROR) exitWith {error(_msg)};
+    if (_ch == RENODE_MSG_TYPE_TRACE) exitWith {trace(_msg)};
 };

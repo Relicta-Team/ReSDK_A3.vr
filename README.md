@@ -92,5 +92,7 @@ ReSDK - это набор инструментов для разработки �
 
 ![screen1](Documentation/Data/reeditor_1.png)
 ![screen2](Documentation/Data/reeditor_2.png)
-![screen3](Documentation/Data/ingame_debug_1.png)
-![screen4](Documentation/Data/ingame_debug_2.png)
+![screen3](Documentation/Data/renode_1.png)
+![screen4](Documentation/Data/ingame_debug_1.png)
+![screen5](Documentation/Data/ingame_debug_2.png)
+![screen6](Documentation/Data/ingame_debug_3.png)

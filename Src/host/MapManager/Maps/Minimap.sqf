@@ -645,7 +645,7 @@ _3780_000003753_0000024_50330 = ['Decor',[3780,3753,24.5033],65.8498,[0,0,1], {_
 _3799_639893774_0600624_45650 = ['Decor',[3799.64,3774.06,24.4565],88.0797,[0,0,1], {_thisObj setvariable ['model','ca\structures\furniture\tables\conference_table_a\conference_table_a.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['Bench1',[3801.72,3762.64,28.003],179.905,[0,0,1]] call InitStruct; 
 ['Bench1',[3798.51,3761.25,27.9604],358.57,[0,0,1]] call InitStruct; 
-['Bench1',[3800.1,3764.68,28.003],267.954,[0,0,1]] call InitStruct; 
+['Bench1',[3800.1,3764.68,28.003],89.9138,[0,0,1]] call InitStruct; 
 ['Bucket',[3799.59,3764.62,28.5366],0,[0,0,1]] call InitItem; 
 ['Bucket',[3799.12,3760.27,27.9837],0,[0,0,1]] call InitItem; 
 ['PaperHolder',[3799.5,3774.59,25.1588],0,[0,0,1]] call InitItem; 
@@ -2524,12 +2524,10 @@ _3830_843023776_3669422_09163 = ['Decor',[3830.84,3776.37,22.0916],273.303,[0,0,
 _3830_880623777_7851622_22951 = ['Decor',[3830.88,3777.79,22.2295],273.303,[0,0,1], {_thisObj setvariable ['model','ml_exodusnew\ganzazhelezo3.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['WoodenSmallFence2',[3834.77,3773.16,21.9651],273.507,[0,0,1]] call InitStruct; 
 ['LuxuryRedCurtain',[3831.08,3779.72,21.9246],278.628,[0,0,1]] call InitStruct; 
-['SmallRoundWoodenTable',[3828.63,3777.62,22.4039],273.235,[0,0,1]] call InitStruct; 
-['RedSofa',[3828.34,3780.1,22.5023],86.052,[0,0,1]] call InitStruct; 
-['StripedChair',[3827.58,3777.68,22.5244],91.5794,[0,0,1]] call InitItem; 
-['StripedChair',[3829.65,3777.57,22.5224],270.616,[0,0,1]] call InitItem; 
-['ChairBigCasual',[3828.54,3776.65,22.3849],0,[0,0,1]] call InitItem; 
-['OrangeCapet',[3828.5,3777.47,27.5201,true],0,[0,-0.0201315,0.999797]] call InitStruct; 
+['SmallRoundWoodenTable',[3828.7,3777.86,22.4039],273.235,[0,0,1]] call InitStruct; 
+['StripedChair',[3827.65,3777.91,22.5244],91.5794,[0,0,1]] call InitItem; 
+['StripedChair',[3829.72,3777.81,22.5224],270.616,[0,0,1]] call InitItem; 
+['ChairBigCasual',[3828.61,3776.88,22.3849],0,[0,0,1]] call InitItem; 
 ['OrangeCapet',[3828.43,3780.55,28.7559,true],[-0.0239592,-0.00352831,0.999707],[0.0122466,-0.99992,-0.00323556]] call InitStruct; 
 ['BarChair',[3836.02,3779.7,22.4688],272.157,[0,0,1]] call InitItem; 
 ['BarChair',[3835.6,3779.59,22.4766],272.157,[0,0,1]] call InitItem; 
@@ -2580,6 +2578,11 @@ _3770_429693782_2539124_21754 = ['SteelGreenDoor',[3770.43,3782.25,24.2175],88.0
 ['MetalAndConcreteRuins',[3747.89,3793.1,23.8718],0,[0,0,1]] call InitStruct; 
 ['MediumFenceOfSheetsAndBoards',[3747.56,3788.01,23.6759],272.745,[0,0,1]] call InitStruct; 
 ['BlockStone',[3775.14,3791.4,37.6375],0,[0,0,1]] call InitDecor; 
+['RedSofa',[3828.34,3780.1,22.5023],86.052,[0,0,1]] call InitStruct; 
+['Crutch',[3797.44,3747.4,27.5628],0,[0,0,1]] call InitItem; 
+['Crutch',[3797.47,3747.6,27.5628],180.951,[0,0,1]] call InitItem; 
+['Crutch',[3796.92,3751.9,30.0592,true],[0.980895,-0.194537,-0.000396758],[-0.189083,-0.953872,0.233184]] call InitItem; 
+['Crutch',[3797.22,3751.74,30.0389,true],[0.983585,-0.169357,0.062279],[-0.179892,-0.893304,0.411883]] call InitItem; 
 
 
 
@@ -2759,7 +2762,6 @@ if (!isNil'_3796_610113751_3000527_17740') then {
 };
 if (!isNil'_3807_590093762_0300327_56480') then {
 	_3807_590093762_0300327_56480 setvariable ['keytypes',["home_6","super"]];
-	_3807_590093762_0300327_56480 setvariable ['islocked',true];
 };
 if (!isNil'_3782_070073755_0800824_37810') then {
 	_3782_070073755_0800824_37810 setvariable ['keytypes',["medpublic","medmain","super"]];
@@ -2770,7 +2772,6 @@ if (!isNil'_3801_219973759_5600624_39800') then {
 };
 if (!isNil'_3807_500003761_8000524_49040') then {
 	_3807_500003761_8000524_49040 setvariable ['keytypes',["home_3","super"]];
-	_3807_500003761_8000524_49040 setvariable ['islocked',true];
 };
 if (!isNil'_3785_689943751_8300825_85409') then {
 	[_3785_689943751_8300825_85409,go_editor_globalRefs get "Imported LampWall953697"] call (_3785_689943751_8300825_85409 getvariable 'proto' getvariable 'addConnection');
@@ -3134,15 +3135,12 @@ if (!isNil'_3838_510013768_8898921_99380') then {
 };
 if (!isNil'_3808_820073752_3999024_55540') then {
 	_3808_820073752_3999024_55540 setvariable ['keytypes',["home_1","super"]];
-	_3808_820073752_3999024_55540 setvariable ['islocked',true];
 };
 if (!isNil'_3809_600103753_2500027_52260') then {
 	_3809_600103753_2500027_52260 setvariable ['keytypes',["badhome_5","super"]];
-	_3809_600103753_2500027_52260 setvariable ['islocked',true];
 };
 if (!isNil'_3812_409913755_1499027_50500') then {
 	_3812_409913755_1499027_50500 setvariable ['keytypes',["badhome_4","super"]];
-	_3812_409913755_1499027_50500 setvariable ['islocked',true];
 };
 if (!isNil'_3821_080083751_1999524_54700') then {
 	_3821_080083751_1999524_54700 setvariable ['keytypes',["home_9","super"]];
@@ -3150,11 +3148,9 @@ if (!isNil'_3821_080083751_1999524_54700') then {
 };
 if (!isNil'_3813_000003755_9499527_53240') then {
 	_3813_000003755_9499527_53240 setvariable ['keytypes',["badhome_3","super"]];
-	_3813_000003755_9499527_53240 setvariable ['islocked',true];
 };
 if (!isNil'_3812_570073761_8200724_69000') then {
 	_3812_570073761_8200724_69000 setvariable ['keytypes',["home_4","super"]];
-	_3812_570073761_8200724_69000 setvariable ['islocked',true];
 };
 if (!isNil'_3817_840093762_0200227_64360') then {
 	_3817_840093762_0200227_64360 setvariable ['keytypes',["home_8","super"]];
@@ -3162,11 +3158,9 @@ if (!isNil'_3817_840093762_0200227_64360') then {
 };
 if (!isNil'_3816_199953758_2099624_27810') then {
 	_3816_199953758_2099624_27810 setvariable ['keytypes',["home_2","super"]];
-	_3816_199953758_2099624_27810 setvariable ['islocked',true];
 };
 if (!isNil'_3812_620123762_1201227_61010') then {
 	_3812_620123762_1201227_61010 setvariable ['keytypes',["home_7","super"]];
-	_3812_620123762_1201227_61010 setvariable ['islocked',true];
 };
 if (!isNil'_3817_719973761_8601124_46020') then {
 	_3817_719973761_8601124_46020 setvariable ['keytypes',["home_5","super"]];
@@ -3174,11 +3168,9 @@ if (!isNil'_3817_719973761_8601124_46020') then {
 };
 if (!isNil'_3811_610113758_7299827_56010') then {
 	_3811_610113758_7299827_56010 setvariable ['keytypes',["badhome_1","super"]];
-	_3811_610113758_7299827_56010 setvariable ['islocked',true];
 };
 if (!isNil'_3811_550053757_3200727_55190') then {
 	_3811_550053757_3200727_55190 setvariable ['keytypes',["badhome_2","super"]];
-	_3811_550053757_3200727_55190 setvariable ['islocked',true];
 };
 if (!isNil'_3834_659913775_6101123_72960') then {
 	_3834_659913775_6101123_72960 setvariable ['name',"Табличка"];

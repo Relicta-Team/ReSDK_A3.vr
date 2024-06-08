@@ -49,3 +49,6 @@
 
 // loadFile("src\host\Gender\Genders.sqf");
 #include <..\..\host\Gender\Genders.sqf>
+
+//loading materials
+#include <..\..\host\Materials\Materials_base.sqf>

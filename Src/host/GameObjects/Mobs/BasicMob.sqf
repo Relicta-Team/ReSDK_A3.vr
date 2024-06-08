@@ -62,7 +62,7 @@ class(BasicMob) extends(GameObject)
 	//some getters
 	"
 		name:Это ребенок
-		desc:Возвращает ИСТИНУ, если сущность является ребенком
+		desc:Возвращает @[bool ИСТИНУ], если сущность является ребенком
 		type:get
 		lockoverride:1
 		return:bool:Это ребенок
@@ -70,7 +70,7 @@ class(BasicMob) extends(GameObject)
 	getter_func(isChild,getSelf(age)<=18);
 	"
 		name:Это мужчина
-		desc:Возвращает ИСТИНУ, если сущность является мужчиной
+		desc:Возвращает @[bool ИСТИНУ], если сущность является мужчиной
 		type:get
 		lockoverride:1
 		return:bool:Это мужчина
@@ -78,7 +78,7 @@ class(BasicMob) extends(GameObject)
 	getter_func(isMale,equals(getSelf(gender),gender_male));
 	"
 		name:Это женщина
-		desc:Возвращает ИСТИНУ, если сущность является женщиной
+		desc:Возвращает @[bool ИСТИНУ], если сущность является женщиной
 		type:get
 		lockoverride:1
 		return:bool:Это женщина
@@ -110,35 +110,62 @@ class(BasicMob) extends(GameObject)
 
 	"
 		name:Добавить задачу
-		desc:Добавляет персонажу новую задачу. Возвращает результат добавления задачи. Если она была добавлена для персонажа - возвращает ИСТИНУ.
+		desc:Добавляет персонажу новую задачу. Возвращает результат добавления задачи. Если она была добавлена для персонажа - возвращает @[bool ИСТИНУ].
 		type:method
 		lockoverride:1
-		in:TBase:Задача:Добавляемая задача для персонажа
-		in:TaskParamsProvider:Параметры задачи:Параметры выполнения задачи
+		in:TaskBase:Задача:Добавляемая задача для персонажа
 		return:bool:Была ли задача успешно добавлена.
 	" node_met
 	func(addTask)
 	{
-		objParams_2(_v,_ctx);
-		if (equalTypes(_v,"") && {!isTypeNameOf(_v,TBase)}) exitwith {
-			errorformat("Cant add task %1 for %2 <%3> - task does not exists",_v arg getSelf(pointer) arg callSelf(getClassName));
-			false
-		};
-		if (equalTypes(_v,nullPtr) && {!isTypeOf(_v,TBase)}) exitWith {
+		objParams_1(_v);
+
+		if isNullReference(_v) exitWith {
+			setLastError("Task reference is null");
 			errorformat("Cant add task object %1 for %2 <%3>",_v arg getSelf(pointer) arg callSelf(getClassName));
 			false
 		};
-		private _t = ifcheck(equalTypes(_v,""),instantiate(_v),_v);
-		getSelf(tasks) pushBack _t;
-		callFuncParams(_t,onTaskAdded,this);
-		callFuncParams(_t,handleTaskAddedParams,_ctx);
+		if (callFunc(_v,getClassName)=="TaskBase") exitWith {
+			setLastError("Задача должна быть наследником от TaskBase");
+			false
+		};
+		if !isTypeOf(_v,TaskBase) exitWith {
+			assert_str(false,format vec2("Invalid task type %1 for mob %2",callFunc(_v,getClassName) arg this));
+			false;
+		};
+		
+		getSelf(tasks) pushBack _v;
+		callFuncParams(_v,onRegisterInTarget,this);
+		
 		true
+	};
+
+	// Новая функция регистрации задачи
+	func(registerTask)
+	{
+		objParams_1(_tObj);
 	};
 
 region(roles management)
 	//! tasks already defined in Mob
 	//var_array(tasks); //задачи для человека
+	"
+		name:Базовая роль
+		desc:Базовая роль персонажа, с которой он появился в мире. Тут хранится объект роли, которую выбрал игрок при входе, либо получил в результате успешной проверки на полного антагониста. Базовая роль не меняется до самого конца раунда.
+		prop:get
+		classprop:0
+		return:ScriptedRole:Базовая роль моба
+		restr:ScriptedRole
+	" node_var
 	var(basicRole,nullPtr); //объект роли человека, выдаваемой при старте
+	"
+		name:Текущая роль
+		desc:Текущая роль моба. Можно переназначить с помощью узла ""Установить роль мобу"". Если вы ни разу не изменяли роль моба, то значение текущей роли эквиваленто базовой роли.
+		prop:get
+		classprop:0
+		return:ScriptedRole:Текущая роль моба
+		restr:ScriptedRole
+	" node_var
 	var(role,nullPtr); //текущая роль. возможно переназначать персонажей на другие роли
 	
 	var(location,nullPtr); //местоположение (тип ZoneBase)
@@ -156,6 +183,14 @@ region(roles management)
 	};
 
 	//Устанавливает новую текущую роль персонажу
+	"
+		name:Установить роль мобу
+		desc:Устанавливает новую роль для моба.
+		type:method
+		lockoverride:1
+		in:classname:Роль:Новая роль моба
+			opt:def=ScriptedRole
+	" node_met
 	func(setToRole)
 	{
 		objParams_1(_roleObj);
@@ -601,7 +636,7 @@ region(Connect control events)
 	// Подключен ли к актору какой-нибудь игрок
 	"
 		name:Это игрок
-		desc:Возвращает ИСТИНУ, если за сущность подключен какой-либо клиент (игрок)
+		desc:Возвращает @[bool ИСТИНУ], если за сущность подключен какой-либо клиент (игрок)
 		type:get
 		lockoverride:1
 		return:bool:Подключен ли к мобу клиент
@@ -770,15 +805,16 @@ region(Mob location info: position; direction; speed)
 		DIR_FRONT
 	};
 
-	"
-		name:Расстояние от моба до цели
-		desc:Получает расстояние от вызывающего моба до цели в метрах. Целью может быть любой игровой объект, включа сущностей. "+
-		"В случае с расстоянием до сущности за конечную точку берется торс сущности. При проверке расстояния до игровых объектов берется центр модели, который помечается значком в редакторе ReEditor.
-		type:method
-		lockoverride:1
-		in:GameObject:Объект-цель:Объект, до которого измеряется расстояние
-		return:float:Расстояние в метрах
-	" node_met
+	//already implemented in GameObject::getDistanceTo
+	// "
+	// 	name:Расстояние от моба до цели
+	// 	desc:Получает расстояние от вызывающего моба до цели в метрах. Целью может быть любой игровой объект, включа сущностей. "+
+	// 	"В случае с расстоянием до сущности за конечную точку берется торс сущности. При проверке расстояния до игровых объектов берется центр модели, который помечается значком в редакторе ReEditor.
+	// 	type:method
+	// 	lockoverride:1
+	// 	in:GameObject:Объект-цель:Объект, до которого измеряется расстояние
+	// 	return:float:Расстояние в метрах
+	// " node_met
 	func(getDistanceTo)
 	{
 		objParams_1(_target);
@@ -1122,6 +1158,15 @@ region(Visual states)
 
 region(Messaging and chat managers)
 	
+	"
+		name:Установить имена моба
+		desc:Устанавливает первое и второе имя моба. Генерирует имена во всех склонениях.
+		type:method
+		lockoverride:1
+		in:string:Первое имя:Первое имя моба.
+		in:string:Второе имя:Второе имя моба. Чаще всего представлено в виде фамилии.
+			opt:require=-1
+	" node_met
 	func(generateNaming)
 	{
 		objParams_2(_f,_s);
@@ -1462,6 +1507,11 @@ region(Animator)
 	_anim = {
 		(_this select 0) switchmove (_this select 1)
 	}; rpcAdd("switchMove",_anim);
+	
+	_anim = {
+		(_this select 0) switchmove (_this select 1);
+		(_this select 0) playMoveNow (_this select 1); //fix force switchmove for fuckedup animations configs
+	}; rpcAdd("switchMove_force",_anim);
 
 	_anim = {
 		(_this select 0) switchmove (_this select 1)
@@ -1484,23 +1534,24 @@ region(Animator)
 		private _mob = getSelf(owner);
 
 		//changed after 0.4.75
-		if (_method == "switchmove") then {
-			
+		if (_method == "switchmove" || _method == "switchmove_force") then {
 			
 			//На сервере тоже вызываем метод
 			rpcCall(_method,[_mob arg _type]);
 
 			{
 				rpcSendToObject(_x,_method,[_mob arg _type]);
+
 			} foreach allPlayers;
 			
 			//Отладочная информация. Будет убрано после отлова ошибки синхронизации
-			["[applyGlobalAnim]: local - %1; Count: %2; Serversync: %3; Owner: %4; State %5",
-				isPlayer _mob,
+			["[applyGlobalAnim]: local - %1 (player=%6); Count: %2; Serversync: %3; Owner: %4; State %5;",
+				local _mob,
 				count allPlayers,
 				animationState _mob == _type,
 				owner _mob,
-				_type
+				_type,
+				isPlayer _mob
 			] call logInfo;
 
 			// //Тестовое исправление синхронизации по сети
@@ -1678,12 +1729,20 @@ region(Sound helpers)
 		in:float:Громкость:Громкость звука. Не рекомендуется менять это значение
 			opt:def=1
 		in:auto:Источник:Источник звука. Если не указан, то звук воспроизведется из позиции вызывающего моба.
-			opt:require=0:typeget=value;@type:allowtypes=GameObject
+			opt:require=0:typeget=value;@type:allowtypes=GameObject^|vector3
 	" node_met
 	func(playSoundLocal)
 	{
 		params ['this',"_path",["_pitch",1],["_maxDist",50],["_vol",1],"_atPos"];
-		private _source = ifcheck(!isNullVar(_atPos),_atPos,callSelf(getBasicLoc));
+		private _source = if(!isNullVar(_atPos)) then {
+			if equalTypes(_atPos,nullPtr) then {
+				callFunc(_atPos,getBasicLoc)
+			} else {
+				_atPos
+			};
+		} else {
+			callSelf(getBasicLoc)
+		};
 
 		private _data = [_path arg _source arg _vol arg _pitch arg _maxDist];
 		callSelfParams(sendInfo,"sl_p" arg _data);
@@ -1943,6 +2002,62 @@ region(banned combat setting)
 			#endif
 			callSelfParams(Stun,_timer arg true arg true);
 			callSelfParams(adjustPain,BP_INDEX_TORSO arg randInt(200,500));
+		};
+	};
+
+region(Step sounds component)
+	autoref var_handle(__ssHandle);
+	getter_func(isStepSoundSystemEnabled,getSelf(__ssHandle)!=-1);
+	func(setStepSoundSystem)
+	{
+		objParams_1(_mode);
+		if equals(callSelf(isStepSoundSystemEnabled),_mode) exitWith {false};
+		if (_mode) then {
+			assert_str(!isNullReference(getSelf(owner)),"Mob::setStepSoundSystem() - owner must be not null");
+
+			private __update = {
+				_paramStruct = (_this select 0);
+				this = _paramStruct select 0;
+				_m = _paramStruct select 1;
+				if isNullReference(_m) exitWith {
+					stopThisUpdate();
+				};
+
+				if !callFunc(this,isActive) exitWith {}; //dont send message on inactive mob
+
+				_newpos = getposatl _m;
+				_oldpos = _paramStruct select 2;
+				if (_newpos distance _oldpos > 0.2) then {
+					_paramStruct set [2,_newpos];
+					_p = callFunc(this,getObjectPlace);
+					_obj = (
+						[_newpos vectorAdd [0,0,-0.001],
+						_newpos vectorAdd [0,0,-100],
+						_m
+					] call si_getIntersectData) select 0;
+					_p = [_obj] call si_handleObjectReturnCheckVirtual;
+					if isNullReference(_p) exitWith {};
+					
+					_matObj = getVar(_p,material);
+					if isNullVar(_matObj) exitWith {};
+					if not_equalTypes(_matObj,nullPtr) exitWith {};
+					if isNullReference(_matObj) exitWith {};
+					_oldMat = _paramStruct select 3;
+					if equals(_matObj,_oldMat) exitWith {};
+
+					_paramStruct set [3,_matObj];
+
+					_dat = callFunc(_matObj,getStepSoundNetworkData);
+					callFuncParams(this,sendInfo,"stupd" arg _dat);
+				};
+
+			};
+			private _delay = 0.1;
+			private _p = [this,getSelf(owner),vec3(0,0,0),nullPtr];
+			setSelf(__ssHandle,startUpdateParams(__update,_delay,_p));
+		} else {
+			stopUpdate(getSelf(__ssHandle));
+			setSelf(__ssHandle,-1);
 		};
 	};
 

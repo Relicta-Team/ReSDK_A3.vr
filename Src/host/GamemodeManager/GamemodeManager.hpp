@@ -10,6 +10,11 @@
 #define GAME_STATE_PLAY 2
 #define GAME_STATE_END 3
 
+#define GAME_STATE_LIST_NODE_BINDING ['Выбор режима:GAME_STATE_PRELOAD:В этот момент режим ещё не выбран.', \
+    'Подготовка:GAME_STATE_LOBBY:На этом моменте раунд ещё не запущен, но режим уже выбран.', \
+    'Игра:GAME_STATE_PLAY:На этом моменте режим выбран и раунд запущен. Идёт процесс игры.', \
+    'Конец раунда:GAME_STATE_END:На этом моменте процесс игры завершен. Условия режима привели к его завершению.']
+
 //регистратор структуры роли
 //#define addRole(roleclass,rolename,countSlots) [roleclass,rolename,countSlots,[]]
 #define ROLE_NAME 0

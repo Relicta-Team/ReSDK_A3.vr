@@ -10,6 +10,8 @@
 class(ElectricalShield) extends(ElectronicDeviceNode)
 	var(name,"Щиток");
 	var(model,"ml\ml_object_new\model_24\transformator_2.p3d");
+	var(material,"MatMetal");
+	var(dr,3);
 	var(desc,"Обеспечивает распределение и контроль электричества для подключенных источников");
 	var(edReqPower,15);
 	var(edIsEnabled,true);

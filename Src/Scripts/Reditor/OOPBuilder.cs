@@ -113,9 +113,18 @@ class OOPBuilder : IScript
 			
 		} else if (args == "textbox")
 		{
+			string _maxlntbxS = ScriptContext.GetArg(4);
+			int maxlntbx = 8; //maxlen
 			string value = ScriptContext.GetArg(3);
 			var mpos = Control.MousePosition;
-			if (TextBox(ScriptContext.GetArg(0), ScriptContext.GetArg(1), ScriptContext.GetArg(2)=="true", ref value) == DialogResult.OK)
+			if (int.TryParse(_maxlntbxS, out maxlntbx) &&
+			TextBox(
+				ScriptContext.GetArg(0), 
+				ScriptContext.GetArg(1), 
+				ScriptContext.GetArg(2)=="true", 
+				ref value,
+				maxlntbx
+				) == DialogResult.OK)
 			{
 				SetCursorPos(mpos.X,mpos.Y);
 				output.Append(ScriptContext.EncodingToRV(value));
@@ -239,7 +248,7 @@ class OOPBuilder : IScript
 	[DllImport("user32.dll")]
 	private static extern bool SetCursorPos(int X, int Y);
 
-	public static DialogResult TextBox(string title, string promptText,bool canMultiline, ref string value)
+	public static DialogResult TextBox(string title, string promptText,bool canMultiline, ref string value,int maxlen__)
 	{
 		Form form = new Form();
 		Label label = new Label();
@@ -252,6 +261,8 @@ class OOPBuilder : IScript
 		textBox.Text = value;
 		textBox.Multiline = true; // Мультистрочное поле ввода
 		textBox.ScrollBars = ScrollBars.Vertical; // Вертикальная прокрутка
+		//установка ограничения по символам
+		textBox.MaxLength = maxlen__;
 
 		buttonOk.Text = "ОК";
 		buttonCancel.Text = "Отмена";

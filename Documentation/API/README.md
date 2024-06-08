@@ -2,7 +2,7 @@
 Count modules: 31
  - [client](client//client.md) - 2 files
  - [Chat](client//Chat.md) - 6 files
- - [ClientData](client//ClientData.md) - 13 files
+ - [ClientData](client//ClientData.md) - 14 files
  - [ClientInit](client//ClientInit.md) - 1 files
  - [ClientMenus](client//ClientMenus.md) - 1 files
  - [ClientRpc](client//ClientRpc.md) - 2 files
@@ -15,7 +15,7 @@ Count modules: 31
  - [InputSystem](client//InputSystem.md) - 6 files
  - [Interactions](client//Interactions.md) - 21 files
  - [Inventory](client//Inventory.md) - 7 files
- - [LightEngine](client//LightEngine.md) - 29 files
+ - [LightEngine](client//LightEngine.md) - 52 files
  - [Lobby](client//Lobby.md) - 8 files
  - [LocalEffects](client//LocalEffects.md) - 3 files
  - [NetDisplays](client//NetDisplays.md) - 16 files
@@ -32,10 +32,11 @@ Count modules: 31
  - [VoiceSystem](client//VoiceSystem.md) - 12 files
  - [WidgetSystem](client//WidgetSystem.md) - 6 files
 # Side: host
-Count modules: 49
+Count modules: 51
  - [host](host//host.md) - 11 files
  - [AI](host//AI.md) - 1 files
  - [AmbientControl](host//AmbientControl.md) - 1 files
+ - [Atmos](host//Atmos.md) - 3 files
  - [CaveSystem](host//CaveSystem.md) - 4 files
  - [Client](host//Client.md) - 3 files
  - [ClientManager](host//ClientManager.md) - 16 files
@@ -49,16 +50,17 @@ Count modules: 49
  - [FaithSystem](host//FaithSystem.md) - 3 files
  - [Family](host//Family.md) - 2 files
  - [GameEvents](host//GameEvents.md) - 4 files
- - [GamemodeManager](host//GamemodeManager.md) - 11 files
+ - [GamemodeManager](host//GamemodeManager.md) - 10 files
  - [GameModes](host//GameModes.md) - 40 files
- - [GameObjects](host//GameObjects.md) - 139 files
+ - [GameObjects](host//GameObjects.md) - 142 files
  - [Gender](host//Gender.md) - 1 files
  - [GURPS](host//GURPS.md) - 3 files
  - [Logger](host//Logger.md) - 1 files
- - [MapManager](host//MapManager.md) - 11 files
+ - [MapManager](host//MapManager.md) - 12 files
+ - [Materials](host//Materials.md) - 3 files
  - [MatterSystem](host//MatterSystem.md) - 11 files
  - [Medals](host//Medals.md) - 3 files
- - [Namings](host//Namings.md) - 5 files
+ - [Namings](host//Namings.md) - 7 files
  - [Networking](host//Networking.md) - 2 files
  - [NOEngine](host//NOEngine.md) - 11 files
  - [ObjectiveSystem](host//ObjectiveSystem.md) - 3 files
@@ -66,7 +68,7 @@ Count modules: 49
  - [Perks](host//Perks.md) - 1 files
  - [PointerSystem](host//PointerSystem.md) - 3 files
  - [Reagents](host//Reagents.md) - 8 files
- - [ReNode](host//ReNode.md) - 17 files
+ - [ReNode](host//ReNode.md) - 19 files
  - [Reputation](host//Reputation.md) - 2 files
  - [SceneReloader](host//SceneReloader.md) - 1 files
  - [ScriptErrorHandler](host//ScriptErrorHandler.md) - 1 files

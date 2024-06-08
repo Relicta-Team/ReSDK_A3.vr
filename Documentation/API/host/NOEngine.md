@@ -647,6 +647,14 @@ Description: getting ngo
 File: [host\NOEngine\NOEngine_NGOServer.sqf at line 74](../../../Src/host/NOEngine/NOEngine_NGOServer.sqf#L74)
 # NOEngine_ObjectManager.sqf
 
+## createGameObjectScriptInternal
+
+Type: function
+
+Description: 
+- Param: _obj
+
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 133](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L133)
 ## createItemInWorld
 
 Type: function
@@ -659,7 +667,7 @@ Description: Создание предмета в 3д пространстве
 - Param: _vec (optional, default ['0', '0', '1'])
 - Param: _probStackSize (optional, default 1)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 99](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L99)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 168](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L168)
 ## createStructure
 
 Type: function
@@ -671,7 +679,7 @@ Description: Создание структуры в мире
 - Param: _emulDrop (optional, default true)
 - Param: _vec (optional, default ['0', '0', '1'])
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 270](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L270)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 345](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L345)
 ## createDecoration
 
 Type: function
@@ -683,7 +691,7 @@ Description: Создание декорации в мире
 - Param: _emulDrop (optional, default true)
 - Param: _vec (optional, default ['0', '0', '1'])
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 312](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L312)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 389](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L389)
 ## deleteDecor
 
 Type: function
@@ -691,7 +699,7 @@ Type: function
 Description: Удаление декора
 - Param: _dec
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 355](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L355)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 434](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L434)
 ## deleteStructure
 
 Type: function
@@ -699,7 +707,7 @@ Type: function
 Description: Удаление структуры
 - Param: _struct
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 370](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L370)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 449](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L449)
 ## deleteItem
 
 Type: function
@@ -707,7 +715,7 @@ Type: function
 Description: Удаление предмета
 - Param: _item
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 385](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L385)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 464](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L464)
 ## getGameObjectOnPosition
 
 Type: function
@@ -719,7 +727,7 @@ Description:
 - Param: _retAsList (optional, default false)
 - Param: _retChild (optional, default false)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 432](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L432)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 511](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L511)
 ## getMobsOnPosition
 
 Type: function
@@ -731,7 +739,7 @@ Description:
 - Param: _retAsList (optional, default false)
 - Param: _retChild (optional, default false)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 635](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L635)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 714](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L714)
 ## getZoneByName
 
 Type: function
@@ -739,7 +747,7 @@ Type: function
 Description: TODO implement
 
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 692](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L692)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 771](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L771)
 ## noe_transform_position
 
 Type: function
@@ -749,7 +757,7 @@ Description: TODO implement
 - Param: _newpos
 - Param: _transformAsWPos (optional, default false)
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 697](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L697)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 776](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L776)
 ## noe_transform_direction
 
 Type: function
@@ -757,7 +765,7 @@ Type: function
 Description: TODO implement
 
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 702](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L702)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 781](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L781)
 ## noe_transform_vector
 
 Type: function
@@ -765,7 +773,7 @@ Type: function
 Description: TODO implement
 
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 706](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L706)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 785](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L785)
 ## noe_transform_all
 
 Type: function
@@ -773,7 +781,7 @@ Type: function
 Description: TODO implement
 
 
-File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 710](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L710)
+File: [host\NOEngine\NOEngine_ObjectManager.sqf at line 789](../../../Src/host/NOEngine/NOEngine_ObjectManager.sqf#L789)
 # NOEngine_ObjectRegisterModel.sqf
 
 ## noe_extended_log_reguister

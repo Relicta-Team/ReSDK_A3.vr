@@ -30,6 +30,16 @@ scriptError_internal_handleStack = {
 	} foreach _varmap;
 	format["-> f:%1 at %2 (scope:%3), lv: %4",_fn,_line,_scope,_stackInfo joinString ", "];
 };
+
+scriptError_internal_handleStack_short = {
+	params ["_fn","_line","_scope","_varmap"];
+	if (_fn == "" && _scope == "") exitWith {""};
+	
+	private _stackInfo = null;
+	_stackInfo = keys _varmap;
+	format["f:%1 at %2 (scope:%3), lv: %4",[_fn,getMissionPath "",""] call stringReplace,_line,_scope,_stackInfo joinString ", "];
+};
+
 scriptErrGlobLastMessage = "";
 scriptErrHndlGlobal = addMissionEventHandler ["ScriptError",
 {

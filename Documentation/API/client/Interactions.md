@@ -1379,7 +1379,7 @@ Type: function
 Description: открыть лист категорий
 - Param: _mode
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 164](../../../Src/client/Interactions/interactEmoteMenu.sqf#L164)
+File: [client\Interactions\interactEmoteMenu.sqf at line 178](../../../Src/client/Interactions/interactEmoteMenu.sqf#L178)
 ## interactEmote_cleanupInputText
 
 Type: function
@@ -1387,7 +1387,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 230](../../../Src/client/Interactions/interactEmoteMenu.sqf#L230)
+File: [client\Interactions\interactEmoteMenu.sqf at line 251](../../../Src/client/Interactions/interactEmoteMenu.sqf#L251)
 ## interactEmote_getInputTextParams
 
 Type: function
@@ -1395,7 +1395,7 @@ Type: function
 Description: Получение виджета инпута и текста в нём
 
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 236](../../../Src/client/Interactions/interactEmoteMenu.sqf#L236)
+File: [client\Interactions\interactEmoteMenu.sqf at line 257](../../../Src/client/Interactions/interactEmoteMenu.sqf#L257)
 ## interactEmote_handleInputText
 
 Type: function
@@ -1403,7 +1403,7 @@ Type: function
 Description: Обработчик строки инпута. Возврат bool значений означает ошибку текста
 - Param: _text
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 242](../../../Src/client/Interactions/interactEmoteMenu.sqf#L242)
+File: [client\Interactions\interactEmoteMenu.sqf at line 263](../../../Src/client/Interactions/interactEmoteMenu.sqf#L263)
 ## interactEmote_onSendEmote
 
 Type: function
@@ -1411,7 +1411,7 @@ Type: function
 Description: 
 - Param: _text
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 290](../../../Src/client/Interactions/interactEmoteMenu.sqf#L290)
+File: [client\Interactions\interactEmoteMenu.sqf at line 311](../../../Src/client/Interactions/interactEmoteMenu.sqf#L311)
 ## interactEmote_onMouseMoving
 
 Type: function
@@ -1419,7 +1419,7 @@ Type: function
 Description: 
 - Param: _display
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 305](../../../Src/client/Interactions/interactEmoteMenu.sqf#L305)
+File: [client\Interactions\interactEmoteMenu.sqf at line 326](../../../Src/client/Interactions/interactEmoteMenu.sqf#L326)
 ## interactEmote_switchActionMenu
 
 Type: function
@@ -1428,7 +1428,7 @@ Description:
 - Param: _mode
 - Param: _isSetMode (optional, default false)
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 329](../../../Src/client/Interactions/interactEmoteMenu.sqf#L329)
+File: [client\Interactions\interactEmoteMenu.sqf at line 350](../../../Src/client/Interactions/interactEmoteMenu.sqf#L350)
 ## interactEmote_loadActions
 
 Type: function
@@ -1436,7 +1436,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 349](../../../Src/client/Interactions/interactEmoteMenu.sqf#L349)
+File: [client\Interactions\interactEmoteMenu.sqf at line 370](../../../Src/client/Interactions/interactEmoteMenu.sqf#L370)
 ## interactEmote_doEmoteAction
 
 Type: function
@@ -1444,7 +1444,7 @@ Type: function
 Description: Отправка эмоута
 - Param: _act
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 425](../../../Src/client/Interactions/interactEmoteMenu.sqf#L425)
+File: [client\Interactions\interactEmoteMenu.sqf at line 451](../../../Src/client/Interactions/interactEmoteMenu.sqf#L451)
 ## interactEmote_unloadActions
 
 Type: function
@@ -1452,7 +1452,7 @@ Type: function
 Description: 
 - Param: _acts
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 447](../../../Src/client/Interactions/interactEmoteMenu.sqf#L447)
+File: [client\Interactions\interactEmoteMenu.sqf at line 473](../../../Src/client/Interactions/interactEmoteMenu.sqf#L473)
 # interactMenu.hpp
 
 ## SIZE_HITPART_ZONE

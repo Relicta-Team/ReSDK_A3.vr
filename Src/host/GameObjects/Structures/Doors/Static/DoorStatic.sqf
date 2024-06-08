@@ -12,7 +12,7 @@
 
 //Статическая дверь. Открывается сменой позиции/поворотом
 class(DoorStatic) extends(IStruct)
-	
+	var(dr,2);
 	getter_func(animateData,[]);//[vecbias,dir]
 
 	getter_func(getOpenSoundParams,["doors\wooden_open" arg getRandomPitchInRange(0.6,1.3) arg null]);

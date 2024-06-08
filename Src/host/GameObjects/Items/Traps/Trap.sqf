@@ -142,9 +142,12 @@ endclass
 class(Trap) extends(ITrapItem)
 	var(name,"Капкан");
 	var(model,"relicta_models\models\weapons\kapkan\kapkan.p3d");
+	var(material,"MatMetal");
 	var(desc,"Стальной капкан. Используется кочевниками для поимки монстров... и иногда людей.");
-	var(size,ITEM_SIZE_LARGE);
+	var(size,ITEM_SIZE_MEDIUM);
 	var(weight,1.35);
+	var(dr,4);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 	getter_func(getMainActionName,ifcheck(callSelf(isTrapActive),"Обезвредить","Активировать"));
 	var(emplacer,"map");
 	func(onMainAction)
@@ -247,6 +250,7 @@ class(Trap) extends(ITrapItem)
 			private _m = pick["схлопывается","издает леденящий щелчок","сжимается"];
 			callFuncParams(this,worldSay,"<t color='#AD1D1D' size='1.3'>"+callFuncParams(this,getNameFor,_usr) + " " + _m +".</t>");
 		};
+		super();
 	};
 
 endclass

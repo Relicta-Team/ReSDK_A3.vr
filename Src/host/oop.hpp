@@ -33,14 +33,20 @@
 		}; \
 	})
 
-	#define vm_throw(ctx) vm_lastError = ctx; throw vm_lastError;
+	#define __vm_throw_prep_ctx(ctx) ((ctx) splitSTring ENDl joinSTring "\n")
+
+	#define vm_throw(ctx) vm_lastError = __vm_throw_prep_ctx(ctx); throw vm_lastError;
+	#define vm_throw_flinf(ctx) vm_lastError = __vm_throw_prep_ctx(ctx) + "|CTX:" + __FILE__ + "+" + str(__LINE__) ; throw vm_lastError;
 
 	#define setName ;
 	
 #else
 	#define __postclassVM
 	#define vm_throw(ctx)
+	#define vm_throw_flinf(ctx)
 #endif
+
+#define interfaceHeader __interface_header_flag__ = true;
 
 //определение класса
 #define class(name) __class_beginDefine__(__className_toString__(name))
@@ -53,7 +59,7 @@
 //common class begin define
 #define __class_beginDefine__(name) _decl_info___ = [__FILE__,__LINE__ + 1]; \
 	__testSyntaxClass \
-	private ["_class","_mother","_mem_name","_lastIndex","_fields","_methods"]; \
+	private ["_class","_mother","_mem_name","_lastIndex","_lastIndexF","_fields","_methods"]; \
 	_class = name; _mother = "object"; \
 	[_class] call pc_oop_regClassTable; \
 	_fields = []; _methods = []; _attributes = []; _autoref = []; \
@@ -62,6 +68,7 @@
 	_editor_next_attr = []; _editor_attrs_f = []; _editor_attrs_m = []; \
 	_classmet_declinfo = createHashMap; \
 	_last_node_info_ = null; \
+	__interface_header_flag__ = null; \
 	private _pt_obj = [_class] call pc_oop_newTypeObj;
 
 
@@ -101,7 +108,7 @@
 //Регистратор переменной
 #define var(name,value) \
 	_mem_name = #name ; \
-	_lastIndex = _fields pushback [_mem_name,'value']; \
+	_lastIndexF = _fields pushback [_mem_name,'value']; \
 	call pc_oop_handleAttrF;
 
 /*
@@ -114,13 +121,13 @@
 #define pair(key,val) [key,val]
 #define varpair(name,value) \
 	_mem_name = #name ; \
-	_lastIndex = _fields pushback [_mem_name,"createHashMapFromArray [" + ('value' splitString (";"+toString[9,13,10]) joinString ",") + "]"]; \
+	_lastIndexF = _fields pushback [_mem_name,"createHashMapFromArray [" + ('value' splitString (";"+toString[9,13,10]) joinString ",") + "]"]; \
 	call pc_oop_handleAttrF;
 
 //Регистратор переменной со строковым именем
 #define var_runtime(name,value) \
 	_mem_name = name ; \
-	_lastIndex = _fields pushback [_mem_name,'value']; \
+	_lastIndexF = _fields pushback [_mem_name,'value']; \
 	call pc_oop_handleAttrF;
 
 //Вычисляет значения поля на этапе компиляции
@@ -128,7 +135,7 @@
 #define var_exprval(name,value) \
 	_mem_name = #name ; \
 	__iv_r = value; if equalTypes(__iv_r,"") then {__iv_r = str __iv_r}; \
-	_lastIndex = _fields pushback [_mem_name,format["%1",__iv_r]]; \
+	_lastIndexF = _fields pushback [_mem_name,format["%1",__iv_r]]; \
 	call pc_oop_handleAttrF;
 
 #define net_use _netuse = true;
@@ -140,13 +147,21 @@
 #define var_obj(name) var(name,objnull)
 #define var_vobj(name) var(name,locationnull)
 #define var_hashmap(name) var(name,createHashMap)
+#define var_handle(name) var(name,-1)
 
 //#define var_multi(defaultvalue)
 
+#define __check_method_duplicate 
+
+#ifdef __VM_VALIDATE
+	#define __check_method_duplicate if (isnil'__interface_header_flag__') then {vm_throw_flinf(format ["Duplicate method '%1::%2'" arg _class arg _mem_name])};
+#endif
+
 #define func(name) _mem_name = #name; _classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LINE__)]; \
-	_lastIndex = _methods pushback [_mem_name]; \
 	_propOverride = _methods findIf {(_x select 0) == _mem_name}; \
-	if (_propOverride != -1) then {_methods deleteAt _lastIndex; _methods set [_propOverride,[_mem_name]]; _lastIndex = _propOverride}; \
+	if (_propOverride != -1) then {__check_method_duplicate (_methods select _propOverride) deleteAt 1; _lastIndex = _propOverride} else { \
+		_lastIndex = _methods pushback [_mem_name]; \
+	}; \
 	call pc_oop_handleAttrM; \
 	(_methods select _lastIndex) pushback
 
@@ -181,6 +196,7 @@
 #define new(type) (call (pt_##type getvariable "__instance"))
 #define newParams(type,Params) ((Params) call (pt_##type getvariable "__instance"))
 #define delete(ref) (ref) call oop_deleteObject
+#define isdeleted(ref) (!isNIL{ref getvariable "__del_flag__"})
 #define instantiate(strType) (call ((missionNamespace getVariable ("pt_" + (strType))) getvariable '__instance'))
 #define instantiateParams(strType,Params) ((Params) call ((missionNamespace getVariable ("pt_" + (strType))) getvariable '__instance'))
 

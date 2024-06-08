@@ -5,6 +5,7 @@
 
 #include <..\..\MatterSystem\MatterSystem.hpp>
 
+interfaceHeader
 
 /*
 	Интерфейс контейнера для реагентов

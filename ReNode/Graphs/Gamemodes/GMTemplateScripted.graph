@@ -42,20 +42,20 @@
           ]
         }
       },
-      "compiledGUID":"bc1250fb-96dc-4b36-9285-90fb510e2c7c",
+      "compiledGUID":"12d988ab-c138-4c91-85bb-d956a336bd33",
       "compileStatus":"Compiled",
-      "graphVersion":1
+      "graphVersion":2
     },
     "mpos":[
-      167.9678715416943,
-      -146.51365704440389,
-      1935.892991923874,
-      1822.0169335754074
+      1230.0959871127257,
+      884.1077552987435,
+      1472.5633160056614,
+      1385.9419444759142
     ],
-    "mzoom":-0.75
+    "mzoom":-0.68
   },
   "nodes":{
-    "0x27911c95d90":{
+    "0x240ed57bb50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Проверка конца раунда",
@@ -90,7 +90,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedGamemode._checkFinishWrapper_0"
     },
-    "0x27911c94890":{
+    "0x240f449dbd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Завершить раунд",
@@ -114,7 +114,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":542.0,
+      "width":325.0,
       "height":195.70000000000002,
       "pos":[
         1585.3596157949535,
@@ -130,7 +130,7 @@
       },
       "class_":"methods.ScriptedGamemode.setEndgameScriptedMode_0"
     },
-    "0x2791584e0d0":{
+    "0x240f449fd10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -158,7 +158,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":447.0,
+      "width":350.0,
       "height":112.75,
       "pos":[
         520.1460631113821,
@@ -172,7 +172,7 @@
       },
       "class_":"fields.ScriptedGamemode.countDead_0.get"
     },
-    "0x2791584f250":{
+    "0x240f44aced0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Branch_16x",
       "name":"Ветка",
@@ -197,7 +197,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":192.0,
+      "width":160,
       "height":82.55000000000001,
       "pos":[
         1250.920997685978,
@@ -211,7 +211,7 @@
       },
       "class_":"operators.if_branch"
     },
-    "0x27915858510":{
+    "0x240f44ae250":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"&gt;=",
@@ -236,7 +236,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":200.0,
+      "width":160,
       "height":81.8,
       "pos":[
         1007.092495348191,
@@ -305,7 +305,7 @@
       },
       "class_":"math.greaterthanorequalnum"
     },
-    "0x27915879950":{
+    "0x240f44afd50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Branch_16x",
       "name":"Ветка",
@@ -330,7 +330,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":192.0,
+      "width":160,
       "height":82.55000000000001,
       "pos":[
         1647.2960004218414,
@@ -344,49 +344,7 @@
       },
       "class_":"operators.if_branch"
     },
-    "0x27915878b10":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":[
-        "data\\icons\\pill_16x.png",
-        "#800000"
-      ],
-      "name":"Погиб поздний приключенец",
-      "color":[
-        128,
-        0,
-        0,
-        255
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":473.0,
-      "height":86.1,
-      "pos":[
-        1094.8510353603363,
-        1107.3919100705896
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "custom":{
-        "Цель":"Этот GMTemplateScripted"
-      },
-      "class_":"fields.GMTemplateScripted.Pogib_pozdniy_priklyuchenets_0.get"
-    },
-    "0x2791587a550":{
+    "0x240f44aef10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Завершить раунд",
@@ -410,7 +368,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":542.0,
+      "width":325.0,
       "height":195.70000000000002,
       "pos":[
         1880.9631985290882,
@@ -426,7 +384,7 @@
       },
       "class_":"methods.ScriptedGamemode.setEndgameScriptedMode_0"
     },
-    "0x2791587b1d0":{
+    "0x240f44b4990":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка",
@@ -451,7 +409,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":333.0,
+      "width":268.0,
       "height":82.55000000000001,
       "pos":[
         1592.2134723670167,
@@ -465,7 +423,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x2791587bb50":{
+    "0x240f44b5f10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка",
@@ -490,7 +448,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":333.0,
+      "width":268.0,
       "height":82.55000000000001,
       "pos":[
         1175.1520580065094,
@@ -504,7 +462,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x2791587be90":{
+    "0x240f44b67d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Условие запуска раунда",
@@ -539,7 +497,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedGamemode._conditionToStartWrapper_0"
     },
-    "0x279158856d0":{
+    "0x240f44b6e50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\FIB_VarGet",
       "name":"Кандидаты на роль",
@@ -563,7 +521,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":447.0,
+      "width":355.0,
       "height":125.35000000000001,
       "pos":[
         577.7278201242708,
@@ -578,7 +536,7 @@
       },
       "class_":"methods.ScriptedGamemode.getCandidatesCount_0"
     },
-    "0x279158b8190":{
+    "0x240f451a190":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"&gt;=",
@@ -603,7 +561,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":200.0,
+      "width":160,
       "height":81.8,
       "pos":[
         828.4512208976274,
@@ -672,7 +630,7 @@
       },
       "class_":"math.greaterthanorequalnum"
     },
-    "0x279158b9e10":{
+    "0x240f451b610":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Node_16x",
       "name":"Вернуть значение",
@@ -752,7 +710,7 @@
       },
       "class_":"control.return"
     },
-    "0x279158b9450":{
+    "0x240f4520750":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_MakeStruct_16x",
       "name":"Создать Условие запуска",
@@ -777,8 +735,8 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":474.0,
-      "height":117.2,
+      "width":383.0,
+      "height":102.5,
       "pos":[
         1048.3340856063069,
         309.4700769824113
@@ -788,11 +746,11 @@
       "subgraph_session":{},
       "custom":{
         "Запуск":false,
-        "Причина задержки":"Должен быть готов хотя бы один приключенец"
+        "Причина задержки":"Попульчик"
       },
       "class_":"structHelper.struct.ConditionToStartGamemode_make"
     },
-    "0x279158c4150":{
+    "0x240f4521990":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Объект по ссылке",
@@ -816,7 +774,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":414.0,
+      "width":327.0,
       "height":101.45,
       "pos":[
         1898.4766734257762,
@@ -830,7 +788,7 @@
       },
       "class_":"func.getObjectByRef"
     },
-    "0x279158c4990":{
+    "0x240f4521710":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Объект по ссылке",
@@ -854,7 +812,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":414.0,
+      "width":327.0,
       "height":101.45,
       "pos":[
         1886.1263361343538,
@@ -868,7 +826,7 @@
       },
       "class_":"func.getObjectByRef"
     },
-    "0x279158c5910":{
+    "0x240f4522710":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\FIB_VarGet",
       "name":"Дистанция до",
@@ -892,7 +850,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":348.0,
+      "width":256.0,
       "height":136.9,
       "pos":[
         2396.708378890852,
@@ -902,12 +860,12 @@
       "port_deletion_allowed":false,
       "subgraph_session":{},
       "custom":{
-        "Цель":"Этот GMTemplateScripted",
+        "Цель":"Объект GameObject",
         "2d расстояние":false
       },
       "class_":"methods.GameObject.getDistanceTo_0"
     },
-    "0x27913b83d90":{
+    "0x240f4523550":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"&lt;=",
@@ -932,7 +890,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":200.0,
+      "width":160,
       "height":81.8,
       "pos":[
         2808.5400153789906,
@@ -1001,7 +959,7 @@
       },
       "class_":"math.lessthanorequalnum"
     },
-    "0x27913b72a50":{
+    "0x240f4530e50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"И",
@@ -1041,7 +999,7 @@
       },
       "class_":"math.logical.boolAnd"
     },
-    "0x27913b8dfd0":{
+    "0x240f451a550":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\FIB_VarGet",
       "name":"В мире",
@@ -1065,7 +1023,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":358.0,
+      "width":266.0,
       "height":112.75,
       "pos":[
         2624.178152137122,
@@ -1075,11 +1033,11 @@
       "port_deletion_allowed":false,
       "subgraph_session":{},
       "custom":{
-        "Цель":"Этот GMTemplateScripted"
+        "Цель":"Объект GameObject"
       },
       "class_":"methods.GameObject.isInWorld_0"
     },
-    "0x27913b73b90":{
+    "0x240f4532310":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Branch_16x",
       "name":"Ветка",
@@ -1104,7 +1062,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":192.0,
+      "width":160,
       "height":82.55000000000001,
       "pos":[
         2552.2541059813075,
@@ -1118,7 +1076,7 @@
       },
       "class_":"operators.if_branch"
     },
-    "0x27913b8ffd0":{
+    "0x240f4532c90":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Завершить раунд",
@@ -1142,7 +1100,7 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":542.0,
+      "width":325.0,
       "height":195.70000000000002,
       "pos":[
         2833.0837617901598,
@@ -1157,227 +1115,533 @@
         "Описание":"Свечу принесли на базу"
       },
       "class_":"methods.ScriptedGamemode.setEndgameScriptedMode_0"
+    },
+    "0x240f4533910":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
+      "name":"Сказать в чат",
+      "color":[
+        0,
+        69,
+        104
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":321.0,
+      "height":260.8,
+      "pos":[
+        682.2206381195294,
+        1107.189333593551
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Объект GameObject",
+        "Текст":"Test 123",
+        "Тип сообщения":"Система",
+        "Расстояние":18.0,
+        "Только при видимости":false
+      },
+      "class_":"methods.GameObject._worldSayWrapper_0"
+    },
+    "0x240f453ce50":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
+      "name":"Объект по ссылке",
+      "color":[
+        0,
+        69,
+        104
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":327.0,
+      "height":101.45,
+      "pos":[
+        238.0652983025377,
+        1096.604423721537
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Ссылка":"table_target"
+      },
+      "class_":"func.getObjectByRef"
+    },
+    "0x240f453eb10":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
+      "name":"Форматировать строку",
+      "color":[
+        52,
+        107,
+        43,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":357.0,
+      "height":126.65,
+      "pos":[
+        268.2670594796465,
+        1342.6503320035247
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":true,
+      "subgraph_session":{},
+      "input_ports":[
+        {
+          "name":"Строка",
+          "multi_connection":false,
+          "display_name":true,
+          "color":[
+            255,
+            0,
+            255,
+            255
+          ],
+          "type":"string"
+        },
+        {
+          "name":"Элемент",
+          "multi_connection":false,
+          "display_name":true,
+          "color":[
+            46,
+            139,
+            87,
+            255
+          ],
+          "type":"int"
+        },
+        {
+          "name":"Массив в элементы",
+          "multi_connection":false,
+          "display_name":true,
+          "color":[
+            128,
+            0,
+            0,
+            255
+          ],
+          "type":"bool"
+        }
+      ],
+      "output_ports":[
+        {
+          "name":"Новая строка",
+          "multi_connection":true,
+          "display_name":true,
+          "color":[
+            255,
+            0,
+            255,
+            255
+          ],
+          "type":"string"
+        }
+      ],
+      "custom":{
+        "autoportdata":{
+          "color":[
+            255,
+            255,
+            255,
+            255
+          ],
+          "border_color":[
+            255,
+            255,
+            255,
+            255
+          ]
+        },
+        "Строка":"время %1",
+        "Массив в элементы":false
+      },
+      "class_":"string.stringFormat"
+    },
+    "0x240f4544e90":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\FIB_VarGet",
+      "name":"Время игры",
+      "color":[
+        37,
+        136,
+        143
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":355.0,
+      "height":112.75,
+      "pos":[
+        131.50346052923845,
+        1493.8793116121494
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Этот GMTemplateScripted"
+      },
+      "class_":"methods.ScriptedGamemode._getDurationWrapper_0"
+    },
+    "0x240f463a250":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":[
+        "data\\icons\\pill_16x.png",
+        "#800000"
+      ],
+      "name":"Погиб поздний приключенец",
+      "color":[
+        128,
+        0,
+        0,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":true,
+      "visible":true,
+      "width":376.0,
+      "height":86.1,
+      "pos":[
+        1239.7764916059361,
+        1122.5921382897584
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Этот GMTemplateScripted"
+      },
+      "class_":"fields.GMTemplateScripted.Pogib_pozdniy_priklyuchenets_0.get"
     }
   },
   "connections":[
     {
       "out":[
-        "0x27911c95d90",
+        "0x240ed57bb50",
         "Выход"
       ],
       "in":[
-        "0x2791584f250",
+        "0x240f44aced0",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x27911c94890",
+        "0x240f449dbd0",
         "Вход"
       ],
       "out":[
-        "0x2791584f250",
+        "0x240f44aced0",
         "Истина"
       ]
     },
     {
       "out":[
-        "0x2791584e0d0",
+        "0x240f449fd10",
         "Значение"
       ],
       "in":[
-        "0x27915858510",
+        "0x240f44ae250",
         "Число 1"
       ]
     },
     {
       "in":[
-        "0x2791584f250",
+        "0x240f44aced0",
         "Условие"
       ],
       "out":[
-        "0x27915858510",
+        "0x240f44ae250",
         "Результат"
       ]
     },
     {
       "out":[
-        "0x2791584f250",
+        "0x240f44aced0",
         "Ложь"
       ],
       "in":[
-        "0x27915879950",
+        "0x240f44afd50",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x27915879950",
+        "0x240f44afd50",
         "Условие"
       ],
       "out":[
-        "0x27915878b10",
+        "0x240f463a250",
         "Значение"
       ]
     },
     {
       "out":[
-        "0x27915879950",
+        "0x240f44afd50",
         "Истина"
       ],
       "in":[
-        "0x2791587a550",
+        "0x240f44aef10",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x27915879950",
+        "0x240f44afd50",
         "Ложь"
       ],
       "in":[
-        "0x279158c4150",
+        "0x240f4521990",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x2791587be90",
+        "0x240f44b67d0",
         "Выход"
       ],
       "in":[
-        "0x279158b9e10",
+        "0x240f451b610",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x279158856d0",
+        "0x240f44b6e50",
         "Результат"
       ],
       "in":[
-        "0x279158b8190",
+        "0x240f451a190",
         "Число 1"
       ]
     },
     {
       "out":[
-        "0x279158b8190",
+        "0x240f451a190",
         "Результат"
       ],
       "in":[
-        "0x279158b9450",
+        "0x240f4520750",
         "Запуск"
       ]
     },
     {
       "in":[
-        "0x279158b9e10",
+        "0x240f451b610",
         "Возвращаемое значение"
       ],
       "out":[
-        "0x279158b9450",
+        "0x240f4520750",
         "Условие запуска"
       ]
     },
     {
       "out":[
-        "0x279158c4150",
+        "0x240f4521990",
         "Выход"
       ],
       "in":[
-        "0x279158c4990",
+        "0x240f4521710",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x279158c4150",
+        "0x240f4521990",
         "Объект"
       ],
       "in":[
-        "0x27913b8dfd0",
+        "0x240f451a550",
         "Цель"
       ]
     },
     {
       "out":[
-        "0x279158c4150",
+        "0x240f4521990",
         "Объект"
       ],
       "in":[
-        "0x279158c5910",
+        "0x240f4522710",
         "Объект-цель"
       ]
     },
     {
       "out":[
-        "0x279158c4990",
+        "0x240f4521710",
         "Выход"
       ],
       "in":[
-        "0x27913b73b90",
+        "0x240f4532310",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x279158c4990",
+        "0x240f4521710",
         "Объект"
       ],
       "in":[
-        "0x279158c5910",
+        "0x240f4522710",
         "Цель"
       ]
     },
     {
       "out":[
-        "0x279158c5910",
+        "0x240f4522710",
         "Результат"
       ],
       "in":[
-        "0x27913b83d90",
+        "0x240f4523550",
         "Число 1"
       ]
     },
     {
       "out":[
-        "0x27913b83d90",
+        "0x240f4523550",
         "Результат"
       ],
       "in":[
-        "0x27913b72a50",
+        "0x240f4530e50",
         "Значение 2"
       ]
     },
     {
       "in":[
-        "0x27913b72a50",
+        "0x240f4530e50",
         "Значение 1"
       ],
       "out":[
-        "0x27913b8dfd0",
+        "0x240f451a550",
         "Результат"
       ]
     },
     {
       "out":[
-        "0x27913b72a50",
+        "0x240f4530e50",
         "Результат"
       ],
       "in":[
-        "0x27913b73b90",
+        "0x240f4532310",
         "Условие"
       ]
     },
     {
       "out":[
-        "0x27913b73b90",
+        "0x240f4532310",
         "Истина"
       ],
       "in":[
-        "0x27913b8ffd0",
+        "0x240f4532c90",
         "Вход"
+      ]
+    },
+    {
+      "in":[
+        "0x240f4533910",
+        "Вход"
+      ],
+      "out":[
+        "0x240f453ce50",
+        "Выход"
+      ]
+    },
+    {
+      "in":[
+        "0x240f4533910",
+        "Цель"
+      ],
+      "out":[
+        "0x240f453ce50",
+        "Объект"
+      ]
+    },
+    {
+      "in":[
+        "0x240f4533910",
+        "Текст"
+      ],
+      "out":[
+        "0x240f453eb10",
+        "Новая строка"
+      ]
+    },
+    {
+      "in":[
+        "0x240f453eb10",
+        "Элемент"
+      ],
+      "out":[
+        "0x240f4544e90",
+        "Результат"
       ]
     }
   ]

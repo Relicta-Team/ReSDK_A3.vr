@@ -11,7 +11,12 @@
 //Растительность
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(Vegetation) extends(Constructions) var(name,"Растительность"); editor_only(var(desc,"Растительность");) endclass
+class(Vegetation) extends(Constructions) 
+	var(name,"Растительность"); 
+	editor_only(var(desc,"Растительность");) 
+	var(material,"MatOrganic");
+	var(dr,1);
+endclass
 
 editor_attribute("EditorGenerated")
 class(SmallMushroom) extends(Vegetation)
@@ -105,6 +110,7 @@ editor_attribute("EditorGenerated")
 class(TreeRoots) extends(Vegetation)
 	var(model,"ml\ml_object_new\model_24\derevo.p3d");
 	var(name,"Корни");
+	var(material,"MatWood");
 endclass
 
 editor_attribute("EditorGenerated")

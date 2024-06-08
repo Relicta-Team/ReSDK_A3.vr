@@ -710,7 +710,7 @@ Description: Отправляет сообщение всем клиентам �
 - Param: _type (optional, default null)
 - Param: _groups (optional, default "")
 
-File: [host\ClientManager\functions.sqf at line 389](../../../Src/host/ClientManager/functions.sqf#L389)
+File: [host\ClientManager\functions.sqf at line 393](../../../Src/host/ClientManager/functions.sqf#L393)
 # OnConnected.sqf
 
 ## cm_maxClients

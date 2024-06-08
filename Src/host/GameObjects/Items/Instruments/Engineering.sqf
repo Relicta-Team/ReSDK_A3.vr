@@ -9,6 +9,9 @@
 
 class(EngineeringToolItem) extends(Item)
 	var(icon,invicon(tool_base));
+	var(material,"MatSynt");
+	var(dr,2);
+	var(weight,gramm(150));
 endclass
 
 
@@ -17,6 +20,8 @@ class(Screwdriver) extends(EngineeringToolItem)
 	var(model,"a3\structures_f\items\tools\screwdriver_v1_f.p3d");
 	var(weight,gramm(58));
 	var(size,ITEM_SIZE_SMALL);
+	var(material,"MatMetal");
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 endclass
 
 class(WireCutters) extends(EngineeringToolItem)
@@ -25,6 +30,7 @@ class(WireCutters) extends(EngineeringToolItem)
 	var(model,"a3\structures_f\items\tools\pliers_f.p3d");
 	var(weight,gramm(60));
 	var(size,ITEM_SIZE_SMALL);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 
 endclass
 
@@ -33,41 +39,46 @@ class(Gloves) extends(EngineeringToolItem)
 	var(weight,gramm(15));
 	var(model,"a3\structures_f\items\tools\gloves_f.p3d");
 	var(size,ITEM_SIZE_SMALL);
+	var(material,"MatCloth");
+	var(dr,1);
 endclass
 
 class(Multimeter) extends(EngineeringToolItem)
 	var(name,"Мультиметр");
-	var(desc,null);
-	getterconst_func(getDesc,"Электроизмерительный прибор");
+	var(desc,"Электроизмерительный прибор");
 	var(model,"a3\structures_f\items\tools\multimeter_f.p3d");
 	var(weight,gramm(80));
 	var(size,ITEM_SIZE_SMALL);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 endclass
 
 class(Wrench) extends(EngineeringToolItem)
 	var(name,"Гаечный ключ");
 	var(model,"a3\structures_f\items\tools\wrench_f.p3d");
+	var(material,"MatMetal");
 	var(weight,gramm(62));
-	var(size,ITEM_SIZE_SMALL);
+	var(size,ITEM_SIZE_TINY);
 endclass
 
 class(Hammer) extends(EngineeringToolItem)
 	var(name,"Мотолок");
 	var(model,"a3\structures_f\items\tools\hammer_f.p3d");
+	var(material,"MatMetal");
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
 	var(weight,gramm(800));
-	var(size,ITEM_SIZE_MEDIUM);
+	var(size,ITEM_SIZE_SMALL);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_SWORD);
 endclass
 
 class(Crowbar) extends(EngineeringToolItem)
 	var(name,"Лом");
-	var(desc,null);
-	getterconst_func(getDesc,"Против лома нет приёма!");
+	var(desc,"Против лома нет приёма!");
 	var(model,"a3\props_f_orange\items\tools\crowbar_01_f.p3d");
+	var(material,"MatMetal");
 	var(attachedWeap,weaponModule(WeapCrowbar));
 	var(weight,5.2);
-	var(size,ITEM_SIZE_LARGE);
+	var(size,ITEM_SIZE_MEDIUM);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_SWORD);
 
@@ -79,8 +90,10 @@ class(Shovel) extends(EngineeringToolItem)
 	var(name,"Лопата");
 	var(attachedWeap,weaponModule(WeapShovel));
 	var(model,"a3\structures_f_epa\items\tools\shovel_f.p3d");
-	var(weight,gramm(720));
-	var(size,ITEM_SIZE_LARGE);
+	var(weight,1.3);
+	var(size,ITEM_SIZE_MEDIUM);
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
+
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_SWORD);
 	var(allowedSlots,[INV_BACK arg INV_BACKPACK]);
@@ -119,16 +132,17 @@ class(ToolPipe) extends(EngineeringToolItem)
 	var(name,"Труба");
 	var(model,"relicta_models\models\weapons\melee\tire\tire.p3d");
 	var(weight,3.4);
-	var(size,ITEM_SIZE_LARGE);
+	var(material,"MatMetal");
+	var(size,ITEM_SIZE_MEDIUM);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_SWORD);
 endclass
 
-class(ToolStraigthPipe) extends(EngineeringToolItem)
+class(ToolStraigthPipe) extends(ToolPipe)
 	var(name,"Труба");
 	var(model,"ml\ml_object_new\model_24\tryba_3.p3d");
 	var(weight,3.7);
-	var(size,ITEM_SIZE_LARGE);
+	var(size,ITEM_SIZE_MEDIUM);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_SWORD);
 endclass

@@ -14,9 +14,9 @@
 #define thisParams _attributeParams
 #define hasParams not_equals(thisParams,[])
 #define getClassName (thisClass getVariable 'classname')
-#define getMemeber(name) (thisClass getVariable 'name')
+#define getMember(name) (thisClass getVariable 'name')
 #define getMemberReflect(name) (thisClass getVariable (name))
-#define hasMember(name) !isNull(getMemeber(name))
+#define hasMember(name) !isNull(getMember(name))
 #define setMember(name,value) thisClass setVariable ['name',value]
 #define setMemberReflect(name,value) thisClass setVariable [name,value]
 #define endAttribute }; ["(OOP) Attribute '" + _oop_attr_last_name + "' loaded."] call logInfo;
@@ -35,7 +35,7 @@
 	newAttribute(PrintHelloworld)
 
 		//override method
-		_ctor = str getMemeber(constructor); //get ctor code as string
+		_ctor = str getMember(constructor); //get ctor code as string
 		_ctor = "call " + _ctor + "; " + 'log("Hello world! " + callSelf(getClassName))';
 		setMember(constructor,compile _ctor); //update ctor
 
@@ -108,7 +108,7 @@ newAttribute(hasField)
 		appExit(APPEXIT_REASON_COMPILATIOEXCEPTION);
 	};
 
-	private _fieldList = getMemeber(__allfields);
+	private _fieldList = getMember(__allfields);
 	{
 		if not_equalTypes(_x,"") exitWith {
 			_iserror = true;
@@ -203,36 +203,37 @@ newAttribute(GenerateWeaponModule)
 		#define ITEM_SIZE_HUGE 6
 	*/
 	_parryBonus = round linearConversion[ITEM_SIZE_TINY,ITEM_SIZE_HUGE,_size,-4,4,true];
-	_dmgBonus = 1;//linearConversion[0.1,50,_weight,0,5,true];
+	//_dmgBonus = 1;//linearConversion[0.1,50,_weight,0,5,true];
+	_dmgBonus = round linearConversion[ITEM_SIZE_TINY,ITEM_SIZE_HUGE,_size,-2,2,true];
 	call {
 
 		if (_size == ITEM_SIZE_TINY) exitWith {
 			_canParry = WEAPON_PARRY_UNABLE;
-			_dmgBonus = -20;
+			//_dmgBonus = -20;
 		};
 		if (_size == ITEM_SIZE_SMALL) exitWith {
 			_canParry = WEAPON_PARRY_UNABLE;
 			
-				_dmgBonus = floor(_dmgBonus * -10);
+			//	_dmgBonus = floor(_dmgBonus * -10);
 			
 		};
 		if (_size == ITEM_SIZE_MEDIUM) exitWith {
 			_canParry = WEAPON_PARRY_ENABLE;
 			
-				_dmgBonus = floor(_dmgBonus * -5);
+			//	_dmgBonus = floor(_dmgBonus * -5);
 			
 		};
 		if (_size == ITEM_SIZE_LARGE) exitWith {
 			_canParry = WEAPON_PARRY_UNBALANCED;
-			_dmgBonus = round(_dmgBonus * -3);
+			//_dmgBonus = round(_dmgBonus * -3);
 		};
 		if (_size == ITEM_SIZE_BIG) exitWith {
 			_canParry = WEAPON_PARRY_UNABLE;
-			_dmgBonus = round(_dmgBonus * -2);
+			//_dmgBonus = round(_dmgBonus * -2);
 		};
 		if (_size == ITEM_SIZE_HUGE) exitWith {
 			_canParry = WEAPON_PARRY_UNABLE;
-			_dmgBonus = round(_dmgBonus * -1);
+			//_dmgBonus = round(_dmgBonus * -1);
 		};
 	};
 	
@@ -244,4 +245,14 @@ newAttribute(GenerateWeaponModule)
 	missionNamespace setVariable [_wmName,_obj];
 	setMember(getGeneratedWeaponModule,compile(_wmName));
 	logformat("INITIALIZED CLASS %1 with wm: %2 %3 %4",getClassName arg _wmName arg _obj arg pt_GeneratedWeapHandyItem);
+endAttribute
+
+
+newAttribute(staticInit)
+	private _func = getMember(staticInit);
+	if isNullVar(_func) exitWith {
+		setLastError("Cant find staticInit function in class " + getClassName);
+	};
+
+	[getClassName,thisClass] call _func
 endAttribute

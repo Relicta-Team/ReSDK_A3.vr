@@ -15,11 +15,6 @@ class(GMStationBase) extends(GMBase)
 		objParams();
 	};
 
-	func(postSetup)
-	{
-		objParams();
-	};
-
 	var(__songIndex,str randInt(1,2));
 	func(getStartSong)
 	{
@@ -42,7 +37,7 @@ class(GMStationBase) extends(GMBase)
 
 	//стандартизированное событие начала раунда
 	//!!! Не рекомендуется к использованию
-	func(onRoundBegin)
+	func(postSetup)
 	{
 		objParams();
 		//init bank money

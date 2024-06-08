@@ -229,6 +229,8 @@ endclass
 class(ChemicalBlender) extends(ElectronicDeviceNode)
 	var(name,"Химический смешиватель");
 	var(model,"ml\ml_object_new\model_24\her.p3d");
+	var(material,"MatMetal");
+	var(dr,5);
 	
 	var(edReqPower,100);
 

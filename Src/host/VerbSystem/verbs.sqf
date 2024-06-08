@@ -146,11 +146,26 @@ verb_tryCollectVerbs = {
 	usr = _mob;
 	private _vData = 0;
 	private _redirName = "";
+	private _verbClassName = "";
+	
+	//script check
+	private _isScripted = callFunc(_targ,isScriptedObject);
+	private _scriptObj = nullPtr;
+	if (_isScripted) then {
+		_scriptObj = getVar(_targ,__script);
+	};
+
 	{
-		_vData = (verbs_funcData get (verb_inverted_list get _x));
+		_verbClassName = verb_inverted_list get _x;
+		_vData = (verbs_funcData get _verbClassName);
 		_condition = _vData select 0;
 		_canAdd = call _condition;
-		//logformat("canadd %1 - %2",_x arg _canAdd);
+
+		if (_isScripted) then {
+			_canAdd = _canAdd && callFuncParams(_scriptObj,canSeeVerb,_mob arg _verbClassName);
+		};
+
+		//logformat("canadd %1 - %2; Scripted - %3",_x arg _canAdd arg _isScripted);
 		if (_canAdd) then {
 			_redirName = null;
 			call (_vData select 2);

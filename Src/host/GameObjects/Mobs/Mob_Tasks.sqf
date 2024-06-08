@@ -30,12 +30,41 @@ region(Memories)
 
 		if (count getSelf(tasks) > 0) then {
 			_txt = _txt + sbr + "<t size='1.4'>Мои задачи:";
+			private _tpref = "";
 			{
-				//error("Mob::getMemories() - probably error at getting tasks");
-				modvar(_txt) + sbr + format["    %1: %2",getVar(_x,name),callFunc(_x,getDescRoleplay)]
+				_tpref = "";
+				if getVar(_x,isDone) then {
+					if (getVar(_x,result) > 0) then {
+						_tpref = "<t color='#00ff00'>[выполнено] </t>";
+					} else {
+						_tpref = "<t color='#ff0000'>[не выполнено] </t>";
+					};
+				};
+				if getVar(_x,customTaskInfo) then {
+					private _tdescEx = callFuncParams(_x,getTaskDescription,this);
+					if (_tdescEx != "") then {
+						modvar(_txt) + sbr + format["    %2%1",_tdescEx,_tpref];
+					};
+				} else {
+					modvar(_txt) + sbr + format["    %3%1: %2",getVar(_x,name),callFuncParams(_x,getTaskDescription,this),_tpref];
+				};
 			} foreach getSelf(tasks);
 			
 			modvar(_txt) +"</t>";
+		};
+
+		private _mobDesc = callSelf(getDesc);
+		if (!isNullVar(_mobDesc) && {_mobDesc!=""}) then {
+			modvar(_txt) + sbr + _mobDesc;
+		};
+
+		private _mpool = [];
+		{
+			_mpool pushBack _x;
+		} foreach getVar(_mem,messages);
+
+		if (count _mpool > 0) then {
+			modvar(_txt) + sbr + "<t color='#5A71A3'>" + (_mpool joinString sbr) + "</t>";
 		};
 
 		{
@@ -83,13 +112,37 @@ region(Memories)
 		callSelfParams(ShowMessageBox,"Text" arg _txt);
 	};
 
+	"
+		name:Добавить воспоминание
+		desc:Добавляет мобу сообщение, отображаемое в его воспоминаниях. Если у персонажа нет головы или мозга - воспоминание не будет добавлено.
+		type:method
+		lockoverride:1
+		in:string:Воспоминание:Текст воспоминания
+		return:int:Индекс добавленного сообщения для возможности последующего удаления.
+	" node_met
 	func(addMemory)
 	{
 		objParams_1(_txt);
 
-		if !callSelf(hasBrain) exitWith {};
+		if !callSelf(hasBrain) exitWith {-1};
 		private _mem = getVar(callSelf(getBrain),memories);
 		callFuncParams(_mem,addMemory,_txt);
+	};
+
+	"
+		name:Удалить воспоминание
+		desc:Удаляет воспоминание моба. Если у персонажа нет головы или мозга - воспоминание не будет удалено.
+		type:method
+		lockoverride:1
+		in:int:Индекс:Индекс воспоминания для удаления
+		return:bool:Удалено ли воспоминание. Если у персонажа нет мозга или индекс принимает недопустимое значение - возвращает @[bool ЛОЖЬ]
+	" node_met
+	func(removeMemory)
+	{
+		objParams_1(_h);
+		if !callSelf(hasBrain) exitWith {false};
+		private _mem = getVar(callSelf(getBrain),memories);
+		callFuncParams(_mem,removeMemory,_h);
 	};
 
 endregion

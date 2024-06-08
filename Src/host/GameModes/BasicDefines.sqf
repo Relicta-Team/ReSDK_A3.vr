@@ -75,23 +75,6 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 		objParams_3(_client,_mob,_index);
 	};
 
-	//Обработчик явных ролей. _index начинается с 1. вызывается когда уже все клиенты распределены по ролям и загрузились в игру
-	//В этом методе доступна внешняя ссылка _countClientsInGame - количество людей в раунде
-	//TODO remove this method after GM_STARTLOGIC_2_0 release
-	func(handleAntagRoleFull)
-	{
-		objParams_3(_client,_mob,_index);
-		false
-	};
-
-	//Алгоритм получения роли для списка игроков которые остались в пуле незаспавненных с прожатой кнопкой готовости при старте раунда
-	//TODO remove this method after GM_STARTLOGIC_2_0 release
-	func(getRoleForPostClient)
-	{
-		objParams_2(_client,_index);
-		//OBSOLETE METHOD. not used
-	};
-
 	//getterconst_func(getAntagsRoles,[]);//строковые типы антагов (Роли) сюда суём
 
 	var(finishResult,0); //Системная переменная. Устанавливается снаружи класса
@@ -110,12 +93,6 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 
 	//Вызывается после начала раунда когда все клиенты зашли в игру
 	func(postSetup)
-	{
-		objParams();
-	};
-
-	//!Устаревший метод. Используйте postSetup
-	func(onRoundBegin)
 	{
 		objParams();
 	};

@@ -33,6 +33,20 @@ class(object) basic()
 	};
 
 	"
+		name:Получить класснейм родителя
+		namelib:Получить имя класса родителя
+		desc:Получает имя родительского класса, от которого унаследован объект. Не рекомендуется использовать этот узел для объектов типа object.
+		type:get
+		lockoverride:1
+		return:classname:Имя класса
+	" node_met
+	func(getParentClassName)
+	{
+		objParams();
+		this getVariable PROTOTYPE_VAR_NAME getVariable "__motherClass"
+	};
+
+	"
 		name:Получить класс
 		namelib:Получить класс объекта
 		desc:Получает класс объекта. Класс объекта - это специальный тип, содержащий информацию о самом классе а не о его экземплярах.
@@ -118,6 +132,8 @@ class(ManagedObject) extends(object)
 	// Указывает будет ли запущена функция обновления при создании объекта
 	getterconst_func(startUpdateOnConstruct,false);
 
+	getterconst_func(defaultUpdateDelay,1);
+
 	//включена ли подсистема автоочистки autoref переменных
 	getter_func(enableAutoRefGC,true);
 
@@ -135,7 +151,9 @@ class(ManagedObject) extends(object)
 		objParams_1(_mode);
 		if (callSelf(isUpdateActive) == _mode) exitWith {};
 		if (_mode) then {
-			setSelf(__handleUpdateNative__,startUpdateParams(getSelfFunc(onUpdate),1,[this]));
+			if (!isImplementFunc(this,onUpdate)) exitWith {};
+
+			setSelf(__handleUpdateNative__,startUpdateParams({(_this select 0)params["_p" arg "_c"]; _p call _c},callSelf(defaultUpdateDelay),[this arg getSelfFunc(onUpdate)]));
 			INC(oop_upd);
 		} else {
 			private _hnd = getSelf(__handleUpdateNative__);

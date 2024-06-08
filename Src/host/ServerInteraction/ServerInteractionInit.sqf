@@ -455,6 +455,7 @@ si_onBulletAct = {
 		#define logshotgun(txt,vars)
 	#endif
 
+	logshotgun("Process bullet damage: ",_dam arg _type arg _selection arg _usr arg _weapon)
 	logshotgun("Distance and half distance info:",_distance arg _halfDistance)
 
 	//половина повреждений при дистанции большей чем 1/2
@@ -612,6 +613,7 @@ si_throwModes = [
 					#endif
 					(_x getVariable "_dmgData")params ["_dam","_type","_selection","_usr"];
 					_throwed = _x getVariable "_sysRef";
+					__INTERNAL_THROWED_VIRTUAL__ = _x;
 					_distance = linearConversion[0,1,_interp,0,(_x getVariable "_distance")];
 					callFuncParams(_targ,onThrowHit,_dam arg _type arg _selection arg _usr arg _distance arg _throwed)
 				};

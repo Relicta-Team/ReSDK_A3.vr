@@ -20,6 +20,19 @@ node_system_group("conversion")
     out:string:Строка
 " node_system
 
+"
+    node:anyToBool
+    name:В булево
+    path:Преобразования
+    desc:Преобразует любое значение в булево. Любые числа, равные нулю, инвалидные объекты (null-ссылки) преобразуются в @[bool ЛОЖЬ]. Во всех остальных случаях выполняется преобразование в @[bool ИСТИНА].
+    rendertype:NoHeaderText
+    exec:pure
+    code:[@in.1]call rv_cppcheck
+    in:auto:Значение
+        opt:typeget=ANY;@type
+    out:bool:Результат
+" node_system
+
 _convFunc = {
     params ["_name","_code","_in","_out",["_desc","Преобразование"]];
     (_in splitString ":")params ["_intype","_inname"];
@@ -57,9 +70,9 @@ format["
 //stringToBool
 (["stringToBool","(trim(@in.1)==""true"")","string:Строка","bool:Булево","Преобразование строки в логическое значение"] call _convFunc) node_system
 //arrayToBool
-(["arrayToBool","(count (@in.1) > 0)","auto:Массив" opt "typeget=array;@type","bool:Булево","Преобразование массива в логическое значение. Пустой массив является ЛОЖЬЮ, не пустой - ИСТИНОЙ."] call _convFunc) node_system
+(["arrayToBool","(count (@in.1) > 0)","auto:Массив" opt "typeget=array;@type","bool:Булево","Преобразование массива в логическое значение. Пустой массив является @[bool ЛОЖЬЮ], не пустой - @[bool ИСТИНОЙ]."] call _convFunc) node_system
 //objectToBool
-(["objectToBool","!ISNULL(@in.1)","object^:Объект","bool:Булево","Преобразование объекта в логическое значение. Валидный (существующий) объект является ИСТИНОЙ, несуществующий (удаленный) - ЛОЖЬЮ."] call _convFunc) node_system
+(["objectToBool","!ISNULL(@in.1)","object^:Объект","bool:Булево","Преобразование объекта в логическое значение. Валидный (существующий) объект является @[bool ИСТИНОЙ], несуществующий (удаленный) - @[bool ЛОЖЬЮ]."] call _convFunc) node_system
 
 //boolToString -> use valueToString
 //(["boolToString","str(@in.1)","bool:Булево","string:Строка","Преобразование логического значения в строку"] call _convFunc) node_system
@@ -112,8 +125,8 @@ format["
 " node_system
 
 //enum helpers
-(["enumToInt","@in.1","auto:Перечилсение"/*TODO +endl+"opt:allowtypes=>enum."*/,"int:Число","Преобразование значения перечисления в целое число"] call _convFunc) node_system
-(["enumToString","enum_vToK_@gettype.in.1 get str(@in.1)","auto:Перечисление","string:Имя","Преобразование значения перечисления в его название"] call _convFunc) node_system
+(["enumToInt","@in.1","auto:Перечилсение" opt "allowtypes=*enum","int:Число","Преобразование значения перечисления в целое число"] call _convFunc) node_system
+(["enumToString","enum_vToK_@gettype.in.1 get str(@in.1)","auto:Перечисление" opt "allowtypes=*enum","string:Имя","Преобразование значения перечисления в его название"] call _convFunc) node_system
 
 (["structToList","@in.1","auto:Структура"+endl+"opt:allowtypes=*struct","list:Лист"]call _convFunc) node_system
 

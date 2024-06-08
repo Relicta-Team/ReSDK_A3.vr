@@ -35,6 +35,7 @@
 
 #include "ClientData_forceWalk.sqf"
 
+#include "ClientData_customAnims.sqf"
 
 //уникальное имя клиента
 cd_clientName = "";
@@ -512,8 +513,13 @@ _authResult = {
 
 //client side animator
 _anim = {
-	(_this select 0) switchmove (_this select 1)
+	(_this select 0) switchmove (_this select 1);
 }; rpcAdd("switchMove",_anim);
+
+_anim = {
+	(_this select 0) switchmove (_this select 1);
+	(_this select 0) playMoveNow (_this select 1); //fix force switchmove for fuckedup animations configs
+}; rpcAdd("switchMove_force",_anim);
 
 //Плавная смена анимации
 _anim = {

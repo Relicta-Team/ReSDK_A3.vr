@@ -12,6 +12,8 @@ class(Grenade) extends(Item)
 	var(name,"Разрывная граната");
 	var(model,"relicta_models\models\weapons\rgd5.p3d");
 	var(weight,gramm(310));
+	var(size,ITEM_SIZE_SMALL);
+	var(dr,4);
 	var(isReady,false);
 
 	var(explosionTimeout,5);

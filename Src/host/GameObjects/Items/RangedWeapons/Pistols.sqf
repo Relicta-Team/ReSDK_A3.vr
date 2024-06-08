@@ -25,8 +25,9 @@ class(PistolPBM) extends(IRangedWeapon)
 	getter_func(getAmmoCaliber,"9мм");
 	getter_func(getShootDamageType,DAMAGE_TYPE_PIERCING_NO);
 	var(allowedSlots,[INV_BELT]);
-	var(size,ITEM_SIZE_MEDIUM);
+	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(730));
+	var(dr,4);
 	getter_func(getReqST,8);
 
 endclass
@@ -47,7 +48,7 @@ class(Revolver) extends(IRangedWeapon)
 	getter_func(getReqMagazineType,"MagazineRevolver");
 	getter_func(getShootDamageType,DAMAGE_TYPE_PIERCING_NO);
 	var(allowedSlots,[INV_BELT]);
-	var(size,ITEM_SIZE_MEDIUM);
+	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(750));
 	getter_func(getReqST,8);
 	//sounds
@@ -237,7 +238,7 @@ class(PistolHandmade) extends(IRangedWeapon)
 	var(name,"Пистолет ""Дудатрёп""");
 	var(model,"relicta_models\models\weapons\fireweapon\handmade\newarmypistol\newarmypistol.p3d");
 
-	var(size,ITEM_SIZE_MEDIUM);
+	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(820));
 	getter_func(getReqST,8);
 	var(basicDistance,150);

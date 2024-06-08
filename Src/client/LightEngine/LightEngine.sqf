@@ -17,6 +17,8 @@
 #include "ScriptedEffectConfigs.sqf"
 //prepare cfgs
 call le_se_doSorting;
+//create drop emitter map
+call le_se_internal_createDropEmitterMap;
 
 #include "LightConfigs.sqf"
 #include "FireLightConfigs.sqf"
@@ -344,6 +346,14 @@ le_debug_lightRender = {
 
 	}; startUpdateParams(_evlight,0.01,[lightObject arg sourceObject arg _renderMode]);
 };
+
+//render damage effect for objects
+_dofe = {
+	params ["_pos","_type","_norm"];
+	traceformat("damage effect normal: %1",_norm)
+	[_type,_pos,_norm] call le_se_fireEmit;
+};
+rpcAdd("do_fe",_dofe);
 
 
 //OBSOLETE

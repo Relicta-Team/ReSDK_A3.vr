@@ -8,18 +8,35 @@
 	
 	addCommand("showthreads",PUBLIC_COMMAND)
 	{
-		_t = "Active threads: ";
+		_t = format["Active %1 threads: ",count cba_common_perFrameHandlerArray];
 		{
 			_delay = _x select 1;
 			_startedAt = _x select 3;
+			_threadLocation = _x select 6;
+			// _threadStacktrace = +(_x select 7);
+			// reverse _threadStacktrace;
+			// _ist = _threadStacktrace findif {_x select 0 != ""};
+			// if (_ist == -1) then {
+			// 	_threadStacktrace = endl + "Unknown stacktrace region";
+			// } else {
+			// 	_tlist = (_threadStacktrace select [0,_ist+1]) apply {"		"+(_x call scriptError_internal_handleStack_short)};
+			// 	_tlist = _tlist - [""];
+			// 	_threadStacktrace = endl + ((_tlist) joinString endl);
+			// };
+			// _threadStacktrace = endl + ((_threadStacktrace apply {"	" + (_x call scriptError_internal_handleStack_short)}) joinString endl);
+			_threadStacktrace = ""; // not implemented now...
+
 			_code = (toString (_x select 0)) splitString ";";
+			
+			_threadStacktrace = [_threadStacktrace,endl,sbr] call stringReplace;
+
 			if (count _code > 0 && {[_code select 0,"private ___fn___ = ",false] call stringStartWith}) then {
 				_code = _code select 0;
 				_code = _code select [count "private ___fn___ = ",count _code];
 
-				modvar(_t) + sbr + (format["%1 (per %2s, started %3s ago)",_code,_delay,tickTime - _startedAt]);
+				modvar(_t) + sbr + (format["<t color='#00ff00'>%1</t> (per %2s, started %3s ago): %4%5",_code,_delay,tickTime - _startedAt,_threadLocation,_threadStacktrace]);
 			} else {
-				modvar(_t) + sbr + (format["Unk thread %1",_x select 5]);
+				modvar(_t) + sbr + (format["<t color='#00ff00'>Unk thread %1</t> (per %4s, started %5s ago): %2%3",_x select 5,_threadLocation,_threadStacktrace,_delay,tickTime - _startedAt]);
 			};
 		} foreach cba_common_perFrameHandlerArray;
 
@@ -238,4 +255,17 @@ addCommandWithDescription("playtarget",ACCESS_OWNERS,"Перейти за дру
 };
 
 
+#endif
+
+#ifdef EDITOR
+addCommandWithDescription("rcsphere",PUBLIC_COMMAND,"Скрыть или показать желтую сферу при интеракциях")
+{
+	if (parseNumber args == 0) then {
+		si_internal_rayObject hideObject true;
+		["Курсор выключен","system"] call chatPrint;
+	} else {
+		si_internal_rayObject hideObject false;
+		["Курсор включен","system"] call chatPrint;
+	};
+};
 #endif

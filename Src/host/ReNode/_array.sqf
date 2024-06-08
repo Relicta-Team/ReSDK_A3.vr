@@ -12,6 +12,7 @@ node_system_group("array")
     namelib:Создание массива
     desc:Создает массив из указанных элементов
     icon:data\\icons\\icon_Blueprint_MakeArray_16x.png
+    color:PureFunction
     exec:pure
     code:[ @genport.in.1(,) ]
     in:auto:[0]
@@ -19,6 +20,20 @@ node_system_group("array")
     out:auto:Массив
         opt:typeget=array;@type
     option:""makeport_in""\: {""type""\: ""makeport_in"",""src""\:""[0]"",""text_format""\:""[{index}]""}
+" node_system
+
+"
+    node:makeArrayEmpty
+    path:Массивы
+    name:Создать пустой массив
+    namelib:Создание пустого массива
+    desc:Создает пустой массив для возможности заполнения пользователем.
+    icon:data\\icons\\icon_Blueprint_MakeArray_16x.png
+    color:PureFunction
+    exec:pure
+    code:[]
+    out:auto:Массив
+        opt:typeget=array;@type
 " node_system
 
 "
@@ -72,7 +87,7 @@ node_system
 "
     node:isValidIndex
     name:Индекс существует
-    desc:Проверяет является ли индекс существующим (валидным), возвращая ИСТИНУ, если он находится в диапазоне размера массива. Для массива [5,6,7] индекс 4 будет инвалиден, а индекс 2 - валиден.
+    desc:Проверяет является ли индекс существующим (валидным), возвращая @[bool ИСТИНУ], если он находится в диапазоне размера массива. Для массива [5,6,7] индекс 4 будет инвалиден, а индекс 2 - валиден.
     icon:data\\icons\\ArrayPin.png
     rendertype:NoHeader
     autocoloricon:1
@@ -116,8 +131,8 @@ node_system
     node:swap
     name:Заменить
     desc:Заменяет два элемента массива местами.
-    icon:data\\icons\\ArrayPin.png
-    rendertype:NoHeader
+    icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:Function
     exec:all
     code:[@in.1,@in.2,@in.3] call arraySwap; @out.1
     in:auto:Массив:Ссылка на массив
@@ -132,8 +147,8 @@ node_system
 	name:Установить элемент
 	namelib:Установка элемента массива
 	desc:Устанавливает элемент массива по указанному индексу.
-	icon:data\\icons\\ArrayPin.png
-
+	icon:data\\icons\\icon_BluePrintEditor_Function_16px
+    color:Function
 	exec:all
 	code:(@in.2)set[@in.3,@in.4]; @out.1
 	in:auto:Массив:Ссылка на массив, в котором будет установлен элемент по указанному индексу.
@@ -155,7 +170,7 @@ node_system
     in:auto:Массив:Ссылка на массив, который будет скопирован.
         opt:typeget=array;@type
     out:auto:Массив:Скопированный массив. Любые изменения в этой копии не будут влиять на исходный массив.
-        opt:typeget=array;@value.1
+        opt:typeget=array;@type
 " node_system
 
 //count
@@ -208,23 +223,24 @@ node_system
     out:int:Индекс:Возвращает -1 если элемент не найден, иначе возвращает индекс элемента в массиве.
 " node_system
 
-//findif //!Нужны генераторы локальных функций
+//! всё ещё не оптимизировано. в локальной функции параметр не итерируемый
+//findif
 // "
 //     node:findif
 //     name:Найти элемент по условию
-//     namelib:Поиск элемента по условию
-//     desc:Поиск элемента в массиве по условию
-//     icon:data\\icons\\ArrayPin.png
+//     namelib:Найти элемент по условию
+//     desc:Поиск элемента в массиве по условию."+
+//     "\nПараметры анонимной функции\:"+
+//     " Вход - любое значение. Выход - @[bool Условие] - был ли найден искомый элемент
+//     icon:data\\icons\\icon_BluePrintEditor_Function_16px
 //     exec:pure
 //     rendertype:NoHeader
-//     autocoloricon:1
-//     code:(@in.1) findif {@genvar.out.2.internal(_x) (@out.2)}
+//     code:(((@in.1) findif (@in.2))!=-1)
 //     in:auto:Массив
 //         opt:typeget=array;@type
-//     out:bool:Условие
-//     out:auto:Проверяемый элемент
-//         opt:typeget=array;@value.1
-//     out:bool:Результат:Истина, если элемент найден в массиве, иначе ложь
+//     in:auto:Функция
+//         opt:typeget=function;@value.1;function[anon=bool={}]
+//     out:bool:Результат:@[bool ИСТИНА], если элемент найден в массиве, иначе @[bool ЛОЖЬ]
 
 // " node_system
     
@@ -359,7 +375,7 @@ node_system
     in:auto:Массив
         opt:typeget=array;@type
     in:int:Индекс:Индекс, с которого начинается удаление элементов массива
-    int:int:Количество:Количество элементов для удаления
+    in:int:Количество:Количество элементов для удаления
 " node_system
 
 //sort
@@ -436,10 +452,12 @@ node_system
     rendertype:NoHeader
     autocoloricon:1
     exec:all
-    code:(@in.2) append (@in.3); @out.1
+    code:private @genvar.out.2 = (@in.2); @locvar.out.2 append (@in.3); @out.1
     in:auto:Источник:Первый массив, к котрому будут добавлены все элементы из второго.
         opt:typeget=array;@type
     in:auto:Добавляемый:Второй массив, элементы которого будут добавлены в первый массив.
+        opt:typeget=array;@type
+    out:auto:Источник:Ссылка на массив-источник
         opt:typeget=array;@type
 " node_system
 
@@ -448,7 +466,7 @@ node_system
 //     node:apply
 //     name:Применить к массиву
 //     namelib:Применить к массиву
-//     desc:Применяет операцию к каждому элементу массива и возвращает новый массив с обновленными элементами
+//     desc:Применяет операцию (анонимную функцию) к каждому элементу массива и возвращает новый массив с обновленными элементами
 //     icon:data\\icons\\ArrayPin.png
 //     rendertype:NoHeader
 //     autocoloricon:1

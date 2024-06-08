@@ -188,7 +188,7 @@ oop_getFieldBaseValue = {
 
 	private _type = missionNamespace getVariable ["pt_"+_type,nullPtr];
 	if isNullReference(_type) exitWith {
-		errorformat("oop::getFieldBaseValue() - Cant find type '%1'",_type);
+		errorformat("oop::getFieldBaseValue() - Cant find field '%2+%3' in type '%1'",_type arg _field arg _altMethodNameIfNil);
 		null;
 	};
 

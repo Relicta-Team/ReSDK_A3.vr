@@ -16,6 +16,9 @@ class(AmmoBoxBase) extends(Item)
 	getter_func(specialAmmoName,"");
 	getter_func(getCaliberName,getFieldBaseValueWithMethod(callSelf(createdType),"", "getCaliber"));
 	var(model,"ml\ml_object_new\model_24\patroni.p3d");
+	var(material,"MatPaper");
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
+	var(dr,1);
 	func(getName)
 	{
 		objParams();

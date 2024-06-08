@@ -36,11 +36,3 @@
 #ifdef EDITOR
 //#define PRE_LOBBY_AWAIT_TIME 1
 #endif
-
-#define GM_STARTLOGIC_2_0
-
-#ifdef GM_STARTLOGIC_2_0
-	#define SL20Func(name) name##_sl20
-#else
-	#define SL20Func(name) 
-#endif

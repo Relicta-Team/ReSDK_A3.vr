@@ -97,6 +97,11 @@ _iact = {
 
 	};
 	if (_type == INTERACT_RPC_EXTRA) exitWith {
+		//скриптовая проверка с защитой переполнения стека
+		if (callFunc(_target,isScriptedObject) && {isNullVar(__SCRIPT_EXACT_ACTION__)}) exitWith {
+			private __SCRIPT_EXACT_ACTION__ = true;
+			callFuncParams(getVar(_target,__script),onExtraAction,this);
+		};
 		callSelfParams(extraAction,_target);
 	};
 
@@ -288,6 +293,7 @@ _onInteractInventoryWith = {
 		_withItem = callFunc(_withItem,rewriteSystemItem);
 	};
 
+	//emplace item into container
 	if callFunc(_item,isContainer) then {
 		callFuncParams(_item,onInteractWith,_withItem arg this);
 	};
@@ -322,6 +328,8 @@ _onMainAction = {
 	};
 	if callSelf(isHandcuffed) exitwith {};
 	if (isTypeOf(_item,StolenItem)) exitWith {callFuncParams(_item,onStolen,this);};
+
+	if callFunc(_item,isScriptedObject) exitWith {callFuncParams(getVar(_item,__script),onMainAction,this)};
 
 	callFuncParams(_item,onMainAction,this);
 }; rpcAdd("onMainAction",_onMainAction);
@@ -553,6 +561,12 @@ _onStrafeCatch = {
 		};
 	};
 }; rpcAdd("onStrafeCatch",_onStrafeCatch);
+
+__resetCustomAnim = {
+	params ["_mobObj"];
+	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
+	callSelfParams(setCustomActionState,CUSTOM_ANIM_ACTION_NONE arg true);
+}; rpcAdd("__resetCustomAnim",__resetCustomAnim);
 
 /**************************************************************************
 |					ONE SYNC SERVER EVENTS								  |

@@ -25,8 +25,8 @@ _provider_isRoundEnding = {
 _provider_getState = {
 	private _ind = [GAME_STATE_PRELOAD,GAME_STATE_LOBBY,GAME_STATE_PLAY,GAME_STATE_END] find _this;
 	if (_ind == -1) exitWith {
-		errorformat("Cant find game state enum %1. Returns GAME_STATE_LOBBY",_this);
-		GAME_STATE_LOBBY
+		errorformat("Cant find game state enum %1. Returns unknown state",_this);
+		format["GAME_STATE_UNKNOWN_%1",_this]
 	};
 	
 	["GAME_STATE_PRELOAD","GAME_STATE_LOBBY","GAME_STATE_PLAY","GAME_STATE_END"] select _ind
@@ -40,6 +40,7 @@ _provider_checkState = {
 	
 	if (_idx == -1) exitWith {
 		errorformat("[GAMEMODE:COMMON]: Unknown game state str <%1>",_stateStr);
+		false
 	};
 	if equals(_comparer,"==") exitWith {gm_state == _idx};
 	if equals(_comparer,"!=") exitWith {gm_state != _idx};

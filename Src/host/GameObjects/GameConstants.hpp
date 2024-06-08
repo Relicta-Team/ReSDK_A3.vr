@@ -10,6 +10,7 @@
 #include <ConstantAndDefines\Life.h>
 #include <ConstantAndDefines\Chemistry.h>
 #include <ConstantAndDefines\Cleanable.h>
+#include <ConstantAndDefines\ObjectsHP.h>
 #include <..\MatterSystem\MatterSystem.hpp>
 #include <Items\Item_HandAnim.hpp>
 #include <..\CraftSystem\Craft.hpp>
@@ -95,6 +96,11 @@
 
 //из киллограмм в фунты
 #define kgToLb(val) ((val)*2)
+
+//дюймы в метры
+#define inchToMeters(val) ((val)/39.37)
+//метры в футы
+#define metersToFeet(val) ((val)*3.289)
 
 #define DISTANCE_WORLDSAY 15
 

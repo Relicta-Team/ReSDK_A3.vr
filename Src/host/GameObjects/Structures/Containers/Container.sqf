@@ -21,6 +21,7 @@ editor_attribute("InterfaceClass")
 class(SContainer) extends(IContainerStruct)
 	var_exprval(countSlots,DEFAULT_BOX_STORAGE); //количество слотов (доступный объём контейнера)
 	var(maxSize,ITEM_SIZE_BIG); //максимальный допустимый объем предмета для укладки в контейнер
+	var(dr,2);
 endclass
 
 //virtual
@@ -45,11 +46,14 @@ endclass
 class(KeyHolder) extends(SContainer)
 	var(name,"Ключница");
 	var(model,"ml_shabut\exodus\sdaykey.p3d");
+	var(material,"MatSynt");
+	var(dr,1);
 endclass
 
-class(InfoBoard) extends(SContainer)
+class(InfoBoard) extends(KeyHolder)
 	var(name,"Доска информации");
 	var(model,"ml_shabut\exodus\infotablicka.p3d");
+	var(material,"MatWood");
 endclass
 
 

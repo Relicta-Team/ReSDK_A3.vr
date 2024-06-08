@@ -21,6 +21,7 @@ class(Knife) extends(IMeleeWeapon)
 	getter_func(getUnequipSound,"updown\knife_equip");
 	var(attachedWeap,weaponModule(WeapKnife));
 	var(weight,gramm(200));
+	var(dr,6);
 	var(size,ITEM_SIZE_MEDIUM);
 
 	var(allowedSlots,[INV_BELT]);
@@ -69,23 +70,30 @@ class(KitchenKnife) extends(Knife)
 	var(desc,"Иногда для готовки" + comma + " иногда для самообороны.");
 	var(model,"relicta_models\models\weapons\melee\knife2\knife2.p3d");
 	var(attachedWeap,weaponModule(WeapLittleKnife));
+	var(dr,3);
 endclass
 
 class(CombatKnife) extends(Knife)
 	var(name,"Боевой нож");
 	var(model,"relicta_models\models\weapons\melee\warknife3\warknife3.p3d");
-	var(weight,gramm(240));
+	var(weight,gramm(750));
+	var(size,ITEM_SIZE_SMALL);
 endclass
 
 class(DaggerKnife) extends(Knife)
 	var(name,"Кинжал");
 	var(model,"relicta_models\models\weapons\melee\ceremonial.p3d");
 	var(attachedWeap,weaponModule(WeapDaggerKnife));
+	var(size,ITEM_SIZE_SMALL);
+	var(weight,gramm(600));
 endclass
 
 class(SurgeryScalpel) extends(Knife)
 	var(name,"Скальпель");
 	var(model,"relicta_models\models\weapons\melee\shank\shank.p3d");
 	var(attachedWeap,weaponModule(WeapLittleKnife));
+	var(dr,4);
+	var(size,ITEM_SIZE_SMALL);
+	var(weight,gramm(460));
 	
 endclass

@@ -5,6 +5,8 @@
 
 #include <..\..\NOEngine\NOEngine.hpp>
 
+interfaceHeader
+
 /*
 	Trigger interface:
 

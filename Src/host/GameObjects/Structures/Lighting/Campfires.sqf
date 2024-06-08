@@ -52,6 +52,8 @@ class(Campfire) extends(ICampfireStruct)
 	var(desc,"Главный источник тепла и света.");
 	var(light,LIGHT_CAMPFIRE);
 	var(model,"a3\structures_f\civ\camping\fireplace_f.p3d");
+	var(material,"MatStone");
+	var(dr,2);
 	getterconst_func(isFireLight,true);
 
 	var(fuelLeft,60 * 25); //сколько топлива осталось
@@ -171,6 +173,7 @@ class(CampfireBig) extends(Campfire)
 	var(desc,"Он достаточно хорошо закидан различными горящими материалами, что позволит осветить и согреть окружение на долгий срок.");
 	var(light,LIGHT_CAMPFIRE_BIG);
 	var(model,"ml_shabut\drova\pepelishe.p3d");
+	var(dr,3);
 	var(fuelLeft,-1);
 	//getterconst_func(allowedConnectItems,[]);
 	getter_func(canConnect,false);
@@ -185,11 +188,14 @@ editor_attribute("EditorGenerated")
 class(BarrelCampfireBig) extends(CampfireBig)
 	var(model,"a3\props_f_enoch\military\garbage\garbagebarrel_02_buried_f.p3d");
 	var(name,"Костёр в бочке");
+	var(material,"MatMetal");
+	var(dr,2);
 endclass
 
 editor_attribute("EditorGenerated")
 class(BarrelCampfireBig1) extends(BarrelCampfireBig)
 	var(model,"ml_shabut\stalker_props\kosterchik.p3d");
+	var(material,"MatMetal");
 endclass
 
 class(CampfireDisabled) extends(Campfire)

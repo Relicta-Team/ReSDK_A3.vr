@@ -13,6 +13,9 @@ class(Armor) extends(Cloth)
 
 	var(countSlots,10);
 	var(maxSize,ITEM_SIZE_MEDIUM);
+	var(dr,2);
+	var(coverage,70);
+	var(bodyPartsCovered,TORSO);
 
 	func(armaItemAddImpl)
 	{
@@ -73,7 +76,7 @@ class(ArmorCeramic) extends(ArmorVST)
 	var(desc,"Собирается в больших городах и имеет хорошую защиту.");
 	var(armaClass,VST_CLOTH_CERAMIC);
 	
-	var(weight,10);
+	var(weight,24);
 	var(size,ITEM_SIZE_BIG);
 	var(allowedSlots,[INV_ARMOR]);
 	var(canUseContainer,false);
@@ -105,7 +108,7 @@ endclass
 class(ArmorLite) extends(Armor)
 	var(name,"Легкий бронежилет");
 	var(canUseContainer,true);
-	var(weight,2.8);
+	var(weight,3.4);
 	var(allowedSlots,[INV_ARMOR]);
 	var_exprval(countSlots,BASE_STORAGE_CAPACITY(2));
 	var(armaClass,"FRITH_ruin_vestia_lite_ltr");
@@ -117,7 +120,7 @@ endclass
 class(ArmorMedium) extends(ArmorLite)
 	var(name,"Улучшенный бронежилет");
 	var(armaClass,"FRITH_ruin_vestia_ltr");
-	var(weight,3.7);
+	var(weight,4.3);
 	var(bodyPartsCovered,UPPER_TORSO + LOWER_TORSO + GROIN);
 	var(dr,7);
 endclass
@@ -125,7 +128,7 @@ endclass
 class(ArmorHeavy) extends(ArmorLite)
 	var(name,"Тяжелый бронежилет");
 	var(armaClass,"FRITH_ruin_vestiaGL_ltr");
-	var(weight,5.2);
+	var(weight,5.8);
 	var(bodyPartsCovered,UPPER_TORSO + LOWER_TORSO + GROIN + NECK + ARMS);
 	var(dr,10);
 endclass

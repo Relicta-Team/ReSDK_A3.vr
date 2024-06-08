@@ -10,7 +10,11 @@
 //большие стены
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
-class(BigWall) extends(BigConstructions) var(name,"Большая стена"); editor_only(var(desc,"Огромная стена выполняющая роль ограничения доступной зоны. Не разрушаема");) endclass
+class(BigWall) extends(BigConstructions) 
+	var(name,"Большая стена"); 
+	var(material,"MatStone");
+	editor_only(var(desc,"Огромная стена выполняющая роль ограничения доступной зоны. Не разрушаема");)
+endclass
 
 editor_attribute("EditorGenerated")
 class(StoneArch) extends(BigWall)

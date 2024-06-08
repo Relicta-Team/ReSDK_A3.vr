@@ -33,11 +33,15 @@ private __FUNCITONS_LOAD_ONLY__ = true;
 #include "_model.sqf"
 #include "_hashmap.sqf"
 #include "_objects.sqf"
-#include "_system.sqf"
+
 //типы стандартных перечислений
 #include "_enums.sqf"
 //структуры
 #include "_structures.sqf"
+
+//dependency enums
+#include "_clients.sqf"
+#include "_system.sqf"
 
 nodeModule_register("native_functions")
 
@@ -47,6 +51,9 @@ nodeModule_setPath("Игровые объекты.Утилиты")
 #include "..\NOEngine\NOEngine.hpp"
 #include "..\PointerSystem\pointers.hpp"
 #include "..\NOEngine\NOEngine_ObjectManager.sqf"
+
+nodeModule_setPath("Игровая логика.Ролевая система")
+#include "..\GURPS\Gurps.sqf"
 
 nodeModule_register("clients")
 nodeModule_setPath("Клиенты")
@@ -62,8 +69,12 @@ nodeModule_setPath("Контроль игры")
 #include "..\GamemodeManager\GamemodeFunctions.sqf"
 
 nodeModule_register("taskSystem")
-nodeModule_setPath("Игровая логика.Задачи")
+nodeModule_setPath("Игровая логика.Задачи.Утилиты")
 
 #include "..\GameModes\taskSystem_functions.sqf"
+
+nodeModule_register("namingSystem")
+nodeModule_setPath("Игровая логика.Характеристики.Национальности")
+#include "..\Namings\Naming_nodes.sqf"
 
 //
