@@ -589,6 +589,11 @@ class(GameObject) extends(ManagedObject)
 	{
 		objParams();
 
+		if callSelf(isFlying) exitWith {
+			assert_str(!isNullVar(__INTERNAL_THROWED_VIRTUAL__),"Object is flying but visual object is null -> __INTERNAL_THROWED_VIRTUAL__");
+			__INTERNAL_THROWED_VIRTUAL__
+		};
+
 		private _curLoc = this;
 		private _probNewLoc = nullPtr;
 		while {true} do {
@@ -604,7 +609,7 @@ class(GameObject) extends(ManagedObject)
 			};
 			_curLoc = _probNewLoc;
 		};
-
+		
 		_curLoc;
 	};
 
@@ -1216,7 +1221,19 @@ region(throwing and bullets functions)
 	func(onThrowHit) //вызывается при попадании в цель
 	{
 		objParams_6(_dam,_type,_sel,_usr,_dist,_throwed);
+		//_p is outref
+		private _drObj = getSelf(dr);
+		callSelfParams(applyDamage,_dam arg _type arg _p arg "throw_hit");
 
+		private _matObj = getVar(_throwed,material);
+		private _thDamModif = 1;
+		if (!isNullVar(_matObj) && !isNullReference(_matObj)) then {
+			_thDamModif = callFunc(_matObj,getDamageCoefOnAttack);
+		};
+
+		private _weapDamage = round(_dam*_thDamModif) - _drObj;
+		//! THIS CAN BE THROWS ERROR BECAUSE _throwed.loc - is flyingObject
+		callFuncParams(_throwed,applyDamage,_weapDamage arg _type arg _p arg "throwed");
 	};
 
 	//Тут обязательно нужно удалить пулю чтобы не вызывать утечек памяти
@@ -1319,7 +1336,7 @@ class(IDestructible) extends(GameObject)
 	{
 		// количество урона, тип повреждений, мировая позиция по которой пришлись повреждения, (опциональная) причина урона
 		objParams_4(_amount,_type,_worldPos,_cause);
-
+		traceformat("%1::applyDamage main - count: %2; dt: %3; pos: %4; cause: %5",this arg _amount arg _type arg _worldPos arg _cause);
 		private _canUseEffect = true;
 		private _canUseSound = true;
 		private _useBlockSound = true;
