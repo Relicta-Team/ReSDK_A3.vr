@@ -1,3 +1,8 @@
+// ======================================================
+// Copyright (c) 2017-2024 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
 ItemRadio (Радио)::
 	decl: file: src\host\GameObjects\Items\Item.sqf at line 691
 	size: ITEM_SIZE_SMALL (2) (const: 1)
