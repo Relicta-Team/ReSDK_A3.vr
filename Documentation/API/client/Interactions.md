@@ -501,7 +501,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Interactions\interact.sqf at line 373](../../../Src/client/Interactions/interact.sqf#L373)
+File: [client\Interactions\interact.sqf at line 401](../../../Src/client/Interactions/interact.sqf#L401)
 ## interact_isMouseModeActive
 
 Type: Variable
@@ -513,7 +513,7 @@ Initial value:
 ```sqf
 true //допускается ли активность режима мышь/мир
 ```
-File: [client\Interactions\interact.sqf at line 374](../../../Src/client/Interactions/interact.sqf#L374)
+File: [client\Interactions\interact.sqf at line 402](../../../Src/client/Interactions/interact.sqf#L402)
 ## interact_isActive
 
 Type: function
@@ -607,6 +607,17 @@ Description: Функция аналогична interact_getIntersectData но 
 - Param: _ignored
 
 File: [client\Interactions\interact.sqf at line 250](../../../Src/client/Interactions/interact.sqf#L250)
+## interact_getRayCastData
+
+Type: function
+
+Description: возвращает [object,atl pos,vectorup normal]
+- Param: _startPos
+- Param: _endPos
+- Param: _ig1 (optional, default objnull)
+- Param: _ig2 (optional, default objnull)
+
+File: [client\Interactions\interact.sqf at line 278](../../../Src/client/Interactions/interact.sqf#L278)
 ## interact_checkPosition
 
 Type: function
@@ -614,7 +625,7 @@ Type: function
 Description: Проверяет дистанцию до позиции - может ли взаимодействовать по дистанции
 
 
-File: [client\Interactions\interact.sqf at line 278](../../../Src/client/Interactions/interact.sqf#L278)
+File: [client\Interactions\interact.sqf at line 306](../../../Src/client/Interactions/interact.sqf#L306)
 ## interact_inScreenView
 
 Type: function
@@ -622,7 +633,7 @@ Type: function
 Description: Проверяет видимость позиции в экране
 
 
-File: [client\Interactions\interact.sqf at line 283](../../../Src/client/Interactions/interact.sqf#L283)
+File: [client\Interactions\interact.sqf at line 311](../../../Src/client/Interactions/interact.sqf#L311)
 ## interact_canTouchPosition
 
 Type: function
@@ -631,7 +642,7 @@ Description: Иным образом функция является прове�
 - Param: _posAtl
 - Param: _ignored (optional, default objNull)
 
-File: [client\Interactions\interact.sqf at line 289](../../../Src/client/Interactions/interact.sqf#L289)
+File: [client\Interactions\interact.sqf at line 317](../../../Src/client/Interactions/interact.sqf#L317)
 ## interact_canInteractWithObject
 
 Type: function
@@ -640,7 +651,7 @@ Description: Основной обработчик возможности вза
 - Param: _object
 - Param: _pos
 
-File: [client\Interactions\interact.sqf at line 318](../../../Src/client/Interactions/interact.sqf#L318)
+File: [client\Interactions\interact.sqf at line 346](../../../Src/client/Interactions/interact.sqf#L346)
 ## interact_getNearPointForObject
 
 Type: function
@@ -648,7 +659,7 @@ Type: function
 Description: Находит ближайшую точку на линии игрок->объект
 - Param: _targetOrPos
 
-File: [client\Interactions\interact.sqf at line 345](../../../Src/client/Interactions/interact.sqf#L345)
+File: [client\Interactions\interact.sqf at line 373](../../../Src/client/Interactions/interact.sqf#L373)
 ## interact_canUseInteract
 
 Type: function
@@ -656,7 +667,7 @@ Type: function
 Description: Однако открыть меню интеракций и изменить какое-либо из значений (кроме интента) можно без этой проверки
 
 
-File: [client\Interactions\interact.sqf at line 378](../../../Src/client/Interactions/interact.sqf#L378)
+File: [client\Interactions\interact.sqf at line 406](../../../Src/client/Interactions/interact.sqf#L406)
 ## interact_openMouseMode
 
 Type: function
@@ -664,7 +675,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 383](../../../Src/client/Interactions/interact.sqf#L383)
+File: [client\Interactions\interact.sqf at line 411](../../../Src/client/Interactions/interact.sqf#L411)
 ## interact_closeMouseMode
 
 Type: function
@@ -672,7 +683,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 408](../../../Src/client/Interactions/interact.sqf#L408)
+File: [client\Interactions\interact.sqf at line 436](../../../Src/client/Interactions/interact.sqf#L436)
 ## interact_closeMouseMode_handle
 
 Type: function
@@ -680,7 +691,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 462](../../../Src/client/Interactions/interact.sqf#L462)
+File: [client\Interactions\interact.sqf at line 490](../../../Src/client/Interactions/interact.sqf#L490)
 ## interact_onMouseButtonUp
 
 Type: function
@@ -694,7 +705,7 @@ Description:
 - Param: _ctrl
 - Param: _alt
 
-File: [client\Interactions\interact.sqf at line 477](../../../Src/client/Interactions/interact.sqf#L477)
+File: [client\Interactions\interact.sqf at line 505](../../../Src/client/Interactions/interact.sqf#L505)
 ## interact_getReachItem
 
 Type: function
@@ -702,7 +713,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 542](../../../Src/client/Interactions/interact.sqf#L542)
+File: [client\Interactions\interact.sqf at line 570](../../../Src/client/Interactions/interact.sqf#L570)
 ## setpostestmobinmouse
 
 Type: function
@@ -712,7 +723,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 610](../../../Src/client/Interactions/interact.sqf#L610)
+File: [client\Interactions\interact.sqf at line 638](../../../Src/client/Interactions/interact.sqf#L638)
 # interactCombat.hpp
 
 ## CS_MAP_INDEX_TEXT

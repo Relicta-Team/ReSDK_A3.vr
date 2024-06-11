@@ -913,6 +913,15 @@ Description:
 - Param: _retAsData (optional, default false)
 
 File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 312](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L312)
+## noe_client_getObjPtr
+
+Type: function
+
+Description: DEBUG
+- Param: _obj
+- Param: _checkNGO (optional, default true)
+
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 341](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L341)
 # NOEngineClient_onUpdate.sqf
 
 ## variable_name_prevchunk

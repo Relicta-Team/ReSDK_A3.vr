@@ -3816,7 +3816,7 @@ Replaced value:
 ```sqf
 (getSelf(owner) call anim_getUnitAnim)
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 843](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L843)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 844](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L844)
 ## __data_light_slot__
 
 Type: constant
@@ -3828,7 +3828,7 @@ Replaced value:
 ```sqf
 [[INV_BACKPACK,null], [INV_ARMOR,null], [INV_HEAD,null], [INV_BACK,null],[INV_CLOTH,null],[INV_FACE,null],[INV_HAND_R,null],[INV_HAND_L,null],[INV_BELT,null]]
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 953](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L953)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 954](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L954)
 ## debug_internal_getinteractiontarget_spheres
 
 Type: Variable
@@ -3958,7 +3958,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 365](../../../Src/host/GameObjects/Mobs/Mob.sqf#L365)
+File: [host\GameObjects\Mobs\Mob.sqf at line 368](../../../Src/host/GameObjects/Mobs/Mob.sqf#L368)
 # MobGhost.sqf
 
 ## hasBP(idx)
@@ -4393,7 +4393,7 @@ Description: replicator common
 - Param: _method
 - Param: _ctx
 
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 590](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L590)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 600](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L600)
 # Mob_Interact.sqf
 
 ## callScriptedEvent(action__)
