@@ -3,15 +3,20 @@
 // sdk.relicta.ru
 // ======================================================
 
-
-//TODO возможно определять тип звука стоит от объекта на стороне сервера
+#include "..\LightEngine\LightEngine.hpp"
 
 os_steps_handle = -1;
 
 os_steps_currentSoundName = "";
 os_steps_currentSoundCount = 0;
 
+#define OS_STEPS_DEFAULT_SOUND_KEY SLIGHT_DAM_STONE
+
 //os_steps_soundsType = [];
+os_steps_getStepData = { materials_map_stepData };
+os_steps_map_objToMaterialPtr = createHashMap; //key - strPtr, value - materials_map_stepData:key
+os_steps_lastPtr = stringEmpty;
+os_steps_canUseRequests = false;
 
 os_steps_lastpos = vec3(0,0,0);
 
@@ -29,6 +34,52 @@ os_steps_setEnable = {
 		call os_steps_resetAllVariables;
 	};
 };
+
+os_steps_handleStepData = {
+	params ["_ptr"];
+	if (_ptr==stringEmpty) exitWith {};
+	//if (_ptr==os_steps_lastPtr) exitWith {};
+
+	private _matKey = os_steps_map_objToMaterialPtr get _ptr;
+	if isNullVar(_matKey) then {
+		//send request
+		rpcSendToServer("os_sgd",vec2(player,_ptr));
+		//os_steps_lastPtr = _ptr; //prevent network spam
+	} else {
+		if (_matKey == -1) then {
+			//no default material. apply stone by default:
+			_matKey = OS_STEPS_DEFAULT_SOUND_KEY;
+		};
+		private _mStepData = materials_map_stepData get _matKey;
+		if isNullVar(_mStepData) exitWith {
+			warningformat("os::steps::handleStepData - No material found %1",_matKey);
+		};
+
+		//unpack and apply material
+		_mStepData params ["_stepSound"];
+		_stepSound params ["_pattern","_count"];
+		
+		os_steps_currentSoundName = _pattern;
+		os_steps_currentSoundCount = _count;
+		os_steps_lastPtr = _ptr;
+	};
+};
+
+os_steps_getObjectOnFoot = {
+	private _footObjParams = [getPosAtl player,(getPosAtl player) vectorDiff [0,0,1000],player] call interact_getRayCastData;
+	private _footObj = _footObjParams select 0;
+	if isNullReference(_footObj) exitWith {""};
+	[_footObj] call noe_client_getObjPtr
+};
+
+os_steps_onGetStepData = {
+	params ["_wobjPtr","_sdPtr"];
+
+	os_steps_map_objToMaterialPtr set [_wobjPtr,_sdPtr];
+
+}; rpcAdd("os_gs",os_steps_onGetStepData);
+
+// -------- internal processes -------------
 
 os_steps_updateLastPos = {
 	os_steps_lastpos = getPosAtl player;
@@ -51,6 +102,7 @@ os_steps_resetAllVariables = {
 		player setVariable [("__fs_isCall_"+_x),null];
 		player setVariable [("__fs_lastCall_"+_x),null];
 	} foreach os_steps_const_foots;
+	os_steps_lastPtr = stringEmpty;
 };
 
 os_steps_getTrigger = {
@@ -71,7 +123,7 @@ os_steps_setLastCall = {
 
 os_steps_onUpdate = {
 	if !isNullReference(attachedTo player) exitWith {};
-	if (os_steps_currentSoundName == "") exitWith {};
+	if (!os_steps_canUseRequests) exitWith {};
 	
 	_triggerPos = 0;
 	_fottes = os_steps_const_foots;
@@ -93,6 +145,11 @@ os_steps_onUpdate = {
 		call os_steps_debug_renderInfo;
 	};
 	#endif
+
+	_o = call os_steps_getObjectOnFoot;
+	[_o] call os_steps_handleStepData;
+
+	if (os_steps_currentSoundName == "") exitWith {};
 
 	if not_equals(os_steps_lastpos,getPosATL player) then {
 		if (os_steps_lastpos distance getPosATL player < 0.11) exitWith {};

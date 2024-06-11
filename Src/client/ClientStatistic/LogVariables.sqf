@@ -100,6 +100,13 @@ clistat_buffer = [
 	[colortext(1FC4C4,"m_vol:"),{str musicVolume}],
 	[colortext(1FC4C4,"m_curchan:"),{str music_internal_lastPriority}]
 	#ifdef EDITOR
+	,[colortext(1FC4C4,"stepdat: "),{format["%1 x%2; ptr:%3 all:%4"
+		,os_steps_currentSoundName
+		,os_steps_currentSoundCount
+		,os_steps_lastPtr
+		,count os_steps_map_objToMaterialPtr]}]
+	#endif
+	#ifdef EDITOR
 	,["<t color='#832DCF'>[ENGINE]</t> Global threads:",{format["upd %1; hndl %2",count cba_common_perFrameHandlerArray,count cba_common_PFHhandles]}]
 	,["<t color='#832DCF'>[ENGINE]</t> Delayed:",{str count cba_common_waitAndExecArray}]
 	,["<t color='#832DCF'>[ENGINE]</t> Async delayed:",{str count cba_common_waitUntilAndExecArray}]
