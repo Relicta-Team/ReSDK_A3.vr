@@ -338,3 +338,11 @@ noe_client_debug_findChunkObjectByPointer = {
 #endif
 //DEBUG
 
+noe_client_getObjPtr = {
+	params ["_obj",["_checkNGO",true]];
+	if (_checkNGO && {_obj call noe_client_isNGO}) then {
+		_obj = _obj call noe_client_getNGOSource;
+	};
+	_obj getvariable ["ref",""];
+};
+
