@@ -317,6 +317,9 @@ region(Connect control events)
 
 		callSelfParams(loadActions,null);
 
+		//хандлер звуков шагов
+		callSelfParams(fastSendInfo,"os_steps_canUseRequests" arg callSelf(isStepSoundSystemEnabled));
+
 		callSelfParams(onChangeAttackType,"sync"); //синхронизируем основные статистики
 
 		callSelfParams(sendInfo, "onPrepareClient" arg

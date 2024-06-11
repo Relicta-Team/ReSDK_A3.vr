@@ -4,12 +4,16 @@
 // ======================================================
 
 #include "Materials.h"
+#include "..\Networking\Network.hpp"
 
 class(MatBase) attribute(staticInit)
 	
 	func(staticInit)
 	{
 		params ["_thisClass","_thisType"];
+		if (_thisClass!="MatBase") exitWith {};
+
+		private _mdata = createHashMap;
 		{
 			private _class = _x;
 			
@@ -17,7 +21,11 @@ class(MatBase) attribute(staticInit)
 			private _objClass = callFunc(_obj,getClassName);
 
 			mat_map_all set [tolower _objClass,_obj];
+
+			callFuncParams(_obj,applyStepDataForGlobalVar,_mdata);
 		} foreach getAllObjectsTypeOfStr(_thisClass);
+
+		netSetGlobal(materials_map_stepData,_mdata);
 	};
 	
 	var(name,"Материал");
@@ -28,6 +36,24 @@ class(MatBase) attribute(staticInit)
 	var(damageSounds,[]);
 
 	var(resistSounds,[]);
+
+	func(applyStepDataForGlobalVar)
+	{
+		objParams_1(_hm);
+
+		if (callSelf(getStepDataKey) in _hm) exitWith {
+			setLastError("Duplicated step config for " + callSelf(getClassName));
+		};
+
+		_hm set [callSelf(getStepDataKey),
+			[
+				getSelf(stepSound)
+			]
+		]
+	};
+
+	getter_func(getStepDataKey,getSelf(damageEffect));
+	
 
 	getter_func(getDamageEffect,getSelf(damageEffect));
 	func(getDamageSound)

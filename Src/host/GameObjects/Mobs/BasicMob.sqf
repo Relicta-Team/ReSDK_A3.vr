@@ -652,6 +652,7 @@ region(Connect control events)
 		callSelfParams(sendInfo, "onPrepareClient" arg [callSelf(getInitialPos) arg getSelf(visionBlock)]);
 		
 		callSelfParams(localEffectUpdate,"GenericAmbSound");
+
 	};
 	// Вызывается при отключении клиента от моба
 	func(onDisconnected)
@@ -2006,59 +2007,34 @@ region(banned combat setting)
 	};
 
 region(Step sounds component)
-	autoref var_handle(__ssHandle);
-	getter_func(isStepSoundSystemEnabled,getSelf(__ssHandle)!=-1);
+
+	func(handleStepSounds)
+	{
+		objParams_1(_obj);
+		private _matObj = getVar(_obj,material);
+		private _defaultReturn = {
+			callSelfParams(sendInfo,"os_gs" arg vec2(getVar(_obj,pointer),-1));
+		};
+
+		if (isNullVar(_matObj) || {not_equalTypes(_matObj,nullPtr)}) exitWith _defaultReturn;
+		if isNullReference(_matObj) exitWith _defaultReturn;
+
+		private _kStep = callFunc(_matObj,getStepDataKey);
+		callSelfParams(sendInfo,"os_gs" arg vec2(getVar(_obj,pointer),_kStep));
+	};
+
+	var(__enabledStepSoundSys,false);
+	
+	getter_func(isStepSoundSystemEnabled,getSelf(__enabledStepSoundSys));
+
 	func(setStepSoundSystem)
 	{
 		objParams_1(_mode);
 		if equals(callSelf(isStepSoundSystemEnabled),_mode) exitWith {false};
 		if (_mode) then {
 			assert_str(!isNullReference(getSelf(owner)),"Mob::setStepSoundSystem() - owner must be not null");
-
-			private __update = {
-				_paramStruct = (_this select 0);
-				this = _paramStruct select 0;
-				_m = _paramStruct select 1;
-				if isNullReference(_m) exitWith {
-					stopThisUpdate();
-				};
-
-				if !callFunc(this,isActive) exitWith {}; //dont send message on inactive mob
-
-				_newpos = getposatl _m;
-				_oldpos = _paramStruct select 2;
-				if (_newpos distance _oldpos > 0.2) then {
-					_paramStruct set [2,_newpos];
-					_p = callFunc(this,getObjectPlace);
-					_obj = (
-						[_newpos vectorAdd [0,0,-0.001],
-						_newpos vectorAdd [0,0,-100],
-						_m
-					] call si_getIntersectData) select 0;
-					_p = [_obj] call si_handleObjectReturnCheckVirtual;
-					if isNullReference(_p) exitWith {};
-					
-					_matObj = getVar(_p,material);
-					if isNullVar(_matObj) exitWith {};
-					if not_equalTypes(_matObj,nullPtr) exitWith {};
-					if isNullReference(_matObj) exitWith {};
-					_oldMat = _paramStruct select 3;
-					if equals(_matObj,_oldMat) exitWith {};
-
-					_paramStruct set [3,_matObj];
-
-					_dat = callFunc(_matObj,getStepSoundNetworkData);
-					callFuncParams(this,sendInfo,"stupd" arg _dat);
-				};
-
-			};
-			private _delay = 0.1;
-			private _p = [this,getSelf(owner),vec3(0,0,0),nullPtr];
-			setSelf(__ssHandle,startUpdateParams(__update,_delay,_p));
-		} else {
-			stopUpdate(getSelf(__ssHandle));
-			setSelf(__ssHandle,-1);
 		};
+		setSelf(__enabledStepSoundSys,_mode);
 	};
 
 endclass
