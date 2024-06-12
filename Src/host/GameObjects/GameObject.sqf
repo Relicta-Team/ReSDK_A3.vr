@@ -1369,7 +1369,9 @@ class(IDestructible) extends(GameObject)
 		private _canUseSound = true;
 		private _useBlockSound = true;
 		private _effector = {
-			callSelfParams(sendDamageVisualOnPos,_worldPos arg _canUseEffect arg _canUseSound arg _useBlockSound);
+			if !isNullVar(_worldPos) then {
+				callSelfParams(sendDamageVisualOnPos,_worldPos arg _canUseEffect arg _canUseSound arg _useBlockSound);
+			};
 		};
 
 		if (!callSelf(canApplyDamage) || callSelf(getClassName) == "IStruct") exitWith {
@@ -1560,7 +1562,16 @@ class(IDestructible) extends(GameObject)
 		setSelf(hpMax,_val);
 	};
 
+	//TODO replace to nullptr and refactoing all checks
 	var(material,null);//string|object
+	func(getMaterial)
+	{
+		objParams();
+		private _mObj = getSelf(material);
+		if isNullVar(_mObj) exitWith {nullPtr};
+		if not_equalTypes(_mObj,nullPtr) exitWith {nullPtr};
+		_mObj
+	};
 
 	func(sendDamageVisualOnPos)
 	{

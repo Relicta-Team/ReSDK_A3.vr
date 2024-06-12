@@ -26,3 +26,4 @@
 #include "ScriptedConfigs\SLIGHT_DAM_FLESH.sqf"
 #include "ScriptedConfigs\SLIGHT_DAM_ORGANIC.sqf"
 #include "ScriptedConfigs\SLIGHT_DAM_SYNT.sqf"
+#include "ScriptedConfigs\SLIGHT_ATMOS_FIRE_1.sqf"
