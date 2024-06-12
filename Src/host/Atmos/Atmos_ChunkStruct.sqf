@@ -35,8 +35,8 @@ atmos_createProcess = {
     if isNullReference(_pObj) then {
         _pObj = callFuncParams(_chObj,registerArea,_processClass);
     };
-    
-    setVar(_pObj,lastActivity,tickTime + callFunc(_pObj,spreadTimeout));
+
+    setVar(_pObj,lastActivity,tickTime + randInt(1,callFunc(_pObj,spreadTimeout)));
 
     _pObj
 };
