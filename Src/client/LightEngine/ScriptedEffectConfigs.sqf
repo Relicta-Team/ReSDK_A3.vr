@@ -27,3 +27,5 @@
 #include "ScriptedConfigs\SLIGHT_DAM_ORGANIC.sqf"
 #include "ScriptedConfigs\SLIGHT_DAM_SYNT.sqf"
 #include "ScriptedConfigs\SLIGHT_ATMOS_FIRE_1.sqf"
+#include "ScriptedConfigs\SLIGHT_ATMOS_FIRE_2.sqf"
+#include "ScriptedConfigs\SLIGHT_ATMOS_FIRE_3.sqf"

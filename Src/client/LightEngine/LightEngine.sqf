@@ -84,6 +84,7 @@ le_loadLight = {
 	//выгрузка старого конфига света
 	private _oldCfg = _src getvariable "__config";
 	if (!isNullVar(_oldCfg)) then {
+		//? это может вызывать проблемы когда требуется обновить внутреннее состояние одного источника.
 		if not_equals(_oldCfg,_type) then {
 			//Вот этот код может вызывать определённые проблемы в некоторых случаях
 			[_src] call le_unloadLight;

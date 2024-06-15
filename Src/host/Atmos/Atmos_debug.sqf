@@ -96,6 +96,26 @@ atmos_debug_drawCurrentZone = {
 			} foreach atmos_debug_list_chgno;
 		};
 		#endif
+
+		#ifdef ATMOS_DEBUG_DRAW_INTERSECT_INFO
+		if !isNull(atmos_debug_list_giiSpheres) then {
+			_mid = count atmos_debug_list_giiSpheres - 1;
+			for "_i" from 0 to (count atmos_debug_list_giiSpheres)-1 step 2 do {
+				_s = atmos_debug_list_giiSpheres select _i;
+				_e = atmos_debug_list_giiSpheres select (_i+1);
+				drawIcon3D ["",[1,0,0,1],getposatl _s,0,0,0,format[
+					"%1",_s getvariable "__index"
+				],1,0.04, "TahomaB"];
+
+				drawIcon3D ["",[1,0,0,1],getposatl _e,0,0,0,format[
+					"%1",_e getvariable "__index"
+				],1,0.04, "TahomaB"];
+
+				drawLine3D [getposatl _s,getposatl _e,[1,0,0,1]];
+			};
+			
+		};
+		#endif
 	};
 	atmos_debug_handleDebugDraw = startUpdate(_drawFunc,0);
 };
@@ -105,8 +125,8 @@ atmos_debug_drawObjectInfo = {
 	showHUD true;
 	private _pos = callFunc(_aObj,getModelPosition);
 	drawIcon3D ["", [0,1,0,1], _pos, 0, 0, 0, format[
-						"%1 - f:%2 (t:%3)",
-					callFunc(_aObj,getClassName),getVar(_aObj,force),round(getVar(_aObj,lastActivity)-tickTime)
+						"%1 s:%4 - f:%2 (t:%3)",
+					_aObj,getVar(_aObj,force),round(getVar(_aObj,lastActivity)-tickTime),getVar(_aObj,size)
 	], 1, linearConversion [ATMOS_SIZE_HALF*1,ATMOS_SIZE_HALF*5,(asltoatl eyepos player) distance _pos,0.04,0.04,true], "TahomaB"];
 };
 

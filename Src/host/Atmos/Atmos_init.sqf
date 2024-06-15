@@ -122,10 +122,11 @@ atmos_getIntersectInfo = {
 		};
 
 		#define __ATMOS_DEBUG_SPHERE_INIT(r,g,b) private _s = ATMOS_DEBUG_CREATE_SPHERE(r,g,ifcheck(_foreachIndex==0,1,b)); atmos_debug_list_giiSpheres pushBack _s; \
-			_s setposatl _x; \
+			_s setposatl _x; _s setvariable ["__index",_foreachIndex]; \
 			_s = ATMOS_DEBUG_CREATE_SPHERE(r,g,b); atmos_debug_list_giiSpheres pushBack _s; \
-			_s setposatl ifcheck((_qResult select 1)isequalto vec3(0,0,0),_destPosList select _foreachIndex,_qResult select 1);
-		
+			_s setposatl ifcheck((_qResult select 1)isequalto vec3(0,0,0),_destPosList select _foreachIndex,_qResult select 1); \
+			_s setvariable ["__index",_foreachIndex];
+
 		#define exitMethod then
 		#define setupValue(v) if (!_valueSetupGet) then {v}
 		
@@ -287,10 +288,12 @@ atmos_getIntersectPosList = {
 
 	[[_p1S,_p2S,_p3S,_p4S,_p5S
 		#ifdef ATMOS_EXTENDED_INTERSECTION_COUNT
+		,_p2S,_p3S,_p4S,_p5S //additional
 		,_p1S,_p1S,_p1S,_p1S
 		#endif
-	],[_p1E,_p2E,_p3E,_p4E,_p5E
+	],[_p1E,_p5E,_p4E,_p3E,_p2E //я инверснул конечные точки с 2 по 4 чтобы был захват большей площади
 		#ifdef ATMOS_EXTENDED_INTERSECTION_COUNT
+		,_p2E,_p3E,_p4E,_p5E //additional
 		,_p6E,_p7E,_p8E,_p9E
 		#endif
 	]];
@@ -322,11 +325,10 @@ atmos_onUpdate = {
 			
 			setVar(_aObj,lastActivity,tickTime + callFunc(_aObj,spreadTimeout));
 			
-			modVar(_aObj,force,-1);
+			callFuncParams(_aObj,adjustForce,-1);
 
-			if (getVar(_aObj,force) <= 0) then {
+			if isNullReference(_aObj) then {
 				_fdel = true;
-				delete(_aObj);
 				continue;
 			};
 

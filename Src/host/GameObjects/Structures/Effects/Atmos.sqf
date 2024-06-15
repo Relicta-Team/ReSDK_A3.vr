@@ -133,14 +133,43 @@ endclass
 class(AtmosAreaFire) extends(AtmosAreaBase)
 	var(size,1);//1-3
     var(light,SLIGHT_ATMOS_FIRE_1);
-
     var(force,5);
+    getterconst_func(spreadTimeout,editor_conditional(5,0.5));
 
     func(doPropagateTo)
     {
         objParams_2(_chObj,_side);
         private _new = super();
-        modVar(_new,force,+ 5);
+        callFuncParams(_new,adjustForce,+5);
+    };
+
+    func(calcFireSize)
+    {
+        objParams();
+        round linearConversion [1,15,getSelf(force),1,3,true];
+    };
+
+    func(getLightTypeBySize)
+    {
+        objParams();
+        [SLIGHT_ATMOS_FIRE_1,SLIGHT_ATMOS_FIRE_2,SLIGHT_ATMOS_FIRE_3] select (getSelf(size)-1)
+    };
+
+    func(adjustForce)
+    {
+        objParams_1(_lt);
+        modSelf(force, + _lt);
+        private _size = callSelf(calcFireSize);
+        private _newForce = getSelf(force);
+        if (_size!=getSelf(size)) then {
+            setSelf(size,_size);
+            if (_newForce > 0) then {
+                callSelfParams(lightSetType,callSelf(getLightTypeBySize));
+            };
+        };
+        if (_newForce <= 0) then {
+            delete(this);
+        };
     };
 
     getterconst_func(canContactOnMob,true);

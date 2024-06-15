@@ -256,6 +256,20 @@ noe_unregisterLightAtObject = {
 	};
 };
 
+noe_syncLightAtObject = {
+	params ["_obj","_light",["_updateByteArr",false]];
+	_obj setvariable ["flags",(_obj getvariable "flags") + lightObj_true];
+	_obj setvariable ["light",_light];
+	
+	//reload serverlight
+	[_obj] call slt_destr;
+	[_obj,_light] call slt_create;
+
+	if (_updateByteArr) then {
+		[_obj] call noe_updateObjectByteArr;
+	};
+};
+
 // Обновляет информацию о радио. Небезопасный контекст. Возможно переполнение
 noe_updateObjectRadio = {
 	params ["_obj","_mode"];
