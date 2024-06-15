@@ -61,6 +61,20 @@ atmos_chunkGetNearObjects = {
 		private _olist = [];
 		atmos_debug_list_chgno = _olist;
 	#endif
+	
+	private _objList = ["IDestructible",_fromCh,
+			#ifdef ATMOS_DEBUG_DRAW_NEAROBJECTS
+			ATMOS_SIZE*4
+			#else
+			ATMOS_SIZE*2
+			#endif
+		,true,true] call getGameObjectOnPosition;
+	
+	{
+		if isTypeOf(_x,BasicMob) then {continue};
+
+		_objList pushBackUnique _x;
+	} foreach ([_fromCh] call atmos_getObjectsInChunk);
 
 	private _mPos = null;
 	{
@@ -83,16 +97,167 @@ atmos_chunkGetNearObjects = {
 			#endif
 		};
 	}forEach(
-		["IDestructible",_fromCh,
-			#ifdef ATMOS_DEBUG_DRAW_NEAROBJECTS
-			ATMOS_SIZE*4
-			#else
-			ATMOS_SIZE*2
-			#endif
-		,true,true] call getGameObjectOnPosition
+		_objList
 	);
 
 	_collectReal
+};
+
+atmos_getVectorsChunkInfo = {
+	private _vectors = [];
+	// Центр чанка
+	private _center = vec3(ATMOS_SIZE_HALF, ATMOS_SIZE_HALF, ATMOS_SIZE_HALF);
+	// Размеры куба
+	private _size = ATMOS_SIZE;
+    private _halfSize = _size / 2;
+    private _points = [
+		
+		[[0,0,0],[0,_size,0]]
+		,[[0,0,0],[0,0,_size]]
+		,[[0,_size,_size],[0,_size,0]]
+		,[[0,_size,_size],[0,0,_size]]
+		//+ in center
+		,[[0,_halfSize,0],[0,_halfSize,_size]]
+		,[[0,0,_halfSize],[0,_size,_halfSize]]
+
+		//X in center
+		,[[0,0,0],[0,_size,_size]]
+		,[[0,_size,0],[0,0,_size]]
+
+		//romb
+		,[[0,_halfSize,0],[0,_size,_halfSize]]
+		,[[0,_size,_halfSize],[0,_halfSize,_size]]
+		,[[0,_halfSize,_size],[0,0,_halfSize]]
+		,[[0,0,_halfSize],[0,_halfSize,0]]
+
+		//not used
+		// ,[[0, 0, 0], [0, _halfSize, _size]]
+		// ,[[0,0,0],[0,_size,_halfSize]]
+		
+	];
+
+	_origPoints = +_points;
+	_points append (_origPoints apply {
+		[
+			[_x select 0,90,2] call BIS_fnc_rotateVector3D,
+			[_x select 1,90,2] call BIS_fnc_rotateVector3D
+		]
+	});
+
+	_points append (_origPoints apply {
+		[
+			[_x select 1,-90,1] call BIS_fnc_rotateVector3D,
+			[_x select 0,-90,1] call BIS_fnc_rotateVector3D
+		]
+	});
+
+	// /// other side
+	_points append (_origPoints apply {
+		[
+			[(_x select 0) vectordiff [_size,0,0],90,2] call BIS_fnc_rotateVector3D,
+			[(_x select 1) vectordiff [_size,0,0],90,2] call BIS_fnc_rotateVector3D
+		]
+	});
+
+	_points append (_origPoints apply {
+		[
+			(_x select 0) vectoradd [_size,0,0],
+			(_x select 1) vectoradd [_size,0,0]
+		]
+	});
+
+	_points append (_origPoints apply {
+		[
+			([(_x select 1),-90,1] call BIS_fnc_rotateVector3D)vectoradd [0,0,_size],
+			([(_x select 0),-90,1] call BIS_fnc_rotateVector3D)vectoradd [0,0,_size]
+		]
+	});
+
+	
+    _points
+};
+
+atmos_const_lineVectors = call atmos_getVectorsChunkInfo;
+
+
+
+atmos_getObjectsInChunk = {
+	params ["_fromCh"];
+	/*
+		1. get line
+	*/
+	_fromCh = _fromCh call atmos_chunkIdToPos; //now chunk is center position
+	#ifdef ATMOS_DEBUG_DRAW_CHUNKOBJECTS
+	
+	{deleteVehicle _x} foreach atmos_debug_list_goic;
+	atmos_debug_list_goic = [];
+	atmos_debug_list_goicSposes = [];
+	#endif
+	private _startPosReal = _fromCh vectorDiff vec3(ATMOS_SIZE_HALF,ATMOS_SIZE_HALF,ATMOS_SIZE_HALF);
+	private _startPos = _startPosReal;
+	private _endPos = null;
+	private _objMap = createHashMap;
+	private _tList = [];
+
+	// #define ATMOS_COUNT_LINES 8
+	// private _itr = ATMOS_SIZE/ATMOS_COUNT_LINES;
+	
+	// for "_x" from -ATMOS_SIZE_HALF to ATMOS_SIZE_HALF step _itr do {
+		
+	// 	for "_y" from -ATMOS_SIZE_HALF to ATMOS_SIZE_HALF step _itr do {
+			
+	// 		_startPos = _startPosReal vectoradd vec3(_x,_y,ATMOS_SIZE_HALF);
+	// 		//for "_z" from ATMOS_SIZE to 0 step -1 do {
+	// 			_endPos = _startPosReal vectorAdd ((vec3(_x,_y,-ATMOS_SIZE_HALF)));
+	// 			#ifdef ATMOS_DEBUG_DRAW_CHUNKOBJECTS
+	// 			_etlist = ([_startPos,_endPos,objNull,objNull,2,null,true,true] call si_getIntersectObjects);
+	// 			_tList = _etlist apply {_x select 0};
+	// 			_tPos = _etlist apply {_x select 1};
+	// 			#else
+	// 			_tList = [_startPos,_endPos,objNull,objNull,2,null,true] call si_getIntersectObjects;
+	// 			#endif
+				
+	// 			{_objMap set [getVar(_x,pointer),_x];false}count _tList;
+
+
+	// 			#ifdef ATMOS_DEBUG_DRAW_CHUNKOBJECTS
+				
+	// 			_s = ATMOS_DEBUG_CREATE_SPHERE(0,1,1);
+	// 			_s setposatl _startPos; _s setvariable ["_vec",vec3(_x,_y,_z)];
+	// 			atmos_debug_list_goic pushBack _s;
+	// 			_s = ATMOS_DEBUG_CREATE_SPHERE(0,1,0);
+	// 			_s setposatl _endPos; _s setvariable ["_vec",vec3(_x,_y,_z)];
+	// 			atmos_debug_list_goic pushBack _s;
+
+	// 			atmos_debug_list_goicSposes pushBack [_startPos,_endPos];
+
+	// 			#endif
+	// 		//}
+	// 	};
+	// };
+
+	private _vectors = atmos_const_lineVectors; //call atmos_getVectorsChunkInfo;
+	private _startPos = null; private _endPos = null;
+	{
+		_x params ["_vs","_ve"];
+		_startPos = _startPosReal vectorAdd _vs;
+		_endPos = _startPosReal vectorAdd _ve;
+		_tList = [_startPos,_endPos,objNull,objNull,2,null,true] call si_getIntersectObjects;
+		{_objMap set [getVar(_x,pointer),_x];false}count _tList;
+
+		#ifdef ATMOS_DEBUG_DRAW_CHUNKOBJECTS
+		_s = ATMOS_DEBUG_CREATE_SPHERE(0,1,1);
+		_s setposatl _startPos; _s setvariable ["_vec",_vs];
+		atmos_debug_list_goic pushBack _s;
+		_s = ATMOS_DEBUG_CREATE_SPHERE(0,1,0);
+		_s setposatl _endPos; _s setvariable ["_vec",_ve];
+		atmos_debug_list_goic pushBack _s;
+
+		atmos_debug_list_goicSposes pushBack [_startPos,_endPos];
+		#endif
+	} foreach _vectors;
+
+	values _objMap
 };
 
 //возвращает информацию по пересечениям в соседнем чанке
@@ -324,7 +489,7 @@ atmos_onUpdate = {
 			if (getVar(_aObj,lastActivity) > tickTime) then {continue};//!THIS ALWAYS SKIPS SIM, TODO check mob contact and objects
 			
 			setVar(_aObj,lastActivity,tickTime + callFunc(_aObj,spreadTimeout));
-			
+
 			callFuncParams(_aObj,adjustForce,-1);
 
 			if isNullReference(_aObj) then {
@@ -341,9 +506,15 @@ atmos_onUpdate = {
 					callFuncParams(_aObj,doPropagateTo,_chObj arg _x);
 					//traceformat("Object %1 spread success",_aObj)
 				};
+				private _force = 0;
 				{
+					if callFunc(_x,canApplyDamage) then {
+						modvar(_force) + 1;
+					};
 					callFuncParams(_x,applyDamage,randInt(5,10) arg DAMAGE_TYPE_BURN arg callFunc(_x,getModelPosition));
-				} foreach ([_chId] call atmos_chunkGetNearObjects)
+				} foreach ([_chId] call atmos_chunkGetNearObjects);
+
+				callFuncParams(_aObj,adjustForce,_force);
 			} foreach _sides;
 		} foreach _aList;
 

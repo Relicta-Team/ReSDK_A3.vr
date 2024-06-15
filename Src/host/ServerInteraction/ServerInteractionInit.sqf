@@ -201,9 +201,8 @@ si_getIntersectData = {
 	[_ins select 0 select 2,asltoatl (_ins select 0 select 0),_ins select 0 select 1]
 };
 
-//not used in gamecode
 si_getIntersectObjects = {
-	params ["_p1","_p2",["_ig1",objNUll],["_ig2",objNUll],["_countObjs",10],["_retUnique",true]];
+	params ["_p1","_p2",["_ig1",objNUll],["_ig2",objNUll],["_countObjs",10],["_retUnique",true],["_retAsVObj",false],["_retIPos",false]];
 	private _ins = lineIntersectsSurfaces [
   		AGLToASL _p1,
   		AGLToASL _p2,
@@ -214,19 +213,39 @@ si_getIntersectObjects = {
 		INTERACT_LODS_CHECK_STANDART,
 		_retUnique
  	];
+	//second pass
+	if (count _ins == 0) then {
+		_ins = lineIntersectsSurfaces [
+			AGLToASL _p1,
+			AGLToASL _p2,
+			_ig1,
+			_ig2,
+			true,
+			_countObjs,
+			INTERACT_LODS_CHECK_GEOM,
+			_retUnique
+		];
+	};
 	if (count _ins == 0) exitWith {[]};
-	_ins = lineIntersectsSurfaces [
-		AGLToASL _p1,
-		AGLToASL _p2,
-  		_ig1,
-		_ig2,
-		true,
-		_countObjs,
-		INTERACT_LODS_CHECK_GEOM,
-		_retUnique
- 	];
-	if (count _ins == 0) exitWith {[]};
-	_ins apply {_x select 2}
+	if _retAsVObj then {
+		if _retIPos then {
+			_ins apply {
+				[[_x select 2] call si_handleObjectReturnCheckVirtual, asltoatl (_x select 0)]
+			}
+		} else {
+			_ins apply {
+				[_x select 2] call si_handleObjectReturnCheckVirtual
+			}
+		};
+	} else {
+		if _retIPos then {
+			_ins apply {
+				[_x select 2,asltoatl (_x select 0)]
+			}
+		} else {
+			_ins apply {_x select 2}
+		};
+	};
 };
 
 //Отладчик эдитора

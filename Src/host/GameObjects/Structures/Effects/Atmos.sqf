@@ -68,6 +68,13 @@ class(AtmosChunk)
         } foreach getSelf(aObj);
     };
 
+    func(getChunkDown)
+    {
+        objParams();
+        private _newChid = getSelf(chId) vectorDiff [0,0,1];
+        [_newChid] call atmos_getChunkAtChId;
+    };
+
 
 endclass
 
@@ -84,7 +91,8 @@ class(AtmosAreaBase) extends(ILightibleStruct)
     getterconst_func(canContactOnObjects,false);
     getterconst_func(propagationType,ATMOS_PROPAGATION_AIR);
     var(chunk,nullPtr);
-    var(lastTransfer,nullPtr);
+    //var(lastTransfer,nullPtr);
+    var(createdFrom,nullPtr);
 
 	func(onMobContact)
 	{
@@ -133,13 +141,19 @@ endclass
 class(AtmosAreaFire) extends(AtmosAreaBase)
 	var(size,1);//1-3
     var(light,SLIGHT_ATMOS_FIRE_1);
-    var(force,5);
-    getterconst_func(spreadTimeout,editor_conditional(5,0.5));
+    var(force,3);
+
+    #ifdef ATMOS_DEBUG_USE_FAST_SIM
+    getterconst_func(spreadTimeout,0.5);
+    #else
+    getterconst_func(spreadTimeout,5);
+    #endif
 
     func(doPropagateTo)
     {
         objParams_2(_chObj,_side);
         private _new = super();
+        setVar(_new,createdFrom,this);
         callFuncParams(_new,adjustForce,+5);
     };
 
@@ -161,6 +175,14 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
         modSelf(force, + _lt);
         private _size = callSelf(calcFireSize);
         private _newForce = getSelf(force);
+
+        if isNullReference(getSelf(createdFrom)) then {
+            if !callSelf(hasFireDown) then {
+                if !getSelf(lastCanPropagateDown) exitWith {};//can propagate down but not exists fire
+                _newForce = 0;//del mark
+            };
+        };
+
         if (_size!=getSelf(size)) then {
             setSelf(size,_size);
             if (_newForce > 0) then {
@@ -177,11 +199,13 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
     getterconst_func(getPropagationSideMin,3);
     getterconst_func(propagationType,ATMOS_PROPAGATION_FIRE);
 
+    var(lastCanPropagateDown,false);
+
     func(canPropagateTo)
     {
         objParams_3(_chId,_side,_propT);
         private _pRet = super();
-        if (count _pRet > 0) then {
+        private _propCheck = if (count _pRet > 0) then {
             //сосдений чанк не должен гореть
             private _chObjMid = [_chId vectorAdd _side] call atmos_getChunkAtChId;
             if callFunc(_chObjMid,hasFireInChunk) exitWith {false};
@@ -195,7 +219,20 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
                     || isTypeOf(_matObj,MatPaper)
                 } else {false};
             } )!=-1;
-        } else {false};
+        } else {
+            false
+        };
+
+        if equals(_side,vec3(0,0,-1)) then {
+            setSelf(lastCanPropagateDown,_propCheck);
+        };
+        _propCheck
+    };
+
+    func(hasFireDown)
+    {
+        objParams();
+        callFunc(callFunc(getSelf(chunk),getChunkDown),hasFireInChunk)
     };
 
 endclass

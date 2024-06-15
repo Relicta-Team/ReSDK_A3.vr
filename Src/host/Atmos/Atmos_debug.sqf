@@ -5,12 +5,13 @@
 
 
 //debug draw atmos
-#define ATMOS_DEBUG_DRAW
+//#define ATMOS_DEBUG_DRAW
 
 //тесты по порядку: рендер точек соседних зон, рендер пересечений, рендер объектов в чанке
 //#define ATMOS_DEBUG_DRAW_INTERSECT_POS
 //#define ATMOS_DEBUG_DRAW_INTERSECT_INFO
 //#define ATMOS_DEBUG_DRAW_NEAROBJECTS
+//#define ATMOS_DEBUG_DRAW_CHUNKOBJECTS
 //отладка силы горения
 //#define ATMOS_DEBUG_ON_UPDATE
 
@@ -122,15 +123,16 @@ atmos_debug_drawCurrentZone = {
 
 atmos_debug_drawObjectInfo = {
 	params ["_aObj"];
-	showHUD true;
 	private _pos = callFunc(_aObj,getModelPosition);
 	drawIcon3D ["", [0,1,0,1], _pos, 0, 0, 0, format[
-						"%1 s:%4 - f:%2 (t:%3)",
-					_aObj,getVar(_aObj,force),round(getVar(_aObj,lastActivity)-tickTime),getVar(_aObj,size)
+						"%1>%5 s:%4 - f:%2 (t:%3)",
+					_aObj,getVar(_aObj,force),round(getVar(_aObj,lastActivity)-tickTime),getVar(_aObj,size),getVar(getVar(_aObj,createdFrom),pointer)
 	], 1, linearConversion [ATMOS_SIZE_HALF*1,ATMOS_SIZE_HALF*5,(asltoatl eyepos player) distance _pos,0.04,0.04,true], "TahomaB"];
 };
 
 atmos_debug_onupdate_internal = {
+	showHUD true;
+	if !isNullReference(findDisplay 49) exitWith {};
 	{
 		{
 			[_x] call atmos_debug_drawObjectInfo;
@@ -138,23 +140,53 @@ atmos_debug_onupdate_internal = {
 	} foreach (values atmos_map_chunks);
 };
 
-#ifdef EDITOR
-if !isNull(atmos_debug_onupdate_handle_internal) then {
-	stopUpdate(atmos_debug_onupdate_handle_internal);
+atmos_debug_onupdate_getObjInChunk = {
+	
+	if !isNullReference(findDisplay 49) exitWith {};
+	showHUD true;
+	// {
+	// 	_ref = _x getvariable "_ref";
+	// 	_vec = _x getvariable "_vec";
+	// 	private _pos = getPosAtl _x; //callFunc(_ref,getModelPosition);
+	// 	drawIcon3D ["", [1,1,0,1], _pos, 0, 0, 0, format[
+	// 						"%1",
+	// 					_vec
+	// 	], 1, linearConversion [ATMOS_SIZE_HALF*1,ATMOS_SIZE_HALF*5,(asltoatl eyepos player) distance _pos,0.04,0.02,true], "TahomaB"];
+	// } foreach atmos_debug_list_goic;
+
+	_color = [1,0,0,1];
+	{
+		_x params ["_sp","_ep"];
+		drawLine3D [_sp,_ep,_color];
+	} foreach atmos_debug_list_goicSposes;
 };
-#endif
-#ifdef ATMOS_DEBUG_ON_UPDATE
-atmos_debug_onupdate_handle_internal = startUpdate(atmos_debug_onupdate_internal,0);
-#endif
 
 // ---------- initialize debug ----------
-
-#ifdef ATMOS_DEBUG_DRAW
+#ifdef EDITOR
+	//debug cleanup on reload
+	if !isNull(atmos_debug_onupdate_handle_internal) then {
+		stopUpdate(atmos_debug_onupdate_handle_internal);
+	};
 	if !isNull(atmos_debug_handleDebugDraw) then {
 		stopUpdate(atmos_debug_handleDebugDraw);
+	};
+	if !isNull(atmos_debug_handle_getObjInChunk) then {
+		stopUpdate(atmos_debug_handle_getObjInChunk);
+	};
+	if !isNull(atmos_debug_map_spheres) then {
+		{deleteVehicle _y} foreach atmos_debug_map_spheres;
 	};
 	atmos_debug_handleDebugDraw = -1;
 
 	if !isNull(atmos_debug_list_chintto) then {{deleteVehicle _x} foreach atmos_debug_list_chintto;};
 	if !isNull(atmos_debug_list_giiSpheres) then {{deleteVehicle _x} foreach atmos_debug_list_giiSpheres;};
+	if !isNull(atmos_debug_list_goic) then {{deleteVehicle _x} foreach atmos_debug_list_goic;};
+#endif
+
+#ifdef ATMOS_DEBUG_ON_UPDATE
+atmos_debug_onupdate_handle_internal = startUpdate(atmos_debug_onupdate_internal,0);
+#endif
+
+#ifdef ATMOS_DEBUG_DRAW_CHUNKOBJECTS
+atmos_debug_handle_getObjInChunk = startUpdate(atmos_debug_onupdate_getObjInChunk,0);
 #endif

@@ -3,6 +3,13 @@
 // sdk.relicta.ru
 // ======================================================
 
+//быстрое процессирование симуляции
+//#define ATMOS_DEBUG_USE_FAST_SIM
+
+#ifndef EDITOR
+	#undef ATMOS_DEBUG_USE_FAST_SIM
+#endif
+
 //size one chunk in meters and half (only constexpr in prod. required)
 #define ATMOS_SIZE 1
 #define ATMOS_SIZE_HALF 0.5

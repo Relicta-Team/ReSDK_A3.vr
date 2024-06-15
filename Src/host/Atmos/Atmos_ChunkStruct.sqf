@@ -24,7 +24,7 @@ atmos_getChunkAtChId = {
 
 //create atmos effect (fire,smoke etc)
 atmos_createProcess = {
-    params ["_pos","_processClass"];
+    params ["_pos","_processClass",["_manualCreate",false]];
     if !isTypeNameOf(_processClass,AtmosAreaBase) exitWith {nullPtr};
 
     private _chId = _pos call atmos_chunkPosToId;
@@ -34,6 +34,10 @@ atmos_createProcess = {
     private _pObj = callFuncParams(_chObj,getAreaByType,_processClass);
     if isNullReference(_pObj) then {
         _pObj = callFuncParams(_chObj,registerArea,_processClass);
+    };
+    
+    if (_manualCreate) then {
+        setVar(_pObj,createdFrom,_pObj);
     };
 
     setVar(_pObj,lastActivity,tickTime + randInt(1,callFunc(_pObj,spreadTimeout)));
