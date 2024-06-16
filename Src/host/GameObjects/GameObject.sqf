@@ -412,14 +412,18 @@ class(GameObject) extends(ManagedObject)
 			#endif
 		};
 
-		private _ch = [callFunc(_usr,getLastInteractEndPos) call atmos_chunkPosToId] call atmos_getChunkAtChIdUnsafe;
-		if !isNullReference(_ch) then {
-			private _inf = callFuncParams(_ch,getChunkUserInfo,_usr);
-			if (_inf!=stringEmpty) then {
-				modvar(_otherText) + sbr + _inf;
-			};
+		callFunc(_usr,generateLastInteractOnServer);
+		if equals(this,callFunc(_usr,getLastInteractTarget)) then {
+			private _ch = [callFunc(_usr,getLastInteractEndPos) call atmos_chunkPosToId] call atmos_getChunkAtChIdUnsafe;
+			if !isNullReference(_ch) then {
+				private _inf = callFuncParams(_ch,getChunkUserInfo,_usr);
+				if (_inf!=stringEmpty) then {
+					modvar(_otherText) + sbr + _inf;
+				};
 
+			};
 		};
+
 		
 		//ddat = [_rand,_postrand,_icon,callSelfParams(getNameFor,_usr),_desc,_otherText];
 		format[_rand + _postrand,_icon + callSelfParams(getNameFor,_usr)] +
