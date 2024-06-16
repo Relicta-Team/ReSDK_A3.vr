@@ -29,7 +29,7 @@ atmos_debug_drawCurrentZone = {
 	};
 
 	showHUD true; //for use drawicon3d
-	atmos_debug_cntDrwArndHlf = 2;
+	atmos_debug_cntDrwArndHlf = 3;
 	atmos_debug_basicPos = getposatl player;
 
 	atmos_debug_map_spheres = createHashMap;

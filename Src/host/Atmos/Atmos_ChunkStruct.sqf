@@ -15,11 +15,16 @@ atmos_getChunkAtChId = {
     private _strKey = str _chId;
     if !(_strKey in atmos_map_chunks) then {
         private _chObj = new(AtmosChunk);
-        setVar(_chObj,pos,_chId call atmos_chunkIdToPos);
         setVar(_chObj,chId,_chId);
         atmos_map_chunks set [_strKey,_chObj];
     };
     atmos_map_chunks get _strKey
+};
+
+atmos_getChunkAtChIdUnsafe = {
+    params ["_chId"];
+    private _strKey = str _chId;
+    atmos_map_chunks getOrDefault [_strKey,nullPtr]
 };
 
 //create atmos effect (fire,smoke etc)

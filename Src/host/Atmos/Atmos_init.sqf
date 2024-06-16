@@ -51,6 +51,7 @@ atmos_handle_update = -1;
 //получает все объекты, находящиеся в чанке
 atmos_chunkGetNearObjects = {
 	params ["_fromCh"];
+	private _baseFromCh = _fromCh;
 	_fromCh = _fromCh call atmos_chunkIdToPos; //now chunk is position
 	private _collectReal = [];
 	
@@ -69,16 +70,11 @@ atmos_chunkGetNearObjects = {
 			ATMOS_SIZE*2
 			#endif
 		,true,true] call getGameObjectOnPosition;
-	
-	{
-		if isTypeOf(_x,BasicMob) then {continue};
-
-		_objList pushBackUnique _x;
-	} foreach ([_fromCh] call atmos_getObjectsInChunk);
 
 	private _mPos = null;
 	{
 		if callFunc(_x,isFlying) then {continue};
+		if isTypeOf(_x,AtmosAreaBase) then {continue};//no affect to area
 		if callFunc(_x,isInWorld) then {
 			_mPos = callFunc(_x,getModelPosition);
 			if ATMOS_POS_INSIDE_CHUNK(_mPos,_fromCh) then {
@@ -96,9 +92,14 @@ atmos_chunkGetNearObjects = {
 				
 			#endif
 		};
-	}forEach(
-		_objList
-	);
+	}forEach(_objList);
+
+	//тут точно объекты с моделями (isinworld и не летящие т.к. у них нет геометрии)
+	{
+		if isTypeOf(_x,BasicMob) then {continue};
+
+		_collectReal pushBackUnique _x;
+	} foreach ([_baseFromCh] call atmos_getObjectsInChunk);
 
 	_collectReal
 };
@@ -193,48 +194,10 @@ atmos_getObjectsInChunk = {
 	atmos_debug_list_goic = [];
 	atmos_debug_list_goicSposes = [];
 	#endif
+
 	private _startPosReal = _fromCh vectorDiff vec3(ATMOS_SIZE_HALF,ATMOS_SIZE_HALF,ATMOS_SIZE_HALF);
-	private _startPos = _startPosReal;
-	private _endPos = null;
 	private _objMap = createHashMap;
 	private _tList = [];
-
-	// #define ATMOS_COUNT_LINES 8
-	// private _itr = ATMOS_SIZE/ATMOS_COUNT_LINES;
-	
-	// for "_x" from -ATMOS_SIZE_HALF to ATMOS_SIZE_HALF step _itr do {
-		
-	// 	for "_y" from -ATMOS_SIZE_HALF to ATMOS_SIZE_HALF step _itr do {
-			
-	// 		_startPos = _startPosReal vectoradd vec3(_x,_y,ATMOS_SIZE_HALF);
-	// 		//for "_z" from ATMOS_SIZE to 0 step -1 do {
-	// 			_endPos = _startPosReal vectorAdd ((vec3(_x,_y,-ATMOS_SIZE_HALF)));
-	// 			#ifdef ATMOS_DEBUG_DRAW_CHUNKOBJECTS
-	// 			_etlist = ([_startPos,_endPos,objNull,objNull,2,null,true,true] call si_getIntersectObjects);
-	// 			_tList = _etlist apply {_x select 0};
-	// 			_tPos = _etlist apply {_x select 1};
-	// 			#else
-	// 			_tList = [_startPos,_endPos,objNull,objNull,2,null,true] call si_getIntersectObjects;
-	// 			#endif
-				
-	// 			{_objMap set [getVar(_x,pointer),_x];false}count _tList;
-
-
-	// 			#ifdef ATMOS_DEBUG_DRAW_CHUNKOBJECTS
-				
-	// 			_s = ATMOS_DEBUG_CREATE_SPHERE(0,1,1);
-	// 			_s setposatl _startPos; _s setvariable ["_vec",vec3(_x,_y,_z)];
-	// 			atmos_debug_list_goic pushBack _s;
-	// 			_s = ATMOS_DEBUG_CREATE_SPHERE(0,1,0);
-	// 			_s setposatl _endPos; _s setvariable ["_vec",vec3(_x,_y,_z)];
-	// 			atmos_debug_list_goic pushBack _s;
-
-	// 			atmos_debug_list_goicSposes pushBack [_startPos,_endPos];
-
-	// 			#endif
-	// 		//}
-	// 	};
-	// };
 
 	private _vectors = atmos_const_lineVectors; //call atmos_getVectorsChunkInfo;
 	private _startPos = null; private _endPos = null;
@@ -261,7 +224,6 @@ atmos_getObjectsInChunk = {
 };
 
 //возвращает информацию по пересечениям в соседнем чанке
-//TODO use si_handleObjectReturnCheckVirtual
 atmos_getIntersectInfo = {
 	params ["_fromCh","_side",["_searchMode",ATMOS_SEARCH_MODE_GET_COUNT],"_refOutPos"];
 
@@ -486,36 +448,43 @@ atmos_onUpdate = {
 		{
 			_aObj = _x;
 
-			if (getVar(_aObj,lastActivity) > tickTime) then {continue};//!THIS ALWAYS SKIPS SIM, TODO check mob contact and objects
+			if callFunc(_aObj,canActivity) then {continue};
 			
-			setVar(_aObj,lastActivity,tickTime + callFunc(_aObj,spreadTimeout));
-
-			callFuncParams(_aObj,adjustForce,-1);
+			callFunc(_aObj,preActivity);
 
 			if isNullReference(_aObj) then {
 				_fdel = true;
 				continue;
 			};
 
-			_sides =  [randInt(callFunc(_aObj,getPropagationSideMin),callFunc(_aObj,getPropagationSideMax))] call atmos_getNextRandAroundChunks;
-			_pType = [_aObj] call atmos_getSearchModeByPType;
-			//traceformat("Process atmos object %1 at id%2",_aObj arg _chId)
-			
-			{
-				if callFuncParams(_aObj,canPropagateTo,_chId arg _x arg _pType) then {
-					callFuncParams(_aObj,doPropagateTo,_chObj arg _x);
-					//traceformat("Object %1 spread success",_aObj)
-				};
-				private _force = 0;
-				{
-					if callFunc(_x,canApplyDamage) then {
-						modvar(_force) + 1;
-					};
-					callFuncParams(_x,applyDamage,randInt(5,10) arg DAMAGE_TYPE_BURN arg callFunc(_x,getModelPosition));
-				} foreach ([_chId] call atmos_chunkGetNearObjects);
+			callFunc(_aObj,onActivity);
 
-				callFuncParams(_aObj,adjustForce,_force);
-			} foreach _sides;
+			if callFunc(_aObj,canContactOnObjects) then {
+				{
+					callFuncParams(_aObj,onObjectContact,_x);
+				} foreach callFunc(_chObj,getObjectsInChunk);
+			};
+
+
+			// _sides =  [randInt(callFunc(_aObj,getPropagationSideMin),callFunc(_aObj,getPropagationSideMax))] call atmos_getNextRandAroundChunks;
+			// _pType = [_aObj] call atmos_getSearchModeByPType;
+			// //traceformat("Process atmos object %1 at id%2",_aObj arg _chId)
+			
+			// {
+			// 	if callFuncParams(_aObj,canPropagateTo,_chId arg _x arg _pType) then {
+			// 		callFuncParams(_aObj,doPropagateTo,_chObj arg _x);
+			// 		//traceformat("Object %1 spread success",_aObj)
+			// 	};
+			// 	private _force = 0;
+			// 	{
+			// 		if callFunc(_x,canApplyDamage) then {
+			// 			modvar(_force) + 1;
+			// 		};
+			// 		callFuncParams(_x,applyDamage,randInt(5,10) arg DAMAGE_TYPE_BURN arg callFunc(_x,getModelPosition));
+			// 	} foreach ([_chId] call atmos_chunkGetNearObjects);
+
+			// 	callFuncParams(_aObj,adjustForce,_force);
+			// } foreach _sides;
 		} foreach _aList;
 
 		if (_fdel) then {
