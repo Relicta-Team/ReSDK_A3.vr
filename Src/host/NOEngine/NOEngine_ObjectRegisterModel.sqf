@@ -258,7 +258,9 @@ noe_unregisterLightAtObject = {
 
 noe_syncLightAtObject = {
 	params ["_obj","_light",["_updateByteArr",false]];
-	_obj setvariable ["flags",(_obj getvariable "flags") + lightObj_true];
+	if isNull(_obj getvariable "light") then { //fix if light is not register
+		_obj setvariable ["flags",(_obj getvariable "flags") + lightObj_true];
+	};
 	_obj setvariable ["light",_light];
 	
 	//reload serverlight
