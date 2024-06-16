@@ -304,7 +304,7 @@ atmos_getIntersectInfo = {
 			{
 				ATMOS_DEBUG_DRAW_INTERSECT_SPHERE
 				_rayResult = [_x, _destPosList select _foreachIndex] call si_getIntersectData;
-				if !isNullReference(_rayResult select 0) exitMethod {
+				if isNullReference(_rayResult select 0) exitMethod {
 					setupValue(_bRet = true; if (_canSetRefOut) then {refset(_refOutPos,_rayResult select vec2(0,2))});
 				};
 			} foreach _srcPosList;
@@ -448,7 +448,9 @@ atmos_onUpdate = {
 		{
 			_aObj = _x;
 
-			if callFunc(_aObj,canActivity) then {continue};
+			#ifndef ATMOS_MANAGED_ACTIVITY
+			if !callFunc(_aObj,canActivity) then {continue};
+			#endif
 			
 			callFunc(_aObj,preActivity);
 
@@ -464,27 +466,6 @@ atmos_onUpdate = {
 					callFuncParams(_aObj,onObjectContact,_x);
 				} foreach callFunc(_chObj,getObjectsInChunk);
 			};
-
-
-			// _sides =  [randInt(callFunc(_aObj,getPropagationSideMin),callFunc(_aObj,getPropagationSideMax))] call atmos_getNextRandAroundChunks;
-			// _pType = [_aObj] call atmos_getSearchModeByPType;
-			// //traceformat("Process atmos object %1 at id%2",_aObj arg _chId)
-			
-			// {
-			// 	if callFuncParams(_aObj,canPropagateTo,_chId arg _x arg _pType) then {
-			// 		callFuncParams(_aObj,doPropagateTo,_chObj arg _x);
-			// 		//traceformat("Object %1 spread success",_aObj)
-			// 	};
-			// 	private _force = 0;
-			// 	{
-			// 		if callFunc(_x,canApplyDamage) then {
-			// 			modvar(_force) + 1;
-			// 		};
-			// 		callFuncParams(_x,applyDamage,randInt(5,10) arg DAMAGE_TYPE_BURN arg callFunc(_x,getModelPosition));
-			// 	} foreach ([_chId] call atmos_chunkGetNearObjects);
-
-			// 	callFuncParams(_aObj,adjustForce,_force);
-			// } foreach _sides;
 		} foreach _aList;
 
 		if (_fdel) then {
@@ -493,15 +474,6 @@ atmos_onUpdate = {
 
 		
 	} foreach atmos_map_chunks;
-};
-
-atmos_getSearchModeByPType = {
-	params ["_atmObj"];
-	private _curProp = callFunc(_atmObj,propagationType);
-	if (_curProp==ATMOS_PROPAGATION_AIR) exitWith {ATMOS_SEARCH_MODE_NO_INTERSECT};
-	if (_curProp==ATMOS_PROPAGATION_OBJECTS) exitWith {ATMOS_SEARCH_MODE_FIRST_INTERSECT};
-	if (_curProp==ATMOS_PROPAGATION_FIRE) exitWith {ATMOS_SEARCH_MODE_GET_VOBJECTS};
-	assert_str(false,format vec2("Unknown propagation type: %1",_curProp));
 };
 
 //convert world postion to virtual chunk id
@@ -592,13 +564,45 @@ atmos_list_getAroundChunksManaged = {
 	]
 };
 
+atmos_list_getAroundXYChunksManaged = {
+	[
+		[0,0,1],
+		[0,0,-1],
+		[1,0,0],
+		[-1,0,0],
+		[0,1,0],
+		[0,-1,0],
+		[1,1,0],
+		[1,-1,0],
+		[-1,-1,0],
+		[-1,1,0]
+	]
+};
+
+atmos_list_getAroundNoZChunksManaged = {
+	[
+		[1,0,0],
+		[-1,0,0],
+		[0,1,0],
+		[0,-1,0]
+	]
+};
+
+atmos_const_list_ptrFuncsGetChunks = [
+	atmos_list_getAroundChunksManaged,
+	atmos_list_getAroundXYChunksManaged,
+	atmos_list_getAroundNoZChunksManaged
+];
+
 //возвращает случайные стороны
 atmos_getNextRandAroundChunks = {
-	params [["_count",1]];
+	params [["_count",1],["_colType",ATMOS_SPREAD_MODE_NORMAL]];
 	
-	assert_str(inRange(_count,1,count atmos_const_aroundChunks),"Unexpected count: "+(str _count));
 
-	private _copyArr = call atmos_list_getAroundChunksManaged;
+	private _copyArr = call (atmos_const_list_ptrFuncsGetChunks select _colType);
+	
+	assert_str(inRange(_count,1,count _copyArr),"Unexpected count '"+(str _count) + "' for mode " + (str _colType));
+
 	private _tArr = [];
 	for "_i" from 0 to _count-1 do {
 		_tArr pushBack (_copyArr deleteAt (randInt(0,count _copyArr-1)));
@@ -609,5 +613,8 @@ atmos_getNextRandAroundChunks = {
 
 //run thread updater
 atmos_init = {
+	#ifdef ATMOS_MANAGED_ACTIVITY
+	if (true) exitWith {};
+	#endif
 	atmos_handle_update = startUpdate(atmos_onUpdate,ATMOS_MAIN_THREAD_UPDATE_DELAY);
 };

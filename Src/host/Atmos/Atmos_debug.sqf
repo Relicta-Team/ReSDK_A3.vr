@@ -14,6 +14,8 @@
 //#define ATMOS_DEBUG_DRAW_CHUNKOBJECTS
 //отладка силы горения
 //#define ATMOS_DEBUG_ON_UPDATE
+//ручная симуляция
+//#define ATMOS_MANAGED_ACTIVITY
 
 
 #define ATMOS_DEBUG_CREATE_SPHERE(_r,_g,_b) call {private _s = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0]; \
@@ -124,10 +126,10 @@ atmos_debug_drawCurrentZone = {
 atmos_debug_drawObjectInfo = {
 	params ["_aObj"];
 	private _pos = callFunc(_aObj,getModelPosition);
-	drawIcon3D ["", [0,1,0,1], _pos, 0, 0, 0, format[
-						"%1>%5 s:%4 - f:%2 (t:%3)",
-					_aObj,getVar(_aObj,force),round(getVar(_aObj,lastActivity)-tickTime),getVar(_aObj,size),getVar(getVar(_aObj,createdFrom),pointer)
-	], 1, linearConversion [ATMOS_SIZE_HALF*1,ATMOS_SIZE_HALF*5,(asltoatl eyepos player) distance _pos,0.04,0.04,true], "TahomaB"];
+	private _di = callFunc(_aObj,getDeubgInfo);
+	if (_di == "") exitWith {};
+	drawIcon3D ["", [0,1,0,1], _pos, 0, 0, 0, _di
+	, 1, linearConversion [ATMOS_SIZE_HALF*5,ATMOS_SIZE_HALF*2,(asltoatl eyepos player) distance _pos,0.02,0.04,true], "TahomaB"];
 };
 
 atmos_debug_onupdate_internal = {

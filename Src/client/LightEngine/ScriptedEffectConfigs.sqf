@@ -29,3 +29,6 @@
 #include "ScriptedConfigs\SLIGHT_ATMOS_FIRE_1.sqf"
 #include "ScriptedConfigs\SLIGHT_ATMOS_FIRE_2.sqf"
 #include "ScriptedConfigs\SLIGHT_ATMOS_FIRE_3.sqf"
+#include "ScriptedConfigs\SLIGHT_ATMOS_SMOKE_1.sqf"
+#include "ScriptedConfigs\SLIGHT_ATMOS_SMOKE_2.sqf"
+#include "ScriptedConfigs\SLIGHT_ATMOS_SMOKE_3.sqf"
