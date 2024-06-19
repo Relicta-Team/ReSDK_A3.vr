@@ -387,12 +387,12 @@ class(GameObject) extends(ManagedObject)
 						callSelf(canApplyDamage)
 						&& callSelf(getClassName) != "IStruct" //!temporary fix. remove in next versions
 						) then {
-					private _drTexts = ["Беззащитно","Слабенкьо защищено","Выглядит крепко","Хорошо защищено","Отличная защита"];
+					private _drTexts = ["Беззащитно","Слабенько защищено","Выглядит крепко","Хорошо защищено","Отличная защита"];
 					private _drConv = round (linearConversion [0, 8, getSelf(dr),0,4,true]);
 					
 					format[
 						'Состояние: %1 - %2br_inlineКачество: %3',
-						callSelf(getHPStatusText),
+						callSelfParams(getHPStatusText,true),
 						_drTexts select _drConv,
 						callSelf(getHTStatusText)
 					]
@@ -1480,22 +1480,35 @@ class(IDestructible) extends(GameObject)
 
 	func(getHPStatusText)
 	{
-		objParams();
-		private _hp = getSelf(hp);
-		private _maxhp = getSelf(hpMax);
-		if (_hp < (round(_maxhp/3)) && _hp > 0) exitWith {
-			"Повреждено"
+		objParams_1(_addClr);
+		if isNullVar(_addClr) then {_addClr = false};
+		private _curClr = "ffffff";
+		
+		private _tval = call {
+			private _hp = getSelf(hp);
+			private _maxhp = getSelf(hpMax);
+			if (_hp < (round(_maxhp/3)) && _hp > 0) exitWith {
+				_curClr = "207332";
+				"Повреждено"
+			};
+			if (_hp <= 0 && _hp > (-1*_maxhp)) exitWith {
+				_curClr = "3D541D";
+				"Сильно повреждено"
+			};
+			if (_hp <= (-1*_maxhp) && _hp > (-5*_maxhp)) exitWith {
+				_curClr = "992C08";
+				//private _idx = round linearConversion [-5*_maxhp,-1*_maxhp,_hp,0,4,true];
+				//["Почти уничтожено",""] select _idx
+				"Почти " + (pick["разрушено","уничтожено","сломано","раздолбано"])
+			};
+			if (_hp > 0) exitWith {
+				_curClr = "00C12B";
+				"Нормальное"
+			};
+			_curClr = "ff0000";
+			"Уничтожено"
 		};
-		if (_hp <= 0 && _hp > (-1*_maxhp)) exitWith {
-			"Сильно повреждено"
-		};
-		if (_hp <= (-1*_maxhp) && _hp > (-5*_maxhp)) exitWith {
-			//private _idx = round linearConversion [-5*_maxhp,-1*_maxhp,_hp,0,4,true];
-			//["Почти уничтожено",""] select _idx
-			"Почти " + (pick["разрушено","уничтожено","сломано","раздолбано"])
-		};
-		if (_hp > 0) exitWith {"Нормальное"};
-		"Уничтожено"
+		ifcheck(_addClr,format["<t color='#%1'>%2</t>" arg _curClr arg _tval],_tval);
 	};
 
 	func(getHTStatusText)
