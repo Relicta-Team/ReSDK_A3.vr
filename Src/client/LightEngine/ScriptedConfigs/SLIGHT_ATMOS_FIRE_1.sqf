@@ -16,7 +16,7 @@ regScriptEmit(SLIGHT_ATMOS_FIRE_1)
 	]
 	,[
 		"pt",
-		null,
+		[["loop_sound",["fire\flame_1",[0.9,1.1],15,2]]],
 		_emitAlias("Пламя")
 		["linkToLight",[0,0,0]],
 		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,10,32,1],"","Billboard",3,0.21,[0,0,0],[0,0,0],0,0.05,0.04,0.03,[0.42,0],[[1,0.466,0.239,0.14],[1,0,0.338,-1.7],[1,0.131,0,-2.5],[1,0.452,0.258,-2],[1,0.834,0.32,-1.7],[1,0.655,0.272,0]],[1],0,0,"","","",0,false,-1,[]]],

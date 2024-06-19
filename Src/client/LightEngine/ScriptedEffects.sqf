@@ -69,6 +69,7 @@ le_se_handleConfig = {
 				// 	call _funcInit;
 				// };
 			};
+			_events call le_se_handleCfgEvents;
 			if !isNullReference(_o) then {
 				allEmitters pushBack _o;
 			};
@@ -100,6 +101,7 @@ le_se_handleConfig = {
 					call _funcInit;
 				};
 			};
+			_events call le_se_handleCfgEvents;
 			if !isNullReference(_o) then {
 				allEmitters pushBack _o;
 			};
@@ -114,6 +116,34 @@ le_se_handleConfig = {
 	//Возвращаем свет 
 	sourceObject getvariable ["__light",objnull]
 };
+
+le_se_handleCfgEvents = {
+	//all configs are handler
+	//params is: ["configHandlerName",cfgparams_any]
+	//confighandler was
+	//inside configHandlerName params is: cfgOwner:obj (cannot set objvars), src - source object, cfgparams, outparams
+	private _hfunc = null;
+	{
+		_x params ["_cfgName","_cfgInParams"];
+		private _hfunc = le_se_map_cfgHandlers getorDefault [_cfgName,le_se_internal_errorFuncCfgEvents];
+		[_o,sourceObject,_cfgInParams,
+			null //todo implement outparams
+		] call _hfunc
+	} foreach _this;
+};
+le_se_internal_errorFuncCfgEvents = {
+	private _errpar = _this;
+	setLastError("Cannot initialize config handler: " + str _errpar);
+};
+le_se_registerConfigHandler = {
+	params ["_cfgName","_cfgCode"];
+	le_se_map_cfgHandlers set [_cfgName,_cfgCode];
+}; //регистрация нового конфига. только на клиенте
+le_se_map_cfgHandlers = createHashMap; //карта зарегистрированных конфигов
+
+#if __has_include("SEConfigHandlers.sqf")
+	#include "SEConfigHandlers.sqf"
+#endif
 
 le_se_mapHandlersShots = null;
 le_se_mapHandlers = createHashMapFromArray [
