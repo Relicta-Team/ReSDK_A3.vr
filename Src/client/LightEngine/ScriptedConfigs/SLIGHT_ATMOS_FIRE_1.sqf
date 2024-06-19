@@ -26,7 +26,7 @@ regScriptEmit(SLIGHT_ATMOS_FIRE_1)
 	]
 	,[
 		"lt",
-		null,
+		[["randomize_value_vec3",["setLightAmbient",[ [-.01,0,0],[.01,0,0] ], [.05,.1]]],["randomize_value_float",["setLightIntensity",[-1000,-500],[.05,.1]]]],
 		_emitAlias("Свет огня")
 		["linkToLight",[0,0,0.3]],
 		["setLightColor",[0.17,0.04,0]],

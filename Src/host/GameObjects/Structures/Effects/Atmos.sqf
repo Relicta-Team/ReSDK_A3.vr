@@ -13,13 +13,19 @@ class(AtmosChunk)
 	var(chId,null); //vec3 chunk id
 	getter_func(getChunkCenterPos,getSelf(chId) call atmos_chunkIdToPos);
 	var_array(objInside); //список геймобджектов внутри зоны
-	var(flagUpdObj,true); //когда этот флаг сбрасывается будет выполнена пересборка объектов внутри чанка
+	var(flagUpdObj,true); //когда этот флаг true - будет выполнена пересборка объектов внутри чанка
 
 	var(aObj,[]); //atmos objects
 
 	func(getObjectsInChunk) //getting all objects or part of objects inside this chunk
 	{
 		objParams();
+		
+		//! temporary fix. need collect chunks, owned by objects
+		if array_exists(getSelf(objInside),nullPtr) then {
+			setSelf(flagUpdObj,true);
+		};
+
 		if getSelf(flagUpdObj) then {
 			setSelf(flagUpdObj,false);
 			setSelf(objInside,[getSelf(chId)] call atmos_chunkGetNearObjects);
@@ -107,7 +113,7 @@ class(AtmosChunk)
 			format ["%1 %2",
 				pick["Тут вот","Ещё ","Тут","А ещё"],
 				pick ["горит","пожар","загорелось","огонь хреначит"]
-			] editor_conditional(+ " size:" + (str getVar(_f,size)),;)
+			] editor_conditional(+ " size:" + (str getVar(_f,size)) + "; force:"+(str getVar(_f,force)),;)
 		};
 		""
 	};
@@ -246,7 +252,9 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
 		objParams_1(_side);
 		private _new = super();
 		setVar(_new,createdFrom,this);
-		callFuncParams(_new,adjustForce,+5);
+		if equals(_side,vec3(0,0,1)) then {
+			callFuncParams(_new,adjustForce,+2);
+		};
 	};
 
 	func(calcFireSize)
@@ -264,18 +272,26 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
 	func(adjustForce)
 	{
 		objParams_1(_lt);
-		modSelf(force, + _lt);
+		//modSelf(force, + _lt);
+		private _newForce = (getSelf(force) + _lt) min 30;
+		setSelf(force,_newForce);
 
 		//sorce deleted
 		//if isNullReference(getSelf(createdFrom)) then {
 			if !callSelf(hasFireDown) then {
-				if !getSelf(lastCanPropagateDown) exitWith {};//can propagate down but not exists fire
-				setSelf(force,1);
+				if (_newForce > 5) then {
+					private _dch = getSelf(chunk);//callFunc(getSelf(chunk),getChunkDown);
+					
+					if ((count callFunc(_dch,getObjectsInChunk))==0) then {
+						_newForce = 0;
+						setSelf(force,_newForce);
+					};
+				};
+				
 			};
 		//};
 
 		private _size = callSelf(calcFireSize);
-		private _newForce = getSelf(force);
 		
 
 		if (_size!=getSelf(size)) then {
@@ -300,13 +316,13 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
 	getterconst_func(canContactOnObjects,true);
 	getterconst_func(getPropagationSideMin,4);
 
-	var(lastCanPropagateDown,false);
-
 	func(canPropagateTo)
 	{
 		objParams_1(_side);
 		private _pRet = super();
 		
+		_pRet = _pRet && getSelf(size) > 1;
+
 		private _propRes = if (_pRet) then {
 			private _curCh = getSelf(chunk);
 			private _chObjMid = [callSelf(getChunkId) vectorAdd _side] call atmos_getChunkAtChId;
@@ -329,9 +345,6 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
 		} else {
 			false
 		};
-		if equals(_side,vec3(0,0,-1)) then {
-			setSelf(lastCanPropagateDown,_propRes);
-		};
 		_propRes
 	};
 
@@ -350,7 +363,7 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
 				private _mpos = ifcheck(prob(30),callFunc(_obj,getModelPosition),null);
 				callFuncParams(_obj,applyDamage,_dam arg DAMAGE_TYPE_BURN arg _mpos);
 				if not_equals(_oldHP,getVar(_obj,hp)) then {
-					callSelfParams(adjustForce,1);
+					callSelfParams(adjustForce,2);//because decrement is 1
 				};
 
 			};

@@ -1099,6 +1099,11 @@ endregion
 			error("GameObject::unloadModel() - getChunkType returns null");
 			false
 		};
+
+		//request for update atmos chunk
+		private _ch = [(getposatl getSelf(loc))call atmos_chunkPosToId] call atmos_getChunkAtChId;
+		setVar(_ch,flagUpdObj,true);
+
 		[this,_cht] call noe_unloadVisualObject;
 		true
 	};
@@ -1324,6 +1329,8 @@ class(IDestructible) extends(GameObject)
 		if !isNullReference(_srcipt) then {
 			delete(_script);
 		};
+
+
 	};
 
 	//all info for this system in baisc set: B 557
@@ -1377,7 +1384,7 @@ class(IDestructible) extends(GameObject)
 	{
 		// количество урона, тип повреждений, мировая позиция по которой пришлись повреждения, (опциональная) причина урона
 		objParams_4(_amount,_type,_worldPos,_cause);
-		traceformat("%1::applyDamage main - count: %2; dt: %3; pos: %4; cause: %5",this arg _amount arg _type arg _worldPos arg _cause);
+		//traceformat("%1::applyDamage main - count: %2; dt: %3; pos: %4; cause: %5",this arg _amount arg _type arg _worldPos arg _cause);
 		private _canUseEffect = true;
 		private _canUseSound = true;
 		private _useBlockSound = true;
@@ -1468,7 +1475,7 @@ class(IDestructible) extends(GameObject)
 			callSelf(onDestroyed);
 			delete(this);
 		};
-		errorformat("IDestructible::applyDamage() - no affect damage: hp %1; max hp %2; Amount %3",_newhp arg _maxhp arg _amount);
+		//errorformat("IDestructible::applyDamage() - no affect damage: hp %1; max hp %2; Amount %3",_newhp arg _maxhp arg _amount);
 	};
 
 	func(getHPStatusText)
