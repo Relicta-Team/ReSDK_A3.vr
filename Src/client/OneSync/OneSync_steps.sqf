@@ -233,7 +233,7 @@ os_steps_debug_renderInfo = {
 		if (distLTG <= 0.25 && isNegativize && !(_ground getVariable ["isTriggered",false])) then {
 			_ground setVariable ["isTriggered",true];
 			_leg setObjectTexture [0,"#(rgb,8,8,3)color(1,0,0,1)"];
-			call debug_doFootStep;
+			call os_steps_doFootStep;
 		};
 		if (isPositivize && (_ground getVariable ["isTriggered",false])) then {
 			_ground setVariable ["isTriggered",false];
