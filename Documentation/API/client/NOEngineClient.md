@@ -821,7 +821,7 @@ Replaced value:
 ```sqf
 50
 ```
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 273](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L273)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 274](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L274)
 ## NOE_CLIENT_DELETEOBJS_DELAY
 
 Type: constant
@@ -833,7 +833,7 @@ Replaced value:
 ```sqf
 0.2
 ```
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 275](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L275)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 276](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L276)
 ## noe_client_spawnObject
 
 Type: function
@@ -875,7 +875,7 @@ Description:
 - Param: _type
 - Param: _chunkObject
 
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 164](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L164)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 165](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L165)
 ## noe_client_doRemoveObjects
 
 Type: function
@@ -884,7 +884,7 @@ Description:
 - Param: _chunkObject
 - Param: _listPtr
 
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 207](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L207)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 208](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L208)
 ## noe_client_remObjsAlg
 
 Type: function
@@ -892,7 +892,7 @@ Type: function
 Description: 
 
 
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 276](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L276)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 277](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L277)
 ## noe_client_doUpdateObjects
 
 Type: function
@@ -901,7 +901,7 @@ Description: Обновляет информацию об объектах
 - Param: _chunkObject
 - Param: _updObjList
 
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 288](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L288)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 289](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L289)
 ## noe_client_debug_findChunkObjectByPointer
 
 Type: function
@@ -912,7 +912,7 @@ Description:
 - Param: _pointer
 - Param: _retAsData (optional, default false)
 
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 312](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L312)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 313](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L313)
 ## noe_client_getObjPtr
 
 Type: function
@@ -921,7 +921,7 @@ Description: DEBUG
 - Param: _obj
 - Param: _checkNGO (optional, default true)
 
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 341](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L341)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 342](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L342)
 # NOEngineClient_onUpdate.sqf
 
 ## variable_name_prevchunk

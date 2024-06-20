@@ -901,19 +901,7 @@ Description:
 File: [client\SoundSystem\MusicManager_experimental.sqf at line 116](../../../Src/client/SoundSystem/MusicManager_experimental.sqf#L116)
 # Sound3d.sqf
 
-## tmpPos
-
-Type: Variable
-
-Description: Тестовый обработчик шагов
-
-
-Initial value:
-```sqf
-[0,0,0]
-```
-File: [client\SoundSystem\Sound3d.sqf at line 121](../../../Src/client/SoundSystem/Sound3d.sqf#L121)
-## lastpos
+## sound3d_internal_list_soundBuff
 
 Type: Variable
 
@@ -922,45 +910,9 @@ Description:
 
 Initial value:
 ```sqf
-getPosWorld player
+[]
 ```
-File: [client\SoundSystem\Sound3d.sqf at line 122](../../../Src/client/SoundSystem/Sound3d.sqf#L122)
-## debug_lastpos
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-getPosAtl player
-```
-File: [client\SoundSystem\Sound3d.sqf at line 143](../../../Src/client/SoundSystem/Sound3d.sqf#L143)
-## arrows
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-["Sign_Sphere10cm_F" createVehicle [0,0,0],"Sign_Sphere10cm_F" createVehicle [0,0,0]]
-```
-File: [client\SoundSystem\Sound3d.sqf at line 145](../../../Src/client/SoundSystem/Sound3d.sqf#L145)
-## arrowsGround
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-["Sign_Sphere10cm_F" createVehicle [0,0,0],"Sign_Sphere10cm_F" createVehicle [0,0,0]]
-```
-File: [client\SoundSystem\Sound3d.sqf at line 146](../../../Src/client/SoundSystem/Sound3d.sqf#L146)
+File: [client\SoundSystem\Sound3d.sqf at line 169](../../../Src/client/SoundSystem/Sound3d.sqf#L169)
 ## soundProcessor_play
 
 Type: function
@@ -1012,11 +964,36 @@ Description: from say3D [sound, maxDistance, pitch, isSpeech, offset]
 - Param: _offset (optional, default 0)
 
 File: [client\SoundSystem\Sound3d.sqf at line 113](../../../Src/client/SoundSystem/Sound3d.sqf#L113)
-## debug_doFootStep
+## sound3d_playLocalOnObjectLooped
 
 Type: function
 
 Description: 
+- Param: _file
+- Param: _src
+- Param: _pitch (optional, default 1)
+- Param: _dist (optional, default 10)
+- Param: _offset (optional, default 0)
+- Param: _preendbuf (optional, default 0)
+- Param: _vol (optional, default 1)
 
+File: [client\SoundSystem\Sound3d.sqf at line 125](../../../Src/client/SoundSystem/Sound3d.sqf#L125)
+## sound3d_stopLocalLopped
 
-File: [client\SoundSystem\Sound3d.sqf at line 138](../../../Src/client/SoundSystem/Sound3d.sqf#L138)
+Type: function
+
+Description: 
+- Param: _soundPtr
+
+File: [client\SoundSystem\Sound3d.sqf at line 150](../../../Src/client/SoundSystem/Sound3d.sqf#L150)
+## sound3d_internal_localHandler
+
+Type: function
+
+Description: 
+- Param: _src
+- Param: _sid
+- Param: _preend
+- Param: _psParams
+
+File: [client\SoundSystem\Sound3d.sqf at line 170](../../../Src/client/SoundSystem/Sound3d.sqf#L170)

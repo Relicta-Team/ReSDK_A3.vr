@@ -4074,7 +4074,7 @@ Initial value:
 ```sqf
 1
 ```
-File: [host\init.sqf at line 92](../../../Src/host/init.sqf#L92)
+File: [host\init.sqf at line 93](../../../Src/host/init.sqf#L93)
 # keyboard.hpp
 
 ## KEY_ESCAPE
