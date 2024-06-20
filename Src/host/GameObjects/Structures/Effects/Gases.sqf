@@ -20,4 +20,19 @@ class(GasBase)
 		objParams_1(_to);
 	};
 
+	func(onBreathing)
+	{
+		objParams_1(_mob);
+		
+		if callFunc(_mob,canBreath) then {
+			callFuncParams(_mob,adjustToxin,+8);
+			callFuncParams(_mob,adjustOxyLoss,-5);
+		};
+	};
+
+	func(onSkinContact)
+	{
+		objParams_1(_mob);
+	};
+
 endclass

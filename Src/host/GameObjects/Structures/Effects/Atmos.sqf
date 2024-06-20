@@ -37,7 +37,7 @@ class(AtmosChunk)
 	{
 		objParams();
 		private _fire = nullPtr;
-		{if isTypeOf(_x,AtmosAreaFire) exitWith {_fire = _x}} foreach getSelf(aObj);
+		{if isTypeOf(_x,AtmosAreaFire) exitWith {_fire = _x};false} count getSelf(aObj);
 		_fire
 	};
 
@@ -51,7 +51,7 @@ class(AtmosChunk)
 	{
 		objParams();
 		private _gas = nullPtr;
-		{if isTypeOf(_x,AtmosAreaGas) exitWith {_gas = _x}} foreach getSelf(aObj);
+		{if isTypeOf(_x,AtmosAreaGas) exitWith {_gas = _x};false} count getSelf(aObj);
 		_gas
 	};
 
@@ -67,7 +67,8 @@ class(AtmosChunk)
 		private _oRet = nullPtr;
 		{
 			if isTypeStringOf(_x,_classname) exitWith {_oRet = _x};
-		} foreach getSelf(aObj);
+			false
+		} count getSelf(aObj);
 		_oRet
 	};
 
@@ -125,6 +126,26 @@ class(AtmosChunk)
 		""
 	};
 
+	//event on mob inside turf (contact on legs)
+	func(onMobContactTurf)
+	{
+		objParams_1(_mob);
+		{
+			callFuncParams(_x,onMobContactTurf,_mob);
+			false;
+		} count getSelf(aObj)
+	};
+
+	//event on mob body contacted to area (breathing etc...)
+	func(onMobContactBody)
+	{
+		objParams_1(_mob);
+		{
+			callFuncParams(_x,onMobContactBody,_mob);
+			false;
+		} count getSelf(aObj);
+	};
+
 
 endclass
 
@@ -156,7 +177,13 @@ class(AtmosAreaBase) extends(ILightibleStruct)
 	};
 
 	//react on mob inside this atmos object
-	func(onMobContact)
+	func(onMobContactTurf)
+	{
+		objParams_1(_mob);
+	};
+
+	//react on mob breathing or contacted this with body
+	func(onMobContactBody)
 	{
 		objParams_1(_mob);
 	};
@@ -246,6 +273,52 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
 	#else
 	getterconst_func(spreadTimeout,5);
 	#endif
+
+	func(onMobContactTurf)
+	{
+		objParams_1(_mob);
+		private _dz = TARGET_ZONE_TORSO;
+
+		//turf calculate random body part
+		call {
+			private _sta = callFunc(_mob,getStance);
+			private _tzList = [];
+			if (_sta <= STANCE_UP) then {
+				_tzList append [TARGET_ZONE_LEG_L,TARGET_ZONE_LEG_R];
+			};
+			if (_sta <= STANCE_MIDDLE) then {
+				_tzList append TARGET_ZONE_LIST_TORSO;
+				_tzList append [TARGET_ZONE_ARM_R,TARGET_ZONE_ARM_L];
+			};
+			if (_sta <= STANCE_DOWN) then {
+				_tzList append TARGET_ZONE_LIST_HEAD;
+			};
+			if (count _tzList > 0) then {
+				_dz = pick _tzList;
+			};
+		};
+
+		callSelfParams(applyFireDamage,_mob arg _dz);
+	};
+
+	func(onMobContactBody)
+	{
+		objParams_1(_mob);
+		_tzlist = TARGET_ZONE_LIST_HEAD;
+		_tzlist append TARGET_ZONE_LIST_TORSO;
+		
+		callSelfParams(applyFireDamage,_mob arg pick _tzlist);
+	};
+
+	func(applyFireDamage)
+	{
+		objParams_2(_m,_sel);
+		if (tickTime >= getVar(_m,__lastFireDamage)) then {
+			private _dam = D6 - 1;
+			callFuncParams(_m,applyDamage,_dam arg DAMAGE_TYPE_BURN arg _sel arg DIR_RANDOM);
+			setVar(_m,__lastFireDamage,tickTime+0.3);//each 300ms
+		};
+	};
 
 	func(preActivity)
 	{
@@ -461,6 +534,21 @@ class(AtmosAreaGas) extends(AtmosAreaBase)
 			setSelf(__gvis,_s);
 		};
 		#endif
+	};
+
+	func(onMobContactBody)
+	{
+		objParams_1(_mob);
+		
+		{
+			callFuncParams(_y,onBreathing,_mob);
+			callFuncParams(_y,onSkinContact,_mob);
+		} foreach getSelf(gCont);
+	};
+
+	func(onMobContactTurf)
+	{
+		objParams_1(_mob);
 	};
 
 	func(updateLeadingGas)
