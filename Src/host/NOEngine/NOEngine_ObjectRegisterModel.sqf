@@ -46,6 +46,11 @@ noe_registerObject = {
 			rpcSendToClient(getVar(_x,id),"onupdob",_packet);
 		} foreach chunk_getOwners(_chdata);
 	};
+
+	//request for update atmos chunk
+	assert_str(!isNullReference(_vis),"Null object in noe::registerObject; ptr -> " + _ptr);
+	private _chAtm = [(getposatl _vis)call atmos_chunkPosToId] call atmos_getChunkAtChId;
+	setVar(_chAtm,flagUpdObj,true);
 };
 
 //выводим регистрацию объекта
