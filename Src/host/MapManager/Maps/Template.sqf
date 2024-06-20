@@ -285,6 +285,13 @@ _4003_656253965_768802_80272 = ['MetalAndConcreteRuins',[4003.66,3965.77,2.80272
 ['Campfire',[4009.54,3959.19,8.03733,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
 ['Campfire',[4005.19,3950.16,7.57013,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
 ['Campfire',[4004.82,3933.9,7.30728,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
+['BrickThinWall',[4014.29,3918.14,8.07354,true],271.501,[0.000849549,-0.00702072,0.999975]] call InitStruct; 
+['BrickThinWallDoorwayWindow',[4017.49,3921.3,8.07725,true],0,[-0.0069996,-0.00103549,0.999975]] call InitStruct; 
+['BrickThinWall',[4014.25,3918.27,10.1142,true],271.501,[0.000849549,-0.00702072,0.999975]] call InitStruct; 
+['BrickThinWall',[4017.54,3921.5,10.5,true],359.622,[-0.00698694,-0.00106839,0.999975]] call InitStruct; 
+['ConcreteGreenSmallFloor',[4016,3917.12,6.06905],0,[0,0,1]] call InitStruct; 
+['ConcreteGreenSmallFloor',[4020.68,3917.57,6.19916],0,[0,0,1]] call InitStruct; 
+['ConcreteGreenSmallFloor',[4019.84,3920,6.33359],0,[0,0,1]] call InitStruct; 
 
 
 

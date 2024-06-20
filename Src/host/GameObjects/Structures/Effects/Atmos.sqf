@@ -105,6 +105,13 @@ class(AtmosChunk)
 		[_newChid] call atmos_getChunkAtChId;
 	};
 
+	func(getChunkFromSide)
+	{
+		objParams_1(_side);
+		private _newChid = getSelf(chId) vectorAdd _side;
+		[_newChid] call atmos_getChunkAtChId;
+	};
+
 	func(getChunkUserInfo)
 	{
 		objParams_1(_usr);
@@ -245,6 +252,19 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
 		objParams();
 		super();
 		callSelfParams(adjustForce,-1);
+		
+		if !isNullReference(this) then {
+			//огонь прогорает - выделяется дым
+			private _gas = [
+				callFunc(getSelf(chunk),getChunkCenterPos),
+				"AtmosAreaGas",
+				true,
+				["GasBase",
+					4 * getSelf(size)
+				]
+			] call atmos_createProcess;
+			callFuncParams(_gas,adjustGas,"GasBase" arg 1.0 * getSelf(size));
+		};
 	};
 
 	func(onPropagateTo)
@@ -302,13 +322,6 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
 		};
 		if (_newForce <= 0) then {
 			delete(this);
-		} else {
-			[
-				callFunc(getSelf(chunk),getChunkCenterPos),
-				"AtmosAreaGas",
-				true,
-				["GasBase",1 * getSelf(size)]
-			] call atmos_createProcess;
 		};
 	};
 
@@ -430,7 +443,13 @@ class(AtmosAreaGas) extends(AtmosAreaBase)
 			//при распространении газ перемещается из источника
 			callSelfParams(adjustGas,_gt arg _v);
 			callSelf(updateLeadingGas);
+		} else {
+			// if (getSelf(volume)<=0.3) then {
+			// 	callSelfParams(adjustGas,_gt arg _v);
+			// 	callSelf(updateLeadingGas);
+			// };
 		};
+
 		//побольше времени чтобы было нормально...
 		//setVar(this,lastActivity,tickTime + callFunc(this,spreadTimeout) + randInt(1,callFunc(this,spreadTimeout)));
 		super();//std timing
@@ -585,6 +604,12 @@ class(AtmosAreaGas) extends(AtmosAreaBase)
 		true
 	};
 
+	// func(getTransferAmountBySize)
+	// {
+	// 	objParams_1(_vol);
+	// 	null
+	// };
+
 
 	func(updateVolume)
 	{
@@ -602,12 +627,21 @@ class(AtmosAreaGas) extends(AtmosAreaBase)
 	{
 		objParams();
 		super();
-		callSelfParams(removeVolume,0.01);
+		callSelfParams(removeVolume,0.1);
 		if (getSelf(volume) <= 0) then {
 			delete(this);
 		} else {
 			callSelf(updateLeadingGas);
 		};
+	};
+
+	//todo unload model visual on dispose object
+	var(enabledVisual,false);
+	func(setEnableVisual)
+	{
+		objParams_1(_mode);
+		if equals(_mode,getSelf(enabledVisual)) exitWith {false};
+		
 	};
 
 	func(handleActivitySides)
@@ -616,47 +650,98 @@ class(AtmosAreaGas) extends(AtmosAreaBase)
 		_sides insert [0,[[0,0,1]],false];//top spread
 	};
 
-	// func(onActivity) //custom activity
-	// {
-	// 	objParams();
-	// 	private _sides = [
-	// 		randInt(callSelf(getPropagationSideMin),callSelf(getPropagationSideMax)),
-	// 		callSelf(getPropagationChunkMode)
-	// 	] call atmos_getNextRandAroundChunks;
+	func(onActivity)
+	{
+		objParams();
+		private _sides = [
+			randInt(callSelf(getPropagationSideMin),callSelf(getPropagationSideMax)),
+			callSelf(getPropagationChunkMode)
+		] call atmos_getNextRandAroundChunks;
 
-	// 	callSelfParams(handleActivitySides,_sides);
+		callSelfParams(handleActivitySides,_sides);
 
-	// 	#ifdef ATMOS_DEBUG_TEST_SIDE_SPREAD
-	// 	_sides = [ATMOS_DEBUG_TEST_SIDE_SPREAD];
-	// 	#endif
+		#ifdef ATMOS_DEBUG_TEST_SIDE_SPREAD
+		_sides = [ATMOS_DEBUG_TEST_SIDE_SPREAD];
+		#endif
 		
-	// 	{
-	// 		if callSelfParams(canPropagateTo,_x) then {
-	// 			callSelfParams(onPropagateTo,_x);
-	// 		};
-	// 		false
-	// 	} count _sides;
-	// };
+		private _psides = [];
+		{
+			if callSelfParams(canPropagateTo,_x) then {
+				_psides pushBack _x;
+			};
+			false
+		} count _sides;
+
+		private _iterCnt = count _psides;
+		if (_iterCnt == 0) exitWith {};
+
+		//private _valPass = getSelf(volume)/2;//0.5 min getSelf(volume);
+
+		private _DIFF_RATE = 0.5;
+		private _valPass = getSelf(volume) * _DIFF_RATE;
+
+		private _val = _valPass/_iterCnt;
+		//traceformat("Calculate end: pass %1, cnt: %2 %3",_val arg _iterCnt);
+		{
+			callSelfParams(onPropagateToGas,_x arg _val);
+			false
+		} count _psides;
+	};
+
+	func(getDiffusionRate)
+	{
+	//	objParams_3(_)
+	};
+
+	func(onPropagateToGas)
+	{
+		objParams_2(_side,_transVal);
+		private _myVol = getSelf(volume);
+		if (_myVol <= 0) exitWith {};
+		private _new = callSelfParams(onPropagateTo,_side);
+		setVar(_new,createdFrom,this);
+		callSelfParams(transferTo,_new arg _transVal);
+		callSelf(updateLeadingGas);
+		callFunc(_new,updateLeadingGas);
+
+		private _srcCh = getVar(_new,createdSource);
+		if isNullReference(_srcCh) then {
+			setVar(_new,createdSource,getSelf(chunk));
+		};
+	};
+	var(createdSource,nullPtr);
 
 	func(canPropagateTo)
 	{
 		objParams_1(_side);
-		if (getSelf(volume) <= 0.2) exitWith {false};
+
+		//if (getSelf(volume) <= ifcheck(equals(_side,vec3(0,0,1)),1,5)) exitWith {false};
+		if (getSelf(volume) < 0.8) exitWith {false};
+		private _canProp = true;
+		private _chIdTo = callFuncParams(getSelf(chunk),getChunkFromSide,_side);
+		private _gas = callFunc(_chIdTo,getGasInChunk);
+		
+		if equals(getSelf(createdSource),_chIdTo) then {
+			_canProp = false;
+		};
+		
+		
+		if (!_canProp) exitWith {false};
 		super() && getSelf(volume) > 0;
 	};
 
-	func(onPropagateTo)
-	{
-		objParams_1(_side);
-		private _myVol = getSelf(volume);
-		if (_myVol <= 0) exitWith {};
-		private _new = super();
-		setVar(_new,createdFrom,this);
-		private _transVal = _myVol/3;
-		callSelfParams(transferTo,_new arg _transVal);
-		callSelf(updateLeadingGas);
-		callFunc(_new,updateLeadingGas);
-	};
+	// func(onPropagateTo)
+	// {
+	// 	objParams_1(_side);
+	// 	private _myVol = getSelf(volume);
+	// 	if (_myVol <= 0) exitWith {};
+	// 	private _new = super();
+	// 	setVar(_new,createdFrom,this);
+	// 	private _transVal = _myVol/3;
+	// 	callSelfParams(transferTo,_new arg _transVal);
+	// 	callSelf(updateLeadingGas);
+	// 	callFunc(_new,updateLeadingGas);
+	// };
 
 	func(getGasLightType)
 	{

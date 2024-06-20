@@ -13,7 +13,7 @@
 //#define ATMOS_DEBUG_DRAW_NEAROBJECTS
 //#define ATMOS_DEBUG_DRAW_CHUNKOBJECTS
 //отладка силы горения
-#define ATMOS_DEBUG_ON_UPDATE
+//#define ATMOS_DEBUG_ON_UPDATE
 //ручная симуляция
 //#define ATMOS_MANAGED_ACTIVITY
 
