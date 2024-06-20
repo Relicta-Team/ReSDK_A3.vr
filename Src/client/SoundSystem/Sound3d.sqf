@@ -134,7 +134,7 @@ sound3d_playLocalOnObjectLooped = {
 	private _pspFT = array_copy(_playSoundParams);
 	_pspFT set [6,_preendbuf];
 	private _sid = _pspFT call soundGlobal_play;
-	private _spar = soundParams _sid;
+	private _spar = _sid call soundParams_impl;
 	if equals(_spar,[]) exitWith {
 		setLastError("Sound params empty; Args: " + str _this);
 		warningformat("sound3d::playLocalOnObjectLooped() - Sound params empty; Args: %1",_this);
@@ -144,13 +144,16 @@ sound3d_playLocalOnObjectLooped = {
 	sound3d_internal_list_soundBuff pushBack _params;
 };
 
+VM_COMPILER_ADDFUNC_UNARY(stopSound_impl,stopSound);
+VM_COMPILER_ADDFUNC_UNARY(soundParams_impl,soundParams);
+
 sound3d_stopLocalLopped = {
 	params ["_soundPtr"];
 	if (_soundPtr >= (count sound3d_internal_list_soundBuff)) exitWith {false};
 	private _params = sound3d_internal_list_soundBuff select _soundPtr;
-	private _spar = soundParams (_params select 1);
+	private _spar = (_params select 1) call soundParams_impl;
 	if equals(_spar,[]) exitWith {false};
-	stopSound (_params select 1);
+	(_params select 1) call stopSound_impl;
 	sound3d_internal_list_soundBuff select _soundPtr set [0,objNull];
 	true
 };
@@ -159,7 +162,7 @@ sound3d_stopLocalLopped = {
 #ifdef EDITOR
 if !isNullVar(sound3d_internal_list_soundBuff) then {
 	{
-		stopSound (_x select 1);
+		(_x select 1) call stopSound_impl;
 	} foreach sound3d_internal_list_soundBuff;
 };
 #endif
@@ -170,10 +173,10 @@ sound3d_internal_localHandler = {
 	{
 		_x params ["_src","_sid","_preend","_psParams"];
 		//traceformat("check sound %1",_psParams)
-		private _spar = soundParams _sid;
+		private _spar = _sid call soundParams_impl;
 		//this stop event
 		if isNullReference(_src) exitWith {
-			stopSound _sid;
+			_sid call stopSound_impl;
 			_slist set [_foreachindex,objNull];
 			_needDel = true;
 		};
@@ -204,17 +207,3 @@ sound3d_internal_localHandler = {
 		
 	};
 }; startUpdate(sound3d_internal_localHandler,0.1);
-
-/*
-
-soundParams id
-Parameters:
-id: Number - id returned by playSoundUI and playSound3D commands
-Return Value:
-Array in format [path, curPos, length, time, volume], where:
-path: String - the path to the played sound file
-curPos: Number - current play position in 0...1 range
-length: Number - total sound duration in seconds
-time: Number - time passed since the start of playback
-volume: Number - playback volume
- */
