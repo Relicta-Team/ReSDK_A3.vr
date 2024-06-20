@@ -25,47 +25,6 @@ class(Samovar) extends(InteractibleInterior)
 	var(model,"ml\ml_object_new\model_24\samovar.p3d");
 endclass
 
-class(Umivalnik) extends(InteractibleInterior)
-	var(model,"metro_ob\model\umivalnik1.p3d");
-	var(material,"MatSynt");
-	var(sourceMatter,"Water");
-	func(onInteractWith)
-	{
-		objParams_2(_with,_usr);
-		if isTypeOf(_with,IReagentNDItem) exitWith {
-			if callFuncParams(_with,addReagent,getSelf(sourceMatter) arg getVar(_with,curTransferSize)) then {
-				callFuncParams(_usr,meSay,"наполняет " + callFunc(_with,getName));
-				callSelf(playSinkSound);
-			};
-		};
-	};
-
-	func(onClick)
-	{
-		objParams_1(_usr);
-		private _pt = nullPtr;
-		{
-			_pt = callFuncParams(_usr,getPart,_x);
-			if !isNullReference(_pt) then {
-				setVar(_pt,germs,(getVar(_pt,germs) - randInt(40,60)) max 0);
-			};
-		} foreach [BP_INDEX_ARM_R,BP_INDEX_ARM_L,BP_INDEX_HEAD];
-
-		if !isNullReference(_pt) then {
-			callFunc(_usr,syncGermsVisual);
-			callFuncParams(_usr,meSay,"умывается");
-			callSelf(playSinkSound);
-		};
-	};
-
-	func(playSinkSound)
-	{
-		objParams();
-		callSelfParams(playSound,"reagents\sink.ogg" arg getRandomPitchInRange(0.9,1.3));
-	};
-
-endclass
-
 class(HoochMachine) extends(InteractibleInterior)
 	var(model,"ml_shabut\exoduss\samogonapparat.p3d");
 endclass
