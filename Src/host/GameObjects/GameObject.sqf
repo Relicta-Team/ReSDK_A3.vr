@@ -83,7 +83,7 @@ class(GameObject) extends(ManagedObject)
 	editor_attribute("Tooltip" arg "Модифицируемый метод получения описания")
 	getter_func(getDesc,if isNull(getSelf(desc)) then {""} else {getSelf(desc)});
 
-	verbListOverride("description mainact"); //список действий которые можно сделать с ЭТИМ объектом
+	verbListOverride("extinguish description mainact"); //список действий которые можно сделать с ЭТИМ объектом
 
 	"
 		name:В мире

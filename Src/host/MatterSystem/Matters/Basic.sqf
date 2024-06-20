@@ -30,6 +30,24 @@ matter(Spirt) extends(Matter)
 
 matter(Water) extends(Matter)
 	prop(name,"Вода");
+	prop(overdose,30);
+	def(onOverdosed)
+		//very temp code... fuck this
+		callSelfParams(adjustToxin,4*randInt(6,8));
+		modSelf(vomitAmount, + 2*4);
+		// private _liv = callSelfParams(getBodyOrgan,BO_INDEX_LIVER);
+		// traceformat("liver %1 inside %2",_liv arg callSelfParams(getPart,BP_INDEX_TORSO))
+		// if !isNullReference(_liv) then {
+		// 	callFuncParams(callSelfParams(getPart,BP_INDEX_TORSO),damageOrgan,BO_INDEX_LIVER);
+		// };
+		// {
+		// 	private _kid = callSelfParams(getBodyOrgan,_x);
+		// 	if !isNullReference(_kid) then {
+		// 		callFuncParams(callSelfParams(getPart,BP_INDEX_TORSO),damageOrgan,_x);
+		// 	};
+		// } foreach [BO_INDEX_KIDNEY_L,BO_INDEX_KIDNEY_R];
+	end
+
 
 matter(Blood) extends(Matter)
 	prop(name,"Кровь");
