@@ -1417,7 +1417,7 @@ _3361_202393746_2229028_62116 = ['Key',[3361.2,3746.22,28.6212],45.8999,[0,0,1],
 ['BrownLeatherChair',[3368.13,3746.04,27.6381],231.888,[0,0,1], {go_editor_globalRefs set ["RBanditMainSaloonChair",_thisObj];
 }] call InitStruct; 
 ['BrownLeatherChair',[3368.21,3742.01,27.6381],313.079,[0,0,1]] call InitStruct; 
-['Candle',[3366.76,3743.75,28.425],0,[0,0,1]] call InitItem; 
+['Candle',[3366.26,3743.21,28.425],0,[0,0,1]] call InitItem; 
 ['Candle',[3365.21,3741.96,28.3232],0,[0,0,1]] call InitItem; 
 ['Candle',[3364.45,3737.67,31.8912],0,[0,0,1]] call InitItem; 
 ['Candle',[3365,3739.64,27.6232],0,[0,0,1]] call InitItem; 
@@ -2013,7 +2013,7 @@ _3420_941893497_050291_37144 = ['IStruct',[3420.94,3497.05,1.37144],0,[0,0,1], {
 _3420_738043499_405031_46790 = ['IStruct',[3420.74,3499.41,6.66745,true],95.3356,[7.75496e-005,0.000909055,1], {_thisObj setvariable ['model','relicta_models\models\mutants\spider.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3420_746093499_722662_13411 = ['IStruct',[3420.75,3499.72,7.13388,true],0,[-0.00091349,0,1], {_thisObj setvariable ['model','ml_shabut\exoduss\shyrevo.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['MedicalCurtainSmall',[3426.92,3652.26,25.75],0.960737,[0,0,1]] call InitStruct; 
-['ClayWallSmall',[3427.4,3657.09,25.7814],179.89,[0,0,1]] call InitStruct; 
+['ClayWallSmall',[3427.43,3657.09,25.7814],179.89,[0,0,1]] call InitStruct; 
 
 
 

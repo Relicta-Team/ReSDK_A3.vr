@@ -81,6 +81,7 @@ class(TorchHolder) extends(IStruct)
 		deleteVehicle _temptorchGO;
 
 		setSelf(torch,_torch);
+		setVar(_torch,__static_disableCanIgnite,true); //tempvar
 
 	};
 
@@ -95,6 +96,7 @@ class(TorchHolder) extends(IStruct)
 		[_hld] call deleteStructure;
 			
 		private _itm = getSelf(torch);
+		setVar(_itm,__static_disableCanIgnite,null);
 		setSelf(torch,nullPtr);
 
 		callFuncParams(_usr,addItem,_itm);

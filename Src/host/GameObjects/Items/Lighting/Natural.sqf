@@ -237,6 +237,7 @@ class(Torch) extends(ILightible)
 	func(canIgniteArea)
 	{
 		objParams();
+		if !isNull(getSelf(__static_disableCanIgnite)) exitWith {false};//todo: tempvar, remove after refactoring holders
 		if !getSelf(lightIsEnabled) exitWith {false};
 
 		if callSelf(isItem) exitWith {
