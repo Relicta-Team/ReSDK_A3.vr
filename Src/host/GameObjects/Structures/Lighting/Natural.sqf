@@ -192,6 +192,7 @@ class(TorchAsStruct) extends(Campfire)
 	var(holder,nullPtr); //привязан к холдеру
 	var(light,LIGHT_FIRE);
 	getter_func(isFireLight,true);
+	getter_func(canIgniteArea,false); //holders cannot ignite any
 	var(lightIsEnabled,false);
 	
 	func(onUpdate)

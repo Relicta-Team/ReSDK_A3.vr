@@ -55,9 +55,10 @@ class(Campfire) extends(ICampfireStruct)
 	var(material,"MatStone");
 	var(dr,2);
 	getterconst_func(isFireLight,true);
+	getter_func(canIgniteArea,getSelf(lightIsEnabled));
 
 	var(fuelLeft,60 * 25); //сколько топлива осталось
-	var(handleUpdate,-1);
+	autoref var(handleUpdate,-1);
 
 	func(getDescFor)
 	{
@@ -124,7 +125,10 @@ class(Campfire) extends(ICampfireStruct)
 				callFunc(_cookingCont,onUpdate);
 			};
 		};
+
+		callSelf(handleIgniteArea);
 		modSelf(fuelLeft,-1);
+
 		if (getSelf(fuelLeft) == 0) exitWith {
 			callSelfParams(lightSetMode,false);
 		};
@@ -190,6 +194,12 @@ class(BarrelCampfireBig) extends(CampfireBig)
 	var(name,"Костёр в бочке");
 	var(material,"MatMetal");
 	var(dr,2);
+
+	func(checkCanIgniteObject)
+	{
+		objParams_1(_targ);
+		callSelfParams(getDistanceTo,_targ) <= 0.15
+	};
 endclass
 
 editor_attribute("EditorGenerated")
