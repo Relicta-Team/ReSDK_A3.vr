@@ -80,6 +80,7 @@ class(IReagentItem) extends(Item)
 	{
 		objParams();
 		callSelfParams(removeReagents,getSelf(curTransferSize));
+		callSelfParams(playSound,"reagents\water_land" arg getRandomPitchInRange(0.8,1.2));
 	};
 
 	func(onInteractWith)

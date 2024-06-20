@@ -1697,6 +1697,31 @@ class(IDestructible) extends(GameObject)
 		true;
 	};
 
+region(Fire functionality)
+
+	getter_func(canIgniteArea,false); //может ли этот источник поджечь свой чанк
+	//доп проверка на возгорание объекта. например можно настроить, чтобы источником был маленький предмет
+	func(checkCanIgniteObject)
+	{
+		objParams_1(_targ);
+		true
+	};
+	var(__s_nextCheckIgnite,0);
+	func(handleIgniteArea)
+	{
+		objParams();
+		if !callSelf(canIgniteArea) exitWith {};
+
+		if (tickTime>=getSelf(__s_nextCheckIgnite)) then {
+			#ifdef EDITOR
+			setSelf(__s_nextCheckIgnite,tickTime + 3);
+			#else
+			setSelf(__s_nextCheckIgnite,tickTime + randInt(10,20));
+			#endif
+			[this] call atmos_tryIgnite;
+		};
+	};
+
 	// "
 	// 	name:Установка света
 	// 	desc:Включает или выключает освещение для данного объекта
