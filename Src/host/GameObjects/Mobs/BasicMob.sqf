@@ -625,6 +625,10 @@ region(Connect control events)
 		
 		//init voice
 		callSelfParams(applyVoiceType,null);
+
+		if callSelf(enabledAtmosReaction) then {
+			callSelfParams(setAtmosModeReaction,true);
+		};
 	};
 	
 	// Событие вызывается при изменении локальности клиента. (параметр true означает что владение мобом передано серверу)
@@ -2035,6 +2039,61 @@ region(Step sounds component)
 			assert_str(!isNullReference(getSelf(owner)),"Mob::setStepSoundSystem() - owner must be not null");
 		};
 		setSelf(__enabledStepSoundSys,_mode);
+	};
+
+region(Atmos subsystem)
+
+	getterconst_func(enabledAtmosReaction,false);
+	autoref var_handle(__atmosHandle);
+
+	//timeout react
+	var(__lastChunkReactStep,0);
+	var(__lastChunkReactBody,0);
+	var(__lastFireDamage,0);
+
+	func(setAtmosModeReaction)
+	{
+		objParams_1(_mode);
+		private _curMode = getSelf(__atmosHandle)!=-1;
+		if (_mode==_curMode) exitWith {false};
+		if (_mode) then {
+			callSelfParams(startUpdateMethod,"onAtmosUpdate" arg "__atmosHandle" arg TIME_ATMOS_MAIN_HANDLER_UPDATE);
+		} else {
+			callSelfParams(stopUpdateMethod,"__atmosHandle");
+		};
+		true
+	};
+
+	func(onAtmosUpdate)
+	{
+		updateParams();
+		private _o = getSelf(owner);
+		if isNullReference(_o) exitWith {};
+		private _hpos = (
+			_o modelToWorldVisual (_o selectionPosition "spine3")
+		) call atmos_chunkPosToId;
+		private _lpos = (getposatl _o) call atmos_chunkPosToId;
+		
+		//handle breathing
+		if (tickTime >= getSelf(__lastChunkReactBody)) then {
+			setSelf(__lastChunkReactBody,tickTime+TIME_ATMOS_DELAY_REACT_BODY);
+			_chHd = [_hpos] call atmos_getChunkAtChIdUnsafe;
+			if !isNullReference(_chHd) then {
+				callFuncParams(_chHd,onMobContactBody,this)
+			};
+		};
+
+		//legs check
+		if (tickTime >= getSelf(__lastChunkReactStep)) then {
+			setSelf(__lastChunkReactStep,tickTime+TIME_ATMOS_DELAY_REACT_LEGS);
+			
+			if equals(_hpos,_lpos) exitWith {};// exit, because already contacted on body (STANCE_MIDDLE)
+			
+			_chLg = [_lpos] call atmos_getChunkAtChIdUnsafe;
+			if !isNullReference(_chLg) then {
+				callFuncParams(_chLg,onMobContactTurf,this);
+			};
+		};
 	};
 
 endclass

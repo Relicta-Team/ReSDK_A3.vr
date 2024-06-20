@@ -212,6 +212,20 @@ class(ILightibleStruct) extends(IStruct)
 		true
 	};
 
+	func(lightSetType)
+	{
+		objParams_1(_lt);
+		
+		setSelf(light,_lt);
+		if getSelf(lightIsEnabled) then {
+			private _vObj = getSelf(loc);
+			if !isNullReference(_vObj) then {
+				[_vObj,_lt,false] call noe_syncLightAtObject;
+			};
+			callSelf(replicateObject);
+		};
+	};
+
 endclass
 
 

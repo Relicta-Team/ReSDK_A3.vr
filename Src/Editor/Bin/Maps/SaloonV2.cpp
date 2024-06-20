@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=1654;
+		nextID=1712;
 	};
 	class Camera
 	{
-		pos[]={3428.7092,33.193729,3661.073};
-		dir[]={0.024980459,-0.27774155,-0.96044236};
-		up[]={0.0072240769,0.96061647,-0.27775288};
-		aside[]={-0.99975669,2.1896994e-006,-0.026004422};
+		pos[]={3461.8333,32.953838,3636.7441};
+		dir[]={0.94965214,-0.31256938,-0.022165973};
+		up[]={0.31249306,0.94989014,-0.0072939526};
+		aside[]={-0.02333549,-9.3492417e-008,-0.99974155};
 	};
 };
 binarizationWanted=0;
@@ -22037,7 +22037,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3366.7583,33.509167,3743.7527};
+								position[]={3366.261,33.509167,3743.2053};
 							};
 							side="Empty";
 							class Attributes
@@ -29928,6 +29928,7 @@ class Mission
 				{
 					dataType="Layer";
 					name="А Лекарь";
+					state=1;
 					class Entities
 					{
 						items=55;
@@ -30871,11 +30872,11 @@ class Mission
 						};
 					};
 					id=8458;
-					atlOffset=0.96467018;
+					atlOffset=0.085792542;
 				};
 			};
 			id=6175;
-			atlOffset=2.4319611;
+			atlOffset=1.6244545;
 		};
 		class Item4
 		{
@@ -34056,7 +34057,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3426.9202,31.94479,3652.2573};
-				angles[]={0,0.016768031,-0};
+				angles[]={0,0.016768031,0};
 			};
 			side="Empty";
 			flags=1;
@@ -34074,7 +34075,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3427.428,30.916199,3657.0876};
-				angles[]={0,3.1396756,-0};
+				angles[]={0,3.1396756,0};
 			};
 			side="Empty";
 			flags=4;

@@ -34,7 +34,7 @@ le_se_cfgRange = [2100,4900];
 //Функция-обработчик скриптового освещения (для клиента)
 le_se_handleConfig = {
 	params ["_cfgDataList",["_isDrop",false],"_dropPos"];
-	private ["_t","_events","_o"];
+	private ["_t","_events","_o","_cfgDataCur"];
 	
 	private _funcInit = le_se_intenral_handleVarInit;
 	if (_isDrop) then {
@@ -47,6 +47,7 @@ le_se_handleConfig = {
 		{
 			_o = objnull;
 			call {
+				_cfgDataCur = _x;
 				_t = _x select 0;
 				_events = _x param [1,[]]; //list events
 				//this dosent used
@@ -69,6 +70,7 @@ le_se_handleConfig = {
 				// 	call _funcInit;
 				// };
 			};
+			_events call le_se_handleCfgEvents;
 			if !isNullReference(_o) then {
 				allEmitters pushBack _o;
 			};
@@ -77,6 +79,7 @@ le_se_handleConfig = {
 		{
 			_o = objnull;
 			call {
+				_cfgDataCur = _x;
 				_t = _x select 0;
 				_events = _x param [1,[]]; //list events
 				//this dosent used
@@ -100,6 +103,7 @@ le_se_handleConfig = {
 					call _funcInit;
 				};
 			};
+			_events call le_se_handleCfgEvents;
 			if !isNullReference(_o) then {
 				allEmitters pushBack _o;
 			};
@@ -114,6 +118,44 @@ le_se_handleConfig = {
 	//Возвращаем свет 
 	sourceObject getvariable ["__light",objnull]
 };
+
+le_se_handleCfgEvents = {
+	//all configs are handler
+	//params is: ["configHandlerName",cfgparams_any]
+	//confighandler was
+	//inside configHandlerName params is: cfgOwner:obj (cannot set objvars), src - source object, cfgparams, outparams
+	private _hfunc = null;
+	{
+		_x params ["_cfgName","_cfgInParams"];
+		private _hfunc = le_se_map_cfgHandlers getorDefault [_cfgName,le_se_internal_errorFuncCfgEvents];
+		[_o,sourceObject,_cfgInParams,
+			null //todo implement outparams
+		] call _hfunc
+	} foreach _this;
+};
+le_se_internal_errorFuncCfgEvents = {
+	private _errpar = _this;
+	setLastError("Cannot initialize config handler: " + str _errpar);
+};
+le_se_registerConfigHandler = {
+	params ["_cfgName","_cfgCode"];
+	le_se_map_cfgHandlers set [_cfgName,_cfgCode];
+}; //регистрация нового конфига. только на клиенте
+
+//получает значение опции из конфига. используется в хандлерах событий скриптовых эмиттеров
+le_se_getCurrentConfigPropVal = {
+	params ["_srch"];
+	
+	private _ls = _cfgDataCur select [2,(count _cfgDataCur) - 2];
+	private _id = _ls findif {(_x select 0) == _srch};
+	if (_id == -1) exitWith {null};
+	_ls select _id select 1
+};
+le_se_map_cfgHandlers = createHashMap; //карта зарегистрированных конфигов
+
+#if __has_include("SEConfigHandlers.sqf")
+	#include "SEConfigHandlers.sqf"
+#endif
 
 le_se_mapHandlersShots = null;
 le_se_mapHandlers = createHashMapFromArray [

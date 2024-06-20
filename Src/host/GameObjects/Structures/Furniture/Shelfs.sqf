@@ -18,6 +18,69 @@ class(ShelfBase) extends(Furniture)
 endclass
 
 editor_attribute("EditorGenerated")
+class(Sink) extends(ShelfBase)
+	var(model,"ca\structures\furniture\bathroom\sink\sink.p3d");
+	var(name,"Раковина");
+	var(desc,"Настоящая роскошь");
+
+	var(material,"MatBeton");
+	var(sourceMatter,"Water");
+	func(onInteractWith)
+	{
+		objParams_2(_with,_usr);
+		if isTypeOf(_with,IReagentNDItem) exitWith {
+			if !callSelfParams(canUseWaterSink,_usr) exitWith {};
+			if callFuncParams(_with,addReagent,getSelf(sourceMatter) arg getVar(_with,curTransferSize)) then {
+				callFuncParams(_usr,meSay,"наполняет " + callFunc(_with,getName));
+				callSelf(playSinkSound);
+			};
+		};
+	};
+
+	func(onClick)
+	{
+		objParams_1(_usr);
+		if !callSelfParams(canUseWaterSink,_usr) exitWith {};
+		private _pt = nullPtr;
+		{
+			_pt = callFuncParams(_usr,getPart,_x);
+			if !isNullReference(_pt) then {
+				setVar(_pt,germs,(getVar(_pt,germs) - randInt(40,60)) max 0);
+			};
+		} foreach [BP_INDEX_ARM_R,BP_INDEX_ARM_L,BP_INDEX_HEAD];
+
+		if !isNullReference(_pt) then {
+			callFunc(_usr,syncGermsVisual);
+			callFuncParams(_usr,meSay,"умывается");
+			callSelf(playSinkSound);
+		};
+	};
+
+	func(canUseWaterSink)
+	{
+		objParams_1(_usr);
+		if (getSelf(hp)<=(getSelf(hpMax)/3)) exitWith {
+			private _m = pick["слишком сильно повреждено."];
+			callFuncParams(_usr,localSay,callSelf(getName) + " "+_m arg "error");
+			false;
+		};
+		true
+	};
+
+	func(playSinkSound)
+	{
+		objParams();
+		callSelfParams(playSound,"reagents\sink.ogg" arg getRandomPitchInRange(0.9,1.3));
+	};
+endclass
+
+
+class(Umivalnik) extends(Sink)
+	var(model,"metro_ob\model\umivalnik1.p3d");
+	var(name,"Умывальник");
+endclass
+
+editor_attribute("EditorGenerated")
 class(WoodenSmallShelf) extends(ShelfBase)
 	var(model,"ml\ml_object_new\shabbat\bar_stoika.p3d");
 endclass

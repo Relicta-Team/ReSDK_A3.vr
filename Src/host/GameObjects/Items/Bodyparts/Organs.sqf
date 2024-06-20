@@ -700,6 +700,10 @@ class(Lungs) extends(VitalOrgan)
 				};
 				_checkLovVal = true;
 			};
+
+			if (getVar(_usr,oxygen)<=3) then {
+				callFuncParams(_usr,setUnconscious,randInt(10,30));
+			};
 			
 			if (_checkLovVal) then {
 				if (getVar(_usr,oxygen)<=0) then {

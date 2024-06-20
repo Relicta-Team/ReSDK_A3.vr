@@ -88,6 +88,8 @@ var(isCloseEyes,false); //закрыты ли глаза (веки) персон
 
 var(lastDamageTime,0); //время последнего урона по персонажу
 
+getterconst_func(enabledAtmosReaction,true); //enable living mob atmos react
+
 //системные звуки персонажа
 getter_func(getRetchSounds,["mob\male_retch1" arg "mob\male_retch2" arg "mob\male_retch3"]); //подавиться
 getter_func(getPainSounds,["mob\male_pain1" arg "mob\male_pain2" arg "mob\male_pain3"]); //боль
@@ -1047,7 +1049,8 @@ region(Status effects)
 		objParams();
 		if getSelf(isHoldedBreath) exitWith {false};
 		private _breathOrg = callSelfParams(getBodyOrgan,BO_INDEX_LUNGS);
-		!isNullReference(_breathOrg) && {!callFunc(_breathOrg,isStatusDestroyed)}
+		if (isNullReference(_breathOrg) || {callFunc(_breathOrg,isStatusDestroyed)}) exitwith {false};
+		true
 	};
 
 	func(adjustToxin)

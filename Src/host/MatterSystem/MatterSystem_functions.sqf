@@ -361,6 +361,8 @@ ms_addMatter = {
 
 	//Места в мсе может не хватить. надо ограничить сверху по вместимости
 	_amount = _amount max 0 min ms_getFreeSpace(_ms);
+	
+	if (_amount == 0) exitWith {false};//мы не можем добавить туда ничего. реакций не будет
 
 	// Материя существует в мсе
 	if (_matter in _mlist) then {
