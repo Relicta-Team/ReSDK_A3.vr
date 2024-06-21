@@ -46,6 +46,11 @@ noe_registerObject = {
 			rpcSendToClient(getVar(_x,id),"onupdob",_packet);
 		} foreach chunk_getOwners(_chdata);
 	};
+
+	//request for update atmos chunk
+	assert_str(!isNullReference(_vis),"Null object in noe::registerObject; ptr -> " + _ptr);
+	private _chAtm = [(getposatl _vis)call atmos_chunkPosToId] call atmos_getChunkAtChId;
+	setVar(_chAtm,flagUpdObj,true);
 };
 
 //выводим регистрацию объекта
@@ -253,6 +258,22 @@ noe_unregisterLightAtObject = {
 		{
 			rpcSendToClient(getVar(_x,id),"onupdob",_packet);
 		} foreach chunk_getOwners(_chunkObject);
+	};
+};
+
+noe_syncLightAtObject = {
+	params ["_obj","_light",["_updateByteArr",false]];
+	if isNull(_obj getvariable "light") then { //fix if light is not register
+		_obj setvariable ["flags",(_obj getvariable "flags") + lightObj_true];
+	};
+	_obj setvariable ["light",_light];
+	
+	//reload serverlight
+	[_obj] call slt_destr;
+	[_obj,_light] call slt_create;
+
+	if (_updateByteArr) then {
+		[_obj] call noe_updateObjectByteArr;
 	};
 };
 

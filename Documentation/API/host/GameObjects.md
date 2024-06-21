@@ -361,7 +361,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 713](../../../Src/host/GameObjects/GameObject.sqf#L713)
+File: [host\GameObjects\GameObject.sqf at line 726](../../../Src/host/GameObjects/GameObject.sqf#L726)
 ## sectorSize
 
 Type: constant
@@ -373,7 +373,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 714](../../../Src/host/GameObjects/GameObject.sqf#L714)
+File: [host\GameObjects\GameObject.sqf at line 727](../../../Src/host/GameObjects/GameObject.sqf#L727)
 ## flyingObject
 
 Type: Variable
@@ -397,7 +397,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\GameObject.sqf at line 433](../../../Src/host/GameObjects/GameObject.sqf#L433)
+File: [host\GameObjects\GameObject.sqf at line 446](../../../Src/host/GameObjects/GameObject.sqf#L446)
 ## go_internal_chatMesMap
 
 Type: Variable
@@ -409,7 +409,7 @@ Initial value:
 ```sqf
 ["emote","log","act","combat","info","mind","event","system","error","default"]
 ```
-File: [host\GameObjects\GameObject.sqf at line 1036](../../../Src/host/GameObjects/GameObject.sqf#L1036)
+File: [host\GameObjects\GameObject.sqf at line 1049](../../../Src/host/GameObjects/GameObject.sqf#L1049)
 ## go_internal_chatMesMapText
 
 Type: Variable
@@ -421,7 +421,7 @@ Initial value:
 ```sqf
 ["Эмоут:Кастомное пользовательское действие",...
 ```
-File: [host\GameObjects\GameObject.sqf at line 1037](../../../Src/host/GameObjects/GameObject.sqf#L1037)
+File: [host\GameObjects\GameObject.sqf at line 1050](../../../Src/host/GameObjects/GameObject.sqf#L1050)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
@@ -3134,6 +3134,42 @@ Replaced value:
 0.5
 ```
 File: [host\GameObjects\ConstantAndDefines\TimeConstants.h at line 22](../../../Src/host/GameObjects/ConstantAndDefines/TimeConstants.h#L22)
+## TIME_ATMOS_MAIN_HANDLER_UPDATE
+
+Type: constant
+
+Description: частота вызова метода проверки реакции
+
+
+Replaced value:
+```sqf
+0.1
+```
+File: [host\GameObjects\ConstantAndDefines\TimeConstants.h at line 25](../../../Src/host/GameObjects/ConstantAndDefines/TimeConstants.h#L25)
+## TIME_ATMOS_DELAY_REACT_BODY
+
+Type: constant
+
+Description: таймеры реакции моба на атмос. для тела и ног
+
+
+Replaced value:
+```sqf
+0.7
+```
+File: [host\GameObjects\ConstantAndDefines\TimeConstants.h at line 27](../../../Src/host/GameObjects/ConstantAndDefines/TimeConstants.h#L27)
+## TIME_ATMOS_DELAY_REACT_LEGS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+0.7
+```
+File: [host\GameObjects\ConstantAndDefines\TimeConstants.h at line 28](../../../Src/host/GameObjects/ConstantAndDefines/TimeConstants.h#L28)
 # Decor.sqf
 
 ## oop_internal_decor_makeUnicalName
@@ -3816,7 +3852,7 @@ Replaced value:
 ```sqf
 (getSelf(owner) call anim_getUnitAnim)
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 843](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L843)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 848](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L848)
 ## __data_light_slot__
 
 Type: constant
@@ -3828,7 +3864,7 @@ Replaced value:
 ```sqf
 [[INV_BACKPACK,null], [INV_ARMOR,null], [INV_HEAD,null], [INV_BACK,null],[INV_CLOTH,null],[INV_FACE,null],[INV_HAND_R,null],[INV_HAND_L,null],[INV_BELT,null]]
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 953](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L953)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 958](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L958)
 ## debug_internal_getinteractiontarget_spheres
 
 Type: Variable
@@ -3958,7 +3994,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 365](../../../Src/host/GameObjects/Mobs/Mob.sqf#L365)
+File: [host\GameObjects\Mobs\Mob.sqf at line 368](../../../Src/host/GameObjects/Mobs/Mob.sqf#L368)
 # MobGhost.sqf
 
 ## hasBP(idx)
@@ -4393,7 +4429,7 @@ Description: replicator common
 - Param: _method
 - Param: _ctx
 
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 590](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L590)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 600](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L600)
 # Mob_Interact.sqf
 
 ## callScriptedEvent(action__)
@@ -4484,7 +4520,7 @@ Replaced value:
 ```sqf
 randInt(3,4)
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 826](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L826)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 828](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L828)
 ## hasBP(idx)
 
 Type: constant
@@ -4496,7 +4532,7 @@ Replaced value:
 ```sqf
 !isNullObject(_bpArray getOrDefault [idx arg nullPtr])
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 855](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L855)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 857](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L857)
 ## AMOUNT_REGEN_STAMINA
 
 Type: constant
@@ -4508,7 +4544,7 @@ Replaced value:
 ```sqf
 3.3
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 997](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L997)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 999](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L999)
 ## AMOUNT_LESS_STAMINA
 
 Type: constant
@@ -4520,7 +4556,7 @@ Replaced value:
 ```sqf
 0.5
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 998](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L998)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1000](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1000)
 ## UNC_TO_STAMINALOSS_MIN
 
 Type: constant
@@ -4532,7 +4568,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1268](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1268)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1271](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1271)
 ## UNC_TO_STAMINALOSS_MAX
 
 Type: constant
@@ -4544,7 +4580,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1269](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1269)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1272](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1272)
 ## __dmgAndHp
 
 Type: constant
@@ -4556,7 +4592,7 @@ Replaced value:
 ```sqf
 _dmg arg _hp
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1305](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1305)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1308](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1308)
 ## log_performance
 
 Type: constant
@@ -4568,7 +4604,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1306](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1306)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1309](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1309)
 ## lifelog(mes,fmt)
 
 Type: constant
@@ -4581,7 +4617,7 @@ Replaced value:
 ```sqf
 "debug_console" callExtension (format["[LOG::LIFE]" + (mes) + "#1011",fmt])
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1308](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1308)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1311](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1311)
 ## std_check_dam(low,up)
 
 Type: constant
@@ -4594,7 +4630,7 @@ Replaced value:
 ```sqf
 if (_dmg >= (low) && _dmg < (up)) exitWith
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1385](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1385)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1388](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1388)
 # Mob_Skills.sqf
 
 ## skill_def

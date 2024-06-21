@@ -245,10 +245,14 @@ class(Trap) extends(ITrapItem)
 	func(applyDamage)
 	{
 		objParams_4(_amount,_type,_worldPos,_cause);
+		
 		if callSelf(isTrapActive) then {
-			callSelfParams(setTrapEnable,false);
-			private _m = pick["схлопывается","издает леденящий щелчок","сжимается"];
-			callFuncParams(this,worldSay,"<t color='#AD1D1D' size='1.3'>"+callFuncParams(this,getNameFor,_usr) + " " + _m +".</t>");
+			private _damMob = _caller; //caller defined inside combat system
+			if !isNullVar(_damMob) then {
+				//мы считаем что ближайший ударил по ловушке...
+				callSelfParams(onActivateHandTrap,_damMob);
+				callSelfParams(setTrapEnable,false);
+			};
 		};
 		super();
 	};

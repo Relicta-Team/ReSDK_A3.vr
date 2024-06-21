@@ -1039,7 +1039,7 @@ Description:
 - Param: _matter
 - Param: _amount
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 388](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L388)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 390](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L390)
 ## ms_transToHolder
 
 Type: function
@@ -1049,7 +1049,7 @@ Description:
 - Param: _amount
 - Param: _chemType
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 412](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L412)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 414](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L414)
 ## ms_transferMatter
 
 Type: function
@@ -1059,7 +1059,7 @@ Description: #define ms_log_transfer
 - Param: _mTo
 - Param: _mAmount (optional, default INFINITY)
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 436](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L436)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 438](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L438)
 ## ms_removeMatters
 
 Type: function
@@ -1068,7 +1068,7 @@ Description:
 - Param: _mFrom
 - Param: _mAmount (optional, default INFINITY)
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 496](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L496)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 498](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L498)
 ## ms_removeMattersWithReturns
 
 Type: function
@@ -1077,7 +1077,7 @@ Description: убирает материи из мса и возвращает �
 - Param: _mFrom
 - Param: _mAmount (optional, default INFINITY)
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 543](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L543)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 545](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L545)
 # MatterSystem_init.sqf
 
 ## ms_map_allMatters
@@ -1118,7 +1118,7 @@ Replaced value:
 ```sqf
 matter(class) extends(Matter) prop(name,txtpropval);
 ```
-File: [host\MatterSystem\Matters\Basic.sqf at line 83](../../../Src/host/MatterSystem/Matters/Basic.sqf#L83)
+File: [host\MatterSystem\Matters\Basic.sqf at line 101](../../../Src/host/MatterSystem/Matters/Basic.sqf#L101)
 # Reactions.sqf
 
 ## ms_internal_react_gen

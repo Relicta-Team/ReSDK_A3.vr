@@ -137,7 +137,7 @@ class(Torch) extends(ILightible)
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_SWORD);
 
-	var(handleUpdate,-1);
+	autoref var(handleUpdate,-1);
 	var(fuelLeft,60 * 60 * 1.2);
 
 	func(getDescFor)
@@ -166,6 +166,7 @@ class(Torch) extends(ILightible)
 	{
 		updateParams();
 		modSelf(fuelLeft,-1);
+		callSelf(handleIgniteArea);
 		if (getSelf(fuelLeft) == 0) then {
 			callSelf(onFuelEmpty);
 			callSelfParams(lightSetMode,false);
@@ -233,6 +234,26 @@ class(Torch) extends(ILightible)
 		};
 	};
 
+	func(canIgniteArea)
+	{
+		objParams();
+		if !isNull(getSelf(__static_disableCanIgnite)) exitWith {false};//todo: tempvar, remove after refactoring holders
+		if !getSelf(lightIsEnabled) exitWith {false};
+
+		if callSelf(isItem) exitWith {
+			if callSelf(isInWorld) exitWith {true};
+			if callSelf(isInContainer) exitWith {true};
+			//item in mob inventory
+			private _loc = callSelf(getSourceLoc);
+			if callFunc(_loc,isMob) exitWith {
+				callFunc(_loc,getStance) <= STANCE_DOWN
+			};
+			true
+		};
+
+		true; //super == true
+	};
+
 endclass
 
 class(Sigarette) extends(Torch)
@@ -268,6 +289,16 @@ class(Sigarette) extends(Torch)
 			};
 		};
 		
+	};
+
+	func(checkCanIgniteObject)
+	{
+		objParams_1(_targ);
+		if callFunc(_targ,isItem) exitWith {
+			callSelfParams(getDistanceTo,_targ) <= 0.1;
+		};
+		//
+		false
 	};
 
 	func(lightSetMode)
@@ -320,6 +351,16 @@ class(Candle) extends(Sigarette)
 		setSelf(canRestoreLight,false);
 		setSelf(name,"Прогоревшая " + tolower callSelf(getName));
 	};
+
+	func(checkCanIgniteObject)
+	{
+		objParams_1(_targ);
+		if callFunc(_targ,isItem) exitWith {
+			callSelfParams(getDistanceTo,_targ) <= 0.1;
+		};
+		//
+		false
+	};
 endclass
 
 class(CandleDisabled) extends(Candle)
@@ -340,6 +381,24 @@ class(LampKerosene) extends(Torch)
 	var(light,LIGHT_LAMP_KEROSENE);
 	getterconst_func(getHandAnim,ITEM_HANDANIM_LAMP);
 	var(fuelLeft,60 * 60 * 1.3);
+
+	func(checkCanIgniteObject)
+	{
+		objParams_1(_targ);
+		if callFunc(_targ,isItem) exitWith {
+			callSelfParams(getDistanceTo,_targ) <= 0.5;
+		};
+		//
+		callSelfParams(getDistanceTo,_targ) <= 0.8;
+	};
+
+	func(canIgniteArea)
+	{
+		objParams();
+		if !super() exitWith {false};
+		if (getSelf(hp) > 0) exitWith {false}; //треснувшее стекло лампы распространит огонь
+		true
+	};
 endclass
 
 class(LampKeroseneDisabled) extends(LampKerosene)
@@ -373,6 +432,16 @@ class(Match) extends(Sigarette)
 		objParams_1(_mode);
 		if (getSelf(lightIsEnabled) && !_mode) then {setSelf(canRestoreLight,false)};
 		super();
+	};
+
+	func(checkCanIgniteObject)
+	{
+		objParams_1(_targ);
+		if callFunc(_targ,isItem) exitWith {
+			callSelfParams(getDistanceTo,_targ) <= 0.1;
+		};
+		//wtf???
+		prob(25)
 	};
 
 endclass

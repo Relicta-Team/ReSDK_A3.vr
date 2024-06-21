@@ -25,11 +25,6 @@ class(Samovar) extends(InteractibleInterior)
 	var(model,"ml\ml_object_new\model_24\samovar.p3d");
 endclass
 
-class(Umivalnik) extends(InteractibleInterior)
-	var(model,"metro_ob\model\umivalnik1.p3d");
-	var(material,"MatBeton");
-endclass
-
 class(HoochMachine) extends(InteractibleInterior)
 	var(model,"ml_shabut\exoduss\samogonapparat.p3d");
 endclass

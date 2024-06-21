@@ -62,6 +62,7 @@ loadFile("src\host\GURPS\Gurps.sqf");
 loadFile("src\host\PointerSystem\Pointer.sqf");
 loadFile("src\host\VerbSystem\verbs.sqf");
 loadFile("src\host\ClientManager\ClientManager.sqf");
+loadFile("src\host\Atmos\Atmos_init.sqf");
 loadFile("src\host\GamemodeManager\GamemodeManager.sqf");
 loadFile("src\host\CraftSystem\Craft.sqf"); //serverside craft system
 loadFile("src\host\AmbientControl\AmbientControl_init.sqf");

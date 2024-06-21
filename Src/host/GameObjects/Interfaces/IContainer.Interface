@@ -32,6 +32,15 @@ var(canUseContainer,true); //флаг для добавления содержи
 getterconst_func(startWith,[]); //list of items to start: getterconst_func(startWith,[["Item",["name","Предметец"],["weight",1200]],["Brain",["name","Объект"]]])
 // ------------- new vars end
 
+//!вычистку содержимого нельзя сделать через autoref, так как деструктор вызывает removeItem, который изменяет исходный массив и появляются миссы
+func(destructor)
+{
+	objParams();
+	{
+		delete(_x);
+	} foreach array_copy(getSelf(content));
+};
+
 func(getWeight)
 {
 	objParams();

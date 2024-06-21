@@ -47,6 +47,14 @@ onGameKeyInputs = {
 	//if (_key == KEY_ESCAPE) exitWith {
 	//	[false] call esc_openMenu;
 	//};
+
+	//TODO add debug console executor with comments fix
+	// #ifdef EDITOR
+	// if (_key == KEY_P) exitWith {
+	// 	call compile (profileNamespace getVariable 'rscdebugconsole_expression')
+	// };
+	// #endif
+
 	_kupc = unpackKeyData(_this);
 
 	#define isPressed(var) isPressedKey(_kupc,var)

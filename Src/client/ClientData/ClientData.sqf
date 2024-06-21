@@ -543,7 +543,7 @@ _setvdirup = {
 }; rpcAdd("syncongrabrot",_setvdirup);
 
 //теперь cam_addCamShake можно вызывать удаленно
-rpcAdd("camshake",cam_addCamShake);
+rpcAdd("camshake",{_this call cam_addCamShake}); //fix initialization error
 
 //Репликация любых методов. универсальный удаленный вызов
 _replloc = {

@@ -274,6 +274,34 @@ interact_getMouseIntersectData = {
 	[_ins select 0 select 2,asltoatl (_ins select 0 select 0),_ins select 0 select 1]
 };
 
+//возвращает [object,atl pos,vectorup normal]
+interact_getRayCastData = {
+	params ["_startPos","_endPos",["_ig1",objnull],["_ig2",objnull]];
+
+	private _ins = lineIntersectsSurfaces [
+  		ATLToASL _startPos,
+  		ATLToASL _endPos,
+  		_ig1,
+		_ig2,
+		true,
+		1,
+		INTERACT_LODS_CHECK_STANDART
+ 	];
+	if (count _ins == 0) exitWith {[objnull,[0,0,0],[0,0,0]]};
+	if isNotSecondPassObject(_ins select 0 select 2) exitWith {[_ins select 0 select 2,asltoatl (_ins select 0 select 0),_ins select 0 select 1]};
+	_ins = lineIntersectsSurfaces [
+  		ATLToASL _startPos,
+  		ATLToASL _endPos,
+  		_ig1,
+		_ig2,
+		true,
+		1,
+		INTERACT_LODS_CHECK_GEOM
+ 	];
+	if (count _ins == 0) exitWith {[objnull,[0,0,0],[0,0,0]]};
+	[_ins select 0 select 2,asltoatl (_ins select 0 select 0),_ins select 0 select 1]
+};
+
 // Проверяет дистанцию до позиции - может ли взаимодействовать по дистанции
 interact_checkPosition = {
 	(_this distance getCenterMobPos(player)) <= INTERACT_DISTANCE

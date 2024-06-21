@@ -80,6 +80,7 @@ class(IReagentItem) extends(Item)
 	{
 		objParams();
 		callSelfParams(removeReagents,getSelf(curTransferSize));
+		callSelfParams(playSound,"reagents\water_land" arg getRandomPitchInRange(0.8,1.2));
 	};
 
 	func(onInteractWith)
@@ -135,6 +136,76 @@ class(IReagentNDItem) extends(IReagentItem)
 			};
 		};
 	};
+
+	func(doExtinguish)
+	{
+		objParams_2(_targ,_pos);
+		if isNullReference(_targ) exitWith {false};
+		private _size = getSelf(curTransferSize);
+		private _rvals = callSelfParams(removeReagentsAndReturn,_size);
+		
+		traceformat("doExitinguish() - matters: %1",_rvals);
+
+		if (count _rvals > 0) then {
+			callSelfParams(playSound,"reagents\water_land" arg getRandomPitchInRange(0.8,1.2));
+			//TODO: done this fucking code...
+
+			private _chid = _pos call atmos_chunkPosToId;
+
+			private _sizeFactor = round(_size/30) min 1;
+			for "_x" from -_sizeFactor to _sizeFactor do {
+				for "_y" from -_sizeFactor to _sizeFactor do {
+					for "_z" from -1 to 1 do {
+						private _myCh = _chid vectorAdd [_x,_y,_z];
+						
+						private _chObj = [_myCh] call atmos_getChunkAtChId;
+						if isNullReference(_chObj) then {continue};
+						private _f = callFunc(_chObj,getFireInChunk);
+						private _hasFire = !isNullReference(_f);
+						private _fitems = [];
+						{
+							if callFunc(_x,isFireLight) then {
+								if getVar(_x,lightIsEnabled) then {
+									_fitems pushBack _x;
+								};
+							};
+						} foreach callFunc(_chObj,getObjectsInChunk);
+
+						{
+							_x params ["_m","_n"];
+							if (_m=="Water" && _n >= 1) then {
+								if (_hasFire) then {
+									callFuncParams(_f,adjustForce,-5);
+								};
+								{callFuncParams(_x,lightSetMode,false)} foreach _fitems;
+							};
+							if (_m=="Spirt" && _n>=0.5) then {
+								if (_hasFire) then {
+									callFuncParams(_f,adjustForce,7);
+								};
+								if (count _fitems > 0) then {
+									_f = [callFunc(_chObj,getChunkCenterPos),"AtmosAreaFire",true] call atmos_createProcess;
+									_hasFire = !isNullReference(_f);
+									callFuncParams(_f,adjustForce,5);
+								};
+							} else {
+								if (_n >= 2) then {
+									if (_hasFire) then {
+										callFuncParams(_f,adjustForce,-1);
+									};
+								};
+							};
+						} foreach _rvals;
+					}
+				}
+			};
+
+			//prob more size for transsize
+			
+		};
+		count _rvals > 0;
+	};
+
 	getter_func(getMainActionName,"Объём переливания");
 	func(onMainAction)
 	{

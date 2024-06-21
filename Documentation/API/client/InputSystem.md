@@ -554,7 +554,7 @@ Replaced value:
 ```sqf
 isPressedKey(_kupc,var)
 ```
-File: [client\InputSystem\inputManager.sqf at line 52](../../../Src/client/InputSystem/inputManager.sqf#L52)
+File: [client\InputSystem\inputManager.sqf at line 60](../../../Src/client/InputSystem/inputManager.sqf#L60)
 ## attr
 
 Type: constant
@@ -568,7 +568,7 @@ Replaced value:
 ```sqf
 ([#st,#ht,#dx,#iq,#fp,#will,#per,#hp] select ind_stat)
 ```
-File: [client\InputSystem\inputManager.sqf at line 125](../../../Src/client/InputSystem/inputManager.sqf#L125)
+File: [client\InputSystem\inputManager.sqf at line 133](../../../Src/client/InputSystem/inputManager.sqf#L133)
 ## dbg_addAtr(name,amount)
 
 Type: constant
@@ -583,7 +583,7 @@ Replaced value:
 ```sqf
 [(player),amount] call ((player) getVariable 'proto' getVariable ('add'+ name))
 ```
-File: [client\InputSystem\inputManager.sqf at line 126](../../../Src/client/InputSystem/inputManager.sqf#L126)
+File: [client\InputSystem\inputManager.sqf at line 134](../../../Src/client/InputSystem/inputManager.sqf#L134)
 ## onGameInputs_Down
 
 Type: function
@@ -621,7 +621,7 @@ Description: мышь в режиме игры
 - Param: _ctrl
 - Param: _alt
 
-File: [client\InputSystem\inputManager.sqf at line 155](../../../Src/client/InputSystem/inputManager.sqf#L155)
+File: [client\InputSystem\inputManager.sqf at line 163](../../../Src/client/InputSystem/inputManager.sqf#L163)
 # input_init.sqf
 
 ## input_catchedEscape

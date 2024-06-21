@@ -114,6 +114,30 @@ VERB(doempty)
 		callSelf(pourOutReagents);
 ENDVERB
 
+VERB(extinguish)
+	cond
+		private _it = callFunc(usr,getItemInActiveHandRedirect);
+		skipCond(isNullReference(_it));
+		skipCond(isTypeOf(src,Mob));
+		skipCond(!callFunc(_it,isReagentContainer));
+		skipCond(isTypeOf(_it,Syringe));
+		skipCond(callFunc(_it,getFilledSpace)==0);
+	act
+		private _it = callFunc(usr,getItemInActiveHandRedirect);
+		if !isNullReference(_it) then {
+			callFunc(usr,generateLastInteractOnServer);
+			if callFuncParams(_it,doExtinguish,src arg callFunc(usr,getLastInteractEndPos)) then {
+				callFuncParams(usr,meSay,"выливает " + callFunc(_it,getName) + " на " + callFunc(src,getName));
+			};
+		};
+	name
+		private _it = callFunc(usr,getItemInActiveHandRedirect);
+		if !isNullReference(_it) then {
+			private _pto = (pick["здесь","тут","сюда"]);
+			setName("Вылить " + callFunc(_it,getName) + " " + _pto);
+		};
+ENDVERB
+
 VERB(craft)
 	cond
 		skipCond(!isTypeOf(usr,Mob));

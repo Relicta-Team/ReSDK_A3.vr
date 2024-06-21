@@ -15,7 +15,7 @@ Count modules: 31
  - [InputSystem](client//InputSystem.md) - 6 files
  - [Interactions](client//Interactions.md) - 21 files
  - [Inventory](client//Inventory.md) - 7 files
- - [LightEngine](client//LightEngine.md) - 52 files
+ - [LightEngine](client//LightEngine.md) - 59 files
  - [Lobby](client//Lobby.md) - 8 files
  - [LocalEffects](client//LocalEffects.md) - 3 files
  - [NetDisplays](client//NetDisplays.md) - 16 files
@@ -36,7 +36,7 @@ Count modules: 51
  - [host](host//host.md) - 11 files
  - [AI](host//AI.md) - 1 files
  - [AmbientControl](host//AmbientControl.md) - 1 files
- - [Atmos](host//Atmos.md) - 3 files
+ - [Atmos](host//Atmos.md) - 5 files
  - [CaveSystem](host//CaveSystem.md) - 4 files
  - [Client](host//Client.md) - 3 files
  - [ClientManager](host//ClientManager.md) - 16 files

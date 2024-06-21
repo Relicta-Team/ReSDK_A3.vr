@@ -1,10 +1,19 @@
+// ======================================================
+// Copyright (c) 2017-2024 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
 #include "Materials.h"
+#include "..\Networking\Network.hpp"
 
 class(MatBase) attribute(staticInit)
 	
 	func(staticInit)
 	{
 		params ["_thisClass","_thisType"];
+		if (_thisClass!="MatBase") exitWith {};
+
+		private _mdata = createHashMap;
 		{
 			private _class = _x;
 			
@@ -12,7 +21,11 @@ class(MatBase) attribute(staticInit)
 			private _objClass = callFunc(_obj,getClassName);
 
 			mat_map_all set [tolower _objClass,_obj];
+
+			callFuncParams(_obj,applyStepDataForGlobalVar,_mdata);
 		} foreach getAllObjectsTypeOfStr(_thisClass);
+
+		netSetGlobal(materials_map_stepData,_mdata);
 	};
 	
 	var(name,"Материал");
@@ -23,6 +36,24 @@ class(MatBase) attribute(staticInit)
 	var(damageSounds,[]);
 
 	var(resistSounds,[]);
+
+	func(applyStepDataForGlobalVar)
+	{
+		objParams_1(_hm);
+
+		if (callSelf(getStepDataKey) in _hm) exitWith {
+			setLastError("Duplicated step config for " + callSelf(getClassName));
+		};
+
+		_hm set [callSelf(getStepDataKey),
+			[
+				getSelf(stepSound)
+			]
+		]
+	};
+
+	getter_func(getStepDataKey,getSelf(damageEffect));
+	
 
 	getter_func(getDamageEffect,getSelf(damageEffect));
 	func(getDamageSound)
@@ -59,6 +90,11 @@ class(MatBase) attribute(staticInit)
 	getterconst_func(getWeightCoefForCalcHP,1);
 
 	getter_func(getDamageCoefOnAttack,1);
+
+	//------------------------------------------------
+	//модификатор урона огнем (1к-1) и базовая вероятность распространения
+	getterconst_func(getFireDamageModifier,1); //no mod
+	getterconst_func(getFireDamageIgniteProb,0);//basic prob 0-100
 
 endclass
 
@@ -102,6 +138,8 @@ class(MatDirt) extends(MatBase)
 	getterconst_func(getWeightCoefForCalcHP,50);
 
 	getter_func(getDamageCoefOnAttack,0.6);
+
+	getterconst_func(getFireDamageIgniteProb,2);
 endclass
 
 class(MatWood) extends(MatBase)
@@ -116,6 +154,9 @@ class(MatWood) extends(MatBase)
 	getterconst_func(getWeightCoefForCalcHP,50);
 
 	getter_func(getDamageCoefOnAttack,1.3);
+
+	getterconst_func(getFireDamageModifier,1.5);
+	getterconst_func(getFireDamageIgniteProb,70);
 endclass
 
 class(MatMetal) extends(MatBase)
@@ -130,6 +171,7 @@ class(MatMetal) extends(MatBase)
 	getterconst_func(getWeightCoefForCalcHP,100);
 
 	getter_func(getDamageCoefOnAttack,0.7);
+
 endclass
 
 
@@ -156,6 +198,9 @@ class(MatCloth) extends(MatBase)
 	getterconst_func(getWeightCoefForCalcHP,20);
 
 	getter_func(getDamageCoefOnAttack,1.5);
+
+	getterconst_func(getFireDamageModifier,2.5);
+	getterconst_func(getFireDamageIgniteProb,80);
 endclass
 
 class(MatPaper) extends(MatBase)
@@ -169,6 +214,9 @@ class(MatPaper) extends(MatBase)
 
 
 	getter_func(getDamageCoefOnAttack,4);
+
+	getterconst_func(getFireDamageModifier,3);
+	getterconst_func(getFireDamageIgniteProb,90);
 endclass
 
 class(MatFlesh) extends(MatBase)
@@ -181,6 +229,9 @@ class(MatFlesh) extends(MatBase)
 	getterconst_func(getWeightCoefForCalcHP,30);
 
 	getter_func(getDamageCoefOnAttack,1.5);
+
+	getterconst_func(getFireDamageModifier,1.1);
+	getterconst_func(getFireDamageIgniteProb,50);
 endclass
 
 class(MatOrganic) extends(MatBase)
@@ -194,6 +245,9 @@ class(MatOrganic) extends(MatBase)
 
 	getter_func(getDamageCoefOnAttack,2);
 
+	getterconst_func(getFireDamageModifier,1.2);
+	getterconst_func(getFireDamageIgniteProb,65);
+
 endclass
 
 class(MatSynt) extends(MatBase)
@@ -206,6 +260,9 @@ class(MatSynt) extends(MatBase)
 	getterconst_func(getWeightCoefForCalcHP,50);
 
 	getter_func(getDamageCoefOnAttack,1.2);
+
+	getterconst_func(getFireDamageModifier,1.4);
+	getterconst_func(getFireDamageIgniteProb,75);
 endclass
 
 

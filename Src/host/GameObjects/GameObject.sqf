@@ -83,7 +83,7 @@ class(GameObject) extends(ManagedObject)
 	editor_attribute("Tooltip" arg "Модифицируемый метод получения описания")
 	getter_func(getDesc,if isNull(getSelf(desc)) then {""} else {getSelf(desc)});
 
-	verbListOverride("description mainact"); //список действий которые можно сделать с ЭТИМ объектом
+	verbListOverride("extinguish description mainact"); //список действий которые можно сделать с ЭТИМ объектом
 
 	"
 		name:В мире
@@ -387,12 +387,12 @@ class(GameObject) extends(ManagedObject)
 						callSelf(canApplyDamage)
 						&& callSelf(getClassName) != "IStruct" //!temporary fix. remove in next versions
 						) then {
-					private _drTexts = ["Беззащитно","Слабенкьо защищено","Выглядит крепко","Хорошо защищено","Отличная защита"];
+					private _drTexts = ["Беззащитно","Слабенько защищено","Выглядит крепко","Хорошо защищено","Отличная защита"];
 					private _drConv = round (linearConversion [0, 8, getSelf(dr),0,4,true]);
 					
 					format[
 						'Состояние: %1 - %2br_inlineКачество: %3',
-						callSelf(getHPStatusText),
+						callSelfParams(getHPStatusText,true),
 						_drTexts select _drConv,
 						callSelf(getHTStatusText)
 					]
@@ -411,6 +411,19 @@ class(GameObject) extends(ManagedObject)
 			modvar(_otherText) + sbr + callSelf(getObjectHealth_Editor)
 			#endif
 		};
+
+		callFunc(_usr,generateLastInteractOnServer);
+		if equals(this,callFunc(_usr,getLastInteractTarget)) then {
+			private _ch = [callFunc(_usr,getLastInteractEndPos) call atmos_chunkPosToId] call atmos_getChunkAtChIdUnsafe;
+			if !isNullReference(_ch) then {
+				private _inf = callFuncParams(_ch,getChunkUserInfo,_usr);
+				if (_inf!=stringEmpty) then {
+					modvar(_otherText) + sbr + _inf;
+				};
+
+			};
+		};
+
 		
 		//ddat = [_rand,_postrand,_icon,callSelfParams(getNameFor,_usr),_desc,_otherText];
 		format[_rand + _postrand,_icon + callSelfParams(getNameFor,_usr)] +
@@ -1086,6 +1099,11 @@ endregion
 			error("GameObject::unloadModel() - getChunkType returns null");
 			false
 		};
+
+		//request for update atmos chunk
+		private _ch = [(getposatl getSelf(loc))call atmos_chunkPosToId] call atmos_getChunkAtChId;
+		setVar(_ch,flagUpdObj,true);
+
 		[this,_cht] call noe_unloadVisualObject;
 		true
 	};
@@ -1311,6 +1329,8 @@ class(IDestructible) extends(GameObject)
 		if !isNullReference(_srcipt) then {
 			delete(_script);
 		};
+
+
 	};
 
 	//all info for this system in baisc set: B 557
@@ -1364,12 +1384,14 @@ class(IDestructible) extends(GameObject)
 	{
 		// количество урона, тип повреждений, мировая позиция по которой пришлись повреждения, (опциональная) причина урона
 		objParams_4(_amount,_type,_worldPos,_cause);
-		traceformat("%1::applyDamage main - count: %2; dt: %3; pos: %4; cause: %5",this arg _amount arg _type arg _worldPos arg _cause);
+		//traceformat("%1::applyDamage main - count: %2; dt: %3; pos: %4; cause: %5",this arg _amount arg _type arg _worldPos arg _cause);
 		private _canUseEffect = true;
 		private _canUseSound = true;
 		private _useBlockSound = true;
 		private _effector = {
-			callSelfParams(sendDamageVisualOnPos,_worldPos arg _canUseEffect arg _canUseSound arg _useBlockSound);
+			if !isNullVar(_worldPos) then {
+				callSelfParams(sendDamageVisualOnPos,_worldPos arg _canUseEffect arg _canUseSound arg _useBlockSound);
+			};
 		};
 
 		if (!callSelf(canApplyDamage) || callSelf(getClassName) == "IStruct") exitWith {
@@ -1453,27 +1475,40 @@ class(IDestructible) extends(GameObject)
 			callSelf(onDestroyed);
 			delete(this);
 		};
-		errorformat("IDestructible::applyDamage() - no affect damage: hp %1; max hp %2; Amount %3",_newhp arg _maxhp arg _amount);
+		//errorformat("IDestructible::applyDamage() - no affect damage: hp %1; max hp %2; Amount %3",_newhp arg _maxhp arg _amount);
 	};
 
 	func(getHPStatusText)
 	{
-		objParams();
-		private _hp = getSelf(hp);
-		private _maxhp = getSelf(hpMax);
-		if (_hp < (round(_maxhp/3)) && _hp > 0) exitWith {
-			"Повреждено"
+		objParams_1(_addClr);
+		if isNullVar(_addClr) then {_addClr = false};
+		private _curClr = "ffffff";
+		
+		private _tval = call {
+			private _hp = getSelf(hp);
+			private _maxhp = getSelf(hpMax);
+			if (_hp < (round(_maxhp/3)) && _hp > 0) exitWith {
+				_curClr = "207332";
+				"Повреждено"
+			};
+			if (_hp <= 0 && _hp > (-1*_maxhp)) exitWith {
+				_curClr = "3D541D";
+				"Сильно повреждено"
+			};
+			if (_hp <= (-1*_maxhp) && _hp > (-5*_maxhp)) exitWith {
+				_curClr = "992C08";
+				//private _idx = round linearConversion [-5*_maxhp,-1*_maxhp,_hp,0,4,true];
+				//["Почти уничтожено",""] select _idx
+				"Почти " + (pick["разрушено","уничтожено","сломано","раздолбано"])
+			};
+			if (_hp > 0) exitWith {
+				_curClr = "00C12B";
+				"Нормальное"
+			};
+			_curClr = "ff0000";
+			"Уничтожено"
 		};
-		if (_hp <= 0 && _hp > (-1*_maxhp)) exitWith {
-			"Сильно повреждено"
-		};
-		if (_hp <= (-1*_maxhp) && _hp > (-5*_maxhp)) exitWith {
-			//private _idx = round linearConversion [-5*_maxhp,-1*_maxhp,_hp,0,4,true];
-			//["Почти уничтожено",""] select _idx
-			"Почти " + (pick["разрушено","уничтожено","сломано","раздолбано"])
-		};
-		if (_hp > 0) exitWith {"Нормальное"};
-		"Уничтожено"
+		ifcheck(_addClr,format["<t color='#%1'>%2</t>" arg _curClr arg _tval],_tval);
 	};
 
 	func(getHTStatusText)
@@ -1560,7 +1595,16 @@ class(IDestructible) extends(GameObject)
 		setSelf(hpMax,_val);
 	};
 
+	//TODO replace to nullptr and refactoing all checks
 	var(material,null);//string|object
+	func(getMaterial)
+	{
+		objParams();
+		private _mObj = getSelf(material);
+		if isNullVar(_mObj) exitWith {nullPtr};
+		if not_equalTypes(_mObj,nullPtr) exitWith {nullPtr};
+		_mObj
+	};
 
 	func(sendDamageVisualOnPos)
 	{
@@ -1651,6 +1695,31 @@ class(IDestructible) extends(GameObject)
 		};
 		
 		true;
+	};
+
+region(Fire functionality)
+
+	getter_func(canIgniteArea,false); //может ли этот источник поджечь свой чанк
+	//доп проверка на возгорание объекта. например можно настроить, чтобы источником был маленький предмет
+	func(checkCanIgniteObject)
+	{
+		objParams_1(_targ);
+		true
+	};
+	var(__s_nextCheckIgnite,0);
+	func(handleIgniteArea)
+	{
+		objParams();
+		if !callSelf(canIgniteArea) exitWith {};
+
+		if (tickTime>=getSelf(__s_nextCheckIgnite)) then {
+			#ifdef EDITOR
+			setSelf(__s_nextCheckIgnite,tickTime + 3);
+			#else
+			setSelf(__s_nextCheckIgnite,tickTime + randInt(10,20));
+			#endif
+			[this] call atmos_tryIgnite;
+		};
 	};
 
 	// "
