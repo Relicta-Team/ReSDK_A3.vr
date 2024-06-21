@@ -24,7 +24,7 @@
 
 acli_map_chunks = createHashMap;
 acli_bool_requestUpdate = false;
-acli_bool_enableSystem = true; //turn off is won't work
+acli_bool_enableSystem = false; //turn off is won't work
 
 acli_handleAddObj = {
 	params ["_obj","_cfgId"];

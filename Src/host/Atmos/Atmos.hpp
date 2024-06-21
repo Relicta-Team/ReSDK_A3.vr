@@ -16,6 +16,11 @@
 //turn on if you want simple visualization of chunks (only one particle type per chunk)
 //#define ATMOS_MODE_SIMPLE_VISUALIZATION
 
+//prerelease optimize
+#define ATMOS_MODE_FORCE_OPTIMIZE
+//this value decremented on instance copy of object
+#define ATMOS_MODE_SPREAD_FORCE_OPTIMIZE 6
+
 //size one chunk in meters and half (only constexpr in prod. required)
 #define ATMOS_SIZE 1
 #define ATMOS_SIZE_HALF 0.5

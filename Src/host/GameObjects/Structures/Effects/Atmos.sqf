@@ -13,6 +13,8 @@ editor_attribute("HiddenClass")
 class(AtmosChunk)
 	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
 		extends(ILightibleStruct)
+		getterconst_func(canApplyDamage,false);
+		var(model,"a3\structures_f\system\cluttercutter_small_f.p3d");
 	#endif
 	
 	var(chId,null); //vec3 chunk id
@@ -26,7 +28,10 @@ class(AtmosChunk)
 	{
 		objParams();
 		
-		assert_str(!array_exists(getSelf(objInside),nullPtr),"Null pointer found in object list inside chunk " + (str this));
+		//assert_str(!array_exists(getSelf(objInside),nullPtr),"Null pointer found in object list inside chunk " + (str this));
+		if array_exists(getSelf(objInside),nullPtr) then {
+			setSelf(flagUpdObj,true);
+		};
 
 		if getSelf(flagUpdObj) then {
 			setSelf(flagUpdObj,false);
@@ -39,7 +44,9 @@ class(AtmosChunk)
 	{
 		objParams();
 	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
-		getSelf(fireObj)
+		private _g = getSelf(fireObj);
+		if !isNullReference(_g) exitWith {ifcheck(getVar(_g,force)>0,_g,nullPtr)};
+		_g
 	#else
 		private _fire = nullPtr;
 		{if isTypeOf(_x,AtmosAreaFire) exitWith {_fire = _x};false} count getSelf(aObj);
@@ -57,7 +64,9 @@ class(AtmosChunk)
 	{
 		objParams();
 	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
-		getSelf(gasObj)
+		private _g = getSelf(gasObj);
+		if !isNullReference(_g) exitWith {ifcheck(getVar(_g,volume)>0,_g,nullPtr)};
+		_g
 	#else
 		private _gas = nullPtr;
 		{if isTypeOf(_x,AtmosAreaGas) exitWith {_gas = _x};false} count getSelf(aObj);
@@ -100,6 +109,7 @@ class(AtmosChunk)
 			private _varNameSave = callFunc(_areaObj,fSetType);
 			assert_str(_varNameSave!=stringEmpty,format vec2("%1.fSetType - cannot be empty",this));
 			setSelfReflect(_varNameSave,_areaObj);
+			callSelf(onUpdateLight);
 		#endif
 		_areaObj
 	};
@@ -131,7 +141,7 @@ class(AtmosChunk)
 		if !isNullReference(_f) exitWith _fCall;
 		
 		//no atmos - disable light
-		callFuncParams(lightSetMode,false);
+		callSelfParams(lightSetMode,false);
 	};
 
 	#endif
@@ -213,6 +223,11 @@ class(AtmosAreaBase)
 	var(light,-1);
 	var(lightIsEnabled,true);
 	getterconst_func(canApplyDamage,false);
+
+	#ifdef ATMOS_MODE_FORCE_OPTIMIZE
+	var(areaPower,ATMOS_MODE_SPREAD_FORCE_OPTIMIZE);
+	var(canDecrementAreaPower,true);
+	#endif
 
 	getterconst_func(canContactOnMob,false);
 	getterconst_func(canContactOnObjects,false);
@@ -302,6 +317,12 @@ class(AtmosAreaBase)
 		objParams_1(_side);
 		private _pos = (callSelf(getChunkId) vectorAdd _side) call atmos_chunkIdToPos;
 		private _procObj = [_pos,callSelf(getClassName)] call atmos_createProcess;
+		#ifdef ATMOS_MODE_FORCE_OPTIMIZE
+		if getVar(_procObj,canDecrementAreaPower) then {
+			setVar(_procObj,areaPower,(getSelf(areaPower)-1) max 0);
+			setVar(_procObj,canDecrementAreaPower,false);
+		};
+		#endif
 		_procObj
 	};
 
@@ -328,7 +349,9 @@ class(AtmosAreaBase)
 	func(destructor)
 	{
 		objParams();
+		private _myCh = getSelf(chunk);
 		callFunc(getSelf(chunk),onUpdateLight);
+		//todo remove from aobj list if not simple vis (can be memleaks)
 	};
 
 	func(getModelPosition)
@@ -476,7 +499,11 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
 			};
 		};
 		if (_newForce <= 0) then {
+			#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+			setSelf(force,0);
+			#else
 			delete(this);
+			#endif
 		};
 	};
 
@@ -487,6 +514,9 @@ class(AtmosAreaFire) extends(AtmosAreaBase)
 	func(canPropagateTo)
 	{
 		objParams_1(_side);
+		#ifdef ATMOS_MODE_FORCE_OPTIMIZE
+		if (getSelf(areaPower)<=0) exitWith {false};
+		#endif
 		private _pRet = super();
 		
 		_pRet = _pRet && getSelf(size) > 1;
@@ -557,7 +587,7 @@ endclass
 
 class(AtmosAreaGas) extends(AtmosAreaBase)
 	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
-	getterconst_func(fSetType,"fireObj");
+	getterconst_func(fSetType,"gasObj");
 	#endif
 	getterconst_func(canContactOnMob,true);
 	var(light,SLIGHT_ATMOS_SMOKE_1);
@@ -802,7 +832,11 @@ class(AtmosAreaGas) extends(AtmosAreaBase)
 		super();
 		callSelfParams(removeVolume,0.1);
 		if (getSelf(volume) <= 0) then {
-			delete(this);
+			#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+				setSelf(volume,0);
+			#else
+				delete(this);
+			#endif
 		} else {
 			callSelf(updateLeadingGas);
 		};
@@ -887,7 +921,9 @@ class(AtmosAreaGas) extends(AtmosAreaBase)
 	func(canPropagateTo)
 	{
 		objParams_1(_side);
-
+		#ifdef ATMOS_MODE_FORCE_OPTIMIZE
+		if (getSelf(areaPower)<=0) exitWith {false};
+		#endif
 		//if (getSelf(volume) <= ifcheck(equals(_side,vec3(0,0,1)),1,5)) exitWith {false};
 		if (getSelf(volume) < 0.8) exitWith {false};
 		private _canProp = true;
