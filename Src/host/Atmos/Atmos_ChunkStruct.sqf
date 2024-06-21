@@ -14,7 +14,15 @@ atmos_getChunkAtChId = {
     params ["_chId"];
     private _strKey = str _chId;
     if !(_strKey in atmos_map_chunks) then {
-        private _chObj = new(AtmosChunk);
+         
+			
+		#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+			private _ppos = _chId call atmos_chunkIdToPos;
+			private _chObj = ["AtmosChunk",_ppos vectoradd [ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_Z] ] call createGameObjectInWorld;
+		#else
+			private _chObj = new(AtmosChunk);
+		#endif
+
         #ifdef EDITOR
         _chObj setName (format["AtmosChunk%1",_strKey]);
         #endif

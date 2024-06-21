@@ -9,7 +9,12 @@
 #include "..\..\..\Atmos\Atmos.hpp"
 
 //internal class for chunk metadata
+editor_attribute("HiddenClass")
 class(AtmosChunk)
+	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+		extends(ILightibleStruct)
+	#endif
+	
 	var(chId,null); //vec3 chunk id
 	getter_func(getChunkCenterPos,getSelf(chId) call atmos_chunkIdToPos);
 	var_array(objInside); //список геймобджектов внутри зоны
@@ -21,10 +26,7 @@ class(AtmosChunk)
 	{
 		objParams();
 		
-		//! temporary fix. need collect chunks, owned by objects
-		if array_exists(getSelf(objInside),nullPtr) then {
-			setSelf(flagUpdObj,true);
-		};
+		assert_str(!array_exists(getSelf(objInside),nullPtr),"Null pointer found in object list inside chunk " + (str this));
 
 		if getSelf(flagUpdObj) then {
 			setSelf(flagUpdObj,false);
@@ -36,9 +38,13 @@ class(AtmosChunk)
 	func(getFireInChunk)
 	{
 		objParams();
+	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+		getSelf(fireObj)
+	#else
 		private _fire = nullPtr;
 		{if isTypeOf(_x,AtmosAreaFire) exitWith {_fire = _x};false} count getSelf(aObj);
 		_fire
+	#endif
 	};
 
 	func(hasFireInChunk)
@@ -50,9 +56,13 @@ class(AtmosChunk)
 	func(getGasInChunk)
 	{
 		objParams();
+	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+		getSelf(gasObj)
+	#else
 		private _gas = nullPtr;
 		{if isTypeOf(_x,AtmosAreaGas) exitWith {_gas = _x};false} count getSelf(aObj);
 		_gas
+	#endif
 	};
 
 	func(hasGasInChunk)
@@ -76,13 +86,55 @@ class(AtmosChunk)
 	func(registerArea)
 	{
 		objParams_1(_classname);
-		private _areaObj = [_classname,callSelf(getChunkCenterPos) 
-			vectoradd [ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_Z]
-		] call createGameObjectInWorld;
+		private _areaObj = 
+		#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+			instantiate(_classname);
+		#else
+			[_classname,callSelf(getChunkCenterPos) 
+				vectoradd [ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_Z]
+			] call createGameObjectInWorld;
+		#endif
 		getSelf(aObj) pushBack _areaObj;
 		setVar(_areaObj,chunk,this);
+		#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+			private _varNameSave = callFunc(_areaObj,fSetType);
+			assert_str(_varNameSave!=stringEmpty,format vec2("%1.fSetType - cannot be empty",this));
+			setSelfReflect(_varNameSave,_areaObj);
+		#endif
 		_areaObj
 	};
+
+	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+	
+	var(fireObj,nullPtr);
+	var(gasObj,nullPtr);
+
+	var(light,-1);
+	var(lightIsEnabled,false);
+	//automaticly select light type for this chunk
+	func(onUpdateLight)
+	{
+		objParams();
+		private _f = callSelf(getFireInChunk); if isdeleted(_f) then {_f = nullPtr};
+		private _fCall = {
+			private _newLight = getVar(_f,light);
+			if (_newLight >= 0) then {
+				setSelf(lightIsEnabled,true);//enable light forced (handled in lightSetType (used replicateObject on enabled light))
+				callSelfParams(lightSetType,_newLight);
+			} else {
+				//light disposed
+				callSelfParams(lightSetMode,false);
+			};
+		};
+		if !isNullReference(_f) exitWith _fCall;
+		_f = callSelf(getGasInChunk); if isdeleted(_f) then {_f = nullPtr};
+		if !isNullReference(_f) exitWith _fCall;
+		
+		//no atmos - disable light
+		callFuncParams(lightSetMode,false);
+	};
+
+	#endif
 
 	func(destructor)
 	{
@@ -119,7 +171,7 @@ class(AtmosChunk)
 		if callSelf(hasFireInChunk) exitWith {
 			private _f = callSelf(getFireInChunk);
 			format ["%1 %2",
-				pick["Тут вот","Ещё ","Тут","А ещё"],
+				pick["Тут вот","Ещё","Тут","А ещё"],
 				pick ["горит","пожар","загорелось","огонь хреначит"]
 			] editor_conditional(+ " size:" + (str getVar(_f,size)) + "; force:"+(str getVar(_f,force)),;)
 		};
@@ -146,11 +198,16 @@ class(AtmosChunk)
 		} count getSelf(aObj);
 	};
 
-
 endclass
 
 editor_attribute("HiddenClass")
-class(AtmosAreaBase) extends(ILightibleStruct)
+class(AtmosAreaBase) 
+	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+		extends(object)
+		getterconst_func(fSetType,"");
+	#else
+		extends(ILightibleStruct)
+	#endif
 	var(model,"a3\structures_f\system\cluttercutter_small_f.p3d");
 	var(name,null);
 	var(light,-1);
@@ -260,10 +317,35 @@ class(AtmosAreaBase) extends(ILightibleStruct)
 	};
 	#endif
 
+	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+	func(lightSetType)
+	{
+		objParams_1(_t);
+		setSelf(light,_t);
+		callFunc(getSelf(chunk),onUpdateLight);
+	};
+
+	func(destructor)
+	{
+		objParams();
+		callFunc(getSelf(chunk),onUpdateLight);
+	};
+
+	func(getModelPosition)
+	{
+		objParams();
+		callFunc(getSelf(chunk),getChunkCenterPos)
+	};
+
+	#endif
+
 endclass
 
 
 class(AtmosAreaFire) extends(AtmosAreaBase)
+	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+	getterconst_func(fSetType,"fireObj");
+	#endif
 	var(size,1);//1-3
 	var(light,SLIGHT_ATMOS_FIRE_1);
 	var(force,3);
@@ -474,6 +556,9 @@ endclass
 #endif
 
 class(AtmosAreaGas) extends(AtmosAreaBase)
+	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+	getterconst_func(fSetType,"fireObj");
+	#endif
 	getterconst_func(canContactOnMob,true);
 	var(light,SLIGHT_ATMOS_SMOKE_1);
 

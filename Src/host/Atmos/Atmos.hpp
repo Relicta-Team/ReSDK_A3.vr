@@ -13,6 +13,9 @@
 	#undef ATMOS_DEBUG_TEST_SIDE_SPREAD
 #endif
 
+//turn on if you want simple visualization of chunks (only one particle type per chunk)
+//#define ATMOS_MODE_SIMPLE_VISUALIZATION
+
 //size one chunk in meters and half (only constexpr in prod. required)
 #define ATMOS_SIZE 1
 #define ATMOS_SIZE_HALF 0.5

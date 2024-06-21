@@ -74,7 +74,11 @@ atmos_chunkGetNearObjects = {
 	private _mPos = null;
 	{
 		if callFunc(_x,isFlying) then {continue};
-		if isTypeOf(_x,AtmosAreaBase) then {continue};//no affect to area
+		#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+			if isTypeOf(_x,AtmosChunk) then {continue};
+		#else
+			if isTypeOf(_x,AtmosAreaBase) then {continue};//no affect to area
+		#endif
 		if callFunc(_x,isInWorld) then {
 			_mPos = callFunc(_x,getModelPosition);
 			if ATMOS_POS_INSIDE_CHUNK(_mPos,_fromCh) then {
