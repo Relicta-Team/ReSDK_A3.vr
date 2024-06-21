@@ -2,28 +2,28 @@ version=54;
 class EditorData
 {
 	moveGridStep=0.125;
-	angleGridStep=0.2617994;
+	angleGridStep=0.08726646;
 	scaleGridStep=100;
 	autoGroupingDist=10;
-	toggles=2;
+	toggles=34;
 	class ItemIDProvider
 	{
-		nextID=3292;
+		nextID=3300;
 	};
 	class LayerIndexProvider
 	{
-		nextID=204;
+		nextID=205;
 	};
 	class Camera
 	{
-		pos[]={3682.1069,22.731283,3686.2339};
-		dir[]={0.53456753,-0.48181641,-0.69436014};
-		up[]={0.29392537,0.87626797,-0.38178656};
-		aside[]={-0.7923978,-4.2212196e-007,-0.6100449};
+		pos[]={3681.229,24.743565,3667.6021};
+		dir[]={0.007445714,-0.26010942,0.96555275};
+		up[]={0.0020058563,0.96558022,0.26010227};
+		aside[]={0.99997419,2.4949259e-008,-0.0077109518};
 	};
 };
 binarizationWanted=0;
-sourceName="relicta";
+sourceName="ReSDK_A3";
 addons[]=
 {
 	"A3_Characters_F",
@@ -116,13 +116,14 @@ addons[]=
 	"CUP_CAStructures_E_Misc_Misc_cables",
 	"A3_Structures_F_Enoch_Infrastructure_Railways",
 	"A3_Structures_F_Exp_Industrial_Port",
-	"RELICTA_models2"
+	"RELICTA_models2",
+	"CUP_A2_EditorObjects"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=70;
+		items=71;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -517,6 +518,12 @@ class AddonsMetaData
 			name="RELICTA_models2";
 			author="Sranych";
 		};
+		class Item70
+		{
+			className="CUP_A2_EditorObjects";
+			name="CUP_A2_EditorObjects";
+			author="MemphisBelle";
+		};
 	};
 };
 dlcs[]=
@@ -617,7 +624,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=1057;
+		items=1064;
 		class Item0
 		{
 			dataType="Group";
@@ -875,7 +882,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\slum\slum_house01_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSheetMetalHouse2""]]}";
 			};
 			id=2211;
 			type="Land_Slum_House01_F";
@@ -893,7 +900,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\addons\metal_shed_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumJunkShed""]]}";
 			};
 			id=2212;
 			type="Land_Metal_Shed_F";
@@ -928,7 +935,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\ganzazhelezo2.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallMedium""]]}";
 			};
 			id=2214;
 			type="land_ganzazhelezo2";
@@ -946,7 +953,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\ganzazhelezo2.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallMedium""]]}";
 			};
 			id=2215;
 			type="land_ganzazhelezo2";
@@ -964,7 +971,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\ganzazhelezo2.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallMedium""]]}";
 			};
 			id=2216;
 			type="land_ganzazhelezo2";
@@ -1500,7 +1507,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\slum\slum_house01_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSheetMetalHouse2""]]}";
 			};
 			id=2247;
 			type="Land_Slum_House01_F";
@@ -1518,7 +1525,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\slum\slum_house01_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSheetMetalHouse2""]]}";
 			};
 			id=2248;
 			type="Land_Slum_House01_F";
@@ -1536,7 +1543,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\slum\slum_house01_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSheetMetalHouse2""]]}";
 			};
 			id=2249;
 			type="Land_Slum_House01_F";
@@ -1554,7 +1561,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object\l04_catacombs\l04_catacombs_00.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcreteArch""]]}";
 			};
 			id=2250;
 			type="l04_catacombs_00";
@@ -1729,7 +1736,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigConcretePanel""]]}";
 			};
 			id=2262;
 			type="Land_ConcretePanels_02_four_F";
@@ -1746,7 +1753,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigConcretePanel""]]}";
 			};
 			id=2263;
 			type="Land_ConcretePanels_02_four_F";
@@ -1763,7 +1770,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigConcretePanel""]]}";
 			};
 			id=2264;
 			type="Land_ConcretePanels_02_four_F";
@@ -1799,7 +1806,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\cultural\cemeteries\tombstone_16_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldTombstone2""]]}";
 			};
 			id=2266;
 			type="Land_Tombstone_16_F";
@@ -1817,7 +1824,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\cultural\cemeteries\gravefence_03_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldGraveFence""]]}";
 			};
 			id=2267;
 			type="Land_GraveFence_03_F";
@@ -1835,7 +1842,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\cultural\cemeteries\gravefence_01_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldGraveFence3""]]}";
 			};
 			id=2268;
 			type="Land_GraveFence_01_F";
@@ -1853,7 +1860,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\cultural\cemeteries\grave_11_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Grave""]]}";
 			};
 			id=2269;
 			type="Land_Grave_11_F";
@@ -1870,7 +1877,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\misc\hrobecek_krizek2.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenGraveCross""]]}";
 			};
 			id=2270;
 			type="GraveCross2";
@@ -1888,7 +1895,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\cultural\chapel_02\chapel_02_white_damaged_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ChurchPrayHouse""]]}";
 			};
 			id=2271;
 			type="Land_Chapel_02_white_damaged_F";
@@ -1924,7 +1931,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\civilian\sheds\shed_06_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopy""]]}";
 			};
 			id=2273;
 			type="Land_Shed_06_F";
@@ -1942,7 +1949,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_24\yolka.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TreeRoots2""]]}";
 			};
 			id=2274;
 			type="yolka";
@@ -1960,7 +1967,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_24\yolka.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TreeRoots2""]]}";
 			};
 			id=2275;
 			type="yolka";
@@ -1978,7 +1985,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\nowoederewo.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TreeRoots1""]]}";
 			};
 			id=2276;
 			type="nowoederewo";
@@ -1996,7 +2003,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\gardentree.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TreeRootsNoGeom""]]}";
 			};
 			id=2277;
 			type="gardentree";
@@ -2014,7 +2021,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_24\derevo.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TreeRoots""]]}";
 			};
 			id=2278;
 			type="derevo";
@@ -2032,7 +2039,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_24\derevo.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TreeRoots""]]}";
 			};
 			id=2279;
 			type="derevo";
@@ -2153,7 +2160,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\ind\pipes\indpipe1_uup_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumSteelUpperPipe""]]}";
 			};
 			id=2286;
 			type="Land_IndPipe1_Uup_F";
@@ -2171,7 +2178,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\ruins\houseruin_small_02_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigRuinedBrickBuilding""]]}";
 			};
 			id=2287;
 			type="Land_HouseRuin_Small_02_F";
@@ -2275,7 +2282,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""metro_ob\model\sartir_kabinka.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenToiletSmall""]]}";
 			};
 			id=2293;
 			type="sartir_kabinka";
@@ -2293,7 +2300,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\nowoederewo.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TreeRoots1""]]}";
 			};
 			id=2294;
 			type="nowoederewo";
@@ -2327,7 +2334,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2296;
 			type="Land_kr_stena_3x6_dv";
@@ -2508,7 +2515,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_6x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorSmall""]]}";
 			};
 			id=2307;
 			type="Land_pod_6x6";
@@ -2524,7 +2531,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_6x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorSmall""]]}";
 			};
 			id=2308;
 			type="Land_pod_6x6";
@@ -2560,7 +2567,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exodus\kaleetka.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RustyCell""]]}";
 			};
 			id=2310;
 			type="kaleetka";
@@ -2871,7 +2878,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2328;
 			type="Land_kr_stena_3x6";
@@ -2889,7 +2896,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2329;
 			type="Land_kr_stena_3x6";
@@ -2906,7 +2913,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2330;
 			type="Land_kr_stena_3x6";
@@ -2923,7 +2930,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2331;
 			type="Land_kr_stena_3x6";
@@ -2940,7 +2947,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2332;
 			type="Land_kr_stena_3x6";
@@ -2957,7 +2964,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2333;
 			type="Land_kr_stena_3x6";
@@ -2974,7 +2981,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2334;
 			type="Land_kr_stena_3x6";
@@ -2991,7 +2998,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2335;
 			type="Land_kr_stena_3x6";
@@ -3008,7 +3015,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2336;
 			type="Land_kr_stena_3x6";
@@ -3291,7 +3298,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_epa\civ\camping\woodentable_small_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallWoodenTable""]]}";
 			};
 			id=2353;
 			type="Land_WoodenTable_small_F";
@@ -3309,7 +3316,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""],[""name"",""Странная стена""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Странная стена""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2354;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3327,7 +3334,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2355;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3345,7 +3352,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2356;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3363,7 +3370,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""],[""name"",""Странная стена""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Странная стена""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2357;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3381,7 +3388,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2358;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3399,7 +3406,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2359;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3417,7 +3424,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2360;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3435,7 +3442,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2361;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3453,7 +3460,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2362;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3471,7 +3478,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2363;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3489,7 +3496,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""],[""name"",""Странная стена""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Странная стена""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2364;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3507,7 +3514,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""],[""name"",""Странная стена""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Странная стена""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2365;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3525,7 +3532,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2366;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3543,7 +3550,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2367;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3561,7 +3568,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2368;
 			type="Land_Canal_WallSmall_10m_F";
@@ -3699,7 +3706,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_m.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
 			};
 			id=2376;
 			type="Land_kr_stena_3x3";
@@ -3716,7 +3723,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_m.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
 			};
 			id=2377;
 			type="Land_kr_stena_3x3";
@@ -3727,13 +3734,13 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3678.05,23.205637,3677.4399};
+				position[]={3678.05,23.205637,3677.7644};
 				angles[]={0,1.6090331,0};
 			};
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2378;
 			type="Land_kr_stena_3x6_dv";
@@ -3751,7 +3758,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2379;
 			type="Land_kr_stena_3x6_dv";
@@ -3768,7 +3775,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2380;
 			type="Land_kr_stena_3x6_dv";
@@ -3785,7 +3792,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2381;
 			type="Land_kr_stena_3x6_dv";
@@ -3802,7 +3809,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2382;
 			type="Land_kr_stena_3x6_dv";
@@ -3820,7 +3827,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2383;
 			type="Land_kr_stena_3x6_dv";
@@ -3838,7 +3845,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\addons\metal_shed_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumJunkShed""]]}";
 			};
 			id=2384;
 			type="Land_Metal_Shed_F";
@@ -3856,7 +3863,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\addons\metal_shed_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumJunkShed""]]}";
 			};
 			id=2385;
 			type="Land_Metal_Shed_F";
@@ -4086,7 +4093,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\misc2\desk\desk.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenOfficeTable""]]}";
 			};
 			id=2398;
 			type="Desk";
@@ -4156,7 +4163,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2402;
 			type="Land_lest_pod_2x4";
@@ -4173,7 +4180,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2403;
 			type="Land_lest_pod_2x4";
@@ -4190,7 +4197,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_18x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorMedium""]]}";
 			};
 			id=2404;
 			type="Land_pod_18x6";
@@ -4207,7 +4214,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_18x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorMedium""]]}";
 			};
 			id=2405;
 			type="Land_pod_18x6";
@@ -4348,7 +4355,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryClayWall""]]}";
 			};
 			id=2413;
 			type="Wall_L2_5m_EP1";
@@ -4365,7 +4372,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryClayWall""]]}";
 			};
 			id=2414;
 			type="Wall_L2_5m_EP1";
@@ -4486,7 +4493,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\slum\cargo_addon01_v2_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopySmall""]]}";
 			};
 			id=2421;
 			type="Land_cargo_addon01_V2_F";
@@ -4504,7 +4511,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\slum\cargo_addon01_v2_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopySmall""]]}";
 			};
 			id=2422;
 			type="Land_cargo_addon01_V2_F";
@@ -4522,7 +4529,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\slum\cargo_addon01_v2_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopySmall""]]}";
 			};
 			id=2423;
 			type="Land_cargo_addon01_V2_F";
@@ -4540,7 +4547,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\slum\cargo_addon01_v2_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopySmall""]]}";
 			};
 			id=2424;
 			type="Land_cargo_addon01_V2_F";
@@ -4558,7 +4565,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\slum\cargo_addon01_v2_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopySmall""]]}";
 			};
 			id=2425;
 			type="Land_cargo_addon01_V2_F";
@@ -4576,7 +4583,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\slum\cargo_addon01_v2_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopySmall""]]}";
 			};
 			id=2426;
 			type="Land_cargo_addon01_V2_F";
@@ -5042,7 +5049,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigConcretePanel""]]}";
 			};
 			id=2453;
 			type="Land_ConcretePanels_02_four_F";
@@ -5060,7 +5067,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=2454;
 			type="poldrevko";
@@ -5078,7 +5085,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=2455;
 			type="poldrevko";
@@ -5096,7 +5103,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_05\zabori.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFence""]]}";
 			};
 			id=2456;
 			type="zabori";
@@ -5163,7 +5170,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\plita_3x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumConcreteFloor""]]}";
 			};
 			id=2460;
 			type="Land_plita_3x6";
@@ -5180,7 +5187,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\plita_3x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumConcreteFloor""]]}";
 			};
 			id=2461;
 			type="Land_plita_3x6";
@@ -5197,7 +5204,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\plita_3x3.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Struct_DebugMaterial__""]]}";
 			};
 			id=2462;
 			type="Land_plita_3x3";
@@ -5214,7 +5221,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\plita_3x3.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Struct_DebugMaterial__""]]}";
 			};
 			id=2463;
 			type="Land_plita_3x3";
@@ -5230,7 +5237,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\stolb_6m.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcreteLongPole""]]}";
 			};
 			id=2464;
 			type="Land_stolb_6m";
@@ -5246,7 +5253,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\stolb_6m.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcreteLongPole""]]}";
 			};
 			id=2465;
 			type="Land_stolb_6m";
@@ -5262,7 +5269,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\stolb_6m.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcreteLongPole""]]}";
 			};
 			id=2466;
 			type="Land_stolb_6m";
@@ -5278,7 +5285,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\stolb_6m.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcreteLongPole""]]}";
 			};
 			id=2467;
 			type="Land_stolb_6m";
@@ -5294,7 +5301,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\stolb_6m.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcreteLongPole""]]}";
 			};
 			id=2468;
 			type="Land_stolb_6m";
@@ -5396,7 +5403,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\nowoederewo.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TreeRoots1""]]}";
 			};
 			id=2474;
 			type="nowoederewo";
@@ -5414,7 +5421,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_24\derevo.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TreeRoots""]]}";
 			};
 			id=2475;
 			type="derevo";
@@ -5502,7 +5509,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\props_f_orange\furniture\tablebig_01_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumWoodenTable1""]]}";
 			};
 			id=2480;
 			type="Land_TableBig_01_F";
@@ -5520,7 +5527,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\shtora_pravo.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryRedCurtain""]]}";
 			};
 			id=2481;
 			type="shtora_pravo";
@@ -5538,7 +5545,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\shtora_pravo.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryRedCurtain""]]}";
 			};
 			id=2482;
 			type="shtora_pravo";
@@ -5556,7 +5563,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\shtora_pravo.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryRedCurtain""]]}";
 			};
 			id=2483;
 			type="shtora_pravo";
@@ -5574,7 +5581,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\shtora_pravo.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryRedCurtain""]]}";
 			};
 			id=2484;
 			type="shtora_pravo";
@@ -5934,7 +5941,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2505;
 			type="Land_kr_stena_3x6";
@@ -5951,7 +5958,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2506;
 			type="Land_kr_stena_3x6";
@@ -5969,7 +5976,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2507;
 			type="Land_kr_stena_3x6";
@@ -6005,7 +6012,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2509;
 			type="Land_Canal_WallSmall_10m_F";
@@ -6023,7 +6030,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2510;
 			type="Land_Canal_WallSmall_10m_F";
@@ -6041,7 +6048,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2511;
 			type="Land_Canal_WallSmall_10m_F";
@@ -6059,7 +6066,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2512;
 			type="Land_Canal_WallSmall_10m_F";
@@ -6077,7 +6084,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2513;
 			type="Land_Canal_WallSmall_10m_F";
@@ -6095,7 +6102,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2514;
 			type="Land_Canal_WallSmall_10m_F";
@@ -6113,7 +6120,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""],[""name"",""Странная стена""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Странная стена""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2515;
 			type="Land_Canal_WallSmall_10m_F";
@@ -6131,7 +6138,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2516;
 			type="Land_Canal_WallSmall_10m_F";
@@ -6149,7 +6156,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""],[""name"",""Странная стена""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Странная стена""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2517;
 			type="Land_Canal_WallSmall_10m_F";
@@ -6634,7 +6641,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\stelazh_ot_seregi\stelazh_ot_seregi.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LongShelf""]]}";
 			};
 			id=2546;
 			type="stelazh_ot_seregi";
@@ -6652,7 +6659,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\stelazh_ot_seregi\stelazh_ot_seregi.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LongShelf""]]}";
 			};
 			id=2547;
 			type="stelazh_ot_seregi";
@@ -6772,7 +6779,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=2554;
 			type="poldrevko";
@@ -6790,7 +6797,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=2555;
 			type="poldrevko";
@@ -6842,7 +6849,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\kovrik\kovernew.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OrangeCapet""]]}";
 			};
 			id=2558;
 			type="kovernew";
@@ -6860,7 +6867,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\carpet\carpet.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedCarpet""]]}";
 			};
 			id=2559;
 			type="carpet";
@@ -6999,7 +7006,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2567;
 			type="Land_Canal_WallSmall_10m_F";
@@ -7017,7 +7024,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2568;
 			type="Land_Canal_WallSmall_10m_F";
@@ -7035,7 +7042,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""],[""name"",""Странная стена""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Странная стена""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2569;
 			type="Land_Canal_WallSmall_10m_F";
@@ -7053,7 +7060,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2570;
 			type="Land_Canal_WallSmall_10m_F";
@@ -7071,7 +7078,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2571;
 			type="Land_Canal_WallSmall_10m_F";
@@ -7089,7 +7096,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""],[""name"",""Странная стена""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Странная стена""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2572;
 			type="Land_Canal_WallSmall_10m_F";
@@ -7106,7 +7113,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_18x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorMedium""]]}";
 			};
 			id=2573;
 			type="Land_pod_18x6";
@@ -7159,7 +7166,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_24\derevo.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TreeRoots""]]}";
 			};
 			id=2577;
 			type="derevo";
@@ -7211,7 +7218,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\pavements\gardenpavement_02_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallStoneRoad""]]}";
 			};
 			id=2580;
 			type="Land_GardenPavement_02_F";
@@ -7228,7 +7235,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\pavements\gardenpavement_02_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallStoneRoad""]]}";
 			};
 			id=2581;
 			type="Land_GardenPavement_02_F";
@@ -7245,7 +7252,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\pavements\gardenpavement_02_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallStoneRoad""]]}";
 			};
 			id=2582;
 			type="Land_GardenPavement_02_F";
@@ -7460,7 +7467,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_6x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorSmall""]]}";
 			};
 			id=2595;
 			type="Land_pod_6x6";
@@ -7476,7 +7483,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_6x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorSmall""]]}";
 			};
 			id=2596;
 			type="Land_pod_6x6";
@@ -7566,7 +7573,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exodus\kaleetka.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RustyCell""]]}";
 			};
 			id=2601;
 			type="kaleetka";
@@ -7584,7 +7591,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exodus\kaleetka.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RustyCell""]]}";
 			};
 			id=2602;
 			type="kaleetka";
@@ -7602,7 +7609,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exodus\kaleetka.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RustyCell""]]}";
 			};
 			id=2603;
 			type="kaleetka";
@@ -7976,7 +7983,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ClayWallBig""]]}";
 			};
 			id=2625;
 			type="Wall_L_5m_EP1";
@@ -7993,7 +8000,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2626;
 			type="Land_kr_stena_3x6";
@@ -8011,7 +8018,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2627;
 			type="Land_kr_stena_3x6";
@@ -8029,7 +8036,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2628;
 			type="Land_kr_stena_3x6";
@@ -8046,7 +8053,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2629;
 			type="Land_kr_stena_3x6";
@@ -8063,7 +8070,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2630;
 			type="Land_kr_stena_3x6";
@@ -8080,7 +8087,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2631;
 			type="Land_kr_stena_3x6";
@@ -8097,7 +8104,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2632;
 			type="Land_kr_stena_3x6";
@@ -8114,7 +8121,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2633;
 			type="Land_kr_stena_3x6";
@@ -8132,7 +8139,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2634;
 			type="Land_kr_stena_3x6";
@@ -8149,7 +8156,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2635;
 			type="Land_kr_stena_3x6";
@@ -8166,7 +8173,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2636;
 			type="Land_kr_stena_3x6";
@@ -8184,7 +8191,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v2_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TinBigFence""]]}";
 			};
 			id=2637;
 			type="Land_TinWall_01_m_4m_v2_F";
@@ -8219,7 +8226,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_epa\civ\camping\woodentable_small_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallWoodenTable""]]}";
 			};
 			id=2639;
 			type="Land_WoodenTable_small_F";
@@ -8236,7 +8243,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_epa\civ\camping\woodentable_small_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallWoodenTable""]]}";
 			};
 			id=2640;
 			type="Land_WoodenTable_small_F";
@@ -8254,7 +8261,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2641;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8272,7 +8279,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""],[""name"",""Странная стена""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Странная стена""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2642;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8290,7 +8297,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2643;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8308,7 +8315,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2644;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8326,7 +8333,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2645;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8344,7 +8351,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2646;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8362,7 +8369,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2647;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8380,7 +8387,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2648;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8398,7 +8405,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2649;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8416,7 +8423,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2650;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8434,7 +8441,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""],[""name"",""Странная стена""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Странная стена""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2651;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8452,7 +8459,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2652;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8470,7 +8477,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2653;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8488,7 +8495,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2654;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8506,7 +8513,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2655;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8524,7 +8531,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2656;
 			type="Land_Canal_WallSmall_10m_F";
@@ -8774,7 +8781,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\ind\pipes\indpipe1_uup_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumSteelUpperPipe""]]}";
 			};
 			id=2670;
 			type="Land_IndPipe1_Uup_F";
@@ -8791,7 +8798,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\ind\pipes\indpipe1_uup_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumSteelUpperPipe""]]}";
 			};
 			id=2671;
 			type="Land_IndPipe1_Uup_F";
@@ -8808,7 +8815,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\ind\pipes\indpipe1_uup_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumSteelUpperPipe""]]}";
 			};
 			id=2672;
 			type="Land_IndPipe1_Uup_F";
@@ -8825,7 +8832,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\ind\pipes\indpipe1_uup_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumSteelUpperPipe""]]}";
 			};
 			id=2673;
 			type="Land_IndPipe1_Uup_F";
@@ -8843,7 +8850,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\wip\unfinished_building_01_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigConcreteUnfinishedBuilding""]]}";
 			};
 			id=2674;
 			type="Land_Unfinished_Building_01_F";
@@ -8860,7 +8867,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_m.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
 			};
 			id=2675;
 			type="Land_kr_stena_3x3";
@@ -8877,7 +8884,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_m.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
 			};
 			id=2676;
 			type="Land_kr_stena_3x3";
@@ -8894,7 +8901,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_m.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
 			};
 			id=2677;
 			type="Land_kr_stena_3x3";
@@ -8963,7 +8970,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2681;
 			type="Land_kr_stena_3x6_dv";
@@ -8981,7 +8988,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2682;
 			type="Land_kr_stena_3x6_dv";
@@ -8997,7 +9004,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2683;
 			type="Land_kr_stena_3x6_dv";
@@ -9014,7 +9021,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2684;
 			type="Land_kr_stena_3x6_dv";
@@ -9032,7 +9039,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2685;
 			type="Land_kr_stena_3x6_dv";
@@ -9049,7 +9056,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2686;
 			type="Land_kr_stena_3x6_dv";
@@ -9138,7 +9145,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=2691;
 			type="stair";
@@ -9156,7 +9163,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=2692;
 			type="stair";
@@ -9710,7 +9717,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\bar_stoika.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallShelf""]]}";
 			};
 			id=2725;
 			type="bar_stoika";
@@ -9728,7 +9735,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\stelazh_ot_seregi\stelazh_ot_seregi.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LongShelf""]]}";
 			};
 			id=2726;
 			type="stelazh_ot_seregi";
@@ -9746,7 +9753,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\gate_bridge.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate2""]]}";
 			};
 			id=2727;
 			type="gate_bridge";
@@ -9890,7 +9897,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2735;
 			type="Land_lest_pod_2x4";
@@ -9907,7 +9914,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2736;
 			type="Land_lest_pod_2x4";
@@ -9924,7 +9931,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2737;
 			type="Land_lest_pod_2x4";
@@ -9942,7 +9949,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2738;
 			type="Land_lest_pod_2x4";
@@ -9960,7 +9967,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2739;
 			type="Land_lest_pod_2x4";
@@ -9977,7 +9984,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2740;
 			type="Land_lest_pod_2x4";
@@ -9994,7 +10001,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2741;
 			type="Land_lest_pod_2x4";
@@ -10011,7 +10018,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2742;
 			type="Land_lest_pod_2x4";
@@ -10028,7 +10035,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2743;
 			type="Land_lest_pod_2x4";
@@ -10045,7 +10052,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2744;
 			type="Land_lest_pod_2x4";
@@ -10062,7 +10069,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2745;
 			type="Land_lest_pod_2x4";
@@ -10079,7 +10086,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\lest_pod_2x4.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
 			};
 			id=2746;
 			type="Land_lest_pod_2x4";
@@ -10096,7 +10103,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_18x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorMedium""]]}";
 			};
 			id=2747;
 			type="Land_pod_18x6";
@@ -10114,7 +10121,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_18x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorMedium""]]}";
 			};
 			id=2748;
 			type="Land_pod_18x6";
@@ -10131,7 +10138,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_18x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorMedium""]]}";
 			};
 			id=2749;
 			type="Land_pod_18x6";
@@ -10148,7 +10155,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_18x6.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorMedium""]]}";
 			};
 			id=2750;
 			type="Land_pod_18x6";
@@ -10165,7 +10172,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryClayWall""]]}";
 			};
 			id=2751;
 			type="Wall_L2_5m_EP1";
@@ -10182,7 +10189,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryClayWall""]]}";
 			};
 			id=2752;
 			type="Wall_L2_5m_EP1";
@@ -10199,7 +10206,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryClayWall""]]}";
 			};
 			id=2753;
 			type="Wall_L2_5m_EP1";
@@ -10216,7 +10223,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryClayWall""]]}";
 			};
 			id=2754;
 			type="Wall_L2_5m_EP1";
@@ -10233,7 +10240,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryClayWall""]]}";
 			};
 			id=2755;
 			type="Wall_L2_5m_EP1";
@@ -10250,7 +10257,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryClayWall""]]}";
 			};
 			id=2756;
 			type="Wall_L2_5m_EP1";
@@ -10267,7 +10274,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryClayWall""]]}";
 			};
 			id=2757;
 			type="Wall_L2_5m_EP1";
@@ -10284,7 +10291,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryClayWall""]]}";
 			};
 			id=2758;
 			type="Wall_L2_5m_EP1";
@@ -11712,7 +11719,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\propeller.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigVentilationTurbine""]]}";
 			};
 			id=2842;
 			type="propeller";
@@ -11766,7 +11773,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=2845;
 			type="poldrevko";
@@ -11784,7 +11791,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=2846;
 			type="poldrevko";
@@ -11802,7 +11809,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=2847;
 			type="poldrevko";
@@ -11820,7 +11827,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=2848;
 			type="poldrevko";
@@ -11838,7 +11845,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_05\zabori.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFence""]]}";
 			};
 			id=2849;
 			type="zabori";
@@ -11856,7 +11863,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_05\zabori.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFence""]]}";
 			};
 			id=2850;
 			type="zabori";
@@ -11874,7 +11881,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_o.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallWindow2""]]}";
 			};
 			id=2851;
 			type="Land_kr_stena_3x6_okn";
@@ -11891,7 +11898,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_2d.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallTwoDoorways""]]}";
 			};
 			id=2852;
 			type="Land_kr_stena_3x6_2dv";
@@ -11908,7 +11915,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_2d.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallTwoDoorways""]]}";
 			};
 			id=2853;
 			type="Land_kr_stena_3x6_2dv";
@@ -12044,7 +12051,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\plita_3x3.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Struct_DebugMaterial__""]]}";
 			};
 			id=2861;
 			type="Land_plita_3x3";
@@ -12061,7 +12068,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\stolb_6m.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcreteLongPole""]]}";
 			};
 			id=2862;
 			type="Land_stolb_6m";
@@ -12077,7 +12084,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\stolb_6m.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcreteLongPole""]]}";
 			};
 			id=2863;
 			type="Land_stolb_6m";
@@ -12094,7 +12101,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\stolb_6m.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcreteLongPole""]]}";
 			};
 			id=2864;
 			type="Land_stolb_6m";
@@ -12110,7 +12117,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\stolb_6m.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcreteLongPole""]]}";
 			};
 			id=2865;
 			type="Land_stolb_6m";
@@ -12144,7 +12151,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\krysha.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigSteelRoof""]]}";
 			};
 			id=2867;
 			type="Land_krysha_18x18";
@@ -12599,7 +12606,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\carpet\carpet.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedCarpet""]]}";
 			};
 			id=2893;
 			type="carpet";
@@ -12616,7 +12623,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\carpet\carpet.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedCarpet""]]}";
 			};
 			id=2894;
 			type="carpet";
@@ -12758,7 +12765,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_heli\furniture\officetable_01_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenOfficeTable2""]]}";
 			};
 			id=2902;
 			type="OfficeTable_01_old_F";
@@ -12776,7 +12783,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_heli\furniture\officetable_01_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenOfficeTable2""]]}";
 			};
 			id=2903;
 			type="OfficeTable_01_old_F";
@@ -12825,7 +12832,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\props_f_orange\furniture\tablesmall_01_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TinyWoodenTable""]]}";
 			};
 			id=2906;
 			type="Land_TableSmall_01_F";
@@ -12842,7 +12849,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\props_f_orange\furniture\tablesmall_01_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TinyWoodenTable""]]}";
 			};
 			id=2907;
 			type="Land_TableSmall_01_F";
@@ -12860,7 +12867,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\shtora_pravo.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryRedCurtain""]]}";
 			};
 			id=2908;
 			type="shtora_pravo";
@@ -12878,7 +12885,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\shtora_pravo.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryRedCurtain""]]}";
 			};
 			id=2909;
 			type="shtora_pravo";
@@ -12896,7 +12903,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\shtora_pravo.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryRedCurtain""]]}";
 			};
 			id=2910;
 			type="shtora_pravo";
@@ -12914,7 +12921,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\ml_plakats3\picture_117.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PictureSussy""]]}";
 			};
 			id=2911;
 			type="picture_117";
@@ -13137,7 +13144,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l_2m5_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ClayWallSmall""]]}";
 			};
 			id=2924;
 			type="Wall_L_2m5_EP1";
@@ -13154,7 +13161,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l_2m5_ep1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ClayWallSmall""]]}";
 			};
 			id=2925;
 			type="Wall_L_2m5_EP1";
@@ -13240,7 +13247,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2930;
 			type="Land_kr_stena_3x6";
@@ -13257,7 +13264,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2931;
 			type="Land_kr_stena_3x6";
@@ -13274,7 +13281,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2932;
 			type="Land_kr_stena_3x6";
@@ -13291,7 +13298,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2933;
 			type="Land_kr_stena_3x6";
@@ -13309,7 +13316,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
 			};
 			id=2934;
 			type="Land_kr_stena_3x6";
@@ -13326,7 +13333,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2935;
 			type="Land_Canal_WallSmall_10m_F";
@@ -13344,7 +13351,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2936;
 			type="Land_Canal_WallSmall_10m_F";
@@ -13362,7 +13369,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2937;
 			type="Land_Canal_WallSmall_10m_F";
@@ -13380,7 +13387,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""],[""name"",""Странная стена""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Странная стена""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2938;
 			type="Land_Canal_WallSmall_10m_F";
@@ -13398,7 +13405,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=2939;
 			type="Land_Canal_WallSmall_10m_F";
@@ -13416,7 +13423,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_1d.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
 			};
 			id=2940;
 			type="Land_kr_stena_3x6_dv";
@@ -13681,7 +13688,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\stelazh_ot_seregi\stelazh_ot_seregi.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LongShelf""]]}";
 			};
 			id=2964;
 			type="stelazh_ot_seregi";
@@ -13699,7 +13706,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\stelazh_ot_seregi\stelazh_ot_seregi.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LongShelf""]]}";
 			};
 			id=2965;
 			type="stelazh_ot_seregi";
@@ -13716,7 +13723,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_18x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorMedium""]]}";
 			};
 			id=2966;
 			type="Land_pod_18x6";
@@ -13733,7 +13740,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\pod_18x6.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorMedium""]]}";
 			};
 			id=2967;
 			type="Land_pod_18x6";
@@ -13872,7 +13879,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=2975;
 			type="poldrevko";
@@ -13890,7 +13897,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=2976;
 			type="poldrevko";
@@ -13908,7 +13915,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=2977;
 			type="poldrevko";
@@ -13926,7 +13933,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=2978;
 			type="poldrevko";
@@ -13978,7 +13985,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\shabbat\shtora_pravo.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryRedCurtain""]]}";
 			};
 			id=2981;
 			type="shtora_pravo";
@@ -14241,7 +14248,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\ganzazhelezo2.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallMedium""]]}";
 			};
 			id=2996;
 			type="land_ganzazhelezo2";
@@ -14259,7 +14266,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\ganzazhelezo2.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallMedium""]]}";
 			};
 			id=2997;
 			type="land_ganzazhelezo2";
@@ -14378,7 +14385,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\walls\canal_wallsmall_10m_f.p3d""],[""name"",""Странная стена""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Странная стена""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 			};
 			id=3004;
 			type="Land_Canal_WallSmall_10m_F";
@@ -14431,7 +14438,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\slum\cargo_addon01_v2_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopySmall""]]}";
 			};
 			id=3007;
 			type="Land_cargo_addon01_V2_F";
@@ -14449,7 +14456,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\households\slum\cargo_addon01_v2_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopySmall""]]}";
 			};
 			id=3008;
 			type="Land_cargo_addon01_V2_F";
@@ -14467,7 +14474,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v1_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TinFence""]]}";
 			};
 			id=3009;
 			type="Land_TinWall_01_m_4m_v1_F";
@@ -14485,7 +14492,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\walls\tin\tinwall_01_m_4m_v1_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TinFence""]]}";
 			};
 			id=3010;
 			type="Land_TinWall_01_m_4m_v1_F";
@@ -14520,7 +14527,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\krysha.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigSteelRoof""]]}";
 			};
 			id=3012;
 			type="Land_krysha_18x18";
@@ -14537,7 +14544,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\krysha.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigSteelRoof""]]}";
 			};
 			id=3013;
 			type="Land_krysha_18x18";
@@ -14643,7 +14650,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\pavements\gardenpavement_02_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallStoneRoad""]]}";
 			};
 			id=3019;
 			type="Land_GardenPavement_02_F";
@@ -14660,7 +14667,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\pavements\gardenpavement_02_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallStoneRoad""]]}";
 			};
 			id=3020;
 			type="Land_GardenPavement_02_F";
@@ -14677,7 +14684,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\pavements\gardenpavement_02_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallStoneRoad""]]}";
 			};
 			id=3021;
 			type="Land_GardenPavement_02_F";
@@ -14694,7 +14701,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\pavements\gardenpavement_02_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallStoneRoad""]]}";
 			};
 			id=3022;
 			type="Land_GardenPavement_02_F";
@@ -14746,7 +14753,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\ruins\houseruin_small_02_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigRuinedBrickBuilding""]]}";
 			};
 			id=3025;
 			type="Land_HouseRuin_Small_02_F";
@@ -16467,7 +16474,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\medzanaves2.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MedicalCurtainSmall""]]}";
 			};
 			id=3147;
 			type="medzanaves2";
@@ -16516,7 +16523,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3150;
 			type="stair";
@@ -16533,7 +16540,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3151;
 			type="stair";
@@ -16551,7 +16558,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3152;
 			type="stair";
@@ -16569,7 +16576,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3153;
 			type="stair";
@@ -16587,7 +16594,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3154;
 			type="stair";
@@ -16605,7 +16612,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3155;
 			type="stair";
@@ -16623,7 +16630,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3156;
 			type="stair";
@@ -16641,7 +16648,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3157;
 			type="stair";
@@ -16659,7 +16666,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3158;
 			type="stair";
@@ -16677,7 +16684,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3159;
 			type="stair";
@@ -16694,7 +16701,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3160;
 			type="metalplate";
@@ -16712,7 +16719,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3161;
 			type="metalplate";
@@ -16730,7 +16737,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3162;
 			type="metalplate";
@@ -16748,7 +16755,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3163;
 			type="metalplate";
@@ -16766,7 +16773,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3164;
 			type="metalplate";
@@ -16784,7 +16791,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3165;
 			type="metalplate";
@@ -16802,7 +16809,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3166;
 			type="metalplate";
@@ -16820,7 +16827,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3167;
 			type="metalplate";
@@ -16838,7 +16845,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3168;
 			type="stair";
@@ -16856,7 +16863,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3169;
 			type="stair";
@@ -17005,7 +17012,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3179;
 			type="stair";
@@ -17022,7 +17029,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3180;
 			type="stair";
@@ -17039,7 +17046,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3181;
 			type="stair";
@@ -17057,7 +17064,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3182;
 			type="stair";
@@ -17075,7 +17082,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\stair.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelRustyStairs""]]}";
 			};
 			id=3183;
 			type="stair";
@@ -17093,7 +17100,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3184;
 			type="metalplate";
@@ -17111,7 +17118,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3185;
 			type="metalplate";
@@ -17129,7 +17136,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3186;
 			type="metalplate";
@@ -17147,7 +17154,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3187;
 			type="metalplate";
@@ -17165,7 +17172,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3188;
 			type="metalplate";
@@ -17183,7 +17190,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3189;
 			type="metalplate";
@@ -17201,7 +17208,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3190;
 			type="metalplate";
@@ -17219,7 +17226,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3191;
 			type="metalplate";
@@ -17268,7 +17275,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\decor\bed_original1.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""DoubleCitizenBed1""]]}";
 			};
 			id=3194;
 			type="bed_original1";
@@ -17364,7 +17371,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_epa\civ\camping\woodentable_small_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallWoodenTable""]]}";
 			};
 			id=3200;
 			type="Land_WoodenTable_small_F";
@@ -17380,7 +17387,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_05\zabori.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFence""]]}";
 			};
 			id=3201;
 			type="zabori";
@@ -17397,7 +17404,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\metalplate.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate""]]}";
 			};
 			id=3202;
 			type="metalplate";
@@ -17413,7 +17420,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigConcretePanel""]]}";
 			};
 			id=3203;
 			type="Land_ConcretePanels_02_four_F";
@@ -17429,7 +17436,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\poldrevko.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallFloor""]]}";
 			};
 			id=3204;
 			type="poldrevko";
@@ -17445,7 +17452,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\grating_01.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigSteelGrating""]]}";
 			};
 			id=3205;
 			type="grating_01";
@@ -17592,7 +17599,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\medzanaves2.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MedicalCurtainSmall""]]}";
 			};
 			id=3214;
 			type="medzanaves2";
@@ -17641,7 +17648,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\ganzazhelezo3.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallSmall""]]}";
 			};
 			id=3217;
 			type="land_ganzazhelezo3";
@@ -17657,7 +17664,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\ganzazhelezo3.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallSmall""]]}";
 			};
 			id=3218;
 			type="land_ganzazhelezo3";
@@ -17674,7 +17681,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\civilian\accessories\plank_01_8m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LongRottenBoards""]]}";
 			};
 			id=3219;
 			type="Land_Plank_01_8m_F";
@@ -17690,7 +17697,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\ml_object_2\l01_props\gate_bridge.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate2""]]}";
 			};
 			id=3220;
 			type="gate_bridge";
@@ -17707,7 +17714,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\pavements\gardenpavement_01_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallConcretePanel""]]}";
 			};
 			id=3221;
 			type="Land_GardenPavement_01_F";
@@ -17724,7 +17731,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\pavements\gardenpavement_01_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallConcretePanel""]]}";
 			};
 			id=3222;
 			type="Land_GardenPavement_01_F";
@@ -17740,7 +17747,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\pavements\gardenpavement_01_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallConcretePanel""]]}";
 			};
 			id=3223;
 			type="Land_GardenPavement_01_F";
@@ -17757,7 +17764,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\pavements\gardenpavement_01_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallConcretePanel""]]}";
 			};
 			id=3224;
 			type="Land_GardenPavement_01_F";
@@ -17773,7 +17780,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\pavements\gardenpavement_01_f.p3d""]]],[""class"",""IStruct""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallConcretePanel""]]}";
 			};
 			id=3225;
 			type="Land_GardenPavement_01_F";
@@ -18147,7 +18154,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\propeller.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigVentilationTurbine""]]}";
 			};
 			id=3248;
 			type="propeller";
@@ -18278,7 +18285,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\civilian\accessories\plank_01_8m_f.p3d""]]],[""class"",""Decor""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LongRottenBoards""]]}";
 			};
 			id=3256;
 			type="Land_Plank_01_8m_F";
@@ -20353,6 +20360,123 @@ class Mission
 			id=3291;
 			type="S_Salt";
 			atlOffset=0.2850914;
+		};
+		class Item1057
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3707.1475,24.041832,3667.7209};
+				angles[]={0,4.7123895,-0};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Umivalnik""]]}";
+			};
+			id=3293;
+			type="umivalnik1";
+			atlOffset=0.80870819;
+		};
+		class Item1058
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3707.2429,23.255527,3668.5203};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bucket""]]}";
+			};
+			id=3294;
+			type="CUP_A2_bucket";
+			atlOffset=0.81567383;
+		};
+		class Item1059
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3707.2903,23.254797,3670.9336};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bucket""]]}";
+			};
+			id=3295;
+			type="CUP_A2_bucket";
+			atlOffset=1.2960396;
+		};
+		class Item1060
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3707.2446,24.334393,3669.2625};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenBucket""]]}";
+			};
+			id=3296;
+			type="CUP_A2_bucket_ep1";
+			atlOffset=0.84147835;
+		};
+		class Item1061
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3673.4973,22.551495,3678.5984};
+				angles[]={0,1.5707976,-0};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Umivalnik""]]}";
+			};
+			id=3297;
+			type="umivalnik1";
+			atlOffset=16.76059;
+		};
+		class Item1062
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3673.4011,21.783016,3677.7986};
+				angles[]={0,3.1415923,-0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bucket""]]}";
+			};
+			id=3298;
+			type="CUP_A2_bucket";
+			atlOffset=16.783016;
+		};
+		class Item1063
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3675.4197,23.113474,3679.884};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenBucket""]]}";
+			};
+			id=3299;
+			type="CUP_A2_bucket_ep1";
+			atlOffset=0.96068954;
 		};
 	};
 };
