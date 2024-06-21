@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: 1.14-path.2';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.14-path.3';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -91,7 +91,7 @@ _4042_299563635_5053731_61089 = ['IStruct',[4042.3,3635.51,36.8926,true],[-0.330
 ['TorchDisabled',[4041.13,3630.81,31.2558],15,[0,0,1]] call InitItem; 
 _4041_277593630_4711931_68046 = ['Head2',[4041.28,3630.47,31.6805],240,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\civ\dead\humanskull_f.p3d'];}] call InitItem; // !!! realocated model !!!
 _4042_897953627_9702131_05613 = ['Key',[4042.9,3627.97,31.0561],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RChiefKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
-['BarrelCampfireBig',[4043.3,3637.45,31.8818,true],[-0.5,0.866026,-2.75671e-007],[0.0754781,0.0435775,0.996195], {_thisObj setvariable ['lightisenabled',false];}] call InitStruct; 
+['BarrelCampfireBig',[4041.05,3636.45,31.8522,true],330.095,[-0.0116333,0.0435775,0.998982], {_thisObj setvariable ['lightisenabled',false];}] call InitStruct; 
 _4047_703133628_7377926_57799 = ['WoodenDoor',[4047.7,3628.74,26.578],240,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RChiefKey, RChiefSonKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['WoodenDoor',[4049.64,3643.07,26.6143],355,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RChiefKey, RChiefSonKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['WoodenDoor',[4051.1,3643.01,26.6029],185.001,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RChiefKey, RChiefSonKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
@@ -132,11 +132,13 @@ _4045_488283633_1135327_37314 = ['ContainerGreen',[4045.49,3633.11,27.3731],150,
 ['RedCarpetWall',[4045.05,3628.86,32.163],240,[0,0,1]] call InitStruct; 
 ['RedCarpet',[4043.51,3631.66,29.69],330,[0,0,1]] call InitStruct; 
 ['PosterWorkingClass',[4045.76,3633.28,37.1261,true],[-7.58967e-007,1.30265e-006,-1],[-0.866026,-0.5,5.96244e-009]] call InitStruct; 
-_4042_413823635_1272027_41410 = ['IStruct',[4042.41,3635.13,27.4141],330,[0,0,1], {_thisObj setvariable ['model','a3\props_f_orange\furniture\tablebig_01_f.p3d'];}] call InitStruct; // !!! realocated model !!!
+['MediumWoodenTable1',[4042.41,3635.13,27.4141],330,[0,0,1]] call InitStruct; 
 ['SmallSteelTable',[4045.46,3629.5,27.4641],330,[0,0,1]] call InitStruct; 
 ['LampKeroseneHolder',[4045.79,3634,26.6498],335,[0,0,1]] call InitStruct; 
 ['LampKeroseneHolder',[4040.34,3631.79,29.8432],335,[0,0,1]] call InitStruct; 
 _4042_295173635_2895528_28765 = ['Samovar',[4042.3,3635.29,28.2877],150,[0,0,1]] call InitStruct; 
+['Bucket',[4043.32,3637.17,32.2369,true],150,[0.00554301,0.00439716,0.999975]] call InitItem; 
+['Umivalnik',[4043.18,3637.11,26.4575],330,[0,0,1]] call InitStruct; 
 ['Meat',[4076.24,3646.82,29.7845],160,[0,0,1]] call InitItem; 
 ['Shovel',[4069.46,3645.99,29.2318],0,[0,0,1]] call InitItem; 
 ['Screwdriver',[4069.51,3646.93,34.5945,true],55,[-0.00486291,0.00513991,0.999975]] call InitItem; 
@@ -692,6 +694,8 @@ _4043_605223649_7739327_76392 = ['ContainerGreen',[4043.61,3649.77,27.7639],180,
 ['TorchDisabled',[4036.39,3646.65,32.1054],165,[0,0,1]] call InitItem; 
 _4038_859623646_8256831_24920 = ['BigClothCabinet',[4038.86,3646.83,31.2492],90,[0,0,1]] call InitStruct; 
 ['OldBrickWallMedium',[4034.62,3658.16,32.2315],90.0003,[0,0,1]] call InitStruct; 
+['Umivalnik',[4040.01,3660.76,27.7735],90,[0,0,1]] call InitStruct; 
+['WoodenBucket',[4039.89,3660.11,33.0211,true],0,[-0.0010358,0.00251358,0.999996]] call InitItem; 
 ['ChairCasual',[4043.15,3679.62,29.3849],260,[0,0,1]] call InitItem; 
 ['DBShotgun',[4051.09,3674.67,32.9723,true],[-0.965927,-0.258816,0.000494715],[0.254202,-0.948346,0.189794]] call InitItem; 
 ['RopeItem',[4051.91,3674.68,32.9848,true],335,[-0.0237896,-0.0069539,0.999693]] call InitItem; 
@@ -763,6 +767,9 @@ _4058_410163679_1208527_31193 = ['WoodenDoor',[4058.41,3679.12,27.3119],90.0005,
 ['LargeConcreteWallWithReinforcement',[4030.26,3667.25,34.1591,true],[-1.19249e-008,2.9099e-005,1],[1,0,1.19249e-008]] call InitStruct; 
 ['TorchHolderCharged',[4040.21,3670.8,27.0028],90.0003,[0,0,1], {_thisObj setvariable ['preinit@__enablechanged',false]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['LargeConcreteWallWithReinforcement',[4029.57,3657.89,30.261],266,[0,0,1]] call InitStruct; 
+['Bucket',[4047.62,3665.43,31.5087,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
+['WoodenBucket',[4048.36,3665.49,31.7295,true],359.897,[-0.0153039,-0.0204795,0.999673]] call InitItem; 
+['Umivalnik',[4046.35,3666.76,26.4855],45,[0,0,1]] call InitStruct; 
 ['MediumConcreteWall',[4037.91,3671.08,28.7514],0,[0,0,1]] call InitStruct; 
 ['MediumConcreteWall',[4036.11,3672.83,28.7577],270,[0,0,1]] call InitStruct; 
 ['MediumConcreteWall',[4037.9,3674.55,28.7562],180,[0,0,1]] call InitStruct; 
@@ -786,9 +793,9 @@ _4036_867683673_8217827_45319 = ['SquareWoodenBox',[4036.87,3673.82,27.4532],0,[
 ['MediumRuinedPipe',[4038.36,3675.83,29.9943],0,[0,0,1]] call InitStruct; 
 ['BigPilePipes',[4036.53,3672.85,29.4348],252.807,[0,0,1]] call InitStruct; 
 ['CampfireCreator',[4038.55,3674.02,33.4538,true],0,[0.00566271,-0.00693096,0.99996]] call InitItem; 
-['OlderWoodenCup',[4037.73,3673.72,28.3244],0,[0,0,1]] call InitItem; 
-['Candle',[4036.87,3673.79,28.4005],0,[0,0,1]] call InitItem; 
-['TorchDisabled',[4037.11,3673.64,28.4265],28.0449,[0,0,1]] call InitItem; 
+['OlderWoodenCup',[4037.61,3673.71,28.3256],0,[0,0,1]] call InitItem; 
+['Candle',[4038.07,3673.94,28.3246],0,[0,0,1]] call InitItem; 
+['TorchDisabled',[4038.74,3673.54,28.318],28.0449,[0,0,1]] call InitItem; 
 ['Statue7',[4058.28,3648.71,25.6172],5,[0,0,1]] call InitStruct; 
 ['SmallMushroom',[4056.89,3648.58,32.6655,true],338.246,[-0.101306,-0.221664,0.969846]] call InitStruct; 
 ['Tumannik',[4057.28,3647.57,32.4171,true],[0,0.988538,0.150975],[0.0671642,-0.150634,0.986305]] call InitItem; 
@@ -2304,7 +2311,7 @@ _3771_207523364_571534_65545 = ['IStruct',[3771.21,3364.57,10.9398,true],275,[0.
 ['MediumFenceOfSheetsAndBoards',[3798.19,3389.76,4.96538],240,[0,0,1]] call InitStruct; 
 ['MediumFenceOfSheetsAndBoards',[3773.06,3410.24,5.02999],295,[0,0,1]] call InitStruct; 
 ['WoodenSmallFence',[3771.54,3399.37,5.56],270,[0,0,1]] call InitStruct; 
-_3769_489263401_386234_20435 = ['IStruct',[3769.49,3401.39,5.05303,true],355,[0.00566271,-0.00693096,0.99996], {_thisObj setvariable ['model','ca\structures\nav_boathouse\nav_boathouse_piert.p3d'];}] call InitStruct; // !!! realocated model !!!
+['LongBoardsOnStilts',[3769.49,3401.39,5.05303,true],355,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
 ['SmallSteelRustyFence',[3766.49,3543.83,22.9926],290.168,[0,0,1]] call InitStruct; 
 ['ConcreteArch',[4004.98,3717.2,10.8425],270,[0,0,1]] call InitDecor; 
 _4005_010743717_3383812_64127 = ['IStruct',[4005.01,3717.34,20.5513,true],180,[0.00566319,-0.00693144,0.99996], {_thisObj setvariable ['model','ml_exodusnew\germozatvor_menu2.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -3037,9 +3044,6 @@ if ((random 1) < 0.3) then {
 _3922_290533575_536135_31161 = if ((random 1) < 0.3) then {
 	['FabricBagBig2',[3922.29,3575.54,5.31161],270,[0,0,1]] call InitItem; 
 };
-_3846_000493591_692875_22444 = if ((random 1) < 0.75) then {
-	['BoardWoodenBox',[3846,3591.69,5.22444],200,[0,0,1]] call InitStruct; 
-};
 _3839_798833586_713389_16221 = if ((random 1) < 0.6) then {
 	['SteelGreenCabinet',[3839.8,3586.71,9.16221],290,[0,0,1]] call InitStruct; 
 };
@@ -3051,9 +3055,6 @@ _3841_589603594_166505_25552 = if ((random 1) < 0.6) then {
 };
 _3841_237553584_966809_14303 = if ((random 1) < 0.6) then {
 	['ContainerGreen3',[3841.24,3584.97,14.4121,true],201.973,[0.00161916,-0.00659633,0.999977]] call InitStruct; 
-};
-_3926_691413544_448735_22121 = if ((random 1) < 0.5) then {
-	['BoardWoodenBox',[3926.69,3544.45,5.22121],180.001,[0,0,1]] call InitStruct; 
 };
 _3763_703373532_3481421_87132 = if ((random 1) < 0.6) then {
 	['ContainerGreen3',[3763.7,3532.35,27.1404,true],201.973,[0.00161916,-0.00659633,0.999977]] call InitStruct; 
@@ -3067,14 +3068,8 @@ _3764_284913542_8864721_84266 = if ((random 1) < 0.6) then {
 _3754_868903530_2363321_73763 = if ((random 1) < 0.6) then {
 	['ContainerGreen',[3754.87,3530.24,21.7376],110,[0,0,1]] call InitStruct; 
 };
-_3755_593263540_7209521_65967 = if ((random 1) < 0.75) then {
-	['BoardWoodenBox',[3755.59,3540.72,21.6597],105.001,[0,0,1]] call InitStruct; 
-};
 _3753_539553557_0383322_11060 = if ((random 1) < 0.5) then {
 	['BigClothCabinet',[3753.54,3557.04,27.1106,true],15.001,[0.00583866,-0.0115593,0.999916]] call InitStruct; 
-};
-_3751_437503554_8064019_23812 = if ((random 1) < 0.75) then {
-	['BoardWoodenBox',[3751.44,3554.81,19.2381],15.0006,[0,0,1]] call InitStruct; 
 };
 _3771_203133549_9543522_15615 = if ((random 1) < 0.6) then {
 	['ContainerGreen3',[3771.2,3549.95,27.4252,true],221.973,[0.00161916,-0.00659633,0.999977]] call InitStruct; 
@@ -3100,12 +3095,6 @@ _3776_904303410_456545_38984 = if ((random 1) < 0.6) then {
 _3749_168213488_8134816_60955 = if ((random 1) < 0.6) then {
 	['ContainerGreen',[3749.17,3488.81,21.8813,true],[-5.57105e-006,-0.965926,-0.258819],[-1.25677e-006,-0.258819,0.965926]] call InitStruct; 
 };
-_3750_989503451_510254_93789 = if ((random 1) < 0.75) then {
-	['BoardWoodenBox',[3750.99,3451.51,4.93789],85.0005,[0,0,1]] call InitStruct; 
-};
-_3749_955573477_9436010_70015 = if ((random 1) < 0.75) then {
-	['BoardWoodenBox',[3749.96,3477.94,16.1098,true],[0.173632,-0.981063,0.0858319],[0,0.0871557,0.996195]] call InitStruct; 
-};
 _3749_366703481_8239710_31572 = if ((random 1) < 0.5) then {
 	['BigClothCabinet',[3749.37,3481.82,15.3157,true],[-0.0875983,-0.932928,-0.349245],[-0.00202711,-0.350425,0.936589]] call InitStruct; 
 };
@@ -3114,9 +3103,6 @@ _3749_420173490_0539613_36392 = if ((random 1) < 0.6) then {
 };
 _3748_514653468_559085_75224 = if ((random 1) < 0.6) then {
 	['SteelGreenCabinet',[3748.51,3468.56,11.1554,true],[0.939692,-0.342021,5.39422e-006],[0.296197,0.813798,0.5]] call InitStruct; 
-};
-_3820_792483387_532964_99013 = if ((random 1) < 0.75) then {
-	['BoardWoodenBox',[3820.79,3387.53,4.99013],270.001,[0,0,1]] call InitStruct; 
 };
 _3827_018553436_579356_31526 = if ((random 1) < 0.6) then {
 	['ContainerGreen3',[3827.02,3436.58,11.5843,true],291.972,[0.00161916,-0.00659633,0.999977]] call InitStruct; 
@@ -3136,23 +3122,14 @@ _3827_373543445_0463910_03900 = if ((random 1) < 0.75) then {
 _3817_342533443_407716_37011 = if ((random 1) < 0.5) then {
 	['BigClothCabinet',[3817.34,3443.41,11.3701,true],269.997,[0.00583866,-0.0115593,0.999916]] call InitStruct; 
 };
-_3827_235113435_2739310_08836 = if ((random 1) < 0.75) then {
-	['BoardWoodenBox',[3827.24,3435.27,10.0884],200,[0,0,1]] call InitStruct; 
-};
 _3819_652343435_3252010_40695 = if ((random 1) < 0.6) then {
 	['SteelGreenCabinet',[3819.65,3435.33,15.4209,true],[-0.707107,-0.707106,8.34369e-007],[0.707106,-0.707107,3.45607e-007]] call InitStruct; 
-};
-_3814_303963458_605719_87127 = if ((random 1) < 0.75) then {
-	['BoardWoodenBox',[3814.3,3458.61,9.87127],355.001,[0,0,1]] call InitStruct; 
 };
 _3899_852783562_475345_80502 = if ((random 1) < 0.5) then {
 	['BigClothCabinet',[3899.85,3562.48,10.805,true],84.9962,[0.0101758,-0.00800828,0.999916]] call InitStruct; 
 };
 _3906_742433572_429205_89154 = if ((random 1) < 0.6) then {
 	['SteelGreenCabinet',[3906.74,3572.43,11.2348,true],[-4.06738e-006,-1,6.03626e-006],[0.906306,-1.13524e-006,0.422622]] call InitStruct; 
-};
-_3903_378173553_776865_77942 = if ((random 1) < 0.75) then {
-	['BoardWoodenBox',[3903.38,3553.78,5.77942],180.001,[0,0,1]] call InitStruct; 
 };
 _3942_235603492_894788_88375 = if ((random 1) < 0.6) then {
 	['ContainerGreen3',[3942.24,3492.89,14.1528,true],86.9726,[0.00528792,0.00425297,0.999977]] call InitStruct; 
@@ -3166,17 +3143,11 @@ _3944_118653494_885015_42675 = if ((random 1) < 0.6) then {
 _3937_333983491_925548_89532 = if ((random 1) < 0.6) then {
 	['ContainerGreen',[3937.33,3491.93,14.1679,true],[-0.980109,0.0880904,-0.177837],[-0.176523,0.0225548,0.984038]] call InitStruct; 
 };
-_3933_670413493_454835_14829 = if ((random 1) < 0.75) then {
-	['BoardWoodenBox',[3933.67,3493.45,5.14829],200,[0,0,1]] call InitStruct; 
-};
 _3902_275883508_094489_43684 = if ((random 1) < 0.6) then {
 	['ContainerGreen3',[3902.28,3508.09,14.7059,true],261.973,[-0.00490216,-0.0046985,0.999977]] call InitStruct; 
 };
 _3901_578133503_710946_33484 = if ((random 1) < 0.6) then {
 	['SteelGreenCabinet',[3901.58,3503.71,11.3529,true],[-0.473972,-0.880539,0.00138542],[0.880531,-0.473959,0.00523983]] call InitStruct; 
-};
-_3904_009033502_271006_14434 = if ((random 1) < 0.75) then {
-	['BoardWoodenBox',[3904.01,3502.27,6.14434],30.0006,[0,0,1]] call InitStruct; 
 };
 _3840_572513439_847905_82794 = if ((random 1) < 0.6) then {
 	['ContainerGreen3',[3840.57,3439.85,11.0809,true],[-0.349708,-0.927349,-0.133148],[-0.340491,-0.00659584,0.940225]] call InitStruct; 
@@ -3189,9 +3160,6 @@ _3821_626463462_305665_78310 = if ((random 1) < 0.6) then {
 };
 _3816_271003433_413095_02104 = if ((random 1) < 0.6) then {
 	['ContainerGreen',[3816.27,3433.41,5.02104],125,[0,0,1]] call InitStruct; 
-};
-_3848_343023448_044686_23548 = if ((random 1) < 0.75) then {
-	['BoardWoodenBox',[3848.34,3448.04,11.6459,true],[-0.342029,-0.90767,0.24321],[0,0.258819,0.965926]] call InitStruct; 
 };
 _3937_157713502_771978_94925 = if ((random 1) < 0.5) then {
 	['BigClothCabinet',[3937.16,3502.77,13.9493,true],359.996,[0.00886125,0.00943791,0.999916]] call InitStruct; 
@@ -3246,6 +3214,45 @@ _3820_068123386_761234_94075 = if ((random 1) < 0.8) then {
 };
 _3829_007573383_581795_26842 = if ((random 1) < 0.8) then {
 	['SteelBrownContainer',[3829.01,3383.58,10.4843,true],[-0.108843,0.992798,-0.050062],[-0.00151922,0.050195,0.998738]] call InitItem; 
+};
+_3827_330813435_1687010_09341 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3827.33,3435.17,10.0934],200,[0,0,1]] call InitStruct; 
+};
+_3848_321293448_200686_17823 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3848.32,3448.2,11.5828,true],[-0.326505,-0.925413,0.192364],[0.0858316,0.173648,0.98106]] call InitStruct; 
+};
+_3846_085453591_734865_23476 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3846.09,3591.73,5.23476],200,[0,0,1]] call InitStruct; 
+};
+_3926_708983544_420655_25572 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3926.71,3544.42,5.25572],180.001,[0,0,1]] call InitStruct; 
+};
+_3755_402343540_5349121_65800 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3755.4,3540.53,21.658],95.0009,[0,0,1]] call InitStruct; 
+};
+_3751_388923554_5664119_26038 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3751.39,3554.57,19.2604],15.0009,[0,0,1]] call InitStruct; 
+};
+_3751_023683451_455324_93744 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3751.02,3451.46,4.93744],80.0006,[0,0,1]] call InitStruct; 
+};
+_3749_915773477_9895010_67909 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3749.92,3477.99,16.0887,true],[0.173639,-0.981062,0.0858318],[0,0.0871557,0.996195]] call InitStruct; 
+};
+_3820_520263387_617924_88520 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3820.52,3387.62,4.8852],270.001,[0,0,1]] call InitStruct; 
+};
+_3814_232673458_685069_93392 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3814.23,3458.69,9.93392],170.001,[0,0,1]] call InitStruct; 
+};
+_3903_348883553_749275_74550 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3903.35,3553.75,5.7455],170.001,[0,0,1]] call InitStruct; 
+};
+_3933_618163493_381595_41332 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3933.62,3493.38,5.41332],200,[0,0,1]] call InitStruct; 
+};
+_3904_143313502_239506_22150 = if ((random 1) < 0.75) then {
+	['BoardWoodenBox',[3904.14,3502.24,6.2215],200,[0,0,1]] call InitStruct; 
 };
 if ((random 1) < 0.1) then {
 	['AmmoBoxShotgun',[3831.47,3604.05,10.5515,true],[-0.965924,0.258807,0.00327122],[-0.0433492,-0.174223,0.983752]] call InitItem; 
@@ -3522,7 +3529,7 @@ _4284_740233694_9133331_01853 = ['IStruct',[4284.74,3694.91,36.2107,true],0,[-0.
 _4284_218753694_1003431_19803 = ['IStruct',[4284.22,3694.1,36.1949,true],270,[-0.026172,-0.0384808,0.998917], {_thisObj setvariable ['model','ml\ml_object_new\model_05\yashikderewo.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4284_206053693_3974631_18048 = ['IStruct',[4284.21,3693.4,36.1805,true],0,[-0.0069996,-0.00103597,0.999975], {_thisObj setvariable ['model','ml\ml_object_new\model_05\yashikgrib.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4286_174803694_3852529_94276 = ['IStruct',[4286.17,3694.39,35.4901,true],[-6.9614e-006,-0.999888,-0.0149684],[-0.106956,-0.0148818,0.994152], {_thisObj setvariable ['model','ml_exodusnew\stulred.p3d'];}] call InitStruct; // !!! realocated model !!!
-_4286_151373693_3017630_01963 = ['IStruct',[4286.15,3693.3,35.6625,true],270,[0.00103361,-0.00699687,0.999975], {_thisObj setvariable ['model','ml_exodusnew\virusbratan.p3d'];}] call InitStruct; // !!! realocated model !!!
+['Wheelchair',[4286.15,3693.3,35.6625,true],270,[0.00103361,-0.00699687,0.999975]] call InitStruct; 
 _4283_852053700_4831530_25121 = ['IStruct',[4283.85,3700.48,35.5508,true],0,[-0.0168716,0.0321326,0.999341], {_thisObj setvariable ['model','egl_gliese_misc\crystal1.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4284_737793704_8230030_23751 = ['IStruct',[4284.74,3704.82,35.3118,true],0,[0.00566319,-0.00693144,0.99996], {_thisObj setvariable ['model','egl_gliese_misc\crystal3.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4282_516113704_4174831_54258 = ['IStruct',[4282.52,3704.42,36.5653,true],0,[0.00566319,-0.00693144,0.99996], {_thisObj setvariable ['model','egl_gliese_misc\crystal4.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -3552,7 +3559,7 @@ _4289_596193697_7402330_45430 = ['IStruct',[4289.6,3697.74,35.4972,true],0,[-0.0
 _4289_531743695_7597730_07496 = ['IStruct',[4289.53,3695.76,35.4485,true],175,[0.00687481,0.00164079,0.999975], {_thisObj setvariable ['model','metro_ob\model\reading_hall_head_1.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4291_072753695_8689029_99126 = ['IStruct',[4291.07,3695.87,35.0189,true],0,[-0.0069996,-0.00103597,0.999975], {_thisObj setvariable ['model','relicta_models\models\interier\props\soap.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4290_178713696_4013730_02850 = ['IStruct',[4290.18,3696.4,35.2163,true],0,[-0.0069996,-0.00103597,0.999975], {_thisObj setvariable ['model','ml\ml_object_new\model_14_10\swarshik.p3d'];}] call InitStruct; // !!! realocated model !!!
-_4292_187013696_4985429_99189 = ['IStruct',[4292.19,3696.5,29.9919],0,[0,0,1], {_thisObj setvariable ['model','relicta_models\models\weapons\melee\swordxach\swordxach.p3d'];}] call InitStruct; // !!! realocated model !!!
+['SwordScimitar',[4292.19,3696.5,29.9919],0,[0,0,1]] call InitItem; 
 _4285_030763693_1774931_02557 = ['IStruct',[4285.03,3693.18,36.1218,true],0,[0.00566271,-0.00693096,0.99996], {_thisObj setvariable ['model','relicta_models\models\weapons\tnt.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4318_327643711_6948229_87771 = ['IStruct',[4318.33,3711.69,37.2116,true],0,[-0.00659628,-0.0016196,0.999977], {_thisObj setvariable ['model','ml_shabut\redforresttun\rftnew.p3d'];}] call InitStruct; // !!! realocated model !!!
 _4318_306643698_8793931_09864 = ['IStruct',[4318.31,3698.88,37.8331,true],0,[-0.0154596,-0.00693072,0.999856], {_thisObj setvariable ['model','ml\ml_object_new\model_14_10\monorail.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -4025,6 +4032,10 @@ _4071_219243768_6071817_22151 = ['CollectionSpawnPoint',[4071.22,3768.61,17.2215
 _4147_897463688_5910620_04749 = ['CollectionSpawnPoint',[4147.9,3688.59,20.0475],210,[0,0,1]] call InitStruct; 
 _4079_958253668_8855027_07249 = ['CollectionSpawnPoint',[4079.96,3668.89,27.0725],235,[0,0,1]] call InitStruct; 
 _4099_658693625_2885727_30774 = ['CollectionSpawnPoint',[4099.66,3625.29,27.3077],285,[0,0,1]] call InitStruct; 
+['Umivalnik',[4025.58,3759.45,15.6147],90,[0,0,1]] call InitStruct; 
+['WoodenBucket',[4024.44,3760.36,20.8751,true],0,[-0.00567329,0.00693103,0.99996]] call InitItem; 
+['Bucket',[4025.6,3755.73,20.6036,true],[-0.00227831,0.999658,0.0260426],[-0.0486934,-0.0261227,0.998472]] call InitItem; 
+['WoodenBucket',[4022.63,3759.79,20.8713,true],0,[0.00659634,0.00161941,0.999977]] call InitItem; 
 
 
 
@@ -4379,11 +4390,11 @@ if (!isNil'_4040_015383646_4279827_76221') then {
 };
 if (!isNil'_4038_507323646_4140627_80130') then {
 	[_4038_507323646_4140627_80130,'FryingPan',1,100] call (_4038_507323646_4140627_80130 getvariable 'proto' getvariable 'createItemInContainer');
-	[_4038_507323646_4140627_80130,'Torch',1,100] call (_4038_507323646_4140627_80130 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4038_507323646_4140627_80130,'Paper',1,71] call (_4038_507323646_4140627_80130 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4038_507323646_4140627_80130,'Rag',1,67] call (_4038_507323646_4140627_80130 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4038_507323646_4140627_80130,'Muka',1,50] call (_4038_507323646_4140627_80130 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4038_507323646_4140627_80130,'Egg',1,55] call (_4038_507323646_4140627_80130 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4038_507323646_4140627_80130,'TorchDisabled',1,100] call (_4038_507323646_4140627_80130 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_4038_803473648_1420927_78952') then {
 	[_4038_803473648_1420927_78952,'MetalCup',1,62] call (_4038_803473648_1420927_78952 getvariable 'proto' getvariable 'createItemInContainer');
@@ -4406,7 +4417,7 @@ if (!isNil'_4038_859623646_8256831_24920') then {
 if (!isNil'_4051_815193675_0297927_19326') then {
 	_4051_815193675_0297927_19326 setvariable ['countslots',100];
 	[_4051_815193675_0297927_19326,'RopeItem',1,50] call (_4051_815193675_0297927_19326 getvariable 'proto' getvariable 'createItemInContainer');
-	[_4051_815193675_0297927_19326,'Torch',1,100] call (_4051_815193675_0297927_19326 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4051_815193675_0297927_19326,'TorchDisabled',1,100] call (_4051_815193675_0297927_19326 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_4041_928713681_3925826_38194') then {
 	_4041_928713681_3925826_38194 setvariable ['islocked',true];
@@ -4462,11 +4473,11 @@ if (!isNil'_4037_159183771_1257316_66478') then {
 };
 if (!isNil'_4023_737553764_9958515_59146') then {
 	_4023_737553764_9958515_59146 setvariable ['countslots',100];
-	[_4023_737553764_9958515_59146,'Torch',2,100] call (_4023_737553764_9958515_59146 getvariable 'proto' getvariable 'createItemInContainer');
-	[_4023_737553764_9958515_59146,'Torch',1,50] call (_4023_737553764_9958515_59146 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4023_737553764_9958515_59146,'SoupPlate',1,50] call (_4023_737553764_9958515_59146 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4023_737553764_9958515_59146,'Bone',1,50] call (_4023_737553764_9958515_59146 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4023_737553764_9958515_59146,'Rag',1,50] call (_4023_737553764_9958515_59146 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4023_737553764_9958515_59146,'TorchDisabled',2,100] call (_4023_737553764_9958515_59146 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4023_737553764_9958515_59146,'TorchDisabled',1,50] call (_4023_737553764_9958515_59146 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_4035_033693773_4267616_79198') then {
 	[_4035_033693773_4267616_79198,'FryingPan',1,100] call (_4035_033693773_4267616_79198 getvariable 'proto' getvariable 'createItemInContainer');
@@ -4534,37 +4545,6 @@ if (!isNil'_3922_290533575_536135_31161') then {
 	[_3922_290533575_536135_31161,'Egg',1,52] call (_3922_290533575_536135_31161 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3922_290533575_536135_31161,'Egg',1,49] call (_3922_290533575_536135_31161 getvariable 'proto' getvariable 'createItemInContainer');
 };
-if (!isNil'_3846_000493591_692875_22444') then {
-	_3846_000493591_692875_22444 setvariable ['countslots',100];
-	[_3846_000493591_692875_22444,'Bone',1,25] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'BoneStraightener',1,25] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'BrushCleaner',1,25] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'Calculator',1,25] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'CampfireCreator',1,35] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'BalaclavaMask2',1,30] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'FaceCoverMask',1,30] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'NomadCloth4',1,25] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'WoolCoat',1,30] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'Crutch',1,25] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'CuttingBoard',1,30] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'Forceps',1,30] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'CoinBag',1,30] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'Bread',1,25] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'Egg',1,25] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'Melteshonok',1,25] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'SaltShaker',1,25] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'Torch',1,35] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'WorkingAxe',1,15] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'CombatKnife',1,15] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'ShortSword',1,15] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'Book',1,25] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'PistolHandmade',1,15] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'MetalCup',1,30] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'WoodenCup',1,30] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'SoupPlate',1,30] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'MatchBox',1,30] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3846_000493591_692875_22444,'NeedleWithThreads',1,30] call (_3846_000493591_692875_22444 getvariable 'proto' getvariable 'createItemInContainer');
-};
 if (!isNil'_3839_798833586_713389_16221') then {
 	_3839_798833586_713389_16221 setvariable ['countslots',100];
 	[_3839_798833586_713389_16221,'Crowbar',1,20] call (_3839_798833586_713389_16221 getvariable 'proto' getvariable 'createItemInContainer');
@@ -4627,37 +4607,6 @@ if (!isNil'_3841_237553584_966809_14303') then {
 	[_3841_237553584_966809_14303,'DBShotgun',1,20] call (_3841_237553584_966809_14303 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3841_237553584_966809_14303,'SawedOff',1,20] call (_3841_237553584_966809_14303 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3841_237553584_966809_14303,'PistolHandmade',1,20] call (_3841_237553584_966809_14303 getvariable 'proto' getvariable 'createItemInContainer');
-};
-if (!isNil'_3926_691413544_448735_22121') then {
-	_3926_691413544_448735_22121 setvariable ['countslots',100];
-	[_3926_691413544_448735_22121,'Bone',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'BoneStraightener',1,10] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'BrushCleaner',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'Calculator',1,10] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'CampfireCreator',1,20] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'BalaclavaMask2',1,25] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'FaceCoverMask',1,25] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'NomadCloth4',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'WoolCoat',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'Crutch',1,10] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'CuttingBoard',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'Forceps',1,10] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'CoinBag',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'Bread',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'Egg',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'Melteshonok',1,20] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'SaltShaker',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'Torch',1,20] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'WorkingAxe',1,5] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'CombatKnife',1,5] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'ShortSword',1,5] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'Book',1,5] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'PistolHandmade',1,2] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'MetalCup',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'WoodenCup',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'SoupPlate',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'MatchBox',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3926_691413544_448735_22121,'NeedleWithThreads',1,15] call (_3926_691413544_448735_22121 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3763_703373532_3481421_87132') then {
 	_3763_703373532_3481421_87132 setvariable ['countslots',60];
@@ -4722,37 +4671,6 @@ if (!isNil'_3754_868903530_2363321_73763') then {
 	[_3754_868903530_2363321_73763,'ShortSword',1,25] call (_3754_868903530_2363321_73763 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3754_868903530_2363321_73763,'TwoHandedSword',1,20] call (_3754_868903530_2363321_73763 getvariable 'proto' getvariable 'createItemInContainer');
 };
-if (!isNil'_3755_593263540_7209521_65967') then {
-	_3755_593263540_7209521_65967 setvariable ['countslots',100];
-	[_3755_593263540_7209521_65967,'Bone',1,25] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'BoneStraightener',1,25] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'BrushCleaner',1,25] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'Calculator',1,25] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'CampfireCreator',1,35] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'BalaclavaMask2',1,30] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'FaceCoverMask',1,30] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'NomadCloth4',1,25] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'WoolCoat',1,30] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'Crutch',1,25] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'CuttingBoard',1,30] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'Forceps',1,30] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'CoinBag',1,30] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'Bread',1,25] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'Egg',1,25] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'Melteshonok',1,25] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'SaltShaker',1,25] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'Torch',1,35] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'WorkingAxe',1,15] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'CombatKnife',1,15] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'ShortSword',1,15] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'Book',1,25] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'PistolHandmade',1,15] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'MetalCup',1,30] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'WoodenCup',1,30] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'SoupPlate',1,30] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'MatchBox',1,30] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3755_593263540_7209521_65967,'NeedleWithThreads',1,30] call (_3755_593263540_7209521_65967 getvariable 'proto' getvariable 'createItemInContainer');
-};
 if (!isNil'_3753_539553557_0383322_11060') then {
 	_3753_539553557_0383322_11060 setvariable ['countslots',100];
 	[_3753_539553557_0383322_11060,'Castoffs1',1,30] call (_3753_539553557_0383322_11060 getvariable 'proto' getvariable 'createItemInContainer');
@@ -4779,37 +4697,6 @@ if (!isNil'_3753_539553557_0383322_11060') then {
 	[_3753_539553557_0383322_11060,'NomadCloth5',1,25] call (_3753_539553557_0383322_11060 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3753_539553557_0383322_11060,'NomadCloth15',1,25] call (_3753_539553557_0383322_11060 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3753_539553557_0383322_11060,'NomadCloth13',1,25] call (_3753_539553557_0383322_11060 getvariable 'proto' getvariable 'createItemInContainer');
-};
-if (!isNil'_3751_437503554_8064019_23812') then {
-	_3751_437503554_8064019_23812 setvariable ['countslots',100];
-	[_3751_437503554_8064019_23812,'Bone',1,25] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'BoneStraightener',1,25] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'BrushCleaner',1,25] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'Calculator',1,25] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'CampfireCreator',1,35] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'BalaclavaMask2',1,30] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'FaceCoverMask',1,30] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'NomadCloth4',1,25] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'WoolCoat',1,30] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'Crutch',1,25] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'CuttingBoard',1,30] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'Forceps',1,30] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'CoinBag',1,30] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'Bread',1,25] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'Egg',1,25] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'Melteshonok',1,25] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'SaltShaker',1,25] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'Torch',1,35] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'WorkingAxe',1,15] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'CombatKnife',1,15] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'ShortSword',1,15] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'Book',1,25] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'PistolHandmade',1,15] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'MetalCup',1,30] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'WoodenCup',1,30] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'SoupPlate',1,30] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'MatchBox',1,30] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3751_437503554_8064019_23812,'NeedleWithThreads',1,30] call (_3751_437503554_8064019_23812 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3771_203133549_9543522_15615') then {
 	_3771_203133549_9543522_15615 setvariable ['countslots',60];
@@ -4914,68 +4801,6 @@ if (!isNil'_3749_168213488_8134816_60955') then {
 	[_3749_168213488_8134816_60955,'ShortSword',1,25] call (_3749_168213488_8134816_60955 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3749_168213488_8134816_60955,'TwoHandedSword',1,20] call (_3749_168213488_8134816_60955 getvariable 'proto' getvariable 'createItemInContainer');
 };
-if (!isNil'_3750_989503451_510254_93789') then {
-	_3750_989503451_510254_93789 setvariable ['countslots',100];
-	[_3750_989503451_510254_93789,'Bone',1,25] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'BoneStraightener',1,25] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'BrushCleaner',1,25] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'Calculator',1,25] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'CampfireCreator',1,35] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'BalaclavaMask2',1,30] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'FaceCoverMask',1,30] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'NomadCloth4',1,25] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'WoolCoat',1,30] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'Crutch',1,25] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'CuttingBoard',1,30] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'Forceps',1,30] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'CoinBag',1,30] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'Bread',1,25] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'Egg',1,25] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'Melteshonok',1,25] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'SaltShaker',1,25] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'Torch',1,35] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'WorkingAxe',1,15] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'CombatKnife',1,15] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'ShortSword',1,15] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'Book',1,25] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'PistolHandmade',1,15] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'MetalCup',1,30] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'WoodenCup',1,30] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'SoupPlate',1,30] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'MatchBox',1,30] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3750_989503451_510254_93789,'NeedleWithThreads',1,30] call (_3750_989503451_510254_93789 getvariable 'proto' getvariable 'createItemInContainer');
-};
-if (!isNil'_3749_955573477_9436010_70015') then {
-	_3749_955573477_9436010_70015 setvariable ['countslots',100];
-	[_3749_955573477_9436010_70015,'Bone',1,25] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'BoneStraightener',1,25] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'BrushCleaner',1,25] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'Calculator',1,25] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'CampfireCreator',1,35] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'BalaclavaMask2',1,30] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'FaceCoverMask',1,30] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'NomadCloth4',1,25] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'WoolCoat',1,30] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'Crutch',1,25] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'CuttingBoard',1,30] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'Forceps',1,30] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'CoinBag',1,30] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'Bread',1,25] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'Egg',1,25] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'Melteshonok',1,25] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'SaltShaker',1,25] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'Torch',1,35] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'WorkingAxe',1,15] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'CombatKnife',1,15] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'ShortSword',1,15] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'Book',1,25] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'PistolHandmade',1,15] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'MetalCup',1,30] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'WoodenCup',1,30] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'SoupPlate',1,30] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'MatchBox',1,30] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3749_955573477_9436010_70015,'NeedleWithThreads',1,30] call (_3749_955573477_9436010_70015 getvariable 'proto' getvariable 'createItemInContainer');
-};
 if (!isNil'_3749_366703481_8239710_31572') then {
 	_3749_366703481_8239710_31572 setvariable ['countslots',100];
 	[_3749_366703481_8239710_31572,'Castoffs1',1,30] call (_3749_366703481_8239710_31572 getvariable 'proto' getvariable 'createItemInContainer');
@@ -5025,37 +4850,6 @@ if (!isNil'_3748_514653468_559085_75224') then {
 	[_3748_514653468_559085_75224,'SurgicalSaw',1,25] call (_3748_514653468_559085_75224 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3748_514653468_559085_75224,'BoneStraightener',1,25] call (_3748_514653468_559085_75224 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3748_514653468_559085_75224,'Calculator',1,25] call (_3748_514653468_559085_75224 getvariable 'proto' getvariable 'createItemInContainer');
-};
-if (!isNil'_3820_792483387_532964_99013') then {
-	_3820_792483387_532964_99013 setvariable ['countslots',100];
-	[_3820_792483387_532964_99013,'Bone',1,25] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'BoneStraightener',1,25] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'BrushCleaner',1,25] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'Calculator',1,25] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'CampfireCreator',1,35] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'BalaclavaMask2',1,30] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'FaceCoverMask',1,30] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'NomadCloth4',1,25] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'WoolCoat',1,30] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'Crutch',1,25] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'CuttingBoard',1,30] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'Forceps',1,30] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'CoinBag',1,30] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'Bread',1,25] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'Egg',1,25] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'Melteshonok',1,25] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'SaltShaker',1,25] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'Torch',1,35] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'WorkingAxe',1,15] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'CombatKnife',1,15] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'ShortSword',1,15] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'Book',1,25] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'PistolHandmade',1,15] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'MetalCup',1,30] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'WoodenCup',1,30] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'SoupPlate',1,30] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'MatchBox',1,30] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3820_792483387_532964_99013,'NeedleWithThreads',1,30] call (_3820_792483387_532964_99013 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3827_018553436_579356_31526') then {
 	_3827_018553436_579356_31526 setvariable ['countslots',60];
@@ -5131,7 +4925,6 @@ if (!isNil'_3827_373543445_0463910_03900') then {
 	[_3827_373543445_0463910_03900,'FaceCoverMask',1,30] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3827_373543445_0463910_03900,'NomadCloth4',1,25] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3827_373543445_0463910_03900,'WoolCoat',1,30] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_373543445_0463910_03900,'Crutch',1,25] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3827_373543445_0463910_03900,'CuttingBoard',1,30] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3827_373543445_0463910_03900,'Forceps',1,30] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3827_373543445_0463910_03900,'CoinBag',1,30] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
@@ -5139,7 +4932,6 @@ if (!isNil'_3827_373543445_0463910_03900') then {
 	[_3827_373543445_0463910_03900,'Egg',1,25] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3827_373543445_0463910_03900,'Melteshonok',1,25] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3827_373543445_0463910_03900,'SaltShaker',1,25] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_373543445_0463910_03900,'Torch',1,35] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3827_373543445_0463910_03900,'WorkingAxe',1,15] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3827_373543445_0463910_03900,'CombatKnife',1,15] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3827_373543445_0463910_03900,'ShortSword',1,15] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
@@ -5150,6 +4942,7 @@ if (!isNil'_3827_373543445_0463910_03900') then {
 	[_3827_373543445_0463910_03900,'SoupPlate',1,30] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3827_373543445_0463910_03900,'MatchBox',1,30] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3827_373543445_0463910_03900,'NeedleWithThreads',1,30] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_373543445_0463910_03900,'TorchDisabled',1,35] call (_3827_373543445_0463910_03900 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3817_342533443_407716_37011') then {
 	_3817_342533443_407716_37011 setvariable ['countslots',100];
@@ -5178,37 +4971,6 @@ if (!isNil'_3817_342533443_407716_37011') then {
 	[_3817_342533443_407716_37011,'NomadCloth15',1,25] call (_3817_342533443_407716_37011 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3817_342533443_407716_37011,'NomadCloth13',1,25] call (_3817_342533443_407716_37011 getvariable 'proto' getvariable 'createItemInContainer');
 };
-if (!isNil'_3827_235113435_2739310_08836') then {
-	_3827_235113435_2739310_08836 setvariable ['countslots',100];
-	[_3827_235113435_2739310_08836,'Bone',1,25] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'BoneStraightener',1,25] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'BrushCleaner',1,25] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'Calculator',1,25] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'CampfireCreator',1,35] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'BalaclavaMask2',1,30] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'FaceCoverMask',1,30] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'NomadCloth4',1,25] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'WoolCoat',1,30] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'Crutch',1,25] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'CuttingBoard',1,30] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'Forceps',1,30] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'CoinBag',1,30] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'Bread',1,25] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'Egg',1,25] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'Melteshonok',1,25] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'SaltShaker',1,25] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'Torch',1,35] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'WorkingAxe',1,15] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'CombatKnife',1,15] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'ShortSword',1,15] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'Book',1,25] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'PistolHandmade',1,15] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'MetalCup',1,30] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'WoodenCup',1,30] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'SoupPlate',1,30] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'MatchBox',1,30] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3827_235113435_2739310_08836,'NeedleWithThreads',1,30] call (_3827_235113435_2739310_08836 getvariable 'proto' getvariable 'createItemInContainer');
-};
 if (!isNil'_3819_652343435_3252010_40695') then {
 	_3819_652343435_3252010_40695 setvariable ['countslots',100];
 	[_3819_652343435_3252010_40695,'Crowbar',1,20] call (_3819_652343435_3252010_40695 getvariable 'proto' getvariable 'createItemInContainer');
@@ -5223,37 +4985,6 @@ if (!isNil'_3819_652343435_3252010_40695') then {
 	[_3819_652343435_3252010_40695,'SurgicalSaw',1,25] call (_3819_652343435_3252010_40695 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3819_652343435_3252010_40695,'BoneStraightener',1,25] call (_3819_652343435_3252010_40695 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3819_652343435_3252010_40695,'Calculator',1,25] call (_3819_652343435_3252010_40695 getvariable 'proto' getvariable 'createItemInContainer');
-};
-if (!isNil'_3814_303963458_605719_87127') then {
-	_3814_303963458_605719_87127 setvariable ['countslots',100];
-	[_3814_303963458_605719_87127,'Bone',1,25] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'BoneStraightener',1,25] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'BrushCleaner',1,25] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'Calculator',1,25] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'CampfireCreator',1,35] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'BalaclavaMask2',1,30] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'FaceCoverMask',1,30] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'NomadCloth4',1,25] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'WoolCoat',1,30] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'Crutch',1,25] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'CuttingBoard',1,30] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'Forceps',1,30] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'CoinBag',1,30] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'Bread',1,25] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'Egg',1,25] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'Melteshonok',1,25] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'SaltShaker',1,25] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'Torch',1,35] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'WorkingAxe',1,15] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'CombatKnife',1,15] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'ShortSword',1,15] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'Book',1,25] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'PistolHandmade',1,15] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'MetalCup',1,30] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'WoodenCup',1,30] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'SoupPlate',1,30] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'MatchBox',1,30] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3814_303963458_605719_87127,'NeedleWithThreads',1,30] call (_3814_303963458_605719_87127 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3899_852783562_475345_80502') then {
 	_3899_852783562_475345_80502 setvariable ['countslots',100];
@@ -5296,37 +5027,6 @@ if (!isNil'_3906_742433572_429205_89154') then {
 	[_3906_742433572_429205_89154,'SurgicalSaw',1,25] call (_3906_742433572_429205_89154 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3906_742433572_429205_89154,'BoneStraightener',1,25] call (_3906_742433572_429205_89154 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3906_742433572_429205_89154,'Calculator',1,25] call (_3906_742433572_429205_89154 getvariable 'proto' getvariable 'createItemInContainer');
-};
-if (!isNil'_3903_378173553_776865_77942') then {
-	_3903_378173553_776865_77942 setvariable ['countslots',100];
-	[_3903_378173553_776865_77942,'Bone',1,25] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'BoneStraightener',1,25] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'BrushCleaner',1,25] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'Calculator',1,25] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'CampfireCreator',1,35] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'BalaclavaMask2',1,30] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'FaceCoverMask',1,30] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'NomadCloth4',1,25] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'WoolCoat',1,30] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'Crutch',1,25] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'CuttingBoard',1,30] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'Forceps',1,30] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'CoinBag',1,30] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'Bread',1,25] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'Egg',1,25] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'Melteshonok',1,25] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'SaltShaker',1,25] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'Torch',1,35] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'WorkingAxe',1,15] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'CombatKnife',1,15] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'ShortSword',1,15] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'Book',1,25] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'PistolHandmade',1,15] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'MetalCup',1,30] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'WoodenCup',1,30] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'SoupPlate',1,30] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'MatchBox',1,30] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3903_378173553_776865_77942,'NeedleWithThreads',1,30] call (_3903_378173553_776865_77942 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3942_235603492_894788_88375') then {
 	_3942_235603492_894788_88375 setvariable ['countslots',60];
@@ -5391,37 +5091,6 @@ if (!isNil'_3937_333983491_925548_89532') then {
 	[_3937_333983491_925548_89532,'ShortSword',1,25] call (_3937_333983491_925548_89532 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3937_333983491_925548_89532,'TwoHandedSword',1,20] call (_3937_333983491_925548_89532 getvariable 'proto' getvariable 'createItemInContainer');
 };
-if (!isNil'_3933_670413493_454835_14829') then {
-	_3933_670413493_454835_14829 setvariable ['countslots',100];
-	[_3933_670413493_454835_14829,'Bone',1,25] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'BoneStraightener',1,25] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'BrushCleaner',1,25] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'Calculator',1,25] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'CampfireCreator',1,35] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'BalaclavaMask2',1,30] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'FaceCoverMask',1,30] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'NomadCloth4',1,25] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'WoolCoat',1,30] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'Crutch',1,25] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'CuttingBoard',1,30] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'Forceps',1,30] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'CoinBag',1,30] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'Bread',1,25] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'Egg',1,25] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'Melteshonok',1,25] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'SaltShaker',1,25] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'Torch',1,35] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'WorkingAxe',1,15] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'CombatKnife',1,15] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'ShortSword',1,15] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'Book',1,25] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'PistolHandmade',1,15] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'MetalCup',1,30] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'WoodenCup',1,30] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'SoupPlate',1,30] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'MatchBox',1,30] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3933_670413493_454835_14829,'NeedleWithThreads',1,30] call (_3933_670413493_454835_14829 getvariable 'proto' getvariable 'createItemInContainer');
-};
 if (!isNil'_3902_275883508_094489_43684') then {
 	_3902_275883508_094489_43684 setvariable ['countslots',60];
 	[_3902_275883508_094489_43684,'Crowbar',1,25] call (_3902_275883508_094489_43684 getvariable 'proto' getvariable 'createItemInContainer');
@@ -5444,37 +5113,6 @@ if (!isNil'_3901_578133503_710946_33484') then {
 	[_3901_578133503_710946_33484,'SurgicalSaw',1,25] call (_3901_578133503_710946_33484 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3901_578133503_710946_33484,'BoneStraightener',1,25] call (_3901_578133503_710946_33484 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3901_578133503_710946_33484,'Calculator',1,25] call (_3901_578133503_710946_33484 getvariable 'proto' getvariable 'createItemInContainer');
-};
-if (!isNil'_3904_009033502_271006_14434') then {
-	_3904_009033502_271006_14434 setvariable ['countslots',100];
-	[_3904_009033502_271006_14434,'Bone',1,25] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'BoneStraightener',1,25] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'BrushCleaner',1,25] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'Calculator',1,25] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'CampfireCreator',1,35] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'BalaclavaMask2',1,30] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'FaceCoverMask',1,30] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'NomadCloth4',1,25] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'WoolCoat',1,30] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'Crutch',1,25] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'CuttingBoard',1,30] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'Forceps',1,30] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'CoinBag',1,30] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'Bread',1,25] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'Egg',1,25] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'Melteshonok',1,25] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'SaltShaker',1,25] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'Torch',1,35] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'WorkingAxe',1,15] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'CombatKnife',1,15] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'ShortSword',1,15] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'Book',1,25] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'PistolHandmade',1,15] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'MetalCup',1,30] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'WoodenCup',1,30] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'SoupPlate',1,30] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'MatchBox',1,30] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3904_009033502_271006_14434,'NeedleWithThreads',1,30] call (_3904_009033502_271006_14434 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3840_572513439_847905_82794') then {
 	_3840_572513439_847905_82794 setvariable ['countslots',60];
@@ -5538,37 +5176,6 @@ if (!isNil'_3816_271003433_413095_02104') then {
 	[_3816_271003433_413095_02104,'HalfHandedSword',1,20] call (_3816_271003433_413095_02104 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3816_271003433_413095_02104,'ShortSword',1,25] call (_3816_271003433_413095_02104 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3816_271003433_413095_02104,'TwoHandedSword',1,20] call (_3816_271003433_413095_02104 getvariable 'proto' getvariable 'createItemInContainer');
-};
-if (!isNil'_3848_343023448_044686_23548') then {
-	_3848_343023448_044686_23548 setvariable ['countslots',100];
-	[_3848_343023448_044686_23548,'Bone',1,25] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'BoneStraightener',1,25] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'BrushCleaner',1,25] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'Calculator',1,25] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'CampfireCreator',1,35] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'BalaclavaMask2',1,30] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'FaceCoverMask',1,30] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'NomadCloth4',1,25] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'WoolCoat',1,30] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'Crutch',1,25] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'CuttingBoard',1,30] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'Forceps',1,30] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'CoinBag',1,30] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'Bread',1,25] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'Egg',1,25] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'Melteshonok',1,25] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'SaltShaker',1,25] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'Torch',1,35] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'WorkingAxe',1,15] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'CombatKnife',1,15] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'ShortSword',1,15] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'Book',1,25] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'PistolHandmade',1,15] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'MetalCup',1,30] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'WoodenCup',1,30] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'SoupPlate',1,30] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'MatchBox',1,30] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3848_343023448_044686_23548,'NeedleWithThreads',1,30] call (_3848_343023448_044686_23548 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3937_157713502_771978_94925') then {
 	_3937_157713502_771978_94925 setvariable ['countslots',100];
@@ -5701,6 +5308,396 @@ if (!isNil'_3829_007573383_581795_26842') then {
 	[_3829_007573383_581795_26842,'AmmoRevolver',2,35] call (_3829_007573383_581795_26842 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3829_007573383_581795_26842,'AmmoShotgun',2,30] call (_3829_007573383_581795_26842 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3829_007573383_581795_26842,'AmmoShotgunNonLethal',2,35] call (_3829_007573383_581795_26842 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3827_330813435_1687010_09341') then {
+	_3827_330813435_1687010_09341 setvariable ['countslots',100];
+	[_3827_330813435_1687010_09341,'Bone',1,25] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'BoneStraightener',1,25] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'BrushCleaner',1,25] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'Calculator',1,25] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'CampfireCreator',1,35] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'BalaclavaMask2',1,30] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'FaceCoverMask',1,30] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'NomadCloth4',1,25] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'WoolCoat',1,30] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'CuttingBoard',1,30] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'Forceps',1,30] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'CoinBag',1,30] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'Bread',1,25] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'Egg',1,25] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'Melteshonok',1,25] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'SaltShaker',1,25] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'WorkingAxe',1,15] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'CombatKnife',1,15] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'ShortSword',1,15] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'Book',1,25] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'PistolHandmade',1,15] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'MetalCup',1,30] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'WoodenCup',1,30] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'SoupPlate',1,30] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'MatchBox',1,30] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'NeedleWithThreads',1,30] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3827_330813435_1687010_09341,'TorchDisabled',1,35] call (_3827_330813435_1687010_09341 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3848_321293448_200686_17823') then {
+	_3848_321293448_200686_17823 setvariable ['countslots',100];
+	[_3848_321293448_200686_17823,'Bone',1,25] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'BoneStraightener',1,25] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'BrushCleaner',1,25] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'Calculator',1,25] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'CampfireCreator',1,35] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'BalaclavaMask2',1,30] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'FaceCoverMask',1,30] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'NomadCloth4',1,25] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'WoolCoat',1,30] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'CuttingBoard',1,30] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'Forceps',1,30] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'CoinBag',1,30] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'Bread',1,25] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'Egg',1,25] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'Melteshonok',1,25] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'SaltShaker',1,25] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'WorkingAxe',1,15] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'CombatKnife',1,15] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'ShortSword',1,15] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'Book',1,25] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'PistolHandmade',1,15] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'MetalCup',1,30] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'WoodenCup',1,30] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'SoupPlate',1,30] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'MatchBox',1,30] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'NeedleWithThreads',1,30] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3848_321293448_200686_17823,'TorchDisabled',1,35] call (_3848_321293448_200686_17823 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3846_085453591_734865_23476') then {
+	_3846_085453591_734865_23476 setvariable ['countslots',100];
+	[_3846_085453591_734865_23476,'Bone',1,25] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'BoneStraightener',1,25] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'BrushCleaner',1,25] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'Calculator',1,25] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'CampfireCreator',1,35] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'BalaclavaMask2',1,30] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'FaceCoverMask',1,30] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'NomadCloth4',1,25] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'WoolCoat',1,30] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'CuttingBoard',1,30] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'Forceps',1,30] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'CoinBag',1,30] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'Bread',1,25] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'Egg',1,25] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'Melteshonok',1,25] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'SaltShaker',1,25] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'WorkingAxe',1,15] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'CombatKnife',1,15] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'ShortSword',1,15] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'Book',1,25] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'PistolHandmade',1,15] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'MetalCup',1,30] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'WoodenCup',1,30] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'SoupPlate',1,30] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'MatchBox',1,30] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'NeedleWithThreads',1,30] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3846_085453591_734865_23476,'TorchDisabled',1,35] call (_3846_085453591_734865_23476 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3926_708983544_420655_25572') then {
+	_3926_708983544_420655_25572 setvariable ['countslots',100];
+	[_3926_708983544_420655_25572,'Bone',1,25] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'BoneStraightener',1,25] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'BrushCleaner',1,25] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'Calculator',1,25] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'CampfireCreator',1,35] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'BalaclavaMask2',1,30] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'FaceCoverMask',1,30] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'NomadCloth4',1,25] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'WoolCoat',1,30] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'CuttingBoard',1,30] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'Forceps',1,30] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'CoinBag',1,30] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'Bread',1,25] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'Egg',1,25] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'Melteshonok',1,25] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'SaltShaker',1,25] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'WorkingAxe',1,15] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'CombatKnife',1,15] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'ShortSword',1,15] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'Book',1,25] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'PistolHandmade',1,15] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'MetalCup',1,30] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'WoodenCup',1,30] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'SoupPlate',1,30] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'MatchBox',1,30] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'NeedleWithThreads',1,30] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3926_708983544_420655_25572,'TorchDisabled',1,35] call (_3926_708983544_420655_25572 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3755_402343540_5349121_65800') then {
+	_3755_402343540_5349121_65800 setvariable ['countslots',100];
+	[_3755_402343540_5349121_65800,'Bone',1,25] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'BoneStraightener',1,25] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'BrushCleaner',1,25] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'Calculator',1,25] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'CampfireCreator',1,35] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'BalaclavaMask2',1,30] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'FaceCoverMask',1,30] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'NomadCloth4',1,25] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'WoolCoat',1,30] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'CuttingBoard',1,30] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'Forceps',1,30] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'CoinBag',1,30] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'Bread',1,25] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'Egg',1,25] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'Melteshonok',1,25] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'SaltShaker',1,25] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'WorkingAxe',1,15] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'CombatKnife',1,15] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'ShortSword',1,15] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'Book',1,25] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'PistolHandmade',1,15] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'MetalCup',1,30] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'WoodenCup',1,30] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'SoupPlate',1,30] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'MatchBox',1,30] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'NeedleWithThreads',1,30] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3755_402343540_5349121_65800,'TorchDisabled',1,35] call (_3755_402343540_5349121_65800 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3751_388923554_5664119_26038') then {
+	_3751_388923554_5664119_26038 setvariable ['countslots',100];
+	[_3751_388923554_5664119_26038,'Bone',1,25] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'BoneStraightener',1,25] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'BrushCleaner',1,25] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'Calculator',1,25] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'CampfireCreator',1,35] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'BalaclavaMask2',1,30] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'FaceCoverMask',1,30] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'NomadCloth4',1,25] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'WoolCoat',1,30] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'CuttingBoard',1,30] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'Forceps',1,30] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'CoinBag',1,30] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'Bread',1,25] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'Egg',1,25] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'Melteshonok',1,25] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'SaltShaker',1,25] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'WorkingAxe',1,15] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'CombatKnife',1,15] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'ShortSword',1,15] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'Book',1,25] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'PistolHandmade',1,15] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'MetalCup',1,30] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'WoodenCup',1,30] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'SoupPlate',1,30] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'MatchBox',1,30] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'NeedleWithThreads',1,30] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_388923554_5664119_26038,'TorchDisabled',1,35] call (_3751_388923554_5664119_26038 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3751_023683451_455324_93744') then {
+	_3751_023683451_455324_93744 setvariable ['countslots',100];
+	[_3751_023683451_455324_93744,'Bone',1,25] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'BoneStraightener',1,25] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'BrushCleaner',1,25] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'Calculator',1,25] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'CampfireCreator',1,35] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'BalaclavaMask2',1,30] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'FaceCoverMask',1,30] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'NomadCloth4',1,25] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'WoolCoat',1,30] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'CuttingBoard',1,30] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'Forceps',1,30] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'CoinBag',1,30] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'Bread',1,25] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'Egg',1,25] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'Melteshonok',1,25] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'SaltShaker',1,25] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'WorkingAxe',1,15] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'CombatKnife',1,15] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'ShortSword',1,15] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'Book',1,25] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'PistolHandmade',1,15] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'MetalCup',1,30] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'WoodenCup',1,30] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'SoupPlate',1,30] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'MatchBox',1,30] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'NeedleWithThreads',1,30] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3751_023683451_455324_93744,'TorchDisabled',1,35] call (_3751_023683451_455324_93744 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3749_915773477_9895010_67909') then {
+	_3749_915773477_9895010_67909 setvariable ['countslots',100];
+	[_3749_915773477_9895010_67909,'Bone',1,25] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'BoneStraightener',1,25] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'BrushCleaner',1,25] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'Calculator',1,25] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'CampfireCreator',1,35] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'BalaclavaMask2',1,30] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'FaceCoverMask',1,30] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'NomadCloth4',1,25] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'WoolCoat',1,30] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'CuttingBoard',1,30] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'Forceps',1,30] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'CoinBag',1,30] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'Bread',1,25] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'Egg',1,25] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'Melteshonok',1,25] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'SaltShaker',1,25] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'WorkingAxe',1,15] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'CombatKnife',1,15] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'ShortSword',1,15] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'Book',1,25] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'PistolHandmade',1,15] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'MetalCup',1,30] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'WoodenCup',1,30] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'SoupPlate',1,30] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'MatchBox',1,30] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'NeedleWithThreads',1,30] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3749_915773477_9895010_67909,'TorchDisabled',1,35] call (_3749_915773477_9895010_67909 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3820_520263387_617924_88520') then {
+	_3820_520263387_617924_88520 setvariable ['countslots',100];
+	[_3820_520263387_617924_88520,'Bone',1,25] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'BoneStraightener',1,25] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'BrushCleaner',1,25] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'Calculator',1,25] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'CampfireCreator',1,35] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'BalaclavaMask2',1,30] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'FaceCoverMask',1,30] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'NomadCloth4',1,25] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'WoolCoat',1,30] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'CuttingBoard',1,30] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'Forceps',1,30] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'CoinBag',1,30] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'Bread',1,25] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'Egg',1,25] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'Melteshonok',1,25] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'SaltShaker',1,25] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'WorkingAxe',1,15] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'CombatKnife',1,15] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'ShortSword',1,15] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'Book',1,25] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'PistolHandmade',1,15] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'MetalCup',1,30] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'WoodenCup',1,30] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'SoupPlate',1,30] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'MatchBox',1,30] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'NeedleWithThreads',1,30] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3820_520263387_617924_88520,'TorchDisabled',1,35] call (_3820_520263387_617924_88520 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3814_232673458_685069_93392') then {
+	_3814_232673458_685069_93392 setvariable ['countslots',100];
+	[_3814_232673458_685069_93392,'Bone',1,25] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'BoneStraightener',1,25] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'BrushCleaner',1,25] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'Calculator',1,25] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'CampfireCreator',1,35] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'BalaclavaMask2',1,30] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'FaceCoverMask',1,30] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'NomadCloth4',1,25] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'WoolCoat',1,30] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'CuttingBoard',1,30] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'Forceps',1,30] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'CoinBag',1,30] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'Bread',1,25] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'Egg',1,25] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'Melteshonok',1,25] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'SaltShaker',1,25] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'WorkingAxe',1,15] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'CombatKnife',1,15] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'ShortSword',1,15] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'Book',1,25] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'PistolHandmade',1,15] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'MetalCup',1,30] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'WoodenCup',1,30] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'SoupPlate',1,30] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'MatchBox',1,30] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'NeedleWithThreads',1,30] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3814_232673458_685069_93392,'TorchDisabled',1,35] call (_3814_232673458_685069_93392 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3903_348883553_749275_74550') then {
+	_3903_348883553_749275_74550 setvariable ['countslots',100];
+	[_3903_348883553_749275_74550,'Bone',1,25] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'BoneStraightener',1,25] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'BrushCleaner',1,25] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'Calculator',1,25] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'CampfireCreator',1,35] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'BalaclavaMask2',1,30] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'FaceCoverMask',1,30] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'NomadCloth4',1,25] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'WoolCoat',1,30] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'CuttingBoard',1,30] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'Forceps',1,30] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'CoinBag',1,30] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'Bread',1,25] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'Egg',1,25] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'Melteshonok',1,25] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'SaltShaker',1,25] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'WorkingAxe',1,15] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'CombatKnife',1,15] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'ShortSword',1,15] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'Book',1,25] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'PistolHandmade',1,15] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'MetalCup',1,30] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'WoodenCup',1,30] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'SoupPlate',1,30] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'MatchBox',1,30] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'NeedleWithThreads',1,30] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3903_348883553_749275_74550,'TorchDisabled',1,35] call (_3903_348883553_749275_74550 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3933_618163493_381595_41332') then {
+	_3933_618163493_381595_41332 setvariable ['countslots',100];
+	[_3933_618163493_381595_41332,'Bone',1,25] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'BoneStraightener',1,25] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'BrushCleaner',1,25] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'Calculator',1,25] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'CampfireCreator',1,35] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'BalaclavaMask2',1,30] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'FaceCoverMask',1,30] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'NomadCloth4',1,25] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'WoolCoat',1,30] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'CuttingBoard',1,30] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'Forceps',1,30] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'CoinBag',1,30] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'Bread',1,25] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'Egg',1,25] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'Melteshonok',1,25] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'SaltShaker',1,25] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'WorkingAxe',1,15] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'CombatKnife',1,15] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'ShortSword',1,15] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'Book',1,25] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'PistolHandmade',1,15] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'MetalCup',1,30] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'WoodenCup',1,30] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'SoupPlate',1,30] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'MatchBox',1,30] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'NeedleWithThreads',1,30] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3933_618163493_381595_41332,'TorchDisabled',1,35] call (_3933_618163493_381595_41332 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3904_143313502_239506_22150') then {
+	_3904_143313502_239506_22150 setvariable ['countslots',100];
+	[_3904_143313502_239506_22150,'Bone',1,25] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'BoneStraightener',1,25] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'BrushCleaner',1,25] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'Calculator',1,25] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'CampfireCreator',1,35] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'BalaclavaMask2',1,30] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'FaceCoverMask',1,30] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'NomadCloth4',1,25] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'WoolCoat',1,30] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'CuttingBoard',1,30] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'Forceps',1,30] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'CoinBag',1,30] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'Bread',1,25] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'Egg',1,25] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'Melteshonok',1,25] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'SaltShaker',1,25] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'WorkingAxe',1,15] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'CombatKnife',1,15] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'ShortSword',1,15] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'Book',1,25] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'PistolHandmade',1,15] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'MetalCup',1,30] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'WoodenCup',1,30] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'SoupPlate',1,30] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'MatchBox',1,30] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'NeedleWithThreads',1,30] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3904_143313502_239506_22150,'TorchDisabled',1,35] call (_3904_143313502_239506_22150 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3965_197513732_835457_81252') then {
 	[_3965_197513732_835457_81252,"govnelin"] call (_3965_197513732_835457_81252 getvariable 'proto' getvariable 'setEffectType');
