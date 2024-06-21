@@ -74,3 +74,10 @@
 	[tickTime,_emit,_pvFunc,_curval_const,_rangeVals,_rangeDelay]
 	endAsyncInvoke
 }] call le_se_registerConfigHandler;
+
+
+["atmos_optimize_chunk",{
+	params ["_emit","_src"];
+	if (!acli_bool_enableSystem) exitWith {};
+	[_emit,call le_se_getCurrentConfigId] call acli_handleAddObj;
+}] call le_se_registerConfigHandler;

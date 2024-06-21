@@ -126,7 +126,7 @@ le_se_handleCfgEvents = {
 	//inside configHandlerName params is: cfgOwner:obj (cannot set objvars), src - source object, cfgparams, outparams
 	private _hfunc = null;
 	{
-		_x params ["_cfgName","_cfgInParams"];
+		_x params ["_cfgName","_cfgInParams"];//inparams can be null
 		private _hfunc = le_se_map_cfgHandlers getorDefault [_cfgName,le_se_internal_errorFuncCfgEvents];
 		[_o,sourceObject,_cfgInParams,
 			null //todo implement outparams
@@ -151,6 +151,11 @@ le_se_getCurrentConfigPropVal = {
 	if (_id == -1) exitWith {null};
 	_ls select _id select 1
 };
+//получает айди текущего конфига. только внутри хандлееров событий скриптовых эмиттеров
+le_se_getCurrentConfigId = {
+	assert_str(sourceObject getVariable "__config","Unexpected context or null config returns");
+};
+
 le_se_map_cfgHandlers = createHashMap; //карта зарегистрированных конфигов
 
 #if __has_include("SEConfigHandlers.sqf")
