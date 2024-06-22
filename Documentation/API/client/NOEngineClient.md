@@ -1,3 +1,210 @@
+# NOEgnineClient_localAtmos.sqf
+
+## ACLI_TYPE_FIRE
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+[SLIGHT_ATMOS_FIRE_1,SLIGHT_ATMOS_FIRE_2,SLIGHT_ATMOS_FIRE_3]
+```
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 14](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L14)
+## ACLI_DATA_OBJECTS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+0
+```
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 16](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L16)
+## ACLI_DATA_METAINFO
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+1
+```
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 17](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L17)
+## ACLI_DATA_CHUNK_ID
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+2
+```
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 18](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L18)
+## __ACLI_NEW_BUFFER_OBJECTS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+[objNull,objNull]
+```
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 20](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L20)
+## __ACLI_NEW_BUFFER_METAINFO
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+0
+```
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 21](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L21)
+## __ACLI_NEW_DATA
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+[__ACLI_NEW_BUFFER_OBJECTS,__ACLI_NEW_BUFFER_METAINFO,_chid]
+```
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 22](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L22)
+## ACLI_NEW_CHUNK
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+__ACLI_NEW_DATA
+```
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 23](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L23)
+## acli_map_chunks
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 25](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L25)
+## acli_bool_requestUpdate
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 26](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L26)
+## acli_bool_enableSystem
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false //turn off is won't work
+```
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 27](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L27)
+## acli_internal_onUpdate_handle
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+ifcheck(acli_bool_enableSystem,startUpdate(acli_lazyCheck,1),-1)
+```
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 160](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L160)
+## acli_handleAddObj
+
+Type: function
+
+Description: turn off is won't work
+- Param: _obj
+- Param: _cfgId
+
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 29](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L29)
+## acli_getChunk
+
+Type: function
+
+Description: };
+- Param: _chid
+
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 80](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L80)
+## acli_getChunkUnsafe
+
+Type: function
+
+Description: 
+- Param: _chid
+
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 91](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L91)
+## acli_lazyCheck
+
+Type: function
+
+Description: 
+
+
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 111](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L111)
+## acli_getAroundChIDList
+
+Type: function
+
+Description: 
+- Param: _chid
+
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 162](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L162)
+## acli_chunkPosToId
+
+Type: function
+
+Description: 
+- Param: _x
+- Param: _y
+- Param: _z
+
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 174](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L174)
+## acli_chunkIdToPos
+
+Type: function
+
+Description: returns center atl pos of chunk
+- Param: _iX
+- Param: _iY
+- Param: _iZ
+
+File: [client\NOEngineClient\NOEgnineClient_localAtmos.sqf at line 185](../../../Src/client/NOEngineClient/NOEgnineClient_localAtmos.sqf#L185)
 # NOEngineClient.h
 
 ## PACKET_LIFETIME
@@ -461,7 +668,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 28](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L28)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 30](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L30)
 ## noe_client_cs
 
 Type: Variable
@@ -473,7 +680,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 31](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L31)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 33](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L33)
 ## noe_client_allChunkTypes
 
 Type: Variable
@@ -485,7 +692,7 @@ Initial value:
 ```sqf
 [CHUNK_TYPE_ITEM,CHUNK_TYPE_STRUCTURE,CHUNK_TYPE_DECOR]
 ```
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 32](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L32)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 34](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L34)
 ## noe_client_packetId
 
 Type: Variable
@@ -497,7 +704,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 43](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L43)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 45](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L45)
 ## noe_client_packets
 
 Type: Variable
@@ -509,7 +716,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 44](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L44)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 46](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L46)
 ## noe_client_packetsChunks
 
 Type: Variable
@@ -521,7 +728,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 45](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L45)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 47](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L47)
 ## noe_client_allPointers
 
 Type: Variable
@@ -533,7 +740,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 47](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L47)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 49](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L49)
 ## noe_client_handlers
 
 Type: Variable
@@ -545,7 +752,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 49](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L49)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 51](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L51)
 ## noe_client_generateStorage
 
 Type: function
@@ -553,7 +760,7 @@ Type: function
 Description: генерирует контейнеры хранения данных под чанки
 
 
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 35](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L35)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 37](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L37)
 ## noe_client_startListening
 
 Type: function
@@ -561,7 +768,7 @@ Type: function
 Description: Запускает потоки карты
 
 
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 52](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L52)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 54](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L54)
 ## noe_client_isEnabled
 
 Type: function
@@ -569,7 +776,7 @@ Type: function
 Description: 
 
 
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 60](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L60)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 62](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L62)
 ## noe_client_stopListening
 
 Type: function
@@ -577,7 +784,7 @@ Type: function
 Description: 
 - Param: _mob
 
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 62](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L62)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 64](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L64)
 ## noe_client_unloadAllChunks
 
 Type: function
@@ -585,7 +792,7 @@ Type: function
 Description: Выгружает и отписывает клиента от всех чанков которые он загрузил
 - Param: _mob
 
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 80](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L80)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 82](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L82)
 ## noe_client_onUpdate
 
 Type: function
@@ -593,7 +800,7 @@ Type: function
 Description: 
 
 
-File: [client\NOEngineClient\NOEngineClientInit.sqf at line 117](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L117)
+File: [client\NOEngineClient\NOEngineClientInit.sqf at line 119](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L119)
 # NOEngineClient_chunkDebug.sqf
 
 ## upside

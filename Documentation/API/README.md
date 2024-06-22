@@ -19,7 +19,7 @@ Count modules: 31
  - [Lobby](client//Lobby.md) - 8 files
  - [LocalEffects](client//LocalEffects.md) - 3 files
  - [NetDisplays](client//NetDisplays.md) - 16 files
- - [NOEngineClient](client//NOEngineClient.md) - 9 files
+ - [NOEngineClient](client//NOEngineClient.md) - 10 files
  - [OneSync](client//OneSync.md) - 5 files
  - [ParticleEngine](client//ParticleEngine.md) - 3 files
  - [ProxyItems](client//ProxyItems.md) - 5 files
