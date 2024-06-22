@@ -213,7 +213,11 @@ atmos_getObjectsInChunk = {
 		_startPos = _startPosReal vectorAdd _vs;
 		_endPos = _startPosReal vectorAdd _ve;
 		_tList = [_startPos,_endPos,objNull,objNull,2,null,true] call si_getIntersectObjects;
-		{_objMap set [getVar(_x,pointer),_x];false}count _tList;
+		{
+			if !isNullReference(_x) then { //TODO detect why some objects was nullPtr
+				_objMap set [getVar(_x,pointer),_x];
+			};
+		false}count _tList;
 
 		#ifdef ATMOS_DEBUG_DRAW_CHUNKOBJECTS
 		_s = ATMOS_DEBUG_CREATE_SPHERE(0,1,1);
