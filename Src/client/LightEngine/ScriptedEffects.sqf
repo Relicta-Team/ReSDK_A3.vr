@@ -158,9 +158,9 @@ le_se_getCurrentConfigId = {
 
 le_se_map_cfgHandlers = createHashMap; //карта зарегистрированных конфигов
 
-#if __has_include("SEConfigHandlers.sqf")
-	#include "SEConfigHandlers.sqf"
-#endif
+//always need included on client
+#include "SEConfigHandlers.sqf"
+
 
 le_se_mapHandlersShots = null;
 le_se_mapHandlers = createHashMapFromArray [
