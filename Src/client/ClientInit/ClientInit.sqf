@@ -102,6 +102,10 @@ _owner = if (isServer) then {0} else {clientOwner};
 _data = [_owner];
 
 if (!isMultiplayer) then {
+    call struct_initialize; //clientside structures initialization
+};
+
+if (!isMultiplayer) then {
     //против задержки пакетов
     invokeAfterDelayParams({rpcSendToServer("onClientReady",_this)},0.3,_data)
 } else {

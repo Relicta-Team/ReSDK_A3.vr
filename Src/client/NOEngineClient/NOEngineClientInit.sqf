@@ -19,7 +19,11 @@
 
 #include "NOEngineClient_ObjectManager.sqf"
 
-#include "NOEgnineClient_localAtmos.sqf"
+#include "NOEngineClient_localAtmos.sqf"
+
+#include "NOEngineClient_Interpolation.sqf"
+
+#include "NOEngineClient_NetAtmos.sqf"
 
 //#include "NOEngineClient_Rendering.sqf"
 
@@ -130,5 +134,7 @@ if (!isMultiplayer) then {
 	invokeAfterDelay(_post,1.5);
 };
 
+//structures only defined after main module inialized
+#include "NOEngineClient_NetAtmos_structs.sqf"
 
 log("NOEngine: client module loaded!");

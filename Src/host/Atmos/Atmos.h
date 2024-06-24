@@ -11,3 +11,13 @@
 
 #define ATMOS_POS_INSIDE_CHUNK(_p,_chunkPos) ((_p) inArea [_chunkPos, ATMOS_SIZE_HALF, ATMOS_SIZE_HALF, 0, true, ATMOS_SIZE_HALF])
 
+//subscribers for chunk update
+#define ATMOS_AREA_INDEX_CLIENTS 0
+//list of all chunks in area
+#define ATMOS_AREA_INDEX_CHUNKS 1
+//timestamp of last update area
+#define ATMOS_AREA_INDEX_LASTUPDATE 2
+//timestamp of last delete inside area
+#define ATMOS_AREA_INDEX_LASTDELETE 3
+
+#define ATMOS_AREA_NEW [[], [], 0, 0]

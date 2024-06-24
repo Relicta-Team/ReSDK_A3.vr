@@ -26,6 +26,9 @@
 #define ATMOS_SIZE_HALF 0.5
 #define ATMOS_SIZE_HALF_OFFSET 0.1
 
+// одна зона = 10 чанков
+#define ATMOS_AREA_SIZE 10
+
 //left, right, top, bottom, front, back
 #define ATMOS_PROPAGATION_SIDE_MAX_COUNT 6
 
