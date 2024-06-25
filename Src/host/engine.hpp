@@ -16,12 +16,12 @@
 #define PLATFORM_VERSION_BUILD __GAME_BUILD__
 
 #ifdef EDITOR
-	#define ISDEVBUILD (0 Call{ \
+	#define ISDEVBUILD (0 call{ \
 		private _file = ".git\head"; \
 		private _pattern = "refs/heads/development"; \
 		if (is3DEN) then { \
-			if ([_file] Call file_exists) then { \
-				_pattern in ([_file] Call file_read) \
+			if ([_file] call file_exists) then { \
+				_pattern in ([_file] call file_read) \
 			} else { \
 				false \
 			};\
@@ -70,20 +70,20 @@
 
 #define conDllCall "debug_console" callExtension
 
-#define log(message) [message] Call cprint
-#define logformat(provider,formatText) [provider,formatText] Call cprint
+#define log(message) [message] call cprint
+#define logformat(provider,formatText) [provider,formatText] call cprint
 
-/*#define warning(message) "debug_console" callExtension ("WARN: " + message + "#1101"); [message] Call discWarning
-#define error(message) "debug_console" callExtension ("ERROR: " + message + "#1001"); [message] Call discError
+/*#define warning(message) "debug_console" callExtension ("WARN: " + message + "#1101"); [message] call discWarning
+#define error(message) "debug_console" callExtension ("ERROR: " + message + "#1001"); [message] call discError
 
-#define warningformat(message,fmt) "debug_console" callExtension (format ["WARN: " + message + "#1101",fmt]); [format[message,fmt]] Call discWarning
-#define errorformat(message,fmt) "debug_console" callExtension (format ["ERROR: " + message  + "#1001",fmt]); [format[message,fmt]] Call discError*/
+#define warningformat(message,fmt) "debug_console" callExtension (format ["WARN: " + message + "#1101",fmt]); [format[message,fmt]] call discWarning
+#define errorformat(message,fmt) "debug_console" callExtension (format ["ERROR: " + message  + "#1001",fmt]); [format[message,fmt]] call discError*/
 /// -------------------------------------- FUNCTIONAL PRINTS ---------------------------------------
-#define warning(message) [message] Call cprintWarn
-#define error(message) [message] Call cprintErr
+#define warning(message) [message] call cprintWarn
+#define error(message) [message] call cprintErr
 
-#define warningformat(message,fmt) [message,fmt] Call cprintWarn
-#define errorformat(message,fmt) [message,fmt] Call cprintErr
+#define warningformat(message,fmt) [message,fmt] call cprintWarn
+#define errorformat(message,fmt) [message,fmt] call cprintErr
 
 /// ------------------------------------ FUNCTIONAL PRINTS -----------------------------------------
 
@@ -93,7 +93,7 @@
 
 	//breakpoints
 	#define breakpoint_setfile(x) __bp__file__ = x;
-	#define breakpoint(data) "__REDIRECT_KEYWORD_THIS_REQUIRED__" Call{private __bp_l = __LINE__;private __bp_f = "<anon>"; if !isNullVar(__bp__file__)then{__bp_f=__bp__file__};\
+	#define breakpoint(data) "__REDIRECT_KEYWORD_THIS_REQUIRED__" call{private __bp_l = __LINE__;private __bp_f = "<anon>"; if !isNullVar(__bp__file__)then{__bp_f=__bp__file__};\
 	traceformat("L%1 [%2]	%3",__bp_l arg __bp_f arg data)\
 	};
 #else
@@ -107,9 +107,9 @@
 
 
 
-#define OBSOLETE(funcname) private _dt = format ["[OBSOLETE] => %1(): This function will be removed in the future and should not be used." + "#1101", #funcname]; "debug_console" callExtension _dt; [_dt] Call discWarning;
+#define OBSOLETE(funcname) private _dt = format ["[OBSOLETE] => %1(): This function will be removed in the future and should not be used." + "#1101", #funcname]; "debug_console" callExtension _dt; [_dt] call discWarning;
 
-#define NOTIMPLEMENTED(funcname) private _dt = format ["[NOT_IMPLEMENTED] => %1(): This function not implemented." + "#1101", #funcname]; "debug_console" callExtension _dt; [_dt] Call discWarning;
+#define NOTIMPLEMENTED(funcname) private _dt = format ["[NOT_IMPLEMENTED] => %1(): This function not implemented." + "#1101", #funcname]; "debug_console" callExtension _dt; [_dt] call discWarning;
 
 //закрытие потока программы
 #define ___appexitstr(value) #value
@@ -144,26 +144,26 @@
 //__THIS_FILE_REPLACE__
 //__THIS_MODULE_REPLACE__
 #ifdef DISABLE_REGEX_ON_FILE
-	#define loadFile(path) if (server_isLocked) exitWith {error("Compile process aborted - server.isLocked == true")}; logformat("Start loading file %1",path); ["Load file - '%1'",path] Call logInfo;  Call compile __pragma_preprocess (path)
+	#define loadFile(path) if (server_isLocked) exitWith {error("Compile process aborted - server.isLocked == true")}; logformat("Start loading file %1",path); ["Load file - '%1'",path] call logInfo;  call compile __pragma_preprocess (path)
 
 	#define importClient(path) if (isNil {allClientContents}) then {allClientContents = [];}; if (client_isLocked) exitWith {error("Compile process aborted - client.isLocked == true")}; \
-	private _ctx = compile __pragma_prep_cli (path); if (_canCallClientCode) then {Call _ctx}; allClientContents pushback _ctx;
+	private _ctx = compile __pragma_prep_cli (path); if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 
 	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = [];}; \
 	private _ctx = compile __pragma_prep_cli ("src\host\CommonComponents\" + path); \
-	if (_canCallClientCode) then {Call _ctx}; allClientContents pushback _ctx;
+	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 #else
-	#define loadFile(path) if (server_isLocked) exitWith {error("Compile process aborted - server.isLocked == true")}; logformat("Start loading file %1",path); ["Load file - '%1'",path] Call logInfo; Call compile __pragma_preprocess (path)
+	#define loadFile(path) if (server_isLocked) exitWith {error("Compile process aborted - server.isLocked == true")}; logformat("Start loading file %1",path); ["Load file - '%1'",path] call logInfo; call compile __pragma_preprocess (path)
 
 	#define importClient(path) if (isNil {allClientContents}) then {allClientContents = [];}; if (client_isLocked) exitWith {error("Compile process aborted - client.isLocked == true")}; \
 	_macro_module = path regexFind ["\w+(?=\.)",0] select 0 select 0 select 0; \
-	private _ctx = compile ((__pragma_prep_cli (path))regexReplace ["__THIS_MODULE_REPLACE__",""""+ _macro_module+""""]); if (_canCallClientCode) then {Call _ctx}; allClientContents pushback _ctx;
+	private _ctx = compile ((__pragma_prep_cli (path))regexReplace ["__THIS_MODULE_REPLACE__",""""+ _macro_module+""""]); if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 
 	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = [];}; \
 	_macro_file = """shared" +"\" + path + """"; _macro_module = path regexFind ["\w+(?=\.)",0] select 0 select 0 select 0; \
 	__prep = ((__pragma_prep_cli ("src\host\CommonComponents\" + path)) regexReplace ["__THIS_FILE_REPLACE__",(_macro_file regexReplace ["\\","\\\\"])]) regexReplace ["__THIS_MODULE_REPLACE__",""""+ _macro_module+""""]; \
 	private _ctx = compile __prep; \
-	if (_canCallClientCode) then {Call _ctx}; allClientContents pushback _ctx;
+	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 #endif
 
 #ifdef __VM_VALIDATE
@@ -171,7 +171,7 @@
 
 	#define loadFile(path) \
 	__vm_log("Load file: " + path); \
-	Call compile preprocessFile (path);
+	call compile preprocessFile (path);
 
 	#define __vm_warning(data) diag_log format["[VM_WARN]: %1",data];
 
@@ -206,13 +206,13 @@
 //check if file exists
 #define fileExists(file) fileexists (file)
 
-#define SHORT_PATH Call {private _arr = __FILE__ splitString "\"; private _ret = ""; if (!isMultiplayer) then \
+#define SHORT_PATH call {private _arr = __FILE__ splitString "\"; private _ret = ""; if (!isMultiplayer) then \
 { {if (_foreachindex >= 8) then {_ret = _ret + "\" + _x}} forEach _arr } else { \
 _ret = __FILE__; \
 }; _ret select [1,count _ret - 1]} \
 
 #define getMissionName (missionname+".vr")
-#define SHORT_PATH_CUSTOM(d__) (d__) Call {private _arr = _this splitString "\"; private _ret = ""; if (!isMultiplayer) then \
+#define SHORT_PATH_CUSTOM(d__) (d__) call {private _arr = _this splitString "\"; private _ret = ""; if (!isMultiplayer) then \
 { if (getMissionName in _arr) then {_ret = (_arr select [(_arr find getMissionName)+1,count _arr]) joinString "\"} else {_ret = _this}; } else { \
 _ret = _this; \
 }; _ret} \
@@ -246,9 +246,9 @@ _ret = _this; \
 
 //mem check
 // Осуществляет проверку значения в стиле C++. Любые nullable значения вернут false
-#define isValid(ptr) ([ptr] Call rv_cppcheck)
+#define isValid(ptr) ([ptr] call rv_cppcheck)
 //псевдоним if (valid(modlue_somevariable))
-#define valid(ptr) ([ptr] Call rv_cppcheck)
+#define valid(ptr) ([ptr] call rv_cppcheck)
 // alias to valid
 #define bool(val) valid(val)
 
@@ -272,7 +272,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define precentage(checked,precval) ((checked)*(precval)/100)
 
 // формат в игровое время мин и сек (часы вряд-ли где-то юзаются)
-#define formatTime(secs) (secs Call{format["%1 мин. %2 сек.",floor(_this / 60),_this % 60]})
+#define formatTime(secs) (secs call{format["%1 мин. %2 сек.",floor(_this / 60),_this % 60]})
 
 //форматирование времени: каст секунды в минуты
 #define t_asMin(s) ((s)*60)
@@ -294,19 +294,19 @@ bool TestRange (int numberToCheck, int bottom, int top)
 
 #define array_exists(arr,var) ((var)in arr)
 //рандомный сорт массива
-#define array_shuffle(array) (array Call BIS_fnc_arrayShuffle)
+#define array_shuffle(array) (array call BIS_fnc_arrayShuffle)
 //копирование массива
 #define array_copy(array) (+(array))
 //poplast
-#define array_remlast(arr) (arr Call {_this deleteAt (count _this - 1)})
+#define array_remlast(arr) (arr call {_this deleteAt (count _this - 1)})
 //select last item
-#define array_selectlast(arr) (arr Call {_this select (count _this - 1)})
+#define array_selectlast(arr) (arr call {_this select (count _this - 1)})
 // check if array empty
 #define array_isempty(arr) (count(arr)==0)
 //check array elements count
 #define array_count(arr) (count (arr))
 
-#define array_remove(array,el) ([array,el] Call {params["_a","_e"]; _a deleteAt(_a find _e)})
+#define array_remove(array,el) ([array,el] call {params["_a","_e"]; _a deleteAt(_a find _e)})
 
 #define vec1(x) [x]
 #define vec2(x,y) [x,y]
@@ -339,23 +339,23 @@ bool TestRange (int numberToCheck, int bottom, int top)
 */
 #define __ptr_struct_internal__(address,value) vec2(address,value)
 #define nullptr ptr_cnl
-#define ptr_alloc(initial) ((initial)Call ptr_create)
-#define ptr_free(refval) ((refval)Call ptr_destroy)
+#define ptr_alloc(initial) ((initial)call ptr_create)
+#define ptr_free(refval) ((refval)call ptr_destroy)
 	//internal ptr helpers
 	#define PTR_STRUCT_ADDRESS 0
 	#define PTR_STRUCT_VALUE 1
 	//simple commands
-	#define ptr_address(p) ((p)Call ptr_cts)
+	#define ptr_address(p) ((p)call ptr_cts)
 	#define ptr_read(p) ((p)select PTR_STRUCT_VALUE)
 	#define ptr_write(p,v) (p)set[PTR_STRUCT_VALUE,v]
 	//functionality
-	#define ptr_modvar(p) _poldvm_g_=0;(p Call ptr_remval)pushBack _poldvm_g_
+	#define ptr_modvar(p) _poldvm_g_=0;(p call ptr_remval)pushBack _poldvm_g_
 	#define ptr_inc(p) _poldvs_g_=(p)select PTR_STRUCT_VALUE;p set[PTR_STRUCT_VALUE,_poldvs_g_+1];
 	#define ptr_dec(p) _poldvs_g_=(p)select PTR_STRUCT_VALUE;p set[PTR_STRUCT_VALUE,_poldvs_g_-1];
 	//fast set value
-	#define ptr(p) _poldvm_g_=0;(p Call ptr_remval)pushBack
+	#define ptr(p) _poldvm_g_=0;(p call ptr_remval)pushBack
 	//check is ptr
-	#define isptr(p) ((p)Call ptr_check)
+	#define isptr(p) ((p)call ptr_check)
 
 //hash set
 #define hashSet_createEmpty() createHashMap
@@ -366,7 +366,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define hashSet_rem(hash,item) (hash)deleteAt (item)
 #define hashSet_exists(hash,item) ((item)in(hash))
 #define hashSet_count(hash) (count(hash))
-#define hashSet_clear(hash) (hash)Call{{_this deleteat _x}foreach +_this}
+#define hashSet_clear(hash) (hash)call{{_this deleteat _x}foreach +_this}
 #define hashSet_copyFrom(hash,merged) (hash)merge (merged)
 
 //hashmap
@@ -395,8 +395,8 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define prop(varname) varname
 #define onpropset(varname) varname##_set
 #define onpropget(varname) varname##_get
-#define propset(varname,val) val Call onpropset(varname)
-#define propget(varname) Call onpropget(varname)
+#define propset(varname,val) val call onpropset(varname)
+#define propget(varname) call onpropget(varname)
 
 // scripted events
 /*
@@ -411,7 +411,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 	addEventHandler(onSystemPrint,{warning("First")});
 	addEventHandler(onSystemPrint,{warning("second. Message was: " + eventHandlerArgs)});
 
-	Call systemPrint;
+	call systemPrint;
 */
 
 // preprocessing protect to native function eventhandler
@@ -422,7 +422,32 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define registerEventHandler(varname) __eventHandlerName__(varname) = []
 #define addEventHandler(varname,val) __eventHandlerName__(varname) pushBack (val)
 #define removeEventHandler(varname,val) __eventHandlerName__(varname) deleteat (__eventHandlerName__(varname) find (val))
-#define callEventHandler(varname,evhargs) private eventHandlerArgs = evhargs; {Call _x;true} count __eventHandlerName__(varname)
+#define callEventHandler(varname,evhargs) private eventHandlerArgs = evhargs; {call _x;true} count __eventHandlerName__(varname)
+
+// simple object creator
+/*
+	ps_##name = [["typeName",#name
+		],[#varname,1],[#varname,2
+	]];
+
+	structCreate(tempStruct)
+		structVar(a) 1
+		structVar(b) 2
+	structEnd
+
+	_s = structNew(tempStruct);
+
+
+*/
+#define structCreate(name) ps_##name = [["typeName",#name
+#define structEnd ]];
+
+#define structVar(varname) ],[#varname,
+
+#define structNew(name) (createHashMapFromArray ps_##name)
+//accessing struct
+#define structSet(obj,varname,varval) obj set [#varname,varval]
+#define structGet(obj,varname) (obj get #varname)
 
 //comparison
 
@@ -434,9 +459,9 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define not_equalTypes(obja,objb) (!equalTypes(obja,objb))
 
 //algorithm
-#define all_of(values) ([values] Call allOf)
-#define any_of(values) ([values] Call anyOf)
-#define none_of(values) ([values] Call noneOf)
+#define all_of(values) ([values] call allOf)
+#define any_of(values) ([values] call anyOf)
+#define none_of(values) ([values] call noneOf)
 
 //random helpers
 #define pick selectRandom
@@ -455,7 +480,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 
 #define clampangle(x,a,b) (((((x) % 360 + 360) % 360) max (a)) min (b))
 
-#define parseNumberSafe(v) ((parseNumber (v)) Call {if(finite _this) then {_this} else {0}})
+#define parseNumberSafe(v) ((parseNumber (v)) call {if(finite _this) then {_this} else {0}})
 
 //delay subsystem
 
@@ -464,33 +489,33 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define deltaTime diag_deltaTime
 
 #ifdef EDITOR
-	#define __alloc_thread_loc__ (cba_common_perFrameHandlerArray select -1) set [6,format["%1 at line %2",[__FILE__,getMissionPath "",""] Call stringReplace,__LINE__]]; \
+	#define __alloc_thread_loc__ (cba_common_perFrameHandlerArray select -1) set [6,format["%1 at line %2",[__FILE__,getMissionPath "",""] call stringReplace,__LINE__]]; \
 		(cba_common_perFrameHandlerArray select -1) set [7,diag_stacktrace]
-	#define startUpdate(func,delay) Call{private _h = [func,delay] Call CBA_fnc_addPerFrameHandler; __alloc_thread_loc__; _h}
-	#define startUpdateParams(func,delay,params) Call{private _h = [func,delay,params] Call CBA_fnc_addPerFrameHandler; __alloc_thread_loc__; _h}
+	#define startUpdate(func,delay) call{private _h = [func,delay] call CBA_fnc_addPerFrameHandler; __alloc_thread_loc__; _h}
+	#define startUpdateParams(func,delay,params) call{private _h = [func,delay,params] call CBA_fnc_addPerFrameHandler; __alloc_thread_loc__; _h}
 #else
-	#define startUpdate(func,delay) [func,delay] Call CBA_fnc_addPerFrameHandler
-	#define startUpdateParams(func,delay,params) [func,delay,params] Call CBA_fnc_addPerFrameHandler
+	#define startUpdate(func,delay) [func,delay] call CBA_fnc_addPerFrameHandler
+	#define startUpdateParams(func,delay,params) [func,delay,params] call CBA_fnc_addPerFrameHandler
 #endif
 
-#define stopUpdate(handle) handle Call CBA_fnc_removePerFrameHandler
+#define stopUpdate(handle) handle call CBA_fnc_removePerFrameHandler
 
 #define thisUpdate (_this select 1)
 
 #define stopThisUpdate() stopUpdate(_this select 1)
 
-#define changeUpdateTime(handle,newTime) (Call {if (handle < 0 || newTime < 0) exitWith {false}; \
+#define changeUpdateTime(handle,newTime) (call {if (handle < 0 || newTime < 0) exitWith {false}; \
 cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 
 #define changeThisUpdateTime(newTime) changeUpdateTime(thisUpdate,newTime)
 
 #define getThisCodeInTimeEvent(varname) varname = _x select 1
 
-#define nextFrame(code) [code] Call CBA_fnc_execNextFrame
-#define nextFrameParams(code,args) [code,args] Call CBA_fnc_execNextFrame
+#define nextFrame(code) [code] call CBA_fnc_execNextFrame
+#define nextFrameParams(code,args) [code,args] call CBA_fnc_execNextFrame
 
-#define invokeAfterDelay(code,delay) [code,[],delay] Call CBA_fnc_waitAndExecute
-#define invokeAfterDelayParams(code,delay,params) [code,params,delay] Call CBA_fnc_waitAndExecute
+#define invokeAfterDelay(code,delay) [code,[],delay] call CBA_fnc_waitAndExecute
+#define invokeAfterDelayParams(code,delay,params) [code,params,delay] call CBA_fnc_waitAndExecute
 
 	/*
 
@@ -505,10 +530,10 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 	#define doInvoke(delay) ;invokeAfterDelay(__cframe__,delay)
 	#define doInvokeParams(delay,_prms) ;invokeAfterDelayParams(__cframe__,delay,_prms)
 
-#define asyncInvoke(c_condit,c_state,args,timeout,c_tim) [c_condit, c_state, args,timeout,c_tim] Call CBA_fnc_waitUntilAndExecute
+#define asyncInvoke(c_condit,c_state,args,timeout,c_tim) [c_condit, c_state, args,timeout,c_tim] call CBA_fnc_waitUntilAndExecute
 
 #define startAsyncInvoke [
-#define endAsyncInvoke ] Call CBA_fnc_waitUntilAndExecute;
+#define endAsyncInvoke ] call CBA_fnc_waitUntilAndExecute;
 
 
 //lang helpers
@@ -534,7 +559,7 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 #define CASE(cond) case (cond) :
 
 // extended language helpers
-#define fswitch(val) (val) Call
+#define fswitch(val) (val) call
 #define fcase(val) if equals(_this,val) exitWith
 #define fcasein(values) if (_this in (values)) exitWith
 
@@ -576,8 +601,8 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 	//определяем имя модуля
 	#define defineModule(name) _thisModule = 'name';
 
-	#define global_var(var) [#var,__FILE__,__LINE__,_thisModule] Call gv_rv; var
-	#define global_func(var) [#var,__FILE__,__LINE__,_thisModule] Call gv_rf; var
+	#define global_var(var) [#var,__FILE__,__LINE__,_thisModule] call gv_rv; var
+	#define global_func(var) [#var,__FILE__,__LINE__,_thisModule] call gv_rf; var
 	/*
 		global_var(lobby_isReady) = true;
 		global_func(cm_isLoaded) {
@@ -592,7 +617,7 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 	*/
 	//critical safe data
 		//register for type-safety variable
-	#define __iglob_provider(var,type) [#var,type] Call gv_rts
+	#define __iglob_provider(var,type) [#var,type] call gv_rts
 	#define global_num(var) __iglob_provider(var,0)
 	#define global_str(var) __iglob_provider(var,"")
 	#define global_arr(var) __iglob_provider(var,[])
@@ -616,26 +641,26 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 
 #define __assert_runtime_file__ __FILE__
 
-#define __EVAL_PATH_VM__(filepath) (filepath) Call { \
+#define __EVAL_PATH_VM__(filepath) (filepath) call { \
 private _arr = (tolower _this) splitString "\/"; private _ret = ""; if ("src" in _arr) then {_ret = (_arr select [(_arr find "src"),count _arr]) joinString "\" \
 } else {_ret = _this};\
 _ret} \
 
 #ifdef __VM_BUILD
-	#define __assert_runtime_file__ __EVAL(Call compile '_ref = toArray __FILE__;{if (_x <= 0)then{_ref set [_foreachindex,32]}} foreach _ref; __EVAL_PATH_VM__(TOString _ref)')
+	#define __assert_runtime_file__ __EVAL(call compile '_ref = toArray __FILE__;{if (_x <= 0)then{_ref set [_foreachindex,32]}} foreach _ref; __EVAL_PATH_VM__(TOString _ref)')
 	#define __assert_value_tostring__(val) 'val'
 #endif
 #ifdef __VM_VALIDATE
-	#define __assert_runtime_file__ __EVAL(Call compile '_ref = toArray __FILE__;{if (_x <= 0)then{_ref set [_foreachindex,32]}} foreach _ref; __EVAL_PATH_VM__(TOString _ref)')
+	#define __assert_runtime_file__ __EVAL(call compile '_ref = toArray __FILE__;{if (_x <= 0)then{_ref set [_foreachindex,32]}} foreach _ref; __EVAL_PATH_VM__(TOString _ref)')
 	#define __assert_value_tostring__(val) 'val'
 #endif
 
-#define __assert_static_runtime_expr1(expr) if !([expr] Call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__] Call sys_static_assert_}
-#define __assert_static_runtime_expr2(expr,message) if !([expr] Call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__,message] Call sys_static_assert_}
+#define __assert_static_runtime_expr1(expr) if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__] call sys_static_assert_}
+#define __assert_static_runtime_expr2(expr,message) if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__,message] call sys_static_assert_}
 #define __assert_static_compile_expr1(expr) __EVAL(__assert_static_runtime_expr1(expr))
 #define __assert_static_compile_expr2(expr,message) __EVAL(__assert_static_runtime_expr2(expr,message))
-#define __assert_runtime_expr1(expr) if !([expr] Call sys_int_evalassert)exitWith {[toString {expr},__assert_runtime_file__,__LINE__] Call sys_assert_}
-#define __assert_runtime_expr2(expr,message) if !([expr] Call sys_int_evalassert)exitWith {[toString {expr},__assert_runtime_file__,__LINE__,message] Call sys_assert_}
+#define __assert_runtime_expr1(expr) if !([expr] call sys_int_evalassert)exitWith {[toString {expr},__assert_runtime_file__,__LINE__] call sys_assert_}
+#define __assert_runtime_expr2(expr,message) if !([expr] call sys_int_evalassert)exitWith {[toString {expr},__assert_runtime_file__,__LINE__,message] call sys_assert_}
 
 //called at compile/build; Only simple expressions without macros
 #define static_assert(expr) __assert_static_runtime_expr1(expr)
@@ -686,14 +711,14 @@ _ret} \
 
 //debuging
 /*#define CALLSTACK(function) {private ['_ret']; \
-if (ACRE_IS_ERRORED) then { ['AUTO','AUTO'] Call ACRE_DUMPSTACK_FNC; ACRE_IS_ERRORED = false; }; \
+if (ACRE_IS_ERRORED) then { ['AUTO','AUTO'] call ACRE_DUMPSTACK_FNC; ACRE_IS_ERRORED = false; }; \
 ACRE_IS_ERRORED = true; ACRE_STACK_TRACE set [ACRE_STACK_DEPTH, [diag_tickTime, __FILE__, __LINE__, ACRE_CURRENT_FUNCTION, 'ANON', _this]]; \
 ACRE_STACK_DEPTH = ACRE_STACK_DEPTH + 1; ACRE_CURRENT_FUNCTION = 'ANON'; \
-_ret = _this Call ##function; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH - 1; \
+_ret = _this call ##function; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH - 1; \
 ACRE_IS_ERRORED = false; _ret;}*/
 
 #ifdef EDITOR
-	#define setLastError(data__) ([data__] Call relicta_debug_setlasterror); halt
+	#define setLastError(data__) ([data__] call relicta_debug_setlasterror); halt
 #else
 	#define setLastError(data__)
 #endif
@@ -702,8 +727,8 @@ ACRE_IS_ERRORED = false; _ret;}*/
 #define exitScope(cond) if (true) exitWith {cond};
 //TODO: опционально возвращаем только первые несколько функций стека вызова
 #define getCallStack() diag_stacktrace
-//#define CALLSTACK_NAMED(function, functionName) {private ['_ret']; if (ACRE_IS_ERRORED) then { ['AUTO','AUTO'] Call ACRE_DUMPSTACK_FNC; ACRE_IS_ERRORED = false; }; ACRE_IS_ERRORED = true; ACRE_STACK_TRACE set [ACRE_STACK_DEPTH, [diag_tickTime, __FILE__, __LINE__, ACRE_CURRENT_FUNCTION, functionName, _this]]; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH + 1; ACRE_CURRENT_FUNCTION = functionName; _ret = _this Call ##function; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH - 1; ACRE_IS_ERRORED = false; _ret;}
-//#define DUMPSTACK ([__FILE__, __LINE__] Call acre_main_fnc_dumpCallStack
+//#define CALLSTACK_NAMED(function, functionName) {private ['_ret']; if (ACRE_IS_ERRORED) then { ['AUTO','AUTO'] call ACRE_DUMPSTACK_FNC; ACRE_IS_ERRORED = false; }; ACRE_IS_ERRORED = true; ACRE_STACK_TRACE set [ACRE_STACK_DEPTH, [diag_tickTime, __FILE__, __LINE__, ACRE_CURRENT_FUNCTION, functionName, _this]]; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH + 1; ACRE_CURRENT_FUNCTION = functionName; _ret = _this call ##function; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH - 1; ACRE_IS_ERRORED = false; _ret;}
+//#define DUMPSTACK ([__FILE__, __LINE__] call acre_main_fnc_dumpCallStack
 
 
 //common macro
@@ -712,7 +737,7 @@ ACRE_IS_ERRORED = false; _ret;}*/
 
 // bypass compiler unknown commands
 // Данные макросы используются для проброса функций из новой версии в обход компилятора клиента
-// Пример: VM_COMPILER_ADDFUNC_UNARY(freeExtension_impl,freeExtension) -> для вызова используем: Call freeExtension_impl
+// Пример: VM_COMPILER_ADDFUNC_UNARY(freeExtension_impl,freeExtension) -> для вызова используем: call freeExtension_impl
 #define VM_COMPILER_ADDFUNC_BINARY(name,cmd) name = compile '(_this select 0) cmd (_this select 1)'
 #define VM_COMPILER_ADDFUNC_UNARY(name,cmd) name = compile 'cmd _this'
 #define VM_COMPILER_ADDFUNC_NULAR(name,cmd) name = compile 'cmd'
@@ -742,7 +767,7 @@ ACRE_IS_ERRORED = false; _ret;}*/
 	prop - тип свойства (дефолт all, доступные: all,get,set)
 	classprop - видимость свойства в инспекторе класса (дефолт-0)
 */
-#define node_var Call nodegen_addClassField;
+#define node_var call nodegen_addClassField;
 
 //регистрация метода класса в библиотеке
 /*
@@ -788,14 +813,14 @@ ACRE_IS_ERRORED = false; _ret;}*/
 		in:int:Вход 1:Описание входного значения
 		opt:custom=1:mul=1:dname=1:allowtypes=int|bool|float
 */
-#define node_met Call nodegen_addClassMethod;
+#define node_met call nodegen_addClassMethod;
 
 //регистрация класса в библиотеке
 /*
 	path - Путь для членов класса, path:Объекты.Логика
 	Путь наследуется для членов но может быть переопределен
 */
-#define node_class Call nodegen_addClass;
+#define node_class call nodegen_addClass;
 
 // регистрация статической функции по имени
 /*
@@ -806,10 +831,10 @@ ACRE_IS_ERRORED = false; _ret;}*/
 	для установки параметров функции в автоматическом режиме используйте @cfParams
 
 */
-#define node_func(name) + endl+ 'node:name' Call nodegen_addFunction; name
+#define node_func(name) + endl+ 'node:name' call nodegen_addFunction; name
 
 //Регистрация системного узла
-#define node_system Call nodegen_addSystemNode;
+#define node_system call nodegen_addSystemNode;
 
 //Регистрация перечисления
 /*
@@ -832,7 +857,7 @@ ACRE_IS_ERRORED = false; _ret;}*/
 	Доступ из системы получается по имени enum.TestEnum
 */
 //! Этот макрос нельзя вырезать из компиляции. Он генерирует статические члены
-#define node_enum Call nodegen_addEnumerator;
+#define node_enum call nodegen_addEnumerator;
 
 //Регистратор структуры
 /*
@@ -846,7 +871,7 @@ ACRE_IS_ERRORED = false; _ret;}*/
 	! Пока неизвестно какие глобальные члены должна писать структура.
 	TODO Нужно придумать и реализовать
 */
-#define node_struct Call nodegen_addStruct;
+#define node_struct call nodegen_addStruct;
 
 /*
 
