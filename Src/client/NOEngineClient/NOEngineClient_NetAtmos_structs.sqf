@@ -11,37 +11,37 @@ struct(AtmosAreaClient)
 
 	def(chunks) null;
 
-	def(constructor)
+	def(init)
 	{
 		params ["_aId"];
-		self set(areaId,_aId);
-		self set(chunks,createHashMap);
+		self setv(areaId,_aId);
+		self setv(chunks,createHashMap); 
 	}
 
 	def(loadChunkEffect)
 	{
 		params ["_locChId","_light"];
-		private _pos = [self get(areaId),_locChId] nativeCall atmos_localChunkIdToGlobal;
-		private _locid = _locChid nativeCall atmos_encodeChId;
-		if (_locid in (self get(chunks))) then {
-			self callp(unloadChunk,[_locid]);
+		private _pos = [self getv(areaId),_locChId] call atmos_localChunkIdToGlobal;
+		private _locid = _locChid call atmos_encodeChId;
+		if (_locid in (self getv(chunks))) then {
+			self callp(unloadChunk,_locid);
 		};
-		//todo - set pos as center of chunk with bias
-		self callp(loadChunk,[_locid arg _pos arg _light]);
+		//todo - setv pos as center of chunk with bias
+		self callp(loadChunk,_locid arg _pos arg _light);
 	}
 
 	def(loadChunk)
 	{
 		params ["_locid","_pos","_light"];
-		private _vobj = self callp(createVisualObject,[_pos]);
+		private _vobj = self callp(createVisualObject,_pos);
 		private _lt = [_light,_vobj] call le_loadLight;
-		self get(chunks) SET [_locid,[_vobj,_lt]];
+		self getv(chunks) SET [_locid,[_vobj,_lt]];
 	}
 
 	def(unloadChunk)
 	{
 		params ["_locid"];
-		private _chDat = self get(chunks) GET _locid;
+		private _chDat = self getv(chunks) GET _locid;
 		if !isNullVar(_chDat) then {
 			[_chDat select 0] call le_unloadLight;
 			deletevehicle (_chDat select 0);
@@ -58,6 +58,6 @@ struct(AtmosAreaClient)
 
 	def(str)
 	{
-		format["Area%1",self get(areaId)]
+		format["Area%1",self getv(areaId)]
 	}
 endstruct

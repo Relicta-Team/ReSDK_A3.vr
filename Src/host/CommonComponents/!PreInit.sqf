@@ -125,12 +125,12 @@ struct_initialize = {
 	private _bmap = createHashMap;
 	{
 		_decl = createHashMapFromArray _x;
-		_t = _decl deleteAt "constructor";
+		_t = _decl deleteAt "init";
 		if !isNullVar(_t) then {
 			_decl set [STRUCT_MEM_CONSTRUCTOR,_t];
 		};
 		
-		_t = _decl deleteAt "destructor";
+		_t = _decl deleteAt "del";
 		if !isNullVar(_t) then {
 			_decl set [STRUCT_MEM_DESTRUCTOR,_t];
 		};
@@ -161,7 +161,7 @@ struct_initialize = {
 	} foreach _bmap;
 };
 
-struct_new = {
+struct_alloc = {
 	params ["_s",["_params",[]]];
 	createHashMapObject [vtable_s get _s,_params];
 };

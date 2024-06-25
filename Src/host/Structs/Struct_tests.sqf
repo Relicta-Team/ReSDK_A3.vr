@@ -1,20 +1,20 @@
 
-//for testing use: ["InheritedStruct"] call struct_new;
+//for testing use: ["InheritedStruct"] call struct_alloc;
 struct(InheritedStruct) base(TestStruct)
 
 endstruct
 
-//for testing use: ["TestStruct"] call struct_new;
+//for testing use: ["TestStruct"] call struct_alloc;
 struct(TestStruct)
 	def(created) 0;
-	def(constructor)
+	def(init)
 	{
-		self set(created,tickTime);
+		self setv(created,tickTime);
 		logformat("%1 created",self);
-		self call(testprint);
+		self callv(testprint);
 	}
 
-	def(destructor)
+	def(del)
 	{
 		logformat("%1 destroyed",self);
 	}
@@ -26,6 +26,6 @@ struct(TestStruct)
 	
 	def(str)
 	{
-		format["Object %1:%2",typename(self),self get(created)]
+		format["Object %1:%2",typename(self),self getv(created)]
 	}
 endstruct

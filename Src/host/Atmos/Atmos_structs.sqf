@@ -18,9 +18,9 @@ struct(AtmosChunk)
 	def(chNum) -1; //local chunk id
 	def(chLPos) null; //local position in area 
 	def(lastUpd) 0;
-	def(getChunkCenterPos) {(self get(chId)) nativeCall atmos_chunkIdToPos}
-	def(getChunkZoneOffset) {self get(chLPos)}
-	def(getChunkAreaId) {(self get(chId)) nativeCall atmos_chunkIdToAreaId}
+	def(getChunkCenterPos) {(self getv(chId)) call atmos_chunkIdToPos}
+	def(getChunkZoneOffset) {self getv(chLPos)}
+	def(getChunkAreaId) {(self getv(chId)) call atmos_chunkIdToAreaId}
 
 
 	def(objInside) null; //gameobjects inside this chunk
@@ -34,13 +34,13 @@ struct(AtmosChunk)
 		def(aGas) null;
 		def(aWater) null;
 
-	def(hasFire) {!isNull(self get(aFire))};
-	def(hasGas) {!isNull(self get(aGas))};
-	def(hasWater) {!isNull(self get(aWater))};
+	def(hasFire) {!isNull(self getv(aFire))};
+	def(hasGas) {!isNull(self getv(aGas))};
+	def(hasWater) {!isNull(self getv(aWater))};
 
 	def(updateLight)
 	{
-		if (self call(hasFire)) exitWith {
+		if (self callv(hasFire)) exitWith {
 			
 		};
 	}
@@ -48,23 +48,23 @@ struct(AtmosChunk)
 	//generate packet for client
 	def(getPacket)
 	{
-		[self get(chNum),SLIGHT_ATMOS_FIRE_1]
+		[self getv(chNum),SLIGHT_ATMOS_FIRE_1]
 	}
 
-	def(constructor)
+	def(init)
 	{
 		params ["_chId"];
 		
-		self set(objInside) [];
-		self set(aObj) [];
+		self setv(objInside) [];
+		self setv(aObj) [];
 
-		self set(chId,_chId);
+		self setv(chId,_chId);
 
 		//setup local position and chunk localID
-		self set(chLPos,_chId nativeCall atmos_getLocalChunkIdInArea);
-		self set(chNum, (self get(chLPos)) nativeCall atmos_encodeChId);
+		self setv(chLPos,_chId call atmos_getLocalChunkIdInArea);
+		self setv(chNum, (self getv(chLPos)) call atmos_encodeChId);
 
-		self set(chCtr,atmos_chunks_uniqIdx);
+		self setv(chCtr,atmos_chunks_uniqIdx);
 		INC(atmos_chunks_uniqIdx);
 	}
 
@@ -82,7 +82,7 @@ struct(AtmosAreaBase)
 	def(getSpreadTimeout) 5;
 	def(lastActivity) 0;
 
-	def(canActivity) {tickTime > self get(lastActivity)}
+	def(canActivity) {tickTime > self getv(lastActivity)}
 
 	def(onActivity) {}
 	def(canPropagateTo) {}

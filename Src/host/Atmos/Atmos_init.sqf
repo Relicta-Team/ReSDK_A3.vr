@@ -36,7 +36,7 @@ atmos_getChunkAtChId = {
 	params ["_chId"];
 	private _strKey = str _chId;
 	if !(_strKey in atmos_map_chunks) then {
-		private _chObj = ["AtmosChunk",[_chId]] call struct_new; //newParams(AtmosChunk,[_chId]);
+		private _chObj = ["AtmosChunk",[_chId]] call struct_alloc; //newParams(AtmosChunk,[_chId]);
 		atmos_map_chunks set [_strKey,_chObj];
 
 		//checking area and register in area
@@ -123,7 +123,7 @@ atmos_createProcess = {
 
 	private _m = _atmCh get _fNameStore;
 	if isNullVar(_m) then {
-		private _at = [_procType] call struct_new;
+		private _at = [_procType] call struct_alloc;
 		_at set ["chunk",_atmCh];
 		_atmCh set [_fNameStore,_at];
 		(_atmCh get "aObj") set [_aObjOffset,_at];

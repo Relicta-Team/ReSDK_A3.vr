@@ -69,7 +69,7 @@ noe_client_nat_getArea = {
 	params ["_areaId"];
 	private _key = str _areaId;
 	if isNull(noe_client_nat_areas get _key) then {
-		noe_client_nat_areas set [_key,["AtmosAreaClient",[_areaId]] call struct_new];
+		noe_client_nat_areas set [_key,["AtmosAreaClient",[_areaId]] call struct_alloc];
 	};
 	noe_client_nat_areas get _key
 };
