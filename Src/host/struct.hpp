@@ -4,6 +4,8 @@
 // ======================================================
 
 #define STRUCT_API_VERSION 1.0
+// enable fileinfo for structs. do not enable in release build
+#define STRUCT_USE_ALLOC_INFO
 
 /*
 	Structures are dynamic faster objects with automatically memory management
@@ -18,16 +20,14 @@
 		}
 	endstruct
 
-	_o = struct_alloc(TestStructure);
+	_o = struct_new(TestStructure);
 
 	//_o sc(method);
 	//_o scp(method,1 arg 2 arg 3);
 	//_o fn(method)
 	//_o fnp(method,2 arg 3 arg 4)
-	_o f(method);
-	_o fp(method,1 arg 2);
-	_o fcall(method);
-	_o fcallp(method,1 arg 2);
+	_o callv(method);
+	_o callp(method,1 arg 2);
 	
 	_o getv(mem)
 	_o setv(mem,1)
@@ -89,8 +89,13 @@
 #define struct_typename(o) ((o) GET STRUCT_MEM_TYPE select 0)
 
 //instansing
-#define struct_new(name) (createHashMapObject [pts_##name])
-#define struct_newp(name,arglist) (createHashMapObject [pts_##name,[arglist]])
+#ifdef STRUCT_USE_ALLOC_INFO
+	#define struct_new(name) (call{_sbj___ = (createHashMapObject [pts_##name]); _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']})
+	#define struct_newp(name,arglist) (call{_sbj___ = (createHashMapObject [pts_##name,[arglist]]); _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']})
+#else
+	#define struct_new(name) (createHashMapObject [pts_##name])
+	#define struct_newp(name,arglist) (createHashMapObject [pts_##name,[arglist]])
+#endif
 
 //forced delete structure
 #define struct_free(o) (o SET ["__dflg__",true];{if !(_y isequaltype {})then{o deleteAt _x};}foreach o)

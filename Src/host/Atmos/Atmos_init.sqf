@@ -42,7 +42,7 @@ atmos_getChunkAtChId = {
 		//checking area and register in area
 		private _aDat = [_chId call atmos_chunkIdToAreaId] call atmos_getAreaAtAid;
 		(_aDat select ATMOS_AREA_INDEX_CHUNKS) pushBack _chObj;
-		_chObj set ["area",_aDat]; //!!cross memleak reference
+		_chObj set ["area",["SafeRef",[_aDat]] call struct_alloc];
 	};
 	atmos_map_chunks get _strKey
 };

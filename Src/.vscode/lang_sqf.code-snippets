@@ -25,6 +25,30 @@
 			""
 		]
 	},
+
+	"getv" : {
+		"prefix": "getv",
+		"body": [
+			"getv(${1:name})${0}"
+		],
+		"description": "Get struct variable"
+	},
+	"setv" : {
+		"prefix": "setv",
+		"body": "setv(${1:name},${2:value})${0}",
+		"description": "Set struct variable value"
+	},
+	"callv": {
+		"prefix": "callv",
+		"body": ["callv(${1:funcName})${0}"],
+		"description": "Call struct function without parameters"
+	},
+	"callp": {
+		"prefix": "callp",
+		"body": ["callp(${1:funcName},${2:args})${0}"],
+		"description": "Call struct function with params. Params can separated with delimeter 'arg'"
+	},
+
 	"calls": {
 		"prefix": "calls",
 		"body": [

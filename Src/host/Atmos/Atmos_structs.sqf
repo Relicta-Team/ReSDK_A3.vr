@@ -13,7 +13,7 @@
 struct(AtmosChunk)
 	def(chCtr) 0; //chunk counter
 
-	def(area) null;//reference to area
+	def(area) null;//saferef to area
 	def(chId) null;
 	def(chNum) -1; //local chunk id
 	def(chLPos) null; //local position in area 
@@ -21,6 +21,10 @@ struct(AtmosChunk)
 	def(getChunkCenterPos) {(self getv(chId)) call atmos_chunkIdToPos}
 	def(getChunkZoneOffset) {self getv(chLPos)}
 	def(getChunkAreaId) {(self getv(chId)) call atmos_chunkIdToAreaId}
+	def(getArea)
+	{
+		self getv(area) callv(getValue)
+	}
 
 
 	def(objInside) null; //gameobjects inside this chunk
