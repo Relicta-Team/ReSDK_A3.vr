@@ -3,11 +3,14 @@
 // sdk.relicta.ru
 // ======================================================
 #include "..\..\host\struct.hpp"
+#include "NOEngineClient_NetAtmos.hpp"
 
 struct(AtmosAreaClient)
 	def(areaId) null;
 	def(lastUpd) 0;
 	def(lastDel) 0;
+
+	def(state) NAT_LOADING_STATE_NOT_LOADED;
 
 	def(chunks) null;
 

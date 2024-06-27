@@ -65,7 +65,7 @@
 #define STRUCT_MEM_DESTRUCTOR "#delete"
 #define STRUCT_MEM_COPY "#clone"
 
-#define struct(name) _sdecl__ = [[STRUCT_MEM_TYPE, #name ], [STRUCT_MEM_FLAGS, ["unscheduled"], ["__dflg__",false] ] ];
+#define struct(name) _sdecl__ = [ [STRUCT_MEM_TYPE, #name ], [STRUCT_MEM_FLAGS, struct_default_flag], ["__dflg__",false] ];
 #define base(basename) _sdecl__ pushBack [STRUCT_MEM_BASE, #basename ];
 #define endstruct ;spi_lst pushBack _sdecl__;
 

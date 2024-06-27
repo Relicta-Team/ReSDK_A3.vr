@@ -2,6 +2,8 @@
 // Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
+#include "NOEngineClient_NetAtmos.hpp"
+#include "..\..\host\struct.hpp"
 
 #define NOE_NETATMOS_UPDATE_DELAY 1
 
@@ -27,7 +29,7 @@ noe_client_nat_setEnabled = {
 	true;
 };
 
-
+//основной цикл обработки областей
 noe_client_nat_onUpdate = {
 	_mob = player;
 	_arCenter = (getposatl _mob) call atmos_getAreaIdByPos;
@@ -52,19 +54,23 @@ noe_client_nat_onUpdate = {
 	} foreach _toLoad;
 
 	//выгрузка старых
-	_aObj = null;
+	_aObj = null; //oftype AtmosAreaClient
 	{
 		_aObj = [_x] call noe_client_nat_getArea;
-		[_aObj] call noe_client_nat_unloadArea;
+		if (_aObj getv(state) == NAT_LOADING_STATE_LOADED) then {
+			[_aObj] call noe_client_nat_unloadArea;
+		};
 	} foreach _toUnload;
 
 	//загружаем новые
 	{
 		_aObj = [_x] call noe_client_nat_getArea;
-		[_aObj] call noe_client_nat_requestLoad;
+		if (_aObj getv(state) <= NAT_LOADING_STATE_NOT_LOADED) then {
+			[_aObj] call noe_client_nat_requestLoad;
+		};
 	} foreach _toLoad;
 };
-
+//получение области. если область не создана - генерирует новую
 noe_client_nat_getArea = {
 	params ["_areaId"];
 	private _key = str _areaId;
@@ -74,8 +80,10 @@ noe_client_nat_getArea = {
 	noe_client_nat_areas get _key
 };
 
+//запрос зоны на загрузку
 noe_client_nat_requestLoad = {
 	params ["_areaObj"];
+	_areaObj setv(state,NAT_LOADING_STATE_AWAIT_RESPONE);
 	private _packet = [
 		clientOwner,
 		_areaObj get "areaId",
@@ -84,22 +92,25 @@ noe_client_nat_requestLoad = {
 	rpcSendToServer("salr",_packet);
 };
 
+//ответ от сервера
 noe_client_nat_onLoadArea = {
 	private _packet = _this;
-	assert_str(count _packet > 4,"Packet must be greater than 4");
-	_aid = _packet select [0,2];
+	_aid = _packet select [0,3];
 	_packet deleteRange [0,3];
 	_upd = _packet deleteAt 0;
-	assert(count _packet > 0);
 	assert_str((count _packet) % 2 == 0,"Packet must be even items count");
 
 	_aObj = [_aid] call noe_client_nat_getArea;
+	_aObj setv(state,NAT_LOADING_STATE_LOADING);
 
 	_addList = [];
 	_remList = [];
 	if ([_packet,_addList,_remList] call noe_client_nat_decodePacket) then {
 		[_aObj,_addList] call noe_client_nat_loadVisualArea;
 		[_aObj,_remList] call noe_client_nat_deleteChunks;
+		_aObj setv(state,NAT_LOADING_STATE_LOADED);
+	} else {
+		_aObj setv(state,NAT_LOADING_STATE_ERROR);
 	};
 };
 rpcAdd("cuar",noe_client_nat_onLoadArea);
@@ -134,8 +145,11 @@ noe_client_nat_loadVisualArea = {
 	} foreach _arrChDat;
 };
 
+//выгрузка зоны. обращаю внимание, что проверка состояния загруженности должна производиться снаружи функции
 noe_client_nat_unloadArea = {
 	params ["_areaObj"];
+	_areaObj setv(state,NAT_LOADING_STATE_NOT_LOADED);
+	traceformat("Unloading area %1",_areaObj)
 	//TODO unloading chunks in area
 };
 

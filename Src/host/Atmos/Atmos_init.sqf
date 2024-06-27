@@ -5,14 +5,10 @@
 
 
 #include "..\engine.hpp"
+#include "..\ServerRpc\serverRpc.hpp"
 #include "..\GameObjects\GameConstants.hpp"
 #include "Atmos.hpp"
 #include "Atmos.h"
-
-#ifndef rpcSendToClient
-	#define rpcSendToClient(a,b,c) 
-	#define rpcAdd(a,b) 
-#endif
 
 #include "Atmos_shared.sqf"
 
@@ -34,6 +30,7 @@ atmos_chunks_uniqIdx = 0;
 //returns chunk by id, creates new if not exists
 atmos_getChunkAtChId = {
 	params ["_chId"];
+	assert(equalTypes(_chId,[]));
 	private _strKey = str _chId;
 	if !(_strKey in atmos_map_chunks) then {
 		private _chObj = ["AtmosChunk",[_chId]] call struct_alloc; //newParams(AtmosChunk,[_chId]);
@@ -42,7 +39,7 @@ atmos_getChunkAtChId = {
 		//checking area and register in area
 		private _aDat = [_chId call atmos_chunkIdToAreaId] call atmos_getAreaAtAid;
 		(_aDat select ATMOS_AREA_INDEX_CHUNKS) pushBack _chObj;
-		_chObj set ["area",["SafeRef",[_aDat]] call struct_alloc];
+		_chObj set ["areaSR",["SafeRef",[_aDat]] call struct_alloc];
 	};
 	atmos_map_chunks get _strKey
 };
@@ -50,6 +47,7 @@ atmos_getChunkAtChId = {
 //returns chunk by id
 atmos_getChunkAtChIdUnsafe = {
 	params ["_chId"];
+	assert(equalTypes(_chId,[]));
 	private _strKey = str _chId;
 	atmos_map_chunks get _strKey //can return null
 };
@@ -57,6 +55,7 @@ atmos_getChunkAtChIdUnsafe = {
 //returns area by id
 atmos_getAreaAtAid = {
 	params ["_aid"];
+	assert(equalTypes(_aid,[]));
 	private _strkey = str _aid;
 	if !(_strkey in atmos_map_chunkAreas) then {
 		atmos_map_chunkAreas set [_strkey,ATMOS_AREA_NEW];
@@ -64,22 +63,22 @@ atmos_getAreaAtAid = {
 	atmos_map_chunkAreas get _strkey
 };
 
-
+//обработка запроса зоны от клиента
 atmos_rpc_requestGetArea = {
 	params ["_cli","_ar","_lastUpd"];
 	
-	private _aO = _ar call atmos_getAreaAtAid;
+	private _aDat = [_ar] call atmos_getAreaAtAid;
 	private _packet = [_ar select 0,_ar select 1,_ar select 2];
 
-	_packet pushBack (_aO select ATMOS_AREA_INDEX_LASTUPDATE);
+	_packet pushBack (_aDat select ATMOS_AREA_INDEX_LASTUPDATE);
 	
 	//генерируем пакет
-	[_packet,_aO select ATMOS_AREA_INDEX_CHUNKS,_lastUpd] call atmos_internal_generatePacket;
+	[_packet,_aDat select ATMOS_AREA_INDEX_CHUNKS,_lastUpd] call atmos_internal_generatePacket;
 
 	rpcSendToClient(_cli,"cuar",_packet);
 
 	//добавляем netid клиента к владельцам
-	(_aO select ATMOS_AREA_INDEX_CLIENTS) pushBackUnique _cli;
+	(_aDat select ATMOS_AREA_INDEX_CLIENTS) pushBack _cli;
 };
 rpcAdd("salr",atmos_rpc_requestGetArea);
 
@@ -94,7 +93,7 @@ atmos_internal_generatePacket = {
 
 atmos_onUpdateAreaByChunk = {
 	params ["_chObj"];
-	private _aDat = _chObj get "area";
+	private _aDat = _chObj get "areaSR" call ["getValue"];
 	private _lupd = tickTime;
 	_aDat set [ATMOS_AREA_INDEX_LASTUPDATE,_lupd];
 	_chObj set ["lastUpd",_lupd];
@@ -123,14 +122,15 @@ atmos_createProcess = {
 
 	private _m = _atmCh get _fNameStore;
 	if isNullVar(_m) then {
-		private _at = [_procType] call struct_alloc;
-		_at set ["chunk",_atmCh];
-		_atmCh set [_fNameStore,_at];
-		(_atmCh get "aObj") set [_aObjOffset,_at];
+		//private _at = [_procType,"_chId"] call struct_alloc;
+		//_m = _at;
+		_m = _atmCh call ["registerArea",[_procType,_fNameStore,_aObjOffset]];
 		[_atmCh] call atmos_onUpdateAreaByChunk;
 		//private _areaDat = (_atmCh get "area");
 		//TODO push packet in next call
 	};
+
+	_m
 };
 
 atmos_imap_process_t = createHashMapFromArray [

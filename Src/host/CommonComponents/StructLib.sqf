@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-#include "..\host.hpp"
+#include "..\engine.hpp"
 #include "..\struct.hpp"
 
 //! not supported
@@ -47,13 +47,11 @@ struct(SafeRef)
 
 	def(init)
 	{
-		params ['_obj']
+		params ['_obj'];
 		private _curi = sref_i;
 		self setv(iptr, _curi);
 		sref_cont set [_curi,_obj];
-		sref_i = _curi + 1;
-		getv(func)
-		
+		sref_i = _curi + 1;		
 	}
 	def(releaseRef)
 	{

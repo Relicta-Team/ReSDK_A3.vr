@@ -109,6 +109,7 @@ if (!isServer) then {
 
 spi_lst = []; //preinit structures list
 vtable_s = createHashMap;
+struct_default_flag = ["unscheduled"];
 struct_initialize = {
 
 	#define STRUCT_MEM_TYPE "#type"
@@ -123,7 +124,15 @@ struct_initialize = {
 	private _decl = null;
 	//first pass - creating vtable and setup into vtable map
 	private _bmap = createHashMap;
+	private _undefFields = null;
 	{
+		//fill all fields with null values
+		_undefFields = _x select {count _x==1};
+		{
+			_x append [nil];
+			;false
+		} count _undefFields;
+
 		_decl = createHashMapFromArray _x;
 		_t = _decl deleteAt "init";
 		if !isNullVar(_t) then {
@@ -162,8 +171,12 @@ struct_initialize = {
 };
 
 struct_alloc = {
-	params ["_s",["_params",[]]];
-	createHashMapObject [vtable_s get _s,_params];
+	params ["_s","_params"];
+	if isNullVar(_params) then {
+		createHashMapObject [vtable_s get _s]
+	} else {
+		createHashMapObject [vtable_s get _s,_params]
+	};
 };
 
 allThreads = []; //init thread pool

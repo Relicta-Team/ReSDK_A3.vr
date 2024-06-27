@@ -9,7 +9,7 @@ clistat_isEnabled = false;
 clistat_widgets = [widgetNull,widgetNull,widgetNull];
 
 _gui = getGUI;
-private _ctg = [_gui,WIDGETGROUP,[0,50,20,50]] call createWidget;
+private _ctg = [_gui,WIDGETGROUP,[0,40,20,60]] call createWidget;
 _ctg ctrlShow false;
 
 _back = [_gui,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
@@ -92,6 +92,12 @@ clistat_buffer = [
 		_dt = (["{%1,%2,%3}=%4"]+clistat_internal_allch_buffer);
 		_dt pushBack _all;
 		format _dt
+	}],
+	[colortext(57D4AC,"NAT:"),{
+		#include "..\NOEngineClient\NOEngineClient_NetAtmos.hpp"
+		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;
+		_state = _ar get "state";
+		format["st:%1(%2)",NAT_LOADING_SLIST_STATES select (_state+1),_state]
 	}],
 	[colortext(5D56DB,"Receiver in world:"),{count vs_allWorldRadios}],
 	[colortext(5D56DB,"TF local transport:"),{count vs_processingRadiosList}],

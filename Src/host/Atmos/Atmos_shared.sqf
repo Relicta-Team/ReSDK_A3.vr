@@ -125,7 +125,8 @@ atmos_getAroundAreas = {
 		//center+1|-1
 		[0,0,1],
 		[0,0,-1]
-	]
+	];
+	_l
 };
 
 //! only for local chunk pos
