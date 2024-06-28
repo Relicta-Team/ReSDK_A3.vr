@@ -8,7 +8,7 @@
 #define STRUCT_USE_ALLOC_INFO
 
 /*
-	Structures are dynamic faster objects with automatically memory management
+	Structures are dynamic faster than locations objects with automatically memory management
 
 	struct(Struct1) base(StructBase)
 		def(testvar) 1;
@@ -21,14 +21,8 @@
 	endstruct
 
 	_o = struct_new(TestStructure);
-
-	//_o sc(method);
-	//_o scp(method,1 arg 2 arg 3);
-	//_o fn(method)
-	//_o fnp(method,2 arg 3 arg 4)
 	_o callv(method);
 	_o callp(method,1 arg 2);
-	
 	_o getv(mem)
 	_o setv(mem,1)
 
@@ -56,6 +50,19 @@
 		"#base": Array or HashMap - declaration of base class for inheritance
 		"#type": Any - can be used to give a object a "type name", on inheritance types will be merged into an Array
 
+	! Внимание !
+	При создании структур с переменными все их значения располагаются по одному адресу в памяти.
+	Это актуально как для ссылочных типов,так и для типов значений.
+	Т.е. мы можем использовать константы как значения, получаемые без накладных расходов на доп вызов кода
+
+	! Внимание 2 !
+	? Вероятнее всего (нужно проверить) хэшобъекты не могут возвращать значение в переменную с помощью exitWith
+	def(test) {params["_d"]; if(true) exitWith {123}}
+
+	_o = ...
+	private _var = _o call ["test",["hello"]];
+	assert(!isNullVar(_var)) //!выбросит исключение...
+
 */
 #define STRUCT_MEM_TYPE "#type"
 #define STRUCT_MEM_BASE "#base"
@@ -81,6 +88,8 @@
 #define callv(methodname) call [#methodname]
 //call functions with parameters
 #define callp(methodname,params) call [#methodname,[params]]
+//call base version of any method
+#define callbase(methodname) _this call(missionnamespace getvariable ("pts_"+(self GET STRUCT_MEM_TYPE select 1)) GET #methodname)
 
 //variables management
 #define getv(memname) get #memname

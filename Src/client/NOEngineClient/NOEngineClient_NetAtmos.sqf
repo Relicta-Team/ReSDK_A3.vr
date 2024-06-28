@@ -89,31 +89,73 @@ noe_client_nat_requestLoad = {
 		_areaObj get "areaId",
 		_areaObj get "lastUpd"
 	];
-	rpcSendToServer("salr",_packet);
+	rpcSendToServer(ATMOS_RPC_SERVER_REQUEST_AREA,_packet);
+};
+
+noe_client_nat_requestDelExpired = {
+	params ["_areaObj","_newTick"];
+	_areaObj setv(lastDel,_newTick);
+	private _idList = _areaObj callv(getChunkIdList);
+	private _packet = [
+		clientOwner,
+		_areaObj get "areaId",
+		_idList
+	];
+	rpcSendToServer(ATMOS_RPC_SERVER_DELETE_EXPIRED_CHUNKS,_packet);
 };
 
 //ответ от сервера
 noe_client_nat_onLoadArea = {
 	private _packet = _this;
+	assert(count _packet > 3);
 	_aid = _packet select [0,3];
 	_packet deleteRange [0,3];
 	_upd = _packet deleteAt 0;
+	_del = 0;
+	_isUpdate = false;
+
+	//правила кодирования подразумеваю что если z зоны меньше нуля 
+	// то следующий после отметки времени элемент отметка удаления
+	if (_upd >= 0) then {
+		_del = _packet deleteAt 0;
+	} else {
+		//так же если это отрицательное число то это обновление
+		_upd = abs _upd;
+		_isUpdate = true;
+	};
+
 	assert_str((count _packet) % 2 == 0,"Packet must be even items count");
 
 	_aObj = [_aid] call noe_client_nat_getArea;
-	_aObj setv(state,NAT_LOADING_STATE_LOADING);
+	
+	assert_str(_isUpdate == (_aObj callv(isLoaded)),"Internal update atmos area logic error; State was " + (str (_aObj getv(state))));
+	
+	if (!_isUpdate) then {
+		_aObj setv(state,NAT_LOADING_STATE_LOADING);
+	};
 
 	_addList = [];
 	_remList = [];
 	if ([_packet,_addList,_remList] call noe_client_nat_decodePacket) then {
-		[_aObj,_addList] call noe_client_nat_loadVisualArea;
+		[_aObj,_addList,_isUpdate] call noe_client_nat_loadArea;
 		[_aObj,_remList] call noe_client_nat_deleteChunks;
+		
+		if (_isUpdate) exitWith {};
+
 		_aObj setv(state,NAT_LOADING_STATE_LOADED);
+
+		if (_del > 0 && {_del != (_aObj getv(lastDel))}) then {
+			[_aObj,_del] call noe_client_nat_requestDelExpired;
+		};
 	} else {
+		errorformat("Error on unpack atmos area: " + (str _aObj));
+		
+		if (_isUpdate) exitWith {};
+
 		_aObj setv(state,NAT_LOADING_STATE_ERROR);
 	};
 };
-rpcAdd("cuar",noe_client_nat_onLoadArea);
+rpcAdd(ATMOS_RPC_CLIENT_UPDATE_CHUNK,noe_client_nat_onLoadArea);
 
 //декодирование пакета в массивы запросов
 noe_client_nat_decodePacket = {
@@ -126,7 +168,7 @@ noe_client_nat_decodePacket = {
 	private _chIdLoc = -1;
 	private _cmd = null;
 	for "_i" from 0 to _buffLen-1 step 2 do {
-		_chIdLoc = [_buff select _i] call atmos_decodeChId;
+		_chIdLoc = _buff select _i;
 		_cmd = _buff select (_i+1);
 		if (_cmd==-1) then {
 			_remList pushBack _chIdLoc;
@@ -138,19 +180,40 @@ noe_client_nat_decodePacket = {
 	true
 };
 
-noe_client_nat_loadVisualArea = {
-	params ["_aObj","_arrChDat"];//_arrChDat<localChId,cmd_t>
+//обновление и загрузка зоны
+noe_client_nat_loadArea = {
+	params ["_aObj",["_arrChDat",[]],["_isUpdateFlag",false]];//_arrChDat<locid,cmd_t>
 	{
-		_aObj call ["loadChunkEffect",_x];
+		_aObj call ["registerEffects",_x];
 	} foreach _arrChDat;
+
+	if (!_isUpdateFlag) then {
+		_aObj call ["loadArea"];
+	};
+};
+
+noe_client_nat_deleteChunks = {
+	params ["_aObj","_arrChIds"];//_arrChIds<locid>
+	{
+		_aObj callp(deleteChunk,_x);
+	} foreach _arrChIds;
 };
 
 //выгрузка зоны. обращаю внимание, что проверка состояния загруженности должна производиться снаружи функции
 noe_client_nat_unloadArea = {
 	params ["_areaObj"];
 	_areaObj setv(state,NAT_LOADING_STATE_NOT_LOADED);
-	traceformat("Unloading area %1",_areaObj)
-	//TODO unloading chunks in area
+	_areaObj call ["unloadArea"];
+	[_areaObj] call noe_client_nat_unsubscribeArea;
+	//traceformat("Unloading area %1",_areaObj)
+};
+
+//снятие клиента с прослушки зоны
+noe_client_nat_unsubscribeArea = {
+	params ["_areaObj"];
+	private _aid = _areaObj getv(areaId);
+	private _upacket = [clientOwner,_aid];
+	rpcSendToServer(ATMOS_RPC_CLIENT_UNSUBSCRIBE_LISTEN_CHUNK,_upacket)
 };
 
 //-------------------------------------------

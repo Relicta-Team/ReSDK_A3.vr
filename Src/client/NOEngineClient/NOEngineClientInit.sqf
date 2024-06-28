@@ -7,6 +7,8 @@
 #include <..\..\host\NOEngine\NOEngine.hpp>
 #include "..\..\host\NOEngine\NOEngine_Shared.sqf"
 #include <..\..\host\NOEngine\NOEngine_SharedTransportLevel.hpp>
+#include <..\..\host\Atmos\Atmos.hpp>
+#include <..\..\host\Atmos\Atmos_shared.sqf>
 #include <..\ClientRpc\clientRpc.hpp>
 
 #include <NOEngineClient.h>

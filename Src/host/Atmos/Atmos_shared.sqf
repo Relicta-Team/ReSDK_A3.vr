@@ -42,7 +42,7 @@ atmos_getPosByAreaId = {
 		(_x - ATMOS_START_INDEX) * ATMOS_AREA_SIZE,
 		(_y - ATMOS_START_INDEX) * ATMOS_AREA_SIZE,
 		(_z - ATMOS_START_INDEX) * ATMOS_AREA_SIZE
-	]
+	] vectoradd [ATMOS_AREA_SIZE/2,ATMOS_AREA_SIZE/2,ATMOS_AREA_SIZE/2]
 };
 
 // Получение локального айди чанка для зоны
@@ -61,7 +61,7 @@ atmos_getLocalChunkIdInArea = {
 	]
 };
 
-//TODO check working
+// Возвращает айди чанка по зоне
 atmos_localChunkIdToGlobal = {
     params ["_arId", "_locChId"];
 	_arId params ["_areaX", "_areaY", "_areaZ"];
@@ -78,9 +78,9 @@ atmos_localChunkIdToGlobal = {
     ];
 
     // Вычисляем глобальные координаты чанка
-    private _globalChunkX = (_areaPos select 0) + (_localChunkX - 1);
-    private _globalChunkY = (_areaPos select 1) + (_localChunkY - 1);
-    private _globalChunkZ = (_areaPos select 2) + (_localChunkZ - 1);
+    private _globalChunkX = (_areaPos select 0) + (_localChunkX);
+    private _globalChunkY = (_areaPos select 1) + (_localChunkY);
+    private _globalChunkZ = (_areaPos select 2) + (_localChunkZ);
 
     // Возвращаем глобальный идентификатор чанка
     [_globalChunkX, _globalChunkY, _globalChunkZ]

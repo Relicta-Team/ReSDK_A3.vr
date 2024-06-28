@@ -9,10 +9,13 @@
 #include "..\GameObjects\GameConstants.hpp"
 #include "Atmos.hpp"
 #include "Atmos.h"
-
+#include "Atmos_raycasts.sqf"
 #include "Atmos_shared.sqf"
+#include "Atmos_spreading.sqf"
 
 #ifdef EDITOR
+	loadFile("src\host\Atmos\Atmos_debug.sqf");
+
 	if !isNull(atmos_map_chunks) then {
 		//{delete(_x)} foreach (values atmos_map_chunks);
 	};
@@ -71,16 +74,17 @@ atmos_rpc_requestGetArea = {
 	private _packet = [_ar select 0,_ar select 1,_ar select 2];
 
 	_packet pushBack (_aDat select ATMOS_AREA_INDEX_LASTUPDATE);
+	_packet pushBack (_aDat select ATMOS_AREA_INDEX_LASTDELETE);
 	
 	//генерируем пакет
 	[_packet,_aDat select ATMOS_AREA_INDEX_CHUNKS,_lastUpd] call atmos_internal_generatePacket;
 
-	rpcSendToClient(_cli,"cuar",_packet);
+	rpcSendToClient(_cli,ATMOS_RPC_CLIENT_UPDATE_CHUNK,_packet);
 
 	//добавляем netid клиента к владельцам
 	(_aDat select ATMOS_AREA_INDEX_CLIENTS) pushBack _cli;
 };
-rpcAdd("salr",atmos_rpc_requestGetArea);
+rpcAdd(ATMOS_RPC_SERVER_REQUEST_AREA,atmos_rpc_requestGetArea);
 
 atmos_internal_generatePacket = {
 	params ["_packet","_chObjList","_lastUpd"];
@@ -91,6 +95,28 @@ atmos_internal_generatePacket = {
 	} foreach _chObjList;
 };
 
+atmos_rpc_validateExpiredChunks = {
+	params ["_cli","_ar","_listIds"];
+	private _aDat = [_ar] call atmos_getAreaAtAid;
+	private _idListActual = (_aDat select ATMOS_AREA_INDEX_CHUNKS) apply {_x get "chNum"};
+	private _packet = [
+		_ar select 0,
+		_ar select 1,
+		_ar select 2,
+		-(_aDat select ATMOS_AREA_INDEX_LASTUPDATE) //нам не нужна отметка последнего удаления
+	];
+	private _baseCount = count _packet;
+	{
+		_packet append [_x,-1];
+	} count (_listIds - _idListActual);
+	
+	if (count _packet > _baseCount) then {
+		rpcSendToClient(_cli,ATMOS_RPC_CLIENT_UPDATE_CHUNK,_packet);	
+	};
+	
+};
+rpcAdd(ATMOS_RPC_SERVER_DELETE_EXPIRED_CHUNKS,atmos_rpc_validateExpiredChunks);
+
 atmos_onUpdateAreaByChunk = {
 	params ["_chObj"];
 	private _aDat = _chObj get "areaSR" call ["getValue"];
@@ -98,16 +124,30 @@ atmos_onUpdateAreaByChunk = {
 	_aDat set [ATMOS_AREA_INDEX_LASTUPDATE,_lupd];
 	_chObj set ["lastUpd",_lupd];
 	private _aid = _chObj call ["getChunkAreaId"];
-	private _packet = _aid;
+	private _packetS = _aid;
 
-	_packet pushBack _lupd;
+	_packetS pushBack (-_lupd);//это обновление. не загрузка
+	//_packetS pushBack (_aDat select ATMOS_AREA_INDEX_LASTDELETE);
+	
+	assert(count _packetS == 4);
 
-	_packet append (_chObj call ["getPacket"]);
+	_packetS append (_chObj call ["getPacket"]);
 
 	{
-		rpcSendToClient(_x,"cuar",_packet);
+		rpcSendToClient(_x,ATMOS_RPC_CLIENT_UPDATE_CHUNK,_packetS);
 	} foreach (_aDat select ATMOS_AREA_INDEX_CLIENTS);
 };
+
+atmos_onUnsubscribeClientListening = {
+	params ["_cli","_aId"];
+	private _aDat = [_aId] call atmos_getAreaAtAid;
+	private _cList = (_aDat select ATMOS_AREA_INDEX_CLIENTS);
+	private _idxDel = _cList find _cli;
+	if (_idxDel!=-1) then {
+		_cList deleteAt _idxDel;
+	};
+};
+rpcAdd(ATMOS_RPC_CLIENT_UNSUBSCRIBE_LISTEN_CHUNK,atmos_onUnsubscribeClientListening);
 
 //create new process inside chunk
 atmos_createProcess = {
@@ -121,12 +161,11 @@ atmos_createProcess = {
 	_mapper params ["_fNameStore","_aObjOffset"];
 
 	private _m = _atmCh get _fNameStore;
+	
 	if isNullVar(_m) then {
 		//private _at = [_procType,"_chId"] call struct_alloc;
 		//_m = _at;
 		_m = _atmCh call ["registerArea",[_procType,_fNameStore,_aObjOffset]];
-		[_atmCh] call atmos_onUpdateAreaByChunk;
-		//private _areaDat = (_atmCh get "area");
 		//TODO push packet in next call
 	};
 
@@ -139,6 +178,46 @@ atmos_imap_process_t = createHashMapFromArray [
 	["AtmosAreaWater",	["aWater",2]]
 ];
 
+//----- main update handle -------
+
+atmos_internal_handleUpdate = -1;
+
+//small optimizations
+atmos_cv_ca = ["canActivity"];
+atmos_cv_goch = ["getObjectsInChunk"];
+atmos_cv_oa = ["onActivity"];
+
+atmos_internal_onUpdate = {
+	private _chObj = null;
+	private _aObj = null;
+	private _objInside = null;
+	{
+		_chObj = _y;
+		_objInside = null;
+		
+		{
+			_aObj = _x;
+			if !isNullVar(_aObj) then {
+				if !(_aObj call atmos_cv_ca) then {continue};
+				
+				if isNullVar(_objInside) then {
+					_objInside = _chObj call atmos_cv_goch;
+				};
+				
+				_aObj call atmos_cv_oa;
+
+				{
+					_aObj call ["onObjectContact",_x];
+					false
+				} count _objInside;
+			};
+			false;
+		} count (_chObj get "atmosList");
+		false;
+	} foreach atmos_map_chunks;
+};
+
+atmos_internal_handleUpdate = startUpdate(atmos_internal_onUpdate,ATMOS_MAIN_THREAD_UPDATE_DELAY);
 
 //!================================== WIP ==================================!
 

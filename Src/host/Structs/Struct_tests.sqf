@@ -1,7 +1,11 @@
 
 //for testing use: ["InheritedStruct"] call struct_alloc;
 struct(InheritedStruct) base(TestStruct)
-
+	def(testprint)
+	{
+		logformat("Overriden testprint function for %1",self);
+		callbase(testprint);
+	}
 endstruct
 
 //for testing use: ["TestStruct"] call struct_alloc;

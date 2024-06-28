@@ -50,8 +50,8 @@ noe_registerObject = {
 	//request for update atmos chunk
 	assert_str(!isNullReference(_vis),"Null object in noe::registerObject; ptr -> " + _ptr);
 	private _chAtm = [(getposatl _vis)call atmos_chunkPosToId] call atmos_getChunkAtChIdUnsafe;
-	if !isNullReference(_chAtm) then {
-		setVar(_chAtm,flagUpdObj,true);
+	if !isNullVar(_chAtm) then {
+		_chAtm set ["flagUpdObj",true];
 	};
 };
 
