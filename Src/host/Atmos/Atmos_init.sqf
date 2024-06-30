@@ -74,7 +74,11 @@ atmos_chunkGetNearObjects = {
 	private _mPos = null;
 	{
 		if callFunc(_x,isFlying) then {continue};
-		if isTypeOf(_x,AtmosAreaBase) then {continue};//no affect to area
+		#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+			if isTypeOf(_x,AtmosChunk) then {continue};
+		#else
+			if isTypeOf(_x,AtmosAreaBase) then {continue};//no affect to area
+		#endif
 		if callFunc(_x,isInWorld) then {
 			_mPos = callFunc(_x,getModelPosition);
 			if ATMOS_POS_INSIDE_CHUNK(_mPos,_fromCh) then {
@@ -209,7 +213,11 @@ atmos_getObjectsInChunk = {
 		_startPos = _startPosReal vectorAdd _vs;
 		_endPos = _startPosReal vectorAdd _ve;
 		_tList = [_startPos,_endPos,objNull,objNull,2,null,true] call si_getIntersectObjects;
-		{_objMap set [getVar(_x,pointer),_x];false}count _tList;
+		{
+			if !isNullReference(_x) then { //TODO detect why some objects was nullPtr
+				_objMap set [getVar(_x,pointer),_x];
+			};
+		false}count _tList;
 
 		#ifdef ATMOS_DEBUG_DRAW_CHUNKOBJECTS
 		_s = ATMOS_DEBUG_CREATE_SPHERE(0,1,1);

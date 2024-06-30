@@ -6,7 +6,7 @@
 regScriptEmit(SLIGHT_ATMOS_FIRE_2)
 	[
 		"pt",
-		null,
+		[["atmos_optimize_chunk"]],
 		_emitAlias("Искры")
 		["linkToSrc",[0,0,0]],
 		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,13,2,0],"","Billboard",1,1.5,[0,0,0],[0,0,1.5],1,1.25,1,0.17,[0.1,0.1,0.1,0.1,0.1,0.08,0.08,0.08,0.08,0],[[1,0.3,0.3,-6.5],[1,0.3,0.3,-6],[1,0.3,0.3,-5.5],[1,0.3,0.3,-4.5]],[1000],0.5,0.55,"","","",0,false,-1,[]]],

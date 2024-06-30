@@ -39,6 +39,30 @@ Replaced value:
 File: [host\Atmos\Atmos.h at line 12](../../../Src/host/Atmos/Atmos.h#L12)
 # Atmos.hpp
 
+## ATMOS_MODE_FORCE_OPTIMIZE
+
+Type: constant
+
+Description: prerelease optimize
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\Atmos\Atmos.hpp at line 20](../../../Src/host/Atmos/Atmos.hpp#L20)
+## ATMOS_MODE_SPREAD_FORCE_OPTIMIZE
+
+Type: constant
+
+Description: this value decremented on instance copy of object
+
+
+Replaced value:
+```sqf
+6
+```
+File: [host\Atmos\Atmos.hpp at line 22](../../../Src/host/Atmos/Atmos.hpp#L22)
 ## ATMOS_SIZE
 
 Type: constant
@@ -50,7 +74,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\Atmos\Atmos.hpp at line 17](../../../Src/host/Atmos/Atmos.hpp#L17)
+File: [host\Atmos\Atmos.hpp at line 25](../../../Src/host/Atmos/Atmos.hpp#L25)
 ## ATMOS_SIZE_HALF
 
 Type: constant
@@ -62,7 +86,7 @@ Replaced value:
 ```sqf
 0.5
 ```
-File: [host\Atmos\Atmos.hpp at line 18](../../../Src/host/Atmos/Atmos.hpp#L18)
+File: [host\Atmos\Atmos.hpp at line 26](../../../Src/host/Atmos/Atmos.hpp#L26)
 ## ATMOS_SIZE_HALF_OFFSET
 
 Type: constant
@@ -74,7 +98,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [host\Atmos\Atmos.hpp at line 19](../../../Src/host/Atmos/Atmos.hpp#L19)
+File: [host\Atmos\Atmos.hpp at line 27](../../../Src/host/Atmos/Atmos.hpp#L27)
 ## ATMOS_PROPAGATION_SIDE_MAX_COUNT
 
 Type: constant
@@ -86,7 +110,7 @@ Replaced value:
 ```sqf
 6
 ```
-File: [host\Atmos\Atmos.hpp at line 22](../../../Src/host/Atmos/Atmos.hpp#L22)
+File: [host\Atmos\Atmos.hpp at line 30](../../../Src/host/Atmos/Atmos.hpp#L30)
 ## ATMOS_ADDITIONAL_RANGE_XY
 
 Type: constant
@@ -98,7 +122,7 @@ Replaced value:
 ```sqf
 rand(-0.25, 0.25)
 ```
-File: [host\Atmos\Atmos.hpp at line 24](../../../Src/host/Atmos/Atmos.hpp#L24)
+File: [host\Atmos\Atmos.hpp at line 32](../../../Src/host/Atmos/Atmos.hpp#L32)
 ## ATMOS_ADDITIONAL_RANGE_Z
 
 Type: constant
@@ -110,7 +134,7 @@ Replaced value:
 ```sqf
 rand(-0.1, 0.1)
 ```
-File: [host\Atmos\Atmos.hpp at line 25](../../../Src/host/Atmos/Atmos.hpp#L25)
+File: [host\Atmos\Atmos.hpp at line 33](../../../Src/host/Atmos/Atmos.hpp#L33)
 ## ATMOS_SEARCH_MODE_GET_COUNT
 
 Type: constant
@@ -122,7 +146,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\Atmos\Atmos.hpp at line 29](../../../Src/host/Atmos/Atmos.hpp#L29)
+File: [host\Atmos\Atmos.hpp at line 37](../../../Src/host/Atmos/Atmos.hpp#L37)
 ## ATMOS_SEARCH_MODE_FIRST_INTERSECT
 
 Type: constant
@@ -134,7 +158,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\Atmos\Atmos.hpp at line 31](../../../Src/host/Atmos/Atmos.hpp#L31)
+File: [host\Atmos\Atmos.hpp at line 39](../../../Src/host/Atmos/Atmos.hpp#L39)
 ## ATMOS_SEARCH_MODE_NO_INTERSECT
 
 Type: constant
@@ -146,7 +170,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\Atmos\Atmos.hpp at line 33](../../../Src/host/Atmos/Atmos.hpp#L33)
+File: [host\Atmos\Atmos.hpp at line 41](../../../Src/host/Atmos/Atmos.hpp#L41)
 ## ATMOS_SEARCH_MODE_GET_VOBJECTS
 
 Type: constant
@@ -158,7 +182,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\Atmos\Atmos.hpp at line 35](../../../Src/host/Atmos/Atmos.hpp#L35)
+File: [host\Atmos\Atmos.hpp at line 43](../../../Src/host/Atmos/Atmos.hpp#L43)
 ## ATMOS_SPREAD_MODE_NORMAL
 
 Type: constant
@@ -170,7 +194,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\Atmos\Atmos.hpp at line 39](../../../Src/host/Atmos/Atmos.hpp#L39)
+File: [host\Atmos\Atmos.hpp at line 47](../../../Src/host/Atmos/Atmos.hpp#L47)
 ## ATMOS_SPREAD_MODE_XY_ANGLES
 
 Type: constant
@@ -182,7 +206,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\Atmos\Atmos.hpp at line 40](../../../Src/host/Atmos/Atmos.hpp#L40)
+File: [host\Atmos\Atmos.hpp at line 48](../../../Src/host/Atmos/Atmos.hpp#L48)
 ## ATMOS_SPREAD_MODE_NO_Z
 
 Type: constant
@@ -194,7 +218,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\Atmos\Atmos.hpp at line 41](../../../Src/host/Atmos/Atmos.hpp#L41)
+File: [host\Atmos\Atmos.hpp at line 49](../../../Src/host/Atmos/Atmos.hpp#L49)
 # Atmos_ChunkStruct.sqf
 
 ## ATMOS_DEBUG_TRY_IGNITE
@@ -208,7 +232,7 @@ Replaced value:
 ```sqf
 atmos_debug_ignite_ptr
 ```
-File: [host\Atmos\Atmos_ChunkStruct.sqf at line 55](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L55)
+File: [host\Atmos\Atmos_ChunkStruct.sqf at line 63](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L63)
 ## ignite_info(v)
 
 Type: constant
@@ -222,7 +246,7 @@ Replaced value:
 ```sqf
 if equals(atmos_debug_ignite_ptr,getVar(_obj,pointer)) then {logformat("atmos::tryIgnite() [%1] - %2",_obj arg v)};
 ```
-File: [host\Atmos\Atmos_ChunkStruct.sqf at line 61](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L61)
+File: [host\Atmos\Atmos_ChunkStruct.sqf at line 69](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L69)
 ## ignite_info(v)
 
 Type: constant
@@ -236,7 +260,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Atmos\Atmos_ChunkStruct.sqf at line 64](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L64)
+File: [host\Atmos\Atmos_ChunkStruct.sqf at line 72](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L72)
 ## atmos_debug_ignite_ptr
 
 Type: Variable
@@ -250,7 +274,7 @@ Initial value:
 ```sqf
 ""
 ```
-File: [host\Atmos\Atmos_ChunkStruct.sqf at line 62](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L62)
+File: [host\Atmos\Atmos_ChunkStruct.sqf at line 70](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L70)
 ## atmos_getChunkAtChId
 
 Type: function
@@ -266,7 +290,7 @@ Type: function
 Description: 
 - Param: _chId
 
-File: [host\Atmos\Atmos_ChunkStruct.sqf at line 27](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L27)
+File: [host\Atmos\Atmos_ChunkStruct.sqf at line 35](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L35)
 ## atmos_createProcess
 
 Type: function
@@ -277,7 +301,7 @@ Description: create atmos effect (fire,smoke etc)
 - Param: _manualCreate (optional, default false)
 - Param: _initialGas (optional, default ['"GasBase"', '1'])
 
-File: [host\Atmos\Atmos_ChunkStruct.sqf at line 34](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L34)
+File: [host\Atmos\Atmos_ChunkStruct.sqf at line 42](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L42)
 ## atmos_tryIgnite
 
 Type: function
@@ -285,7 +309,7 @@ Type: function
 Description: попытка зажечь область при нахождении предметов рядом
 - Param: _obj
 
-File: [host\Atmos\Atmos_ChunkStruct.sqf at line 68](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L68)
+File: [host\Atmos\Atmos_ChunkStruct.sqf at line 76](../../../Src/host/Atmos/Atmos_ChunkStruct.sqf#L76)
 # Atmos_debug.sqf
 
 ## ATMOS_DEBUG_CREATE_SPHERE(_r,_g,_b)
@@ -316,7 +340,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [host\Atmos\Atmos_debug.sqf at line 182](../../../Src/host/Atmos/Atmos_debug.sqf#L182)
+File: [host\Atmos\Atmos_debug.sqf at line 188](../../../Src/host/Atmos/Atmos_debug.sqf#L188)
 ## atmos_debug_onupdate_handle_internal
 
 Type: Variable
@@ -330,7 +354,7 @@ Initial value:
 ```sqf
 startUpdate(atmos_debug_onupdate_internal,0)
 ```
-File: [host\Atmos\Atmos_debug.sqf at line 190](../../../Src/host/Atmos/Atmos_debug.sqf#L190)
+File: [host\Atmos\Atmos_debug.sqf at line 196](../../../Src/host/Atmos/Atmos_debug.sqf#L196)
 ## atmos_debug_handle_getObjInChunk
 
 Type: Variable
@@ -344,7 +368,7 @@ Initial value:
 ```sqf
 startUpdate(atmos_debug_onupdate_getObjInChunk,0)
 ```
-File: [host\Atmos\Atmos_debug.sqf at line 194](../../../Src/host/Atmos/Atmos_debug.sqf#L194)
+File: [host\Atmos\Atmos_debug.sqf at line 200](../../../Src/host/Atmos/Atmos_debug.sqf#L200)
 ## atmos_debug_drawCurrentZone
 
 Type: function
@@ -368,7 +392,7 @@ Type: function
 Description: 
 
 
-File: [host\Atmos\Atmos_debug.sqf at line 136](../../../Src/host/Atmos/Atmos_debug.sqf#L136)
+File: [host\Atmos\Atmos_debug.sqf at line 142](../../../Src/host/Atmos/Atmos_debug.sqf#L142)
 ## atmos_debug_onupdate_getObjInChunk
 
 Type: function
@@ -376,7 +400,7 @@ Type: function
 Description: 
 
 
-File: [host\Atmos\Atmos_debug.sqf at line 146](../../../Src/host/Atmos/Atmos_debug.sqf#L146)
+File: [host\Atmos\Atmos_debug.sqf at line 152](../../../Src/host/Atmos/Atmos_debug.sqf#L152)
 # Atmos_init.sqf
 
 ## ATMOS_DEBUG_DRAW_INTERSECT_SPHERE
@@ -397,7 +421,7 @@ _qResult = ([_x arg _destPosList select _foreachIndex] call si_getIntersectData)
 			__ATMOS_DEBUG_SPHERE_INIT(0,1,0) \
 		};
 ```
-File: [host\Atmos\Atmos_init.sqf at line 247](../../../Src/host/Atmos/Atmos_init.sqf#L247)
+File: [host\Atmos\Atmos_init.sqf at line 255](../../../Src/host/Atmos/Atmos_init.sqf#L255)
 ## __ATMOS_DEBUG_SPHERE_INIT(r,g,b)
 
 Type: constant
@@ -417,7 +441,7 @@ private _s = ATMOS_DEBUG_CREATE_SPHERE(r,g,ifcheck(_foreachIndex==0,1,b)); atmos
 			_s setposatl ifcheck((_qResult select 1)isequalto vec3(0,0,0),_destPosList select _foreachIndex,_qResult select 1); \
 			_s setvariable ["__index",_foreachIndex];
 ```
-File: [host\Atmos\Atmos_init.sqf at line 254](../../../Src/host/Atmos/Atmos_init.sqf#L254)
+File: [host\Atmos\Atmos_init.sqf at line 262](../../../Src/host/Atmos/Atmos_init.sqf#L262)
 ## exitMethod
 
 Type: constant
@@ -431,7 +455,7 @@ Replaced value:
 ```sqf
 then
 ```
-File: [host\Atmos\Atmos_init.sqf at line 260](../../../Src/host/Atmos/Atmos_init.sqf#L260)
+File: [host\Atmos\Atmos_init.sqf at line 268](../../../Src/host/Atmos/Atmos_init.sqf#L268)
 ## setupValue(v)
 
 Type: constant
@@ -445,7 +469,7 @@ Replaced value:
 ```sqf
 if (!_valueSetupGet) then {v}
 ```
-File: [host\Atmos\Atmos_init.sqf at line 261](../../../Src/host/Atmos/Atmos_init.sqf#L261)
+File: [host\Atmos\Atmos_init.sqf at line 269](../../../Src/host/Atmos/Atmos_init.sqf#L269)
 ## ATMOS_DEBUG_DRAW_INTERSECT_SPHERE
 
 Type: constant
@@ -459,7 +483,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Atmos\Atmos_init.sqf at line 264](../../../Src/host/Atmos/Atmos_init.sqf#L264)
+File: [host\Atmos\Atmos_init.sqf at line 272](../../../Src/host/Atmos/Atmos_init.sqf#L272)
 ## exitMethod
 
 Type: constant
@@ -473,7 +497,7 @@ Replaced value:
 ```sqf
 exitWith
 ```
-File: [host\Atmos\Atmos_init.sqf at line 265](../../../Src/host/Atmos/Atmos_init.sqf#L265)
+File: [host\Atmos\Atmos_init.sqf at line 273](../../../Src/host/Atmos/Atmos_init.sqf#L273)
 ## setupValue(v)
 
 Type: constant
@@ -487,7 +511,7 @@ Replaced value:
 ```sqf
 v
 ```
-File: [host\Atmos\Atmos_init.sqf at line 266](../../../Src/host/Atmos/Atmos_init.sqf#L266)
+File: [host\Atmos\Atmos_init.sqf at line 274](../../../Src/host/Atmos/Atmos_init.sqf#L274)
 ## ATMOS_EXTENDED_INTERSECTION_COUNT
 
 Type: constant
@@ -499,7 +523,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Atmos\Atmos_init.sqf at line 320](../../../Src/host/Atmos/Atmos_init.sqf#L320)
+File: [host\Atmos\Atmos_init.sqf at line 328](../../../Src/host/Atmos/Atmos_init.sqf#L328)
 ## atmos_map_chunks
 
 Type: Variable
@@ -535,7 +559,7 @@ Initial value:
 ```sqf
 call atmos_getVectorsChunkInfo
 ```
-File: [host\Atmos\Atmos_init.sqf at line 184](../../../Src/host/Atmos/Atmos_init.sqf#L184)
+File: [host\Atmos\Atmos_init.sqf at line 188](../../../Src/host/Atmos/Atmos_init.sqf#L188)
 ## atmos_const_aroundChunks
 
 Type: Variable
@@ -547,7 +571,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [host\Atmos\Atmos_init.sqf at line 549](../../../Src/host/Atmos/Atmos_init.sqf#L549)
+File: [host\Atmos\Atmos_init.sqf at line 557](../../../Src/host/Atmos/Atmos_init.sqf#L557)
 ## atmos_const_list_ptrFuncsGetChunks
 
 Type: Variable
@@ -559,7 +583,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [host\Atmos\Atmos_init.sqf at line 594](../../../Src/host/Atmos/Atmos_init.sqf#L594)
+File: [host\Atmos\Atmos_init.sqf at line 602](../../../Src/host/Atmos/Atmos_init.sqf#L602)
 ## atmos_chunkGetNearObjects
 
 Type: function
@@ -575,7 +599,7 @@ Type: function
 Description: 
 
 
-File: [host\Atmos\Atmos_init.sqf at line 107](../../../Src/host/Atmos/Atmos_init.sqf#L107)
+File: [host\Atmos\Atmos_init.sqf at line 111](../../../Src/host/Atmos/Atmos_init.sqf#L111)
 ## atmos_getObjectsInChunk
 
 Type: function
@@ -583,7 +607,7 @@ Type: function
 Description: 
 - Param: _fromCh
 
-File: [host\Atmos\Atmos_init.sqf at line 188](../../../Src/host/Atmos/Atmos_init.sqf#L188)
+File: [host\Atmos\Atmos_init.sqf at line 192](../../../Src/host/Atmos/Atmos_init.sqf#L192)
 ## atmos_getIntersectInfo
 
 Type: function
@@ -594,7 +618,7 @@ Description: возвращает информацию по пересечени
 - Param: _searchMode (optional, default ATMOS_SEARCH_MODE_GET_COUNT)
 - Param: _refOutPos
 
-File: [host\Atmos\Atmos_init.sqf at line 230](../../../Src/host/Atmos/Atmos_init.sqf#L230)
+File: [host\Atmos\Atmos_init.sqf at line 238](../../../Src/host/Atmos/Atmos_init.sqf#L238)
 ## atmos_getIntersectPosList
 
 Type: function
@@ -604,7 +628,7 @@ Description: возвращает точки входа и конца перес
 - Param: _side
 - Param: _fromPos (optional, default true)
 
-File: [host\Atmos\Atmos_init.sqf at line 323](../../../Src/host/Atmos/Atmos_init.sqf#L323)
+File: [host\Atmos\Atmos_init.sqf at line 331](../../../Src/host/Atmos/Atmos_init.sqf#L331)
 ## atmos_onUpdate
 
 Type: function
@@ -612,7 +636,7 @@ Type: function
 Description: 
 
 
-File: [host\Atmos\Atmos_init.sqf at line 433](../../../Src/host/Atmos/Atmos_init.sqf#L433)
+File: [host\Atmos\Atmos_init.sqf at line 441](../../../Src/host/Atmos/Atmos_init.sqf#L441)
 ## atmos_chunkPosToId
 
 Type: function
@@ -622,7 +646,7 @@ Description: convert world postion to virtual chunk id
 - Param: _y
 - Param: _z
 
-File: [host\Atmos\Atmos_init.sqf at line 483](../../../Src/host/Atmos/Atmos_init.sqf#L483)
+File: [host\Atmos\Atmos_init.sqf at line 491](../../../Src/host/Atmos/Atmos_init.sqf#L491)
 ## atmos_chunkIdToPos
 
 Type: function
@@ -632,7 +656,7 @@ Description: returns center atl pos of chunk
 - Param: _iY
 - Param: _iZ
 
-File: [host\Atmos\Atmos_init.sqf at line 494](../../../Src/host/Atmos/Atmos_init.sqf#L494)
+File: [host\Atmos\Atmos_init.sqf at line 502](../../../Src/host/Atmos/Atmos_init.sqf#L502)
 ## atmos_chunkIdGetAround
 
 Type: function
@@ -641,7 +665,7 @@ Description:
 - Param: _chunk
 - Param: _addCurrent (optional, default false)
 
-File: [host\Atmos\Atmos_init.sqf at line 526](../../../Src/host/Atmos/Atmos_init.sqf#L526)
+File: [host\Atmos\Atmos_init.sqf at line 534](../../../Src/host/Atmos/Atmos_init.sqf#L534)
 ## atmos_list_getAroundChunksManaged
 
 Type: function
@@ -649,7 +673,7 @@ Type: function
 Description: 
 
 
-File: [host\Atmos\Atmos_init.sqf at line 558](../../../Src/host/Atmos/Atmos_init.sqf#L558)
+File: [host\Atmos\Atmos_init.sqf at line 566](../../../Src/host/Atmos/Atmos_init.sqf#L566)
 ## atmos_list_getAroundXYChunksManaged
 
 Type: function
@@ -657,7 +681,7 @@ Type: function
 Description: 
 
 
-File: [host\Atmos\Atmos_init.sqf at line 570](../../../Src/host/Atmos/Atmos_init.sqf#L570)
+File: [host\Atmos\Atmos_init.sqf at line 578](../../../Src/host/Atmos/Atmos_init.sqf#L578)
 ## atmos_list_getAroundNoZChunksManaged
 
 Type: function
@@ -665,7 +689,7 @@ Type: function
 Description: 
 
 
-File: [host\Atmos\Atmos_init.sqf at line 585](../../../Src/host/Atmos/Atmos_init.sqf#L585)
+File: [host\Atmos\Atmos_init.sqf at line 593](../../../Src/host/Atmos/Atmos_init.sqf#L593)
 ## atmos_getNextRandAroundChunks
 
 Type: function
@@ -674,7 +698,7 @@ Description: возвращает случайные стороны
 - Param: _count (optional, default 1)
 - Param: _colType (optional, default ATMOS_SPREAD_MODE_NORMAL)
 
-File: [host\Atmos\Atmos_init.sqf at line 601](../../../Src/host/Atmos/Atmos_init.sqf#L601)
+File: [host\Atmos\Atmos_init.sqf at line 609](../../../Src/host/Atmos/Atmos_init.sqf#L609)
 ## atmos_init
 
 Type: function
@@ -682,4 +706,4 @@ Type: function
 Description: run thread updater
 
 
-File: [host\Atmos\Atmos_init.sqf at line 618](../../../Src/host/Atmos/Atmos_init.sqf#L618)
+File: [host\Atmos\Atmos_init.sqf at line 626](../../../Src/host/Atmos/Atmos_init.sqf#L626)

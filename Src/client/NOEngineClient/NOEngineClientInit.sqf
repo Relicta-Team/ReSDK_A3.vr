@@ -19,6 +19,8 @@
 
 #include "NOEngineClient_ObjectManager.sqf"
 
+#include "NOEgnineClient_localAtmos.sqf"
+
 //#include "NOEngineClient_Rendering.sqf"
 
 

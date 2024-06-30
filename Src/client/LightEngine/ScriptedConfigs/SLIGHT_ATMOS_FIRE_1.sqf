@@ -6,7 +6,7 @@
 regScriptEmit(SLIGHT_ATMOS_FIRE_1)
 	[
 		"pt",
-		null,
+		[["atmos_optimize_chunk"]],
 		_emitAlias("Преломление")
 		["linkToSrc",[0,0,0]],
 		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1,0],"","Billboard",1,0.45,[0,0,0],[0,0,0],1,0.8,1,0.1,[0.8,0.5],[[0.3,0.3,0.3,0.01],[0.3,0.3,0.3,0.26],[0.3,0.3,0.3,0.24],[0.3,0.3,0.3,0.22],[0.3,0.3,0.3,0.16],[0.3,0.3,0.3,0.08],[0.3,0.3,0.3,0.02]],[2,1],0.1,0.05,"","","",0,false,-1,[]]],

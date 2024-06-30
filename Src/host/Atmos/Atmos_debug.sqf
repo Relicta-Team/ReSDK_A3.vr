@@ -129,6 +129,12 @@ atmos_debug_drawObjectInfo = {
 	private _pos = callFunc(_aObj,getModelPosition);
 	private _di = callFunc(_aObj,getDeubgInfo);
 	if (_di == "") exitWith {};
+	#ifdef ATMOS_MODE_SIMPLE_VISUALIZATION
+	_di = _di + (format[" lcf:%1-%2",getVar(_aObj,light),getVar(_aObj,lightIsEnabled)]);
+	#endif
+	#ifdef ATMOS_MODE_FORCE_OPTIMIZE
+	_di = _di + (format[" pwr:%1 (isset:%2)",getVar(_aObj,areaPower),!getVar(_aObj,canDecrementAreaPower)]);
+	#endif
 	drawIcon3D ["", [0,1,0,1], _pos, 0, 0, 0, _di
 	, 1, linearConversion [ATMOS_SIZE_HALF*5,ATMOS_SIZE_HALF*2,(asltoatl eyepos player) distance _pos,0.02,0.04,true], "TahomaB"];
 };

@@ -1716,7 +1716,7 @@ region(Fire functionality)
 			#ifdef EDITOR
 			setSelf(__s_nextCheckIgnite,tickTime + 3);
 			#else
-			setSelf(__s_nextCheckIgnite,tickTime + randInt(10,20));
+			setSelf(__s_nextCheckIgnite,tickTime + randInt(40,60*2));
 			#endif
 			[this] call atmos_tryIgnite;
 		};
