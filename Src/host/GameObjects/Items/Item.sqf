@@ -462,6 +462,11 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 			false
 		};
 		if (!_supressThrowErrLoc && {!callFuncParams(_loc,canMoveOutItem,this)}) exitWith {false};
+		
+		if isTypeOf(_loc,Mob) then {
+			callFuncParams(_loc,interpolate,"auto_trans" arg this arg getVar(this,pointer));
+		};
+
 		if (!_supressThrowErrLoc) then {
 			callFuncParams(_loc,onMoveOutItem,this);
 		};

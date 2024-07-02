@@ -742,6 +742,9 @@ func(interpolate)
 			};
 			if isNullVar(_d) exitWith {};
 			private _fS = getVar(_obj,slot);
+			
+			if callSelfParams(isHoldedTwoHands,_obj) exitWith {}; //do not play actions on twohanded anim
+
 			if (_fS==-1) then {
 				private _obj = getVar(_obj,loc);
 				_fS = [getPosAtl _obj,[_obj] call model_getPitchBankYaw];
@@ -837,6 +840,10 @@ func(interpolate)
 					};
 				};
 			} else {
+				//for pointer type
+				if equalTypes(_opt,"") exitWith {
+					_datTo = _opt;
+				};
 				setLastError("Unsupported destination object type");
 			};
 			
