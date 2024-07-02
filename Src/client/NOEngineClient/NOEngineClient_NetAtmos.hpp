@@ -4,7 +4,7 @@
 // ======================================================
 
 //! Отладочная визуализация зон. включать только в редакторе
-#define NAT_DEBUG_ENABLE_VISUAL_HELPER
+//#define NAT_DEBUG_ENABLE_VISUAL_HELPER
 
 #ifndef EDITOR
 	#undef NAT_DEBUG_ENABLE_VISUAL_HELPER

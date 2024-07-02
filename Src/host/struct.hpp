@@ -64,6 +64,11 @@
 	assert(!isNullVar(_var)) //!выбросит исключение...
 
 */
+
+#ifndef EDITOR
+	#undef STRUCT_USE_ALLOC_INFO
+#endif
+
 #define STRUCT_MEM_TYPE "#type"
 #define STRUCT_MEM_BASE "#base"
 #define STRUCT_MEM_TOSTRING "#str"
@@ -76,7 +81,7 @@
 #define base(basename) _sdecl__ pushBack [STRUCT_MEM_BASE, #basename ];
 #define endstruct ;spi_lst pushBack _sdecl__;
 
-#define isinstance(_inst_o,type_n) (type_n in (_inst_o get STRUCT_MEM_TYPE))
+#define isinstance(_inst_o,type_n) (#type_n in (_inst_o get STRUCT_MEM_TYPE))
 
 //define new field or method
 //!all values located for objects of type in one address (reference equals)
@@ -99,11 +104,11 @@
 
 //instansing
 #ifdef STRUCT_USE_ALLOC_INFO
-	#define struct_new(name) (call{_sbj___ = (createHashMapObject [pts_##name]); _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
-	#define struct_newp(name,arglist) (call{_sbj___ = (createHashMapObject [pts_##name,[arglist]]); _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
+	#define struct_new(name) (call{_sbj___ = [ pts_##name ] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
+	#define struct_newp(name,arglist) (call{_sbj___ = [ pts_##name ,[arglist]] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
 #else
-	#define struct_new(name) (createHashMapObject [pts_##name])
-	#define struct_newp(name,arglist) (createHashMapObject [pts_##name,[arglist]])
+	#define struct_new(name) ([ pts_##name ] call struct_iallc)
+	#define struct_newp(name,arglist) ([ pts_##name ,[arglist]] call struct_iallc)
 #endif
 
 //forced delete structure

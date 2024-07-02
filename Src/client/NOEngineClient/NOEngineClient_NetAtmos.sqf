@@ -148,7 +148,7 @@ noe_client_nat_onLoadArea = {
 			[_aObj,_del] call noe_client_nat_requestDelExpired;
 		};
 	} else {
-		errorformat("Error on unpack atmos area: " + (str _aObj));
+		errorformat("Error on unpack atmos area: %1", (str _aObj));
 		
 		if (_isUpdate) exitWith {};
 

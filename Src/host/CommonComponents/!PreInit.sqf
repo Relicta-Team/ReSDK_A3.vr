@@ -171,22 +171,24 @@ struct_initialize = {
 	} foreach _bmap;
 };
 
+VM_COMPILER_ADDFUNC_UNARY(struct_iallc,createHashMapObject);
+
 struct_alloc = {
 	params ["_s","_params"];
+	
 	#ifdef STRUCT_USE_ALLOC_INFO
-		private _s = if isNullVar(_params) then {
-			createHashMapObject [vtable_s get _s]
-		} else {
-			createHashMapObject [vtable_s get _s,_params]
-		};
+	private _s = 
+	#endif
+
+	if isNullVar(_params) then {
+		[vtable_s get _s] call struct_iallc;
+	} else {
+		[vtable_s get _s,_params] call struct_iallc;
+	};
+	
+	#ifdef STRUCT_USE_ALLOC_INFO
 		_s set ["__fileinfo__",'stack:'+(str diag_stacktrace)];
 		_s
-	#else
-		if isNullVar(_params) then {
-			createHashMapObject [vtable_s get _s]
-		} else {
-			createHashMapObject [vtable_s get _s,_params]
-		};
 	#endif
 };
 

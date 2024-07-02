@@ -101,8 +101,9 @@ _owner = if (isServer) then {0} else {clientOwner};
 ["Station"] call ct_load;
 _data = [_owner];
 
-if (!isMultiplayer) then {
-    call struct_initialize; //clientside structures initialization
+//init clientside structures only in mp-mode
+if (isMultiplayer) then {
+    call struct_initialize;
 };
 
 if (!isMultiplayer) then {

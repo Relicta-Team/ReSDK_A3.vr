@@ -21,7 +21,7 @@
 
 #include "NOEngineClient_ObjectManager.sqf"
 
-#include "NOEngineClient_localAtmos.sqf"
+//#include "NOEngineClient_localAtmos.sqf"
 
 #include "NOEngineClient_Interpolation.sqf"
 

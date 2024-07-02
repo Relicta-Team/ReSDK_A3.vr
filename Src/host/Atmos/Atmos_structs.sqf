@@ -19,9 +19,6 @@
 
 */
 
-atmos_chunks = 0;
-atmos_areas = 0;
-
 struct(AtmosChunk)
 	def(chCtr) 0; //chunk counter
 
