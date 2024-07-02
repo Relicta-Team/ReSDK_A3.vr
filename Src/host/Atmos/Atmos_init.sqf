@@ -151,7 +151,7 @@ rpcAdd(ATMOS_RPC_CLIENT_UNSUBSCRIBE_LISTEN_CHUNK,atmos_onUnsubscribeClientListen
 
 //create new process inside chunk
 atmos_createProcess = {
-	params ["_pos","_procType"];
+	params ["_pos","_procType",["_manualCreate",false],["_paramsInit",null]];
 
 	private _chId = _pos call atmos_chunkPosToId;
 	private _atmCh = [_chId] call atmos_getChunkAtChId;
@@ -166,7 +166,12 @@ atmos_createProcess = {
 		//private _at = [_procType,"_chId"] call struct_alloc;
 		//_m = _at;
 		_m = _atmCh call ["registerArea",[_procType,_fNameStore,_aObjOffset]];
+		_m call ["onInitialized",_paramsInit];
 		//TODO push packet in next call
+	};
+
+	if (_manualCreate) then {
+		_m call ["onManualCreated",_paramsInit];
 	};
 
 	_m
@@ -191,9 +196,22 @@ atmos_internal_onUpdate = {
 	private _chObj = null;
 	private _aObj = null;
 	private _objInside = null;
+	private _area = null;
+	private _curLimit = 0;
 	{
 		_chObj = _y;
 		_objInside = null;
+		_area = _chObj call ["getArea"];
+		
+		if ((_area select ATMOS_AREA_INDEX_LASTLIMIT_REACH)>tickTime) then {continue};
+
+		_curLimit = _area select ATMOS_AREA_INDEX_SIM_LIMIT;
+		_area set [ATMOS_AREA_INDEX_SIM_LIMIT,_curLimit-1];
+		if (_curLimit<=0) then {
+			_area set [ATMOS_AREA_INDEX_LASTLIMIT_REACH,tickTime+5];
+			_curLimit = ATMOS_SIMULATION_AREA_LIMIT;
+			_area set [ATMOS_AREA_INDEX_SIM_LIMIT,_curLimit];
+		};
 		
 		{
 			_aObj = _x;

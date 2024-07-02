@@ -6,6 +6,21 @@
 #include "NOEngineClient_NetAtmos.hpp"
 /*
 	Структура зоны атмоса
+
+	Процесс оптимизации происходит следующим образом:
+	При обновлении зоны запускается полная валидация
+	происходит проход по уровням.
+		процесс сортировки:
+		массив уровней собирает айди чанков:
+		[
+			[1,0,0],[1,0,1],[1,2,5] //level 1
+			[2,0,0],[2,0,1],[2,2,5] //level 2
+			null // no chunks at level 3
+			etc...
+		]
+
+		процесс проверки:
+		последовательно создаем зависимости
 */
 
 struct(AtmosAreaClient)
@@ -57,6 +72,8 @@ struct(AtmosAreaClient)
 			self callp(loadChunkInternal,_x);
 			false
 		} count (self callv(getChunkIdList));
+
+		self callv(optimizeRegion);
 	}
 
 	def(unloadArea)
@@ -86,11 +103,10 @@ struct(AtmosAreaClient)
 		_pos = _pos vectorAdd [ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_Z];
 		
 		//creating visuals
-		private _vobj = self callp(_createVisual,_pos arg _basePos);
-		private _lightObj = self callp(_loadLight,_light arg _vobj);
+		private _ltObj = self callp(_createVisual,_light arg _pos arg _basePos);
 		
 		//saving data
-		_cDat set [NAT_CHUNKDAT_OBJECT,_vobj];
+		_cDat set [NAT_CHUNKDAT_OBJECT,_ltObj];
 	}
 
 	//вызывает обновление чанка при загруженной зоне
@@ -99,15 +115,17 @@ struct(AtmosAreaClient)
 		params ["_locid"];
 		private _cDat = self getv(chunks) get _locid;
 		if isNullVar(_cDat) exitWith {};
-		private _obj = _cDat select NAT_CHUNKDAT_OBJECT;
-		if isNullReference(_obj) then {
+		private _ltObj = _cDat select NAT_CHUNKDAT_OBJECT;
+		if isNullVar(_ltObj) then {
 			//create new object
 			self callp(loadChunkInternal,_locid);
 		} else {
 			//update or create light 
-			private _light = _cDat select NAT_CHUNKDAT_CFG;
-			self callp(_loadLight,_light arg _obj);
+			private _ltCfg = _cDat select NAT_CHUNKDAT_CFG;
+			_ltObj callp(updateLight,_ltCfg);
 		};
+
+		self callv(optimizeRegion);
 	}
 
 	def(unloadChunkInternal)
@@ -116,9 +134,10 @@ struct(AtmosAreaClient)
 		private _cDat = self getv(chunks) get _locid;
 		
 		if isNullVar(_cDat) exitWith {};
-		private _obj = _cDat select NAT_CHUNKDAT_OBJECT;
-		if isNullReference(_obj) exitWith {};
-		self callp(_deleteVisual,_obj);
+		private _ltObj = _cDat select NAT_CHUNKDAT_OBJECT;
+		if isNullVar(_ltObj) exitWith {};
+		self callp(_deleteVisual,_ltObj);
+		_cDat set [NAT_CHUNKDAT_OBJECT,null];
 	}
 
 	def(deleteChunk)
@@ -134,22 +153,28 @@ struct(AtmosAreaClient)
 
 	def(_createVisual)
 	{
-		params ["_pos","_basePos"];
+		params ["_light","_pos","_basePos"];
+		#ifdef NAT_DEBUG_ENABLE_VISUAL_HELPER
 		private _vobj = "Sign_Arrow_F" createVehicleLocal [0,0,0];
 		_vobj setvariable ["_basePos",_basePos];
 		_vobj setposatl _pos;
-		_vobj
+		self set ["__debug_visual",_vobj];
+		#endif
+
+		struct_newp(AtmosVirtualLight,_light arg _pos);
 	}
 
 	def(_deleteVisual)
 	{
 		params ["_obj"];
-		[_obj] call le_unloadLight;
-		deleteVehicle _obj;
+		
+		#ifdef NAT_DEBUG_ENABLE_VISUAL_HELPER
+		deleteVehicle (self get "__debug_visual");
+		#endif
 	}
 
 	//load or recreate light
-	def(_loadLight)
+	def(_loadLight_depr)
 	{
 		params ["_light","_obj"];
 		private _lightObj = [_light,_obj] call le_loadLight;
@@ -181,5 +206,155 @@ struct(AtmosAreaClient)
 	def(str)
 	{
 		format["Area%1",self getv(areaId)]
+	}
+
+	def(optimizeRegion)
+	{
+		if (true) exitWith {}; //not optimized...
+
+		//fill leveling
+		private _levels = [];
+		_levels resize (ATMOS_AREA_SIZE+1);//because locid started at 1
+		_levels = _levels apply {[]};
+
+		private _chunks = self getv(chunks);
+		{
+			_chIdLoc = [_x] call atmos_decodeChId;
+			_chIdLevel = _chIdLoc select 0;
+			if isNull(_y select NAT_CHUNKDAT_OBJECT) then {continue};
+
+			_levels select _chIdLevel pushBack [_x,(_y select NAT_CHUNKDAT_OBJECT)];
+			(_y select NAT_CHUNKDAT_OBJECT) callp(setHidden,false);
+		} foreach _chunks;
+
+		_aroundMapper = [+100,-100,+10,-10];
+		_countMapper = count _aroundMapper;
+		_probId = null;
+		{
+			{
+				_x params ["_locid","_ltObj"];
+				if ({
+					_probId = _locid+_x;
+					_probId in _chunks
+					&& {!(_chunks get _probId select NAT_CHUNKDAT_OBJECT callv(isHidden))}
+				} count _aroundMapper == _countMapper) then {
+					{
+						_probId = _locid+_x;
+						_chunks get _probId select NAT_CHUNKDAT_OBJECT callp(setHidden,true);
+					} foreach _aroundMapper;
+				};
+			} foreach _x;
+		} foreach _levels;
+	}
+
+endstruct
+
+
+struct(AtmosVirtualLight)
+	def(effects) null;
+	def(id) -1;
+
+	def(init)
+	{
+		params ["_cfg","_pos"];
+		
+		self callp(loadEmitters,_cfg arg _pos);
+	}
+
+	def(loadEmitters)
+	{
+		params ["_cfg","_pos"];
+		private _funcHandle = {
+			params ["_o","_p","_v","_i"];
+
+			//use le_se_getParticleOption, le_se_setParticleOption for change object options
+		};
+		self setv(effects,[_cfg arg _pos arg _funcHandle] call le_se_createUnmanagedEmitter);
+		self setv(id,_cfg);
+	}
+
+	def(deleteEmitters)
+	{
+		{
+			deleteVehicle _x;
+		} foreach (self getv(effects));
+	}
+
+	def(getEmitterPos)
+	{
+		private _eff = self getv(effects);
+		private _vec3Zero = [0,0,0];
+		if isNullVar(_eff) exitWith {_vec3Zero};
+		if (count _eff == 0) exitWith {_vec3Zero};
+		getPosAtl (_eff select 0)
+	}
+
+	def(setEmitterPos)
+	{
+		params ["_pos"];
+		private _eff = self getv(effects);
+		if isNullVar(_eff) exitWith {};
+		if (count _eff == 0) exitWith {};
+		private _baseObj = _eff select 0;
+		private _basePos = getPosAtl _baseObj;
+		_baseObj setPosAtl _pos;
+		private _offList = [];
+		{
+			_curOffset = _x worldToModelVisual _basePos;
+			_x setPosAtl (_pos vectorAdd _curOffset);
+		} foreach (_eff select [1,count _eff]);
+	}
+
+	def(_unhide_pos) null;
+	def(isHidden) {!isNull(self getv(_unhide_pos))}
+	def(setHidden)
+	{
+		params ["_mode"];
+		if equals(_mode,self callv(isHidden)) exitWith {false};
+
+		if (_mode) then {
+			private _curPos = self callv(getEmitterPos);
+			self setv(_unhide_pos,_curPos);
+			
+			#ifdef NAT_DEBUG_ENABLE_VISUAL_HELPER
+			_s = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
+			_s setObjectTexture [0,"#(rgb,8,8,3)color(1,0,0,1)"];
+			_s setposatl (self callv(getEmitterPos));
+			self setv(__sphereDebugHidden,_s);
+			#endif
+
+			self callp(setEmitterPos,_curPos vectorAdd vec3(0,0,-1000));
+		} else {
+
+			#ifdef NAT_DEBUG_ENABLE_VISUAL_HELPER
+			deleteVehicle (self getv(__sphereDebugHidden));
+			#endif
+
+			self callp(setEmitterPos,(self getv(_unhide_pos)) vectorAdd vec3(0,0,1000));
+			self setv(_unhide_pos,null);
+		};
+
+		true
+	}
+
+	def(del)
+	{
+		self callv(deleteEmitters);
+	}
+	
+	def(updateLight)
+	{
+		params ["_cfg"];
+		private _pos = self callv(getEmitterPos);
+		if equals(_pos,vec3(0,0,0)) exitWith {
+			setLastError("Invalid emitter position; ctx: "+str [self arg self getv(effects) arg count (self getv(effects)) arg _pos]);
+		};
+		self callv(deleteEmitters);
+		self callp(loadEmitters,_cfg arg _pos);
+	}
+
+	def(str)
+	{
+		format["%1-%2",struct_typename(self),self getv(id)]
 	}
 endstruct

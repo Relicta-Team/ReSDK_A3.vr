@@ -99,6 +99,11 @@ clistat_buffer = [
 		_state = _ar get "state";
 		format["st:%1(%2)",NAT_LOADING_SLIST_STATES select (_state+1),_state]
 	}],
+	#ifdef EDITOR
+	[colortext(57D4AC,"ATMOS_SRV: "),{
+		format["R:%1 C:%2 A:%3",count atmos_map_chunkAreas,atmos_chunks,atmos_areas]
+	}],
+	#endif
 	[colortext(5D56DB,"Receiver in world:"),{count vs_allWorldRadios}],
 	[colortext(5D56DB,"TF local transport:"),{count vs_processingRadiosList}],
 	[colortext(1FC4C4,"Cur music: "),{ifcheck(isNull(music_playedObject),"no",music_playedObject get "file")}],

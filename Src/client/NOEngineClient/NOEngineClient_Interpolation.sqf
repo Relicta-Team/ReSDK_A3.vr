@@ -198,6 +198,9 @@ noe_client_interp_determineTransform = {
 		if isNullVar(_obj)exitWith {};
 		if isNullReference(_obj) exitWith {};
 		(_obj getvariable "_pit_lastAttachData") params ["_mSrc","_offset","_selName"];
+		
+		if isNullVar(_offset) exitWith {};
+
 		[_obj,"AUTO_GEN",[_mSrc,_offset,_selName,[_obj] call model_getPitchBankYaw]]
 	};
 	//no compression, just save

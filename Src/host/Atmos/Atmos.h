@@ -20,4 +20,10 @@
 //timestamp of last delete inside area
 #define ATMOS_AREA_INDEX_LASTDELETE 3
 
-#define ATMOS_AREA_NEW [[], [], 0, 0]
+#define ATMOS_AREA_INDEX_SIM_LIMIT 4
+#define ATMOS_AREA_INDEX_LASTLIMIT_REACH 5
+
+#define ATMOS_AREA_NEW [[], [], 0, 0 , ATMOS_SIMULATION_AREA_LIMIT, 0]
+
+
+#define ATMOS_SIMULATION_AREA_LIMIT 50
