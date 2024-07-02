@@ -190,6 +190,11 @@ struct_alloc = {
 	#endif
 };
 
+struct_eraseFull = {
+	params ["_o"];
+	struct_erase(_o)
+};
+
 allThreads = []; //init thread pool
 hashMapNull = createHashMapFromArray [["__NULL_HASH_MAP__","__NULL_HASH_MAP__"]];
 

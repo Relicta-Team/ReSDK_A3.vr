@@ -107,7 +107,8 @@
 #endif
 
 //forced delete structure
-#define struct_free(o) (o SET ["__dflg__",true];{if !(_y isequaltype {})then{o deleteAt _x};}foreach o)
+#define struct_free(o) o SET ["__dflg__",true];{if !(_y isequaltype {})then{o deleteAt _x};}foreach o
+#define struct_erase(o) o SET ["__dflg__",true]; {o deleteAt _x}foreach o
 #define struct_isdeleted(o) (o get "__dflg__")
 //copy of object
 #define struct_copy(rval) (+(rval))
