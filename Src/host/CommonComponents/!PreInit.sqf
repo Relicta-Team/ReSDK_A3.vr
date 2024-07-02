@@ -107,6 +107,7 @@ if (!isServer) then {
 	}];
 };
 
+#include "..\struct.hpp"
 spi_lst = []; //preinit structures list
 vtable_s = createHashMap;
 struct_default_flag = ["unscheduled"];
@@ -172,11 +173,21 @@ struct_initialize = {
 
 struct_alloc = {
 	params ["_s","_params"];
-	if isNullVar(_params) then {
-		createHashMapObject [vtable_s get _s]
-	} else {
-		createHashMapObject [vtable_s get _s,_params]
-	};
+	#ifdef STRUCT_USE_ALLOC_INFO
+		private _s = if isNullVar(_params) then {
+			createHashMapObject [vtable_s get _s]
+		} else {
+			createHashMapObject [vtable_s get _s,_params]
+		};
+		_s set ["__fileinfo__",'stack:'+(str diag_stacktrace)];
+		_s
+	#else
+		if isNullVar(_params) then {
+			createHashMapObject [vtable_s get _s]
+		} else {
+			createHashMapObject [vtable_s get _s,_params]
+		};
+	#endif
 };
 
 allThreads = []; //init thread pool

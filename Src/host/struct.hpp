@@ -99,8 +99,8 @@
 
 //instansing
 #ifdef STRUCT_USE_ALLOC_INFO
-	#define struct_new(name) (call{_sbj___ = (createHashMapObject [pts_##name]); _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']})
-	#define struct_newp(name,arglist) (call{_sbj___ = (createHashMapObject [pts_##name,[arglist]]); _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']})
+	#define struct_new(name) (call{_sbj___ = (createHashMapObject [pts_##name]); _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
+	#define struct_newp(name,arglist) (call{_sbj___ = (createHashMapObject [pts_##name,[arglist]]); _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
 #else
 	#define struct_new(name) (createHashMapObject [pts_##name])
 	#define struct_newp(name,arglist) (createHashMapObject [pts_##name,[arglist]])
