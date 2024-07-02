@@ -33,6 +33,7 @@ smd_list_variables = [
 	["smd_isGrabbed","onGrabbed"], //обработчик граба
 	["smd_visualStates","onVisualStates"], //визуалки (некроз, текущая кровь, горящий чел, марево)
 	["smd_visibility","onVisiblility"],
+	["smd_interp","onInterpolate"], //поднятие и положение предметов
 	["smd_chatMessage","onChatMessage"], //text chat system chatMessage
 	["smd_voiceBlob","onVoiceBlobInit"],
 	["smd_isPrintingSay","onIsPrintingSay"]
@@ -509,6 +510,7 @@ smd_onChangeSlotData = {
 	_mob setvariable [_outVarName,_object];
 };
 
+//проверяет является ли объект смд слотом
 smd_isSMDObjectInSlot = {
 	!isNull(_this getvariable "_pit_lastattachdata")
 };
@@ -603,6 +605,15 @@ smd_hasVisualState = {
 		ifcheck(equalTypes(_x,[]),equals(_x select 0,_state),equals(_x,_state))
 	}) != 1;
 };
+
+smd_onInterpolate = {
+	params ["_mob","_data"];
+	_data = array_copy(_data);
+	private _tick = _data deleteAt 0;
+	if ((netTickTime -_tick)>3) exitWith {};
+	[_mob,_data] call noe_client_interp_start;
+};
+
 
 smd_getObjectInSlot = {
 	params ["_mob","_slot"];

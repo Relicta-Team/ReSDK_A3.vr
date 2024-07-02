@@ -702,6 +702,25 @@ class(GameObject) extends(ManagedObject)
 		_curLoc;
 	};
 
+	//расширенный метод получения базовой локации объекта
+	func(getSourceLocEx)
+	{
+		params ['this',"_owningList"];
+		if isNullVar(_owningList) then {_owningList = []};
+		private _curLoc = this;
+		private _probNewLoc = nullPtr;
+		while {true} do {
+			_probNewLoc = getVar(_curLoc,loc);
+			if (isNullVar(_probNewLoc) || {equalTypes(_probNewLoc,objNUll)}) exitWith {};
+			if callFunc(_probNewLoc,isMob) exitWith {};
+			
+			_curLoc = _probNewLoc;
+			_owningList pushBack _probNewLoc;
+		};
+		if isNullVar(_curLoc) exitWith {nullPtr};
+		_curLoc;
+	};
+
 	//Возвращает позицию объекта
 	getter_func(getModelPosition,getPosATL callSelf(getBasicLoc));
 	getter_func(getModelDirection,getDir callSelf(getBasicLoc));

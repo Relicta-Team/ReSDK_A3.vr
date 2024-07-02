@@ -162,6 +162,13 @@ le_isLoadedLight = {
 	not_equals(_light,objNUll)
 };
 
+le_getLoadedLightCfg = {
+	params ["_obj"];
+	private _light = _obj getvariable ["__light",objNUll];
+	if isNullReference(_light) exitWith {-1};
+	_obj getvariable ["__config",-1]
+};
+
 le_isLightConfig = {
 	_this > 0 && _this <= le_light_max_index
 };

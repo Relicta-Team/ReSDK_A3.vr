@@ -436,6 +436,18 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		if !callFuncParams(_loc,canMoveOutItem,this) exitWith {false};
 		if !callFuncParams(_newlocation,canMoveInItem,this) exitWith {false};
 
+		if callFunc(_newlocation,isMob) then {
+			//transfer item in mob
+			traceformat("transfer item to mob %1",vec3(this,_loc,_newlocation))
+			callFuncParams(_newlocation,interpolate,"auto_trans" arg this arg _newlocation);
+		} else {
+			//transfer item from mob
+			if callFunc(_loc,isMob) then {
+				traceformat("transfer item from mob %1",vec3(this,_loc,_newlocation))
+				callFuncParams(_loc,interpolate,"auto_trans" arg this arg _newlocation);
+			};
+		};
+
 		callFuncParams(_loc,onMoveOutItem,this);
 		callFuncParams(_newlocation,onMoveInItem,this);
 		true
