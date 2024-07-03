@@ -5,6 +5,7 @@
 
 
 #include "..\engine.hpp"
+#include "..\struct.hpp"
 #include "..\ServerRpc\serverRpc.hpp"
 #include "..\GameObjects\GameConstants.hpp"
 #include "Atmos.hpp"
@@ -17,7 +18,7 @@
 	loadFile("src\host\Atmos\Atmos_debug.sqf");
 
 	if !isNull(atmos_map_chunks) then {
-		//{delete(_x)} foreach (values atmos_map_chunks);
+		{[_y] call struct_eraseFull} foreach (values atmos_map_chunks);
 	};
 	if !isNull(atmos_handle_update) then {stopUpdate(atmos_handle_update)};
 #endif
@@ -29,6 +30,9 @@ atmos_map_chunks = createHashMap; //key:str(chunkloc) -> value(struct:AtmosChunk
 atmos_map_chunkAreas = createHashMap; //key: str chunkArea, value (list<AtmosChunks>)
 atmos_handle_update = -1;
 atmos_chunks_uniqIdx = 0;
+
+atmos_chunks = 0;
+atmos_areas = 0;
 
 //returns chunk by id, creates new if not exists
 atmos_getChunkAtChId = {
@@ -233,6 +237,73 @@ atmos_internal_onUpdate = {
 		} count (_chObj get "atmosList");
 		false;
 	} foreach atmos_map_chunks;
+};
+
+atmos_internal_onUpdate = {
+	_chunkList = null;
+	_atmosDat = null;
+	_chObj = null;
+	_aObj = null;
+	_objInside = null;
+	_curLimit = 0;
+	{
+		_atmosDat = _y;
+		//if ((_atmosDat select ATMOS_AREA_INDEX_LASTLIMIT_REACH)>tickTime) then {continue};
+
+		_chunkList = _y select ATMOS_AREA_INDEX_CHUNKS;
+		_curLimit = _atmosDat select ATMOS_AREA_INDEX_SIM_LIMIT;
+
+		{
+			_chObj = _x;
+			_objInside = null;
+
+			
+			// _curLimit = _curLimit - 1;
+			// if (_curLimit<=0) then {
+			// 	_atmosDat set [ATMOS_AREA_INDEX_LASTLIMIT_REACH,tickTime+5];
+			// 	_curLimit = ATMOS_SIMULATION_AREA_LIMIT;
+			// 	_atmosDat set [ATMOS_AREA_INDEX_SIM_LIMIT,_curLimit];
+			// 	break;
+			// };
+			
+			_aFire = null;
+
+			{
+				if !isNullVar(_x) then {
+					_aObj = _x;
+					if !(_aObj call atmos_cv_ca) then {continue};
+					if isinstance(_aObj,AtmosAreaFire) then {
+						_aFire = _aObj;	
+					};
+					// if isNullVar(_objInside) then {
+					// 	_objInside = _chObj call atmos_cv_goch;
+					// };
+
+					_aObj call atmos_cv_oa;
+
+					// {
+					// 	_aObj call ["onObjectContact",_x];
+					// 	false
+					// } count _objInside;
+				};
+				false;
+			} count (_chObj get "atmosList");
+
+			//handle fire
+			if !isNullVar(_aFire) then {
+				if isNullVar(_objInside) then {
+					_objInside = _chObj call atmos_cv_goch;
+				};
+
+				{_aFire call ["onObjectContact",_x];false;} count _objInside;
+			};
+
+			false;
+		} count (_chunkList);
+
+		//_atmosDat set [ATMOS_AREA_INDEX_SIM_LIMIT,_curLimit];
+	} foreach atmos_map_chunkAreas;
+
 };
 
 atmos_internal_handleUpdate = startUpdate(atmos_internal_onUpdate,ATMOS_MAIN_THREAD_UPDATE_DELAY);
