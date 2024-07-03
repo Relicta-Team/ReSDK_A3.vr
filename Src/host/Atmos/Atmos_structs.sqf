@@ -380,11 +380,15 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 			if isNullReference(_m) exitwith {};
 
 			private _dam = floor (D6 * callFunc(_m,getFireDamageModifier));
-			private _oldHP = getVar(_obj,hp);
-			private _mpos = ifcheck(prob(30),callFunc(_obj,getModelPosition),null);
-			callFuncParams(_obj,applyDamage,_dam arg DAMAGE_TYPE_BURN arg _mpos);
-			if not_equals(_oldHP,getVar(_obj,hp)) then {
-				self callp(adjustForce,2); //because decrement is 1
+			if (_dam > 0) then {
+				if (callFunc(_m,getFireDamageModifier) <= 1) exitWith {};
+				
+				private _oldHP = getVar(_obj,hp);
+				private _mpos = ifcheck(prob(30),callFunc(_obj,getModelPosition),null);
+				callFuncParams(_obj,applyDamage,_dam arg DAMAGE_TYPE_BURN arg _mpos);
+				if not_equals(_oldHP,getVar(_obj,hp)) then {
+					self callp(adjustForce,2); //because decrement is 1
+				};
 			};
 		};
 	}
