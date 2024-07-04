@@ -111,3 +111,8 @@ if (isMultiplayer) then {
 	setDate [1985,5,20,0,00];
 	#endif
 };
+
+#ifdef RBUILDER
+//initialize RBuilder
+loadFile("src\host\Tools\RBuilder\RBuilder_init.sqf");
+#endif
