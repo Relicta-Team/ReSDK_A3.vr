@@ -17,6 +17,13 @@ ReBridge_defaultLogFile =
 	#endif
 ;
 
+//возвращает корневую директорию сервера
+#ifdef RBUILDER
+ReBridge_getWorkspace = {
+	call compile (engineCall(getworkspace) select 0)
+};
+#endif
+
 ReBridge_loadedLogFile = "";
 
 ReBridge_start = {

@@ -164,6 +164,10 @@ discUserLog = {
 	[_message] call disc_logger_provider;
 };
 
+#ifdef RBUILDER
+	DiscordEmbedBuilder_fnc_buildSqf = {};
+#endif
+
 _cliErr = {
 	params ["_fmtMessage","_cli"];
 

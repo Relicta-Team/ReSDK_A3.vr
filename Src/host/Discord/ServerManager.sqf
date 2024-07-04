@@ -57,6 +57,12 @@ dsm_onOnlineUpdate = {
 };
 
 dsm_initialize = {
+	#ifdef RBUILDER
+	if (true) exitWith {
+		log("dsm::initialize() - RBUILDER mode. Skip initialization");
+	};
+	#endif
+
 	#ifdef DSM_DISABLE
 	if (true) exitwith {
 		log("dsm::initialize() - Flag DSM_DISABLE active. Skip initialization");
