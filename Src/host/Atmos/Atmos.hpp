@@ -21,6 +21,9 @@
 //this value decremented on instance copy of object
 #define ATMOS_MODE_SPREAD_FORCE_OPTIMIZE 6
 
+//начальное число с которого начинается отсчёт позиций
+#define ATMOS_START_INDEX 1
+
 //size one chunk in meters and half (only constexpr in prod. required)
 #define ATMOS_SIZE 1
 #define ATMOS_SIZE_HALF 0.5

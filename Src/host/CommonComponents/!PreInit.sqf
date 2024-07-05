@@ -164,6 +164,8 @@ struct_initialize = {
 	{
 		_declFrom = _y;
 		_tnTo = _y get STRUCT_MEM_BASE;
+		if isNullVar(_tnTo) then {continue};
+		
 		_declTo = _bmap get _tnTo;
 		if !isNullVar(_declTo) then {
 			_declFrom set [STRUCT_MEM_BASE,_declTo];

@@ -3,6 +3,8 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "Atmos.hpp"
+
 //convert world postion to virtual chunk id
 atmos_chunkPosToId = {
 	params ["_x","_y","_z"];

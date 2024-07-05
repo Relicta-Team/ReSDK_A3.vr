@@ -7,10 +7,7 @@
 
 #define ATMOS_TYPEID_FIRE 0
 #define ATMOS_TYPEID_GAS 1
-#define ATMOS_TYPEID 2
-
-//начальное число с которого начинается отсчёт позиций
-#define ATMOS_START_INDEX 1
+#define ATMOS_TYPEID_WATER 2
 
 //частота обновления основного треда
 #define ATMOS_MAIN_THREAD_UPDATE_DELAY 0.1

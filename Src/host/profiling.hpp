@@ -20,7 +20,7 @@
 
 #include "struct.hpp"
 
-//#define ASP_USE_PROFILING
+#define ASP_USE_PROFILING
 
 #define PROFILE_TOSTRING(val) #val
 
@@ -30,6 +30,10 @@
 // #define PROFILE_NAME(x) PROFILE_DECLVAR = struct_newp(ProfileZone, x arg __LINE__);
 // #define PROFILE_SCOPE PROFILE_DECLVAR = struct_newp(ProfileZone, PROFILE_TOSTRING(__FILE__) arg __LINE__);
 // #define PROFILE_SCOPE_NAME(x) PROFILE_DECLVAR = struct_newp(ProfileZone, x arg __LINE__);
+
+#ifndef EDITOR
+    #undef ASP_USE_PROFILING
+#endif
 
 #ifdef ASP_USE_PROFILING
     //log message
