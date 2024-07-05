@@ -20,6 +20,7 @@
 */
 
 struct(AtmosChunk)
+
 	def(chCtr) 0; //chunk counter
 
 	def(areaSR) null;//saferef to area
@@ -37,7 +38,10 @@ struct(AtmosChunk)
 
 
 	def(objInside) null; //gameobjects inside this chunk
+	def(lastObjUpdate) 0;
 	def(flagUpdObj) true;
+
+	def(mapSpreadCache) null; //list<hashmap> key chid,value lastobjects update
 
 	def(cfg) -1;//light config effector
 	
@@ -99,6 +103,8 @@ struct(AtmosChunk)
 
 		self setv(chId,_chId);
 
+		self setv(mapSpreadCache,vec3(createHashMap,createHashMap,createHashMap));
+
 		//setup local position and chunk localID
 		self setv(chLPos,_chId call atmos_getLocalChunkIdInArea);
 		self setv(chNum, (self getv(chLPos)) call atmos_encodeChId);
@@ -141,11 +147,17 @@ struct(AtmosChunk)
 
 	def(getObjectsInChunk)
 	{
+		self callv(updateObjectsInChunk);
+		self getv(objInside);
+	}
+
+	def(updateObjectsInChunk)
+	{
 		if (self getv(flagUpdObj)) then {
 			self setv(objInside,[self getv(chId)] call atmos_chunkGetNearObjects);
 			self setv(flagUpdObj,false);
+			self setv(lastObjUpdate,tickTime);
 		};
-		self getv(objInside);
 	}
 
 	def(str)
@@ -163,7 +175,7 @@ struct(AtmosChunk)
 		if (count _flags > 0) then {
 			_flags = "<" + _flags + ">";
 		};
-		format["A%2Ch%1%3",self getv(chId),self callv(getChunkAreaId),_flags]
+		format["A%2Ch%1%3+o%4",self getv(chId),self callv(getChunkAreaId),_flags,count (self getv(objInside))]
 	}
 
 	//запрос соседних чанков. генерирует новый объект чанка если не существует
@@ -193,6 +205,8 @@ struct(AtmosChunk)
 endstruct
 
 struct(AtmosAreaBase)
+	def(c_areaTypeId) ATMOS_TYPEID_FIRE; //constant typeid
+
 	def(getCfg) {-1} //interface for getting light cfg
 	def(chunkId) null; //vec3 to chunk id
 	def(getChunk) {[self getv(chunkId)] call atmos_getChunkAtChIdUnsafe}
@@ -233,7 +247,32 @@ struct(AtmosAreaBase)
 
 	def(canSpreadTo) {
 		params ["_side"];
-		[self getv(chunkId),_side,self getv(c_spreadSearchMode)] call atmos_getIntersectInfo;
+		private _chTo = self callp(getChunkTo,_side);
+		private _cinf = self callv(getChunk) getv(mapSpreadCache) select (self getv(c_areaTypeId));
+		if (_chTo getv(flagUpdObj)) then {
+			_chTo callv(updateObjectsInChunk);
+		};
+		private _lastUpd = _chTo getv(lastObjUpdate);
+		//info cached. check timestamp
+		if (_side in  _cinf) then {
+			//objects has updated. need recalculate
+			if (_lastUpd > ((_cinf get _side) select 0)) then {
+
+				private _r = [self getv(chunkId),_side,self getv(c_spreadSearchMode)] call atmos_getIntersectInfo;
+				_cinf set [_side,[_lastUpd,_r]];
+				_r
+			} else {
+				//info not updated. get last actual value
+				_cinf get _side select 1
+			};
+		} else {
+			private _r = [self getv(chunkId),_side,self getv(c_spreadSearchMode)] call atmos_getIntersectInfo;
+			//info not cached. need recalculate and update timestamp
+			_cinf set [_side,[_lastUpd,_r]];
+			_r
+		};
+		
+
 	}
 
 	def(onSpreadTo) {
@@ -295,9 +334,23 @@ struct(AtmosAreaBase)
 		(self callv(getUnlinkStructInfo)) params ["_memName","_idx"];
 		self callv(getChunk) callp(unregisterArea,_memName arg _idx)
 	}
+
+	def(hasFireAt)
+	{
+		params ["_chId"];
+		self callp(getChunkTo,_chId) callv(hasFire);
+	}
+
+	def(hasGasAt)
+	{
+		params ["_chId"];
+		self callp(getChunkTo,_chId) callv(hasGas);
+	}
 endstruct
 
 struct(AtmosAreaFire) base(AtmosAreaBase)
+	def(c_areaTypeId) ATMOS_TYPEID_FIRE;
+
 	def(force) 3; //default fire force
 	def(size) 1;
 	def(isActive) {self getv(force) > 0}
@@ -306,6 +359,7 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 		private _chD = _ch callv(getChunkDown);
 		_chD callv(hasFire);
 	}
+
 	def(init)
 	{
 		params ["_chId"];
@@ -343,7 +397,7 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 				self callv(getChunk) callv(getChunkCenterPos),
 				"AtmosAreaGas",
 				true,
-				["GasBase",4 * (self getv(size))]
+				["GasBase",1 * (self getv(size))]
 			] call atmos_createProcess;
 			_gas callp(adjustGas,"GasBase" arg 1.0 * (self getv(size)) arg true);
 		};
@@ -353,7 +407,8 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 	{
 		params ["_side"];
 		
-		if (self getv(size)<=1) exitWith {false};
+		if (self getv(force)<=4) exitWith {false};
+		if (self callp(hasFireAt,_side)) exitWith {false};
 		if !(callbase(canSpreadTo)) exitWith {false};
 		//check materials in next chunk
 		private _nChunk = self callp(getChunkTo,_side);
@@ -384,7 +439,7 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 				if (callFunc(_m,getFireDamageModifier) <= 1) exitWith {};
 				
 				private _oldHP = getVar(_obj,hp);
-				private _mpos = ifcheck(prob(30),callFunc(_obj,getModelPosition),null);
+				private _mpos = null;//ifcheck(prob(30),callFunc(_obj,getModelPosition),null);
 				callFuncParams(_obj,applyDamage,_dam arg DAMAGE_TYPE_BURN arg _mpos);
 				if not_equals(_oldHP,getVar(_obj,hp)) then {
 					self callp(adjustForce,2); //because decrement is 1
@@ -420,6 +475,8 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 endstruct
 
 struct(AtmosAreaGas) base(AtmosAreaBase)
+	def(c_areaTypeId) ATMOS_TYPEID_GAS;
+
 	def(isActive) {self getv(volume) > 0}
 
 	def(c_spreadCountMin) 3

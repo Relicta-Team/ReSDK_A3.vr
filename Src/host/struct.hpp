@@ -5,7 +5,7 @@
 
 #define STRUCT_API_VERSION 1.0
 // enable fileinfo for structs. do not enable in release build
-#define STRUCT_USE_ALLOC_INFO
+//#define STRUCT_USE_ALLOC_INFO
 
 /*
 	Structures are dynamic faster than locations objects with automatically memory management

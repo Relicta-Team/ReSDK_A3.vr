@@ -3,6 +3,12 @@
 // sdk.relicta.ru
 // ======================================================
 
+#define ATMOS_USE_UPDATE_BUFFER
+
+#define ATMOS_TYPEID_FIRE 0
+#define ATMOS_TYPEID_GAS 1
+#define ATMOS_TYPEID 2
+
 //начальное число с которого начинается отсчёт позиций
 #define ATMOS_START_INDEX 1
 
@@ -20,10 +26,15 @@
 //timestamp of last delete inside area
 #define ATMOS_AREA_INDEX_LASTDELETE 3
 
-#define ATMOS_AREA_INDEX_SIM_LIMIT 4
-#define ATMOS_AREA_INDEX_LASTLIMIT_REACH 5
+//буффер изменений для следующей отправки
+#define ATMOS_AREA_INDEX_UPDATE_BUFFER 4
+//отметка последнего рассыла обновлений буфера
+#define ATMOS_AREA_INDEX_LASTSEND_BUFFER 5
 
-#define ATMOS_AREA_NEW [[], [], 0, 0 , ATMOS_SIMULATION_AREA_LIMIT, 0]
+
+#define ATMOS_AREA_INDEX_AREAID 6
+
+#define ATMOS_AREA_NEW [[], [], 0, 0 , createHashMap, 0, _aid]
 
 
-#define ATMOS_SIMULATION_AREA_LIMIT 50
+#define ATMOS_SEND_DELAY_BUFFER 1

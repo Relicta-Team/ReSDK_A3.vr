@@ -28,7 +28,7 @@
 	startAsyncInvoke
 	{
 		params ["_t","_o","_fnc","_val","_rng","_del"];
-		if isNullVar(_o) exitWith {true};
+		if isNullReference(_o) exitWith {true};
 		if (tickTime < _t) exitWith {false};
 		_this set [0,tickTime + rand(_del select 0,_del select 1)];
 		
@@ -61,7 +61,7 @@
 	startAsyncInvoke
 	{
 		params ["_t","_o","_fnc","_val","_rng","_del"];
-		if isNullVar(_o) exitWith {true};
+		if isNullReference(_o) exitWith {true};
 		if (tickTime < _t) exitWith {false};
 		_this set [0,tickTime + rand(_del select 0,_del select 1)];
 		
@@ -76,8 +76,9 @@
 }] call le_se_registerConfigHandler;
 
 
+//do not use this before fix le_se_getCurrentConfigId for unmanaged emitters
 ["atmos_optimize_chunk",{
 	params ["_emit","_src"];
-	if (!acli_bool_enableSystem) exitWith {};
-	[_emit,call le_se_getCurrentConfigId] call acli_handleAddObj;
+	// if (!acli_bool_enableSystem) exitWith {};
+	// [_emit,call le_se_getCurrentConfigId] call acli_handleAddObj;
 }] call le_se_registerConfigHandler;

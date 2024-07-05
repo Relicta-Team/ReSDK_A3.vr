@@ -6,6 +6,7 @@
 
 #include "..\engine.hpp"
 #include "..\struct.hpp"
+#include "..\profiling.hpp"
 #include "..\ServerRpc\serverRpc.hpp"
 #include "..\GameObjects\GameConstants.hpp"
 #include "Atmos.hpp"
@@ -123,6 +124,17 @@ rpcAdd(ATMOS_RPC_SERVER_DELETE_EXPIRED_CHUNKS,atmos_rpc_validateExpiredChunks);
 
 atmos_onUpdateAreaByChunk = {
 	params ["_chObj"];
+	#ifdef ATMOS_USE_UPDATE_BUFFER
+
+	private _aDat = _chObj get "areaSR" call ["getValue"];
+	private _lupd = tickTime;
+	_aDat set [ATMOS_AREA_INDEX_LASTUPDATE,_lupd];
+	_chObj set ["lastUpd",_lupd];
+	private _mapBuffer = _aDat select ATMOS_AREA_INDEX_UPDATE_BUFFER;
+	_mapBuffer set [_chObj get "chNum",_chObj call ["getPacket"]];
+
+	#else
+
 	private _aDat = _chObj get "areaSR" call ["getValue"];
 	private _lupd = tickTime;
 	_aDat set [ATMOS_AREA_INDEX_LASTUPDATE,_lupd];
@@ -140,7 +152,34 @@ atmos_onUpdateAreaByChunk = {
 	{
 		rpcSendToClient(_x,ATMOS_RPC_CLIENT_UPDATE_CHUNK,_packetS);
 	} foreach (_aDat select ATMOS_AREA_INDEX_CLIENTS);
+
+	#endif
 };
+
+#ifdef ATMOS_USE_UPDATE_BUFFER
+atmos_transferBuffer = {
+	params ["_aDat"];
+	private _t = tickTime;
+	private _ubuff = _aDat select ATMOS_AREA_INDEX_UPDATE_BUFFER;
+	//no updates
+	if (count _ubuff == 0) exitWith {
+		_aDat set [ATMOS_AREA_INDEX_LASTSEND_BUFFER,_t + ATMOS_SEND_DELAY_BUFFER];
+	};
+
+	private _packBuff = array_copy(_aDat select ATMOS_AREA_INDEX_AREAID);
+	_packBuff pushBack (-_t);
+	{
+		_packBuff append _x;
+	} count (values(_ubuff));
+
+	{
+		rpcSendToClient(_x,ATMOS_RPC_CLIENT_UPDATE_CHUNK,_packBuff);
+	} foreach (_aDat select ATMOS_AREA_INDEX_CLIENTS);
+	//cleanup buffer and update timestamp
+	_aDat set [ATMOS_AREA_INDEX_UPDATE_BUFFER,createHashMap];
+	_aDat set [ATMOS_AREA_INDEX_LASTSEND_BUFFER,_t + ATMOS_SEND_DELAY_BUFFER];
+};
+#endif
 
 atmos_onUnsubscribeClientListening = {
 	params ["_cli","_aId"];
@@ -171,7 +210,6 @@ atmos_createProcess = {
 		//_m = _at;
 		_m = _atmCh call ["registerArea",[_procType,_fNameStore,_aObjOffset]];
 		_m call ["onInitialized",_paramsInit];
-		//TODO push packet in next call
 	};
 
 	if (_manualCreate) then {
@@ -182,9 +220,9 @@ atmos_createProcess = {
 };
 
 atmos_imap_process_t = createHashMapFromArray [
-	["AtmosAreaFire",	["aFire",0]],
-	["AtmosAreaGas",	["aGas",1]],
-	["AtmosAreaWater",	["aWater",2]]
+	["AtmosAreaFire",	["aFire",ATMOS_TYPEID_FIRE]],
+	["AtmosAreaGas",	["aGas",ATMOS_TYPEID_GAS]],
+	["AtmosAreaWater",	["aWater",ATMOS_TYPEID_WATER]]
 ];
 
 //----- main update handle -------
@@ -196,48 +234,13 @@ atmos_cv_ca = ["canActivity"];
 atmos_cv_goch = ["getObjectsInChunk"];
 atmos_cv_oa = ["onActivity"];
 
-atmos_internal_onUpdate = {
-	private _chObj = null;
-	private _aObj = null;
-	private _objInside = null;
-	private _area = null;
-	private _curLimit = 0;
-	{
-		_chObj = _y;
-		_objInside = null;
-		_area = _chObj call ["getArea"];
-		
-		if ((_area select ATMOS_AREA_INDEX_LASTLIMIT_REACH)>tickTime) then {continue};
+#define ASP_USE_NAMED_REGION
 
-		_curLimit = _area select ATMOS_AREA_INDEX_SIM_LIMIT;
-		_area set [ATMOS_AREA_INDEX_SIM_LIMIT,_curLimit-1];
-		if (_curLimit<=0) then {
-			_area set [ATMOS_AREA_INDEX_LASTLIMIT_REACH,tickTime+5];
-			_curLimit = ATMOS_SIMULATION_AREA_LIMIT;
-			_area set [ATMOS_AREA_INDEX_SIM_LIMIT,_curLimit];
-		};
-		
-		{
-			_aObj = _x;
-			if !isNullVar(_aObj) then {
-				if !(_aObj call atmos_cv_ca) then {continue};
-				
-				if isNullVar(_objInside) then {
-					_objInside = _chObj call atmos_cv_goch;
-				};
-				
-				_aObj call atmos_cv_oa;
-
-				{
-					_aObj call ["onObjectContact",_x];
-					false
-				} count _objInside;
-			};
-			false;
-		} count (_chObj get "atmosList");
-		false;
-	} foreach atmos_map_chunks;
-};
+#ifdef ASP_USE_NAMED_REGION
+	#define ASP_REGION_NAMED(t,x) ASP_REGION(t + (str _x))
+#else
+	#define ASP_REGION_NAMED(t,x) ASP_REGION(t)
+#endif
 
 atmos_internal_onUpdate = {
 	_chunkList = null;
@@ -245,31 +248,25 @@ atmos_internal_onUpdate = {
 	_chObj = null;
 	_aObj = null;
 	_objInside = null;
-	_curLimit = 0;
+	ASP_REGION("Atmos update")
+	
 	{
 		_atmosDat = _y;
-		//if ((_atmosDat select ATMOS_AREA_INDEX_LASTLIMIT_REACH)>tickTime) then {continue};
+		ASP_REGION_NAMED("Atmos area process: ",_x)
 
 		_chunkList = _y select ATMOS_AREA_INDEX_CHUNKS;
-		_curLimit = _atmosDat select ATMOS_AREA_INDEX_SIM_LIMIT;
 
 		{
 			_chObj = _x;
+			ASP_REGION_NAMED("Chunk process" + (str _chObj))
 			_objInside = null;
 
-			
-			// _curLimit = _curLimit - 1;
-			// if (_curLimit<=0) then {
-			// 	_atmosDat set [ATMOS_AREA_INDEX_LASTLIMIT_REACH,tickTime+5];
-			// 	_curLimit = ATMOS_SIMULATION_AREA_LIMIT;
-			// 	_atmosDat set [ATMOS_AREA_INDEX_SIM_LIMIT,_curLimit];
-			// 	break;
-			// };
 			
 			_aFire = null;
 
 			{
 				if !isNullVar(_x) then {
+					ASP_REGION_NAMED("Object process ",_x)
 					_aObj = _x;
 					if !(_aObj call atmos_cv_ca) then {continue};
 					if isinstance(_aObj,AtmosAreaFire) then {
@@ -278,8 +275,9 @@ atmos_internal_onUpdate = {
 					// if isNullVar(_objInside) then {
 					// 	_objInside = _chObj call atmos_cv_goch;
 					// };
-
+					ASP_MESSAGE("Start activity")
 					_aObj call atmos_cv_oa;
+					ASP_MESSAGE("End activity")
 
 					// {
 					// 	_aObj call ["onObjectContact",_x];
@@ -290,18 +288,29 @@ atmos_internal_onUpdate = {
 			} count (_chObj get "atmosList");
 
 			//handle fire
+			ASP_MESSAGE("Start fire obj check")
 			if !isNullVar(_aFire) then {
+				ASP_REGION_NAMED("Fire process " + (str _aFire))
 				if isNullVar(_objInside) then {
 					_objInside = _chObj call atmos_cv_goch;
 				};
 
 				{_aFire call ["onObjectContact",_x];false;} count _objInside;
 			};
+			ASP_MESSAGE("End fire obj check")
 
 			false;
 		} count (_chunkList);
 
-		//_atmosDat set [ATMOS_AREA_INDEX_SIM_LIMIT,_curLimit];
+		#ifdef ATMOS_USE_UPDATE_BUFFER
+		if (count (_atmosDat select ATMOS_AREA_INDEX_CLIENTS) > 0) then {
+			if (tickTime > (_atmosDat select ATMOS_AREA_INDEX_LASTSEND_BUFFER)) then {
+				[_atmosDat] call atmos_transferBuffer;
+			};
+		};
+		#endif
+
+		
 	} foreach atmos_map_chunkAreas;
 
 };
