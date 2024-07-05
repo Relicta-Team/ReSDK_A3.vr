@@ -88,6 +88,11 @@ atmos_rpc_requestGetArea = {
 
 	//добавляем netid клиента к владельцам
 	(_aDat select ATMOS_AREA_INDEX_CLIENTS) pushBack _cli;
+
+	private _cObj = _cli call cm_findClientById;
+	if !isNullReference(_cObj) then {
+		getVar(_cObj,loadedAreas) set [_aId,null];
+	};
 };
 rpcAdd(ATMOS_RPC_SERVER_REQUEST_AREA,atmos_rpc_requestGetArea);
 
@@ -189,8 +194,25 @@ atmos_onUnsubscribeClientListening = {
 	if (_idxDel!=-1) then {
 		_cList deleteAt _idxDel;
 	};
+
+	private _cObj = _cli call cm_findClientById;
+	if !isNullReference(_cObj) then {
+		getVar(_cObj,loadedAreas) deleteAt _aId;
+	};
 };
 rpcAdd(ATMOS_RPC_CLIENT_UNSUBSCRIBE_LISTEN_CHUNK,atmos_onUnsubscribeClientListening);
+
+atmos_unsubscribeClientListeningSrv = {
+	params ["_cli"];
+	private _aDat = null;
+	private _cList = null;
+	private _id = getVar(_cli,id);
+	{
+		_aDat = [_x] call atmos_getAreaAtAid;
+		_cList = (_aDat select ATMOS_AREA_INDEX_CLIENTS);
+		array_remove(_cList,_id);
+	} foreach getVar(_cli,loadedAreas);
+};
 
 //create new process inside chunk
 atmos_createProcess = {

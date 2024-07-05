@@ -61,3 +61,52 @@ atmos_getNextRandAroundChunks = {
 	};
 	_tArr
 };
+
+//#define ATMOS_DEBUG_TRY_IGNITE
+
+#ifdef ATMOS_DEBUG_TRY_IGNITE
+    #define ignite_info(v) if equals(atmos_debug_ignite_ptr,getVar(_obj,pointer)) then {traceformat("atmos::tryIgnite() [%1] - %2",_obj arg v)};
+    atmos_debug_ignite_ptr = "";
+#else
+    #define ignite_info(v) 
+#endif
+//попытка зажечь область при нахождении предметов рядом
+atmos_tryIgnite = {
+    params ["_obj"];
+	
+	ASP_REGION("atmos_tryIgnite: "+(str _obj))
+
+    ignite_info("Check process from >>>>>>>>>>>>>>>" + str _obj + "; deleted: " + str isdeleted(_obj))
+    if callFunc(_obj,isFlying) exitWith {
+        ignite_info("OBJECT IS FLYING")
+        false
+    };
+
+    private _pos = callFunc(_obj,getPos);
+    private _chObj = [_pos call atmos_chunkPosToId] call atmos_getChunkAtChId;
+    ignite_info("   Check chunk: " + str _chObj)
+        
+	//already flamed
+	if (_chObj callv(hasFire)) exitWith {
+		ignite_info("   - already inflamed")
+	};
+
+	ignite_info("   - objcount: " + str (_chObj callv(getObjectsInChunk)))
+
+	private _mat = nullPtr;
+	{
+		if equals(_obj,_x) then {continue};
+		_mat = callFunc(_x,getMaterial);
+		if !isNullReference(_mat) then {
+			ignite_info("   - precheck material object " + str _x)
+			if prob(callFunc(_mat,getFireDamageIgniteProb)) then {
+				ignite_info("   - postcheck object " + str _x)
+				if callFuncParams(_obj,checkCanIgniteObject,_x) then {
+					[_pos,"AtmosAreaFire",true] call atmos_createProcess;
+					break;
+				};
+			};
+		};
+	} foreach (_chObj callv(getObjectsInChunk));
+
+};

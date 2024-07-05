@@ -20,7 +20,9 @@
 
 #include "struct.hpp"
 
-#define ASP_USE_PROFILING
+//#define ASP_USE_PROFILING
+
+#define USE_SCRIPTED_PROFILING
 
 #define PROFILE_TOSTRING(val) #val
 

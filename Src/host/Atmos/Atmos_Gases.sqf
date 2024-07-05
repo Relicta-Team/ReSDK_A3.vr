@@ -35,4 +35,19 @@ struct(GasBase)
 		format["%1(%2)",self getv(name),self getv(volume)]
 	}
 
+	def(onBreathing)
+	{
+		params ["_mob"];
+		
+		if callFunc(_mob,canBreath) then {
+			callFuncParams(_mob,adjustToxin,+8);
+			callFuncParams(_mob,adjustOxyLoss,-5);
+		};
+	}
+
+	def(onSkinContact)
+	{
+		params ["_mob"];
+	}
+
 endstruct

@@ -202,6 +202,27 @@ struct(AtmosChunk)
 		};
 	};
 
+	//вызывается при контакте моба с этим типом атмоса
+	//TODO продумать как лучше делать контакт по нескольким зонам
+	def(onMobContactBody) {
+		params["_mob"];
+		{
+			if !isNullVar(_x) then {
+				_x callp(onMobContactBody,_mob);
+			};
+			false
+		} count (self getv(atmosList));
+	}
+	def(onMobContactTurf) {
+		params["_mob"];
+		{
+			if !isNullVar(_x) then {
+				_x callp(onMobContactTurf,_mob);
+			};
+			false
+		} count (self getv(atmosList));
+	}
+
 endstruct
 
 struct(AtmosAreaBase)
@@ -284,9 +305,9 @@ struct(AtmosAreaBase)
 
 	//вызывается при контакте объекта с этим типом атмоса
 	def(onObjectContact) {params["_obj"]}
-	//вызывается при контакте моба с этим типом атмоса
-	//TODO продумать как лучше делать контакт по нескольким зонам
-	def(onMobContact) {params["_mob"]}
+	def(onMobContactBody) {params["_mob"]}
+	def(onMobContactTurf) {params["_mob"]}
+	
 
 	def(updateLight)
 	{
@@ -472,6 +493,53 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 			self callv(unlinkStruct);
 		};
 	}
+
+	def(applyFireDamage)
+	{
+		params ["_m","_sel"];
+		if (tickTime >= getVar(_m,__lastFireDamage)) then {
+			private _dam = D6 - 1;
+			callFuncParams(_m,applyDamage,_dam arg DAMAGE_TYPE_BURN arg _sel arg DIR_RANDOM);
+			setVar(_m,__lastFireDamage,tickTime+0.3);//each 300ms
+		};
+	}
+
+	def(onMobContactTurf)
+	{
+		params ["_mob"];
+		private _dz = TARGET_ZONE_TORSO;
+
+		//turf calculate random body part
+		call {
+			private _sta = callFunc(_mob,getStance);
+			private _tzList = [];
+			if (_sta <= STANCE_UP) then {
+				_tzList append [TARGET_ZONE_LEG_L,TARGET_ZONE_LEG_R];
+			};
+			if (_sta <= STANCE_MIDDLE) then {
+				_tzList append TARGET_ZONE_LIST_TORSO;
+				_tzList append [TARGET_ZONE_ARM_R,TARGET_ZONE_ARM_L];
+			};
+			if (_sta <= STANCE_DOWN) then {
+				_tzList append TARGET_ZONE_LIST_HEAD;
+			};
+			if (count _tzList > 0) then {
+				_dz = pick _tzList;
+			};
+		};
+
+		self callp(applyFireDamage,_mob arg _dz);
+	}
+
+	def(onMobContactBody)
+	{
+		params ["_mob"];
+		private _tzlist = TARGET_ZONE_LIST_HEAD;
+		_tzlist append TARGET_ZONE_LIST_TORSO;
+
+		self callp(applyFireDamage,_mob arg pick _tzlist);
+	}
+
 endstruct
 
 struct(AtmosAreaGas) base(AtmosAreaBase)
@@ -713,6 +781,15 @@ struct(AtmosAreaGas) base(AtmosAreaBase)
 		self setv(volume,_vol);
 		self setv(leftVol,(self getv(c_maxVolume)) - _vol);
 		_vol
+	}
+
+	def(onMobContactBody)
+	{
+		params ["_mob"];
+		{
+			_y callp(onBreathing,_mob);
+			_y callp(onSkinContact,_mob);
+		} foreach (self getv(gCont));
 	}
 
 
