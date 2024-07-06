@@ -131,11 +131,11 @@ class(ServerClient) /*extends(NetObject)*/
 				_ch__ = parseSimpleArray _x;
 				rpcCall("unsubChunkListen",vec4(_ch__ select 0,_ch__ select 1,getSelf(id),false));
 			} foreach (getSelf(loadedChunks));
-			setSelf(loadedChunks,null);
+			setSelf(loadedChunks,createHashMap);
 
 			
 			[this] call atmos_unsubscribeClientListeningSrv;
-			setSelf(loadedAreas,null);
+			setSelf(loadedAreas,createHashMap);
 		};
 	};
 	
