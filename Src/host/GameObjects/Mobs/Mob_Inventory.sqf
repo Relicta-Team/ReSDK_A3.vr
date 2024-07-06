@@ -523,6 +523,8 @@ region(Inventory control)
 
 		if !callSelfParams(canSetItemOnSlot,args2(_item,_slot)) exitWith {};
 
+		callSelfParams(interpolate,"pickup" arg _item arg _slot);
+
 		callFunc(_item,simulatePhysics);
 
 		callFunc(_item,unloadModel);
@@ -563,6 +565,9 @@ region(Inventory control)
 		if callSelfParams(isHoldedTwoHands,_item) then {
 			callSelfParams(onTwoHand,_item);
 		};
+
+		callSelfParams(interpolate,"putdown" arg _item);
+
 		//create worldobj on mob position
 		private _worldObj = [_item,getSelf(owner),null,null,_isSafePutdown] call noe_loadVisualObject_OnDrop;
 
@@ -585,6 +590,9 @@ region(Inventory control)
 		if callSelfParams(isHoldedTwoHands,_item) then {
 			callSelfParams(onTwoHand,_item);
 		};
+		
+		callSelfParams(interpolate,"putdown" arg _item);
+
 		private _worldObj = [_item,getSelf(owner),null,null] call noe_loadVisualObject_OnDrop;
 		callSelfParams(removeItemOnSlot,_item arg _slotId arg _worldObj);
 		callFuncParams(_item,onDrop, this);
@@ -608,6 +616,9 @@ region(Inventory control)
 		if callSelfParams(isHoldedTwoHands,_item) then {
 			callSelfParams(onTwoHand,_item);
 		};
+		
+		callSelfParams(interpolate,"putdown" arg _item);
+
 		private _worldObj = [_item,_posData] call noe_loadVisualObject_OnPutdown;
 
 		callSelfParams(removeItemOnSlot,_item arg _slotId arg _worldObj);
@@ -647,7 +658,7 @@ region(Inventory control)
 		if callSelfParams(isHoldedTwoHands,_itemFrom) then {
 			callSelfParams(onTwoHand,_itemFrom);
 		};
-		
+		callSelfParams(interpolate,"trans" arg _itemFrom arg _slotTo);
 		callSelfParams(setItemOnSlot,_itemFrom arg _slotTo);
 	};
 
@@ -695,4 +706,156 @@ func(dropAllItemsInHands)
 	if (!callSelfParams(isEmptyHand,INV_HAND_R)) then {
 		callSelfParams(dropItem,INV_HAND_R);
 	};
+};
+
+
+func(interpolate)
+{
+	objParams_3(_mode,_obj,_opt); //_opt -> slotId|null
+	traceformat("INTERPOLATE ------------------> %1",_this)
+	private _plist = null;
+	call {
+		if (_mode=="pickup") exitWith {
+			private _obj = getVar(_obj,loc);
+			assert_str(equalTypes(_obj,objNull) && {!isNullReference(_obj)},"Object is not valid for pickup");
+			private _d = [getPosAtl _obj,[_obj] call model_getPitchBankYaw];
+			_plist = [netTickTime,
+				/*getVar(_obj,pointer)*/ //! this doesn't work
+				_d,
+				_opt
+			];
+		};
+		if (_mode=="putdown") exitWith {
+			_plist = [netTickTime,getVar(_obj,slot),getVar(_obj,pointer)];
+		};
+		//transfer: delete source object and teleport to destination|or other slot
+		if (_mode=="trans") exitWith {
+			private _d = null;
+			if equalTypes(_opt,nullPtr) then {
+				private _optObj = getVar(_opt,loc);
+				assert_str(equalTypes(_optObj,objNull) && {!isNullReference(_optObj)},"Object is not valid for pickup");
+				_d = [getPosAtl _optObj,[_optObj] call model_getPitchBankYaw];	
+			} else {
+				//Отлично работает. трансфер объекта в слот
+				assert(equalTypes(_opt,0));
+				_d = _opt;
+			};
+			if isNullVar(_d) exitWith {};
+			private _fS = getVar(_obj,slot);
+			
+			if callSelfParams(isHoldedTwoHands,_obj) exitWith {}; //do not play actions on twohanded anim
+
+			if (_fS==-1) then {
+				private _obj = getVar(_obj,loc);
+				_fS = [getPosAtl _obj,[_obj] call model_getPitchBankYaw];
+			};
+			_plist = [netTickTime,_fS,_d];
+		};
+		if (_mode == "auto_trans") exitWith {
+			/*
+				Дополнительные параметры:
+					- выключить скрытие источника (nhs)
+					- выключить скрытие назначения (nhd)
+					- скалирование к минимому (для контейнерной эмуляции) (sc-)
+					- скалирование к стандарту (sc+)
+					- использовать модель от объекта dest (udo)
+
+				Автоперемещение нужно для перемещения объекта по локациям.
+				каждый из параметров может быть 3х типов:
+					указатель - для мировой локации
+					слот - для трансфера из инвентаря
+					трансформ - из мировой позиции
+				для определения типа перемещения:
+					1. определяем локацию источника. 
+						для мобов это слот, 
+						для предметов в мире и внутри других предметов это позиция/указатель
+					2. определяем локацию цели.
+						владелец цели этот моб - используем слот (активной руки)
+						владелец цели не в мире - используем позицию
+
+					--
+					для отдачи объекта другому персонажу - в цель помещаем позицию цели, в источник новую локацию
+			*/
+			private _getTransform = {
+				private _l = callFunc(_this,getBasicLoc);
+				[getPosAtl _l,[_l] call model_getPitchBankYaw]
+			};
+			private _datFrom = null;
+			private _datTo = null;
+			private _optionals = [];
+
+			if (equalTypes(_obj,nullPtr)) then {
+				if (callFunc(_obj,isMob)) then {
+					//todo
+					_datFrom = getVar(_obj,activeHand);
+				} else {
+					//loc check
+					if callFunc(_obj,isInWorld) then {
+						//object is in world
+						_datFrom = _obj call _getTransform;
+					} else {
+						//object inside another object
+						private _ownObj = callFuncParams(_obj,getSourceLocEx,null);
+						if callFunc(_ownObj,isInWorld) then {
+							_datFrom = _ownObj call _getTransform;
+						} else {
+							assert_str(callFunc(getVar(_ownObj,loc),isMob),"Unexpected condition for " + (str _ownObj));
+							_datFrom = getVar(_ownObj,slot);
+							_optionals pushBack "udo";
+						};
+
+						if callFunc(_ownObj,isContainer) then {
+							_optionals pushBack "sc+";
+						};
+
+						//enable nohide source
+						_optionals pushBack "nhs";
+					};
+
+				};
+			} else {
+				setLastError("Unsupported source object type");
+			};
+
+			if equalTypes(_opt,nullPtr) then {
+				if callFunc(_opt,isMob) then {
+					_datTo = getVar(_opt,activeHand);
+				} else {
+					if callFunc(_opt,isInWorld) then {
+						_datTo = _opt call _getTransform;
+						if callFunc(_opt,isContainer) then {
+							_optionals pushBack "sc-";
+						};	
+					} else {
+						private _ownObj = callFuncParams(_opt,getSourceLocEx,null);
+						if callFunc(_ownObj,isInWorld) then {
+							_datTo = _ownObj call _getTransform;
+						} else {
+							assert_str(callFunc(getVar(_ownObj,loc),isMob),"Unexpected condition for " + (str _ownObj));
+							_datTo = getVar(_ownObj,slot);
+							array_remove(_optionals,"udo");
+						};
+
+						_optionals pushBack "nhd";
+					};
+				};
+			} else {
+				//for pointer type
+				if equalTypes(_opt,"") exitWith {
+					_datTo = _opt;
+				};
+				setLastError("Unsupported destination object type");
+			};
+			
+			
+			if (!isNullVar(_datFrom) && !isNullVar(_datTo)) then {
+				_plist = [netTickTime,_datFrom,_datTo];
+				if (count _optionals > 0) then {
+					_plist pushBack _optionals;
+				};
+			};
+		};
+	};
+	if isNullVar(_plist) exitWith {};
+	callSelfParams(syncSmdVar,"interp" arg _plist);
 };

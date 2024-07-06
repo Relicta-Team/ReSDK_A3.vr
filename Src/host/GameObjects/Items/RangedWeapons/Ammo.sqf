@@ -11,7 +11,7 @@
 class(AmmoPBM) extends(IAmmoBase)
 	getterconst_func(getCasingType,"BulletCasePBM");
 	getterconst_func(getCaliber,"9мм");
-	var(model,"\A3\Weapons_f\ammo\cartridge_small");
+	var(model,"\A3\Weapons_f\ammo\cartridge_small.p3d");
 endclass
 	class(AmmoPBM_BB) extends(AmmoPBM)
 		var(additionalDamage,+1);
@@ -49,7 +49,7 @@ endclass
 
 class(AmmoShotgun) extends(IAmmoBase)
 	getter_func(getProjectileName,"Дробь");
-	var(model,"\A3\Weapons_f\ammo\cartridge_slug");
+	var(model,"\A3\Weapons_f\ammo\cartridge_slug.p3d");
 	getterconst_func(getCasingType,"BulletCaseShotgun");
 	getter_func(getDropSound,vec2("guns\shotgun_fall",getRandomPitchInRange(.85,1.3)));
 	getterconst_func(getCaliber,".12");
@@ -74,7 +74,7 @@ endclass
 	endclass
 
 	class(BulletCaseShotgun) extends(BulletCase)
-		var(model,"\A3\Weapons_f\ammo\cartridge_slug");
+		var(model,"\A3\Weapons_f\ammo\cartridge_slug.p3d");
 		getter_func(getDropSound,vec2("guns\shotgun_fall",getRandomPitchInRange(.85,1.3)));
 		getterconst_func(getCaliber,".12");
 	endclass
@@ -82,7 +82,7 @@ endclass
 
 class(AmmoShotgunMini) extends(IAmmoBase)
 	getter_func(getProjectileName,"Дробь");
-	var(model,"\A3\Weapons_f\ammo\cartridge_slug");
+	var(model,"\A3\Weapons_f\ammo\cartridge_slug.p3d");
 	getterconst_func(getCasingType,"BulletCaseShotgunMini");
 	getter_func(getDropSound,vec2("guns\shotgun_fall",getRandomPitchInRange(.85,1.3)));
 	var(weight,gramm(50));
@@ -92,30 +92,30 @@ class(AmmoShotgunMini) extends(IAmmoBase)
 endclass
 
 	class(BulletCaseShotgunMini) extends(BulletCase)
-		var(model,"\A3\Weapons_f\ammo\cartridge_slug");
+		var(model,"\A3\Weapons_f\ammo\cartridge_slug.p3d");
 		getter_func(getDropSound,vec2("guns\shotgun_fall",getRandomPitchInRange(.85,1.3)));
 		getterconst_func(getCaliber,".11");
 	endclass
 
 class(AmmoRifle) extends(IAmmoBase)
-	var(model,"\A3\Weapons_f\ammo\cartridge_65");
+	var(model,"\A3\Weapons_f\ammo\cartridge_65.p3d");
 	var(weight,gramm(22.7));
 	getterconst_func(getCaliber,"7.62мм");
 	getterconst_func(getCasingType,"BulletCaseRifle");
 endclass
 
 	class(BulletCaseRifle) extends(BulletCase)
-		var(model,"\A3\Weapons_f\ammo\cartridge_65");
+		var(model,"\A3\Weapons_f\ammo\cartridge_65.p3d");
 		getterconst_func(getCaliber,"7.62мм");
 	endclass
 
 class(AmmoPistolHandmade) extends(IAmmoBase)
-	var(model,"\A3\Weapons_f_enoch\ammo\cartridge_762x39");
+	var(model,"\A3\Weapons_f_enoch\ammo\cartridge_762x39.p3d");
 	getterconst_func(getCaliber,".340");
 	getterconst_func(getCasingType,"BulletCasePistolHandmade");
 endclass
 
 	class(BulletCasePistolHandmade) extends(BulletCase)
-		var(model,"\A3\Weapons_f_enoch\ammo\cartridge_762x39");
+		var(model,"\A3\Weapons_f_enoch\ammo\cartridge_762x39.p3d");
 		getterconst_func(getCaliber,".340");
 	endclass

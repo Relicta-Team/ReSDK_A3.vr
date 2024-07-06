@@ -110,6 +110,9 @@ cd_processConnection = {
 
 				//остановить onesync services
 				call os_stop;
+
+				//остановка пакетирования атмоса
+				[false] call noe_client_nat_setEnabled;
 				
 				//перезагрузка постпроцессора
 				call pp_reload;

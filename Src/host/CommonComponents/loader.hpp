@@ -37,3 +37,4 @@ importCommon("DateTime.sqf");
 importCommon("Replicator.sqf");
 importCommon("AttackTypesAssoc.sqf");
 importCommon("Pencfg.sqf");
+importCommon("StructLib.sqf");

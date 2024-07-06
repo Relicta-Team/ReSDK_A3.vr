@@ -126,6 +126,15 @@ sourceObject setvariable ["__config",type]; sourceObject setVariable ["__light",
 	GROUP: Scripted emitter
 ================================================================================
 */
+
+//used in le_se_list_fassoc
+//стандартный обработчик скриптовых эффектов
+#define SCRIPT_EMIT_HANDLER_MODE_DEFAULT 0
+//скриптовый обработчик дроппер. основная особенность - не создает направленные источники, удаляется самостоятельно
+#define SCRIPT_EMIT_HANDLER_MODE_DROP 1
+//скриптовый обработчик неуправляемый. основная особенность - не привязан к объекту, создается в позиции. пользователь самостоятельно должен удалять его
+#define SCRIPT_EMIT_HANDLER_MODE_UNMANAGED 2
+
 //scripted emitters
 #define regScriptEmit(type) _semDat = []; le_se_map set ['type',_semDat]; le_conf_##type = { \
 	params ['sourceObject']; \

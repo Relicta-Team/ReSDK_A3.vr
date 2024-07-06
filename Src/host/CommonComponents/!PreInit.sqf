@@ -107,6 +107,97 @@ if (!isServer) then {
 	}];
 };
 
+#include "..\struct.hpp"
+spi_lst = []; //preinit structures list
+vtable_s = createHashMap;
+struct_default_flag = ["unscheduled"];
+struct_initialize = {
+
+	#define STRUCT_MEM_TYPE "#type"
+	#define STRUCT_MEM_BASE "#base"
+	#define STRUCT_MEM_TOSTRING "#str"
+	#define STRUCT_MEM_FLAGS "#flags"
+	#define STRUCT_MEM_CONSTRUCTOR "#create"
+	#define STRUCT_MEM_DESTRUCTOR "#delete"
+	#define STRUCT_MEM_COPY "#clone"
+
+	private _t = null;
+	private _decl = null;
+	//first pass - creating vtable and setup into vtable map
+	private _bmap = createHashMap;
+	private _undefFields = null;
+	{
+		//fill all fields with null values
+		_undefFields = _x select {count _x==1};
+		{
+			_x append [nil];
+			;false
+		} count _undefFields;
+
+		_decl = createHashMapFromArray _x;
+		_t = _decl deleteAt "init";
+		if !isNullVar(_t) then {
+			_decl set [STRUCT_MEM_CONSTRUCTOR,_t];
+		};
+		
+		_t = _decl deleteAt "del";
+		if !isNullVar(_t) then {
+			_decl set [STRUCT_MEM_DESTRUCTOR,_t];
+		};
+
+		_t = _decl deleteat "copy";
+		if !isNullVar(_t) then {
+			_decl set [STRUCT_MEM_COPY,_t];
+		};
+
+		_t = _decl deleteat "str";
+		if !isNullVar(_t) then {
+			_decl set [STRUCT_MEM_TOSTRING,_t];
+		};
+
+		missionnamespace setvariable ["pts_"+(_decl get STRUCT_MEM_TYPE),_decl];
+		vtable_s set [_decl get STRUCT_MEM_TYPE,_decl];
+		_bmap set [_decl get STRUCT_MEM_TYPE,_decl];
+	} foreach spi_lst;
+
+	//second pass - inheritance
+	{
+		_declFrom = _y;
+		_tnTo = _y get STRUCT_MEM_BASE;
+		if isNullVar(_tnTo) then {continue};
+		
+		_declTo = _bmap get _tnTo;
+		if !isNullVar(_declTo) then {
+			_declFrom set [STRUCT_MEM_BASE,_declTo];
+		};
+	} foreach _bmap;
+};
+
+VM_COMPILER_ADDFUNC_UNARY(struct_iallc,createHashMapObject);
+
+struct_alloc = {
+	params ["_s","_params"];
+	
+	#ifdef STRUCT_USE_ALLOC_INFO
+	private _s = 
+	#endif
+
+	if isNullVar(_params) then {
+		[vtable_s get _s] call struct_iallc;
+	} else {
+		[vtable_s get _s,_params] call struct_iallc;
+	};
+	
+	#ifdef STRUCT_USE_ALLOC_INFO
+		_s set ["__fileinfo__",'stack:'+(str diag_stacktrace)];
+		_s
+	#endif
+};
+
+struct_eraseFull = {
+	params ["_o"];
+	struct_erase(_o)
+};
 
 allThreads = []; //init thread pool
 hashMapNull = createHashMapFromArray [["__NULL_HASH_MAP__","__NULL_HASH_MAP__"]];

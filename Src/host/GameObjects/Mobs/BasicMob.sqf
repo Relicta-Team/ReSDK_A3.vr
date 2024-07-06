@@ -2078,8 +2078,8 @@ region(Atmos subsystem)
 		if (tickTime >= getSelf(__lastChunkReactBody)) then {
 			setSelf(__lastChunkReactBody,tickTime+TIME_ATMOS_DELAY_REACT_BODY);
 			_chHd = [_hpos] call atmos_getChunkAtChIdUnsafe;
-			if !isNullReference(_chHd) then {
-				callFuncParams(_chHd,onMobContactBody,this)
+			if !isNullVar(_chHd) then {
+				_chHd call ["onMobContactBody",[this]];
 			};
 		};
 
@@ -2090,8 +2090,8 @@ region(Atmos subsystem)
 			if equals(_hpos,_lpos) exitWith {};// exit, because already contacted on body (STANCE_MIDDLE)
 			
 			_chLg = [_lpos] call atmos_getChunkAtChIdUnsafe;
-			if !isNullReference(_chLg) then {
-				callFuncParams(_chLg,onMobContactTurf,this);
+			if !isNullVar(_chLg) then {
+				_chLg call ["onMobContactTurf",[this]];
 			};
 		};
 	};
