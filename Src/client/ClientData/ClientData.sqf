@@ -194,6 +194,9 @@ _onPrepareClient = {
 				//initialize onesync services
 				call os_start;
 
+				//enable atmos packets
+				[true] call noe_client_nat_setEnabled;
+
 				//set client game state
 				"game" call client_setState;
 

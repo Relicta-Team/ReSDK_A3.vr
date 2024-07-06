@@ -21,10 +21,28 @@
 //this value decremented on instance copy of object
 #define ATMOS_MODE_SPREAD_FORCE_OPTIMIZE 6
 
+//начальное число с которого начинается отсчёт позиций
+#define ATMOS_START_INDEX 1
+
 //size one chunk in meters and half (only constexpr in prod. required)
 #define ATMOS_SIZE 1
 #define ATMOS_SIZE_HALF 0.5
 #define ATMOS_SIZE_HALF_OFFSET 0.1
+
+// одна зона = 10 чанков
+#define ATMOS_AREA_SIZE 10
+
+#ifdef EDITOR
+	#define ATMOS_RPC_SERVER_REQUEST_AREA "atmos_request_area"
+	#define ATMOS_RPC_SERVER_DELETE_EXPIRED_CHUNKS "atmos_delete_expired"
+	#define ATMOS_RPC_CLIENT_UPDATE_CHUNK "atmos_update_chunk"
+	#define ATMOS_RPC_CLIENT_UNSUBSCRIBE_LISTEN_CHUNK "atmos_unsub_area"
+#else
+	#define ATMOS_RPC_SERVER_REQUEST_AREA "salr"
+	#define ATMOS_RPC_SERVER_DELETE_EXPIRED_CHUNKS "sald"
+	#define ATMOS_RPC_CLIENT_UPDATE_CHUNK "cuar"
+	#define ATMOS_RPC_CLIENT_UNSUBSCRIBE_LISTEN_CHUNK "cdar"
+#endif
 
 //left, right, top, bottom, front, back
 #define ATMOS_PROPAGATION_SIDE_MAX_COUNT 6
@@ -43,7 +61,7 @@
 #define ATMOS_SEARCH_MODE_GET_VOBJECTS 3
 
 
-//functions spread ptr
-#define ATMOS_SPREAD_MODE_NORMAL 0
-#define ATMOS_SPREAD_MODE_XY_ANGLES 1
-#define ATMOS_SPREAD_MODE_NO_Z 2
+// Типы распространения. Нормальный тип это 4 стороны от центра, +1z,-1z
+#define ATMOS_SPREAD_TYPE_NORMAL 0
+#define ATMOS_SPREAD_TYPE_NORMAL_XY_ANGLES 1
+#define ATMOS_SPREAD_TYPE_NO_Z 2

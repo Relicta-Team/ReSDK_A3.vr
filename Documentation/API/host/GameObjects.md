@@ -361,7 +361,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 726](../../../Src/host/GameObjects/GameObject.sqf#L726)
+File: [host\GameObjects\GameObject.sqf at line 745](../../../Src/host/GameObjects/GameObject.sqf#L745)
 ## sectorSize
 
 Type: constant
@@ -373,7 +373,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 727](../../../Src/host/GameObjects/GameObject.sqf#L727)
+File: [host\GameObjects\GameObject.sqf at line 746](../../../Src/host/GameObjects/GameObject.sqf#L746)
 ## flyingObject
 
 Type: Variable
@@ -409,7 +409,7 @@ Initial value:
 ```sqf
 ["emote","log","act","combat","info","mind","event","system","error","default"]
 ```
-File: [host\GameObjects\GameObject.sqf at line 1049](../../../Src/host/GameObjects/GameObject.sqf#L1049)
+File: [host\GameObjects\GameObject.sqf at line 1068](../../../Src/host/GameObjects/GameObject.sqf#L1068)
 ## go_internal_chatMesMapText
 
 Type: Variable
@@ -421,7 +421,7 @@ Initial value:
 ```sqf
 ["Эмоут:Кастомное пользовательское действие",...
 ```
-File: [host\GameObjects\GameObject.sqf at line 1050](../../../Src/host/GameObjects/GameObject.sqf#L1050)
+File: [host\GameObjects\GameObject.sqf at line 1069](../../../Src/host/GameObjects/GameObject.sqf#L1069)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
@@ -3205,7 +3205,7 @@ Replaced value:
 ```sqf
 setSelf(name,getVar(_item,name))
 ```
-File: [host\GameObjects\Items\Item.sqf at line 773](../../../Src/host/GameObjects/Items/Item.sqf#L773)
+File: [host\GameObjects\Items\Item.sqf at line 790](../../../Src/host/GameObjects/Items/Item.sqf#L790)
 ## methodReference(name__,parm,refparam)
 
 Type: constant
@@ -3219,7 +3219,7 @@ Replaced value:
 ```sqf
 func(name__) {parm; callFuncParams(getSelf(object),name__,refparam)}
 ```
-File: [host\GameObjects\Items\Item.sqf at line 1172](../../../Src/host/GameObjects/Items/Item.sqf#L1172)
+File: [host\GameObjects\Items\Item.sqf at line 1189](../../../Src/host/GameObjects/Items/Item.sqf#L1189)
 ## generateItemSize
 
 Type: function
@@ -5697,7 +5697,7 @@ Description: for testing [obj,[-0.73,0.7,-1.365],270] call struct_door_initOpenM
 - Param: _vecbias
 - Param: _dir
 
-File: [host\GameObjects\Structures\Doors\Static\DoorStatic.sqf at line 83](../../../Src/host/GameObjects/Structures/Doors/Static/DoorStatic.sqf#L83)
+File: [host\GameObjects\Structures\Doors\Static\DoorStatic.sqf at line 112](../../../Src/host/GameObjects/Structures/Doors/Static/DoorStatic.sqf#L112)
 # Teleport.sqf
 
 ## teleportMobToPoint

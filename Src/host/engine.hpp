@@ -424,31 +424,6 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define removeEventHandler(varname,val) __eventHandlerName__(varname) deleteat (__eventHandlerName__(varname) find (val))
 #define callEventHandler(varname,evhargs) private eventHandlerArgs = evhargs; {call _x;true} count __eventHandlerName__(varname)
 
-// simple object creator
-/*
-	ps_##name = [["typeName",#name
-		],[#varname,1],[#varname,2
-	]];
-
-	structCreate(tempStruct)
-		structVar(a) 1
-		structVar(b) 2
-	structEnd
-
-	_s = structNew(tempStruct);
-
-
-*/
-#define structCreate(name) ps_##name = [["typeName",#name
-#define structEnd ]];
-
-#define structVar(varname) ],[#varname,
-
-#define structNew(name) (createHashMapFromArray ps_##name)
-//accessing struct
-#define structSet(obj,varname,varval) obj set [#varname,varval]
-#define structGet(obj,varname) (obj get #varname)
-
 //comparison
 
 #define equals(obja,objb) ((obja)isequalto(objb))

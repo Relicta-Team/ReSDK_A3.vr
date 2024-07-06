@@ -761,7 +761,7 @@ class(IAmmoBase) extends(Stack)
 	var(size,ITEM_SIZE_TINY);
 	var(weight,gramm(16.8)); //basic pistol ammo weight
 	var(dr,4);
-	var(model,"\A3\Weapons_f\ammo\cartridge_small");
+	var(model,"\A3\Weapons_f\ammo\cartridge_small.p3d");
 	var(material,"MatMetal");
 	getterconst_func(getProjectileModel,"\a3\Weapons_F\data\bullettracer\tracer_white.p3d");
 
@@ -804,13 +804,34 @@ class(IAmmoBase) extends(Stack)
 			};
 		};
 	};
+
+	//есть баг с отсечением пути моделей патронов. это быстрый фикс чтобы видеть иконки
+	func(constructor)
+	{
+		objParams();
+		private _myIcon = getSelf(icon);
+		if ([_myIcon,"+p3d"] call stringEndWith) then {
+			setSelf(icon,_myIcon select [0 arg (count _myIcon)-4]);
+		};
+	};
 endclass
 
 class(BulletCase) extends(Stack)
+
+	//!see IAmmoBase::constructor
+	func(constructor)
+	{
+		objParams();
+		private _myIcon = getSelf(icon);
+		if ([_myIcon,"+p3d"] call stringEndWith) then {
+			setSelf(icon,_myIcon select [0 arg (count _myIcon)-4]);
+		};
+	};
+
 	getterconst_func(getCaliber,"9мм");
 	var(name,"Гильза");
 	var(stackName,"Гильзы");
-	var(model,"\A3\Weapons_f\ammo\cartridge_small");
+	var(model,"\A3\Weapons_f\ammo\cartridge_small.p3d");
 	var(material,"MatMetal");
 	editor_attribute("EditorVisible" arg "type:int" arg "range:1:20")
 	var(stackCount,1);

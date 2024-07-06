@@ -48,6 +48,90 @@ Replaced value:
 "WARN: "
 ```
 File: [host\CommonComponents\!PreInit.sqf at line 69](../../../Src/host/CommonComponents/!PreInit.sqf#L69)
+## STRUCT_MEM_TYPE
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"#type"
+```
+File: [host\CommonComponents\!PreInit.sqf at line 116](../../../Src/host/CommonComponents/!PreInit.sqf#L116)
+## STRUCT_MEM_BASE
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"#base"
+```
+File: [host\CommonComponents\!PreInit.sqf at line 117](../../../Src/host/CommonComponents/!PreInit.sqf#L117)
+## STRUCT_MEM_TOSTRING
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"#str"
+```
+File: [host\CommonComponents\!PreInit.sqf at line 118](../../../Src/host/CommonComponents/!PreInit.sqf#L118)
+## STRUCT_MEM_FLAGS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"#flags"
+```
+File: [host\CommonComponents\!PreInit.sqf at line 119](../../../Src/host/CommonComponents/!PreInit.sqf#L119)
+## STRUCT_MEM_CONSTRUCTOR
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"#create"
+```
+File: [host\CommonComponents\!PreInit.sqf at line 120](../../../Src/host/CommonComponents/!PreInit.sqf#L120)
+## STRUCT_MEM_DESTRUCTOR
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"#delete"
+```
+File: [host\CommonComponents\!PreInit.sqf at line 121](../../../Src/host/CommonComponents/!PreInit.sqf#L121)
+## STRUCT_MEM_COPY
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"#clone"
+```
+File: [host\CommonComponents\!PreInit.sqf at line 122](../../../Src/host/CommonComponents/!PreInit.sqf#L122)
 ## __ptr_size__
 
 Type: constant
@@ -59,7 +143,7 @@ Replaced value:
 ```sqf
 8
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 148](../../../Src/host/CommonComponents/!PreInit.sqf#L148)
+File: [host\CommonComponents\!PreInit.sqf at line 239](../../../Src/host/CommonComponents/!PreInit.sqf#L239)
 ## __num_size__
 
 Type: constant
@@ -71,7 +155,7 @@ Replaced value:
 ```sqf
 8
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 149](../../../Src/host/CommonComponents/!PreInit.sqf#L149)
+File: [host\CommonComponents\!PreInit.sqf at line 240](../../../Src/host/CommonComponents/!PreInit.sqf#L240)
 ## __vector_size__
 
 Type: constant
@@ -83,7 +167,7 @@ Replaced value:
 ```sqf
 24
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 150](../../../Src/host/CommonComponents/!PreInit.sqf#L150)
+File: [host\CommonComponents\!PreInit.sqf at line 241](../../../Src/host/CommonComponents/!PreInit.sqf#L241)
 ## __map_size__
 
 Type: constant
@@ -95,7 +179,7 @@ Replaced value:
 ```sqf
 48
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 151](../../../Src/host/CommonComponents/!PreInit.sqf#L151)
+File: [host\CommonComponents\!PreInit.sqf at line 242](../../../Src/host/CommonComponents/!PreInit.sqf#L242)
 ## C_PTR_REALOC_SIZE
 
 Type: constant
@@ -107,7 +191,7 @@ Replaced value:
 ```sqf
 1024
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 185](../../../Src/host/CommonComponents/!PreInit.sqf#L185)
+File: [host\CommonComponents\!PreInit.sqf at line 276](../../../Src/host/CommonComponents/!PreInit.sqf#L276)
 ## C_PTR_BYTE_SITE
 
 Type: constant
@@ -119,7 +203,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 186](../../../Src/host/CommonComponents/!PreInit.sqf#L186)
+File: [host\CommonComponents\!PreInit.sqf at line 277](../../../Src/host/CommonComponents/!PreInit.sqf#L277)
 ## testcheck(value,errortext)
 
 Type: constant
@@ -137,7 +221,7 @@ if !(value) exitWith { \
 		setLastError(_format); \
 	};
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 502](../../../Src/host/CommonComponents/!PreInit.sqf#L502)
+File: [host\CommonComponents\!PreInit.sqf at line 593](../../../Src/host/CommonComponents/!PreInit.sqf#L593)
 ## cprint_usestdout
 
 Type: Variable
@@ -162,6 +246,42 @@ Initial value:
 isMultiplayer && isServer
 ```
 File: [host\CommonComponents\!PreInit.sqf at line 37](../../../Src/host/CommonComponents/!PreInit.sqf#L37)
+## spi_lst
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[] //preinit structures list
+```
+File: [host\CommonComponents\!PreInit.sqf at line 111](../../../Src/host/CommonComponents/!PreInit.sqf#L111)
+## vtable_s
+
+Type: Variable
+
+Description: preinit structures list
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CommonComponents\!PreInit.sqf at line 112](../../../Src/host/CommonComponents/!PreInit.sqf#L112)
+## struct_default_flag
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+["unscheduled"]
+```
+File: [host\CommonComponents\!PreInit.sqf at line 113](../../../Src/host/CommonComponents/!PreInit.sqf#L113)
 ## allThreads
 
 Type: Variable
@@ -173,7 +293,7 @@ Initial value:
 ```sqf
 [] //init thread pool
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 111](../../../Src/host/CommonComponents/!PreInit.sqf#L111)
+File: [host\CommonComponents\!PreInit.sqf at line 202](../../../Src/host/CommonComponents/!PreInit.sqf#L202)
 ## hashMapNull
 
 Type: Variable
@@ -185,7 +305,7 @@ Initial value:
 ```sqf
 createHashMapFromArray [["__NULL_HASH_MAP__","__NULL_HASH_MAP__"]]
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 112](../../../Src/host/CommonComponents/!PreInit.sqf#L112)
+File: [host\CommonComponents\!PreInit.sqf at line 203](../../../Src/host/CommonComponents/!PreInit.sqf#L203)
 ## table_hex
 
 Type: Variable
@@ -197,7 +317,7 @@ Initial value:
 ```sqf
 "0123456789abcdef"splitString stringEmpty
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 114](../../../Src/host/CommonComponents/!PreInit.sqf#L114)
+File: [host\CommonComponents\!PreInit.sqf at line 205](../../../Src/host/CommonComponents/!PreInit.sqf#L205)
 ## ptr_i_mctr
 
 Type: Variable
@@ -209,7 +329,7 @@ Initial value:
 ```sqf
 1//internal memory counter
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 183](../../../Src/host/CommonComponents/!PreInit.sqf#L183)
+File: [host\CommonComponents\!PreInit.sqf at line 274](../../../Src/host/CommonComponents/!PreInit.sqf#L274)
 ## ptr_i_al
 
 Type: Variable
@@ -221,7 +341,7 @@ Initial value:
 ```sqf
 0 //allocated before realoc ( not used now...)
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 184](../../../Src/host/CommonComponents/!PreInit.sqf#L184)
+File: [host\CommonComponents\!PreInit.sqf at line 275](../../../Src/host/CommonComponents/!PreInit.sqf#L275)
 ## ptr_cnl
 
 Type: Variable
@@ -233,7 +353,7 @@ Initial value:
 ```sqf
 __ptr_struct_internal__(str ptr_i_mctr,0) //null pointer
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 187](../../../Src/host/CommonComponents/!PreInit.sqf#L187)
+File: [host\CommonComponents\!PreInit.sqf at line 278](../../../Src/host/CommonComponents/!PreInit.sqf#L278)
 ## ptr_htable
 
 Type: Variable
@@ -245,7 +365,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 188](../../../Src/host/CommonComponents/!PreInit.sqf#L188)
+File: [host\CommonComponents\!PreInit.sqf at line 279](../../../Src/host/CommonComponents/!PreInit.sqf#L279)
 ## ptr_i_hex__
 
 Type: Variable
@@ -257,7 +377,7 @@ Initial value:
 ```sqf
 "0123456789abcdef"splitString stringEmpty
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 206](../../../Src/host/CommonComponents/!PreInit.sqf#L206)
+File: [host\CommonComponents\!PreInit.sqf at line 297](../../../Src/host/CommonComponents/!PreInit.sqf#L297)
 ## client_sendNotifToServer
 
 Type: function
@@ -290,6 +410,31 @@ Description:
 
 
 File: [host\CommonComponents\!PreInit.sqf at line 68](../../../Src/host/CommonComponents/!PreInit.sqf#L68)
+## struct_initialize
+
+Type: function
+
+Description: 
+
+
+File: [host\CommonComponents\!PreInit.sqf at line 114](../../../Src/host/CommonComponents/!PreInit.sqf#L114)
+## struct_alloc
+
+Type: function
+
+Description: 
+- Param: _s
+- Param: _params
+
+File: [host\CommonComponents\!PreInit.sqf at line 178](../../../Src/host/CommonComponents/!PreInit.sqf#L178)
+## struct_eraseFull
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\CommonComponents\!PreInit.sqf at line 197](../../../Src/host/CommonComponents/!PreInit.sqf#L197)
 ## rpc_addEventGlobal
 
 Type: function
@@ -298,7 +443,7 @@ Description:
 - Param: _eventName
 - Param: _eventCode
 
-File: [host\CommonComponents\!PreInit.sqf at line 116](../../../Src/host/CommonComponents/!PreInit.sqf#L116)
+File: [host\CommonComponents\!PreInit.sqf at line 207](../../../Src/host/CommonComponents/!PreInit.sqf#L207)
 ## rv_cppcheck
 
 Type: function
@@ -306,7 +451,7 @@ Type: function
 Description: if (isValid(nullPtr)) then {} else {};
 - Param: _val
 
-File: [host\CommonComponents\!PreInit.sqf at line 135](../../../Src/host/CommonComponents/!PreInit.sqf#L135)
+File: [host\CommonComponents\!PreInit.sqf at line 226](../../../Src/host/CommonComponents/!PreInit.sqf#L226)
 ## rv_sizeOf
 
 Type: function
@@ -314,7 +459,7 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 147](../../../Src/host/CommonComponents/!PreInit.sqf#L147)
+File: [host\CommonComponents\!PreInit.sqf at line 238](../../../Src/host/CommonComponents/!PreInit.sqf#L238)
 ## ptr_create
 
 Type: function
@@ -322,7 +467,7 @@ Type: function
 Description: initialize new pointer
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 192](../../../Src/host/CommonComponents/!PreInit.sqf#L192)
+File: [host\CommonComponents\!PreInit.sqf at line 283](../../../Src/host/CommonComponents/!PreInit.sqf#L283)
 ## ptr_destroy
 
 Type: function
@@ -330,7 +475,7 @@ Type: function
 Description: delete pointer if not null
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 198](../../../Src/host/CommonComponents/!PreInit.sqf#L198)
+File: [host\CommonComponents\!PreInit.sqf at line 289](../../../Src/host/CommonComponents/!PreInit.sqf#L289)
 ## ptr_cts
 
 Type: function
@@ -338,7 +483,7 @@ Type: function
 Description: convert to string
 - Param: _p
 
-File: [host\CommonComponents\!PreInit.sqf at line 209](../../../Src/host/CommonComponents/!PreInit.sqf#L209)
+File: [host\CommonComponents\!PreInit.sqf at line 300](../../../Src/host/CommonComponents/!PreInit.sqf#L300)
 ## ptr_remval
 
 Type: function
@@ -346,7 +491,7 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 241](../../../Src/host/CommonComponents/!PreInit.sqf#L241)
+File: [host\CommonComponents\!PreInit.sqf at line 332](../../../Src/host/CommonComponents/!PreInit.sqf#L332)
 ## ptr_check
 
 Type: function
@@ -354,7 +499,7 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 247](../../../Src/host/CommonComponents/!PreInit.sqf#L247)
+File: [host\CommonComponents\!PreInit.sqf at line 338](../../../Src/host/CommonComponents/!PreInit.sqf#L338)
 ## toNumeralString
 
 Type: function
@@ -364,7 +509,7 @@ Description: Склоняет слова в числительное
 - Param: _counter (optional, default ['"Штука"', '"Штуки"', '"Штук"'])
 - Param: _addNumToText (optional, default false)
 
-File: [host\CommonComponents\!PreInit.sqf at line 254](../../../Src/host/CommonComponents/!PreInit.sqf#L254)
+File: [host\CommonComponents\!PreInit.sqf at line 345](../../../Src/host/CommonComponents/!PreInit.sqf#L345)
 ## regex_isMatch
 
 Type: function
@@ -373,7 +518,7 @@ Description: ===================================================================
 - Param: _txt
 - Param: _pattern
 
-File: [host\CommonComponents\!PreInit.sqf at line 268](../../../Src/host/CommonComponents/!PreInit.sqf#L268)
+File: [host\CommonComponents\!PreInit.sqf at line 359](../../../Src/host/CommonComponents/!PreInit.sqf#L359)
 ## regex_getFirstMatch
 
 Type: function
@@ -383,7 +528,7 @@ Description:
 - Param: _pattern
 - Param: _optMath (optional, default 0)
 
-File: [host\CommonComponents\!PreInit.sqf at line 274](../../../Src/host/CommonComponents/!PreInit.sqf#L274)
+File: [host\CommonComponents\!PreInit.sqf at line 365](../../../Src/host/CommonComponents/!PreInit.sqf#L365)
 ## regex_replace
 
 Type: function
@@ -393,7 +538,7 @@ Description:
 - Param: _pattern
 - Param: _replacer
 
-File: [host\CommonComponents\!PreInit.sqf at line 281](../../../Src/host/CommonComponents/!PreInit.sqf#L281)
+File: [host\CommonComponents\!PreInit.sqf at line 372](../../../Src/host/CommonComponents/!PreInit.sqf#L372)
 ## stringStartWith
 
 Type: function
@@ -403,7 +548,7 @@ Description: Строковые хелперы
 - Param: _started
 - Param: _casesense (optional, default true)
 
-File: [host\CommonComponents\!PreInit.sqf at line 336](../../../Src/host/CommonComponents/!PreInit.sqf#L336)
+File: [host\CommonComponents\!PreInit.sqf at line 427](../../../Src/host/CommonComponents/!PreInit.sqf#L427)
 ## stringEndWith
 
 Type: function
@@ -413,7 +558,7 @@ Description:
 - Param: _ended
 - Param: _casesense (optional, default true)
 
-File: [host\CommonComponents\!PreInit.sqf at line 342](../../../Src/host/CommonComponents/!PreInit.sqf#L342)
+File: [host\CommonComponents\!PreInit.sqf at line 433](../../../Src/host/CommonComponents/!PreInit.sqf#L433)
 ## stringReplace
 
 Type: function
@@ -423,7 +568,7 @@ Description:
 - Param: _find (optional, default "")
 - Param: _replace (optional, default "")
 
-File: [host\CommonComponents\!PreInit.sqf at line 349](../../../Src/host/CommonComponents/!PreInit.sqf#L349)
+File: [host\CommonComponents\!PreInit.sqf at line 440](../../../Src/host/CommonComponents/!PreInit.sqf#L440)
 ## selectBest
 
 Type: function
@@ -433,7 +578,7 @@ Description: Выбирает лучший случай [[1,2,3],{_x > 2}] call 
 - Param: _criteria
 - Param: _return
 
-File: [host\CommonComponents\!PreInit.sqf at line 368](../../../Src/host/CommonComponents/!PreInit.sqf#L368)
+File: [host\CommonComponents\!PreInit.sqf at line 459](../../../Src/host/CommonComponents/!PreInit.sqf#L459)
 ## searchInList
 
 Type: function
@@ -443,7 +588,7 @@ Description:
 - Param: _lambda
 - Param: _defaultReturn
 
-File: [host\CommonComponents\!PreInit.sqf at line 384](../../../Src/host/CommonComponents/!PreInit.sqf#L384)
+File: [host\CommonComponents\!PreInit.sqf at line 475](../../../Src/host/CommonComponents/!PreInit.sqf#L475)
 ## arrayDeleteItem
 
 Type: function
@@ -452,7 +597,7 @@ Description:
 - Param: _a
 - Param: _it
 
-File: [host\CommonComponents\!PreInit.sqf at line 391](../../../Src/host/CommonComponents/!PreInit.sqf#L391)
+File: [host\CommonComponents\!PreInit.sqf at line 482](../../../Src/host/CommonComponents/!PreInit.sqf#L482)
 ## arrayIsValidIndex
 
 Type: function
@@ -461,7 +606,7 @@ Description:
 - Param: _a
 - Param: _ix
 
-File: [host\CommonComponents\!PreInit.sqf at line 398](../../../Src/host/CommonComponents/!PreInit.sqf#L398)
+File: [host\CommonComponents\!PreInit.sqf at line 489](../../../Src/host/CommonComponents/!PreInit.sqf#L489)
 ## arrayShuffleOrig
 
 Type: function
@@ -469,7 +614,7 @@ Type: function
 Description: shuffle array elements, return alter array
 - Param: _array
 
-File: [host\CommonComponents\!PreInit.sqf at line 404](../../../Src/host/CommonComponents/!PreInit.sqf#L404)
+File: [host\CommonComponents\!PreInit.sqf at line 495](../../../Src/host/CommonComponents/!PreInit.sqf#L495)
 ## arraySwap
 
 Type: function
@@ -479,7 +624,7 @@ Description: swap 2 elements in array
 - Param: _is
 - Param: _id
 
-File: [host\CommonComponents\!PreInit.sqf at line 416](../../../Src/host/CommonComponents/!PreInit.sqf#L416)
+File: [host\CommonComponents\!PreInit.sqf at line 507](../../../Src/host/CommonComponents/!PreInit.sqf#L507)
 ## stringLength
 
 Type: function
@@ -488,7 +633,7 @@ Description:
 - Param: _str
 - Param: _unicode (optional, default true)
 
-File: [host\CommonComponents\!PreInit.sqf at line 423](../../../Src/host/CommonComponents/!PreInit.sqf#L423)
+File: [host\CommonComponents\!PreInit.sqf at line 514](../../../Src/host/CommonComponents/!PreInit.sqf#L514)
 ## stringSelect
 
 Type: function
@@ -498,7 +643,7 @@ Description:
 - Param: _i
 - Param: _c
 
-File: [host\CommonComponents\!PreInit.sqf at line 433](../../../Src/host/CommonComponents/!PreInit.sqf#L433)
+File: [host\CommonComponents\!PreInit.sqf at line 524](../../../Src/host/CommonComponents/!PreInit.sqf#L524)
 ## randomFloat
 
 Type: function
@@ -507,7 +652,7 @@ Description:
 - Param: _beg
 - Param: _end
 
-File: [host\CommonComponents\!PreInit.sqf at line 439](../../../Src/host/CommonComponents/!PreInit.sqf#L439)
+File: [host\CommonComponents\!PreInit.sqf at line 530](../../../Src/host/CommonComponents/!PreInit.sqf#L530)
 ## randomInt
 
 Type: function
@@ -516,7 +661,7 @@ Description:
 - Param: _beg
 - Param: _end
 
-File: [host\CommonComponents\!PreInit.sqf at line 444](../../../Src/host/CommonComponents/!PreInit.sqf#L444)
+File: [host\CommonComponents\!PreInit.sqf at line 535](../../../Src/host/CommonComponents/!PreInit.sqf#L535)
 ## randomProbably
 
 Type: function
@@ -524,7 +669,7 @@ Type: function
 Description: 
 - Param: _v
 
-File: [host\CommonComponents\!PreInit.sqf at line 449](../../../Src/host/CommonComponents/!PreInit.sqf#L449)
+File: [host\CommonComponents\!PreInit.sqf at line 540](../../../Src/host/CommonComponents/!PreInit.sqf#L540)
 ## getPrecentage
 
 Type: function
@@ -533,7 +678,7 @@ Description:
 - Param: _checkedval
 - Param: _pval
 
-File: [host\CommonComponents\!PreInit.sqf at line 454](../../../Src/host/CommonComponents/!PreInit.sqf#L454)
+File: [host\CommonComponents\!PreInit.sqf at line 545](../../../Src/host/CommonComponents/!PreInit.sqf#L545)
 ## clampNumber
 
 Type: function
@@ -543,7 +688,7 @@ Description:
 - Param: _mi
 - Param: _ma
 
-File: [host\CommonComponents\!PreInit.sqf at line 459](../../../Src/host/CommonComponents/!PreInit.sqf#L459)
+File: [host\CommonComponents\!PreInit.sqf at line 550](../../../Src/host/CommonComponents/!PreInit.sqf#L550)
 ## stringFormat
 
 Type: function
@@ -553,7 +698,7 @@ Description:
 - Param: _val
 - Param: _breakArr (optional, default false)
 
-File: [host\CommonComponents\!PreInit.sqf at line 464](../../../Src/host/CommonComponents/!PreInit.sqf#L464)
+File: [host\CommonComponents\!PreInit.sqf at line 555](../../../Src/host/CommonComponents/!PreInit.sqf#L555)
 ## functionalitests_preinit
 
 Type: function
@@ -563,7 +708,7 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 501](../../../Src/host/CommonComponents/!PreInit.sqf#L501)
+File: [host\CommonComponents\!PreInit.sqf at line 592](../../../Src/host/CommonComponents/!PreInit.sqf#L592)
 # Algorithm.sqf
 
 ## allOf

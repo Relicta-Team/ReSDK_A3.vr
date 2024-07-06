@@ -101,6 +101,11 @@ _owner = if (isServer) then {0} else {clientOwner};
 ["Station"] call ct_load;
 _data = [_owner];
 
+//init clientside structures only in mp-mode
+if (isMultiplayer) then {
+    call struct_initialize;
+};
+
 if (!isMultiplayer) then {
     //против задержки пакетов
     invokeAfterDelayParams({rpcSendToServer("onClientReady",_this)},0.3,_data)

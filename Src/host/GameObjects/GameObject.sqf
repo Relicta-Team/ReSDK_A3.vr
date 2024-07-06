@@ -415,8 +415,8 @@ class(GameObject) extends(ManagedObject)
 		callFunc(_usr,generateLastInteractOnServer);
 		if equals(this,callFunc(_usr,getLastInteractTarget)) then {
 			private _ch = [callFunc(_usr,getLastInteractEndPos) call atmos_chunkPosToId] call atmos_getChunkAtChIdUnsafe;
-			if !isNullReference(_ch) then {
-				private _inf = callFuncParams(_ch,getChunkUserInfo,_usr);
+			if !isNullVar(_ch) then {
+				private _inf = _ch call ["getChunkUserInfo",[_usr]];
 				if (_inf!=stringEmpty) then {
 					modvar(_otherText) + sbr + _inf;
 				};
@@ -699,6 +699,25 @@ class(GameObject) extends(ManagedObject)
 			warningformat("%1:getSourceLoc() returns this object",callSelf(getClassName));
 		};*/
 
+		_curLoc;
+	};
+
+	//расширенный метод получения базовой локации объекта
+	func(getSourceLocEx)
+	{
+		params ['this',"_owningList"];
+		if isNullVar(_owningList) then {_owningList = []};
+		private _curLoc = this;
+		private _probNewLoc = nullPtr;
+		while {true} do {
+			_probNewLoc = getVar(_curLoc,loc);
+			if (isNullVar(_probNewLoc) || {equalTypes(_probNewLoc,objNUll)}) exitWith {};
+			if callFunc(_probNewLoc,isMob) exitWith {};
+			
+			_curLoc = _probNewLoc;
+			_owningList pushBack _probNewLoc;
+		};
+		if isNullVar(_curLoc) exitWith {nullPtr};
 		_curLoc;
 	};
 
@@ -1102,7 +1121,7 @@ endregion
 
 		//request for update atmos chunk
 		private _ch = [(getposatl getSelf(loc))call atmos_chunkPosToId] call atmos_getChunkAtChId;
-		setVar(_ch,flagUpdObj,true);
+		_ch set ["flagUpdObj",true];
 
 		[this,_cht] call noe_unloadVisualObject;
 		true
@@ -1534,7 +1553,7 @@ class(IDestructible) extends(GameObject)
 	func(onAffectDamageToPos)
 	{
 		objParams_4(_passedDamage,_type,_worldPos,_cause);
-		traceformat("AFFECT DAM %1 %2 %3",_passedDamage arg _type arg _worldPos);
+		//traceformat("AFFECT DAM %1 %2 %3",_passedDamage arg _type arg _worldPos);
 	};
 
 	func(constructor)

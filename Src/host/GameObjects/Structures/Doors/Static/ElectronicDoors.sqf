@@ -71,6 +71,7 @@ class(GateCity) extends(ElectronicDeviceDoor)
 	var(material,"MatMetal");
 	var(dr,5);
 	getter_func(animateData,[vec3(0,0,0.95) arg 0]);
+	getterconst_func(interpSpeed,1.8);
 	var(edReqPower,10);
 	
 	getterconst_func(getActivationDelay,4);
@@ -87,6 +88,7 @@ class(SteelGridDoorElectronic) extends(ElectronicDeviceDoor)
 	var(material,"MatMetal");
 	var(dr,4);
 	getter_func(animateData,[vec3(0.55,0.55,-1.76488) arg 90]);
+	getterconst_func(interpSpeed,0.4);
 	
 	var(stBreakBonus,-4);
 	getterconst_func(canBreak,true);
