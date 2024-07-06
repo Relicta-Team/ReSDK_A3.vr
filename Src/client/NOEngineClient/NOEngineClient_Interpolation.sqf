@@ -6,7 +6,7 @@
 noe_client_defaultInterpTime = 0.15;
 
 noe_client_interp_processObjInterp = {
-	params ["_srcObj","_fromPos","_fromTransf","_toPos","_toTransf","_time",["_scaleMode",0]];
+	params ["_srcObj","_fromPos","_fromTransf","_toPos","_toTransf","_time",["_scaleMode",0],["_stdMode",0]];
 	_srcObj disableCollisionWith player;
 	traceformat("Interp process launched: %1",_this)
 	
@@ -16,12 +16,14 @@ noe_client_interp_processObjInterp = {
 		{(_x select 0)call(_x select 1)} foreach (_src getvariable "_eventOnDelete");
 		deleteVehicle _src;
 	};
-	_time = _time + rand(-0.05,0.1);
 
 	startAsyncInvoke
 	{
-		params ["_src","_fp","_ft","_tp","_tt","_tStart","_dur","_scl"];
+		params ["_src","_fp","_ft","_tp","_tt","_tStart","_dur","_scl","_stdMode"];
 		if isNullReference(_src) exitWith {true};
+		
+		{(_x select 0)call(_x select 1)} foreach (_src getvariable "_eventOnFrame");
+
 		//auto_gen: transform data params; [_mSrc,_offset,_selName,[_obj] call model_getPitchBankYaw]
 		if equals(_fp,"AUTO_GEN") then {
 			_ft params ["_m","_of","_sl","_pby"];
@@ -38,12 +40,61 @@ noe_client_interp_processObjInterp = {
 		_pos = vectorLinearConversion [_tStart,_tEnd,tickTime,_fp,_tp];
 		_src setPosAtl _pos;
 		
-		if ((linearConversion[_tStart,_tEnd,tickTime,0,1])>=0.7) then {
-			_trans = vectorLinearConversion [_tStart,_tEnd,tickTime,_ft,_tt];
-			[_src,_trans] call model_SetPitchBankYaw;
-		} else {
-			[_src,_fp] call model_SetPitchBankYaw;
+		_canApplyTransf = true;
+		
+		_normAngle = {
+			private _r = _this % 360;
+			if (_r>=180) then {
+				_r = _r - 360;
+			} else {
+				if (_r<=-180) then {
+					_r = _r + 360;
+				};
+			};
+			_r
 		};
+
+		if (_canApplyTransf) then {
+			if equalTypes(_ft,0) then {
+				if not_equalTypes(_tt,0) then {
+					_tt = _tt select 2;
+				};
+				_src setDir (linearConversion[_tStart,_tEnd,tickTime,_ft,_tt]);
+			} else {
+				if not_equalTypes(_tt,[]) then {
+					_tt = [0,0,_tt];
+				};
+				
+				// Нормализация углов векторов
+				_ft set [2, (_ft select 2) call _normAngle];
+				_tt set [2, (_tt select 2) call _normAngle];
+
+				// Коррекция углов для кратчайшего пути
+				private _startAngle = _ft select 2;
+				private _endAngle = _tt select 2;
+
+				if ((_endAngle - _startAngle) > 180) then {
+					_endAngle = _endAngle - 360;
+				} else {
+					if ((_endAngle - _startAngle) < -180) then {
+						_endAngle = _endAngle + 360;
+					};
+				};
+
+				_tt set [2, _endAngle];
+
+				_transf = vectorLinearConversion [_tStart,_tEnd,tickTime,_ft,_tt];
+				
+				// Нормализация результирующего угла для предотвращения артефактов
+				_transf set [2, (_transf select 2) call _normAngle];
+
+				[_src,_transf] call model_SetPitchBankYaw;
+			};
+		} else {
+			if equalTypes(_ft,0) exitWith {_src setDir _ft}; 
+			[_src,_ft] call model_SetPitchBankYaw;
+		};
+		
 
 		if (_scl!=0) then {
 			_sFact = if (_scl>0) then {
@@ -57,7 +108,7 @@ noe_client_interp_processObjInterp = {
 		false
 	},
 	_onEnd,
-	[_srcObj,_fromPos,_fromTransf,_toPos,_toTransf,tickTime,_time,_scaleMode],
+	[_srcObj,_fromPos,_fromTransf,_toPos,_toTransf,tickTime,_time,_scaleMode,_stdMode],
 	_time,
 	_onEnd
 	endAsyncInvoke
@@ -120,7 +171,9 @@ noe_client_interp_start = {
 		};
 		//temporary hidding objects (checks smd_isSMDObjectInSlot)
 		_tEventOnDelete = [];
+		_tEventOnFrame = []; //TODO implement onframe for fix bug when object updated with recreated (changed pos at new chunk)
 		_iObj setvariable ["_eventOnDelete",_tEventOnDelete];
+		_iObj setvariable ["_eventOnFrame",_tEventOnFrame];
 		_objects = [_sObj,_dObj];
 
 		if ("nhs" in _options) then {_objects set [0,objNull];};
@@ -128,6 +181,19 @@ noe_client_interp_start = {
 		private _scaleMode = 0;
 		if ("sc-" in _options) then {_scaleMode = -1};
 		if ("sc+" in _options) then {_scaleMode = 1};
+		private _stdMode = 0;
+		if ("std" in _options) then {_stdMode = 1};
+		
+		//setup interpolation speed
+		_ispdIdx = _options find "ispd";
+		private _interpSpeed = -noe_client_defaultInterpTime;
+		if (_ispdIdx!=-1) then {
+			assert((_ispdIdx+1) < count _options);
+			_interpSpeed = _options select (_ispdIdx+1);
+		};
+		if (_interpSpeed < 0) then {
+			_interpSpeed = (abs _interpSpeed) + rand(-0.05,0.1);
+		};
 
 		{
 			if isNullReference(_x) then {continue};
@@ -150,12 +216,14 @@ noe_client_interp_start = {
 				continue;
 			};
 			if (([_x,true] call noe_client_getObjPtr)!="") then {
-				_ppos = getposatl _x;
-				_x setposatl [0,0,0];
+				// _ppos = getposatl _x;
+				// _x setposatl [0,0,0]; //! raise position error
+				_x hideObject true;
 				_tEventOnDelete pushBack [
 					[_x,_ppos],{
 						params ["_o","_ppos"];
-						_o setposatl _ppos;
+						//_o setposatl _ppos;
+						_o hideObject false;
 					}
 				];
 				continue;
@@ -164,7 +232,7 @@ noe_client_interp_start = {
 
 		//starting interpolation
 		traceformat("STARTING INTERPOLATE OF %1; lt: %2; options: %3",_iObj arg _light arg _options)
-		[_iObj,_sPos,_sTr,_dPos,_dTr,noe_client_defaultInterpTime,_scaleMode] call noe_client_interp_processObjInterp;
+		[_iObj,_sPos,_sTr,_dPos,_dTr,_interpSpeed,_scaleMode,_stdMode] call noe_client_interp_processObjInterp;
 	};
 
 	if (_argList call _checkConditions) exitWith {
@@ -209,7 +277,9 @@ noe_client_interp_determineTransform = {
 	};
 };
 
-//!performance issues
-// noe_client_handleNetworkInterpolation = {
-// 	params ["_ptr","_tfrom","_tto"];
-// }; rpcAdd("nitrp",noe_client_handleNetworkInterpolation);
+_interpNet = {
+	params ["_f","_t","_opt"];
+
+	[player,[_f,_t,_opt]] call noe_client_interp_start;
+
+}; rpcAdd("nintrp",_interpNet);
