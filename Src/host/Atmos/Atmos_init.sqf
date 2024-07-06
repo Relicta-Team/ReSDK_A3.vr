@@ -280,7 +280,7 @@ atmos_internal_onUpdate = {
 
 		{
 			_chObj = _x;
-			ASP_REGION_NAMED("Chunk process" + (str _chObj))
+			ASP_REGION_NAMED("Chunk process",(_chObj))
 			_objInside = null;
 
 			
@@ -312,7 +312,7 @@ atmos_internal_onUpdate = {
 			//handle fire
 			ASP_MESSAGE("Start fire obj check")
 			if !isNullVar(_aFire) then {
-				ASP_REGION_NAMED("Fire process " + (str _aFire))
+				ASP_REGION_NAMED("Fire process ",(_aFire))
 				if isNullVar(_objInside) then {
 					_objInside = _chObj call atmos_cv_goch;
 				};
