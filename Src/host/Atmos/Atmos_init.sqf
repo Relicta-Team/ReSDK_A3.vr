@@ -91,7 +91,7 @@ atmos_rpc_requestGetArea = {
 
 	private _cObj = _cli call cm_findClientById;
 	if !isNullReference(_cObj) then {
-		getVar(_cObj,loadedAreas) set [_aId,null];
+		getVar(_cObj,loadedAreas) set [_ar,null];
 	};
 };
 rpcAdd(ATMOS_RPC_SERVER_REQUEST_AREA,atmos_rpc_requestGetArea);
