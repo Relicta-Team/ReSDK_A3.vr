@@ -105,7 +105,7 @@ db_query = {
 		["Probably error database request: %1 (%2)",_request,_retTypes] call logError;
 	};
 	#endif
-
+	["db::query() ret:%2-%3; req: %1",_request,_retTypes,_singleReturn] call logInfo;
 	private _q = parseSimpleArray((dbRequest ["query",[_request,_retTypes]])select 0);
 	if (_singleReturn) exitWith {_q select 0};
 	_q
