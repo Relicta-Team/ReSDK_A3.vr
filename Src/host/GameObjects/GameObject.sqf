@@ -1732,13 +1732,18 @@ region(Fire functionality)
 		if !callSelf(canIgniteArea) exitWith {};
 
 		if (tickTime>=getSelf(__s_nextCheckIgnite)) then {
-			#ifdef EDITOR
-			setSelf(__s_nextCheckIgnite,tickTime + 3);
-			#else
-			setSelf(__s_nextCheckIgnite,tickTime + randInt(40,60*2));
-			#endif
+			callSelf(resetIngiteTimer);
 			[this] call atmos_tryIgnite;
 		};
+	};
+	func(resetIngiteTimer)
+	{
+		objParams();
+		#ifdef EDITOR
+		setSelf(__s_nextCheckIgnite,tickTime + 5);
+		#else
+		setSelf(__s_nextCheckIgnite,tickTime + randInt(40,60*2));
+		#endif
 	};
 
 	// "

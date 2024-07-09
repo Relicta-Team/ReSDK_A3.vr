@@ -178,6 +178,7 @@ class(Torch) extends(ILightible)
 		objParams();
 		if (getSelf(fuelLeft) != -1) then {
 			if getSelf(lightIsEnabled) then {
+				callSelf(resetIngiteTimer);
 				callSelfParams(startUpdateMethod,"onUpdate" arg "handleUpdate");
 			};
 		};
@@ -197,6 +198,7 @@ class(Torch) extends(ILightible)
 		private _result = callSuper(ILightible,lightSetMode);
 		if (_result) then {
 			if (_mode) then {
+				callSelf(resetIngiteTimer);
 				callSelfParams(startUpdateMethod,"onUpdate" arg "handleUpdate");
 				if callSelf(isInContainer) exitWith {};
 				callSelfParams(playSound, "fire\torch_on" arg rand(0.8,1.8));
@@ -246,12 +248,22 @@ class(Torch) extends(ILightible)
 			//item in mob inventory
 			private _loc = callSelf(getSourceLoc);
 			if callFunc(_loc,isMob) exitWith {
-				callFunc(_loc,getStance) <= STANCE_DOWN
+				private _isDowned = callFunc(_loc,getStance) <= STANCE_DOWN;
+				if (!_isDowned) then {
+					callSelf(resetIngiteTimer);
+				};
+				_isDowned
 			};
 			true
 		};
 
 		true; //super == true
+	};
+
+	func(onChangeLoc)
+	{
+		objParams();
+		callSelf(resetIngiteTimer);
 	};
 
 endclass
