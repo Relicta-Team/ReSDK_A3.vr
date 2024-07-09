@@ -98,9 +98,9 @@ noe_client_interp_processObjInterp = {
 
 		if (_scl!=0) then {
 			_sFact = if (_scl>0) then {
-				linearConversion [_tStart,_tEnd,tickTime,0,1]
+				linearConversion [_tStart,_tEnd,tickTime,0.3,1]
 			} else {
-				linearConversion [_tStart,_tEnd,tickTime,1,0]
+				linearConversion [_tStart,_tEnd,tickTime,1,0.3]
 			};
 			_src setObjectScale _sFact;
 		};
@@ -176,14 +176,6 @@ noe_client_interp_start = {
 		_iObj setvariable ["_eventOnFrame",_tEventOnFrame];
 		_objects = [_sObj,_dObj];
 
-		if ("nhs" in _options) then {_objects set [0,objNull];};
-		if ("nhd" in _options) then {_objects set [1,objNull];};
-		private _scaleMode = 0;
-		if ("sc-" in _options) then {_scaleMode = -1};
-		if ("sc+" in _options) then {_scaleMode = 1};
-		private _stdMode = 0;
-		if ("std" in _options) then {_stdMode = 1};
-		
 		//setup interpolation speed
 		_ispdIdx = _options find "ispd";
 		private _interpSpeed = -noe_client_defaultInterpTime;
@@ -194,6 +186,19 @@ noe_client_interp_start = {
 		if (_interpSpeed < 0) then {
 			_interpSpeed = (abs _interpSpeed) + rand(-0.05,0.1);
 		};
+
+		if ("nhs" in _options) then {_objects set [0,objNull];};
+		if ("nhd" in _options) then {_objects set [1,objNull];};
+		private _scaleMode = 0;
+		if ("sc-" in _options) then {_scaleMode = -1};
+		if ("sc+" in _options) then {_scaleMode = 1};
+		if (_scaleMode!=0) then {
+			_interpSpeed = _interpSpeed * 2;
+		};
+		private _stdMode = 0;
+		if ("std" in _options) then {_stdMode = 1};
+		
+		
 
 		{
 			if isNullReference(_x) then {continue};

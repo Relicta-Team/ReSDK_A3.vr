@@ -777,8 +777,14 @@ func(interpolate)
 					для отдачи объекта другому персонажу - в цель помещаем позицию цели, в источник новую локацию
 			*/
 			private _getTransform = {
-				private _l = callFunc(_this,getBasicLoc);
-				[getPosAtl _l,[_l] call model_getPitchBankYaw]
+				params ["_srcObj"];
+				private _l = callFunc(_srcObj,getBasicLoc);
+				private _pos = getPosATLVisual _l;
+				if callFunc(_srcObj,isContainer) then {
+					_bbx = boundingBoxReal [_l,"Geometry"];
+					_pos = _l modelToWorldVisual ([_bbx select [0,2]] call getPosListCenter);
+				};
+				[_pos,[_l] call model_getPitchBankYaw]
 			};
 			private _datFrom = null;
 			private _datTo = null;
@@ -792,12 +798,12 @@ func(interpolate)
 					//loc check
 					if callFunc(_obj,isInWorld) then {
 						//object is in world
-						_datFrom = _obj call _getTransform;
+						_datFrom = [_obj] call _getTransform;
 					} else {
 						//object inside another object
 						private _ownObj = callFuncParams(_obj,getSourceLocEx,null);
 						if callFunc(_ownObj,isInWorld) then {
-							_datFrom = _ownObj call _getTransform;
+							_datFrom = [_ownObj] call _getTransform;
 						} else {
 							assert_str(callFunc(getVar(_ownObj,loc),isMob),"Unexpected condition for " + (str _ownObj));
 							_datFrom = getVar(_ownObj,slot);
@@ -822,14 +828,14 @@ func(interpolate)
 					_datTo = getVar(_opt,activeHand);
 				} else {
 					if callFunc(_opt,isInWorld) then {
-						_datTo = _opt call _getTransform;
+						_datTo = [_opt] call _getTransform;
 						if callFunc(_opt,isContainer) then {
 							_optionals pushBack "sc-";
 						};	
 					} else {
 						private _ownObj = callFuncParams(_opt,getSourceLocEx,null);
 						if callFunc(_ownObj,isInWorld) then {
-							_datTo = _ownObj call _getTransform;
+							_datTo = [_ownObj] call _getTransform;
 						} else {
 							assert_str(callFunc(getVar(_ownObj,loc),isMob),"Unexpected condition for " + (str _ownObj));
 							_datTo = getVar(_ownObj,slot);
@@ -842,6 +848,10 @@ func(interpolate)
 			} else {
 				//for pointer type
 				if equalTypes(_opt,"") exitWith {
+					_datTo = _opt;
+				};
+				//for slot type
+				if equalTypes(_opt,0) exitWith {
 					_datTo = _opt;
 				};
 				setLastError("Unsupported destination object type");
