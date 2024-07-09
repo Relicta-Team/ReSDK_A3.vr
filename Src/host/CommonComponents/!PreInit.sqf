@@ -568,6 +568,21 @@ stringFormat = {
 	format _eval
 };
 
+getPosListCenter = {
+	params [["_poses",[]],"_dummyParam"];
+	private _cPosSum = [0,0,0];
+	if equals(_poses,[]) exitWith {_cPosSum};
+
+	{
+		_cPosSum = _cPosSum vectorAdd _x;
+		false
+	} count _poses;
+
+	_cPosSum vectorMultiply (1 / count _poses);
+};
+
+//todo add new ranom funcs https://community.bistudio.com/wiki/Example_Code:_Random_Area_Distribution
+
 missionNamespace setVariable ["pushFront",
 {
 	params ["_list","_element",["_unique",false]];
