@@ -205,6 +205,8 @@ atmos_debug_renderCurrentUpdate = {
 		_mes pushBack (format["Dirty: %1, Last upd: %2",_chObj getv(flagUpdObj),_chObj getv(lastObjUpdate)]);
 		_mes pushBack sbr;
 		_mes pushBack (format["Objects %1: %2",count (_chObj getv(objInside)),sanitize(str(_chObj getv(objInside)))]);
+		_mes pushBack sbr;
+		_mes pushBack (format["Temp: %1",_chObj getv(atmosTemp)]);
 
 		if (_chObj callv(hasFire)) then {
 			private _aobj = _chObj getv(aFire);

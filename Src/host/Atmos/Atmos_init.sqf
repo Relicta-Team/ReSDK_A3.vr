@@ -255,6 +255,7 @@ atmos_internal_handleUpdate = -1;
 atmos_cv_ca = ["canActivity"];
 atmos_cv_goch = ["getObjectsInChunk"];
 atmos_cv_oa = ["onActivity"];
+atmos_cv_tupd = ["onTemperatureUpdate"];
 
 #define ASP_USE_NAMED_REGION
 
@@ -284,6 +285,10 @@ atmos_internal_onUpdate = {
 			ASP_REGION_NAMED("Chunk process",(_chObj))
 			_objInside = null;
 
+			//temperature update
+			if (tickTime >= (_chObj getv(nextTempUpdate))) then {
+				_chObj call atmos_cv_tupd;
+			};
 			
 			_aFire = null;
 

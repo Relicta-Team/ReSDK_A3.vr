@@ -223,6 +223,41 @@ struct(AtmosChunk)
 		} count (self getv(atmosList));
 	}
 
+	def(atmosTemp) 24; //нормальная температура воздуха в градусах
+	def(atmosTempNormal) 24; //дефолтная температура
+	def(atmosTempNormal_str) "24.00"
+	def(nextTempUpdate) 0;//временная отметка следующего обновления температуры
+	def(c_tempUpdateDelay) 5; //частота обновления температуры
+
+	def(onTemperatureUpdate)
+	{
+		self setv(nextTempUpdate,tickTime + (self getv(c_tempUpdateDelay)));
+
+		private _oldTemp = self getv(atmosTemp);
+		private _normTemp = self getv(atmosTempNormal);
+		
+		//значения должны быть одинаковы при уменьшении и при увеличении
+		if (_oldTemp > _normTemp) exitWith {
+			//охлаждение
+			self callp(adjustTemperature,-0.1);
+		};
+		if (_oldTemp < _normTemp) exitWith {
+			//нагревание
+			self callp(adjustTemperature,0.1);
+		};
+	}
+
+	def(adjustTemperature)
+	{
+		params ["_temp"];
+		private _newTemp = ((self getv(atmosTemp))+_temp) max -100 min 100;
+		//normalize
+		if ((_newTemp toFixed 2) == (self getv(atmosTempNormal_str))) then {
+			_newTemp = self getv(atmosTempNormal);
+		};
+		self setv(atmosTemp,_newTemp);
+	}
+
 endstruct
 
 struct(AtmosAreaBase)
@@ -411,6 +446,8 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 		callbase(onActivity);
 
 		private _newForce = -1;
+		
+		self callv(getChunk) callp(adjustTemperature,1.2 * (self getv(size)));
 
 		self callp(adjustForce,_newForce);
 		if (self callv(isActive)) then {
@@ -616,7 +653,14 @@ struct(AtmosAreaGas) base(AtmosAreaBase)
 			self getv(c_spreadType)
 		] call atmos_getNextRandAroundChunks;
 		
-		_sides pushBack [0,0,1]; //up
+		private _chunk = self callv(getChunk);
+		private _curTemp = _chunk getv(atmosTemp);
+		if (_curTemp > (_chunk getv(atmosTempNormal))) then {
+			_sides pushBack [0,0,1]; //up
+		} else {
+			_sides pushBack [0,0,-1];
+		};
+
 		private _psides = [];
 		{
 			if (self callp(canSpreadTo,_x)) then {
@@ -631,8 +675,13 @@ struct(AtmosAreaGas) base(AtmosAreaBase)
 		private _DIFF_RATE = 0.5;
 		private _valPass = (self getv(volume)) * _DIFF_RATE;
 		private _val = _valPass/_iterCnt;
+
+		private _TEMP_DIFFRATE = 0.05;
+		private _tempPass = _curTemp * _TEMP_DIFFRATE;
+		_chunk callp(adjustTemperature, -_tempPass/2);
+		private _tempPerCh = _tempPass/_iterCnt;
 		{
-			self callp(onSpreadTo,_x arg _val);
+			self callp(onSpreadTo,_x arg _val arg _tempPerCh);
 			false
 		} count _psides;
 	}
@@ -646,10 +695,12 @@ struct(AtmosAreaGas) base(AtmosAreaBase)
 
 	def(onSpreadTo)
 	{
-		params ["_side","_transVal"];
+		params ["_side","_transVal","_transTemp"];
 		if ((self getv(volume))<=0)exitWith {};
 		private _newGas = callbase(onSpreadTo);
 		self callp(transferTo,_newGas arg _transVal);
+
+		self callp(getChunkTo,_side) callp(adjustTemperature,_transTemp);
 	}
 
 	// volume management
