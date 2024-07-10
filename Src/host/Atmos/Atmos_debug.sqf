@@ -186,6 +186,12 @@ atmos_debug_renderCurrentUpdate = {
 	drawLine3D [_sp vectorAdd [0,_size,0],_sp vectorAdd [0,_size,_size],_color];
 	drawLine3D [_sp vectorAdd [_size,_size,0],_sp vectorAdd [_size,_size,_size],_color];
 
+	_sp = _sp vectoradd [0,0,_size];
+	drawLine3D [_sp,_sp vectorAdd [_size,0,0],_color];
+	drawLine3D [_sp,_sp vectorAdd [0,_size,0],_color];
+	drawLine3D [_sp vectorAdd [_size,_size,0],_sp vectorAdd [_size,0,0],_color];
+	drawLine3D [_sp vectorAdd [_size,_size,0],_sp vectorAdd [0,_size,0],_color];
+
 	private _tR = atmos_debug_centerHelperRefText select 0;
 	private _chObj = [_chId] call atmos_getChunkAtChIdUnsafe;
 	private _mes = format["[OFFS:%4]%1Chunk %2=%3",sbr,_chId,ifcheck(isNullVar(_chObj),"NULL_CHUNK",sanitize(str _chObj)),atmos_debug_rangeOffset];
