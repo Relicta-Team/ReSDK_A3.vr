@@ -9,6 +9,8 @@
 //режим отладочного отображения сфер
 //#define ATMOS_DEBUG_DRAW_INTERSECT_INFO
 
+//#define ATMOS_DEBUG_DRAW_COLLECT_CHUNKS
+
 // генератор лучей для отлова объектов в границах чанка
 atmos_getVectorsChunkInfo = {
 	private _vectors = [];
@@ -91,7 +93,7 @@ atmos_const_lineVectors = call atmos_getVectorsChunkInfo;
 
 // получает все объекты, находящиеся в чанке (объекты находящиеся частично в чанке так же будут получены)
 atmos_chunkGetNearObjects = {
-	params ["_fromCh"];
+	params ["_fromCh","_fromChObj"];
 	private _baseFromCh = _fromCh;
 	_fromCh = _fromCh call atmos_chunkIdToPos; //now chunk is position
 	private _collectReal = [];
@@ -111,6 +113,7 @@ atmos_chunkGetNearObjects = {
 			_mPos = callFunc(_x,getModelPosition);
 			if ATMOS_POS_INSIDE_CHUNK(_mPos,_fromCh) then {
 				_collectReal pushBack _x;
+				getVar(_x,__atm_ownerChunks) set [_baseFromCh,_fromChObj];
 			};
 		};
 	} forEach(_objList);
@@ -120,6 +123,7 @@ atmos_chunkGetNearObjects = {
 		if isTypeOf(_x,BasicMob) then {continue};
 
 		_collectReal pushBackUnique _x;
+		getVar(_x,__atm_ownerChunks) set [_baseFromCh,_fromChObj];
 	} foreach ([_baseFromCh] call atmos_getObjectsInChunk);
 
 	_collectReal
@@ -341,4 +345,74 @@ atmos_getIntersectInfo = {
 			_bRet
 		};
 	};
+};
+
+/* 
+	получение чанков/позиций чанков, которыми владеет этот объект
+	! Внимание - для больших объектов процедура может занять некоторе время
+*/
+atmos_getObjectOwnedChunks = {
+	params ["_obj",["_retChObj",false],["_retOnlyExists",false]];
+	private _visObj = callFunc(_obj,getBasicLoc);
+	private _bbx = boundingBoxReal [_visObj,"Geometry"];
+	private _posMin = (_visObj modelToWorldVisual (_bbx select 0));
+	private _posMax = (_visObj modelToWorldVisual (_bbx select 1));
+
+	/*
+		1. получаем 2 позиции modeltoworldvisal от bbx смещения
+		2. строим 2 вектора - минимальный и максимальный
+		3. конвертим векторы в позиции чанков
+		3. стандартный перебор по трехмерному вектору
+	*/
+
+	private _coordList = [];
+	#define NORMALIZE_VEC(l,r,i) ifcheck((l select i)>(r select i),vec2(r select i call atmos_coordToId,l select i call atmos_coordToId),vec2(l select i call atmos_coordToId,r select i call atmos_coordToId))
+	
+	NORMALIZE_VEC(_posMin,_posMax,0) params ["_sX","_eX"];
+	NORMALIZE_VEC(_posMin,_posMax,1) params ["_sY","_eY"];
+	NORMALIZE_VEC(_posMin,_posMax,2) params ["_sZ","_eZ"];
+	#undef NORMALIZE_VEC
+	private _chid = null;
+	private _algGet = if (_retChObj) then {
+		if (_retOnlyExists) then {
+			{
+				_chid = [[_x,_y,_z]] call atmos_getChunkAtChIdUnsafe;
+				if !isNullVar(_chid) then {
+					_coordList pushBack _chid;
+				};
+			}
+		} else {
+			{
+				_coordList pushBack ([[_x,_y,_z]] call atmos_getChunkAtChId);
+			}
+		};
+		
+	} else {
+		{_coordList pushBack [_x,_y,_z]}
+	};
+
+	for "_x" from _sX to _eX step ATMOS_SIZE do {
+		for "_y" from _sY to _eY step ATMOS_SIZE do {
+			for "_z" from _sZ to _eZ step ATMOS_SIZE do _algGet;
+		};
+	};
+	
+
+	#ifdef ATMOS_DEBUG_DRAW_COLLECT_CHUNKS
+	if !isNull(atmos_debug_getobjownch_list_arrows) then {
+		{deletevehicle _x} foreach atmos_debug_getobjownch_list_arrows;
+	};
+	atmos_debug_getobjownch_list_arrows = [];
+	if (!_retChObj) then {
+		{
+			private _pObj = _x ;//call atmos_chunkIdToPos;
+			_o = [1,ifcheck(_foreachIndex in [0 arg count _coordList-1],0,1),0] call atmos_debug_createSphere;
+			_o setposatl (_pObj call atmos_chunkIdToPos);
+			atmos_debug_getobjownch_list_arrows pushBack _o;
+		} foreach _coordList;
+	};
+
+	#endif
+
+	_coordList;
 };

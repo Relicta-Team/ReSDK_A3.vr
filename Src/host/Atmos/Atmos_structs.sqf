@@ -40,7 +40,7 @@ struct(AtmosChunk)
 	def(objInside) null; //gameobjects inside this chunk
 	def(lastObjUpdate) 0;
 	def(flagUpdObj) true;
-
+	//кеш распространения разных типов атмоса
 	def(mapSpreadCache) null; //list<hashmap> key chid,value lastobjects update
 
 	def(cfg) -1;//light config effector
@@ -154,7 +154,7 @@ struct(AtmosChunk)
 	def(updateObjectsInChunk)
 	{
 		if (self getv(flagUpdObj)) then {
-			self setv(objInside,[self getv(chId)] call atmos_chunkGetNearObjects);
+			self setv(objInside,[self getv(chId) arg self] call atmos_chunkGetNearObjects);
 			self setv(flagUpdObj,false);
 			self setv(lastObjUpdate,tickTime);
 		};
@@ -304,7 +304,8 @@ struct(AtmosAreaBase)
 	}
 
 	//вызывается при контакте объекта с этим типом атмоса
-	def(onObjectContact) {params["_obj"]}
+	def(onObjectContact) {params["_obj","_contextRef"]}
+	def(postObjectsContact) {params ["_contextRef"]};
 	def(onMobContactBody) {params["_mob"]}
 	def(onMobContactTurf) {params["_mob"]}
 	
@@ -428,7 +429,9 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 	{
 		params ["_side"];
 		
-		if (self getv(force)<=4) exitWith {false};
+		if (self getv(force)<=
+			ifcheck(equals(_side,vec3(0,0,1)),5,7) // огонь быстрее распространяется вверх
+		) exitWith {false};
 		if (self callp(hasFireAt,_side)) exitWith {false};
 		if !(callbase(canSpreadTo)) exitWith {false};
 		//check materials in next chunk
@@ -450,7 +453,7 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 
 	def(onObjectContact)
 	{
-		params ["_obj"];
+		params ["_obj","_contextRef"];
 		if callFunc(_obj,canApplyDamage) then {
 			private _m = callFunc(_obj,getMaterial);
 			if isNullReference(_m) exitwith {};
@@ -458,14 +461,29 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 			private _dam = floor (D6 * callFunc(_m,getFireDamageModifier));
 			if (_dam > 0) then {
 				if (callFunc(_m,getFireDamageModifier) <= 1) exitWith {};
+				//ограничение урона.
+				if (tickTime<getVar(_obj,__atm_lastFireDamage)) exitWith {
+					refset(_contextRef,refget(_contextRef) + 1);
+				};
 				
 				private _oldHP = getVar(_obj,hp);
 				private _mpos = null;//ifcheck(prob(30),callFunc(_obj,getModelPosition),null);
 				callFuncParams(_obj,applyDamage,_dam arg DAMAGE_TYPE_BURN arg _mpos);
 				if not_equals(_oldHP,getVar(_obj,hp)) then {
-					self callp(adjustForce,2); //because decrement is 1
+					//self callp(adjustForce,2); //because decrement is 1
+					refset(_contextRef,refget(_contextRef) + 1);
+					setVar(_obj,__atm_lastFireDamage,tickTime+rand(0.2,0.7));
 				};
 			};
+		};
+	}
+
+	def(postObjectsContact)
+	{
+		params ["_contextRef"];
+		private _count = refget(_contextRef);
+		if (_count > 0) then {
+			self callp(adjustForce,round(_count/2) + 1);
 		};
 	}
 
@@ -474,10 +492,16 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 		params ["_force"];
 		private _newForce = ((self getv(force))+_force) max 0 min 30;
 		if !(self callv(hasFireDown)) then {
-			if (_newForce > 3) then {
+			if (_newForce > 2) then {
 				//тут нечему гореть. совсем
 				if (count (self callv(getChunk) callv(getObjectsInChunk)) == 0) then {
 					_newForce = 0;
+				};
+			};
+		} else {
+			if (_newForce > 2) then {
+				if (count (self callv(getChunk) callv(getObjectsInChunk)) == 0) then {
+					_newForce = _newForce min 2;
 				};
 			};
 		};
@@ -591,7 +615,7 @@ struct(AtmosAreaGas) base(AtmosAreaBase)
 			randInt(self getv(c_spreadCountMin),self getv(c_spreadCountMax)),
 			self getv(c_spreadType)
 		] call atmos_getNextRandAroundChunks;
-
+		
 		_sides pushBack [0,0,1]; //up
 		private _psides = [];
 		{
@@ -616,7 +640,7 @@ struct(AtmosAreaGas) base(AtmosAreaBase)
 	def(canSpreadTo)
 	{
 		params ["_side"];
-		if (self getv(volume)<=0.5) exitWith {false};
+		if (self getv(volume)<=0.2) exitWith {false};
 		callbase(canSpreadTo)
 	}
 

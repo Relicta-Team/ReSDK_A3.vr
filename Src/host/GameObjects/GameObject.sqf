@@ -6,6 +6,7 @@
 #include "..\engine.hpp"
 #include "..\oop.hpp"
 #include "..\text.hpp"
+#include "..\struct.hpp"
 #include "GameConstants.hpp"
 #include "..\ServerRpc\serverRpc.hpp"
 #include <..\..\client\Inventory\inventory.hpp>
@@ -1122,6 +1123,7 @@ endregion
 		//request for update atmos chunk
 		private _ch = [(getposatl getSelf(loc))call atmos_chunkPosToId] call atmos_getChunkAtChId;
 		_ch set ["flagUpdObj",true];
+		callSelf(onUpdatePosition);
 
 		[this,_cht] call noe_unloadVisualObject;
 		true
@@ -1349,8 +1351,200 @@ class(IDestructible) extends(GameObject)
 			delete(_script);
 		};
 
-
+		{
+			_x set ["flagUpdObj",true];
+			false;
+		} count (values getSelf(__atm_ownerChunks));
 	};
+
+	func(onUpdatePosition)
+	{
+		objParams();
+		{
+			_x set ["flagUpdObj",true];
+			false;
+		} count (values getSelf(__atm_ownerChunks));
+		setSelf(__atm_ownerChunks,createHashMap);
+
+		//TODO определение НИЗА модели
+		if (true) exitWith {};
+
+		//update simulation
+		/*
+			Цель - получить все объекты, граничащие с чанками этого объекта
+			1. Получаем чанки с помощью [this,true,false] atmos_getObjectOwnedChunks
+			2. Получаем полный список объектов в каждом чанке
+		*/
+		private _chObjList = [this,true,false] call atmos_getObjectOwnedChunks;
+		private _mapObjAll = createHashMap;
+		private _needSim = [];
+		traceformat("CHUNKS COUNT: %1",count _chObjList);
+		{
+			{
+				if !array_exists(_mapObjAll,getVar(_x,pointer)) then {
+					_mapObjAll set [getVar(_x,pointer),_x];
+					traceformat("CHECK OPENSPACE %1 - %2",_x arg callFunc(_x,isInOpenSpace))
+					if callFunc(_x,isInOpenSpace) then {
+						_needSim pushBack _x;
+					};
+				};
+				false;
+			} count (_x callv(getObjectsInChunk));
+			false
+		} count _chObjList;
+
+		//TODO sorting by z-value
+		{
+			callFunc(_x,onObjectFalling);
+		} count _needSim;
+	};
+
+	#define DEBUG_VISUAL_OBJECTFALLING
+
+	#ifndef EDITOR
+		#undef DEBUG_VISUAL_OBJECTFALLING
+	#endif
+
+	func(onObjectFalling)
+	{
+		objParams();
+		//if isNullReference(this) exitWith {false};
+
+		private _visObj = callSelf(getBasicLoc);
+		private _p1 = _visObj modelToWorldVisual [0,0,0];
+		private _p2 = _p1 vectorAdd [0,0,-1000];
+
+		private _iDat = [_p1,_p2,_visObj,
+		#ifdef EDITOR
+		noe_client_allPointers getOrDefault [getSelf(pointer),objNull]
+		#else
+		objNull
+		#endif
+		] call si_getIntersectData;
+		
+		#ifdef DEBUG_VISUAL_OBJECTFALLING
+		if !isNull(debug_objfalling_list) then {{deletevehicle _x} foreach debug_objfalling_list};
+		debug_objfalling_list = [];
+		assert_str(!isNull(atmos_debug_createSphere),"atmos_debug_createSphere must be defined");
+		_s1 = [1,0,0] call atmos_debug_createSphere;
+		_s2 = [0,1,0] call atmos_debug_createSphere;
+		_s1 setposatl _p1;
+		_s2 setposatl ifcheck(isNullReference(_iDat select 0),_p2,_iDat select 1);
+		debug_objfalling_list append vec2(_s1,_s2);
+		#endif
+
+		if isNullReference(_iDat select 0) exitWith {false};
+
+		
+		{
+			callFuncParams(_x,interpolate,"auto_trans_fall" arg this arg getSelf(pointer));
+		} foreach callSelfParams(getNearMobs,20);
+		
+		callSelfParams(setPos__,_iDat select 1);
+
+		private _dam = D6 * 5; //TODO расчет урона от дистанции падения+ объемов объекта
+		//TODO урон по объектам, на которые упал этот объект
+		callSelfAfterParams(applyDamage,rand(1.2,1.3),_dam arg DAMAGE_TYPE_CRUSHING arg _iDat select 1);
+		true
+	};
+
+	func(setPos__)
+	{
+		objParams_1(_pos);
+		private _wobj = callSelf(getBasicLoc);
+		_wobj setposatl _pos;
+		callSelf(replicateObject);
+	};
+
+	#define DEBUG_VISUAL_OPENSPACE
+
+	#ifndef EDITOR
+		#undef DEBUG_VISUAL_OPENSPACE
+	#endif
+
+	//функция проверки находится ли объект в воздухе
+	func(isInOpenSpace)
+	{
+		objParams();
+		private _visObj = callSelf(getBasicLoc);
+		private _bbx = boundingBoxReal [_visObj,"Geometry"];
+		private _lowerZ = _bbx select 0 select 2;
+		private _poses = [
+			_bbx select 0 select [0,2],
+			_bbx select 1 select [0,2],
+			[_bbx select 0 select 0,_bbx select 1 select 1],
+			[_bbx select 1 select 0,_bbx select 0 select 1]
+		] apply {
+			asltoatl (
+				_visObj modelToWorldVisualWorld  (_x vectoradd [0,0,_lowerZ])
+			)
+		};
+
+		//additional positions workaround
+		private _added = [];
+		{
+			_added pushBack ([_x] call getPosListCenter);
+		} foreach [
+			[_poses select 1,_poses select 2],
+			[_poses select 1,_poses select 3],
+			[_poses select 0,_poses select 2],
+			[_poses select 0,_poses select 3]
+		];
+		_poses append _added;
+
+		private _iDat = null;
+		private _countConnections = 0;
+
+		#ifdef DEBUG_VISUAL_OPENSPACE
+		if !isNull(debug_openspace_list) then {{deletevehicle _x} foreach debug_openspace_list};
+		debug_openspace_list = [];
+		assert_str(!isNull(atmos_debug_createSphere),"atmos_debug_createSphere must be defined");
+		{
+			_s1 = [1,0,1] call atmos_debug_createSphere;
+			_s2 = objNull;
+			_s1 setposatl _x;
+			private _iDatDebug = [_x,_x vectoradd [0,0,-.2],_visObj] call si_getIntersectData;
+			if !isNullReference(_iDatDebug select 0) then {
+				_s2 = [0,1,0] call atmos_debug_createSphere;
+				_s2 setposatl (_iDatDebug select 1);
+			} else {
+				_s2 = [1,0,0] call atmos_debug_createSphere;
+				_s2 setposatl (_x vectoradd [0,0,-.2]);
+			};
+			debug_openspace_list append vec2(_s1,_s2);
+		} foreach _poses;
+		#endif
+		#ifdef EDITOR
+		private _toUnhide = [];
+		{
+			if !(isObjectHidden _x) then {
+				_x hideObject true;
+				_toUnhide pushBack _x;
+			};
+		} foreach (values noe_client_allPointers);
+		#endif
+		{
+
+			_iDat = [_x,_x vectorAdd [0,0,-0.2],_visObj] call si_getIntersectData;
+
+			if !isNullReference(_iDat select 0) then {
+				INC(_countConnections);
+			};
+			false;
+		} count _poses;
+
+		#ifdef EDITOR
+		{_x hideObject false} foreach _toUnhide;
+		#endif
+
+		#ifdef DEBUG_VISUAL_OPENSPACE
+		traceformat("IDestructible::isInOpenSpace: _countConnections = %1",_countConnections);
+		#endif
+
+		_countConnections <= 3//8=>примерно треть для устойчивости объекта
+	};
+
+	getter_func(isMovable,isTypeOf(this,IStruct) || isTypeOf(this,Item));
 
 	//all info for this system in baisc set: B 557
 	//Повреждения оружия на B 485
@@ -1398,6 +1592,11 @@ class(IDestructible) extends(GameObject)
 			callSelfParams(sendDamageVisualOnPos,_worldPos arg true arg true arg false);
 		};
 	};
+	
+	//Отметка времени последнего урона огнём
+	var(__atm_lastFireDamage,0);
+	//Здесь хранятся ссылка на чанки, которые владеют этим объектом. key:chId, value:AtmosChunk
+	var(__atm_ownerChunks,createHashMap);
 
 	func(applyDamage)
 	{

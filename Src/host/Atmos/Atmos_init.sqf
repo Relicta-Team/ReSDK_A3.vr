@@ -270,6 +270,7 @@ atmos_internal_onUpdate = {
 	_chObj = null;
 	_aObj = null;
 	_objInside = null;
+	_objContactCtx = null;
 	ASP_REGION("Atmos update")
 	
 	{
@@ -316,8 +317,9 @@ atmos_internal_onUpdate = {
 				if isNullVar(_objInside) then {
 					_objInside = _chObj call atmos_cv_goch;
 				};
-
-				{_aFire call ["onObjectContact",_x];false;} count _objInside;
+				_objContactCtx = refcreate(0);
+				{_aFire call ["onObjectContact",[_x,_objContactCtx]];false;} count _objInside;
+				_aFire call ["postObjectsContact",[_objContactCtx]];
 			};
 			ASP_MESSAGE("End fire obj check")
 

@@ -751,6 +751,11 @@ func(interpolate)
 			};
 			_plist = [netTickTime,_fS,_d];
 		};
+		private _speedModifOnFalling = false;
+		if (_mode == "auto_trans_fall") then {
+			_mode = "auto_trans";
+			_speedModifOnFalling = true;
+		};
 		if (_mode == "auto_trans") exitWith {
 			/*
 				Дополнительные параметры:
@@ -860,6 +865,9 @@ func(interpolate)
 			
 			if (!isNullVar(_datFrom) && !isNullVar(_datTo)) then {
 				_plist = [netTickTime,_datFrom,_datTo];
+				if (_speedModifOnFalling) then {
+					_optionals append ["ispd",rand(1,1.3)];
+				};
 				if (count _optionals > 0) then {
 					_plist pushBack _optionals;
 				};
