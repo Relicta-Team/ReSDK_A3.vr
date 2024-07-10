@@ -111,7 +111,6 @@ loadFile("src\host\GameObjects\Structures\Containers\Container.sqf");
 	loadFile("src\host\GameObjects\Structures\Containers\Boxes.sqf");
 	loadFile("src\host\GameObjects\Structures\Containers\Tech.sqf");
 loadFile("src\host\GameObjects\Structures\Effects\AtmEffects.sqf");
-	loadFile("src\host\GameObjects\Structures\Effects\Atmos.sqf");
 	loadFile("src\host\GameObjects\Structures\Effects\Teleport.sqf");
 	loadFile("src\host\GameObjects\Structures\Effects\Zones.sqf");
 loadFile("src\host\GameObjects\Structures\ReagentContainers\ReagentContainer.sqf");
