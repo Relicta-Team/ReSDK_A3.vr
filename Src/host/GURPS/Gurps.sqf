@@ -292,6 +292,16 @@ gurps_getEncumbrance = {
 	4
 };
 
+gurps_encumLevelToMoveModifier = {
+	params ["_lvl"];
+	if (_lvl == 0) exitWith {1};
+	if (_lvl == 1) exitWith {0.8};
+	if (_lvl == 2) exitWith {0.6};
+	if (_lvl == 3) exitWith {0.4};
+	if (_lvl == 4) exitWith {0.2};
+	setLastError("Unknown level: " + (str _lvl));
+};
+
 gurps_recalcuateEncumbrance = {
 	private this = _this;
 
@@ -312,10 +322,17 @@ gurps_recalcuateEncumbrance = {
 	setSelf(encumbrance,_encumbrance);
 
 	private _newEncum = this call gurps_getEncumbrance;
+
+	private _updated = _newEncum != getSelf(curEncumbranceLevel);
+
 	#ifdef log_onEncumbranceRecalculate
 		warningformat("new encumLevel - %1",_newEncum);
 	#endif
 	setSelf(curEncumbranceLevel,_newEncum);
+
+	if (_updated) then {
+		callSelf(onChangeAnimCoef);
+	};
 
 	callSelfParams(fastSendInfo,"hud_encumb" arg _newEncum);
 };
