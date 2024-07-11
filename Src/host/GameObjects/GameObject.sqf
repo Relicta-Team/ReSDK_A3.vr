@@ -1884,7 +1884,7 @@ class(IDestructible) extends(GameObject)
 				_wobj,
 				[0,0,0],//TODO randomize
 				10
-			] si_rayTraceProcess;
+			] call si_rayTraceProcess;
 			_tDat params ["_iobj","_ipos","_ivec"];
 			//TODO replicate position
 		};
