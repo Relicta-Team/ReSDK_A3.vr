@@ -236,6 +236,7 @@ class(GameObject) extends(ManagedObject)
 	editor_attribute("Tooltip" arg "Вес объекта в граммах или килограммах")
 	var(weight,gramm(1000));//вес в граммах
 
+	//рандомизатор веса
 	getterconst_func(canApplyWeightRandomize,false);
 	getterconst_func(getWeightRandomCoeff,vec2(0,0));
 	getterconst_func(getWeightRandomPrecision,2);//сколько знаков после нуля доступно
@@ -1787,6 +1788,9 @@ class(IDestructible) extends(GameObject)
 
 		if (getSelf(hp)>0) then {
 			setSelf(hpMax,getSelf(hp));
+			if !callSelf(isItem) then {
+				setSelf(weight,[this] call gurps_calculateConstructionWeight);
+			};
 		} else {
 			callSelf(generateObjectHP);
 		};
@@ -1807,7 +1811,10 @@ class(IDestructible) extends(GameObject)
 		if callSelf(isItem) then {
 			_val = [this] call gurps_calculateItemHP;
 		} else {
-			_val = [this] call gurps_calculateConstructionHP;
+			private _weightTn = [this] call gurps_calculateConstructionWeight;
+			_val = [_weightTn] call gurps_calculateConstructionHP;
+			//lb to kg
+			setSelf(weight,_weightTn * 1000);
 		};
 		setSelf(hp,_val);
 		setSelf(hpMax,_val);
@@ -1846,6 +1853,58 @@ class(IDestructible) extends(GameObject)
 			private _sound = ifcheck(_useBlockSound,callFunc(_mat,getResistSound),callFunc(_mat,getDamageSound));
 			if (_sound == stringEmpty) exitWith {};
 			callSelfParams(playSound,_sound arg randInt(0.85,1.15) arg 15 arg null arg _pos);
+		};
+	};
+
+	//функция создает частицы и раскидывает их вокруг объекта
+	func(dropDebrisOnDestroy)
+	{
+		objParams();
+		
+		//nonworld objects cannot drop debris
+		if !callSelf(isInWorld) exitWith {};
+
+		private _typeList = callSelf(getOnDestroyTypes);
+		if (count _typeList == 0) exitWith {}; //nothing to drop 
+		/*
+			Формула расчета количества частиц из объекта:
+			round(hpMax / 20)
+		*/
+		private _countCreate = round(getSelf(hpMax)/20);
+		private _type = null;
+		private _startPos = callSelf(getModelPosition);
+		private _wobj = nullPtr;
+		private _tDat = null;
+
+		for "_i" from 1 to _countCreate do {
+			_type = pick _typeList;
+			_wobj = [_type,_startPos] call createGameObjectInWorld;
+			assert_str(!isNullReference(_wobj),"Failed to create debris type " + _type);
+			_tDat = [
+				_wobj,
+				[0,0,0],//TODO randomize
+				10
+			] si_rayTraceProcess;
+			_tDat params ["_iobj","_ipos","_ivec"];
+			//TODO replicate position
+		};
+	};
+
+	//пользовательская функция получения типов при уничтожении объекта. можно настроить кастомные типы, выпадающие при уничтожении
+	func(getOnDestroyTypes)
+	{
+		objParams();
+		callSelf(getOnDestroyTypesFromMaterial);
+	};
+
+	func(getOnDestroyTypesFromMaterial)
+	{
+		objParams();
+		private _mat = callSelf(getMaterial);
+		if !isNullReference(_mat) then {
+			callFunc(_mat,getDestructionTypes);
+		} else {
+			[]
 		};
 	};
 	

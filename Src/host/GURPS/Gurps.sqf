@@ -463,7 +463,7 @@ gurps_calculateItemHP = {
 
 //расчетка для построек
 gurps_calculateConstructionHP = {
-	params ["_obj"];
+	params ["_weight"];
 
 	/*hp - 100 × (куб.корень из веса пустой постройки в тоннах),
 	
@@ -473,7 +473,13 @@ gurps_calculateConstructionHP = {
 		- 150 тонн для камня
 		...
 	*/
-	
+	private _hp = 100 * (_weight ^ (1/3));
+
+	(round _hp ) max 1//в спецификации не указано про округление, поэтому просто округляем до целых
+};
+
+gurps_calculateConstructionWeight = {
+	params ["_obj"];
 	private _mpath = getVar(_obj,model);
 	if !isNull(core_cfg2model getvariable _mpath) then {
 		_mpath = core_cfg2model getvariable _mpath;
@@ -490,10 +496,7 @@ gurps_calculateConstructionHP = {
 		0
 	};
 	private _wPer1000sqft = callFunc(_mat,getWeightCoefForCalcHP);
-	private _weight = (_areaFt * _wPer1000sqft) / 1000;
-	private _hp = 100 * (_weight ^ (1/3));
-
-	(round _hp ) max 1//в спецификации не указано про округление, поэтому просто округляем до целых
+	(_areaFt * _wPer1000sqft) / 1000;
 };
 
 //only for editor

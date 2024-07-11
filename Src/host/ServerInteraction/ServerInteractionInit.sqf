@@ -248,6 +248,22 @@ si_getIntersectObjects = {
 	};
 };
 
+/* 
+	Бросок луча от текущего объекта и возвращение информации о первом пересечении. 
+	Процесс просчитывается моментально без задержек.
+	Возвращает: [GameObject, intersect position as ATL,vectorUp lod]
+		Никогда не возвращает нулевые координаты. Если результат трейса неуспешен - вернёт начальную позицию
+	Примеры использования:
+		- фрагменты осколков разрыва гранаты
+		- разлет осколков при разрушении объекта
+*/
+#define SI_RAYTRACE_DEBUG
+si_rayTraceProcess = {
+	params ["_vobj","_pstart","_vecDir","_force"];
+	//TODO implement
+	if(true) exitWith {[_vobj,_pstart,[0,0,1]]};
+};
+
 //Отладчик эдитора
 //#define SI_THROW_DEBUG
 #define SH_DEBUG_SHOTGUN

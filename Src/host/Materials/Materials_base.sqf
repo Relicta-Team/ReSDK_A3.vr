@@ -96,6 +96,14 @@ class(MatBase) attribute(staticInit)
 	getterconst_func(getFireDamageModifier,1); //no mod
 	getterconst_func(getFireDamageIgniteProb,0);//basic prob 0-100
 
+	//------ destruction ------
+	//типы, выпадаемые при разрушении
+	func(getDestructionTypes)
+	{
+		objParams();
+		[];
+	};
+
 endclass
 
 class(MatStone) extends(MatBase)
