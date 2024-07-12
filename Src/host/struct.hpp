@@ -87,6 +87,9 @@
 //!all values located for objects of type in one address (reference equals)
 #define def(varname) ;_soffst__ = _sdecl__ pushBack [#varname]; _sdecl__ select _soffst__ pushBack 
 
+#define cast_def
+#define static_def
+
 //method managemet
 #define self _self
 //call function without parameters
@@ -114,8 +117,48 @@
 //forced delete structure
 #define struct_free(o) o SET ["__dflg__",true];{if !(_y isequaltype {})then{o deleteAt _x};}foreach o
 #define struct_erase(o) o SET ["__dflg__",true]; {o deleteAt _x}foreach o
-#define struct_isdeleted(o) (o get "__dflg__")
+#define struct_isdeleted(o) (!isnil{o get "__dflg__"})
 //copy of object
 #define struct_copy(rval) (+(rval))
-//calling base method
-#define struct_base_call(method) call (missionnamespace getvariable ("pts_"+ (self GET STRUCT_MEM_TYPE select 1) ) )
+
+
+/*
+	For cast struct for special type
+
+	struct(Vec3)
+		def(_x) 0; def(_y) 0; def(_z) 0;
+		cast_def(Array) //TODO cast_def macro
+		{
+			[self getv(_x),self getv(_y),self getv(_z)]
+		}
+		cast_def(int)
+		{
+			floor (self getv(_x) + self getv(_y) + self getv(_z))
+		}
+	endstruct
+*/
+#define struct_cast(o,typeto) (o call missionamespace getvariable (["pts_",struct_typename(o),"_c_", #typeto] joinString ""))
+
+//TODO implement
+#define struct_callstat(Typename,static_func)
+
+
+/*
+	// special operator overloading
+	// def(num) 0;
+	// operator_def(=)
+	// {
+	// 	params ["_rval"];
+	// 	_rval setv(num,_rval getv(num) + 1);
+	// 	_rval;
+	// }
+	// operator_def(+)
+	// {
+	// 	params ["_rval"];
+	// 	self setv(num,self getv(num) + _rval);
+	// }
+
+	// op_call(_struct, 	=  ,3); // _struct = _struct callp(operator_=,3);
+
+	// opcall(_s,	+	,5); // _s callp(operator_+,5);
+*/
