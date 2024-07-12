@@ -1449,9 +1449,12 @@ class(IDestructible) extends(GameObject)
 		true
 	};
 
-	func(setPos__)
+	//set positiof of world object with replication
+	func(setPos__) //name is temporary
 	{
 		objParams_1(_pos);
+		if !callSelf(isInWorld) exitWith {};
+
 		private _wobj = callSelf(getBasicLoc);
 		_wobj setposatl _pos;
 		callSelf(replicateObject);
@@ -1867,10 +1870,11 @@ class(IDestructible) extends(GameObject)
 		private _typeList = callSelf(getOnDestroyTypes);
 		if (count _typeList == 0) exitWith {}; //nothing to drop 
 		/*
-			Формула расчета количества частиц из объекта:
+			Стандартная формула расчета количества частиц из объекта:
 			round(hpMax / 20)
 		*/
-		private _countCreate = round(getSelf(hpMax)/20);
+		private _countCreate = callSelf(getOnDestroyCountCreate);
+
 		private _type = null;
 		private _startPos = getSelf(loc) modelToWorldVisual [0,0,0]; //center of model (not atl pos)
 		private _wobj = nullPtr;
@@ -1887,16 +1891,15 @@ class(IDestructible) extends(GameObject)
 				10 //testforce
 			] call si_rayTraceProcess;
 			_tDat params ["_iobj","_ipos","_ivec"];
-			//TODO replicate position
+			
+			callFuncParams(_wobj,setPos__,_ipos);
 		};
 	};
 
+	//Пользовательская функция определения количества выпадающих предметов
+	getter_func(getOnDestroyCountCreate,round(getSelf(hpMax)/20));
 	//пользовательская функция получения типов при уничтожении объекта. можно настроить кастомные типы, выпадающие при уничтожении
-	func(getOnDestroyTypes)
-	{
-		objParams();
-		callSelf(getOnDestroyTypesFromMaterial);
-	};
+	getter_func(getOnDestroyTypes,callSelf(getOnDestroyTypesFromMaterial));
 
 	func(getOnDestroyTypesFromMaterial)
 	{
