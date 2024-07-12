@@ -252,7 +252,7 @@ si_getIntersectObjects = {
 	Бросок луча от текущего объекта и возвращение информации о первом пересечении. 
 	Процесс просчитывается моментально без задержек.
 	Возвращает: [GameObject, intersect position as ATL,vectorUp lod]
-		Никогда не возвращает нулевые координаты. Если результат трейса неуспешен - вернёт начальную позицию
+		Никогда не возвращает нулевые координаты. Если результат трейса неуспешен - вернёт начальную позицию/объект
 	Примеры использования:
 		- фрагменты осколков разрыва гранаты
 		- разлет осколков при разрушении объекта
@@ -260,8 +260,100 @@ si_getIntersectObjects = {
 #define SI_RAYTRACE_DEBUG
 si_rayTraceProcess = {
 	params ["_vobj","_pstart","_vecDir","_force"];
-	//TODO implement
-	if(true) exitWith {[_vobj,_pstart,[0,0,1]]};
+	
+	private _c_defaultRet = [_vobj,_pstart,[0,0,1]];
+	private _rtObj = si_internal_rayObject;
+	
+	private _model = getVar(_vobj,model);
+	private _bbx = core_modelBBX get _model;
+	if isNullVar(_bbx) then {
+		_rtObj = createSimpleObject[_model,[50,50,50],true];
+		#ifndef EDITOR
+		_rtObj hideObject true;
+		#endif
+		_bbx = boundingBoxReal _rtObj;
+		warningformat("si::rayTraceProcess() - Cant find bbx data for model %1",_model)
+	};
+
+	_rtObj setPosAtl _pstart;
+	_rtObj setVectorDir _vecDir;
+	private _rayDist = _force;
+	private _precdown = 100;//через какое расстояние объект потеряет направление
+	private _leveldown = 0.1;//на сколько сильно отклонится объект при потере направления
+	private _pend = _rtObj modelToWorldVisual [0,_rayDist,0];
+	private _pmid = _rtObj modelToWorldVisual [0,_rayDist*_precdown/100,_leveldown];
+
+	(_bbx select 0) params ["_b1","","_b2"];
+	private _bbxCheck = [[_b1,0,_b2],[-_b1,0,_b2],[_b1,0,-_b2],[-_b1,0,-_b2]];
+	
+	//функция генерации точек
+	private _buildPoints = {
+		[
+			_pstart,
+			_rtObj modelToWorldVisual [0,_rayDist*_precdown/100,_leveldown],
+			_rtObj modelToWorldVisual [0,_rayDist,0]
+		]
+	};
+
+	private _points = call _buildPoints;
+	//? (0-1) bezierInterpolation _points
+
+	#ifdef SI_RAYTRACE_DEBUG
+	private _debug_slist = [];
+	private _sph = "Sign_Sphere10cm_F" createVehicleLocal[0,0,0];
+	_sph setposatl _pstart;
+	_debug_slist pushBack _sph;
+	#endif
+
+	//проверка каждые SI_RAYTRACE_CHECK_DISTANCE метров
+	#define SI_RAYTRACE_CHECK_DISTANCE 0.1
+
+	private _ipt = 0;
+	private _oldPos = _pstart;
+	private _newPos = null;
+	private _iDat = null;
+	for "_i" from 0 to _rayDist step SI_RAYTRACE_CHECK_DISTANCE do {
+		_ipt = linearConversion [0,_rayDist,_ipt,0,1];
+		_newPos = _ipt bezierInterpolation _points;
+
+		#ifdef SI_RAYTRACE_DEBUG
+		_sph = "Sign_Sphere10cm_F" createVehicleLocal[0,0,0];
+		_sph setposatl _newPos;
+		_debug_slist pushBack _sph;
+		#endif
+
+		_iDat = [_oldPos,_newPos,_rtObj] call si_getIntersectData;
+		if isNullReference(_iDat select 0) then {
+			{
+				_iDat = [_rtObj modelToWorldVisual _x,_newPos,_rtObj] call si_getIntersectData;
+				if !isNullReference(_iDat select 0) exitWith {};
+			} foreach _bbxCheck;
+		};
+
+		_angle = _iDat select 2;
+		_hasMoving = (_oldPos distance _newPos) > 0.01;
+		if (_angle < 0.65 && _hasMoving) then {
+			//todo finalize
+			//отскок объекта
+			//_iDat set [0,nullPtr];
+			_rayDist = _rayDist - _i;
+			assert_str(_rayDist > 0,"_rayDist must be > 0");
+			_points = call _buildPoints;
+			break;
+		} else {
+			break;
+		};
+
+		if !isNullReference(_iDat select 0) exitWith {};
+	};
+
+	#ifdef SI_RAYTRACE_DEBUG
+	invokeAfterDelayParams({{deletevehicle _x}foreach _this},60,_debug_slist);
+	#endif
+	
+	if (isNullVar(_iDat) || {isNullReference(_iDat select 0)}) exitWith {_c_defaultRet};
+
+	[[_iDat select 0] call si_handleObjectReturnCheckVirtual,_iDat select 1,_iDat select 2]
 };
 
 //Отладчик эдитора

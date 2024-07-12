@@ -1882,8 +1882,9 @@ class(IDestructible) extends(GameObject)
 			assert_str(!isNullReference(_wobj),"Failed to create debris type " + _type);
 			_tDat = [
 				_wobj,
-				[0,0,0],//TODO randomize
-				10
+				_startPos,
+				[rand(-1,1),rand(-1,1),rand(-1,1)],
+				10 //testforce
 			] call si_rayTraceProcess;
 			_tDat params ["_iobj","_ipos","_ivec"];
 			//TODO replicate position
