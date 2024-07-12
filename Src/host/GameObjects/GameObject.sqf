@@ -1872,7 +1872,7 @@ class(IDestructible) extends(GameObject)
 		*/
 		private _countCreate = round(getSelf(hpMax)/20);
 		private _type = null;
-		private _startPos = callSelf(getModelPosition);
+		private _startPos = getSelf(loc) modelToWorldVisual [0,0,0]; //center of model (not atl pos)
 		private _wobj = nullPtr;
 		private _tDat = null;
 
