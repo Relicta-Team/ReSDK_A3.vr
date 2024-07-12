@@ -137,8 +137,9 @@
 		}
 	endstruct
 */
-#define struct_cast(o,typeto) (o call missionamespace getvariable (["pts_",struct_typename(o),"_c_", #typeto] joinString ""))
-
+#define struct_cast(o,typeto) ((o) call missionamespace getvariable (["pts_",struct_typename(o),"_c_", #typeto] joinString ""))
+// _obj scast(bool); _vec3struct scast(array) 
+#define scast(typeto) call missionamespace getvariable (["pts_",struct_typename(o),"_c_", #typeto] joinString "")
 //TODO implement
 #define struct_callstat(Typename,static_func)
 
