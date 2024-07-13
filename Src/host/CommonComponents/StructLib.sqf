@@ -141,8 +141,7 @@ struct(Model)
 		params ["_cfgPath","_pos",["_simple",false],["_local",true]];
 		
 		if !(self callp(isValidModelPath,_cfgPath)) exitWith {};
-
-		assert_str(false,"This type")
+		
 		if (_simple) then {
 			self setv(_vars,createHashMap);
 			private _mesh = createSimpleObject [_cfgPath,[0,0,0],_local];

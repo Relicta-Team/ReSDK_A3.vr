@@ -19,7 +19,7 @@ struct(IEnumerable)
 	def(getEnumerator) { self getv(_enum) }
 	
 	def(length) {count (self getv(_enum))}
-	def(clear) {self getv(_enum) resize 0}
+	def(clear) {(self getv(_enum)) resize 0}
 
 	def(str)
 	{
@@ -284,7 +284,7 @@ struct(SafeTypeDict) base(IEnumerable)
 
 	def(clear)
 	{
-		private _map = self getv(_enum)
+		private _map = self getv(_enum);
 		(self getv(_order)) resize 0;
 		{
 			_map deleteAt _x;
@@ -304,7 +304,7 @@ struct(SafeTypeDict) base(IEnumerable)
 	{
 		params ["_key","_val"];
 		private _map = self getv(_enum);
-		privae _keyStr = hashValue _key;
+		private _keyStr = hashValue _key;
 		_map set [_keyStr,[_key,_val]];
 	}
 
