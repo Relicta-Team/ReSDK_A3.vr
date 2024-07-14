@@ -1595,6 +1595,8 @@ class(IDestructible) extends(GameObject)
 			private _worldPos = _p vectorAdd [rand(-0.2,0.2),rand(-0.2,0.2),rand(-0.2,0.2)];
 			callSelfParams(sendDamageVisualOnPos,_worldPos arg true arg true arg false);
 		};
+
+		callSelf(dropDebrisOnDestroy);
 	};
 	
 	//Отметка времени последнего урона огнём
@@ -1868,6 +1870,8 @@ class(IDestructible) extends(GameObject)
 		if !callSelf(isInWorld) exitWith {};
 
 		private _typeList = callSelf(getOnDestroyTypes);
+		//_typeList = ["TorchDisabled"];//!for debug only
+
 		if (count _typeList == 0) exitWith {}; //nothing to drop 
 		/*
 			Стандартная формула расчета количества частиц из объекта:
@@ -1880,20 +1884,65 @@ class(IDestructible) extends(GameObject)
 		private _wobj = nullPtr;
 		private _tDat = null;
 
+		#ifdef EDITOR
+		private _hidemodevobj = {
+			params ["_vobj","_mode"];
+			if (_mode) then {
+				getVar(_vobj,loc) hideObject true;
+				(noe_client_allPointers getOrDefault [getVar(_vobj,pointer),objNull]) hideObject true;
+			} else {
+				getVar(_vobj,loc) hideObject false;
+				(noe_client_allPointers getOrDefault [getVar(_vobj,pointer),objNull]) hideObject false;
+			};
+		};
+		[this,true] call _hidemodevobj;
+		//_parList = [this,_countCreate,_typeList,_startPos];
+		//_nfp = { params ['this',"_countCreate","_typeList","_startPos"];
+
+		#endif
+		
+		private _mobs = callSelfParams(getNearMobs,20);
+
 		for "_i" from 1 to _countCreate do {
 			_type = pick _typeList;
-			_wobj = [_type,_startPos] call createGameObjectInWorld;
+			
+			_wobj = [_type,_startPos] call createGameObjectInWorld;//instantiate(_type);//
 			assert_str(!isNullReference(_wobj),"Failed to create debris type " + _type);
+
+			#ifdef EDITOR
+			[_wobj,true] call _hidemodevobj;
+			#endif
+
 			_tDat = [
 				_wobj,
-				_startPos,
-				[rand(-1,1),rand(-1,1),rand(-1,1)],
-				10 //testforce
+				_startPos vectoradd [rand(-.1,.1),rand(-.1,.1),rand(0,.1)],
+				[rand(-20,70),rand(0,360)],
+				rand(2,4) //testforce
 			] call si_rayTraceProcess;
+
+			#ifdef EDITOR
+			[_wobj,false] call _hidemodevobj;
+			#endif
+			
 			_tDat params ["_iobj","_ipos","_ivec"];
+			
+			private _plis = [getVar(_wobj,pointer),[_ipos,callFunc(_wobj,getDir)],["ispd",
+				rand(0.7,1.2)//3//<fortest
+				,
+				"emuf"]];
+			{
+				callFuncParams(_x,sendInfo,"nintrp" arg _plis)
+			} foreach _mobs;
+
 			
 			callFuncParams(_wobj,setPos__,_ipos);
 		};
+
+		#ifdef EDITOR
+		//}; invokeAfterDelayParams(_nfp,2,_parList);
+		[this,false] call _hidemodevobj;
+
+		#endif
 	};
 
 	//Пользовательская функция определения количества выпадающих предметов
