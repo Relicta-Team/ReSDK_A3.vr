@@ -68,7 +68,20 @@ class(SmallChair) extends(IChairAsItem)
 	getterconst_func(getChairOffsetDir,-180);
 endclass
 
+class(SmallChair1) extends(IChairAsItem)
+	var(model,"ca\structures\furniture\chairs\kitchen_chair_a\kitchen_chair_a.p3d");
+	var(size,ITEM_SIZE_LARGE);
+	var(weight,3.4);
+	getterconst_func(getChairOffsetPos,vec3(0,0,0.01));
+	getterconst_func(getChairOffsetDir,-180);
+endclass
 
+class(SmallChair4) extends(IChairAsItem)
+	var(model,"relicta_models\models\interier\chair3.p3d");
+	var(size,ITEM_SIZE_LARGE);
+	var(weight,3.4);
+	getterconst_func(getChairOffsetPos,vec3(0,0.06,-0.48));
+endclass
 
 //THIS IS EQUAL SmallRedseatChair
 editor_attribute("Deprecated" arg "Заменить на SmallRedseatChair. Будет удален с редактором 1.15")

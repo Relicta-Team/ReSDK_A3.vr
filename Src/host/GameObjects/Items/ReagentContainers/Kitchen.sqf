@@ -229,14 +229,21 @@ endclass
 class(Cup) extends(IReagentNDItem)
 	var(name,"Чашка");
 	var(model,"relicta_models\models\interier\props\cup.p3d");
-	var(material,"MatSynt");
+	var(material,"MatGlass");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(200));
-	var(dr,1);
-	
 	var(reagents,vec2(this,30) call ms_create);
 	getterconst_func(transferAmount,[2 arg 5 arg 10 arg 20 arg 30]);
-	
+endclass
+
+class(Cup1) extends(Cup)
+	var(name,"Чашка");
+	var(model,"ml_exodusnew\chashunka.p3d");
+	var(material,"MatGlass");
+	var(size,ITEM_SIZE_SMALL);
+	var(weight,gramm(200));
+	var(reagents,vec2(this,30) call ms_create);
+	getterconst_func(transferAmount,[2 arg 5 arg 10 arg 20 arg 30]);
 endclass
 
 class(WoodenCup) extends(Cup)

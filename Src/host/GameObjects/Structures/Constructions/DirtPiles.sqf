@@ -19,6 +19,11 @@ class(SmallDirtPile) extends(Constructions)
 endclass
 
 editor_attribute("EditorGenerated")
+class(SmallDirtLight) extends(SmallDirtPile)
+	var(model,"ml_shabut\nvprops\gryazyuka3.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(MediumPileOfLightMud) extends(SmallDirtPile)
 	var(model,"apalon\metro_a3\surfaces\gryazoookass2.p3d");
 	var(name,"Куча грязи");
