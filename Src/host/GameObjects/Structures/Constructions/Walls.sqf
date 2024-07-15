@@ -233,7 +233,7 @@ class(SteelThinWallSmall) extends(SmallWall)
 endclass
 
 editor_attribute("EditorGenerated")
-0class(SteelThinWallMedium) extends(SteelThinWallSmall)
+class(SteelThinWallMedium) extends(SteelThinWallSmall)
 	var(model,"ml_exodusnew\ganzazhelezo2.p3d");
 	var(material,"MatMetal");
 endclass

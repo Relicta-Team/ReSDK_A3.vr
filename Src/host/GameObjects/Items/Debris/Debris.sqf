@@ -9,7 +9,6 @@
 #include <..\..\GameConstants.hpp>
 
 editor_attribute("InterfaceClass")
-
 class(Debris) extends(Item)
 	var(name,"Обломки"); 
 	var(desc,"Из этого можно что-нибудь смастерить.");

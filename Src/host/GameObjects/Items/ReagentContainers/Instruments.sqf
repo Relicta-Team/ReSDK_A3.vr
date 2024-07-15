@@ -81,29 +81,24 @@ class(Canister) extends(IReagentNDItem)
 	var(dr,2);
 	var(size,ITEM_SIZE_BIG);
 	var(reagents,vec2(this,1000) call ms_create);
-	getterconst_func(transferAmount,[10 arg 20 arg 30 arg 60 arg 120 arg 150 arg 180]);
+	getterconst_func(transferAmount,[5 arg 10 arg 25 arg 30 arg 60]);
 endclass
 
 class(Canister1) extends(Canister)
 	var(name,"Канистра");
-	var(weight,gramm(10000));
+	var(weight,gramm(1000));
 	var(model,"ml\ml_object_new\model_14_10\redbalon.p3d");
-	var(material,"MatMetal");
 	var(dr,2);
-	var(size,ITEM_SIZE_BIG);
-	var(reagents,vec2(this,2000) call ms_create);
-	getterconst_func(transferAmount,[10 arg 20 arg 30 arg 60 arg 120 arg 150 arg 180]);
 endclass
 
 class(Canister2) extends(Canister)
 	var(name,"Канистра");
+	var(weight,gramm(2000));
 	var(weight,gramm(400));
 	var(model,"ml_exodusnew\kanistorka.p3d");
 	var(material,"MatSynt");
 	var(dr,2);
-	var(size,ITEM_SIZE_BIG);
 	var(reagents,vec2(this,500) call ms_create);
-	getterconst_func(transferAmount,[10 arg 20 arg 30 arg 60 arg 120 arg 150 arg 180]);
 endclass
 
 
