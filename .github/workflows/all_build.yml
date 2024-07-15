@@ -135,6 +135,11 @@ jobs:
           ${{ env.validate_source_path }} ${{ matrix.build_type }}
           echo "::endgroup::"
         working-directory: ${{ github.workspace }}
+      - name: Preprocessed output ${{ matrix.build_type }}
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: Prepr log ${{ matrix.build_type }}
+          path: ${{ env.parse_source_out_path }}
       - name: Post validate ${{ matrix.build_type }}
         run: | 
           python -V
