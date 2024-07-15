@@ -139,7 +139,7 @@ jobs:
         uses: actions/upload-artifact@v3.1.2
         with:
           name: Prepr log ${{ matrix.build_type }}
-          path: ${{ env.parse_source_out_path }}
+          path: ${{ env.source_out_path }}
       - name: Post validate ${{ matrix.build_type }}
         run: | 
           python -V
