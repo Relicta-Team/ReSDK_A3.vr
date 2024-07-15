@@ -93,7 +93,6 @@ endclass
 
 class(Canister2) extends(Canister)
 	var(name,"Канистра");
-	var(weight,gramm(2000));
 	var(weight,gramm(400));
 	var(model,"ml_exodusnew\kanistorka.p3d");
 	var(material,"MatSynt");
