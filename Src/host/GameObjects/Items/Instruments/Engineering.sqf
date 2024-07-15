@@ -14,6 +14,46 @@ class(EngineeringToolItem) extends(Item)
 	var(weight,gramm(150));
 endclass
 
+class(Sledgehammer) extends(EngineeringToolItem)
+	var(name,"Кувалда");
+	var(desc,"Ломает стены, простройки, и в крайнем случае - черепа.");
+	var(model,"relicta_models2\tools\s_sledgehammer\s_sledgehammer.p3d");
+	var(material,"MatMetal");
+	var(weight,gramm(6500));
+	var(size,ITEM_SIZE_BIG);
+	var(allowedSlots,[INV_BELT arg INV_BACK arg INV_BACKPACK]);
+endclass
+
+class(Sledgehammer1) extends(Sledgehammer)
+	var(name,"Кувалдушка");
+	var(desc,"То же что и кувалда, только поменьше");
+	var(model,"relicta_models2\tools\s_sledgehammer1\s_sledgehammer1.p3d");
+	var(material,"MatMetal");
+	var(weight,gramm(4500));
+	var(size,ITEM_SIZE_LARGE);
+	var(allowedSlots,[INV_BELT]);
+endclass
+
+class(Pickaxe) extends(EngineeringToolItem)
+	var(name,"Колотилка");
+	var(desc,"Хороший прибор для разламывания камней");
+	var(model,"relicta_models2\tools\s_pickaxe\s_pickaxe.p3d");
+	var(material,"MatMetal");
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
+	var(weight,gramm(4000));
+	var(size,ITEM_SIZE_BIG);
+	var(allowedSlots,[INV_BELT arg INV_BACK arg INV_BACKPACK]);
+endclass
+
+class(FireExtinguisher) extends(EngineeringToolItem)
+	var(name,"Тушилка");
+	var(desc,"Он же ""Тухляк""");
+	var(model,"relicta_models2\tools\s_fire_extinguisher\s_fire_extinguisher.p3d");
+	var(material,"MatMetal");
+	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
+	var(weight,gramm(10000));
+	var(size,ITEM_SIZE_BIG);
+endclass
 
 class(Screwdriver) extends(EngineeringToolItem)
 	var(name,"Отвёртка");

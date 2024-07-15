@@ -36,6 +36,12 @@ class(ScaffoldingLadder) extends(StepsLadder)
 endclass
 
 editor_attribute("EditorGenerated")
+class(BigWoodenLadder) extends(ScaffoldingLadder)
+	var(model,"ca\structures\castle\a_castle_stairs_a.p3d");
+	var(material,"MatWood");
+endclass
+
+editor_attribute("EditorGenerated")
 class(SteelSmallLadder) extends(StepsLadder)
 	var(model,"metro_ob\model\vag_wash4_p1.p3d");
 endclass

@@ -58,6 +58,21 @@ class(ConcreteSmallFloor) extends(SmallFloor)
 endclass
 
 editor_attribute("EditorGenerated")
+class(SmallTileFloor) extends(ConcreteSmallFloor)
+	var(model,"ml_shabut\sbs\polwhitesbs.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SmallTileFloor2) extends(SmallTileFloor)
+	var(model,"ml_shabut\sbs\polbetonsbs.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SmallTileFloor1) extends(SmallTileFloor)
+	var(model,"ml_shabut\sbs\polbetonsbs_2.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(ConcreteSmallFloor2) extends(ConcreteSmallFloor)
 	var(model,"ml_shabut\exoduss\concrete_slub.p3d");
 endclass
@@ -70,6 +85,13 @@ endclass
 editor_attribute("EditorGenerated")
 class(SmallStoneRoad) extends(SmallFloor)
 	var(model,"a3\structures_f_exp\infrastructure\pavements\gardenpavement_02_f.p3d");
+	var(material,"MatStone");
+	var(dr,3);
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumStoneRoad) extends(SmallStoneRoad)
+	var(model,"a3\structures_f_epc\dominants\ghosthotel\gh_platform_f.p3d");
 	var(material,"MatStone");
 	var(dr,3);
 endclass
@@ -106,6 +128,11 @@ class(MediumConcreteFloor) extends(SmallFloor)
 endclass
 
 editor_attribute("EditorGenerated")
+class(MediumConcreteFloor1) extends(MediumConcreteFloor)
+	var(model,"csa_constr\csa_obj\plita_6x6.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(WhiteConcreteFloorBig) extends(MediumConcreteFloor)
 	var(model,"ml_shabut\exoduss\concreteplat.p3d");
 endclass
@@ -120,6 +147,11 @@ editor_attribute("EditorGenerated")
 class(SmallSteelPlate) extends(SmallFloor)
 	var(model,"ml_shabut\exoduss\metalplate.p3d");
 	var(material,"MatMetal");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumSteelFloor) extends(SmallSteelPlate)
+	var(model,"ml_exodusnew\zhelezoplatforma.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
