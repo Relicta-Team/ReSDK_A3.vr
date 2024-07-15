@@ -34,6 +34,20 @@ class(Wheelchair) extends(IChair)
 endclass
 
 editor_attribute("EditorGenerated")
+class(Wheelchair2) extends(Wheelchair)
+	var(model,"relicta_models\models\nocategory\wheelchair2.p3d");
+	getter_func(getChairOffsetPos,[0 arg 0 arg -0.73]);
+	getterconst_func(getChairOffsetDir,180);
+endclass
+
+editor_attribute("EditorGenerated")
+class(Wheelchair1) extends(Wheelchair)
+	var(model,"relicta_models\models\nocategory\wheelchair1.p3d");
+	getter_func(getChairOffsetPos,[0 arg 0.09 arg -0.45]);
+	getterconst_func(getChairOffsetDir,180);
+endclass
+
+editor_attribute("EditorGenerated")
 class(OldGreenToiletBowl) extends(IChair)
 	var(model,"ml\ml_object_new\model_24\tolchek.p3d");
 	var(material,"MatMetal");

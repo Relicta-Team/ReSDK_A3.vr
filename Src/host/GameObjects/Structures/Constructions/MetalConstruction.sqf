@@ -19,6 +19,13 @@ class(MetalConstruction) extends(Constructions)
 endclass
 
 editor_attribute("EditorGenerated")
+class(SmallRadiator) extends(MetalConstruction)
+	var(model,"ml\ml_object_new\model_24\batareya.p3d");
+	var(name,"Металлолом");
+	var(desc,"Можно бы было сдать"" + pcomma + "" да не утащить..");
+endclass
+
+editor_attribute("EditorGenerated")
 class(MetalFanSmall) extends(MetalConstruction)
 	var(model,"metro_ob\model\vent_02.p3d");
 endclass

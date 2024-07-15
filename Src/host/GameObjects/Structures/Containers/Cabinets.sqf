@@ -24,6 +24,27 @@ class(BigClothCabinet) extends(SContainer)
 	var(material,"MatWood");
 endclass
 
+class(BigClothCabinetGreen) extends(BigClothCabinet)
+	var(name,"Гардеробный шкаф");
+	var_exprval(countSlots,DEFAULT_LARGEBOX_STORAGE);
+	var(model,"ca\structures\furniture\cases\case_cans_b\case_cans_b.p3d");
+	var(material,"MatWood");
+endclass
+
+class(BigClothCabinet1) extends(BigClothCabinet)
+	var(name,"Гардеробный шкаф");
+	var_exprval(countSlots,DEFAULT_LARGEBOX_STORAGE);
+	var(model,"ml\ml_object_new\model_24\shkafik.p3d");
+	var(material,"MatWood");
+endclass
+
+class(BigClothCabinetDamaged) extends(BigClothCabinet)
+	var(name,"Гардеробный шкаф");
+	var_exprval(countSlots,DEFAULT_LARGEBOX_STORAGE);
+	var(model,"ml_shabut\exodusss\shkafique.p3d");
+	var(material,"MatWood");
+endclass
+
 class(BigClothCabinetNew) extends(BigClothCabinet)
 	var(name,"Новый гардеробный шкаф");
 	var(desc,"Либо чудом сохранился, либо его сделали совсем недавно");

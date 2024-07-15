@@ -101,6 +101,11 @@ class(SteelCanopy) extends(SmallHouse)
 endclass
 
 editor_attribute("EditorGenerated")
+class(SteelCanopySmall1) extends(SteelCanopy)
+	var(model,"a3\structures_f_exp\commercial\market\woodenshelter_01_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(SteelCanopySmall) extends(SteelCanopy)
 	var(model,"a3\structures_f\households\slum\cargo_addon01_v2_f.p3d");
 endclass

@@ -35,8 +35,26 @@ class(Bucket) extends(IReagentNDItem)
 	};
 endclass
 
+class(Bucket1) extends(Bucket)
+	var(name,"Ведро");
+	var(model,"a3\structures_f\items\vessels\bucket_painted_f.p3d");
+	var(material,"MatMetal");
+	var(dr,2);
+	var(weight,1.2);
+	var(size,ITEM_SIZE_MEDIUM);
+endclass
+
+class(Bucket2) extends(Bucket)
+	var(name,"Ведро");
+	var(model,"a3\structures_f\items\vessels\bucket_clean_f.p3d");
+	var(material,"MatMetal");
+	var(dr,2);
+	var(weight,1.2);
+	var(size,ITEM_SIZE_MEDIUM);
+endclass
+
 class(WoodenBucket) extends(Bucket)
-	var(desc,"Деревянное ведро");
+	var(name,"Деревянное ведро");
 	var(model,"ca\structures_e\misc\misc_interier\bucket_ep1.p3d");
 	var(material,"MatWood");
 	var(weight,gramm(770));
@@ -44,13 +62,42 @@ class(WoodenBucket) extends(Bucket)
 	var(reagents,vec2(this,200) call ms_create);
 endclass
 
-class(Canister) extends(IGlassReagentCont)
+
+class(Teapot) extends(IReagentNDItem)
+	var(name,"Чайник");
+	var(model,"relicta_models\models\interier\props\kitchen\chaynik.p3d");
+	var(material,"MatMetal");
+	var(weight,gramm(400));
+	var(size,ITEM_SIZE_MEDIUM);
+	var(reagents,vec2(this,100) call ms_create);
+	getterconst_func(transferAmount,[5 arg 10 arg 20 arg 30]);
+endclass
+
+class(Canister) extends(IReagentNDItem)
 	var(name,"Канистра");
 	var(weight,gramm(5000));
 	var(model,"ml\ml_object_new\model_14_10\benzin.p3d");
-	var(material,"MatOrganic");
-	var(weight,1.3);
+	var(material,"MatMetal");
+	var(dr,2);
 	var(size,ITEM_SIZE_BIG);
 	var(reagents,vec2(this,1000) call ms_create);
-	getterconst_func(transferAmount,[5 arg 10 arg 20 arg 30]);
+	getterconst_func(transferAmount,[5 arg 10 arg 25 arg 30 arg 60]);
 endclass
+
+class(Canister1) extends(Canister)
+	var(name,"Канистра");
+	var(weight,gramm(1000));
+	var(model,"ml\ml_object_new\model_14_10\redbalon.p3d");
+	var(dr,2);
+endclass
+
+class(Canister2) extends(Canister)
+	var(name,"Канистра");
+	var(weight,gramm(400));
+	var(model,"ml_exodusnew\kanistorka.p3d");
+	var(material,"MatSynt");
+	var(dr,2);
+	var(reagents,vec2(this,500) call ms_create);
+endclass
+
+

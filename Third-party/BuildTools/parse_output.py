@@ -158,6 +158,12 @@ log(f"No errors!")
 if "GITHUB_STEP_SUMMARY" in os.environ :
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f :
             print("# Files:\n", file=f)
+            __i = 0;
             for file in loadedFilesInfo:
-                print(f"* {file}", file=f)
+                __i = __i + 1
+                try:
+                    log(f"Saving {file} ({__i})")
+                    print(f"* {file}", file=f)
+                except Exception as e:
+                    log(f"::warning::Cannot output at line {__i};  {e};")
 

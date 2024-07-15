@@ -52,6 +52,11 @@ class(WoodenOfficeTable) extends(TableBase)
 endclass
 
 editor_attribute("EditorGenerated")
+class(WoodenOfficeTable4) extends(WoodenOfficeTable)
+	var(model,"ml\ml_object_new\model_14_10\stolik.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(WoodenOfficeTable3) extends(WoodenOfficeTable)
 	var(model,"ca\structures\furniture\tables\conference_table_a\conference_table_a.p3d");
 endclass
