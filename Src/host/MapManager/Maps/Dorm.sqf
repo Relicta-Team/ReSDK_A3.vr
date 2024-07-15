@@ -1776,7 +1776,7 @@ _4067_299804053_3750011_48151 = ['IStruct',[4067.3,4053.38,16.488,true],[-0.9967
 ['BetonGarageMedium',[4013.54,4035.07,10.2399],180,[0,0,1]] call InitStruct; 
 ['ClothDebris1',[4177.98,3941.98,0],0,[0,0,1]] call InitItem; 
 ['ClothDebris2',[4180,3942,0],0,[0,0,1]] call InitItem; 
-['Head1',[4173.4,3939.55,0.166418],340,[0,0,1]] call InitItem; 
+_4173_397953939_547360_16642 = ['Head1',[4173.4,3939.55,0.166418],340,[0,0,1]] call InitItem; 
 ['MediumSteelFloor',[4173.52,3940.14,0.0123053],0,[0,0,1]] call InitStruct; 
 ['Bucket',[4173.54,3940.44,5.20187,true],0,[0,0.00119604,0.999999]] call InitItem; 
 ['OrganicDebris1',[4178,3939.98,-0.00450516],0,[0,0,1]] call InitItem; 
@@ -1833,6 +1833,9 @@ _4192_000003917_375000_00000 = ['PowerGenerator',[4192,3917.38,0],0,[0,0,1], {go
 ['LogDebris1',[4196,3950,0],0,[0,0,1]] call InitItem; 
 ['LogDebris2',[4198,3950,0],0,[0,0,1]] call InitItem; 
 ['MetalDebris2',[4179.99,3938,0],0,[0,0,1]] call InitItem; 
+['MediumSteelFloor',[4184.63,3928.38,0],0,[0,0,1]] call InitStruct; 
+['StreetLampEnabled',[4184.63,3926.38,0],2.56132e-006,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_DORM_var]; go_editor_globalRefs set ["StreetLampEnabled G:Q82SVCAlYvk (3)",_thisObj];
+}] call InitStruct; 
 
 
 
@@ -2363,6 +2366,9 @@ if (!isNil'_4087_000004011_00000_3_00000') then {
 if (!isNil'_4069_708984053_218999_74378') then {
 	_4069_708984053_218999_74378 setvariable ['islocked',true];
 };
+if (!isNil'_4173_397953939_547360_16642') then {
+	_4173_397953939_547360_16642 setvariable ['desc',"Эта голова уже никому ничего не расскажет. Кто знает может быть это иууу к лучшему."];
+};
 if (!isNil'_4192_000003917_375000_00000') then {
 	[_4192_000003917_375000_00000,go_editor_globalRefs get "StreetLampEnabled G:BQnzwRacNe0"] call (_4192_000003917_375000_00000 getvariable 'proto' getvariable 'addConnection');
 	[_4192_000003917_375000_00000,go_editor_globalRefs get "StreetLampEnabled G:Q82SVCAlYvk"] call (_4192_000003917_375000_00000 getvariable 'proto' getvariable 'addConnection');
@@ -2372,4 +2378,5 @@ if (!isNil'_4192_000003917_375000_00000') then {
 	[_4192_000003917_375000_00000,go_editor_globalRefs get "StreetLampEnabled G:Q82SVCAlYvk (1)"] call (_4192_000003917_375000_00000 getvariable 'proto' getvariable 'addConnection');
 	[_4192_000003917_375000_00000,go_editor_globalRefs get "StreetLampEnabled G:Q82SVCAlYvk (2)"] call (_4192_000003917_375000_00000 getvariable 'proto' getvariable 'addConnection');
 	[_4192_000003917_375000_00000,go_editor_globalRefs get "StreetLampEnabled G:BQnzwRacNe0 (2)"] call (_4192_000003917_375000_00000 getvariable 'proto' getvariable 'addConnection');
+	[_4192_000003917_375000_00000,go_editor_globalRefs get "StreetLampEnabled G:Q82SVCAlYvk (3)"] call (_4192_000003917_375000_00000 getvariable 'proto' getvariable 'addConnection');
 };

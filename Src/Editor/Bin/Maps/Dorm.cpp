@@ -8,18 +8,18 @@ class EditorData
 	toggles=46;
 	class ItemIDProvider
 	{
-		nextID=6475;
+		nextID=6477;
 	};
 	class LayerIndexProvider
 	{
-		nextID=2862;
+		nextID=2907;
 	};
 	class Camera
 	{
-		pos[]={4117.1792,44.006828,4023.063};
-		dir[]={0.16410418,-0.58190691,0.7966913};
-		up[]={0.11744032,0.81307775,0.57015753};
-		aside[]={0.9795509,4.5383349e-006,-0.20176969};
+		pos[]={4045.8933,19.980904,4037.4619};
+		dir[]={0.83871293,-0.28661796,-0.46318126};
+		up[]={0.25095049,0.95802402,-0.13858773};
+		aside[]={-0.48346218,-4.6278001e-007,-0.87543654};
 	};
 };
 binarizationWanted=0;
@@ -790,7 +790,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=68;
+		items=70;
 		class Item0
 		{
 			dataType="Group";
@@ -26583,7 +26583,7 @@ class Mission
 				};
 			};
 			id=4308;
-			atlOffset=1.7777443;
+			atlOffset=0.040844917;
 		};
 		class Item12
 		{
@@ -29108,7 +29108,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Head1""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""desc"",""Эта голова уже никому ничего не расскажет. Кто знает может быть это иууу к лучшему.""]]],[""class"",""Head1""]]}";
 			};
 			id=5439;
 			type="golova_trup1";
@@ -29242,7 +29242,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PowerGenerator""],[""edConnected"",[""StreetLampEnabled G:BQnzwRacNe0"",""StreetLampEnabled G:Q82SVCAlYvk"",""StreetLampEnabled G:tWqtnbDqqws"",""StreetLampEnabled G:rOqB9B6l4bA"",""StreetLampEnabled G:BQnzwRacNe0 (1)"",""StreetLampEnabled G:Q82SVCAlYvk (1)"",""StreetLampEnabled G:Q82SVCAlYvk (2)"",""StreetLampEnabled G:BQnzwRacNe0 (2)""]],[""mark"",""PowerGenerator G:1o6bJJZJVv4""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PowerGenerator""],[""edConnected"",[""StreetLampEnabled G:BQnzwRacNe0"",""StreetLampEnabled G:Q82SVCAlYvk"",""StreetLampEnabled G:tWqtnbDqqws"",""StreetLampEnabled G:rOqB9B6l4bA"",""StreetLampEnabled G:BQnzwRacNe0 (1)"",""StreetLampEnabled G:Q82SVCAlYvk (1)"",""StreetLampEnabled G:Q82SVCAlYvk (2)"",""StreetLampEnabled G:BQnzwRacNe0 (2)"",""StreetLampEnabled G:Q82SVCAlYvk (3)""]],[""mark"",""PowerGenerator G:1o6bJJZJVv4""]]}";
 			};
 			id=5456;
 			type="controlpanel";
@@ -29880,6 +29880,39 @@ class Mission
 			};
 			id=5514;
 			type="S_Metal_Debris1";
+		};
+		class Item68
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4184.625,5.0235543,3928.375};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumSteelFloor""]]}";
+			};
+			id=6475;
+			type="land_zhelezoplatforma";
+		};
+		class Item69
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4184.625,8.7720299,3926.375};
+				angles[]={0,4.4703484e-008,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_STREET_LAMP_DORM""]]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:Q82SVCAlYvk (3)""]]}";
+			};
+			id=6476;
+			type="Land_LampShabby_off_F";
 		};
 	};
 };
