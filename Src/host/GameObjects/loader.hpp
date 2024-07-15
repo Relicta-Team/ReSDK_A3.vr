@@ -80,7 +80,7 @@ loadFile("src\host\GameObjects\Structures\Constructions\Construction.sqf");
 	loadFile("src\host\GameObjects\Structures\Constructions\Poles.sqf");
 	loadFile("src\host\GameObjects\Structures\Constructions\StepsLadders.sqf");
 	loadFile("src\host\GameObjects\Structures\Constructions\Walls.sqf");
-	loadFile("Src\host\GameObjects\Structures\LiquidСontainers\LiquidСontainer.sqf");
+	loadFile("Src\host\GameObjects\Structures\LiquidContainers\LiquidContainer.sqf");
 loadFile("src\host\GameObjects\Structures\Lighting\Natural.sqf");
 	loadFile("src\host\GameObjects\Structures\Lighting\Campfires.sqf");
 loadFile("src\host\GameObjects\Structures\Furniture\Furniture.sqf");
