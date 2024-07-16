@@ -4,6 +4,7 @@
 // ======================================================
 
 #include "..\engine.hpp"
+#include "..\struct.hpp"
 #include "..\ServerRpc\serverRpc.hpp"
 #include "..\GameObjects\GameConstants.hpp"
 #include "Atmos.hpp"
@@ -11,6 +12,11 @@
 
 #define ATMOS_DEBUG_CREATE_SPHERE(_r,_g,_b) call {private _s = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0]; \
 _s setObjectTexture [0,format(["#(rgb,8,8,3)color(%1,%2,%3,1)",_r,_g,_b])]; _s}
+
+atmos_debug_createSphere = {
+	params ["_r","_g","_b"];
+	ATMOS_DEBUG_CREATE_SPHERE(_r,_g,_b)
+};
 
 atmos_debug_testAll = {
 	private _worldPos = getposatl player;
@@ -121,6 +127,101 @@ atmos_debug_enableRender = {
 	atmos_debug_handleRender = addMissionEventHandler ["Draw3d", atmos_debug_renderUpdate];
 };
 
+atmos_debug_currentHelper = {
+	showHUD true;
+	
+	call atmos_debug_cleanupCurrentHelper;
+
+	#include "..\..\client\WidgetSystem\widgets.hpp"
+	#include "..\keyboard.hpp"
+	#include "..\text.hpp"
+	atmos_debug_sphereCenterHelper = [0,1,1] call atmos_debug_createSphere;
+	atmos_debug_rangeOffset = 1;
+	_d = findDisplay 46;
+	_ctrl = [_d,WIDGETGROUP,[0,0,30,40]] call createWidget;
+	_d setvariable ["__renderCurrentWidget",_ctrl];
+	_w = [_d,BACKGROUND,WIDGET_FULLSIZE,_ctrl] call createWidget;
+	_w setBackgroundColor [0.2,0.2,0.2,0.8];
+
+	_t = [_d,TEXT,WIDGET_FULLSIZE,_ctrl] call createWidget;
+	atmos_debug_centerHelperRefText = [_t];
+
+	atmos_debug_handleCurrentRenderScroll = (findDisplay 46) displayAddEventHandler ["MouseZChanged",{
+		_value = _this select 1;
+		if (_value > 0) then {
+			atmos_debug_rangeOffset = atmos_debug_rangeOffset + 0.5;
+		} else {
+			atmos_debug_rangeOffset = atmos_debug_rangeOffset - 0.5;
+		};
+		atmos_debug_rangeOffset = clamp(atmos_debug_rangeOffset,0.1,100);
+	}];
+	atmos_debug_forceUpdateFlag = false;
+	atmos_debug_handleCurrentRenderKeyUp = (findDisplay 46) displayAddEventHandler ["KeyUp",{
+		params ["_d","_key","_shift","_ctrl","_alt"];
+		if (_key==KEY_R) exitWith {
+			atmos_debug_forceUpdateFlag = true;
+		};
+	}];
+	atmos_debug_handleCurrentRender = addMissionEventHandler ["Draw3d", atmos_debug_renderCurrentUpdate];
+};
+
+atmos_debug_renderCurrentUpdate = {
+	if !isNullReference(findDisplay 49) exitWith {};
+	private _pos = positionCameraToWorld [0,0,atmos_debug_rangeOffset];
+	private _chId = _pos call atmos_chunkPosToId;
+	private _posBaseCenter = (_chId call atmos_chunkIdToPos);
+	atmos_debug_sphereCenterHelper setPosAtl _posBaseCenter;
+	private _posBase = _posBaseCenter vectordiff [ATMOS_SIZE_HALF,ATMOS_SIZE_HALF,ATMOS_SIZE_HALF];;
+	private _sp = _posBase;
+	private _size = ATMOS_SIZE;
+	private _color = [1,0,0,1];
+	drawLine3D [_sp,_sp vectorAdd [_size,0,0],_color];
+	drawLine3D [_sp,_sp vectorAdd [0,_size,0],_color];
+	drawLine3D [_sp vectorAdd [_size,_size,0],_sp vectorAdd [_size,0,0],_color];
+	drawLine3D [_sp vectorAdd [_size,_size,0],_sp vectorAdd [0,_size,0],_color];
+	//to up
+
+	drawLine3D [_sp vectorAdd [0,0,0],_sp vectorAdd [0,0,_size],_color];
+	drawLine3D [_sp vectorAdd [_size,0,0],_sp vectorAdd [_size,0,_size],_color];
+	drawLine3D [_sp vectorAdd [0,_size,0],_sp vectorAdd [0,_size,_size],_color];
+	drawLine3D [_sp vectorAdd [_size,_size,0],_sp vectorAdd [_size,_size,_size],_color];
+
+	_sp = _sp vectoradd [0,0,_size];
+	drawLine3D [_sp,_sp vectorAdd [_size,0,0],_color];
+	drawLine3D [_sp,_sp vectorAdd [0,_size,0],_color];
+	drawLine3D [_sp vectorAdd [_size,_size,0],_sp vectorAdd [_size,0,0],_color];
+	drawLine3D [_sp vectorAdd [_size,_size,0],_sp vectorAdd [0,_size,0],_color];
+
+	private _tR = atmos_debug_centerHelperRefText select 0;
+	private _chObj = [_chId] call atmos_getChunkAtChIdUnsafe;
+	private _mes = format["[OFFS:%4]%1Chunk %2=%3",sbr,_chId,ifcheck(isNullVar(_chObj),"NULL_CHUNK",sanitize(str _chObj)),atmos_debug_rangeOffset];
+	_mes = [_mes];
+	if !isNullVar(_chObj) then {
+		if (atmos_debug_forceUpdateFlag && {_chObj getv(flagUpdObj)}) then {
+			atmos_debug_forceUpdateFlag = false;
+			_chObj callv(updateObjectsInChunk);
+		};
+		_mes pushBack sbr;
+		_mes pushBack (format["Dirty: %1, Last upd: %2",_chObj getv(flagUpdObj),_chObj getv(lastObjUpdate)]);
+		_mes pushBack sbr;
+		_mes pushBack (format["Objects %1: %2",count (_chObj getv(objInside)),sanitize(str(_chObj getv(objInside)))]);
+		_mes pushBack sbr;
+		_mes pushBack (format["Temp: %1",_chObj getv(atmosTemp)]);
+
+		if (_chObj callv(hasFire)) then {
+			private _aobj = _chObj getv(aFire);
+			_mes pushBack sbr;
+			_mes pushBack sanitize(format["fire:%1 (%2)" arg _aobj getv(force) arg _aobj getv(size)]);
+		};
+		if (_chObj callv(hasGas)) then {
+			private _aobj = _chObj getv(aGas);
+			_mes pushBack sbr;
+			_mes pushBack sanitize(format["gas:%1=%2 %3" arg _aobj getv(leadingGas) arg _aobj getv(volume) arg _aobj getv(gCont)]);
+		};
+	};
+	[_tR,(_mes joinString "")] call widgetSetText;
+};
+
 //cleanup memory
 if !isNull(atmos_debug_handleRender) then {
 	removeMissionEventHandler ["Draw3d",atmos_debug_handleRender];
@@ -128,4 +229,18 @@ if !isNull(atmos_debug_handleRender) then {
 if !isNull(atmos_debug_spheresCenter) then {
 	{deleteVehicle _x} foreach (values atmos_debug_spheresCenter);
 };
+atmos_debug_cleanupCurrentHelper = {
+	if !isNull(atmos_debug_handleCurrentRender) then {
+		removeMissionEventHandler ["Draw3d",atmos_debug_handleCurrentRender];
+		[(findDisplay 46)getvariable ["__renderCurrentWidget",controlnull]] call deleteWidget;
+		(findDisplay 46) displayRemoveEventHandler ["MouseZChanged",atmos_debug_handleCurrentRenderScroll];
+		(findDisplay 46) displayRemoveEventHandler ["KeyUp",atmos_debug_handleCurrentRenderKeyUp];
+		atmos_debug_handleCurrentRender = null;
+	};
+	if !isNull(atmos_debug_sphereCenterHelper) then {
+		deletevehicle atmos_debug_sphereCenterHelper;
+	};
+};
+call atmos_debug_cleanupCurrentHelper;
+
 atmos_debug_spheresCenter = createHashMap;

@@ -16,6 +16,8 @@ atmos_chunkPosToId = {
 	]
 };
 
+atmos_coordToId = { floor(_this/ATMOS_SIZE)+ATMOS_START_INDEX };
+
 //returns center atl pos of chunk
 atmos_chunkIdToPos = {
 	params ["_iX","_iY","_iZ"];

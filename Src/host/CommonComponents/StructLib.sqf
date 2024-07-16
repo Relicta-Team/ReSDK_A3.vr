@@ -4,6 +4,7 @@
 // ======================================================
 
 #include "..\engine.hpp"
+#include "..\oop.hpp"
 #include "..\struct.hpp"
 
 //! not supported
@@ -39,181 +40,151 @@
 	endstruct
 */
 
-// Safe reference. Used for bypass crossreferences and possible memory leaks
-sref_cont = createHashMap;
-sref_i = 0;
-struct(SafeRef)
-	def(iptr) null //integer pointer is just a number
+/*
+	Context struct
 
-	def(init)
-	{
-		params ['_obj'];
-		private _curi = sref_i;
-		self setv(iptr, _curi);
-		sref_cont set [_curi,_obj];
-		sref_i = _curi + 1;		
-	}
-	def(releaseRef)
-	{
-		sref_cont deleteAt (self getv(iptr));
-	}
-	def(getPtr) {self getv(iptr)}
-	def(getValue) {sref_cont get (self getv(iptr))}
+	Example:
 
-	def(del)
-	{
-		self callv(releaseRef);
-	}
+		_ctx = struct_new(Context);
+		_ctx callp(setValue,"test" arg 1)
 
-	def(str)
-	{
-		format["ref:%1<%2>",self getv(iptr),self callv(getValue)]
-	}
-endstruct
-
-
-struct(_SmartPointerBase)
-	def(_v) null
-
-	//_ptr callv(get)
-	def(get)
-	{
-		self getv(_v)
-	}
-
-	def(deleted)
-	{
-		private _v = self getv(_v);
-		if isNullVar(_v) exitWith {true};
-		if equalTypes(_v,objNull) exitWith {!isNullReference(_v)};
-		false
-	}
-
-	def(dispose)
-	{
-		private _v = self getv(_v);
-		if !(self callv(deleted)) then {
-			call {
-				if equalTypes(_v,objNull) exitWith {deletevehicle _x};
-				assert_str(false,"Not supported type for removing");
+		_ctx call {
+			private _ctx = _this;
+			if (_ctx callp(compare,"test" arg 1)) then {
+				["Called"] call messageBox;
 			};
-			self setv(_v,null);
 		};
-	}
-endstruct
-
-/*
-	AutoPtr - is smart pointer. He will delete source on last reference is removed
-	Now 
-	Usage:
-		if (true) then {
-			private _model = "VehicleConfigExample" createVehicle [0,0,0];
-			private _obj = struct_newp(AutoPtr,_model);
-			logformat("Autoptr value is %1",_obj callv(get));
-		};
-		assert(isNullReference(_model))
 */
-struct(AutoPtr) base(_SmartPointerBase)
-	def(_v) null
+struct(ContextParamData)
+	def(_@created) 0;
+	def(_@defaults) null;
+	def(_@caseSense) true;
+
 	def(init)
 	{
-		params ["_data"];
-		self setv(_v,_data)
-	}
-	
-	def(del)
-	{
-		callv(dispose)
+		params [["_arrContent",[]],["_caseSense",true]];
+		private _mapCurKeys = keys self;
+		
+		self setv(_@defaults,_mapCurKeys);
+
+		private _map = self;
+		{
+			_x params ["_k","_v"];
+			if (!_caseSense) then {
+				_k = tolower _k;
+			};
+			_map set _x;
+		} count _arrContent;
+		
+		self setv(_@caseSense,_caseSense);
+		self setv(_@created,tickTime);
 	}
 
-endstruct
-
-/*
-	Collections
-*/
-struct(IEnumerable)
-	def(_enum) null
-	def(getEnumerator) { self getv(_enum) }
-	
-	def(length) {count (self getv(_enum))}
-	def(clear) {self getv(_enum) resize 0}
-
-	def(str)
+	def(getKeys)
 	{
-		str(self getv(_enum))
-	}
-endstruct
+		private _kList = [];
+		private _lowerize = !(self getv(_@caseSense));
+		{
+			if (_lowerize) then {
+				_x = tolower _x;
+			};
+			_kList pushBack _x;
+			false;
+		} count (keys self);
 
-//stack structure
-struct(Stack) base(IEnumerable)
-	def(init)
-	{
-		params [["_list",[]]];
-		self setv(_enum,_list);
-	}
-	
-	def(push) {params ["_el"]; self getv(_enum) pushBack _el};
-	def(pop) {
-		if (self callv(length) == 0) exitWith {null};
-		self getv(_enum) deleteAt -1
-	}
-endstruct
-
-//list structure
-struct(List) base(IEnumerable)
-	def(init)
-	{
-		params [["_list",[]]];
-		self setv(_enum,_list);
+		_kList
 	}
 
-	def(addItem)
+	def(getValue)
 	{
-		params ["_item"];
-		self getv(_enum) pushBack _item
-	}
-	def(removeItem)
-	{
-		params ["_item"];
-		private _pitms = self getv(_enum);
-		private _i = _pitms findif {equals(_x,_item)};
-		if (_i>=0) then {
-			_pitms deleteAt _i;
+		params ["_key","_default"];
+		if !(self getv(_@caseSense)) then {_key = tolower _key;};
+
+		if isNullVar(_default) then {
+			self get _key
+		} else {
+			self getOrDefault [_key,_default]
 		};
 	}
 
+	def(setValue)
+	{
+		params ["_key","_value"];
+		if !(self getv(_@caseSense)) then {_key = tolower _key;};
+
+		self set [_key,_value];
+	}
+
+	def(hasValue)
+	{
+		params ["_key"];
+		if !(self getv(_@caseSense)) then {_key = tolower _key;};
+
+		_key in self;
+	}
+
+	def(compare)
+	{
+		params ["_key","_value"];
+		if !(self callv(hasValue))exitWith {false};
+		equals(self callp(getValue,_key),_value);
+	}
 endstruct
 
-/*
-	PROFILING
-*/
-prof_map_zones = createHashMap;
-
-//this can be used for hotreload fixing
-struct(ProfilerSystem)
-	def(zone) createHashMap
-
-endstruct
-
-struct(ProfileZone)
-	def(_name) "Anon_Scope";
-	def(_line) 0;
-	def(_time) 0;
-	def(_isScoped) false;
+//TODO implement
+struct(Model)
+	def(_mesh) objNull;
+	def(_vars) null;//for variables inside simple object
+	def(isSimple) {isSimpleObject (self getv(_mesh))} 
 	def(init)
 	{
-		params ["_name","_line",["_isScoped"]];
-		self setv(_name,_name);
-		self setv(_line,_line);
-		self setv(_isScoped,_isScoped);
-		//TODO work scoped: add to stack
+		params ["_cfgPath","_pos",["_simple",false],["_local",true]];
+		
+		if !(self callp(isValidModelPath,_cfgPath)) exitWith {};
+		
+		if (_simple) then {
+			self setv(_vars,createHashMap);
+			private _mesh = createSimpleObject [_cfgPath,[0,0,0],_local];
+			assert(!isNullReference(_mesh));
+			self setv(_mesh,_mesh);
+			self callp(setPos,_pos);
+		} else {
 
-		self setv(_time,tickTime);
+		};
 	}
 
 	def(del)
 	{
-		private _delta = tickTime - (self getv(_time));
-		//TODO set result
+		deleteVehicle (self getv(_mesh))
 	}
+
+	def(isValidModelPath)
+	{
+		params ["_cfgPath"];
+	}
+
+	def(isVisible) {}
+	def(setVisible) {}
+	def(getMesh) {}
+	def(setMesh) { params ["_model"];}
+
+	def(setPos) {}
+	def(getPos) {}
+	def(modelToWorld) {}
+	def(setTransform) {}
+	def(getTransform) {}
+
+	//variable management
+	def(setVar) {}
+	def(getVar) {}
+	def(hasVar) {}
+	def(allVars) {}
 endstruct
+
+#include "Structs\Core.sqf"
+
+#include "Structs\Pointers.sqf"
+
+#include "Structs\Collections.sqf"
+
+#include "Structs\Profiling.sqf"

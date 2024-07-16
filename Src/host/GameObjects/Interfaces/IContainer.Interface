@@ -170,7 +170,7 @@ func(removeItem)
 		callSelf(onContainerContentUpdate);
 
 		if _isMobNewLoc then {
-			callFuncParams(_newLoc,interpolate,"auto_trans" arg _item arg _newLoc);
+			callFuncParams(_newLoc,interpolate,"auto_trans" arg _item arg _slot);
 			if (callFuncParams(_newLoc,addItem,args2(_item,_slot))) then {
 				callFuncParams(_item,playEventSound,"pickup");
 			} else {

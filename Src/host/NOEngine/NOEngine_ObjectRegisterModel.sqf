@@ -52,6 +52,10 @@ noe_registerObject = {
 	private _chAtm = [(getposatl _vis)call atmos_chunkPosToId] call atmos_getChunkAtChIdUnsafe;
 	if !isNullVar(_chAtm) then {
 		_chAtm set ["flagUpdObj",true];
+		private _refObj = pointerList get _ptr;
+		if !isNullVar(_refObj) then {
+			callFunc(_refObj,onUpdatePosition);
+		};
 	};
 };
 

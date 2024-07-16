@@ -96,6 +96,14 @@ class(MatBase) attribute(staticInit)
 	getterconst_func(getFireDamageModifier,1); //no mod
 	getterconst_func(getFireDamageIgniteProb,0);//basic prob 0-100
 
+	//------ destruction ------
+	//типы, выпадаемые при разрушении
+	func(getDestructionTypes)
+	{
+		objParams();
+		[];
+	};
+
 endclass
 
 class(MatStone) extends(MatBase)
@@ -113,6 +121,8 @@ class(MatStone) extends(MatBase)
 
 	getter_func(getDamageCoefOnAttack,0.2);
 
+	getter_func(getDestructionTypes,["StoneDebris1" arg "StoneDebris2" arg "StoneDebris3" arg "StoneDebris4" arg "StoneDebris5"]);
+
 endclass
 
 class(MatBeton) extends(MatStone)
@@ -127,6 +137,8 @@ class(MatBeton) extends(MatStone)
 
 	getter_func(getDamageCoefOnAttack,0.3);
 
+	getter_func(getDestructionTypes,["ConcreteDebris1" arg "ConcreteDebris2" arg "ConcreteDebris3" arg "ConcreteDebris4"]);
+
 endclass
 
 class(MatDirt) extends(MatBase)
@@ -140,6 +152,8 @@ class(MatDirt) extends(MatBase)
 	getter_func(getDamageCoefOnAttack,0.6);
 
 	getterconst_func(getFireDamageIgniteProb,2);
+
+	getter_func(getDestructionTypes,["DirtDebris1" arg "DirtDebris2"]);
 endclass
 
 class(MatWood) extends(MatBase)
@@ -157,6 +171,9 @@ class(MatWood) extends(MatBase)
 
 	getterconst_func(getFireDamageModifier,1.5);
 	getterconst_func(getFireDamageIgniteProb,70);
+
+	getter_func(getDestructionTypes,["WoodenDebris1" arg "WoodenDebris2" arg "WoodenDebris3" arg "WoodenDebris4" arg "WoodenDebris5" arg "WoodenDebris6" arg "WoodenDebris7"]);
+
 endclass
 
 class(MatMetal) extends(MatBase)
@@ -172,6 +189,8 @@ class(MatMetal) extends(MatBase)
 
 	getter_func(getDamageCoefOnAttack,0.7);
 
+	getter_func(getDestructionTypes,["MetalDebris1" arg "MetalDebris2"]);
+
 endclass
 
 
@@ -186,6 +205,8 @@ class(MatGlass) extends(MatBase)
 	getterconst_func(getWeightCoefForCalcHP,200);
 
 	getter_func(getDamageCoefOnAttack,3.2);
+
+	getter_func(getDestructionTypes,[]);
 endclass
 
 class(MatCloth) extends(MatBase)
@@ -201,6 +222,8 @@ class(MatCloth) extends(MatBase)
 
 	getterconst_func(getFireDamageModifier,2.5);
 	getterconst_func(getFireDamageIgniteProb,80);
+
+	getter_func(getDestructionTypes,["ClothDebris1" arg "ClothDebris2"]);
 endclass
 
 class(MatPaper) extends(MatBase)
@@ -217,6 +240,8 @@ class(MatPaper) extends(MatBase)
 
 	getterconst_func(getFireDamageModifier,3);
 	getterconst_func(getFireDamageIgniteProb,90);
+
+	getter_func(getDestructionTypes,[]);
 endclass
 
 class(MatFlesh) extends(MatBase)
@@ -232,6 +257,8 @@ class(MatFlesh) extends(MatBase)
 
 	getterconst_func(getFireDamageModifier,1.1);
 	getterconst_func(getFireDamageIgniteProb,50);
+
+	getter_func(getDestructionTypes,["FleshDebris1"]);
 endclass
 
 class(MatOrganic) extends(MatBase)
@@ -248,6 +275,8 @@ class(MatOrganic) extends(MatBase)
 	getterconst_func(getFireDamageModifier,1.2);
 	getterconst_func(getFireDamageIgniteProb,65);
 
+	getter_func(getDestructionTypes,["OrganicDebris1"]);
+
 endclass
 
 class(MatSynt) extends(MatBase)
@@ -263,6 +292,8 @@ class(MatSynt) extends(MatBase)
 
 	getterconst_func(getFireDamageModifier,1.4);
 	getterconst_func(getFireDamageIgniteProb,75);
+
+	getter_func(getDestructionTypes,["SyntDebris1"]);
 endclass
 
 
