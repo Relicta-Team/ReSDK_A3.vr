@@ -23,7 +23,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 253](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L253)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 255](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L255)
 ## debug_t(data)
 
 Type: constant
@@ -37,7 +37,7 @@ Replaced value:
 ```sqf
 traceformat("[THROW_DEBUG]: %1",data)
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 259](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L259)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 261](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L261)
 ## debug_line(p,v,clr)
 
 Type: constant
@@ -54,7 +54,7 @@ Replaced value:
 __D_IL_OBJ = "Sign_Arrow_F" createVehicle [0,0,0]; si_debug_listVectors pushBack __D_IL_OBJ; \
 __D_IL_OBJ setPosAtl p; __D_IL_OBJ setVectorUp v; __D_IL_OBJ setObjectTexture [0,format["#(rgb,8,8,3)color(%1,%2,%3,1)",clr select 0,clr select 1,clr select 2]];
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 260](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L260)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 262](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L262)
 ## debug_t(data)
 
 Type: constant
@@ -68,7 +68,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 265](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L265)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 267](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L267)
 ## debug_line(p,v,clr)
 
 Type: constant
@@ -84,7 +84,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 266](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L266)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 268](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L268)
 ## logshotgun(txt,vars)
 
 Type: constant
@@ -99,7 +99,7 @@ Replaced value:
 ```sqf
 errorformat("[SH_DEBUG_SHOTGUN]: %1 %2",txt arg [vars]);
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 472](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L472)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 474](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L474)
 ## logshotgun(txt,vars)
 
 Type: constant
@@ -114,7 +114,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 474](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L474)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 476](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L476)
 ## si_internal_rayObject
 
 Type: Variable
@@ -138,7 +138,7 @@ Initial value:
 ```sqf
 [] //obj, vecpos, vecdir, dist, precdown, downlevel, speed
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 256](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L256)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 258](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L258)
 ## si_debug_listVectors
 
 Type: Variable
@@ -152,7 +152,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 263](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L263)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 265](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L265)
 ## si_throwModes
 
 Type: Variable
@@ -164,7 +164,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 601](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L601)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 603](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L603)
 ## si_throwingProcess
 
 Type: function
@@ -239,7 +239,7 @@ Description:
 - Param: _throwMode (optional, default SI_TM_THROW)
 - Param: _addPenaltySupressFire
 
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 269](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L269)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 271](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L271)
 ## si_onFlyWorldActionLoad
 
 Type: function
@@ -247,7 +247,7 @@ Type: function
 Description: например взрыв летящей гранаты
 - Param: _tempObj
 
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 391](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L391)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 393](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L393)
 ## si_onThrowingEnd
 
 Type: function
@@ -256,7 +256,7 @@ Description:
 - Param: _tempObj
 - Param: _barrierObj
 
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 407](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L407)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 409](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L409)
 ## si_onBulletAct
 
 Type: function
@@ -265,7 +265,7 @@ Description:
 - Param: _tempObj
 - Param: _barrierObj
 
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 436](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L436)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 438](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L438)
 # ServerInteractionShared.sqf
 
 ## addInteractSecondPassObj(path)
@@ -622,6 +622,33 @@ Description:
 
 
 File: [host\ServerInteraction\ServerInteraction_Collision.sqf at line 11](../../../Src/host/ServerInteraction/ServerInteraction_Collision.sqf#L11)
+# ServerInteraction_rayTrace.sqf
+
+## SI_RAYTRACE_CHECK_DISTANCE
+
+Type: constant
+
+Description: проверка каждые SI_RAYTRACE_CHECK_DISTANCE метров
+
+
+Replaced value:
+```sqf
+0.05
+```
+File: [host\ServerInteraction\ServerInteraction_rayTrace.sqf at line 86](../../../Src/host/ServerInteraction/ServerInteraction_rayTrace.sqf#L86)
+## si_rayTraceProcess
+
+Type: function
+
+Description: _force - не рекомендуется больше 10
+- Param: _vobj
+- Param: _pstart
+- Param: _vecDirect
+- Param: _force
+- Param: _precdownIn (optional, default 70)
+- Param: _leveldownIn (optional, default 0.1)
+
+File: [host\ServerInteraction\ServerInteraction_rayTrace.sqf at line 21](../../../Src/host/ServerInteraction/ServerInteraction_rayTrace.sqf#L21)
 # ServerInteraction_ThrowModes.sqf
 
 ## SI_TM_THROW
