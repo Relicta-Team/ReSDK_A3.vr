@@ -126,7 +126,7 @@ struct(ContextParamData)
 	def(compare)
 	{
 		params ["_key","_value"];
-		if !(self callp(hasValue))exitWith {false};
+		if !(self callv(hasValue))exitWith {false};
 		equals(self callp(getValue,_key),_value);
 	}
 endstruct
