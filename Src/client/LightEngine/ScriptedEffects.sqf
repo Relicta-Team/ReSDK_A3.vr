@@ -11,6 +11,7 @@ le_se_map = createHashMap;
 le_se_noattr = null;
 le_se_cfgRange = [2100,4900];
 
+
 /*
 	regScriptEmit(name) //ineditor: start of cfg location
 		[ //this is array
@@ -521,3 +522,11 @@ le_se_internal_generateOptionAddress = {
 		_mapStore set [_oName,[compile(_funcBuffGet joinString " "),compile(_funcBuffSet joinString " ")]];
 	};
 };
+
+
+//see macro SCRIPT_EMIT_HANDLER_MODE_
+le_se_list_fassoc = [];
+le_se_list_fassoc set [SCRIPT_EMIT_HANDLER_MODE_DEFAULT,le_se_intenral_handleVarInit];
+le_se_list_fassoc set [SCRIPT_EMIT_HANDLER_MODE_DROP,le_se_intenral_handleDropVarInit];
+le_se_list_fassoc set [SCRIPT_EMIT_HANDLER_MODE_UNMANAGED,le_se_intenral_handleUnmanagedVarInit];
+assert(({isNullVar(_x)}count le_se_list_fassoc)==0);
