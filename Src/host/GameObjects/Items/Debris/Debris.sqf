@@ -12,6 +12,14 @@ editor_attribute("InterfaceClass")
 class(Debris) extends(Item)
 	var(name,"Обломки"); 
 	var(desc,"Из этого можно что-нибудь смастерить.");
+
+	//мусор... не дает мусор
+	func(getOnDestroyTypes)
+	{
+		objParams();
+		[];
+	};
+
 endclass
 
 class(SmallStone) extends(Debris)

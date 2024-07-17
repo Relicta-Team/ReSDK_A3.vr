@@ -1884,14 +1884,21 @@ class(IDestructible) extends(GameObject)
 		private _wobj = nullPtr;
 		private _tDat = null;
 
+		#ifdef NOE_DEBUG_HIDE_SERVER_OBJECT
+		private _nochange_serverobject = true;
+		#endif
 		#ifdef EDITOR
 		private _hidemodevobj = {
 			params ["_vobj","_mode"];
 			if (_mode) then {
-				getVar(_vobj,loc) hideObject true;
+				if isNullVar(_nochange_serverobject) then {
+					getVar(_vobj,loc) hideObject true;
+				};
 				(noe_client_allPointers getOrDefault [getVar(_vobj,pointer),objNull]) hideObject true;
 			} else {
-				getVar(_vobj,loc) hideObject false;
+				if isNullVar(_nochange_serverobject) then {
+					getVar(_vobj,loc) hideObject false;
+				};
 				(noe_client_allPointers getOrDefault [getVar(_vobj,pointer),objNull]) hideObject false;
 			};
 		};
