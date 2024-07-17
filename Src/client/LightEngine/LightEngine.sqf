@@ -22,13 +22,6 @@ call le_se_internal_createDropEmitterMap;
 call le_se_internal_createUnmanagedEmitterMap;
 call le_se_internal_generateOptionAddress;
 
-//see macro SCRIPT_EMIT_HANDLER_MODE_
-le_se_list_fassoc = [];
-le_se_list_fassoc set [SCRIPT_EMIT_HANDLER_MODE_DEFAULT,le_se_intenral_handleVarInit];
-le_se_list_fassoc set [SCRIPT_EMIT_HANDLER_MODE_DROP,le_se_intenral_handleDropVarInit];
-le_se_list_fassoc set [SCRIPT_EMIT_HANDLER_MODE_UNMANAGED,le_se_intenral_handleUnmanagedVarInit];
-assert(({isNullVar(_x)}count le_se_list_fassoc)==0);
-
 #include "LightConfigs.sqf"
 #include "FireLightConfigs.sqf"
 #include "ShotableConfigs.sqf"

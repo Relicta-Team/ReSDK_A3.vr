@@ -97,6 +97,10 @@ function(golib_vis_onCreateExpand)
 	_back = [_d,BACKGROUND,WIDGET_FULLSIZE,_ctg] call createWidget;
 	_back setBackgroundColor [0.1,0.1,0.1,.8];
 
+	// Fix #347
+	golib_vis_isEnteredInWidget = false;
+	golib_vis_lastBeforeEnterMousePos = [0,0,0];
+
 	_searchSizeH = 3;
 
 
@@ -278,6 +282,18 @@ function(golib_vis_onFrame)
 			[_drag,[100,100]] call widgetSetPositionOnly;
 		};
 		//["%1 - is inside %2",__FUNC__,call golib_vis_isMouseInsideTree] call printTrace;
+	};
+	golib_vis_isEnteredInWidget = call golib_vis_isMouseInsideTree;
+	if (golib_vis_isEnteredInWidget) then {
+		if equals(golib_vis_lastBeforeEnterMousePos,vec3(0,0,0)) then {
+			golib_vis_lastBeforeEnterMousePos = getposasl get3dencamera;
+		};
+		move3DENCamera [golib_vis_lastBeforeEnterMousePos,!true];
+	} else {
+		if not_equals(golib_vis_lastBeforeEnterMousePos,vec3(0,0,0)) then {
+			golib_vis_lastBeforeEnterMousePos = [0,0,0];
+			ctrlSetFocus (call MouseAreaGetWidget);
+		};
 	};
 }
 
