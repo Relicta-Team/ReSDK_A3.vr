@@ -1905,6 +1905,10 @@ class(IDestructible) extends(GameObject)
 		[this,true] call _hidemodevobj;
 		//_parList = [this,_countCreate,_typeList,_startPos];
 		//_nfp = { params ['this',"_countCreate","_typeList","_startPos"];
+		#else
+		
+		//non editor hide serverside object
+		getVar(_vobj,loc) hideObject true;
 
 		#endif
 		
@@ -1918,6 +1922,8 @@ class(IDestructible) extends(GameObject)
 
 			#ifdef EDITOR
 			[_wobj,true] call _hidemodevobj;
+			#else
+			getVar(_wobj,loc) hideObject true; //hide debris on server prod
 			#endif
 
 			_tDat = [
@@ -1929,6 +1935,8 @@ class(IDestructible) extends(GameObject)
 
 			#ifdef EDITOR
 			[_wobj,false] call _hidemodevobj;
+			#else
+			getVar(_wobj,loc) hideObject false; //unhide debris on server prod
 			#endif
 			
 			_tDat params ["_iobj","_ipos","_ivec"];
@@ -1948,6 +1956,10 @@ class(IDestructible) extends(GameObject)
 		#ifdef EDITOR
 		//}; invokeAfterDelayParams(_nfp,2,_parList);
 		[this,false] call _hidemodevobj;
+		#else
+		
+		//non editor show serverside object
+		getVar(_vobj,loc) hideObject false;
 
 		#endif
 	};
