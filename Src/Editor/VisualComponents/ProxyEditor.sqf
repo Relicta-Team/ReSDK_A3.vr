@@ -24,9 +24,6 @@ init_function(prox_initialize)
 		deletevehicle prox_itemObj;
 	};
 	prox_targetObj = objNull; //моб
-
-	prox_nowpnAnims = ["amovppnemstpsnonwnondnon","amovpknlmstpsnonwnondnon","amovpercmstpsnonwnondnon"];
-	prox_wpnAnims = ["amovppnemstpsraswpstdnon","amovpknlmstpsraswpstdnon","amovpercmstpsraswpstdnon"];
 	
 	prox_stateConstFormatter = "Amov%1%2%3%4%5";
 
@@ -55,8 +52,6 @@ init_function(prox_initialize)
 		AmovPercMwlkSrasWpstDf
 		AmovPercMevaSlowWpstDf
 	*/
-
-	prox_map_modes = createHashMapFromArray[["normal",false],["combat",false],["attack",false],["parry",false]];
 
 	prox_map_currentAnimListMode = "normal";
 
@@ -106,11 +101,6 @@ init_function(prox_initialize)
 	prox_anim_handBlend = [0,0];
 	prox_anim_legsExists = [true,true]; //r, l
 
-	// prox_anim_handBlendMode = [
-	// 	["Без смешивания",0],
-	// 	["Половина",0.5],
-	// 	["Полное",1]
-	// ];
 	call {
 		#include "..\..\host\Namings\FacesHelpers.sqf"
 		#include "..\..\host\Namings\PrepareFaces.sqf"
@@ -133,7 +123,7 @@ init_function(prox_initialize)
 
 	//что загружено на персонажа в данный момент. индексы для prox_inv_types
 	prox_inv_dataCurIndexes = prox_inv_types apply {0};
-
+	
 	private _configArray = (
 		("true" configClasses (configFile >> "CfgWeapons")) +
 		("true" configClasses (configFile >> "CfgVehicles")) +
@@ -152,10 +142,6 @@ init_function(prox_initialize)
 		private _itemScope = if (isNumber (_x >> "scopeArsenal")) then { getNumber (_x >> "scopeArsenal") } else { getNumber (_x >> "scope") };
 		if (_itemScope < 2) then {continue};
 
-		// if (_itemScope == 2 && {
-		// 	getText (_x >> "protocol") != "RadioProtocolBase"
-		// }) then {
-		// };
 		_classname = configName _x;
 		_cat = (_classname call bis_fnc_itemType) select 1;
 		if (_cat in _assocIndexMap) then {

@@ -98,25 +98,56 @@ struct(ContextParamData)
 	}
 endstruct
 
-//TODO implement
+struct(Transform)
+	def(_pos) null;
+	def(_orient) null;
+
+	def(init)
+	{
+		params [["_pos",[0,0,0]],["_orient",[[0,0,1],[0,0,1]]]];
+		self setv(_pos,_pos);
+		self setv(_orient,_orient);
+	}
+
+	cast_def(Array)
+	{
+		[self getv(_pos),self getv(_orient)]
+	}
+
+	def(str)
+	{
+		format["Transform %1+%2",self getv(_pos),self getv(_orient)];
+	}
+endstruct
+
 struct(Model)
 	def(_mesh) objNull;
 	def(_vars) null;//for variables inside simple object
+	def(__localFlag) false;
 	def(isSimple) {isSimpleObject (self getv(_mesh))} 
 	def(init)
 	{
 		params ["_cfgPath","_pos",["_simple",false],["_local",true]];
 		
 		if !(self callp(isValidModelPath,_cfgPath)) exitWith {};
-		
+		self setv(__localFlag,_local);
+		self setv(_vars,createHashMap);
+		self callp(_setMesh,_cfgPath arg _pos arg _simple arg _local);
+	}
+
+	def(_setMesh)
+	{
+		params ["_cfgPath",["_pos",[0,0,0]],["_simple",false]];
 		if (_simple) then {
-			self setv(_vars,createHashMap);
-			private _mesh = createSimpleObject [_cfgPath,[0,0,0],_local];
+			private _mesh = createSimpleObject [_cfgPath,[0,0,0],self getv(__localFlag)];
 			assert(!isNullReference(_mesh));
 			self setv(_mesh,_mesh);
 			self callp(setPos,_pos);
 		} else {
-
+			private _mesh = ifcheck(self getv(__localFlag),_cfgPath createVehicleLocal vec3(0,0,0),_cfgPath createVehicle vec3(0,0,0));
+			assert(!isNullReference(_mesh));
+			self setv(_mesh,_mesh);
+			self callp(setPos,_pos);
 		};
 	}
 
@@ -128,24 +159,70 @@ struct(Model)
 	def(isValidModelPath)
 	{
 		params ["_cfgPath"];
+		true
 	}
 
-	def(isVisible) {}
-	def(setVisible) {}
-	def(getMesh) {}
-	def(setMesh) { params ["_model"];}
+	def(isVisible) {
+		!(isObjectHidden (self getv(_mesh)))
+	}
+	def(setVisible) {
+		params ["_visible"];
+		(self getv(_mesh)) hideObject (!_visible);
+	}
 
-	def(setPos) {}
-	def(getPos) {}
-	def(modelToWorld) {}
-	def(setTransform) {}
-	def(getTransform) {}
+	def(getMesh) {}
+	def(setMesh) { 
+		params ["_model"];
+		private _oldtransform = self callv(getTransform);
+		deleteVehicle (self getv(_mesh));
+		self callp(_setMesh,_model arg null arg self callv(isSimple) arg self getv(__localFlag));
+		self callp(setTransform,_oldtransform);
+	}
+
+	def(setPos) {
+		params ["_pos"];
+		(self getv(_mesh)) setPosAtl _pos;
+	}
+	def(getPos) {
+		getPosAtl (self getv(_mesh))
+	}
+	def(modelToWorld) {
+		params ["_offset",["_visual",false]];
+		private _o = self getv(_mesh);
+		if (_visual) then {
+			_o modelToWorldVisual _offset;
+		} else {
+			_o modelToWorld _offset;
+		};
+	}
+	def(setTransform) {
+		params ["_transform"];
+
+		private _o = self getv(_mesh);
+		_o setVectorDirAndUp (_transform getv(_orient));
+		_o setPosAtl (_transform getv(_pos));
+	}
+	def(getTransform) {
+		private _o = self getv(_mesh);
+		struct_newp(Transform,getPosAtl _o arg vec2(vectorDir _o,vectorUp _o))
+	}
 
 	//variable management
-	def(setVar) {}
-	def(getVar) {}
-	def(hasVar) {}
-	def(allVars) {}
+	def(setVar) {
+		params ["_key","_value"];
+		(self getv(_vars)) set [_key,_value];
+	}
+	def(getVar) {
+		params ["_key"];
+		(self getv(_vars)) get [_key];
+	}
+	def(hasVar) {
+		params ["_key"];
+		_key in (self getv(_vars));
+	}
+	def(allVars) {
+		keys (self getv(_vars))
+	}
 endstruct
 
 #include "Structs\Core.sqf"
