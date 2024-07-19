@@ -9,19 +9,19 @@ init_function(core_initStruct)
         core_objPool = null; //cleanup object pool (on recompile editor code)
     };
     core_objPool = struct_new(ObjectPool);
-}
+};
 
 struct(BaseObject)
     def(_address) -1;
 
     def(init)
     {
-        core_objPool callp(new,self);
+        core_objPool callp(new_,self);
     }
 
     def(del)
     {
-        core_objPool callp(delete,self);
+        core_objPool callp(delete_,self);
     }
 
 endstruct
@@ -36,7 +36,7 @@ struct(ObjectPool)
         self setv(_pool,createHashMap);
     }
 
-    def(new)
+    def(new_)
     {
         params ["_obj"];
         private _addr = self getv(_iaddr);
@@ -45,7 +45,7 @@ struct(ObjectPool)
         self setv(_iaddr,_iaddr + 1);
     }
 
-    def(delete)
+    def(delete_)
     {
         params ["_obj"];
         private _addr = _obj getv(_address);
