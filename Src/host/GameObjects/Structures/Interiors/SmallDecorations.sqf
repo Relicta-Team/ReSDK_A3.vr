@@ -124,6 +124,11 @@ class(RedCarpet) extends(Carpet)
 endclass
 
 editor_attribute("EditorGenerated")
+class(RedCarpet1) extends(RedCarpet)
+	var(model,"ca\structures_e\misc\misc_interier\carpet_2_ep1.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(OrangeCapet) extends(Carpet)
 	var(model,"ml_shabut\kovrik\kovernew.p3d");
 endclass

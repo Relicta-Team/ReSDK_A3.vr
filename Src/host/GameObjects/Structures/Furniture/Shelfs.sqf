@@ -74,6 +74,13 @@ class(Sink) extends(ShelfBase)
 	};
 endclass
 
+editor_attribute("EditorGenerated")
+class(Shower) extends(Sink)
+	var(model,"ml\ml_object_new\model_05\dysh.p3d");
+	var(name,"Мытьё");
+	var(desc,"Так сделано"" + pcomma + "" что сверху течёт струя прямо на голову");
+endclass
+
 
 class(Umivalnik) extends(Sink)
 	var(model,"metro_ob\model\umivalnik1.p3d");

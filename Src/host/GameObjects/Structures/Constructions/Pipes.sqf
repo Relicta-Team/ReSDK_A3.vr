@@ -54,6 +54,11 @@ class(SmallDestroyedCornerPipe) extends(BasicPipe)
 endclass
 
 editor_attribute("EditorGenerated")
+class(SmallDestoyedCornerPipe1) extends(SmallDestroyedCornerPipe)
+	var(model,"a3\structures_f\ind\pipes\indpipe1_90degr_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(MediumRuinedPipe) extends(BasicPipe)
 	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_valve.p3d");
 	var(name,"Разрушенная труба");
