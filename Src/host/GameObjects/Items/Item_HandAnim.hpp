@@ -41,7 +41,7 @@
 
 //Лист для хватов комбата
 #define ITEM_COMBATANIM_LIST_ALLANIMS ["hnd","sht","avt","avt"]
-#define __ITEM_COMBATANIM_LIST_ALLANIMS_NAMES ["Рука","Короткое","Автомат","Автомат рукоять"]
+
 //лист для хватов атаки
 #define ITEM_ATTACKANIM_LIST_ALLANIMS ["hnd","sht","gun","sht"]
 

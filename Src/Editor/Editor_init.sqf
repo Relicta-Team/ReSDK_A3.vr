@@ -79,6 +79,8 @@ call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
 	cba_common_waitUntilAndExecArray = [];
 };
 
+#include <..\host\CommonComponents\ModelTransform.hpp>
+
 //renode отладчик
 #include "..\host\ReNode\ReNode_debugger.sqf"
 
