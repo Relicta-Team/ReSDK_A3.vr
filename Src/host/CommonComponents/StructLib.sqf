@@ -7,39 +7,6 @@
 #include "..\oop.hpp"
 #include "..\struct.hpp"
 
-//! not supported
-/*
-	mmr_pool = []; //memory pool for struct references
-	mmr_allocator_s = null;
-
-	_initStruct = { //need calling on structure initialization
-		mmr_allocator_s = struct_new(DefaultAllocator);
-	};
-
-	struct(DefaultAllocator)
-		def(_i) 0 //this is next given pointer for next allocation
-		//allocate object in memory address and return pointer/address of object
-		def(allocate)
-		{
-			params ["_o"];
-			private _icur = self getv(_i);
-			//check limit
-			if (_icur >= 999999) exitWith {
-				setLastError("Memory limit reached");
-			};
-
-			mmr_pool set [_icur,_o];
-			self setv(_i,_icur);
-		}
-
-		def(deallocate)
-		{
-			params ["_ptr"];
-			mmr_pool set [_ptr, null];
-		}
-	endstruct
-*/
-
 /*
 	Context struct
 
@@ -188,3 +155,5 @@ endstruct
 #include "Structs\Collections.sqf"
 
 #include "Structs\Profiling.sqf"
+
+#include "Structs\Allocator.sqf"
