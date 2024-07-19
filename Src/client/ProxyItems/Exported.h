@@ -62,3 +62,5 @@ model("\relicta_models2\tools\s_sledgehammer1\s_sledgehammer1.p3d") [[INV_HAND_L
 model("\relicta_models2\tools\s_pickaxe\s_pickaxe.p3d") [[INV_BACKPACK,[[-0.157,-0.107,-0.074],[132,84,-9]]],[INV_BACK,[[0,-0.165,-0.24],[0,75,3]]],[INV_HAND_L,[[-0.032,0.051,-0.041],[-30,3,111]]],[INV_BELT,[[0.192,0.101,-0.24],[0,87,87]]],[INV_HAND_R,[[-0.024,0,-0.032],[9,-12,63]]]]
 model("\relicta_models2\tools\s_fire_extinguisher\s_fire_extinguisher.p3d") [[INV_HAND_L,[[-0.107,0.068,-0.232],[141,-3,-15]]],[INV_HAND_R,[[0.109,0.068,-0.174],[195,-6,33]]]]
 model("\relicta_models2\debris\s_metal_debris\s_metal_debris.p3d") [[INV_HAND_L,[[-0.149,0,-0.215],[-21,42,-51]]],[INV_HAND_R,[[0.176,-0.082,-0.232],[0,9,48]]]]
+model("\relicta_models2\debris\s_wooden_debris5\s_wooden_debris5.p3d") [[INV_HAND_L,[[-0.075,0.274,0.042],[-21,0,9]]],[INV_HAND_R,[[-0.074,0.259,0.051],proxIt_vec]]]
+model("\relicta_models2\debris\s_wooden_debris6\s_wooden_debris6.p3d") [[INV_HAND_L,[[-0.082,0.274,0.034],[-21,0,9]]],[INV_HAND_R,[[-0.066,0.184,0.026],proxIt_vec]]]
