@@ -7,9 +7,18 @@
 #include <..\struct.hpp>
 
 loot_mapConfigs = createHashMap;
-
+loot_list_loader = [];// список файлов для загрузки
 loot_init = {
+	{
+		if !([_x] call loot_loadConfig) exitWith {
+			setLastError("Loot system build failed. See console for more details");
+		};
+	} foreach loot_list_loader;
+};
 
+loot_addConfig = {
+	params ["_cfgPath"];
+	loot_list_loader pushBack _cfgPath;
 };
 
 loot_loadConfig = {
@@ -32,6 +41,7 @@ loot_loadConfig = {
 		if (_cfg getv(__hasErrorOnCreate)) exitWith {
 			_error = true;
 		};
+		loot_mapConfigs set [_cfgType,_cfg];
 	} foreach _d;
 	if (_error) exitWith {false};
 
