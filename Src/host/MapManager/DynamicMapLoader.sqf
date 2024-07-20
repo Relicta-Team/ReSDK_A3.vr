@@ -53,7 +53,28 @@ struct(BinaryMapInstructions)
 		compile (_buff joinString endl);
 	}
 
-endstruct
+	endstruct
+
+// https://github.com/CBATeam/CBA_A3/issues/1352#issuecomment-665343452
+//TODO check function
+dml_internal_eulerToVec = {
+	params ["_rotation"];
+	_rotation params ["_rotX", "_rotY", "_rotZ"];
+
+	_vectorDirAndUp = [
+		[
+			(cos _rotY) * (sin _rotZ),
+			(cos _rotX)*(cos _rotZ)+(sin _rotX)*(sin _rotY)*(sin _rotZ),
+			-(sin _rotX)*(cos _rotZ)+(cos _rotX)*(sin _rotY)*(sin _rotZ)
+		],
+		[
+			-sin _rotY, 
+			(sin _rotX)*(cos _rotY), 
+			(cos _rotX)*(cos _rotY)
+		]
+	];
+	_vectorDirAndUp
+};
 
 //загрузчик карты
 dml_loadMap = {
