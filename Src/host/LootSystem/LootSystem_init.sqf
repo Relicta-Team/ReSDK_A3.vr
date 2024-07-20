@@ -29,7 +29,7 @@ loot_loadConfig = {
 			_error = true;
 		};
 		private _cfg = struct_newp(LootTempate,_cfgType arg _path arg _cfgData);
-		if (_cfg getv(__hasError)) exitWith {
+		if (_cfg getv(__hasErrorOnCreate)) exitWith {
 			_error = true;
 		};
 	} foreach _d;
