@@ -126,6 +126,9 @@
 	...
 	_i = struct_cast(o,int); //_i == 321
 */
+
+#define def_null(varname) def(varname) null;
+
 #define __STRUCT_CAST_PREFIX___ "$_"
 #define cast_def(typeto) ;_soffst__ = _sdecl__ pushBack [__STRUCT_CAST_PREFIX___ + (#varname)]; _sdecl__ select _soffst__ pushBack 
 #define static_def(t) setLastError("Static declarations are not supported in current version");
