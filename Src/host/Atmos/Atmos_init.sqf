@@ -255,6 +255,7 @@ atmos_internal_handleUpdate = -1;
 atmos_cv_ca = ["canActivity"];
 atmos_cv_goch = ["getObjectsInChunk"];
 atmos_cv_oa = ["onActivity"];
+atmos_cv_tupd = ["onTemperatureUpdate"];
 
 #define ASP_USE_NAMED_REGION
 
@@ -270,6 +271,7 @@ atmos_internal_onUpdate = {
 	_chObj = null;
 	_aObj = null;
 	_objInside = null;
+	_objContactCtx = null;
 	ASP_REGION("Atmos update")
 	
 	{
@@ -283,6 +285,10 @@ atmos_internal_onUpdate = {
 			ASP_REGION_NAMED("Chunk process",(_chObj))
 			_objInside = null;
 
+			//temperature update
+			if (tickTime >= (_chObj getv(nextTempUpdate))) then {
+				_chObj call atmos_cv_tupd;
+			};
 			
 			_aFire = null;
 
@@ -316,8 +322,9 @@ atmos_internal_onUpdate = {
 				if isNullVar(_objInside) then {
 					_objInside = _chObj call atmos_cv_goch;
 				};
-
-				{_aFire call ["onObjectContact",_x];false;} count _objInside;
+				_objContactCtx = refcreate(0);
+				{_aFire call ["onObjectContact",[_x,_objContactCtx]];false;} count _objInside;
+				_aFire call ["postObjectsContact",[_objContactCtx]];
 			};
 			ASP_MESSAGE("End fire obj check")
 

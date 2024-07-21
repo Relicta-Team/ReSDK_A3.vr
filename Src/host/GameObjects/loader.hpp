@@ -13,6 +13,7 @@ loadFile("src\host\GameObjects\Mobs\MobGhost.sqf");
 
 //items
 loadFile("src\host\GameObjects\Items\Item.sqf");
+loadFile("src\host\GameObjects\Items\Debris\Debris.sqf");
 loadFile("src\host\GameObjects\Items\Clothes\cloth.sqf");
 	loadFile("src\host\GameObjects\Items\Clothes\Armors.sqf");
 loadFile("src\host\GameObjects\Items\MeleeWeapons\Axes.sqf");
@@ -79,6 +80,7 @@ loadFile("src\host\GameObjects\Structures\Constructions\Construction.sqf");
 	loadFile("src\host\GameObjects\Structures\Constructions\Poles.sqf");
 	loadFile("src\host\GameObjects\Structures\Constructions\StepsLadders.sqf");
 	loadFile("src\host\GameObjects\Structures\Constructions\Walls.sqf");
+	loadFile("Src\host\GameObjects\Structures\LiquidContainers\LiquidContainer.sqf");
 loadFile("src\host\GameObjects\Structures\Lighting\Natural.sqf");
 	loadFile("src\host\GameObjects\Structures\Lighting\Campfires.sqf");
 loadFile("src\host\GameObjects\Structures\Furniture\Furniture.sqf");
@@ -111,7 +113,6 @@ loadFile("src\host\GameObjects\Structures\Containers\Container.sqf");
 	loadFile("src\host\GameObjects\Structures\Containers\Boxes.sqf");
 	loadFile("src\host\GameObjects\Structures\Containers\Tech.sqf");
 loadFile("src\host\GameObjects\Structures\Effects\AtmEffects.sqf");
-	loadFile("src\host\GameObjects\Structures\Effects\Atmos.sqf");
 	loadFile("src\host\GameObjects\Structures\Effects\Teleport.sqf");
 	loadFile("src\host\GameObjects\Structures\Effects\Zones.sqf");
 loadFile("src\host\GameObjects\Structures\ReagentContainers\ReagentContainer.sqf");

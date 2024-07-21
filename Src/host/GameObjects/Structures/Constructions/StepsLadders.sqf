@@ -19,6 +19,12 @@ class(StepsLadder) extends(Constructions)
 endclass
 
 editor_attribute("EditorGenerated")
+class(LongWoodenLadder) extends(StepsLadder)
+	var(model,"ca\structures\nav_boathouse\nav_boathouse_pierl.p3d");
+	var(material,"MatWood");
+endclass
+
+editor_attribute("EditorGenerated")
 class(SmallSteelRustyStairs) extends(StepsLadder)
 	var(model,"ml\ml_object_new\ml_object_2\l01_props\stair01.p3d");
 endclass
@@ -32,6 +38,12 @@ endclass
 editor_attribute("EditorGenerated")
 class(ScaffoldingLadder) extends(StepsLadder)
 	var(model,"ca\structures\misc\misc_scaffolding\misc_scaffolding.p3d");
+	var(material,"MatWood");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BigWoodenLadder) extends(ScaffoldingLadder)
+	var(model,"ca\structures\castle\a_castle_stairs_a.p3d");
 	var(material,"MatWood");
 endclass
 

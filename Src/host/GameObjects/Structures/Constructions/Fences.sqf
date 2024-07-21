@@ -62,6 +62,11 @@ class(WoodenSmallFence3) extends(WoodenSmallFence)
 endclass
 
 editor_attribute("EditorGenerated")
+class(WoodenSmallFence4) extends(WoodenSmallFence3)
+	var(model,"a3\props_f_enoch\infrastructure\traffic\woodenwindbreak_01_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(WoodenSmallFence2) extends(WoodenSmallFence)
 	var(model,"ml\ml_object_new\model_24\ykritie.p3d");
 endclass
@@ -105,6 +110,16 @@ class(SmallSteelRustyFence) extends(SmallFence)
 	var(model,"metro_ob\model\fence01.p3d");
 	var(material,"MatMetal");
 	var(dr,2);
+endclass
+
+editor_attribute("EditorGenerated")
+class(SmallSteelGreenFence) extends(SmallSteelRustyFence)
+	var(model,"ca\buildings\misc\plot_green_vrat_r.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumRedSteelFence) extends(SmallSteelRustyFence)
+	var(model,"ca\buildings\misc\plot_rust_vrata.p3d");
 endclass
 
 editor_attribute("EditorGenerated")

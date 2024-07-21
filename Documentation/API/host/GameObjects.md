@@ -349,7 +349,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\GameObject.sqf at line 347](../../../Src/host/GameObjects/GameObject.sqf#L347)
+File: [host\GameObjects\GameObject.sqf at line 349](../../../Src/host/GameObjects/GameObject.sqf#L349)
 ## startSectorIndex
 
 Type: constant
@@ -361,7 +361,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 745](../../../Src/host/GameObjects/GameObject.sqf#L745)
+File: [host\GameObjects\GameObject.sqf at line 747](../../../Src/host/GameObjects/GameObject.sqf#L747)
 ## sectorSize
 
 Type: constant
@@ -373,7 +373,31 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 746](../../../Src/host/GameObjects/GameObject.sqf#L746)
+File: [host\GameObjects\GameObject.sqf at line 748](../../../Src/host/GameObjects/GameObject.sqf#L748)
+## DEBUG_VISUAL_OBJECTFALLING
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\GameObjects\GameObject.sqf at line 1403](../../../Src/host/GameObjects/GameObject.sqf#L1403)
+## DEBUG_VISUAL_OPENSPACE
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\GameObjects\GameObject.sqf at line 1463](../../../Src/host/GameObjects/GameObject.sqf#L1463)
 ## flyingObject
 
 Type: Variable
@@ -385,7 +409,7 @@ Initial value:
 ```sqf
 createObj
 ```
-File: [host\GameObjects\GameObject.sqf at line 50](../../../Src/host/GameObjects/GameObject.sqf#L50)
+File: [host\GameObjects\GameObject.sqf at line 51](../../../Src/host/GameObjects/GameObject.sqf#L51)
 ## go_internal_updateMethodsAfterStart
 
 Type: Variable
@@ -397,7 +421,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\GameObject.sqf at line 446](../../../Src/host/GameObjects/GameObject.sqf#L446)
+File: [host\GameObjects\GameObject.sqf at line 448](../../../Src/host/GameObjects/GameObject.sqf#L448)
 ## go_internal_chatMesMap
 
 Type: Variable
@@ -409,7 +433,7 @@ Initial value:
 ```sqf
 ["emote","log","act","combat","info","mind","event","system","error","default"]
 ```
-File: [host\GameObjects\GameObject.sqf at line 1068](../../../Src/host/GameObjects/GameObject.sqf#L1068)
+File: [host\GameObjects\GameObject.sqf at line 1070](../../../Src/host/GameObjects/GameObject.sqf#L1070)
 ## go_internal_chatMesMapText
 
 Type: Variable
@@ -421,7 +445,7 @@ Initial value:
 ```sqf
 ["Эмоут:Кастомное пользовательское действие",...
 ```
-File: [host\GameObjects\GameObject.sqf at line 1069](../../../Src/host/GameObjects/GameObject.sqf#L1069)
+File: [host\GameObjects\GameObject.sqf at line 1071](../../../Src/host/GameObjects/GameObject.sqf#L1071)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
@@ -431,7 +455,7 @@ Type: function
 Description: 
 
 
-File: [host\GameObjects\GameObject.sqf at line 37](../../../Src/host/GameObjects/GameObject.sqf#L37)
+File: [host\GameObjects\GameObject.sqf at line 38](../../../Src/host/GameObjects/GameObject.sqf#L38)
 # Chemistry.h
 
 ## CHEM_TIME_SLOW_UPDATE
@@ -3315,6 +3339,18 @@ Replaced value:
 (ITEM_HANDANIM_LIST_ALLANIMS select (idx))
 ```
 File: [host\GameObjects\Items\Item_HandAnim.hpp at line 19](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L19)
+## __ITEM_HANDANIM_LIST_NAMESTRUCT
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+['Нижний:ITEM_HANDANIM_LOWER','Нижний (только кисть):ITEM_HANDANIM_LOWERONLYHAND','Фонарик:ITEM_HANDANIM_FLASHLIGHT','Факел:ITEM_HANDANIM_TORCH','Лампа:ITEM_HANDANIM_LAMP']
+```
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 21](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L21)
 ## ITEM_HANDANIM_LOWER
 
 Type: constant
@@ -3326,7 +3362,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 21](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L21)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 22](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L22)
 ## ITEM_HANDANIM_LOWERONLYHAND
 
 Type: constant
@@ -3338,7 +3374,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 22](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L22)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 23](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L23)
 ## ITEM_HANDANIM_FLASHLIGHT
 
 Type: constant
@@ -3350,7 +3386,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 23](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L23)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 24](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L24)
 ## ITEM_HANDANIM_TORCH
 
 Type: constant
@@ -3362,7 +3398,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 24](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L24)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 25](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L25)
 ## ITEM_HANDANIM_LAMP
 
 Type: constant
@@ -3374,7 +3410,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 25](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L25)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 26](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L26)
 ## ITEM_TWOHANDANIM_LIST_ALLANIMS
 
 Type: constant
@@ -3386,7 +3422,19 @@ Replaced value:
 ```sqf
 ["lwr","swd","pst","rfl","pswda","pswdb","capb"]
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 28](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L28)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 29](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L29)
+## __ITEM_TWOHANDANIM_LIST_NAMESTRUCT
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+['Нижний:ITEM_2HANIM_LOWER','Меч:ITEM_2HANIM_SWORD','Пистолет:ITEM_2HANIM_PISTOL','Винтовка:ITEM_2HANIM_RIFLE','Парирование:ITEM_2HANIM_PARRY_SWORD_1','Парирование:ITEM_2HANIM_PARRY_SWORD_2','Связан:ITEM_2HANIM_CAPTIVEBACK']
+```
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 31](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L31)
 ## ITEM_2HANIM_LOWER
 
 Type: constant
@@ -3398,7 +3446,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 30](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L30)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 32](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L32)
 ## ITEM_2HANIM_SWORD
 
 Type: constant
@@ -3410,7 +3458,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 31](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L31)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 33](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L33)
 ## ITEM_2HANIM_PISTOL
 
 Type: constant
@@ -3422,7 +3470,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 32](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L32)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 34](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L34)
 ## ITEM_2HANIM_RIFLE
 
 Type: constant
@@ -3434,7 +3482,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 33](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L33)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 35](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L35)
 ## ITEM_2HANIM_PARRY_SWORD_1
 
 Type: constant
@@ -3446,7 +3494,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 34](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L34)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 36](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L36)
 ## ITEM_2HANIM_PARRY_SWORD_2
 
 Type: constant
@@ -3458,7 +3506,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 35](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L35)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 37](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L37)
 ## ITEM_2HANIM_CAPTIVEBACK
 
 Type: constant
@@ -3470,7 +3518,7 @@ Replaced value:
 ```sqf
 6
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 36](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L36)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 38](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L38)
 ## ITEM_COMBATANIM_LIST_ALLANIMS
 
 Type: constant
@@ -3482,7 +3530,19 @@ Replaced value:
 ```sqf
 ["hnd","sht","avt","avt"]
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 41](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L41)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 43](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L43)
+## __ITEM_COMBATANIM_LIST_ALLANIMS_NAMES
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+["Рука","Короткое","Автомат","Автомат рукоять"]
+```
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 44](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L44)
 ## ITEM_ATTACKANIM_LIST_ALLANIMS
 
 Type: constant
@@ -3494,7 +3554,7 @@ Replaced value:
 ```sqf
 ["hnd","sht","gun","sht"]
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 43](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L43)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 46](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L46)
 ## ITEM_GET_OTHERHAND_ANIM(tex,ret,istwohands)
 
 Type: constant
@@ -3508,7 +3568,7 @@ Replaced value:
 ```sqf
 (if (tex == "gun") then {ret} else {if(istwohands)exitWith{tex};"bck"})
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 46](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L46)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 49](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L49)
 ## ITEM_COMBATANIM_ENUM_TO_ANIM(idx)
 
 Type: constant
@@ -3520,7 +3580,7 @@ Replaced value:
 ```sqf
 (ITEM_COMBATANIM_LIST_ALLANIMS select (idx))
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 48](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L48)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 51](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L51)
 ## ITEM_ATTACKANIM_ENUM_TO_ANIM(idx)
 
 Type: constant
@@ -3532,8 +3592,8 @@ Replaced value:
 ```sqf
 (ITEM_ATTACKANIM_LIST_ALLANIMS select (idx))
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 49](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L49)
-## ITEM_COMBATANIM_HAND
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 52](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L52)
+## __ITEM_COMBATANIM_LIST_NAMESTRUCT
 
 Type: constant
 
@@ -3542,9 +3602,21 @@ Description: используются данные: ITEM_COMBATANIM_LIST_ALLANIM
 
 Replaced value:
 ```sqf
+['Кулак:ITEM_COMBATANIM_HAND','Короткое:ITEM_COMBATANIM_SHORT','Автомат:ITEM_COMBATANIM_GUN','Рукоять:ITEM_COMBATANIM_GUN_HANDLE']
+```
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 55](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L55)
+## ITEM_COMBATANIM_HAND
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
 0
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 52](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L52)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 56](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L56)
 ## ITEM_COMBATANIM_SHORT
 
 Type: constant
@@ -3556,7 +3628,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 53](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L53)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 57](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L57)
 ## ITEM_COMBATANIM_GUN
 
 Type: constant
@@ -3568,7 +3640,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 54](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L54)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 58](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L58)
 ## ITEM_COMBATANIM_GUN_HANDLE
 
 Type: constant
@@ -3580,7 +3652,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 56](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L56)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 60](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L60)
 ## ITEM_TWOHANDCOMBATANIM_LIST_ALLANIMS
 
 Type: constant
@@ -3592,7 +3664,7 @@ Replaced value:
 ```sqf
 ["lwr","swd","pst","rfl"]
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 59](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L59)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 63](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L63)
 ## ITEM_TWOHANDATTACKANIM_LIST_ALLANIMS
 
 Type: constant
@@ -3604,7 +3676,19 @@ Replaced value:
 ```sqf
 ["lwr","swd","pst","rfl"]
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 61](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L61)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 66](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L66)
+## __ITEM_2HANIM_COMBAT_LIST_NAMESTRUCT
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+['Нижний:ITEM_2HANIM_COMBAT_LOWER','Меч:ITEM_2HANIM_COMBAT_SWORD','Пистолет:ITEM_2HANIM_COMBAT_PISTOL','Винтовка:ITEM_2HANIM_COMBAT_RIFLE']
+```
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 68](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L68)
 ## ITEM_2HANIM_COMBAT_LOWER
 
 Type: constant
@@ -3616,7 +3700,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 63](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L63)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 69](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L69)
 ## ITEM_2HANIM_COMBAT_SWORD
 
 Type: constant
@@ -3628,7 +3712,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 64](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L64)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 70](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L70)
 ## ITEM_2HANIM_COMBAT_PISTOL
 
 Type: constant
@@ -3640,7 +3724,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 65](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L65)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 71](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L71)
 ## ITEM_2HANIM_COMBAT_RIFLE
 
 Type: constant
@@ -3652,7 +3736,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 66](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L66)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 72](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L72)
 ## __item_parry_list_anims__
 
 Type: constant
@@ -3664,7 +3748,7 @@ Replaced value:
 ```sqf
 ["parh1","parh2","pars1","pars2"]
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 69](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L69)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 75](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L75)
 ## ITEM_PARRY_ENUM_TO_ANIM(idx)
 
 Type: constant
@@ -3676,7 +3760,19 @@ Replaced value:
 ```sqf
 (__item_parry_list_anims__ select idx)
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 70](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L70)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 76](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L76)
+## __ITEM_PARRY_LIST_NAMESTRUCT
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+['Кулак:ITEM_PARRY_HAND_1','Кулак 2:ITEM_PARRY_HAND_2','Меч:ITEM_PARRY_SWORD_1','Меч 2:ITEM_PARRY_SWORD_2']
+```
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 78](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L78)
 ## ITEM_PARRY_HAND_1
 
 Type: constant
@@ -3688,7 +3784,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 72](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L72)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 79](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L79)
 ## ITEM_PARRY_HAND_2
 
 Type: constant
@@ -3700,7 +3796,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 73](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L73)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 80](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L80)
 ## ITEM_PARRY_SWORD_1
 
 Type: constant
@@ -3712,7 +3808,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 74](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L74)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 81](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L81)
 ## ITEM_PARRY_SWORD_2
 
 Type: constant
@@ -3724,7 +3820,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\Items\Item_HandAnim.hpp at line 75](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L75)
+File: [host\GameObjects\Items\Item_HandAnim.hpp at line 82](../../../Src/host/GameObjects/Items/Item_HandAnim.hpp#L82)
 # Bodyparts.sqf
 
 ## _rwt(t)

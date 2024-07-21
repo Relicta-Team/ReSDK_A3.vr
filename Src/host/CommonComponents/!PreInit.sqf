@@ -568,6 +568,39 @@ stringFormat = {
 	format _eval
 };
 
+getPosListCenter = {
+	params [["_poses",[]],"_dummyParam"];
+	private _cPosSum = [0,0,0];
+	if equals(_poses,[]) exitWith {_cPosSum};
+
+	{
+		_cPosSum = _cPosSum vectorAdd _x;
+		false
+	} count _poses;
+
+	_cPosSum vectorMultiply (1 / count _poses);
+};
+
+//Specialized random functions. For more details see https://community.bistudio.com/wiki/Example_Code:_Random_Area_Distribution
+
+//Специальный рандом по области. Чем ближе к центру тем выше вероятность. Распределение идёт по всей окружности.
+randomRadius = {
+	params ["_center","_radius"];
+	_center getPos [random _radius,random 360]
+};
+
+//Специальный рандом по области. Равномерное распределение по позиции в радиусе.
+randomPosition = {
+	params ["_center","_radius"];
+	_center getPos [_radius * (sqrt random 1),random 360]
+};
+
+//Специальный рандом по области. Распределение идёт ближе к центру. Чем ближе к центру тем выше вероятность.
+randomGaussian = {
+	params ["_center","_radius"];
+	_center getPos [_radius * (random [-1,0,1]),random 180] 
+};
+
 missionNamespace setVariable ["pushFront",
 {
 	params ["_list","_element",["_unique",false]];

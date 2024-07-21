@@ -6,6 +6,7 @@
 #include "..\engine.hpp"
 #include "..\oop.hpp"
 #include "..\text.hpp"
+#include "..\struct.hpp"
 #include "GameConstants.hpp"
 #include "..\ServerRpc\serverRpc.hpp"
 #include <..\..\client\Inventory\inventory.hpp>
@@ -235,6 +236,7 @@ class(GameObject) extends(ManagedObject)
 	editor_attribute("Tooltip" arg "Вес объекта в граммах или килограммах")
 	var(weight,gramm(1000));//вес в граммах
 
+	//рандомизатор веса
 	getterconst_func(canApplyWeightRandomize,false);
 	getterconst_func(getWeightRandomCoeff,vec2(0,0));
 	getterconst_func(getWeightRandomPrecision,2);//сколько знаков после нуля доступно
@@ -1122,6 +1124,7 @@ endregion
 		//request for update atmos chunk
 		private _ch = [(getposatl getSelf(loc))call atmos_chunkPosToId] call atmos_getChunkAtChId;
 		_ch set ["flagUpdObj",true];
+		callSelf(onUpdatePosition);
 
 		[this,_cht] call noe_unloadVisualObject;
 		true
@@ -1349,8 +1352,203 @@ class(IDestructible) extends(GameObject)
 			delete(_script);
 		};
 
-
+		{
+			_x set ["flagUpdObj",true];
+			false;
+		} count (values getSelf(__atm_ownerChunks));
 	};
+
+	func(onUpdatePosition)
+	{
+		objParams();
+		{
+			_x set ["flagUpdObj",true];
+			false;
+		} count (values getSelf(__atm_ownerChunks));
+		setSelf(__atm_ownerChunks,createHashMap);
+
+		//TODO определение НИЗА модели
+		if (true) exitWith {};
+
+		//update simulation
+		/*
+			Цель - получить все объекты, граничащие с чанками этого объекта
+			1. Получаем чанки с помощью [this,true,false] atmos_getObjectOwnedChunks
+			2. Получаем полный список объектов в каждом чанке
+		*/
+		private _chObjList = [this,true,false] call atmos_getObjectOwnedChunks;
+		private _mapObjAll = createHashMap;
+		private _needSim = [];
+		traceformat("CHUNKS COUNT: %1",count _chObjList);
+		{
+			{
+				if !array_exists(_mapObjAll,getVar(_x,pointer)) then {
+					_mapObjAll set [getVar(_x,pointer),_x];
+					traceformat("CHECK OPENSPACE %1 - %2",_x arg callFunc(_x,isInOpenSpace))
+					if callFunc(_x,isInOpenSpace) then {
+						_needSim pushBack _x;
+					};
+				};
+				false;
+			} count (_x callv(getObjectsInChunk));
+			false
+		} count _chObjList;
+
+		//TODO sorting by z-value
+		{
+			callFunc(_x,onObjectFalling);
+		} count _needSim;
+	};
+
+	#define DEBUG_VISUAL_OBJECTFALLING
+
+	#ifndef EDITOR
+		#undef DEBUG_VISUAL_OBJECTFALLING
+	#endif
+
+	func(onObjectFalling)
+	{
+		objParams();
+		//if isNullReference(this) exitWith {false};
+
+		private _visObj = callSelf(getBasicLoc);
+		private _p1 = _visObj modelToWorldVisual [0,0,0];
+		private _p2 = _p1 vectorAdd [0,0,-1000];
+
+		private _iDat = [_p1,_p2,_visObj,
+		#ifdef EDITOR
+		noe_client_allPointers getOrDefault [getSelf(pointer),objNull]
+		#else
+		objNull
+		#endif
+		] call si_getIntersectData;
+		
+		#ifdef DEBUG_VISUAL_OBJECTFALLING
+		if !isNull(debug_objfalling_list) then {{deletevehicle _x} foreach debug_objfalling_list};
+		debug_objfalling_list = [];
+		assert_str(!isNull(atmos_debug_createSphere),"atmos_debug_createSphere must be defined");
+		_s1 = [1,0,0] call atmos_debug_createSphere;
+		_s2 = [0,1,0] call atmos_debug_createSphere;
+		_s1 setposatl _p1;
+		_s2 setposatl ifcheck(isNullReference(_iDat select 0),_p2,_iDat select 1);
+		debug_objfalling_list append vec2(_s1,_s2);
+		#endif
+
+		if isNullReference(_iDat select 0) exitWith {false};
+
+		
+		{
+			callFuncParams(_x,interpolate,"auto_trans_fall" arg this arg getSelf(pointer));
+		} foreach callSelfParams(getNearMobs,20);
+		
+		callSelfParams(setPos__,_iDat select 1);
+
+		private _dam = D6 * 5; //TODO расчет урона от дистанции падения+ объемов объекта
+		//TODO урон по объектам, на которые упал этот объект
+		callSelfAfterParams(applyDamage,rand(1.2,1.3),_dam arg DAMAGE_TYPE_CRUSHING arg _iDat select 1);
+		true
+	};
+
+	//set positiof of world object with replication
+	func(setPos__) //name is temporary
+	{
+		objParams_1(_pos);
+		if !callSelf(isInWorld) exitWith {};
+
+		private _wobj = callSelf(getBasicLoc);
+		_wobj setposatl _pos;
+		callSelf(replicateObject);
+	};
+
+	#define DEBUG_VISUAL_OPENSPACE
+
+	#ifndef EDITOR
+		#undef DEBUG_VISUAL_OPENSPACE
+	#endif
+
+	//функция проверки находится ли объект в воздухе
+	func(isInOpenSpace)
+	{
+		objParams();
+		private _visObj = callSelf(getBasicLoc);
+		private _bbx = boundingBoxReal [_visObj,"Geometry"];
+		private _lowerZ = _bbx select 0 select 2;
+		private _poses = [
+			_bbx select 0 select [0,2],
+			_bbx select 1 select [0,2],
+			[_bbx select 0 select 0,_bbx select 1 select 1],
+			[_bbx select 1 select 0,_bbx select 0 select 1]
+		] apply {
+			asltoatl (
+				_visObj modelToWorldVisualWorld  (_x vectoradd [0,0,_lowerZ])
+			)
+		};
+
+		//additional positions workaround
+		private _added = [];
+		{
+			_added pushBack ([_x] call getPosListCenter);
+		} foreach [
+			[_poses select 1,_poses select 2],
+			[_poses select 1,_poses select 3],
+			[_poses select 0,_poses select 2],
+			[_poses select 0,_poses select 3]
+		];
+		_poses append _added;
+
+		private _iDat = null;
+		private _countConnections = 0;
+
+		#ifdef DEBUG_VISUAL_OPENSPACE
+		if !isNull(debug_openspace_list) then {{deletevehicle _x} foreach debug_openspace_list};
+		debug_openspace_list = [];
+		assert_str(!isNull(atmos_debug_createSphere),"atmos_debug_createSphere must be defined");
+		{
+			_s1 = [1,0,1] call atmos_debug_createSphere;
+			_s2 = objNull;
+			_s1 setposatl _x;
+			private _iDatDebug = [_x,_x vectoradd [0,0,-.2],_visObj] call si_getIntersectData;
+			if !isNullReference(_iDatDebug select 0) then {
+				_s2 = [0,1,0] call atmos_debug_createSphere;
+				_s2 setposatl (_iDatDebug select 1);
+			} else {
+				_s2 = [1,0,0] call atmos_debug_createSphere;
+				_s2 setposatl (_x vectoradd [0,0,-.2]);
+			};
+			debug_openspace_list append vec2(_s1,_s2);
+		} foreach _poses;
+		#endif
+		#ifdef EDITOR
+		private _toUnhide = [];
+		{
+			if !(isObjectHidden _x) then {
+				_x hideObject true;
+				_toUnhide pushBack _x;
+			};
+		} foreach (values noe_client_allPointers);
+		#endif
+		{
+
+			_iDat = [_x,_x vectorAdd [0,0,-0.2],_visObj] call si_getIntersectData;
+
+			if !isNullReference(_iDat select 0) then {
+				INC(_countConnections);
+			};
+			false;
+		} count _poses;
+
+		#ifdef EDITOR
+		{_x hideObject false} foreach _toUnhide;
+		#endif
+
+		#ifdef DEBUG_VISUAL_OPENSPACE
+		traceformat("IDestructible::isInOpenSpace: _countConnections = %1",_countConnections);
+		#endif
+
+		_countConnections <= 3//8=>примерно треть для устойчивости объекта
+	};
+
+	getter_func(isMovable,isTypeOf(this,IStruct) || isTypeOf(this,Item));
 
 	//all info for this system in baisc set: B 557
 	//Повреждения оружия на B 485
@@ -1397,7 +1595,14 @@ class(IDestructible) extends(GameObject)
 			private _worldPos = _p vectorAdd [rand(-0.2,0.2),rand(-0.2,0.2),rand(-0.2,0.2)];
 			callSelfParams(sendDamageVisualOnPos,_worldPos arg true arg true arg false);
 		};
+
+		callSelf(dropDebrisOnDestroy);
 	};
+	
+	//Отметка времени последнего урона огнём
+	var(__atm_lastFireDamage,0);
+	//Здесь хранятся ссылка на чанки, которые владеют этим объектом. key:chId, value:AtmosChunk
+	var(__atm_ownerChunks,createHashMap);
 
 	func(applyDamage)
 	{
@@ -1588,6 +1793,9 @@ class(IDestructible) extends(GameObject)
 
 		if (getSelf(hp)>0) then {
 			setSelf(hpMax,getSelf(hp));
+			if !callSelf(isItem) then {
+				setSelf(weight,[this] call gurps_calculateConstructionWeight);
+			};
 		} else {
 			callSelf(generateObjectHP);
 		};
@@ -1608,7 +1816,10 @@ class(IDestructible) extends(GameObject)
 		if callSelf(isItem) then {
 			_val = [this] call gurps_calculateItemHP;
 		} else {
-			_val = [this] call gurps_calculateConstructionHP;
+			private _weightTn = [this] call gurps_calculateConstructionWeight;
+			_val = [_weightTn] call gurps_calculateConstructionHP;
+			//lb to kg
+			setSelf(weight,_weightTn * 1000);
 		};
 		setSelf(hp,_val);
 		setSelf(hpMax,_val);
@@ -1647,6 +1858,125 @@ class(IDestructible) extends(GameObject)
 			private _sound = ifcheck(_useBlockSound,callFunc(_mat,getResistSound),callFunc(_mat,getDamageSound));
 			if (_sound == stringEmpty) exitWith {};
 			callSelfParams(playSound,_sound arg randInt(0.85,1.15) arg 15 arg null arg _pos);
+		};
+	};
+
+	//функция создает частицы и раскидывает их вокруг объекта
+	func(dropDebrisOnDestroy)
+	{
+		objParams();
+		
+		//nonworld objects cannot drop debris
+		if !callSelf(isInWorld) exitWith {};
+
+		private _typeList = callSelf(getOnDestroyTypes);
+		//_typeList = ["TorchDisabled"];//!for debug only
+
+		if (count _typeList == 0) exitWith {}; //nothing to drop 
+		/*
+			Стандартная формула расчета количества частиц из объекта:
+			round(hpMax / 20)
+		*/
+		private _countCreate = callSelf(getOnDestroyCountCreate);
+
+		private _type = null;
+		private _startPos = getSelf(loc) modelToWorldVisual [0,0,0]; //center of model (not atl pos)
+		private _wobj = nullPtr;
+		private _tDat = null;
+
+		#ifdef NOE_DEBUG_HIDE_SERVER_OBJECT
+		private _nochange_serverobject = true;
+		#endif
+		#ifdef EDITOR
+		private _hidemodevobj = {
+			params ["_vobj","_mode"];
+			if (_mode) then {
+				if isNullVar(_nochange_serverobject) then {
+					getVar(_vobj,loc) hideObject true;
+				};
+				(noe_client_allPointers getOrDefault [getVar(_vobj,pointer),objNull]) hideObject true;
+			} else {
+				if isNullVar(_nochange_serverobject) then {
+					getVar(_vobj,loc) hideObject false;
+				};
+				(noe_client_allPointers getOrDefault [getVar(_vobj,pointer),objNull]) hideObject false;
+			};
+		};
+		[this,true] call _hidemodevobj;
+		//_parList = [this,_countCreate,_typeList,_startPos];
+		//_nfp = { params ['this',"_countCreate","_typeList","_startPos"];
+		#else
+		
+		//non editor hide serverside object
+		getVar(_vobj,loc) hideObject true;
+
+		#endif
+		
+		private _mobs = callSelfParams(getNearMobs,20);
+
+		for "_i" from 1 to _countCreate do {
+			_type = pick _typeList;
+			
+			_wobj = [_type,_startPos] call createGameObjectInWorld;//instantiate(_type);//
+			assert_str(!isNullReference(_wobj),"Failed to create debris type " + _type);
+
+			#ifdef EDITOR
+			[_wobj,true] call _hidemodevobj;
+			#else
+			getVar(_wobj,loc) hideObject true; //hide debris on server prod
+			#endif
+
+			_tDat = [
+				_wobj,
+				_startPos vectoradd [rand(-.1,.1),rand(-.1,.1),rand(0,.1)],
+				[rand(-20,70),rand(0,360)],
+				rand(2,4) //testforce
+			] call si_rayTraceProcess;
+
+			#ifdef EDITOR
+			[_wobj,false] call _hidemodevobj;
+			#else
+			getVar(_wobj,loc) hideObject false; //unhide debris on server prod
+			#endif
+			
+			_tDat params ["_iobj","_ipos","_ivec"];
+			
+			private _plis = [getVar(_wobj,pointer),[_ipos,callFunc(_wobj,getDir)],["ispd",
+				rand(0.7,1.2)//3//<fortest
+				,
+				"emuf"]];
+			{
+				callFuncParams(_x,sendInfo,"nintrp" arg _plis)
+			} foreach _mobs;
+
+			
+			callFuncParams(_wobj,setPos__,_ipos);
+		};
+
+		#ifdef EDITOR
+		//}; invokeAfterDelayParams(_nfp,2,_parList);
+		[this,false] call _hidemodevobj;
+		#else
+		
+		//non editor show serverside object
+		getVar(_vobj,loc) hideObject false;
+
+		#endif
+	};
+
+	//Пользовательская функция определения количества выпадающих предметов
+	getter_func(getOnDestroyCountCreate,round(getSelf(hpMax)/20));
+	//пользовательская функция получения типов при уничтожении объекта. можно настроить кастомные типы, выпадающие при уничтожении
+	getter_func(getOnDestroyTypes,callSelf(getOnDestroyTypesFromMaterial));
+
+	func(getOnDestroyTypesFromMaterial)
+	{
+		objParams();
+		private _mat = callSelf(getMaterial);
+		if !isNullReference(_mat) then {
+			callFunc(_mat,getDestructionTypes);
+		} else {
+			[]
 		};
 	};
 	
@@ -1732,13 +2062,18 @@ region(Fire functionality)
 		if !callSelf(canIgniteArea) exitWith {};
 
 		if (tickTime>=getSelf(__s_nextCheckIgnite)) then {
-			#ifdef EDITOR
-			setSelf(__s_nextCheckIgnite,tickTime + 3);
-			#else
-			setSelf(__s_nextCheckIgnite,tickTime + randInt(40,60*2));
-			#endif
+			callSelf(resetIngiteTimer);
 			[this] call atmos_tryIgnite;
 		};
+	};
+	func(resetIngiteTimer)
+	{
+		objParams();
+		#ifdef EDITOR
+		setSelf(__s_nextCheckIgnite,tickTime + 5);
+		#else
+		setSelf(__s_nextCheckIgnite,tickTime + randInt(40,60*2));
+		#endif
 	};
 
 	// "

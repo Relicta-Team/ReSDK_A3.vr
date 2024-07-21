@@ -167,10 +167,11 @@ function(vcom_observ_loadCameraController)
 	private _d = call vcom_getDisplay;
 	private _ctg = call vcom_getCtg;
 	if (isNullReference(_d) || isNullReference(_ctg)) exitwith {};
-
-	private _zoneDrag = [_d,TEXT,_sizes,_ctg] call createWidget;
+	private _bc = [_d,WIDGETGROUP,_sizes,_ctg] call createWidget;
+	private _zoneDrag = [_d,TEXT,WIDGET_FULLSIZE,_bc] call createWidget;
 	_zoneDrag ctrlSetTooltip "Тяните мышку чтобы вращать объект";
 	_ctg setvariable ["_zoneDragWidget",_zoneDrag];
+	_ctg setvariable ["_wgroupRef",_bc];
 
 	_d DisplayAddEventHandler ["mousebuttondown",{['MouseButtonDown',_this] call vcom_observ_handleControl;}];
 	_d DisplayAddEventHandler ["mousebuttonup",{['MouseButtonUp',_this] call vcom_observ_handleControl;}];
@@ -289,6 +290,9 @@ function(vcom_observ_centerAtObject)
 function(vcom_observ_handleControl)
 {
 	params ["_controlType","_thisParams"];
+	
+	_isMobCamControl = vcom_windowMode == "prox";
+
 	call {
 		if (_controlType == "MouseButtonDown") exitwith {
 			if !(((call vcom_getDisplay) getvariable "____zoneDragRef") call isMouseInsideWidget) exitwith {};
@@ -327,6 +331,10 @@ function(vcom_observ_handleControl)
 			_RMB = vcom_observ_buttons select 1;
 
 			if (count _LMB > 0) then {
+				// if (_isMobCamControl) exitWith {
+					//TODO implement new camera control for mobs
+				// };
+
 				_cX = _LMB select 0;
 				_cY = _LMB select 1;
 				_dX = (_cX - _mX) * 10;
@@ -375,6 +383,11 @@ function(vcom_observ_handleControl)
 			_cam camcommitprepared 0;
 		};
 		if (_controlType == "draw3D") exitwith {
+
+			if (_isMobCamControl) then {
+				call prox_syncVisualSceneWidgets;	
+			};
+
 			if (!vcom_visual_canDrawLines) exitwith {};
 			
 			_logic = vcom_logicObject;

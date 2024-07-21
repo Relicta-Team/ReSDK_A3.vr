@@ -248,6 +248,8 @@ si_getIntersectObjects = {
 	};
 };
 
+#include "ServerInteraction_rayTrace.sqf"
+
 //Отладчик эдитора
 //#define SI_THROW_DEBUG
 #define SH_DEBUG_SHOTGUN

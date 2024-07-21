@@ -221,7 +221,7 @@ if !(value) exitWith { \
 		setLastError(_format); \
 	};
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 593](../../../Src/host/CommonComponents/!PreInit.sqf#L593)
+File: [host\CommonComponents\!PreInit.sqf at line 626](../../../Src/host/CommonComponents/!PreInit.sqf#L626)
 ## cprint_usestdout
 
 Type: Variable
@@ -699,6 +699,42 @@ Description:
 - Param: _breakArr (optional, default false)
 
 File: [host\CommonComponents\!PreInit.sqf at line 555](../../../Src/host/CommonComponents/!PreInit.sqf#L555)
+## getPosListCenter
+
+Type: function
+
+Description: 
+- Param: _poses (optional, default [])
+- Param: _dummyParam
+
+File: [host\CommonComponents\!PreInit.sqf at line 571](../../../Src/host/CommonComponents/!PreInit.sqf#L571)
+## randomRadius
+
+Type: function
+
+Description: Специальный рандом по области. Чем ближе к центру тем выше вероятность. Распределение идёт по всей окружности.
+- Param: _center
+- Param: _radius
+
+File: [host\CommonComponents\!PreInit.sqf at line 587](../../../Src/host/CommonComponents/!PreInit.sqf#L587)
+## randomPosition
+
+Type: function
+
+Description: Специальный рандом по области. Равномерное распределение по позиции в радиусе.
+- Param: _center
+- Param: _radius
+
+File: [host\CommonComponents\!PreInit.sqf at line 593](../../../Src/host/CommonComponents/!PreInit.sqf#L593)
+## randomGaussian
+
+Type: function
+
+Description: Специальный рандом по области. Распределение идёт ближе к центру. Чем ближе к центру тем выше вероятность.
+- Param: _center
+- Param: _radius
+
+File: [host\CommonComponents\!PreInit.sqf at line 599](../../../Src/host/CommonComponents/!PreInit.sqf#L599)
 ## functionalitests_preinit
 
 Type: function
@@ -708,7 +744,7 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 592](../../../Src/host/CommonComponents/!PreInit.sqf#L592)
+File: [host\CommonComponents\!PreInit.sqf at line 625](../../../Src/host/CommonComponents/!PreInit.sqf#L625)
 # Algorithm.sqf
 
 ## allOf
@@ -1214,31 +1250,6 @@ Description:
 - Param: _value
 
 File: [host\CommonComponents\ModelsPath.sqf at line 8](../../../Src/host/CommonComponents/ModelsPath.sqf#L8)
-## model_convertPithBankYawToVec
-
-Type: function
-
-Description: 
-
-
-File: [host\CommonComponents\ModelsPath.sqf at line 24](../../../Src/host/CommonComponents/ModelsPath.sqf#L24)
-## model_SetPitchBankYaw
-
-Type: function
-
-Description: 
-- Param: _object
-- Param: _data
-
-File: [host\CommonComponents\ModelsPath.sqf at line 63](../../../Src/host/CommonComponents/ModelsPath.sqf#L63)
-## model_getPitchBankYaw
-
-Type: function
-
-Description: 
-- Param: _vehicle
-
-File: [host\CommonComponents\ModelsPath.sqf at line 69](../../../Src/host/CommonComponents/ModelsPath.sqf#L69)
 ## model_debug_dumpAllModels
 
 Type: function
@@ -1248,7 +1259,34 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\ModelsPath.sqf at line 75](../../../Src/host/CommonComponents/ModelsPath.sqf#L75)
+File: [host\CommonComponents\ModelsPath.sqf at line 27](../../../Src/host/CommonComponents/ModelsPath.sqf#L27)
+# ModelTransform.hpp
+
+## model_convertPithBankYawToVec
+
+Type: function
+
+Description: 
+
+
+File: [host\CommonComponents\ModelTransform.hpp at line 6](../../../Src/host/CommonComponents/ModelTransform.hpp#L6)
+## model_SetPitchBankYaw
+
+Type: function
+
+Description: 
+- Param: _object
+- Param: _data
+
+File: [host\CommonComponents\ModelTransform.hpp at line 45](../../../Src/host/CommonComponents/ModelTransform.hpp#L45)
+## model_getPitchBankYaw
+
+Type: function
+
+Description: 
+- Param: _vehicle
+
+File: [host\CommonComponents\ModelTransform.hpp at line 51](../../../Src/host/CommonComponents/ModelTransform.hpp#L51)
 # Pencfg.sqf
 
 ## addtobj(model,soundpen,armpen)
@@ -1696,3 +1734,43 @@ Description:
 - Param: _counter
 
 File: [host\CommonComponents\__notcompile__PerFrame.sqf at line 272](../../../Src/host/CommonComponents/__notcompile__PerFrame.sqf#L272)
+# Pointers.sqf
+
+## sref_cont
+
+Type: Variable
+
+Description: Safe reference. Used for bypass crossreferences and possible memory leaks
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CommonComponents\Structs\Pointers.sqf at line 7](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L7)
+## sref_i
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [host\CommonComponents\Structs\Pointers.sqf at line 8](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L8)
+# Profiling.sqf
+
+## prof_map_zones
+
+Type: Variable
+
+Description: PROFILING
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [host\CommonComponents\Structs\Profiling.sqf at line 10](../../../Src/host/CommonComponents/Structs/Profiling.sqf#L10)

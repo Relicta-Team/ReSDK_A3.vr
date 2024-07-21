@@ -33,6 +33,11 @@ class(BigStoneWall) extends(BigWall)
 	var(model,"ca\structures\castle\a_castle_wall1_20.p3d");
 	var(desc, "Огромная каменная стена" pcomma " покрытая мхом");
 endclass
+
+editor_attribute("EditorGenerated")
+class(BigStoneWall2) extends(BigStoneWall)
+	var(model,"ca\structures\castle\a_castle_wall1_corner_2.p3d");
+endclass
 editor_attribute("EditorGenerated")
 class(BigStoneWall1) extends(BigStoneWall)
 	var(model,"ca\structures\castle\a_castle_wall1_end_2.p3d");

@@ -798,6 +798,7 @@ Description:
 - Param: _time
 - Param: _scaleMode (optional, default 0)
 - Param: _stdMode (optional, default 0)
+- Param: _emuMode (optional, default false)
 
 File: [client\NOEngineClient\NOEngineClient_Interpolation.sqf at line 8](../../../Src/client/NOEngineClient/NOEngineClient_Interpolation.sqf#L8)
 ## noe_client_interp_start
@@ -808,7 +809,7 @@ Description:
 - Param: _owner
 - Param: _paramsT
 
-File: [client\NOEngineClient\NOEngineClient_Interpolation.sqf at line 126](../../../Src/client/NOEngineClient/NOEngineClient_Interpolation.sqf#L126)
+File: [client\NOEngineClient\NOEngineClient_Interpolation.sqf at line 137](../../../Src/client/NOEngineClient/NOEngineClient_Interpolation.sqf#L137)
 ## noe_client_interp_determineTransform
 
 Type: function
@@ -817,7 +818,7 @@ Description: returns [srcobj,pos,trans]
 - Param: _owner
 - Param: _data
 
-File: [client\NOEngineClient\NOEngineClient_Interpolation.sqf at line 255](../../../Src/client/NOEngineClient/NOEngineClient_Interpolation.sqf#L255)
+File: [client\NOEngineClient\NOEngineClient_Interpolation.sqf at line 273](../../../Src/client/NOEngineClient/NOEngineClient_Interpolation.sqf#L273)
 # NOEngineClient_localAtmos.sqf
 
 ## ACLI_TYPE_FIRE

@@ -292,6 +292,16 @@ gurps_getEncumbrance = {
 	4
 };
 
+gurps_encumLevelToMoveModifier = {
+	params ["_lvl"];
+	if (_lvl == 0) exitWith {1};
+	if (_lvl == 1) exitWith {0.8};
+	if (_lvl == 2) exitWith {0.6};
+	if (_lvl == 3) exitWith {0.4};
+	if (_lvl == 4) exitWith {0.2};
+	setLastError("Unknown level: " + (str _lvl));
+};
+
 gurps_recalcuateEncumbrance = {
 	private this = _this;
 
@@ -312,10 +322,17 @@ gurps_recalcuateEncumbrance = {
 	setSelf(encumbrance,_encumbrance);
 
 	private _newEncum = this call gurps_getEncumbrance;
+
+	private _updated = _newEncum != getSelf(curEncumbranceLevel);
+
 	#ifdef log_onEncumbranceRecalculate
 		warningformat("new encumLevel - %1",_newEncum);
 	#endif
 	setSelf(curEncumbranceLevel,_newEncum);
+
+	if (_updated) then {
+		callSelf(onChangeAnimCoef);
+	};
 
 	callSelfParams(fastSendInfo,"hud_encumb" arg _newEncum);
 };
@@ -446,7 +463,7 @@ gurps_calculateItemHP = {
 
 //расчетка для построек
 gurps_calculateConstructionHP = {
-	params ["_obj"];
+	params ["_weight"];
 
 	/*hp - 100 × (куб.корень из веса пустой постройки в тоннах),
 	
@@ -456,7 +473,13 @@ gurps_calculateConstructionHP = {
 		- 150 тонн для камня
 		...
 	*/
-	
+	private _hp = 100 * (_weight ^ (1/3));
+
+	(round _hp ) max 1//в спецификации не указано про округление, поэтому просто округляем до целых
+};
+
+gurps_calculateConstructionWeight = {
+	params ["_obj"];
 	private _mpath = getVar(_obj,model);
 	if !isNull(core_cfg2model getvariable _mpath) then {
 		_mpath = core_cfg2model getvariable _mpath;
@@ -473,10 +496,7 @@ gurps_calculateConstructionHP = {
 		0
 	};
 	private _wPer1000sqft = callFunc(_mat,getWeightCoefForCalcHP);
-	private _weight = (_areaFt * _wPer1000sqft) / 1000;
-	private _hp = 100 * (_weight ^ (1/3));
-
-	(round _hp ) max 1//в спецификации не указано про округление, поэтому просто округляем до целых
+	(_areaFt * _wPer1000sqft) / 1000;
 };
 
 //only for editor

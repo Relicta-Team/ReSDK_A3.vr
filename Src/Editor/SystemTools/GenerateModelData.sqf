@@ -7,7 +7,7 @@
 function(systools_GenerateModelData)
 {
 	[ 
-	"Вы уверены? Процесс может занять какое-то время", 
+	"Вы уверены? Процесс может занять какое-то время. После успешной генерации может сильно упасть производительность и потребуется перезагруказ Arma 3.", 
 	"Генератор карты моделей", 
 	[ 
 	"Запустить", 
@@ -52,10 +52,22 @@ function(systools_internal_generateModelData)
 			};
 	};
 	#define searchcmp(m,list) ( (list findif {_x in m})!=-1 )
-	_header = ["src\Editor\GENERATED\ModelConfig.sqf"] call file_read;
+	private _headerPath = "src\Editor\GENERATED\ModelConfig_header.sqf";
+	private _header = [_headerPath] call file_read;
+	if (_header == "") exitWith {
+		[format["Header '%1' not found or empty",_headerPath]] call showError;
+	};
 	_cfgData = "true" configClasses (configFile >> "CfgVehicles");
 	_countData = (count _cfgData)-1;
 	_stringStream = "";
+	private _obj = objNull;
+	_progSuccessed = [];
+	_progCur = 0;
+	_posCreate = getposatl cameraOn;
+
+
+	["--------------------------- START ---------------------------"] call printLog;
+
 	{
 		_cfgName = tolower (configname _x);
 		_modelNoLowered = getText(_x >> "model");
@@ -64,26 +76,29 @@ function(systools_internal_generateModelData)
 			if searchcmp(_model, _blacklist) then {continue};
 			//if searchcmp(_model, _restrictedModels) then {continue};
 			
+			if ({_cfgName isKindOf _x} count _blockedTypes > 0) exitWith {
+				INC(_blockedTypesCount);
+				//["Skipped blacklisted cfg - %1 (%2);",_cfgName] call printTrace;
+				continue;
+			};
+
 			//Fix #70
 			if !([_model,".p3d",false] call stringEndWith) then {
 				_model = _model + ".p3d";
 			};
 
-			_obj = createSimpleObject [_model,getPosATL cameraOn];
+			_obj = createSimpleObject [_model,_posCreate];
+			mdat_modelList pushBack _obj;
 			if isNullReference(_obj) exitWith {
 				INC(_brokenModels);
-				continue;
-			};
-			
-			if ({_cfgName isKindOf _x} count _blockedTypes > 0) exitWith {
-				INC(_blockedTypesCount);
-				deleteVehicle _obj;
+				["Model broken - %1 (%2); Ctx: %2",_cfgName,_model,_bbx] call printWarning;
 				continue;
 			};
 			
 			_bbx = boundingBoxReal _obj;
 			if ((_bbx select 2) == 0) exitWith {
 				INC(_toosmall);
+				["Too small - %1 (%2); Ctx: %2",_cfgName,_model,_bbx] call printWarning;
 				deleteVehicle _obj;
 				continue;
 			};
@@ -91,7 +106,12 @@ function(systools_internal_generateModelData)
 			if (_model select [0,1] == "\") then {
 				_model = _model select [1,count _model];
 			};
-			["[%2] saved %1",_cfgName,_forEachIndex * 100/_countData] call printLog;
+			_progCur = round(_foreachIndex*100/_countData);
+			if ((_progCur%10) == 0 && {!(_progCur in _progSuccessed)}) then {
+				["Saving progress - %1",_progCur] call printLog;
+				_progSuccessed pushBack _progCur;
+			};
+			//["[%2] saved %1",_cfgName,_forEachIndex * 100/_countData] call printLog;
 			modvar(_stringStream) + endl + format["['%1','%2',%3] _",str _cfgName,str _model,_bbx /*call _handleBBXType*/];
 			INC(_added);
 			deleteVehicle _obj;
@@ -103,6 +123,9 @@ function(systools_internal_generateModelData)
 	["FileManager","Write",[_pathFull,_out]] call rescript_callCommandVoid;
 	
 	["Work done at %1 sec: Added: %2; Broken models: %3; Small: %4; Wrong types: %5",tickTime - _t,_added,_brokenModels,_toosmall,_blockedTypesCount] call printLog;
+
+	["Процедура выполнена за %1 секунд. Сгенерировано %2 записей",tickTime - _t,_added] call messageBox;
+	//nextFrame({compileEditorOnly})
 }
 
 

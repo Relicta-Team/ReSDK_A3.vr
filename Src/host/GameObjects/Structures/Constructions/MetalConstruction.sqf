@@ -19,6 +19,31 @@ class(MetalConstruction) extends(Constructions)
 endclass
 
 editor_attribute("EditorGenerated")
+class(SteamBarrel) extends(MetalConstruction)
+	var(model,"ml_shabut\exodus\baloonexo.p3d");
+	var(name,"Паровик");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ElectricalEngineDevice) extends(MetalConstruction)
+	var(model,"ml\ml_germogate\l_02_alex_vorota_pult.p3d");
+	var(name,"Оборудование");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ElectricalTransformer) extends(ElectricalEngineDevice)
+	var(model,"a3\structures_f_exp\industrial\dieselpowerplant_01\dpp_01_transformer_f.p3d");
+	var(name,"Трансформатор");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SmallRadiator) extends(MetalConstruction)
+	var(model,"ml\ml_object_new\model_24\batareya.p3d");
+	var(name,"Металлолом");
+	var(desc,"Можно бы было сдать"" + pcomma + "" да не утащить..");
+endclass
+
+editor_attribute("EditorGenerated")
 class(MetalFanSmall) extends(MetalConstruction)
 	var(model,"metro_ob\model\vent_02.p3d");
 endclass

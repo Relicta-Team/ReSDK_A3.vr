@@ -19,6 +19,40 @@ class(SmallPole) extends(Constructions)
 endclass
 
 editor_attribute("EditorGenerated")
+class(WoodPole) extends(SmallPole)
+	var(name,"Позорник");
+	var(desc,"Чтобы на нём оказаться - много ума не надо!");
+	var(model,"ca\structures\ruins\rubble_wood_girder.p3d");
+	var(material,"MatWood");
+endclass
+
+editor_attribute("EditorGenerated")
+class(WoodPole1) extends(WoodPole)
+	var(model,"a3\structures_f_exp\walls\polewalls\polewall_01_pole_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(WoodCross) extends(SmallPole)
+	var(name,"Крест");
+	var(desc,"Здесь людей вешают! И очень даже неплохо!");
+	var(model,"a3\structures_f_enoch\cultural\cemeteries\tombstone_13_f.p3d");
+	var(material,"MatWood");
+endclass
+
+editor_attribute("EditorGenerated")
+class(Gallows) extends(SmallPole)
+	var(name,"Вешалка");
+	var(desc,"С неё начинается театр");
+	var(model,"relicta_models2\small_constructions\s_gallows\s_gallows.p3d");
+	var(material,"MatWood");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ElectricPole) extends(SmallPole)
+	var(model,"a3\structures_f_exp\infrastructure\powerlines\powerline_01_pole_small_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(ThickConcretePillarDestroyed) extends(SmallPole)
 	var(model,"ml\ml_object_new\model_24\balka.p3d");
 	var(name,"Бетон");
@@ -41,7 +75,18 @@ class(SmallGrayPillar) extends(SmallPole)
 	var(model,"a3\structures_f_exp\walls\wired\wiredfence_01_pole_45_f.p3d");
 	var(name,"Маленький столб");
 endclass
+
 editor_attribute("EditorGenerated")
 class(ConcreteLongPole) extends(SmallPole)
 	var(model,"csa_constr\csa_obj\stolb_6m.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(ConcretePole) extends(ConcreteLongPole)
+	var(model,"ca\structures\wall\wall_indcnc_pole.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumLightConcretePole) extends(ConcreteLongPole)
+	var(model,"a3\structures_f_argo\walls\city\wallcity_01_pillar_grey_f.p3d");
 endclass

@@ -6,7 +6,7 @@
 noe_client_defaultInterpTime = 0.15;
 
 noe_client_interp_processObjInterp = {
-	params ["_srcObj","_fromPos","_fromTransf","_toPos","_toTransf","_time",["_scaleMode",0],["_stdMode",0]];
+	params ["_srcObj","_fromPos","_fromTransf","_toPos","_toTransf","_time",["_scaleMode",0],["_stdMode",0],["_emuMode",false]];
 	_srcObj disableCollisionWith player;
 	traceformat("Interp process launched: %1",_this)
 	
@@ -19,7 +19,7 @@ noe_client_interp_processObjInterp = {
 
 	startAsyncInvoke
 	{
-		params ["_src","_fp","_ft","_tp","_tt","_tStart","_dur","_scl","_stdMode"];
+		params ["_src","_fp","_ft","_tp","_tt","_tStart","_dur","_scl","_stdMode","_emuMode"];
 		if isNullReference(_src) exitWith {true};
 		
 		{(_x select 0)call(_x select 1)} foreach (_src getvariable "_eventOnFrame");
@@ -37,8 +37,19 @@ noe_client_interp_processObjInterp = {
 		};
 		traceformat("POS: %1 -> %2; TRANS: %3  -> %4",_fp arg _tp arg _ft arg _tt);
 		_tEnd = _tStart + _dur;
-		_pos = vectorLinearConversion [_tStart,_tEnd,tickTime,_fp,_tp];
-		_src setPosAtl _pos;
+		if (_emuMode) then {
+			_tval = linearConversion [_tStart,_tEnd,tickTime,0,1];
+			_pointList = [
+				_fp,
+				([[_fp,_tp]] call getPosListCenter)vectorAdd [0,0,_fp distance _tp],
+				_tp
+			];
+			_pos = _tval bezierInterpolation _pointList;
+			_src setPosAtl _pos;
+		} else {
+			_pos = vectorLinearConversion [_tStart,_tEnd,tickTime,_fp,_tp];
+			_src setPosAtl _pos;
+		};
 		
 		_canApplyTransf = true;
 		
@@ -98,9 +109,9 @@ noe_client_interp_processObjInterp = {
 
 		if (_scl!=0) then {
 			_sFact = if (_scl>0) then {
-				linearConversion [_tStart,_tEnd,tickTime,0,1]
+				linearConversion [_tStart,_tEnd,tickTime,0.3,1]
 			} else {
-				linearConversion [_tStart,_tEnd,tickTime,1,0]
+				linearConversion [_tStart,_tEnd,tickTime,1,0.3]
 			};
 			_src setObjectScale _sFact;
 		};
@@ -108,7 +119,7 @@ noe_client_interp_processObjInterp = {
 		false
 	},
 	_onEnd,
-	[_srcObj,_fromPos,_fromTransf,_toPos,_toTransf,tickTime,_time,_scaleMode,_stdMode],
+	[_srcObj,_fromPos,_fromTransf,_toPos,_toTransf,tickTime,_time,_scaleMode,_stdMode,_emuMode],
 	_time,
 	_onEnd
 	endAsyncInvoke
@@ -176,14 +187,6 @@ noe_client_interp_start = {
 		_iObj setvariable ["_eventOnFrame",_tEventOnFrame];
 		_objects = [_sObj,_dObj];
 
-		if ("nhs" in _options) then {_objects set [0,objNull];};
-		if ("nhd" in _options) then {_objects set [1,objNull];};
-		private _scaleMode = 0;
-		if ("sc-" in _options) then {_scaleMode = -1};
-		if ("sc+" in _options) then {_scaleMode = 1};
-		private _stdMode = 0;
-		if ("std" in _options) then {_stdMode = 1};
-		
 		//setup interpolation speed
 		_ispdIdx = _options find "ispd";
 		private _interpSpeed = -noe_client_defaultInterpTime;
@@ -194,6 +197,21 @@ noe_client_interp_start = {
 		if (_interpSpeed < 0) then {
 			_interpSpeed = (abs _interpSpeed) + rand(-0.05,0.1);
 		};
+
+		if ("nhs" in _options) then {_objects set [0,objNull];};
+		if ("nhd" in _options) then {_objects set [1,objNull];};
+		private _scaleMode = 0;
+		if ("sc-" in _options) then {_scaleMode = -1};
+		if ("sc+" in _options) then {_scaleMode = 1};
+		if (_scaleMode!=0) then {
+			_interpSpeed = _interpSpeed * 2;
+		};
+		private _stdMode = 0;
+		if ("std" in _options) then {_stdMode = 1};
+		private _emuMode = false;
+		if ("emuf" in _options) then {_emuMode = true};
+		
+		
 
 		{
 			if isNullReference(_x) then {continue};
@@ -232,7 +250,7 @@ noe_client_interp_start = {
 
 		//starting interpolation
 		traceformat("STARTING INTERPOLATE OF %1; lt: %2; options: %3",_iObj arg _light arg _options)
-		[_iObj,_sPos,_sTr,_dPos,_dTr,_interpSpeed,_scaleMode,_stdMode] call noe_client_interp_processObjInterp;
+		[_iObj,_sPos,_sTr,_dPos,_dTr,_interpSpeed,_scaleMode,_stdMode,_emuMode] call noe_client_interp_processObjInterp;
 	};
 
 	if (_argList call _checkConditions) exitWith {

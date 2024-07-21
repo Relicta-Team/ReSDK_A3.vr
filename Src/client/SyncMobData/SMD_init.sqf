@@ -34,6 +34,7 @@ smd_list_variables = [
 	["smd_visualStates","onVisualStates"], //визуалки (некроз, текущая кровь, горящий чел, марево)
 	["smd_visibility","onVisiblility"],
 	["smd_interp","onInterpolate"], //поднятие и положение предметов
+	["smd_animSpeed","onAnimSpeed"], //изменение скорости анимации персонажа
 	["smd_chatMessage","onChatMessage"], //text chat system chatMessage
 	["smd_voiceBlob","onVoiceBlobInit"],
 	["smd_isPrintingSay","onIsPrintingSay"]
@@ -614,6 +615,10 @@ smd_onInterpolate = {
 	[_mob,_data] call noe_client_interp_start;
 };
 
+smd_onAnimSpeed = {
+	params ["_mob","_val"];
+	_mob setAnimSpeedCoef _val;
+};
 
 smd_getObjectInSlot = {
 	params ["_mob","_slot"];

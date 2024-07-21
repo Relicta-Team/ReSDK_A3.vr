@@ -93,6 +93,7 @@ class(Campfire) extends(ICampfireStruct)
 			
 			//с доп проверкой если инфинити источник
 			if (_mode) then {
+				callSelf(resetIngiteTimer);
 				callSelfParams(playSound, "fire\torch_on" arg rand(0.8,1.8));
 				if (getSelf(fuelLeft) == -1) exitWith {};
 				callSelfParams(startUpdateMethod,"onUpdate" arg "handleUpdate");

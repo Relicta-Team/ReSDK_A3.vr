@@ -1583,6 +1583,25 @@ region(Animator)
 	func(onChangeAnimCoef)
 	{
 		objParams();
+		//0.5-10 -> 0.5-1.4
+		private _move = callSelf(getMove) ;
+		//bonuses
+		private _encumBon = [getSelf(curEncumbranceLevel)] call gurps_encumLevelToMoveModifier;
+		_move = _move * _encumBon;
+		
+
+		//private _anmCoeff = getSelf(animCoef);
+		private _curSpeed = linearConversion[0.1,10,_move,0.5,1.4,true];
+
+		callSelfParams(setAnimSpeedCoef,_curSpeed);
+
+	};
+
+	func(setAnimSpeedCoef)
+	{
+		objParams_1(_val);
+
+		callSelfParams(syncSmdVar,"animSpeed" arg _val);
 	};
 
 	//установка кастомной анимации для частей тела, например для связки
