@@ -56,7 +56,6 @@ struct(BinaryMapInstructions)
 	endstruct
 
 // https://github.com/CBATeam/CBA_A3/issues/1352#issuecomment-665343452
-//TODO check function
 dml_internal_eulerToVec = {
 	params ["_rotation"];
 	_rotation params ["_rotX", "_rotY", "_rotZ"];
