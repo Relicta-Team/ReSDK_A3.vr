@@ -96,14 +96,41 @@ init_function(prox_initialize)
 	prox_widgetsHands = []; //ссылки на виджеты рук. виджеты типа Listbox
 	prox_widgetStateNameRef = [];
 
-	prox_anim_handStates = ["na","na"];
 	prox_anim_handEnumStates = [-1,-1];//r,l
-	prox_anim_handBlend = [0,0];
-	prox_anim_legsExists = [true,true]; //r, l
+	prox_anim_handEnumStatesCached = createHashMapFromArray [
+		["combat",[-1,-1]]
+
+	];
+	prox_anim_partsExists = [true,true,true,true]; //r, l
 
 	call {
 		#include "..\..\host\Namings\FacesHelpers.sqf"
 		#include "..\..\host\Namings\PrepareFaces.sqf"
+	};
+
+	call {
+		#define ANIMATOR_EDITOR
+		smd_isCombatModeEnabled = {prox_isCombat};
+		smd_isTwoHandedModeEnabled = {prox_isTwoHanded};
+		smd_isSitting = {false};
+		smd_getAnimValue = {
+			params ["_mob","_hnd","_categ"];
+			// if ((prox_slotListData select prox_curSelection select PROX_SDATA_INDEX_ID) != _hnd) exitWith {
+			// 	-1
+			// };
+			//return -1 if no blend, categ - 0 noncombat, 1 combat
+			private _indexOf = ifcheck(_hnd==INV_HAND_R,0,1);
+			prox_anim_handEnumStates select _indexOf
+			//-1
+		};
+		smd_isCustomAnimationEnabled = {false};
+
+		prox_initOnMob = {
+			params ["_mob"];
+			_mob setvariable ["smd_bodyParts",prox_anim_partsExists];//reference
+		};
+
+		#include "..\..\host\CommonComponents\Animator.sqf"
 	};
 
 	prox_inv_allFaces = faces_list_man + faces_list_woman;
@@ -183,6 +210,9 @@ function(prox_openEditor)
 	if !isNullReference(prox_targetObj) then {
 		deletevehicle prox_targetObj;
 	};
+	if !isNullReference(prox_itemObj) then {
+		deletevehicle prox_itemObj;
+	};
 	
 	["prox"] call vcom_openWindow;
 
@@ -256,7 +286,7 @@ function(prox_openEditor)
 	removeAllWeapons _unit;
 
 	prox_targetObj = _unit;
-	
+	[_unit] call prox_initOnMob;
 	call prox_syncAnim;
 
 	call prox_initializeModelList;
@@ -465,7 +495,7 @@ function(prox_internal_loadBottomPanel)
 		_b = [_d,BUTTON,[_midX*_foreachIndex,_curY,_midX,_sizePerButtonY-_offsetY],_ctgDown] call createWidget;
 		_b ctrlsettext _name;
 		_b setvariable ["name",_sysname];
-		_b setvariable ["idxSetvar",_idxSetvar];
+		_b setvariable ["idxSetvar",_idxSetvar+2];//offset for hands
 		_b ctrlAddEventHandler ["MouseButtonUp",{_this call prox_anim_switchLegState}];
 	} foreach [
 		["switch_leg_l","Л.нога",1],
@@ -529,11 +559,14 @@ function(prox_internal_loadBottomPanel)
 	_st ctrlAddEventHandler ["SliderPosChanged",{
 		params ["_w","_val"];
 		prox_animSpeedCoef = _val;
-		setAccTime prox_animSpeedCoef;
+		prox_targetObj setAnimSpeedCoef prox_animSpeedCoef;
 	}];
 	_st ctrlAddEventHandler ["MouseButtonUp",{
 		params ["_w","_ct"];
-		if (_ct==MOUSE_RIGHT) exitWith {prox_animSpeedCoef = 1; setAccTime prox_animSpeedCoef;};
+		if (_ct==MOUSE_RIGHT) exitWith {prox_animSpeedCoef = 1;
+		prox_targetObj setAnimSpeedCoef prox_animSpeedCoef;
+		_w sliderSetPosition prox_animSpeedCoef;
+		};
 	}];
 	_st sliderSetRange [0,2];
 	_st sliderSetSpeed [0.01,0.1];
@@ -569,8 +602,10 @@ function(prox_internal_loadBottomPanel)
 			
 			_lbDat = parseNumber _lbDat;
 
-			//prox_anim_handStates set [_idxSet,_lbDat];
 			prox_anim_handEnumStates set [_idxSet,_lbDat];
+			if (prox_isTwoHanded) then {
+				prox_anim_handEnumStates = prox_anim_handEnumStates apply {_lbDat};
+			};
 
 			call prox_syncHandAnimations;
 		}];
@@ -604,6 +639,8 @@ function(prox_loadModel)
 	if isNullReference(_object) exitWith {
 		["Cannot load model %1",_model] call showError;
 	};
+	deletevehicle prox_itemObj;
+
 	_object disableCollisionWith prox_targetObj;
 	prox_itemObj = _object;
 	
