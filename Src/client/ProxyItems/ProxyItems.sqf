@@ -11,6 +11,8 @@ proxIt_vec = [0,0,0];
 proxIt_def = [proxIt_vec,proxIt_vec];
 proxIt_list_selections = ["spine3","spine3","head","rightshoulder","spine3","head","lefthand","pelvis","righthand"];
 
+proxIt_canUseRProx = false; // переопределяется если скомпилирован RProx
+
 //Подготавливает имя если указан класснейм
 proxIt_prepName = {
 	FHEADER;
@@ -37,6 +39,11 @@ proxIt_prepName = {
 
 proxIt_updateModel = {
 	params ["_mob","_object","_newselection"];
+
+	if (proxIt_canUseRProx && {[_modelPathOrClass] call rprox_hasConfigForModel}) exitWith {
+		_this call rprox_updateModel;
+	};
+
 	private _model = (getModelInfo _object) select 1;
 	if (_model select [0,1] != "\") then {
 		_model = "\" + _model;
@@ -58,6 +65,10 @@ proxIt_updateModel = {
 
 proxIt_loadConfig = {
 	params ["_mob","_modelPathOrClass","_selectionId"];
+	
+	if (proxIt_canUseRProx && {[_modelPathOrClass] call rprox_hasConfigForModel}) exitWith {
+		_this call rprox_loadConfig;
+	};
 
 	FHEADER;
 	private _baseModel = _modelPathOrClass;
