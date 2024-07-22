@@ -42,7 +42,7 @@
 io_praseYaml = {
 	params ["_file",["_loadFromString",false]];
 	
-	private _yamlString = ifcheck(_loadFromString,_file,loadFile _file);
+	private _yamlString = ifcheck(_loadFromString,_file,LoadFile _file);
 	private _yaml = toArray _yamlString;
 	private _lineBreaks = [ASCII_NEWLINE, ASCII_CR];
 
@@ -103,9 +103,9 @@ io_yml_formatNumber = {
 	};
 
 	_return
-}
+};
 
-private io_yml_raiseError = {
+io_yml_raiseError = {
 	params ["_message", "_yaml", "_pos", "_lines"];
 
 	private _lastLine = _lines select ((count _lines) - 1);
@@ -142,7 +142,7 @@ private io_yml_raiseError = {
 	errorformat("YAML parser error: %1", _message);
 };
 
-private io_yml_parse = {
+io_yml_parse = {
 	params ["_yaml", "_pos", "_indent", "_lines"];
 	assert(!isNull(cba_fnc_trim));
 	assert(!isNull(CBA_fnc_strLen));
