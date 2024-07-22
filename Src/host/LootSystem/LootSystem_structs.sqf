@@ -58,7 +58,7 @@ struct(LootTempate)
 		private _cmode = LOOT_COMPARE_MODE_MAP;
 		{
 			
-			if equalTypes(_x,"") thne {
+			if equalTypes(_x,"") then {
 				_allowMaps pushBack struct_newp(LootRestrictionType,LOOT_COMPARE_BY_NAME arg _cmode arg _x);
 				continue;
 			};
@@ -68,7 +68,7 @@ struct(LootTempate)
 
 		_cmode = LOOT_COMPARE_MODE_GAMEMODE;
 		{
-			if equalTypes(_x,"") thne {
+			if equalTypes(_x,"") then {
 				_allowModes pushBack struct_newp(LootRestrictionType,LOOT_COMPARE_BY_NAME arg _cmode arg _x);
 				continue;
 			};
@@ -140,7 +140,7 @@ struct(LootTempate)
 			};
 
 			//spawn by native method
-			callFuncParams(_obj,createItemInContainer,_x getv(itemType) arg _x callv(_x,getRandomCount) arg _x getv(probability) arg _attrMethods);
+			callFuncParams(_obj,createItemInContainer,_x getv(itemType) arg _x callv(getRandomCount) arg _x getv(probability) arg _attrMethods);
 
 
 			// if prob(_x getv(probability)) then {
