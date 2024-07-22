@@ -364,6 +364,10 @@ function(vcom_observ_handleControl)
 				_LMB params ["_cX", "_cY"];
 				vcom_observ_buttons set [0,[_mX, _mY]];
 
+				//first person camera
+				prox_cam_dragControl set [0,(_cX - _mX)];
+				prox_cam_dragControl set [1,(_cY - _mY)];
+
 				boundingboxreal _center params ["_minBox", "_maxBox"];
 				private _centerSizeBottom = _minBox select 2;
 				private _centerSizeUp = _maxBox select 2;
@@ -466,15 +470,21 @@ function(vcom_observ_handleControl)
 				_center = vcom_prox_center;
 				_target = vcom_targetObject;
 
-				vcom_observ_camPos params ["_dis","_dirH","_dirV","_targetPos"];
-				
-				[_target, [_dirH + 180, -_dirV, 0]] call bis_fnc_setobjectrotation;
-				_target attachto [_center, _targetPos, ""]; //--- Reattach for smooth movement
+				if (prox_isExternalCam) then {
+					vcom_observ_camPos params ["_dis","_dirH","_dirV","_targetPos"];
+					
+					[_target, [_dirH + 180, -_dirV, 0]] call bis_fnc_setobjectrotation;
+					_target attachto [_center, _targetPos, ""]; //--- Reattach for smooth movement
 
-				//_cam setvectordirandup [vectordirvisual _target, vectorupvisual _target];
-				//_cam setPosASL (_target modeltoworldvisualworld [0, -_dis, 0]); //--- Don't use setPosASL, can be blacklisted on server
-				_cam attachto [_target,[0, -_dis, 0],""];
-				_cam setdir 0;
+					//_cam setvectordirandup [vectordirvisual _target, vectorupvisual _target];
+					//_cam setPosASL (_target modeltoworldvisualworld [0, -_dis, 0]); //--- Don't use setPosASL, can be blacklisted on server
+					_cam attachto [_target,[0, -_dis, 0],""];
+					_cam setdir 0;
+				} else {
+					call prox_cam_updateInternalCamera
+				};
+
+				
 
 				call prox_syncVisualSceneWidgets;	
 			};

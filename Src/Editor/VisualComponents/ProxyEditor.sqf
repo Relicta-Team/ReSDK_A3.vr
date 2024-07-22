@@ -286,6 +286,17 @@ function(prox_openEditor)
 	removeAllWeapons _unit;
 
 	prox_targetObj = _unit;
+	prox_isExternalCam = true;
+	if !isNullReference(prox_firstPersonCamera) then {
+		deletevehicle prox_firstPersonCamera;
+	};
+
+	prox_firstPersonCamera = call{private _c = "camera" createVehicleLocal [0,0,0]; _c hideObject true; _c};
+	prox_cam_dragControl = [0,0];
+	prox_cam_vec_lastDirect = [0,0];
+
+	prox_cam_defaultPos = [-0.05,-0.05,0.12];
+
 	[_unit] call prox_initOnMob;
 	call prox_syncAnim;
 
@@ -299,6 +310,111 @@ function(prox_openEditor)
 	};
 	
 }
+
+function(prox_onChangedCameraMode)
+{
+	params ["_newmode"];
+	prox_isExternalCam = _newmode;
+	if (!_newmode) then {
+		private _cam = prox_firstPersonCamera;
+		_cam cameraeffect ["internal", "back"];
+		
+		// _cam campreparefov 0.70;
+		// _cam camcommitprepared 0;
+		// _cam attachTo [prox_targetObj, prox_cam_defaultPos,"head",true];
+		// _cam setVectorUp [0,0,1];
+		// _cam attachTo [prox_targetObj, prox_cam_defaultPos,"head",true];
+		detach _cam;
+	} else {
+		private _cam = vcom_camObject;
+		_cam cameraeffect ["internal", "back"];
+		_cam campreparefocus [-1,-1];
+		_cam campreparefov 0.35;
+		_cam camcommitprepared 0;
+	};
+}
+
+function(prox_cam_updateInternalCamera)
+{
+	_cam_isNewCamera = false;
+	_unit = prox_targetObj;
+
+	_isArcadeMode = false;
+	_lamp = prox_firstPersonCamera;
+	
+	_cameraVector = getCameraViewDirection _unit;//(if (!cam_isNewCamera) then {_unit} else {cam_object}); //z offset
+	_offsetVector = [0,0.06,0.01];
+
+	_dir = if(_isArcadeMode) then
+	{
+		[0,0,0] getdir _cameraVector;
+	} else {
+		if (!_cam_isNewCamera) then {
+		[0,0,0] getdir (eyeDirection _unit);
+		} else {
+		[0,0,0] getdir (vectorDirVisual cam_object)
+		};
+	};
+
+
+	_pitch = (_cameraVector select 2) * 90;
+
+	//_cam_camshakeDir
+	//getMousePosition params ["_x","_y"];
+	_ref = (call vcom_getDisplay) getvariable "____zoneDragRef";
+	(if (_ref call isMouseInsideWidget && (count (vcom_observ_buttons select 0) > 0)) then {
+		_d = (_ref call getMousePositionInWidget) vectoradd [-50,-50];
+		prox_cam_vec_lastDirect = _d;
+		_d
+		//prox_cam_dragControl //todo fix cam rotator
+	} else {
+		//[0,0]
+		prox_cam_vec_lastDirect
+	}) params ["_x","_y"];
+	
+	MOD(_dir, + _x /100 * 250);
+	MOD(_pitch, - _y /100 * 250);
+
+	_vuz = cos _pitch;
+
+	_oldPos = if (!_cam_isNewCamera) then {
+		AGLToASL(_unit modelToWorldVisual ((_unit selectionPosition "head")vectoradd[-0.06,0.0,0.0889]))/*eyePos _unit*/
+		} else {
+			getPosASLVisual //cam_object
+			prox_firstPersonCamera
+		};
+
+	//_offsetVector = _offsetVector vectorAdd [0,0,0];
+	
+	_rvec = [ [(sin _dir) * _vuz,(cos _dir) * _vuz,sin _pitch], [0,0,_vuz] ];
+	_rpos = ((_oldPos) vectorAdd [
+		((_offsetVector select 0) * cos _dir) + ((_offsetVector select 1) * sin _dir),
+		(((_offsetVector select 1) * cos _dir) - (_offsetVector select 0) * sin _dir),
+		_offsetVector select 2
+		]);
+	
+	//save pos
+	_cam_renderPos = ASLToATL _rpos;
+	_cam_renderVec = _rvec;
+	//calculate mouse vector
+	_mousepos = screenToWorld getMousePosition;
+	_i = lineIntersectsSurfaces [_rpos,AGLToASL _mousepos,_unit,_lamp,true,5,"VIEW","NONE"];
+	
+	//мы получили вектор направления для мыши. Если луч не прокнул то 
+	_cam_renderVecMouse = [
+		if(count _i > 0)then {
+			vectorNormalized ((ASLToATL(_i select 0 select 0)) vectorDiff _cam_renderPos)
+		}else{
+			_rvec select 0
+		}
+		,
+		_rvec select 1
+	];
+	
+	_lamp setVectorDirAndUp _rvec;
+	_lamp setPosASL _rpos;
+}
+
 
 //загрузчик левой панели (трансформ, слоты и т.д.)
 function(prox_internal_loadLeftPanel)
@@ -515,6 +631,14 @@ function(prox_internal_loadBottomPanel)
 		prox_isTwoHanded = !prox_isTwoHanded;
 		call prox_syncAnim;
 		call prox_anim_loadHandWidgets;
+	}];
+	modvar(_ofsY) + _szPb;
+
+	//cam
+	_cam = [_d,BUTTON,[0,_ofsY,100,_szPb],_ctg] call createWidget;
+	_cam ctrlsettext "Камера";
+	_cam ctrlAddEventHandler ["MouseButtonUp",{
+		[!prox_isExternalCam] call prox_onChangedCameraMode;
 	}];
 	modvar(_ofsY) + _szPb;
 
