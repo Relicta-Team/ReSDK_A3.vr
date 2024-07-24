@@ -19,6 +19,29 @@ class(SmallGarbage) extends(Constructions)
 endclass
 
 editor_attribute("EditorGenerated")
+class(ConcreteGarbage) extends(SmallGarbage)
+	var(model,"ca\structures\ruins\rubble_concrete_03.p3d");
+	var(material,"MatBeton");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SheetMetalGarbage) extends(SmallGarbage)
+	var(model,"ca\structures\ruins\rubble_metal_plates_04.p3d");
+	var(material,"MatMetal");
+endclass
+
+editor_attribute("EditorGenerated")
+class(SheetMetalGarbage1) extends(SheetMetalGarbage)
+	var(model,"ca\structures\ruins\rubble_metal_plates_03.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(WoodenPlanksGarbage) extends(SmallGarbage)
+	var(model,"ca\structures\ruins\rubble_wood_02.p3d");
+	var(material,"MatWood");
+endclass
+
+editor_attribute("EditorGenerated")
 class(MediumBarrelGarbage) extends(SmallGarbage)
 	var(model,"ml_exodusnew\gryazooka_bochki.p3d");
 endclass

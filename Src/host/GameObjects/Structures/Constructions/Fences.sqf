@@ -62,6 +62,11 @@ class(WoodenSmallFence3) extends(WoodenSmallFence)
 endclass
 
 editor_attribute("EditorGenerated")
+class(WoodenSmallFence4) extends(WoodenSmallFence3)
+	var(model,"a3\props_f_enoch\infrastructure\traffic\woodenwindbreak_01_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(WoodenSmallFence2) extends(WoodenSmallFence)
 	var(model,"ml\ml_object_new\model_24\ykritie.p3d");
 endclass

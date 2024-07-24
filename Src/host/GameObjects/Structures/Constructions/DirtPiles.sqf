@@ -19,6 +19,11 @@ class(SmallDirtPile) extends(Constructions)
 endclass
 
 editor_attribute("EditorGenerated")
+class(MediumStonePile) extends(SmallDirtPile)
+	var(model,"ca\structures\ruins\rubble_rocks_01.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(SmallDirtLight) extends(SmallDirtPile)
 	var(model,"ml_shabut\nvprops\gryazyuka3.p3d");
 endclass

@@ -27,6 +27,11 @@ class(WoodPole) extends(SmallPole)
 endclass
 
 editor_attribute("EditorGenerated")
+class(WoodPole1) extends(WoodPole)
+	var(model,"a3\structures_f_exp\walls\polewalls\polewall_01_pole_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(WoodCross) extends(SmallPole)
 	var(name,"Крест");
 	var(desc,"Здесь людей вешают! И очень даже неплохо!");
@@ -70,10 +75,17 @@ class(SmallGrayPillar) extends(SmallPole)
 	var(model,"a3\structures_f_exp\walls\wired\wiredfence_01_pole_45_f.p3d");
 	var(name,"Маленький столб");
 endclass
+
 editor_attribute("EditorGenerated")
 class(ConcreteLongPole) extends(SmallPole)
 	var(model,"csa_constr\csa_obj\stolb_6m.p3d");
 endclass
+
+editor_attribute("EditorGenerated")
+class(ConcretePole) extends(ConcreteLongPole)
+	var(model,"ca\structures\wall\wall_indcnc_pole.p3d");
+endclass
+
 editor_attribute("EditorGenerated")
 class(MediumLightConcretePole) extends(ConcreteLongPole)
 	var(model,"a3\structures_f_argo\walls\city\wallcity_01_pillar_grey_f.p3d");

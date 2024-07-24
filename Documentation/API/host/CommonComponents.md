@@ -1250,31 +1250,6 @@ Description:
 - Param: _value
 
 File: [host\CommonComponents\ModelsPath.sqf at line 8](../../../Src/host/CommonComponents/ModelsPath.sqf#L8)
-## model_convertPithBankYawToVec
-
-Type: function
-
-Description: 
-
-
-File: [host\CommonComponents\ModelsPath.sqf at line 24](../../../Src/host/CommonComponents/ModelsPath.sqf#L24)
-## model_SetPitchBankYaw
-
-Type: function
-
-Description: 
-- Param: _object
-- Param: _data
-
-File: [host\CommonComponents\ModelsPath.sqf at line 63](../../../Src/host/CommonComponents/ModelsPath.sqf#L63)
-## model_getPitchBankYaw
-
-Type: function
-
-Description: 
-- Param: _vehicle
-
-File: [host\CommonComponents\ModelsPath.sqf at line 69](../../../Src/host/CommonComponents/ModelsPath.sqf#L69)
 ## model_debug_dumpAllModels
 
 Type: function
@@ -1284,7 +1259,34 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\ModelsPath.sqf at line 75](../../../Src/host/CommonComponents/ModelsPath.sqf#L75)
+File: [host\CommonComponents\ModelsPath.sqf at line 27](../../../Src/host/CommonComponents/ModelsPath.sqf#L27)
+# ModelTransform.hpp
+
+## model_convertPithBankYawToVec
+
+Type: function
+
+Description: 
+
+
+File: [host\CommonComponents\ModelTransform.hpp at line 6](../../../Src/host/CommonComponents/ModelTransform.hpp#L6)
+## model_SetPitchBankYaw
+
+Type: function
+
+Description: 
+- Param: _object
+- Param: _data
+
+File: [host\CommonComponents\ModelTransform.hpp at line 45](../../../Src/host/CommonComponents/ModelTransform.hpp#L45)
+## model_getPitchBankYaw
+
+Type: function
+
+Description: 
+- Param: _vehicle
+
+File: [host\CommonComponents\ModelTransform.hpp at line 51](../../../Src/host/CommonComponents/ModelTransform.hpp#L51)
 # Pencfg.sqf
 
 ## addtobj(model,soundpen,armpen)
