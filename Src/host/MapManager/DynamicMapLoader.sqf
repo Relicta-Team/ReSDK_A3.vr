@@ -84,7 +84,7 @@ dml_loadMap = {
 	};
 };
 
-VM_COMPILER_ADDFUNC_UNARY(LoadConfig,dml_internal_loadConfig);
+VM_COMPILER_ADDFUNC_UNARY(dml_internal_loadConfig,LoadConfig);
 
 //подготовка загрузочных инструкций
 dml_parseMap = {
