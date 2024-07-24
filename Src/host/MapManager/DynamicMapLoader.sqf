@@ -84,8 +84,10 @@ dml_loadMap = {
 	};
 };
 
-#ifndef __VM_VALIDATE
+#ifndef __GH_ACTION
+
 VM_COMPILER_ADDFUNC_UNARY(dml_internal_loadConfig,LoadConfig);
+
 #endif
 
 //подготовка загрузочных инструкций
