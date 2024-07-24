@@ -211,7 +211,7 @@ dml_internal_handleObj = {
 	};
 
 	private _instancer = dml_const_enum_instancerNames select ([_class,"",true,"getChunkType"] call oop_getFieldBaseValue);
-	assert_str(!isNullVar(_instancer));
+	assert_str(!isNullVar(_instancer),"Unknown chunk type for class " + _class);
 
 	private _counterNotNeedLvar = 0;
 	private _realocModel = "";

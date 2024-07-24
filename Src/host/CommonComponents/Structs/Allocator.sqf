@@ -36,7 +36,7 @@ struct(DefaultAllocator) base(IAllocator)
         params ["_ocount"];
         
         if !isNullVar(_ocount) then {
-            self setv(maxObjectCount);
+            self setv(maxObjectCount,_ocount);
         };
 
         self setv(mmr_pool,[]); //initialize storage
