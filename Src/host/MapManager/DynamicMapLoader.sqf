@@ -84,7 +84,7 @@ dml_loadMap = {
 	};
 };
 
-dml_internal_loadConfig = compile "loadConfig _this";
+VM_COMPILER_ADDFUNC_UNARY(LoadConfig,dml_internal_loadConfig);
 
 //подготовка загрузочных инструкций
 dml_parseMap = {
