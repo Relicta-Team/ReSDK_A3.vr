@@ -65,7 +65,7 @@ Replaced value:
 ```sqf
 (if (val < 10) then {"0" + str val} else {str val})
 ```
-File: [host\Database\SQLite\SQLite_functions.sqf at line 149](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L149)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 156](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L156)
 ## db_open
 
 Type: function
@@ -148,7 +148,7 @@ Type: function
 Description: versioning
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 115](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L115)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 122](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L122)
 ## db_getCommonVal
 
 Type: function
@@ -157,7 +157,7 @@ Description:
 - Param: _varName
 - Param: _returnType (optional, default "string")
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 122](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L122)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 129](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L129)
 ## db_setCommonVal
 
 Type: function
@@ -167,7 +167,7 @@ Description:
 - Param: _value
 - Param: _inString (optional, default true)
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 130](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L130)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 137](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L137)
 ## db_dateTimeFormatForComparsion
 
 Type: function
@@ -181,7 +181,7 @@ Description: Форматирует массив даты-времени в ст
 - Param: _s (optional, default 0)
 - Param: _ms (optional, default 0)
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 146](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L146)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 153](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L153)
 # SQLite_init.sqf
 
 ## db_version

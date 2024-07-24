@@ -22,7 +22,7 @@ Count modules: 31
  - [NOEngineClient](client//NOEngineClient.md) - 14 files
  - [OneSync](client//OneSync.md) - 5 files
  - [ParticleEngine](client//ParticleEngine.md) - 3 files
- - [ProxyItems](client//ProxyItems.md) - 5 files
+ - [ProxyItems](client//ProxyItems.md) - 8 files
  - [Rendering](client//Rendering.md) - 11 files
  - [SoundSystem](client//SoundSystem.md) - 6 files
  - [StaminaControl](client//StaminaControl.md) - 4 files
@@ -32,7 +32,7 @@ Count modules: 31
  - [VoiceSystem](client//VoiceSystem.md) - 12 files
  - [WidgetSystem](client//WidgetSystem.md) - 6 files
 # Side: host
-Count modules: 52
+Count modules: 53
  - [host](host//host.md) - 13 files
  - [AI](host//AI.md) - 1 files
  - [AmbientControl](host//AmbientControl.md) - 1 files
@@ -41,7 +41,7 @@ Count modules: 52
  - [Client](host//Client.md) - 3 files
  - [ClientManager](host//ClientManager.md) - 16 files
  - [CombatSystem](host//CombatSystem.md) - 13 files
- - [CommonComponents](host//CommonComponents.md) - 27 files
+ - [CommonComponents](host//CommonComponents.md) - 29 files
  - [CraftSystem](host//CraftSystem.md) - 5 files
  - [Curl](host//Curl.md) - 3 files
  - [Database](host//Database.md) - 4 files
@@ -56,7 +56,8 @@ Count modules: 52
  - [Gender](host//Gender.md) - 1 files
  - [GURPS](host//GURPS.md) - 3 files
  - [Logger](host//Logger.md) - 1 files
- - [MapManager](host//MapManager.md) - 12 files
+ - [LootSystem](host//LootSystem.md) - 2 files
+ - [MapManager](host//MapManager.md) - 13 files
  - [Materials](host//Materials.md) - 3 files
  - [MatterSystem](host//MatterSystem.md) - 11 files
  - [Medals](host//Medals.md) - 3 files
