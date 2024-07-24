@@ -62,6 +62,12 @@ call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
 //встраиваемые предварительные функции
 #include <..\host\precompiled.sqf>
 
+//структуры
+#define STRUCT_INIT_FUNCTIONS
+#include <..\host\struct.hpp>
+
+//структурная библиотека
+#include <..\host\CommonComponents\StructLib.sqf>
 
 //Отладчик
 #include <..\host\Tools\EditorWorkspaceDebug\InternalImpl.sqf>
@@ -79,6 +85,8 @@ call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
 	cba_common_waitUntilAndExecArray = [];
 };
 
+#include <..\host\CommonComponents\ModelTransform.hpp>
+
 //renode отладчик
 #include "..\host\ReNode\ReNode_debugger.sqf"
 
@@ -94,6 +102,8 @@ Editor_enableAutoloadGOLIB = true;
 //core
 componentInit(Core)
 #include "Core\Core_init.sqf"
+componentInit(Core_struct)
+#include "Core\Core_struct.sqf"
 componentInit(Core_fileWatcher)
 #include "Core\Core_fileWatcher.sqf"
 componentInit(Core_pathes)
