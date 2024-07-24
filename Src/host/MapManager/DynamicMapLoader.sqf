@@ -84,6 +84,8 @@ dml_loadMap = {
 	};
 };
 
+dml_internal_loadConfig = compile "loadConfig _this";
+
 //подготовка загрузочных инструкций
 dml_parseMap = {
 	params ["_mapPath"];
@@ -91,7 +93,7 @@ dml_parseMap = {
 
 	traceformat("Attempt load config %1",_mapPath);
 
-	private _cfg = loadConfig _mapPath;
+	private _cfg = _mapPath call dml_internal_loadConfig;
 	private _cfgMap = _cfg call dml_prepMapConfig;
 	private _bmap = struct_new(BinaryMapInstructions);
 

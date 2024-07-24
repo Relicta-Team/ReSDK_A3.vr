@@ -216,7 +216,7 @@ struct(LootItemTemplate)
 				self setv(countMin,_counter select 0);
 				self setv(counterMax,_counter select 1);
 			};
-			setLastError(format vec3("Cannot define count value %1 in %2",_counter arg _path));
+			setLastError(format vec2("Cannot define count value %1 in %2",_counter arg _path));
 		};
 	}
 
