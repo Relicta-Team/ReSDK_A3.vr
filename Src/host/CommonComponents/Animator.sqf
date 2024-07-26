@@ -21,6 +21,7 @@ addAnim("reshotks");
 addAnim("doorvlk1");
 addAnim("doorvlk2");
 addAnim("door_1_rot");
+addAnim("door_2_rot");
 addAnim("door_3_rot");
 
 //конвертор ассоциаций 
