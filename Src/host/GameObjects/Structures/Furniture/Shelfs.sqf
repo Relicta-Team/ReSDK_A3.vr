@@ -80,7 +80,6 @@ class(Shower) extends(Sink)
 	var(model,"ml\ml_object_new\model_05\dysh.p3d");
 	var(name,"Мытьё");
 	var(desc,"Так сделано" pcomma " что сверху течёт струя прямо на голову.");
-	var(desc,"Так сделано" pcomma " 
 endclass
 
 
