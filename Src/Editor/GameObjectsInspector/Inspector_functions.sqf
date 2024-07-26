@@ -857,7 +857,37 @@ function(inspector_menuLoad)
 				call (_wid getVariable "_onSync");
 			};
 		};
-
+		if (!golib_code_deprecatedWarnVisible) then {
+			golib_code_deprecatedWarnVisible = true;
+			["Компонент ECode является устаревшим и не должен быть использован на новых проектах карт"] call messageBox;
+		};
 		[_data getOrDefault ["code_onInit",""],_objWorld] call golib_code_open;		
 	} call _setOnPressCode;
+
+	//===============================new scripting tab===============================
+	[TEXT,[100,_optimalSizeH]] call _createElement; //name
+	[_wid,"<t align='left'>Скрипт объекта</t>"] call widgetSetText;
+
+	//edit scriptname
+	["RscEditReadOnly",[65,_optimalSizeH],5,false] call _createElement;
+	_input = _wid;
+	{
+
+	} call _setSyncValCode;
+
+	[BUTTON,[24,_optimalSizeH],72,true] call _createElement;
+	_wid ctrlSetText "Изменить";
+	_wid ctrlSetTooltip "ЛКМ - для открытия окна выбора класса\nПКМ - сброс";
+
+	//script params
+	[TEXT,[50,_optimalSizeH],0,false] call _createElement;
+	[_wid,format["<t align='left'>Параметры:</t>"]] call widgetSetText;
+	[INPUT,[30,_optimalSizeH],50,true] call _createElement;
+	//todo dynamic param count
+
+	[BUTTON,[50,_optimalSizeH],0,false] call _createElement;
+	_wid ctrlSetText "Добавить параметр";
+
+	[BUTTON,[50,_optimalSizeH],50,true] call _createElement;
+	_wid ctrlSetText "Удалить параметр";
 }

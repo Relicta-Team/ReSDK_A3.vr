@@ -18,7 +18,10 @@
 	mem "refname" getref
 
 */
-
+init_function(golib_code_initializer)
+{
+	golib_code_deprecatedWarnVisible = false;
+}
 function(golib_code_open)
 {
 	params ["_curInstructions","_contextObject"];
