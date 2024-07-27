@@ -55,19 +55,18 @@ nodeModule_setColorStyle("Function")
 nodeModule_popPath(1)
 nodeModule_addPath("Файлы")
 
-nodeModule_setColorStyle("Function")
+nodeModule_setColorStyle("PureFunction")
 nodeModule_setExecType("pure")
 ["fileExists","Файл существует","[@in.1] call fileExists_Node",
 	"string:Файл:Путь к файлу.",
-	"bool:Существует ли файл. Возвращает @[bool ИСТИНУ], если файл существует.", 
+	"bool:Существует:Существует ли файл. Возвращает @[bool ИСТИНУ], если файл существует.", 
 	"Проверяет существование файла."
-] reg_unary;
+] reg_unary
 
-nodeModule_setExecType("all")
-["fileLoad","Загрузить файл","private @genvar.out.2 = [@in.1,@in.2] call fileLoad_Node; @out.1",
+["fileLoad","Загрузить файл","[@in.1,@in.2] call fileLoad_Node",
 	"string:Файл:Путь к файлу.",
 	"bool:Препроцесс:Возвращает @[bool ИСТИНУ], если файл загружен."
 		opt "def=false:require=-1",
-	"string:Содержимое файла. Возвращает пустую строку, если файл не загружен.",
+	"string:Содержимое:Содержимое файла. Возвращает пустую строку, если файл не загружен.",
 	"Загружает файл в в переменную. Возвращает пустую строку, если файл не загружен."
-]
+] reg_binary
