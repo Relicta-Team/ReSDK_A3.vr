@@ -59,7 +59,8 @@ try:
         'src/host/ReNode/compiled/',
         'src/Editor/Bin/Maps/',
         'src/Editor/Bin/ProtoMap/',
-        'src/version.hpp'
+        'src/version.hpp',
+        'src/client/ProxyItems/RProx_cfg.h'
     ]
     
 

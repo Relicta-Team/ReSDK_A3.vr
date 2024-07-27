@@ -97,6 +97,8 @@ startUpdateParams(Core_invokeEvent,0,"onFrame");
 
 projectEditor_isCompileProcess = false;
 
+call struct_initialize;
+
 {
 	if (Core_catchedInitError) exitWith {};
 

@@ -61,6 +61,7 @@ if (Core_isFirstLoad) then {
 } foreach core_settings_list_default;
 
 removeAllMissionEventHandlers "ScriptError";
+removeAllMissionEventHandlers "Draw3d";
 
 removeAll3DENEventHandlers "OnMissionSave";
 removeAll3DENEventHandlers "OnMissionAutosave";
@@ -106,6 +107,7 @@ functions_list_init = [];
 Core_internal_map_events = createHashMapFromArray [
 	//Все необходимые события добавляются тут
 	//основной обработчик обновления каждого кадра
+	["onDraw",[]],
 	["onFrame",[]],
 	//visual event
 	["onDisplayOpen",[]],
@@ -129,6 +131,10 @@ Core_internal_map_events = createHashMapFromArray [
 
 	["onMouseAreaPressed",[]] //событие при отпускании мыши по зоне 52(MouseArea)
 ];
+
+addMissionEventHandler ["draw3D",{
+	["onDraw",[]] call Core_invokeEvent;
+}];
 
 function(compileEditorOnly)
 {

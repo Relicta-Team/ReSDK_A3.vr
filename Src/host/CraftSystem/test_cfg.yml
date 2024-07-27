@@ -1,0 +1,18 @@
+
+
+TestCraft:
+  name: test craft
+  type: recipe # can be: recipe | interactor
+  # inherit: BaseCraft
+  recipe:
+    makeon: cook | construct
+    result: GameObject
+  interactor:
+    on_item: Item
+    with_item: Knife
+    result: 
+      Item: Food
+      count: 1
+      
+
+  

@@ -5,6 +5,7 @@
 
 #include <..\..\..\engine.hpp>
 #include <..\..\..\oop.hpp>
+#include <..\..\..\text.hpp>
 #include <..\..\GameConstants.hpp>
 
 // Стеллажи

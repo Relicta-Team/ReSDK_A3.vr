@@ -74,6 +74,18 @@ Initial value:
 ["spine3","spine3","head","rightshoulder","spine3","head","lefthand","pelvis","righthand"]
 ```
 File: [client\ProxyItems\ProxyItems.sqf at line 12](../../../Src/client/ProxyItems/ProxyItems.sqf#L12)
+## proxIt_canUseRProx
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false // переопределяется если скомпилирован RProx
+```
+File: [client\ProxyItems\ProxyItems.sqf at line 14](../../../Src/client/ProxyItems/ProxyItems.sqf#L14)
 ## proxIt_prepName
 
 Type: function
@@ -81,7 +93,7 @@ Type: function
 Description: Подготавливает имя если указан класснейм
 - Param: _modelPath
 
-File: [client\ProxyItems\ProxyItems.sqf at line 15](../../../Src/client/ProxyItems/ProxyItems.sqf#L15)
+File: [client\ProxyItems\ProxyItems.sqf at line 17](../../../Src/client/ProxyItems/ProxyItems.sqf#L17)
 ## proxIt_updateModel
 
 Type: function
@@ -91,7 +103,7 @@ Description:
 - Param: _object
 - Param: _newselection
 
-File: [client\ProxyItems\ProxyItems.sqf at line 38](../../../Src/client/ProxyItems/ProxyItems.sqf#L38)
+File: [client\ProxyItems\ProxyItems.sqf at line 40](../../../Src/client/ProxyItems/ProxyItems.sqf#L40)
 ## proxIt_loadConfig
 
 Type: function
@@ -101,4 +113,116 @@ Description:
 - Param: _modelPathOrClass
 - Param: _selectionId
 
-File: [client\ProxyItems\ProxyItems.sqf at line 59](../../../Src/client/ProxyItems/ProxyItems.sqf#L59)
+File: [client\ProxyItems\ProxyItems.sqf at line 66](../../../Src/client/ProxyItems/ProxyItems.sqf#L66)
+# RProx.sqf
+
+## proxIt_canUseRProx
+
+Type: Variable
+
+Description: RProx is improvement proxy system for inventory slots
+
+
+Initial value:
+```sqf
+true //переопределение
+```
+File: [client\ProxyItems\RProx.sqf at line 15](../../../Src/client/ProxyItems/RProx.sqf#L15)
+## rprox_const_vec
+
+Type: Variable
+
+Description: переопределение
+
+
+Initial value:
+```sqf
+[0,0,0]
+```
+File: [client\ProxyItems\RProx.sqf at line 17](../../../Src/client/ProxyItems/RProx.sqf#L17)
+## rprox_const_vdu
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[rprox_const_vec,rprox_const_vec]
+```
+File: [client\ProxyItems\RProx.sqf at line 18](../../../Src/client/ProxyItems/RProx.sqf#L18)
+## rprox_const_selections
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+["spine3","spine3","head","rightshoulder","spine3","head","lefthand","pelvis","righthand"]
+```
+File: [client\ProxyItems\RProx.sqf at line 19](../../../Src/client/ProxyItems/RProx.sqf#L19)
+## rprox_map_configs
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //ключ - путь до модели (без префикса \), значение - карта селекшонов
+```
+File: [client\ProxyItems\RProx.sqf at line 21](../../../Src/client/ProxyItems/RProx.sqf#L21)
+## rprox_loadConfig
+
+Type: function
+
+Description: загрузка модели на моба. Возвращает приаттаченный объект, objNull если не удалось создать
+- Param: _mob
+- Param: _modelPathOrClass
+- Param: _selectionId
+
+File: [client\ProxyItems\RProx.sqf at line 24](../../../Src/client/ProxyItems/RProx.sqf#L24)
+## rprox_hasConfigForModel
+
+Type: function
+
+Description: 
+- Param: _modOrCfg
+
+File: [client\ProxyItems\RProx.sqf at line 69](../../../Src/client/ProxyItems/RProx.sqf#L69)
+## rprox_updateModel
+
+Type: function
+
+Description: 
+- Param: _mob
+- Param: _object
+- Param: _newselection
+
+File: [client\ProxyItems\RProx.sqf at line 78](../../../Src/client/ProxyItems/RProx.sqf#L78)
+## rprox_init
+
+Type: function
+
+Description: загрузчик конфигураций
+
+
+File: [client\ProxyItems\RProx.sqf at line 84](../../../Src/client/ProxyItems/RProx.sqf#L84)
+# RProx_def.h
+
+## cfg(path)
+
+Type: constant
+
+Description: 
+- Param: path
+
+Replaced value:
+```sqf
+;_mvdata = [ path ]; _rprox_preload pushBack _mvdata; _mvdata pushBack 
+```
+File: [client\ProxyItems\RProx_def.h at line 6](../../../Src/client/ProxyItems/RProx_def.h#L6)

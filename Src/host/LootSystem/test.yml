@@ -1,0 +1,20 @@
+
+TestLoot:
+  type: Loot # Все конфиги должны иметь тип
+  interface: true # интерфейсы только для заготовки шаблонов
+  inherit: BaseLoot # Опциональное наследование конфигурации.
+  name: some name # Описательное название конфигурации (опционально)
+  allowmaps: # попадание хотя бы под одну группу разрешает тип
+    - regex: \*Map[1-9] #regex like pattern
+    - name: TestMap #exact
+    - TestMap
+    - typeof: BaseMap #type inheritance check
+  #allowgamemodes: # не определенный тип снимает все ограничения
+  items:
+    Item:
+      name: Overriden name {i} # {i} - counter of created items
+      prob: 35
+      count: [1, 3] #ranged count
+    Key:
+      prob: 20
+      count: 4 #fixed count

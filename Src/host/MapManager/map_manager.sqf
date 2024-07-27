@@ -8,6 +8,7 @@
 #include <..\PointerSystem\pointers.hpp>
 #include <..\Networking\Network.hpp>
 #include "ObjectManager.sqf"
+#include "DynamicMapLoader.sqf"
 
 mapmanager_savemap = {
 

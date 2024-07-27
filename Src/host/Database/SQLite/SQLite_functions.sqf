@@ -106,7 +106,14 @@ db_query = {
 	};
 	#endif
 	["db::query() ret:%2-%3; req: %1",_request,_retTypes,_singleReturn] call logInfo;
-	private _q = parseSimpleArray((dbRequest ["query",[_request,_retTypes]])select 0);
+	private _resp = (dbRequest ["query",[_request,_retTypes]])select 0;
+	//QUERY_FATAL - on unhandled exception
+	if ("QUERY_FATAL" in _resp) exitWith {
+		["db::query(): Fatal query error: %1",_resp] call logInfo;
+		null //for skip any actions
+	};
+
+	private _q = parseSimpleArray(_resp);
 	if (_singleReturn) exitWith {_q select 0};
 	_q
 };

@@ -38,6 +38,7 @@ importClient("src\client\StaminaControl\Stamina_init.sqf"); cmplog("Stamina")//Ñ
 importClient("src\client\ParticleEngine\ParticleEngine.sqf"); cmplog("ParticleEngine")
 importClient("src\client\LightEngine\LightEngine.sqf"); cmplog("LightEngine")
 importClient("src\client\ProxyItems\ProxyItems.sqf"); cmplog("ProxIt")//proxypos of items
+importClient("src\client\ProxyItems\RProx.sqf"); cmplog("RProxExtension")//proxy system v2. !load only after proxit
 importClient("src\client\SyncMobData\SMD_init.sqf"); cmplog("SMD")//synced mobs
 importClient("src\client\NetDisplays\NetDisplays.sqf"); cmplog("NetDisplays")
 importClient("src\client\Hud\Hud_init.sqf"); cmplog("HUD")//ingame hud

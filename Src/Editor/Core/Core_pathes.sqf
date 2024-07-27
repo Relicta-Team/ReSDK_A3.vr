@@ -19,3 +19,6 @@ core_path_renode_folder = "ReNode";
 core_path_renode = core_path_renode_folder + "/ReNode.exe";
 core_path_renode_lib_obj = core_path_renode_folder + "/lib.obj";
 core_path_renode_lib_json = core_path_renode_folder + "/lib.json";
+
+
+core_path_proxyConfigs = "src\client\ProxyItems\RProx_cfg.h";

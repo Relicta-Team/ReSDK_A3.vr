@@ -32,3 +32,7 @@
 #include "ScriptedConfigs\SLIGHT_ATMOS_SMOKE_1.sqf"
 #include "ScriptedConfigs\SLIGHT_ATMOS_SMOKE_2.sqf"
 #include "ScriptedConfigs\SLIGHT_ATMOS_SMOKE_3.sqf"
+#include "ScriptedConfigs\SLIGHT_THEATRE_SCENE_MAIN.sqf"
+#include "ScriptedConfigs\SLIGHT_THEATRE_SCENE_AREA_MAIN.sqf"
+#include "ScriptedConfigs\SLIGHT_THEATRE_SCENE_STREETS.sqf"
+#include "ScriptedConfigs\SLIGHT_THEATRE_ROOM_GENERIC.sqf"
