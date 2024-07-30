@@ -2099,11 +2099,11 @@ region(Pulling functionality)
 		if (_dir!=DIR_FRONT) then {_ret = false};
 		if callFunc(_usr,isConnected) then {_ret = false};//сел - сброс
 		_stance = callFunc(_usr,getStance);
-		if callFunc(this,isItem) then {
+		//if callFunc(this,isItem) then {
 			if (_stance < STANCE_MIDDLE) then {_ret = false};
-		} else {
-			if (_stance != STANCE_UP) then {_ret = false};
-		};
+		//} else {
+		//	if (_stance != STANCE_UP) then {_ret = false};
+		//};
 		_ret
 	};
 	func(startPull)
@@ -2123,9 +2123,24 @@ region(Pulling functionality)
 		setSelf(__moverMob,_usr);
 
 		private _bbxDat = (core_modelBBX get (tolower getSelf(model)));
-		assert(!isNullVar(_bbxDat));
-		if isNullVar(_bbxDat) exitWith {};
-		private _bbxDatAll = (_bbxDat select 0) + (_bbxDat select 1) + [[0,0,0]];
+		
+		if isNullVar(_bbxDat) then {
+			_bbxDat = [[0,0,0],[0,0,0],0];
+		};
+
+		(_bbxDat select 0) params ["_x1","_y1","_z1"];
+		(_bbxDat select 1) params ["_x2","_y2","_z2"];
+		private _bbxDatAll = [
+			[0,0,0],
+			[_x1,_y1,_z1],
+			[_x1,_y1,_z2],
+			[_x1,_y2,_z1],
+			[_x1,_y2,_z2],
+			[_x2,_y1,_z1],
+			[_x2,_y1,_z2],
+			[_x2,_y2,_z1],
+			[_x2,_y2,_z2]
+		];
 		private _wobj = getSelf(loc);
 		private _srcPos = asltoatl getPosWorld _wobj;
 		private _vtarg = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
@@ -2143,7 +2158,7 @@ region(Pulling functionality)
 
 
 		#define async_delay_check_ 0.5
-		private _params = [this,_usr,_vtarg];
+		private _params = [this,_usr,_vtarg,_bbxDatAll];
 		
 		callFuncParams(_usr,syncSmdVar,"pull" arg [getSelf(pointer)]);
 
@@ -2152,20 +2167,51 @@ region(Pulling functionality)
 				private _tick = _this select 1;
 				if (tickTime < _tick) exitWith {false};
 				_this set [1,tickTime + async_delay_check_];
-				(_this select 0) params ['this',"_usr","_vtarg"];
+				(_this select 0) params ['this',"_usr","_vtarg","_bbxDatAll"];
 				private _isStop = false;
 
 				if isNullReference(_vtarg) exitWith {true};
-
+				private _oldpos = getposatl _vtarg;
+				_own = (_vtarg getvariable "_own");
+				private _modpos = ((getposatl _own) vectoradd (_vtarg getvariable "_offs"));
 				if !callSelfParams(_checkCanPullingConditions,_usr) then {
 					_isStop = true;
+				};
+
+				_intersectCount = 0;
+				_canmove = true;
+				private _its = null;
+				_upos = _own modelToWorld (_own selectionPosition "spine3");
+				{
+					_its = [
+						_upos,
+						_vtarg modelToWorld _x,
+						_vtarg,
+						_own
+					] call si_getIntersectData;
+					if !isNullReference(_its select 0) then {
+						private _itobj = _its select 0;
+						if equals(_itobj,_vtarg) exitWith {};
+						_itobj = [_itobj] call si_handleObjectReturnCheckVirtual;
+						if equals(_itobj,this) exitWith {};
+						traceformat("increment iobj: %1",_its select 0)
+						INC(_intersectCount);
+					};
+				} foreach _bbxDatAll;
+
+				traceformat("On intersection check result: %1",_intersectCount)
+				_canmove = _intersectCount <= 4;
+
+				if ((_oldpos distance (_modpos)) > 1.5) then {
+					_isStop = true;
+					callFuncParams(_usr,localSay,"Сорвалась хватка!");
 				};
 
 				//bbx checking
 
 				if (!_isStop) then {
-					private _oldpos = getposatl _vtarg;
-					_vtarg setposatl ((getposatl (_vtarg getvariable "_own")) vectoradd (_vtarg getvariable "_offs"));
+					if (!_canmove) exitWith {};
+					_vtarg setposatl _modpos;
 					private _newpos = getposatl _vtarg;
 
 					callFuncParams(this,setPos__,_newpos);
