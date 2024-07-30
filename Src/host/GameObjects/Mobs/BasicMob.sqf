@@ -784,7 +784,21 @@ region(Mob location info: position; direction; speed)
 		if (_dir > 45 && _dir <= 135) exitWith {DIR_RIGHT};
 		if (_dir > 135 && _dir <= 225) exitWith {DIR_BACK};
 		if (_dir > 225 && _dir <= 315) exitWith {DIR_LEFT};
-		errorformat("Unknown dir data %1",_dir);
+		DIR_FRONT
+	};
+
+	//inverted variant of getDirTo
+	func(getDirFrom)
+	{
+		objParams_1(_target);
+		private _obj = if (!isTypeOf(_target,Mob)) then {callFunc(_target,getBasicLoc)} else {getVar(_target,owner)};
+
+		private _dir = getSelf(owner) getRelDir _obj;
+
+		if (_dir > 315 || _dir <= 45) exitWith {DIR_FRONT};
+		if (_dir > 45 && _dir <= 135) exitWith {DIR_RIGHT};
+		if (_dir > 135 && _dir <= 225) exitWith {DIR_BACK};
+		if (_dir > 225 && _dir <= 315) exitWith {DIR_LEFT};
 		DIR_FRONT
 	};
 
