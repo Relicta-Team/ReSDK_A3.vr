@@ -31,6 +31,7 @@ smd_list_variables = [
 	["smd_attdam","onAttackOrDamage"], //срабатывает при атаке или получении урона
 	["smd_isStunned","onStun"], //обработчик стана
 	["smd_isGrabbed","onGrabbed"], //обработчик граба
+	["smd_pull","onPull"], //таскание предметов
 	["smd_visualStates","onVisualStates"], //визуалки (некроз, текущая кровь, горящий чел, марево)
 	["smd_visibility","onVisiblility"],
 	["smd_interp","onInterpolate"], //поднятие и положение предметов
@@ -547,6 +548,88 @@ smd_onGrabbed = {
 			};
 		};*/
 	};
+};
+
+smd_isPulling = {
+	params ["_mob"];
+	!isNull(_mob getvariable "__loc_pull_ptr");
+};
+
+smd_onPull = {
+	params ["_mob","_ctx"];
+	
+	private _syncWalk = {
+		//in pull mode we can only walking
+		if equals(_mob,player) then {
+			_mob call cd_fw_syncForceWalk;
+		};
+	};
+
+	if equals(_ctx,0) exitWith {
+		//stop grab
+		private _ptr = _mob getVariable "__loc_pull_ptr";
+		if isNullVar(_ptr) exitWith {};
+		[_ptr] call noe_client_resetObjectTransform;
+		_mob setVariable ["__loc_pull_ptr",null];
+		call _syncWalk;
+	};
+	_ctx params ["_ptr"];
+	private _pars = [_mob,_ptr];
+	_mob setVariable ["__loc_pull_ptr",_ptr];
+	call _syncWalk;
+
+	private _pdat = [_ptr,true] call noe_client_getOrignalObjectData;
+	_mob setVariable ["__loc_pull_lastpos",_pdat get "pos"];
+	_mob setVariable ["__loc_pull_newpos",_pdat get "pos"];
+	_mob setVariable ["__loc_pull_lastupd",tickTime];
+
+	startAsyncInvoke
+		{
+			params ["_pars","_tick"];
+			_pars params ["_mob","_ptr"];
+			private _obj = noe_client_allPointers get _ptr;
+			if isNullReference(_obj) exitWith {false};
+			private _pdat = [_ptr,true] call noe_client_getOrignalObjectData;
+			if isNullVar(_pdat) exitWith {false};
+			//pos, dir,vec
+			private _pos = _pdat get "pos";
+			private _dir = _pdat get "dir";
+			private _vec = _pdat get "vec";
+			/*
+				принцип работы:
+				1. берется последняя применённая позиция (по умолчанию - исходная)
+				2. интерполируется по времени от стартовой до новой. время интерполяции 0.5 (const)
+				3. при достижении лимита времени - позиция обновляется
+			*/
+			_lastSavedPos = _mob getVariable ["__loc_pull_lastpos",_pos];
+			_newSavedPos = _mob getVariable ["__loc_pull_newpos",_lastSavedPos];
+			_lastUpd = _mob getVariable "__loc_pull_lastupd";
+			_nextUpd = _lastUpd + 0.5;
+			//traceformat("pre %1; post %2",_lastSavedPos arg _pos)
+			_newpos = vectorLinearConversion [
+				_lastUpd,
+				_nextUpd,
+				tickTime,
+				_lastSavedPos select [0,3],
+				_newSavedPos select [0,3],
+				true//clamp value
+			];
+			_intv = linearConversion [_lastUpd,_nextUpd,tickTime,0,1,true];
+			traceformat("interp pull %1: %2; dist %3",_intv arg _nextUpd-tickTime arg (_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))))
+			if (count _pos > 3) then {_newpos pushBack (_pos select 3)};
+			if (tickTime >= _nextUpd) then {
+				//_this set [2,tickTime + 0.5];
+				_mob setVariable ["__loc_pull_lastpos",_newpos];
+				_mob setVariable ["__loc_pull_newpos",_pos];
+				_mob setVariable ["__loc_pull_lastupd",_nextUpd];
+			};
+			[_obj,"pos",_newpos] call noe_client_setObjectTransform;
+
+			isNull(_mob getVariable "__loc_pull_ptr");
+		},
+		{},
+		[_pars,tickTime]
+	endAsyncInvoke
 };
 
 //TODO replace to header
