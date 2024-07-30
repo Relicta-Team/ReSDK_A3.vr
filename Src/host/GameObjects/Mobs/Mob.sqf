@@ -175,6 +175,8 @@ class(Mob) extends(BasicMob)
 	//Объект сетевого дисплея для раздевания
 	editor_attribute("InternalImpl") autoref var(_internalEquipmentND,newParams(SystemInternalND,this));
 
+	editor_attribute("InternalImpl") autoref var(_internalDynamicND,newParams(SystemInternalDynamicND,this));
+
 	func(constructor)
 	{
 		objParams();

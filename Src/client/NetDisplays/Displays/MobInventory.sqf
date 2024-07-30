@@ -79,3 +79,46 @@ ND_INIT(MobInventory)
 	
 	
 ND_END
+
+ND_INIT(ObjectPull)
+	_ctg = if (isFirstLoad) then {
+		_sx = 40;
+		_sy = 40;
+		private _ctg = [thisDisplay,WIDGETGROUP,[50 - _sx/2,50-_sy/2,_sx,_sy]] call createWidget;
+		addSavedWdiget(_ctg);
+
+		_back = [thisDisplay,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
+		_back setBackgroundColor [0.3,0.3,0.3,0.5];
+
+		_closer = [thisDisplay,[0,90,100,10],_ctg] call nd_addClosingButton;
+		_closer ctrlSetText "Закрыть";
+
+		_ctgLeft = [thisDisplay,WIDGETGROUPSCROLLS,[0,0,100,90],_ctg] call createWidget;
+		addSavedWdiget(_ctgLeft);
+		
+		_ctgLeft
+	} else {
+		getSavedWidgets select 1
+	};
+	
+	call nd_cleanupData;
+	_sizeH = 20;
+	_par = [
+		["+Влево+",-5],
+		["Влево",-1],
+		["Вправо",1],
+		["+Вправо+",5]
+	];
+	_perbut = 100/4;
+	for "_i" from 0 to 3 do {
+		regNDWidget(BUTTON,vec4(_perbut * _i,_sizeH,_perbut,_sizeH),_ctg,null);
+		lastNDWidget ctrlSetText (_par select _i select 0);
+		lastNDWidget setvariable ["_rotval",(_par select _i select 1)];
+		lastNDWidget ctrlAddEventHandler ["MouseButtonUp",{
+			params ["_b"];
+			[["rot",_b getvariable ["_rotval",1]]] call nd_onPressButton;
+		}];
+	};
+	
+	
+ND_END

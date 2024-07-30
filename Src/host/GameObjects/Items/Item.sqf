@@ -1276,6 +1276,34 @@ class(SystemInternalND) extends(Item)
 endclass
 
 editor_attribute("HiddenClass")
+class(SystemInternalDynamicND) extends(SystemInternalND)
+	var(ptrval,"");
+	var(delegateNDInfo,null);
+	var(delegateNDInput,null);
+
+	func(getNDInfo) {
+		objParams();
+		this call getSelf(delegateNDInfo);
+	};
+
+	func(onHandleNDInput) {
+		objParams_2(_usr,_inp);
+		[this,_usr,_inp] call getSelf(delegateNDInput);
+	};
+
+	//getter_func(getNDPointer,getSelf(ptrval));
+	func(setNDOptions)
+	{
+		objParams_5(_ndname,_dist,_ptr,_ndinf,_ndinp);
+		setSelf(ndName,_ndname);
+		setSelf(ndInteractDistance,_dist);
+		setSelf(ptrval,_ptr);
+		setSelf(delegateNDInfo,_ndinf);
+		setSelf(delegateNDInput,_ndinp);
+	};
+endclass
+
+editor_attribute("HiddenClass")
 class(SystemMessageBoxND) extends(SystemInternalND)
 	
 	var(ndInteractDistance,2);

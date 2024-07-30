@@ -85,7 +85,7 @@ class(GameObject) extends(ManagedObject)
 	editor_attribute("Tooltip" arg "Модифицируемый метод получения описания")
 	getter_func(getDesc,if isNull(getSelf(desc)) then {""} else {getSelf(desc)});
 
-	verbListOverride("pull extinguish description mainact"); //список действий которые можно сделать с ЭТИМ объектом
+	verbListOverride("pull pulltransform extinguish description mainact"); //список действий которые можно сделать с ЭТИМ объектом
 
 	"
 		name:В мире
@@ -2151,7 +2151,9 @@ region(Pulling functionality)
 		_vtarg setvariable ["_srcPos",_srcPos];
 		_vtarg setvariable ["_own",_own];
 		_vtarg setvariable ["_offs",_offs];
-		
+		_vtarg setvariable ["_rot",0];
+		_vtarg setvariable ["_curRot",getDir _wobj];
+
 		_wobj setVariable ["__vtarg_pull",_vtarg];//creating reference
 		
 		_vtarg setposatl ((getposatl _own) vectoradd (_vtarg getvariable "_offs"));
@@ -2177,6 +2179,7 @@ region(Pulling functionality)
 				if !callSelfParams(_checkCanPullingConditions,_usr) then {
 					_isStop = true;
 				};
+
 
 				_intersectCount = 0;
 				_canmove = true;
@@ -2211,8 +2214,14 @@ region(Pulling functionality)
 
 				if (!_isStop) then {
 					if (!_canmove) exitWith {};
+
+					_vtarg setVariable ["_curRot",(_vtarg getVariable "_curRot") + (_vtarg getVariable "_rot")];
+					_vtarg setvariable ["_rot",0];
+
 					_vtarg setposatl _modpos;
 					private _newpos = getposatl _vtarg;
+					
+					getSelf(loc) setDir (_vtarg getVariable "_curRot");
 
 					callFuncParams(this,setPos__,_newpos);
 					if ((_oldpos distance _newpos) > 0.15) then {
@@ -2246,6 +2255,34 @@ region(Pulling functionality)
 		private _wobj = getSelf(loc);
 		private _vtarg = _wobj getVariable "__vtarg_pull";
 		deleteVehicle _vtarg;
+	};
+	func(openPullSettings)
+	{
+		objParams_1(_usr);
+		private _dynDisp = getVar(_usr,_internalDynamicND);
+
+		private _getInfo = {
+			private _p = getSelf(ptrval);
+			[_p]
+		};
+		private _handleInp = {
+			objParams_2(_usr,_inp);
+			
+			private _src = callFunc(_usr,getGrabbedInActiveHand);
+			if isNullReference(_src) exitWith {};
+			_inp params ["_mode","_val"];
+			if (_mode=="rot") exitWith {
+				private _rotval = 0.5 * _val;
+				_vtarg = getVar(_src,loc) getVariable "__vtarg_pull";
+				_curRot = (_vtarg getVariable "_rot")+_rotval;
+				_curRot = clampangle(_curRot,0,359);
+				_vtarg setVariable ["_rot",_curRot];
+			};
+		};
+
+		callFuncParams(_dynDisp,setNDOptions,"ObjectPull" arg 10 arg getSelf(pointer) arg _getInfo arg _handleInp);
+		
+		callFuncParams(_dynDisp,openNDisplayInternal,_usr arg getVar(_usr,owner));
 	};
 
 	// "

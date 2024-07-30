@@ -193,6 +193,12 @@ noe_client_setObjectTransform = {
 		};
 	};
 
+	if (_type=="dir") exitWith {
+		if equalTypes(_dir,0) then {
+			_obj setDir _dir;
+		};
+	};
+
 };
 
 //генерирует пакет который указывает на актуальность действия при коллбеке

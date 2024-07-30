@@ -147,6 +147,12 @@ VERB(pull)
 		callFuncParams(usr,startGrab,src);
 ENDVERB
 
+VERB(pulltransform)
+	cond
+	act
+		callFuncParams(src,openPullSettings,usr);
+ENDVERB
+
 VERB(craft)
 	cond
 		skipCond(!isTypeOf(usr,Mob));

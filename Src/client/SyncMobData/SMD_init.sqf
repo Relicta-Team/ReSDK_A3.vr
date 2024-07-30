@@ -581,6 +581,10 @@ smd_onPull = {
 	private _pdat = [_ptr,true] call noe_client_getOrignalObjectData;
 	_mob setVariable ["__loc_pull_lastpos",_pdat get "pos"];
 	_mob setVariable ["__loc_pull_newpos",_pdat get "pos"];
+	
+	_mob setVariable ["__loc_pull_lastdir",_pdat get "dir"];
+	_mob setVariable ["__loc_pull_newdir",_pdat get "dir"];
+
 	_mob setVariable ["__loc_pull_lastupd",tickTime];
 
 	startAsyncInvoke
@@ -614,16 +618,26 @@ smd_onPull = {
 				_newSavedPos select [0,3],
 				true//clamp value
 			];
-			_intv = linearConversion [_lastUpd,_nextUpd,tickTime,0,1,true];
-			traceformat("interp pull %1: %2; dist %3",_intv arg _nextUpd-tickTime arg (_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))))
+			_newdir = linearConversion [
+				_lastUpd,
+				_nextUpd,
+				tickTime,
+				_mob getVariable ["__loc_pull_lastdir",getDir _obj],
+				_mob getVariable ["__loc_pull_newdir",getDir _obj],
+				true];
+			//traceformat("interp pull %1: %2; dist %3",_intv arg _nextUpd-tickTime arg (_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))))
 			if (count _pos > 3) then {_newpos pushBack (_pos select 3)};
 			if (tickTime >= _nextUpd) then {
 				//_this set [2,tickTime + 0.5];
 				_mob setVariable ["__loc_pull_lastpos",_newpos];
 				_mob setVariable ["__loc_pull_newpos",_pos];
+
+				_mob setVariable ["__loc_pull_lastdir",_newdir];
+				_mob setVariable ["__loc_pull_newdir",_dir];
 				_mob setVariable ["__loc_pull_lastupd",_nextUpd];
 			};
 			[_obj,"pos",_newpos] call noe_client_setObjectTransform;
+			[_obj,"dir",_newdir] call noe_client_setObjectTransform;
 
 			isNull(_mob getVariable "__loc_pull_ptr");
 		},
