@@ -965,8 +965,10 @@ class(SystemHandItem) extends(SystemItem)
 		private _relDir = [0,0,1];
 		private _sidePos = ifcheck(getSelf(side)==SIDE_LEFT,vec3(-0.3,0.8,0),vec3(0.3,0.8,0));
 		private _canReattach = true;
+		private _isMob = callFunc(_obj,isMob);
+		private _itemDragModename = "grab";//todo -> ifcheck(_isMob,"grab","pull");
 
-		if callFunc(_obj,isMob) then {
+		if (_isMob) then {
 			
 			//если его хочет грабнуть кто-то другой то ...
 			//точнее если владелец
@@ -1021,10 +1023,16 @@ class(SystemHandItem) extends(SystemItem)
 			private _m = format["хватает %1 %2",[_tz,TARGET_ZONE_NAME_WHAT] call gurps_convertTargetZoneToString,callFuncParams(_obj,getNameEx,"кого")];
 			callFuncParams(getSelf(loc),meSay,_m);
 
+			callFuncParams(getSelf(loc),fastSendInfo,"cd_sp_grabbingMob" arg true);
+			callFuncParams(getSelf(loc),sendInfo,"spr_sync" arg []);
+
 		} else {
+			//non-mob
 			setSelf(object,_obj);
+			setSelf(weight,getVar(_obj,weight));//set weight for object
 			_worldObj = getVar(_obj,loc);
-			setSelf(attachedWeap,weaponModule(WeapHandyItem));
+			setSelf(attachedWeap,weaponModule(WeapHandyItem)); //todo change 
+			_canReattach = false;
 		};
 
 		if (_grabIsBlocked) exitWith {};
@@ -1041,16 +1049,19 @@ class(SystemHandItem) extends(SystemItem)
 
 		};
 
-		setSelf(mode,"grab");
+		setSelf(mode,_itemDragModename);
 
 		callFuncParams(getSelf(loc),addItem,this arg _slotTo);
+
+		if (!_isMob) then {
+			callFuncParams(_obj,startPull,getSelf(loc));
+		};
 	};
 
 	func(stopGrab)
 	{
 		objParams();
 
-		//TODO: разделение на моба и структуру
 		private _obj = getSelf(object);
 		setSelf(object,nullPtr);
 
@@ -1062,6 +1073,10 @@ class(SystemHandItem) extends(SystemItem)
 		private _isGrabOtherMob = !isNullReference(_otherObj) && {not_equals(_obj,_otherObj)};
 
 		callFuncParams(getSelf(loc),removeItem,this arg nullPtr);
+
+		if !callFunc(_obj,isMob) exitWith {
+			callFunc(_obj,stopPull);
+		};
 
 		private _mobObj = getVar(_obj,owner);
 		private _usrObj = getVar(getSelf(loc),owner);
@@ -1104,6 +1119,15 @@ class(SystemHandItem) extends(SystemItem)
 
 			callFuncParams(_obj,syncSmdVar,"isGrabbed" arg false);
 		};
+
+		
+		private _grabbedAnyMobs = (
+			{
+				(!isNullReference(_x) && {callFunc(getVar(_x,object),isMob)})
+			} count getVar(getSelf(loc),specHandAct)
+		) > 0;//no grabbed mobs now
+		callFuncParams(getSelf(loc),fastSendInfo,"cd_sp_grabbingMob" arg _grabbedAnyMobs);
+		callFuncParams(getSelf(loc),sendInfo,"spr_sync" arg []);
 
 	};
 

@@ -453,15 +453,15 @@ func(extraAction)
 		if equals(_targ,this) exitWith {
 			//нельзя себя таскать
 		};
-		if !callFunc(_targ,isMob) exitWith {
-			callSelfParams(localSay,"Лучше существо какое-нибудь потаскать." arg "error");
-		};
+		// if !callFunc(_targ,isMob) exitWith {
+		// 	callSelfParams(localSay,"Лучше существо какое-нибудь потаскать." arg "error");
+		// };
+		private _isMob = callFunc(_targ,isMob);
 		//связанного можно схватить сразу
-		if (callFunc(_targ,isHandcuffed) || getVar(_targ,stunned) >= 2) then {
+		if (_isMob && {callFunc(_targ,isHandcuffed) || getVar(_targ,stunned) >= 2}) then {
 			callSelfParams(onGrabImpl,_targ);
 		} else {
-			callSelfParams(meSay,"собирается схватить " + callFuncParams(_targ,getNameEx,"вин"));
-			callSelfParams(startProgress,_targ arg "caller.onGrabImpl" arg getSelf(rta)*1.2 arg INTERACT_PROGRESS_TYPE_FULL);
+			callSelfParams(startGrab,_targ);
 		};
 		//callSelfParams(onGrab,_targ);
 	};
@@ -682,15 +682,27 @@ region(Throwing)
 		private _speed = (sqrt(2* 9.81 * callFunc(_item,getWeight)))max rand(10,15);
 
 		//метание системного предмета
-		if (_isSystemItem && callFunc(_item,isGrabProcess)) exitWith {
-
+		private _throwsMob = false;
+		private _mobTarg = nullPtr;
+		if (_isSystemItem && callFunc(_item,isGrabProcess)) then {
+			
 			private _targ = getVar(_item,object);
+			
 			callFunc(_item,stopGrab);
+			
+			if callFunc(_targ,isMob) then {_throwsMob = true; _mobTarg = _targ;};
+
 			if callFunc(_targ,isGrabbed) then {
 				_item = getSelf(specHandAct) select sideToIndex(ifcheck(getVar(_item,side) == SIDE_LEFT,SIDE_RIGHT,SIDE_LEFT));
 				callFunc(_item,stopGrab);
 				//callSelfParams(localSay,"Метать нужно одной рукой." arg "error");
 			};
+			_item = _targ;
+			if (!_throwsMob) then {
+				callFunc(_item,unloadModel);
+			};
+		};
+		if (_throwsMob) exitWith {			
 			traceformat("SPEED WAS %1, THROW DISTANCE %2",_speed arg _throwDist)
 			private _dir = getDir getSelf(owner);
 			private _vel = [
@@ -700,7 +712,7 @@ region(Throwing)
 			];
 			_vel = (callSelf(getLastInteractVector) select 0) vectorMultiply (_speed * _throwDist);
 			traceformat("VELOCITY THROW: %1",_vel)
-			[getVar(_targ,owner),"setVelocity",[getVar(_targ,owner),_vel]] call repl_doLocal;
+			[getVar(_mobTarg,owner),"setVelocity",[getVar(_mobTarg,owner),_vel]] call repl_doLocal;
 		};
 
 		private _throwText = pick["метает","кидает","бросает","швыряет"];
@@ -934,26 +946,51 @@ region(Captives)
 		} foreach getSelf(specHandAct);
 	};
 
+	func(startGrab)
+	{
+		objParams_1(_targ);
+		private _isMob = callFunc(_targ,isMob);
+		private _namegrab = if (_isMob) then {
+			callFuncParams(_targ,getNameEx,"вин");
+		} else {
+			callFunc(_targ,getName);
+		};
+		if (!_isMob && {!callFunc(_targ,isMovable)}) exitWith {};//nonmob with movable-off
+		if (!_isMob && {!callFuncParams(_targ,_checkCanPullingConditions,this)}) exitWith {
+			callSelfParams(localSay,"Нельзя тащить это в таком положении." arg "error");
+		};
+		callSelfParams(meSay,"собирается схватить " + _namegrab);
+		callSelfParams(startProgress,_targ arg "caller.onGrabImpl" arg getSelf(rta)*1.2 arg INTERACT_PROGRESS_TYPE_FULL);
+	};
 
 	func(onGrabImpl)
 	{
 		objParams_1(_targ);
 		if isNullReference(_targ) exitWith {};
-		if (callSelfParams(getDistanceTo,_targ) >= 1.7) exitWith {
-			callSelfParams(localSay,"Далеко слишком." arg "error");
+		private _canAct = true;
+		if callFunc(_targ,isMob) then {
+			if (callSelfParams(getDistanceTo,_targ) >= 1.7) then {
+				//исправление, когда лежащих на втором ярусе кровати нельзя было достать
+				if !callFunc(_targ,isConnected) then {
+					callSelfParams(localSay,"Далеко слишком." arg "error");
+					_canAct = false;
+				};
+			};
 		};
-		callSelfParams(onGrab,_targ);
+		if (_canAct) then {
+			callSelfParams(onGrab,_targ);
+		};
 	};
 
 	func(onGrab)
 	{
 		objParams_2(_grabSrc,_slotTo);
-
+		
 		if isNullVar(_slotTo) then {_slotTo = getSelf(activeHand)};
 
-		if !callFunc(_grabSrc,isMob) exitWith {
-			callSelfParams(localSay,"Не могу это тащить." arg "error");
-		};
+		// if !callFunc(_grabSrc,isMob) exitWith {
+		// 	callSelfParams(localSay,"Не могу это тащить." arg "error");
+		// };
 
 		//self grab disabled
 		if equals(_grabSrc,this) exitWith {
@@ -967,9 +1004,12 @@ region(Captives)
 
 		private _sideIdx = sideToIndex(ifcheck(_slotTo==INV_HAND_L,SIDE_LEFT,SIDE_RIGHT));
 		private _itm = getSelf(specHandAct) select _sideIdx;
-		//Нельзя этой рукой грабнуть
-		if !callSelfParams(canSetItemOnSlot,_itm arg _slotTo) exitWith {};
+		
+		
 		if !callFunc(_itm,isGrabProcess) then {
+			//Нельзя этой рукой грабнуть
+			if !callSelfParams(canSetItemOnSlot,_itm arg _slotTo) exitWith {};
+
 			callFuncParams(_itm,startGrab,_grabSrc arg _slotTo);
 		} else {
 			callFunc(_itm,stopGrab);

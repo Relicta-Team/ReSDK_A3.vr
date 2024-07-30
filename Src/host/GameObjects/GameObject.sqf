@@ -9,6 +9,7 @@
 #include "..\struct.hpp"
 #include "GameConstants.hpp"
 #include "..\ServerRpc\serverRpc.hpp"
+#include "..\Networking\Network.hpp"
 #include <..\..\client\Inventory\inventory.hpp>
 #include <..\PointerSystem\pointers.hpp>
 
@@ -84,7 +85,7 @@ class(GameObject) extends(ManagedObject)
 	editor_attribute("Tooltip" arg "Модифицируемый метод получения описания")
 	getter_func(getDesc,if isNull(getSelf(desc)) then {""} else {getSelf(desc)});
 
-	verbListOverride("extinguish description mainact"); //список действий которые можно сделать с ЭТИМ объектом
+	verbListOverride("pull extinguish description mainact"); //список действий которые можно сделать с ЭТИМ объектом
 
 	"
 		name:В мире
@@ -178,7 +179,7 @@ class(GameObject) extends(ManagedObject)
 		desc:Возвращает @[bool ИСТИНУ], если игровой объект может светиться, используя конфиги освещения и частиц.
 		type:const
 		classprop:0
-		return:bool:Является ли объект дверью
+		return:bool:Является ли объект источником света
 	" node_met
 	getterconst_func(canLight,false); //является ли предмет источником света
 	"
@@ -194,7 +195,7 @@ class(GameObject) extends(ManagedObject)
 		desc:Возвращает @[bool ИСТИНУ], если игровой объект является хранилищем реагентов (например, бутыки, шприцы).
 		type:const
 		classprop:0
-		return:bool:Является ли объект дверью
+		return:bool:Является ли объект реагент-хранилищем
 	" node_met
 	getterconst_func(isReagentContainer,false); // реагент-контейнер
 	"
@@ -235,6 +236,10 @@ class(GameObject) extends(ManagedObject)
 	editor_attribute("EditorVisible" arg "custom_provider:weight")
 	editor_attribute("Tooltip" arg "Вес объекта в граммах или килограммах")
 	var(weight,gramm(1000));//вес в граммах
+
+	//перетаскивание
+	getter_func(isMovable,false); //объект движим
+	var(__moverMob,nullPtr);// кто двигает предмет
 
 	//рандомизатор веса
 	getterconst_func(canApplyWeightRandomize,false);
@@ -2074,6 +2079,127 @@ region(Fire functionality)
 		#else
 		setSelf(__s_nextCheckIgnite,tickTime + randInt(40,60*2));
 		#endif
+	};
+
+region(Pulling functionality)
+	func(playPullSound)
+	{
+		objParams();
+		private _mat = callSelf(getMaterial);
+		if isNullReference(_mat) exitWith {};
+		private _snd = callFunc(_mat,getPullSound);
+		if (_snd == "") exitWith {};
+		callSelfParams(playSound,_snd arg getRandomPitchInRange(0.5,1.1) arg 8);
+	};
+	func(_checkCanPullingConditions)
+	{
+		objParams_1(_usr);
+		private _ret = true;
+		private _dir = callFuncParams(_usr,getDirFrom,this);
+		if (_dir!=DIR_FRONT) then {_ret = false};
+		if callFunc(_usr,isConnected) then {_ret = false};//сел - сброс
+		_stance = callFunc(_usr,getStance);
+		if callFunc(this,isItem) then {
+			if (_stance < STANCE_MIDDLE) then {_ret = false};
+		} else {
+			if (_stance != STANCE_UP) then {_ret = false};
+		};
+		_ret
+	};
+	func(startPull)
+	{
+		objParams_1(_usr);
+		if !callSelf(isMovable) exitWith {};
+		if !callSelf(isInWorld) exitWith {};
+		if !callSelfParams(_checkCanPullingConditions,_usr) exitWith {};
+		if !isNullReference(getSelf(__moverMob)) exitWith {};
+		// if not_equals(callFunc(_usr,getLastInteractTarget),this) exitWith {};//не установлена актуальная цель движения
+		// #ifdef EDITOR
+		// callFunc(_usr,generateLastInteractOnServer);
+		// #endif
+		// private _startPoint = callFunc(_usr,getLastInteractEndPos);
+		//todo горящие чанки объекта не позволят двигать его
+		
+		setSelf(__moverMob,_usr);
+
+		private _bbxDat = (core_modelBBX get (tolower getSelf(model)));
+		assert(!isNullVar(_bbxDat));
+		if isNullVar(_bbxDat) exitWith {};
+		private _bbxDatAll = (_bbxDat select 0) + (_bbxDat select 1) + [[0,0,0]];
+		private _wobj = getSelf(loc);
+		private _srcPos = asltoatl getPosWorld _wobj;
+		private _vtarg = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
+		private _own = getVar(_usr,owner);
+		private _offs = 
+			//_own worldToModel (getposatl _wobj);
+			(getposatl _wobj) vectorDiff (getposatl _own);
+		_vtarg setvariable ["_srcPos",_srcPos];
+		_vtarg setvariable ["_own",_own];
+		_vtarg setvariable ["_offs",_offs];
+		
+		_wobj setVariable ["__vtarg_pull",_vtarg];//creating reference
+		
+		_vtarg setposatl ((getposatl _own) vectoradd (_vtarg getvariable "_offs"));
+
+
+		#define async_delay_check_ 0.5
+		private _params = [this,_usr,_vtarg];
+		
+		callFuncParams(_usr,syncSmdVar,"pull" arg [getSelf(pointer)]);
+
+		startAsyncInvoke
+			{
+				private _tick = _this select 1;
+				if (tickTime < _tick) exitWith {false};
+				_this set [1,tickTime + async_delay_check_];
+				(_this select 0) params ['this',"_usr","_vtarg"];
+				private _isStop = false;
+
+				if isNullReference(_vtarg) exitWith {true};
+
+				if !callSelfParams(_checkCanPullingConditions,_usr) then {
+					_isStop = true;
+				};
+
+				//bbx checking
+
+				if (!_isStop) then {
+					private _oldpos = getposatl _vtarg;
+					_vtarg setposatl ((getposatl (_vtarg getvariable "_own")) vectoradd (_vtarg getvariable "_offs"));
+					private _newpos = getposatl _vtarg;
+
+					callFuncParams(this,setPos__,_newpos);
+					if ((_oldpos distance _newpos) > 0.15) then {
+						callFunc(this,playPullSound);
+					};
+				};
+
+				_isStop;
+			},
+			{
+				(_this select 0) params ['this',"_usr","_vtarg"];
+				//callFunc(this,stopPull);
+				traceformat("PULLING TRIGGER STOPPED %1",_vtarg)
+				if !isNullReference(_vtarg) then {
+					callFuncParams(_usr,onGrab,this);
+				};
+			},
+			[_params,tickTime + async_delay_check_]
+		endAsyncInvoke
+
+		#undef async_delay_check_
+	};
+	func(stopPull)
+	{
+		objParams();
+		private _usr = getSelf(__moverMob);
+		if isNullReference(_usr) exitWith {};
+		callFuncParams(_usr,syncSmdVar,"pull" arg 0);
+		setSelf(__moverMob,nullPtr);
+
+		private _wobj = getSelf(loc);
+		private _vtarg = _wobj getVariable "__vtarg_pull";
+		deleteVehicle _vtarg;
 	};
 
 	// "

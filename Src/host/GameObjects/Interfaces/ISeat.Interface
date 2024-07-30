@@ -158,6 +158,8 @@ var(seatListOwners,[nullPtr]);
 //это ссылка на объекты-заглушки для репликации
 var(_seatListDummy,[objNUll]);
 
+getter_func(isMovable,(getSelf(seatListOwners) findif {!isNullReference(_x)})==-1 );
+
 //название мест (нужно дописать логику)
 getter_func(seatListName,["Сиденье"]);
 

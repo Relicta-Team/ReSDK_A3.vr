@@ -30,8 +30,9 @@ cd_fw_syncForceWalk = {
 //sprint sync
 cd_sp_enabled = true;
 cd_sp_lockedSetting = false;
+cd_sp_grabbingMob = false;
 cd_sp_canSprint = {
-	cd_sp_enabled && !cd_sp_lockedSetting
+	cd_sp_enabled && !cd_sp_lockedSetting && !cd_sp_grabbingMob
 };
 _spr_sync = {
 	player allowSprint (call cd_sp_canSprint)

@@ -138,6 +138,15 @@ VERB(extinguish)
 		};
 ENDVERB
 
+VERB(pull)
+	cond
+		skipCond(!isTypeOf(usr,Mob));
+		skipCond(isTypeOf(src,BasicMob));
+		skipCond(!callFunc(src,isMovable));
+	act
+		callFuncParams(usr,startGrab,src);
+ENDVERB
+
 VERB(craft)
 	cond
 		skipCond(!isTypeOf(usr,Mob));
