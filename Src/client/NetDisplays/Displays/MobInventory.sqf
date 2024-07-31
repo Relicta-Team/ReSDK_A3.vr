@@ -82,43 +82,64 @@ ND_END
 
 ND_INIT(ObjectPull)
 	_ctg = if (isFirstLoad) then {
-		_sx = 40;
-		_sy = 40;
-		private _ctg = [thisDisplay,WIDGETGROUP,[50 - _sx/2,50-_sy/2,_sx,_sy]] call createWidget;
-		addSavedWdiget(_ctg);
+		
+		private _offsH = 10;
+		private _header = [thisDisplay,TEXT,vec4(0,0,90,_offsH)] call createWidget;
+		[_header,"<t align='center'>Зажмите ЛКМ для вращения, скролл для подъема, опускания</t>"] call widgetSetText;
+		addSavedWdiget(_header);
 
-		_back = [thisDisplay,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
-		_back setBackgroundColor [0.3,0.3,0.3,0.5];
-
-		_closer = [thisDisplay,[0,90,100,10],_ctg] call nd_addClosingButton;
+		_closer = [thisDisplay,[90,0,100-90,_offsH],_ctg] call nd_addClosingButton;
 		_closer ctrlSetText "Закрыть";
 
-		_ctgLeft = [thisDisplay,WIDGETGROUPSCROLLS,[0,0,100,90],_ctg] call createWidget;
-		addSavedWdiget(_ctgLeft);
+		//full-sized
+		private _back = [thisDisplay,BACKGROUND,vec4(0,0,100,100),_ctg] call createWidget;
+		_back ctrlEnable true;
+		_back ctrlShow true;
+		addSavedWdiget(_back);
+
+		//initialize variables
+		_back setVariable ["_tranform_vec",[0,0,0]];
+		_back setVariable ["_ch_vec",[0,0,0]];
+		_back setVariable ["_transform_zpos",0];
+		_back setVariable ["_ch_zpos",0];
+		_back setVariable ["_isPressed",false];
 		
-		_ctgLeft
+		lastNDWidget ctrlAddEventHandler ["MouseButtonDown",{
+			params ["_w","_b"];
+			_w setVariable ["_isPressed",true];
+		}];
+		lastNDWidget ctrlAddEventHandler ["MouseButtonUp",{
+			params ["_w","_b"];
+			_w setVariable ["_isPressed",true];
+			//save transform
+			private _transform = _w getVariable ["_ch_vec",vec3(0,0,0)];
+			_w setvariable ["_tranform_vec",_transform];
+			
+			//send new transform
+			[["vupd",_transform]]call nd_onPressButton;
+		}];
+		lastNDWidget ctrlAddEventHandler ["MouseMoving",{
+			params ["_w","_xabs","_yabs"];
+			if (_w getVariable ["_isPressed",false]) then {
+				(call mouseGetPosition) params ["_x","_y"];
+				//x - 2
+				//y - 0
+				_xnorm = linearConversion [0,100,_x,-180,180,true];
+				_ynorm = linearConversion [0,100,_y,-180,180,true];
+				_oldVec = _w getVariable ["_tranform_vec",vec3(0,0,0)];
+				_newvec = [(_oldVec select 0) + (_ynorm),(_oldVec select 1),(_oldVec select 2) + (_xnorm)];
+				_w setvariable ["_ch_vec",_newvec];
+			};
+		}];
+		lastNDWidget ctrlAddEventHandler ["MouseZChanged",{
+			params ["_w","_val"];
+		}];
+
+		_back
 	} else {
 		getSavedWidgets select 1
 	};
 	
-	call nd_cleanupData;
-	_sizeH = 20;
-	_par = [
-		["+Влево+",-5],
-		["Влево",-1],
-		["Вправо",1],
-		["+Вправо+",5]
-	];
-	_perbut = 100/4;
-	for "_i" from 0 to 3 do {
-		regNDWidget(BUTTON,vec4(_perbut * _i,_sizeH,_perbut,_sizeH),_ctg,null);
-		lastNDWidget ctrlSetText (_par select _i select 0);
-		lastNDWidget setvariable ["_rotval",(_par select _i select 1)];
-		lastNDWidget ctrlAddEventHandler ["MouseButtonUp",{
-			params ["_b"];
-			[["rot",_b getvariable ["_rotval",1]]] call nd_onPressButton;
-		}];
-	};
-	
+	call nd_cleanupData;	
 	
 ND_END

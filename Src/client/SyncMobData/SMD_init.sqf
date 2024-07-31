@@ -573,6 +573,11 @@ smd_onPull = {
 		_mob setVariable ["__loc_pull_ptr",null];
 		call _syncWalk;
 	};
+	if (equalTypes(_ctx,"") && {[_ctx,"helper+"] call stringStartWith}) exitWith {
+		_mob setVariable ["__loc_pull_ptr",_ctx];
+		call _syncWalk;
+	};
+
 	_ctx params ["_ptr"];
 	private _pars = [_mob,_ptr];
 	_mob setVariable ["__loc_pull_ptr",_ptr];

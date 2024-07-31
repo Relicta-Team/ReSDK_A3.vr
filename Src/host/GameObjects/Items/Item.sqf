@@ -1075,7 +1075,7 @@ class(SystemHandItem) extends(SystemItem)
 		callFuncParams(getSelf(loc),removeItem,this arg nullPtr);
 
 		if !callFunc(_obj,isMob) exitWith {
-			callFunc(_obj,stopPull);
+			callFuncParams(_obj,stopPull,getSelf(loc));
 		};
 
 		private _mobObj = getVar(_obj,owner);
@@ -1280,6 +1280,7 @@ class(SystemInternalDynamicND) extends(SystemInternalND)
 	var(ptrval,"");
 	var(delegateNDInfo,null);
 	var(delegateNDInput,null);
+	var(context,null);
 
 	func(getNDInfo) {
 		objParams();
@@ -1294,12 +1295,13 @@ class(SystemInternalDynamicND) extends(SystemInternalND)
 	//getter_func(getNDPointer,getSelf(ptrval));
 	func(setNDOptions)
 	{
-		objParams_5(_ndname,_dist,_ptr,_ndinf,_ndinp);
+		objParams_6(_ndname,_dist,_ptr,_ndinf,_ndinp,_context);
 		setSelf(ndName,_ndname);
 		setSelf(ndInteractDistance,_dist);
 		setSelf(ptrval,_ptr);
 		setSelf(delegateNDInfo,_ndinf);
 		setSelf(delegateNDInput,_ndinp);
+		setSelf(context,_context);
 	};
 endclass
 
