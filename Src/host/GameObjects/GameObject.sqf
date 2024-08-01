@@ -1465,6 +1465,7 @@ class(IDestructible) extends(GameObject)
 		callSelf(replicateObject);
 	};
 
+	//todo optimize transport (from replicateObject to replicateTransform)
 	func(setTransform)
 	{
 		objParams_2(_p,_rot);
@@ -2214,10 +2215,12 @@ region(Pulling functionality)
 			_newvtarg setvariable ["_own",_own];
 			_newvtarg setvariable ["_offs",_offs];
 
-			_newvtarg setvariable ["_rot",[0,0,0]];//offset vector transform
-			_newvtarg setvariable ["_curRot",[_wobj] call model_getPitchBankYaw]; //current vector transform
+			private _rotDefault = [_wobj] call model_getPitchBankYaw;
+			_newvtarg setvariable ["_rot",_rotDefault];//offset vector transform
+			_newvtarg setvariable ["_curRot",_rotDefault]; //current vector transform
 			_newvtarg setvariable ["_zpos",0]; //offset z-axis
 			_newvtarg setvariable ["_curZPos",0]; //current offset z-axis
+			_newvtarg setvariable ["_lastpos",[0,0,0]];
 
 			_wobj setVariable ["__vtarg_pull",_newvtarg];//creating reference
 			
@@ -2266,13 +2269,21 @@ region(Pulling functionality)
 				private _isMainOwner = equals(callSelf(getPullMainOwner),_usr);
 				private _canmove = true;
 				private _oldpos = getposatl _vtarg;
-
 				private _modpos = ((getposatl _own) vectoradd _offs);
+				
+				private _newtempPos = _vtarg getvariable "_zpos";
+				private _newtempVec = _vtarg getvariable "_rot";
+
 				if !callSelfParams(_checkCanPullingConditions,_usr) then {
 					_isStop = true;
 				};
 
 				if (_isMainOwner) then {
+					
+					//apply vtarg temp transform
+					_vtarg setPosATL _newtempPos;
+					[_vtarg,_newtempVec] call model_SetPitchBankYaw;
+
 					_intersectCount = 0;
 					private _its = null;
 					_upos = _own modelToWorld (_own selectionPosition "spine3");
@@ -2306,18 +2317,19 @@ region(Pulling functionality)
 
 				if (!_isStop) then {
 					if (!_isMainOwner) exitWith {};
-					if (!_canmove) exitWith {};
+					if (!_canmove) exitWith {
+						//reset position
+						_vtarg setPosAtl (_oldpos);
+						[_vtarg,_vtarg getVariable ["_curRot"]] call model_SetPitchBankYaw;
+					};
+					//save positions
+					_vtarg setVariable ["_curRot",_newtempVec];
+					_vtarg setVariable ["_curZPos",_newtempPos];
+					private _newPos = _modpos vectorAdd [0,0,_curZPos];
 
-					//TODO use model_ funcs
-					// _vtarg setVariable ["_curRot",(_vtarg getVariable "_curRot") + (_vtarg getVariable "_rot")];
-					// _vtarg setvariable ["_rot",0];
+					//update location transform
+					callSelfParams(setTransform,_newPos arg _newtempVec);
 
-					_vtarg setposatl _modpos;
-					private _newpos = getposatl _vtarg;
-					
-					getSelf(loc) setDir (_vtarg getVariable "_curRot");
-
-					callFuncParams(this,setPos__,_newpos);
 					if ((_oldpos distance _newpos) > 0.15) then {
 						callFunc(this,playPullSound);
 					};

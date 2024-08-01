@@ -42,6 +42,41 @@ model_convertPithBankYawToVec = {
 	[[_dirX,_dirY,_dirZ],[_upX,_upY,_upZ]];
 };
 
+//todo replace model_convertPithBankYawToVec with this
+//optimized variant;
+model_cnvPBYToVec_v2 = {
+	params ["_aroundX","_aroundY","_aroundZ"];
+	_aroundZ = (360 - _aroundZ) - 360;
+	private _dirX = 0;
+	private _dirY = 1;
+	private _dirZ = 0;
+	private _upX = 0;
+	private _upY = 0;
+	private _upZ = 1;
+	if (_aroundX != 0) then { 
+		_dirY = cos _aroundX;
+		_dirZ = sin _aroundX;
+		_upY = -sin _aroundX;
+		_upZ = cos _aroundX;
+	};
+	if (_aroundY != 0) then { 
+		_dirX = _dirZ * sin _aroundY;
+		_dirZ = _dirZ * cos _aroundY;
+		_upX = _upZ * sin _aroundY;
+		_upZ = _upZ * cos _aroundY;
+	};
+	if (_aroundZ != 0) then { 
+		private _dirXTemp = _dirX;
+		_dirX = (_dirXTemp* cos _aroundZ) - (_dirY * sin _aroundZ);
+		_dirY = (_dirY * cos _aroundZ) + (_dirXTemp * sin _aroundZ);
+		private _upXTemp = _upX;
+		_upX = (_upXTemp * cos _aroundZ) - (_upY * sin _aroundZ);
+		_upY = (_upY * cos _aroundZ) + (_upXTemp * sin _aroundZ);
+	};
+	
+	[[_dirX,_dirY,_dirZ],[_upX,_upY,_upZ]];
+};
+
 model_SetPitchBankYaw = {
 	params ["_object","_data"];
 	(_data call model_convertPithBankYawToVec) params ["_dir","_up"];
