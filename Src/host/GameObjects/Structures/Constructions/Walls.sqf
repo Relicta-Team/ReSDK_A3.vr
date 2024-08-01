@@ -96,6 +96,11 @@ class(MediumWhiteConcreteWall) extends(SmallWall)
 endclass
 
 editor_attribute("EditorGenerated")
+class(SmallWhiteConcreteWall) extends(MediumWhiteConcreteWall)
+	var(model,"a3\structures_f_argo\walls\city\wallcity_01_4m_plain_whiteblue_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(MediumWoodenWall) extends(SmallWall)
 	var(model,"ml_shabut\sbs\woodstenka.p3d");
 	var(name,"Стена");

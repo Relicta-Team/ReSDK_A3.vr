@@ -13,6 +13,21 @@ class(SmallDecorations) extends(StructureBasicCategory) endclass
 
 //мусорки < container
 
+//Предметы интерьера, украшения
+editor_attribute("InterfaceClass")
+editor_attribute("TemplatePrefab")
+class(InterierProp) extends(SmallDecorations) 
+	var(name,"Предмет интерьера");
+	editor_only(var(desc,"Различные украшения интерьера");)
+	var(material,"MatGlass");
+endclass
+
+class(Vase) extends(InterierProp) 
+	var(name,"Великолепная ваза");
+	var(desc,"Потрясающее изделие невиданной красоты");
+	var(model,"relicta_models\models\interier\props\treasure\vase\vase.p3d");
+endclass
+
 //картины
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
@@ -251,6 +266,11 @@ endclass
 editor_attribute("EditorGenerated")
 class(Statue) extends(MonumentBase)
 	var(model,"relicta_models\models\nocategory\savin\savin.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(Pedestal) extends(Statue)
+	var(model,"a3\structures_f_argo\cultural\statues\pedestal_01_f.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
