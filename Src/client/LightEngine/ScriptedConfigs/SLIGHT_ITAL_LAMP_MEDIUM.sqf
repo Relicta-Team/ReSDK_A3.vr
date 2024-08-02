@@ -11,12 +11,12 @@ regScriptEmit(SLIGHT_ITAL_LAMP_MEDIUM)
 		["linkToSrc",[0,0,-0.15]],
 		["setOrient",[0,-90,0]],
 		["setLightColor",[0.74,0.71,0.68]],
-		["setLightAmbient",[0.81,0.79,0.7]],
-		["setLightIntensity",3500],
+		["setLightAmbient",[0.1,0.1,0.05]],
+		["setLightIntensity",400],
 		["setLightUseFlare",true],
 		["setLightFlareSize",0.2],
-		["setLightFlareMaxDistance",100],
-		["setLightAttenuation",[0,0,0,0,0.01,10]],
-		["setLightConePars",[230,0,4]]
+		["setLightFlareMaxDistance",30.13],
+		["setLightAttenuation",[1,0,0,0,0.01,14]],
+		["setLightConePars",[230,180,4]]
 	]
 endScriptEmit
