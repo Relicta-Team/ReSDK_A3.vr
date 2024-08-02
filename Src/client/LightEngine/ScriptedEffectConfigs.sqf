@@ -36,3 +36,7 @@
 #include "ScriptedConfigs\SLIGHT_THEATRE_SCENE_AREA_MAIN.sqf"
 #include "ScriptedConfigs\SLIGHT_THEATRE_SCENE_STREETS.sqf"
 #include "ScriptedConfigs\SLIGHT_THEATRE_ROOM_GENERIC.sqf"
+#include "ScriptedConfigs\SLIGHT_STREET_LAMP_ITAL.sqf"
+#include "ScriptedConfigs\SLIGHT_LIGHT_ITAL_DALEKO.sqf"
+#include "ScriptedConfigs\SLIGHT_ITAL_LAMP_STRONG.sqf"
+#include "ScriptedConfigs\SLIGHT_ITAL_LAMP_MEDIUM.sqf"
