@@ -1486,6 +1486,7 @@ class(IDestructible) extends(GameObject)
 					_posworld = true;
 				};
 				_wobj setVariable ["vidr",true];
+				_wobj setvectordirandup _rot;
 			};
 		};
 
