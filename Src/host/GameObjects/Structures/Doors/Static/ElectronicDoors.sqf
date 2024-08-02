@@ -102,7 +102,7 @@ endclass
 class(CurtainElectronic) extends(ElectronicDeviceDoor)
 	var(name,"Занавес");
 	var(model,"ml\ml_object_new\shabbat\shtora_centr.p3d");
-	getter_func(animateData,[vec3(0,0,3.7) arg 0]);
+	getter_func(animateData,[vec3(0,0,2.3) arg 0]);
 	getterconst_func(interpSpeed,4.5);
 	var(material,"MatCloth");
 
