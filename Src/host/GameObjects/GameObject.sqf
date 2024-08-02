@@ -1602,7 +1602,7 @@ class(IDestructible) extends(GameObject)
 		_countConnections <= 3//8=>примерно треть для устойчивости объекта
 	};
 
-	getter_func(isMovable,isTypeOf(this,IStruct) || isTypeOf(this,Item));
+	getter_func(isMovable,false);
 
 	//all info for this system in baisc set: B 557
 	//Повреждения оружия на B 485

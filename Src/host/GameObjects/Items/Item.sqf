@@ -45,6 +45,8 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 
 	getterconst_func(isRadio,false);
 
+	getter_func(isMovable,true);
+
 	getterconst_func(canPickup,true); //можно ли поднять предмет
 	editor_attribute("EditorVisible" arg "custom_provider:allowedSlots") editor_attribute("Tooltip" arg "В какие слоты может быть назначен предмет")
 	var_array(allowedSlots);

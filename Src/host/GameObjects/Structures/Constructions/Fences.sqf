@@ -152,4 +152,5 @@ class(MedicalCurtainSmall) extends(SmallFence)
 	var(model,"ml_shabut\exoduss\medzanaves2.p3d");
 	var(name,"Ширма");
 	var(material,"MatCloth");
+	getter_func(isMovable,true);
 endclass
