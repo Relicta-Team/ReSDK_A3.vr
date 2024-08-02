@@ -1012,8 +1012,8 @@ _3830_455324141_9038166_69774 = ['Tumbler',[3830.46,4141.9,66.6977],0,[0,0,1], {
 ['FarmGarden',[3805.25,4084.75,68.5491,true],330,[-0.00554412,-0.00439618,0.999975]] call InitStruct; 
 ['FarmGarden',[3802.75,4089,68.7991,true],0,[-0.0069996,-0.00103549,0.999975]] call InitStruct; 
 ['BetonGarageMedium',[3826.13,4082.5,63.875],90,[0,0,1]] call InitStruct; 
-['WoodenDoor',[3829.13,4093,63.5],75,[0,0,1]] call InitStruct; 
-['WoodenDoor',[3828.88,4094.5,63.5],270,[0,0,1]] call InitStruct; 
+['WoodenDoor',[3828.92,4092.98,63.5],255,[0,0,1]] call InitStruct; 
+['WoodenDoor',[3828.75,4094.48,63.5],90.0001,[0,0,1]] call InitStruct; 
 ['MediumFenceOfSheetsAndBoards',[3829.25,4089.63,63.5],0,[0,0,1]] call InitStruct; 
 ['MediumFenceOfSheetsAndBoards',[3828.88,4097.88,63.75],0,[0,0,1]] call InitStruct; 
 ['MediumFenceOfSheetsAndBoards',[3831,4101.88,63.625],60,[0,0,1]] call InitStruct; 

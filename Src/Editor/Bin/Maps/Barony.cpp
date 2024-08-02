@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=722;
+		nextID=762;
 	};
 	class Camera
 	{
-		pos[]={3846.9324,70.493797,4115.123};
-		dir[]={-0.88002127,-0.43292487,0.19594616};
-		up[]={-0.42266306,0.90136641,0.094106741};
-		aside[]={0.21735595,9.8643795e-008,0.97620738};
+		pos[]={3832.9133,72.076752,4093.1516};
+		dir[]={-0.82765436,-0.56129318,0.014106321};
+		up[]={-0.56127143,0.82754749,0.0095622437};
+		aside[]={0.01703674,-1.0820827e-006,0.99996263};
 	};
 };
 binarizationWanted=0;
@@ -16556,7 +16556,6 @@ class Mission
 		{
 			dataType="Layer";
 			name="Ферма";
-			state=1;
 			class Entities
 			{
 				items=228;
@@ -16637,8 +16636,8 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3829.125,69.591957,4093};
-						angles[]={0,1.3089972,0};
+						position[]={3828.9182,69.591957,4092.978};
+						angles[]={0,4.4505901,-0};
 					};
 					side="Empty";
 					flags=1;
@@ -16655,8 +16654,8 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3828.875,69.591957,4094.5};
-						angles[]={0,4.7123899,0};
+						position[]={3828.7502,69.591957,4094.4841};
+						angles[]={0,1.5707979,-0};
 					};
 					side="Empty";
 					flags=5;
@@ -16666,7 +16665,7 @@ class Mission
 					};
 					id=3500;
 					type="Land_xlamdoor";
-					atlOffset=0.089950562;
+					atlOffset=0.10028076;
 				};
 				class Item6
 				{
@@ -42076,7 +42075,7 @@ class Mission
 				};
 			};
 			id=3452;
-			atlOffset=0.054145813;
+			atlOffset=0.054504395;
 		};
 		class Item23
 		{
