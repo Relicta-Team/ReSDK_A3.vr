@@ -16,6 +16,36 @@ class(BigHouse) extends(BigConstructions)
 endclass
 
 editor_attribute("EditorGenerated")
+class(BigTwoStoreyHouse) extends(BigHouse)
+	var(model,"a3\structures_f\households\house_big01\u_house_big_01_v1_dam_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BigClayHouse) extends(BigHouse)
+	var(model,"ca\structures_e\housek\house_k_6_ep1.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BigClayHouse4) extends(BigClayHouse)
+	var(model,"ca\structures_e\housec\house_c_5_v3_dam_ep1.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BigClayHouse3) extends(BigClayHouse)
+	var(model,"ca\structures_e\housec\house_c_3_dam_ep1.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BigClayHouse2) extends(BigClayHouse)
+	var(model,"ca\structures_e\housec\house_c_5_v1_ep1.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(BigClayHouse1) extends(BigClayHouse)
+	var(model,"ca\structures_e\housec\house_c_2_ep1.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(FactoryWithTanks) extends(BigHouse)
 	var(model,"ca\buildings2\ind_cementworks\ind_mlyn\ind_mlyn_03.p3d");
 endclass

@@ -39,6 +39,8 @@ class(GlassBottle) extends(IGlassReagentItem)
 	var(size,ITEM_SIZE_SMALL);
 	var(reagents,vec2(this,60) call ms_create);
 	getterconst_func(transferAmount,[5 arg 10 arg 15 arg 25 arg 30 arg 60]);
+	editor_attribute("EditorVisible" arg "type:string") editor_attribute("Tooltip" arg "Подписанное имя бутылки")
+	editor_attribute("alias" arg "Имя бутылки")
 	var_str(bottleName); //подписанное название
 	
 	getter_func(getDropSound,"dropping\drop_glass");
