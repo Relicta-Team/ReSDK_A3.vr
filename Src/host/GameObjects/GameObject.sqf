@@ -2175,6 +2175,7 @@ region(Pulling functionality)
 	func(startPull)
 	{
 		objParams_1(_usr);
+		if (true) exitWith {};//todo remove when fix
 		if !callSelf(isMovable) exitWith {};
 		if !callSelf(isInWorld) exitWith {};
 		if !callSelfParams(_checkCanPullingConditions,_usr) exitWith {};
