@@ -38,6 +38,8 @@ ACT(SelectGroupUnit8) + ACT(SelectGroupUnit9) + ACT(SelectGroupUnit0) + ACT(sele
 #define LEFT_MOVE_BUTTONS ( ACT(TurnLeft) )
 #define RIGHT_MOVE_BUTTONS ( ACT(TurnRight) )
 
+#define MOVE_FORWARD_BUTTONS ( ACT(MoveForward) + ACT(MoveFastForward) + ACT(MoveSlowForward) )
+
 //movement actions 
 #define CAN_MOVE_BUTTONS (ACT(MoveForward) + ACT(MoveBack) + ACT(TurnLeft) + ACT(TurnRight) + \
  ACT(MoveFastForward) + ACT(MoveSlowForward) + ACT(turbo) + ACT(TurboToggle) + ACT(MoveLeft) + ACT(MoveRight) + ACT(GetOver))

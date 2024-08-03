@@ -349,7 +349,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\GameObject.sqf at line 349](../../../Src/host/GameObjects/GameObject.sqf#L349)
+File: [host\GameObjects\GameObject.sqf at line 354](../../../Src/host/GameObjects/GameObject.sqf#L354)
 ## startSectorIndex
 
 Type: constant
@@ -361,7 +361,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 747](../../../Src/host/GameObjects/GameObject.sqf#L747)
+File: [host\GameObjects\GameObject.sqf at line 752](../../../Src/host/GameObjects/GameObject.sqf#L752)
 ## sectorSize
 
 Type: constant
@@ -373,7 +373,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 748](../../../Src/host/GameObjects/GameObject.sqf#L748)
+File: [host\GameObjects\GameObject.sqf at line 753](../../../Src/host/GameObjects/GameObject.sqf#L753)
 ## DEBUG_VISUAL_OBJECTFALLING
 
 Type: constant
@@ -385,7 +385,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\GameObject.sqf at line 1403](../../../Src/host/GameObjects/GameObject.sqf#L1403)
+File: [host\GameObjects\GameObject.sqf at line 1408](../../../Src/host/GameObjects/GameObject.sqf#L1408)
 ## DEBUG_VISUAL_OPENSPACE
 
 Type: constant
@@ -397,7 +397,19 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\GameObject.sqf at line 1463](../../../Src/host/GameObjects/GameObject.sqf#L1463)
+File: [host\GameObjects\GameObject.sqf at line 1518](../../../Src/host/GameObjects/GameObject.sqf#L1518)
+## async_delay_check_
+
+Type: constant
+
+Description: default async check timeout
+
+
+Replaced value:
+```sqf
+0.5
+```
+File: [host\GameObjects\GameObject.sqf at line 2200](../../../Src/host/GameObjects/GameObject.sqf#L2200)
 ## flyingObject
 
 Type: Variable
@@ -409,7 +421,7 @@ Initial value:
 ```sqf
 createObj
 ```
-File: [host\GameObjects\GameObject.sqf at line 51](../../../Src/host/GameObjects/GameObject.sqf#L51)
+File: [host\GameObjects\GameObject.sqf at line 52](../../../Src/host/GameObjects/GameObject.sqf#L52)
 ## go_internal_updateMethodsAfterStart
 
 Type: Variable
@@ -421,7 +433,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\GameObject.sqf at line 448](../../../Src/host/GameObjects/GameObject.sqf#L448)
+File: [host\GameObjects\GameObject.sqf at line 453](../../../Src/host/GameObjects/GameObject.sqf#L453)
 ## go_internal_chatMesMap
 
 Type: Variable
@@ -433,7 +445,7 @@ Initial value:
 ```sqf
 ["emote","log","act","combat","info","mind","event","system","error","default"]
 ```
-File: [host\GameObjects\GameObject.sqf at line 1070](../../../Src/host/GameObjects/GameObject.sqf#L1070)
+File: [host\GameObjects\GameObject.sqf at line 1075](../../../Src/host/GameObjects/GameObject.sqf#L1075)
 ## go_internal_chatMesMapText
 
 Type: Variable
@@ -445,7 +457,7 @@ Initial value:
 ```sqf
 ["Эмоут:Кастомное пользовательское действие",...
 ```
-File: [host\GameObjects\GameObject.sqf at line 1071](../../../Src/host/GameObjects/GameObject.sqf#L1071)
+File: [host\GameObjects\GameObject.sqf at line 1076](../../../Src/host/GameObjects/GameObject.sqf#L1076)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
@@ -455,7 +467,7 @@ Type: function
 Description: 
 
 
-File: [host\GameObjects\GameObject.sqf at line 38](../../../Src/host/GameObjects/GameObject.sqf#L38)
+File: [host\GameObjects\GameObject.sqf at line 39](../../../Src/host/GameObjects/GameObject.sqf#L39)
 # Chemistry.h
 
 ## CHEM_TIME_SLOW_UPDATE
@@ -3229,7 +3241,7 @@ Replaced value:
 ```sqf
 setSelf(name,getVar(_item,name))
 ```
-File: [host\GameObjects\Items\Item.sqf at line 790](../../../Src/host/GameObjects/Items/Item.sqf#L790)
+File: [host\GameObjects\Items\Item.sqf at line 792](../../../Src/host/GameObjects/Items/Item.sqf#L792)
 ## methodReference(name__,parm,refparam)
 
 Type: constant
@@ -3243,7 +3255,7 @@ Replaced value:
 ```sqf
 func(name__) {parm; callFuncParams(getSelf(object),name__,refparam)}
 ```
-File: [host\GameObjects\Items\Item.sqf at line 1189](../../../Src/host/GameObjects/Items/Item.sqf#L1189)
+File: [host\GameObjects\Items\Item.sqf at line 1216](../../../Src/host/GameObjects/Items/Item.sqf#L1216)
 ## generateItemSize
 
 Type: function
@@ -3253,7 +3265,7 @@ Description:
 - Param: _bmax
 - Param: _radius
 
-File: [host\GameObjects\Items\Item.sqf at line 175](../../../Src/host/GameObjects/Items/Item.sqf#L175)
+File: [host\GameObjects\Items\Item.sqf at line 177](../../../Src/host/GameObjects/Items/Item.sqf#L177)
 ## generateItemInfoList
 
 Type: function
@@ -3264,7 +3276,7 @@ Description:
 - Param: _file (optional, default "unknown_file")
 - Param: _line (optional, default 0)
 
-File: [host\GameObjects\Items\Item.sqf at line 201](../../../Src/host/GameObjects/Items/Item.sqf#L201)
+File: [host\GameObjects\Items\Item.sqf at line 203](../../../Src/host/GameObjects/Items/Item.sqf#L203)
 # Item_HandAnim.hpp
 
 ## ANIM_INDEX_HANDED
@@ -3948,7 +3960,7 @@ Replaced value:
 ```sqf
 (getSelf(owner) call anim_getUnitAnim)
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 848](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L848)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 862](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L862)
 ## __data_light_slot__
 
 Type: constant
@@ -3960,7 +3972,7 @@ Replaced value:
 ```sqf
 [[INV_BACKPACK,null], [INV_ARMOR,null], [INV_HEAD,null], [INV_BACK,null],[INV_CLOTH,null],[INV_FACE,null],[INV_HAND_R,null],[INV_HAND_L,null],[INV_BELT,null]]
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 958](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L958)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 972](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L972)
 ## debug_internal_getinteractiontarget_spheres
 
 Type: Variable
@@ -4078,7 +4090,7 @@ Replaced value:
 ```sqf
 getSelf(name)
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 291](../../../Src/host/GameObjects/Mobs/Mob.sqf#L291)
+File: [host\GameObjects\Mobs\Mob.sqf at line 293](../../../Src/host/GameObjects/Mobs/Mob.sqf#L293)
 ## PIC_PREP
 
 Type: constant
@@ -4090,7 +4102,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 368](../../../Src/host/GameObjects/Mobs/Mob.sqf#L368)
+File: [host\GameObjects\Mobs\Mob.sqf at line 370](../../../Src/host/GameObjects/Mobs/Mob.sqf#L370)
 # MobGhost.sqf
 
 ## hasBP(idx)
@@ -4587,7 +4599,7 @@ Replaced value:
 ```sqf
 'v'
 ```
-File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 1374](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L1374)
+File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 1414](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L1414)
 # Mob_Inventory.sqf
 
 ## __switchVars(prevname,nextname)
