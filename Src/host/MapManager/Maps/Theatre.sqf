@@ -104,18 +104,18 @@ _4167_671393933_1328141_99997 = ['SteelDoorThinSmall',[4167.67,3933.13,42],0,[0,
 ['SmallSteelRustyStairs',[4180.5,3947.39,49.25],90,[0,0,1]] call InitStruct; 
 ['SmallSteelRustyStairs',[4180.5,3948.62,49.25],90,[0,0,1]] call InitStruct; 
 ['SmallSteelRustyStairs',[4180.5,3949.84,49.25],90,[0,0,1]] call InitStruct; 
-['Bench3',[4182.77,3948.67,42.7032],90,[0,0,1]] call InitStruct; 
-['Bench3',[4182.77,3944.69,42.7032],90,[0,0,1]] call InitStruct; 
-['Bench3',[4180,3944.72,43.5772],90,[0,0,1]] call InitStruct; 
-['Bench3',[4180.04,3948.7,43.5772],90,[0,0,1]] call InitStruct; 
-['WoodenOldBench',[4177.12,3944.07,44.4512],270,[0,0,1]] call InitStruct; 
-['WoodenOldBench',[4177.12,3946.7,44.4512],270,[0,0,1]] call InitStruct; 
-['WoodenOldBench',[4177.12,3949.32,44.4512],270,[0,0,1]] call InitStruct; 
-['WoodenOldBench',[4174.75,3949.32,45.0772],270,[0,0,1]] call InitStruct; 
-['WoodenOldBench',[4174.75,3946.7,45.0772],270,[0,0,1]] call InitStruct; 
-['WoodenOldBench',[4174.75,3944.07,45.0772],270,[0,0,1]] call InitStruct; 
+_4182_766113948_6726142_70317 = ['Bench3',[4182.77,3948.67,42.7032],90,[0,0,1]] call InitStruct; 
+_4182_771483944_6901942_70317 = ['Bench3',[4182.77,3944.69,42.7032],90,[0,0,1]] call InitStruct; 
+_4180_000983944_7153343_57717 = ['Bench3',[4180,3944.72,43.5772],90,[0,0,1]] call InitStruct; 
+_4180_043953948_6977543_57717 = ['Bench3',[4180.04,3948.7,43.5772],90,[0,0,1]] call InitStruct; 
+_4177_120613944_0727544_45117 = ['WoodenOldBench',[4177.12,3944.07,44.4512],270,[0,0,1]] call InitStruct; 
+_4177_120613946_6977544_45117 = ['WoodenOldBench',[4177.12,3946.7,44.4512],270,[0,0,1]] call InitStruct; 
+_4177_120613949_3227544_45117 = ['WoodenOldBench',[4177.12,3949.32,44.4512],270,[0,0,1]] call InitStruct; 
+_4174_745613949_3227545_07717 = ['WoodenOldBench',[4174.75,3949.32,45.0772],270,[0,0,1]] call InitStruct; 
+_4174_745613946_6977545_07717 = ['WoodenOldBench',[4174.75,3946.7,45.0772],270,[0,0,1]] call InitStruct; 
+_4174_745613944_0727545_07717 = ['WoodenOldBench',[4174.75,3944.07,45.0772],270,[0,0,1]] call InitStruct; 
 ['StripedChair',[4195.5,3941.57,42.9652],185.002,[0,0,1]] call InitItem; 
-['SmallSteelTable',[4195.5,3940.73,42.9713],5,[0,0,1]] call InitStruct; 
+['SmallSteelTable',[4195.53,3940.66,42.9713],5,[0,0,1]] call InitStruct; 
 ['SquareWoodenBox',[4195.59,3952.57,42.875],0,[0,0,1]] call InitStruct; 
 ['SquareWoodenBox',[4195.59,3952.45,43.8516],290,[0,0,1]] call InitStruct; 
 _4201_390633942_3186042_96576 = ['BigClothCabinetNew',[4201.39,3942.32,42.9658],89,[0,0,1]] call InitStruct; 
@@ -156,14 +156,14 @@ _4196_870613937_1977543_87497 = ['SquareWoodenBox',[4196.87,3937.2,43.875],7,[0,
 ['SquareWoodenBox',[4216.82,3957.86,42.3031],0,[0,0,1]] call InitStruct; 
 ['SquareWoodenBox',[4216.8,3956.79,42.3596],0,[0,0,1]] call InitStruct; 
 ['SquareWoodenBox',[4216.94,3955.66,42.3466],351,[0,0,1]] call InitStruct; 
-['RedLuxuryChair',[4182.58,3945.06,49.2844],345,[0,0,1]] call InitStruct; 
-['RedLuxuryChair',[4182.54,3946.95,49.2874],1.02453e-005,[0,0,1]] call InitStruct; 
-['RedLuxuryChair',[4182.64,3948.84,49.2844],15,[0,0,1]] call InitStruct; 
+_4182_579103945_0637249_28441 = ['RedLuxuryChair',[4182.58,3945.06,49.2844],345,[0,0,1]] call InitStruct; 
+_4182_543953946_9494649_28741 = ['RedLuxuryChair',[4182.54,3946.95,49.2874],1.02453e-005,[0,0,1]] call InitStruct; 
+_4182_640633948_8408249_28441 = ['RedLuxuryChair',[4182.64,3948.84,49.2844],15,[0,0,1]] call InitStruct; 
 ['SmallRoundWoodenTable1',[4178.25,3949.82,50.125],0,[0,0,1]] call InitStruct; 
 ['SmallRoundWoodenTable1',[4178.12,3944.07,50.125],0,[0,0,1]] call InitStruct; 
 ['RedSofa',[4175.75,3944.07,50.125],275.001,[0,0,1]] call InitStruct; 
 ['RedSofa',[4175.75,3950.07,50.125],92.0014,[0,0,1]] call InitStruct; 
-['WoodenNewBench',[4176.12,3946.82,47.1689],269.585,[0,0,1]] call InitStruct; 
+_4176_120613946_8227547_16889 = ['WoodenNewBench',[4176.12,3946.82,47.1689],269.585,[0,0,1]] call InitStruct; 
 ['TinyWoodenTable',[4173.3,3944.7,47.125],270,[0,0,1]] call InitStruct; 
 ['TinyWoodenTable',[4173.21,3948.93,47.1611],270,[0,0,1]] call InitStruct; 
 ['TinyWoodenTable',[4183.06,3944.34,49.2874],255,[0,0,1]] call InitStruct; 
@@ -1709,6 +1709,10 @@ _4132_398443866_7075247_17764 = ['IStruct',[4132.4,3866.71,52.173,true],[-3.4671
 ['StumpChair',[4129.84,3873.94,46.9984],334.862,[0,0,1]] call InitItem; 
 ['HospitalBench',[4131.12,3869.67,47.0197],155,[0,0,1], {go_editor_globalRefs set ["RAudienceRichTheatreChair0",_thisObj];
 }] call InitStruct; 
+['SheetMetalTinFence',[4129.94,3870.26,52.8031,true],[-0.360733,0.93217,-0.0304964],[-0.320104,-0.0930302,0.942804], {go_editor_globalRefs set ["vehicle_door1",_thisObj];
+}] call InitStruct; 
+['SheetMetalTinFence',[4129.37,3875.3,53.676,true],62.9276,[-0.0120338,0.0269888,0.999563], {go_editor_globalRefs set ["vehicle_door2",_thisObj];
+}] call InitStruct; 
 ['ConcretePanel',[4148,4005.2,50.875,true],[-0.421011,0.906308,-0.0368337],[-0.0871557,0,0.996195]] call InitStruct; 
 ['BigConcretePanel',[4148.11,3997.7,50.8949,true],0,[-0.0871558,0,0.996195]] call InitStruct; 
 ['BigConcretePanel',[4147.87,3989.45,50.875,true],[0.052137,0.99863,0.00456122],[-0.0871558,1.79302e-007,0.996195]] call InitStruct; 
@@ -2434,6 +2438,8 @@ _4131_681153868_3803747_04371 = ['SpawnPoint',[4131.68,3868.38,47.0437],216,[0,0
 _4132_099613867_5022047_04371 = ['SpawnPoint',[4132.1,3867.5,47.0437],209,[0,0,1]] call InitStruct; 
 _4133_293463867_9221247_04371 = ['SpawnPoint',[4133.29,3867.92,47.0437],67,[0,0,1]] call InitStruct; 
 _4132_815923868_9604547_04371 = ['SpawnPoint',[4132.82,3868.96,47.0437],64,[0,0,1]] call InitStruct; 
+_4195_154793940_6215843_77146 = ['RedButton',[4195.15,3940.62,43.7715],10,[0,0,1], {go_editor_globalRefs set ["scene_launch",_thisObj];
+}] call InitStruct; 
 
 
 
@@ -2451,6 +2457,36 @@ if (!isNil'_4179_245613935_1977541_99997') then {
 };
 if (!isNil'_4167_671393933_1328141_99997') then {
 	_4167_671393933_1328141_99997 setvariable ['islocked',true];
+};
+if (!isNil'_4182_766113948_6726142_70317') then {
+	_4182_766113948_6726142_70317 setvariable ['name',"""Ближняк 5-9"""];
+};
+if (!isNil'_4182_771483944_6901942_70317') then {
+	_4182_771483944_6901942_70317 setvariable ['name',"""Ближняк 1-4"""];
+};
+if (!isNil'_4180_000983944_7153343_57717') then {
+	_4180_000983944_7153343_57717 setvariable ['name',"""Средняк 10-14"""];
+};
+if (!isNil'_4180_043953948_6977543_57717') then {
+	_4180_043953948_6977543_57717 setvariable ['name',"""Средняк 15-19"""];
+};
+if (!isNil'_4177_120613944_0727544_45117') then {
+	_4177_120613944_0727544_45117 setvariable ['name',"""Средняк 1-3"""];
+};
+if (!isNil'_4177_120613946_6977544_45117') then {
+	_4177_120613946_6977544_45117 setvariable ['name',"""Средняк 4-6"""];
+};
+if (!isNil'_4177_120613949_3227544_45117') then {
+	_4177_120613949_3227544_45117 setvariable ['name',"""Средняк 7-9"""];
+};
+if (!isNil'_4174_745613949_3227545_07717') then {
+	_4174_745613949_3227545_07717 setvariable ['name',"""Дальняк 7-9"""];
+};
+if (!isNil'_4174_745613946_6977545_07717') then {
+	_4174_745613946_6977545_07717 setvariable ['name',"""Дальняк 4-6"""];
+};
+if (!isNil'_4174_745613944_0727545_07717') then {
+	_4174_745613944_0727545_07717 setvariable ['name',"""Дальняк 1-3"""];
 };
 if (!isNil'_4201_390633942_3186042_96576') then {
 	_4201_390633942_3186042_96576 setvariable ['name',"Шкаф с шапками и повязками"];
@@ -2587,6 +2623,18 @@ if (!isNil'_4196_870613937_1977543_87497') then {
 	[_4196_870613937_1977543_87497,'WorkerCap1',1,100] call (_4196_870613937_1977543_87497 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4196_870613937_1977543_87497,'WorkerCap2',1,100] call (_4196_870613937_1977543_87497 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4196_870613937_1977543_87497,'WorkerCoolCap',1,100] call (_4196_870613937_1977543_87497 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4182_579103945_0637249_28441') then {
+	_4182_579103945_0637249_28441 setvariable ['name',"""Роскошь 1"""];
+};
+if (!isNil'_4182_543953946_9494649_28741') then {
+	_4182_543953946_9494649_28741 setvariable ['name',"""Роскошь 2"""];
+};
+if (!isNil'_4182_640633948_8408249_28441') then {
+	_4182_640633948_8408249_28441 setvariable ['name',"""Роскошь 3"""];
+};
+if (!isNil'_4176_120613946_8227547_16889') then {
+	_4176_120613946_8227547_16889 setvariable ['name',"""Почти роскошь 1-3"""];
 };
 if (!isNil'_4200_213873958_0332042_32932') then {
 	_4200_213873958_0332042_32932 setvariable ['countslots',100];
@@ -3069,4 +3117,8 @@ if (!isNil'_4133_293463867_9221247_04371') then {
 };
 if (!isNil'_4132_815923868_9604547_04371') then {
 	_4132_815923868_9604547_04371 setvariable ['spawnpointname',"RAudienceRichTheatre5"];
+};
+if (!isNil'_4195_154793940_6215843_77146') then {
+	_4195_154793940_6215843_77146 setvariable ['name',"Спектакальник"];
+	_4195_154793940_6215843_77146 setvariable ['desc',"Для начала представления - нажать. Для антракта - нажать снова. Завершить спектакль - нажать."];
 };
