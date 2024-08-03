@@ -96,7 +96,7 @@
             ]
           ],
           "name":"Избранный из Канавы",
-          "desc":"Ты - избранный воин Канавы, охранник посла. Один из самых сильнейших солдат, которых видовала Сеть, и ты понимаешь, что ни один слабак из Влаги Камней не сможет остановить расширение Канавы. Слава Аккузату!",
+          "desc":"Один из самых сильнейших солдат, которых видывала Сеть, и он понимает, что ни один слабак из Влаги Камней не сможет остановить расширение Канавы. \nСлава Аккузату!",
           "_deadTimeout":300
         },
         "methods":{
@@ -107,15 +107,15 @@
       "graphVersion":2
     },
     "mpos":[
-      -604.9537400244544,
-      -729.0438118992757,
-      1914.707333331299,
-      1802.077490194164
+      -514.5410818355296,
+      -643.9495453685228,
+      1733.8820169534492,
+      1631.888957132658
     ],
-    "mzoom":-0.69
+    "mzoom":-0.65
   },
   "nodes":{
-    "0x133727b6e50":{
+    "0x2510660c890":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -150,7 +150,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x1336da6b7d0":{
+    "0x2510642fc50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -193,7 +193,7 @@
       },
       "class_":"fields.GameObject.name_0.set"
     },
-    "0x1336da682d0":{
+    "0x25106435d10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Sequence_16x",
       "name":"Последовательность",
@@ -289,7 +289,7 @@
       },
       "class_":"operators.sequence"
     },
-    "0x133793ef950":{
+    "0x251064376d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Cast_16x",
       "name":"Преобразовать тип",
@@ -328,7 +328,7 @@
       },
       "class_":"control.castto"
     },
-    "0x133726f3890":{
+    "0x2510643bd50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Sequence_16x",
       "name":"Последовательность",
@@ -424,7 +424,7 @@
       },
       "class_":"operators.sequence"
     },
-    "0x133726f3250":{
+    "0x25106440e10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в контейнере",
@@ -462,7 +462,7 @@
       },
       "class_":"func.createItemInContainer"
     },
-    "0x1336d8c5fd0":{
+    "0x25106440550":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в инвентаре",
@@ -501,7 +501,7 @@
       },
       "class_":"func.createItemInInventory"
     },
-    "0x1336f01ff10":{
+    "0x2510b274750":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"RandInt",
@@ -595,7 +595,7 @@
       },
       "class_":"math.randomInt"
     },
-    "0x1336efeb950":{
+    "0x2510b2769d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в инвентаре",
@@ -634,7 +634,7 @@
       },
       "class_":"func.createItemInInventory"
     },
-    "0x13378286b90":{
+    "0x2510b2d7e90":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Задать количество в стаке",
@@ -677,151 +677,151 @@
   "connections":[
     {
       "out":[
-        "0x133727b6e50",
+        "0x2510660c890",
         "Выход"
       ],
       "in":[
-        "0x133793ef950",
+        "0x251064376d0",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x133727b6e50",
+        "0x2510660c890",
         "Моб"
       ],
       "in":[
-        "0x133793ef950",
+        "0x251064376d0",
         "Входной объект"
       ]
     },
     {
       "in":[
-        "0x1336da6b7d0",
+        "0x2510642fc50",
         "Вход"
       ],
       "out":[
-        "0x133726f3890",
+        "0x2510643bd50",
         "Действие 3"
       ]
     },
     {
       "in":[
-        "0x1336da6b7d0",
+        "0x2510642fc50",
         "Цель"
       ],
       "out":[
-        "0x1336efeb950",
+        "0x2510b2769d0",
         "Предмет"
       ]
     },
     {
       "in":[
-        "0x1336da682d0",
+        "0x25106435d10",
         "Вход"
       ],
       "out":[
-        "0x133793ef950",
+        "0x251064376d0",
         "Успешное преобразование"
       ]
     },
     {
       "out":[
-        "0x1336da682d0",
+        "0x25106435d10",
         "Действие 1"
       ],
       "in":[
-        "0x1336d8c5fd0",
+        "0x25106440550",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1336da682d0",
+        "0x25106435d10",
         "Действие 2"
       ],
       "in":[
-        "0x1336efeb950",
+        "0x2510b2769d0",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x133793ef950",
+        "0x251064376d0",
         "Объект"
       ],
       "in":[
-        "0x1336efeb950",
+        "0x2510b2769d0",
         "Персонаж"
       ]
     },
     {
       "out":[
-        "0x133793ef950",
+        "0x251064376d0",
         "Объект"
       ],
       "in":[
-        "0x1336d8c5fd0",
+        "0x25106440550",
         "Персонаж"
       ]
     },
     {
       "in":[
-        "0x133726f3890",
+        "0x2510643bd50",
         "Вход"
       ],
       "out":[
-        "0x1336efeb950",
+        "0x2510b2769d0",
         "Выход"
       ]
     },
     {
       "out":[
-        "0x133726f3890",
+        "0x2510643bd50",
         "Действие 2"
       ],
       "in":[
-        "0x133726f3250",
+        "0x25106440e10",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x133726f3250",
+        "0x25106440e10",
         "Контейнер"
       ],
       "out":[
-        "0x1336efeb950",
+        "0x2510b2769d0",
         "Предмет"
       ]
     },
     {
       "out":[
-        "0x133726f3250",
+        "0x25106440e10",
         "Выход"
       ],
       "in":[
-        "0x13378286b90",
+        "0x2510b2d7e90",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x133726f3250",
+        "0x25106440e10",
         "Предмет"
       ],
       "in":[
-        "0x13378286b90",
+        "0x2510b2d7e90",
         "Цель"
       ]
     },
     {
       "out":[
-        "0x1336f01ff10",
+        "0x2510b274750",
         "Результат"
       ],
       "in":[
-        "0x13378286b90",
+        "0x2510b2d7e90",
         "Количество"
       ]
     }

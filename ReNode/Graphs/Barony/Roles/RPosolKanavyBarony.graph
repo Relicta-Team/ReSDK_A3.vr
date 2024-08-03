@@ -21,7 +21,7 @@
             "Спавнпоинт",
             "RPosolKanavyBarony"
           ],
-          "desc":"Ты - посол Канавы, самого большого и великого города Сети. С каждой сменой он становится еще больше и прожорливее, а вместе с ним растут и твои аппетиты. Тебе было повелено любыми способами присоединить к себе баронство: даже если не получится договориться, армия Канавы в сотни раз сильнее жалкой стражи Влаги Камней. Никакой слабости и слава Канаве!",
+          "desc":"Посол Канавы, самого большого и великого города Сети. \nС каждой сменой он становится еще больше и прожорливее, а вместе с ним растут и посольские аппетиты. \nЕму было велено любыми способами присоединить к себе баронство: даже если не получится договориться, армия Канавы в сотни раз сильнее жалкой стражи Влаги Камней. \nНикакой слабости и слава Канаве!",
           "_currentBaseSkills":[
             [
               10.0,
@@ -101,15 +101,15 @@
       "graphVersion":2
     },
     "mpos":[
-      1108.676754097389,
-      -947.3055463404064,
-      1816.5639590938288,
-      1709.7072556177238
+      1270.7939939943385,
+      -794.7246146726889,
+      1492.3294792999293,
+      1404.5453922822887
     ],
-    "mzoom":-0.57
+    "mzoom":-0.56
   },
   "nodes":{
-    "0x1336da1f0d0":{
+    "0x20953a57110":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -144,7 +144,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x1336c9125d0":{
+    "0x209539cf5d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в инвентаре",
@@ -183,7 +183,7 @@
       },
       "class_":"func.createItemInInventory"
     },
-    "0x1336d7324d0":{
+    "0x2095375bb10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в контейнере",
@@ -221,7 +221,7 @@
       },
       "class_":"func.createItemInContainer"
     },
-    "0x13379356f90":{
+    "0x2094e3ca150":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в контейнере",
@@ -259,7 +259,7 @@
       },
       "class_":"func.createItemInContainer"
     },
-    "0x1336dd3d010":{
+    "0x2094e7a8cd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Cast_16x",
       "name":"Преобразовать тип",
@@ -298,7 +298,7 @@
       },
       "class_":"control.castto"
     },
-    "0x1337146fb10":{
+    "0x2095373e2d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -341,7 +341,7 @@
       },
       "class_":"fields.GameObject.name_0.set"
     },
-    "0x133714652d0":{
+    "0x2095373fad0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Sequence_16x",
       "name":"Последовательность",
@@ -424,7 +424,7 @@
       },
       "class_":"operators.sequence"
     },
-    "0x133714648d0":{
+    "0x209536f0950":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Sequence_16x",
       "name":"Последовательность",
@@ -520,7 +520,7 @@
       },
       "class_":"operators.sequence"
     },
-    "0x1337146f350":{
+    "0x209536f1690":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Задать количество в стаке",
@@ -559,7 +559,7 @@
       },
       "class_":"methods.Stack.setStackCount_0"
     },
-    "0x13372e19d90":{
+    "0x209536f1a50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Задать количество в стаке",
@@ -598,7 +598,7 @@
       },
       "class_":"methods.Stack.setStackCount_0"
     },
-    "0x1336ff25990":{
+    "0x209536f31d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Loop_16x",
       "name":"Цикл в диапазоне",
@@ -638,7 +638,7 @@
       },
       "class_":"operators.for_loop"
     },
-    "0x1336ff24c90":{
+    "0x209537a4290":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Sequence_16x",
       "name":"Последовательность",
@@ -734,7 +734,7 @@
       },
       "class_":"operators.sequence"
     },
-    "0x1336ff47210":{
+    "0x209537a5650":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в контейнере",
@@ -772,7 +772,7 @@
       },
       "class_":"func.createItemInContainer"
     },
-    "0x133781f8050":{
+    "0x2094e395710":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в контейнере",
@@ -810,7 +810,7 @@
       },
       "class_":"func.createItemInContainer"
     },
-    "0x1336c982450":{
+    "0x209539c9a90":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Задать количество в стаке",
@@ -849,7 +849,7 @@
       },
       "class_":"methods.Stack.setStackCount_0"
     },
-    "0x1336c9838d0":{
+    "0x209539cad50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в инвентаре",
@@ -888,7 +888,7 @@
       },
       "class_":"func.createItemInInventory"
     },
-    "0x13371268c90":{
+    "0x209539c8e90":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в контейнере",
@@ -930,281 +930,281 @@
   "connections":[
     {
       "out":[
-        "0x1336da1f0d0",
+        "0x20953a57110",
         "Выход"
       ],
       "in":[
-        "0x1336dd3d010",
+        "0x2094e7a8cd0",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1336da1f0d0",
+        "0x20953a57110",
         "Моб"
       ],
       "in":[
-        "0x1336dd3d010",
+        "0x2094e7a8cd0",
         "Входной объект"
       ]
     },
     {
       "in":[
-        "0x1336c9125d0",
+        "0x209539cf5d0",
         "Вход"
       ],
       "out":[
-        "0x133714652d0",
+        "0x2095373fad0",
         "Действие 2"
       ]
     },
     {
       "in":[
-        "0x1336c9125d0",
+        "0x209539cf5d0",
         "Персонаж"
       ],
       "out":[
-        "0x1336dd3d010",
+        "0x2094e7a8cd0",
         "Объект"
       ]
     },
     {
       "out":[
-        "0x1336c9125d0",
+        "0x209539cf5d0",
         "Выход"
       ],
       "in":[
-        "0x133714648d0",
+        "0x209536f0950",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1336c9125d0",
+        "0x209539cf5d0",
         "Предмет"
       ],
       "in":[
-        "0x13379356f90",
+        "0x2094e3ca150",
         "Контейнер"
       ]
     },
     {
       "out":[
-        "0x1336c9125d0",
+        "0x209539cf5d0",
         "Предмет"
       ],
       "in":[
-        "0x1337146fb10",
+        "0x2095373e2d0",
         "Цель"
       ]
     },
     {
       "out":[
-        "0x1336c9125d0",
+        "0x209539cf5d0",
         "Предмет"
       ],
       "in":[
-        "0x1336d7324d0",
+        "0x2095375bb10",
         "Контейнер"
       ]
     },
     {
       "in":[
-        "0x1336d7324d0",
+        "0x2095375bb10",
         "Вход"
       ],
       "out":[
-        "0x133714648d0",
+        "0x209536f0950",
         "Действие 1"
       ]
     },
     {
       "out":[
-        "0x1336d7324d0",
+        "0x2095375bb10",
         "Выход"
       ],
       "in":[
-        "0x1337146f350",
+        "0x209536f1690",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1336d7324d0",
+        "0x2095375bb10",
         "Предмет"
       ],
       "in":[
-        "0x1337146f350",
+        "0x209536f1690",
         "Цель"
       ]
     },
     {
       "in":[
-        "0x13379356f90",
+        "0x2094e3ca150",
         "Вход"
       ],
       "out":[
-        "0x133714648d0",
+        "0x209536f0950",
         "Действие 2"
       ]
     },
     {
       "out":[
-        "0x13379356f90",
+        "0x2094e3ca150",
         "Выход"
       ],
       "in":[
-        "0x13372e19d90",
+        "0x209536f1a50",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x13379356f90",
+        "0x2094e3ca150",
         "Предмет"
       ],
       "in":[
-        "0x13372e19d90",
+        "0x209536f1a50",
         "Цель"
       ]
     },
     {
       "out":[
-        "0x1336dd3d010",
+        "0x2094e7a8cd0",
         "Успешное преобразование"
       ],
       "in":[
-        "0x133714652d0",
+        "0x2095373fad0",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1336dd3d010",
+        "0x2094e7a8cd0",
         "Объект"
       ],
       "in":[
-        "0x1336c9838d0",
+        "0x209539cad50",
         "Персонаж"
       ]
     },
     {
       "in":[
-        "0x1337146fb10",
+        "0x2095373e2d0",
         "Вход"
       ],
       "out":[
-        "0x133714648d0",
+        "0x209536f0950",
         "Действие 3"
       ]
     },
     {
       "out":[
-        "0x133714652d0",
+        "0x2095373fad0",
         "Действие 1"
       ],
       "in":[
-        "0x1336c9838d0",
+        "0x209539cad50",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x1336ff25990",
+        "0x209536f31d0",
         "Вход"
       ],
       "out":[
-        "0x1336ff24c90",
+        "0x209537a4290",
         "Действие 3"
       ]
     },
     {
       "out":[
-        "0x1336ff25990",
+        "0x209536f31d0",
         "Тело цикла"
       ],
       "in":[
-        "0x133781f8050",
+        "0x2094e395710",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x1336ff24c90",
+        "0x209537a4290",
         "Вход"
       ],
       "out":[
-        "0x1336c9838d0",
+        "0x209539cad50",
         "Выход"
       ]
     },
     {
       "out":[
-        "0x1336ff24c90",
+        "0x209537a4290",
         "Действие 1"
       ],
       "in":[
-        "0x13371268c90",
+        "0x209539c8e90",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1336ff24c90",
+        "0x209537a4290",
         "Действие 2"
       ],
       "in":[
-        "0x1336ff47210",
+        "0x209537a5650",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x1336ff47210",
+        "0x209537a5650",
         "Контейнер"
       ],
       "out":[
-        "0x1336c9838d0",
+        "0x209539cad50",
         "Предмет"
       ]
     },
     {
       "in":[
-        "0x133781f8050",
+        "0x2094e395710",
         "Контейнер"
       ],
       "out":[
-        "0x1336c9838d0",
+        "0x209539cad50",
         "Предмет"
       ]
     },
     {
       "out":[
-        "0x133781f8050",
+        "0x2094e395710",
         "Выход"
       ],
       "in":[
-        "0x1336c982450",
+        "0x209539c9a90",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x133781f8050",
+        "0x2094e395710",
         "Предмет"
       ],
       "in":[
-        "0x1336c982450",
+        "0x209539c9a90",
         "Цель"
       ]
     },
     {
       "out":[
-        "0x1336c9838d0",
+        "0x209539cad50",
         "Предмет"
       ],
       "in":[
-        "0x13371268c90",
+        "0x209539c8e90",
         "Контейнер"
       ]
     }
