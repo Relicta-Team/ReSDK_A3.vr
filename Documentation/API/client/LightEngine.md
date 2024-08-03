@@ -1988,6 +1988,42 @@ Replaced value:
 2132
 ```
 File: [client\LightEngine\ScriptedEffects.hpp at line 38](../../../Src/client/LightEngine/ScriptedEffects.hpp#L38)
+## SLIGHT_STREET_LAMP_ITAL
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+2133
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 39](../../../Src/client/LightEngine/ScriptedEffects.hpp#L39)
+## SLIGHT_ITAL_LAMP_STRONG
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+2134
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 40](../../../Src/client/LightEngine/ScriptedEffects.hpp#L40)
+## SLIGHT_ITAL_LAMP_MEDIUM
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+2135
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 41](../../../Src/client/LightEngine/ScriptedEffects.hpp#L41)
 ## SLIGHT_MAGICSTORM_DEBUG_var
 
 Type: Variable
@@ -2001,7 +2037,7 @@ Initial value:
 ```sqf
 2100
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 42](../../../Src/client/LightEngine/ScriptedEffects.hpp#L42)
+File: [client\LightEngine\ScriptedEffects.hpp at line 45](../../../Src/client/LightEngine/ScriptedEffects.hpp#L45)
 ## SLIGHT_SET123_DEBUG_var
 
 Type: Variable
@@ -2013,7 +2049,7 @@ Initial value:
 ```sqf
 2101
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 43](../../../Src/client/LightEngine/ScriptedEffects.hpp#L43)
+File: [client\LightEngine\ScriptedEffects.hpp at line 46](../../../Src/client/LightEngine/ScriptedEffects.hpp#L46)
 ## SLIGHT_TEMPLATE_DIRECTLIGHT_var
 
 Type: Variable
@@ -2025,7 +2061,7 @@ Initial value:
 ```sqf
 2102
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 44](../../../Src/client/LightEngine/ScriptedEffects.hpp#L44)
+File: [client\LightEngine\ScriptedEffects.hpp at line 47](../../../Src/client/LightEngine/ScriptedEffects.hpp#L47)
 ## SLIGHT_TEMPLATE_POINTLIGHT_var
 
 Type: Variable
@@ -2037,7 +2073,7 @@ Initial value:
 ```sqf
 2103
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 45](../../../Src/client/LightEngine/ScriptedEffects.hpp#L45)
+File: [client\LightEngine\ScriptedEffects.hpp at line 48](../../../Src/client/LightEngine/ScriptedEffects.hpp#L48)
 ## SLIGHT_STREET_LAMP_var
 
 Type: Variable
@@ -2049,7 +2085,7 @@ Initial value:
 ```sqf
 2104
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 46](../../../Src/client/LightEngine/ScriptedEffects.hpp#L46)
+File: [client\LightEngine\ScriptedEffects.hpp at line 49](../../../Src/client/LightEngine/ScriptedEffects.hpp#L49)
 ## SLIGHT_SHIT_SMELL_var
 
 Type: Variable
@@ -2061,7 +2097,7 @@ Initial value:
 ```sqf
 2105
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 47](../../../Src/client/LightEngine/ScriptedEffects.hpp#L47)
+File: [client\LightEngine\ScriptedEffects.hpp at line 50](../../../Src/client/LightEngine/ScriptedEffects.hpp#L50)
 ## SLIGHT_WEAK_FIRE_var
 
 Type: Variable
@@ -2073,7 +2109,7 @@ Initial value:
 ```sqf
 2106
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 48](../../../Src/client/LightEngine/ScriptedEffects.hpp#L48)
+File: [client\LightEngine\ScriptedEffects.hpp at line 51](../../../Src/client/LightEngine/ScriptedEffects.hpp#L51)
 ## SLIGHT_SPOT_LAMP_var
 
 Type: Variable
@@ -2085,7 +2121,7 @@ Initial value:
 ```sqf
 2107
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 49](../../../Src/client/LightEngine/ScriptedEffects.hpp#L49)
+File: [client\LightEngine\ScriptedEffects.hpp at line 52](../../../Src/client/LightEngine/ScriptedEffects.hpp#L52)
 ## SLIGHT_LAMP_HOUSE_var
 
 Type: Variable
@@ -2097,7 +2133,7 @@ Initial value:
 ```sqf
 2108
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 50](../../../Src/client/LightEngine/ScriptedEffects.hpp#L50)
+File: [client\LightEngine\ScriptedEffects.hpp at line 53](../../../Src/client/LightEngine/ScriptedEffects.hpp#L53)
 ## SLIGHT_LIGHT_STOVE_var
 
 Type: Variable
@@ -2109,7 +2145,7 @@ Initial value:
 ```sqf
 2109
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 51](../../../Src/client/LightEngine/ScriptedEffects.hpp#L51)
+File: [client\LightEngine\ScriptedEffects.hpp at line 54](../../../Src/client/LightEngine/ScriptedEffects.hpp#L54)
 ## SLIGHT_LIGHT_BAKE_var
 
 Type: Variable
@@ -2121,7 +2157,7 @@ Initial value:
 ```sqf
 2110
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 52](../../../Src/client/LightEngine/ScriptedEffects.hpp#L52)
+File: [client\LightEngine\ScriptedEffects.hpp at line 55](../../../Src/client/LightEngine/ScriptedEffects.hpp#L55)
 ## SLIGHT_STREET_LAMP_DORM_var
 
 Type: Variable
@@ -2133,7 +2169,7 @@ Initial value:
 ```sqf
 2111
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 53](../../../Src/client/LightEngine/ScriptedEffects.hpp#L53)
+File: [client\LightEngine\ScriptedEffects.hpp at line 56](../../../Src/client/LightEngine/ScriptedEffects.hpp#L56)
 ## SLIGHT_DAM_METAL_var
 
 Type: Variable
@@ -2145,7 +2181,7 @@ Initial value:
 ```sqf
 2112
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 54](../../../Src/client/LightEngine/ScriptedEffects.hpp#L54)
+File: [client\LightEngine\ScriptedEffects.hpp at line 57](../../../Src/client/LightEngine/ScriptedEffects.hpp#L57)
 ## SLIGHT_DAM_STONE_var
 
 Type: Variable
@@ -2157,7 +2193,7 @@ Initial value:
 ```sqf
 2113
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 55](../../../Src/client/LightEngine/ScriptedEffects.hpp#L55)
+File: [client\LightEngine\ScriptedEffects.hpp at line 58](../../../Src/client/LightEngine/ScriptedEffects.hpp#L58)
 ## SLIGHT_DAM_WOOD_var
 
 Type: Variable
@@ -2169,7 +2205,7 @@ Initial value:
 ```sqf
 2114
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 56](../../../Src/client/LightEngine/ScriptedEffects.hpp#L56)
+File: [client\LightEngine\ScriptedEffects.hpp at line 59](../../../Src/client/LightEngine/ScriptedEffects.hpp#L59)
 ## SLIGHT_DAM_BETON_var
 
 Type: Variable
@@ -2181,7 +2217,7 @@ Initial value:
 ```sqf
 2115
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 57](../../../Src/client/LightEngine/ScriptedEffects.hpp#L57)
+File: [client\LightEngine\ScriptedEffects.hpp at line 60](../../../Src/client/LightEngine/ScriptedEffects.hpp#L60)
 ## SLIGHT_DAM_DIRT_var
 
 Type: Variable
@@ -2193,7 +2229,7 @@ Initial value:
 ```sqf
 2116
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 58](../../../Src/client/LightEngine/ScriptedEffects.hpp#L58)
+File: [client\LightEngine\ScriptedEffects.hpp at line 61](../../../Src/client/LightEngine/ScriptedEffects.hpp#L61)
 ## SLIGHT_DAM_GLASS_var
 
 Type: Variable
@@ -2205,7 +2241,7 @@ Initial value:
 ```sqf
 2117
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 59](../../../Src/client/LightEngine/ScriptedEffects.hpp#L59)
+File: [client\LightEngine\ScriptedEffects.hpp at line 62](../../../Src/client/LightEngine/ScriptedEffects.hpp#L62)
 ## SLIGHT_DAM_CLOTH_var
 
 Type: Variable
@@ -2217,7 +2253,7 @@ Initial value:
 ```sqf
 2118
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 60](../../../Src/client/LightEngine/ScriptedEffects.hpp#L60)
+File: [client\LightEngine\ScriptedEffects.hpp at line 63](../../../Src/client/LightEngine/ScriptedEffects.hpp#L63)
 ## SLIGHT_DAM_PAPER_var
 
 Type: Variable
@@ -2229,7 +2265,7 @@ Initial value:
 ```sqf
 2119
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 61](../../../Src/client/LightEngine/ScriptedEffects.hpp#L61)
+File: [client\LightEngine\ScriptedEffects.hpp at line 64](../../../Src/client/LightEngine/ScriptedEffects.hpp#L64)
 ## SLIGHT_DAM_FLESH_var
 
 Type: Variable
@@ -2241,7 +2277,7 @@ Initial value:
 ```sqf
 2120
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 62](../../../Src/client/LightEngine/ScriptedEffects.hpp#L62)
+File: [client\LightEngine\ScriptedEffects.hpp at line 65](../../../Src/client/LightEngine/ScriptedEffects.hpp#L65)
 ## SLIGHT_DAM_ORGANIC_var
 
 Type: Variable
@@ -2253,7 +2289,7 @@ Initial value:
 ```sqf
 2121
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 63](../../../Src/client/LightEngine/ScriptedEffects.hpp#L63)
+File: [client\LightEngine\ScriptedEffects.hpp at line 66](../../../Src/client/LightEngine/ScriptedEffects.hpp#L66)
 ## SLIGHT_DAM_SYNT_var
 
 Type: Variable
@@ -2265,7 +2301,7 @@ Initial value:
 ```sqf
 2122
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 64](../../../Src/client/LightEngine/ScriptedEffects.hpp#L64)
+File: [client\LightEngine\ScriptedEffects.hpp at line 67](../../../Src/client/LightEngine/ScriptedEffects.hpp#L67)
 ## SLIGHT_ATMOS_FIRE_1_var
 
 Type: Variable
@@ -2277,7 +2313,7 @@ Initial value:
 ```sqf
 2123
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 65](../../../Src/client/LightEngine/ScriptedEffects.hpp#L65)
+File: [client\LightEngine\ScriptedEffects.hpp at line 68](../../../Src/client/LightEngine/ScriptedEffects.hpp#L68)
 ## SLIGHT_ATMOS_FIRE_2_var
 
 Type: Variable
@@ -2289,7 +2325,7 @@ Initial value:
 ```sqf
 2124
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 66](../../../Src/client/LightEngine/ScriptedEffects.hpp#L66)
+File: [client\LightEngine\ScriptedEffects.hpp at line 69](../../../Src/client/LightEngine/ScriptedEffects.hpp#L69)
 ## SLIGHT_ATMOS_FIRE_3_var
 
 Type: Variable
@@ -2301,7 +2337,7 @@ Initial value:
 ```sqf
 2125
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 67](../../../Src/client/LightEngine/ScriptedEffects.hpp#L67)
+File: [client\LightEngine\ScriptedEffects.hpp at line 70](../../../Src/client/LightEngine/ScriptedEffects.hpp#L70)
 ## SLIGHT_ATMOS_SMOKE_1_var
 
 Type: Variable
@@ -2313,7 +2349,7 @@ Initial value:
 ```sqf
 2126
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 68](../../../Src/client/LightEngine/ScriptedEffects.hpp#L68)
+File: [client\LightEngine\ScriptedEffects.hpp at line 71](../../../Src/client/LightEngine/ScriptedEffects.hpp#L71)
 ## SLIGHT_ATMOS_SMOKE_2_var
 
 Type: Variable
@@ -2325,7 +2361,7 @@ Initial value:
 ```sqf
 2127
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 69](../../../Src/client/LightEngine/ScriptedEffects.hpp#L69)
+File: [client\LightEngine\ScriptedEffects.hpp at line 72](../../../Src/client/LightEngine/ScriptedEffects.hpp#L72)
 ## SLIGHT_ATMOS_SMOKE_3_var
 
 Type: Variable
@@ -2337,7 +2373,7 @@ Initial value:
 ```sqf
 2128
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 70](../../../Src/client/LightEngine/ScriptedEffects.hpp#L70)
+File: [client\LightEngine\ScriptedEffects.hpp at line 73](../../../Src/client/LightEngine/ScriptedEffects.hpp#L73)
 ## SLIGHT_THEATRE_SCENE_MAIN_var
 
 Type: Variable
@@ -2349,7 +2385,7 @@ Initial value:
 ```sqf
 2129
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 71](../../../Src/client/LightEngine/ScriptedEffects.hpp#L71)
+File: [client\LightEngine\ScriptedEffects.hpp at line 74](../../../Src/client/LightEngine/ScriptedEffects.hpp#L74)
 ## SLIGHT_THEATRE_SCENE_AREA_MAIN_var
 
 Type: Variable
@@ -2361,7 +2397,7 @@ Initial value:
 ```sqf
 2130
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 72](../../../Src/client/LightEngine/ScriptedEffects.hpp#L72)
+File: [client\LightEngine\ScriptedEffects.hpp at line 75](../../../Src/client/LightEngine/ScriptedEffects.hpp#L75)
 ## SLIGHT_THEATRE_SCENE_STREETS_var
 
 Type: Variable
@@ -2373,7 +2409,7 @@ Initial value:
 ```sqf
 2131
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 73](../../../Src/client/LightEngine/ScriptedEffects.hpp#L73)
+File: [client\LightEngine\ScriptedEffects.hpp at line 76](../../../Src/client/LightEngine/ScriptedEffects.hpp#L76)
 ## SLIGHT_THEATRE_ROOM_GENERIC_var
 
 Type: Variable
@@ -2385,7 +2421,43 @@ Initial value:
 ```sqf
 2132
 ```
-File: [client\LightEngine\ScriptedEffects.hpp at line 74](../../../Src/client/LightEngine/ScriptedEffects.hpp#L74)
+File: [client\LightEngine\ScriptedEffects.hpp at line 77](../../../Src/client/LightEngine/ScriptedEffects.hpp#L77)
+## SLIGHT_STREET_LAMP_ITAL_var
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+2133
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 78](../../../Src/client/LightEngine/ScriptedEffects.hpp#L78)
+## SLIGHT_ITAL_LAMP_STRONG_var
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+2134
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 79](../../../Src/client/LightEngine/ScriptedEffects.hpp#L79)
+## SLIGHT_ITAL_LAMP_MEDIUM_var
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+2135
+```
+File: [client\LightEngine\ScriptedEffects.hpp at line 80](../../../Src/client/LightEngine/ScriptedEffects.hpp#L80)
 # ScriptedEffects.sqf
 
 ## le_se_map

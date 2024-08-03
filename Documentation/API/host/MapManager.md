@@ -230,6 +230,40 @@ Description: Алгоритм симуляции падения объектов
 - Param: _src
 
 File: [host\MapManager\ObjectManager.sqf at line 10](../../../Src/host/MapManager/ObjectManager.sqf#L10)
+# Barony.sqf
+
+## reditor_binding_fc
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\Barony.sqf at line 3](../../../Src/host/MapManager/Maps/Barony.sqf#L3)
+## reditor_binding_gv
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\Barony.sqf at line 12](../../../Src/host/MapManager/Maps/Barony.sqf#L12)
+## reditor_binding_sv
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\Barony.sqf at line 17](../../../Src/host/MapManager/Maps/Barony.sqf#L17)
+## reditor_binding_gref
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\Barony.sqf at line 22](../../../Src/host/MapManager/Maps/Barony.sqf#L22)
 # detective.sqf
 
 ## reditor_binding_fc
