@@ -122,7 +122,7 @@ node_system
     rendertype:NoHeader
     autocoloricon:1
     exec:all
-    code:[@in.1] call arrayShuffleOrig; @out.1
+    code:[@in.2] call arrayShuffleOrig; @out.1
     in:auto:Массив:Ссылка на массив
         opt:typeget=array;@type
 " node_system
@@ -134,7 +134,7 @@ node_system
     icon:data\\icons\\icon_BluePrintEditor_Function_16px
     color:Function
     exec:all
-    code:[@in.1,@in.2,@in.3] call arraySwap; @out.1
+    code:[@in.2,@in.3,@in.4] call arraySwap; @out.1
     in:auto:Массив:Ссылка на массив
         opt:typeget=array;@type
     in:int:Индекс 1:Индекс первого элемента

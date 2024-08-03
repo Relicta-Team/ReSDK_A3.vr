@@ -325,3 +325,17 @@ io_yml_parse = {
 
 // ----------------------------------------------------------------------------
 
+fileExists_Node = {
+	params ["_f"];
+	FileExists _f
+};
+
+fileLoad_Node = {
+	params ["_f",["_doPreprocess",false]];
+	if !([_f] call fileExists_Node) exitWith {""};
+	if (_doPreprocess) then {
+		PreprocessFileLineNumbers _f
+	} else {
+		LoadFile _f
+	};
+};

@@ -41,6 +41,8 @@ class(BedBase) extends(IChair)
 	//кровать (возможно двухместная)
 
 	getter_func(getMainActionName,"Лечь");
+
+	getter_func(isMovable,true);
 endclass
 
 editor_attribute("EditorGenerated")

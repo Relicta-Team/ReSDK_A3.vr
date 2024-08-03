@@ -16,6 +16,7 @@ class(CleanableItem) extends(Item)
 	var(weight,gramm(400));
 	var(dr,4);
 	getter_func(objectHealthType,OBJECT_TYPE_SPREADED);
+	getter_func(isMovable,false);
 
 	var(model,"WaterSpill_01_Small_New_F");
 	#include "..\..\Interfaces\IReagentContainer.Interface"
