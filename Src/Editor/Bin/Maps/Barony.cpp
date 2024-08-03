@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=762;
+		nextID=842;
 	};
 	class Camera
 	{
-		pos[]={3832.9133,72.076752,4093.1516};
-		dir[]={-0.82765436,-0.56129318,0.014106321};
-		up[]={-0.56127143,0.82754749,0.0095622437};
-		aside[]={0.01703674,-1.0820827e-006,0.99996263};
+		pos[]={3723.7549,67.257904,4183.3657};
+		dir[]={-0.0098086586,-0.99994999,-0.0019457198};
+		up[]={-0.98083836,0.00999978,-0.19456653};
+		aside[]={-0.19457626,0,0.98088741};
 	};
 };
 binarizationWanted=0;
@@ -16556,6 +16556,7 @@ class Mission
 		{
 			dataType="Layer";
 			name="Ферма";
+			state=1;
 			class Entities
 			{
 				items=228;
@@ -16637,7 +16638,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3828.9182,69.591957,4092.978};
-						angles[]={0,4.4505901,-0};
+						angles[]={0,4.4505901,0};
 					};
 					side="Empty";
 					flags=1;
@@ -16655,7 +16656,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3828.7502,69.591957,4094.4841};
-						angles[]={0,1.5707979,-0};
+						angles[]={0,1.5707979,0};
 					};
 					side="Empty";
 					flags=5;
@@ -43063,7 +43064,6 @@ class Mission
 		{
 			dataType="Layer";
 			name="Пещеры";
-			state=1;
 			class Entities
 			{
 				items=111;
@@ -43641,7 +43641,7 @@ class Mission
 					side="Empty";
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Бич Чумазед""],[""desc"",""Легендарный меч, созданный многие колена назад и потерянный бароном Бибигоном. Говорят что тот, кто его найдет - будет избранным и станет новым бароном.""]]],[""class"",""TwoHandedSword""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Бич Чумазед""],[""desc"",""Легендарный меч, созданный многие колена назад и потерянный бароном Сухо Мокровым. Говорят что тот, кто его найдет - будет избранным и станет новым бароном.""]]],[""class"",""TwoHandedSword""]]}";
 					};
 					id=4867;
 					type="swordzyb";
