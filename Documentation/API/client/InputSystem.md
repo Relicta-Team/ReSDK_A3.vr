@@ -524,7 +524,7 @@ Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 201](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L201)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 204](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L204)
 ## input_internal_isMovingButton
 
 Type: function
@@ -532,7 +532,15 @@ Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 202](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L202)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 205](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L205)
+## input_internal_isMovingForward
+
+Type: function
+
+Description: 
+
+
+File: [client\InputSystem\inputKeyHandlers.sqf at line 206](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L206)
 ## input_getKeyNameByInputName
 
 Type: function
@@ -540,7 +548,7 @@ Type: function
 Description: 
 - Param: _inp
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 204](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L204)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 208](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L208)
 # inputManager.sqf
 
 ## isPressed(var)

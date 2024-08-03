@@ -140,6 +140,18 @@ Replaced value:
 ( ACT(TurnRight) )
 ```
 File: [client\WidgetSystem\blockedButtons.hpp at line 39](../../../Src/client/WidgetSystem/blockedButtons.hpp#L39)
+## MOVE_FORWARD_BUTTONS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+( ACT(MoveForward) + ACT(MoveFastForward) + ACT(MoveSlowForward) )
+```
+File: [client\WidgetSystem\blockedButtons.hpp at line 41](../../../Src/client/WidgetSystem/blockedButtons.hpp#L41)
 ## CAN_MOVE_BUTTONS
 
 Type: constant
@@ -152,7 +164,7 @@ Replaced value:
 (ACT(MoveForward) + ACT(MoveBack) + ACT(TurnLeft) + ACT(TurnRight) + \
  ACT(MoveFastForward) + ACT(MoveSlowForward) + ACT(turbo) + ACT(TurboToggle) + ACT(MoveLeft) + ACT(MoveRight) + ACT(GetOver))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 42](../../../Src/client/WidgetSystem/blockedButtons.hpp#L42)
+File: [client\WidgetSystem\blockedButtons.hpp at line 44](../../../Src/client/WidgetSystem/blockedButtons.hpp#L44)
 ## CHANGE_STANCE_BUTTONS
 
 Type: constant
@@ -164,7 +176,7 @@ Replaced value:
 ```sqf
 (ACT(AdjustUp) + ACT(AdjustDown) + ACT(Crouch) + ACT(Stand) + ACT(MoveUp) + ACT(MoveDown))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 45](../../../Src/client/WidgetSystem/blockedButtons.hpp#L45)
+File: [client\WidgetSystem\blockedButtons.hpp at line 47](../../../Src/client/WidgetSystem/blockedButtons.hpp#L47)
 ## FAST_DROP_BUTTONS
 
 Type: constant
@@ -176,7 +188,7 @@ Replaced value:
 ```sqf
 (ACT(Crouch) + ACT(MoveDown))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 47](../../../Src/client/WidgetSystem/blockedButtons.hpp#L47)
+File: [client\WidgetSystem\blockedButtons.hpp at line 49](../../../Src/client/WidgetSystem/blockedButtons.hpp#L49)
 ## SIDEWAYS_MOVEMENT_BUTTONS
 
 Type: constant
@@ -188,7 +200,7 @@ Replaced value:
 ```sqf
 (ACT(TurnLeft) + ACT(TurnRight))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 49](../../../Src/client/WidgetSystem/blockedButtons.hpp#L49)
+File: [client\WidgetSystem\blockedButtons.hpp at line 51](../../../Src/client/WidgetSystem/blockedButtons.hpp#L51)
 ## ADDRULE_FORBIDDEN_BUTTONS(forkey)
 
 Type: constant
@@ -202,7 +214,7 @@ Replaced value:
 ```sqf
 (forkey in GROUP_ACTIONS || forkey in GROUP_COMMA_MENU || forkey in SIMPLE_PLAYER_INTERACTION)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 53](../../../Src/client/WidgetSystem/blockedButtons.hpp#L53)
+File: [client\WidgetSystem\blockedButtons.hpp at line 55](../../../Src/client/WidgetSystem/blockedButtons.hpp#L55)
 # defines.sqf
 
 ## HEIGHT_WINDOW_DRAGGER
