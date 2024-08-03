@@ -579,6 +579,18 @@ Initial value:
 false
 ```
 File: [client\ClientData\ClientData_forceWalk.sqf at line 32](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L32)
+## cd_sp_grabbingMob
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\ClientData\ClientData_forceWalk.sqf at line 33](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L33)
 ## cd_fw_isForceWalk
 
 Type: function
@@ -602,7 +614,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\ClientData_forceWalk.sqf at line 33](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L33)
+File: [client\ClientData\ClientData_forceWalk.sqf at line 34](../../../Src/client/ClientData/ClientData_forceWalk.sqf#L34)
 # EscapeMenu.sqf
 
 ## ESC_MENU_SIZE_X
