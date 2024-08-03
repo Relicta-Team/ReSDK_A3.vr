@@ -1397,6 +1397,23 @@ Description:
 - Param: _lines
 
 File: [host\CommonComponents\io.sqf at line 145](../../../Src/host/CommonComponents/io.sqf#L145)
+## fileExists_Node
+
+Type: function
+
+Description: ----------------------------------------------------------------------------
+- Param: _f
+
+File: [host\CommonComponents\io.sqf at line 328](../../../Src/host/CommonComponents/io.sqf#L328)
+## fileLoad_Node
+
+Type: function
+
+Description: 
+- Param: _f
+- Param: _doPreprocess (optional, default false)
+
+File: [host\CommonComponents\io.sqf at line 333](../../../Src/host/CommonComponents/io.sqf#L333)
 # loader.hpp
 
 ## importCommon(path)
@@ -1463,6 +1480,16 @@ Description:
 
 
 File: [host\CommonComponents\ModelTransform.hpp at line 6](../../../Src/host/CommonComponents/ModelTransform.hpp#L6)
+## model_cnvPBYToVec_v2
+
+Type: function
+
+Description: optimized variant;
+- Param: _aroundX
+- Param: _aroundY
+- Param: _aroundZ
+
+File: [host\CommonComponents\ModelTransform.hpp at line 47](../../../Src/host/CommonComponents/ModelTransform.hpp#L47)
 ## model_SetPitchBankYaw
 
 Type: function
@@ -1471,7 +1498,7 @@ Description:
 - Param: _object
 - Param: _data
 
-File: [host\CommonComponents\ModelTransform.hpp at line 45](../../../Src/host/CommonComponents/ModelTransform.hpp#L45)
+File: [host\CommonComponents\ModelTransform.hpp at line 80](../../../Src/host/CommonComponents/ModelTransform.hpp#L80)
 ## model_getPitchBankYaw
 
 Type: function
@@ -1479,7 +1506,7 @@ Type: function
 Description: 
 - Param: _vehicle
 
-File: [host\CommonComponents\ModelTransform.hpp at line 51](../../../Src/host/CommonComponents/ModelTransform.hpp#L51)
+File: [host\CommonComponents\ModelTransform.hpp at line 86](../../../Src/host/CommonComponents/ModelTransform.hpp#L86)
 # Pencfg.sqf
 
 ## addtobj(model,soundpen,armpen)

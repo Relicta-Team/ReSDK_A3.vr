@@ -13,6 +13,22 @@ class(SmallDecorations) extends(StructureBasicCategory) endclass
 
 //мусорки < container
 
+//Предметы интерьера, украшения
+editor_attribute("InterfaceClass")
+editor_attribute("TemplatePrefab")
+class(InterierProp) extends(SmallDecorations) 
+	var(name,"Предмет интерьера");
+	editor_only(var(desc,"Различные украшения интерьера");)
+	var(material,"MatGlass");
+endclass
+
+class(Vase) extends(InterierProp) 
+	var(name,"Великолепная ваза");
+	var(desc,"Потрясающее изделие невиданной красоты");
+	var(model,"relicta_models\models\interier\props\treasure\vase\vase.p3d");
+	getter_func(isMovable,true);
+endclass
+
 //картины
 editor_attribute("InterfaceClass")
 editor_attribute("TemplatePrefab")
@@ -20,6 +36,7 @@ class(Picture) extends(SmallDecorations)
 	var(name,"Картина");
 	editor_only(var(desc,"Просто картина");)
 	var(material,"MatCloth");
+	getter_func(isMovable,true);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -57,6 +74,7 @@ editor_attribute("EditorGenerated")
 class(PosterLive) extends(Picture)
 	var(model,"metro_ob\model\sovet3.p3d");
 	var(material,"MatCloth");
+	getter_func(isMovable,false);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -111,6 +129,7 @@ class(Carpet) extends(SmallDecorations)
 	var(name,"Ковер");
 	editor_only(var(desc,"Красивый ковер");)
 	var(material,"MatCloth");
+	getter_func(isMovable,true);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -150,6 +169,7 @@ endclass
 editor_attribute("EditorGenerated")
 class(WoodenGraveCross) extends(SmallSign)
 	var(model,"ca\buildings\misc\hrobecek_krizek2.p3d");
+	getter_func(isMovable,true);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -251,6 +271,11 @@ endclass
 editor_attribute("EditorGenerated")
 class(Statue) extends(MonumentBase)
 	var(model,"relicta_models\models\nocategory\savin\savin.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(Pedestal) extends(Statue)
+	var(model,"a3\structures_f_argo\cultural\statues\pedestal_01_f.p3d");
 endclass
 
 editor_attribute("EditorGenerated")

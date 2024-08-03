@@ -15,6 +15,7 @@ class(TableBase) extends(Furniture)
 	editor_only(var(desc,"Просто стол");)
 	var(material,"MatWood");
 	var(dr,2);
+	getter_func(isMovable,true);
 endclass
 
 editor_attribute("EditorGenerated")

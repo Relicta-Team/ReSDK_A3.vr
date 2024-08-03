@@ -19,6 +19,11 @@ class(SmallPole) extends(Constructions)
 endclass
 
 editor_attribute("EditorGenerated")
+class(StonePole) extends(SmallPole)
+	var(model,"a3\structures_f_exp\cultural\basaltruins\basaltkerb_01_2m_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(WoodPole) extends(SmallPole)
 	var(name,"Позорник");
 	var(desc,"Чтобы на нём оказаться - много ума не надо!");

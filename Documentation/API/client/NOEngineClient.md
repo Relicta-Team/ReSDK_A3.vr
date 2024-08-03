@@ -1338,7 +1338,7 @@ Replaced value:
 ```sqf
 50
 ```
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 274](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L274)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 276](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L276)
 ## NOE_CLIENT_DELETEOBJS_DELAY
 
 Type: constant
@@ -1350,7 +1350,7 @@ Replaced value:
 ```sqf
 0.2
 ```
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 276](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L276)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 278](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L278)
 ## noe_client_spawnObject
 
 Type: function
@@ -1392,7 +1392,7 @@ Description:
 - Param: _type
 - Param: _chunkObject
 
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 165](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L165)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 167](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L167)
 ## noe_client_doRemoveObjects
 
 Type: function
@@ -1401,7 +1401,7 @@ Description:
 - Param: _chunkObject
 - Param: _listPtr
 
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 208](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L208)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 210](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L210)
 ## noe_client_remObjsAlg
 
 Type: function
@@ -1409,7 +1409,7 @@ Type: function
 Description: 
 
 
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 277](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L277)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 279](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L279)
 ## noe_client_doUpdateObjects
 
 Type: function
@@ -1418,7 +1418,7 @@ Description: Обновляет информацию об объектах
 - Param: _chunkObject
 - Param: _updObjList
 
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 289](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L289)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 291](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L291)
 ## noe_client_debug_findChunkObjectByPointer
 
 Type: function
@@ -1429,7 +1429,7 @@ Description:
 - Param: _pointer
 - Param: _retAsData (optional, default false)
 
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 313](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L313)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 315](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L315)
 ## noe_client_getObjPtr
 
 Type: function
@@ -1438,7 +1438,7 @@ Description: DEBUG
 - Param: _obj
 - Param: _checkNGO (optional, default true)
 
-File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 342](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L342)
+File: [client\NOEngineClient\NOEngineClient_ObjectManager.sqf at line 344](../../../Src/client/NOEngineClient/NOEngineClient_ObjectManager.sqf#L344)
 # NOEngineClient_onUpdate.sqf
 
 ## variable_name_prevchunk
@@ -1611,7 +1611,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 209](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L209)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 269](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L269)
 ## callwarn(macroname)
 
 Type: constant
@@ -1625,7 +1625,7 @@ Replaced value:
 ```sqf
 warningformat("__DEBUG__::%1() - count tokens %2" + endl + "Data: %3",macroname arg count _tokens arg _tokens);
 ```
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 212](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L212)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 272](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L272)
 ## callwarn(ma)
 
 Type: constant
@@ -1639,7 +1639,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 214](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L214)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 274](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L274)
 ## tokenIndex
 
 Type: constant
@@ -1651,7 +1651,7 @@ Replaced value:
 ```sqf
 _pos
 ```
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 217](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L217)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 277](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L277)
 ## moveNext()
 
 Type: constant
@@ -1663,7 +1663,7 @@ Replaced value:
 ```sqf
 MOD(tokenIndex,+1); if (tokenIndex > (_lastIndex)) then { error("NOEngineClient::byteArrToObjStruct() - Out of range"); callwarn("next") RETURN(false);}
 ```
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 218](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L218)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 278](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L278)
 ## moveTo(val)
 
 Type: constant
@@ -1675,7 +1675,7 @@ Replaced value:
 ```sqf
 MOD(tokenIndex,+val); if (tokenIndex > (_lastIndex)) then { error("NOEngineClient::byteArrToObjStruct() - Out of range"); callwarn("move") RETURN(false); }
 ```
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 220](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L220)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 280](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L280)
 ## getToken(ch)
 
 Type: constant
@@ -1687,7 +1687,7 @@ Replaced value:
 ```sqf
 (_tokens select ch)
 ```
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 221](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L221)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 281](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L281)
 ## canMove(idx)
 
 Type: constant
@@ -1699,7 +1699,7 @@ Replaced value:
 ```sqf
 (idx <= (count _tokens - 1) && idx >= 0)
 ```
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 222](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L222)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 282](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L282)
 ## getTokenSafe(idx)
 
 Type: constant
@@ -1711,7 +1711,7 @@ Replaced value:
 ```sqf
 if canMove(idx) then {getToken(idx)} else {"0x0"}
 ```
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 223](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L223)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 283](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L283)
 ## getCurToken()
 
 Type: constant
@@ -1723,7 +1723,7 @@ Replaced value:
 ```sqf
 getToken(tokenIndex)
 ```
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 224](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L224)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 284](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L284)
 ## isTrue(val)
 
 Type: constant
@@ -1735,7 +1735,7 @@ Replaced value:
 ```sqf
 not_equals(val,_strZero)
 ```
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 232](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L232)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 292](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L292)
 ## noe_client_debug_requestLoadChunk
 
 Type: function
@@ -1765,6 +1765,33 @@ Description:
 - Param: _time
 
 File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 32](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L32)
+## noe_client_getOrignalObjectData
+
+Type: function
+
+Description: get original object data; see noe_client_updateObject for info
+- Param: _ptr
+- Param: _retAsHash (optional, default true)
+
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 143](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L143)
+## noe_client_resetObjectTransform
+
+Type: function
+
+Description: 
+- Param: _ptr
+
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 154](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L154)
+## noe_client_setObjectTransform
+
+Type: function
+
+Description: 
+- Param: _obj
+- Param: _type
+- Param: _val
+
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 181](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L181)
 ## noe_client_generatePacketId
 
 Type: function
@@ -1773,7 +1800,7 @@ Description: генерирует пакет который указывает �
 - Param: _chunkObject
 - Param: _lifetime (optional, default PACKET_LIFETIME)
 
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 145](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L145)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 205](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L205)
 ## noe_client_byteArrToObjStruct
 
 Type: function
@@ -1783,7 +1810,7 @@ Description: Конвертирует данные из массива байт�
 - Param: _struct
 - Param: _remStruct
 
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 185](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L185)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 245](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L245)
 ## noe_client_unsubscribeChunkListening
 
 Type: function
@@ -1792,7 +1819,7 @@ Description: производит выписывание клиента из п�
 - Param: _chunk
 - Param: _type
 
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 431](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L431)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 491](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L491)
 ## noe_client_unsubscribeChunkListeningFull
 
 Type: function
@@ -1801,4 +1828,4 @@ Description:
 - Param: _chunk
 - Param: _type
 
-File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 435](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L435)
+File: [client\NOEngineClient\NOEngineClient_TransportLevel.sqf at line 495](../../../Src/client/NOEngineClient/NOEngineClient_TransportLevel.sqf#L495)

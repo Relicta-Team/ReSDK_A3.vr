@@ -18,6 +18,85 @@ class(BasicPipe) extends(Constructions)
 	var(dr,2);
 endclass
 
+//Ржавые Индустриальные трубы (Коллекция похожих объектов)
+class(IndPipeGround) extends(BasicPipe)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_ground.p3d");
+endclass
+
+class(IndPipeGround2) extends(IndPipeGround)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_ground2.p3d");
+endclass
+
+class(IndPipe90degR) extends(IndPipeGround)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_90degr.p3d");
+endclass
+
+class(IndPipe90DegL) extends(IndPipeGround)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_90degl.p3d");
+endclass
+
+class(IndPipe45DegL) extends(IndPipeGround)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_45degl.p3d");
+endclass
+
+class(IndPipe45DegR) extends(IndPipeGround)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_45degr.p3d");
+endclass
+
+class(IndPipeBroken) extends(IndPipeGround)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_broken.p3d");
+endclass
+
+class(IndPipeValve) extends(IndPipeGround)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_valve.p3d");
+endclass
+
+class(IndPipeStair) extends(IndPipeGround)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_stair.p3d");
+endclass
+
+class(IndPipeUR) extends(IndPipeGround)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_ur.p3d");
+endclass
+
+class(IndPipeUUP) extends(IndPipeGround)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_uup.p3d");
+endclass
+
+class(IndPipeUL) extends(IndPipeGround)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_ul.p3d");
+endclass
+
+class(IndPipe20m) extends(IndPipeGround)
+	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_20m.p3d");
+endclass
+
+//Индустриальные трубы (Коллекция похожих объектов)
+class(NewIndPipeGround) extends(BasicPipe)
+	var(model,"a3\structures_f\ind\pipes\indpipe1_ground_f.p3d");
+endclass
+
+class(NewIndPipe90DegL) extends(NewIndPipeGround)
+	var(model,"a3\structures_f\ind\pipes\indpipe1_90degl_f.p3d");
+endclass
+
+class(NewIndPipe90DegR) extends(NewIndPipeGround)
+	var(model,"a3\structures_f\ind\pipes\indpipe1_90degr_f.p3d");
+endclass
+
+class(NewIndPipeValve) extends(NewIndPipeGround)
+	var(model,"a3\structures_f\ind\pipes\indpipe1_valve_f.p3d");
+endclass
+
+class(NewIndPipeUUP) extends(NewIndPipeGround)
+	var(model,"a3\structures_f\ind\pipes\indpipe1_uup_f.p3d");
+endclass
+
+class(NewIndPipe20m) extends(NewIndPipeGround)
+	var(model,"a3\structures_f\ind\pipes\indpipe1_20m_f.p3d");
+endclass
+
+//Остальное
 editor_attribute("EditorGenerated")
 class(DestroyedPipeMedium) extends(BasicPipe)
 	var(model,"ca\buildings2\ind_cementworks\ind_malykomin\ind_malykomin_ruins.p3d");
@@ -48,17 +127,20 @@ class(PipeCutOnSupportingStructure) extends(BasicPipe)
 endclass
 
 editor_attribute("EditorGenerated")
+editor_attribute("Deprecated" arg "Заменить на NewIndPipe90DegR.")
 class(SmallDestroyedCornerPipe) extends(BasicPipe)
 	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_45degl.p3d");
 	var(name,"Разрушенная труба");
 endclass
 
 editor_attribute("EditorGenerated")
+editor_attribute("Deprecated" arg "Заменить на IndPipeValve.")
 class(SmallDestoyedCornerPipe1) extends(SmallDestroyedCornerPipe)
 	var(model,"a3\structures_f\ind\pipes\indpipe1_90degr_f.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
+editor_attribute("Deprecated" arg "Заменить на IndPipeValve.")
 class(MediumRuinedPipe) extends(BasicPipe)
 	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_valve.p3d");
 	var(name,"Разрушенная труба");
@@ -88,11 +170,13 @@ class(SmallConcretePipe) extends(BasicPipe)
 endclass
 
 editor_attribute("EditorGenerated")
+editor_attribute("Deprecated" arg "Заменить на NewIndPipeUUP.")
 class(MediumSteelUpperPipe) extends(BasicPipe)
 	var(model,"a3\structures_f\ind\pipes\indpipe1_uup_f.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
+editor_attribute("Deprecated" arg "Заменить на NewIndPipe20m.")
 class(LongSteelPipe) extends(BasicPipe)
 	var(model,"a3\structures_f\ind\pipes\indpipe1_20m_f.p3d");
 endclass
