@@ -8,18 +8,18 @@ class EditorData
 	toggles=106;
 	class ItemIDProvider
 	{
-		nextID=10546;
+		nextID=10547;
 	};
 	class LayerIndexProvider
 	{
-		nextID=1668;
+		nextID=1747;
 	};
 	class Camera
 	{
-		pos[]={4165.8823,52.633537,3935.0447};
-		dir[]={0.73090178,-0.66066396,-0.17172422};
-		up[]={0.64318794,0.75063676,-0.15111689};
-		aside[]={-0.22874078,8.4342901e-008,-0.97357184};
+		pos[]={4155.7314,57.265995,3952.5408};
+		dir[]={0.64688796,-0.5520224,-0.52635211};
+		up[]={0.42824557,0.83376372,-0.34845224};
+		aside[]={-0.63120991,1.6340055e-006,-0.77574921};
 	};
 };
 binarizationWanted=0;
@@ -607,7 +607,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=28;
+		items=29;
 		class Item0
 		{
 			dataType="Group";
@@ -41571,7 +41571,6 @@ class Mission
 			};
 			id=10536;
 			type="Leaflet_05_Stack_F";
-			atlOffset=3.8146973e-006;
 		};
 		class Item19
 		{
@@ -41644,7 +41643,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4167.2803,51.992077,3934.2654};
-				angles[]={0,4.7123895,-0};
+				angles[]={0,4.7123895,0};
 			};
 			side="Empty";
 			flags=5;
@@ -41718,7 +41717,24 @@ class Mission
 			};
 			id=10545;
 			type="Brush_01_green_F";
-			atlOffset=0.93220139;
+			atlOffset=0.917202;
+		};
+		class Item28
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4158.0464,55.858372,3952.2874};
+				angles[]={0,4.7123895,-0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Бюджетный шкаф""],[""desc"",""В этом ящике бюджет театра между прочим!""]]],[""class"",""SteelGreenCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""Bryak""""]]}"",3],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",50],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",50],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",50],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",50],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",100],[""""class"""",""""Zvak""""]]}"",5],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""Zvak""""]]}"",3],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",53],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",54],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",50],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",53],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",59],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",59],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",55],[""""class"""",""""Zvak""""]]}"",1]]]]}";
+			};
+			id=10546;
+			type="shkafsin";
 		};
 	};
 };

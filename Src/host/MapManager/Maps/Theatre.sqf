@@ -2453,7 +2453,7 @@ _4195_154793940_6215843_77146 = ['RedButton',[4195.15,3940.62,43.7715],10,[0,0,1
 ['PenBlack',[4204.66,3948.67,48.1484,true],random 360,[0.0173835,0.00152235,0.999848]] call InitItem; 
 ['PaperHolder',[4204.91,3948.82,48.2106,true],85,[0.0173835,0.00152235,0.999848]] call InitItem; 
 ['PaperHolder',[4156.46,3947.76,55.9724,true],85,[0.0173835,0.00152235,0.999848]] call InitItem; 
-['PaperHolder',[4156.1,3947.75,55.9724,true],95,[0.0173835,-0.00151936,0.999848]] call InitItem; 
+['PaperHolder',[4156.1,3947.75,55.9724,true],95,[0.0173835,-0.00151928,0.999848]] call InitItem; 
 ['PenBlack',[4156.3,3948.06,50.8966],random 360,[0,0,1]] call InitItem; 
 ['PenBlack',[4156.17,3948.04,50.8966],random 360,[0,0,1]] call InitItem; 
 ['PenRed',[4156.47,3947.99,50.8966],random 360,[0,0,1]] call InitItem; 
@@ -2461,7 +2461,8 @@ _4195_154793940_6215843_77146 = ['RedButton',[4195.15,3940.62,43.7715],10,[0,0,1
 ['Bucket2',[4166.06,3935.97,46.2022],0,[0,0,1]] call InitItem; 
 ['Bucket1',[4166.4,3935.96,46.2022],0,[0,0,1]] call InitItem; 
 ['Bucket',[4165.63,3935.98,46.2022],0,[0,0,1]] call InitItem; 
-['BrushCleaner',[4167.5,3934.61,52.1772,true],345,[0.00827884,-0.0308972,0.999488]] call InitItem; 
+['BrushCleaner',[4167.5,3934.61,52.1772,true],345,[0.00827858,-0.0308972,0.999488]] call InitItem; 
+_4158_046393952_2873550_07617 = ['SteelGreenCabinet',[4158.05,3952.29,50.0762],270,[0,0,1]] call InitStruct; 
 
 
 
@@ -3157,4 +3158,17 @@ if (!isNil'_4132_815923868_9604547_04371') then {
 if (!isNil'_4195_154793940_6215843_77146') then {
 	_4195_154793940_6215843_77146 setvariable ['name',"Спектакальник"];
 	_4195_154793940_6215843_77146 setvariable ['desc',"Для начала представления - нажать. Для антракта - нажать снова. Завершить спектакль - нажать."];
+};
+if (!isNil'_4158_046393952_2873550_07617') then {
+	_4158_046393952_2873550_07617 setvariable ['name',"Бюджетный шкаф"];
+	_4158_046393952_2873550_07617 setvariable ['desc',"В этом ящике бюджет театра между прочим!"];
+	[_4158_046393952_2873550_07617,'Bryak',3,100] call (_4158_046393952_2873550_07617 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4158_046393952_2873550_07617,'Bryak',1,50] call (_4158_046393952_2873550_07617 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4158_046393952_2873550_07617,'Zvak',5,100] call (_4158_046393952_2873550_07617 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4158_046393952_2873550_07617,'Zvak',3,100] call (_4158_046393952_2873550_07617 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4158_046393952_2873550_07617,'Zvak',1,53] call (_4158_046393952_2873550_07617 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4158_046393952_2873550_07617,'Zvak',1,54] call (_4158_046393952_2873550_07617 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4158_046393952_2873550_07617,'Zvak',1,50] call (_4158_046393952_2873550_07617 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4158_046393952_2873550_07617,'Zvak',1,59] call (_4158_046393952_2873550_07617 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4158_046393952_2873550_07617,'Zvak',1,55] call (_4158_046393952_2873550_07617 getvariable 'proto' getvariable 'createItemInContainer');
 };
