@@ -847,7 +847,7 @@ _4168_620613940_8227547_12497 = ['WoodenDoubleDoor',[4168.62,3940.82,47.125],90,
 ['StripedChair',[4159.92,3941.68,47.1214],91,[0,0,1]] call InitItem; 
 ['StripedChair',[4160.71,3942.84,47.125],170,[0,0,1]] call InitItem; 
 ['StripedChair',[4155.37,3942.57,47.13],177,[0,0,1]] call InitItem; 
-['ContainerGreen4',[4155.75,3938.5,47.3013],85,[0,0,1]] call InitStruct; 
+_4155_745613938_5036647_30128 = ['ContainerGreen4',[4155.75,3938.5,47.3013],85,[0,0,1]] call InitStruct; 
 ['BarChair',[4155.7,3939.41,47.125],0,[0,0,1]] call InitItem; 
 ['BarChair',[4156.43,3939.4,47.1453],0,[0,0,1]] call InitItem; 
 ['BarChair',[4157.21,3939.36,47.116],0,[0,0,1]] call InitItem; 
@@ -1160,9 +1160,9 @@ _4159_370613951_6745651_69085 = ['IStruct',[4159.37,3951.67,51.6908],0,[0,0,1], 
 ['RedLuxuryChair',[4156.14,3949.18,50.0762],1.02453e-005,[0,0,1], {go_editor_globalRefs set ["RMasterTheatreChair",_thisObj];
 }] call InitStruct; 
 ['WoodenOfficeTable',[4157.21,3949.15,50.0738],270,[0,0,1]] call InitStruct; 
-['CaseBedroomMedium',[4157.18,3950.27,50.0738],270,[0,0,1]] call InitStruct; 
+_4157_179693950_2658750_07375 = ['CaseBedroomMedium',[4157.18,3950.27,50.0738],270,[0,0,1]] call InitStruct; 
 ['CaseBedroomMedium',[4155.12,3951.35,50.0772],92.9067,[0,0,1]] call InitStruct; 
-['LuxuryCabinet',[4155.37,3945.4,50.0772],90,[0,0,1]] call InitStruct; 
+_4155_373053945_3999050_07717 = ['LuxuryCabinet',[4155.37,3945.4,50.0772],90,[0,0,1]] call InitStruct; 
 ['Bookcase',[4161.62,3944.8,50.0762],90,[0,0,1]] call InitStruct; 
 ['StripedChair',[4157.98,3944.07,50.0772],199.002,[0,0,1]] call InitItem; 
 ['StripedChair',[4158.26,3948.7,50.0713],284.001,[0,0,1], {go_editor_globalRefs set ["RHelperTheatreChair",_thisObj];
@@ -2440,6 +2440,28 @@ _4133_293463867_9221247_04371 = ['SpawnPoint',[4133.29,3867.92,47.0437],67,[0,0,
 _4132_815923868_9604547_04371 = ['SpawnPoint',[4132.82,3868.96,47.0437],64,[0,0,1]] call InitStruct; 
 _4195_154793940_6215843_77146 = ['RedButton',[4195.15,3940.62,43.7715],10,[0,0,1], {go_editor_globalRefs set ["scene_launch",_thisObj];
 }] call InitStruct; 
+['PaperHolder',[4204.73,3962.79,48.1495,true],0,[0,0.0174515,0.999848]] call InitItem; 
+['PenBlack',[4204.78,3962.39,48.0882,true],random 360,[0,0.0174515,0.999848]] call InitItem; 
+['PenBlack',[4204.69,3962.45,48.0875,true],random 360,[0,0.0174515,0.999848]] call InitItem; 
+['PenBlack',[4204.86,3962.52,48.0872,true],random 360,[0,0.0174515,0.999848]] call InitItem; 
+['PenBlack',[4204.75,3962.55,48.0873,true],random 360,[0,0.0174515,0.999848]] call InitItem; 
+['PenBlack',[4204.53,3962.5,48.0859,true],random 360,[0,0.0174515,0.999848]] call InitItem; 
+['PenBlack',[4204.61,3949,48.147,true],random 360,[0.0173835,0.00152235,0.999848]] call InitItem; 
+['PenBlack',[4204.57,3948.84,48.1486,true],random 360,[0.0173835,0.00152235,0.999848]] call InitItem; 
+['PenBlack',[4204.52,3948.73,48.1493,true],random 360,[0.0173835,0.00152235,0.999848]] call InitItem; 
+['PenBlack',[4204.67,3948.78,48.1485,true],random 360,[0.0173835,0.00152235,0.999848]] call InitItem; 
+['PenBlack',[4204.66,3948.67,48.1484,true],random 360,[0.0173835,0.00152235,0.999848]] call InitItem; 
+['PaperHolder',[4204.91,3948.82,48.2106,true],85,[0.0173835,0.00152235,0.999848]] call InitItem; 
+['PaperHolder',[4156.46,3947.76,55.9724,true],85,[0.0173835,0.00152235,0.999848]] call InitItem; 
+['PaperHolder',[4156.1,3947.75,55.9724,true],95,[0.0173835,-0.00151936,0.999848]] call InitItem; 
+['PenBlack',[4156.3,3948.06,50.8966],random 360,[0,0,1]] call InitItem; 
+['PenBlack',[4156.17,3948.04,50.8966],random 360,[0,0,1]] call InitItem; 
+['PenRed',[4156.47,3947.99,50.8966],random 360,[0,0,1]] call InitItem; 
+['Umivalnik',[4167.28,3934.27,46.2012],270,[0,0,1]] call InitStruct; 
+['Bucket2',[4166.06,3935.97,46.2022],0,[0,0,1]] call InitItem; 
+['Bucket1',[4166.4,3935.96,46.2022],0,[0,0,1]] call InitItem; 
+['Bucket',[4165.63,3935.98,46.2022],0,[0,0,1]] call InitItem; 
+['BrushCleaner',[4167.5,3934.61,52.1772,true],345,[0.00827884,-0.0308972,0.999488]] call InitItem; 
 
 
 
@@ -2686,6 +2708,10 @@ if (!isNil'_4168_620613940_8227547_12497') then {
 	_4168_620613940_8227547_12497 setvariable ['name',"Партер"];
 	_4168_620613940_8227547_12497 setvariable ['islocked',true];
 };
+if (!isNil'_4155_745613938_5036647_30128') then {
+	[_4155_745613938_5036647_30128,'SigaretteDisabled',30,100] call (_4155_745613938_5036647_30128 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4155_745613938_5036647_30128,'MatchBox',4,100] call (_4155_745613938_5036647_30128 getvariable 'proto' getvariable 'createItemInContainer');
+};
 if (!isNil'_4167_301763935_6001046_17939') then {
 	[_4167_301763935_6001046_17939,'Cutlet',8,100] call (_4167_301763935_6001046_17939 getvariable 'proto' getvariable 'createItemInContainer');
 	[_4167_301763935_6001046_17939,'Butter',2,100] call (_4167_301763935_6001046_17939 getvariable 'proto' getvariable 'createItemInContainer');
@@ -2880,6 +2906,16 @@ if (!isNil'_4172_120613946_8227549_99997') then {
 if (!isNil'_4159_370613951_6745651_69085') then {
 	_4159_370613951_6745651_69085 setvariable ['name',"Картина Овода Квасова"];
 	_4159_370613951_6745651_69085 setvariable ['desc',"Посвящается народному артисту Канавы, великолепному мастеру импровизации и комедий - Оводу Квасову."];
+};
+if (!isNil'_4157_179693950_2658750_07375') then {
+	[_4157_179693950_2658750_07375,'PenRed',3,100] call (_4157_179693950_2658750_07375 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4157_179693950_2658750_07375,'PenBlack',3,100] call (_4157_179693950_2658750_07375 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4157_179693950_2658750_07375,'PaperHolder',1,100] call (_4157_179693950_2658750_07375 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_4155_373053945_3999050_07717') then {
+	[_4155_373053945_3999050_07717,'MatchBox',2,100] call (_4155_373053945_3999050_07717 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4155_373053945_3999050_07717,'SpirtBottle',3,100,[["var","bottlename","Вино"]]] call (_4155_373053945_3999050_07717 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4155_373053945_3999050_07717,'SigaretteDisabled',13,100] call (_4155_373053945_3999050_07717 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_4165_458503938_9314051_34815') then {
 	[_4165_458503938_9314051_34815,'NeedleWithThreads',2,100] call (_4165_458503938_9314051_34815 getvariable 'proto' getvariable 'createItemInContainer');
