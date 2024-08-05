@@ -27,9 +27,11 @@ call {
 	if (!isMultiplayer) exitwith {
 		gm_allowedModes = _classlist;
 	};
+	private _gmblacklist = ["ScriptedGamemode"] apply {tolower _x};
 	private _setter = [];
 	{
 		private _isplayable = getFieldBaseValueWithMethod(_x,"","isPlayableGamemode");
+		if ((tolower _x) in _gmblacklist) then {_isplayable = false}; //check blacklisted gamemodes
 		if (!isNullVar(_isplayable) && {_isplayable}) then {
 			_setter pushBackUnique _x;
 		};
