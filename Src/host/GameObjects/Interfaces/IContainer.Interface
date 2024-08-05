@@ -121,6 +121,8 @@ func(addItem)
 	private _oldSlot = getVar(_item,slot);
 	private _isSlot = _oldSlot != -1;
 	if (callFunc(_oldLoc,isMob) && _isSlot) then {
+		callFuncParams(_oldLoc,interpolate,"auto_trans" arg _item arg this);
+
 		callFuncParams(_oldLoc,removeItem,_item arg this);
 	} else {
 
@@ -168,7 +170,7 @@ func(removeItem)
 		callSelf(onContainerContentUpdate);
 
 		if _isMobNewLoc then {
-
+			callFuncParams(_newLoc,interpolate,"auto_trans" arg _item arg _slot);
 			if (callFuncParams(_newLoc,addItem,args2(_item,_slot))) then {
 				callFuncParams(_item,playEventSound,"pickup");
 			} else {

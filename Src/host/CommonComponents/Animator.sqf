@@ -6,6 +6,8 @@
 #include <..\engine.hpp>
 #include <..\ServerRpc\serverRpc.hpp>
 
+#ifndef ANIMATOR_EDITOR
+
 #define addAnim(name) INC(__animIndex); anim_assocList_keyString set [name,__animIndex]; anim_assocList_keyInt set [__animIndex,name]
 anim_assocList_keyString = createHashMap; 
 anim_assocList_keyInt = createHashMap;
@@ -19,6 +21,7 @@ addAnim("reshotks");
 addAnim("doorvlk1");
 addAnim("doorvlk2");
 addAnim("door_1_rot");
+addAnim("door_2_rot");
 addAnim("door_3_rot");
 
 //конвертор ассоциаций 
@@ -59,7 +62,7 @@ _anim = {
 	(_this select 0) setMimic (_this select 1)
 }; rpcAddGlobal("setMimic",_anim);
 
-
+#endif
 
 // =============================================================================
 // anim state sync
@@ -78,9 +81,11 @@ anim_isWalking = { "wlks" in (_this call anim_getUnitAnim)};
 anim_syncAnim = {
 	params ["_mob"];
 	
+	#ifndef ANIMATOR_EDITOR
 	if (!local _mob) exitWith {
 		errorformat("anim::syncAnim() - Generic locality error. Mob is not local - %1",_mob);
-	};	
+	};
+	#endif
 	/*if (_mob getVariable ["__SMDINT_isSupressedAnimSync",false]) exitWith {
 		invokeAfterDelayParams(anim_syncAnim,_mob getVariable "__SMDINT_animSyncCallAfter",_this);
 	};*/
@@ -273,8 +278,10 @@ anim_doAttack = {
 		params ["_mob"];
 		
 		_mob playActionNow (_mob getVariable ["__laststate","naRnaLnlRnlL_0000"])
-	};	
+	};
+	#ifndef ANIMATOR_EDITOR
 	invokeAfterDelayParams(_onEndAnim,0.4,[_mob]);
+	#endif
 	
 }; 
 
@@ -333,5 +340,7 @@ anim_doParry = {
 		params ["_mob"];
 		_mob playActionNow (_mob getVariable ["__laststate","naRnaLnlRnlL_0000"]);
 	};
+	#ifndef ANIMATOR_EDITOR
 	invokeAfterDelayParams(_onEndAnim,0.4,[_mob]);
+	#endif
 };

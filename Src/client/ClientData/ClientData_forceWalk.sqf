@@ -18,7 +18,7 @@ _onSyncLegsBoneState = {
 cd_fw_forceWalk = false;
 //сломанные кости на ногах записываются сюда
 cd_fw_hasBreakBone = false;
-cd_fw_isForceWalk = {cd_fw_forceWalk || cd_fw_hasBreakBone};
+cd_fw_isForceWalk = {cd_fw_forceWalk || cd_fw_hasBreakBone || ([player] call smd_isPulling)};
 cd_fw_syncForceWalk = {
 	private _mob = _this;
 	if ([_mob,"ghost_flag",VST_GHOST_EFFECT] call le_vst_hasVarExt) exitWith {
@@ -30,8 +30,9 @@ cd_fw_syncForceWalk = {
 //sprint sync
 cd_sp_enabled = true;
 cd_sp_lockedSetting = false;
+cd_sp_grabbingMob = false;
 cd_sp_canSprint = {
-	cd_sp_enabled && !cd_sp_lockedSetting
+	cd_sp_enabled && !cd_sp_lockedSetting && !cd_sp_grabbingMob
 };
 _spr_sync = {
 	player allowSprint (call cd_sp_canSprint)

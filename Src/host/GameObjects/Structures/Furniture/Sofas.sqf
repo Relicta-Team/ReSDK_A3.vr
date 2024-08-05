@@ -13,6 +13,7 @@ class(SofaBase) extends(IChair)
 	var(name,"Диван");
 	var(material,"MatCloth");
 	var(dr,2);
+	getter_func(isMovable,true);
 	//диваны
 endclass
 

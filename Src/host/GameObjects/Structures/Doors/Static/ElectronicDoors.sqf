@@ -71,6 +71,7 @@ class(GateCity) extends(ElectronicDeviceDoor)
 	var(material,"MatMetal");
 	var(dr,5);
 	getter_func(animateData,[vec3(0,0,0.95) arg 0]);
+	getterconst_func(interpSpeed,1.8);
 	var(edReqPower,10);
 	
 	getterconst_func(getActivationDelay,4);
@@ -87,6 +88,7 @@ class(SteelGridDoorElectronic) extends(ElectronicDeviceDoor)
 	var(material,"MatMetal");
 	var(dr,4);
 	getter_func(animateData,[vec3(0.55,0.55,-1.76488) arg 90]);
+	getterconst_func(interpSpeed,0.4);
 	
 	var(stBreakBonus,-4);
 	getterconst_func(canBreak,true);
@@ -95,4 +97,15 @@ class(SteelGridDoorElectronic) extends(ElectronicDeviceDoor)
 
 	getter_func(getOpenSoundParams,["doors\tribunal_open" arg getRandomPitchInRange(0.5,1.5) arg null arg 1.5]);
 	getter_func(getCloseSoundParams,["doors\falsewall_close" arg getRandomPitchInRange(0.5,1.5) arg null arg 1.5]);
+endclass
+
+class(CurtainElectronic) extends(ElectronicDeviceDoor)
+	var(name,"Занавес");
+	var(model,"ml\ml_object_new\shabbat\shtora_centr.p3d");
+	getter_func(animateData,[vec3(0,0,2.3) arg 0]);
+	getterconst_func(interpSpeed,4.5);
+	var(material,"MatCloth");
+
+	getterconst_func(canBreak,false);
+
 endclass

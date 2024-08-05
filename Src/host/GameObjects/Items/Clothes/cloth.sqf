@@ -322,6 +322,50 @@ class(ZnatCloth) extends(GreatcoatBlack)
 	var(name,"Знатная одежда");
 endclass
 
+//Халат
+class(BlueRobe) extends(BodyClothBase)
+	var(armaClass,"rds_uniform_schoolteacher");
+	var(name,"Синий халат");
+endclass
+
+//Пальто
+class(GreenCoat) extends(BodyClothBase)
+	var(armaClass,"Skyline_Character_U_CivilA_03_F");
+	var(name,"Зелёное пальто");
+endclass
+
+class(YellowCoat) extends(GreenCoat)
+	var(armaClass,"Skyline_Character_U_CivilA_02_F");
+	var(name,"Жёлтое пальто");
+endclass
+
+class(BlackPlaidCoat) extends(GreenCoat)
+	var(armaClass,"Skyline_Character_U_CivilA_09_F");
+	var(name,"Чёрное клетчатое пальто");
+endclass
+
+class(BluePlaidCoat) extends(GreenCoat)
+	var(armaClass,"Skyline_Character_U_CivilA_06_F");
+	var(name,"Синее клетчатое пальто");
+endclass
+
+class(WhitePlaidCoat) extends(GreenCoat)
+	var(armaClass,"Skyline_Character_U_CivilA_04_F");
+	var(name,"Белое клетчатое пальто");
+endclass
+
+class(RedPlaidCoat) extends(GreenCoat)
+	var(armaClass,"Skyline_Character_U_CivilA_10_F");
+	var(name,"Красное клетчатое пальто");
+endclass
+
+//Куртки(Сюда бы все куртки пермеместить...)
+class(GreenJacketCloth) extends(GreenCoat)
+	var(armaClass,"Skyline_Character_U_CivilA_10_F");
+	var(name,"Зелёная куртка");
+	var(desc,"Хорошая куртка из плотной ткани")
+endclass
+
 //кожанка
 class(LeatherJacketCloth) extends(BodyClothBase) var(armaClass,"Skyline_Character_U_CivilC_06_F"); endclass
 //химза
@@ -356,12 +400,11 @@ class(GreenWorkerCloth) extends(BodyClothBase)
 	var(weight,gramm(270));
 endclass
 
-
-
 class(AbbatCloth) extends(BodyClothBase)
 	var(armaClass,"U_TIOW_Priest_Red");
 	var(name,"Роба Аббата");
 endclass
+
 class(CliricCloth) extends(BodyClothBase)
 	var(armaClass,"U_TIOW_Priest_Grey");
 	var(name,"Серая роба");
@@ -480,15 +523,41 @@ class(HeadgearBase) extends(Cloth)
 endclass
 
 //headgears
+//Шляпы
+class(Hat) extends(HeadgearBase)
+	var(armaClass, "H_Hat_brown");
+	var(name, "Коричневая шляпа");
+endclass
+
+class(Hat1) extends(Hat)
+	var(armaClass, "H_Hat_Grey");
+	var(name, "Серая шляпа");
+endclass
+
+class(Hat2) extends(Hat)
+	var(armaClass, "H_Hat_tan");
+	var(name, "Жёлтая шляпа");
+endclass
+
+//Ушанки с ушами
 class(HatUshanka) extends(HeadgearBase)
-	
 	var(armaClass,"Skyline_HeadGear_Chapka_01_F");
 	var(weight,gramm(170));
 	var(maxSize,ITEM_SIZE_SMALL);
-	
-	
+	var(name, "Чёрная ушастая шапка");
 endclass
 
+class(HatUshanka1) extends(HatUshanka)
+	var(armaClass,"Skyline_HeadGear_Chapka_02_F");
+	var(name, "Синяя ушастая шапка");
+endclass
+
+class(HatUshanka2) extends(HatUshanka)
+	var(armaClass,"Skyline_HeadGear_Chapka_03_F");
+	var(name, "Зелёная ушастая шапка");
+endclass
+
+//Короны
 editor_attribute("InterfaceClass")
 class(HatProxy) extends(HeadgearBase)
 	func(armaItemAddImpl)
@@ -502,6 +571,17 @@ class(HatProxy) extends(HeadgearBase)
 	};
 endclass
 
+class(Crown1) extends(HatProxy)
+	var(name,"Корона");
+	var(model,"relicta_models\models\interier\props\treasure\crown\crown1.p3d");
+	var(weight,gramm(600));
+endclass
+
+class(Crown2) extends(Crown1)
+	var(name,"Корона");
+	var(model,"relicta_models\models\interier\props\treasure\crown\crown2.p3d");
+endclass
+
 class(HatBeret) extends(HeadgearBase)
 	var(armaClass,"H_Beret_Colonel");
 	var(name,"Берет");
@@ -512,34 +592,80 @@ class(HatArmyCap) extends(HeadgearBase)
 	var(name,"Фуражка");
 endclass
 
-class(HatShemag) extends(HeadgearBase)
-	var(armaClass,"H_ShemagOpen_tan");
-	var(name,"Головная повязка");
-endclass
-
+//Банданы и повязки
 class(HatBandana) extends(HeadgearBase)
 	var(armaClass,"H_Bandanna_gry");
 	var(name,"Чёрная повязка на голову");
 endclass
 
+class(HatBandana1) extends(HatBandana)
+	var(armaClass,"H_Bandanna_cbr");
+	var(name,"Коричневая повязка на голову");
+endclass
+
+class(HatBandana2) extends(HatBandana)
+	var(armaClass,"H_Bandanna_sand");
+	var(name,"Жёлтая повязка на голову");
+endclass
+
+class(HatBandana3) extends(HatBandana)
+	var(armaClass,"H_Bandanna_sgg");
+	var(name,"Зелёная повязка на голову");
+endclass
+
+class(HatShemag) extends(HeadgearBase)
+	var(armaClass,"H_ShemagOpen_tan");
+	var(name,"Головная повязка");
+endclass
+
+//Ушанки ухи к верху
+class(HatUshankaUp) extends(HeadgearBase)
+	var(armaClass,"rds_Woodlander_cap1");
+	var(name,"Коричневая безухая шапка");
+endclass
+
+class(HatUshankaUp1) extends(HatUshankaUp)
+	var(armaClass,"rds_Woodlander_cap2");
+	var(name,"Зелёная безухая шапка");
+endclass
+
+class(HatUshankaUp2) extends(HatUshankaUp)
+	var(armaClass,"rds_Woodlander_cap3");
+	var(name,"Тёмно-коричневая безухая шапка");
+endclass
+
+class(HatUshankaUp3) extends(HatUshankaUp)
+	var(armaClass,"rds_Woodlander_cap4");
+	var(name,"Светло-коричневая безухая шапка");
+endclass
+
+//Устаревший класс
+editor_attribute("Deprecated" arg "Заменить на HatUshankaUp2.")
 class(HatOldUshanka) extends(HeadgearBase)
 	var(armaClass,"rds_Woodlander_cap3");
 endclass
 
+//Устаревший класс
+editor_attribute("Deprecated" arg "Заменить на HatUshankaUp.")
 class(HatGrayOldUshanka) extends(HatOldUshanka)
 	var(armaClass,"rds_Woodlander_cap1");
 endclass
 
+//Шапки
 class(WorkerCap) extends(HeadgearBase)
 	var(armaClass,"rds_worker_cap2");
-	var(name,"Шапка");
+	var(name,"Жёлтая шапка");
 endclass
 
-class(WorkerCoolCap) extends(WorkerCap)
+class(WorkerCap1) extends(WorkerCap)
+	var(armaClass,"rds_worker_cap3");
+	var(name,"Светло-коричневая шапка с узором");
+endclass
+
+class(WorkerCap2) extends(WorkerCap)
 	var(armaClass,"rds_worker_cap4");
-	var(name,"Коричневая шапка");
+	var(name,"Коричневая шапка с узором");
 endclass
-
 
 class(CookerCap) extends(HeadgearBase)
 	var(armaClass,"rds_Villager_cap4");
@@ -548,6 +674,26 @@ class(CookerCap) extends(HeadgearBase)
 	var(weight,gramm(200));
 endclass
 
+class(CookerCap1) extends(CookerCap)
+	var(armaClass,"rds_Villager_cap1");
+	var(name,"Чёрный чепчик");
+	var(desc,"С пипкой на макушке! Сделан из шкуры чумазёдных мельтешат!");
+endclass
+
+class(CookerCap2) extends(CookerCap)
+	var(armaClass,"rds_Villager_cap2");
+	var(name,"Коричневый чепчик");
+	var(desc,"С пипкой на макушке! Сделан из мельтешиной шкурки!");
+endclass
+
+//Устаревший класс
+editor_attribute("Deprecated" arg "Заменить на WorkerCap2.")
+class(WorkerCoolCap) extends(WorkerCap)
+	var(armaClass,"rds_worker_cap4");
+	var(name,"Коричневая шапка");
+endclass
+
+//Капюшоны
 class(HoodAbbat) extends(HeadgearBase)
 	var(armaClass,"TIOW_Priest_Hood_Red");
 	var(name,"Капюшон");
@@ -568,17 +714,6 @@ endclass
 class(HoodChemicalProt) extends(HoodAbbat)
 	var(armaClass,"Skyline_HeadGear_NBC_Hazmat_01_F");
 	var(name,"Капюшон");
-endclass
-
-class(Crown1) extends(HatProxy)
-	var(name,"Корона");
-	var(model,"relicta_models\models\interier\props\treasure\crown\crown1.p3d");
-	var(weight,gramm(600));
-endclass
-
-class(Crown2) extends(Crown1)
-	var(name,"Корона");
-	var(model,"relicta_models\models\interier\props\treasure\crown\crown2.p3d");
 endclass
 
 //combat headgears

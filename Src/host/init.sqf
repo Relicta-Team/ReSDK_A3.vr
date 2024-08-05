@@ -47,6 +47,10 @@ call cs_runtime_internal_makeAll;
 [] call oop_loadTypes;
 //end classes
 
+//structures initialize
+loadFile("src\host\Structs\Structs_init.sqf");
+call struct_initialize; //init all struct
+
 //another loaded files...
 //DEPREACTED loadFile("src\host\Database\fDB\fDB_init.sqf"); //локальная база данных
 loadFile("src\host\Database\SQLite\SQLite_init.sqf");

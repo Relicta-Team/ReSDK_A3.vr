@@ -134,7 +134,7 @@ function(vcom_loadModel)
 
 function(vcom_observ_loadCameraController)
 {
-	params [["_sizes",[0,0,100,100]]];
+	params [["_sizes",[0,0,100,100]],["_ctxRef",null]];
 
 	//reset buttons
 	vcom_observ_buttons = call vcom_const_observ_buttons;
@@ -167,10 +167,11 @@ function(vcom_observ_loadCameraController)
 	private _d = call vcom_getDisplay;
 	private _ctg = call vcom_getCtg;
 	if (isNullReference(_d) || isNullReference(_ctg)) exitwith {};
-
-	private _zoneDrag = [_d,TEXT,_sizes,_ctg] call createWidget;
+	private _bc = [_d,WIDGETGROUP,_sizes,_ctg] call createWidget;
+	private _zoneDrag = [_d,TEXT,WIDGET_FULLSIZE,_bc] call createWidget;
 	_zoneDrag ctrlSetTooltip "Тяните мышку чтобы вращать объект";
 	_ctg setvariable ["_zoneDragWidget",_zoneDrag];
+	_ctg setvariable ["_wgroupRef",_bc];
 
 	_d DisplayAddEventHandler ["mousebuttondown",{['MouseButtonDown',_this] call vcom_observ_handleControl;}];
 	_d DisplayAddEventHandler ["mousebuttonup",{['MouseButtonUp',_this] call vcom_observ_handleControl;}];
@@ -230,6 +231,23 @@ function(vcom_observ_loadCameraController)
 		vcom_observ_internal_camModifKeyVal = 0;
 	}];
 
+	if (vcom_windowMode=="prox") then {
+		private _unit = createvehicle [BASIC_MOB_TYPE,position _logic,[],0,"none"];
+		_ctxRef set [0,_unit];
+		vcom_prox_center = _unit; //unit
+		vcom_observedObjects pushBack vcom_prox_center;
+
+		//caminit
+		vcom_observ_camPos = [10,-45,15,[0,0,-1]]; //[5,0,0,[0,0,0.85]];
+		//detach vcom_targetObject;
+		vcom_targetObject attachto [vcom_prox_center,vcom_observ_camPos select 3,""];
+		private _cam = vcom_camObject;
+		_cam cameraeffect ["internal", "back"];
+		_cam campreparefocus [-1,-1];
+		_cam campreparefov 0.35;
+		_cam camcommitprepared 0;
+	};
+
 	vcom_handler_draw3D = addMissionEventHandler ["draw3D",{['draw3D',_this] call vcom_observ_handleControl;}];
 
 	call vcom_observ_reloadCamPos;
@@ -239,6 +257,10 @@ function(vcom_observ_reloadCamPos)
 {
 	vcom_observ_buttons = [[0,0],[0,0]];
 	["Mouse",[controlnull,0,0]] call vcom_observ_handleControl;
+	if (vcom_windowMode=="prox") then {
+		["draw3D",[controlnull,0,0]] call vcom_observ_handleControl;
+		["MouseZChanged",[controlnull,0]] call vcom_observ_handleControl;
+	};	
 	vcom_observ_buttons = [[],[]];
 }
 
@@ -289,6 +311,9 @@ function(vcom_observ_centerAtObject)
 function(vcom_observ_handleControl)
 {
 	params ["_controlType","_thisParams"];
+	
+	_isMobCamControl = vcom_windowMode == "prox";
+
 	call {
 		if (_controlType == "MouseButtonDown") exitwith {
 			if !(((call vcom_getDisplay) getvariable "____zoneDragRef") call isMouseInsideWidget) exitwith {};
@@ -303,11 +328,74 @@ function(vcom_observ_handleControl)
 		if (_controlType == "MouseZChanged") exitwith {
 			if !(((call vcom_getDisplay) getvariable "____zoneDragRef") call isMouseInsideWidget) exitwith {};
 			
+			if (_isMobCamControl) exitWith {
+				_cam = vcom_camObject;
+				_center = vcom_prox_center;
+				_target = vcom_targetObject;
+				private _disMax = (boundingboxreal _center select 0 vectordistance (boundingboxreal _center select 1)) * 1.5;
+
+				_dis = vcom_observ_camPos select 0;
+				_dis = _dis - ((_thisParams select 1) / _disMax);
+				_dis = _dis max (_disMax * 0.05) min _disMax;
+				vcom_observ_camPos set [0,_dis];
+			};
+
 			_z = _thisParams select 1;
 			_dis = vcom_observ_camPos select 0;
 			_dis = _dis - (_z / 4);
 			_dis = _dis max 1 min 30; //prev 10
 			vcom_observ_camPos set [0,_dis];
+		};
+		if (_controlType=="Mouse" && _isMobCamControl) exitWith {
+			[_thisParams select 1,GetMousePosition select 0,GetMousePosition select 1] params ["_ctrl", "_mX", "_mY"];
+
+			_cam = vcom_camObject;
+			_center = vcom_prox_center;
+			_target = vcom_targetObject;
+			
+			vcom_observ_camPos params ["_dis", "_dirH", "_dirV", "_targetPos"];
+			vcom_observ_buttons params ["_LMB", "_RMB"];
+			if (isNullReference(_thisParams select 0)) then {
+				_LMB = [0,0];
+			};
+
+			if (count _LMB > 0) then 
+			{
+				_LMB params ["_cX", "_cY"];
+				vcom_observ_buttons set [0,[_mX, _mY]];
+
+				//first person camera
+				prox_cam_dragControl set [0,(_cX - _mX)];
+				prox_cam_dragControl set [1,(_cY - _mY)];
+
+				boundingboxreal _center params ["_minBox", "_maxBox"];
+				private _centerSizeBottom = _minBox select 2;
+				private _centerSizeUp = _maxBox select 2;
+				private _centerSize = sqrt ([_minBox select 0, _minBox select 1] distance2D [_maxBox select 0, _maxBox select 1]);
+
+				private _z = _targetPos select 2;
+				_targetPos = _targetPos getPos [(_cX - _mX) * _centerSize, _dirH - 90];
+				_z = (_z - (_cY - _mY) * _centerSize) max _centerSizeBottom min _centerSizeUp;
+				_targetPos = [0,0,0] getPos [([0,0,0] distance2D _targetPos) min _centerSize, [0,0,0] getDir _targetPos];
+				_targetPos set [2, _z max ((_minBox select 2) + 0.2)];
+
+				vcom_observ_camPos set [3, _targetPos];
+			};
+			if (count _RMB > 0) then {
+				_RMB params ["_cX", "_cY"];
+
+				private _dX = (_cX - _mX) * 0.75;
+				private _dY = (_cY - _mY) * 0.75;
+				private _z = _targetPos select 2;
+				
+				_targetPos = [0,0,0] getPos [[0,0,0] distance2D _targetPos, ([0,0,0] getDir _targetPos) - _dX * 180];
+				_targetPos set [2, _z];
+
+				vcom_observ_camPos set [1, (_dirH - _dX * 180) % 360];
+				vcom_observ_camPos set [2, (_dirV - _dY * 100) max -89 min 89];
+				vcom_observ_camPos set [3, _targetPos];
+				vcom_observ_buttons set [1, [_mX,_mY]];
+			};
 		};
 		if (_controlType == "Mouse") exitWith {
 			ifcheck(equals(_thisParams select 0,controlnull),_thisParams select vec2(1,2),GetMousePosition) params ["_mX","_mY"];
@@ -327,6 +415,7 @@ function(vcom_observ_handleControl)
 			_RMB = vcom_observ_buttons select 1;
 
 			if (count _LMB > 0) then {
+
 				_cX = _LMB select 0;
 				_cY = _LMB select 1;
 				_dX = (_cX - _mX) * 10;
@@ -375,6 +464,31 @@ function(vcom_observ_handleControl)
 			_cam camcommitprepared 0;
 		};
 		if (_controlType == "draw3D") exitwith {
+
+			if (_isMobCamControl) then {
+				_cam = vcom_camObject;
+				_center = vcom_prox_center;
+				_target = vcom_targetObject;
+
+				if (prox_isExternalCam) then {
+					vcom_observ_camPos params ["_dis","_dirH","_dirV","_targetPos"];
+					
+					[_target, [_dirH + 180, -_dirV, 0]] call bis_fnc_setobjectrotation;
+					_target attachto [_center, _targetPos, ""]; //--- Reattach for smooth movement
+
+					//_cam setvectordirandup [vectordirvisual _target, vectorupvisual _target];
+					//_cam setPosASL (_target modeltoworldvisualworld [0, -_dis, 0]); //--- Don't use setPosASL, can be blacklisted on server
+					_cam attachto [_target,[0, -_dis, 0],""];
+					_cam setdir 0;
+				} else {
+					call prox_cam_updateInternalCamera
+				};
+
+				
+
+				call prox_syncVisualSceneWidgets;	
+			};
+
 			if (!vcom_visual_canDrawLines) exitwith {};
 			
 			_logic = vcom_logicObject;

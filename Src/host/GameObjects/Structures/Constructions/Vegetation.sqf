@@ -44,8 +44,24 @@ class(SmallMushroom1) extends(SmallMushroom)
 	var(model,"veg_gliese\tw2.p3d");
 endclass
 
+editor_attribute("InterfaceClass")
+class(IWoodenVegetation) extends(Vegetation)
+	func(getOnDestroyTypesFromMaterial)
+	{
+		objParams();
+		private _mat = callSelf(getMaterial);
+		if !isNullReference(_mat) exitWith {
+			if isTypeOf(_mat,MatWood) exitWith {
+				["LogDebris1" arg "LogDebris2"];
+			};
+			super();
+		};
+		super();
+	};
+endclass
+
 editor_attribute("EditorGenerated")
-class(BigMushroom) extends(Vegetation)
+class(BigMushroom) extends(IWoodenVegetation)
 	var(model,"veg_gliese\tx2.p3d");
 	var(name,"Гриб");
 endclass
@@ -107,7 +123,7 @@ class(TreeRoots1) extends(TreeRoots)
 endclass
 
 editor_attribute("EditorGenerated")
-class(TreeRoots) extends(Vegetation)
+class(TreeRoots) extends(IWoodenVegetation)
 	var(model,"ml\ml_object_new\model_24\derevo.p3d");
 	var(name,"Корни");
 	var(material,"MatWood");

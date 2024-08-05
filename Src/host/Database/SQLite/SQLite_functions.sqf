@@ -6,6 +6,8 @@
 
 //отлов ошибки с any полями бд
 #define CATCH_REQUEST_ERROR
+//проверка последней ошибки
+#define VALIDATE_LAST_ERROR
 
 db_open = {
 	parseSimpleArray((dbRequest ["open",[DB_PATH]])select 0)
@@ -53,10 +55,13 @@ db_checkSystemReturn = {
 	if (_isSys && _printtoconsole) then {
 		if equals(_output select 0,1) then {
 			logformat("[DATABASE]:	%1 - %2",_output select 0 arg _output select 1);
+			["[DATABASE]:	%1 - %2",_output select 0 arg _output select 1] call logInfo;
 		} else {
 			errorformat("[DATABASE]:	Return code: %1 - %2",_output select 0 arg _output select 1);
+			["[DATABASE]:	Return code: %1 - %2",_output select 0 arg _output select 1] call logError;
 			errorformat("[DATABASE]: %1",call db_getlasterror);
-		}
+			["[DATABASE]: %1",call db_getlasterror] call logError;
+		};
 	};
 	_isSys
 };
@@ -105,8 +110,27 @@ db_query = {
 		["Probably error database request: %1 (%2)",_request,_retTypes] call logError;
 	};
 	#endif
+	["db::query() ret:%2-%3; req: %1",_request,_retTypes,_singleReturn] call logInfo;
+	private _resp = (dbRequest ["query",[_request,_retTypes]]);
+	
+	//check exceptions
+	#ifdef VALIDATE_LAST_ERROR
+	if ((_resp select 1) != 0) exitWith {
+		["db::query(): Fatal query error: %1",_resp] call logError;
+		["db::query(): %1",call db_getlasterror] call logError;
 
-	private _q = parseSimpleArray((dbRequest ["query",[_request,_retTypes]])select 0);
+		["Database fatal error. See logs for more details. Server will be restart after 5 seconds"] call discServerNotif;
+		["<t size='4'>Ошибочка. Сервер надо перезапустить...</t>","system"] call cm_sendOOSMessage;
+		
+		{[getVar(_x,id),"Возникла общая ошибка. Сервер сейчас перезапустится."] call cm_serverKickById;} foreach cm_allClients;
+		if (!cm_isServerLocked) then {call cm_serverLock;};
+
+		invokeAfterDelay({"#restart" call cm_serverCommand},5);
+		null //for skip any actions
+	};
+	#endif
+	
+	private _q = parseSimpleArray(_resp select 0);
 	if (_singleReturn) exitWith {_q select 0};
 	_q
 };

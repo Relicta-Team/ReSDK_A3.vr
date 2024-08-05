@@ -158,10 +158,10 @@ class(IReagentNDItem) extends(IReagentItem)
 					for "_z" from -1 to 1 do {
 						private _myCh = _chid vectorAdd [_x,_y,_z];
 						
-						private _chObj = [_myCh] call atmos_getChunkAtChId;
-						if isNullReference(_chObj) then {continue};
-						private _f = callFunc(_chObj,getFireInChunk);
-						private _hasFire = !isNullReference(_f);
+						private _chObj = [_myCh] call atmos_getChunkAtChIdUnsafe;
+						if isNullVar(_chObj) then {continue};
+						private _f = _chObj get "aFire";
+						private _hasFire = !isNullVar(_f);
 						private _fitems = [];
 						{
 							if callFunc(_x,isFireLight) then {
@@ -169,29 +169,29 @@ class(IReagentNDItem) extends(IReagentItem)
 									_fitems pushBack _x;
 								};
 							};
-						} foreach callFunc(_chObj,getObjectsInChunk);
+						} foreach (_chObj call ["getObjectsInChunk"]);
 
 						{
 							_x params ["_m","_n"];
 							if (_m=="Water" && _n >= 1) then {
 								if (_hasFire) then {
-									callFuncParams(_f,adjustForce,-5);
+									_f call ["adjustForce",-5];
 								};
 								{callFuncParams(_x,lightSetMode,false)} foreach _fitems;
 							};
 							if (_m=="Spirt" && _n>=0.5) then {
 								if (_hasFire) then {
-									callFuncParams(_f,adjustForce,7);
+									_f call ["adjustForce",7];
 								};
 								if (count _fitems > 0) then {
-									_f = [callFunc(_chObj,getChunkCenterPos),"AtmosAreaFire",true] call atmos_createProcess;
-									_hasFire = !isNullReference(_f);
-									callFuncParams(_f,adjustForce,5);
+									_f = [_chObj call ["getChunkCenterPos"],"AtmosAreaFire",true] call atmos_createProcess;
+									_hasFire = !isNullVar(_f);
+									_f call ["adjustForce",5];
 								};
 							} else {
 								if (_n >= 2) then {
 									if (_hasFire) then {
-										callFuncParams(_f,adjustForce,-1);
+										_f call ["adjustForce",-1];
 									};
 								};
 							};

@@ -156,6 +156,9 @@ input_movementCheck = {
 		true
 	};
 
+	//нельзя тащить вперёд
+	if (_isMov && {[player] call smd_isPulling} && {call input_internal_isMovingForward}) exitWith {true};
+
 	(player getVariable ["smd_bodyParts",[true,true,true,true]]) params ["_ra","_la","_rl","_ll","_canStand"];
 	_hasNoLegs = !_rl && !_ll;
 	//флаг если персонаж с костылями
@@ -200,6 +203,7 @@ input_movementCheck = {
 };
 input_internal_isChangeStance = {_key in CHANGE_STANCE_BUTTONS};
 input_internal_isMovingButton = {_key in CAN_MOVE_BUTTONS};
+input_internal_isMovingForward = {_key in MOVE_FORWARD_BUTTONS};
 
 input_getKeyNameByInputName = {
 	params ["_inp"];

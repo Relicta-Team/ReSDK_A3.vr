@@ -45,6 +45,8 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 
 	getterconst_func(isRadio,false);
 
+	getter_func(isMovable,true);
+
 	getterconst_func(canPickup,true); //можно ли поднять предмет
 	editor_attribute("EditorVisible" arg "custom_provider:allowedSlots") editor_attribute("Tooltip" arg "В какие слоты может быть назначен предмет")
 	var_array(allowedSlots);
@@ -436,6 +438,18 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		if !callFuncParams(_loc,canMoveOutItem,this) exitWith {false};
 		if !callFuncParams(_newlocation,canMoveInItem,this) exitWith {false};
 
+		if callFunc(_newlocation,isMob) then {
+			//transfer item in mob
+			traceformat("transfer item to mob %1",vec3(this,_loc,_newlocation))
+			callFuncParams(_newlocation,interpolate,"auto_trans" arg this arg _newlocation);
+		} else {
+			//transfer item from mob
+			if callFunc(_loc,isMob) then {
+				traceformat("transfer item from mob %1",vec3(this,_loc,_newlocation))
+				callFuncParams(_loc,interpolate,"auto_trans" arg this arg _newlocation);
+			};
+		};
+
 		callFuncParams(_loc,onMoveOutItem,this);
 		callFuncParams(_newlocation,onMoveInItem,this);
 		true
@@ -450,6 +464,11 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 			false
 		};
 		if (!_supressThrowErrLoc && {!callFuncParams(_loc,canMoveOutItem,this)}) exitWith {false};
+		
+		if isTypeOf(_loc,Mob) then {
+			callFuncParams(_loc,interpolate,"auto_trans" arg this arg getVar(this,pointer));
+		};
+
 		if (!_supressThrowErrLoc) then {
 			callFuncParams(_loc,onMoveOutItem,this);
 		};
@@ -948,8 +967,10 @@ class(SystemHandItem) extends(SystemItem)
 		private _relDir = [0,0,1];
 		private _sidePos = ifcheck(getSelf(side)==SIDE_LEFT,vec3(-0.3,0.8,0),vec3(0.3,0.8,0));
 		private _canReattach = true;
+		private _isMob = callFunc(_obj,isMob);
+		private _itemDragModename = "grab";//todo -> ifcheck(_isMob,"grab","pull");
 
-		if callFunc(_obj,isMob) then {
+		if (_isMob) then {
 			
 			//если его хочет грабнуть кто-то другой то ...
 			//точнее если владелец
@@ -1004,10 +1025,17 @@ class(SystemHandItem) extends(SystemItem)
 			private _m = format["хватает %1 %2",[_tz,TARGET_ZONE_NAME_WHAT] call gurps_convertTargetZoneToString,callFuncParams(_obj,getNameEx,"кого")];
 			callFuncParams(getSelf(loc),meSay,_m);
 
+			callFuncParams(getSelf(loc),fastSendInfo,"cd_sp_grabbingMob" arg true);
+			callFuncParams(getSelf(loc),sendInfo,"spr_sync" arg []);
+
 		} else {
+			//non-mob
 			setSelf(object,_obj);
+			setSelf(weight,getVar(_obj,weight));//set weight for object
 			_worldObj = getVar(_obj,loc);
-			setSelf(attachedWeap,weaponModule(WeapHandyItem));
+			setSelf(attachedWeap,weaponModule(WeapHandyItem)); //todo change 
+			_canReattach = false;
+			_grabIsBlocked = true;//todo remove when fix
 		};
 
 		if (_grabIsBlocked) exitWith {};
@@ -1024,16 +1052,19 @@ class(SystemHandItem) extends(SystemItem)
 
 		};
 
-		setSelf(mode,"grab");
+		setSelf(mode,_itemDragModename);
 
 		callFuncParams(getSelf(loc),addItem,this arg _slotTo);
+
+		if (!_isMob) then {
+			callFuncParams(_obj,startPull,getSelf(loc));
+		};
 	};
 
 	func(stopGrab)
 	{
 		objParams();
 
-		//TODO: разделение на моба и структуру
 		private _obj = getSelf(object);
 		setSelf(object,nullPtr);
 
@@ -1045,6 +1076,10 @@ class(SystemHandItem) extends(SystemItem)
 		private _isGrabOtherMob = !isNullReference(_otherObj) && {not_equals(_obj,_otherObj)};
 
 		callFuncParams(getSelf(loc),removeItem,this arg nullPtr);
+
+		if !callFunc(_obj,isMob) exitWith {
+			callFuncParams(_obj,stopPull,getSelf(loc));
+		};
 
 		private _mobObj = getVar(_obj,owner);
 		private _usrObj = getVar(getSelf(loc),owner);
@@ -1087,6 +1122,15 @@ class(SystemHandItem) extends(SystemItem)
 
 			callFuncParams(_obj,syncSmdVar,"isGrabbed" arg false);
 		};
+
+		
+		private _grabbedAnyMobs = (
+			{
+				(!isNullReference(_x) && {callFunc(getVar(_x,object),isMob)})
+			} count getVar(getSelf(loc),specHandAct)
+		) > 0;//no grabbed mobs now
+		callFuncParams(getSelf(loc),fastSendInfo,"cd_sp_grabbingMob" arg _grabbedAnyMobs);
+		callFuncParams(getSelf(loc),sendInfo,"spr_sync" arg []);
 
 	};
 
@@ -1232,6 +1276,36 @@ class(SystemInternalND) extends(Item)
 		};
 	};
 
+endclass
+
+editor_attribute("HiddenClass")
+class(SystemInternalDynamicND) extends(SystemInternalND)
+	var(ptrval,"");
+	var(delegateNDInfo,null);
+	var(delegateNDInput,null);
+	var(context,null);
+
+	func(getNDInfo) {
+		objParams();
+		this call getSelf(delegateNDInfo);
+	};
+
+	func(onHandleNDInput) {
+		objParams_2(_usr,_inp);
+		[this,_usr,_inp] call getSelf(delegateNDInput);
+	};
+
+	//getter_func(getNDPointer,getSelf(ptrval));
+	func(setNDOptions)
+	{
+		objParams_6(_ndname,_dist,_ptr,_ndinf,_ndinp,_context);
+		setSelf(ndName,_ndname);
+		setSelf(ndInteractDistance,_dist);
+		setSelf(ptrval,_ptr);
+		setSelf(delegateNDInfo,_ndinf);
+		setSelf(delegateNDInput,_ndinp);
+		setSelf(context,_context);
+	};
 endclass
 
 editor_attribute("HiddenClass")

@@ -15,6 +15,7 @@ class(TableBase) extends(Furniture)
 	editor_only(var(desc,"Просто стол");)
 	var(material,"MatWood");
 	var(dr,2);
+	getter_func(isMovable,true);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -49,6 +50,11 @@ endclass
 editor_attribute("EditorGenerated")
 class(WoodenOfficeTable) extends(TableBase)
 	var(model,"ca\misc2\desk\desk.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(WoodenOfficeTable4) extends(WoodenOfficeTable)
+	var(model,"ml\ml_object_new\model_14_10\stolik.p3d");
 endclass
 
 editor_attribute("EditorGenerated")

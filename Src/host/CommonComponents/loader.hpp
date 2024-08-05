@@ -22,6 +22,7 @@
 
 importCommon("!PreInit.sqf");
 importCommon("Assert.sqf");
+importCommon("io.sqf");
 importCommon("Algorithm.sqf");
 importCommon("bitflags.sqf");
 importCommon("Animator.sqf");
@@ -37,3 +38,4 @@ importCommon("DateTime.sqf");
 importCommon("Replicator.sqf");
 importCommon("AttackTypesAssoc.sqf");
 importCommon("Pencfg.sqf");
+importCommon("StructLib.sqf");

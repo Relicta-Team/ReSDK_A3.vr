@@ -1,0 +1,338 @@
+// ======================================================
+// Copyright (c) 2017-2024 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+#define STRUCT_API_VERSION 1.1
+// enable fileinfo for structs. do not enable in release build
+//#define STRUCT_USE_ALLOC_INFO
+
+/*
+	Structures are dynamic faster than locations objects with automatically memory management
+
+	====================================
+	====================================
+	====================================
+
+	How to use:
+
+	1. Include this header in preloaded code. Before them include STRUCT_INIT_FUNCTIONS for generate functions
+		#define STRUCT_INIT_FUNCTIONS
+		#include "......\struct.hpp"
+	2. Load or include your struct delcarations
+		Optional you can use structlib for utility structures
+		Load or inlcude StructLib.sqf
+	3. After connection all structure declarations you must call initializator
+		call struct_initialize
+
+	If you need override base class for all structures define macro STRUCT_ROOT_TYPE on initialize functions:
+		#define STRUCT_INIT_FUNCTIONS
+		#define STRUCT_ROOT_TYPE StructTypeName
+		#include "......\struct.hpp"
+	For example this can be used for allocators
+
+	====================================
+	====================================
+	====================================
+	struct(Struct1) base(StructBase)
+		def(testvar) 1;
+		def(testvar2) false;
+		def(testfunc)
+		{
+			_a = 1 + 2;
+			_a //return
+		}
+	endstruct
+
+	_o = struct_new(TestStructure);
+	_o callv(method);
+	_o callp(method,1 arg 2);
+	_o getv(mem)
+	_o setv(mem,1)
+
+
+	* ==== Example of usage ====
+	struct(TestStructure)
+		def(variable) 3;
+		def(method) {}
+		? special methods
+		def(copy) {} //copy constructor
+		def(init) {} //constructor
+		def(del) {} //destructor
+		def(str) {} //string representation
+	endstruct
+
+	flags
+		"#create": Code - this is the hashmap object's constructor
+		"#clone": Code - this is code happening when cloning is done on this hashmap object
+		"#delete": Code - this is the hashmap object's destructor. It will always be executed inside missionNamespace.
+		"#str": Code - code that is used to evaluate what is displayed when the str function is called on the object - must return String
+		"#flags": Array of Strings - case-insensitive flags regarding this hashmap object
+			"noCopy": forbids copying, +_hashMapObject will throw an error
+			"sealed": prevents from adding and removing any keys - key values can still be edited
+			"unscheduled": all methods (including #clone and #create) will be executed in unscheduled environment
+		"#base": Array or HashMap - declaration of base class for inheritance
+		"#type": Any - can be used to give a object a "type name", on inheritance types will be merged into an Array
+
+	! Внимание !
+	При создании структур с переменными все их значения располагаются по одному адресу в памяти.
+	Это актуально как для ссылочных типов,так и для типов значений.
+	Т.е. мы можем использовать константы как значения, получаемые без накладных расходов на доп вызов кода
+
+	! Внимание 2 !
+	? Вероятнее всего (нужно проверить) хэшобъекты не могут возвращать значение в переменную с помощью exitWith
+	def(test) {params["_d"]; if(true) exitWith {123}}
+
+	_o = ...
+	private _var = _o call ["test",["hello"]];
+	assert(!isNullVar(_var)) //!выбросит исключение...
+
+*/
+
+#ifndef EDITOR
+	#undef STRUCT_USE_ALLOC_INFO
+#endif
+
+	//macro for specific member names (rvengine-side)
+	#define STRUCT_MEM_TYPE "#type"
+	#define STRUCT_MEM_BASE "#base"
+	#define STRUCT_MEM_TOSTRING "#str"
+	#define STRUCT_MEM_FLAGS "#flags"
+	#define STRUCT_MEM_CONSTRUCTOR "#create"
+	#define STRUCT_MEM_DESTRUCTOR "#delete"
+	#define STRUCT_MEM_COPY "#clone"
+
+// ======================================================
+// ======================================================
+// ======================================================
+
+// * * * * * * * * * * * * Declaration base * * * * * * * * * * * * 
+
+#define struct(name) _sdecl__ = [ [STRUCT_MEM_TYPE, #name ], [STRUCT_MEM_FLAGS, struct_default_flag], ["__dflg__",false] ];
+#define base(basename) _sdecl__ pushBack [STRUCT_MEM_BASE, #basename ];
+#define endstruct ;spi_lst pushBack _sdecl__;
+
+
+// * * * * * * * * * * * * Member declaration * * * * * * * * * * * *
+
+//define new field or method
+//!all values located for objects of type in one address (reference equals)
+#define def(varname) ;_soffst__ = _sdecl__ pushBack [#varname]; _sdecl__ select _soffst__ pushBack 
+
+//define new method for cast to type. Signature: $_ToType
+/*
+	def(value) 321;
+	cast_def(int) { self getv(value) }
+	...
+	_i = struct_cast(o,int); //_i == 321
+*/
+
+#define def_null(varname) def(varname) null;
+
+#define __STRUCT_CAST_PREFIX___ "$_"
+#define cast_def(typeto) ;_soffst__ = _sdecl__ pushBack [__STRUCT_CAST_PREFIX___ + (#varname)]; _sdecl__ select _soffst__ pushBack 
+#define static_def(t) setLastError("Static declarations are not supported in current version");
+
+
+// * * * * * * * * * * * * Member access and call * * * * * * * * * * * *
+
+//method managemet
+#define self _self
+//call function without parameters
+#define callv(methodname) call [#methodname]
+//call functions with parameters
+#define callp(methodname,params) call [#methodname,[params]]
+//call base version of any method
+#define callbase(methodname) _this call(missionnamespace getvariable ("pts_"+(self GET STRUCT_MEM_TYPE select 1)) GET #methodname)
+
+//variables management
+#define getv(memname) get #memname
+#define setv(memname,val__) set [#memname,val__]
+
+
+// * * * * * * * * * * * * Type checking * * * * * * * * * * * *
+
+#define isinstance(_inst_o,type_n) (#type_n in (_inst_o get STRUCT_MEM_TYPE))
+
+#define struct_typename(o) ((o) GET STRUCT_MEM_TYPE select 0)
+
+
+// * * * * * * * * * * * * Object management * * * * * * * * * * * *
+
+//instansing
+#ifdef STRUCT_USE_ALLOC_INFO
+	#define struct_new(name) (call{_sbj___ = [ pts_##name ] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
+	#define struct_newp(name,arglist) (call{_sbj___ = [ pts_##name ,[arglist]] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
+#else
+	#define struct_new(name) ([ pts_##name ] call struct_iallc)
+	#define struct_newp(name,arglist) ([ pts_##name ,[arglist]] call struct_iallc)
+#endif
+
+//forced delete structure
+#define struct_free(o) o SET ["__dflg__",true];{if !(_y isequaltype {})then{o deleteAt _x};}foreach o
+#define struct_erase(o) o SET ["__dflg__",true]; {o deleteAt _x}foreach o
+#define struct_isdeleted(o) (!isnil{o get "__dflg__"})
+//copy of object
+#define struct_copy(rval) (+(rval))
+
+
+// * * * * * * * * * * * * Type casting * * * * * * * * * * * *
+/*
+	For cast struct for special type
+
+	struct(Vec3)
+		def(_x) 0; def(_y) 0; def(_z) 0;
+		cast_def(Array)
+		{
+			[self getv(_x),self getv(_y),self getv(_z)]
+		}
+		cast_def(int)
+		{
+			floor (self getv(_x) + self getv(_y) + self getv(_z))
+		}
+	endstruct
+*/
+#define struct_cast(o,typeto) o call [__STRUCT_CAST_PREFIX___ + #typeto]
+
+//TODO implement
+// //#define struct_callstat(Typename,static_func)
+
+
+// * * * * * * * * * * * * Internal * * * * * * * * * * * *
+/*
+	! Not implemented in current version
+	special operator overloading
+	def(num) 0;
+	operator_def(=)
+	{
+		params ["_rval"];
+		_rval setv(num,_rval getv(num) + 1);
+		_rval;
+	}
+	operator_def(+)
+	{
+		params ["_rval"];
+		self setv(num,self getv(num) + _rval);
+	}
+
+	op_call(_struct, 	=  ,3); // _struct = _struct callp(operator_=,3);
+
+	opcall(_s,	+	,5); // _s callp(operator_+,5);
+*/
+
+
+#define ___struct_root_instr(v) #v
+
+#ifdef STRUCT_ROOT_TYPE
+	#define __STRUCT_CHECK_ROOT	\
+		private _structRootName = ___struct_root_instr(STRUCT_ROOT_TYPE); \
+		if !(_structRootName in _bmap) exitWith { \
+			private _eMessage = format["Structure type %1 not found; Disable flag STRUCT_ROOT_TYPE or declare that struct",_structRootName]; \
+			setLastError(_eMessage); \
+		};
+
+	//if base not root type - change base type
+	#define __STRUCT_REDEFINE_BASE \
+		if not_equals(_x,_structRootName) exitWith {_structRootName};
+
+
+#else
+	#define __STRUCT_CHECK_ROOT
+	#define __STRUCT_REDEFINE_BASE
+#endif
+
+
+
+#ifdef STRUCT_INIT_FUNCTIONS
+
+	spi_lst = []; //preinit structures list
+	vtable_s = createHashMap;
+	vt_cast = createHashMap; //cast table
+	struct_default_flag = ["unscheduled"];
+	struct_initialize = {
+
+		private _t = null;
+		private _decl = null;
+		//first pass - creating vtable and setup into vtable map
+		private _bmap = createHashMap;
+		private _undefFields = null;
+		{
+			//fill all fields with null values
+			_undefFields = _x select {count _x==1};
+			{
+				_x append [nil];
+				;false
+			} count _undefFields;
+
+			_decl = createHashMapFromArray _x;
+			_t = _decl deleteAt "init";
+			if !isNullVar(_t) then {
+				_decl set [STRUCT_MEM_CONSTRUCTOR,_t];
+			};
+			
+			_t = _decl deleteAt "del";
+			if !isNullVar(_t) then {
+				_decl set [STRUCT_MEM_DESTRUCTOR,_t];
+			};
+
+			_t = _decl deleteat "copy";
+			if !isNullVar(_t) then {
+				_decl set [STRUCT_MEM_COPY,_t];
+			};
+
+			_t = _decl deleteat "str";
+			if !isNullVar(_t) then {
+				_decl set [STRUCT_MEM_TOSTRING,_t];
+			};
+
+			missionnamespace setvariable ["pts_"+(_decl get STRUCT_MEM_TYPE),_decl];
+			vtable_s set [_decl get STRUCT_MEM_TYPE,_decl];
+			_bmap set [_decl get STRUCT_MEM_TYPE,_decl];
+		} foreach spi_lst;
+
+		//check base
+		__STRUCT_CHECK_ROOT
+
+		//second pass - inheritance
+		{
+			_declFrom = _y;
+			_tnTo = _declFrom get STRUCT_MEM_BASE;
+			if isNullVar(_tnTo) then {
+				__STRUCT_REDEFINE_BASE
+				continue
+			};
+			
+			_declTo = _bmap get _tnTo;
+			if !isNullVar(_declTo) then {
+				_declFrom set [STRUCT_MEM_BASE,_declTo];
+			};
+		} foreach _bmap;
+	};
+
+	VM_COMPILER_ADDFUNC_UNARY(struct_iallc,createHashMapObject);
+
+	struct_alloc = {
+		params ["_s","_params"];
+		
+		#ifdef STRUCT_USE_ALLOC_INFO
+		private _s = 
+		#endif
+
+		if isNullVar(_params) then {
+			[vtable_s get _s] call struct_iallc;
+		} else {
+			[vtable_s get _s,_params] call struct_iallc;
+		};
+		
+		#ifdef STRUCT_USE_ALLOC_INFO
+			_s set ["__fileinfo__",'stack:'+(str diag_stacktrace)];
+			_s
+		#endif
+	};
+
+	struct_eraseFull = {
+		params ["_o"];
+		struct_erase(_o)
+	};
+
+#endif

@@ -23,6 +23,7 @@ endclass
 
 class(Samovar) extends(InteractibleInterior)
 	var(model,"ml\ml_object_new\model_24\samovar.p3d");
+	getter_func(isMovable,true);
 endclass
 
 class(HoochMachine) extends(InteractibleInterior)
@@ -35,15 +36,18 @@ endclass
 
 class(StationTea) extends(InteractibleInterior)
 	var(model,"ml\ml_object_new\model_14_10\chai.p3d");
+	getter_func(isMovable,true);
 endclass
 
 class(Scales) extends(InteractibleInterior)
 	var(model,"ml\ml_object_new\model_14_10\wesi.p3d");
+	getter_func(isMovable,true);
 endclass
 
 class(Gramofon) extends(InteractibleInterior)
 	var(model,"relicta_models\models\interier\props\patefon.p3d");
 	var(material,"MatWood");
+	getter_func(isMovable,true);
 endclass
 
 class(OldEngine) extends(InteractibleInterior)
@@ -75,11 +79,7 @@ class(Forge) extends(InteractibleInterior)
 	var(model,"ml_shabut\exoduss\forge.p3d");
 endclass
 
-class(WaterBarrel) extends(InteractibleInterior)
-	var(model,"a3\structures_f_epb\items\vessels\barrelwater_grey_f.p3d");
-	var(material,"MatSynt");
-endclass
-
 class(Anvil) extends(InteractibleInterior)
 	var(model,"ml\ml_object_new\model_14_10\nakowal.p3d");
+	getter_func(isMovable,true);
 endclass

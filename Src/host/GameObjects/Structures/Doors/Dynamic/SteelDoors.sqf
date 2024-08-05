@@ -78,6 +78,15 @@ class(SteelArmoredDoor2) extends(SteelArmoredDoor)
 	getter_func(animateData,[["reshotks" arg 2.5 arg 5] arg vec3("plomba5",1.78,1.4)]);
 endclass
 
+class(SteelLatticeGate) extends(DoorDynamic)
+	var(name,"Стальные ворота");
+	var(model,"Land_PipeFence_01_m_gate_v2_closed_F");
+	getter_func(anmCount,animObj_count(2));
+	getter_func(animateData,[["door_1_rot" arg 2.5 arg ifcheck(!getSelf(isOpen),1.5,0.5)] arg ["door_2_rot" arg 2.5 arg ifcheck(!getSelf(isOpen),1.5,0.5)]]);
+	var(serializedAnim,[-1 arg -1 arg -1 arg -1 arg -1 arg -1]);
+	var(material,"MatMetal");
+endclass
+
 class(GreenAmbarWithDoors) extends(DoorDynamic)
 	getter_func(canUseMainAction,false); //В амбаре нельзя юзать такие дейсвтия
 	getter_func(canApplyDamage,false);

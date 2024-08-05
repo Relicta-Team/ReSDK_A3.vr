@@ -107,7 +107,7 @@ __G_FLAG_BUILD = false;
 #include <..\host\CommonComponents\loader.hpp>
 
 #define importClient(path) if (isNil {allClientContents}) then {allClientContents = [];}; if (client_isLocked) exitWith {__vm_log("Compile process aborted - client.isLocked == true")}; \
-	__vm_log("[LOAD] " + path); \
+	__vm_log("[LOAD] " + path + " (" + (str(count allClientContents))+ ")"); \
 	private _ctx = compile ((preprocessFile (path))); allClientContents pushback _ctx;
 
 #include <loader.hpp>
@@ -156,6 +156,25 @@ __vm_log("VM compile done");
 	};
 #endif
 
+__vm_log("Validate modules");
+
+{
+	{
+		__vm_log("Checking module " + (str _foreachIndex));
+		//включить для тестов если старая виртуалка начнет опять тупить
+		//copytoclipboard (CRYPT_KEY+"|"+(str (allClientContents select _foreachIndex)));
+	} foreach allClientContents;
+}
+except__
+{
+	_exName = str _exception;
+	_m = format ["	FATAL EXCEPTION: %1", _exName];
+	__vm_log(endl+endl+_m);
+
+	exitcode__ -25555;
+};
+
+__vm_log("Start copy to clipboard...");
 copyToClipboard (CRYPT_KEY+"|"+(str allClientContents));
 
 exitcode__ 0;

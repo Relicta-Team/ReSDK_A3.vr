@@ -62,6 +62,11 @@ class(WoodenSmallFence3) extends(WoodenSmallFence)
 endclass
 
 editor_attribute("EditorGenerated")
+class(WoodenSmallFence4) extends(WoodenSmallFence3)
+	var(model,"a3\props_f_enoch\infrastructure\traffic\woodenwindbreak_01_f.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(WoodenSmallFence2) extends(WoodenSmallFence)
 	var(model,"ml\ml_object_new\model_24\ykritie.p3d");
 endclass
@@ -108,6 +113,16 @@ class(SmallSteelRustyFence) extends(SmallFence)
 endclass
 
 editor_attribute("EditorGenerated")
+class(SmallSteelGreenFence) extends(SmallSteelRustyFence)
+	var(model,"ca\buildings\misc\plot_green_vrat_r.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
+class(MediumRedSteelFence) extends(SmallSteelRustyFence)
+	var(model,"ca\buildings\misc\plot_rust_vrata.p3d");
+endclass
+
+editor_attribute("EditorGenerated")
 class(RustyWindowFrameMeduim) extends(SmallSteelRustyFence)
 	var(model,"ml\ml_object_new\ml_object_2\l01_props\guardroom_window.p3d");
 	var(material,"MatMetal");
@@ -137,4 +152,5 @@ class(MedicalCurtainSmall) extends(SmallFence)
 	var(model,"ml_shabut\exoduss\medzanaves2.p3d");
 	var(name,"Ширма");
 	var(material,"MatCloth");
+	getter_func(isMovable,true);
 endclass

@@ -5,6 +5,7 @@
 
 #include <..\..\..\engine.hpp>
 #include <..\..\..\oop.hpp>
+#include <..\..\..\text.hpp>
 #include <..\..\GameConstants.hpp>
 
 // Стеллажи
@@ -74,6 +75,13 @@ class(Sink) extends(ShelfBase)
 	};
 endclass
 
+editor_attribute("EditorGenerated")
+class(Shower) extends(Sink)
+	var(model,"ml\ml_object_new\model_05\dysh.p3d");
+	var(name,"Мытьё");
+	var(desc,"Так сделано" pcomma " что сверху течёт струя прямо на голову.");
+endclass
+
 
 class(Umivalnik) extends(Sink)
 	var(model,"metro_ob\model\umivalnik1.p3d");
@@ -83,6 +91,7 @@ endclass
 editor_attribute("EditorGenerated")
 class(WoodenSmallShelf) extends(ShelfBase)
 	var(model,"ml\ml_object_new\shabbat\bar_stoika.p3d");
+	getter_func(isMovable,true);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -94,6 +103,7 @@ editor_attribute("EditorGenerated")
 class(LongShelf) extends(ShelfBase)
 	var(model,"ml_shabut\stelazh_ot_seregi\stelazh_ot_seregi.p3d");
 	var(dr,2);
+	getter_func(isMovable,true);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -106,10 +116,12 @@ endclass
 editor_attribute("EditorGenerated")
 class(BigRedEdgesRack) extends(ShelfBase)
 	var(model,"a3\structures_f\furniture\metal_wooden_rack_f.p3d");
+	getter_func(isMovable,true);
 endclass
 
 class(Shelves) extends(ShelfBase)
 	var(model,"a3\structures_f\furniture\metal_rack_f.p3d");
 	var(material,"MatMetal");
 	var(name,"Полки");
+	getter_func(isMovable,true);
 endclass

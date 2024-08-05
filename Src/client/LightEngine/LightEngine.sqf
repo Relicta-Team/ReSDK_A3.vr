@@ -19,6 +19,8 @@
 call le_se_doSorting;
 //create drop emitter map
 call le_se_internal_createDropEmitterMap;
+call le_se_internal_createUnmanagedEmitterMap;
+call le_se_internal_generateOptionAddress;
 
 #include "LightConfigs.sqf"
 #include "FireLightConfigs.sqf"
@@ -160,6 +162,13 @@ le_isLoadedLight = {
 	params ["_obj"];
 	private _light = _obj getvariable ["__light",objNUll];
 	not_equals(_light,objNUll)
+};
+
+le_getLoadedLightCfg = {
+	params ["_obj"];
+	private _light = _obj getvariable ["__light",objNUll];
+	if isNullReference(_light) exitWith {-1};
+	_obj getvariable ["__config",-1]
 };
 
 le_isLightConfig = {

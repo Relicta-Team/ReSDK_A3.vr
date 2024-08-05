@@ -784,7 +784,21 @@ region(Mob location info: position; direction; speed)
 		if (_dir > 45 && _dir <= 135) exitWith {DIR_RIGHT};
 		if (_dir > 135 && _dir <= 225) exitWith {DIR_BACK};
 		if (_dir > 225 && _dir <= 315) exitWith {DIR_LEFT};
-		errorformat("Unknown dir data %1",_dir);
+		DIR_FRONT
+	};
+
+	//inverted variant of getDirTo
+	func(getDirFrom)
+	{
+		objParams_1(_target);
+		private _obj = if (!isTypeOf(_target,Mob)) then {callFunc(_target,getBasicLoc)} else {getVar(_target,owner)};
+
+		private _dir = getSelf(owner) getRelDir _obj;
+
+		if (_dir > 315 || _dir <= 45) exitWith {DIR_FRONT};
+		if (_dir > 45 && _dir <= 135) exitWith {DIR_RIGHT};
+		if (_dir > 135 && _dir <= 225) exitWith {DIR_BACK};
+		if (_dir > 225 && _dir <= 315) exitWith {DIR_LEFT};
 		DIR_FRONT
 	};
 
@@ -1583,6 +1597,25 @@ region(Animator)
 	func(onChangeAnimCoef)
 	{
 		objParams();
+		//0.5-10 -> 0.5-1.4
+		private _move = callSelf(getMove) ;
+		//bonuses
+		private _encumBon = [getSelf(curEncumbranceLevel)] call gurps_encumLevelToMoveModifier;
+		_move = _move * _encumBon;
+		
+
+		//private _anmCoeff = getSelf(animCoef);
+		private _curSpeed = linearConversion[0.1,10,_move,0.5,1.4,true];
+
+		callSelfParams(setAnimSpeedCoef,_curSpeed);
+
+	};
+
+	func(setAnimSpeedCoef)
+	{
+		objParams_1(_val);
+
+		callSelfParams(syncSmdVar,"animSpeed" arg _val);
 	};
 
 	//установка кастомной анимации для частей тела, например для связки
@@ -2078,8 +2111,8 @@ region(Atmos subsystem)
 		if (tickTime >= getSelf(__lastChunkReactBody)) then {
 			setSelf(__lastChunkReactBody,tickTime+TIME_ATMOS_DELAY_REACT_BODY);
 			_chHd = [_hpos] call atmos_getChunkAtChIdUnsafe;
-			if !isNullReference(_chHd) then {
-				callFuncParams(_chHd,onMobContactBody,this)
+			if !isNullVar(_chHd) then {
+				_chHd call ["onMobContactBody",[this]];
 			};
 		};
 
@@ -2090,8 +2123,8 @@ region(Atmos subsystem)
 			if equals(_hpos,_lpos) exitWith {};// exit, because already contacted on body (STANCE_MIDDLE)
 			
 			_chLg = [_lpos] call atmos_getChunkAtChIdUnsafe;
-			if !isNullReference(_chLg) then {
-				callFuncParams(_chLg,onMobContactTurf,this);
+			if !isNullVar(_chLg) then {
+				_chLg call ["onMobContactTurf",[this]];
 			};
 		};
 	};

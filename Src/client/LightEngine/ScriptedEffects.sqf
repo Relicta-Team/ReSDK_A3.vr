@@ -11,6 +11,7 @@ le_se_map = createHashMap;
 le_se_noattr = null;
 le_se_cfgRange = [2100,4900];
 
+
 /*
 	regScriptEmit(name) //ineditor: start of cfg location
 		[ //this is array
@@ -33,13 +34,11 @@ le_se_cfgRange = [2100,4900];
 
 //Функция-обработчик скриптового освещения (для клиента)
 le_se_handleConfig = {
-	params ["_cfgDataList",["_isDrop",false],"_dropPos"];
-	private ["_t","_events","_o","_cfgDataCur"];
-	
-	private _funcInit = le_se_intenral_handleVarInit;
-	if (_isDrop) then {
-		_funcInit = le_se_intenral_handleDropVarInit;
-	};
+	params ["_cfgDataList",["_hMode",SCRIPT_EMIT_HANDLER_MODE_DEFAULT],"_dropPos"];
+	private ["_t","_events","_o","_cfgDataCur","_cfgDataCurIdx"];
+	private _isDrop = _hMode == SCRIPT_EMIT_HANDLER_MODE_DROP;
+	private _isUnmanaged = _hMode == SCRIPT_EMIT_HANDLER_MODE_UNMANAGED;
+	private _funcInit = le_se_list_fassoc select _hMode;
 
 	private _handleFirstEmit = false;
 	private _offset = [0,0,0];
@@ -80,6 +79,7 @@ le_se_handleConfig = {
 			_o = objnull;
 			call {
 				_cfgDataCur = _x;
+				_cfgDataCurIdx = _foreachIndex;
 				_t = _x select 0;
 				_events = _x param [1,[]]; //list events
 				//this dosent used
@@ -90,7 +90,9 @@ le_se_handleConfig = {
 				if (_t == "pt") exitwith {
 					_o = "#particlesource" createVehicleLocal [0,0,0];
 					call _funcInit;
-					call _funcInit; //?this really needed?
+					if (!_isUnmanaged) then {
+						call _funcInit; //?this really needed?
+					};
 				};
 				//light handler
 				if (_t == "lt") exitwith {
@@ -111,12 +113,43 @@ le_se_handleConfig = {
 	};
 	
 
-	if (_isDrop) exitWith {true};
+	if (_isDrop || _isUnmanaged) exitWith {true};
 	//addEventOnDestroySource not used in scripted emitters
 	//! native evh Destroyed not working with simple objects (sourceObject it is)
 
 	//Возвращаем свет 
 	sourceObject getvariable ["__light",objnull]
+};
+
+/* 
+	создание неуправляемых эмиттеров. 
+	параметр _dataHandler служит обработчиком внутри частиц
+	Он принимает набор специальных параметров:
+		- object - обрабатываемый эмиттер
+		- param_name - имя обрабатываемой опции
+		- param_value - значение обрабатываемой опции (является копией оригинала. при изменении опции значение будет установлено в эффекторе)
+		- emitter_index - индекс эмиттера в списке конфигурации
+
+*/
+le_se_createUnmanagedEmitter = {
+	params ["_cfg","_pos",["_dataHandler",{}]];
+	
+	if not_equalTypes(_cfg,"") then {
+		_cfg = str _cfg;
+	};
+
+	private __seMDat = le_se_map get _cfg;
+	if isNullVar(__seMDat) exitWith {
+		errorformat("Cant load light from config => %1",_cfg);
+		[]
+	};
+
+	private _u_spawnpos = _pos;//!do not change _u_spawnpos varname
+	private _allEmitters = []; //external variable
+	private sourceObject = objNull; //dummy var. just in case...
+	[__seMDat,SCRIPT_EMIT_HANDLER_MODE_UNMANAGED] call le_se_handleConfig;
+
+	_allEmitters
 };
 
 le_se_handleCfgEvents = {
@@ -161,7 +194,7 @@ le_se_map_cfgHandlers = createHashMap; //карта зарегистрирова
 //always need included on client
 #include "SEConfigHandlers.sqf"
 
-
+le_se_mapHandlersUnmanaged = null; //карта нативных эффектов
 le_se_mapHandlersShots = null;
 le_se_mapHandlers = createHashMapFromArray [
 	#ifdef EDITOR
@@ -266,6 +299,39 @@ le_se_internal_createDropEmitterMap = {
 	le_se_mapHandlersShots = createHashMapFromArray _listNew;
 };
 
+le_se_internal_createUnmanagedEmitterMap = {
+	private _listNew = le_se_mapHandlers toArray false;
+	private _funcSetPos = {
+		(_this select 0) setPosAtl _u_spawnpos;
+	};
+	{
+		_x params ["_prop","_val"];
+		if (_prop == "linkToSrc") then {_listNew select _forEachIndex set [1,{
+			(_this select 0) setposatl _u_spawnpos;
+		}]};
+		if (_prop == "linkToLight") then {_listNew select _forEachIndex set [1,{
+			(_this select 0) setposatl (_u_spawnpos vectoradd (_this select 1));
+		}]};
+		if (_prop == "setOrient") then {_listNew select _forEachIndex set [1,{}]};
+	} foreach _listNew;
+
+	le_se_mapHandlersUnmanaged = createHashMapFromArray _listNew;
+};
+
+le_se_intenral_handleUnmanagedVarInit = {
+	private _valCopy = null;
+	{
+		_x params ["_prop","_val"];
+		_valCopy = _val;
+		
+		if equalTypes(_valCopy,[]) then {_valCopy = array_copy(_valCopy)};
+
+		[_o,_prop,_valCopy,_cfgDataCurIdx] call _dataHandler;
+		[_o,_valCopy] call (le_se_mapHandlersUnmanaged getorDefault [_prop,le_se_errorHandler]);
+		true;
+	} count (_x select [2,(count _x) - 2]);
+};
+
 le_se_intenral_handleDropVarInit = {
 	{
 		_x params ["_prop","_val"];
@@ -286,7 +352,7 @@ le_se_fireEmit = {
 		false
 	};
 	private allEmitters = [];
-	[_cfgData,true,_pos] call le_se_handleConfig;
+	[_cfgData,SCRIPT_EMIT_HANDLER_MODE_DROP,_pos] call le_se_handleConfig;
 	// #ifdef EDITOR
 	// private _et = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
 	// _et setposatl _pos;
@@ -358,3 +424,109 @@ le_se_doSorting = {
 
 	} foreach le_se_map;
 };
+
+le_se_map_partAddress = createHashMap; //key setParticleN , value [functions]
+le_se_getParticleOption = {
+	params ["_optName","_varname","_storage"];
+	private _oDat = le_se_map_partAddress get _optName;
+	if isNullVar(_oDat) exitWith {null};
+	private _storCode = _oDat get _varname;
+	if isNullVar(_storCode) exitWith {null};
+	(_storage)call(_storCode select 0)
+};
+
+le_se_setParticleOption = {
+	params ["_optName","_varname","_storage","_value"];
+	private _oDat = le_se_map_partAddress get _optName;
+	if isNullVar(_oDat) exitWith {};
+	private _storCode = _oDat get _varname;
+	if isNullVar(_storCode) exitWith {};
+	[_storage,_value] call(_storCode select 1)
+};
+
+le_se_internal_generateOptionAddress = {
+	private _aListNames = ["setParticleParams","setParticleRandom","setParticleCircle","setDropInterval"];
+	private _aList = [
+		"particleShape", [0, 0, 0], 
+		"particleFSNtieth", [0, 0, 1], 
+		"particleFSIndex", [0, 0, 2], 
+		"particleFSFrameCount", [0, 0, 3], 
+		"particleFSLoop", [0, 0, 4], 
+		"particleType", [0, 2], 
+		"timerPeriod", [0, 3], 
+		"lifeTime", [0, 4], 
+		"position", [0, 5], 
+		"moveVelocity", [0, 6], 
+		"rotationVelocity", [0, 7], 
+		"weight", [0, 8], 
+		"volume", [0, 9], 
+		"rubbing", [0, 10], 
+		"size", [0, 11], 
+		"color", [0, 12], 
+		"animationSpeed", [0, 13], 
+		"randomDirectionPeriod", [0, 14], 
+		"randomDirectionIntensity", [0, 15], 
+		"onTimerScript", [0, 16], 
+		"beforeDestroyScript", [0, 17], 
+		"attachTo", [0, 18], 
+		"angle", [0, 19], 
+		"onSurface", [0, 20], 
+		"bounceOnSurface", [0, 21], 
+		"emissiveColor",  [0, 22], 
+		"lifeTimeVar", [1, 0], 
+		"positionVar",  [1, 1], 
+		"moveVelocityVar", [1, 2], 
+		"rotationVelocityVar", [1, 3], 
+		"sizeVar",  [1, 4], 
+		"colorVar", [1, 5], 
+		"randomDirectionPeriodVar", [1, 6], 
+		"randomDirectionIntensityVar",  [1, 7], 
+		"angleVar",  [1, 8], 
+		"bounceOnSurfaceVar",  [1, 9], 
+		"circleRadius", [2, 0], 
+		"circleVelocity", [2, 1],
+		"interval",  [3]
+	];
+	private _oName = null;
+	private _oValAddr = null;
+	for "_i" from 0 to (count _aList)-1 step 2 do {
+		_oName = _aList select _i;
+		_oValAddr = _aList select (_i+1);
+		private _pOffset = _oValAddr select 0;
+		private _propName = _aListNames select _pOffset;
+		private _addrMap = _oValAddr select [1,count _oValAddr];
+		private _funcBuffGet = ["_this"];
+		private _funcBuffSet = ["(_this select 0)"];
+		if (count _addrMap==0) then {
+			//no addresses - is value
+			_funcBuffGet pushBack (format[""]);
+			_funcBuffSet pushBack (format[""]);
+		} else {
+			_funcBuffGet pushBack (format["%1",_addrMap apply {"select " + (str _x)} joinString " "]);
+			private _lastArr = _addrMap select -1;
+			private _midArrL = _addrMap select [0,count _addrMap-1];
+			if (count _addrMap == 1) then {
+				_midArrL = [];//reset
+			};
+			_funcBuffSet pushBack (format[
+				"%2 set [%1,(_this select 1)]",
+				_lastArr,
+				_midArrL apply {"select " + (str _x)} joinString " "
+			]);
+		};
+
+		if !(_propName in le_se_map_partAddress) then {
+			le_se_map_partAddress set [_propName,createHashMap];
+		};
+		private _mapStore = le_se_map_partAddress get _propName;
+		_mapStore set [_oName,[compile(_funcBuffGet joinString " "),compile(_funcBuffSet joinString " ")]];
+	};
+};
+
+
+//see macro SCRIPT_EMIT_HANDLER_MODE_
+le_se_list_fassoc = [];
+le_se_list_fassoc set [SCRIPT_EMIT_HANDLER_MODE_DEFAULT,le_se_intenral_handleVarInit];
+le_se_list_fassoc set [SCRIPT_EMIT_HANDLER_MODE_DROP,le_se_intenral_handleDropVarInit];
+le_se_list_fassoc set [SCRIPT_EMIT_HANDLER_MODE_UNMANAGED,le_se_intenral_handleUnmanagedVarInit];
+assert(({isNullVar(_x)}count le_se_list_fassoc)==0);

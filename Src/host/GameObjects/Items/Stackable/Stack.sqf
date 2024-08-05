@@ -251,6 +251,7 @@ class(Stack) extends(Item)
 
 		private _oldLoc = getVar(_item,loc);
 		if equals(_oldLoc,_usr) then {
+			callFuncParams(_usr,interpolate,"auto_trans" arg _item arg this);
 			callFuncParams(_usr,removeItem,_item);
 			callSelfParams(addToStack,_item);
 		} else {
@@ -270,7 +271,7 @@ class(Stack) extends(Item)
 		if !callFunc(_usr,isEmptyActiveHand) exitWith {
 			callFuncParams(_usr,localSay,"Активная рука не пустая" arg "error");
 		};
-
+		callFuncParams(_usr,interpolate,"auto_trans" arg this arg _usr);
 		private _newItem = callSelfParams(removeFromStack,_count);
 
 		callFuncParams(_usr,addItem,_newItem); //adding in active hand

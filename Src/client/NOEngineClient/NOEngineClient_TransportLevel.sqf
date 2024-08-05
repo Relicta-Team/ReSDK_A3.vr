@@ -139,7 +139,67 @@ _noe_client_onUpdateObject = {
 
 //fncs
 
+//get original object data; see noe_client_updateObject for info
+noe_client_getOrignalObjectData = {
+	params ["_ptr",["_retAsHash",true]];
+	private _dat = noe_client_allPointers get _ptr;
+	if isNullVar(_dat) exitWith {null};
+	_dat = _dat getVariable "origData";
+	if isNullVar(_dat) exitWith {null};
+	if (!_retAsHash) exitWith {_dat};
+	//["_ref","_isSimple","_model","_pos","_dir","_vec",["_light",0],["_anim",null],["_radio",null]];
+	["ref","isSimple","model","pos","dir","vec","light","anim","radio"] createHashMapFromArray _dat
+};
 
+noe_client_resetObjectTransform = {
+	params ["_ptr"];
+	
+	private _obj = noe_client_allPointers get _ptr;
+	if isNullVar(_obj) exitWith {};
+	if isNullReference(_obj) exitWith {};
+
+	private _map = [_ptr,true] call noe_client_getOrignalObjectData;
+	if isNullVar(_map) exitWith {};
+	private _pos = _map get "pos";
+	private _dir = _map get "dir";
+	private _vec = _map get "vec";
+
+	if (count _pos == 4) then {
+		_obj setPosWorld (_pos select [0,3]);
+	} else {
+		_obj setPosAtl _pos;
+	};
+	
+	if equalTypes(_dir,0) then {
+		_obj setDir _dir;
+		_obj setVectorUp _vec;
+	} else {
+		_obj setVectorDirAndUp [_dir,_vec];
+	};
+};
+
+noe_client_setObjectTransform = {
+	params ["_obj","_type","_val"];
+	if equalTypes(_obj,"") then {
+		_obj = noe_client_allPointers get _obj;
+	};
+	assert(!isNullReference(_obj));
+
+	if (_type=="pos") exitWith {
+		if (count _val == 4) then {
+			_obj setPosWorld (_val select [0,3]);
+		} else {
+			_obj setPosAtl _val;
+		};
+	};
+
+	if (_type=="dir") exitWith {
+		if equalTypes(_dir,0) then {
+			_obj setDir _dir;
+		};
+	};
+
+};
 
 //генерирует пакет который указывает на актуальность действия при коллбеке
 noe_client_generatePacketId = {

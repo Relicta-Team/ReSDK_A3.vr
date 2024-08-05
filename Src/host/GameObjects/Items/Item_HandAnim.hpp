@@ -18,6 +18,7 @@
 
 #define ITEM_HANDANIM_ENUM_TO_ANIM(idx) (ITEM_HANDANIM_LIST_ALLANIMS select (idx))
 
+#define __ITEM_HANDANIM_LIST_NAMESTRUCT ['Нижний:ITEM_HANDANIM_LOWER','Нижний (только кисть):ITEM_HANDANIM_LOWERONLYHAND','Фонарик:ITEM_HANDANIM_FLASHLIGHT','Факел:ITEM_HANDANIM_TORCH','Лампа:ITEM_HANDANIM_LAMP']
 #define ITEM_HANDANIM_LOWER 0
 #define ITEM_HANDANIM_LOWERONLYHAND 1
 #define ITEM_HANDANIM_FLASHLIGHT 2
@@ -27,6 +28,8 @@
 //twohanded non combat.
 #define ITEM_TWOHANDANIM_LIST_ALLANIMS ["lwr","swd","pst","rfl","pswda","pswdb","capb"]
 
+#define __ITEM_TWOHANDANIM_LIST_NAMESTRUCT ['Нижний:ITEM_2HANIM_LOWER','Меч:ITEM_2HANIM_SWORD','Пистолет:ITEM_2HANIM_PISTOL','Винтовка:ITEM_2HANIM_RIFLE','Парирование:ITEM_2HANIM_PARRY_SWORD_1','Парирование:ITEM_2HANIM_PARRY_SWORD_2','Связан:ITEM_2HANIM_CAPTIVEBACK']
+#define __ITEM_TWOHANDANIM_PARRY_LIST_NAMESTRUCT ['меч 1:ITEM_2HANIM_PARRY_SWORD_1','меч 2:ITEM_2HANIM_PARRY_SWORD_2']
 #define ITEM_2HANIM_LOWER 0
 #define ITEM_2HANIM_SWORD 1
 #define ITEM_2HANIM_PISTOL 2
@@ -39,6 +42,7 @@
 
 //Лист для хватов комбата
 #define ITEM_COMBATANIM_LIST_ALLANIMS ["hnd","sht","avt","avt"]
+
 //лист для хватов атаки
 #define ITEM_ATTACKANIM_LIST_ALLANIMS ["hnd","sht","gun","sht"]
 
@@ -49,6 +53,7 @@
 #define ITEM_ATTACKANIM_ENUM_TO_ANIM(idx) (ITEM_ATTACKANIM_LIST_ALLANIMS select (idx))
 
 //используются данные: ITEM_COMBATANIM_LIST_ALLANIMS для комбат простоя, ITEM_ATTACKANIM_LIST_ALLANIMS для комбат атак
+#define __ITEM_COMBATANIM_LIST_NAMESTRUCT ['Кулак:ITEM_COMBATANIM_HAND','Короткое:ITEM_COMBATANIM_SHORT','Автомат:ITEM_COMBATANIM_GUN','Рукоять:ITEM_COMBATANIM_GUN_HANDLE']
 #define ITEM_COMBATANIM_HAND 0
 #define ITEM_COMBATANIM_SHORT 1
 #define ITEM_COMBATANIM_GUN 2
@@ -57,9 +62,11 @@
 
 //лист для двуручных хватов комбата
 #define ITEM_TWOHANDCOMBATANIM_LIST_ALLANIMS ["lwr","swd","pst","rfl"]
+
 //Лист для двуручных хватов атаки
 #define ITEM_TWOHANDATTACKANIM_LIST_ALLANIMS ["lwr","swd","pst","rfl"]
 
+#define __ITEM_2HANIM_COMBAT_LIST_NAMESTRUCT ['Нижний:ITEM_2HANIM_COMBAT_LOWER','Меч:ITEM_2HANIM_COMBAT_SWORD','Пистолет:ITEM_2HANIM_COMBAT_PISTOL','Винтовка:ITEM_2HANIM_COMBAT_RIFLE']
 #define ITEM_2HANIM_COMBAT_LOWER 0
 #define ITEM_2HANIM_COMBAT_SWORD 1
 #define ITEM_2HANIM_COMBAT_PISTOL 2
@@ -69,6 +76,7 @@
 #define __item_parry_list_anims__ ["parh1","parh2","pars1","pars2"]
 #define ITEM_PARRY_ENUM_TO_ANIM(idx) (__item_parry_list_anims__ select idx)
 
+#define __ITEM_PARRY_LIST_NAMESTRUCT ['Кулак:ITEM_PARRY_HAND_1','Кулак 2:ITEM_PARRY_HAND_2','Меч:ITEM_PARRY_SWORD_1','Меч 2:ITEM_PARRY_SWORD_2']
 #define ITEM_PARRY_HAND_1 0
 #define ITEM_PARRY_HAND_2 1
 #define ITEM_PARRY_SWORD_1 2
