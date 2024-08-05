@@ -13,6 +13,7 @@ class RBuilder : IScript
     private bool clientConnected => tcpClient != null && tcpClient.Connected;
     private static Queue<string> messages = new Queue<string>();
 
+    private int parentApplicationPID = 0;
 
     private void stopClient()
 	{
@@ -68,6 +69,7 @@ class RBuilder : IScript
                 {
                     // Сервер закрыл соединение
                     print("Server disconnected");
+                    Environment.Exit(-5502);
                     break;
                 }
             }
@@ -75,6 +77,7 @@ class RBuilder : IScript
         catch (Exception ex)
         {
             print($"Error receiving messages: {ex.Message}");
+            Environment.Exit(-5503);
         }
     }
 
@@ -96,11 +99,13 @@ class RBuilder : IScript
             else
             {
                 print("Error: Connection to RBuilder server is not established.");
+                Environment.Exit(-5504);
             }
         }
         catch (Exception ex)
         {
             print($"Error send to RBuilder: {ex.Message}");
+            Environment.Exit(-5505);
         }
     }
 
@@ -119,6 +124,7 @@ class RBuilder : IScript
 
 	}
 
+
 	public void Command(string args, StringBuilder output)
 	{
         switch (args)
@@ -134,6 +140,10 @@ class RBuilder : IScript
                 string message = ScriptContext.GetArg(0);
                 string par = string.Empty;
                 if (ScriptContext.GetArgsCount() > 1) par = ScriptContext.GetArg(1);
+                if (message == "print")
+                {
+                    par = par.Replace(";","");
+                }
                 string msnd = $"m:{message};{par}";
                 SendMessage(msnd);
                 break;
@@ -143,6 +153,18 @@ class RBuilder : IScript
                     output.Append(messages.Dequeue());
                 }
                 break;
+            case "init_console_redirect":
+                if (ScriptContext.GetArgsCount() != 1) return;
+                int argPID = int.Parse(ScriptContext.GetArg(0));
+                this.parentApplicationPID = argPID;
+                break;
+            // case "write_data":
+            //     if (ScriptContext.GetArgsCount() != 1) return;
+            //     string contentConsole__ = ScriptContext.GetArg(0);
+            //     Process powner = System.Diagnostics.Process.GetProcessById(this.parentApplicationPID);
+            //     Console.WriteLine($"pown {powner}: {contentConsole__}");
+            //     powner.StandardInput.WriteLine(contentConsole__);
+            //     break;
             case "exit":
                 if (ScriptContext.GetArgsCount() != 1) return;
                 int arg = int.Parse(ScriptContext.GetArg(0));
