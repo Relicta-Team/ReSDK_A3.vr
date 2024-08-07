@@ -54,6 +54,18 @@ Replaced value:
 
 ```
 File: [host\Database\SQLite\SQLite_functions.sqf at line 8](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L8)
+## VALIDATE_LAST_ERROR
+
+Type: constant
+
+Description: проверка последней ошибки
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\Database\SQLite\SQLite_functions.sqf at line 10](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L10)
 ## applyficator(val)
 
 Type: constant
@@ -65,7 +77,7 @@ Replaced value:
 ```sqf
 (if (val < 10) then {"0" + str val} else {str val})
 ```
-File: [host\Database\SQLite\SQLite_functions.sqf at line 156](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L156)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 173](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L173)
 ## db_open
 
 Type: function
@@ -73,7 +85,7 @@ Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 10](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L10)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 12](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L12)
 ## db_close
 
 Type: function
@@ -81,7 +93,7 @@ Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 14](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L14)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 16](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L16)
 ## db_isOpened
 
 Type: function
@@ -89,7 +101,7 @@ Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 20](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L20)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 22](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L22)
 ## db_getlasterror
 
 Type: function
@@ -97,7 +109,7 @@ Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 24](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L24)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 26](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L26)
 ## db_flushlasterror
 
 Type: function
@@ -105,7 +117,7 @@ Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 28](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L28)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 30](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L30)
 ## db_isEnabledStdoutLog
 
 Type: function
@@ -113,7 +125,7 @@ Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 32](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L32)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 34](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L34)
 ## db_switchStdoutLog
 
 Type: function
@@ -121,7 +133,7 @@ Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 36](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L36)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 38](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L38)
 ## db_checkSystemReturn
 
 Type: function
@@ -130,7 +142,7 @@ Description: true если системный возврат
 - Param: _output
 - Param: _printtoconsole (optional, default true)
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 41](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L41)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 43](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L43)
 ## db_query
 
 Type: function
@@ -140,7 +152,7 @@ Description:
 - Param: _retTypes (optional, default "")
 - Param: _singleReturn (optional, default false)
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 98](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L98)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 103](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L103)
 ## db_getVersion
 
 Type: function
@@ -148,7 +160,7 @@ Type: function
 Description: versioning
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 122](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L122)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 139](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L139)
 ## db_getCommonVal
 
 Type: function
@@ -157,7 +169,7 @@ Description:
 - Param: _varName
 - Param: _returnType (optional, default "string")
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 129](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L129)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 146](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L146)
 ## db_setCommonVal
 
 Type: function
@@ -167,7 +179,7 @@ Description:
 - Param: _value
 - Param: _inString (optional, default true)
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 137](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L137)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 154](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L154)
 ## db_dateTimeFormatForComparsion
 
 Type: function
@@ -181,7 +193,7 @@ Description: Форматирует массив даты-времени в ст
 - Param: _s (optional, default 0)
 - Param: _ms (optional, default 0)
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 153](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L153)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 170](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L170)
 # SQLite_init.sqf
 
 ## db_version
