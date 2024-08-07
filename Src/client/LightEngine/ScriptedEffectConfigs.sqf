@@ -39,3 +39,5 @@
 #include "ScriptedConfigs\SLIGHT_STREET_LAMP_ITAL.sqf"
 #include "ScriptedConfigs\SLIGHT_ITAL_LAMP_STRONG.sqf"
 #include "ScriptedConfigs\SLIGHT_ITAL_LAMP_MEDIUM.sqf"
+#include "ScriptedConfigs\SLIGHT_LAMP_REDLIGHT_ALARM.sqf"
+#include "ScriptedConfigs\SLIGHT_LAMP_KINKY_VIBE.sqf"
