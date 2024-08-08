@@ -572,6 +572,7 @@ smd_onPull = {
 		[_ptr] call noe_client_resetObjectTransform;
 		_mob setVariable ["__loc_pull_ptr",null];
 		call _syncWalk;
+		noe_client_set_lockedPropUpdates deleteAt _ptr;
 	};
 	if (equalTypes(_ctx,"") && {[_ctx,"helper+"] call stringStartWith}) exitWith {
 		_mob setVariable ["__loc_pull_ptr",_ctx];
@@ -579,6 +580,10 @@ smd_onPull = {
 	};
 
 	_ctx params ["_ptr"];
+
+	private _isSelf = equals(_mob,player); //true if mob is local client
+	noe_client_set_lockedPropUpdates set [_ptr,true];
+
 	//"Land_VR_CoverObject_01_kneel_F" - target
 	private _vtarg = "Land_VR_CoverObject_01_kneel_F" createVehicleLocal [0,0,0];
 	_vtarg setObjectTexture [0,""];
@@ -586,8 +591,7 @@ smd_onPull = {
 	_vtarg setObjectTexture [1,"#(argb,8,8,3)color(1,1,0,1,co)"];//edge colors
 	_vtarg disableCollisionWith _mob;
 	_mob setVariable ["__loc_pull_vtarg",_vtarg];
-	
-	private _pars = [_mob,_ptr,_vtarg];
+	private _pars = [_mob,_ptr,_vtarg,_isSelf];
 	_mob setVariable ["__loc_pull_ptr",_ptr];
 	call _syncWalk;
 	private _obj = noe_client_allPointers get _ptr;
@@ -600,32 +604,34 @@ smd_onPull = {
 	_mob setVariable ["__loc_pull_lastpos",_lpp];
 	_mob setVariable ["__loc_pull_newpos",_lpp];
 	
-	_mob setVariable ["__loc_pull_lastdir",[_obj] call model_getPitchBankYaw];
-	_mob setVariable ["__loc_pull_newdir",[_obj] call model_getPitchBankYaw];
+	_mob setVariable ["__loc_pull_lastVDU",[_obj] call model_getPitchBankYaw];
+	_mob setVariable ["__loc_pull_newVDU",[_obj] call model_getPitchBankYaw];
 
 	_mob setVariable ["__loc_pull_lastupd",tickTime];
 	startAsyncInvoke
 		{
 			params ["_pars","_tick"];
-			_pars params ["_mob","_ptr","_vtarg"];
+			_pars params ["_mob","_ptr","_vtarg","_isSelf"];
 			private _obj = noe_client_allPointers get _ptr;
 			if isNullReference(_obj) exitWith {false};
 			private _pdat = [_ptr,true] call noe_client_getOrignalObjectData;
 			if isNullVar(_pdat) exitWith {false};
-			if (true) exitWith {false};
+			if (true) exitWith {false}; //todo remove on ready
 			//pos, dir,vec
 			private _pos = _pdat get "pos";
 			//asltoatl
-			if (count _pos == 3) then {
-				_pos = (atltoasl _pos) + [true];
+			if (count _pos == 4) then {
+				_pos = _pos select [0,3];
 			};
 			
 			private _vdu = [_obj] call model_getPitchBankYaw;
 
 			//sync color
-			_vtarg setObjectTexture [1,
-				if (pulling_canPull) then {"#(argb,8,8,3)color(0,1,0,1,co)"} else {"#(argb,8,8,3)color(1,0.0,0,1,co)"}
-			];//edge colors
+			if (_isSelf) then {
+				_vtarg setObjectTexture [1,
+					if (pulling_canPull) then {"#(argb,8,8,3)color(0,1,0,1,co)"} else {"#(argb,8,8,3)color(1,0.0,0,1,co)"}
+				];//edge colors
+			};
 
 			/*
 				принцип работы:
@@ -634,13 +640,9 @@ smd_onPull = {
 				3. при достижении лимита времени - позиция обновляется
 			*/
 			_lastSavedPos = _mob getVariable ["__loc_pull_lastpos",_pos];
-			if (count _lastSavedPos == 3) then {
-				_lastSavedPos = (atltoasl _lastSavedPos) + [true];
-			};
 			_newSavedPos = _mob getVariable ["__loc_pull_newpos",_lastSavedPos];
-			if (count _newSavedPos == 3) then {
-				_newSavedPos = (atltoasl _newSavedPos) + [true];
-			};
+			assert(_lastSavedPos);
+			assert(_newSavedPos);
 
 			_lastUpd = _mob getVariable "__loc_pull_lastupd";
 			_nextUpd = _lastUpd + 0.5;
@@ -657,18 +659,18 @@ smd_onPull = {
 				_lastUpd,
 				_nextUpd,
 				tickTime,
-				_mob getVariable "__loc_pull_lastdir",
-				_mob getVariable "__loc_pull_newdir",
+				_mob getVariable "__loc_pull_lastVDU",
+				_mob getVariable "__loc_pull_newVDU",
 				true];
 			traceformat("interp pull dist %1; ---> FROM %2 TO %3; NEWPOS %4",(_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))) arg _lastSavedPos arg _newSavedPos arg _newpos)
 			
 			if (tickTime >= _nextUpd) then {
 				//_this set [2,tickTime + 0.5];
-				_mob setVariable ["__loc_pull_lastpos",_newpos + [true]];
+				_mob setVariable ["__loc_pull_lastpos",_newpos];
 				_mob setVariable ["__loc_pull_newpos",_pos];
 
-				_mob setVariable ["__loc_pull_lastdir",_newvdu];
-				_mob setVariable ["__loc_pull_newdir",_vdu];
+				_mob setVariable ["__loc_pull_lastVDU",_newvdu];
+				_mob setVariable ["__loc_pull_newVDU",_vdu];
 				_mob setVariable ["__loc_pull_lastupd",_nextUpd];
 			};
 			_obj setPosWorld (_newpos);

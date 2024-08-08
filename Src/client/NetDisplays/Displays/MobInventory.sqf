@@ -94,7 +94,7 @@ ND_INIT(ObjectPull)
 		
 		private _offsH = 10;
 		private _header = [thisDisplay,TEXT,vec4(0,0,90,_offsH)] call createWidget;
-		[_header,"<t align='center'>Зажмите ЛКМ для вращения, скролл для подъема, опускания</t>"] call widgetSetText;
+		[_header,"<t align='center'>ЛКМ - вращение, ЛКМ + Alt - альт.вращение, ПКМ - подъем/опускание</t>"] call widgetSetText;
 		addSavedWdiget(_header);
 
 		_closer = [thisDisplay,[90,0,100-90,_offsH]] call nd_addClosingButton;
@@ -110,14 +110,22 @@ ND_INIT(ObjectPull)
 		//initialize variables
 		_back setVariable ["_tranform_vec",[0,0,0]];
 		_back setVariable ["_ch_vec",[0,0,0]];
-		_back setVariable ["_transform_zpos",0];
-		_back setVariable ["_ch_zpos",0];
+		_back setVariable ["_transform_pos",[0,0,0]];
+		_back setVariable ["_ch_pos",[0,0,0]];
+
 		_back setVariable ["_isPressed",false];
+		_back setVariable ["_altMode",false];
+		_back setVariable ["_isPressedPos",false];
 		_back setVariable ["_pressedPos",[50,50]];
 		
 		_back ctrlAddEventHandler ["MouseButtonDown",{
-			params ["_w","_b"];
+			params ["_w","_b","_xpos","_ypos","_ctrl","_shift","_alt"];
 			_w setVariable ["_isPressed",true];
+			
+			if (_b != MOUSE_LEFT) then {
+				_w setVariable ["_isPressedPos",true];
+			};
+			_w setVariable ["_altMode",_alt];
 			_w setVariable ["_pressedPos",call mouseGetPosition];
 			private _o = call ND_ObjectPull_getPtrObj;
 			if !isNullReference(_o) then {
@@ -128,6 +136,7 @@ ND_INIT(ObjectPull)
 		_back ctrlAddEventHandler ["MouseButtonUp",{
 			params ["_w","_b"];
 			_w setVariable ["_isPressed",false];
+			_w setVariable ["_altMode",false];
 			//save transform
 			private _transform = _w getVariable ["_ch_vec",vec3(0,0,0)];
 			_w setvariable ["_tranform_vec",_transform];
@@ -140,17 +149,25 @@ ND_INIT(ObjectPull)
 			if (_w getVariable ["_isPressed",false]) then {
 				(call mouseGetPosition) params ["_x","_y"];
 				(_w getVariable "_pressedPos") params ["_ofX","_ofY"];
-				
+				_altMode = _w getVariable ["_altMode",false];
+				_isPressedPos = _w getVariable ["_isPressedPos",false];
 				//x - 2
 				//y - 0
 				_dX = _ofX - _x;
 				_dY = _ofY - _y;
-				_xnorm = (linearConversion [0,100,_ofX - _x,-180,180,true]) ;
-				_ynorm = (linearConversion [0,100,_ofY - _y,-90,90,true]) ;
+				
+				
 				_oldVec = _w getVariable ["_tranform_vec",vec3(0,0,0)];
-				_newvec = [(_oldVec select 0) + (_dY),(_oldVec select 1),(_oldVec select 2) + (_dX)];
-				_newvec set [0,[_newvec select 0,-180,180] call clampInRange];
+				_newvec = [0,0,0];
+				if (!_altMode) then {
+					_newvec = [(_oldVec select 0) + (_dY),(_oldVec select 1),(_oldVec select 2) + (_dX)];
+					_newvec set [0,[_newvec select 0,-180,180] call clampInRange];
+				} else {
+					_newvec = [(_oldVec select 0),(_oldVec select 1) + (_dY),(_oldVec select 2) + (_dX)];
+					_newvec set [1,[_newvec select 0,-180,180] call clampInRange];
+				};
 				_newvec set [2,clampangle(_newvec select 2,0,359)];
+				
 				traceformat("NEWVEC %1",_newvec)
 
 				_w setvariable ["_ch_vec",_newvec];
@@ -158,12 +175,14 @@ ND_INIT(ObjectPull)
 				if !isNullReference(_o) then {
 					[_o,_newvec] call model_SetPitchBankYaw;
 				};
+				
+				
 			};
 		}];
-		_back ctrlAddEventHandler ["MouseZChanged",{
-			params ["_w","_val"];
-			[["zupd",_val / 12]]call nd_onPressButton;
-		}];
+		// _back ctrlAddEventHandler ["MouseZChanged",{
+		// 	params ["_w","_val"];
+		// 	[["zupd",_val / 12]]call nd_onPressButton;
+		// }];
 
 		_back
 	} else {

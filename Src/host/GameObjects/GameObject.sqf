@@ -1471,11 +1471,11 @@ class(IDestructible) extends(GameObject)
 	{
 		objParams_2(_p,_rot);
 		if !callSelf(isInWorld) exitWith {false};
+		assert_str(callSelf(isEnabledTransformMode),"Transform mode for pointer must be enabled -> " + getSelf(pointer));
 		private _wobj = getSelf(loc);
-		private _posworld = false;
+		
 		if !isNullVar(_rot) then {
 			if equalTypes(_rot,0) then {
-				_wobj setVariable ["vdir",null];
 				_wobj setDir _rot;
 			} else {
 				//conv to vec-coords
@@ -1483,29 +1483,11 @@ class(IDestructible) extends(GameObject)
 					_rot = _rot call model_convertPithBankYawToVec;
 				};
 				_rot params ["_vdr","_vup"];
-				
-				if !([_rot] call model_isSafedirTransform) then {
-					_posworld = true;
-					//_p = (atltoasl _p);
-				};
-				_wobj setVariable ["vidr",true];
 				_wobj setvectordirandup _rot;
 			};
 		};
 		
-		if (_posworld) then {
-			if !(_wobj getVariable ["wpos",false]) then {
-				(_wobj setVariable ["flags",(_wobj getvariable "flags") + wposObj_true]);
-			};
-			_wobj setVariable ["wpos",true];
-			_wobj setPosWorld (atltoasl _p);
-		} else {
-			if (_wobj getVariable ["wpos",false]) then {
-				(_wobj setVariable ["flags",(_wobj getvariable "flags") - wposObj_true]);
-			};
-			_wobj setVariable ["wpos",null];
-			_wobj setPosAtl _p;
-		};
+		_wobj setPosWorld (atltoasl _p);
 
 		traceformat("Replicate object %1 (wpos %4); %2 %3",getSelf(pointer) arg _p arg _rot arg _posworld)
 
@@ -1536,17 +1518,33 @@ class(IDestructible) extends(GameObject)
 				(_wobj setVariable ["flags",(_wobj getvariable "flags") + wposObj_true]);
 			};
 			_wobj setVariable ["wpos",true];
+			if !(_wobj getVariable ["vidr",false]) then {
+				(_wobj setVariable ["flags",(_wobj getvariable "flags") + vDirObj_true]);
+			};
+			_wobj setVariable ["vidr",true];
 		} else {
 			if (_wobj getVariable ["wpos",false]) then {
 				(_wobj setVariable ["flags",(_wobj getvariable "flags") - wposObj_true]);
 			};
 			_wobj setVariable ["wpos",null];
+			if (_wobj getVariable ["vidr",false]) then {
+				(_wobj setVariable ["flags",(_wobj getvariable "flags") - vDirObj_true]);
+			};
+			_wobj setVariable ["vidr",null];
 		};
+		
 		if !isNullVar(_replicate) then {_replicate = true};
 
 		if (_replicate) then {
 			callSelf(replicateObject);
 		};
+	};
+	func(isEnabledTransformMode)
+	{
+		objParams();
+		if !callSelf(isInWorld) exitWith {false};
+		private _wobj = getSelf(loc);
+		(_wobj getVariable ["wpos",false]) && (_wobj getVariable ["vidr",false])
 	};
 
 	func(replicateTransform)
@@ -2242,15 +2240,6 @@ region(Pulling functionality)
 		callSelf(onPullChanged);
 	};
 
-	func(_pullMakeRPCParams)
-	{
-		objParams_1(_offs);
-		private _args = [_offs];
-		_args pushBack ([getSelf(model)] call model_getAssoc);
-		_args
-
-	};
-
 	//internal function for handling pullings
 	func(_pullStarted)
 	{
@@ -2267,7 +2256,7 @@ region(Pulling functionality)
 		private _offs = _srcPos vectorDiff (getposatl _own);
 
 		private _vtarg = if (_isMainOwner) then {
-			callSelfParams(setTransformMode,true);
+			callSelfParams(setTransformMode,true); //enable transform
 			private _newvtarg = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
 
 			_newvtarg setvariable ["_srcPos",_srcPos];
@@ -2397,11 +2386,6 @@ region(Pulling functionality)
 					};
 					private _oldTransform = callSelf(getTransform);
 					//save positions
-					private _canSync = (
-						not_equals(_newtempVec,_vtarg getvariable "_curRot") 
-						|| not_equals(_newtempPosZ,_vtarg getvariable "_curZPos")
-						//|| not_equals(_oldTransform,_vtarg getvariable "_lastTransform")
-					);
 					_vtarg setVariable ["_curRot",_newtempVec];
 					_vtarg setVariable ["_curZPos",_newtempPosZ];
 					
@@ -2529,19 +2513,8 @@ region(Pulling functionality)
 				private _oldval = _ph getVariable "_zpos";
 				_ph setVariable ["_zpos",clamp(_val + _oldval,-_maxZOffset/2,_maxZOffset)];	
 			};
-			//temp
+			//unsupported mode
 			setLastError("Mode '" + _mode + "' is not supported");
-
-			if (_mode=="rot") exitWith {
-				private _rotval = 0.5 * _val;
-				_vtarg = getVar(_src,loc) getVariable "__vtarg_pull";
-				_curRot = (_vtarg getVariable "_rot")+_rotval;
-				_curRot = clampangle(_curRot,0,359);
-				_vtarg setVariable ["_rot",_curRot];
-			};
-			if (_mode=="zpos") exitWith {
-
-			};
 		};
 		private _ctx = this;
 		callFuncParams(_dynDisp,setNDOptions,"ObjectPull" arg 10 arg getSelf(pointer) arg _getInfo arg _handleInp arg _ctx);
