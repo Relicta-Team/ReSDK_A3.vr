@@ -554,7 +554,7 @@ smd_isPulling = {
 	params ["_mob"];
 	!isNull(_mob getvariable "__loc_pull_ptr");
 };
-
+pulling_canPull = false;
 smd_onPull = {
 	params ["_mob","_ctx"];
 	
@@ -579,31 +579,54 @@ smd_onPull = {
 	};
 
 	_ctx params ["_ptr"];
-	private _pars = [_mob,_ptr];
+	//"Land_VR_CoverObject_01_kneel_F" - target
+	private _vtarg = "Land_VR_CoverObject_01_kneel_F" createVehicleLocal [0,0,0];
+	_vtarg setObjectTexture [0,""];
+	_vtarg setObjectMaterial [0,""];
+	_vtarg setObjectTexture [1,"#(argb,8,8,3)color(1,1,0,1,co)"];//edge colors
+	_vtarg disableCollisionWith _mob;
+	_mob setVariable ["__loc_pull_vtarg",_vtarg];
+	
+	private _pars = [_mob,_ptr,_vtarg];
 	_mob setVariable ["__loc_pull_ptr",_ptr];
 	call _syncWalk;
-
-	private _pdat = [_ptr,true] call noe_client_getOrignalObjectData;
-	_mob setVariable ["__loc_pull_lastpos",_pdat get "pos"];
-	_mob setVariable ["__loc_pull_newpos",_pdat get "pos"];
+	private _obj = noe_client_allPointers get _ptr;
+	if isNullVar(_obj) exitWith {
+		setLastError("Object not found: " + _ptr);
+	};
 	
-	_mob setVariable ["__loc_pull_lastdir",_pdat get "dir"];
-	_mob setVariable ["__loc_pull_newdir",_pdat get "dir"];
+	private _lpp = getPosWorld _obj;
+	
+	_mob setVariable ["__loc_pull_lastpos",_lpp];
+	_mob setVariable ["__loc_pull_newpos",_lpp];
+	
+	_mob setVariable ["__loc_pull_lastdir",[_obj] call model_getPitchBankYaw];
+	_mob setVariable ["__loc_pull_newdir",[_obj] call model_getPitchBankYaw];
 
 	_mob setVariable ["__loc_pull_lastupd",tickTime];
-
 	startAsyncInvoke
 		{
 			params ["_pars","_tick"];
-			_pars params ["_mob","_ptr"];
+			_pars params ["_mob","_ptr","_vtarg"];
 			private _obj = noe_client_allPointers get _ptr;
 			if isNullReference(_obj) exitWith {false};
 			private _pdat = [_ptr,true] call noe_client_getOrignalObjectData;
 			if isNullVar(_pdat) exitWith {false};
+			if (true) exitWith {false};
 			//pos, dir,vec
 			private _pos = _pdat get "pos";
-			private _dir = _pdat get "dir";
-			private _vec = _pdat get "vec";
+			//asltoatl
+			if (count _pos == 3) then {
+				_pos = (atltoasl _pos) + [true];
+			};
+			
+			private _vdu = [_obj] call model_getPitchBankYaw;
+
+			//sync color
+			_vtarg setObjectTexture [1,
+				if (pulling_canPull) then {"#(argb,8,8,3)color(0,1,0,1,co)"} else {"#(argb,8,8,3)color(1,0.0,0,1,co)"}
+			];//edge colors
+
 			/*
 				принцип работы:
 				1. берется последняя применённая позиция (по умолчанию - исходная)
@@ -611,7 +634,14 @@ smd_onPull = {
 				3. при достижении лимита времени - позиция обновляется
 			*/
 			_lastSavedPos = _mob getVariable ["__loc_pull_lastpos",_pos];
+			if (count _lastSavedPos == 3) then {
+				_lastSavedPos = (atltoasl _lastSavedPos) + [true];
+			};
 			_newSavedPos = _mob getVariable ["__loc_pull_newpos",_lastSavedPos];
+			if (count _newSavedPos == 3) then {
+				_newSavedPos = (atltoasl _newSavedPos) + [true];
+			};
+
 			_lastUpd = _mob getVariable "__loc_pull_lastupd";
 			_nextUpd = _lastUpd + 0.5;
 			//traceformat("pre %1; post %2",_lastSavedPos arg _pos)
@@ -623,30 +653,40 @@ smd_onPull = {
 				_newSavedPos select [0,3],
 				true//clamp value
 			];
-			_newdir = linearConversion [
+			_newvdu = vectorLinearConversion [
 				_lastUpd,
 				_nextUpd,
 				tickTime,
-				_mob getVariable ["__loc_pull_lastdir",getDir _obj],
-				_mob getVariable ["__loc_pull_newdir",getDir _obj],
+				_mob getVariable "__loc_pull_lastdir",
+				_mob getVariable "__loc_pull_newdir",
 				true];
-			//traceformat("interp pull %1: %2; dist %3",_intv arg _nextUpd-tickTime arg (_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))))
-			if (count _pos > 3) then {_newpos pushBack (_pos select 3)};
+			traceformat("interp pull dist %1; ---> FROM %2 TO %3; NEWPOS %4",(_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))) arg _lastSavedPos arg _newSavedPos arg _newpos)
+			
 			if (tickTime >= _nextUpd) then {
 				//_this set [2,tickTime + 0.5];
-				_mob setVariable ["__loc_pull_lastpos",_newpos];
+				_mob setVariable ["__loc_pull_lastpos",_newpos + [true]];
 				_mob setVariable ["__loc_pull_newpos",_pos];
 
-				_mob setVariable ["__loc_pull_lastdir",_newdir];
-				_mob setVariable ["__loc_pull_newdir",_dir];
+				_mob setVariable ["__loc_pull_lastdir",_newvdu];
+				_mob setVariable ["__loc_pull_newdir",_vdu];
 				_mob setVariable ["__loc_pull_lastupd",_nextUpd];
 			};
-			[_obj,"pos",_newpos] call noe_client_setObjectTransform;
-			[_obj,"dir",_newdir] call noe_client_setObjectTransform;
+			_obj setPosWorld (_newpos);
+			
+			//[_obj,_newvdu] call model_SetPitchBankYaw;
+			_vtarg setposatl (getposatl _obj);
+			_vtarg setVectorDirAndUp [vectorDir _obj,vectorUp _obj];
+			
+			_vtarg setObjectScale (1.1 * (boundingBoxReal _obj select 2));
 
 			isNull(_mob getVariable "__loc_pull_ptr");
 		},
-		{},
+		{
+			params ["_pars","_tick"];
+			_pars params ["_mob","_ptr","_vtarg"];
+			[_ptr] call noe_client_resetObjectTransform;
+			deleteVehicle _vtarg;
+		},
 		[_pars,tickTime]
 	endAsyncInvoke
 };

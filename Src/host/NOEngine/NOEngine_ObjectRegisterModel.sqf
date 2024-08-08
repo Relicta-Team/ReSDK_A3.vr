@@ -361,6 +361,7 @@ noe_replicateObject = {
 
 noe_replicateTransform = {
 	params ["_obj","_chunkType",["_doUpdateByteArr",false]];
+	setLastError("Not implemented - noe::replicateTransform");
 
 	if not_equalTypes(_obj,objNUll) exitWith {
 		errorformat("NOEngine::replicateTransform() - Attempt replicate non visual object - %1",_obj);

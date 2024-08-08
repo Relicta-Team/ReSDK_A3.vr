@@ -12,6 +12,7 @@
 #include "..\Networking\Network.hpp"
 #include <..\..\client\Inventory\inventory.hpp>
 #include <..\PointerSystem\pointers.hpp>
+#include <..\NOEngine\NOEngine_SharedTransportLevel.hpp>
 
 /*
 # Основные методы для моба
@@ -1163,7 +1164,7 @@ endregion
 		if callSelf(isInWorld) then {
 			private _cht = callSelf(getChunkType);
 			if isNullVar(_cht) exitWith {
-				error("GameObject::unloadModel() - getChunkType returns null");
+				error("GameObject::replicateObject() - getChunkType returns null");
 				false
 			};
 			[getSelf(loc),_cht,true] call noe_replicateObject;
@@ -1482,21 +1483,31 @@ class(IDestructible) extends(GameObject)
 					_rot = _rot call model_convertPithBankYawToVec;
 				};
 				_rot params ["_vdr","_vup"];
-				if not_equals(_vup,vec3(0,0,1)) then {
+				
+				if !([_rot] call model_isSafedirTransform) then {
 					_posworld = true;
+					//_p = (atltoasl _p);
 				};
 				_wobj setVariable ["vidr",true];
 				_wobj setvectordirandup _rot;
 			};
 		};
-
+		
 		if (_posworld) then {
+			if !(_wobj getVariable ["wpos",false]) then {
+				(_wobj setVariable ["flags",(_wobj getvariable "flags") + wposObj_true]);
+			};
 			_wobj setVariable ["wpos",true];
-			_wobj setPosWorld _p;
+			_wobj setPosWorld (atltoasl _p);
 		} else {
+			if (_wobj getVariable ["wpos",false]) then {
+				(_wobj setVariable ["flags",(_wobj getvariable "flags") - wposObj_true]);
+			};
 			_wobj setVariable ["wpos",null];
 			_wobj setPosAtl _p;
 		};
+
+		traceformat("Replicate object %1 (wpos %4); %2 %3",getSelf(pointer) arg _p arg _rot arg _posworld)
 
 		callSelf(replicateObject);
 
@@ -1513,6 +1524,46 @@ class(IDestructible) extends(GameObject)
 			ifcheck(_wobj getVariable vec2("wpos",false),getPosWorld _wobj,getPosAtl _wobj),
 			ifcheck(_wobj getVariable vec2("vdir",false),getDir _wobj,[_wobj] call model_getPitchBankYaw)
 		]
+	};
+
+	func(setTransformMode)
+	{
+		objParams_2(_mode,_replicate);
+		if !callSelf(isInWorld) exitWith {};
+		private _wobj = getSelf(loc);
+		if (_mode) then {
+			if !(_wobj getVariable ["wpos",false]) then {
+				(_wobj setVariable ["flags",(_wobj getvariable "flags") + wposObj_true]);
+			};
+			_wobj setVariable ["wpos",true];
+		} else {
+			if (_wobj getVariable ["wpos",false]) then {
+				(_wobj setVariable ["flags",(_wobj getvariable "flags") - wposObj_true]);
+			};
+			_wobj setVariable ["wpos",null];
+		};
+		if !isNullVar(_replicate) then {_replicate = true};
+
+		if (_replicate) then {
+			callSelf(replicateObject);
+		};
+	};
+
+	func(replicateTransform)
+	{
+		objParams();
+		if callSelf(isInWorld) then {
+			private _cht = callSelf(getChunkType);
+			if isNullVar(_cht) exitWith {
+				error("GameObject::replicateTransform() - getChunkType returns null");
+				false
+			};
+			[getSelf(loc),_cht,true] call noe_replicateTransform;
+
+			true
+		} else {
+			false
+		};
 	};
 
 	#define DEBUG_VISUAL_OPENSPACE
@@ -2175,7 +2226,6 @@ region(Pulling functionality)
 	func(startPull)
 	{
 		objParams_1(_usr);
-		if (true) exitWith {};//todo remove when fix
 		if !callSelf(isMovable) exitWith {};
 		if !callSelf(isInWorld) exitWith {};
 		if !callSelfParams(_checkCanPullingConditions,_usr) exitWith {};
@@ -2192,6 +2242,15 @@ region(Pulling functionality)
 		callSelf(onPullChanged);
 	};
 
+	func(_pullMakeRPCParams)
+	{
+		objParams_1(_offs);
+		private _args = [_offs];
+		_args pushBack ([getSelf(model)] call model_getAssoc);
+		_args
+
+	};
+
 	//internal function for handling pullings
 	func(_pullStarted)
 	{
@@ -2204,15 +2263,13 @@ region(Pulling functionality)
 
 		private _wobj = getSelf(loc);
 		private _srcPos = asltoatl getPosWorld _wobj;
-		private _offs = [0,0,0];
 		private _own = getVar(_usr,owner);
+		private _offs = _srcPos vectorDiff (getposatl _own);
 
 		private _vtarg = if (_isMainOwner) then {
-		
+			callSelfParams(setTransformMode,true);
 			private _newvtarg = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
-			_offs = 
-				//_own worldToModel (getposatl _wobj);
-				(getposatl _wobj) vectorDiff (getposatl _own);
+
 			_newvtarg setvariable ["_srcPos",_srcPos];
 			_newvtarg setvariable ["_own",_own];
 			_newvtarg setvariable ["_offs",_offs];
@@ -2222,11 +2279,15 @@ region(Pulling functionality)
 			_newvtarg setvariable ["_curRot",_rotDefault]; //current vector transform
 			_newvtarg setvariable ["_zpos",0]; //offset z-axis
 			_newvtarg setvariable ["_curZPos",0]; //current offset z-axis
-			_newvtarg setvariable ["_lastpos",[0,0,0]];
+
+			_newvtarg setVariable ["_lastTransform",callSelf(getTransform)];
 
 			_wobj setVariable ["__vtarg_pull",_newvtarg];//creating reference
 			
-			_newvtarg setposatl ((getposatl _own) vectoradd (_newvtarg getvariable "_offs"));
+			_newvtarg setPosATL ((getposatl _own) vectoradd _offs);
+			[_newvtarg,_rotDefault] call model_SetPitchBankYaw;
+
+			_newvtarg
 		} else {
 			callSelf(getPullHelperObject)
 		};
@@ -2249,6 +2310,8 @@ region(Pulling functionality)
 				[_x2,_y2,_z1],
 				[_x2,_y2,_z2]
 			];
+			private _maxZ = (abs _z1) + (abs _z2);
+			_vtarg setVariable ["_maxZOffset",_maxZ];
 
 			_params pushBack _bbxDatAll;
 		};
@@ -2256,8 +2319,13 @@ region(Pulling functionality)
 		private _ptrInfo = getSelf(pointer);
 		if (!_isMainOwner) then {
 			_ptrInfo = "helper+"+_ptrInfo;
+		} else {
+			callFuncParams(_usr,fastSendInfo,"pulling_canPull" arg true);
 		};
-		callFuncParams(_usr,syncSmdVar,"pull" arg [_ptrInfo]);
+		private _paramsRPC = [_ptrInfo];
+		
+		callFuncParams(_usr,syncSmdVar,"pull" arg _paramsRPC);
+		
 
 		startAsyncInvoke
 			{
@@ -2273,7 +2341,8 @@ region(Pulling functionality)
 				private _oldpos = getposatl _vtarg;
 				private _modpos = ((getposatl _own) vectoradd _offs);
 				
-				private _newtempPos = _vtarg getvariable "_zpos";
+				private _newtempPosZ = _vtarg getvariable "_zpos";
+				private _newtempPos = _modpos vectorAdd [0,0,_newtempPosZ];
 				private _newtempVec = _vtarg getvariable "_rot";
 
 				if !callSelfParams(_checkCanPullingConditions,_usr) then {
@@ -2288,7 +2357,8 @@ region(Pulling functionality)
 
 					_intersectCount = 0;
 					private _its = null;
-					_upos = _own modelToWorld (_own selectionPosition "spine3");
+					//_upos = _own modelToWorld (_own selectionPosition "spine3");
+					_upos = getPosATL _own; //от предыдущей позиции проверка, не от моба...
 					{
 						_its = [
 							_upos,
@@ -2301,16 +2371,16 @@ region(Pulling functionality)
 							if equals(_itobj,_vtarg) exitWith {};
 							_itobj = [_itobj] call si_handleObjectReturnCheckVirtual;
 							if equals(_itobj,this) exitWith {};
-							traceformat("increment iobj: %1",_its select 0)
+							//traceformat("increment iobj: %1",_its select 0)
 							INC(_intersectCount);
 						};
 					} foreach _bbxDatAll;
 
-					traceformat("On intersection check result: %1",_intersectCount)
+					//traceformat("On intersection check result: %1",_intersectCount)
 					_canmove = _intersectCount <= 4;
 				};
 
-				if ((_oldpos distance (_modpos)) > 1.5) then {
+				if ((_oldpos distance (_modpos)) > 1.1) then {
 					_isStop = true;
 					callFuncParams(_usr,localSay,"Сорвалась хватка!" arg "error");
 				};
@@ -2319,18 +2389,36 @@ region(Pulling functionality)
 
 				if (!_isStop) then {
 					if (!_isMainOwner) exitWith {};
+					callFuncParams(_usr,fastSendInfo,"pulling_canPull" arg _canmove);
 					if (!_canmove) exitWith {
 						//reset position
 						_vtarg setPosAtl (_oldpos);
-						[_vtarg,_vtarg getVariable ["_curRot"]] call model_SetPitchBankYaw;
+						//[_vtarg,_vtarg getVariable ["_curRot"]] call model_SetPitchBankYaw;
 					};
+					private _oldTransform = callSelf(getTransform);
 					//save positions
+					private _canSync = (
+						not_equals(_newtempVec,_vtarg getvariable "_curRot") 
+						|| not_equals(_newtempPosZ,_vtarg getvariable "_curZPos")
+						//|| not_equals(_oldTransform,_vtarg getvariable "_lastTransform")
+					);
 					_vtarg setVariable ["_curRot",_newtempVec];
-					_vtarg setVariable ["_curZPos",_newtempPos];
-					private _newPos = _modpos vectorAdd [0,0,_curZPos];
-
+					_vtarg setVariable ["_curZPos",_newtempPosZ];
+					
+					private _newPos = _newtempPos;
+					
 					//update location transform
-					callSelfParams(setTransform,_newPos arg _newtempVec);
+					//if (_canSync) then {
+					// private _src = getSelf(loc);
+					// _src attachTo [_vtarg,[0,0,0]];
+					// //[_src,_newtempVec] call model_SetPitchBankYaw;
+					// detach _src;
+					// callSelf(replicateObject);
+					//traceformat("transform update %1 %2; OFFSET %3; Z %4",_newPos arg _newtempVec arg _offs arg _newtempPosZ)
+					//callSelfParams(setTransform,_newPos vectordiff (boundingCenter getSelf(loc)) arg _newtempVec);
+
+					//	_vtarg setVariable ["_lastTransform",callSelf(getTransform)];
+					//};
 
 					if ((_oldpos distance _newpos) > 0.15) then {
 						callFunc(this,playPullSound);
@@ -2360,7 +2448,12 @@ region(Pulling functionality)
 		if isNullReference(_usr) exitWith {};
 		callFuncParams(_usr,syncSmdVar,"pull" arg 0);
 		private _mvr = getSelf(__moverMobs);
+		private _isMainOwner = equals(callSelf(getPullMainOwner),_usr);
 		array_remove(_mvr,_usr);
+
+		if (_isMainOwner) then {
+			callSelf(closePullSettings);
+		};
 
 		if (count _mvr == 0) then {
 			private _vtarg = callSelf(getPullHelperObject);
@@ -2387,6 +2480,8 @@ region(Pulling functionality)
 				{if equals(_x,this) then {_wobjList pushBack _x;}} foreach _sysitm;
 			};
 		} foreach _mvr;
+		
+		if (count _wobjList == 0) exitWith {};
 
 		private _wPerItem = callSelf(getWeight) / (count _wobjList);
 		{setVar(_x,weight,_wPerItem)} foreach _wobjList;
@@ -2394,6 +2489,15 @@ region(Pulling functionality)
 		{_x call gurps_recalcuateEncumbrance} foreach _mvr;
 	};
 	
+	func(closePullSettings)
+	{
+		objParams();
+		private _dynDisp = getVar(_usr,_internalDynamicND);
+		if equals(getVar(_dynDisp,ndName),"ObjectPull") then {
+			callFunc(_dynDisp,closeNDisplayForAllMobs);
+		};
+	};
+
 	func(openPullSettings)
 	{
 		objParams_1(_usr);
@@ -2410,12 +2514,20 @@ region(Pulling functionality)
 			objParams_2(_usr,_inp);
 			private _src = getSelf(context);
 			if isNullReference(_src) exitWith {};
+			if !callFunc(_src,isInWorld) exitWith {};
+			
 			private _ph = callFunc(_src,getPullHelperObject);
 			if isNullReference(_ph) exitWith {};
+			private _maxZOffset = _ph getvariable "_maxZOffset";
 
 			_inp params ["_mode","_val"];
 			if (_mode == "vupd") exitWith {
-				_ph setVariable ["_rot",_val];
+				private _oldrot = _ph getVariable "_rot";
+				_ph setVariable ["_rot",(_oldrot vectorAdd _val) apply {_x}];
+			};
+			if (_mode == "zupd") exitWith {
+				private _oldval = _ph getVariable "_zpos";
+				_ph setVariable ["_zpos",clamp(_val + _oldval,-_maxZOffset/2,_maxZOffset)];	
 			};
 			//temp
 			setLastError("Mode '" + _mode + "' is not supported");
