@@ -1035,7 +1035,6 @@ class(SystemHandItem) extends(SystemItem)
 			_worldObj = getVar(_obj,loc);
 			setSelf(attachedWeap,weaponModule(WeapHandyItem)); //todo change 
 			_canReattach = false;
-			_grabIsBlocked = true;//todo remove when fix
 		};
 
 		if (_grabIsBlocked) exitWith {};

@@ -140,7 +140,6 @@ ENDVERB
 
 VERB(pull)
 	cond
-		skipCond(true);//todo remove when fix
 		skipCond(!isTypeOf(usr,Mob));
 		skipCond(isTypeOf(src,BasicMob));
 		skipCond(!callFunc(src,isMovable));
@@ -150,7 +149,6 @@ ENDVERB
 
 VERB(pulltransform)
 	cond
-		skipCond(true);//todo remove when fix
 	act
 		callFuncParams(src,openPullSettings,usr);
 ENDVERB
