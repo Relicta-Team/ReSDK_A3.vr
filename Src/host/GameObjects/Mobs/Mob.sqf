@@ -30,8 +30,8 @@
 	#define __perf_print()
 #endif
 
-#define logmob(funcname,text) "debug_console" callExtension ("<server> mob::" + #funcname + "    " + text + "#0111")
-#define rp_log(text,fmt) "debug_console" callExtension ("<server::Roleplay> " + format[text,fmt] + "#0111")
+#define logmob(funcname,text) (["<server> mob::" + #funcname + "    ",text,"#0111"] call stdoutPrint)
+#define rp_log(text,fmt) (["<server::Roleplay> ",text,fmt,"#0111"] call stdoutPrint)
 
 //медленное бросание
 //#define debug_throw_slow
