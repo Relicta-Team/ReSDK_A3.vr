@@ -90,10 +90,6 @@ if (!isMultiplayer) then {
 };
 #endif
 
-#ifdef DEBUG
-loadFile("src\host\UnitTests\UnitTest.sqf");
-#endif
-
 server_loadingState = 1;
 
 if (isMultiplayer) then {
