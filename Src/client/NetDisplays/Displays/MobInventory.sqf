@@ -108,7 +108,7 @@ ND_INIT(ObjectPull)
 		addSavedWdiget(_back);
 
 		//initialize variables
-		_back setVariable ["_tranform_vec",[0,0,0]];
+		_back setVariable ["_transform_vec",[0,0,0]];
 		_back setVariable ["_ch_vec",[0,0,0]];
 		_back setVariable ["_transform_pos",[0,0,0]];
 		_back setVariable ["_ch_pos",[0,0,0]];
@@ -139,7 +139,7 @@ ND_INIT(ObjectPull)
 			_w setVariable ["_altMode",false];
 			//save transform
 			private _transform = _w getVariable ["_ch_vec",vec3(0,0,0)];
-			_w setvariable ["_tranform_vec",_transform];
+			_w setvariable ["_transform_vec",_transform];
 			
 			//send new transform
 			[["vupd",_transform]]call nd_onPressButton;
@@ -157,18 +157,18 @@ ND_INIT(ObjectPull)
 				_dY = _ofY - _y;
 				
 				
-				_oldVec = _w getVariable ["_tranform_vec",vec3(0,0,0)];
+				_oldVec = _w getVariable ["_transform_vec",vec3(0,0,0)];
 				_newvec = [0,0,0];
 				if (!_altMode) then {
 					_newvec = [(_oldVec select 0) + (_dY),(_oldVec select 1),(_oldVec select 2) + (_dX)];
 					_newvec set [0,[_newvec select 0,-180,180] call clampInRange];
 				} else {
 					_newvec = [(_oldVec select 0),(_oldVec select 1) + (_dY),(_oldVec select 2) + (_dX)];
-					_newvec set [1,[_newvec select 0,-180,180] call clampInRange];
+					_newvec set [1,[_newvec select 1,-180,180] call clampInRange];
 				};
 				_newvec set [2,clampangle(_newvec select 2,0,359)];
 				
-				traceformat("NEWVEC %1",_newvec)
+				traceformat("NEWVEC %1 (alt: %2; isposchange: %3)",_newvec arg _altMode arg _isPressedPos)
 
 				_w setvariable ["_ch_vec",_newvec];
 				private _o = call ND_ObjectPull_getPtrObj;
