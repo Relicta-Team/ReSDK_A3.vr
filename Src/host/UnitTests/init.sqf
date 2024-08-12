@@ -11,7 +11,7 @@ test_const_pathFormatter = "src\host\UnitTests\TestsCollection\%1.sqf";
 test_fixtureStageMap = null;
 
 test_isExcludedName = {
-	("_all_" in (tolower _this))
+	("_all_" in (tolower _this)) || ("_all" in (tolower _this))
 };
 
 if isNull(sys_int_evalassert) exitWith {
@@ -35,7 +35,7 @@ test_getAllTestMacroNames = {
 		private _t = tolower _x;
 		if (count _t > 5 && {_t select [0,5] == "test_"}) then {
 			_testName = _t select [5,count _t];
-			if !(_testName call test_isExcludedName) then {
+			if !(_t call test_isExcludedName) then {
 				_macroList pushBack _testName;
 			};
 		};

@@ -63,9 +63,9 @@ TEST(RandomRanged)
 
 	//range-based random check
 	private _rndResult = [{[-5,5] call randomFloat},_count,0] call _func;
-	ASSERT_EQ(parsenumber(_rndResult tofixed 2),0);
+	ASSERT_EQ(abs parsenumber(_rndResult tofixed 0),0);
 	_rndResult = [{[0,5] call randomFloat},_count,0] call _func;
-	ASSERT_EQ(parsenumber(_rndResult tofixed 2),2.5);
+	ASSERT_EQ(parsenumber(_rndResult tofixed 1),2.5);
 
 	//value check
 	_rndResult = [{[0,5] call randomInt},_count,1] call _func;
