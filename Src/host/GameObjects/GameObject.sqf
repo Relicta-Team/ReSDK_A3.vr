@@ -1518,19 +1518,19 @@ class(IDestructible) extends(GameObject)
 				(_wobj setVariable ["flags",(_wobj getvariable "flags") + wposObj_true]);
 			};
 			_wobj setVariable ["wpos",true];
-			if !(_wobj getVariable ["vidr",false]) then {
+			if !(_wobj getVariable ["vdir",false]) then {
 				(_wobj setVariable ["flags",(_wobj getvariable "flags") + vDirObj_true]);
 			};
-			_wobj setVariable ["vidr",true];
+			_wobj setVariable ["vdir",true];
 		} else {
 			if (_wobj getVariable ["wpos",false]) then {
 				(_wobj setVariable ["flags",(_wobj getvariable "flags") - wposObj_true]);
 			};
 			_wobj setVariable ["wpos",null];
-			if (_wobj getVariable ["vidr",false]) then {
+			if (_wobj getVariable ["vdir",false]) then {
 				(_wobj setVariable ["flags",(_wobj getvariable "flags") - vDirObj_true]);
 			};
-			_wobj setVariable ["vidr",null];
+			_wobj setVariable ["vdir",null];
 		};
 		
 		if !isNullVar(_replicate) then {_replicate = true};
@@ -1544,7 +1544,7 @@ class(IDestructible) extends(GameObject)
 		objParams();
 		if !callSelf(isInWorld) exitWith {false};
 		private _wobj = getSelf(loc);
-		(_wobj getVariable ["wpos",false]) && (_wobj getVariable ["vidr",false])
+		(_wobj getVariable ["wpos",false]) && (_wobj getVariable ["vdir",false])
 	};
 
 	func(replicateTransform)
@@ -2397,7 +2397,10 @@ region(Pulling functionality)
 					// _src attachTo [_vtarg,[0,0,0]];
 					// //[_src,_newtempVec] call model_SetPitchBankYaw;
 					// detach _src;
-					// callSelf(replicateObject);
+					getSelf(loc) setPosWorld (atltoasl _newPos);
+					[getSelf(loc),_newtempVec] call model_SetPitchBankYaw;
+					[getSelf(loc)] call noe_updateObjectByteArr;
+					callSelf(replicateObject);
 					//traceformat("transform update %1 %2; OFFSET %3; Z %4",_newPos arg _newtempVec arg _offs arg _newtempPosZ)
 					//callSelfParams(setTransform,_newPos vectordiff (boundingCenter getSelf(loc)) arg _newtempVec);
 

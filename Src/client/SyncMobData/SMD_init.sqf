@@ -569,10 +569,10 @@ smd_onPull = {
 		//stop grab
 		private _ptr = _mob getVariable "__loc_pull_ptr";
 		if isNullVar(_ptr) exitWith {};
+		noe_client_set_lockedPropUpdates deleteAt _ptr;
 		[_ptr] call noe_client_resetObjectTransform;
 		_mob setVariable ["__loc_pull_ptr",null];
 		call _syncWalk;
-		noe_client_set_lockedPropUpdates deleteAt _ptr;
 	};
 	if (equalTypes(_ctx,"") && {[_ctx,"helper+"] call stringStartWith}) exitWith {
 		_mob setVariable ["__loc_pull_ptr",_ctx];
@@ -686,7 +686,7 @@ smd_onPull = {
 		{
 			params ["_pars","_tick"];
 			_pars params ["_mob","_ptr","_vtarg"];
-			[_ptr] call noe_client_resetObjectTransform;
+			
 			deleteVehicle _vtarg;
 		},
 		[_pars,tickTime]

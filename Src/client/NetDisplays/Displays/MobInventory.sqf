@@ -173,6 +173,7 @@ ND_INIT(ObjectPull)
 				_w setvariable ["_ch_vec",_newvec];
 				private _o = call ND_ObjectPull_getPtrObj;
 				if !isNullReference(_o) then {
+					call changeTransf;
 					[_o,_newvec] call model_SetPitchBankYaw;
 				};
 				
