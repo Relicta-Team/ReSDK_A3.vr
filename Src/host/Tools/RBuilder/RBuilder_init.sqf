@@ -22,5 +22,9 @@ if (_hasTests) then {
 	call test_run;
 };
 
+
+//noexit on auto-reload
+if (RBuilder_autoReload) exitWith {};
+
 log("No RBuilder work found. Exiting...");
 ["RBuilder","exit",[0]] call rescript_callCommandVoid;

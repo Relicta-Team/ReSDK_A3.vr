@@ -57,38 +57,60 @@ TEST_F(ArrayFixture,API_Functions)
 	ASSERT_EQ(arr select 0,25);
 	ASSERT_EQ(array_selectlast(arr),-3);
 
-	[arr,4] arrayDeleteItem;
+	[arr,4] call arrayDeleteItem;
 	ASSERT_EQ(arr select 2,18);
 	
+	traceformat("Array contents: %1",arr);
+
 	//out of range
-	ASSERT(!([arr,-2] call arrayIsValidIndex));
-	ASSERT(!([arr,-1] call arrayIsValidIndex));
-	ASSERT(!([arr,count arr] call arrayIsValidIndex));
+	ASSERT(!([arr arg -2] call arrayIsValidIndex));
+	ASSERT(!([arr arg -1] call arrayIsValidIndex));
+	ASSERT(!([arr arg count arr] call arrayIsValidIndex));
 	//valid range
-	ASSERT(([arr,count arr - 2] call arrayIsValidIndex));
+	ASSERT(([arr arg 0] call arrayIsValidIndex));
+	ASSERT(([arr arg count arr - 2] call arrayIsValidIndex));
 
 	// shuffle original
-	private _cpy = array_copy(arr)
+	private _cpy = array_copy(arr);
 	private _cpyRef = [_cpy] call arrayShuffleOrig;
 	ASSERT(_cpy isequalref _cpyRef);
 
 	//Swap values; There array is: [25,2,18,-3]
-	[arr,0,(count arr) - 1] call arraySwap;
+	[arr,0,(count arr) - 1] call arraySwap; //swap last and first: [-3,2,18,25]
 	ASSERT_EQ(arr select 0,-3);
 }
 
-
-FIXTURE_SETUP(HashmapFixture)
+TEST_F(HashsetFixture,MacroCheck)
 {
-	some_hashmap = createHashMapFromArray [["test",0],["best",1],["dest",2]];
-}
+	private _m = hashMapNew;
+	ASSERT(count _m == 0);
+	private _m2 = hashMapNewArgs [["a",123]];
+	ASSERT(count _m2 == 1);
 
-FIXTURE_TEARDOWN(HashmapFixture)
-{
-	some_hashmap = null;
-}
+	private _hash = hashSet_createEmpty();
+	ASSERT(!isNullVar(_hash));
+	private _keymap = ["a","b","c"];
+	_hash = hashSet_create(_keymap);
+	ASSERT(!isNullVar(_hash));
+	
+	hashSet_add(_hash,"d");
+	ASSERT(hashSet_exists(_hash,"d"));
+	hashSet_rem(_hash,"d");
+	ASSERT(!hashSet_exists(_hash,"d"));
 
-TEST_F(HashmapFixture,MacroCheck)
-{
-	//TODO implement
+	private _reqCount = count _keymap;
+	private _foundCount = {_x in _keymap} count hashSet_toArray(_hash);
+	ASSERT_EQ(_foundCount,_reqCount); //toarray check
+	ASSERT_EQ(hashSet_count(_hash),_reqCount);//count check
+
+	//merging
+	private _hash2 = hashSet_createList("x" arg "y" arg "z");
+	ASSERT_EQ(hashSet_count(_hash2),3);
+
+	hashSet_copyFrom(_hash,_hash2);
+	ASSERT_EQ(hashSet_count(_hash),6);
+
+	//cleanup original
+	hashSet_clear(_hash);
+	ASSERT_EQ(hashSet_count(_hash),0);
 }

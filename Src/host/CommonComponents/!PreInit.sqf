@@ -412,7 +412,7 @@ arrayDeleteItem = {
 
 arrayIsValidIndex = {
 	params ["_a","_ix"];
-	count _a > 0 && {_ix < count _a}
+	count _a > 0 && {_ix < count _a} && {_ix >= 0}
 };
 
 //shuffle array elements, return alter array
