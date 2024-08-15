@@ -575,7 +575,6 @@ smd_onPull = {
 		_mob setVariable ["__loc_pull_ptr",null];
 		
 		private _obj = noe_client_allPointers get _ptr;
-		assert(!isNullReference(_obj));
 		if !isNullReference(_obj) then {
 			_obj enableCollisionWith _mob;
 		};
@@ -608,6 +607,7 @@ smd_onPull = {
 		setLastError("Object not found: " + _ptr);
 	};
 	
+	_vtarg setvariable ["_lastobj",_obj];
 	[_obj,_vtarg] call NGOExt_createSoftlink;
 	private _lpp = getPosWorld _obj;
 	
@@ -622,11 +622,20 @@ smd_onPull = {
 		{
 			params ["_pars","_tick"];
 			_pars params ["_mob","_ptr","_vtarg","_isSelf"];
+			if !([_mob] call smd_isPulling) exitWith {true};
+
 			private _obj = noe_client_allPointers get _ptr;
 			if isNullReference(_obj) exitWith {false};
 			private _pdat = [_ptr,true] call noe_client_getOrignalObjectData;
 			if isNullVar(_pdat) exitWith {false};
-			if !([_mob] call smd_isPulling) exitWith {true};
+			
+			_lastobj = _vtarg getvariable ["_lastobj",objnull];
+			_needUpdate = not_equals(_lastobj,_obj);
+			if (_needUpdate) then {
+				_vtarg setvariable ["_lastobj",_obj];
+				[_ptr] call noe_client_resetObjectTransform;
+			};
+
 			//if (true) exitWith {false}; //todo remove on ready
 			//pos, dir,vec
 			private _pos = _pdat get "pos";
@@ -686,6 +695,8 @@ smd_onPull = {
 				_mob setVariable ["__loc_pull_newVDU",_vdu];
 				_mob setVariable ["__loc_pull_lastupd",_nextUpd];
 			};
+			_zdelta = _obj getvariable ["pull_interp_zpos_delta",0];
+			_newpos = _newpos vectorAdd [0,0,_zdelta];
 			_obj setPosWorld (_newpos);
 			
 			//[_obj,_newvdu] call model_SetPitchBankYaw;

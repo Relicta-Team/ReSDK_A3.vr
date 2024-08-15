@@ -2299,7 +2299,7 @@ region(Pulling functionality)
 				[_x2,_y2,_z1],
 				[_x2,_y2,_z2]
 			];
-			private _maxZ = (abs _z1) + (abs _z2);
+			private _maxZ = ((abs _z1) + (abs _z2))/2;
 			_vtarg setVariable ["_maxZOffset",_maxZ];
 
 			_params pushBack _bbxDatAll;
@@ -2325,6 +2325,7 @@ region(Pulling functionality)
 				private _isStop = false;
 
 				if isNullReference(_vtarg) exitWith {true};
+				if !callFunc(this,isInWorld) exitWith {true};
 				private _isMainOwner = equals(callSelf(getPullMainOwner),_usr);
 				private _canmove = true;
 				private _oldpos = getposatl _vtarg;
@@ -2373,6 +2374,17 @@ region(Pulling functionality)
 					_isStop = true;
 					callFuncParams(_usr,localSay,"Сорвалась хватка!" arg "error");
 				};
+				_it = [
+					getposatl _own,
+					(getposatl _own) vectoradd [0,0,-100],
+					_own,
+					getSelf(loc)
+				] call si_getIntersectData;
+				if (!isNullReference(_it select 0)) then {
+					if equals(_it select 0,getSelf(loc)) exitWith {
+						_isStop = true;
+					};
+				};
 
 				//bbx checking
 
@@ -2419,7 +2431,12 @@ region(Pulling functionality)
 				
 				traceformat("PULLING TRIGGER STOPPED %1",_vtarg)
 				if !isNullReference(_vtarg) then {
-					callFuncParams(_usr,onGrab,this);
+					//callFuncParams(_usr,onGrab,this);
+					{
+						if equals(getVar(_x,object),this) then {
+							callFunc(_x,stopGrab);
+						};
+					} foreach getVar(_usr,specHandAct);
 				};
 			},
 			[_params,tickTime + async_delay_check_]

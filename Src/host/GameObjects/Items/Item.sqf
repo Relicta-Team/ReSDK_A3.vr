@@ -1029,6 +1029,12 @@ class(SystemHandItem) extends(SystemItem)
 			callFuncParams(getSelf(loc),sendInfo,"spr_sync" arg []);
 
 		} else {
+			//checks
+			//!temporary
+			if !isNullReference(callFunc(_obj,getPullMainOwner)) exitWith {
+				_grabIsBlocked = true;
+			};
+
 			//non-mob
 			setSelf(object,_obj);
 			setSelf(weight,getVar(_obj,weight));//set weight for object

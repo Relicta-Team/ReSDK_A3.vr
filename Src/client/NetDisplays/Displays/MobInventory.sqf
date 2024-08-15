@@ -113,8 +113,8 @@ ND_INIT(ObjectPull)
 		//initialize variables
 		_back setVariable ["_transform_vec",[0,0,0]];
 		_back setVariable ["_ch_vec",[0,0,0]];
-		_back setVariable ["_transform_pos",[0,0,0]];
-		_back setVariable ["_ch_pos",[0,0,0]];
+		_back setVariable ["_transform_pos",0];
+		_back setVariable ["_ch_pos",0];
 
 		_back setVariable ["_isPressed",false];
 		_back setVariable ["_altMode",false];
@@ -133,6 +133,7 @@ ND_INIT(ObjectPull)
 			private _o = call ND_ObjectPull_getPtrObj;
 			if !isNullReference(_o) then {
 				_w setVariable ["_transform_vec",[_o] call model_getPitchBankYaw];
+				_w setvariable ["_presaved_pos",getPosWorld _o];
 			};
 
 		}];
@@ -140,12 +141,25 @@ ND_INIT(ObjectPull)
 			params ["_w","_b"];
 			_w setVariable ["_isPressed",false];
 			_w setVariable ["_altMode",false];
+			_isPressedPos = _w getVariable ["_isPressedPos",false];
+			_w setVariable ["_isPressedPos",false];
 			//save transform
 			private _transform = _w getVariable ["_ch_vec",vec3(0,0,0)];
 			_w setvariable ["_transform_vec",_transform];
+			private _zpos = _w getVariable ["_ch_pos",0];
+			_w setvariable ["_transform_pos",_zpos];
 			
+			private _o = call ND_ObjectPull_getPtrObj;
+			if !isNullReference(_o) then {
+				_o setvariable ["pull_interp_zpos_delta",null];
+			};
+
 			//send new transform
-			[["vupd",_transform]]call nd_onPressButton;
+			if (_isPressedPos) then {
+				[["zupd",_zpos]]call nd_onPressButton;
+			} else {
+				[["vupd",_transform]]call nd_onPressButton;
+			};
 		}];
 		_back ctrlAddEventHandler ["MouseMoving",{
 			params ["_w","_xabs","_yabs"];
@@ -159,25 +173,36 @@ ND_INIT(ObjectPull)
 				_dX = _ofX - _x;
 				_dY = _ofY - _y;
 				
-				
-				_oldVec = _w getVariable ["_transform_vec",vec3(0,0,0)];
-				_newvec = [0,0,0];
-				if (!_altMode) then {
-					_newvec = [(_oldVec select 0) + (_dY),(_oldVec select 1),(_oldVec select 2) + (_dX)];
-					_newvec set [0,[_newvec select 0,-180,180] call clampInRange];
+				if (_isPressedPos) then {
+					// _oldZ = _w getVariable ["_transform_pos",0];
+					// modvar(_oldZ) + _dY;
+					_newdelta = _dY * 0.01;
+					_w setvariable ["_ch_pos",_newdelta];
+					private _o = call ND_ObjectPull_getPtrObj;
+					if !isNullReference(_o) then {
+						_o setvariable ["pull_interp_zpos_delta",_newdelta];	
+					};
 				} else {
-					_newvec = [(_oldVec select 0),(_oldVec select 1) + (_dY),(_oldVec select 2) + (_dX)];
-					_newvec set [1,[_newvec select 1,-180,180] call clampInRange];
-				};
-				_newvec set [2,clampangle(_newvec select 2,0,359)];
-				
-				traceformat("NEWVEC %1 (alt: %2; isposchange: %3)",_newvec arg _altMode arg _isPressedPos)
+					_oldVec = _w getVariable ["_transform_vec",vec3(0,0,0)];
+					_newvec = [0,0,0];
+					if (!_altMode) then {
+						_newvec = [(_oldVec select 0) + (_dY),(_oldVec select 1),(_oldVec select 2) + (_dX)];
+						_newvec set [0,[_newvec select 0,-180,180] call clampInRange];
+					} else {
+						_newvec = [(_oldVec select 0),(_oldVec select 1) + (_dY),(_oldVec select 2) + (_dX)];
+						_newvec set [1,[_newvec select 1,-180,180] call clampInRange];
+					};
+					_newvec set [2,clampangle(_newvec select 2,0,359)];
+					
+					traceformat("NEWVEC %1 (alt: %2; isposchange: %3)",_newvec arg _altMode arg _isPressedPos)
 
-				_w setvariable ["_ch_vec",_newvec];
-				private _o = call ND_ObjectPull_getPtrObj;
-				if !isNullReference(_o) then {
-					[_o,_newvec] call model_SetPitchBankYaw;
+					_w setvariable ["_ch_vec",_newvec];
+					private _o = call ND_ObjectPull_getPtrObj;
+					if !isNullReference(_o) then {
+						[_o,_newvec] call model_SetPitchBankYaw;
+					};
 				};
+				
 				
 				
 			};
@@ -190,6 +215,7 @@ ND_INIT(ObjectPull)
 			_tvec = _w getVariable ["_transform_vec",vec3(0,0,0)];
 			_tvec set [0,0];
 			_tvec set [1,0];
+			[["vupd",_tvec]]call nd_onPressButton;
 			private _o = call ND_ObjectPull_getPtrObj;
 			if !isNullReference(_o) then {
 				[_o,_tvec] call model_SetPitchBankYaw;
