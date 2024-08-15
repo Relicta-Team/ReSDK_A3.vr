@@ -570,6 +570,10 @@ smd_onPull = {
 		private _ptr = _mob getVariable "__loc_pull_ptr";
 		if isNullVar(_ptr) exitWith {};
 		noe_client_set_lockedPropUpdates deleteAt _ptr;
+		private _obj = noe_client_allPointers get _ptr;
+		if !isNullReference(_obj) then {
+			_obj enableCollisionWith _mob;
+		};
 		[_ptr] call noe_client_resetObjectTransform;
 		_mob setVariable ["__loc_pull_ptr",null];
 		call _syncWalk;
@@ -590,6 +594,7 @@ smd_onPull = {
 	_vtarg setObjectMaterial [0,""];
 	_vtarg setObjectTexture [1,"#(argb,8,8,3)color(1,1,0,1,co)"];//edge colors
 	_vtarg disableCollisionWith _mob;
+
 	_mob setVariable ["__loc_pull_vtarg",_vtarg];
 	private _pars = [_mob,_ptr,_vtarg,_isSelf];
 	_mob setVariable ["__loc_pull_ptr",_ptr];
@@ -599,6 +604,7 @@ smd_onPull = {
 		setLastError("Object not found: " + _ptr);
 	};
 	
+	[_obj,_vtarg] call NGOExt_createSoftlink;
 	private _lpp = getPosWorld _obj;
 	
 	_mob setVariable ["__loc_pull_lastpos",_lpp];
@@ -624,6 +630,8 @@ smd_onPull = {
 				_pos = _pos select [0,3];
 			};
 			
+			_obj disableCollisionWith _mob;
+
 			private _vdu = [_obj] call model_getPitchBankYaw;
 
 			//sync color
@@ -677,17 +685,21 @@ smd_onPull = {
 			
 			//[_obj,_newvdu] call model_SetPitchBankYaw;
 			//_vtarg setposatl (getposatl _obj);
-			_vtarg attachTo [_obj,[0,0,0]];
-			_vtarg setVectorDirAndUp [vectorDir _obj,vectorUp _obj];
+			if (_isSelf) then {
+				//_vtarg setVectorDirAndUp [vectorDirVisual _obj,vectorUpVisual _obj];
+				_vtarg attachTo [_obj,[0,0,0]];
+				//_vtarg setVectorDirAndUp [vectorDirVisual _obj,vectorUpVisual _obj];
+				
+				_vtarg setObjectScale (1.1 * (boundingBoxReal _obj select 2));
+				detach _vtarg;
+			};
 			
-			_vtarg setObjectScale (1.1 * (boundingBoxReal _obj select 2));
-			detach _vtarg;
 			isNull(_mob getVariable "__loc_pull_ptr");
 		},
 		{
 			params ["_pars","_tick"];
 			_pars params ["_mob","_ptr","_vtarg"];
-			
+			traceformat("TERMINATED PULLING %1",_pars)
 			deleteVehicle _vtarg;
 		},
 		[_pars,tickTime]

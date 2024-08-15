@@ -2399,7 +2399,7 @@ region(Pulling functionality)
 					// detach _src;
 					getSelf(loc) setPosWorld (atltoasl _newPos);
 					[getSelf(loc),_newtempVec] call model_SetPitchBankYaw;
-					[getSelf(loc)] call noe_updateObjectByteArr;
+					//[getSelf(loc)] call noe_updateObjectByteArr;
 					callSelf(replicateObject);
 					traceformat("transform update %1 %2; OFFSET %3; Z %4",_newPos arg _newtempVec arg _offs arg _newtempPosZ)
 					//callSelfParams(setTransform,_newPos vectordiff (boundingCenter getSelf(loc)) arg _newtempVec);

@@ -43,6 +43,16 @@ NGOExt_create = {
 	_bnd
 };
 
+NGOExt_createSoftlink = {
+	params ["_srcWorldObj","_target"];
+	private _ref = _srcWorldObj getvariable "ref";
+	if isNullVar(_ref) exitWith {false};
+	_target setvariable ["ref",_ref];
+	_target setvariable ["ngo_src",_srcWorldObj];
+	_target setvariable ["__ngoext_itt",true];
+	true
+};
+
 //create virtual object
 NGOExt_createDummyObject = {
 	params ["_src","_objType",["_imode",true],["_simple",true]];
