@@ -570,12 +570,16 @@ smd_onPull = {
 		private _ptr = _mob getVariable "__loc_pull_ptr";
 		if isNullVar(_ptr) exitWith {};
 		noe_client_set_lockedPropUpdates deleteAt _ptr;
+		
+		[_ptr] call noe_client_resetObjectTransform;
+		_mob setVariable ["__loc_pull_ptr",null];
+		
 		private _obj = noe_client_allPointers get _ptr;
+		assert(!isNullReference(_obj));
 		if !isNullReference(_obj) then {
 			_obj enableCollisionWith _mob;
 		};
-		[_ptr] call noe_client_resetObjectTransform;
-		_mob setVariable ["__loc_pull_ptr",null];
+
 		call _syncWalk;
 	};
 	if (equalTypes(_ctx,"") && {[_ctx,"helper+"] call stringStartWith}) exitWith {
@@ -622,6 +626,7 @@ smd_onPull = {
 			if isNullReference(_obj) exitWith {false};
 			private _pdat = [_ptr,true] call noe_client_getOrignalObjectData;
 			if isNullVar(_pdat) exitWith {false};
+			if !([_mob] call smd_isPulling) exitWith {true};
 			//if (true) exitWith {false}; //todo remove on ready
 			//pos, dir,vec
 			private _pos = _pdat get "pos";
