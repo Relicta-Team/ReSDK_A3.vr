@@ -2382,9 +2382,9 @@ region(Pulling functionality)
 					if (!_canmove) exitWith {
 						//reset position
 						_vtarg setPosAtl (_oldpos);
-						//[_vtarg,_vtarg getVariable ["_curRot"]] call model_SetPitchBankYaw;
+						[_vtarg,_vtarg getVariable "_curRot"] call model_SetPitchBankYaw;
 					};
-					private _oldTransform = callSelf(getTransform);
+					
 					//save positions
 					_vtarg setVariable ["_curRot",_newtempVec];
 					_vtarg setVariable ["_curZPos",_newtempPosZ];
@@ -2401,7 +2401,7 @@ region(Pulling functionality)
 					[getSelf(loc),_newtempVec] call model_SetPitchBankYaw;
 					[getSelf(loc)] call noe_updateObjectByteArr;
 					callSelf(replicateObject);
-					//traceformat("transform update %1 %2; OFFSET %3; Z %4",_newPos arg _newtempVec arg _offs arg _newtempPosZ)
+					traceformat("transform update %1 %2; OFFSET %3; Z %4",_newPos arg _newtempVec arg _offs arg _newtempPosZ)
 					//callSelfParams(setTransform,_newPos vectordiff (boundingCenter getSelf(loc)) arg _newtempVec);
 
 					//	_vtarg setVariable ["_lastTransform",callSelf(getTransform)];
@@ -2510,7 +2510,7 @@ region(Pulling functionality)
 			_inp params ["_mode","_val"];
 			if (_mode == "vupd") exitWith {
 				private _oldrot = _ph getVariable "_rot";
-				_ph setVariable ["_rot",(_oldrot vectorAdd _val) apply {_x}];
+				_ph setVariable ["_rot",_val];
 			};
 			if (_mode == "zupd") exitWith {
 				private _oldval = _ph getVariable "_zpos";

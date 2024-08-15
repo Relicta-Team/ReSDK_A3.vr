@@ -616,7 +616,7 @@ smd_onPull = {
 			if isNullReference(_obj) exitWith {false};
 			private _pdat = [_ptr,true] call noe_client_getOrignalObjectData;
 			if isNullVar(_pdat) exitWith {false};
-			if (true) exitWith {false}; //todo remove on ready
+			//if (true) exitWith {false}; //todo remove on ready
 			//pos, dir,vec
 			private _pos = _pdat get "pos";
 			//asltoatl
@@ -662,7 +662,7 @@ smd_onPull = {
 				_mob getVariable "__loc_pull_lastVDU",
 				_mob getVariable "__loc_pull_newVDU",
 				true];
-			traceformat("interp pull dist %1; ---> FROM %2 TO %3; NEWPOS %4",(_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))) arg _lastSavedPos arg _newSavedPos arg _newpos)
+			//traceformat("interp pull dist %1; ---> FROM %2 TO %3; NEWPOS %4",(_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))) arg _lastSavedPos arg _newSavedPos arg _newpos)
 			
 			if (tickTime >= _nextUpd) then {
 				//_this set [2,tickTime + 0.5];
@@ -676,11 +676,12 @@ smd_onPull = {
 			_obj setPosWorld (_newpos);
 			
 			//[_obj,_newvdu] call model_SetPitchBankYaw;
-			_vtarg setposatl (getposatl _obj);
+			//_vtarg setposatl (getposatl _obj);
+			_vtarg attachTo [_obj,[0,0,0]];
 			_vtarg setVectorDirAndUp [vectorDir _obj,vectorUp _obj];
 			
 			_vtarg setObjectScale (1.1 * (boundingBoxReal _obj select 2));
-
+			detach _vtarg;
 			isNull(_mob getVariable "__loc_pull_ptr");
 		},
 		{

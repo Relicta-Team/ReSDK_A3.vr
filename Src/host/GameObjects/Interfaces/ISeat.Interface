@@ -287,6 +287,13 @@ func(seatConnect)
 	//callSelfParams(seatApplySeatAnim,_usr);
 	
 	private _origObj = getSelf(loc);
+
+	private _pby = ([_origObj] call model_getpitchbankyaw) apply {abs _x};
+	if (_pby select 0 >= 12 || _pby select 1 >= 12) exitWith {
+		callFuncParams(_usr,localSay,"Слишком большой наклон" arg "error");
+		false
+	};
+
 	private _offsetPos = callSelf(seatListOffsetPos) select _index;
 	private _offsetDir = callSelf(seatListOffsetDir) select _index;
 	

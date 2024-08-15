@@ -93,11 +93,14 @@ ND_INIT(ObjectPull)
 	_ctg = if (isFirstLoad) then {
 		
 		private _offsH = 10;
-		private _header = [thisDisplay,TEXT,vec4(0,0,90,_offsH)] call createWidget;
+		private _header = [thisDisplay,TEXT,vec4(0,0,80,_offsH)] call createWidget;
 		[_header,"<t align='center'>ЛКМ - вращение, ЛКМ + Alt - альт.вращение, ПКМ - подъем/опускание</t>"] call widgetSetText;
 		addSavedWdiget(_header);
 
-		_closer = [thisDisplay,[90,0,100-90,_offsH]] call nd_addClosingButton;
+		_reset = [thisDisplay,BUTTON,[80,0,9,_offsH]] call createWidget;
+		_reset ctrlSetText "Сбросить повороты";
+
+		_closer = [thisDisplay,[90,0,10,_offsH]] call nd_addClosingButton;
 		_closer ctrlSetText "Закрыть";
 
 		//full-sized
@@ -173,13 +176,26 @@ ND_INIT(ObjectPull)
 				_w setvariable ["_ch_vec",_newvec];
 				private _o = call ND_ObjectPull_getPtrObj;
 				if !isNullReference(_o) then {
-					call changeTransf;
 					[_o,_newvec] call model_SetPitchBankYaw;
 				};
 				
 				
 			};
 		}];
+
+		_reset setvariable ["_drag",_back];
+		_reset ctrlAddEventHandler ["MouseButtonUp",{
+			params ["_ct","_bt"];
+			_w = _ct getvariable "_drag";
+			_tvec = _w getVariable ["_transform_vec",vec3(0,0,0)];
+			_tvec set [0,0];
+			_tvec set [1,0];
+			private _o = call ND_ObjectPull_getPtrObj;
+			if !isNullReference(_o) then {
+				[_o,_tvec] call model_SetPitchBankYaw;
+			};
+		}];
+
 		// _back ctrlAddEventHandler ["MouseZChanged",{
 		// 	params ["_w","_val"];
 		// 	[["zupd",_val / 12]]call nd_onPressButton;
