@@ -2228,11 +2228,6 @@ region(Pulling functionality)
 		if !callSelf(isInWorld) exitWith {};
 		if !callSelfParams(_checkCanPullingConditions,_usr) exitWith {};
 		
-		// if not_equals(callFunc(_usr,getLastInteractTarget),this) exitWith {};//не установлена актуальная цель движения
-		// #ifdef EDITOR
-		// callFunc(_usr,generateLastInteractOnServer);
-		// #endif
-		// private _startPoint = callFunc(_usr,getLastInteractEndPos);
 		//todo горящие чанки объекта не позволят двигать его
 		
 		getSelf(__moverMobs) pushBack _usr;
@@ -2403,21 +2398,12 @@ region(Pulling functionality)
 					
 					private _newPos = _newtempPos;
 					
-					//update location transform
-					//if (_canSync) then {
-					// private _src = getSelf(loc);
-					// _src attachTo [_vtarg,[0,0,0]];
-					// //[_src,_newtempVec] call model_SetPitchBankYaw;
-					// detach _src;
 					getSelf(loc) setPosWorld (atltoasl _newPos);
 					[getSelf(loc),_newtempVec] call model_SetPitchBankYaw;
-					//[getSelf(loc)] call noe_updateObjectByteArr;
+					
 					callSelf(replicateObject);
 					traceformat("transform update %1 %2; OFFSET %3; Z %4",_newPos arg _newtempVec arg _offs arg _newtempPosZ)
-					//callSelfParams(setTransform,_newPos vectordiff (boundingCenter getSelf(loc)) arg _newtempVec);
-
-					//	_vtarg setVariable ["_lastTransform",callSelf(getTransform)];
-					//};
+					
 
 					if ((_oldpos distance _newpos) > 0.15) then {
 						callFunc(this,playPullSound);
