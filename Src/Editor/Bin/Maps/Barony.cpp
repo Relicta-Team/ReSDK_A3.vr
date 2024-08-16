@@ -8,18 +8,18 @@ class EditorData
 	toggles=42;
 	class ItemIDProvider
 	{
-		nextID=8697;
+		nextID=8698;
 	};
 	class LayerIndexProvider
 	{
-		nextID=1057;
+		nextID=1099;
 	};
 	class Camera
 	{
-		pos[]={3821.2568,77.727852,4093.9673};
-		dir[]={-0.6260528,-0.61519849,-0.47936326};
-		up[]={-0.48849019,0.78833288,-0.37403461};
-		aside[]={-0.60800266,-7.6552533e-007,0.79405433};
+		pos[]={3839.8687,88.056091,4146.7729};
+		dir[]={-0.088541441,-0.5936076,-0.799869};
+		up[]={-0.065310434,0.80475461,-0.59000391};
+		aside[]={-0.99392909,3.7252903e-009,0.1100229};
 	};
 };
 binarizationWanted=0;
@@ -6587,7 +6587,7 @@ class Mission
 			name="Трубы";
 			class Entities
 			{
-				items=100;
+				items=99;
 				class Item0
 				{
 					dataType="Object";
@@ -8358,27 +8358,9 @@ class Mission
 					type="land_trubaduba1";
 					atlOffset=3.5238113;
 				};
-				class Item99
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3838.9993,67.200356,4155.3696};
-						angles[]={0,1.7186667e-007,4.712389};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ShortPipeBlueMetal""]]}";
-					};
-					id=7600;
-					type="land_trubaduba1";
-					atlOffset=61.876122;
-				};
 			};
 			id=3286;
-			atlOffset=0.58215332;
+			atlOffset=2.9580917;
 		};
 		class Item7
 		{
@@ -12651,7 +12633,7 @@ class Mission
 			state=1;
 			class Entities
 			{
-				items=97;
+				items=98;
 				class Item0
 				{
 					dataType="Object";
@@ -13206,7 +13188,7 @@ class Mission
 					};
 					id=3729;
 					type="Land_Hammer_F";
-					atlOffset=0.37180328;
+					atlOffset=0.9753952;
 				};
 				class Item32
 				{
@@ -13539,7 +13521,7 @@ class Mission
 					};
 					id=3688;
 					type="swordefault";
-					atlOffset=0.36428833;
+					atlOffset=0.96813965;
 				};
 				class Item51
 				{
@@ -14350,9 +14332,27 @@ class Mission
 					type="gryazyuka5";
 					atlOffset=0.045860291;
 				};
+				class Item97
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3839.0242,67.211006,4155.4038};
+						angles[]={0,0.7853983,-0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcretePillarDestroyed""]]}";
+					};
+					id=8697;
+					type="balka";
+					atlOffset=60.21711;
+				};
 			};
 			id=3579;
-			atlOffset=0.27277374;
+			atlOffset=62.113785;
 		};
 		class Item11
 		{
@@ -32195,7 +32195,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3826.335,70.647858,4135.9414};
-						angles[]={6.0213861,4.7123909,-0};
+						angles[]={6.0213861,4.7123909,0};
 					};
 					side="Empty";
 					flags=4;
@@ -32213,7 +32213,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3826.9575,70.910576,4135.604};
-						angles[]={0,4.9741888,-0};
+						angles[]={0,4.9741888,0};
 					};
 					side="Empty";
 					flags=5;

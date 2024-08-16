@@ -448,7 +448,6 @@ _3881_523444132_4624063_89912 = ['SteelLatticeGate',[3881.52,4132.46,63.8991],27
 ['ShortPipeBlueMetal',[3832.68,4154.48,66.4929],0,[0,0,1]] call InitStruct; 
 ['ShortPipeBlueMetal',[3828.69,4154.48,66.4905],0,[0,0,1]] call InitStruct; 
 ['ShortPipeBlueMetal',[3824.81,4154.48,72.307,true],0,[0.258819,0,0.965926]] call InitStruct; 
-['ShortPipeBlueMetal',[3839,4155.37,67.2004,true],1.17427e-013,[1,0,1.19249e-008]] call InitStruct; 
 _3825_625004125_6889665_50000 = ['StreetLampEnabled',[3825.63,4125.69,65.5],145,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_ITAL_var]; go_editor_globalRefs set ["StreetLampEnabled G:h3/3C4ZWVso",_thisObj];
 }] call InitStruct; 
 ['StreetLampEnabled',[3824.13,4105.63,63.125],320,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_ITAL_var]; go_editor_globalRefs set ["StreetLampEnabled G:RSeLrlEyJvw",_thisObj];
@@ -939,6 +938,7 @@ _3833_663574148_7714865_59573 = ['IStruct',[3833.66,4148.77,71.1173,true],90,[-0
 ['TrashCan',[3841.24,4146.21,63.7444],300.56,[0,0,1]] call InitStruct; 
 ['WoodenSmallShelf',[3838.88,4153.01,63.5282],270,[0,0,1]] call InitStruct; 
 ['SmallDirtGrey',[3837.55,4143.21,69.2013,true],[-0.985855,-0.0124355,0.16714],[0.158964,0.246646,0.955979]] call InitStruct; 
+['ThickConcretePillarDestroyed',[3839.02,4155.4,60.2171],45,[0,0,1]] call InitStruct; 
 _3828_828374159_8374062_97133 = ['SmallBrickHouse',[3828.83,4159.84,62.9713],0,[0,0,1]] call InitStruct; 
 ['SleepingMatras1',[3830.71,4161.02,63.5238],356.588,[0,0,1], {go_editor_globalRefs set ["RSadovnikBaronyBed",_thisObj];
 }] call InitStruct; 
