@@ -349,7 +349,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\GameObject.sqf at line 354](../../../Src/host/GameObjects/GameObject.sqf#L354)
+File: [host\GameObjects\GameObject.sqf at line 355](../../../Src/host/GameObjects/GameObject.sqf#L355)
 ## startSectorIndex
 
 Type: constant
@@ -361,7 +361,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 752](../../../Src/host/GameObjects/GameObject.sqf#L752)
+File: [host\GameObjects\GameObject.sqf at line 753](../../../Src/host/GameObjects/GameObject.sqf#L753)
 ## sectorSize
 
 Type: constant
@@ -373,7 +373,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\GameObject.sqf at line 753](../../../Src/host/GameObjects/GameObject.sqf#L753)
+File: [host\GameObjects\GameObject.sqf at line 754](../../../Src/host/GameObjects/GameObject.sqf#L754)
 ## DEBUG_VISUAL_OBJECTFALLING
 
 Type: constant
@@ -385,7 +385,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\GameObject.sqf at line 1408](../../../Src/host/GameObjects/GameObject.sqf#L1408)
+File: [host\GameObjects\GameObject.sqf at line 1409](../../../Src/host/GameObjects/GameObject.sqf#L1409)
 ## DEBUG_VISUAL_OPENSPACE
 
 Type: constant
@@ -397,7 +397,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\GameObject.sqf at line 1518](../../../Src/host/GameObjects/GameObject.sqf#L1518)
+File: [host\GameObjects\GameObject.sqf at line 1567](../../../Src/host/GameObjects/GameObject.sqf#L1567)
 ## async_delay_check_
 
 Type: constant
@@ -409,7 +409,7 @@ Replaced value:
 ```sqf
 0.5
 ```
-File: [host\GameObjects\GameObject.sqf at line 2200](../../../Src/host/GameObjects/GameObject.sqf#L2200)
+File: [host\GameObjects\GameObject.sqf at line 2243](../../../Src/host/GameObjects/GameObject.sqf#L2243)
 ## flyingObject
 
 Type: Variable
@@ -421,7 +421,7 @@ Initial value:
 ```sqf
 createObj
 ```
-File: [host\GameObjects\GameObject.sqf at line 52](../../../Src/host/GameObjects/GameObject.sqf#L52)
+File: [host\GameObjects\GameObject.sqf at line 53](../../../Src/host/GameObjects/GameObject.sqf#L53)
 ## go_internal_updateMethodsAfterStart
 
 Type: Variable
@@ -433,7 +433,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\GameObject.sqf at line 453](../../../Src/host/GameObjects/GameObject.sqf#L453)
+File: [host\GameObjects\GameObject.sqf at line 454](../../../Src/host/GameObjects/GameObject.sqf#L454)
 ## go_internal_chatMesMap
 
 Type: Variable
@@ -445,7 +445,7 @@ Initial value:
 ```sqf
 ["emote","log","act","combat","info","mind","event","system","error","default"]
 ```
-File: [host\GameObjects\GameObject.sqf at line 1075](../../../Src/host/GameObjects/GameObject.sqf#L1075)
+File: [host\GameObjects\GameObject.sqf at line 1076](../../../Src/host/GameObjects/GameObject.sqf#L1076)
 ## go_internal_chatMesMapText
 
 Type: Variable
@@ -457,7 +457,7 @@ Initial value:
 ```sqf
 ["Эмоут:Кастомное пользовательское действие",...
 ```
-File: [host\GameObjects\GameObject.sqf at line 1076](../../../Src/host/GameObjects/GameObject.sqf#L1076)
+File: [host\GameObjects\GameObject.sqf at line 1077](../../../Src/host/GameObjects/GameObject.sqf#L1077)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
@@ -467,7 +467,7 @@ Type: function
 Description: 
 
 
-File: [host\GameObjects\GameObject.sqf at line 39](../../../Src/host/GameObjects/GameObject.sqf#L39)
+File: [host\GameObjects\GameObject.sqf at line 40](../../../Src/host/GameObjects/GameObject.sqf#L40)
 # Chemistry.h
 
 ## CHEM_TIME_SLOW_UPDATE
@@ -3255,7 +3255,7 @@ Replaced value:
 ```sqf
 func(name__) {parm; callFuncParams(getSelf(object),name__,refparam)}
 ```
-File: [host\GameObjects\Items\Item.sqf at line 1216](../../../Src/host/GameObjects/Items/Item.sqf#L1216)
+File: [host\GameObjects\Items\Item.sqf at line 1221](../../../Src/host/GameObjects/Items/Item.sqf#L1221)
 ## generateItemSize
 
 Type: function

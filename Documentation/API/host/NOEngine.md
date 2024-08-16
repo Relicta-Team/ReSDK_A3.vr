@@ -1032,6 +1032,16 @@ Description: Реплицирует изменённое состояние об
 - Param: _doUpdateByteArr (optional, default false)
 
 File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 299](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L299)
+## noe_replicateTransform
+
+Type: function
+
+Description: 
+- Param: _obj
+- Param: _chunkType
+- Param: _doUpdateByteArr (optional, default false)
+
+File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 362](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L362)
 ## noe_updateObjectByteArr
 
 Type: function
@@ -1039,7 +1049,7 @@ Type: function
 Description: Сохраняет данные об объекте в специальном массиве
 - Param: _obj
 
-File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 363](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L363)
+File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 428](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L428)
 ## noe_serializeChunkInfoToPacket
 
 Type: function
@@ -1049,7 +1059,7 @@ Description:
 - Param: _clientTick
 - Param: _cbPacket
 
-File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 480](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L480)
+File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 545](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L545)
 ## noe_serializeObjectInfoPacket
 
 Type: function
@@ -1058,7 +1068,7 @@ Description: Сериализует в пакет информацию об об
 - Param: _packet
 - Param: _visObj
 
-File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 500](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L500)
+File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 565](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L565)
 ## noe_prepareInfoToRemoveObject
 
 Type: function
@@ -1067,7 +1077,7 @@ Description: подготовка пакета объекта для удале�
 - Param: _packet
 - Param: _ptr
 
-File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 507](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L507)
+File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 572](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L572)
 # NOEngine_Shared.sqf
 
 ## noe_posToChunk
