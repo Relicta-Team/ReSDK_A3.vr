@@ -1314,8 +1314,10 @@ region(throwing and bullets functions)
 	func(onBulletAct) //вызывается при попадании пули в цель
 	{
 		objParams_6(_dam,_type,_sel,_usr,_dist,_throwed);
-		callSelfParams(playSound,"guns\ric"+str randInt(1,5) arg randInt(0.85,1.15) arg 15 arg null arg _p); //_p is exref
-		callSelfParams(applyDamage,_dam arg _type arg _p arg null);
+		if !callFunc(_throwed,isNonLethalAmmo) then {
+			callSelfParams(playSound,"guns\ric"+str randInt(1,5) arg randInt(0.85,1.15) arg 15 arg null arg _p); //_p is exref
+			callSelfParams(applyDamage,_dam arg _type arg _p arg null);
+		};
 		delete(_throwed);
 	};
 
