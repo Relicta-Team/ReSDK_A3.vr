@@ -163,6 +163,8 @@ noe_client_resetObjectTransform = {
 	private _pos = _map get "pos";
 	private _dir = _map get "dir";
 	private _vec = _map get "vec";
+	private _light = _map get "light";
+	private _radio = _map get "radio";
 
 	if (count _pos == 4) then {
 		_obj setPosWorld (_pos select [0,3]);
@@ -175,6 +177,24 @@ noe_client_resetObjectTransform = {
 		_obj setVectorUp _vec;
 	} else {
 		_obj setVectorDirAndUp [_dir,_vec];
+	};
+
+	//create or update geom
+	[_obj,_model] call noe_client_ngo_check;
+	
+	if (_light > 0) then {
+		[_light,_obj] call le_loadLight;
+	} else {
+		if ([_obj] call le_isLoadedLight) then {
+			[_obj] call le_unloadLight;
+		};
+	};
+
+	//radio
+	if !isNullVar(_radio) then {
+		[_obj,_radio,_obj getVariable "ref"] call vs_loadWorldRadio;
+	} else {
+		if (_obj call vs_isWorldRadioObject) then {[_obj] call vs_unloadWorldRadio};
 	};
 };
 
