@@ -385,7 +385,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\GameObject.sqf at line 1409](../../../Src/host/GameObjects/GameObject.sqf#L1409)
+File: [host\GameObjects\GameObject.sqf at line 1411](../../../Src/host/GameObjects/GameObject.sqf#L1411)
 ## DEBUG_VISUAL_OPENSPACE
 
 Type: constant
@@ -397,7 +397,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\GameObject.sqf at line 1567](../../../Src/host/GameObjects/GameObject.sqf#L1567)
+File: [host\GameObjects\GameObject.sqf at line 1569](../../../Src/host/GameObjects/GameObject.sqf#L1569)
 ## async_delay_check_
 
 Type: constant
@@ -409,7 +409,7 @@ Replaced value:
 ```sqf
 0.5
 ```
-File: [host\GameObjects\GameObject.sqf at line 2243](../../../Src/host/GameObjects/GameObject.sqf#L2243)
+File: [host\GameObjects\GameObject.sqf at line 2245](../../../Src/host/GameObjects/GameObject.sqf#L2245)
 ## flyingObject
 
 Type: Variable
