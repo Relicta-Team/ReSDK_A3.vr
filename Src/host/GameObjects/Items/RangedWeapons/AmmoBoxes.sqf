@@ -209,9 +209,14 @@ endclass
 		getter_func(createdType,"AmmoPBM_BB");
 	endclass
 
-	class(AmmoBoxPBMNonLethal) extends(AmmoBoxShotgun)
+	class(AmmoBoxPBMNonLethal) extends(AmmoBoxPBM)
 		getter_func(specialAmmoName,"Коробка ("+callSelf(getCaliberName)+" защитные)");
 		getter_func(createdType,"AmmoPBMNonLethal");
+	endclass
+
+	class(AmmoBoxPBMBlank) extends(AmmoBoxPBM)
+		getter_func(specialAmmoName,"Коробка ("+callSelf(getCaliberName)+" холостые)");
+		getter_func(createdType,"AmmoPBMBlank");
 	endclass
 
 class(AmmoBoxRevolver) extends(AmmoBoxBase)
@@ -219,6 +224,11 @@ class(AmmoBoxRevolver) extends(AmmoBoxBase)
 	getter_func(initialCount,16);
 	var(model,"relicta_models2\ammo_box\s_ammo_box_revolver\s_ammo_box_revolver.p3d");
 endclass
+
+	class(AmmoBoxRevolverBlank) extends(AmmoBoxRevolver)
+		getter_func(specialAmmoName,"Коробка ("+callSelf(getCaliberName)+" холостые)");
+		getter_func(createdType,"AmmoRevolverBlank");
+	endclass
 
 class(AmmoBoxShotgun) extends(AmmoBoxBase)
 	getter_func(createdType,"AmmoShotgun");
@@ -232,11 +242,21 @@ endclass
 		getter_func(initialCount,25);
 	endclass
 
+	class(AmmoBoxShotgunBlank) extends(AmmoBoxShotgun)
+		getter_func(specialAmmoName,"Коробка ("+callSelf(getCaliberName)+" холостые)");
+		getter_func(createdType,"AmmoShotgunBlank");
+	endclass
+
 class(AmmoBoxShotgunMini) extends(AmmoBoxShotgun)
 	getter_func(createdType,"AmmoShotgunMini");
 	getter_func(initialCount,25);
 	var(model,"relicta_models2\ammo_box\s_ammo_box_shotgun\s_ammo_box_shotgun.p3d");
 endclass
+
+	class(AmmoBoxShotgunMiniBlank) extends(AmmoBoxShotgunMini)
+		getter_func(specialAmmoName,"Коробка ("+callSelf(getCaliberName)+" холостые)");
+		getter_func(createdType,"AmmoShotgunMiniBlank");
+	endclass
 
 class(AmmoBoxPistolHandmade) extends(AmmoBoxBase)
 	getter_func(createdType,"AmmoPistolHandmade");
@@ -244,8 +264,18 @@ class(AmmoBoxPistolHandmade) extends(AmmoBoxBase)
 	var(model,"relicta_models2\ammo_box\s_ammo_box_pistol\s_ammo_box_pistol.p3d");
 endclass
 
+	class(AmmoBoxPistolHandmadeBlank) extends(AmmoBoxPistolHandmade)
+		getter_func(specialAmmoName,"Коробка ("+callSelf(getCaliberName)+" холостые)");
+		getter_func(createdType,"AmmoPistolHandmadeBlank");
+	endclass
+
 class(AmmoBoxRifle) extends(AmmoBoxBase)
 	getter_func(createdType,"AmmoRifle");
 	getter_func(initialCount,20);
 	var(model,"relicta_models2\ammo_box\s_ammo_box_rifle\s_ammo_box_rifle.p3d");
 endclass
+
+	class(AmmoBoxRifleBlank) extends(AmmoBoxRifle)
+		getter_func(specialAmmoName,"Коробка ("+callSelf(getCaliberName)+" холостые)");
+		getter_func(createdType,"AmmoRifleBlank");
+	endclass

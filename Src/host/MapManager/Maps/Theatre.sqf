@@ -2463,6 +2463,21 @@ _4195_154793940_6215843_77146 = ['RedButton',[4195.15,3940.62,43.7715],10,[0,0,1
 ['Bucket',[4165.63,3935.98,46.2022],0,[0,0,1]] call InitItem; 
 ['BrushCleaner',[4167.5,3934.61,52.1772,true],345,[0.00827858,-0.0308972,0.999488]] call InitItem; 
 _4158_046393952_2873550_07617 = ['SteelGreenCabinet',[4158.05,3952.29,50.0762],270,[0,0,1]] call InitStruct; 
+['AmmoBoxPBMBlank',[4197.28,3951.69,48.8308,true],0,[-0.0206804,0.0010916,0.999786]] call InitItem; 
+['AmmoBoxPistolHandmadeBlank',[4197.54,3951.63,48.8321,true],90,[0.00109131,0.0206804,0.999786]] call InitItem; 
+['AmmoBoxRevolverBlank',[4197.54,3951.06,48.8253,true],70,[-0.00604761,0.0198064,0.999786]] call InitItem; 
+['AmmoBoxRifleBlank',[4197.55,3951.81,48.8339,true],95,[0.00288945,0.0205065,0.999786]] call InitItem; 
+['AmmoBoxShotgunBlank',[4197.6,3951.34,48.8343,true],0,[-0.0206804,0.0010916,0.999786]] call InitItem; 
+['AmmoBoxShotgunMiniBlank',[4197.26,3951.1,48.8344,true],100,[0.00466612,0.0201766,0.999786]] call InitItem; 
+['MagazineAuto',[4197.57,3951.81,48.9094,true],0,[-0.0206804,0.0010916,0.999786]] call InitItem; 
+['MagazineBastard',[4197.65,3951.97,48.7895,true],0,[-0.0206804,0.0010916,0.999786]] call InitItem; 
+['MagazineFinisher',[4197.51,3952,48.7797,true],25,[-0.0182814,0.00972922,0.999786]] call InitItem; 
+['MagazinePBM',[4197.28,3951.63,48.9007,true],55,[-0.0109676,0.0175665,0.999786]] call InitItem; 
+['MagazinePBM',[4197.29,3951.75,48.9008,true],335,[-0.0192041,-0.00775057,0.999786]] call InitItem; 
+['MagazinePistolHandmade',[4197.55,3951.63,48.902,true],0,[-0.0206804,0.0010916,0.999786]] call InitItem; 
+['MagazineSVT',[4197.63,3952.09,48.7829,true],95,[0.00288985,0.0205065,0.999786]] call InitItem; 
+['AmmoBoxRifleBlank',[4197.26,3951.95,48.8272,true],95,[0.00288945,0.0205065,0.999786]] call InitItem; 
+['AmmoBoxRifleBlank',[4197.64,3952.3,48.834,true],165,[0.0202578,0.00429845,0.999786]] call InitItem; 
 
 
 
