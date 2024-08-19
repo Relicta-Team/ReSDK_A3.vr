@@ -67,6 +67,7 @@
 
 #define UNC_MIMIC 'unconscious'
 #define DEFAULT_MIMIC 'neutral'
+#define DEAD_MIMIC 'dead'
 
 #define CUSTOM_ANIM_ACTION_NONE 0
 #define CUSTOM_ANIM_ACTION_SEAT 1
