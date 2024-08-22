@@ -18,6 +18,8 @@ class(ITrapItem) extends(Item)
 
 	getterconst_func(activateOnCreate,false); //Будет активировать ловушку при создании
 
+	getter_func(isMovable,!callSelf(isTrapEnabled));
+
 	func(constructor)
 	{
 		objParams();

@@ -41,3 +41,4 @@
 #include "ScriptedConfigs\SLIGHT_ITAL_LAMP_MEDIUM.sqf"
 #include "ScriptedConfigs\SLIGHT_LAMP_REDLIGHT_ALARM.sqf"
 #include "ScriptedConfigs\SLIGHT_LAMP_KINKY_VIBE.sqf"
+#include "ScriptedConfigs\SLIGHT_MOB_VOMIT.sqf"

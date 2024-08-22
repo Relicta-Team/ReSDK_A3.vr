@@ -554,7 +554,7 @@ smd_isPulling = {
 	params ["_mob"];
 	!isNull(_mob getvariable "__loc_pull_ptr");
 };
-
+pulling_canPull = false;
 smd_onPull = {
 	params ["_mob","_ctx"];
 	
@@ -569,8 +569,16 @@ smd_onPull = {
 		//stop grab
 		private _ptr = _mob getVariable "__loc_pull_ptr";
 		if isNullVar(_ptr) exitWith {};
+		noe_client_set_lockedPropUpdates deleteAt _ptr;
+		
 		[_ptr] call noe_client_resetObjectTransform;
 		_mob setVariable ["__loc_pull_ptr",null];
+		
+		private _obj = noe_client_allPointers get _ptr;
+		if !isNullReference(_obj) then {
+			_obj enableCollisionWith _mob;
+		};
+
 		call _syncWalk;
 	};
 	if (equalTypes(_ctx,"") && {[_ctx,"helper+"] call stringStartWith}) exitWith {
@@ -579,31 +587,74 @@ smd_onPull = {
 	};
 
 	_ctx params ["_ptr"];
-	private _pars = [_mob,_ptr];
+
+	private _isSelf = equals(_mob,player); //true if mob is local client
+	noe_client_set_lockedPropUpdates set [_ptr,true];
+
+	//"Land_VR_CoverObject_01_kneel_F" - target
+	private _vtarg = "Land_VR_CoverObject_01_kneel_F" createVehicleLocal [0,0,0];
+	_vtarg setObjectTexture [0,""];
+	_vtarg setObjectMaterial [0,""];
+	_vtarg setObjectTexture [1,"#(argb,8,8,3)color(1,1,0,1,co)"];//edge colors
+	_vtarg disableCollisionWith _mob;
+
+	_mob setVariable ["__loc_pull_vtarg",_vtarg];
+	private _pars = [_mob,_ptr,_vtarg,_isSelf];
 	_mob setVariable ["__loc_pull_ptr",_ptr];
 	call _syncWalk;
-
-	private _pdat = [_ptr,true] call noe_client_getOrignalObjectData;
-	_mob setVariable ["__loc_pull_lastpos",_pdat get "pos"];
-	_mob setVariable ["__loc_pull_newpos",_pdat get "pos"];
+	private _obj = noe_client_allPointers get _ptr;
+	if isNullVar(_obj) exitWith {
+		setLastError("Object not found: " + _ptr);
+	};
 	
-	_mob setVariable ["__loc_pull_lastdir",_pdat get "dir"];
-	_mob setVariable ["__loc_pull_newdir",_pdat get "dir"];
+	_vtarg setvariable ["_lastobj",_obj];
+	[_obj,_vtarg] call NGOExt_createSoftlink;
+	private _lpp = getPosWorld _obj;
+	
+	_mob setVariable ["__loc_pull_lastpos",_lpp];
+	_mob setVariable ["__loc_pull_newpos",_lpp];
+	
+	_mob setVariable ["__loc_pull_lastVDU",[_obj] call model_getPitchBankYaw];
+	_mob setVariable ["__loc_pull_newVDU",[_obj] call model_getPitchBankYaw];
 
 	_mob setVariable ["__loc_pull_lastupd",tickTime];
-
 	startAsyncInvoke
 		{
 			params ["_pars","_tick"];
-			_pars params ["_mob","_ptr"];
+			_pars params ["_mob","_ptr","_vtarg","_isSelf"];
+			if !([_mob] call smd_isPulling) exitWith {true};
+
 			private _obj = noe_client_allPointers get _ptr;
 			if isNullReference(_obj) exitWith {false};
 			private _pdat = [_ptr,true] call noe_client_getOrignalObjectData;
 			if isNullVar(_pdat) exitWith {false};
+			
+			_lastobj = _vtarg getvariable ["_lastobj",objnull];
+			_needUpdate = not_equals(_lastobj,_obj);
+			if (_needUpdate) then {
+				_vtarg setvariable ["_lastobj",_obj];
+				[_ptr] call noe_client_resetObjectTransform;
+			};
+
+			//if (true) exitWith {false}; //todo remove on ready
 			//pos, dir,vec
 			private _pos = _pdat get "pos";
-			private _dir = _pdat get "dir";
-			private _vec = _pdat get "vec";
+			//asltoatl
+			if (count _pos == 4) then {
+				_pos = _pos select [0,3];
+			};
+			
+			_obj disableCollisionWith _mob;
+
+			private _vdu = [_obj] call model_getPitchBankYaw;
+
+			//sync color
+			if (_isSelf) then {
+				_vtarg setObjectTexture [1,
+					if (pulling_canPull) then {"#(argb,8,8,3)color(0,1,0,1,co)"} else {"#(argb,8,8,3)color(1,0.0,0,1,co)"}
+				];//edge colors
+			};
+
 			/*
 				принцип работы:
 				1. берется последняя применённая позиция (по умолчанию - исходная)
@@ -612,6 +663,9 @@ smd_onPull = {
 			*/
 			_lastSavedPos = _mob getVariable ["__loc_pull_lastpos",_pos];
 			_newSavedPos = _mob getVariable ["__loc_pull_newpos",_lastSavedPos];
+			assert(_lastSavedPos);
+			assert(_newSavedPos);
+
 			_lastUpd = _mob getVariable "__loc_pull_lastupd";
 			_nextUpd = _lastUpd + 0.5;
 			//traceformat("pre %1; post %2",_lastSavedPos arg _pos)
@@ -623,30 +677,47 @@ smd_onPull = {
 				_newSavedPos select [0,3],
 				true//clamp value
 			];
-			_newdir = linearConversion [
+			_newvdu = vectorLinearConversion [
 				_lastUpd,
 				_nextUpd,
 				tickTime,
-				_mob getVariable ["__loc_pull_lastdir",getDir _obj],
-				_mob getVariable ["__loc_pull_newdir",getDir _obj],
+				_mob getVariable "__loc_pull_lastVDU",
+				_mob getVariable "__loc_pull_newVDU",
 				true];
-			//traceformat("interp pull %1: %2; dist %3",_intv arg _nextUpd-tickTime arg (_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))))
-			if (count _pos > 3) then {_newpos pushBack (_pos select 3)};
+			//traceformat("interp pull dist %1; ---> FROM %2 TO %3; NEWPOS %4",(_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))) arg _lastSavedPos arg _newSavedPos arg _newpos)
+			
 			if (tickTime >= _nextUpd) then {
 				//_this set [2,tickTime + 0.5];
 				_mob setVariable ["__loc_pull_lastpos",_newpos];
 				_mob setVariable ["__loc_pull_newpos",_pos];
 
-				_mob setVariable ["__loc_pull_lastdir",_newdir];
-				_mob setVariable ["__loc_pull_newdir",_dir];
+				_mob setVariable ["__loc_pull_lastVDU",_newvdu];
+				_mob setVariable ["__loc_pull_newVDU",_vdu];
 				_mob setVariable ["__loc_pull_lastupd",_nextUpd];
 			};
-			[_obj,"pos",_newpos] call noe_client_setObjectTransform;
-			[_obj,"dir",_newdir] call noe_client_setObjectTransform;
-
+			_zdelta = _obj getvariable ["pull_interp_zpos_delta",0];
+			_newpos = _newpos vectorAdd [0,0,_zdelta];
+			_obj setPosWorld (_newpos);
+			
+			//[_obj,_newvdu] call model_SetPitchBankYaw;
+			//_vtarg setposatl (getposatl _obj);
+			if (_isSelf) then {
+				//_vtarg setVectorDirAndUp [vectorDirVisual _obj,vectorUpVisual _obj];
+				_vtarg attachTo [_obj,[0,0,0]];
+				//_vtarg setVectorDirAndUp [vectorDirVisual _obj,vectorUpVisual _obj];
+				
+				_vtarg setObjectScale (1.1 * (boundingBoxReal _obj select 2));
+				detach _vtarg;
+			};
+			
 			isNull(_mob getVariable "__loc_pull_ptr");
 		},
-		{},
+		{
+			params ["_pars","_tick"];
+			_pars params ["_mob","_ptr","_vtarg"];
+			traceformat("TERMINATED PULLING %1",_pars)
+			deleteVehicle _vtarg;
+		},
 		[_pars,tickTime]
 	endAsyncInvoke
 };

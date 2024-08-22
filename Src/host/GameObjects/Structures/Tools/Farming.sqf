@@ -210,7 +210,7 @@ class(FarmGarden) extends(IStruct)
 		#endif
 		 == 0) then {
 			private _nearLamps = (["StreetLampEnabled",getPosATL getSelf(loc),20,true] call getGameObjectOnPosition) +
-				["StreetLamp",getPosATL getSelf(loc),20,true] call getGameObjectOnPosition;
+				(["StreetLamp",getPosATL getSelf(loc),20,true] call getGameObjectOnPosition);
 			//traceformat("GARGEN CHECK %1",_nearLamps)
 
 			if (count _nearLamps == 0) exitWith {

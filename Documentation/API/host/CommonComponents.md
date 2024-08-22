@@ -149,7 +149,7 @@ if !(value) exitWith { \
 		setLastError(_format); \
 	};
 ```
-File: [host\CommonComponents\!PreInit.sqf at line 537](../../../Src/host/CommonComponents/!PreInit.sqf#L537)
+File: [host\CommonComponents\!PreInit.sqf at line 567](../../../Src/host/CommonComponents/!PreInit.sqf#L567)
 ## cprint_usestdout
 
 Type: Variable
@@ -556,6 +556,42 @@ Description:
 - Param: _ma
 
 File: [host\CommonComponents\!PreInit.sqf at line 461](../../../Src/host/CommonComponents/!PreInit.sqf#L461)
+## clampInRange
+
+Type: function
+
+Description: 
+- Param: _v
+- Param: _mi
+- Param: _ma
+
+File: [host\CommonComponents\!PreInit.sqf at line 466](../../../Src/host/CommonComponents/!PreInit.sqf#L466)
+## pulsate
+
+Type: function
+
+Description: See - BIS_fnc_pulsate; frequency: Number - the frequency in Hz, 1 / _frequency = 0.1 second is the period
+- Param: _freq
+- Param: _timeval (optional, default diag_tickTime)
+
+File: [host\CommonComponents\!PreInit.sqf at line 479](../../../Src/host/CommonComponents/!PreInit.sqf#L479)
+## numberGetDigits
+
+Type: function
+
+Description: число в массив цифр
+- Param: _num
+
+File: [host\CommonComponents\!PreInit.sqf at line 485](../../../Src/host/CommonComponents/!PreInit.sqf#L485)
+## numberCutDecimals
+
+Type: function
+
+Description: срезает дробную часть числа
+- Param: _num
+- Param: _digits
+
+File: [host\CommonComponents\!PreInit.sqf at line 491](../../../Src/host/CommonComponents/!PreInit.sqf#L491)
 ## stringFormat
 
 Type: function
@@ -565,7 +601,7 @@ Description:
 - Param: _val
 - Param: _breakArr (optional, default false)
 
-File: [host\CommonComponents\!PreInit.sqf at line 466](../../../Src/host/CommonComponents/!PreInit.sqf#L466)
+File: [host\CommonComponents\!PreInit.sqf at line 496](../../../Src/host/CommonComponents/!PreInit.sqf#L496)
 ## getPosListCenter
 
 Type: function
@@ -574,7 +610,7 @@ Description:
 - Param: _poses (optional, default [])
 - Param: _dummyParam
 
-File: [host\CommonComponents\!PreInit.sqf at line 482](../../../Src/host/CommonComponents/!PreInit.sqf#L482)
+File: [host\CommonComponents\!PreInit.sqf at line 512](../../../Src/host/CommonComponents/!PreInit.sqf#L512)
 ## randomRadius
 
 Type: function
@@ -583,7 +619,7 @@ Description: Специальный рандом по области. Чем б�
 - Param: _center
 - Param: _radius
 
-File: [host\CommonComponents\!PreInit.sqf at line 498](../../../Src/host/CommonComponents/!PreInit.sqf#L498)
+File: [host\CommonComponents\!PreInit.sqf at line 528](../../../Src/host/CommonComponents/!PreInit.sqf#L528)
 ## randomPosition
 
 Type: function
@@ -592,7 +628,7 @@ Description: Специальный рандом по области. Равно
 - Param: _center
 - Param: _radius
 
-File: [host\CommonComponents\!PreInit.sqf at line 504](../../../Src/host/CommonComponents/!PreInit.sqf#L504)
+File: [host\CommonComponents\!PreInit.sqf at line 534](../../../Src/host/CommonComponents/!PreInit.sqf#L534)
 ## randomGaussian
 
 Type: function
@@ -601,7 +637,7 @@ Description: Специальный рандом по области. Распр
 - Param: _center
 - Param: _radius
 
-File: [host\CommonComponents\!PreInit.sqf at line 510](../../../Src/host/CommonComponents/!PreInit.sqf#L510)
+File: [host\CommonComponents\!PreInit.sqf at line 540](../../../Src/host/CommonComponents/!PreInit.sqf#L540)
 ## functionalitests_preinit
 
 Type: function
@@ -611,7 +647,7 @@ Type: function
 Description: 
 
 
-File: [host\CommonComponents\!PreInit.sqf at line 536](../../../Src/host/CommonComponents/!PreInit.sqf#L536)
+File: [host\CommonComponents\!PreInit.sqf at line 566](../../../Src/host/CommonComponents/!PreInit.sqf#L566)
 # Algorithm.sqf
 
 ## allOf
@@ -1507,6 +1543,14 @@ Description:
 - Param: _vehicle
 
 File: [host\CommonComponents\ModelTransform.hpp at line 86](../../../Src/host/CommonComponents/ModelTransform.hpp#L86)
+## model_isSafedirTransform
+
+Type: function
+
+Description: проверяет является ли направление безопасным
+- Param: _vdu_dir
+
+File: [host\CommonComponents\ModelTransform.hpp at line 92](../../../Src/host/CommonComponents/ModelTransform.hpp#L92)
 # Pencfg.sqf
 
 ## addtobj(model,soundpen,armpen)

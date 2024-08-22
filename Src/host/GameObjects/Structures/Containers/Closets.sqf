@@ -13,6 +13,7 @@ class(CaseBedroom) extends(SContainer)
 	var(name,"Тумбочка"); //4 sections
 	var(model,"ca\buildings\furniture\case_bedroom_b.p3d");
 	var(material,"MatWood");
+	getter_func(isMovable,true);
 	var(dr,1);
 endclass
 
@@ -29,6 +30,7 @@ class(ChestCabinet) extends(SContainer)
 	var(name,"Сундук на ножках");
 	var(model,"ca\structures_e\misc\misc_interier\chest_ep1.p3d");
 	var(material,"MatWood");
+	getter_func(isMovable,true);
 	var(dr,1);
 endclass
 
@@ -43,5 +45,6 @@ class(SteelBlueCase)  extends(SContainer)
 	var(name,"Шкафчик");
 	var(model,"ca\structures\furniture\cases\metalcase\metalcase_01.p3d");
 	var(material,"MatMetal");
+	getter_func(isMovable,true);
 	var(dr,2);
 endclass

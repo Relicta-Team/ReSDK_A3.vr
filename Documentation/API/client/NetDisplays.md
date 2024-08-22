@@ -504,3 +504,21 @@ Description: структуры с виджетами
 
 
 File: [client\NetDisplays\Displays\MessageBoxes.sqf at line 339](../../../Src/client/NetDisplays/Displays/MessageBoxes.sqf#L339)
+# MobInventory.sqf
+
+## ND_ObjectPull_getVtarget
+
+Type: function
+
+Description: 
+
+
+File: [client\NetDisplays\Displays\MobInventory.sqf at line 83](../../../Src/client/NetDisplays/Displays/MobInventory.sqf#L83)
+## ND_ObjectPull_getPtrObj
+
+Type: function
+
+Description: 
+
+
+File: [client\NetDisplays\Displays\MobInventory.sqf at line 86](../../../Src/client/NetDisplays/Displays/MobInventory.sqf#L86)

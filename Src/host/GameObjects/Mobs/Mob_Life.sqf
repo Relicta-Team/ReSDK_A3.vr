@@ -2321,8 +2321,8 @@ region(Food and drinking)
 	{
 		objParams();
 		if getSelf(isDead) exitWith {};
-
-		callSelfParams(stun,randInt(2,5));
+		private _stunTime = randInt(2,5);
+		callSelfParams(stun,_stunTime);
 
 		if !callFuncParams(this,hasBodyOrgan,BO_INDEX_STOMACH) exitWith {
 			callSelfParams(playSound,pick callSelf(getRetchSounds) arg getRandomPitch);
@@ -2339,6 +2339,17 @@ region(Food and drinking)
 		};
 		callSelfParams(playEmoteSound,"vomit");
 		callSelfParams(meSay,pick _mes);
+
+		private _vomitDuration = precentage(_stunTime,60);
+		private _vparams = [getSelf(owner),SLIGHT_MOB_VOMIT_var,
+			["bubbleseffect","Memory"] //"head"
+			,_vomitDuration];
+		{
+			callFuncParams(_x,sendInfo,"do_fe_mob" arg _vparams);
+		} foreach callSelfParams(getNearMobs,20 arg false);
+
+		callSelfParams(setMobFaceAnim,DEAD_MIMIC);
+		callSelfAfter(syncMobFaceAnim,_vomitDuration);
 		
 		callSelfParams(adjustToxin, - randInt(1,5));
 	};

@@ -463,6 +463,36 @@ clampNumber = {
 	clamp(_v,_mi,_ma)	
 };
 
+clampInRange = {
+	params ["_v","_mi","_ma"];
+	private _fact = _ma * 2;
+	if (_v < _mi) exitWith {
+		_v + _fact
+	};
+	if (_v > _ma) exitWith {
+		_v - _fact
+	};
+	_v
+};
+
+// See - BIS_fnc_pulsate; frequency: Number - the frequency in Hz, 1 / _frequency = 0.1 second is the period
+pulsate = {
+	params ["_freq",["_timeval",diag_tickTime]];
+	0.5 * (1.0 + sin(2 * PI * _freq * _timeval))
+};
+
+//число в массив цифр
+numberGetDigits = {
+	params ["_num"];
+	[_num] call BIS_fnc_numberDigits;
+};
+
+//срезает дробную часть числа
+numberCutDecimals = {
+	params ["_num","_digits"];
+	[_num, _digits] call BIS_fnc_cutDecimals;
+};
+
 stringFormat = {
 	params ["_fmt","_val",["_breakArr",false]];
 	private _eval = if equalTypes(_val,[]) then {
