@@ -284,6 +284,15 @@ function(mm_handleObjectSave)
 		_customCodeOnInit = _retStrCode;
 	};
 
+	private _script = _hash get "__scriptName";
+	private _scriptParams = _hash get "__scriptParams";
+	private _scriptCode = "";
+	if !isNullVar(_script) then {
+		INC(_counterNotNeedLvar);
+		_objcustomdata pushBackUnique "";
+		_scriptCode = format["['%1',%2,%3] call createGameObjectScript;",_script,"%1",str _scriptParams];
+	};
+
 	//?? -----------------check edConnected
 	_edConnected = _hash get "edConnected";
 	if !isNullVar(_edConnected) then {
@@ -432,6 +441,10 @@ function(mm_handleObjectSave)
 			if (_customCodeOnInit != "") then {
 				_postoutput = _postoutput + "_o="+_varName+";"+endl;
 				_postoutput = _postoutput + _customCodeOnInit + endl;
+			};
+
+			if (_scriptCode != "") then {
+				_postoutput = _postoutput + (format[_scriptCode,_varName]) + endl;
 			};
 			
 			_postoutput = _postoutput + "};" + endl;
