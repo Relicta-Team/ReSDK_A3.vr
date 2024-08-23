@@ -2225,7 +2225,7 @@ def:node:objects
 node:isTypeOf
 name:Унаследован от
 path:Объекты
-code:((tolower "@in.2") in ((@in.1) getvariable "proto" getvariable ("__inhlist_map")))
+code:((tolower (@in.2)) in ((@in.1) getvariable "proto" getvariable ("__inhlist_map")))
 desc:Проверяет, является ли проверяемый объект дочерним типом от указанного класса.
 icon:data\\icons\\icon_Blueprint_Node_16x
 color:PureFunction
@@ -4069,6 +4069,25 @@ def:m:ScriptedGameObject.callBaseItemSelfClick_0
 		desc:Основная логика нажатия по предмету в активной руке.
 		type:method
 		lockoverride:1
+	
+def:m:ScriptedGameObject.hasParameter_0
+
+		name:Имеет параметр
+		desc:Проверяет был ли зарегистрирован параметр с указанным именем в скрипте.
+		type:get
+		lockoverride:1
+		in:string:Название:Название параметра.
+		return:bool:Есть ли параметр
+	
+def:m:ScriptedGameObject.onParameter_0
+
+		name:При параметре
+		desc:Обработчик значения параметров переданных скрипту.
+		type:event
+		out:string:Название:Название параметра.
+		out:float:Как число:Значение параметра как дробное число.
+		out:bool:Как булево:Значение параметра как булево.
+		out:string:Как строка:Значение параметра как строка.
 	
 def:c:BasicMob
 
@@ -6010,9 +6029,9 @@ $REGION:CLASSMETA
     "baseClass" : "object",
     "defined" : {"file":"src\\host\\GameObjects\\ScriptedGameObject.sqf","line":10},
    "fields": { "defined": {
-"name":{"return": "string"},"src":{"return": "object"},"tickMode":{"return": "bool"},"__tickHandle__":{"return": "int"},"mainActionName":{"return": "string"}}   },
+"name":{"return": "string"},"src":{"return": "object"},"tickMode":{"return": "bool"},"__tickHandle__":{"return": "int"},"mainActionName":{"return": "string"},"_parameters":{"return": "null_hashmap"},"_cachedParameters":{"return": "null"}}   },
    "methods": { "defined": {
-"getRestrictions":{"return": "<undefined>"},"addScriptToAllObjects":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onTickWrapper":{"return": "<undefined>"},"onTick":{"return": "<undefined>"},"setTickMode":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_getMainActionNameWrapper":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"callBaseGetMainActionName":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onInteractWithWrapper":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"callBaseInteractWith":{"return": "<undefined>"},"_canSeeVerb":{"return": "<undefined>"},"canSeeVerb":{"return": "<undefined>"},"_onClickWrapper":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"callBaseOnClick":{"return": "<undefined>"},"_onItemSelfClickWrapper":{"return": "<undefined>"},"onItemSelfClick":{"return": "<undefined>"},"callBaseItemSelfClick":{"return": "<undefined>"},"callBaseClickTarget":{"return": "<undefined>"}
+"getRestrictions":{"return": "<undefined>"},"addScriptToAllObjects":{"return": "<undefined>"},"assignScript":{"return": "<undefined>"},"onScriptAssigned":{"return": "<undefined>"},"_onTickWrapper":{"return": "<undefined>"},"onTick":{"return": "<undefined>"},"setTickMode":{"return": "<undefined>"},"_onMainActionWrapper":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"callBaseMainAction":{"return": "<undefined>"},"_getMainActionNameWrapper":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"callBaseGetMainActionName":{"return": "<undefined>"},"_onExtraActionWrapper":{"return": "<undefined>"},"onExtraAction":{"return": "<undefined>"},"callBaseExtraAction":{"return": "<undefined>"},"_onInteractWithWrapper":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"callBaseInteractWith":{"return": "<undefined>"},"_canSeeVerb":{"return": "<undefined>"},"canSeeVerb":{"return": "<undefined>"},"_onClickWrapper":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"callBaseOnClick":{"return": "<undefined>"},"_onItemSelfClickWrapper":{"return": "<undefined>"},"onItemSelfClick":{"return": "<undefined>"},"callBaseItemSelfClick":{"return": "<undefined>"},"callBaseClickTarget":{"return": "<undefined>"},"hasParameter":{"return": "<undefined>"},"onParameter":{"return": "<undefined>"},"_handleParameters":{"return": "<undefined>"},"_prepareParameters":{"return": "<undefined>"}
 }   }
 }
 ,"VirtualMemoryStorage": {
@@ -6206,7 +6225,7 @@ $REGION:CLASSMETA
 }
 ,"SystemInternalDynamicND": {
     "baseClass" : "SystemInternalND",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":1281},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":1287},
    "fields": { "defined": {
 "ptrval":{"return": "string"},"delegateNDInfo":{"return": "null"},"delegateNDInput":{"return": "null"},"context":{"return": "null"}}   },
    "methods": { "defined": {
@@ -6215,7 +6234,7 @@ $REGION:CLASSMETA
 }
 ,"SystemMessageBoxND": {
     "baseClass" : "SystemInternalND",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":1311},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":1317},
    "fields": { "defined": {
 "ndInteractDistance":{"return": "int"},"delegate_handleInput":{"return": "unknown_type"},"delegate_handleData":{"return": "unknown_type"},"event_inputHandler":{"return": "unknown_type"},"bufferedCtx":{"return": "null"},"event_onClose":{"return": "unknown_type"}}   },
    "methods": { "defined": {
@@ -8607,6 +8626,15 @@ $REGION:CLASSMETA
 "getBulletType":{"return": "<undefined>"}
 }   }
 }
+,"AmmoPBMBlank": {
+    "baseClass" : "AmmoPBMNonLethal",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":36},
+   "fields": { "defined": {
+"name":{"return": "string"},"stackName":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"onDamageBulletProcess":{"return": "<undefined>"}
+}   }
+}
 ,"AmmoPBM_BB": {
     "baseClass" : "AmmoPBM",
     "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":16},
@@ -8625,9 +8653,54 @@ $REGION:CLASSMETA
 "isNonLethalAmmo":{"return": "<undefined>"},"onDamageBulletProcess":{"return": "<undefined>"}
 }   }
 }
+,"AmmoRevolverBlank": {
+    "baseClass" : "AmmoRevolver",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":58},
+   "fields": { "defined": {
+"name":{"return": "string"},"stackName":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"isNonLethalAmmo":{"return": "<undefined>"},"onDamageBulletProcess":{"return": "<undefined>"}
+}   }
+}
+,"AmmoShotgunBlank": {
+    "baseClass" : "AmmoShotgunNonLethal",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":99},
+   "fields": { "defined": {
+"name":{"return": "string"},"stackName":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"onDamageBulletProcess":{"return": "<undefined>"}
+}   }
+}
 ,"AmmoShotgunNonLethal": {
     "baseClass" : "AmmoShotgun",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":60},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":83},
+   "fields": { "defined": {
+"name":{"return": "string"},"stackName":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"isNonLethalAmmo":{"return": "<undefined>"},"onDamageBulletProcess":{"return": "<undefined>"}
+}   }
+}
+,"AmmoShotgunMiniBlank": {
+    "baseClass" : "AmmoShotgunMini",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":127},
+   "fields": { "defined": {
+"name":{"return": "string"},"stackName":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"isNonLethalAmmo":{"return": "<undefined>"},"onDamageBulletProcess":{"return": "<undefined>"}
+}   }
+}
+,"AmmoRifleBlank": {
+    "baseClass" : "AmmoRifle",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":151},
+   "fields": { "defined": {
+"name":{"return": "string"},"stackName":{"return": "string"},"desc":{"return": "string"}}   },
+   "methods": { "defined": {
+"isNonLethalAmmo":{"return": "<undefined>"},"onDamageBulletProcess":{"return": "<undefined>"}
+}   }
+}
+,"AmmoPistolHandmadeBlank": {
+    "baseClass" : "AmmoPistolHandmade",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":173},
    "fields": { "defined": {
 "name":{"return": "string"},"stackName":{"return": "string"},"desc":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8645,7 +8718,7 @@ $REGION:CLASSMETA
 }
 ,"AmmoRevolver": {
     "baseClass" : "IAmmoBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":41},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":53},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -8654,7 +8727,7 @@ $REGION:CLASSMETA
 }
 ,"AmmoShotgun": {
     "baseClass" : "IAmmoBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":50},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":73},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8663,7 +8736,7 @@ $REGION:CLASSMETA
 }
 ,"AmmoShotgunMini": {
     "baseClass" : "IAmmoBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":83},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":116},
    "fields": { "defined": {
 "model":{"return": "string"},"weight":{"return": "float"}}   },
    "methods": { "defined": {
@@ -8672,7 +8745,7 @@ $REGION:CLASSMETA
 }
 ,"AmmoRifle": {
     "baseClass" : "IAmmoBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":100},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":144},
    "fields": { "defined": {
 "model":{"return": "string"},"weight":{"return": "float"}}   },
    "methods": { "defined": {
@@ -8681,7 +8754,7 @@ $REGION:CLASSMETA
 }
 ,"AmmoPistolHandmade": {
     "baseClass" : "IAmmoBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":112},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":167},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8690,7 +8763,7 @@ $REGION:CLASSMETA
 }
 ,"BulletCasePBM": {
     "baseClass" : "BulletCase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":36},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":48},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -8699,7 +8772,7 @@ $REGION:CLASSMETA
 }
 ,"BulletCaseRevolver": {
     "baseClass" : "BulletCase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":46},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":69},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -8708,7 +8781,7 @@ $REGION:CLASSMETA
 }
 ,"BulletCaseShotgun": {
     "baseClass" : "BulletCase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":76},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":109},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8717,7 +8790,7 @@ $REGION:CLASSMETA
 }
 ,"BulletCaseShotgunMini": {
     "baseClass" : "BulletCase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":94},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":138},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8726,7 +8799,7 @@ $REGION:CLASSMETA
 }
 ,"BulletCaseRifle": {
     "baseClass" : "BulletCase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":107},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":162},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8735,7 +8808,7 @@ $REGION:CLASSMETA
 }
 ,"BulletCasePistolHandmade": {
     "baseClass" : "BulletCase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":118},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\Ammo.sqf","line":184},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8824,8 +8897,35 @@ $REGION:CLASSMETA
 }   }
 }
 ,"AmmoBoxPBMNonLethal": {
-    "baseClass" : "AmmoBoxShotgun",
+    "baseClass" : "AmmoBoxPBM",
     "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":212},
+   "fields": { "defined": {
+}   },
+   "methods": { "defined": {
+"specialAmmoName":{"return": "<undefined>"},"createdType":{"return": "<undefined>"}
+}   }
+}
+,"AmmoBoxPBMBlank": {
+    "baseClass" : "AmmoBoxPBM",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":217},
+   "fields": { "defined": {
+}   },
+   "methods": { "defined": {
+"specialAmmoName":{"return": "<undefined>"},"createdType":{"return": "<undefined>"}
+}   }
+}
+,"AmmoBoxRevolverBlank": {
+    "baseClass" : "AmmoBoxRevolver",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":228},
+   "fields": { "defined": {
+}   },
+   "methods": { "defined": {
+"specialAmmoName":{"return": "<undefined>"},"createdType":{"return": "<undefined>"}
+}   }
+}
+,"AmmoBoxShotgunMiniBlank": {
+    "baseClass" : "AmmoBoxShotgunMini",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":256},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -8834,20 +8934,47 @@ $REGION:CLASSMETA
 }
 ,"AmmoBoxShotgunNonLethal": {
     "baseClass" : "AmmoBoxShotgun",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":229},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":239},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
 "specialAmmoName":{"return": "<undefined>"},"createdType":{"return": "<undefined>"},"initialCount":{"return": "<undefined>"}
 }   }
 }
+,"AmmoBoxShotgunBlank": {
+    "baseClass" : "AmmoBoxShotgun",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":245},
+   "fields": { "defined": {
+}   },
+   "methods": { "defined": {
+"specialAmmoName":{"return": "<undefined>"},"createdType":{"return": "<undefined>"}
+}   }
+}
 ,"AmmoBoxShotgunMini": {
     "baseClass" : "AmmoBoxShotgun",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":235},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":250},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
 "createdType":{"return": "<undefined>"},"initialCount":{"return": "<undefined>"}
+}   }
+}
+,"AmmoBoxPistolHandmadeBlank": {
+    "baseClass" : "AmmoBoxPistolHandmade",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":267},
+   "fields": { "defined": {
+}   },
+   "methods": { "defined": {
+"specialAmmoName":{"return": "<undefined>"},"createdType":{"return": "<undefined>"}
+}   }
+}
+,"AmmoBoxRifleBlank": {
+    "baseClass" : "AmmoBoxRifle",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":278},
+   "fields": { "defined": {
+}   },
+   "methods": { "defined": {
+"specialAmmoName":{"return": "<undefined>"},"createdType":{"return": "<undefined>"}
 }   }
 }
 ,"AmmoBoxPBM": {
@@ -8859,18 +8986,18 @@ $REGION:CLASSMETA
 "createdType":{"return": "<undefined>"},"initialCount":{"return": "<undefined>"}
 }   }
 }
-,"AmmoBoxShotgun": {
+,"AmmoBoxRevolver": {
     "baseClass" : "AmmoBoxBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":223},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":222},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
 "createdType":{"return": "<undefined>"},"initialCount":{"return": "<undefined>"}
 }   }
 }
-,"AmmoBoxRevolver": {
+,"AmmoBoxShotgun": {
     "baseClass" : "AmmoBoxBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":217},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":233},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8879,7 +9006,7 @@ $REGION:CLASSMETA
 }
 ,"AmmoBoxPistolHandmade": {
     "baseClass" : "AmmoBoxBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":241},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":261},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -8888,7 +9015,7 @@ $REGION:CLASSMETA
 }
 ,"AmmoBoxRifle": {
     "baseClass" : "AmmoBoxBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":247},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\RangedWeapons\\AmmoBoxes.sqf","line":272},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -10481,7 +10608,7 @@ $REGION:CLASSMETA
 }
 ,"TrapEnabled": {
     "baseClass" : "Trap",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Traps\\Trap.sqf","line":262},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Traps\\Trap.sqf","line":264},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -10490,7 +10617,7 @@ $REGION:CLASSMETA
 }
 ,"Trap": {
     "baseClass" : "ITrapItem",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Traps\\Trap.sqf","line":142},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Traps\\Trap.sqf","line":144},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"desc":{"return": "string"},"size":{"return": "int"},"weight":{"return": "float"},"dr":{"return": "int"},"emplacer":{"return": "string"}}   },
    "methods": { "defined": {
@@ -10544,7 +10671,7 @@ $REGION:CLASSMETA
 }
 ,"SystemInternalND": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":1237},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":1243},
    "fields": { "defined": {
 "name":{"return": "null"},"desc":{"return": "null"},"ndOpenedBy":{"return": "null_array"},"ndCurrentDisplay":{"return": "int"},"ndIsLockedInput":{"return": "bool"},"ndName":{"return": "string"},"ndInteractDistance":{"return": "float"}}   },
    "methods": { "defined": {
@@ -10553,7 +10680,7 @@ $REGION:CLASSMETA
 }
 ,"Debug_Item_damager": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":1457},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Item.sqf","line":1463},
    "fields": { "defined": {
 "attachedWeap":{"return": "null"}}   },
    "methods": { "defined": {
@@ -10944,7 +11071,7 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "trapStruct":{"return": "object"}}   },
    "methods": { "defined": {
-"isTrapActive":{"return": "<undefined>"},"isTrapEnabled":{"return": "<undefined>"},"activateOnCreate":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"__initTrap":{"return": "<undefined>"},"onActivateTrap":{"return": "<undefined>"},"onActivateHandTrap":{"return": "<undefined>"},"setTrapActive":{"return": "<undefined>"},"setTrapEnable":{"return": "<undefined>"},"canPickup":{"return": "<undefined>"},"onCantPickup":{"return": "<undefined>"},"onPickup":{"return": "<undefined>"}
+"isTrapActive":{"return": "<undefined>"},"isTrapEnabled":{"return": "<undefined>"},"activateOnCreate":{"return": "<undefined>"},"isMovable":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"__initTrap":{"return": "<undefined>"},"onActivateTrap":{"return": "<undefined>"},"onActivateHandTrap":{"return": "<undefined>"},"setTrapActive":{"return": "<undefined>"},"setTrapEnable":{"return": "<undefined>"},"canPickup":{"return": "<undefined>"},"onCantPickup":{"return": "<undefined>"},"onPickup":{"return": "<undefined>"}
 }   }
 }
 ,"CaptiveItemBase": {
@@ -14063,7 +14190,7 @@ $REGION:CLASSMETA
 }
 ,"CaseBedroomMedium": {
     "baseClass" : "CaseBedroomSmall",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Closets.sqf","line":24},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Closets.sqf","line":25},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14072,7 +14199,7 @@ $REGION:CLASSMETA
 }
 ,"CaseBedroomSmall": {
     "baseClass" : "CaseBedroom",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Closets.sqf","line":19},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Closets.sqf","line":20},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14081,38 +14208,38 @@ $REGION:CLASSMETA
 }
 ,"BigClothCabinetGreen": {
     "baseClass" : "BigClothCabinet",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":27},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":29},
    "fields": { "defined": {
 "name":{"return": "string"},"countSlots":{"return": "int"},"model":{"return": "string"},"material":{"return": "string"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"BigClothCabinet1": {
     "baseClass" : "BigClothCabinet",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":34},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":37},
    "fields": { "defined": {
 "name":{"return": "string"},"countSlots":{"return": "int"},"model":{"return": "string"},"material":{"return": "string"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"BigClothCabinetDamaged": {
     "baseClass" : "BigClothCabinet",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":41},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":45},
    "fields": { "defined": {
 "name":{"return": "string"},"countSlots":{"return": "int"},"model":{"return": "string"},"material":{"return": "string"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"BigClothCabinetNew": {
     "baseClass" : "BigClothCabinet",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":48},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":53},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"countSlots":{"return": "int"},"model":{"return": "string"},"material":{"return": "string"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"OfficeCabinet_Saloon": {
@@ -14135,7 +14262,7 @@ $REGION:CLASSMETA
 }
 ,"SmallBookcase": {
     "baseClass" : "Bookcase",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Library.sqf","line":27},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Library.sqf","line":29},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14144,29 +14271,29 @@ $REGION:CLASSMETA
 }
 ,"ContainerGreen4": {
     "baseClass" : "ContainerGreen",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":47},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":51},
    "fields": { "defined": {
 "model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"ContainerGreen2": {
     "baseClass" : "ContainerGreen",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":53},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":58},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"ContainerGreen3": {
     "baseClass" : "ContainerGreen",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":60},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":66},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"RDetMailBox": {
@@ -14180,7 +14307,7 @@ $REGION:CLASSMETA
 }
 ,"TrashCan": {
     "baseClass" : "SmallTrashCan",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":97},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":108},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14202,21 +14329,21 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"ChestCabinet": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Closets.sqf","line":28},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Closets.sqf","line":29},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"WallmountedMedicalCabinet": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Closets.sqf","line":35},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Closets.sqf","line":37},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
@@ -14225,11 +14352,11 @@ $REGION:CLASSMETA
 }
 ,"SteelBlueCase": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Closets.sqf","line":42},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Closets.sqf","line":44},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"LuxuryCabinet": {
@@ -14238,52 +14365,52 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"countSlots":{"return": "int"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"BigClothCabinet": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":20},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":21},
    "fields": { "defined": {
 "name":{"return": "string"},"countSlots":{"return": "int"},"model":{"return": "string"},"material":{"return": "string"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"ClothCabinet": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":56},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":62},
    "fields": { "defined": {
 "name":{"return": "string"},"countSlots":{"return": "int"},"model":{"return": "string"},"material":{"return": "string"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"SteelGreenCabinet": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":64},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":71},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"OfficeCabinet": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":72},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":80},
    "fields": { "defined": {
 "name":{"return": "string"},"countSlots":{"return": "int"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"LargeClothCabinet": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":80},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Cabinets.sqf","line":89},
    "fields": { "defined": {
 "name":{"return": "string"},"countSlots":{"return": "int"},"desc":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"BigFileCabinet": {
@@ -14292,16 +14419,16 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"Bookcase": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Library.sqf","line":20},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Library.sqf","line":21},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"WoodenMedicalBox": {
@@ -14319,70 +14446,70 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"BoardWoodenBox": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":26},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":27},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"OldWoodenBox": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":32},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":34},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"ContainerGreen": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":39},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":42},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"WoodenWeaponBox": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":66},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":73},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"LongWeaponContainer": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":73},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":81},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"SquareWoodenBox": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":81},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":90},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"countSlots":{"return": "int"},"model":{"return": "string"},"material":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"SmallTrashCan": {
     "baseClass" : "SContainer",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":91},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Boxes.sqf","line":101},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"material":{"return": "string"}}   },
    "methods": { "defined": {
-
+"isMovable":{"return": "<undefined>"}
 }   }
 }
 ,"SContainer": {
@@ -16061,7 +16188,7 @@ $REGION:CLASSMETA
 }
 ,"TrapVirtualStruct": {
     "baseClass" : "IStruct",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Traps\\Trap.sqf","line":119},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Traps\\Trap.sqf","line":121},
    "fields": { "defined": {
 "model":{"return": "string"},"tListInside":{"return": "null_array"},"_tHandle":{"return": "int"},"__tLocker":{"return": "bool"},"tDistance":{"return": "float"},"tDelay":{"return": "float"},"tCallDelay":{"return": "float"},"trapObj":{"return": "object"}}   },
    "methods": { "defined": {
@@ -16961,11 +17088,11 @@ $REGION:CLASSMETA
 }
 ,"IDestructible": {
     "baseClass" : "GameObject",
-    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":1329},
+    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":1332},
    "fields": { "defined": {
 "__script":{"return": "object"},"ht":{"return": "int"},"hp":{"return": "int"},"hpMax":{"return": "int"},"dr":{"return": "int"},"drMax":{"return": "int"},"__atm_lastFireDamage":{"return": "int"},"__atm_ownerChunks":{"return": "null_hashmap"},"material":{"return": "null"},"germs":{"return": "int"},"__statusEffects":{"return": "null"},"__s_nextCheckIgnite":{"return": "int"}}   },
    "methods": { "defined": {
-"isScriptedObject":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"onUpdatePosition":{"return": "<undefined>"},"onObjectFalling":{"return": "<undefined>"},"setPos__":{"return": "<undefined>"},"setTransform":{"return": "<undefined>"},"getTransform":{"return": "<undefined>"},"isInOpenSpace":{"return": "<undefined>"},"isMovable":{"return": "<undefined>"},"canApplyDamage":{"return": "<undefined>"},"objectHealthType":{"return": "<undefined>"},"onDestroyed":{"return": "<undefined>"},"applyDamage":{"return": "<undefined>"},"getHPStatusText":{"return": "<undefined>"},"getHTStatusText":{"return": "<undefined>"},"onChangeObjectHP":{"return": "<undefined>"},"onAffectDamageToPos":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"generateObjectHP":{"return": "<undefined>"},"getMaterial":{"return": "<undefined>"},"sendDamageVisualOnPos":{"return": "<undefined>"},"dropDebrisOnDestroy":{"return": "<undefined>"},"getOnDestroyCountCreate":{"return": "<undefined>"},"getOnDestroyTypes":{"return": "<undefined>"},"getOnDestroyTypesFromMaterial":{"return": "<undefined>"},"getObjectPlace":{"return": "<undefined>"},"addStatusEffect":{"return": "<undefined>"},"removeStatusEffect":{"return": "<undefined>"},"canIgniteArea":{"return": "<undefined>"},"checkCanIgniteObject":{"return": "<undefined>"},"handleIgniteArea":{"return": "<undefined>"},"resetIngiteTimer":{"return": "<undefined>"},"getPullHelperObject":{"return": "<undefined>"},"isPulled":{"return": "<undefined>"},"getPullMainOwner":{"return": "<undefined>"},"playPullSound":{"return": "<undefined>"},"_checkCanPullingConditions":{"return": "<undefined>"},"startPull":{"return": "<undefined>"},"_pullStarted":{"return": "<undefined>"},"stopPull":{"return": "<undefined>"},"onPullChanged":{"return": "<undefined>"},"pullRecalculateWeight":{"return": "<undefined>"},"openPullSettings":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"}
+"isScriptedObject":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"onUpdatePosition":{"return": "<undefined>"},"onObjectFalling":{"return": "<undefined>"},"setPos__":{"return": "<undefined>"},"setTransform":{"return": "<undefined>"},"getTransform":{"return": "<undefined>"},"setTransformMode":{"return": "<undefined>"},"isEnabledTransformMode":{"return": "<undefined>"},"replicateTransform":{"return": "<undefined>"},"isInOpenSpace":{"return": "<undefined>"},"isMovable":{"return": "<undefined>"},"canApplyDamage":{"return": "<undefined>"},"objectHealthType":{"return": "<undefined>"},"onDestroyed":{"return": "<undefined>"},"applyDamage":{"return": "<undefined>"},"getHPStatusText":{"return": "<undefined>"},"getHTStatusText":{"return": "<undefined>"},"onChangeObjectHP":{"return": "<undefined>"},"onAffectDamageToPos":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"generateObjectHP":{"return": "<undefined>"},"getMaterial":{"return": "<undefined>"},"sendDamageVisualOnPos":{"return": "<undefined>"},"dropDebrisOnDestroy":{"return": "<undefined>"},"getOnDestroyCountCreate":{"return": "<undefined>"},"getOnDestroyTypes":{"return": "<undefined>"},"getOnDestroyTypesFromMaterial":{"return": "<undefined>"},"getObjectPlace":{"return": "<undefined>"},"addStatusEffect":{"return": "<undefined>"},"removeStatusEffect":{"return": "<undefined>"},"canIgniteArea":{"return": "<undefined>"},"checkCanIgniteObject":{"return": "<undefined>"},"handleIgniteArea":{"return": "<undefined>"},"resetIngiteTimer":{"return": "<undefined>"},"getPullHelperObject":{"return": "<undefined>"},"isPulled":{"return": "<undefined>"},"getPullMainOwner":{"return": "<undefined>"},"playPullSound":{"return": "<undefined>"},"_checkCanPullingConditions":{"return": "<undefined>"},"startPull":{"return": "<undefined>"},"_pullStarted":{"return": "<undefined>"},"stopPull":{"return": "<undefined>"},"onPullChanged":{"return": "<undefined>"},"pullRecalculateWeight":{"return": "<undefined>"},"closePullSettings":{"return": "<undefined>"},"openPullSettings":{"return": "<undefined>"},"isSingleSeat":{"return": "<undefined>"},"getSeatMaxIndex":{"return": "<undefined>"},"isSeatIndexFree":{"return": "<undefined>"},"getSeatOwner":{"return": "<undefined>"},"getNearFreeSeatIndex":{"return": "<undefined>"},"seatConnect":{"return": "<undefined>"},"seatDisconnect":{"return": "<undefined>"}
 }   }
 }
 ,"BasicMob": {
@@ -16974,12 +17101,12 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "Naming":{"return": "null"},"gender":{"return": "null"},"name":{"return": "string"},"age":{"return": "int"},"owner":{"return": "model"},"client":{"return": "object"},"playerClients":{"return": "null_array"},"visionBlock":{"return": "int"},"tasks":{"return": "null_array"},"basicRole":{"return": "object"},"role":{"return": "object"},"location":{"return": "object"},"handleUpdate":{"return": "int"},"__lastinteractdata__":{"return": "null_array"},"_internalND":{"return": "null"},"openedNDisplay":{"return": "object"},"__listactions":{"return": "null_array"},"_initialPos":{"return": "null_array"},"__lightSlots":{"return": "null_hashmap"},"__lastClientLighting":{"return": "int"},"__visualStates":{"return": "null_array"},"__firstLoginMesPool":{"return": "null_array"},"face":{"return": "string"},"voiceType":{"return": "string"},"__originVoiceType":{"return": "null"},"progressData":{"return": "null_array"},"__lcfmap":{"return": "null_hashmap"},"__enabledStepSoundSys":{"return": "bool"},"__atmosHandle":{"return": "int"},"__lastChunkReactStep":{"return": "int"},"__lastChunkReactBody":{"return": "int"},"__lastFireDamage":{"return": "int"}}   },
    "methods": { "defined": {
-"isMob":{"return": "<undefined>"},"getNameFor":{"return": "<undefined>"},"isInWorld":{"return": "<undefined>"},"isChild":{"return": "<undefined>"},"isMale":{"return": "<undefined>"},"isFemale":{"return": "<undefined>"},"getLastPlayerClient":{"return": "<undefined>"},"addTask":{"return": "<undefined>"},"registerTask":{"return": "<undefined>"},"onInitRole":{"return": "<undefined>"},"setToRole":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"Destroy":{"return": "<undefined>"},"__destroyImpl":{"return": "<undefined>"},"clickTarget":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"mainAction":{"return": "<undefined>"},"extraAction":{"return": "<undefined>"},"onUpdate":{"return": "<undefined>"},"canSeeObject":{"return": "<undefined>"},"saveLastInteract":{"return": "<undefined>"},"getLastInteractStartPos":{"return": "<undefined>"},"getLastInteractEndPos":{"return": "<undefined>"},"getLastInteractDistance":{"return": "<undefined>"},"getLastInteractVector":{"return": "<undefined>"},"getLastInteractTarget":{"return": "<undefined>"},"getLastInteractNormal":{"return": "<undefined>"},"canInteractWithSavedObject":{"return": "<undefined>"},"getInteractionTarget":{"return": "<undefined>"},"generateLastInteractOnServer":{"return": "<undefined>"},"isOpenedNDisplay":{"return": "<undefined>"},"closeOpenedNetDisplay":{"return": "<undefined>"},"ShowMessageBox":{"return": "<undefined>"},"CloseMessageBox":{"return": "<undefined>"},"UpdateMessageBox":{"return": "<undefined>"},"setMessageBoxContext":{"return": "<undefined>"},"SetMessageBoxEvent":{"return": "<undefined>"},"loadActions":{"return": "<undefined>"},"hasAction":{"return": "<undefined>"},"addAction":{"return": "<undefined>"},"playAction":{"return": "<undefined>"},"removeAction":{"return": "<undefined>"},"setInitialPos":{"return": "<undefined>"},"getInitialPos":{"return": "<undefined>"},"initAsActor":{"return": "<undefined>"},"onChangeLocality":{"return": "<undefined>"},"isPlayer":{"return": "<undefined>"},"onConnected":{"return": "<undefined>"},"onDisconnected":{"return": "<undefined>"},"setPos":{"return": "<undefined>"},"setPosServer":{"return": "<undefined>"},"getPos":{"return": "<undefined>"},"isTouchingGround":{"return": "<undefined>"},"setDir":{"return": "<undefined>"},"getDir":{"return": "<undefined>"},"getRealSpeed":{"return": "<undefined>"},"getDirTo":{"return": "<undefined>"},"getDirFrom":{"return": "<undefined>"},"getDirectionTo":{"return": "<undefined>"},"getDistanceTo":{"return": "<undefined>"},"getStance":{"return": "<undefined>"},"isWalking":{"return": "<undefined>"},"isRunning":{"return": "<undefined>"},"isSprinting":{"return": "<undefined>"},"getSpeedMode":{"return": "<undefined>"},"getAnimation":{"return": "<undefined>"},"sendInfo":{"return": "<undefined>"},"fastSendInfo":{"return": "<undefined>"},"requestSMDUpdate":{"return": "<undefined>"},"syncSmdSlot":{"return": "<undefined>"},"syncSmdVar":{"return": "<undefined>"},"getBodyPartStatusArray":{"return": "<undefined>"},"syncBodyParts":{"return": "<undefined>"},"getLighting":{"return": "<undefined>"},"addVisualState":{"return": "<undefined>"},"removeVisualState":{"return": "<undefined>"},"hasVisualState":{"return": "<undefined>"},"updateVisualState":{"return": "<undefined>"},"generateNaming":{"return": "<undefined>"},"getFirstName":{"return": "<undefined>"},"getSecondName":{"return": "<undefined>"},"getNameEx":{"return": "<undefined>"},"getFirstNameEx":{"return": "<undefined>"},"getSecondNameEx":{"return": "<undefined>"},"getDescFor":{"return": "<undefined>"},"examine":{"return": "<undefined>"},"isFirstJoin":{"return": "<undefined>"},"addFirstJoinMessage":{"return": "<undefined>"},"printFirstJoinMessage":{"return": "<undefined>"},"_localSayWrapper":{"return": "<undefined>"},"localSay":{"return": "<undefined>"},"worldSay":{"return": "<undefined>"},"meSay":{"return": "<undefined>"},"addToKnown":{"return": "<undefined>"},"removeFromKnown":{"return": "<undefined>"},"getKnownName":{"return": "<undefined>"},"isKnownTarget":{"return": "<undefined>"},"visibleSay":{"return": "<undefined>"},"mindSay":{"return": "<undefined>"},"applyGlobalAnim":{"return": "<undefined>"},"onChangeAnimCoef":{"return": "<undefined>"},"setAnimSpeedCoef":{"return": "<undefined>"},"setCustomAnimState":{"return": "<undefined>"},"getMobFace":{"return": "<undefined>"},"setMobFace":{"return": "<undefined>"},"setMobFaceAnim":{"return": "<undefined>"},"applyVoiceType":{"return": "<undefined>"},"updateVoiceType":{"return": "<undefined>"},"playSoundData":{"return": "<undefined>"},"playSoundLocal":{"return": "<undefined>"},"playMusic":{"return": "<undefined>"},"pauseMusic":{"return": "<undefined>"},"stopMusic":{"return": "<undefined>"},"playSoundUI":{"return": "<undefined>"},"startSelfProgress":{"return": "<undefined>"},"startProgress":{"return": "<undefined>"},"isProgressProcess":{"return": "<undefined>"},"stopProgress":{"return": "<undefined>"},"successProgress":{"return": "<undefined>"},"startSelfContextProgress":{"return": "<undefined>"},"startContextProgress":{"return": "<undefined>"},"isSuccessContextProgress":{"return": "<undefined>"},"localEffectUpdate":{"return": "<undefined>"},"localEffectRemove":{"return": "<undefined>"},"localEffectClearAll":{"return": "<undefined>"},"localEffectSyncAll":{"return": "<undefined>"},"localEffectExists":{"return": "<undefined>"},"isFailCombat":{"return": "<undefined>"},"applyFailCombat":{"return": "<undefined>"},"handleStepSounds":{"return": "<undefined>"},"isStepSoundSystemEnabled":{"return": "<undefined>"},"setStepSoundSystem":{"return": "<undefined>"},"enabledAtmosReaction":{"return": "<undefined>"},"setAtmosModeReaction":{"return": "<undefined>"},"onAtmosUpdate":{"return": "<undefined>"}
+"isMob":{"return": "<undefined>"},"getNameFor":{"return": "<undefined>"},"isInWorld":{"return": "<undefined>"},"isChild":{"return": "<undefined>"},"isMale":{"return": "<undefined>"},"isFemale":{"return": "<undefined>"},"getLastPlayerClient":{"return": "<undefined>"},"addTask":{"return": "<undefined>"},"registerTask":{"return": "<undefined>"},"onInitRole":{"return": "<undefined>"},"setToRole":{"return": "<undefined>"},"constructor":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"Destroy":{"return": "<undefined>"},"__destroyImpl":{"return": "<undefined>"},"clickTarget":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"onClick":{"return": "<undefined>"},"mainAction":{"return": "<undefined>"},"extraAction":{"return": "<undefined>"},"onUpdate":{"return": "<undefined>"},"canSeeObject":{"return": "<undefined>"},"saveLastInteract":{"return": "<undefined>"},"getLastInteractStartPos":{"return": "<undefined>"},"getLastInteractEndPos":{"return": "<undefined>"},"getLastInteractDistance":{"return": "<undefined>"},"getLastInteractVector":{"return": "<undefined>"},"getLastInteractTarget":{"return": "<undefined>"},"getLastInteractNormal":{"return": "<undefined>"},"canInteractWithSavedObject":{"return": "<undefined>"},"getInteractionTarget":{"return": "<undefined>"},"generateLastInteractOnServer":{"return": "<undefined>"},"isOpenedNDisplay":{"return": "<undefined>"},"closeOpenedNetDisplay":{"return": "<undefined>"},"ShowMessageBox":{"return": "<undefined>"},"CloseMessageBox":{"return": "<undefined>"},"UpdateMessageBox":{"return": "<undefined>"},"setMessageBoxContext":{"return": "<undefined>"},"SetMessageBoxEvent":{"return": "<undefined>"},"loadActions":{"return": "<undefined>"},"hasAction":{"return": "<undefined>"},"addAction":{"return": "<undefined>"},"playAction":{"return": "<undefined>"},"removeAction":{"return": "<undefined>"},"setInitialPos":{"return": "<undefined>"},"getInitialPos":{"return": "<undefined>"},"initAsActor":{"return": "<undefined>"},"onChangeLocality":{"return": "<undefined>"},"isPlayer":{"return": "<undefined>"},"onConnected":{"return": "<undefined>"},"onDisconnected":{"return": "<undefined>"},"setPos":{"return": "<undefined>"},"setPosServer":{"return": "<undefined>"},"getPos":{"return": "<undefined>"},"isTouchingGround":{"return": "<undefined>"},"setDir":{"return": "<undefined>"},"getDir":{"return": "<undefined>"},"getRealSpeed":{"return": "<undefined>"},"getDirTo":{"return": "<undefined>"},"getDirFrom":{"return": "<undefined>"},"getDirectionTo":{"return": "<undefined>"},"getDistanceTo":{"return": "<undefined>"},"getStance":{"return": "<undefined>"},"isWalking":{"return": "<undefined>"},"isRunning":{"return": "<undefined>"},"isSprinting":{"return": "<undefined>"},"getSpeedMode":{"return": "<undefined>"},"getAnimation":{"return": "<undefined>"},"sendInfo":{"return": "<undefined>"},"fastSendInfo":{"return": "<undefined>"},"requestSMDUpdate":{"return": "<undefined>"},"syncSmdSlot":{"return": "<undefined>"},"syncSmdVar":{"return": "<undefined>"},"getBodyPartStatusArray":{"return": "<undefined>"},"syncBodyParts":{"return": "<undefined>"},"getLighting":{"return": "<undefined>"},"addVisualState":{"return": "<undefined>"},"removeVisualState":{"return": "<undefined>"},"hasVisualState":{"return": "<undefined>"},"updateVisualState":{"return": "<undefined>"},"generateNaming":{"return": "<undefined>"},"getFirstName":{"return": "<undefined>"},"getSecondName":{"return": "<undefined>"},"getNameEx":{"return": "<undefined>"},"getFirstNameEx":{"return": "<undefined>"},"getSecondNameEx":{"return": "<undefined>"},"getDescFor":{"return": "<undefined>"},"examine":{"return": "<undefined>"},"isFirstJoin":{"return": "<undefined>"},"addFirstJoinMessage":{"return": "<undefined>"},"printFirstJoinMessage":{"return": "<undefined>"},"_localSayWrapper":{"return": "<undefined>"},"localSay":{"return": "<undefined>"},"worldSay":{"return": "<undefined>"},"meSay":{"return": "<undefined>"},"addToKnown":{"return": "<undefined>"},"removeFromKnown":{"return": "<undefined>"},"getKnownName":{"return": "<undefined>"},"isKnownTarget":{"return": "<undefined>"},"visibleSay":{"return": "<undefined>"},"mindSay":{"return": "<undefined>"},"applyGlobalAnim":{"return": "<undefined>"},"onChangeAnimCoef":{"return": "<undefined>"},"setAnimSpeedCoef":{"return": "<undefined>"},"setCustomAnimState":{"return": "<undefined>"},"getMobFace":{"return": "<undefined>"},"setMobFace":{"return": "<undefined>"},"setMobFaceAnim":{"return": "<undefined>"},"syncMobFaceAnim":{"return": "<undefined>"},"applyVoiceType":{"return": "<undefined>"},"updateVoiceType":{"return": "<undefined>"},"playSoundData":{"return": "<undefined>"},"playSoundLocal":{"return": "<undefined>"},"playMusic":{"return": "<undefined>"},"pauseMusic":{"return": "<undefined>"},"stopMusic":{"return": "<undefined>"},"playSoundUI":{"return": "<undefined>"},"startSelfProgress":{"return": "<undefined>"},"startProgress":{"return": "<undefined>"},"isProgressProcess":{"return": "<undefined>"},"stopProgress":{"return": "<undefined>"},"successProgress":{"return": "<undefined>"},"startSelfContextProgress":{"return": "<undefined>"},"startContextProgress":{"return": "<undefined>"},"isSuccessContextProgress":{"return": "<undefined>"},"localEffectUpdate":{"return": "<undefined>"},"localEffectRemove":{"return": "<undefined>"},"localEffectClearAll":{"return": "<undefined>"},"localEffectSyncAll":{"return": "<undefined>"},"localEffectExists":{"return": "<undefined>"},"isFailCombat":{"return": "<undefined>"},"applyFailCombat":{"return": "<undefined>"},"handleStepSounds":{"return": "<undefined>"},"isStepSoundSystemEnabled":{"return": "<undefined>"},"setStepSoundSystem":{"return": "<undefined>"},"enabledAtmosReaction":{"return": "<undefined>"},"setAtmosModeReaction":{"return": "<undefined>"},"onAtmosUpdate":{"return": "<undefined>"}
 }   }
 }
 ,"GameObject": {
     "baseClass" : "ManagedObject",
-    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":56},
+    "defined" : {"file":"src\\host\\GameObjects\\GameObject.sqf","line":57},
    "fields": { "defined": {
 "name":{"return": "null"},"desc":{"return": "null"},"weight":{"return": "int"},"__moverMobs":{"return": "null_array"},"pointer":{"return": "null"},"_update_handle_auto":{"return": "int"}}   },
    "methods": { "defined": {
