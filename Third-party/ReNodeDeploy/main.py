@@ -261,6 +261,7 @@ vfileInfo = vfileInfo.replace("VER_TUPLE",fullVerTUPLE).replace("VER_FULL",fullV
 with open(vfile_gen, 'w') as f: f.write(vfileInfo)
 
 data = f"pyinstaller --noconfirm --onefile --windowed --icon \"{iconPath}\" --name \"ReNode\" --hidden-import \"NodeGraphQt\" --additional-hooks-dir \"{nodeGraphLibPath}\" --paths \"{tempRenodeDir}\"  \"{mainScriptPath}\" --version-file \"{vfile_gen}\""
+print("PYINSTALLER CLI: " + data)
 curDir = os.getcwd()
 os.chdir(os.path.join(tempRenodeDir))
 return_ = os.system(data)
