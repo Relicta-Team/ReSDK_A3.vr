@@ -211,7 +211,8 @@ if not downloadRepo(dictInfo['url'],dictInfo['sha']):
 tempfolder = os.path.abspath(TEMP_FOLDER)
 tempRenodeDir = os.path.join(tempfolder, RELEASEREPONAME)
 deployProjectPath = renodeDir
-reqTxt = os.path.join(tempRenodeDir, "requirements.txt")
+#reqTxt = os.path.join(tempRenodeDir, "requirements.txt")
+reqTxt = os.path.join(curAppDir,"req_build.txt")
 print("Installing pip libs")
 
 if 'DISABLE_INSTALL_REQUIREMENTS' in os.environ:
