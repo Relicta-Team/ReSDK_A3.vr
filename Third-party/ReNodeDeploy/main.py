@@ -290,4 +290,9 @@ shutil.copyfile(os.path.join(tempRenodeDir,'dist/ReNode.exe'),dest+"/ReNode.exe"
 
 os.environ['RENODE_DEPLOY_BUILD_VER'] = fullVerFULL
 
+env_file = os.getenv('GITHUB_ENV')
+
+with open(env_file, "a") as f:
+    f.write("RENODE_FULL_VERSION={}".format(fullVerFULL))
+
 print("WORK DONE!")

@@ -12,7 +12,6 @@ env:
   renode_deploy_path: Third-party/ReNodeDeploy/main.py
   renode_artifacts_sources_path: ReNode/
   RENODE_DEPLOY_TOKEN: ${{secrets.TOKEN}}
-  RENODE_DEPLOY_BUILD_VER: "UNKNOWN"
 
 jobs:
 
@@ -25,13 +24,14 @@ jobs:
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
       - name: Deploy ReNode
+        id: renode_compile
         working-directory: ${{ github.workspace }}/Third-party/ReNodeDeploy
         run: |
           python -V
           python main.py ./../../ReNode
       - uses: actions/upload-artifact@v4
         with:
-          name: ReNode ${{ env.RENODE_DEPLOY_BUILD_VER }}
+          name: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
           path: |
             ${{ env.renode_artifacts_sources_path }}
       # - name: Update ReNode application
