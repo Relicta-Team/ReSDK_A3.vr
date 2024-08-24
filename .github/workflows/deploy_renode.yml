@@ -20,14 +20,14 @@ jobs:
     name: Build
     runs-on: windows-latest
     steps:
+      - name: Setup Python
+        uses: actions/setup-python@v3.1.4
+      - uses: actions/checkout@v3
       - name: Test issue (GH CLI)
         env:
           GH_TOKEN: ${{secrets.TOKEN}}
         run: |
           gh issue create --title "Тестовая задача" --body "Тестовая задача, предоставленна через Github actions"
-      - name: Setup Python
-        uses: actions/setup-python@v3.1.4
-      - uses: actions/checkout@v3
       - name: Deploy ReNode
         id: renode_compile
         working-directory: ${{ github.workspace }}/Third-party/ReNodeDeploy
