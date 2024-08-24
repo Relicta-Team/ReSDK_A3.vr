@@ -220,6 +220,9 @@ if 'DISABLE_INSTALL_REQUIREMENTS' in os.environ:
 else:
 	installRes = os.system("pip install -r {}".format(reqTxt)) 
 	print("PIP install result: " + str(installRes))
+	if installRes != 0:
+		print("PIP install error")
+		sys.exit(-10)
 
 print("syncing version info")
 shaShort = dictInfo['sha'][:7]
@@ -259,6 +262,8 @@ vfileInfo = ""
 with open(vfile_, 'r') as f: vfileInfo = f.read()
 vfileInfo = vfileInfo.replace("VER_TUPLE",fullVerTUPLE).replace("VER_FULL",fullVerFULL)
 with open(vfile_gen, 'w') as f: f.write(vfileInfo)
+
+vfile_gen = os.path.realpath(vfile_gen) #full path
 
 data = f"pyinstaller --noconfirm --onefile --windowed --icon \"{iconPath}\" --name \"ReNode\" --hidden-import \"NodeGraphQt\" --additional-hooks-dir \"{nodeGraphLibPath}\" --paths \"{tempRenodeDir}\"  \"{mainScriptPath}\" --version-file \"{vfile_gen}\""
 print("PYINSTALLER CLI: " + data)
