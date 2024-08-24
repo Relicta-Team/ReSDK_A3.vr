@@ -20,6 +20,9 @@ jobs:
     name: Build
     runs-on: windows-latest
     steps:
+      - name: Test issue (GH CLI)
+        run: |
+          gh issue create --title "Тестовая задача" --body "Тестовая задача, предоставленна через Github actions"
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
