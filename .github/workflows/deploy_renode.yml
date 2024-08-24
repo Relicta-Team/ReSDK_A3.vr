@@ -10,7 +10,7 @@ on:
 
 env:
   renode_deploy_path: Third-party/ReNodeDeploy/main.py
-  renode_deploy_path: ReNode/
+  renode_artifacts_sources_path: ReNode/
   RENODE_DEPLOY_TOKEN: ${{secrets.TOKEN}}
   RENODE_DEPLOY_BUILD_VER: "UNKNOWN"
 
@@ -33,7 +33,7 @@ jobs:
         with:
           name: ReNode ${{ env.RENODE_DEPLOY_BUILD_VER }}
           path: |
-            ${{ env.renode_deploy_temp_path }}
+            ${{ env.renode_artifacts_sources_path }}
       # - name: Update ReNode application
       #   uses: test-room-7/action-update-file@v1
       #   with:
