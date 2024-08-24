@@ -21,7 +21,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Test issue (GH CLI)
-        GH_TOKEN: ${{secrets.TOKEN}}
+        env:
+          GH_TOKEN: ${{secrets.TOKEN}}
         run: |
           gh issue create --title "Тестовая задача" --body "Тестовая задача, предоставленна через Github actions"
       - name: Setup Python
