@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - RBuilder
   workflow_dispatch:
 
 env:
