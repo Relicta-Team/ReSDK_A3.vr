@@ -152,6 +152,10 @@ function(Core_initObjects)
 	["onPaste",{
 		params ["_objList"];
 		{
+			if (grpNull isequaltype _x) then {			
+				continue;
+			};
+
 			[_x,true] call Core_initObjectEvents;
 		} foreach _objList;
 	}] call Core_addEventHandler;

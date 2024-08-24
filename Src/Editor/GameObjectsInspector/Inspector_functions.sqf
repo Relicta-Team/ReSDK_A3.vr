@@ -14,7 +14,9 @@ function(inspector_init)
 		//Нельзя также выбирать системный объект golib_com_object
 		if (!cfg_debug_devMode && {
 			_list findif {
-				(_x isKindOf "Man" && (!cfg_debug_allowSelectUnits)) || 
+				_ismob = [_x get3DENAttribute "name" select 0, "debug_mob"] call stringStartWith;
+				//{(_x get3DENAttribute "ControlMP" select 0)}
+				((_x isKindOf "Man") && {(!cfg_debug_allowSelectUnits)} && {!_ismob}) || 
 				(equals(golib_com_object,_x) && !cfg_debug_allowSelectSystemObject)
 			} != -1}
 		) exitwith {
