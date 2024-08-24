@@ -10,8 +10,9 @@ on:
 
 env:
   renode_deploy_path: Third-party/ReNodeDeploy/main.py
-  renode_deploy_temp_path: Third-party/ReNodeDeploy/TEMP/RENODE_TEMP/
+  renode_deploy_path: ReNode/
   RENODE_DEPLOY_TOKEN: ${{secrets.TOKEN}}
+  RENODE_DEPLOY_BUILD_VER: "UNKNOWN"
 
 jobs:
 
@@ -30,7 +31,7 @@ jobs:
           python main.py ./../../ReNode
       - uses: actions/upload-artifact@v4
         with:
-          name: ReNode
+          name: ReNode ${{ env.RENODE_DEPLOY_BUILD_VER }}
           path: |
             ${{ env.renode_deploy_temp_path }}
       # - name: Update ReNode application
