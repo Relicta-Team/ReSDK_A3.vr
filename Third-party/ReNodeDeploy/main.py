@@ -3,7 +3,13 @@ import os
 import shutil
 import sys
 import zipfile
-import requests
+
+try:
+	import requests
+except:
+	os.system("pip install requests")
+	import requests
+
 import re
 
 DEBUG_MODE = False
