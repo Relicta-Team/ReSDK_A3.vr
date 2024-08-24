@@ -49,7 +49,7 @@ def check_github_token(api_token):
 	return False
 
 
-if not check_github_token(os.environ['TOKEN']):
+if not check_github_token(os.environ['RENODE_DEPLOY_TOKEN']):
 	print("Github token invalid")
 	sys.exit(-2)
 
@@ -85,7 +85,7 @@ def get_latest_commit_hash(repo_name, access_token,ref="main"):
 		print(f"Error fetching commit data. Status code: {response.status_code}")
 		return None
 
-dictInfo = get_latest_commit_hash(REPOPATH,os.environ['TOKEN'])
+dictInfo = get_latest_commit_hash(REPOPATH,os.environ['RENODE_DEPLOY_TOKEN'])
 if dictInfo == None:
 	print("No commit found")
 	sys.exit(-3)
