@@ -93,7 +93,7 @@ call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
 #include <EditorEngine.h>
 
 //Строковое название версии. Пишется в пользовательском интерфейсе редактора
-Core_version_name = "1.14-path.3";
+Core_version_name = "1.15";
 //Номер версии сборки редактора. Используется в бинарных файлах карт.
 Core_version_number = 4;
 

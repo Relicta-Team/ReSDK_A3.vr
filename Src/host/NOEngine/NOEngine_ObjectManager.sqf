@@ -82,7 +82,7 @@ node_func(createGameObjectInWorld) = {
 	out:bool:Результат:Результат создания и назначения скрипта. При успешном выполнеии возвращает @[bool ИСТИНУ].
 "
 node_func(createGameObjectScript) = {
-	params ["_name_str","_gobj"];
+	params ["_name_str","_gobj","_scriptParamsArgs"];
 	if isNullReference(_gobj) exitWith {false};
 	if !isNullReference(getVar(_gobj,__script)) exitWith {false};
 
@@ -93,6 +93,10 @@ node_func(createGameObjectScript) = {
 	if !isTypeOf(_script,ScriptedGameObject) exitWith {
 		setLastError("Created object is not ScriptedGameObject: " + callFunc(_script,getClassName));
 		false
+	};
+
+	if !isNullVar(_scriptParamsArgs) then {
+		setVar(_script,_parameters,_scriptParamsArgs);	
 	};
 
 	callFuncParams(_script,assignScript,_gobj);
