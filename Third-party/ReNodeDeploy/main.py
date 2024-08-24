@@ -288,9 +288,7 @@ dest = deployProjectPath
 shutil.copytree(os.path.join(tempRenodeDir,'data'),dest+"/data")
 shutil.copyfile(os.path.join(tempRenodeDir,'dist/ReNode.exe'),dest+"/ReNode.exe")
 
-os.environ['RENODE_DEPLOY_BUILD_VER'] = fullVerFULL
-
-env_file = os.getenv('GITHUB_ENV')
+env_file = os.getenv('GITHUB_OUTPUT')
 
 with open(env_file, "a") as f:
     f.write("RENODE_FULL_VERSION={}".format(fullVerFULL))
