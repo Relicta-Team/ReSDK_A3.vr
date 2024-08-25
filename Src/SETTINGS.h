@@ -14,9 +14,15 @@
 	#include <..\preload\rbuilder.h>
 #endif
 
+#ifdef EDITOR
+	#define EDITOR_OR_RBUILDER
+#endif
+
 #ifdef RBUILDER
 	#undef EDITOR
+	#define EDITOR_OR_RBUILDER
 #endif
+
 
 //============================================================================
 //			REGION: COMMON SETTINGS

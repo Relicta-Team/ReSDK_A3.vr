@@ -5,46 +5,64 @@ on:
   push:
     branches:
       - main
-      - RBuilder
   workflow_dispatch:
 
 env:
   renode_deploy_path: Third-party/ReNodeDeploy/main.py
   renode_artifacts_sources_path: ReNode/
+  renode_compiled_executable: ReNode/ReNode.exe
+  renode_compile_graphs_cli: -prep_code -nosplash -noapp -noerrwin
   RENODE_DEPLOY_TOKEN: ${{secrets.TOKEN}}
 
 jobs:
 
-
   deploy:
     name: Build
     runs-on: windows-latest
+    if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     steps:
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
-      - name: Test issue (GH CLI)
-        env:
-          GH_TOKEN: ${{secrets.TOKEN}}
-        run: |
-          gh issue create --title "Тестовая задача" --body "Тестовая задача, предоставленна через Github actions"
-      - name: Deploy ReNode
+      # - name: Test issue (GH CLI)
+      #   env:
+      #     GH_TOKEN: ${{secrets.TOKEN}}
+      #   run: |
+      #     gh issue create --title "Тестовая задача" --body "Тестовая задача, предоставленна через Github actions"
+      
+      # ----------------------- build exe -----------------------
+      - name: Compile
         id: renode_compile
         working-directory: ${{ github.workspace }}/Third-party/ReNodeDeploy
         run: |
           python -V
           python main.py ./../../ReNode
+      # ----------------------- tests and build dependencies -----------------------
+      - name: Test executable
+        id: renode_test_exe
+        run: |
+          echo "TODO implement test executable"
+      - name: Build nodes library
+        if: steps.renode_test_exe.outcome=='success'
+        run: |
+          echo "TODO implement build nodes library"
+      - name: Build graphs
+        if: steps.renode_test_exe.outcome=='success'
+        run: |
+          python ${{ env.renode_compiled_executable }} ${{ env.renode_compile_graphs_cli }}
+      # ----------------------- upload/commit compiled -----------------------
       - uses: actions/upload-artifact@v4
+        name: Upload ReNode artifacts
         with:
           name: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
           path: |
             ${{ env.renode_artifacts_sources_path }}
-      # - name: Update ReNode application
-      #   uses: test-room-7/action-update-file@v1
-      #   with:
-      #     committer-name: Docgen
-      #     file-path: |
-      #       ReNode/**
-      #     commit-msg: Update ReNode
-      #     github-token: ${{secrets.TOKEN}}
+      - name: Update ReNode application
+        uses: test-room-7/action-update-file@v1
+        with:
+          committer-name: ReNode update
+          file-path: |
+            ReNode/**
+          commit-msg: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
+          github-token: ${{secrets.TOKEN}}
 

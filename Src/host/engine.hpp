@@ -697,7 +697,7 @@ ACRE_STACK_DEPTH = ACRE_STACK_DEPTH + 1; ACRE_CURRENT_FUNCTION = 'ANON'; \
 _ret = _this call ##function; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH - 1; \
 ACRE_IS_ERRORED = false; _ret;}*/
 
-#ifdef EDITOR
+#ifdef EDITOR_OR_RBUILDER
 	#define setLastError(data__) ([data__] call relicta_debug_setlasterror); halt
 #else
 	#define setLastError(data__)

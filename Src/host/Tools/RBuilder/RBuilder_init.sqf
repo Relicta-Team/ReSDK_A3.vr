@@ -5,6 +5,9 @@
 
 #include "..\..\engine.hpp"
 
+#include "..\EditorDebug\EditorDebug_io.sqf"
+#include "..\..\Tools\EditorWorkspaceDebug\InternalImpl.sqf"
+
 private _hasTests = false;
 {
 	private _t = tolower _x;
@@ -22,6 +25,13 @@ if (_hasTests) then {
 	call test_run;
 };
 
+if ("GENERATE_RENODE_BINDINGS" in RBuilder_map_defines) then {
+	private _r = [null] call nodegen_generateLib;
+	["ReNode binding generation result - %1",_r] call cprint;
+	if (!_r) then {
+		[-600,"ReNode binding generation failed"] call RBuilder_exit;
+	};
+};
 
 //noexit on auto-reload
 if (RBuilder_autoReload) exitWith {};
