@@ -316,3 +316,9 @@ TEST(OrderedSetParameters)
 
 // 	ASSERT_EQ(_dict callv(length),count objectList);
 // }
+
+
+TEST(ObjectStructBase)
+{
+	
+}
