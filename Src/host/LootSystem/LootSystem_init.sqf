@@ -23,7 +23,7 @@ loot_addConfig = {
 
 loot_loadConfig = {
 	params ["_path"];
-	private _d = [_path] call io_praseYaml;
+	private _d = [_path] call yaml_loadFile;
 	if isNullVar(_d) exitWith {
 		errorformat("loot::loadConfig() - Cannot load %1",_path);
 		false

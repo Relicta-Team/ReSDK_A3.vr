@@ -542,6 +542,21 @@ randomGaussian = {
 	_center getPos [_radius * (random [-1,0,1]),random 180] 
 };
 
+fileExists_Node = {
+	params ["_f"];
+	FileExists _f
+};
+
+fileLoad_Node = {
+	params ["_f",["_doPreprocess",false]];
+	if !([_f] call fileExists_Node) exitWith {""};
+	if (_doPreprocess) then {
+		PreprocessFileLineNumbers _f
+	} else {
+		LoadFile _f
+	};
+};
+
 missionNamespace setVariable ["pushFront",
 {
 	params ["_list","_element",["_unique",false]];
