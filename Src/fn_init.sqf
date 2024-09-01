@@ -200,6 +200,7 @@ if (!call yaml_isExtensionLoaded) then {
 		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""ReMaker\DEPLOY.bat"""] call messageBox;
 	#endif
 	setLastError("Yaml library not found.");
+	appExit(APPEXIT_REASON_EXTENSION_ERROR);
 };
 
 if (server_isLocked) exitWith {};
