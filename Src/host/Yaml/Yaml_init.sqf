@@ -23,9 +23,8 @@
 #define YAML_OUTPUT_SANITIZE_EXCEPTION(val) ((val) select [count YAML_OUTPUT_PREFIX_EXCEPTION,count (val)])
 #define YAML_OUTPUT_PREFIX_PARTIAL "$PART$"
 
-yaml_internal_lastError = "";
-
-#define YAML_TESTS
+//enable for test cases
+//#define YAML_TESTS
 
 //есть куски для чтения
 yaml_hasPartsForRead = {
@@ -46,6 +45,25 @@ yaml_getPartsCount = {
 //расширение валидно
 yaml_isExtensionLoaded = {
 	(YAML_EXTENSION_NAME callExtension "") == YAML_EXTENSION_NAME
+};
+
+//загрузка yml файла. ошибка загрузи или несуществующий файл приведет к возврату null-значения
+yaml_loadFile = {
+	params ["_file"];
+	
+	if (!fileExists(_file)) exitWith {
+		errorformat("yaml::loadFile() - File not found: %1",_file);
+		null
+	};
+
+	private _content = LoadFile(_file);
+	private _ref = refcreate(0);
+	if !([_data,_ref] call yaml_loadData) exitWith {
+		errorformat("yaml::loadFile() - Error loading file: %1; Output: %2",refget(_ref));
+		null;
+	};
+
+	refget(_ref);
 };
 
 yaml_loadData = {
