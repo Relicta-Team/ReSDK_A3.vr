@@ -32,7 +32,7 @@ Count modules: 31
  - [VoiceSystem](client//VoiceSystem.md) - 12 files
  - [WidgetSystem](client//WidgetSystem.md) - 6 files
 # Side: host
-Count modules: 53
+Count modules: 54
  - [host](host//host.md) - 13 files
  - [AI](host//AI.md) - 1 files
  - [AmbientControl](host//AmbientControl.md) - 1 files
@@ -86,3 +86,4 @@ Count modules: 53
  - [Traits](host//Traits.md) - 4 files
  - [UnitTests](host//UnitTests.md) - 2 files
  - [VerbSystem](host//VerbSystem.md) - 6 files
+ - [Yaml](host//Yaml.md) - 1 files
