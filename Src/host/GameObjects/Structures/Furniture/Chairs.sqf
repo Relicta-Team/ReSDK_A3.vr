@@ -97,7 +97,7 @@ class(LobbyChair) extends(IChair)
 	var(model,"ca\structures\furniture\chairs\lobby_chair\lobby_chair.p3d");
 endclass
 
-editor_attribute("Deprecated" arg "Заменить на BrownLeatherChair. Будет удален с редактором 1.15")
+editor_attribute("Deprecated" arg "Заменить на BrownLeatherChair. Будет удален с редактором 1.16")
 class(BumArmChair) extends(IChair)
 	getterconst_func(getChairOffsetPos,vec3(0,0.2,-0.5));
 	getterconst_func(restBias,vec3(0,0.8,0));
@@ -114,7 +114,7 @@ class(GreenArmChair) extends(IChair)
 	var(model,"ml\ml_object_new\model_14_10\diwan.p3d");
 endclass
 	//EQUALS
-	editor_attribute("Deprecated" arg "Заменить на GreenArmChair. Будет удален с редактором 1.15")
+	editor_attribute("Deprecated" arg "Заменить на GreenArmChair. Будет удален с редактором 1.16")
 	class(GreenChair) extends(GreenArmChair)
 		var(model,"ml\ml_object_new\model_14_10\diwan.p3d");
 	endclass

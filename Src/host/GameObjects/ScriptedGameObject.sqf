@@ -94,6 +94,8 @@ class(ScriptedGameObject) extends(object)
 		};
 
 		callSelfParams(onScriptAssigned,_src);
+
+		callSelf(_handleParameters);
 	};
 
 	"
@@ -439,6 +441,94 @@ region(ItemClick)
 		assert_str(!isNullVar(_targ),"Internal error - target reference not defined");
 		private __SKIP_CLICK_TARGET_FLAG__ = true;
 		callFuncParams(_usr,clickTarget,_targ);
+	};
+
+region(Scripted parameters)
+	var(_parameters,[]);//value is [float,bool,string]
+	var(_cachedParameters,null);
+
+	"
+		name:Имеет параметр
+		desc:Проверяет был ли зарегистрирован параметр с указанным именем в скрипте.
+		type:get
+		lockoverride:1
+		in:string:Название:Название параметра.
+		return:bool:Есть ли параметр
+	" node_met
+	func(hasParameter)
+	{
+		objParams_1(_name);
+		if !callSelf(scriptParamsCacheLoaded) then {
+			callSelf(_prepareParameters);
+		};
+		_name in getSelf(_cachedParameters);
+	};
+
+	getter_func(scriptParamsCacheLoaded,!isNull(getSelf(_cachedParameters)));
+
+	"
+		name:При параметре
+		desc:Обработчик значения параметров переданных скрипту.
+		type:event
+		out:string:Название:Название параметра.
+		out:float:Как число:Значение параметра как дробное число.
+		out:bool:Как булево:Значение параметра как булево.
+		out:string:Как строка:Значение параметра как строка.
+	" node_met
+	func(onParameter)
+	{
+		objParams_4(_name,_float,_bool,_str);
+	};
+
+	func(_handleParameters)
+	{
+		objParams();
+		callSelf(_prepareParameters);
+		private _name = null;
+		private _val = null;
+		private _cache = getSelf(_cachedParameters);
+		{
+			_name = _x select 0;
+			_val = _cache get _name;
+			_val params ["_float","_bool","_str"];
+			callSelfParams(onParameter,_name arg _float arg _bool arg _str);
+		} foreach getSelf(_parameters);
+	};
+
+	func(_prepareParameters)
+	{
+		objParams();
+		if !isNull(getSelf(_cachedParameters)) exitWith {};
+
+		private _asNum = 0;
+		private _asStr = "";
+		private _asBool = false;
+
+		private _valToBool = {
+			private _val = _this;
+			//regex match
+			//bool check
+			if ([_val,"\s*(true|yes)\s*"] call regex_isMatch) exitWith {true};
+			if ([_val,"\s*(false|no)\s*"] call regex_isMatch) exitWith {false};
+			//int check
+			if ([_val,"\s*-?\d+(\.\d+)?\s*"] call regex_isMatch) exitWith {
+				parseNumberSafe(_val) != 0
+			};
+			not_equals(_val,stringEmpty)
+		};
+		private _mapCache = createHashMap;
+
+		{
+			_x params ["_k","_v"];
+			_asNum = parseNumberSafe(_v);
+			_asStr = _v;
+			_asBool = _v call _valToBool;
+			
+			_mapCache set [_k,[_asNum,_asBool,_asStr]];
+
+		} foreach getSelf(_parameters);
+
+		setSelf(_cachedParameters,_mapCache);
 	};
 
 endclass

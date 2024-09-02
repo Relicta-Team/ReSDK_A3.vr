@@ -1,0 +1,81 @@
+#comment test
+key : value #comment after test
+test_null: ~
+test_null2: null
+
+test_bool_1: True
+test_bool_2: False
+test_bool_keywords: [y,n,yes,no,on,off,true,false]
+
+test_int: 1
+test_int2: -1
+test_float: 1.23435
+test_float2: -1.23435
+test_hex: 0xFF
+test_hex2: 0xff
+
+test_oneline_str: abs
+test_oneline_str_in: "abs"
+test_oneline_str_in2: 'abs'
+test_oneline_str_inline: "abs \"inlined\""
+test_oneline_str_inline2: 'abs "inlined"'
+test_oneline_str_inline3: 'abs \"inlined\"'
+test_oneline_str_inline4: "abs 'inlined'"
+test_oneline_str_inline5: "abs \"inlined\""
+test_oneline_str_inline6: "abs \"\"inlined\"\""
+test_mutiline_str: |
+  line-1
+  line-2
+test_mutiline_str_inline: |
+  line-1
+  "INLINED"
+test_oneline_from_multiline: >
+  Hello
+  world
+
+test_str_add: >+
+  this is not a normal string it
+  spans more than
+  one line
+  see?
+test_str_del: |-
+  this is not a normal string it
+  spans more than
+  one line
+  see?
+
+test_arr: [1, 2, 3]
+test_arr_multiline:
+  - 1
+  - 2
+  - 3
+
+test_oneline_dict: { thing1: huey, thing2: louie, thing3: dewey }
+test_arr_asval:
+  bar:
+    - bar
+    - rab
+    - plop
+
+test_obj:
+  a: 1
+test_obj2:
+  a: 1
+  b: 2
+test_obj_inside:
+  child1:
+    a: 1
+    b: 2
+  child2:
+    a: 1
+    b: 2
+  
+test_reference: &ref_example
+  a: 1
+  b: 2
+
+test_obj_refered: *ref_example #emplace dict {a: 1, b: 2}
+
+test_obj_override:
+  <<: *ref_example
+  b: 1000
