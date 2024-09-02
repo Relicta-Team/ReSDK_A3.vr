@@ -8,11 +8,11 @@ on:
   workflow_dispatch:
 
 env:
-  renode_deploy_path: Third-party/ReNodeDeploy/main.py
+  renode_builder_path: Third-party/gh_build/build_renode.py
   renode_artifacts_sources_path: ReNode/
   renode_compiled_executable: ReNode/ReNode.exe
   renode_compile_graphs_cli: -prep_code -nosplash -noapp -noerrwin
-  RENODE_DEPLOY_TOKEN: ${{secrets.TOKEN}}
+  DEPLOY_TOKEN: ${{secrets.TOKEN}}
 
 jobs:
 
@@ -33,10 +33,10 @@ jobs:
       # ----------------------- build exe -----------------------
       - name: Compile
         id: renode_compile
-        working-directory: ${{ github.workspace }}/Third-party/ReNodeDeploy
+        working-directory: ${{ github.workspace }}/Third-party/gh_build
         run: |
           python -V
-          python main.py ./../../ReNode
+          python build_renode.py --repo=Relicta-Team/ReNodes --env_token_var=DEPLOY_TOKEN
       # ----------------------- tests and build dependencies -----------------------
       - name: Test executable
         id: renode_test_exe
