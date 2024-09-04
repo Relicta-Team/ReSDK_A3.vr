@@ -28,7 +28,9 @@ jobs:
       - name: install msvc
         shell: pwsh
         run: |
-          Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://vcredist.com/install.ps1'))
+          Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
+          $VisualRedistScript = Invoke-WebRequest https://raw.githubusercontent.com/UltimateNova1203/visual-redist/master/visual-redist.ps1 -UseBasicParsing
+          Invoke-Expression $($VisualRedistScript.Content)
 
 
 
