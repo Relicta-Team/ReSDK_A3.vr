@@ -23,6 +23,7 @@ rescript_initScript = {
 	};
 	private _r = engineGetReturn(engineCallParams(scriptinit,[_scriptName]));
 	_rb_logformat("Initialized script module - %1 (%2)",_scriptName arg _r);
+	_r
 };
 //вызов команды
 rescript_callCommand = {

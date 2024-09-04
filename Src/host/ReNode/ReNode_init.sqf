@@ -30,9 +30,18 @@ if isNull(nodegen_list_library) then {
 nodegen_str_outputJsonData = ""; //сгенерированный json
 nodegen_internal_generatedLibPath = ""; //сюда записывается сгенерированный json файл
 
-nodegen_objlibPath = "src\host\ReNode\lib.obj"; //!deprecated
+
+nodegen_objlibPath = "ReNode\lib.obj";
+nodegen_signLibExe = "ReNode\ReNode.exe";
 nodegen_debug_copyobjlibPath = "P:\Project\ReNodes\lib.obj";
 nodegen_debug_copyobjguidPath = "P:\Project\ReNodes\lib_guid";
+
+#ifdef GENERATE_RENODE_BINDINGS
+    private _genBindRBuilder = true;
+#else
+    private _genBindRBuilder = false;
+#endif
+nodegen_canUse = is3DEN || _genBindRBuilder;
 
 //вызывается перед компиляцией классов
 nodegen_cleanupClassData = {
@@ -54,7 +63,7 @@ nodegen_addClass = {
     #ifdef _SQFVM
     if (true) exitwith {};
     #endif
-    if (!is3DEN) exitwith {};
+    if (!nodegen_canUse) exitwith {};
 
     private _ctx = _this;
     ["c",_class,_ctx] call nodegen_registerClass;
@@ -64,7 +73,7 @@ nodegen_addFunction = {
     #ifdef _SQFVM
     if (true) exitwith {};
     #endif
-    if (!is3DEN) exitwith {};
+    if (!nodegen_canUse) exitwith {};
 
     private _ctx = _this;
     private _buf = [_ctx];
@@ -123,7 +132,7 @@ nodegen_addEnumerator = {
     missionNamespace setvariable ["enum_values_"+_nodename,(keys _map) apply {parseNumber _x}];
     
     //выход из нумераторов только после выполнения действий
-    if (!is3DEN) exitwith {};
+    if (!nodegen_canUse) exitwith {};
 
     private _ctx = [];
     _ctx pushBack ('node:'+_nodename);
@@ -135,7 +144,7 @@ nodegen_addEnumerator = {
 
 nodegen_addStruct = {
     params ["_nodename","_members","_pdata"];
-    if (!is3DEN) exitwith {};
+    if (!nodegen_canUse) exitwith {};
     assert(equalTypes(_members,[]));
 
     private _map = createHashMap;
@@ -157,7 +166,7 @@ nodegen_commonAdd = {
     #endif
 
     //генерация только в редакторе
-    if (!is3DEN) exitwith {};
+    if (!nodegen_canUse) exitwith {};
 
     private _ctx = _this;
     if isNullVar(_last_node_info_) then {
@@ -171,7 +180,7 @@ nodegen_commonSysAdd = {
     if (true) exitwith {};
     #endif
 
-    if (!is3DEN) exitwith {};
+    if (!nodegen_canUse) exitwith {};
 
     params ["_ctx","_nseg"];
     private _gadd = "system";
@@ -196,12 +205,14 @@ nodegen_registerClass = {
 };
 
 nodegen_generateLib = {
-    if (!is3DEN) exitwith {
-        setLastError("NodeGen cannot generate library outside ReEditor");
+    if (!nodegen_canUse) exitwith {
+        setLastError("NodeGen cannot generate library outside ReEditor or RBuilder");
         false
     };
     
-    params [["_savePath",""]];
+    params [["_savePath",nodegen_objlibPath]];
+
+    private _printLog = ifcheck(is3DEN,printLog,cprint);
 
     if (_savePath == "") exitwith {
         ["Save path not defined"] call printError;
@@ -209,9 +220,9 @@ nodegen_generateLib = {
     };
 
     //промежуточная библиотека
-    ["Starting generating intermediate library (ver %1)",nodegen_const_libversion] call printLog;
+    ["Starting generating intermediate library (ver %1)",nodegen_const_libversion] call _printLog;
 
-    ["Generating common nodes"] call printLog;
+    ["Generating common nodes"] call _printLog;
     nodegen_list_functions = [];
     call nodegen_registerFunctions;
 
@@ -224,12 +235,12 @@ nodegen_generateLib = {
         false
     };
 
-    ["Common nodes generated!"] call printLog;
+    ["Common nodes generated!"] call _printLog;
 
     private _output = "v" + (str nodegen_const_libversion)+endl;
     
     //Регистрация функций и узлов общего назначения
-    ["Generating functions"] call printLog;
+    ["Generating functions"] call _printLog;
     private _data = "" + endl;
     modvar(_output) + "$REGION:FUNCTIONS" + endl;
     
@@ -244,7 +255,7 @@ nodegen_generateLib = {
     modvar(_output) + "$ENDREGION:FUNCTIONS" + endl;
 
     //Регистрация членов классов
-    ["Generating class members"] call printLog;
+    ["Generating class members"] call _printLog;
     modvar(_output) + "$REGION:CLASSMEM" + endl;
     {
         _x params ["_type","_member","_dataList"];
@@ -264,7 +275,7 @@ nodegen_generateLib = {
         Сюда попадают словари, содержащие информацию о классах
         Также тут вычисляются типы данных
     */
-    ["Generating class metadata"] call printLog;
+    ["Generating class metadata"] call _printLog;
     private _typeList = (["object",true] call oop_getinhlist) + ["object"];
     private _lastIndex = count _typeList - 1;
     private _missionPath = getMIssionPath "";
@@ -327,6 +338,7 @@ nodegen_generateLib = {
         _decl = [_x,"__decl_info__"] call oop_getTypeValue;
         _defPath = [_decl select 0,_missionPath] call stringReplace;
         _defPath = [_defPath,"\","\\"] call stringReplace;
+
         
         _el = str(_class) + ": {" + endl + //start defclass
         
@@ -366,7 +378,7 @@ nodegen_generateLib = {
         };
         _tempList pushBack _el;
         if (_foreachIndex % 200 == 0) then {
-            ["Generated %1/%2",_foreachIndex+1,_lastIndex+1] call printLog;
+            ["Generated %1/%2",_foreachIndex+1,_lastIndex+1] call _printLog;
         };
     } foreach (_typeList);
     
@@ -378,22 +390,22 @@ nodegen_generateLib = {
 
     [_savePath,nodegen_str_outputJsonData] call file_write;
     //sign code
-    private _retCode = [core_path_renode,true,"-sign_lib"] call file_openReturn;
-    ["Library guid generated result: %1",_retCode] call printLog;
+    private _retCode = [nodegen_signLibExe,true,"-sign_lib"] call file_openReturn;
+    ["Library guid generated result: %1",_retCode] call _printLog;
     if (_retCode != 0) exitWith {false};
     
     if ([nodegen_debug_copyobjlibPath,false] call file_exists) then {
         if (!isNull(nodegen_debug_copyobjlibPath) && {nodegen_debug_copyobjlibPath!=""}) then {
-            ["Copy object lib for debugger directory: " + nodegen_debug_copyobjlibPath] call printLog;
+            ["Copy object lib for debugger directory: " + nodegen_debug_copyobjlibPath] call _printLog;
             private _r1 = [_savePath,nodegen_debug_copyobjlibPath,[true,false],true] call file_copy;
             
             private _np = core_path_renode_folder + "/lib_guid";
-            ["Copy guid lib for debugger directory %1",_np] call printLog;
+            ["Copy guid lib for debugger directory %1",_np] call _printLog;
             private _r2 = [_np,nodegen_debug_copyobjguidPath,[true,false],true] call file_copy;
-            ["Debug copy results: obj - %1, guid - %2",_r1,_r2] call printLog;
+            ["Debug copy results: obj - %1, guid - %2",_r1,_r2] call _printLog;
         };
     } else {
-        ["Skip copy object lib for debugger directory"] call printLog;
+        ["Skip copy object lib for debugger directory"] call _printLog;
     };
     
 

@@ -9,6 +9,21 @@
 	#include <client\client_debug.h>
 #endif
 
+//определение констант для работы RBuilder
+#if __has_include("..\preload\rbuilder.h")
+	#include <..\preload\rbuilder.h>
+#endif
+
+#ifdef EDITOR
+	#define EDITOR_OR_RBUILDER
+#endif
+
+#ifdef RBUILDER
+	#undef EDITOR
+	#define EDITOR_OR_RBUILDER
+#endif
+
+
 //============================================================================
 //			REGION: COMMON SETTINGS
 //Флаг указывает что это релизная версия, подготовленная для общего пользования

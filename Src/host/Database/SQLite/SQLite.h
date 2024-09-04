@@ -12,3 +12,7 @@
 #else
 	#define DB_PATH "C:\Games\Arma3\A3Master\@server\db\GameMain.db"
 #endif
+
+#ifdef RBUILDER
+	#define DB_PATH ((call ReBridge_getWorkspace) + ("\@server\db\GameMain.db"))
+#endif

@@ -194,6 +194,7 @@ loadFile("src\host\init.sqf");
 
 call dsm_initialize; //discord mgr init
 
+
 if (!call yaml_isExtensionLoaded) then {
 	#ifdef EDITOR
 	["Yaml библиотека не найдена."
@@ -203,7 +204,11 @@ if (!call yaml_isExtensionLoaded) then {
 	appExit(APPEXIT_REASON_EXTENSION_ERROR);
 };
 
-if (server_isLocked) exitWith {};
+if (server_isLocked) exitWith {
+	#ifdef RBUILDER
+	call RBuilder_onServerLockedLoading;
+	#endif
+};
 
 progLog("Serverside scripts loaded in " + str(diag_ticktime - _time_global) + " sec");
 

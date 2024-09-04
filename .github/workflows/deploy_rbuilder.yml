@@ -1,0 +1,66 @@
+
+name: Deploy RBuilder
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  rb_dir: RBuilder/
+  rb_exe: RBuilder/rb.exe
+  rb_args_init: -init build -l
+  rb_args_test: -testapp
+  rb_args_run_empty: run -d DEBUG
+  rb_args_run_tests: run -d DEBUG -d TEST_ALL
+  DEPLOY_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+jobs:
+
+  deploy:
+    name: Build
+    runs-on: windows-latest
+    if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v3.1.4
+      - uses: actions/checkout@v3
+      
+      # ----------------------- build exe -----------------------
+      - name: Compile
+        id: rbuilder_compile
+        working-directory: ${{ github.workspace }}/Third-party/gh_build
+        run: |
+          python -V
+          python build_rbuilder.py --repo=Relicta-Team/RBuilder --env_token_var=DEPLOY_TOKEN
+      # ----------------------- tests and build dependencies -----------------------
+      - name: Init RBuilder
+        run: ${{env.rb_exe}}  ${{env.rb_args_init}}
+
+      - name: Test compiled exe
+        id: rb_test_exe
+        run: ${{ env.rb_exe }} ${{ env.rb_args_test }}
+
+      - name: Run empty vm
+        run: ${{ env.rb_exe }} ${{ env.rb_args_run_empty }}
+      - name: Run unit tests
+        run: ${{ env.rb_exe }} ${{ env.rb_args_run_tests }}
+        
+
+      # ----------------------- upload/commit compiled -----------------------
+      - uses: actions/upload-artifact@v4
+        name: Upload RBuilder artifacts
+        with:
+          name: RBuilder ${{ steps.rbuilder_compile.outputs.RBUILDER_FULL_VERSION }}
+          path: |
+            ${{ env.rb_dir }}
+      - name: Update Rbuilder application
+        uses: test-room-7/action-update-file@v1
+        with:
+          committer-name: Rbuilder update
+          file-path: |
+            RBuilder/**
+          commit-msg: RBuilder ${{ steps.rbuilder_compile.outputs.RBUILDER_FULL_VERSION }}
+          github-token: ${{secrets.GITHUB_TOKEN}}
+

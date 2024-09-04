@@ -11,6 +11,12 @@
 */
 #include <engine.hpp>
 
+#ifdef RBUILDER
+isRBuilder = true;
+#else
+isRBuilder = false;
+#endif
+
 pc_oop_flag_reloadModule = false;
 pc_oop_intList_loadObjectPool = [];
 
