@@ -30,7 +30,7 @@ jobs:
           choco install vcredist2013 -y
           choco install vcredist2015 -y
           choco install vcredist2017 -y
-          choco install vcredist2019 -y
+          
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
