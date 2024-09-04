@@ -88,7 +88,7 @@ def printWarning(data):
 
 def getCurrentWorkingDir():
 	"""Получить текущую рабочую директорию"""
-	return getDirFromFile(sys.argv[0])
+	return getAbsPath(getDirFromFile(sys.argv[0]))
 
 #region CLI
 
@@ -134,6 +134,9 @@ def checkPip(reqTxt):
 	except:
 		reqPipLibs = True
 	
+	if not reqPipLibs and isGithubActions():
+		reqPipLibs = True
+
 	print("Reuired pip loading: " + str(reqPipLibs))
 
 	if reqPipLibs:
@@ -460,6 +463,8 @@ def buildPythonScript(versionInfo:VersionInfo,cmpCLI:CompilerCLI,workdir:str="")
 	compilerCommand += f" --version-file \"{vinfAbs}\""
 	
 	print("PYINSTALLER CLI: " + compilerCommand)
+	print(f"CWD: {os.getcwd()}")
+	print(f"Exec CWD: {workdir}")
 	t = dt_start()
 	curDir = os.getcwd()
 	os.chdir(os.path.join(workdir))
@@ -478,6 +483,8 @@ def buildPythonScript(versionInfo:VersionInfo,cmpCLI:CompilerCLI,workdir:str="")
 
 #endregion
 
+def isGithubActions():
+	return os.getenv('GITHUB_OUTPUT') != None
 
 def writeToGithubOutput(key:str,value:str):
 	"""Записывает в переменную среды GITHUB_OUTPUT ключ и значение"""
