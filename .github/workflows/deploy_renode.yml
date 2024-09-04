@@ -20,25 +20,18 @@ jobs:
 
   deploy:
     name: Build
-    runs-on: windows-latest
+    runs-on: windows-2019
     if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     steps:
-      - name: Install Visual C++ Redistributable 2012
+      
+      
+      - name: install msvc
         shell: pwsh
         run: |
-          Invoke-WebRequest -Uri https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x64.exe -OutFile vcredist_x64_2012.exe
-          Start-Process vcredist_x64_2012.exe -ArgumentList '/install', '/quiet', '/norestart' -Wait
-      - name: Install Visual C++ Redistributable 2013
-        shell: pwsh
-        run: |
-          Invoke-WebRequest -Uri https://aka.ms/vs/17/release/vc_redist.x64.exe -OutFile vcredist_x64_2013.exe
-          Start-Process vcredist_x64_2013.exe -ArgumentList '/install', '/quiet', '/norestart' -Wait
+          Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://vcredist.com/install.ps1'))
 
-      - name: Install Visual C++ Redistributable 2015
-        shell: pwsh
-        run: |
-          Invoke-WebRequest -Uri https://aka.ms/vs/15/release/vc_redist.x64.exe -OutFile vcredist_x64_2015.exe
-          Start-Process vcredist_x64_2015.exe -ArgumentList '/install', '/quiet', '/norestart' -Wait      
+
+
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
