@@ -2,9 +2,6 @@
 name: Deploy RBuilder
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 env:
@@ -14,7 +11,7 @@ env:
   rb_args_test: -testapp
   rb_args_run_empty: run -d DEBUG
   rb_args_run_tests: run -d DEBUG -d TEST_ALL
-  DEPLOY_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  DEPLOY_TOKEN: ${{ secrets.TOKEN }}
 
 jobs:
 
