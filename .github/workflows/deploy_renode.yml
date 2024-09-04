@@ -10,6 +10,7 @@ env:
   renode_dir: ReNode/
   renode_compiled_executable: ReNode.exe
   renode_compile_graphs_cli: -prep_code -nosplash -noapp -noerrwin
+  rb_exe: ${{github.workspace}}/RBuilder/rb.exe
   DEPLOY_TOKEN: ${{ secrets.TOKEN }}
 
 jobs:
@@ -44,12 +45,12 @@ jobs:
         if: steps.renode_test_exe.outcome=='success'
         working-directory: ${{github.workspace}}/RBuilder
         run: |
-          rb.exe -init build -l
+          ${{env.rb_exe}} -init build -l
       - name: Build nodes library
         if: steps.renode_test_exe.outcome=='success'
         working-directory: ${{github.workspace}}/RBuilder
         run: |
-          rb.exe run -d DEBUG -d GENERATE_RENODE_BINDINGS
+          ${{env.rb_exe}} run -d DEBUG -d GENERATE_RENODE_BINDINGS
       - name: Compile graphs
         if: steps.renode_test_exe.outcome=='success'
         working-directory: ${{ env.renode_dir }}

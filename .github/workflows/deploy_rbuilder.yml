@@ -6,7 +6,7 @@ on:
 
 env:
   rb_dir: ${{github.workspace}}/RBuilder/
-  rb_exe: RBuilder/rb.exe
+  rb_exe: ${{github.workspace}}/RBuilder/rb.exe
   rb_args_init: -init build -l
   rb_args_test: -testapp
   rb_args_run_empty: run -d DEBUG
