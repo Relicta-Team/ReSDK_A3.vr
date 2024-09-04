@@ -2,9 +2,6 @@
 name: Deploy ReNode
 
 on:
-  push: 
-    branches: 
-      - main
   workflow_dispatch:
 
 env:
