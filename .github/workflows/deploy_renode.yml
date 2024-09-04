@@ -50,7 +50,15 @@ jobs:
         if: steps.renode_test_exe.outcome=='success'
         working-directory: ${{github.workspace}}/RBuilder
         run: |
-          ${{env.rb_exe}} run -d DEBUG -d GENERATE_RENODE_BINDINGS -rpt true
+          ${{env.rb_exe}} run -d DEBUG -d GENERATE_RENODE_BINDINGS -rptshow True
+
+      - uses: actions/upload-artifact@v4
+        name: Postbuild nodes lib
+        with:
+          name: Postbuild lib rpt
+          path: |
+            ${{github.workspace}}/RBuilder/VM/profiles/*.rpt
+        
       - name: Compile graphs
         if: steps.renode_test_exe.outcome=='success'
         working-directory: ${{ env.renode_dir }}
