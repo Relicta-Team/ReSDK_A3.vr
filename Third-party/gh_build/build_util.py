@@ -138,8 +138,10 @@ def checkPip(reqTxt):
 
 	if reqPipLibs:
 		print(f"Installing dependencies from {reqTxt}")
-
-		for dat in re.findall('^.$'):
+		content = []
+		with open(reqTxt,'r') as fhandle:
+			content = fhandle.readlines()
+		for dat in content:
 			print(f"\tLIB: {dat}")
 
 		installRes = os.system("pip install -r {}".format(reqTxt)) 
