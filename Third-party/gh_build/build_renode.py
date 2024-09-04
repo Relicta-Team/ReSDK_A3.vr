@@ -60,7 +60,7 @@ if fileExists(dest_exe): fileRemove(dest_exe)
 dirCopy(pathJoin(src,"data"),dest_data)
 fileCopy(compiledPath,dest_exe)
 
-writeToGithubOutput("RENODE_FULL_VERSION",vobj.file_verion)
+writeToGithubOutput("RENODE_FULL_VERSION",vobj.product_version)
 
 print("Build ReNode done!")
 

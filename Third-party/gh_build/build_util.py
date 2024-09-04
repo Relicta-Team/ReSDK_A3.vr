@@ -357,6 +357,8 @@ class CompilerCLI:
 		self.additionalHooksDir = None
 		self.paths = []
 		self.mainScriptPath = None
+		
+		#self.uacAccess = False
 
 		self.executableType = execT
 
@@ -371,6 +373,12 @@ class CompilerCLI:
 		elif self.executableType == ExecutableType.Windowed:
 			cli.append("--windowed")
 	
+		#cli.append("--disable-windowed-traceback")
+
+		# if self.uacAccess:
+		# 	cli.append("--uac-uiaccess")
+		#cli.append('--uac-admin')
+
 		if self.iconPath:
 			cli.append(f"--icon \"{self.iconPath}\"")
 		if self.appName:
@@ -381,7 +389,7 @@ class CompilerCLI:
 		if self.additionalHooksDir:
 			cli.append(f"--additional-hooks-dir \"{self.additionalHooksDir}\"")
 		if self.paths:
-			cli.append(f"--paths \"{";".join(self.paths)}\"")
+			cli.append(f"--paths \"{';'.join(self.paths)}\"")
 		if self.mainScriptPath:
 			cli.append(f"\"{self.mainScriptPath}\"")
 		return ' '.join(cli)

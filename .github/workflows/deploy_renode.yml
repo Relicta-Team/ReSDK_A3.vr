@@ -10,9 +10,10 @@ on:
 env:
   renode_builder_path: Third-party/gh_build/build_renode.py
   renode_artifacts_sources_path: ReNode/
-  renode_compiled_executable: ReNode/ReNode.exe
+  renode_dir: ReNode/
+  renode_compiled_executable: ReNode.exe
   renode_compile_graphs_cli: -prep_code -nosplash -noapp -noerrwin
-  DEPLOY_TOKEN: ${{secrets.TOKEN}}
+  DEPLOY_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
 
@@ -42,14 +43,21 @@ jobs:
         id: renode_test_exe
         run: |
           echo "TODO implement test executable"
+      - name: Init RBuilder
+        if: steps.renode_test_exe.outcome=='success'
+        working-directory: RBuilder
+        run: |
+          rb.exe -init build -l
       - name: Build nodes library
         if: steps.renode_test_exe.outcome=='success'
+        working-directory: RBuilder
         run: |
-          echo "TODO implement build nodes library"
-      - name: Build graphs
+          rb.exe run -d DEBUG -d GENERATE_RENODE_BINDINGS
+      - name: Compile graphs
         if: steps.renode_test_exe.outcome=='success'
+        working-directory: ${{ env.renode_dir }}
         run: |
-          python ${{ env.renode_compiled_executable }} ${{ env.renode_compile_graphs_cli }}
+          ${{ env.renode_compiled_executable }} ${{ env.renode_compile_graphs_cli }}
       # ----------------------- upload/commit compiled -----------------------
       - uses: actions/upload-artifact@v4
         name: Upload ReNode artifacts
@@ -64,5 +72,5 @@ jobs:
           file-path: |
             ReNode/**
           commit-msg: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
-          github-token: ${{secrets.TOKEN}}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 

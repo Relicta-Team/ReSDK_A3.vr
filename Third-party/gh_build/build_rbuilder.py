@@ -31,6 +31,7 @@ vinf.file_verion = f'{vinf.file_verion} ({_dt.strftime("%H:%M:%S %d.%m.%Y")})'
 vinf.original_filename = "rbuilder.exe"
 
 cli = CompilerCLI(ExecutableType.Console)
+#cli.uacAccess = True
 cli.iconPath = iconPath
 cli.appName = "rb.exe"
 
@@ -79,6 +80,9 @@ if fileExists(dest): dirRemove(dest)
 
 try:
 	for pathInfo in files:
+
+		print("Copy source: " + pathInfo)
+
 		srcPath = pathJoin(src,pathInfo)
 		destPath = pathJoin(dest,pathInfo)
 		if os.path.isfile(srcPath):
@@ -99,4 +103,4 @@ except Exception as e:
 
 # fileCopy(compiledPath,dest_exe)
 
-writeToGithubOutput("RBUILDER_FULL_VERSION",vinf.file_verion)
+writeToGithubOutput("RBUILDER_FULL_VERSION",vinf.product_version)
