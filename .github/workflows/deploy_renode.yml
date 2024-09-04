@@ -24,14 +24,16 @@ jobs:
     if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     steps:
       - name: Install Visual C++ Redistributable 2013
+        shell: pwsh
         run: |
-          curl -L -o vcredist_x64_2013.exe https://aka.ms/vs/17/release/vc_redist.x64.exe
-          start /wait vcredist_x64_2013.exe /install /quiet /norestart
+          Invoke-WebRequest -Uri https://aka.ms/vs/17/release/vc_redist.x64.exe -OutFile vcredist_x64_2013.exe
+          Start-Process vcredist_x64_2013.exe -ArgumentList '/install', '/quiet', '/norestart' -Wait
 
       - name: Install Visual C++ Redistributable 2015
+        shell: pwsh
         run: |
-          curl -L -o vcredist_x64_2015.exe https://aka.ms/vs/17/release/vc_redist.x64.exe
-          start /wait vcredist_x64_2015.exe /install /quiet /norestart          
+          Invoke-WebRequest -Uri https://aka.ms/vs/17/release/vc_redist.x64.exe -OutFile vcredist_x64_2015.exe
+          Start-Process vcredist_x64_2015.exe -ArgumentList '/install', '/quiet', '/norestart' -Wait      
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
