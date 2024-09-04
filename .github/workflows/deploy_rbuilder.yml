@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  rb_dir: RBuilder/
+  rb_dir: ${{github.workspace}}/RBuilder/
   rb_exe: RBuilder/rb.exe
   rb_args_init: -init build -l
   rb_args_test: -testapp
@@ -33,15 +33,19 @@ jobs:
           python build_rbuilder.py --repo=Relicta-Team/RBuilder --env_token_var=DEPLOY_TOKEN
       # ----------------------- tests and build dependencies -----------------------
       - name: Init RBuilder
+        working-directory: ${{env.rb_dir}}
         run: ${{env.rb_exe}}  ${{env.rb_args_init}}
 
       - name: Test compiled exe
         id: rb_test_exe
+        working-directory: ${{env.rb_dir}}
         run: ${{ env.rb_exe }} ${{ env.rb_args_test }}
 
       - name: Run empty vm
+        working-directory: ${{env.rb_dir}}
         run: ${{ env.rb_exe }} ${{ env.rb_args_run_empty }}
       - name: Run unit tests
+        working-directory: ${{env.rb_dir}}
         run: ${{ env.rb_exe }} ${{ env.rb_args_run_tests }}
         
 

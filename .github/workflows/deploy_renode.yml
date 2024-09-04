@@ -42,12 +42,12 @@ jobs:
           echo "TODO implement test executable"
       - name: Init RBuilder
         if: steps.renode_test_exe.outcome=='success'
-        working-directory: RBuilder
+        working-directory: ${{github.workspace}}/RBuilder
         run: |
           rb.exe -init build -l
       - name: Build nodes library
         if: steps.renode_test_exe.outcome=='success'
-        working-directory: RBuilder
+        working-directory: ${{github.workspace}}/RBuilder
         run: |
           rb.exe run -d DEBUG -d GENERATE_RENODE_BINDINGS
       - name: Compile graphs
