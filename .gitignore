@@ -32,3 +32,12 @@ Third-party/ReNodeDeploy/TEMP/**
 Third-party/ReNodeDeploy/RENODE_VER_GEN.txt
 Third-party/gh_build/__pycache__/**
 Third-party/gh_build/TEMP/**
+RBuilder/VM/src
+RBuilder/VM/preload/**
+RBuilder/VM/preload/**
+RBuilder/VM/@server/Addons/**
+RBuilder/VM/mpmissions/loader.vr.pbo
+RBuilder/mdl_loader/CfgVehicles.hpp
+RBuilder/VM/@server/db/GameMain.db
+RBuilder/VM/@server/ReEngineLogs/log.txt
+RBuilder/VM/profile/**
