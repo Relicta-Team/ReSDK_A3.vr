@@ -23,16 +23,12 @@ jobs:
     runs-on: windows-latest
     if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     steps:
-      - name: Install Chocolatey
-        run: |
-          Set-ExecutionPolicy Bypass -Scope Process -Force; `
-          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
-          iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
       - name: Install vcredist 2013 and 2015
         run: |
+          choco install vcredist2010 -y
           choco install vcredist2013 -y
           choco install vcredist2015 -y
+          choco install vcredist140 -y
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
