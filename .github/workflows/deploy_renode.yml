@@ -50,7 +50,7 @@ jobs:
         if: steps.renode_test_exe.outcome=='success'
         working-directory: ${{github.workspace}}/RBuilder
         run: |
-          ${{env.rb_exe}} run -d DEBUG -d GENERATE_RENODE_BINDINGS
+          ${{env.rb_exe}} run -d DEBUG -d GENERATE_RENODE_BINDINGS -rpt true
       - name: Compile graphs
         if: steps.renode_test_exe.outcome=='success'
         working-directory: ${{ env.renode_dir }}
