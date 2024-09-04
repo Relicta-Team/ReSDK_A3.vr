@@ -130,11 +130,18 @@ def checkPip(reqTxt):
 		# test common pip modules
 		import iniparser2
 		import requests
+		import setuptools
 	except:
 		reqPipLibs = True
+	
+	print("Reuired pip loading: " + str(reqPipLibs))
 
 	if reqPipLibs:
 		print(f"Installing dependencies from {reqTxt}")
+
+		for dat in re.findall('^.$'):
+			print(f"\tLIB: {dat}")
+
 		installRes = os.system("pip install -r {}".format(reqTxt)) 
 		printDebug("PIP install result: " + str(installRes))
 		if installRes != 0:
