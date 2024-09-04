@@ -24,15 +24,15 @@ jobs:
     if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     steps:
       
-      
-      - name: install msvc
-        shell: pwsh
+      - name: Common utils
         run: |
-          Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
-          $VisualRedistScript = Invoke-WebRequest https://raw.githubusercontent.com/UltimateNova1203/visual-redist/master/visual-redist.ps1 -UseBasicParsing
-          Invoke-Expression $($VisualRedistScript.Content)
-
-
+          choco install directx
+          choco install directx-sdk
+          choco install vcredist2010
+          choco install vcredist2012
+          choco install devbox-vcredist2010
+          choco install vcredist140
+      
 
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
