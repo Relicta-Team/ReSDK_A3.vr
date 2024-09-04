@@ -2,6 +2,9 @@
 name: Deploy ReNode
 
 on:
+  push: 
+    branches: 
+      - main
   workflow_dispatch:
 
 env:
@@ -20,11 +23,16 @@ jobs:
     runs-on: windows-latest
     if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     steps:
-      - name: Install winget
-        uses: Cyberboss/install-winget@v1
-      - name: Setup MSVC
-        shell: pwsh
-        run: winget install --id=Microsoft.VCRedist.2005.x86 -e  ; winget install --id=Microsoft.VCRedist.2005.x64 -e  ; winget install --id=Microsoft.VCRedist.2008.x86 -e  ; winget install --id=Microsoft.VCRedist.2008.x64 -e  ; winget install --id=Microsoft.VCRedist.2010.x86 -e  ; winget install --id=Microsoft.VCRedist.2010.x64 -e  ; winget install --id=Microsoft.VCRedist.2012.x86 -e  ; winget install --id=Microsoft.VCRedist.2012.x64 -e  ; winget install --id=Microsoft.VCRedist.2013.x86 -e  ; winget install --id=Microsoft.VCRedist.2013.x64 -e  ; winget install --id=Microsoft.VCRedist.2015+.x86 -e  ; winget install --id=Microsoft.VCRedist.2015+.x64 -e 
+      - name: Install Chocolatey
+        run: |
+          Set-ExecutionPolicy Bypass -Scope Process -Force; `
+          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
+          iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+      - name: Install vcredist 2013 and 2015
+        run: |
+          choco install vcredist2013 -y
+          choco install vcredist2015 -y
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
