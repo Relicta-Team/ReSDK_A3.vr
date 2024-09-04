@@ -68,7 +68,7 @@ jobs:
         with:
           name: Postbuild lib log
           path: |
-            RBuilder/VM/profiles/**
+            ${{github.workspace}}/RBuilder/VM/profile/**
         
       - name: Compile graphs
         if: steps.renode_test_exe.outcome=='success'
