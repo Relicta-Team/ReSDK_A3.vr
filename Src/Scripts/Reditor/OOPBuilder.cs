@@ -14,12 +14,13 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Linq;
 
 class OOPBuilder : IScript
 {
 	public void Init()
 	{
-		
+
 	}
 
 	public void Destroy()
@@ -65,22 +66,22 @@ class OOPBuilder : IScript
 		}
 		else if (args == "colorbox")
 		{
-			
+
 			var selectedColor = Color.Black;
 			if (ScriptContext.GetArgsCount() == 3)
 			{
 				//try {
-					//Console.WriteLine(ScriptContext.GetArg(0));
-					double rNormalized = float.Parse(ScriptContext.GetArg(0).Replace(".",","));
-					double gNormalized = float.Parse(ScriptContext.GetArg(1).Replace(".", ","));
-					double bNormalized = float.Parse(ScriptContext.GetArg(2).Replace(".", ","));
-					//Console.WriteLine("POST COLOR");
-					int r = (int)(rNormalized * 255.0);
-					int g = (int)(gNormalized * 255.0);
-					int b = (int)(bNormalized * 255.0);
-					//Console.WriteLine($"PRESETUP {r} {g} {b}");
-					selectedColor = Color.FromArgb(r, g, b);
-					//Console.WriteLine($"POSTSETUP {selectedColor}");
+				//Console.WriteLine(ScriptContext.GetArg(0));
+				double rNormalized = float.Parse(ScriptContext.GetArg(0).Replace(".", ","));
+				double gNormalized = float.Parse(ScriptContext.GetArg(1).Replace(".", ","));
+				double bNormalized = float.Parse(ScriptContext.GetArg(2).Replace(".", ","));
+				//Console.WriteLine("POST COLOR");
+				int r = (int)(rNormalized * 255.0);
+				int g = (int)(gNormalized * 255.0);
+				int b = (int)(bNormalized * 255.0);
+				//Console.WriteLine($"PRESETUP {r} {g} {b}");
+				selectedColor = Color.FromArgb(r, g, b);
+				//Console.WriteLine($"POSTSETUP {selectedColor}");
 				/*} catch (Exception ex)
 				{
 					Console.WriteLine(ex);
@@ -107,11 +108,14 @@ class OOPBuilder : IScript
 								  $"{g.ToString("0.######", CultureInfo.InvariantCulture)}, " +
 								  $"{b.ToString("0.######", CultureInfo.InvariantCulture)}]";
 				output.Append(colorText);
-			} else {
+			}
+			else
+			{
 				output.Append("$CLOSED$");
 			}
-			
-		} else if (args == "textbox")
+
+		}
+		else if (args == "textbox")
 		{
 			string _maxlntbxS = ScriptContext.GetArg(4);
 			int maxlntbx = 8; //maxlen
@@ -119,15 +123,35 @@ class OOPBuilder : IScript
 			var mpos = Control.MousePosition;
 			if (int.TryParse(_maxlntbxS, out maxlntbx) &&
 			TextBox(
-				ScriptContext.GetArg(0), 
-				ScriptContext.GetArg(1), 
-				ScriptContext.GetArg(2)=="true", 
+				ScriptContext.GetArg(0),
+				ScriptContext.GetArg(1),
+				ScriptContext.GetArg(2) == "true",
 				ref value,
 				maxlntbx
 				) == DialogResult.OK)
 			{
-				SetCursorPos(mpos.X,mpos.Y);
+				SetCursorPos(mpos.X, mpos.Y);
 				output.Append(ScriptContext.EncodingToRV(value));
+			}
+			else
+			{
+				SetCursorPos(mpos.X, mpos.Y);
+				output.Append("$CLOSED$");
+			}
+		}
+		else if (args == "tree")
+		{
+			var mpos = Control.MousePosition;
+			string val = ScriptContext.GetArg(3);
+			if (CreateTree(
+				ScriptContext.GetArg(0),
+				ScriptContext.GetArg(1),
+				ScriptContext.GetArg(2),
+				ref val
+				) == DialogResult.OK)
+			{
+				SetCursorPos(mpos.X, mpos.Y);
+				output.Append(ScriptContext.EncodingToRV(val));
 			}
 			else
 			{
@@ -202,6 +226,138 @@ class OOPBuilder : IScript
 			}
 		}
 	}
+
+	// Главный метод для парсинга строки и добавления узлов в TreeView
+	public static void ParseToTreeView(TreeView treeView, string input)
+	{
+		treeView.Nodes.Clear();
+		// Парсим строку в словарь
+		var nodesDictionary = ParseInput(input);
+
+		// Определяем корневые узлы (те, которые не являются детьми)
+		var rootNodes = BuildTree(nodesDictionary);
+
+		// Добавляем узлы в TreeView
+		treeView.Nodes.AddRange(rootNodes.ToArray());
+	}
+
+	// Метод для парсинга строки формата "ребенок:родитель;"
+	private static Dictionary<string, TreeNode> ParseInput(string input)
+	{
+		var nodesDictionary = new Dictionary<string, TreeNode>();
+		var parentChildMap = new Dictionary<string, string>();
+
+		// Разбиваем входную строку на пары "ребенок:родитель"
+		var pairs = input.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+		foreach (var pair in pairs)
+		{
+			var nodes = pair.Split(':');
+			if (nodes.Length == 2)
+			{
+				var child = nodes[0].Trim();
+				var parent = nodes[1].Trim();
+
+				// Создаем узел только для lvalue (ребенок)
+				if (!nodesDictionary.ContainsKey(child))
+				{
+					nodesDictionary[child] = new TreeNode(child);
+				}
+
+				// Сохраняем информацию о родительском отношении
+				parentChildMap[child] = parent;
+			}
+		}
+
+		// Устанавливаем родительские связи
+		foreach (var kvp in parentChildMap)
+		{
+			var child = kvp.Key;
+			var parent = kvp.Value;
+
+			if (nodesDictionary.ContainsKey(parent))
+			{
+				nodesDictionary[parent].Nodes.Add(nodesDictionary[child]);
+			}
+		}
+
+		return nodesDictionary;
+	}
+
+	// Метод для построения списка корневых узлов
+	private static List<TreeNode> BuildTree(Dictionary<string, TreeNode> nodesDictionary)
+	{
+		var rootNodes = new List<TreeNode>();
+
+		// Выбираем корневые узлы (те, которые не имеют родителей)
+		foreach (var node in nodesDictionary.Values)
+		{
+			if (node.Parent == null)
+			{
+				rootNodes.Add(node);
+			}
+		}
+
+		return rootNodes;
+	}
+
+
+	public static DialogResult CreateTree(string title,string promptText,string treeData,ref string value)
+    {
+		Form form = new Form();
+		Label label = new Label();
+		TreeView textBox = new TreeView();
+		Button buttonOk = new Button();
+		Button buttonCancel = new Button();
+
+		form.Text = title;
+		label.Text = promptText;
+
+		buttonOk.Text = "ОК";
+		buttonCancel.Text = "Отмена";
+		buttonOk.DialogResult = DialogResult.OK;
+		buttonCancel.DialogResult = DialogResult.Cancel;
+
+		label.SetBounds(9, 20, 372, 13);
+		textBox.SetBounds(12, 36, 670, 500); // Изменил размеры на 670x500
+		buttonOk.SetBounds(516, 546, 75, 23); // Изменил координаты кнопок
+		buttonCancel.SetBounds(597, 546, 75, 23); // Изменил координаты кнопок
+
+		label.AutoSize = true;
+		textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+		buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+		buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+		/*
+		 TreeData struct:
+			object:
+			
+		 */
+		//fill tree
+
+		// TreeNode parentNode = new TreeNode();
+		// parentNode.Text = "Parent Node";
+		// textBox.Nodes.Add(parentNode);
+
+		ParseToTreeView(textBox, treeData);
+		//var root = ParseInputToTreeNodes(treeData);
+		//textBox.Nodes.AddRange(root.ToArray());
+
+
+		// Обработка нажатия клавиш в поле ввод
+
+		form.ClientSize = new Size(700, 600); // Устанавливаем размер окна
+		form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+		form.FormBorderStyle = FormBorderStyle.FixedDialog;
+		form.StartPosition = FormStartPosition.CenterScreen;
+		form.MinimizeBox = false;
+		form.MaximizeBox = false;
+		form.CancelButton = buttonCancel;
+
+		DialogResult dialogResult = form.ShowDialog();
+		value = textBox.SelectedNode.Text;
+		return dialogResult;
+    }
 
 	public static DialogResult InputBox(string title, string promptText, ref string value)
 	{

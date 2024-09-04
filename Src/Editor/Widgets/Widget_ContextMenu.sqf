@@ -263,6 +263,7 @@ function(ContextMenu_loadMouseObject)
 	["Context selected object %1",_obj] call printTrace;
 	private _ctxParams = [_obj];
 
+
 	private _commonSimStart = {
 		_stackMenu pushBack ["Запустить симуляцию отсюда",[
 			["Запуск",{
@@ -406,6 +407,39 @@ function(ContextMenu_loadMouseObject)
 		]
 	};
 	
+	//context menu for debug mob
+	if ([_obj] call ContextMenu_isDebugMob) exitWith {
+		call _commonCheckDistance;
+
+		_stackMenu pushBack [
+			"Манекен стоит",
+			{
+				_obj = (call contextMenu_getContextParams) select 0;
+				_obj set3DENAttribute ["unitPos",0];
+			}
+		];
+		_stackMenu pushBack [
+			"Манекен сидит",
+			{
+				_obj = (call contextMenu_getContextParams) select 0;
+				_obj set3DENAttribute ["unitPos",1];
+			}
+		];
+		_stackMenu pushBack [
+			"Манекен лежит",
+			{
+				_obj = (call contextMenu_getContextParams) select 0;
+				_obj set3DENAttribute ["unitPos",2];
+			}
+		];
+
+		[
+			_stackMenu,
+			call mouseGetPosition,
+			_ctxParams
+		] call contextMenu_create;
+	};
+
 	if (!_hasObject) exitwith {};
 	
 	if !(_obj call golib_hasHashData) exitWith {};
@@ -550,12 +584,30 @@ function(ContextMenu_loadMouseObject)
 		};
 	}];
 
+	_stackMenu pushBack ["Создать манекен",{
+		_screenToWorldPos = screenToWorld ContextMenu_internal_openedMousePosNative;
+		([_screenToWorldPos] call golib_om_getRayCastData) params ["_obj","_atlPos"];
+		if equals(_atlPos,vec3(0,0,0)) then {
+			_atlPos = _screenToWorldPos;
+		};
+
+		_obj = create3DENEntity ["Object",BASIC_MOB_TYPE,_atlPos];
+		_obj set3DENAttribute ["Name","debug_mob_gen_" + ((toArray hashValue _obj)joinString "_")];
+		[_obj,_atlPos,false,golib_history_skippedHistoryStageFlag + " - fixpos"] call golib_om_setPosition;
+	}];
+
 
 	[
 		_stackMenu,
 		call mouseGetPosition,
 		_ctxParams
 	] call contextMenu_create;
+}
+
+function(ContextMenu_isDebugMob)
+{
+	params ["_mob"];
+	[_mob get3DENAttribute "Name" select 0, "debug_mob"] call stringStartWith
 }
 
 init_function(ContextMenu_mouseArea_init)

@@ -43,6 +43,35 @@ NGOExt_create = {
 	_bnd
 };
 
+NGOExt_createSoftlink = {
+	params ["_srcWorldObj","_target"];
+	private _ref = _srcWorldObj getvariable "ref";
+	if isNullVar(_ref) exitWith {false};
+	_target setvariable ["ref",_ref];
+	_target setvariable ["ngo_src",_srcWorldObj];
+	_target setvariable ["__ngoext_itt",true];
+	true
+};
+
+//create virtual object
+NGOExt_createDummyObject = {
+	params ["_src","_objType",["_imode",true],["_simple",true]];
+	private _ptr = [_src] call noe_client_getObjPtr;
+	if isNullVar(_objType) then {
+		_objType = ([_ptr,true] call noe_client_getOrignalObjectData) get "model";
+	};
+	private _obj = if (_simple) then {
+		createSimpleObject [_objType,[0,0,0],true];
+	} else {
+		_objType createVehicleLocal [0,0,0];
+	};
+	_obj setVariable ["__ngoext_itt",_imode];
+	_obj disableCollisionWith player;
+	_obj setVariable ["ngo_src",_src];
+	_obj setVariable ["ref",_ptr];
+	_obj
+};
+
 noe_client_ngo_check = {
 	params ["_obj","_model"];
 	

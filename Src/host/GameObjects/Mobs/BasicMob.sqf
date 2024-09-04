@@ -1696,6 +1696,16 @@ region(Face and voice helpers)
 
 		callSelfParams(syncSmdVar,"faceAnim" arg _anim);
 	};
+
+	func(syncMobFaceAnim)
+	{
+		objParams();
+		if callSelf(isActive) then {
+			callSelfParams(setMobFaceAnim,DEFAULT_MIMIC);
+		} else {
+			callSelfParams(setMobFaceAnim,UNC_MIMIC);
+		};
+	};
 	
 	var(voiceType,"human");
 	var(__originVoiceType,null); //системное для updateVoiceType

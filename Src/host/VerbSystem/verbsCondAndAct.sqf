@@ -140,17 +140,20 @@ ENDVERB
 
 VERB(pull)
 	cond
-		skipCond(true);//todo remove when fix
 		skipCond(!isTypeOf(usr,Mob));
 		skipCond(isTypeOf(src,BasicMob));
 		skipCond(!callFunc(src,isMovable));
+
+		//temporary object cannot be pulled more than 1 mobs
+		private _pobj = callFunc(src,getPullMainOwner);
+		skipCond(!(_pobj in vec2(usr,nullPtr)));
 	act
 		callFuncParams(usr,startGrab,src);
 ENDVERB
 
 VERB(pulltransform)
 	cond
-		skipCond(true);//todo remove when fix
+		skipCond(not_equals(usr,callFunc(src,getPullMainOwner)));
 	act
 		callFuncParams(src,openPullSettings,usr);
 ENDVERB

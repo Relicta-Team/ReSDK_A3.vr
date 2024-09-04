@@ -87,3 +87,19 @@ model_getPitchBankYaw = {
 	params ["_vehicle"];
 	(_vehicle call BIS_fnc_getPitchBank) + [getDir _vehicle]
 };
+
+//проверяет является ли направление безопасным
+model_isSafedirTransform = {
+	params ["_vdu_dir"];
+	if equalTypes(_vdu_dir,0) then {
+		true
+	} else {
+		//conv to vec-coords
+		if (count _vdu_dir == 3) then {
+			_vdu_dir = _vdu_dir call model_convertPithBankYawToVec;
+		};
+		_vdu_dir params ["_vdr","_vup"];
+		equals(_vup apply {((abs _x) toFixed 1)},vec3("0.0","0.0","1.0"))
+	};
+	
+};

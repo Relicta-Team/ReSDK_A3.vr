@@ -112,6 +112,8 @@ noe_client_updateObject = {
 	#endif
 
 	_obj setVariable ["origData",(_this select chunk_objectData_transform)];
+
+	if (_ref in noe_client_set_lockedPropUpdates) exitWith {};
 	
 	if (count _pos == 4) then {
 		_obj setPosWorld (_pos select [0,3]);

@@ -8,22 +8,22 @@ class EditorData
 	toggles=106;
 	class ItemIDProvider
 	{
-		nextID=10547;
+		nextID=10564;
 	};
 	class LayerIndexProvider
 	{
-		nextID=1747;
+		nextID=1826;
 	};
 	class Camera
 	{
-		pos[]={4155.7314,57.265995,3952.5408};
-		dir[]={0.64688796,-0.5520224,-0.52635211};
-		up[]={0.42824557,0.83376372,-0.34845224};
-		aside[]={-0.63120991,1.6340055e-006,-0.77574921};
+		pos[]={4198.0347,49.663876,3951.4553};
+		dir[]={-0.49696952,-0.79196215,0.35504165};
+		up[]={-0.64441395,0.61052573,0.46038178};
+		aside[]={0.58137608,3.3279648e-006,0.81377059};
 	};
 };
 binarizationWanted=0;
-sourceName="ReSDK_A3";
+sourceName="resdk_fork";
 addons[]=
 {
 	"A3_Characters_F",
@@ -122,7 +122,8 @@ addons[]=
 	"A3_Structures_F_Argo_Industrial_Agriculture",
 	"A3_Structures_F_Enoch_Ruins",
 	"A3_Structures_F_Civ_Lamps",
-	"A3_Structures_F_Bootcamp_VR_Helpers"
+	"A3_Structures_F_Bootcamp_VR_Helpers",
+	"A3_Structures_F_EPB_Items_Military"
 };
 class AddonsMetaData
 {
@@ -607,7 +608,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=29;
+		items=44;
 		class Item0
 		{
 			dataType="Group";
@@ -41725,7 +41726,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4158.0464,55.858372,3952.2874};
-				angles[]={0,4.7123895,-0};
+				angles[]={0,4.7123895,0};
 			};
 			side="Empty";
 			flags=5;
@@ -41735,6 +41736,270 @@ class Mission
 			};
 			id=10546;
 			type="shkafsin";
+		};
+		class Item29
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.2754,48.830788,3951.6924};
+				angles[]={0.0010918301,0,0.020681832};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""AmmoBoxPBMBlank""]]}";
+			};
+			id=10548;
+			type="S_Ammo_Box_Pistol";
+			atlOffset=0.0037231445;
+		};
+		class Item30
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.5435,48.832104,3951.6348};
+				angles[]={0.020681843,1.5707737,6.282094};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""AmmoBoxPistolHandmadeBlank""]]}";
+			};
+			id=10549;
+			type="S_Ammo_Box_Pistol";
+			atlOffset=0.79111862;
+		};
+		class Item31
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.54,48.82534,3951.0576};
+				angles[]={0.019808082,1.221779,0.0060476442};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""AmmoBoxRevolverBlank""]]}";
+			};
+			id=10550;
+			type="S_Ammo_Box_Revolver";
+			atlOffset=0.78441238;
+		};
+		class Item32
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.5474,48.83392,3951.8113};
+				angles[]={0.020508047,1.6580218,6.2802958};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""AmmoBoxRifleBlank""]]}";
+			};
+			id=10551;
+			type="S_Ammo_Box_Rifle";
+			atlOffset=0.0013580322;
+		};
+		class Item33
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.605,48.834286,3951.3391};
+				angles[]={0.0010918301,0,0.020681832};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""AmmoBoxShotgunBlank""]]}";
+			};
+			id=10552;
+			type="S_Ammo_Box_Shotgun";
+			atlOffset=1.9073486e-005;
+		};
+		class Item34
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.2603,48.834415,3951.1003};
+				angles[]={0.02017821,1.7452707,6.2785192};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""AmmoBoxShotgunMiniBlank""]]}";
+			};
+			id=10553;
+			type="S_Ammo_Box_Shotgun";
+			atlOffset=0.007019043;
+		};
+		class Item35
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.5684,48.909416,3951.8074};
+				angles[]={0.0010918301,0,0.020681832};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazineAuto""]]}";
+			};
+			id=10554;
+			type="S_RifleAuto_Magazine";
+			atlOffset=0.12382889;
+		};
+		class Item36
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.6455,48.789516,3951.9675};
+				angles[]={0.0010918301,0,0.020681832};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazineBastard""]]}";
+			};
+			id=10555;
+			type="S_Bastard_Magazine";
+			atlOffset=1.1444092e-005;
+		};
+		class Item37
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.5132,48.779701,3952.0042};
+				angles[]={0.0097309984,0.43640998,0.018282458};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazineFinisher""]]}";
+			};
+			id=10556;
+			type="Land_Magazine_rifle_F";
+			atlOffset=0.0023574829;
+		};
+		class Item38
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.2798,48.900707,3951.6348};
+				angles[]={0.017568428,0.96001613,0.010967802};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazinePBM""]]}";
+			};
+			id=10557;
+			type="S_Pistol_Magazine";
+			atlOffset=0.12732697;
+		};
+		class Item39
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.2891,48.900776,3951.7502};
+				angles[]={6.2754335,5.8467674,0.019205278};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazinePBM""]]}";
+			};
+			id=10558;
+			type="S_Pistol_Magazine";
+			atlOffset=0.12733078;
+		};
+		class Item40
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.5464,48.901989,3951.6279};
+				angles[]={0.0010918301,0,0.020681832};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazinePistolHandmade""]]}";
+			};
+			id=10559;
+			type="S_Pistol_Magazine";
+			atlOffset=0.12308884;
+		};
+		class Item41
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.625,48.782944,3952.0872};
+				angles[]={0.020508047,1.6580218,6.2802958};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazineSVT""]]}";
+			};
+			id=10561;
+			type="S_Svt_Magazine";
+			atlOffset=3.8146973e-005;
+		};
+		class Item42
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.2588,48.827183,3951.9517};
+				angles[]={0.020508047,1.6580218,6.2802958};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""AmmoBoxRifleBlank""]]}";
+			};
+			id=10562;
+			type="S_Ammo_Box_Rifle";
+			atlOffset=0.00074005127;
+		};
+		class Item43
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4197.6367,48.833996,3952.3003};
+				angles[]={0.0042993436,2.8797381,6.2629261};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""AmmoBoxRifleBlank""]]}";
+			};
+			id=10563;
+			type="S_Ammo_Box_Rifle";
+			atlOffset=0.00011444092;
 		};
 	};
 };

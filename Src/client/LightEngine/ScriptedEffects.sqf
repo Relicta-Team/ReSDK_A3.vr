@@ -341,7 +341,7 @@ le_se_intenral_handleDropVarInit = {
 };
 
 le_se_fireEmit = {
-	params ["_cfg","_pos",["_norm",[0,0,1]],"_reservedParam"];
+	params ["_cfg","_pos",["_norm",[0,0,1]],"_deleteAfter","_refemitters","_reservedParam"];
 	
 	if not_equalTypes(_cfg,"") then {_cfg = str _cfg};
 
@@ -370,6 +370,12 @@ le_se_fireEmit = {
 	allEmitters pushBack _et;
 	
 	private _rp = rand(0.05,0.2);
+	if !isNullVar(_deleteAfter) then {
+		_rp = _deleteAfter;
+	};
+	if !isNullVar(_refemitters) then {
+		refset(_refemitters,allEmitters);
+	};
 	invokeAfterDelayParams({{deleteVehicle _x}foreach _this},_rp,allEmitters);
 
 	true

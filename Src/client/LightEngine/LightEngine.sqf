@@ -365,6 +365,77 @@ _dofe = {
 };
 rpcAdd("do_fe",_dofe);
 
+_dofe_mob = {
+	params ["_owner","_type",["_sel","spine3"],"_deleteAfter"];
+	private _refem = refcreate([]);
+	[
+		_type,
+		_owner modelToWorldVisual (_owner selectionPosition _sel),
+		null,
+		_deleteAfter,
+		_refem
+	] call le_se_fireEmit;
+	
+	refunpack(_refem);
+	private _params = [_refem,_owner,_sel];
+
+	startAsyncInvoke
+		{
+			params ["_emitters","_owner","_sel"];
+			if isNullReference(_owner) exitWith {true};
+			_realpos = _owner modelToWorldVisual (_owner selectionPosition _sel);
+			_dostop = false;
+			{
+				if isNullReference(_x) exitWith {_dostop = true};
+				_x setposatl _realpos;
+			} foreach _emitters;
+			_dostop
+		},
+		{},//do notning on end
+		_params
+	endAsyncInvoke
+};
+rpcAdd("do_fe_mob",_dofe_mob);
+
+/*
+Memory head_axis (dist: 0.127475)
+Memory pilot (dist: 0.151308)
+Memory head (dist: 0)
+Memory neck (dist: 0.127475)
+Memory rightshoulder (dist: 0.18672)
+Memory bubbleseffect (dist: 0)
+FireGeometry head (dist: 0.144867)
+HitPoints rightarm (dist: 0.187544)
+HitPoints spine3 (dist: 0.178059)
+HitPoints head (dist: 0.160828)
+HitPoints neck (dist: 0.120611)
+HitPoints body (dist: 0.178059)
+HitPoints head_hit (dist: 0.120611)
+HitPoints hand_r (dist: 0.187544)
+HitPoints arms (dist: 0.187544)
+
+*/
+// positions = {
+
+// 	_orig = player selectionPosition "head";
+// 	private _car = player; 
+// 	private _return = []; 
+// 	{ 
+// 		_sels = _car selectionNames _x;
+// 		_lod = _x;
+// 		{
+// 			_dist = _orig distance (_car selectionPosition [_x,_lod]);
+// 			if (_dist > 0.05) then {continue};
+// 			_return pushBack (format[
+// 				"%1 %2 (dist: %3)",
+// 				_lod,_x,_dist
+// 			])
+// 		} foreach _sels;
+// 	} forEach [
+// 		"Memory", "Geometry", "FireGeometry", "LandContact", "HitPoints"
+// 	]; 
+// 	copyToClipboard (_return joinString endl);
+// }
 
 //OBSOLETE
 

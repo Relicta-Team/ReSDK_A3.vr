@@ -14,7 +14,9 @@ function(inspector_init)
 		//Нельзя также выбирать системный объект golib_com_object
 		if (!cfg_debug_devMode && {
 			_list findif {
-				(_x isKindOf "Man" && (!cfg_debug_allowSelectUnits)) || 
+				_ismob = [_x get3DENAttribute "name" select 0, "debug_mob"] call stringStartWith;
+				//{(_x get3DENAttribute "ControlMP" select 0)}
+				((_x isKindOf "Man") && {(!cfg_debug_allowSelectUnits)} && {!_ismob}) || 
 				(equals(golib_com_object,_x) && !cfg_debug_allowSelectSystemObject)
 			} != -1}
 		) exitwith {
@@ -748,7 +750,8 @@ function(inspector_menuLoad)
 		_x select _idx;
 	};
 	_type = _obj getVariable "className";
-	50 call _createCTGExt;
+	_propsSizeMid = 50;
+	_propsSizeMid call _createCTGExt;
 	
 	{
 		_memberName = _x;
@@ -825,10 +828,154 @@ function(inspector_menuLoad)
 		
 	} foreach (_obj getVariable "_redit_attribFields");
 	
+	//adjust max size
+	//TODO auto adjust size for object propertys
+	//(_controlGroup call widgetGetPosition) params ["_pX","_pY","_pW","_pH"];
+	// private _newHLastGroup = _internalY;//_propsSizeMid min (_internalY);
+	// //_internalY = _newHLastGroup;
+	// [_controlGroup,[_pX,_pY,_pW,_newHLastGroup],5] call widgetSetPosition;
+	// [_backgroundPrev,WIDGET_FULLSIZE] call widgetSetPosition;
 	
 	30 call _createCTGExt;
+
+	//===============================new scripting tab===============================
+	[TEXT,[100,_optimalSizeH]] call _createElement; //name
+	[_wid,"<t align='left'>Скрипт объекта</t>"] call widgetSetText;
+
+	//edit scriptname
+	["RscEditReadOnly",[65,_optimalSizeH],5,false] call _createElement;
+	_input = _wid;
+	{
+		_scr = _data getOrDefault ["__scriptName",""];
+		_wid ctrlsettext _scr;
+	} call _setSyncValCode;
+
+	[BUTTON,[24,_optimalSizeH],72,true] call _createElement;
+	_wid setvariable ["_input",_input];
+	_wid ctrlSetText "Изменить";
+	_wid ctrlSetTooltip "ЛКМ - для открытия окна выбора класса\nПКМ - сброс";
+	{
+		_inputSync = {
+			_wid = _wid getVariable "_input";
+			call (_wid getVariable "_onSync");
+		};	
+		if (_key == MOUSE_RIGHT) exitwith {
+			if ("__scriptName" in _data) then {
+				_data deleteAt "__scriptName";
+				[_objWorld,_data,true] call golib_setHashData;
+				call _inputSync;
+			};
+		};
+		
+		private _newval = refcreate(0);
+		if ([
+			_newval,
+			"Выберите скрипт",
+			"Выберите скрипт, который будет назначен этому объекту",
+			["ScriptedGameObject",{_this != "ScriptedGameObject"}] call widget_winapi_getTreeObject
+		] call widget_winapi_openTreeView) then {
+			_data set ["__scriptName",refget(_newval)];
+			[_objWorld,_data,true] call golib_setHashData;
+			
+			call _inputSync;
+		};
+
+	} call _setOnPressCode;
+
+	//script params
+	[TEXT,[100,_optimalSizeH],0,true] call _createElement;
+	[_wid,format["<t align='left'>Параметры:</t>"]] call widgetSetText;
+	
+	_iTxt = 8;
+	_pnameTxt = 25;
+	_pvalTxt = 55;
+	_pdelTxt = 12;
+
+	_hd = _data get "__scriptParams";
+	{
+		[TEXT,[_iTxt,_optimalSizeH],0,false] call _createElement;
+		[_wid,format["<t align='left'>#%1</t>",_foreachIndex+1]] call widgetSetText;
+		
+		// ? Param key
+		[INPUT,[_pnameTxt,_optimalSizeH],_iTxt,false] call _createElement;
+		_wid setvariable ["_index",_foreachIndex];
+		{
+			_spars = _data getOrDefault ["__scriptParams",[]];
+			_index = _wid getvariable "_index";
+			_txtData = "";
+			_txtData = _spars select _index select 0;
+			_wid ctrlSetText _txtData;
+		} call _setSyncValCode;
+		{
+			_spars = _data getOrDefault ["__scriptParams",[]];
+			_index = _wid getvariable "_index";
+			_kvpair = _spars select _index;
+			private _key = _kvpair select 0;
+			if not_equals(_key,ctrlText _wid) then {
+				_kvpair set [0,ctrlText _wid];
+				[_objWorld,_data,true,format["Изменение параметра '%1'",_key]] call golib_setHashData;
+			};
+		} call _setOnKillFocusCode;
+
+		// ? Param value
+		[INPUT,[_pvalTxt-2,_optimalSizeH],_iTxt+_pnameTxt+2,false] call _createElement;
+		_wid setvariable ["_index",_foreachIndex];
+		{
+			_spars = _data getOrDefault ["__scriptParams",[]];
+			_index = _wid getvariable "_index";
+			_txtData = "";
+			_txtData = _spars select _index select 1;
+			_wid ctrlSetText _txtData;
+		} call _setSyncValCode;
+		{
+			_spars = _data getOrDefault ["__scriptParams",[]];
+			_index = _wid getvariable "_index";
+			_kvpair = _spars select _index;
+			private _key = _kvpair select 0;
+			_val = _kvpair select 1;
+			if not_equals(_val,ctrlText _wid) then {
+				_kvpair set [1,ctrlText _wid];
+				[_objWorld,_data,true,format["Изменение значения параметра '%1'",_key]] call golib_setHashData;
+			};
+		} call _setOnKillFocusCode;
+
+		// ? delete param
+		[BUTTON,[_pdelTxt,_optimalSizeH],(_iTxt+_pnameTxt+_pvalTxt),true] call _createElement;
+		_wid ctrlSetText "X";
+		_wid ctrlSetTooltip (format["Удаляет параметр %1",_foreachIndex+1]);
+		_wid ctrlSetBackgroundColor [1,0,0,1];
+		_wid setVariable ["_index",_foreachIndex];
+		{
+			_spars = _data getOrDefault ["__scriptParams",[]];
+			_index = _wid getvariable "_index";
+			_spars deleteAt _index;
+			if (count _spars == 0) then {
+				_data deleteAt "__scriptParams";
+			} else {
+				_data set ["__scriptParams",_spars];
+			};
+			[_objWorld,_data,true,format["Удаление параметра %1",_foreachIndex+1]] call golib_setHashData;
+		} call _setOnPressCode;
+	} foreach _hd;
+	
+
+	[BUTTON,[48*2,_optimalSizeH],2,true] call _createElement;
+	_wid ctrlSetText "Добавить параметр";
+	{
+		_spars = _data getOrDefault ["__scriptParams",[]];
+		_spars pushBack [format["Параметр %1",count _spars+1],""];
+		_data set ["__scriptParams",_spars];
+
+		[_objWorld,_data,true,format["Добавление параметра скрипта"]] call golib_setHashData;
+	} call _setOnPressCode;
+
+	//----------- LEGACY SCRIPTING ------------
+	//! this will be removed in next versions
+	[TEXT,[100,_optimalSizeH/2],null,null] call _createElement;
+	_wid setBackgroundColor [0.7,0.7,0.7,0.6];
+	
 	[TEXT,[100,_optimalSizeH]] call _createElement;
-	[_wid,"<t align='left'>Код инициализации</t>"] call widgetSetText;
+	[_wid,"<t align='left' color='#BD2211'>Код инициализации (УСТАРЕВШЕЕ)</t>"] call widgetSetText;
 	_wid ctrlSetTooltip "Данный код будет вызван сразу после создания объекта и расположения на карте";
 
 	["RscEditReadOnly",[65,_optimalSizeH],5,false] call _createElement;
@@ -863,31 +1010,4 @@ function(inspector_menuLoad)
 		};
 		[_data getOrDefault ["code_onInit",""],_objWorld] call golib_code_open;		
 	} call _setOnPressCode;
-
-	//===============================new scripting tab===============================
-	[TEXT,[100,_optimalSizeH]] call _createElement; //name
-	[_wid,"<t align='left'>Скрипт объекта</t>"] call widgetSetText;
-
-	//edit scriptname
-	["RscEditReadOnly",[65,_optimalSizeH],5,false] call _createElement;
-	_input = _wid;
-	{
-
-	} call _setSyncValCode;
-
-	[BUTTON,[24,_optimalSizeH],72,true] call _createElement;
-	_wid ctrlSetText "Изменить";
-	_wid ctrlSetTooltip "ЛКМ - для открытия окна выбора класса\nПКМ - сброс";
-
-	//script params
-	[TEXT,[50,_optimalSizeH],0,false] call _createElement;
-	[_wid,format["<t align='left'>Параметры:</t>"]] call widgetSetText;
-	[INPUT,[30,_optimalSizeH],50,true] call _createElement;
-	//todo dynamic param count
-
-	[BUTTON,[50,_optimalSizeH],0,false] call _createElement;
-	_wid ctrlSetText "Добавить параметр";
-
-	[BUTTON,[50,_optimalSizeH],50,true] call _createElement;
-	_wid ctrlSetText "Удалить параметр";
 }
