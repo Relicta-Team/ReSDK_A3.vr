@@ -90,9 +90,9 @@ jobs:
           file-path: |
             ReNode/lib.obj
             ReNode/lib_guid
-          #./ReNode/data/**
-          #./ReNode/ReNode.exe
+            ReNode/data/**
+            ReNode/ReNode.exe
           commit-msg: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.TOKEN }}
 
 
