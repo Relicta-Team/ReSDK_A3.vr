@@ -89,9 +89,10 @@ jobs:
           committer-name: ReNode update
           file-path: |
             ReNode/lib.obj
-            ReNode/lib_guid
-            ReNode/data/**
+            ReNode/lib_guid 
             ReNode/ReNode.exe
+            
+          # ReNode/data/**
           commit-msg: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
           github-token: ${{ secrets.TOKEN }}
 
