@@ -52,6 +52,14 @@ jobs:
         run: |
           python -V
           python build_renode.py --repo=Relicta-Team/ReNodes --env_token_var=DEPLOY_TOKEN
+      
+      - uses: actions/upload-artifact@v4
+        name: Postbuild nodes lib
+        with:
+          name: Postbuild lib log
+          path: |
+            ${{github.workspace}}/Third-party/gh_build/TEMP/**
+
       # ----------------------- tests and build dependencies -----------------------
       - name: Test executable
         id: renode_test_exe
@@ -67,14 +75,6 @@ jobs:
         working-directory: ${{github.workspace}}/RBuilder
         run: |
           ${{env.rb_exe}} run -d DEBUG -d GENERATE_RENODE_BINDINGS -rptshow True
-
-      - uses: actions/upload-artifact@v4
-        name: Postbuild nodes lib
-        if: failure()
-        with:
-          name: Postbuild lib log
-          path: |
-            ${{github.workspace}}/RBuilder/VM
         
       - name: Compile graphs
         if: steps.renode_test_exe.outcome=='success'
@@ -82,12 +82,14 @@ jobs:
         run: |
           ${{ env.renode_compiled_executable }} ${{ env.renode_compile_graphs_cli }}
       # ----------------------- upload/commit compiled -----------------------
+      
       - uses: actions/upload-artifact@v4
-        name: Upload ReNode artifacts
+        name: Upload ReNode compiled artifact
         with:
           name: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
           path: |
             ${{ env.renode_artifacts_sources_path }}
+      
       - name: Update ReNode application
         uses: test-room-7/action-update-file@v1
         with:
