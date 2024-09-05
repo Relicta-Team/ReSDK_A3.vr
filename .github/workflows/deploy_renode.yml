@@ -99,8 +99,9 @@ jobs:
           author_name: DeployBot
           message: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
           add: |
-            ./ReNode/data/**
             ./ReNode/ReNode.exe
             ./ReNode/lib.obj
             ./ReNode/lib_guid
+          #./ReNode/data/
+
 
