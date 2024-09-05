@@ -52,13 +52,6 @@ jobs:
         run: |
           python -V
           python build_renode.py --repo=Relicta-Team/ReNodes --env_token_var=DEPLOY_TOKEN
-      
-      - uses: actions/upload-artifact@v4
-        name: Postbuild nodes lib
-        with:
-          name: Postbuild lib log
-          path: |
-            ${{ env.renode_artifacts_sources_path }}
 
       # ----------------------- tests and build dependencies -----------------------
       - name: Test executable
@@ -95,7 +88,10 @@ jobs:
         with:
           committer-name: ReNode update
           file-path: |
-            ReNode/**
+            ./ReNode/data/**
+            ./ReNode/ReNode.exe
+            ./ReNode/lib.obj
+            ./ReNode/lib_guid
           commit-msg: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
