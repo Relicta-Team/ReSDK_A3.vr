@@ -84,14 +84,24 @@ jobs:
             ${{ env.renode_artifacts_sources_path }}
       
       - name: Update ReNode application
-        uses: test-room-7/action-update-file@v1
+        # uses: test-room-7/action-update-file@v1
+        # with:
+        #   committer-name: ReNode update
+        #   file-path: |
+        #     ./ReNode/data/**
+        #     ./ReNode/ReNode.exe
+        #     ./ReNode/lib.obj
+        #     ./ReNode/lib_guid
+        #   commit-msg: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
+        #   github-token: ${{ secrets.GITHUB_TOKEN }}
+
+        uses: EndBug/add-and-commit@v9
         with:
-          committer-name: ReNode update
-          file-path: |
+          author_name: DeployBot
+          message: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
+          add: |
             ./ReNode/data/**
             ./ReNode/ReNode.exe
             ./ReNode/lib.obj
             ./ReNode/lib_guid
-          commit-msg: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
 
