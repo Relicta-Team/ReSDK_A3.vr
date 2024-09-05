@@ -2,12 +2,14 @@
 name: Deploy ReNode
 
 on:
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 env:
   renode_builder_path: Third-party/gh_build/build_renode.py
   renode_artifacts_sources_path: ReNode/
-  renode_dir: ReNode/
+  renode_dir: ${{github.workspace}}/ReNode/
   renode_compiled_executable: ReNode.exe
   renode_compile_graphs_cli: -prep_code -nosplash -noapp -noerrwin
   rb_exe: ${{github.workspace}}/RBuilder/rb.exe
