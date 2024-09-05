@@ -88,9 +88,8 @@ jobs:
         with:
           committer-name: ReNode update
           file-path: |
-            
-            ./ReNode/lib.obj
-            ./ReNode/lib_guid
+            ReNode/lib.obj
+            ReNode/lib_guid
           #./ReNode/data/**
           #./ReNode/ReNode.exe
           commit-msg: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
