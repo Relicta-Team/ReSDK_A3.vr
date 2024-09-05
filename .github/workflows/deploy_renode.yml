@@ -94,7 +94,6 @@ jobs:
         #     ./ReNode/lib_guid
         #   commit-msg: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
         #   github-token: ${{ secrets.GITHUB_TOKEN }}
-
         uses: EndBug/add-and-commit@v9
         with:
           author_name: DeployBot
