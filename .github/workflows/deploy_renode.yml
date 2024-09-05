@@ -10,7 +10,7 @@ env:
   renode_builder_path: Third-party/gh_build/build_renode.py
   renode_artifacts_sources_path: ReNode/
   renode_dir: ${{github.workspace}}/ReNode/
-  renode_compiled_executable: ReNode.exe
+  renode_compiled_executable: ./ReNode.exe
   renode_compile_graphs_cli: -prep_code -nosplash -noapp -noerrwin
   rb_exe: ${{github.workspace}}/RBuilder/rb.exe
   DEPLOY_TOKEN: ${{ secrets.TOKEN }}
@@ -58,7 +58,7 @@ jobs:
         with:
           name: Postbuild lib log
           path: |
-            ${{github.workspace}}/Third-party/gh_build/TEMP/**
+            ${{ env.renode_artifacts_sources_path }}
 
       # ----------------------- tests and build dependencies -----------------------
       - name: Test executable
