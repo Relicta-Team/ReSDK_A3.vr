@@ -30,9 +30,9 @@ jobs:
         #  choco install devbox-vcredist2010
         #  choco install vcredist140
         run: |
-        choco install directx
-        choco install vcredist2010
-        choco install vcredist2012
+          choco install directx
+          choco install vcredist2010
+          choco install vcredist2012
 
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
