@@ -57,7 +57,9 @@ dest_exe = pathJoin(dest,getFilenameFromPath(compiledPath))
 if fileExists(dest_data): dirRemove(dest_data)
 if fileExists(dest_exe): fileRemove(dest_exe)
 
+print("Copy from {} to {}".format(pathJoin(src,"data"),dest))
 dirCopy(pathJoin(src,"data"),dest_data)
+print("Copy from {} to {}".format(compiledPath,dest_exe))
 fileCopy(compiledPath,dest_exe)
 
 writeToGithubOutput("RENODE_FULL_VERSION",vobj.product_version)
