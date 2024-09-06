@@ -84,16 +84,11 @@ jobs:
             ${{ env.renode_artifacts_sources_path }}
       
       - name: Update ReNode application
-        uses: test-room-7/action-update-file@v1
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
+          push_options: '--force'
           committer-name: ReNode update
-          file-path: |
-            ReNode/lib.obj
-            ReNode/lib_guid 
-            ReNode/ReNode.exe
-            
-          # ReNode/data/**
-          commit-msg: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
-          github-token: ${{ secrets.TOKEN }}
+          file_pattern: ReNode/lib.obj ReNode/lib_guid ReNode/ReNode.exe ReNode/data/
+          commit_message: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
 
 
