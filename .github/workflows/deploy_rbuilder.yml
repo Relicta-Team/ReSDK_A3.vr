@@ -23,10 +23,10 @@ jobs:
     if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     steps:
       - name: Setup msvc+directx
-          run: |
-            choco install directx
-            choco install vcredist2010
-            choco install vcredist2012
+        run: |
+          choco install directx
+          choco install vcredist2010
+          choco install vcredist2012
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
