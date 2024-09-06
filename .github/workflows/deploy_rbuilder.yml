@@ -19,7 +19,7 @@ jobs:
 
   deploy:
     name: Build
-    runs-on: windows-latest
+    runs-on: windows-2019
     if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     steps:
       - name: Setup msvc+directx
