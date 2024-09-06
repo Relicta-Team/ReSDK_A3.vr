@@ -39,6 +39,8 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.TOKEN }}
       # - name: Test issue (GH CLI)
       #   env:
       #     GH_TOKEN: ${{secrets.TOKEN}}
@@ -90,6 +92,5 @@ jobs:
           commit_user_name: ReNode update
           file_pattern: ReNode/lib.obj ReNode/lib_guid ReNode/ReNode.exe ReNode/data/
           commit_message: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
-          token: ${{ secrets.TOKEN }}
 
 
