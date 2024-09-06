@@ -2,8 +2,6 @@
 name: Deploy ReNode
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
 
 env:
@@ -23,14 +21,7 @@ jobs:
     if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     steps:
       
-      - name: Common utils
-        #run: |
-        #  choco install directx
-        #  choco install directx-sdk
-        #  choco install vcredist2010
-        #  choco install vcredist2012
-        #  choco install devbox-vcredist2010
-        #  choco install vcredist140
+      - name: Setup msvc+directx
         run: |
           choco install directx
           choco install vcredist2010
@@ -40,13 +31,8 @@ jobs:
         uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.TOKEN }}
-      # - name: Test issue (GH CLI)
-      #   env:
-      #     GH_TOKEN: ${{secrets.TOKEN}}
-      #   run: |
-      #     gh issue create --title "Тестовая задача" --body "Тестовая задача, предоставленна через Github actions"
-      
+          token: ${{ secrets.TOKEN }} # for forcepush working
+            
       # ----------------------- build exe -----------------------
       - name: Compile
         id: renode_compile
@@ -59,7 +45,8 @@ jobs:
       - name: Test executable
         id: renode_test_exe
         run: |
-          echo "TODO implement test executable"
+          echo "::warning::ReNode test app not implemented"
+      
       - name: Init RBuilder
         if: steps.renode_test_exe.outcome=='success'
         working-directory: ${{github.workspace}}/RBuilder
@@ -79,6 +66,7 @@ jobs:
       # ----------------------- upload/commit compiled -----------------------
       
       - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
         name: Upload ReNode compiled artifact
         with:
           name: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
