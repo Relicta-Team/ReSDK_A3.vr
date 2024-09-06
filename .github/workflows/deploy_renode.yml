@@ -90,5 +90,6 @@ jobs:
           commit_user_name: ReNode update
           file_pattern: ReNode/lib.obj ReNode/lib_guid ReNode/ReNode.exe ReNode/data/
           commit_message: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
+          token: ${{ secrets.TOKEN }}
 
 
