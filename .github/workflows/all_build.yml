@@ -175,10 +175,10 @@ jobs:
         working-directory: ${{env.rb_dir}}
         run: ${{env.rb_exe}} ${{env.rb_args_init}}
 
-      - name: RB ${{ matrix.flags }}
+      - name: Run RBuilder
         id: rb_run
         working-directory: ${{env.rb_dir}}
-        run: ${{ env.rb_exe }} ${{ matrix.flags }}
+        run: ${{ env.rb_exe }} run ${{ matrix.flags }}
 
   # Обновление версии и документации (only on main)
 
