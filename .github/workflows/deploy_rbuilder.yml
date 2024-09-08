@@ -23,11 +23,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.TOKEN }} # for forcepush working
-      - uses: ./.github/actions/using_rbuilder.yml
+      
+      - uses: ./.github/using_rbuilder.yml
         with:
           rb_dir: ${{env.rb_dir}}
           renode_dir: "${{github.workspace}}/ReNode/"
-          DEPLOY_TOKEN: ${{env.DEPLOY_TOKEN}}
+          DEPLOY_TOKEN: ${{ env.DEPLOY_TOKEN }}
       
       # ----------------------- build exe -----------------------
       - name: Compile

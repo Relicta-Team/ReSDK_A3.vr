@@ -24,3 +24,5 @@ jobs:
       
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
+        with:
+          cache: 'pip'
