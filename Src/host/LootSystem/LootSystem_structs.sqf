@@ -62,8 +62,17 @@ struct(LootTempate)
 				_allowMaps pushBack struct_newp(LootRestrictionType,LOOT_COMPARE_BY_NAME arg _cmode arg _x);
 				continue;
 			};
+			private _mode = (keys _x) select 0;
+			if (equals(_mode,LOOT_COMPARE_BY_REGEX) 
+				|| {equals(_mode,LOOT_COMPARE_BY_TYPEOF)
+				|| equals(_mode,LOOT_COMPARE_BY_NAME)
+			}) then {
+				private _val = (_x get _mode);
+				_allowMaps pushBack struct_newp(LootRestrictionType,_mode arg _cmode arg _val);
+				continue;
+			};
 
-			warningformat("Unknown compare value %1 in %2",_x arg _path);
+			warningformat("Unknown compare maps value %1 in %2",_x arg _path);
 		} foreach _alm;
 
 		_cmode = LOOT_COMPARE_MODE_GAMEMODE;
@@ -72,7 +81,17 @@ struct(LootTempate)
 				_allowModes pushBack struct_newp(LootRestrictionType,LOOT_COMPARE_BY_NAME arg _cmode arg _x);
 				continue;
 			};
-			warningformat("Unknown compare value %1 in %2",_x arg _path);
+			private _mode = (keys _x) select 0;
+			if (equals(_mode,LOOT_COMPARE_BY_REGEX)
+				|| {equals(_mode,LOOT_COMPARE_BY_TYPEOF)
+				|| equals(_mode,LOOT_COMPARE_BY_NAME)
+			}) then {
+				private _val = (_x get _mode);
+				_allowModes pushBack struct_newp(LootRestrictionType,_mode arg _cmode arg _val);
+				continue;
+			};
+
+			warningformat("Unknown compare maps value %1 in %2",_x arg _path);
 		} foreach _alg;
 
 		self setv(allowMaps,_allowMaps);
@@ -173,16 +192,30 @@ struct(LootRestrictionType)
 	{
 		params ["_with"];
 		private _ctype = self getv(compareType);
-		if (_ctype == LOOT_COMPARE_BY_NAME) exitWith {
-			_with == self getv(value)
+		
+		private _res = call {
+			if (_ctype == LOOT_COMPARE_BY_NAME) exitWith {
+				_with == self getv(value)
+			};
+			if (_ctype == LOOT_COMPARE_BY_REGEX) exitWith {
+				[_with,self getv(value)] call regex_isMatch
+			};
+			if (_ctype == LOOT_COMPARE_BY_TYPEOF) exitWith {
+				isTypeNameStringOf(self getv(value),_with)
+			};
+			null
 		};
-		if (_ctype == LOOT_COMPARE_BY_REGEX) exitWith {
-			[_with,self getv(value)] call regexi_isMatch
+		if !isNullVar(_res) then {
+			_res
+		} else {
+			setLastError("Unknown compare type: " + str _ctype);
+			false
 		};
-		if (_ctype == LOOT_COMPARE_BY_TYPEOF) exitWith {
-			isTypeNameStringOf(self getv(value),_with)
-		};
-		setLastError("Unknown compare type: " + str _ctype);
+	}
+
+	def(str)
+	{
+		format["%1(%2:%3)",struct_typename(self),self getv(compareMode),self getv(compareType)]
 	}
 endstruct
 
@@ -192,8 +225,8 @@ struct(LootItemTemplate)
 	def(probability) 100
 	def(countMin) 1
 	def(countMax) 1
-	def(getRandomCount) { rand(self getv(countMin),self getv(countMax))	}
-	def(isRangeBasedCount) {(self getv(countMin)) == (self getv(countMax))}
+	def(getRandomCount) { randInt(self getv(countMin),self getv(countMax))	}
+	def(isRangeBasedCount) {(self getv(countMin)) != (self getv(countMax))}
 	def(itemType) "Item"
 
 	def(name) ""; //in current version can only update name of created item
@@ -212,11 +245,11 @@ struct(LootItemTemplate)
 				self setv(countMin,_counter);
 				self setv(countMax,_counter);
 			};
-			if (equalTypes(_counter,[]) && {count _counter == 2}) then {
+			if (equalTypes(_counter,[]) && {count _counter == 2}) exitWith {
 				self setv(countMin,_counter select 0);
-				self setv(counterMax,_counter select 1);
+				self setv(countMax,_counter select 1);
 			};
-			setLastError(format vec2("Cannot define count value %1 in %2",_counter arg _path));
+			setLastError(format vec3("Cannot define count value %1 in %2",_counter arg _path));
 		};
 	}
 
@@ -225,7 +258,7 @@ struct(LootItemTemplate)
 	def(str)
 	{
 		private _rangeText = ifcheck(self callv(isRangeBasedCount),format vec3("(%1-%2)",self getv(countMin),self getv(countMax)),self getv(countMin));
-		format["%1::%2 %3 %4%5",struct_typename(self),self getv(itemType),_rangeText,self getv(prob),"%"];
+		format["%1::%2 %3 %4%5",struct_typename(self),self getv(itemType),_rangeText,self getv(probability),"%"];
 	}
 
 endstruct

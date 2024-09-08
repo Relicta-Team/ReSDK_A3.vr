@@ -1,11 +1,10 @@
 
 TestLoot:
-  type: Loot # Все конфиги должны иметь тип
   interface: true # интерфейсы только для заготовки шаблонов
   inherit: BaseLoot # Опциональное наследование конфигурации.
   name: some name # Описательное название конфигурации (опционально)
   allowmaps: # попадание хотя бы под одну группу разрешает тип
-    - regex: \*Map[1-9] #regex like pattern
+    - regex: .*Map[1-9] #regex like pattern
     - name: TestMap #exact
     - TestMap
     - typeof: BaseMap #type inheritance check

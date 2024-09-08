@@ -17,7 +17,10 @@ loot_init = {
 };
 
 loot_addConfig = {
-	params ["_cfgPath"];
+	params ["_cfgPath",["_isRelativePath",true]];
+	if (_isRelativePath) then {
+		_cfgPath = "src\host\LootSystem\"+_cfgPath;
+	};
 	loot_list_loader pushBack _cfgPath;
 };
 
