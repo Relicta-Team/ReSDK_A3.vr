@@ -24,7 +24,7 @@ jobs:
         with:
           token: ${{ secrets.TOKEN }} # for forcepush working
       
-      - uses: ./.github/using_rbuilder.yml
+      - uses: ./.github/actions/using_rbuilder
         with:
           rb_dir: ${{env.rb_dir}}
           renode_dir: "${{github.workspace}}/ReNode/"
