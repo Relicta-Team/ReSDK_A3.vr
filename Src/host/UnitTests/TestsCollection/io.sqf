@@ -64,11 +64,12 @@ TEST(LootSystem_AllCheckBase)
 	loot_list_loader = [];// список файлов для загрузки
 
 	//init
-	["test.yml"] call loot_addConfig;
+	private _fullpath = "src\host\LootSystem\test.yml";
+	[_fullpath] call loot_addConfig;
 	call loot_init;
 
 	//checks
-	ASSERT_STR(count loot_mapConfigs == 1,"Loot templates not loaded");
+	ASSERT_STR(count loot_mapConfigs == 2,"Loot templates not loaded");
 	ASSERT("TestLoot" in loot_mapConfigs);
 
 	private _lootObj = loot_mapConfigs get "TestLoot";

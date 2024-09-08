@@ -1,6 +1,10 @@
 
+BaseLoot:
+  interface: true
+  name: Basic loot config
+
 TestLoot:
-  interface: true # интерфейсы только для заготовки шаблонов
+  interface: false # интерфейсы только для заготовки шаблонов
   inherit: BaseLoot # Опциональное наследование конфигурации.
   name: some name # Описательное название конфигурации (опционально)
   maps: # попадание хотя бы под одну группу разрешает тип
