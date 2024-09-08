@@ -15,15 +15,14 @@ on:
 
 runs:
   using: "composite"
-  prepare:
-    steps:
-      - name: Setup msvc+directx
-        run: |
-          choco install directx
-          choco install vcredist2010
-          choco install vcredist2012
-      
-      - name: Setup Python
-        uses: actions/setup-python@v3.1.4
-        with:
-          cache: 'pip'
+  steps:
+    - name: Setup msvc+directx
+      run: |
+        choco install directx
+        choco install vcredist2010
+        choco install vcredist2012
+    
+    - name: Setup Python
+      uses: actions/setup-python@v3.1.4
+      with:
+        cache: 'pip'
