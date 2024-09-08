@@ -57,6 +57,12 @@ TEST(Yaml_FileLoadingAllTypes)
 	ASSERT("test_null" in _dat && {isNull(_dat get "test_null")});
 }
 
+
+TEST(Yaml_stringEncoding)
+{
+	//todo check utf8 from extension
+}
+
 TEST(LootSystem_AllCheckBase)
 {
 	//cleanup
@@ -132,7 +138,7 @@ TEST(LootSystem_AllCheckBase)
 	//check naming override
 	private _fkey = [_content,{isTypeOf(_x,Key)},nullPtr] call searchInList;
 	ASSERT(!isNullReference(_fkey));
-	ASSERT_EQ(toarray getVar(_fkey,name),toarray "Тест-ключ");
+	ASSERT_EQ(getVar(_fkey,name),"Test-key");
 
 	[_tobj] call deleteGameObject;
 }
