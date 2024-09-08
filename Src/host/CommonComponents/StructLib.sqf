@@ -139,7 +139,7 @@ struct(Model)
 	{
 		params ["_cfgPath",["_pos",[0,0,0]],["_simple",false]];
 		if (_simple) then {
-			private _mesh = createSimpleObject [_cfgPath,[0,0,0],self getv(__localFlag)];
+			private _mesh = createMesh([_cfgPath arg [0 arg 0 arg 0] arg self getv(__localFlag)]);
 			assert(!isNullReference(_mesh));
 			self setv(_mesh,_mesh);
 			self callp(setPos,_pos);

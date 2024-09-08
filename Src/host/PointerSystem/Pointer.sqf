@@ -41,7 +41,7 @@ pointer_create = {
 #endif
 
 	// adding pointer id to object name in string representation
-	#ifdef EDITOR
+	#ifdef RBUILDER_OR_EDITOR
 	_ref SETNAME (format["%1#%2",NAME _ref,_nptr]);
 	#endif
 

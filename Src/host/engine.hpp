@@ -244,6 +244,16 @@ _ret = _this; \
 #define isValType(val) !isRefType(val)
 */
 
+#ifdef RBUILDER
+	#define __rb_mesh_common_path__ "core\default\default.p3d"
+	#define createMesh(ctx) ctx call { params ["_p","_ps","_loc"]; \
+		createSimpleObject [ __rb_mesh_common_path__, _ps,_loc ]; \
+	}
+#else
+	#define createMesh(ctx) createSimpleObject (ctx)
+#endif
+
+
 //string help
 #define stringEmpty ""
 

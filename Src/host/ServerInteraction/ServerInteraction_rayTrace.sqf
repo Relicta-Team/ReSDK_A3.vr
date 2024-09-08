@@ -27,7 +27,7 @@ si_rayTraceProcess = {
 	private _model = getVar(_vobj,model);
 	private _bbx = core_modelBBX get _model;
 	if isNullVar(_bbx) then {
-		_rtObj = createSimpleObject[_model,[50,50,50],true];
+		_rtObj = createMesh([_model arg [50 arg 50 arg 50] arg true]);
 		#ifndef EDITOR
 		_rtObj hideObject true;
 		#endif

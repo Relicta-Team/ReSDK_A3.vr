@@ -147,6 +147,7 @@ struct(LootTempate)
 	{
 		params ["_obj"];
 		if !callFunc(_obj,isContainer) exitWith {
+			errorformat("Cannot spawn loot %1 in %2 - it is not container",self getv(type) arg _obj);
 			false
 		};
 		
@@ -155,7 +156,7 @@ struct(LootTempate)
 			private _name = _x getv(name);
 			private _attrMethods = [];
 			if (_name!="") then {
-				_attrMethods pushBack ["name",_name];
+				_attrMethods pushBack ["var","name",_name];
 			};
 
 			//spawn by native method

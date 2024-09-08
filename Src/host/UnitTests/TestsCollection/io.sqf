@@ -94,11 +94,6 @@ TEST(LootSystem_AllCheckBase)
 	ASSERT_EQ(_sit getv(countMax),4);
 	ASSERT_EQ(_sit callv(isRangeBasedCount),false);
 
-	//loot spawn test
-	_tobj = ["OldWoodenBox",[10,10,10]] call createGameObjectInWorld;
-	ASSERT(!isNullReference(_tobj));
-	ASSERT(_sit callp(processSpawnLoot,_tobj));
-
 	//compare checks
 	private _clst = _lootObj getv(allowMaps);
 	
@@ -119,6 +114,26 @@ TEST(LootSystem_AllCheckBase)
 	traceformat("Compare now: %1",_clst select 3 getv(compareType))
 	(_clst select 3) setv(value,"ManagedObject");
 	ASSERT(_clst select 3 callp(compareTo,"object"));
+
+	//loot spawn test
+	private _tobj = ["OldWoodenBox",[10,10,10]] call createGameObjectInWorld;
+	traceformat("GameObject %1",_tobj);
+	ASSERT(!isNullReference(_tobj));
+
+	traceformat("Loot items: %1",_lootObj getv(items))
+
+	ASSERT(_lootObj callp(processSpawnLoot,_tobj));
+	private _content = getVar(_tobj,content);
+	traceformat("Count created items: %1",count _content);
+	traceformat("Items: %1",_content)
+	ASSERT(count _content >= 4);// fixed keys count 4
+
+	//check naming override
+	private _fkey = [_content,{isTypeOf(_x,Key)},nullPtr] call searchInList;
+	ASSERT(!isNullReference(_fkey));
+	ASSERT_EQ(getVar(_fkey,name),"Тест-ключ");
+
+	[_tobj] call deleteGameObject;
 }
 
 TEST(FileSystem_Basic)

@@ -16,11 +16,13 @@
 
 #ifdef EDITOR
 	#define EDITOR_OR_RBUILDER
+	#define RBUILDER_OR_EDITOR
 #endif
 
 #ifdef RBUILDER
 	#undef EDITOR
 	#define EDITOR_OR_RBUILDER
+	#define RBUILDER_OR_EDITOR
 #endif
 
 

@@ -48,7 +48,7 @@ class(DoorStatic) extends(IStruct)
 			};
 			
 			if (count _origin != 4) then {
-				private _tempObj = createSimpleObject [getSelf(model),[0,0,0],true];
+				private _tempObj = createMesh([getSelf(model) arg [0 arg 0 arg 0] arg true]);
 				_tempObj setPosAtl (_origin select 0);
 				_tempObj setDir (_origin select 1);
 				
@@ -115,7 +115,7 @@ struct_door_initOpenMode = {
 		deleteVehicle struct_door_internal_ref;
 	};
 
-	private _tempObj = createSimpleObject [(getModelInfo _o) select 1,[0,0,0],true];
+	private _tempObj = createMesh( [(getModelInfo _o) select 1 arg [0 arg 0 arg 0] arg true]);
 
 	_tempObj setPosAtl getPosATL _o;
 	_tempObj setdir (getdir _o);
