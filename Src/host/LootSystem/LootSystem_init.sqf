@@ -49,6 +49,9 @@ loot_prepareAll = {
 	#ifdef RBUILDER
 	if (true) exitWith {};
 	#endif
+	#ifdef __VM_VALIDATE
+	if (true) exitWith {};
+	#endif
 
 	private _pathLoader = "src\host\LootSystem\loader.sqf";
 	private _content = (loadfile _pathLoader) splitString endl;
