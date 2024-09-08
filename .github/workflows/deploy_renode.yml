@@ -73,6 +73,21 @@ jobs:
           path: |
             ${{ env.renode_artifacts_sources_path }}
       
+      - name: Export Event Logs
+        if: failure()
+        run: |
+          echo "Exporting Windows event logs..."
+          Get-EventLog -LogName Application -Newest 100 | Out-File -FilePath event_logs.txt
+          Get-EventLog -LogName System -Newest 100 | Out-File -Append event_logs.txt
+
+      - name: Upload Event Logs
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: event-logs
+          path: event_logs.txt
+
+
       - name: Update ReNode application
         uses: stefanzweifel/git-auto-commit-action@v5
         with:

@@ -20,15 +20,16 @@ jobs:
     runs-on: windows-2019
     if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     steps:
+      - name: Setup msvc+directx
+        run: |
+          choco install directx
+          choco install vcredist2010
+          choco install vcredist2012
+      - name: Setup Python
+        uses: actions/setup-python@v3.1.4
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.TOKEN }} # for forcepush working
-      
-      - uses: ./.github/actions/using_rbuilder
-        with:
-          rb_dir: ${{env.rb_dir}}
-          renode_dir: "${{github.workspace}}/ReNode/"
-          DEPLOY_TOKEN: ${{ env.DEPLOY_TOKEN }}
       
       # ----------------------- build exe -----------------------
       - name: Compile
@@ -62,6 +63,21 @@ jobs:
           name: RBuilder ${{ steps.rbuilder_compile.outputs.RBUILDER_FULL_VERSION }}
           path: |
             ${{ env.rb_dir }}
+
+      - name: Export Event Logs
+        if: failure()
+        run: |
+          echo "Exporting Windows event logs..."
+          Get-EventLog -LogName Application -Newest 100 | Out-File -FilePath event_logs.txt
+          Get-EventLog -LogName System -Newest 100 | Out-File -Append event_logs.txt
+
+      - name: Upload Event Logs
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: event-logs
+          path: event_logs.txt
+          
       - name: Update RBuilder application
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
