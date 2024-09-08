@@ -13,7 +13,8 @@ on:
         required: true
 
 
-jobs:
+runs:
+  using: "composite"
   prepare:
     steps:
       - name: Setup msvc+directx
