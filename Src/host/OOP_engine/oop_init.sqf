@@ -59,6 +59,7 @@ _attr_ex_init_list = [];
 	#define allocName this setName "%2"
 
 	_shell_data = if (_motherType == "NetObject") then {
+		setLastError("Network objects obsoleted and not supported");
 		format['private ctxParams = _this; private this = createNetObj; private _pt = pt_%2; allocName; this setvariable ["%1",_pt]; ',PROTOTYPE_VAR_NAME,_x];
 	} else {
 		format['private ctxParams = _this; private this = createObj; private _pt = pt_%2; allocName; this setvariable ["%1",_pt]; ',PROTOTYPE_VAR_NAME,_x];

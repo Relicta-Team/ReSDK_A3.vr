@@ -364,7 +364,7 @@ dfunc(preyLoad) = {
 		];
 		
 		{
-			//gvar(objectsList) pushBack (createSimpleObject ["a3\structures_f\civ\camping\fireplace_f.p3d",_x,false])
+			//gvar(objectsList) pushBack (createMesh( ["a3\structures_f\civ\camping\fireplace_f.p3d" arg _x arg false]))
 		} foreach gvar(randPoses);
 		
 		gvar(backupedPoses) = [];
@@ -679,7 +679,7 @@ dfunc(dirtpitLoad) = {
 		];
 		
 		{
-			//gvar(objectsList) pushBack (createSimpleObject ["a3\structures_f\civ\camping\fireplace_f.p3d",_x,false])
+			//gvar(objectsList) pushBack (createMesh( ["a3\structures_f\civ\camping\fireplace_f.p3d" arg _x arg false]))
 		} foreach gvar(randPoses);
 		
 		gvar(backupedPoses) = [];

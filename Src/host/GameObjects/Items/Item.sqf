@@ -532,7 +532,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 	{
 		objParams_3(_pos,_dir,_vec);
 
-		_vObj = createSimpleObject [getSelf(model),[0,0,0],true];
+		_vObj = createMesh([getSelf(model) arg [0 arg 0 arg 0] arg true]);
 		#ifdef NOE_DEBUG_HIDE_SERVER_OBJECT
 		_vobj hideObject true;
 		#endif
@@ -725,7 +725,7 @@ class(ItemRadio) extends(Item)
 
 		//private _o = callSuper(Item,InitModel);
 
-		_vObj = createSimpleObject [getSelf(model),[0,0,0],true];
+		_vObj = createMesh([getSelf(model) arg [0 arg 0 arg 0] arg true]);
 		#ifdef NOE_DEBUG_HIDE_SERVER_OBJECT
 		_vobj hideObject true;
 		#endif

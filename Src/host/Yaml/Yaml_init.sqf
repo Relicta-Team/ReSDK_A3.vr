@@ -58,7 +58,7 @@ yaml_loadFile = {
 
 	private _content = LoadFile(_file);
 	private _ref = refcreate(0);
-	if !([_data,_ref] call yaml_loadData) exitWith {
+	if !([_content,_ref] call yaml_loadData) exitWith {
 		errorformat("yaml::loadFile() - Error loading file: %1; Output: %2",_file arg refget(_ref));
 		null;
 	};

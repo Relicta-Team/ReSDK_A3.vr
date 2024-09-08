@@ -6,95 +6,154 @@
 
 #include "..\TestFramework.h"
 
-// TEST(FileSystem_Basic)
-// {
-// 	private _thisfile = "src\host\UnitTests\TestsCollection\io.sqf";
-
-// 	ASSERT(fileExists(_thisFile));
-// 	ASSERT([_thisfile] call fileExists_Node);
+TEST(Yaml_Base)
+{
+	ASSERT_STR(call yaml_isExtensionLoaded,"ReYaml not found or not loaded");
+private _dat = "
+  a: 1
+  b:
+    c: [6,7,8]
+    d: [a,b,c]
+";
+	private _ref = refcreate(0);
+	ASSERT([_dat arg _ref] call yaml_loadData);
+	private _map = refget(_ref);
 	
-// 	//content load
-// 	private _content = [_thisfile] call fileLoad_Node;
-// 	ASSERT("#define PREPROCESS_DATA" in _content);
+	ASSERT_EQ(count _map,2);
+	ASSERT_EQ(_map get "a",1);
 	
-// 	private _pcontent = [_thisfile,true] call fileLoad_Node;
-// 	ASSERT(PREPROCESS_DATA in _pcontent);
-// }
-
-// TEST(Yaml_Basic)
-// {
-// 	private _emptyMap = ["","data"] call yml_parse;
-// 	ASSERT_EQ(count _emptyMap,2); //source + errors
-// 	private _err = [_emptyMap] call yml_getErrors;
-// 	ASSERT_EQ(count _err,1);
-// 	ASSERT_EQ(_emptyMap get "#SOURCE",stringEmpty);
-
-// private _content = "
-// # comment
-// a: 1
-// b: 2
-// ";
-
-// 	private _map = [_content,"data"] call yml_parse;
-// 	traceformat("Errors: %1",[_map] call yml_getErrors);
-// 	ASSERT_EQ(count _map,2 + 2);
-// 	ASSERT("a" in _map);
-// 	ASSERT_EQ(_map get "a",1);
-// 	ASSERT("b" in _map);
-// 	ASSERT_EQ(_map get "b",2);
+	ASSERT_EQ(count (_map get "b"),2);
 	
-// private _content2 = "
-// a:
-//   - 1
-//   - 2
-// b: ['test end', 'test2 end']
-// c: 'str end'
-// d:
-//   - e:
-//     - f: [3,4]
-//     - g: [5,6]
-//   - x: 4
-
-// ";
-
-// _content2 = "
-// TestLoot:
-//   type: Loot # Все конфиги должны иметь тип
-//   interface: true # интерфейсы только для заготовки шаблонов
-//   inherit: BaseLoot # Опциональное наследование конфигурации.
-//   name: some name # Описательное название конфигурации (опционально)
-//   allowmaps: # попадание хотя бы под одну группу разрешает тип
-//     - regex: *Map[1-9] #regex like pattern
-//     - name: TestMap #exact
-//     - TestMap
-//     - typeof: BaseMap #type inheritance check
-//   #allowgamemodes: # не определенный тип снимает все ограничения
-//   items:
-//     Item:
-//       name: Overriden name {i} # {i} - counter of created items
-//       prob: 35
-//       count: [1, 3] #ranged count
-//     Key:
-//       prob: 20
-//       count: 4 #fixed count
-// ";
-
-// 	private _map2 = [_content2,"data"] call yml_parse;
-// 	traceformat("Map2 content: %1",[_map2] call yml_getData)
-// 	["RBuilder","wait",[7 * 1000]] call rescript_callCommandVoid;
-// 	ASSERT_EQ(count _map2, 4 + 2);
-
-// 	ASSERT("a" in _map2);
-// 	ASSERT_EQ(_map2 get "a", [1 arg 2]);
-
-// 	ASSERT("b" in _map2);
-// 	ASSERT_EQ(_map2 get "b", ["test end" arg "test2 end"]);
-
-// 	ASSERT("c" in _map2);
-// 	ASSERT_EQ(_map2 get "c", "str end");
-
-// 	ASSERT("d" in _map2);
-// 	private _o = _map2 get "d";
-// 	traceformat("D content: %1",_o);
+	ASSERT_EQ(count (_map get "b" get "c"),3);
+	ASSERT_EQ(_map get "b" get "c" select 2,8);
 	
-// }
+	ASSERT_EQ(count (_map get "b" get "d"),3);
+	ASSERT_EQ(_map get "d" select 2,"c");
+}
+
+TEST(Yaml_PartialLoading)
+{
+	//test long yaml (partial loading)
+	private _d = [];
+	for"_i" from 1 to 20480 do {
+		_d pushBack (format["longkey_%1: Ключ с длинным значением по индексу %1",_i]);
+	};
+	_d pushBack "LATEST: ""EOF""   ";
+	_d = _d joinString endl;
+
+	ASSERT([_dat arg _ref] call yaml_loadData);
+	_map = refget(_ref);
+	ASSERT_EQ(count _map,20480 + 1);
+	ASSERT_EQ(_map get "LATEST","EOF");
+	ASSERT_EQ(_map get "longkey_20480","Ключ с длинным значением по индексу 20480");
+}
+
+TEST(Yaml_FileLoadingAllTypes)
+{
+	private _dat = ["src\host\Yaml\test.yaml"] call yaml_loadFile;
+	ASSERT(_dat);
+	ASSERT(count _dat > 0);
+	ASSERT_EQ(_dat get "key","value");
+	ASSERT("test_null" in _dat && {isNull(_dat get "test_null")});
+}
+
+
+TEST(Yaml_stringEncoding)
+{
+	//todo check utf8 from extension
+}
+
+TEST(LootSystem_AllCheckBase)
+{
+	//cleanup
+	loot_mapConfigs = createHashMap;
+	loot_list_loader = [];// список файлов для загрузки
+
+	//init
+	private _fullpath = "src\host\LootSystem\test.yml";
+	[_fullpath] call loot_addConfig;
+	call loot_init;
+
+	//checks
+	ASSERT_STR(count loot_mapConfigs == 2,"Loot templates not loaded");
+	ASSERT("TestLoot" in loot_mapConfigs);
+
+	private _lootObj = loot_mapConfigs get "TestLoot";
+	private _funcRef = oop_getFieldBaseValue;
+	oop_getFieldBaseValue = { "TestMap" }; //override func to return "TestMap"
+	ASSERT_EQ(_lootObj callp(checkLootSpawnRestriction,"GamemodeName"),true);
+	oop_getFieldBaseValue = _funcRef; //restore func
+
+	ASSERT_EQ(count (_lootObj getv(allowMaps)),4);
+	ASSERT_EQ(count (_lootObj getv(allowModes)),0);
+	ASSERT_EQ(count (_lootObj getv(items)),2);
+	
+	private _itemList = _lootObj getv(items);
+
+	private _fit = _itemList select (_itemlist findif {_x getv(itemType) == "Item"});
+	ASSERT_EQ(_fit getv(itemType),"Item");
+	ASSERT_EQ(_fit getv(countMin),1);
+	ASSERT_EQ(_fit getv(countMax),3);
+
+	private _sit = _itemList select (_itemlist findif {_x getv(itemType) == "Key"});
+	ASSERT_EQ(_sit getv(itemType),"Key");
+	ASSERT_EQ(_sit getv(countMin),4);
+	ASSERT_EQ(_sit getv(countMax),4);
+	ASSERT_EQ(_sit callv(isRangeBasedCount),false);
+
+	//compare checks
+	private _clst = _lootObj getv(allowMaps);
+	
+	//regex base
+	traceformat("Compare now: %1",_clst select 0 getv(compareType))
+	ASSERT_EQ(_clst select 0 callp(compareTo,"OMap4"),true);
+	ASSERT_EQ(_clst select 0 callp(compareTo,"OMap"),false);
+	
+	//exact
+	traceformat("Compare now: %1",_clst select 1 getv(compareType))
+	ASSERT(_clst select 1 callp(compareTo,"TestMap"));
+	ASSERT(_clst select 1 callp(compareTo,"testmap"));
+	
+	//inline exact
+	ASSERT_EQ(_clst select 1 getv(compareType),_clst select 2 getv(compareType));
+	
+	//typeof
+	traceformat("Compare now: %1",_clst select 3 getv(compareType))
+	(_clst select 3) setv(value,"ManagedObject");
+	ASSERT(_clst select 3 callp(compareTo,"object"));
+
+	//loot spawn test
+	private _tobj = ["OldWoodenBox",[10,10,10]] call createGameObjectInWorld;
+	traceformat("GameObject %1",_tobj);
+	ASSERT(!isNullReference(_tobj));
+
+	traceformat("Loot items: %1",_lootObj getv(items))
+
+	ASSERT(_lootObj callp(processSpawnLoot,_tobj));
+	private _content = getVar(_tobj,content);
+	traceformat("Count created items: %1",count _content);
+	traceformat("Items: %1",_content)
+	ASSERT(count _content >= 4);// fixed keys count 4
+
+	//check naming override
+	private _fkey = [_content,{isTypeOf(_x,Key)},nullPtr] call searchInList;
+	ASSERT(!isNullReference(_fkey));
+	ASSERT_EQ(getVar(_fkey,name),"Test-key");
+
+	[_tobj] call deleteGameObject;
+}
+
+TEST(FileSystem_Basic)
+{
+	private _thisfile = "src\host\UnitTests\TestsCollection\io.sqf";
+
+	ASSERT(fileExists(_thisFile));
+	ASSERT([_thisfile] call fileExists_Node);
+	
+	//content load
+	private _content = [_thisfile] call fileLoad_Node;
+	ASSERT("#define PREPROCESS_DATA" in _content);
+	
+	private _pcontent = [_thisfile,true] call fileLoad_Node;
+	ASSERT(PREPROCESS_DATA in _pcontent);
+}
