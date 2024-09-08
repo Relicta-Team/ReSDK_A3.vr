@@ -36,6 +36,14 @@ if (isMultiplayer)then{
 cprint_usestdout = true; //flag for standart console output
 cprint_isserver = isMultiplayer && isServer;
 
+// ["PREFIX","message %1, arg %2, last %3",...,...] call stdoutPrint
+stdoutPrint = {
+	private _args = _this;
+	private _PREF = _args deleteAt 0;
+	private _color = _args deleteAt (count _args - 1);
+	conDllCall (_PREF + (format _args) + _color);
+	__post_message_RB(_PREF + (format _args))
+};
 
 cprint = {
 	if (cprint_isserver) then {
@@ -49,6 +57,8 @@ cprint = {
 			[format _this, "log"] call chatPrint;
 		};
 	};
+
+	__post_message_RB(format _this)
 };
 
 cprintErr = {
@@ -63,6 +73,8 @@ cprintErr = {
 			[PRFX__ + format _this, "log"] call chatPrint;
 		};
 	};
+
+	__post_message_RB(PRFX__ + format _this)
 };
 
 cprintWarn = {
@@ -78,6 +90,8 @@ cprintWarn = {
 			[PRFX__ + format _this, "log"] call chatPrint;
 		};
 	};
+
+	__post_message_RB(PRFX__ + format _this)
 };
 
 if (isMultiplayer && {!isNullVar(__editorEnabled)})then{
@@ -85,7 +99,9 @@ if (isMultiplayer && {!isNullVar(__editorEnabled)})then{
 	appExit(APPEXIT_REASON_CRITICAL);
 };
 
+#ifndef RBUILDER
 removeAllMissionEventHandlers "ScriptError";
+#endif
 
 if (!isServer) then {
 	scriptErrHndl = addMissionEventHandler ["ScriptError",
@@ -331,9 +347,6 @@ cst_isComressed = {
 //		Other utility functions
 //==================================================================================================
 
-//enable preinit functional tests function decl
-//#define __ENABLE_STATIC_TEST
-
 // Строковые хелперы
 stringStartWith = {
 	params ["_checked","_started",["_casesense",true]];
@@ -366,7 +379,7 @@ stringReplace = {
 	_result + _string
 };
 
-//Выбирает лучший случай [[1,2,3],{_x > 2}] call selectBest
+//Выбирает лучший случай [[2, -6, 4], {abs _x}] call selectBest
 selectBest = {
 	params ["_array", "_criteria", "_return"];
 
@@ -399,7 +412,7 @@ arrayDeleteItem = {
 
 arrayIsValidIndex = {
 	params ["_a","_ix"];
-	count _a > 0 && {_ix < count _a}
+	count _a > 0 && {_ix < count _a} && {_ix >= 0}
 };
 
 //shuffle array elements, return alter array
@@ -570,26 +583,3 @@ missionNamespace setVariable ["pushFront",
 }
 ];
 //!pushfront = {}; <- throws compier error
-
-#ifndef EDITOR
-	#undef __ENABLE_STATIC_TEST
-#endif
-
-//tests
-#ifdef __ENABLE_STATIC_TEST
-
-functionalitests_preinit = {
-		#define testcheck(value,errortext) if !(value) exitWith { \
-		private _format = format["%1 - %2",errortext,'value']; \
-		setLastError(_format); \
-	};
-
-	testcheck(vec3("helloworld","Hello",false) call stringStartWith,"")
-	testcheck(!(vec3("helloworld","Hello",true) call stringStartWith),"")
-	testcheck(vec3("helloworld","rld",false) call stringEndWith,"")
-	testcheck(!(vec3("helloWORLD","RLD",true) call stringEndWith),"")
-
-	#undef testcheck
-};
-
-#endif

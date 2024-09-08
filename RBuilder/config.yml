@@ -1,0 +1,61 @@
+version: 1
+
+# Project pathes, relative or absolute
+pathes:
+  # original sources repo
+  sources: ../Src
+  vm_dir: ./VM
+  resdk_dir: ./../
+
+# this generating definelist with dependencies
+defines:
+  RELEASE:
+  DEBUG:
+
+  # enable interact mode with application
+  BASE_VM_SANDBOX:
+
+  # enable renode bindings generator
+  GENERATE_RENODE_BINDINGS:
+
+  # unit-test checks
+  TEST_ALL:
+    needs: DEBUG,RELEASE
+  TEST_FRAMEWORK_BASE:
+    enable_on: TEST_ALL
+  TEST_MATH:
+    enable_on: TEST_ALL
+  TEST_STRINGS:
+    enable_on: TEST_ALL
+  TEST_ARRAYS:
+    enable_on: TEST_ALL
+  TEST_STRUCTS:
+    enable_on: TEST_ALL
+  TEST_ALGORITHMS:
+    enable_on: TEST_ALL
+  TEST_IO:
+    enable_on: TEST_ALL
+
+  TEST_OOP_ALL:
+    enable_on: TEST_ALL
+  TEST_OOP_BASE:
+    enable_on: TEST_OOP_ALL
+  TEST_OOP_GAMEOBJECTS:
+    enable_on: TEST_OOP_ALL
+
+  TEST_DATABASE:
+    enable_on: TEST_ALL
+
+build:
+  include: Inventory\inventory.hpp;LightEngine\LightEngine.hpp;Interactions\interact.hpp;LightEngine\ScriptedEffects.hpp;LightEngine\ScriptedEffectConfigs.sqf;LightEngine\ScriptedConfigs\*.*
+  exclude: Editor;Scipts;.vscode
+
+# common runtime options
+runtime:
+  show_window: false
+  preload_timeout: 30000 # in ms
+  cleanup_logs_on_start: true
+  rb_output: true
+  show_rpt: false
+  auto_reload: false # if true rbuilder will be reload question on RBuilder_exit called
+  

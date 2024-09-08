@@ -4051,7 +4051,7 @@ Description:
 
 Replaced value:
 ```sqf
-"debug_console" callExtension ("<server> mob::" + #funcname + "    " + text + "#0111")
+(["<server> mob::" + #funcname + "    ",text,"#0111"] call stdoutPrint)
 ```
 File: [host\GameObjects\Mobs\Mob.sqf at line 33](../../../Src/host/GameObjects/Mobs/Mob.sqf#L33)
 ## rp_log(text,fmt)
@@ -4064,7 +4064,7 @@ Description:
 
 Replaced value:
 ```sqf
-"debug_console" callExtension ("<server::Roleplay> " + format[text,fmt] + "#0111")
+(["<server::Roleplay> ",text,fmt,"#0111"] call stdoutPrint)
 ```
 File: [host\GameObjects\Mobs\Mob.sqf at line 34](../../../Src/host/GameObjects/Mobs/Mob.sqf#L34)
 ## DELAY_SHOCK
@@ -4735,7 +4735,7 @@ Description:
 
 Replaced value:
 ```sqf
-"debug_console" callExtension (format["[LOG::LIFE]" + (mes) + "#1011",fmt])
+(["[LOG::LIFE]",(mes),fmt,"#1011"] call stdoutPrint)
 ```
 File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1311](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1311)
 ## std_check_dam(low,up)

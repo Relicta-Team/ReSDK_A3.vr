@@ -1,19 +1,329 @@
-# UnitTest.h
+# init.sqf
 
-## assertion_errors
+## test_collections
 
-Type: constant
+Type: Variable
 
-Description: #define unit_test_enabled
+Description: 
 
 
-Replaced value:
+Initial value:
 ```sqf
-_as_err
+[]
 ```
-File: [host\UnitTests\UnitTest.h at line 11](../../../Src/host/UnitTests/UnitTest.h#L11)
+File: [host\UnitTests\init.sqf at line 8](../../../Src/host/UnitTests/init.sqf#L8)
+## test_loadErrCount
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [host\UnitTests\init.sqf at line 9](../../../Src/host/UnitTests/init.sqf#L9)
+## test_const_pathFormatter
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"src\host\UnitTests\TestsCollection\%1.sqf"
+```
+File: [host\UnitTests\init.sqf at line 10](../../../Src/host/UnitTests/init.sqf#L10)
+## test_fixtureStageMap
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+null
+```
+File: [host\UnitTests\init.sqf at line 11](../../../Src/host/UnitTests/init.sqf#L11)
+## test_isExcludedName
+
+Type: function
+
+Description: 
+
+
+File: [host\UnitTests\init.sqf at line 13](../../../Src/host/UnitTests/init.sqf#L13)
+## test_expectMessage
+
+Type: function
+
+Description: 
+- Param: _expr
+- Param: _f
+- Param: _l
+- Param: _mes (optional, default "")
+
+File: [host\UnitTests\init.sqf at line 21](../../../Src/host/UnitTests/init.sqf#L21)
+## test_assertFail
+
+Type: function
+
+Description: 
+- Param: _expr
+- Param: _f
+- Param: _l
+- Param: _mes (optional, default "")
+
+File: [host\UnitTests\init.sqf at line 26](../../../Src/host/UnitTests/init.sqf#L26)
+## test_getAllTestMacroNames
+
+Type: function
+
+Description: 
+
+
+File: [host\UnitTests\init.sqf at line 31](../../../Src/host/UnitTests/init.sqf#L31)
+## test_loadModule
+
+Type: function
+
+Description: 
+- Param: _name
+- Param: _showError (optional, default true)
+
+File: [host\UnitTests\init.sqf at line 46](../../../Src/host/UnitTests/init.sqf#L46)
+## test_internal_buildCurrentModuleTests
+
+Type: function
+
+Description: 
+- Param: _module
+
+File: [host\UnitTests\init.sqf at line 60](../../../Src/host/UnitTests/init.sqf#L60)
+## test_internal_runAllTestCases
+
+Type: function
+
+Description: 
+- Param: __RUT_TESTNAME
+- Param: _testCode
+
+File: [host\UnitTests\init.sqf at line 101](../../../Src/host/UnitTests/init.sqf#L101)
+## test_run
+
+Type: function
+
+Description: 
+
+
+File: [host\UnitTests\init.sqf at line 144](../../../Src/host/UnitTests/init.sqf#L144)
+# loader.sqf
+
+## test_collections
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\UnitTests\loader.sqf at line 8](../../../Src/host/UnitTests/loader.sqf#L8)
+## testLoadingErrors
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [host\UnitTests\loader.sqf at line 9](../../../Src/host/UnitTests/loader.sqf#L9)
+## testFormatterPath
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+"src\host\UnitTests\TestsCollection\%1.sqf"
+```
+File: [host\UnitTests\loader.sqf at line 10](../../../Src/host/UnitTests/loader.sqf#L10)
 ## test_errors
 
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\UnitTests\loader.sqf at line 12](../../../Src/host/UnitTests/loader.sqf#L12)
+## test_hasAnyErrors
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [host\UnitTests\loader.sqf at line 13](../../../Src/host/UnitTests/loader.sqf#L13)
+## test_map_config
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
+File: [host\UnitTests\loader.sqf at line 16](../../../Src/host/UnitTests/loader.sqf#L16)
+## test_hasErrors
+
+Type: function
+
+Description: 
+
+
+File: [host\UnitTests\loader.sqf at line 14](../../../Src/host/UnitTests/loader.sqf#L14)
+## test_onfail
+
+Type: function
+
+Description: TEST_ASSERT
+- Param: _eval
+- Param: _file
+- Param: _line
+- Param: _mes (optional, default "")
+
+File: [host\UnitTests\loader.sqf at line 26](../../../Src/host/UnitTests/loader.sqf#L26)
+## test_warnUnexpected
+
+Type: function
+
+Description: TEST_EXPECT() - nothrow error
+- Param: _eval
+- Param: _file
+- Param: _line
+- Param: _mes (optional, default "")
+
+File: [host\UnitTests\loader.sqf at line 37](../../../Src/host/UnitTests/loader.sqf#L37)
+## loadTest
+
+Type: function
+
+Description: 
+- Param: _testname
+
+File: [host\UnitTests\loader.sqf at line 41](../../../Src/host/UnitTests/loader.sqf#L41)
+## runTest
+
+Type: function
+
+Description: 
+- Param: _module
+
+File: [host\UnitTests\loader.sqf at line 54](../../../Src/host/UnitTests/loader.sqf#L54)
+# TestFramework.h
+
+## __RUT_FUNCTION_PREFIX
+
+Type: constant
+
+Description: get function prefix for working __RUT_STOPTEST
+
+
+Replaced value:
+```sqf
+(tostring{FHEADER;})
+```
+File: [host\UnitTests\TestFramework.h at line 33](../../../Src/host/UnitTests/TestFramework.h#L33)
+## __RUT_STOPTEST(val)
+
+Type: constant
+
+Description: immediately stop test case
+- Param: val
+
+Replaced value:
+```sqf
+RETURN(val)
+```
+File: [host\UnitTests\TestFramework.h at line 35](../../../Src/host/UnitTests/TestFramework.h#L35)
+## __RUT_ASSERTVAL(expr)
+
+Type: constant
+
+Description: validate expression. checking provided by assertion checker - sys::int::evalassert
+- Param: expr
+
+Replaced value:
+```sqf
+([expr] call sys_int_evalassert)
+```
+File: [host\UnitTests\TestFramework.h at line 37](../../../Src/host/UnitTests/TestFramework.h#L37)
+## __RUT_EXPR_MESSAGE(expr,f,l,msg)
+
+Type: constant
+
+Description: generate params for message (assertion, equals, message, etc...)
+- Param: expr
+- Param: f
+- Param: l
+- Param: msg
+
+Replaced value:
+```sqf
+[toString {expr},f,l,msg]
+```
+File: [host\UnitTests\TestFramework.h at line 39](../../../Src/host/UnitTests/TestFramework.h#L39)
+## __RUT_ALLOC_MODULE(module)
+
+Type: constant
+
+Description: 
+- Param: module
+
+Replaced value:
+```sqf
+\
+	private _fixtureStatesBegin = []; \
+	private _fixtureStatesEnd = []; \
+	private _testList = []; \
+	private _testFixturesList = []; \
+	private _errorCountAll = 0;
+```
+File: [host\UnitTests\TestFramework.h at line 47](../../../Src/host/UnitTests/TestFramework.h#L47)
+## __RUT_FREE_MODULE()
+
+Type: constant
+
+Description: dispose all module data and
+- Param: 
+
+Replaced value:
+```sqf
+test_fixtureStageMap = null; _fixtureStatesBegin = null; _fixtureStatesEnd = null; _testList = null; _testFixturesList = null;
+```
+File: [host\UnitTests\TestFramework.h at line 55](../../../Src/host/UnitTests/TestFramework.h#L55)
+## __RUT_DATACASE_INDEX_NAME
+
 Type: constant
 
 Description: 
@@ -21,22 +331,10 @@ Description:
 
 Replaced value:
 ```sqf
-_ts_err
+0
 ```
-File: [host\UnitTests\UnitTest.h at line 12](../../../Src/host/UnitTests/UnitTest.h#L12)
-## setTestName(name)
-
-Type: constant
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-private _unitName = name;
-```
-File: [host\UnitTests\UnitTest.h at line 14](../../../Src/host/UnitTests/UnitTest.h#L14)
-## predefTestName
+File: [host\UnitTests\TestFramework.h at line 57](../../../Src/host/UnitTests/TestFramework.h#L57)
+## __RUT_DATACASE_INDEX_CODE
 
 Type: constant
 
@@ -45,312 +343,220 @@ Description:
 
 Replaced value:
 ```sqf
-_unitName = if (isNil"_unitName") then {"UNDEFINED"} else {_unitName}
+1
 ```
-File: [host\UnitTests\UnitTest.h at line 16](../../../Src/host/UnitTests/UnitTest.h#L16)
-## __internal_log_red(message,fmt)
+File: [host\UnitTests\TestFramework.h at line 58](../../../Src/host/UnitTests/TestFramework.h#L58)
+## __RUT_FIXT_INDEX_STAGE_SETUP
 
 Type: constant
 
 Description: 
+
+
+Replaced value:
+```sqf
+0
+```
+File: [host\UnitTests\TestFramework.h at line 60](../../../Src/host/UnitTests/TestFramework.h#L60)
+## __RUT_FIXT_INDEX_STAGE_TEARDOWN
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+1
+```
+File: [host\UnitTests\TestFramework.h at line 61](../../../Src/host/UnitTests/TestFramework.h#L61)
+## __RUT_FIXT_NEW_STAGE()
+
+Type: constant
+
+Description: 
+- Param: 
+
+Replaced value:
+```sqf
+[{0},{0}]
+```
+File: [host\UnitTests\TestFramework.h at line 63](../../../Src/host/UnitTests/TestFramework.h#L63)
+## __RUT_TESTNAME
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+_testName
+```
+File: [host\UnitTests\TestFramework.h at line 65](../../../Src/host/UnitTests/TestFramework.h#L65)
+## __RUT_ONERROR
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+INC(_errorCountAll); INC(_localErrorCount);
+```
+File: [host\UnitTests\TestFramework.h at line 67](../../../Src/host/UnitTests/TestFramework.h#L67)
+## FIXTURE_SETUP(fixtname)
+
+Type: constant
+
+Description: declaration for fixture - called before test fixture started
+- Param: fixtname
+
+Replaced value:
+```sqf
+;_fRef = [ #fixtname ]; _fixtureStatesBegin pushback _fRef; _fRef pushback 
+```
+File: [host\UnitTests\TestFramework.h at line 72](../../../Src/host/UnitTests/TestFramework.h#L72)
+## FIXTURE_TEARDOWN(fixtname)
+
+Type: constant
+
+Description: declaration for fixture - called after test fixture finished (successed or not)
+- Param: fixtname
+
+Replaced value:
+```sqf
+;_fRef = [ #fixtname ]; _fixtureStatesEnd pushback _fRef; _fRef pushback 
+```
+File: [host\UnitTests\TestFramework.h at line 74](../../../Src/host/UnitTests/TestFramework.h#L74)
+## TEST_F(fixtname,testname)
+
+Type: constant
+
+Description: declaration for test case
+- Param: fixtname
+- Param: testname
+
+Replaced value:
+```sqf
+;_fRef = [format["%1::%2", #fixtname , #testname ]]; _testFixturesList pushback _fRef; _fRef pushback 
+```
+File: [host\UnitTests\TestFramework.h at line 76](../../../Src/host/UnitTests/TestFramework.h#L76)
+## TEST(testname)
+
+Type: constant
+
+Description: declaration for test case
+- Param: testname
+
+Replaced value:
+```sqf
+;_fRef = [ #testname ]; _testList pushback _fRef; _fRef pushback 
+```
+File: [host\UnitTests\TestFramework.h at line 76](../../../Src/host/UnitTests/TestFramework.h#L76)
+## EXPECT_EQ(expr,expect)
+
+Type: constant
+
+Description: 
+- Param: expr
+- Param: expect
+
+Replaced value:
+```sqf
+if !(equals(expr,expect)) then {__RUT_ONERROR; __RUT_EXPR_MESSAGE(expr,__FILE__,__LINE__,format vec3("Expected '%2'; got '%1'",expr,expect)) call test_expectMessage;};
+```
+File: [host\UnitTests\TestFramework.h at line 79](../../../Src/host/UnitTests/TestFramework.h#L79)
+## EXPECT_NE(expr,expect)
+
+Type: constant
+
+Description: 
+- Param: expr
+- Param: expect
+
+Replaced value:
+```sqf
+if !(not_equals(expr,expect)) then {__RUT_ONERROR; __RUT_EXPR_MESSAGE(expr,__FILE__,__LINE__,format vec3("Not expected '%1'",expr,expect)) call test_expectMessage;}
+```
+File: [host\UnitTests\TestFramework.h at line 80](../../../Src/host/UnitTests/TestFramework.h#L80)
+## ASSERT_EQ(expr,expect)
+
+Type: constant
+
+Description: 
+- Param: expr
+- Param: expect
+
+Replaced value:
+```sqf
+if !(equals(expr,expect)) then {__RUT_ONERROR; __RUT_EXPR_MESSAGE(expr,__FILE__,__LINE__,format vec3("Expected '%2'; got '%1'",expr,expect)) call test_assertFail; __RUT_STOPTEST(-1)};
+```
+File: [host\UnitTests\TestFramework.h at line 82](../../../Src/host/UnitTests/TestFramework.h#L82)
+## ASSERT_NE(expr,expect)
+
+Type: constant
+
+Description: 
+- Param: expr
+- Param: expect
+
+Replaced value:
+```sqf
+if !(not_equals(expr,expect)) then {__RUT_ONERROR; __RUT_EXPR_MESSAGE(expr,__FILE__,__LINE__,format vec3("Not expected '%1'",expr,expect)) call test_assertFail; __RUT_STOPTEST(-1)};
+```
+File: [host\UnitTests\TestFramework.h at line 83](../../../Src/host/UnitTests/TestFramework.h#L83)
+## ASSERT(expr)
+
+Type: constant
+
+Description: 
+- Param: expr
+
+Replaced value:
+```sqf
+if !(__RUT_ASSERTVAL(expr)) then {__RUT_ONERROR; __RUT_EXPR_MESSAGE(expr,__FILE__,__LINE__,"") call test_assertFail; __RUT_STOPTEST(-1)}
+```
+File: [host\UnitTests\TestFramework.h at line 82](../../../Src/host/UnitTests/TestFramework.h#L82)
+## ASSERT_STR(expr,message)
+
+Type: constant
+
+Description: 
+- Param: expr
 - Param: message
-- Param: fmt
 
 Replaced value:
 ```sqf
-predefTestName; "debug_console" callExtension (format[message,fmt] + "#1001")
+if !(__RUT_ASSERTVAL(expr)) then {__RUT_ONERROR; __RUT_EXPR_MESSAGE(expr,__FILE__,__LINE__,message) call test_assertFail; __RUT_STOPTEST(-1)}
 ```
-File: [host\UnitTests\UnitTest.h at line 18](../../../Src/host/UnitTests/UnitTest.h#L18)
-## __internal_log_green(message,fmt)
+File: [host\UnitTests\TestFramework.h at line 86](../../../Src/host/UnitTests/TestFramework.h#L86)
+## EXPECT(expr)
 
 Type: constant
 
 Description: 
+- Param: expr
+
+Replaced value:
+```sqf
+if !(__RUT_ASSERTVAL(expr)) then {__RUT_ONERROR; __RUT_EXPR_MESSAGE(expr,__FILE__,__LINE__,"") call test_expectMessage;}
+```
+File: [host\UnitTests\TestFramework.h at line 79](../../../Src/host/UnitTests/TestFramework.h#L79)
+## EXPECT_STR(expr,message)
+
+Type: constant
+
+Description: 
+- Param: expr
 - Param: message
-- Param: fmt
 
 Replaced value:
 ```sqf
-predefTestName; "debug_console" callExtension (format[message,fmt] + "#0101")
+if !(__RUT_ASSERTVAL(expr)) then {__RUT_ONERROR; __RUT_EXPR_MESSAGE(expr,__FILE__,__LINE__,message) call test_expectMessage;}
 ```
-File: [host\UnitTests\UnitTest.h at line 19](../../../Src/host/UnitTests/UnitTest.h#L19)
-## __internal_log_common(message,fmt)
-
-Type: constant
-
-Description: 
-- Param: message
-- Param: fmt
-
-Replaced value:
-```sqf
-predefTestName; "debug_console" callExtension (format[message,fmt] + "#1101")
-```
-File: [host\UnitTests\UnitTest.h at line 20](../../../Src/host/UnitTests/UnitTest.h#L20)
-## assert_error(mes)
-
-Type: constant
-
-Description: 
-- Param: mes
-
-Replaced value:
-```sqf
-__internal_log_red("<Assert>	["+_unitName+"]: - %1",mes); INC(assertion_errors)
-```
-File: [host\UnitTests\UnitTest.h at line 22](../../../Src/host/UnitTests/UnitTest.h#L22)
-## test_ok(mes)
-
-Type: constant
-
-Description: 
-- Param: mes
-
-Replaced value:
-```sqf
-__internal_log_green("<Test>	["+_unitName+"]: - Test OK. %1",mes)
-```
-File: [host\UnitTests\UnitTest.h at line 24](../../../Src/host/UnitTests/UnitTest.h#L24)
-## test_fail(mes)
-
-Type: constant
-
-Description: 
-- Param: mes
-
-Replaced value:
-```sqf
-__internal_log_red("<Test>	["+_unitName+"]: - Test Fail! %1",mes); INC(test_errors)
-```
-File: [host\UnitTests\UnitTest.h at line 25](../../../Src/host/UnitTests/UnitTest.h#L25)
-## test_flags(flags)
-
-Type: constant
-
-Description: 
-- Param: flags
-
-Replaced value:
-```sqf
-flags
-```
-File: [host\UnitTests\UnitTest.h at line 27](../../../Src/host/UnitTests/UnitTest.h#L27)
-## onlyMultiplayer
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-if (!isMultiplayer) exitWith {};
-```
-File: [host\UnitTests\UnitTest.h at line 28](../../../Src/host/UnitTests/UnitTest.h#L28)
-## newTest(name)
-
-Type: constant
-
-> Exists if **unit_test_enabled** defined
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-call { \
-		setTestName('name') \
-		private assertion_errors = 0;  private test_errors = 0;
-```
-File: [host\UnitTests\UnitTest.h at line 31](../../../Src/host/UnitTests/UnitTest.h#L31)
-## newTest(name)
-
-Type: constant
-
-> Exists if **unit_test_enabled** not defined
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-{
-```
-File: [host\UnitTests\UnitTest.h at line 35](../../../Src/host/UnitTests/UnitTest.h#L35)
-## endTest
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-__hasFail = false; \
-if (assertion_errors > 0) then { \
-	__internal_log_red("		ASSERTION FAILED %1 TIMES",assertion_errors); \
-	__hasFail = true; \
-}; \
-if (test_errors > 0) then { \
-	__internal_log_red("		TESTS FAILED %1 TIMES",test_errors); \
-	__hasFail = true; \
-}; \
-if (__hasFail) then { \
-	__internal_log_red("====== Tests <%1> FAILED ======",_unitName) \
-} else { \
-	__internal_log_green("====== Tests <%1> SUCCESS ======",_unitName) \
-}; \
-};
-```
-File: [host\UnitTests\UnitTest.h at line 39](../../../Src/host/UnitTests/UnitTest.h#L39)
-## assert_true(cond,mes)
-
-Type: constant
-
-Description: 
-- Param: cond
-- Param: mes
-
-Replaced value:
-```sqf
-if (!(cond)) then { \
-	assert_error('Assertion (cond) failed! ' + mes) \
-}
-```
-File: [host\UnitTests\UnitTest.h at line 55](../../../Src/host/UnitTests/UnitTest.h#L55)
-## assert_false(cond,mes)
-
-Type: constant
-
-Description: 
-- Param: cond
-- Param: mes
-
-Replaced value:
-```sqf
-if (cond) then { \
-	assert_error('Assertion (NOT cond) failed! ' + mes) \
-}
-```
-File: [host\UnitTests\UnitTest.h at line 59](../../../Src/host/UnitTests/UnitTest.h#L59)
-## assert_op(a,op,b,mes)
-
-Type: constant
-
-Description: 
-- Param: a
-- Param: op
-- Param: b
-- Param: mes
-
-Replaced value:
-```sqf
-if (!(a op b)) then { \
-	assert_error('Assertion (a op b) failed!' + mes) \
-}
-```
-File: [host\UnitTests\UnitTest.h at line 63](../../../Src/host/UnitTests/UnitTest.h#L63)
-## assert_def(var,mes)
-
-Type: constant
-
-Description: 
-- Param: var
-- Param: mes
-
-Replaced value:
-```sqf
-if (isNil {var}) then { \
-	assert_error('Assertion (var is defined) failed!' + mes) \
-}
-```
-File: [host\UnitTests\UnitTest.h at line 67](../../../Src/host/UnitTests/UnitTest.h#L67)
-## test_true(CONDITION, MESSAGE)
-
-Type: constant
-
-Description: 
-- Param: CONDITION
-- Param: MESSAGE
-
-Replaced value:
-```sqf
-\
-    if (CONDITION) then \
-    { \
-        test_ok('(CONDITION)'); \
-    } \
-    else \
-    { \
-        test_fail('(CONDITION) ' + (MESSAGE)); \
-    }
-```
-File: [host\UnitTests\UnitTest.h at line 71](../../../Src/host/UnitTests/UnitTest.h#L71)
-## test_false(CONDITION, MESSAGE)
-
-Type: constant
-
-Description: 
-- Param: CONDITION
-- Param: MESSAGE
-
-Replaced value:
-```sqf
-\
-    if (not (CONDITION)) then \
-    { \
-        test_ok('(not (CONDITION))'); \
-    } \
-    else \
-    { \
-        test_fail('(not (CONDITION)) ' + (MESSAGE)); \
-    }
-```
-File: [host\UnitTests\UnitTest.h at line 81](../../../Src/host/UnitTests/UnitTest.h#L81)
-## test_op(A,OPERATOR,B,MESSAGE)
-
-Type: constant
-
-Description: 
-- Param: A
-- Param: OPERATOR
-- Param: B
-- Param: MESSAGE
-
-Replaced value:
-```sqf
-\
-    if ((A) OPERATOR (B)) then \
-    { \
-        test_ok('(A OPERATOR B)') \
-    } \
-    else \
-    { \
-        test_fail('(A OPERATOR B)') \
-    }
-```
-File: [host\UnitTests\UnitTest.h at line 91](../../../Src/host/UnitTests/UnitTest.h#L91)
-## TEST_DEFINED(VARIABLE,MESSAGE)
-
-Type: constant
-
-Description: 
-- Param: VARIABLE
-- Param: MESSAGE
-
-Replaced value:
-```sqf
-\
-    if (not isNil {VARIABLE}) then \
-    { \
-        test_ok('(' + VARIABLE + ' is defined)'); \
-    } \
-    else \
-    { \
-        test_fail('(' + VARIABLE + ' is not defined)' + (MESSAGE)); \
-    }
-```
-File: [host\UnitTests\UnitTest.h at line 101](../../../Src/host/UnitTests/UnitTest.h#L101)
+File: [host\UnitTests\TestFramework.h at line 88](../../../Src/host/UnitTests/TestFramework.h#L88)
 # UnitTest.sqf
 
 ## wToPrec(val)
@@ -377,3 +583,17 @@ Replaced value:
 (parseSimpleArray ("RelictaNC" callExtension (var)))
 ```
 File: [host\UnitTests\UnitTest.sqf at line 39](../../../Src/host/UnitTests/UnitTest.sqf#L39)
+# io.sqf
+
+## PREPROCESS_DATA
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"PREPROCESS_OUTPUT"
+```
+File: [host\UnitTests\TestsCollection\io.sqf at line 5](../../../Src/host/UnitTests/TestsCollection/io.sqf#L5)

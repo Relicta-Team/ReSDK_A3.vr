@@ -161,10 +161,10 @@
 
 //instansing
 #ifdef STRUCT_USE_ALLOC_INFO
-	#define struct_new(name) (call{_sbj___ = [ pts_##name ] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
+	#define struct_new(name) (call{_sbj___ = [ pts_##name ,nil] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
 	#define struct_newp(name,arglist) (call{_sbj___ = [ pts_##name ,[arglist]] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
 #else
-	#define struct_new(name) ([ pts_##name ] call struct_iallc)
+	#define struct_new(name) ([ pts_##name ,nil ] call struct_iallc)
 	#define struct_newp(name,arglist) ([ pts_##name ,[arglist]] call struct_iallc)
 #endif
 

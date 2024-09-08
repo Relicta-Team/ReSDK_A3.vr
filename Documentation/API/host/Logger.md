@@ -192,7 +192,7 @@ Description:
 - Param: _second
 - Param: _millisecond
 
-File: [host\Logger\Logger_init.sqf at line 178](../../../Src/host/Logger/Logger_init.sqf#L178)
+File: [host\Logger\Logger_init.sqf at line 185](../../../Src/host/Logger/Logger_init.sqf#L185)
 ## logger_formatMob
 
 Type: function
@@ -200,4 +200,4 @@ Type: function
 Description: 
 - Param: _mob
 
-File: [host\Logger\Logger_init.sqf at line 185](../../../Src/host/Logger/Logger_init.sqf#L185)
+File: [host\Logger\Logger_init.sqf at line 192](../../../Src/host/Logger/Logger_init.sqf#L192)

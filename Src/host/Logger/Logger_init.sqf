@@ -157,6 +157,13 @@ logger_action = {
 	#endif
 
 	if (uiNamespace getVariable ["A3LOGEXT_HASERROR",false]) exitWith {false};
+	
+	#ifdef RBUILDER
+	if (true) exitWith {
+		__post_message_RB(format ["[%1]  %2" arg _cat arg _dat])
+		true;
+	};
+	#endif
 
 	private _result = "A3LOG" callExtension [
 		"LOG",
@@ -164,7 +171,7 @@ logger_action = {
 			format["-1%1%2%1%3%1%4", toString[29], _dat, _cat, _lvl]
 		]
 	];
-
+	
 	if (equals((_result param [0]),"[]") && equals((_result param [1]),0) 
 		&& equals((_result param [2]),0)) exitWith {true};
 

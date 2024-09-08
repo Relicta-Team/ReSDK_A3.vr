@@ -55,4 +55,4 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 95](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L95)
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 98](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L98)

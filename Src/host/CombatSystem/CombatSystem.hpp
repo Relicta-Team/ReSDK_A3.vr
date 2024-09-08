@@ -6,7 +6,7 @@
 #include <CombatRules.hpp>
 
 #define reqSkillAdd(name,minval) [#name,minval]
-#define wmLog(text,fmt) "debug_console" callExtension ("<Roleplay::WeapModule>" + format[text,fmt] + "#0111");
+#define wmLog(text,fmt) ["<Roleplay::WeapModule>",format[text,fmt],"#0111"] call stdoutPrint;
 
 //типы защиты уворот, парирование, блок
 #define DEF_TYPE_DODGE "def_dodge"

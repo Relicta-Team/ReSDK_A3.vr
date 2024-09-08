@@ -35,6 +35,10 @@ env:
   source_out_path: ./Third-party/BuildTools/output.txt
   GENDOC_COMMIT_MES: Generated documentation
 
+  rb_dir: ${{github.workspace}}/RBuilder/
+  rb_exe: ${{github.workspace}}/RBuilder/rb.exe
+  rb_args_init: -init build -l
+
 jobs:
 
   # Проверка клиента, сервера и карт (только в PR, workflow_dispatch)
@@ -148,6 +152,34 @@ jobs:
           name: Output log ${{ matrix.build_type }}
           path: ${{ env.source_out_path }}
   
+  checkserver-vm:
+    name: Check server VM
+    runs-on: windows-latest
+    needs: [ValidatePR]
+    strategy:
+      fail-fast: true
+      matrix:
+        flags:
+          - -d DEBUG
+          - -d RELEASE
+          - -d TEST_ALL -d DEBUG
+          - -d TEST_ALL -d RELEASE
+    steps:
+      - name: Setup msvc+directx
+        run: |
+          choco install directx
+          choco install vcredist2010
+          choco install vcredist2012
+      - uses: actions/checkout@v3
+      - name: Init RBuilder
+        working-directory: ${{env.rb_dir}}
+        run: ${{env.rb_exe}} ${{env.rb_args_init}}
+
+      - name: Run RBuilder
+        id: rb_run
+        working-directory: ${{env.rb_dir}}
+        run: ${{ env.rb_exe }} run ${{ matrix.flags }}
+
   # Обновление версии и документации (only on main)
 
   #updateversion:
