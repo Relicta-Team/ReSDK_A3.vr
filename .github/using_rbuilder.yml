@@ -1,0 +1,26 @@
+name: RBuilder preparing
+
+on:
+  workflow_call:
+    inputs:
+      rb_dir:
+        required: true
+        type: string
+      renode_dir:
+        required: true
+        type: string
+      DEPLOY_TOKEN:
+        required: true
+
+
+jobs:
+  prepare:
+    steps:
+      - name: Setup msvc+directx
+        run: |
+          choco install directx
+          choco install vcredist2010
+          choco install vcredist2012
+      
+      - name: Setup Python
+        uses: actions/setup-python@v3.1.4
