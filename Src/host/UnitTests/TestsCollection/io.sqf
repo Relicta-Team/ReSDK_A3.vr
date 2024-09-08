@@ -132,7 +132,7 @@ TEST(LootSystem_AllCheckBase)
 	//check naming override
 	private _fkey = [_content,{isTypeOf(_x,Key)},nullPtr] call searchInList;
 	ASSERT(!isNullReference(_fkey));
-	ASSERT_EQ(getVar(_fkey,name),"Тест-ключ");
+	ASSERT_EQ(toarray getVar(_fkey,name),toarray "Тест-ключ");
 
 	[_tobj] call deleteGameObject;
 }
