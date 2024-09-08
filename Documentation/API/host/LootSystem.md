@@ -40,6 +40,22 @@ Description:
 - Param: _cfgPath
 
 File: [host\LootSystem\LootSystem_init.sqf at line 19](../../../Src/host/LootSystem/LootSystem_init.sqf#L19)
+## loot_internal_resolvePath
+
+Type: function
+
+Description: 
+- Param: _p
+
+File: [host\LootSystem\LootSystem_init.sqf at line 25](../../../Src/host/LootSystem/LootSystem_init.sqf#L25)
+## loot_prepareAll
+
+Type: function
+
+Description: 
+
+
+File: [host\LootSystem\LootSystem_init.sqf at line 47](../../../Src/host/LootSystem/LootSystem_init.sqf#L47)
 ## loot_loadConfig
 
 Type: function
@@ -47,7 +63,16 @@ Type: function
 Description: 
 - Param: _path
 
-File: [host\LootSystem\LootSystem_init.sqf at line 24](../../../Src/host/LootSystem/LootSystem_init.sqf#L24)
+File: [host\LootSystem\LootSystem_init.sqf at line 68](../../../Src/host/LootSystem/LootSystem_init.sqf#L68)
+## loot_processObject
+
+Type: function
+
+Description: 
+- Param: _type
+- Param: _obj
+
+File: [host\LootSystem\LootSystem_init.sqf at line 133](../../../Src/host/LootSystem/LootSystem_init.sqf#L133)
 # LootSystem_structs.sqf
 
 ## LOOT_COMPARE_BY_NAME

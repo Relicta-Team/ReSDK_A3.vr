@@ -594,6 +594,14 @@ Description:
 
 Replaced value:
 ```sqf
-"PREPROCESS_OUTPUT"
+" in _content);
 ```
-File: [host\UnitTests\TestsCollection\io.sqf at line 5](../../../Src/host/UnitTests/TestsCollection/io.sqf#L5)
+File: [host\UnitTests\TestsCollection\io.sqf at line 155](../../../Src/host/UnitTests/TestsCollection/io.sqf#L155)
+## oop_getFieldBaseValue
+
+Type: function
+
+Description: 
+
+
+File: [host\UnitTests\TestsCollection\io.sqf at line 83](../../../Src/host/UnitTests/TestsCollection/io.sqf#L83)
