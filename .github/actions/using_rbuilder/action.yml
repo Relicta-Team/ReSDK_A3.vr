@@ -15,6 +15,7 @@ on:
 
 runs:
   using: "composite"
+  shell: pwsh
   steps:
     - name: Setup msvc+directx
       run: |
