@@ -1,0 +1,23 @@
+
+
+TestCollection:
+  name: Лут-тест
+  inherit: BaseLoot
+  gamemodes:
+    - regex: GMTemplate(Scripted)?
+  items:
+    AmmoBoxPBM:
+      prob: 80
+      count: [2,5]
+    PistolPBM:
+      name: Пистоль
+      prob: 100
+    MagazinePBM:
+      name: Магазинчик
+      prob: 80
+
+
+TestCollection2:
+  inherit: TestCollection
+  maps: 
+    - Template

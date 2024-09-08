@@ -32,6 +32,24 @@ var(canUseContainer,true); //флаг для добавления содержи
 getterconst_func(startWith,[]); //list of items to start: getterconst_func(startWith,[["Item",["name","Предметец"],["weight",1200]],["Brain",["name","Объект"]]])
 // ------------- new vars end
 
+
+editor_attribute("alias" arg "Шаблон лута")
+editor_attribute("Tooltip" arg "Указывает какой набор лута будет заспавнен в этом хранилище")
+editor_attribute("EditorVisible" arg "type:string" arg "stringmaxsize:512")
+var(preinit@__lootTemplate,""); //системная переменная для установки ключей через редактор
+
+func(__handlePreInitVars__)
+{
+	objParams();
+	super();
+	private _lootType = getSelf(preinit@__lootTemplate);
+	if (_lootType != stringEmpty) then {
+		[_lootType,this] call loot_processObject;
+	};
+	setSelf(preinit@__lootTemplate,null);
+};
+
+
 //!вычистку содержимого нельзя сделать через autoref, так как деструктор вызывает removeItem, который изменяет исходный массив и появляются миссы
 func(destructor)
 {

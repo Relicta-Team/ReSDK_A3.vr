@@ -20,33 +20,46 @@ struct(LootTempate)
 	def_null(type) //loot typename
 	def_null(name) //loot name
 
+	def(isInterface) false
+	def(inherit) ""
+	def_null(childs);
+
 	def(path) ""; //config location
 
 	def(__hasErrorOnCreate) false;
-	def(allowMaps) ["ALL"]
-	def(allowModes) ["ALL"]
+	def_null(allowMaps)
+	def_null(allowModes)
 
 	def(init)
 	{
 		params ["_type","_path","_cfgData"];
+		
+		self setv(childs,[]);
 
 		self setv(type,_type);
 		self setv(path,_path);
+
 
 		private _allowedKeys = [
 			"type",
 			"interface",
 			"inherit",
 			"name",
-			"allowmaps",
-			"allowgamemodes",
+			"maps",
+			"gamemodes",
 			"items"
 		];
 		private _name = _cfgData get "name";
 		if !isNullVar(_name) then {self setv(name,_name)};
-		private _alm = _cfgData getOrDefault ["allowmaps",[]];
-		private _alg = _cfgData getOrDefault ["allowgamemodes",[]];
+		private _alm = _cfgData getOrDefault ["maps",[]];
+		private _alg = _cfgData getOrDefault ["gamemodes",[]];
 		private _items = _cfgData getOrDefault ["items",[]];
+
+		self setv(isInterface, _cfgData getOrDefault vec2("interface",false));
+		self setv(inherit, _cfgData getOrDefault vec2("inherit",""));
+		if (_type == "BaseLoot") then {
+			self setv(inherit,null);
+		};
 
 		/*===================================
 			Map and gamemode restrictions
@@ -173,6 +186,11 @@ struct(LootTempate)
 		true
 	}
 
+	def(str)
+	{
+		format["%1::%2",struct_typename(self),self getv(type)]
+	}
+
 endstruct
 
 //структура ограничения спавна лута
@@ -184,6 +202,13 @@ struct(LootRestrictionType)
 	def(init)
 	{
 		params ["_ct","_cm","_val"];
+
+		if (_ct == LOOT_COMPARE_MODE_MAP && {
+			_cm == LOOT_COMPARE_BY_TYPEOF
+		}) then {
+			_cm = LOOT_COMPARE_BY_NAME;
+		};
+
 		self setv(compareType,_ct);
 		self setv(compareMode,_cm);
 		self setv(value,_val);

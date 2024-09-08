@@ -42,6 +42,7 @@ loadFile("src\host\Client\client.sqf");
 loadFile("src\host\Gender\Genders.sqf");
 loadFile("src\host\Materials\Materials_init.sqf");
 call nodegen_loadClasses;
+call loot_prepareAll;
 // start class generator
 call cs_runtime_internal_makeAll;
 

@@ -3,12 +3,12 @@ TestLoot:
   interface: true # интерфейсы только для заготовки шаблонов
   inherit: BaseLoot # Опциональное наследование конфигурации.
   name: some name # Описательное название конфигурации (опционально)
-  allowmaps: # попадание хотя бы под одну группу разрешает тип
+  maps: # попадание хотя бы под одну группу разрешает тип
     - regex: .*Map[1-9] #regex like pattern
     - name: TestMap #exact
     - TestMap
     - typeof: BaseMap #type inheritance check
-  #allowgamemodes: # не определенный тип снимает все ограничения
+  #gamemodes: # не определенный тип снимает все ограничения
   items:
     Item:
       name: Overriden name
