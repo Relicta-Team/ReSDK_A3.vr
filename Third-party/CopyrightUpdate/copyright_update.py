@@ -60,7 +60,8 @@ try:
         'src/Editor/Bin/Maps/',
         'src/Editor/Bin/ProtoMap/',
         'src/version.hpp',
-        'src/client/ProxyItems/RProx_cfg.h'
+        'src/client/ProxyItems/RProx_cfg.h',
+        "src/host/LootSystem/loader.sqf"
     ]
     
 
