@@ -29,6 +29,7 @@ jobs:
       - name: Setup msvc+directx
         run: |
           choco config set cacheLocation "${{ github.workspace }}\choco-cache"
+          choco list
           choco install directx
           choco install vcredist2010
           choco install vcredist2012
