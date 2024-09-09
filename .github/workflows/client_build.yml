@@ -12,7 +12,7 @@ jobs:
   build:
     name: Test
     runs-on: windows-2019
-    if: github.repository_owner != 'Relicta-Team'
+    if: github.repository_owner != 'Relicta-Team' and vars.local_build != ''
     strategy:
       fail-fast: true
       matrix:
