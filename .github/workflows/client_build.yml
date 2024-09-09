@@ -25,7 +25,7 @@ jobs:
         run: |
           choco install directx
           choco install vcredist2010
-          
+          choco install vcredist2012
       - name: Init
         working-directory: ${{env.rb_dir}}
         run: ${{env.rb_exe}} ${{env.rb_args_init}}
