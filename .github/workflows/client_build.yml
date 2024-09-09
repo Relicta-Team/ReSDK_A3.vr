@@ -23,7 +23,9 @@ jobs:
     steps:
       - name: Setup msvc+directx
         run: |
-          echo skip
+          choco install directx
+          choco install vcredist2010
+          choco install vcredist2012
         
       - uses: actions/checkout@v3
       - name: Init
@@ -33,7 +35,7 @@ jobs:
       - name: Run
         id: rb_run
         working-directory: ${{env.rb_dir}}
-        run: ${{ env.rb_exe }} run ${{ matrix.flags }} 1> app_output.log 2> app_error.log
+        run: ${{ env.rb_exe }} run ${{ matrix.flags }}
 
       - name: Export Detailed Event Logs
         if: failure()
@@ -56,5 +58,3 @@ jobs:
           name: detailed-event-logs
           path: |
             detailed_event_logs.txt
-            app_output.log
-            app_error.log
