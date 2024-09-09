@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Setup msvc+directx
         run: |
+          choco install directx
+          choco install vcredist2010
           choco install vcredist2012
           choco install vcredist2013
         
