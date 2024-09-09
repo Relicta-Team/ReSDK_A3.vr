@@ -26,9 +26,7 @@ jobs:
           choco install directx
           choco install vcredist2010
           choco install vcredist2012
-          choco install vcredist2013
-      - name: Dotnet check
-        run: dotnet --info
+      
       - uses: actions/checkout@v3
       - name: Init
         working-directory: ${{env.rb_dir}}
