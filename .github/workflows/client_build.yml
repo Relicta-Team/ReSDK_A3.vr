@@ -40,6 +40,9 @@ jobs:
           if (Test-Path ${{github.workspace}}/choco_cache)
           {
             Write-Host "Choco cache exists"
+            choco install directx -y
+            choco install vcredist2010 -y
+            choco install vcredist2012 -y
           } else {
             choco install directx
             choco install vcredist2010
