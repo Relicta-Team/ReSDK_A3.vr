@@ -24,6 +24,7 @@ jobs:
       - name: Setup msvc+directx
         run: |
           
+          choco install vcredist2010
           choco install vcredist2012
       - name: Init
         working-directory: ${{env.rb_dir}}
