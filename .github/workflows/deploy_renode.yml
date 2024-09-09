@@ -73,19 +73,26 @@ jobs:
           path: |
             ${{ env.renode_artifacts_sources_path }}
       
-      - name: Export Event Logs
+      - name: Export Detailed Event Logs
         if: failure()
         run: |
-          echo "Exporting Windows event logs..."
-          Get-EventLog -LogName Application -Newest 100 | Out-File -FilePath event_logs.txt
-          Get-EventLog -LogName System -Newest 100 | Out-File -Append event_logs.txt
+          echo "Exporting detailed Windows event logs..."
+          Get-WinEvent -LogName Application -MaxEvents 100 | ForEach-Object {
+            $_ | Select-Object TimeCreated, Id, LevelDisplayName, Message | Format-List | Out-File -Append -FilePath detailed_event_logs.txt
+          }
+          
+          Get-WinEvent -LogName System -MaxEvents 100 | ForEach-Object {
+            $_ | Select-Object TimeCreated, Id, LevelDisplayName, Message | Format-List | Out-File -Append -FilePath detailed_event_logs.txt
+          }
 
-      - name: Upload Event Logs
+      - name: Upload Detailed Event Logs
         if: failure()
         uses: actions/upload-artifact@v3
         with:
-          name: event-logs
-          path: event_logs.txt
+          name: error-logs
+          path: |
+            detailed_event_logs.txt
+            ${{github.workspace}}/RBuilder/VM/profile/
 
 
       - name: Update ReNode application

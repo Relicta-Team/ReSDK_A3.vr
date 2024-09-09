@@ -64,19 +64,26 @@ jobs:
           path: |
             ${{ env.rb_dir }}
 
-      - name: Export Event Logs
+      - name: Export Detailed Event Logs
         if: failure()
         run: |
-          echo "Exporting Windows event logs..."
-          Get-EventLog -LogName Application -Newest 100 | Out-File -FilePath event_logs.txt
-          Get-EventLog -LogName System -Newest 100 | Out-File -Append event_logs.txt
+          echo "Exporting detailed Windows event logs..."
+          Get-WinEvent -LogName Application -MaxEvents 100 | ForEach-Object {
+            $_ | Select-Object TimeCreated, Id, LevelDisplayName, Message | Format-List | Out-File -Append -FilePath detailed_event_logs.txt
+          }
+          
+          Get-WinEvent -LogName System -MaxEvents 100 | ForEach-Object {
+            $_ | Select-Object TimeCreated, Id, LevelDisplayName, Message | Format-List | Out-File -Append -FilePath detailed_event_logs.txt
+          }
 
-      - name: Upload Event Logs
+      - name: Upload Detailed Event Logs
         if: failure()
         uses: actions/upload-artifact@v3
         with:
-          name: event-logs
-          path: event_logs.txt
+          name: error-logs
+          path: |
+            detailed_event_logs.txt
+            ${{ env.rb_dir }}VM/profile/
           
       - name: Update RBuilder application
         uses: stefanzweifel/git-auto-commit-action@v5
