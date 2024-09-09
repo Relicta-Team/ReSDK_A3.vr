@@ -30,9 +30,9 @@ jobs:
       - name: Setup msvc+directx
         run: |
           choco config set cacheLocation ${{github.workspace}}/choco_cache
-          choco install directx -dv
-          choco install vcredist2010 -dv
-          choco install vcredist2012 -dv
+          choco install directx
+          choco install vcredist2010
+          choco install vcredist2012
       - name: Init
         working-directory: ${{env.rb_dir}}
         run: ${{env.rb_exe}} ${{env.rb_args_init}}
