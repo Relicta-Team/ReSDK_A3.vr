@@ -8,7 +8,6 @@ env:
   rb_exe: ${{github.workspace}}/RBuilder/rb.exe
   rb_args_init: -init build -l
 
-
 jobs:
   build:
     name: Test
