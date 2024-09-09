@@ -14,10 +14,12 @@ jobs:
     name: Test
     runs-on: windows-2019
     if: github.repository_owner != 'Relicta-Team'
-    matrix:
-        flags:
-          - -d TEST_ALL -d DEBUG
-          - -d TEST_ALL -d RELEASE
+    strategy:
+      fail-fast: true
+      matrix:
+          flags:
+            - -d TEST_ALL -d DEBUG
+            - -d TEST_ALL -d RELEASE
     steps:
       - name: Cache Choco
         uses: actions/cache@v4
