@@ -21,33 +21,10 @@ jobs:
             - -d TEST_ALL -d RELEASE
     steps:
       - uses: actions/checkout@v3
-      - name: Cache Choco
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{github.workspace}}/choco_cache
-            C:\ProgramData\chocolatey\bin\directx
-            C:\ProgramData\chocolatey\bin\vcredist2010
-            C:\ProgramData\chocolatey\bin\vcredist2012
-            C:\ProgramData\chocolatey\lib\directx
-            C:\ProgramData\chocolatey\lib\vcredist2010
-            C:\ProgramData\chocolatey\lib\vcredist2012
-
-          key: ${{ runner.os }}-choco-temp-cache
       - name: Setup msvc+directx
         run: |
-          choco config set cacheLocation ${{github.workspace}}/choco_cache
-          if (Test-Path ${{github.workspace}}/choco_cache)
-          {
-            Write-Host "Choco cache exists"
-            choco upgrade directx -y
-            choco upgrade vcredist2010 -y
-            choco upgrade vcredist2012 -y
-          } else {
-            choco install directx
-            choco install vcredist2010
-            choco install vcredist2012  
-          }
+          choco install vcredist2010
+          
       - name: Init
         working-directory: ${{env.rb_dir}}
         run: ${{env.rb_exe}} ${{env.rb_args_init}}
