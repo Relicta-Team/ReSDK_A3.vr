@@ -41,12 +41,10 @@ jobs:
         if: failure()
         run: |
           echo "Exporting detailed Windows event logs..."
-          # Экспортируем подробные логи из журнала Application
           Get-WinEvent -LogName Application -MaxEvents 100 | ForEach-Object {
             $_ | Select-Object TimeCreated, Id, LevelDisplayName, Message | Format-List | Out-File -Append -FilePath detailed_event_logs.txt
           }
           
-          # Экспортируем подробные логи из журнала System
           Get-WinEvent -LogName System -MaxEvents 100 | ForEach-Object {
             $_ | Select-Object TimeCreated, Id, LevelDisplayName, Message | Format-List | Out-File -Append -FilePath detailed_event_logs.txt
           }
@@ -55,6 +53,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v3
         with:
-          name: detailed-event-logs
+          name: error-logs
           path: |
             detailed_event_logs.txt
+            ${{ env.rb_dir }}VM/profile/
