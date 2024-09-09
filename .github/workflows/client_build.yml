@@ -25,14 +25,10 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ${{ github.workspace }}\choco-cache
-            C:\ProgramData\chocolatey\lib\directx
-            C:\ProgramData\chocolatey\lib\vcredist2010
-            C:\ProgramData\chocolatey\lib\vcredist2012
+            C:\ProgramData\chocolatey\lib
           key: ${{ runner.os }}-choco-temp-cache
       - name: Setup msvc+directx
         run: |
-          choco config set cacheLocation "${{ github.workspace }}\choco-cache"
           choco list
           choco install directx
           choco install vcredist2010
