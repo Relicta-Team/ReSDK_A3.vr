@@ -23,9 +23,8 @@ jobs:
     steps:
       - name: Setup msvc+directx
         run: |
-          choco install directx
-          choco install vcredist2010
-          choco install vcredist2012
+          echo skip
+        
       - uses: actions/checkout@v3
       - name: Init
         working-directory: ${{env.rb_dir}}
@@ -36,3 +35,16 @@ jobs:
         working-directory: ${{env.rb_dir}}
         run: ${{ env.rb_exe }} run ${{ matrix.flags }}
 
+      - name: Export Event Logs
+        if: failure()
+        run: |
+          echo "Exporting Windows event logs..."
+          Get-EventLog -LogName Application -Newest 100 | Out-File -FilePath event_logs.txt
+          Get-EventLog -LogName System -Newest 100 | Out-File -Append event_logs.txt
+
+      - name: Upload Event Logs
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: event-logs
+          path: event_logs.txt
