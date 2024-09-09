@@ -24,7 +24,11 @@ jobs:
       - name: Cache Choco
         uses: actions/cache@v4
         with:
-          path: ${{ github.workspace }}\choco-cache
+          path: |
+            ${{ github.workspace }}\choco-cache
+            C:\ProgramData\chocolatey\lib\directx
+            C:\ProgramData\chocolatey\lib\vcredist2010
+            C:\ProgramData\chocolatey\lib\vcredist2012
           key: ${{ runner.os }}-choco-temp-cache
       - name: Setup msvc+directx
         run: |
