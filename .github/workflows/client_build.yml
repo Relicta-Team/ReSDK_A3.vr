@@ -13,7 +13,7 @@ jobs:
     name: Test
     runs-on: windows-2019
     # define LOCAL_BUILD in you repo to enable local build
-    if: github.repository_owner != 'Relicta-Team' and vars.local_build != ''
+    if: github.repository_owner != 'Relicta-Team' and vars.LOCAL_BUILD != ''
     strategy:
       fail-fast: true
       matrix:
