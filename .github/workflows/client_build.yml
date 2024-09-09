@@ -33,7 +33,7 @@ jobs:
       - name: Run
         id: rb_run
         working-directory: ${{env.rb_dir}}
-        run: ${{ env.rb_exe }} run ${{ matrix.flags }}
+        run: ${{ env.rb_exe }} run ${{ matrix.flags }} 1> app_output.log 2> app_error.log
 
       - name: Export Detailed Event Logs
         if: failure()
@@ -54,4 +54,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: detailed-event-logs
-          path: detailed_event_logs.txt
+          path: |
+            detailed_event_logs.txt
+            app_output.log
+            app_error.log
