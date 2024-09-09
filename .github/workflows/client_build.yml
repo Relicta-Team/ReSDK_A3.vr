@@ -23,9 +23,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Setup msvc+directx
         run: |
+          choco install directx
           
-          choco install vcredist2010
-          choco install vcredist2012
       - name: Init
         working-directory: ${{env.rb_dir}}
         run: ${{env.rb_exe}} ${{env.rb_args_init}}
