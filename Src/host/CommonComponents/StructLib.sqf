@@ -91,7 +91,7 @@ endstruct
 
 	Example:
 		class(SampleObject)
-			var(evh,struct_newp(ObjectEventHandler,this arg "SampleEvent"));
+			var(evh,struct_newp(ObjectEventHandler,"SampleEvent" arg this));
 		endclass
 
 		//...
@@ -111,7 +111,7 @@ struct(ObjectEventHandler) base(EventHandler)
 
 	def(init)
 	{
-		params ["_obj",["_eventName","_name"]];
+		params [["_eventName",""],["_obj",nullPtr]];
 		assert_str(!isNullReference(_obj),"Object cannot be null");
 		self setv(_src,_obj);
 		self setv(_eventName,_eventName);
