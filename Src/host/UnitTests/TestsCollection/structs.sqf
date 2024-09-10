@@ -322,6 +322,8 @@ TEST(ObjectEventHandlers)
 	private _obj = new(object);
 
 	private _ev = struct_newp(EventHandler,_obj arg "TestEvent");
+	ASSERT_EQ(_ev getv(_src),_obj);
+	
 	private _fn = {
 		objParams_1(_val);
 		ASSERT_EQ(this,_obj);
