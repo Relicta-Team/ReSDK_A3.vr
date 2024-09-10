@@ -107,7 +107,7 @@ endstruct
 		getVar(_obj,evh) callp(callEvent,2 arg 5);
 */
 struct(ObjectEventHandler) base(EventHandler)
-	def_null(_src);
+	def(_src) nullPtr;
 
 	def(init)
 	{
