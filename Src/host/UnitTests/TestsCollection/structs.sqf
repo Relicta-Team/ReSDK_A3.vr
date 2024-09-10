@@ -302,6 +302,8 @@ TEST(EventHandlers)
 	private _lastId = _ev callp(add,_function); //7
 	ASSERT_EQ(count (_ev getv(_events)),3);
 
+	traceformat("Event handler %1",str _ev);
+
 	_ev callp(callEvent,2);
 	ASSERT_EQ(_scopedVar,7);
 
@@ -311,7 +313,7 @@ TEST(EventHandlers)
 	_ev callp(remove,_function);
 	ASSERT_EQ(count (_ev getv(_events)),1);
 
-	_ev callp(removeAll);
+	_ev callv(removeAll);
 	ASSERT_EQ(count (_ev getv(_events)),0);
 }
 
@@ -323,12 +325,16 @@ TEST(ObjectEventHandlers)
 	private _fn = {
 		objParams_1(_val);
 		ASSERT_EQ(this,_obj);
-		ASSERT_EQ(_val,321)
+		ASSERT_EQ(_val,321);
 	};
 
 	_ev callp(add,_fn);
 
+	traceformat("Object Event handler %1",str _ev);
+
 	_ev callp(callEvent,321);
+
+	delete(_obj);
 }
 
 

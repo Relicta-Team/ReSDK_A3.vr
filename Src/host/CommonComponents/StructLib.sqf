@@ -120,8 +120,16 @@ struct(ObjectEventHandler) base(EventHandler)
 	def(callEvent)
 	{
 		private _args = _this;
-		private _objArgs = [self getv(_src)];
-		_objArgs append _args;
+		
+		private _objArgs = 
+		if (isNullVar(_args)) then {
+			self getv(_src)
+		} else {
+			private _targs = [self getv(_src)];
+			_targs append _args;
+			_targs;
+		};
+
 		{
 			_objArgs call _x;
 		} foreach (self getv(_events));
