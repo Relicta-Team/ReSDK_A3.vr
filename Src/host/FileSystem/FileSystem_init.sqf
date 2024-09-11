@@ -17,13 +17,15 @@ fso_init = {
 	if (!_useNativeCollector) then {
 		assert_str(!isNull(file_getFileList),"file::getFileList function not found");
 		_nativeCollection = ["src\",null,null,true] call file_getFileList;
-		
+		assert_str(count _nativeCollection > 0,"Empty file collection");
 		_nativeCollection = _nativeCollection apply {;
 			_parts = (tolower _x) splitString "\/";
 			_idxSrc = _parts find "src";
 			(_parts select [_idxSrc,count _parts]) joinString "\";
 		};
 	};
+
+	traceformat("fso::init() - count files %1; Is native collection: %2",count _nativeCollection arg _useNativeCollector)
 	
 	fso_map_tree = [_nativeCollection] call fso_buildTree;
 };
@@ -66,13 +68,13 @@ fso_buildTree = {
 			_tree set [_dir,FSO_NEW_DATA];
 		};
 
-		traceformat("Check path: %1 + %2",_dir arg _probFileName)
+		//traceformat("Check path: %1 + %2",_dir arg _probFileName)
 		if (_pathIsFile) then {
 			((_tree get _dir) select FSO_INDEX_FILES) pushBack _probFileName;
 			((_tree get _parentDir) select FSO_INDEX_FOLDERS) pushBackUnique _probDirName;
 		} else {
 			((_tree get _dir) select FSO_INDEX_FOLDERS) pushBackUnique _probDirName;
-			traceformat("dir: %1",_probDirName);
+			//traceformat("dir: %1",_probDirName);
 		};
 		
 	} foreach _flist;
@@ -86,6 +88,12 @@ fso_buildTree = {
 */
 fso_getFiles = {
 	params ["_pathDir",["_extension",""],["_recursive",false],["_internalFlag",true]];
+	
+	//build fso tree
+	if (_internalFlag && {count fso_map_tree == 0}) then {
+		call fso_init;
+	};
+	
 	_pathDir = FSO_NORMALIZE_PATH(_pathDir);
 	private _buff = fso_map_tree get _pathDir;
 	if isNullVar(_buff) exitWith {[]};
