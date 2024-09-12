@@ -29,6 +29,21 @@ private _dat = "
 	
 	ASSERT_EQ(count (_map get "b" get "d"),3);
 	ASSERT_EQ(_map get "d" select 2,"c");
+
+	_dat = "
+- name: 1
+  val: On
+- name: 2
+  val: Off
+";
+	_ref = refcreate(0);
+	ASSERT([_dat arg _ref] call yaml_loadData);
+	_map = refget(_ref);
+	ASSERT_EQ(count _map,2);
+	ASSERT_EQ(_map select 0 get "name",1);
+	ASSERT_EQ(_map select 0 get "val",true);
+	ASSERT_EQ(_map select 1 get "name",2);
+	ASSERT_EQ(_map select 1 get "val",false);
 }
 
 TEST(Yaml_PartialLoading)
