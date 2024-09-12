@@ -32,7 +32,7 @@ Count modules: 31
  - [VoiceSystem](client//VoiceSystem.md) - 12 files
  - [WidgetSystem](client//WidgetSystem.md) - 6 files
 # Side: host
-Count modules: 54
+Count modules: 55
  - [host](host//host.md) - 13 files
  - [AI](host//AI.md) - 1 files
  - [AmbientControl](host//AmbientControl.md) - 1 files
@@ -49,6 +49,7 @@ Count modules: 54
  - [Discord](host//Discord.md) - 3 files
  - [FaithSystem](host//FaithSystem.md) - 3 files
  - [Family](host//Family.md) - 2 files
+ - [FileSystem](host//FileSystem.md) - 1 files
  - [GameEvents](host//GameEvents.md) - 4 files
  - [GamemodeManager](host//GamemodeManager.md) - 10 files
  - [GameModes](host//GameModes.md) - 40 files
