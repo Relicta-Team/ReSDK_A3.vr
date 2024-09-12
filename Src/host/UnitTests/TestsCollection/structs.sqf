@@ -287,6 +287,59 @@ TEST(OrderedSetParameters)
 	};
 }
 
+TEST(EventHandlers)
+{
+	private _scopedVar = 1;
+	private _ev = struct_newp(EventHandler,"TestEvent");
+	ASSERT_EQ(_ev callv(getEventName),"TestEvent");
+	private _function = {
+		params ["_v"];
+		_scopedVar = _scopedVar + _v;
+	};
+
+	_ev callp(add,_function); //3
+	_ev callp(add,_function); //5
+	private _lastId = _ev callp(add,_function); //7
+	ASSERT_EQ(count (_ev getv(_events)),3);
+
+	traceformat("Event handler %1",str _ev);
+
+	_ev callp(callEvent,2);
+	ASSERT_EQ(_scopedVar,7);
+
+	_ev callp(remove,_lastId);
+	ASSERT_EQ(count (_ev getv(_events)),2);
+
+	_ev callp(remove,_function);
+	ASSERT_EQ(count (_ev getv(_events)),1);
+
+	_ev callv(removeAll);
+	ASSERT_EQ(count (_ev getv(_events)),0);
+}
+
+TEST(ObjectEventHandlers)
+{
+	private _obj = new(object);
+
+	private _ev = struct_newp(ObjectEventHandler,"TestEvent" arg _obj);
+	ASSERT_EQ(_ev getv(_src),_obj);
+
+	private _fn = {
+		objParams_1(_val);
+		traceformat("Args was %1",_this)
+		ASSERT_EQ(this,_obj);
+		ASSERT_EQ(_val,321);
+	};
+
+	_ev callp(add,_fn);
+
+	traceformat("Object Event handler %1",str _ev);
+
+	_ev callp(callEvent,321);
+
+	delete(_obj);
+}
+
 
 
 //TODO done hashing for all reference type objects

@@ -157,3 +157,28 @@ TEST(FileSystem_Basic)
 	private _pcontent = [_thisfile,true] call fileLoad_Node;
 	ASSERT(PREPROCESS_DATA in _pcontent);
 }
+
+TEST(FileSystem_Pathes)
+{
+	private _sdkPath = RBuilder_map_defines get "RBUILDER_RESDK_PATH";
+	traceformat("sdk path: %1",_sdkPath)
+	ASSERT(!isNull(_sdkPath));
+
+	private _required = toLower "src/host/UnitTests/TestsCollection/io.sqf";
+	private _data = [_required] call file_read;
+	traceformat("Data len: %1 bytes",count _data)
+	ASSERT(count _data > 0);
+
+
+	ASSERT_STR(!isNull(fso_getFiles),"fso::getFiles() not defined");
+
+	private _test = "Src\host/UnitTests\TESTsCollection\";
+	private _files = [_test,null,false] call fso_getFiles;
+	ASSERT(count fso_map_tree > 0);
+	ASSERT(count _files > 0);
+	trace("Files: ")
+	{
+		traceformat("    %1",_x)
+	} foreach _files;
+	ASSERT(_required in _files);
+}

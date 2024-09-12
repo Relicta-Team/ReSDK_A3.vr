@@ -8,6 +8,137 @@
 #include "..\struct.hpp"
 
 /*
+	Event Handler struct
+
+	Example:
+
+		_anonHandler = struct_new(EventHandler);
+		_ev = {
+			params ["_a"];
+			["param is %1",_a] call messageBox;
+		};
+		_anonHandler callp(addEvent,_ev);
+
+		//....
+
+		_anonHandler callp(callEvent,"exists");
+
+
+*/
+struct(EventHandler)
+	def_null(_events)
+	def(_eventName) "";
+
+	def(str)
+	{
+		private _name = self getv(_eventName);
+		if (_name != "") then {
+			format["%1::%3(%2)",struct_typename(self),count (self getv(_events)),_name];
+		} else {
+			format["%1(%2)",struct_typename(self),count (self getv(_events))];
+		};
+	}
+
+	def(setEventName)
+	{
+		params ["_eventName"];
+		self setv(_eventName,_eventName);
+	};
+
+	def(getEventName) {self getv(_eventName)};
+
+	def(init)
+	{
+		params [["_eventName",""]];
+		self setv(_eventName,_eventName);
+
+		self setv(_events,[]);
+	};
+
+	def(add)
+	{
+		params ["_code"];
+		(self getv(_events)) pushBack _code;
+	};
+
+	def(remove)
+	{
+		params ["_codeORid"];
+		if equalTypes(_codeORid,0) then {
+			(self getv(_events)) deleteAt _codeORid;
+		} else {
+			array_remove((self getv(_events)),_codeORid);
+		};
+	};
+
+	def(removeAll)
+	{
+		(self getv(_events)) resize 0;
+	};
+
+	def(callEvent)
+	{
+		private _args = _this;
+		{
+			_args call _x;
+		} foreach (self getv(_events));
+	};
+
+endstruct
+
+/*
+	Object Event Handler
+
+	Example:
+		class(SampleObject)
+			var(evh,struct_newp(ObjectEventHandler,"SampleEvent" arg this));
+		endclass
+
+		//...
+
+		_obj = new(SampleObject);
+		_event = {
+			objParams_2(_a,_b);
+			logformat("Object %1; Args: %2 %3",_obj arg _a arg _b);
+		};
+		getVar(_obj,evh) callp(addEvent,_event);
+
+
+		getVar(_obj,evh) callp(callEvent,2 arg 5);
+*/
+struct(ObjectEventHandler) base(EventHandler)
+	def(_src) nullPtr;
+
+	def(init)
+	{
+		params [["_eventName",""],["_obj",nullPtr]];
+		assert_str(!isNullReference(_obj),"Object cannot be null");
+		self setv(_src,_obj);
+		self setv(_eventName,_eventName);
+	};
+
+	def(callEvent)
+	{
+		private _args = _this;
+		
+		private _objArgs = 
+		if (isNullVar(_args)) then {
+			self getv(_src)
+		} else {
+			private _targs = [self getv(_src)];
+			_targs append _args;
+			_targs;
+		};
+
+		{
+			_objArgs call _x;
+		} foreach (self getv(_events));
+	};
+
+endstruct
+
+
+/*
 	Context struct
 
 	Example:
