@@ -23,6 +23,8 @@
 #define YAML_OUTPUT_SANITIZE_EXCEPTION(val) ((val) select [count YAML_OUTPUT_PREFIX_EXCEPTION,count (val)])
 #define YAML_OUTPUT_PREFIX_PARTIAL "$PART$"
 
+yaml_lastErrorLoadFileString = "";
+
 //enable for test cases
 //#define YAML_TESTS
 
@@ -47,10 +49,15 @@ yaml_isExtensionLoaded = {
 	(YAML_EXTENSION_NAME callExtension "") == YAML_EXTENSION_NAME
 };
 
+yaml_getLastError = {
+	yaml_lastErrorLoadFileString
+};
+
 //загрузка yml файла. ошибка загрузи или несуществующий файл приведет к возврату null-значения
 yaml_loadFile = {
 	params ["_file"];
-	
+	yaml_lastErrorLoadFileString = "";
+
 	if (!fileExists(_file)) exitWith {
 		errorformat("yaml::loadFile() - File not found: %1",_file);
 		null
@@ -60,6 +67,7 @@ yaml_loadFile = {
 	private _ref = refcreate(0);
 	if !([_content,_ref] call yaml_loadData) exitWith {
 		errorformat("yaml::loadFile() - Error loading file: %1; Output: %2",_file arg refget(_ref));
+		yaml_lastErrorLoadFileString = format["Error in file: %1; Output: %2",_file arg refget(_ref)];
 		null;
 	};
 
