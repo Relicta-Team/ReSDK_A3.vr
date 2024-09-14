@@ -1,0 +1,16 @@
+
+- desc: abs
+  aq: 3
+  type: interactor
+  name: a
+  a: 3
+  interactor:
+    a: 3
+  targetx: 
+    typxe: a
+  val: 3
+
+
+- name: a
+  message: dest
+  test_int: 2
