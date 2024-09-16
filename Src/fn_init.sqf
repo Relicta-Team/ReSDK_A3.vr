@@ -12,7 +12,7 @@
 //server password and crypt key if exists
 if (fileExists("src\private.h")) then {
 	private _CRYPT_COMPILE_SERVER_ = true;
-	loadFile("src\private.h");
+	call compile __pragma_preprocess ("src\private.h");
 };
 
 //предварительная компиляция трассировки стека в редакторе
