@@ -43,7 +43,6 @@ loadFile("src\host\Client\client.sqf");
 loadFile("src\host\Gender\Genders.sqf");
 loadFile("src\host\Materials\Materials_init.sqf");
 call nodegen_loadClasses;
-call loot_prepareAll;
 // start class generator
 call cs_runtime_internal_makeAll;
 
@@ -54,6 +53,7 @@ call cs_runtime_internal_makeAll;
 //structures initialize
 loadFile("src\host\Structs\Structs_init.sqf");
 call struct_initialize; //init all struct
+call loot_prepareAll;// intialize loot only after structs loaded
 
 //another loaded files...
 //DEPREACTED loadFile("src\host\Database\fDB\fDB_init.sqf"); //локальная база данных
