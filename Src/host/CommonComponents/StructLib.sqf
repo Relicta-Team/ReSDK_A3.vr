@@ -28,6 +28,7 @@
 struct(EventHandler)
 	def_null(_events)
 	def(_eventName) "";
+	def(_locked) false; //блокирующий режим
 
 	def(str)
 	{
@@ -79,9 +80,21 @@ struct(EventHandler)
 	def(callEvent)
 	{
 		private _args = _this;
+		
 		{
+			if (self getv(_locked)) exitWith {};
 			_args call _x;
 		} foreach (self getv(_events));
+		
+		if (self getv(_locked)) then {
+			self setv(_locked,false);
+		};
+	};
+
+	def(setLocked)
+	{
+		params["_mode"];
+		self setv(_locked,_mode);
 	};
 
 endstruct
@@ -131,8 +144,13 @@ struct(ObjectEventHandler) base(EventHandler)
 		};
 
 		{
+			if (self getv(_locked)) exitWith {};
 			_objArgs call _x;
 		} foreach (self getv(_events));
+
+		if (self getv(_locked)) then {
+			self setv(_locked,false);
+		};
 	};
 
 endstruct
