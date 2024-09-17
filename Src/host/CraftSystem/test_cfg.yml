@@ -22,8 +22,7 @@
 
   # настройки навыка
   skills:
-    type: cavelore
-    level: 2
+    cavelore: 2
     force_visible: true # видимость даже при нехватке навыка
 
   options: # опции крафта
