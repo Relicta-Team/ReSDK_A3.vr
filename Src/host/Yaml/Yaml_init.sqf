@@ -5,23 +5,7 @@
 
 
 #include "..\engine.hpp"
-
-#define YAML_EXTENSION_NAME "ReYaml"
-
-#define YAML_COMMAND_PARSE_STRING "parse_string"
-#define YAML_COMMAND_HAS_PARTS "has_parts"
-#define YAML_COMMAND_READ_PART "next_read"
-
-#define YAML_COMMAND_FREE_PARTS "free_parts"
-#define YAML_COMMAND_GET_LEFT_PARTS_COUNT "get_left_parts_count"
-
-#define YAML_COMMAND_SET_DEBUG_PRINT "set_debug"
-
-#define YAML_DEFAULT_CHAR_REPLACER ""
-
-#define YAML_OUTPUT_PREFIX_EXCEPTION "$EX$:"
-#define YAML_OUTPUT_SANITIZE_EXCEPTION(val) ((val) select [count YAML_OUTPUT_PREFIX_EXCEPTION,count (val)])
-#define YAML_OUTPUT_PREFIX_PARTIAL "$PART$"
+#include "Yaml.h"
 
 yaml_lastErrorLoadFileString = "";
 
@@ -124,45 +108,4 @@ yaml_setDLLConfig = {
 	_result
 };
 
-#ifdef YAML_TESTS
-
-[true] call yaml_setDLLConfig;
-yaml_debug_testData = "
-
-	# test comment
-	testLoot:
-	- name: abc
-		desc: cde
-		test_num: 123
-		test_bool: on
-		test_float: -0.123
-		test_str: abstring
-	- onelinearr: [1,2,0xabc]
-	- ab: 1
-" regexReplace ["\t/g","  "];
-private _bufferRef = refcreate(0);
-_d1 = [yaml_debug_testData,_bufferRef] call yaml_loadData;
-assert(_d1);
-_d1 = refget(_bufferRef);
-buf = _d1;
-assert(count _d1 == 1);
-_d1 = _d1 get "testLoot";
-assert(count(_d1) == 3);
-assert(_d1 isequaltype []);
-assert(count (_d1 select 0)==6);
-assert(count (_d1 select 1 get "onelinearr")==3);
-assert((_d1 select 1 get "onelinearr") isequalto vec3(1,2,0xabc));
-
-
-private _d = [];
-for"_i" from 1 to 20480 do {
-	_d pushBack (format["longkey_%1: Ключ с длинным значением по индексу %1",_i]);
-};
-_d pushBack "LATEST: ""EOF""   ";
-yaml_debug_longData = _d joinString endl;
-
-yaml_debug_fileContent = loadfile "src\host\Yaml\test.yaml";
-
-
-
-#endif
+#include "Yaml_tests.sqf"
