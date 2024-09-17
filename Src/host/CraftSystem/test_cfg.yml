@@ -1,5 +1,109 @@
+# Крафты через меню:
+# systematic
+# default
 
-# Пример интерактивного крафта (когда происходит нажатие ЛКМ объектом по миру)
+# дефолтный крафт
+- name: Сборка факела
+  desc: Сложите палку и тряпку рядом с костром.
+  type: default # опционален так как все крафты по умолчанию дефолтные (сборочные)
+  category: Light # категория. в примере выбрана категория освещения
+  # требуемые предметы
+  required:
+    - class: WoodenStick # класснейм объекта. может быть как итемом, так и любым типом от IDestructible
+      count: 1 # количество требуемых. По умолчанию 1
+    - class: [Rag,Bandage] # один из типов и наследники
+      count: 1
+      hp: 30% # может быть числом, может строкой процентной 
+      check_type_of: false #по умолчанию включено. Это отвечает за проверку наследников. Если false - проверяются только типы указанные для класса
+    - class: Campfire # костер добавлен для примера
+      condition: lightIsEnabled && isFileLight() # дополнительные условия. для продвинутых пользователей. можно использовать свойства объекта, геттеры и вызывать функции. должно возвращать булево
+      count: 1
+      destroy: false # по умолчанию все требуемые предметы уничтожаются
+
+  # настройки навыка
+  skills:
+    type: cavelore
+    level: 2
+    force_visible: true # видимость даже при нехватке навыка
+
+  options: # опции крафта
+    # distance <= 2
+    collect_distance: 4 # переопределяем дистанцию в которой ищутся предметы для крафта относительно крафтера (моба)
+    craft_duration: rta * 2 # rta спец.коснтанта персонажа на основе его скорости действий (Real Time Action)
+
+    can_fail: true # порча предметов при недостаточном навыке
+    on_fail_item: Debris
+    on_fail_count: 1
+
+
+  # что получается на выходе
+  result: # может быть как сингловым, так и массивом разных объектов
+    class: Torch
+    count: 1
+    radius: 0.2 # опционально
+    # модификаторы результирующих предметов
+    modifiers:
+      - provide: set_name
+        value: Горящий {basename.lower}
+
+
+- name: Пример готовки
+  desc: Опциональное дополнительное описание
+  type: system #системный крафт - завязан на спец. объекте. По умолчанию тип крафта default
+  system_specific: cook_frying # (спецификация типа) жарка, печь, и тд. спецификация определяется на объекте
+  category: Cook # Категория в меню крафтов. По умолчанию Other
+
+  # требуемый скилл
+  skills:
+    type: cooking
+    level: 1
+
+  # 
+  options:
+  
+  required:
+    - class: Testo
+      count: 2
+    - class: Salt
+      count: 1
+      optional: true
+    - class: IFoodItem 
+      count: 2
+      check_type_of: true # это позволит задействовать любой предмет, унаследованный от IFoodItem
+
+  # так как это systematic крафт результирующий предмет создается внутри либо на целевом объекте
+  # по специфике cook_frying приголовленное создается на дне сковороды
+  result:
+    class: Bread
+    count: 1
+    modifiers:
+      - provide: set_name
+        parameters: #можно опустить если параметр 1
+          value: "Хлеб"
+      - provide: auto_weight
+
+
+# строительный крафт
+- name: Деревянная стена
+  # type: default
+  category: Light
+  is_preview_emplace: true # это позволяет делать предпросмотр объекта. По умолчанию false
+  skills:
+    type: building
+    level: 3
+  required:
+    - class: Nails
+    - class: WoodenPlank
+      count: 4
+  result:
+    class: WoodenWall
+    # count: 1 не поддерживается если is_preview_emplace включен
+    modifiers:
+      - provide: set_name
+        value: "Деревянная стена"
+      - provide: auto_ht
+  
+  # Пример интерактивного крафта (когда происходит нажатие ЛКМ объектом по миру)
 - name: Резка грибов # название рецепта. Для интеракторов может быть не определено
   type: interactor # тип крафта
   
@@ -53,92 +157,3 @@
           min: 1
       - provide: auto_ht #авто качество
       - auto_weight #автовес
-        
-
-# Крафты через меню:
-# systematic
-# default
-  
-- name: Пример готовки
-  desc: Опциональное дополнительное описание
-  type: systematic #системный крафт - завязан на спец. объекте. По умолчанию тип крафта default
-  category: Cook # Категория в меню крафтов. По умолчанию Other
-
-  # требуемый скилл
-  skills:
-    type: cooking
-    level: 1
-
-  # спецификация типа
-  specific:
-    type: cook_frying # жарка, печь, и тд. спецификация определяется на объекте
-  
-  required:
-    - class: Testo
-      count: 2
-    - class: Salt
-      count: 1
-      optional: true
-    - class: IFoodItem 
-      count: 2
-      is_kind_of: true # это позволит задействовать любой предмет, унаследованный от IFoodItem
-
-  # так как это systematic крафт результирующий предмет создается внутри либо на целевом объекте
-  # по специфике cook_frying приголовленное создается на дне сковороды
-  result:
-    class: Bread
-    count: 1
-    modifiers:
-      - provide: set_name
-        parameters: #можно опустить если параметр 1
-          value: "Хлеб"
-      - provide: auto_weight
-
-# дефолтный крафт
-- name: Сборка факела
-  desc: опциональное описание. Сложите палку и тряпку рядом с костром
-  type: default # опционален так как все крафты по умолчанию дефолтные (сборочные)
-  category: Light # категория. в примере выбрана категория освещения
-  # требуемые предметы
-  required:
-    - class: WoodenStick
-      count: 1
-    - class: [Rag,Bandage] # один из типов
-      count: 1
-    - class: Campfire # костер добавлен для примера
-      count: 1
-      destroy: false # по умолчанию все требуемые предметы уничтожаются
-
-  required_distance: 2 # переопределяем дистанцию в которой ищутся предметы для крафта относительно крафтера (моба)
-
-  # что получается на выходе
-  result:
-    class: Torch
-    count: 1
-    radius: 0.2 # опционально
-    # тут так же как и выше можно добавить message, sound
-    modifiers:
-      - provide: set_name
-        value: Горящий {basename.lower}
-
-# строительный крафт
-- name: Деревянная стена
-  # type: default
-  category: Light
-  is_preview_emplace: true # это позволяет делать предпросмотр объекта. По умолчанию false
-  skills:
-    type: building
-    level: 3
-  required:
-    - class: Nails
-    - class: WoodenPlank
-      count: 4
-  result:
-    class: WoodenWall
-    # count: 1 не поддерживается если is_preview_emplace включен
-    modifiers:
-      - provide: set_name
-        value: "Деревянная стена"
-      - provide: auto_ht
-  
-  
