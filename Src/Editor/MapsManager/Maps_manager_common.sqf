@@ -290,7 +290,8 @@ function(mm_handleObjectSave)
 	if !isNullVar(_script) then {
 		INC(_counterNotNeedLvar);
 		_objcustomdata pushBackUnique "";
-		_scriptCode = format["['%1',%2,%3] call createGameObjectScript;",_script,"%1",str _scriptParams];
+		private _sparams = ifcheck(isNullVar(_scriptParams),"nil",str _scriptParams);
+		_scriptCode = format["['%1',%2,%3] call createGameObjectScript;",_script,"%1",_sparams];
 	};
 
 	//?? -----------------check edConnected
