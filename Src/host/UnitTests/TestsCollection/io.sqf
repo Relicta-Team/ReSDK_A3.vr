@@ -14,6 +14,7 @@ private _dat = "
   b:
     c: [6,7,8]
     d: [a,b,c]
+  one_line_test: {First: Hello, Second: ""World!"" }
 ";
 	private _ref = refcreate(0);
 	ASSERT([_dat arg _ref] call yaml_loadData);
@@ -29,6 +30,10 @@ private _dat = "
 	
 	ASSERT_EQ(count (_map get "b" get "d"),3);
 	ASSERT_EQ(_map get "d" select 2,"c");
+
+	ASSERT_EQ(count (_map getOrDefault vec2("one_line_test",[])),2);
+	ASSERT_EQ(_map get "one_line_test" getOrDefault vec2("First","notdef"),"Hello");
+	ASSERT_EQ(_map get "one_line_test" getOrDefault vec2("Second","notdef"),"World!");
 
 	_dat = "
 - name: 1
