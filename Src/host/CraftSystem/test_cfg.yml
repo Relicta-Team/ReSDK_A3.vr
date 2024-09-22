@@ -100,10 +100,17 @@
 - name: Резка грибов # название рецепта. Для интеракторов может быть не определено
   type: interact # тип крафта
   
-  # Требования к навыкам человека который выполняет интеракцию
-  skills:
-    cooking: 1 # название навыка и минимальное значение. навык ниже этого
-
+  required:
+    skills: {cooking: 1}
+    components:
+      - class: Testo
+        count: 2
+      - class: Salt
+        count: 1
+        optional: true
+      - class: IFoodItem 
+        count: 2
+        check_type_of: true
   # раздел конфигурации интрерактора. Нажать ЛКМ предметом (interactor) по (target)
   item:
     class: Knife # с помощью чего должно быть взаимодействие

@@ -16,3 +16,8 @@ struct(CraftAbstractModifier)
 
 	}
 endstruct
+
+
+struct(ICraftRecipeOption)
+	
+endstruct
