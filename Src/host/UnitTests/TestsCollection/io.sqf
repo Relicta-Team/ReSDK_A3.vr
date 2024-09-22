@@ -20,7 +20,7 @@ private _dat = "
 	ASSERT([_dat arg _ref] call yaml_loadData);
 	private _map = refget(_ref);
 	
-	ASSERT_EQ(count _map,2);
+	ASSERT_EQ(count _map,3);
 	ASSERT_EQ(_map get "a",1);
 	
 	ASSERT_EQ(count (_map get "b"),2);
