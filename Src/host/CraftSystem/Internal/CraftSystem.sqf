@@ -3,14 +3,35 @@
 // sdk.relicta.ru
 // ======================================================
 
+/*
+	Как проверяются крафты:
+		При запуске рецепта отправляется его айди
+		Для дефолт и строительных рецепт ищется в csys_map_allCraftRefs
+
+		Для интерактивного:
+		существует карта ассоциаций: csys_map_allInteractiveCrafts
+
+		Для системных из-за отсутствия меню:
+		
+
+*/
 #include <..\..\engine.hpp>
 #include <..\..\struct.hpp>
 #include <..\..\text.hpp>
 #include "Craft.hpp"
 #include "Craft.h"
 
-csys_map_storages = [];
+//key int, val ICraftRecipeBase
+csys_map_allCraftRefs = createHashMap;
+//key string(typename), val array<ICraftRecipeBase>
+csys_map_allInteractiveCrafts = createHashMap;
+//key string(typename), val array<ICraftRecipeBase>
+csys_map_allSystemCrafts = createHashMap; //! В будущем можно перенести хранение буферов крафтов на типы классов
 
+//глобальное хранилище крафтов по категориям, key int(id), val array<ICraftRecipeBase>
+csys_map_storage = createhashMap; 
+
+csys_global_counter = 1;
 csys_cat_names = CRAFT_CONST_CATEGORY_NAMES;
 csys_cat_map_sysnames = createHashMap;
 
@@ -24,6 +45,7 @@ csys_cat_debug_allCrafts = [];
 csys_init = {
 	{
 		csys_cat_map_sysnames set [_x,_foreachindex];
+		csys_map_storage set [_foreachindex,[]];
 	} foreach CRAFT_CONST_CATEGORY_LIST_SYS_NAMES;
 
 	//collecting all files and load into buffer
@@ -66,13 +88,14 @@ csys_loadConfig = {
 	
 	private _loaded = 0;
 	private _isok = true;
+	private _t = tickTime;
 	{
 		if !([_x] call csys_internal_loadCfgSegment) exitWith {
 			_isok = false;
 		};
 		INC(_loaded);
 	} foreach _cfgContent;
-	traceformat("Loaded %1 configs",_loaded);
+	traceformat("Loaded %1 configs (%2 sec)",_loaded arg tickTime - _t);
 
 	_isok
 };
@@ -227,6 +250,12 @@ csys_internal_loadCfgSegment = {
 	csys_cat_debug_allCrafts pushBack _sobj;
 	#endif
 
+	_sobj callv(onRecipeReady);
+	
+	#ifdef CRAFT_DEBUG_LOAD
+	traceformat("============= Recipe ready: %1",_sobj)
+	#endif
+
 	true
 };
 
@@ -272,6 +301,21 @@ csys_map_tokenMap = createHashMapFromArray [
 ];
 
 csys_defaultTokenCode = { _this };
+
+csys_prepareRangedString = {
+	params ["_input",["_intoArray",false]];
+	if !([_input,"\(\d+\-\d+\)"] call regex_isMatch) exitWith {ifcheck(_intoArray,[_input],_input)};
+
+	private _matchFull = [_input,"\(\d+\-\d+\)"] call regex_getFirstMatch;
+	_input = [_input,"\(\d+\-\d+\)","%1"] call regex_replace;
+	(_matchFull splitString " .-()" apply {parseNumberSafe(_x)}) params [["_min",1],["_max",1]];
+	private _buff = [];
+	for "_i" from _min to _max do {
+		_buff pushBack (format[_input,_i]);
+	};
+	_buff
+};
+
 
 /* 
 	Генератор кода условия

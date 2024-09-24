@@ -22,4 +22,4 @@
 #define FAIL_CHECK_EMPTY FAIL_CHECK {}
 
 // enable for more verbose logging
-// #define CRAFT_DEBUG_LOAD
+#define CRAFT_DEBUG_LOAD

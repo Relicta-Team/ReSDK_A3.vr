@@ -75,7 +75,7 @@ struct(CraftRecipeComponent)
 	{
 		params ["_class"];
 		if equalTypes(_class,[]) then {
-			self setv(isMultiSelector,true);	
+			self setv(isMultiSelector,true);
 		};
 		self setv(class,_class);
 	}
@@ -83,6 +83,37 @@ struct(CraftRecipeComponent)
 	def(str)
 	{
 		format["%3%1%4 x%2",ifcheck(self getv(isMultiSelector),self getv(class) joinString "|",self getv(class)),self getv(count),ifcheck(self getv(checkTypeOf),"^",""),ifcheck(self getv(optional),"?","")]
+	}
+
+	def(_ingredientRegister)
+	{
+		params ["_storageRef","_recipeRef"];
+		private _classList = self getv(class);
+		if !(self getv(isMultiSelector)) then {
+			_classList = [_classList];
+		};
+
+		private _checkTypeOf = self getv(checkTypeOf);
+		//private _isOptional = self getv(optional);
+		private _store = _storageRef;
+
+		private _registererFunc = {
+			_x = tolower _x;
+			if !(_x in _store) then {
+				_store set [_x,[_recipeRef]];
+			} else {
+				(_store get _x) pushBack _recipeRef;
+			};
+		};
+
+		{
+			if (_checkTypeOf) then {
+				_registererFunc foreach getAllObjectsTypeOfStr(_x);
+			};
+
+			call _registererFunc;
+			false
+		} count _classList;
 	}
 
 endstruct
@@ -143,7 +174,9 @@ struct(ICraftRecipeBase)
 	def(name) "";
 	def(desc) "";
 	def(c_type) "";
-	def(categoryId) -1;
+	def(categoryId) -1; //айди категории
+
+	def(craftId) -1 //глобальный айди крафта
 
 	def(getType) { self getv(c_type) };
 
@@ -154,11 +187,19 @@ struct(ICraftRecipeBase)
 		};
 	}
 
+	//тут происходит присвоение идентификатора и сохранение в буферах
+	def(onRecipeReady)
+	{
+		self setv(craftId,csys_global_counter);
+		csys_map_allCraftRefs set [csys_global_counter,self];
+		INC(csys_global_counter);
+	}
+
 	def(str)
 	{
 		format["%1:%2[%3]=(%4)",
 			self getv(c_type),
-			self getv(categoryId),
+			self getv(craftId),
 			self getv(name),
 			[((self getv(components)) joinString " + "),"""",""] call regex_replace
 		]
@@ -218,10 +259,22 @@ struct(ICraftRecipeBase)
 
 		GETVAL_ARRAY(_cdict, vec2("components",[]));
 		FAIL_CHECK_REFSET(_refErr);
-		private _ingredient = null;
+		if (count value == 0) exitWith {
+			refset(_refErr,"Components list is empty");
+		};
+		
 		private _ingredientList = [];
 		self setv(components,_ingredientList);
 
+		self callp(_parseRequiredComponents_Internal,value arg _ingredientList arg _refErr);
+	};
+
+	def(_parseRequiredComponents_Internal)
+	{
+		params ["_content","_ingredientList","_refErr"];
+		CRAFT_PARSER_HEAD;
+		private _ingredient = null;
+		traceformat("COMPONENTS CHECK %1",_content)
 		{
 			
 			private _cls = _x get "class";
@@ -229,30 +282,28 @@ struct(ICraftRecipeBase)
 			if isNullVar(_cls) exitWith {
 				message = "Property 'class' must be defined in components";
 			};
-			if equalTypes(_cls,[]) then {
-				{
-					if not_equalTypes(_x,"") exitWith {
-						_exitClasscheck = true;
-						refset(_refErr,"Property 'class' wrong type; Expected string");
-					};
-					if !isImplementClass(_x) exitWith {
-						_exitClasscheck = true;
-						refset(_refErr,"Ingredient class not found: " + _x);
-					};
-				} foreach _cls;
-			} else {
-				if not_equalTypes(_cls,"") exitWith {
+			if not_equalTypes(_cls,[]) then {_cls = [_cls,true] call csys_prepareRangedString};
+
+			{
+
+				if not_equalTypes(_x,"") exitWith {
 					_exitClasscheck = true;
 					refset(_refErr,"Property 'class' wrong type; Expected string");
 				};
-				if !isImplementClass(_cls) exitWith {
+				_x = [_x] call csys_prepareRangedString;
+				_cls set [_foreachindex,_x];
+
+				if !isImplementClass(_x) exitWith {
 					_exitClasscheck = true;
-					refset(_refErr,"Ingredient class not found: " + value);
+					refset(_refErr,"Ingredient class not found: " + _x);
 				};
-
-			};
+				
+			} foreach _cls;
+			
 			if (_exitClasscheck) exitWith {};
-
+			if (count _cls == 1) then {
+				_cls = _cls select 0;
+			};
 			
 			_ingredient = struct_newp(CraftRecipeComponent,_cls);
 
@@ -299,10 +350,10 @@ struct(ICraftRecipeBase)
 			//push ingredient
 			_ingredientList pushBack _ingredient;
 
-		} foreach value;
+		} foreach _content;
 		FAIL_CHECK_EMPTY;
-		
 	};
+
 
 
 	def(fail_enable) true;
@@ -372,6 +423,11 @@ struct(ICraftRecipeBase)
 		private _robj = struct_newp(CraftRecipeResult,_class arg value);
 		self setv(result,_robj);
 
+		if (self getv(__canGetNameFromResult)) then {
+			self setv(name,getFieldBaseValueWithMethod(_class,"name","getName"));
+		};
+
+
 		GETVAL_FLOAT(_req, vec2("radius",_robj getv(radius)));
 		FAIL_CHECK_REFSET(_refResult);
 		_robj setv(radius,value);
@@ -394,17 +450,48 @@ endstruct
 
 struct(CraftRecipeDefault) base(ICraftRecipeBase)
 	def(c_type) "default";
+	def(onRecipeReady)
+	{
+		callbase(onRecipeReady);
+		(csys_map_storage get (self getv(categoryId))) pushBack self;
+	}
 endstruct
 
-struct(CraftRecipeBuilding) base(ICraftRecipeBase)
+struct(CraftRecipeBuilding) base(CraftRecipeDefault)
 	def(c_type) "building";
 endstruct
 
 struct(CraftRecipeSystem) base(ICraftRecipeBase)
 	def(c_type) "system";
 	def(systemSpecific) "undefined";
+
+	def(onRecipeReady)
+	{
+		callbase(onRecipeReady);
+
+		{
+			_x callp(_ingredientRegister,csys_map_allSystemCrafts arg self);
+		} foreach (self getv(components));
+	}
+
 endstruct
 
 struct(CraftRecipeInteract) base(ICraftRecipeBase)
 	def(c_type) "interact";
+
+	def(onRecipeReady)
+	{
+		callbase(onRecipeReady);
+		{
+			_x callp(_ingredientRegister,csys_map_allInteractiveCrafts arg self);
+		} foreach (self getv(components));
+	}
+
+
+	def(_parseRequiredComponents_Internal)
+	{
+		params ["_content","_ingredientList","_refErr"];
+		CRAFT_PARSER_HEAD;
+	}
+
 endstruct
