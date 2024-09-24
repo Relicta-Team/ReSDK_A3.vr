@@ -192,7 +192,7 @@ TEST(FileSystem_Pathes)
 	traceformat("sdk path: %1",_sdkPath)
 	ASSERT(!isNull(_sdkPath));
 
-	private _required = toLower "src/host/UnitTests/TestsCollection/io.sqf";
+	private _required = toLower "src\host\UnitTests\TestsCollection\io.sqf"; //path delimeter constant \
 	private _data = [_required] call file_read;
 	traceformat("Data len: %1 bytes",count _data)
 	ASSERT(count _data > 0);
