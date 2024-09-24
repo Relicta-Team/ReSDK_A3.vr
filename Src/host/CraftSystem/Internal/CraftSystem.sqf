@@ -18,8 +18,14 @@
 #include <..\..\engine.hpp>
 #include <..\..\struct.hpp>
 #include <..\..\text.hpp>
+#include "..\..\ServerRpc\serverRpc.hpp"
 #include "Craft.hpp"
 #include "Craft.h"
+
+#include <..\..\oop.hpp>
+#undef class
+
+#include "CraftSystemProcess.sqf"
 
 //key int, val ICraftRecipeBase
 csys_map_allCraftRefs = createHashMap;

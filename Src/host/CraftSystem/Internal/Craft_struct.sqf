@@ -85,6 +85,33 @@ struct(CraftRecipeComponent)
 		format["%3%1%4 x%2",ifcheck(self getv(isMultiSelector),self getv(class) joinString "|",self getv(class)),self getv(count),ifcheck(self getv(checkTypeOf),"^",""),ifcheck(self getv(optional),"?","")]
 	}
 
+	def(getComponentTextData)
+	{
+		private _textData = if (self getv(isMultiSelector)) then {
+			private _itms = (self getv(class)) apply {getFieldBaseValueWithMethod(_x,"name","getName")};
+			private _iListUni = [];
+			{
+				if !array_exists(_iListUni,_x) then {
+					_iListUni pushBack _x;
+				};
+			} foreach _itms;
+			private _itmsTxt = _iListUni joinString " или ";
+			_itmsTxt
+		} else {
+			private _itmsTxt = getFieldBaseValueWithMethod(self getv(class),"name","getName");
+			_itmsTxt
+		};
+
+		if (self getv(count) > 1) then {
+			modvar(_textData) + (format[" (x%1)",self getv(count)]);
+		};
+		if (self getv(optional)) then {
+			modvar(_textData) + " (необяз.)"
+		};
+
+		_textData
+	}
+
 	def(_ingredientRegister)
 	{
 		params ["_storageRef","_recipeRef"];
@@ -455,6 +482,37 @@ struct(CraftRecipeDefault) base(ICraftRecipeBase)
 		callbase(onRecipeReady);
 		(csys_map_storage get (self getv(categoryId))) pushBack self;
 	}
+
+	def(canSeeRecipe)
+	{
+		params ["_usr"];
+		private _canSee = false; //by default cannot see recipe (low skills)
+		call {
+			if (self getv(forceVisible)) exitWith {_canSee = true};
+
+			private _skills = self getv(skills);
+			if isNullVar(_skills) exitWith {_canSee = true};
+			{
+				assert(isImplementFuncStr("get" + _x));
+				if (callFuncReflect(_usr,"get" + _x) >= _y) exitWith {_canSee = true};
+			} foreach _skills;
+		};
+
+		_canSee 
+	}
+
+	def(getRecipeMenuData)
+	{
+		private _buff = [self getv(craftId)];
+		private _buffText = [self getv(name)];
+		_buffText pushBack ((self getv(components) apply {_x callv(getComponentTextData)}) joinString " + ");
+		if ((self getv(desc)) != "") then {
+			_buffText pushBack (self getv(desc));
+		};
+		_buff pushBack (_buffText joinString endl);
+		_buff
+	}
+
 endstruct
 
 struct(CraftRecipeBuilding) base(CraftRecipeDefault)
