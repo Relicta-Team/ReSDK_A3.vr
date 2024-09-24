@@ -5,6 +5,7 @@
 
 
 #include "..\engine.hpp"
+#include "..\struct.hpp"
 #include "Yaml.h"
 
 yaml_lastErrorLoadFileString = "";
@@ -31,6 +32,13 @@ yaml_getPartsCount = {
 //расширение валидно
 yaml_isExtensionLoaded = {
 	(YAML_EXTENSION_NAME callExtension "") == YAML_EXTENSION_NAME
+};
+//получает версию расширения в виде массива
+yaml_getExtensionVersion = {
+	private _v = (YAML_EXTENSION_NAME callExtension "get_version");
+	if (_v == "") exitWith {struct_new(Version)};
+	private _varr = (_v splitString ",. ") apply {parseNumber _x};
+	struct_newp(Version,_varr);
 };
 
 yaml_getLastError = {

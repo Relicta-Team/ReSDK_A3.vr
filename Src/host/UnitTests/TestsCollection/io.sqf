@@ -6,9 +6,17 @@
 
 #include "..\TestFramework.h"
 
-TEST(Yaml_Base)
+TEST(Yaml_Extension)
 {
 	ASSERT_STR(call yaml_isExtensionLoaded,"ReYaml not found or not loaded");
+	private _ver = call yaml_getExtensionVersion;
+	traceformat("Yaml version: %1",_ver);
+	ASSERT_STR(_ver getv(major) > 0,"ReYaml not updated");
+	ASSERT_STR(_ver callp(compare,"1.0") >= 0,"ReYaml version < 1.0");
+}
+
+TEST(Yaml_Base)
+{
 private _dat = "
   a: 1
   b:

@@ -4,6 +4,7 @@
 // ======================================================
 
 #include "host\engine.hpp"
+#include "host\struct.hpp"
 #include "host\oop.hpp"
 #include <host\Networking\Network.hpp>
 
@@ -201,6 +202,14 @@ if (!call yaml_isExtensionLoaded) then {
 		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""ReMaker\DEPLOY.bat"""] call messageBox;
 	#endif
 	setLastError("Yaml library not found.");
+	appExit(APPEXIT_REASON_EXTENSION_ERROR);
+};
+if (((call yaml_getExtensionVersion) getv(major)) == 0) then {
+	#ifdef EDITOR
+	["Yaml библиотека не обновлена."
+		+endl+endl++"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""ReMaker\DEPLOY.bat"""] call messageBox;
+	#endif
+	setLastError("Yaml library outdated.");
 	appExit(APPEXIT_REASON_EXTENSION_ERROR);
 };
 
