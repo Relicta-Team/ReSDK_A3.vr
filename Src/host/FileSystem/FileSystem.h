@@ -6,7 +6,7 @@
 #define FSO_INDEX_FILES 0
 #define FSO_INDEX_FOLDERS 1
 
-#define FSO_PATH_DELIMETER "/"
+#define FSO_PATH_DELIMETER "\"
 
 #define FSO_NEW_DATA [[],[]]
 
