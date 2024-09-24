@@ -1,0 +1,17 @@
+
+- name: Факел
+  type: default
+  category: Light
+  required:
+    skills: null
+    components:
+      - class: WoodenDebris6
+        count: 1
+        check_type_of: false
+      - class: [Bandage,Rag]
+        count: 1
+        check_type_of: false
+        hp: 50%
+  result:
+    class: TorchDisabled
+    modifiers: null
