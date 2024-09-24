@@ -207,7 +207,7 @@ if (!call yaml_isExtensionLoaded) then {
 if (((call yaml_getExtensionVersion) getv(major)) == 0) then {
 	#ifdef EDITOR
 	["Yaml библиотека не обновлена."
-		+endl+endl++"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""ReMaker\DEPLOY.bat"""] call messageBox;
+		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""ReMaker\DEPLOY.bat"""] call messageBox;
 	#endif
 	setLastError("Yaml library outdated.");
 	appExit(APPEXIT_REASON_EXTENSION_ERROR);
