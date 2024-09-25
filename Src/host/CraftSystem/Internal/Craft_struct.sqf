@@ -143,6 +143,12 @@ struct(CraftRecipeComponent)
 		} count _classList;
 	}
 
+	def(isValidIngredient)
+	{
+		params ["_ingredient"];
+		
+	}
+
 endstruct
 
 struct(CraftRecipeResult)
@@ -206,6 +212,8 @@ struct(ICraftRecipeBase)
 	def(craftId) -1 //глобальный айди крафта
 
 	def(getType) { self getv(c_type) };
+
+	def(hasPreviewCraft) { (self getv(c_type)) == "building" }
 
 	def(init)
 	{

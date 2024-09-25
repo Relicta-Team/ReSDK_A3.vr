@@ -19,6 +19,7 @@
 #include <..\..\struct.hpp>
 #include <..\..\text.hpp>
 #include "..\..\ServerRpc\serverRpc.hpp"
+#include "..\..\PointerSystem\pointers.hpp"
 #include "Craft.hpp"
 #include "Craft.h"
 
