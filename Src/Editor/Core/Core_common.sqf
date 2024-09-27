@@ -104,6 +104,46 @@ stringStartWith = {
 	ifcheck(_casesense,equals(_comparer,_started),_comparer == _started)
 };
 
+
+searchInList = {
+	params ["_list","_lambda","_defaultReturn"];
+	private _idx = _list findif _lambda;
+	if (_idx == -1) exitWith {_defaultReturn};
+	_list select _idx
+};
+
+arrayDeleteItem = {
+	params["_a","_it"];
+	private _ix = _a findif {_it isequalto _x}; 
+	if (_ix != -1) then {_a deleteAt _ix}; 
+	_ix != -1
+};
+
+arrayIsValidIndex = {
+	params ["_a","_ix"];
+	count _a > 0 && {_ix < count _a} && {_ix >= 0}
+};
+
+//shuffle array elements, return alter array
+arrayShuffleOrig = {
+	params ["_array"];
+	private _tempArray = + _array;
+
+    for "_size" from (count _tempArray) to 1 step -1 do {
+        _array set [_size - 1, (_tempArray deleteAt (floor random _size))];
+    };
+
+    _array
+};
+
+//swap 2 elements in array
+arraySwap = {
+	params ["_a","_is","_id"];
+	private _t = _a select _is;
+	_a set [_is,_a select _id];
+	_a set [_id,_t];
+};
+
 stringEndWith = {
 	params ["_checked","_ended",["_casesense",true]];
 	private _cnt = count _ended;
