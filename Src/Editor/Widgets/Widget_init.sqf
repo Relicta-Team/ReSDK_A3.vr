@@ -161,7 +161,6 @@ menu_structureLayout = [
 		["text:Кодогенерация",
 			"text:Создать режим из шаблона;act:call gm_filegen_openWindow"
 		],
-		"text:Пакетная обработка;act:[call golib_getSelectedObjects] call goasm_batch_open",
 		// "text:Менеджер режимов;act:call gm_createGamemode",
 		// "",
 		"text:Просмотр моделей;act:call golib_modelViewerContextOpen",
