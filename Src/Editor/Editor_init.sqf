@@ -56,6 +56,8 @@
 
 #include <..\client\Inventory\inventory.hpp>
 
+#include <Widgets\Widgets.hpp>
+
 //assertion
 call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
 
@@ -68,9 +70,11 @@ call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
 #undef STRUCT_INIT_FUNCTIONS
 //структурная библиотека
 #include <..\host\CommonComponents\StructLib.sqf>
+#include <GameObjectsAssembly\GOAsm_batch_structs.sqf>
 //дефайны для лута
 #include <..\host\LootSystem\LootSystem_structs.sqf>
-
+//algorithm
+call compile __pragma_preprocess "src\host\CommonComponents\Algorithm.sqf";
 //Отладчик
 #include <..\host\Tools\EditorWorkspaceDebug\InternalImpl.sqf>
 ;relicta_debug_onPostErrorHandle = {
@@ -97,7 +101,7 @@ call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
 #include <EditorEngine.h>
 
 //Строковое название версии. Пишется в пользовательском интерфейсе редактора
-Core_version_name = "1.15.1";
+Core_version_name = "1.16";
 //Номер версии сборки редактора. Используется в бинарных файлах карт.
 Core_version_number = 4;
 
