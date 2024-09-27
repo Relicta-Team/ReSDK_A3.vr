@@ -335,4 +335,20 @@
 		struct_erase(_o)
 	};
 
+	struct_reflect_getTypeValue = {
+		params ["_typename","_varname"];
+		private _type = missionNamespace getvariable ("pts_"+_typename);
+		if isNullVar(_type) exitWith {null};
+		private _val = _type get _varname;
+		if isNullVar(_val) then {
+			while {isNullVar(_val)} do {
+				_type = _type get STRUCT_MEM_BASE;
+				_val = _type get _varname;
+			};
+			_val
+		} else {
+			_val
+		};
+	};
+
 #endif
