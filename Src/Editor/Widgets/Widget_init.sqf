@@ -5,8 +5,6 @@
 
 // Компонент визуального интерфейса
 
-#include <Widgets.hpp>
-
 displayObjectRef = [displayNull];
 menu_internal_widget_refButtonObjLib = [widgetNull];
 menu_internal_dumpNativeMenuItemsLayout = "";
