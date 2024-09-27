@@ -26,6 +26,33 @@
 		regex STRING REGEX (regex in quotes)
 */
 
+struct(BatchVariableInfo)
+	def(type) null;
+	def(name) null;
+	def(visibleName) null;
+	def(definedIn) null;
+	def(onLoadWidget) null;
+	def(editorContext) null;
+
+	def(init)
+	{
+		params ["_visname","_definedType","_sysname","_type","_edCtx"];
+		self setv(editorContext,_edCtx);
+		self setv(visibleName,_visname);
+		self setv(definedIn,_definedType);
+		self setv(name,_sysname);
+		self setv(type,_type);
+		private _loader = missionNamespace getVariable ["goasm_attributes_handleProvider_"+_type,{}];
+
+		self setv(onLoadWidget,_loader);
+	}
+
+	def(str)
+	{
+		format["%1::%2(%3)",self getv(definedIn),self getv(name),self getv(type)]
+	}
+endstruct
+
 struct(BatchTokenBase)
 	def(name) "Базовый токен";
 	def(description) "Описание";
@@ -152,6 +179,45 @@ struct(BatchTokenSetVar) base(BatchTokenBase)
 	def(description) "Установка свойства объекта";
 	def(nextTokens) ["BatchTokenWhere"];
 	def(canBeEnd) true;
+	def(widgetList) null;
+
+	def(init)
+	{
+		
+		
+		private _ctg = self getv(_internalCtg);
+		private _d = self callv(getDisplay);
+		private _textSize = self getv(textSize);
+		if (count goasm_batch_allFields == 0) exitWith {
+			["Не найдено переменных для модификации"] call showWarning;
+		};
+		private _box = [_d,"RscCombo",[_textSize+2,20,20-2,70],_ctg] call createWidget;
+		{
+			private _idx = _box lbAdd (_x getv(visibleName));
+			_box lbSetTooltip [_idx,str(_x)];
+		} foreach goasm_batch_allFields;
+		
+		_box setvariable ["tok",self];
+		_box setvariable ["startpos",_textSize + 2 + 20-2];
+		private _lbchange = {
+			params ["_list","_index"];
+			private self = _list getvariable "tok";
+			private _fieldProperty = goasm_batch_allFields select _index;
+			
+			{
+				[_x,true] call deleteWidget;
+			} foreach (self getv(widgetList));
+			
+			private _wlist = [];
+			private _startpos = _list getvariable "startpos";
+			[self,_fieldProperty,_wlist,_startpos] call goasm_batch_provideProps;
+			self setv(widgetList,_wlist);
+		};
+		_box ctrlAddEventHandler ["LBSelChanged",_lbchange];
+
+		_box lbSetCurSel 0;
+		[_box,0] call _lbchange;
+	}
 endstruct
 
 struct(BatchTokenWhere) base(BatchTokenBase)
@@ -179,7 +245,7 @@ endstruct
 
 
 struct(BatchTokenWhereCheckVar) base(BatchTokenWhereExpressionBase)
-	def(name) "Свойство"
+	def(name) "Сравнение свойства"
 	def(description) "Оценка значения свойства объекта";
 endstruct
 
