@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define STRUCT_API_VERSION 1.1
+#define STRUCT_API_VERSION 1.2
 // enable fileinfo for structs. do not enable in release build
 //#define STRUCT_USE_ALLOC_INFO
 
@@ -153,6 +153,7 @@
 // * * * * * * * * * * * * Type checking * * * * * * * * * * * *
 
 #define isinstance(_inst_o,type_n) (#type_n in (_inst_o get STRUCT_MEM_TYPE))
+#define isinstance_str(_inst_o,type_n) ((type_n) in (_inst_o get STRUCT_MEM_TYPE))
 
 #define struct_typename(o) ((o) GET STRUCT_MEM_TYPE select 0)
 
@@ -337,6 +338,9 @@
 
 	struct_reflect_getTypeValue = {
 		params ["_typename","_varname"];
+		if not_equalTypes(_typename,"") then {
+			_typename = _typename get STRUCT_MEM_TYPE;
+		};
 		private _type = missionNamespace getvariable ("pts_"+_typename);
 		if isNullVar(_type) exitWith {null};
 		private _val = _type get _varname;
