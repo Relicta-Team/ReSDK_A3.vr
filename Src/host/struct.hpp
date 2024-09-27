@@ -339,7 +339,7 @@
 	struct_reflect_getTypeValue = {
 		params ["_typename","_varname"];
 		if not_equalTypes(_typename,"") then {
-			_typename = _typename get STRUCT_MEM_TYPE;
+			_typename = struct_typename(_typename);
 		};
 		private _type = missionNamespace getvariable ("pts_"+_typename);
 		if isNullVar(_type) exitWith {null};
