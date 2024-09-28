@@ -501,7 +501,7 @@ struct(CraftRecipeDefault) base(ICraftRecipeBase)
 			private _skills = self getv(skills);
 			if isNullVar(_skills) exitWith {_canSee = true};
 			{
-				assert(isImplementFuncStr("get" + _x));
+				assert(isImplementFuncStr(_usr,"get" + _x));
 				if (callFuncReflect(_usr,"get" + _x) >= _y) exitWith {_canSee = true};
 			} foreach _skills;
 		};
