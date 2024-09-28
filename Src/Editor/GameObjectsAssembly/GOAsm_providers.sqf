@@ -1405,7 +1405,17 @@ function(goasm_attributes_handleProvider_edConnected)
 			};
 
 			_build = [["Отмена",{}]];
-			_edc = _data get "edConnected";
+			//_edc = _data get "edConnected";
+			_edc = [];
+			{
+				private _hd = [_x,false] call golib_getHashData;
+				if ("edConnected" in _hd) then {
+					{
+						_edc pushBackUnique _x;
+					} foreach (_hd get "edConnected");
+				};
+			} forEach inspector_allSelectedObjects;
+
 			{
 				_build pushBack [
 					"Перейти к " + str _x,
@@ -1447,10 +1457,14 @@ function(goasm_attributes_handleProvider_edConnected)
 		if (_key == MOUSE_RIGHT) exitwith {
 			_wid = _input;
 			_data deleteAt "edConnected";
-			[_memberName,"cprov"] call goilb_setBatchMode;
+			["edConnected","del"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 			nextFrame(golib_cs_syncMarks);
+		};
+
+		if (count inspector_allSelectedObjects > 1) exitWith {
+			["Изменение подключения для множества объектов не поддерживается"] call showError;
 		};
 
 		call Core_pushContext;
@@ -1608,7 +1622,7 @@ function(goasm_attributes_handleProvider_edConnected)
 					} else {
 						(_data deleteAt "edConnected")
 					};
-					[_memberName,"cprov"] call goilb_setBatchMode;
+					["edConnected"] call goilb_setBatchMode;
 					[_objWorld,_data,true] call golib_setHashData;
 					call (_wid getVariable "_onSync");
 					

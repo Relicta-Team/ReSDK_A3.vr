@@ -262,7 +262,7 @@ function(inspector_menuLoad)
 					call __contextFunc;
 				}];
 				if (_addOfsY) then {
-					modvar(_internalY) + (_sizes select ifcheck(count _sizes >= 3,2,1));
+					modvar(_internalY) + (_sizes select ifcheck(count _sizes >= 3,2,1)); //тут можно добавить оффест для паддинга
 				};
 			};
 		_setSyncValCode = {
