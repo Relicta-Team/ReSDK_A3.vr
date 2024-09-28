@@ -60,7 +60,7 @@ function(golib_setHashData)
 	if (count golib_internal_lastBatchUpdateMode > 1) then {
 		golib_internal_lastBatchUpdateMode params ["_name",["_btype",""]];
 		if (_btype == "cprov") then {
-			_canApplyForCurrent = ((tolower _name) in ([_hashData get "class"] call golib_getClassAllFields));
+			_canApplyForCurrent = [_hashData get "class",_name,_hashData] call golib_batch_validatePropAccess;
 		};
 	};
 
@@ -94,6 +94,21 @@ function(goilb_setBatchMode)
 	golib_internal_lastBatchUpdateMode = [_name,_mode];
 }
 
+function(golib_batch_validatePropAccess)
+{
+	params ["_type","_prop","_hashData"];
+	
+	//no field founded
+	if !((tolower _prop) in ([_type] call golib_getClassAllFields)) exitWith {false};
+
+	//internal field check
+	if ([_type,_prop,"InternalImpl"] call goasm_attributes_hasAttributeField) exitWith {false};
+	//readony field check
+	if ([_type,_prop,"ReadOnly"] call goasm_attributes_hasAttributeField) exitWith {false};
+
+	true
+}
+
 function(golib_setHashData_batch)
 {
 	params ["_worldObj","_newData","_bupd"];
@@ -119,7 +134,7 @@ function(golib_setHashData_batch)
 		//custom provider for fields
 		["cprov",{
 			//validate. class not contain this field
-			if !((tolower _propname) in ([_curData get "class"] call golib_getClassAllFields)) exitWith {
+			if !([_curData get "class",_propname,_curData] call golib_batch_validatePropAccess) exitWith {
 				["Invalidate check %1::%2",_curData get "class",_propname] call printError;
 			};
 

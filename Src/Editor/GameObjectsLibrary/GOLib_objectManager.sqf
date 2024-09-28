@@ -325,14 +325,25 @@ function(golib_om_replaceObject)
 	params ["_worldObj","_newConfig"];
 	
 	//подмена сразу модели на конфиг
-	if ("\" in _newConfig) then {
-		_newConfig = [_newConfig] call golib_om_getConfigByModel;
+	if equalTypes(_newConfig,[]) then {
+		{
+			if ("\" in _x) then {
+				_newConfig set [_forEachIndex,[_x] call golib_om_getConfigByModel];
+			};
+		} foreach _newConfig;
+	} else {
+		if ("\" in _newConfig) then {
+			_newConfig = [_newConfig] call golib_om_getConfigByModel;
+		};
 	};
 	
-	if (_worldObj call golib_isVirtualObject) exitwith {
+	if (ifcheck(equalTypes(_worldObj,[]),_worldObj select 0,_worldObj) call golib_isVirtualObject) exitwith {
 		private _args = [_worldObj,_newConfig];
 		private _code = {
 			params ["_worldObj","_newConfig"];
+
+			assert_str(equalTypes(_newConfig,""),"Not implemented multi-update config");
+
 			_dummyObj = "_dummyObj" call Core_getContextVar;
 			if isNullVar(_dummyObj) exitwith {
 				["Context var _dummyObj not found"] call printError;
@@ -370,16 +381,36 @@ function(golib_om_replaceObject)
 		["!!! Замена модели !!!", "Замена конфига объекта", "a3\3den\data\cfg3den\history\changeattributes_ca.paa"] collect3DENHistory
 		{
 
-			private _oList = if (count inspector_otherObjects == 0) then {[_worldObj]} else {inspector_allSelectedObjects};
+			private _oList = ifcheck(equalTypes(_worldObj,[]),array_copy(_worldObj),[_worldObj]);
 			private _newObjects = [];
+			private _isSingleConfig = equalTypes(_newConfig,"");
+			if (!_isSingleConfig) then {
+				assert_str(count _oList == count _newConfig,"Config count missmatch: " + (str vec2(count _oList,count _newConfig)));
+			};
+
+			//validate can change prop
+			{
+				private _hd = [_x,false] call golib_getHashData;
+				if !([_hd get "class","model",_hd] call golib_batch_validatePropAccess) then {
+					_oList set [_foreachIndex,objNull];
+					if (!_isSingleConfig) then {
+						_newConfig set [_foreachIndex,objNull];
+					};
+				};
+			} foreach _oList;
+			_oList = _oList - [objNull];
+			if (!_isSingleConfig) then {
+				_newConfig = _newConfig - [objNull];
+			};
+
 			{
 				private _pos = _x call golib_om_getPosition;
-			
-				private _obj = create3DENEntity ["Object",_newConfig, _pos];
+				private _cfgName = ifcheck(_isSingleConfig,_newConfig,_newConfig select _foreachIndex);
+				private _obj = create3DENEntity ["Object",_cfgName, _pos];
 				
 				if ((format["%1",_obj]) == "<null>") exitWith {
 					["Не удалось заменить модель. Для подробностей смотрите лог-консоль"] call showWarning;
-					["Cant create eden entity by config %1. It is recommended to cancel the last actions.",_newConfig] call printError;
+					["Cant create eden entity by config %1. It is recommended to cancel the last actions.",_cfgName] call printError;
 				};
 				_newObjects pushBack _obj;
 				

@@ -177,7 +177,7 @@ function(inspector_menuLoad)
 	inspector_allSelectedObjects = [];
 	_isWorldContext = count _objList > 0 && {!((_objList select 0) call golib_isVirtualObject)};
 	
-	["Inspector load %1 (world context - %2)%3CTX:%4",tickTime,_isWorldContext,endl,diag_stacktrace apply {_x select [0,3] joinString " + "} joinString (endl+"    ")] call printTrace;
+	["Inspector load %1, frame: %2 (world context - %3)%4CTX:%5",tickTime,diag_frameNo,_isWorldContext,endl,diag_stacktrace apply {_x select [0,3] joinString " + "} joinString (endl+"    ")] call printTrace;
 
 	private _ctgInspectorMain = "inspector_ctg_bind" call widget_getBind;
 	if isNullReference(_ctgInspectorMain) exitWith {};

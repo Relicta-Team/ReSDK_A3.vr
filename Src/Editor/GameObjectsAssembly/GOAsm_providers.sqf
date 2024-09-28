@@ -763,7 +763,7 @@ function(goasm_attributes_handleProvider_model)
 										_props set [_memberName,_text];
 										[_memberName,"cprov"] call goilb_setBatchMode;
 										[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
-										[_objWorld,_text] call golib_om_replaceObject;
+										[inspector_allSelectedObjects,_text] call golib_om_replaceObject;
 									} call Core_callContext;
 								},null,null,null,
 								"Выберите подходящий конфиг"] call control_createList;
@@ -780,7 +780,7 @@ function(goasm_attributes_handleProvider_model)
 									_wid = _wid getVariable "_input";
 									call (_wid getVariable "_onSync");
 								};
-								[_objWorld,_cfg] call golib_om_replaceObject;
+								[inspector_allSelectedObjects,_cfg] call golib_om_replaceObject;
 							};
 						} else {
 							
@@ -791,7 +791,7 @@ function(goasm_attributes_handleProvider_model)
 								_wid = _wid getVariable "_input";
 								call (_wid getVariable "_onSync");
 							};
-							[_objWorld,_value] call golib_om_replaceObject;
+							[inspector_allSelectedObjects,_value] call golib_om_replaceObject;
 						};
 						
 					} call Core_callContext;
@@ -825,8 +825,12 @@ function(goasm_attributes_handleProvider_model)
 				_wid = _wid getVariable "_input";
 				call (_wid getVariable "_onSync");
 				
-				_defmodel = [_data get "class",_memberName,true] call oop_getFieldBaseValue;
-				[_objWorld,_defmodel] call golib_om_replaceObject;
+				//_defmodel = [_data get "class",_memberName,true] call oop_getFieldBaseValue;
+				_allObj = inspector_allSelectedObjects;
+				_defmodel = _allObj apply {
+					([[_x] call golib_getClassName,_memberName,true] call oop_getFieldBaseValue)
+				};
+				[_allObj,_defmodel] call golib_om_replaceObject;
 			};
 		};
 		
@@ -1675,6 +1679,11 @@ function(goasm_attributes_handlerProv_internal_getText)
 
 function(goasm_attributes_handleProvider_edOwner)
 {
+	if (count inspector_allSelectedObjects > 1) exitWith {
+		[TEXT,[50,_optimalSizeH],_offsetMemX,true] call _createElement;
+		[_wid,"<t align='center' size='0.7'>Несколько значений</t>"] call widgetSetText;
+	};
+
 	["RscButton",[50,_optimalSizeH],_offsetMemX,true] call _createElement;
 	_wid ctrlSetText "К источнику";
 	_wid ctrlSetTooltip "ЛКМ - перейти к источнику";
