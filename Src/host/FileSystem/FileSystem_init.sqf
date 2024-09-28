@@ -6,7 +6,7 @@
 
 #include <..\engine.hpp>
 #include <..\struct.hpp>
-
+#include "FileSystem.h"
 
 fso_map_tree = createhashMap; //flat object
 
@@ -29,17 +29,6 @@ fso_init = {
 	
 	fso_map_tree = [_nativeCollection] call fso_buildTree;
 };
-
-#define FSO_INDEX_FILES 0
-#define FSO_INDEX_FOLDERS 1
-
-#define FSO_PATH_DELIMETER "/"
-
-#define FSO_NEW_DATA [[],[]]
-
-#define FSO_NORMALIZE_PATH(p) ((tolower (p)) splitString "\/" joinString FSO_PATH_DELIMETER)
-
-#define FSO_PATH_JOIN(p1,p2) ([p1,p2] joinString FSO_PATH_DELIMETER)
 
 /*
 	tree builder maker

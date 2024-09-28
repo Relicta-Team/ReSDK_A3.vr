@@ -234,6 +234,9 @@ _ret = _this; \
 //Распаковывает ссылку на переменную из верхнего уровня если существует
 #define outRef(var,def) var = if isNullVar(var) then {def} else {var}
 
+// privates(_a _b _c _d)
+#define privates(v) private (v splitString "."); 
+
 //prob correct??? (rewrite)
 #define isNullPtr(obj) (obj isequaltypeany [locationnull,controlnull,objnull,displaynull])
 

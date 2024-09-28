@@ -340,6 +340,48 @@ TEST(ObjectEventHandlers)
 	delete(_obj);
 }
 
+TEST(LockingEventHandlers)
+{
+	private _ev = struct_newp(EventHandler,"LockableEvent");
+	private _gvar = 0;
+	private _f = {
+		INC(_gvar);
+		if (_gvar == 5) then {
+			self callp(setLocked,true);
+		};
+	};
+
+	for "_i" from 1 to 10 do {_ev callp(add,_f);};
+
+	_ev callp(setLocked,true);
+	_ev callp(callEvent,null);
+	ASSERT_EQ(_ev getv(_locked),false);
+	ASSERT_EQ(_gvar,0);
+
+	_ev callp(callEvent,null);
+	ASSERT_EQ(_ev getv(_locked),false);
+	ASSERT_EQ(_gvar,5);
+
+	//also for object evh
+	_gvar = 0;
+
+	private _obj = new(object);
+	private _ev = struct_newp(ObjectEventHandler,"LockableEvent" arg _obj);
+
+	for "_i" from 1 to 10 do {_ev callp(add,_f);};
+
+	_ev callp(setLocked,true);
+	_ev callp(callEvent,null);
+	ASSERT_EQ(_ev getv(_locked),false);
+	ASSERT_EQ(_gvar,0);
+
+	_ev callp(callEvent,null);
+	ASSERT_EQ(_ev getv(_locked),false);
+	ASSERT_EQ(_gvar,5);
+
+	delete(_obj);
+}
+
 
 
 //TODO done hashing for all reference type objects

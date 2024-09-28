@@ -28,6 +28,7 @@
 struct(EventHandler)
 	def_null(_events)
 	def(_eventName) "";
+	def(_locked) false; //блокирующий режим
 
 	def(str)
 	{
@@ -79,9 +80,21 @@ struct(EventHandler)
 	def(callEvent)
 	{
 		private _args = _this;
+		
 		{
+			if (self getv(_locked)) exitWith {};
 			_args call _x;
 		} foreach (self getv(_events));
+		
+		if (self getv(_locked)) then {
+			self setv(_locked,false);
+		};
+	};
+
+	def(setLocked)
+	{
+		params["_mode"];
+		self setv(_locked,_mode);
 	};
 
 endstruct
@@ -131,11 +144,125 @@ struct(ObjectEventHandler) base(EventHandler)
 		};
 
 		{
+			if (self getv(_locked)) exitWith {};
 			_objArgs call _x;
 		} foreach (self getv(_events));
+
+		if (self getv(_locked)) then {
+			self setv(_locked,false);
+		};
 	};
 
 endstruct
+
+/*
+	Version struct
+*/
+struct(Version)
+	def(major) 0;
+	def(minor) 0;
+	def(patch) 0;
+	def(build) 0;
+
+	/*
+		_vBase - string, array, number
+	*/
+	def(init)
+	{
+		params ["_vBase","_min","_pat","_bld"];
+		if isNullVar(_vBase) then {
+			_vBase = "0.0";
+		};
+
+		if equalTypes(_vBase,"") then {
+			private _numArr = (_vBase splitString ",. ") apply {parseNumber(_x)};
+			self callp(__setVersion,_numArr);
+		} else {
+			if equalTypes(_vBase,[]) then {
+				self callp(__setVersion,_vBase);
+			} else {
+				assert(equalTypes(_vBase,0));
+				self callp(__setVersion,[_vBase arg _min arg _pat arg _bld]);
+			};
+		};
+	}
+
+	def(__setVersion)
+	{
+		params ["_d"];
+		
+		private _mapping = ["major","minor","path","build"];
+		{
+			private _xval = _x;
+			if isNullVar(_xval) then {
+				_xval = 0;
+			};
+			assert(equalTypes(_xval,0));
+			self set [_mapping select _foreachindex,_xval];
+		} foreach _d;
+	}
+
+	def(str)
+	{
+		private _vArr = [self getv(major),self getv(minor)];
+		
+		_vArr pushBack (self getv(patch));
+		_vArr pushBack (self getv(build));
+
+		(_vArr apply {str _x}) joinString ".";
+	}
+
+	/*
+		private _v = struct_new(Version,"1.3");
+		_v callp(compare,struct_newp(Version,"1.0"))
+		Положительные числа - вызывающий объект новее, отрицательные - переданный аргумент новее
+		0 - если версии равны
+
+	*/
+	def(compare)
+	{
+		params ["_over"];
+		
+		if (equalTypes(_over,"") || {equalTypes(_over,[])}) then {
+			_over = struct_newp(Version,_over);
+		};
+		
+		private _ret = 0;
+		call {
+			if ((self getv(major)) < (_over getv(major))) exitWith {_ret = -1};
+			if ((self getv(major)) > (_over getv(major))) exitWith {_ret = 1};
+			if ((self getv(minor)) < (_over getv(minor))) exitWith {_ret = -1};
+			if ((self getv(minor)) > (_over getv(minor))) exitWith {_ret = 1};
+			if ((self getv(patch)) < (_over getv(patch))) exitWith {_ret = -1};
+			if ((self getv(patch)) > (_over getv(patch))) exitWith {_ret = 1};
+			if ((self getv(build)) < (_over getv(build))) exitWith {_ret = -1};
+			if ((self getv(build)) > (_over getv(build))) exitWith {_ret = 1};
+		};
+
+		_ret
+	}
+
+	// def(checkOp)
+	// {
+	// 	// #define __opstr(val) #val
+	// 	// #define OP_(sym) [__opstr(sym),{(_this select 0) sym (_this select 1)}]
+
+	// 	// private _smap = createHashMapFromArray [
+	// 	// 	OP_(==),
+	// 	// 	OP_(!=),
+	// 	// 	OP_(>),
+	// 	// 	OP_(<),
+	// 	// 	OP_(>=),
+	// 	// 	OP_(<=)
+	// 	// ];
+
+	// 	// #undef __opstr
+	// 	// #undef OP_
+	// 	false
+	// }
+
+endstruct
+
 
 
 /*

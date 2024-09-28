@@ -143,7 +143,8 @@
 //call functions with parameters
 #define callp(methodname,params) call [#methodname,[params]]
 //call base version of any method
-#define callbase(methodname) _this call(missionnamespace getvariable ("pts_"+(self GET STRUCT_MEM_TYPE select 1)) GET #methodname)
+#define callbase(methodname) _this call {__CBASE_INC__; _this call(missionnamespace getvariable ("pts_"+(self GET STRUCT_MEM_TYPE select __scb_i_s)) GET #methodname) }
+#define __CBASE_INC__ private __scb_i_s = if (isnil'__scb_i_s') then {1} else {__scb_i_s + 1}
 
 //variables management
 #define getv(memname) get #memname

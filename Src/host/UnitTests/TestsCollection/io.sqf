@@ -6,20 +6,29 @@
 
 #include "..\TestFramework.h"
 
-TEST(Yaml_Base)
+TEST(Yaml_Extension)
 {
 	ASSERT_STR(call yaml_isExtensionLoaded,"ReYaml not found or not loaded");
+	private _ver = call yaml_getExtensionVersion;
+	traceformat("Yaml version: %1",_ver);
+	ASSERT_STR(_ver getv(major) > 0,"ReYaml not updated");
+	ASSERT_STR(_ver callp(compare,"1.0") >= 0,"ReYaml version < 1.0");
+}
+
+TEST(Yaml_Base)
+{
 private _dat = "
   a: 1
   b:
     c: [6,7,8]
     d: [a,b,c]
+  one_line_test: {First: Hello, Second: ""World!"" }
 ";
 	private _ref = refcreate(0);
 	ASSERT([_dat arg _ref] call yaml_loadData);
 	private _map = refget(_ref);
 	
-	ASSERT_EQ(count _map,2);
+	ASSERT_EQ(count _map,3);
 	ASSERT_EQ(_map get "a",1);
 	
 	ASSERT_EQ(count (_map get "b"),2);
@@ -29,6 +38,25 @@ private _dat = "
 	
 	ASSERT_EQ(count (_map get "b" get "d"),3);
 	ASSERT_EQ(_map get "d" select 2,"c");
+
+	ASSERT_EQ(count (_map getOrDefault vec2("one_line_test",[])),2);
+	ASSERT_EQ(_map get "one_line_test" getOrDefault vec2("First","notdef"),"Hello");
+	ASSERT_EQ(_map get "one_line_test" getOrDefault vec2("Second","notdef"),"World!");
+
+	_dat = "
+- name: 1
+  val: On
+- name: 2
+  val: Off
+";
+	_ref = refcreate(0);
+	ASSERT([_dat arg _ref] call yaml_loadData);
+	_map = refget(_ref);
+	ASSERT_EQ(count _map,2);
+	ASSERT_EQ(_map select 0 get "name",1);
+	ASSERT_EQ(_map select 0 get "val",true);
+	ASSERT_EQ(_map select 1 get "name",2);
+	ASSERT_EQ(_map select 1 get "val",false);
 }
 
 TEST(Yaml_PartialLoading)
@@ -164,7 +192,7 @@ TEST(FileSystem_Pathes)
 	traceformat("sdk path: %1",_sdkPath)
 	ASSERT(!isNull(_sdkPath));
 
-	private _required = toLower "src/host/UnitTests/TestsCollection/io.sqf";
+	private _required = toLower "src\host\UnitTests\TestsCollection\io.sqf"; //path delimeter constant \
 	private _data = [_required] call file_read;
 	traceformat("Data len: %1 bytes",count _data)
 	ASSERT(count _data > 0);
