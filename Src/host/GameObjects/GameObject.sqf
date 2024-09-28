@@ -247,7 +247,7 @@ class(GameObject) extends(ManagedObject)
 	getterconst_func(getWeightRandomCoeff,vec2(0,0));
 	getterconst_func(getWeightRandomPrecision,2);//сколько знаков после нуля доступно
 
-	editor_attribute("ReadOnly")
+	//editor_attribute("ReadOnly")
 	var(pointer,pointer_new(this)); //unique pointer
 	
 	func(constructor)
