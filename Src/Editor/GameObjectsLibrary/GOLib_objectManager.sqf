@@ -36,7 +36,7 @@ function(golib_om_internal_handleTransformEvent)
 function(golib_om_onAttibutesChanged)
 {
 	params ["_obj"];
-	[null] call inspector_menuLoad;
+	//[null] call inspector_menuLoad;
 }
 
 function(golib_om_generatelAssoc)
@@ -369,31 +369,40 @@ function(golib_om_replaceObject)
 
 		["!!! Замена модели !!!", "Замена конфига объекта", "a3\3den\data\cfg3den\history\changeattributes_ca.paa"] collect3DENHistory
 		{
-			private _pos = _worldObj call golib_om_getPosition;
+
+			private _oList = if (count inspector_otherObjects == 0) then {[_worldObj]} else {inspector_allSelectedObjects};
+			private _newObjects = [];
+			{
+				private _pos = _x call golib_om_getPosition;
 			
-			_obj = create3DENEntity ["Object",_newConfig, _pos];
-			
-			if ((format["%1",_obj]) == "<null>") exitWith {
-				["Не удалось заменить модель. Для подробностей смотрите лог-консоль"] call showWarning;
-				["Cant create eden entity by config %1. It is recommended to cancel the last actions.",_newConfig] call printError;
+				private _obj = create3DENEntity ["Object",_newConfig, _pos];
+				
+				if ((format["%1",_obj]) == "<null>") exitWith {
+					["Не удалось заменить модель. Для подробностей смотрите лог-консоль"] call showWarning;
+					["Cant create eden entity by config %1. It is recommended to cancel the last actions.",_newConfig] call printError;
+				};
+				_newObjects pushBack _obj;
+				
+
+				private _rot = _x call golib_om_getRotation;
+				private _data = [_x,true] call golib_getHashData;
+				delete3DENEntities [_x];
+				
+				[_obj,_data] call golib_setHashData;
+				[_obj,_pos] call golib_om_setPosition;
+				[_obj,_rot] call golib_om_setRotation;
+				
+				[_obj] call golib_om_internal_handleTransformEvent;
+				[_obj,true] call Core_initObjectEvents;
+				
+				
+			} foreach _oList;
+
+			if (count _newObjects > 0) then {
+				call golib_cs_syncMarks;
+				set3DENSelected _newObjects;
 			};
 			
-			
-			
-			private _rot = _worldObj call golib_om_getRotation;
-			private _data = [_worldObj,true] call golib_getHashData;
-			delete3DENEntities [_worldObj];
-			
-			[_obj,_data] call golib_setHashData;
-			[_obj,_pos] call golib_om_setPosition;
-			[_obj,_rot] call golib_om_setRotation;
-			
-			[_obj] call golib_om_internal_handleTransformEvent;
-			[_obj,true] call Core_initObjectEvents;
-			
-			call golib_cs_syncMarks;
-
-			set3DENSelected [_obj];
 		};
 	};
 	

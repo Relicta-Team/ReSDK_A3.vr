@@ -7,6 +7,9 @@
 
 function(inspector_init)
 {
+	inspector_const_providedBatchedPropColor = "#94502E" call color_HTMLtoRGBA;
+	inspector_const_providedBatchedPropColor set [3,0.4];
+
 	private _handleSelectionChange = {
 		params ["_list"];
 		
@@ -48,6 +51,9 @@ function(inspector_init)
 		["Инспектор",{}]
 		//,["<t size='0.9' color='#ff0000'>Слои</t>",{}]
 	];
+
+	inspector_otherObjects = [];
+	inspector_allSelectedObjects = [];
 	
 	call inspector_loadWidgets;
 }
@@ -166,17 +172,20 @@ function(inspector_onPressButton)
 function(inspector_menuLoad)
 {
 	params [["_objList",get3DENSelected "" select 0]];
+	
+	inspector_otherObjects = [];
+	inspector_allSelectedObjects = [];
 	_isWorldContext = count _objList > 0 && {!((_objList select 0) call golib_isVirtualObject)};
 	
-	["Inspector load %1 (world context - %2)",tickTime,_isWorldContext] call printTrace;
+	["Inspector load %1 (world context - %2)%3CTX:%4",tickTime,_isWorldContext,endl,diag_stacktrace apply {_x select [0,3] joinString " + "} joinString (endl+"    ")] call printTrace;
 
 	private _ctgInspectorMain = "inspector_ctg_bind" call widget_getBind;
 	if isNullReference(_ctgInspectorMain) exitWith {};
 	{ctrlDelete _x} foreach (allControls _ctgInspectorMain);
 	
 	//_objlist = get3DENSelected "" select 0;
-	private _isOneNonDatedObject = count _objList == 1 && {!([_objList select 0] call golib_hasHashData)};
-	if (count(_objlist)!=1 || _isOneNonDatedObject) exitWith {
+	private _isOneNonDatedObject = count _objList == 0 || { _objList findif {!([_x] call golib_hasHashData)} != -1};
+	if (_isOneNonDatedObject) exitWith {
 		_txt = [getEdenDisplay,TEXT,WIDGET_FULLSIZE,_ctgInspectorMain] call createWidget;
 		_txtDat = if (count _objList == 0) then {
 			"Выберите объекты для просмотра в окне инспектора"
@@ -201,6 +210,11 @@ function(inspector_menuLoad)
 		private _sizeH = _txt call widgetGetTextHeight;
 		[_txt,[0,0,100,_sizeH]] call widgetSetPosition;
 		(0) breakout "inspector_menuLoad";
+	};
+
+	private _isSingleObject = count _objList == 1;
+	private _multiObjectText = {
+		ifcheck(_isSingleObject,"",_this)
 	};
 	
 	
@@ -361,10 +375,12 @@ function(inspector_menuLoad)
 	private _type = _data get "class";
 	private _obj = missionNamespace getVariable ["pt_"+_type,nullPtr];
 	if isNullReference(_obj) exitWith {
-		["%1 - null type %2",__FUNC__,_type] call printError;
+		//["%1 - null type %2",__FUNC__,_type] call printError;
 	};
 	private _isVirtualObject = _objWorld call golib_isVirtualObject;
-	
+	inspector_allSelectedObjects = _objList;
+	if (!_isSingleObject) then {inspector_otherObjects = _objList select [1,count _objList]};
+
 	/*
 		ссылка игрового объекта
 			Глобальная переменая ТЭГ (строка)
@@ -378,12 +394,47 @@ function(inspector_menuLoad)
 	if ([_type,"Deprecated"] call goasm_attributes_hasAttributeClass) then {
 		_classnameShow = format["<t color='#ff0000'>(УСТАРЕВШИЙ) %1</t>",_classnameShow];
 	};
-	_text = format["<t align='left'>Свойства объекта: %1</t>",_classnameShow];
+	_text = if (_isSingleObject) then {
+		format["<t align='left'>Объект: %1</t>",_classnameShow];
+	} else {
+		format["<t align='left'>Несколько объектов: %1</t>",count _objList];
+	};
 	[_wid,_text] call widgetSetText;
+	if (!_isSingleObject) then {
+		_wid ctrlSetTooltip (
+			(format["Нажмите ЛКМ для контекстного меню\nПервый объект: %1\n",_classnameShow]) + 
+			("Типы:\n"+(hashSet_toArray(hashSet_create(_objList apply {[_x] call golib_getClassName})) joinString "\n"))
+		);
+	} else {
+		_wid ctrlSetTooltip "Нажмите ЛКМ для контекстного меню";
+	};
+	_wid ctrlAddEventHandler ["MouseEnter",{(_this select 0) setBackgroundColor [0.4,0.4,0.4,1];}];
+	_wid ctrlAddEventHandler ["MouseExit",{(_this select 0) setBackgroundColor [0,0,0,0];}];
+	{
+		[
+			[
+				["Сбросить все свойства",{
+					["Не реализовано в текущей версии"] call showError;
+				}],
+				["Замена класса",{
+					//(call contextMenu_getContextParams) params ["_wid","__codeValidateContainer"];
+					if (["Внимание!"+endl+endl
+					+"Замена класса объекта может повлечь за собой удаление свойств."
+					+"Вы действительно хотите заменить класс объекта?"] call messageBoxRet) then {
+						["Не реализовано в текущей версии"] call showError;
+					};
+				}],
+				["Отмена",{}]
+			],
+			call mouseGetPosition,
+			[]
+		] call contextMenu_create;
+	} call _setOnPressCode;
+
 	
 	//mark
 	[TEXT,[50,_optimalSizeH],0,false] call _createElement;
-	[_wid,format["<t align='left'>Глобальая ссылка:</t>"]] call widgetSetText;
+	[_wid,format["<t align='left' size='0.9'>Глобальн%1 ссылк%2:</t>",ifcheck(_isSingleObject,"ая","ые"),ifcheck(_isSingleObject,"а","и")]] call widgetSetText;
 	[BUTTON,[10,_optimalSizeH],50,false] call _createElement;
 	_wid ctrlSetText "+";
 	_wid ctrlSetTooltip "ЛКМ - сохранить\nПКМ - очистить";
@@ -394,6 +445,7 @@ function(inspector_menuLoad)
 			(_wid getVariable "input") ctrlSetText "";
 			if ("mark" in _data) then {
 				_data deleteAt "mark";
+				["mark"] call goilb_setBatchMode;
 				[_objWorld,_data,true,"Удаление глобальной ссылки"] call golib_setHashData;
 				call golib_cs_syncMarks;
 			};
@@ -410,6 +462,7 @@ function(inspector_menuLoad)
 				"Добавление глобальный ссылки"
 			};
 			_data set ["mark",_txt];
+			["mark","set_mark"] call goilb_setBatchMode;
 			[_objWorld,_data,true,_editReason] call golib_setHashData;
 			call golib_cs_syncMarks;
 		} else _deleteCode;
@@ -430,13 +483,19 @@ function(inspector_menuLoad)
 		};
 	} call _setSyncValCode;
 	
+
+	
+
 	//invisible
-	[TEXT,[50,_optimalSizeH],0,false] call _createElement;
-	{
-		_layer = [_objWorld,true] call layer_getObjectLayer;
-		if (_layer == "") then {_layer = slt+"нет"+sgt};
-		[_wid,format["<t align='left'>Слой: %1</t>",_layer]] call widgetSetText;
-	} call _setSyncValCode;
+	if (_isSingleObject && !_isVirtualObject) then {
+		[TEXT,[50,_optimalSizeH],0,false] call _createElement;
+		{
+			_layer = [_objWorld,true] call layer_getObjectLayer;
+			if (_layer == "") then {_layer = slt+"нет"+sgt};
+			[_wid,format["<t align='left'>Слой: %1</t>",_layer]] call widgetSetText;
+		} call _setSyncValCode;
+	};
+	
 	
 	[TEXT,[40,_optimalSizeH],50,false] call _createElement;
 	[_wid,format["<t align='right'>Видимость:</t>"]] call widgetSetText;
@@ -469,7 +528,7 @@ function(inspector_menuLoad)
 	*/
 	ifcheck(_isVirtualObject,8,24) call _createCTGExt;
 
-	if (!_isVirtualObject) then {
+	if (!_isVirtualObject && _isSingleObject) then {
 
 		_panList = [["X",[1,0,0,1]],["Y",[0,1,0,1]],["Z",[0,0,1,1]]];
 		
@@ -478,7 +537,7 @@ function(inspector_menuLoad)
 		//==========================================================================
 		region(pos)
 			[TEXT,[100,_optimalSizeH]] call _createElement;
-			[_wid,format["<t align='left' size='0.8'>Трансформация: позиция</t>"]] call widgetSetText;
+			[_wid,format["<t align='left' size='0.8'>Трансформация: позиция%1</t>"," (несколько)" call _multiObjectText]] call widgetSetText;
 			for "_i" from 0 to 2 do {
 				[TEXT,[100/3/4,_optimalSizeH],100/3*_i,false] call _createElement;
 				(_panList select _i)params ["_t","_col"];
@@ -542,7 +601,7 @@ function(inspector_menuLoad)
 		//==========================================================================
 		region(rot)
 			[TEXT,[100,_optimalSizeH]] call _createElement;
-			[_wid,format["<t align='left' size='0.8'>Трансформация: поворот</t>"]] call widgetSetText;
+			[_wid,format["<t align='left' size='0.8'>Трансформация: поворот%1</t>"," (несколько)" call _multiObjectText]] call widgetSetText;
 			for "_i" from 0 to 2 do {
 				[TEXT,[100/3/4,_optimalSizeH],100/3*_i,false] call _createElement;
 				(_panList select _i)params ["_t","_col"];
@@ -606,7 +665,7 @@ function(inspector_menuLoad)
 	region(probspawn)
 		[TEXT,[100,_optimalSizeH]] call _createElement;
 		//Тут осталось настроить синхру кнопки применения настроек
-		[_wid,format["<t align='left'>Вероятность появления:</t>"]] call widgetSetText;
+		[_wid,format["<t align='left'>Вероятность появления%1:</t>"," (несколько)" call _multiObjectText]] call widgetSetText;
 			[SLIDERWNEW,[70,_optimalSizeH/1.5],0,false] call _createElement;
 			_slider = _wid;
 			_wid sliderSetRange [0,100];
@@ -640,6 +699,7 @@ function(inspector_menuLoad)
 					_value = sliderPosition (_wid getVariable "slider");
 					_old = _data get "prob";
 					_data set ["prob",_value];
+					["prob"] call goilb_setBatchMode;
 					[_objWorld,_data,true,format["Изменение вероятности появления (%1 -> %2)",_old,_value]] call golib_setHashData;
 					
 					_sli = (_wid getVariable "slider");
@@ -674,7 +734,7 @@ function(inspector_menuLoad)
 					_data deleteAt "prob";
 					_m = "Выключение случайного появления";	
 				};
-				
+				["prob"] call goilb_setBatchMode;
 				[_objWorld,_data,true,_m] call golib_setHashData;
 			} call _setOnCBChanged;
 	
@@ -682,7 +742,8 @@ function(inspector_menuLoad)
 
 		region(randdir)
 			[TEXT,[80,_optimalSizeH],0,false] call _createElement;
-			[_wid,format["<t align='left'>Случайное направление:</t>"]] call widgetSetText;
+			[_wid,format["<t align='left'>Ранд. направление%1:</t>"," <t size='0.7'>(несколько)</t>" call _multiObjectText]] call widgetSetText;
+				_wid ctrlSetTooltip "Случайное направление (рандомное) отвечает за рандомный поворт объекта при появлении.";
 				["RscCheckBox",[10,_optimalSizeH],80,true] call _createElement;
 				{
 					_wid cbSetChecked ("rdir" in _data);
@@ -696,14 +757,15 @@ function(inspector_menuLoad)
 						_data set ["rdir",true];
 						_m = "Включение рандомного направления";
 					};
-					
+					["rdir"] call goilb_setBatchMode;
 					[_objWorld,_data,true,_m] call golib_setHashData;
 				} call _setOnCBChanged;
 			
 		region(randpos)
 			[TEXT,[50,_optimalSizeH],0,false] call _createElement;
-			[_wid,format["<t align='left'>Случайная позиция</t>"]] call widgetSetText;
-			
+			[_wid,format["<t align='left'>Ранд. позиция%1</t>"," <t size='0.7'>(неск.)</t>" call _multiObjectText]] call widgetSetText;
+			_wid ctrlSetTooltip "Случайная позиция (рандомная) отвечает за зону случайной позиции объекта. Если она установлена, то объект появится в радиусе указанной позиции по оси Z.";
+
 			[INPUT,[30,_optimalSizeH],50,false] call _createElement;
 			_input = _wid;
 			{
@@ -722,6 +784,7 @@ function(inspector_menuLoad)
 					_val = clamp(_val,0,1000);
 				};
 				_data set ["rpos",_val];
+				["rpos"] call goilb_setBatchMode;
 				[_objWorld,_data,true,"Изменение радиуса случайной позиции"] call golib_setHashData;
 			} call _setOnKillFocusCode;
 			["RscCheckBox",[10,_optimalSizeH],80,true] call _createElement;
@@ -735,6 +798,7 @@ function(inspector_menuLoad)
 				} else {
 					_data deleteAt "rpos";
 				};
+				["rpos"] call goilb_setBatchMode;
 				[_objWorld,_data,true,"Переключение случайной позиции"] call golib_setHashData;
 				
 				_wid = _wid getVariable "_input";
@@ -749,85 +813,124 @@ function(inspector_menuLoad)
 		if (count _x <= 1 || {(count _x -1) > _idx}) exitWith {_onerror};
 		_x select _idx;
 	};
-	_type = _obj getVariable "className";
+	
 	_propsSizeMid = 50;
 	_propsSizeMid call _createCTGExt;
 	
+	_registeredFields = createHashMap;
 	{
-		_memberName = _x;
-		_memberVisibleName = _x;
-		_atrList = _y;
-		
-		//Только внутренняя реализация
-		if ([_type,_memberName,"InternalImpl"] call goasm_attributes_hasAttributeField) then {continue};
-		
-		_sizeMemX = 100;
-		_offsetMemX = 0;
-		_toNextLine = true;
-		_tooltip = format["%1::%2",_type,_memberName];
-		_editorType = "";
-		_editorContext = null;
-		//Обрабатываем атрибуты члена в этом цикле
+		//_type = _x getVariable "className";
+		_wobjIter = _x;
+		_clsObj = [_x] call golib_getClassName;
+		_type = [_clsObj,"className"] call oop_getTypeValue;
+		_isFirstType = _foreachIndex == 0;
 		{
-			_atrName = _x select 0;
-			call {
-				if (_atrName == "Tooltip") exitWith {
-					_tooltip = _tooltip+"\n\n"+([_x,0,"empty descr"] call _getAtrAtIdx);
-				};
-				if (_atrName == "alias") exitWith {
-					if (count _x <= 1) exitWith {_memberVisibleName = "ERROR_ALIAS::"+_memberName};
-					_memberVisibleName = _x select 1;
-				};
-				if (_atrName == "EditorVisible") exitWith {
-					if (_editorType!="") exitWith {
-						["%1 - Editor provider already defined <%2> -> %3::%4",__FUNC__,_editorType,_data get "class",_memberName] call printError;
-						continue;
-					};
-					
-					_idx = _x findif {"type:"in _x};
-					if (_idx!=-1) exitWith {
-						_editorType = ["check",((_x select _idx) splitString ":") select 1] call goasm_attributes_providerNativeGet;
-						if (_editorType!="") then {
-							//если есть способ изменения то он будет правее названия
-							_sizeMemX = 45;
-							_offsetMemX = _sizeMemX;
-							_editorContext = _x select [1,count _x];
-						};
-					};
-					_idx = _x findif {"custom_provider:"in _x};
-					if (_idx!=-1) then {
-						_editorType = ((_x select _idx) splitString ":") select 1;
-						if (_editorType!="") then {
-							//если есть способ изменения то он будет правее названия
-							_sizeMemX = 45;
-							_offsetMemX = _sizeMemX;
-							_editorContext = _x select [1,count _x];
-						};
-					};
-				};
-			}
-		} foreach _atrList;
-		[TEXT,[_sizeMemX,_optimalSizeH],0,_editorType==""] call _createElement;
-		[_wid,format["<t align='left'>p: %1</t>",_memberVisibleName]] call widgetSetText;
-		_wid setVariable ["_memberName",_memberName];
-		_wid setVariable ["_editorContext",_editorContext];
-		
-		_wid ctrlSetTooltip _tooltip;
-		
-		if (_editorType!="") then {
+			_memberName = _x;
+			//already registered in inspector
+			if ((tolower _memberName) in _registeredFields) then {
+				private _rf = (_registeredFields get (tolower _memberName));
+				_rf params ["_wid__","_ctr__"];
+				_rf set [1,_ctr__ + 1];
+				continue;
+			}; 
+			_memberVisibleName = _x;
+			_atrList = _y;
 			
-			//Вот тут сам код поставщика
-			call (missionNamespace getVariable ["goasm_attributes_handleProvider_"+_editorType,{
-				[BUTTON,[50,_optimalSizeH],_offsetMemX,true] call _createElement;
-				_wid ctrlSetText ("ERROR PROVIDER: " + _editorType);
-				_wid ctrlSetTooltip("ERROR PROVIDER: " + _editorType);
-			}]);
-		};
-		
-		
-		
-	} foreach (_obj getVariable "_redit_attribFields");
+			//Только внутренняя реализация
+			if ([_type,_memberName,"InternalImpl"] call goasm_attributes_hasAttributeField) then {continue};
+			
+			_sizeMemX = 100;
+			_offsetMemX = 0;
+			_toNextLine = true;
+			_tooltip = format["%1::%2",_type,_memberName];
+			_editorType = "";
+			_editorContext = null;
+			//Обрабатываем атрибуты члена в этом цикле
+			{
+				_atrName = _x select 0;
+				call {
+					if (_atrName == "Tooltip") exitWith {
+						_tooltip = _tooltip+"\n\n"+([_x,0,"empty descr"] call _getAtrAtIdx);
+					};
+					if (_atrName == "alias") exitWith {
+						if (count _x <= 1) exitWith {_memberVisibleName = "ERROR_ALIAS::"+_memberName};
+						_memberVisibleName = _x select 1;
+					};
+					if (_atrName == "EditorVisible") exitWith {
+						if (_editorType!="") exitWith {
+							["%1 - Editor provider already defined <%2> -> %3::%4",__FUNC__,_editorType,_data get "class",_memberName] call printError;
+							continue;
+						};
+						
+						_idx = _x findif {"type:"in _x};
+						if (_idx!=-1) exitWith {
+							_editorType = ["check",((_x select _idx) splitString ":") select 1] call goasm_attributes_providerNativeGet;
+							if (_editorType!="") then {
+								//если есть способ изменения то он будет правее названия
+								_sizeMemX = 45;
+								_offsetMemX = _sizeMemX;
+								_editorContext = _x select [1,count _x];
+							};
+						};
+						_idx = _x findif {"custom_provider:"in _x};
+						if (_idx!=-1) then {
+							_editorType = ((_x select _idx) splitString ":") select 1;
+							if (_editorType!="") then {
+								//если есть способ изменения то он будет правее названия
+								_sizeMemX = 45;
+								_offsetMemX = _sizeMemX;
+								_editorContext = _x select [1,count _x];
+							};
+						};
+					};
+				}
+			} foreach _atrList;
+			[TEXT,[_sizeMemX,_optimalSizeH],0,_editorType==""] call _createElement;
+			[_wid,format["<t align='left'>%1</t>",_memberVisibleName]] call widgetSetText;
+			_wid setVariable ["_memberName",_memberName];
+			_wid setVariable ["_editorContext",_editorContext];
+			
+			_wid ctrlSetTooltip _tooltip;
+
+			if (!_isFirstType) then {
+				_tooltip = "Предоставлено классом " + _type + "\n\n" + _tooltip;
+				_wid ctrlSetTooltip _tooltip;
+				_wid setBackgroundColor inspector_const_providedBatchedPropColor;
+			};
+
+			_registeredFields set [tolower _memberName,[_wid,1,_memberVisibleName]];
+			
+			if (_editorType!="") then {
+				private _cacheODT = [_objWorld,_data];
+				if (!_isFirstType) then {
+					//правка чтобы с внешних объектов подгружались дефолт свойства в визуал
+					_objWorld = _wobjIter;
+					_data = [_objWorld] call golib_getHashData;
+				};
+
+				//Вот тут сам код поставщика
+				call (missionNamespace getVariable ["goasm_attributes_handleProvider_"+_editorType,{
+					[BUTTON,[50,_optimalSizeH],_offsetMemX,true] call _createElement;
+					_wid ctrlSetText ("ERROR PROVIDER: " + _editorType);
+					_wid ctrlSetTooltip("ERROR PROVIDER: " + _editorType);
+				}]);
+
+				_objWorld = _cacheODT select 0;
+				_data = _cacheODT select 1;
+			};
+			
+		} foreach ([_clsObj,"_redit_attribFields"] call oop_getTypeValue);//(_x getVariable "_redit_attribFields");
+
+	} foreach ifcheck(_isSingleObject,[_objWorld],_objList);
 	
+	{
+		_y params ["_wid__","_ctr__","_memvisname__"];
+		if (_ctr__ > 1) then {
+			[_wid__,format["<t align='left'>%1 (x%2)</t>",_memvisname__,_ctr__]] call widgetSetText;
+			_wid__ ctrlSetTooltip (format["Объектов с этим свойством: %1\n%2",_ctr__,ctrltooltip _wid__]);
+		};
+	} foreach _registeredFields;
+
 	//adjust max size
 	//TODO auto adjust size for object propertys
 	//(_controlGroup call widgetGetPosition) params ["_pX","_pY","_pW","_pH"];
@@ -840,7 +943,7 @@ function(inspector_menuLoad)
 
 	//===============================new scripting tab===============================
 	[TEXT,[100,_optimalSizeH]] call _createElement; //name
-	[_wid,"<t align='left'>Скрипт объекта</t>"] call widgetSetText;
+	[_wid,format["<t align='left'>Скрипт объекта%1</t>"," (несколько)" call _multiObjectText]] call widgetSetText;
 
 	//edit scriptname
 	["RscEditReadOnly",[65,_optimalSizeH],5,false] call _createElement;
@@ -862,8 +965,11 @@ function(inspector_menuLoad)
 		if (_key == MOUSE_RIGHT) exitwith {
 			if ("__scriptName" in _data) then {
 				_data deleteAt "__scriptName";
+				_data deleteAt "__scriptParams";
+				[["__scriptName","__scriptParams"],"del"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 				call _inputSync;
+				nextFrame(inspector_menuLoad);
 			};
 		};
 		
@@ -874,7 +980,10 @@ function(inspector_menuLoad)
 			"Выберите скрипт, который будет назначен этому объекту",
 			["ScriptedGameObject",{_this != "ScriptedGameObject"}] call widget_winapi_getTreeObject
 		] call widget_winapi_openTreeView) then {
+			if (refget(_newval) == "") exitWith {};
+
 			_data set ["__scriptName",refget(_newval)];
+			["__scriptName"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			
 			call _inputSync;
@@ -894,7 +1003,7 @@ function(inspector_menuLoad)
 	_hd = _data get "__scriptParams";
 	{
 		[TEXT,[_iTxt,_optimalSizeH],0,false] call _createElement;
-		[_wid,format["<t align='left'>#%1</t>",_foreachIndex+1]] call widgetSetText;
+		[_wid,format["<t align='left' size='0.9'>%1</t>",_foreachIndex+1]] call widgetSetText;
 		
 		// ? Param key
 		[INPUT,[_pnameTxt,_optimalSizeH],_iTxt,false] call _createElement;
@@ -913,6 +1022,7 @@ function(inspector_menuLoad)
 			private _key = _kvpair select 0;
 			if not_equals(_key,ctrlText _wid) then {
 				_kvpair set [0,ctrlText _wid];
+				["__scriptParams"] call goilb_setBatchMode;
 				[_objWorld,_data,true,format["Изменение параметра '%1'",_key]] call golib_setHashData;
 			};
 		} call _setOnKillFocusCode;
@@ -935,6 +1045,7 @@ function(inspector_menuLoad)
 			_val = _kvpair select 1;
 			if not_equals(_val,ctrlText _wid) then {
 				_kvpair set [1,ctrlText _wid];
+				["__scriptParams"] call goilb_setBatchMode;
 				[_objWorld,_data,true,format["Изменение значения параметра '%1'",_key]] call golib_setHashData;
 			};
 		} call _setOnKillFocusCode;
@@ -954,7 +1065,9 @@ function(inspector_menuLoad)
 			} else {
 				_data set ["__scriptParams",_spars];
 			};
+			["__scriptParams"] call goilb_setBatchMode;
 			[_objWorld,_data,true,format["Удаление параметра %1",_foreachIndex+1]] call golib_setHashData;
+			nextFrame(inspector_menuLoad);
 		} call _setOnPressCode;
 	} foreach _hd;
 	
@@ -962,11 +1075,15 @@ function(inspector_menuLoad)
 	[BUTTON,[48*2,_optimalSizeH],2,true] call _createElement;
 	_wid ctrlSetText "Добавить параметр";
 	{
+		if !("__scriptName" in _data) exitWith {
+			["Для добавления параметров назначьте скрипт выбранным объектам"] call showError;
+		};
 		_spars = _data getOrDefault ["__scriptParams",[]];
 		_spars pushBack [format["Параметр %1",count _spars+1],""];
 		_data set ["__scriptParams",_spars];
-
+		["__scriptParams"] call goilb_setBatchMode;
 		[_objWorld,_data,true,format["Добавление параметра скрипта"]] call golib_setHashData;
+		nextFrame(inspector_menuLoad);
 	} call _setOnPressCode;
 
 	//----------- LEGACY SCRIPTING ------------

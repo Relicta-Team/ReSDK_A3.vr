@@ -52,7 +52,7 @@ function(goasm_attributes_handleProvider_bool)
 		} else {
 			_props deleteAt _memberName;
 		};
-		
+		[_memberName,"cprov"] call goilb_setBatchMode;
 		[_objWorld,_data,true] call golib_setHashData;
 	} call _setOnCBChanged;
 	[BUTTON,[20,_optimalSizeH],_offsetMemX + 10,true] call _createElement;
@@ -61,6 +61,7 @@ function(goasm_attributes_handleProvider_bool)
 	_wid ctrlSetText "СБРОС";
 	{
 		(_data get "customProps") deleteAt _memberName;
+		[_memberName,"cprov"] call goilb_setBatchMode;
 		[_objWorld,_data,true] call golib_setHashData;
 		_wid = _wid getVariable "checkProvBool";
 		call (_wid getVariable "checkProvBool" getVariable "_onSync");
@@ -146,6 +147,7 @@ function(goasm_attributes_handleProvider_inputGeneric)
 			call (_wid getVariable "_onKillFocus");
 		} else {
 			(_data get "customProps") deleteAt _memberName;
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 		};
 	} call _setOnPressCode;
@@ -181,6 +183,7 @@ function(goasm_attributes_handleProvider_inputGeneric)
 						_props deleteAt _memberName;
 					};
 					if (_changedData) then {
+						[_memberName,"cprov"] call goilb_setBatchMode;
 						[_objWorld,_data,true] call golib_setHashData;
 					};
 				};
@@ -240,6 +243,7 @@ function(goasm_attributes_handleProvider_inputGeneric)
 				_props deleteAt _memberName;
 			};
 			//["stage %1",_wid getVariable "_setNewValue_prov"] call printTrace;
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 		};
 
@@ -284,7 +288,7 @@ function(goasm_attributes_handleProvider_size)
 				};
 				
 				//call __codeValidateContainer;
-
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 				
 				call (_wid getVariable "_onSync");	
@@ -327,7 +331,7 @@ function(goasm_attributes_handleProvider_size)
 							_props deleteAt _memberName;
 							
 							//call __codeValidateContainer;
-
+							[_memberName,"cprov"] call goilb_setBatchMode;
 							[_objWorld,_data,true] call golib_setHashData;
 							call (_wid getVariable "_onSync");	
 						};
@@ -384,6 +388,7 @@ function(goasm_attributes_handleProvider_icon)
 				["Inventory icon not found or not generated - "+PATH_PICTURE_INV(_mod),10] call showWarning;
 			};
 			_props set [_memberName,_mod];
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 		} else {
@@ -395,9 +400,11 @@ function(goasm_attributes_handleProvider_icon)
 			["%1 %2",_curpic,_hasNewPicExists] call printTrace;
 			if (_defval!=_curpic && _hasNewPicExists) then {
 				_props set [_memberName,_curpic];
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 			} else {
 				_data get "customProps" deleteAt _memberName;
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 				if (!_hasNewPicExists) then {
 					["Иконка для модели ("+(_curpic)+") не найдена в библиотеке иконок - сброс на иконку по умолчанию",5] call showInfo;
@@ -422,6 +429,7 @@ function(goasm_attributes_handleProvider_icon)
 		if (_key == MOUSE_RIGHT) exitWith {
 			_wid = _picture;
 			_data get "customProps" deleteAt _memberName;
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 		};
@@ -481,6 +489,7 @@ function(goasm_attributes_handleProvider_icon)
 						if equals(_val,_defval) then {
 							_props deleteAt _memberName;
 						};
+						[_memberName,"cprov"] call goilb_setBatchMode;
 						[_objWorld,_data,true] call golib_setHashData;
 						call (_wid getVariable "_onSync");	
 					} call Core_callContext;
@@ -583,10 +592,11 @@ function(goasm_attributes_handleProvider_scriptedlight)
 							if equals(_val,_keyName) then {
 								_props deleteAt _memberName;
 							};
+							[_memberName,"cprov"] call goilb_setBatchMode;
 							[_objWorld,_data,true] call golib_setHashData;
 							call (_wid getVariable "_onSync");	
 
-							[_objWorld] call lsim_reloadLightOnObject;
+							{[_x] call lsim_reloadLightOnObject} foreach inspector_allSelectedObjects;
 
 						} call Core_callContext;
 						call Core_popContext;
@@ -607,10 +617,11 @@ function(goasm_attributes_handleProvider_scriptedlight)
 			
 			_wid = _input;
 			_data get "customProps" deleteAt _memberName;
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 			
-			[_objWorld] call lsim_reloadLightOnObject;
+			{[_x] call lsim_reloadLightOnObject} foreach inspector_allSelectedObjects;
 		};
 	} call _setOnPressCode;
 }
@@ -661,17 +672,20 @@ function(goasm_attributes_handleProvider_weight)
 			if (_eval == _defval || _eval == "") exitwith {
 				if (_memberName in _props) then {
 					_props deleteAt _memberName;
+					[_memberName,"cprov"] call goilb_setBatchMode;
 					[_objWorld,_data,true] call golib_setHashData;
 					call (_wid getVariable "_onSync");	
 				};
 			};
 
 			_props set [_memberName,_eval];
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 		} else {
 			if (_memberName in _props) then {
 				_props deleteAt _memberName;
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 				call (_wid getVariable "_onSync");
 			};
@@ -747,6 +761,7 @@ function(goasm_attributes_handleProvider_model)
 										};
 										
 										_props set [_memberName,_text];
+										[_memberName,"cprov"] call goilb_setBatchMode;
 										[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
 										[_objWorld,_text] call golib_om_replaceObject;
 									} call Core_callContext;
@@ -759,6 +774,7 @@ function(goasm_attributes_handleProvider_model)
 								};
 								
 								_props set [_memberName,_cfg];
+								[_memberName,"cprov"] call goilb_setBatchMode;
 								[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
 								if !isNullReference(_wid) then {
 									_wid = _wid getVariable "_input";
@@ -769,6 +785,7 @@ function(goasm_attributes_handleProvider_model)
 						} else {
 							
 							_props set [_memberName,_value];
+							[_memberName,"cprov"] call goilb_setBatchMode;
 							[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
 							if !isNullReference(_wid) then {
 								_wid = _wid getVariable "_input";
@@ -802,6 +819,7 @@ function(goasm_attributes_handleProvider_model)
 		} else {
 			if (_memberName in _props) then {
 				_props deleteAt _memberName;
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
 				
 				_wid = _wid getVariable "_input";
@@ -862,6 +880,7 @@ function(goasm_attributes_handleProvider_allowedSlots)
 		if (_key == MOUSE_RIGHT) exitWith {
 			_wid = _input;
 			_data get "customProps" deleteAt _memberName;
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 		};
@@ -919,6 +938,7 @@ function(goasm_attributes_handleProvider_allowedSlots)
 					} else {
 						(_data get "customProps") deleteAt _memberName;
 					};
+					[_memberName,"cprov"] call goilb_setBatchMode;
 					[_objWorld,_data,true] call golib_setHashData;
 					call (_wid getVariable "_onSync");
 					
@@ -991,6 +1011,7 @@ function(goasm_attributes_handleProvider_container_content)
 			_wid = _input;
 			if ("containerContent" in _data) then {
 				_data deleteAt "containerContent";
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 				call (_wid getVariable "_onSync");
 			};
@@ -1166,6 +1187,7 @@ function(goasm_attributes_handleProvider_container_content)
 					} else {
 						_data deleteAt "containerContent";
 					};
+					[_memberName,"cprov"] call goilb_setBatchMode;
 					[_srcObject,_data,true] call golib_setHashData;
 					call (_wid getVariable "_onSync");
 				} call Core_callContext;
@@ -1421,6 +1443,7 @@ function(goasm_attributes_handleProvider_edConnected)
 		if (_key == MOUSE_RIGHT) exitwith {
 			_wid = _input;
 			_data deleteAt "edConnected";
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 			nextFrame(golib_cs_syncMarks);
@@ -1581,6 +1604,7 @@ function(goasm_attributes_handleProvider_edConnected)
 					} else {
 						(_data deleteAt "edConnected")
 					};
+					[_memberName,"cprov"] call goilb_setBatchMode;
 					[_objWorld,_data,true] call golib_setHashData;
 					call (_wid getVariable "_onSync");
 					
@@ -1723,6 +1747,7 @@ function(goasm_attributes_handleProvider_effect_configs)
 				if equals(_val,_defval) then {
 					_props deleteAt _memberName;
 				};
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 				
 				call (_wid getVariable "_onSync");	
@@ -1741,6 +1766,7 @@ function(goasm_attributes_handleProvider_effect_configs)
 						_val = _props getOrDefault [_memberName,_defval];
 						if not_equals(_val,_defval) then {
 							_props deleteAt _memberName;
+							[_memberName,"cprov"] call goilb_setBatchMode;
 							[_objWorld,_data,true] call golib_setHashData;
 							call (_wid getVariable "_onSync");	
 						};
