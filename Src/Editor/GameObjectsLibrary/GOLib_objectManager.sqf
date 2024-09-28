@@ -73,6 +73,38 @@ function(golib_om_generatelAssoc)
 	
 }
 
+function(golib_om_createObject)
+{
+	params ["_gameObject","_pos","_rot"];
+	if ([_gameObject,"InterfaceClass"] call goasm_attributes_hasAttributeClass) exitWith {objNull};
+	private _flagEffect = false;
+	if ([_gameObject,"EffectClass"] call goasm_attributes_hasAttributeClass) then {
+		_flagEffect = true;
+	};
+	private _cfg = [_gameObject] call golib_om_getConfigByGameObject;
+
+	if (_flagEffect) then {
+		_cfg = [_gameObject,_cfg] call goasm_iapi_effect_convertConfig;
+	};
+	if (_cfg=="") exitWith {objNull};
+	private _obj = create3DENEntity ["Object",_cfg, _pos];
+	[_obj,_gameObject] call golib_initHashData;
+	if !isNullVar(_pos) then {
+		[_obj,_pos] call golib_om_setPosition;
+	};
+	if !isNullVar(_rot) then {
+		[_obj,_rot] call golib_om_setRotation;
+	};
+		
+	[_obj] call golib_om_internal_handleTransformEvent;
+	[_obj,true] call Core_initObjectEvents;
+	if (_flagEffect) then {
+		[_obj,_gameObject] call goasm_iapi_effect_preparModel;
+	};
+
+	_obj
+}
+
 function(golib_om_placeObjectAtMouse)
 {
 	params ["_gameObject"];
@@ -438,4 +470,40 @@ function(golib_om_replaceObject)
 	};
 	
 	nextFrameParams(_code,_args);
+}
+
+//восстановление данных объектов через замену
+function(golib_resetObjectsData)
+{
+	params ["_olist",["_pushHistory",false],["_resetRnd",false],["_resetProps",false]];
+	private _codeReset = {
+		{
+			private _oldHD = [_x,false] call golib_getHashData;
+			private _class = _oldHD get "class";
+			private _pos = _x call golib_om_getPosition;
+			private _rot = _x call golib_om_getRotation;
+			private _obj = [_class,_pos,_rot] call golib_om_createObject;
+			if isNullReference(_obj) then {continue};
+			delete3DENEntities [_x];
+
+			if (_resetRnd) then {
+				_oldHD deleteAt "rdir";
+				_oldHD deleteAt "rpos";
+				_oldHD deleteAt "prob";
+			};
+
+			if (_resetProps) then {
+				_oldHD set ["customProps",createHashMap];
+				_oldHD deleteAt "edConnected";
+			};
+
+			[_obj,_oldHD] call golib_setHashData;
+
+		} foreach _olist;
+	};
+	if (_pushHistory) then {
+		["Сброс свойств", "Сброс состояния объекта на дефолтные значения", "a3\3den\data\cfg3den\history\changeattributes_ca.paa"] collect3DENHistory _codeReset;
+	} else {
+		call _codeReset;
+	};
 }

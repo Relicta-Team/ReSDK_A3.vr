@@ -413,9 +413,22 @@ function(inspector_menuLoad)
 	{
 		[
 			[
-				["Сбросить все свойства",{
-					["Не реализовано в текущей версии"] call showError;
-				}],
+				["Сбросить свойства",
+					[
+						["Все",{
+							private _olist = inspector_allSelectedObjects;
+							[_olist,true,true,true] call golib_resetObjectsData;
+						}],
+						["Вероятности",{
+							private _olist = inspector_allSelectedObjects;
+							[_olist,true,true,false] call golib_resetObjectsData;
+						}],
+						["Только свойства",{
+							private _olist = inspector_allSelectedObjects;
+							[_olist,true,false,true] call golib_resetObjectsData;
+						}]
+					]
+				],
 				["Замена класса",{
 					//(call contextMenu_getContextParams) params ["_wid","__codeValidateContainer"];
 					if (["Внимание!"+endl+endl
