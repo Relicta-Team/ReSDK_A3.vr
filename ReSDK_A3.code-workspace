@@ -21,6 +21,18 @@
 			"**/bower_components": true,
 			"**/*.code-search": true,
 			"**/Temp/**": true
-		}
-	}
+		},
+		"[yaml]": {
+			"editor.insertSpaces": true,
+			"editor.tabSize": 2,
+			"editor.autoIndent": "advanced",
+			"diffEditor.ignoreTrimWhitespace": false,
+		},		
+		"yaml.schemas": {
+			"host/CraftSystem/craft.schema.json": "**/CraftSystem/scm.yml",
+		},
+		"yaml.completion": true,
+		"yaml.schemaStore.enable": false,
+		
+	},
 }

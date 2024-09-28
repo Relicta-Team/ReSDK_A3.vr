@@ -90,10 +90,16 @@ ms_internal_copyFrom = {
 	params ["_thisMatter","_copyData"];
 
 	private _keys = keys _thisMatter;
-
+	
 	{
 		if (!(_x in _keys)) then {
-			_thisMatter set [_x,_y]; //!WARN! _y is undefined. Check this
+			
+			private _y = defIsNull(_y,null);
+			if isNullVar(_y) then {
+				_thisMatter set [_x,null];
+			} else {
+				_thisMatter set [_x,_y];
+			};
 		};
 	} foreach _copyData;
 
