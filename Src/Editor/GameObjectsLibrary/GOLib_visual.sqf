@@ -264,6 +264,11 @@ function(golib_vis_isMouseInsideTree)
 	("golib_vis_ctg_bind" call widget_getBind) call isMouseInsideWidget
 }
 
+function(golib_vis_isMouseInsideInspector)
+{
+	("inspector_ctg_main_bind" call widget_getBind) call isMouseInsideWidget
+}
+
 function(golib_vis_onFrame)
 {
 	if (golib_vis_isholdedLMB) then {
@@ -283,7 +288,7 @@ function(golib_vis_onFrame)
 		};
 		//["%1 - is inside %2",__FUNC__,call golib_vis_isMouseInsideTree] call printTrace;
 	};
-	golib_vis_isEnteredInWidget = call golib_vis_isMouseInsideTree;
+	golib_vis_isEnteredInWidget = call golib_vis_isMouseInsideTree || call golib_vis_isMouseInsideInspector;
 	if (golib_vis_isEnteredInWidget) then {
 		if equals(golib_vis_lastBeforeEnterMousePos,vec3(0,0,0)) then {
 			golib_vis_lastBeforeEnterMousePos = getposasl get3dencamera;
