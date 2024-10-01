@@ -7,6 +7,7 @@
 
 editor_attribute("CodeOnyGamemode")
 class(GMTVTGame) extends(GMStationBase)
+	getterconst_func(isPlayableGamemode,false);
 	var(canAddAspect,false);
 	getterconst_func(canPlayEvents,false);
 	
