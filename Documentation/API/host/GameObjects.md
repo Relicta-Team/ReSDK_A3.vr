@@ -3922,7 +3922,7 @@ Replaced value:
 ```sqf
 _y get #func
 ```
-File: [host\GameObjects\Items\Office\Books.sqf at line 442](../../../Src/host/GameObjects/Items/Office/Books.sqf#L442)
+File: [host\GameObjects\Items\Office\Books.sqf at line 445](../../../Src/host/GameObjects/Items/Office/Books.sqf#L445)
 # BasicMob.sqf
 
 ## emulate_mp_in_sp
