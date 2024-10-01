@@ -475,11 +475,14 @@ function(golib_om_replaceObject)
 //восстановление данных объектов через замену
 function(golib_resetObjectsData)
 {
-	params ["_olist",["_pushHistory",false],["_resetRnd",false],["_resetProps",false]];
+	params ["_olist",["_pushHistory",false],["_resetRnd",false],["_resetProps",false],["_newclass",""]];
 	private _codeReset = {
 		{
 			private _oldHD = [_x,false] call golib_getHashData;
 			private _class = _oldHD get "class";
+			if (_newclass != "") then {
+				_class = _newclass;
+			};
 			private _pos = _x call golib_om_getPosition;
 			private _rot = _x call golib_om_getRotation;
 			private _obj = [_class,_pos,_rot] call golib_om_createObject;

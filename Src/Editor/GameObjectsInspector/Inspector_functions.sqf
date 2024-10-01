@@ -429,12 +429,37 @@ function(inspector_menuLoad)
 						}]
 					]
 				],
-				["Замена класса",{
+				["Замена класс"+ifcheck(count inspector_otherObjects == 0,"а","ов"),{
 					//(call contextMenu_getContextParams) params ["_wid","__codeValidateContainer"];
-					if (["Внимание!"+endl+endl
-					+"Замена класса объекта может повлечь за собой удаление свойств."
-					+"Вы действительно хотите заменить класс объекта?"] call messageBoxRet) then {
-						["Не реализовано в текущей версии"] call showError;
+					
+					private _newval = refcreate(0);
+					if ([
+						_newval,
+						"Выберите новый тип",
+						"Выберите тип для выделенных объектов",
+						["IDestructible",{
+							_this != "IDestructible"
+						}] call widget_winapi_getTreeObject
+					] call widget_winapi_openTreeView) then {
+						if (refget(_newval) == "") exitWith {};
+						private _class = refget(_newval);
+
+						if (
+							([_class,"InterfaceClass"] call goasm_attributes_hasAttributeClass)
+							|| {([_class,"HiddenClass"] call goasm_attributes_hasAttributeClass)}
+						) exitWith {
+							["Класс недоступен (интрейфес или скрытый)"] call showError;
+						};
+
+						if (["Внимание!"+endl+endl
+							+"Замена класса объекта влечет за собой очистку свойств изменяемых объектов."+endl+endl
+							+(format[" Вы действительно хотите выполнить замену на %1?",_class])] call messageBoxRet
+						) then {
+							private _olist = inspector_allSelectedObjects;
+							[_olist,true,false,true,_class] call golib_resetObjectsData;
+							nextFrame(inspector_menuLoad);
+						};
+						
 					};
 				}],
 				["Отмена",{}]
@@ -1017,16 +1042,21 @@ function(inspector_menuLoad)
 	{
 		[TEXT,[_iTxt,_optimalSizeH],0,false] call _createElement;
 		[_wid,format["<t align='left' size='0.9'>%1</t>",_foreachIndex+1]] call widgetSetText;
+		_indexKeyWid = _wid;
 		
 		// ? Param key
 		[INPUT,[_pnameTxt,_optimalSizeH],_iTxt,false] call _createElement;
 		_wid setvariable ["_index",_foreachIndex];
+		_wid setvariable ["_indexKeyWid",_indexKeyWid];
 		{
 			_spars = _data getOrDefault ["__scriptParams",[]];
 			_index = _wid getvariable "_index";
+			_indexKeyWid = _wid getvariable "_indexKeyWid";
 			_txtData = "";
 			_txtData = _spars select _index select 0;
 			_wid ctrlSetText _txtData;
+			_wid ctrlSetTooltip (format["Значение: '%1'",_txtData]);
+			_indexKeyWid ctrlSetTooltip (format["Параметр %1: '%2'",_index,_txtData]);
 		} call _setSyncValCode;
 		{
 			_spars = _data getOrDefault ["__scriptParams",[]];
