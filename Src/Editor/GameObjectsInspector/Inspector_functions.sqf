@@ -7,7 +7,7 @@
 
 function(inspector_init)
 {
-	inspector_const_providedBatchedPropColor = "#94502E" call color_HTMLtoRGBA;
+	inspector_const_providedBatchedPropColor = "#448709" call color_HTMLtoRGBA;
 	inspector_const_providedBatchedPropColor set [3,0.4];
 
 	private _handleSelectionChange = {
