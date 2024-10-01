@@ -1010,7 +1010,26 @@ function(inspector_menuLoad)
 	_input = _wid;
 	{
 		_scr = _data getOrDefault ["__scriptName",""];
-		_wid ctrlsettext _scr;
+		private _dirtyScriptName = false;
+		private _dirtyScriptList = [];
+		if (count inspector_otherObjects > 0) then {
+			{
+				private _scrCheck = [_x,"__scriptName"] call golib_getActualBasicValue;
+				
+				if (!isNullVar(_scrCheck) && {_scrCheck != _scr}) then {
+					_dirtyScriptName = true;
+					if !isNullVar(_scrCheck) then {
+						_dirtyScriptList pushBackUnique _scrCheck;
+					};
+				};
+				
+			} foreach inspector_otherObjects;
+		};
+		_wid ctrlsettext ifcheck(_dirtyScriptName,"Несколько значений",_scr);
+		if (_dirtyScriptName && count _dirtyScriptList > 0) then {
+			_dirtyScriptList pushBackUnique _scr;
+			_wid ctrlSetTooltip (format["Несколько скриптов:\n%1",_dirtyScriptList joinString "\n"]);
+		};
 	} call _setSyncValCode;
 
 	[BUTTON,[24,_optimalSizeH],72,true] call _createElement;
@@ -1078,6 +1097,7 @@ function(inspector_menuLoad)
 			_txtData = _spars select _index select 0;
 			_wid ctrlSetText _txtData;
 			_wid ctrlSetTooltip (format["Значение: '%1'",_txtData]);
+			_wid ctrlSetFontHeight 0.035;
 			_indexKeyWid ctrlSetTooltip (format["Параметр %1: '%2'",_index,_txtData]);
 		} call _setSyncValCode;
 		{
@@ -1087,7 +1107,7 @@ function(inspector_menuLoad)
 			private _key = _kvpair select 0;
 			if not_equals(_key,ctrlText _wid) then {
 				_kvpair set [0,ctrlText _wid];
-				["__scriptParams"] call goilb_setBatchMode;
+				["__scriptParams","script_params_setvalidate"] call goilb_setBatchMode;
 				[_objWorld,_data,true,format["Изменение параметра '%1'",_key]] call golib_setHashData;
 			};
 		} call _setOnKillFocusCode;
@@ -1110,7 +1130,7 @@ function(inspector_menuLoad)
 			_val = _kvpair select 1;
 			if not_equals(_val,ctrlText _wid) then {
 				_kvpair set [1,ctrlText _wid];
-				["__scriptParams"] call goilb_setBatchMode;
+				["__scriptParams","script_params_setvalidate"] call goilb_setBatchMode;
 				[_objWorld,_data,true,format["Изменение значения параметра '%1'",_key]] call golib_setHashData;
 			};
 		} call _setOnKillFocusCode;
@@ -1125,12 +1145,15 @@ function(inspector_menuLoad)
 			_spars = _data getOrDefault ["__scriptParams",[]];
 			_index = _wid getvariable "_index";
 			_spars deleteAt _index;
+			_validator = null;
 			if (count _spars == 0) then {
 				_data deleteAt "__scriptParams";
+				_validator = "script_params_delvalidate";
 			} else {
 				_data set ["__scriptParams",_spars];
+				_validator = "script_params_setvalidate";
 			};
-			["__scriptParams"] call goilb_setBatchMode;
+			["__scriptParams",_validator] call goilb_setBatchMode;
 			[_objWorld,_data,true,format["Удаление параметра %1",_foreachIndex+1]] call golib_setHashData;
 			nextFrame(inspector_menuLoad);
 		} call _setOnPressCode;
@@ -1146,7 +1169,7 @@ function(inspector_menuLoad)
 		_spars = _data getOrDefault ["__scriptParams",[]];
 		_spars pushBack [format["Параметр %1",count _spars+1],""];
 		_data set ["__scriptParams",_spars];
-		["__scriptParams"] call goilb_setBatchMode;
+		["__scriptParams","script_params_setvalidate"] call goilb_setBatchMode;
 		[_objWorld,_data,true,format["Добавление параметра скрипта"]] call golib_setHashData;
 		nextFrame(inspector_menuLoad);
 	} call _setOnPressCode;

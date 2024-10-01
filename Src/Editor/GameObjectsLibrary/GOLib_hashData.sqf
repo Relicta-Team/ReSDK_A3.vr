@@ -173,6 +173,14 @@ function(golib_setHashData_batch)
 			assert(equalTypes(_propname,""));
 			private _newvalue = _newData get _propname;
 			_curData set [_propname,format["%1 (copy %2)",[_newvalue," \(copy \d+\)",""] call regex_replace, _foreachIndex + 1]]
+		}],
+		["script_params_setvalidate",{
+			if !("__scriptName" in _curData) exitWith {};
+			call (_statementMap get "set");
+		}],
+		["script_params_delvalidate",{
+			if !("__scriptName" in _curData) exitWith {};
+			call (_statementMap get "del");
 		}]
 	]);
 
