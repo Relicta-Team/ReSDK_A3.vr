@@ -135,6 +135,9 @@ class(IWritableContentItem) extends(IPaperItemBase)
 	func(appendText)
 	{
 		objParams_2(_data,_writter);
+		
+		//fix format nextlines
+		_data = _data splitString endl joinString sbr;
 
 		if !callSelfParams(canApplyText,_data) exitWith {false};
 

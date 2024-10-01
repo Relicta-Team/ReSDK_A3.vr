@@ -52,7 +52,7 @@ function(goasm_attributes_handleProvider_bool)
 		} else {
 			_props deleteAt _memberName;
 		};
-		
+		[_memberName,"cprov"] call goilb_setBatchMode;
 		[_objWorld,_data,true] call golib_setHashData;
 	} call _setOnCBChanged;
 	[BUTTON,[20,_optimalSizeH],_offsetMemX + 10,true] call _createElement;
@@ -61,6 +61,7 @@ function(goasm_attributes_handleProvider_bool)
 	_wid ctrlSetText "СБРОС";
 	{
 		(_data get "customProps") deleteAt _memberName;
+		[_memberName,"cprov"] call goilb_setBatchMode;
 		[_objWorld,_data,true] call golib_setHashData;
 		_wid = _wid getVariable "checkProvBool";
 		call (_wid getVariable "checkProvBool" getVariable "_onSync");
@@ -146,6 +147,7 @@ function(goasm_attributes_handleProvider_inputGeneric)
 			call (_wid getVariable "_onKillFocus");
 		} else {
 			(_data get "customProps") deleteAt _memberName;
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 		};
 	} call _setOnPressCode;
@@ -181,6 +183,7 @@ function(goasm_attributes_handleProvider_inputGeneric)
 						_props deleteAt _memberName;
 					};
 					if (_changedData) then {
+						[_memberName,"cprov"] call goilb_setBatchMode;
 						[_objWorld,_data,true] call golib_setHashData;
 					};
 				};
@@ -240,6 +243,7 @@ function(goasm_attributes_handleProvider_inputGeneric)
 				_props deleteAt _memberName;
 			};
 			//["stage %1",_wid getVariable "_setNewValue_prov"] call printTrace;
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 		};
 
@@ -284,7 +288,7 @@ function(goasm_attributes_handleProvider_size)
 				};
 				
 				//call __codeValidateContainer;
-
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 				
 				call (_wid getVariable "_onSync");	
@@ -327,7 +331,7 @@ function(goasm_attributes_handleProvider_size)
 							_props deleteAt _memberName;
 							
 							//call __codeValidateContainer;
-
+							[_memberName,"cprov"] call goilb_setBatchMode;
 							[_objWorld,_data,true] call golib_setHashData;
 							call (_wid getVariable "_onSync");	
 						};
@@ -384,6 +388,7 @@ function(goasm_attributes_handleProvider_icon)
 				["Inventory icon not found or not generated - "+PATH_PICTURE_INV(_mod),10] call showWarning;
 			};
 			_props set [_memberName,_mod];
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 		} else {
@@ -395,9 +400,11 @@ function(goasm_attributes_handleProvider_icon)
 			["%1 %2",_curpic,_hasNewPicExists] call printTrace;
 			if (_defval!=_curpic && _hasNewPicExists) then {
 				_props set [_memberName,_curpic];
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 			} else {
 				_data get "customProps" deleteAt _memberName;
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 				if (!_hasNewPicExists) then {
 					["Иконка для модели ("+(_curpic)+") не найдена в библиотеке иконок - сброс на иконку по умолчанию",5] call showInfo;
@@ -422,6 +429,7 @@ function(goasm_attributes_handleProvider_icon)
 		if (_key == MOUSE_RIGHT) exitWith {
 			_wid = _picture;
 			_data get "customProps" deleteAt _memberName;
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 		};
@@ -481,6 +489,7 @@ function(goasm_attributes_handleProvider_icon)
 						if equals(_val,_defval) then {
 							_props deleteAt _memberName;
 						};
+						[_memberName,"cprov"] call goilb_setBatchMode;
 						[_objWorld,_data,true] call golib_setHashData;
 						call (_wid getVariable "_onSync");	
 					} call Core_callContext;
@@ -583,10 +592,11 @@ function(goasm_attributes_handleProvider_scriptedlight)
 							if equals(_val,_keyName) then {
 								_props deleteAt _memberName;
 							};
+							[_memberName,"cprov"] call goilb_setBatchMode;
 							[_objWorld,_data,true] call golib_setHashData;
 							call (_wid getVariable "_onSync");	
 
-							[_objWorld] call lsim_reloadLightOnObject;
+							{[_x] call lsim_reloadLightOnObject} foreach inspector_allSelectedObjects;
 
 						} call Core_callContext;
 						call Core_popContext;
@@ -607,10 +617,11 @@ function(goasm_attributes_handleProvider_scriptedlight)
 			
 			_wid = _input;
 			_data get "customProps" deleteAt _memberName;
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 			
-			[_objWorld] call lsim_reloadLightOnObject;
+			{[_x] call lsim_reloadLightOnObject} foreach inspector_allSelectedObjects;
 		};
 	} call _setOnPressCode;
 }
@@ -661,17 +672,20 @@ function(goasm_attributes_handleProvider_weight)
 			if (_eval == _defval || _eval == "") exitwith {
 				if (_memberName in _props) then {
 					_props deleteAt _memberName;
+					[_memberName,"cprov"] call goilb_setBatchMode;
 					[_objWorld,_data,true] call golib_setHashData;
 					call (_wid getVariable "_onSync");	
 				};
 			};
 
 			_props set [_memberName,_eval];
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 		} else {
 			if (_memberName in _props) then {
 				_props deleteAt _memberName;
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 				call (_wid getVariable "_onSync");
 			};
@@ -747,8 +761,9 @@ function(goasm_attributes_handleProvider_model)
 										};
 										
 										_props set [_memberName,_text];
+										[_memberName,"cprov"] call goilb_setBatchMode;
 										[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
-										[_objWorld,_text] call golib_om_replaceObject;
+										[inspector_allSelectedObjects,_text] call golib_om_replaceObject;
 									} call Core_callContext;
 								},null,null,null,
 								"Выберите подходящий конфиг"] call control_createList;
@@ -759,22 +774,24 @@ function(goasm_attributes_handleProvider_model)
 								};
 								
 								_props set [_memberName,_cfg];
+								[_memberName,"cprov"] call goilb_setBatchMode;
 								[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
 								if !isNullReference(_wid) then {
 									_wid = _wid getVariable "_input";
 									call (_wid getVariable "_onSync");
 								};
-								[_objWorld,_cfg] call golib_om_replaceObject;
+								[inspector_allSelectedObjects,_cfg] call golib_om_replaceObject;
 							};
 						} else {
 							
 							_props set [_memberName,_value];
+							[_memberName,"cprov"] call goilb_setBatchMode;
 							[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
 							if !isNullReference(_wid) then {
 								_wid = _wid getVariable "_input";
 								call (_wid getVariable "_onSync");
 							};
-							[_objWorld,_value] call golib_om_replaceObject;
+							[inspector_allSelectedObjects,_value] call golib_om_replaceObject;
 						};
 						
 					} call Core_callContext;
@@ -802,13 +819,18 @@ function(goasm_attributes_handleProvider_model)
 		} else {
 			if (_memberName in _props) then {
 				_props deleteAt _memberName;
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true,golib_history_skippedHistoryStageFlag+"!!! СВОЙСТВА ПЕРЕД ЗАМЕНОЙ"] call golib_setHashData;
 				
 				_wid = _wid getVariable "_input";
 				call (_wid getVariable "_onSync");
 				
-				_defmodel = [_data get "class",_memberName,true] call oop_getFieldBaseValue;
-				[_objWorld,_defmodel] call golib_om_replaceObject;
+				//_defmodel = [_data get "class",_memberName,true] call oop_getFieldBaseValue;
+				_allObj = inspector_allSelectedObjects;
+				_defmodel = _allObj apply {
+					([[_x] call golib_getClassName,_memberName,true] call oop_getFieldBaseValue)
+				};
+				[_allObj,_defmodel] call golib_om_replaceObject;
 			};
 		};
 		
@@ -862,6 +884,7 @@ function(goasm_attributes_handleProvider_allowedSlots)
 		if (_key == MOUSE_RIGHT) exitWith {
 			_wid = _input;
 			_data get "customProps" deleteAt _memberName;
+			[_memberName,"cprov"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 		};
@@ -919,6 +942,7 @@ function(goasm_attributes_handleProvider_allowedSlots)
 					} else {
 						(_data get "customProps") deleteAt _memberName;
 					};
+					[_memberName,"cprov"] call goilb_setBatchMode;
 					[_objWorld,_data,true] call golib_setHashData;
 					call (_wid getVariable "_onSync");
 					
@@ -967,13 +991,22 @@ function(goasm_attributes_handleProvider_container_content)
 	_input = _wid;
 	{
 		if ("containerContent" in _data) then {
-			_wid ctrlSetText ([_data get "containerContent",false] call goasm_attributes_container_content_ToString);
+			private _content = ([_data get "containerContent",false] call goasm_attributes_container_content_ToString);
+			if (count inspector_otherObjects > 0) then {
+				_content = "Несколько значений...";
+			};
+
+			_wid ctrlSetText _content;
 			_wid ctrlSetBackgroundColor [.7,.7,.7,.7];
-			_wid ctrlSetTooltip ([_data get "containerContent",true] call goasm_attributes_container_content_ToString);
+			_wid ctrlSetTooltip _content;
 		} else {
-			_wid ctrlSetText "Пусто";
+			_content = ["Пусто","Там ничего нет"];
+			if (count inspector_otherObjects > 0) then {
+				_content = _content apply {"Несколько значений..."};
+			};
+			_wid ctrlSetText (_content select 0);
 			_wid ctrlSetBackgroundColor [0.3,0.3,0.3,0.3];
-			_wid ctrlSetTooltip "Там ничего нет";
+			_wid ctrlSetTooltip (_content select 1);
 		};
 	} call _setSyncValCode;
 	[BUTTON,[10,_optimalSizeH],_offsetMemX+40,true] call _createElement;
@@ -989,12 +1022,18 @@ function(goasm_attributes_handleProvider_container_content)
 		//сброс
 		if (_key == MOUSE_RIGHT) exitwith {
 			_wid = _input;
-			if ("containerContent" in _data) then {
+			//if ("containerContent" in _data) then {
 				_data deleteAt "containerContent";
+				["containerContent","del"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 				call (_wid getVariable "_onSync");
-			};
+			//};
 		};
+
+		if (count inspector_otherObjects > 0) exitWith {
+			["В текущей версии нельзя изменять содержимое контейнеров для нескольких объектов."] call showError;
+		};
+
 		_srcObject = _objWorld;
 		_dummyObj = createSimpleObject ["block_dirt",[0,0,0]];
 		_dummyObj setVariable ["observedIndex",-1];
@@ -1166,6 +1205,7 @@ function(goasm_attributes_handleProvider_container_content)
 					} else {
 						_data deleteAt "containerContent";
 					};
+					[_memberName] call goilb_setBatchMode;
 					[_srcObject,_data,true] call golib_setHashData;
 					call (_wid getVariable "_onSync");
 				} call Core_callContext;
@@ -1379,7 +1419,17 @@ function(goasm_attributes_handleProvider_edConnected)
 			};
 
 			_build = [["Отмена",{}]];
-			_edc = _data get "edConnected";
+			//_edc = _data get "edConnected";
+			_edc = [];
+			{
+				private _hd = [_x,false] call golib_getHashData;
+				if ("edConnected" in _hd) then {
+					{
+						_edc pushBackUnique _x;
+					} foreach (_hd get "edConnected");
+				};
+			} forEach inspector_allSelectedObjects;
+
 			{
 				_build pushBack [
 					"Перейти к " + str _x,
@@ -1421,9 +1471,14 @@ function(goasm_attributes_handleProvider_edConnected)
 		if (_key == MOUSE_RIGHT) exitwith {
 			_wid = _input;
 			_data deleteAt "edConnected";
+			["edConnected","del"] call goilb_setBatchMode;
 			[_objWorld,_data,true] call golib_setHashData;
 			call (_wid getVariable "_onSync");
 			nextFrame(golib_cs_syncMarks);
+		};
+
+		if (count inspector_allSelectedObjects > 1) exitWith {
+			["Изменение подключения для множества объектов не поддерживается"] call showError;
 		};
 
 		call Core_pushContext;
@@ -1581,6 +1636,7 @@ function(goasm_attributes_handleProvider_edConnected)
 					} else {
 						(_data deleteAt "edConnected")
 					};
+					["edConnected"] call goilb_setBatchMode;
 					[_objWorld,_data,true] call golib_setHashData;
 					call (_wid getVariable "_onSync");
 					
@@ -1651,6 +1707,11 @@ function(goasm_attributes_handlerProv_internal_getText)
 
 function(goasm_attributes_handleProvider_edOwner)
 {
+	if (count inspector_allSelectedObjects > 1) exitWith {
+		[TEXT,[50,_optimalSizeH],_offsetMemX,true] call _createElement;
+		[_wid,"<t align='center' size='0.7'>Несколько значений</t>"] call widgetSetText;
+	};
+
 	["RscButton",[50,_optimalSizeH],_offsetMemX,true] call _createElement;
 	_wid ctrlSetText "К источнику";
 	_wid ctrlSetTooltip "ЛКМ - перейти к источнику";
@@ -1723,6 +1784,7 @@ function(goasm_attributes_handleProvider_effect_configs)
 				if equals(_val,_defval) then {
 					_props deleteAt _memberName;
 				};
+				[_memberName,"cprov"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 				
 				call (_wid getVariable "_onSync");	
@@ -1741,6 +1803,7 @@ function(goasm_attributes_handleProvider_effect_configs)
 						_val = _props getOrDefault [_memberName,_defval];
 						if not_equals(_val,_defval) then {
 							_props deleteAt _memberName;
+							[_memberName,"cprov"] call goilb_setBatchMode;
 							[_objWorld,_data,true] call golib_setHashData;
 							call (_wid getVariable "_onSync");	
 						};
