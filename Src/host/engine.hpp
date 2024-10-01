@@ -475,6 +475,8 @@ bool TestRange (int numberToCheck, int bottom, int top)
 
 #define parseNumberSafe(v) ((parseNumber (v)) call {if(finite _this) then {_this} else {0}})
 
+#define getdiff(a,b) ([a,b] call {params["_a","_b"]; if equals(_a,_b)exitWith{0}; ifcheck(_a>_b,-_a+_b,_b-_a) })
+
 //delay subsystem
 
 #define netTickTime CBA_missionTime
