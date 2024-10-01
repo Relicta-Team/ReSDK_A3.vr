@@ -297,7 +297,9 @@ function(golib_vis_onFrame)
 	} else {
 		if not_equals(golib_vis_lastBeforeEnterMousePos,vec3(0,0,0)) then {
 			golib_vis_lastBeforeEnterMousePos = [0,0,0];
-			ctrlSetFocus (call MouseAreaGetWidget);
+			if (ctrlclassname ctrlFocus != INPUT) then {
+				ctrlSetFocus (call MouseAreaGetWidget);
+			};
 		};
 	};
 }
