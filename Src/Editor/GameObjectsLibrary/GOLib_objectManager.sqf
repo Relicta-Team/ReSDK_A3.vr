@@ -322,13 +322,45 @@ function(golib_om_setPosition)
 			_postMes = ": " + _postMes;
 		};
 		["Инспектор"+_postMes, "Изменение трансофрмации объекта", "a3\3den\data\cfg3den\history\moveItems_ca.paa"] collect3DENHistory {
+			[_obj,_pos] call golib_om_internal_batchProcess;
 			_obj set3DENAttribute ["position",_pos];
 		};
 	} else {
+		[_obj,_pos] call golib_om_internal_batchProcess;
 		_obj set3DENAttribute ["position",_pos];
 	};
 	
 }
+
+function(golib_om_internal_batchProcess)
+{
+	params ["_srcObj","_val"];
+	if (count golib_internal_lastBatchUpdateMode > 0) then {
+		golib_internal_lastBatchUpdateMode params ["_name","_modeOrData"];
+		golib_internal_lastBatchUpdateMode = [];
+
+		private _isRelativeCoordMode = (get3DENActionState "WidgetCoord") == 0;
+		{
+			private _newval = null;
+			if (_name == "position") then {
+				_modeOrData params ["_tIndex","_delta"];
+				_newval = _x call golib_om_getPosition;
+				["Change index %1 at %2",_tIndex,_delta] call printTrace;
+				_newval set [_tIndex,(_newval select _tIndex) + _delta];
+			};
+			if (_name == "rotation") then {
+				_modeOrData params ["_tIndex","_delta"];
+				_newval = _x call golib_om_getRotation;
+				["Change index %1 at %2",_tIndex,_delta] call printTrace;
+				_newval set [_tIndex,(_newval select _tIndex) + _delta];
+			};
+			if !isNullVar(_newval) then {
+				_x set3DENAttribute [_name,_newval];
+			};
+		} foreach inspector_otherObjects;
+	};
+}
+
 
 function(golib_om_getRotation)
 {
@@ -345,9 +377,11 @@ function(golib_om_setRotation)
 			_postMes = ": " + _postMes;
 		};
 		["Инспектор"+_postMes, "Изменение трансофрмации объекта", "a3\3den\data\cfg3den\history\rotateItems_ca.paa"] collect3DENHistory {
+			[_obj,_rot] call golib_om_internal_batchProcess;
 			_obj set3DENAttribute ["rotation",_rot];
 		};
 	} else {
+		[_obj,_rot] call golib_om_internal_batchProcess;
 		_obj set3DENAttribute ["rotation",_rot];
 	};
 }
