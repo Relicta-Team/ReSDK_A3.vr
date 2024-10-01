@@ -10,6 +10,9 @@ function(inspector_init)
 	inspector_const_providedBatchedPropColor = "#448709" call color_HTMLtoRGBA;
 	inspector_const_providedBatchedPropColor set [3,0.4];
 
+	inspector_const_providedBatchedTransformColor = "#448709" call color_HTMLtoRGBA;
+	inspector_const_providedBatchedTransformColor set [3,0.4];
+
 	private _handleSelectionChange = {
 		params ["_list"];
 		
@@ -566,7 +569,7 @@ function(inspector_menuLoad)
 	*/
 	ifcheck(_isVirtualObject,8,24) call _createCTGExt;
 
-	if (!_isVirtualObject && _isSingleObject) then {
+	if (!_isVirtualObject) then {
 
 		_panList = [["X",[1,0,0,1]],["Y",[0,1,0,1]],["Z",[0,0,1,1]]];
 		
@@ -584,27 +587,32 @@ function(inspector_menuLoad)
 				_wid setVariable ["transform_index",_i];
 				_wid setVariable ["transform_name",_t];
 				_drag = _wid;
-				_wid ctrlSetTooltip format["Потяните вверх или вниз для изменения оси %1",_t];
-				{
-					if (_key != MOUSE_LEFT) exitWith {};
-					_mPos = call mouseGetPosition select 1;
-					_wid setVariable ["transform_lastPoint",_mPos];
-					inspector_internal_lastWidgetTransformPos = [_wid];
-					
-				} call _setOnMouseDownCode;
-				_exitedConditions = 
-				{
-					if isNullReference(inspector_internal_lastWidgetTransformPos select 0) exitWith {};
-					inspector_internal_lastWidgetTransformPos = [widgetNull];
-					_transName = _wid getVariable "transform_name";
-					_transIndex = _wid getVariable "transform_index";
-					_newPos = getPosATL _objWorld;
-					_oldPos = _objWorld call golib_om_getPosition;
-					
-					[_objWorld,_newPos,true,format["Позиция %1 (%2 -> %3)",_transName,_oldPos select _transIndex,_newPos select _transIndex]] call golib_om_setPosition;
+				if (!_isSingleObject) then {
+					_wid ctrlSetTooltip format["Трансформация перетягиванием для нескольких объектов не поддерживается"];
+				} else {
+					_wid ctrlSetTooltip format["Потяните вверх или вниз для изменения оси %1",_t];
+					{
+						if (_key != MOUSE_LEFT) exitWith {};
+						_mPos = call mouseGetPosition select 1;
+						_wid setVariable ["transform_lastPoint",_mPos];
+						inspector_internal_lastWidgetTransformPos = [_wid];
+						
+					} call _setOnMouseDownCode;
+					_exitedConditions = 
+					{
+						if isNullReference(inspector_internal_lastWidgetTransformPos select 0) exitWith {};
+						inspector_internal_lastWidgetTransformPos = [widgetNull];
+						_transName = _wid getVariable "transform_name";
+						_transIndex = _wid getVariable "transform_index";
+						_newPos = getPosATL _objWorld;
+						_oldPos = _objWorld call golib_om_getPosition;
+						
+						[_objWorld,_newPos,true,format["Позиция %1 (%2 -> %3)",_transName,_oldPos select _transIndex,_newPos select _transIndex]] call golib_om_setPosition;
+					};
+					_exitedConditions call _setOnPressCode;
+					_exitedConditions call _setOnKillFocusCode;
 				};
-				_exitedConditions call _setOnPressCode;
-				_exitedConditions call _setOnKillFocusCode;
+				
 				{
 					(_wid getVariable "input") ctrlSetText str ((_objWorld call golib_om_getPosition) select (_wid getVariable "transform_index"))
 				} call _setSyncValCode;
@@ -613,6 +621,9 @@ function(inspector_menuLoad)
 				
 				[INPUT,[100/3-(100/3/4),_optimalSizeH],100/3*_i + (100/3/4),_i==2] call _createElement;
 				_wid ctrlSetFontHeight 0.035;
+				if (!_isSingleObject) then {
+					_wid setBackgroundColor inspector_const_providedBatchedTransformColor;	
+				};
 				_drag setVariable ["input",_wid];
 				_wid setVariable ["transform_index",_i];
 				_wid setVariable ["transform_name",_t];
@@ -630,7 +641,8 @@ function(inspector_menuLoad)
 					_oldPos = (_objWorld call golib_om_getPosition);
 					_oldval = _oldPos select _transIndex;
 					_oldPos set [_transIndex,_numval];
-					
+
+					["position",[_transIndex,getdiff(_oldval,_numval)]] call goilb_setBatchMode;
 					[_objWorld,_oldPos,true,format["Позиция %1 (%2 -> %3)",_transName,_oldval,_numval]] call golib_om_setPosition;
 				} call _setOnKillFocusCode;
 			};
@@ -677,6 +689,9 @@ function(inspector_menuLoad)
 				
 				[INPUT,[100/3-(100/3/4),_optimalSizeH],100/3*_i + (100/3/4),_i==2] call _createElement;
 				_wid ctrlSetFontHeight 0.035;
+				if (!_isSingleObject) then {
+					_wid setBackgroundColor inspector_const_providedBatchedTransformColor;	
+				};
 				_drag setVariable ["input",_wid];
 				_wid setVariable ["transform_index",_i];
 				_wid setVariable ["transform_name",_t];
@@ -695,6 +710,7 @@ function(inspector_menuLoad)
 					_oldval = _oldPos select _transIndex;
 					_oldPos set [_transIndex,_numval];
 					
+					["rotation",[_transIndex,getdiff(_oldval,_numval)]] call goilb_setBatchMode;
 					[_objWorld,_oldPos,true,format["Поворот %1 (%2 -> %3)",_transName,_oldval,_numval]] call golib_om_setRotation;
 				} call _setOnKillFocusCode;
 			};
@@ -737,7 +753,7 @@ function(inspector_menuLoad)
 					_value = sliderPosition (_wid getVariable "slider");
 					_old = _data get "prob";
 					_data set ["prob",_value];
-					["prob"] call goilb_setBatchMode;
+					["prob","set"] call goilb_setBatchMode;
 					[_objWorld,_data,true,format["Изменение вероятности появления (%1 -> %2)",_old,_value]] call golib_setHashData;
 					
 					_sli = (_wid getVariable "slider");
@@ -757,22 +773,28 @@ function(inspector_menuLoad)
 				_button ctrlEnable _canuseslider;
 				widgetFadeNow(_slider,ifcheck(_canuseslider,0,0.5));
 				widgetFadeNow(_button,ifcheck(_canuseslider,0,0.5));
+				_slider ctrlShow _canuseslider;
 				if (_canuseslider) then {
 					_slider sliderSetPosition (_data get "prob");
 					private _wid = _slider; //только здесь приват спасет (контекст не сломается)
 					call (_slider getVariable "_onSync");
+				} else {
+					_slider sliderSetPosition 100;
 				};
 			} call _setSyncValCode;
 			{
 				private _m = "";
+				private _modeBatch = "";
 				if (_checked) then {
 					_data set ["prob",_data getOrDefault ["prob",100]];
 					_m = "Включение случайного появления";
+					_modeBatch = "set";
 				} else {
 					_data deleteAt "prob";
 					_m = "Выключение случайного появления";	
+					_modeBatch = "del";
 				};
-				["prob"] call goilb_setBatchMode;
+				["prob",_modeBatch] call goilb_setBatchMode;
 				[_objWorld,_data,true,_m] call golib_setHashData;
 			} call _setOnCBChanged;
 	
