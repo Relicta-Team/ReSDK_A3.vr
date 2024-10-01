@@ -105,7 +105,12 @@ function(MouseArea_handleMousePress)
 {
 	params ["_key","_shift","_ctrl","_alt"];
 	if (_key == MOUSE_RIGHT) exitwith {
-		call ContextMenu_loadMouseObject;
+		if (call contextMenu_energy_isDragModeActive) exitWith {};
+		if (count call golib_getSelectedObjects > 1) then {
+			[call golib_getSelectedObjects] call ContextMenu_loadMouseObjectList;
+		} else {
+			call ContextMenu_loadMouseObject;
+		};
 	};
 }
 
