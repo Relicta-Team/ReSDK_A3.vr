@@ -130,6 +130,11 @@ func(addItem)
 		warningformat("Attempt duplicate item on attach to container: item %1 in container %2 not placed",getVar(_item,pointer) arg getVar(_oldLoc,pointer));
 		"IContainer syserror: oldLoc equals this"
 	};
+	
+	//todo: remove disable firelights on insert in container (https://github.com/Relicta-Team/ReSDK_A3.vr/issues/502)
+	if (callFunc(_item,isFireLight) && getVar(_item,lightIsEnabled)) then {
+		callFuncParams(_item,lightSetMode,false);
+	};
 
 	callFuncParams(_item,playEventSound,"putdown");
 
