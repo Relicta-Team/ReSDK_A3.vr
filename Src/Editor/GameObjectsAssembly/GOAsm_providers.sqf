@@ -991,13 +991,22 @@ function(goasm_attributes_handleProvider_container_content)
 	_input = _wid;
 	{
 		if ("containerContent" in _data) then {
-			_wid ctrlSetText ([_data get "containerContent",false] call goasm_attributes_container_content_ToString);
+			private _content = ([_data get "containerContent",false] call goasm_attributes_container_content_ToString);
+			if (count inspector_otherObjects > 0) then {
+				_content = "Несколько значений...";
+			};
+
+			_wid ctrlSetText _content;
 			_wid ctrlSetBackgroundColor [.7,.7,.7,.7];
-			_wid ctrlSetTooltip ([_data get "containerContent",true] call goasm_attributes_container_content_ToString);
+			_wid ctrlSetTooltip _content;
 		} else {
-			_wid ctrlSetText "Пусто";
+			_content = ["Пусто","Там ничего нет"];
+			if (count inspector_otherObjects > 0) then {
+				_content = _content apply {"Несколько значений..."};
+			};
+			_wid ctrlSetText (_content select 0);
 			_wid ctrlSetBackgroundColor [0.3,0.3,0.3,0.3];
-			_wid ctrlSetTooltip "Там ничего нет";
+			_wid ctrlSetTooltip (_content select 1);
 		};
 	} call _setSyncValCode;
 	[BUTTON,[10,_optimalSizeH],_offsetMemX+40,true] call _createElement;
@@ -1013,13 +1022,18 @@ function(goasm_attributes_handleProvider_container_content)
 		//сброс
 		if (_key == MOUSE_RIGHT) exitwith {
 			_wid = _input;
-			if ("containerContent" in _data) then {
+			//if ("containerContent" in _data) then {
 				_data deleteAt "containerContent";
-				[_memberName,"cprov"] call goilb_setBatchMode;
+				["containerContent","del"] call goilb_setBatchMode;
 				[_objWorld,_data,true] call golib_setHashData;
 				call (_wid getVariable "_onSync");
-			};
+			//};
 		};
+
+		if (count inspector_otherObjects > 0) exitWith {
+			["В текущей версии нельзя изменять содержимое контейнеров для нескольких объектов."] call showError;
+		};
+
 		_srcObject = _objWorld;
 		_dummyObj = createSimpleObject ["block_dirt",[0,0,0]];
 		_dummyObj setVariable ["observedIndex",-1];
@@ -1191,7 +1205,7 @@ function(goasm_attributes_handleProvider_container_content)
 					} else {
 						_data deleteAt "containerContent";
 					};
-					[_memberName,"cprov"] call goilb_setBatchMode;
+					[_memberName] call goilb_setBatchMode;
 					[_srcObject,_data,true] call golib_setHashData;
 					call (_wid getVariable "_onSync");
 				} call Core_callContext;
