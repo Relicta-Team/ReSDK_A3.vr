@@ -117,11 +117,9 @@ csys_tryCraft_internal = {
 		} foreach _leftComponents;
 		false
 	} count _objList;
-	
-	private _previewObj = _robj callv(hasPreviewCraft);
 
 	private _canCraft = all_of(_leftComponents apply {_x callv(canCraftFromIngredient)});
-	if (!_canCraft) exitWith {
+	private _onCannotCraft = {
 		private _ingredient = "чего-то...";
 		{
 			if (!(_x callv(canCraftFromIngredient)) && {
@@ -134,6 +132,7 @@ csys_tryCraft_internal = {
 		} foreach _leftComponents;
 		callFuncParams(_usr,localSay,"Не хватает: " + _ingredient arg "error");
 	};
+	if (!_canCraft) exitWith _onCannotCraft;
 
 	private _durationCheck = _robj getv(opt_craft_duration);
 	assert(equalTypes(_durationCheck,{}));
@@ -143,13 +142,11 @@ csys_tryCraft_internal = {
 
 	private _duration = _myRta call _durationCheck;
 
-	private _ctx = ["_robj","_leftComponents","_eps"];
+	private _ctx = ["_robj","_leftComponents","_eps","_onCannotCraft"];
 	private _postCrafted = {
 
 		//validate
-		if !all_of(_leftComponents apply {_x callv(canCraftFromIngredient)}) exitWith {
-			callFuncParams(_usr,localSay,"Не хватает ингредиентов." arg "error");
-		};
+		if !all_of(_leftComponents apply {_x callv(canCraftFromIngredient)}) exitWith _onCannotCraft;
 
 		private _refSuccess = refcreate(0);
 
@@ -161,6 +158,7 @@ csys_tryCraft_internal = {
 		private _craftCtx = createHashMapFromArray [
 			["position",_eps],
 			["user",this],
+			["recipe",_robj],
 			["used_skill",_refSuccess select 0],
 			["success_amount",getRollAmount(_refSuccess select 1)],
 			["roll_result",getRollType(_refSuccess select 1)],
@@ -177,6 +175,8 @@ csys_tryCraft_internal = {
 
 			_robj callp(onFailProcess,_craftCtx);
 		};
+
+		private _previewObj = _robj callv(hasPreviewCraft);
 
 		//removing components
 		{

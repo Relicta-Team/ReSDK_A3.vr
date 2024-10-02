@@ -288,6 +288,7 @@ struct(CraftRecipeResult)
 		
 		private _pos = _craftCtx get "position";
 		private _usr = _craftCtx get "user";
+		private _robj = _craftCtx get "recipe";
 
 		private _realPos = [_pos,self getv(radius)] call randomRadius;
 		private _class = self getv(class);
@@ -300,6 +301,8 @@ struct(CraftRecipeResult)
 		if ((_craftCtx get "roll_result") == DICE_CRITSUCCESS) then {
 			callFuncParams(_usr,localSay,"<t size='1.5'>Критический успех</t>" arg "mind");
 		};
+		
+		callFuncParams(_usr,meSay,"создаёт " + (_robj getv(name)));
 	}
 
 endstruct
@@ -703,6 +706,16 @@ struct(ICraftRecipeBase)
 			setVar(_newObj,hp,_perDebrisHP + randInt(-4,2));
 			setVar(_newObj,ht,randInt(1,4));
 		};
+
+		private _m = format["пытается сделать %1%2",self getv(name),
+			pick[
+				", но всё запарывает.",
+				", но ничего не получается.",
+				" и всё портит.",
+				" и проваливает попытку."
+			]
+		];
+		callFuncParams(_ctx get "user",meSay,_m);
 	}
 
 endstruct
