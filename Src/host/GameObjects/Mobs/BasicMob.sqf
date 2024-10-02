@@ -670,6 +670,8 @@ region(Connect control events)
 		
 		// close net display if client dropped connection
 		callSelf(closeOpenedNetDisplay);
+		//release building preview if exist
+		callSelf(releaseBuildingPreview);
 	};
 
 region(Mob location info: position; direction; speed)
@@ -2209,4 +2211,17 @@ region(Atmos subsystem)
 		};
 	};
 
+region(previef functionality)
+	getter_func(isInBuildingPreviewMode,!isNull(getSelf(___cachedCraftBuildPreview)));
+
+	func(releaseBuildingPreview)
+	{
+		objParams();
+		if !callSelf(isInBuildingPreviewMode) exitWith {};
+		
+		//send preview build end
+		callSelfParams(sendInfo,"craft_endPrevFromServer" arg [false]);
+
+		[this,false] call csys_onCraftEndPreview;
+	};
 endclass

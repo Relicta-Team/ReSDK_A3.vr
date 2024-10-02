@@ -83,6 +83,8 @@ onGameKeyInputs = {
 	};
 
 	if (!([] call interact_isActive)) exitWith {};
+	
+	if (craft_isPreviewEnabled) exitWith {};
 
 	if isPressed(input_act_switchTwoHands) exitWith {call inventory_changeTwoHandsMode};
 	if isPressed(input_act_pointTo) exitWith {call interact_pointTo};
@@ -164,6 +166,7 @@ onGameMouseInputs = {
 	params ["","_button", "", "", "_shift", "_ctrl", "_alt"];
 
 	if (isDisplayOpen || call smd_isStunned || !([] call interact_isActive)) exitWith {false};
+	if (craft_isPreviewEnabled) exitWith {};
 
 	if (_button == MOUSE_LEFT) exitwith {
 		[true] call interact_onLMBPress

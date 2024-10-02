@@ -25,7 +25,7 @@
   type: building
   category: Building
   required:
-    skills: { engineering: 1 }
+    #skills: { engineering: 1 }
     components:
       - class: WoodenDebris(1-5)
         count: 4

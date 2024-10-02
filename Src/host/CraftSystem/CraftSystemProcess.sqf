@@ -142,7 +142,7 @@ csys_tryCraft_internal = {
 
 	private _duration = _myRta call _durationCheck;
 
-	private _ctx = ["_robj","_leftComponents","_eps","_onCannotCraft"];
+	private _ctx = ["_robj","_leftComponents","_eps","_onCannotCraft","_usr"];
 	private _postCrafted = {
 
 		//validate
@@ -184,8 +184,46 @@ csys_tryCraft_internal = {
 		} foreach _leftComponents;
 
 		//create object
-		_robj getv(result) callp(onCrafted,_craftCtx);
+		private _postCreate = {
+			params ["_robj","_craftCtx"];
+			_robj getv(result) callp(onCrafted,_craftCtx);
+		};
+
+		if (_previewObj) then {
+			private _previewModel = _robj callv(getPreviewModel);
+			if isNullVar(_previewModel) exitWith {
+				setLastError("Неопределенная модель для рецепта " + (str _robj));
+			};
+			setVar(_usr,___cachedCraftBuildPreview,vec2(vec2(_robj,_craftCtx),_postCreate));
+			callFuncParams(_usr,sendInfo,"craft_preview" arg [_eps arg _previewModel] )
+		} else {
+			[_robj,_craftCtx] call _postCreate;
+		};
 
 	};
 	callFuncParams(_usr,doAfter,_postCrafted arg _duration arg _ctx arg INTERACT_PROGRESS_TYPE_FULL);
+};
+
+_craft_onEndPreview = {
+	params ["_usrptr","_isApply","_tfmOpt"];
+	unrefObject(this,_usrptr,errorformat("csys::onCraftEndPreview() - Mob object has no exists virtual object - %1",_usrptr);false);
+	
+	[this,_isApply,_tfmOpt] call csys_onCraftEndPreview;
+
+}; rpcAdd("craft_onEndPreview",_craft_onEndPreview);
+
+csys_onCraftEndPreview = {
+	params ['this',"_isApply","_tfmOpt"];
+
+	private _pData = getSelf(___cachedCraftBuildPreview);
+	setSelf(___cachedCraftBuildPreview,null);
+	private _params = _pData select 0;
+	private _postCreate = _pData select 1;
+	private _craftCtx = _params select 1;
+	if (_isApply) then {
+		_craftCtx set ["position",_tfmOpt select 0];
+		_craftCtx set ["direction",_tfmOpt select 1];
+	};
+
+	_params call _postCreate;
 };

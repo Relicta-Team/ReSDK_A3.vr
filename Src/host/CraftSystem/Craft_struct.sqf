@@ -269,12 +269,16 @@ struct(CraftRecipeResult)
 	def(radius) 0;
 	def(modifiers) null;
 
+	def(_model) null; //model path
+
 	def(init)
 	{
 		params ["_class","_count"];
 		self setv(class,_class);
 		self setv(count,struct_newp(CraftDynamicCountRange__,_count));
 		self setv(modifiers,[]);
+
+		self setv(_model,getFieldBaseValue(_class,"model"))
 	}
 
 	def(str)
@@ -287,6 +291,7 @@ struct(CraftRecipeResult)
 		params ["_craftCtx"];
 		
 		private _pos = _craftCtx get "position";
+		private _dir = _craftCtx get "direction";
 		private _usr = _craftCtx get "user";
 		private _robj = _craftCtx get "recipe";
 
@@ -294,7 +299,7 @@ struct(CraftRecipeResult)
 		private _class = self getv(class);
 		if !isNullVar(_class) then {
 			for "_i" from 1 to (self getv(count) callv(getValue)) do {
-				private _newObj = [_class,_realPos] call createGameObjectInWorld;
+				private _newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
 			};
 		};
 
@@ -303,6 +308,12 @@ struct(CraftRecipeResult)
 		};
 		
 		callFuncParams(_usr,meSay,"создаёт " + (_robj getv(name)));
+	}
+
+	//получает путь до результирующей модели
+	def(getModelPath)
+	{
+		self getv(_model)
 	}
 
 endstruct
@@ -390,7 +401,7 @@ struct(ICraftRecipeBase)
 	def(forceVisible) false; //видимость рецепта при нехватке навыков
 	def(skills) null; //hashmap of skills with values
 	def(components) null; //dict of components
-	def(result) null;
+	def(result) null; //CraftRecipeResult
 
 	//обработка требований
 	def(_parseRequired)
@@ -538,7 +549,7 @@ struct(ICraftRecipeBase)
 
 
 
-	def(fail_enable) true;
+	def(fail_enable) false;
 	def(fail_type) null;
 	def(fail_count) null; //CraftDynamicCountRange__
 
@@ -762,6 +773,18 @@ endstruct
 
 struct(CraftRecipeBuilding) base(CraftRecipeDefault)
 	def(c_type) "building";
+
+	def(getPreviewModel)
+	{
+		private _output = null;
+		private _r = self getv(result);
+		call {
+			if isNullVar(_r) exitWith {};
+			_output = _r callv(getModelPath);
+		};
+		_output
+	}
+
 endstruct
 
 struct(CraftRecipeSystem) base(ICraftRecipeBase)

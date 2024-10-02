@@ -4,12 +4,14 @@
 // ======================================================
 
 #include "..\..\host\engine.hpp"
+#include "..\..\host\struct.hpp"
 #include <..\..\host\text.hpp>
 #include "..\WidgetSystem\widgets.hpp"
 #include <..\ClientRpc\clientRpc.hpp>
 #include <..\..\host\CraftSystem\Craft.hpp>
 #include <..\..\host\keyboard.hpp>
 #include "CraftMenu_RPC.sqf"
+#include "Craft_preview.sqf"
 
 #define CRAFT_WIND_SIZE_X 60
 #define CRAFT_WIND_SIZE_Y 80
