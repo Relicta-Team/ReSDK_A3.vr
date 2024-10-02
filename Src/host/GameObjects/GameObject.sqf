@@ -1784,7 +1784,7 @@ class(IDestructible) extends(GameObject)
 		if (_newhp <= 0 && _newhp > (-1*_maxhp)) exitWith {
 			callSelfParams(onChangeObjectHP,2);
 			private _rr = (getSelf(ht) call gurps_rollstd);
-			if (getRollType(_rr) in [DICE_FAIL,DICE_CRITFAIL]) then {
+			if DICE_ISFAIL(getRollType(_rr)) then {
 				//?тест. снижаем dr объекта
 				private _oldDr = getSelf(dr);
 				if (_oldDr>0) then {
@@ -1795,7 +1795,7 @@ class(IDestructible) extends(GameObject)
 		if (_newhp <= (-1*_maxhp) && _newhp > (-5*_maxhp)) exitWith {
 			callSelfParams(onChangeObjectHP,3);
 			private _rr = (getSelf(ht) call gurps_rollstd);
-			if (getRollType(_rr) in [DICE_FAIL,DICE_CRITFAIL]) then {
+			if DICE_ISFAIL(getRollType(_rr)) then {
 				callSelf(onDestroyed);
 				delete(this);
 			};

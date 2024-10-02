@@ -461,6 +461,17 @@ region(Common skills functions)
 		(_stMe - _stHim)>0
 	};
 
+	// func(checkSkillWith)
+	// {
+	// 	params ['this',"_strSkill","_otherValue",["_bonuses",0],["_isSimpleReturn",false]];
+	// 	private _bonusMe = ifcheck(isNullVar(_bonuses),0,ifcheck(equalTypes(_bonuses,0),_bonuses,_bonuses select 0));
+	// 	private _bonusHim = ifcheck(isNullVar(_bonuses),0,ifcheck(equalTypes(_bonuses,0),_bonuses,_bonuses select 1));
+
+	// 	unpackRollResult(callSelfParams(checkSkill,_strSkill arg _bonusMe),_stMe,_diceRez_1,_3d6Amount_1);
+	// 	unpackRollResult(_otherValue call gurps_rollstd,_stHim,_diceRez_2,_3d6Amount_2);
+	// 	(_stMe - _stHim)>0
+	// };
+
 
 region(learning skills)
 	//max skill level was 18, min 0

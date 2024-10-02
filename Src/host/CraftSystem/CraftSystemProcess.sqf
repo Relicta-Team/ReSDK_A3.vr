@@ -96,6 +96,8 @@ csys_tryCraft_internal = {
 	csys_internal_editor_list_prepobjects = [];
 	#endif
 
+	traceformat("Collected objects: %1",_objList)
+
 	{
 		_objIngredient = _x;
 
@@ -120,7 +122,17 @@ csys_tryCraft_internal = {
 
 	private _canCraft = all_of(_leftComponents apply {_x callv(canCraftFromIngredient)});
 	if (!_canCraft) exitWith {
-
+		private _ingredient = "чего-то...";
+		{
+			if (!(_x callv(canCraftFromIngredient)) && {
+				//опциональные не требуются обязательно
+				!(_x getv(optional))
+			}
+			) exitWith {
+				_ingredient = _x callv(getRequiredComponentName);
+			};
+		} foreach _leftComponents;
+		callFuncParams(_usr,localSay,"Не хватает: " + _ingredient arg "error");
 	};
 
 	private _durationCheck = _robj getv(opt_craft_duration);
@@ -133,19 +145,46 @@ csys_tryCraft_internal = {
 
 	private _ctx = ["_robj","_leftComponents","_eps"];
 	private _postCrafted = {
+
 		//validate
 		if !all_of(_leftComponents apply {_x callv(canCraftFromIngredient)}) exitWith {
-
+			callFuncParams(_usr,localSay,"Не хватает ингредиентов." arg "error");
 		};
 
+		private _refSuccess = refcreate(0);
+
+		//skills check
+		private _canCraftBySkills = _robj callp(checkCraftSkills,this arg _refSuccess);
+		refunpack(_refSuccess); //params: vec2(skillname(str),success_amount(int))
+
+		//craft context
+		private _craftCtx = createHashMapFromArray [
+			["position",_eps],
+			["user",this],
+			["used_skill",_refSuccess select 0],
+			["success_amount",getRollAmount(_refSuccess select 1)],
+			["roll_result",getRollType(_refSuccess select 1)],
+			["amount_3d6",getRollDiceAmount(_refSuccess select 1)],
+			["components_copy",_leftComponents]
+		];
+
+		if (!_canCraftBySkills) exitWith {
+			//cannot craft because lowskill
+			if !(self getv(fail_enable)) exitWith {
+				private _message = pick ["Знаний не хватает.","Не умею, не могу.","Не понимаю как делать","Что-то не понятно ничего.","Не могу сделать.","Не знаю как делать."];
+				callFuncParams(_usr,localSay,_message arg "error");
+			};
+
+			_robj callp(onFailProcess,_craftCtx);
+		};
 
 		//removing components
 		{
-			_x callv(onCrafted);
+			_x callv(onComponentUsed);
 		} foreach _leftComponents;
 
 		//create object
-		_robj getv(result) callp(onCrafted,_eps);
+		_robj getv(result) callp(onCrafted,_craftCtx);
 
 	};
 	callFuncParams(_usr,doAfter,_postCrafted arg _duration arg _ctx arg INTERACT_PROGRESS_TYPE_FULL);

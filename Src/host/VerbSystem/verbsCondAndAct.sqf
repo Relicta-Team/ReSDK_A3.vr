@@ -169,6 +169,7 @@ ENDVERB
 VERB(craft_here)
 	cond
 		skipCond(!isTypeOf(usr,Mob));
+		skipCond(getVar(usr,isCombatModeEnable));
 	act
 		[src,usr] call csys_requestOpenMenu;
 ENDVERB

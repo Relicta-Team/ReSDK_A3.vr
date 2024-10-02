@@ -7,6 +7,7 @@
 #include <..\engine.hpp>
 #include <..\struct.hpp>
 #include <..\oop.hpp>
+#include <..\GURPS\gurps.hpp>
 #include "Craft.h"
 
 // because keyword used in struct field
@@ -107,9 +108,9 @@ struct(CraftRecipeComponent)
 		format["%3%1%4 x%2",ifcheck(self getv(isMultiSelector),self getv(class) joinString "|",self getv(class)),self getv(count),ifcheck(self getv(checkTypeOf),"^",""),ifcheck(self getv(optional),"?","")]
 	}
 
-	def(getComponentTextData)
+	def(getRequiredComponentName)
 	{
-		private _textData = if (self getv(isMultiSelector)) then {
+		if (self getv(isMultiSelector)) then {
 			private _itms = (self getv(class)) apply {getFieldBaseValueWithMethod(_x,"name","getName")};
 			private _iListUni = [];
 			{
@@ -122,7 +123,12 @@ struct(CraftRecipeComponent)
 		} else {
 			private _itmsTxt = getFieldBaseValueWithMethod(self getv(class),"name","getName");
 			_itmsTxt
-		};
+		}
+	}
+
+	def(getComponentTextData)
+	{
+		private _textData = self callv(getRequiredComponentName);
 
 		if (self getv(count) > 1) then {
 			modvar(_textData) + (format[" (x%1)",self getv(count)]);
@@ -245,7 +251,7 @@ struct(CraftRecipeComponent)
 	}
 
 	//вызывается для ингредиентов при успешном карфте
-	def(onCrafted)
+	def(onComponentUsed)
 	{
 		if (self getv(destroy)) then {
 			{
@@ -278,14 +284,21 @@ struct(CraftRecipeResult)
 
 	def(onCrafted)
 	{
-		params ["_pos"];
+		params ["_craftCtx"];
 		
+		private _pos = _craftCtx get "position";
+		private _usr = _craftCtx get "user";
+
 		private _realPos = [_pos,self getv(radius)] call randomRadius;
 		private _class = self getv(class);
 		if !isNullVar(_class) then {
 			for "_i" from 1 to (self getv(count) callv(getValue)) do {
 				private _newObj = [_class,_realPos] call createGameObjectInWorld;
 			};
+		};
+
+		if ((_craftCtx get "roll_result") == DICE_CRITSUCCESS) then {
+			callFuncParams(_usr,localSay,"<t size='1.5'>Критический успех</t>" arg "mind");
 		};
 	}
 
@@ -371,7 +384,7 @@ struct(ICraftRecipeBase)
 	
 	//internal vars
 	def(__canGetNameFromResult) false; // при true название рецепта будет браться из результата
-	def(forceVisible) false; //видимость рецепта при нехватке ингредиентов
+	def(forceVisible) false; //видимость рецепта при нехватке навыков
 	def(skills) null; //hashmap of skills with values
 	def(components) null; //dict of components
 	def(result) null;
@@ -383,7 +396,7 @@ struct(ICraftRecipeBase)
 		
 		CRAFT_PARSER_HEAD;
 		
-		GETVAL_BOOL(_req, vec2("forceVisible",self getv(forceVisible)));
+		GETVAL_BOOL(_req, vec2("force_visible",self getv(forceVisible)));
 		FAIL_CHECK_REFSET(_refResult);
 		if (value != (self getv(forceVisible))) then {
 			self setv(forceVisible,value);
@@ -407,6 +420,10 @@ struct(ICraftRecipeBase)
 			};
 			_filledSkills set [_x,_y];
 		} foreach value;
+
+		if (count _filledSkills > 0) then {
+			self setv(skills,_filledSkills);
+		};
 		
 		if (refget(_refResult) != "") exitWith {};
 
@@ -520,7 +537,7 @@ struct(ICraftRecipeBase)
 
 	def(fail_enable) true;
 	def(fail_type) null;
-	def(fail_count) null;
+	def(fail_count) null; //CraftDynamicCountRange__
 
 	def(_parseFailed)
 	{
@@ -608,17 +625,94 @@ struct(ICraftRecipeBase)
 		_robj setv(modifiers,_mods);
 	}
 
+	//валидация по навыкам
+	def(checkCraftSkills)
+	{
+		params ["_usr","_successAmountRef"];
+		private _skills = self getv(skills);
+		private _result = false;
+		private _maxSuccessAmount = -1000;
+		call {
+			if isNullVar(_skills) exitWith {_result = true};
+			{
+				private _requiredSkillName = _x;
+				private _requiredSkillValue = _y;
+
+				private _rollValidate = callFuncParams(_usr,checkSkill,_x arg 0);
+				if DICE_ISSUCCESS(getRollType(_rollValidate)) then {
+					private _successAmount = getRollAmount(_rollValidate);
+					traceformat("Skill check success: %1 -> %2",_x arg _rollValidate)
+					
+					//используем максимально сильный успех чтобы выудить максимальный бонус
+					if (_successAmount > _maxSuccessAmount) then {
+						refset(_successAmountRef,vec2(_requiredSkillName,_rollValidate));
+					};
+					_result = true;
+				};
+			} foreach _skills;
+		};
+		if equals(refget(_successAmountRef),0) then {
+			refset(_successAmountRef,vec2("craft",customRollResult(-15,DICE_CRITFAIL,3)));
+		};
+
+		_result
+	}
+
+	//TODO сделать разные варианты провала (урон, поломка, уменьшение состояния)
+	def(onFailProcess)
+	{
+		params ["_ctx"];
+		private _ccpy = _ctx get "components_copy";
+		private _pos = _ctx get "position";
+
+		private _maxDistanceRange = 0.05;
+		private _allHP = 0;
+		private _ctrItms = 0;
+
+		//delete all ingredients
+		{
+			//exclude optionals
+			if (_x getv(optional)) then {continue};
+
+			{
+				_x params ["_itm","_real"];
+
+				if ((getVar(_itm,getPos) distance _pos) > _maxDistanceRange) then {
+					_maxDistanceRange = getVar(_itm,getPos) distance _pos;
+				};
+
+				if (getVar(_itm,hp) > 0) then {
+					modvar(_allHP) + getVar(_itm,hp);
+					INC(_ctrItms);
+				};
+
+				[_itm] call deleteGameObject;
+			} foreach (_x getv(_foundItems));
+		} foreach _ccpy;
+		
+		//creating fail items
+		private _type = self getv(fail_type);
+		assert(_type);
+		private _createCount = self getv(fail_count) callv(getValue);
+
+		private _perDebrisHP = floor(_allHP / _ctrItms);
+
+		for "_i" from 1 to _createCount do {
+			private _realPos = [_pos,_maxDistanceRange] call randomRadius;
+			private _newObj = [_type,_realPos] call createGameObjectInWorld;
+			setVar(_newObj,hp,_perDebrisHP + randInt(-4,2));
+			setVar(_newObj,ht,randInt(1,4));
+		};
+	}
+
 endstruct
 
 struct(CraftRecipeDefault) base(ICraftRecipeBase)
 	def(c_type) "default";
 	def(onRecipeReady)
 	{
-		["recipe register start; map now: %1",csys_map_storage get (self getv(categoryId))] call cprintWarn;
 		callbase(onRecipeReady);
-		["AFTER BASE map now: %1",csys_map_storage get (self getv(categoryId))] call cprintWarn;
 		(csys_map_storage get (self getv(categoryId))) pushBack self;
-		["POST RELEASE map now: %1",csys_map_storage get (self getv(categoryId))] call cprintWarn;
 	}
 
 	def(canSeeRecipe)
