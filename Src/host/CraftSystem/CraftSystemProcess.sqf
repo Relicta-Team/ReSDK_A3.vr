@@ -62,6 +62,10 @@ csys_tryCraft = {
 	
 }; rpcAdd("tryCraft",csys_tryCraft);
 
+#ifdef CRAFT_DEBUG_VISUAL_ON_ATTEMPT
+csys_internal_editor_list_prepobjects = [];
+#endif
+
 //попытка крафта через меню
 csys_tryCraft_internal = {
 	params ["_usr","_srcPtr","_recipeID"];
@@ -69,22 +73,80 @@ csys_tryCraft_internal = {
 	/*
 		Собираем предметы в радиусе последней точки интеракции
 	*/
+
+	traceformat("Attempt try craft: %1",_robj);
+
+	if isNullVar(_robj) exitWith {false};
+	
+	//generate server interact
+	callFunc(_usr,generateLastInteractOnServer);
+
 	private _eps = callFunc(_usr,getLastInteractEndPos);
-	private _objList = ["IDestructible",_eps,_robj getv(collect_distance),true,true] call getGameObjectOnPosition;
+	private _objList = ["IDestructible",_eps,_robj getv(opt_collect_distance),true,true] call getGameObjectOnPosition;
+	//sort by distance
+	_objList = [_objList,{callFunc(_x,getPos) distance _eps}] call sortBy;
+
 	private _refDict = csys_map_allCraftRefs;
-	private _leftComponents = array_copy(_robj getv(components));
+	private _leftComponents = array_copy(_robj getv(components)) apply {_x callv(createIngredientTempValidator)};
 	private _classname = null;
 	private _objIngredient = null;
-	private _preparedList = [];
+	
+	#ifdef CRAFT_DEBUG_VISUAL_ON_ATTEMPT
+	{deletevehicle _x} foreach csys_internal_editor_list_prepobjects;
+	csys_internal_editor_list_prepobjects = [];
+	#endif
+
 	{
 		_objIngredient = _x;
-		{
-			if (_x callp(isValidIngredient,_objIngredient)) exitWith {
 
+		#ifdef CRAFT_DEBUG_VISUAL_ON_ATTEMPT
+		private _itm = "Sign_Arrow_F" createVehicle [0,0,0];
+		csys_internal_editor_list_prepobjects pushBack _itm;
+		_itm setposatl ((getposatl getVar(_objIngredient,loc)) vectoradd [0,0,0]);
+		#endif
+
+		{
+			//skips ready
+			if (_x callv(isReadyIngredient)) then {continue};
+
+			if (_x callp(isValidIngredient,_objIngredient)) exitWith {
+				_x callp(handleValidIngredient,_objIngredient);
 			};
 		} foreach _leftComponents;
 		false
 	} count _objList;
 	
 	private _previewObj = _robj callv(hasPreviewCraft);
+
+	private _canCraft = all_of(_leftComponents apply {_x callv(canCraftFromIngredient)});
+	if (!_canCraft) exitWith {
+
+	};
+
+	private _durationCheck = _robj getv(opt_craft_duration);
+	assert(equalTypes(_durationCheck,{}));
+
+	private _myRta = getVar(_usr,rta);
+	assert(!isNullVar(_myRta));
+
+	private _duration = _myRta call _durationCheck;
+
+	private _ctx = ["_robj","_leftComponents","_eps"];
+	private _postCrafted = {
+		//validate
+		if !all_of(_leftComponents apply {_x callv(canCraftFromIngredient)}) exitWith {
+
+		};
+
+
+		//removing components
+		{
+			_x callv(onCrafted);
+		} foreach _leftComponents;
+
+		//create object
+		_robj getv(result) callp(onCrafted,_eps);
+
+	};
+	callFuncParams(_usr,doAfter,_postCrafted arg _duration arg _ctx arg INTERACT_PROGRESS_TYPE_FULL);
 };

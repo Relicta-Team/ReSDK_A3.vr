@@ -24,6 +24,18 @@ struct(CraftDynamicPrecVal__)
 		self setv(val, ifcheck(_isPrec,parseNumberSafe(_val),_val) );
 	}
 
+	def(validate)
+	{
+		params ["_maxVal","_checkVal",["_greaterThan",true]];
+		private _funcValid = ifcheck(_greaterThan,{(_this select 0) >= (_this select 1)},{(_this select 0) <= (_this select 1)});
+		
+		if (self getv(isPrecentage)) then {
+			[_checkVal,precentage(_maxVal,self getv(val))] call _funcValid;
+		} else {
+			[_checkVal,self getv(val)] call _funcValid;
+		};
+	}
+
 	def(str) { format["%1%2",self getv(val),ifcheck(self getv(isPrecentage),"%","")] }
 endstruct
 
@@ -70,6 +82,16 @@ struct(CraftRecipeComponent)
 	def(destroy) true;
 	def(conditionEvent) {true};
 	def(metaTag) ""; //!reserved
+
+	//for craft processor
+	def(_getLeftCount) {
+		private _contains = (count(self getv(_foundItems)));
+		private _needs = self getv(count);
+
+		(_needs - _contains) max 0
+	}
+	def(_foundItems) null;
+	def(_isReadyIngredient) false;
 
 	def(init)
 	{
@@ -143,10 +165,94 @@ struct(CraftRecipeComponent)
 		} count _classList;
 	}
 
+	//creating temp object for validation
+	def(createIngredientTempValidator)
+	{
+		private _cpy = struct_copy(self);
+		_cpy setv(_foundItems,[]);
+		assert(_cpy getv(class));
+		_cpy
+	}
+
 	def(isValidIngredient)
 	{
 		params ["_ingredient"];
+		private _checkTypeOf = self getv(checkTypeOf);
+		private _valid = false;
+		call {
+			private _hasClass = false;
+			if (self getv(isMultiSelector)) then {
+				{
+					if (_checkTypeOf) then {
+						_hasClass = isTypeStringOf(_ingredient,_x);
+					} else {
+						_hasClass = callFunc(_ingredient,getClassName) == _x;
+					};
+					if (_hasClass) exitWith {};
+				} foreach (self getv(class));
+			} else {
+				_hasClass = ifcheck(_checkTypeOf,isTypeStringOf(_ingredient,self getv(class)),callFunc(_ingredient,getClassName) == (self getv(class)));
+			};
+
+			if (!_hasClass) exitWith {};//no class found
+
+			//condition lambda
+			private _condCheck = [_ingredient] call (self getv(conditionEvent));
+			if (!_condCheck) exitWith {};//condition failed
+
+			//validate hp
+			private _validHP = true;
+			if isNull(self getv(hp)) then {
+				_validHP = false;
+				private _hpObj = self getv(hp);
+				private _maxHp = getVar(_ingredient,hpMax);
+				private _curHp = getVar(_ingredient,hp);
+				_validHP = _hpObj callp(validate,_maxHp arg _curHp);
+			};
+			
+			if (!_validHP) exitWith {};//hp check failed
+
+			_valid = true;
+		};
 		
+		_valid
+	}
+
+	//called on found valid ingredient
+	def(handleValidIngredient)
+	{
+		params ["_ingredient"];
+		private _fList = self getv(_foundItems);
+		_fList pushBack [_ingredient,getVar(_ingredient,loc)];
+
+		if ((self callv(_getLeftCount)) == 0) then {
+			self setv(_isReadyIngredient,true);
+		};
+	}
+
+	def(isReadyIngredient)
+	{
+		self getv(_isReadyIngredient);
+	}
+
+	//валидация подготовленных ингредиентов. одни должны существовать и не менять меш (что происходит при перемещении)
+	def(canCraftFromIngredient)
+	{
+		(self callv(isReadyIngredient)
+		|| (self getv(optional))) && {
+			all_of(self getv(_foundItems) apply {!isNullReference(_x select 0) && {!isNullReference(_x select 1)}})
+		}
+	}
+
+	//вызывается для ингредиентов при успешном карфте
+	def(onCrafted)
+	{
+		if (self getv(destroy)) then {
+			{
+				_x params ["_itm","_real"];
+				[_itm] call deleteGameObject;
+			} foreach (self getv(_foundItems));
+		};
 	}
 
 endstruct
@@ -169,6 +275,20 @@ struct(CraftRecipeResult)
 	{
 		format["%1 %2",self getv(class),(self getv(count))];
 	}
+
+	def(onCrafted)
+	{
+		params ["_pos"];
+		
+		private _realPos = [_pos,self getv(radius)] call randomRadius;
+		private _class = self getv(class);
+		if !isNullVar(_class) then {
+			for "_i" from 1 to (self getv(count) callv(getValue)) do {
+				private _newObj = [_class,_realPos] call createGameObjectInWorld;
+			};
+		};
+	}
+
 endstruct
 
 struct(CraftRecipeResultModifier)
@@ -200,6 +320,7 @@ struct(CraftRecipeResultModifier)
 	{
 		format["%1(%2)",struct_typename(self),self getv(name)]
 	}
+
 endstruct
 
 
@@ -423,7 +544,7 @@ struct(ICraftRecipeBase)
 		self setv(fail_count,struct_newp(CraftDynamicCountRange__,value));
 	};
 
-	def(opt_collect_distance) 1
+	def(opt_collect_distance) 0.8
 	def(opt_craft_duration) {_this} //_this == usr.rta
 
 	def(_parseOptions)

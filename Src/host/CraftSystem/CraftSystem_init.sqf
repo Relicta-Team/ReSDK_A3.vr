@@ -20,6 +20,7 @@
 #include <..\text.hpp>
 #include "..\ServerRpc\serverRpc.hpp"
 #include "..\PointerSystem\pointers.hpp"
+#include "..\..\client\Interactions\interact.hpp"
 #include "Craft.hpp"
 #include "Craft.h"
 
