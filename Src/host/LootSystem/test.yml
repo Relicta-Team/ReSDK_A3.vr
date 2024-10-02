@@ -3,7 +3,7 @@ BaseLoot:
   interface: true
   name: Basic loot config
 
-TestLoot:
+TestLoot: #имя конфига. Оно указывается в инспекторе в свойстве "Шаблон лута"
   interface: false # интерфейсы только для заготовки шаблонов
   inherit: BaseLoot # Опциональное наследование конфигурации.
   name: some name # Описательное название конфигурации (опционально)
