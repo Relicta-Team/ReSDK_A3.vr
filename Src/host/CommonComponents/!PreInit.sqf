@@ -551,25 +551,36 @@ getPosListCenter = {
 //Специальный рандом по области. Чем ближе к центру тем выше вероятность. Распределение идёт по всей окружности.
 randomRadius = {
 	params ["_center","_radius"];
-	_center getPos [random _radius,random 360]
+	private _pos = _center getPos [random _radius,random 360];
+	_pos set [2,_center select 2];
+	_pos
 };
 
 //Специальный рандом по области. Равномерное распределение по позиции в радиусе.
 randomPosition = {
 	params ["_center","_radius"];
-	_center getPos [_radius * (sqrt random 1),random 360]
+	private _pos = _center getPos [_radius * (sqrt random 1),random 360];
+	_pos set [2,_center select 2];
+	_pos
 };
 
 //Специальный рандом по области. Распределение идёт ближе к центру. Чем ближе к центру тем выше вероятность.
 randomGaussian = {
 	params ["_center","_radius"];
-	_center getPos [_radius * (random [-1,0,1]),random 180] 
+	private _pos = _center getPos [_radius * (random [-1,0,1]),random 180];
+	_pos set [2,_center select 2];
+	_pos
 };
 
 fileExists_Node = {
 	params ["_f"];
 	FileExists _f
 };
+
+//TODO optimize and refactoring
+// _mode == true -> asc, false -> desc: [[20,2,5],{_x}] call sortBy;
+sortBy = { params ["_list","_algorithm",["_mode",true]]; [_list,[],_algorithm,ifcheck(_mode,"ASCEND","DESCEND")] call BIS_fnc_sortBy};
+nearNumber = compile toString BIS_fnc_nearestNum;
 
 fileLoad_Node = {
 	params ["_f",["_doPreprocess",false]];
