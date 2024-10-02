@@ -6,8 +6,8 @@
 csys_requestOpenMenu = {
 	params ["_objSrc","_usr"];
 	
-	if !callFunc(_objSrc,canUseAsCraftSpace) exitWith {};
-	private _allowedCateg = callFunc(_objSrc,getAllowedCraftCategories);
+	//if !callFunc(_objSrc,canUseAsCraftSpace) exitWith {};
+	private _allowedCateg = CRAFT_CONST_CATEGORY_LIST_IDS;
 	if (isNullVar(_allowedCateg) || not_equalTypes(_allowedCateg,[]) || count _allowedCateg == 0) exitWith {
 		errorformat("csys::requestOpenMenu() - catched unhandled error after calling: %1::getAllowedCraftCategories()",callFunc(_objSrc,getClassName));
 	};	
@@ -42,7 +42,7 @@ csys_requestLoadCateg = {
 	
 	unrefObject(this,_usrptr,errorformat("csys::tryCraft() - Mob object has no exists virtual object - %1",_usrptr); rpcSendToObject(_usrptr,"onCraftLoadCateg",["PTR_ERR"]));
 	private _list = [_cat,this] call csys_getRecipesForUser;
-	rpcSendToObject(_usrptr,"onCraftLoadCateg",[_cat,_list]);
+	rpcSendToObject(_usrptr,"onCraftLoadCateg",[_cat arg _list]);
 	
 }; rpcAdd("processLoadCatCraft",csys_requestLoadCateg);
 

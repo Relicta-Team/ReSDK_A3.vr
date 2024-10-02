@@ -72,7 +72,7 @@ loadFile("src\host\VerbSystem\verbs.sqf");
 loadFile("src\host\ClientManager\ClientManager.sqf");
 loadFile("src\host\Atmos\Atmos_init.sqf");
 loadFile("src\host\GamemodeManager\GamemodeManager.sqf");
-loadFile("src\host\CraftSystem\Craft.sqf"); //serverside craft system
+loadFile("src\host\CraftSystem\CraftSystem_init.sqf"); //craft system
 loadFile("src\host\AmbientControl\AmbientControl_init.sqf");
 loadFile("src\host\ServerInteraction\ServerInteractionInit.sqf"); //throwing, interactions etc. on serverside
 loadFile("src\host\ServerLighting\ServerLighting_init.sqf"); //serverside lighting system
@@ -93,6 +93,10 @@ if (!isMultiplayer) then {
 	loadFile("src\host\ServerSceneTest\serverscrene_init.sqf"); //for testing only
 };
 #endif
+
+//postload initialize systems
+call csys_init; //craft table init
+
 
 server_loadingState = 1;
 

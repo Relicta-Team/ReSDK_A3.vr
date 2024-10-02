@@ -166,6 +166,13 @@ VERB(craft)
 		[src,usr] call craft_requestOpenMenu;
 ENDVERB
 
+VERB(craft_here)
+	cond
+		skipCond(!isTypeOf(usr,Mob));
+	act
+		[src,usr] call csys_requestOpenMenu;
+ENDVERB
+
 VERB(twohands)
 	cond
 		skipCond(!isTypeOf(usr,Mob));

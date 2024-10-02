@@ -4,9 +4,9 @@
 // ======================================================
 
 
-#include <..\..\engine.hpp>
-#include <..\..\struct.hpp>
-#include <..\..\oop.hpp>
+#include <..\engine.hpp>
+#include <..\struct.hpp>
+#include <..\oop.hpp>
 #include "Craft.h"
 
 // because keyword used in struct field
@@ -215,6 +215,9 @@ struct(ICraftRecipeBase)
 
 	def(hasPreviewCraft) { (self getv(c_type)) == "building" }
 
+	def(sourceFile) "";
+	def(sourceItem) -1;
+
 	def(init)
 	{
 		if (struct_typename(self) == "ICraftRecipeBase") exitWith {
@@ -228,6 +231,9 @@ struct(ICraftRecipeBase)
 		self setv(craftId,csys_global_counter);
 		csys_map_allCraftRefs set [csys_global_counter,self];
 		INC(csys_global_counter);
+
+		self setv(sourceFile,csys_internal_lastLoadedFile);
+		self setv(sourceItem,csys_internal_configNumber);
 	}
 
 	def(str)
@@ -487,8 +493,11 @@ struct(CraftRecipeDefault) base(ICraftRecipeBase)
 	def(c_type) "default";
 	def(onRecipeReady)
 	{
+		["recipe register start; map now: %1",csys_map_storage get (self getv(categoryId))] call cprintWarn;
 		callbase(onRecipeReady);
+		["AFTER BASE map now: %1",csys_map_storage get (self getv(categoryId))] call cprintWarn;
 		(csys_map_storage get (self getv(categoryId))) pushBack self;
+		["POST RELEASE map now: %1",csys_map_storage get (self getv(categoryId))] call cprintWarn;
 	}
 
 	def(canSeeRecipe)
