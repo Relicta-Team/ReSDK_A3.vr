@@ -22,28 +22,6 @@ loot_addConfig = {
 	loot_list_loader pushBack _cfgPath;
 };
 
-loot_internal_resolvePath = {
-	params ["_p"];
-	private _patterns = [
-		"Collections\%1.yml",
-		"Collections\%1",
-		"%1",
-		"%1.yml"
-	];
-	private _prefix = "src\host\LootSystem\";
-	private _founded = _p splitString "/\" joinString "\";
-	{
-		private _patternPrep = format [_x,_p];
-		if (fileExists(_patternPrep)) exitWith {
-			_founded = format [_x,_p];
-		};
-		if (fileExists(_prefix+_patternPrep)) exitWith {
-			_founded = _prefix + _patternPrep;
-		};
-	} foreach _patterns;
-	_founded
-};
-
 loot_prepareAll = {
 	
 	#ifdef RBUILDER
@@ -52,15 +30,14 @@ loot_prepareAll = {
 	#ifdef __VM_VALIDATE
 	if (true) exitWith {};
 	#endif
-
-	private _pathLoader = "src\host\LootSystem\loader.sqf";
-	private _content = (loadfile _pathLoader) splitString endl;
-	if (count _content == 0) exitWith {
-		setLastError("loot::prepareAll() - no loot templates was found in " + _pathLoader);
+	
+	private _fileList = ["src\host\LootSystem\Collections",".yml",true] call fso_getFiles;
+	if (count _fileList == 0) exitWith {
+		setLastError("loot::prepareAll() - no loot templates was found");
 	};
 	{
-		[[_x] call loot_internal_resolvePath] call loot_addConfig;
-	} foreach _content;
+		[_x] call loot_addConfig;
+	} foreach _fileList;
 
 	call loot_init;
 };

@@ -15,9 +15,16 @@ fso_init = {
 	private _nativeCollection = addonFiles ["src\"];
 	private _useNativeCollector = count _nativeCollection > 0;
 	if (!_useNativeCollector) then {
-		assert_str(!isNull(file_getFileList),"file::getFileList function not found");
+		
+		if isNull(file_getFileList) exitWith {
+			setLastError("file::getFileList function not found");
+		};
+		
 		_nativeCollection = ["src\",null,null,true] call file_getFileList;
-		assert_str(count _nativeCollection > 0,"Empty file collection");
+		if (count _nativeCollection == 0) exitWith {
+			setLastError("file::getFileList Empty file collection");
+		};
+
 		_nativeCollection = _nativeCollection apply {;
 			_parts = (tolower _x) splitString "\/";
 			_idxSrc = _parts find "src";
