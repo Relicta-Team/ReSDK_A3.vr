@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define STRUCT_API_VERSION 1.2
+#define STRUCT_API_VERSION 1.3
 // enable fileinfo for structs. do not enable in release build
 //#define STRUCT_USE_ALLOC_INFO
 
@@ -143,8 +143,10 @@
 //call functions with parameters
 #define callp(methodname,params) call [#methodname,[params]]
 //call base version of any method
-#define callbase(methodname) _this call {__CBASE_INC__; _this call(missionnamespace getvariable ("pts_"+(self GET STRUCT_MEM_TYPE select __scb_i_s)) GET #methodname) }
-#define __CBASE_INC__ private __scb_i_s = if (isnil'__scb_i_s') then {1} else {__scb_i_s + 1}
+#define callbase(methodname) call{__STRUCT_CALLBASE__;'methodname'}
+#define __STRUCT_CALLBASE_TOKEN__ "__STRUCT_CALLBASE__;"
+#define __STRUCT_CALLBASE_REGEX__ "call\{__STRUCT_CALLBASE__;'(\w+)'\}"
+#define __STRUCT_CALLBASE_REGEX_REPLACE_FORMAT__ "call\{__STRUCT_CALLBASE__;'%1'\}"
 
 //variables management
 #define getv(memname) get #memname
@@ -252,6 +254,7 @@
 	vt_cast = createHashMap; //cast table
 	struct_default_flag = ["unscheduled"];
 	struct_initialize = {
+		assert(regex_replace);
 
 		private _t = null;
 		private _decl = null;
@@ -286,6 +289,31 @@
 			if !isNullVar(_t) then {
 				_decl set [STRUCT_MEM_TOSTRING,_t];
 			};
+
+			//virtual check
+			{
+				if (equalTypes(_y,{})) then {
+
+					private _code__ = toString _y;
+					if !(__STRUCT_CALLBASE_TOKEN__ in _code__) exitWith {};
+
+					//match
+					private _signatures = [_code__,__STRUCT_CALLBASE_REGEX__] call regex_getMatches;
+					private _mname = null;
+					_mother = _decl get STRUCT_MEM_BASE;
+					//replace tokens
+					{
+						_mname = [_x,"'(\w+)'",1] call regex_getFirstMatch;
+						_code__ = [_code__,
+							format[__STRUCT_CALLBASE_REGEX_REPLACE_FORMAT__,_mname],
+							format["(_this call (pts_%1 get '%2'))",_mother,_mname]
+						] call regex_replace
+					} foreach _signatures;
+
+					//update code
+					_decl set [_x,compile _code__];
+				}
+			} foreach _decl;
 
 			missionnamespace setvariable ["pts_"+(_decl get STRUCT_MEM_TYPE),_decl];
 			vtable_s set [_decl get STRUCT_MEM_TYPE,_decl];
