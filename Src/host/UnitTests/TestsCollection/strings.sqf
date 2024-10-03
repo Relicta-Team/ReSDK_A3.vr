@@ -76,13 +76,13 @@ TEST(stringRegex)
 	EXPECT_EQ(_match,"little");
 
 	private _string2 = "test Test Dest test2 Rest";
-	private _matches = [_string2,"[A-Z]\w+/"] call regex_getMatches;
+	private _matches = [_string2,"[A-Z]\w+/g"] call regex_getMatches;
 	EXPECT_EQ(count _matches,3);
 	EXPECT_EQ(_matches select 0,"Test");
 	EXPECT_EQ(_matches select 1,"Dest");
 	EXPECT_EQ(_matches select 2,"Rest");
 
-	_matches = [_string2,"[A-Z](\w+)/",1] call regex_getMatches;
+	_matches = [_string2,"[A-Z](\w+)/g",1] call regex_getMatches;
 	EXPECT_EQ(count _matches,3);
 	EXPECT_EQ(_matches select 0,"est");
 	EXPECT_EQ(_matches select 1,"est");
