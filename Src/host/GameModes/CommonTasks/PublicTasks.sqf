@@ -62,7 +62,7 @@ class(GameObjectKindTask) extends(TaskBase)
 		private _refto = null;
 		{
 			_refto = [_x] call getObjectByRef;
-			assert_str(!isNullReference(_refto),format vec2("Null reference: %1",_x));
+			assert_str(!isNullReference(_refto),format vec2("Null reference: %1; Global reference '%1' not found or object was deleted",_x));
 			_lvals pushBack _refto;
 		} foreach getSelf(__globalRefs);
 
