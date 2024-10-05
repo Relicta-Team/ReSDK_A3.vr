@@ -194,10 +194,11 @@ struct(LootTemplate)
 				(self callv(_generateWeightLists)) params ["_its","_wts"];
 				_it = _its selectRandomWeighted _wts;
 				if isNullVar(_it) then {continue};
-				traceformat("Loot spawn at %1; pick %2 -> %3",_obj arg _its arg _it);
 
 				if (_onlyPreview) then {
 					loot_internal_editor_previewBuffer pushBack (format["  <t color='#3C1EA1'>Проход %1:</t> выпал %2",_i,(_it)]);
+				} else {
+					traceformat("Loot spawn at %1; pick %2 -> %3",_obj arg _its arg _it);
 				};
 
 				_name = _it getv(name);
@@ -214,14 +215,14 @@ struct(LootTemplate)
 				//спавн по количеству
 				for "_lti" from 1 to (_it getv(count) callv(getValue)) do {
 					if (_onlyPreview) then {
-						loot_internal_editor_previewBuffer pushBack (format["    <t color='#D1114B'>Предмет(%1)</t> %2",_lti,_itClass]);
+						loot_internal_editor_previewBuffer pushBack (format["    <t color='#D1114B'>%1:</t> <t color='#D1114B'>%2</t>",_lti,_itClass]);
 						loot_internal_editor_previewBuffer pushBack (format["    Атрибуты: %1",_attrMethods apply {((_x select [0,2]) joinString ".") + " = " + (_x select 2)}]);
 						
 						if !isNullVar(_qualObj) then {
 							private _htItm = getFieldBaseValue(_itClass,"ht");
 							private _htPrec = _qualObj callv(getValue);
 							private _qual = floor linearConversion [0,100,_htPrec,1,_htItm * 2,true];
-							loot_internal_editor_previewBuffer pushBack (format["    HT (Quality): %1, prec: %2",_qual,_htPrec]);
+							loot_internal_editor_previewBuffer pushBack (format["    HT (Quality): %1, prec: %2%3",_qual,_htPrec,"%"]);
 						};
 
 						if !isNullVar(_healthObj) then {
@@ -229,7 +230,7 @@ struct(LootTemplate)
 							private _hpMin = _hpMax * -5;
 							private _hpPick = _healthObj callv(getValue);
 							private _hp = floor linearConversion [100,0,_hpPick,_hpMax,_hpMin,true];
-							loot_internal_editor_previewBuffer pushBack (format["    HP (Health): non-rtt, prec: %2",_hp,_hpPick]);
+							loot_internal_editor_previewBuffer pushBack (format["    HP (Health): non-rtt, prec: %2%3",_hp,_hpPick,"%"]);
 						};
 
 						continue;
