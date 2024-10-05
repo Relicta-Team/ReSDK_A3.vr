@@ -117,19 +117,24 @@ loot_loadConfig = {
 
 loot_processObject = {
 	params ["_type","_obj"];
+	
+	private _curmode = gm_currentMode;
+	assert(!isNullReference(_curmode));
+
 	private _isCollection = "." in _type;
 	private _cfg = ifcheck(_isCollection,loot_mapTemplates,loot_mapConfigs) get _type;
 	if isNullVar(_cfg) exitWith {
 		errorformat("loot::processObject() - Unknown config or tag '%1'",_type);
 	};
 	if (_isCollection) then {
+		//exclude restrictions
+		_cfg = _cfg select {_x callp(checkLootSpawnRestriction,_modeClass)};
+		//select random item
 		_cfg = pick _cfg;
-	};
-	
-	private _curmode = gm_currentMode;
-	assert(!isNullReference(_curmode));
-	private _modeClass = callFunc(_curmode,getClassName);
-	if !(_cfg callp(checkLootSpawnRestriction,_modeClass)) exitWith {};
+	} else {
+		private _modeClass = callFunc(_curmode,getClassName);
+		if !(_cfg callp(checkLootSpawnRestriction,_modeClass)) exitWith {};
+	};	
 
 	_cfg callp(processSpawnLoot,_obj);
 };
