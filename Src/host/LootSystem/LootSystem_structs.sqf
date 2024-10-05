@@ -418,6 +418,7 @@ struct(LootTemplate_RangedValue)
 
 		if (equalTypes(_val,0) || equalTypes(_val,"")) then {
 			self setv(minValue,_val call _precStrToInt);
+			self setv(maxValue,self getv(minValue));
 		} else {
 			private _min = _val getOrDefault ["min",0];
 			private _max = _val getOrDefault ["max",1];
