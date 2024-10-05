@@ -306,7 +306,11 @@ function(mm_handleObjectSave)
 	//?? ---- container content
 	_containerContent = _hash get "containerContent";
 	if !isNullVar(_containerContent) then {
+		private _pre = "";
+		private _post = "";
 		{
+			_pre = "";
+			_post = "";
 			INC(_counterNotNeedLvar);
 			_x params ["_hashitem","_count"];
 			_hashitem = _hashitem call golib_deserializeHashData;
@@ -326,7 +330,12 @@ function(mm_handleObjectSave)
 				_stringStruct = _stringStruct + "," + str _arrAtrs;
 			};
 
-			_objcustomdata pushBackUnique (format["[%1,%2] call (%1 getvariable '"+PROTOTYPE_VAR_NAME+"' getvariable 'createItemInContainer');","%1",_stringStruct]);
+			if ("mark" in _hashItem) then {
+				_pre = "private _ccit = ";
+				_post = format[" go_editor_globalRefs set [""%1"",%2];",_hashItem get "mark","_ccit"];
+			};
+
+			_objcustomdata pushBackUnique (format["%3[%1,%2] call (%1 getvariable '"+PROTOTYPE_VAR_NAME+"' getvariable 'createItemInContainer');%4","%1",_stringStruct,_pre,_post]);
 		} foreach _containerContent;
 	};
 
