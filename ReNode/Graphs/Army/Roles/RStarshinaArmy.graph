@@ -39,14 +39,14 @@
               "Рукопашный бой",
               [
                 2.0,
-                3.0
+                4.0
               ]
             ],
             [
               "Фехтование",
               [
                 2.0,
-                3.0
+                4.0
               ]
             ],
             [
@@ -60,14 +60,14 @@
               "Пистолеты",
               [
                 1.0,
-                3.0
+                4.0
               ]
             ],
             [
               "Винтовки",
               [
                 1.0,
-                3.0
+                4.0
               ]
             ],
             [
@@ -97,6 +97,13 @@
                 0.0,
                 1.0
               ]
+            ],
+            [
+              "Топоры",
+              [
+                0.0,
+                3.0
+              ]
             ]
           ],
           "_currentSpawnLocation":[
@@ -124,15 +131,15 @@
       "graphVersion":2
     },
     "mpos":[
-      643.1235641684074,
-      993.2447283927495,
-      1292.5313428791528,
-      1216.500087415672
+      757.8958704647478,
+      1101.2657225540108,
+      1062.9867302864718,
+      1000.4580990931489
     ],
-    "mzoom":-0.42
+    "mzoom":-0.29
   },
   "nodes":{
-    "0x175d529a590":{
+    "0x24f77b0ed20":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Sequence_16x",
       "name":"Последовательность",
@@ -228,7 +235,7 @@
       },
       "class_":"operators.sequence"
     },
-    "0x175d4da8c10":{
+    "0x24f77b0f860":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в инвентаре",
@@ -267,7 +274,7 @@
       },
       "class_":"func.createItemInInventory"
     },
-    "0x175cefd6550":{
+    "0x24f63665e50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в контейнере",
@@ -305,7 +312,7 @@
       },
       "class_":"func.createItemInContainer"
     },
-    "0x175c84b5610":{
+    "0x24f77b0f200":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Cast_16x",
       "name":"Преобразовать тип",
@@ -344,7 +351,7 @@
       },
       "class_":"control.castto"
     },
-    "0x175d4e232d0":{
+    "0x24f63665340":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -379,7 +386,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x175d4e24050":{
+    "0x24f63665be0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Sequence_16x",
       "name":"Последовательность",
@@ -462,7 +469,7 @@
       },
       "class_":"operators.sequence"
     },
-    "0x175d4e24f10":{
+    "0x24f63667530":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в инвентаре",
@@ -501,7 +508,7 @@
       },
       "class_":"func.createItemInInventory"
     },
-    "0x175d0191d90":{
+    "0x24f63666150":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -544,7 +551,7 @@
       },
       "class_":"fields.GameObject.name_0.set"
     },
-    "0x175d0193dd0":{
+    "0x24f63666480":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -587,7 +594,7 @@
       },
       "class_":"fields.GameObject.name_0.set"
     },
-    "0x175d01cd290":{
+    "0x24f63666db0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -630,7 +637,7 @@
       },
       "class_":"fields.GameObject.name_0.set"
     },
-    "0x175d01cc890":{
+    "0x24f63666060":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Задать типы ключа",
@@ -669,7 +676,7 @@
       },
       "class_":"methods.Key._setKeyOwnerWrapper_0"
     },
-    "0x175d01ce350":{
+    "0x24f63665610":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",
@@ -704,7 +711,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onDeadBasicWrapper_0"
     },
-    "0x175d01cf690":{
+    "0x24f63667440":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\Icon_Sequencer_Key_Part_24x",
       "name":"Получить текущий режим",
@@ -742,7 +749,7 @@
       },
       "class_":"methods.ScriptedRole.getCurrentGamemode_0"
     },
-    "0x175d01cfc10":{
+    "0x24f63665400":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Cast_16x",
       "name":"Преобразовать тип",
@@ -781,7 +788,7 @@
       },
       "class_":"control.castto"
     },
-    "0x175cd901750":{
+    "0x24f636661b0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -824,7 +831,7 @@
       },
       "class_":"fields.GMArmy.Smert_starshiny_0.set"
     },
-    "0x175cd9032d0":{
+    "0x24f636672f0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -867,7 +874,7 @@
       },
       "class_":"fields.GameObject.name_0.set"
     },
-    "0x175d0193c50":{
+    "0x24f77b0f140":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Добавить текст",
@@ -906,7 +913,7 @@
       },
       "class_":"methods.IWritableContentItem.appendText_0"
     },
-    "0x175cd8fdf90":{
+    "0x24f77f96810":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Форматировать строку",
@@ -1012,7 +1019,7 @@
       },
       "class_":"string.stringFormat"
     },
-    "0x175cd8fe7d0":{
+    "0x24f77b0cad0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать предмет в контейнере",
@@ -1050,7 +1057,7 @@
       },
       "class_":"func.createItemInContainer"
     },
-    "0x175cd8fe250":{
+    "0x24f671a9f40":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Полное имя моба в склонении",
@@ -1089,7 +1096,7 @@
       },
       "class_":"methods.BasicMob.getNameEx_0"
     },
-    "0x175cd99b510":{
+    "0x24f66db4aa0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -1124,7 +1131,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x175cd99aad0":{
+    "0x24f66db53d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\Icon_Sequencer_Key_Part_24x",
       "name":"Получить текущий режим",
@@ -1162,7 +1169,7 @@
       },
       "class_":"methods.ScriptedRole.getCurrentGamemode_0"
     },
-    "0x175d38cafd0":{
+    "0x24f66db4950":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -1204,7 +1211,7 @@
       },
       "class_":"fields.GMArmy.Starshina_0.set"
     },
-    "0x175cd9991d0":{
+    "0x24f66db5ca0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_OverrideableFunction_16x",
       "name":"Вызов базового метода",
@@ -1285,7 +1292,7 @@
       },
       "class_":"control.supercall"
     },
-    "0x175cd999d10":{
+    "0x24f66db5bb0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Cast_16x",
       "name":"Преобразовать тип",
@@ -1324,7 +1331,7 @@
       },
       "class_":"control.castto"
     },
-    "0x175cd956510":{
+    "0x24f61c91760":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Cast_16x",
       "name":"Преобразовать тип",
@@ -1367,401 +1374,401 @@
   "connections":[
     {
       "in":[
-        "0x175d529a590",
+        "0x24f77b0ed20",
         "Вход"
       ],
       "out":[
-        "0x175d4e24f10",
+        "0x24f63667530",
         "Выход"
       ]
     },
     {
       "out":[
-        "0x175d529a590",
+        "0x24f77b0ed20",
         "Действие 1"
       ],
       "in":[
-        "0x175d0193dd0",
+        "0x24f63666480",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x175d529a590",
+        "0x24f77b0ed20",
         "Действие 2"
       ],
       "in":[
-        "0x175cefd6550",
+        "0x24f63665e50",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x175d529a590",
+        "0x24f77b0ed20",
         "Действие 3"
       ],
       "in":[
-        "0x175cd8fe7d0",
+        "0x24f77b0cad0",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x175d4da8c10",
+        "0x24f77b0f860",
         "Вход"
       ],
       "out":[
-        "0x175d4e24050",
+        "0x24f63665be0",
         "Действие 1"
       ]
     },
     {
       "in":[
-        "0x175d4da8c10",
+        "0x24f77b0f860",
         "Персонаж"
       ],
       "out":[
-        "0x175c84b5610",
+        "0x24f77b0f200",
         "Объект"
       ]
     },
     {
       "out":[
-        "0x175d4da8c10",
+        "0x24f77b0f860",
         "Выход"
       ],
       "in":[
-        "0x175d0191d90",
+        "0x24f63666150",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x175d4da8c10",
+        "0x24f77b0f860",
         "Предмет"
       ],
       "in":[
-        "0x175d0191d90",
+        "0x24f63666150",
         "Цель"
       ]
     },
     {
       "in":[
-        "0x175cefd6550",
+        "0x24f63665e50",
         "Контейнер"
       ],
       "out":[
-        "0x175d4e24f10",
+        "0x24f63667530",
         "Предмет"
       ]
     },
     {
       "out":[
-        "0x175cefd6550",
+        "0x24f63665e50",
         "Выход"
       ],
       "in":[
-        "0x175d01cc890",
+        "0x24f63666060",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x175cefd6550",
+        "0x24f63665e50",
         "Предмет"
       ],
       "in":[
-        "0x175d01cd290",
+        "0x24f63666db0",
         "Цель"
       ]
     },
     {
       "out":[
-        "0x175cefd6550",
+        "0x24f63665e50",
         "Предмет"
       ],
       "in":[
-        "0x175d01cc890",
+        "0x24f63666060",
         "Цель"
       ]
     },
     {
       "in":[
-        "0x175c84b5610",
+        "0x24f77b0f200",
         "Вход"
       ],
       "out":[
-        "0x175d4e232d0",
+        "0x24f63665340",
         "Выход"
       ]
     },
     {
       "in":[
-        "0x175c84b5610",
+        "0x24f77b0f200",
         "Входной объект"
       ],
       "out":[
-        "0x175d4e232d0",
+        "0x24f63665340",
         "Моб"
       ]
     },
     {
       "out":[
-        "0x175c84b5610",
+        "0x24f77b0f200",
         "Успешное преобразование"
       ],
       "in":[
-        "0x175d4e24050",
+        "0x24f63665be0",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x175c84b5610",
+        "0x24f77b0f200",
         "Объект"
       ],
       "in":[
-        "0x175d4e24f10",
+        "0x24f63667530",
         "Персонаж"
       ]
     },
     {
       "out":[
-        "0x175d4e232d0",
+        "0x24f63665340",
         "Моб"
       ],
       "in":[
-        "0x175cd8fe250",
+        "0x24f671a9f40",
         "Цель"
       ]
     },
     {
       "out":[
-        "0x175d4e24050",
+        "0x24f63665be0",
         "Действие 2"
       ],
       "in":[
-        "0x175d4e24f10",
+        "0x24f63667530",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x175d4e24f10",
+        "0x24f63667530",
         "Предмет"
       ],
       "in":[
-        "0x175d0193dd0",
+        "0x24f63666480",
         "Цель"
       ]
     },
     {
       "out":[
-        "0x175d4e24f10",
+        "0x24f63667530",
         "Предмет"
       ],
       "in":[
-        "0x175cd8fe7d0",
+        "0x24f77b0cad0",
         "Контейнер"
       ]
     },
     {
       "in":[
-        "0x175d01cd290",
+        "0x24f63666db0",
         "Вход"
       ],
       "out":[
-        "0x175d01cc890",
+        "0x24f63666060",
         "Выход"
       ]
     },
     {
       "out":[
-        "0x175d01ce350",
+        "0x24f63665610",
         "Выход"
       ],
       "in":[
-        "0x175d01cfc10",
+        "0x24f63665400",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x175d01cf690",
+        "0x24f63667440",
         "Результат"
       ],
       "in":[
-        "0x175d01cfc10",
+        "0x24f63665400",
         "Входной объект"
       ]
     },
     {
       "out":[
-        "0x175d01cfc10",
+        "0x24f63665400",
         "Успешное преобразование"
       ],
       "in":[
-        "0x175cd901750",
+        "0x24f636661b0",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x175d01cfc10",
+        "0x24f63665400",
         "Объект"
       ],
       "in":[
-        "0x175cd901750",
+        "0x24f636661b0",
         "Цель"
       ]
     },
     {
       "in":[
-        "0x175cd9032d0",
+        "0x24f636672f0",
         "Вход"
       ],
       "out":[
-        "0x175cd8fe7d0",
+        "0x24f77b0cad0",
         "Выход"
       ]
     },
     {
       "in":[
-        "0x175cd9032d0",
+        "0x24f636672f0",
         "Цель"
       ],
       "out":[
-        "0x175cd8fe7d0",
+        "0x24f77b0cad0",
         "Предмет"
       ]
     },
     {
       "out":[
-        "0x175cd9032d0",
+        "0x24f636672f0",
         "Выход"
       ],
       "in":[
-        "0x175cd8fe250",
+        "0x24f671a9f40",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x175d0193c50",
+        "0x24f77b0f140",
         "Вход"
       ],
       "out":[
-        "0x175cd8fe250",
+        "0x24f671a9f40",
         "Выход"
       ]
     },
     {
       "in":[
-        "0x175d0193c50",
+        "0x24f77b0f140",
         "Цель"
       ],
       "out":[
-        "0x175cd8fe7d0",
+        "0x24f77b0cad0",
         "Предмет"
       ]
     },
     {
       "in":[
-        "0x175d0193c50",
+        "0x24f77b0f140",
         "Текст"
       ],
       "out":[
-        "0x175cd8fdf90",
+        "0x24f77f96810",
         "Новая строка"
       ]
     },
     {
       "in":[
-        "0x175cd8fdf90",
+        "0x24f77f96810",
         "Элемент"
       ],
       "out":[
-        "0x175cd8fe250",
+        "0x24f671a9f40",
         "Результат"
       ]
     },
     {
       "out":[
-        "0x175cd99b510",
+        "0x24f66db4aa0",
         "Выход"
       ],
       "in":[
-        "0x175cd9991d0",
+        "0x24f66db5ca0",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x175cd99b510",
+        "0x24f66db4aa0",
         "Моб"
       ],
       "in":[
-        "0x175cd956510",
+        "0x24f61c91760",
         "Входной объект"
       ]
     },
     {
       "out":[
-        "0x175cd99aad0",
+        "0x24f66db53d0",
         "Результат"
       ],
       "in":[
-        "0x175cd999d10",
+        "0x24f66db5bb0",
         "Входной объект"
       ]
     },
     {
       "in":[
-        "0x175d38cafd0",
+        "0x24f66db4950",
         "Вход"
       ],
       "out":[
-        "0x175cd956510",
+        "0x24f61c91760",
         "Успешное преобразование"
       ]
     },
     {
       "in":[
-        "0x175d38cafd0",
+        "0x24f66db4950",
         "Цель"
       ],
       "out":[
-        "0x175cd999d10",
+        "0x24f66db5bb0",
         "Объект"
       ]
     },
     {
       "in":[
-        "0x175d38cafd0",
+        "0x24f66db4950",
         "Значение"
       ],
       "out":[
-        "0x175cd956510",
+        "0x24f61c91760",
         "Объект"
       ]
     },
     {
       "out":[
-        "0x175cd9991d0",
+        "0x24f66db5ca0",
         "Выход"
       ],
       "in":[
-        "0x175cd999d10",
+        "0x24f66db5bb0",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x175cd999d10",
+        "0x24f66db5bb0",
         "Успешное преобразование"
       ],
       "in":[
-        "0x175cd956510",
+        "0x24f61c91760",
         "Вход"
       ]
     }
