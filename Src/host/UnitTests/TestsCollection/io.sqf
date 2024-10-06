@@ -120,14 +120,16 @@ TEST(LootSystem_AllCheckBase)
 
 	private _fit = _itemList select (_itemlist findif {_x getv(itemType) == "Item"});
 	ASSERT_EQ(_fit getv(itemType),"Item");
-	ASSERT_EQ(_fit getv(countMin),1);
-	ASSERT_EQ(_fit getv(countMax),3);
+	ASSERT_EQ(_fit getv(minValue),1);
+	ASSERT_EQ(_fit getv(maxValue),3);
+	ASSERT_EQ(_fit callv(getValue),35);
 
 	private _sit = _itemList select (_itemlist findif {_x getv(itemType) == "Key"});
 	ASSERT_EQ(_sit getv(itemType),"Key");
-	ASSERT_EQ(_sit getv(countMin),4);
-	ASSERT_EQ(_sit getv(countMax),4);
-	ASSERT_EQ(_sit callv(isRangeBasedCount),false);
+	ASSERT_EQ(_sit getv(minValue),4);
+	ASSERT_EQ(_sit getv(maxValue),4);
+	ASSERT_EQ(_sit callv(getValue),100);
+	ASSERT_EQ(_sit getv(isRangeBased),false);
 
 	//compare checks
 	private _clst = _lootObj getv(allowMaps);

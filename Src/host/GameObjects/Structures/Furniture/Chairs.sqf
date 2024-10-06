@@ -52,6 +52,7 @@ class(OldGreenToiletBowl) extends(IChair)
 	var(model,"ml\ml_object_new\model_24\tolchek.p3d");
 	var(material,"MatMetal");
 	var(name,"Туалет");
+	getter_func(isMovable,false);
 	getter_func(getChairOffsetPos,[-0.0479994 arg -0.0999994 arg -1.1]);
 	getterconst_func(getChairOffsetDir,180);
 endclass

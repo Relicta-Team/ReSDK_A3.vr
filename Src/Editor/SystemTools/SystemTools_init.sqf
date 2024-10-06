@@ -17,3 +17,4 @@
 #include "ClassValidator.sqf"
 #include "LightConfigValidator.sqf"
 #include "LigthSimulation.sqf"
+#include "LootChecker.sqf"

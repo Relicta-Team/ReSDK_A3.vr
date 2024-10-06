@@ -102,7 +102,7 @@ Type: function
 Description: tree builder maker
 - Param: _flist
 
-File: [host\FileSystem\FileSystem_init.sqf at line 36](../../../Src/host/FileSystem/FileSystem_init.sqf#L36)
+File: [host\FileSystem\FileSystem_init.sqf at line 43](../../../Src/host/FileSystem/FileSystem_init.sqf#L43)
 ## fso_getFiles
 
 Type: function
@@ -113,7 +113,7 @@ Description:
 - Param: _recursive (optional, default false)
 - Param: _internalFlag (optional, default true)
 
-File: [host\FileSystem\FileSystem_init.sqf at line 78](../../../Src/host/FileSystem/FileSystem_init.sqf#L78)
+File: [host\FileSystem\FileSystem_init.sqf at line 85](../../../Src/host/FileSystem/FileSystem_init.sqf#L85)
 ## fso_debug_createTreeExample
 
 Type: function
@@ -123,4 +123,4 @@ Type: function
 Description: тестовая функция для просмотра директорий. параметр _t - строка (путь)
 - Param: _t
 
-File: [host\FileSystem\FileSystem_init.sqf at line 122](../../../Src/host/FileSystem/FileSystem_init.sqf#L122)
+File: [host\FileSystem\FileSystem_init.sqf at line 129](../../../Src/host/FileSystem/FileSystem_init.sqf#L129)
