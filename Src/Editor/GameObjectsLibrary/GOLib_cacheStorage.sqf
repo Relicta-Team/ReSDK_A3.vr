@@ -94,7 +94,7 @@ init_function(golib_cs_initAll)
 			_objPtr = _y;
 
 			//check if mark defined in container-side
-			if (_markName in golib_internal_map_contMarks) exitWith {};
+			if (_markName in golib_internal_map_contMarks) then {continue};
 
 			if (_objPtr call golib_hasHashData) then {
 				_hash = [_objPtr,false] call golib_getHashData;
