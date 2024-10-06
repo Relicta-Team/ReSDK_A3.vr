@@ -153,6 +153,7 @@ menu_structureLayout = [
 			"text:Проверка несуществующих конфигов света на карте;act:call lightValidator_process",
 			"text:Проверка путей классов;act:call systools_checkClassPathes",
 			"text:Проверка классов с одинаковыми моделями;act:call classValidator_validateModels",
+			"text:Проверка шансов спавна лута;act:call systools_openLootCheck",
 			"",
 			"text:Проверка нагрузки сцены игровыми объектами;act:call pertest_chunkPerformanceToggle;"
 		],

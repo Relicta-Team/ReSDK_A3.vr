@@ -12,6 +12,11 @@ file_const_defaultAsyncWriteTimeout = 5;
 #define EXTENDED_LOGGING_ASYNCCOPY
 #define EXTENDED_LOGGING_ASYNCUNLOCK
 
+init_function(io_init)
+{
+	#include "..\..\host\FileSystem\FileSystem_init.sqf"
+}
+
 function(file_open)
 {
 	params ["_path",["_isRelative",true],["_args",""]];
