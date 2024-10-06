@@ -93,6 +93,9 @@ init_function(golib_cs_initAll)
 			_markName = _x;
 			_objPtr = _y;
 
+			//check if mark defined in container-side
+			if (_markName in golib_internal_map_contMarks) then {continue};
+
 			if (_objPtr call golib_hasHashData) then {
 				_hash = [_objPtr,false] call golib_getHashData;
 				_hasMark = "mark" in _hash;
@@ -102,7 +105,7 @@ init_function(golib_cs_initAll)
 					_listEd = _hash get "edConnected";
 					_baseCount = count _listEd;
 					{
-						if (!(_objPtr in golib_internal_map_marks)) then {
+						if (!(_x in golib_internal_map_marks)) then {
 							_listEd set [_forEachIndex,objnull];
 						};
 					} foreach _listEd;
@@ -123,9 +126,6 @@ init_function(golib_cs_initAll)
 					golib_internal_map_connected set [_hash get "mark",_hash get "edConnected"];
 				};
 			} else {
-				
-				//check if mark defined in container-side
-				if (_markName in golib_internal_map_contMarks) exitWith {};
 
 				["Unexpected object on sync electronics %1",_x] call printError;
 			};
