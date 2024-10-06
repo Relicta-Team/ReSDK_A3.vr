@@ -57,7 +57,7 @@ Count modules: 55
  - [Gender](host//Gender.md) - 1 files
  - [GURPS](host//GURPS.md) - 3 files
  - [Logger](host//Logger.md) - 1 files
- - [LootSystem](host//LootSystem.md) - 3 files
+ - [LootSystem](host//LootSystem.md) - 2 files
  - [MapManager](host//MapManager.md) - 15 files
  - [Materials](host//Materials.md) - 3 files
  - [MatterSystem](host//MatterSystem.md) - 11 files
