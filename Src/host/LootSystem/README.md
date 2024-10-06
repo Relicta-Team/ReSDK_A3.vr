@@ -157,8 +157,8 @@ pass_count: 2
 
 # будет выбрано от 3 до 6 позиций
 pass_count:
-  - min: 3
-  - max: 6
+  min: 3
+  max: 6
 
 # one-line вариант
 pass_count: {min: 3, max: 6}
