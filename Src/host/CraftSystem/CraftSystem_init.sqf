@@ -32,7 +32,7 @@
 
 //key int, val ICraftRecipeBase
 csys_map_allCraftRefs = createHashMap;
-//key string(typename), val array<ICraftRecipeBase>
+//key string(typename) as target, val array<ICraftRecipeBase>
 csys_map_allInteractiveCrafts = createHashMap;
 //key string(typename), val array<ICraftRecipeBase>
 csys_map_allSystemCrafts = createHashMap; //! В будущем можно перенести хранение буферов крафтов на типы классов
@@ -81,7 +81,7 @@ csys_init = {
 	{
 		_x params ["_file","_content"];
 		csys_internal_lastLoadedFile = _file;
-		csys_internal_configNumber = _foreachindex + 1;
+		csys_internal_configNumber = 1;
 		traceformat("Loading craft file: %1",_file);
 
 		if !([_content] call csys_loadConfig) exitWith {
@@ -103,6 +103,7 @@ csys_loadConfig = {
 			_isok = false;
 		};
 		INC(_loaded);
+		INC(csys_internal_configNumber);
 	} foreach _cfgContent;
 	traceformat("Loaded %1 configs (%2 sec)",_loaded arg tickTime - _t);
 

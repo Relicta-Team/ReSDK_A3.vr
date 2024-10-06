@@ -227,3 +227,41 @@ csys_onCraftEndPreview = {
 
 	_params call _postCreate;
 };
+
+//interactor
+
+// if return true - do redirected interact
+csys_handleInteractor = {
+	params ["_usr","_handItem","_targ"];
+
+	traceformat("csys::handleInteractor() - %1 interacted from %2 to %3",_usr arg _handItem arg _targ)
+	private _targClass = callFunc(_targ,getClassName);
+	private _listCrafts = csys_map_allInteractiveCrafts get _targClass;
+	if isNullVar(_listCrafts) exitWith {false};
+
+	private _foundedRecipe = null;
+	traceformat("csys::handleInteractor() - possible crafts: %1",_listCrafts);
+	{
+		private _handItmIngr = _x getv(hand_item) callv(createIngredientTempValidator);
+		private _targIngr = _x getv(target) callv(createIngredientTempValidator);
+
+		if (_handItmIngr callp(isValidIngredient,_objIngredient)) then {
+			_handItmIngr callp(handleValidIngredient,_objIngredient);
+		};
+
+		if (_targIngr callp(isValidIngredient,_objIngredient)) then {
+			_targIngr callp(handleValidIngredient,_objIngredient);
+		};
+
+		if (_handItmIngr callv(isReadyIngredient) && {_targIngr callv(isReadyIngredient)}) exitWith {
+			_foundedRecipe = _x;
+		};
+
+	} foreach _listCrafts;
+	
+	if isNullVar(_foundedRecipe) exitWith {false};
+
+	
+
+	false
+};

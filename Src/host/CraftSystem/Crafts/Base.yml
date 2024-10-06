@@ -41,3 +41,13 @@
   result:
     class: Bread
     count: 1
+
+- type: interact
+  required:
+    components:
+      hand_item: 
+        class: Knife
+      target:
+        class: IFoodItem
+  result:
+    class: Svetlolik

@@ -13,343 +13,9 @@
 // because keyword used in struct field
 #undef class
 
-struct(CraftDynamicPrecVal__)
-	def(isPrecentage) false;
-	def(val) 0;
-	def(init)
-	{
-		params ["_val"];
-		private _isPrec = equalTypes(_val,"");
-		self setv(isPrecentage,_isPrec);
-		
-		self setv(val, ifcheck(_isPrec,parseNumberSafe(_val),_val) );
-	}
-
-	def(validate)
-	{
-		params ["_maxVal","_checkVal",["_greaterThan",true]];
-		private _funcValid = ifcheck(_greaterThan,{(_this select 0) >= (_this select 1)},{(_this select 0) <= (_this select 1)});
-		
-		if (self getv(isPrecentage)) then {
-			[_checkVal,precentage(_maxVal,self getv(val))] call _funcValid;
-		} else {
-			[_checkVal,self getv(val)] call _funcValid;
-		};
-	}
-
-	def(str) { format["%1%2",self getv(val),ifcheck(self getv(isPrecentage),"%","")] }
-endstruct
-
-struct(CraftDynamicCountRange__)
-	def(isRangeBased) false;
-	def(val) null;
-	def(init)
-	{
-		params ["_v"];
-		if equalTypes(_v,0) then {
-			self setv(isRangeBased,false);
-			self setv(val,_v);
-		} else {
-			assert_str(equalTypes(_v,hashMapNull),"Invalid type");
-			assert("min" in _v);
-			assert("max" in _v);
-			self setv(isRangeBased,true);
-			self setv(val,vec2(_v get "min",_v get "max"));
-		};
-	}
-	def(getValue)
-	{
-		if (self getv(isRangeBased)) then {
-			(self getv(val)) params ["_min","_max"];
-			rand(_min,_max)
-		} else {
-			self getv(val)
-		};
-	}
-
-	def(str)
-	{
-		format["Count:%1",ifcheck(self getv(isRangeBased), ((self getv(val)) apply {str _x}) joinString "-", self getv(val)  )]
-	}
-endstruct
-
-struct(CraftRecipeComponent)
-	def(class) null;
-	def(isMultiSelector) false;
-	def(count) 1;
-	def(hp) null; //required helath of ingredient
-	def(checkTypeOf) true;
-	def(optional) false;
-	def(destroy) true;
-	def(conditionEvent) {true};
-	def(metaTag) ""; //!reserved
-
-	//for craft processor
-	def(_getLeftCount) {
-		private _contains = (count(self getv(_foundItems)));
-		private _needs = self getv(count);
-
-		(_needs - _contains) max 0
-	}
-	def(_foundItems) null;
-	def(_isReadyIngredient) false;
-
-	def(init)
-	{
-		params ["_class"];
-		if equalTypes(_class,[]) then {
-			self setv(isMultiSelector,true);
-		};
-		self setv(class,_class);
-	}
-
-	def(str)
-	{
-		format["%3%1%4 x%2",ifcheck(self getv(isMultiSelector),self getv(class) joinString "|",self getv(class)),self getv(count),ifcheck(self getv(checkTypeOf),"^",""),ifcheck(self getv(optional),"?","")]
-	}
-
-	def(getRequiredComponentName)
-	{
-		if (self getv(isMultiSelector)) then {
-			private _itms = (self getv(class)) apply {getFieldBaseValueWithMethod(_x,"name","getName")};
-			private _iListUni = [];
-			{
-				if !array_exists(_iListUni,_x) then {
-					_iListUni pushBack _x;
-				};
-			} foreach _itms;
-			private _itmsTxt = _iListUni joinString " или ";
-			_itmsTxt
-		} else {
-			private _itmsTxt = getFieldBaseValueWithMethod(self getv(class),"name","getName");
-			_itmsTxt
-		}
-	}
-
-	def(getComponentTextData)
-	{
-		private _textData = self callv(getRequiredComponentName);
-
-		if (self getv(count) > 1) then {
-			modvar(_textData) + (format[" (x%1)",self getv(count)]);
-		};
-		if (self getv(optional)) then {
-			modvar(_textData) + " (необяз.)"
-		};
-
-		_textData
-	}
-
-	def(_ingredientRegister)
-	{
-		params ["_storageRef","_recipeRef"];
-		private _classList = self getv(class);
-		if !(self getv(isMultiSelector)) then {
-			_classList = [_classList];
-		};
-
-		private _checkTypeOf = self getv(checkTypeOf);
-		//private _isOptional = self getv(optional);
-		private _store = _storageRef;
-
-		private _registererFunc = {
-			_x = tolower _x;
-			if !(_x in _store) then {
-				_store set [_x,[_recipeRef]];
-			} else {
-				(_store get _x) pushBack _recipeRef;
-			};
-		};
-
-		{
-			if (_checkTypeOf) then {
-				_registererFunc foreach getAllObjectsTypeOfStr(_x);
-			};
-
-			call _registererFunc;
-			false
-		} count _classList;
-	}
-
-	//creating temp object for validation
-	def(createIngredientTempValidator)
-	{
-		private _cpy = struct_copy(self);
-		_cpy setv(_foundItems,[]);
-		assert(_cpy getv(class));
-		_cpy
-	}
-
-	def(isValidIngredient)
-	{
-		params ["_ingredient"];
-		private _checkTypeOf = self getv(checkTypeOf);
-		private _valid = false;
-		call {
-			private _hasClass = false;
-			if (self getv(isMultiSelector)) then {
-				{
-					if (_checkTypeOf) then {
-						_hasClass = isTypeStringOf(_ingredient,_x);
-					} else {
-						_hasClass = callFunc(_ingredient,getClassName) == _x;
-					};
-					if (_hasClass) exitWith {};
-				} foreach (self getv(class));
-			} else {
-				_hasClass = ifcheck(_checkTypeOf,isTypeStringOf(_ingredient,self getv(class)),callFunc(_ingredient,getClassName) == (self getv(class)));
-			};
-
-			if (!_hasClass) exitWith {};//no class found
-
-			//condition lambda
-			private _condCheck = [_ingredient] call (self getv(conditionEvent));
-			if (!_condCheck) exitWith {};//condition failed
-
-			//validate hp
-			private _validHP = true;
-			if isNull(self getv(hp)) then {
-				_validHP = false;
-				private _hpObj = self getv(hp);
-				private _maxHp = getVar(_ingredient,hpMax);
-				private _curHp = getVar(_ingredient,hp);
-				_validHP = _hpObj callp(validate,_maxHp arg _curHp);
-			};
-			
-			if (!_validHP) exitWith {};//hp check failed
-
-			_valid = true;
-		};
-		
-		_valid
-	}
-
-	//called on found valid ingredient
-	def(handleValidIngredient)
-	{
-		params ["_ingredient"];
-		private _fList = self getv(_foundItems);
-		_fList pushBack [_ingredient,getVar(_ingredient,loc)];
-
-		if ((self callv(_getLeftCount)) == 0) then {
-			self setv(_isReadyIngredient,true);
-		};
-	}
-
-	def(isReadyIngredient)
-	{
-		self getv(_isReadyIngredient);
-	}
-
-	//валидация подготовленных ингредиентов. одни должны существовать и не менять меш (что происходит при перемещении)
-	def(canCraftFromIngredient)
-	{
-		(self callv(isReadyIngredient)
-		|| (self getv(optional))) && {
-			all_of(self getv(_foundItems) apply {!isNullReference(_x select 0) && {!isNullReference(_x select 1)}})
-		}
-	}
-
-	//вызывается для ингредиентов при успешном карфте
-	def(onComponentUsed)
-	{
-		if (self getv(destroy)) then {
-			{
-				_x params ["_itm","_real"];
-				[_itm] call deleteGameObject;
-			} foreach (self getv(_foundItems));
-		};
-	}
-
-endstruct
-
-struct(CraftRecipeResult)
-	def(class) null;
-	def(count) null; //type CraftDynamicCountRange__
-	def(radius) 0;
-	def(modifiers) null;
-
-	def(_model) null; //model path
-
-	def(init)
-	{
-		params ["_class","_count"];
-		self setv(class,_class);
-		self setv(count,struct_newp(CraftDynamicCountRange__,_count));
-		self setv(modifiers,[]);
-
-		self setv(_model,getFieldBaseValue(_class,"model"))
-	}
-
-	def(str)
-	{
-		format["%1 %2",self getv(class),(self getv(count))];
-	}
-
-	def(onCrafted)
-	{
-		params ["_craftCtx"];
-		
-		private _pos = _craftCtx get "position";
-		private _dir = _craftCtx get "direction";
-		private _usr = _craftCtx get "user";
-		private _robj = _craftCtx get "recipe";
-
-		private _realPos = [_pos,self getv(radius)] call randomRadius;
-		private _class = self getv(class);
-		if !isNullVar(_class) then {
-			for "_i" from 1 to (self getv(count) callv(getValue)) do {
-				private _newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
-			};
-		};
-
-		if ((_craftCtx get "roll_result") == DICE_CRITSUCCESS) then {
-			callFuncParams(_usr,localSay,"<t size='1.5'>Критический успех</t>" arg "mind");
-		};
-		
-		callFuncParams(_usr,meSay,"создаёт " + (_robj getv(name)));
-	}
-
-	//получает путь до результирующей модели
-	def(getModelPath)
-	{
-		self getv(_model)
-	}
-
-endstruct
-
-struct(CraftRecipeResultModifier)
-	def(name) null;
-	def(params) [];
-	def(__raised) false;
-
-	def(init)
-	{
-		params ["_paramData"];
-		if equalTypes(_paramData,"") exitWith {
-			self setv(name,_paramData);
-		};
-
-		private _pname = _paramData get "name";
-		if not_equalTypes(_pname,"") exitWith {self setv(__raised,true)};
-
-		private _val = _paramData get "value";
-		if !isNullVar(_val) exitWith {
-			self setv(params,[_val]);	
-		};
-		_val = _paramData get "parameters";
-		if !isNullVar(_val) exitWith {
-			self setv(params,[_val]);
-		};
-	}
-
-	def(str)
-	{
-		format["%1(%2)",struct_typename(self),self getv(name)]
-	}
-
-endstruct
-
+#include "Craft_UtilityTypes_struct.sqf"
+#include "Craft_Componets_struct.sqf"
+#include "Craft_Result_struct.sqf"
 
 struct(ICraftRecipeBase)
 	def(name) "";
@@ -362,6 +28,8 @@ struct(ICraftRecipeBase)
 	def(getType) { self getv(c_type) };
 
 	def(hasPreviewCraft) { (self getv(c_type)) == "building" }
+
+	def(isInteractCraft) { (self getv(c_type))=="interact" }
 
 	def(sourceFile) "";
 	def(sourceItem) -1;
@@ -470,83 +138,94 @@ struct(ICraftRecipeBase)
 		traceformat("COMPONENTS CHECK %1",_content)
 		{
 			
-			private _cls = _x get "class";
-			private _exitClasscheck = false;
-			if isNullVar(_cls) exitWith {
-				message = "Property 'class' must be defined in components";
-			};
-			if not_equalTypes(_cls,[]) then {_cls = [_cls,true] call csys_prepareRangedString};
-
-			{
-
-				if not_equalTypes(_x,"") exitWith {
-					_exitClasscheck = true;
-					refset(_refErr,"Property 'class' wrong type; Expected string");
-				};
-				_x = [_x] call csys_prepareRangedString;
-				_cls set [_foreachindex,_x];
-
-				if !isImplementClass(_x) exitWith {
-					_exitClasscheck = true;
-					refset(_refErr,"Ingredient class not found: " + _x);
-				};
-				
-			} foreach _cls;
-			
-			if (_exitClasscheck) exitWith {};
-			if (count _cls == 1) then {
-				_cls = _cls select 0;
-			};
-			
-			_ingredient = struct_newp(CraftRecipeComponent,_cls);
-
-			GETVAL_INT(_x, vec2("count",1));
-			FAIL_CHECK_REFSET(_refErr);
-			if !inRange(value,1,100) exitWith {
-				refset(_refErr,"Invalid count: " + (str value));
-			};
-			_ingredient setv(count,value);
-
-			private _hpval = _x get "hp";
-			if !isNullVar(_hpval) then {
-				private _hpObj = struct_newp(CraftDynamicPrecVal__, _hpval);
-				_ingredient setv(hp,_hpObj);
-			};
-
-			GETVAL_BOOL(_x, vec2("check_type_of",_ingredient getv(checkTypeOf)));
-			FAIL_CHECK_REFSET(_refErr);
-			_ingredient setv(checkTypeOf,value);
-
-			GETVAL_BOOL(_x, vec2("optional",_ingredient getv(optional)));
-			FAIL_CHECK_REFSET(_refErr);
-			_ingredient setv(optional,value);
-
-			GETVAL_BOOL(_x, vec2("destroy",_ingredient getv(destroy)));
-			FAIL_CHECK_REFSET(_refErr);
-			_ingredient setv(destroy,value);
-
-			GETVAL_STR(_x, vec2("condition",null));
-			FAIL_CHECK_REFSET;
-			if !isNullVar(value) then {
-				private _code = [value] call csys_generateInsturctions;
-				if isNullVar(_code) exitWith {
-					FAIL_CHECK_REFSET(_refErr);
-				};
-				_ingredient setv(conditionEvent,_code);
-			};
-
-			
-			GETVAL_STR(_x , vec2("meta_tag",null));
-			FAIL_CHECK_REFSET;
-			_ingredient setv(metaTag,value);
-
-			//push ingredient
-			_ingredientList pushBack _ingredient;
+			self callp(_parseComponent,_x arg _content arg _ingredientList arg _refErr)
 
 		} foreach _content;
 		FAIL_CHECK_EMPTY;
 	};
 
+	def(_parseComponent)
+	{
+		params ["_curObj","_content","_ingredientListOrRef","_refErr"];
+		CRAFT_PARSER_HEAD;
+
+		private _cls = _curObj get "class";
+		private _exitClasscheck = false;
+		if isNullVar(_cls) exitWith {
+			message = "Property 'class' must be defined in components";
+		};
+		if not_equalTypes(_cls,[]) then {_cls = [_cls,true] call csys_prepareRangedString};
+
+		{
+
+			if not_equalTypes(_x,"") exitWith {
+				_exitClasscheck = true;
+				refset(_refErr,"Property 'class' wrong type; Expected string");
+			};
+			_x = [_x] call csys_prepareRangedString;
+			_cls set [_foreachindex,_x];
+
+			if !isImplementClass(_x) exitWith {
+				_exitClasscheck = true;
+				refset(_refErr,"Ingredient class not found: " + _x);
+			};
+			
+		} foreach _cls;
+		
+		if (_exitClasscheck) exitWith {};
+		if (count _cls == 1) then {
+			_cls = _cls select 0;
+		};
+		
+		_ingredient = ifcheck(self callv(isInteractCraft),struct_newp(CraftRecipeInteractorComponent,_cls),struct_newp(CraftRecipeComponent,_cls));
+
+		GETVAL_INT(_curObj, vec2("count",1));
+		FAIL_CHECK_REFSET(_refErr);
+		if !inRange(value,1,100) exitWith {
+			refset(_refErr,"Invalid count: " + (str value));
+		};
+		_ingredient setv(count,value);
+
+		private _hpval = _curObj get "hp";
+		if !isNullVar(_hpval) then {
+			private _hpObj = struct_newp(CraftDynamicPrecVal__, _hpval);
+			_ingredient setv(hp,_hpObj);
+		};
+
+		GETVAL_BOOL(_curObj, vec2("check_type_of",_ingredient getv(checkTypeOf)));
+		FAIL_CHECK_REFSET(_refErr);
+		_ingredient setv(checkTypeOf,value);
+
+		GETVAL_BOOL(_curObj, vec2("optional",_ingredient getv(optional)));
+		FAIL_CHECK_REFSET(_refErr);
+		_ingredient setv(optional,value);
+
+		GETVAL_BOOL(_curObj, vec2("destroy",_ingredient getv(destroy)));
+		FAIL_CHECK_REFSET(_refErr);
+		_ingredient setv(destroy,value);
+
+		GETVAL_STR(_curObj, vec2("condition",null));
+		FAIL_CHECK_REFSET;
+		if !isNullVar(value) then {
+			private _code = [value] call csys_generateInsturctions;
+			if isNullVar(_code) exitWith {
+				FAIL_CHECK_REFSET(_refErr);
+			};
+			_ingredient setv(conditionEvent,_code);
+		};
+
+		
+		GETVAL_STR(_curObj , vec2("meta_tag",null));
+		FAIL_CHECK_REFSET;
+		_ingredient setv(metaTag,value);
+
+		if (self callv(isInteractCraft)) exitWith {
+			refset(_ingredientListOrRef,_ingredient);
+		};
+
+		//push ingredient
+		_ingredientList pushBack _ingredient;
+	}
 
 
 	def(fail_enable) false;
@@ -805,19 +484,70 @@ endstruct
 struct(CraftRecipeInteract) base(ICraftRecipeBase)
 	def(c_type) "interact";
 
+	def(str)
+	{
+		format["%1:%2[%3]=(%4)",
+			self getv(c_type),
+			self getv(craftId),
+			self getv(name),
+			[([self getv(hand_item),self getv(target)] joinString " => "),"""",""] call regex_replace
+		]
+	}
+
 	def(onRecipeReady)
 	{
 		callbase(onRecipeReady);
-		{
-			_x callp(_ingredientRegister,csys_map_allInteractiveCrafts arg self);
-		} foreach (self getv(components));
+		(self getv(target)) callp(_ingredientRegister,csys_map_allInteractiveCrafts arg self);
 	}
 
+	def_null(hand_item) //CraftRecipeComponent
+	def_null(target) //CraftRecipeComponent
+
+	def(_parseRequiredComponents)
+	{
+		params ["_cdict","_refErr"];
+		CRAFT_PARSER_HEAD;
+
+		GETVAL_DICT(_cdict, vec2("components",null));
+		FAIL_CHECK_REFSET(_refErr);
+		if (isNullVar(value) || {count value == 0}) exitWith {
+			refset(_refErr,"Components must be defined");
+		};
+
+		self callp(_parseRequiredComponents_Internal,value arg _refErr);
+	};
 
 	def(_parseRequiredComponents_Internal)
 	{
-		params ["_content","_ingredientList","_refErr"];
+		params ["_content","_refErr"];
 		CRAFT_PARSER_HEAD;
+		traceformat("COMPONENTS CHECK %1",_content)
+		
+		//parse hand item
+		GETVAL_DICT(_content, vec2("hand_item",null));
+		FAIL_CHECK_REFSET(_refErr);
+
+		private _refResult = refcreate(null);
+		self callp(_parseComponent,value arg _content arg _refResult arg _refErr);
+		if isNull(refget(_refResult)) exitWith {
+			refset(_refErr,"hand_item property not found");
+		};
+		self setv(hand_item,refget(_refResult));
+		self getv(hand_item) setv(componentCategory,"hand_item");
+
+		//parse target item
+		GETVAL_DICT(_content, vec2("target",null));
+		FAIL_CHECK_REFSET(_refErr);
+
+		_refResult = refcreate(null);
+		self callp(_parseComponent,value arg _content arg _refResult arg _refErr);
+		if isNull(refget(_refResult)) exitWith {
+			refset(_refErr,"target property not found");
+		};
+		self setv(target,refget(_refResult));
+		self getv(target) setv(componentCategory,"target");
+		
+		FAIL_CHECK_EMPTY;
 	}
 
 endstruct
