@@ -1,0 +1,64 @@
+TrashCan:
+  name: Мусор для помоек
+  health: {min: 10%, max: 60%}
+  quality: {min: 10%, max: 60%}
+  pass_count: {min: 2, max: 4}
+
+#Частое 70 - 100   
+  items:
+    Paper:
+      prob: 80%
+    GlassBottle:
+      prob: 80%      
+    ClothDebris1:
+      prob: 75%
+    ClothDebris2:
+      prob: 75%   
+    SmallStone:
+      prob: 75%          
+    WoodenDebris6:
+      prob: 75%       
+    WoodenDebris7:
+      prob: 75%     
+    Rag:
+      prob: 70% 
+    Bone:
+      prob: 70%          
+
+#Среднее 40 - 70
+    MetalDebris1:
+      prob: 45%  
+    MetalDebris2:
+      prob: 45%   
+    OrganicDebris1:
+      prob: 45%    
+    SyntDebris1:
+      prob: 45%  
+    Tooth:
+      prob: 45% 
+
+#Редкое 20 - 40
+    Syringe:
+      prob: 25%   
+    Castoffs1:
+      prob: 20%
+    Castoffs2:
+      prob: 20%
+    BrownBandannaMask:
+      prob: 20%
+    BreadChopped:
+      prob: 20%        
+    FleshDebris1:
+      prob: 20%  
+
+#Очень редкое 0 - 20
+    BulletCaseShotgun:
+      prob: 15% 
+    BulletCasePBM:
+      prob: 15%
+    Poo:
+      prob: 10%
+    Zvak:
+      prob: 5%      
+    Melteshonok:
+      prob: 5% 

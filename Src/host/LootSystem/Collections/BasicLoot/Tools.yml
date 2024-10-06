@@ -1,0 +1,44 @@
+Tools:
+  name: Различные инструменты
+  health: {min: 40%, max: 85%}
+  quality: {min: 30%, max: 75%}
+  pass_count: {min: 1, max: 4}
+
+#Частое ~70 - 100   
+  items:      
+    Wrench:
+      prob: 95%
+    SmallBattery:
+      prob: 90% 
+
+#Среднее ~40 - 70
+    Multimeter:
+      prob: 40%           
+    Gloves:
+      prob: 40%
+
+#Редкое ~20 - 40
+    Hammer:
+      prob: 20%
+    WireCutters:
+      prob: 20%
+
+#Очень редкое ~0 - 20 
+    Screwdriver:
+      prob: 15%
+    Shovel:
+      prob: 15%
+    Flashlight:
+      prob: 10% 
+    ToolPipe:
+      prob: 5%
+    ToolStraigthPipe:
+      prob: 5%         
+    Crowbar:
+      prob: 3%
+    Pickaxe:
+      prob: 3%
+    Sledgehammer:
+      prob: 3%
+    Sledgehammer1:
+      prob: 3%

@@ -1,0 +1,49 @@
+Kitchen:
+  name: Кухонные принадлежности и посуда
+  health: {min: 60%, max: 90%}
+  quality: {min: 30%, max: 90%}
+  pass_count: {min: 2, max: 5}
+
+#Частое 70 - 100
+  items:          
+    SoupPlate:
+      prob: 70%
+    OlderWoodenCup:
+      prob: 70%
+    WoodenCup:
+      prob: 70%
+
+#Среднее 40 - 70
+    FoodPlate:
+      prob: 40%
+    Mug:
+      prob: 40%      
+    Cup:
+      prob: 40% 
+    cup1:
+      prob: 40% 
+    GlassBottle:
+      prob: 40%
+    FryingPan:
+      prob: 40%
+    Kastrula:
+      prob: 40%                       
+    CuttingBoard:
+      prob: 40%
+    Polovnik:
+      prob: 40%      
+
+#Редкое 20 - 40
+    GlassGoblet:
+      prob: 20%
+    MetalCup:
+      prob: 20%      
+    GlassLargeBreaker:
+      prob: 20% 
+    Teapot:
+      prob: 20% 
+
+#Очень редкое 0 - 20
+
+
+

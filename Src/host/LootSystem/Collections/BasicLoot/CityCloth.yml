@@ -1,0 +1,179 @@
+CityCloth:
+  name: Городская одежда
+  health: {min: 60%, max: 83%}
+  quality: {min: 60%, max: 83%}
+  pass_count: {min: 2, max: 4}
+
+#Частое ~70 - 100   
+  items:
+    #Одежда    
+    CitizenCloth1:
+      prob: 83%
+    CitizenCloth3:
+      prob: 83%    
+    CitizenCloth6:
+      prob: 83%  
+    CitizenCloth9:
+      prob: 83%
+
+    #Шапки    
+    HatBandana:
+      prob: 73%  
+    HatBandana1:
+      prob: 73%  
+    HatBandana2:
+      prob: 73%  
+    HatBandana3:
+      prob: 73%
+    WorkerCap:
+      prob: 73%   
+    WorkerCap1:
+      prob: 73%   
+    WorkerCap2:
+      prob: 73%   
+    WorkerCoolCap:
+      prob: 73%
+
+    #Маски     
+    FaceCoverMask:
+      prob: 83%
+
+#Среднее ~40 - 70
+    #Одежда
+    BlueRobe:
+      prob: 50%
+    GreenWorkerCloth:
+      prob: 50%
+    GriblanCloth:
+      prob: 50%      
+    LeatherJacketCloth:
+      prob: 50% 
+
+    #Шапки  
+    HatRedSaloon:
+      prob: 40%
+    HatOldUshanka:
+      prob: 40%  
+    HatGrayOldUshanka:
+      prob: 40%  
+    HatUshanka:
+      prob: 40%  
+    HatUshanka1:
+      prob: 40%   
+    HatUshanka2:
+      prob: 40%   
+    HatUshankaUp:
+      prob: 40%  
+    HatUshankaUp1:
+      prob: 40%
+    HatUshankaUp2:
+      prob: 40%
+    HatUshankaUp3:
+      prob: 40%       
+
+#Редкое ~20 - 40
+    #Одежда
+    DoctorCloth:
+      prob: 20%
+    CookerCloth:
+      prob: 20%
+    GromilaCloth:
+      prob: 20%
+    RDetClothThief:
+      prob: 20%         
+    WoolCoat:
+      prob: 20%   
+    BanditSaloonCloth:
+      prob: 20%
+
+    #Шапки   
+    CookerCap:
+      prob: 20%   
+    CookerCap1:
+      prob: 20%   
+    CookerCap2:
+      prob: 20%
+    HatShemag:
+      prob: 20% 
+
+    #Маски
+    BrownBandannaMask:
+      prob: 20%  
+    BlackBandannaMask:
+      prob: 20%  
+
+#Очень редкое ~0 - 20
+    #Одежда
+    GreatcoatBlack:
+      prob: 3%
+    GreatcoatBlack:
+      prob: 3%
+    GreatcoatBrown:
+      prob: 3%
+    WomanBasicCloth:
+      prob: 3%
+    ZnatCloth:
+      prob: 3%
+    GreenCoat:
+      prob: 3%
+    BlackPlaidCoat:
+      prob: 3%
+    BlackPlaidCoat:
+      prob: 3%
+    GreenJacketCloth:
+      prob: 3%
+    RedPlaidCoat:
+      prob: 3%
+    WhitePlaidCoat:
+      prob: 3%
+    YellowCoat:
+      prob: 3%
+    BrightRedCloth:
+      prob: 3%
+    TorgashPalthCloth:
+      prob: 3%    
+    MerchantCloth:
+      prob: 3%    
+    MerchantClothSaloon:
+      prob: 3%    
+    WatchmanCloth:
+      prob: 3%    
+    BarmenCloth:
+      prob: 3%
+
+    #Шапки
+    hat:
+      prob: 3%    
+    hat1:
+      prob: 3%    
+    hat2:
+      prob: 3% 
+
+    #Маски
+    BalaclavaMask:
+      prob: 3%    
+    BalaclavaMask2:
+      prob: 3%
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
+
+
+
