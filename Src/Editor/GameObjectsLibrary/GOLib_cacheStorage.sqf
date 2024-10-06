@@ -105,7 +105,7 @@ init_function(golib_cs_initAll)
 					_listEd = _hash get "edConnected";
 					_baseCount = count _listEd;
 					{
-						if (!(_objPtr in golib_internal_map_marks)) then {
+						if (!(_x in golib_internal_map_marks)) then {
 							_listEd set [_forEachIndex,objnull];
 						};
 					} foreach _listEd;
