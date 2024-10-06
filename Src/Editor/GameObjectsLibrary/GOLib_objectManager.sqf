@@ -530,6 +530,7 @@ function(golib_resetObjectsData)
 			};
 
 			if (_resetProps) then {
+				_oldHD set ["class",_class];
 				_oldHD set ["customProps",createHashMap];
 				_oldHD deleteAt "edConnected";
 			};
