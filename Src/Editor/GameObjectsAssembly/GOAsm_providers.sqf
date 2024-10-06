@@ -1208,6 +1208,8 @@ function(goasm_attributes_handleProvider_container_content)
 					[_memberName] call goilb_setBatchMode;
 					[_srcObject,_data,true] call golib_setHashData;
 					call (_wid getVariable "_onSync");
+
+					call golib_cs_syncMarks; //sync marks because globalrefs can be inside container
 				} call Core_callContext;
 
 				[_srcObject,true] call golib_setSelectedObjects;

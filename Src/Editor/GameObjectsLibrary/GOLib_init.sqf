@@ -53,6 +53,7 @@ golib_internal_buffer_icons = [];
 
 golib_internal_map_marks = createHashMap;
 golib_internal_map_connected = createHashMap; //ссылки на которых ссылки подключенных объектов
+golib_internal_map_contMarks = createhashMap;
 
 golib_hashData_keys = [
 	"class", //референс на текущий объект (строка)

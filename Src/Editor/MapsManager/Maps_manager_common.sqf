@@ -36,6 +36,8 @@ function(mm_build)
 
 	mm_internal_allSpawnPoints = [];
 
+	mm_internal_map_marks = hashSet_createEmpty();
+
 	private _objList = [];
 	{
 		if (_x call golib_hasHashData) then {
@@ -333,6 +335,12 @@ function(mm_handleObjectSave)
 			if ("mark" in _hashItem) then {
 				_pre = "private _ccit = ";
 				_post = format[" go_editor_globalRefs set [""%1"",%2];",_hashItem get "mark","_ccit"];
+				if ((_hashItem get "mark") in mm_internal_map_marks) exitWith {
+					INC(mm_internal_errorCount);
+					mm_internal_threadErrorText = mm_internal_threadErrorText + endl +
+					format["Container item mark '%1' duplicate name",_hashItem get "mark"];
+				};
+				hashSet_add(mm_internal_map_marks,_hashItem get "mark");
 			};
 
 			_objcustomdata pushBackUnique (format["%3[%1,%2] call (%1 getvariable '"+PROTOTYPE_VAR_NAME+"' getvariable 'createItemInContainer');%4","%1",_stringStruct,_pre,_post]);
@@ -366,6 +374,12 @@ function(mm_handleObjectSave)
 	if ("mark" in _hash) then {
 		_registeredMark = _hash get "mark";
 		_initCodeArgs pushBackUnique format["go_editor_globalRefs set [""%1"",%2];",_registeredMark,"_thisObj"] + endl;
+		if ((_hash get "mark") in mm_internal_map_marks) exitWith {
+			INC(mm_internal_errorCount);
+			mm_internal_threadErrorText = mm_internal_threadErrorText + endl +
+			format["Object mark '%1' duplicate name",_hash get "mark"];
+		};
+		hashSet_add(mm_internal_map_marks,_hash get "mark");
 	};
 
 	if not_equals(_vup,[0 arg 0 arg 1]) then {
