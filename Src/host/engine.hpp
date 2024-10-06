@@ -560,7 +560,7 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 
 
 //sound engine
-
+#define soundPathPrep(v) ((v)splitString "/" joinString "\")
 #define soundDataDef(path) [path]
 #define soundData(path,pithmin,pithmax) [path,pithmin,pithmax]
 

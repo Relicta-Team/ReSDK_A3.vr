@@ -88,7 +88,8 @@ struct(CraftRecipeInteractResult) base(CraftRecipeResult)
 
 		if (count (self getv(sounds)) > 0) then {
 			private _snd = pick (self getv(sounds));
-			callFuncParams(_newObj,playSound,_snd arg getRandomPitchInRange(0.7,1.2) arg 5);
+			//used soundPathPrep because user can be define wrong song path delimeter "/"
+			callFuncParams(_newObj,playSound,soundPathPrep(_snd) arg getRandomPitchInRange(0.7,1.2) arg 5);
 		};
 
 		if (count (self getv(emotes)) > 0) then {
