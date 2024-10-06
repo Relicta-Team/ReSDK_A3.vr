@@ -184,11 +184,11 @@ oop_getAllObjectsOfType = {
 //_doCompile - возвращает десериализованное дефолтное значение типа
 //_altMethodNameIfNil - возвращает альтернативный метод геттера по которому будет осуществлён поиск и получение значения
 oop_getFieldBaseValue = {
-	params ["_type","_field",["_doCompile",false],["_altMethodNameIfNil",""]];
+	params ["_typename","_field",["_doCompile",false],["_altMethodNameIfNil",""]];
 
-	private _type = missionNamespace getVariable ["pt_"+_type,nullPtr];
+	private _type = missionNamespace getVariable ["pt_"+_typename,nullPtr];
 	if isNullReference(_type) exitWith {
-		errorformat("oop::getFieldBaseValue() - Cant find field '%2+%3' in type '%1'",_type arg _field arg _altMethodNameIfNil);
+		errorformat("oop::getFieldBaseValue() - Cant find field '%2+%3' in type '%1'",_typename arg _field arg _altMethodNameIfNil);
 		null;
 	};
 
