@@ -299,8 +299,52 @@ csys_handleInteractor = {
 	};
 
 	if (!_output) then {
+		
 		//process craft
 		trace("csys::handleInteractor() - Process craft")
+
+		private _eps = callFunc(_usr,getLastInteractEndPos);
+
+		private _handItemName = callFuncParams(_handItem,getNameFor,_usr);
+		private _targName = callFuncParams(_targ,getNameFor,_usr);
+
+		_handItmIngr callv(onComponentUsed);
+		_targIngr callv(onComponentUsed);
+
+		private _refSuccess = refcreate(0);
+
+		//skills check
+		private _canCraftBySkills = _foundedRecipe callp(checkCraftSkills,this arg _refSuccess);
+		refunpack(_refSuccess); //params: vec2(skillname(str),success_amount(int))
+
+		//craft context
+		private _craftCtx = createHashMapFromArray [
+			["position",_eps],
+			["user",this],
+			["recipe",_foundedRecipe],
+			["used_skill",_refSuccess select 0],
+			["success_amount",getRollAmount(_refSuccess select 1)],
+			["roll_result",getRollType(_refSuccess select 1)],
+			["amount_3d6",getRollDiceAmount(_refSuccess select 1)],
+			["components_copy",[_handItmIngr,_targIngr]],
+
+			["target_name",_targName],
+			["hand_item_name",_handItemName]
+		];
+
+		if (!_canCraftBySkills) exitWith {
+			//cannot craft because lowskill
+			if !(self getv(fail_enable)) exitWith {
+				private _message = pick ["Знаний не хватает.","Не умею, не могу.","Не понимаю как делать","Что-то не понятно ничего.","Не могу сделать.","Не знаю как делать."];
+				callFuncParams(_usr,localSay,_message arg "error");
+			};
+
+			_foundedRecipe callp(onFailProcess,_craftCtx);
+		};
+
+		_foundedRecipe getv(result) callp(onCrafted,_craftCtx);
+
+		_output = true;
 	};
 
 	_output

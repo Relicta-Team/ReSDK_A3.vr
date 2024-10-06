@@ -60,8 +60,52 @@ struct(CraftRecipeResult)
 endstruct
 
 struct(CraftRecipeInteractResult) base(CraftRecipeResult)
+	
+	def(radius) 0.01;
+	
 	def(sounds) []
 	def(emotes) []
+
+	def(onCrafted)
+	{
+		params ["_craftCtx"];
+		
+		private _pos = _craftCtx get "position";
+		private _dir = _craftCtx get "direction";
+		private _usr = _craftCtx get "user";
+		private _robj = _craftCtx get "recipe";
+		private _newObj = nullPtr;
+
+		private _realPos = [_pos,self getv(radius)] call randomRadius;
+		private _class = self getv(class);
+		if !isNullVar(_class) then {
+			_newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
+		};
+
+		if ((_craftCtx get "roll_result") == DICE_CRITSUCCESS) then {
+			callFuncParams(_usr,localSay,"<t size='1.5'>Критический успех</t>" arg "mind");
+		};
+
+		if (count (self getv(sounds)) > 0) then {
+			private _snd = pick (self getv(sounds));
+			callFuncParams(_newObj,playSound,_snd arg getRandomPitchInRange(0.7,1.2) arg 5);
+		};
+
+		if (count (self getv(emotes)) > 0) then {
+			private _msg = pick (self getv(emotes));
+			_msg = [_msg,
+				createHashMapFromArray[
+					["basename", callFuncParams(_newObj,getNameFor,_usr)]
+					,["target", _craftCtx get "target_name"]
+					,["hand_item", _craftCtx get "hand_item_name"]
+				]
+			] call csys_format;
+			_msg = [_msg] call csys_formatSelector;
+			callFuncParams(_usr,meSay,_msg);
+		};
+		
+	}
+
 endstruct
 
 struct(CraftRecipeResultModifier)

@@ -207,9 +207,28 @@ struct(CraftRecipeComponent)
 endstruct
 
 struct(CraftRecipeInteractorComponent) base(CraftRecipeComponent)
+	def(destroy) null //by default components not destroyed
+
 	def(componentCategory) ""//target|hand_item
 
 	def(targetItem) nullPtr;
+
+	def(_ingredientRegister)
+	{
+		params ["_storageRef","_recipeRef"];
+		
+		if ((self getv(componentCategory)) == "target") then {
+			callbase(_ingredientRegister);
+			if isNull(self getv(destroy)) then {
+				self setv(destroy,true);
+			};
+		};
+		if ((self getv(componentCategory)) == "hand_item") then {
+			if isNull(self getv(destroy)) then {
+				self setv(destroy,false);
+			};
+		};
+	}
 
 	//called on found valid ingredient
 	def(handleValidIngredient)
@@ -263,4 +282,15 @@ struct(CraftRecipeInteractorComponent) base(CraftRecipeComponent)
 		
 		_valid
 	}
+
+	def(onComponentUsed)
+	{
+		if !isNull(self getv(destroy)) then {
+			if (self getv(destroy)) then {
+				[self getv(targetItem)] call deleteGameObject;
+			
+			};
+		};
+	}
+
 endstruct

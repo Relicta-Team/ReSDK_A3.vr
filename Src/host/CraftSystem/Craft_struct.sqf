@@ -220,8 +220,9 @@ struct(ICraftRecipeBase)
 		GETVAL_BOOL(_curObj, vec2("optional",_ingredient getv(optional)));
 		FAIL_CHECK_REFSET(_refErr);
 		_ingredient setv(optional,value);
-
-		GETVAL_BOOL(_curObj, vec2("destroy",_ingredient getv(destroy)));
+		
+		private _defDestrVal = _ingredient getv(destroy);
+		GETVAL_BOOL(_curObj, vec2("destroy",_defDestrVal));
 		FAIL_CHECK_REFSET(_refErr);
 		_ingredient setv(destroy,value);
 
@@ -542,7 +543,9 @@ struct(CraftRecipeInteract) base(ICraftRecipeBase)
 	def(onRecipeReady)
 	{
 		callbase(onRecipeReady);
-		(self getv(target)) callp(_ingredientRegister,csys_map_allInteractiveCrafts arg self);
+		{
+			_x callp(_ingredientRegister,csys_map_allInteractiveCrafts arg self);
+		} foreach [self getv(target),self getv(hand_item)];
 	}
 
 	def_null(hand_item) //CraftRecipeComponent
