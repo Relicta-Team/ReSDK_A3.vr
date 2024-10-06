@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3946.3467,30.790623,4031.6001};
-		dir[]={0.67669094,-0.45383108,0.57978392};
-		up[]={0.34463865,0.89108491,0.29528439};
-		aside[]={0.65064764,-3.5751145e-007,-0.75939816};
+		pos[]={3903.7744,31.884779,4037.1936};
+		dir[]={-0.91423345,-0.33124933,0.23335692};
+		up[]={-0.32095975,0.9435426,0.081924573};
+		aside[]={0.24731968,-4.3481123e-008,0.96893698};
 	};
 };
 binarizationWanted=0;
@@ -21404,7 +21404,7 @@ class Mission
 								};
 							};
 							id=5921;
-							atlOffset=0.40727997;
+							atlOffset=0.81455994;
 						};
 						class Item6
 						{
@@ -24261,7 +24261,7 @@ class Mission
 						};
 					};
 					id=2873;
-					atlOffset=1.0575905;
+					atlOffset=1.083046;
 				};
 				class Item2
 				{
@@ -28845,7 +28845,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Склад";
-					state=1;
 					class Entities
 					{
 						items=4;
@@ -53922,7 +53921,7 @@ class Mission
 				};
 			};
 			id=7549;
-			atlOffset=21.200508;
+			atlOffset=21.200512;
 		};
 		class Item9
 		{
@@ -54359,7 +54358,7 @@ class Mission
 					name="Фонари";
 					class Entities
 					{
-						items=28;
+						items=26;
 						class Item0
 						{
 							dataType="Object";
@@ -54797,24 +54796,6 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3869.9409,27.302654,4023.2617};
-								angles[]={0,0.78540039,0};
-							};
-							side="Empty";
-							flags=1;
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_STREET_LAMP_DORM""]]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:7fZz/E0O8Fk (1)""]]}";
-							};
-							id=8319;
-							type="Land_LampShabby_off_F";
-							atlOffset=18.530624;
-						};
-						class Item25
-						{
-							dataType="Object";
-							class PositionInfo
-							{
 								position[]={3887.6787,27.257774,4024.0549};
 								angles[]={0,2.1457672e-006,0};
 							};
@@ -54828,7 +54809,7 @@ class Mission
 							type="Land_LampShabby_off_F";
 							atlOffset=18.485744;
 						};
-						class Item26
+						class Item25
 						{
 							dataType="Object";
 							class PositionInfo
@@ -54845,24 +54826,6 @@ class Mission
 							id=8321;
 							type="Land_LampShabby_off_F";
 							atlOffset=17.991543;
-						};
-						class Item27
-						{
-							dataType="Object";
-							class PositionInfo
-							{
-								position[]={3872.6682,27.11043,4038.2832};
-								angles[]={0,2.6179972,0};
-							};
-							side="Empty";
-							flags=1;
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_STREET_LAMP_DORM""]]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:7fZz/E0O8Fk (4)""]]}";
-							};
-							id=8322;
-							type="Land_LampShabby_off_F";
-							atlOffset=18.3384;
 						};
 					};
 					id=7662;

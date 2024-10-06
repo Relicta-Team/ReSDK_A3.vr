@@ -3349,13 +3349,9 @@ _3941_000004043_7500022_62500 = ['PowerSwitcher',[3941,4043.75,22.625],90.0002,[
 }] call InitStruct; 
 ['StreetLamp',[3938.76,4041.52,17.8731],165,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_DORM_var]; go_editor_globalRefs set ["StreetLamp G:qaN9tedbMqQ",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3869.94,4023.26,18.5306],45.0001,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_DORM_var]; go_editor_globalRefs set ["StreetLamp G:7fZz/E0O8Fk (1)",_thisObj];
-}] call InitStruct; 
 ['StreetLamp',[3887.68,4024.05,18.4857],0.000122943,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_DORM_var]; go_editor_globalRefs set ["StreetLamp G:7fZz/E0O8Fk (2)",_thisObj];
 }] call InitStruct; 
 ['StreetLamp',[3889.64,4037.81,17.9915],225,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_DORM_var]; go_editor_globalRefs set ["StreetLamp G:7fZz/E0O8Fk (3)",_thisObj];
-}] call InitStruct; 
-['StreetLamp',[3872.67,4038.28,18.3384],150,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_DORM_var]; go_editor_globalRefs set ["StreetLamp G:7fZz/E0O8Fk (4)",_thisObj];
 }] call InitStruct; 
 _3920_948974010_4809622_33245 = ['RedButton',[3920.95,4010.48,27.3326,true],0,[-1,0,-4.37114e-008], {go_editor_globalRefs set ["RedButton G:lA3KukP7kK4",_thisObj];
 }] call InitStruct; 
