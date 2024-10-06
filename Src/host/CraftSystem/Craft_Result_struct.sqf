@@ -59,6 +59,11 @@ struct(CraftRecipeResult)
 
 endstruct
 
+struct(CraftRecipeInteractResult) base(CraftRecipeResult)
+	def(sounds) []
+	def(emotes) []
+endstruct
+
 struct(CraftRecipeResultModifier)
 	def(name) null;
 	def(params) [];

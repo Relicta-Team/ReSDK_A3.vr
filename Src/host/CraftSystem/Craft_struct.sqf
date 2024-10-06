@@ -69,7 +69,7 @@ struct(ICraftRecipeBase)
 	def(forceVisible) false; //видимость рецепта при нехватке навыков
 	def(skills) null; //hashmap of skills with values
 	def(components) null; //dict of components
-	def(result) null; //CraftRecipeResult
+	def(result) null; //CraftRecipeResult|CraftRecipeInteractResult
 
 	//обработка требований
 	def(_parseRequired)
@@ -176,8 +176,9 @@ struct(ICraftRecipeBase)
 		if (count _cls == 1) then {
 			_cls = _cls select 0;
 		};
+		private _isInteractCraft = self callv(isInteractCraft);
 		
-		_ingredient = ifcheck(self callv(isInteractCraft),struct_newp(CraftRecipeInteractorComponent,_cls),struct_newp(CraftRecipeComponent,_cls));
+		_ingredient = ifcheck(_isInteractCraft,struct_newp(CraftRecipeInteractorComponent,_cls),struct_newp(CraftRecipeComponent,_cls));
 
 		GETVAL_INT(_curObj, vec2("count",1));
 		FAIL_CHECK_REFSET(_refErr);
@@ -188,9 +189,29 @@ struct(ICraftRecipeBase)
 
 		private _hpval = _curObj get "hp";
 		if !isNullVar(_hpval) then {
-			private _hpObj = struct_newp(CraftDynamicPrecVal__, _hpval);
-			_ingredient setv(hp,_hpObj);
+			if (_isInteractCraft) then {
+				if equalTypes(_hpval,0) then {
+					_ingredient setv(hp,struct_newp(CraftDynamicPrecVal__, _hpval));
+				} else {
+					private _hpvalue = _hpval get "value";
+					if !isNullVar(_hpvalue) then {
+						_ingredient setv(hp,struct_newp(CraftDynamicPrecVal__, _hpvalue));
+					};
+
+					private _hpmessage = _hpval get "message";
+					if !isNullVar(_hpmessage) then {
+						if equalTypes(_hpmessage,"") then {
+							_hpmessage = [_hpmessage];
+						};
+						_ingredient setv(on_hp_error_messages,_hpmessage);
+					};
+				};
+			} else {
+				private _hpObj = struct_newp(CraftDynamicPrecVal__, _hpval);
+				_ingredient setv(hp,_hpObj);
+			};
 		};
+
 
 		GETVAL_BOOL(_curObj, vec2("check_type_of",_ingredient getv(checkTypeOf)));
 		FAIL_CHECK_REFSET(_refErr);
@@ -292,13 +313,35 @@ struct(ICraftRecipeBase)
 
 		GETVAL(_req, vec2("count",1), [0 arg hashMapNull]);
 		FAIL_CHECK_REFSET(_refResult);
-		private _robj = struct_newp(CraftRecipeResult,_class arg value);
+
+		private _isInteractCraft = self callv(isInteractCraft);
+
+		private _robj = ifcheck(_isInteractCraft,struct_newp(CraftRecipeInteractResult,_class arg value),struct_newp(CraftRecipeResult,_class arg value));
 		self setv(result,_robj);
 
 		if (self getv(__canGetNameFromResult)) then {
 			self setv(name,getFieldBaseValueWithMethod(_class,"name","getName"));
 		};
+		
+		//interact craft prep emote and sound
+		if (_isInteractCraft) then {
+			
+			GETVAL(_req, vec2("sound",null), [ "" arg  [] ]);
+			FAIL_CHECK_REFSET(_refResult);
+			if equalTypes(value,"") then {
+				value = [value,true] call csys_prepareRangedString;
+			};
+			_robj setv(sounds,value);
 
+			GETVAL(_req, vec2("emote",null), [ "" arg [] ]);
+			FAIL_CHECK_REFSET(_refResult);
+			if equalTypes(value,"") then {
+				value = [value];
+			};
+			_robj setv(emotes,value);
+
+		};
+		FAIL_CHECK_EMPTY;
 
 		GETVAL_FLOAT(_req, vec2("radius",_robj getv(radius)));
 		FAIL_CHECK_REFSET(_refResult);
@@ -483,6 +526,8 @@ endstruct
 
 struct(CraftRecipeInteract) base(ICraftRecipeBase)
 	def(c_type) "interact";
+
+	def(opt_craft_duration) {0} //by default duration disabled
 
 	def(str)
 	{

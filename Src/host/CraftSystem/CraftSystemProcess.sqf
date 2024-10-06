@@ -236,32 +236,72 @@ csys_handleInteractor = {
 
 	traceformat("csys::handleInteractor() - %1 interacted from %2 to %3",_usr arg _handItem arg _targ)
 	private _targClass = callFunc(_targ,getClassName);
-	private _listCrafts = csys_map_allInteractiveCrafts get _targClass;
+	private _listCrafts = csys_map_allInteractiveCrafts get (tolower _targClass);
 	if isNullVar(_listCrafts) exitWith {false};
 
 	private _foundedRecipe = null;
 	traceformat("csys::handleInteractor() - possible crafts: %1",_listCrafts);
+	//assert_str(count _listCrafts <= 1,"Interact craft list collision: "+ (_listCrafts apply {str _x} joinString " and "));
+	private _handItmIngr = null;
+	private _targIngr = null;
 	{
-		private _handItmIngr = _x getv(hand_item) callv(createIngredientTempValidator);
-		private _targIngr = _x getv(target) callv(createIngredientTempValidator);
+		_handItmIngr = _x getv(hand_item) callv(createIngredientTempValidator);
+		_targIngr = _x getv(target) callv(createIngredientTempValidator);
 
-		if (_handItmIngr callp(isValidIngredient,_objIngredient)) then {
-			_handItmIngr callp(handleValidIngredient,_objIngredient);
+		if (_handItmIngr callp(isValidIngredient,_handItem)) then {
+			_handItmIngr callp(handleValidIngredient,_handItem);
 		};
 
-		if (_targIngr callp(isValidIngredient,_objIngredient)) then {
-			_targIngr callp(handleValidIngredient,_objIngredient);
+		if (_targIngr callp(isValidIngredient,_targ)) then {
+			_targIngr callp(handleValidIngredient,_targ);
 		};
 
 		if (_handItmIngr callv(isReadyIngredient) && {_targIngr callv(isReadyIngredient)}) exitWith {
 			_foundedRecipe = _x;
 		};
 
+
 	} foreach _listCrafts;
 	
 	if isNullVar(_foundedRecipe) exitWith {false};
+	#ifdef EDITOR
+	csys_internal_interactor_debugInfo = [_foundedRecipe,_handItmIngr,_targIngr];
+	#endif
 
-	
+	private _output = false;
+	private _printedErrMes = false;
 
-	false
+	private _error_message_provider = {
+		params ["_ingrType"];
+		traceformat("csys::handleInteractor() - error message because hp error on %1",_ingrType);
+		private _msg = _ingrType getv(on_hp_error_messages);
+		if (count _msg == 0) exitWith {};
+		assert(equalTypes(_msg,[]));
+		_msg = pick _msg;
+		_msg = [_msg,
+			createHashMapFromArray[
+				["basename", callFuncParams(_ingrType getv(targetItem),getNameFor,_usr)]
+				,["target", callFuncParams(_handItmIngr getv(targetItem),getNameFor,_usr)]
+				,["hand_item", callFuncParams(_targIngr getv(targetItem),getNameFor,_usr)]
+			]
+		] call csys_format;
+		_msg = [_msg] call csys_formatSelector;
+		callFuncParams(_usr,localSay,_msg arg "error");
+		_output = true;
+	};
+
+	if (_handItmIngr getv(hp_error_catched)) then {
+		[_handItmIngr] call _error_message_provider;
+	};
+
+	if (!_output && (_targIngr getv(hp_error_catched))) then {
+		[_targIngr] call _error_message_provider;
+	};
+
+	if (!_output) then {
+		//process craft
+		trace("csys::handleInteractor() - Process craft")
+	};
+
+	_output
 };

@@ -110,26 +110,47 @@ struct(CraftRecipeComponent)
 		_cpy
 	}
 
-	def(isValidIngredient)
+	def(__validateClass)
 	{
 		params ["_ingredient"];
 		private _checkTypeOf = self getv(checkTypeOf);
+		private _hasClass = false;
+		if (self getv(isMultiSelector)) then {
+			{
+				if (_checkTypeOf) then {
+					_hasClass = isTypeStringOf(_ingredient,_x);
+				} else {
+					_hasClass = callFunc(_ingredient,getClassName) == _x;
+				};
+				if (_hasClass) exitWith {};
+			} foreach (self getv(class));
+		} else {
+			_hasClass = ifcheck(_checkTypeOf,isTypeStringOf(_ingredient,self getv(class)),callFunc(_ingredient,getClassName) == (self getv(class)));
+		};
+
+		_hasClass
+	}
+
+	def(__validateHP)
+	{
+		params ["_ingredient"];
+		private _validHP = true;
+		if !isNull(self getv(hp)) then {
+			_validHP = false;
+			private _hpObj = self getv(hp);
+			private _maxHp = getVar(_ingredient,hpMax);
+			private _curHp = getVar(_ingredient,hp);
+			_validHP = _hpObj callp(validate,_maxHp arg _curHp);
+		};
+		_validHP
+	}
+
+	def(isValidIngredient)
+	{
+		params ["_ingredient"];
 		private _valid = false;
 		call {
-			private _hasClass = false;
-			if (self getv(isMultiSelector)) then {
-				{
-					if (_checkTypeOf) then {
-						_hasClass = isTypeStringOf(_ingredient,_x);
-					} else {
-						_hasClass = callFunc(_ingredient,getClassName) == _x;
-					};
-					if (_hasClass) exitWith {};
-				} foreach (self getv(class));
-			} else {
-				_hasClass = ifcheck(_checkTypeOf,isTypeStringOf(_ingredient,self getv(class)),callFunc(_ingredient,getClassName) == (self getv(class)));
-			};
-
+			private _hasClass = self callp(__validateClass,_ingredient);
 			if (!_hasClass) exitWith {};//no class found
 
 			//condition lambda
@@ -137,15 +158,7 @@ struct(CraftRecipeComponent)
 			if (!_condCheck) exitWith {};//condition failed
 
 			//validate hp
-			private _validHP = true;
-			if isNull(self getv(hp)) then {
-				_validHP = false;
-				private _hpObj = self getv(hp);
-				private _maxHp = getVar(_ingredient,hpMax);
-				private _curHp = getVar(_ingredient,hp);
-				_validHP = _hpObj callp(validate,_maxHp arg _curHp);
-			};
-			
+			private _validHP = self callp(__validateHP,_ingredient);
 			if (!_validHP) exitWith {};//hp check failed
 
 			_valid = true;
@@ -195,4 +208,59 @@ endstruct
 
 struct(CraftRecipeInteractorComponent) base(CraftRecipeComponent)
 	def(componentCategory) ""//target|hand_item
+
+	def(targetItem) nullPtr;
+
+	//called on found valid ingredient
+	def(handleValidIngredient)
+	{
+		params ["_ingredient"];
+		self setv(targetItem,_ingredient);
+
+		self setv(_isReadyIngredient,true);		
+	}
+
+	def(on_hp_error_messages) []
+	def(hp_error_catched) false
+
+	def(__validateHP)
+	{
+		params ["_ingredient"];
+		private _validHP = true;
+		if !isNull(self getv(hp)) then {
+			_validHP = false;
+			private _hpObj = self getv(hp);
+			private _maxHp = getVar(_ingredient,hpMax);
+			private _curHp = getVar(_ingredient,hp);
+			
+			_validHP = _hpObj callp(validate,_maxHp arg _curHp);
+			if (!_validHP) then {
+				self setv(hp_error_catched,true);
+				_validHP = true; //override because need print hp error
+			};
+		};
+		_validHP
+	}
+
+	def(isValidIngredient)
+	{
+		params ["_ingredient"];
+		private _valid = false;
+		call {
+			private _hasClass = self callp(__validateClass,_ingredient);
+			if (!_hasClass) exitWith {};//no class found
+
+			//condition lambda
+			private _condCheck = [_ingredient] call (self getv(conditionEvent));
+			if (!_condCheck) exitWith {};//condition failed
+
+			//validate hp
+			private _validHP = self callp(__validateHP,_ingredient);
+			if (!_validHP) exitWith {};//hp check failed
+
+			_valid = true;
+		};
+		
+		_valid
+	}
 endstruct

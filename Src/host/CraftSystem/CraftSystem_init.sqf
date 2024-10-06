@@ -293,16 +293,32 @@ csys_format = {
 		_tokens = _kmap splitString " .";
 		_argName = _tokens deleteAt 0;
 		if (_argName in _argsmap) then {
-			private _val = _argsmap get _argName;
+			private _val = _argsmap get _argName; //is value
 			assert(!isNullVar(_val));
 			{
 				_val = _val call (csys_map_tokenMap getOrDefault [_x,csys_defaultTokenCode]);
-			} foreach _tokens;
-			_str = [_str,_match,_val] call regex_replace;
+			} foreach _tokens;			
+			_str = [_str,_match,_val] call stringReplace;
 		};
 	};
 
 	_str
+};
+
+csys_formatSelector = {
+	params ["_val"];
+	private _patternSelector = "\([^()]*\)";
+	private _patternElements = "[^\(\)\|]+";
+	private _match = null;
+	private _elements = null;
+	while {[_val,_patternSelector] call regex_isMatch} do {
+		_match = [_val,_patternSelector] call regex_getFirstMatch;
+		_elements = [_match,_patternElements] call regex_getMatches;
+		if (count _elements > 0) then {
+			_val = [_val,_match,pick _elements] call stringReplace;
+		};
+	};
+	_val
 };
 
 csys_map_tokenMap = createHashMapFromArray [
@@ -312,6 +328,7 @@ csys_map_tokenMap = createHashMapFromArray [
 
 csys_defaultTokenCode = { _this };
 
+//генериурет ранжированный список на основе входной строки: "item(1-5)" -> ["item1","item2","item3","item4","item5"]
 csys_prepareRangedString = {
 	params ["_input",["_intoArray",false]];
 	if !([_input,"\(\d+\-\d+\)"] call regex_isMatch) exitWith {ifcheck(_intoArray,[_input],_input)};
