@@ -308,19 +308,30 @@ csys_handleInteractor = {
 		private _handItemName = callFuncParams(_handItem,getNameFor,_usr);
 		private _targName = callFuncParams(_targ,getNameFor,_usr);
 
+		_captCtx = createHashMapFromArray [
+			["is_interact",true],
+			["hand_item",_handItem],
+			["target",_targ],
+			["user",_usr]
+		];
+		private _modCtx = [];
+		{
+			_modCtx pushBack (_x callp(createModifierContext,_modCtx));
+		} foreach (_foundedRecipe getv(result) get(modifiers));
+
 		_handItmIngr callv(onComponentUsed);
 		_targIngr callv(onComponentUsed);
 
 		private _refSuccess = refcreate(0);
 
 		//skills check
-		private _canCraftBySkills = _foundedRecipe callp(checkCraftSkills,this arg _refSuccess);
+		private _canCraftBySkills = _foundedRecipe callp(checkCraftSkills,_usr arg _refSuccess);
 		refunpack(_refSuccess); //params: vec2(skillname(str),success_amount(int))
 
 		//craft context
 		private _craftCtx = createHashMapFromArray [
 			["position",_eps],
-			["user",this],
+			["user",_usr],
 			["recipe",_foundedRecipe],
 			["used_skill",_refSuccess select 0],
 			["success_amount",getRollAmount(_refSuccess select 1)],
@@ -329,7 +340,9 @@ csys_handleInteractor = {
 			["components_copy",[_handItmIngr,_targIngr]],
 
 			["target_name",_targName],
-			["hand_item_name",_handItemName]
+			["hand_item_name",_handItemName],
+
+			["modifier_context_list",_modCtx]
 		];
 
 		if (!_canCraftBySkills) exitWith {

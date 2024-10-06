@@ -80,6 +80,12 @@ struct(CraftRecipeInteractResult) base(CraftRecipeResult)
 		private _class = self getv(class);
 		if !isNullVar(_class) then {
 			_newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
+
+			//apply modifiers to created object
+			private _modCtxList = _craftCtx get "modifier_context_list";
+			{
+				_x callp(onApply,_newObj arg _usr arg _modCtxList select _foreachIndex);
+			} foreach (self getv(modifiers));
 		};
 
 		if ((_craftCtx get "roll_result") == DICE_CRITSUCCESS) then {
@@ -105,38 +111,6 @@ struct(CraftRecipeInteractResult) base(CraftRecipeResult)
 			callFuncParams(_usr,meSay,_msg);
 		};
 		
-	}
-
-endstruct
-
-struct(CraftRecipeResultModifier)
-	def(name) null;
-	def(params) [];
-	def(__raised) false;
-
-	def(init)
-	{
-		params ["_paramData"];
-		if equalTypes(_paramData,"") exitWith {
-			self setv(name,_paramData);
-		};
-
-		private _pname = _paramData get "name";
-		if not_equalTypes(_pname,"") exitWith {self setv(__raised,true)};
-
-		private _val = _paramData get "value";
-		if !isNullVar(_val) exitWith {
-			self setv(params,[_val]);	
-		};
-		_val = _paramData get "parameters";
-		if !isNullVar(_val) exitWith {
-			self setv(params,[_val]);
-		};
-	}
-
-	def(str)
-	{
-		format["%1(%2)",struct_typename(self),self getv(name)]
 	}
 
 endstruct

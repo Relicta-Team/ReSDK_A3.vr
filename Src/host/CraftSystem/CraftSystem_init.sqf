@@ -57,6 +57,7 @@ csys_init = {
 		csys_map_storage set [_foreachindex,[]];
 	} foreach CRAFT_CONST_CATEGORY_LIST_SYS_NAMES;
 
+
 	//collecting all files and load into buffer
 	private _files = ["src\host\CraftSystem\Crafts\",".yml",true] call fso_getFiles;
 	private _content = [];//this is full array of preloaded crafts

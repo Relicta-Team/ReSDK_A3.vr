@@ -351,12 +351,73 @@ struct(ICraftRecipeBase)
 		GETVAL_ARRAY(_req, vec2("modifiers",_robj getv(modifiers)));
 		FAIL_CHECK_REFSET(_refResult);
 		private _mods = [];
+		private _paramData = null;
+		private _paramDict = null;
 		{
-			private _m = struct_newp(CraftRecipeResultModifier,_x);
-			if (_m getv(__raised)) exitWith {
-				message = "Modifier error: " + (str _m);
+			_paramData = _x;
+			_paramDict = null;
+
+			//inline modifier
+			if equalTypes(_paramData,"") then {
+				private _m = ["CraftModifier::" + _paramData,[null]] call struct_alloc;
+				if isNullVar(_m) exitWith {
+					message = format["Modifier not found: %1",_paramData];
+					break;
+				};
+				if (_m getv(__raised)) exitWith {
+					message = format["Modifier error: %1",_m getv(_lastError)];
+					break;
+				};
+
+				_mods pushBack _m;
+				continue;
 			};
+
+			//with value or params
+			private _pname = _paramData get "name";
+			if (isNullVar(_pname) || {not_equalTypes(_pname,"")}) exitWith {
+				message = format["Modifier name error: %1",_pname];
+			};
+
+			private _val = _paramData get "value";
+			private _valP = _paramData get "parameters";
+			if !isNullVar(_val) then {
+				
+				if !isNullVar(_valP) exitWith {
+					message = format["Modifier error (%1): %2",_pname,"'value' and 'parameters' cannot be used at the same time"];
+					break;
+				};
+
+				_paramDict = createHashMapFromArray[["value" , _val]];	
+			};
+			
+			if isNullVar(_paramDict) then {
+				//parameters dict validate
+				if not_equalTypes(_valP,hashMapNull) then {
+					message = format["Modifier error (%1): Unexpected modifier parameter type. Need dict type, not %2",_pname,tolower typename _valP];
+					break;
+				};
+				
+				if isNullVar(_valP) then {
+					message = format["Modifier error (%1): Null parameters cannot be used",_pname];
+					break;
+				};
+			};
+
+
+			//instance creation 
+			private _m = ["CraftModifier::" + _pname,[_paramDict]] call struct_alloc;
+			//validate exists
+			if isNullVar(_m) exitWith {
+				message = format["Modifier not found: %1",_paramData];
+			};
+			//validate raised
+			if (_m getv(__raised)) exitWith {
+				message = format["Modifier error: %1",_m getv(_lastError)];
+			};
+
 			_mods pushBack _m;
+
 		} foreach value;
 		FAIL_CHECK_REFSET(_refResult);
 		_robj setv(modifiers,_mods);
