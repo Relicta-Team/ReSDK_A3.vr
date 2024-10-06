@@ -303,7 +303,7 @@ csys_handleInteractor = {
 		//process craft
 		trace("csys::handleInteractor() - Process craft")
 
-		private _eps = callFunc(_usr,getLastInteractEndPos);
+		private _eps = callFunc(_targ,getPos); //callFunc(_usr,getLastInteractEndPos);
 
 		private _handItemName = callFuncParams(_handItem,getNameFor,_usr);
 		private _targName = callFuncParams(_targ,getNameFor,_usr);
