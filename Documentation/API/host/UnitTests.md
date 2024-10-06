@@ -596,7 +596,7 @@ Replaced value:
 ```sqf
 " in _content);
 ```
-File: [host\UnitTests\TestsCollection\io.sqf at line 183](../../../Src/host/UnitTests/TestsCollection/io.sqf#L183)
+File: [host\UnitTests\TestsCollection\io.sqf at line 185](../../../Src/host/UnitTests/TestsCollection/io.sqf#L185)
 ## oop_getFieldBaseValue
 
 Type: function
