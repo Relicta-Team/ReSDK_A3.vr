@@ -4166,14 +4166,14 @@ File: [host\engine.hpp at line 885](../../../Src/host/engine.hpp#L885)
 
 Type: Variable
 
-Description: 
+Description: intialize loot only after structs loaded
 
 
 Initial value:
 ```sqf
 1
 ```
-File: [host\init.sqf at line 97](../../../Src/host/init.sqf#L97)
+File: [host\init.sqf at line 98](../../../Src/host/init.sqf#L98)
 # keyboard.hpp
 
 ## KEY_ESCAPE
