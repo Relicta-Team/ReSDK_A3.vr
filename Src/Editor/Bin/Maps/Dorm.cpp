@@ -8,22 +8,22 @@ class EditorData
 	toggles=46;
 	class ItemIDProvider
 	{
-		nextID=8730;
+		nextID=8799;
 	};
 	class LayerIndexProvider
 	{
-		nextID=3961;
+		nextID=4025;
 	};
 	class Camera
 	{
-		pos[]={4042.5767,40.957062,4027.4231};
-		dir[]={0.91664213,-0.39724028,0.044369493};
-		up[]={0.39677593,0.91771364,0.01920573};
-		aside[]={0.048347734,-1.0129952e-008,-0.9988308};
+		pos[]={4310.7817,13.875372,3896.8213};
+		dir[]={-0.82758629,-0.55471581,0.087444521};
+		up[]={-0.55199462,0.83177447,0.058326013};
+		aside[]={0.10508613,7.7317964e-007,0.99451697};
 	};
 };
 binarizationWanted=0;
-sourceName="resdk_a3";
+sourceName="ReSDK_A3";
 addons[]=
 {
 	"A3_Characters_F",
@@ -787,7 +787,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=19;
+		items=45;
 		class Item0
 		{
 			dataType="Group";
@@ -2472,7 +2472,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3789;
 							type="Land_WoodenBox_02_F";
@@ -2489,7 +2489,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3790;
 							type="Land_WoodenBox_02_F";
@@ -2540,7 +2540,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""LargeClothCabinet""]]}";
 							};
 							id=3797;
 							type="CUP_A2_almara";
@@ -3756,7 +3756,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigClothCabinetNew""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinetNew""]]}";
 							};
 							id=2844;
 							type="CUP_A2_case_a";
@@ -3878,7 +3878,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=2846;
 							type="Land_WoodenBox_02_F";
@@ -4742,7 +4742,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=2871;
 							type="Land_WoodenBox_02_F";
@@ -4760,7 +4760,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=2872;
 							type="Land_WoodenBox_02_F";
@@ -4778,7 +4778,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=2873;
 							type="Land_WoodenBox_02_F";
@@ -5613,7 +5613,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ShuttleBag""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""ShuttleBag""]]}";
 							};
 							id=2925;
 							type="case_1";
@@ -6333,7 +6333,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3656;
 							type="Land_WoodenBox_02_F";
@@ -6351,7 +6351,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3657;
 							type="Land_WoodenBox_02_F";
@@ -6369,7 +6369,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3664;
 							type="Land_WoodenBox_02_F";
@@ -6387,7 +6387,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3666;
 							type="Land_WoodenBox_02_F";
@@ -6405,7 +6405,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3667;
 							type="Land_WoodenBox_02_F";
@@ -6788,7 +6788,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3680;
 							type="Land_WoodenBox_02_F";
@@ -6806,7 +6806,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""],[""mark"",""PoisonBox4""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""],[""mark"",""PoisonBox4""]]}";
 							};
 							id=3681;
 							type="Land_WoodenBox_02_F";
@@ -6824,7 +6824,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3682;
 							type="Land_WoodenBox_02_F";
@@ -7140,7 +7140,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ContainerGreen""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""ContainerGreen""]]}";
 							};
 							id=3710;
 							type="sundugan";
@@ -7458,7 +7458,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=3515;
 							type="CUP_Dhangar_borwnskrin";
@@ -7502,7 +7502,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LongWeaponContainer""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""LongWeaponContainer""]]}";
 							};
 							id=3527;
 							type="Land_WoodenBox_F";
@@ -7519,7 +7519,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3530;
 							type="Land_WoodenBox_02_F";
@@ -8212,7 +8212,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""OldWoodenBox""]]}";
 							};
 							id=3528;
 							type="land_tarkov_wood";
@@ -8262,7 +8262,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=3533;
 							type="CUP_Dhangar_borwnskrin";
@@ -8436,7 +8436,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4029.1675,36.351357,4022.8738};
-								angles[]={0,4.7123895,-0};
+								angles[]={0,4.7123895,0};
 							};
 							side="Empty";
 							flags=5;
@@ -8689,7 +8689,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3714;
 							type="Land_WoodenBox_02_F";
@@ -11708,7 +11708,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3764;
 							type="Land_WoodenBox_02_F";
@@ -11744,7 +11744,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3762;
 							type="Land_WoodenBox_02_F";
@@ -11762,7 +11762,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3763;
 							type="Land_WoodenBox_02_F";
@@ -11780,7 +11780,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3765;
 							type="Land_WoodenBox_02_F";
@@ -11798,7 +11798,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""],[""mark"",""PoisonBox1""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""],[""mark"",""PoisonBox1""]]}";
 							};
 							id=3766;
 							type="Land_WoodenBox_02_F";
@@ -11816,7 +11816,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3767;
 							type="Land_WoodenBox_02_F";
@@ -11833,7 +11833,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3769;
 							type="Land_WoodenBox_02_F";
@@ -17828,7 +17828,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",58],[""""class"""",""""Tumannik""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""Tumannik""""]]}"",1]]]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",58],[""""class"""",""""Tumannik""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""Tumannik""""]]}"",1]]]]}";
 					};
 					id=3851;
 					type="Land_WoodenBox_02_F";
@@ -17845,7 +17845,7 @@ class Mission
 					flags=1;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""Tumannik""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",29],[""""class"""",""""Tumannik""""]]}"",1]]]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""Tumannik""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",29],[""""class"""",""""Tumannik""""]]}"",1]]]]}";
 					};
 					id=3852;
 					type="Land_WoodenBox_02_F";
@@ -21055,7 +21055,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3261;
 							type="Land_WoodenBox_02_F";
@@ -21108,7 +21108,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=3262;
 							type="Land_WoodenBox_02_F";
@@ -21568,7 +21568,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=4112;
 							type="CUP_Dhangar_borwnskrin";
@@ -22212,7 +22212,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelGreenCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Tools""]]],[""class"",""SteelGreenCabinet""]]}";
 							};
 							id=4088;
 							type="shkafsin";
@@ -22316,7 +22316,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=4087;
 							type="CUP_Dhangar_borwnskrin";
@@ -22334,7 +22334,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=4100;
 							type="CUP_Dhangar_borwnskrin";
@@ -22910,7 +22910,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=4172;
 							type="CUP_Dhangar_borwnskrin";
@@ -23086,7 +23086,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Длинный ящик""],[""desc"",""Туда и человек влезет наверное""]]],[""class"",""RDetMailBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Длинный ящик""],[""desc"",""Туда и человек влезет наверное""],[""preinit@__loottemplate"",""Things""]]],[""class"",""RDetMailBox""]]}";
 							};
 							id=4418;
 							type="Land_WoodenBox_F";
@@ -23104,7 +23104,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=4417;
 							type="Land_WoodenBox_02_F";
@@ -23122,7 +23122,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=4422;
 							type="Land_WoodenBox_02_F";
@@ -23278,7 +23278,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenWeaponBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""WoodenWeaponBox""]]}";
 							};
 							id=4419;
 							type="oruzhie_crate";
@@ -23789,7 +23789,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelGreenCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Tools""]]],[""class"",""SteelGreenCabinet""]]}";
 							};
 							id=4080;
 							type="shkafsin";
@@ -23807,7 +23807,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ContainerGreen""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""ContainerGreen""]]}";
 							};
 							id=4079;
 							type="sundugan";
@@ -23824,7 +23824,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=4078;
 							type="CUP_Dhangar_borwnskrin";
@@ -25758,7 +25758,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigClothCabinet1""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""BigClothCabinet1""]]}";
 					};
 					id=4614;
 					type="shkafik";
@@ -25908,7 +25908,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 					};
 					id=5002;
 					type="Land_WoodenBox_02_F";
@@ -26220,7 +26220,7 @@ class Mission
 					side="Empty";
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigClothCabinetGreen""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinetGreen""]]}";
 					};
 					id=4984;
 					type="CUP_A2_case_cans_b";
@@ -26454,7 +26454,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Входы";
-					state=1;
 					class Entities
 					{
 						items=31;
@@ -28199,7 +28198,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Пол";
-					state=1;
 					class Entities
 					{
 						items=125;
@@ -30362,7 +30360,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Стены";
-					state=1;
 					class Entities
 					{
 						items=143;
@@ -32800,7 +32797,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Потолок";
-					state=1;
 					class Entities
 					{
 						items=105;
@@ -34533,7 +34529,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Декорации";
-					state=1;
 					class Entities
 					{
 						items=254;
@@ -38926,7 +38921,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Двери";
-					state=1;
 					class Entities
 					{
 						items=1;
@@ -38956,7 +38950,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="эЛЕКТРИЧЕСКИЙ ЗАМОК";
-					state=1;
 					class Entities
 					{
 						items=11;
@@ -39149,7 +39142,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Капканы";
-					state=1;
 					class Entities
 					{
 						items=13;
@@ -39387,7 +39379,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Мебель";
-					state=1;
 					class Entities
 					{
 						items=13;
@@ -39402,7 +39393,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=8218;
 							type="Land_WoodenBox_02_F";
@@ -39419,7 +39410,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=8219;
 							type="Land_WoodenBox_02_F";
@@ -39436,7 +39427,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelBlueCase""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Tools""]]],[""class"",""SteelBlueCase""]]}";
 							};
 							id=8258;
 							type="CUP_A2_metalcase_01";
@@ -39453,7 +39444,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""OldWoodenBox""]]}";
 							};
 							id=8220;
 							type="land_tarkov_wood";
@@ -39469,7 +39460,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=8552;
 							type="Land_WoodenBox_02_F";
@@ -39485,7 +39476,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=8554;
 							type="Land_WoodenBox_02_F";
@@ -39503,7 +39494,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=8553;
 							type="Land_WoodenBox_02_F";
@@ -39520,7 +39511,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BoardWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""BoardWoodenBox""]]}";
 							};
 							id=8549;
 							type="box_wood_close";
@@ -39538,7 +39529,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=8550;
 							type="Land_WoodenBox_02_F";
@@ -39555,7 +39546,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelBlueCase""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Tools""]]],[""class"",""SteelBlueCase""]]}";
 							};
 							id=8555;
 							type="CUP_A2_metalcase_01";
@@ -39573,7 +39564,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""OldWoodenBox""]]}";
 							};
 							id=8551;
 							type="land_tarkov_wood";
@@ -39620,7 +39611,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Мусор";
-					state=1;
 					class Entities
 					{
 						items=15;
@@ -39890,7 +39880,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Предметы";
-					state=1;
 					class Entities
 					{
 						items=2;
@@ -39936,7 +39925,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Телепорт";
-					state=1;
 					class Entities
 					{
 						items=5;
@@ -45307,6 +45295,441 @@ class Mission
 			};
 			id=8480;
 			atlOffset=14.25;
+		};
+		class Item19
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4265.5,5.3420787,3911.125};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe20m""]]}";
+			};
+			id=8766;
+			type="Land_IndPipe1_20m_F";
+		};
+		class Item20
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4289.5,5.3420773,3885.75};
+				angles[]={0,3.1415923,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegL""]]}";
+			};
+			id=8767;
+			type="Land_IndPipe1_90degL_F";
+		};
+		class Item21
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4291.875,5.3431873,3885.75};
+				angles[]={0,3.1415973,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegR""]]}";
+			};
+			id=8768;
+			type="Land_IndPipe1_90degR_F";
+		};
+		class Item22
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4293.25,5.5573483,3890.625};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipeValve""]]}";
+			};
+			id=8769;
+			type="Land_IndPipe1_valve_F";
+		};
+		class Item23
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4294.125,5.3431873,3895.375};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegR""]]}";
+			};
+			id=8770;
+			type="Land_IndPipe1_90degR_F";
+		};
+		class Item24
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4305.625,5.3420787,3896.875};
+				angles[]={0,4.7123899,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe20m""]]}";
+			};
+			id=8771;
+			type="Land_IndPipe1_20m_F";
+		};
+		class Item25
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4294.125,5.3420787,3923};
+				angles[]={0,3.1415985,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe20m""]]}";
+			};
+			id=8778;
+			type="Land_IndPipe1_20m_F";
+		};
+		class Item26
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4293,5.3420773,3935.0007};
+				angles[]={0,1.6391277e-007,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegL""]]}";
+			};
+			id=8779;
+			type="Land_IndPipe1_90degL_F";
+		};
+		class Item27
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4290.625,5.3431873,3935.0005};
+				angles[]={0,5.4314733e-006,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegR""]]}";
+			};
+			id=8780;
+			type="Land_IndPipe1_90degR_F";
+		};
+		class Item28
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4289.2505,5.5573483,3930.1245};
+				angles[]={0,3.1415985,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipeValve""]]}";
+			};
+			id=8781;
+			type="Land_IndPipe1_valve_F";
+		};
+		class Item29
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4288.374,5.3431873,3925.375};
+				angles[]={0,3.1415985,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegR""]]}";
+			};
+			id=8782;
+			type="Land_IndPipe1_90degR_F";
+		};
+		class Item30
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4278.874,5.3420787,3923.876};
+				angles[]={0,1.5708022,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe20m""]]}";
+			};
+			id=8783;
+			type="Land_IndPipe1_20m_F";
+		};
+		class Item31
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4292.625,5.3420773,3911.375};
+				angles[]={0,1.5707963,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegL""]]}";
+			};
+			id=8784;
+			type="Land_IndPipe1_90degL_F";
+		};
+		class Item32
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4266.75,5.3431873,3922.375};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegR""]]}";
+			};
+			id=8785;
+			type="Land_IndPipe1_90degR_F";
+		};
+		class Item33
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4267.75,6.1494832,3924};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Torch""]]}";
+			};
+			id=8786;
+			type="torch";
+			atlOffset=1.125;
+		};
+		class Item34
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4289.875,5.3420773,3909.125};
+				angles[]={0,4.7123938,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegL""]]}";
+			};
+			id=8787;
+			type="Land_IndPipe1_90degL_F";
+		};
+		class Item35
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4288.375,5.3420787,3897.625};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe20m""]]}";
+			};
+			id=8788;
+			type="Land_IndPipe1_20m_F";
+		};
+		class Item36
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4316.75,5.3420773,3895.2507};
+				angles[]={0,1.6391277e-007,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegL""]]}";
+			};
+			id=8789;
+			type="Land_IndPipe1_90degL_F";
+		};
+		class Item37
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4317.875,5.3420787,3883.25};
+				angles[]={0,3.1415985,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe20m""]]}";
+			};
+			id=8790;
+			type="Land_IndPipe1_20m_F";
+		};
+		class Item38
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4316.375,5.3420773,3872.75};
+				angles[]={0,1.5707965,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegL""]]}";
+			};
+			id=8791;
+			type="Land_IndPipe1_90degL_F";
+		};
+		class Item39
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4304.3745,5.3420787,3871.6255};
+				angles[]={0,4.7124019,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe20m""]]}";
+			};
+			id=8792;
+			type="Land_IndPipe1_20m_F";
+		};
+		class Item40
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4283.375,5.3420787,3871.625};
+				angles[]={0,4.7124019,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe20m""]]}";
+			};
+			id=8793;
+			type="Land_IndPipe1_20m_F";
+		};
+		class Item41
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4265.5,5.3420787,3890.375};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe20m""]]}";
+			};
+			id=8794;
+			type="Land_IndPipe1_20m_F";
+		};
+		class Item42
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4266.625,5.3420773,3878.375};
+				angles[]={0,3.1415923,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegL""]]}";
+			};
+			id=8795;
+			type="Land_IndPipe1_90degL_F";
+		};
+		class Item43
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4269.125,5.3431873,3875.75};
+				angles[]={0,1.5708013,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegR""]]}";
+			};
+			id=8797;
+			type="Land_IndPipe1_90degR_F";
+		};
+		class Item44
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4271.75,5.3420773,3873.125};
+				angles[]={0,3.1415923,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""NewIndPipe90DegL""]]}";
+			};
+			id=8798;
+			type="Land_IndPipe1_90degL_F";
 		};
 	};
 };
