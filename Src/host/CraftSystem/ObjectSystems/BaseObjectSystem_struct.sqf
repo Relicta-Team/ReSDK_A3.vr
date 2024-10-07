@@ -40,3 +40,7 @@ struct(BaseCraftSystem)
 	}
 
 endstruct
+
+struct(BaseInternalCraftSystem) base(BaseCraftSystem)
+
+endstruct
