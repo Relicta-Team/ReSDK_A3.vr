@@ -392,3 +392,22 @@ csys_const_regexFunc = "(\w+)\s*\(\)";
 csys_const_regexField = "\w+";
 csys_const_regexOP = "==|!=|<=|>=|\|\||&&|>|<";
 csys_const_alllowRegex = (csys_const_regexFunc+"|"+csys_const_regexField+"|"+csys_const_regexOP);
+
+
+
+csys_list_systemControllers = []; //SystemControllerCrafts  системы зарегистрированы здесь
+csys_map_systemControllersIndexes = createhashMap; //k<int>, v<SystemControllerCrafts>
+
+//get or register craft system controller
+csys_getSystemController = {
+	params ["_sysname"];
+	if (_sysname in csys_map_systemControllersIndexes) then {
+		private _index = csys_map_systemControllersIndexes get _sysname;
+		csys_list_systemControllers select _index
+	} else {
+		private _sysObj = struct_newp(SystemControllerCrafts,_sysname);
+		csys_list_systemControllers pushBack _sysObj;
+		csys_map_systemControllersIndexes set [_sysname,_sysObj];
+		_sysObj
+	};
+};
