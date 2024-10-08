@@ -28,7 +28,7 @@
 #include "..\..\GameObjects\GameConstants.hpp"
 
 struct(SystemControllerCrafts)
-	def_null(_components)
+	def_null(_components) //содержит списки обновляемых систем
 	def(systemType) ""
 
 	def(init)
@@ -37,13 +37,84 @@ struct(SystemControllerCrafts)
 
 		self setv(_components,[])
 	}
-
+	//добавление процессора системы в контроллер
 	def(addProcessor)
 	{
 		params ["_o"];
 		(self getv(_components)) pushBack _o;
 	}
+
+	def(update)
+	{
+		{
+			_x callv(process);
+			false
+		} count (self getv(_components));
+	}
+
 endstruct
+
+/*
+	Сериализатор трансформации игрового объекта.
+	Нужен для быстрой\удобной валидации внутри систем
+	
+	private _itm = ["Item",[0,0,0]] call createGameObjectInWorld;
+	private _stObj = struct_newp(CraftSerializedTransform,_itm);
+
+	assert(_stObj callv(isValid));
+
+	callFuncParams(_itm,setPos, vec3(100,100,0));
+	assert(_stObj callv(isValid)); //throws error
+
+*/
+struct(CraftSerializedTransform)
+	def(_origObject) nullPtr
+
+	def(_useWorldObject) false
+
+	def(_lastLoc) objNull
+	def(_lastPos) null
+
+	def(init)
+	{
+		params ["_obj"];
+		self setv(_origObject,_obj);
+		self callv(updateTransform);
+		
+	}
+
+	def(updateTransform)
+	{
+		private _obj = self getv(_origObject);
+		
+		self setv(_useWorldObject,callFunc(_obj,isInWorld));
+		self setv(_lastLoc,getVar(_obj,loc));
+		if (self getv(_useWorldObject)) then {
+			self setv(_lastPos,callFunc(_obj,getPos));
+		} else {
+			self setv(_lastLoc,null);
+		};
+	}
+
+	def(isValid)
+	{
+		private _obj = self getv(_origObject);
+		call {
+			//check null
+			if isNullReference(_obj) exitWith {false};
+			//check last loc
+			if not_equals(getVar(_obj,loc),self getv(_lastLoc)) exitWith {false};
+
+			if (self getv(_useWorldObject)) then {
+				equals(callFunc(_obj,getPos),self getv(_lastPos))
+			} else {
+				true //non-world object, position doesn't change
+			};
+		}
+	}
+
+endstruct
+
 
 // basic type 
 struct(BaseCraftSystem)
@@ -66,7 +137,7 @@ struct(BaseCraftSystem)
 		};
 	}
 
-	//main processor
+	//main processor handler. called each second
 	def(process)
 	{
 

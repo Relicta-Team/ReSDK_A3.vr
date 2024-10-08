@@ -57,6 +57,8 @@ csys_init = {
 		csys_map_storage set [_foreachindex,[]];
 	} foreach CRAFT_CONST_CATEGORY_LIST_SYS_NAMES;
 
+	csys_systemController_handleUpdate = startUpdate(csys_systemController_onUpdate,1);
+
 
 	//collecting all files and load into buffer
 	private _files = ["src\host\CraftSystem\Crafts\",".yml",true] call fso_getFiles;
@@ -410,4 +412,12 @@ csys_getSystemController = {
 		csys_map_systemControllersIndexes set [_sysname,_sysObj];
 		_sysObj
 	};
+};
+
+csys_systemController_handleUpdate = -1;
+csys_systemController_onUpdate = {
+	{
+		_x callv(update);
+		false
+	} count (csys_list_systemControllers);
 };
