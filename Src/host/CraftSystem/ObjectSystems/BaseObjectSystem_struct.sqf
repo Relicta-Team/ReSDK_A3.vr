@@ -123,6 +123,8 @@ struct(BaseCraftSystem)
 	def(src) nullPtr //source game object
 	def(usr) nullPtr //user last activator or world objects last owner
 
+	def(_ingredients) [] //here writes ingredient list
+
 	def(canUpdate) { true } //отвечает за то будет ли обрабатываться цикл симуляции
 	
 	def(init)
@@ -138,15 +140,53 @@ struct(BaseCraftSystem)
 	}
 
 	//main processor handler. called each second
-	def(process)
-	{
+	def(process) {}
 
+	//get possible recipes based on ingredients
+	def(_getRecipes)
+	{
+		private _recipes = [];
+		private _cls = null;
+		
+		{
+			_cls = tolower callFunc(_x,getClassName);
+			if (_cls in csys_map_allSystemCrafts) then {
+				_recipes pushBack (csys_map_allSystemCrafts get _cls);
+			};
+		} foreach (self getv(_ingredients));
+		
+		_recipes
 	}
 
 endstruct
 
 struct(BaseInternalCraftSystem) base(BaseCraftSystem)
+	
+	//called on user perform action
+	def(onActivate)
+	{
+		params ["_usr"];
+		self setv(usr,_usr);
+	}
 
+	//called on adding ingredient
+	def(addIngredient)
+	{
+		params ["_ingr"];
+		(self getv(_ingredients)) pushBack _ingr;
+	}
+
+	//require user implementation
+	def(canAddIngredient)
+	{
+		params ["_ingr"];
+		false
+	}
+	
+	def(process)
+	{
+
+	}
 endstruct
 
 struct(BaseWorldProcessorCraftSystem) base(BaseCraftSystem)

@@ -15,3 +15,4 @@ loadFile("src\host\LootSystem\LootSystem_structs.sqf");
 loadFile("src\host\CraftSystem\Craft_struct.sqf");
 loadFile("src\host\CraftSystem\Modifiers\Modifier_base_struct.sqf");
 loadFile("src\host\CraftSystem\ObjectSystems\BaseObjectSystem_struct.sqf");
+loadFile("src\host\CraftSystem\ObjectSystems\OrganicGrinderSystem_struct.sqf");
