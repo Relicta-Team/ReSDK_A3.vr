@@ -183,6 +183,10 @@ relicta_debug_internal_serializeStackTrace = {
 //used on halt system call
 relicta_debug_setlasterror = {
 	params ["_name"];
+	#ifdef RBUILDER
+	errorformat("RBuilder setLastError: %1",_name);
+	#endif
+
 	relicta_debug_internal_lastErrorName = _name;
 };
 
