@@ -92,6 +92,9 @@ if (!isMultiplayer) then {
 	loadFile("src\host\ServerSceneTest\serverscrene_init.sqf"); //for testing only
 };
 #endif
+#ifdef RBUILDER
+	loadFile("src\host\Tools\EditorDebug\EditorDebug.sqf"); //predecl debug utils in rb mode
+#endif
 
 //postload initialize systems
 call loot_prepareAll;// intialize loot only after structs loaded
