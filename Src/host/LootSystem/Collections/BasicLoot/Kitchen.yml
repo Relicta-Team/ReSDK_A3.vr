@@ -1,49 +1,114 @@
-Kitchen:
+Kintchen: &Kintchen_base
   name: Кухонные принадлежности и посуда
   health: {min: 60%, max: 90%}
   quality: {min: 30%, max: 90%}
   pass_count: {min: 2, max: 5}
 
-#Частое 70 - 100
-  items:          
+#Tier1
+Kintchen_tier1:
+  <<: *Kintchen_base
+  items: &Kintchen_teir1
     SoupPlate:
-      prob: 70%
+      prob: 4%
     OlderWoodenCup:
-      prob: 70%
+      prob: 4%
     WoodenCup:
-      prob: 70%
-
-#Среднее 40 - 70
-    FoodPlate:
-      prob: 40%
-    Mug:
-      prob: 40%      
-    Cup:
-      prob: 40% 
-    cup1:
-      prob: 40% 
-    GlassBottle:
-      prob: 40%
-    FryingPan:
-      prob: 40%
-    Kastrula:
-      prob: 40%                       
+      prob: 4%
     CuttingBoard:
-      prob: 40%
+      prob: 4%
+
+#Tier2
+Kintchen_tier2:
+  <<: *Kintchen_base
+  items: &Kintchen_teir2
+    FoodPlate:
+      prob: 3%
+    Mug:
+      prob: 3%      
+    Cup:
+      prob: 3% 
+    cup1:
+      prob: 3% 
+    GlassBottle:
+      prob: 3%
+    Kastrula:
+      prob: 3%
     Polovnik:
-      prob: 40%      
+      prob: 3%   
 
-#Редкое 20 - 40
-    GlassGoblet:
-      prob: 20%
+#Tier3
+Kintchen_tier3:
+  <<: *Kintchen_base
+  pass_count: {min: 1, max: 2}
+  items: &Kintchen_teir3
     MetalCup:
-      prob: 20%      
-    GlassLargeBreaker:
-      prob: 20% 
+      prob: 2%
     Teapot:
-      prob: 20% 
+      prob: 2% 
+    GlassLargeBreaker:
+      prob: 2% 
+    FryingPan:
+      prob: 2%
 
-#Очень редкое 0 - 20
+#Tier4
+Kintchen_tier4:
+  <<: *Kintchen_base
+  pass_count: {min: 1, max: 2}
+  items: &Kintchen_teir4
+    KitchenKnife:
+      prob: 1%    
+    GlassGoblet:
+      prob: 1%
+    SaltShaker:  
+      prob: 0.5%
+    PepperShaker:  
+      prob: 0.5%
+      
+#Presets
+#Full config
+Kintchen_all:
+  <<: *Kintchen_base
+  items:
+    <<: *Kintchen_teir1
+    <<: *Kintchen_teir2
+    <<: *Kintchen_teir3
+    <<: *Kintchen_teir4
 
+#Tier1-2
+Kintchen_tier1_2:
+  <<: *Kintchen_base
+  items:
+    <<: *Kintchen_teir1
+    <<: *Kintchen_teir2
+
+#Tier1-2-3
+Kintchen_tier1_2_3:
+  <<: *Kintchen_base
+  items:
+    <<: *Kintchen_teir1
+    <<: *Kintchen_teir2    
+    <<: *Kintchen_teir3
+
+#Tier2-3
+Kintchen_tier2_3:
+  <<: *Kintchen_base
+  items:
+    <<: *Kintchen_teir2
+    <<: *Kintchen_teir3
+
+#Tier3-4
+Kintchen_tier3_4:
+  <<: *Kintchen_base
+  items:
+    <<: *Kintchen_teir3
+    <<: *Kintchen_teir4
+
+#Tier2-3-4
+Kintchen_tier2_3_4:
+  <<: *Kintchen_base
+  items:
+    <<: *Kintchen_teir2 
+    <<: *Kintchen_teir3
+    <<: *Kintchen_teir4
 
 
