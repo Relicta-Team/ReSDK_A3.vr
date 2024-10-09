@@ -282,6 +282,9 @@ bool TestRange (int numberToCheck, int bottom, int top)
 //Проверка диапазона
 #define inRange(numberToCheck,bottom,top) ((numberToCheck) >= bottom && (numberToCheck) <= top)
 
+//Проверка типов
+#define isInt(num) ((num) call {floor _this == _this})
+
 #define boolToInt(bval) ([0,1]select (bval))
 
 //получить процент от числа
