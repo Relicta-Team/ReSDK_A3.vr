@@ -1369,6 +1369,10 @@ gm_createMob = {
 	//private _mob = gm_mainGroup createUnit [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
 
 	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
+	
+	//only after platform 2.18
+	_mob setPhysicsCollisionFlag false;
+
 	_mob disableAI "MOVE";
 	_mob disableAI "TARGET";
 	_mob disableAI "AUTOTARGET";

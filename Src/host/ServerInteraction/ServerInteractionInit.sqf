@@ -16,8 +16,6 @@
 #include "ServerInteractionTests.sqf"
 //Проверщик объектов с проблемными моделями, через которые не проходит рейкаст
 #include "ServerInteractionShared.sqf"
-//хандлер коллизии на стороне сервера
-#include "ServerInteraction_Collision.sqf"
 
 
 //клиентское использование интеракта для INTERACT_LODS_CHECK_GEOM
