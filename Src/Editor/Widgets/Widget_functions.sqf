@@ -463,16 +463,7 @@ function(getScreenPointToWorld)
 {
     params [["_screenPos",getMousePosition],["_mulDist",1000]];
 
-    _screenPos = _screenPos vectorDiff [0.5, 0.5];
-    private _res = getResolution;
-
-    private _m = _res select 4;
-    private _aspect = _res select 7;
-    positionCameraToWorld (vectorNormalized [
-      (_screenPos select 0) * tan (45/2) * _m * _aspect,
-      -((_screenPos select 1) * tan (45/2) * _m),
-      1
-    ] vectorMultiply _mulDist);
+    setLastError("This function is not implemented in Editor");
 }
 
 //Проверяет находится ли позиция внутри другой позиции. Отсчёт позиции с верхнего левого угла всегда
