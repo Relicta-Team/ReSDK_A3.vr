@@ -288,10 +288,37 @@ struct(LootTemplate)
 
 						continue;
 					};
-
-
+					
 					_objItm = callFuncParams(_obj,createItemInContainer,_itClass arg 1 arg null arg _attrMethods);
-					assert(!isNullReference(_objItm));
+					assert(!isNullVar(_objItm));
+					assert(equalTypes(_objItm,nullPtr));
+
+					if isNullReference(_objItm) then {
+						#ifdef EDITOR
+						if (!is3den && !loot_internal_catchedError) then {
+							loot_internal_catchedError = true;
+							if (["Не удалось создать предмет %1 в %2. (не вместилось по размеру или нет места)."+endl+
+							"Нажмите 'Да' чтобы телепортироваться к проблемному контейнеру."+endl+endl+
+							"Это сообщение будет подавлено при возникновении следующей ошибки",_itClass,callFunc(_obj,getClassName)] call messageBoxRet) then {
+								startAsyncInvoke
+								{
+									private _own = player getvariable "link" getvariable "owner";
+									!isNullVar(_own) && {!isNullReference(_own)}
+								},
+								{
+									player setposatl (callFunc(_this select 0,getPos))
+								},
+								[_obj],
+								30,
+								{
+									["Timeout on teleport to error container (LootTemplate)"] call messageBox
+								}
+								endAsyncInvoke
+							};
+						};
+						#endif
+						continue;
+					};
 
 					//set hp and quality
 					if !isNullVar(_qualObj) then {
