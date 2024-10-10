@@ -58,7 +58,7 @@ Count modules: 55
  - [GURPS](host//GURPS.md) - 3 files
  - [Logger](host//Logger.md) - 1 files
  - [LootSystem](host//LootSystem.md) - 2 files
- - [MapManager](host//MapManager.md) - 15 files
+ - [MapManager](host//MapManager.md) - 16 files
  - [Materials](host//Materials.md) - 3 files
  - [MatterSystem](host//MatterSystem.md) - 11 files
  - [Medals](host//Medals.md) - 3 files
