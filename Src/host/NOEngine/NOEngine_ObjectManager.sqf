@@ -219,6 +219,10 @@ createItemInWorld = {
 	this
 };
 
+//error counter for debugging cannot add items in container information
+ciic_internal_errorCheckCanAdd = 0;
+ciic_internal_successedCreation = 0;
+
 // Создание предмета в контейнере
 "
 	name:Создать предмет в контейнере
@@ -279,12 +283,15 @@ node_func(createItemInContainer) = {
 	};
 
 	if !(_rez isEqualTo true) exitWith {
+		INC(ciic_internal_errorCheckCanAdd);
 		errorformat("Cant create %2 in %1. Result is %3",callFunc(_container,getClassName) arg callFunc(_item,getClassName) arg _rez);
 		delete(_item);
 		//перерасчитываем вес
 		_contLoc call gurps_recalcuateEncumbrance;
 		nullPtr;
 	};
+
+	INC(ciic_internal_successedCreation);
 
 	[_item] call createGameObjectScriptInternal;
 
