@@ -599,7 +599,7 @@ gm_spawnClientToRole = {
 	};
 
 	//face setting
-	_face = getClientSetting(face);
+	private _face = getClientSetting(face);
 	if (_face == "rand") then {
 		_face = if (_gender == 0) then {pick faces_list_man} else {pick faces_list_woman};
 	};
@@ -849,13 +849,16 @@ gm_sendLateRolesToClient = {
 			_obsoleteSettings = _ruName;
 		};
 	} foreach _lastCharData;
+	
 	#ifndef EDITOR
 	if not_equals(_obsoleteSettings,"") exitWith {
 		callFuncParams(_client,localSay,"Измени " + _obsoleteSettings + " и сможешь зайти в раунд." arg "log");
 		rpcSendToClient(_owner,"onSelectLateRole",-1);
 	};
 	#else
-	callFuncParams(_client,localSay,"<t size='2'>Внимание! Требования смены " + _obsoleteSettings + " выключено в режиме EDITOR</t>" arg "log");
+	if not_equals(_obsoleteSettings,"") then {
+		callFuncParams(_client,localSay,"<t size='2'>Внимание! Требования смены " + _obsoleteSettings + " выключено в режиме EDITOR</t>" arg "log");
+	};
 	#endif
 
 

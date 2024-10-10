@@ -204,7 +204,10 @@ if (!call yaml_isExtensionLoaded) then {
 	setLastError("Yaml library not found.");
 	appExit(APPEXIT_REASON_EXTENSION_ERROR);
 };
-if (((call yaml_getExtensionVersion) getv(major)) == 0) then {
+
+private _yamlObj = call yaml_getExtensionVersion;
+logformat("Yaml version: %1",_yamlObj);
+if ((_yamlObj getv(major)) == 0) then {
 	#ifdef EDITOR
 	["Yaml библиотека не обновлена."
 		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""ReMaker\DEPLOY.bat"""] call messageBox;
