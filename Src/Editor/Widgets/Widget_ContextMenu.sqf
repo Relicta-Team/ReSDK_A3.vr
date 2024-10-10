@@ -665,7 +665,8 @@ init_function(ContextMenu_mouseArea_init)
 					drawLine3D [
 						getPosAtl _x, 
 						_atlPos, 
-						[1,0,0,1]
+						[1,0,0,1],
+						50
 					];
 				} foreach _objList;
 				
@@ -711,7 +712,8 @@ init_function(ContextMenu_mouseArea_init)
 				drawLine3D [
 					getPosAtl _curObj, 
 					_atlPos, 
-					[0,1,0,1]
+					[0,1,0,1],
+					30
 				];
 				drawIcon3D ["", [0,0.7,0,1], (getPosAtl _curObj) vectoradd [0,0,1], 0, 0, 0, "Точка привязки", 1, 0.05, "PuristaMedium"];
 				if (contextMenu_internal_energy_toObject call golib_hasHashData) then {

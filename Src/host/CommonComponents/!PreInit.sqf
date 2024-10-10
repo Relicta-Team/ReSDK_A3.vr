@@ -519,7 +519,33 @@ stringFormat = {
 	} else {
 		[_fmt,_val]
 	};
-	format _eval
+	_eval call formatLazy;
+};
+
+/*
+	Ленивое форматирование. 
+	Не выбрасывает исключений при отсутствующих параметрах для ключей (в режиме -debug)
+	Все отсутствующие параметры заменяются на пустые строки.
+	Пример:
+		format["%1 %2","Hello"] // throws error
+
+		...
+		["%1 %2","Hello"] call formatLazy; //no throws, result is "Hello "
+
+*/
+formatLazy = {
+	private _args = _this;
+	private _firstTxt = _args select 0;
+	private _params = _args select [1]; // get params without first string
+	private _rtoks = (_firstTxt regexfind ["\%\d+",0]) apply {_x select 0 select 0};
+	_rtoks = _rtoks arrayIntersect _rtoks; //only unique
+	if (count _rtoks == (count _params)) exitWith {
+		format _args;
+	};
+	_params resize (count _rtoks);
+	private _out = [_firstTxt];
+	_out append (_params apply {ifcheck(isNullVar(_x),"",_x)});
+	format _out
 };
 
 getPosListCenter = {
@@ -583,3 +609,6 @@ missionNamespace setVariable ["pushFront",
 }
 ];
 //!pushfront = {}; <- throws compier error
+
+VM_COMPILER_ADDFUNC_BINARY(setPhysicsCollisionFlag_impl,setPhysicsCollisionFlag);
+VM_COMPILER_ADDFUNC_UNARY(screenToWorldDirection_impl,screenToWorldDirection);

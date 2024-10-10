@@ -134,7 +134,9 @@ interact_sendAction = {
 	if (_isMouseMode) then {
 		//private _angle = (getCameraViewDirection player) select 2;
 		#define __hardcoded_angle__ -0.2
-		if (((getCameraViewDirection player) select 2) < __hardcoded_angle__) then {_sourceVecArr = cam_renderVecMouse};
+		//if (((getCameraViewDirection player) select 2) < __hardcoded_angle__) then {
+			_sourceVecArr = [getmouseposition call screenToWorldDirection_impl,cam_renderVecMouse select 1];
+		//};
 	};
 	_data append (_sourceVecArr select 0);
 	_data pushBack (_sourceVecArr select 1 select 2);
@@ -255,7 +257,7 @@ interact_getMouseIntersectData = {
 	private _maxDist = if (_angle < __hardcoded_angle__) then {
 		AGLToASL (screenToWorld getMousePosition)
 	} else {
-		AGLToASL (positionCameraToWorld [0,0,1000])
+		AGLToASL ([] call screenPosToWorldPoint)
 	};
 
 	private _ins = lineIntersectsSurfaces [AGLToASL(positionCameraToWorld[0,0,0]),_maxDist,player,_ignored,true,1,INTERACT_LODS_CHECK_STANDART];
@@ -263,7 +265,7 @@ interact_getMouseIntersectData = {
 	if isNotSecondPassObject(_ins select 0 select 2) exitWith {[_ins select 0 select 2,asltoatl (_ins select 0 select 0),_ins select 0 select 1]};
 	_ins = lineIntersectsSurfaces [
   		AGLToASL positionCameraToWorld [0,0,0],
-  		AGLToASL positionCameraToWorld [0,0,1000],
+  		_maxDist,
   		player,
 		_ignored,
 		true,
@@ -310,6 +312,33 @@ interact_checkPosition = {
 // Проверяет видимость позиции в экране
 interact_inScreenView = {
 	(_this call positionWorldToScreen) call canSeeScreenPoint;
+};
+
+//Получает направление (азимут) головы. Взято с TFAR_fnc_currentDirection
+interact_getHeadDirection = {
+	private ["_current_look_at_x","_current_look_at_y","_current_look_at_z","_current_hyp_horizontal","_current_rotation_horizontal"];
+
+	_current_look_at = (screenToWorld [0.5,0.5]) vectorDiff (eyepos TFAR_currentUnit);
+	_current_look_at_x = _current_look_at select 0;
+	_current_look_at_y = _current_look_at select 1;
+	_current_look_at_z = _current_look_at select 2;
+
+	_current_rotation_horizontal = 0;
+	_current_hyp_horizontal = sqrt(_current_look_at_x * _current_look_at_x + _current_look_at_y * _current_look_at_y);
+
+	if (_current_hyp_horizontal > 0) then {
+		if (_current_look_at_x < 0) then {
+			_current_rotation_horizontal = round - acos(_current_look_at_y / _current_hyp_horizontal);
+		}else{
+			_current_rotation_horizontal = round acos(_current_look_at_y / _current_hyp_horizontal);
+		};
+	} else {
+		_current_rotation_horizontal = 0;
+	};
+	while{_current_rotation_horizontal < 0} do {
+		_current_rotation_horizontal = _current_rotation_horizontal + 360;
+	};
+	_current_rotation_horizontal;
 };
 
 // Проверяет пересечение с позицией исключая целевой объект. Луч всегда берётся из центра моба
@@ -589,7 +618,7 @@ interact_getReachItem = {
 	*/
 
 	verb_lastclickedpos = call mouseGetPosition;
-	private _end = AGLToASL screenToWorld getMousePosition;
+	private _end = AGLToASL ([] call screenPosToWorldPoint);
 
 	private _itsc = lineIntersectsSurfaces [eyepos player,_end,player,objNull,true,5,"VIEW","NONE"];
 
@@ -636,7 +665,7 @@ interact_getReachItem = {
 //onlydebug
 #ifdef DEBUG
 setpostestmobinmouse = {
-	private _end = AGLToASL screenToWorld getMousePosition;
+	private _end = AGLToASL ([] call screenPosToWorldPoint);
 
 	private _itsc = lineIntersectsSurfaces [eyepos player,_end,player,objNull,true,5,"VIEW","NONE"];
 	vasya setposatl (ASLToATL(_itsc select 0 select 0));

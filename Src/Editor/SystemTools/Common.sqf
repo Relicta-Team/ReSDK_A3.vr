@@ -35,3 +35,58 @@ function(systools_checkClassPathes)
 		["Operation done - all pathes is ok!"] call printLog;
 	};
 }
+
+
+init_function(systools_internal_clientLibInfo_init)
+{
+	systools_internal_libs = [
+		"debug_console",
+		"DiscordRichPresence",
+		"task_force_radio_pipe",
+		//currently not used but signed also
+		"url_fetch",
+		"real_date"
+	];
+}
+
+function(systools_generateLibInfo)
+{
+	private _required = systools_internal_libs;
+	private _exList = allextensions;
+	["Required: %1",count _required] call printlog;
+	["Current loaded: %1",count _exList] call printlog;
+
+	{
+		_x callExtension "";
+	} foreach _required;
+	private _headerPart = format["// Generated from systools::generateLibInfo (ReEditor %1)",Core_version_name];
+	_headerPart = [_headerPart];
+	_hashesInfo = [];
+	{
+		["Check library %1",_x get "name"] call printlog;
+
+		if ((_x get "name") in _required) then {
+			_ind = _required find (_x get "name");
+			if (_ind == -1) exitWith {
+				setLastError("Logic error on finding required extension: " + (_x get "name"));
+			};
+			_hashesInfo pushBack (format["	[""%1"", ""%2""]",_x get "name",_x get "hash"]);
+		} else {
+			["Skipped extension %1",_x get "name"] call printlog;
+		};
+	} foreach _exList;
+	["Libs %1",count _hashesInfo] call printlog;
+	private _h = _hashesInfo joinString (", \"+endl);
+	_headerPart pushBack "#define CLIENTSIDE_LIST_ALLOWED_EXTENSIONS [ \";
+	_headerPart pushBack (_h + " \");
+	_headerPart pushBack " ]";
+
+	private _out = _headerPart joinString endl;
+	["Output: "] call printLog;
+	[_out] call printLog;
+
+	copytoclipboard _out;
+	["===== Copyied to clipboard ====="] call printLog;
+	["Place it in 'src\client\ClientInit\_allowed_extensions.h'"] call printLog;
+	["Pasted in clipboard"] call showInfo;
+}

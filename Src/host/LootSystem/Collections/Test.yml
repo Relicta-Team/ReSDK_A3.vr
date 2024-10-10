@@ -12,6 +12,11 @@ TestCollection: &template_collection #создание якоря
   quality: 30%
 
   items:
+    CitizenCloth(1-22):
+      prob: 100%
+    IFoodItem:
+      all_types_of: true
+      prob: 100%
     AmmoBoxPBM:
       prob: 70%
       count: 2
