@@ -123,6 +123,48 @@ struct(LootTemplate)
 		/*===================================
 					Items work
 		===================================*/
+		
+		//handle item extensions
+		private _itAppender = createHashMap;
+		private _toRemoveKeys = [];
+		private _itAppenderRegexPattern = "\(\s*\d+\s*\-\s*\d+\s*\)";
+		{
+			if ([_x,_itAppenderRegexPattern] call regex_isMatch) then {
+				private _repl = [_x,_itAppenderRegexPattern] call regex_getFirstMatch;
+				private _numbers = _repl splitString "()- ";
+				if (count _numbers != 2) exitWith {
+					setLastError("Counter pattern error (wrong pattern): " + (str self));
+				};
+
+				private _min = parseNumberSafe(_numbers select 0);
+				private _max = parseNumberSafe(_numbers select 1);
+				if (_min > _max) then {
+					swap_lvars(_min,_max);
+				};
+				
+				private _origName = [_x,_repl,"%1"] call stringReplace;
+				private _newName = null;
+				for "_i" from _min to _max do {
+					_newName = format[_origName,_i];
+					_itAppender set [_newName,_y];
+				};
+
+				_toRemoveKeys pushBack _x;
+			};
+		} foreach _items;
+
+		// update item collection
+		if (count _toRemoveKeys > 0) then {
+			{
+				_items deleteAt _x;
+			} foreach _toRemoveKeys;
+
+			{
+				_items set [_x,_y];
+			} foreach _itAppender;
+		};
+		
+		// main item list handler
 		private _itemList = [];
 		{
 			_itemList pushBack struct_newp(LootItemTemplate,_x arg _y arg self);
@@ -275,7 +317,11 @@ struct(LootTemplate)
 
 	def(str)
 	{
-		format["%1::%2",struct_typename(self),self getv(type)]
+		private _postname = "";
+		if (self getv(name) != "") then {
+			_postname = format[" (%1)",self getv(name)];
+		};
+		format["%1::%2",struct_typename(self),self getv(type),_postname]
 	}
 
 endstruct
