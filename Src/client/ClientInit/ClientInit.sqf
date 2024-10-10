@@ -7,7 +7,7 @@
 #include <..\ClientRpc\clientRpc.hpp>
 
 //first step - check dlls
-#include "DllSignCheck.sqf";
+#include "DllSignCheck.sqf"
 
 //disable world map effects
 setDetailMapBlendPars [1000, 1000];

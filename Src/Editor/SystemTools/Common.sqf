@@ -76,9 +76,9 @@ function(systools_generateLibInfo)
 		};
 	} foreach _exList;
 	["Libs %1",count _hashesInfo] call printlog;
-	private _h = _hashesInfo joinString (" \"+endl);
+	private _h = _hashesInfo joinString (", \"+endl);
 	_headerPart pushBack "#define CLIENTSIDE_LIST_ALLOWED_EXTENSIONS [ \";
-	_headerPart pushBack (_h);
+	_headerPart pushBack (_h + " \");
 	_headerPart pushBack " ]";
 
 	private _out = _headerPart joinString endl;
