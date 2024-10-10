@@ -151,10 +151,21 @@ struct(LootTemplate)
 
 				_toRemoveKeys pushBack _x;
 			};
+
+			if (_y getOrDefault ["all_types_of",false]) then {
+				private _itemData = _y;
+				_itemData deleteAt "all_types_of";
+				{
+					_itAppender set [_x,_itemData];
+				} foreach (getAllObjectsTypeOfStr(_x));
+
+				_toRemoveKeys pushBack _x;
+			};
+
 		} foreach _items;
 
 		// update item collection
-		if (count _toRemoveKeys > 0) then {
+		if (count _toRemoveKeys > 0 || {count _itAppender > 0}) then {
 			{
 				_items deleteAt _x;
 			} foreach _toRemoveKeys;
