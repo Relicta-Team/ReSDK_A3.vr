@@ -406,6 +406,17 @@ struct(LootItemTemplate)
 	{
 		params ["_type","_cfgData","_sourceTemplate"];
 
+		if !isImplementClass(_type) then {
+			private _errorMessage = format[
+				"Classname %1 not found %4%4Config: %2%4File path: '%3'%4",
+				_type,
+				_sourceTemplate getv(type),
+				_sourceTemplate getv(path),
+				endl
+			];
+			setLastError(_errorMessage);
+		};
+
 		private _srcHp = _sourceTemplate getv(health);
 		private _srcQuality = _sourceTemplate getv(quality);
 
