@@ -11,6 +11,10 @@ init_function(layer_internal_initLayerDict)
 
 	private _onchange = {
 		params ["_entity"];
+		
+		//skip models (only id's)
+		if not_equalTypes(_entity,-1) exitWith {};
+
 		if equals(get3DENEntity _entity,_entity) then {
 			if array_exists(all3DENEntities select 6,_entity) then {
 				//do reload layers library
