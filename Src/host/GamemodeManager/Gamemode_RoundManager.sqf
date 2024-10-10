@@ -1371,7 +1371,7 @@ gm_createMob = {
 	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
 	
 	//only after platform 2.18
-	_mob setPhysicsCollisionFlag false;
+	[_mob,false] call setPhysicsCollisionFlag_impl;
 
 	_mob disableAI "MOVE";
 	_mob disableAI "TARGET";

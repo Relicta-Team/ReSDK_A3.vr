@@ -609,3 +609,6 @@ missionNamespace setVariable ["pushFront",
 }
 ];
 //!pushfront = {}; <- throws compier error
+
+VM_COMPILER_ADDFUNC_BINARY(setPhysicsCollisionFlag_impl,setPhysicsCollisionFlag);
+VM_COMPILER_ADDFUNC_UNARY(screenToWorldDirection_impl,screenToWorldDirection);

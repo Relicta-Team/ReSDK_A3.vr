@@ -257,14 +257,14 @@ gf_collisionProcess = {
 	
 	//enable player collision
 	#ifdef EDITOR
-	player setPhysicsCollisionFlag true;
+	[player,true] call setPhysicsCollisionFlag_impl;
 	#endif
 
 	{
 		_dist = _x distance player;
 		
 		//disable collision with player (locally)
-		_x setPhysicsCollisionFlag false;
+		[_x,false] call setPhysicsCollisionFlag_impl;
 		
 		if (_dist < _mindist && !isObjectHidden _x) then {_mindist = _dist; _mindistobj = _x};
 	} foreach (smd_allInGameMobs-[player]);
