@@ -8,22 +8,22 @@ class EditorData
 	toggles=46;
 	class ItemIDProvider
 	{
-		nextID=8890;
+		nextID=9021;
 	};
 	class LayerIndexProvider
 	{
-		nextID=4153;
+		nextID=4217;
 	};
 	class Camera
 	{
-		pos[]={4045.9976,40.478027,4041.4038};
-		dir[]={0.45760095,-0.30804902,0.83415735};
-		up[]={0.14817931,0.95135486,0.270114};
-		aside[]={0.87678653,2.6077032e-08,-0.48098662};
+		pos[]={4035.9829,37.752659,4038.116};
+		dir[]={0.87074864,-0.23187944,0.43363667};
+		up[]={0.2075654,0.97274208,0.10336844};
+		aside[]={0.44578648,8.9989044e-08,-0.89514768};
 	};
 };
 binarizationWanted=0;
-sourceName="resdk_a3";
+sourceName="ReSDK_A3";
 addons[]=
 {
 	"A3_Characters_F",
@@ -787,7 +787,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=20;
+		items=19;
 		class Item0
 		{
 			dataType="Group";
@@ -1113,7 +1113,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan""]]],[""class"",""TrashCan""],[""mark"",""KoldyrTrash""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_all""]]],[""class"",""TrashCan""],[""mark"",""KoldyrTrash""]]}";
 							};
 							id=4220;
 							type="SMG_UrnaMetall";
@@ -2540,7 +2540,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""LargeClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier1""]]],[""class"",""LargeClothCabinet""]]}";
 							};
 							id=3797;
 							type="CUP_A2_almara";
@@ -2557,7 +2557,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""SmallBookcase""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""SmallBookcase""]]}";
 							};
 							id=3795;
 							type="CUP_A1_Dhangar_knihovna";
@@ -2904,7 +2904,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""BigFileCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""BigFileCabinet""]]}";
 							};
 							id=3804;
 							type="kartoteka";
@@ -3207,7 +3207,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""Bookcase""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_all""]]],[""class"",""Bookcase""]]}";
 							};
 							id=2745;
 							type="biblio";
@@ -3240,7 +3240,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier2_3""]]],[""class"",""CaseBedroom""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier4""]]],[""class"",""CaseBedroom""]]}";
 							};
 							id=2746;
 							type="CUP_A1_case_bedroom_b";
@@ -3257,7 +3257,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""SmallBookcase""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier3""]]],[""class"",""SmallBookcase""]]}";
 							};
 							id=2747;
 							type="CUP_A1_Dhangar_knihovna";
@@ -3311,7 +3311,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan""]]],[""class"",""SmallTrashCan""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_all""]]],[""class"",""SmallTrashCan""]]}";
 							};
 							id=2764;
 							type="pomoika";
@@ -3419,7 +3419,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""CaseBedroomMedium""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""CaseBedroomMedium""]]}";
 							};
 							id=2749;
 							type="yashik";
@@ -3608,7 +3608,7 @@ class Mission
 					name="Заведующий";
 					class Entities
 					{
-						items=22;
+						items=23;
 						class Item0
 						{
 							dataType="Object";
@@ -3756,7 +3756,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinetNew""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier4""]]],[""class"",""BigClothCabinetNew""]]}";
 							};
 							id=2844;
 							type="CUP_A2_case_a";
@@ -3792,7 +3792,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""BigFileCabinet""],[""mark"",""ZavKartoteka""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""BigFileCabinet""],[""mark"",""ZavKartoteka""]]}";
 							};
 							id=2849;
 							type="kartoteka";
@@ -3809,7 +3809,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Tools""]]],[""class"",""SteelGreenCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Tools_tier1_2""]]],[""class"",""SteelGreenCabinet""]]}";
 							};
 							id=2845;
 							type="shkafsin";
@@ -3878,7 +3878,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_all""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=2846;
 							type="Land_WoodenBox_02_F";
@@ -3988,9 +3988,27 @@ class Mission
 							type="sdaykey";
 							atlOffset=0.70610046;
 						};
+						class Item22
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4042.2175,36.304451,4021.5725};
+								angles[]={0,4.6519604,-0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_all""]]],[""class"",""CaseBedroomMedium""]]}";
+							};
+							id=8971;
+							type="yashik";
+							atlOffset=0.00030136108;
+						};
 					};
 					id=2850;
-					atlOffset=0.53189468;
+					atlOffset=0.25487518;
 				};
 				class Item6
 				{
@@ -4401,7 +4419,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan""]]],[""class"",""SmallTrashCan""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_all""]]],[""class"",""SmallTrashCan""]]}";
 							};
 							id=4218;
 							type="pomoika";
@@ -4466,7 +4484,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigClothCabinet""],[""mark"",""KoldyrShkaf""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier1""]]],[""class"",""BigClothCabinet""],[""mark"",""KoldyrShkaf""]]}";
 							};
 							id=4217;
 							type="CUP_Dhangar_borwnskrin";
@@ -4778,7 +4796,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""SquareWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier2""]]],[""class"",""SquareWoodenBox""]]}";
 							};
 							id=2873;
 							type="Land_WoodenBox_02_F";
@@ -5613,7 +5631,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""ShuttleBag""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier2""]]],[""class"",""ShuttleBag""]]}";
 							};
 							id=2925;
 							type="case_1";
@@ -6177,7 +6195,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4037.375,38.875,4030.875};
-								angles[]={0,4.7123952,-0};
+								angles[]={0,4.7123952,0};
 							};
 							side="Empty";
 							class Attributes
@@ -7070,7 +7088,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""BigFileCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""BigFileCabinet""]]}";
 							};
 							id=3689;
 							type="kartoteka";
@@ -7378,7 +7396,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan""]]],[""class"",""TrashCan""],[""mark"",""PoisonBox5""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_all""]]],[""class"",""TrashCan""],[""mark"",""PoisonBox5""]]}";
 							};
 							id=3346;
 							type="SMG_UrnaMetall";
@@ -7475,7 +7493,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier1""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=3515;
 							type="CUP_Dhangar_borwnskrin";
@@ -8162,7 +8180,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan""]]],[""class"",""TrashCan""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_all""]]],[""class"",""TrashCan""]]}";
 							};
 							id=3529;
 							type="SMG_UrnaMetall";
@@ -8279,7 +8297,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier1""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=3533;
 							type="CUP_Dhangar_borwnskrin";
@@ -8459,7 +8477,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kitchen""]]],[""class"",""BoardWoodenBox""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""BoardWoodenBox""]]}";
 							};
 							id=3713;
 							type="box_wood_close";
@@ -8558,7 +8576,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Tools""]]],[""class"",""SteelGreenCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Tools_tier1_2""]]],[""class"",""SteelGreenCabinet""]]}";
 							};
 							id=3715;
 							type="shkafsin";
@@ -11958,7 +11976,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan""]]],[""class"",""TrashCan""],[""mark"",""PoisonBox2""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_all""]]],[""class"",""TrashCan""],[""mark"",""PoisonBox2""]]}";
 							};
 							id=3787;
 							type="SMG_UrnaMetall";
@@ -11987,7 +12005,7 @@ class Mission
 				};
 			};
 			id=2447;
-			atlOffset=2.0083809;
+			atlOffset=2.0082397;
 		};
 		class Item4
 		{
@@ -21460,7 +21478,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan""]]],[""class"",""TrashCan""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_all""]]],[""class"",""TrashCan""]]}";
 							};
 							id=8587;
 							type="SMG_UrnaMetall";
@@ -21571,7 +21589,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier2""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=4112;
 							type="CUP_Dhangar_borwnskrin";
@@ -21867,7 +21885,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""CaseBedroom""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""CaseBedroom""]]}";
 							};
 							id=4111;
 							type="CUP_A1_case_bedroom_b";
@@ -22319,7 +22337,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier1""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=4087;
 							type="CUP_Dhangar_borwnskrin";
@@ -22337,7 +22355,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier1""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=4100;
 							type="CUP_Dhangar_borwnskrin";
@@ -22589,7 +22607,7 @@ class Mission
 					name="Участок";
 					class Entities
 					{
-						items=57;
+						items=58;
 						class Item0
 						{
 							dataType="Object";
@@ -22810,7 +22828,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""CaseBedroom""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""keylockers"""",""""NaruchKey""""]]],[""""class"""",""""HandcuffItem""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""RopeItem""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от наручников""""],[""""preinit@__keytypesstr"""",""""NaruchKey""""]]],[""""class"""",""""Key""""]]}"",1]]]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""CaseBedroom""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""keylockers"""",""""NaruchKey""""]]],[""""class"""",""""HandcuffItem""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""RopeItem""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от наручников""""],[""""preinit@__keytypesstr"""",""""NaruchKey""""]]],[""""class"""",""""Key""""]]}"",1]]]]}";
 							};
 							id=4174;
 							type="CUP_A1_case_bedroom_b";
@@ -22879,7 +22897,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""BigFileCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""BigFileCabinet""]]}";
 							};
 							id=4176;
 							type="kartoteka";
@@ -22913,7 +22931,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier4""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=4172;
 							type="CUP_Dhangar_borwnskrin";
@@ -23332,7 +23350,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""CaseBedroomSmall""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""RopeItem""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""RopeItem""""]]}"",1]]]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""CaseBedroomSmall""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""RopeItem""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""RopeItem""""]]}"",1]]]]}";
 							};
 							id=4434;
 							type="CUP_A2_case_bedroom_a";
@@ -23578,9 +23596,26 @@ class Mission
 							type="S_Baton1";
 							atlOffset=0.56282425;
 						};
+						class Item57
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3976.7615,40.607399,4026.5017};
+								angles[]={0.001035801,0,6.276186};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Ящик""],[""preinit@__loottemplate"",""Things_tier1_2""]]],[""class"",""LongWeaponContainer""]]}";
+							};
+							id=8809;
+							type="Land_WoodenBox_F";
+							atlOffset=35.607399;
+						};
 					};
 					id=4180;
-					atlOffset=2.566082;
+					atlOffset=0.38014221;
 				};
 				class Item2
 				{
@@ -23810,7 +23845,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier4""]]],[""class"",""BigClothCabinet""]]}";
 							};
 							id=4078;
 							type="CUP_Dhangar_borwnskrin";
@@ -23927,7 +23962,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""OfficeCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""OfficeCabinet""]]}";
 							};
 							id=4363;
 							type="Land_OfficeCabinet_02_F";
@@ -24012,7 +24047,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""BigFileCabinet""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""BigFileCabinet""]]}";
 							};
 							id=4362;
 							type="kartoteka";
@@ -24077,7 +24112,7 @@ class Mission
 				};
 			};
 			id=3509;
-			atlOffset=1.8632011;
+			atlOffset=1.3293266;
 		};
 		class Item9
 		{
@@ -25690,7 +25725,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""BigFileCabinet""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""BigFileCabinet""]]}";
 					};
 					id=4615;
 					type="kartoteka";
@@ -25708,7 +25743,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office""]]],[""class"",""BigFileCabinet""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""BigFileCabinet""]]}";
 					};
 					id=4616;
 					type="kartoteka";
@@ -25744,7 +25779,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things""]]],[""class"",""BigClothCabinet1""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier1""]]],[""class"",""BigClothCabinet1""]]}";
 					};
 					id=4614;
 					type="shkafik";
@@ -26206,7 +26241,7 @@ class Mission
 					side="Empty";
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth""]]],[""class"",""BigClothCabinetGreen""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier1""]]],[""class"",""BigClothCabinetGreen""]]}";
 					};
 					id=4984;
 					type="CUP_A2_case_cans_b";
@@ -27897,7 +27932,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan""]]],[""class"",""SmallTrashCan""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_all""]]],[""class"",""SmallTrashCan""]]}";
 							};
 							id=7782;
 							type="pomoika";
@@ -45281,23 +45316,6 @@ class Mission
 			};
 			id=8480;
 			atlOffset=14.25;
-		};
-		class Item19
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={3976.7615,40.607399,4026.5017};
-				angles[]={0.001035801,0,6.276186};
-			};
-			side="Empty";
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Ящик""],[""preinit@__loottemplate"",""Things_tier1_2""]]],[""class"",""LongWeaponContainer""]]}";
-			};
-			id=8809;
-			type="Land_WoodenBox_F";
-			atlOffset=35.607399;
 		};
 	};
 };

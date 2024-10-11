@@ -1,179 +1,219 @@
-CityCloth:
+CityCloth: &CityCloth_base
   name: Городская одежда
-  health: {min: 60%, max: 83%}
-  quality: {min: 60%, max: 83%}
-  pass_count: {min: 2, max: 4}
+  health: {min: 60%, max: 4%}
+  quality: {min: 60%, max: 4%}
+  pass_count: {min: 1, max: 4}
 
-#Частое ~70 - 100   
-  items:
-    #Одежда    
+#Конфиг надо доработать
+#Tier1
+CityCloth_tier1:
+  <<: *CityCloth_base
+  items: &CityCloth_tier1
+    #Одежда
     CitizenCloth1:
-      prob: 83%
+      prob: 4%
     CitizenCloth3:
-      prob: 83%    
+      prob: 4%
     CitizenCloth6:
-      prob: 83%  
+      prob: 4%
     CitizenCloth9:
-      prob: 83%
+      prob: 4%
+    NomadCloth1:
+      prob: 4%
+    NomadCloth3:
+      prob: 4%
+    NomadCloth6:
+      prob: 4%
+    NomadCloth9:
+      prob: 4%
 
-    #Шапки    
+    #Шапки
     HatBandana:
-      prob: 73%  
+      prob: 4%
     HatBandana1:
-      prob: 73%  
+      prob: 4%
     HatBandana2:
-      prob: 73%  
+      prob: 4%
     HatBandana3:
-      prob: 73%
-    WorkerCap:
-      prob: 73%   
-    WorkerCap1:
-      prob: 73%   
-    WorkerCap2:
-      prob: 73%   
-    WorkerCoolCap:
-      prob: 73%
-
-    #Маски     
-    FaceCoverMask:
-      prob: 83%
-
-#Среднее ~40 - 70
-    #Одежда
-    BlueRobe:
-      prob: 50%
-    GreenWorkerCloth:
-      prob: 50%
-    GriblanCloth:
-      prob: 50%      
-    LeatherJacketCloth:
-      prob: 50% 
-
-    #Шапки  
-    HatRedSaloon:
-      prob: 40%
-    HatOldUshanka:
-      prob: 40%  
-    HatGrayOldUshanka:
-      prob: 40%  
-    HatUshanka:
-      prob: 40%  
-    HatUshanka1:
-      prob: 40%   
-    HatUshanka2:
-      prob: 40%   
-    HatUshankaUp:
-      prob: 40%  
-    HatUshankaUp1:
-      prob: 40%
-    HatUshankaUp2:
-      prob: 40%
-    HatUshankaUp3:
-      prob: 40%       
-
-#Редкое ~20 - 40
-    #Одежда
-    DoctorCloth:
-      prob: 20%
-    CookerCloth:
-      prob: 20%
-    GromilaCloth:
-      prob: 20%
-    RDetClothThief:
-      prob: 20%         
-    WoolCoat:
-      prob: 20%   
-    BanditSaloonCloth:
-      prob: 20%
-
-    #Шапки   
-    CookerCap:
-      prob: 20%   
-    CookerCap1:
-      prob: 20%   
-    CookerCap2:
-      prob: 20%
-    HatShemag:
-      prob: 20% 
+      prob: 4%
 
     #Маски
-    BrownBandannaMask:
-      prob: 20%  
-    BlackBandannaMask:
-      prob: 20%  
+    FaceCoverMask:
+      prob: 4%
 
-#Очень редкое ~0 - 20
+#Tier2
+CityCloth_tier2:
+  <<: *CityCloth_base
+  pass_count: {min: 0, max: 3}
+  items: &CityCloth_tier2
     #Одежда
-    GreatcoatBlack:
+    BlueRobe:
       prob: 3%
-    GreatcoatBlack:
+    GreenWorkerCloth:
       prob: 3%
-    GreatcoatBrown:
+    GriblanCloth:
       prob: 3%
-    WomanBasicCloth:
-      prob: 3%
-    ZnatCloth:
-      prob: 3%
-    GreenCoat:
-      prob: 3%
-    BlackPlaidCoat:
-      prob: 3%
-    BlackPlaidCoat:
-      prob: 3%
-    GreenJacketCloth:
-      prob: 3%
-    RedPlaidCoat:
-      prob: 3%
-    WhitePlaidCoat:
-      prob: 3%
-    YellowCoat:
-      prob: 3%
-    BrightRedCloth:
-      prob: 3%
-    TorgashPalthCloth:
-      prob: 3%    
-    MerchantCloth:
-      prob: 3%    
-    MerchantClothSaloon:
-      prob: 3%    
-    WatchmanCloth:
-      prob: 3%    
-    BarmenCloth:
+    LeatherJacketCloth:
       prob: 3%
 
     #Шапки
-    hat:
-      prob: 3%    
-    hat1:
-      prob: 3%    
-    hat2:
-      prob: 3% 
-
-    #Маски
-    BalaclavaMask:
-      prob: 3%    
-    BalaclavaMask2:
+    HatRedSaloon:
+      prob: 3%
+    HatOldUshanka:
+      prob: 3%
+    HatGrayOldUshanka:
+      prob: 3%
+    HatUshanka:
+      prob: 3%
+    HatUshanka1:
+      prob: 3%
+    HatUshanka2:
+      prob: 3%
+    CookerCap:
+      prob: 3%
+    CookerCap1:
+      prob: 3%
+    CookerCap2:
+      prob: 3%
+    HatShemag:
       prob: 3%
 
+#Tier3
+CityCloth_tier3:
+  <<: *CityCloth_base
+  pass_count: {min: 1, max: 2}
+  items: &CityCloth_tier3
+    #Одежда
+    # DoctorCloth:
+    #   prob: 2%
+    CookerCloth:
+      prob: 2%
+    GromilaCloth:
+      prob: 2%
+    RDetClothThief:
+      prob: 2%
+    WoolCoat:
+      prob: 2%
+    BanditSaloonCloth:
+      prob: 2%
 
+    #Шапки
+    WorkerCap:
+      prob: 2%
+    WorkerCap1:
+      prob: 2%
+    WorkerCap2:
+      prob: 2%
+    WorkerCoolCap:
+      prob: 2%
 
+    #Маски
+    BrownBandannaMask:
+      prob: 2%
+    BlackBandannaMask:
+      prob: 2%
 
+#Tier4
+CityCloth_tier4:
+  <<: *CityCloth_base
+  pass_count: {min: 1, max: 2}  
+  items: &CityCloth_tier4
+    GreatcoatBlack:
+      prob: 1%
+    GreatcoatBlack:
+      prob: 1%
+    GreatcoatBrown:
+      prob: 1%
+    WomanBasicCloth:
+      prob: 1%
+    ZnatCloth:
+      prob: 1%
+    GreenCoat:
+      prob: 1%
+    BlackPlaidCoat:
+      prob: 1%
+    BlackPlaidCoat:
+      prob: 1%
+    GreenJacketCloth:
+      prob: 1%
+    RedPlaidCoat:
+      prob: 1%
+    WhitePlaidCoat:
+      prob: 1%
+    YellowCoat:
+      prob: 1%
+    BrightRedCloth:
+      prob: 1%
+    TorgashPalthCloth:
+      prob: 1%
+    MerchantCloth:
+      prob: 1%
+    MerchantClothSaloon:
+      prob: 1%
+    WatchmanCloth:
+      prob: 1%
+    BarmenCloth:
+      prob: 1%
 
+    #Шапки
+    hat:
+      prob: 1%
+    hat1:
+      prob: 1%
+    hat2:
+      prob: 1%
+    HatUshankaUp:
+      prob: 1%
+    HatUshankaUp1:
+      prob: 1%
+    HatUshankaUp2:
+      prob: 1%
+    HatUshankaUp3:
+      prob: 1%
 
+#Presets
+#Full config
+CityCloth_all:
+  <<: *CityCloth_base
+  items:
+    <<: *CityCloth_tier1
+    <<: *CityCloth_tier2
+    <<: *CityCloth_tier3
+    <<: *CityCloth_tier4
 
+#Tier1-2
+CityCloth_tier1_2:
+  <<: *CityCloth_base
+  items:
+    <<: *CityCloth_tier1
+    <<: *CityCloth_tier2
 
+#Tier1-2-3
+CityCloth_tier1_2_3:
+  <<: *CityCloth_base
+  items:
+    <<: *CityCloth_tier1
+    <<: *CityCloth_tier2
+    <<: *CityCloth_tier3
 
+#Tier2-3
+CityCloth_tier2_3:
+  <<: *CityCloth_base
+  items:
+    <<: *CityCloth_tier2
+    <<: *CityCloth_tier3
 
+#Tier3-4
+CityCloth_tier3_4:
+  <<: *CityCloth_base
+  items:
+    <<: *CityCloth_tier3
+    <<: *CityCloth_tier4
 
-
-
-     
-
-
-
-
-
-
-
-
-
+#Tier2-3-4
+CityCloth_tier2_3_4:
+  <<: *CityCloth_base
+  items:
+    <<: *CityCloth_tier2
+    <<: *CityCloth_tier3
+    <<: *CityCloth_tier4

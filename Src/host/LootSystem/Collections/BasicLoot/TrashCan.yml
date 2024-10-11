@@ -1,64 +1,128 @@
-TrashCan:
+TrashCan: &TrashCan_base
   name: Мусор для помоек
-  health: {min: 10%, max: 60%}
-  quality: {min: 10%, max: 60%}
+  health: {min: 10%, max: 35%}
+  quality: {min: 10%, max: 35%}
   pass_count: {min: 2, max: 4}
 
-#Частое 70 - 100   
-  items:
+#Tier1
+TrashCan_tier1:
+  <<: *TrashCan_base
+  items: &TrashCan_tier1
     Paper:
-      prob: 80%
+      prob: 4%
     GlassBottle:
-      prob: 80%      
+      prob: 4%
     ClothDebris1:
-      prob: 75%
+      prob: 4%
     ClothDebris2:
-      prob: 75%   
+      prob: 4%
     SmallStone:
-      prob: 75%          
+      prob: 4%
     WoodenDebris6:
-      prob: 75%       
+      prob: 4%
     WoodenDebris7:
-      prob: 75%     
+      prob: 4%
     Rag:
-      prob: 70% 
+      prob: 4%
     Bone:
-      prob: 70%          
+      prob: 4%
 
-#Среднее 40 - 70
+#Tier2
+TrashCan_tier2:
+  <<: *TrashCan_base
+  pass_count: {min: 1, max: 3}  
+  items: &TrashCan_tier2
     MetalDebris1:
-      prob: 45%  
+      prob: 3%
     MetalDebris2:
-      prob: 45%   
+      prob: 3%
     OrganicDebris1:
-      prob: 45%    
+      prob: 3%
     SyntDebris1:
-      prob: 45%  
+      prob: 3%
     Tooth:
-      prob: 45% 
+      prob: 3%
 
-#Редкое 20 - 40
+#Tier3
+TrashCan_tier3:
+  <<: *TrashCan_base
+  pass_count: {min: 1, max: 2}  
+  items: &TrashCan_tier3
     Syringe:
-      prob: 25%   
-    Castoffs1:
-      prob: 20%
-    Castoffs2:
-      prob: 20%
-    BrownBandannaMask:
-      prob: 20%
-    BreadChopped:
-      prob: 20%        
-    FleshDebris1:
-      prob: 20%  
-
-#Очень редкое 0 - 20
+      prob: 2%
+    TorchDisabled:
+      prob: 2%
+    SoupPlate:
+      prob: 2%
+    OlderWoodenCup:
+      prob: 2%
     BulletCaseShotgun:
-      prob: 15% 
+      prob: 2%
     BulletCasePBM:
-      prob: 15%
-    Poo:
-      prob: 10%
+      prob: 2%      
+
+#Tier4
+TrashCan_tier4:
+  <<: *TrashCan_base
+  pass_count: {min: 0, max: 2}
+  items: &TrashCan_tier4
     Zvak:
-      prob: 5%      
+      prob: 1%
     Melteshonok:
-      prob: 5% 
+      prob: 1%
+    Castoffs1:
+      prob: 1%
+    Castoffs2:
+      prob: 1%
+    BrownBandannaMask:
+      prob: 1%
+    BreadChopped:
+      prob: 1%      
+      
+#Presets
+#Full config
+TrashCan_all:
+  <<: *TrashCan_base
+  items:
+    <<: *TrashCan_tier1
+    <<: *TrashCan_tier2
+    <<: *TrashCan_tier3
+    <<: *TrashCan_tier4
+
+#Tier1-2
+TrashCan_tier1_2:
+  <<: *TrashCan_base
+  items:
+    <<: *TrashCan_tier1
+    <<: *TrashCan_tier2
+
+#Tier1-2-3
+TrashCan_tier1_2_3:
+  <<: *TrashCan_base
+  items:
+    <<: *TrashCan_tier1
+    <<: *TrashCan_tier2
+    <<: *TrashCan_tier3
+
+#Tier2-3
+TrashCan_tier2_3:
+  <<: *TrashCan_base
+  items:
+    <<: *TrashCan_tier2
+    <<: *TrashCan_tier3
+
+#Tier3-4
+TrashCan_tier3_4:
+  <<: *TrashCan_base
+  items:
+    <<: *TrashCan_tier3
+    <<: *TrashCan_tier4
+
+#Tier2-3-4
+TrashCan_tier2_3_4:
+  <<: *TrashCan_base
+  items:
+    <<: *TrashCan_tier2
+    <<: *TrashCan_tier3
+    <<: *TrashCan_tier4
+

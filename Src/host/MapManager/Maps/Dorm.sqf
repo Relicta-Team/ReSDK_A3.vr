@@ -33,7 +33,7 @@ _4045_515144022_7897931_02055 = ['Umivalnik',[4045.52,4022.79,31.0205],270,[0,0,
 _4043_248294022_4292031_02055 = ['Umivalnik',[4043.25,4022.43,31.0205],90,[0,0,1]] call InitStruct; 
 _4043_284424023_7231431_02055 = ['Umivalnik',[4043.28,4023.72,31.0205],90,[0,0,1]] call InitStruct; 
 _4044_447754020_6936032_09883 = ['Shower',[4044.45,4020.69,32.0988],0,[0,0,1]] call InitStruct; 
-['TrashCan',[4048.42,4025.21,30.9652],285,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan"]; go_editor_globalRefs set ["KoldyrTrash",_thisObj];
+['TrashCan',[4048.42,4025.21,30.9652],285,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan_all"]; go_editor_globalRefs set ["KoldyrTrash",_thisObj];
  _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['Paper',[4046.54,4024.47,31.9364],345,[0,0,1]] call InitItem; 
 ['Paper',[4046.65,4024.59,36.5999,true],0,[-0.0069996,-0.00103549,0.999975]] call InitItem; 
@@ -118,8 +118,8 @@ _4037_716064032_2500031_24020 = ['BarrelCampfireBig1',[4037.72,4032.25,31.2402],
 ['SquareWoodenBox',[4047.67,4034.49,30.9939],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['PictureFoliesBergere',[4043.77,4029.3,32.2951],0,[0,0,1]] call InitStruct; 
 ['RedCarpet',[4043.01,4032.13,30.3744],270,[0,0,1]] call InitStruct; 
-['LargeClothCabinet',[4042.92,4034.68,30.9523],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-['SmallBookcase',[4037.3,4029.97,30.9245],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['LargeClothCabinet',[4042.92,4034.68,30.9523],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier1"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SmallBookcase',[4037.3,4029.97,30.9245],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4037_618654032_2187530_70971 = ['Forge',[4037.62,4032.22,30.7097],270,[0,0,1]] call InitStruct; 
 _4044_608404034_8510730_91115 = ['SmallRadiator',[4044.61,4034.85,36.3193,true],0,[0.00161964,0.494275,0.869304]] call InitStruct; 
 _4031_000004029_2500031_86520 = ['ConcreteWallWithNetfence',[4031,4029.25,31.8652],180,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\walls\net\netfence_01_m_4m_f.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -139,7 +139,7 @@ _4029_571534030_3750031_36520 = ['KeyHolder',[4029.57,4030.38,31.3652],180,[0,0,
 ['PenRed',[4032.25,4032.82,31.7981],325,[0,0,1]] call InitItem; 
 ['PenBlack',[4032.31,4032.85,31.7981],355,[0,0,1]] call InitItem; 
 ['MetalCup',[4032.48,4032.64,31.7843],35,[0,0,1]] call InitItem; 
-['BigFileCabinet',[4027.8,4034.83,30.9951],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigFileCabinet',[4027.8,4034.83,30.9951],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['Briefcase',[4026.74,4031.73,31.946],95,[0,0,1]] call InitItem; 
 ['LuxuryRedCurtain',[4029.2,4034,27.7298],265,[0,0,1]] call InitStruct; 
 ['Notepad',[4032.46,4032.79,31.7981],0,[0,0,1]] call InitItem; 
@@ -157,19 +157,19 @@ _4032_423834032_4235831_25031 = ['SteelMedicalBox',[4032.42,4032.42,36.2465,true
 ['MediumWoodenTable1',[4048.34,4033.22,33.9179],270,[0,0,1]] call InitStruct; 
 ['WoodenSmallShelf1',[4048.31,4029.78,33.9179],270,[0,0,1]] call InitStruct; 
 ['OrangeCarpet1',[4046.52,4032.75,33.914],255,[0,0,1]] call InitStruct; 
-['Bookcase',[4047.6,4034.76,33.918],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['Bookcase',[4047.6,4034.76,33.918],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['RedCarpetWall',[4043.04,4033.42,35.55],0,[0,0,1]] call InitStruct; 
-['CaseBedroom',[4045.87,4034.86,33.8719],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier2_3"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-['SmallBookcase',[4043.56,4031.94,33.918],180,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['CaseBedroom',[4045.87,4034.86,33.8719],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier4"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SmallBookcase',[4043.56,4031.94,33.918],180,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier3"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['LampKerosene',[4048.43,4033.65,34.7928],300,[0,0,1], {_thisObj setvariable ['lightisenabled',false];}] call InitItem; 
 ['SmallStoveGrill',[4048.47,4031.64,33.768],180,[0,0,1], {_thisObj setvariable ['lightisenabled',false]; _thisObj setvariable ['light',SLIGHT_LIGHT_STOVE_var];}] call InitStruct; 
-['SmallTrashCan',[4045.5,4031.07,33.918],0.000122943,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SmallTrashCan',[4045.5,4031.07,33.918],0.000122943,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['MeatGrinder',[4048.48,4032.38,34.7857],195,[0,0,1]] call InitStruct; 
 ['FryingPan',[4048.56,4032.83,34.7864],30,[0,0,1]] call InitItem; 
 ['ChairCasual',[4047.55,4033.66,33.9019],15,[0,0,1]] call InitItem; 
 ['OldGreenToiletBowl',[4043.47,4030.06,33.9216],225,[0,0,1]] call InitStruct; 
 ['Umivalnik',[4044.49,4031.33,33.9261],180,[0,0,1]] call InitStruct; 
-['CaseBedroomMedium',[4043.31,4034.61,33.9155],180,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['CaseBedroomMedium',[4043.31,4034.61,33.9155],180,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['MatchBox',[4048.22,4032.31,34.802],315,[0,0,1]] call InitItem; 
 ['Paper',[4048.14,4033.06,34.8049],30,[0,0,1], {_thisObj setvariable ['preinit@__content',"Списоквввцв дел
 "]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
@@ -243,15 +243,15 @@ _4045_883304034_7033735_03304 = ['Documents',[4045.88,4034.7,35.033],20,[0,0,1],
 ['SingleWhiteBed',[4041.42,4020.65,30.9292],92.0003,[0,0,1], {go_editor_globalRefs set ["RZavZhilBed",_thisObj];
 }] call InitStruct; 
 ['BrickThinWallSmall',[4039.38,4024.25,30.8652],90,[0,0,1]] call InitStruct; 
-['BigClothCabinetNew',[4042.09,4025.13,30.9588],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigClothCabinetNew',[4042.09,4025.13,30.9588],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier4"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['WoodenOfficeTable3',[4042.22,4022.59,30.9652],270,[0,0,1]] call InitStruct; 
-['BigFileCabinet',[4037.92,4020.32,31.0822],90,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; go_editor_globalRefs set ["ZavKartoteka",_thisObj];
+['BigFileCabinet',[4037.92,4020.32,31.0822],90,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1"]; go_editor_globalRefs set ["ZavKartoteka",_thisObj];
  _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-['SteelGreenCabinet',[4037.35,4023.5,30.9596],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Tools"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SteelGreenCabinet',[4037.35,4023.5,30.9596],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Tools_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['BrownLeatherChair',[4039.52,4020.48,30.9652],15,[0,0,1]] call InitStruct; 
 ['Candle',[4040.42,4024.24,31.9218],0,[0,0,1]] call InitItem; 
 ['SmallChair',[4041.57,4022.28,30.959],255,[0,0,1]] call InitItem; 
-['SquareWoodenBox',[4040.05,4024.63,30.9686],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SquareWoodenBox',[4040.05,4024.63,30.9686],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['MatchBox',[4042.08,4022.83,31.6624],0,[0,0,1]] call InitItem; 
 ['Briefcase',[4039.99,4024.29,31.9316],0,[0,0,1]] call InitItem; 
 ['Bread',[4042.41,4024.29,31.9652],0,[0,0,1]] call InitItem; 
@@ -260,6 +260,7 @@ if ((random 1) < 0.5) then {
 };
 ['Shelves',[4042.43,4023.99,30.9652],90,[0,0,1]] call InitStruct; 
 _4037_090334021_7871131_70051 = ['KeyHolder',[4037.09,4021.79,31.7005],180,[0,0,1]] call InitStruct; 
+['CaseBedroomMedium',[4042.22,4021.57,30.9531],266.538,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['BloodPoolSmall',[4034.53,4030.24,33.9083],0,[0,0,1]] call InitItem; 
 ['WoodenTableHandmade',[4035.17,4034.53,33.918],182,[0,0,1]] call InitStruct; 
 ['SquareWoodenBox',[4032.51,4030.15,33.918],345,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier1_2"]; go_editor_globalRefs set ["KoldyrAlkoBox",_thisObj];
@@ -285,12 +286,12 @@ _4037_090334021_7871131_70051 = ['KeyHolder',[4037.09,4021.79,31.7005],180,[0,0,
 ['Syringe',[4035.44,4029.72,33.918],320,[0,0,1]] call InitItem; 
 ['SmallWoodenTableHandmade',[4032.42,4032.59,33.9144],265,[0,0,1]] call InitStruct; 
 ['SoupPlate',[4033.01,4032.58,33.918],0,[0,0,1]] call InitItem; 
-['SmallTrashCan',[4033.28,4028.91,33.918],15,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SmallTrashCan',[4033.28,4028.91,33.918],15,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SaltShaker',[4035.37,4034.31,34.849],0,[0,0,1]] call InitItem; 
 ['SaltShaker',[4035.46,4034.39,34.8501],0,[0,0,1]] call InitItem; 
 ['SaltShaker',[4035.36,4034.41,34.8475],0,[0,0,1]] call InitItem; 
-['BigClothCabinet',[4036.43,4032.89,33.923],90,[0,0,1], {go_editor_globalRefs set ["KoldyrShkaf",_thisObj];
-}] call InitStruct; 
+['BigClothCabinet',[4036.43,4032.89,33.923],90,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier1"]; go_editor_globalRefs set ["KoldyrShkaf",_thisObj];
+ _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['BreadChopped',[4035.62,4034.34,34.8518],30,[0,0,1]] call InitItem; 
 ['ClothDebris1',[4032.18,4033.18,34.8725],0,[0,0,1]] call InitItem; 
 ['ClothDebris1',[4033.91,4032.62,33.918],0,[0,0,1]] call InitItem; 
@@ -308,7 +309,7 @@ _4037_090334021_7871131_70051 = ['KeyHolder',[4037.09,4021.79,31.7005],180,[0,0,
 ['SmallWoodenTable',[4029.57,4034.42,33.9149],93,[0,0,1]] call InitStruct; 
 ['SquareWoodenBox',[4031.02,4030.12,33.917],11.2096,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier2_3"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SquareWoodenBox',[4031.1,4031.25,33.922],359.266,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-['SquareWoodenBox',[4031.09,4030.61,34.874],353.296,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SquareWoodenBox',[4031.09,4030.61,34.874],353.296,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4027_207034034_2902833_91122 = ['RatCage',[4027.21,4034.29,33.9112],357.01,[0,0,1]] call InitStruct; 
 _4027_194094032_9877933_91122 = ['RatCage',[4027.19,4032.99,33.9112],1.97399,[0,0,1]] call InitStruct; 
 ['WoodenChair',[4029.5,4033.6,33.9436],170.001,[0,0,1]] call InitItem; 
@@ -359,7 +360,7 @@ _4042_386234031_3793934_19823 = ['IStruct',[4042.39,4031.38,34.1982],350,[0,0,1]
 }] call InitStruct; 
 ['Canister',[4042.34,4031.51,35.7386],340,[0,0,1]] call InitItem; 
 ['SteelBrownContainer',[4038.16,4030.37,33.918],10.0001,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Tools"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
-['ShuttleBag',[4039.94,4034.13,33.918],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
+['ShuttleBag',[4039.94,4034.13,33.918],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
 ['PowerSwitcherBig',[4042.58,4033.1,40.1635,true],90,[0,1,7.54979e-08]] call InitStruct; 
 ['Flashlight',[4042.21,4034.35,34.9039],105,[0,0,1]] call InitItem; 
 ['Flashlight',[4042.3,4034.1,34.9013],45,[0,0,1]] call InitItem; 
@@ -452,7 +453,7 @@ _4045_955574026_0163632_20388 = ['IStruct',[4045.96,4026.02,32.2039],0.000338948
 ['MetalBarrel1',[4027.1,4028.82,30.9604],0,[0,0,1]] call InitStruct; 
 ['MetalBarrel1',[4027.73,4028.7,30.9517],45,[0,0,1]] call InitStruct; 
 ['InfoBoard',[4036.68,4024.5,31.7232],0,[0,0,1]] call InitStruct; 
-['BigFileCabinet',[4043.12,4028.68,30.9708],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigFileCabinet',[4043.12,4028.68,30.9708],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['MetalBarrel',[4048.37,4028.59,30.9587],0,[0,0,1]] call InitStruct; 
 ['MetalBarrel',[4047.57,4028.67,30.9504],0,[0,0,1]] call InitStruct; 
 ['MetalBarrel',[4048.47,4026.38,36.2906,true],[0,7.54979e-08,-1],[0,1,7.54979e-08]] call InitStruct; 
@@ -525,7 +526,7 @@ _4045_955574026_0163632_20388 = ['IStruct',[4045.96,4026.02,32.2039],0.000338948
 ['WoodenOldBench',[4043.41,4035.81,30.9665],180,[0,0,1]] call InitStruct; 
 ['SteelThinWallMedium',[4044.58,4036.53,30.3632],90,[0,0,1]] call InitStruct; 
 ['SteelThinWallSmall',[4043.77,4038.05,30.2082],0,[0,0,1]] call InitStruct; 
-['TrashCan',[4041.66,4035.65,30.8503],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan"]; go_editor_globalRefs set ["PoisonBox5",_thisObj];
+['TrashCan',[4041.66,4035.65,30.8503],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan_all"]; go_editor_globalRefs set ["PoisonBox5",_thisObj];
  _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 if ((random 1) < 0.65) then {
 	['WoodenNewBench',[4037.41,4036.08,30.9974],180.001,[0,0,1]] call InitStruct; 
@@ -533,7 +534,7 @@ if ((random 1) < 0.65) then {
 ['WoodenChair',[4041.24,4024.44,33.918],285,[0,0,1]] call InitItem; 
 ['SingleWhiteBed',[4042,4021.17,33.9156],0,[0,0,1]] call InitStruct; 
 ['BrownOldSofa',[4037.79,4022.65,33.918],90,[0,0,1]] call InitStruct; 
-['BigClothCabinet',[4039.52,4020.31,33.9151],180,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigClothCabinet',[4039.52,4020.31,33.9151],180,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier1"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['MediumWoodenTable',[4042.02,4023.99,33.9179],0,[0,0,1]] call InitStruct; 
 ['LongWeaponContainer',[4047.31,4025.28,39.8956,true],[-0.999741,-0.0225574,0.00295896],[0.0225576,-0.965925,0.257837], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SquareWoodenBox',[4048.27,4024.79,33.918],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
@@ -575,14 +576,14 @@ _4047_938724023_2272933_89002 = ['IStruct',[4047.94,4023.23,38.89,true],[0.25882
 ['Crutch',[4048.06,4024.59,34.9087],55,[0,0,1]] call InitItem; 
 ['HoochMachine',[4045.26,4020.3,33.918],0,[0,0,1]] call InitStruct; 
 ['FryingPan',[4046.35,4024.79,34.6569],0,[0,0,1]] call InitItem; 
-['TrashCan',[4043.36,4025.15,33.918],75,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['TrashCan',[4043.36,4025.15,33.918],75,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SmallSteelTable1',[4046.09,4020.93,33.9159],270,[0,0,1]] call InitStruct; 
 ['SoupPlate',[4045.95,4020.89,33.918],0,[0,0,1]] call InitItem; 
 ['SoupPlate',[4046.09,4020.95,34.7859],0,[0,0,1]] call InitItem; 
 ['OldWoodenBox',[4045.94,4024.59,33.9051],5,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier2_3"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['Scales',[4046.32,4020.6,34.7859],85,[0,0,1]] call InitStruct; 
 ['WoodenCup',[4046.48,4020.99,34.7859],0,[0,0,1]] call InitItem; 
-['BigClothCabinet',[4048.44,4023.45,33.918],80,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigClothCabinet',[4048.44,4023.45,33.918],80,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier1"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SmallBattery',[4046.16,4021.42,34.7859],0,[0,0,1]] call InitItem; 
 ['Teapot',[4046.72,4024.94,34.6665],40,[0,0,1]] call InitItem; 
 ['MatchBox',[4030.22,4020.7,31.9577],0,[0,0,1]] call InitItem; 
@@ -592,13 +593,13 @@ _4047_938724023_2272933_89002 = ['IStruct',[4047.94,4023.23,38.89,true],[0.25882
 ['BrushCleaner',[4032.91,4020.59,31.9577],15,[0,0,1]] call InitItem; 
 ['BrushCleaner',[4032.51,4020.58,31.9577],350,[0,0,1]] call InitItem; 
 ['BrushCleaner',[4032.13,4020.6,31.9577],350,[0,0,1]] call InitItem; 
-['BoardWoodenBox',[4029.17,4022.87,30.9402],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Kitchen"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BoardWoodenBox',[4029.17,4022.87,30.9402],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Kintchen_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['Bucket',[4032.75,4020.57,31.2458],0,[0,0,1]] call InitItem; 
 ['Bucket',[4032.08,4020.5,31.2458],0,[0,0,1]] call InitItem; 
 ['Kastrula',[4032.38,4020.67,31.2458],0,[0,0,1]] call InitItem; 
 ['Rag',[4029.75,4020.59,31.2458],0,[0,0,1]] call InitItem; 
 ['Rag',[4030.13,4020.46,31.2458],335,[0,0,1]] call InitItem; 
-['SteelGreenCabinet',[4031.13,4022.87,30.9588],95,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Tools"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SteelGreenCabinet',[4031.13,4022.87,30.9588],95,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Tools_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['FryingPan',[4031.69,4020.5,31.2458],345,[0,0,1]] call InitItem; 
 ['CandleDisabled',[4030.98,4020.57,31.9577],0,[0,0,1]] call InitItem; 
 ['CandleDisabled',[4030.69,4020.69,31.9577],0,[0,0,1]] call InitItem; 
@@ -791,7 +792,7 @@ _4034_987794035_3024930_73840 = ['SteelGridDoor',[4034.99,4035.3,30.7384],0,[0,0
 ['MetalBarrel',[4019.09,4020.9,33.9229],0,[0,0,1]] call InitStruct; 
 ['MetalBarrel',[4018.18,4020.75,33.9229],0,[0,0,1]] call InitStruct; 
 ['MetalBarrel',[4018.11,4021.76,33.9229],0,[0,0,1]] call InitStruct; 
-['TrashCan',[4025.69,4024.19,33.923],15,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan"]; go_editor_globalRefs set ["PoisonBox2",_thisObj];
+['TrashCan',[4025.69,4024.19,33.923],15,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan_all"]; go_editor_globalRefs set ["PoisonBox2",_thisObj];
  _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['ConcretePanelDamaged',[4024.07,4027.48,33.9227],270,[0,0,1]] call InitStruct; 
 _4007_750004056_3750034_86522 = ['PowerGenerator',[4007.75,4056.38,40.5294,true],180,[0.00659539,0.00162002,0.999977], {go_editor_globalRefs set ["PowerGenerator G:gh057LhnsQs",_thisObj];
@@ -1442,12 +1443,12 @@ _4066_609384061_2426830_83279 = ['SmallSteelTable1',[4066.61,4061.24,36.2678,tru
 ['MediumWoodenTable',[4060.32,4061.47,36.2458,true],90,[-0.00161855,0.00659637,0.999977]] call InitStruct; 
 ['MediumWoodenTable1',[4070.24,4069.5,31.0144],265.001,[0,0,1]] call InitStruct; 
 ['WoodenChair',[4062.52,4065.95,35.8623,true],80,[-0.00584073,-0.00677742,0.99996]] call InitItem; 
-['TrashCan',[4063,4063.71,30.8802],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['TrashCan',[4063,4063.71,30.8802],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SmallStoveGrill',[4064.28,4074.33,30.8652],105,[0,0,1], {_thisObj setvariable ['light',SLIGHT_LIGHT_STOVE_var];}] call InitStruct; 
 ['BlackSmallStove',[4066.63,4073.38,31.0502],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_LIGHT_BAKE_var];}] call InitStruct; 
 ['PosterWorkplaceClean',[4065.17,4074.94,32.5725],180,[0,0,1]] call InitStruct; 
 ['LampKeroseneHolderCharged',[4063.8,4059.86,31.1696],275,[0,0,1]] call InitStruct; 
-['BigClothCabinet',[4003.16,4037.17,35.8464],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigClothCabinet',[4003.16,4037.17,35.8464],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['DirtCraterLong',[4000.07,4033.85,40.7223,true],0,[-0.00566278,0.00693103,0.99996]] call InitStruct; 
 ['WoodenDoor',[3991.36,4027.21,36.3935],180,[0,0,1]] call InitStruct; 
 _4005_875004027_3750036_11520 = ['WoodenDoor',[4005.88,4027.38,36.1152],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RPriyatelDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
@@ -1467,7 +1468,7 @@ _4005_875004027_3750036_11520 = ['WoodenDoor',[4005.88,4027.38,36.1152],0,[0,0,1
 }] call InitStruct; 
 ['SingleWhiteBed',[4008.45,4036.67,35.8515],355,[0,0,1], {go_editor_globalRefs set ["RLekarDormBed",_thisObj];
 }] call InitStruct; 
-['CaseBedroom',[4007.26,4037.72,35.847],265.034,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['CaseBedroom',[4007.26,4037.72,35.847],265.034,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['GreenArmChair',[4006.25,4037.29,35.8509],0,[0,0,1]] call InitStruct; 
 ['SmallBrickHouse',[4006,4035,35.2574],270,[0,0,1]] call InitStruct; 
 _4005_194584033_4079635_84485 = ['SteelGreenDoor',[4005.19,4033.41,35.8449],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RLekarDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
@@ -1493,8 +1494,8 @@ _4005_194584033_4079635_84485 = ['SteelGreenDoor',[4005.19,4033.41,35.8449],0,[0
 ['Wicket',[4013.12,4030.46,36.0167],0,[0,0,1]] call InitStruct; 
 ['SmallChair',[4009.23,4025.41,36.0495],285,[0,0,1]] call InitItem; 
 ['SmallChair',[4004.25,4035.9,40.8504,true],75,[0.00281125,-0.00648951,0.999975]] call InitItem; 
-['BigClothCabinet',[3993.56,4021.19,36.316],180,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-['BigClothCabinet',[4005.15,4021.75,36.0613],250,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigClothCabinet',[3993.56,4021.19,36.316],180,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier1"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigClothCabinet',[4005.15,4021.75,36.0613],250,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier1"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SpirtBottle',[4010.62,4022.21,36.0804],0,[0,0,1]] call InitItem; 
 _4008_528814022_6792036_08043 = ['SpawnPoint',[4008.53,4022.68,36.0804],120,[0,0,1]] call InitStruct; 
 ['SteelBrownContainer',[4010.05,4025.05,36.0804],35,[0,0,1], {go_editor_globalRefs set ["AlkoBox",_thisObj];
@@ -1523,13 +1524,13 @@ _4003_508544033_3056637_17892 = ['WallmountedMedicalCabinet',[4003.51,4033.31,37
 ['MetalCup',[3978.91,4030.02,38.3532],0,[0,0,1]] call InitItem; 
 ['HospitalBed',[3975.62,4029.78,42.8346,true],270.685,[2.46207e-05,0.00255372,0.999997], {go_editor_globalRefs set ["RUchastDormBed",_thisObj];
 }] call InitStruct; 
-_3974_669684030_6586937_18520 = ['CaseBedroom',[3974.67,4030.66,42.1852,true],180.922,[-0.00257779,5.20634e-05,0.999997], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+_3974_669684030_6586937_18520 = ['CaseBedroom',[3974.67,4030.66,42.1852,true],180.922,[-0.00257779,5.20634e-05,0.999997], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['Cup',[3978.38,4033.05,43.1445,true],0,[0.0025838,0,0.999997]] call InitItem; 
 ['HospitalBench',[3981.3,4031.49,37.2908],90.8706,[0,0,1]] call InitStruct; 
 ['RustyCell',[3977.5,4032.14,40.1199],0,[0,0,1]] call InitStruct; 
-['BigFileCabinet',[3981.39,4033.69,37.3176],359.513,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigFileCabinet',[3981.39,4033.69,37.3176],359.513,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _3977_916754034_9587438_64833 = ['WallmountedMedicalCabinet',[3977.92,4034.96,43.6483,true],0,[0.0025838,0,0.999997]] call InitStruct; 
-['BigClothCabinet',[3974.65,4031.7,42.2848,true],269.185,[-4.5079e-05,0.00257916,0.999997], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigClothCabinet',[3974.65,4031.7,42.2848,true],269.185,[-4.5079e-05,0.00257916,0.999997], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier4"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['LargeTwoStoreyStoneHouse',[3979.54,4033.02,37.1152],180,[0,0,1]] call InitStruct; 
 _3981_853764029_6223137_18520 = ['SteelBrownDoor',[3981.85,4029.62,37.1852],270,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RUchastDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SteelThinWallSmall',[3974.26,4031.5,40.1052],90,[0,0,1]] call InitStruct; 
@@ -1555,7 +1556,7 @@ if ((random 1) < 0.4) then {
 _3981_222414032_2087441_02331 = ['CoinBag',[3981.22,4032.21,41.0233],0,[0,0,1]] call InitItem; 
 ['RedSteelBox',[3978.32,4029.84,41.0562],310,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['RedCarpet1',[3979.62,4033.81,40.1213],175,[0,0,1]] call InitStruct; 
-_3976_000004034_2500040_17519 = ['CaseBedroomSmall',[3976,4034.25,40.1752],265.001,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+_3976_000004034_2500040_17519 = ['CaseBedroomSmall',[3976,4034.25,40.1752],265.001,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['MediumPileOfDirtAndStones',[3977.95,4019.35,42.1932,true],0,[-0.00566278,0.505982,0.862525]] call InitStruct; 
 ['LampKeroseneDisabled',[3981.27,4031.94,41.0207],5,[0,0,1]] call InitItem; 
 _3979_621344034_0034240_16192 = if ((random 1) < 0.5) then {
@@ -1573,6 +1574,7 @@ _3980_522714022_0053735_60637 = ['Wicket',[3980.52,4022.01,35.6064],0,[0,0,1]] c
 _3977_878424034_2717340_04393 = ['ClayPot',[3977.88,4034.27,45.3916,true],335,[-0.0080614,0.00388847,0.99996]] call InitStruct; 
 ['Baton1',[3978.41,4032.81,43.1003,true],110,[-0.000882034,-0.00242406,0.999997]] call InitItem; 
 ['Baton1',[3975.92,4034.1,40.738],0,[0,0,1]] call InitItem; 
+_3976_761474026_5017135_60740 = ['LongWeaponContainer',[3976.76,4026.5,40.6074,true],0,[0.00699926,0.00103578,0.999975], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['HouseWithGarageSmall1',[3992.13,4035.06,35.8652],180,[0,0,1]] call InitStruct; 
 ['MediumWoodenTable',[3987.24,4035.65,35.9385],0,[0,0,1]] call InitStruct; 
 ['SmallWoodenTable',[3993.71,4036.88,35.9245],0,[0,0,1]] call InitStruct; 
@@ -1587,19 +1589,19 @@ _3977_878424034_2717340_04393 = ['ClayPot',[3977.88,4034.27,45.3916,true],335,[-
 ['SteelThinWallSmall',[3994.8,4038.17,35.9245],0,[0,0,1]] call InitStruct; 
 ['SteelGreenCabinet',[3989.86,4032.3,35.9375],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Tools_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['ContainerGreen',[3997.08,4032.56,35.9398],185,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier2_3_4"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-['BigClothCabinet',[3989.23,4037.62,35.9416],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigClothCabinet',[3989.23,4037.62,35.9416],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier4"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _3991_640634031_6001035_92449 = ['WoodenDoor',[3991.64,4031.6,35.9245],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"RRostDormKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['Notepad',[3987.47,4035.72,36.8031],165,[0,0,1]] call InitItem; 
 ['RedCarpet',[3990.83,4034.94,35.3655],0,[0,0,1]] call InitStruct; 
 ['PaperHolder',[3987.3,4034.9,36.8031],0,[0,0,1]] call InitItem; 
 ['Paper',[3987.34,4035.19,36.8031],0,[0,0,1]] call InitItem; 
 ['Paper',[3987.29,4035.43,36.8031],340,[0,0,1]] call InitItem; 
-['OfficeCabinet',[3992.49,4034.88,35.9553],90,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['OfficeCabinet',[3992.49,4034.88,35.9553],90,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['PenBlack',[3987.47,4035.72,36.8139],0,[0,0,1]] call InitItem; 
 ['OrangeCarpet1',[3995.35,4036.44,35.9397],0,[0,0,1]] call InitStruct; 
 ['RedCarpetWall',[3993.14,4036.13,37.7153],0,[0,0,1]] call InitStruct; 
 ['SmallSteelRustyFence',[3995.86,4031.68,36.7164],90,[0,0,1]] call InitStruct; 
-['BigFileCabinet',[3987.99,4032.16,35.9554],90,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigFileCabinet',[3987.99,4032.16,35.9554],90,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['RustyWindowFrameMeduim',[3997.75,4034.88,37.192],270,[0,0,1]] call InitStruct; 
 ['RustyWindowFrameMeduim',[3986.38,4034.37,37.2016],90.0001,[0,0,1]] call InitStruct; 
 ['PosterGirl',[3986.69,4035.72,42.6481,true],[1.19249e-08,-7.58967e-07,-1],[1,0,1.19249e-08]] call InitStruct; 
@@ -1689,10 +1691,10 @@ _3976_000004033_0000040_17519 = ['SpawnPoint',[3976,4033,40.1752],320,[0,0,1]] c
 _4087_000004011_0000017_86520 = ['EffectAsStruct',[4087,4011,17.8652],0,[0,0,1]] call InitStruct; // Effect
 ['BrickThinWallDoorwayWindow',[4068.5,4053.38,30.8555],0,[0,0,1]] call InitStruct; 
 _4069_708984053_2189930_60897 = ['SteelGreenDoor',[4069.71,4053.22,30.609],0,[0,0,1]] call InitStruct; 
-['BigFileCabinet',[4067.53,4057.32,30.9375],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-['BigFileCabinet',[4069.11,4057.32,30.9368],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigFileCabinet',[4067.53,4057.32,30.9375],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigFileCabinet',[4069.11,4057.32,30.9368],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _4067_299804053_3750032_34671 = ['IStruct',[4067.3,4053.38,37.3532,true],[-0.996774,-0.0802532,-5.29794e-06],[-0.0802519,0.996759,-0.00565548], {_thisObj setvariable ['model','metro_ob\model\l19_cell_type_03.p3d'];}] call InitStruct; // !!! realocated model !!!
-['BigClothCabinet1',[4066.14,4057.17,37.1346,true],180,[0.00699259,0.00103492,0.999975], {_thisObj setvariable ['preinit@__loottemplate',"Things"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigClothCabinet1',[4066.14,4057.17,37.1346,true],180,[0.00699259,0.00103492,0.999975], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier1"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['WoodenOfficeTable4',[4067.34,4054.06,30.773],90.0006,[0,0,1]] call InitStruct; 
 ['DoubleArmyBed',[4070.91,4056.78,35.97,true],0,[-0.0069996,-0.00103549,0.999975]] call InitStruct; 
 ['SmallChair',[4067.14,4054.85,30.8926],0,[0,0,1]] call InitItem; 
@@ -1718,7 +1720,7 @@ _4067_299804053_3750032_34671 = ['IStruct',[4067.3,4053.38,37.3532,true],[-0.996
 ['WoodenBucket',[4014.62,4037.29,31.2469],70,[0,0,1]] call InitItem; 
 ['WoodenBucket',[4014.9,4036.92,31.2441],15,[0,0,1]] call InitItem; 
 ['WoodenBucket',[4014.65,4036.57,31.2444],335,[0,0,1]] call InitItem; 
-['BigClothCabinetGreen',[4017.23,4035.88,31.2478],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigClothCabinetGreen',[4017.23,4035.88,31.2478],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_tier1"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SmallConcretePipe',[4022.53,4032.75,38.4477,true],[0,2.39611e-06,1],[0,-1,2.39611e-06]] call InitStruct; 
 ['Kastrula',[4014.96,4032.52,31.2411],345,[0,0,1]] call InitItem; 
 ['MediumFireGarbagePile',[4014.61,4034.36,40.8883,true],[0.0871511,-0.996195,1.8673e-07],[0.086824,0.0075959,0.996195]] call InitStruct; 
@@ -1814,7 +1816,7 @@ _4034_250003723_8750048_12500 = ['SteelBrownDoor',[4034.25,3723.88,48.125],0,[0,
 ['LampKerosene',[4029.68,3721.65,49.6312],340,[0,0,1]] call InitItem; 
 ['KitchenKnife',[4036.41,3718.65,54.5612,true],[0.500001,-0.866025,6.93584e-07],[0.866025,0.500001,3.7749e-08]] call InitItem; 
 ['SmallStoveGrill',[4035.73,3718.11,48.4952],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_LIGHT_STOVE_var];}] call InitStruct; 
-['SmallTrashCan',[4035.25,3718.07,48.7022],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SmallTrashCan',[4035.25,3718.07,48.7022],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['AmmoBoxRifle',[4038.55,3721.15,49.5801],160,[0,0,1]] call InitItem; 
 ['FleshDebris1',[4038.69,3718.1,48.8478],295,[0,0,1]] call InitItem; 
 ['OrganicDebris1',[4036.65,3718.21,49.5668],0,[0,0,1]] call InitItem; 
@@ -2876,7 +2878,6 @@ if ((random 1) < 0.5) then {
 ['LogDebris2',[4025.02,4022.56,33.9106],95,[0,0,1]] call InitItem; 
 ['TeleportExit',[4026,4021.13,14.25],0,[0,0,1], {go_editor_globalRefs set ["testExit",_thisObj];
 }] call InitStruct; 
-_3976_761474026_5017135_60740 = ['LongWeaponContainer',[3976.76,4026.5,40.6074,true],0,[0.00699926,0.00103578,0.999975], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 
 
 
@@ -3344,6 +3345,9 @@ if (!isNil'_3977_878424034_2717340_04393') then {
 	_3977_878424034_2717340_04393 setvariable ['name',"Нужник"];
 	_3977_878424034_2717340_04393 setvariable ['desc',"Все свои ""дела"" делать сюда, а потом вылить"];
 };
+if (!isNil'_3976_761474026_5017135_60740') then {
+	_3976_761474026_5017135_60740 setvariable ['name',"Ящик"];
+};
 if (!isNil'_3991_640634031_6001035_92449') then {
 	_3991_640634031_6001035_92449 setvariable ['islocked',true];
 };
@@ -3479,7 +3483,4 @@ if (!isNil'_4192_000003917_375000_00000') then {
 };
 if (!isNil'_4173_397953939_547360_16642') then {
 	_4173_397953939_547360_16642 setvariable ['desc',"Эта голова уже никому ничего не расскажет. Кто знает может быть это иууу к лучшему."];
-};
-if (!isNil'_3976_761474026_5017135_60740') then {
-	_3976_761474026_5017135_60740 setvariable ['name',"Ящик"];
 };
