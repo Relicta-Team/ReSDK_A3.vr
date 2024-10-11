@@ -311,7 +311,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define SETARR(arr,index,val) arr set[index,val]
 #define GETARR(arr,index) arr select(index)
 
-#define array_exists(arr,var) ((var)in arr)
+#define array_exists(arr,var) ((var)in(arr))
 //рандомный сорт массива
 #define array_shuffle(array) (array call BIS_fnc_arrayShuffle)
 //копирование массива
