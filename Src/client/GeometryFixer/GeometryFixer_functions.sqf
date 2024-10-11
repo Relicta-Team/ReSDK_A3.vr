@@ -249,45 +249,55 @@ gf_processWallLock = {
 };
 
 //процессор коллизии армовских мобов
-//не самое оптимизированное решеие. нужно собрать через ближние объекты
+//выключает локальную коллизию моба на клиенте полностью
 gf_collisionProcess = {
 	_dist = 0;
 	_mindist = 100;
 	_mindistobj = objNull;
+	
+	//enable player collision
+	#ifdef EDITOR
+	[player,true] call setPhysicsCollisionFlag_impl;
+	#endif
+
 	{
 		_dist = _x distance player;
-		if (_dist < 15) then {
-			_x disableCollisionWith player;
-		};
+		
+		//disable collision with player (locally)
+		[_x,false] call setPhysicsCollisionFlag_impl;
+		
 		if (_dist < _mindist && !isObjectHidden _x) then {_mindist = _dist; _mindistobj = _x};
 	} foreach (smd_allInGameMobs-[player]);
 
-	if !isNullReference(_mindistobj) then {
-		/*
-		if (_mindistobj call gf_cp_internal_isMovingTo) then {
-			if (
-				(player modelToWorldVisual (player selectionPosition "spine3")) distance
-				(_mindistobj modelToWorldVisual (_mindistobj selectionPosition "spine3"))
-				<= 0.5
-			) then {
-				//too near
-				gf_isLockedInputByActor = true;
-				//TODO check vector move direction and send crushing contact to server
-			};
-		} else {
-			gf_isLockedInputByActor = false;
-		};
-		*/
-	};
+	// if !isNullReference(_mindistobj) then {
+		
+	// 	if ([getposatl player, getposatl _mindistobj,velocity player] call gf_cp_internal_isMovingTo) then {
+	// 		if (
+	// 			(player modelToWorldVisual (player selectionPosition "spine3")) distance
+	// 			(_mindistobj modelToWorldVisual (_mindistobj selectionPosition "spine3"))
+	// 			<= 0.65
+	// 		) then {
+	// 			//too near
+	// 			gf_isLockedInputByActor = true;
+	// 			//TODO check vector move direction and send crushing contact to server
+	// 		};
+	// 	} else {
+	// 		private _relDir = player getreldir _mindistobj;
+	// 		if (_relDir > 350 || _relDir < 10) exitWith {};
+	// 		gf_isLockedInputByActor = false;
+	// 	};
+		
+	// };
 };
 
-gf_cp_internal_isMovingTo = {
-	private _targ = _this;
-	if (true) exitwith {
-		abs speed player > 0
-	};
-	
-	private _v1 = vectorNormalized (velocity player);
-	private _v2 = vectorDir _targ;
-	//????
-};
+// gf_cp_internal_isMovingTo = {
+// 	params ["_p1","_p2","_vecDir"];
+// 	if (abs speed player == 0) exitWith {false};
+// 	private _tvec = _p2 vectorDiff _p1;
+// 	private _normVDir = vectorNormalized _vecDir;
+// 	private _normVTarg = vectorNormalized _tvec;
+
+// 	private _dot = _normVDir vectorDotProduct _normVTarg;
+// 	traceformat("DOT WAS %1",_dot)
+// 	_dot > 0.7
+// };

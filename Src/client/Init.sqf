@@ -37,7 +37,7 @@ if isnil {buffer_cba_funcs} then {
 _getRelictaModHashes = {
 	//getLoadedModsInfo
 };
-_ctx = compile format['errorformat("Version mismatch - %1 (required %2)",client_version arg relicta_version); endMission "LOSER";'];
+_ctx = compile 'errorformat("Version mismatch - %1 (required %2)",client_version arg relicta_version); endMission "LOSER";';
 
 //saving and create models assoc
 if !isNullVar(__USE_OOP_CREATE__) then {

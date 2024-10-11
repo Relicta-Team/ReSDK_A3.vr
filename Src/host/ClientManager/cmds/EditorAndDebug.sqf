@@ -6,6 +6,16 @@
 
 #ifdef DEBUG
 	
+	addCommand("container_errinfo",PUBLIC_COMMAND)
+	{
+		checkIfMobExists();
+		private _msg = "Internal error: Variables not found";
+		if !isNull(ciic_internal_errorCheckCanAdd) then {
+			_msg = format["Success created: %1; Errors: %2",ciic_internal_successedCreation,ciic_internal_errorCheckCanAdd];
+		};
+		callSelfParams(localSay,_msg arg "system");
+	};
+
 	addCommand("showthreads",PUBLIC_COMMAND)
 	{
 		_t = format["Active %1 threads: ",count cba_common_perFrameHandlerArray];

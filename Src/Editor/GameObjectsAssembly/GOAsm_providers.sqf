@@ -128,8 +128,8 @@ function(goasm_attributes_handleProvider_inputGeneric)
 		_rangeValues = parseNumber(((_editorContext select _idxRange) splitString ":") select 1);
 		_allowedRangeText = format["Макс. размер строки:\n%1 символов",_rangeValues];
 		_checkRange = {
-			forceUnicode 1;
-			count _this <= ((_wid getVariable "_rangeValues_InputGeneric") )
+			forceUnicode 0;
+			(count _this) <= ((_wid getVariable "_rangeValues_InputGeneric") )
 		}
 	};
 	
@@ -171,9 +171,10 @@ function(goasm_attributes_handleProvider_inputGeneric)
 				//["base %1",_base] call printTrace;
 				_maxlen = (_wid getVariable "_rangeValues_InputGeneric");
 				if not_equalTypes(_maxlen,0) then {_maxlen = 0};
-				
-				if ([_ref,"Изменение поля " + format["%1::%2",_data get "class",_memberName,_maxlen],"Введите текст",_base,true,_maxlen] call widget_winapi_openTextBox) then {
+				forceUnicode 1;
+				if ([_ref,"Изменение поля " + format["%1::%2 (max %3, cur: %4)",_data get "class",_memberName,_maxlen,count toarray _base],"Введите текст",_base,true,_maxlen] call widget_winapi_openTextBox) then {
 					private _newvalue = refget(_ref);
+					["New count %1",count toarray _newvalue] call printTrace;
 					_props set [_memberName,_newvalue];
 					private _changedData = true;
 					_defval = [_data get "class",_memberName] call oop_getFieldBaseValue;
@@ -230,10 +231,17 @@ function(goasm_attributes_handleProvider_inputGeneric)
 			_val = _defval;
 			//["EMPTY %1",_val] call printTrace;
 		};
+		forceUnicode 1; //global enable unicode
+
 		if ([_val] call (_wid getVariable "_conditionType")) then {
 			//["stage %1",_wid getVariable "_conditionType"] call printTrace;
+			
 			if !(_val call (_wid getVariable "_checkRange") || equals(_val,_defval)) exitWith {
-				[format["Значение %1::%2 вне диапазона",_data get "class",_memberName],4] call showWarning;
+				private _itinf = "";
+				if ((_wid getVariable "_inputType")=="string") then {
+					_itinf = format[". Количество %1, Допустимо %2",count _val,_wid getvariable "_rangeValues_InputGeneric"]
+				};
+				[format["Значение %1::%2 вне диапазона%3",_data get "class",_memberName,_itinf],4] call showWarning;
 			};
 			//["stage %1",_wid getVariable "_checkRange"] call printTrace;
 			_val call (_wid getVariable "_setNewValue_prov");

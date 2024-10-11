@@ -282,6 +282,9 @@ bool TestRange (int numberToCheck, int bottom, int top)
 //Проверка диапазона
 #define inRange(numberToCheck,bottom,top) ((numberToCheck) >= bottom && (numberToCheck) <= top)
 
+//Проверка типов
+#define isInt(num) ((num) call {floor _this == _this})
+
 #define boolToInt(bval) ([0,1]select (bval))
 
 //получить процент от числа
@@ -329,6 +332,9 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define vec3(x,y,z) [x,y,z]
 #define vec4(x,y,w,h) [x,y,w,h]
 
+//local variables swap
+#define __sw_combine(o1,o2) o1##o2
+#define swap_lvars(a,b) private __sw_combine(__t_swp_,b) = a; a = b; b = __sw_combine(__t_swp_,b)
 
 //reference packer
 #define refcreate(value) [value]
