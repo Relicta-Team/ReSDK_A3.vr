@@ -1891,7 +1891,7 @@ Description:
 
 Replaced value:
 ```sqf
-((var)in arr)
+((var)in(arr))
 ```
 File: [host\engine.hpp at line 314](../../../Src/host/engine.hpp#L314)
 ## array_shuffle(array)
