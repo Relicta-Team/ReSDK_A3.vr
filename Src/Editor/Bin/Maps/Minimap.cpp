@@ -8,22 +8,22 @@ class EditorData
 	toggles=42;
 	class ItemIDProvider
 	{
-		nextID=5152;
+		nextID=5154;
 	};
 	class LayerIndexProvider
 	{
-		nextID=483;
+		nextID=489;
 	};
 	class Camera
 	{
-		pos[]={3805.3921,32.933865,3717.2095};
-		dir[]={-0.035980262,-0.57864636,0.81493288};
-		up[]={-0.025519622,0.81550092,0.57813674};
-		aside[]={0.99912661,1.18975e-006,0.044109643};
+		pos[]={3793.429,33.89893,3754.8682};
+		dir[]={0.92318028,-0.37666288,-0.07734739};
+		up[]={0.37535313,0.92634004,-0.031448834};
+		aside[]={-0.08350189,2.7837814e-07,-0.99656355};
 	};
 };
 binarizationWanted=0;
-sourceName="resdk_fork";
+sourceName="ReSDK_A3";
 addons[]=
 {
 	"A3_Characters_F",
@@ -802,7 +802,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=2320;
+		items=2322;
 		class Item0
 		{
 			dataType="Group";
@@ -1039,7 +1039,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldWoodenBox""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier3_4""]]],[""class"",""OldWoodenBox""]]}";
 			};
 			id=2210;
 			type="land_tarkov_wood";
@@ -1091,7 +1091,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeClothCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""HeadCloth""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",48],[""""class"""",""""HeadCloth""""]]}"",1]]]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier4""]]],[""class"",""LargeClothCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""HeadCloth""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",48],[""""class"""",""""HeadCloth""""]]}"",1]]]]}";
 			};
 			id=2213;
 			type="CUP_almara";
@@ -1108,7 +1108,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeClothCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""WomanBasicCloth""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",47],[""""class"""",""""WomanBasicCloth""""]]}"",1]]]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier4""]]],[""class"",""LargeClothCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""WomanBasicCloth""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",47],[""""class"""",""""WomanBasicCloth""""]]}"",1]]]]}";
 			};
 			id=2214;
 			type="CUP_almara";
@@ -1119,7 +1119,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3742.54,35.463402,3765.1299};
+				position[]={3742.54,35.414928,3765.1299};
 				angles[]={0,1.5652899,0};
 			};
 			side="Empty";
@@ -1130,7 +1130,7 @@ class Mission
 			};
 			id=2215;
 			type="komodvirus";
-			atlOffset=0.0096206665;
+			atlOffset=0.20013046;
 		};
 		class Item13
 		{
@@ -1143,7 +1143,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bookcase""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_all""]]],[""class"",""Bookcase""]]}";
 			};
 			id=2216;
 			type="biblio";
@@ -1586,7 +1586,7 @@ class Mission
 			};
 			id=2242;
 			type="svecha";
-			atlOffset=8.0108643e-005;
+			atlOffset=8.0108643e-05;
 		};
 		class Item40
 		{
@@ -1696,17 +1696,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3762.6899,25.118729,3719.7};
+				position[]={3762.6899,25.102493,3719.7};
 				angles[]={0,1.634986,0};
 			};
 			side="Empty";
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ContainerGreen""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""ContainerGreen""]]}";
 			};
 			id=2249;
 			type="sundugan";
+			atlOffset=0.0041484833;
 		};
 		class Item47
 		{
@@ -1738,7 +1739,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroom""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier2_3""]]],[""class"",""CaseBedroom""]]}";
 			};
 			id=2251;
 			type="CUP_case_bedroom_b";
@@ -2089,7 +2090,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bookcase""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier2_3""]]],[""class"",""Bookcase""]]}";
 			};
 			id=2271;
 			type="biblio";
@@ -3801,7 +3802,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ContainerGreen2""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_all""]]],[""class"",""ContainerGreen2""]]}";
 			};
 			id=2374;
 			type="yashi4ek";
@@ -3969,34 +3970,34 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3745.96,38.2962,3760.7};
+				position[]={3746.0737,38.2962,3760.5654};
 				angles[]={0,1.5010809,0};
 			};
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallBookcase""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_all""]]],[""class"",""SmallBookcase""]]}";
 			};
 			id=2384;
 			type="CUP_Dhangar_knihovna";
-			atlOffset=3.3767433;
+			atlOffset=3.3763123;
 		};
 		class Item178
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3745.96,38.384499,3763.3401};
+				position[]={3745.96,38.308891,3763.3401};
 				angles[]={0,1.5010809,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallBookcase""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_all""]]],[""class"",""SmallBookcase""]]}";
 			};
 			id=2385;
 			type="CUP_Dhangar_knihovna";
+			atlOffset=3.3937073;
 		};
 		class Item179
 		{
@@ -4880,18 +4881,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3755.01,31.191294,3751.4399};
+				position[]={3755.01,31.15959,3751.4399};
 				angles[]={0,3.3252885,0};
 			};
 			side="Empty";
-			flags=5;
+			flags=1;
 			class Attributes
 			{
 				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""code_onInit"",""mem """"setHeadConsole"""" , mem """"_headcon"""" getref docall""],[""class"",""RegistrationPaperArchive""]]}";
 			};
 			id=2438;
 			type="archive_tube";
-			atlOffset=0.01320076;
+			atlOffset=24.586697;
 		};
 		class Item230
 		{
@@ -5366,7 +5367,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroom""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""CaseBedroom""]]}";
 			};
 			id=2469;
 			type="CUP_case_bedroom_b";
@@ -5401,7 +5402,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroomMedium""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""CaseBedroomMedium""]]}";
 			};
 			id=2471;
 			type="yashik";
@@ -5483,18 +5484,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3775.6499,29.433399,3781.4399};
+				position[]={3775.6499,29.455673,3781.4399};
 				angles[]={0,3.1215215,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallTrashCan""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_tier1_2_3""]]],[""class"",""SmallTrashCan""]]}";
 			};
 			id=2476;
 			type="pomoika";
-			atlOffset=24.1094;
+			atlOffset=24.131674;
 		};
 		class Item265
 		{
@@ -5543,7 +5544,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelGreenCabinet""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Tools_tier2_3""]]],[""class"",""SteelGreenCabinet""]]}";
 			};
 			id=2479;
 			type="shkafsin";
@@ -5561,7 +5562,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigFileCabinet""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""BigFileCabinet""]]}";
 			};
 			id=2480;
 			type="kartoteka";
@@ -5577,7 +5578,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeClothCabinet""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier2_3""]]],[""class"",""LargeClothCabinet""]]}";
 			};
 			id=2481;
 			type="CUP_almara";
@@ -6280,7 +6281,7 @@ class Mission
 			};
 			id=2524;
 			type="Land_kr_stena_3x6";
-			atlOffset=1.9073486e-005;
+			atlOffset=1.9073486e-05;
 		};
 		class Item310
 		{
@@ -6314,7 +6315,7 @@ class Mission
 			};
 			id=2526;
 			type="CUP_vojenska_palanda";
-			atlOffset=1.9073486e-005;
+			atlOffset=1.9073486e-05;
 		};
 		class Item312
 		{
@@ -6340,7 +6341,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3806.5601,29.30131,3711.52};
-				angles[]={3.1416624,3.1098976,5.0891358e-006};
+				angles[]={3.1416624,3.1098976,5.0891358e-06};
 			};
 			side="Empty";
 			flags=1;
@@ -6637,7 +6638,7 @@ class Mission
 			};
 			id=2545;
 			type="Land_kr_stena_3x6";
-			atlOffset=1.9073486e-005;
+			atlOffset=1.9073486e-05;
 		};
 		class Item331
 		{
@@ -6689,7 +6690,7 @@ class Mission
 			};
 			id=2548;
 			type="CUP_vojenska_palanda";
-			atlOffset=1.9073486e-005;
+			atlOffset=1.9073486e-05;
 		};
 		class Item334
 		{
@@ -6759,7 +6760,7 @@ class Mission
 			};
 			id=2552;
 			type="buhlo1";
-			atlOffset=1.9073486e-006;
+			atlOffset=1.9073486e-06;
 		};
 		class Item338
 		{
@@ -6829,7 +6830,7 @@ class Mission
 			};
 			id=2556;
 			type="Land_Metal_rack_F";
-			atlOffset=1.9073486e-005;
+			atlOffset=1.9073486e-05;
 		};
 		class Item342
 		{
@@ -6855,7 +6856,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3806.7,29.284908,3717.04};
-				angles[]={3.1416624,3.1098976,5.0891358e-006};
+				angles[]={3.1416624,3.1098976,5.0891358e-06};
 			};
 			side="Empty";
 			flags=1;
@@ -6872,18 +6873,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3807.8899,27.5411,3731.1699};
+				position[]={3807.8899,27.551699,3731.1699};
 				angles[]={0,4.7882757,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallTrashCan""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_tier1_2_3""]]],[""class"",""SmallTrashCan""]]}";
 			};
 			id=2559;
 			type="pomoika";
-			atlOffset=22.2171;
+			atlOffset=22.227699;
 		};
 		class Item345
 		{
@@ -6901,7 +6902,7 @@ class Mission
 			};
 			id=2560;
 			type="CUP_ch_mod_d";
-			atlOffset=1.9073486e-005;
+			atlOffset=1.9073486e-05;
 		};
 		class Item346
 		{
@@ -6919,7 +6920,7 @@ class Mission
 			};
 			id=2561;
 			type="CUP_ch_mod_d";
-			atlOffset=1.9073486e-005;
+			atlOffset=1.9073486e-05;
 		};
 		class Item347
 		{
@@ -6937,7 +6938,7 @@ class Mission
 			};
 			id=2562;
 			type="CUP_ch_mod_d";
-			atlOffset=1.9073486e-005;
+			atlOffset=1.9073486e-05;
 		};
 		class Item348
 		{
@@ -6955,7 +6956,7 @@ class Mission
 			};
 			id=2563;
 			type="CUP_ch_mod_d";
-			atlOffset=1.9073486e-005;
+			atlOffset=1.9073486e-05;
 		};
 		class Item349
 		{
@@ -7027,7 +7028,7 @@ class Mission
 			};
 			id=2568;
 			type="woodcup";
-			atlOffset=1.9073486e-006;
+			atlOffset=1.9073486e-06;
 		};
 		class Item353
 		{
@@ -7045,7 +7046,7 @@ class Mission
 			};
 			id=2569;
 			type="woodcup";
-			atlOffset=1.9073486e-006;
+			atlOffset=1.9073486e-06;
 		};
 		class Item354
 		{
@@ -7063,7 +7064,7 @@ class Mission
 			};
 			id=2570;
 			type="woodcup";
-			atlOffset=1.9073486e-006;
+			atlOffset=1.9073486e-06;
 		};
 		class Item355
 		{
@@ -7081,7 +7082,7 @@ class Mission
 			};
 			id=2571;
 			type="woodcup";
-			atlOffset=1.9073486e-006;
+			atlOffset=1.9073486e-06;
 		};
 		class Item356
 		{
@@ -8139,7 +8140,7 @@ class Mission
 			};
 			id=2633;
 			type="Land_xlamdoor";
-			atlOffset=3.4332275e-005;
+			atlOffset=3.4332275e-05;
 		};
 		class Item418
 		{
@@ -8491,7 +8492,7 @@ class Mission
 			};
 			id=2653;
 			type="buhlo1";
-			atlOffset=1.1444092e-005;
+			atlOffset=1.1444092e-05;
 		};
 		class Item438
 		{
@@ -8524,7 +8525,7 @@ class Mission
 			};
 			id=2655;
 			type="buhlo1";
-			atlOffset=1.1444092e-005;
+			atlOffset=1.1444092e-05;
 		};
 		class Item440
 		{
@@ -8541,7 +8542,7 @@ class Mission
 			};
 			id=2656;
 			type="buhlo1";
-			atlOffset=1.1444092e-005;
+			atlOffset=1.1444092e-05;
 		};
 		class Item441
 		{
@@ -8575,7 +8576,7 @@ class Mission
 			};
 			id=2658;
 			type="bed4";
-			atlOffset=3.4332275e-005;
+			atlOffset=3.4332275e-05;
 		};
 		class Item443
 		{
@@ -8589,11 +8590,11 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroom""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",100],[""""class"""",""""DoctorCloth""""]]}"",2]]]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""CaseBedroom""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",100],[""""class"""",""""DoctorCloth""""]]}"",2]]]]}";
 			};
 			id=2659;
 			type="CUP_case_bedroom_b";
-			atlOffset=3.4332275e-005;
+			atlOffset=3.4332275e-05;
 		};
 		class Item444
 		{
@@ -8680,7 +8681,7 @@ class Mission
 			};
 			id=2664;
 			type="Desk";
-			atlOffset=4.196167e-005;
+			atlOffset=4.196167e-05;
 		};
 		class Item449
 		{
@@ -8693,7 +8694,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroomMedium""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""CaseBedroomMedium""]]}";
 			};
 			id=2665;
 			type="yashik";
@@ -8710,7 +8711,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroomMedium""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""CaseBedroomMedium""]]}";
 			};
 			id=2666;
 			type="yashik";
@@ -8911,7 +8912,7 @@ class Mission
 			};
 			id=2677;
 			type="Land_TinWall_01_m_4m_v1_F";
-			atlOffset=3.8146973e-006;
+			atlOffset=3.8146973e-06;
 		};
 		class Item462
 		{
@@ -8947,7 +8948,7 @@ class Mission
 			};
 			id=2679;
 			type="Land_TinWall_01_m_4m_v1_F";
-			atlOffset=3.8146973e-006;
+			atlOffset=3.8146973e-06;
 		};
 		class Item464
 		{
@@ -8972,18 +8973,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3792.49,29.606699,3753.77};
+				position[]={3792.49,29.637642,3753.77};
 				angles[]={0,4.7357063,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallTrashCan""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_tier1_2""]]],[""class"",""SmallTrashCan""]]}";
 			};
 			id=2681;
 			type="pomoika";
-			atlOffset=2.4027367;
+			atlOffset=2.4336796;
 		};
 		class Item466
 		{
@@ -9089,7 +9090,7 @@ class Mission
 			};
 			id=2687;
 			type="CUP_ch_mod_d";
-			atlOffset=3.4332275e-005;
+			atlOffset=3.4332275e-05;
 		};
 		class Item472
 		{
@@ -9171,7 +9172,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ContainerGreen4""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier1""]]],[""class"",""ContainerGreen4""]]}";
 			};
 			id=2692;
 			type="boxuzk";
@@ -9189,7 +9190,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigFileCabinet""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""BigFileCabinet""]]}";
 			};
 			id=2693;
 			type="kartoteka";
@@ -9225,7 +9226,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigFileCabinet""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""BigFileCabinet""]]}";
 			};
 			id=2695;
 			type="kartoteka";
@@ -9243,7 +9244,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelBrownContainer""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""SteelBrownContainer""]]}";
 			};
 			id=2696;
 			type="box_metal_9";
@@ -9360,18 +9361,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3782.97,29.902693,3755.8799};
+				position[]={3782.97,29.977076,3755.8799};
 				angles[]={0,1.5368078,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TrashCan""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_tier1_2""]]],[""class"",""TrashCan""]]}";
 			};
 			id=2703;
 			type="SMG_UrnaMetall";
-			atlOffset=24.328199;
+			atlOffset=24.402582;
 		};
 		class Item488
 		{
@@ -9509,11 +9510,11 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallBookcase""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""SmallBookcase""]]}";
 			};
 			id=2711;
 			type="CUP_Dhangar_knihovna";
-			atlOffset=3.4332275e-005;
+			atlOffset=3.4332275e-05;
 		};
 		class Item496
 		{
@@ -9776,7 +9777,7 @@ class Mission
 			};
 			id=2728;
 			type="kryjka";
-			atlOffset=9.5367432e-005;
+			atlOffset=9.5367432e-05;
 		};
 		class Item511
 		{
@@ -11874,42 +11875,43 @@ class Mission
 			};
 			id=2849;
 			type="CUP_ch_mod_d";
-			atlOffset=1.9073486e-006;
+			atlOffset=1.9073486e-06;
 		};
 		class Item632
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3797.1699,29.670258,3786.96};
+				position[]={3797.1199,29.670258,3787.0837};
 				angles[]={0,1.5540254,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BoardWoodenBox""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""BoardWoodenBox""]]}";
 			};
 			id=2850;
 			type="box_wood_close";
-			atlOffset=1.7958241;
+			atlOffset=1.8810902;
 		};
 		class Item633
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3799.8989,34.027798,3782.2761};
+				position[]={3799.8989,34.030857,3782.2761};
 				angles[]={0,3.2316303,0};
 			};
 			side="Empty";
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ContainerGreen2""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Tools_tier3""]]],[""class"",""ContainerGreen2""]]}";
 			};
 			id=2851;
 			type="yashi4ek";
+			atlOffset=0.0030593872;
 		};
 		class Item634
 		{
@@ -11923,7 +11925,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigFileCabinet""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""BigFileCabinet""]]}";
 			};
 			id=2852;
 			type="kartoteka";
@@ -11941,7 +11943,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigFileCabinet""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""BigFileCabinet""]]}";
 			};
 			id=2853;
 			type="kartoteka";
@@ -11959,7 +11961,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigFileCabinet""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1_2""]]],[""class"",""BigFileCabinet""]]}";
 			};
 			id=2854;
 			type="kartoteka";
@@ -13471,7 +13473,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3839.23,21.9074,3574.0901};
-				angles[]={3.1415401,1.5025086,7.7542354e-006};
+				angles[]={3.1415401,1.5025086,7.7542354e-06};
 			};
 			side="Empty";
 			flags=1;
@@ -15029,7 +15031,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3821.04,33.812801,3711.6299};
+				position[]={3821.04,33.80275,3711.6299};
 				angles[]={0,4.6781454,0};
 			};
 			side="Empty";
@@ -15040,7 +15042,7 @@ class Mission
 			};
 			id=3058;
 			type="shkafsin";
-			atlOffset=0.63539505;
+			atlOffset=0.62534332;
 		};
 		class Item815
 		{
@@ -15352,7 +15354,7 @@ class Mission
 			};
 			id=3078;
 			type="transformator_2";
-			atlOffset=9.9182129e-005;
+			atlOffset=9.9182129e-05;
 		};
 		class Item834
 		{
@@ -16215,7 +16217,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3825.1899,23.677,3733.53};
-				angles[]={0,7.503188e-006,4.8022556};
+				angles[]={0,7.503188e-06,4.8022556};
 			};
 			side="Empty";
 			flags=1;
@@ -16233,7 +16235,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3809.5601,31.8895,3727.72};
-				angles[]={0,7.503188e-006,4.8022556};
+				angles[]={0,7.503188e-06,4.8022556};
 			};
 			side="Empty";
 			flags=1;
@@ -16563,7 +16565,7 @@ class Mission
 			};
 			id=3148;
 			type="Land_Metal_rack_F";
-			atlOffset=3.4332275e-005;
+			atlOffset=3.4332275e-05;
 		};
 		class Item903
 		{
@@ -16623,18 +16625,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3812.6001,27.387999,3717.71};
+				position[]={3812.6001,27.370794,3717.71};
 				angles[]={0,3.2015274,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallTrashCan""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_all""]]],[""class"",""SmallTrashCan""]]}";
 			};
 			id=3152;
 			type="pomoika";
-			atlOffset=22.063999;
+			atlOffset=22.046795;
 		};
 		class Item907
 		{
@@ -18765,7 +18767,7 @@ class Mission
 			};
 			id=3290;
 			type="knife2";
-			atlOffset=7.6293945e-006;
+			atlOffset=7.6293945e-06;
 		};
 		class Item1031
 		{
@@ -18783,7 +18785,7 @@ class Mission
 			};
 			id=3291;
 			type="knife2";
-			atlOffset=7.6293945e-006;
+			atlOffset=7.6293945e-06;
 		};
 		class Item1032
 		{
@@ -18886,7 +18888,7 @@ class Mission
 			};
 			id=3297;
 			type="land_doskarez";
-			atlOffset=7.6293945e-006;
+			atlOffset=7.6293945e-06;
 		};
 		class Item1038
 		{
@@ -19549,7 +19551,7 @@ class Mission
 			};
 			id=3342;
 			type="land_skovoroda";
-			atlOffset=7.6293945e-006;
+			atlOffset=7.6293945e-06;
 		};
 		class Item1077
 		{
@@ -20063,52 +20065,52 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3816.6101,29.739399,3756.48};
+				position[]={3816.6101,29.766279,3756.48};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallTrashCan""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_tier1_2""]]],[""class"",""SmallTrashCan""]]}";
 			};
 			id=3374;
 			type="pomoika";
-			atlOffset=24.4154;
+			atlOffset=24.44228;
 		};
 		class Item1107
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3808.51,29.676699,3756.0601};
+				position[]={3808.51,29.720964,3756.0601};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallTrashCan""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_all""]]],[""class"",""SmallTrashCan""]]}";
 			};
 			id=3375;
 			type="pomoika";
-			atlOffset=24.352699;
+			atlOffset=24.396965;
 		};
 		class Item1108
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3833.49,27.398199,3767.28};
+				position[]={3833.49,27.582094,3767.28};
 				angles[]={0,1.6564989,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallTrashCan""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_tier1_2""]]],[""class"",""SmallTrashCan""]]}";
 			};
 			id=3376;
 			type="pomoika";
-			atlOffset=22.0742;
+			atlOffset=22.258095;
 		};
 		class Item1109
 		{
@@ -20242,7 +20244,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ContainerGreen4""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_tier1_2""]]],[""class"",""ContainerGreen4""]]}";
 			};
 			id=3384;
 			type="boxuzk";
@@ -20260,7 +20262,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ContainerGreen4""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier2""]]],[""class"",""ContainerGreen4""]]}";
 			};
 			id=3385;
 			type="boxuzk";
@@ -20278,7 +20280,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ContainerGreen4""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier2""]]],[""class"",""ContainerGreen4""]]}";
 			};
 			id=3386;
 			type="boxuzk";
@@ -20295,7 +20297,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ClothCabinet""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier1""]]],[""class"",""ClothCabinet""]]}";
 			};
 			id=3387;
 			type="CUP_case_wooden_b";
@@ -20313,11 +20315,11 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelBrownContainer""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_tier1_2""]]],[""class"",""SteelBrownContainer""]]}";
 			};
 			id=3388;
 			type="box_metal_9";
-			atlOffset=4.5776367e-005;
+			atlOffset=4.5776367e-05;
 		};
 		class Item1121
 		{
@@ -20331,11 +20333,11 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelBrownContainer""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_tier1""]]],[""class"",""SteelBrownContainer""]]}";
 			};
 			id=3389;
 			type="box_metal_9";
-			atlOffset=1.1444092e-005;
+			atlOffset=1.1444092e-05;
 		};
 		class Item1122
 		{
@@ -20366,7 +20368,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroomSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""CaseBedroomSmall""]]}";
 			};
 			id=3391;
 			type="CUP_case_bedroom_a";
@@ -20383,7 +20385,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroomSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_tier1""]]],[""class"",""CaseBedroomSmall""]]}";
 			};
 			id=3392;
 			type="CUP_case_bedroom_a";
@@ -20400,7 +20402,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroomSmall""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""CaseBedroomSmall""]]}";
 			};
 			id=3393;
 			type="CUP_case_bedroom_a";
@@ -20482,17 +20484,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3823.6899,30.008894,3755.1101};
+				position[]={3823.6899,30.039055,3755.1101};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TrashCan""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""TrashCan_tier2_3_4""]]],[""class"",""TrashCan""]]}";
 			};
 			id=3398;
 			type="SMG_UrnaMetall";
-			atlOffset=24.434401;
+			atlOffset=24.464561;
 		};
 		class Item1131
 		{
@@ -20505,7 +20507,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedSteelBox""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier1""]]],[""class"",""RedSteelBox""]]}";
 			};
 			id=3399;
 			type="box_metal_1";
@@ -20559,7 +20561,7 @@ class Mission
 			};
 			id=3403;
 			type="woodcup";
-			atlOffset=1.1444092e-005;
+			atlOffset=1.1444092e-05;
 		};
 		class Item1135
 		{
@@ -20577,7 +20579,7 @@ class Mission
 			};
 			id=3406;
 			type="kryjka";
-			atlOffset=1.1444092e-005;
+			atlOffset=1.1444092e-05;
 		};
 		class Item1136
 		{
@@ -20595,7 +20597,7 @@ class Mission
 			};
 			id=3407;
 			type="kryjka";
-			atlOffset=1.1444092e-005;
+			atlOffset=1.1444092e-05;
 		};
 		class Item1137
 		{
@@ -21849,7 +21851,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ContainerGreen3""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""ContainerGreen3""]]}";
 			};
 			id=3481;
 			type="box";
@@ -21906,7 +21908,7 @@ class Mission
 			};
 			id=3484;
 			type="Land_ChairWood_F";
-			atlOffset=0.0011024475;
+			atlOffset=0.0010585785;
 		};
 		class Item1212
 		{
@@ -21914,7 +21916,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3833.4751,27.519144,3780.2148};
-				angles[]={0,6.2246475,-0};
+				angles[]={0,6.2246475,0};
 			};
 			side="Empty";
 			flags=4;
@@ -21941,7 +21943,7 @@ class Mission
 			};
 			id=3486;
 			type="Land_ChairWood_F";
-			atlOffset=0.50803757;
+			atlOffset=0.50801659;
 		};
 		class Item1214
 		{
@@ -24277,7 +24279,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3840.6001,35.9086,3620.1499};
-				angles[]={3.1415751,4.6385441,1.2026069e-006};
+				angles[]={3.1415751,4.6385441,1.2026069e-06};
 			};
 			side="Empty";
 			flags=1;
@@ -25140,11 +25142,11 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ContainerGreen4""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier2""]]],[""class"",""ContainerGreen4""]]}";
 			};
 			id=3714;
 			type="boxuzk";
-			atlOffset=4.3869019e-005;
+			atlOffset=4.3869019e-05;
 		};
 		class Item1398
 		{
@@ -26213,7 +26215,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_all""]]],[""class"",""SquareWoodenBox""]]}";
 			};
 			id=3776;
 			type="Land_WoodenBox_02_F";
@@ -26641,7 +26643,7 @@ class Mission
 			};
 			id=3801;
 			type="cup";
-			atlOffset=7.6293945e-006;
+			atlOffset=7.6293945e-06;
 		};
 		class Item1484
 		{
@@ -26659,7 +26661,7 @@ class Mission
 			};
 			id=3802;
 			type="kryjka";
-			atlOffset=7.6293945e-006;
+			atlOffset=7.6293945e-06;
 		};
 		class Item1485
 		{
@@ -26822,7 +26824,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3860.6399,24.940851,3770.48};
-				angles[]={3.2886368e-007,6.2697115,9.4898084e-008};
+				angles[]={3.2886368e-07,6.2697115,9.4898084e-08};
 			};
 			side="Empty";
 			flags=4;
@@ -26840,7 +26842,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3860.6001,24.942652,3773.3101};
-				angles[]={3.2886368e-007,6.2697115,9.4898084e-008};
+				angles[]={3.2886368e-07,6.2697115,9.4898084e-08};
 			};
 			side="Empty";
 			flags=4;
@@ -27216,7 +27218,7 @@ class Mission
 			};
 			id=3834;
 			type="OfficeTable_01_old_F";
-			atlOffset=9.5367432e-006;
+			atlOffset=9.5367432e-06;
 		};
 		class Item1517
 		{
@@ -27708,7 +27710,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeClothCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""CookerCloth""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""CookerCap""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""BarmenCloth""""]]}"",1]]]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier1_2""]]],[""class"",""LargeClothCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""CookerCloth""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""CookerCap""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""BarmenCloth""""]]}"",1]]]]}";
 			};
 			id=3863;
 			type="CUP_almara";
@@ -27725,7 +27727,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroomSmall""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Главный гостевой ключ""""],[""""keyowner"""",[""""hotelmain""""]]]],[""""prob"""",100],[""""class"""",""""Key""""]]}"",1]]]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""CaseBedroomSmall""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Главный гостевой ключ""""],[""""keyowner"""",[""""hotelmain""""]]]],[""""prob"""",100],[""""class"""",""""Key""""]]}"",1]]]]}";
 			};
 			id=3864;
 			type="CUP_case_bedroom_a";
@@ -28473,7 +28475,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3876.8899,23.5891,3622.1599};
-				angles[]={3.1416101,3.0700517,1.7484534e-007};
+				angles[]={3.1416101,3.0700517,1.7484534e-07};
 			};
 			side="Empty";
 			flags=1;
@@ -28810,7 +28812,7 @@ class Mission
 			};
 			id=3960;
 			type="svecha";
-			atlOffset=3.8146973e-006;
+			atlOffset=3.8146973e-06;
 		};
 		class Item1609
 		{
@@ -28828,7 +28830,7 @@ class Mission
 			};
 			id=3961;
 			type="svecha";
-			atlOffset=2.4795532e-005;
+			atlOffset=2.4795532e-05;
 		};
 		class Item1610
 		{
@@ -28846,7 +28848,7 @@ class Mission
 			};
 			id=3962;
 			type="svecha";
-			atlOffset=2.4795532e-005;
+			atlOffset=2.4795532e-05;
 		};
 		class Item1611
 		{
@@ -29669,7 +29671,7 @@ class Mission
 			};
 			id=4011;
 			type="svecha";
-			atlOffset=1.9073486e-005;
+			atlOffset=1.9073486e-05;
 		};
 		class Item1658
 		{
@@ -30506,7 +30508,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3964.74,6.7648821,3813.9299};
-				angles[]={0,2.1457602e-006,0};
+				angles[]={0,2.1457602e-06,0};
 			};
 			side="Empty";
 			flags=5;
@@ -30588,7 +30590,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3939.8301,39.887882,3885.1001};
-				angles[]={0,7.450584e-007,0};
+				angles[]={0,7.450584e-07,0};
 			};
 			side="Empty";
 			flags=1;
@@ -30623,7 +30625,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3941.4399,39.887882,3885.1001};
-				angles[]={0,1.3262041e-006,0};
+				angles[]={0,1.3262041e-06,0};
 			};
 			side="Empty";
 			flags=1;
@@ -30641,7 +30643,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3941.45,18.568279,3885.1101};
-				angles[]={0,7.450584e-007,0};
+				angles[]={0,7.450584e-07,0};
 			};
 			side="Empty";
 			flags=1;
@@ -30713,7 +30715,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3940.6699,21.364464,3892.3101};
-				angles[]={0,3.2782518e-007,0};
+				angles[]={0,3.2782518e-07,0};
 			};
 			side="Empty";
 			flags=1;
@@ -30731,7 +30733,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3940.6599,42.679565,3889.8999};
-				angles[]={0,7.450584e-007,0};
+				angles[]={0,7.450584e-07,0};
 			};
 			side="Empty";
 			flags=1;
@@ -30767,7 +30769,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3940.6699,42.684166,3892.3};
-				angles[]={0,7.450584e-007,0};
+				angles[]={0,7.450584e-07,0};
 			};
 			side="Empty";
 			flags=1;
@@ -30785,7 +30787,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3940.6699,21.359964,3889.9099};
-				angles[]={0,3.2782518e-007,0};
+				angles[]={0,3.2782518e-07,0};
 			};
 			side="Empty";
 			flags=1;
@@ -31168,7 +31170,7 @@ class Mission
 			};
 			id=4125;
 			type="medzanaves2";
-			atlOffset=-1.9073486e-006;
+			atlOffset=-1.9073486e-06;
 		};
 		class Item1745
 		{
@@ -31324,7 +31326,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4008.1001,4.9487596,3909.55};
-				angles[]={0,2.3841895e-007,0};
+				angles[]={0,2.3841895e-07,0};
 			};
 			side="Empty";
 			flags=4;
@@ -33072,7 +33074,7 @@ class Mission
 			};
 			id=4198;
 			type="block_dirt";
-			atlOffset=3.8146973e-006;
+			atlOffset=3.8146973e-06;
 		};
 		class Item1776
 		{
@@ -33702,7 +33704,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3808.7461,30.619368,3846.3035};
-				angles[]={0.28927508,2.134177,2.6775524e-008};
+				angles[]={0.28927508,2.134177,2.6775524e-08};
 			};
 			side="Empty";
 			flags=1;
@@ -33963,7 +33965,7 @@ class Mission
 					};
 					id=4424;
 					type="VR_3DSelector_01_default_F";
-					atlOffset=9.5367432e-007;
+					atlOffset=9.5367432e-07;
 				};
 				class Item14
 				{
@@ -34563,7 +34565,7 @@ class Mission
 			};
 			id=4329;
 			type="land_ganzazhelezo2";
-			atlOffset=9.5367432e-007;
+			atlOffset=9.5367432e-07;
 		};
 		class Item1847
 		{
@@ -34581,7 +34583,7 @@ class Mission
 			};
 			id=4331;
 			type="land_ganzazhelezo2";
-			atlOffset=9.5367432e-007;
+			atlOffset=9.5367432e-07;
 		};
 		class Item1848
 		{
@@ -34599,7 +34601,7 @@ class Mission
 			};
 			id=4332;
 			type="land_ganzazhelezo2";
-			atlOffset=9.5367432e-007;
+			atlOffset=9.5367432e-07;
 		};
 		class Item1849
 		{
@@ -35424,7 +35426,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3749.7925,38.321075,3762.1404};
-				angles[]={0,1.6400031,-0};
+				angles[]={0,1.6400031,0};
 			};
 			side="Empty";
 			flags=1;
@@ -35555,7 +35557,7 @@ class Mission
 			};
 			id=4412;
 			type="Leaflet_05_Old_F";
-			atlOffset=7.6293945e-006;
+			atlOffset=7.6293945e-06;
 		};
 		class Item1890
 		{
@@ -36107,7 +36109,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroomMedium""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""PaperHolder""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""PenBlack""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""PenBlack""""]]}"",1]]]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier2""]]],[""class"",""CaseBedroomMedium""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""PaperHolder""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""PenBlack""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""PenBlack""""]]}"",1]]]]}";
 			};
 			id=4506;
 			type="yashik";
@@ -36300,7 +36302,7 @@ class Mission
 			};
 			id=4518;
 			type="svecha";
-			atlOffset=1.9073486e-006;
+			atlOffset=1.9073486e-06;
 		};
 		class Item1933
 		{
@@ -36317,7 +36319,7 @@ class Mission
 			};
 			id=4519;
 			type="svecha";
-			atlOffset=1.9073486e-006;
+			atlOffset=1.9073486e-06;
 		};
 		class Item1934
 		{
@@ -36944,7 +36946,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3614.5667,32.306229,3614.0325};
-						angles[]={3.1415923,3.141655,4.1234307e-006};
+						angles[]={3.1415923,3.141655,4.1234307e-06};
 					};
 					side="Empty";
 					class Attributes
@@ -36993,7 +36995,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3613.8735,31.609575,3623.1318};
-						angles[]={3.1415923,3.141655,4.1234307e-006};
+						angles[]={3.1415923,3.141655,4.1234307e-06};
 					};
 					side="Empty";
 					class Attributes
@@ -37010,7 +37012,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3614.3325,31.39065,3633.0635};
-						angles[]={3.1415923,3.141655,4.1234307e-006};
+						angles[]={3.1415923,3.141655,4.1234307e-06};
 					};
 					side="Empty";
 					class Attributes
@@ -37262,7 +37264,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3554.1484,20.554117,3593.8928};
-				angles[]={9.4244744e-005,1.554171,6.2824736};
+				angles[]={9.4244744e-05,1.554171,6.2824736};
 			};
 			side="Empty";
 			class Attributes
@@ -38117,7 +38119,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3562.3384,24.440393,3581.7175};
+				position[]={3562.3384,24.341497,3581.7175};
 				angles[]={6.2814941,0,0.0065782312};
 			};
 			side="Empty";
@@ -38127,7 +38129,7 @@ class Mission
 			};
 			id=4641;
 			type="Land_IndPipe1_20m_F";
-			atlOffset=0.42292786;
+			atlOffset=0.32403183;
 		};
 		class Item1998
 		{
@@ -38585,7 +38587,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3583.772,27.259651,3584.3494};
-				angles[]={3.1415753,4.6968527,2.249292e-006};
+				angles[]={3.1415753,4.6968527,2.249292e-06};
 			};
 			side="Empty";
 			flags=1;
@@ -39143,7 +39145,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelBlueCase""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Tools_tier1_2_3""]]],[""class"",""SteelBlueCase""]]}";
 			};
 			id=4699;
 			type="CUP_A2_metalcase_01";
@@ -39599,7 +39601,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SquareWoodenBox""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_all""]]],[""class"",""SquareWoodenBox""]]}";
 			};
 			id=4725;
 			type="Land_WoodenBox_02_F";
@@ -40032,7 +40034,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3646.3345,23.56069,3587.1345};
-				angles[]={6.0626292,5.9397596e-005,0.0032525426};
+				angles[]={6.0626292,5.9397596e-05,0.0032525426};
 			};
 			side="Empty";
 			class Attributes
@@ -40322,7 +40324,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelBlueCase""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_all""]]],[""class"",""SteelBlueCase""]]}";
 			};
 			id=4766;
 			type="CUP_A2_metalcase_01";
@@ -40340,7 +40342,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelBlueCase""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""SteelBlueCase""]]}";
 			};
 			id=4767;
 			type="CUP_A2_metalcase_01";
@@ -40653,18 +40655,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3631.1853,23.710701,3566.3079};
+				position[]={3631.1853,23.92454,3566.3079};
 				angles[]={0,3.1043997,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelGreenCabinet""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Tools_all""]]],[""class"",""SteelGreenCabinet""]]}";
 			};
 			id=4792;
 			type="shkafsin";
-			atlOffset=17.928501;
+			atlOffset=18.14234;
 		};
 		class Item2142
 		{
@@ -40705,7 +40707,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3643.8228,24.291821,3536.3789};
+				position[]={3643.8228,24.291821,3536.5466};
 				angles[]={6.2741637,4.7314973,0.025922045};
 			};
 			side="Empty";
@@ -40716,7 +40718,7 @@ class Mission
 			};
 			id=4796;
 			type="Land_Canal_WallSmall_10m_F";
-			atlOffset=3.2532368;
+			atlOffset=3.2542057;
 		};
 		class Item2145
 		{
@@ -41687,7 +41689,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3577.4038,27.975145,3581.4124};
-				angles[]={1.5707964,4.5619186e-007,4.7679157};
+				angles[]={1.5707964,4.5619186e-07,4.7679157};
 			};
 			side="Empty";
 			class Attributes
@@ -41792,7 +41794,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3653.9104,26.704975,3556.3022};
-				angles[]={1.5707959,2.2048238e-005,1.4380071};
+				angles[]={1.5707959,2.2048238e-05,1.4380071};
 			};
 			side="Empty";
 			class Attributes
@@ -41845,7 +41847,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3647.0073,25.940956,3537.4353};
-				angles[]={1.5707955,3.3309865e-005,6.2456269};
+				angles[]={1.5707955,3.3309865e-05,6.2456269};
 			};
 			side="Empty";
 			class Attributes
@@ -42473,7 +42475,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3828.3323,27.937218,3773.3469};
-				angles[]={4.3054275e-005,4.8006897,0.0004863794};
+				angles[]={4.3054275e-05,4.8006897,0.0004863794};
 			};
 			side="Empty";
 			class Attributes
@@ -42727,7 +42729,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bookcase""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""Bookcase""]]}";
 			};
 			id=5039;
 			type="biblio";
@@ -42744,7 +42746,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ChestCabinet""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""ChestCabinet""]]}";
 			};
 			id=5042;
 			type="CUP_A2_chest_ep1";
@@ -43086,7 +43088,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ChestCabinet""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier2_3""]]],[""class"",""ChestCabinet""]]}";
 			};
 			id=5078;
 			type="CUP_A2_chest_ep1";
@@ -43613,7 +43615,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3835.4053,28.310028,3780.4084};
-				angles[]={0,3.2288594,-0};
+				angles[]={0,3.2288594,0};
 			};
 			side="Empty";
 			flags=5;
@@ -43631,7 +43633,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3796.7073,30.267708,3747.4775};
-				angles[]={0,0.087267607,-0};
+				angles[]={0,0.087267607,0};
 			};
 			side="Empty";
 			flags=5;
@@ -43641,7 +43643,7 @@ class Mission
 			};
 			id=5135;
 			type="umivalnik1";
-			atlOffset=1.9073486e-006;
+			atlOffset=1.9073486e-06;
 		};
 		class Item2312
 		{
@@ -43684,7 +43686,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3750.9546,39.451405,3758.7954};
-				angles[]={0,1.5707963,-0};
+				angles[]={0,1.5707963,0};
 			};
 			side="Empty";
 			flags=1;
@@ -43734,7 +43736,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3749.1572,39.671299,3759.4949};
-				angles[]={0,1.5707964,-0};
+				angles[]={0,1.5707964,0};
 			};
 			side="Empty";
 			class Attributes
@@ -43751,7 +43753,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3750.4133,39.319599,3761.0469};
-				angles[]={0,0.010271737,-0};
+				angles[]={0,0.010271737,0};
 			};
 			side="Empty";
 			flags=1;
@@ -43779,6 +43781,40 @@ class Mission
 			id=5151;
 			type="CUP_A2_sink";
 			atlOffset=1.1570873;
+		};
+		class Item2320
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3744.1855,28.806416,3786.9285};
+				angles[]={6.2239776,1.5702685,-0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""OldWoodenBox""]]}";
+			};
+			id=5152;
+			type="land_tarkov_wood";
+			atlOffset=23.806416;
+		};
+		class Item2321
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3761.4053,29.577904,3754.1895};
+				angles[]={0,3.4278674,-0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_all""]]],[""class"",""CaseBedroom""]]}";
+			};
+			id=5153;
+			type="CUP_case_bedroom_b";
+			atlOffset=24.577904;
 		};
 	};
 };
