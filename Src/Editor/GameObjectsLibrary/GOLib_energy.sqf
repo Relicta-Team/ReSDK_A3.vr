@@ -157,7 +157,7 @@ function(golib_en_internal_doRender)
 		_x params ["_fObj","_tObj","_fEn","_fCol"];
 		_add = ((boundingBoxReal _fObj select 1 select 2) / 2);
 		_add2 = ((boundingBoxReal _tObj select 1 select 2) / 2);
-		drawLine3D [(getPosAtl _fObj) vectorAdd [0,0,_add], (getPosAtl _tObj) vectorAdd [0,0,_add2], _fCol];
+		drawLine3D [(getPosAtl _fObj) vectorAdd [0,0,_add], (getPosAtl _tObj) vectorAdd [0,0,_add2], _fCol, 20];
 
 	} foreach golib_en_internal_list_buffer;
 

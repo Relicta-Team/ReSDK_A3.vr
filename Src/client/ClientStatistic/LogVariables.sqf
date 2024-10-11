@@ -20,7 +20,7 @@ clistat_widgets = [_ctg,_back,_text];
 
 #define colortext(clr,txt) "<t color='#"+'clr'+"'>"+txt+"</t>"
 
-clistat_internal_allch_buffer = [];
+clistat_internal_allch_buffer = [0,0,0];
 clistat_internal_allch_buffer_frame = 0;
 
 clistat_buffer = [
@@ -55,7 +55,8 @@ clistat_buffer = [
 	[colortext(D3C857,"NOE objs: "),{
 		_ppos = getPosATL player; _buf = [];
 		{
-			_iCtr = _buf pushBack (count((noe_client_cs get _x get (str([_ppos,_x] call noe_posToChunk))) select 2));
+			_chInfo = (noe_client_cs get _x get (str([_ppos,_x] call noe_posToChunk)));
+			_iCtr = _buf pushBack (count(_chInfo select 2));
 			clistat_internal_allch_buffer_frame = clistat_internal_allch_buffer_frame + 1;
 			if (clistat_internal_allch_buffer_frame > 10) then {
 				if (_iCtr == -1) then {continue};
@@ -77,6 +78,8 @@ clistat_buffer = [
 					[-1,1]
 				];
 				if !(finite _curBuf) then {_curBuf = 0.1};
+				if isNullVar(_curBuf) then {_curBuf = 0.01};
+
 				clistat_internal_allch_buffer set [_foreachIndex,_curBuf];
 				clistat_internal_allch_buffer_frame = 0;
 			};
@@ -89,7 +92,7 @@ clistat_buffer = [
 	[colortext(D3C857,"NOE all: "),{
 		_all = 0;
 		{_all = _all + _x; true} count clistat_internal_allch_buffer;
-		_dt = (["{%1,%2,%3}=%4"]+clistat_internal_allch_buffer);
+		_dt = (["{%1,%2,%3}=%4"]+(clistat_internal_allch_buffer apply {ifcheck(!isInt(_x),"loading",_x)}));
 		_dt pushBack _all;
 		format _dt
 	}],

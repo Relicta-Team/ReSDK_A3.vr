@@ -10,6 +10,11 @@
 loot_mapConfigs = createHashMap; //all crafts map
 loot_mapTemplates = createHashMap; //template map (tagged)
 loot_list_loader = [];// список файлов для загрузки
+
+#ifdef EDITOR
+loot_internal_catchedError = false;
+#endif
+
 loot_init = {
 	{
 		if !([_x] call loot_loadConfig) exitWith {

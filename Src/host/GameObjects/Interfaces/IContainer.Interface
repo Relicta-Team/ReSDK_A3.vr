@@ -91,8 +91,8 @@ func(canAdd)
 	if (!getSelf(canUseContainer)) exitWith {false};
 	if isTypeOf(_item,SystemItem) exitWith {false};
 	if (_size > getSelf(maxSize)) exitWith {
-		if !isNullVar(_FLAG_msFlag__) exitWith {
-			if !isNullVar(_FLAG_spResize__) then {
+		if (!isNullVar(_FLAG_msFlag__) && {_FLAG_msFlag__}) exitWith {
+			if (!isNullVar(_FLAG_spResize__) && {_FLAG_spResize__}) then {
 				setSelf(maxSize,_size);
 			};
 			true
@@ -100,7 +100,7 @@ func(canAdd)
 		false
 	};
 	if (getSelf(currentsize) + BASE_STORAGE_COST(_size) > getSelf(countSlots)) exitWith {
-		if !isNullVar(_FLAG_csFlag__) exitWith {
+		if (!isNullVar(_FLAG_csFlag__) && {_FLAG_csFlag__}) exitWith {
 			modSelf(countSlots, + BASE_STORAGE_COST(_size));
 			true
 		};

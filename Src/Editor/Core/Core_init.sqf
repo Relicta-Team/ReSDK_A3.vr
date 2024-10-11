@@ -73,6 +73,8 @@ removeAll3DENEventHandlers "onConnectingStart";
 removeAll3DENEventHandlers "onConnectingEnd";
 removeAll3DENEventHandlers "OnEntityMenu";
 //removeAll3DENEventHandlers "OnModeChange";
+removeAll3DENEventHandlers "OnEditableEntityAdded";
+removeAll3DENEventHandlers "OnEditableEntityRemoved";
 
 set3DENSelected [];
 
@@ -84,6 +86,10 @@ add3DENEventHandler ["onRedo",{["onRedo",[]] call Core_invokeEvent}];
 add3DENEventHandler ["OnPaste",{["onPaste",[flatten get3denselected ""]] call Core_invokeEvent}];
 add3DENEventHandler ["onConnectingStart",{["onConnectingStart",[_this select 1]] call Core_invokeEvent}];
 add3DENEventHandler ["onConnectingEnd",{["onConnectingEnd",[_this select 1,_this select 2]] call Core_invokeEvent}];
+
+add3DENEventHandler ["OnEditableEntityAdded", {params ["_entity"]; ["onEntityAdded",[_entity]] call Core_invokeEvent}];
+add3DENEventHandler ["OnEditableEntityRemoved", {params ["_entity"]; ["onEntityRemoved",[_entity]] call Core_invokeEvent}];
+
 //add3DENEventHandler ["OnModeChange",{["changed to %1",_this] call printWarning}];
 
 add3DENEventHandler ["OnEntityMenu", {
@@ -128,6 +134,9 @@ Core_internal_map_events = createHashMapFromArray [
 	//события добавления и удаления объектов // params ["_obj"]
 	["onObjectAdded",[]], 
 	["onObjectRemoved",[]],
+	//события добавления и удаления любых энтитей редактора
+	["onEntityAdded",[]],
+	["onEntityRemoved",[]],
 
 	["onMouseAreaPressed",[]] //событие при отпускании мыши по зоне 52(MouseArea)
 ];
