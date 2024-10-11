@@ -553,7 +553,7 @@ _3947_173584036_5571321_68722 = ['SpirtBottle',[3947.17,4036.56,26.8192,true],[0
 ['SmallMushroom3',[3916.04,4031.39,21.2564],0,[0,0,1]] call InitStruct; 
 ['ThickConcretePillarDestroyed',[3974.15,4006.94,26.3284,true],[4.70311e-08,-1.50319e-07,-1],[-0.258819,0.965926,-1.57369e-07]] call InitStruct; 
 ['ClayWallSmall',[3895.65,3980.3,29.2316,true],0,[-0.00659628,-0.00161913,0.999977]] call InitStruct; 
-['BrownOldSofa',[3900.37,3980.54,21.1589],1.00179e-05,[0,0,1]] call InitStruct; 
+['BrownOldSofa',[3900.37,3980.54,21.1589],0,[0,0,1]] call InitStruct; 
 _3914_000004000_0000021_13279 = ['IStruct',[3914,4000,30.4691,true],0,[0.0038293,-0.0498798,0.998748], {_thisObj setvariable ['model','a3\structures_f_exp\infrastructure\watersupply\watertower_01_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3867_250004069_5000013_73979 = ['IStruct',[3867.25,4069.5,27.6521,true],180,[0.0154583,0.00692894,0.999856], {_thisObj setvariable ['model','ca\buildings2\houseblocks\houseblock_a\houseblock_a2.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3993_375004053_0000016_86690 = ['IStruct',[3993.38,4053,29.4953,true],270,[0.00692917,0.0056627,0.99996], {_thisObj setvariable ['model','ca\buildings2\houseblocks\houseblock_b\houseblock_b6.p3d'];}] call InitStruct; // !!! realocated model !!!
@@ -3065,7 +3065,7 @@ _3927_538333993_2878422_31157 = ['IStruct',[3927.54,3993.29,22.3116],330,[0,0,1]
 }] call InitStruct; 
 ['WoodenNewBench',[3906.29,3986.74,21.1462],285,[0,0,1], {go_editor_globalRefs set ["RNovobranetsArmyBed1",_thisObj];
 }] call InitStruct; 
-['WoodenBench',[3918.36,3973.22,26.4393,true],0.733247,[0.00557269,-0.00700085,0.99996], {go_editor_globalRefs set ["RProverkaArmyBed",_thisObj];
+['WoodenBench',[3918.36,3973.22,26.4393,true],0.733247,[0.00557259,-0.00700058,0.99996], {go_editor_globalRefs set ["RProverkaArmyBed",_thisObj];
 }] call InitStruct; 
 ['BigGermoGate',[3919.94,3969.94,20.5943],0,[0,0,1]] call InitDecor; 
 ['SmallSteelPlate',[3919.87,3970.61,21.125],0,[0,0,1], {go_editor_globalRefs set ["Ueb",_thisObj];
@@ -3737,6 +3737,7 @@ if (!isNil'_3947_443364033_2221724_17776') then {
 };
 if (!isNil'_3944_983154031_6149924_94176') then {
 	_3944_983154031_6149924_94176 setvariable ['countslots',12];
+	[_3944_983154031_6149924_94176,'AmmoRevolver',12,100] call (_3944_983154031_6149924_94176 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3947_677004029_6140124_17776') then {
 	[_3947_677004029_6140124_17776,'Documents',1,100,[["var","name","Папка с надписью ""Проишествие на хозяйстве"""],["var","preinit@__content","Во время работы в подсобном хозяйстве рядовой Иван Андреевич Толстомыш был укушен мельтешонком, после чего упал и сломал себе руку. Рядовой настаивал на том, что ранение было получено в боевых условиях и, что, цитата: ""Я предотвратил проникновение диверсанта на территорию воинской части,"" За вранье рядовой был отправлен в яму на месяц."]]] call (_3947_677004029_6140124_17776 getvariable 'proto' getvariable 'createItemInContainer');
