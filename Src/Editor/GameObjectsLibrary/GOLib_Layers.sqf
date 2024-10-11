@@ -3,6 +3,116 @@
 // sdk.relicta.ru
 // ======================================================
 
+//#ifdef EDITOR_GOLIB_LAYER_SYSTEM_UPDATE
+
+init_function(layer_internal_initLayerDict)
+{
+	call layer_internal_reloadLayerTree;
+
+	private _onchange = {
+		params ["_entity"];
+		
+		//skip models (only id's)
+		if not_equalTypes(_entity,-1) exitWith {};
+
+		if equals(get3DENEntity _entity,_entity) then {
+			if array_exists(all3DENEntities select 6,_entity) then {
+				//do reload layers library
+				call layer_internal_reloadLayerTree;
+			};
+		};
+	};
+
+	["onEntityAdded",_onchange] call Core_addEventHandler;
+	["onEntityRemoved",_onchange] call Core_addEventHandler;
+}
+
+function(layer_internal_reloadLayerTree)
+{
+	private _allLayers = all3DENEntities select 6;
+	#define __getname(_v) ((_v) get3DENAttribute "name" select 0)
+	#define __getparentlayer(_v) (get3DENLayer (_v))
+	
+	layer_internal_map_layerTree = createHashMap;//k id(int), childs[]
+	private _ldict = layer_internal_map_layerTree;
+
+	private _flatChilds = createHashMap;
+	layer_internal_map_childs = _flatChilds; //base mother, child
+
+	{
+		private _p = __getparentlayer(_x);
+		if (_p != -1) then {
+			if !(_p in _flatChilds) then {
+				_flatChilds set [_p,[]];
+			};
+			(_flatChilds get _p) pushBack _x;
+		} else {
+			//no parents found - is root
+			_ldict set [_x,[]];
+		};
+	} foreach _allLayers;
+
+	_search = {
+		params ["_cur","_plist","_mapping"];
+		//add current to tree
+		private _imap = createHashMap;
+		_mapping set [_cur,_imap];
+		{
+			[_x,_flatChilds get _x,_imap] call _search;
+		} foreach _plist;
+	};
+
+	{
+		[_x,_y,_ldict] call _search;
+	} foreach _flatChilds;
+}
+
+function(layer_openSelectLayer)
+{
+	params [["_tex","Выберите слой"],["_des","Выберите слой по названию"],["_firstId",-1]];
+	private _dictinf_data = [];
+	private _getname_ = { format["%1 #%2",__getname(_this),_this] };
+	private _selItm = "";
+	private _fmtType = "<<< %1 >>>";
+	{
+		private _p = __getparentlayer(_x);
+		private _lname = _x call _getname_;
+		
+		if (_x == _firstId) then {
+			_lname = format[_fmtType,_lname];
+		};
+
+		if (_p == -1) then {
+			_dictinf_data pushBack (_lname + ":ROOT");
+		} else {
+			private _ppb = (_p call _getname_);
+			if (_p == _firstId) then {
+				_ppb = format[_fmtType,_ppb];	
+			};
+			_dictinf_data pushBack (_lname + ":" + _ppb);
+		};
+		
+	} foreach (all3DENEntities select 6);
+
+	_dictinf_data = _dictinf_data joinString ";";
+
+	private _newval = refcreate(0);
+	if ([
+		_newval,
+		_tex,
+		_des,
+		_dictinf_data
+	] call widget_winapi_openTreeView) then {
+		if (refget(_newval) == "") exitWith {-1};
+		private _v = refget(_newval);
+		parseNumber(_v select [(_v find "#") + 1])
+	} else {
+		-1
+	};
+}
+
+//#else
+
 /* *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *
 |						LOW LEVEL API								|
 *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***/
@@ -205,3 +315,6 @@ function(layer_getObjectLayer)
 
 	_retval
 }
+
+//#endif
+//EDITOR_GOLIB_LAYER_SYSTEM_UPDATE

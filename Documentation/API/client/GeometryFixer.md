@@ -239,18 +239,10 @@ File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 193](../../../Sr
 
 Type: function
 
-Description: не самое оптимизированное решеие. нужно собрать через ближние объекты
+Description: выключает локальную коллизию моба на клиенте полностью
 
 
 File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 253](../../../Src/client/GeometryFixer/GeometryFixer_functions.sqf#L253)
-## gf_cp_internal_isMovingTo
-
-Type: function
-
-Description: 
-- Param: _targ
-
-File: [client\GeometryFixer\GeometryFixer_functions.sqf at line 284](../../../Src/client/GeometryFixer/GeometryFixer_functions.sqf#L284)
 # GeometryFixer_init.sqf
 
 ## GEOMETRYFIXER_GEOSAVER_DISABLED

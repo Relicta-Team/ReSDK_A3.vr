@@ -39,7 +39,8 @@ TEST(Algorithms_searching)
 	ASSERT_EQ(_element,"HELLO");
 	private _referenceDefault = false;
 	private _defaultReturn = [_list,{equalTypes(_x,true) && {_x}},_referenceDefault] call searchInList;
-	ASSERT(_defaultReturn isnotequalref (_list select 2));
+	//ASSERT(_defaultReturn isnotequalref (_list select 2)); //this throws error because 2.18 use simplevm optimizations
+	ASSERT_EQ(_defaultReturn,_referenceDefault);
 
 	private _d = [10,0];
 	private _bestResult = [

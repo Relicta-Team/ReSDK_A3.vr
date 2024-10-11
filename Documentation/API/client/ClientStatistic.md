@@ -58,7 +58,7 @@ Description:
 
 Initial value:
 ```sqf
-[]
+[0,0,0]
 ```
 File: [client\ClientStatistic\LogVariables.sqf at line 23](../../../Src/client/ClientStatistic/LogVariables.sqf#L23)
 ## clistat_internal_allch_buffer_frame
@@ -92,7 +92,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientStatistic\LogVariables.sqf at line 140](../../../Src/client/ClientStatistic/LogVariables.sqf#L140)
+File: [client\ClientStatistic\LogVariables.sqf at line 143](../../../Src/client/ClientStatistic/LogVariables.sqf#L143)
 ## clistat_setLogVars
 
 Type: function
@@ -100,4 +100,4 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\ClientStatistic\LogVariables.sqf at line 154](../../../Src/client/ClientStatistic/LogVariables.sqf#L154)
+File: [client\ClientStatistic\LogVariables.sqf at line 157](../../../Src/client/ClientStatistic/LogVariables.sqf#L157)

@@ -297,7 +297,7 @@ function(golib_vis_onFrame)
 	} else {
 		if not_equals(golib_vis_lastBeforeEnterMousePos,vec3(0,0,0)) then {
 			golib_vis_lastBeforeEnterMousePos = [0,0,0];
-			ctrlSetFocus (call MouseAreaGetWidget);
+			//ctrlSetFocus (call MouseAreaGetWidget);
 		};
 	};
 }
@@ -351,6 +351,7 @@ function(golib_vis_ontreeMouseUp)
 	} else {
 		//["tree rb up"] call showInfo;
 		_cs = tvCurSel (call golib_vis_getTree);
+		if (!call golib_vis_isMouseInsideTree) exitWith {};
 		if not_equals(_cs,[]) then {
 			[[_cs,"class"] call golib_vis_getTreeItemProperty] call golib_vis_onPressSettingsObject;
 		};
