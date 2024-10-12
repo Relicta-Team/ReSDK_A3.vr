@@ -56,7 +56,7 @@ Count modules: 55
  - [GameObjects](host//GameObjects.md) - 143 files
  - [Gender](host//Gender.md) - 1 files
  - [GURPS](host//GURPS.md) - 3 files
- - [Logger](host//Logger.md) - 1 files
+ - [Logger](host//Logger.md) - 2 files
  - [LootSystem](host//LootSystem.md) - 2 files
  - [MapManager](host//MapManager.md) - 16 files
  - [Materials](host//Materials.md) - 3 files
