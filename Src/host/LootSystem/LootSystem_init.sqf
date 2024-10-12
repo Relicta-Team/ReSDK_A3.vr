@@ -36,11 +36,15 @@ loot_prepareAll = {
 	_skipLoad = true;
 	#endif
 	
-	
 	if (_skipLoad) exitWith {};
 
 	#ifdef __VM_VALIDATE
 	if (true) exitWith {};
+	#endif
+
+	#ifdef RBUILDER
+	//preparing file_getFileList
+	call loot_internal_rbuilder_preloadUtils;
 	#endif
 	
 	private _fileList = ["src\host\LootSystem\Collections",".yml",true] call fso_getFiles;
@@ -53,6 +57,12 @@ loot_prepareAll = {
 
 	call loot_init;
 };
+
+#ifdef RBUILDER
+loot_internal_rbuilder_preloadUtils = {
+	#include "..\Tools\EditorDebug\EditorDebug_io.sqf"
+};
+#endif
 
 loot_loadConfig = {
 	params ["_path"];
