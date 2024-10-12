@@ -53,7 +53,7 @@ gvar(handleCreate) = {
 		};
 	};
 	
-	_cube = createSimpleObject ["block_dirt",_vPos,false];
+	_cube = createMesh(["block_dirt" arg _vPos arg false]);
 	_cube setdir pick[0,90,180,270];
 	/* TODO add mushroom generator
 		if (k == 0)
@@ -71,7 +71,7 @@ gvar(handleCreate) = {
 };
 gvar(postCreate) = {
 	{
-		gvar(listCaveBlocks) pushBack (createSimpleObject ["a3\structures_f\civ\camping\fireplace_f.p3d",_x,false])
+		gvar(listCaveBlocks) pushBack (createMesh(["a3\structures_f\civ\camping\fireplace_f.p3d" arg _x arg false]))
 	} foreach gvar(randPoses);
 };
 

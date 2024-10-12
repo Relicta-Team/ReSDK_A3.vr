@@ -138,11 +138,28 @@ input_spamProtect = {
 	};
 };
 
+//temorary wall pass through walls 
+input_passThroughWallsProtect = {
+	private _anmList = [
+		"aovrpercmstpsnonwnondf", //default
+		"aovrpercmstpsraswpstdf" //combat
+	];
+	if ((tolower animationState player) in _anmList) exitWith {
+		["<t color='#ff0000' size='1.3'>Ай-яй-яй...</t>"] call chatPrint;
+		true
+	};
+	false
+};
+
+
 #include <..\WidgetSystem\blockedButtons.hpp>
 
 //Проверяет пользовательский инпут. true означает что клавиша заблокирована
 input_movementCheck = {
 	params ["_key"];
+
+	//disable V in combat mode
+	if ([player] call smd_isCombatModeEnabled && {_key in (actionKeys "GetOver")}) exitWith {true};
 
 	_isMov = call input_internal_isMovingButton;
 	_isCS = call input_internal_isChangeStance;

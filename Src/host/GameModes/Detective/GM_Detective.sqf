@@ -256,13 +256,14 @@ class(GMDetective) extends(GMBase)
 		//секреты добавляем
 
 		{
-			if (_x getVariable "name" == "Странная стена" ) then {
+			if (getVar(_x,name) == "Странная стена" || {prob_new(20)}) then {
 				_l pushback _x;
+				setVar(_x,name,"Странная стена");
 				//override
 				_x setVariable [PROTOTYPE_VAR_NAME,pt_GMDetectiveStructHidden];
 				callFunc(_x,onRelink);
 			};
-		} foreach (["IStruct",[3684.64,3667.82,23.5604],10000,true] call getGameObjectOnPosition);
+		} foreach (["LargeConcreteWallWithReinforcement",[3684.64,3667.82,23.5604],10000,true] call getGameObjectOnPosition);
 
 		callSelf(pickMurder);
 		//invokeAfterDelayParams({callFunc(_this,pickMurder)},2,this);
@@ -457,7 +458,7 @@ class(GMDetective) extends(GMBase)
 
 endclass
 
-class(GMDetectiveStructHidden) extends(IStruct)
+class(GMDetectiveStructHidden) extends(LargeConcreteWallWithReinforcement)
 	var(isSpawnedItem,false);
 	func(onRelink)
 	{

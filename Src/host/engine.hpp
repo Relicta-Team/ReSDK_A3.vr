@@ -73,11 +73,6 @@
 #define log(message) [message] call cprint
 #define logformat(provider,formatText) [provider,formatText] call cprint
 
-/*#define warning(message) "debug_console" callExtension ("WARN: " + message + "#1101"); [message] call discWarning
-#define error(message) "debug_console" callExtension ("ERROR: " + message + "#1001"); [message] call discError
-
-#define warningformat(message,fmt) "debug_console" callExtension (format ["WARN: " + message + "#1101",fmt]); [format[message,fmt]] call discWarning
-#define errorformat(message,fmt) "debug_console" callExtension (format ["ERROR: " + message  + "#1001",fmt]); [format[message,fmt]] call discError*/
 /// -------------------------------------- FUNCTIONAL PRINTS ---------------------------------------
 #define warning(message) [message] call cprintWarn
 #define error(message) [message] call cprintErr
@@ -85,12 +80,20 @@
 #define warningformat(message,fmt) [message,fmt] call cprintWarn
 #define errorformat(message,fmt) [message,fmt] call cprintErr
 
+#ifdef RBUILDER
+	#define __post_message_RB(m) if (RBuilder_serverStarted) then {["RBuilder","c_send",["print",m]] call rescript_callCommandVoid};
+	#define __RB_FATAL_EXIT call RBuilder_onServerLockedLoading;
+#else
+	#define __post_message_RB(m) 
+	#define __RB_FATAL_EXIT 
+#endif
+
 /// ------------------------------------ FUNCTIONAL PRINTS -----------------------------------------
 
 #ifdef __TRACE__ENABLED
-	#define trace(message) "debug_console" callExtension ("TRACE: " + message + "#1011");
-	#define traceformat(message,fmt) "debug_console" callExtension (format ["TRACE: " + message + "#1011",fmt]);
-
+	#define trace(message) "debug_console" callExtension ("TRACE: " + message + "#1011"); __post_message_RB("TRACE: " + (message))
+	#define traceformat(message,fmt) "debug_console" callExtension (format ["TRACE: " + message + "#1011",fmt]); __post_message_RB(format["TRACE: " + (message) arg fmt])
+	
 	//breakpoints
 	#define breakpoint_setfile(x) __bp__file__ = x;
 	#define breakpoint(data) "__REDIRECT_KEYWORD_THIS_REQUIRED__" call{private __bp_l = __LINE__;private __bp_f = "<anon>"; if !isNullVar(__bp__file__)then{__bp_f=__bp__file__};\
@@ -107,13 +110,13 @@
 
 
 
-#define OBSOLETE(funcname) private _dt = format ["[OBSOLETE] => %1(): This function will be removed in the future and should not be used." + "#1101", #funcname]; "debug_console" callExtension _dt; [_dt] call discWarning;
+#define OBSOLETE(funcname) private _dt = format ["[OBSOLETE] => %1(): This function will be removed in the future and should not be used." + "#1101", #funcname]; warning(_dt); [_dt] call discWarning;
 
-#define NOTIMPLEMENTED(funcname) private _dt = format ["[NOT_IMPLEMENTED] => %1(): This function not implemented." + "#1101", #funcname]; "debug_console" callExtension _dt; [_dt] call discWarning;
+#define NOTIMPLEMENTED(funcname) private _dt = format ["[NOT_IMPLEMENTED] => %1(): This function not implemented." + "#1101", #funcname]; warning(_dt); [_dt] call discWarning;
 
 //закрытие потока программы
 #define ___appexitstr(value) #value
-#define appExit(exitCode) logformat("Application exited. Reason: %1 (%2)",exitCode arg __appexit_listreasons select exitCode); if (!isMultiplayer) then {client_isLocked = true; server_isLocked = true; endMission "END1";} else {if (isServer) then {server_isLocked = true} else {client_isLocked = true}}
+#define appExit(exitCode) logformat("Application exited. Reason: %1 (%2)",exitCode arg __appexit_listreasons select exitCode); if (!isMultiplayer) then {client_isLocked = true; server_isLocked = true; endMission "END1";} else {if (isServer) then {server_isLocked = true; __RB_FATAL_EXIT} else {client_isLocked = true}}
 	#define __appexit_listreasons (["EXIT" \
 	,"CRITICAL" \
 	,"DOUBLEDEF" \
@@ -231,6 +234,9 @@ _ret = _this; \
 //Распаковывает ссылку на переменную из верхнего уровня если существует
 #define outRef(var,def) var = if isNullVar(var) then {def} else {var}
 
+// privates(_a _b _c _d)
+#define privates(v) private (v splitString "."); 
+
 //prob correct??? (rewrite)
 #define isNullPtr(obj) (obj isequaltypeany [locationnull,controlnull,objnull,displaynull])
 
@@ -240,6 +246,16 @@ _ret = _this; \
 #define isRefType(val) (val isEqualTypeAny [locationnull,controlnull,objnull,displaynull])
 #define isValType(val) !isRefType(val)
 */
+
+#ifdef RBUILDER
+	#define __rb_mesh_common_path__ "core\default\default.p3d"
+	#define createMesh(ctx) ctx call { params ["_p","_ps","_loc"]; \
+		createSimpleObject [ __rb_mesh_common_path__, _ps,_loc ]; \
+	}
+#else
+	#define createMesh(ctx) createSimpleObject (ctx)
+#endif
+
 
 //string help
 #define stringEmpty ""
@@ -265,6 +281,9 @@ bool TestRange (int numberToCheck, int bottom, int top)
 */
 //Проверка диапазона
 #define inRange(numberToCheck,bottom,top) ((numberToCheck) >= bottom && (numberToCheck) <= top)
+
+//Проверка типов
+#define isInt(num) ((num) call {floor _this == _this})
 
 #define boolToInt(bval) ([0,1]select (bval))
 
@@ -292,7 +311,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define SETARR(arr,index,val) arr set[index,val]
 #define GETARR(arr,index) arr select(index)
 
-#define array_exists(arr,var) ((var)in arr)
+#define array_exists(arr,var) ((var)in(arr))
 //рандомный сорт массива
 #define array_shuffle(array) (array call BIS_fnc_arrayShuffle)
 //копирование массива
@@ -313,6 +332,9 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define vec3(x,y,z) [x,y,z]
 #define vec4(x,y,w,h) [x,y,w,h]
 
+//local variables swap
+#define __sw_combine(o1,o2) o1##o2
+#define swap_lvars(a,b) private __sw_combine(__t_swp_,b) = a; a = b; b = __sw_combine(__t_swp_,b)
 
 //reference packer
 #define refcreate(value) [value]
@@ -447,6 +469,8 @@ bool TestRange (int numberToCheck, int bottom, int top)
 
 #define prob(val) (random[0,50,100]<(val))
 
+#define prob_new(val) (random 100<(val))
+
 //math helpers
 #define pow(a,b) ((a) ^ (b))
 
@@ -456,6 +480,8 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define clampangle(x,a,b) (((((x) % 360 + 360) % 360) max (a)) min (b))
 
 #define parseNumberSafe(v) ((parseNumber (v)) call {if(finite _this) then {_this} else {0}})
+
+#define getdiff(a,b) ([a,b] call {params["_a","_b"]; if equals(_a,_b)exitWith{0}; ifcheck(_a>_b,-_a+_b,_b-_a) })
 
 //delay subsystem
 
@@ -692,7 +718,7 @@ ACRE_STACK_DEPTH = ACRE_STACK_DEPTH + 1; ACRE_CURRENT_FUNCTION = 'ANON'; \
 _ret = _this call ##function; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH - 1; \
 ACRE_IS_ERRORED = false; _ret;}*/
 
-#ifdef EDITOR
+#ifdef EDITOR_OR_RBUILDER
 	#define setLastError(data__) ([data__] call relicta_debug_setlasterror); halt
 #else
 	#define setLastError(data__)

@@ -253,7 +253,7 @@ Description:
 
 Replaced value:
 ```sqf
-"debug_console" callExtension ("<Roleplay::WeapModule>" + format[text,fmt] + "#0111");
+["<Roleplay::WeapModule>",format[text,fmt],"#0111"] call stdoutPrint;
 ```
 File: [host\CombatSystem\CombatSystem.hpp at line 9](../../../Src/host/CombatSystem/CombatSystem.hpp#L9)
 ## DEF_TYPE_DODGE

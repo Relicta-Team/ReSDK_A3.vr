@@ -1000,7 +1000,7 @@ region(Status effects)
 		#define AMOUNT_LESS_STAMINA 0.5
 
 		//moving mob
-		if (callSelf(getRealSpeed) > 0) then {
+		if (callSelf(getSpeedMode) > SPEED_MODE_STOP) then {
 			_staLoss = AMOUNT_LESS_STAMINA * (getSelf(curEncumbranceLevel) + 1);
 			modvar(_staLoss) * ([1,1,3,10] select callSelf(getSpeedMode));
 			callSelfParams(addStaminaLoss,_staLoss);
@@ -1308,7 +1308,7 @@ region(Log macros)
 	#define __dmgAndHp _dmg arg _hp
 	#define log_performance
 
-	#define lifelog(mes,fmt) "debug_console" callExtension (format["[LOG::LIFE]" + (mes) + "#1011",fmt])
+	#define lifelog(mes,fmt) (["[LOG::LIFE]",(mes),fmt,"#1011"] call stdoutPrint)
 
 	"
 		name:Нанести повреждение

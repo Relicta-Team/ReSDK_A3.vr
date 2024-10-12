@@ -1,0 +1,95 @@
+
+name: Deploy RBuilder
+
+on:
+  workflow_dispatch:
+
+env:
+  rb_dir: ${{github.workspace}}/RBuilder/
+  rb_exe: ${{github.workspace}}/RBuilder/rb.exe
+  rb_args_init: -init build -l
+  rb_args_test: -testapp
+  rb_args_run_empty: run -d DEBUG
+  rb_args_run_tests: run -d DEBUG -d TEST_ALL
+  DEPLOY_TOKEN: ${{ secrets.TOKEN }}
+
+jobs:
+
+  deploy:
+    name: Build
+    runs-on: windows-2019
+    if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
+    steps:
+      - name: Setup msvc+directx
+        run: |
+          choco install directx
+          choco install vcredist2010
+          choco install vcredist2012
+      - name: Setup Python
+        uses: actions/setup-python@v3.1.4
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.TOKEN }} # for forcepush working
+      
+      # ----------------------- build exe -----------------------
+      - name: Compile
+        id: rbuilder_compile
+        working-directory: ${{ github.workspace }}/Third-party/gh_build
+        run: |
+          python -V
+          python build_rbuilder.py --repo=Relicta-Team/RBuilder --env_token_var=DEPLOY_TOKEN
+      # ----------------------- tests and build dependencies -----------------------
+      - name: Init RBuilder
+        working-directory: ${{env.rb_dir}}
+        run: ${{env.rb_exe}} ${{env.rb_args_init}}
+
+      - name: Test compiled exe
+        id: rb_test_exe
+        working-directory: ${{env.rb_dir}}
+        run: ${{ env.rb_exe }} ${{ env.rb_args_test }}
+
+      - name: Run empty VM
+        working-directory: ${{env.rb_dir}}
+        run: ${{ env.rb_exe }} ${{ env.rb_args_run_empty }}
+      - name: Run unit tests
+        working-directory: ${{env.rb_dir}}
+        run: ${{ env.rb_exe }} ${{ env.rb_args_run_tests }}
+
+      # ----------------------- upload/commit compiled -----------------------
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        name: Upload RBuilder artifacts
+        with:
+          name: RBuilder ${{ steps.rbuilder_compile.outputs.RBUILDER_FULL_VERSION }}
+          path: |
+            ${{ env.rb_dir }}
+
+      - name: Export Detailed Event Logs
+        if: failure()
+        run: |
+          echo "Exporting detailed Windows event logs..."
+          Get-WinEvent -LogName Application -MaxEvents 100 | ForEach-Object {
+            $_ | Select-Object TimeCreated, Id, LevelDisplayName, Message | Format-List | Out-File -Append -FilePath detailed_event_logs.txt
+          }
+          
+          Get-WinEvent -LogName System -MaxEvents 100 | ForEach-Object {
+            $_ | Select-Object TimeCreated, Id, LevelDisplayName, Message | Format-List | Out-File -Append -FilePath detailed_event_logs.txt
+          }
+
+      - name: Upload Detailed Event Logs
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: error-logs
+          path: |
+            detailed_event_logs.txt
+            ${{ env.rb_dir }}VM/profile/
+          
+      - name: Update RBuilder application
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          push_options: '--force'
+          commit_user_name: RBuilder update
+          file_pattern: RBuilder/
+          commit_message: RBuilder ${{ steps.rbuilder_compile.outputs.RBUILDER_FULL_VERSION }}
+

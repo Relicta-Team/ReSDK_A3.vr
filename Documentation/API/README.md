@@ -3,7 +3,7 @@ Count modules: 31
  - [client](client//client.md) - 2 files
  - [Chat](client//Chat.md) - 6 files
  - [ClientData](client//ClientData.md) - 14 files
- - [ClientInit](client//ClientInit.md) - 1 files
+ - [ClientInit](client//ClientInit.md) - 3 files
  - [ClientMenus](client//ClientMenus.md) - 1 files
  - [ClientRpc](client//ClientRpc.md) - 2 files
  - [ClientStatistic](client//ClientStatistic.md) - 3 files
@@ -32,7 +32,7 @@ Count modules: 31
  - [VoiceSystem](client//VoiceSystem.md) - 12 files
  - [WidgetSystem](client//WidgetSystem.md) - 6 files
 # Side: host
-Count modules: 54
+Count modules: 55
  - [host](host//host.md) - 13 files
  - [AI](host//AI.md) - 1 files
  - [AmbientControl](host//AmbientControl.md) - 1 files
@@ -41,14 +41,15 @@ Count modules: 54
  - [Client](host//Client.md) - 3 files
  - [ClientManager](host//ClientManager.md) - 16 files
  - [CombatSystem](host//CombatSystem.md) - 13 files
- - [CommonComponents](host//CommonComponents.md) - 29 files
- - [CraftSystem](host//CraftSystem.md) - 5 files
+ - [CommonComponents](host//CommonComponents.md) - 28 files
+ - [CraftSystem](host//CraftSystem.md) - 10 files
  - [Curl](host//Curl.md) - 3 files
  - [Database](host//Database.md) - 4 files
  - [DataObjects](host//DataObjects.md) - 1 files
  - [Discord](host//Discord.md) - 3 files
  - [FaithSystem](host//FaithSystem.md) - 3 files
  - [Family](host//Family.md) - 2 files
+ - [FileSystem](host//FileSystem.md) - 2 files
  - [GameEvents](host//GameEvents.md) - 4 files
  - [GamemodeManager](host//GamemodeManager.md) - 10 files
  - [GameModes](host//GameModes.md) - 40 files
@@ -57,7 +58,7 @@ Count modules: 54
  - [GURPS](host//GURPS.md) - 3 files
  - [Logger](host//Logger.md) - 1 files
  - [LootSystem](host//LootSystem.md) - 2 files
- - [MapManager](host//MapManager.md) - 15 files
+ - [MapManager](host//MapManager.md) - 16 files
  - [Materials](host//Materials.md) - 3 files
  - [MatterSystem](host//MatterSystem.md) - 11 files
  - [Medals](host//Medals.md) - 3 files
@@ -74,7 +75,7 @@ Count modules: 54
  - [SceneReloader](host//SceneReloader.md) - 1 files
  - [ScriptErrorHandler](host//ScriptErrorHandler.md) - 1 files
  - [ServerChat](host//ServerChat.md) - 1 files
- - [ServerInteraction](host//ServerInteraction.md) - 7 files
+ - [ServerInteraction](host//ServerInteraction.md) - 6 files
  - [ServerLighting](host//ServerLighting.md) - 2 files
  - [ServerRpc](host//ServerRpc.md) - 2 files
  - [ServerSceneTest](host//ServerSceneTest.md) - 2 files
@@ -82,8 +83,8 @@ Count modules: 54
  - [SpecialActions](host//SpecialActions.md) - 3 files
  - [StatusEffects](host//StatusEffects.md) - 6 files
  - [Structs](host//Structs.md) - 2 files
- - [Tools](host//Tools.md) - 13 files
+ - [Tools](host//Tools.md) - 14 files
  - [Traits](host//Traits.md) - 4 files
- - [UnitTests](host//UnitTests.md) - 2 files
+ - [UnitTests](host//UnitTests.md) - 11 files
  - [VerbSystem](host//VerbSystem.md) - 6 files
- - [Yaml](host//Yaml.md) - 1 files
+ - [Yaml](host//Yaml.md) - 3 files

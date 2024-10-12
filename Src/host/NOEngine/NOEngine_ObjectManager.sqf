@@ -219,6 +219,10 @@ createItemInWorld = {
 	this
 };
 
+//error counter for debugging cannot add items in container information
+ciic_internal_errorCheckCanAdd = 0;
+ciic_internal_successedCreation = 0;
+
 // Создание предмета в контейнере
 "
 	name:Создать предмет в контейнере
@@ -249,6 +253,7 @@ node_func(createItemInContainer) = {
 	private _type = missionnamespace getVariable ["pt_" + _name_str,"NAN"];
 	if (_type isEqualTo "NAN") exitWith {
 		errorformat("Cant instantiate object with class %1 (not found)",_name_str);
+		nullPtr
 	};
 
 	if (!callFunc(_container,isContainer)) exitWith {
@@ -268,7 +273,7 @@ node_func(createItemInContainer) = {
 	};
 	//specifiers
 	private _FLAG_spResize__ = "expand" in _ignoreMode;
-
+	
 	private _rez = callFuncParams(_container,addItem,_item);
 
 	//Если контейнер на мобе
@@ -278,12 +283,15 @@ node_func(createItemInContainer) = {
 	};
 
 	if !(_rez isEqualTo true) exitWith {
+		INC(ciic_internal_errorCheckCanAdd);
 		errorformat("Cant create %2 in %1. Result is %3",callFunc(_container,getClassName) arg callFunc(_item,getClassName) arg _rez);
 		delete(_item);
-		//перерасчитываем в вес
+		//перерасчитываем вес
 		_contLoc call gurps_recalcuateEncumbrance;
 		nullPtr;
 	};
+
+	INC(ciic_internal_successedCreation);
 
 	[_item] call createGameObjectScriptInternal;
 

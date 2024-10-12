@@ -306,9 +306,10 @@ class OOPBuilder : IScript
     {
 		Form form = new Form();
 		Label label = new Label();
-		TreeView textBox = new TreeView();
+		TreeView treeView = new TreeView();
 		Button buttonOk = new Button();
 		Button buttonCancel = new Button();
+		TextBox searchBox = new TextBox(); // Добавляем поле для поиска
 
 		form.Text = title;
 		label.Text = promptText;
@@ -319,35 +320,57 @@ class OOPBuilder : IScript
 		buttonCancel.DialogResult = DialogResult.Cancel;
 
 		label.SetBounds(9, 20, 372, 13);
-		textBox.SetBounds(12, 36, 670, 500); // Изменил размеры на 670x500
-		buttonOk.SetBounds(516, 546, 75, 23); // Изменил координаты кнопок
-		buttonCancel.SetBounds(597, 546, 75, 23); // Изменил координаты кнопок
+		searchBox.SetBounds(12, 36, 670, 20); // Поле поиска под меткой
+		treeView.SetBounds(12, 60, 670, 475); // Дерево под полем поиска
+		buttonOk.SetBounds(516, 546, 75, 23);
+		buttonCancel.SetBounds(597, 546, 75, 23);
 
 		label.AutoSize = true;
-		textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+		treeView.Anchor = treeView.Anchor | AnchorStyles.Right;
 		buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 		buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 
-		/*
-		 TreeData struct:
-			object:
-			
-		 */
-		//fill tree
+		// Добавляем данные в дерево
+		ParseToTreeView(treeView, treeData);
 
-		// TreeNode parentNode = new TreeNode();
-		// parentNode.Text = "Parent Node";
-		// textBox.Nodes.Add(parentNode);
+		// Оригинальные данные дерева для сброса фильтра
+		TreeNode[] originalNodes = new TreeNode[treeView.Nodes.Count];
+		treeView.Nodes.CopyTo(originalNodes, 0);
 
-		ParseToTreeView(textBox, treeData);
-		//var root = ParseInputToTreeNodes(treeData);
-		//textBox.Nodes.AddRange(root.ToArray());
+		// Обработчик поиска
+		searchBox.TextChanged += (sender, e) =>
+		{
+			string searchText = searchBox.Text.ToLower();
+			treeView.BeginUpdate(); // Отключаем перерисовку во время обновления
 
+			treeView.Nodes.Clear();
 
-		// Обработка нажатия клавиш в поле ввод
+			if (string.IsNullOrWhiteSpace(searchText))
+			{
+				// Восстанавливаем оригинальное дерево, если строка поиска пуста
+				treeView.Nodes.AddRange(originalNodes);
+				treeView.CollapseAll();
+			}
+			else
+			{
+				// Проходим по узлам и фильтруем по тексту поиска
+				foreach (TreeNode node in originalNodes)
+				{
+					var matchedNodes = SearchTree(node, searchText);
+					if (matchedNodes != null)
+					{
+						treeView.Nodes.Add(matchedNodes);
+					}
+				}
 
-		form.ClientSize = new Size(700, 600); // Устанавливаем размер окна
-		form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+				treeView.ExpandAll();
+			}
+
+			treeView.EndUpdate(); // Включаем перерисовку после обновления
+		};
+
+		form.ClientSize = new Size(700, 600);
+		form.Controls.AddRange(new Control[] { label, searchBox, treeView, buttonOk, buttonCancel });
 		form.FormBorderStyle = FormBorderStyle.FixedDialog;
 		form.StartPosition = FormStartPosition.CenterScreen;
 		form.MinimizeBox = false;
@@ -355,9 +378,53 @@ class OOPBuilder : IScript
 		form.CancelButton = buttonCancel;
 
 		DialogResult dialogResult = form.ShowDialog();
-		value = textBox.SelectedNode.Text;
+		if (treeView.SelectedNode != null)
+		{
+			value = treeView.SelectedNode.Text;
+		}
 		return dialogResult;
     }
+
+	private static TreeNode SearchTree(TreeNode node, string searchText)
+	{
+		string lowerSearchText = searchText.ToLower();
+		string lowerNodeText = node.Text.ToLower();
+
+		// Создаем список для дочерних узлов
+		List<TreeNode> matchedChildNodes = new List<TreeNode>();
+
+		// Проходим по дочерним узлам и рекурсивно проверяем их
+		foreach (TreeNode childNode in node.Nodes)
+		{
+			TreeNode matchedChild = SearchTree(childNode, searchText);
+			if (matchedChild != null)
+			{
+				matchedChildNodes.Add(matchedChild); // Добавляем только совпадающие дочерние узлы
+			}
+		}
+
+		// Если текст узла совпадает или есть совпадения в дочерних узлах
+		if (lowerNodeText.Contains(lowerSearchText) || matchedChildNodes.Count > 0)
+		{
+			TreeNode matchedNode = new TreeNode(node.Text); // Создаем узел без клонирования
+			if (lowerNodeText.Contains(lowerSearchText))
+			{
+				matchedNode.BackColor = Color.Green; // Подсветим совпадающий узел
+			}
+
+			// Добавляем дочерние узлы, которые содержат совпадения
+			foreach (TreeNode matchedChild in matchedChildNodes)
+			{
+				matchedNode.Nodes.Add(matchedChild);
+			}
+
+			return matchedNode; // Возвращаем только совпавший узел с нужными дочерними
+		}
+
+		return null; // Если совпадений нет, возвращаем null
+	}
+
+
 
 	public static DialogResult InputBox(string title, string promptText, ref string value)
 	{

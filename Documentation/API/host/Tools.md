@@ -277,16 +277,24 @@ Initial value:
 5
 ```
 File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 14](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L14)
-## file_open
+## file_getSourcePath
 
 Type: function
 
 Description: #define EXTENDED_LOGGING_ASYNCUNLOCK
+
+
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 21](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L21)
+## file_open
+
+Type: function
+
+Description: 
 - Param: _path
 - Param: _isRelative (optional, default true)
 - Param: _args (optional, default "")
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 21](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L21)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 29](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L29)
 ## file_openReturn
 
 Type: function
@@ -296,7 +304,7 @@ Description:
 - Param: _isRelative (optional, default true)
 - Param: _args (optional, default "")
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 41](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L41)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 49](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L49)
 ## file_copy
 
 Type: function
@@ -307,7 +315,7 @@ Description: this cannot copy directory
 - Param: _relInfo
 - Param: _canOverride (optional, default true)
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 58](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L58)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 66](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L66)
 ## file_move
 
 Type: function
@@ -317,7 +325,7 @@ Description:
 - Param: _dest
 - Param: _relInfo
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 73](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L73)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 81](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L81)
 ## dir_move
 
 Type: function
@@ -325,7 +333,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 88](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L88)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 96](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L96)
 ## file_getFileList
 
 Type: function
@@ -336,7 +344,7 @@ Description:
 - Param: _searchOption (optional, default "*.*")
 - Param: _useDeepSearch (optional, default false)
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 92](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L92)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 100](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L100)
 ## file_read
 
 Type: function
@@ -345,7 +353,7 @@ Description:
 - Param: _path
 - Param: _isRelative (optional, default true)
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 108](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L108)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 116](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L116)
 ## file_write
 
 Type: function
@@ -355,7 +363,7 @@ Description:
 - Param: _data
 - Param: _isRelative (optional, default true)
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 120](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L120)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 128](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L128)
 ## file_delete
 
 Type: function
@@ -363,7 +371,7 @@ Type: function
 Description: 
 - Param: _path
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 140](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L140)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 148](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L148)
 ## folder_delete
 
 Type: function
@@ -371,7 +379,7 @@ Type: function
 Description: 
 - Param: _path
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 151](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L151)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 159](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L159)
 ## file_exists
 
 Type: function
@@ -380,7 +388,7 @@ Description:
 - Param: _path
 - Param: _isRelative (optional, default true)
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 162](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L162)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 170](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L170)
 ## folder_exists
 
 Type: function
@@ -389,7 +397,7 @@ Description:
 - Param: _path
 - Param: _isRelative (optional, default true)
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 168](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L168)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 176](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L176)
 ## file_isLocked
 
 Type: function
@@ -398,7 +406,7 @@ Description:
 - Param: _path
 - Param: _isRelative (optional, default true)
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 175](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L175)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 183](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L183)
 ## file_clearFileLock
 
 Type: function
@@ -406,7 +414,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 182](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L182)
+File: [host\Tools\EditorDebug\EditorDebug_io.sqf at line 190](../../../Src/host/Tools/EditorDebug/EditorDebug_io.sqf#L190)
 # EditorDebug_shared.sqf
 
 ## checkdata(cachevalue)
@@ -724,7 +732,7 @@ Description:
 - Param: _scope
 - Param: _varmap
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 145](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L145)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 148](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L148)
 ## relicta_debug_setlasterror
 
 Type: function
@@ -732,7 +740,7 @@ Type: function
 Description: used on halt system call
 - Param: _name
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 181](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L181)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 184](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L184)
 ## relicta_debug_internal_testErrorInternal
 
 Type: function
@@ -740,7 +748,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 186](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L186)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 189](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L189)
 ## relicta_debug_internal_testError
 
 Type: function
@@ -748,7 +756,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 193](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L193)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 196](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L196)
 # HotReload_init.sqf
 
 ## printTrace

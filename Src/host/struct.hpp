@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define STRUCT_API_VERSION 1.1
+#define STRUCT_API_VERSION 1.2
 // enable fileinfo for structs. do not enable in release build
 //#define STRUCT_USE_ALLOC_INFO
 
@@ -143,7 +143,8 @@
 //call functions with parameters
 #define callp(methodname,params) call [#methodname,[params]]
 //call base version of any method
-#define callbase(methodname) _this call(missionnamespace getvariable ("pts_"+(self GET STRUCT_MEM_TYPE select 1)) GET #methodname)
+#define callbase(methodname) _this call {__CBASE_INC__; _this call(missionnamespace getvariable ("pts_"+(self GET STRUCT_MEM_TYPE select __scb_i_s)) GET #methodname) }
+#define __CBASE_INC__ private __scb_i_s = if (isnil'__scb_i_s') then {1} else {__scb_i_s + 1}
 
 //variables management
 #define getv(memname) get #memname
@@ -153,6 +154,7 @@
 // * * * * * * * * * * * * Type checking * * * * * * * * * * * *
 
 #define isinstance(_inst_o,type_n) (#type_n in (_inst_o get STRUCT_MEM_TYPE))
+#define isinstance_str(_inst_o,type_n) ((type_n) in (_inst_o get STRUCT_MEM_TYPE))
 
 #define struct_typename(o) ((o) GET STRUCT_MEM_TYPE select 0)
 
@@ -161,10 +163,10 @@
 
 //instansing
 #ifdef STRUCT_USE_ALLOC_INFO
-	#define struct_new(name) (call{_sbj___ = [ pts_##name ] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
+	#define struct_new(name) (call{_sbj___ = [ pts_##name ,nil] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
 	#define struct_newp(name,arglist) (call{_sbj___ = [ pts_##name ,[arglist]] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
 #else
-	#define struct_new(name) ([ pts_##name ] call struct_iallc)
+	#define struct_new(name) ([ pts_##name ,nil ] call struct_iallc)
 	#define struct_newp(name,arglist) ([ pts_##name ,[arglist]] call struct_iallc)
 #endif
 
@@ -333,6 +335,25 @@
 	struct_eraseFull = {
 		params ["_o"];
 		struct_erase(_o)
+	};
+
+	struct_reflect_getTypeValue = {
+		params ["_typename","_varname"];
+		if not_equalTypes(_typename,"") then {
+			_typename = struct_typename(_typename);
+		};
+		private _type = missionNamespace getvariable ("pts_"+_typename);
+		if isNullVar(_type) exitWith {null};
+		private _val = _type get _varname;
+		if isNullVar(_val) then {
+			while {isNullVar(_val)} do {
+				_type = _type get STRUCT_MEM_BASE;
+				_val = _type get _varname;
+			};
+			_val
+		} else {
+			_val
+		};
 	};
 
 #endif

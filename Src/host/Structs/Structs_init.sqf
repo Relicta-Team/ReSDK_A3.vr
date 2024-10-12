@@ -11,4 +11,5 @@
 
 //atmos structures
 loadFile("src\host\Atmos\Atmos_structs.sqf");
-loadFile("src\host\LootSystem\LootSystem_structs.sqf")
+loadFile("src\host\LootSystem\LootSystem_structs.sqf");
+loadFile("src\host\CraftSystem\Internal\Craft_struct.sqf");

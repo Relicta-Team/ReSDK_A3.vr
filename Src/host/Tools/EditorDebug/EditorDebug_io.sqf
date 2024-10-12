@@ -18,10 +18,18 @@ file_const_defaultAsyncWriteTimeout = 5;
 // #define EXTENDED_LOGGING_ASYNCCOPY
 // #define EXTENDED_LOGGING_ASYNCUNLOCK
 
+file_getSourcePath = {
+	#ifdef RBUILDER
+		(RBuilder_map_defines get "RBUILDER_RESDK_PATH") + "/" + _this
+	#else
+		getMissionPath _this
+	#endif
+};
+
 file_open = {
 	params ["_path",["_isRelative",true],["_args",""]];
 	
-	if (_isRelative) then {_path = getMissionPath _path};
+	if (_isRelative) then {_path = _path call file_getSourcePath};
 
 	if !([_path,false] call file_exists) exitwith {false};
 	if (_arsgs == "") then {
@@ -41,8 +49,8 @@ file_open = {
 file_openReturn = {
 	params ["_path",["_isRelative",true],["_args",""]];
 
-	if (_isRelative) then {_path = getMissionPath _path};
-
+	if (_isRelative) then {_path = _path call file_getSourcePath};
+	
 	if !([_path,false] call file_exists) exitwith {999999};
 
 	if (_args == "") then {
@@ -62,8 +70,8 @@ file_copy = {
 	if equalTypes(_relInfo,true) then {_relInfo = vec2(_relInfo,_relInfo)};
 	_relInfo params [["_isRelative",true],["_isRelativeDest",true]];
 
-	if (_isRelative) then {_path = getMissionPath _path};
-	if (_isRelativeDest) then {_dest = getMissionPath _dest};
+	if (_isRelative) then {_path = _path call file_getSourcePath};
+	if (_isRelativeDest) then {_dest = _dest call file_getSourcePath};
 
 	(["FileManager","Copy",[
 		_path,_dest,_canOverride
@@ -77,8 +85,8 @@ file_move = {
 	if equalTypes(_relInfo,true) then {_relInfo = vec2(_relInfo,_relInfo)};
 	_relInfo params [["_isRelative",true],["_isRelativeDest",true]];
 
-	if (_isRelative) then {_path = getMissionPath _path};
-	if (_isRelativeDest) then {_dest = getMissionPath _dest};
+	if (_isRelative) then {_path = _path call file_getSourcePath};
+	if (_isRelativeDest) then {_dest = _dest call file_getSourcePath};
 
 	(["FileManager","Move",[
 		_path,_dest
@@ -92,7 +100,7 @@ dir_move = {
 file_getFileList = {
 	params ["_path",["_isRelative",true],["_searchOption","*.*"],["_useDeepSearch",false]];
 
-	if (_isRelative) then {_path = getMissionPath _path};
+	if (_isRelative) then {_path = _path call file_getSourcePath};
 
 	private _argsQuery = [_path,_searchOption];
 	if (_useDeepSearch) then {_argsQuery pushBack "deep"};
@@ -107,7 +115,7 @@ file_getFileList = {
 
 file_read = {
 	params ["_path",["_isRelative",true]];
-	if (_isRelative) then {_path = getMissionPath _path};
+	if (_isRelative) then {_path = _path call file_getSourcePath};
 
 	private _data = ["FileManager","Read",[_path,file_const_defaultDelimeter],true] call rescript_callCommand;
 	if equals(_data,"$BUFFER_OVERFLOW$") exitWith {
@@ -120,7 +128,7 @@ file_read = {
 file_write = {
 	params ["_path","_data",["_isRelative",true]];
 	
-	if (_isRelative) then {_path = getMissionPath _path};
+	if (_isRelative) then {_path = _path call file_getSourcePath};
 
 	//before check
 	if ([_path,false] call file_isLocked) exitwith {
@@ -139,7 +147,7 @@ file_write = {
 
 file_delete = {
 	params ["_path"]; //здесь обязательная защита от удаления файлов за директорией sdk
-	_path = getMissionPath _path;
+	_path = _path call file_getSourcePath;
 	if ([_path,false] call file_exists) then {
 		["FileManager","Delete",[_path]] call rescript_callCommandVoid;
 		true
@@ -150,7 +158,7 @@ file_delete = {
 
 folder_delete = {
 	params ["_path"]; //обязательная защита
-	_path = getMissionPath _path;
+	_path = _path call file_getSourcePath;
 	if ([_path,false] call folder_exists) then {
 		["FileManager","FolderDelete",[_path]] call rescript_callCommandVoid;
 		true
@@ -161,20 +169,20 @@ folder_delete = {
 
 file_exists = {
 	params ["_path",["_isRelative",true]];
-	if (_isRelative) then {_path = getMissionPath _path};
+	if (_isRelative) then {_path = _path call file_getSourcePath};
 	(["FileManager","Exists",[_path],true] call rescript_callCommand)=="true"
 };
 
 folder_exists = {
 	params ["_path",["_isRelative",true]];
-	if (_isRelative) then {_path = getMissionPath _path};
+	if (_isRelative) then {_path = _path call file_getSourcePath};
 	(["FileManager","ExistsDir",[_path],true] call rescript_callCommand)=="true"
 };
 
 
 file_isLocked = {
 	params ["_path",["_isRelative",true]];
-	if (_isRelative) then {_path = getMissionPath _path};
+	if (_isRelative) then {_path = _path call file_getSourcePath};
 
 	(["WorkspaceHelper","checkfilelock",[_path],true] call rescript_callCommand)=="false"
 };

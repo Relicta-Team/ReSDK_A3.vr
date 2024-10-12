@@ -3,6 +3,10 @@
 // sdk.relicta.ru
 // ======================================================
 
+init_function(golib_hashData_init)
+{
+	golib_internal_lastBatchUpdateMode = [];
+}
 
 function(golib_hasHashData)
 {
@@ -27,7 +31,7 @@ function(golib_serializeHashData)
 	_serializedData
 }
 
-//записать данные в объект
+
 function(golib_setHashData)
 {
 	params ["_worldObj","_hashData",["_addToHistory",false],["_postMes",""]];
@@ -43,17 +47,155 @@ function(golib_setHashData)
 		(_observedContent select _observedIndex) set [0,_serializedData];
 	};
 
+	//only first object must passed from params
+	private _otherObjects = inspector_otherObjects;
+	if not_equals(_worldObj,inspector_allSelectedObjects select 0) then {
+		["first object: %1; list: %2",_worldObj,inspector_otherObjects] call printTrace;
+		_otherObjects = inspector_allSelectedObjects - [_worldObj];
+	};
+
+	//prevaidate data
+	private _canApplyForCurrent = true;
+	
+	if (count golib_internal_lastBatchUpdateMode > 1) then {
+		golib_internal_lastBatchUpdateMode params ["_name",["_btype",""]];
+		if (_btype == "cprov") then {
+			_canApplyForCurrent = [_hashData get "class",_name,_hashData] call golib_batch_validatePropAccess;
+		};
+	};
+
 	private _serializedData = [_hashData] call golib_serializeHashData;
 	if (_addToHistory) then {
 		if (_postMes!="") then {
 			_postMes = ": " + _postMes;
 		};
 		["Инспектор"+_postMes, "Изменение свойств объекта "+(_hashData get "class"), "a3\3den\data\cfg3den\history\changeAttributes_ca.paa"] collect3DENHistory {
-			_worldObj set3DENAttribute ["init",_serializedData];
+			[_otherObjects,_hashData,golib_internal_lastBatchUpdateMode] call golib_setHashData_batch;
+			if (_canApplyForCurrent) then {
+				_worldObj set3DENAttribute ["init",_serializedData];
+			};
 		};
 	} else {
-		_worldObj set3DENAttribute ["init",_serializedData];
+		[_otherObjects,_hashData,golib_internal_lastBatchUpdateMode] call golib_setHashData_batch;
+		if (_canApplyForCurrent) then {
+			_worldObj set3DENAttribute ["init",_serializedData];
+		};
 	};
+}
+
+/*
+	set next sethashdata batch mode
+	Если свойство найдено в новой дате - это установка
+	Если свойство не найден в новой дате - это удаление
+*/
+function(goilb_setBatchMode)
+{
+	params ["_name",["_mode",""]];
+	golib_internal_lastBatchUpdateMode = [_name,_mode];
+}
+
+function(golib_batch_validatePropAccess)
+{
+	params ["_type","_prop","_hashData"];
+	
+	//no field founded
+	if !((tolower _prop) in ([_type] call golib_getClassAllFields)) exitWith {false};
+
+	//internal field check
+	if ([_type,_prop,"InternalImpl"] call goasm_attributes_hasAttributeField) exitWith {false};
+	//readony field check
+	if ([_type,_prop,"ReadOnly"] call goasm_attributes_hasAttributeField) exitWith {false};
+
+	true
+}
+
+function(golib_setHashData_batch)
+{
+	params ["_worldObj","_newData","_bupd"];
+	golib_internal_lastBatchUpdateMode = [];
+	if (count _bupd == 0) exitWith {};
+	if not_equalTypes(_worldObj,[]) then {_worldObj = [_worldObj]};
+	if (count _worldObj == 0) exitWith {};
+
+	_bupd params ["_propname",["_mode",""]];
+
+	if (_mode == "") then {
+		assert(equalTypes(_propname,""));
+		if (_propname in _newData) then {
+			_mode = "set";
+		} else {
+			_mode = "del";
+		};
+	};
+
+	["Update batch: %1 for %2 (newclass: %3)",_mode,_propname ,_newData get "class"] call printTrace;
+	
+	private _statementMap = (createHashMapFromArray [
+		//custom provider for fields
+		["cprov",{
+			//validate. class not contain this field
+			if !([_curData get "class",_propname,_curData] call golib_batch_validatePropAccess) exitWith {
+				["Invalidate check %1::%2",_curData get "class",_propname] call printError;
+			};
+
+
+			private _curDataTemp = _curData;
+			private _newDataTemp = _newData;
+			_curData = _curData get "customProps";
+			_newData = _newData get "customProps";
+			private _intMode = if (_propname in _newData) then {"set"} else {"del"};
+			
+			["internal cprov batch: %1 for %2",_intMode,_propname] call printTrace;
+
+			call (_statementMap get _intMode);
+			
+			//restore
+			_curData = _curDataTemp;
+			_newData = _newDataTemp;
+		}],
+		["set",{
+			if equalTypes(_propname,[]) then {
+				{_curData set [_x,_newData get _x]} foreach _propname
+			} else {
+				private _newvalue = _newData get _propname;
+				_curData set [_propname,_newvalue]
+			};
+			
+		}],
+		["del",{
+			if equalTypes(_propname,[]) then {
+				{_curData deleteAt _x} foreach _propname
+			} else {
+				_curData deleteAt _propname
+			};
+		}],
+		["set_mark",{
+			assert(equalTypes(_propname,""));
+			private _newvalue = _newData get _propname;
+			_curData set [_propname,format["%1 (copy %2)",[_newvalue," \(copy \d+\)",""] call regex_replace, _foreachIndex + 1]]
+		}],
+		["script_params_setvalidate",{
+			if !("__scriptName" in _curData) exitWith {};
+			call (_statementMap get "set");
+		}],
+		["script_params_delvalidate",{
+			if !("__scriptName" in _curData) exitWith {};
+			call (_statementMap get "del");
+		}]
+	]);
+
+	private _execCode = _statementMap get (_mode);
+	if isNullVar(_execCode) exitWith {
+		["Unknown batch type %1",_mode] call printError;
+	};
+
+	{
+		private _curData = [_x,false] call golib_getHashData;
+		["batch update class: %1",_curData get "class"] call printTrace;
+		call _execCode;
+		private _serHash = [_curData] call golib_serializeHashData;
+		_x set3DENAttribute ["init",_serHash];
+	} foreach _worldObj;
 }
 
 function(golib_isVirtualObject)
@@ -135,6 +277,14 @@ function(golib_initHashData)
 		[_worldObj,_mapData] call golib_setHashData;
 	};
 	_mapData
+}
+
+function(golib_getClassAllFields)
+{
+	params ["_obj"];
+	private _cls = ifcheck(equalTypes(_obj,""),_obj,[_obj] call golib_getClassName);
+	if isNullVar(_cls) exitWith {[]};
+	[_cls,"__allfields_map"] call oop_getTypeValue;
 }
 
 function(golib_getClassName)

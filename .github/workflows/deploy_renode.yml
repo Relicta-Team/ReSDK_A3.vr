@@ -1,0 +1,106 @@
+
+name: Deploy ReNode
+
+on:
+  workflow_dispatch:
+
+env:
+  renode_builder_path: Third-party/gh_build/build_renode.py
+  renode_artifacts_sources_path: ReNode/
+  renode_dir: ${{github.workspace}}/ReNode/
+  renode_compiled_executable: ./ReNode.exe
+  renode_compile_graphs_cli: -prep_code -nosplash -noapp -noerrwin
+  rb_exe: ${{github.workspace}}/RBuilder/rb.exe
+  DEPLOY_TOKEN: ${{ secrets.TOKEN }}
+
+jobs:
+
+  deploy:
+    name: Build
+    runs-on: windows-2019
+    if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
+    steps:
+      
+      - name: Setup msvc+directx
+        run: |
+          choco install directx
+          choco install vcredist2010
+          choco install vcredist2012
+
+      - name: Setup Python
+        uses: actions/setup-python@v3.1.4
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.TOKEN }} # for forcepush working
+            
+      # ----------------------- build exe -----------------------
+      - name: Compile
+        id: renode_compile
+        working-directory: ${{ github.workspace }}/Third-party/gh_build
+        run: |
+          python -V
+          python build_renode.py --repo=Relicta-Team/ReNodes --env_token_var=DEPLOY_TOKEN
+
+      # ----------------------- tests and build dependencies -----------------------
+      - name: Test executable
+        id: renode_test_exe
+        run: |
+          echo "::warning::ReNode test app not implemented"
+      
+      - name: Init RBuilder
+        if: steps.renode_test_exe.outcome=='success'
+        working-directory: ${{github.workspace}}/RBuilder
+        run: |
+          ${{env.rb_exe}} -init build -l
+      - name: Build nodes library
+        if: steps.renode_test_exe.outcome=='success'
+        working-directory: ${{github.workspace}}/RBuilder
+        run: |
+          ${{env.rb_exe}} run -d DEBUG -d GENERATE_RENODE_BINDINGS -rptshow True
+        
+      - name: Compile graphs
+        if: steps.renode_test_exe.outcome=='success'
+        working-directory: ${{ env.renode_dir }}
+        run: |
+          ${{ env.renode_compiled_executable }} ${{ env.renode_compile_graphs_cli }}
+      # ----------------------- upload/commit compiled -----------------------
+      
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        name: Upload ReNode compiled artifact
+        with:
+          name: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
+          path: |
+            ${{ env.renode_artifacts_sources_path }}
+      
+      - name: Export Detailed Event Logs
+        if: failure()
+        run: |
+          echo "Exporting detailed Windows event logs..."
+          Get-WinEvent -LogName Application -MaxEvents 100 | ForEach-Object {
+            $_ | Select-Object TimeCreated, Id, LevelDisplayName, Message | Format-List | Out-File -Append -FilePath detailed_event_logs.txt
+          }
+          
+          Get-WinEvent -LogName System -MaxEvents 100 | ForEach-Object {
+            $_ | Select-Object TimeCreated, Id, LevelDisplayName, Message | Format-List | Out-File -Append -FilePath detailed_event_logs.txt
+          }
+
+      - name: Upload Detailed Event Logs
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: error-logs
+          path: |
+            detailed_event_logs.txt
+            ${{github.workspace}}/RBuilder/VM/profile/
+
+
+      - name: Update ReNode application
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          push_options: '--force'
+          commit_user_name: ReNode update
+          file_pattern: ReNode/lib.obj ReNode/lib_guid ReNode/ReNode.exe ReNode/data/
+          commit_message: ReNode ${{ steps.renode_compile.outputs.RENODE_FULL_VERSION }}
+
+

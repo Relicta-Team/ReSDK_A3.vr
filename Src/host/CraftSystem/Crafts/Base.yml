@@ -1,0 +1,38 @@
+
+- name: Факел
+  type: default
+  category: Light
+  required:
+    skills: null
+    components:
+      - class: WoodenDebris6
+        count: 1
+        check_type_of: false
+      - class: [Bandage,Rag]
+        count: 1
+        check_type_of: false
+        hp: 50%
+  result:
+    class: TorchDisabled
+    modifiers: null
+
+- name: Деревянная ограда
+  type: building
+  category: Building
+  required:
+    skills: { engineering: 1 }
+    components:
+      - class: WoodenDebris(1-5)
+        count: 4
+        check_type_of: false
+  result:
+    class: WoodenSmallFence
+
+- type: system
+  required:
+    components:
+      - class: IFoodItem
+        count: 1
+  result:
+    class: Bread
+    count: 1

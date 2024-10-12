@@ -45,6 +45,9 @@ scriptError_internal_handleStack_short = {
 scriptErrGlobLastMessage = "";
 scriptErrHndlGlobal = addMissionEventHandler ["ScriptError",
 {
+	#ifdef RBUILDER
+	if (true) exitWith {};
+	#endif
 	/*
 		[error text, 
 		filename, 

@@ -13,6 +13,7 @@ class(EffectAsStruct) extends(ILightibleStruct)
 	//У частиц нельзя поменять модель
 	editor_attribute("InternalImpl")
 	var(model,"a3\structures_f\system\cluttercutter_small_f.p3d");
+	editor_attribute("InternalImpl")
 	var(light,-1);
 	editor_attribute("InternalImpl")
 	var(lightIsEnabled,false);

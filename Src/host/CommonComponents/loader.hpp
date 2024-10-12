@@ -22,7 +22,6 @@
 
 importCommon("!PreInit.sqf");
 importCommon("Assert.sqf");
-importCommon("io.sqf");
 importCommon("Algorithm.sqf");
 importCommon("bitflags.sqf");
 importCommon("Animator.sqf");

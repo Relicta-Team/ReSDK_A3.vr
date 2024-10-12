@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "yodes.resdk-vscode",
-        "codeium.codeium"
+        "codeium.codeium",
+        "redhat.vscode-yaml"
     ]
 }

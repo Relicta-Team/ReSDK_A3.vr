@@ -1,0 +1,40 @@
+
+
+TestCollection: &template_collection #создание якоря
+  name: Лут-тест
+  gamemodes: 
+    - regex: GMTemplate(Scripted)?
+  
+  pass_count: {min: 1, max: 2}
+  tag: .default_collections
+
+  health: 30%
+  quality: 30%
+
+  items:
+    CitizenCloth(1-22):
+      prob: 100%
+    IFoodItem:
+      all_types_of: true
+      prob: 100%
+    AmmoBoxPBM:
+      prob: 70%
+      count: 2
+    PistolPBM:
+      name: Пистоль
+      prob: 20%
+      quality: 100%
+      health: 
+        min: 5%
+        max: 15%
+    MagazinePBM:
+      name: Магазинчик
+      prob: 80%
+
+
+TestCollection2:
+  <<: *template_collection #вставляем все свойства из TestCollection по ссылке
+  maps: 
+    - Template
+  items: # переопределяем items от TestCollection
+    ~

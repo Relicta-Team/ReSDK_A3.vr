@@ -1,0 +1,59 @@
+name: Fork Run Tests
+
+on:
+  push:
+
+env:
+  rb_dir: ${{github.workspace}}/RBuilder/
+  rb_exe: ${{github.workspace}}/RBuilder/rb.exe
+  rb_args_init: -init build -l
+
+jobs:
+  build:
+    name: Test
+    runs-on: windows-2019
+    # define LOCAL_BUILD in you repo to enable local build
+    if: github.repository_owner != 'Relicta-Team' && vars.LOCAL_BUILD != ''
+    strategy:
+      fail-fast: true
+      matrix:
+          flags:
+            - -d TEST_ALL -d DEBUG
+            - -d TEST_ALL -d RELEASE
+    steps:
+      - name: Setup msvc+directx
+        run: |
+          choco install directx
+          choco install vcredist2010
+          choco install vcredist2012
+      
+      - uses: actions/checkout@v3
+      - name: Init
+        working-directory: ${{env.rb_dir}}
+        run: ${{env.rb_exe}} ${{env.rb_args_init}}
+
+      - name: Run
+        id: rb_run
+        working-directory: ${{env.rb_dir}}
+        run: ${{ env.rb_exe }} run ${{ matrix.flags }}
+
+      - name: Export Detailed Event Logs
+        if: failure()
+        run: |
+          echo "Exporting detailed Windows event logs..."
+          Get-WinEvent -LogName Application -MaxEvents 100 | ForEach-Object {
+            $_ | Select-Object TimeCreated, Id, LevelDisplayName, Message | Format-List | Out-File -Append -FilePath detailed_event_logs.txt
+          }
+          
+          Get-WinEvent -LogName System -MaxEvents 100 | ForEach-Object {
+            $_ | Select-Object TimeCreated, Id, LevelDisplayName, Message | Format-List | Out-File -Append -FilePath detailed_event_logs.txt
+          }
+
+      - name: Upload Detailed Event Logs
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: error-logs
+          path: |
+            detailed_event_logs.txt
+            ${{ env.rb_dir }}VM/profile/

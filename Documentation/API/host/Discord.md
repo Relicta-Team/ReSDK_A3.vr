@@ -414,6 +414,20 @@ Description:
 - Param: _name
 
 File: [host\Discord\Discord.sqf at line 161](../../../Src/host/Discord/Discord.sqf#L161)
+## DiscordEmbedBuilder_fnc_buildSqf
+
+Type: function
+
+> Exists if **RBUILDER** defined
+
+Description: 
+- Param: _token
+- Param: _mes
+- Param: _name
+- Param: _ico
+- Param: _flg
+
+File: [host\Discord\Discord.sqf at line 168](../../../Src/host/Discord/Discord.sqf#L168)
 # ServerManager.sqf
 
 ## DSM_CALLBACKNAME
@@ -503,7 +517,7 @@ Initial value:
 ```sqf
 nullPtr
 ```
-File: [host\Discord\ServerManager.sqf at line 168](../../../Src/host/Discord/ServerManager.sqf#L168)
+File: [host\Discord\ServerManager.sqf at line 174](../../../Src/host/Discord/ServerManager.sqf#L174)
 ## dsm_stdCall
 
 Type: function
@@ -569,7 +583,7 @@ Type: function
 Description: 
 
 
-File: [host\Discord\ServerManager.sqf at line 97](../../../Src/host/Discord/ServerManager.sqf#L97)
+File: [host\Discord\ServerManager.sqf at line 103](../../../Src/host/Discord/ServerManager.sqf#L103)
 ## dsm_callbackHandle
 
 Type: function
@@ -579,7 +593,7 @@ Description:
 - Param: _function
 - Param: _data
 
-File: [host\Discord\ServerManager.sqf at line 103](../../../Src/host/Discord/ServerManager.sqf#L103)
+File: [host\Discord\ServerManager.sqf at line 109](../../../Src/host/Discord/ServerManager.sqf#L109)
 ## dsm_isLoaded
 
 Type: function
@@ -587,7 +601,7 @@ Type: function
 Description: 
 
 
-File: [host\Discord\ServerManager.sqf at line 161](../../../Src/host/Discord/ServerManager.sqf#L161)
+File: [host\Discord\ServerManager.sqf at line 167](../../../Src/host/Discord/ServerManager.sqf#L167)
 ## dsm_callServerCommand
 
 Type: function
@@ -596,4 +610,4 @@ Description:
 - Param: _cmd
 - Param: _executorName
 
-File: [host\Discord\ServerManager.sqf at line 170](../../../Src/host/Discord/ServerManager.sqf#L170)
+File: [host\Discord\ServerManager.sqf at line 176](../../../Src/host/Discord/ServerManager.sqf#L176)

@@ -30,7 +30,7 @@ class(IStruct) extends(IDestructible)
 
 	editor_attribute("EditorVisible" arg "custom_provider:model") editor_attribute("Tooltip" arg "Модель структуры")
 	var(model,"a3\structures_f_epa\items\food\canteen_f.p3d");
-	editor_attribute("ReadOnly")
+	
 	var(loc,objNull);
 
 	func(destructor)
@@ -75,7 +75,7 @@ class(IStruct) extends(IDestructible)
 	{
 		objParams_3(_pos,_dir,_vec);
 
-		_vObj = createSimpleObject [getSelf(model),[0,0,0],true];
+		_vObj = createMesh([getSelf(model) arg [0 arg 0 arg 0] arg true]);
 		#ifdef NOE_DEBUG_HIDE_SERVER_OBJECT
 		_vobj hideObject true;
 		#endif
@@ -140,7 +140,7 @@ class(ILightibleStruct) extends(IStruct)
 	{
 		objParams_3(_pos,_dir,_vec);
 
-		_vObj = createSimpleObject [getSelf(model),[0,0,0],true];
+		_vObj = createMesh([getSelf(model) arg [0 arg 0 arg 0] arg true]);
 		#ifdef NOE_DEBUG_HIDE_SERVER_OBJECT
 		_vobj hideObject true;
 		#endif
@@ -301,7 +301,7 @@ class(IStructRadio) extends(ElectronicDeviceNode)
 	{
 		objParams_3(_pos,_dir,_vec);
 
-		_vObj = createSimpleObject [getSelf(model),[0,0,0],true];
+		_vObj = createMesh([getSelf(model) arg [0 arg 0 arg 0] arg true]);
 		#ifdef NOE_DEBUG_HIDE_SERVER_OBJECT
 		_vobj hideObject true;
 		#endif

@@ -40,6 +40,20 @@ Replaced value:
 "C:\Games\Arma3\A3Master\@server\db\GameMain.db"
 ```
 File: [host\Database\SQLite\SQLite.h at line 13](../../../Src/host/Database/SQLite/SQLite.h#L13)
+## DB_PATH
+
+Type: constant
+
+> Exists if **RBUILDER** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+((call ReBridge_getWorkspace) + ("\@server\db\GameMain.db"))
+```
+File: [host\Database\SQLite\SQLite.h at line 17](../../../Src/host/Database/SQLite/SQLite.h#L17)
 # SQLite_functions.sqf
 
 ## CATCH_REQUEST_ERROR

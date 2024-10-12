@@ -369,7 +369,7 @@ endclass
 //смерть сегодня имеет самый ужасный исход (потеря 5 хвостиков)
 class(NoDeathPointsAspect) extends(DirtpitGameAspect)
 	var(name,"Жажда жизни");
-	var(desc,"За смерть любой роли потеря 5х хвостиков");
+	var(desc,"За смерть в роли человека потеря 5х хвостиков");
 	var(descRoleplay,"Сегодня никому не хочется умирать...");
 	var(weight,0.1);
 
@@ -382,7 +382,13 @@ class(NoDeathPointsAspect) extends(DirtpitGameAspect)
 		{
 			//Аккуратно инжектим код
 			[_x,"onDeadBasic",{
-				callFuncParams(_usr,removePoints,5)
+				//жрунам не даем штраф
+				if (
+					getSelf(classMan) != "GMPreyMobEater" 
+					&& {getSelf(classWoman) != "GMPreyMobEater"}
+				) then {
+					callFuncParams(_usr,removePoints,5)
+				};
 			},"end",false] call oop_injectToMethod;
 		} foreach (callFunc(gm_currentMode,getLobbyRoles) + callFunc(gm_currentMode,getLateRoles))
 

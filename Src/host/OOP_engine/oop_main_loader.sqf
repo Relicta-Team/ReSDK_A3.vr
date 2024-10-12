@@ -20,7 +20,7 @@ oop_lastTypeLoadTime = 0;
 #define NULLCLASS "<NAN_CLASS>"
 #define EXIT_IF_ERROR(mes) if (_iserror || server_isLocked) exitWith {error(mes); [mes] call logCritical; false}
 #define shell_init(__name__system,__value__system) format["_thisobj setvariable ['%1',%2]; ",__name__system,__value__system]
-#define logoop(mes) "debug_console" callExtension ("[OOP]:    " + (mes) + "#0111"); ["(OOP_init)	%1",mes] call logInfo
+#define logoop(mes) ["[OOP]:    ",(mes),"#0111"] call stdoutPrint; ["(OOP_init)	%1",mes] call logInfo
 
 #ifdef __VM_VALIDATE
     #define logoop(mes) diag_log format["[OOP_init]: %1",mes]

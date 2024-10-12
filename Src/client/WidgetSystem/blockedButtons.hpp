@@ -24,6 +24,8 @@ ACT(SelectGroupUnit8) + ACT(SelectGroupUnit9) + ACT(SelectGroupUnit0) + ACT(sele
 
 // + ACT(TactShort) -> TactShort - тактический шаг на 3 секунды
 
+// GetOver - перешагивание
+
 //эскейп
 #define ESCAPE_BUTTONS ACT(ingamePause)
 

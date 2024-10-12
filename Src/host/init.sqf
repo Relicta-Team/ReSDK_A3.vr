@@ -9,6 +9,7 @@ server_loadingState = 0;
 
 loadFile("src\host\ScriptErrorHandler\ScriptErrorHandler_init.sqf");
 loadFile("src\host\Curl\Curl.sqf");
+loadFile("src\host\FileSystem\FileSystem_init.sqf");
 loadFile("src\host\Yaml\Yaml_init.sqf");
 loadFile("src\host\Networking\Network.sqf");
 loadFile("src\public_loader.sqf");
@@ -29,6 +30,7 @@ loadFile("src\host\OOP_engine\oop_object.sqf");
 #include "GameObjects\loader.hpp"
 #include "CombatSystem\loader.hpp"
 #include "CraftSystem\Crafts\Basic.sqf"
+loadFile("src\host\LootSystem\LootSystem_init.sqf");
 loadFile("src\host\DataObjects\DataObjects_init.sqf");
 loadFile("src\host\Reagents\loader.hpp");
 #include "StatusEffects\StatusEffects_init.sqf"
@@ -91,9 +93,7 @@ if (!isMultiplayer) then {
 };
 #endif
 
-#ifdef DEBUG
-loadFile("src\host\UnitTests\UnitTest.sqf");
-#endif
+call loot_prepareAll;// intialize loot only after structs loaded
 
 server_loadingState = 1;
 
@@ -116,3 +116,8 @@ if (isMultiplayer) then {
 	setDate [1985,5,20,0,00];
 	#endif
 };
+
+#ifdef RBUILDER
+//initialize RBuilder
+loadFile("src\host\Tools\RBuilder\RBuilder_init.sqf");
+#endif

@@ -5,8 +5,6 @@
 
 // Компонент визуального интерфейса
 
-#include <Widgets.hpp>
-
 displayObjectRef = [displayNull];
 menu_internal_widget_refButtonObjLib = [widgetNull];
 menu_internal_dumpNativeMenuItemsLayout = "";
@@ -144,7 +142,8 @@ menu_structureLayout = [
 				"text:Генерация по указанным;act:[true,true] call systools_imageProcessor;"
 			],
 			"text:Создать объектную библиотеку (ReNode);act:call vs_generateLib",
-			"text:Запустить импорт старой карты;act:call mm_doImportOldMap"
+			"text:Запустить импорт старой карты;act:call mm_doImportOldMap",
+			"text:Генерировать подписи библиотек клиента;act: call systools_generateLibInfo"
 		],
 		["text:Валидаторы",
 			["text:Обновление объектов",
@@ -155,6 +154,7 @@ menu_structureLayout = [
 			"text:Проверка несуществующих конфигов света на карте;act:call lightValidator_process",
 			"text:Проверка путей классов;act:call systools_checkClassPathes",
 			"text:Проверка классов с одинаковыми моделями;act:call classValidator_validateModels",
+			"text:Проверка шансов спавна лута;act:call systools_openLootCheck",
 			"",
 			"text:Проверка нагрузки сцены игровыми объектами;act:call pertest_chunkPerformanceToggle;"
 		],

@@ -4,6 +4,7 @@
 // ======================================================
 
 #include "host\engine.hpp"
+#include "host\struct.hpp"
 #include "host\oop.hpp"
 #include <host\Networking\Network.hpp>
 
@@ -12,7 +13,7 @@
 //server password and crypt key if exists
 if (fileExists("src\private.h")) then {
 	private _CRYPT_COMPILE_SERVER_ = true;
-	loadFile("src\private.h");
+	call compile __pragma_preprocess ("src\private.h");
 };
 
 //предварительная компиляция трассировки стека в редакторе
@@ -194,6 +195,7 @@ loadFile("src\host\init.sqf");
 
 call dsm_initialize; //discord mgr init
 
+
 if (!call yaml_isExtensionLoaded) then {
 	#ifdef EDITOR
 	["Yaml библиотека не найдена."
@@ -203,7 +205,22 @@ if (!call yaml_isExtensionLoaded) then {
 	appExit(APPEXIT_REASON_EXTENSION_ERROR);
 };
 
-if (server_isLocked) exitWith {};
+private _yamlObj = call yaml_getExtensionVersion;
+logformat("Yaml version: %1",_yamlObj);
+if ((_yamlObj getv(major)) == 0) then {
+	#ifdef EDITOR
+	["Yaml библиотека не обновлена."
+		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""ReMaker\DEPLOY.bat"""] call messageBox;
+	#endif
+	setLastError("Yaml library outdated.");
+	appExit(APPEXIT_REASON_EXTENSION_ERROR);
+};
+
+if (server_isLocked) exitWith {
+	#ifdef RBUILDER
+	call RBuilder_onServerLockedLoading;
+	#endif
+};
 
 progLog("Serverside scripts loaded in " + str(diag_ticktime - _time_global) + " sec");
 

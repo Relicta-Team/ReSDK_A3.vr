@@ -3901,14 +3901,14 @@ File: [host\GameObjects\Items\Clothes\cloth.sqf at line 192](../../../Src/host/G
 
 Type: constant
 
-Description: text in book
+Description: 
 
 
 Replaced value:
 ```sqf
-1024*3
+1024*10
 ```
-File: [host\GameObjects\Items\Office\Books.sqf at line 74](../../../Src/host/GameObjects/Items/Office/Books.sqf#L74)
+File: [host\GameObjects\Items\Office\Books.sqf at line 22](../../../Src/host/GameObjects/Items/Office/Books.sqf#L22)
 ## gv(func)
 
 Type: constant
@@ -3922,7 +3922,7 @@ Replaced value:
 ```sqf
 _y get #func
 ```
-File: [host\GameObjects\Items\Office\Books.sqf at line 442](../../../Src/host/GameObjects/Items/Office/Books.sqf#L442)
+File: [host\GameObjects\Items\Office\Books.sqf at line 449](../../../Src/host/GameObjects/Items/Office/Books.sqf#L449)
 # BasicMob.sqf
 
 ## emulate_mp_in_sp
@@ -4051,7 +4051,7 @@ Description:
 
 Replaced value:
 ```sqf
-"debug_console" callExtension ("<server> mob::" + #funcname + "    " + text + "#0111")
+(["<server> mob::" + #funcname + "    ",text,"#0111"] call stdoutPrint)
 ```
 File: [host\GameObjects\Mobs\Mob.sqf at line 33](../../../Src/host/GameObjects/Mobs/Mob.sqf#L33)
 ## rp_log(text,fmt)
@@ -4064,7 +4064,7 @@ Description:
 
 Replaced value:
 ```sqf
-"debug_console" callExtension ("<server::Roleplay> " + format[text,fmt] + "#0111")
+(["<server::Roleplay> ",text,fmt,"#0111"] call stdoutPrint)
 ```
 File: [host\GameObjects\Mobs\Mob.sqf at line 34](../../../Src/host/GameObjects/Mobs/Mob.sqf#L34)
 ## DELAY_SHOCK
@@ -4735,7 +4735,7 @@ Description:
 
 Replaced value:
 ```sqf
-"debug_console" callExtension (format["[LOG::LIFE]" + (mes) + "#1011",fmt])
+(["[LOG::LIFE]",(mes),fmt,"#1011"] call stdoutPrint)
 ```
 File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1311](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1311)
 ## std_check_dam(low,up)

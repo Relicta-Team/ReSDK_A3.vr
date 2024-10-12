@@ -1,4 +1,4 @@
-# Yaml_init.sqf
+# Yaml.h
 
 ## YAML_EXTENSION_NAME
 
@@ -11,7 +11,7 @@ Replaced value:
 ```sqf
 "ReYaml"
 ```
-File: [host\Yaml\Yaml_init.sqf at line 9](../../../Src/host/Yaml/Yaml_init.sqf#L9)
+File: [host\Yaml\Yaml.h at line 6](../../../Src/host/Yaml/Yaml.h#L6)
 ## YAML_COMMAND_PARSE_STRING
 
 Type: constant
@@ -23,7 +23,7 @@ Replaced value:
 ```sqf
 "parse_string"
 ```
-File: [host\Yaml\Yaml_init.sqf at line 11](../../../Src/host/Yaml/Yaml_init.sqf#L11)
+File: [host\Yaml\Yaml.h at line 8](../../../Src/host/Yaml/Yaml.h#L8)
 ## YAML_COMMAND_HAS_PARTS
 
 Type: constant
@@ -35,7 +35,7 @@ Replaced value:
 ```sqf
 "has_parts"
 ```
-File: [host\Yaml\Yaml_init.sqf at line 12](../../../Src/host/Yaml/Yaml_init.sqf#L12)
+File: [host\Yaml\Yaml.h at line 9](../../../Src/host/Yaml/Yaml.h#L9)
 ## YAML_COMMAND_READ_PART
 
 Type: constant
@@ -47,7 +47,7 @@ Replaced value:
 ```sqf
 "next_read"
 ```
-File: [host\Yaml\Yaml_init.sqf at line 13](../../../Src/host/Yaml/Yaml_init.sqf#L13)
+File: [host\Yaml\Yaml.h at line 10](../../../Src/host/Yaml/Yaml.h#L10)
 ## YAML_COMMAND_FREE_PARTS
 
 Type: constant
@@ -59,7 +59,7 @@ Replaced value:
 ```sqf
 "free_parts"
 ```
-File: [host\Yaml\Yaml_init.sqf at line 15](../../../Src/host/Yaml/Yaml_init.sqf#L15)
+File: [host\Yaml\Yaml.h at line 12](../../../Src/host/Yaml/Yaml.h#L12)
 ## YAML_COMMAND_GET_LEFT_PARTS_COUNT
 
 Type: constant
@@ -71,7 +71,7 @@ Replaced value:
 ```sqf
 "get_left_parts_count"
 ```
-File: [host\Yaml\Yaml_init.sqf at line 16](../../../Src/host/Yaml/Yaml_init.sqf#L16)
+File: [host\Yaml\Yaml.h at line 13](../../../Src/host/Yaml/Yaml.h#L13)
 ## YAML_COMMAND_SET_DEBUG_PRINT
 
 Type: constant
@@ -83,7 +83,7 @@ Replaced value:
 ```sqf
 "set_debug"
 ```
-File: [host\Yaml\Yaml_init.sqf at line 18](../../../Src/host/Yaml/Yaml_init.sqf#L18)
+File: [host\Yaml\Yaml.h at line 15](../../../Src/host/Yaml/Yaml.h#L15)
 ## YAML_DEFAULT_CHAR_REPLACER
 
 Type: constant
@@ -95,7 +95,7 @@ Replaced value:
 ```sqf
 ""
 ```
-File: [host\Yaml\Yaml_init.sqf at line 20](../../../Src/host/Yaml/Yaml_init.sqf#L20)
+File: [host\Yaml\Yaml.h at line 17](../../../Src/host/Yaml/Yaml.h#L17)
 ## YAML_OUTPUT_PREFIX_EXCEPTION
 
 Type: constant
@@ -107,7 +107,7 @@ Replaced value:
 ```sqf
 "$EX$:"
 ```
-File: [host\Yaml\Yaml_init.sqf at line 22](../../../Src/host/Yaml/Yaml_init.sqf#L22)
+File: [host\Yaml\Yaml.h at line 19](../../../Src/host/Yaml/Yaml.h#L19)
 ## YAML_OUTPUT_SANITIZE_EXCEPTION(val)
 
 Type: constant
@@ -119,7 +119,7 @@ Replaced value:
 ```sqf
 ((val) select [count YAML_OUTPUT_PREFIX_EXCEPTION,count (val)])
 ```
-File: [host\Yaml\Yaml_init.sqf at line 23](../../../Src/host/Yaml/Yaml_init.sqf#L23)
+File: [host\Yaml\Yaml.h at line 20](../../../Src/host/Yaml/Yaml.h#L20)
 ## YAML_OUTPUT_PREFIX_PARTIAL
 
 Type: constant
@@ -131,22 +131,10 @@ Replaced value:
 ```sqf
 "$PART$"
 ```
-File: [host\Yaml\Yaml_init.sqf at line 24](../../../Src/host/Yaml/Yaml_init.sqf#L24)
-## yaml_debug_testData
+File: [host\Yaml\Yaml.h at line 21](../../../Src/host/Yaml/Yaml.h#L21)
+# Yaml_init.sqf
 
-Type: Variable
-
-> Exists if **YAML_TESTS** defined
-
-Description: 
-
-
-Initial value:
-```sqf
-"...
-```
-File: [host\Yaml\Yaml_init.sqf at line 122](../../../Src/host/Yaml/Yaml_init.sqf#L122)
-## buf
+## yaml_lastErrorLoadFileString
 
 Type: Variable
 
@@ -155,33 +143,9 @@ Description:
 
 Initial value:
 ```sqf
-_d1
+""
 ```
-File: [host\Yaml\Yaml_init.sqf at line 139](../../../Src/host/Yaml/Yaml_init.sqf#L139)
-## yaml_debug_longData
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-_d joinString endl
-```
-File: [host\Yaml\Yaml_init.sqf at line 154](../../../Src/host/Yaml/Yaml_init.sqf#L154)
-## yaml_debug_fileContent
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-loadfile "src\host\Yaml\test.yaml"
-```
-File: [host\Yaml\Yaml_init.sqf at line 156](../../../Src/host/Yaml/Yaml_init.sqf#L156)
+File: [host\Yaml\Yaml_init.sqf at line 11](../../../Src/host/Yaml/Yaml_init.sqf#L11)
 ## yaml_hasPartsForRead
 
 Type: function
@@ -189,7 +153,7 @@ Type: function
 Description: есть куски для чтения
 
 
-File: [host\Yaml\Yaml_init.sqf at line 30](../../../Src/host/Yaml/Yaml_init.sqf#L30)
+File: [host\Yaml\Yaml_init.sqf at line 17](../../../Src/host/Yaml/Yaml_init.sqf#L17)
 ## yaml_readNextPart
 
 Type: function
@@ -197,7 +161,7 @@ Type: function
 Description: прочитать кусок
 
 
-File: [host\Yaml\Yaml_init.sqf at line 34](../../../Src/host/Yaml/Yaml_init.sqf#L34)
+File: [host\Yaml\Yaml_init.sqf at line 21](../../../Src/host/Yaml/Yaml_init.sqf#L21)
 ## yaml_freeParts
 
 Type: function
@@ -205,7 +169,7 @@ Type: function
 Description: вычистить куски
 
 
-File: [host\Yaml\Yaml_init.sqf at line 38](../../../Src/host/Yaml/Yaml_init.sqf#L38)
+File: [host\Yaml\Yaml_init.sqf at line 25](../../../Src/host/Yaml/Yaml_init.sqf#L25)
 ## yaml_getPartsCount
 
 Type: function
@@ -213,7 +177,7 @@ Type: function
 Description: получить количество кусков для чтения
 
 
-File: [host\Yaml\Yaml_init.sqf at line 42](../../../Src/host/Yaml/Yaml_init.sqf#L42)
+File: [host\Yaml\Yaml_init.sqf at line 29](../../../Src/host/Yaml/Yaml_init.sqf#L29)
 ## yaml_isExtensionLoaded
 
 Type: function
@@ -221,7 +185,23 @@ Type: function
 Description: расширение валидно
 
 
-File: [host\Yaml\Yaml_init.sqf at line 46](../../../Src/host/Yaml/Yaml_init.sqf#L46)
+File: [host\Yaml\Yaml_init.sqf at line 33](../../../Src/host/Yaml/Yaml_init.sqf#L33)
+## yaml_getExtensionVersion
+
+Type: function
+
+Description: получает версию расширения в виде массива
+
+
+File: [host\Yaml\Yaml_init.sqf at line 37](../../../Src/host/Yaml/Yaml_init.sqf#L37)
+## yaml_getLastError
+
+Type: function
+
+Description: 
+
+
+File: [host\Yaml\Yaml_init.sqf at line 44](../../../Src/host/Yaml/Yaml_init.sqf#L44)
 ## yaml_loadFile
 
 Type: function
@@ -229,7 +209,7 @@ Type: function
 Description: загрузка yml файла. ошибка загрузи или несуществующий файл приведет к возврату null-значения
 - Param: _file
 
-File: [host\Yaml\Yaml_init.sqf at line 51](../../../Src/host/Yaml/Yaml_init.sqf#L51)
+File: [host\Yaml\Yaml_init.sqf at line 49](../../../Src/host/Yaml/Yaml_init.sqf#L49)
 ## yaml_loadData
 
 Type: function
@@ -246,4 +226,56 @@ Type: function
 Description: 
 - Param: _debugMode (optional, default false)
 
-File: [host\Yaml\Yaml_init.sqf at line 112](../../../Src/host/Yaml/Yaml_init.sqf#L112)
+File: [host\Yaml\Yaml_init.sqf at line 115](../../../Src/host/Yaml/Yaml_init.sqf#L115)
+# Yaml_tests.sqf
+
+## yaml_debug_testData
+
+Type: Variable
+
+> Exists if **YAML_TESTS** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+"...
+```
+File: [host\Yaml\Yaml_tests.sqf at line 9](../../../Src/host/Yaml/Yaml_tests.sqf#L9)
+## buf
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_d1
+```
+File: [host\Yaml\Yaml_tests.sqf at line 26](../../../Src/host/Yaml/Yaml_tests.sqf#L26)
+## yaml_debug_longData
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+_d joinString endl
+```
+File: [host\Yaml\Yaml_tests.sqf at line 41](../../../Src/host/Yaml/Yaml_tests.sqf#L41)
+## yaml_debug_fileContent
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+loadfile "src\host\Yaml\test.yaml"
+```
+File: [host\Yaml\Yaml_tests.sqf at line 43](../../../Src/host/Yaml/Yaml_tests.sqf#L43)

@@ -4821,7 +4821,7 @@ def:f:IWritableContentItem.content_0
 def:m:IWritableContentItem.getMaxLen_0
 
 		name:Максимальная длина текста
-		desc:Максимальная допустимая длина текста в книге или листке бумаги. На данный момент константна и равна 3072 символам.
+		desc:Максимальная допустимая длина текста в книге или листке бумаги. На данный момент константна и равна 10240 символам.
 		type:get
 		lockoverride:1
 		return:int:Максимальная длина текста
@@ -4853,16 +4853,16 @@ def:m:IWritableContentItem.appendText_0
 			opt:require=-1
 		return:bool:Возвращает истину, если текст добавлен.
 	
-def:c:Book
-
-		name:Книга
-		desc:Базовый класс для книги.
-		path:Игровые объекты.Текстовые
-	
 def:c:Paper
 
 		name:Листок
 		desc:Базовый класс для листа бумаги.
+		path:Игровые объекты.Текстовые
+	
+def:c:Book
+
+		name:Книга
+		desc:Базовый класс для книги.
 		path:Игровые объекты.Текстовые
 	
 def:c:ScriptedGamemode
@@ -8313,7 +8313,7 @@ $REGION:CLASSMETA
 }
 ,"GMDetectiveItemWeaponMurder": {
     "baseClass" : "SawedOff",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":493},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":494},
    "fields": { "defined": {
 "name":{"return": "string"},"basicDamage":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -9159,7 +9159,7 @@ $REGION:CLASSMETA
 }
 ,"GMDetectiveItemKeyUniversal": {
     "baseClass" : "Key",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":489},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":490},
    "fields": { "defined": {
 "keyOwner":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -9501,7 +9501,7 @@ $REGION:CLASSMETA
 }
 ,"GMDetectiveItemGlassVenomBottle": {
     "baseClass" : "GlassBottle",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":483},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":484},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -10052,9 +10052,9 @@ $REGION:CLASSMETA
     "baseClass" : "Organ",
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Bodyparts\\Organs.sqf","line":555},
    "fields": { "defined": {
-"content":{"return": "null_array"},"currentsize":{"return": "int"},"openedBy":{"return": "null_array"},"canUseContainer":{"return": "bool"},"countSlots":{"return": "int"},"maxSize":{"return": "int"}}   },
+"content":{"return": "null_array"},"currentsize":{"return": "int"},"openedBy":{"return": "null_array"},"canUseContainer":{"return": "bool"},"preinit@__lootTemplate":{"return": "string"},"countSlots":{"return": "int"},"maxSize":{"return": "int"}}   },
    "methods": { "defined": {
-"isContainer":{"return": "<undefined>"},"startWith":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"getContainerClientInfo":{"return": "<undefined>"},"canAdd":{"return": "<undefined>"},"addItem":{"return": "<undefined>"},"removeItem":{"return": "<undefined>"},"onContainerOpen":{"return": "<undefined>"},"getContainerMainData":{"return": "<undefined>"},"onContainerClose":{"return": "<undefined>"},"onContainerContentUpdate":{"return": "<undefined>"},"getReasonForCantPutin":{"return": "<undefined>"},"getContainerOwerflowText":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"createItemsInContainer":{"return": "<undefined>"},"createItemInContainer":{"return": "<undefined>"},"onAddItemInContainer":{"return": "<undefined>"},"onRemoveItemFromContainer":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"initMoney":{"return": "<undefined>"}
+"isContainer":{"return": "<undefined>"},"startWith":{"return": "<undefined>"},"__handlePreInitVars__":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"getContainerClientInfo":{"return": "<undefined>"},"canAdd":{"return": "<undefined>"},"addItem":{"return": "<undefined>"},"removeItem":{"return": "<undefined>"},"onContainerOpen":{"return": "<undefined>"},"getContainerMainData":{"return": "<undefined>"},"onContainerClose":{"return": "<undefined>"},"onContainerContentUpdate":{"return": "<undefined>"},"getReasonForCantPutin":{"return": "<undefined>"},"getContainerOwerflowText":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"createItemsInContainer":{"return": "<undefined>"},"createItemInContainer":{"return": "<undefined>"},"onAddItemInContainer":{"return": "<undefined>"},"onRemoveItemFromContainer":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"initMoney":{"return": "<undefined>"}
 }   }
 }
 ,"Lapsha": {
@@ -10401,7 +10401,7 @@ $REGION:CLASSMETA
 }
 ,"Folder": {
     "baseClass" : "Book",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":378},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":365},
    "fields": { "defined": {
 "name":{"return": "string"},"weight":{"return": "float"},"size":{"return": "int"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
@@ -10410,7 +10410,7 @@ $REGION:CLASSMETA
 }
 ,"BookChemReactions": {
     "baseClass" : "Book",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":432},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":439},
    "fields": { "defined": {
 "ndName":{"return": "string"}}   },
    "methods": { "defined": {
@@ -10419,7 +10419,7 @@ $REGION:CLASSMETA
 }
 ,"Notepad": {
     "baseClass" : "Paper",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":358},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":345},
    "fields": { "defined": {
 "model":{"return": "string"},"name":{"return": "string"},"dr":{"return": "int"},"size":{"return": "int"},"weight":{"return": "float"}}   },
    "methods": { "defined": {
@@ -10428,7 +10428,7 @@ $REGION:CLASSMETA
 }
 ,"Documents": {
     "baseClass" : "Paper",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":366},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":353},
    "fields": { "defined": {
 "model":{"return": "string"},"name":{"return": "string"},"size":{"return": "int"},"weight":{"return": "float"}}   },
    "methods": { "defined": {
@@ -10437,11 +10437,20 @@ $REGION:CLASSMETA
 }
 ,"Documents1": {
     "baseClass" : "Paper",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":373},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":360},
    "fields": { "defined": {
 "model":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
 
+}   }
+}
+,"Book": {
+    "baseClass" : "Paper",
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":372},
+   "fields": { "defined": {
+"name":{"return": "string"},"model":{"return": "string"},"size":{"return": "int"},"weight":{"return": "float"},"dr":{"return": "int"}}   },
+   "methods": { "defined": {
+"canWrite":{"return": "<undefined>"}
 }   }
 }
 ,"IdentityDocs": {
@@ -10464,7 +10473,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Item_BrokenPaper": {
     "baseClass" : "Paper",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":620},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":621},
    "fields": { "defined": {
 }   },
    "methods": { "defined": {
@@ -10552,18 +10561,9 @@ $REGION:CLASSMETA
 "canWrite":{"return": "<undefined>"},"canRead":{"return": "<undefined>"},"doBurn":{"return": "<undefined>"}
 }   }
 }
-,"Book": {
-    "baseClass" : "IWritableContentItem",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":169},
-   "fields": { "defined": {
-"name":{"return": "string"},"ndName":{"return": "string"},"model":{"return": "string"},"size":{"return": "int"},"weight":{"return": "float"},"dr":{"return": "int"}}   },
-   "methods": { "defined": {
-
-}   }
-}
 ,"Paper": {
     "baseClass" : "IWritableContentItem",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":194},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":181},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"model":{"return": "string"},"content":{"return": "string"},"ndName":{"return": "string"},"ndInteractDistance":{"return": "float"},"weight":{"return": "float"},"size":{"return": "int"},"usrsWithWriters":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -10572,7 +10572,7 @@ $REGION:CLASSMETA
 }
 ,"IWritableContentItem": {
     "baseClass" : "IPaperItemBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":53},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":55},
    "fields": { "defined": {
 "ndOpenedBy":{"return": "null_array"},"ndCurrentDisplay":{"return": "int"},"ndIsLockedInput":{"return": "bool"},"ndName":{"return": "string"},"ndInteractDistance":{"return": "float"},"content":{"return": "string"},"preinit@__content":{"return": "string"}}   },
    "methods": { "defined": {
@@ -10581,7 +10581,7 @@ $REGION:CLASSMETA
 }
 ,"PaperHolder": {
     "baseClass" : "IPaperItemBase",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":386},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":393},
    "fields": { "defined": {
 "model":{"return": "string"},"name":{"return": "string"},"countBlanks":{"return": "int"},"weight":{"return": "float"},"size":{"return": "int"}}   },
    "methods": { "defined": {
@@ -10700,9 +10700,9 @@ $REGION:CLASSMETA
     "baseClass" : "Item",
     "defined" : {"file":"src\\host\\GameObjects\\Items\\Containers\\Container.sqf","line":15},
    "fields": { "defined": {
-"material":{"return": "string"},"content":{"return": "null_array"},"currentsize":{"return": "int"},"openedBy":{"return": "null_array"},"canUseContainer":{"return": "bool"},"countSlots":{"return": "int"},"maxSize":{"return": "int"},"size":{"return": "int"},"weight":{"return": "float"}}   },
+"material":{"return": "string"},"content":{"return": "null_array"},"currentsize":{"return": "int"},"openedBy":{"return": "null_array"},"canUseContainer":{"return": "bool"},"preinit@__lootTemplate":{"return": "string"},"countSlots":{"return": "int"},"maxSize":{"return": "int"},"size":{"return": "int"},"weight":{"return": "float"}}   },
    "methods": { "defined": {
-"isContainer":{"return": "<undefined>"},"startWith":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"getContainerClientInfo":{"return": "<undefined>"},"canAdd":{"return": "<undefined>"},"addItem":{"return": "<undefined>"},"removeItem":{"return": "<undefined>"},"onContainerOpen":{"return": "<undefined>"},"getContainerMainData":{"return": "<undefined>"},"onContainerClose":{"return": "<undefined>"},"onContainerContentUpdate":{"return": "<undefined>"},"getReasonForCantPutin":{"return": "<undefined>"},"getContainerOwerflowText":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"createItemsInContainer":{"return": "<undefined>"},"createItemInContainer":{"return": "<undefined>"},"onAddItemInContainer":{"return": "<undefined>"},"onRemoveItemFromContainer":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"initMoney":{"return": "<undefined>"},"onChangeLoc":{"return": "<undefined>"}
+"isContainer":{"return": "<undefined>"},"startWith":{"return": "<undefined>"},"__handlePreInitVars__":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"getContainerClientInfo":{"return": "<undefined>"},"canAdd":{"return": "<undefined>"},"addItem":{"return": "<undefined>"},"removeItem":{"return": "<undefined>"},"onContainerOpen":{"return": "<undefined>"},"getContainerMainData":{"return": "<undefined>"},"onContainerClose":{"return": "<undefined>"},"onContainerContentUpdate":{"return": "<undefined>"},"getReasonForCantPutin":{"return": "<undefined>"},"getContainerOwerflowText":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"createItemsInContainer":{"return": "<undefined>"},"createItemInContainer":{"return": "<undefined>"},"onAddItemInContainer":{"return": "<undefined>"},"onRemoveItemFromContainer":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"initMoney":{"return": "<undefined>"},"onChangeLoc":{"return": "<undefined>"}
 }   }
 }
 ,"IMeleeWeapon": {
@@ -11040,7 +11040,7 @@ $REGION:CLASSMETA
 }
 ,"IPaperItemBase": {
     "baseClass" : "Item",
-    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":23},
+    "defined" : {"file":"src\\host\\GameObjects\\Items\\Office\\Books.sqf","line":25},
    "fields": { "defined": {
 "material":{"return": "string"},"weight":{"return": "float"},"size":{"return": "int"}}   },
    "methods": { "defined": {
@@ -13045,6 +13045,15 @@ $REGION:CLASSMETA
 
 }   }
 }
+,"GMDetectiveStructHidden": {
+    "baseClass" : "LargeConcreteWallWithReinforcement",
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":461},
+   "fields": { "defined": {
+"isSpawnedItem":{"return": "bool"}}   },
+   "methods": { "defined": {
+"onRelink":{"return": "<undefined>"},"onClick":{"return": "<undefined>"}
+}   }
+}
 ,"SmallWhiteConcreteWall": {
     "baseClass" : "MediumWhiteConcreteWall",
     "defined" : {"file":"src\\host\\GameObjects\\Structures\\Constructions\\Walls.sqf","line":99},
@@ -13758,7 +13767,7 @@ $REGION:CLASSMETA
 }
 ,"BrownLeatherChair": {
     "baseClass" : "BumArmChair",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":107},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":108},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -13767,7 +13776,7 @@ $REGION:CLASSMETA
 }
 ,"GreenChair": {
     "baseClass" : "GreenArmChair",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":118},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":119},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14077,12 +14086,12 @@ $REGION:CLASSMETA
    "fields": { "defined": {
 "model":{"return": "string"},"material":{"return": "string"},"name":{"return": "string"}}   },
    "methods": { "defined": {
-"getChairOffsetPos":{"return": "<undefined>"},"getChairOffsetDir":{"return": "<undefined>"}
+"isMovable":{"return": "<undefined>"},"getChairOffsetPos":{"return": "<undefined>"},"getChairOffsetDir":{"return": "<undefined>"}
 }   }
 }
 ,"BrownOldArmchair": {
     "baseClass" : "IChair",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":60},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":61},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14091,7 +14100,7 @@ $REGION:CLASSMETA
 }
 ,"HeadThrone": {
     "baseClass" : "IChair",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":66},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":67},
    "fields": { "defined": {
 "name":{"return": "string"},"model":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
@@ -14100,7 +14109,7 @@ $REGION:CLASSMETA
 }
 ,"RedLuxuryChair": {
     "baseClass" : "IChair",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":76},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":77},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14109,7 +14118,7 @@ $REGION:CLASSMETA
 }
 ,"ArmChair": {
     "baseClass" : "IChair",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":82},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":83},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14118,7 +14127,7 @@ $REGION:CLASSMETA
 }
 ,"ArmChairBrown": {
     "baseClass" : "IChair",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":88},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":89},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14127,7 +14136,7 @@ $REGION:CLASSMETA
 }
 ,"LobbyChair": {
     "baseClass" : "IChair",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":94},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":95},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14136,7 +14145,7 @@ $REGION:CLASSMETA
 }
 ,"BumArmChair": {
     "baseClass" : "IChair",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":101},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":102},
    "fields": { "defined": {
 "model":{"return": "string"},"dr":{"return": "int"}}   },
    "methods": { "defined": {
@@ -14145,7 +14154,7 @@ $REGION:CLASSMETA
 }
 ,"GreenArmChair": {
     "baseClass" : "IChair",
-    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":111},
+    "defined" : {"file":"src\\host\\GameObjects\\Structures\\Furniture\\Chairs.sqf","line":112},
    "fields": { "defined": {
 "model":{"return": "string"}}   },
    "methods": { "defined": {
@@ -14561,9 +14570,9 @@ $REGION:CLASSMETA
     "baseClass" : "Furniture",
     "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Container.sqf","line":11},
    "fields": { "defined": {
-"name":{"return": "string"},"content":{"return": "null_array"},"currentsize":{"return": "int"},"openedBy":{"return": "null_array"},"canUseContainer":{"return": "bool"},"countSlots":{"return": "int"},"maxSize":{"return": "int"}}   },
+"name":{"return": "string"},"content":{"return": "null_array"},"currentsize":{"return": "int"},"openedBy":{"return": "null_array"},"canUseContainer":{"return": "bool"},"preinit@__lootTemplate":{"return": "string"},"countSlots":{"return": "int"},"maxSize":{"return": "int"}}   },
    "methods": { "defined": {
-"isContainer":{"return": "<undefined>"},"startWith":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"getContainerClientInfo":{"return": "<undefined>"},"canAdd":{"return": "<undefined>"},"addItem":{"return": "<undefined>"},"removeItem":{"return": "<undefined>"},"onContainerOpen":{"return": "<undefined>"},"getContainerMainData":{"return": "<undefined>"},"onContainerClose":{"return": "<undefined>"},"onContainerContentUpdate":{"return": "<undefined>"},"getReasonForCantPutin":{"return": "<undefined>"},"getContainerOwerflowText":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"createItemsInContainer":{"return": "<undefined>"},"createItemInContainer":{"return": "<undefined>"},"onAddItemInContainer":{"return": "<undefined>"},"onRemoveItemFromContainer":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"initMoney":{"return": "<undefined>"}
+"isContainer":{"return": "<undefined>"},"startWith":{"return": "<undefined>"},"__handlePreInitVars__":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"getContainerClientInfo":{"return": "<undefined>"},"canAdd":{"return": "<undefined>"},"addItem":{"return": "<undefined>"},"removeItem":{"return": "<undefined>"},"onContainerOpen":{"return": "<undefined>"},"getContainerMainData":{"return": "<undefined>"},"onContainerClose":{"return": "<undefined>"},"onContainerContentUpdate":{"return": "<undefined>"},"getReasonForCantPutin":{"return": "<undefined>"},"getContainerOwerflowText":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"createItemsInContainer":{"return": "<undefined>"},"createItemInContainer":{"return": "<undefined>"},"onAddItemInContainer":{"return": "<undefined>"},"onRemoveItemFromContainer":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"initMoney":{"return": "<undefined>"}
 }   }
 }
 ,"Vase": {
@@ -15776,9 +15785,9 @@ $REGION:CLASSMETA
     "baseClass" : "ElectronicDeviceNode",
     "defined" : {"file":"src\\host\\GameObjects\\Structures\\Electronics\\Devices\\Medical.sqf","line":11},
    "fields": { "defined": {
-"name":{"return": "string"},"desc":{"return": "string"},"model":{"return": "string"},"edIsEnabled":{"return": "bool"},"edReqPower":{"return": "int"},"ndOpenedBy":{"return": "null_array"},"ndCurrentDisplay":{"return": "int"},"ndIsLockedInput":{"return": "bool"},"ndName":{"return": "string"},"ndInteractDistance":{"return": "float"},"content":{"return": "null_array"},"currentsize":{"return": "int"},"openedBy":{"return": "null_array"},"canUseContainer":{"return": "bool"},"countSlots":{"return": "int"},"maxSize":{"return": "int"},"freezedObjects":{"return": "null_array"},"updatehandle":{"return": "int"}}   },
+"name":{"return": "string"},"desc":{"return": "string"},"model":{"return": "string"},"edIsEnabled":{"return": "bool"},"edReqPower":{"return": "int"},"ndOpenedBy":{"return": "null_array"},"ndCurrentDisplay":{"return": "int"},"ndIsLockedInput":{"return": "bool"},"ndName":{"return": "string"},"ndInteractDistance":{"return": "float"},"content":{"return": "null_array"},"currentsize":{"return": "int"},"openedBy":{"return": "null_array"},"canUseContainer":{"return": "bool"},"preinit@__lootTemplate":{"return": "string"},"countSlots":{"return": "int"},"maxSize":{"return": "int"},"freezedObjects":{"return": "null_array"},"updatehandle":{"return": "int"}}   },
    "methods": { "defined": {
-"updateNDisplay":{"return": "<undefined>"},"handleNDInput":{"return": "<undefined>"},"openNDisplayImplBackend":{"return": "<undefined>"},"closeNDisplayImplBackend":{"return": "<undefined>"},"openNDisplay":{"return": "<undefined>"},"getNDPointer":{"return": "<undefined>"},"openNDisplayInternal":{"return": "<undefined>"},"closeNDisplay":{"return": "<undefined>"},"closeNDisplayServer":{"return": "<undefined>"},"closeNDisplayForAllMobs":{"return": "<undefined>"},"isContainer":{"return": "<undefined>"},"startWith":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"getContainerClientInfo":{"return": "<undefined>"},"canAdd":{"return": "<undefined>"},"addItem":{"return": "<undefined>"},"removeItem":{"return": "<undefined>"},"onContainerOpen":{"return": "<undefined>"},"getContainerMainData":{"return": "<undefined>"},"onContainerClose":{"return": "<undefined>"},"onContainerContentUpdate":{"return": "<undefined>"},"getReasonForCantPutin":{"return": "<undefined>"},"getContainerOwerflowText":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"createItemsInContainer":{"return": "<undefined>"},"createItemInContainer":{"return": "<undefined>"},"onAddItemInContainer":{"return": "<undefined>"},"onRemoveItemFromContainer":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"initMoney":{"return": "<undefined>"},"onUpdate":{"return": "<undefined>"},"onChangeUsePower":{"return": "<undefined>"},"getNDInfo":{"return": "<undefined>"},"onHandleNDInput":{"return": "<undefined>"}
+"updateNDisplay":{"return": "<undefined>"},"handleNDInput":{"return": "<undefined>"},"openNDisplayImplBackend":{"return": "<undefined>"},"closeNDisplayImplBackend":{"return": "<undefined>"},"openNDisplay":{"return": "<undefined>"},"getNDPointer":{"return": "<undefined>"},"openNDisplayInternal":{"return": "<undefined>"},"closeNDisplay":{"return": "<undefined>"},"closeNDisplayServer":{"return": "<undefined>"},"closeNDisplayForAllMobs":{"return": "<undefined>"},"isContainer":{"return": "<undefined>"},"startWith":{"return": "<undefined>"},"__handlePreInitVars__":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"getContainerClientInfo":{"return": "<undefined>"},"canAdd":{"return": "<undefined>"},"addItem":{"return": "<undefined>"},"removeItem":{"return": "<undefined>"},"onContainerOpen":{"return": "<undefined>"},"getContainerMainData":{"return": "<undefined>"},"onContainerClose":{"return": "<undefined>"},"onContainerContentUpdate":{"return": "<undefined>"},"getReasonForCantPutin":{"return": "<undefined>"},"getContainerOwerflowText":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"createItemsInContainer":{"return": "<undefined>"},"createItemInContainer":{"return": "<undefined>"},"onAddItemInContainer":{"return": "<undefined>"},"onRemoveItemFromContainer":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"initMoney":{"return": "<undefined>"},"onUpdate":{"return": "<undefined>"},"onChangeUsePower":{"return": "<undefined>"},"getNDInfo":{"return": "<undefined>"},"onHandleNDInput":{"return": "<undefined>"}
 }   }
 }
 ,"DryChemStruct": {
@@ -15857,9 +15866,9 @@ $REGION:CLASSMETA
     "baseClass" : "ElectronicDevice",
     "defined" : {"file":"src\\host\\GameObjects\\Structures\\Containers\\Tech.sqf","line":19},
    "fields": { "defined": {
-"edIsEnabled":{"return": "bool"},"edReqPower":{"return": "int"},"content":{"return": "null_array"},"currentsize":{"return": "int"},"openedBy":{"return": "null_array"},"canUseContainer":{"return": "bool"},"maxSize":{"return": "int"},"countSlots":{"return": "int"}}   },
+"edIsEnabled":{"return": "bool"},"edReqPower":{"return": "int"},"content":{"return": "null_array"},"currentsize":{"return": "int"},"openedBy":{"return": "null_array"},"canUseContainer":{"return": "bool"},"preinit@__lootTemplate":{"return": "string"},"maxSize":{"return": "int"},"countSlots":{"return": "int"}}   },
    "methods": { "defined": {
-"isContainer":{"return": "<undefined>"},"startWith":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"getContainerClientInfo":{"return": "<undefined>"},"canAdd":{"return": "<undefined>"},"addItem":{"return": "<undefined>"},"removeItem":{"return": "<undefined>"},"onContainerOpen":{"return": "<undefined>"},"getContainerMainData":{"return": "<undefined>"},"onContainerClose":{"return": "<undefined>"},"onContainerContentUpdate":{"return": "<undefined>"},"getReasonForCantPutin":{"return": "<undefined>"},"getContainerOwerflowText":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"createItemsInContainer":{"return": "<undefined>"},"createItemInContainer":{"return": "<undefined>"},"onAddItemInContainer":{"return": "<undefined>"},"onRemoveItemFromContainer":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"initMoney":{"return": "<undefined>"}
+"isContainer":{"return": "<undefined>"},"startWith":{"return": "<undefined>"},"__handlePreInitVars__":{"return": "<undefined>"},"destructor":{"return": "<undefined>"},"getWeight":{"return": "<undefined>"},"getContainerClientInfo":{"return": "<undefined>"},"canAdd":{"return": "<undefined>"},"addItem":{"return": "<undefined>"},"removeItem":{"return": "<undefined>"},"onContainerOpen":{"return": "<undefined>"},"getContainerMainData":{"return": "<undefined>"},"onContainerClose":{"return": "<undefined>"},"onContainerContentUpdate":{"return": "<undefined>"},"getReasonForCantPutin":{"return": "<undefined>"},"getContainerOwerflowText":{"return": "<undefined>"},"onInteractWith":{"return": "<undefined>"},"createItemsInContainer":{"return": "<undefined>"},"createItemInContainer":{"return": "<undefined>"},"onAddItemInContainer":{"return": "<undefined>"},"onRemoveItemFromContainer":{"return": "<undefined>"},"canUseMainAction":{"return": "<undefined>"},"getMainActionName":{"return": "<undefined>"},"onMainAction":{"return": "<undefined>"},"initMoney":{"return": "<undefined>"}
 }   }
 }
 ,"PrinterMerchantConsole": {
@@ -16373,15 +16382,6 @@ $REGION:CLASSMETA
 "model":{"return": "string"}}   },
    "methods": { "defined": {
 "onSpawn":{"return": "<undefined>"},"disposeAfterUserEnterLocation":{"return": "<undefined>"},"onEnterArea":{"return": "<undefined>"}
-}   }
-}
-,"GMDetectiveStructHidden": {
-    "baseClass" : "IStruct",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":460},
-   "fields": { "defined": {
-"isSpawnedItem":{"return": "bool"}}   },
-   "methods": { "defined": {
-"onRelink":{"return": "<undefined>"},"onClick":{"return": "<undefined>"}
 }   }
 }
 ,"MediumStoneHouseRuins": {
@@ -17601,7 +17601,7 @@ $REGION:CLASSMETA
 }
 ,"ArmedMilitarsDirtpitAspect": {
     "baseClass" : "DirtpitGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":393},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":399},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"weight":{"return": "float"}}   },
    "methods": { "defined": {
@@ -17610,7 +17610,7 @@ $REGION:CLASSMETA
 }
 ,"StrongCitizensAspect": {
     "baseClass" : "DirtpitGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":429},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":435},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"isHidden":{"return": "bool"}}   },
    "methods": { "defined": {
@@ -17619,7 +17619,7 @@ $REGION:CLASSMETA
 }
 ,"HeadSonEscapedAspect": {
     "baseClass" : "DirtpitGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":471},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":477},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -17628,7 +17628,7 @@ $REGION:CLASSMETA
 }
 ,"MerchantMoreMoneyAspect": {
     "baseClass" : "DirtpitGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":497},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":503},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -17637,7 +17637,7 @@ $REGION:CLASSMETA
 }
 ,"NoMoneyInBankAspect": {
     "baseClass" : "DirtpitGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":513},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":519},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"isHidden":{"return": "bool"}}   },
    "methods": { "defined": {
@@ -17646,7 +17646,7 @@ $REGION:CLASSMETA
 }
 ,"StrongHeadWifeAspect": {
     "baseClass" : "DirtpitGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":527},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":533},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"wifeHeads":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -17655,7 +17655,7 @@ $REGION:CLASSMETA
 }
 ,"DirtpitIsRealAspect": {
     "baseClass" : "DirtpitGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":567},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":573},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -17727,7 +17727,7 @@ $REGION:CLASSMETA
 }
 ,"StealedDoorsAspect": {
     "baseClass" : "BaseGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":446},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":452},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"}}   },
    "methods": { "defined": {
@@ -17736,7 +17736,7 @@ $REGION:CLASSMETA
 }
 ,"GAExtendedKeys": {
     "baseClass" : "BaseGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":614},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":620},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"weight":{"return": "null"},"_allKeyTypes":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -17745,7 +17745,7 @@ $REGION:CLASSMETA
 }
 ,"GADeathSprint": {
     "baseClass" : "BaseGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":668},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":674},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"weight":{"return": "null"}}   },
    "methods": { "defined": {
@@ -17754,7 +17754,7 @@ $REGION:CLASSMETA
 }
 ,"GACombatChairs": {
     "baseClass" : "BaseGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":720},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":726},
    "fields": { "defined": {
 "name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"weight":{"return": "null"}}   },
    "methods": { "defined": {
@@ -17763,7 +17763,7 @@ $REGION:CLASSMETA
 }
 ,"GADangerousWeapon": {
     "baseClass" : "BaseGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":777},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":783},
    "fields": { "defined": {
 "isHidden":{"return": "bool"},"name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"weight":{"return": "null"}}   },
    "methods": { "defined": {
@@ -17772,7 +17772,7 @@ $REGION:CLASSMETA
 }
 ,"GAPainfullPainkiller": {
     "baseClass" : "BaseGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":806},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":812},
    "fields": { "defined": {
 "isHidden":{"return": "bool"},"name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"weight":{"return": "null"}}   },
    "methods": { "defined": {
@@ -17781,7 +17781,7 @@ $REGION:CLASSMETA
 }
 ,"GASaloonWhereWeapons": {
     "baseClass" : "BaseGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":836},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":842},
    "fields": { "defined": {
 "isHidden":{"return": "bool"},"name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"allowedModes":{"return": "null_array"},"weight":{"return": "null"},"listStolenWeapons":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -17790,7 +17790,7 @@ $REGION:CLASSMETA
 }
 ,"GASaloonNoAmmo": {
     "baseClass" : "BaseGameAspect",
-    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":878},
+    "defined" : {"file":"src\\host\\GameModes\\CommonGameAspects.sqf","line":884},
    "fields": { "defined": {
 "isHidden":{"return": "bool"},"name":{"return": "string"},"desc":{"return": "string"},"descRoleplay":{"return": "string"},"allowedModes":{"return": "null_array"},"weight":{"return": "null"}}   },
    "methods": { "defined": {
@@ -19194,7 +19194,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_Loskut": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":549},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":550},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19203,7 +19203,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_Sledi": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":556},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":557},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19212,7 +19212,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_Carapini": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":563},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":564},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19221,7 +19221,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_Volos": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":570},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":571},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19230,7 +19230,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_Bottle": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":577},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":578},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19239,7 +19239,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_GlassPiece": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":591},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":592},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19248,7 +19248,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_CombatPlace": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":598},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":599},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19257,7 +19257,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_BrokenPaper": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":605},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":606},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19266,7 +19266,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_MurderWeapon": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":625},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":626},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19275,7 +19275,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_Saja": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":639},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":640},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19284,7 +19284,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_BloodPodteki": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":646},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":647},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19293,7 +19293,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_Derevashki": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":653},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":654},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19302,7 +19302,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_Otpechatki": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":660},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":661},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19311,7 +19311,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence_StrangeZidkost": {
     "baseClass" : "GMDet_Evidence",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":667},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":668},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19320,7 +19320,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_Koridor2etaz_2": {
     "baseClass" : "GMDet_MurderInfo_Koridor2etaz",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":755},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":756},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19329,7 +19329,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_Tualet": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":683},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":684},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "float"}}   },
    "methods": { "defined": {
@@ -19338,7 +19338,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_Molitvennik": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":689},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":690},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19347,7 +19347,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_PomKoridor": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":695},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":696},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19356,7 +19356,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_LowLestnica": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":701},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":702},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19365,7 +19365,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_LightSklad": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":707},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":708},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19374,7 +19374,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_FoodSklad": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":713},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":714},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19383,7 +19383,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_MainHall": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":719},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":720},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19392,7 +19392,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_StolovHead": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":725},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":726},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19401,7 +19401,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_SlugiHouse": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":731},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":732},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19410,7 +19410,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_SlugiStolov": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":737},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":738},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19419,7 +19419,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_Zal2etaz": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":743},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":744},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19428,7 +19428,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_Koridor2etaz": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":749},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":750},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19437,7 +19437,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_Biblio": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":760},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":761},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19446,7 +19446,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_Kuhnya": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":766},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":767},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19455,7 +19455,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_ZadDvor": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":771},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":772},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19464,7 +19464,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_Besedka": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":777},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":778},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19473,7 +19473,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_Ferma": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":783},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":784},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19482,7 +19482,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_KomnataOtdiha": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":789},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":790},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19491,7 +19491,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_BragaSklad": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":794},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":795},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19500,7 +19500,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_ShitovayaPodval": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":800},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":801},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19509,7 +19509,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_SwitchersPodval": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":806},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":807},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19518,7 +19518,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_PomeshBalkon": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":812},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":813},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19527,7 +19527,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo_PomeshOffice": {
     "baseClass" : "GMDet_MurderInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":818},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":819},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "int"}}   },
    "methods": { "defined": {
@@ -19536,7 +19536,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_KillInfo_Melee_Knife": {
     "baseClass" : "GMDet_KillInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":850},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":851},
    "fields": { "defined": {
 "killProcessText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19545,7 +19545,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_KillInfo_Melee_Crowbar": {
     "baseClass" : "GMDet_KillInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":861},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":862},
    "fields": { "defined": {
 "killProcessText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19554,7 +19554,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_KillInfo_Melee_Axe": {
     "baseClass" : "GMDet_KillInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":871},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":872},
    "fields": { "defined": {
 "killProcessText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19563,7 +19563,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_KillInfo_Venom": {
     "baseClass" : "GMDet_KillInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":880},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":881},
    "fields": { "defined": {
 "killProcessText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19572,7 +19572,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_KillInfo_Forced": {
     "baseClass" : "GMDet_KillInfo",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":888},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":889},
    "fields": { "defined": {
 "killProcessText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19581,7 +19581,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderReason_Love": {
     "baseClass" : "GMDet_MurderReason",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":906},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":907},
    "fields": { "defined": {
 "reasonText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19590,7 +19590,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderReason_Obida": {
     "baseClass" : "GMDet_MurderReason",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":910},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":911},
    "fields": { "defined": {
 "reasonText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19599,7 +19599,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderReason_Revenge": {
     "baseClass" : "GMDet_MurderReason",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":914},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":915},
    "fields": { "defined": {
 "reasonText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19608,7 +19608,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderReason_Money": {
     "baseClass" : "GMDet_MurderReason",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":918},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":919},
    "fields": { "defined": {
 "reasonText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19617,7 +19617,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderReason_Dolg": {
     "baseClass" : "GMDet_MurderReason",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":922},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":923},
    "fields": { "defined": {
 "reasonText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19626,7 +19626,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderReason_NoAlko": {
     "baseClass" : "GMDet_MurderReason",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":926},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":927},
    "fields": { "defined": {
 "reasonText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19635,7 +19635,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderReason_Psih": {
     "baseClass" : "GMDet_MurderReason",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":930},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":931},
    "fields": { "defined": {
 "reasonText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19644,7 +19644,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderReason_TOM": {
     "baseClass" : "GMDet_MurderReason",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":934},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":935},
    "fields": { "defined": {
 "reasonText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19653,7 +19653,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderReason_KnowSecret": {
     "baseClass" : "GMDet_MurderReason",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":938},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":939},
    "fields": { "defined": {
 "reasonText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19662,7 +19662,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderReason_Izdevka": {
     "baseClass" : "GMDet_MurderReason",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":942},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":943},
    "fields": { "defined": {
 "reasonText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19815,7 +19815,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_Evidence": {
     "baseClass" : "IGamemodeSpecificClass",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":506},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":507},
    "fields": { "defined": {
 "canCreateOnDetective":{"return": "bool"},"evidenceInfo":{"return": "string"},"reasonEvidence":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19824,7 +19824,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderInfo": {
     "baseClass" : "IGamemodeSpecificClass",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":677},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":678},
    "fields": { "defined": {
 "murderLoc":{"return": "null_array"},"murderLocName":{"return": "string"},"bloodPoolRandOffset":{"return": "null_array"}}   },
    "methods": { "defined": {
@@ -19833,7 +19833,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_KillInfo": {
     "baseClass" : "IGamemodeSpecificClass",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":826},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":827},
    "fields": { "defined": {
 "killReason":{"return": "object"},"killProcessText":{"return": "string"}}   },
    "methods": { "defined": {
@@ -19842,7 +19842,7 @@ $REGION:CLASSMETA
 }
 ,"GMDet_MurderReason": {
     "baseClass" : "IGamemodeSpecificClass",
-    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":902},
+    "defined" : {"file":"src\\host\\GameModes\\Detective\\GM_Detective.sqf","line":903},
    "fields": { "defined": {
 "reasonText":{"return": "string"}}   },
    "methods": { "defined": {

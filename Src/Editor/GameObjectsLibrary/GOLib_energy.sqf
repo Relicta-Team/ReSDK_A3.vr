@@ -157,7 +157,7 @@ function(golib_en_internal_doRender)
 		_x params ["_fObj","_tObj","_fEn","_fCol"];
 		_add = ((boundingBoxReal _fObj select 1 select 2) / 2);
 		_add2 = ((boundingBoxReal _tObj select 1 select 2) / 2);
-		drawLine3D [(getPosAtl _fObj) vectorAdd [0,0,_add], (getPosAtl _tObj) vectorAdd [0,0,_add2], _fCol];
+		drawLine3D [(getPosAtl _fObj) vectorAdd [0,0,_add], (getPosAtl _tObj) vectorAdd [0,0,_add2], _fCol, 20];
 
 	} foreach golib_en_internal_list_buffer;
 
@@ -268,4 +268,99 @@ function(golib_en_connectObjects)
 	call golib_cs_syncMarks;
 
 	["(%1) - Task success",__FUNC__] call printLog;
+}
+
+
+function(golib_en_connectObjectsList)
+{
+	params ["_objList",["_toObj",objNull]];
+	private _fromObj = null;
+	if isNullReference(_toObj) exitWith {};
+	if !(_toObj call golib_en_obj_isEnergyObject) exitWith {
+		["Цель "+str _toObj+" не является электронным объектом"] call showWarning;
+	};
+
+	//dest validate node type
+	private _isNodeTo = [_toObj,"edIsNode"] call golib_getActualDataValue;
+	if isNullVar(_isNodeTo) exitWith {_isNodeTo = false};
+	if (!_isNodeTo) exitWith {
+		["Цель не явлется узлом"] call showWarning;
+	};
+
+	["Подключение электроники", "Подключение электрических устройств", "a3\3den\data\cfg3den\history\changeAttributes_ca.paa"] collect3DENHistory
+	{
+		
+		{
+			_fromObj = _x;
+			if isNullReference(_fromObj) then {continue};
+			if equals(_fromObj, _toObj) then {continue};
+
+			if !(_fromObj call golib_en_obj_isEnergyObject) then {continue};
+			
+			["Connect %1 to %2",_fromObj,_toObj] call printTrace;
+
+			private _marks = _toObj call golib_en_obj_getConnectedMarks;
+			private _thisMark = [_fromObj,"mark"] call golib_getActualBasicValue;
+			private _prevMother = _fromObj call golib_en_obj_getMotherEnergyObject;
+
+			if isNullVar(_thisMark) then {
+				private _cls = [_fromObj,"class"] call golib_getActualBasicValue;
+				_thisMark = _cls + " G:"+hashvalue((systemtime joinString "") + str randInt(1,999999));
+				[_fromObj,"mark",_thisMark] call golib_setActualBasicValue;
+			};
+
+			if isNull(vec2(_toObj,"mark") call golib_getActualBasicValue) then {
+				private _cls = [_toObj,"class"] call golib_getActualBasicValue;
+				[_toObj,"mark",_cls + " G:"+hashvalue((systemtime joinString "") + str randInt(1,999999))] call golib_setActualBasicValue;
+			};
+
+			//already set in dest object
+			if (_thisMark in _marks) then {continue};
+
+			private _allMotherMarks = [];
+			private _mot = _toObj;
+			while {
+				_mot = _mot call golib_en_obj_getMotherEnergyObject;
+
+				if isNullReference(_mot) exitWith {false};
+
+				if (_mot call golib_en_obj_isEnergyObject) then {
+					_allMotherMarks pushback (_mot call golib_en_obj_getMark);
+				};
+				true
+			} do {};
+
+			if (_thisMark in _allMotherMarks) then {
+				["%1: circular dependency found at mark %2",__FUNC__,_thisMark] call printWarning;
+				continue;
+			};
+
+			//remove prev
+			if !isNullReference(_prevMother) then {
+				private _mHash = [_prevMother,false] call golib_getHashData;
+				if (count _mHash == 0) exitWith {};
+				private _list = _mHash getOrDefault ["edConnected",[]];
+				_list deleteAt (_list find _thisMark);
+				if (count _list == 0) then {
+					_mHash deleteAt "edConnected";
+				} else {
+					_mHash set ["edConnected",_list];
+				};
+				[_prevMother,_mHash] call golib_setHashData;
+			};
+
+			//set to new
+			private _newHash = [_toObj,false] call golib_getHashData;
+			if (count _newHash == 0) exitWith {
+				["(%1) - Task failed",__FUNC__] call printError;
+			};
+
+			_newHash set ["edConnected",(_newHash getOrDefault ["edConnected",[]]) + [_thisMark]];
+			[_toObj,_newHash] call golib_setHashData;
+			
+		} foreach _objList;
+
+		call golib_cs_syncMarks;
+	};
+
 }

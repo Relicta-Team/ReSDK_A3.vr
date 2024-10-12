@@ -275,3 +275,10 @@ oop_injectToMethod = {
 	errorformat("Cant inject code to %1::%2 - unknown section %3",_type arg _metname arg _sect);
 	false
 };
+
+//получить значение системного поля типа, например __decl_info__
+oop_getTypeValue = {
+	params ["_typeName","_value"];
+	_value = tolower _value;
+	(missionnamespace getvariable ["pt_"+_typeName,LOCATIONNULL]) getvariable _value
+};

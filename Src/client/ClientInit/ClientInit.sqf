@@ -6,6 +6,9 @@
 #include <..\..\host\engine.hpp>
 #include <..\ClientRpc\clientRpc.hpp>
 
+//first step - check dlls
+#include "DllSignCheck.sqf"
+
 //disable world map effects
 setDetailMapBlendPars [1000, 1000];
 setHorizonParallaxCoef 500;

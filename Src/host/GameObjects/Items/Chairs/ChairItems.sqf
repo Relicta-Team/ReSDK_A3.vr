@@ -84,7 +84,7 @@ class(SmallChair4) extends(IChairAsItem)
 endclass
 
 //THIS IS EQUAL SmallRedseatChair
-editor_attribute("Deprecated" arg "Заменить на SmallRedseatChair. Будет удален с редактором 1.16")
+editor_attribute("Deprecated" arg "Заменить на SmallRedseatChair. Будет удален с редактором 1.20")
 class(SmallChair2) extends(IChairAsItem)
 	var(model,"ca\buildings\furniture\ch_mod_e.p3d");
 	var(icon,invicon(redchair));
