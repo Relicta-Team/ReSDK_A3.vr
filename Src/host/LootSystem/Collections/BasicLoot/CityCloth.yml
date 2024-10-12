@@ -1,7 +1,7 @@
 CityCloth: &CityCloth_base
   name: Городская одежда
-  health: {min: 60%, max: 4%}
-  quality: {min: 60%, max: 4%}
+  health: {min: 40%, max: 70%}
+  quality: {min: 30%, max: 60%}
   pass_count: {min: 1, max: 4}
 
 #Конфиг надо доработать
