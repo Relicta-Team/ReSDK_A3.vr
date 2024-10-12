@@ -16,11 +16,11 @@ TestLoot: #имя конфига. Оно указывается в инспек�
     - TestMap
     - typeof: BaseMap #type inheritance check
   #gamemodes: # не определенный тип снимает все ограничения
-  pass_count: 2
+  pass_count: 8
   items:
     Item:
       name: Overriden name
-      prob: 35%
+      prob: 1%
       #ranged count
       count: 
         min: 1
