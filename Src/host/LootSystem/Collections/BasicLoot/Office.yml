@@ -1,0 +1,91 @@
+Office: &Office_base
+  name: Канцелярия
+  health: {min: 60%, max: 100%}
+  quality: {min: 30%, max: 100%}
+  pass_count: {min: 1, max: 4}
+
+#Tier1
+Office_tier1:
+  <<: *Office_base
+  pass_count: {min: 1, max: 3}
+  items: &Office_tier1
+    Paper:
+      prob: 4%  
+      count: {min: 1, max: 2}
+    Notepad:
+      prob: 4%
+    PenBlack:
+      prob: 4%
+
+#Tier2
+Office_tier2:
+  <<: *Office_base
+  items: &Office_tier2
+    PaperHolder:
+      prob: 3%
+    Documents:
+      prob: 3%
+    Documents1:
+      prob: 3%
+
+#Tier3
+Office_tier3:
+  <<: *Office_base
+  pass_count: {min: 0, max: 2}
+  items: &Office_tier3
+    Book:
+      prob: 2%
+    PenRed:
+      prob: 2%
+
+# #Tier4
+# Office_tier4:
+#   <<: *Office_base
+#   items: &Office_tier4
+
+#Presets
+#Full config
+Office_all:
+  <<: *Office_base
+  items:
+    <<: *Office_tier1
+    <<: *Office_tier2
+    <<: *Office_tier3
+    # <<: *Office_tier4
+
+#Tier1-2
+Office_tier1_2:
+  <<: *Office_base
+  items:
+    <<: *Office_tier1
+    <<: *Office_tier2
+
+#Tier1-2-3
+Office_tier1_2_3:
+  <<: *Office_base
+  items:
+    <<: *Office_tier1
+    <<: *Office_tier2
+    <<: *Office_tier3
+
+#Tier2-3
+Office_tier2_3:
+  <<: *Office_base
+  items:
+    <<: *Office_tier2
+    <<: *Office_tier3
+
+# #Tier3-4
+# Office_tier3_4:
+#   <<: *Office_base
+#   items:
+#     <<: *Office_tier3
+#     <<: *Office_tier4
+
+# #Tier2-3-4
+# Office_tier2_3_4:
+#   <<: *Office_base
+#   items:
+#     <<: *Office_tier2
+#     <<: *Office_tier3
+#     <<: *Office_tier4
