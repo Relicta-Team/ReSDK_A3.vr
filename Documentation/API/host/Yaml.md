@@ -226,7 +226,7 @@ Type: function
 Description: 
 - Param: _debugMode (optional, default false)
 
-File: [host\Yaml\Yaml_init.sqf at line 112](../../../Src/host/Yaml/Yaml_init.sqf#L112)
+File: [host\Yaml\Yaml_init.sqf at line 115](../../../Src/host/Yaml/Yaml_init.sqf#L115)
 # Yaml_tests.sqf
 
 ## yaml_debug_testData

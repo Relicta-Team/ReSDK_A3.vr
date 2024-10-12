@@ -78,6 +78,7 @@ function(config_isEditorVisible)
 	(getNumber (configFile >> "CfgVehicles" >> _this >> "scope")) > 0
 };
 
+hashMapNull = createHashMapFromArray [["__NULL_HASH_MAP__","__NULL_HASH_MAP__"]];
 
 regex_isMatch = {
 	params ["_txt","_pattern"];

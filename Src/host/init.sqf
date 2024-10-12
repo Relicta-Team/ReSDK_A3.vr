@@ -53,7 +53,6 @@ call cs_runtime_internal_makeAll;
 //structures initialize
 loadFile("src\host\Structs\Structs_init.sqf");
 call struct_initialize; //init all struct
-call loot_prepareAll;// intialize loot only after structs loaded
 
 //another loaded files...
 //DEPREACTED loadFile("src\host\Database\fDB\fDB_init.sqf"); //локальная база данных
@@ -93,6 +92,8 @@ if (!isMultiplayer) then {
 	loadFile("src\host\ServerSceneTest\serverscrene_init.sqf"); //for testing only
 };
 #endif
+
+call loot_prepareAll;// intialize loot only after structs loaded
 
 server_loadingState = 1;
 

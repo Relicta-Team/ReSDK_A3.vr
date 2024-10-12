@@ -3901,14 +3901,14 @@ File: [host\GameObjects\Items\Clothes\cloth.sqf at line 192](../../../Src/host/G
 
 Type: constant
 
-Description: text in book
+Description: 
 
 
 Replaced value:
 ```sqf
-1024*3
+1024*10
 ```
-File: [host\GameObjects\Items\Office\Books.sqf at line 74](../../../Src/host/GameObjects/Items/Office/Books.sqf#L74)
+File: [host\GameObjects\Items\Office\Books.sqf at line 22](../../../Src/host/GameObjects/Items/Office/Books.sqf#L22)
 ## gv(func)
 
 Type: constant
@@ -3922,7 +3922,7 @@ Replaced value:
 ```sqf
 _y get #func
 ```
-File: [host\GameObjects\Items\Office\Books.sqf at line 442](../../../Src/host/GameObjects/Items/Office/Books.sqf#L442)
+File: [host\GameObjects\Items\Office\Books.sqf at line 449](../../../Src/host/GameObjects/Items/Office/Books.sqf#L449)
 # BasicMob.sqf
 
 ## emulate_mp_in_sp

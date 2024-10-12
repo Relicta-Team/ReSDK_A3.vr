@@ -99,12 +99,15 @@ yaml_loadData = {
 			_parts pushBack _curData;
 		};
 		if (_retCode) then {
-			private _result = call compile (_parts joinString "");
+			private _result = "";
+			private _fmtRes = "_result = " + (_parts joinString "");
+			isNil (compile _fmtRes);
 			refset(_refData,_result);
 		};
 		_retCode
 	};
-	_result = call compile _result;
+	private _fmtRes = "_result = " + _result;
+	isNil (compile _fmtRes);
 	refset(_refData,_result);
 	true
 };

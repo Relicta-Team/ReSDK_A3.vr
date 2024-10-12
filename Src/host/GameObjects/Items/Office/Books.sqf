@@ -19,6 +19,8 @@
 "relicta_models\models\interier\props\book6.p3d"]
 */
 
+#define __CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__ 1024*10
+
 editor_attribute("InterfaceClass")
 class(IPaperItemBase) extends(Item)
 	var(material,"MatPaper");
@@ -71,11 +73,9 @@ class(IWritableContentItem) extends(IPaperItemBase)
 	" node_var
 	var(content,""); //text in book
 
-	#define __CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__ 1024*3
-
 	"
 		name:Максимальная длина текста
-		desc:Максимальная допустимая длина текста в книге или листке бумаги. На данный момент константна и равна 3072 символам.
+		desc:Максимальная допустимая длина текста в книге или листке бумаги. На данный момент константна и равна "+(str (__CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__))+" символам.
 		type:get
 		lockoverride:1
 		return:int:Максимальная длина текста
@@ -89,7 +89,7 @@ class(IWritableContentItem) extends(IPaperItemBase)
 		lockoverride:1
 		return:bool:Можно записать
 	" node_met
-	getter_func(canWrite,forceUnicode 0; (count getSelf(content))<callSelf(getMaxLen));
+	getter_func(canWrite,forceUnicode 1; (count getSelf(content))<callSelf(getMaxLen));
 
 	"
 		name:Можно прочитать
@@ -103,9 +103,10 @@ class(IWritableContentItem) extends(IPaperItemBase)
 	func(canApplyText)
 	{
 		objParams_2(_txtToAdd,_ref);
-		forceUnicode 0;
+		forceUnicode 0; //enable full
 		private _curCount = (count getSelf(content))+(count _txtToAdd);
-		private _canAdd = _curCount < callSelf(getMaxLen);
+		forceUnicode -1; //reset
+		private _canAdd = _curCount <= callSelf(getMaxLen);
 
 		if !isNullVar(_ref) then {
 			refset(_ref,_curCount - callSelf(getMaxLen));
@@ -138,6 +139,10 @@ class(IWritableContentItem) extends(IPaperItemBase)
 
 		if !callSelfParams(canApplyText,_data) exitWith {false};
 
+		//fix format nextlines
+		//! only after validate size (temporary fix)
+		_data = _data splitString endl joinString sbr;
+
 		if (!isNullVar(_writter) && {!isNullReference(_writter)}) then {
 			_data = callFuncParams(_writter,applyColorToText,_data);
 		};
@@ -163,24 +168,6 @@ class(IWritableContentItem) extends(IPaperItemBase)
 			setSelf(preinit@__content,null);
 		};
 	};
-
-endclass
-
-class(Book) extends(IWritableContentItem)
-	"
-		name:Книга
-		desc:Базовый класс для книги.
-		path:Игровые объекты.Текстовые
-	" node_class
-	var(name,"Книга");
-	var(ndName,"Book");
-	var(model,"relicta_models\models\interier\props\book6.p3d");
-
-	var(size,ITEM_SIZE_MEDIUM);
-	var(weight,gramm(350));
-	var(dr,2);
-
-	//getterconst_func(onePaperSize,256); //length one piper size
 
 endclass
 
@@ -293,7 +280,7 @@ class(Paper) extends(IWritableContentItem)
 				//Проверим размер буфера
 				private _lenStr = refcreate(0);
 				if !callSelfParams(canApplyText,_data arg _lenStr) exitWith {
-					forceUnicode 1;
+					// forceUnicode 1; //not needed
 					private _ft = format["Всё не уместится. Нужно убрать %1 символов.",refget(_lenStr)];
 					callFuncParams(_usr,localSay,_ft arg "error");
 				};
@@ -301,7 +288,7 @@ class(Paper) extends(IWritableContentItem)
 
 				//До применения цвета ставим деск
 				if (getSelf(desc) == "") then {
-					forceUnicode 1;
+					forceUnicode 1; //enable for select
 					setSelf(desc,"Там видно текст: " + (_data select vec2(0,16)) + "...");
 
 					//Статистика по запискам в раунде
@@ -380,6 +367,26 @@ class(Folder) extends(Book)
 	var(weight,gramm(220));
 	var(size,ITEM_SIZE_MEDIUM);
 	var(dr,1);
+endclass
+
+class(Book) extends(Paper)
+	"
+		name:Книга
+		desc:Базовый класс для книги.
+		path:Игровые объекты.Текстовые
+	" node_class
+	var(name,"Книга");
+	//var(ndName,"Book");
+	var(model,"relicta_models\models\interier\props\book6.p3d");
+
+	var(size,ITEM_SIZE_MEDIUM);
+	var(weight,gramm(350));
+	var(dr,2);
+
+	getter_func(canWrite,false);
+
+	//getterconst_func(onePaperSize,256); //length one piper size
+
 endclass
 
 

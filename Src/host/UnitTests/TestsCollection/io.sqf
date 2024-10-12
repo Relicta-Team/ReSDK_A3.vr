@@ -83,6 +83,30 @@ TEST(Yaml_FileLoadingAllTypes)
 	ASSERT(count _dat > 0);
 	ASSERT_EQ(_dat get "key","value");
 	ASSERT("test_null" in _dat && {isNull(_dat get "test_null")});
+
+}
+
+TEST(Yaml_References)
+{
+	private _dat = ["src\host\Yaml\test.yaml"] call yaml_loadFile;
+	ASSERT(_dat);
+	ASSERT(count _dat > 0);
+	
+	ASSERT(array_exists(_dat,"test_reference"));
+	ASSERT_EQ(count (_dat get "test_reference"),2);
+	ASSERT_EQ(_dat get "test_reference" getOrDefault vec2("a",-123321),1);
+	ASSERT_EQ(_dat get "test_reference" getOrDefault vec2("b",-123321),2)
+	
+	ASSERT(array_exists(_dat,"test_obj_refered"));
+	ASSERT_EQ(count (_dat get "test_obj_refered"),2);
+	ASSERT_EQ(_dat get "test_obj_refered" getOrDefault vec2("a",-123321),1);
+	ASSERT_EQ(_dat get "test_obj_refered" getOrDefault vec2("b",-123321),2);
+
+	//overriding check
+	ASSERT(array_exists(_dat,"test_obj_override"));
+	ASSERT_EQ(count (_dat get "test_obj_override"),2);
+	ASSERT_EQ(_dat get "test_obj_override" getOrDefault vec2("b",-123321),1000);
+
 }
 
 
@@ -120,14 +144,16 @@ TEST(LootSystem_AllCheckBase)
 
 	private _fit = _itemList select (_itemlist findif {_x getv(itemType) == "Item"});
 	ASSERT_EQ(_fit getv(itemType),"Item");
-	ASSERT_EQ(_fit getv(countMin),1);
-	ASSERT_EQ(_fit getv(countMax),3);
+	ASSERT_EQ(_fit getv(minValue),1);
+	ASSERT_EQ(_fit getv(maxValue),3);
+	ASSERT_EQ(_fit callv(getValue),35);
 
 	private _sit = _itemList select (_itemlist findif {_x getv(itemType) == "Key"});
 	ASSERT_EQ(_sit getv(itemType),"Key");
-	ASSERT_EQ(_sit getv(countMin),4);
-	ASSERT_EQ(_sit getv(countMax),4);
-	ASSERT_EQ(_sit callv(isRangeBasedCount),false);
+	ASSERT_EQ(_sit getv(minValue),4);
+	ASSERT_EQ(_sit getv(maxValue),4);
+	ASSERT_EQ(_sit callv(getValue),100);
+	ASSERT_EQ(_sit getv(isRangeBased),false);
 
 	//compare checks
 	private _clst = _lootObj getv(allowMaps);
@@ -165,7 +191,7 @@ TEST(LootSystem_AllCheckBase)
 
 	//check naming override
 	private _fkey = [_content,{isTypeOf(_x,Key)},nullPtr] call searchInList;
-	ASSERT(!isNullReference(_fkey));
+	ASSERT(!isNullReference(_fkey)); // ! Если снова вывалится это исключение значит увеличиваем pass_count
 	ASSERT_EQ(getVar(_fkey,name),"Test-key");
 
 	[_tobj] call deleteGameObject;

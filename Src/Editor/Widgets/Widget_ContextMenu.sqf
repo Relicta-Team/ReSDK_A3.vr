@@ -228,6 +228,40 @@ function(contextMenu_internal_showCat)
 	} foreach (_back getVariable "items");
 }
 
+function(ContextMenu_loadMouseObjectList)
+{
+	params ["_objList"];
+
+	_stackMenu = [["Отмена",{}]];
+	["Context selected object count %1",count _objList] call printTrace;
+	private _ctxParams = [_objList];
+
+	private _energyListIs = _objList apply {_x call golib_en_obj_isEnergyObject};
+	if (any_of(_energyListIs)) then {
+		_stackMenu pushBack [
+			format["Подключить %1 к источнику",{_x} count _energyListIs],
+			{
+				["Нажмите ЛКМ чтобы связать объект, ПКМ + Ctrl для отмены"] call showInfo;
+				private _possibleObjects = (call contextMenu_getContextParams) select 0;
+				{
+					if (!(_x call golib_en_obj_isEnergyObject)) then {_possibleObjects set [_foreachIndex,objNull]};
+				} foreach _possibleObjects;
+				_possibleObjects = _possibleObjects - [objNull];
+				contextMenu_internal_energy_connectorList = _possibleObjects;
+			}
+		]
+	};
+
+
+
+	[
+		_stackMenu,
+		call mouseGetPosition,
+		_ctxParams
+	] call contextMenu_create;
+
+}
+
 function(ContextMenu_loadMouseObject)
 {
 	
@@ -617,18 +651,25 @@ init_function(ContextMenu_mouseArea_init)
 
 	["onMouseAreaPressed",ContextMenu_mouseArea_handleEvent] call Core_addEventHandler;
 	["onFrame",{
-		if !isNullReference(contextMenu_internal_energy_connector) then {
+		if (call contextMenu_energy_isDragModeActive) then {
+			_curObj = objNull;
+			_objList = ifcheck(!isNullReference(contextMenu_internal_energy_connector),[contextMenu_internal_energy_connector],contextMenu_internal_energy_connectorList);
+			
 			_errDraw = {
 				_screenToWorldPos = screenToWorld getMousePosition;
 				([_screenToWorldPos] call golib_om_getRayCastData) params ["_obj","_atlPos"];
 				if equals(_atlPos,vec3(0,0,0)) then {
 					_atlPos = _screenToWorldPos;
 				};
-				drawLine3D [
-					getPosAtl contextMenu_internal_energy_connector, 
-					_atlPos, 
-					[1,0,0,1]
-				];
+				{
+					drawLine3D [
+						getPosAtl _x, 
+						_atlPos, 
+						[1,0,0,1],
+						50
+					];
+				} foreach _objList;
+				
 			};
 			contextMenu_internal_energy_toObject = objnull;
 			
@@ -665,42 +706,62 @@ init_function(ContextMenu_mouseArea_init)
 			if equals(_atlPos,vec3(0,0,0)) then {
 				_atlPos = getPosAtl contextMenu_internal_energy_toObject;
 			};
-
-			drawLine3D [
-				getPosAtl contextMenu_internal_energy_connector, 
-				_atlPos, 
-				[0,1,0,1]
-			];
-			drawIcon3D ["", [0,0.7,0,1], (getPosAtl contextMenu_internal_energy_connector) vectoradd [0,0,1], 0, 0, 0, "Точка привязки", 1, 0.05, "PuristaMedium"];
-			if (contextMenu_internal_energy_toObject call golib_hasHashData) then {
-				_hd = contextMenu_internal_energy_toObject call golib_getHashData;
-				_t = format["Привязать к %1",_hd getOrDefault ["class","ERROR_TYPE"]];
-				drawIcon3D ["", [0,1,0,2,1], _atlPos, 0, 0, 0, _t, 1, 0.07, "PuristaMedium","right"];
-			};
-
+			
+			{
+				_curObj = _x;
+				drawLine3D [
+					getPosAtl _curObj, 
+					_atlPos, 
+					[0,1,0,1],
+					30
+				];
+				drawIcon3D ["", [0,0.7,0,1], (getPosAtl _curObj) vectoradd [0,0,1], 0, 0, 0, "Точка привязки", 1, 0.05, "PuristaMedium"];
+				if (contextMenu_internal_energy_toObject call golib_hasHashData) then {
+					_hd = contextMenu_internal_energy_toObject call golib_getHashData;
+					_t = format["Привязать к %1",_hd getOrDefault ["class","ERROR_TYPE"]];
+					drawIcon3D ["", [0,1,0,2,1], _atlPos, 0, 0, 0, _t, 1, 0.07, "PuristaMedium","right"];
+				};
+			} foreach _objList;
 		};
+
 	}] call Core_addEventHandler;
 
 	contextMenu_internal_energy_connector = objnull;
+	contextMenu_internal_energy_connectorList = [];
 	contextMenu_internal_energy_toObject = objnull;
+}
+
+function(contextMenu_energy_isDragModeActive)
+{
+	!isNullReference(contextMenu_internal_energy_connector)
+	|| {count contextMenu_internal_energy_connectorList > 0}
 }
 
 function(ContextMenu_mouseArea_handleEvent)
 {
 	params ["_mouse","_shift","_ctrl","_alt"];
 
-	if isNullReference(contextMenu_internal_energy_connector) exitwith {};
+	if !(call contextMenu_energy_isDragModeActive) exitwith {};
 
 	//["Связывание через контекст не реализовано в данной версии"] call showWarning;
 	
 	if (_mouse == MOUSE_RIGHT) exitwith {
 		if (!_ctrl) exitwith {};
+		contextMenu_internal_energy_connectorList = [];
 		contextMenu_internal_energy_connector = objnull;
 		contextMenu_internal_energy_toObject = objnull;
 	};
 	
-	[contextMenu_internal_energy_connector,contextMenu_internal_energy_toObject] call golib_en_connectObjects;
+	if !isNullReference(contextMenu_internal_energy_connector) then {
+		[contextMenu_internal_energy_connector,contextMenu_internal_energy_toObject] call golib_en_connectObjects;
+	} else {
+		[contextMenu_internal_energy_connectorList,contextMenu_internal_energy_toObject] call golib_en_connectObjectsList;
+	};
 
+	contextMenu_internal_energy_connectorList = [];
 	contextMenu_internal_energy_connector = objnull;
 	contextMenu_internal_energy_toObject = objnull;
+	
+	//sync inspector visual
+	nextFrame(inspector_menuLoad);
 }

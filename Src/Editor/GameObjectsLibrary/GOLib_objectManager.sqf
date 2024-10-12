@@ -36,7 +36,7 @@ function(golib_om_internal_handleTransformEvent)
 function(golib_om_onAttibutesChanged)
 {
 	params ["_obj"];
-	[null] call inspector_menuLoad;
+	//[null] call inspector_menuLoad;
 }
 
 function(golib_om_generatelAssoc)
@@ -71,6 +71,38 @@ function(golib_om_generatelAssoc)
 
 	} foreach ("true" configClasses (configFile >> "CfgVehicles"));
 	
+}
+
+function(golib_om_createObject)
+{
+	params ["_gameObject","_pos","_rot"];
+	if ([_gameObject,"InterfaceClass"] call goasm_attributes_hasAttributeClass) exitWith {objNull};
+	private _flagEffect = false;
+	if ([_gameObject,"EffectClass"] call goasm_attributes_hasAttributeClass) then {
+		_flagEffect = true;
+	};
+	private _cfg = [_gameObject] call golib_om_getConfigByGameObject;
+
+	if (_flagEffect) then {
+		_cfg = [_gameObject,_cfg] call goasm_iapi_effect_convertConfig;
+	};
+	if (_cfg=="") exitWith {objNull};
+	private _obj = create3DENEntity ["Object",_cfg, _pos];
+	[_obj,_gameObject] call golib_initHashData;
+	if !isNullVar(_pos) then {
+		[_obj,_pos] call golib_om_setPosition;
+	};
+	if !isNullVar(_rot) then {
+		[_obj,_rot] call golib_om_setRotation;
+	};
+		
+	[_obj] call golib_om_internal_handleTransformEvent;
+	[_obj,true] call Core_initObjectEvents;
+	if (_flagEffect) then {
+		[_obj,_gameObject] call goasm_iapi_effect_preparModel;
+	};
+
+	_obj
 }
 
 function(golib_om_placeObjectAtMouse)
@@ -290,13 +322,45 @@ function(golib_om_setPosition)
 			_postMes = ": " + _postMes;
 		};
 		["Инспектор"+_postMes, "Изменение трансофрмации объекта", "a3\3den\data\cfg3den\history\moveItems_ca.paa"] collect3DENHistory {
+			[_obj,_pos] call golib_om_internal_batchProcess;
 			_obj set3DENAttribute ["position",_pos];
 		};
 	} else {
+		[_obj,_pos] call golib_om_internal_batchProcess;
 		_obj set3DENAttribute ["position",_pos];
 	};
 	
 }
+
+function(golib_om_internal_batchProcess)
+{
+	params ["_srcObj","_val"];
+	if (count golib_internal_lastBatchUpdateMode > 0) then {
+		golib_internal_lastBatchUpdateMode params ["_name","_modeOrData"];
+		golib_internal_lastBatchUpdateMode = [];
+
+		private _isRelativeCoordMode = (get3DENActionState "WidgetCoord") == 0;
+		{
+			private _newval = null;
+			if (_name == "position") then {
+				_modeOrData params ["_tIndex","_delta"];
+				_newval = _x call golib_om_getPosition;
+				["Change index %1 at %2",_tIndex,_delta] call printTrace;
+				_newval set [_tIndex,(_newval select _tIndex) + _delta];
+			};
+			if (_name == "rotation") then {
+				_modeOrData params ["_tIndex","_delta"];
+				_newval = _x call golib_om_getRotation;
+				["Change index %1 at %2",_tIndex,_delta] call printTrace;
+				_newval set [_tIndex,(_newval select _tIndex) + _delta];
+			};
+			if !isNullVar(_newval) then {
+				_x set3DENAttribute [_name,_newval];
+			};
+		} foreach inspector_otherObjects;
+	};
+}
+
 
 function(golib_om_getRotation)
 {
@@ -313,9 +377,11 @@ function(golib_om_setRotation)
 			_postMes = ": " + _postMes;
 		};
 		["Инспектор"+_postMes, "Изменение трансофрмации объекта", "a3\3den\data\cfg3den\history\rotateItems_ca.paa"] collect3DENHistory {
+			[_obj,_rot] call golib_om_internal_batchProcess;
 			_obj set3DENAttribute ["rotation",_rot];
 		};
 	} else {
+		[_obj,_rot] call golib_om_internal_batchProcess;
 		_obj set3DENAttribute ["rotation",_rot];
 	};
 }
@@ -325,14 +391,25 @@ function(golib_om_replaceObject)
 	params ["_worldObj","_newConfig"];
 	
 	//подмена сразу модели на конфиг
-	if ("\" in _newConfig) then {
-		_newConfig = [_newConfig] call golib_om_getConfigByModel;
+	if equalTypes(_newConfig,[]) then {
+		{
+			if ("\" in _x) then {
+				_newConfig set [_forEachIndex,[_x] call golib_om_getConfigByModel];
+			};
+		} foreach _newConfig;
+	} else {
+		if ("\" in _newConfig) then {
+			_newConfig = [_newConfig] call golib_om_getConfigByModel;
+		};
 	};
 	
-	if (_worldObj call golib_isVirtualObject) exitwith {
+	if (ifcheck(equalTypes(_worldObj,[]),_worldObj select 0,_worldObj) call golib_isVirtualObject) exitwith {
 		private _args = [_worldObj,_newConfig];
 		private _code = {
 			params ["_worldObj","_newConfig"];
+
+			assert_str(equalTypes(_newConfig,""),"Not implemented multi-update config");
+
 			_dummyObj = "_dummyObj" call Core_getContextVar;
 			if isNullVar(_dummyObj) exitwith {
 				["Context var _dummyObj not found"] call printError;
@@ -369,33 +446,102 @@ function(golib_om_replaceObject)
 
 		["!!! Замена модели !!!", "Замена конфига объекта", "a3\3den\data\cfg3den\history\changeattributes_ca.paa"] collect3DENHistory
 		{
-			private _pos = _worldObj call golib_om_getPosition;
-			
-			_obj = create3DENEntity ["Object",_newConfig, _pos];
-			
-			if ((format["%1",_obj]) == "<null>") exitWith {
-				["Не удалось заменить модель. Для подробностей смотрите лог-консоль"] call showWarning;
-				["Cant create eden entity by config %1. It is recommended to cancel the last actions.",_newConfig] call printError;
+
+			private _oList = ifcheck(equalTypes(_worldObj,[]),array_copy(_worldObj),[_worldObj]);
+			private _newObjects = [];
+			private _isSingleConfig = equalTypes(_newConfig,"");
+			if (!_isSingleConfig) then {
+				assert_str(count _oList == count _newConfig,"Config count missmatch: " + (str vec2(count _oList,count _newConfig)));
+			};
+
+			//validate can change prop
+			{
+				private _hd = [_x,false] call golib_getHashData;
+				if !([_hd get "class","model",_hd] call golib_batch_validatePropAccess) then {
+					_oList set [_foreachIndex,objNull];
+					if (!_isSingleConfig) then {
+						_newConfig set [_foreachIndex,objNull];
+					};
+				};
+			} foreach _oList;
+			_oList = _oList - [objNull];
+			if (!_isSingleConfig) then {
+				_newConfig = _newConfig - [objNull];
+			};
+
+			{
+				private _pos = _x call golib_om_getPosition;
+				private _cfgName = ifcheck(_isSingleConfig,_newConfig,_newConfig select _foreachIndex);
+				private _obj = create3DENEntity ["Object",_cfgName, _pos];
+				
+				if ((format["%1",_obj]) == "<null>") exitWith {
+					["Не удалось заменить модель. Для подробностей смотрите лог-консоль"] call showWarning;
+					["Cant create eden entity by config %1. It is recommended to cancel the last actions.",_cfgName] call printError;
+				};
+				_newObjects pushBack _obj;
+				
+
+				private _rot = _x call golib_om_getRotation;
+				private _data = [_x,true] call golib_getHashData;
+				delete3DENEntities [_x];
+				
+				[_obj,_data] call golib_setHashData;
+				[_obj,_pos] call golib_om_setPosition;
+				[_obj,_rot] call golib_om_setRotation;
+				
+				[_obj] call golib_om_internal_handleTransformEvent;
+				[_obj,true] call Core_initObjectEvents;
+				
+				
+			} foreach _oList;
+
+			if (count _newObjects > 0) then {
+				call golib_cs_syncMarks;
+				set3DENSelected _newObjects;
 			};
 			
-			
-			
-			private _rot = _worldObj call golib_om_getRotation;
-			private _data = [_worldObj,true] call golib_getHashData;
-			delete3DENEntities [_worldObj];
-			
-			[_obj,_data] call golib_setHashData;
-			[_obj,_pos] call golib_om_setPosition;
-			[_obj,_rot] call golib_om_setRotation;
-			
-			[_obj] call golib_om_internal_handleTransformEvent;
-			[_obj,true] call Core_initObjectEvents;
-			
-			call golib_cs_syncMarks;
-
-			set3DENSelected [_obj];
 		};
 	};
 	
 	nextFrameParams(_code,_args);
+}
+
+//восстановление данных объектов через замену
+function(golib_resetObjectsData)
+{
+	params ["_olist",["_pushHistory",false],["_resetRnd",false],["_resetProps",false],["_newclass",""]];
+	private _codeReset = {
+		{
+			private _oldHD = [_x,false] call golib_getHashData;
+			private _class = _oldHD get "class";
+			if (_newclass != "") then {
+				_class = _newclass;
+			};
+			private _pos = _x call golib_om_getPosition;
+			private _rot = _x call golib_om_getRotation;
+			private _obj = [_class,_pos,_rot] call golib_om_createObject;
+			if isNullReference(_obj) then {continue};
+			delete3DENEntities [_x];
+
+			if (_resetRnd) then {
+				_oldHD deleteAt "rdir";
+				_oldHD deleteAt "rpos";
+				_oldHD deleteAt "prob";
+			};
+
+			if (_resetProps) then {
+				_oldHD set ["class",_class];
+				_oldHD set ["customProps",createHashMap];
+				_oldHD deleteAt "edConnected";
+			};
+
+			[_obj,_oldHD] call golib_setHashData;
+
+		} foreach _olist;
+	};
+	if (_pushHistory) then {
+		["Сброс свойств", "Сброс состояния объекта на дефолтные значения", "a3\3den\data\cfg3den\history\changeattributes_ca.paa"] collect3DENHistory _codeReset;
+	} else {
+		call _codeReset;
+	};
 }

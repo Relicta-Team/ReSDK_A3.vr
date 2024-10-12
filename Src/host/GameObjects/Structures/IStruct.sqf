@@ -30,7 +30,7 @@ class(IStruct) extends(IDestructible)
 
 	editor_attribute("EditorVisible" arg "custom_provider:model") editor_attribute("Tooltip" arg "Модель структуры")
 	var(model,"a3\structures_f_epa\items\food\canteen_f.p3d");
-	editor_attribute("ReadOnly")
+	
 	var(loc,objNull);
 
 	func(destructor)
