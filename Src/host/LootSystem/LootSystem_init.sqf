@@ -30,10 +30,15 @@ loot_addConfig = {
 };
 
 loot_prepareAll = {
+	private _skipLoad = false;
 	
-	#ifdef RBUILDER
-	if (true) exitWith {};
+	#ifdef TEST_IO
+	_skipLoad = true;
 	#endif
+	
+	
+	if (_skipLoad) exitWith {};
+
 	#ifdef __VM_VALIDATE
 	if (true) exitWith {};
 	#endif
