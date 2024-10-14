@@ -189,7 +189,7 @@ func(clickTarget)
 
 				callScriptedEvent(callFuncParams(_scriptOut,onInteractWith,_item arg this arg _isCombatAction arg equals(_targLoc,this)));
 				
-				if ([this,_item,_targ] call csys_handleInteractor) exitWith {}; //craft interactor redirect
+				if ([this,[_item,_targ]] call csys_processCraftMain) exitWith {}; //craft interactor redirect
 
 				private _isRedirAct = callFunc(_item,isRedirectedInteractWith);
 				if (!isNullVar(_isRedirAct) && {_isRedirAct}) then {

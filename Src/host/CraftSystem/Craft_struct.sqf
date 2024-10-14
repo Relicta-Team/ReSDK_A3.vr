@@ -254,26 +254,31 @@ struct(ICraftRecipeBase)
 	def(fail_type) null;
 	def(fail_count) null; //CraftDynamicCountRange__
 
+	//new failed handler params
+	def(fail_handler_type) "" //Craft_FailedHandler::$name$
+	def(fail_handler_params) null
+
 	def(_parseFailed)
 	{
 		params ["_fdict","_refResult"];
 		if isNullVar(_fdict) exitWith {};
 		CRAFT_PARSER_HEAD;
 
-		GETVAL_BOOL(_fdict, vec2("enable",self getv(fail_enable)));
+		GETVAL_STR(_fdict, vec2("handler_name",self getv(fail_enable)));
 		FAIL_CHECK_REFSET(_refResult);
-		self setv(fail_enable,value);
-		if (!value) exitWith {};
+		private _handlerName = "CraftFailedHandler::" + value;
 		
-		GETVAL_STR(_fdict, vec2("item",null));
-		if (!isImplementClass(value) || {!isTypeNameStringOf(value,"Item")}) exitWith {
-			refset(_refErr,"Failed item not found or not inherit of Item class: " + value);
+		if struct_existType_str(_handlerName) exitWith {
+			refset(_refErr,"Failed handler not found: " + value);
 		};
-		self setv(fail_type,value);
+		//set handler name
+		self setv(fail_handler_type,_handlerName);
 
-		GETVAL(_fdict, vec2("count",1), [0 arg hashMapNull]);
-		FAIL_CHECK_REFSET(_refResult);
-		self setv(fail_count,struct_newp(CraftDynamicCountRange__,value));
+		_fdict deleteAt "handler_name";
+		if (count _fdict > 0) then {
+			self setv(fail_handler_params,_fdict);
+		};
+
 	};
 
 	def(opt_collect_distance) 0.8

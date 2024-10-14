@@ -57,7 +57,7 @@ csys_init = {
 		csys_map_storage set [_foreachindex,[]];
 	} foreach CRAFT_CONST_CATEGORY_LIST_SYS_NAMES;
 
-	csys_systemController_handleUpdate = startUpdate(csys_systemController_onUpdate,1);
+	//csys_systemController_handleUpdate = startUpdate(csys_systemController_onUpdate,1);
 
 
 	//collecting all files and load into buffer
@@ -241,7 +241,7 @@ csys_internal_loadCfgSegment = {
 	};
 
 	// ----------------------- failed check -----------------------
-	GETVAL_DICT(_data, vec2("failed",null));
+	GETVAL_DICT(_data, vec2("failed_handler",null));
 	FAIL_CHECK_PRINT;
 
 	_sobj callp(_parseFailed,value arg _ref);

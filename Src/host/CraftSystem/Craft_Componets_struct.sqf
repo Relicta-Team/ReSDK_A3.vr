@@ -24,6 +24,12 @@ struct(CraftRecipeComponent)
 	def(_foundItems) null;
 	def(_isReadyIngredient) false;
 
+	//метод получения объектов из ингредиент-типа
+	def(getObjects)
+	{
+		(self getv(_foundItems)) apply {_x select 0};
+	}
+
 	def(init)
 	{
 		params ["_class"];
@@ -212,6 +218,8 @@ struct(CraftRecipeInteractorComponent) base(CraftRecipeComponent)
 	def(componentCategory) ""//target|hand_item
 
 	def(targetItem) nullPtr;
+
+	def(getObjects) {[self getv(targetItem)]}
 
 	def(_ingredientRegister)
 	{

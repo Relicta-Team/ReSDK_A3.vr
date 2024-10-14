@@ -365,3 +365,190 @@ csys_handleInteractor = {
 
 	_output
 };
+
+/* 
+	Универсальная функция процесса крафта
+	крафт интерактора, стройки или меню. В том числе готовки.
+*/
+csys_processCraftMain = {
+	/*
+		(usr,[_item,_targ],null) - for interactor (return bool)
+		(usr,[objects_sorted],id) - for default, building (void)
+		(null,[objects_sorted],system) - for system (void)
+	*/
+	params ["_usr","_objectColleciton","_recipeIdOrSystem"];
+	FHEADER;
+
+	private _isInteract = isNullVar(_recipeIdOrSystem);
+	private _isSystem = isNullVar(_usr);
+	private _isDefault = !_isInteract && !_isSystem;
+
+	private _recipe = null;
+	private _modContext = null;
+	private _craftContext = null;
+	private _failContext = null;
+
+	private _leftComponents = null;
+	private _position = null;
+
+	private _addModContext = {
+		if isNullVar(_modContext) then {
+			_modContext = createhashMap;
+		};
+		_modContext set _this;
+	};
+	private _addCraftContext = {
+		if isNullVar(_craftContext) then {
+			_craftContext = createhashMap;
+		};
+		_craftContext set _this;
+	};
+	private _addFailContext = {
+		if isNullVar(_failContext) then {
+			_failContext = createhashMap;
+		};
+		_failContext set _this;
+	};
+
+	if (_isInteract) then {
+		_objectColleciton params ["_handItem","_targ"];
+		traceformat("csys::processCraftMain() - %1 interacted from %2 to %3",_usr arg _handItem arg _targ)
+		private _targClass = callFunc(_targ,getClassName);
+		private _listCrafts = csys_map_allInteractiveCrafts get (tolower _targClass);
+		if isNullVar(_listCrafts) exitWith {RETURN(false)};
+
+		private _handItmIngr = null;
+		private _targIngr = null;
+		
+		{
+			_handItmIngr = _x getv(hand_item) callv(createIngredientTempValidator);
+			_targIngr = _x getv(target) callv(createIngredientTempValidator);
+
+			if (_handItmIngr callp(isValidIngredient,_handItem)) then {
+				_handItmIngr callp(handleValidIngredient,_handItem);
+			};
+
+			if (_targIngr callp(isValidIngredient,_targ)) then {
+				_targIngr callp(handleValidIngredient,_targ);
+			};
+
+			if (_handItmIngr callv(isReadyIngredient) && {_targIngr callv(isReadyIngredient)}) exitWith {
+				_recipe = _x;
+			};
+		} foreach _listCrafts;
+
+		private _error_message_provider = {
+			params ["_ingrType"];
+			traceformat("csys::handleInteractor() - error message because hp error on %1",_ingrType);
+			private _msg = _ingrType getv(on_hp_error_messages);
+			if (count _msg == 0) exitWith {};
+			assert(equalTypes(_msg,[]));
+			_msg = pick _msg;
+			_msg = [_msg,
+				createHashMapFromArray[
+					["basename", callFuncParams(_ingrType getv(targetItem),getNameFor,_usr)]
+					,["target", callFuncParams(_handItmIngr getv(targetItem),getNameFor,_usr)]
+					,["hand_item", callFuncParams(_targIngr getv(targetItem),getNameFor,_usr)]
+				]
+			] call csys_format;
+			_msg = [_msg] call csys_formatSelector;
+			callFuncParams(_usr,localSay,_msg arg "error");
+
+			RETURN(true);
+		};
+
+		if (_handItmIngr getv(hp_error_catched)) then {
+			[_handItmIngr] call _error_message_provider;
+		};
+
+		if (_targIngr getv(hp_error_catched)) then {
+			[_targIngr] call _error_message_provider;
+		};
+
+		//запоминаем названия предметов для создания
+		private _handItemName = callFuncParams(_handItem,getNameFor,_usr);
+		private _targName = callFuncParams(_targ,getNameFor,_usr);
+		["hand_item_name",_handItemName] call _addCraftContext;
+		["target_name",_targName] call _addCraftContext;
+
+		_leftComponents = [_handItmIngr,_targIngr];
+
+		_position = callFunc(_targ,getPos);
+
+	};
+
+	if isNullVar(_recipe) exitWith {false};
+
+	 
+	//регистрируем контекст модификаторов
+	["is_interact",_isInteract] call _addModContext;
+	["user",_usr] call _addModContext;
+	["ingredients",_objectColleciton] call _addModContext;
+	private _modCtxPrepared = [];
+	{
+		_modCtxPrepared pushBack (_x callp(createModifierContext,_modContext));
+	} foreach (_recipe getv(result) get(modifiers));
+
+	//регистрируем контекст провала
+	private _failHandler = null;
+	if ((_recipe getv(fail_handler_type)) != "") then {
+		private _failHandlerType = _recipe getv(fail_handler_type);
+		private _failHandlerParams = _recipe getv(fail_handler_params);
+		_failHandler = [_failHandlerType,_failHandlerParams] call struct_alloc;
+		_failHandler callp(captureContext,_recipe arg _usr arg _leftComponents);
+	};
+
+
+	//skills check
+	private _refSuccess = refcreate(0);
+	private _canCraftBySkills = _recipe callp(checkCraftSkills,_usr arg _refSuccess);
+	refunpack(_refSuccess); //params: vec2(skillname(str),success_amount(int))
+
+	//register craft context
+	["used_skill",_refSuccess select 0] call _addCraftContext;
+	["success_amount",getRollAmount(_refSuccess select 1)] call _addCraftContext;
+	["roll_result",getRollType(_refSuccess select 1)] call _addCraftContext;
+	["amount_3d6",getRollDiceAmount(_refSuccess select 1)] call _addCraftContext;
+	
+	["position",_position] call _addCraftContext;
+	["user",_usr] call _addCraftContext;
+	["recipe",_recipe] call _addCraftContext;
+	["modifier_context_list",_modCtxPrepared] call _addCraftContext;
+	// copy ingredients info structs (copy)
+	["components_copy",_leftComponents] call _addCraftContext;
+
+	private _durationCheck = _recipe getv(opt_craft_duration);
+	assert(equalTypes(_durationCheck,{}));
+	private _myRta = getVar(_usr,rta);
+	assert(!isNullVar(_myRta));
+	private _duration = _myRta call _durationCheck;
+
+
+	private _ctx = ["_recipe","_leftComponents","_craftContext","_usr","_failHandler"];
+	private _postCrafted = {
+		assert(_leftComponents);
+		{
+			_x callv(onComponentUsed);
+		} foreach _leftComponents;
+
+		_recipe getv(result) callp(onCrafted,_craftContext);
+	};
+
+	if (_isInteract) exitWith {
+		if (!_canCraftBySkills) exitWith {
+			//cannot craft because lowskill
+			if isNullVar(_failHandler) exitWith {
+				private _message = pick ["Знаний не хватает.","Не умею, не могу.","Не понимаю как делать","Что-то не понятно ничего.","Не могу сделать.","Не знаю как делать."];
+				callFuncParams(_usr,localSay,_message arg "error");
+			};
+
+			_failHandler callp(onCatched,_recipe arg _craftContext)
+		};
+		if (_duration > 0) then {
+			callFuncParams(_usr,doAfter,_postCrafted arg _duration arg _ctx arg INTERACT_PROGRESS_TYPE_FULL);
+		} else {
+			call _postCrafted;
+		};
+		RETURN(true)
+	};
+};
