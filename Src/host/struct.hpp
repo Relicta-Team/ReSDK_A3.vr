@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define STRUCT_API_VERSION 1.3
+#define STRUCT_API_VERSION 1.4
 // enable fileinfo for structs. do not enable in release build
 //#define STRUCT_USE_ALLOC_INFO
 
@@ -160,6 +160,8 @@
 
 #define struct_typename(o) ((o) GET STRUCT_MEM_TYPE select 0)
 
+#define struct_existType(o) (#o in vtable_s)
+#define struct_existType_str(o) ((o) in vtable_s)
 
 // * * * * * * * * * * * * Object management * * * * * * * * * * * *
 
