@@ -50,7 +50,7 @@ clistat_buffer = [
 		} foreach noe_client_allChunkTypes;
 
 		_dt = ["{""%1"",""%2"",""%3""}"]+_buf;
-		format(_dt)
+		_dt call formatLazy;
 	}],
 	[colortext(D3C857,"NOE objs: "),{
 		_ppos = getPosATL player; _buf = [];
@@ -87,7 +87,7 @@ clistat_buffer = [
 		} foreach noe_client_allChunkTypes;
 		
 		_dt = ["{%1,%2,%3}"]+_buf;
-		format(_dt)
+		_dt call formatLazy
 	}],
 	[colortext(D3C857,"NOE all: "),{
 		_all = 0;
