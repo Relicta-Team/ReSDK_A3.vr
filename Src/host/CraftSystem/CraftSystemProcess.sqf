@@ -61,7 +61,7 @@ csys_tryCraft = {
 		false
 	};
 	
-	[this,_obj,_recipeID] call csys_tryCraft_internal;
+	[this,null,_recipeID] call csys_processCraftMain;
 	
 }; rpcAdd("tryCraft",csys_tryCraft);
 
@@ -477,6 +477,51 @@ csys_processCraftMain = {
 
 	};
 
+	if (_isDefault) then {
+		//generate server interact
+		callFunc(_usr,generateLastInteractOnServer);
+
+		_recipe = csys_map_allCraftRefs get _recipeIdOrSystem;
+
+		_position = callFunc(_usr,getLastInteractEndPos);
+		private _objList = ["IDestructible",_position,_recipe getv(opt_collect_distance),true,true] call getGameObjectOnPosition;
+
+		//sort by distance
+		_objectColleciton = [_objList,{callFunc(_x,getPos) distance _eps}] call sortBy;
+		_leftComponents = array_copy(_recipe getv(components)) apply {_x callv(createIngredientTempValidator)};
+
+		{
+			_objIngredient = _x;
+
+			{
+				//skips ready
+				if (_x callv(isReadyIngredient)) then {continue};
+
+				if (_x callp(isValidIngredient,_objIngredient)) exitWith {
+					_x callp(handleValidIngredient,_objIngredient);
+				};
+			} foreach _leftComponents;
+			false
+		} count _objectColleciton;
+
+		private _canCraft = all_of(_leftComponents apply {_x callv(canCraftFromIngredient)});
+		private _onCannotCraft = {
+			private _ingredient = "чего-то...";
+			{
+				if (!(_x callv(canCraftFromIngredient)) && {
+					//опциональные не требуются обязательно
+					!(_x getv(optional))
+				}
+				) exitWith {
+					_ingredient = _x callv(getRequiredComponentName);
+				};
+			} foreach _leftComponents;
+			callFuncParams(_usr,localSay,"Не хватает: " + _ingredient arg "error");
+			RETURN(0);
+		};
+		if (!_canCraft) exitWith _onCannotCraft;
+	};
+
 	if isNullVar(_recipe) exitWith {false};
 
 	 
@@ -550,5 +595,45 @@ csys_processCraftMain = {
 			call _postCrafted;
 		};
 		RETURN(true)
+	};
+
+	if (_isDefault) exitWith {
+		if (!_canCraftBySkills) exitWith {
+			//cannot craft because lowskill
+			if isNullVar(_failHandler) exitWith {
+				private _message = pick ["Знаний не хватает.","Не умею, не могу.","Не понимаю как делать","Что-то не понятно ничего.","Не могу сделать.","Не знаю как делать."];
+				callFuncParams(_usr,localSay,_message arg "error");
+			};
+
+			_failHandler callp(onCatched,_recipe arg _craftContext)
+		};
+		
+		//removing components
+		{
+			_x callv(onComponentUsed);
+		} foreach _leftComponents;
+
+		private _previewObj = _recipe callv(hasPreviewCraft);
+
+		//create object
+		private _postCreate = {
+			params ["_recipe","_craftContext"];
+			_recipe getv(result) callp(onCrafted,_craftContext);
+		};
+
+		if (_previewObj) then {
+			private _previewModel = _recipe callv(getPreviewModel);
+			if isNullVar(_previewModel) exitWith {
+				setLastError("Неопределенная модель для рецепта " + (str _recipe));
+			};
+			setVar(_usr,___cachedCraftBuildPreview,vec2(vec2(_recipe,_craftContext),_postCreate));
+			#ifdef EDITOR
+			callFuncAfterParams(_usr,sendInfo,0.05,"craft_preview" arg [_position arg _previewModel] )
+			#else
+			callFuncParams(_usr,sendInfo,"craft_preview" arg [_position arg _previewModel] )
+			#endif
+		} else {
+			[_recipe,_craftContext] call _postCreate;
+		};
 	};
 };
