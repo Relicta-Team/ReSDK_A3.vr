@@ -152,6 +152,10 @@
 #define getv(memname) get #memname
 #define setv(memname,val__) set [#memname,val__]
 
+#define modv(memname,val__) call { _this set [#memname, (_this get #memname) val__ ] }
+#define incv(memname) modv(memname, + 1)
+#define decv(memname) modv(memname, - 1)
+
 
 // * * * * * * * * * * * * Type checking * * * * * * * * * * * *
 
