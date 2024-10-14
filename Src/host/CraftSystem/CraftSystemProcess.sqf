@@ -522,6 +522,88 @@ csys_processCraftMain = {
 		if (!_canCraft) exitWith _onCannotCraft;
 	};
 
+	//TODO refactoring
+	if (_isSystem) then {
+		private _sysObj = _recipeIdOrSystem;
+		private _possibleRecipes = _sysObj callp(_getRecipes,_objectColleciton);
+		
+		private _curRecipes = []; //vec2(recipe,components)
+		
+		{
+			private _robj = _x;
+			private _leftComponents = array_copy(_robj getv(components)) apply {_x callv(createIngredientTempValidator)};
+
+			{
+				private _objIngredient = _x;
+				{
+					//skips ready
+					if (_x callv(isReadyIngredient)) then {continue};
+
+					if (_x callp(isValidIngredient,_objIngredient)) exitWith {
+						_x callp(handleValidIngredient,_objIngredient);
+					};
+				} foreach _leftComponents;
+			} foreach _objList;
+
+			private _canCraft = all_of(_leftComponents apply {_x callv(canCraftFromIngredient)});
+			if (_canCraft) then {
+				_curRecipes pushBack [_robj,_leftComponents];
+			};
+
+		} foreach _possibleRecipes;
+		assert_str(count _curRecipes <= 1,format vec3("Too many possible recipes (%2): %1",_curRecipes apply {_x select 1},count _curRecipes));
+		if (count _curRecipes == 0) exitWith {
+			RETURN(0)
+		};
+
+		_recipe = _curRecipes select 0 select 0;
+		_leftComponents = _curRecipes select 0 select 1;
+
+		//found cooker
+		private _possibleCookers = createHashMap;//<hashUser,count>
+		private _possibleCookersPtr = createhashMap;//<hashUser,ptr>
+		private _pUsr = null;
+		private _hashUsr = null;
+		{
+			{
+				_pUsr = callFunc(_x select 0,getLastTouched);
+				_hashUsr = getVar(_pUsr,pointer);
+				if !(_hashUsr in _possibleCookers) then {
+					_possibleCookers set [_hashUsr,0];
+					_possibleCookersPtr set [_hashUsr,_pUsr];
+				};
+
+				_possibleCookers set [_hashUsr,(_possibleCookers get _hashUsr) + 1];
+			} foreach (_x getv(_foundItems));
+		} foreach _leftComponents;
+
+		_possibleCookers = _possibleCookers toArray false;
+		_possibleCookers = [_possibleCookers,{_x select 1}] call sortBy;
+		
+		if (count _possibleCookers == 0) exitWith {
+			setLastError("Possible cookers is empty");
+		};
+
+		//save cooker
+		private _cooker = _possibleCookersPtr get (_possibleCookers select 0 select 0);
+		_sysObj setv(usr,_cooker);
+
+		private _allPoses = [];
+		//use components and calculate tempobject pos
+		{
+			{
+				_allPoses pushBack callFunc(_x select 0,getPos);
+			} foreach (_x getv(_foundItems));
+
+			_x callv(onComponentUsed); //use component
+		} foreach _leftComponents;
+		//create temp cooking
+		private _midPos = [_allPoses] call getPosListCenter;
+		if equals(_midPos,vec3(0,0,0)) then {_midPos = callFunc(self getv(src),getPos)};
+
+		_position = _midPos;
+	};
+
 	if isNullVar(_recipe) exitWith {false};
 
 	 
