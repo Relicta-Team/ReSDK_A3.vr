@@ -36,6 +36,8 @@ struct(LootTemplate)
 	{
 		params ["_type","_path","_cfgData"];
 
+		private __GLOBAL_FLAG_CURRENT_LOOT__ = self;
+
 		self setv(type,_type);
 		self setv(path,_path);
 
@@ -123,6 +125,59 @@ struct(LootTemplate)
 		/*===================================
 					Items work
 		===================================*/
+		
+		//handle item extensions
+		private _itAppender = createHashMap;
+		private _toRemoveKeys = [];
+		private _itAppenderRegexPattern = "\(\s*\d+\s*\-\s*\d+\s*\)";
+		{
+			if ([_x,_itAppenderRegexPattern] call regex_isMatch) then {
+				private _repl = [_x,_itAppenderRegexPattern] call regex_getFirstMatch;
+				private _numbers = _repl splitString "()- ";
+				if (count _numbers != 2) exitWith {
+					setLastError("Counter pattern error (wrong pattern): " + (str self));
+				};
+
+				private _min = parseNumberSafe(_numbers select 0);
+				private _max = parseNumberSafe(_numbers select 1);
+				if (_min > _max) then {
+					swap_lvars(_min,_max);
+				};
+				
+				private _origName = [_x,_repl,"%1"] call stringReplace;
+				private _newName = null;
+				for "_i" from _min to _max do {
+					_newName = format[_origName,_i];
+					_itAppender set [_newName,_y];
+				};
+
+				_toRemoveKeys pushBack _x;
+			};
+
+			if (_y getOrDefault ["all_types_of",false]) then {
+				private _itemData = _y;
+				_itemData deleteAt "all_types_of";
+				{
+					_itAppender set [_x,_itemData];
+				} foreach (getAllObjectsTypeOfStr(_x));
+
+				_toRemoveKeys pushBack _x;
+			};
+
+		} foreach _items;
+
+		// update item collection
+		if (count _toRemoveKeys > 0 || {count _itAppender > 0}) then {
+			{
+				_items deleteAt _x;
+			} foreach _toRemoveKeys;
+
+			{
+				_items set [_x,_y];
+			} foreach _itAppender;
+		};
+		
+		// main item list handler
 		private _itemList = [];
 		{
 			_itemList pushBack struct_newp(LootItemTemplate,_x arg _y arg self);
@@ -235,10 +290,37 @@ struct(LootTemplate)
 
 						continue;
 					};
-
-
+					
 					_objItm = callFuncParams(_obj,createItemInContainer,_itClass arg 1 arg null arg _attrMethods);
-					assert(!isNullReference(_objItm));
+					assert(!isNullVar(_objItm));
+					assert(equalTypes(_objItm,nullPtr));
+
+					if isNullReference(_objItm) then {
+						#ifdef EDITOR
+						if (!is3den && !loot_internal_catchedError) then {
+							loot_internal_catchedError = true;
+							if (["Не удалось создать предмет %1 в %2. (не вместилось по размеру или нет места)."+endl+
+							"Нажмите 'Да' чтобы телепортироваться к проблемному контейнеру."+endl+endl+
+							"Это сообщение будет подавлено при возникновении следующей ошибки",_itClass,callFunc(_obj,getClassName)] call messageBoxRet) then {
+								startAsyncInvoke
+								{
+									private _own = player getvariable "link" getvariable "owner";
+									!isNullVar(_own) && {!isNullReference(_own)}
+								},
+								{
+									player setposatl (callFunc(_this select 0,getPos))
+								},
+								[_obj],
+								30,
+								{
+									["Timeout on teleport to error container (LootTemplate)"] call messageBox
+								}
+								endAsyncInvoke
+							};
+						};
+						#endif
+						continue;
+					};
 
 					//set hp and quality
 					if !isNullVar(_qualObj) then {
@@ -275,7 +357,11 @@ struct(LootTemplate)
 
 	def(str)
 	{
-		format["%1::%2",struct_typename(self),self getv(type)]
+		private _postname = "";
+		if (self getv(name) != "") then {
+			_postname = format[" (%1)",self getv(name)];
+		};
+		format["%1::%2",struct_typename(self),self getv(type),_postname]
 	}
 
 endstruct
@@ -349,6 +435,17 @@ struct(LootItemTemplate)
 	{
 		params ["_type","_cfgData","_sourceTemplate"];
 
+		if !isImplementClass(_type) then {
+			private _errorMessage = format[
+				"Classname %1 not found %4%4Config: %2%4File path: '%3'%4",
+				_type,
+				_sourceTemplate getv(type),
+				_sourceTemplate getv(path),
+				endl
+			];
+			setLastError(_errorMessage);
+		};
+
 		private _srcHp = _sourceTemplate getv(health);
 		private _srcQuality = _sourceTemplate getv(quality);
 
@@ -380,6 +477,7 @@ struct(LootItemTemplate)
 
 endstruct
 
+//this class must be used only for Loot structs
 struct(LootTemplate_RangedValue)
 	
 	def(isRangeBased) false;
@@ -425,6 +523,12 @@ struct(LootTemplate_RangedValue)
 			self setv(minValue,_min call _precStrToInt);
 			self setv(maxValue,_max call _precStrToInt);
 			self setv(isRangeBased,true);
+			if !isNullVar(__GLOBAL_FLAG_CURRENT_LOOT__) then {
+				if ((self getv(minValue)) > (self getv(maxValue))) then {
+					__GLOBAL_FLAG_CURRENT_LOOT__ setv(__hasErrorOnCreate,true);
+					errorformat("RangedValue::init() - Min value %1 is bigger than max value %2 in template %3",self getv(minValue) arg self getv(maxValue) arg __GLOBAL_FLAG_CURRENT_LOOT__);
+				};
+			};
 		};
 	}
 endstruct

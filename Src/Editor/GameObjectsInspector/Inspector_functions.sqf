@@ -528,23 +528,63 @@ function(inspector_menuLoad)
 	
 
 	//invisible
-	if (_isSingleObject && !_isVirtualObject) then {
-		[TEXT,[50,_optimalSizeH],0,false] call _createElement;
+	if (!_isVirtualObject) then {
+		[TEXT,[100,_optimalSizeH],0,true] call _createElement;
 		{
-			_layer = [_objWorld,true] call layer_getObjectLayer;
-			if (_layer == "") then {_layer = slt+"нет"+sgt};
-			[_wid,format["<t align='left'>Слой: %1</t>",_layer]] call widgetSetText;
+			private _setKeys = createHashMap;
+			{
+				private _l = [_x,true] call layer_getObjectLayer;
+				if (_l!="") then {
+					hashSet_add(_setKeys,_l);
+				};
+			} foreach inspector_allSelectedObjects;
+
+			_pressHelper = "Нажмите ЛКМ чтобы открыть меню выбора слоя";
+			private _ltxt = "НЕ ЗАГРУЖЕНО";
+			if (count _setKeys <= 1) then {
+				_fkey = hashSet_toArray(_setKeys );
+				_ltxt = ifcheck(count _fkey == 0,"",_fkey select 0);
+				if (_ltxt == "") then {_ltxt = slt+"нет"+sgt};
+			} else {
+				_ltxt = slt+"несколько значений"+sgt;
+				modvar(_pressHelper) + "\n\nОбнаружены слои:\n" + (
+					(hashSet_toArray(_setKeys) apply {format["- %1",_x]}) joinString "\n"
+				);
+			};
+
+			_wid ctrlSetTooltip _pressHelper;
+			[_wid,format["<t align='left'>Слой: %1</t>",_ltxt]] call widgetSetText;
 		} call _setSyncValCode;
+		
+		_wid ctrlAddEventHandler ["MouseEnter",{(_this select 0) setBackgroundColor [0.4,0.4,0.4,1];}];
+		_wid ctrlAddEventHandler ["MouseExit",{(_this select 0) setBackgroundColor [0,0,0,0];}];
+		{
+			private _newLayerId = [
+				"Выберите слой",
+				format["Выберите слой, в который будут помещены объекты (%1 шт)",count inspector_allSelectedObjects],
+				[_objWorld,false] call layer_getObjectLayer
+			] call layer_openSelectLayer;
+			if (_newLayerId != -1) then {
+				
+				["Изменение слоя", format["Замена слоя для %1 объектов",count inspector_allSelectedObjects], "a3\3den\data\Cfg3DEN\History\addToLayer_ca.paa"] collect3DENHistory
+				{
+					{
+						[_x,_newLayerId] call layer_addObject;
+					} foreach inspector_allSelectedObjects;
+				};
+			};
+
+		} call _setOnPressCode;
 	};
 	
-	
-	[TEXT,[40,_optimalSizeH],50,false] call _createElement;
-	[_wid,format["<t align='right'>Видимость:</t>"]] call widgetSetText;
-	["RscCheckBox",[10,_optimalSizeH],90,true] call _createElement;
-	_wid ctrlSetTooltip "Не реализовано в текущей версии...";
-	{
-		_wid cbSetChecked (!("invisible" in _data));
-	} call _setSyncValCode;
+	//!VISIBILITY DISABLED
+	// [TEXT,[40,_optimalSizeH],50,false] call _createElement;
+	// [_wid,format["<t align='right'>Видимость:</t>"]] call widgetSetText;
+	// ["RscCheckBox",[10,_optimalSizeH],90,true] call _createElement;
+	// _wid ctrlSetTooltip "Не реализовано в текущей версии...";
+	// {
+	// 	_wid cbSetChecked (!("invisible" in _data));
+	// } call _setSyncValCode;
 	/*{
 		private _m = "";
 		if (_checked) then {

@@ -192,6 +192,7 @@ nd_loadDisplay = {
 		if isPressed(input_act_switchTwoHands) exitWith {call inventory_changeTwoHandsMode};
 		if isPressed(input_act_combatMode) exitWith {
 			if (call smd_isStunned) exitWith {};
+			if (call input_passThroughWallsProtect) exitWith {};
 			[!([player] call smd_isCombatModeEnabled)] call interact_setCombatMode;
 		};
 	}];

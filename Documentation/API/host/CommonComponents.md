@@ -592,6 +592,14 @@ Description:
 - Param: _breakArr (optional, default false)
 
 File: [host\CommonComponents\!PreInit.sqf at line 509](../../../Src/host/CommonComponents/!PreInit.sqf#L509)
+## formatLazy
+
+Type: function
+
+Description: 
+- Param: _args
+
+File: [host\CommonComponents\!PreInit.sqf at line 536](../../../Src/host/CommonComponents/!PreInit.sqf#L536)
 ## getPosListCenter
 
 Type: function
@@ -600,7 +608,7 @@ Description:
 - Param: _poses (optional, default [])
 - Param: _dummyParam
 
-File: [host\CommonComponents\!PreInit.sqf at line 525](../../../Src/host/CommonComponents/!PreInit.sqf#L525)
+File: [host\CommonComponents\!PreInit.sqf at line 551](../../../Src/host/CommonComponents/!PreInit.sqf#L551)
 ## randomRadius
 
 Type: function
@@ -609,7 +617,7 @@ Description: Специальный рандом по области. Чем б�
 - Param: _center
 - Param: _radius
 
-File: [host\CommonComponents\!PreInit.sqf at line 541](../../../Src/host/CommonComponents/!PreInit.sqf#L541)
+File: [host\CommonComponents\!PreInit.sqf at line 567](../../../Src/host/CommonComponents/!PreInit.sqf#L567)
 ## randomPosition
 
 Type: function
@@ -618,7 +626,7 @@ Description: Специальный рандом по области. Равно
 - Param: _center
 - Param: _radius
 
-File: [host\CommonComponents\!PreInit.sqf at line 547](../../../Src/host/CommonComponents/!PreInit.sqf#L547)
+File: [host\CommonComponents\!PreInit.sqf at line 573](../../../Src/host/CommonComponents/!PreInit.sqf#L573)
 ## randomGaussian
 
 Type: function
@@ -627,7 +635,7 @@ Description: Специальный рандом по области. Распр
 - Param: _center
 - Param: _radius
 
-File: [host\CommonComponents\!PreInit.sqf at line 553](../../../Src/host/CommonComponents/!PreInit.sqf#L553)
+File: [host\CommonComponents\!PreInit.sqf at line 579](../../../Src/host/CommonComponents/!PreInit.sqf#L579)
 ## fileExists_Node
 
 Type: function
@@ -635,7 +643,7 @@ Type: function
 Description: 
 - Param: _f
 
-File: [host\CommonComponents\!PreInit.sqf at line 558](../../../Src/host/CommonComponents/!PreInit.sqf#L558)
+File: [host\CommonComponents\!PreInit.sqf at line 584](../../../Src/host/CommonComponents/!PreInit.sqf#L584)
 ## fileLoad_Node
 
 Type: function
@@ -644,7 +652,7 @@ Description:
 - Param: _f
 - Param: _doPreprocess (optional, default false)
 
-File: [host\CommonComponents\!PreInit.sqf at line 563](../../../Src/host/CommonComponents/!PreInit.sqf#L563)
+File: [host\CommonComponents\!PreInit.sqf at line 589](../../../Src/host/CommonComponents/!PreInit.sqf#L589)
 # Algorithm.sqf
 
 ## allOf

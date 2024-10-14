@@ -16,10 +16,31 @@ function(widget_winapi_openTextBox)
 	private _result = ["OOPBuilder","textbox",[_header,_desc,_canMultiLine,_baseText,_maxlen],true] call rescript_callCommand;
 	//setMousePosition _cachedMousePos;
 	if (_result != "$CLOSED$") exitWith {
+		
+		private _etok = [_result] call widget_winapi_internal_validateByteCount;
+		if (_etok != "") exitWith {
+			["Символ '%1' не входит в допустимый диапазон. Уберите его из текста",_etok] call messageBox;
+			false
+		};
+		
 		refset(_refOut,_result);
 		true
 	};
 	false
+}
+
+function(widget_winapi_internal_validateByteCount)
+{
+	params ["_data"];
+	forceUnicode 0;
+	private _bytes = toArray _data;
+	private _errorToken = "";
+	{
+		if (_x > 8000) exitWith {
+			_errorToken = toString [_x];
+		};
+	} foreach _bytes;
+	_errorToken
 }
 
 function(widget_winapi_openTreeView)

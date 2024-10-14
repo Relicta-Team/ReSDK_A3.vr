@@ -120,17 +120,17 @@ function(pertest_drawChunkSquad)
 	_basicPos set [2,(_basicPos select 2)+(_forEachIndex * 0.1)];
 	drawIcon3D ["", _color, _basicPos, 0.5, 0.5, 0,_tRender,1, 0.03, "TahomaB"];
 	_upside = _size;
-
-	drawLine3D [_linePos,_linePos vectorAdd [_size,0,0],_color];
-	drawLine3D [_linePos,_linePos vectorAdd [0,_size,0],_color];
-	drawLine3D [_linePos vectorAdd [_size,_size,0],_linePos vectorAdd [_size,0,0],_color];
-	drawLine3D [_linePos vectorAdd [_size,_size,0],_linePos vectorAdd [0,_size,0],_color];
+	_wdt = [10,20,50] select _type;
+	drawLine3D [_linePos,_linePos vectorAdd [_size,0,0],_color,_wdt];
+	drawLine3D [_linePos,_linePos vectorAdd [0,_size,0],_color,_wdt];
+	drawLine3D [_linePos vectorAdd [_size,_size,0],_linePos vectorAdd [_size,0,0],_color,_wdt];
+	drawLine3D [_linePos vectorAdd [_size,_size,0],_linePos vectorAdd [0,_size,0],_color,_wdt];
 	//to up
 	
-	drawLine3D [_linePos vectorAdd [0,0,0],_linePos vectorAdd [0,0,_upside],_color];
-	drawLine3D [_linePos vectorAdd [_size,0,0],_linePos vectorAdd [_size,0,_upside],_color];
-	drawLine3D [_linePos vectorAdd [0,_size,0],_linePos vectorAdd [0,_size,_upside],_color];
-	drawLine3D [_linePos vectorAdd [_size,_size,0],_linePos vectorAdd [_size,_size,_upside],_color];
+	drawLine3D [_linePos vectorAdd [0,0,0],_linePos vectorAdd [0,0,_upside],_color,_wdt];
+	drawLine3D [_linePos vectorAdd [_size,0,0],_linePos vectorAdd [_size,0,_upside],_color,_wdt];
+	drawLine3D [_linePos vectorAdd [0,_size,0],_linePos vectorAdd [0,_size,_upside],_color,_wdt];
+	drawLine3D [_linePos vectorAdd [_size,_size,0],_linePos vectorAdd [_size,_size,_upside],_color,_wdt];
 	
 }
 

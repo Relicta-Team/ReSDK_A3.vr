@@ -1,0 +1,128 @@
+TrashCan: &TrashCan_base
+  name: Мусор для помоек
+  health: {min: 10%, max: 35%}
+  quality: {min: 10%, max: 35%}
+  pass_count: {min: 2, max: 4}
+
+#Tier1
+TrashCan_tier1:
+  <<: *TrashCan_base
+  items: &TrashCan_tier1
+    Paper:
+      prob: 4%
+    GlassBottle:
+      prob: 4%
+    ClothDebris1:
+      prob: 4%
+    ClothDebris2:
+      prob: 4%
+    SmallStone:
+      prob: 4%
+    WoodenDebris6:
+      prob: 4%
+    WoodenDebris7:
+      prob: 4%
+    Rag:
+      prob: 4%
+    Bone:
+      prob: 4%
+
+#Tier2
+TrashCan_tier2:
+  <<: *TrashCan_base
+  pass_count: {min: 1, max: 3}  
+  items: &TrashCan_tier2
+    MetalDebris1:
+      prob: 3%
+    MetalDebris2:
+      prob: 3%
+    OrganicDebris1:
+      prob: 3%
+    SyntDebris1:
+      prob: 3%
+    Tooth:
+      prob: 3%
+
+#Tier3
+TrashCan_tier3:
+  <<: *TrashCan_base
+  pass_count: {min: 1, max: 2}  
+  items: &TrashCan_tier3
+    Syringe:
+      prob: 2%
+    TorchDisabled:
+      prob: 2%
+    SoupPlate:
+      prob: 2%
+    OlderWoodenCup:
+      prob: 2%
+    BulletCaseShotgun:
+      prob: 2%
+    BulletCasePBM:
+      prob: 2%      
+
+#Tier4
+TrashCan_tier4:
+  <<: *TrashCan_base
+  pass_count: {min: 0, max: 2}
+  items: &TrashCan_tier4
+    Zvak:
+      prob: 1%
+    Melteshonok:
+      prob: 1%
+    Castoffs1:
+      prob: 1%
+    Castoffs2:
+      prob: 1%
+    BrownBandannaMask:
+      prob: 1%
+    BreadChopped:
+      prob: 1%      
+      
+#Presets
+#Full config
+TrashCan_all:
+  <<: *TrashCan_base
+  items:
+    <<: *TrashCan_tier1
+    <<: *TrashCan_tier2
+    <<: *TrashCan_tier3
+    <<: *TrashCan_tier4
+
+#Tier1-2
+TrashCan_tier1_2:
+  <<: *TrashCan_base
+  items:
+    <<: *TrashCan_tier1
+    <<: *TrashCan_tier2
+
+#Tier1-2-3
+TrashCan_tier1_2_3:
+  <<: *TrashCan_base
+  items:
+    <<: *TrashCan_tier1
+    <<: *TrashCan_tier2
+    <<: *TrashCan_tier3
+
+#Tier2-3
+TrashCan_tier2_3:
+  <<: *TrashCan_base
+  items:
+    <<: *TrashCan_tier2
+    <<: *TrashCan_tier3
+
+#Tier3-4
+TrashCan_tier3_4:
+  <<: *TrashCan_base
+  items:
+    <<: *TrashCan_tier3
+    <<: *TrashCan_tier4
+
+#Tier2-3-4
+TrashCan_tier2_3_4:
+  <<: *TrashCan_base
+  items:
+    <<: *TrashCan_tier2
+    <<: *TrashCan_tier3
+    <<: *TrashCan_tier4
+

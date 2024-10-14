@@ -72,14 +72,6 @@ inventory_onVisualPreviewObject = {
 		resetBackgrounDragSlot
 	};
 	
-	private _angle = (getCameraViewDirection player) select 2;
-	
-	private _maxDist = if (_angle < MAX_ONMOUSECURSOR_DROP_ANGLE) then {
-		AGLToASL (screenToWorld getMousePosition);
-	} else {
-		AGLToASL (positionCameraToWorld [0,0,PUTDOWN_RADIUS])
-	};
-	
 	(_visObj call interact_getMouseIntersectData) params ["_targ","_pos","_vecup"];
 	
 	if equals(_targ,objNUll) exitWith {
