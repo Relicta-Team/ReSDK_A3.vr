@@ -43,7 +43,7 @@ craft_loadCateg_lastLoadingTime = 0;
 
 craft_open = {
 	__nextframedata_ = _this;
-	params ["_visibleCat","_listRecipes"];
+	params ["_visibleCat","_listRecipes",["_onlyPreview",false]];
 	if (count _visibleCat == 0) exitWith {
 		error("craft::open() - visible categories list empty");
 	};	
@@ -117,18 +117,20 @@ craft_open = {
 	setRecipeInfoWidget(_info);
 	
 	//creating craft button
-	_btsize = 100 - _leftsize;
-	_bt = [_d,BUTTONMENU,[_leftsize + 5,75,_btsize - 10,15],_ctg] call createWidget;
-	_bt ctrlSetText "Создать";
-	setCraftButton(_bt);
-	[false] call craft_setActiveCraftButton;
-	_bt ctrlAddEventHandler ["MouseButtonUp",{
-		params ["_ct","_bt"];
-		if (_bt == MOUSE_LEFT) then {
-			call craft_onPressCraft;
-			nextFrame(craft_close);
-		};
-	}];
+	if (!_onlyPreview) then {
+		_btsize = 100 - _leftsize;
+		_bt = [_d,BUTTONMENU,[_leftsize + 5,75,_btsize - 10,15],_ctg] call createWidget;
+		_bt ctrlSetText "Создать";
+		setCraftButton(_bt);
+		[false] call craft_setActiveCraftButton;
+		_bt ctrlAddEventHandler ["MouseButtonUp",{
+			params ["_ct","_bt"];
+			if (_bt == MOUSE_LEFT) then {
+				call craft_onPressCraft;
+				nextFrame(craft_close);
+			};
+		}];
+	};
 	
 	// load first category
 	[_visibleCat select 0,_listRecipes] call craft_onLoadCategory;

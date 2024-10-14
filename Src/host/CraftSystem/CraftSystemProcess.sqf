@@ -4,7 +4,7 @@
 // ======================================================
 
 csys_requestOpenMenu = {
-	params ["_objSrc","_usr"];
+	params ["_objSrc","_usr",["_onlyPreviewMode",false]];
 	
 	//if !callFunc(_objSrc,canUseAsCraftSpace) exitWith {};
 	private _allowedCateg = CRAFT_CONST_CATEGORY_LIST_IDS;
@@ -18,6 +18,9 @@ csys_requestOpenMenu = {
 		_allowedCateg,
 		[_allowedCateg select 0,_usr] call csys_getRecipesForUser
 	];
+	if (_onlyPreviewMode) then {
+		_data pushBack true;
+	};
 	
 	callFuncParams(_usr,sendInfo,"openCraftMenu" arg _data);	
 };

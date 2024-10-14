@@ -171,7 +171,9 @@ VERB(craft_here)
 		skipCond(!isTypeOf(usr,Mob));
 		skipCond(getVar(usr,isCombatModeEnable));
 	act
-		[src,usr] call csys_requestOpenMenu;
+		[src,usr,!isNull(getSelf(craftComponent))] call csys_requestOpenMenu;
+	name
+		if !isNull(getSelf(craftComponent)) exitWith {setName("Вспомнить рецепты")};
 ENDVERB
 
 VERB(twohands)
