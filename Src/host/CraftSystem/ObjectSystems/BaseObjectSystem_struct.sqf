@@ -27,14 +27,20 @@
 #include "..\..\text.hpp"
 #include "..\..\GameObjects\GameConstants.hpp"
 
+//контроллер систем
 struct(SystemControllerCrafts)
 	def_null(_components) //содержит списки обновляемых систем
 	def(systemType) ""
 
+	def(str)
+	{
+		format["Controller_%1 %2",self getv(systemType),(self getv(_components)) apply {str _x}];
+	}
+
 	def(init)
 	{
 		params ["_stype"];
-
+		self setv(systemType,_stype);
 		self setv(_components,[])
 	}
 	//добавление процессора системы в контроллер
@@ -145,23 +151,55 @@ struct(BaseCraftSystem)
 	//get possible recipes based on ingredients
 	def(_getRecipes)
 	{
+		params ["_objList"];
 		private _recipes = [];
 		private _cls = null;
-		
+		private _myClassname = struct_typename(self);
+		private _validateSysSpec = null;
 		{
 			_cls = tolower callFunc(_x,getClassName);
 			if (_cls in csys_map_allSystemCrafts) then {
-				_recipes pushBack (csys_map_allSystemCrafts get _cls);
+				//only unique returns
+				{
+					_validateSysSpec = _x getv(systemSpecific);
+					traceformat("Validate recipe %2 is %1",_validateSysSpec arg _myClassname)
+					if (_validateSysSpec==_myClassname) then {
+						_recipes pushBackUnique _x;
+					};
+
+					;false
+				} count (csys_map_allSystemCrafts get _cls);
 			};
-		} foreach (self getv(_ingredients));
+		} foreach _objList;
 		
 		_recipes
+	}
+	
+	def(toString)
+	{
+		format["CraftSystem::%1(%2)",struct_typename(self),self getv(systemType)];
+	}
+
+	def(str)
+	{
+		self callv(toString)
 	}
 
 endstruct
 
+/* 
+	Основной интерфейс для внутренних систем
+	Внутренние системы выполняются по нажатию пользователя
+*/
 struct(BaseInternalCraftSystem) base(BaseCraftSystem)
 	
+	def(toString)
+	{
+		format["InternalSystem::%1(%2)",struct_typename(self),self getv(systemType)];
+	}
+
+	def(canUpdate) { false }
+
 	//called on user perform action
 	def(onActivate)
 	{
@@ -190,5 +228,26 @@ struct(BaseInternalCraftSystem) base(BaseCraftSystem)
 endstruct
 
 struct(BaseWorldProcessorCraftSystem) base(BaseCraftSystem)
+	
+	def(toString)
+	{
+		format["WorldProc::%1(%2)",struct_typename(self),self getv(systemType)];
+	}
+	
+	
+	//life cycle
+	def(process) {}
+
+
+	//utility functions
+
+	//get near objects
+	def(getObjects)
+	{
+		params ["_type",["_distance",5]];
+		[_type,callFunc(self getv(src),getPos),_distance,true,true] call getGameObjectOnPosition;
+	}
+
+	def(isInWorld) { callFunc(self getv(src),isInWorld) }
 
 endstruct

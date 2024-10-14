@@ -70,6 +70,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 	//последний владелец который брал предмет
 	editor_attribute("InternalImpl")
 	var(lastAttLoc,vec2(nullPtr,ATTACK_TYPE_SWING));
+	getter_func(getLastTouched,getSelf(lastAttLoc) select 0); //кто последний трогал предмет
 	getter_func(getAttacksTypeAssoc,ATTACK_TYPE_ASSOC_SWING_ONLY);
 
 	//проигрывает звук из категории

@@ -34,6 +34,7 @@
     class: WoodenSmallFence
 
 - type: system
+  system_specific: RandomName___
   required:
     components:
       - class: IFoodItem
@@ -69,3 +70,19 @@
     modifiers:
       - name: set_name
         value: "Грибная ебала"
+
+- name: Пирог
+  type: system
+  system_specific: FryingPanSystem
+  required:
+    force_visible: true
+    skills:
+      cooking: 1
+    components:
+      - class: Testo
+        count: 2
+  result:
+    class: Pie
+    modifiers:
+      - name: set_name
+        value: "Пирог с НАЧИНКОЙ"

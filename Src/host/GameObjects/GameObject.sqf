@@ -224,6 +224,7 @@ class(GameObject) extends(ManagedObject)
 	" node_met
 	getterconst_func(isSeat,false); //это сиденье (стул, лавка)
 
+	//TODO remove
 	getter_func(canUseAsCraftSpace,false);//для пукнта в verb-меню (позволяет открывать крафт от этого объекта)
 	getter_func(getAllowedCraftCategories,[]); //доступные категории для крафт меню
 
@@ -1871,6 +1872,8 @@ class(IDestructible) extends(GameObject)
 	{
 		objParams();
 
+		callSelf(initCraftSystem);
+
 		private _mat = getSelf(material);
 		if equalTypes(_mat,"") then {
 			_mat = _mat call mat_getByClass;
@@ -2153,6 +2156,8 @@ class(IDestructible) extends(GameObject)
 	};
 
 region(Fire functionality)
+	//Временное решение чтобы при готовке не загорался предмет
+	var(_lockedCanIgnite,false); //внешнее блокирование пожара
 
 	getter_func(canIgniteArea,false); //может ли этот источник поджечь свой чанк
 	//доп проверка на возгорание объекта. например можно настроить, чтобы источником был маленький предмет
@@ -2529,6 +2534,26 @@ region(Pulling functionality)
 		
 		callFuncParams(_dynDisp,openNDisplayInternal,_usr arg getVar(_usr,owner));
 	};
+
+region(Craft system)
+	
+	//кто последний дотрагивался до предмета
+	getter_func(getLastTouched,nullPtr);
+
+	var(craftComponentName,null); //система крафта (строка или null)
+	var(craftComponent,null);
+
+	func(initCraftSystem)
+	{
+		objParams();
+		private _craftComp = getSelf(craftComponentName);
+		if !isNullVar(_craftComp) then {
+			assert_str(struct_existType_str(_craftComp),format vec3("Craft component %1 not found in class %2",_craftComp,callSelf(getClassName)));
+			private _comp = [_craftComp,[this]] call struct_alloc;
+			setSelf(craftComponent,_comp);
+		};
+	};
+
 
 	// "
 	// 	name:Установка света

@@ -212,13 +212,22 @@ csys_internal_loadCfgSegment = {
 
 	GETVAL_STR(_data, vec2("system_specific",""));
 	FAIL_CHECK_PRINT;
-	if (value != "" && {!(_sobj callv(canApplySystemSpecific))}) exitWith {
-		["Type %1 cannot contain system specific (required 'type: system')",_type] call csys_errorMessage;
-		false
-	};
+	private _err = false;
+	private _canUseSysSpec = _sobj callv(canApplySystemSpecific);
 	if (value != "") then {
+		if (!_canUseSysSpec) then {
+			_err = true;
+			["Item %1 (%2) cannot contain system specific (required 'system_specific')",csys_internal_configNumber,csys_internal_lastLoadedFile] call csys_errorMessage;
+		};
 		_sobj setv(systemSpecific,value);
+	} else {
+		if (_canUseSysSpec) then {
+			_err = true;
+			["Item %1 (%2) must contain system specific (required 'system_specific')",csys_internal_configNumber,csys_internal_lastLoadedFile] call csys_errorMessage;
+		};
 	};
+	if (_err) exitWith {false};
+	
 
 	// ----------------------- requirements check -----------------------
 	GETVAL_DICT(_data, "required");
@@ -400,7 +409,7 @@ csys_const_alllowRegex = (csys_const_regexFunc+"|"+csys_const_regexField+"|"+csy
 csys_list_systemControllers = []; //SystemControllerCrafts  системы зарегистрированы здесь
 csys_map_systemControllersIndexes = createhashMap; //k<int>, v<SystemControllerCrafts>
 
-//get or register craft system controller
+//get or register craft system controller (SystemControllerCrafts)
 csys_getSystemController = {
 	params ["_sysname"];
 	if (_sysname in csys_map_systemControllersIndexes) then {
@@ -408,8 +417,8 @@ csys_getSystemController = {
 		csys_list_systemControllers select _index
 	} else {
 		private _sysObj = struct_newp(SystemControllerCrafts,_sysname);
-		csys_list_systemControllers pushBack _sysObj;
-		csys_map_systemControllersIndexes set [_sysname,_sysObj];
+		private _indSys = csys_list_systemControllers pushBack _sysObj;
+		csys_map_systemControllersIndexes set [_sysname,_indSys];
 		_sysObj
 	};
 };

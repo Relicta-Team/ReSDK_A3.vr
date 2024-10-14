@@ -86,7 +86,7 @@ csys_tryCraft_internal = {
 	//sort by distance
 	_objList = [_objList,{callFunc(_x,getPos) distance _eps}] call sortBy;
 
-	private _refDict = csys_map_allCraftRefs;
+	//private _refDict = csys_map_allCraftRefs; //this not used
 	private _leftComponents = array_copy(_robj getv(components)) apply {_x callv(createIngredientTempValidator)};
 	private _classname = null;
 	private _objIngredient = null;
