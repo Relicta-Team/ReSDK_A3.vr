@@ -81,7 +81,8 @@ csys_init = {
 	} foreach _files;
 
 	if (_errored) exitWith {
-		assert_str(false,_erroredString);
+		//assert_str(false,_erroredString);
+		error(_erroredString);
 		setLastError(_erroredString);
 	};
 
