@@ -603,10 +603,37 @@ fileExists_Node = {
 	FileExists _f
 };
 
-//TODO optimize and refactoring
 // _mode == true -> asc, false -> desc: [[20,2,5],{_x}] call sortBy;
-sortBy = { params ["_list","_algorithm",["_mode",true]]; [_list,[],_algorithm,ifcheck(_mode,"ASCEND","DESCEND")] call BIS_fnc_sortBy};
-nearNumber = compile toString BIS_fnc_nearestNum;
+sortBy = {
+	params ["_list","_algorithm",["_modeIsAscend",true]];
+
+	private _cnt = 0;
+	private _inputArray = _list apply 
+	{
+		_cnt = _cnt + 1; 
+		[_x call _algorithm, _cnt, _x]
+	};
+
+	_inputArray sort _modeIsAscend;
+	_inputArray apply {_x select 2}
+	
+};
+
+//find nearest number in array of numbers
+nearNumber = {
+	params ["_arr","_num"];
+	_arr = _arr + [_num];
+	_arr sort true;
+
+	private _i = _arr find _num;
+	private _max = _arr deleteAt (_i + 1);
+	private _min = _arr deleteAt (_i - 1);
+
+	if (isNil "_min") exitWith {_max};
+	if (isNil "_max") exitWith {_min};
+
+	[_min, _max] select (_num - _min > _max - _num)
+};
 
 fileLoad_Node = {
 	params ["_f",["_doPreprocess",false]];
