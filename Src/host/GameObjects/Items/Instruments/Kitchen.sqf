@@ -28,6 +28,7 @@ class(FryingPan) extends(Item)
 	var(size,ITEM_SIZE_MEDIUM);
 	var(model,"ml_exodusnew\skovoroda.p3d");//"relicta_models\models\interier\props\kitchen\pan.p3d"
 	var(material,"MatMetal");
+	getter_func(getDropSound,"dropping\potspans_" + (str randInt(1,4)));
 	var(dr,2);
 
 	var(craftComponentName,"FryingPanSystem");
@@ -38,6 +39,7 @@ class(Polovnik) extends(Item)
 	var(name,"Половник");
 	var(model,"relicta_models\models\interier\props\kitchen\ladle.p3d");
 	var(material,"MatMetal");
+	getter_func(getDropSound,"dropping\potspans_" + (str randInt(1,4)));
 	var(size,ITEM_SIZE_MEDIUM);
 	var(weight,gramm(140));
 	var(dr,2);
