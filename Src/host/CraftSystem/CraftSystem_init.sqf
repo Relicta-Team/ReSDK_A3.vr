@@ -57,7 +57,7 @@ csys_init = {
 		csys_map_storage set [_foreachindex,[]];
 	} foreach CRAFT_CONST_CATEGORY_LIST_SYS_NAMES;
 
-	//csys_systemController_handleUpdate = startUpdate(csys_systemController_onUpdate,1);
+	csys_systemController_handleUpdate = startUpdate(csys_systemController_onUpdate,1);
 
 
 	//collecting all files and load into buffer

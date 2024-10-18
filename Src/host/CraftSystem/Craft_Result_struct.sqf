@@ -36,10 +36,10 @@ struct(CraftRecipeResult)
 		private _usr = _craftCtx get "user";
 		private _robj = _craftCtx get "recipe";
 
-		private _realPos = [_pos,self getv(radius)] call randomRadius;
 		private _class = self getv(class);
 		if !isNullVar(_class) then {
 			for "_i" from 1 to (self getv(count) callv(getValue)) do {
+				private _realPos = [_pos,self getv(radius)] call randomRadius;
 				private _newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
 				
 				//apply modifiers to created object
@@ -82,9 +82,9 @@ struct(CraftRecipeInteractResult) base(CraftRecipeResult)
 		private _robj = _craftCtx get "recipe";
 		private _newObj = nullPtr;
 
-		private _realPos = [_pos,self getv(radius)] call randomRadius;
 		private _class = self getv(class);
 		if !isNullVar(_class) then {
+			private _realPos = [_pos,self getv(radius)] call randomRadius;
 			_newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
 
 			//apply modifiers to created object
@@ -119,4 +119,33 @@ struct(CraftRecipeInteractResult) base(CraftRecipeResult)
 		
 	}
 
+endstruct
+
+struct(CraftRecipeSystemResult) base(CraftRecipeResult)
+	def(radius) 0.01;
+
+	def(onCrafted)
+	{
+		params ["_craftCtx"];
+		
+		private _pos = _craftCtx get "position";
+		private _dir = _craftCtx get "direction";
+		private _usr = _craftCtx get "user";
+		private _robj = _craftCtx get "recipe";
+
+		private _class = self getv(class);
+		if !isNullVar(_class) then {
+			for "_i" from 1 to (self getv(count) callv(getValue)) do {
+				private _realPos = [_pos,self getv(radius)] call randomRadius;
+				private _newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
+				
+				//apply modifiers to created object
+				private _modCtxList = _craftCtx get "modifier_context_list";
+				{
+					_x callp(onApply,_newObj arg _usr arg _modCtxList select _foreachIndex);
+				} foreach (self getv(modifiers));
+			};
+		};
+		
+	}
 endstruct

@@ -30,6 +30,7 @@ struct(ICraftRecipeBase)
 	def(hasPreviewCraft) { (self getv(c_type)) == "building" }
 
 	def(isInteractCraft) { (self getv(c_type))=="interact" }
+	def(isSystemCraft) { (self getv(c_type))=="system" }
 
 	def(sourceFile) "";
 	def(sourceItem) -1;
@@ -69,7 +70,7 @@ struct(ICraftRecipeBase)
 	def(forceVisible) false; //видимость рецепта при нехватке навыков
 	def(skills) null; //hashmap of skills with values
 	def(components) null; //dict of components
-	def(result) null; //CraftRecipeResult|CraftRecipeInteractResult
+	def(result) null; //CraftRecipeResult|CraftRecipeInteractResult|CraftRecipeSystemResult
 
 	//обработка требований
 	def(_parseRequired)
@@ -321,8 +322,17 @@ struct(ICraftRecipeBase)
 		FAIL_CHECK_REFSET(_refResult);
 
 		private _isInteractCraft = self callv(isInteractCraft);
-
-		private _robj = ifcheck(_isInteractCraft,struct_newp(CraftRecipeInteractResult,_class arg value),struct_newp(CraftRecipeResult,_class arg value));
+		private _robj = null;
+		call {
+			if (_isInteractCraft) exitwith {
+				_robj = struct_newp(CraftRecipeInteractResult,_class arg value);
+			};
+			if (self callv(isSystemCraft)) exitWith {
+				_robj = struct_newp(CraftRecipeSystemResult,_class arg value);
+			};
+			_robj = struct_newp(CraftRecipeResult,_class arg value);
+		};
+		
 		self setv(result,_robj);
 
 		if (self getv(__canGetNameFromResult)) then {

@@ -27,8 +27,7 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 	def_null(campfireTransform) //CraftSerializedTransform
 	def_null(sourceTransform) //CraftSerializedTransform
 	def_null(tempObjectTransform) //CraftSerializedTransform
-	def_null(craftResult) //CraftRecipeResult
-	def_null(craftResultCtx);//hashmap
+
 	def(processTimeLeft) 0
 
 	def(toString)
@@ -104,113 +103,19 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 		};
 
 		private _pos = callFunc(self getv(src),getPos);
-		private _objList = ["IDestructible",_pos,self getv(collectDistance),true,true] call getGameObjectOnPosition;
-		//sort by distance, removing source
-		_objList = [_objList - [self getv(src)],{callFunc(_x,getPos) distance _pos}] call sortBy;
+		private _objList = self callp(getObjects,"IDestructible" arg self getv(collectDistance));
 		
 		debugformat("frypan: near objects: %1",_objList)
+		//save context
+		if ([null,_objList,self] call csys_processCraftMain) then {
+			self setv(procStage,2);
 
-		//define possible recipes
-		private _possibleRecipes = self callp(_getRecipes,_objList);
-		debugformat("Possible recipes: %1",_possibleRecipes)
-		
-		//check recipes
-		private _curRecipes = []; //vec2(recipe,components)
-		
-		{
-			private _robj = _x;
-			private _leftComponents = array_copy(_robj getv(components)) apply {_x callv(createIngredientTempValidator)};
-
-			{
-				private _objIngredient = _x;
-				{
-					//skips ready
-					if (_x callv(isReadyIngredient)) then {continue};
-
-					if (_x callp(isValidIngredient,_objIngredient)) exitWith {
-						_x callp(handleValidIngredient,_objIngredient);
-					};
-				} foreach _leftComponents;
-			} foreach _objList;
-
-			private _canCraft = all_of(_leftComponents apply {_x callv(canCraftFromIngredient)});
-			if (_canCraft) then {
-				_curRecipes pushBack [_robj,_leftComponents];
-			};
-
-		} foreach _possibleRecipes;
-		assert_str(count _curRecipes <= 1,format vec3("Too many possible recipes (%2): %1",_curRecipes apply {_x select 1},count _curRecipes));
-
-		if (count _curRecipes == 0) exitWith {
-			//not found recipe	
+			private _tempItem = ["OrganicDebris1",self getv(craftContext) get "position"] call createGameObjectInWorld;
+			setVar(_tempItem,_lockedCanIgnite,true);
+			self setv(tempObjectTransform,struct_newp(CraftSerializedTransform,_tempItem));
+			//allocate time
+			self setv(processTimeLeft,10);
 		};
-
-		private _robj = _curRecipes select 0 select 0;
-		private _leftComponents = _curRecipes select 0 select 1;
-
-		//found cooker
-		private _possibleCookers = createHashMap;//<hashUser,count>
-		private _possibleCookersPtr = createhashMap;//<hashUser,ptr>
-		private _pUsr = null;
-		private _hashUsr = null;
-		{
-			{
-				_pUsr = callFunc(_x select 0,getLastTouched);
-				_hashUsr = getVar(_pUsr,pointer);
-				if !(_hashUsr in _possibleCookers) then {
-					_possibleCookers set [_hashUsr,0];
-					_possibleCookersPtr set [_hashUsr,_pUsr];
-				};
-
-				_possibleCookers set [_hashUsr,(_possibleCookers get _hashUsr) + 1];
-			} foreach (_x getv(_foundItems));
-		} foreach _leftComponents;
-
-		_possibleCookers = _possibleCookers toArray false;
-		_possibleCookers = [_possibleCookers,{_x select 1}] call sortBy;
-		debugformat("frypan: possible cookers: %1",_possibleCookers)
-		if (count _possibleCookers == 0) exitWith {
-			setLastError("Possible cookers is empty");
-		};
-
-		//save cooker
-		private _cooker = _possibleCookersPtr get (_possibleCookers select 0 select 0);
-		self setv(usr,_cooker);
-		private _refSuccess = refcreate(0);
-		private _canCraftBySkills = _robj callp(checkCraftSkills,_cooker arg _refSuccess);
-
-		private _allPoses = [];
-		//use components and calculate tempobject pos
-		{
-			{
-				_allPoses pushBack callFunc(_x select 0,getPos);
-			} foreach (_x getv(_foundItems));
-
-			_x callv(onComponentUsed); //use component
-		} foreach _leftComponents;
-		//create temp cooking
-		private _midPos = [_allPoses] call getPosListCenter;
-		if equals(_midPos,vec3(0,0,0)) then {_midPos = callFunc(self getv(src),getPos)};
-		private _tempItem = ["OrganicDebris1",_midPos] call createGameObjectInWorld;
-		setVar(_tempItem,_lockedCanIgnite,true);
-		self setv(tempObjectTransform,struct_newp(CraftSerializedTransform,_tempItem));
-		//allocate time
-		self setv(processTimeLeft,10); //TODO remove magic number (time creating)
-		self setv(procStage,2);
-
-		//set result
-		self setv(craftResult,_robj getv(result));
-		private _ctx = createHashMapFromArray [
-			["position",_midPos],
-			["user",self getv(usr)],
-			["recipe",_robj],
-			["used_skill",_refSuccess select 0],
-			["success_amount",getRollAmount(_refSuccess select 1)],
-			["roll_result",getRollType(_refSuccess select 1)],
-			["amount_3d6",getRollDiceAmount(_refSuccess select 1)],
-			["components_copy",_leftComponents]
-		];
-		self setv(craftResultCtx,_ctx);
 	}
 
 	def(processCreation)
@@ -225,13 +130,17 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 			self setv(procStage,1); //reset to find items
 		};
 		self modv(processTimeLeft, - 1);
+		debugformat("frypan: timeleft %1",self getv(processTimeLeft))
 
 		if ((self getv(processTimeLeft)) <= 0) then {
 			delete(self getv(tempObjectTransform) getv(_origObject));
 			self setv(procStage,1); //reset to found item
-			private _ctx = self getv(craftResultCtx);
-			self getv(craftResult) callp(onCrafted,_ctx);
+			debugformat("frypan: cancraft by skills: %1",self getv(craftContext) get "can_craft_by_skills")
+			self callv(processCraft);
+			
 		};
 	}
+
+	
 
 endstruct

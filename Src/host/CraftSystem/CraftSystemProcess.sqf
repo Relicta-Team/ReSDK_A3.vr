@@ -522,7 +522,6 @@ csys_processCraftMain = {
 		if (!_canCraft) exitWith _onCannotCraft;
 	};
 
-	//TODO refactoring
 	if (_isSystem) then {
 		private _sysObj = _recipeIdOrSystem;
 		private _possibleRecipes = _sysObj callp(_getRecipes,_objectColleciton);
@@ -553,40 +552,41 @@ csys_processCraftMain = {
 		} foreach _possibleRecipes;
 		assert_str(count _curRecipes <= 1,format vec3("Too many possible recipes (%2): %1",_curRecipes apply {_x select 1},count _curRecipes));
 		if (count _curRecipes == 0) exitWith {
-			RETURN(0)
+			RETURN(false)
 		};
 
 		_recipe = _curRecipes select 0 select 0;
 		_leftComponents = _curRecipes select 0 select 1;
 
 		//found cooker
-		private _possibleCookers = createHashMap;//<hashUser,count>
-		private _possibleCookersPtr = createhashMap;//<hashUser,ptr>
+		private _possibleCrafters = createHashMap;//<hashUser,count>
+		private _possibleCraftersPtr = createhashMap;//<hashUser,ptr>
 		private _pUsr = null;
 		private _hashUsr = null;
 		{
 			{
 				_pUsr = callFunc(_x select 0,getLastTouched);
 				_hashUsr = getVar(_pUsr,pointer);
-				if !(_hashUsr in _possibleCookers) then {
-					_possibleCookers set [_hashUsr,0];
-					_possibleCookersPtr set [_hashUsr,_pUsr];
+				if !(_hashUsr in _possibleCrafters) then {
+					_possibleCrafters set [_hashUsr,0];
+					_possibleCraftersPtr set [_hashUsr,_pUsr];
 				};
 
-				_possibleCookers set [_hashUsr,(_possibleCookers get _hashUsr) + 1];
+				_possibleCrafters set [_hashUsr,(_possibleCrafters get _hashUsr) + 1];
 			} foreach (_x getv(_foundItems));
 		} foreach _leftComponents;
 
-		_possibleCookers = _possibleCookers toArray false;
-		_possibleCookers = [_possibleCookers,{_x select 1}] call sortBy;
+		_possibleCrafters = _possibleCrafters toArray false;
+		_possibleCrafters = [_possibleCrafters,{_x select 1}] call sortBy;
 		
-		if (count _possibleCookers == 0) exitWith {
-			setLastError("Possible cookers is empty");
+		if (count _possibleCrafters == 0) exitWith {
+			setLastError("Possible crafters is empty");
 		};
 
 		//save cooker
-		private _cooker = _possibleCookersPtr get (_possibleCookers select 0 select 0);
-		_sysObj setv(usr,_cooker);
+		private _crafter = _possibleCraftersPtr get (_possibleCrafters select 0 select 0);
+		_sysObj setv(usr,_crafter);
+		_usr = _crafter;
 
 		private _allPoses = [];
 		//use components and calculate tempobject pos
@@ -645,6 +645,8 @@ csys_processCraftMain = {
 	// copy ingredients info structs (copy)
 	["components_copy",_leftComponents] call _addCraftContext;
 
+	["can_craft_by_skills",_canCraftBySkills] call _addCraftContext;
+
 	private _durationCheck = _recipe getv(opt_craft_duration);
 	assert(equalTypes(_durationCheck,{}));
 	private _myRta = getVar(_usr,rta);
@@ -672,11 +674,7 @@ csys_processCraftMain = {
 			RETURN(false);
 		};
 		if (!_canCraft) exitWith _onCannotCraft;
-
-		{
-			_x callv(onComponentUsed);
-		} foreach _leftComponents;
-		traceformat("CHECK SKILLS %1",_canCraftBySkills)
+		
 		if (!_canCraftBySkills) exitWith {
 			//cannot craft because lowskill
 			if isNullVar(_failHandler) exitWith {
@@ -686,6 +684,11 @@ csys_processCraftMain = {
 
 			_failHandler callp(onCatched,_recipe arg _craftContext)
 		};
+
+		//only after fail handler checks
+		{
+			_x callv(onComponentUsed);
+		} foreach _leftComponents;
 		
 		private _postPlaced = {
 			params ["_recipe","_craftContext"];
@@ -693,7 +696,7 @@ csys_processCraftMain = {
 		};
 
 		private _previewObj = _recipe callv(hasPreviewCraft);
-		traceformat("CHECK PREVIEW %1",_previewObj)
+		
 		//custom handler
 		if (_previewObj) then {
 
@@ -724,4 +727,12 @@ csys_processCraftMain = {
 		};
 		RETURN(true)
 	};
+
+	if (_isSystem) exitWith {
+		_recipeIdOrSystem callp(captureCraft,_recipe arg _craftContext arg _failHandler);
+		true
+	};
+
+	setLastError("Unknown craft type");
+	RETURN(false);
 };

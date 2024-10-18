@@ -148,6 +148,48 @@ struct(BaseCraftSystem)
 	//main processor handler. called each second
 	def(process) {}
 
+	def_null(failHandler)
+	def_null(craftContext)
+	def_null(craftRecipe)
+
+	//захват контекста при успешном крафте
+	def(captureCraft)
+	{
+		params ["_recipe","_craftCtx","_failHndl"];
+		self setv(craftRecipe,_recipe);
+		self setv(craftContext,_craftCtx);
+		self setv(failHandler,_failHndl);
+	}
+
+	//called on craft processed (jump to onCrafted or onFail). This method can be overrided but not needed
+	def(processCraft)
+	{
+		private _ctx = self getv(craftContext);
+		if (_ctx get "can_craft_by_skills" || isNull(self getv(failHandler))) then {
+			self callv(onCrafted);
+		} else {
+			self callv(onFail);
+		};
+		self setv(failHandler,null);
+		self setv(craftRecipe,null);
+		self setv(craftContext,null);
+	}
+
+	//called on successful craft
+	def(onCrafted)
+	{
+		//for get context use field craftContext
+		//for get result use craftRecipe
+		self getv(craftRecipe) getv(result) callp(onCrafted,self getv(craftContext))
+	}
+
+	//called on fail handler catched
+	def(onFail)
+	{
+		//for get context use field craftContext
+		self getv(failHandler) callp(onCatched)
+	}
+
 	//get possible recipes based on ingredients
 	def(_getRecipes)
 	{
@@ -200,11 +242,36 @@ struct(BaseInternalCraftSystem) base(BaseCraftSystem)
 
 	def(canUpdate) { false }
 
-	//called on user perform action
+	//called on user perform action (E pressing)
 	def(onActivate)
 	{
 		params ["_usr"];
 		self setv(usr,_usr);
+	}
+
+	//move functions
+	def(canMoveInItem)
+	{
+		params ["_itm"];
+		self callp(canAddIngredient,_itm)
+	}
+
+	def(canMoveOutItem)
+	{
+		params ["_itm"];
+		self callp(canRemoveIngredient,_itm)
+	}
+
+	def(onMoveInItem)
+	{
+		params ["_itm"];
+		self callp(addIngredient,_itm)
+	}
+
+	def(onMoveOutItem)
+	{
+		params ["_itm"];
+		self callp(removeIngredient,_itm)
 	}
 
 	//called on adding ingredient
@@ -212,6 +279,13 @@ struct(BaseInternalCraftSystem) base(BaseCraftSystem)
 	{
 		params ["_ingr"];
 		(self getv(_ingredients)) pushBack _ingr;
+		setVar(_ingr,loc,self getv(src));
+	}
+
+	def(removeIngredient)
+	{
+		params ["_ingr"];
+		[self getv(_ingredients),_ingr] call arrayDeleteItem;
 	}
 
 	//require user implementation
@@ -219,6 +293,12 @@ struct(BaseInternalCraftSystem) base(BaseCraftSystem)
 	{
 		params ["_ingr"];
 		false
+	}
+
+	def(canRemoveIngredient)
+	{
+		params ["_ingr"];
+		_ingr in (self getv(_ingredients));
 	}
 	
 	def(process)
@@ -244,8 +324,17 @@ struct(BaseWorldProcessorCraftSystem) base(BaseCraftSystem)
 	//get near objects
 	def(getObjects)
 	{
-		params ["_type",["_distance",5]];
-		[_type,callFunc(self getv(src),getPos),_distance,true,true] call getGameObjectOnPosition;
+		params ["_type",["_distance",5],["_excludeSelf",true],["_sortByNear",true]];
+		private _pos = callFunc(self getv(src),getPos);
+		private _oList = [_type,_pos,_distance,true,true] call getGameObjectOnPosition;
+		if (_excludeSelf) then {
+			[_oList,self getv(src)] call arrayDeleteItem;
+		};
+		if (_sortByNear) then {
+			//sort by distance, removing source
+			_oList = [_oList,{callFunc(_x,getPos) distance _pos}] call sortBy;	
+		};
+		_oList
 	}
 
 	def(isInWorld) { callFunc(self getv(src),isInWorld) }
