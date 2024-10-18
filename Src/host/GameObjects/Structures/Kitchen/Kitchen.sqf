@@ -141,6 +141,8 @@ class(BlackSmallStove) extends(ILightibleStruct)
 	var(light,LIGHT_BAKE);
 	var(lightIsEnabled,true);
 
+	var(craftComponentName,"BakingOvenSystem");
+
 	autoref var(handleUpdate,-1);//обновление метода
 	getter_func(canUseMainAction,getSelf(lightIsEnabled) && super());
 	getter_func(getMainActionName,"Затушить");

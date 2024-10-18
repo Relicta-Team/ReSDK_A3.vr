@@ -77,17 +77,24 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 				&& {callFunc(_x,isInWorld)}
 				&& {callFunc(_x,isStruct)}
 				&& {getVar(_x,lightIsEnabled)}
-			} apply {traceformat("FIRST VALIDATE %1",_x); _x} select {
+			} 
+				//apply {traceformat("FIRST VALIDATE %1",_x); _x} 
+			select {
 				//filter 
 				//если тип костёр до дистанция должна быть меньше 0.4
 				if isTypeOf(_x,Campfire) then {
-					callFuncParams(_x,getDistanceTo,_src) <= 0.4
+					//traceformat("DIST CHECK %1",callFuncParams(_x,getDistanceTo,_src))
+					callFuncParams(_x,getDistanceTo,_src) <= 0.43 && {
+						(callFunc(_x,getPos) select 2) <= (callFunc(_src,getPos) select 2)
+					}
 				} else {
 					//иначе сковорода должна лежать на печи
 					equals(_placed,_x)
 				}
 				
-			} apply {traceformat("SECOND VALIDATE %1",_x); _x};
+			} 
+				//apply {traceformat("SECOND VALIDATE %1",_x); _x}
+			;
 
 		//sortby distance [near...far]
 		private _nearList = [_itList,{callFunc(_x,getDistanceTo,_src)}] call sortBy;
@@ -117,7 +124,7 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 			self setv(procStage,0);
 		};
 
-		private _pos = callFunc(self getv(src),getPos);
+		//private _pos = callFunc(self getv(src),getPos);
 		private _objList = self callp(getObjects,"IDestructible" arg self getv(collectDistance));
 		
 		debugformat("frypan: near objects: %1",_objList)

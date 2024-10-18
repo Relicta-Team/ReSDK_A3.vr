@@ -359,14 +359,18 @@ struct(BaseWorldProcessorCraftSystem) base(BaseCraftSystem)
 	//life cycle
 	def(process) {}
 
-
 	//utility functions
 
+	//получает позицию отсчета для объектов
+	def(getObjects_getCollectPos)
+	{
+		callFunc(self getv(src),getPos)
+	}
 	//get near objects
 	def(getObjects)
 	{
 		params ["_type",["_distance",5],["_excludeSelf",true],["_sortByNear",true]];
-		private _pos = callFunc(self getv(src),getPos);
+		private _pos = self callv(getObjects_getCollectPos);
 		private _oList = [_type,_pos,_distance,true,true] call getGameObjectOnPosition;
 		if (_excludeSelf) then {
 			[_oList,self getv(src)] call arrayDeleteItem;

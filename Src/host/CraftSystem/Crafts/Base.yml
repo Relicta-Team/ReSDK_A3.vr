@@ -33,16 +33,6 @@
   result:
     class: WoodenSmallFence
 
-- type: system
-  system_specific: RandomName___
-  required:
-    components:
-      - class: IFoodItem
-        count: 1
-  result:
-    class: Bread
-    count: 1
-
 - type: interact
   required:
     components:
@@ -90,3 +80,15 @@
     modifiers:
       - name: set_name
         value: "Пирог с НАЧИНКОЙ"
+
+- type: system
+  system_specific: BakingOvenSystem
+  options:
+    craft_duration: from_skill(20,2)
+  required:
+    components:
+      - class: Testo
+        count: 2
+  result:
+    class: Bread
+    count: 1
