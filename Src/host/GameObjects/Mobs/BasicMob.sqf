@@ -1882,6 +1882,7 @@ region(Progress helpers)
 		setSelf(__doafter_context,null);
 		if isNullVar(_da_ctx__) exitWith {
 			this call (getSelf(___doafter_code));
+			setSelf(___doafter_code,null);
 		};
 		
 		private _vars = _da_ctx__ select 0;
@@ -1899,8 +1900,9 @@ region(Progress helpers)
 		_vals call (mob_static_assign_signatures get _assignSignature);
 
 		this call (getSelf(___doafter_code));
+		setSelf(___doafter_code,null);
 	};
-
+	//caching doAfter context
 	mob_static_savectx_signatures = createhashMap;
 	mob_static_assign_signatures = createhashMap;
 
