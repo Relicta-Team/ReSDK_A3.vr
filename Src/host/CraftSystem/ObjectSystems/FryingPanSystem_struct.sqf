@@ -28,6 +28,8 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 	def_null(sourceTransform) //CraftSerializedTransform
 	def_null(tempObjectTransform) //CraftSerializedTransform
 
+
+	def(weakUpdateDelay) 5
 	def(processTimeLeft) 0
 
 	def(toString)
@@ -42,7 +44,7 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 
 	def(init)
 	{
-		params ["_src"];
+		params ["_src","_paramDict"];
 		self setv(sourceTransform,struct_newp(CraftSerializedTransform,_src));
 		self setv(campfireTransform,struct_newp(CraftSerializedTransform,nullPtr));
 		self setv(tempObjectTransform,struct_newp(CraftSerializedTransform,nullPtr));
@@ -65,14 +67,27 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 
 	def(findNearCampfire)
 	{
-		private _itList = (self callp(getObjects,"IDestructible" arg 0.4))
-			//filter firelights
+		private _src = self getv(src);
+		private _placed = callFunc(_src,getObjectPlace);
+		private _itList = (self callp(getObjects,"IDestructible" arg 1.4));
+		_itList append (self callp(getObjects,"BlackSmallStove" arg 5)); //fix for fuckedup offset of small stove
+		_itList = _itList //filter firelights
 			select {
 				callFunc(_x,isFireLight)
 				&& {callFunc(_x,isInWorld)}
 				&& {callFunc(_x,isStruct)}
-			};
-		private _src = self getv(src);
+				&& {getVar(_x,lightIsEnabled)}
+			} apply {traceformat("FIRST VALIDATE %1",_x); _x} select {
+				//filter 
+				//если тип костёр до дистанция должна быть меньше 0.4
+				if isTypeOf(_x,Campfire) then {
+					callFuncParams(_x,getDistanceTo,_src) <= 0.4
+				} else {
+					//иначе сковорода должна лежать на печи
+					equals(_placed,_x)
+				}
+				
+			} apply {traceformat("SECOND VALIDATE %1",_x); _x};
 
 		//sortby distance [near...far]
 		private _nearList = [_itList,{callFunc(_x,getDistanceTo,_src)}] call sortBy;
@@ -83,7 +98,7 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 		};
 		private _near = _nearList select 0; //select first
 
-		self setv(campfireTransform,struct_newp(CraftSerializedTransform,_near));
+		self setv(campfireTransform,struct_newp(CraftSerializedTransform,_near arg ["lightIsEnabled"]));
 		self getv(sourceTransform) callv(updateTransform);
 		self setv(procStage,1);
 
@@ -109,12 +124,13 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 		//save context
 		if ([null,_objList,self] call csys_processCraftMain) then {
 			self setv(procStage,2);
+			self setv(isActiveUpdate,true);
 
 			private _tempItem = ["OrganicDebris1",self getv(craftContext) get "position"] call createGameObjectInWorld;
 			setVar(_tempItem,_lockedCanIgnite,true);
 			self setv(tempObjectTransform,struct_newp(CraftSerializedTransform,_tempItem));
 			//allocate time
-			self setv(processTimeLeft,10);
+			self setv(processTimeLeft,self getv(craftContext) get "duration");
 		};
 	}
 
@@ -122,12 +138,15 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 	{
 		if !(self getv(campfireTransform) callv(isValid)) exitWith {
 			self setv(procStage,0); //reset to find campfire
+			self setv(isActiveUpdate,false);
 		};
 		if !(self getv(sourceTransform) callv(isValid)) exitWith {
 			self setv(procStage,0);
+			self setv(isActiveUpdate,false);
 		};
 		if !(self getv(tempObjectTransform) callv(isValid)) exitWith {
 			self setv(procStage,1); //reset to find items
+			self setv(isActiveUpdate,false);
 		};
 		self modv(processTimeLeft, - 1);
 		debugformat("frypan: timeleft %1",self getv(processTimeLeft))
@@ -137,6 +156,7 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 			self setv(procStage,1); //reset to found item
 			debugformat("frypan: cancraft by skills: %1",self getv(craftContext) get "can_craft_by_skills")
 			self callv(processCraft);
+			self setv(isActiveUpdate,false);
 			
 		};
 	}

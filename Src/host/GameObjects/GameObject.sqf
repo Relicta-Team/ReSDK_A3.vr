@@ -2541,6 +2541,7 @@ region(Craft system)
 	getter_func(getLastTouched,nullPtr);
 
 	var(craftComponentName,null); //система крафта (строка или null)
+	var(craftComponentParams,null);
 	var(craftComponent,null);
 
 	func(initCraftSystem)
@@ -2549,8 +2550,47 @@ region(Craft system)
 		private _craftComp = getSelf(craftComponentName);
 		if !isNullVar(_craftComp) then {
 			assert_str(struct_existType_str(_craftComp),format vec3("Craft component %1 not found in class %2",_craftComp,callSelf(getClassName)));
-			private _comp = [_craftComp,[this]] call struct_alloc;
+			private _params = getSelf(craftComponentParams);
+			if !isNullVar(_params) then {
+				_params = createHashMapFromArray _params;
+			};
+			private _comp = [_craftComp,[this,_params]] call struct_alloc;
 			setSelf(craftComponent,_comp);
+		};
+	};
+
+	//redirects move funcs to craft component
+	func(canMoveInItem)
+	{
+		objParams_1(_item);
+		private _ccomp = getSelf(craftComponent);
+		if (isNullVar(_ccomp) || {!isinstance(_ccomp,BaseInternalCraftSystem)}) exitWith {true};
+		_ccomp callp(canMoveInItem,_item);
+	};
+
+	func(canMoveOutItem)
+	{
+		objParams_1(_item);
+		private _ccomp = getSelf(craftComponent);
+		if (isNullVar(_ccomp) || {!isinstance(_ccomp,BaseInternalCraftSystem)}) exitWith {true};
+		_ccomp callp(canMoveOutItem,_item);
+	};
+
+	func(onMoveInItem)
+	{
+		objParams_1(_item);
+		private _ccomp = getSelf(craftComponent);
+		if (!isNullVar(_ccomp) && {isinstance(_ccomp,BaseInternalCraftSystem)}) then {
+			_ccomp callp(onMoveInItem,_item);
+		};
+	};
+
+	func(onMoveOutItem)
+	{
+		objParams_1(_item);
+		private _ccomp = getSelf(craftComponent);
+		if (!isNullVar(_ccomp) && {isinstance(_ccomp,BaseInternalCraftSystem)}) then {
+			_ccomp callp(onMoveOutItem,_item);
 		};
 	};
 

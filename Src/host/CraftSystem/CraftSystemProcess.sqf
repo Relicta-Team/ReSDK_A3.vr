@@ -140,10 +140,8 @@ csys_tryCraft_internal = {
 	private _durationCheck = _robj getv(opt_craft_duration);
 	assert(equalTypes(_durationCheck,{}));
 
-	private _myRta = getVar(_usr,rta);
-	assert(!isNullVar(_myRta));
-
-	private _duration = _myRta call _durationCheck;
+	private _duration = _usr call _durationCheck;
+	assert_str(!isNullVar(_duration) && {equalTypes(_duration,0)},"Craft duration returns null or not-number -> " + str _recipe);
 
 	private _ctx = ["_robj","_leftComponents","_eps","_onCannotCraft","_usr"];
 	private _postCrafted = {
@@ -649,9 +647,18 @@ csys_processCraftMain = {
 
 	private _durationCheck = _recipe getv(opt_craft_duration);
 	assert(equalTypes(_durationCheck,{}));
-	private _myRta = getVar(_usr,rta);
-	assert(!isNullVar(_myRta));
-	private _duration = _myRta call _durationCheck;
+	assert(!isNullVar(_usr));
+	private _InternalCraftSkill = _craftContext get "used_skill";
+	if ("_" in _InternalCraftSkill) then {
+		_InternalCraftSkill = 1;
+	} else {
+		_InternalCraftSkill = callFuncReflect(_usr,"get" + _InternalCraftSkill);
+		assert(!isNullVar(_InternalCraftSkill));
+	};
+	assert(equalTypes(_InternalCraftSkill,0));
+	private _duration = _usr call _durationCheck;
+
+	["duration",_duration] call _addCraftContext;
 
 
 	private _ctx = ["_recipe","_leftComponents","_craftContext","_usr","_failHandler","_canCraftBySkills"];

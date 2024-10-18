@@ -283,7 +283,7 @@ struct(ICraftRecipeBase)
 	};
 
 	def(opt_collect_distance) 0.8
-	def(opt_craft_duration) {_this} //_this == usr.rta
+	def(opt_craft_duration) {getVar(_this,rta)} //_this == usr.rta
 
 	def(_parseOptions)
 	{
@@ -298,7 +298,13 @@ struct(ICraftRecipeBase)
 		GETVAL_STR(_req, vec2("craft_duration",null));
 		FAIL_CHECK_REFSET(_refResult);
 		if !isNullVar(value) then {
-			value = [value,"rta","_this"] call regex_replace;
+			value = [value,"rta",'getVar(_this,rta)'] call regex_replace;
+			//rnd replace
+			value = [value,"\birnd\(([^\d]*(\d+)[^\d]*(\d+)[^\d]*)\)",'randInt($2,$3)'] call regex_replace;
+			value = [value,"\brnd\(([^\d]*(\d+)[^\d]*(\d+)[^\d]*)\)","rand($2,$3)"] call regex_replace;
+			
+			value = [value,"from_skill\(([^)]*)\)","(linearconversion [1,20,_InternalCraftSkill,$1,true])"] call regex_replace;
+
 			value = compile value;
 			if !isNullVar(value) then {
 				self setv(opt_craft_duration,value);

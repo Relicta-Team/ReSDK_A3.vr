@@ -52,8 +52,16 @@ struct(SystemControllerCrafts)
 
 	def(update)
 	{
+		_tUpd = tickTime;
 		{
-			_x callv(process);
+			if (_x getv(isActiveUpdate)) then {
+				_x callv(process);
+			} else {
+				if (_tUpd >= (_x getv(__nextWeakUpdate))) then {
+					_x callv(process);
+					_x setv(__nextWeakUpdate,tickTime + (_x getv(weakUpdateDelay)));
+				};
+			};
 			false
 		} count (self getv(_components));
 	}
@@ -81,12 +89,24 @@ struct(CraftSerializedTransform)
 	def(_lastLoc) objNull
 	def(_lastPos) null
 
+	def(_options) null
+
 	def(init)
 	{
-		params ["_obj"];
+		params ["_obj","_optionFields"];
 		self setv(_origObject,_obj);
+		if !isNullVar(_optionFields) then {
+			private _dict = _optionFields createHashMapFromArray [];
+			self setv(_options,_dict);
+		};
 		self callv(updateTransform);
-		
+	}
+
+	def(str)
+	{
+		private _opts = self getv(_options);
+		_opts = if isNullVar(_opts) then {"opt_no"} else {_opts};
+		format["TransValid(%1+%2)[%3]",self getv(_origObject),_opts,self callv(isValid)];
 	}
 
 	def(updateTransform)
@@ -100,6 +120,13 @@ struct(CraftSerializedTransform)
 		} else {
 			self setv(_lastLoc,null);
 		};
+		//update options
+		if !isNull(self getv(_options)) then {
+			private _options = self getv(_options);
+			{
+				_options set [_x,getVarReflect(_obj,_x)];
+			} foreach (_options);
+		};
 	}
 
 	def(isValid)
@@ -111,11 +138,18 @@ struct(CraftSerializedTransform)
 			//check last loc
 			if not_equals(getVar(_obj,loc),self getv(_lastLoc)) exitWith {false};
 
-			if (self getv(_useWorldObject)) then {
-				equals(callFunc(_obj,getPos),self getv(_lastPos))
-			} else {
-				true //non-world object, position doesn't change
+			if (self getv(_useWorldObject) && {not_equals(callFunc(_obj,getPos),self getv(_lastPos))}) exitWith {false};
+			
+			private _valid = true;
+			if !isNull(self getv(_options)) then {
+				{
+					if not_equals(_y,getVarReflect(_obj,_x)) exitWith {
+						_valid = false;
+					};
+				} foreach (self getv(_options));
 			};
+			// all checks passed
+			_valid //non-world object, position doesn't change
 		}
 	}
 
@@ -132,10 +166,17 @@ struct(BaseCraftSystem)
 	def(_ingredients) [] //here writes ingredient list
 
 	def(canUpdate) { true } //отвечает за то будет ли обрабатываться цикл симуляции
-	
+
+	//стадия активного обновления
+	def(isActiveUpdate) false
+	//частота инактивного обновления
+	def(weakUpdateDelay) 5
+
+	def(__nextWeakUpdate) 0
+
 	def(init)
 	{
-		params ["_src"];
+		params ["_src","_paramDict"];
 		assert_str(not_equals(self getv(systemType),""),format vec2("%1 - systemType must be defined",struct_typename(self)));
 		self setv(src,_src);
 
@@ -204,7 +245,7 @@ struct(BaseCraftSystem)
 				//only unique returns
 				{
 					_validateSysSpec = _x getv(systemSpecific);
-					traceformat("Validate recipe %2 is %1",_validateSysSpec arg _myClassname)
+					//traceformat("Validate recipe %2 is %1",_validateSysSpec arg _myClassname)
 					if (_validateSysSpec==_myClassname) then {
 						_recipes pushBackUnique _x;
 					};

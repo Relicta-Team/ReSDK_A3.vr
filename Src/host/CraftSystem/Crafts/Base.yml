@@ -25,7 +25,7 @@
   type: building
   category: Building
   required:
-    #skills: { engineering: 1 }
+    skills: { engineering: 13 }
     components:
       - class: WoodenDebris(1-5)
         count: 4
@@ -83,6 +83,8 @@
     components:
       - class: Testo
         count: 2
+  options:
+    craft_duration: (rta * 2) + from_skill(30,2) + irnd(2,6)
   result:
     class: Pie
     modifiers:
