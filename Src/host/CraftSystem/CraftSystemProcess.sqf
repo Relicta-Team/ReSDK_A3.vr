@@ -16,7 +16,7 @@ csys_requestOpenMenu = {
 		getVar(_objSrc,pointer),
 		getVar(_usr,pointer),
 		_allowedCateg,
-		[_allowedCateg select 0,_usr] call csys_getRecipesForUser
+		[_allowedCateg select 0,_usr,_objSrc,_onlyPreviewMode] call csys_getRecipesForUser
 	];
 	if (_onlyPreviewMode) then {
 		_data pushBack true;
@@ -27,12 +27,12 @@ csys_requestOpenMenu = {
 
 //возвращает массив данных: vec2(recipeId,name + needs + optdesc)
 csys_getRecipesForUser = {
-	params ["_catId","_usr"];
-	private _crafts = csys_map_storage getOrDefault [_catId,[]];
+	params ["_catId","_usr","_src",["_onlyPreview",false]];
+	private _crafts = ifcheck(_onlyPreview,csys_map_systems_storage,csys_map_storage) getOrDefault [_catId,[]];
 	private _recipes = [];
 	{
 		
-		if (_x callp(canSeeRecipe,_usr)) then {
+		if (_x callp(canSeeRecipe,_usr arg _src)) then {
 			_recipes pushBack (_x callv(getRecipeMenuData));
 		};
 	} foreach _crafts;
@@ -41,10 +41,14 @@ csys_getRecipesForUser = {
 
 //запрос загрузки новой категории
 csys_requestLoadCateg = {
-	params ["_usrptr","_cat"];
+	params ["_usrptr","_srcPtr","_cat",["_isPreview",false]];
 	
 	unrefObject(this,_usrptr,errorformat("csys::tryCraft() - Mob object has no exists virtual object - %1",_usrptr); rpcSendToObject(_usrptr,"onCraftLoadCateg",["PTR_ERR"]));
-	private _list = [_cat,this] call csys_getRecipesForUser;
+
+	private _obj = pointer_get(_srcPtr);
+	if !pointer_isValidResult(_obj) exitWith {errorformat("csys::tryCraft() - target reference has no exists in pointers table - %1",_srcptr);false};
+
+	private _list = [_cat,this,_obj,_isPreview] call csys_getRecipesForUser;
 	rpcSendToObject(_usrptr,"onCraftLoadCateg",[_cat arg _list]);
 	
 }; rpcAdd("processLoadCatCraft",csys_requestLoadCateg);

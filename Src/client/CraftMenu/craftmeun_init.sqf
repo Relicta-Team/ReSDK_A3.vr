@@ -41,6 +41,9 @@ craft_lastPressedRecipeID = -1;
 craft_loadCateg_isLoading = false;
 craft_loadCateg_lastLoadingTime = 0;
 
+//режим предпросмотра рецептов (без кнопки крафта)
+craft_isPreviewOnlyMode = false;
+
 craft_open = {
 	__nextframedata_ = _this;
 	params ["_visibleCat","_listRecipes",["_onlyPreview",false]];
@@ -68,6 +71,8 @@ craft_open = {
 	craft_lastPressedRecipeID = -1;
 	craft_loadCateg_isLoading = false;
 	craft_loadCateg_lastLoadingTime = 0;
+
+	craft_isPreviewOnlyMode = _onlyPreview;
 	
 	_ctg = [_d,WIDGETGROUP_H,[50 - CRAFT_WIND_SIZE_X/2,50-CRAFT_WIND_SIZE_Y/2,CRAFT_WIND_SIZE_X,CRAFT_WIND_SIZE_Y]] call createWidget;
 	_back = [_d,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
@@ -152,7 +157,11 @@ craft_onLoadCategory = {
 		};
 		
 		craft_loadCateg_isLoading = true;
-		rpcSendToServer("processLoadCatCraft",[player arg _cat]);
+		private _data = [player,craft_cxtRpcSourcePtr,_cat];
+		if (craft_isPreviewOnlyMode) then {
+			_data pushBack true;
+		};
+		rpcSendToServer("processLoadCatCraft",_data);
 	};	
 	
 	_list = getRecipesWidget();

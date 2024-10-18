@@ -82,13 +82,25 @@
         value: "Пирог с НАЧИНКОЙ"
 
 - type: system
+  ignored: false
   system_specific: BakingOvenSystem
   options:
     craft_duration: from_skill(20,2)
   required:
+    force_visible: true
+    skills:
+      cooking: 1
     components:
       - class: Testo
         count: 2
+      - class: IFoodItem
+        name: Любая еда
+        count: 1
+        check_type_of: true
+        meta_tag: OPTIONAL_FOOD
   result:
     class: Bread
     count: 1
+    modifiers:
+      - name: set_name
+        value: "Пирог с {OPTIONAL_FOOD:name.lower}"

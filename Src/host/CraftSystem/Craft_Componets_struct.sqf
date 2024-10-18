@@ -7,12 +7,13 @@ struct(CraftRecipeComponent)
 	def(class) null;
 	def(isMultiSelector) false;
 	def(count) 1;
+	def(name) "";
 	def(hp) null; //required helath of ingredient
 	def(checkTypeOf) true;
 	def(optional) false;
 	def(destroy) true;
 	def(conditionEvent) {true};
-	def(metaTag) ""; //!reserved
+	def(metaTag) "";
 
 	//for craft processor
 	def(_getLeftCount) {
@@ -46,7 +47,11 @@ struct(CraftRecipeComponent)
 
 	def(getRequiredComponentName)
 	{
+		private _optName = self getv(name);
+
 		if (self getv(isMultiSelector)) then {
+			if not_equals(_optName,"") exitWith {_optName};
+
 			private _itms = (self getv(class)) apply {getFieldBaseValueWithMethod(_x,"name","getName")};
 			private _iListUni = [];
 			{
@@ -57,6 +62,8 @@ struct(CraftRecipeComponent)
 			private _itmsTxt = _iListUni joinString " или ";
 			_itmsTxt
 		} else {
+			if not_equals(_optName,"") exitWith {_optName};
+			
 			private _itmsTxt = getFieldBaseValueWithMethod(self getv(class),"name","getName");
 			_itmsTxt
 		}

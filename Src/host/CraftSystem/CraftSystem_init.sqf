@@ -40,6 +40,9 @@ csys_map_allSystemCrafts = createHashMap; //! В будущем можно пе�
 //глобальное хранилище крафтов по категориям, key int(id), val array<ICraftRecipeBase>
 csys_map_storage = createhashMap; 
 
+//системные крафты...
+csys_map_systems_storage = createhashMap;
+
 csys_global_counter = 1;
 csys_cat_names = CRAFT_CONST_CATEGORY_NAMES;
 csys_cat_map_sysnames = createHashMap;
@@ -55,6 +58,7 @@ csys_init = {
 	{
 		csys_cat_map_sysnames set [_x,_foreachindex];
 		csys_map_storage set [_foreachindex,[]];
+		csys_map_systems_storage set [_foreachIndex,[]];
 	} foreach CRAFT_CONST_CATEGORY_LIST_SYS_NAMES;
 
 	csys_systemController_handleUpdate = startUpdate(csys_systemController_onUpdate,1);
@@ -174,6 +178,10 @@ csys_validateType = {
 
 csys_internal_loadCfgSegment = {
 	params ["_data"];
+	if (_data getOrDefault ["ignored",false]) exitWith {
+		traceformat("IGNORE: config %1 in %2",csys_internal_configNumber arg csys_internal_lastLoadedFile);
+		true
+	};
 	CRAFT_PARSER_HEAD;
 	
 	// ----------------------- base check -----------------------
@@ -302,11 +310,12 @@ csys_format = {
 	while {[_str,_patternFormatter] call regex_isMatch} do {
 		_match = [_str,_patternFormatter] call regex_getFirstMatch;
 		_kmap = [_match,_patternKeys] call regex_getFirstMatch;
-		_tokens = _kmap splitString " .";
-		_argName = _tokens deleteAt 0;
+		_tokens = _kmap splitString " ."; //tokenlist a.b.c.d
+		_argName = _tokens deleteAt 0; //first part
 		if (_argName in _argsmap) then {
 			private _val = _argsmap get _argName; //is value
 			assert(!isNullVar(_val));
+			//pass of all func tokens b.c.d
 			{
 				_val = _val call (csys_map_tokenMap getOrDefault [_x,csys_defaultTokenCode]);
 			} foreach _tokens;			

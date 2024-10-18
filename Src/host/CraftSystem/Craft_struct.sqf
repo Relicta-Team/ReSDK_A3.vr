@@ -238,9 +238,13 @@ struct(ICraftRecipeBase)
 		};
 
 		
-		GETVAL_STR(_curObj , vec2("meta_tag",null));
+		GETVAL_STR(_curObj , vec2("meta_tag",_ingredient getv(metaTag)));
 		FAIL_CHECK_REFSET;
 		_ingredient setv(metaTag,value);
+
+		GETVAL_STR(_curObj , vec2("name",_ingredient getv(name)));
+		FAIL_CHECK_REFSET;
+		_ingredient setv(name,value);
 
 		if (self callv(isInteractCraft)) exitWith {
 			refset(_ingredientListOrRef,_ingredient);
@@ -302,7 +306,7 @@ struct(ICraftRecipeBase)
 			//rnd replace
 			value = [value,"\birnd\(([^\d]*(\d+)[^\d]*(\d+)[^\d]*)\)",'randInt($2,$3)'] call regex_replace;
 			value = [value,"\brnd\(([^\d]*(\d+)[^\d]*(\d+)[^\d]*)\)","rand($2,$3)"] call regex_replace;
-			
+
 			value = [value,"from_skill\(([^)]*)\)","(linearconversion [1,20,_InternalCraftSkill,$1,true])"] call regex_replace;
 
 			value = compile value;
@@ -538,16 +542,6 @@ struct(ICraftRecipeBase)
 		callFuncParams(_ctx get "user",meSay,_m);
 	}
 
-endstruct
-
-struct(CraftRecipeDefault) base(ICraftRecipeBase)
-	def(c_type) "default";
-	def(onRecipeReady)
-	{
-		callbase(onRecipeReady);
-		(csys_map_storage get (self getv(categoryId))) pushBack self;
-	}
-
 	def(canSeeRecipe)
 	{
 		params ["_usr"];
@@ -580,6 +574,16 @@ struct(CraftRecipeDefault) base(ICraftRecipeBase)
 
 endstruct
 
+struct(CraftRecipeDefault) base(ICraftRecipeBase)
+	def(c_type) "default";
+	def(onRecipeReady)
+	{
+		callbase(onRecipeReady);
+		(csys_map_storage get (self getv(categoryId))) pushBack self;
+	}
+
+endstruct
+
 struct(CraftRecipeBuilding) base(CraftRecipeDefault)
 	def(c_type) "building";
 
@@ -600,9 +604,27 @@ struct(CraftRecipeSystem) base(ICraftRecipeBase)
 	def(c_type) "system";
 	def(systemSpecific) "undefined";
 
+	def(canSeeRecipe)
+	{
+		params ["_usr","_src"];
+		private _canSee = callbase(canSeeRecipe);
+		private _canSeeByStype = false;
+		if (self callv(isSystemCraft)) then {
+			private _sys = getVar(_src,craftComponent);
+			if !isNullVar(_sys) then {
+				if isinstance_str(_sys,self getv(systemSpecific)) then {
+					_canSeeByStype = true;
+				};
+			};
+		};
+		traceformat("[%4]: VALIDATE %1 && %3 => %2",_canSee arg _this arg _canSeeByStype arg self)
+		_canSee && _canSeeByStype
+	}
+
 	def(onRecipeReady)
 	{
 		callbase(onRecipeReady);
+		csys_map_systems_storage get (self getv(categoryId)) pushBack self;
 
 		{
 			_x callp(_ingredientRegister,csys_map_allSystemCrafts arg self);

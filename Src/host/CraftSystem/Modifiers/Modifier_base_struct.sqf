@@ -105,10 +105,35 @@ endstruct
 	Описание: Изменяет название создаваемого предмета
 	Параметры:
 		value - (строка) новое название.
+		Допускается использование тегов:
+			{TAG:name} для названия
 */
 struct(CraftModifier::set_name) base(CraftModifierAbstract)
 	
-	def(new_name) "";
+	def(new_name) ""; //before preprocessed
+
+	def(createModifierContext)
+	{
+		params ["_capturedCtx"];
+		private _ingr = _capturedCtx get "ingredients";
+		private _map = createHashMap;
+		private _allTagsRefs = createhashMap; //ссылки по тегам
+		{
+			if not_equals(_x getv(metaTag),"") then {
+				private _objList = _x callv(getObjects);
+				if (count _objList > 0) then {
+					_allTagsRefs set [_x getv(metaTag),_objList select 0];
+				};
+			};	
+		} foreach _ingr;
+
+		//создаем карту имён
+		{
+			_map set [_x+":name",getVar(_y,name)];
+		} foreach _allTagsRefs;
+
+		_map
+	}
 
 	def(onParameter)
 	{
@@ -125,7 +150,8 @@ struct(CraftModifier::set_name) base(CraftModifierAbstract)
 		params ["_itm","_usr","_ctx"];
 
 		if (self getv(name)!="") then {
-			setVar(_itm,name,self getv(new_name));
+			private _newName = [self getv(new_name),_ctx] call csys_format;
+			setVar(_itm,name,_newName);
 		};
 	}
 endstruct

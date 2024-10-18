@@ -6,9 +6,7 @@
 
 _openCraftMenu = {
 	params ["_src","_usr","_categories","_listFirstCat",["_onlyPreview",false]];
-	if (_onlyPreview) then {
-		["Режим предпросмотра системных рецептов пока не реализован"] call messageBox;
-	};
+	
 	craft_cxtRpcSourcePtr = _src;	
 	//[[1],[1]] call craft_open;
 	[_categories,_listFirstCat,_onlyPreview] call craft_open;
