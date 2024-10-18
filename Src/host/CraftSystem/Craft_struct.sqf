@@ -445,6 +445,7 @@ struct(ICraftRecipeBase)
 
 		} foreach value;
 		FAIL_CHECK_REFSET(_refResult);
+		assert(!isNullVar(_mods));
 		_robj setv(modifiers,_mods);
 	}
 

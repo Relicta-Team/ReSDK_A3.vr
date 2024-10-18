@@ -85,7 +85,7 @@
   ignored: false
   system_specific: BakingOvenSystem
   options:
-    craft_duration: from_skill(20,2)
+    craft_duration: from_skill(5,2)
   required:
     force_visible: true
     skills:

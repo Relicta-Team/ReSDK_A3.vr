@@ -568,6 +568,8 @@ csys_processCraftMain = {
 		{
 			{
 				_pUsr = callFunc(_x select 0,getLastTouched);
+				if isNullReference(_pUsr) then {continue};
+
 				_hashUsr = getVar(_pUsr,pointer);
 				if !(_hashUsr in _possibleCrafters) then {
 					_possibleCrafters set [_hashUsr,0];
@@ -594,10 +596,8 @@ csys_processCraftMain = {
 		//use components and calculate tempobject pos
 		{
 			{
-				_allPoses pushBack callFunc(_x select 0,getPos);
-			} foreach (_x getv(_foundItems));
-
-			_x callv(onComponentUsed); //use component
+				_allPoses pushBack callFunc(_x,getPos);
+			} foreach (_x callv(getObjects));
 		} foreach _leftComponents;
 		//create temp cooking
 		private _midPos = [_allPoses] call getPosListCenter;
@@ -612,11 +612,14 @@ csys_processCraftMain = {
 	//регистрируем контекст модификаторов
 	["is_interact",_isInteract] call _addModContext;
 	["user",_usr] call _addModContext;
-	["ingredients",_objectColleciton] call _addModContext;
+	["ingredients",_leftComponents] call _addModContext;
 	private _modCtxPrepared = [];
+	// traceformat("Founded recipe %1",_recipe)
+	// traceformat("with result %1",_recipe getv(result))
+	// traceformat("Recipe mods: %1",_recipe getv(result) getv(modifiers))
 	{
 		_modCtxPrepared pushBack (_x callp(createModifierContext,_modContext));
-	} foreach (_recipe getv(result) get(modifiers));
+	} foreach (_recipe getv(result) getv(modifiers));
 
 	//регистрируем контекст провала
 	private _failHandler = null;
@@ -741,6 +744,12 @@ csys_processCraftMain = {
 
 	if (_isSystem) exitWith {
 		_recipeIdOrSystem callp(captureCraft,_recipe arg _craftContext arg _failHandler);
+
+		//after captured all info we can delete objects
+		{
+			_x callv(onComponentUsed);
+		} foreach _leftComponents;
+
 		true
 	};
 

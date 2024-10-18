@@ -300,7 +300,7 @@ csys_internal_loadCfgSegment = {
 */
 csys_format = {
 	params ["_str","_argsmap"];
-	private _patternKeys = "\ *\w+([ \t]*\.[ \t]*\w+)*\ *";
+	private _patternKeys = "\ *[\w:]+([ \t]*\.[ \t]*\w+)*\ *";
 	private _patternFormatter = "\{("+_patternKeys+")\}";
 	private _match = null;
 	private _kmap = null;

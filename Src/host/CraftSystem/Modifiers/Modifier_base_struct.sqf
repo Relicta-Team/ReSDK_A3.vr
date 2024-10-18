@@ -56,6 +56,8 @@ struct(CraftModifierAbstract)
 		 
 		 - Для обычных внутри дикта массив ingredients
 		
+		user - ссылка на юзера-крафтера
+
 		_capturedCtx не должен изменяться. Возвращаться должен новый набор данных, который будет предоставлен в onApply._ctx
 		возврат null не допускается. Любое not-nill значение
 	*/
@@ -79,6 +81,11 @@ struct(CraftModifierAbstract)
 
 		self setv(_paramDict,_pdct);
 		self callv(_parseParameters);
+	}
+
+	def(str)
+	{
+		"CMod:" + (self getv(name))
 	}
 
 	def(_parseParameters)
@@ -115,22 +122,25 @@ struct(CraftModifier::set_name) base(CraftModifierAbstract)
 	def(createModifierContext)
 	{
 		params ["_capturedCtx"];
-		private _ingr = _capturedCtx get "ingredients";
+		private _ingrList = _capturedCtx get "ingredients";
 		private _map = createHashMap;
 		private _allTagsRefs = createhashMap; //ссылки по тегам
 		{
 			if not_equals(_x getv(metaTag),"") then {
 				private _objList = _x callv(getObjects);
+				traceformat("Object enum %1 is %2",_foreachIndex arg _objList)
 				if (count _objList > 0) then {
 					_allTagsRefs set [_x getv(metaTag),_objList select 0];
 				};
 			};	
-		} foreach _ingr;
+		} foreach _ingrList;
 
 		//создаем карту имён
 		{
 			_map set [_x+":name",getVar(_y,name)];
 		} foreach _allTagsRefs;
+
+		traceformat("Captured context for set_name: %1 from refs: %2",_map arg _allTagsRefs);
 
 		_map
 	}
@@ -149,9 +159,23 @@ struct(CraftModifier::set_name) base(CraftModifierAbstract)
 	{
 		params ["_itm","_usr","_ctx"];
 
-		if (self getv(name)!="") then {
+		if (self getv(new_name)!="") then {
 			private _newName = [self getv(new_name),_ctx] call csys_format;
 			setVar(_itm,name,_newName);
 		};
+	}
+endstruct
+
+
+struct(CraftModifier::auto_default) base(CraftModifierAbstract)
+	def(createModifierContext)
+	{
+		params ["_capturedCtx"];
+		0
+	}
+
+	def(onApply)
+	{
+		params ["_itm","_usr","_ctx"];
 	}
 endstruct

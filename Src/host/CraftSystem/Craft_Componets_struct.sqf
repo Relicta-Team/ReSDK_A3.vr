@@ -22,7 +22,7 @@ struct(CraftRecipeComponent)
 
 		(_needs - _contains) max 0
 	}
-	def(_foundItems) null;
+	def(_foundItems) null; //list of vec2(gameobject,loc)
 	def(_isReadyIngredient) false;
 
 	//метод получения объектов из ингредиент-типа
@@ -63,7 +63,7 @@ struct(CraftRecipeComponent)
 			_itmsTxt
 		} else {
 			if not_equals(_optName,"") exitWith {_optName};
-			
+
 			private _itmsTxt = getFieldBaseValueWithMethod(self getv(class),"name","getName");
 			_itmsTxt
 		}

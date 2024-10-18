@@ -9,15 +9,9 @@
 #include "..\..\text.hpp"
 #include "..\..\GameObjects\GameConstants.hpp"
 
-#define TRACE_MESSAGES
+//#define ENABLE_THIS_SYSTEM_DEBUG
+#include "ObjectSystem.h"
 
-#ifdef TRACE_MESSAGES
-	#define debug(m) trace(m)
-	#define debugformat(m,f) traceformat(m,f)
-#else
-	#define debug(m)
-	#define debugformat(m,f)
-#endif
 
 struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 	def(systemType) "frying_pan"
@@ -53,7 +47,7 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 	def(process)
 	{
 		private _stage = self getv(procStage);
-		debugformat("frypan: curstage %1",_stage)
+		debug_system("frypan: curstage %1" arg _stage)
 		if (_stage == 0) exitWith {
 			self callv(findNearCampfire);
 		};
@@ -99,7 +93,7 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 		//sortby distance [near...far]
 		private _nearList = [_itList,{callFunc(_x,getDistanceTo,_src)}] call sortBy;
 		if (count _nearList == 0) exitWith {
-			debugformat("frypan: no campfire found",_src)
+			debug_system("frypan: no campfire found" arg _src)
 			//todo optimize
 			self setv(procStage,0);
 		};
@@ -109,7 +103,7 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 		self getv(sourceTransform) callv(updateTransform);
 		self setv(procStage,1);
 
-		debugformat("frypan: found campfire %1",_near)
+		debug_system("frypan: found campfire %1" arg _near)
 	}
 
 	def(collectDistance) 0.25;
@@ -127,7 +121,7 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 		//private _pos = callFunc(self getv(src),getPos);
 		private _objList = self callp(getObjects,"IDestructible" arg self getv(collectDistance));
 		
-		debugformat("frypan: near objects: %1",_objList)
+		debug_system("frypan: near objects: %1" arg _objList)
 		//save context
 		if ([null,_objList,self] call csys_processCraftMain) then {
 			self setv(procStage,2);
@@ -156,12 +150,12 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 			self setv(isActiveUpdate,false);
 		};
 		self modv(processTimeLeft, - 1);
-		debugformat("frypan: timeleft %1",self getv(processTimeLeft))
+		debug_system("frypan: timeleft %1" arg self getv(processTimeLeft))
 
 		if ((self getv(processTimeLeft)) <= 0) then {
 			delete(self getv(tempObjectTransform) getv(_origObject));
 			self setv(procStage,1); //reset to found item
-			debugformat("frypan: cancraft by skills: %1",self getv(craftContext) get "can_craft_by_skills")
+			debug_system("frypan: cancraft by skills: %1" arg self getv(craftContext) get "can_craft_by_skills")
 			self callv(processCraft);
 			self setv(isActiveUpdate,false);
 			

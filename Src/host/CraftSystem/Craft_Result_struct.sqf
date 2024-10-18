@@ -44,7 +44,9 @@ struct(CraftRecipeResult)
 				
 				//apply modifiers to created object
 				private _modCtxList = _craftCtx get "modifier_context_list";
+				traceformat("Start apply craft reslut modifiers (%1) with context %2",count (self getv(modifiers)) arg _modCtxList)
 				{
+					traceformat("apply craft reslut modifier %1",_x)
 					_x callp(onApply,_newObj arg _usr arg _modCtxList select _foreachIndex);
 				} foreach (self getv(modifiers));
 			};
@@ -89,7 +91,9 @@ struct(CraftRecipeInteractResult) base(CraftRecipeResult)
 
 			//apply modifiers to created object
 			private _modCtxList = _craftCtx get "modifier_context_list";
+			traceformat("Start apply craft reslut modifiers (%1) with context %2",count (self getv(modifiers)) arg _modCtxList)
 			{
+				traceformat("apply craft reslut modifier %1",_x)
 				_x callp(onApply,_newObj arg _usr arg _modCtxList select _foreachIndex);
 			} foreach (self getv(modifiers));
 		};
@@ -141,11 +145,13 @@ struct(CraftRecipeSystemResult) base(CraftRecipeResult)
 				
 				//apply modifiers to created object
 				private _modCtxList = _craftCtx get "modifier_context_list";
+				traceformat("Start apply craft reslut modifiers (%1) with context %2",count (self getv(modifiers)) arg _modCtxList)
 				{
+					traceformat("apply craft reslut modifier %1",_x)
 					_x callp(onApply,_newObj arg _usr arg _modCtxList select _foreachIndex);
 				} foreach (self getv(modifiers));
 			};
 		};
-		
+
 	}
 endstruct

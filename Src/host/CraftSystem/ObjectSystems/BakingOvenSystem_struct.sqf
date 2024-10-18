@@ -9,6 +9,9 @@
 #include "..\..\text.hpp"
 #include "..\..\GameObjects\GameConstants.hpp"
 
+#define ENABLE_THIS_SYSTEM_DEBUG
+#include "ObjectSystem.h"
+
 struct(BakingOvenSystem) base(BaseWorldProcessorCraftSystem)
 	def(systemType) "baking_oven"
 
@@ -18,7 +21,7 @@ struct(BakingOvenSystem) base(BaseWorldProcessorCraftSystem)
 	def_null(sourceTransform) //CraftSerializedTransform
 	def_null(tempObjectTransform) //CraftSerializedTransform
 
-	def(collectDistance) 0.3
+	def(collectDistance) 0.34
 
 	def(init)
 	{
@@ -40,6 +43,7 @@ struct(BakingOvenSystem) base(BaseWorldProcessorCraftSystem)
 	def(process)
 	{
 		private _stage = self getv(procStage);
+		debug_system("stage is %1" arg _stage)
 		if (_stage == 0) exitWith {
 			self callv(checkEnabled);
 		};
@@ -68,6 +72,9 @@ struct(BakingOvenSystem) base(BaseWorldProcessorCraftSystem)
 
 		private _src = self getv(src);
 		private _objList = self callp(getObjects,"IDestructible" arg self getv(collectDistance));
+		
+		debug_system("Near objects %1" arg _objList)
+
 		if ([null,_objList,self] call csys_processCraftMain) then {
 			self setv(procStage,2);
 			self setv(isActiveUpdate,true);
