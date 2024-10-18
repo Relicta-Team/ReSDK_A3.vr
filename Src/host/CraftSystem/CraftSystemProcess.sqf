@@ -373,7 +373,7 @@ csys_handleInteractor = {
 csys_processCraftMain = {
 	/*
 		(usr,[_item,_targ],null) - for interactor (return bool)
-		(usr,[objects_sorted],id) - for default, building (void)
+		(usr,null,id) - for default, building (void)
 		(null,[objects_sorted],system) - for system (void)
 	*/
 	params ["_usr","_objectColleciton","_recipeIdOrSystem"];
@@ -637,6 +637,7 @@ csys_processCraftMain = {
 	["roll_result",getRollType(_refSuccess select 1)] call _addCraftContext;
 	["amount_3d6",getRollDiceAmount(_refSuccess select 1)] call _addCraftContext;
 	
+	assert(!isNullVar(_position));
 	["position",_position] call _addCraftContext;
 	["user",_usr] call _addCraftContext;
 	["recipe",_recipe] call _addCraftContext;
@@ -651,35 +652,31 @@ csys_processCraftMain = {
 	private _duration = _myRta call _durationCheck;
 
 
-	private _ctx = ["_recipe","_leftComponents","_craftContext","_usr","_failHandler"];
+	private _ctx = ["_recipe","_leftComponents","_craftContext","_usr","_failHandler","_canCraftBySkills"];
 	private _postCrafted = {
 		assert(_leftComponents);
+
+		private _canCraft = all_of(_leftComponents apply {_x callv(canCraftFromIngredient)});
+		private _onCannotCraft = {
+			private _ingredient = "чего-то...";
+			{
+				if (!(_x callv(canCraftFromIngredient)) && {
+					//опциональные не требуются обязательно
+					!(_x getv(optional))
+				}
+				) exitWith {
+					_ingredient = _x callv(getRequiredComponentName);
+				};
+			} foreach _leftComponents;
+			callFuncParams(_usr,localSay,"Не хватает: " + _ingredient arg "error");
+			RETURN(false);
+		};
+		if (!_canCraft) exitWith _onCannotCraft;
+
 		{
 			_x callv(onComponentUsed);
 		} foreach _leftComponents;
-
-		_recipe getv(result) callp(onCrafted,_craftContext);
-	};
-
-	if (_isInteract) exitWith {
-		if (!_canCraftBySkills) exitWith {
-			//cannot craft because lowskill
-			if isNullVar(_failHandler) exitWith {
-				private _message = pick ["Знаний не хватает.","Не умею, не могу.","Не понимаю как делать","Что-то не понятно ничего.","Не могу сделать.","Не знаю как делать."];
-				callFuncParams(_usr,localSay,_message arg "error");
-			};
-
-			_failHandler callp(onCatched,_recipe arg _craftContext)
-		};
-		if (_duration > 0) then {
-			callFuncParams(_usr,doAfter,_postCrafted arg _duration arg _ctx arg INTERACT_PROGRESS_TYPE_FULL);
-		} else {
-			call _postCrafted;
-		};
-		RETURN(true)
-	};
-
-	if (_isDefault) exitWith {
+		traceformat("CHECK SKILLS %1",_canCraftBySkills)
 		if (!_canCraftBySkills) exitWith {
 			//cannot craft because lowskill
 			if isNullVar(_failHandler) exitWith {
@@ -690,32 +687,41 @@ csys_processCraftMain = {
 			_failHandler callp(onCatched,_recipe arg _craftContext)
 		};
 		
-		//removing components
-		{
-			_x callv(onComponentUsed);
-		} foreach _leftComponents;
-
-		private _previewObj = _recipe callv(hasPreviewCraft);
-
-		//create object
-		private _postCreate = {
+		private _postPlaced = {
 			params ["_recipe","_craftContext"];
 			_recipe getv(result) callp(onCrafted,_craftContext);
 		};
 
+		private _previewObj = _recipe callv(hasPreviewCraft);
+		traceformat("CHECK PREVIEW %1",_previewObj)
+		//custom handler
 		if (_previewObj) then {
+
 			private _previewModel = _recipe callv(getPreviewModel);
+			private _position = _craftContext get "position";
 			if isNullVar(_previewModel) exitWith {
 				setLastError("Неопределенная модель для рецепта " + (str _recipe));
 			};
-			setVar(_usr,___cachedCraftBuildPreview,vec2(vec2(_recipe,_craftContext),_postCreate));
+			setVar(_usr,___cachedCraftBuildPreview,vec2(vec2(_recipe,_craftContext),_postPlaced));
 			#ifdef EDITOR
-			callFuncAfterParams(_usr,sendInfo,0.05,"craft_preview" arg [_position arg _previewModel] )
+				//задержка из-за предварительного захвата нажатия ЛКМ (фикс мгновенной расстановки)
+				callFuncAfterParams(_usr,sendInfo,0.05,"craft_preview" arg [_position arg _previewModel] )
 			#else
-			callFuncParams(_usr,sendInfo,"craft_preview" arg [_position arg _previewModel] )
+				callFuncParams(_usr,sendInfo,"craft_preview" arg [_position arg _previewModel] )
 			#endif
 		} else {
-			[_recipe,_craftContext] call _postCreate;
+			[_recipe,_craftContext] call _postPlaced;
 		};
+
+	};
+
+	if (_isInteract || _isDefault) exitWith {
+
+		if (_duration > 0) then {
+			callFuncParams(_usr,doAfter,_postCrafted arg _duration arg _ctx arg INTERACT_PROGRESS_TYPE_FULL);
+		} else {
+			call _postCrafted;
+		};
+		RETURN(true)
 	};
 };

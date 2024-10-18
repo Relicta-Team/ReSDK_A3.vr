@@ -436,7 +436,11 @@ struct(ICraftRecipeBase)
 		private _result = false;
 		private _maxSuccessAmount = -1000;
 		call {
-			if isNullVar(_skills) exitWith {_result = true};
+			if isNullVar(_skills) exitWith {
+				//автоуспех.
+				refset(_successAmountRef,vec2("craft_success",customRollResult(-15,DICE_CRITFAIL,3)));
+				_result = true;
+			};
 			{
 				private _requiredSkillName = _x;
 				private _requiredSkillValue = _y;
@@ -455,7 +459,7 @@ struct(ICraftRecipeBase)
 			} foreach _skills;
 		};
 		if equals(refget(_successAmountRef),0) then {
-			refset(_successAmountRef,vec2("craft",customRollResult(-15,DICE_CRITFAIL,3)));
+			refset(_successAmountRef,vec2("craft_fail",customRollResult(-15,DICE_CRITFAIL,3)));
 		};
 
 		_result
