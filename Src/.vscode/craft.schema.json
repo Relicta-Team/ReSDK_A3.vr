@@ -16,28 +16,100 @@
 	"type": "array",
 	"items": {
 		"definitions": {
-			
+			"ItemComponent": {
+				"type": "object",
+				"required": ["class"],
+				"additionalProperties": false,
+				"properties": {
+					"class": {
+						"title": "Класс ингредиента",
+						"description": "Класснейм требуемого ингредиента. Может быть строкой или массивом строк. Строки (в т.ч. в массиве) могут содержать макросы расширения для автоматического добавления множества классов с одинаковыми именем и отличающихся одной цифрой (см. примеры).\nНапример: при добавлении класса \"CitizenCloth(1-4)\" значение будет расширено в массив строк: [\"CitizenCloth1\",\"CitizenCloth2\",\"CitizenCloth3\",\"CitizenCloth4\"]",
+						"type": ["string","array"],
+						"examples": [
+							"Item",
+							["WoodenDebris1","WoodenDebris2","WoodenDebris3"],
+							"WoodenDebris(1-3)"
+						],
+						"default": "Item"
+					},
+					"name": {
+						"title": "Название ингредиента",
+						"description": "(Опционально) Кастомное название, выводимое информации о рецепте.",
+						"type": "string"
+					},
+					"hp": {
+						"title": "Требуемое здоровье",
+						"description": "(Опционально) Требуемое здоровье ингредиента. По умолчанию без ограничений. Может быть процентным значением либо количеством ХП",
+						"examples": [10,-5,"20%","85%"],
+						"type": ["integer","string"],
+						"if": {
+							"type": "string"
+						},
+						"then": {
+							"pattern": "^(([0-9]){1,2}|100)[ \t]*%$"
+						},
+						"else": {
+							"minimum": -1000,
+							"maximum": 1000
+						}
+					},
+					"count": {
+						"title": "Необходимое количество",
+						"description": "Количество необходимых предметов",
+						"type": "integer",
+						"minimum": 1,
+						"maximum": 100
+					},
+					"check_type_of": {
+						"title": "Тип проверки",
+						"description": "Тип проверки ингредиента. Включенный режим выполняет сопоставление ингредиента по классу и его дочерним классам.",
+						"type": "boolean",
+						"default": false
+					},
+					"destroy": {
+						"type": "boolean",
+						"title": "Уничтожать при использовании",
+						"description": "Будет ли уничтожен ингредиент после успешного крафта",
+						"default": true
+					},
+					"meta_tag": {
+						"type": "string",
+						"title": "Мета-тег",
+						"description": "Мета-тег ингредиента. Необходим при заменах в строках или модификаторах",
+						"default": ""
+					},
+					"condition": {
+						"type": "string",
+						"title": "Дополнительное условие",
+						"description": "(для опытных) Код условия, которое при удовлетворении позволит использовать ингредиент",
+						"default": ""
+					}
+				}
+			}
 		},
 		
 		
         "type": "object",
         "required": ["type"],
-		"additionalProperties": true,
+		"additionalProperties": false,
 		"$comment": "TODO: refactoring additionalProperties for use ignored correctly",
 		"properties": {
 			
 			"name": {
 				"type": "string",
+				"title": "Название рецепта",
 				"description": "Название крафта, выводимое в списке рецептов"
 			},
 			"desc": {
 				"type": "string",
+				"title": "Описание рецепта",
 				"description": "(Опционально) Дополнительное описание крафта. Выводится как дополнительная информация под рецептом."
 			},
 			
 			"type": {
 				"type": "string",
-				"description": "Тип рецепта крафта",
+				"title": "Тип рецепта",
+				"description": "Тип рецепта крафта. Для некоторых типов существуют изменения в структуре рецепта.",
 				"enum": [
 					"default",
 					"building",
@@ -46,8 +118,15 @@
 				],
 				"default": "default"
 			},
+			"system_specific": {
+				"type": "string",
+				"title": "Спецификация рецепта",
+				"description": "(ТОЛЬКО ДЛЯ СИСТЕМНЫХ) Отвечает за то какая система будет обрабатывать данный рецепт.",
+				"pattern": "^[a-zA-Z]+System$"
+			},
 			"category": {
 				"type": "string",
+				"title": "Категория рецепта",
 				"description": "(Опционально) Категория крафта. Отвечает за то, в какой категории меню будет храниться этот рецепт. По умолчанию - 'Other'.",
 				"enum": [
 					"Cloth",
@@ -62,79 +141,184 @@
 				],
 				"default": "Other"
 			},
-			"system_specific": {
-				"type": "string",
-				"required": ["type"],
-				"pattern": "^[a-zA-Z]+System$"
-			},
 			"ignored": {
 				"type": "boolean",
+				"title": "Игнорировать рецепт",
 				"description": "(Опционально) Игнорировать рецепт в редакторе крафта",
 				"default": false
 			},
-			
-
 			"required": {
+				"title": "Требования",
+				"description": "Секция требуемых компонентов",
 				"type": "object",
-				"additionalProperties": true,
 				"properties": {
 					"force_visible": {
 						"type": "boolean",
-						"description": "(Опционально) Рецепт должен быть видимым в списке крафтов даже если не хватает навыков",
-						"default": false
+						"default": false,
+						"title": "Принудительно видеть",
+						"description": "Позволяет принудительно видеть рецепт даже при нехватке навыков (если таковые были указаны)."
 					},
 					"skills": {
-						"title": "",
-						"type": "object",
-						"description": "Навыки, которые необходимо для этого крафта",
-						"patternProperties": {
-							"[a-z]+": {
+						"title": "Требуемые навыки",
+						"description": "Список доступных навыков:\n\n- fp (усталость)\n- will (воля)\n- per (восприятие)\n- hp (жизнь)\n- fight (рукопашный бой)\n- shield (щиты)\n- fencing (фехтование)\n- axe (топоры)\n- baton (дубины)\n- spear (копья)\n- sword (мечи)\n- knife (ножи)\n- whip (кнуты)\n- pistol (пистолеты)\n- rifle (винтовки)\n- shotgun (дробовики)\n- crossbow (луки)\n- throw (метание)\n- chemistry (химичество)\n- alchemy (грибничество)\n- engineering (инженерия)\n- traps (ловушки)\n- repair (ремонт)\n- blacksmithing (кузнечество)\n- craft (создание)\n- theft (воровство)\n- stealth (скрытность)\n- agility (акробатика)\n- lockpicking (взлом)\n- healing (первая помощь)\n- surgery (хирургия)\n- cavelore (знание пещер)\n- cooking (готовка)\n- farming (фермерство)",
+						"type": ["object","null"],
+						
+						"additionalProperties": false,
+						"definitions": {
+							"skill_def": {
 								"type": "integer",
 								"minimum": 1,
-								"maximum": 100
+								"maximum": 20
 							}
+						},
+						
+						"properties": {
+							
+							"fight":  {"title": "Рукопашный бой", "$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"shield":  {"title": "Щиты","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"fencing":  {"title": "Фехтование","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"axe":  {"title": "Топоры","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"baton":  {"title": "Дубины","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"spear":  {"title": "Копья","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"sword":  {"title": "Мечи","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"knife":  {"title": "Ножи","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"whip":  {"title": "Кнуты","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"pistol":  {"title": "Пистолеты","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"rifle":  {"title": "Винтовки","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"shotgun":  {"title": "Дробовики","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"crossbow":  {"title": "Луки","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"throw":  {"title": "Метание","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"chemistry":  {"title": "Химичество","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"alchemy":  {"title": "Грибничество","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"engineering":  {"title": "Инженерия","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"traps":  {"title": "Ловушки","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"repair":  {"title": "Ремонт","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"blacksmithing":  {"title": "Кузнечество","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"craft":  {"title": "Создание","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"theft":  {"title": "Воровство","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"stealth":  {"title": "Скрытность","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"agility":  {"title": "Акробатика","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"lockpicking":  {"title": "Взлом","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"healing":  {"title": "Первая помощь","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"surgery":  {"title": "Хирургия","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"cavelore":  {"title": "Знание пещер","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"cooking":  {"title": "Готовка","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"farming":  {"title": "Фермерство","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"}
+						}
+					}
+				}
+			},
+
+			"fail_handler": {
+				"type": ["object","null"],
+				"title": "Обработчик провала",
+				"description": "Обработчик провала крафта (по скиллам)",
+				"required": ["handler_type"],
+				"properties": {
+					"handler_type": {
+						"type": "string",
+						"title": "Тип обработчика",
+						"description": "Имя типа обработчика провала",
+						"enum": ["custom","default"]
+					}
+				}
+			}
+
+			
+		},
+		
+		"allOf": [
+			{
+				"if": {
+					"properties": {
+						"type": {
+							"not": {"const": "system"}
+						}
+					}
+				},
+				"then": {
+					"$comment": "THIS DOSENT NOT WORKS...",
+					"dependencies": {
+						"type": {
+							"not": {"const": "system"}
 						}
 					},
-					"components": {
-						"title": "Компоненты",
-						"description": "Компоненты, которые необходимо для этого крафта",
-						"$comment": "if type: interact -> then can be only named components: hand_item, target; otherwise can be list of components",
+					
+					"properties": {
 						
-						"if": {
-							"properties": {
-								"type": {"const": "interact"}
-							},
-							"required": ["type"]
-						},
-						"then": {
+					}					
+				}, "else": {
+					"required": ["system_specific"]
+				}
+			},
+			{
+				"if": {
+					"properties": {
+						"type": {
+							"const": "interact"
+						}
+					}
+				},
+				"then": {
+					"required": ["required"],
+					"properties": {
+						"required": {
 							"type": "object",
-							"title": "hand item and target",
+							"required": ["components"],
 							"properties": {
-								"hand_item": {"type": "string"},
-								"target": {"type": "string"}
-							},
-							"required": ["hand_item", "target"],
-							"additionalProperties": false
-						},
-						"else": {
-							"title": "list of components",
-							"type": "array",
-							"items": {"type": "object"}
+								"components": {
+									"additionalProperties": false,
+									"title": "Объекты hand_item и target",
+									"description": "Объекты взаимодействия цель и интерактор. Только для крафтов типа interact",
+									"type": "object",
+									"properties": {
+										"hand_item": {
+											"title": "Предмет в руке",
+											"description": "Необходимый предмет которым взаимодействуют по target",
+											"type":"object",
+											"$ref": "#/items/definitions/ItemComponent"
+										},
+										"target": {
+											"title": "Цель взаимодействия",
+											"description": "Целевой объект взаимодействия, по которому игрок кликает с помощью hand_item",
+											"type": "object",
+											"$ref": "#/items/definitions/ItemComponent"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"else": {
+					"required": ["required"],
+					"properties": {
+						"required": {
+							"type": "object",
+							"required": ["components"],
+							"properties": {
+								"components": {
+									"title": "Список ингредиентов",
+									"description": "Список ингредиентов, необходимых для крафта",
+									"type": "array",
+									"items": {
+										"$ref": "#/items/definitions/ItemComponent"
+									}
+								}
+							}
 						}
 					}
 				}
 			}
-		},
+		]
 		
-		"if": {
-			"properties": {
-				"type": {
-					"const": "system"
-				}
-			}
-		},
-		"then": {
-			"required": ["system_specific"]
-		}
     }
   }

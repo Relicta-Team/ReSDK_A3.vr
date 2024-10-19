@@ -1,29 +1,37 @@
 
 - desc: abs
-  type: default
+  type: system
+  system_specific: CookingSystem
   name: a
-  FXT: ""
+  required:
+    components:
+      - class: NonCls
 
 - 
-  message: dest
-  test_int: 2
   desc: ""
   type: interact
-  system_specific: CookingSystem
-  
   category: Food
   ignored: false
-  ax: 3
   required:
     force_visible: false
     skills:
+      fight: 20
       cooking: 1
     components:
-      - class: Testo
-        count: 1
+      hand_item:
+        class: Content(10-$x asd qw deqw )
+        hp: 0%
+        count: 100
+      target:
+        class: Item
+  fail_handler:
+    handler_type: default
+
+- name: test
+  type: building
+  system_specific: CookingSystem
+  required:
+    components:
       - class: IFoodItem
-        count: 2
-      # hand_item:
-      #   class: IFoodItem
-      # target:
-      #   class: Testo
+      - class: Opt
+  
