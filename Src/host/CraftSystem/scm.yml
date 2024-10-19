@@ -1,16 +1,29 @@
 
 - desc: abs
-  aq: 3
-  type: interactor
+  type: default
   name: a
-  a: 3
-  interactor:
-    a: 3
-  targetx: 
-    typxe: a
-  val: 3
+  FXT: ""
 
-
-- name: a
+- 
   message: dest
   test_int: 2
+  desc: ""
+  type: interact
+  system_specific: CookingSystem
+  
+  category: Food
+  ignored: false
+  ax: 3
+  required:
+    force_visible: false
+    skills:
+      cooking: 1
+    components:
+      - class: Testo
+        count: 1
+      - class: IFoodItem
+        count: 2
+      # hand_item:
+      #   class: IFoodItem
+      # target:
+      #   class: Testo

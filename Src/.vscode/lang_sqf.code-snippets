@@ -31,50 +31,59 @@
 		"body": [
 			"getv(${1:name})${0}"
 		],
+		"scope": "sqf",
 		"description": "Get struct variable"
 	},
 	"setv" : {
 		"prefix": "setv",
 		"body": "setv(${1:name},${2:value})${0}",
+		"scope": "sqf",
 		"description": "Set struct variable value"
 	},
 	"callv": {
 		"prefix": "callv",
 		"body": ["callv(${1:funcName})${0}"],
+		"scope": "sqf",
 		"description": "Call struct function without parameters"
 	},
 	"callp": {
 		"prefix": "callp",
 		"body": ["callp(${1:funcName},${2:args})${0}"],
+		"scope": "sqf",
 		"description": "Call struct function with params. Params can separated with delimeter 'arg'"
 	},
 
 	"calls": {
 		"prefix": "calls",
+		"scope": "sqf",
 		"body": [
 			"callSelf(${1:member})"
 		]
 	},
 	"callsp": {
 		"prefix": "callsp",
+		"scope": "sqf",
 		"body": [
 			"callSelfParams(${1:member},${2:params})"
 		]
 	},
 	"callf": {
 		"prefix": "callf",
+		"scope": "sqf",
 		"body": [
 			"callFunc(${1:object},${2:member})"
 		]
 	},
 	"callfp": {
 		"prefix": "callfp",
+		"scope": "sqf",
 		"body": [
 			"callFuncParams(${1:object},${2:member},${3:params})"
 		]
 	},
 	"for": {
 		"prefix": "for",
+		"scope": "sqf",
 		"body": [
 			"for \"_${1:loopVariable}\" from ${2:fromValue} to ${3:toValue} do {",
 			"\t$0",
@@ -84,6 +93,7 @@
 	},
 	"while": {
 		"prefix": "while",
+		"scope": "sqf",
 		"body": [
 			"while { ${1:condition} } do {",
 			"\t$0",

@@ -1,0 +1,140 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "craft.schema",
+	"$comment": "For more details: https://json-schema.org/learn/getting-started-step-by-step",
+	"title": "Рецепт крафта",
+	"properties": {
+		"val": {
+			"type":"string"
+		}
+	},
+	
+	"definitions": {
+		
+	},
+	
+	"type": "array",
+	"items": {
+		"definitions": {
+			
+		},
+		
+		
+        "type": "object",
+        "required": ["type"],
+		"additionalProperties": true,
+		"$comment": "TODO: refactoring additionalProperties for use ignored correctly",
+		"properties": {
+			
+			"name": {
+				"type": "string",
+				"description": "Название крафта, выводимое в списке рецептов"
+			},
+			"desc": {
+				"type": "string",
+				"description": "(Опционально) Дополнительное описание крафта. Выводится как дополнительная информация под рецептом."
+			},
+			
+			"type": {
+				"type": "string",
+				"description": "Тип рецепта крафта",
+				"enum": [
+					"default",
+					"building",
+					"interact",
+					"system"
+				],
+				"default": "default"
+			},
+			"category": {
+				"type": "string",
+				"description": "(Опционально) Категория крафта. Отвечает за то, в какой категории меню будет храниться этот рецепт. По умолчанию - 'Other'.",
+				"enum": [
+					"Cloth",
+					"Food",
+					"Alchemy",
+					"Medical",
+					"Weapon",
+					"Furniture",
+					"Light",
+					"Building",
+					"Other"
+				],
+				"default": "Other"
+			},
+			"system_specific": {
+				"type": "string",
+				"required": ["type"],
+				"pattern": "^[a-zA-Z]+System$"
+			},
+			"ignored": {
+				"type": "boolean",
+				"description": "(Опционально) Игнорировать рецепт в редакторе крафта",
+				"default": false
+			},
+			
+
+			"required": {
+				"type": "object",
+				"additionalProperties": true,
+				"properties": {
+					"force_visible": {
+						"type": "boolean",
+						"description": "(Опционально) Рецепт должен быть видимым в списке крафтов даже если не хватает навыков",
+						"default": false
+					},
+					"skills": {
+						"title": "",
+						"type": "object",
+						"description": "Навыки, которые необходимо для этого крафта",
+						"patternProperties": {
+							"[a-z]+": {
+								"type": "integer",
+								"minimum": 1,
+								"maximum": 100
+							}
+						}
+					},
+					"components": {
+						"title": "Компоненты",
+						"description": "Компоненты, которые необходимо для этого крафта",
+						"$comment": "if type: interact -> then can be only named components: hand_item, target; otherwise can be list of components",
+						
+						"if": {
+							"properties": {
+								"type": {"const": "interact"}
+							},
+							"required": ["type"]
+						},
+						"then": {
+							"type": "object",
+							"title": "hand item and target",
+							"properties": {
+								"hand_item": {"type": "string"},
+								"target": {"type": "string"}
+							},
+							"required": ["hand_item", "target"],
+							"additionalProperties": false
+						},
+						"else": {
+							"title": "list of components",
+							"type": "array",
+							"items": {"type": "object"}
+						}
+					}
+				}
+			}
+		},
+		
+		"if": {
+			"properties": {
+				"type": {
+					"const": "system"
+				}
+			}
+		},
+		"then": {
+			"required": ["system_specific"]
+		}
+    }
+  }
