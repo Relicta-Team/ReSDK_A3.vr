@@ -151,9 +151,8 @@
 		
 		
         "type": "object",
-        "required": ["type","required","result"],
+       // "required": ["type","required","result"], //redefined in ignored checks
 		"additionalProperties": false,
-		"$comment": "TODO: refactoring additionalProperties for use ignored correctly",
 		"properties": {
 			
 			"name": {
@@ -427,13 +426,22 @@
 			{
 				"if": {
 					"properties": {
+						"ignored": {"not": {"const": true}}
+					}
+				},
+				"then": {
+					"required": ["type","required","result"]
+				}
+			},
+			{
+				"if": {
+					"properties": {
 						"type": {
 							"const": "interact"
 						}
 					}
 				},
 				"then": {
-					"required": ["required"],
 					"properties": {
 						"required": {
 							"type": "object",
@@ -464,7 +472,6 @@
 					}
 				},
 				"else": {
-					"required": ["required"],
 					"properties": {
 						"required": {
 							"type": "object",

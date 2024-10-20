@@ -29,7 +29,7 @@
 			"diffEditor.ignoreTrimWhitespace": false,
 		},		
 		"yaml.schemas": {
-			".vscode/craft.schema.json": "**/CraftSystem/scm.yml",
+			".vscode/craft.schema.json": "**/CraftSystem/**/*.yml",
 		},
 		"yaml.completion": true,
 		"yaml.schemaStore.enable": false,
