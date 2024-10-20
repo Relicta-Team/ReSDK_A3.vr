@@ -103,6 +103,17 @@ struct(CraftModifierAbstract)
 		_ready
 	}
 
+	//получает карту доступных настроек этого модификатора
+	def(getModifierDict)
+	{
+		createHashMapFromArray [
+			["title","Общее название модификатора"],
+			["description","Описание модификатора"],
+			["param_mode",0], //0 - без параметров, 1 - с одним параметром, имеет несколько параметров
+		]
+		//TODO implement
+	}
+
 
 endstruct
 
@@ -158,6 +169,9 @@ struct(CraftModifier::set_name) base(CraftModifierAbstract)
 	def(onApply)
 	{
 		params ["_itm","_usr","_ctx"];
+		
+		//add basename
+		_ctx set ["basename", callFuncParams(_newObj,getNameFor,_usr)];
 
 		if (self getv(new_name)!="") then {
 			private _newName = [self getv(new_name),_ctx] call csys_format;
