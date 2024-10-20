@@ -16,6 +16,31 @@
 	"type": "array",
 	"items": {
 		"definitions": {
+
+			"DefaultUtilityCounter": {
+				"type": ["integer","object"],
+				"allOf": [
+					{
+						"if": {
+							"type": "object"
+						}, "then": {
+							"required": ["min","max"],
+							"properties": {
+								"min": {"type":"integer","minimum":1, "default": 1},
+								"max": {"type":"integer","default": 3}
+							}
+						}
+					},
+					{
+						"if": {"type":"integer"},
+						"then": {
+							"minimum": 0,
+							"default": 1
+						}
+					}
+				]
+			},
+
 			"ItemComponent": {
 				"type": "object",
 				"required": ["class"],
@@ -85,12 +110,48 @@
 						"default": ""
 					}
 				}
+			},
+
+			"HandlerType": {
+				"type": "string",
+				"title": "Тип обработчика",
+				"description": "Имя типа обработчика провала",
+				//
+				"enum": ["default","custom"]
+			},
+			
+			// place here all fail handlers
+			"DefaultFailHandler": {
+				"description": "Стандартный обработчик провала, который удаляет ингредиенты при провале",
+				"properties": {
+					"handler_type": {},
+					"item": {
+						"title": "classname",
+						"description": "Тип класса, создаваемого при провале",
+						"type": "string"
+					},
+					"count": {
+						"title": "Количество объектов",
+						"description": "Количество объектов, созданных в результате провала крафта",
+						"$ref": "#/items/definitions/DefaultUtilityCounter"
+					}
+				}
+			},
+
+			"CustomFailHandler": {
+				"type": "object",
+				"title": "Кастомный обработчик (ТОЛЬКО ДЛЯ ОТЛАДКИ YAML СХЕМЫ)",
+				"properties": {
+					"handler_type": {"const": "custom"},
+					"evalulate": {"type": "string"}
+				}
 			}
+			// endplace failhandlers
 		},
 		
 		
         "type": "object",
-        "required": ["type"],
+        "required": ["type","required","result"],
 		"additionalProperties": false,
 		"$comment": "TODO: refactoring additionalProperties for use ignored correctly",
 		"properties": {
@@ -224,15 +285,96 @@
 				"required": ["handler_type"],
 				"properties": {
 					"handler_type": {
-						"type": "string",
-						"title": "Тип обработчика",
-						"description": "Имя типа обработчика провала",
-						"enum": ["custom","default"]
+						"$ref": "#/items/definitions/HandlerType"
+					}
+				},
+				"$comment": "Здесь можно автоматически генерировать список обработчиков и условий",
+				
+				"allOf": [
+					{
+						
+						"if": {
+							"properties": {"handler_type": {"const": "default"}}
+						}, "then": {
+							"additionalProperties": false,
+							"$ref": "#/items/definitions/DefaultFailHandler"
+						}
+					},
+					{
+						"if": {
+							"properties": {"handler_type": {"const": "custom"}}
+						},"then": {
+							"additionalProperties": false,
+							"$ref": "#/items/definitions/CustomFailHandler"
+						}
+					}
+				]
+			},
+
+			"result": {
+				"title": "Результат",
+				"description": "Результат успешного крафта",
+				"type": "object",
+				"required": ["class"],
+				"properties": {
+					"class": {
+						"type":"string",
+						"title": "Тип объекта",
+						"description": "Имя класса объекта, который будет создан"
+					},
+					"count": {
+						"title": "Количество объектов",
+						"description": "Сколько объектов будет создано в результате успешного крафта",
+						"$ref": "#/items/definitions/DefaultUtilityCounter"
+					},
+					"radius": {
+						"title": "Радиус создания",
+						"description": "Радиус создания объекта",
+						"type":"number",
+						"default": 0,
+						"minimum": 0, "maximum": 50
+					},
+					"modifiers": {
+						"type": "array",
+						"title": "Модификаторы",
+						"description": "Модификаторы для создаваемых предметов",
+						"items": {
+							"title": "Модификатор (без параметров)",
+							"type": ["object","string"],
+							"properties": {
+								"name": {
+									"title": "Название модификатора",
+									"enum": ["set_name","auto_ht"]
+								}
+							},							
+							// here placed dict of modifiers
+							"anyOf": [
+								{
+									"if": {
+										"type": "object",
+										"properties": {"name": {"const": "set_name"}}
+									},"then": {
+										"additionalProperties": false,
+										"required": ["value"],
+										"properties": {
+											"name": {},
+											"value": {
+												"type": "string",
+												"title": "Новое имя",
+												"description": "Новое название предмета. Допускается использование тегов",
+												"examples": [
+													"Предмет",
+													"Предмет из {TAGGED_INGREDIENT.name.lower}"
+												]
+											}
+										}
+									}
+								}
+							]
+						}
 					}
 				}
 			}
-
-			
 		},
 		
 		"allOf": [

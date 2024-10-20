@@ -6,6 +6,8 @@
   required:
     components:
       - class: NonCls
+  result:
+    class: IFoodItem
 
 - 
   desc: ""
@@ -24,8 +26,20 @@
         count: 100
       target:
         class: Item
-  fail_handler:
+  fail_handler: 
     handler_type: default
+    item: "Test"
+    count: 30
+  result:
+    class: IFoodItem
+    count: 5
+    modifiers:
+      - test
+      - evalaekr;faekr;
+      - name: set_name
+        value: "test"
+      - name: set_name
+        value: ""
 
 - name: test
   type: building
@@ -34,4 +48,6 @@
     components:
       - class: IFoodItem
       - class: Opt
-  
+  result:
+    class: Test
+    
