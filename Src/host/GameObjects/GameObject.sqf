@@ -2109,6 +2109,22 @@ class(IDestructible) extends(GameObject)
 	//пользовательская функция получения типов при уничтожении объекта. можно настроить кастомные типы, выпадающие при уничтожении
 	getter_func(getOnDestroyTypes,callSelf(getOnDestroyTypesFromMaterial));
 
+	//минимально допустимое хп
+	getter_func(getMinAllowedHP,-5* getSelf(hpMax));
+	//текущее представление хп в процентном соотношении
+	func(getHPCurrentPrecentage)
+	{
+		objParams();
+		round linearConversion [callSelf(getMinAllowedHP),getSelf(hpMax),getSelf(hp),0,100,true];
+	};
+	func(setHPCurrentPrecentage)
+	{
+		objParams_1(_val);
+		private _newHp = round linearConversion [0,100,_val,callSelf(getMinAllowedHP),getSelf(hpMax),true];
+		_newHp = clamp(_newHp,callSelf(getMinAllowedHP),getSelf(hpMax));
+		setSelf(hp,_newHp);
+	};
+
 	func(getOnDestroyTypesFromMaterial)
 	{
 		objParams();
