@@ -41,11 +41,14 @@
 				]
 			},
 
-			"ItemComponent": {
+			"ItemComponentBase": {
+				"title": "Ингредиент",
+				"description": "Ингредиент крафта",
 				"type": "object",
 				"required": ["class"],
 				"additionalProperties": false,
 				"properties": {
+					"hp": {},
 					"class": {
 						"title": "Класс ингредиента",
 						"description": "Класснейм требуемого ингредиента. Может быть строкой или массивом строк. Строки (в т.ч. в массиве) могут содержать макросы расширения для автоматического добавления множества классов с одинаковыми именем и отличающихся одной цифрой (см. примеры).\nНапример: при добавлении класса \"CitizenCloth(1-4)\" значение будет расширено в массив строк: [\"CitizenCloth1\",\"CitizenCloth2\",\"CitizenCloth3\",\"CitizenCloth4\"]",
@@ -61,22 +64,6 @@
 						"title": "Название ингредиента",
 						"description": "(Опционально) Кастомное название, выводимое информации о рецепте.",
 						"type": "string"
-					},
-					"hp": {
-						"title": "Требуемое здоровье",
-						"description": "(Опционально) Требуемое здоровье ингредиента. По умолчанию без ограничений. Может быть процентным значением либо количеством ХП",
-						"examples": [10,-5,"20%","85%"],
-						"type": ["integer","string"],
-						"if": {
-							"type": "string"
-						},
-						"then": {
-							"pattern": "^(([0-9]){1,2}|100)[ \t]*%$"
-						},
-						"else": {
-							"minimum": -1000,
-							"maximum": 1000
-						}
 					},
 					"count": {
 						"title": "Необходимое количество",
@@ -108,6 +95,156 @@
 						"title": "Дополнительное условие",
 						"description": "(для опытных) Код условия, которое при удовлетворении позволит использовать ингредиент",
 						"default": ""
+					}
+				}
+			},
+			"ItemComponent": {
+				"allOf": [
+					{
+						"$ref": "#/items/definitions/ItemComponentBase"
+					},
+					{
+						"properties": {
+							"hp": {
+								"title": "Требуемое здоровье",
+								"description": "(Опционально) Требуемое здоровье ингредиента. По умолчанию без ограничений. Может быть процентным значением либо количеством ХП",
+								"examples": [10,-5,"20%","85%"],
+								"type": ["integer","string"],
+								"if": {
+									"type": "string"
+								},
+								"then": {
+									"pattern": "^(([0-9]){1,2}|100)[ \t]*%$"
+								},
+								"else": {
+									"minimum": -1000,
+									"maximum": 1000
+								}
+							}
+						}
+					}
+				]
+			},
+			"ItemComponentInteract": 
+			{
+				"allOf": [
+					{
+						"$ref": "#/items/definitions/ItemComponentBase"
+					},
+					{
+						"properties": {
+							"hp": {
+								"additionalProperties": false,
+								"type": ["integer","string","object"],
+								"required": ["value"],
+								"properties": {
+									"value": {
+										"title": "Требуемое здоровье",
+										"description": "(Опционально) Требуемое здоровье ингредиента. По умолчанию без ограничений. Может быть процентным значением либо количеством ХП",
+										"examples": [10,-5,"20%","85%"],
+										"type": ["integer","string"],
+										"if": {
+											"type": "string"
+										},
+										"then": {
+											"pattern": "^(([0-9]){1,2}|100)[ \t]*%$"
+										},
+										"else": {
+											"minimum": -1000,
+											"maximum": 1000
+										}
+									},
+									"message": {
+										"type": ["string","array"],
+										"title": "Сообщение об ошибке",
+										"description": "Сообщение об ошибке. Чтобы получить имя этого ингредиента используйте {basename}. Для выбора случайных слов из набора используйте (A|B|C)",
+										"required": ["value"],
+										"examples": [
+											"{basename} слишком повреждён",
+											"{basename} (сломан|раздолбан|попорчен)",
+											[
+												"Для создания {basename.lower} должен быть в хорошем состоянии",
+												"{basename} поломан"
+											]
+										]
+									}
+								},
+								"examples": [
+									{
+										"value": "70%"
+									},
+									{
+										"value": "10%",
+										"message": "{basename} слишком повреждён"
+									}
+								]
+							}
+						}
+					}
+				]				
+			},
+
+			"ResultBase": {
+				"title": "Результат",
+				"description": "Результат успешного крафта",
+				"type": "object",
+				"required": ["class"],
+				"properties": {
+					"class": {
+						"type":"string",
+						"title": "Тип объекта",
+						"description": "Имя класса объекта, который будет создан"
+					},
+					"count": {
+						"title": "Количество объектов",
+						"description": "Сколько объектов будет создано в результате успешного крафта",
+						"$ref": "#/items/definitions/DefaultUtilityCounter"
+					},
+					"radius": {
+						"title": "Радиус создания",
+						"description": "Радиус создания объекта",
+						"type":"number",
+						"default": 0,
+						"minimum": 0, "maximum": 50
+					},
+					"modifiers": {
+						"type": ["array","null"],
+						"title": "Модификаторы",
+						"description": "Модификаторы для создаваемых предметов",
+						"items": {
+							"title": "Модификатор (без параметров)",
+							"type": ["object","string"],
+							"properties": {
+								"name": {
+									"title": "Название модификатора",
+									"enum": ["set_name","auto_ht"]
+								}
+							},							
+							// here placed dict of modifiers
+							"anyOf": [
+								{
+									"if": {
+										"type": "object",
+										"properties": {"name": {"const": "set_name"}}
+									},"then": {
+										"additionalProperties": false,
+										"required": ["value"],
+										"properties": {
+											"name": {},
+											"value": {
+												"type": "string",
+												"title": "Новое имя",
+												"description": "Новое название предмета. Допускается использование тегов",
+												"examples": [
+													"Предмет",
+													"Предмет из {TAGGED_INGREDIENT.name.lower}"
+												]
+											}
+										}
+									}
+								}
+							]
+						}
 					}
 				}
 			},
@@ -277,7 +414,7 @@
 				}
 			},
 
-			"fail_handler": {
+			"failed_handler": {
 				"type": ["object","null"],
 				"title": "Обработчик провала",
 				"description": "Обработчик провала крафта (по скиллам)",
@@ -310,6 +447,8 @@
 				]
 			},
 			"options": {
+				"title": "Дополнительные опции",
+				"description": "Дополнительные опции крафта",
 				"type": "object",
 				"properties": {
 					"collect_distance": {
@@ -334,68 +473,7 @@
 			},
 
 			"result": {
-				"title": "Результат",
-				"description": "Результат успешного крафта",
-				"type": "object",
-				"required": ["class"],
-				"properties": {
-					"class": {
-						"type":"string",
-						"title": "Тип объекта",
-						"description": "Имя класса объекта, который будет создан"
-					},
-					"count": {
-						"title": "Количество объектов",
-						"description": "Сколько объектов будет создано в результате успешного крафта",
-						"$ref": "#/items/definitions/DefaultUtilityCounter"
-					},
-					"radius": {
-						"title": "Радиус создания",
-						"description": "Радиус создания объекта",
-						"type":"number",
-						"default": 0,
-						"minimum": 0, "maximum": 50
-					},
-					"modifiers": {
-						"type": "array",
-						"title": "Модификаторы",
-						"description": "Модификаторы для создаваемых предметов",
-						"items": {
-							"title": "Модификатор (без параметров)",
-							"type": ["object","string"],
-							"properties": {
-								"name": {
-									"title": "Название модификатора",
-									"enum": ["set_name","auto_ht"]
-								}
-							},							
-							// here placed dict of modifiers
-							"anyOf": [
-								{
-									"if": {
-										"type": "object",
-										"properties": {"name": {"const": "set_name"}}
-									},"then": {
-										"additionalProperties": false,
-										"required": ["value"],
-										"properties": {
-											"name": {},
-											"value": {
-												"type": "string",
-												"title": "Новое имя",
-												"description": "Новое название предмета. Допускается использование тегов",
-												"examples": [
-													"Предмет",
-													"Предмет из {TAGGED_INGREDIENT.name.lower}"
-												]
-											}
-										}
-									}
-								}
-							]
-						}
-					}
-				}
+				//base defined
 			}
 		},
 		
@@ -457,17 +535,51 @@
 											"title": "Предмет в руке",
 											"description": "Необходимый предмет которым взаимодействуют по target",
 											"type":"object",
-											"$ref": "#/items/definitions/ItemComponent"
+											"$ref": "#/items/definitions/ItemComponentInteract"
 										},
 										"target": {
 											"title": "Цель взаимодействия",
 											"description": "Целевой объект взаимодействия, по которому игрок кликает с помощью hand_item",
 											"type": "object",
-											"$ref": "#/items/definitions/ItemComponent"
+											"$ref": "#/items/definitions/ItemComponentInteract"
 										}
 									}
 								}
 							}
+						},
+						"result": {
+							"additionalProperties": false,
+							"patternProperties": {
+								"^sound$": {
+									"title": "Звук при крафте",
+									"description": "(Опционально) Запуск звука при успешном действии крафта. Можно использовать макрос диапазона (MIN-MAX). При указании массива выбирает один случайный звук из списка.",
+									"type": ["string","array"],
+									"examples": [
+										"damage/wood_1.ogg",
+										"damage/wood_(1-3).ogg",
+										[
+											"damage/wood_1",
+											"damage/wood_2",
+											"damage/wood_3"
+										]
+									]
+								},
+								"^emote$": {
+									"title": "Эмоция при крафте",
+									"description": "(Опционально) Запуск эмоута игроком при успешном действии крафта. Можно использовать макросы выбора и подстановку названий от target и hand_item. При указании массива выбирает одно случайное сообщение из списка.",
+									"type": ["string","array"],
+									"examples": [
+										"(использует|уничтожает) {target.lower}.",
+										"работает над {target.lower} с помощью {hand_item.lower}.",
+										[
+											"крафтит штуку",
+											"создает фиговину",
+											"фигачит изделие"
+										]
+									]
+								}
+							},
+							"$ref": "#/items/definitions/ResultBase"
 						}
 					}
 				},
@@ -486,6 +598,10 @@
 									}
 								}
 							}
+						},
+						"result": {
+							"additionalProperties": false,
+							"$ref": "#/items/definitions/ResultBase"
 						}
 					}
 				}

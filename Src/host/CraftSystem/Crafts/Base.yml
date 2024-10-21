@@ -13,8 +13,8 @@
         count: 1
         check_type_of: false
         hp: 50%
-  failed:
-    enable: true # порча предметов при недостаточном навыке.
+  failed_handler:
+    handler_type: "default" # порча предметов при недостаточном навыке.
     item: WoodenDebris2
     count: {min: 3, max: 6} # может быть диапазоном -> count: {min: 1, max: 4}
   result:
