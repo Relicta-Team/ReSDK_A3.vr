@@ -9,7 +9,7 @@
 #include "..\..\text.hpp"
 #include "..\..\GameObjects\GameConstants.hpp"
 
-#define ENABLE_THIS_SYSTEM_DEBUG
+//#define ENABLE_THIS_SYSTEM_DEBUG
 #include "ObjectSystem.h"
 
 struct(BakingOvenSystem) base(BaseWorldProcessorCraftSystem)
