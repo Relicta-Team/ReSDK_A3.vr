@@ -35,7 +35,7 @@ noe_client_interp_processObjInterp = {
 			_tp = _m modelToWorldVisual (_m selectionPosition (_sl)vectoradd _of);
 			_tt = _pby;
 		};
-		traceformat("POS: %1 -> %2; TRANS: %3  -> %4",_fp arg _tp arg _ft arg _tt);
+		//traceformat("POS: %1 -> %2; TRANS: %3  -> %4",_fp arg _tp arg _ft arg _tt);
 		_tEnd = _tStart + _dur;
 		if (_emuMode) then {
 			_tval = linearConversion [_tStart,_tEnd,tickTime,0,1];
