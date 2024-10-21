@@ -2543,6 +2543,7 @@ region(Craft system)
 	var(craftComponentName,null); //система крафта (строка или null)
 	var(craftComponentParams,null);
 	var(craftComponent,null);
+	getter_func(hasCraftComponent,!isNull(getSelf(craftComponent)));
 
 	func(initCraftSystem)
 	{
@@ -2557,6 +2558,19 @@ region(Craft system)
 			private _comp = [_craftComp,[this,_params]] call struct_alloc;
 			setSelf(craftComponent,_comp);
 		};
+	};
+
+	func(getDescFor)
+	{
+		objParams_1(_usr);
+		private _baseDesc = super();
+		if callSelf(hasCraftComponent) then {
+			private _ccompDesc = getSelf(craftComponent) callp(getDescFor,_usr);
+			if (_ccompDesc!="") then {
+				modvar(_baseDesc) +sbr+ _ccompDesc;
+			};
+		};
+		_baseDesc
 	};
 
 	//redirects move funcs to craft component

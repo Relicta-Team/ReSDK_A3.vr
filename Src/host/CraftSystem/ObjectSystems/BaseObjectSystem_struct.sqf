@@ -231,6 +231,13 @@ struct(BaseCraftSystem)
 		self getv(failHandler) callp(onCatched)
 	}
 
+	//доп описание для пользователя
+	def(getDescFor)
+	{
+		params ["_usr"];
+		""
+	}
+
 	//get possible recipes based on ingredients
 	def(_getRecipes)
 	{
