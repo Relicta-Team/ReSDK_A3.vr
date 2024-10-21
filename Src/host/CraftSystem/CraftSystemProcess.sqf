@@ -544,14 +544,16 @@ csys_processCraftMain = {
 						_x callp(handleValidIngredient,_objIngredient);
 					};
 				} foreach _leftComponents;
-			} foreach _objList;
+			} foreach _objectColleciton;
 
 			private _canCraft = all_of(_leftComponents apply {_x callv(canCraftFromIngredient)});
+			//traceformat("VALID RECIPE %1 : %2",_robj arg _leftComponents apply {_x callv(canCraftFromIngredient)})
 			if (_canCraft) then {
 				_curRecipes pushBack [_robj,_leftComponents];
 			};
 
 		} foreach _possibleRecipes;
+		//traceformat("CAPTURED: %1 %2",_curRecipes arg _possibleRecipes)
 		assert_str(count _curRecipes <= 1,format vec3("Too many possible recipes (%2): %1",_curRecipes apply {_x select 1},count _curRecipes));
 		if (count _curRecipes == 0) exitWith {
 			RETURN(false)
@@ -592,18 +594,7 @@ csys_processCraftMain = {
 		_sysObj setv(usr,_crafter);
 		_usr = _crafter;
 
-		private _allPoses = [];
-		//use components and calculate tempobject pos
-		{
-			{
-				_allPoses pushBack callFunc(_x,getPos);
-			} foreach (_x callv(getObjects));
-		} foreach _leftComponents;
-		//create temp cooking
-		private _midPos = [_allPoses] call getPosListCenter;
-		if equals(_midPos,vec3(0,0,0)) then {_midPos = callFunc(self getv(src),getPos)};
-
-		_position = _midPos;
+		_position = _sysObj callp(getResultBasePosition,_leftComponents);
 	};
 
 	if isNullVar(_recipe) exitWith {false};

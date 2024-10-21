@@ -1469,6 +1469,37 @@ class(IDestructible) extends(GameObject)
 		callSelf(replicateObject);
 	};
 
+	//set new position with interpolation
+	func(changePosition)
+	{
+		objParams_1(_pos);
+		if !callSelf(isInWorld) exitWith {};
+		
+		{
+			callFuncParams(_x,interpolate,"auto_trans_fall" arg this arg getSelf(pointer));
+		} foreach callSelfParams(getNearMobs,20);
+
+		callSelfParams(setPos__,_pos);
+	};
+
+	func(getNewTransform)
+	{
+		params ['this',["_down",-90],["_dir",random 360],["_force",2],["_addIgnored",[]]];
+		private _startPos = callSelf(getPos);
+		_force = clamp(_force,1,10);
+		private _ign = [this];
+		_ign append _addIgnored;
+		[
+			this,
+			_startPos,
+			[_down,0,_dir],
+			_force,
+			null,
+			null,
+			_ign
+		] call si_rayTraceProcess;
+	};
+
 	//todo optimize transport (from replicateObject to replicateTransform)
 	func(setTransform)
 	{
@@ -2571,6 +2602,22 @@ region(Craft system)
 			};
 		};
 		_baseDesc
+	};
+
+	func(onMainAction) {
+		objParams_1(_usr);
+		if callSelf(hasCraftComponent) exitWith {
+			getSelf(craftComponent) callp(onActivate,_usr);
+		};
+		super();
+	};
+
+	func(onInteractWith)
+	{
+		objParams_2(_with,_usr);
+		if callSelf(hasCraftComponent) exitWith {
+			getSelf(craftComponent) callp(moveIngredient,_with arg _usr);
+		};
 	};
 
 	//redirects move funcs to craft component

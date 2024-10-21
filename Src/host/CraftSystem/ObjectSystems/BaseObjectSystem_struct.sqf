@@ -163,8 +163,6 @@ struct(BaseCraftSystem)
 	def(src) nullPtr //source game object
 	def(usr) nullPtr //user last activator or world objects last owner
 
-	def(_ingredients) [] //here writes ingredient list
-
 	def(canUpdate) { true } //отвечает за то будет ли обрабатываться цикл симуляции
 
 	//стадия активного обновления
@@ -206,7 +204,7 @@ struct(BaseCraftSystem)
 	def(processCraft)
 	{
 		private _ctx = self getv(craftContext);
-		if (_ctx get "can_craft_by_skills" || isNull(self getv(failHandler))) then {
+		private _result = if (_ctx get "can_craft_by_skills" || isNull(self getv(failHandler))) then {
 			self callv(onCrafted);
 		} else {
 			self callv(onFail);
@@ -214,6 +212,15 @@ struct(BaseCraftSystem)
 		self setv(failHandler,null);
 		self setv(craftRecipe,null);
 		self setv(craftContext,null);
+
+		self callv(postCrafted);
+		_result
+	}
+
+	//always called after processCraft
+	def(postCrafted)
+	{
+
 	}
 
 	//called on successful craft
@@ -275,6 +282,12 @@ struct(BaseCraftSystem)
 		self callv(toString)
 	}
 
+	def(getResultBasePosition)
+	{
+		setLastError("Result base position not defined");
+		[0,0,0]
+	}
+
 endstruct
 
 /* 
@@ -290,11 +303,21 @@ struct(BaseInternalCraftSystem) base(BaseCraftSystem)
 
 	def(canUpdate) { false }
 
+	
+	def(_ingredients) [] //here writes ingredient list as gameobjects
+	def(_results) [] //resultlist
+
+	def(init)
+	{
+		self setv(_ingredients,[]);
+		self setv(_results,[]);
+	}
+
 	//called on user perform action (E pressing)
 	def(onActivate)
 	{
 		params ["_usr"];
-		self setv(usr,_usr);
+		self callv(process);
 	}
 
 	//move functions
@@ -336,7 +359,7 @@ struct(BaseInternalCraftSystem) base(BaseCraftSystem)
 		[self getv(_ingredients),_ingr] call arrayDeleteItem;
 	}
 
-	//require user implementation
+	// require user implementation
 	def(canAddIngredient)
 	{
 		params ["_ingr"];
@@ -348,11 +371,30 @@ struct(BaseInternalCraftSystem) base(BaseCraftSystem)
 		params ["_ingr"];
 		_ingr in (self getv(_ingredients));
 	}
+
+	// called on LMB with item
+	def(moveIngredient)
+	{
+		params ["_ingr","_usr"];
+		if isNullReference(_ingr) exitWith {};
+		assert(isTypeOf(_ingr,Item));
+		callFuncParams(_ingr,moveItem,self getv(src));
+	}
+
+	def(getObjects) {array_copy(self getv(_ingredients))}
 	
+	// main processor
 	def(process)
 	{
 
 	}
+
+	def(postCrafted)
+	{
+		self setv(_ingredients,(self getv(_ingredients)) - [nullPtr]);
+	}
+
+	
 endstruct
 
 struct(BaseWorldProcessorCraftSystem) base(BaseCraftSystem)
@@ -362,6 +404,22 @@ struct(BaseWorldProcessorCraftSystem) base(BaseCraftSystem)
 		format["WorldProc::%1(%2)",struct_typename(self),self getv(systemType)];
 	}
 	
+	def(getResultBasePosition)
+	{
+		params ["_leftComponents"];
+		private _allPoses = [];
+		//use components and calculate tempobject pos
+		{
+			{
+				_allPoses pushBack callFunc(_x,getPos);
+			} foreach (_x callv(getObjects));
+		} foreach _leftComponents;
+		//create temp cooking
+		private _midPos = [_allPoses] call getPosListCenter;
+		if equals(_midPos,vec3(0,0,0)) then {_midPos = callFunc(self getv(src),getPos)};
+
+		_midPos
+	}
 	
 	//life cycle
 	def(process) {}

@@ -104,3 +104,19 @@
     modifiers:
       - name: set_name
         value: "Пирог с {OPTIONAL_FOOD:name.lower}"
+
+- type: system
+  name: Лапшовое дело
+  desc: Тесто запихнуть в мясодавку
+  system_specific: OrganicGrinderSystem
+  required:
+    components:
+      - class: Testo
+        count: 2
+        meta_tag: TESTO_TAG
+  result:
+    class: Lapsha
+    count: 1
+    modifiers:
+      - name: set_name
+        value: "Лапша из {TESTO_TAG:name.lower}"

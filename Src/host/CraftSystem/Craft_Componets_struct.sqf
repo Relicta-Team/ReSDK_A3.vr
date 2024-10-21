@@ -185,7 +185,8 @@ struct(CraftRecipeComponent)
 	{
 		params ["_ingredient"];
 		private _fList = self getv(_foundItems);
-		_fList pushBack [_ingredient,getVar(_ingredient,loc)];
+		private _ingrLoc = if callFunc(_ingredient,isInWorld) then {getVar(_ingredient,loc)} else {_ingredient};
+		_fList pushBack [_ingredient,_ingrLoc];
 
 		if ((self callv(_getLeftCount)) == 0) then {
 			self setv(_isReadyIngredient,true);

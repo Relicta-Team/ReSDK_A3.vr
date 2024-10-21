@@ -138,11 +138,14 @@ struct(CraftRecipeSystemResult) base(CraftRecipeResult)
 		private _robj = _craftCtx get "recipe";
 
 		private _class = self getv(class);
+		private _resultObjects = [];
 		if !isNullVar(_class) then {
 			for "_i" from 1 to (self getv(count) callv(getValue)) do {
 				private _realPos = [_pos,self getv(radius)] call randomRadius;
 				private _newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
 				
+				_resultObjects pushBack _newObj;
+
 				//apply modifiers to created object
 				private _modCtxList = _craftCtx get "modifier_context_list";
 				traceformat("Start apply craft reslut modifiers (%1) with context %2",count (self getv(modifiers)) arg _modCtxList)
@@ -153,5 +156,6 @@ struct(CraftRecipeSystemResult) base(CraftRecipeResult)
 			};
 		};
 
+		_resultObjects
 	}
 endstruct

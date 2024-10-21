@@ -269,7 +269,7 @@ struct(ICraftRecipeBase)
 		if isNullVar(_fdict) exitWith {};
 		CRAFT_PARSER_HEAD;
 
-		GETVAL_STR(_fdict, vec2("handler_name",self getv(fail_enable)));
+		GETVAL_STR(_fdict, vec2("handler_name","UNDEFINED"));
 		FAIL_CHECK_REFSET(_refResult);
 		private _handlerName = "CraftFailedHandler::" + value;
 		

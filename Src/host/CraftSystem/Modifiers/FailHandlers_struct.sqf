@@ -115,10 +115,11 @@ struct(Craft_FailedHandler::default)
 		private _createCount = self getv(fail_count) callv(getValue);
 
 		private _perDebrisHP = floor(_allHP / _ctrItms);
-
+		private _created = [];
 		for "_i" from 1 to _createCount do {
 			private _realPos = [_pos,_maxDistanceRange] call randomRadius;
 			private _newObj = [_type,_realPos] call createGameObjectInWorld;
+			_created pushBack _newObj;
 			setVar(_newObj,hp,_perDebrisHP + randInt(-4,2));
 			setVar(_newObj,ht,randInt(1,4));
 		};
@@ -132,5 +133,7 @@ struct(Craft_FailedHandler::default)
 			]
 		];
 		callFuncParams(_ctx get "user",meSay,_m);
+
+		_created
 	}
 endstruct
