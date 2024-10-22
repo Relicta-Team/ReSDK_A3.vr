@@ -254,11 +254,6 @@ struct(ICraftRecipeBase)
 		_ingredientList pushBack _ingredient;
 	}
 
-
-	def(fail_enable) false;
-	def(fail_type) null;
-	def(fail_count) null; //CraftDynamicCountRange__
-
 	//new failed handler params
 	def(fail_handler_type) "" //Craft_FailedHandler::$name$
 	def(fail_handler_params) null
@@ -266,20 +261,21 @@ struct(ICraftRecipeBase)
 	def(_parseFailed)
 	{
 		params ["_fdict","_refResult"];
+		
 		if isNullVar(_fdict) exitWith {};
 		CRAFT_PARSER_HEAD;
 
-		GETVAL_STR(_fdict, vec2("handler_name","UNDEFINED"));
+		GETVAL_STR(_fdict, vec2("handler_type","UNDEFINED"));
 		FAIL_CHECK_REFSET(_refResult);
-		private _handlerName = "CraftFailedHandler::" + value;
-		
-		if struct_existType_str(_handlerName) exitWith {
+		private _handlerName = "Craft_FailedHandler::" + value;
+		traceformat("PARSE FAILED %1",_handlerName)
+		if !struct_existType_str(_handlerName) exitWith {
 			refset(_refErr,"Failed handler not found: " + value);
 		};
 		//set handler name
 		self setv(fail_handler_type,_handlerName);
 
-		_fdict deleteAt "handler_name";
+		_fdict deleteAt "handler_type";
 		if (count _fdict > 0) then {
 			self setv(fail_handler_params,_fdict);
 		};
@@ -461,63 +457,6 @@ struct(ICraftRecipeBase)
 		};
 
 		_result
-	}
-
-	//TODO сделать разные варианты провала (урон, поломка, уменьшение состояния)
-	def(onFailProcess)
-	{
-		params ["_ctx"];
-		private _ccpy = _ctx get "components_copy";
-		private _pos = _ctx get "position";
-
-		private _maxDistanceRange = 0.05;
-		private _allHP = 0;
-		private _ctrItms = 0;
-
-		//delete all ingredients
-		{
-			//exclude optionals
-			if (_x getv(optional)) then {continue};
-
-			{
-				_x params ["_itm","_real"];
-
-				if ((getVar(_itm,getPos) distance _pos) > _maxDistanceRange) then {
-					_maxDistanceRange = getVar(_itm,getPos) distance _pos;
-				};
-
-				if (getVar(_itm,hp) > 0) then {
-					modvar(_allHP) + getVar(_itm,hp);
-					INC(_ctrItms);
-				};
-
-				[_itm] call deleteGameObject;
-			} foreach (_x getv(_foundItems));
-		} foreach _ccpy;
-		
-		//creating fail items
-		private _type = self getv(fail_type);
-		assert(_type);
-		private _createCount = self getv(fail_count) callv(getValue);
-
-		private _perDebrisHP = floor(_allHP / _ctrItms);
-
-		for "_i" from 1 to _createCount do {
-			private _realPos = [_pos,_maxDistanceRange] call randomRadius;
-			private _newObj = [_type,_realPos] call createGameObjectInWorld;
-			setVar(_newObj,hp,_perDebrisHP + randInt(-4,2));
-			setVar(_newObj,ht,randInt(1,4));
-		};
-
-		private _m = format["пытается сделать %1%2",self getv(name),
-			pick[
-				", но всё запарывает.",
-				", но ничего не получается.",
-				" и всё портит.",
-				" и проваливает попытку."
-			]
-		];
-		callFuncParams(_ctx get "user",meSay,_m);
 	}
 
 	def(canSeeRecipe)

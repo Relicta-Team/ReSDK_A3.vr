@@ -52,6 +52,10 @@
             - "А хавчик то (попорчен|убит|наёбнут)"
   options:
     craft_duration: rta * 2
+  failed_handler:
+    handler_type: default
+    item: OrganicDebris1
+    count: 1
     
   result:
     sound: "damage/wood_(1-3).ogg" # (опционально) проигрыш звука при действии. (1-3) подставляет рандомное число

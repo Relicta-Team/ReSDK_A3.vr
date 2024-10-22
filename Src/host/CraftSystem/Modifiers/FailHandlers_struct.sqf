@@ -22,6 +22,8 @@
 */
 struct(Craft_FailedHandler)
 	
+	def(position) null; //внешняя установочная позиция расположения результата
+
 	// получает контекст для обработки провала.
 	// это нужно для того, чтобы можно было получить информацию по предметам до их непосредственного уничтожения
 	//_ingredientsCopy - это CraftRecipeComponent|CraftRecipeInteractorComponent
@@ -32,6 +34,7 @@ struct(Craft_FailedHandler)
 
 	// поймали провал крафта
 	//ctx это контекст крафта
+	//! Должен возвращать массив созданных предметов (при наличии)
 	def(onCatched)
 	{
 		params ["_recipe","_ctx"];
@@ -77,24 +80,31 @@ struct(Craft_FailedHandler::default)
 		};
 	}
 
-	def(onCatched)
-	{
-		params ["_recipe","_ctx"];
+	def(perDebrisHPPrec) 1 //one precent
+	def(maxDistanceRange) 0.05 //допустимая дистанция рандомного размещения
 
-		private _ccpy = _ctx get "components_copy";
-		private _pos = _ctx get "position";
+	def(itmsToDelete) []
+
+	def(captureContext)
+	{
+		params ["_recipe","_usr","_ingredientsCopy"];
+		private _delitms = [];
+		private _ccpy = _ingredientsCopy;
 
 		private _maxDistanceRange = 0.05;
 		private _allHP = 0;
 		private _ctrItms = 0;
+		private _pos = self getv(position);
 
 		//delete all ingredients
 		{
 			//exclude optionals
-			if (_x getv(optional)) then {continue};
+			private _curIngredient = _x;
+			if (_curIngredient getv(optional)) then {continue};
+			if !(_curIngredient getv(destroy)) then {continue};
 
 			{
-				_x params ["_itm","_real"];
+				private _itm = _x;
 
 				if ((getVar(_itm,getPos) distance _pos) > _maxDistanceRange) then {
 					_maxDistanceRange = getVar(_itm,getPos) distance _pos;
@@ -105,26 +115,55 @@ struct(Craft_FailedHandler::default)
 					INC(_ctrItms);
 				};
 
-				[_itm] call deleteGameObject;
-			} foreach (_x getv(_foundItems));
+				
+				_delitms pushBack _itm;
+			} foreach (_curIngredient callv(getObjects));
 		} foreach _ccpy;
+
+		self setv(maxDistanceRange,_maxDistanceRange);
+		self setv(itmsToDelete,_delitms);
 		
+		if (_ctrItms == 0) exitWith {};
+
+		private _perDebrisHPPrec = floor(_allHP / _ctrItms);
+		
+		self setv(perDebrisHPPrec,_perDebrisHPPrec);
+
+	}
+
+	def(onCatched)
+	{
+		params ["_recipe","_ctx"];
+
+		//delete items before
+		{
+			[_x] call deleteGameObject;
+		} foreach (self getv(itmsToDelete));
+
+		private _pos = _ctx get "position";
+
 		//creating fail items
 		private _type = self getv(fail_type);
 		assert(_type);
 		private _createCount = self getv(fail_count) callv(getValue);
 
-		private _perDebrisHP = floor(_allHP / _ctrItms);
+		
 		private _created = [];
 		for "_i" from 1 to _createCount do {
-			private _realPos = [_pos,_maxDistanceRange] call randomRadius;
+			private _realPos = [_pos,self getv(maxDistanceRange)] call randomRadius;
 			private _newObj = [_type,_realPos] call createGameObjectInWorld;
 			_created pushBack _newObj;
-			setVar(_newObj,hp,_perDebrisHP + randInt(-4,2));
+			//setVar(_newObj,hp,_perDebrisHP + randInt(-4,2));
 			setVar(_newObj,ht,randInt(1,4));
+			private _perDebrisHP = self getv(perDebrisHPPrec);
+			callFuncParams(_newObj,setHPCurrentPrecentage,_perDebrisHP + randInt(-2,2));
 		};
-
-		private _m = format["пытается сделать %1%2",self getv(name),
+		private _nameCreated = "что-то";
+		private _probName = _recipe getv(name);
+		if (!isNullVar(_probName) && {not_equals(_probName,"")}) then {
+			_nameCreated = _probName;
+		};
+		private _m = format["пытается сделать %1%2",_nameCreated,
 			pick[
 				", но всё запарывает.",
 				", но ничего не получается.",

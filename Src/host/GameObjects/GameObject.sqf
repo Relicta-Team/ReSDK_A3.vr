@@ -2117,7 +2117,7 @@ class(IDestructible) extends(GameObject)
 	getter_func(getOnDestroyTypes,callSelf(getOnDestroyTypesFromMaterial));
 
 	//минимально допустимое хп
-	getter_func(getMinAllowedHP,-5* getSelf(hpMax));
+	getter_func(getMinAllowedHP,-5 * getSelf(hpMax));
 	//текущее представление хп в процентном соотношении
 	func(getHPCurrentPrecentage)
 	{

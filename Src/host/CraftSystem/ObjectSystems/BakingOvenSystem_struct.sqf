@@ -80,6 +80,8 @@ struct(BakingOvenSystem) base(BaseWorldProcessorCraftSystem)
 			self setv(isActiveUpdate,true);
 
 			private _tempItem = ["OrganicDebris1",self getv(craftContext) get "position"] call createGameObjectInWorld;
+			setVar(_tempItem,name,"Блюдо");
+			setVar(_tempItem,desc,"Готовящееся " + (self getv(craftContext) get "recipe" get "name"));
 			setVar(_tempItem,_lockedCanIgnite,true);
 			self setv(tempObjectTransform,struct_newp(CraftSerializedTransform,_tempItem));
 			//allocate time

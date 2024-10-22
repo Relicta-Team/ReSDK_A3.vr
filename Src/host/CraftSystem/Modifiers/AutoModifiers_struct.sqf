@@ -199,3 +199,10 @@ struct(CraftModifier::default) base(CraftModifierAbstract)
 		};
 	}
 endstruct
+
+
+struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
+	def(title) "Передача реагентов"
+	def(description) "Модификатор передает реагенты из исходных ингредиентов в результат крафта"
+	
+endstruct
