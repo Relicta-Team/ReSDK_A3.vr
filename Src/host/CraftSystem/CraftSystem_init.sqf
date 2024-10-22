@@ -374,9 +374,20 @@ csys_prepareRangedString = {
 */
 csys_generateInsturctions = {
 	params ["_condition"];
-	
-	setLastError("Component.condition - not implemented yet...");
 
+	private _pat_methodArgs = ":(\w+)\s*\(([^)]+)\)";
+	private _pat_method = ":(\w+)\s*\(\s*\)";
+	private _pat_field = ":(\w+)\b";
+
+	//replace parametrize methods
+	_condition = [_condition,_pat_methodArgs,'callFuncParams(this,$1,$2)'] call regex_replace;
+	_condition = [_condition,_pat_method,'callFunc(this,$1)'] call regex_replace;
+	_condition = [_condition,_pat_field,'getVar(this,$1)'] call regex_replace;
+	private _CODE_INSTR_ = null;
+	_condition = ["_CODE_INSTR_ = {params["""+'this'+"""];",_condition,"}; true"] joinString " ";
+	isNIL (compile _condition);
+
+	_CODE_INSTR_
 	// private _baseCondition = _condition;
 	// private _condExecution = [];
 	// private _lop = [];
@@ -409,6 +420,8 @@ csys_generateInsturctions = {
 	// if (count _condExecution == 0) then { _condExecution = ["true"]};
 	// compile (_condExecution joinString "")
 };
+
+//obsolete constants
 csys_const_regexFunc = "(\w+)\s*\(\)";
 csys_const_regexField = "\w+";
 csys_const_regexOP = "==|!=|<=|>=|\|\||&&|>|<";

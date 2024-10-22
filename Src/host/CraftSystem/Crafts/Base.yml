@@ -15,7 +15,7 @@
         hp: 50%
   failed_handler:
     handler_type: "default" # порча предметов при недостаточном навыке.
-    item: WoodenDebris2
+    class: WoodenDebris2
     count: {min: 3, max: 6} # может быть диапазоном -> count: {min: 1, max: 4}
   result:
     class: TorchDisabled
@@ -54,7 +54,7 @@
     craft_duration: rta * 2
   failed_handler:
     handler_type: default
-    item: OrganicDebris1
+    class: OrganicDebris1
     count: 1
     
   result:

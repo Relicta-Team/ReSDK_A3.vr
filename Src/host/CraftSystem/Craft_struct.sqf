@@ -228,22 +228,24 @@ struct(ICraftRecipeBase)
 		_ingredient setv(destroy,value);
 
 		GETVAL_STR(_curObj, vec2("condition",null));
-		FAIL_CHECK_REFSET;
+		FAIL_CHECK_REFSET(_refErr);
 		if !isNullVar(value) then {
 			private _code = [value] call csys_generateInsturctions;
 			if isNullVar(_code) exitWith {
+				refset(_refErr,format vec2("CraftSystem::Craft() - Invalid condition code: %1",value));
 				FAIL_CHECK_REFSET(_refErr);
 			};
 			_ingredient setv(conditionEvent,_code);
 		};
+		FAIL_CHECK_EMPTY;
 
 		
 		GETVAL_STR(_curObj , vec2("meta_tag",_ingredient getv(metaTag)));
-		FAIL_CHECK_REFSET;
+		FAIL_CHECK_REFSET(_refErr);
 		_ingredient setv(metaTag,value);
 
 		GETVAL_STR(_curObj , vec2("name",_ingredient getv(name)));
-		FAIL_CHECK_REFSET;
+		FAIL_CHECK_REFSET(_refErr);
 		_ingredient setv(name,value);
 
 		if (self callv(isInteractCraft)) exitWith {
