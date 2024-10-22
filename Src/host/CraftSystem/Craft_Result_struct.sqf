@@ -86,16 +86,18 @@ struct(CraftRecipeInteractResult) base(CraftRecipeResult)
 
 		private _class = self getv(class);
 		if !isNullVar(_class) then {
-			private _realPos = [_pos,self getv(radius)] call randomRadius;
-			_newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
+			for "_i" from 1 to (self getv(count) callv(getValue)) do {
+				private _realPos = [_pos,self getv(radius)] call randomRadius;
+				_newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
 
-			//apply modifiers to created object
-			private _modCtxList = _craftCtx get "modifier_context_list";
-			traceformat("Start apply craft reslut modifiers (%1) with context %2",count (self getv(modifiers)) arg _modCtxList)
-			{
-				traceformat("apply craft reslut modifier %1",_x)
-				_x callp(onApply,_newObj arg _usr arg _modCtxList select _foreachIndex arg _craftCtx);
-			} foreach (self getv(modifiers));
+				//apply modifiers to created object
+				private _modCtxList = _craftCtx get "modifier_context_list";
+				traceformat("Start apply craft reslut modifiers (%1) with context %2",count (self getv(modifiers)) arg _modCtxList)
+				{
+					traceformat("apply craft reslut modifier %1",_x)
+					_x callp(onApply,_newObj arg _usr arg _modCtxList select _foreachIndex arg _craftCtx);
+				} foreach (self getv(modifiers));
+			};
 		};
 
 		if ((_craftCtx get "roll_result") == DICE_CRITSUCCESS) then {

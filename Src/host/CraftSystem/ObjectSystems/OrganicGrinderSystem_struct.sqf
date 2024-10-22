@@ -19,6 +19,15 @@
 struct(OrganicGrinderSystem) base(BaseInternalCraftSystem)
 	def(systemType) "organic_grinder"
 	
+	def(moveIngredient)
+	{
+		params ["_ingr","_usr"];
+		if (count (self getv(_ingredients)) >= 5) exitWith {
+			callFuncParams(_usr,localSay,"Не поддаётся. Надо сначала вытащить прокрученное." arg "error");
+		};
+		callbase(moveIngredient);
+	}
+
 	def(getResultBasePosition)
 	{
 		params ["_leftComponents"]; //[[0.08,0,-0.2]]
@@ -44,7 +53,12 @@ struct(OrganicGrinderSystem) base(BaseInternalCraftSystem)
 
 	def(playGrindSound)
 	{
-		callFuncParams(self getv(src),playSound,"reagents\canopen" arg getRandomPitch);
+		private _src = self getv(src);
+		callFuncParams(_src,playSound,"reagents\canopen" arg getRandomPitch);
+		if (count (self getv(_ingredients)) > 0) then {
+			private _mes = pick ["кряхтит.","работает.","крутит кушанья.","вертит яства."];
+			callFuncParams(_src,worldSay,callFunc(_src,getName) + " " +_mes arg "info");	
+		};
 	}
 
 	def(canAddIngredient)

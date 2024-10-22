@@ -1,6 +1,7 @@
 
 - name: Факел
   type: default
+  ignored: true
   category: Light
   required:
     force_visible: true
@@ -23,6 +24,7 @@
 
 - name: Деревянная ограда
   type: building
+  ignored: true
   category: Building
   required:
     skills: { engineering: 13 }
@@ -34,6 +36,7 @@
     class: WoodenSmallFence
 
 - type: interact
+  ignored: true
   required:
     skills:
       farming: 2
@@ -72,6 +75,7 @@
 
 - name: Пирог
   type: system
+  ignored: true
   system_specific: FryingPanSystem
   required:
     force_visible: true
@@ -89,7 +93,7 @@
         value: "Пирог с НАЧИНКОЙ"
 
 - type: system
-  ignored: false
+  ignored: true
   system_specific: BakingOvenSystem
   options:
     craft_duration: from_skill(5,2)
@@ -114,6 +118,7 @@
 
 - type: system
   name: Лапшовое дело
+  ignored: true
   desc: Тесто запихнуть в мясодавку
   system_specific: OrganicGrinderSystem
   required:

@@ -394,7 +394,11 @@ csys_processCraftMain = {
 	};
 	assert(equalTypes(_InternalCraftSkill,0));
 	private _duration = _usr call _durationCheck;
-
+	
+	#ifdef CRAFT_DEBUG_DURATION_CREATING
+	_duration = CRAFT_DEBUG_DURATION_CREATING min _duration;
+	#endif
+	
 	["duration",_duration] call _addCraftContext;
 
 

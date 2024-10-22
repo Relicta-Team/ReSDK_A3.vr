@@ -441,6 +441,7 @@
 				"title": "Дополнительные опции",
 				"description": "Дополнительные опции крафта",
 				"type": "object",
+				"additionalProperties": false,
 				"properties": {
 					"collect_distance": {
 						"type": "number",

@@ -18,6 +18,17 @@
     <<: *ref_main_cooking
     type: system
     system_specific: BakingOvenSystem
+  
+  organic_grinder_default: &organic_grinder
+    <<: *ref_main_cooking
+    type: system
+    system_specific: OrganicGrinderSystem
+
+  interacting_default: &interacting
+    type: interact
+    category: Food
+    options:
+      craft_duration: from_skill(10,1)
 
 # =======================================================
 # Frying pan
@@ -80,7 +91,6 @@
         count: 2
       - class: ButterPiece
       # любая еда в которой не меньше 5 единиц реагентов
-      # ! баг. не берется опциональный ингредиент
       - class: IFoodItem
         condition: :isFood() && :getFilledSpace() >= 5
         meta_tag: mainIngredient
@@ -88,7 +98,7 @@
     class: Pie
     modifiers:
       - name: set_name
-        value: "Пирог с {mainIngredient.lower}"
+        value: "Пирог с {mainIngredient:name.lower}"
 
 - <<: *baking_oven
   required:
@@ -115,4 +125,131 @@
       - class: Testo
   result:
     class: Lepeshka
+    <<: *def_mods
+
+# =======================================================
+# grinder
+# =======================================================
+
+- <<: *organic_grinder
+  required:
+    components:
+      - class: MeatChopped
+  result:
+    class: MeatMinced
+    <<: *def_mods
+- <<: *organic_grinder
+  required:
+    components:
+      - class: Testo
+  result:
+    class: Lapsha
+    <<: *def_mods
+
+# =======================================================
+# Interacting
+# =======================================================
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: Knife
+      target:
+        class: Meat
+  result:
+    class: MeatChopped
+    count: {min: 1, max: 3}
+    <<: *def_mods
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: Knife
+      target:
+        class: Butter
+  result:
+    class: ButterPiece
+    count: 1
+    <<: *def_mods
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: Item
+        name: Молоко
+        condition: |
+          :isReagentContainer() 
+          && (:getMasterReagent() select 0) == "Milk"
+          && (:getMasterReagent() select 1) >= 10
+      target:
+        class: Muka
+  result:
+    class: Testo
+    count: 1
+    #TODO partial transfer
+    <<: *def_mods
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: Knife
+      target:
+        class: Bread
+  result:
+    class: BreadChopped
+    count: {min: 6, max: 10}
+    <<: *def_mods
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: ButterPiece
+      target:
+        class: BreadChopped
+        condition: :name == "Кусок хлеба"
+  result:
+    class: BreadChopped
+    count: 1
+    #TODO add reagents
+    #TODO update model to "relicta_models2\food\s_sandwich\s_sandwich.p3d"
+    modifiers:
+      - default
+      - name: set_name
+        value: Бутер с маслом
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: ButterPiece
+      target:
+        class: BreadChopped
+        condition: :name == "Кусок хлеба"
+  result:
+    class: BreadChopped
+    count: 1
+    #TODO add reagents
+    modifiers:
+      - default
+      - name: set_name
+        value: Бутер "по-калековски"
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: Knife
+      target:
+        class: Pie
+  failed_handler:
+    handler_type: custom
+  result:
+    class: PiePiece
+    radius: 0.1
+    count: {min: 7, max: 10}
     <<: *def_mods

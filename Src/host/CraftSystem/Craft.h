@@ -24,11 +24,13 @@
 // enable for more verbose logging
 #define CRAFT_DEBUG_LOAD
 
+#define CRAFT_DEBUG_DURATION_CREATING 10
 
 #define CRAFT_DEBUG_VISUAL_ON_ATTEMPT
 
 
 #ifndef EDITOR
+	#undef CRAFT_DEBUG_DURATION_CREATING
 	#undef CRAFT_DEBUG_LOAD
 	#undef CRAFT_DEBUG_VISUAL_ON_ATTEMPT
 #endif

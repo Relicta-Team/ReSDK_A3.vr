@@ -15,7 +15,7 @@ class(MeatGrinder) extends(IStruct)
 	var(model,"ml\ml_object_new\model_24\press.p3d");
 	var(material,"MatMetal");
 	var(dr,3);
-
+	getter_func(getMainActionName,"Крутить");
 	var(craftComponentName,"OrganicGrinderSystem");
 	
 endclass
