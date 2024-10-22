@@ -74,7 +74,13 @@
 					},
 					"check_type_of": {
 						"title": "Тип проверки",
-						"description": "Тип проверки ингредиента. Включенный режим выполняет сопоставление ингредиента по классу и его дочерним классам.",
+						"description": "(Опционально) Тип проверки ингредиента. Включенный режим выполняет сопоставление ингредиента по классу и его дочерним классам. По умолчанию включено",
+						"type": "boolean",
+						"default": true
+					},
+					"optional": {
+						"title": "Опциональный ингредиент",
+						"description": "Является ли ингредиент опциональным (необязательным) для крафта. По умолчанию ингредиент обязательный (опция выключена)",
 						"type": "boolean",
 						"default": false
 					},
@@ -274,7 +280,7 @@
 		
         "type": "object",
        // "required": ["type","required","result"], //redefined in ignored checks
-		"additionalProperties": false,
+		
 		"properties": {
 			
 			"name": {
@@ -492,8 +498,30 @@
 						"ignored": {"not": {"const": true}}
 					}
 				},
-				"then": {
+				"then": {"additionalProperties": false,
+					"properties": {
+						"name":{}
+						,"type":{}
+						,"required":{}
+						,"result":{}
+						,"category":{}
+						,"failed_handler":{}
+						,"options":{}
+						,"system_specific":{}
+						,"ignored":{}
+						,"desc":{}
+					},
 					"required": ["type","required","result"]
+				}
+			},
+			{
+				"if": {
+					"properties": {
+						"ignored": {"const": true}
+					}
+				},
+				"then": {
+					"additionalProperties":true
 				}
 			},
 			{

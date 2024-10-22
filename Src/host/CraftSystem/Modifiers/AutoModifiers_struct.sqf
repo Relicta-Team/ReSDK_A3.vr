@@ -31,7 +31,7 @@ struct(CraftModifier::default) base(CraftModifierAbstract)
 		["auto_all",[
 			"type:boolean",
 			"title:Включить все модификаторы",
-			"description:Включить все модификаторы (по умолчанию выключено)"
+			"description:Включает все модификаторы (включено по умолчанию)"
 		]],
 		["auto_ht",[
 			"type:boolean",
@@ -46,7 +46,7 @@ struct(CraftModifier::default) base(CraftModifierAbstract)
 		["auto_hp",[
 			"type:boolean",
 			"title:Автоматическое хп",
-			"description:Автоматическое хп (! сейчас завязано на весе)"
+			"description:Автоматическое хп результирующего объекта"
 		]],
 		["hp_from_skill",[
 			"type:boolean",
@@ -60,7 +60,7 @@ struct(CraftModifier::default) base(CraftModifierAbstract)
 		]]
 	]
 
-	def(auto_all) false
+	def(auto_all) true
 	def(auto_ht) false
 	def(auto_hp) false
 	def(auto_weight) false
@@ -200,9 +200,55 @@ struct(CraftModifier::default) base(CraftModifierAbstract)
 	}
 endstruct
 
+/*
+	Передача реагентов
 
+*/
 struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
 	def(title) "Передача реагентов"
 	def(description) "Модификатор передает реагенты из исходных ингредиентов в результат крафта"
-	
+	def(reqired_fields) []
+	def(allowed_params) [
+		["precentage_loss",
+			[
+				"title:Процент потери реагентов",
+				"description:Сколько процентов от реагентов потеряется при крафте",
+				"type:number",
+				["default",0],
+				["example",[0,50,75,100]]
+			]
+		],
+		["loss_from_skills",[
+				"title:Потеря реагентов от успешности",
+				"description:Потеря реагентов от успешности крафта. Чем выше скилл крафтера, тем меньше потеря",
+				"type:bool",
+				["default",false]
+			]
+		]
+	]
+
+	def(precentage_loss) 0
+	def(loss_from_skills) false
+
+	def(onParameter)
+	{
+		params ["_name","_val"];
+		if (_name == "precentage_loss") exitWith {
+			self callp(addParam,_name arg _val arg 0);
+		};
+		if (_name == "loss_from_skills") exitWith {
+			self callp(addParam,_name arg _val arg false);
+		};
+	}
+
+	def(createModifierContext)
+	{
+		params ["_capturedCtx"];
+	}
+
+	def(onApply)
+	{
+		params ["_itm","_usr","_ctx","_craftContext"];
+	}
+
 endstruct

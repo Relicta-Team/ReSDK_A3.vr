@@ -283,7 +283,15 @@ csys_processCraftMain = {
 
 		} foreach _possibleRecipes;
 		//traceformat("CAPTURED: %1 %2",_curRecipes arg _possibleRecipes)
-		assert_str(count _curRecipes <= 1,format vec3("Too many possible recipes (%2): %1",_curRecipes apply {_x select 1},count _curRecipes));
+		if (count _curRecipes > 1) then {
+			[
+				"Слишком много рецептов соответствуют этому набору ингредиентов."
+				+"Соответствующие рецепты: %1"+endl+"Будет выбран первый рецепт.",
+				(_curRecipes apply {format["Рецепт %1 в %2",(_x select 0) getv(sourceItem),(_x select 0) getv(sourceFile)]})
+					joinString endl
+			] call messageBox;
+		};
+		//assert_str(count _curRecipes <= 1,format vec3("Too many possible recipes (%2): %1",_curRecipes apply {_x select 1},count _curRecipes));
 		if (count _curRecipes == 0) exitWith {
 			RETURN(false)
 		};

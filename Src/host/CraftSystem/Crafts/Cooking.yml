@@ -1,2 +1,118 @@
-- name: head
-  ignored: true
+- ignored: true
+  default_modifiers: &def_mods
+     modifiers:
+        - name: default
+  data_common: &ref_main_cooking
+    # Пробросим самое частое
+    type: default
+    category: Food
+    options:
+      craft_duration: from_skill(180,60)
+
+  frying_default: &frying_pan
+    <<: *ref_main_cooking
+    type: system
+    system_specific: FryingPanSystem
+  
+  baking_oven_default: &baking_oven
+    <<: *ref_main_cooking
+    type: system
+    system_specific: BakingOvenSystem
+
+# =======================================================
+# Frying pan
+# =======================================================
+
+- <<: *frying_pan
+  required:
+    components:
+      - class: Testo
+      - class: Egg
+  result:
+    class: Bun
+    count: 3
+    modifiers:
+      - default
+      - name: set_name
+        value: "Жареный {basename.lower}"
+
+- <<: *frying_pan
+  required:
+    components:
+      - class: Lepeshka
+      - class: Egg
+  result:
+    class: Pancakes
+    <<: *def_mods
+
+- <<: *frying_pan
+  required:
+    components:
+      - class: MeatMinced
+        count: 2
+      - class: SaltShaker
+        check_type_of: false
+        destroy: false
+        optional: true
+  result:
+    class: Cutlet
+    count: 4
+    <<: *def_mods
+
+# =======================================================
+# Baking oven
+# =======================================================
+
+- <<: *baking_oven
+  required:
+    components:
+      - class: Lepeshka
+      - class: Melteshonok
+  result:
+    class: Shavirma
+    <<: *def_mods
+
+- <<: *baking_oven
+  desc: Дополнительно 1 любой ингредиент
+  required:
+    components:
+      - class: Testo
+        count: 2
+      - class: ButterPiece
+      # любая еда в которой не меньше 5 единиц реагентов
+      # ! баг. не берется опциональный ингредиент
+      - class: IFoodItem
+        condition: :isFood() && :getFilledSpace() >= 5
+        meta_tag: mainIngredient
+  result:
+    class: Pie
+    modifiers:
+      - name: set_name
+        value: "Пирог с {mainIngredient.lower}"
+
+- <<: *baking_oven
+  required:
+    components:
+      - class: Testo
+      - class: Egg
+        count: 2
+  result:
+    class: Bread
+    <<: *def_mods
+
+- <<: *baking_oven
+  required:
+    components:
+      - class: Egg
+        count: 2
+  result:
+    class: Omlet
+    <<: *def_mods
+
+- <<: *baking_oven
+  required:
+    components:
+      - class: Testo
+  result:
+    class: Lepeshka
+    <<: *def_mods

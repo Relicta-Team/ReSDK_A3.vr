@@ -185,6 +185,24 @@ struct(CraftModifierAbstract)
 	*/
 	def(allowed_params) []
 
+	def(addParam)
+	{
+		params ["_name","_val","_allowTypes"];
+		if !isNullVar(_allowTypes) then {
+			if not_equalTypes(_allowTypes,[]) then {
+				_allowTypes = [_allowTypes];
+			};
+		};
+		if (!isNullVar(_allowTypes) && {!(_val isEqualTypeAny _allowTypes)}) exitWith {
+			self callp(setParseError,format vec3("Param %1 type missmatch %2",_name,typename _val))
+		};
+		if !(_name in self) exitWith {
+			self callp(setParseError,format vec2("Param %1 not found",_name))
+		};
+
+		self set [_name,_val];
+	}
+
 endstruct
 
 /*
