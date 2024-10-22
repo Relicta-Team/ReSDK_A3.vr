@@ -29,7 +29,6 @@ loadFile("src\host\OOP_engine\oop_object.sqf");
 #include "CombatSystem\RuntimeWeaponModulesGenerator.sqf"
 #include "GameObjects\loader.hpp"
 #include "CombatSystem\loader.hpp"
-#include "CraftSystem\Crafts\Basic.sqf"
 loadFile("src\host\LootSystem\LootSystem_init.sqf");
 loadFile("src\host\DataObjects\DataObjects_init.sqf");
 loadFile("src\host\Reagents\loader.hpp");
