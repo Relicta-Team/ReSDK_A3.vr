@@ -136,7 +136,7 @@ csys_errorMessage = {
 	_fmt set [0,(_fmt select 0) + (format[" (file: %1; item: %2)",csys_internal_lastLoadedFile,csys_internal_configNumber])];
 	private _message = format _fmt;
 	errorformat("[CraftError]: %1",_message);
-	setLastError(_message);
+	["Craft build failed:" +endl+ _message] call messageBox;
 };
 
 csys_validateType = {
@@ -440,3 +440,35 @@ csys_systemController_onUpdate = {
 		false
 	} count (csys_list_systemControllers);
 };
+
+#ifdef EDITOR
+csys_internal_generateSchema = {
+	private _types = ["CraftModifierAbstract"] call struct_getAllTypesOf;
+	private _headSegment = ["// place part 1 here"];
+	private _modNames = [];
+	private _dictSegment = ["// here placed dict of modifiers"];
+	private _anyOfList = createHashMapFromArray[["anyOf",[]]];
+	{
+		private _obj = [_x,["GETMODINFO"]] call struct_alloc;
+		_modNames pushBack (_obj getv(name__));
+
+		(_anyOfList get "anyOf") pushBack (_obj callv(getModifierDict));
+	} foreach _types;
+
+	_dictEnum = toJson(createHashMapFromArray[["enum",_modNames]]);
+	_dictEnum = _dictEnum select [1];
+	_dictEnum = _dictEnum select [0,count _dictEnum-1];
+	_headSegment pushBack (_dictEnum);
+
+	_dct = (toJson(_anyOfList));
+	_dct = _dct select [1];
+	_dct = _dct select [0,count _dct-1];
+	_dictSegment pushBack _dct;
+
+	//return
+	private _r = (_headSegment joinString endl)+endl+endl+endl + ([_dictSegment joinString endl,"\\n","\n"] call stringReplace);
+	copytoclipboard _r;
+	text _r
+};
+
+#endif

@@ -377,16 +377,18 @@ struct(ICraftRecipeBase)
 		FAIL_CHECK_REFSET(_refResult);
 		private _mods = [];
 		private _paramData = null;
-		private _paramDict = null;
 		{
 			_paramData = _x;
-			_paramDict = null;
 
 			//inline modifier
 			if equalTypes(_paramData,"") then {
 				private _m = ["CraftModifier::" + _paramData,[null]] call struct_alloc;
 				if isNullVar(_m) exitWith {
 					message = format["Modifier not found: %1",_paramData];
+					break;
+				};
+				if (count (_m getv(reqired_fields)) > 0) exitWith {
+					message = format["Modifier error; Required parameters must be defined: %1",_m getv(reqired_fields) joinString ", "];
 					break;
 				};
 				if (_m getv(__raised)) exitWith {
@@ -403,38 +405,13 @@ struct(ICraftRecipeBase)
 			if (isNullVar(_pname) || {not_equalTypes(_pname,"")}) exitWith {
 				message = format["Modifier name error: %1",_pname];
 			};
-
-			private _val = _paramData get "value";
-			private _valP = _paramData get "parameters";
-			if !isNullVar(_val) then {
-				
-				if !isNullVar(_valP) exitWith {
-					message = format["Modifier error (%1): %2",_pname,"'value' and 'parameters' cannot be used at the same time"];
-					break;
-				};
-
-				_paramDict = createHashMapFromArray[["value" , _val]];	
-			};
-			
-			if isNullVar(_paramDict) then {
-				//parameters dict validate
-				if not_equalTypes(_valP,hashMapNull) then {
-					message = format["Modifier error (%1): Unexpected modifier parameter type. Need dict type, not %2",_pname,tolower typename _valP];
-					break;
-				};
-				
-				if isNullVar(_valP) then {
-					message = format["Modifier error (%1): Null parameters cannot be used",_pname];
-					break;
-				};
-			};
-
+			_paramData deleteAt "name";
 
 			//instance creation 
-			private _m = ["CraftModifier::" + _pname,[_paramDict]] call struct_alloc;
+			private _m = ["CraftModifier::" + _pname,[_paramData]] call struct_alloc;
 			//validate exists
 			if isNullVar(_m) exitWith {
-				message = format["Modifier not found: %1",_paramData];
+				message = format["Modifier not found: %1",_pname];
 			};
 			//validate raised
 			if (_m getv(__raised)) exitWith {
@@ -459,7 +436,7 @@ struct(ICraftRecipeBase)
 		call {
 			if isNullVar(_skills) exitWith {
 				//автоуспех.
-				refset(_successAmountRef,vec2("craft_success",customRollResult(-15,DICE_CRITFAIL,3)));
+				refset(_successAmountRef,vec2("craft_success",customRollResult(0,DICE_SUCCESS,3)));
 				_result = true;
 			};
 			{
@@ -480,7 +457,7 @@ struct(ICraftRecipeBase)
 			} foreach _skills;
 		};
 		if equals(refget(_successAmountRef),0) then {
-			refset(_successAmountRef,vec2("craft_fail",customRollResult(-15,DICE_CRITFAIL,3)));
+			refset(_successAmountRef,vec2("craft_fail",customRollResult(-16,DICE_CRITFAIL,3)));
 		};
 
 		_result

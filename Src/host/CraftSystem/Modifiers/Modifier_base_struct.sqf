@@ -78,14 +78,25 @@ struct(CraftModifierAbstract)
 		params ["_pdct"];
 
 		self setv(name__,struct_typename(self) splitString ":" select 1);
+		
+		if not_equals(_pdct,"GETMODINFO") then {
+			self setv(_paramDict,_pdct);
+			self callv(_parseParameters);
+		};
 
-		self setv(_paramDict,_pdct);
-		self callv(_parseParameters);
 	}
 
 	def(str)
 	{
 		"CMod:" + (self getv(name__))
+	}
+
+	def(debugMessage)
+	{
+		#ifdef EDITOR
+		private _msg = _this call formatLazy;
+		logformat("[%1] %2",text str (self) arg _msg);
+		#endif
 	}
 
 	def(_parseParameters)
@@ -98,6 +109,16 @@ struct(CraftModifierAbstract)
 					_ready = false;
 				};
 			} foreach (self getv(_paramDict));
+
+			//validate required params
+			if (_ready) then {
+				{
+					if !(_x in (self getv(_paramDict))) exitWith {
+						self callp(setParseError,"Param must be defined: " + _x);
+						_ready = false;
+					};
+				} foreach (self getv(reqired_fields));
+			};
 		};
 
 		_ready
@@ -106,14 +127,63 @@ struct(CraftModifierAbstract)
 	//получает карту доступных настроек этого модификатора
 	def(getModifierDict)
 	{
-		createHashMapFromArray [
-			["title","Общее название модификатора"],
-			["description","Описание модификатора"],
-			["param_mode",0] //0 - без параметров, 1 - с одним параметром, имеет несколько параметров
-		]
-		//TODO implement
+		private _dictRet = createhashMap;
+		private _thisModName = self getv(name__);
+		#define mmap createHashMapFromArray
+		_dictRet set ["if",mmap [
+			["type","object"],
+			["properties",mmap [vec2("name",mmap [vec2("const",_thisModName)])]]
+		]];
+		_mmThen = mmap [];
+		_mmThen set ["additionalProperties",false];
+		_mmThen set ["required",self getv(reqired_fields)];
+			_mmtprop = mmap [];
+			private _desc = self getv(description);
+			if (_desc!="")then {_desc = _desc + "\n\n"};
+			modvar(_desc) + "Доступные параметры: " + ((self getv(allowed_params) apply {_x select 0}) joinString ", ");
+			
+			_mmtprop set ["name",mmap[
+				["description",format["Выбран модификатор '%1' (%2)\n%3",self getv(title),_thisModName,_desc]]
+			]];
+			{
+				_x params ["_name","_dictvals"];
+				private _mmPropInt = mmap [];
+				{
+					if equalTypes("",_x) then {
+						private _idx = _x find ":";
+						if (_idx != -1) then {
+							_mmPropInt set [_x select [0,_idx],_x select [_idx +1,count _x]];
+						};
+					} else {
+						_mmPropInt set _x;
+					};
+				} foreach _dictvals;
+				_mmtprop set [_name,_mmPropInt];
+			} foreach (self getv(allowed_params));
+
+
+			_mmThen set ["properties",_mmtprop];
+		_dictRet set ["then",_mmThen];
+
+		_dictRet
 	}
 
+
+	def(title) "Общее название модификатора"
+	def(description) "Описание модификатора"
+	def(reqired_fields) [] //какие поля нужны
+	//какие параметры доступны должны быть имена полей. это словарь
+	/*
+		def(allowed_params) [
+			["name",[
+				"type:string",
+				"title:Название модификатора",
+				"description:Описание",
+				["examples",[1,2,3]]
+			]]
+		]
+	*/
+	def(allowed_params) []
 
 endstruct
 
@@ -128,6 +198,21 @@ endstruct
 */
 struct(CraftModifier::set_name) base(CraftModifierAbstract)
 	
+	def(title) "Изменение названия"
+	def(description) "Изменяет название создаваемого предмета"
+	def(reqired_fields) ["value"]
+	def(allowed_params) [
+		["value",[
+			"type:string",
+			"title:Новое название",
+			"description:Новое название предмета. Допускается использование тегов, например {TAG:name} для установки названия от предмета с тегом TAG",
+			["examples",[
+				"Предмет",
+				"Предмет из {TAGGED_INGREDIENT.name.lower}"
+			]]
+		]]
+	]
+
 	def(new_name) ""; //before preprocessed
 
 	def(createModifierContext)
@@ -176,6 +261,8 @@ struct(CraftModifier::set_name) base(CraftModifierAbstract)
 		if (self getv(new_name)!="") then {
 			private _newName = [self getv(new_name),_ctx] call csys_format;
 			setVar(_itm,name,_newName);
+
+			self callp(debugMessage,"Update name %1 to %2" arg _itm arg _newName);
 		};
 	}
 endstruct

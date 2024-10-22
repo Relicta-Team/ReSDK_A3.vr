@@ -215,19 +215,20 @@ result: # может содержать несколько выходных об
 
   # модификаторы, применяемые к создаваемому предмету
   # ключ value для модификаторов с одним параметром
-  # если параметров несколько: используйте именованный раздел parameters:
   #  
   # modifiers:
   #   - name: example_multiparam_mod
-  #     parameters:
-  #       named_param: 123
-  #       another_value: "hello!"
-  # 
+  #     named_param: 123
+  #     another_value: "hello!"
+  # !!! Модификаторы в примере могут не существовать в сборке или существовать с другими названиями !!!
   modifiers:
     - name: set_name # имя модификатора
       value: Созданный предмет из {basename.lower} # про форматированные данные в разделах ниже
     - name: auto_ht # модификатор может не принимать значений
     - auto_weight # также ключ name можно опустить если у модификатора нет параметров
+    - name: another_modifier
+      modifier_param_bool: false
+      modifier_param_string: "hello"
     
 ```
 

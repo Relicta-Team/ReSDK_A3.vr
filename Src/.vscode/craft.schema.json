@@ -217,33 +217,12 @@
 							"properties": {
 								"name": {
 									"title": "Название модификатора",
-									"enum": ["set_name","auto_ht"]
+									//place part 1 here
+									"enum":["default","set_name"]
 								}
 							},							
 							// here placed dict of modifiers
-							"anyOf": [
-								{
-									"if": {
-										"type": "object",
-										"properties": {"name": {"const": "set_name"}}
-									},"then": {
-										"additionalProperties": false,
-										"required": ["value"],
-										"properties": {
-											"name": {},
-											"value": {
-												"type": "string",
-												"title": "Новое имя",
-												"description": "Новое название предмета. Допускается использование тегов",
-												"examples": [
-													"Предмет",
-													"Предмет из {TAGGED_INGREDIENT.name.lower}"
-												]
-											}
-										}
-									}
-								}
-							]
+							"allOf":[{"if":{"type":"object","properties":{"name":{"const":"default"}}},"then":{"required":[],"properties":{"name":{"description":"Выбран модификатор 'Стандартный модификатор' (default)\nСтандартный модификатор установки хп, веса, качества\n\nДоступные параметры: auto_all"},"auto_all":{"type":"boolean","description":"Включить все модификаторы (по умолчанию выключено)","title":"Включить все модификаторы"}},"additionalProperties":false}},{"if":{"type":"object","properties":{"name":{"const":"set_name"}}},"then":{"required":["value"],"properties":{"name":{"description":"Выбран модификатор 'Изменение названия' (set_name)\nИзменяет название создаваемого предмета\n\nДоступные параметры: value"},"value":{"type":"string","description":"Новое название предмета. Допускается использование тегов, например {TAG:name} для установки названия от предмета с тегом TAG","examples":["Предмет","Предмет из {TAGGED_INGREDIENT.name.lower}"],"title":"Новое название"}},"additionalProperties":false}}]
 						}
 					}
 				}

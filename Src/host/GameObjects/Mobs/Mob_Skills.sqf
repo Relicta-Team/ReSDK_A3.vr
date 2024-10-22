@@ -677,6 +677,9 @@ region(learning skills)
 				};
 				modvar(_text) + sbr + capitalize(callSelfParams(getSkillName,_x))
 				+ ": "+callSelfParams(getSkillLevelText,_x);
+				#ifdef EDITOR
+				modvar(_text) + (format[" (lvl: %1)",getSelfReflect(_x)]);
+				#endif
 				_knownany = true;
 			};
 		} foreach skills_internal_list_otherSkillsSystemNames_withCategories;

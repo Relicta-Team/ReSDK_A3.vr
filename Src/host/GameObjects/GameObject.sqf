@@ -1884,14 +1884,14 @@ class(IDestructible) extends(GameObject)
 	{
 		objParams();
 		private _ht = getSelf(ht);
-		if (_ht <= 3) exitWith {"Отвратительное"};
-		if (inRange(_ht,4,6)) exitWith {"Ужасное"};
-		if inRange(_ht,7,8) exitWith {"Плохое"};
-		if inRange(_ht,9,10) exitWith {"Обычное"};
-		if inRange(_ht,11,12) exitWith {"Хорошее"};
-		if inRange(_ht,13,14) exitWith {"Отличное"};
-		if inRange(_ht,15,16) exitWith {"Превосходное"};
-		if (_ht > 17) exitWith {"Великолепное"};
+		if (_ht <= 2) exitWith {"Отвратительное"};//2
+		if inRange(_ht,3,5) exitWith {"Ужасное"}; //3
+		if (inRange(_ht,6,8)) exitWith {"Плохое"}; //3
+		if inRange(_ht,9,11) exitWith {"Обычное"}; //3
+		if inRange(_ht,12,13) exitWith {"Хорошее"}; //2
+		if inRange(_ht,13,14) exitWith {"Отличное"};//2
+		if inRange(_ht,15,16) exitWith {"Превосходное"};//2
+		if (_ht >= 17) exitWith {"Великолепное"};//2
 	};
 
 	func(onChangeObjectHP)

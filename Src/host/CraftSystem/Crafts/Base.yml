@@ -35,6 +35,8 @@
 
 - type: interact
   required:
+    skills:
+      farming: 2
     components:
       hand_item: 
         class: Knife
@@ -60,8 +62,9 @@
       - "ловко оперирует {hand_item.lower} по {target.lower} возводя {basename}"
     class: Svetlolik
     modifiers:
-      - name: set_name
-        value: "Грибная ебала"
+      - name: default
+        auto_all: true
+
 
 - name: Пирог
   type: system

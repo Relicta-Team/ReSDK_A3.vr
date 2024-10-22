@@ -626,6 +626,7 @@ csys_processCraftMain = {
 	private _refSuccess = refcreate(0);
 	private _canCraftBySkills = _recipe callp(checkCraftSkills,_usr arg _refSuccess);
 	refunpack(_refSuccess); //params: vec2(skillname(str),success_amount(int))
+	traceformat("CRAFT SKILL INFO: skill: %1; succam: %2; rz: %3; 3d6: %4",_refSuccess select 0 arg getRollAmount(_refSuccess select 1) arg getRollType(_refSuccess select 1) arg getRollDiceAmount(_refSuccess select 1));
 
 	//register craft context
 	["used_skill",_refSuccess select 0] call _addCraftContext;
@@ -683,7 +684,7 @@ csys_processCraftMain = {
 		if (!_canCraftBySkills) exitWith {
 			//cannot craft because lowskill
 			if isNullVar(_failHandler) exitWith {
-				private _message = pick ["Знаний не хватает.","Не умею, не могу.","Не понимаю как делать","Что-то не понятно ничего.","Не могу сделать.","Не знаю как делать."];
+				private _message = pick ["Знаний не хватило.","Не умею, не могу.","Не понимаю как делать.","Слооооожно!","Что-то не понятно ничего.","Не могу сделать.","Не знаю как делать."];
 				callFuncParams(_usr,localSay,_message arg "error");
 			};
 
