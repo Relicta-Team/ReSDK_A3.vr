@@ -510,6 +510,13 @@ class(GameObject) extends(ManagedObject)
 		};
 	};
 
+	func(setWeight)
+	{
+		objParams_1(_w);
+		setSelf(weight,_w);
+		callSelf(onWeightChanged);
+	};
+
 	func(getTextWeight)
 	{
 		objParams();
@@ -2138,6 +2145,12 @@ class(IDestructible) extends(GameObject)
 	
 	
 	var(germs,0);//сколько микробов на объекте (для инфекций)
+
+	func(addGerms)
+	{
+		objParams_1(_val);
+		setSelf(germs,getSelf(germs) + clamp(_val,0,GERM_COUNT_MAX));
+	};
 
 	//функция, получающая с помощью рейкаста объект, на котором лежит этот объект
 	func(getObjectPlace)

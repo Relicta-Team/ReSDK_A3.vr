@@ -22,7 +22,7 @@
 		3. Реализуем createModifierContext , который будет собирать необходимую инфу с ингредиентов
 */
 struct(CraftModifierAbstract)
-	def(name) ""; //internal modifier name, constant
+	def(name__) ""; //internal modifier name, constant
 
 	def(hasParams) true //by default modifier has params
 
@@ -35,7 +35,7 @@ struct(CraftModifierAbstract)
 		params ["_msg",["_addPrefixName",true]];
 		self setv(__raised,true);
 		if (_addPrefixName) then {
-			_msg = format["(%1) - %2",self getv(name),_msg];
+			_msg = format["(%1) - %2",self getv(name__),_msg];
 		};
 		self setv(_lastError,_msg);
 	}
@@ -67,17 +67,17 @@ struct(CraftModifierAbstract)
 		0
 	}
 
-	// Применение модификатора
+	// Применение модификатора, _craftContext предоставляет контекст крафта (бросок навыка, позиции и т.д.)
 	def(onApply)
 	{
-		params ["_itm","_usr","_ctx"];
+		params ["_itm","_usr","_ctx","_craftContext"];
 	}
 
 	def(init)
 	{
 		params ["_pdct"];
 
-		self setv(name,struct_typename(self) splitString ":" select 1);
+		self setv(name__,struct_typename(self) splitString ":" select 1);
 
 		self setv(_paramDict,_pdct);
 		self callv(_parseParameters);
@@ -85,7 +85,7 @@ struct(CraftModifierAbstract)
 
 	def(str)
 	{
-		"CMod:" + (self getv(name))
+		"CMod:" + (self getv(name__))
 	}
 
 	def(_parseParameters)
@@ -139,7 +139,7 @@ struct(CraftModifier::set_name) base(CraftModifierAbstract)
 		{
 			if not_equals(_x getv(metaTag),"") then {
 				private _objList = _x callv(getObjects);
-				traceformat("Object enum %1 is %2",_foreachIndex arg _objList)
+				//traceformat("Object enum %1 is %2",_foreachIndex arg _objList)
 				if (count _objList > 0) then {
 					_allTagsRefs set [_x getv(metaTag),_objList select 0];
 				};
@@ -168,7 +168,7 @@ struct(CraftModifier::set_name) base(CraftModifierAbstract)
 
 	def(onApply)
 	{
-		params ["_itm","_usr","_ctx"];
+		params ["_itm","_usr","_ctx","_craftContext"];
 		
 		//add basename
 		_ctx set ["basename", callFuncParams(_newObj,getNameFor,_usr)];
@@ -180,16 +180,3 @@ struct(CraftModifier::set_name) base(CraftModifierAbstract)
 	}
 endstruct
 
-
-struct(CraftModifier::auto_default) base(CraftModifierAbstract)
-	def(createModifierContext)
-	{
-		params ["_capturedCtx"];
-		0
-	}
-
-	def(onApply)
-	{
-		params ["_itm","_usr","_ctx"];
-	}
-endstruct
