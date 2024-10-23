@@ -37,7 +37,7 @@ noe_server_ngo_check = {
 			//#endif
 			_bnd attachto [_obj,_vec];
 			_bnd setObjectScale _scale;
-			_bnd disableCollisionWith player;
+			[_bnd,false] call setPhysicsCollisionFlag_impl;
 			_obj setVariable ["srv_ngo_geom",_bnd];
 			_bnd setVariable ["srv_ngo_src",_obj];
 			_bnd setVariable ["link",_obj getVariable "link"];
@@ -52,7 +52,7 @@ noe_server_ngo_check = {
 			//#endif
 			_bnd attachto [_obj,_vec];
 			_bnd setObjectScale _scale;
-			_bnd disableCollisionWith player;
+			[_bnd,false] call setPhysicsCollisionFlag_impl;
 			_bnd setVariable ["srv_ngo_src",_obj];
 			_bnd setVariable ["link",_obj getVariable "link"];
 			//#ifndef NOE_NGO_DEBUG_MODE

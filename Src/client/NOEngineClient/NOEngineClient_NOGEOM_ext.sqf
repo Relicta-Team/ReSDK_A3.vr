@@ -29,7 +29,7 @@ NGOExt_create = {
 	
 	//_bnd attachto [_obj,_vec];
 	_bnd setVariable ["__ngoext_itt",_imode];
-	_bnd disableCollisionWith player;
+	[_bnd,false] call setPhysicsCollisionFlag_impl;
 	//_obj setVariable ["ngo_geom",_bnd];
 	_bnd setVariable ["ngo_src",_obj];
 	_bnd setVariable ["ref",_obj getVariable "ref"];
@@ -66,7 +66,7 @@ NGOExt_createDummyObject = {
 		_objType createVehicleLocal [0,0,0];
 	};
 	_obj setVariable ["__ngoext_itt",_imode];
-	_obj disableCollisionWith player;
+	[_bnd,false] call setPhysicsCollisionFlag_impl;
 	_obj setVariable ["ngo_src",_src];
 	_obj setVariable ["ref",_ptr];
 	_obj
@@ -85,7 +85,7 @@ noe_client_ngo_check = {
 			#endif
 			_bnd attachto [_obj,_vec];
 			_bnd setObjectScale _scale;
-			_bnd disableCollisionWith player;
+			[_bnd,false] call setPhysicsCollisionFlag_impl;
 			_obj setVariable ["ngo_geom",_bnd];
 			_bnd setVariable ["ngo_src",_obj];
 			_bnd setVariable ["ref",_obj getVariable "ref"];
@@ -100,7 +100,7 @@ noe_client_ngo_check = {
 			#endif
 			_bnd attachto [_obj,_vec];
 			_bnd setObjectScale _scale;
-			_bnd disableCollisionWith player;
+			[_bnd,false] call setPhysicsCollisionFlag_impl;
 			_bnd setVariable ["ngo_src",_obj];
 			_bnd setVariable ["ref",_obj getVariable "ref"];
 			#ifndef NOE_NGO_DEBUG_MODE

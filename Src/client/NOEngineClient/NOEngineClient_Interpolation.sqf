@@ -7,7 +7,7 @@ noe_client_defaultInterpTime = 0.15;
 
 noe_client_interp_processObjInterp = {
 	params ["_srcObj","_fromPos","_fromTransf","_toPos","_toTransf","_time",["_scaleMode",0],["_stdMode",0],["_emuMode",false]];
-	_srcObj disableCollisionWith player;
+	[_srcObj,false] call setPhysicsCollisionFlag_impl;
 	traceformat("Interp process launched: %1",_this)
 	
 	private _onEnd = {
