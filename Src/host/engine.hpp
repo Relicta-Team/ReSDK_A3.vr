@@ -394,7 +394,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 //hashmap
 #define hashMapNew createHashMap
 #define hashMapNewArgs createHashMapFromArray
-
+#define toMap hashMapNewArgs
 // assign logics
 /*
 	prop(testvar) = "";
