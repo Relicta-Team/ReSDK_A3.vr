@@ -34,7 +34,7 @@
         class: Item
   failed_handler: 
     handler_type: default
-    item: "Test"
+    class: "Test"
     count: 30
   options:
     collect_distance: 0.8

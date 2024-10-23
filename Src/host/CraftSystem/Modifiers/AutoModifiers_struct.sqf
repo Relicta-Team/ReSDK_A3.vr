@@ -202,17 +202,42 @@ endstruct
 
 /*
 	Передача реагентов
-
+	
+	Example
+		precentage_loss: 20
+		loss_from_skills: true
+		get_from_all: 30 #precents
+		get_from:
+			TAG: precentvalue
+		reagents_whitelist: [Milk]
+		reagents_blacklist: []
 */
 struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
 	def(title) "Передача реагентов"
 	def(description) "Модификатор передает реагенты из исходных ингредиентов в результат крафта"
 	def(reqired_fields) []
 	def(allowed_params) [
+		["reagents_whitelist",[
+				"type:array",
+				"title:Разрешенные реагенты",
+				"description:Список разрешенных реагентов для передачи. Указанные в этом списке реагенты будут переданы. Остальные исключаются. По умолчанию передает все реагенты",
+				"example":[
+					[],["Milk","Water"],["Blood"]
+				]
+			]
+		],
+		["reagents_blacklist",[
+			"type:array",
+			"title:Запрещенные реагенты",
+			"description:Список запрещенных реагентов для передачи. Указанные в этом списке реагенты будут исключены. Остальные передаются. По умолчанию передает все реагенты",
+			"example":[
+				[],["Milk","Water"],["Blood"]
+			]
+		]],
 		["precentage_loss",
 			[
 				"title:Процент потери реагентов",
-				"description:Сколько процентов от реагентов потеряется при крафте",
+				"description:Сколько процентов от реагентов потеряется при крафте. Это значение накладывается поверх переданных реагентов с помощью get_from_all и get_from",
 				"type:number",
 				["default",0],
 				["example",[0,50,75,100]]
@@ -224,16 +249,51 @@ struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
 				"type:bool",
 				["default",false]
 			]
+		],
+		["get_from_all",[
+				"title:Передача из всех",
+				"description:Передача реагентов (единиц или процентов) из всех реагент-контейнеров. Значение 100% означает полную передачу. Если указано число (количество единиц)",
+				["type",["number","string"]],
+				["default",100],
+				["example",[5,"40%"]]
+			]
+		],
+		["get_from",[
+				"title:Передача по тегам",
+				"description:Передача процентных значений реагентов из реагент-контейнеров с указанными тегами. Если объект по тегу не является реагент-контейнером, то передача не произойдёт."
+				"type:object",
+				["additionalProperties",false],
+				["properties", createHashMapFromArray [
+					["patternProperties", 
+						createHashMapFromArray [
+							["^[a-zA-Z]+$", createHashMapFromArray [
+								["type",["number","string"]],
+								["example",[15,"30%"]]
+							]]
+						]
+					]
+				]]
+				["example",
+					createHashMapFromArray [
+						["TAGGED_OBJECT_1",70],
+						["TAG_2","50%"]
+					]
+				]
+			]
 		]
 	]
 
 	def(precentage_loss) 0
 	def(loss_from_skills) false
+	def(get_from_all) "100%"
+	def(get_from) []
+	def(reagents_whitelist) []
+	def(reagents_blacklist) []
 
 	def(onParameter)
 	{
 		params ["_name","_val"];
-		if (_name == "precentage_loss") exitWith {
+		if (_name in "precentage_loss") exitWith {
 			self callp(addParam,_name arg _val arg 0);
 		};
 		if (_name == "loss_from_skills") exitWith {
