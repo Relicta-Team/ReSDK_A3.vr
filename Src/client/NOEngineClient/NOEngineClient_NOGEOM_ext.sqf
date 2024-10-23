@@ -120,3 +120,14 @@ noe_client_isNGO = {!isNullReference(_this getVariable vec2("ngo_src",objNull))}
 
 // getting ngo 
 noe_client_getNGOSource = {_this getVariable ["ngo_src",objnull]};
+
+noe_client_getObjectNGOSkip = {
+	private _obj = _this;
+	if (_obj call noe_client_isNGO) then {
+		private _probObj = _obj call noe_client_getNGOSource;
+		if isNullReference(_probObj) exitWith {_obj};
+		_probObj
+	} else {
+		_obj
+	}
+};
