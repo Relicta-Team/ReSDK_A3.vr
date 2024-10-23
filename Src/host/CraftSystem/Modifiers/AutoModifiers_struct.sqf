@@ -221,18 +221,18 @@ struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
 				"type:array",
 				"title:Разрешенные реагенты",
 				"description:Список разрешенных реагентов для передачи. Указанные в этом списке реагенты будут переданы. Остальные исключаются. По умолчанию передает все реагенты",
-				"example":[
+				["example",[
 					[],["Milk","Water"],["Blood"]
-				]
+				]]
 			]
 		],
 		["reagents_blacklist",[
 			"type:array",
 			"title:Запрещенные реагенты",
 			"description:Список запрещенных реагентов для передачи. Указанные в этом списке реагенты будут исключены. Остальные передаются. По умолчанию передает все реагенты",
-			"example":[
+			["example",[
 				[],["Milk","Water"],["Blood"]
-			]
+			]]
 		]],
 		["precentage_loss",
 			[
@@ -246,7 +246,7 @@ struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
 		["loss_from_skills",[
 				"title:Потеря реагентов от успешности",
 				"description:Потеря реагентов от успешности крафта. Чем выше скилл крафтера, тем меньше потеря",
-				"type:bool",
+				"type:boolean",
 				["default",false]
 			]
 		],
@@ -260,21 +260,21 @@ struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
 		],
 		["get_from",[
 				"title:Передача по тегам",
-				"description:Передача процентных значений реагентов из реагент-контейнеров с указанными тегами. Если объект по тегу не является реагент-контейнером, то передача не произойдёт."
+				"description:Передача процентных значений реагентов из реагент-контейнеров с указанными тегами. Если объект по тегу не является реагент-контейнером, то передача не произойдёт.",
 				"type:object",
 				["additionalProperties",false],
-				["properties", createHashMapFromArray [
+				["properties", toMap [
 					["patternProperties", 
-						createHashMapFromArray [
-							["^[a-zA-Z]+$", createHashMapFromArray [
+						toMap [
+							["^[a-zA-Z]+$", toMap [
 								["type",["number","string"]],
 								["example",[15,"30%"]]
 							]]
 						]
 					]
-				]]
+				]],
 				["example",
-					createHashMapFromArray [
+					toMap [
 						["TAGGED_OBJECT_1",70],
 						["TAG_2","50%"]
 					]

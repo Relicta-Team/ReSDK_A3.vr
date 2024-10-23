@@ -460,12 +460,12 @@ csys_internal_generateSchema = {
 	private _headSegment = ["// place part 1 here"];
 	private _modNames = [];
 	private _dictSegment = ["// here placed dict of modifiers"];
-	private _anyOfList = createHashMapFromArray[["anyOf",[]]];
+	private _allOfList = createHashMapFromArray[["allOf",[]]];
 	{
 		private _obj = [_x,["GETMODINFO"]] call struct_alloc;
 		_modNames pushBack (_obj getv(name__));
 
-		(_anyOfList get "anyOf") pushBack (_obj callv(getModifierDict));
+		(_allOfList get "allOf") pushBack (_obj callv(getModifierDict));
 	} foreach _types;
 
 	_dictEnum = toJson(createHashMapFromArray[["enum",_modNames]]);
@@ -473,7 +473,7 @@ csys_internal_generateSchema = {
 	_dictEnum = _dictEnum select [0,count _dictEnum-1];
 	_headSegment pushBack (_dictEnum);
 
-	_dct = (toJson(_anyOfList));
+	_dct = (toJson(_allOfList));
 	_dct = _dct select [1];
 	_dct = _dct select [0,count _dct-1];
 	_dictSegment pushBack _dct;
