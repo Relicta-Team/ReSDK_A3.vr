@@ -127,14 +127,14 @@ class(PipeCutOnSupportingStructure) extends(BasicPipe)
 endclass
 
 editor_attribute("EditorGenerated")
-editor_attribute("Deprecated" arg "Заменить на NewIndPipe90DegR.")
+editor_attribute("Deprecated" arg "Заменить на IndPipe45DegL.")
 class(SmallDestroyedCornerPipe) extends(BasicPipe)
 	var(model,"ca\buildings2\ind_pipeline\indpipe1\indpipe1_45degl.p3d");
 	var(name,"Разрушенная труба");
 endclass
 
 editor_attribute("EditorGenerated")
-editor_attribute("Deprecated" arg "Заменить на IndPipeValve.")
+editor_attribute("Deprecated" arg "Заменить на NewIndPipe90DegR.")
 class(SmallDestoyedCornerPipe1) extends(SmallDestroyedCornerPipe)
 	var(model,"a3\structures_f\ind\pipes\indpipe1_90degr_f.p3d");
 endclass

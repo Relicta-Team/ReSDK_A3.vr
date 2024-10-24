@@ -262,6 +262,10 @@ progLog("Revision: " + __revision);
 #endif
 
 progLog("isDebug: " + str _debug + "; isRelease: " + str _release);
+if (_debug == _release) exitWith {
+	setLastError("Debug/Release modes cannot be the same! " + (str _debug));
+	appExit(APPEXIT_REASON_COMPILATIOEXCEPTION);
+};
 
 #ifdef EDITOR
 	if !isNull(relicta_debug_compileMain) then {

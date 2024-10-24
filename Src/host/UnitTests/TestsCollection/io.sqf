@@ -191,7 +191,7 @@ TEST(LootSystem_AllCheckBase)
 
 	//check naming override
 	private _fkey = [_content,{isTypeOf(_x,Key)},nullPtr] call searchInList;
-	ASSERT(!isNullReference(_fkey));
+	ASSERT(!isNullReference(_fkey)); // ! Если снова вывалится это исключение значит увеличиваем pass_count
 	ASSERT_EQ(getVar(_fkey,name),"Test-key");
 
 	[_tobj] call deleteGameObject;

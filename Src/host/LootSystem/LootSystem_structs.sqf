@@ -36,6 +36,8 @@ struct(LootTemplate)
 	{
 		params ["_type","_path","_cfgData"];
 
+		private __GLOBAL_FLAG_CURRENT_LOOT__ = self;
+
 		self setv(type,_type);
 		self setv(path,_path);
 
@@ -475,6 +477,7 @@ struct(LootItemTemplate)
 
 endstruct
 
+//this class must be used only for Loot structs
 struct(LootTemplate_RangedValue)
 	
 	def(isRangeBased) false;
@@ -520,6 +523,12 @@ struct(LootTemplate_RangedValue)
 			self setv(minValue,_min call _precStrToInt);
 			self setv(maxValue,_max call _precStrToInt);
 			self setv(isRangeBased,true);
+			if !isNullVar(__GLOBAL_FLAG_CURRENT_LOOT__) then {
+				if ((self getv(minValue)) > (self getv(maxValue))) then {
+					__GLOBAL_FLAG_CURRENT_LOOT__ setv(__hasErrorOnCreate,true);
+					errorformat("RangedValue::init() - Min value %1 is bigger than max value %2 in template %3",self getv(minValue) arg self getv(maxValue) arg __GLOBAL_FLAG_CURRENT_LOOT__);
+				};
+			};
 		};
 	}
 endstruct
