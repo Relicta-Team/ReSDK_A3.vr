@@ -10,6 +10,8 @@
 #include "..\engine.hpp"
 #include "..\oop.hpp"
 
+#include "Logger_RPTDump.h"
+
 //отключить логгер в редакторе
 #define DISABLE_LOG_IN_EDITOR
 
@@ -149,6 +151,12 @@ logger_action = {
 	
 	#ifdef PRINT_LOG_TO_CONSOLE
 		["PRINT_LOG_TO_CONSOLE: [%1] %2    %3",_cat,_lvl,_dat] call cprint;
+	#endif
+
+	#ifdef SYSTEM_LOG_DUMP_TO_RPT
+		if (_cat == "system") then {
+			SYSLOG_RPT_DUMP(format["syslog:%1: %2" arg _lvl arg _dat]);
+		};
 	#endif
 
 	//logger not supported in editor mode
