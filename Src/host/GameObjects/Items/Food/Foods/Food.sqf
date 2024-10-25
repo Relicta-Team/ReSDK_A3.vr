@@ -230,28 +230,6 @@ class(BreadChopped) extends(IFoodItem)
 	var(reagents,[vec2("Nutriment",4)]newReagentsFood);
 	getterconst_func(getBiteSize,2);
 
-	// func(onInteractWith)
-	// {
-	// 	objParams_2(_with,_usr);
-	// 	private _anonSetCrafted = {
-	// 		setSelf(isCrafted,true);
-	// 		setSelf(weight,getVar(_with,weight));
-	// 		delete(_with);
-	// 	};
-	// 	private _cls = callFunc(_with,getClassName);
-	// 	if (equals(_cls,"ButterPiece") && !getSelf(isCrafted)) exitWith {
-	// 		call _anonSetCrafted;
-	// 		setSelf(name,"Бутер с маслом");
-	// 		callSelfParams(setModel,"relicta_models2\food\s_sandwich\s_sandwich.p3d");
-	// 		callSelfParams(addReagent,"Nutriment" arg 30);
-	// 	};
-	// 	if (equals(_cls,"Cutlet") && !getSelf(isCrafted)) exitWith {
-	// 		call _anonSetCrafted;
-	// 		setSelf(name,"Бутер ""по-калековски""");
-	// 		callSelfParams(addReagent,"Nutriment" arg 45);
-	// 	};
-	// };
-
 endclass
 
 class(Tea) extends(IFoodItem)

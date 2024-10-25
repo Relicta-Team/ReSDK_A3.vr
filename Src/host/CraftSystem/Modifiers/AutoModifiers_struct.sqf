@@ -547,11 +547,17 @@ struct(CraftModifier::execute_code) base(CraftModifierAbstract)
 		["code",[
 			"type:string",
 			"title:Инструкции",
-			"description:Инструкции кода, которые будут выполнены"
+			"description:Инструкции кода, которые будут выполнены после создания результата"
+		]],
+		["before_code",[
+			"type:string",
+			"title:Инструкции перед созданием результата",
+			"description:Инструкции кода, которые будут выполнены до создания результата. Инструкции вызываются непосредственно при захвате контекста модификаторов."
 		]]
 	]
 
-	def(compiled_code) {} 
+	def(compiled_code_result) {} 
+	def(compiled_code_preinit) {}
 
 	def(onParameter)
 	{
@@ -561,8 +567,26 @@ struct(CraftModifier::execute_code) base(CraftModifierAbstract)
 			if isNullVar(_cde) exitWith {
 				self callp(setParseError,"Error on generating code");
 			};
-			self setv(compiled_code,_cde);
+			self setv(compiled_code_result,_cde);
 		};
+
+		if (_name == "before_code") exitWith {
+			private _cde = [_val] call csys_internal_generateYamlExpr;
+			if isNullVar(_cde) exitWith {
+				self callp(setParseError,"Error on generating precode");
+			};
+			self setv(compiled_code_preinit,_cde);
+		};
+	}
+
+	def(createModifierContext)
+	{
+		params ["_capturedCtx"];
+		private _map = callbase(createModifierContext);
+		private _tags = _ctx;
+		_tags set ["result",nullPtr];
+		call (self getv(compiled_code_preinit));
+		_map
 	}
 
 	def(collectTagInfo)
@@ -575,7 +599,8 @@ struct(CraftModifier::execute_code) base(CraftModifierAbstract)
 	{
 		params ["_itm","_usr","_ctx","_craftContext"];
 		private _tags = _ctx;
-		call (self getv(compiled_code));
+		_tags set ["result",_itm];
+		call (self getv(compiled_code_result));
 	}
 endstruct
 

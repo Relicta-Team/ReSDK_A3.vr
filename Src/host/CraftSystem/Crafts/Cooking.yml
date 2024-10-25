@@ -44,15 +44,16 @@
     class: Bun
     count: 3
     modifiers:
-      - default
       - name: set_name
         value: "Жареный {basename.lower}"
+      - default
 
 - <<: *frying_pan
   name: Блины
   required:
     components:
       - class: Lepeshka
+        check_type_of: false
       - class: Egg
   result:
     class: Pancakes
@@ -63,15 +64,30 @@
   required:
     components:
       - class: MeatMinced
+        check_type_of: false
         count: 2
       - class: SaltShaker
         check_type_of: false
         destroy: false
         optional: true
+        meta_tag: spice
   result:
     class: Cutlet
     count: 4
-    <<: *def_mods
+    modifiers:
+      - name: execute_code
+        before_code: |
+          if ("spice" in tags) then {
+            spice:removeReagents(5)
+          }
+        code: |
+          if ("spice" in tags) then {
+            var _curcap = result:getFilledSpace()
+            result:setCapacity(_curcap+10)
+            result:addReagent("Spice",2)
+            result:addReagent("Nutriment",8)
+          }
+      - default
 
 # =======================================================
 # Baking oven
@@ -249,14 +265,14 @@
     class: BreadChopped
     count: 1
     modifiers:
-      - default
       - name: set_name
         value: Бутер с маслом
       - name: add_reagent
         reagent: Nutriment
-        amount: 30
+        amount: 10
       - name: set_model
         value: relicta_models2\food\s_sandwich\s_sandwich.p3d
+      - default
 
 - <<: *interacting
   required:
@@ -269,11 +285,13 @@
   result:
     class: BreadChopped
     count: 1
-    #TODO add reagents
     modifiers:
-      - default
+      - name: add_reagent
+        reagent: Nutriment
+        amount: 15
       - name: set_name
         value: Бутер "по-калековски"
+      - default
 
 - <<: *interacting
   required:

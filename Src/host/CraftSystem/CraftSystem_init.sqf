@@ -381,6 +381,8 @@ csys_internal_generateYamlExpr = {
 	private _pat_field = "(\w+):(\w+)";
 	private _pat_return = "\s*(return)\s*;?";
 	private _pat_delete = "\s*(delete)\s*\(([^)]+)\)";
+	private _pat_tags = "\b(tags)\b";
+	private _pat_vardef = "\b(var)\b";
 	private _pat_endl = "[)}\w]\s*$";
 	{
 		private _curLine = _x;
@@ -394,6 +396,9 @@ csys_internal_generateYamlExpr = {
 
 		_curLine = ([_curLine,_pat_delete,'delete(_tags get "$2")'] call regex_replace);
 		
+		_curLine = ([_curLine,_pat_tags,"_tags"] call regex_replace);
+		_curLine = ([_curLine,_pat_vardef,"private"] call regex_replace);
+
 		_stack pushBack _curLine;
 		
 		if ([_curLine,_pat_endl] call regex_isMatch) then {
@@ -403,7 +408,9 @@ csys_internal_generateYamlExpr = {
 
 	private _CODEINSTR_ = null;
 	private _code = "_CODEINSTR_ = {" + (_stack joinString endl) + "};";
-	//debug_comiper = [_code,_stack];
+	#ifdef EDITOR
+	debug_compiler_csys_lastInstructions = [_code,_stack];
+	#endif
 	isNIL (compile _code);
 	_CODEINSTR_
 };
