@@ -220,27 +220,6 @@ class(Bread) extends(IFoodItem)
 	var(weight,gramm(300));
 	var(reagents,[vec2("Nutriment",25)]newReagentsFood);
 
-	// func(onInteractWith)
-	// {
-	// 	objParams_2(_with,_usr);
-	// 	if isTypeOf(_with,Knife) exitWith {
-	// 		if callSelf(isInWorld) then {
-	// 			private _pos = getPosAtl getSelf(loc);
-	// 			private _weight = getSelf(weight);
-	// 			private _count = randInt(6,10);
-	// 			private _wperitem = _weight / (_count);
-	// 			private _itm = null;
-	// 			delete(this);
-	// 			for "_i" from 1 to _count do {
-	// 				_itm = ["BreadChopped",_pos vectoradd [rand(-0.01,0.01),rand(-0.01,0.01),rand(-0.001,0.001)],null,false] call createItemInWorld;
-	// 				setVar(_itm,weight,_wperitem);
-	// 			};
-	// 		} else {
-	// 			callFuncParams(_usr,localSay,"В руках резать не удобно..." arg "mind");
-	// 		};
-	// 	};
-	// };
-
 endclass
 
 class(BreadChopped) extends(IFoodItem)
@@ -249,12 +228,7 @@ class(BreadChopped) extends(IFoodItem)
 	var(weight,gramm(300));
 	var(size,ITEM_SIZE_SMALL);
 	var(reagents,[vec2("Nutriment",4)]newReagentsFood);
-	func(getBiteSize)
-	{
-		objParams();
-		if getSelf(isCrafted) exitWith {5};
-	};
-	var(isCrafted,false);
+	getterconst_func(getBiteSize,2);
 
 	// func(onInteractWith)
 	// {

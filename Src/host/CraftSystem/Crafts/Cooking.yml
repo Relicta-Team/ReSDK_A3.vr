@@ -208,7 +208,7 @@
     modifiers:
       - name: transfer_reagents
         get_from: 
-          milkContainer: 10
+          milkContainer: 30
       - name: replace_reagent
         from: Milk
         to: Nutriment
@@ -230,25 +230,33 @@
   result:
     class: BreadChopped
     count: {min: 6, max: 10}
-    <<: *def_mods
+    modifiers:
+      - name: transfer_reagents
+        get_from_all: 100%
+        partial_transfer: true
+      - name: default
 
 - <<: *interacting
   required:
     components:
       hand_item:
         class: ButterPiece
+        destroy: true
       target:
         class: BreadChopped
         condition: :name == "Кусок хлеба"
   result:
     class: BreadChopped
     count: 1
-    #TODO add reagents
-    #TODO update model to "relicta_models2\food\s_sandwich\s_sandwich.p3d"
     modifiers:
       - default
       - name: set_name
         value: Бутер с маслом
+      - name: add_reagent
+        reagent: Nutriment
+        amount: 30
+      - name: set_model
+        value: relicta_models2\food\s_sandwich\s_sandwich.p3d
 
 - <<: *interacting
   required:

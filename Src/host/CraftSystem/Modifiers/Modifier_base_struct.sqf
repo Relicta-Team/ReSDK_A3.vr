@@ -116,7 +116,7 @@ struct(CraftModifierAbstract)
 						self callp(setParseError,"Param must be defined: " + _x);
 						_ready = false;
 					};
-				} foreach (self getv(reqired_fields));
+				} foreach (self getv(required_fields));
 			};
 		};
 
@@ -135,7 +135,7 @@ struct(CraftModifierAbstract)
 		]];
 		_mmThen = mmap [];
 		_mmThen set ["additionalProperties",false];
-		_mmThen set ["required",self getv(reqired_fields)];
+		_mmThen set ["required",self getv(required_fields)];
 			_mmtprop = mmap [];
 			private _desc = self getv(description);
 			if (_desc!="")then {_desc = _desc + "\n\n"};
@@ -170,7 +170,7 @@ struct(CraftModifierAbstract)
 
 	def(title) "Общее название модификатора"
 	def(description) "Описание модификатора"
-	def(reqired_fields) [] //какие поля нужны
+	def(required_fields) [] //какие поля нужны
 	//какие параметры доступны должны быть имена полей. это словарь
 	/*
 		def(allowed_params) [
@@ -250,7 +250,7 @@ struct(CraftModifier::set_name) base(CraftModifierAbstract)
 	
 	def(title) "Изменение названия"
 	def(description) "Изменяет название создаваемого предмета"
-	def(reqired_fields) ["value"]
+	def(required_fields) ["value"]
 	def(allowed_params) [
 		["value",[
 			"type:string",
