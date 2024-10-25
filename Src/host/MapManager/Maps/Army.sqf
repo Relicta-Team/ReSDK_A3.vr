@@ -547,10 +547,6 @@ if ((random 1) < 0.51) then {
 	['ToolStraigthPipe',[3873.45,4051.24,22.0427],0,[0,0,1]] call InitItem; 
 };
 ['Wheelchair',[3915.92,4014.52,21.0978],31.4276,[0,0,1]] call InitStruct; 
-if ((random 1) < 0.34) then {
-	['Revolver',[3890.8,4005.47,26.1531,true],[0.534766,-0.845,-9.73316e-05],[0.84497,0.534747,-0.00849009]] call InitItem; 
-};
-['AmmoBoxRevolver',[3890.68,4005.32,26.1826,true],0,[0.00566271,-0.00693096,0.99996]] call InitItem; 
 ['PipeCutOnSupportingStructure',[3915.34,3979.59,38.575,true],[-1.27952e-06,1,-8.02676e-07],[-2.14577e-06,-8.02679e-07,-1]] call InitStruct; 
 _3947_173584036_5571321_68722 = ['SpirtBottle',[3947.17,4036.56,26.8192,true],[0,0.973772,-0.227525],[0.106835,0.226222,0.968199]] call InitItem; 
 ['SmallMushroom3',[3916.04,4031.39,21.2564],0,[0,0,1]] call InitStruct; 
