@@ -312,7 +312,7 @@ _3948_356694045_2385325_55872 = ['SteelBrownDoor',[3948.36,4045.24,25.5587],180,
 ['ConcreteTreePlanter',[3984.13,4031.5,21],0,[0,0,1]] call InitStruct; 
 ['ConcreteTreePlanter',[3979.25,4031.5,21],0,[0,0,1]] call InitStruct; 
 ['ConcreteTreePlanter',[3957.25,4009.63,21],0,[0,0,1]] call InitStruct; 
-_3985_859864049_4614321_18508 = ['SquareWoodenBox',[3985.86,4049.46,21.1851],15,[0,0,1]] call InitStruct; 
+['SquareWoodenBox',[3985.86,4049.46,21.1851],15,[0,0,1]] call InitStruct; 
 _3987_289064049_2487821_15557 = ['SquareWoodenBox',[3987.29,4049.25,21.1556],345,[0,0,1]] call InitStruct; 
 _3986_389894048_1220721_18576 = ['SquareWoodenBox',[3986.39,4048.12,21.1858],1.36604e-05,[0,0,1]] call InitStruct; 
 _3986_375004048_7500022_12500 = ['SquareWoodenBox',[3986.38,4048.75,22.125],345,[0,0,1]] call InitStruct; 
@@ -391,23 +391,17 @@ _3976_859624007_9787622_03907 = if ((random 1) < 0.18) then {
 ['Bucket1',[3932.41,4042.75,26.2702,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
 ['Bucket2',[3932.43,4043.18,26.2636,true],0,[-0.0384836,0.0261709,0.998916]] call InitItem; 
 ['SmallOldWell',[3931.11,4042.95,20.5716],0,[0,0,1]] call InitStruct; 
-_3930_063484038_6296421_07586 = if ((random 1) < 0.91) then {
-	['CoinBag',[3930.06,4038.63,26.1829,true],285,[-0.000811764,-0.00702834,0.999975]] call InitItem; 
-};
 ['Bucket',[3932.2,4042.96,26.1278,true],0,[-0.0384836,0.0261709,0.998916]] call InitItem; 
 ['WoodenBucket',[3931.98,4043.8,26.368,true],0,[0.00566271,-0.00693096,0.99996]] call InitItem; 
 ['MediumPileOfDirtAndStones',[3930.3,4044.98,25.3,true],270,[0.00692917,0.00566269,0.99996]] call InitStruct; 
-if ((random 1) < 0.4) then {
-	['SawedOff',[3929.86,4038.81,26.3154,true],[-0.499106,4.72553e-06,0.866541],[0.86652,-0.00699836,0.499094]] call InitItem; 
-};
 _3931_356204042_9299321_30770 = ['Sink',[3931.36,4042.93,26.953,true],105,[0.0352389,0.030399,0.998917], {_thisObj setvariable ['model','ml_shabut\exoduss\kolonkawater.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['SmallWoodenTableHandmade',[3930.84,4039.81,21.1115],45,[0,0,1]] call InitStruct; 
 ['SmallWoodenTableHandmade',[3932.72,4039.17,21.1199],0,[0,0,1]] call InitStruct; 
 ['Wheelchair1',[3932.8,4041.09,26.7346,true],45,[-0.00568167,0.00421726,0.999975]] call InitStruct; 
 ['Bucket1',[3952.75,4035.1,27.2203,true],0,[-0.0384836,0.0261709,0.998916]] call InitItem; 
 ['SquareWoodenBox',[3954.19,4039.34,21.1269],330,[0,0,1]] call InitStruct; 
-['SquareWoodenBox',[3954.29,4038.08,21.1669],0,[0,0,1]] call InitStruct; 
-['SquareWoodenBox',[3953.17,4038.65,21.1685],255,[0,0,1]] call InitStruct; 
+_3954_289314038_0752021_16686 = ['SquareWoodenBox',[3954.29,4038.08,21.1669],0,[0,0,1]] call InitStruct; 
+_3953_169194038_6462421_16847 = ['SquareWoodenBox',[3953.17,4038.65,21.1685],255,[0,0,1]] call InitStruct; 
 ['SquareWoodenBox',[3953.78,4038.65,22.0862],0,[0,0,1]] call InitStruct; 
 ['SmallOldWell',[3950.81,4034.85,20.4871],270,[0,0,1]] call InitStruct; 
 ['WoodenLadder',[3949.02,4040.66,20.5083],0.00023308,[0,0,1]] call InitStruct; 
@@ -3823,10 +3817,6 @@ if (!isNil'_3954_105964045_0000023_00000') then {
 if (!isNil'_3948_356694045_2385325_55872') then {
 	_3948_356694045_2385325_55872 setvariable ['islocked',true];
 };
-if (!isNil'_3985_859864049_4614321_18508') then {
-	[_3985_859864049_4614321_18508,'CustomKnife',1,13] call (_3985_859864049_4614321_18508 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3985_859864049_4614321_18508,'Sledgehammer1',1,57] call (_3985_859864049_4614321_18508 getvariable 'proto' getvariable 'createItemInContainer');
-};
 if (!isNil'_3987_289064049_2487821_15557') then {
 	[_3987_289064049_2487821_15557,'SpirtBottle',1,25] call (_3987_289064049_2487821_15557 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3987_289064049_2487821_15557,'SigaretteDisabled',2,14] call (_3987_289064049_2487821_15557 getvariable 'proto' getvariable 'createItemInContainer');
@@ -3911,19 +3901,24 @@ if (!isNil'_3976_383304008_9860822_03008') then {
 if (!isNil'_3976_859624007_9787622_03907') then {
 	_3976_859624007_9787622_03907 setvariable ['name',"Заточка"];
 };
-if (!isNil'_3930_063484038_6296421_07586') then {
-	[_3930_063484038_6296421_07586,'AmmoShotgun',3,100] call (_3930_063484038_6296421_07586 getvariable 'proto' getvariable 'createItemInContainer');
-};
 if (!isNil'_3931_356204042_9299321_30770') then {
 	_3931_356204042_9299321_30770 setvariable ['name',"Колонка"];
+};
+if (!isNil'_3954_289314038_0752021_16686') then {
+	[_3954_289314038_0752021_16686,'SigaretteDisabled',1,62] call (_3954_289314038_0752021_16686 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3954_289314038_0752021_16686,'SigaretteDisabled',1,40] call (_3954_289314038_0752021_16686 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3954_289314038_0752021_16686,'SigaretteDisabled',1,48] call (_3954_289314038_0752021_16686 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3953_169194038_6462421_16847') then {
+	[_3953_169194038_6462421_16847,'ClothDebris2',1,100] call (_3953_169194038_6462421_16847 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3953_169194038_6462421_16847,'OrganicDebris1',1,67] call (_3953_169194038_6462421_16847 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3953_169194038_6462421_16847,'WoodenDebris1',1,100] call (_3953_169194038_6462421_16847 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3953_169194038_6462421_16847,'StoneDebris1',1,73] call (_3953_169194038_6462421_16847 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3951_025634035_5703121_15869') then {
 	_3951_025634035_5703121_15869 setvariable ['name',"Колонка"];
 };
 if (!isNil'_3912_170904011_5319820_87010') then {
-	[_3912_170904011_5319820_87010,'PistolOneShoot',1,20] call (_3912_170904011_5319820_87010 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3912_170904011_5319820_87010,'AmmoPistolHandmade',1,20] call (_3912_170904011_5319820_87010 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3912_170904011_5319820_87010,'AmmoPistolHandmade',1,100] call (_3912_170904011_5319820_87010 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3912_170904011_5319820_87010,'KitchenKnife',1,25] call (_3912_170904011_5319820_87010 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3920_665044013_2851621_09561') then {
