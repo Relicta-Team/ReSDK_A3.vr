@@ -200,6 +200,33 @@ struct(CraftModifier::default) base(CraftModifierAbstract)
 	}
 endstruct
 
+//internal struct for number|string(as precent) value
+struct(CraftModifier_numprecValue)
+	def(realValue) 0
+	def(isPrecentage) false
+	def(init)
+	{
+		params ["_val"];
+		if equalTypes(_val,"") then {
+			self setv(isPrecentage,true);
+			self setv(realValue,parseNumberSafe(_val));
+		} else {
+			self setv(realValue,_val);
+		};
+	}
+
+	def(getValueFrom)
+	{
+		params ["_from"];
+		if (self getv(isPrecentage)) then {
+			precentage(_from,self getv(realValue))
+		} else {
+			(self getv(realValue));
+		};
+	}
+
+endstruct
+
 /*
 	Передача реагентов
 	
@@ -209,35 +236,36 @@ endstruct
 		get_from_all: 30 #precents
 		get_from:
 			TAG: precentvalue
+		-- not needed now --
 		reagents_whitelist: [Milk]
 		reagents_blacklist: []
 */
 struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
 	def(title) "Передача реагентов"
-	def(description) "Модификатор передает реагенты из исходных ингредиентов в результат крафта"
+	def(description) "Модификатор передает реагенты из исходных ингредиентов в результат крафта."
 	def(reqired_fields) []
 	def(allowed_params) [
-		["reagents_whitelist",[
-				"type:array",
-				"title:Разрешенные реагенты",
-				"description:Список разрешенных реагентов для передачи. Указанные в этом списке реагенты будут переданы. Остальные исключаются. По умолчанию передает все реагенты",
-				["example",[
-					[],["Milk","Water"],["Blood"]
-				]]
-			]
-		],
-		["reagents_blacklist",[
-			"type:array",
-			"title:Запрещенные реагенты",
-			"description:Список запрещенных реагентов для передачи. Указанные в этом списке реагенты будут исключены. Остальные передаются. По умолчанию передает все реагенты",
-			["example",[
-				[],["Milk","Water"],["Blood"]
-			]]
-		]],
+		// ["reagents_whitelist",[
+		// 		"type:array",
+		// 		"title:Разрешенные реагенты",
+		// 		"description:Список разрешенных реагентов для передачи. Указанные в этом списке реагенты будут переданы. Остальные исключаются. По умолчанию передает все реагенты",
+		// 		["example",[
+		// 			[],["Milk","Water"],["Blood"]
+		// 		]]
+		// 	]
+		// ],
+		// ["reagents_blacklist",[
+		// 	"type:array",
+		// 	"title:Запрещенные реагенты",
+		// 	"description:Список запрещенных реагентов для передачи. Указанные в этом списке реагенты будут исключены. Остальные передаются. По умолчанию передает все реагенты",
+		// 	["example",[
+		// 		[],["Milk","Water"],["Blood"]
+		// 	]]
+		// ]],
 		["precentage_loss",
 			[
 				"title:Процент потери реагентов",
-				"description:Сколько процентов от реагентов потеряется при крафте. Это значение накладывается поверх переданных реагентов с помощью get_from_all и get_from",
+				"description:Сколько процентов от реагентов потеряется при крафте. Это значение применяется после передачи из ингредиентов в результаты. Если предметов больше 1 то каждый теряет столько процентов, сколько указано в этом параметре.",
 				"type:number",
 				["default",0],
 				["example",[0,50,75,100]]
@@ -245,22 +273,34 @@ struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
 		],
 		["loss_from_skills",[
 				"title:Потеря реагентов от успешности",
-				"description:Потеря реагентов от успешности крафта. Чем выше скилл крафтера, тем меньше потеря",
+				"description:По умолчанию выключено. Потеря реагентов от успешности крафта. Чем выше скилл крафтера, тем меньше потеря. Этот параметр накладывается после процентной потери precentage_loss (если указано) для каждого из результирующих предметов.",
 				"type:boolean",
 				["default",false]
 			]
 		],
+		["partial_transfer",[
+			"title:Частичная передача",
+			"description:Частичная передача от get_from_all. По умолчанию включено. Если опция включена, то каждый из результирующих предметов (если их несколько) получает часть реагентов от всех ингредиентов. Например, если на выходе получается 2 предмета то при передачи 100% каждый из предметов будет иметь лишь 50% от всех реагентов из требуемых ингредиентов.",
+			"type:boolean",
+			["default",true]
+		]],
+		["delete_on_empty",[
+			"title:Удалить опустошенные реагент-контейнеры",
+			"description:Удалять реагент-контейнеры, если после передачи в них не осталось содержимого. По умолчанию включено.",
+			"type:boolean",
+			["default",true]
+		]],
 		["get_from_all",[
 				"title:Передача из всех",
-				"description:Передача реагентов (единиц или процентов) из всех реагент-контейнеров. Значение 100% означает полную передачу. Если указано число (количество единиц)",
+				"description:Передача реагентов (единиц или процентов) из всех реагент-контейнеров. Значение 100% означает полную передачу. Обратите внимание, что на способ работы этого параметра влияет partial_transfer. Взаимоисключаемое с get_from.",
 				["type",["number","string"]],
 				["default",100],
 				["example",[5,"40%"]]
 			]
-		],
-		["get_from",[
+		]
+		,["get_from",[
 				"title:Передача по тегам",
-				"description:Передача процентных значений реагентов из реагент-контейнеров с указанными тегами. Если объект по тегу не является реагент-контейнером, то передача не произойдёт.",
+				"description:Передача реагентов (единиц или процентов) из реагент-контейнеров с указанными тегами. Если объект по тегу не является реагент-контейнером, то передача не произойдёт. Взаимоисключаемое с get_from_all.",
 				"type:object",
 				["additionalProperties",false],
 				["properties", toMap [
@@ -283,10 +323,14 @@ struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
 		]
 	]
 
-	def(precentage_loss) 0
-	def(loss_from_skills) false
-	def(get_from_all) "100%"
-	def(get_from) []
+	def(precentage_loss) 0 //процент потери для всех
+	def(loss_from_skills) false //потеря от навыков
+	def(get_from_all) "100%" //сколько процентов или реагентов отдаём
+	def(partial_transfer) true //частичная передача (get_from_all/count)
+	def(delete_on_empty) true //удалять пустые
+	def(_use_get_from_all) false
+	def(get_from) [] //dict of metatags
+	def(_use_get_from) false
 	def(reagents_whitelist) []
 	def(reagents_blacklist) []
 
@@ -299,16 +343,231 @@ struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
 		if (_name == "loss_from_skills") exitWith {
 			self callp(addParam,_name arg _val arg false);
 		};
+		if (_name == "get_from_all") exitWith {
+			self callp(addParam,_name arg _val arg [0 arg ""]);
+			self setv(_use_get_from_all,true);
+		};
+		if (_name in ["partial_transfer","delete_on_empty"]) exitWith {
+			self callp(addParam,_name arg _val arg false);
+		};
+		if (_name == "get_from") exitWith {
+			self callp(addParam,_name arg _val arg [hashMapNull]);
+			self setv(_use_get_from,true);
+
+			if equals(self getv(_use_get_from),self getv(_use_get_from_all)) then {
+				self callp(setParseError,"get_from и get_from_all не могут быть объявлены одновременно");
+			};
+		};
 	}
 
 	def(createModifierContext)
 	{
 		params ["_capturedCtx"];
+
+		private _mapAll = createhashMap;
+		private _mapRemove = createhashMap;
+		private _canDeleteListCheck = [];
+		{
+			private _ingr = _x;
+			{
+				private _itm = _x;
+				if !callFunc(_itm,isReagentContainer) then {continue};
+				private _useGetFrom = self getv(_use_get_from);
+				private _useGetFromAll = self getv(_use_get_from_all);
+				if (_useGetFromAll || _useGetFrom) then {
+					if (_useGetFrom && {equals(_ingr getv(metaTag),"")}) exitWith {break};
+					private _val = "100%";
+					if (_useGetFrom) then {
+						private _tag = _ingr getv(metaTag);
+						if (_tag in (self getv(get_from))) then {
+							_val = (self getv(get_from) get _tag);
+						} else {
+							break;
+						};
+					} else {
+						_val = self getv(get_from_all);
+					};
+					private _fromValObj = struct_newp(CraftModifier_numprecValue,_val);
+					private _lossValue = _fromValObj callp(getValueFrom,callFunc(_itm,getFilledSpace));
+					self callp(debugMessage,"loss value %1 from %2" arg _lossValue arg _fromValObj);
+					if (_lossValue > 0) then {
+						{
+							_x params ["_reag","_val"];
+							if !(_reag in _mapRemove) then {
+								_mapRemove set [_reag,0];
+							};
+							_mapRemove set [_reag,(_mapRemove get _reag) + _val];
+						} foreach callFuncParams(_itm,removeReagentsAndReturn,_lossValue);
+						if (callFunc(_itm,getFilledSpace)==0) then {
+							_canDeleteListCheck pushBack _itm;
+						};
+					};
+				};
+
+				if (self getv(_use_get_from)) then {
+					if equals(_ingr getv(metaTag),"") exitWith {break};
+					private _curTag = _ingr getv(metaTag);
+					private _curval = self getv(get_from) get _curTag;
+					private _fromCurObj = struct_newp(CraftModifier_numprecValue,_curval);
+				};
+
+			} foreach (_ingr callv(getObjects));
+		} foreach (_capturedCtx get "ingredients");
+		
+		
+		self callp(debugMessage,"captured reagents to add: %1" arg _mapRemove);
+		_mapAll set ["MAP_ADD_REAGENTS",_mapRemove];
+		_mapAll set ["LIST_CAN_DELETE_IF_EMPTY",_canDeleteListCheck];
+
+		_mapAll
 	}
 
 	def(onApply)
 	{
 		params ["_itm","_usr","_ctx","_craftContext"];
+		
+		if !callFunc(_itm,isReagentContainer) exitWith {
+			self callp(debugMessage,"Skipped non-reagent item %1" arg _itm)
+		};
+
+		private _ctxCopy = array_copy(_ctx);
+		private _mapToAdd = _ctxCopy deleteAt "MAP_ADD_REAGENTS";
+		private _delEmptyList = _ctxCopy deleteAt "LIST_CAN_DELETE_IF_EMPTY";
+		private _countItems = _craftContext get "result_count";
+		self callp(debugMessage,"count items %1; add reagents %2" arg _countItems arg _mapToAdd);
+		
+		callFunc(_itm,clearReagentSpace);
+		private _newCapacity = 0;
+		{
+			private _toAdd = ifcheck(self getv(partial_transfer),_y/_countItems,_y);
+			modvar(_newCapacity) + _toAdd;
+		} foreach _mapToAdd;
+		callFuncParams(_itm,setCapacity,_newCapacity);
+
+		{
+			private _toAdd = ifcheck(self getv(partial_transfer),_y/_countItems,_y);
+			callFuncParams(_itm,addReagent, _x arg _y);
+		} foreach _mapToAdd;
+
+		private _precentageLoss = self getv(precentage_loss);
+
+		if (self getv(loss_from_skills)) then {
+			if ((_craftContext get "used_skill")=="craft_success") exitWith {};
+			private _successAmount = _craftContext get "success_amount";
+			private _pval = round linearconversion [0,16,_successAmount,0,100,true];
+			modvar(_precentageLoss) + _pval;
+		};
+
+		if (_precentageLoss > 0) then {
+			private _premove = precentage(callFunc(_itm,getFilledSpace),_precentageLoss);
+			callFuncParams(_itm,removeReagents, _premove);
+			if (callFunc(_itm,getFilledSpace)==0) exitWith {
+				//todo reagents empty. what we do in this case?
+			};
+		};
+
+		if (self getv(delete_on_empty)) then {
+			{
+				if !isNullReference(_x) then {
+					delete(_x);
+				};
+			} foreach _delEmptyList;
+		};
+
+		// {
+		// 	if !("lossValue" in _y) then {continue};
+		// 	self callp(debugMessage,"transfer reagents to %1[%2]: %3" arg _itm arg _x arg _y get "listReagents");
+		// 	{
+		// 		callFuncParams(_itm,addReagent, _x arg _y);
+		// 	} foreach (_y getOrDefault ["listReagents",[]]);
+		// } foreach _ctxCopy;
 	}
 
+endstruct
+
+
+struct(CraftModifier::replace_reagent) base(CraftModifierAbstract)
+	def(title) "Замена реагента"
+	def(description) "Модификатор заменяет реагент в результате крафта."
+	def(required_fields) ["from","to"]
+	def(allowed_params) [
+		["from",[
+			"type:string",
+			"title:Исходный реагент",
+			"description:Исходный реагент который будем заменять на to",
+			"default:Nutriment",
+			["example",["Nutriment","Milk"]]
+		]],
+		["to",[
+			"type:string",
+			"title:Новый реагент",
+			"description:Новый реагент, который будет заменять исходный",
+			"default:Nutriment",
+			["example",["Nutriment","Milk"]]
+		]]
+	]
+
+	def(from) ""
+	def(to) ""
+
+	def(onParameter)
+	{
+		params ["_name","_val"];
+		if (_name in ["from","to"]) exitWith {
+			self callp(addParam,_name arg _val arg "");
+		};
+	};
+
+	def(onApply)
+	{
+		params ["_itm","_usr","_ctx","_craftContext"];
+		if !callFunc(_itm,isReagentContainer) exitWith {};
+		private _from = self getv(from);
+		if (_from == "") exitWith {};
+		private _to = self getv(to);
+		if (_to == "") exitWith {};
+
+		callFuncParams(_itm,replaceReagent,_from arg _to);
+	};
+endstruct
+
+struct(CraftModifier::execute_code) base(CraftModifierAbstract)
+	def(title) "Выполнение кода"
+	def(description) "Выполняет код модификатора."
+	def(required_fields) []
+	def(allowed_params)
+	[
+		["code",[
+			"type:string",
+			"title:Инструкции",
+			"description:Инструкции кода, которые будут выполнены"
+		]]
+	]
+
+	def(compiled_code) {} 
+
+	def(onParameter)
+	{
+		params ["_name","_val"];
+		if (_name == "code") exitWith {
+			private _cde = [_val] call csys_internal_generateYamlExpr;
+			if isNullVar(_cde) exitWith {
+				self callp(setParseError,"Error on generating code");
+			};
+			self setv(compiled_code,_cde);
+		};
+	}
+
+	def(collectTagInfo)
+	{
+		params ["_tagMap","_tagName","_objects"];
+		_tagMap set [_tagName,_objects select 0];
+	}
+
+	def(onApply)
+	{
+		params ["_itm","_usr","_ctx","_craftContext"];
+		private _tags = _ctx;
+		call (self getv(compiled_code));
+	}
 endstruct

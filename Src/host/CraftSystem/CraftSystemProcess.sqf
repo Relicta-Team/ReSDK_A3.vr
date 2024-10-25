@@ -97,6 +97,11 @@ csys_onCraftEndPreview = {
 	_params call _postCreate;
 };
 
+#ifdef EDITOR
+csys_internal_editor_lastRecipe = null;
+csys_internal_editor_lastIngredients = null;
+#endif
+
 /* 
 	Универсальная функция процесса крафта
 	крафт интерактора, стройки или меню. В том числе готовки.
@@ -335,12 +340,20 @@ csys_processCraftMain = {
 	};
 
 	if isNullVar(_recipe) exitWith {false};
+	
+	#ifdef EDITOR
+	csys_internal_editor_lastRecipe = _recipe;
+	csys_internal_editor_lastIngredients = _leftComponents;
+	#endif
 
+	private _resultCount = round (_recipe getv(result) getv(count) callv(getValue));
+	["result_count",_resultCount] call _addCraftContext;
 	 
 	//регистрируем контекст модификаторов
 	["is_interact",_isInteract] call _addModContext;
 	["user",_usr] call _addModContext;
 	["ingredients",_leftComponents] call _addModContext;
+	["result_count",_resultCount] call _addModContext;
 	private _modCtxPrepared = [];
 	// traceformat("Founded recipe %1",_recipe)
 	// traceformat("with result %1",_recipe getv(result))
@@ -396,7 +409,7 @@ csys_processCraftMain = {
 	private _duration = _usr call _durationCheck;
 	
 	#ifdef CRAFT_DEBUG_DURATION_CREATING
-	_duration = CRAFT_DEBUG_DURATION_CREATING min _duration;
+	_duration = ifcheck(_isSystem,CRAFT_DEBUG_DURATION_CREATING,1) min _duration;
 	#endif
 	
 	["duration",_duration] call _addCraftContext;

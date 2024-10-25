@@ -35,6 +35,7 @@
 # =======================================================
 
 - <<: *frying_pan
+  name: Жареные пирожки
   required:
     components:
       - class: Testo
@@ -48,6 +49,7 @@
         value: "Жареный {basename.lower}"
 
 - <<: *frying_pan
+  name: Блины
   required:
     components:
       - class: Lepeshka
@@ -57,6 +59,7 @@
     <<: *def_mods
 
 - <<: *frying_pan
+  name: Котлеты
   required:
     components:
       - class: MeatMinced
@@ -151,6 +154,7 @@
 # =======================================================
 
 - <<: *interacting
+  name: Нарезка мяса
   required:
     components:
       hand_item:
@@ -159,8 +163,13 @@
         class: Meat
   result:
     class: MeatChopped
-    count: {min: 1, max: 3}
-    <<: *def_mods
+    count: {min: 2, max: 4}
+    modifiers:
+      - name: transfer_reagents
+        get_from_all: 100%
+        partial_transfer: true
+        precentage_loss: 20 # типо жир и прочий мусор
+      - default # дефолт после трансфера чтобы вес правильно расчитался
 
 - <<: *interacting
   required:
@@ -169,10 +178,15 @@
         class: Knife
       target:
         class: Butter
+        destroy: false #чтобы кусочки отрезались
   result:
     class: ButterPiece
     count: 1
-    <<: *def_mods
+    modifiers:
+      - name: transfer_reagents
+        get_from_all: 2
+      - default
+
 
 - <<: *interacting
   required:
@@ -180,17 +194,31 @@
       hand_item:
         class: Item
         name: Молоко
+        meta_tag: milkContainer
         condition: |
           :isReagentContainer() 
-          && (:getMasterReagent() select 0) == "Milk"
-          && (:getMasterReagent() select 1) >= 10
+          && :hasReagent("Milk",10)
       target:
+        meta_tag: mukaSource
         class: Muka
+        destroy: false
   result:
     class: Testo
     count: 1
-    #TODO partial transfer
-    <<: *def_mods
+    modifiers:
+      - name: transfer_reagents
+        get_from: 
+          milkContainer: 10
+      - name: replace_reagent
+        from: Milk
+        to: Nutriment
+      - name: execute_code
+        code: |
+          mukaSource:removeReagents(10)
+          if (mukaSource:getFilledSpace()==0) then {
+            delete(mukaSource)
+          }
+      - default
 
 - <<: *interacting
   required:

@@ -49,14 +49,13 @@ struct(CraftModifierAbstract)
 
 	/* 
 		Захват контекста с ингредиентов до их удаления
-		В контекст попадает: 
+		В контекст обработчика попадает: 
 		- is_interact Общий для всех
-		 
-		 - Для интерактивных крафтов внутри дикта ingredients из 2 упорядоченных:( hand_item, target)
-		 
-		 - Для обычных внутри дикта массив ingredients
-		
-		user - ссылка на юзера-крафтера
+		- ingredients (массив структур копий ингредиентов):
+			- Для интерактивных крафтов внутри дикта ingredients из 2 упорядоченных:( hand_item, target)
+			- Для обычных внутри дикта массив
+		- user - ссылка на юзера-крафтера
+		- result_count - количество сколько выйдет предметов.
 
 		_capturedCtx не должен изменяться. Возвращаться должен новый набор данных, который будет предоставлен в onApply._ctx
 		возврат null не допускается. Любое not-nill значение
@@ -64,7 +63,7 @@ struct(CraftModifierAbstract)
 	def(createModifierContext)
 	{
 		params ["_capturedCtx"];
-		0
+		self callp(processCollectTagsFromObjects,_capturedCtx);
 	}
 
 	// Применение модификатора, _craftContext предоставляет контекст крафта (бросок навыка, позиции и т.д.)
@@ -203,6 +202,39 @@ struct(CraftModifierAbstract)
 		self set [_name,_val];
 	}
 
+	//сбор информации о тегах
+	def(collectTagInfo)
+	{
+		params ["_tagMap","_tagName","_objects"];
+		
+	}
+
+	def(processCollectTagsFromObjects)
+	{
+		params ["_capturedCtx"];
+		private _ingrList = _capturedCtx get "ingredients";
+		private _map = createHashMap;
+		private _allTagsRefs = createhashMap; //ссылки по тегам
+		{
+			if not_equals(_x getv(metaTag),"") then {
+				private _objList = _x callv(getObjects);
+				//traceformat("Object enum %1 is %2",_foreachIndex arg _objList)
+				if (count _objList > 0) then {
+					_allTagsRefs set [_x getv(metaTag),_objList];
+				};
+			};	
+		} foreach _ingrList;
+
+		//создаем карту имён
+		{
+			self callp(collectTagInfo,_map arg _x arg _y)
+		} foreach _allTagsRefs;
+
+		traceformat("Captured context for %3: %1 from refs: %2",_map arg _allTagsRefs arg self getv(name__));
+		
+		_map
+	}
+
 endstruct
 
 /*
@@ -236,28 +268,18 @@ struct(CraftModifier::set_name) base(CraftModifierAbstract)
 	def(createModifierContext)
 	{
 		params ["_capturedCtx"];
-		private _ingrList = _capturedCtx get "ingredients";
-		private _map = createHashMap;
-		private _allTagsRefs = createhashMap; //ссылки по тегам
-		{
-			if not_equals(_x getv(metaTag),"") then {
-				private _objList = _x callv(getObjects);
-				//traceformat("Object enum %1 is %2",_foreachIndex arg _objList)
-				if (count _objList > 0) then {
-					_allTagsRefs set [_x getv(metaTag),_objList select 0];
-				};
-			};	
-		} foreach _ingrList;
-
-		//создаем карту имён
-		{
-			_map set [_x+":name",getVar(_y,name)];
-		} foreach _allTagsRefs;
-
-		traceformat("Captured context for set_name: %1 from refs: %2",_map arg _allTagsRefs);
+		
+		private _map = self callp(processCollectTagsFromObjects,_capturedCtx);		
 
 		_map
 	}
+
+	def(collectTagInfo)
+	{
+		params ["_tagMap","_tagName","_objects"];
+		_tagMap set [_tagName + ":name",getVar(_objects select 0,name)];
+	}
+	
 
 	def(onParameter)
 	{

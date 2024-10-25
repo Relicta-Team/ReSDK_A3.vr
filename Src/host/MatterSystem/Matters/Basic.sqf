@@ -75,6 +75,12 @@ matter(Milk) extends(Matter)
 		callSelfParams(adjustToxin, - randInt(1,2));
 	end
 
+matter(Starch) extends(Matter)
+	prop(name,"Крахмал");
+	def(onAssimIngest)
+		callSelfParams(adjustHunger, + 1);
+	end
+
 matter(Salt) extends(Matter)
 	prop(name,"Соль");
 	prop(overdose,10);

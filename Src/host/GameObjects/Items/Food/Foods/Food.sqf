@@ -5,6 +5,7 @@
 
 #include <..\..\..\..\engine.hpp>
 #include <..\..\..\..\oop.hpp>
+#include <..\..\..\..\text.hpp>
 #include <..\..\..\GameConstants.hpp>
 
 editor_attribute("InterfaceClass")
@@ -51,10 +52,33 @@ class(IFoodItem) extends(Item)
 
 	getter_func(onBitesRanOut,delete(this)); //событие вызывается когда куски закончились
 
+	func(getDescFor)
+	{
+		objParams_1(_usr);
+		private _baseDesc = super();
+		
+		private _size = callSelf(getFoodSizeTextEnum) select callSelf(getFoodSize);
+		modvar(_baseDesc) + sbr + _size;
+		_baseDesc
+	};
 
+	func(getFoodSize)
+	{
+		objParams();
+		private _filled = callSelf(getFilledSpace);
+		if (_filled <= 5) exitwith {0};
+		if (_filled <= 10) exitWith {1};
+		if (_filled <= 45) exitWith {2};
+		if (_filled <= 60) exitWith {3};
+		4
+	};
+
+	func(getFoodSizeTextEnum)
+	{
+		["Крошечный кусочек","Маленький кусочек","Средний кусок","Большой кусок","Огромный кусок"]
+	};
 
 endclass
-
 
 class(Pill) extends(IFoodItem)
 	var(name,"Таблетка");
@@ -64,6 +88,11 @@ class(Pill) extends(IFoodItem)
 	getterconst_func(getBiteSize,null);
 	var(weight,gramm(2));
 	var(size,ITEM_SIZE_TINY);
+
+	func(getFoodSizeTextEnum)
+	{
+		["Крошечная","Маленькая","Средняя","Большая","Огромная"]
+	};
 endclass
 
 class(Testo) extends(IFoodItem)
@@ -101,27 +130,6 @@ class(Meat) extends(IFoodItem)
 	var(reagents,[vec2("Nutriment",140)]newReagentsFood);
 	getterconst_func(getBiteSize,30);
 
-	// func(onInteractWith)
-	// {
-	// 	objParams_2(_with,_usr);
-	// 	if isTypeOf(_with,Knife) exitWith {
-	// 		if callSelf(isInWorld) then {
-	// 			private _pos = getPosAtl getSelf(loc);
-	// 			private _weight = getSelf(weight);
-	// 			private _count = randInt(1,3);
-	// 			private _wperitem = _weight / (_count);
-	// 			private _itm = null;
-	// 			delete(this);
-	// 			for "_i" from 1 to _count do {
-	// 				_itm = ["MeatChopped",_pos,null,false] call createItemInWorld;
-	// 				setVar(_itm,weight,_wperitem);
-	// 			};
-	// 		} else {
-	// 			callFuncParams(_usr,localSay,"В руках резать не удобно..." arg "mind");
-	// 		};
-	// 	};
-	// };
-
 endclass
 
 class(MeatChopped) extends(IFoodItem)
@@ -131,6 +139,7 @@ class(MeatChopped) extends(IFoodItem)
 	var(size,ITEM_SIZE_SMALL);
 	var(reagents,[vec2("Nutriment",45)]newReagentsFood);
 	getterconst_func(getBiteSize,10);
+
 endclass
 
 class(MeatMinced) extends(MeatChopped)
@@ -180,27 +189,7 @@ class(Butter) extends(IFoodItem)
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(200));
 	var(reagents,[vec2("Nutriment",10)]newReagentsFood);
-	var(count,5);
 
-	// func(onInteractWith)
-	// {
-	// 	objParams_2(_with,_usr);
-	// 	if isTypeOf(_with,Knife) exitWith {
-	// 		if (!callFunc(this,isInWorld)) exitWith {};
-
-	// 		private _perPieceWeight = gramm(200) / 5;
-	// 		callSelfParams(removeReagents,2);
-	// 		setSelf(weight,getSelf(count) * _perPieceWeight);
-	// 		private _itm = ["ButterPiece",getPosATL getSelf(loc),null,false] call createItemInWorld;
-
-	// 		modSelf(count, - 1);
-
-	// 		if (getSelf(count) == 0) exitWith {
-	// 			delete(this);
-	// 		};
-	// 	};
-	// 	callSuper(IFoodItem,onInteractWith);
-	// };
 endclass
 
 class(ButterPiece) extends(IFoodItem)
@@ -211,43 +200,15 @@ class(ButterPiece) extends(IFoodItem)
 	var(reagents,[vec2("Nutriment",2)]newReagentsFood);
 endclass
 
-class(Muka) extends(Item)
+class(Muka) extends(IFoodItem)
 	var(name,"Мука");
 	var(material,"MatOrganic");
 	var(desc,"Обозначения на пачке вряд-ли скажут о её содержимом.");
 	var(model,"ml_shabut\sovokgoods\risochek.p3d");
 	var(size,ITEM_SIZE_MEDIUM);
 	var(weight,gramm(80));
-	var(count,5);
-
-	// func(onInteractWith)
-	// {
-	// 	objParams_2(_with,_usr);
-	// 	if (callFunc(_with,isReagentContainer)) then {
-	// 		if !callSelf(isInWorld) exitWith {
-	// 			callFuncParams(_usr,localSay,"Неудобно. Надо муку положить." arg "error");
-	// 		};
-	// 		callFunc(_with,getMasterReagent) params ["_reag","_amount"];
-	// 		if (_reag == "Milk" && _amount >= 10) then {
-	// 			private _listReagTransf = callFuncParams(_with,removeReagentsAndReturn,10);
-	// 			private _item = ["Testo",getPosATL getSelf(loc),null,false] call createItemInWorld;
-	// 			{
-	// 				if (_x select 0 == "Milk") then {
-	// 					callFuncParams(_item,addReagent,"Nutriment" arg _x select 1);
-	// 				} else {
-	// 					callFuncParams(_item,addReagent,_x select 0 arg _x select 1);
-	// 				};
-	// 			} forEach _listReagTransf;
-
-	// 			modSelf(count, - 1);
-	// 			if (getSelf(count) == 0) then {
-	// 				delete(this);
-	// 			};
-	// 		} else {
-	// 			callFuncParams(_usr,localSay,"Маловато молочка будет." arg "error");
-	// 		};
-	// 	};
-	// };
+	getter_func(canEat,false);
+	var(reagents,[vec2("Starch",50)]newReagentsFood);
 
 endclass
 

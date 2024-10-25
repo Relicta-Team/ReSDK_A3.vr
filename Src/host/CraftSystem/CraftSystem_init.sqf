@@ -366,6 +366,48 @@ csys_prepareRangedString = {
 };
 
 
+/*
+	генератор кода из yaml строки
+	if (tagged:instructions()) then {
+	  	tagged:doaction()
+	}
+*/
+csys_internal_generateYamlExpr = {
+	params ["_instr"];
+	private _lines = _instr splitString endl;
+	private _stack = ["scopename 'YAMLEXPR'; "];
+	private _pat_metcall = "(\w+):(\w+)\s*\(([^)]+)\)";
+	private _pat_met = "(\w+):(\w+)\s*\(\s*\)";
+	private _pat_field = "(\w+):(\w+)";
+	private _pat_return = "\s*(return)\s*;?";
+	private _pat_delete = "\s*(delete)\s*\(([^)]+)\)";
+	private _pat_endl = "[)}\w]\s*$";
+	{
+		private _curLine = _x;
+		_curLine = ([_curLine,_pat_metcall,'callFuncParams(_tags get "$1",$2,$3)'] call regex_replace);
+		
+		_curLine = ([_curLine,_pat_met,'callFunc(_tags get "$1",$2)'] call regex_replace);
+	
+		_curLine = ([_curLine,_pat_field,'getVar(_tags get "$1",$2)'] call regex_replace);
+	
+		_curLine = ([_curLine,_pat_return,"(0) breakout 'main'"] call regex_replace);
+
+		_curLine = ([_curLine,_pat_delete,'delete(_tags get "$2")'] call regex_replace);
+		
+		_stack pushBack _curLine;
+		
+		if ([_curLine,_pat_endl] call regex_isMatch) then {
+			_stack pushBack ";";
+		};
+	} foreach _lines;
+
+	private _CODEINSTR_ = null;
+	private _code = "_CODEINSTR_ = {" + (_stack joinString endl) + "};";
+	//debug_comiper = [_code,_stack];
+	isNIL (compile _code);
+	_CODEINSTR_
+};
+
 /* 
 	Генератор кода условия
 	Правила:

@@ -38,7 +38,7 @@ struct(CraftRecipeResult)
 
 		private _class = self getv(class);
 		if !isNullVar(_class) then {
-			for "_i" from 1 to (self getv(count) callv(getValue)) do {
+			for "_i" from 1 to (_craftCtx get "result_count") do {
 				private _realPos = [_pos,self getv(radius)] call randomRadius;
 				private _newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
 				
@@ -86,7 +86,7 @@ struct(CraftRecipeInteractResult) base(CraftRecipeResult)
 
 		private _class = self getv(class);
 		if !isNullVar(_class) then {
-			for "_i" from 1 to (self getv(count) callv(getValue)) do {
+			for "_i" from 1 to (_craftCtx get "result_count") do {
 				private _realPos = [_pos,self getv(radius)] call randomRadius;
 				_newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
 
