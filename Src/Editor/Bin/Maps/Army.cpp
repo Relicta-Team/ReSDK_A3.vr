@@ -8,18 +8,18 @@ class EditorData
 	toggles=42;
 	class ItemIDProvider
 	{
-		nextID=9518;
+		nextID=9520;
 	};
 	class LayerIndexProvider
 	{
-		nextID=3983;
+		nextID=4221;
 	};
 	class Camera
 	{
-		pos[]={3959.7544,28.09824,4007.7661};
-		dir[]={0.96123362,-0.27379504,-0.035294712};
-		up[]={0.27363819,0.96177238,-0.010047028};
-		aside[]={-0.036693249,3.0881893e-09,-0.99940193};
+		pos[]={3919.2354,29.864384,3988.4578};
+		dir[]={0.11211074,-0.3090784,0.94454473};
+		up[]={0.036436748,0.95099127,0.30697462};
+		aside[]={0.99314606,-3.8298895e-06,-0.11786094};
 	};
 };
 binarizationWanted=0;
@@ -9374,7 +9374,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3978.7498,26.570944,4030.8889};
-								angles[]={0,5.4977875,-0};
+								angles[]={0,5.4977875,0};
 							};
 							side="Empty";
 							flags=4;
@@ -15335,7 +15335,7 @@ class Mission
 									class PositionInfo
 									{
 										position[]={3969.3313,26.292271,4036.0811};
-										angles[]={0,5.7245803,-0};
+										angles[]={0,5.7245803,0};
 									};
 									side="Empty";
 									flags=4;
@@ -15353,7 +15353,7 @@ class Mission
 									class PositionInfo
 									{
 										position[]={3969.9199,26.306719,4036.2708};
-										angles[]={0,0.75039184,-0};
+										angles[]={0,0.75039184,0};
 									};
 									side="Empty";
 									flags=4;
@@ -15370,7 +15370,7 @@ class Mission
 									class PositionInfo
 									{
 										position[]={3970.2,26.321383,4036.1135};
-										angles[]={0,6.0213861,-0};
+										angles[]={0,6.0213861,0};
 									};
 									side="Empty";
 									flags=1;
@@ -51508,7 +51508,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="КПП";
-					state=1;
 					class Entities
 					{
 						items=1;
@@ -51704,7 +51703,7 @@ class Mission
 									name="Декор";
 									class Entities
 									{
-										items=63;
+										items=64;
 										class Item0
 										{
 											dataType="Object";
@@ -52794,17 +52793,35 @@ class Mission
 											type="plakats_01";
 											atlOffset=1.8013649;
 										};
+										class Item63
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3912.7964,26.472582,3989.6838};
+												angles[]={0,1.5707976,-0};
+											};
+											side="Empty";
+											flags=1;
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenNewBench""],[""mark"",""RNovobranetsArmyBed2""]]}";
+											};
+											id=9518;
+											type="Land_Bench_04_F";
+											atlOffset=21.110138;
+										};
 									};
 									id=7193;
-									atlOffset=0.44880867;
+									atlOffset=0.1029892;
 								};
 							};
 							id=7112;
-							atlOffset=0.073705673;
+							atlOffset=0.023639679;
 						};
 					};
 					id=7110;
-					atlOffset=0.073705673;
+					atlOffset=0.023639679;
 				};
 				class Item14
 				{
@@ -56323,7 +56340,7 @@ class Mission
 				};
 			};
 			id=7549;
-			atlOffset=0.67607307;
+			atlOffset=0.6604023;
 		};
 		class Item7
 		{
@@ -59334,7 +59351,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3969.2534,27.299,4037.042};
-								angles[]={0,1.570797,-0};
+								angles[]={0,1.570797,0};
 							};
 							side="Empty";
 							flags=5;
@@ -59352,7 +59369,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3970.6506,27.299,4036.9907};
-								angles[]={0,4.9741883,-0};
+								angles[]={0,4.9741883,0};
 							};
 							side="Empty";
 							flags=5;
@@ -59461,10 +59478,9 @@ class Mission
 				{
 					dataType="Layer";
 					name="Новобранец";
-					state=1;
 					class Entities
 					{
-						items=2;
+						items=3;
 						class Item0
 						{
 							dataType="Object";
@@ -59501,9 +59517,26 @@ class Mission
 							type="VR_3DSelector_01_default_F";
 							atlOffset=0.058708191;
 						};
+						class Item2
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3911.9768,27.226089,3989.6309};
+								angles[]={0,4.7123895,-0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""spawnpointname"",""RNovobranetsArmy2""]]],[""class"",""SpawnPoint""]]}";
+							};
+							id=9519;
+							type="VR_3DSelector_01_default_F";
+						};
 					};
 					id=8370;
-					atlOffset=0.014226913;
+					atlOffset=21.208424;
 				};
 				class Item5
 				{
@@ -59574,7 +59607,7 @@ class Mission
 				};
 			};
 			id=7909;
-			atlOffset=8.3068714;
+			atlOffset=8.3049135;
 		};
 	};
 };

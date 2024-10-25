@@ -3176,6 +3176,8 @@ _3927_538333993_2878422_31157 = ['IStruct',[3927.54,3993.29,22.3116],330,[0,0,1]
 ['RustyCell',[3914.82,3994.3,20.3224],270,[0,0,1]] call InitStruct; 
 ['SteelThinWallSmall',[3921.93,3994.24,20.2299],0,[0,0,1]] call InitStruct; 
 ['PosterFireAlarm',[3923.36,3988.41,23.1091],180,[0,0,1]] call InitStruct; 
+['WoodenNewBench',[3912.8,3989.68,21.1101],90.0001,[0,0,1], {go_editor_globalRefs set ["RNovobranetsArmyBed2",_thisObj];
+}] call InitStruct; 
 ['SteelRustyStairs',[3934.63,4023.5,15.125],0,[0,0,1]] call InitStruct; 
 ['RustyCell',[3933.63,4021.25,16.9275],0,[0,0,1]] call InitStruct; 
 ['RustyCell',[3933.67,4026.75,16.9449],0,[0,0,1]] call InitStruct; 
@@ -3688,6 +3690,7 @@ _3948_951904043_6777325_79363 = ['SpawnPoint',[3948.95,4043.68,25.7936],0,[0,0,1
 _3948_984864044_1018123_53077 = ['SpawnPoint',[3948.98,4044.1,23.5308],90,[0,0,1]] call InitStruct; 
 _3907_269783984_2226621_15498 = ['SpawnPoint',[3907.27,3984.22,21.155],45,[0,0,1]] call InitStruct; 
 _3906_975343986_6591821_32453 = ['SpawnPoint',[3906.98,3986.66,21.3245],105,[0,0,1]] call InitStruct; 
+_3911_976813989_6308621_17709 = ['SpawnPoint',[3911.98,3989.63,21.1771],270,[0,0,1]] call InitStruct; 
 _3919_104983973_1308621_23259 = ['SpawnPoint',[3919.1,3973.13,21.2326],90.4727,[0,0,1]] call InitStruct; 
 _3949_767824042_8579121_40068 = ['SpawnPoint',[3949.77,4042.86,21.4007],174.352,[0,0,1]] call InitStruct; 
 
@@ -5091,6 +5094,9 @@ if (!isNil'_3907_269783984_2226621_15498') then {
 };
 if (!isNil'_3906_975343986_6591821_32453') then {
 	_3906_975343986_6591821_32453 setvariable ['spawnpointname',"RNovobranetsArmy1"];
+};
+if (!isNil'_3911_976813989_6308621_17709') then {
+	_3911_976813989_6308621_17709 setvariable ['spawnpointname',"RNovobranetsArmy2"];
 };
 if (!isNil'_3919_104983973_1308621_23259') then {
 	_3919_104983973_1308621_23259 setvariable ['spawnpointname',"RProverkaArmy"];
