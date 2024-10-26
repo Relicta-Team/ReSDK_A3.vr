@@ -496,6 +496,7 @@ deleteItem = {
 			callFuncParams(_loc,removeItem,_item arg nullPtr);
 			delete(_item);
 		};
+		delete(_item);
 	};
 
 	RETURN(true);

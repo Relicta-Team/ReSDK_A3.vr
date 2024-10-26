@@ -296,6 +296,17 @@ regex_getFirstMatch = {
 	""
 };
 
+regex_getMatches = {
+	params ["_txt","_pattern",["_optMath",0]];
+	private _out = _txt regexfind [_pattern,0];
+	private _rList = [];
+	{
+		_rList pushBack (_x select _optMath select 0);
+		false
+	} count _out;
+	_rList
+};
+
 regex_replace = {
 	params ["_txt","_pattern","_replacer"];
 	_txt regexReplace [_pattern,_replacer];
@@ -566,24 +577,62 @@ getPosListCenter = {
 //Специальный рандом по области. Чем ближе к центру тем выше вероятность. Распределение идёт по всей окружности.
 randomRadius = {
 	params ["_center","_radius"];
-	_center getPos [random _radius,random 360]
+	private _pos = _center getPos [random _radius,random 360];
+	_pos set [2,_center select 2];
+	_pos
 };
 
 //Специальный рандом по области. Равномерное распределение по позиции в радиусе.
 randomPosition = {
 	params ["_center","_radius"];
-	_center getPos [_radius * (sqrt random 1),random 360]
+	private _pos = _center getPos [_radius * (sqrt random 1),random 360];
+	_pos set [2,_center select 2];
+	_pos
 };
 
 //Специальный рандом по области. Распределение идёт ближе к центру. Чем ближе к центру тем выше вероятность.
 randomGaussian = {
 	params ["_center","_radius"];
-	_center getPos [_radius * (random [-1,0,1]),random 180] 
+	private _pos = _center getPos [_radius * (random [-1,0,1]),random 180];
+	_pos set [2,_center select 2];
+	_pos
 };
 
 fileExists_Node = {
 	params ["_f"];
 	FileExists _f
+};
+
+// _mode == true -> asc, false -> desc: [[20,2,5],{_x}] call sortBy;
+sortBy = {
+	params ["_list","_algorithm",["_modeIsAscend",true]];
+
+	private _cnt = 0;
+	private _inputArray = _list apply 
+	{
+		_cnt = _cnt + 1; 
+		[_x call _algorithm, _cnt, _x]
+	};
+
+	_inputArray sort _modeIsAscend;
+	_inputArray apply {_x select 2}
+	
+};
+
+//find nearest number in array of numbers
+nearNumber = {
+	params ["_arr","_num"];
+	_arr = _arr + [_num];
+	_arr sort true;
+
+	private _i = _arr find _num;
+	private _max = _arr deleteAt (_i + 1);
+	private _min = _arr deleteAt (_i - 1);
+
+	if (isNil "_min") exitWith {_max};
+	if (isNil "_max") exitWith {_min};
+
+	[_min, _max] select (_num - _min > _max - _num)
 };
 
 fileLoad_Node = {

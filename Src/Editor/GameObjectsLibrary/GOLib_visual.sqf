@@ -194,6 +194,18 @@ function(golib_vis_onCreateExpand)
 	_tree ctrlAddEventHandler ["TreeMouseMove",golib_vis_ontreeMouseMoved];
 	_tree ctrlAddEventHandler ["MouseEnter",golib_vis_ontreeMouseEnter];
 	_tree ctrlAddEventHandler ["MouseExit",golib_vis_ontreeMouseExit];
+	_tree ctrlAddEventHandler ["KeyUp",{
+		params ["","_key","_shift","_ctrl","_alt"];
+		if (_key == KEY_C && _ctrl) then {
+			_cs = tvCurSel (call golib_vis_getTree);
+			if (!call golib_vis_isMouseInsideTree) exitWith {};
+			if not_equals(_cs,[]) then {
+				private _classname = ([_cs,"class"] call golib_vis_getTreeItemProperty);
+				[format["Имя '%1' скопировано в буфер обмена",_classname]] call showInfo;
+				copytoclipboard _classname;
+			};
+		};
+	}];
 
 	[_tree] call golib_internal_initTreeStateSaver;
 

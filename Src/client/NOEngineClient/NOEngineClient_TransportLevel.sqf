@@ -69,7 +69,7 @@ _noe_client_onUpdateChunk = {
 
 	if (popPacketId(_id)) then {
 
-		_objList = []; _remList = [];
+		private _objList = []; private _remList = [];
 		if ([_this,_objList,_remList] call noe_client_byteArrToObjStruct) then {
 
 			[_chunkObject,_objList] call noe_client_loadObjects;
@@ -117,7 +117,7 @@ _noe_client_onUpdateObject = {
 		errorformat("noe::client::onUpdateObject() - Cant update object. State was %1",chunk_getLoadingState(_chunkObject));
 	};
 	
-	_objList = []; _remList = [];
+	private _objList = []; private _remList = [];
 	if ([_this,_objList,_remList] call noe_client_byteArrToObjStruct) then {
 
 		//if (count _objList > 0) exitWith {

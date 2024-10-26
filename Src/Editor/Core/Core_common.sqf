@@ -93,6 +93,17 @@ regex_getFirstMatch = {
 	""
 };
 
+regex_getMatches = {
+	params ["_txt","_pattern",["_optMath",0]];
+	private _out = _txt regexfind [_pattern,0];
+	private _rList = [];
+	{
+		_rList pushBack (_x select _optMath select 0);
+		false
+	} count _out;
+	_rList
+};
+
 regex_replace = {
 	params ["_txt","_pattern","_replacer"];
 	_txt regexReplace [_pattern,_replacer];

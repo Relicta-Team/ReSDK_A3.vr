@@ -181,6 +181,68 @@
 		callSelfParams(ShowMessageBox,"Text" arg _struct);
 	};
 
+	addCommandWithDescription("craftlist",PUBLIC_COMMAND,"Открывает список рецептов. параметры default|system|interact")
+	{
+		checkIfMobExists();
+		
+		private _mode = args;
+		private _list = [];
+		{
+			private _recipeType = _y get "c_type";
+			private _kval = str _y;
+			if (_mode in ["default","building"] && _recipeType in ["default","building"]) then {
+				_list pushBack _kval;
+			};
+			if (_mode == "system" && _recipeType == _mode) then {
+				_list pushBack (_kval+(_y get "systemSpecific"));
+			};
+			if (_mode == "interact" && _recipeType == "interact") then {
+				_list pushBack _kval;
+			};
+		} foreach csys_map_allCraftRefs;
+
+		private _dat = ["Выберите рецепт для спавна ингредиентов:"];
+		private _handler = {
+			callSelfParams(localSay,format["Ingredient selected %1" arg _value]);
+			private _recipeId = parseNumber(_value splitString ":" select 1);
+			callSelf(CloseMessageBox);
+			if (_recipeID == 0) exitWith {
+				callSelfParams(localSay,"Parse recipe id error" arg "system");
+			};
+
+			private _recipe = csys_map_allCraftRefs get _recipeID;
+			private _components = _recipe get "components";
+			if ((_recipe get "c_type") == "interact") then {
+				_components = [
+					_recipe get "hand_item",
+					_recipe get "target"
+				];
+			};
+			callSelf(generateLastInteractOnServer);
+			private _endPos = callSelf(getLastInteractEndPos);
+			{
+				private _class = _x get "class";
+				if (_x get "isMultiSelector") then {
+					_class = _class select 0;
+				};
+				private _count = _x get "count";
+				for "_i" from 1 to _count do {
+					[_class,_endPos] call createGameObjectInWorld;
+				};
+			} foreach _components;
+		};
+		{
+			private _istr = [_x,"|","/"] call stringReplace;
+			_dat pushback (format["%1",_istr]);
+		} foreach _list;
+		
+		if (count _dat == 1) exitWith {
+			callFuncParams(thisClient,localSay,"Нет доступных ингредиентов" arg "error");
+		};
+
+		callFuncParams(thisClient,ShowMessageBox,"Listbox" arg _dat arg _handler);
+	};
+
 #endif
 // DEBUG
 

@@ -15,28 +15,33 @@
 		
 
 */
-#include <..\..\engine.hpp>
-#include <..\..\struct.hpp>
-#include <..\..\text.hpp>
-#include "..\..\ServerRpc\serverRpc.hpp"
-#include "..\..\PointerSystem\pointers.hpp"
+#include <..\engine.hpp>
+#include <..\struct.hpp>
+#include <..\text.hpp>
+#include "..\ServerRpc\serverRpc.hpp"
+#include "..\PointerSystem\pointers.hpp"
+#include "..\..\client\Interactions\interact.hpp"
+#include "..\GURPS\gurps.hpp"
 #include "Craft.hpp"
 #include "Craft.h"
 
-#include <..\..\oop.hpp>
+#include <..\oop.hpp>
 #undef class
 
 #include "CraftSystemProcess.sqf"
 
 //key int, val ICraftRecipeBase
 csys_map_allCraftRefs = createHashMap;
-//key string(typename), val array<ICraftRecipeBase>
+//key string(typename) as target, val array<ICraftRecipeBase>
 csys_map_allInteractiveCrafts = createHashMap;
 //key string(typename), val array<ICraftRecipeBase>
 csys_map_allSystemCrafts = createHashMap; //! В будущем можно перенести хранение буферов крафтов на типы классов
 
 //глобальное хранилище крафтов по категориям, key int(id), val array<ICraftRecipeBase>
 csys_map_storage = createhashMap; 
+
+//системные крафты...
+csys_map_systems_storage = createhashMap;
 
 csys_global_counter = 1;
 csys_cat_names = CRAFT_CONST_CATEGORY_NAMES;
@@ -50,10 +55,19 @@ csys_cat_debug_allCrafts = [];
 #endif
 
 csys_init = {
+	
+	#ifdef _SQFVM
+	if (true) exitWith {};
+	#endif
+
 	{
 		csys_cat_map_sysnames set [_x,_foreachindex];
 		csys_map_storage set [_foreachindex,[]];
+		csys_map_systems_storage set [_foreachIndex,[]];
 	} foreach CRAFT_CONST_CATEGORY_LIST_SYS_NAMES;
+
+	csys_systemController_handleUpdate = startUpdate(csys_systemController_onUpdate,1);
+
 
 	//collecting all files and load into buffer
 	private _files = ["src\host\CraftSystem\Crafts\",".yml",true] call fso_getFiles;
@@ -72,14 +86,15 @@ csys_init = {
 	} foreach _files;
 
 	if (_errored) exitWith {
-		assert_str(false,_erroredString);
+		//assert_str(false,_erroredString);
+		error(_erroredString);
 		setLastError(_erroredString);
 	};
 
 	{
 		_x params ["_file","_content"];
 		csys_internal_lastLoadedFile = _file;
-		csys_internal_configNumber = _foreachindex + 1;
+		csys_internal_configNumber = 1;
 		traceformat("Loading craft file: %1",_file);
 
 		if !([_content] call csys_loadConfig) exitWith {
@@ -101,6 +116,7 @@ csys_loadConfig = {
 			_isok = false;
 		};
 		INC(_loaded);
+		INC(csys_internal_configNumber);
 	} foreach _cfgContent;
 	traceformat("Loaded %1 configs (%2 sec)",_loaded arg tickTime - _t);
 
@@ -125,7 +141,7 @@ csys_errorMessage = {
 	_fmt set [0,(_fmt select 0) + (format[" (file: %1; item: %2)",csys_internal_lastLoadedFile,csys_internal_configNumber])];
 	private _message = format _fmt;
 	errorformat("[CraftError]: %1",_message);
-	setLastError(_message);
+	["Craft build failed:" +endl+ _message] call messageBox;
 };
 
 csys_validateType = {
@@ -168,6 +184,10 @@ csys_validateType = {
 
 csys_internal_loadCfgSegment = {
 	params ["_data"];
+	if (_data getOrDefault ["ignored",false]) exitWith {
+		traceformat("IGNORE: config %1 in %2",csys_internal_configNumber arg csys_internal_lastLoadedFile);
+		true
+	};
 	CRAFT_PARSER_HEAD;
 	
 	// ----------------------- base check -----------------------
@@ -206,13 +226,22 @@ csys_internal_loadCfgSegment = {
 
 	GETVAL_STR(_data, vec2("system_specific",""));
 	FAIL_CHECK_PRINT;
-	if (value != "" && {!(_sobj callv(canApplySystemSpecific))}) exitWith {
-		["Type %1 cannot contain system specific (required 'type: system')",_type] call csys_errorMessage;
-		false
-	};
+	private _err = false;
+	private _canUseSysSpec = _sobj callv(canApplySystemSpecific);
 	if (value != "") then {
+		if (!_canUseSysSpec) then {
+			_err = true;
+			["Item %1 (%2) cannot contain system specific (required 'system_specific')",csys_internal_configNumber,csys_internal_lastLoadedFile] call csys_errorMessage;
+		};
 		_sobj setv(systemSpecific,value);
+	} else {
+		if (_canUseSysSpec) then {
+			_err = true;
+			["Item %1 (%2) must contain system specific (required 'system_specific')",csys_internal_configNumber,csys_internal_lastLoadedFile] call csys_errorMessage;
+		};
 	};
+	if (_err) exitWith {false};
+	
 
 	// ----------------------- requirements check -----------------------
 	GETVAL_DICT(_data, "required");
@@ -226,7 +255,7 @@ csys_internal_loadCfgSegment = {
 	};
 
 	// ----------------------- failed check -----------------------
-	GETVAL_DICT(_data, vec2("failed",null));
+	GETVAL_DICT(_data, vec2("failed_handler",null));
 	FAIL_CHECK_PRINT;
 
 	_sobj callp(_parseFailed,value arg _ref);
@@ -277,7 +306,7 @@ csys_internal_loadCfgSegment = {
 */
 csys_format = {
 	params ["_str","_argsmap"];
-	private _patternKeys = "\ *\w+([ \t]*\.[ \t]*\w+)*\ *";
+	private _patternKeys = "\ *[\w:]+([ \t]*\.[ \t]*\w+)*\ *";
 	private _patternFormatter = "\{("+_patternKeys+")\}";
 	private _match = null;
 	private _kmap = null;
@@ -287,19 +316,36 @@ csys_format = {
 	while {[_str,_patternFormatter] call regex_isMatch} do {
 		_match = [_str,_patternFormatter] call regex_getFirstMatch;
 		_kmap = [_match,_patternKeys] call regex_getFirstMatch;
-		_tokens = _kmap splitString " .";
-		_argName = _tokens deleteAt 0;
+		_tokens = _kmap splitString " ."; //tokenlist a.b.c.d
+		_argName = _tokens deleteAt 0; //first part
 		if (_argName in _argsmap) then {
-			private _val = _argsmap get _argName;
+			private _val = _argsmap get _argName; //is value
 			assert(!isNullVar(_val));
+			//pass of all func tokens b.c.d
 			{
 				_val = _val call (csys_map_tokenMap getOrDefault [_x,csys_defaultTokenCode]);
-			} foreach _tokens;
-			_str = [_str,_match,_val] call regex_replace;
+			} foreach _tokens;			
+			_str = [_str,_match,_val] call stringReplace;
 		};
 	};
 
 	_str
+};
+
+csys_formatSelector = {
+	params ["_val"];
+	private _patternSelector = "\([^()]*\)";
+	private _patternElements = "[^\(\)\|]+";
+	private _match = null;
+	private _elements = null;
+	while {[_val,_patternSelector] call regex_isMatch} do {
+		_match = [_val,_patternSelector] call regex_getFirstMatch;
+		_elements = [_match,_patternElements] call regex_getMatches;
+		if (count _elements > 0) then {
+			_val = [_val,_match,pick _elements] call stringReplace;
+		};
+	};
+	_val
 };
 
 csys_map_tokenMap = createHashMapFromArray [
@@ -309,6 +355,7 @@ csys_map_tokenMap = createHashMapFromArray [
 
 csys_defaultTokenCode = { _this };
 
+//генериурет ранжированный список на основе входной строки: "item(1-5)" -> ["item1","item2","item3","item4","item5"]
 csys_prepareRangedString = {
 	params ["_input",["_intoArray",false]];
 	if !([_input,"\(\d+\-\d+\)"] call regex_isMatch) exitWith {ifcheck(_intoArray,[_input],_input)};
@@ -324,6 +371,55 @@ csys_prepareRangedString = {
 };
 
 
+/*
+	генератор кода из yaml строки
+	if (tagged:instructions()) then {
+	  	tagged:doaction()
+	}
+*/
+csys_internal_generateYamlExpr = {
+	params ["_instr"];
+	private _lines = _instr splitString endl;
+	private _stack = ["scopename 'YAMLEXPR'; "];
+	private _pat_metcall = "(\w+):(\w+)\s*\(([^)]+)\)";
+	private _pat_met = "(\w+):(\w+)\s*\(\s*\)";
+	private _pat_field = "(\w+):(\w+)";
+	private _pat_return = "\s*(return)\s*;?";
+	private _pat_delete = "\s*(delete)\s*\(([^)]+)\)";
+	private _pat_tags = "\b(tags)\b";
+	private _pat_vardef = "\b(var)\b";
+	private _pat_endl = "[)}\w]\s*$";
+	{
+		private _curLine = _x;
+		_curLine = ([_curLine,_pat_metcall,'callFuncParams(_tags get "$1",$2,$3)'] call regex_replace);
+		
+		_curLine = ([_curLine,_pat_met,'callFunc(_tags get "$1",$2)'] call regex_replace);
+	
+		_curLine = ([_curLine,_pat_field,'getVar(_tags get "$1",$2)'] call regex_replace);
+	
+		_curLine = ([_curLine,_pat_return,"(0) breakout 'main'"] call regex_replace);
+
+		_curLine = ([_curLine,_pat_delete,'delete(_tags get "$2")'] call regex_replace);
+		
+		_curLine = ([_curLine,_pat_tags,"_tags"] call regex_replace);
+		_curLine = ([_curLine,_pat_vardef,"private"] call regex_replace);
+
+		_stack pushBack _curLine;
+		
+		if ([_curLine,_pat_endl] call regex_isMatch) then {
+			_stack pushBack ";";
+		};
+	} foreach _lines;
+
+	private _CODEINSTR_ = null;
+	private _code = "_CODEINSTR_ = {" + (_stack joinString endl) + "};";
+	#ifdef EDITOR
+	debug_compiler_csys_lastInstructions = [_code,_stack];
+	#endif
+	isNIL (compile _code);
+	_CODEINSTR_
+};
+
 /* 
 	Генератор кода условия
 	Правила:
@@ -332,9 +428,20 @@ csys_prepareRangedString = {
 */
 csys_generateInsturctions = {
 	params ["_condition"];
-	
-	setLastError("Component.condition - not implemented yet...");
 
+	private _pat_methodArgs = ":(\w+)\s*\(([^)]+)\)";
+	private _pat_method = ":(\w+)\s*\(\s*\)";
+	private _pat_field = ":(\w+)\b";
+
+	//replace parametrize methods
+	_condition = [_condition,_pat_methodArgs,'callFuncParams(this,$1,$2)'] call regex_replace;
+	_condition = [_condition,_pat_method,'callFunc(this,$1)'] call regex_replace;
+	_condition = [_condition,_pat_field,'getVar(this,$1)'] call regex_replace;
+	private _CODE_INSTR_ = null;
+	_condition = ["_CODE_INSTR_ = {params["""+'this'+"""];",_condition,"}; true"] joinString " ";
+	isNIL (compile _condition);
+
+	_CODE_INSTR_
 	// private _baseCondition = _condition;
 	// private _condExecution = [];
 	// private _lop = [];
@@ -367,7 +474,68 @@ csys_generateInsturctions = {
 	// if (count _condExecution == 0) then { _condExecution = ["true"]};
 	// compile (_condExecution joinString "")
 };
+
+//obsolete constants
 csys_const_regexFunc = "(\w+)\s*\(\)";
 csys_const_regexField = "\w+";
 csys_const_regexOP = "==|!=|<=|>=|\|\||&&|>|<";
 csys_const_alllowRegex = (csys_const_regexFunc+"|"+csys_const_regexField+"|"+csys_const_regexOP);
+
+
+
+csys_list_systemControllers = []; //SystemControllerCrafts  системы зарегистрированы здесь
+csys_map_systemControllersIndexes = createhashMap; //k<int>, v<SystemControllerCrafts>
+
+//get or register craft system controller (SystemControllerCrafts)
+csys_getSystemController = {
+	params ["_sysname"];
+	if (_sysname in csys_map_systemControllersIndexes) then {
+		private _index = csys_map_systemControllersIndexes get _sysname;
+		csys_list_systemControllers select _index
+	} else {
+		private _sysObj = struct_newp(SystemControllerCrafts,_sysname);
+		private _indSys = csys_list_systemControllers pushBack _sysObj;
+		csys_map_systemControllersIndexes set [_sysname,_indSys];
+		_sysObj
+	};
+};
+
+csys_systemController_handleUpdate = -1;
+csys_systemController_onUpdate = {
+	{
+		_x callv(update);
+		false
+	} count (csys_list_systemControllers);
+};
+
+#ifdef EDITOR
+csys_internal_generateSchema = {
+	private _types = ["CraftModifierAbstract"] call struct_getAllTypesOf;
+	private _headSegment = ["// place part 1 here"];
+	private _modNames = [];
+	private _dictSegment = ["// here placed dict of modifiers"];
+	private _allOfList = createHashMapFromArray[["allOf",[]]];
+	{
+		private _obj = [_x,["GETMODINFO"]] call struct_alloc;
+		_modNames pushBack (_obj getv(name__));
+
+		(_allOfList get "allOf") pushBack (_obj callv(getModifierDict));
+	} foreach _types;
+
+	_dictEnum = toJson(createHashMapFromArray[["enum",_modNames]]);
+	_dictEnum = _dictEnum select [1];
+	_dictEnum = _dictEnum select [0,count _dictEnum-1];
+	_headSegment pushBack (_dictEnum);
+
+	_dct = (toJson(_allOfList));
+	_dct = _dct select [1];
+	_dct = _dct select [0,count _dct-1];
+	_dictSegment pushBack _dct;
+
+	//return
+	private _r = (_headSegment joinString endl)+endl+endl+endl + ([_dictSegment joinString endl,"\\n","\n"] call stringReplace);
+	copytoclipboard _r;
+	text _r
+};
+
+#endif

@@ -394,7 +394,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 //hashmap
 #define hashMapNew createHashMap
 #define hashMapNewArgs createHashMapFromArray
-
+#define toMap hashMapNewArgs
 // assign logics
 /*
 	prop(testvar) = "";
@@ -566,7 +566,7 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 
 
 //sound engine
-
+#define soundPathPrep(v) ((v)splitString "/" joinString "\")
 #define soundDataDef(path) [path]
 #define soundData(path,pithmin,pithmax) [path,pithmin,pithmax]
 

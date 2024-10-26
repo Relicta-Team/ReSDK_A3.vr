@@ -1,16 +1,67 @@
 
 - desc: abs
-  aq: 3
-  type: interactor
+  type: system
+  system_specific: CookingSystem
   name: a
-  a: 3
-  interactor:
-    a: 3
-  targetx: 
-    typxe: a
-  val: 3
+  required:
+    components:
+      - class: NonCls
+        hp: 20%
+  result:
+    class: IFoodItem
 
+- 
+  desc: ""
+  type: interact
+  category: Food
+  ignored: false
+  required:
+    force_visible: false
+    skills:
+      fight: 20
+      cooking: 1
+      
+    components:
+      hand_item:
+        class: Content(10-$x asd qw deqw )
+        hp: 
+          message: "test"
+          value: 10%
 
-- name: a
-  message: dest
-  test_int: 2
+        count: 100
+
+      target:
+        class: Item
+  failed_handler: 
+    handler_type: default
+    class: "Test"
+    count: 30
+  options:
+    collect_distance: 0.8
+    craft_duration: rnd(1,3) + from_skill(20,1)
+  result:
+    sound: "damage/wood_(1-3).ogg"
+    emote: # (опционально) вызывает один из эмоутов. слова в круглых скобках являются рандомной заменой
+      - "(рубит|кромсает) {target.lower}."
+      - "разделяет {target.lower} на мелкие кусочки."
+      - "ловко оперирует {hand_item.lower} по {target.lower}"
+    class: IFoodItem
+    count: 5
+    modifiers:
+      - test
+      - evalaekr;faekr;
+      - name: set_name
+        value: "test"
+      - name: set_name
+        value: ""
+
+- name: test
+  type: building
+  system_specific: CookingSystem
+  required:
+    components:
+      - class: IFoodItem
+      - class: Opt
+  result:
+    class: Test
+    

@@ -1,0 +1,71 @@
+- ignored: true
+
+  constr_base: &light
+    type: building
+    category: Light
+    options:
+      craft_duration: from_skill(8,1)
+
+  default_modifiers: &def_mods
+     modifiers:
+        - name: default
+
+# =======================================================
+# микросвет
+# =======================================================
+
+- <<: *light
+  name: Факел
+  required:
+    components:
+      - class: WoodenDebris6
+        count: 1
+        check_type_of: false
+      - class: [Bandage,Rag]
+        count: 1
+        check_type_of: false
+  result:
+    class: TorchDisabled
+    <<: *def_mods
+
+- <<: *light
+  name: Восстановление свечи
+  required:
+    components:
+      - class: Candle
+        count: 1
+      - class: RopeItem
+        count: 1
+        check_type_of: false
+  result:
+    class: CandleDisabled
+    <<: *def_mods
+
+# =======================================================
+# костры
+# =======================================================
+
+- <<: *light
+  name: Костер
+  required:
+    components:
+      - class: StoneDebris(1-5)
+        count: 3
+        check_type_of: false
+      - class: WoodenDebris(1-7)
+  result:
+    class: CampfireDisabled
+    <<: *def_mods
+
+- <<: *light
+  name: Большой костер
+  required:
+    components:
+      - class: StoneDebris(1-5)
+        count: 4
+        check_type_of: false
+      - class: WoodenDebris(1-5)
+        count: 5
+        check_type_of: false
+  result:
+    class: CampfireBigDisabled

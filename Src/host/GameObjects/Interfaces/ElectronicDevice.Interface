@@ -173,15 +173,65 @@
 		callSelfParams(setEnable,!_oldMode);
 	};
 
+	func(destructor)
+	{
+		objParams();
+		
+		if getSelf(edIsNode) then {
+			assert(getSelf(edConnected));
+			{
+				callSelfParams(removeConnection,_x);
+			} foreach array_copy(getSelf(edConnected));
+		};
+
+		private _owner = getSelf(edOwner);
+		if !isNullReference(_owner) then {
+			callFuncParams(_owner,removeConnection,this);
+		};
+	};
+
+	func(addConnection) {
+		objParams_1(_obj);
+
+		getSelf(edConnected) pushBackUnique _obj;
+		setVar(_obj,edOwner,this);
+		modSelf(edNodeReqPower,+ getVar(_obj,edReqPower));
+
+		//включаем подачу энергии
+		if getVar(this,edIsUsePower) then {
+			callFuncParams(_obj,setUsePower,true);
+		};
+	};
+
+	func(removeConnection) {
+		objParams_1(_obj);
+
+		private _connectedList = getSelf(edConnected);
+		private _ind = _connectedList find _obj;
+		if (_ind == -1) exitWith {false};
+
+		_connectedList deleteAt _ind;
+
+		setVar(_obj,edOwner,nullPtr);
+
+		modSelf(edNodeReqPower, - getVar(_obj,edReqPower));
+		
+		//отключаем подачу энергии на источнике
+		if getVar(_obj,edIsUsePower) then {
+			callFuncParams(_obj,setUsePower,false);
+		};	
+		
+		true //return if success added
+	};
+
 	//подключить это устройство к источнику
-	//Внимание! метод addConnection определён в дочернем ElectronicDeviceNode
 	func(connectTo)
 	{
 		objParams_1(_src);
 		callFuncParams(_src,addConnection,this);
 	};
 	
-	// ВНИМАНИЕ! метод addConnection определён в дочернем removeConnection
+	//Отключить это устройство от источника
 	func(disconnectFrom)
 	{
 		objParams_1(_owner);
