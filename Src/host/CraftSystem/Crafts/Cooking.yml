@@ -39,7 +39,9 @@
   required:
     components:
       - class: Testo
+        check_type_of: false
       - class: Egg
+        check_type_of: false
   result:
     class: Bun
     count: 3
