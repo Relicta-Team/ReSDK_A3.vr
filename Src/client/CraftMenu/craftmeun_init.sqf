@@ -4,12 +4,14 @@
 // ======================================================
 
 #include "..\..\host\engine.hpp"
+#include "..\..\host\struct.hpp"
 #include <..\..\host\text.hpp>
 #include "..\WidgetSystem\widgets.hpp"
 #include <..\ClientRpc\clientRpc.hpp>
 #include <..\..\host\CraftSystem\Craft.hpp>
 #include <..\..\host\keyboard.hpp>
 #include "CraftMenu_RPC.sqf"
+#include "Craft_preview.sqf"
 
 #define CRAFT_WIND_SIZE_X 60
 #define CRAFT_WIND_SIZE_Y 80
@@ -39,9 +41,12 @@ craft_lastPressedRecipeID = -1;
 craft_loadCateg_isLoading = false;
 craft_loadCateg_lastLoadingTime = 0;
 
+//режим предпросмотра рецептов (без кнопки крафта)
+craft_isPreviewOnlyMode = false;
+
 craft_open = {
 	__nextframedata_ = _this;
-	params ["_visibleCat","_listRecipes"];
+	params ["_visibleCat","_listRecipes",["_onlyPreview",false]];
 	if (count _visibleCat == 0) exitWith {
 		error("craft::open() - visible categories list empty");
 	};	
@@ -66,6 +71,8 @@ craft_open = {
 	craft_lastPressedRecipeID = -1;
 	craft_loadCateg_isLoading = false;
 	craft_loadCateg_lastLoadingTime = 0;
+
+	craft_isPreviewOnlyMode = _onlyPreview;
 	
 	_ctg = [_d,WIDGETGROUP_H,[50 - CRAFT_WIND_SIZE_X/2,50-CRAFT_WIND_SIZE_Y/2,CRAFT_WIND_SIZE_X,CRAFT_WIND_SIZE_Y]] call createWidget;
 	_back = [_d,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
@@ -115,18 +122,20 @@ craft_open = {
 	setRecipeInfoWidget(_info);
 	
 	//creating craft button
-	_btsize = 100 - _leftsize;
-	_bt = [_d,BUTTONMENU,[_leftsize + 5,75,_btsize - 10,15],_ctg] call createWidget;
-	_bt ctrlSetText "Создать";
-	setCraftButton(_bt);
-	[false] call craft_setActiveCraftButton;
-	_bt ctrlAddEventHandler ["MouseButtonUp",{
-		params ["_ct","_bt"];
-		if (_bt == MOUSE_LEFT) then {
-			call craft_onPressCraft;
-			nextFrame(craft_close);
-		};
-	}];
+	if (!_onlyPreview) then {
+		_btsize = 100 - _leftsize;
+		_bt = [_d,BUTTONMENU,[_leftsize + 5,75,_btsize - 10,15],_ctg] call createWidget;
+		_bt ctrlSetText "Создать";
+		setCraftButton(_bt);
+		[false] call craft_setActiveCraftButton;
+		_bt ctrlAddEventHandler ["MouseButtonUp",{
+			params ["_ct","_bt"];
+			if (_bt == MOUSE_LEFT) then {
+				call craft_onPressCraft;
+				nextFrame(craft_close);
+			};
+		}];
+	};
 	
 	// load first category
 	[_visibleCat select 0,_listRecipes] call craft_onLoadCategory;
@@ -140,7 +149,7 @@ craft_open = {
 
 
 craft_onLoadCategory = {
-	params ["_cat","_listRecipes"];
+	params ["_cat","_listRecipes"]; //_listRecipes vec2(recipeId,name +\n+ needs +\n+ optdesc)
 	
 	if isNullVar(_listRecipes) exitWith {
 		if (craft_loadCateg_isLoading) exitWith {
@@ -148,7 +157,11 @@ craft_onLoadCategory = {
 		};
 		
 		craft_loadCateg_isLoading = true;
-		rpcSendToServer("processLoadCatCraft",[player arg _cat]);
+		private _data = [player,craft_cxtRpcSourcePtr,_cat];
+		if (craft_isPreviewOnlyMode) then {
+			_data pushBack true;
+		};
+		rpcSendToServer("processLoadCatCraft",_data);
 	};	
 	
 	_list = getRecipesWidget();
@@ -162,23 +175,44 @@ craft_onLoadCategory = {
 	
 	_dat = [_cat,_list,_d,_listWidgets];
 	
+	//for test
+	// #ifdef DEBUG
+	// if (count _listRecipes > 0) then {
+	// 	_listRecipes = array_copy(_listRecipes);
+	// 	for "_i" from 1 to 500 do {
+	// 		__first = array_copy(_listRecipes select 0);
+	// 		_its = (__first select 1) splitString endl;
+	// 		_its set [0,(_its select 0) + " " + (str _i)];
+	// 		__first set [1, _its joinString endl];
+	// 		_listRecipes pushBack __first;
+	// 	};
+	// };
+	// #endif
+
 	{
+		_x params ["_id","_recipeInfo"];
+		(_recipeInfo splitString endl) params ["_name","_needs",["_optDesc",""]];
+
 		_t = [_d,TEXT,[0,SIZE_RECIPE_TEXT * _idx,100,SIZE_RECIPE_TEXT],_list] call createWidget;
 		INC(_idx);
 		_listWidgets pushBack _t;
 		
 		_recipe = craft_client_allRecipes get _x;
 		
-		[_t,format["<t align='center'>%1</t>",_recipe select CRAFT_RECIPE_NAME]] call widgetSetText;
+		[_t,format["<t align='center'>%1</t>",_name]] call widgetSetText;
 		_t ctrlSetBackgroundColor [0.2,0.2,0.2,0.4];
 		
 		_t ctrlAddEventHandler ["MouseButtonUp",{
 			params ["_ct","_bt"];
 			if (_bt == MOUSE_LEFT) then {
-				[_ct getVariable "systemID"] call craft_onSelectRecipe;
+				[_ct] call craft_onSelectRecipe;
 			};	
 		}];
-		_t setVariable ["systemID",_recipe select CRAFT_RECIPE_SYSTEMID];
+		_t setVariable ["systemID",_id];
+		_t setVariable ["name",_name];
+		_t setVariable ["needs",_needs];
+		_t setVariable ["optDesc",_optDesc];
+		_t setVariable ["index",_foreachindex];
 		
 		
 		
@@ -187,9 +221,13 @@ craft_onLoadCategory = {
 };	
 
 craft_onSelectRecipe = {
-	params ["_systemId"];
-	
-	craft_lastPressedRecipeID = _systemId;
+	params ["_wid"];
+	private _id = _wid getVariable "systemID";
+	private _name = _wid getVariable "name";
+	private _needs = _wid getVariable "needs";
+	private _optDesc = _wid getVariable "optDesc";
+
+	craft_lastPressedRecipeID = _id;
 	
 	_recipe = craft_client_allRecipes get _systemId;
 	
@@ -200,7 +238,7 @@ craft_onSelectRecipe = {
 	sbr +
 	"%2" + 
 	sbr +
-	"%3",_recipe select CRAFT_RECIPE_NAME,(_recipe select CRAFT_RECIPE_REQITEMS) joinString " + ",_recipe select CRAFT_RECIPE_DESC]] call widgetSetText;
+	"%3",_name,_needs,_optDesc]] call widgetSetText;
 	
 	[true] call craft_setActiveCraftButton;
 };	

@@ -385,12 +385,25 @@ struct(Model)
 	def(isSimple) {isSimpleObject (self getv(_mesh))} 
 	def(init)
 	{
-		params ["_cfgPath","_pos",["_simple",false],["_local",true]];
+		params ["_cfgPath","_pos","_simple",["_local",true]];
 		
-		if !(self callp(isValidModelPath,_cfgPath)) exitWith {};
+		if !(self callp(isValidModelPath,_cfgPath)) exitWith {
+			setLastError(format["Invalid mesh: %1" arg _cfgPath]);
+		};
+
+		if isNullVar(_simple) then {
+			_simple = self callp(__isSimpleModelPath,_cfgPath);
+		};
+
 		self setv(__localFlag,_local);
 		self setv(_vars,createHashMap);
-		self callp(_setMesh,_cfgPath arg _pos arg _simple arg _local);
+		self callp(_setMesh,_cfgPath arg _pos arg _simple);
+	}
+
+	def(__isSimpleModelPath)
+	{
+		params ["_cfgPath"];
+		(".p3d" in _cfgPath || ("\" in _cfgPath))
 	}
 
 	def(_setMesh)
@@ -398,7 +411,7 @@ struct(Model)
 		params ["_cfgPath",["_pos",[0,0,0]],["_simple",false]];
 		if (_simple) then {
 			private _mesh = createMesh([_cfgPath arg [0 arg 0 arg 0] arg self getv(__localFlag)]);
-			assert(!isNullReference(_mesh));
+			assert_str(!isNullReference(_mesh),"Cannot create mesh: " + _cfgPath);
 			self setv(_mesh,_mesh);
 			self callp(setPos,_pos);
 		} else {
@@ -411,7 +424,12 @@ struct(Model)
 
 	def(del)
 	{
-		deleteVehicle (self getv(_mesh))
+		self callv(removeMesh);
+	}
+
+	def(str)
+	{
+		format["Mesh[%1]",self getv(_mesh)]
 	}
 
 	def(isValidModelPath)
@@ -428,7 +446,7 @@ struct(Model)
 		(self getv(_mesh)) hideObject (!_visible);
 	}
 
-	def(getMesh) {}
+	def(getMesh) {self getv(_mesh)}
 	def(setMesh) { 
 		params ["_model"];
 		private _oldtransform = self callv(getTransform);
@@ -436,14 +454,27 @@ struct(Model)
 		self callp(_setMesh,_model arg null arg self callv(isSimple) arg self getv(__localFlag));
 		self callp(setTransform,_oldtransform);
 	}
+	def(removeMesh)
+	{
+		deleteVehicle (self getv(_mesh))
+	}
 
-	def(setPos) {
-		params ["_pos"];
-		(self getv(_mesh)) setPosAtl _pos;
+	def(setCollisionWith)
+	{
+		params ["_to","_mode"];
+		if (_mode) then {
+			(self getv(_mesh)) enableCollisionWith _to;
+		} else {
+			(self getv(_mesh)) disableCollisionWith _to;
+		};
 	}
-	def(getPos) {
-		getPosAtl (self getv(_mesh))
-	}
+
+	def(setPos) { params ["_pos"]; (self getv(_mesh)) setPosAtl _pos; }
+	def(getPos) { getPosAtl (self getv(_mesh)) }
+
+	def(setDir) { params ["_dir"]; (self getv(_mesh)) setDir _dir; }
+	def(getDir) { getDir (self getv(_mesh)) }
+
 	def(modelToWorld) {
 		params ["_offset",["_visual",false]];
 		private _o = self getv(_mesh);

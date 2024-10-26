@@ -183,6 +183,7 @@ relicta_debug_internal_serializeStackTrace = {
 //used on halt system call
 relicta_debug_setlasterror = {
 	params ["_name"];
+
 	relicta_debug_internal_lastErrorName = _name;
 };
 

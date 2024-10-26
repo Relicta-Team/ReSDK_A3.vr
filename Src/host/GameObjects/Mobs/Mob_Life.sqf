@@ -444,6 +444,7 @@ region(Status effects)
 
 		callSelfParams(stopProgress,true);
 		callSelf(closeOpenedNetDisplay);
+		callSelf(releaseBuildingPreview);
 	};
 
 	"
@@ -617,6 +618,7 @@ region(Status effects)
 			callSelfParams(stopProgress,true);
 
 			callSelf(closeOpenedNetDisplay);
+			callSelf(releaseBuildingPreview);
 
 			//disable custom anim
 			callSelfParams(setCustomActionState,CUSTOM_ANIM_ACTION_NONE);
@@ -1339,6 +1341,7 @@ region(Log macros)
 
 		callSelfParams(stopProgress,true);
 		callSelf(closeOpenedNetDisplay);
+		callSelf(releaseBuildingPreview);
 		callSelfParams(setStealth,false);
 
 		private _basicDamage = _amount;
@@ -2586,6 +2589,7 @@ region(Handle pain)
 
 		callSelfParams(stopProgress,true);
 		callSelf(closeOpenedNetDisplay);
+		callSelf(releaseBuildingPreview);
 		callSelfParams(playSound, pick callSelf(getPainSounds) arg getRandomPitchInRange(0.85,1.2));
 		private _m = ["извивается в агонии.","перестаёт сопротивляться боли."];
 		callSelfParams(meSay,pick _m);

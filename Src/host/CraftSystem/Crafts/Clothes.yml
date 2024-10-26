@@ -1,0 +1,100 @@
+- name: "Default craft"
+  
+  ignored: true
+
+  default_modifiers: &def_mods
+     modifiers:
+        - name: default
+
+  data_common: &ref_main_cloth
+    # Пробросим самое частое
+    type: default
+    category: Cloth
+    options:
+      craft_duration: from_skill(8,1)
+  
+
+
+- type: interact
+  category: Cloth
+  required:
+    components:
+      hand_item:
+        class: Knife
+      target:
+        class: [BodyClothBase,HeadCloth] #одежда или шапка
+        # может быть назначен в один из перечисленных слотов
+        condition: |
+          (:canSetItemOnSlot("INV_CLOTH") || :canSetItemOnSlot("INV_HEAD") || :canSetItemOnSlot("INV_FACE"))
+        check_type_of: true # любые унаследованные от BodyClothBase или HeadCloth
+  result:
+    # TODO звук рванины
+    class: Rag
+    modifiers: [default]
+
+- <<: *ref_main_cloth
+  required:
+    components:
+      - class: Rag
+        count: 2
+        check_type_of: false
+  result:
+    <<: *def_mods
+    class: Bandage
+
+- <<: *ref_main_cloth
+  required: 
+    components:
+      - class: Rag
+        count: 3
+        check_type_of: false
+  result:
+    <<: *def_mods
+    class: RopeItem
+
+- <<: *ref_main_cloth
+  required:
+    components:
+      - class: Rag
+        count: 3
+        check_type_of: false
+      - class: NeedleWithThreads
+        destroy: false
+  result:
+    <<: *def_mods
+    class: Castoffs1 #TODO добавить модификатор замены класса
+
+- <<: *ref_main_cloth
+  required:
+    components:
+      - class: Rag
+        count: 1
+        check_type_of: false
+  result:
+    <<: *def_mods
+    class: FaceCoverMask
+
+- <<: *ref_main_cloth
+  required:
+    components:
+      - class: Rag
+        count: 2
+        check_type_of: false
+      - class: NeedleWithThreads
+        destroy: false
+  result:
+    <<: *def_mods
+    class: CoinBag
+
+- <<: *ref_main_cloth
+  required:
+    components:
+      - class: Rag
+        count: 5
+        check_type_of: false
+      - class: NeedleWithThreads
+        destroy: false
+  result:
+    <<: *def_mods
+    class: FabricBagBig1 # TODO random select between FabricBagBig1 and FabricBagBig2
+

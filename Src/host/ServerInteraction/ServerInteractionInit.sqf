@@ -199,6 +199,25 @@ si_getIntersectData = {
 	[_ins select 0 select 2,asltoatl (_ins select 0 select 0),_ins select 0 select 1]
 };
 
+si_getIntersectDataV2 = {
+	params ["_p1","_p2",["_ig1",objnull],["_ig2",objnull]];
+	private _ins = lineIntersectsSurfaces [
+  		AGLToASL _p1,
+  		AGLToASL _p2,
+  		_ig1,
+		_ig2,
+		true,
+		100,
+		INTERACT_LODS_CHECK_STANDART
+ 	];
+	#ifdef EDITOR
+	_ins = _ins select {isNull((_x select 2)getvariable "link")};
+	#endif
+	if (count _ins == 0) exitWith {[objnull,[0,0,0],[0,0,0]]};
+	
+	[_ins select 0 select 2,asltoatl (_ins select 0 select 0),_ins select 0 select 1]
+};
+
 si_getIntersectObjects = {
 	params ["_p1","_p2",["_ig1",objNUll],["_ig2",objNUll],["_countObjs",10],["_retUnique",true],["_retAsVObj",false],["_retIPos",false]];
 	private _ins = lineIntersectsSurfaces [
