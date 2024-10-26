@@ -10,13 +10,22 @@ csys_requestOpenMenu = {
 	private _allowedCateg = CRAFT_CONST_CATEGORY_LIST_IDS;
 	if (isNullVar(_allowedCateg) || not_equalTypes(_allowedCateg,[]) || count _allowedCateg == 0) exitWith {
 		errorformat("csys::requestOpenMenu() - catched unhandled error after calling: %1::getAllowedCraftCategories()",callFunc(_objSrc,getClassName));
-	};	
+	};
+	private _allowedCategReal = [];
+	{
+		private _recipes = [_x,_usr,_objSrc,_onlyPreviewMode] call csys_getRecipesForUser;
+		if (count _recipes > 0) then {
+			_allowedCategReal pushBack _x;
+		};
+	} foreach _allowedCateg;
+
+	private _firstCat = ifcheck(count _allowedCategReal > 0,_allowedCategReal select 0,_allowedCateg select 0);
 	
 	private _data = [
 		getVar(_objSrc,pointer),
 		getVar(_usr,pointer),
-		_allowedCateg,
-		[_allowedCateg select 0,_usr,_objSrc,_onlyPreviewMode] call csys_getRecipesForUser
+		_allowedCategReal,
+		[_firstCat,_usr,_objSrc,_onlyPreviewMode] call csys_getRecipesForUser
 	];
 	if (_onlyPreviewMode) then {
 		_data pushBack true;
