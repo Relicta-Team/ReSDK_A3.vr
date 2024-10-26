@@ -386,6 +386,16 @@ Description:
 - Param: _optMath (optional, default 0)
 
 File: [host\CommonComponents\!PreInit.sqf at line 292](../../../Src/host/CommonComponents/!PreInit.sqf#L292)
+## regex_getMatches
+
+Type: function
+
+Description: 
+- Param: _txt
+- Param: _pattern
+- Param: _optMath (optional, default 0)
+
+File: [host\CommonComponents\!PreInit.sqf at line 299](../../../Src/host/CommonComponents/!PreInit.sqf#L299)
 ## regex_replace
 
 Type: function
@@ -395,7 +405,7 @@ Description:
 - Param: _pattern
 - Param: _replacer
 
-File: [host\CommonComponents\!PreInit.sqf at line 299](../../../Src/host/CommonComponents/!PreInit.sqf#L299)
+File: [host\CommonComponents\!PreInit.sqf at line 310](../../../Src/host/CommonComponents/!PreInit.sqf#L310)
 ## stringStartWith
 
 Type: function
@@ -405,7 +415,7 @@ Description: Строковые хелперы
 - Param: _started
 - Param: _casesense (optional, default true)
 
-File: [host\CommonComponents\!PreInit.sqf at line 351](../../../Src/host/CommonComponents/!PreInit.sqf#L351)
+File: [host\CommonComponents\!PreInit.sqf at line 362](../../../Src/host/CommonComponents/!PreInit.sqf#L362)
 ## stringEndWith
 
 Type: function
@@ -415,7 +425,7 @@ Description:
 - Param: _ended
 - Param: _casesense (optional, default true)
 
-File: [host\CommonComponents\!PreInit.sqf at line 357](../../../Src/host/CommonComponents/!PreInit.sqf#L357)
+File: [host\CommonComponents\!PreInit.sqf at line 368](../../../Src/host/CommonComponents/!PreInit.sqf#L368)
 ## stringReplace
 
 Type: function
@@ -425,7 +435,7 @@ Description:
 - Param: _find (optional, default "")
 - Param: _replace (optional, default "")
 
-File: [host\CommonComponents\!PreInit.sqf at line 364](../../../Src/host/CommonComponents/!PreInit.sqf#L364)
+File: [host\CommonComponents\!PreInit.sqf at line 375](../../../Src/host/CommonComponents/!PreInit.sqf#L375)
 ## selectBest
 
 Type: function
@@ -435,7 +445,7 @@ Description: Выбирает лучший случай [[2, -6, 4], {abs _x}] c
 - Param: _criteria
 - Param: _return
 
-File: [host\CommonComponents\!PreInit.sqf at line 383](../../../Src/host/CommonComponents/!PreInit.sqf#L383)
+File: [host\CommonComponents\!PreInit.sqf at line 394](../../../Src/host/CommonComponents/!PreInit.sqf#L394)
 ## searchInList
 
 Type: function
@@ -445,7 +455,7 @@ Description:
 - Param: _lambda
 - Param: _defaultReturn
 
-File: [host\CommonComponents\!PreInit.sqf at line 399](../../../Src/host/CommonComponents/!PreInit.sqf#L399)
+File: [host\CommonComponents\!PreInit.sqf at line 410](../../../Src/host/CommonComponents/!PreInit.sqf#L410)
 ## arrayDeleteItem
 
 Type: function
@@ -454,7 +464,7 @@ Description:
 - Param: _a
 - Param: _it
 
-File: [host\CommonComponents\!PreInit.sqf at line 406](../../../Src/host/CommonComponents/!PreInit.sqf#L406)
+File: [host\CommonComponents\!PreInit.sqf at line 417](../../../Src/host/CommonComponents/!PreInit.sqf#L417)
 ## arrayIsValidIndex
 
 Type: function
@@ -463,7 +473,7 @@ Description:
 - Param: _a
 - Param: _ix
 
-File: [host\CommonComponents\!PreInit.sqf at line 413](../../../Src/host/CommonComponents/!PreInit.sqf#L413)
+File: [host\CommonComponents\!PreInit.sqf at line 424](../../../Src/host/CommonComponents/!PreInit.sqf#L424)
 ## arrayShuffleOrig
 
 Type: function
@@ -471,7 +481,7 @@ Type: function
 Description: shuffle array elements, return alter array
 - Param: _array
 
-File: [host\CommonComponents\!PreInit.sqf at line 419](../../../Src/host/CommonComponents/!PreInit.sqf#L419)
+File: [host\CommonComponents\!PreInit.sqf at line 430](../../../Src/host/CommonComponents/!PreInit.sqf#L430)
 ## arraySwap
 
 Type: function
@@ -481,7 +491,7 @@ Description: swap 2 elements in array
 - Param: _is
 - Param: _id
 
-File: [host\CommonComponents\!PreInit.sqf at line 431](../../../Src/host/CommonComponents/!PreInit.sqf#L431)
+File: [host\CommonComponents\!PreInit.sqf at line 442](../../../Src/host/CommonComponents/!PreInit.sqf#L442)
 ## stringLength
 
 Type: function
@@ -490,7 +500,7 @@ Description:
 - Param: _str
 - Param: _unicode (optional, default true)
 
-File: [host\CommonComponents\!PreInit.sqf at line 438](../../../Src/host/CommonComponents/!PreInit.sqf#L438)
+File: [host\CommonComponents\!PreInit.sqf at line 449](../../../Src/host/CommonComponents/!PreInit.sqf#L449)
 ## stringSelect
 
 Type: function
@@ -500,7 +510,7 @@ Description:
 - Param: _i
 - Param: _c
 
-File: [host\CommonComponents\!PreInit.sqf at line 448](../../../Src/host/CommonComponents/!PreInit.sqf#L448)
+File: [host\CommonComponents\!PreInit.sqf at line 459](../../../Src/host/CommonComponents/!PreInit.sqf#L459)
 ## randomFloat
 
 Type: function
@@ -509,7 +519,7 @@ Description:
 - Param: _beg
 - Param: _end
 
-File: [host\CommonComponents\!PreInit.sqf at line 454](../../../Src/host/CommonComponents/!PreInit.sqf#L454)
+File: [host\CommonComponents\!PreInit.sqf at line 465](../../../Src/host/CommonComponents/!PreInit.sqf#L465)
 ## randomInt
 
 Type: function
@@ -518,7 +528,7 @@ Description:
 - Param: _beg
 - Param: _end
 
-File: [host\CommonComponents\!PreInit.sqf at line 459](../../../Src/host/CommonComponents/!PreInit.sqf#L459)
+File: [host\CommonComponents\!PreInit.sqf at line 470](../../../Src/host/CommonComponents/!PreInit.sqf#L470)
 ## randomProbably
 
 Type: function
@@ -526,7 +536,7 @@ Type: function
 Description: 
 - Param: _v
 
-File: [host\CommonComponents\!PreInit.sqf at line 464](../../../Src/host/CommonComponents/!PreInit.sqf#L464)
+File: [host\CommonComponents\!PreInit.sqf at line 475](../../../Src/host/CommonComponents/!PreInit.sqf#L475)
 ## getPrecentage
 
 Type: function
@@ -535,7 +545,7 @@ Description:
 - Param: _checkedval
 - Param: _pval
 
-File: [host\CommonComponents\!PreInit.sqf at line 469](../../../Src/host/CommonComponents/!PreInit.sqf#L469)
+File: [host\CommonComponents\!PreInit.sqf at line 480](../../../Src/host/CommonComponents/!PreInit.sqf#L480)
 ## clampNumber
 
 Type: function
@@ -545,7 +555,7 @@ Description:
 - Param: _mi
 - Param: _ma
 
-File: [host\CommonComponents\!PreInit.sqf at line 474](../../../Src/host/CommonComponents/!PreInit.sqf#L474)
+File: [host\CommonComponents\!PreInit.sqf at line 485](../../../Src/host/CommonComponents/!PreInit.sqf#L485)
 ## clampInRange
 
 Type: function
@@ -555,7 +565,7 @@ Description:
 - Param: _mi
 - Param: _ma
 
-File: [host\CommonComponents\!PreInit.sqf at line 479](../../../Src/host/CommonComponents/!PreInit.sqf#L479)
+File: [host\CommonComponents\!PreInit.sqf at line 490](../../../Src/host/CommonComponents/!PreInit.sqf#L490)
 ## pulsate
 
 Type: function
@@ -564,7 +574,7 @@ Description: See - BIS_fnc_pulsate; frequency: Number - the frequency in Hz, 1 /
 - Param: _freq
 - Param: _timeval (optional, default diag_tickTime)
 
-File: [host\CommonComponents\!PreInit.sqf at line 492](../../../Src/host/CommonComponents/!PreInit.sqf#L492)
+File: [host\CommonComponents\!PreInit.sqf at line 503](../../../Src/host/CommonComponents/!PreInit.sqf#L503)
 ## numberGetDigits
 
 Type: function
@@ -572,7 +582,7 @@ Type: function
 Description: число в массив цифр
 - Param: _num
 
-File: [host\CommonComponents\!PreInit.sqf at line 498](../../../Src/host/CommonComponents/!PreInit.sqf#L498)
+File: [host\CommonComponents\!PreInit.sqf at line 509](../../../Src/host/CommonComponents/!PreInit.sqf#L509)
 ## numberCutDecimals
 
 Type: function
@@ -581,7 +591,7 @@ Description: срезает дробную часть числа
 - Param: _num
 - Param: _digits
 
-File: [host\CommonComponents\!PreInit.sqf at line 504](../../../Src/host/CommonComponents/!PreInit.sqf#L504)
+File: [host\CommonComponents\!PreInit.sqf at line 515](../../../Src/host/CommonComponents/!PreInit.sqf#L515)
 ## stringFormat
 
 Type: function
@@ -591,7 +601,7 @@ Description:
 - Param: _val
 - Param: _breakArr (optional, default false)
 
-File: [host\CommonComponents\!PreInit.sqf at line 509](../../../Src/host/CommonComponents/!PreInit.sqf#L509)
+File: [host\CommonComponents\!PreInit.sqf at line 520](../../../Src/host/CommonComponents/!PreInit.sqf#L520)
 ## formatLazy
 
 Type: function
@@ -599,7 +609,7 @@ Type: function
 Description: 
 - Param: _args
 
-File: [host\CommonComponents\!PreInit.sqf at line 536](../../../Src/host/CommonComponents/!PreInit.sqf#L536)
+File: [host\CommonComponents\!PreInit.sqf at line 547](../../../Src/host/CommonComponents/!PreInit.sqf#L547)
 ## getPosListCenter
 
 Type: function
@@ -608,7 +618,7 @@ Description:
 - Param: _poses (optional, default [])
 - Param: _dummyParam
 
-File: [host\CommonComponents\!PreInit.sqf at line 551](../../../Src/host/CommonComponents/!PreInit.sqf#L551)
+File: [host\CommonComponents\!PreInit.sqf at line 562](../../../Src/host/CommonComponents/!PreInit.sqf#L562)
 ## randomRadius
 
 Type: function
@@ -617,7 +627,7 @@ Description: Специальный рандом по области. Чем б�
 - Param: _center
 - Param: _radius
 
-File: [host\CommonComponents\!PreInit.sqf at line 567](../../../Src/host/CommonComponents/!PreInit.sqf#L567)
+File: [host\CommonComponents\!PreInit.sqf at line 578](../../../Src/host/CommonComponents/!PreInit.sqf#L578)
 ## randomPosition
 
 Type: function
@@ -626,7 +636,7 @@ Description: Специальный рандом по области. Равно
 - Param: _center
 - Param: _radius
 
-File: [host\CommonComponents\!PreInit.sqf at line 573](../../../Src/host/CommonComponents/!PreInit.sqf#L573)
+File: [host\CommonComponents\!PreInit.sqf at line 586](../../../Src/host/CommonComponents/!PreInit.sqf#L586)
 ## randomGaussian
 
 Type: function
@@ -635,7 +645,7 @@ Description: Специальный рандом по области. Распр
 - Param: _center
 - Param: _radius
 
-File: [host\CommonComponents\!PreInit.sqf at line 579](../../../Src/host/CommonComponents/!PreInit.sqf#L579)
+File: [host\CommonComponents\!PreInit.sqf at line 594](../../../Src/host/CommonComponents/!PreInit.sqf#L594)
 ## fileExists_Node
 
 Type: function
@@ -643,7 +653,26 @@ Type: function
 Description: 
 - Param: _f
 
-File: [host\CommonComponents\!PreInit.sqf at line 584](../../../Src/host/CommonComponents/!PreInit.sqf#L584)
+File: [host\CommonComponents\!PreInit.sqf at line 601](../../../Src/host/CommonComponents/!PreInit.sqf#L601)
+## sortBy
+
+Type: function
+
+Description: _mode == true -> asc, false -> desc: [[20,2,5],{_x}] call sortBy;
+- Param: _list
+- Param: _algorithm
+- Param: _modeIsAscend (optional, default true)
+
+File: [host\CommonComponents\!PreInit.sqf at line 607](../../../Src/host/CommonComponents/!PreInit.sqf#L607)
+## nearNumber
+
+Type: function
+
+Description: find nearest number in array of numbers
+- Param: _arr
+- Param: _num
+
+File: [host\CommonComponents\!PreInit.sqf at line 623](../../../Src/host/CommonComponents/!PreInit.sqf#L623)
 ## fileLoad_Node
 
 Type: function
@@ -652,7 +681,7 @@ Description:
 - Param: _f
 - Param: _doPreprocess (optional, default false)
 
-File: [host\CommonComponents\!PreInit.sqf at line 589](../../../Src/host/CommonComponents/!PreInit.sqf#L589)
+File: [host\CommonComponents\!PreInit.sqf at line 638](../../../Src/host/CommonComponents/!PreInit.sqf#L638)
 # Algorithm.sqf
 
 ## allOf

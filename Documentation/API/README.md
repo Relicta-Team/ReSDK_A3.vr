@@ -8,7 +8,7 @@ Count modules: 31
  - [ClientRpc](client//ClientRpc.md) - 2 files
  - [ClientStatistic](client//ClientStatistic.md) - 3 files
  - [ColorThemes](client//ColorThemes.md) - 4 files
- - [CraftMenu](client//CraftMenu.md) - 2 files
+ - [CraftMenu](client//CraftMenu.md) - 3 files
  - [DiscordRPC](client//DiscordRPC.md) - 3 files
  - [GeometryFixer](client//GeometryFixer.md) - 3 files
  - [Hud](client//Hud.md) - 1 files
@@ -42,7 +42,7 @@ Count modules: 55
  - [ClientManager](host//ClientManager.md) - 16 files
  - [CombatSystem](host//CombatSystem.md) - 13 files
  - [CommonComponents](host//CommonComponents.md) - 28 files
- - [CraftSystem](host//CraftSystem.md) - 10 files
+ - [CraftSystem](host//CraftSystem.md) - 16 files
  - [Curl](host//Curl.md) - 3 files
  - [Database](host//Database.md) - 4 files
  - [DataObjects](host//DataObjects.md) - 1 files
