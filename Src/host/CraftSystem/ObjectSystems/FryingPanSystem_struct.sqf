@@ -160,7 +160,10 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 			debug_system("frypan: cancraft by skills: %1" arg self getv(craftContext) get "can_craft_by_skills")
 			self callv(processCraft);
 			self setv(isActiveUpdate,false);
-			
+
+			private _rmes = pick ["манит ароматом.","шкварчит.","испускает дивный аромат."];
+			private _mes = format["%1 %2",callFunc(self getv(src),getName),_rmes];
+			callFuncParams(self getv(src),worldSay,_mes arg "info");	
 		};
 	}
 

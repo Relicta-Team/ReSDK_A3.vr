@@ -12,7 +12,12 @@ fso_map_tree = createhashMap; //flat object
 
 //initialize filesystem
 fso_init = {
-	private _nativeCollection = addonFiles ["src\"];
+	private _nativeCollection = 
+		#ifdef _SQFVM
+		[];
+		#else
+		addonFiles ["src\"];
+		#endif
 	private _useNativeCollector = count _nativeCollection > 0;
 	if (!_useNativeCollector) then {
 		
