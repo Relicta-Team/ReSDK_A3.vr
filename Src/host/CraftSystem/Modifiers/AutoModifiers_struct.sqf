@@ -389,7 +389,7 @@ struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
 					};
 					private _fromValObj = struct_newp(CraftModifier_numprecValue,_val);
 					private _lossValue = _fromValObj callp(getValueFrom,callFunc(_itm,getFilledSpace));
-					self callp(debugMessage,"loss value %1 from %2" arg _lossValue arg _fromValObj);
+					self callp(debugMessage,"loss value %1 from %2" arg _lossValue arg _val);
 					if (_lossValue > 0) then {
 						private _delReagents = callFuncParams(_itm,removeReagentsAndReturn,_lossValue);
 						{

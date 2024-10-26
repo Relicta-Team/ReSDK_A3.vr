@@ -48,7 +48,9 @@ fso_init = {
 fso_buildTree = {
 	params ["_flist"];
 	private _tree = createhashMap;
+	#ifndef _SQFVM
 	forceUnicode 0;
+	#endif
 	_flist = _flist apply {tolower _x splitString "\/"};
 	private _parts = null;
 	

@@ -21,7 +21,7 @@ struct(BakingOvenSystem) base(BaseWorldProcessorCraftSystem)
 	def_null(sourceTransform) //CraftSerializedTransform
 	def_null(tempObjectTransform) //CraftSerializedTransform
 
-	def(collectDistance) 0.34
+	def(collectDistance) 0.35
 
 	def(init)
 	{
@@ -36,7 +36,7 @@ struct(BakingOvenSystem) base(BaseWorldProcessorCraftSystem)
 		if isNullReference(_o) then {
 			[0,0,0];
 		} else {
-			_o modelToWorldVisual [-0.8,0.75,-3.7]
+			_o modelToWorldVisual [-0.8,0.550003,-3.7] //[[-0.8,0.550003,-3.7]]
 		};
 	}
 

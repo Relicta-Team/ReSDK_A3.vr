@@ -1368,6 +1368,11 @@ class(IDestructible) extends(GameObject)
 			delete(_script);
 		};
 
+		private _ccomp = getSelf(craftComponent);
+		if !isNullVar(_ccomp) then {
+			_ccomp callv(releaseComponent);
+		};
+
 		{
 			_x set ["flagUpdObj",true];
 			false;

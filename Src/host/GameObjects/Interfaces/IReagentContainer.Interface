@@ -135,7 +135,7 @@ func(clearReagentSpace)
 	
 	{
 		[_ms,_x,_y] call ms_removeMatter;
-	} foreach ms_getMatterList(_ms);
+	} foreach array_copy(ms_getMatterList(_ms));
 	callFunc(this,onTransferReagents);
 };
 

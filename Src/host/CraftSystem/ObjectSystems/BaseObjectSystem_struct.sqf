@@ -50,6 +50,13 @@ struct(SystemControllerCrafts)
 		(self getv(_components)) pushBack _o;
 	}
 
+	//исключение из контроллера (например, при удалении объекта)
+	def(removeProcessor)
+	{
+		params ["_o"];
+		[self getv(_components),_o] call arrayDeleteItem;
+	}
+
 	def(update)
 	{
 		_tUpd = tickTime;
@@ -182,6 +189,12 @@ struct(BaseCraftSystem)
 			private _ctrl = [self getv(systemType)] call csys_getSystemController;
 			_ctrl callp(addProcessor,self);
 		};
+	}
+
+	def(releaseComponent)
+	{
+		private _ctrl = [self getv(systemType)] call csys_getSystemController;
+		_ctrl callp(removeProcessor,self);
 	}
 
 	//main processor handler. called each second

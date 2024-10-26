@@ -324,47 +324,6 @@ class(Pie) extends(IFoodItem)
 	var(size,ITEM_SIZE_MEDIUM);
 	var(weight,gramm(randInt(600,700)));
 	var(reagents,[[vec2("Nutriment",50)] arg 100]newReagents);
-
-	// var_bool(__isLockedByPiecing);
-	// func(canPickup)
-	// {
-	// 	objParams();
-	// 	callSuper(IFoodItem,canPickup) && !getSelf(__isLockedByPiecing);
-	// };
-
-	// func(onInteractWith)
-	// {
-	// 	objParams_2(_with,_usr);
-	// 	if isTypeOf(_with,Knife) exitWith {
-	// 		if callSelf(isInWorld) then {
-
-	// 			//safe cant pickup
-	// 			setSelf(__isLockedByPiecing,true);
-
-	// 			private _pos = getPosAtl getSelf(loc);
-	// 			private _weight = getSelf(weight);
-	// 			private _count = randInt(7,10);
-	// 			private _wperitem = _weight / (_count);
-	// 			private _itm = null;
-
-	// 			//transfering reagents
-	// 			private _reagentsPerItem = callSelf(getFilledSpace) / _count;
-	// 			assert(!isNullVar(_reagentsPerItem));
-	// 			for "_i" from 1 to _count do {
-	// 				_itm = ["PiePiece",_pos vectorAdd [rand(-0.01,0.01),rand(-0.01,0.01),rand(-0.001,0.001)],null,false] call createItemInWorld;
-	// 				setVar(_itm,weight,_wperitem);
-	// 				private _reagents = vec2(_itm,_reagentsPerItem) call ms_create;
-	// 				setVar(_itm,reagents,_reagents);
-	// 				callSelfParams(transferReagents,_itm arg _reagentsPerItem);
-	// 			};
-
-
-	// 			delete(this);
-	// 		} else {
-	// 			callFuncParams(_usr,localSay,"В руках резать не удобно..." arg "mind");
-	// 		};
-	// 	};
-	// };
 endclass
 
 editor_attribute("InterfaceClass")
@@ -373,7 +332,7 @@ class(PiePiece) extends(IFoodItem)
 	var(model,"relicta_models2\food\s_pie_piece\s_pie_piece.p3d");
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(150));
-	var(reagents,null); //created only from pie
+	var(reagents,[vec2("Nutriment",5)]newReagentsFood);
 
 endclass
 

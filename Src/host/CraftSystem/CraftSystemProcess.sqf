@@ -296,6 +296,7 @@ csys_processCraftMain = {
 			};
 
 		} foreach _possibleRecipes;
+
 		//traceformat("CAPTURED: %1 %2",_curRecipes arg _possibleRecipes)
 		if (count _curRecipes > 1) then {
 			[
@@ -309,6 +310,16 @@ csys_processCraftMain = {
 		if (count _curRecipes == 0) exitWith {
 			RETURN(false)
 		};
+
+		//sort by more ingredients used
+		// _curRecipes = [_curRecipes,{
+		// 	private _ingrList = _x select 1;
+		// 	private _amItmAll = 0;
+		// 	{
+		// 		modvar(_amItmAll) + (_x getv(count));
+		// 	} foreach _ingrList;
+		// 	_amItmAll
+		// }] call sortBy;
 
 		_recipe = _curRecipes select 0 select 0;
 		_leftComponents = _curRecipes select 0 select 1;

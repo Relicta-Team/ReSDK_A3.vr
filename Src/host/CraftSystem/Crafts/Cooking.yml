@@ -107,6 +107,7 @@
   required:
     components:
       - class: Testo
+        check_type_of: false
         count: 2
       - class: ButterPiece
       # любая еда в которой не меньше 5 единиц реагентов
@@ -118,11 +119,15 @@
     modifiers:
       - name: set_name
         value: "Пирог с {mainIngredient:name.lower}"
+      - name: transfer_reagents
+        get_from_all: 100%
+      - default
 
 - <<: *baking_oven
   required:
     components:
       - class: Testo
+        check_type_of: false
       - class: Egg
         count: 2
   result:
@@ -142,6 +147,7 @@
   required:
     components:
       - class: Testo
+        check_type_of: false
   result:
     class: Lepeshka
     <<: *def_mods
@@ -306,4 +312,7 @@
     class: PiePiece
     radius: 0.1
     count: {min: 7, max: 10}
-    <<: *def_mods
+    modifiers:
+      - name: transfer_reagents
+        get_from_all: 100%
+      - name: default
