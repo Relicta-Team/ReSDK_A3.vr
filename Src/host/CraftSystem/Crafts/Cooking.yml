@@ -218,6 +218,7 @@
       hand_item:
         class: Item
         name: Молоко
+        destroy: false
         meta_tag: milkContainer
         condition: |
           :isReagentContainer() 
