@@ -1357,6 +1357,14 @@ Description: getting ngo
 
 
 File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 122](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L122)
+## noe_client_getObjectNGOSkip
+
+Type: function
+
+Description: 
+- Param: _obj
+
+File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 124](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L124)
 # NOEngineClient_ObjectManager.sqf
 
 ## NOE_CLIENT_DELETEOBJS_COUNT
