@@ -55,6 +55,11 @@ csys_cat_debug_allCrafts = [];
 #endif
 
 csys_init = {
+	
+	#ifdef _SQFVM
+	if (true) exitWith {};
+	#endif
+
 	{
 		csys_cat_map_sysnames set [_x,_foreachindex];
 		csys_map_storage set [_foreachindex,[]];
