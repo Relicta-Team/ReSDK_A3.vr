@@ -235,7 +235,7 @@ struct(BaseCraftSystem)
 	def(onFail)
 	{
 		//for get context use field craftContext
-		self getv(failHandler) callp(onCatched)
+		self getv(failHandler) callp(onCatched,self arg self getv(craftContext))
 	}
 
 	//доп описание для пользователя

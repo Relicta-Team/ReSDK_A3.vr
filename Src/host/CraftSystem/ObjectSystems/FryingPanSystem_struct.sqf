@@ -91,7 +91,7 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 			;
 
 		//sortby distance [near...far]
-		private _nearList = [_itList,{callFunc(_x,getDistanceTo,_src)}] call sortBy;
+		private _nearList = [_itList,{callFuncParams(_x,getDistanceTo,_src)}] call sortBy;
 		if (count _nearList == 0) exitWith {
 			debug_system("frypan: no campfire found" arg _src)
 			//todo optimize
