@@ -288,7 +288,7 @@ struct(CraftModifier::set_name) base(CraftModifierAbstract)
 			self setv(new_name,_val);
 		};
 
-		self callp(setParseError,"Unknown parameter: %1",_name);
+		self callp(setParseError,"Unknown parameter: %1" arg _name);
 	}
 
 	def(onApply)
