@@ -4235,7 +4235,7 @@ Initial value:
 ```sqf
 1
 ```
-File: [host\init.sqf at line 102](../../../Src/host/init.sqf#L102)
+File: [host\init.sqf at line 109](../../../Src/host/init.sqf#L109)
 # keyboard.hpp
 
 ## KEY_ESCAPE
@@ -9383,7 +9383,7 @@ Description:
 - Param: _s
 - Param: _params
 
-File: [host\struct.hpp at line 378](../../../Src/host/struct.hpp#L378)
+File: [host\struct.hpp at line 382](../../../Src/host/struct.hpp#L382)
 ## struct_eraseFull
 
 Type: function
@@ -9391,7 +9391,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [host\struct.hpp at line 397](../../../Src/host/struct.hpp#L397)
+File: [host\struct.hpp at line 401](../../../Src/host/struct.hpp#L401)
 ## struct_reflect_getTypeValue
 
 Type: function
@@ -9400,7 +9400,7 @@ Description:
 - Param: _typename
 - Param: _varname
 
-File: [host\struct.hpp at line 402](../../../Src/host/struct.hpp#L402)
+File: [host\struct.hpp at line 406](../../../Src/host/struct.hpp#L406)
 ## struct_getAllTypesOf
 
 Type: function
@@ -9408,7 +9408,7 @@ Type: function
 Description: 
 - Param: _typename
 
-File: [host\struct.hpp at line 421](../../../Src/host/struct.hpp#L421)
+File: [host\struct.hpp at line 425](../../../Src/host/struct.hpp#L425)
 ## struct_getBaseTypesOf
 
 Type: function
@@ -9416,7 +9416,7 @@ Type: function
 Description: 
 - Param: _typename
 
-File: [host\struct.hpp at line 426](../../../Src/host/struct.hpp#L426)
+File: [host\struct.hpp at line 430](../../../Src/host/struct.hpp#L430)
 # text.hpp
 
 ## lt
