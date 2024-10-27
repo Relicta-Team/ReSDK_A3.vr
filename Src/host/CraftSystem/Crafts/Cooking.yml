@@ -185,6 +185,7 @@
         class: Knife
       target:
         class: Meat
+        check_type_of: false
   result:
     class: MeatChopped
     count: {min: 2, max: 4}
@@ -253,6 +254,7 @@
         class: Knife
       target:
         class: Bread
+        check_type_of: false
   result:
     class: BreadChopped
     count: {min: 6, max: 10}
@@ -310,6 +312,7 @@
         class: Knife
       target:
         class: Pie
+        check_type_of: false
   failed_handler:
     handler_type: custom
   result:

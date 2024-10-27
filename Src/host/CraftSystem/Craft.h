@@ -3,7 +3,8 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define CRAFT_PARSER_HEAD private ["_val__","_mes__","_par_output__"]
+//private ["_val__","_mes__","_par_output__"]
+#define CRAFT_PARSER_HEAD private _val__ = nil; private _mes__ = nil; private _par_output__ = nil
 
 #define value _val__
 #define message _mes__

@@ -22,11 +22,13 @@
 #include "..\PointerSystem\pointers.hpp"
 #include "..\..\client\Interactions\interact.hpp"
 #include "..\GURPS\gurps.hpp"
-#include "Craft.hpp"
-#include "Craft.h"
 
 #include <..\oop.hpp>
 #undef class
+#undef value
+
+#include "Craft.hpp"
+#include "Craft.h"
 
 #include "CraftSystemProcess.sqf"
 
@@ -44,10 +46,8 @@ csys_map_storage = createhashMap;
 csys_map_systems_storage = createhashMap;
 
 csys_global_counter = 1;
-csys_cat_names = CRAFT_CONST_CATEGORY_NAMES;
-csys_cat_map_sysnames = createHashMap;
 
-csys_cat_getNameById = { csys_cat_names select _this };
+csys_cat_map_sysnames = createHashMap;
 csys_cat_getSystemNameById = { csys_cat_map_sysnames get _this };
 
 #ifdef DEBUG
@@ -144,42 +144,61 @@ csys_errorMessage = {
 	["Craft build failed:" +endl+ _message] call messageBox;
 };
 
+//TODO optimize
 csys_validateType = {
 	params ["_dat","_key","_tarr"];
 	private _keyWithDefault = equalTypes(_key,[]);
+
+	//["after get value %1",_key] call logInfo;
 	private _value = ifcheck(_keyWithDefault,_dat getOrDefault _key,_dat get _key);
+	
 	private _output = "";
 	private _keyName = ifcheck(_keyWithDefault,_key select 0,_key);
-	
+	//["after get keyname %1 %2",_keyName,isNullVar(_value)] call logInfo;
 	#ifdef CRAFT_DEBUG_LOAD
 	traceformat("VALIDATE %1 (%2)",_key arg _tarr)
 	#endif
-
+	//["before check tarr %1",_tarr] call logInfo;
 	if isNullVar(_tarr) exitWith {
 		[_value,_output];
 	};
-	
+	//["before check null value %2 %1",isNullVar(_value),_key] call logInfo;
 	if (isNullVar(_value) && {!_keyWithDefault}) exitWith {
-		[_value,format["'%1' is required",_keyName]];
+		[null,format["'%1' is required",_keyName]];
 	};
+	//["check tarr types %1",_tarr]call logInfo;
 	
-	if equalTypes(_tarr,[]) then {
-		if !(_value isEqualTypeAny _tarr) then {
-			_output = format["Property '%1' wrong type '%2', Expected any of: %3",_keyName,tolower typename _value,(_tarr apply {tolower typename _x}) joinString ", "];
+	//can be null (temporary)
+	if !isNullVar(_value) then {
+		//["tarr types not null"] call logInfo;
+		if equalTypes(_tarr,[]) then {
+			// if (isNullVar(_value) && {_keyWithDefault} && {!isNull(_key select 1)}) exitWith {
+			// 	_output = format["Property '%1' wrong type '%2', Expected any of: %3",_keyName,"null",_tarr];
+			// };
+			if !(_value isEqualTypeAny _tarr) then {
+				_output = format["Property '%1' wrong type '%2', Expected any of: %3",_keyName,tolower typename _value,(_tarr apply {tolower typename _x}) joinString ", "];
+			};
+		} else {
+			// if (isNullVar(_value) && {_keyWithDefault} && {!isNull(_key select 1)}) exitWith {
+			// 	_output = format["Property '%1' wrong type '%2', Expected instance: %3",_keyName,"null",_tarr];
+			// };
+			if equals(_tarr,"int") exitWith {
+				if (not_equalTypes(_value,0) || {round _value != _value}) then {
+					_output = format["Property '%1' wrong type '%2', Expected int",_keyName,tolower typename _value];
+				}
+			};
+			if not_equalTypes(_value,_tarr) then {
+				_output = format["Property '%1' wrong type '%2', Expected %3",_keyName,tolower typename _value,tolower typename _tarr];
+			};
 		};
-	} else {
-		if equals(_tarr,"int") exitWith {
-			if (not_equalTypes(_value,0) || {round _value != _value}) then {
-				_output = format["Property '%1' wrong type '%2', Expected int",_keyName,tolower typename _value];
-			}
-		};
-		if not_equalTypes(_value,_tarr) then {
-			_output = format["Property '%1' wrong type '%2', Expected %3",_keyName,tolower typename _value,tolower typename _tarr];
-		};
-	};
+	}; 
+	//["postreturn value and output"] call logInfo;
 	//traceformat("=======OUTPUT: %1",_value)
-	
-	[_value,_output]
+	if isNullVar(_value) then {
+		[null,_output]
+	} else {
+		[_value,_output]
+	};
 };
 
 csys_internal_loadCfgSegment = {
