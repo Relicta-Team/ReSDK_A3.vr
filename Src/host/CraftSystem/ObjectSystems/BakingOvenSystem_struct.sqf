@@ -40,6 +40,23 @@ struct(BakingOvenSystem) base(BaseWorldProcessorCraftSystem)
 		};
 	}
 
+	def(getDescFor)
+	{
+		params ["_usr"];
+		private _t = "";
+		if (self getv(procStage) == 2) then {
+			private _convInd = round linearConversion [
+				self getv(craftContext) get "duration",
+				0,
+				self getv(processTimeLeft),
+				3,0,true
+			];
+			private _indexes = ["Почти готово","Припеклось","Готовится","Только прихватилось"];
+			_t = format["Там %1",lowerize(_indexes select _convInd)];
+		};
+		_t
+	}
+
 	def(process)
 	{
 		private _stage = self getv(procStage);

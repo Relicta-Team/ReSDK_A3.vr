@@ -46,7 +46,14 @@ call nodegen_loadClasses;
 call cs_runtime_internal_makeAll;
 
 //OOP INIT ZONE
+#ifndef _SQFVM
+if !([] call oop_loadTypes) exitWith {
+	appExit(APPEXIT_REASON_COMPILATIOEXCEPTION);
+};
+#else
+//fucking sqfvm cant works normally...
 [] call oop_loadTypes;
+#endif
 //end classes
 
 //structures initialize

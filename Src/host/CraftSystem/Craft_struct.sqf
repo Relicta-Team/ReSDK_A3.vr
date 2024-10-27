@@ -223,7 +223,17 @@ struct(ICraftRecipeBase)
 		_ingredient setv(optional,value);
 		
 		private _defDestrVal = _ingredient getv(destroy);
+
 		GETVAL_BOOL(_curObj, vec2("destroy",_defDestrVal));
+		if isinstance(_ingredient,CraftRecipeInteractorComponent) then {
+			if isNullVar(value) exitWith {
+				message = "";//no error
+			};//ok, can be null
+			if not_equalTypes(value,false) exitWith {
+				message = "Invalid 'destroy' type (must be bool or null)"
+			};
+			message = "";//no error
+		};
 		FAIL_CHECK_REFSET(_refErr);
 		_ingredient setv(destroy,value);
 
@@ -319,7 +329,7 @@ struct(ICraftRecipeBase)
 		params ["_req","_refResult"];
 		CRAFT_PARSER_HEAD;
 
-		GETVAL_STR(_req, vec2("class",null));
+		GETVAL_STR(_req, vec2("class","object"));
 		FAIL_CHECK_REFSET(_refResult);
 		if (!isImplementClass(value) || {!isTypeNameStringOf(value,"IDestructible")}) exitWith {
 			refset(_refErr,"Result object not found or not inherit of IDestructible class: " + value);
@@ -605,7 +615,9 @@ struct(CraftRecipeInteract) base(ICraftRecipeBase)
 		private _refResult = refcreate(null);
 		self callp(_parseComponent,value arg _content arg _refResult arg _refErr);
 		if isNull(refget(_refResult)) exitWith {
-			refset(_refErr,"hand_item property not found");
+			if equals(refget(_refErr),"") then {
+				refset(_refErr,"hand_item property not found");
+			};
 		};
 		self setv(hand_item,refget(_refResult));
 		self getv(hand_item) setv(componentCategory,"hand_item");
@@ -617,7 +629,9 @@ struct(CraftRecipeInteract) base(ICraftRecipeBase)
 		_refResult = refcreate(null);
 		self callp(_parseComponent,value arg _content arg _refResult arg _refErr);
 		if isNull(refget(_refResult)) exitWith {
-			refset(_refErr,"target property not found");
+			if equals(refget(_refErr),"") then {
+				refset(_refErr,"target property not found");
+			};
 		};
 		self setv(target,refget(_refResult));
 		self getv(target) setv(componentCategory,"target");

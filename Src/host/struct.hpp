@@ -299,9 +299,11 @@
 			if !isNullVar(_t) then {
 				_decl set [STRUCT_MEM_TOSTRING,_t];
 			};
-
+			//["Load struct %1",_decl get STRUCT_MEM_TYPE] call logInfo;
 			//virtual check
 			{
+				if isNullVar(_y) then {continue};
+
 				if (equalTypes(_y,{})) then {
 
 					private _code__ = toString _y;
@@ -324,18 +326,20 @@
 					_decl set [_x,compile _code__];
 				}
 			} foreach _decl;
-
+			
 			missionnamespace setvariable ["pts_"+(_decl get STRUCT_MEM_TYPE),_decl];
 			vtable_s set [_decl get STRUCT_MEM_TYPE,_decl];
 			_bmap set [_decl get STRUCT_MEM_TYPE,_decl];
-
+			
 			//creating type only with type and base fields
 			_weakDecl = createHashMapFromArray [
 				[STRUCT_MEM_TYPE,_decl get STRUCT_MEM_TYPE]
 			];
+			
 			if (STRUCT_MEM_BASE in _decl) then {
 				_weakDecl set [STRUCT_MEM_BASE,_decl get STRUCT_MEM_BASE];
 			};
+			
 			_weakDeclMap set [_weakDecl get STRUCT_MEM_TYPE,_weakDecl];
 			strt_inhChld set [_weakDecl get STRUCT_MEM_TYPE,[]]; //generate empty child list
 		} foreach spi_lst;
