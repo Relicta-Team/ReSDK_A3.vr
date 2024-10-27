@@ -141,7 +141,9 @@ csys_errorMessage = {
 	_fmt set [0,(_fmt select 0) + (format[" (file: %1; item: %2)",csys_internal_lastLoadedFile,csys_internal_configNumber])];
 	private _message = format _fmt;
 	errorformat("[CraftError]: %1",_message);
+	#ifdef EDITOR
 	["Craft build failed:" +endl+ _message] call messageBox;
+	#endif
 };
 
 //TODO optimize
@@ -276,8 +278,9 @@ csys_internal_loadCfgSegment = {
 	// ----------------------- failed check -----------------------
 	GETVAL_DICT(_data, vec2("failed_handler",null));
 	FAIL_CHECK_PRINT;
-
-	_sobj callp(_parseFailed,value arg _ref);
+	if !isNullVar(value) then {
+		_sobj callp(_parseFailed,value arg _ref);
+	};
 	if (refget(_ref)!="") exitWith {
 		[refget(_ref)] call csys_errorMessage;
 		false
@@ -286,7 +289,9 @@ csys_internal_loadCfgSegment = {
 	// ----------------------- options check -----------------------
 	GETVAL_DICT(_data, vec2("options",null));
 	FAIL_CHECK_PRINT;
-	_sobj callp(_parseOptions,value arg _ref);
+	if !isNullVar(value) then {
+		_sobj callp(_parseOptions,value arg _ref);
+	};
 	if (refget(_ref)!="") exitWith {
 		[refget(_ref)] call csys_errorMessage;
 		false
