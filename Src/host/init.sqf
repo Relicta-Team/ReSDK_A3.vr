@@ -46,7 +46,9 @@ call nodegen_loadClasses;
 call cs_runtime_internal_makeAll;
 
 //OOP INIT ZONE
-[] call oop_loadTypes;
+if !([] call oop_loadTypes) exitWith {
+	appExit(APPEXIT_REASON_COMPILATIOEXCEPTION);
+};
 //end classes
 
 //structures initialize
