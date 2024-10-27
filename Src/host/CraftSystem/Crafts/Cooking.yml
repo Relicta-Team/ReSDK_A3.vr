@@ -223,6 +223,7 @@
       target:
         meta_tag: mukaSource
         class: Muka
+        check_type_of: false
         destroy: false
   result:
     class: Testo
