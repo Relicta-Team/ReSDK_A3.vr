@@ -329,7 +329,7 @@ struct(ICraftRecipeBase)
 		params ["_req","_refResult"];
 		CRAFT_PARSER_HEAD;
 
-		GETVAL_STR(_req, vec2("class",null));
+		GETVAL_STR(_req, vec2("class","object"));
 		FAIL_CHECK_REFSET(_refResult);
 		if (!isImplementClass(value) || {!isTypeNameStringOf(value,"IDestructible")}) exitWith {
 			refset(_refErr,"Result object not found or not inherit of IDestructible class: " + value);
