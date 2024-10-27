@@ -314,7 +314,7 @@
         class: Pie
         check_type_of: false
   failed_handler:
-    handler_type: custom
+    handler_type: default
   result:
     class: PiePiece
     radius: 0.1
