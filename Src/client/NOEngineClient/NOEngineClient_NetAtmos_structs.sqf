@@ -322,26 +322,6 @@ struct(AtmosAreaClient)
 				if (!([_x + _size, _y + _i, _z] in _activeChunks)) exitWith {};
 				modvar(_size) + 1;
 			};
-			// while {true} do {
-			// 	private _isSquare = true;
-
-			// 	// Проверяем, что квадрат _size x _size заполнен огнями
-			// 	for "_i" from 0 to _size - 1 do {
-			// 		if (!([_x + _i, _y + _size, _z] in _activeChunks)) exitWith {_isSquare = false};
-			// 		if (!([_x + _size, _y + _i, _z] in _activeChunks)) exitWith {_isSquare = false};
-			// 	};
-
-			// 	// Увеличиваем размер квадрата, если он полностью заполнен огнем
-			// 	if (_isSquare 
-			// 	//&& (_x + _size <= 10) && (_y + _size <= 10)
-			// 	) then {
-			// 		_size = _size + 1;
-			// 	} else {
-			// 		break;
-			// 	};
-			// };
-			
-			// Итоговый размер квадрата
 			_size
 		};
 
@@ -573,19 +553,6 @@ struct(AtmosVirtualLight)
 	def(getEmitterPos)
 	{
 		self getv(_pos)
-		// private _eff = self getv(effects);
-		// private _vec3Zero = [0,0,0];
-		// if isNullVar(_eff) exitWith {_vec3Zero};
-		// if (count _eff == 0) exitWith {_vec3Zero};
-		// private _ppos = null;
-		// {
-		// 	_ppos = getposatl _x;
-		// 	if not_equals(_ppos,_vec3Zero) exitWith {
-		// 		_vec3Zero = _ppos; //update and return
-		// 	};
-		// } count _eff;
-		// _vec3Zero
-		//getPosAtl (_eff select 0)
 	}
 	def(getEmitterRealPos)
 	{
