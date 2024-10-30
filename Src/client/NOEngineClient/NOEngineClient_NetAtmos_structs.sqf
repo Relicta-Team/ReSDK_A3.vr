@@ -43,11 +43,19 @@ struct(AtmosAreaClient)
 
 	def(chunks) null; //key:localid,value vec2(cfg,obj)
 
+	def(_blockCoords) null //локальные координаты блоков по z осям
+	def(_regions) null
+
 	def(init)
 	{
 		params ["_aId"];
 		self setv(areaId,_aId);
 		self setv(chunks,createHashMap); 
+		private _lst = [];
+		_lst resize ATMOS_AREA_SIZE;
+		self setv(_blockCoords,_lst apply {[]});
+
+		self setv(_regions,_lst apply {[]});
 	}
 
 	//регистрация|перерегистрация эффектов в зоне
@@ -312,14 +320,22 @@ struct(AtmosAreaClient)
 
 		// Функция для поиска максимального квадратного региона с текущей позиции
 		private _findMaxSquare = {
-			params ["_pos", "_activeChunks"];
+			params ["_pos", "_activeChunks","_curObj"];
 			private _x = _pos select 0;
 			private _y = _pos select 1;
 			private _z = _pos select 2;
+			private _p1 = null;
+			private _p2 = null;
 			private _size = 0;
 			for "_i" from 1 to (ATMOS_AREA_SIZE) do {
-				if (!([_x + _i, _y + _size, _z] in _activeChunks)) exitWith {};
-				if (!([_x + _size, _y + _i, _z] in _activeChunks)) exitWith {};
+				_p1 = [_x + _i, _y + _size, _z];
+				_p2 = [_x + _size, _y + _i, _z];
+				if (!(_p1 in _activeChunks)) exitWith {};
+				if (!(_p2 in _activeChunks)) exitWith {};
+				//check sametype cfg
+				if !(_curObj callp(isSameCfgType,_mapAssoc get _p1)) exitWith {};
+				if !(_curObj callp(isSameCfgType,_mapAssoc get _p2)) exitWith {};
+
 				modvar(_size) + 1;
 			};
 			_size
@@ -344,7 +360,8 @@ struct(AtmosAreaClient)
 				//traceformat("process pos %1",_pos)
 
 				// Находим максимальный квадратный регион от этой позиции
-				private _size = [_pos, _activeChunks] call _findMaxSquare;
+				private _curObj = _mapAssoc get _pos;
+				private _size = [_pos, _activeChunks,_curObj] call _findMaxSquare;
 				traceformat("  Max size for pos %1 is %2", _pos arg _size)
 				
 				//ограничение зоны по квадратам. Прим.: 5x5 - ok; 6x6 -> lower to 5
@@ -639,8 +656,79 @@ struct(AtmosVirtualLight)
 		self callp(updateLight,self getv(id));
 	}
 
+	def(isSameCfgType)
+	{
+		params ["_check"];
+		(_check getv(id)) == (self getv(id))
+	}
+
 	def(str)
 	{
 		format["%1-%2",struct_typename(self),self getv(id)]
+	}
+endstruct
+
+//структура региона
+struct(AtmosClientBatchRegion)
+	def(startPos) [0,0,0]
+	def(endPos) [0,0,0]
+	def(_midPos) [0,0,0]
+	def(size) 0
+
+	//references to AtmosVirtualLight
+	def(blockRefs) null //list<AtmosVirtualLight>
+	def(midBlockRef) null //AtmosVirtualLight
+
+	def(cfgType) -1 //light config type for batch render
+
+	def(init)
+	{
+		self setv(blockRefs,[]);
+	}
+
+	//проверка локальной позиции
+	def(isPosInsideRegion)
+	{
+		params ["_pos"];
+
+		private _semiSize = (self getv(size))/2;
+		
+		_pos inArea [self getv(_midPos), _semiSize, _semiSize, 0, true]
+	}
+
+	def(makeRegion)
+	{
+		params ["_objList","_midBlock","_startPos","_endPos","_size"];
+
+		self setv(blockRefs,_objList);
+		self setv(midBlockRef,_midBlock);
+
+		self setv(startPos,_startPos);
+		self setv(endPos,_endPos);
+
+		self setv(_midPos,[[_endPos arg _startPos]] call getPosListCenter);
+
+		self setv(size,_size);
+	}
+
+	//включает или отключает режим рендера зоны. true - включение
+	def(setRenderMode)
+	{
+		params ["_mode"];
+		{
+			_x callp(setHidden,_mode);
+			false
+		} count (self getv(blockRefs));
+
+		private _mid = (self getv(midBlockRef));
+		private _size = self getv(size);
+		if (_mode) then {
+			_mid setv(useOffsetMid,_size%2==1);
+			_mid setv(renderZone,_size);
+			_mid callv(reloadLight);
+		} else {
+			_mid setv(renderZone,null);
+			_mid callv(reloadLight);
+		};
 	}
 endstruct

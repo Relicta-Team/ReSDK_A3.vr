@@ -205,6 +205,7 @@ noe_client_nat_loadArea = {
 
 	if (!_isUpdateFlag) then {
 		_aObj call ["loadArea"];
+		//_aObj callp(optimizeProcess, null);
 	};
 };
 
