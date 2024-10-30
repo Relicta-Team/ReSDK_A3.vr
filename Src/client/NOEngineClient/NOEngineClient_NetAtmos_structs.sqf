@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 #include "..\..\host\struct.hpp"
+#include "..\LightEngine\ScriptedEffects.hpp"
 #include "NOEngineClient_NetAtmos.hpp"
 /*
 	Структура зоны атмоса
@@ -73,7 +74,7 @@ struct(AtmosAreaClient)
 			false
 		} count (self callv(getChunkIdList));
 
-		self callv(optimizeRegion);
+		self callv(optimizeProcess);
 	}
 
 	def(unloadArea)
@@ -103,7 +104,7 @@ struct(AtmosAreaClient)
 		_pos = _pos vectorAdd [ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_Z];
 		
 		//creating visuals
-		private _ltObj = self callp(_createVisual,_light arg _pos arg _basePos);
+		private _ltObj = self callp(_createVisual,_light arg _pos arg _basePos arg _locChId);
 		
 		//saving data
 		_cDat set [NAT_CHUNKDAT_OBJECT,_ltObj];
@@ -125,7 +126,8 @@ struct(AtmosAreaClient)
 			_ltObj callp(updateLight,_ltCfg);
 		};
 
-		self callv(optimizeRegion);
+		self callp(onChangedAreaInfo,_locid arg true);
+		self callv(optimizeProcess);
 	}
 
 	def(unloadChunkInternal)
@@ -138,6 +140,8 @@ struct(AtmosAreaClient)
 		if isNullVar(_ltObj) exitWith {};
 		self callp(_deleteVisual,_ltObj);
 		_cDat set [NAT_CHUNKDAT_OBJECT,null];
+
+		self callp(onChangedAreaInfo,_locid arg false);
 	}
 
 	def(deleteChunk)
@@ -153,7 +157,7 @@ struct(AtmosAreaClient)
 
 	def(_createVisual)
 	{
-		params ["_light","_pos","_basePos"];
+		params ["_light","_pos","_basePos","_chid"];
 		#ifdef NAT_DEBUG_ENABLE_VISUAL_HELPER
 		private _vobj = "Sign_Arrow_F" createVehicleLocal [0,0,0];
 		_vobj setvariable ["_basePos",_basePos];
@@ -161,7 +165,7 @@ struct(AtmosAreaClient)
 		self set ["__debug_visual",_vobj];
 		#endif
 
-		struct_newp(AtmosVirtualLight,_light arg _pos);
+		struct_newp(AtmosVirtualLight,_light arg _pos arg _chid);
 	}
 
 	def(_deleteVisual)
@@ -208,6 +212,159 @@ struct(AtmosAreaClient)
 		format["Area%1",self getv(areaId)]
 	}
 
+	def(onChangedAreaInfo)
+	{
+		params ["_chid","_isCreateOrUpdate"];
+		private _locPos = _chid call atmos_decodeChId;
+		//traceformat("change area chid: %1; lpos %2",_chid arg _locPos)
+		private _chidconn = null;
+		private _chMap = self getv(chunks);
+		private _curLt = _chMap get _chid select NAT_CHUNKDAT_OBJECT;
+		{
+			_chidconn = _x call atmos_encodeChId;
+			if (_chidconn in _chMap) then {
+				private _ltObj = _chMap get _chidconn select NAT_CHUNKDAT_OBJECT;
+				//traceformat("  mod offs; before %1",(_curLt getv(aroundCtr)) arg _ltObj)
+				if (_isCreateOrUpdate) then {
+					// _ltObj getv(relatedList) pushBackUnique _curLt;
+					// _curLt getv(relatedList) pushBackUnique _ltObj;
+					_curLt modv(aroundCtr, + 1);
+					_ltObj modv(aroundCtr, + 1);
+				} else {
+					// [_curLt getv(relatedList),_ltObj] call arrayDeleteItem;
+					// [_ltObj getv(relatedList),_curLt] call arrayDeleteItem;
+					_curLt modv(aroundCtr, - 1);
+					_ltObj modv(aroundCtr, - 1);
+				};
+				//traceformat("  mod offs; after %1",(_curLt getv(aroundCtr)) arg _ltObj)
+			};
+		} foreach [
+			_locPos vectorAdd [0,1,0],
+			_locPos vectorAdd [0,-1,0],
+			_locPos vectorAdd [1,0,0],
+			_locPos vectorAdd [-1,0,0],
+			
+			_locPos vectorAdd [-1,1,0],
+			_locPos vectorAdd [1,1,0],
+			_locPos vectorAdd [-1,-1,0],
+			_locPos vectorAdd [1,-1,0]
+		];
+	}
+
+	def(optimizeProcess)
+	{
+		/*
+			1. группируем зоны по z
+			2. проходим все z уровни
+
+			TODO доп оптимизация. валидируем только уровень на который добавлен чанк
+
+			инфо: 
+			мы можем делать доп оптимизацию по z
+			если в регионе сверху есть регион такого же уровня
+		*/
+		private _chs = (self callv(getChunkIdList)) apply {[_x call atmos_decodeChId,_x]};
+		private _alist = [];
+		_alist resize (ATMOS_AREA_SIZE);
+		_alist = _alist apply {[]};
+		private _curZ = null;
+		//collect zposes
+		private _chMap = self getv(chunks);
+		private _mapAssoc = createhashMap;
+		private _obj = null;
+		{
+			_x params ["_locPos","_chidloc"];
+			_curZ = (_locpos select 2)-1;
+			(_alist select _curZ) pushBack _locPos;
+			_obj = _chMap get _chidloc select NAT_CHUNKDAT_OBJECT;
+			_obj setv(renderZone,null);
+			_mapAssoc set [_locPos,_obj];
+		} foreach _chs;
+		
+		private _obj = null;
+
+		// Функция для поиска максимального квадратного региона с текущей позиции
+		private _findMaxSquare = {
+			params ["_pos", "_activeChunks"];
+			private _x = _pos select 0;
+			private _y = _pos select 1;
+			private _z = _pos select 2;
+			private _size = 1;
+
+			while {true} do {
+				private _isSquare = true;
+
+				// Проверяем, что квадрат _size x _size заполнен огнями
+				for "_i" from 0 to _size - 1 do {
+					if (!([_x + _i, _y + _size, _z] in _activeChunks)) exitWith {_isSquare = false};
+					if (!([_x + _size, _y + _i, _z] in _activeChunks)) exitWith {_isSquare = false};
+				};
+
+				// Увеличиваем размер квадрата, если он полностью заполнен огнем
+				if (_isSquare && (_x + _size < 10) && (_y + _size < 10)) then {
+					_size = _size + 1;
+				} else {
+					break;
+				};
+			};
+			
+			// Итоговый размер квадрата
+			_size - 1;
+		};
+
+		{
+			private _z = _foreachIndex + 1;
+			if (count _x > 0) then {
+				private _activeChunks = _x;
+				_activeChunks sort true;
+				private _processed = []; // Отслеживание обработанных чанков для уровня
+				
+				// Поиск квадратных регионов
+				{
+					private _locPos = _x; //call atmos_decodeChId;
+					private _pos = _locPos;//[_locPos select 0, _locPos select 1];
+					traceformat("process pos %1",_pos)
+
+					// Пропускаем уже обработанные чанки
+					if (_pos in _processed) exitWith {};
+
+					// Находим максимальный квадратный регион от этой позиции
+					private _size = [_pos, _activeChunks] call _findMaxSquare;
+					traceformat("Max size for pos %1 is %2", _pos arg _size)
+					if (_size == 0) then {continue};
+
+					// Помечаем все чанки внутри найденного региона как обработанные
+					for "_i" from 0 to _size - 1 do {
+						for "_j" from 0 to _size - 1 do {
+							private _chunkPos = _locPos vectorAdd [_i,_j,0];
+							_processed pushBack _chunkPos;
+							_mapAssoc get (_chunkPos ) callp(setHidden,true);
+							//traceformat("hide pos %1 exists %2",_chunkPos arg _chunkPos in _mapAssoc)
+						};
+					};
+
+					// Определяем центральную позицию для "огня"
+					private _centerPos = [
+						(_pos select 0) + floor(_size / 2),
+						(_pos select 1) + floor(_size / 2),
+						_z
+					];
+					traceformat("unhide pos %1 exists %2",_centerPos arg _centerPos in _mapAssoc)
+					private _centerObj = _mapAssoc get _centerPos;
+					_centerObj callp(setHidden,false);
+					_centerObj setv(renderZone,_size);
+					_centerObj callv(reloadLight);
+
+					//todo expand fire
+
+					// Создаём "центральный огонь" для региона, с размером _size
+					
+				} foreach _activeChunks;
+
+			};
+		} foreach _alist;
+	}
+
 	def(optimizeRegion)
 	{
 		/*
@@ -221,9 +378,15 @@ struct(AtmosAreaClient)
 			[0,0,0,0,0]
 			[0,0,0,0,0]
 
-			
+			когда добавляется новый чанк смежные (соседние) получают модификатор + 1
 
 		*/
+
+		//проходимся по уровням
+		for "_z" from 1 to ATMOS_AREA_SIZE do {
+
+		};
+
 		if (true) exitWith {}; //not optimized...
 
 		//fill leveling
@@ -266,25 +429,88 @@ endstruct
 
 struct(AtmosVirtualLight)
 	def(effects) null;
-	def(id) -1;
+	def(id) -1; //config id
+	def(localChId) null; //local chunk id from [1,1,1] to [10,10,10]
+
+	def(aroundCtr) 0
+	def(relatedList) null
+
+	def(renderZone) null
+
+	//do not change this constval
+	def(_fireTypes) [SLIGHT_ATMOS_FIRE_1,SLIGHT_ATMOS_FIRE_2,SLIGHT_ATMOS_FIRE_3];
+	//check if atmos if firetype
+	def(isFireType) {(self getv(id)) in (self getv(_fireTypes))}
 
 	def(init)
 	{
-		params ["_cfg","_pos"];
-		
+		params ["_cfg","_pos","_lcid"];
+		self setv(relatedList,[]);
+		self setv(localChId,_lcid);
+		self setv(localId,_lcid call atmos_encodeChId);
 		self callp(loadEmitters,_cfg arg _pos);
 	}
 
 	def(loadEmitters)
 	{
 		params ["_cfg","_pos"];
+		private _renderZone = self getv(renderZone);
 		private _funcHandle = {
-			params ["_o","_p","_v","_i"];
-
+			params ["_o","_p","_v","_alias"];
 			//use le_se_getParticleOption, le_se_setParticleOption for change object options
+			if isNullVar(_renderZone) exitWith {};
+			if (_alias == "Пламя") then {
+				
+				if (_p == "setparticlerandom") then {
+					
+					//update position
+					private _old = [_p,"positionVar",_v] call le_se_getParticleOption;
+					_old set [0,_renderZone/2];
+					_old set [1,_renderZone/2];
+					[_p,"positionVar",_v,_old] call le_se_setParticleOption;
+
+					
+				};
+				//update drop
+				if (_p == "setdropinterval") then {
+					private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
+					[_p,"interval",_v,_dropInterval/_renderZone] call le_se_setParticleOption;
+				};
+				//update size
+				if (_p == "setParticleParams") then {
+					private _size = [_p,"size",_v] call le_se_getParticleOption;
+					[_p,"size",_v,_size apply {_x*(_renderZone/2)}] call le_se_setParticleOption;
+				};
+			};
+			if (_alias == "Искры") then {
+				if (_p == "setdropinterval") then {
+					[_p,"interval",_v,1000] call le_se_setParticleOption;
+				};
+			};
+			if (_alias == "Преломление") then {
+				if (_p == "setdropinterval") then {
+					[_p,"interval",_v,1000] call le_se_setParticleOption;
+				};
+			};
+			if (_alias == "Частицы 1") then {
+				if (_p == "setparticlerandom") then {
+					//update position
+					private _old = [_p,"positionVar",_v] call le_se_getParticleOption;
+					_old set [0,_renderZone/2];
+					_old set [1,_renderZone/2];
+					[_p,"positionVar",_v,_old] call le_se_setParticleOption;
+				};
+				if (_p == "setdropinterval") then {
+					private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
+					[_p,"interval",_v,_dropInterval/_renderZone] call le_se_setParticleOption;
+				};
+			};
+			
+
 		};
 		self setv(effects,[_cfg arg _pos arg _funcHandle] call le_se_createUnmanagedEmitter);
 		self setv(id,_cfg);
+		self setv(_pos,_pos);
 	}
 
 	def(deleteEmitters)
@@ -294,13 +520,24 @@ struct(AtmosVirtualLight)
 		} foreach (self getv(effects));
 	}
 
+	def(_pos) [0,0,0];
+
 	def(getEmitterPos)
 	{
-		private _eff = self getv(effects);
-		private _vec3Zero = [0,0,0];
-		if isNullVar(_eff) exitWith {_vec3Zero};
-		if (count _eff == 0) exitWith {_vec3Zero};
-		getPosAtl (_eff select 0)
+		self getv(_pos)
+		// private _eff = self getv(effects);
+		// private _vec3Zero = [0,0,0];
+		// if isNullVar(_eff) exitWith {_vec3Zero};
+		// if (count _eff == 0) exitWith {_vec3Zero};
+		// private _ppos = null;
+		// {
+		// 	_ppos = getposatl _x;
+		// 	if not_equals(_ppos,_vec3Zero) exitWith {
+		// 		_vec3Zero = _ppos; //update and return
+		// 	};
+		// } count _eff;
+		// _vec3Zero
+		//getPosAtl (_eff select 0)
 	}
 
 	def(setEmitterPos)
@@ -311,6 +548,7 @@ struct(AtmosVirtualLight)
 		if (count _eff == 0) exitWith {};
 		private _baseObj = _eff select 0;
 		private _basePos = getPosAtl _baseObj;
+		self setv(_pos,_pos);
 		_baseObj setPosAtl _pos;
 		private _offList = [];
 		{
@@ -344,7 +582,7 @@ struct(AtmosVirtualLight)
 			deleteVehicle (self getv(__sphereDebugHidden));
 			#endif
 
-			self callp(setEmitterPos,(self getv(_unhide_pos)) vectorAdd vec3(0,0,1000));
+			self callp(setEmitterPos,(self getv(_unhide_pos)) );
 			self setv(_unhide_pos,null);
 		};
 
@@ -361,10 +599,20 @@ struct(AtmosVirtualLight)
 		params ["_cfg"];
 		private _pos = self callv(getEmitterPos);
 		if equals(_pos,vec3(0,0,0)) exitWith {
-			setLastError("Invalid emitter position; ctx: "+str [self arg self getv(effects) arg count (self getv(effects)) arg _pos]);
+			private _dta = [self arg self getv(effects) arg count (self getv(effects)) arg _pos];
+			if (count (self getv(effects)) > 0) then {
+				_dta pushBack ["effposes:",(self getv(effects))apply {getposatl _x}];
+			};
+			setLastError("Invalid emitter position; ctx: "+str _dta);
 		};
 		self callv(deleteEmitters);
 		self callp(loadEmitters,_cfg arg _pos);
+	}
+
+	//simple reload light by config
+	def(reloadLight)
+	{
+		self callp(updateLight,self getv(id));
 	}
 
 	def(str)
