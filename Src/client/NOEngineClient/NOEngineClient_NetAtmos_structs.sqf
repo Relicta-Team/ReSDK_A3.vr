@@ -24,6 +24,8 @@
 		последовательно создаем зависимости
 */
 
+#define ENABLE_OPTIMIZATION
+
 struct(AtmosAreaClient)
 	def(areaId) null;
 	def(lastUpd) 0;
@@ -215,6 +217,10 @@ struct(AtmosAreaClient)
 	def(onChangedAreaInfo)
 	{
 		params ["_chid","_isCreateOrUpdate"];
+		#ifndef ENABLE_OPTIMIZATION
+		if (true) exitWith {};
+		#endif
+		
 		private _locPos = _chid call atmos_decodeChId;
 		//traceformat("change area chid: %1; lpos %2",_chid arg _locPos)
 		private _chidconn = null;
@@ -253,6 +259,10 @@ struct(AtmosAreaClient)
 
 	def(optimizeProcess)
 	{
+		#ifndef ENABLE_OPTIMIZATION
+		if (true) exitWith {};
+		#endif
+
 		/*
 			1. группируем зоны по z
 			2. проходим все z уровни
@@ -301,7 +311,9 @@ struct(AtmosAreaClient)
 				};
 
 				// Увеличиваем размер квадрата, если он полностью заполнен огнем
-				if (_isSquare && (_x + _size < 10) && (_y + _size < 10)) then {
+				if (_isSquare 
+				//&& (_x + _size < 10) && (_y + _size < 10)
+				) then {
 					_size = _size + 1;
 				} else {
 					break;
@@ -326,12 +338,16 @@ struct(AtmosAreaClient)
 					traceformat("process pos %1",_pos)
 
 					// Пропускаем уже обработанные чанки
-					if (_pos in _processed) exitWith {};
+					if (_pos in _processed) then {continue};
 
 					// Находим максимальный квадратный регион от этой позиции
 					private _size = [_pos, _activeChunks] call _findMaxSquare;
 					traceformat("Max size for pos %1 is %2", _pos arg _size)
-					if (_size == 0) then {continue};
+					if (_size == 0) then {
+						//test hide
+						_mapAssoc get (_pos) callp(setHidden,true);
+						continue
+					};
 
 					// Помечаем все чанки внутри найденного региона как обработанные
 					for "_i" from 0 to _size - 1 do {
@@ -363,65 +379,6 @@ struct(AtmosAreaClient)
 
 			};
 		} foreach _alist;
-	}
-
-	def(optimizeRegion)
-	{
-		/*
-			Первая версия оптимизации:
-			Для объединения 4 блока должны быть определены в одном типе.
-			4 объединенных блока образуют регион
-			
-			[0,0,0,0,0]
-			[0,0,X,X,0]
-			[0,0,X,X,0]  <--- X - объединенный регион
-			[0,0,0,0,0]
-			[0,0,0,0,0]
-
-			когда добавляется новый чанк смежные (соседние) получают модификатор + 1
-
-		*/
-
-		//проходимся по уровням
-		for "_z" from 1 to ATMOS_AREA_SIZE do {
-
-		};
-
-		if (true) exitWith {}; //not optimized...
-
-		//fill leveling
-		private _levels = [];
-		_levels resize (ATMOS_AREA_SIZE+1);//because locid started at 1
-		_levels = _levels apply {[]};
-
-		private _chunks = self getv(chunks);
-		{
-			_chIdLoc = [_x] call atmos_decodeChId;
-			_chIdLevel = _chIdLoc select 0;
-			if isNull(_y select NAT_CHUNKDAT_OBJECT) then {continue};
-
-			_levels select _chIdLevel pushBack [_x,(_y select NAT_CHUNKDAT_OBJECT)];
-			(_y select NAT_CHUNKDAT_OBJECT) callp(setHidden,false);
-		} foreach _chunks;
-
-		_aroundMapper = [+100,-100,+10,-10];
-		_countMapper = count _aroundMapper;
-		_probId = null;
-		{
-			{
-				_x params ["_locid","_ltObj"];
-				if ({
-					_probId = _locid+_x;
-					_probId in _chunks
-					&& {!(_chunks get _probId select NAT_CHUNKDAT_OBJECT callv(isHidden))}
-				} count _aroundMapper == _countMapper) then {
-					{
-						_probId = _locid+_x;
-						_chunks get _probId select NAT_CHUNKDAT_OBJECT callp(setHidden,true);
-					} foreach _aroundMapper;
-				};
-			} foreach _x;
-		} foreach _levels;
 	}
 
 endstruct
@@ -474,7 +431,9 @@ struct(AtmosVirtualLight)
 				//update drop
 				if (_p == "setdropinterval") then {
 					private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
-					[_p,"interval",_v,_dropInterval/_renderZone] call le_se_setParticleOption;
+					[_p,"interval",_v,_dropInterval
+					// /_renderZone
+					] call le_se_setParticleOption;
 				};
 				//update size
 				if (_p == "setParticleParams") then {
@@ -482,16 +441,19 @@ struct(AtmosVirtualLight)
 					[_p,"size",_v,_size apply {_x*(_renderZone/2)}] call le_se_setParticleOption;
 				};
 			};
+			//disable sparks
 			if (_alias == "Искры") then {
 				if (_p == "setdropinterval") then {
 					[_p,"interval",_v,1000] call le_se_setParticleOption;
 				};
 			};
+			//disable refract
 			if (_alias == "Преломление") then {
 				if (_p == "setdropinterval") then {
 					[_p,"interval",_v,1000] call le_se_setParticleOption;
 				};
 			};
+			//smoke
 			if (_alias == "Частицы 1") then {
 				if (_p == "setparticlerandom") then {
 					//update position
@@ -538,6 +500,15 @@ struct(AtmosVirtualLight)
 		// } count _eff;
 		// _vec3Zero
 		//getPosAtl (_eff select 0)
+	}
+	def(getEmitterRealPos)
+	{
+		private _p = self getv(_unhide_pos);
+		if !isNullVar(_p) then {
+			_p
+		} else {
+			self getv(_pos)
+		};
 	}
 
 	def(setEmitterPos)
@@ -597,7 +568,7 @@ struct(AtmosVirtualLight)
 	def(updateLight)
 	{
 		params ["_cfg"];
-		private _pos = self callv(getEmitterPos);
+		private _pos = self callv(getEmitterRealPos);
 		if equals(_pos,vec3(0,0,0)) exitWith {
 			private _dta = [self arg self getv(effects) arg count (self getv(effects)) arg _pos];
 			if (count (self getv(effects)) > 0) then {
