@@ -26,6 +26,13 @@
 
 #define ENABLE_OPTIMIZATION
 
+//рандомные цвета для зон
+#define ENABLE_RANDOMIZATION_COLOR
+
+#ifndef EDITOR
+	#undef ENABLE_RANDOMIZATION_COLOR
+#endif
+
 struct(AtmosAreaClient)
 	def(areaId) null;
 	def(lastUpd) 0;
@@ -77,8 +84,8 @@ struct(AtmosAreaClient)
 		} count (self callv(getChunkIdList));
 		
 		//full load area
-		trace("------------ load area ------------")
-		self callp(optimizeProcess, null);
+		//trace("------------ load area ------------")
+		//self callp(optimizeProcess, null);
 	}
 
 	def(unloadArea)
@@ -162,7 +169,7 @@ struct(AtmosAreaClient)
 		
 		//single level update
 		if (_needUpdate) then {
-			self callp(optimizeProcess, _locid call atmos_decodeChId);
+			//self callp(optimizeProcess, _locid call atmos_decodeChId);
 		};
 	}
 
@@ -297,8 +304,7 @@ struct(AtmosAreaClient)
 			_curZ = (_locpos select 2)-1;
 			(_alist select _curZ) pushBack _locPos;
 			_obj = _chMap get _chidloc select NAT_CHUNKDAT_OBJECT;
-			_obj setv(renderZone,null);
-			_obj setv(decZoneRend,null);
+			_obj callv(resetVars);
 			_mapAssoc set [_locPos,_obj];
 		} foreach _chs;
 		
@@ -310,29 +316,33 @@ struct(AtmosAreaClient)
 			private _x = _pos select 0;
 			private _y = _pos select 1;
 			private _z = _pos select 2;
-			private _size = 1;
-
-			while {true} do {
-				private _isSquare = true;
-
-				// Проверяем, что квадрат _size x _size заполнен огнями
-				for "_i" from 0 to _size - 1 do {
-					if (!([_x + _i, _y + _size, _z] in _activeChunks)) exitWith {_isSquare = false};
-					if (!([_x + _size, _y + _i, _z] in _activeChunks)) exitWith {_isSquare = false};
-				};
-
-				// Увеличиваем размер квадрата, если он полностью заполнен огнем
-				if (_isSquare 
-				//&& (_x + _size <= 10) && (_y + _size <= 10)
-				) then {
-					_size = _size + 1;
-				} else {
-					break;
-				};
+			private _size = 0;
+			for "_i" from 1 to (ATMOS_AREA_SIZE) do {
+				if (!([_x + _i, _y + _size, _z] in _activeChunks)) exitWith {};
+				if (!([_x + _size, _y + _i, _z] in _activeChunks)) exitWith {};
+				modvar(_size) + 1;
 			};
+			// while {true} do {
+			// 	private _isSquare = true;
+
+			// 	// Проверяем, что квадрат _size x _size заполнен огнями
+			// 	for "_i" from 0 to _size - 1 do {
+			// 		if (!([_x + _i, _y + _size, _z] in _activeChunks)) exitWith {_isSquare = false};
+			// 		if (!([_x + _size, _y + _i, _z] in _activeChunks)) exitWith {_isSquare = false};
+			// 	};
+
+			// 	// Увеличиваем размер квадрата, если он полностью заполнен огнем
+			// 	if (_isSquare 
+			// 	//&& (_x + _size <= 10) && (_y + _size <= 10)
+			// 	) then {
+			// 		_size = _size + 1;
+			// 	} else {
+			// 		break;
+			// 	};
+			// };
 			
 			// Итоговый размер квадрата
-			_size - 1;
+			_size
 		};
 
 		private _processZOpt = {
@@ -348,27 +358,32 @@ struct(AtmosAreaClient)
 
 				// Пропускаем уже обработанные чанки
 				if (_pos in _processed) then {
-					traceformat("pos in processed; exit pos: %1",_pos);
+					//traceformat("pos in processed; exit pos: %1",_pos);
 					continue;
 				};
-				traceformat("process pos %1",_pos)
+				//traceformat("process pos %1",_pos)
 
 				// Находим максимальный квадратный регион от этой позиции
 				private _size = [_pos, _activeChunks] call _findMaxSquare;
 				traceformat("  Max size for pos %1 is %2", _pos arg _size)
+				
+				//ограничение зоны по квадратам. Прим.: 5x5 - ok; 6x6 -> lower to 5
+				//_size = _size - (_size%2);
+
 				if (_size == 0) then {
 					//test hide
 					_optList pushBack (_mapAssoc get (_pos));
 					continue;
 				};
 
+
 				// Помечаем все чанки внутри найденного региона как обработанные
-				for "_i" from 0 to _size - 1 do {
-					for "_j" from 0 to _size - 1 do {
+				for "_i" from 0 to _size do {
+					for "_j" from 0 to _size do {
 						private _chunkPos = _locPos vectorAdd [_i,_j,0];
 						_processed pushBack _chunkPos;
 						_mapAssoc get (_chunkPos ) callp(setHidden,true);
-						//traceformat("hide pos %1 exists %2",_chunkPos arg _chunkPos in _mapAssoc)
+						//traceformat("  hide pos %1 exists %2",_chunkPos arg _chunkPos in _mapAssoc)
 					};
 				};
 
@@ -382,6 +397,10 @@ struct(AtmosAreaClient)
 				private _centerObj = _mapAssoc get _centerPos;
 				_centerObj callp(setHidden,false);
 				_centerObj setv(renderZone,_size);
+				//смещение на следующую зону
+				if (_size%2==1) then {
+					_centerObj setv(useOffsetMid,true);
+				};
 				_centerObj callv(reloadLight);
 
 				// Создаём "центральный огонь" для региона, с размером _size
@@ -400,7 +419,7 @@ struct(AtmosAreaClient)
 
 		{
 			private _z = _foreachIndex + 1;
-			traceformat(" ----- process zlevel: %1; count %2",_z arg count _x)
+			//traceformat(" ----- process zlevel: %1; count %2",_z arg count _x)
 			if (count _x > 0) then {
 				_x sort true; //by near to far
 				[_z,_x] call _processZOpt;
@@ -422,6 +441,15 @@ struct(AtmosVirtualLight)
 	def(renderZone) null
 	//уменьшение дропа частиц
 	def(decZoneRend) null 
+	//при включении блок создается со смещением 0.5
+	def(useOffsetMid) false
+
+	def(resetVars)
+	{
+		self setv(renderZone,null);
+		self setv(decZoneRend,null);
+		self setv(useOffsetMid,false);
+	}
 
 	//do not change this constval
 	def(_fireTypes) [SLIGHT_ATMOS_FIRE_1,SLIGHT_ATMOS_FIRE_2,SLIGHT_ATMOS_FIRE_3];
@@ -479,6 +507,18 @@ struct(AtmosVirtualLight)
 					if (_p == "setParticleParams") then {
 						private _size = [_p,"size",_v] call le_se_getParticleOption;
 						[_p,"size",_v,_size apply {_x*(_renderZone/2)}] call le_se_setParticleOption;
+
+						#ifdef ENABLE_RANDOMIZATION_COLOR
+						//random color
+						private _colorArr = [_p,"color",_v] call le_se_getParticleOption;
+						["clr %1",_colorArr] call cprint;
+						private _rndClr = [rand(0,1),rand(0,1),rand(0,1),1];
+						_colorArr = _colorArr apply {
+							_rndClr
+							//[_rndClr select 0,_rndClr select 1,_rndClr select 2,_x select 3]
+						};
+						[_p,"color",_v,_colorArr] call le_se_setParticleOption;
+						#endif
 					};
 				};
 				//disable sparks
@@ -512,7 +552,11 @@ struct(AtmosVirtualLight)
 			
 
 		};
-		self setv(effects,[_cfg arg _pos arg _funcHandle] call le_se_createUnmanagedEmitter);
+		private _placePos = _pos;
+		if (self getv(useOffsetMid)) then {
+			_placePos = _placePos vectorAdd [ATMOS_SIZE_HALF,ATMOS_SIZE_HALF,0];
+		};
+		self setv(effects,[_cfg arg _placePos arg _funcHandle] call le_se_createUnmanagedEmitter);
 		self setv(id,_cfg);
 		self setv(_pos,_pos);
 	}
