@@ -58,15 +58,25 @@ noe_client_nat_onUpdate = {
 	{
 		_aObj = [_x] call noe_client_nat_getArea;
 		if (_aObj getv(state) == NAT_LOADING_STATE_LOADED) then {
+#ifdef NET_ATMOS_OPTIMIZATION_RENDER
+			[aopt_cli_processedAreas,_aObj] call arrayDeleteItem;
+#endif
 			[_aObj] call noe_client_nat_unloadArea;
 		};
 	} foreach _toUnload;
 
 	//загружаем новые
+#ifdef NET_ATMOS_OPTIMIZATION_RENDER
+	_listAObj = aopt_cli_processedAreas;
+#endif
 	{
 		_aObj = [_x] call noe_client_nat_getArea;
 		if (_aObj getv(state) <= NAT_LOADING_STATE_NOT_LOADED) then {
 			[_aObj] call noe_client_nat_requestLoad;
+#ifdef NET_ATMOS_OPTIMIZATION_RENDER
+		} else {
+			_listAObj pushBack _aObj;
+#endif
 		};
 	} foreach _toLoad;
 };
@@ -77,6 +87,12 @@ noe_client_nat_getArea = {
 	if isNull(noe_client_nat_areas get _key) then {
 		noe_client_nat_areas set [_key,["AtmosAreaClient",[_areaId]] call struct_alloc];
 	};
+	noe_client_nat_areas get _key
+};
+
+noe_client_nat_getAreaUnsafe = {
+	params ["_areaId"];
+	private _key = str _areaId;
 	noe_client_nat_areas get _key
 };
 
@@ -214,6 +230,40 @@ noe_client_nat_unsubscribeArea = {
 	private _aid = _areaObj getv(areaId);
 	private _upacket = [clientOwner,_aid];
 	rpcSendToServer(ATMOS_RPC_CLIENT_UNSUBSCRIBE_LISTEN_CHUNK,_upacket)
+};
+
+noe_client_nat_const_nearList = [
+	100,
+	10,
+	1
+];
+
+//находит соседний айди [0,0,0] - no offset; [-1,0,0] - x left
+noe_client_nat_nearId = {
+	params ["_id","_xyz"];
+	private _baseId = _id;
+	_xyz params ["_xp","_yp","_zp"];
+	private _cnlst = noe_client_nat_const_nearList;
+	modvar(_id) + (_xp * (_cnlst select 0));
+	if (abs(_baseId - _id) >= 100) exitWith {null}; //out of bounds
+	modvar(_id) + (_yp * (_cnlst select 1));
+	if (abs(_baseId - _id) >= 10) exitWith {null}; //out of bounds
+	modvar(_id) + (_zp * (_cnlst select 2));
+
+	_id
+};
+
+//получает объект AtmosVirtualLight на указанной позиции
+noe_client_getAtmosVirtualLight = {
+	params ["_pos"];
+	private _aId = _pos call atmos_getAreaIdByPos;
+	private _aObj = [_aId] call noe_client_nat_getAreaUnsafe;
+	if isNullVar(_aObj) exitWith {null};
+	private _local = _pos call atmos_getLocalChunkIdInArea;
+	private _id = _local call atmos_encodeChId;
+	private _data = _aObj getv(chunks) get _id;
+	if isNullVar(_data) exitWith {null};
+	_data select NAT_CHUNKDAT_OBJECT
 };
 
 //-------------------------------------------
