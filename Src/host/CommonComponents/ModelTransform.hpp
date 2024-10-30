@@ -88,6 +88,19 @@ model_getPitchBankYaw = {
 	(_vehicle call BIS_fnc_getPitchBank) + [getDir _vehicle]
 };
 
+model_getPitchBankYawAccurate = {
+    private _v = _this select 0;
+
+    private _y = vectorDir _v;
+    private _z = vectorUp _v;
+    private _x1 = _y vectorCrossProduct _z;
+
+    private _ay = -asin(_z select 0);
+    private _az = (_y select 0) atan2 (_x1 select 0);
+    private _ax = (_z select 1) atan2 (_z select 2);
+    [_ax, _ay, _az]
+};
+
 //проверяет является ли направление безопасным
 model_isSafedirTransform = {
 	params ["_vdu_dir"];
