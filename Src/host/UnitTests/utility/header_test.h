@@ -75,14 +75,14 @@ _dummyVal = 1;
 #ifdef MACRO_TEST
 	#ifdef included_macro
 		#if 1
-			_mixedValue = _mixedValue + 1;
+			_mixedValue = _mixedValue + 1;"ifdef-ifdef-if";
 		#endif
 	#endif
 #endif
 #if 1
 	#ifdef included_macro
 		#ifdef MACRO_TEST
-			_mixedValue = _mixedValue + 1;
+			_mixedValue = _mixedValue + 1;"if-ifdef-ifdef";
 		#endif
 	#endif
 #endif
