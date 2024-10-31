@@ -38,16 +38,15 @@ _dummyVal = 1;
 
 //if nested tests
 #if major >= _ONE
-	// #if minor < _TWO
+	#if minor < _TWO
 	// 	#if build == _THREE
-	// 		output(_versionMes, "true")
-	// 	#else
+	 		output(_versionMes, "true")
+	 	#else
 	// 		output(_versionMes, "build error")
 	// 	#endif
 	// #else
-	// 	output(_versionMes, "minor error")
-	// #endif
-	;"noerror";
+	 	output(_versionMes, "minor error")
+	#endif
 #else
 	output(_versionMes, "major error")
 #endif
