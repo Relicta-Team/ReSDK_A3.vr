@@ -39,22 +39,33 @@
 				for "_i" from 1 to 5 do {
 					_p pushBack ([_mob,null,true] call NGOExt_create);
 				};
+			
+				{
+					_c = _p select _forEachIndex;
+					
+					_offGeomObj = [_mob,null,true] call NGOExt_create;
+					_c setvariable ["__offgeomref",_offGeomObj];
+					//auto dispose on deleted ngo source
+					_c objectAddEventHandler ["Deleted",{
+						params ["_c"];
+						deleteVehicle (_c getVariable "__offgeomref");
+					}];
+
+					_c hideObject true;
+					//add offgeom logic for object
+					[player,_c,_offGeomObj] call smd_createOffGeom;
+					
+					_c attachTo [_mob,_x select 2,_x select 0,true];
+					_c setObjectScale (_x select 1);
+				} foreach [
+					["head",0.02,[-0.05,-0.1,0.1]],
+					["spine3",0.03,[0,0,0]],
+					["pelvis",0.03,[0,0,0]],
+					["leftleg",0.02,[0,0,0]],
+					["rightleg",0.02,[0,0,0]]
+				];
 			};
 			
-			{
-				_c = _p select _forEachIndex;
-				/*_c setPosATL (_mob modelToWorld (_mob selectionPosition _x));
-				_c setObjectScale .05;*/
-				_c attachTo [_mob,_x select 2,_x select 0,true];
-				_c setObjectScale (_x select 1);
-				detach _c;
-			} foreach [
-				["head",0.02,[-0.05,-0.1,0.1]],
-				["spine3",0.03,[0,0,0]],
-				["pelvis",0.03,[0,0,0]],
-				["leftleg",0.02,[0,0,0]],
-				["rightleg",0.02,[0,0,0]]
-			];
 		} else {
 			{deleteVehicle _x} foreach _p;
 			_mob setVariable ["__loc_smd_grb_pool",[]];

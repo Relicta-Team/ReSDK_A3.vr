@@ -831,6 +831,33 @@ smd_reloadMobsLighting = {
 	} foreach smd_allInGameMobs;
 };
 
+smd_createOffGeom = {
+	params ["_user","_srcObj","_oGeom"];
+	startAsyncInvoke
+	{
+		params ["_user","_srcObj","_oGeom"];
+		if isNullReference(_user) exitWith {true};
+		if isNullReference(_srcObj) exitWith {true};
+		if isNullReference(_oGeom) exitWith {true};
+
+		//get relative position
+		_srcPos = getPosWorld _srcObj;
+		_srcTransf = [vectorDirVisual _srcObj,vectorUpVisual _srcObj];
+		_srcScale = getObjectScale _srcObj;
+		_localPos = _user worldToModelVisual _srcPos;
+		
+		//hack for disabling roadway lod
+		_oGeom attachTo [player,_localPos];
+		_oGeom setVectorDirAndUp _srcTransf;
+		_oGeom setObjectScale _srcScale;
+		
+		false
+	},
+	{},
+	[_user,_srcObj,_oGeom]
+	endAsyncInvoke
+};
+
 smd_onChatMessage = {
 	params ["_mob","_ctx"];
 	
