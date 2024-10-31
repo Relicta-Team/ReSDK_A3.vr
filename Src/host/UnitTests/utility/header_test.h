@@ -43,7 +43,7 @@ comment("if nested cannot be used")
 #endif
 comment("if nested cannot be used END")
 
-// #define included_macro "not_connected"
+#define included_macro "not_connected"
 
 // //including in nested tests
 // #if __has_include("unexisten_header.h") == 0
@@ -78,6 +78,7 @@ comment("mixed if/ifdef")
 		#endif
 	#endif
 #endif
+comment("mixed if/ifdef END")
 
 comment("ifdef-if macrotest")
 #ifdef MACRO_TEST
