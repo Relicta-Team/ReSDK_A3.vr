@@ -28,27 +28,19 @@ _dummyVal = 1;
 	output(_test1, "false1")
 #endif
 
-#define major 1
-#define minor 2
-#define build 3
+#define version 1
 
 #define _ONE 1
-#define _TWO 2
-#define _THREE 3
 
-//if nested tests
-#if major >= _ONE
-	#if minor < _TWO
-	// 	#if build == _THREE
-	 		output(_versionMes, "true")
-	 	#else
-	// 		output(_versionMes, "build error")
-	// 	#endif
-	// #else
-	 	output(_versionMes, "minor error")
+//if nested cannot be used
+#if version >= _ONE
+	#ifdef version
+		output(_versionMes, "true")
+	#else
+		output(_versionMes, "version undefined")
 	#endif
 #else
-	output(_versionMes, "major error")
+	output(_versionMes, "version error")
 #endif
 
 // #define included_macro "not_connected"
