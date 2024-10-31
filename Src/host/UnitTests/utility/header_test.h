@@ -79,7 +79,13 @@ _dummyVal = 1;
 		#endif
 	#endif
 #endif
-
+#if 1
+	#ifdef included_macro
+		#ifdef MACRO_TEST
+			_mixedValue = _mixedValue + 1;
+		#endif
+	#endif
+#endif
 // //post including define and set
 // #define __endmacro
 
