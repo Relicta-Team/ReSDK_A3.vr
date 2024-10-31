@@ -249,7 +249,9 @@ TEST(MacroIfdefs)
 
 	ASSERT(fileExists(_filePath));
 
-	call compile preprocessFileLineNumbers _filePath;
+	private _pdata = preprocessFileLineNumbers _filePath;
+	traceformat("Preprocessed: %1",_pdata);
+	call compile _pdata;
 	
 	traceformat("Results: %1",[_test1 arg _dummyVal arg _versionMes arg _included_def arg _endmacro])
 
