@@ -245,6 +245,7 @@ TEST(MacroIfdefs)
 	private _dummyVal = 0;
 	private _versionMes = "default";
 	private _included_def = "null";
+	private _mixedValue = 0;
 	private _endmacro = "empty";
 
 	ASSERT(fileExists(_filePath));
@@ -254,7 +255,12 @@ TEST(MacroIfdefs)
 	ASSERT(count _pdata > 0);
 	call compile _pdata;
 	
-	traceformat("Results: %1",[_test1 arg _dummyVal arg _versionMes arg _included_def arg _endmacro])
+	traceformat("Result _test1: %1",_test1)
+	traceformat("Result _dummyVal: %1",_dummyVal)
+	traceformat("Result _versionMes: %1",_versionMes)
+	traceformat("Result _included_def: %1",_included_def)
+	traceformat("Result _mixedValue: %1",_mixedValue)
+	traceformat("Result _endmacro: %1",_endmacro)
 
 	ASSERT_EQ(_dummyVal,1);
 	ASSERT_EQ(_test1,"true");

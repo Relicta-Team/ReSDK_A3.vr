@@ -28,28 +28,28 @@ _dummyVal = 1;
 	output(_test1, "false1")
 #endif
 
-// #define major 1
-// #define minor 2
-// #define build 3
+#define major 1
+#define minor 2
+#define build 3
 
-// #define _ONE 1
-// #define _TWO 2
-// #define _THREE 3
+#define _ONE 1
+#define _TWO 2
+#define _THREE 3
 
-// //if nested tests
-// #if major >= _ONE
-// 	#if minor < _TWO
-// 		#if build ==_THREE
-// 			output(_versionMes, "true")
-// 		#else
-// 			output(_versionMes, "build error")
-// 		#endif
-// 	#else
-// 		output(_versionMes, "minor error")
-// 	#endif
-// #else
-// 	output(_versionMes, "major error")
-// #endif
+//if nested tests
+#if major >= _ONE
+	#if minor < _TWO
+		#if build == _THREE
+			output(_versionMes, "true")
+		#else
+			output(_versionMes, "build error")
+		#endif
+	#else
+		output(_versionMes, "minor error")
+	#endif
+#else
+	output(_versionMes, "major error")
+#endif
 
 // #define included_macro "not_connected"
 
@@ -62,6 +62,16 @@ _dummyVal = 1;
 // #endif
 
 // output(_included_def, included_macro)
+
+//mixed if/ifdef
+// #if 1
+// 	#ifdef included_macro
+// 		#if 0
+// 		#else
+// 			_mixedValue = 1;
+// 		#endif
+// 	#endif
+// #endif
 
 // //post including define and set
 // #define __endmacro
