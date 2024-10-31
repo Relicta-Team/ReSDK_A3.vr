@@ -247,8 +247,12 @@ TEST(MacroIfdefs)
 	private _included_def = "null";
 	private _endmacro = "empty";
 
+	ASSERT(fileExists(_filePath));
+
 	call compile preprocessFileLineNumbers _filePath;
 	
+	traceformat("Results: %1",[_test1 arg _dummyVal arg _versionMes arg _included_def arg _endmacro])
+
 	ASSERT_EQ(_dummyVal,1);
 	ASSERT_EQ(_test1,"true");
 	ASSERT_EQ(_versionMes,"true");
