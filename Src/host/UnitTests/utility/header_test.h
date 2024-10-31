@@ -31,17 +31,16 @@ comment("ifdef nested tests")
 comment("ifdef nested tests END")
 
 #define version 1
-
 #define _ONE 1
 
-//if nested cannot be used
-comment("if nested cannot be used")
+//if simple
+comment("if simple")
 #if version >= _ONE
 	output(_versionMes, "true")
 #else
 	output(_versionMes, "version error")
 #endif
-comment("if nested cannot be used END")
+comment("if simple END")
 
 #define included_macro "not_connected"
 
@@ -60,6 +59,47 @@ comment("including in nested tests")
 comment("including in nested tests END")
 
 output(_included_def, included_macro)
+
+//second checks multilevel
+#define min_ 1
+#define maj_ 2
+#define bld_ 3
+
+comment("mulInclAll")
+#if __has_include("nofile.h") == 0
+	comment("mulInclAll 0")
+	#if __has_include("unexisten_header.h") == 0
+		comment("mulInclAll 1")
+		#ifndef RANDOM_NAME_MACRO
+			comment("mulInclAll 2")
+			#if __has_include("undefined_func.sqf") == 0
+				comment("mulInclAll 3")
+				#ifdef included_macro
+					comment("mulInclAll 4")
+					#if min_ >= 1
+						comment("mulInclAll 5")
+						#if maj_ < bld_
+							comment("mulInclAll 6")
+							#if bld_ == 3
+								output(_mulInclAll, "success")
+							#endif
+							comment("mulInclAll 7")
+						#endif
+						comment("mulInclAll 8")
+					#endif
+					comment("mulInclAll 9")
+				#endif
+				comment("mulInclAll 10")
+			#endif
+			comment("mulInclAll 11")
+		#endif
+		comment("mulInclAll 12")
+	#endif
+	comment("mulInclAll 13")
+#endif
+comment("mulInclAll END")
+
+
 
 //mixed if/ifdef
 comment("mixed if/ifdef")
