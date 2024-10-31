@@ -266,7 +266,7 @@ TEST(MacroIfdefs)
 	ASSERT_EQ(_test1,"true");
 	ASSERT_EQ(_versionMes,"true");
 	ASSERT_EQ(_included_def,"connected");
-	ASSERT_EQ(_mixedValue,4);
+	ASSERT_EQ(_mixedValue,6);
 	ASSERT_EQ(_endmacro,"ok");
 
 }

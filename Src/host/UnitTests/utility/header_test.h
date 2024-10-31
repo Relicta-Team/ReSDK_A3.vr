@@ -129,6 +129,28 @@ comment("if-ifdef macrotest")
 comment("if-ifdef macrotest END")
 
 
+comment("multi-mixed if/ifdef")
+#ifdef included_macro
+	comment("multi-mixed if/ifdef 0")
+	#if 1
+		comment("multi-mixed if/ifdef 1")
+		#ifdef MACRO_TEST
+			comment("multi-mixed if/ifdef 2")
+			#if 1
+				comment("multi-mixed if/ifdef 3")
+				#ifdef MACRO_TEST_INTERNAL
+					_mixedValue = _mixedValue + 1;"multi-mixed";
+				#endif
+				comment("multi-mixed if/ifdef 4")
+			#endif
+			comment("multi-mixed if/ifdef 5")
+		#endif
+		comment("multi-mixed if/ifdef 6")
+	#endif
+	comment("multi-mixed if/ifdef 7")
+#endif
+comment("multi-mixed if/ifdef END")
+
 // //post including define and set
 // #define __endmacro
 
