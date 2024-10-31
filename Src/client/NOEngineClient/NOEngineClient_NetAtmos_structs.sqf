@@ -43,6 +43,7 @@ struct(AtmosAreaClient)
 
 	def(chunks) null; //key:localid,value vec2(cfg,obj)
 
+	def(_optimizeDirty) null
 	def(_blockCoords) null //локальные координаты блоков по z осям
 	def(_regions) null
 
@@ -56,6 +57,8 @@ struct(AtmosAreaClient)
 		self setv(_blockCoords,_lst apply {[]});
 
 		self setv(_regions,_lst apply {[]});
+
+		self setv(_optimizeDirty,_lst apply {true});
 	}
 
 	//регистрация|перерегистрация эффектов в зоне
@@ -69,6 +72,8 @@ struct(AtmosAreaClient)
 			self getv(chunks) set [_locid,NAT_CHUNKDAT_NEW(_light)];
 			private _coord = _locid call atmos_decodeChId;
 			(self getv(_blockCoords) select (_coord select 2)) pushBack _coord;
+
+			self getv(_optimizeDirty) set [(_coord select 2)-1,true];
 		};
 
 		if (self callv(isLoaded)) then {
@@ -85,6 +90,8 @@ struct(AtmosAreaClient)
 			self getv(chunks) deleteAt _locid;
 			private _coord = _locid call atmos_decodeChId;
 			[(self getv(_blockCoords) select (_coord select 2)),_coord] call arrayDeleteItem;
+
+			self getv(_optimizeDirty) set [(_coord select 2)-1,true];
 		};
 	}
 
@@ -291,7 +298,7 @@ struct(AtmosAreaClient)
 		#endif
 		//_level list<Z-level>
 		params ["_levels"]; //Если параметр _level не равен null то это полная перегрузка зоны
-		traceformat("Start optimization of level %1",ifcheck(isNullVar(_level),"ALL",_level))
+		traceformat("Start optimization of level %1",ifcheck(isNullVar(_levels),"ALL",_levels))
 		/*
 			1. группируем зоны по z
 			2. проходим все z уровни
@@ -305,23 +312,40 @@ struct(AtmosAreaClient)
 		//collect zposes
 		private _chMap = self getv(chunks);
 		
-
-		private _chs = (self callv(getChunkIdList)) apply {[_x call atmos_decodeChId,_x]};
-		traceformat("  --- all objects count: %1",count _chs)
 		private _alist = [];
 		_alist resize (ATMOS_AREA_SIZE);
 		_alist = _alist apply {[]};
 		private _curZ = null;
 		private _obj = null;
 		private _mapAssoc = createhashMap;
-		{
-			_x params ["_locPos","_chidloc"];
-			_curZ = (_locpos select 2)-1;
-			(_alist select _curZ) pushBack _locPos;
-			_obj = _chMap get _chidloc select NAT_CHUNKDAT_OBJECT;
-			_obj callv(resetVars);
-			_mapAssoc set [_locPos,_obj];
-		} foreach _chs;
+		if isNullVar(_levels) then {
+			private _chs = (self callv(getChunkIdList)) apply {[_x call atmos_decodeChId,_x]};
+			traceformat("  --- all objects count: %1",count _chs)
+
+			//full load
+			{
+				_x params ["_locPos","_chidloc"];
+				_curZ = (_locpos select 2);
+				
+				(_alist select (_curZ-1)) pushBack _locPos;
+				_obj = _chMap get _chidloc select NAT_CHUNKDAT_OBJECT;
+				_obj callv(resetVars);
+				_mapAssoc set [_locPos,_obj];
+			} foreach _chs;
+		} else {
+			{
+				private _lvlList = self getv(_blockCoords) select (_x -1);
+				_lvllist sort true;
+				_alist set [_x-1,_lvllist];
+				{
+					_obj = _chMap get (_x call atmos_encodeChId) select NAT_CHUNKDAT_OBJECT;
+					_obj callv(resetVars);
+					_mapAssoc set [_x,_obj];
+					;false
+				} count _lvllist;
+			} foreach _levels;
+		};
+		
 		
 		private _obj = null;
 
@@ -425,7 +449,9 @@ struct(AtmosAreaClient)
 			private _z = _foreachIndex + 1;
 			//traceformat(" ----- process zlevel: %1; count %2",_z arg count _x)
 			if (count _x > 0) then {
-				_x sort true; //by near to far
+				if isNullVar(_levels) then {
+					_x sort true; //by near to far
+				};
 				[_z,_x] call _processZOpt;
 			};
 		} foreach _alist;

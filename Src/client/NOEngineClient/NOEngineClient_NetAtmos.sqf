@@ -77,6 +77,18 @@ noe_client_nat_onUpdate = {
 		} else {
 			_listAObj pushBack _aObj;
 #endif
+		} else {
+			private _odList = _aObj getv(_optimizeDirty);
+			private _optList = [];
+			{
+				if (_x) then {
+					_odList set [_foreachIndex,false];
+					_optList pushBack (_foreachIndex + 1);
+				};
+			} foreach _odList;
+			if (count _optList > 0) then {
+				_aObj callp(optimizeProcess,_optList);
+			};
 		};
 	} foreach _toLoad;
 };
@@ -156,7 +168,7 @@ noe_client_nat_onLoadArea = {
 		[_aObj,_addList,_isUpdate] call noe_client_nat_loadArea;
 		[_aObj,_remList] call noe_client_nat_deleteChunks;
 		
-		_aObj callp(optimizeProcess, null);
+		//_aObj callp(optimizeProcess, null);
 
 		if (_isUpdate) exitWith {};
 
