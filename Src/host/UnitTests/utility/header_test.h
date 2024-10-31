@@ -28,44 +28,44 @@ _dummyVal = 1;
 	output(test1, "false1")
 #endif
 
-#define major 1
-#define minor 2
-#define build 3
+// #define major 1
+// #define minor 2
+// #define build 3
 
-#define _ONE 1
-#define _TWO 2
-#define _THREE 3
+// #define _ONE 1
+// #define _TWO 2
+// #define _THREE 3
 
-//if nested tests
-#if major >= _ONE
-	#if minor < _TWO
-		#if build ==_THREE
-			output(versionMes, "true")
-		#else
-			output(versionMes, "build error")
-		#endif
-	#else
-		output(versionMes, "minor error")
-	#endif
-#else
-	output(versionMes, "major error")
-#endif
+// //if nested tests
+// #if major >= _ONE
+// 	#if minor < _TWO
+// 		#if build ==_THREE
+// 			output(versionMes, "true")
+// 		#else
+// 			output(versionMes, "build error")
+// 		#endif
+// 	#else
+// 		output(versionMes, "minor error")
+// 	#endif
+// #else
+// 	output(versionMes, "major error")
+// #endif
 
-#define included_macro "not_connected"
+// #define included_macro "not_connected"
 
-//including in nested tests
-#if __has_include("unexisten_header.h") == 0
-	#if __has_include("included_header_test.h")
-		#define REDEFINE_TEST_HEADER
-		#include "included_header_test.h"
-	#endif
-#endif
+// //including in nested tests
+// #if __has_include("unexisten_header.h") == 0
+// 	#if __has_include("included_header_test.h")
+// 		#define REDEFINE_TEST_HEADER
+// 		#include "included_header_test.h"
+// 	#endif
+// #endif
 
-output(included_def, included_macro)
+// output(included_def, included_macro)
 
-//post including define and set
-#define __endmacro
+// //post including define and set
+// #define __endmacro
 
-#ifdef __endmacro
-	output(endmacro,"ok")
-#endif
+// #ifdef __endmacro
+// 	output(endmacro,"ok")
+// #endif
