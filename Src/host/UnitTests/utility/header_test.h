@@ -69,7 +69,7 @@ _dummyVal = 1;
 
 #ifdef MACRO_TEST
 	#if 1
-		_mixedValue = _mixedValue + 1;
+		_mixedValue = _mixedValue + 1;"ifdef-if";
 	#endif
 #endif
 #ifdef MACRO_TEST
@@ -84,6 +84,11 @@ _dummyVal = 1;
 		#ifdef MACRO_TEST
 			_mixedValue = _mixedValue + 1;"if-ifdef-ifdef";
 		#endif
+	#endif
+#endif
+#if 1
+	#ifdef included_macro
+		_mixedValue = _mixedValue + 1;"if-ifdef";
 	#endif
 #endif
 // //post including define and set
