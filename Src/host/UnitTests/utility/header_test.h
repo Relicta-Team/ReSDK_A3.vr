@@ -45,15 +45,21 @@ comment("if nested cannot be used END")
 
 #define included_macro "not_connected"
 
-// //including in nested tests
-// #if __has_include("unexisten_header.h") == 0
-// 	#if __has_include("included_header_test.h")
-// 		#define REDEFINE_TEST_HEADER
-// 		#include "included_header_test.h"
-// 	#endif
-// #endif
+//including in nested tests
+comment("including in nested tests")
+#if __has_include("unexisten_header.h") == 0
+	comment("including in nested tests 0")
+	#if __has_include("included_header_test.h")
+		comment("including in nested tests 1")
+		#define REDEFINE_TEST_HEADER
+		#include "included_header_test.h"
+		comment("including in nested tests 2")
+	#endif
+	comment("including in nested tests 3")
+#endif
+comment("including in nested tests END")
 
-// output(_included_def, included_macro)
+output(_included_def, included_macro)
 
 //mixed if/ifdef
 comment("mixed if/ifdef")
