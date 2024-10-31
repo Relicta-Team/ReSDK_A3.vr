@@ -58,6 +58,12 @@ chatprint = {
 			//removing all styles (prints only text)
 			_text = htmlToString(_text);
 		};
+		//null text check
+		if (str parsetext _text == "") exitWith {
+			errorformat("chatprint(): invalid text style (style error): %1",_text);
+			[_errorMessage,"system"] call chatPrint;
+			_text = sanitize(_text);
+		};
 		
 		//!Усложнённая проверка. Выше просто подсчитываем < и >
 		//compare openers,closers
