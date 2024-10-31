@@ -236,3 +236,23 @@ TEST(FileSystem_Pathes)
 	} foreach _files;
 	ASSERT(_required in _files);
 }
+
+TEST(MacroIfdefs)
+{
+	private _filePath = "src\host\UnitTests\utility\header_test.h";
+	
+	private _test1 = "not_overriden";
+	private _dummyVal = 0;
+	private _versionMes = "default";
+	private _included_def = "null";
+	private _endmacro = "empty";
+
+	call compile preprocessFileLineNumbers _filePath;
+	
+	ASSERT_EQ(_dummyVal,1);
+	ASSERT_EQ(_test1,"true");
+	ASSERT_EQ(_versionMes,"true");
+	ASSERT_EQ(_included_def,"connected");
+	ASSERT_EQ(_endmacro,"ok");
+
+}
