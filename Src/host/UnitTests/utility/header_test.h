@@ -6,7 +6,7 @@
 #define MACRO_TEST 1
 #define MACRO_TEST_INTERNAL 2
 #define MACRO_TEST_INTERNAL2 3
-#define output(varname,_val) _##varname = _val;
+#define output(_varname,_val) _varname = _val;
 
 _dummyVal = 1;
 
@@ -14,18 +14,18 @@ _dummyVal = 1;
 #ifdef MACRO_TEST
 	// #ifdef MACRO_TEST_INTERNAL
 	// 	#ifdef MACRO_TEST_INTERNAL2
-	// 		output(test1, "true")
+	// 		output(_test1, "true")
 	// 	#else
 	// 		_dummyVal = 2;
-	// 		output(test1, "false3")
+	// 		output(_test1, "false3")
 	// 	#endif
 	// #else
 		_dummyVal = 3;
-		output(test1, "false2")
+		output(_test1, "false2")
 	//#endif
 #else
 	_dummyVal = 4;
-	output(test1, "false1")
+	output(_test1, "false1")
 #endif
 
 // #define major 1
@@ -40,15 +40,15 @@ _dummyVal = 1;
 // #if major >= _ONE
 // 	#if minor < _TWO
 // 		#if build ==_THREE
-// 			output(versionMes, "true")
+// 			output(_versionMes, "true")
 // 		#else
-// 			output(versionMes, "build error")
+// 			output(_versionMes, "build error")
 // 		#endif
 // 	#else
-// 		output(versionMes, "minor error")
+// 		output(_versionMes, "minor error")
 // 	#endif
 // #else
-// 	output(versionMes, "major error")
+// 	output(_versionMes, "major error")
 // #endif
 
 // #define included_macro "not_connected"
@@ -61,11 +61,11 @@ _dummyVal = 1;
 // 	#endif
 // #endif
 
-// output(included_def, included_macro)
+// output(_included_def, included_macro)
 
 // //post including define and set
 // #define __endmacro
 
 // #ifdef __endmacro
-// 	output(endmacro,"ok")
+// 	output(_endmacro,"ok")
 // #endif
