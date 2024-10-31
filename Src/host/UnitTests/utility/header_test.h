@@ -197,9 +197,23 @@ comment("multi-mixed if/ifdef")
 #endif
 comment("multi-mixed if/ifdef END")
 
-// //post including define and set
-// #define __endmacro
+comment("nocomments test")
+#define _simpleOne 2.34
+#if 1
+	#ifdef included_macro
+		#if _simpleOne == 2.34
+			#ifdef MACRO_TEST
+				#ifdef MACRO_TEST_INTERNAL
+					//post including define and set
+					#define __endmacro
+				#endif
+			#endif
+		#endif
+	#endif
+#endif
 
-// #ifdef __endmacro
-// 	output(_endmacro,"ok")
-// #endif
+comment("nocomments test END")
+
+#ifdef __endmacro
+ 	output(_endmacro,"ok")
+#endif
