@@ -34,11 +34,7 @@ _dummyVal = 1;
 
 //if nested cannot be used
 #if version >= _ONE
-	#ifdef version
-		output(_versionMes, "true")
-	#else
-		output(_versionMes, "version undefined")
-	#endif
+	output(_versionMes, "true")
 #else
 	output(_versionMes, "version error")
 #endif
@@ -58,12 +54,24 @@ _dummyVal = 1;
 //mixed if/ifdef
 // #if 1
 // 	#ifdef included_macro
-// 		#if 0
+// 		#ifdef MACRO_TEST
 // 		#else
 // 			_mixedValue = 1;
 // 		#endif
 // 	#endif
 // #endif
+#ifdef MACRO_TEST
+	#if 1
+		_mixedValue = _mixedValue + 1;
+	#endif
+#endif
+#ifdef MACRO_TEST
+	#ifdef included_macro
+		#if 1
+			_mixedValue = _mixedValue + 1;
+		#endif
+	#endif
+#endif
 
 // //post including define and set
 // #define __endmacro
