@@ -156,6 +156,8 @@ noe_client_nat_onLoadArea = {
 		[_aObj,_addList,_isUpdate] call noe_client_nat_loadArea;
 		[_aObj,_remList] call noe_client_nat_deleteChunks;
 		
+		_aObj callp(optimizeProcess, null);
+
 		if (_isUpdate) exitWith {};
 
 		_aObj setv(state,NAT_LOADING_STATE_LOADED);
@@ -205,7 +207,6 @@ noe_client_nat_loadArea = {
 
 	if (!_isUpdateFlag) then {
 		_aObj call ["loadArea"];
-		//_aObj callp(optimizeProcess, null);
 	};
 };
 
@@ -265,6 +266,14 @@ noe_client_getAtmosVirtualLight = {
 	private _data = _aObj getv(chunks) get _id;
 	if isNullVar(_data) exitWith {null};
 	_data select NAT_CHUNKDAT_OBJECT
+};
+
+noe_client_getAtmosArea = {
+	params ["_pos"];
+	private _aId = _pos call atmos_getAreaIdByPos;
+	private _aObj = [_aId] call noe_client_nat_getAreaUnsafe;
+	if isNullVar(_aObj) exitWith {null};
+	_aObj
 };
 
 //-------------------------------------------

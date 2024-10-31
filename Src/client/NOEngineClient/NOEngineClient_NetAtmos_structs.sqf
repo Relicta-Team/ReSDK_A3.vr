@@ -67,6 +67,8 @@ struct(AtmosAreaClient)
 			self getv(chunks) get _locid set [NAT_CHUNKDAT_CFG,_light];
 		} else {
 			self getv(chunks) set [_locid,NAT_CHUNKDAT_NEW(_light)];
+			private _coord = _locid call atmos_decodeChId;
+			(self getv(_blockCoords) select (_coord select 2)) pushBack _coord;
 		};
 
 		if (self callv(isLoaded)) then {
@@ -79,8 +81,11 @@ struct(AtmosAreaClient)
 	{
 		params ["_locid"];
 		private _chDat = self getv(chunks) GET _locid;
-
-		self getv(chunks) deleteAt _locid;
+		if !isNullVar(_chDat) then {
+			self getv(chunks) deleteAt _locid;
+			private _coord = _locid call atmos_decodeChId;
+			[(self getv(_blockCoords) select (_coord select 2)),_coord] call arrayDeleteItem;
+		};
 	}
 
 	//загружает визуал зоны
@@ -284,8 +289,8 @@ struct(AtmosAreaClient)
 		#ifndef ENABLE_OPTIMIZATION
 		if (true) exitWith {};
 		#endif
-		//_level vec3
-		params ["_level"]; //Если параметр _level не равен null то это полная перегрузка зоны
+		//_level list<Z-level>
+		params ["_levels"]; //Если параметр _level не равен null то это полная перегрузка зоны
 		traceformat("Start optimization of level %1",ifcheck(isNullVar(_level),"ALL",_level))
 		/*
 			1. группируем зоны по z
@@ -297,16 +302,18 @@ struct(AtmosAreaClient)
 			мы можем делать доп оптимизацию по z
 			если в регионе сверху есть регион такого же уровня
 		*/
+		//collect zposes
+		private _chMap = self getv(chunks);
+		
+
 		private _chs = (self callv(getChunkIdList)) apply {[_x call atmos_decodeChId,_x]};
 		traceformat("  --- all objects count: %1",count _chs)
 		private _alist = [];
 		_alist resize (ATMOS_AREA_SIZE);
 		_alist = _alist apply {[]};
 		private _curZ = null;
-		//collect zposes
-		private _chMap = self getv(chunks);
-		private _mapAssoc = createhashMap;
 		private _obj = null;
+		private _mapAssoc = createhashMap;
 		{
 			_x params ["_locPos","_chidloc"];
 			_curZ = (_locpos select 2)-1;
@@ -450,8 +457,10 @@ struct(AtmosVirtualLight)
 
 	//do not change this constval
 	def(_fireTypes) [SLIGHT_ATMOS_FIRE_1,SLIGHT_ATMOS_FIRE_2,SLIGHT_ATMOS_FIRE_3];
+	def(_smokeTypes) [SLIGHT_ATMOS_SMOKE_1,SLIGHT_ATMOS_SMOKE_2,SLIGHT_ATMOS_SMOKE_3];
 	//check if atmos if firetype
 	def(isFireType) {(self getv(id)) in (self getv(_fireTypes))}
+	def(isSmokeType) {(self getv(id)) in (self getv(_smokeTypes))}
 
 	def(init)
 	{
@@ -659,7 +668,13 @@ struct(AtmosVirtualLight)
 	def(isSameCfgType)
 	{
 		params ["_check"];
-		(_check getv(id)) == (self getv(id))
+		//(_check getv(id)) == (self getv(id))
+		private _equal = false;
+		call {
+			if ((self callv(isFireType)) && {_check callv(isFireType)}) exitWith {_equal = true};
+			if ((self callv(isSmokeType)) && {_check callv(isSmokeType)}) exitWith {_equal = true};
+		};
+		_equal
 	}
 
 	def(str)
