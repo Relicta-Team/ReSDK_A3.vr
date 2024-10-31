@@ -12,17 +12,17 @@ _dummyVal = 1;
 
 //ifdef nested tests
 #ifdef MACRO_TEST
-	// #ifdef MACRO_TEST_INTERNAL
+	#ifdef MACRO_TEST_INTERNAL
 	// 	#ifdef MACRO_TEST_INTERNAL2
 	// 		output(_test1, "true")
 	// 	#else
-	// 		_dummyVal = 2;
-	// 		output(_test1, "false3")
+	 		_dummyVal = 2;
+	 		output(_test1, "false3")
 	// 	#endif
-	// #else
+	#else
 		_dummyVal = 3;
 		output(_test1, "false2")
-	//#endif
+	#endif
 #else
 	_dummyVal = 4;
 	output(_test1, "false1")
