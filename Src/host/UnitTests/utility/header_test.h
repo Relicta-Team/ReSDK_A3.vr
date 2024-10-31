@@ -52,14 +52,21 @@ _dummyVal = 1;
 // output(_included_def, included_macro)
 
 //mixed if/ifdef
-// #if 1
-// 	#ifdef included_macro
-// 		#ifdef MACRO_TEST
-// 		#else
-// 			_mixedValue = 1;
-// 		#endif
-// 	#endif
-// #endif
+#ifdef included_macro
+	#ifndef MACRO_TEST
+	#else
+		#ifdef included_macro
+			#ifdef MACRO_TEST
+				#ifdef MACRO_TEST_INTERNAL
+					#ifdef MACRO_TEST_INTERNAL2
+						_mixedValue = 1;
+					#endif
+				#endif
+			#endif
+		#endif
+	#endif
+#endif
+
 #ifdef MACRO_TEST
 	#if 1
 		_mixedValue = _mixedValue + 1;
