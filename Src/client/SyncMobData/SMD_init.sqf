@@ -836,18 +836,19 @@ smd_createOffGeom = {
 	startAsyncInvoke
 	{
 		params ["_user","_srcObj","_oGeom"];
+		
 		if isNullReference(_user) exitWith {true};
 		if isNullReference(_srcObj) exitWith {true};
 		if isNullReference(_oGeom) exitWith {true};
 
 		//get relative position
-		_srcPos = getPosWorld _srcObj;
+		_srcPos = asltoatl getPosWorld _srcObj;
 		_srcTransf = [vectorDirVisual _srcObj,vectorUpVisual _srcObj];
 		_srcScale = getObjectScale _srcObj;
 		_localPos = _user worldToModelVisual _srcPos;
 		
 		//hack for disabling roadway lod
-		_oGeom attachTo [player,_localPos];
+		_oGeom attachTo [_user,_localPos];
 		_oGeom setVectorDirAndUp _srcTransf;
 		_oGeom setObjectScale _srcScale;
 		
