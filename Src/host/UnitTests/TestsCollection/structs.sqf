@@ -386,14 +386,14 @@ TEST(StructExitWithError)
 {
 	private _tdecl = [
 		["#type","TestStruct"],
-		["#str",_self get "#type"],
+		["#str",{_self get "#type"}],
 		["func", {params ["_par"]; if (true) exitWith {0}; 1}]
 	];
 	private _obj = createhashmapobject [_tdecl,[]];
 	traceformat("type: %1",_obj)
 	private _rval = _obj call ["func",[5]];
 	traceformat("rval: %1",_rval)
-	ASSERT_EQ(_rval,0)
+	ASSERT_EQ(_rval,0);
 }
 
 
