@@ -390,7 +390,7 @@ TEST(StructExitWith)
 		["return_bool",{
 			true
 		}],
-		["intval",1],
+		["intval",9876],
 		["func", {
 			params ["_par"]; 
 			if (_self call ["return_bool"]) exitWith {
@@ -405,7 +405,7 @@ TEST(StructExitWith)
 	traceformat("type: %1",_obj)
 	private _rval = _obj call ["func",["test"]];
 	traceformat("rval: %1",_rval)
-	ASSERT_EQ(_rval,1234);
+	ASSERT_EQ(_rval,"val is 9876 +strval:9876");
 }
 
 
