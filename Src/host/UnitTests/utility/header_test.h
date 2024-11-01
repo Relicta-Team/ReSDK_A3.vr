@@ -198,10 +198,10 @@ comment("multi-mixed if/ifdef")
 comment("multi-mixed if/ifdef END")
 
 comment("nocomments test")
-#define _simpleOne (2.34)
+#define _simpleOne 234
 #if 1
 	#ifdef included_macro
-		#if _simpleOne == (2.34)
+		#if _simpleOne == 234
 			#ifdef MACRO_TEST
 				#ifdef MACRO_TEST_INTERNAL
 					//post including define and set
