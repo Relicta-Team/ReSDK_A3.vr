@@ -382,7 +382,7 @@ TEST(LockingEventHandlers)
 	delete(_obj);
 }
 
-TEST(StructExitWithError)
+TEST(StructExitWith)
 {
 	private _tdecl = [
 		["#type","TestStruct"],
@@ -390,9 +390,14 @@ TEST(StructExitWithError)
 		["return_bool",{
 			true
 		}],
+		["intval",1],
 		["func", {
 			params ["_par"]; 
-			if (_self call ["return_bool"]) exitWith {1234}; 
+			if (_self call ["return_bool"]) exitWith {
+				private _iv = _self get "intval";
+				(format["val is %1",_self get "intval"])
+				+ " +strval:"+(str _iv);
+			}; 
 			5678
 		}]
 	];
@@ -400,7 +405,7 @@ TEST(StructExitWithError)
 	traceformat("type: %1",_obj)
 	private _rval = _obj call ["func",["test"]];
 	traceformat("rval: %1",_rval)
-	ASSERT_EQ(_rval,0);
+	ASSERT_EQ(_rval,1234);
 }
 
 
