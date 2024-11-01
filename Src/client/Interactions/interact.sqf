@@ -304,6 +304,29 @@ interact_getRayCastData = {
 	[_ins select 0 select 2,asltoatl (_ins select 0 select 0),_ins select 0 select 1]
 };
 
+interact_internal_onscreenObjs = [];
+
+interact_addOnScreenCapturedObject = {
+	params ["_wobj"];
+	interact_internal_onscreenObjs pushBackUnique _wobj;
+};
+
+interact_getOnSceenCapturedObject = {
+	params ["_reservedParam1","_reservedParam2"];
+	private _ret = objNull;
+	{
+		//for get onscreen point use worldtoscreen
+		if (typeOf _x == BASIC_MOB_TYPE) then {
+			//for mob use selection position
+		} else {
+			/*
+				todo
+			*/
+		};
+	} foreach interact_internal_onscreenObjs;
+	_ret
+};
+
 // Проверяет дистанцию до позиции - может ли взаимодействовать по дистанции
 interact_checkPosition = {
 	(_this distance getCenterMobPos(player)) <= INTERACT_DISTANCE
