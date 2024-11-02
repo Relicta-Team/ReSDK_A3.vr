@@ -4,7 +4,7 @@
 // ======================================================
 
 #include <..\..\host\engine.hpp>
-
+#include <..\..\host\struct.hpp>
 
 
 //including modules
@@ -13,6 +13,7 @@
 //#include "Effects\Effects_init.sqf"
 #include "RenderDistance.sqf"
 
+#include "Render_debug.sqf"
 
 //call render_dist_init;
 
