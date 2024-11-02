@@ -177,6 +177,9 @@ func(attackOtherObj)
 	private _delay_next_attack = getSelf(rta);
 
 	callSelf(getAttackerWeapon) params ["_attWeapon","_attItem"];
+	if isTypeOf(_attWeapon,WeapGrabbedHuman) exitWith {
+		callSelfParams(localSay,"Схваченным не ударить." arg "error");
+	};
 	// Не нашлось подходящего оружия или выбранным нельзя атаковать
 	if equals(_attWeapon,nullPtr) exitWith {
 		private _mes = pick["А атаковать-то нечем","А чем атаковать?","НЕЧЕМ ПРОВЕСТИ АТАКУ!"];
@@ -295,6 +298,9 @@ func(attackOtherMob)
 	};
 
 	callSelf(getAttackerWeapon) params ["_attWeapon","_attItem"];
+	if isTypeOf(_attWeapon,WeapGrabbedHuman) exitWith {
+		callSelfParams(localSay,"Схваченным не ударить." arg "error");
+	};
 	// Не нашлось подходящего оружия или выбранным нельзя атаковать
 	if equals(_attWeapon,nullPtr) exitWith {
 		private _mes = pick["А атаковать-то нечем","А чем атаковать?","НЕЧЕМ ПРОВЕСТИ АТАКУ!"];
@@ -562,6 +568,9 @@ func(attackSelf)
 	};
 
 	callSelf(getAttackerWeapon) params ["_attWeapon","_attItem"];
+	if isTypeOf(_attWeapon,WeapGrabbedHuman) exitWith {
+		callSelfParams(localSay,"Схваченным не ударить." arg "error");
+	};
 	// Не нашлось подходящего оружия или выбранным нельзя атаковать
 	if equals(_attWeapon,nullPtr) exitWith {
 		private _mes = pick["А атаковать-то нечем","А чем атаковать?","НЕЧЕМ ПРОВЕСТИ АТАКУ!"];
