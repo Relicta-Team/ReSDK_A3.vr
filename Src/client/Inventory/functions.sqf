@@ -1348,6 +1348,11 @@ inventory_onExamine = {
 		if (call inventoryIsInContainerWidgetsZone) exitWith {};
 
 		(objnull call interact_getMouseIntersectData) params ["_obj","_pos"];
+		private _probOnScr = [true,false] call interact_getOnSceenCapturedObject;
+		if !isNullVar(_probOnScr) then {
+			_obj = _probOnScr;
+			_posAtl = getposatl _obj;
+		};
 		if isNullReference(_obj) exitWith {};
 		//fix after Legacy 0.5.146:
 		//На данный момент обычный осмотр доступен на неограниченной дистанции..
