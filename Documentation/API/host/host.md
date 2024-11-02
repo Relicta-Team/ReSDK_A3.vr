@@ -2426,6 +2426,18 @@ Replaced value:
 createHashMapFromArray
 ```
 File: [host\engine.hpp at line 396](../../../Src/host/engine.hpp#L396)
+## toMap
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+hashMapNewArgs
+```
+File: [host\engine.hpp at line 397](../../../Src/host/engine.hpp#L397)
 ## prop(varname)
 
 Type: constant
@@ -3252,11 +3264,23 @@ Replaced value:
 if (_this in (values)) exitWith
 ```
 File: [host\engine.hpp at line 565](../../../Src/host/engine.hpp#L565)
-## soundDataDef(path)
+## soundPathPrep(v)
 
 Type: constant
 
 Description: sound engine
+- Param: v
+
+Replaced value:
+```sqf
+((v)splitString "/" joinString "\")
+```
+File: [host\engine.hpp at line 569](../../../Src/host/engine.hpp#L569)
+## soundDataDef(path)
+
+Type: constant
+
+Description: 
 - Param: path
 
 Replaced value:
@@ -3268,7 +3292,7 @@ File: [host\engine.hpp at line 570](../../../Src/host/engine.hpp#L570)
 
 Type: constant
 
-Description: sound engine
+Description: 
 - Param: path
 - Param: pithmin
 - Param: pithmax
@@ -4204,14 +4228,14 @@ File: [host\engine.hpp at line 891](../../../Src/host/engine.hpp#L891)
 
 Type: Variable
 
-Description: intialize loot only after structs loaded
+Description: craft table init
 
 
 Initial value:
 ```sqf
 1
 ```
-File: [host\init.sqf at line 98](../../../Src/host/init.sqf#L98)
+File: [host\init.sqf at line 109](../../../Src/host/init.sqf#L109)
 # keyboard.hpp
 
 ## KEY_ESCAPE
@@ -8694,7 +8718,7 @@ Description:
 
 Replaced value:
 ```sqf
-1.2
+1.5
 ```
 File: [host\struct.hpp at line 6](../../../Src/host/struct.hpp#L6)
 ## STRUCT_MEM_TYPE
@@ -8923,10 +8947,10 @@ Description: call base version of any method
 
 Replaced value:
 ```sqf
-_this call {__CBASE_INC__; _this call(missionnamespace getvariable ("pts_"+(self GET STRUCT_MEM_TYPE select __scb_i_s)) GET #methodname) }
+call{__STRUCT_CALLBASE__;'methodname'}
 ```
 File: [host\struct.hpp at line 146](../../../Src/host/struct.hpp#L146)
-## __CBASE_INC__
+## __STRUCT_CALLBASE_TOKEN__
 
 Type: constant
 
@@ -8935,9 +8959,33 @@ Description:
 
 Replaced value:
 ```sqf
-private __scb_i_s = if (isnil'__scb_i_s') then {1} else {__scb_i_s + 1}
+"__STRUCT_CALLBASE__;"
 ```
 File: [host\struct.hpp at line 147](../../../Src/host/struct.hpp#L147)
+## __STRUCT_CALLBASE_REGEX__
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"call\{__STRUCT_CALLBASE__;'(\w+)'\}"
+```
+File: [host\struct.hpp at line 148](../../../Src/host/struct.hpp#L148)
+## __STRUCT_CALLBASE_REGEX_REPLACE_FORMAT__
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"call\{__STRUCT_CALLBASE__;'%1'\}"
+```
+File: [host\struct.hpp at line 149](../../../Src/host/struct.hpp#L149)
 ## getv(memname)
 
 Type: constant
@@ -8949,7 +8997,7 @@ Replaced value:
 ```sqf
 get #memname
 ```
-File: [host\struct.hpp at line 150](../../../Src/host/struct.hpp#L150)
+File: [host\struct.hpp at line 152](../../../Src/host/struct.hpp#L152)
 ## setv(memname,val__)
 
 Type: constant
@@ -8962,7 +9010,44 @@ Replaced value:
 ```sqf
 set [#memname,val__]
 ```
-File: [host\struct.hpp at line 151](../../../Src/host/struct.hpp#L151)
+File: [host\struct.hpp at line 153](../../../Src/host/struct.hpp#L153)
+## modv(memname,val__)
+
+Type: constant
+
+Description: 
+- Param: memname
+- Param: val__
+
+Replaced value:
+```sqf
+call { _this set [#memname, (_this get #memname) val__ ] }
+```
+File: [host\struct.hpp at line 155](../../../Src/host/struct.hpp#L155)
+## incv(memname)
+
+Type: constant
+
+Description: 
+- Param: memname
+
+Replaced value:
+```sqf
+modv(memname, + 1)
+```
+File: [host\struct.hpp at line 156](../../../Src/host/struct.hpp#L156)
+## decv(memname)
+
+Type: constant
+
+Description: 
+- Param: memname
+
+Replaced value:
+```sqf
+modv(memname, - 1)
+```
+File: [host\struct.hpp at line 157](../../../Src/host/struct.hpp#L157)
 ## isinstance(_inst_o,type_n)
 
 Type: constant
@@ -8975,7 +9060,7 @@ Replaced value:
 ```sqf
 (#type_n in (_inst_o get STRUCT_MEM_TYPE))
 ```
-File: [host\struct.hpp at line 156](../../../Src/host/struct.hpp#L156)
+File: [host\struct.hpp at line 162](../../../Src/host/struct.hpp#L162)
 ## isinstance_str(_inst_o,type_n)
 
 Type: constant
@@ -8988,7 +9073,7 @@ Replaced value:
 ```sqf
 ((type_n) in (_inst_o get STRUCT_MEM_TYPE))
 ```
-File: [host\struct.hpp at line 157](../../../Src/host/struct.hpp#L157)
+File: [host\struct.hpp at line 163](../../../Src/host/struct.hpp#L163)
 ## struct_typename(o)
 
 Type: constant
@@ -9000,7 +9085,31 @@ Replaced value:
 ```sqf
 ((o) GET STRUCT_MEM_TYPE select 0)
 ```
-File: [host\struct.hpp at line 159](../../../Src/host/struct.hpp#L159)
+File: [host\struct.hpp at line 165](../../../Src/host/struct.hpp#L165)
+## struct_existType(o)
+
+Type: constant
+
+Description: 
+- Param: o
+
+Replaced value:
+```sqf
+(#o in vtable_s)
+```
+File: [host\struct.hpp at line 167](../../../Src/host/struct.hpp#L167)
+## struct_existType_str(o)
+
+Type: constant
+
+Description: 
+- Param: o
+
+Replaced value:
+```sqf
+((o) in vtable_s)
+```
+File: [host\struct.hpp at line 168](../../../Src/host/struct.hpp#L168)
 ## struct_new(name)
 
 Type: constant
@@ -9014,7 +9123,7 @@ Replaced value:
 ```sqf
 ([ pts_##name ,nil ] call struct_iallc)
 ```
-File: [host\struct.hpp at line 167](../../../Src/host/struct.hpp#L167)
+File: [host\struct.hpp at line 175](../../../Src/host/struct.hpp#L175)
 ## struct_newp(name,arglist)
 
 Type: constant
@@ -9029,7 +9138,7 @@ Replaced value:
 ```sqf
 (call{_sbj___ = [ pts_##name ,[arglist]] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
 ```
-File: [host\struct.hpp at line 167](../../../Src/host/struct.hpp#L167)
+File: [host\struct.hpp at line 175](../../../Src/host/struct.hpp#L175)
 ## struct_newp(name,arglist)
 
 Type: constant
@@ -9044,7 +9153,7 @@ Replaced value:
 ```sqf
 ([ pts_##name ,[arglist]] call struct_iallc)
 ```
-File: [host\struct.hpp at line 170](../../../Src/host/struct.hpp#L170)
+File: [host\struct.hpp at line 178](../../../Src/host/struct.hpp#L178)
 ## struct_free(o)
 
 Type: constant
@@ -9056,7 +9165,7 @@ Replaced value:
 ```sqf
 o SET ["__dflg__",true];{if !(_y isequaltype {})then{o deleteAt _x};}foreach o
 ```
-File: [host\struct.hpp at line 174](../../../Src/host/struct.hpp#L174)
+File: [host\struct.hpp at line 182](../../../Src/host/struct.hpp#L182)
 ## struct_erase(o)
 
 Type: constant
@@ -9068,7 +9177,7 @@ Replaced value:
 ```sqf
 o SET ["__dflg__",true]; {o deleteAt _x}foreach o
 ```
-File: [host\struct.hpp at line 175](../../../Src/host/struct.hpp#L175)
+File: [host\struct.hpp at line 183](../../../Src/host/struct.hpp#L183)
 ## struct_isdeleted(o)
 
 Type: constant
@@ -9080,7 +9189,7 @@ Replaced value:
 ```sqf
 (!isnil{o get "__dflg__"})
 ```
-File: [host\struct.hpp at line 176](../../../Src/host/struct.hpp#L176)
+File: [host\struct.hpp at line 184](../../../Src/host/struct.hpp#L184)
 ## struct_copy(rval)
 
 Type: constant
@@ -9092,7 +9201,7 @@ Replaced value:
 ```sqf
 (+(rval))
 ```
-File: [host\struct.hpp at line 178](../../../Src/host/struct.hpp#L178)
+File: [host\struct.hpp at line 186](../../../Src/host/struct.hpp#L186)
 ## struct_cast(o,typeto)
 
 Type: constant
@@ -9105,7 +9214,7 @@ Replaced value:
 ```sqf
 o call [__STRUCT_CAST_PREFIX___ + #typeto]
 ```
-File: [host\struct.hpp at line 197](../../../Src/host/struct.hpp#L197)
+File: [host\struct.hpp at line 205](../../../Src/host/struct.hpp#L205)
 ## ___struct_root_instr(v)
 
 Type: constant
@@ -9117,7 +9226,7 @@ Replaced value:
 ```sqf
 #v
 ```
-File: [host\struct.hpp at line 226](../../../Src/host/struct.hpp#L226)
+File: [host\struct.hpp at line 234](../../../Src/host/struct.hpp#L234)
 ## __STRUCT_CHECK_ROOT
 
 Type: constant
@@ -9136,7 +9245,7 @@ Replaced value:
 			setLastError(_eMessage); \
 		};
 ```
-File: [host\struct.hpp at line 229](../../../Src/host/struct.hpp#L229)
+File: [host\struct.hpp at line 237](../../../Src/host/struct.hpp#L237)
 ## __STRUCT_REDEFINE_BASE
 
 Type: constant
@@ -9151,7 +9260,7 @@ Replaced value:
 \
 		if not_equals(_x,_structRootName) exitWith {_structRootName};
 ```
-File: [host\struct.hpp at line 237](../../../Src/host/struct.hpp#L237)
+File: [host\struct.hpp at line 245](../../../Src/host/struct.hpp#L245)
 ## __STRUCT_CHECK_ROOT
 
 Type: constant
@@ -9165,7 +9274,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\struct.hpp at line 242](../../../Src/host/struct.hpp#L242)
+File: [host\struct.hpp at line 250](../../../Src/host/struct.hpp#L250)
 ## __STRUCT_REDEFINE_BASE
 
 Type: constant
@@ -9179,7 +9288,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\struct.hpp at line 243](../../../Src/host/struct.hpp#L243)
+File: [host\struct.hpp at line 251](../../../Src/host/struct.hpp#L251)
 ## spi_lst
 
 Type: Variable
@@ -9193,7 +9302,7 @@ Initial value:
 ```sqf
 [] //preinit structures list
 ```
-File: [host\struct.hpp at line 250](../../../Src/host/struct.hpp#L250)
+File: [host\struct.hpp at line 258](../../../Src/host/struct.hpp#L258)
 ## vtable_s
 
 Type: Variable
@@ -9205,7 +9314,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\struct.hpp at line 251](../../../Src/host/struct.hpp#L251)
+File: [host\struct.hpp at line 259](../../../Src/host/struct.hpp#L259)
 ## vt_cast
 
 Type: Variable
@@ -9217,7 +9326,7 @@ Initial value:
 ```sqf
 createHashMap //cast table
 ```
-File: [host\struct.hpp at line 252](../../../Src/host/struct.hpp#L252)
+File: [host\struct.hpp at line 260](../../../Src/host/struct.hpp#L260)
 ## struct_default_flag
 
 Type: Variable
@@ -9229,17 +9338,41 @@ Initial value:
 ```sqf
 ["unscheduled"]
 ```
-File: [host\struct.hpp at line 253](../../../Src/host/struct.hpp#L253)
+File: [host\struct.hpp at line 261](../../../Src/host/struct.hpp#L261)
+## strt_inh
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap //struct inheritance table
+```
+File: [host\struct.hpp at line 262](../../../Src/host/struct.hpp#L262)
+## strt_inhChld
+
+Type: Variable
+
+Description: struct inheritance table
+
+
+Initial value:
+```sqf
+createHashMap //struct inheritance table of all childrens
+```
+File: [host\struct.hpp at line 263](../../../Src/host/struct.hpp#L263)
 ## struct_initialize
 
 Type: function
 
 > Exists if **STRUCT_INIT_FUNCTIONS** defined
 
-Description: 
+Description: struct inheritance table of all childrens
 
 
-File: [host\struct.hpp at line 254](../../../Src/host/struct.hpp#L254)
+File: [host\struct.hpp at line 264](../../../Src/host/struct.hpp#L264)
 ## struct_alloc
 
 Type: function
@@ -9250,7 +9383,7 @@ Description:
 - Param: _s
 - Param: _params
 
-File: [host\struct.hpp at line 316](../../../Src/host/struct.hpp#L316)
+File: [host\struct.hpp at line 382](../../../Src/host/struct.hpp#L382)
 ## struct_eraseFull
 
 Type: function
@@ -9258,7 +9391,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [host\struct.hpp at line 335](../../../Src/host/struct.hpp#L335)
+File: [host\struct.hpp at line 401](../../../Src/host/struct.hpp#L401)
 ## struct_reflect_getTypeValue
 
 Type: function
@@ -9267,7 +9400,23 @@ Description:
 - Param: _typename
 - Param: _varname
 
-File: [host\struct.hpp at line 340](../../../Src/host/struct.hpp#L340)
+File: [host\struct.hpp at line 406](../../../Src/host/struct.hpp#L406)
+## struct_getAllTypesOf
+
+Type: function
+
+Description: 
+- Param: _typename
+
+File: [host\struct.hpp at line 425](../../../Src/host/struct.hpp#L425)
+## struct_getBaseTypesOf
+
+Type: function
+
+Description: 
+- Param: _typename
+
+File: [host\struct.hpp at line 430](../../../Src/host/struct.hpp#L430)
 # text.hpp
 
 ## lt

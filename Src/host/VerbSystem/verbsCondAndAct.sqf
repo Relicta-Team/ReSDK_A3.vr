@@ -166,6 +166,16 @@ VERB(craft)
 		[src,usr] call craft_requestOpenMenu;
 ENDVERB
 
+VERB(craft_here)
+	cond
+		skipCond(!isTypeOf(usr,Mob));
+		skipCond(getVar(usr,isCombatModeEnable));
+	act
+		[src,usr,!isNull(getSelf(craftComponent))] call csys_requestOpenMenu;
+	name
+		if !isNull(getSelf(craftComponent)) exitWith {setName("Вспомнить рецепты")};
+ENDVERB
+
 VERB(twohands)
 	cond
 		skipCond(!isTypeOf(usr,Mob));

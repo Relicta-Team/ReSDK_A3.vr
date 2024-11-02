@@ -1,0 +1,112 @@
+Kintchen: &Kintchen_base
+  name: Кухонные принадлежности и посуда
+  health: {min: 60%, max: 90%}
+  quality: {min: 30%, max: 90%}
+  pass_count: {min: 2, max: 5}
+
+#Tier1
+Kintchen_tier1:
+  <<: *Kintchen_base
+  items: &Kintchen_tier1
+    SoupPlate:
+      prob: 4%
+    OlderWoodenCup:
+      prob: 4%
+    WoodenCup:
+      prob: 4%
+    CuttingBoard:
+      prob: 4%
+
+#Tier2
+Kintchen_tier2:
+  <<: *Kintchen_base
+  items: &Kintchen_tier2
+    FoodPlate:
+      prob: 3%
+    Mug:
+      prob: 3%      
+    Cup:
+      prob: 3% 
+    cup1:
+      prob: 3% 
+    GlassBottle:
+      prob: 3%
+    Kastrula:
+      prob: 3%
+    Polovnik:
+      prob: 3%
+
+#Tier3
+Kintchen_tier3:
+  <<: *Kintchen_base
+  pass_count: {min: 1, max: 2}
+  items: &Kintchen_tier3
+    MetalCup:
+      prob: 2%
+    Teapot:
+      prob: 2% 
+    GlassLargeBreaker:
+      prob: 2% 
+    FryingPan:
+      prob: 2%
+
+#Tier4
+Kintchen_tier4:
+  <<: *Kintchen_base
+  pass_count: {min: 1, max: 2}
+  items: &Kintchen_tier4
+    KitchenKnife:
+      prob: 1%
+    GlassGoblet:
+      prob: 1%
+    SaltShaker:
+      prob: 0.5%
+    PepperShaker:
+      prob: 0.5%
+      
+#Presets
+#Full config
+Kintchen_all:
+  <<: *Kintchen_base
+  items:
+    <<: *Kintchen_tier1
+    <<: *Kintchen_tier2
+    <<: *Kintchen_tier3
+    <<: *Kintchen_tier4
+
+#Tier1-2
+Kintchen_tier1_2:
+  <<: *Kintchen_base
+  items:
+    <<: *Kintchen_tier1
+    <<: *Kintchen_tier2
+
+#Tier1-2-3
+Kintchen_tier1_2_3:
+  <<: *Kintchen_base
+  items:
+    <<: *Kintchen_tier1
+    <<: *Kintchen_tier2
+    <<: *Kintchen_tier3
+
+#Tier2-3
+Kintchen_tier2_3:
+  <<: *Kintchen_base
+  items:
+    <<: *Kintchen_tier2
+    <<: *Kintchen_tier3
+
+#Tier3-4
+Kintchen_tier3_4:
+  <<: *Kintchen_base
+  items:
+    <<: *Kintchen_tier3
+    <<: *Kintchen_tier4
+
+#Tier2-3-4
+Kintchen_tier2_3_4:
+  <<: *Kintchen_base
+  items:
+    <<: *Kintchen_tier2
+    <<: *Kintchen_tier3
+    <<: *Kintchen_tier4

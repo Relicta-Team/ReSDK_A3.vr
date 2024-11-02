@@ -1118,7 +1118,7 @@ Replaced value:
 ```sqf
 matter(class) extends(Matter) prop(name,txtpropval);
 ```
-File: [host\MatterSystem\Matters\Basic.sqf at line 101](../../../Src/host/MatterSystem/Matters/Basic.sqf#L101)
+File: [host\MatterSystem\Matters\Basic.sqf at line 107](../../../Src/host/MatterSystem/Matters/Basic.sqf#L107)
 # Reactions.sqf
 
 ## ms_internal_react_gen

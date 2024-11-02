@@ -1,0 +1,627 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "craft.schema",
+	"$comment": "For more details: https://json-schema.org/learn/getting-started-step-by-step",
+	"title": "Рецепт крафта",
+	"properties": {
+		"val": {
+			"type":"string"
+		}
+	},
+	
+	"definitions": {
+		
+	},
+	
+	"type": "array",
+	"items": {
+		"definitions": {
+
+			"DefaultUtilityCounter": {
+				"type": ["integer","object"],
+				"allOf": [
+					{
+						"if": {
+							"type": "object"
+						}, "then": {
+							"required": ["min","max"],
+							"properties": {
+								"min": {"type":"integer","minimum":1, "default": 1},
+								"max": {"type":"integer","default": 3}
+							}
+						}
+					},
+					{
+						"if": {"type":"integer"},
+						"then": {
+							"minimum": 0,
+							"default": 1
+						}
+					}
+				]
+			},
+
+			"ItemComponentBase": {
+				"title": "Ингредиент",
+				"description": "Ингредиент крафта",
+				"type": "object",
+				"required": ["class"],
+				"additionalProperties": false,
+				"properties": {
+					"hp": {},
+					"class": {
+						"title": "Класс ингредиента",
+						"description": "Класснейм требуемого ингредиента. Может быть строкой или массивом строк. Строки (в т.ч. в массиве) могут содержать макросы расширения для автоматического добавления множества классов с одинаковыми именем и отличающихся одной цифрой (см. примеры).\nНапример: при добавлении класса \"CitizenCloth(1-4)\" значение будет расширено в массив строк: [\"CitizenCloth1\",\"CitizenCloth2\",\"CitizenCloth3\",\"CitizenCloth4\"]",
+						"type": ["string","array"],
+						"examples": [
+							"Item",
+							["WoodenDebris1","WoodenDebris2","WoodenDebris3"],
+							"WoodenDebris(1-3)"
+						],
+						"default": "Item"
+					},
+					"name": {
+						"title": "Название ингредиента",
+						"description": "(Опционально) Кастомное название, выводимое информации о рецепте.",
+						"type": "string"
+					},
+					"count": {
+						"title": "Необходимое количество",
+						"description": "Количество необходимых предметов",
+						"type": "integer",
+						"minimum": 1,
+						"maximum": 100
+					},
+					"check_type_of": {
+						"title": "Тип проверки",
+						"description": "(Опционально) Тип проверки ингредиента. Включенный режим выполняет сопоставление ингредиента по классу и его дочерним классам. По умолчанию включено",
+						"type": "boolean",
+						"default": true
+					},
+					"optional": {
+						"title": "Опциональный ингредиент",
+						"description": "Является ли ингредиент опциональным (необязательным) для крафта. По умолчанию ингредиент обязательный (опция выключена)",
+						"type": "boolean",
+						"default": false
+					},
+					"destroy": {
+						"type": "boolean",
+						"title": "Уничтожать при использовании",
+						"description": "Будет ли уничтожен ингредиент после успешного крафта",
+						"default": true
+					},
+					"meta_tag": {
+						"type": "string",
+						"title": "Мета-тег",
+						"description": "Мета-тег ингредиента. Необходим при заменах в строках или модификаторах",
+						"default": ""
+					},
+					"condition": {
+						"type": "string",
+						"title": "Дополнительное условие",
+						"description": "(Опционально) Код-инструкции условия, которое при удовлетворении позволит использовать ингредиент\nДля получения свойств объекта используйте :PROPERTY_NAME\nДля вызова функции используйте :OBJECT_FUNCTION(parameters)",
+						"default": "true",
+						"examples": [
+							":name == \"Предмет с определенным именем\"",
+							":hp >= 20 && :weight <= 0.3",
+							":germs <= 20",
+							":getHPCurrentPrecentage() >= 30"
+						]
+					}
+				}
+			},
+			"ItemComponent": {
+				"allOf": [
+					{
+						"$ref": "#/items/definitions/ItemComponentBase"
+					},
+					{
+						"properties": {
+							"hp": {
+								"title": "Требуемое здоровье",
+								"description": "(Опционально) Требуемое здоровье ингредиента. По умолчанию без ограничений. Может быть процентным значением либо количеством ХП",
+								"examples": [10,-5,"20%","85%"],
+								"type": ["integer","string"],
+								"if": {
+									"type": "string"
+								},
+								"then": {
+									"pattern": "^(([0-9]){1,2}|100)[ \t]*%$"
+								},
+								"else": {
+									"minimum": -1000,
+									"maximum": 1000
+								}
+							}
+						}
+					}
+				]
+			},
+			"ItemComponentInteract": 
+			{
+				"allOf": [
+					{
+						"$ref": "#/items/definitions/ItemComponentBase"
+					},
+					{
+						"properties": {
+							"hp": {
+								"additionalProperties": false,
+								"type": ["integer","string","object"],
+								"required": ["value"],
+								"properties": {
+									"value": {
+										"title": "Требуемое здоровье",
+										"description": "(Опционально) Требуемое здоровье ингредиента. По умолчанию без ограничений. Может быть процентным значением либо количеством ХП",
+										"examples": [10,-5,"20%","85%"],
+										"type": ["integer","string"],
+										"if": {
+											"type": "string"
+										},
+										"then": {
+											"pattern": "^(([0-9]){1,2}|100)[ \t]*%$"
+										},
+										"else": {
+											"minimum": -1000,
+											"maximum": 1000
+										}
+									},
+									"message": {
+										"type": ["string","array"],
+										"title": "Сообщение об ошибке",
+										"description": "Сообщение об ошибке. Чтобы получить имя этого ингредиента используйте {basename}. Для выбора случайных слов из набора используйте (A|B|C)",
+										"required": ["value"],
+										"examples": [
+											"{basename} слишком повреждён",
+											"{basename} (сломан|раздолбан|попорчен)",
+											[
+												"Для создания {basename.lower} должен быть в хорошем состоянии",
+												"{basename} поломан"
+											]
+										]
+									}
+								},
+								"examples": [
+									{
+										"value": "70%"
+									},
+									{
+										"value": "10%",
+										"message": "{basename} слишком повреждён"
+									}
+								]
+							}
+						}
+					}
+				]				
+			},
+
+			"ResultBase": {
+				"title": "Результат",
+				"description": "Результат успешного крафта",
+				"type": "object",
+				"required": ["class"],
+				"properties": {
+					"class": {
+						"type":"string",
+						"title": "Тип объекта",
+						"description": "Имя класса объекта, который будет создан"
+					},
+					"count": {
+						"title": "Количество объектов",
+						"description": "Сколько объектов будет создано в результате успешного крафта",
+						"$ref": "#/items/definitions/DefaultUtilityCounter"
+					},
+					"radius": {
+						"title": "Радиус создания",
+						"description": "Радиус создания объекта",
+						"type":"number",
+						"default": 0,
+						"minimum": 0, "maximum": 50
+					},
+					"modifiers": {
+						"type": ["array","null"],
+						"title": "Модификаторы",
+						"description": "Модификаторы для создаваемых предметов",
+						"items": {
+							"title": "Модификатор (без параметров)",
+							"type": ["object","string"],
+							"properties": {
+								"name": {
+									"title": "Название модификатора",
+									//place part 1 here
+									"enum":["transfer_reagents","set_model","replace_reagent","default","execute_code","add_reagent","set_name"]
+								}
+							},							
+							// here placed dict of modifiers
+							"allOf":[{"if":{"type":"object","properties":{"name":{"const":"transfer_reagents"}}},"then":{"required":[],"properties":{"partial_transfer":{"type":"boolean","default":true,"description":"Частичная передача от get_from_all. По умолчанию включено. Если опция включена, то каждый из результирующих предметов (если их несколько) получает часть реагентов от всех ингредиентов. Например, если на выходе получается 2 предмета то при передачи 100% каждый из предметов будет иметь лишь 50% от всех реагентов из требуемых ингредиентов.","title":"Частичная передача"},"get_from_all":{"type":["number","string"],"default":100,"description":"Передача реагентов (единиц или процентов) из всех реагент-контейнеров. Значение 100% означает полную передачу. Обратите внимание, что на способ работы этого параметра влияет partial_transfer. Взаимоисключаемое с get_from.","examples":[5,"40%"],"title":"Передача из всех"},"delete_on_empty":{"type":"boolean","default":true,"description":"Удалять реагент-контейнеры, если после передачи в них не осталось содержимого. По умолчанию включено.","title":"Удалить опустошенные реагент-контейнеры"},"name":{"description":"Выбран модификатор 'Передача реагентов' (transfer_reagents)\nМодификатор передает реагенты из исходных ингредиентов в результат крафта.\n\nДоступные параметры: precentage_loss, loss_from_skills, partial_transfer, delete_on_empty, get_from_all, get_from"},"loss_from_skills":{"type":"boolean","default":false,"description":"По умолчанию выключено. Потеря реагентов от успешности крафта. Чем выше скилл крафтера, тем меньше потеря. Этот параметр накладывается после процентной потери precentage_loss (если указано) для каждого из результирующих предметов.","title":"Потеря реагентов от успешности"},"get_from":{"type":"object","description":"Передача реагентов (единиц или процентов) из реагент-контейнеров с указанными тегами. Если объект по тегу не является реагент-контейнером, то передача не произойдёт. Взаимоисключаемое с get_from_all.","properties":{},"patternProperties":{"^[a-zA-Z]+$":{"type":["number","string"],"examples":[15,"30%"]}},"examples":[{"TAG_2":"50%","TAGGED_OBJECT_1":70}],"additionalProperties":false,"title":"Передача по тегам"},"precentage_loss":{"type":"number","default":0,"description":"Сколько процентов от реагентов потеряется при крафте. Это значение применяется после передачи из ингредиентов в результаты. Если предметов больше 1 то каждый теряет столько процентов, сколько указано в этом параметре.","examples":[0,50,75,100],"title":"Процент потери реагентов"}},"additionalProperties":false}},{"if":{"type":"object","properties":{"name":{"const":"set_model"}}},"then":{"required":["value"],"properties":{"name":{"description":"Выбран модификатор 'Установка модели' (set_model)\nМодификатор устанавливает модель в результат крафта.\n\nДоступные параметры: value"},"value":{"type":"string","description":"Путь до модели, которая будет установлена результирующему предмету","title":"Модель"}},"additionalProperties":false}},{"if":{"type":"object","properties":{"name":{"const":"replace_reagent"}}},"then":{"required":["from","to"],"properties":{"name":{"description":"Выбран модификатор 'Замена реагента' (replace_reagent)\nМодификатор заменяет реагент в результате крафта.\n\nДоступные параметры: from, to"},"from":{"type":"string","default":"Nutriment","description":"Исходный реагент который будем заменять на to","examples":["Nutriment","Milk"],"title":"Исходный реагент"},"to":{"type":"string","default":"Nutriment","description":"Новый реагент, который будет заменять исходный","examples":["Nutriment","Milk"],"title":"Новый реагент"}},"additionalProperties":false}},{"if":{"type":"object","properties":{"name":{"const":"default"}}},"then":{"required":[],"properties":{"auto_weight":{"type":"boolean","description":"Автовес (по умолчанию выключено)","title":"Автовес"},"name":{"description":"Выбран модификатор 'Стандартный модификатор' (default)\nСтандартный модификатор установки хп, веса, качества\n\nДоступные параметры: auto_all, auto_ht, auto_weight, auto_hp, hp_from_skill, auto_germs"},"auto_hp":{"type":"boolean","description":"Автоматическое хп результирующего объекта","title":"Автоматическое хп"},"hp_from_skill":{"type":"boolean","description":"Использовать вычисление текущего хп от величины успеха броска","title":"Использовать вычисление текущего хп от величины успеха броска"},"auto_all":{"type":"boolean","description":"Включает все модификаторы (включено по умолчанию)","title":"Включить все модификаторы"},"auto_ht":{"type":"boolean","description":"Автокачество (по умолчанию выключено)","title":"Автокачество"},"auto_germs":{"type":"boolean","description":"Автогрязь (по умолчанию выключено)","title":"Автогрязь"}},"additionalProperties":false}},{"if":{"type":"object","properties":{"name":{"const":"execute_code"}}},"then":{"required":[],"properties":{"name":{"description":"Выбран модификатор 'Выполнение кода' (execute_code)\nВыполняет код модификатора.\n\nДоступные параметры: code, before_code"},"before_code":{"type":"string","description":"Инструкции кода, которые будут выполнены до создания результата. Инструкции вызываются непосредственно при захвате контекста модификаторов.","title":"Инструкции перед созданием результата"},"code":{"type":"string","description":"Инструкции кода, которые будут выполнены после создания результата","title":"Инструкции"}},"additionalProperties":false}},{"if":{"type":"object","properties":{"name":{"const":"add_reagent"}}},"then":{"required":["reagent","amount"],"properties":{"amount":{"type":"number","minimum":0.1,"default":1,"description":"Количество добавляемого реагента","maximum":99999,"title":"Количество"},"name":{"description":"Выбран модификатор 'Добавление реагента' (add_reagent)\nМодификатор добавляет реагент в результат крафта.\n\nДоступные параметры: reagent, amount, expand_capacity"},"expand_capacity":{"type":"boolean","default":true,"description":"Расширить емкость реагент-контейнера если не удается добавить amount реагента. По умолчанию включено.","title":"Расширить емкость"},"reagent":{"type":"string","description":"Реагент, который будет добавлен в результат крафта","examples":["Nutriment","Milk"],"title":"Реагент"}},"additionalProperties":false}},{"if":{"type":"object","properties":{"name":{"const":"set_name"}}},"then":{"required":["value"],"properties":{"name":{"description":"Выбран модификатор 'Изменение названия' (set_name)\nИзменяет название создаваемого предмета\n\nДоступные параметры: value"},"value":{"type":"string","description":"Новое название предмета. Допускается использование тегов, например {TAG:name} для установки названия от предмета с тегом TAG","examples":["Предмет","Предмет из {TAGGED_INGREDIENT.name.lower}"],"title":"Новое название"}},"additionalProperties":false}}]
+							
+						}
+					}
+				}
+			},
+
+			"HandlerType": {
+				"type": "string",
+				"title": "Тип обработчика",
+				"description": "Имя типа обработчика провала",
+				//
+				"enum": ["default","custom"]
+			},
+			
+			// place here all fail handlers
+			"DefaultFailHandler": {
+				"description": "Стандартный обработчик провала, который удаляет ингредиенты при провале",
+				"properties": {
+					"handler_type": {},
+					"class": {
+						"title": "classname",
+						"description": "Тип класса, создаваемого при провале",
+						"type": "string"
+					},
+					"count": {
+						"title": "Количество объектов",
+						"description": "Количество объектов, созданных в результате провала крафта",
+						"$ref": "#/items/definitions/DefaultUtilityCounter"
+					}
+				}
+			},
+
+			"CustomFailHandler": {
+				"type": "object",
+				"title": "Кастомный обработчик (ТОЛЬКО ДЛЯ ОТЛАДКИ YAML СХЕМЫ)",
+				"properties": {
+					"handler_type": {"const": "custom"},
+					"evalulate": {"type": "string"}
+				}
+			}
+			// endplace failhandlers
+		},
+		
+		
+        "type": "object",
+       // "required": ["type","required","result"], //redefined in ignored checks
+		
+		"properties": {
+			
+			"name": {
+				"type": "string",
+				"title": "Название рецепта",
+				"description": "Название крафта, выводимое в списке рецептов"
+			},
+			"desc": {
+				"type": "string",
+				"title": "Описание рецепта",
+				"description": "(Опционально) Дополнительное описание крафта. Выводится как дополнительная информация под рецептом."
+			},
+			
+			"type": {
+				"type": "string",
+				"title": "Тип рецепта",
+				"description": "Тип рецепта крафта. Для некоторых типов существуют изменения в структуре рецепта.",
+				"enum": [
+					"default",
+					"building",
+					"interact",
+					"system"
+				],
+				"default": "default"
+			},
+			"system_specific": {
+				"type": "string",
+				"title": "Спецификация рецепта",
+				"description": "(ТОЛЬКО ДЛЯ СИСТЕМНЫХ) Отвечает за то какая система будет обрабатывать данный рецепт.",
+				"pattern": "^[a-zA-Z]+System$"
+			},
+			"category": {
+				"type": "string",
+				"title": "Категория рецепта",
+				"description": "(Опционально) Категория крафта. Отвечает за то, в какой категории меню будет храниться этот рецепт. По умолчанию - 'Other'.",
+				"enum": [
+					"Cloth",
+					"Food",
+					"Alchemy",
+					"Medical",
+					"Weapon",
+					"Furniture",
+					"Light",
+					"Building",
+					"Other"
+				],
+				"default": "Other"
+			},
+			"ignored": {
+				"type": "boolean",
+				"title": "Игнорировать рецепт",
+				"description": "(Опционально) Игнорировать рецепт в редакторе крафта",
+				"default": false
+			},
+			"required": {
+				"title": "Требования",
+				"description": "Секция требуемых компонентов",
+				"type": "object",
+				"properties": {
+					"force_visible": {
+						"type": "boolean",
+						"default": false,
+						"title": "Принудительно видеть",
+						"description": "Позволяет принудительно видеть рецепт даже при нехватке навыков (если таковые были указаны)."
+					},
+					"skills": {
+						"title": "Требуемые навыки",
+						"description": "Список доступных навыков:\n\n- fp (усталость)\n- will (воля)\n- per (восприятие)\n- hp (жизнь)\n- fight (рукопашный бой)\n- shield (щиты)\n- fencing (фехтование)\n- axe (топоры)\n- baton (дубины)\n- spear (копья)\n- sword (мечи)\n- knife (ножи)\n- whip (кнуты)\n- pistol (пистолеты)\n- rifle (винтовки)\n- shotgun (дробовики)\n- crossbow (луки)\n- throw (метание)\n- chemistry (химичество)\n- alchemy (грибничество)\n- engineering (инженерия)\n- traps (ловушки)\n- repair (ремонт)\n- blacksmithing (кузнечество)\n- craft (создание)\n- theft (воровство)\n- stealth (скрытность)\n- agility (акробатика)\n- lockpicking (взлом)\n- healing (первая помощь)\n- surgery (хирургия)\n- cavelore (знание пещер)\n- cooking (готовка)\n- farming (фермерство)",
+						"type": ["object","null"],
+						
+						"additionalProperties": false,
+						"definitions": {
+							"skill_def": {
+								"type": "integer",
+								"minimum": 1,
+								"maximum": 20
+							}
+						},
+						
+						"properties": {
+							
+							"fight":  {"title": "Рукопашный бой", "$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"shield":  {"title": "Щиты","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"fencing":  {"title": "Фехтование","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"axe":  {"title": "Топоры","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"baton":  {"title": "Дубины","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"spear":  {"title": "Копья","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"sword":  {"title": "Мечи","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"knife":  {"title": "Ножи","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"whip":  {"title": "Кнуты","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"pistol":  {"title": "Пистолеты","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"rifle":  {"title": "Винтовки","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"shotgun":  {"title": "Дробовики","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"crossbow":  {"title": "Луки","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"throw":  {"title": "Метание","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"chemistry":  {"title": "Химичество","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"alchemy":  {"title": "Грибничество","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"engineering":  {"title": "Инженерия","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"traps":  {"title": "Ловушки","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"repair":  {"title": "Ремонт","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"blacksmithing":  {"title": "Кузнечество","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"craft":  {"title": "Создание","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"theft":  {"title": "Воровство","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"stealth":  {"title": "Скрытность","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"agility":  {"title": "Акробатика","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"lockpicking":  {"title": "Взлом","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"healing":  {"title": "Первая помощь","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"surgery":  {"title": "Хирургия","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"cavelore":  {"title": "Знание пещер","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+
+							"cooking":  {"title": "Готовка","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"},
+							"farming":  {"title": "Фермерство","$ref": "#/items/properties/required/properties/skills/definitions/skill_def"}
+						}
+					}
+				}
+			},
+
+			"failed_handler": {
+				"type": ["object","null"],
+				"title": "Обработчик провала",
+				"description": "Обработчик провала крафта (по скиллам)",
+				"required": ["handler_type"],
+				"properties": {
+					"handler_type": {
+						"$ref": "#/items/definitions/HandlerType"
+					}
+				},
+				"$comment": "Здесь можно автоматически генерировать список обработчиков и условий",
+				
+				"allOf": [
+					{
+						
+						"if": {
+							"properties": {"handler_type": {"const": "default"}}
+						}, "then": {
+							"additionalProperties": false,
+							"$ref": "#/items/definitions/DefaultFailHandler"
+						}
+					},
+					{
+						"if": {
+							"properties": {"handler_type": {"const": "custom"}}
+						},"then": {
+							"additionalProperties": false,
+							"$ref": "#/items/definitions/CustomFailHandler"
+						}
+					}
+				]
+			},
+			"options": {
+				"title": "Дополнительные опции",
+				"description": "Дополнительные опции крафта",
+				"type": "object",
+				"additionalProperties": false,
+				"properties": {
+					"collect_distance": {
+						"type": "number",
+						"title": "Дистанция сбора",
+						"description": "На каком расстоянии будут проверяться объекты на соответствие ингредиентам. Не используется если рецепт типа system",
+						"minimum": 0,
+						"default": 0.8
+					},
+					"craft_duration": {
+						"type":"string",
+						"title": "Длительность крафта",
+						"description": "Длительность прогресс-бара при создании. Поддерживает математические выражения со статистикой персонажа и диапазонами.\n\nДопустимые выражения:\n    - rta (RealTimeAction) время обычного действия персонажа (в среднем около секунды)\n    - irnd(min,max) - целочисленное случайное число в диапазоне от min до max\n    - rnd(min,max) - дробное случайное число в диапазоне от min до max\n    - from_skill(lower,higher) - конвертирует значения используемого навыка в число в соответствии с заданным диапазоном от lower до higher. from_skill позволяет указать число, которое будет верно утверждению - чем выше скилл, тем меньше время крафта. from_skill работает только с навыками не ниже 1 и не выше 20. Все значения за пределами допустимых округляют значение к ближайшему.",
+						"examples": [
+							"rta",
+							"(rta * 2) + irnd(2,5)",
+							"rnd(1,3) + from_skill(20,1)"
+						],
+						"default": "rta"
+					}
+				}
+			},
+
+			"result": {
+				//base defined
+			}
+		},
+		
+		"allOf": [
+			{
+				"if": {
+					"properties": {
+						"type": {
+							"not": {"const": "system"}
+						}
+					}
+				},
+				"then": {
+					"$comment": "THIS DOSENT NOT WORKS...",
+					"dependencies": {
+						"type": {
+							"not": {"const": "system"}
+						}
+					},
+					
+					"properties": {
+						
+					}					
+				}, "else": {
+					"required": ["system_specific"]
+				}
+			},
+			{
+				"if": {
+					"properties": {
+						"ignored": {"not": {"const": true}}
+					}
+				},
+				"then": {"additionalProperties": false,
+					"properties": {
+						"name":{}
+						,"type":{}
+						,"required":{}
+						,"result":{}
+						,"category":{}
+						,"failed_handler":{}
+						,"options":{}
+						,"system_specific":{}
+						,"ignored":{}
+						,"desc":{}
+					},
+					"required": ["type","required","result"]
+				}
+			},
+			{
+				"if": {
+					"properties": {
+						"ignored": {"const": true}
+					}
+				},
+				"then": {
+					"additionalProperties":true
+				}
+			},
+			{
+				"if": {
+					"properties": {
+						"type": {
+							"const": "interact"
+						}
+					}
+				},
+				"then": {
+					"properties": {
+						"required": {
+							"type": "object",
+							"required": ["components"],
+							"properties": {
+								"components": {
+									"additionalProperties": false,
+									"title": "Объекты hand_item и target",
+									"description": "Объекты взаимодействия цель и интерактор. Только для крафтов типа interact",
+									"type": "object",
+									"properties": {
+										"hand_item": {
+											"title": "Предмет в руке",
+											"description": "Необходимый предмет которым взаимодействуют по target",
+											"type":"object",
+											"$ref": "#/items/definitions/ItemComponentInteract"
+										},
+										"target": {
+											"title": "Цель взаимодействия",
+											"description": "Целевой объект взаимодействия, по которому игрок кликает с помощью hand_item",
+											"type": "object",
+											"$ref": "#/items/definitions/ItemComponentInteract"
+										}
+									}
+								}
+							}
+						},
+						"result": {
+							"additionalProperties": false,
+							"patternProperties": {
+								"^sound$": {
+									"title": "Звук при крафте",
+									"description": "(Опционально) Запуск звука при успешном действии крафта. Можно использовать макрос диапазона (MIN-MAX). При указании массива выбирает один случайный звук из списка.",
+									"type": ["string","array"],
+									"examples": [
+										"damage/wood_1.ogg",
+										"damage/wood_(1-3).ogg",
+										[
+											"damage/wood_1",
+											"damage/wood_2",
+											"damage/wood_3"
+										]
+									]
+								},
+								"^emote$": {
+									"title": "Эмоция при крафте",
+									"description": "(Опционально) Запуск эмоута игроком при успешном действии крафта. Можно использовать макросы выбора и подстановку названий от target, hand_item и basename. При указании массива выбирает одно случайное сообщение из списка.",
+									"type": ["string","array"],
+									"examples": [
+										"(использует|уничтожает) {target.lower}.",
+										"работает над {target.lower} с помощью {hand_item.lower} создавая {basename}.",
+										[
+											"крафтит {basename}",
+											"создает {basename.lower} из {target.lower}",
+											"фигачит по {target.lower} и получает {basename}"
+										]
+									]
+								}
+							},
+							"$ref": "#/items/definitions/ResultBase"
+						}
+					}
+				},
+				"else": {
+					"properties": {
+						"required": {
+							"type": "object",
+							"required": ["components"],
+							"properties": {
+								"components": {
+									"title": "Список ингредиентов",
+									"description": "Список ингредиентов, необходимых для крафта",
+									"type": "array",
+									"items": {
+										"$ref": "#/items/definitions/ItemComponent"
+									}
+								}
+							}
+						},
+						"result": {
+							"additionalProperties": false,
+							"$ref": "#/items/definitions/ResultBase"
+						}
+					}
+				}
+			}
+		]
+		
+    }
+  }

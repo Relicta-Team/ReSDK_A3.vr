@@ -171,6 +171,11 @@ if (!isMultiplayer) then {
 	#endif
 };
 
+private _onexit = {
+	#ifdef RBUILDER
+	call RBuilder_onServerLockedLoading;
+	#endif
+};
 
 _calculateClientSide = {
 
@@ -192,7 +197,7 @@ _calculateClientSide = {
 
 _time_global = diag_ticktime;
 loadFile("src\host\init.sqf");
-
+if (server_isLocked) exitwith _onexit; //because class compiler can throws errors
 call dsm_initialize; //discord mgr init
 
 
@@ -216,11 +221,7 @@ if ((_yamlObj getv(major)) == 0) then {
 	appExit(APPEXIT_REASON_EXTENSION_ERROR);
 };
 
-if (server_isLocked) exitWith {
-	#ifdef RBUILDER
-	call RBuilder_onServerLockedLoading;
-	#endif
-};
+if (server_isLocked) exitWith _onexit;
 
 progLog("Serverside scripts loaded in " + str(diag_ticktime - _time_global) + " sec");
 
@@ -262,6 +263,10 @@ progLog("Revision: " + __revision);
 #endif
 
 progLog("isDebug: " + str _debug + "; isRelease: " + str _release);
+if (_debug == _release) exitWith {
+	setLastError("Debug/Release modes cannot be the same! " + (str _debug));
+	appExit(APPEXIT_REASON_COMPILATIOEXCEPTION);
+};
 
 #ifdef EDITOR
 	if !isNull(relicta_debug_compileMain) then {

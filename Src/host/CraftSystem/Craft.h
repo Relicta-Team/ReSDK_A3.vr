@@ -3,12 +3,13 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define CRAFT_PARSER_HEAD private ["_val__","_mes__","_par_output__"]
+//private ["_val__","_mes__","_par_output__"]
+#define CRAFT_PARSER_HEAD private _val__ = nil; private _mes__ = nil
 
 #define value _val__
 #define message _mes__
 
-#define GETVAL(dict,key,types) _par_output__ = ([dict,key,types] call csys_validateType); value = _par_output__ select 0; message = _par_output__ select 1
+#define GETVAL(dict,key,types) ([dict,key,types] call csys_validateType) params [['value',null],['message',""]]
 #define GETVAL_STR(dict,key) GETVAL(dict,key,"")
 #define GETVAL_FLOAT(dict,key) GETVAL(dict,key,0)
 #define GETVAL_INT(dict,key) GETVAL(dict,key,"int")
@@ -23,3 +24,14 @@
 
 // enable for more verbose logging
 #define CRAFT_DEBUG_LOAD
+
+#define CRAFT_DEBUG_DURATION_CREATING 10
+
+#define CRAFT_DEBUG_VISUAL_ON_ATTEMPT
+
+
+#ifndef EDITOR
+	#undef CRAFT_DEBUG_DURATION_CREATING
+	#undef CRAFT_DEBUG_LOAD
+	#undef CRAFT_DEBUG_VISUAL_ON_ATTEMPT
+#endif

@@ -1,0 +1,325 @@
+- ignored: true
+  default_modifiers: &def_mods
+     modifiers:
+        - name: default
+  data_common: &ref_main_cooking
+    # Пробросим самое частое
+    type: default
+    category: Food
+    options:
+      craft_duration: from_skill(180,60)
+
+  frying_default: &frying_pan
+    <<: *ref_main_cooking
+    type: system
+    system_specific: FryingPanSystem
+  
+  baking_oven_default: &baking_oven
+    <<: *ref_main_cooking
+    type: system
+    system_specific: BakingOvenSystem
+  
+  organic_grinder_default: &organic_grinder
+    <<: *ref_main_cooking
+    type: system
+    system_specific: OrganicGrinderSystem
+
+  interacting_default: &interacting
+    type: interact
+    category: Food
+    options:
+      craft_duration: from_skill(10,1)
+
+# =======================================================
+# Frying pan
+# =======================================================
+
+- <<: *frying_pan
+  name: Жареные пирожки
+  required:
+    components:
+      - class: Testo
+        check_type_of: false
+      - class: Egg
+        check_type_of: false
+  result:
+    class: Bun
+    count: 3
+    modifiers:
+      - name: set_name
+        value: "Жареный {basename.lower}"
+      - default
+
+- <<: *frying_pan
+  name: Блины
+  required:
+    components:
+      - class: Lepeshka
+        check_type_of: false
+      - class: Egg
+  result:
+    class: Pancakes
+    <<: *def_mods
+
+- <<: *frying_pan
+  name: Котлеты
+  required:
+    components:
+      - class: MeatMinced
+        check_type_of: false
+        count: 2
+      - class: SaltShaker
+        check_type_of: false
+        destroy: false
+        optional: true
+        meta_tag: spice
+  result:
+    class: Cutlet
+    count: 4
+    modifiers:
+      - name: execute_code
+        before_code: |
+          if ("spice" in tags) then {
+            spice:removeReagents(5)
+          }
+        code: |
+          if ("spice" in tags) then {
+            var _curcap = result:getFilledSpace()
+            result:setCapacity(_curcap+10)
+            result:addReagent("Spice",2)
+            result:addReagent("Nutriment",8)
+          }
+      - default
+
+# =======================================================
+# Baking oven
+# =======================================================
+
+- <<: *baking_oven
+  required:
+    components:
+      - class: Lepeshka
+      - class: Melteshonok
+  result:
+    class: Shavirma
+    <<: *def_mods
+
+- <<: *baking_oven
+  desc: Дополнительно 1 любой ингредиент
+  required:
+    components:
+      - class: Testo
+        check_type_of: false
+        count: 2
+      - class: ButterPiece
+      # любая еда в которой не меньше 5 единиц реагентов
+      - class: IFoodItem
+        condition: :isFood() && :getFilledSpace() >= 5
+        meta_tag: mainIngredient
+  result:
+    class: Pie
+    modifiers:
+      - name: set_name
+        value: "Пирог с {mainIngredient:name.lower}"
+      - name: transfer_reagents
+        get_from_all: 100%
+      - default
+
+- <<: *baking_oven
+  required:
+    components:
+      - class: Testo
+        check_type_of: false
+      - class: Egg
+        count: 2
+  result:
+    class: Bread
+    <<: *def_mods
+
+- <<: *baking_oven
+  required:
+    components:
+      - class: Egg
+        count: 2
+  result:
+    class: Omlet
+    <<: *def_mods
+
+- <<: *baking_oven
+  required:
+    components:
+      - class: Testo
+        check_type_of: false
+  result:
+    class: Lepeshka
+    <<: *def_mods
+
+# =======================================================
+# grinder
+# =======================================================
+
+- <<: *organic_grinder
+  required:
+    components:
+      - class: MeatChopped
+  result:
+    class: MeatMinced
+    <<: *def_mods
+- <<: *organic_grinder
+  required:
+    components:
+      - class: Testo
+  result:
+    class: Lapsha
+    <<: *def_mods
+
+# =======================================================
+# Interacting
+# =======================================================
+
+- <<: *interacting
+  name: Нарезка мяса
+  required:
+    components:
+      hand_item:
+        class: Knife
+      target:
+        class: Meat
+        check_type_of: false
+  result:
+    class: MeatChopped
+    count: {min: 2, max: 4}
+    modifiers:
+      - name: transfer_reagents
+        get_from_all: 100%
+        partial_transfer: true
+        precentage_loss: 20 # типо жир и прочий мусор
+      - default # дефолт после трансфера чтобы вес правильно расчитался
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: Knife
+      target:
+        class: Butter
+        destroy: false #чтобы кусочки отрезались
+  result:
+    class: ButterPiece
+    count: 1
+    modifiers:
+      - name: transfer_reagents
+        get_from_all: 2
+      - default
+
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: Item
+        name: Молоко
+        destroy: false
+        meta_tag: milkContainer
+        condition: |
+          :isReagentContainer() 
+          && :hasReagent("Milk",10)
+      target:
+        meta_tag: mukaSource
+        class: Muka
+        check_type_of: false
+        destroy: false
+  result:
+    class: Testo
+    count: 1
+    modifiers:
+      - name: transfer_reagents
+        get_from: 
+          milkContainer: 30
+      - name: replace_reagent
+        from: Milk
+        to: Nutriment
+      - name: execute_code
+        code: |
+          mukaSource:removeReagents(10)
+          if (mukaSource:getFilledSpace()==0) then {
+            delete(mukaSource)
+          }
+      - default
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: Knife
+      target:
+        class: Bread
+        check_type_of: false
+  result:
+    class: BreadChopped
+    count: {min: 6, max: 10}
+    modifiers:
+      - name: transfer_reagents
+        get_from_all: 100%
+        partial_transfer: true
+      - name: default
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: ButterPiece
+        destroy: true
+      target:
+        class: BreadChopped
+        condition: :name == "Кусок хлеба"
+  result:
+    class: BreadChopped
+    count: 1
+    modifiers:
+      - name: set_name
+        value: Бутер с маслом
+      - name: add_reagent
+        reagent: Nutriment
+        amount: 10
+      - name: set_model
+        value: relicta_models2\food\s_sandwich\s_sandwich.p3d
+      - default
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: ButterPiece
+      target:
+        class: BreadChopped
+        condition: :name == "Кусок хлеба"
+  result:
+    class: BreadChopped
+    count: 1
+    modifiers:
+      - name: add_reagent
+        reagent: Nutriment
+        amount: 15
+      - name: set_name
+        value: Бутер "по-калековски"
+      - default
+
+- <<: *interacting
+  required:
+    components:
+      hand_item:
+        class: Knife
+      target:
+        class: Pie
+        check_type_of: false
+  failed_handler:
+    handler_type: default
+  result:
+    class: PiePiece
+    radius: 0.1
+    count: {min: 7, max: 10}
+    modifiers:
+      - name: transfer_reagents
+        get_from_all: 100%
+      - name: default

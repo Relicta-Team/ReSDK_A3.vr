@@ -101,6 +101,9 @@ atmos_tryIgnite = {
 			ignite_info("   - precheck material object " + str _x)
 			if prob(callFunc(_mat,getFireDamageIgniteProb)) then {
 				ignite_info("   - postcheck object " + str _x)
+				
+				if getVar(_obj,_lockedCanIgnite) exitWith {}; //temp exit to avoid crafted
+
 				if callFuncParams(_obj,checkCanIgniteObject,_x) then {
 					[_pos,"AtmosAreaFire",true] call atmos_createProcess;
 					break;

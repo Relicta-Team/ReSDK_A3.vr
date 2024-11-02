@@ -70,6 +70,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 	//последний владелец который брал предмет
 	editor_attribute("InternalImpl")
 	var(lastAttLoc,vec2(nullPtr,ATTACK_TYPE_SWING));
+	getter_func(getLastTouched,getSelf(lastAttLoc) select 0); //кто последний трогал предмет
 	getter_func(getAttacksTypeAssoc,ATTACK_TYPE_ASSOC_SWING_ONLY);
 
 	//проигрывает звук из категории
@@ -268,6 +269,12 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 	// Если нужно ограничить логику возможности установки - юзай canPickup,..
 	func(canSetToSlot) {
 		objParams_1(_slot);
+		if equalTypes(_slot,"") then {
+			private _slotInd = INV_LIST_VARNAME find _slot;
+			if (_slotInd != -1) then {
+				_slot = INV_LIST_VARNAME select _slotInd;
+			};
+		};
 		if (_slot in INV_LIST_HANDS) exitWith {true};
 
 		_slot in getSelf(allowedSlots)

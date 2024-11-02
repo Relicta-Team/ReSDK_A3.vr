@@ -2351,7 +2351,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact_examine.sqf at line 19](../../../Src/client/Interactions/interact_examine.sqf#L19)
+File: [client\Interactions\interact_examine.sqf at line 22](../../../Src/client/Interactions/interact_examine.sqf#L22)
 # interact_grabbing.sqf
 
 ## INTERACT_GRAB_UPDATE_DELAY

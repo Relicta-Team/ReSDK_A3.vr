@@ -75,6 +75,19 @@ TEST(stringRegex)
 	_match = ["Hello my little world! My name is not important.","\w+ (\w+ (\w+))",2] call regex_getFirstMatch;
 	EXPECT_EQ(_match,"little");
 
+	private _string2 = "test Test Dest test2 Rest";
+	private _matches = [_string2,"[A-Z]\w+/g"] call regex_getMatches;
+	EXPECT_EQ(count _matches,3);
+	EXPECT_EQ(_matches select 0,"Test");
+	EXPECT_EQ(_matches select 1,"Dest");
+	EXPECT_EQ(_matches select 2,"Rest");
+
+	_matches = [_string2,"[A-Z](\w+)/g",1] call regex_getMatches;
+	EXPECT_EQ(count _matches,3);
+	EXPECT_EQ(_matches select 0,"est");
+	EXPECT_EQ(_matches select 1,"est");
+	EXPECT_EQ(_matches select 2,"est");
+
 	//TODO outofrange check
 
 }

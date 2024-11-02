@@ -152,6 +152,10 @@ vs_initChangeVoiceCtrl = {
 	
 	(findDisplay 46) displayAddEventHandler ["MouseZChanged",{
 		_value = _this select 1;
+		
+		//disable voice change on craft preview mode
+		if (craft_isPreviewEnabled) exitWith {};
+
 		if (_value > 0) then {
 			[vs_curVoiceMode + 1] call vs_changeVoiceVolume;
 		} else {

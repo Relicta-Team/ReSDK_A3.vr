@@ -1,0 +1,355 @@
+- ignored: true
+
+  constr_base: &construct
+    type: building
+    category: Building
+    options: &def_options
+      craft_duration: from_skill(40,10)
+
+  default_modifiers: &def_mods
+     modifiers:
+        - name: default
+
+# =======================================================
+# заборы/ограды
+# =======================================================
+
+- <<: *construct
+  name: Деревянный забор (легкий)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 4
+        check_type_of: false
+  result:
+    class: WoodenSmallFence
+    <<: *def_mods
+
+- <<: *construct
+  name: Деревянный забор (улучшенный)
+  desc: Укрепленная версия легкого забора
+  required:
+    components:
+      - class: LogDebris(1-2)
+        count: 2
+        check_type_of: false
+      - class: WoodenSmallFence
+        name: Легкий деревянный забор
+        check_type_of: false
+  options:
+    <<: *def_options
+    collect_distance: 1.5
+  result:
+    class: WoodenSmallFence3
+    <<: *def_mods
+
+- <<: *construct
+  name: Плотный забор
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 5
+        check_type_of: false
+  result:
+    class: WoodenSmallFence2
+    <<: *def_mods
+
+- <<: *construct
+  name: Плотный забор (высокий)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 8
+        check_type_of: false
+  result:
+    class: WoodenSmallFence1
+    <<: *def_mods
+
+- <<: *construct
+  name: Палочная ограда
+  required:
+    components:
+      - class: LogDebris(1-2)
+        count: 1
+        check_type_of: false
+      - class: WoodenDebris7
+        count: 4
+  result:
+    class: SmallFenceMadeOfSticks
+    <<: *def_mods
+
+# =======================================================
+# двери
+# =======================================================
+
+- <<: *construct
+  name: Калитка
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 6
+        check_type_of: false
+  result:
+    class: Wicket
+    <<: *def_mods
+
+- <<: *construct
+  name: Деревянная дверь
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 6
+        check_type_of: false
+  result:
+    class: WoodenDoor
+    <<: *def_mods
+# =======================================================
+# стены
+# =======================================================
+
+- <<: *construct
+  name: Деревянная ограда с металлом
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 10
+        check_type_of: false
+      - class: MetalDebris(1-2)
+  result:
+    class: MediumFenceOfSheetsAndBoards
+    <<: *def_mods
+
+- <<: *construct
+  name: Стальная ограда
+  required:
+    components:
+      - class: MetalDebris(1-2)
+        count: 6
+        check_type_of: false
+  result:
+    class: SheetMetalTinFence
+    <<: *def_mods
+
+- <<: *construct
+  name: Стальная ограда (улучшенная)
+  required:
+    components:
+      - class: MetalDebris(1-2)
+        count: 6
+        check_type_of: false
+      - class: SheetMetalTinFence
+        name: Стальная ограда
+        check_type_of: false
+  result:
+    class: TinFence
+    <<: *def_mods
+
+- <<: *construct
+  name: Деревянная стена
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 8
+        check_type_of: false
+  result:
+    class: MediumWoodenWall
+    <<: *def_mods
+
+- <<: *construct
+  name: Каменная стена
+  required:
+    components:
+      - class: StoneDebris(1-5)
+        count: 10
+        check_type_of: false
+  result:
+    class: StoneWall
+    <<: *def_mods
+
+# =======================================================
+# полы
+# =======================================================
+
+- <<: *construct
+  name: Скрепленные доски (короткие)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 6
+        check_type_of: false
+  result:
+    class: ShortRottenBoards
+    <<: *def_mods
+
+- <<: *construct
+  name: Скрепленные доски
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 8
+        check_type_of: false
+  result:
+    class: LongRottenBoards
+    <<: *def_mods
+
+- <<: *construct
+  name: Деревянный блочный пол
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 8
+        check_type_of: false
+  result:
+    class: WoodenSmallFloor
+    <<: *def_mods
+
+- <<: *construct
+  name: Каменная кладка
+  required:
+    components:
+      - class: StoneDebris(1-5)
+        count: 6
+        check_type_of: false
+  result:
+    class: SmallStoneRoad
+    <<: *def_mods
+
+# =======================================================
+# столбы
+# =======================================================
+
+- <<: *construct
+  name: Виселица
+  required:
+    components:
+      - class: LogDebris(1-2)
+        count: 5
+        check_type_of: false
+  result:
+    class: Gallows
+    <<: *def_mods
+
+- <<: *construct
+  name: Большой крест
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 4
+        check_type_of: false
+  result:
+    class: WoodCross
+    <<: *def_mods
+
+- <<: *construct
+  name: Могильный крест
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 2
+        check_type_of: false
+  result:
+    class: WoodenGraveCross
+    <<: *def_mods
+
+# =======================================================
+# монументы
+# =======================================================
+
+# - <<: *construct
+#   name: Стена с рисунками
+#   required:
+#     components:
+#       - class: StoneDebris(1-5)
+#         count: 18
+#         check_type_of: false
+#   result:
+#     class: AncientMonument1
+#     <<: *def_mods
+
+# - <<: *construct
+#   name: Диск с отверстием
+#   required:
+#     components:
+#       - class: StoneDebris(1-5)
+#         count: 16
+#         check_type_of: false
+#   result:
+#     class: AncientMonument2
+#     <<: *def_mods
+
+# - <<: *construct
+#   name: Чаша
+#   required:
+#     components:
+#       - class: StoneDebris(1-5)
+#         count: 16
+#         check_type_of: false
+#   result:
+#     class: AncientMonument3
+#     <<: *def_mods
+
+# =======================================================
+# здания
+# =======================================================
+
+- <<: *construct
+  name: Тканевый навес (малый)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 4
+      - class: ClothDebris(1-2)
+        count: 6
+        check_type_of: false
+  result:
+    class: SmallClothShelter
+    <<: *def_mods
+
+- <<: *construct
+  name: Тканевый навес
+  required:
+    components:
+      - class: WoodenDebris7
+        count: 4
+        check_type_of: false
+      - class: ClothDebris(1-2)
+        count: 8
+        check_type_of: false
+      - class: NeedleWithThreads
+        destroy: false
+  result:
+    class: MediumClothCanopy
+    <<: *def_mods
+
+- <<: *construct
+  name: Кабина туалета
+  required:
+    components:
+      - class: WoodenDebris(1-2)
+        count: 10
+        check_type_of: false
+  result:
+    class: WoodenToiletSmall
+    <<: *def_mods
+
+- <<: *construct
+  name: Сарай (малый)
+  required:
+    components:
+      - class: WoodenDebris(1-2)
+        count: 16
+        check_type_of: false
+  result:
+    class: SmallSheetMetalHouse2
+    <<: *def_mods
+
+- <<: *construct
+  name: Сарай (большой)
+  required:
+    components:
+      - class: WoodenDebris(1-2)
+        count: 24
+        check_type_of: false
+  result:
+    class: SmallSheetMetalHouse
+    <<: *def_mods

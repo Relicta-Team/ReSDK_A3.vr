@@ -70,6 +70,17 @@ func(getReagentVolume)
 	callSelf(getReagents) getOrDefault [_r,0]
 };
 
+func(replaceReagent)
+{
+	objParams_2(_from,_to);
+	private _reagents = callSelf(getReagents);
+	if !(_from in _reagents) exitWith {false};
+	private _oldValue = _reagents get _from;
+	_reagents deleteAt _from;
+	_reagents set [_to,_oldValue];
+	true
+};
+
 //добавляет реагент
 func(addReagent)
 {
@@ -110,6 +121,12 @@ func(removeReagentsAndReturn)
 	_l
 };
 
+func(setCapacity)
+{
+	objParams_1(_c);
+	ms_setCapacity(getSelf(reagents),_c);
+};
+
 //удаляет всё содержимое и нормализует температуру
 func(clearReagentSpace)
 {
@@ -118,7 +135,7 @@ func(clearReagentSpace)
 	
 	{
 		[_ms,_x,_y] call ms_removeMatter;
-	} foreach ms_getMatterList(_ms);
+	} foreach array_copy(ms_getMatterList(_ms));
 	callFunc(this,onTransferReagents);
 };
 

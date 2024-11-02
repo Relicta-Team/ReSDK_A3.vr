@@ -670,6 +670,8 @@ region(Connect control events)
 		
 		// close net display if client dropped connection
 		callSelf(closeOpenedNetDisplay);
+		//release building preview if exist
+		callSelf(releaseBuildingPreview);
 	};
 
 region(Mob location info: position; direction; speed)
@@ -1832,6 +1834,78 @@ region(Progress helpers)
 	//progress subsystem
 	var(progressData,vec3(nullPtr,"",nullPtr)); //ref target, method call, optional item
 	
+	/*
+		lambda-like progress extension with context passing
+		Usage:
+		
+		private _number = 123;
+		private _bool = false;
+		_code = {
+			/// called after 3 seconds
+			assert(_number == 123);
+			assert(!_bool);
+		};
+		callSelfParams(doAfter,_code arg 3 arg ["_number" arg "_bool"]);
+	*/
+	func(doAfter)
+	{
+		params ['this',"_code__","_callAfter","_context",["_checkType",-1]];
+		
+		if equalTypes(_context,"") then {
+			_context = [_context];
+		};
+		private _ctxSignature = _context joinString "+";
+		if (!(_ctxSignature in mob_static_assign_signatures)) then {
+			private _builder = [];
+			{
+				_builder pushBack (format["_ctxVals set [%1,%2];",_foreachindex,_x]);
+			} foreach _context;
+			mob_static_savectx_signatures set [_ctxSignature,compile (_builder joinString endl)];
+		};
+
+		//fill values
+		private _ctxVals = [];
+		0 call (mob_static_savectx_signatures get _ctxSignature);
+		
+		setSelf(___doafter_code,_code__);  //[array<keys>,array<values>]
+		setSelf(__doafter_context,[_context arg _ctxVals]);
+		callSelfParams(startSelfProgress,"__doAfter_completed" arg _callAfter arg _checkType);
+	};
+	//transfer context
+	var(___doafter_code,null);
+	var(__doafter_context,null);
+	
+	func(__doAfter_completed)
+	{
+		objParams();
+		private _da_ctx__ = getSelf(__doafter_context);
+		setSelf(__doafter_context,null);
+		if isNullVar(_da_ctx__) exitWith {
+			this call (getSelf(___doafter_code));
+			setSelf(___doafter_code,null);
+		};
+		
+		private _vars = _da_ctx__ select 0;
+		private _assignSignature = _vars joinString "+";
+		private _vals = _da_ctx__ select 1;
+		if !(_assignSignature in mob_static_assign_signatures) then {
+			private _str = [];
+			{
+				_str pushBack (format["%1 = _this select %2;",_x,_foreachindex]);
+			} foreach _vars;
+			mob_static_assign_signatures set [_assignSignature,compile (_str joinString endl)];
+		};
+		//setup context vars
+		private _vars;
+		_vals call (mob_static_assign_signatures get _assignSignature);
+
+		this call (getSelf(___doafter_code));
+		setSelf(___doafter_code,null);
+	};
+	//caching doAfter context
+	mob_static_savectx_signatures = createhashMap;
+	mob_static_assign_signatures = createhashMap;
+
 	//faster equivalent
 	func(startSelfProgress)
 	{
@@ -2139,4 +2213,17 @@ region(Atmos subsystem)
 		};
 	};
 
+region(previef functionality)
+	getter_func(isInBuildingPreviewMode,!isNull(getSelf(___cachedCraftBuildPreview)));
+
+	func(releaseBuildingPreview)
+	{
+		objParams();
+		if !callSelf(isInBuildingPreviewMode) exitWith {};
+		
+		//send preview build end
+		callSelfParams(sendInfo,"craft_endPrevFromServer" arg [false]);
+
+		[this,false] call csys_onCraftEndPreview;
+	};
 endclass

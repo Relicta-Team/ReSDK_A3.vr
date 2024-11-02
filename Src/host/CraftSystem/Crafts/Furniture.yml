@@ -1,0 +1,431 @@
+- ignored: true
+
+  constr_base: &furniture
+    type: building
+    category: Furniture
+    options:
+      craft_duration: from_skill(25,5)
+
+  default_modifiers: &def_mods
+     modifiers:
+        - name: default
+
+# =======================================================
+# стулья
+# =======================================================
+
+- <<: *furniture
+  name: Деревянный стул
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 1
+        check_type_of: false
+      - class: WoodenDebris6
+        count: 4
+  result:
+    class: WoodenChair
+    <<: *def_mods
+
+- <<: *furniture
+  name: Деревянный стул (небольшой)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 1
+        check_type_of: false
+      - class: WoodenDebris6
+        count: 2
+  result:
+    class: SmallChair
+    <<: *def_mods
+
+- <<: *furniture
+  name: Деревянный стул (крупный)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 3
+        check_type_of: false
+      - class: WoodenDebris6
+        count: 4
+  result:
+    class: ChairCasual
+    <<: *def_mods
+
+- <<: *furniture
+  name: Деревянный стул с обивкой
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 2
+        check_type_of: false
+      - class: WoodenDebris6
+        count: 4
+      - class: ClothDebris(1-2)
+  result:
+    class: SmallChair1
+    <<: *def_mods
+
+- <<: *furniture
+  name: Барный стул
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 1
+        check_type_of: false
+      - class: [ToolPipe,ToolStraigthPipe,WoodenDebris6]
+        count: 4
+  result:
+    class: BarChair
+    <<: *def_mods
+
+# =======================================================
+# скамейки
+# =======================================================
+- <<: *furniture
+  name: Скамейка (маленькая)
+  desc: Нельзя перемещать после установки
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 1
+        check_type_of: false
+      - class: LogDebris(1-2)
+        count: 1
+  result:
+    class: Bench2
+    <<: *def_mods
+
+- <<: *furniture
+  name: Скамейка (подвижная)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 2
+        check_type_of: false
+      - class: WoodenDebris6
+        count: 4
+  result:
+    class: WoodenBench
+    <<: *def_mods
+
+- <<: *furniture
+  name: Скамейка
+  desc: Нельзя перемещать после установки
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 2
+        check_type_of: false
+      - class: LogDebris(1-2)
+        count: 1
+  result:
+    class: Bench3
+    <<: *def_mods
+
+- <<: *furniture
+  name: Скамейка со спинкой
+  desc: Нельзя перемещать после установки
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 4
+        check_type_of: false
+      - class: WoodenDebris7
+        count: 2
+  result:
+    class: WoodenAncientBench
+    <<: *def_mods
+
+# =======================================================
+# столы
+# =======================================================
+
+- <<: *furniture
+  name: Деревянный стол (небольшой)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 4
+        check_type_of: false
+      - class: WoodenDebris6
+        count: 4
+  result:
+    class: SmallWoodenTable
+    <<: *def_mods
+
+- <<: *furniture
+  name: Деревянный стол (небольшой, сквозной)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 4
+        check_type_of: false
+      - class: WoodenDebris6
+        count: 4
+  result:
+    class: SmallWoodenTableHandmade
+    <<: *def_mods
+
+- <<: *furniture
+  name: Деревянный стол
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 6
+        check_type_of: false
+      - class: WoodenDebris6
+        count: 4
+  result:
+    class: MediumWoodenTable
+    <<: *def_mods
+
+- <<: *furniture
+  name: Деревянный стол (городской)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 6
+        check_type_of: false
+      - class: WoodenDebris6
+        count: 4
+  result:
+    class: WoodenOfficeTable4
+    <<: *def_mods
+
+- <<: *furniture
+  name: Деревянный прилавок
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 7
+        check_type_of: false
+  result:
+    class: WoodenTableHandmade
+    <<: *def_mods
+
+- <<: *furniture
+  name: Деревянный роскошный столик
+  desc: Роскошный круглый деревянный стол
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 7
+        check_type_of: false
+      - class: WoodenDebris6
+        count: 3
+  result:
+    class: SmallRoundWoodenTable
+    <<: *def_mods
+
+- <<: *furniture
+  name: Стальной стол (маленький)
+  required:
+    components:
+      - class: MetalDebris(1-2)
+        count: 5
+        check_type_of: false
+      - class: [ToolPipe,ToolStraigthPipe]
+        count: 4
+  result:
+    class: SmallSteelTable
+    <<: *def_mods
+
+- <<: *furniture
+  name: Стальной стол
+  required:
+    components:
+      - class: MetalDebris(1-2)
+        count: 6
+        check_type_of: false
+      - class: [ToolPipe,ToolStraigthPipe]
+        count: 4
+  result:
+    class: SmallSteelTable1
+    <<: *def_mods
+
+- <<: *furniture
+  name: Стальной верстак
+  required:
+    components:
+      - class: MetalDebris(1-2)
+        count: 8
+        check_type_of: false
+      - class: [ToolPipe,ToolStraigthPipe]
+        count: 6
+  result:
+    class: Workbench
+    <<: *def_mods
+
+# =======================================================
+# кровати
+# =======================================================
+
+- <<: *furniture
+  name: Спальный матрас
+  required:
+    components:
+      - class: ClothDebris(1-2)
+        count: 5
+        check_type_of: false
+      - class: NeedleWithThreads
+        destroy: false
+  result:
+    class: SleepingMatras
+    <<: *def_mods
+
+- <<: *furniture
+  name: Спальный матрас (улучшенный)
+  required:
+    components:
+      - class: SleepingMatras
+        name: Спальный матрас
+        check_type_of: false
+      - class: WoodenDebris(1-5)
+        count: 2
+        check_type_of: false
+  options:
+    craft_duration: from_skill(25,5)
+    collect_distance: 1.5
+  result:
+    class: SleepingMatras1
+    <<: *def_mods
+
+- <<: *furniture
+  name: Двухярусная кровать (настенная)
+  required:
+    components:
+      - class: SleepingMatras1
+        name: Улучшенный спальный матрас
+        check_type_of: false
+      - class: WoodenDebris(1-5)
+        count: 4
+        check_type_of: false
+      - class: MetalDebris(1-2)
+  options:
+    craft_duration: from_skill(25,5)
+    collect_distance: 1.5
+  result:
+    class: DoubleCitizenBed
+    <<: *def_mods
+
+- <<: *furniture
+  name: Двухярусная деревянная кровать
+  required:
+    components:
+      - class: ClothDebris(1-2)
+        count: 6
+        check_type_of: false
+      - class: WoodenDebris(1-5)
+        count: 8
+        check_type_of: false
+  result:
+    class: DoubleCitizenBed1
+    <<: *def_mods
+
+# =======================================================
+# ящики
+# =======================================================
+
+- <<: *furniture
+  name: Деревянный ящик
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 8
+        check_type_of: false
+  result:
+    class: OldWoodenBox
+    <<: *def_mods
+
+- <<: *furniture
+  name: Деревянная коробка
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 14
+        check_type_of: false
+  result:
+    class: SquareWoodenBox
+    <<: *def_mods
+
+# =======================================================
+# тумбы и полки
+# =======================================================
+
+- <<: *furniture
+  name: Тумба (маленькая)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 2
+        check_type_of: false
+  result:
+    class: CaseBedroomSmall
+    <<: *def_mods
+
+- <<: *furniture
+  name: Тумба (средняя)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 4
+        check_type_of: false
+  result:
+    class: CaseBedroomMedium
+    <<: *def_mods
+
+- <<: *furniture
+  name: Тумба (большая)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 6
+        check_type_of: false
+  result:
+    class: CaseBedroom
+    <<: *def_mods
+
+- <<: *furniture
+  name: Стеллаж (маленький)
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 4
+        check_type_of: false
+  result:
+    class: WoodenSmallShelf1
+    <<: *def_mods
+
+- <<: *furniture
+  name: Стеллаж
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 6
+        check_type_of: false
+  result:
+    class: WoodenSmallShelf
+    <<: *def_mods
+
+# =======================================================
+# шкафы
+# =======================================================
+
+- <<: *furniture
+  name: Шкаф
+  required:
+    components:
+      - class: WoodenDebris(1-5)
+        count: 10
+        check_type_of: false
+  result:
+    class: BigClothCabinet
+    <<: *def_mods
+
+# =======================================================
+# кресла и диваны
+# =======================================================
+
+# TODO
