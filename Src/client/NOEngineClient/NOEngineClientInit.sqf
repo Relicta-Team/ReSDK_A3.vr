@@ -11,6 +11,7 @@
 #include <..\..\host\Atmos\Atmos.hpp>
 #include <..\..\host\Atmos\Atmos_shared.sqf>
 #include <..\ClientRpc\clientRpc.hpp>
+#include "..\Interactions\interact_component_shared.hpp"
 
 #include <NOEngineClient.h>
 

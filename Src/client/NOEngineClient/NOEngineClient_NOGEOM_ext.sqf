@@ -131,3 +131,12 @@ noe_client_getObjectNGOSkip = {
 		_obj
 	}
 };
+
+noe_client_getPtrInfoNGOSkip = {
+	params ["_obj","_worldRef"];
+	_obj = _obj call noe_client_getObjectNGOSkip;
+	if !isNullVar(_worldRef) then {
+		refset(_worldRef,_obj);
+	};
+	if (typeof _obj == BASIC_MOB_TYPE) then {_obj} else {getObjReference(_obj)};
+};

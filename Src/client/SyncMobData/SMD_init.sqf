@@ -534,7 +534,10 @@ smd_onGrabbed = {
 		_mob setVariable ["__loc_smd_isgrb",false];
 
 		if ((count (_mob getVariable ["__loc_smd_grb_pool",[]])) > 0) then {
-			{deleteVehicle _x} foreach (_mob getVariable ["__loc_smd_grb_pool",[]]);
+			{
+				[_x] call interact_removeOnScreenCapturedObject;
+				deleteVehicle _x;
+			} foreach (_mob getVariable ["__loc_smd_grb_pool",[]]);
 			_mob setVariable ["__loc_smd_grb_pool",[]];
 		};
 

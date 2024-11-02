@@ -30,7 +30,7 @@ _iact = {
 		9 * ?4? = 36 bytes
 	*/
 	//[ [(sin _dir) * _vuz,(cos _dir) * _vuz,sin _pitch], [0,0,_vuz]
-	if (count _this != 9) exitWith {
+	if (count _this < 9) exitWith {
 		errorformat("rpc<iact>() - Wrong params count => %1",count _this);
 	};
 	
@@ -38,6 +38,10 @@ _iact = {
 	_renderVec = [_this select [3,3],[0,0,_this select 6]];
 	_type = _this select 7;
 	_unit = _this select 8;
+	private _optTarg = null;
+	if (count _this > 9) then {
+		_optTarg = _this select 9;
+	};
 	
 	unrefObject(this,_unit,errorformat("rpc<iact>() - Mob object has no exists virtual object - %1",_unit));
 
@@ -53,6 +57,16 @@ _iact = {
 	private _pos = [];
 	private _normal = [];
 	private _target = [_renderPos,_renderVec,true,_bias,_pos,_ignore,_normal] call si_rayCast;
+	if !isNullVar(_optTarg) then {
+		if equalTypes(_optTarg,objNull) then {
+			_optTarg = (_optTarg getvariable ['link',nullPtr]) getvariable ['pointer',"noref"];
+		};
+		private _vobj__ = pointer_get(_optTarg);
+		if !pointer_isValidResult(_vobj__) exitWith {};
+		_target = _vobj__;
+		_pos = callFunc(_target,getPos);
+		_renderPos = callSelf(getPos);
+	};
 
 	//отмена прогресса при активности
 	callSelfParams(stopProgress,true);

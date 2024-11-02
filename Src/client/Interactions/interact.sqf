@@ -31,6 +31,8 @@
 
 #include "interact_grabbing.sqf"
 
+#include "interact_onScreenObjects.sqf"
+
 //#include "RayCastConcept.sqf"
 #include "interact_deprecated.sqf"
 
@@ -72,12 +74,21 @@ interact_onRMBPress = {
 	params [["_isWorld",true]];
 
 	(objnull call interact_getIntersectData) params ["_obj","_posAtl"];
-	if isNullReference(_obj) exitWith {trace("interact::onLMBPress() - Object is null reference")};
+	
+	//получаем спроецированный экранный объект (может являться NGO)
+	private _probOnScr = [!_isWorld,false] call interact_getOnSceenCapturedObject;
+	if !isNullVar(_probOnScr) then {
+		_obj = _probOnScr;
+		_posAtl = getposatl _obj;
+	};
+	
+	if isNullReference(_obj) exitWith {trace("interact::onRMBPress() - Object is null reference")};
 	if !(_posAtl call interact_checkPosition) exitWith {
-		traceformat("interact::onMainAction() - cant interact with %1. Too much distance",_obj);
+		traceformat("interact::onRMBPress() - cant interact with %1. Too much distance",_obj);
 	};
 	if (_obj call noe_client_isNGO) then {_obj = _obj call noe_client_getNGOSource};
 	private _hash = getObjReferenceWithMob(_obj);
+	
 	//rpcSendToServer("onAltClickTarget",[player arg _hash]);
 
 	private _isMob = typeof _obj == BASIC_MOB_TYPE;
@@ -142,6 +153,12 @@ interact_sendAction = {
 	_data pushBack (_sourceVecArr select 1 select 2);
 	_data pushBack _actionType;
 	_data pushBack player;
+
+	private _onscreen = [_isMouseMode] call interact_getOnSceenCapturedObject;
+	if !isNullVar(_onscreen) then {
+		_data pushBack _onscreen;
+	};
+
 	rpcSendToServer("iact",_data);
 };
 
@@ -302,29 +319,6 @@ interact_getRayCastData = {
  	];
 	if (count _ins == 0) exitWith {[objnull,[0,0,0],[0,0,0]]};
 	[_ins select 0 select 2,asltoatl (_ins select 0 select 0),_ins select 0 select 1]
-};
-
-interact_internal_onscreenObjs = [];
-
-interact_addOnScreenCapturedObject = {
-	params ["_wobj"];
-	interact_internal_onscreenObjs pushBackUnique _wobj;
-};
-
-interact_getOnSceenCapturedObject = {
-	params ["_reservedParam1","_reservedParam2"];
-	private _ret = objNull;
-	{
-		//for get onscreen point use worldtoscreen
-		if (typeOf _x == BASIC_MOB_TYPE) then {
-			//for mob use selection position
-		} else {
-			/*
-				todo
-			*/
-		};
-	} foreach interact_internal_onscreenObjs;
-	_ret
 };
 
 // Проверяет дистанцию до позиции - может ли взаимодействовать по дистанции
@@ -575,7 +569,19 @@ interact_onMouseButtonUp = {
 	};
 
 	if (_key == MOUSE_RIGHT && interact_isMouseModeActive) then {
+		trace("interact::onMouseButtonUp() - start verb collecting event");
 		(objnull call interact_getMouseIntersectData) params ["_obj","_pos"];//call interact_cursorObject;
+		
+		private _probOffscr = [true,false] call interact_getOnSceenCapturedObject;
+		if !isNullVar(_probOffscr) then {
+			_obj = _probOffscr;
+			_pos = getPosATL _obj;
+			//ngo block need center pos
+			if (_obj call noe_client_isNGO) then {
+				_pos = _obj modelToWorldVisual [0,0,0];
+			};
+		};
+		
 		if isNullReference(_obj) exitWith {};
 		if !([_obj,_pos] call interact_canInteractWithObject) exitWith {};
 
