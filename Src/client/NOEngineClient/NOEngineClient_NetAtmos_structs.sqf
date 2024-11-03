@@ -26,10 +26,14 @@
 
 #define ENABLE_OPTIMIZATION
 
+//отладочные линии
+#define ENABLE_DRAW_DEBUG_LINES
+
 //рандомные цвета для зон
 #define ENABLE_RANDOMIZATION_COLOR
 
 #ifndef EDITOR
+	#undef ENABLE_DRAW_DEBUG_LINES
 	#undef ENABLE_RANDOMIZATION_COLOR
 #endif
 
@@ -45,7 +49,9 @@ struct(AtmosAreaClient)
 
 	def(_optimizeDirty) null
 	def(_blockCoords) null //локальные координаты блоков по z осям
-	def(_regions) null
+	
+	//хранящиеся регионы
+	def(_regions) null //list[9] -> list<AtmosClientBatchRegion
 
 	def(init)
 	{
@@ -159,8 +165,6 @@ struct(AtmosAreaClient)
 			private _ltCfg = _cDat select NAT_CHUNKDAT_CFG;
 			_ltObj callp(updateLight,_ltCfg);
 		};
-
-		self callp(onChangedAreaInfo,_locid arg true);
 	}
 
 	def(unloadChunkInternal)
@@ -173,8 +177,6 @@ struct(AtmosAreaClient)
 		if isNullVar(_ltObj) exitWith {};
 		self callp(_deleteVisual,_ltObj);
 		_cDat set [NAT_CHUNKDAT_OBJECT,null];
-
-		self callp(onChangedAreaInfo,_locid arg false);
 	}
 
 	def(deleteChunk)
@@ -202,9 +204,17 @@ struct(AtmosAreaClient)
 		_vobj setvariable ["_basePos",_basePos];
 		_vobj setposatl _pos;
 		self set ["__debug_visual",_vobj];
+		setLastError("this can be undefined behaviour because self is atmosareaclient. use atmosvirtualstruct to store __debug_visual");
+		#endif
+		
+		private _obj = struct_newp(AtmosVirtualLight,_light arg _pos arg _chid);
+
+		#ifdef ENABLE_DRAW_DEBUG_LINES
+		private _renderTask = [_basePos,[1,0,1,1],10,[vec3(-ATMOS_SIZE_HALF,-ATMOS_SIZE_HALF,-ATMOS_SIZE_HALF),vec3(ATMOS_SIZE_HALF,ATMOS_SIZE_HALF,ATMOS_SIZE_HALF)]] call debug_addRenderPos;
+		_obj set ["_renderTask_ENABLE_DRAW_DEBUG_LINES",_renderTask];
 		#endif
 
-		struct_newp(AtmosVirtualLight,_light arg _pos arg _chid);
+		_obj
 	}
 
 	def(_deleteVisual)
@@ -213,6 +223,10 @@ struct(AtmosAreaClient)
 		
 		#ifdef NAT_DEBUG_ENABLE_VISUAL_HELPER
 		deleteVehicle (self get "__debug_visual");
+		#endif
+		#ifdef ENABLE_DRAW_DEBUG_LINES
+		(_obj get "_renderTask_ENABLE_DRAW_DEBUG_LINES") callv(stopLoop);
+		_obj set ["_renderTask_ENABLE_DRAW_DEBUG_LINES",null];
 		#endif
 	}
 
@@ -249,46 +263,6 @@ struct(AtmosAreaClient)
 	def(str)
 	{
 		format["Area%1",self getv(areaId)]
-	}
-
-	//! Это нигде не используется
-	def(onChangedAreaInfo)
-	{
-		params ["_chid","_isCreateOrUpdate"];
-		if (true) exitWith {};
-		#ifndef ENABLE_OPTIMIZATION
-		#endif
-		
-		private _locPos = _chid call atmos_decodeChId;
-		//traceformat("change area chid: %1; lpos %2",_chid arg _locPos)
-		private _chidconn = null;
-		private _chMap = self getv(chunks);
-		private _curLt = _chMap get _chid select NAT_CHUNKDAT_OBJECT;
-		{
-			_chidconn = _x call atmos_encodeChId;
-			if (_chidconn in _chMap) then {
-				private _ltObj = _chMap get _chidconn select NAT_CHUNKDAT_OBJECT;
-				//traceformat("  mod offs; before %1",(_curLt getv(aroundCtr)) arg _ltObj)
-				if (_isCreateOrUpdate) then {
-					_curLt modv(aroundCtr, + 1);
-					_ltObj modv(aroundCtr, + 1);
-				} else {
-					_curLt modv(aroundCtr, - 1);
-					_ltObj modv(aroundCtr, - 1);
-				};
-				//traceformat("  mod offs; after %1",(_curLt getv(aroundCtr)) arg _ltObj)
-			};
-		} foreach [
-			_locPos vectorAdd [0,1,0],
-			_locPos vectorAdd [0,-1,0],
-			_locPos vectorAdd [1,0,0],
-			_locPos vectorAdd [-1,0,0],
-			
-			_locPos vectorAdd [-1,1,0],
-			_locPos vectorAdd [1,1,0],
-			_locPos vectorAdd [-1,-1,0],
-			_locPos vectorAdd [1,-1,0]
-		];
 	}
 
 	def(optimizeProcess)
@@ -329,7 +303,6 @@ struct(AtmosAreaClient)
 				
 				(_alist select (_curZ-1)) pushBack _locPos;
 				_obj = _chMap get _chidloc select NAT_CHUNKDAT_OBJECT;
-				_obj callv(resetVars);
 				_mapAssoc set [_locPos,_obj];
 			} foreach _chs;
 		} else {
@@ -339,7 +312,6 @@ struct(AtmosAreaClient)
 				_alist set [_x-1,_lvllist];
 				{
 					_obj = _chMap get (_x call atmos_encodeChId) select NAT_CHUNKDAT_OBJECT;
-					_obj callv(resetVars);
 					_mapAssoc set [_x,_obj];
 					;false
 				} count _lvllist;
@@ -349,27 +321,48 @@ struct(AtmosAreaClient)
 		
 		private _obj = null;
 
-		// Функция для поиска максимального квадратного региона с текущей позиции
-		private _findMaxSquare = {
+		// Функция для поиска максимального региона с текущей позиции
+		private _findMaxZone = {
 			params ["_pos", "_activeChunks","_curObj"];
-			private _x = _pos select 0;
-			private _y = _pos select 1;
-			private _z = _pos select 2;
-			private _p1 = null;
-			private _p2 = null;
-			private _size = 0;
-			for "_i" from 1 to (ATMOS_AREA_SIZE) do {
-				_p1 = [_x + _i, _y + _size, _z];
-				_p2 = [_x + _size, _y + _i, _z];
-				if (!(_p1 in _activeChunks)) exitWith {};
-				if (!(_p2 in _activeChunks)) exitWith {};
-				//check sametype cfg
-				if !(_curObj callp(isSameCfgType,_mapAssoc get _p1)) exitWith {};
-				if !(_curObj callp(isSameCfgType,_mapAssoc get _p2)) exitWith {};
+			_pos params ["_x","_y","_z"];
+			
+			private _sizeX = 0;
+			private _sizeY = 0;
 
-				modvar(_size) + 1;
+			// Максимальное расширение по X
+			for "_i" from 1 to ATMOS_AREA_SIZE do {
+				private _pX = [_x + _i, _y, _z];
+				
+				// Проверяем, можем ли расшириться по X
+				if ((_pX in _activeChunks) && (_curObj callp(isSameCfgType, _mapAssoc get _pX))) then {
+					_sizeX = _i;
+				} else {
+					break;
+				};
 			};
-			_size
+
+			// Максимальное расширение по Y при зафиксированной ширине _sizeX
+			for "_j" from 1 to ATMOS_AREA_SIZE do {
+				private _canExpandY = true;
+				
+				for "_dx" from 0 to _sizeX do {
+					private _pY = [_x + _dx, _y + _j, _z];
+					
+					// Проверяем, можем ли расшириться по Y
+					if (!(_pY in _activeChunks) || !(_curObj callp(isSameCfgType, _mapAssoc get _pY))) then {
+						_canExpandY = false;
+						break;
+					};
+				};
+
+				if (_canExpandY) then {
+					_sizeY = _j;
+				} else {
+					break;
+				};
+			};
+
+			[_sizeX, _sizeY]
 		};
 
 		private _processZOpt = {
@@ -392,13 +385,13 @@ struct(AtmosAreaClient)
 
 				// Находим максимальный квадратный регион от этой позиции
 				private _curObj = _mapAssoc get _pos;
-				private _size = [_pos, _activeChunks,_curObj] call _findMaxSquare;
-				traceformat("  Max size for pos %1 is %2", _pos arg _size)
+				private _sizes = [_pos, _activeChunks,_curObj] call _findMaxZone;
+				traceformat("  Max size for pos %1 is %2", _pos arg _sizes)
 				
 				//ограничение зоны по квадратам. Прим.: 5x5 - ok; 6x6 -> lower to 5
 				//_size = _size - (_size%2);
 
-				if (_size == 0) then {
+				if equals(_sizes,vec2(0,0)) then {
 					//test hide
 					_optList pushBack (_mapAssoc get (_pos));
 					continue;
@@ -406,8 +399,8 @@ struct(AtmosAreaClient)
 
 
 				// Помечаем все чанки внутри найденного региона как обработанные
-				for "_i" from 0 to _size do {
-					for "_j" from 0 to _size do {
+				for "_i" from 0 to (_sizes select 0) do {
+					for "_j" from 0 to (_sizes select 1) do {
 						private _chunkPos = _locPos vectorAdd [_i,_j,0];
 						_processed pushBack _chunkPos;
 						_mapAssoc get (_chunkPos ) callp(setHidden,true);
@@ -417,21 +410,19 @@ struct(AtmosAreaClient)
 
 				// Определяем центральную позицию для "огня"
 				private _centerPos = [
-					(_pos select 0) + floor(_size / 2),
-					(_pos select 1) + floor(_size / 2),
+					(_pos select 0) + floor((_sizes select 0) / 2),
+					(_pos select 1) + floor((_sizes select 1) / 2),
 					_z
 				];
 				traceformat("  unhide pos %1 exists %2",_centerPos arg _centerPos in _mapAssoc)
 				private _centerObj = _mapAssoc get _centerPos;
 				_centerObj callp(setHidden,false);
-				_centerObj setv(renderZone,_size);
+				_centerObj setv(renderZone,_sizes);
 				//смещение на следующую зону
-				if (_size%2==1) then {
-					_centerObj setv(useOffsetMid,true);
-				};
+				// if (_size%2==1) then {
+				// 	_centerObj setv(useOffsetMid,true);
+				// };
 				_centerObj callv(reloadLight);
-
-				// Создаём "центральный огонь" для региона, с размером _size
 				
 			} foreach _activeChunks;
 
@@ -447,8 +438,8 @@ struct(AtmosAreaClient)
 
 		{
 			private _z = _foreachIndex + 1;
-			//traceformat(" ----- process zlevel: %1; count %2",_z arg count _x)
 			if (count _x > 0) then {
+				traceformat(" ----- process zlevel: %1; count %2",_z arg count _x)
 				if isNullVar(_levels) then {
 					_x sort true; //by near to far
 				};
@@ -464,13 +455,8 @@ struct(AtmosVirtualLight)
 	def(effects) null;
 	def(id) -1; //config id
 	def(localChId) null; //local chunk id from [1,1,1] to [10,10,10]
-
-	def(aroundCtr) 0
 	
-	//размер зоны оптимизации
-	def(renderZone) null
-	//уменьшение дропа частиц
-	def(decZoneRend) null 
+	
 	//при включении блок создается со смещением 0.5
 	def(useOffsetMid) false
 
@@ -499,96 +485,8 @@ struct(AtmosVirtualLight)
 	def(loadEmitters)
 	{
 		params ["_cfg","_pos"];
-		private _renderZone = self getv(renderZone);
-		private _decZoneRend = self getv(decZoneRend);
-		private _funcHandle = {
-			params ["_o","_p","_v","_alias"];
-			//use le_se_getParticleOption, le_se_setParticleOption for change object options
-			
-			if !isNullVar(_decZoneRend) then {
-				if (_p == "setDropInterval") then {
-					private _dint = [_p,"interval",_v] call le_se_getParticleOption;
-					[_p,"interval",_v,
-						_dint * (_decZoneRend*1.2)
-					] call le_se_setParticleOption
-				};
-			};
-
-			//оптимизация батченной зоны
-			if !isNullVar(_renderZone) then {
-				if (_alias == "Пламя") then {
-					
-					if (_p == "setparticlerandom") then {
-						
-						//update position
-						private _old = [_p,"positionVar",_v] call le_se_getParticleOption;
-						_old set [0,_renderZone/2];
-						_old set [1,_renderZone/2];
-						[_p,"positionVar",_v,_old] call le_se_setParticleOption;
-
-						
-					};
-					//update drop
-					if (_p == "setdropinterval") then {
-						private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
-						[_p,"interval",_v,_dropInterval
-						// /_renderZone
-						] call le_se_setParticleOption;
-					};
-					//update size
-					if (_p == "setParticleParams") then {
-						private _size = [_p,"size",_v] call le_se_getParticleOption;
-						[_p,"size",_v,_size apply {_x*(_renderZone/2)}] call le_se_setParticleOption;
-
-						#ifdef ENABLE_RANDOMIZATION_COLOR
-						//random color
-						private _colorArr = [_p,"color",_v] call le_se_getParticleOption;
-						["clr %1",_colorArr] call cprint;
-						private _rndClr = [rand(0,1),rand(0,1),rand(0,1),1];
-						_colorArr = _colorArr apply {
-							_rndClr
-							//[_rndClr select 0,_rndClr select 1,_rndClr select 2,_x select 3]
-						};
-						[_p,"color",_v,_colorArr] call le_se_setParticleOption;
-						#endif
-					};
-				};
-				//disable sparks
-				if (_alias == "Искры") then {
-					if (_p == "setdropinterval") then {
-						[_p,"interval",_v,1000] call le_se_setParticleOption;
-					};
-				};
-				//disable refract
-				if (_alias == "Преломление") then {
-					if (_p == "setdropinterval") then {
-						[_p,"interval",_v,1000] call le_se_setParticleOption;
-					};
-				};
-				//smoke
-				if (_alias == "Частицы 1") then {
-					if (_p == "setparticlerandom") then {
-						//update position
-						private _old = [_p,"positionVar",_v] call le_se_getParticleOption;
-						_old set [0,_renderZone/2];
-						_old set [1,_renderZone/2];
-						[_p,"positionVar",_v,_old] call le_se_setParticleOption;
-					};
-					if (_p == "setdropinterval") then {
-						private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
-						[_p,"interval",_v,_dropInterval/_renderZone] call le_se_setParticleOption;
-					};
-				};
-			};
-			
-			
-
-		};
-		private _placePos = _pos;
-		if (self getv(useOffsetMid)) then {
-			_placePos = _placePos vectorAdd [ATMOS_SIZE_HALF,ATMOS_SIZE_HALF,0];
-		};
-		self setv(effects,[_cfg arg _placePos arg _funcHandle] call le_se_createUnmanagedEmitter);
+		
+		self setv(effects,[_cfg arg _pos] call le_se_createUnmanagedEmitter);
 		self setv(id,_cfg);
 		self setv(_pos,_pos);
 	}
@@ -711,65 +609,147 @@ endstruct
 
 //структура региона
 struct(AtmosClientBatchRegion)
+	//локальные точки начала и конца зоны
 	def(startPos) [0,0,0]
 	def(endPos) [0,0,0]
-	def(_midPos) [0,0,0]
-	def(size) 0
+	def(sizes) [0,0] //размер зоны
+
+	//размер зоны оптимизации vec2
+	def(renderZone) null
+	//уменьшение дропа частиц
+	def(decZoneRend) null 
 
 	//references to AtmosVirtualLight
 	def(blockRefs) null //list<AtmosVirtualLight>
-	def(midBlockRef) null //AtmosVirtualLight
-
-	def(cfgType) -1 //light config type for batch render
 
 	def(init)
 	{
 		self setv(blockRefs,[]);
 	}
 
-	//проверка локальной позиции
-	def(isPosInsideRegion)
-	{
-		params ["_pos"];
-
-		private _semiSize = (self getv(size))/2;
-		
-		_pos inArea [self getv(_midPos), _semiSize, _semiSize, 0, true]
-	}
-
-	def(makeRegion)
-	{
-		params ["_objList","_midBlock","_startPos","_endPos","_size"];
-
-		self setv(blockRefs,_objList);
-		self setv(midBlockRef,_midBlock);
-
-		self setv(startPos,_startPos);
-		self setv(endPos,_endPos);
-
-		self setv(_midPos,[[_endPos arg _startPos]] call getPosListCenter);
-
-		self setv(size,_size);
-	}
-
 	//включает или отключает режим рендера зоны. true - включение
 	def(setRenderMode)
 	{
 		params ["_mode"];
-		{
-			_x callp(setHidden,_mode);
-			false
-		} count (self getv(blockRefs));
+			
+	}
 
-		private _mid = (self getv(midBlockRef));
-		private _size = self getv(size);
-		if (_mode) then {
-			_mid setv(useOffsetMid,_size%2==1);
-			_mid setv(renderZone,_size);
-			_mid callv(reloadLight);
-		} else {
-			_mid setv(renderZone,null);
-			_mid callv(reloadLight);
+	def(batchCfg) -1 //конфиг батч эмиттера
+	def(batchPos) [0,0,0] //глобальная позиция батч эмиттера
+	def(batchIsLoaded) false //загружен ли визуал
+	def(emitter) null //массив на world эмиттеры
+
+	//обновляет батч
+	def(reloadBatchEmitter)
+	{
+		if (self getv(batchIsLoaded)) then {
+			self callv(unloadBatchEmitter);
+		};
+		self callv(loadBatchEmitter);
+	}
+
+	//загрузка батч эмиттера
+	def(loadBatchEmitter)
+	{
+		if (self getv(batchIsLoaded)) exitWith {};
+
+		private _renderZone = self getv(renderZone);
+		private _decZoneRend = self getv(decZoneRend);
+		private _funcHandle = {
+			params ["_o","_p","_v","_alias"];
+			//use le_se_getParticleOption, le_se_setParticleOption for change object options
+			
+			if !isNullVar(_decZoneRend) then {
+				if (_p == "setDropInterval") then {
+					private _dint = [_p,"interval",_v] call le_se_getParticleOption;
+					[_p,"interval",_v,
+						_dint * (_decZoneRend*1.2)
+					] call le_se_setParticleOption
+				};
+			};
+
+			//оптимизация батченной зоны
+			if !isNullVar(_renderZone) then {
+				_renderZone params ["_szX","_szY"];
+				if (_alias == "Пламя") then {
+					
+					if (_p == "setparticlerandom") then {
+						
+						//update position
+						private _old = [_p,"positionVar",_v] call le_se_getParticleOption;
+						_old set [0,_szX/2];
+						_old set [1,_szY/2];
+						[_p,"positionVar",_v,_old] call le_se_setParticleOption;
+
+						
+					};
+					//update drop
+					if (_p == "setdropinterval") then {
+						private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
+						[_p,"interval",_v,_dropInterval
+						// /_renderZone
+						] call le_se_setParticleOption;
+					};
+					//update size
+					if (_p == "setParticleParams") then {
+						private _size = [_p,"size",_v] call le_se_getParticleOption;
+						[_p,"size",_v,_size apply {_x*(((_szX+_szY)/2)/2)}] call le_se_setParticleOption;
+
+						#ifdef ENABLE_RANDOMIZATION_COLOR
+						//random color
+						private _colorArr = [_p,"color",_v] call le_se_getParticleOption;
+						["clr %1",_colorArr] call cprint;
+						private _rndClr = [rand(0,1),rand(0,1),rand(0,1),1];
+						_colorArr = _colorArr apply {
+							_rndClr
+							//[_rndClr select 0,_rndClr select 1,_rndClr select 2,_x select 3]
+						};
+						[_p,"color",_v,_colorArr] call le_se_setParticleOption;
+						#endif
+					};
+				};
+				//disable sparks
+				if (_alias == "Искры") then {
+					if (_p == "setdropinterval") then {
+						[_p,"interval",_v,1000] call le_se_setParticleOption;
+					};
+				};
+				//disable refract
+				if (_alias == "Преломление") then {
+					if (_p == "setdropinterval") then {
+						[_p,"interval",_v,1000] call le_se_setParticleOption;
+					};
+				};
+				//smoke
+				if (_alias == "Частицы 1") then {
+					if (_p == "setparticlerandom") then {
+						//update position
+						private _old = [_p,"positionVar",_v] call le_se_getParticleOption;
+						_old set [0,_szX/2];
+						_old set [1,_szY/2];
+						[_p,"positionVar",_v,_old] call le_se_setParticleOption;
+					};
+					if (_p == "setdropinterval") then {
+						private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
+						[_p,"interval",_v,_dropInterval/((_szX+_szY)/2)] call le_se_setParticleOption;
+					};
+				};
+			};
+			
+			
+
+		};
+		
+		self setv(emitter,[self getv(batchCfg) arg self getv(batchPos) arg _funcHandle] call le_se_createUnmanagedEmitter);
+		self setv(batchIsLoaded,true);
+	}
+
+	def(unloadBatchEmitter)
+	{
+		if (self getv(batchIsLoaded)) then {
+			self setv(batchIsLoaded,false);
+			deleteVehicle (self getv(emitter));
+			self setv(emitter,null);
 		};
 	}
 endstruct

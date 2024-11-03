@@ -87,7 +87,7 @@ noe_client_nat_onUpdate = {
 				};
 			} foreach _odList;
 			if (count _optList > 0) then {
-				_aObj callp(optimizeProcess,_optList);
+				//_aObj callp(optimizeProcess,_optList);
 			};
 		};
 	} foreach _toLoad;
