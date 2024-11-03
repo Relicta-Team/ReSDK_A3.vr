@@ -27,13 +27,15 @@
 #define ENABLE_OPTIMIZATION
 
 //отладочные линии
-#define ENABLE_DRAW_DEBUG_LINES
+#define ENABLE_DRAW_DEBUG_LINES_VIRTUALCHUNKS
+#define ENABLE_DRAW_DEBUG_LINES_REGIONS
 
 //рандомные цвета для зон
 #define ENABLE_RANDOMIZATION_COLOR
 
 #ifndef EDITOR
-	#undef ENABLE_DRAW_DEBUG_LINES
+	#undef ENABLE_DRAW_DEBUG_LINES_VIRTUALCHUNKS
+	#undef ENABLE_DRAW_DEBUG_LINES_REGIONS
 	#undef ENABLE_RANDOMIZATION_COLOR
 #endif
 
@@ -209,7 +211,7 @@ struct(AtmosAreaClient)
 		
 		private _obj = struct_newp(AtmosVirtualLight,_light arg _pos arg _chid);
 
-		#ifdef ENABLE_DRAW_DEBUG_LINES
+		#ifdef ENABLE_DRAW_DEBUG_LINES_VIRTUALCHUNKS
 		private _renderTask = [_basePos,[1,0,1,1],10,[vec3(-ATMOS_SIZE_HALF,-ATMOS_SIZE_HALF,-ATMOS_SIZE_HALF),vec3(ATMOS_SIZE_HALF,ATMOS_SIZE_HALF,ATMOS_SIZE_HALF)]] call debug_addRenderPos;
 		_obj set ["_renderTask_ENABLE_DRAW_DEBUG_LINES",_renderTask];
 		#endif
@@ -224,7 +226,7 @@ struct(AtmosAreaClient)
 		#ifdef NAT_DEBUG_ENABLE_VISUAL_HELPER
 		deleteVehicle (self get "__debug_visual");
 		#endif
-		#ifdef ENABLE_DRAW_DEBUG_LINES
+		#ifdef ENABLE_DRAW_DEBUG_LINES_VIRTUALCHUNKS
 		(_obj get "_renderTask_ENABLE_DRAW_DEBUG_LINES") callv(stopLoop);
 		_obj set ["_renderTask_ENABLE_DRAW_DEBUG_LINES",null];
 		#endif
@@ -370,11 +372,10 @@ struct(AtmosAreaClient)
 			private _optList = []; //сюда записываются объекты оптимизации
 			
 			private _processed = []; // Отслеживание обработанных чанков для уровня
-			
-			// Поиск квадратных регионов
+
+			// Поиск регионов
 			{
-				private _locPos = _x; //call atmos_decodeChId;
-				private _pos = _locPos;//[_locPos select 0, _locPos select 1];
+				private _pos = _x;
 
 				// Пропускаем уже обработанные чанки
 				if (_pos in _processed) then {
@@ -399,11 +400,15 @@ struct(AtmosAreaClient)
 
 
 				// Помечаем все чанки внутри найденного региона как обработанные
+				private _lproc = [];
+				private _curVlt = null;
 				for "_i" from 0 to (_sizes select 0) do {
 					for "_j" from 0 to (_sizes select 1) do {
-						private _chunkPos = _locPos vectorAdd [_i,_j,0];
+						private _chunkPos = _pos vectorAdd [_i,_j,0];
 						_processed pushBack _chunkPos;
-						_mapAssoc get (_chunkPos ) callp(setHidden,true);
+						_curVlt = _mapAssoc get _chunkPos;
+						_lproc pushBack _curVlt;
+						//_curVlt callp(setHidden,true);
 						//traceformat("  hide pos %1 exists %2",_chunkPos arg _chunkPos in _mapAssoc)
 					};
 				};
@@ -416,16 +421,33 @@ struct(AtmosAreaClient)
 				];
 				traceformat("  unhide pos %1 exists %2",_centerPos arg _centerPos in _mapAssoc)
 				private _centerObj = _mapAssoc get _centerPos;
-				_centerObj callp(setHidden,false);
-				_centerObj setv(renderZone,_sizes);
+				_centerObj callp(setHidden,false); //for debug
+				//_centerObj setv(renderZone,_sizes);
 				//смещение на следующую зону
 				// if (_size%2==1) then {
 				// 	_centerObj setv(useOffsetMid,true);
 				// };
-				_centerObj callv(reloadLight);
+				//_centerObj callv(reloadLight);
+				private _curRegionList = self getv(_regions) select (_z - 1);
+				private _region = null;
+				{
+					if (_x callp(isEqualPosInfo,_pos arg _sizes)) exitWith {
+						_region = _x;
+					};
+					false
+				} count _curRegionList;
+				if isNullVar(_region) then {
+					_region = struct_newp(AtmosClientBatchRegion,self arg _sizes arg _pos arg _lproc);
+					_curRegionList pushBack _region;
+					_region callp(setRenderMode,true);
+				} else {
+					_region setv(virtLights,_lproc);
+					_region callp(setRenderMode,true);
+				};
 				
 			} foreach _activeChunks;
 
+			//second optimization layer
 			private _ctrend = count _optList;
 			if (_ctrend > 0) then {
 				{
@@ -455,17 +477,8 @@ struct(AtmosVirtualLight)
 	def(effects) null;
 	def(id) -1; //config id
 	def(localChId) null; //local chunk id from [1,1,1] to [10,10,10]
-	
-	
-	//при включении блок создается со смещением 0.5
-	def(useOffsetMid) false
 
-	def(resetVars)
-	{
-		self setv(renderZone,null);
-		self setv(decZoneRend,null);
-		self setv(useOffsetMid,false);
-	}
+	def(regionPosInfo) null; //vec2<Pos3d,Pos2d>
 
 	//do not change this constval
 	def(_fireTypes) [SLIGHT_ATMOS_FIRE_1,SLIGHT_ATMOS_FIRE_2,SLIGHT_ATMOS_FIRE_3];
@@ -614,24 +627,68 @@ struct(AtmosClientBatchRegion)
 	def(endPos) [0,0,0]
 	def(sizes) [0,0] //размер зоны
 
+	def(isEqualPosInfo)
+	{
+		params ["_start","_sizes"];
+		equals(_start,self getv(startPos))
+		&& {equals(_sizes,self getv(sizes))}
+	}
+
 	//размер зоны оптимизации vec2
 	def(renderZone) null
 	//уменьшение дропа частиц
 	def(decZoneRend) null 
 
 	//references to AtmosVirtualLight
-	def(blockRefs) null //list<AtmosVirtualLight>
+	def(virtLights) null //list<AtmosVirtualLight>
 
 	def(init)
 	{
-		self setv(blockRefs,[]);
+		params ["_area","_sizes","_startPos",["_virtLights",[]]];
+		self setv(startPos,_startPos);
+		private _endPos = _startPos vectorAdd _sizes;
+		self setv(endPos,_endPos);
+		self setv(sizes,_sizes);
+		self setv(virtLights,_virtLights);
+
+		self setv(batchCfg,SLIGHT_ATMOS_FIRE_3); //!test cfg
+
+		traceformat("registered batchzone: from %1 to %2",_startPos arg _endPos)
+
+		//define batchpos
+		private _chid = [_area getv(areaId),_startPos] call atmos_localChunkIdToGlobal;
+		//pos of first chunk in area
+		private _pos = (_chid call atmos_chunkIdToPos);
+		private _midPos = _pos vectorAdd [
+			(_sizes select 0)/2,
+			(_sizes select 1)/2,
+			0
+		];
+		self setv(batchPos,_midPos);
+	}
+
+	def(del)
+	{
+		self callv(unloadBatchEmitter);
 	}
 
 	//включает или отключает режим рендера зоны. true - включение
 	def(setRenderMode)
 	{
 		params ["_mode"];
-			
+		if (_mode) then {
+			{
+				_x callv(deleteEmitters);
+				false
+			} count (self getv(virtLights));
+			self callv(reloadBatchEmitter);
+		} else {
+			{
+				_x callv(reloadLight);
+				false
+			} count (self getv(virtLights));
+			self callv(unloadBatchEmitter);
+		};
 	}
 
 	def(batchCfg) -1 //конфиг батч эмиттера
@@ -653,7 +710,7 @@ struct(AtmosClientBatchRegion)
 	{
 		if (self getv(batchIsLoaded)) exitWith {};
 
-		private _renderZone = self getv(renderZone);
+		private _renderZone = self getv(sizes);
 		private _decZoneRend = self getv(decZoneRend);
 		private _funcHandle = {
 			params ["_o","_p","_v","_alias"];
@@ -742,6 +799,17 @@ struct(AtmosClientBatchRegion)
 		
 		self setv(emitter,[self getv(batchCfg) arg self getv(batchPos) arg _funcHandle] call le_se_createUnmanagedEmitter);
 		self setv(batchIsLoaded,true);
+
+		#ifdef ENABLE_DRAW_DEBUG_LINES_REGIONS
+		self getv(sizes) params ["_ddlX","_ddlY"];
+		private _renderTask = [self getv(batchPos),[0,1,0,1],50,
+			[
+				vec3(-_ddlX/2,-_ddlY/2,-0) vectorDiff vec3(ATMOS_SIZE_HALF,ATMOS_SIZE_HALF,ATMOS_SIZE_HALF),
+				vec3(_ddlX/2,_ddlY/2,0) vectorAdd vec3(ATMOS_SIZE_HALF,ATMOS_SIZE_HALF,ATMOS_SIZE_HALF)
+			]
+		] call debug_addRenderPos;
+		self set ["_renderTask_BatchRegion",_renderTask];
+		#endif
 	}
 
 	def(unloadBatchEmitter)
@@ -750,6 +818,12 @@ struct(AtmosClientBatchRegion)
 			self setv(batchIsLoaded,false);
 			deleteVehicle (self getv(emitter));
 			self setv(emitter,null);
+
+			#ifdef ENABLE_DRAW_DEBUG_LINES_REGIONS
+			(self get "_renderTask_BatchRegion") callv(stopLoop);
+			self set ["_renderTask_BatchRegion",null];
+			#endif
+
 		};
 	}
 endstruct
