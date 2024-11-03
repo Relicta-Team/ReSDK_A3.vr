@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define STRUCT_API_VERSION 1.5
+#define STRUCT_API_VERSION 1.6
 // enable fileinfo for structs. do not enable in release build
 //#define STRUCT_USE_ALLOC_INFO
 
@@ -108,9 +108,9 @@
 
 // * * * * * * * * * * * * Declaration base * * * * * * * * * * * * 
 
-#define struct(name) _sdecl__ = [ [STRUCT_MEM_TYPE, #name ], [STRUCT_MEM_FLAGS, struct_default_flag], ["__dflg__",false] ];
+#define struct(name) _t_annot_ = []; _sdecl__ = [ [STRUCT_MEM_TYPE, #name ], [STRUCT_MEM_FLAGS, struct_default_flag], ["__dflg__",false] ];
 #define base(basename) _sdecl__ pushBack [STRUCT_MEM_BASE, #basename ];
-#define endstruct ;spi_lst pushBack _sdecl__;
+#define endstruct ;spi_lst pushBack _sdecl__; if (count _t_annot_ > 0) then {_sdecl__ pushBack ["#type_annot_list",_t_annot_]};
 
 
 // * * * * * * * * * * * * Member declaration * * * * * * * * * * * *
@@ -128,6 +128,16 @@
 */
 
 #define def_null(varname) def(varname) null;
+
+/*
+	type annotation for fix bug #428
+	def_ret(functest) 
+	{
+		if (true) exitWith {"can be with ret_def(), not def()"};
+		"no returns..."
+	}
+*/
+#define def_ret(varname) ;_t_annot_ pushBack ( #varname ); def(varname)
 
 #define __STRUCT_CAST_PREFIX___ "$_"
 #define cast_def(typeto) ;_soffst__ = _sdecl__ pushBack [__STRUCT_CAST_PREFIX___ + (#varname)]; _sdecl__ select _soffst__ pushBack 
@@ -299,6 +309,26 @@
 			if !isNullVar(_t) then {
 				_decl set [STRUCT_MEM_TOSTRING,_t];
 			};
+
+			_t = _decl deleteat "#type_annot_list";
+			if !isNullVar(_t) then {
+				
+				private _cde_ = null;
+				//get unique
+				_t = _t arrayIntersect _t;
+
+				//recompile
+				{
+					_cde_ = _decl get _x;
+					if (_cde_ isequaltype {}) then {
+						//update code
+						_cde_ = compile (["call{", toString _cde_, "}"] joinString " ");
+						//save
+						_decl set [_x,_cde_];
+					};
+				} foreach _t;
+			};
+
 			//["Load struct %1",_decl get STRUCT_MEM_TYPE] call logInfo;
 			//virtual check
 			{
