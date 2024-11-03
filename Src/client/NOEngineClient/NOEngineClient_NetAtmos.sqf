@@ -273,7 +273,7 @@ noe_client_getAtmosVirtualLight = {
 	private _aId = _pos call atmos_getAreaIdByPos;
 	private _aObj = [_aId] call noe_client_nat_getAreaUnsafe;
 	if isNullVar(_aObj) exitWith {null};
-	private _local = _pos call atmos_getLocalChunkIdInArea;
+	private _local = _pos call atmos_chunkPosToId call atmos_getLocalChunkIdInArea;
 	private _id = _local call atmos_encodeChId;
 	private _data = _aObj getv(chunks) get _id;
 	if isNullVar(_data) exitWith {null};
