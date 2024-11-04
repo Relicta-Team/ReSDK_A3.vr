@@ -102,6 +102,10 @@ clistat_buffer = [
 		_state = _ar get "state";
 		format["st:%1(%2)",NAT_LOADING_SLIST_STATES select (_state+1),_state]
 	}],
+	[colortext(57D4AC,"NAT_RGC:"),{
+		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;
+		format["%1",(_ar get "_regions") apply {count _x}]
+	}],
 	#ifdef EDITOR
 	[colortext(57D4AC,"ATMOS_SRV: "),{
 		format["R:%1 C:%2 A:%3",count atmos_map_chunkAreas,atmos_chunks,atmos_areas]
