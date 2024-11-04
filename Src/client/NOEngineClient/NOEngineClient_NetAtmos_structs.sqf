@@ -100,6 +100,25 @@ struct(AtmosAreaClient)
 			[(self getv(_blockCoords) select ((_coord select 2)-1)),_coord] call arrayDeleteItem;
 
 			self getv(_optimizeDirty) set [(_coord select 2)-1,true];
+
+			private _ltObj = _chDat select NAT_CHUNKDAT_OBJECT;
+			
+			if (_ltObj callv(isInsideRegion)) then {
+				private _rpinf = _ltObj getv(regionPosInfo);
+				private _regions = self getv(_regions) select ((_coord select 2)-1);
+				private _foundRegion = null;
+				{
+					if (_x callp(isEqualPosInfo,_rpinf select 0 arg _rpinf select 1)) exitWith {
+						_foundRegion = _x;
+					};
+					false
+				} count _regions;
+				//!temporary code
+				if !isNullVar(_foundRegion) then {
+					traceformat("founded region for unloading: %1",_foundRegion);
+					self callp(onDecreaseRegion,_regions arg _foundRegion arg _ltObj);
+				};
+			};
 		};
 	}
 
@@ -621,8 +640,14 @@ struct(AtmosAreaClient)
 				};
 			};
 
-        } forEach _nearRegions;
+       	} forEach _nearRegions;
 		
+		self callp(mergeRegions,_regions arg _z);
+	}
+
+	def(mergeRegions)
+	{
+		params ["_regions","_z"];
 		// Функция для проверки, можно ли объединить два региона
 		private _canMerge = {
 			params ["_regionA", "_regionB"];
@@ -742,6 +767,101 @@ struct(AtmosAreaClient)
 		
 		_lts pushBack _obj;
 		true
+	}
+
+	def(onDecreaseRegion)
+	{
+		params ["_regionList","_region","_ltObj"];
+		
+		[_region getv(virtLights),_ltObj] call arrayDeleteItem;
+		
+		//debug restore lights
+		// {
+		// 	_x callv(reloadLight);
+		// 	false
+		// } foreach (_region getv(virtLights));
+		
+		private _pos = _ltObj getv(localChId);
+
+		private _startPos = _region getv(startPos);
+		private _endPos = _region getv(endPos);
+		
+		//removing region from list
+		[_regionList,_region] call arrayDeleteItem;
+
+		// Если блок внутри региона, нужно разбить на несколько подрегионов
+		private _newRegions = [];
+		private _splitX = _pos select 0;
+		private _splitY = _pos select 1;
+
+		// Подрегион верхний (если есть)
+		if (_splitY > (_startPos select 1)) then {
+			private _upperRegion = [
+				[_startPos select 0, _startPos select 1, _startPos select 2],
+				[_endPos select 0, _splitY - 1, _endPos select 2]
+			];
+			_newRegions pushBack _upperRegion;
+		};
+
+		// Подрегион нижний (если есть)
+		if (_splitY < (_endPos select 1)) then {
+			private _lowerRegion = [
+				[_startPos select 0, _splitY + 1, _startPos select 2],
+				[_endPos select 0, _endPos select 1, _endPos select 2]
+			];
+			_newRegions pushBack _lowerRegion;
+		};
+
+		// Подрегион левый (если есть)
+		if (_splitX > (_startPos select 0)) then {
+			private _leftRegion = [
+				[_startPos select 0, _splitY, _startPos select 2],
+				[_splitX - 1, _splitY, _endPos select 2]
+			];
+			_newRegions pushBack _leftRegion;
+		};
+
+		// Подрегион правый (если есть)
+		if (_splitX < (_endPos select 0)) then {
+			private _rightRegion = [
+				[_splitX + 1, _splitY, _startPos select 2],
+				[_endPos select 0, _splitY, _endPos select 2]
+			];
+			_newRegions pushBack _rightRegion;
+		};
+
+		private _vligts = _region getv(virtLights);
+		{
+			_x params ["_sp","_ep"];
+			private _sizes = _ep vectorDiff _sp select [0,2];
+			//traceformat("...split before: %1->%2",_sp arg _sizes)
+			//empty zone, skip
+			if equals(_sizes,vec2(0,0)) then {continue};
+
+			private _lproc = _vligts select {
+				private _ps = _x getv(localChId);
+				inRange(_ps select 0,_sp select 0,_ep select 0)
+				&& {inRange(_ps select 1,_sp select 1,_ep select 1)}
+			};
+			//remove lights
+			_vligts = _vligts - _lproc;
+			
+			//traceformat("spliting: %1->%2 cnt: %3",_sp arg _sizes arg count _lproc)
+			private _r = struct_newp(AtmosClientBatchRegion,self arg _sizes arg _sp arg _lproc);
+			_regionList pushBack _r;
+			_r callp(setRenderMode,true);
+		} foreach _newRegions;
+
+		//enable left lights
+		{
+			_x callv(reloadLight);
+			false
+		} count _vligts;
+		traceformat("LEFT VLIGHTS: %1",_vligts apply {_x getv(localChId)})
+		
+		private _z = (_pos select 2);
+
+		self callp(mergeRegions,_regionList arg _z);
 	}
 
 endstruct
@@ -1129,6 +1249,9 @@ struct(AtmosClientBatchRegion)
 						_old set [0,_szX/2 + ATMOS_SIZE_HALF];
 						_old set [1,_szY/2 + ATMOS_SIZE_HALF];
 						[_p,"positionVar",_v,_old] call le_se_setParticleOption;
+
+						//_old = [_p,"lifeTimeVar",_v] call le_se_getParticleOption;
+						//todo increase lifetime of smoke
 					};
 					if (_p == "setdropinterval") then {
 						private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
@@ -1186,3 +1309,45 @@ struct(AtmosClientBatchRegion)
 		};
 	}
 endstruct
+
+/*
+for test append chunk
+
+_mob = player;
+_aid = (getposatl _mob) call atmos_getAreaIdByPos;
+
+
+_aobj = [_aid] call noe_client_nat_getArea;
+_ch = _aobj get "chunks";
+_addList = [];_erg = 0;
+for"_i" from 1 to 1000 do {[_aobj,[_i]]call noe_client_nat_deleteChunks};
+_area = noe_client_nat_areas get "[404,400,2]";
+for "_z" from 5 to 5 do {
+for "_x" from 1 to 10 step 1 do {
+for "_y" from 1 to 10 step 1 do {
+if (_x in [-5])then{continue};
+if (_x==1&&_y==1)then{_erg=[_x,_y,_z];continue};
+_id = [_x,_y,_z] call atmos_encodeChid;
+_addList pushBackUnique [_id,if(_x<=2&&_y<=2)then{2128}else{2125}];
+
+}
+};
+};
+
+
+[_aObj,_addList,true] call noe_client_nat_loadArea;
+//"debug_console" callExtension "C";
+_t = diag_tickTime;
+_aobj call ["optimizeProcess"];
+
+//addnew
+_idj = _erg call atmos_encodeChid;
+[_aObj,[[_idj,2127]],true] call noe_client_nat_loadArea;
+_av = (_ch get _idj select 1);
+_t = diag_tickTime;
+_aobj call ["optimizeSingle",[_av]];
+
+
+diag_tickTime - _t; 
+
+*/
