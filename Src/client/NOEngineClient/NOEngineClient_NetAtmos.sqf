@@ -58,37 +58,32 @@ noe_client_nat_onUpdate = {
 	{
 		_aObj = [_x] call noe_client_nat_getArea;
 		if (_aObj getv(state) == NAT_LOADING_STATE_LOADED) then {
-#ifdef NET_ATMOS_OPTIMIZATION_RENDER
-			[aopt_cli_processedAreas,_aObj] call arrayDeleteItem;
-#endif
 			[_aObj] call noe_client_nat_unloadArea;
 		};
 	} foreach _toUnload;
 
 	//загружаем новые
-#ifdef NET_ATMOS_OPTIMIZATION_RENDER
-	_listAObj = aopt_cli_processedAreas;
-#endif
 	{
 		_aObj = [_x] call noe_client_nat_getArea;
 		if (_aObj getv(state) <= NAT_LOADING_STATE_NOT_LOADED) then {
 			[_aObj] call noe_client_nat_requestLoad;
-#ifdef NET_ATMOS_OPTIMIZATION_RENDER
 		} else {
-			_listAObj pushBack _aObj;
-#endif
-		} else {
-			private _odList = _aObj getv(_optimizeDirty);
-			private _optList = [];
-			{
-				if (_x) then {
-					_odList set [_foreachIndex,false];
-					_optList pushBack (_foreachIndex + 1);
-				};
-			} foreach _odList;
-			if (count _optList > 0) then {
-				//_aObj callp(optimizeProcess,_optList);
-			};
+			// private _odList = _aObj getv(_optimizeDirty);
+			// private _regions = _aObj getv(_regions);
+			// private _optList = [];
+			// {
+			// 	if (_x) then {
+			// 		_odList set [_foreachIndex,false];
+					
+			// 		//skip full optimize loading because regions already exists
+			// 		if (count (_regions select _foreachIndex) > 0) then {continue};
+
+			// 		_optList pushBack (_foreachIndex + 1);
+			// 	};
+			// } foreach _odList;
+			// if (count _optList > 0) then {
+			// 	//_aObj callp(optimizeProcess,_optList);
+			// };
 		};
 	} foreach _toLoad;
 };

@@ -86,6 +86,9 @@ struct(AtmosAreaClient)
 
 		if (self callv(isLoaded)) then {
 			self callp(onUpdateChunk,_locid);
+
+			private _lt = self getv(chunks) get _locid select NAT_CHUNKDAT_OBJECT;
+			self callp(optimizeSingle,_lt);
 		};
 	}
 
@@ -312,6 +315,7 @@ struct(AtmosAreaClient)
 		format["Area%1",self getv(areaId)]
 	}
 
+	//полная оптимизация по уровням
 	def(optimizeProcess)
 	{
 		#ifndef ENABLE_OPTIMIZATION
@@ -522,12 +526,17 @@ struct(AtmosAreaClient)
 		} foreach _alist;
 	}
 
+	//оптимизация при доабвлении нового блока
 	def(optimizeSingle)
 	{
 		params ["_vlight"];
 		private _pos = _vlight getv(localChId);
 		private _z = _pos select 2;
 		private _regions = self getv(_regions) select (_z - 1);
+
+		if (count _regions == 0) then {
+			self callp(optimizeProcess,[_z]);
+		};
 		
 		// Функция для поиска соседних регионов рядом с новым блоком
 		private _findNeighborRegions = {
@@ -645,6 +654,7 @@ struct(AtmosAreaClient)
 		self callp(mergeRegions,_regions arg _z);
 	}
 
+	//задане объединения регионов
 	def(mergeRegions)
 	{
 		params ["_regions","_z"];
@@ -752,6 +762,7 @@ struct(AtmosAreaClient)
 		self getv(_regions) set [(_z - 1),_mergedRegions]
 	}
 
+	//внутренняя функция проверки при расширении
 	def_ret(_isValidCombPos)
 	{
 		params ["_pos","_lts","_region"];
@@ -769,6 +780,7 @@ struct(AtmosAreaClient)
 		true
 	}
 
+	//событие при удалении блока с региона
 	def(onDecreaseRegion)
 	{
 		params ["_regionList","_region","_ltObj"];
@@ -857,7 +869,7 @@ struct(AtmosAreaClient)
 			_x callv(reloadLight);
 			false
 		} count _vligts;
-		traceformat("LEFT VLIGHTS: %1",_vligts apply {_x getv(localChId)})
+		//traceformat("LEFT VLIGHTS: %1",_vligts apply {_x getv(localChId)})
 		
 		private _z = (_pos select 2);
 
