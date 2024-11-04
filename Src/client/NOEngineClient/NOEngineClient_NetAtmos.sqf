@@ -67,23 +67,6 @@ noe_client_nat_onUpdate = {
 		_aObj = [_x] call noe_client_nat_getArea;
 		if (_aObj getv(state) <= NAT_LOADING_STATE_NOT_LOADED) then {
 			[_aObj] call noe_client_nat_requestLoad;
-		} else {
-			// private _odList = _aObj getv(_optimizeDirty);
-			// private _regions = _aObj getv(_regions);
-			// private _optList = [];
-			// {
-			// 	if (_x) then {
-			// 		_odList set [_foreachIndex,false];
-					
-			// 		//skip full optimize loading because regions already exists
-			// 		if (count (_regions select _foreachIndex) > 0) then {continue};
-
-			// 		_optList pushBack (_foreachIndex + 1);
-			// 	};
-			// } foreach _odList;
-			// if (count _optList > 0) then {
-			// 	//_aObj callp(optimizeProcess,_optList);
-			// };
 		};
 	} foreach _toLoad;
 };
@@ -214,8 +197,73 @@ noe_client_nat_loadArea = {
 
 	if (!_isUpdateFlag) then {
 		_aObj call ["loadArea"];
+		[_aObj] call noe_client_nat_procLoad;
 	};
 };
+
+//процессор оптимизатора при загруке
+noe_client_nat_procLoad = {
+	params ["_aObj"];
+	traceformat("============================== PROC[LOAD]: %1",_aObj)
+	{
+		{
+			_x callp(setRenderMode,true);
+			false
+		} count _x;
+		false
+	} count (self getv(_regions));
+};
+
+//процессор оптимизатора при выгрузке
+noe_client_nat_procUnload = {
+	params ["_aObj"];
+	traceformat("============================== PROC[UNLOAD]: %1",_aObj)
+	{
+		{
+			_x callv(unloadBatchEmitter);
+			false
+		} count _x;
+		false
+	} count (self getv(_regions));
+};
+
+//добавление эффекторв (оптимизатор)
+noe_client_nat_procAddEff = {
+	params ["_aObj","_ltob"];
+	traceformat("============================== PROC[ADD]: %1",_ltob)
+	_aObj callp(optimizeSingle,_ltob)
+};
+//удаление эффекторв (оптимизатор)
+noe_client_nat_procDelEff = {
+	params ["_aObj","_ltob"];
+	traceformat("============================== PROC[DELETE]: %1",_ltob)
+	// private _ltObj = _chDat select NAT_CHUNKDAT_OBJECT;
+			
+	if (_ltob callv(isInsideRegion)) then {
+		private _rpinf = _ltob getv(regionPosInfo);
+		private _coord = _ltob getv(localChId);
+		private _regions = _aObj getv(_regions) select ((_coord select 2)-1);
+		private _foundRegion = null;
+		{
+			if (_x callp(isEqualPosInfo,_rpinf select 0 arg _rpinf select 1)) exitWith {
+				_foundRegion = _x;
+			};
+			false
+		} count _regions;
+		//!temporary code
+		if !isNullVar(_foundRegion) then {
+			//traceformat("founded region for unloading: %1",_foundRegion);
+			_aObj callp(onDecreaseRegion,_regions arg _foundRegion arg _ltob);
+		};
+	};
+};
+//обновление эффекторв (оптимизатор)
+noe_client_nat_procUpdEff = {
+	params ["_aObj","_ltob"];
+	traceformat("============================== PROC[UPDATE]: %1",_ltob)
+	_aObj callp(optimizeSingle,_ltob)
+};
+
 
 noe_client_nat_deleteChunks = {
 	params ["_aObj","_arrChIds"];//_arrChIds<locid>
@@ -229,6 +277,7 @@ noe_client_nat_unloadArea = {
 	params ["_areaObj"];
 	_areaObj setv(state,NAT_LOADING_STATE_NOT_LOADED);
 	_areaObj call ["unloadArea"];
+	[_areaObj] call noe_client_nat_procUnload;
 	[_areaObj] call noe_client_nat_unsubscribeArea;
 	//traceformat("Unloading area %1",_areaObj)
 };

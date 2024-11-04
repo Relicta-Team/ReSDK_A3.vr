@@ -22,13 +22,50 @@
 
 		процесс проверки:
 		последовательно создаем зависимости
+
+	Оптимизатор:
+	
+	Оптимизация основана на объединении (батчинге) блоков в регионы с упрощённой отрисовкой.
+
+	При загрузке зоны:
+		загружаем единичные и включаем батчинг
+	При выгрузке: высвобождаем ресурсы
+
+	При добавлении блока:
+		если регионов нет
+			optimizeSingle
+			выполняем поиск смежных блоков на соответствие. 
+			достаточно одного соседнего блока для образования региона.
+			после создания проверяем мержинг
+		если регионы есть
+			находим ближайший и проверяем возможность расширения
+			после обновления проверяем мержинг
+
+	При удалении блока:
+		если в регионе
+			удаляем блок с помощью onDecreaseRegion
+			производим мерж новых зон при наличии
+		иначе
+			удаляем блок
+
+	При изменении блока:
+		если в регионе
+			блок соответсвует типу региона
+				обновляем конфиг и ничего не делаем
+			иначе
+				удаляем блок с помощью onDecreaseRegion
+				производим мерж новых зон при наличии
+		иначе	
+			обновляем блок
+			находим ближайший и проверяем возможность расширения
+			после обновления проверяем мержинг
 */
 
 #define ENABLE_OPTIMIZATION
 
 //отладочные линии
-#define ENABLE_DRAW_DEBUG_LINES_VIRTUALCHUNKS
-#define ENABLE_DRAW_DEBUG_LINES_REGIONS
+//#define ENABLE_DRAW_DEBUG_LINES_VIRTUALCHUNKS
+//#define ENABLE_DRAW_DEBUG_LINES_REGIONS
 
 //рандомные цвета для зон
 #define ENABLE_RANDOMIZATION_COLOR
@@ -48,9 +85,6 @@ struct(AtmosAreaClient)
 	def(isLoaded) {(self getv(state)) == NAT_LOADING_STATE_LOADED}
 
 	def(chunks) null; //key:localid,value vec2(cfg,obj)
-
-	def(_optimizeDirty) null
-	def(_blockCoords) null //локальные координаты блоков по z осям
 	
 	//хранящиеся регионы
 	def(_regions) null //list[9] -> list<AtmosClientBatchRegion
@@ -62,33 +96,32 @@ struct(AtmosAreaClient)
 		self setv(chunks,createHashMap); 
 		private _lst = [];
 		_lst resize ATMOS_AREA_SIZE;
-		self setv(_blockCoords,_lst apply {[]});
 
 		self setv(_regions,_lst apply {[]});
-
-		self setv(_optimizeDirty,_lst apply {true});
 	}
 
 	//регистрация|перерегистрация эффектов в зоне
 	def(registerEffects)
 	{
 		params ["_locid","_light"];
-
-		if (_locid in (self getv(chunks))) then {
+		private _isExist = _locid in (self getv(chunks));
+		if (_isExist) then {
 			self getv(chunks) get _locid set [NAT_CHUNKDAT_CFG,_light];
 		} else {
 			self getv(chunks) set [_locid,NAT_CHUNKDAT_NEW(_light)];
-			private _coord = _locid call atmos_decodeChId;
-			(self getv(_blockCoords) select ((_coord select 2)-1)) pushBack _coord;
-
-			self getv(_optimizeDirty) set [(_coord select 2)-1,true];
 		};
 
 		if (self callv(isLoaded)) then {
 			self callp(onUpdateChunk,_locid);
 
-			private _lt = self getv(chunks) get _locid select NAT_CHUNKDAT_OBJECT;
-			self callp(optimizeSingle,_lt);
+			// private _lt = self getv(chunks) get _locid select NAT_CHUNKDAT_OBJECT;
+			// self callp(optimizeSingle,_lt);
+		};
+
+		if (_isExist) then {
+			[self, self getv(chunks) get _locid select NAT_CHUNKDAT_OBJECT] call noe_client_nat_procUpdEff;
+		} else {
+			[self, self getv(chunks) get _locid select NAT_CHUNKDAT_OBJECT] call noe_client_nat_procAddEff;
 		};
 	}
 
@@ -99,29 +132,26 @@ struct(AtmosAreaClient)
 		private _chDat = self getv(chunks) GET _locid;
 		if !isNullVar(_chDat) then {
 			self getv(chunks) deleteAt _locid;
-			private _coord = _locid call atmos_decodeChId;
-			[(self getv(_blockCoords) select ((_coord select 2)-1)),_coord] call arrayDeleteItem;
-
-			self getv(_optimizeDirty) set [(_coord select 2)-1,true];
 
 			private _ltObj = _chDat select NAT_CHUNKDAT_OBJECT;
+			[self,_ltObj] call noe_client_nat_procDelEff;
 			
-			if (_ltObj callv(isInsideRegion)) then {
-				private _rpinf = _ltObj getv(regionPosInfo);
-				private _regions = self getv(_regions) select ((_coord select 2)-1);
-				private _foundRegion = null;
-				{
-					if (_x callp(isEqualPosInfo,_rpinf select 0 arg _rpinf select 1)) exitWith {
-						_foundRegion = _x;
-					};
-					false
-				} count _regions;
-				//!temporary code
-				if !isNullVar(_foundRegion) then {
-					traceformat("founded region for unloading: %1",_foundRegion);
-					self callp(onDecreaseRegion,_regions arg _foundRegion arg _ltObj);
-				};
-			};
+			// if (_ltObj callv(isInsideRegion)) then {
+			// 	private _rpinf = _ltObj getv(regionPosInfo);
+			// 	private _regions = self getv(_regions) select ((_coord select 2)-1);
+			// 	private _foundRegion = null;
+			// 	{
+			// 		if (_x callp(isEqualPosInfo,_rpinf select 0 arg _rpinf select 1)) exitWith {
+			// 			_foundRegion = _x;
+			// 		};
+			// 		false
+			// 	} count _regions;
+			// 	//!temporary code
+			// 	if !isNullVar(_foundRegion) then {
+			// 		traceformat("founded region for unloading: %1",_foundRegion);
+			// 		self callp(onDecreaseRegion,_regions arg _foundRegion arg _ltObj);
+			// 	};
+			// };
 		};
 	}
 
@@ -133,13 +163,13 @@ struct(AtmosAreaClient)
 			false
 		} count (self callv(getChunkIdList));
 		
-		{
-			{
-				_x callp(setRenderMode,true);
-				false
-			} count _x;
-			false
-		} count (self getv(_regions));
+		// {
+		// 	{
+		// 		_x callp(setRenderMode,true);
+		// 		false
+		// 	} count _x;
+		// 	false
+		// } count (self getv(_regions));
 
 		//full load area
 		//trace("------------ load area ------------")
@@ -154,13 +184,13 @@ struct(AtmosAreaClient)
 		} count (self callv(getChunkIdList));
 
 		//unload regions
-		{
-			{
-				_x callv(unloadBatchEmitter);
-				false
-			} count _x;
-			false
-		} count (self getv(_regions));
+		// {
+		// 	{
+		// 		_x callv(unloadBatchEmitter);
+		// 		false
+		// 	} count _x;
+		// 	false
+		// } count (self getv(_regions));
 		
 		//full unload area
 		//self callp(optimizeProcess, null);
@@ -316,215 +346,215 @@ struct(AtmosAreaClient)
 	}
 
 	//полная оптимизация по уровням
-	def(optimizeProcess)
-	{
-		#ifndef ENABLE_OPTIMIZATION
-		if (true) exitWith {};
-		#endif
-		//_level list<Z-level>
-		params ["_levels"]; //Если параметр _level не равен null то это полная перегрузка зоны
-		traceformat("Start optimization of level %1",ifcheck(isNullVar(_levels),"ALL",_levels))
-		/*
-			1. группируем зоны по z
-			2. проходим все z уровни
+	// def(optimizeProcess)
+	// {
+	// 	#ifndef ENABLE_OPTIMIZATION
+	// 	if (true) exitWith {};
+	// 	#endif
+	// 	//_level list<Z-level>
+	// 	params ["_levels"]; //Если параметр _level не равен null то это полная перегрузка зоны
+	// 	traceformat("Start optimization of level %1",ifcheck(isNullVar(_levels),"ALL",_levels))
+	// 	/*
+	// 		1. группируем зоны по z
+	// 		2. проходим все z уровни
 
-			TODO доп оптимизация. валидируем только уровень на который добавлен чанк
+	// 		TODO доп оптимизация. валидируем только уровень на который добавлен чанк
 
-			инфо: 
-			мы можем делать доп оптимизацию по z
-			если в регионе сверху есть регион такого же уровня
-		*/
-		//collect zposes
-		private _chMap = self getv(chunks);
+	// 		инфо: 
+	// 		мы можем делать доп оптимизацию по z
+	// 		если в регионе сверху есть регион такого же уровня
+	// 	*/
+	// 	//collect zposes
+	// 	private _chMap = self getv(chunks);
 		
-		private _alist = [];
-		_alist resize (ATMOS_AREA_SIZE);
-		_alist = _alist apply {[]};
-		private _curZ = null;
-		private _obj = null;
-		private _mapAssoc = createhashMap;
-		if isNullVar(_levels) then {
-			private _chs = (self callv(getChunkIdList)) apply {[_x call atmos_decodeChId,_x]};
-			traceformat("  --- all objects count: %1",count _chs)
+	// 	private _alist = [];
+	// 	_alist resize (ATMOS_AREA_SIZE);
+	// 	_alist = _alist apply {[]};
+	// 	private _curZ = null;
+	// 	private _obj = null;
+	// 	private _mapAssoc = createhashMap;
+	// 	if isNullVar(_levels) then {
+	// 		private _chs = (self callv(getChunkIdList)) apply {[_x call atmos_decodeChId,_x]};
+	// 		traceformat("  --- all objects count: %1",count _chs)
 
-			//full load
-			{
-				_x params ["_locPos","_chidloc"];
-				_curZ = (_locpos select 2);
+	// 		//full load
+	// 		{
+	// 			_x params ["_locPos","_chidloc"];
+	// 			_curZ = (_locpos select 2);
 				
-				(_alist select (_curZ-1)) pushBack _locPos;
-				_obj = _chMap get _chidloc select NAT_CHUNKDAT_OBJECT;
-				_mapAssoc set [_locPos,_obj];
-			} foreach _chs;
-		} else {
-			{
-				private _lvlList = self getv(_blockCoords) select (_x -1);
-				_lvllist sort true;
-				_alist set [_x-1,_lvllist];
-				{
-					_obj = _chMap get (_x call atmos_encodeChId) select NAT_CHUNKDAT_OBJECT;
-					_mapAssoc set [_x,_obj];
-					;false
-				} count _lvllist;
-			} foreach _levels;
-		};
+	// 			(_alist select (_curZ-1)) pushBack _locPos;
+	// 			_obj = _chMap get _chidloc select NAT_CHUNKDAT_OBJECT;
+	// 			_mapAssoc set [_locPos,_obj];
+	// 		} foreach _chs;
+	// 	} else {
+	// 		{
+	// 			private _lvlList = self getv(_blockCoords) select (_x -1);
+	// 			_lvllist sort true;
+	// 			_alist set [_x-1,_lvllist];
+	// 			{
+	// 				_obj = _chMap get (_x call atmos_encodeChId) select NAT_CHUNKDAT_OBJECT;
+	// 				_mapAssoc set [_x,_obj];
+	// 				;false
+	// 			} count _lvllist;
+	// 		} foreach _levels;
+	// 	};
 		
 		
-		private _obj = null;
+	// 	private _obj = null;
 
-		// Функция для поиска максимального региона с текущей позиции
-		private _findMaxZone = {
-			params ["_pos", "_activeChunks","_curObj"];
-			_pos params ["_x","_y","_z"];
+	// 	// Функция для поиска максимального региона с текущей позиции
+	// 	private _findMaxZone = {
+	// 		params ["_pos", "_activeChunks","_curObj"];
+	// 		_pos params ["_x","_y","_z"];
 			
-			private _sizeX = 0;
-			private _sizeY = 0;
+	// 		private _sizeX = 0;
+	// 		private _sizeY = 0;
 
-			// Максимальное расширение по X
-			for "_i" from 1 to ATMOS_AREA_SIZE do {
-				private _pX = [_x + _i, _y, _z];
+	// 		// Максимальное расширение по X
+	// 		for "_i" from 1 to ATMOS_AREA_SIZE do {
+	// 			private _pX = [_x + _i, _y, _z];
 				
-				if (_pX in _processed) exitWith {};
+	// 			if (_pX in _processed) exitWith {};
 
-				// Проверяем, можем ли расшириться по X
-				if ((_pX in _activeChunks) && (_curObj callp(isSameCfgType, _mapAssoc get _pX))) then {
-					_sizeX = _i;
-				} else {
-					break;
-				};
-			};
+	// 			// Проверяем, можем ли расшириться по X
+	// 			if ((_pX in _activeChunks) && (_curObj callp(isSameCfgType, _mapAssoc get _pX))) then {
+	// 				_sizeX = _i;
+	// 			} else {
+	// 				break;
+	// 			};
+	// 		};
 
-			// Максимальное расширение по Y при зафиксированной ширине _sizeX
-			for "_j" from 1 to ATMOS_AREA_SIZE do {
-				private _canExpandY = true;
+	// 		// Максимальное расширение по Y при зафиксированной ширине _sizeX
+	// 		for "_j" from 1 to ATMOS_AREA_SIZE do {
+	// 			private _canExpandY = true;
 				
-				for "_dx" from 0 to _sizeX do {
-					private _pY = [_x + _dx, _y + _j, _z];
+	// 			for "_dx" from 0 to _sizeX do {
+	// 				private _pY = [_x + _dx, _y + _j, _z];
 
-					if (_pY in _processed) exitWith {_canExpandY = false};
+	// 				if (_pY in _processed) exitWith {_canExpandY = false};
 					
-					// Проверяем, можем ли расшириться по Y
-					if (!(_pY in _activeChunks) || !(_curObj callp(isSameCfgType, _mapAssoc get _pY))) then {
-						_canExpandY = false;
-						break;
-					};
-				};
+	// 				// Проверяем, можем ли расшириться по Y
+	// 				if (!(_pY in _activeChunks) || !(_curObj callp(isSameCfgType, _mapAssoc get _pY))) then {
+	// 					_canExpandY = false;
+	// 					break;
+	// 				};
+	// 			};
 
-				if (_canExpandY) then {
-					_sizeY = _j;
-				} else {
-					break;
-				};
-			};
+	// 			if (_canExpandY) then {
+	// 				_sizeY = _j;
+	// 			} else {
+	// 				break;
+	// 			};
+	// 		};
 
-			[_sizeX, _sizeY]
-		};
+	// 		[_sizeX, _sizeY]
+	// 	};
 
-		private _processZOpt = {
-			params ["_z","_activeChunks"];
-			private _optList = []; //сюда записываются объекты оптимизации
+	// 	private _processZOpt = {
+	// 		params ["_z","_activeChunks"];
+	// 		private _optList = []; //сюда записываются объекты оптимизации
 			
-			private _processed = []; // Отслеживание обработанных чанков для уровня
+	// 		private _processed = []; // Отслеживание обработанных чанков для уровня
 
-			self getv(_regions) select (_z - 1) resize 0;
+	// 		self getv(_regions) select (_z - 1) resize 0;
 
-			// Поиск регионов
-			{
-				private _pos = _x;
+	// 		// Поиск регионов
+	// 		{
+	// 			private _pos = _x;
 
-				// Пропускаем уже обработанные чанки
-				if (_pos in _processed) then {
-					//traceformat("pos in processed; exit pos: %1",_pos);
-					continue;
-				};
-				//traceformat("process pos %1",_pos)
+	// 			// Пропускаем уже обработанные чанки
+	// 			if (_pos in _processed) then {
+	// 				//traceformat("pos in processed; exit pos: %1",_pos);
+	// 				continue;
+	// 			};
+	// 			//traceformat("process pos %1",_pos)
 
-				// Находим максимальный квадратный регион от этой позиции
-				private _curObj = _mapAssoc get _pos;
-				private _sizes = [_pos, _activeChunks,_curObj] call _findMaxZone;
-				traceformat("  Max size for pos %1 is %2", _pos arg _sizes)
+	// 			// Находим максимальный квадратный регион от этой позиции
+	// 			private _curObj = _mapAssoc get _pos;
+	// 			private _sizes = [_pos, _activeChunks,_curObj] call _findMaxZone;
+	// 			traceformat("  Max size for pos %1 is %2", _pos arg _sizes)
 				
-				//ограничение зоны по квадратам. Прим.: 5x5 - ok; 6x6 -> lower to 5
-				//_size = _size - (_size%2);
+	// 			//ограничение зоны по квадратам. Прим.: 5x5 - ok; 6x6 -> lower to 5
+	// 			//_size = _size - (_size%2);
 
-				if equals(_sizes,vec2(0,0)) then {
-					//test hide
-					_optList pushBack (_mapAssoc get (_pos));
-					continue;
-				};
+	// 			if equals(_sizes,vec2(0,0)) then {
+	// 				//test hide
+	// 				_optList pushBack (_mapAssoc get (_pos));
+	// 				continue;
+	// 			};
 
 
-				// Помечаем все чанки внутри найденного региона как обработанные
-				private _lproc = [];
-				private _curVlt = null;
-				for "_i" from 0 to (_sizes select 0) do {
-					for "_j" from 0 to (_sizes select 1) do {
-						private _chunkPos = _pos vectorAdd [_i,_j,0];
-						_processed pushBack _chunkPos;
-						_curVlt = _mapAssoc get _chunkPos;
-						_lproc pushBack _curVlt;
-						//_curVlt callp(setHidden,true);
-						//traceformat("  hide pos %1 exists %2",_chunkPos arg _chunkPos in _mapAssoc)
-					};
-				};
+	// 			// Помечаем все чанки внутри найденного региона как обработанные
+	// 			private _lproc = [];
+	// 			private _curVlt = null;
+	// 			for "_i" from 0 to (_sizes select 0) do {
+	// 				for "_j" from 0 to (_sizes select 1) do {
+	// 					private _chunkPos = _pos vectorAdd [_i,_j,0];
+	// 					_processed pushBack _chunkPos;
+	// 					_curVlt = _mapAssoc get _chunkPos;
+	// 					_lproc pushBack _curVlt;
+	// 					//_curVlt callp(setHidden,true);
+	// 					//traceformat("  hide pos %1 exists %2",_chunkPos arg _chunkPos in _mapAssoc)
+	// 				};
+	// 			};
 
-				// Определяем центральную позицию для "огня"
-				private _centerPos = [
-					(_pos select 0) + floor((_sizes select 0) / 2),
-					(_pos select 1) + floor((_sizes select 1) / 2),
-					_z
-				];
-				traceformat("  unhide pos %1 exists %2",_centerPos arg _centerPos in _mapAssoc)
-				private _centerObj = _mapAssoc get _centerPos;
-				_centerObj callp(setHidden,false); //for debug
-				//_centerObj setv(renderZone,_sizes);
-				//смещение на следующую зону
-				// if (_size%2==1) then {
-				// 	_centerObj setv(useOffsetMid,true);
-				// };
-				//_centerObj callv(reloadLight);
-				private _curRegionList = self getv(_regions) select (_z - 1);
-				private _region = null;
+	// 			// Определяем центральную позицию для "огня"
+	// 			private _centerPos = [
+	// 				(_pos select 0) + floor((_sizes select 0) / 2),
+	// 				(_pos select 1) + floor((_sizes select 1) / 2),
+	// 				_z
+	// 			];
+	// 			traceformat("  unhide pos %1 exists %2",_centerPos arg _centerPos in _mapAssoc)
+	// 			private _centerObj = _mapAssoc get _centerPos;
+	// 			_centerObj callp(setHidden,false); //for debug
+	// 			//_centerObj setv(renderZone,_sizes);
+	// 			//смещение на следующую зону
+	// 			// if (_size%2==1) then {
+	// 			// 	_centerObj setv(useOffsetMid,true);
+	// 			// };
+	// 			//_centerObj callv(reloadLight);
+	// 			private _curRegionList = self getv(_regions) select (_z - 1);
+	// 			private _region = null;
 
-				// {
-				// 	if (_x callp(isEqualPosInfo,_pos arg _sizes)) exitWith {
-				// 		_region = _x;
-				// 	};
-				// 	false
-				// } count _curRegionList;
-				if isNullVar(_region) then {
-					_region = struct_newp(AtmosClientBatchRegion,self arg _sizes arg _pos arg _lproc);
-					_curRegionList pushBack _region;
-					_region callp(setRenderMode,true);
-				} else {
-					_region setv(virtLights,_lproc);
-					_region callp(setRenderMode,true);
-				};
+	// 			// {
+	// 			// 	if (_x callp(isEqualPosInfo,_pos arg _sizes)) exitWith {
+	// 			// 		_region = _x;
+	// 			// 	};
+	// 			// 	false
+	// 			// } count _curRegionList;
+	// 			if isNullVar(_region) then {
+	// 				_region = struct_newp(AtmosClientBatchRegion,self arg _sizes arg _pos arg _lproc);
+	// 				_curRegionList pushBack _region;
+	// 				_region callp(setRenderMode,true);
+	// 			} else {
+	// 				_region setv(virtLights,_lproc);
+	// 				_region callp(setRenderMode,true);
+	// 			};
 				
-			} foreach _activeChunks;
+	// 		} foreach _activeChunks;
 
-			//second optimization layer
-			private _ctrend = count _optList;
-			if (_ctrend > 0) then {
-				// {
-				// 	_x setv(decZoneRend,_ctrend);
-				// 	_x callv(reloadLight);
-				// 	false
-				// } count _optList;
-			};
-		};
+	// 		//second optimization layer
+	// 		private _ctrend = count _optList;
+	// 		if (_ctrend > 0) then {
+	// 			// {
+	// 			// 	_x setv(decZoneRend,_ctrend);
+	// 			// 	_x callv(reloadLight);
+	// 			// 	false
+	// 			// } count _optList;
+	// 		};
+	// 	};
 
-		{
-			private _z = _foreachIndex + 1;
-			if (count _x > 0) then {
-				traceformat(" ----- process zlevel: %1; count %2",_z arg count _x)
-				if isNullVar(_levels) then {
-					_x sort true; //by near to far
-				};
-				[_z,_x] call _processZOpt;
-			};
-		} foreach _alist;
-	}
+	// 	{
+	// 		private _z = _foreachIndex + 1;
+	// 		if (count _x > 0) then {
+	// 			traceformat(" ----- process zlevel: %1; count %2",_z arg count _x)
+	// 			if isNullVar(_levels) then {
+	// 				_x sort true; //by near to far
+	// 			};
+	// 			[_z,_x] call _processZOpt;
+	// 		};
+	// 	} foreach _alist;
+	// }
 
 	//оптимизация при доабвлении нового блока
 	def(optimizeSingle)
@@ -533,10 +563,6 @@ struct(AtmosAreaClient)
 		private _pos = _vlight getv(localChId);
 		private _z = _pos select 2;
 		private _regions = self getv(_regions) select (_z - 1);
-
-		if (count _regions == 0) then {
-			self callp(optimizeProcess,[_z]);
-		};
 		
 		// Функция для поиска соседних регионов рядом с новым блоком
 		private _findNeighborRegions = {
@@ -561,8 +587,54 @@ struct(AtmosAreaClient)
 		private _nearRegions = call _findNeighborRegions;
 		traceformat("NEAR REGIONS FOR POS %2: %1",_nearRegions arg _pos)
 
-		
+		private _singleOptimize = {
+			traceformat("--- single check for make region %1",_vlight)
+			
+			private _tlocid = null;
+			private _id = null;
+			private _chmap = self getv(chunks);
+			private _sizes = null;
+			private _startPos = null;
+			private _lproc = null;
+			{
+				_tlocid = _pos vectorAdd _x;
+				_id = _tlocid call atmos_encodeChId;
+				if (_id in _chmap) then {
+					private _ob = _chmap get _id select NAT_CHUNKDAT_OBJECT;
+					if (
+						_vlight callp(isSameCfgType,_ob)
+						&& {!(_ob callv(isInsideRegion))}
+					) then {
+						_lproc = [_vlight,_ob];
+						_sizes = _x;
+						_startPos = _pos;
+						//negative
+						if (_foreachIndex >= 2) then {
+							_startPos = _pos vectorAdd _x;
+							_sizes = _sizes vectorMultiply -1;
+						};
+						break;
+					};
+				};
+			} foreach [
+				[0,1],
+				[1,0],
+				[0,-1],
+				[-1,0]
+			];
 
+			if !isNullVar(_lproc) then {
+				_region = struct_newp(AtmosClientBatchRegion,self arg _sizes arg _startPos arg _lproc);
+				_regions pushBack _region;
+				_region callp(setRenderMode,true);
+			};
+		};
+
+		if (count _nearRegions == 0) exitWith {
+			call _singleOptimize;
+		};
+
+		private _usedNear = false;
         {
             private _startPos = _x getv(startPos);
             private _endPos = _x getv(endPos);
@@ -645,11 +717,16 @@ struct(AtmosAreaClient)
 					_expandableRegion callv(rebuildData);
 					traceformat("UPDATED REGION: %1",_expandableRegion)
 					_expandableRegion callp(setRenderMode,true);
+					_usedNear = true;
 					break;
 				};
 			};
 
        	} forEach _nearRegions;
+
+		if (!_usedNear) exitWith {
+			call _singleOptimize;
+		};
 		
 		self callp(mergeRegions,_regions arg _z);
 	}
@@ -1022,7 +1099,7 @@ struct(AtmosVirtualLight)
 
 	def(str)
 	{
-		format["%1-%2",struct_typename(self),self getv(id)]
+		format["%1%3(%2)",struct_typename(self),self getv(id),self getv(localChId)]
 	}
 endstruct
 
@@ -1231,7 +1308,7 @@ struct(AtmosClientBatchRegion)
 						#ifdef ENABLE_RANDOMIZATION_COLOR
 						//random color
 						private _colorArr = [_p,"color",_v] call le_se_getParticleOption;
-						["clr %1",_colorArr] call cprint;
+						//["clr %1",_colorArr] call cprint;
 						private _rndClr = [rand(0,1),rand(0,1),rand(0,1),1];
 						_colorArr = _colorArr apply {
 							_rndClr
