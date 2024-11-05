@@ -452,6 +452,7 @@ TEST(SafeReferences)
 		ASSERT_EQ(_itm3 callv(getPtr),2);
 	};
 	
+	ASSERT_EQ(_externalVar,"basic value");
 	
 	//removing ref and check external var
 	_itm3 = null; //refcount is 0 - delete object
