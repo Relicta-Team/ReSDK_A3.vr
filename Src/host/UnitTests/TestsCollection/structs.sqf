@@ -436,17 +436,22 @@ TEST(SafeReferences)
 	_itm2 = null; _itm1_next = null;
 	
 	private _externalVar = "basic value";
-	private _tObj = createhashmapobject [
-		[
-			["#type","ExampleType"],
-			["#delete",{
-				_externalVar = "overriden value";
-			}]
-		]
-	];
-	private _itm3 = struct_newp(SafeReference,_tObj arg _pool);
-	ASSERT_EQ(_itm3 callv(getValue),_tObj);
-	ASSERT_EQ(_itm3 callv(getPtr),2);
+	private _itm3 = null;
+	//anon scope
+	call {
+		private _tObj = createhashmapobject [
+			[
+				["#type","ExampleType"],
+				["#delete",{
+					_externalVar = "overriden value";
+				}]
+			]
+		];
+		_itm3 = struct_newp(SafeReference,_tObj arg _pool);
+		ASSERT_EQ(_itm3 callv(getValue),_tObj);
+		ASSERT_EQ(_itm3 callv(getPtr),2);
+	};
+	
 	
 	//removing ref and check external var
 	_itm3 = null; //refcount is 0 - delete object
