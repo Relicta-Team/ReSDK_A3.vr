@@ -449,7 +449,7 @@ TEST(SafeReferences)
 	ASSERT_EQ(_itm3 callv(getPtr),2);
 	
 	//removing ref and check external var
-	_itm = null; //refcount is 0 - delete object
+	_itm3 = null; //refcount is 0 - delete object
 	ASSERT_EQ(_externalVar,"overriden value");
 }
 
