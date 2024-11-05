@@ -408,6 +408,51 @@ TEST(StructExitWith)
 	ASSERT_EQ(_rval,"val is 9876 +strval:9876");
 }
 
+TEST(SafeReferences)
+{
+	private _pool = ["UnitTest_SafeReference_Container"] call SafeReference_CreatePool;
+	
+	private _itm1 = struct_newp(SafeReference,"first val"); //default pool
+	traceformat("item 1: %1",_itm1)
+	ASSERT_EQ(_itm1 callv(getValue),"first val");
+	ASSERT_EQ(_itm1 callv(getPtr),1);
+
+	_itm1 callv(releaseRef); //manual release reference
+	ASSERT_EQ(_itm1 callv(getPtr),0); //ref set to zero on release
+
+	private _itm1_next = struct_newp(SafeReference,"first val in same pool");
+	traceformat("item 1 next: %1",_itm1_next)
+	ASSERT_EQ(_itm1_next callv(getValue),"first val in same pool");
+	ASSERT_EQ(_itm1_next callv(getPtr),2);
+
+	private _itm2 = struct_newp(SafeReference,"second val" arg _pool); //custom pool
+	traceformat("item 2: %1",_itm2)
+	ASSERT_EQ(_itm2 callv(getValue),"second val");
+	ASSERT_EQ(_itm2 callv(getPtr),1); //other pool, first pointer is one
+
+	ASSERT_STR(!(_itm2 callp(isEqualPoolType,_itm1_next)),"Pool types are equals");
+
+	//cleanup
+	_itm2 = null; _itm1_next = null;
+	
+	private _externalVar = "basic value";
+	private _tObj = createhashmapobject [
+		[
+			["#type","ExampleType"],
+			["#delete",{
+				_externalVar = "overriden value";
+			}]
+		]
+	];
+	private _itm3 = struct_newp(SafeReference,_tObj arg _pool);
+	ASSERT_EQ(_itm3 callv(getValue),_tObj);
+	ASSERT_EQ(_itm3 callv(getPtr),2);
+	
+	//removing ref and check external var
+	_itm = null; //refcount is 0 - delete object
+	ASSERT_EQ(_externalVar,"overriden value");
+}
+
 
 //TODO done hashing for all reference type objects
 // FIXTURE_SETUP(SafeTypeDict)
