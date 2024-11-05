@@ -3,26 +3,72 @@
 // sdk.relicta.ru
 // ======================================================
 
-// Safe reference. Used for bypass crossreferences and possible memory leaks
-sref_cont = createHashMap;
-sref_i = 0;
-struct(SafeRef)
-	def(iptr) null //integer pointer is just a number
+#define SAFE_REFERENCE_POOL_CONTAINER 0
+#define SAFE_REFERENCE_POOL_COUNTER 1
+#define SAFE_REFERENCE_POOL_NAME 2
+
+//создание нового пула для безопасных ссылок
+SafeReference_CreatePool = {
+	params ["_poolName"];
+	if (_poolName == "") then {
+		_poolName = format["AnonimousPool at %1 (frame %2)",tickTime,diag_frameNo];
+	};
+	[createHashMap,1,_poolName]
+};
+
+sref_defaultPool = ["DefaultPool"] call SafeReference_CreatePool;
+
+/* 
+	Safe reference. Used for bypass crossreferences and possible memory leaks
+	Usage:
+
+		Default allocator:
+
+		_ref = struct_newp(SafeReference,"some value");
+		_val = _ref callv(getValue); //some value
+		_ptr = _ref callv(getPtr); // 1
+		_ref = null; //called releaseRef
+
+		Custom allocator:
+
+		_alloc = ["ExamplePool"] call SafeReference_CreatePool;
+		_ref = struct_newp(SafeReference,"value" arg _alloc);
+		_val = _ref callv(getValue); //value
+		_ptr = _ref callv(getPtr); // 1
+		_ref = null; //called releaseRef
+*/
+struct(SafeReference)
+	def(_ctsr) null  //safereference pointers pool
+
+	def(iptr) 0 //null pointer by default
 
 	def(init)
 	{
-		params ['_obj'];
-		private _curi = sref_i;
+		params ['_obj',["_ctObj",sref_defaultPool]];
+		
+		self setv(_ctsr,_ctObj);
+
+		private _curi = _ctObj select SAFE_REFERENCE_POOL_COUNTER;
 		self setv(iptr, _curi);
-		sref_cont set [_curi,_obj];
-		sref_i = _curi + 1;		
+		_ctObj select SAFE_REFERENCE_POOL_CONTAINER set [_curi,_obj];
+		_ctObj set [_curi + 1];
 	}
+
+	// получает объект контейнера хранящего значения ссылок
+	def(_getContainer) { self getv(_ctsr) select SAFE_REFERENCE_POOL_CONTAINER}
+
+	// получает сырой указатель. Указатели равные 0 высвобождены
+	def(getPtr) {self getv(iptr)}
+
+	// получает значение
+	def(getValue) {(self callv(_getContainer)) get (self getv(iptr))}
+
+	//освобождение ссылки
 	def(releaseRef)
 	{
-		sref_cont deleteAt (self getv(iptr));
+		(self callv(_getContainer)) deleteAt (self getv(iptr));
+		self setv(iptr,0);
 	}
-	def(getPtr) {self getv(iptr)}
-	def(getValue) {sref_cont get (self getv(iptr))}
 
 	def(del)
 	{
@@ -31,8 +77,19 @@ struct(SafeRef)
 
 	def(str)
 	{
-		format["ref:%1<%2>",self getv(iptr),self callv(getValue)]
+		private _pn = self getv(_ctsr) select SAFE_REFERENCE_POOL_NAME;
+		format["ref:%1<%2>=>%3",self getv(iptr),_pn,self callv(getValue)]
 	}
+
+	//сравнение типа ссылки. Если они из одного контейнера возвращает true
+	def(isEqualPoolType)
+	{
+		params ["_other"];
+		private _c1 = self callv(_getContainer);
+		private _c2 = _other callv(_getContainer);
+		_c1 isEqualRef _c2
+	}
+
 endstruct
 
 //base interface for smart pointers
