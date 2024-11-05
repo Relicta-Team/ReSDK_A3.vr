@@ -51,7 +51,7 @@ struct(SafeReference)
 		private _curi = _ctObj select SAFE_REFERENCE_POOL_COUNTER;
 		self setv(iptr, _curi);
 		_ctObj select SAFE_REFERENCE_POOL_CONTAINER set [_curi,_obj];
-		_ctObj set [_curi + 1];
+		_ctObj set [SAFE_REFERENCE_POOL_COUNTER,_curi + 1];
 	}
 
 	// получает объект контейнера хранящего значения ссылок
