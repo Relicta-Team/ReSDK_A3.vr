@@ -339,6 +339,15 @@ struct(AtmosAreaClient)
 	{
 		keys (self getv(chunks))
 	}
+	
+	def(getLightByPos)
+	{
+		params ["_ps"];
+		private _chId = _ps call atmos_encodeChId;
+		private _o = (self getv(chunks)) get _chId;
+		if isNullVar(_o) exitWith {null};
+		_o select NAT_CHUNKDAT_OBJECT
+	}
 
 	def(str)
 	{
@@ -959,6 +968,7 @@ struct(AtmosVirtualLight)
 	def(effects) null;
 	def(id) -1; //config id
 	def(localChId) null; //local chunk id from [1,1,1] to [10,10,10]
+	def(localId) null //id from 1 to 1000
 
 	def(regionPosInfo) null; //vec2<Pos3d,Pos2d>
 	def(isInsideRegion) {!isNull(self getv(regionPosInfo))};
@@ -1125,14 +1135,6 @@ struct(AtmosClientBatchRegion)
 		self getv(virtLights) select 0 callp(isSameCfgType,_otherVL)
 	}
 
-	//получает дистанцию
-	def(getDistanceTo)
-	{
-		params ["_posWorld"];
-		//todo
-		//(self getv(batchPos)) distance2d _posWorld;
-	}
-
 	//размер зоны оптимизации vec2
 	def(renderZone) null
 	//уменьшение дропа частиц
@@ -1223,6 +1225,45 @@ struct(AtmosClientBatchRegion)
 	def(del)
 	{
 		self callv(unloadBatchEmitter);
+	}
+
+	//выполняет задание по ближайшим блокам зоны. 
+	// в параметры qtask отдается объект AtmosVirtualLight (при наличии) и позиция
+	def(nearBlocksQuery)
+	{
+		params [["_qtask",{}]];
+		private _startPos = self getv(startPos) vectorAdd [-1,-1];
+		private _endPos = self getv(endPos) vectorAdd [1,1];
+
+		private _pos = null;
+		private _aObj = [self getv(areaId)] call noe_client_nat_getAreaUnsafe;
+		if isNullVar(_aObj) exitWith {};
+
+		_startPos params ["_sX","_sY","_sZ"];
+		_endPos params ["_eX","_eY","_eZ"];
+
+		// Проход по верхней и нижней границам
+		for "_x" from (_sX) to (_eX) do {
+			// Верхняя граница
+			_pos = [_x, (_sY), _sZ];
+			[_aObj callp(getLightByPos,_pos),_pos] call _qtask; // Выполняем задание для блока на верхней границе
+
+			// Нижняя граница
+			_pos = [_x, (_eY), _sZ];
+			[_aObj callp(getLightByPos,_pos),_pos] call _qtask; // Выполняем задание для блока на нижней границе
+		};
+
+		// Проход по левой и правой границам (исключая углы, чтобы не дублировать их)
+		for "_y" from ((_sY) + 1) to ((_eY) - 1) do {
+			// Левая граница
+			_pos = [_sX, _y, _sZ];
+			[_aObj callp(getLightByPos,_pos),_pos] call _qtask; // Выполняем задание для блока на левой границе
+
+			// Правая граница
+			_pos = [_eX, _y, _sZ];
+			[_aObj callp(getLightByPos,_pos),_pos] call _qtask; // Выполняем задание для блока на правой границе
+		};
+
 	}
 
 	//включает или отключает режим рендера зоны. true - включение
