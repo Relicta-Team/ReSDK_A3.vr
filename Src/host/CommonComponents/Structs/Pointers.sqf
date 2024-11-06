@@ -20,6 +20,9 @@ sref_defaultPool = ["DefaultPool"] call SafeReference_CreatePool;
 
 /* 
 	Safe reference. Used for bypass crossreferences and possible memory leaks
+	
+	!Required str override for fix memory leaks on print
+	
 	Usage:
 
 		Default allocator:
@@ -91,6 +94,51 @@ struct(SafeReference)
 	}
 
 endstruct
+
+//test validate circular reference
+// struct(__debugContainer)
+// 	def(_alloc) (["test_alloc"] call SafeReference_CreatePool);
+// 	def(_selfPtr) null
+// 	def(init)
+// 	{
+// 		self setv(_selfPtr,struct_newp(SafeReference,self arg self getv(_alloc)));
+// 	}
+// 	def(del)
+// 	{
+// 		traceformat("OBJDEL %1",tickTime)
+// 	}
+// 	def(str)
+// 	{
+// 		"container[x]"
+// 	}	
+// endstruct
+// debug_ptrs = {
+// 	_p = ["__debugContainer"] call struct_alloc;
+// 	["SafeReference",[_p,_p get "_alloc"]] call struct_alloc
+// };
+
+//!noerror but resources not released
+// struct(_debugCStr)
+// 	def(_ref)null
+// 	def(init)
+// 	{
+// 		params ["_r"];
+// 		self setv(_ref,_r);
+// 	}
+// 	def(str) {"debug cstr"}
+// 	def(del){traceformat("cstr deleted",0)}
+// endstruct
+// struct(_refCtt)
+// 	def(_orig) null
+// 	def(str) {"ref ctt"}
+// 	def(del){traceformat("reference deleted",0)}
+// endstruct
+// debug_ccref_str = {
+// 	_o = struct_new(_refCtt);
+// 	_o2 = struct_newp(_debugCStr,_o);
+// 	_o setv(_orig,_o2);
+// 	_o2
+// };
 
 //base interface for smart pointers
 struct(_SmartPointerBase)
