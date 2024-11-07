@@ -175,10 +175,11 @@ sound3d_internal_localHandler = {
 		//traceformat("check sound %1",_psParams)
 		private _spar = _sid call soundParams_impl;
 		//this stop event
-		if isNullReference(_src) exitWith {
+		if isNullReference(_src) then {
 			_sid call stopSound_impl;
 			_slist set [_foreachindex,objNull];
 			_needDel = true;
+			continue; //next iter
 		};
 
 		private _doRestart = false;

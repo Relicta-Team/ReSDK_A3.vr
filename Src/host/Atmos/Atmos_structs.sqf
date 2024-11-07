@@ -23,7 +23,7 @@ struct(AtmosChunk)
 
 	def(chCtr) 0; //chunk counter
 
-	def(areaSR) null;//saferef to area
+	def(areaSR) null;//SafeReference to area
 	def(chId) null;
 	def(chNum) -1; //local chunk id
 	def(chLPos) null; //local position in area 

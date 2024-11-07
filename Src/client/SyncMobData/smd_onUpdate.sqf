@@ -36,27 +36,38 @@
 		_p = _mob getVariable "__loc_smd_grb_pool";
 		if (_mob distance player < 10) then {
 			if (count _p == 0) then {
-				for "_i" from 1 to 5 do {
-					_p pushBack ([_mob,null,true] call NGOExt_create);
-				};
+			
+				{
+					_ong = [_mob,null,true] call NGOExt_create;
+					[_ong] call interact_addOnScreenCapturedObject;
+					_p pushBack (_ong);
+					_ong hideObject true;					
+					_ong attachTo [_mob,_x select 2,_x select 0,true];
+					_ong setObjectScale (_x select 1);
+				} foreach [
+					["head",0.02,[-0.05,-0.1,0.1]],
+					["spine3",0.03,[0,0,0]],
+					["pelvis",0.03,[0,0,0]],
+					["leftleg",0.02,[0,0,0]],
+					["rightleg",0.02,[0,0,0]],
+					["leftshoulder",0.015,[0,0,0]],
+					["rightshoulder",0.015,[0,0,0]],
+					["leftforearm",0.012,[0,0,-.08]],
+					["rightforearm",0.012,[0,0,-.08]],
+					["leftforearmroll",0.012,[0,0,0]],
+					["rightforearmroll",0.012,[0,0,0]]
+				];
+			
+				#ifdef EDITOR
+				{[_x,[1,0,0,1],10] call debug_addRenderObject}foreach _p;
+				#endif
 			};
 			
-			{
-				_c = _p select _forEachIndex;
-				/*_c setPosATL (_mob modelToWorld (_mob selectionPosition _x));
-				_c setObjectScale .05;*/
-				_c attachTo [_mob,_x select 2,_x select 0,true];
-				_c setObjectScale (_x select 1);
-				detach _c;
-			} foreach [
-				["head",0.02,[-0.05,-0.1,0.1]],
-				["spine3",0.03,[0,0,0]],
-				["pelvis",0.03,[0,0,0]],
-				["leftleg",0.02,[0,0,0]],
-				["rightleg",0.02,[0,0,0]]
-			];
 		} else {
-			{deleteVehicle _x} foreach _p;
+			{
+				[_x] call interact_removeOnScreenCapturedObject;
+				deleteVehicle _x;
+			} foreach _p;
 			_mob setVariable ["__loc_smd_grb_pool",[]];
 		};
 	};

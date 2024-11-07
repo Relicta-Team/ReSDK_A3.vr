@@ -4,7 +4,7 @@
 // ======================================================
 
 #include <..\..\host\engine.hpp>
-
+#include <..\..\host\struct.hpp>
 
 
 //including modules
@@ -12,7 +12,9 @@
 #include "HDR\HDRInit.sqf"
 //#include "Effects\Effects_init.sqf"
 #include "RenderDistance.sqf"
+#include "Render_zpass.sqf"
 
+#include "Render_debug.sqf"
 
 //call render_dist_init;
 

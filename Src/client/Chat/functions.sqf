@@ -45,6 +45,50 @@ chatprint = {
 
 	//removing null vals
 	_text = _text regexreplace ["<null>","NULL"];
+	
+	// -------------------- text validation --------------------
+	call {
+		private _errorMessage = "Некорректный стиль последнего сообщения. Подробнее в консоли отладки.";
+		
+		private _ops = [_text,"<"] call regex_getMatches;
+		private _cls = [_text,">"] call regex_getMatches;
+		if ((count _ops) != (count _cls)) exitWith {
+			errorformat("chatprint(): invalid text style (count tags): %1",_text);
+			[_errorMessage,"system"] call chatPrint;
+			//removing all styles (prints only text)
+			_text = htmlToString(_text);
+		};
+		//null text check
+		if (str parsetext _text == "") exitWith {
+			errorformat("chatprint(): invalid text style (style error): %1",_text);
+			[_errorMessage,"system"] call chatPrint;
+			_text = sanitize(_text);
+		};
+		
+		//!Усложнённая проверка. Выше просто подсчитываем < и >
+		//compare openers,closers
+		// private _opens = [_text,"<\s*t[^>]*>"] call regex_getMatches;
+		// private _closes = [_text,"<\/\s*t[^>]*>"] call regex_getMatches;
+		// if ((count _opens) != (count _closes)) exitWith {
+		// 	errorformat("chatprint(): invalid text style (generic error): %1",_text);
+		// 	[_errorMessage,"system"] call chatPrint;
+		// 	{
+		// 		_text = [_text,_x,""] call stringReplace;
+		// 	} foreach (_opens + _closes);
+		// };
+
+		// //founding dead tags
+		// private _lgtErr = [_text,"<\s*(?!(t|img|br|\/))"] call regex_getMatches;
+		// if (count _lgtErr > 0) exitWith {
+		// 	errorformat("chatprint(): invalid text style (open tag error): %1",_text);
+		// 	[_errorMessage,"system"] call chatPrint;
+		// 	{
+		// 		_text = [_text,_x,""] call stringReplace;
+		// 	} foreach (_lgtErr);
+		// };
+
+	};
+	// -------------------- validation end --------------------
 
 	switch (_type) do {
 		//See more in https://community.bistudio.com/wiki/Structured_Text

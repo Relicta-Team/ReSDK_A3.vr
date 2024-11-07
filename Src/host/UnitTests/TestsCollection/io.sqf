@@ -236,3 +236,40 @@ TEST(FileSystem_Pathes)
 	} foreach _files;
 	ASSERT(_required in _files);
 }
+
+TEST(MacroIfdefs)
+{
+	private _filePath = "src\host\UnitTests\utility\header_test.h";
+	
+	private _test1 = "not_overriden";
+	private _dummyVal = 0;
+	private _versionMes = "default";
+	private _included_def = "null";
+	private _mulInclAll = "default_value";
+	private _mixedValue = 0;
+	private _endmacro = "empty";
+
+	ASSERT(fileExists(_filePath));
+
+	private _pdata = preprocessFileLineNumbers _filePath;
+	traceformat("Preprocessed: %1",_pdata);
+	ASSERT(count _pdata > 0);
+	call compile _pdata;
+	
+	traceformat("Result _test1: %1",_test1)
+	traceformat("Result _dummyVal: %1",_dummyVal)
+	traceformat("Result _versionMes: %1",_versionMes)
+	traceformat("Result _included_def: %1",_included_def)
+	traceformat("Result _mulInclAll: %1",_mulInclAll)
+	traceformat("Result _mixedValue: %1",_mixedValue)
+	traceformat("Result _endmacro: %1",_endmacro)
+
+	ASSERT_EQ(_dummyVal,1);
+	ASSERT_EQ(_test1,"true");
+	ASSERT_EQ(_versionMes,"true");
+	ASSERT_EQ(_included_def,"connected");
+	ASSERT_EQ(_mulInclAll,"success");
+	ASSERT_EQ(_mixedValue,6);
+	ASSERT_EQ(_endmacro,"ok");
+
+}

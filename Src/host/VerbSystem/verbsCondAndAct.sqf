@@ -90,6 +90,8 @@ ENDVERB
 VERB(pickup)
 	act
 		callFunc(usr,generateLastInteractOnServer);
+		callFuncParams(usr,__setLastInteractDistance,0);//bypass check distance inside pickupitem()
+		
 		callFuncParams(usr,pickupItem,src);
 	cond
 		skipCond(!isTypeOf(usr,Mob));

@@ -300,6 +300,12 @@ region(raycast)
 	getter_func(getLastInteractTarget,getSelf(__lastinteractdata__) select 4);
 	getter_func(getLastInteractNormal,getSelf(__lastinteractdata__) select 5);
 
+	func(__setLastInteractDistance)
+	{
+		objParams_1(_dist);
+		getSelf(__lastinteractdata__) set [2,_dist];
+	};
+
 	#define __debug_getinteractiontarget_spheres__
 	#ifdef __debug_getinteractiontarget_spheres__
 	debug_internal_getinteractiontarget_spheres = [];

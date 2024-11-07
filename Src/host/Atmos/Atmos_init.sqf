@@ -35,6 +35,8 @@ atmos_chunks_uniqIdx = 0;
 atmos_chunks = 0;
 atmos_areas = 0;
 
+atmos_areaPtrRefPool = ["AtmosAreaRefPool"] call SafeReference_CreatePool;
+
 //returns chunk by id, creates new if not exists
 atmos_getChunkAtChId = {
 	params ["_chId"];
@@ -47,7 +49,7 @@ atmos_getChunkAtChId = {
 		//checking area and register in area
 		private _aDat = [_chId call atmos_chunkIdToAreaId] call atmos_getAreaAtAid;
 		(_aDat select ATMOS_AREA_INDEX_CHUNKS) pushBack _chObj;
-		_chObj set ["areaSR",["SafeRef",[_aDat]] call struct_alloc];
+		_chObj set ["areaSR",["SafeReference",[_aDat,atmos_areaPtrRefPool]] call struct_alloc];
 	};
 	atmos_map_chunks get _strKey
 };

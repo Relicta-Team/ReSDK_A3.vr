@@ -3,10 +3,10 @@
 // sdk.relicta.ru
 // ======================================================
 
-
-addCommandWithDescription("ping",PUBLIC_COMMAND,"Проверка соединения") {
-	rpcSendToClient(caller,"chatPrint",["pong" arg "log"]);
-};
+//replaced with local
+// addCommandWithDescription("ping",PUBLIC_COMMAND,"Проверка соединения") {
+// 	rpcSendToClient(caller,"chatPrint",["pong" arg "log"]);
+// };
 
 addCommandWithDescription("help",PUBLIC_COMMAND,"Отображает доступные вам команды") {
 	_comliststr = "Доступные команды:" ;
