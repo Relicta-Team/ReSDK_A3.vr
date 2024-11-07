@@ -90,7 +90,8 @@ struct(SafeReference)
 		params ["_other"];
 		private _c1 = self callv(_getContainer);
 		private _c2 = _other callv(_getContainer);
-		_c1 isEqualRef _c2
+		//_c1 isEqualRef _c2
+		[_c1,_c2] call isequalref_impl
 	}
 
 endstruct
