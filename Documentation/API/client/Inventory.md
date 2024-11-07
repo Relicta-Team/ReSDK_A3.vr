@@ -629,7 +629,7 @@ Type: function
 Description: Смена активной руки
 
 
-File: [client\Inventory\functions.sqf at line 1363](../../../Src/client/Inventory/functions.sqf#L1363)
+File: [client\Inventory\functions.sqf at line 1368](../../../Src/client/Inventory/functions.sqf#L1368)
 ## inventory_changeTwoHandsMode
 
 Type: function
@@ -637,7 +637,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1376](../../../Src/client/Inventory/functions.sqf#L1376)
+File: [client\Inventory\functions.sqf at line 1381](../../../Src/client/Inventory/functions.sqf#L1381)
 ## inventory_onChangeActiveHand
 
 Type: function
@@ -647,7 +647,7 @@ Description:
 - Param: _act
 - Param: _setToNew (optional, default false)
 
-File: [client\Inventory\functions.sqf at line 1381](../../../Src/client/Inventory/functions.sqf#L1381)
+File: [client\Inventory\functions.sqf at line 1386](../../../Src/client/Inventory/functions.sqf#L1386)
 ## inventory_isEmptyHands
 
 Type: function
@@ -655,7 +655,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1406](../../../Src/client/Inventory/functions.sqf#L1406)
+File: [client\Inventory\functions.sqf at line 1411](../../../Src/client/Inventory/functions.sqf#L1411)
 ## inventory_isEmptyActiveHand
 
 Type: function
@@ -663,7 +663,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1410](../../../Src/client/Inventory/functions.sqf#L1410)
+File: [client\Inventory\functions.sqf at line 1415](../../../Src/client/Inventory/functions.sqf#L1415)
 ## inventory_getModelById
 
 Type: function
@@ -671,7 +671,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1412](../../../Src/client/Inventory/functions.sqf#L1412)
+File: [client\Inventory\functions.sqf at line 1417](../../../Src/client/Inventory/functions.sqf#L1417)
 ## inventory_getSlotDataById
 
 Type: function
@@ -679,7 +679,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1416](../../../Src/client/Inventory/functions.sqf#L1416)
+File: [client\Inventory\functions.sqf at line 1421](../../../Src/client/Inventory/functions.sqf#L1421)
 ## inventory_getContainerSlotDataById
 
 Type: function
@@ -687,7 +687,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1420](../../../Src/client/Inventory/functions.sqf#L1420)
+File: [client\Inventory\functions.sqf at line 1425](../../../Src/client/Inventory/functions.sqf#L1425)
 # helpers.hpp
 
 ## INVENTORY_LOG

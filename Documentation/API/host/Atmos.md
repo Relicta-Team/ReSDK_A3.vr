@@ -640,7 +640,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Atmos\Atmos_init.sqf at line 260](../../../Src/host/Atmos/Atmos_init.sqf#L260)
+File: [host\Atmos\Atmos_init.sqf at line 262](../../../Src/host/Atmos/Atmos_init.sqf#L262)
 ## ASP_REGION_NAMED(t,x)
 
 Type: constant
@@ -655,7 +655,7 @@ Replaced value:
 ```sqf
 ASP_REGION(t + (str _x))
 ```
-File: [host\Atmos\Atmos_init.sqf at line 263](../../../Src/host/Atmos/Atmos_init.sqf#L263)
+File: [host\Atmos\Atmos_init.sqf at line 265](../../../Src/host/Atmos/Atmos_init.sqf#L265)
 ## ASP_REGION_NAMED(t,x)
 
 Type: constant
@@ -670,7 +670,7 @@ Replaced value:
 ```sqf
 ASP_REGION(t)
 ```
-File: [host\Atmos\Atmos_init.sqf at line 265](../../../Src/host/Atmos/Atmos_init.sqf#L265)
+File: [host\Atmos\Atmos_init.sqf at line 267](../../../Src/host/Atmos/Atmos_init.sqf#L267)
 ## atmos_map_chunks
 
 Type: Variable
@@ -743,6 +743,18 @@ Initial value:
 0
 ```
 File: [host\Atmos\Atmos_init.sqf at line 36](../../../Src/host/Atmos/Atmos_init.sqf#L36)
+## atmos_areaPtrRefPool
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+["AtmosAreaRefPool"] call SafeReference_CreatePool
+```
+File: [host\Atmos\Atmos_init.sqf at line 38](../../../Src/host/Atmos/Atmos_init.sqf#L38)
 ## atmos_imap_process_t
 
 Type: Variable
@@ -754,7 +766,7 @@ Initial value:
 ```sqf
 createHashMapFromArray [...
 ```
-File: [host\Atmos\Atmos_init.sqf at line 244](../../../Src/host/Atmos/Atmos_init.sqf#L244)
+File: [host\Atmos\Atmos_init.sqf at line 246](../../../Src/host/Atmos/Atmos_init.sqf#L246)
 ## atmos_internal_handleUpdate
 
 Type: Variable
@@ -766,7 +778,7 @@ Initial value:
 ```sqf
 startUpdate(atmos_internal_onUpdate,ATMOS_MAIN_THREAD_UPDATE_DELAY)
 ```
-File: [host\Atmos\Atmos_init.sqf at line 347](../../../Src/host/Atmos/Atmos_init.sqf#L347)
+File: [host\Atmos\Atmos_init.sqf at line 349](../../../Src/host/Atmos/Atmos_init.sqf#L349)
 ## atmos_cv_ca
 
 Type: Variable
@@ -778,7 +790,7 @@ Initial value:
 ```sqf
 ["canActivity"]
 ```
-File: [host\Atmos\Atmos_init.sqf at line 255](../../../Src/host/Atmos/Atmos_init.sqf#L255)
+File: [host\Atmos\Atmos_init.sqf at line 257](../../../Src/host/Atmos/Atmos_init.sqf#L257)
 ## atmos_cv_goch
 
 Type: Variable
@@ -790,7 +802,7 @@ Initial value:
 ```sqf
 ["getObjectsInChunk"]
 ```
-File: [host\Atmos\Atmos_init.sqf at line 256](../../../Src/host/Atmos/Atmos_init.sqf#L256)
+File: [host\Atmos\Atmos_init.sqf at line 258](../../../Src/host/Atmos/Atmos_init.sqf#L258)
 ## atmos_cv_oa
 
 Type: Variable
@@ -802,7 +814,7 @@ Initial value:
 ```sqf
 ["onActivity"]
 ```
-File: [host\Atmos\Atmos_init.sqf at line 257](../../../Src/host/Atmos/Atmos_init.sqf#L257)
+File: [host\Atmos\Atmos_init.sqf at line 259](../../../Src/host/Atmos/Atmos_init.sqf#L259)
 ## atmos_cv_tupd
 
 Type: Variable
@@ -814,7 +826,7 @@ Initial value:
 ```sqf
 ["onTemperatureUpdate"]
 ```
-File: [host\Atmos\Atmos_init.sqf at line 258](../../../Src/host/Atmos/Atmos_init.sqf#L258)
+File: [host\Atmos\Atmos_init.sqf at line 260](../../../Src/host/Atmos/Atmos_init.sqf#L260)
 ## atmos_getChunkAtChId
 
 Type: function
@@ -822,7 +834,7 @@ Type: function
 Description: returns chunk by id, creates new if not exists
 - Param: _chId
 
-File: [host\Atmos\Atmos_init.sqf at line 39](../../../Src/host/Atmos/Atmos_init.sqf#L39)
+File: [host\Atmos\Atmos_init.sqf at line 41](../../../Src/host/Atmos/Atmos_init.sqf#L41)
 ## atmos_getChunkAtChIdUnsafe
 
 Type: function
@@ -830,7 +842,7 @@ Type: function
 Description: returns chunk by id
 - Param: _chId
 
-File: [host\Atmos\Atmos_init.sqf at line 56](../../../Src/host/Atmos/Atmos_init.sqf#L56)
+File: [host\Atmos\Atmos_init.sqf at line 58](../../../Src/host/Atmos/Atmos_init.sqf#L58)
 ## atmos_getAreaAtAid
 
 Type: function
@@ -838,7 +850,7 @@ Type: function
 Description: returns area by id
 - Param: _aid
 
-File: [host\Atmos\Atmos_init.sqf at line 64](../../../Src/host/Atmos/Atmos_init.sqf#L64)
+File: [host\Atmos\Atmos_init.sqf at line 66](../../../Src/host/Atmos/Atmos_init.sqf#L66)
 ## atmos_rpc_requestGetArea
 
 Type: function
@@ -848,7 +860,7 @@ Description: обработка запроса зоны от клиента
 - Param: _ar
 - Param: _lastUpd
 
-File: [host\Atmos\Atmos_init.sqf at line 75](../../../Src/host/Atmos/Atmos_init.sqf#L75)
+File: [host\Atmos\Atmos_init.sqf at line 77](../../../Src/host/Atmos/Atmos_init.sqf#L77)
 ## atmos_internal_generatePacket
 
 Type: function
@@ -858,7 +870,7 @@ Description:
 - Param: _chObjList
 - Param: _lastUpd
 
-File: [host\Atmos\Atmos_init.sqf at line 99](../../../Src/host/Atmos/Atmos_init.sqf#L99)
+File: [host\Atmos\Atmos_init.sqf at line 101](../../../Src/host/Atmos/Atmos_init.sqf#L101)
 ## atmos_rpc_validateExpiredChunks
 
 Type: function
@@ -868,7 +880,7 @@ Description:
 - Param: _ar
 - Param: _listIds
 
-File: [host\Atmos\Atmos_init.sqf at line 108](../../../Src/host/Atmos/Atmos_init.sqf#L108)
+File: [host\Atmos\Atmos_init.sqf at line 110](../../../Src/host/Atmos/Atmos_init.sqf#L110)
 ## atmos_onUpdateAreaByChunk
 
 Type: function
@@ -876,7 +888,7 @@ Type: function
 Description: 
 - Param: _chObj
 
-File: [host\Atmos\Atmos_init.sqf at line 130](../../../Src/host/Atmos/Atmos_init.sqf#L130)
+File: [host\Atmos\Atmos_init.sqf at line 132](../../../Src/host/Atmos/Atmos_init.sqf#L132)
 ## atmos_transferBuffer
 
 Type: function
@@ -886,7 +898,7 @@ Type: function
 Description: 
 - Param: _aDat
 
-File: [host\Atmos\Atmos_init.sqf at line 165](../../../Src/host/Atmos/Atmos_init.sqf#L165)
+File: [host\Atmos\Atmos_init.sqf at line 167](../../../Src/host/Atmos/Atmos_init.sqf#L167)
 ## atmos_onUnsubscribeClientListening
 
 Type: function
@@ -895,7 +907,7 @@ Description:
 - Param: _cli
 - Param: _aId
 
-File: [host\Atmos\Atmos_init.sqf at line 189](../../../Src/host/Atmos/Atmos_init.sqf#L189)
+File: [host\Atmos\Atmos_init.sqf at line 191](../../../Src/host/Atmos/Atmos_init.sqf#L191)
 ## atmos_unsubscribeClientListeningSrv
 
 Type: function
@@ -903,7 +915,7 @@ Type: function
 Description: 
 - Param: _cli
 
-File: [host\Atmos\Atmos_init.sqf at line 205](../../../Src/host/Atmos/Atmos_init.sqf#L205)
+File: [host\Atmos\Atmos_init.sqf at line 207](../../../Src/host/Atmos/Atmos_init.sqf#L207)
 ## atmos_createProcess
 
 Type: function
@@ -914,7 +926,7 @@ Description: create new process inside chunk
 - Param: _manualCreate (optional, default false)
 - Param: _paramsInit (optional, default null)
 
-File: [host\Atmos\Atmos_init.sqf at line 218](../../../Src/host/Atmos/Atmos_init.sqf#L218)
+File: [host\Atmos\Atmos_init.sqf at line 220](../../../Src/host/Atmos/Atmos_init.sqf#L220)
 ## atmos_internal_onUpdate
 
 Type: function
@@ -922,7 +934,7 @@ Type: function
 Description: 
 
 
-File: [host\Atmos\Atmos_init.sqf at line 268](../../../Src/host/Atmos/Atmos_init.sqf#L268)
+File: [host\Atmos\Atmos_init.sqf at line 270](../../../Src/host/Atmos/Atmos_init.sqf#L270)
 ## atmos_internal_generateChunkGetCode
 
 Type: function
@@ -930,7 +942,7 @@ Type: function
 Description: what this?..
 - Param: _bch
 
-File: [host\Atmos\Atmos_init.sqf at line 352](../../../Src/host/Atmos/Atmos_init.sqf#L352)
+File: [host\Atmos\Atmos_init.sqf at line 354](../../../Src/host/Atmos/Atmos_init.sqf#L354)
 # Atmos_raycasts.sqf
 
 ## ATMOS_EXTENDED_INTERSECTION_COUNT
@@ -1241,6 +1253,15 @@ Description: ! returns local chunk pos
 - Param: _id
 
 File: [host\Atmos\Atmos_shared.sqf at line 143](../../../Src/host/Atmos/Atmos_shared.sqf#L143)
+## atmos_decodeChIdAt
+
+Type: function
+
+Description: 
+- Param: _id
+- Param: _posIdx
+
+File: [host\Atmos\Atmos_shared.sqf at line 152](../../../Src/host/Atmos/Atmos_shared.sqf#L152)
 # Atmos_spreading.sqf
 
 ## ignite_info(v)

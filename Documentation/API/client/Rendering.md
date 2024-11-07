@@ -64,6 +64,133 @@ Description:
 
 
 File: [client\Rendering\RenderDistance.sqf at line 35](../../../Src/client/Rendering/RenderDistance.sqf#L35)
+# Render_debug.sqf
+
+## debug_drawBoundingBox
+
+Type: function
+
+Description: 
+- Param: _obj
+- Param: _color (optional, default ['1', '0', '1', '1'])
+- Param: _width (optional, default 3)
+- Param: _bbdt
+
+File: [client\Rendering\Render_debug.sqf at line 6](../../../Src/client/Rendering/Render_debug.sqf#L6)
+## debug_drawBoundingBoxPos
+
+Type: function
+
+Description: 
+- Param: _pos
+- Param: _color (optional, default ['1', '0', '1', '1'])
+- Param: _width (optional, default 3)
+- Param: _bbx
+
+File: [client\Rendering\Render_debug.sqf at line 37](../../../Src/client/Rendering/Render_debug.sqf#L37)
+## debug_addRenderPos
+
+Type: function
+
+Description: 
+- Param: _pos
+- Param: _color
+- Param: _wdt
+- Param: _bbx
+
+File: [client\Rendering\Render_debug.sqf at line 67](../../../Src/client/Rendering/Render_debug.sqf#L67)
+## debug_addRenderObject
+
+Type: function
+
+Description: 
+- Param: _obj
+- Param: _color
+- Param: _wdt
+- Param: _bbxVec2
+
+File: [client\Rendering\Render_debug.sqf at line 73](../../../Src/client/Rendering/Render_debug.sqf#L73)
+# Render_zpass.sqf
+
+## render_zpass_cachePositions
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createhashMap
+```
+File: [client\Rendering\Render_zpass.sqf at line 115](../../../Src/client/Rendering/Render_zpass.sqf#L115)
+## render_zpass_getObjBBX
+
+Type: function
+
+Description: list<vec3(distancetocam,list<screenproj>,metaObject)>
+- Param: _cameraPos
+- Param: _objlist
+
+File: [client\Rendering\Render_zpass.sqf at line 10](../../../Src/client/Rendering/Render_zpass.sqf#L10)
+## render_zpass_getBBXInfoVirtual
+
+Type: function
+
+Description: 
+- Param: _psCenter
+- Param: _bmin
+- Param: _bmax
+
+File: [client\Rendering\Render_zpass.sqf at line 46](../../../Src/client/Rendering/Render_zpass.sqf#L46)
+## render_zpass_getBBXInfoVirtual_gbuffCheck
+
+Type: function
+
+Description: 
+- Param: _psCenter
+- Param: _bmin
+- Param: _bmax
+
+File: [client\Rendering\Render_zpass.sqf at line 75](../../../Src/client/Rendering/Render_zpass.sqf#L75)
+## render_zpass_getBBXInfoVirtual_DEBUG
+
+Type: function
+
+Description: 
+- Param: _psCenter
+- Param: _bmin
+- Param: _bmax
+
+File: [client\Rendering\Render_zpass.sqf at line 116](../../../Src/client/Rendering/Render_zpass.sqf#L116)
+## render_processZPass
+
+Type: function
+
+Description: Главная функция для сортировки и проверки видимости объектов
+- Param: _cameraPos
+- Param: _sortedObjects
+- Param: _pipelineFnc
+
+File: [client\Rendering\Render_zpass.sqf at line 156](../../../Src/client/Rendering/Render_zpass.sqf#L156)
+## render_zpass_checkOverlapWithZone
+
+Type: function
+
+Description: Функция для проверки перекрытия двух проекций на экране
+- Param: _screenBoxA
+- Param: _screenBoxB
+
+File: [client\Rendering\Render_zpass.sqf at line 198](../../../Src/client/Rendering/Render_zpass.sqf#L198)
+## render_zpass_checkFullOverlap
+
+Type: function
+
+Description: 
+- Param: _screenBoxA
+- Param: _screenBoxB
+
+File: [client\Rendering\Render_zpass.sqf at line 218](../../../Src/client/Rendering/Render_zpass.sqf#L218)
 # CameraControl.hpp
 
 ## CAMERA_MODE_ARCADE

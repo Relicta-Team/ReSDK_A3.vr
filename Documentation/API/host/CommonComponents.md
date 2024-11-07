@@ -1240,6 +1240,14 @@ Description:
 - Param: _vehicle
 
 File: [host\CommonComponents\ModelTransform.hpp at line 86](../../../Src/host/CommonComponents/ModelTransform.hpp#L86)
+## model_getPitchBankYawAccurate
+
+Type: function
+
+Description: 
+- Param: _v
+
+File: [host\CommonComponents\ModelTransform.hpp at line 91](../../../Src/host/CommonComponents/ModelTransform.hpp#L91)
 ## model_isSafedirTransform
 
 Type: function
@@ -1247,7 +1255,16 @@ Type: function
 Description: проверяет является ли направление безопасным
 - Param: _vdu_dir
 
-File: [host\CommonComponents\ModelTransform.hpp at line 92](../../../Src/host/CommonComponents/ModelTransform.hpp#L92)
+File: [host\CommonComponents\ModelTransform.hpp at line 105](../../../Src/host/CommonComponents/ModelTransform.hpp#L105)
+## model_isPosInsideBBX
+
+Type: function
+
+Description: 
+- Param: _pos
+- Param: _obj
+
+File: [host\CommonComponents\ModelTransform.hpp at line 120](../../../Src/host/CommonComponents/ModelTransform.hpp#L120)
 # Pencfg.sqf
 
 ## addtobj(model,soundpen,armpen)
@@ -1765,19 +1782,43 @@ Description:
 File: [host\CommonComponents\Structs\Collections.sqf at line 331](../../../Src/host/CommonComponents/Structs/Collections.sqf#L331)
 # Pointers.sqf
 
-## sref_cont
+## SAFE_REFERENCE_POOL_CONTAINER
 
-Type: Variable
+Type: constant
 
-Description: Safe reference. Used for bypass crossreferences and possible memory leaks
+Description: 
 
 
-Initial value:
+Replaced value:
 ```sqf
-createHashMap
+0
+```
+File: [host\CommonComponents\Structs\Pointers.sqf at line 6](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L6)
+## SAFE_REFERENCE_POOL_COUNTER
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+1
 ```
 File: [host\CommonComponents\Structs\Pointers.sqf at line 7](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L7)
-## sref_i
+## SAFE_REFERENCE_POOL_NAME
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+2
+```
+File: [host\CommonComponents\Structs\Pointers.sqf at line 8](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L8)
+## sref_defaultPool
 
 Type: Variable
 
@@ -1786,9 +1827,17 @@ Description:
 
 Initial value:
 ```sqf
-0
+["DefaultPool"] call SafeReference_CreatePool
 ```
-File: [host\CommonComponents\Structs\Pointers.sqf at line 8](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L8)
+File: [host\CommonComponents\Structs\Pointers.sqf at line 19](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L19)
+## SafeReference_CreatePool
+
+Type: function
+
+Description: создание нового пула для безопасных ссылок
+- Param: _poolName
+
+File: [host\CommonComponents\Structs\Pointers.sqf at line 11](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L11)
 # Profiling.sqf
 
 ## prof_map_zones

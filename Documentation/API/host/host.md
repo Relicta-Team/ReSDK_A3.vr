@@ -8718,7 +8718,7 @@ Description:
 
 Replaced value:
 ```sqf
-1.5
+1.6
 ```
 File: [host\struct.hpp at line 6](../../../Src/host/struct.hpp#L6)
 ## STRUCT_MEM_TYPE
@@ -8814,7 +8814,7 @@ Description: * * * * * * * * * * * * Declaration base * * * * * * * * * * * *
 
 Replaced value:
 ```sqf
-_sdecl__ = [ [STRUCT_MEM_TYPE, #name ], [STRUCT_MEM_FLAGS, struct_default_flag], ["__dflg__",false] ];
+_t_annot_ = []; _sdecl__ = [ [STRUCT_MEM_TYPE, #name ], [STRUCT_MEM_FLAGS, struct_default_flag], ["__dflg__",false] ];
 ```
 File: [host\struct.hpp at line 111](../../../Src/host/struct.hpp#L111)
 ## base(basename)
@@ -8838,7 +8838,7 @@ Description:
 
 Replaced value:
 ```sqf
-;spi_lst pushBack _sdecl__;
+;spi_lst pushBack _sdecl__; if (count _t_annot_ > 0) then {_sdecl__ pushBack ["#type_annot_list",_t_annot_]};
 ```
 File: [host\struct.hpp at line 113](../../../Src/host/struct.hpp#L113)
 ## def(varname)
@@ -8865,6 +8865,18 @@ Replaced value:
 def(varname) null;
 ```
 File: [host\struct.hpp at line 130](../../../Src/host/struct.hpp#L130)
+## def_ret(varname)
+
+Type: constant
+
+Description: 
+- Param: varname
+
+Replaced value:
+```sqf
+;_t_annot_ pushBack ( #varname ); def(varname)
+```
+File: [host\struct.hpp at line 140](../../../Src/host/struct.hpp#L140)
 ## __STRUCT_CAST_PREFIX___
 
 Type: constant
@@ -8876,7 +8888,7 @@ Replaced value:
 ```sqf
 "$_"
 ```
-File: [host\struct.hpp at line 132](../../../Src/host/struct.hpp#L132)
+File: [host\struct.hpp at line 142](../../../Src/host/struct.hpp#L142)
 ## cast_def(typeto)
 
 Type: constant
@@ -8888,7 +8900,7 @@ Replaced value:
 ```sqf
 ;_soffst__ = _sdecl__ pushBack [__STRUCT_CAST_PREFIX___ + (#varname)]; _sdecl__ select _soffst__ pushBack 
 ```
-File: [host\struct.hpp at line 133](../../../Src/host/struct.hpp#L133)
+File: [host\struct.hpp at line 143](../../../Src/host/struct.hpp#L143)
 ## static_def(t)
 
 Type: constant
@@ -8900,7 +8912,7 @@ Replaced value:
 ```sqf
 setLastError("Static declarations are not supported in current version");
 ```
-File: [host\struct.hpp at line 134](../../../Src/host/struct.hpp#L134)
+File: [host\struct.hpp at line 144](../../../Src/host/struct.hpp#L144)
 ## self
 
 Type: constant
@@ -8912,7 +8924,7 @@ Replaced value:
 ```sqf
 _self
 ```
-File: [host\struct.hpp at line 140](../../../Src/host/struct.hpp#L140)
+File: [host\struct.hpp at line 150](../../../Src/host/struct.hpp#L150)
 ## callv(methodname)
 
 Type: constant
@@ -8924,7 +8936,7 @@ Replaced value:
 ```sqf
 call [#methodname]
 ```
-File: [host\struct.hpp at line 142](../../../Src/host/struct.hpp#L142)
+File: [host\struct.hpp at line 152](../../../Src/host/struct.hpp#L152)
 ## callp(methodname,params)
 
 Type: constant
@@ -8937,7 +8949,7 @@ Replaced value:
 ```sqf
 call [#methodname,[params]]
 ```
-File: [host\struct.hpp at line 144](../../../Src/host/struct.hpp#L144)
+File: [host\struct.hpp at line 154](../../../Src/host/struct.hpp#L154)
 ## callbase(methodname)
 
 Type: constant
@@ -8949,7 +8961,7 @@ Replaced value:
 ```sqf
 call{__STRUCT_CALLBASE__;'methodname'}
 ```
-File: [host\struct.hpp at line 146](../../../Src/host/struct.hpp#L146)
+File: [host\struct.hpp at line 156](../../../Src/host/struct.hpp#L156)
 ## __STRUCT_CALLBASE_TOKEN__
 
 Type: constant
@@ -8961,7 +8973,7 @@ Replaced value:
 ```sqf
 "__STRUCT_CALLBASE__;"
 ```
-File: [host\struct.hpp at line 147](../../../Src/host/struct.hpp#L147)
+File: [host\struct.hpp at line 157](../../../Src/host/struct.hpp#L157)
 ## __STRUCT_CALLBASE_REGEX__
 
 Type: constant
@@ -8973,7 +8985,7 @@ Replaced value:
 ```sqf
 "call\{__STRUCT_CALLBASE__;'(\w+)'\}"
 ```
-File: [host\struct.hpp at line 148](../../../Src/host/struct.hpp#L148)
+File: [host\struct.hpp at line 158](../../../Src/host/struct.hpp#L158)
 ## __STRUCT_CALLBASE_REGEX_REPLACE_FORMAT__
 
 Type: constant
@@ -8985,7 +8997,7 @@ Replaced value:
 ```sqf
 "call\{__STRUCT_CALLBASE__;'%1'\}"
 ```
-File: [host\struct.hpp at line 149](../../../Src/host/struct.hpp#L149)
+File: [host\struct.hpp at line 159](../../../Src/host/struct.hpp#L159)
 ## getv(memname)
 
 Type: constant
@@ -8997,7 +9009,7 @@ Replaced value:
 ```sqf
 get #memname
 ```
-File: [host\struct.hpp at line 152](../../../Src/host/struct.hpp#L152)
+File: [host\struct.hpp at line 162](../../../Src/host/struct.hpp#L162)
 ## setv(memname,val__)
 
 Type: constant
@@ -9010,7 +9022,7 @@ Replaced value:
 ```sqf
 set [#memname,val__]
 ```
-File: [host\struct.hpp at line 153](../../../Src/host/struct.hpp#L153)
+File: [host\struct.hpp at line 163](../../../Src/host/struct.hpp#L163)
 ## modv(memname,val__)
 
 Type: constant
@@ -9023,7 +9035,7 @@ Replaced value:
 ```sqf
 call { _this set [#memname, (_this get #memname) val__ ] }
 ```
-File: [host\struct.hpp at line 155](../../../Src/host/struct.hpp#L155)
+File: [host\struct.hpp at line 165](../../../Src/host/struct.hpp#L165)
 ## incv(memname)
 
 Type: constant
@@ -9035,7 +9047,7 @@ Replaced value:
 ```sqf
 modv(memname, + 1)
 ```
-File: [host\struct.hpp at line 156](../../../Src/host/struct.hpp#L156)
+File: [host\struct.hpp at line 166](../../../Src/host/struct.hpp#L166)
 ## decv(memname)
 
 Type: constant
@@ -9047,7 +9059,7 @@ Replaced value:
 ```sqf
 modv(memname, - 1)
 ```
-File: [host\struct.hpp at line 157](../../../Src/host/struct.hpp#L157)
+File: [host\struct.hpp at line 167](../../../Src/host/struct.hpp#L167)
 ## isinstance(_inst_o,type_n)
 
 Type: constant
@@ -9060,7 +9072,7 @@ Replaced value:
 ```sqf
 (#type_n in (_inst_o get STRUCT_MEM_TYPE))
 ```
-File: [host\struct.hpp at line 162](../../../Src/host/struct.hpp#L162)
+File: [host\struct.hpp at line 172](../../../Src/host/struct.hpp#L172)
 ## isinstance_str(_inst_o,type_n)
 
 Type: constant
@@ -9073,7 +9085,7 @@ Replaced value:
 ```sqf
 ((type_n) in (_inst_o get STRUCT_MEM_TYPE))
 ```
-File: [host\struct.hpp at line 163](../../../Src/host/struct.hpp#L163)
+File: [host\struct.hpp at line 173](../../../Src/host/struct.hpp#L173)
 ## struct_typename(o)
 
 Type: constant
@@ -9085,7 +9097,7 @@ Replaced value:
 ```sqf
 ((o) GET STRUCT_MEM_TYPE select 0)
 ```
-File: [host\struct.hpp at line 165](../../../Src/host/struct.hpp#L165)
+File: [host\struct.hpp at line 175](../../../Src/host/struct.hpp#L175)
 ## struct_existType(o)
 
 Type: constant
@@ -9097,7 +9109,7 @@ Replaced value:
 ```sqf
 (#o in vtable_s)
 ```
-File: [host\struct.hpp at line 167](../../../Src/host/struct.hpp#L167)
+File: [host\struct.hpp at line 177](../../../Src/host/struct.hpp#L177)
 ## struct_existType_str(o)
 
 Type: constant
@@ -9109,7 +9121,7 @@ Replaced value:
 ```sqf
 ((o) in vtable_s)
 ```
-File: [host\struct.hpp at line 168](../../../Src/host/struct.hpp#L168)
+File: [host\struct.hpp at line 178](../../../Src/host/struct.hpp#L178)
 ## struct_new(name)
 
 Type: constant
@@ -9123,7 +9135,7 @@ Replaced value:
 ```sqf
 ([ pts_##name ,nil ] call struct_iallc)
 ```
-File: [host\struct.hpp at line 175](../../../Src/host/struct.hpp#L175)
+File: [host\struct.hpp at line 185](../../../Src/host/struct.hpp#L185)
 ## struct_newp(name,arglist)
 
 Type: constant
@@ -9138,7 +9150,7 @@ Replaced value:
 ```sqf
 (call{_sbj___ = [ pts_##name ,[arglist]] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
 ```
-File: [host\struct.hpp at line 175](../../../Src/host/struct.hpp#L175)
+File: [host\struct.hpp at line 185](../../../Src/host/struct.hpp#L185)
 ## struct_newp(name,arglist)
 
 Type: constant
@@ -9153,7 +9165,7 @@ Replaced value:
 ```sqf
 ([ pts_##name ,[arglist]] call struct_iallc)
 ```
-File: [host\struct.hpp at line 178](../../../Src/host/struct.hpp#L178)
+File: [host\struct.hpp at line 188](../../../Src/host/struct.hpp#L188)
 ## struct_free(o)
 
 Type: constant
@@ -9165,7 +9177,7 @@ Replaced value:
 ```sqf
 o SET ["__dflg__",true];{if !(_y isequaltype {})then{o deleteAt _x};}foreach o
 ```
-File: [host\struct.hpp at line 182](../../../Src/host/struct.hpp#L182)
+File: [host\struct.hpp at line 192](../../../Src/host/struct.hpp#L192)
 ## struct_erase(o)
 
 Type: constant
@@ -9177,7 +9189,7 @@ Replaced value:
 ```sqf
 o SET ["__dflg__",true]; {o deleteAt _x}foreach o
 ```
-File: [host\struct.hpp at line 183](../../../Src/host/struct.hpp#L183)
+File: [host\struct.hpp at line 193](../../../Src/host/struct.hpp#L193)
 ## struct_isdeleted(o)
 
 Type: constant
@@ -9189,7 +9201,7 @@ Replaced value:
 ```sqf
 (!isnil{o get "__dflg__"})
 ```
-File: [host\struct.hpp at line 184](../../../Src/host/struct.hpp#L184)
+File: [host\struct.hpp at line 194](../../../Src/host/struct.hpp#L194)
 ## struct_copy(rval)
 
 Type: constant
@@ -9201,7 +9213,7 @@ Replaced value:
 ```sqf
 (+(rval))
 ```
-File: [host\struct.hpp at line 186](../../../Src/host/struct.hpp#L186)
+File: [host\struct.hpp at line 196](../../../Src/host/struct.hpp#L196)
 ## struct_cast(o,typeto)
 
 Type: constant
@@ -9214,7 +9226,7 @@ Replaced value:
 ```sqf
 o call [__STRUCT_CAST_PREFIX___ + #typeto]
 ```
-File: [host\struct.hpp at line 205](../../../Src/host/struct.hpp#L205)
+File: [host\struct.hpp at line 215](../../../Src/host/struct.hpp#L215)
 ## ___struct_root_instr(v)
 
 Type: constant
@@ -9226,7 +9238,7 @@ Replaced value:
 ```sqf
 #v
 ```
-File: [host\struct.hpp at line 234](../../../Src/host/struct.hpp#L234)
+File: [host\struct.hpp at line 244](../../../Src/host/struct.hpp#L244)
 ## __STRUCT_CHECK_ROOT
 
 Type: constant
@@ -9245,7 +9257,7 @@ Replaced value:
 			setLastError(_eMessage); \
 		};
 ```
-File: [host\struct.hpp at line 237](../../../Src/host/struct.hpp#L237)
+File: [host\struct.hpp at line 247](../../../Src/host/struct.hpp#L247)
 ## __STRUCT_REDEFINE_BASE
 
 Type: constant
@@ -9260,7 +9272,7 @@ Replaced value:
 \
 		if not_equals(_x,_structRootName) exitWith {_structRootName};
 ```
-File: [host\struct.hpp at line 245](../../../Src/host/struct.hpp#L245)
+File: [host\struct.hpp at line 255](../../../Src/host/struct.hpp#L255)
 ## __STRUCT_CHECK_ROOT
 
 Type: constant
@@ -9274,7 +9286,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\struct.hpp at line 250](../../../Src/host/struct.hpp#L250)
+File: [host\struct.hpp at line 260](../../../Src/host/struct.hpp#L260)
 ## __STRUCT_REDEFINE_BASE
 
 Type: constant
@@ -9288,7 +9300,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\struct.hpp at line 251](../../../Src/host/struct.hpp#L251)
+File: [host\struct.hpp at line 261](../../../Src/host/struct.hpp#L261)
 ## spi_lst
 
 Type: Variable
@@ -9302,7 +9314,7 @@ Initial value:
 ```sqf
 [] //preinit structures list
 ```
-File: [host\struct.hpp at line 258](../../../Src/host/struct.hpp#L258)
+File: [host\struct.hpp at line 268](../../../Src/host/struct.hpp#L268)
 ## vtable_s
 
 Type: Variable
@@ -9314,7 +9326,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\struct.hpp at line 259](../../../Src/host/struct.hpp#L259)
+File: [host\struct.hpp at line 269](../../../Src/host/struct.hpp#L269)
 ## vt_cast
 
 Type: Variable
@@ -9326,7 +9338,7 @@ Initial value:
 ```sqf
 createHashMap //cast table
 ```
-File: [host\struct.hpp at line 260](../../../Src/host/struct.hpp#L260)
+File: [host\struct.hpp at line 270](../../../Src/host/struct.hpp#L270)
 ## struct_default_flag
 
 Type: Variable
@@ -9338,7 +9350,7 @@ Initial value:
 ```sqf
 ["unscheduled"]
 ```
-File: [host\struct.hpp at line 261](../../../Src/host/struct.hpp#L261)
+File: [host\struct.hpp at line 271](../../../Src/host/struct.hpp#L271)
 ## strt_inh
 
 Type: Variable
@@ -9350,7 +9362,7 @@ Initial value:
 ```sqf
 createHashMap //struct inheritance table
 ```
-File: [host\struct.hpp at line 262](../../../Src/host/struct.hpp#L262)
+File: [host\struct.hpp at line 272](../../../Src/host/struct.hpp#L272)
 ## strt_inhChld
 
 Type: Variable
@@ -9362,7 +9374,7 @@ Initial value:
 ```sqf
 createHashMap //struct inheritance table of all childrens
 ```
-File: [host\struct.hpp at line 263](../../../Src/host/struct.hpp#L263)
+File: [host\struct.hpp at line 273](../../../Src/host/struct.hpp#L273)
 ## struct_initialize
 
 Type: function
@@ -9372,7 +9384,7 @@ Type: function
 Description: struct inheritance table of all childrens
 
 
-File: [host\struct.hpp at line 264](../../../Src/host/struct.hpp#L264)
+File: [host\struct.hpp at line 274](../../../Src/host/struct.hpp#L274)
 ## struct_alloc
 
 Type: function
@@ -9383,7 +9395,7 @@ Description:
 - Param: _s
 - Param: _params
 
-File: [host\struct.hpp at line 382](../../../Src/host/struct.hpp#L382)
+File: [host\struct.hpp at line 412](../../../Src/host/struct.hpp#L412)
 ## struct_eraseFull
 
 Type: function
@@ -9391,7 +9403,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [host\struct.hpp at line 401](../../../Src/host/struct.hpp#L401)
+File: [host\struct.hpp at line 431](../../../Src/host/struct.hpp#L431)
 ## struct_reflect_getTypeValue
 
 Type: function
@@ -9400,7 +9412,7 @@ Description:
 - Param: _typename
 - Param: _varname
 
-File: [host\struct.hpp at line 406](../../../Src/host/struct.hpp#L406)
+File: [host\struct.hpp at line 436](../../../Src/host/struct.hpp#L436)
 ## struct_getAllTypesOf
 
 Type: function
@@ -9408,7 +9420,7 @@ Type: function
 Description: 
 - Param: _typename
 
-File: [host\struct.hpp at line 425](../../../Src/host/struct.hpp#L425)
+File: [host\struct.hpp at line 455](../../../Src/host/struct.hpp#L455)
 ## struct_getBaseTypesOf
 
 Type: function
@@ -9416,7 +9428,7 @@ Type: function
 Description: 
 - Param: _typename
 
-File: [host\struct.hpp at line 430](../../../Src/host/struct.hpp#L430)
+File: [host\struct.hpp at line 460](../../../Src/host/struct.hpp#L460)
 # text.hpp
 
 ## lt
@@ -10358,6 +10370,18 @@ Replaced value:
 uisleep (time)
 ```
 File: [host\thread.hpp at line 33](../../../Src/host/thread.hpp#L33)
+## threadNull
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+ScriptNull
+```
+File: [host\thread.hpp at line 35](../../../Src/host/thread.hpp#L35)
 ## isAsyncContext
 
 Type: constant
@@ -10369,31 +10393,31 @@ Replaced value:
 ```sqf
 canSuspend
 ```
-File: [host\thread.hpp at line 35](../../../Src/host/thread.hpp#L35)
-## criticalSectionStart()
+File: [host\thread.hpp at line 37](../../../Src/host/thread.hpp#L37)
+## criticalSectionStart
 
 Type: constant
 
 Description: critical section
-- Param: 
+
 
 Replaced value:
 ```sqf
 isNil {
 ```
-File: [host\thread.hpp at line 39](../../../Src/host/thread.hpp#L39)
-## criticalSectionEnd()
+File: [host\thread.hpp at line 41](../../../Src/host/thread.hpp#L41)
+## criticalSectionEnd
 
 Type: constant
 
 Description: 
-- Param: 
+
 
 Replaced value:
 ```sqf
-true}
+};
 ```
-File: [host\thread.hpp at line 41](../../../Src/host/thread.hpp#L41)
+File: [host\thread.hpp at line 43](../../../Src/host/thread.hpp#L43)
 ## mutexNew()
 
 Type: constant
@@ -10405,7 +10429,7 @@ Replaced value:
 ```sqf
 []
 ```
-File: [host\thread.hpp at line 46](../../../Src/host/thread.hpp#L46)
+File: [host\thread.hpp at line 48](../../../Src/host/thread.hpp#L48)
 ## mutexLock(mutex)
 
 Type: constant
@@ -10417,7 +10441,7 @@ Replaced value:
 ```sqf
 waitUntil { (mutex pushBackUnique 0) == 0;}
 ```
-File: [host\thread.hpp at line 48](../../../Src/host/thread.hpp#L48)
+File: [host\thread.hpp at line 50](../../../Src/host/thread.hpp#L50)
 ## mutexUnlock(mutex)
 
 Type: constant
@@ -10429,7 +10453,7 @@ Replaced value:
 ```sqf
 mutex deleteAt 0
 ```
-File: [host\thread.hpp at line 50](../../../Src/host/thread.hpp#L50)
+File: [host\thread.hpp at line 52](../../../Src/host/thread.hpp#L52)
 ## mutexTryLock(mutex)
 
 Type: constant
@@ -10441,7 +10465,7 @@ Replaced value:
 ```sqf
 if(((mutex) pushBackUnique 0) == 0) then {true} else {false}
 ```
-File: [host\thread.hpp at line 52](../../../Src/host/thread.hpp#L52)
+File: [host\thread.hpp at line 54](../../../Src/host/thread.hpp#L54)
 ## mutexIsLocked(mutex)
 
 Type: constant
@@ -10453,7 +10477,7 @@ Replaced value:
 ```sqf
 (count (mutex) > 0)
 ```
-File: [host\thread.hpp at line 53](../../../Src/host/thread.hpp#L53)
+File: [host\thread.hpp at line 55](../../../Src/host/thread.hpp#L55)
 ## mutexTryLockTimeout(mutex, timeout)
 
 Type: constant
@@ -10466,4 +10490,4 @@ Replaced value:
 ```sqf
 [] call { private _timer = diag_tickTime; private _locked = false; waitUntil { _locked = ((mutex) pushBackUnique 0) == 0; _locked || {diag_tickTime > (_timer + (timeout))} }; _locked }
 ```
-File: [host\thread.hpp at line 56](../../../Src/host/thread.hpp#L56)
+File: [host\thread.hpp at line 58](../../../Src/host/thread.hpp#L58)

@@ -3948,7 +3948,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 303](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L303)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 309](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L309)
 ## INTERACT_DIST_DEFAULT
 
 Type: constant
@@ -3960,7 +3960,7 @@ Replaced value:
 ```sqf
 1.1
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 334](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L334)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 340](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L340)
 ## __animget_impl__()
 
 Type: constant
@@ -3972,7 +3972,7 @@ Replaced value:
 ```sqf
 (getSelf(owner) call anim_getUnitAnim)
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 864](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L864)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 870](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L870)
 ## __data_light_slot__
 
 Type: constant
@@ -3984,7 +3984,7 @@ Replaced value:
 ```sqf
 [[INV_BACKPACK,null], [INV_ARMOR,null], [INV_HEAD,null], [INV_BACK,null],[INV_CLOTH,null],[INV_FACE,null],[INV_HAND_R,null],[INV_HAND_L,null],[INV_BELT,null]]
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 974](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L974)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 980](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L980)
 ## debug_internal_getinteractiontarget_spheres
 
 Type: Variable
@@ -3998,7 +3998,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 305](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L305)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 311](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L311)
 ## mob_static_savectx_signatures
 
 Type: Variable
@@ -4010,7 +4010,7 @@ Initial value:
 ```sqf
 createhashMap
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 1906](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1906)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 1912](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1912)
 ## mob_static_assign_signatures
 
 Type: Variable
@@ -4022,7 +4022,7 @@ Initial value:
 ```sqf
 createhashMap
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 1907](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1907)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 1913](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1913)
 # Mob.sqf
 
 ## __performace_attacklog
@@ -4305,7 +4305,7 @@ Replaced value:
 ```sqf
 _d = D6 <= 3; [p1,p2] select _d
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 783](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L783)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 792](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L792)
 ## debuginfo(mes)
 
 Type: constant
@@ -4319,7 +4319,7 @@ Replaced value:
 ```sqf
 breakpoint("("+getSelf(name)+")::EVENT::("+_mode+") " + mes)
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1048](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1048)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1057](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1057)
 ## debuginfo(mes)
 
 Type: constant
@@ -4333,7 +4333,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1050](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1050)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1059](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1059)
 ## __isZoneIn(zones,modif)
 
 Type: constant
@@ -4346,7 +4346,7 @@ Replaced value:
 ```sqf
 if (_attTargetZone in [zones]) exitWith {MOD(_mod,modif)}
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1453](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1453)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1462](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1462)
 ## go_static_internal_map_redirzones
 
 Type: Variable
@@ -4358,7 +4358,7 @@ Initial value:
 ```sqf
 createHashMapFromArray[...
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 813](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L813)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 822](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L822)
 # Mob_combat_attdam_enum.hpp
 
 ## COMBAT_ATTDAM_ATTACK
@@ -4527,7 +4527,7 @@ _o_upd_impl_internal = { \
 	setSelf(varName,_var); \
 }; rpcAdd('content',_o_upd_impl_internal)
 ```
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 454](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L454)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 468](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L468)
 ## __onUpdateImplMethod(content,varName)
 
 Type: constant
@@ -4545,7 +4545,7 @@ _o_upd_impl_internal = { \
 	callSelfParams(varName,_var); \
 }; rpcAdd('content',_o_upd_impl_internal)
 ```
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 461](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L461)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 475](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L475)
 ## __onUpdateImplMethodNoParams(content,varName)
 
 Type: constant
@@ -4563,7 +4563,7 @@ _o_upd_impl_internal = { \
 	callSelf(varName); \
 }; rpcAdd('content',_o_upd_impl_internal)
 ```
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 468](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L468)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 482](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L482)
 ## repl_doLocal
 
 Type: function
@@ -4573,7 +4573,7 @@ Description: replicator common
 - Param: _method
 - Param: _ctx
 
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 600](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L600)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 614](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L614)
 # Mob_Interact.sqf
 
 ## callScriptedEvent(action__)
