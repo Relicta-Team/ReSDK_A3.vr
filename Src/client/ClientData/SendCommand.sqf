@@ -326,9 +326,9 @@ localCommand("ping")
 			private _rtime = diag_tickTime - (_this select 0);
 			[format["Время ответа (in+out): %1 мс",_rtime *1000],"log"] call chatPrint;
 		}]
-		remoteExec ["call",remoteExecutedOwner]
+		remoteExecCall ["call",remoteExecutedOwner]
 
-	}] remoteExec ["call"]
+	}] remoteExecCall ["call",2]
 };
 
 localCommand("smd_reload")
