@@ -38,9 +38,9 @@
 
 //critical section
 
-#define criticalSectionStart() isNil {
+#define criticalSectionStart isNil {
 
-#define criticalSectionEnd() true}
+#define criticalSectionEnd };
 
 
 //mutex

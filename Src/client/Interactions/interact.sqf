@@ -438,6 +438,21 @@ interact_getNearPointForObject = {
 	asltoatl (__its select 0 select 0)
 };
 
+//получает количество пересечений
+interact_getIntersectionCount = {
+	params ["_targetPos"];
+	private _ins = lineIntersectsSurfaces [
+  		AGLToASL positionCameraToWorld [0,0,0],
+		ATLToASL _targetPos,
+  		player,
+		objNull,
+		true,
+		-1,
+		INTERACT_LODS_CHECK_STANDART
+ 	];
+	count _ins
+};
+
 /*
 ================================================================================
 		REGION: INTREACT MENU COMMON

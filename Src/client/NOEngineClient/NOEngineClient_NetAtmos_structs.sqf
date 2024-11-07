@@ -61,7 +61,6 @@
 			после обновления проверяем мержинг
 */
 
-#define ENABLE_OPTIMIZATION
 
 //отладочные линии
 //#define ENABLE_DRAW_DEBUG_LINES_VIRTUALCHUNKS
@@ -73,6 +72,7 @@
 #ifndef EDITOR
 	#undef ENABLE_DRAW_DEBUG_LINES_VIRTUALCHUNKS
 	#undef ENABLE_DRAW_DEBUG_LINES_REGIONS
+	//!temporary
 	#undef ENABLE_RANDOMIZATION_COLOR
 #endif
 
@@ -89,6 +89,8 @@ struct(AtmosAreaClient)
 	//хранящиеся регионы
 	def(_regions) null //list[9] -> list<AtmosClientBatchRegion
 
+	def(toUpdateLevels) null
+
 	def(init)
 	{
 		params ["_aId"];
@@ -98,6 +100,8 @@ struct(AtmosAreaClient)
 		_lst resize ATMOS_AREA_SIZE;
 
 		self setv(_regions,_lst apply {[]});
+
+		self setv(toUpdateLevels,[]);
 	}
 
 	//регистрация|перерегистрация эффектов в зоне
@@ -160,8 +164,7 @@ struct(AtmosAreaClient)
 	{		
 		{
 			self callp(onUpdateChunk,_x);
-			false
-		} count (self callv(getChunkIdList));
+		} foreach (self callv(getChunkIdList));
 		
 		// {
 		// 	{
@@ -180,8 +183,7 @@ struct(AtmosAreaClient)
 	{
 		{
 			self callp(unloadChunkInternal,_x);
-			false
-		} count (self callv(getChunkIdList));
+		} foreach (self callv(getChunkIdList));
 
 		//unload regions
 		// {
@@ -287,7 +289,7 @@ struct(AtmosAreaClient)
 		setLastError("this can be undefined behaviour because self is atmosareaclient. use atmosvirtualstruct to store __debug_visual");
 		#endif
 		
-		private _obj = struct_newp(AtmosVirtualLight,_light arg _pos arg _chid);
+		private _obj = struct_newp(AtmosVirtualLight,_light arg _pos arg _chid arg _basePos);
 
 		#ifdef ENABLE_DRAW_DEBUG_LINES_VIRTUALCHUNKS
 		private _renderTask = [_basePos,[1,0,1,1],10,[vec3(-ATMOS_SIZE_HALF,-ATMOS_SIZE_HALF,-ATMOS_SIZE_HALF),vec3(ATMOS_SIZE_HALF,ATMOS_SIZE_HALF,ATMOS_SIZE_HALF)]] call debug_addRenderPos;
@@ -569,6 +571,7 @@ struct(AtmosAreaClient)
 	def(optimizeSingle)
 	{
 		params ["_vlight"];
+		
 		private _pos = _vlight getv(localChId);
 		private _z = _pos select 2;
 		private _regions = self getv(_regions) select (_z - 1);
@@ -580,14 +583,21 @@ struct(AtmosAreaClient)
 			{
 				private _startPos = _x getv(startPos);
 				private _endPos = _x getv(endPos);
+				(_x getv(sizes))params ["_sX","_sY"];
+				_startPos params ["_pX","_pY"];
+				private _center = [_pX+(_sX/2),_pY+(_sY/2)];
 
-				// Проверка, находится ли регион рядом с добавляемым блоком
-				if (
-					((_pos select 0) >= (_startPos select 0) - 1 && (_pos select 0) <= (_endPos select 0) + 1) &&
-					((_pos select 1) >= (_startPos select 1) - 1 && (_pos select 1) <= (_endPos select 1) + 1)
-				) then {
+				if (_pos inArea [_center,_sX/2 + 1.5,_sY/2 + 1.5,0,true]) then {
 					_neighborRegions pushBack _x;
 				};
+
+				// Проверка, находится ли регион рядом с добавляемым блоком
+				// if (
+				// 	((_pos select 0) >= (_startPos select 0) - 1 && {(_pos select 0) <= (_endPos select 0) + 1}) &&
+				// 	{((_pos select 1) >= (_startPos select 1) - 1 && {(_pos select 1) <= (_endPos select 1) + 1})}
+				// ) then {
+				// 	_neighborRegions pushBack _x;
+				// };
 			} forEach _regions;
 
 			_neighborRegions
@@ -733,39 +743,50 @@ struct(AtmosAreaClient)
 
        	} forEach _nearRegions;
 
-		if (!_usedNear) exitWith {
+		if (!_usedNear) then {
 			call _singleOptimize;
 		};
 		
-		self callp(mergeRegions,_regions arg _z);
+		self getv(toUpdateLevels) pushBackUnique _z;
+		//self callp(mergeRegions,_regions arg _z);
 	}
 
 	//задане объединения регионов
 	def(mergeRegions)
 	{
 		params ["_regions","_z"];
+		
+		
 		// Функция для проверки, можно ли объединить два региона
 		private _canMerge = {
 			params ["_regionA", "_regionB"];
 			
 			// Разные типы батчей
 			if not_equals(_regionA getv(batchCfg),_regionB getv(batchCfg)) exitWith {false};
+			
+			//!performance
+			//if (((_regionA getv(sizes)) findAny (_regionB getv(sizes)))==-1)exitWith{false};
 
+			//!performance
+			// if ([0,0]vectordistance(_regionA getv(sizes)) <= 4) exitWith {false};
+			// if ([0,0]vectordistance(_regionB getv(sizes)) <= 4) exitWith {false};
+			
 			private _startA = _regionA getv(startPos);
 			private _endA = _regionA getv(endPos);
 			private _startB = _regionB getv(startPos);
 			private _endB = _regionB getv(endPos);
 
 			// Проверяем, находятся ли регионы на одном уровне по Z
-			if ((_startA select 2) != (_startB select 2)) exitWith {false};
+			//if ((_startA select 2) != (_startB select 2)) exitWith {false};
 
 			// Проверка по осям X и Y: регионы должны быть рядом
-			private _adjacentX = ((_endA select 0) + 1 == (_startB select 0)) || ((_endB select 0) + 1 == (_startA select 0));
-			private _adjacentY = ((_endA select 1) + 1 == (_startB select 1)) || ((_endB select 1) + 1 == (_startA select 1));
+			private _adjacentX = ((_endA select 0) + 1 == (_startB select 0)) || {((_endB select 0) + 1 == (_startA select 0))};
+			private _adjacentY = ((_endA select 1) + 1 == (_startB select 1)) || {((_endB select 1) + 1 == (_startA select 1))};
 
 			// Считаем, что регионы можно объединить, если они прилегают по одной из осей
-			(_adjacentX && (_startA select 1 == _startB select 1) && (_endA select 1 == _endB select 1)) ||
-			(_adjacentY && (_startA select 0 == _startB select 0) && (_endA select 0 == _endB select 0))
+			(_adjacentX && {(_startA select 1 == _startB select 1)} && {(_endA select 1 == _endB select 1)}) ||
+			{(_adjacentY && {(_startA select 0 == _startB select 0)} && {(_endA select 0 == _endB select 0)})}
+			
 		};
 
 		// Процесс слияния двух регионов в новый
@@ -805,47 +826,78 @@ struct(AtmosAreaClient)
 		private _continueMerge = true;
 		private _mergedRegions = _regions;
 		traceformat("+++ region combine: curcount: %1",count _regions)
-		while {_continueMerge} do {
-			_continueMerge = false;
+		// while {_continueMerge} do {
+		// 	_continueMerge = false;
 			
-			private _newRegions = [];
-			private _usedRegions = [];
+		// 	private _newRegions = [];
+		// 	private _usedRegions = [];
 
-			for "_i" from 0 to (count _mergedRegions - 1) do {
-				private _regionA = _mergedRegions select _i;
-				if (_regionA in _usedRegions) then {continue};
+		// 	for "_i" from 0 to (count _mergedRegions - 1) do {
+		// 		private _regionA = _mergedRegions select _i;
+		// 		//if (_regionA in _usedRegions) then {continue};
 				
-				private _mergedRegion = _regionA;
-				private _mergedThisCycle = false;
+		// 		private _mergedRegion = _regionA;
+		// 		private _mergedThisCycle = false;
 
-				for "_j" from (_i + 1) to (count _mergedRegions - 1) do {
-					private _regionB = _mergedRegions select _j;
-					if (_regionB in _usedRegions) then {continue};
+		// 		for "_j" from (_i + 1) to (count _mergedRegions - 1) do {
+		// 			private _regionB = _mergedRegions select _j;
+		// 			//if (_regionB in _usedRegions) then {continue};
 					
-					// Проверяем, можно ли объединить регионы
-					if ([_mergedRegion, _regionB] call _canMerge) then {
-						_mergedRegion = [_mergedRegion, _regionB] call _merge;
-						traceformat("+++created new region: %1",_mergedRegion)
-						_usedRegions pushBack _regionA;
-						_usedRegions pushBack _regionB;
-						_mergedThisCycle = true;
-						_continueMerge = true; // Повторить цикл после добавления объединенного региона
-						break;
-					};
+		// 			// Проверяем, можно ли объединить регионы
+		// 			if ([_mergedRegion, _regionB] call _canMerge) then {
+		// 				_mergedRegion = [_mergedRegion, _regionB] call _merge;
+		// 				traceformat("+++created new region: %1",_mergedRegion)
+		// 				_usedRegions pushBack _regionA;
+		// 				_usedRegions pushBack _regionB;
+		// 				_mergedThisCycle = true;
+		// 				_continueMerge = true; // Повторить цикл после добавления объединенного региона
+		// 				break;
+		// 			};
+		// 		};
+
+		// 		_newRegions pushBack _mergedRegion;
+		// 	};
+
+		// 	_mergedRegions = _newRegions;
+		// };
+		private _iterCount = count _mergedRegions;
+		private _anyMerge = false;
+		while {_continueMerge} do {
+			/*
+				1 элемент вырезаем
+					сверяем с оставшимися
+						если можно объединить
+							добавляем в конец новый регион
+				если не добавлено
+					возвращаем первый в конец
+			*/
+			_continueMerge = false;
+			private _freq = _mergedRegions deleteAt 0;
+			private _msz = _freq getv(sizes);
+			//errorformat("  COMPARE REGION: %1",_freq);
+			{
+				//errorformat("  MERGE CHECK %1 to %2 => %3",_freq arg _x arg vec2(_freq,_x) call _canMerge);
+				if ([_freq,_x] call _canMerge) then {
+					_mergedRegion = [_freq,_x] call _merge;
+					array_remove(_mergedRegions,_x);
+					_mergedRegions pushBack _mergedRegion;
+					_continueMerge = true;
+					_anyMerge = true;
+					break;
 				};
-
-				_newRegions pushBack _mergedRegion;
-			};
-
-			_mergedRegions = _newRegions;
+			} foreach _mergedRegions;
+			DEC(_iterCount);
+			if (!_continueMerge) then {_mergedRegions pushBack _freq};
+			if (_iterCount>0)then{_continueMerge = true};
 		};
 
-		{
-			_x callp(setRenderMode,true);
-			false
-		} count _mergedRegions;
-		traceformat("output regions: %1",_mergedRegions)
-		self getv(_regions) set [(_z - 1),_mergedRegions]
+		if (_anyMerge) then {
+			{
+				_x callp(setRenderMode,true);
+			} foreach _mergedRegions;
+			traceformat("output regions: %1",_mergedRegions)
+			self getv(_regions) set [(_z - 1),_mergedRegions];
+		};
 	}
 
 	//внутренняя функция проверки при расширении
@@ -872,12 +924,8 @@ struct(AtmosAreaClient)
 		params ["_regionList","_region","_ltObj"];
 		
 		[_region getv(virtLights),_ltObj] call arrayDeleteItem;
-		
-		//debug restore lights
-		// {
-		// 	_x callv(reloadLight);
-		// 	false
-		// } foreach (_region getv(virtLights));
+		_ltObj setv(regionPosInfo,null);
+		_ltObj callv(reloadLight);
 		
 		private _pos = _ltObj getv(localChId);
 
@@ -941,6 +989,10 @@ struct(AtmosAreaClient)
 				inRange(_ps select 0,_sp select 0,_ep select 0)
 				&& {inRange(_ps select 1,_sp select 1,_ep select 1)}
 			};
+
+			//skip region with only one lproc
+			if (count _lproc <= 1) then {continue};
+
 			//remove lights
 			_vligts = _vligts - _lproc;
 			
@@ -952,14 +1004,30 @@ struct(AtmosAreaClient)
 
 		//enable left lights
 		{
+			_x setv(regionPosInfo,null); //remove region info
 			_x callv(reloadLight);
-			false
-		} count _vligts;
+		} foreach _vligts;
 		//traceformat("LEFT VLIGHTS: %1",_vligts apply {_x getv(localChId)})
 		
 		private _z = (_pos select 2);
+		self getv(toUpdateLevels) pushBackUnique _z;
+		//self callp(mergeRegions,_regionList arg _z);
+	}
 
-		self callp(mergeRegions,_regionList arg _z);
+	//возвращает данные региона объекта света. первый элемент - объект региона, второй массив z-уровня региона
+	def(getRegionDatForVLight)
+	{
+		params ["_ltob"];
+		private _rpinf = _ltob getv(regionPosInfo);
+		private _coord = _ltob getv(localChId);
+		private _regions = _aObj getv(_regions) select ((_coord select 2)-1);
+		private _foundRegion = null;
+		{
+			if (_x callp(isEqualPosInfo,_rpinf select 0 arg _rpinf select 1)) exitWith {
+				_foundRegion = _x;
+			};
+		} foreach _regions;
+		[_foundRegion,_regions]
 	}
 
 endstruct
@@ -982,17 +1050,23 @@ struct(AtmosVirtualLight)
 
 	def(init)
 	{
-		params ["_cfg","_pos","_lcid"];
+		params ["_cfg","_pos","_lcid","_ctrPos"];
 		self setv(localChId,_lcid);
 		self setv(localId,_lcid call atmos_encodeChId);
 		self callp(loadEmitters,_cfg arg _pos);
+
+		self setv(centerPos,_ctrPos);
 	}
 
 	def(loadEmitters)
 	{
 		params ["_cfg","_pos"];
-		
-		self setv(effects,[_cfg arg _pos] call le_se_createUnmanagedEmitter);
+
+		//can load only outside region
+		if !(self callv(isInsideRegion)) then {
+			self setv(effects,[_cfg arg _pos] call le_se_createUnmanagedEmitter);
+		};
+
 		self setv(id,_cfg);
 		self setv(_pos,_pos);
 	}
@@ -1151,8 +1225,7 @@ struct(AtmosClientBatchRegion)
 			(self getv(virtLights)) append _vlORvlList;
 			{
 				_x setv(regionPosInfo,_rpi);
-				false
-			} count _vlORvlList;
+			} foreach _vlORvlList;
 		} else {
 			(self getv(virtLights)) pushBack _vlORvlList;
 			_vlORvlList setv(regionPosInfo,_rpi);
@@ -1190,8 +1263,7 @@ struct(AtmosClientBatchRegion)
 
 		{
 			_x setv(regionPosInfo,vec2(_startPos,_sizes));
-			false
-		} count _virtLights;
+		} foreach _virtLights;
 
 		private _cfg = SLIGHT_ATMOS_FIRE_3;
 		private _femit = _virtLights select 0;
@@ -1202,6 +1274,8 @@ struct(AtmosClientBatchRegion)
 			_cfg = SLIGHT_ATMOS_SMOKE_3;
 		};
 		self setv(batchCfg,_cfg);
+
+		self callv(handleCfgCanCulled);
 
 		traceformat("registered batchzone: from %1 to %2 ascfg %3 (lt:%4)",_startPos arg _endPos arg _cfg arg count _virtLights)
 
@@ -1273,22 +1347,59 @@ struct(AtmosClientBatchRegion)
 		if (_mode) then {
 			{
 				_x callv(deleteEmitters);
-				false
-			} count (self getv(virtLights));
+			} foreach (self getv(virtLights));
 			self callv(reloadBatchEmitter);
 		} else {
 			{
 				_x callv(reloadLight);
-				false
-			} count (self getv(virtLights));
+			} foreach (self getv(virtLights));
 			self callv(unloadBatchEmitter);
 		};
 	}
+
+	def(setCull)
+	{
+		params ["_hide"];
+		if equals(_hide,self getv(isCulled)) exitWith{};
+		self setv(isCulled,_hide);
+		private _ncuIdx = self getv(_nocullLight);
+		if (_hide) then {
+			private _cull_cache = self getv(_cull_cache);
+			//traceformat("CULLING BATCH",_cull_cache);
+			{
+				if equals(_ncuIdx,_foreachIndex) then {continue};
+
+				private _cp = (getposatl _x);
+				_cull_cache set [_foreachIndex,_cp];
+				_x setposatl [0,0,0];
+			} foreach (self getv(emitter));
+		} else {
+			private _cull_cache = self getv(_cull_cache);
+			//traceformat("SHOWING BATCH; cull %1",_cull_cache);
+			{
+				if equals(_ncuIdx,_foreachIndex) then {continue};
+				
+				_x setposatl (_cull_cache select _foreachIndex);
+			} foreach (self getv(emitter));
+			self setv(_cull_cache,[]);
+		};
+	};
+	def(isCulled) false
+	def(_cull_cache) null
 
 	def(batchCfg) -1 //конфиг батч эмиттера
 	def(batchPos) [0,0,0] //глобальная позиция батч эмиттера
 	def(batchIsLoaded) false //загружен ли визуал
 	def(emitter) null //массив на world эмиттеры
+
+	def(canUseCullOpt) false
+	def(_nocullLight) -1
+	def(handleCfgCanCulled)
+	{
+		if ((self getv(batchCfg)) in [SLIGHT_ATMOS_SMOKE_1,SLIGHT_ATMOS_SMOKE_2,SLIGHT_ATMOS_SMOKE_3]) then {
+			self setv(canUseCullOpt,true);
+		};
+	}
 
 	//обновляет батч
 	def(reloadBatchEmitter)
@@ -1303,6 +1414,10 @@ struct(AtmosClientBatchRegion)
 	def(loadBatchEmitter)
 	{
 		if (self getv(batchIsLoaded)) exitWith {};
+		
+		self setv(isCulled,false);
+		self setv(_cull_cache,[]);
+		self setv(_nocullLight,-1);
 
 		private _renderZone = self getv(sizes);
 		private _decZoneRend = self getv(decZoneRend);
@@ -1322,8 +1437,10 @@ struct(AtmosClientBatchRegion)
 			//оптимизация батченной зоны
 			if !isNullVar(_renderZone) then {
 				_renderZone params ["_szX","_szY"];
+				if (_alias == "Свет огня") then {
+					self setv(_nocullLight,call le_se_getCurrentEmitterIndex);
+				};
 				if (_alias == "Пламя") then {
-					
 					if (_p == "setparticlerandom") then {
 						
 						//update position
@@ -1336,15 +1453,20 @@ struct(AtmosClientBatchRegion)
 					};
 					//update drop
 					if (_p == "setdropinterval") then {
-						private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
-						[_p,"interval",_v,_dropInterval
-						// /_renderZone
-						] call le_se_setParticleOption;
+						// private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
+						// [_p,"interval",_v,_dropInterval
+						// // /_renderZone
+						// ] call le_se_setParticleOption;
 					};
 					//update size
 					if (_p == "setParticleParams") then {
 						private _size = [_p,"size",_v] call le_se_getParticleOption;
-						[_p,"size",_v,_size apply {_x*(((_szX+_szY)/2)/2)}] call le_se_setParticleOption;
+						//for fire minimum is 0.42
+						//["DEFSIZE: %1",_size] call cprint;
+						[_p,"size",_v,_size apply {
+							private _svr = _x*(((_szX+_szY)/2)/2);
+							_svr max _x
+						}] call le_se_setParticleOption;
 
 						#ifdef ENABLE_RANDOMIZATION_COLOR
 						//random color
@@ -1373,21 +1495,33 @@ struct(AtmosClientBatchRegion)
 				};
 				//smoke
 				if (_alias == "Частицы 1") then {
+					if (_p == "setparticleparams") then {
+						private _size = [_p,"size",_v] call le_se_getParticleOption;
+						//["DEFSIZE: %1",_size] call cprint;
+						[_p,"size",_v,_size apply {
+							private _svr = _x*(((_szX+_szY)/2)/5);
+							_svr max _x
+						}] call le_se_setParticleOption;
+
+						_old = [_p,"lifeTime",_v] call le_se_getParticleOption;
+						
+						private _cval = (_szX+_szY)/2;
+						private _newdrop = linearconversion [0,10,_cval,_old,_old*5,true];
+
+						[_p,"lifeTime",_v,_old] call le_se_setParticleOption;
+					};
 					if (_p == "setparticlerandom") then {
 						//update position
 						private _old = [_p,"positionVar",_v] call le_se_getParticleOption;
 						_old set [0,_szX/2 + ATMOS_SIZE_HALF];
 						_old set [1,_szY/2 + ATMOS_SIZE_HALF];
-						[_p,"positionVar",_v,_old] call le_se_setParticleOption;
-
-						//_old = [_p,"lifeTimeVar",_v] call le_se_getParticleOption;
-						//todo increase lifetime of smoke
+						[_p,"positionVar",_v,_old] call le_se_setParticleOption;						
 					};
 					if (_p == "setdropinterval") then {
 						private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
 						//[_p,"interval",_v,_dropInterval/((_szX+_szY)/2)] call le_se_setParticleOption;
 						private _cval = (_szX+_szY)/2;
-						private _newdrop = linearconversion [0,10,_cval,_dropInterval,_dropInterval/100,true];
+						private _newdrop = linearconversion [0,10,_cval,_dropInterval,_dropInterval/50,true];
 						[_p,"interval",_v,_newdrop] call le_se_setParticleOption;
 					};
 				};

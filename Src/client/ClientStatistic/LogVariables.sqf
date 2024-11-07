@@ -102,10 +102,17 @@ clistat_buffer = [
 		_state = _ar get "state";
 		format["st:%1(%2)",NAT_LOADING_SLIST_STATES select (_state+1),_state]
 	}],
+	#ifdef ENABLE_OPTIMIZATION
 	[colortext(57D4AC,"NAT_RGC:"),{
 		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;
 		format["%1",(_ar get "_regions") apply {count _x}]
 	}],
+	#endif
+	#ifdef NET_ATMOS_OPTIMIZATION_RENDER
+	[colortext(57D4AC,"NAT_CULL:"),{
+		format["cull:%1;gbf:%2;ms:%3",aopt_cli_culledCnt,aopt_cli_gbuffCull,aopt_cli_prevCallTime*1000]
+	}],
+	#endif
 	#ifdef EDITOR
 	[colortext(57D4AC,"ATMOS_SRV: "),{
 		format["R:%1 C:%2 A:%3",count atmos_map_chunkAreas,atmos_chunks,atmos_areas]

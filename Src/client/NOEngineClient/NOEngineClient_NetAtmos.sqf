@@ -5,6 +5,8 @@
 #include "NOEngineClient_NetAtmos.hpp"
 #include "..\..\host\struct.hpp"
 
+#define NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
+
 #define NOE_NETATMOS_UPDATE_DELAY 1
 
 noe_client_nat_isEnabled = {noe_client_nat_handleUpdate != -1};
@@ -16,12 +18,41 @@ noe_client_nat_handleUpdate = -1;
 noe_client_nat_areas = createHashMap;
 noe_client_nat_prevArea = null;
 
+#ifndef EDITOR
+	#undef NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
+#endif
 noe_client_nat_setEnabled = {
 	params ["_mode"];
 	if equals(_mode,call noe_client_nat_isEnabled) exitWith {false};
 
 	if (_mode) then {
 		noe_client_nat_handleUpdate = startUpdate(noe_client_nat_onUpdate,NOE_NETATMOS_UPDATE_DELAY);
+
+		#ifdef NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
+		[{
+			params ["_button","_shift","_ctrl"];
+			_pos = call interact_getCursorIntersectPos;
+			if equals(_pos,vec3(0,0,0)) exitWith {};
+			if (!_alt) then {_pos = _pos vectoradd [0,0,1]};
+			private _aId = _pos call atmos_getAreaIdByPos;
+			private _aObj = [_aid] call noe_client_nat_getArea;
+
+			private _local = _pos call atmos_chunkPosToId call atmos_getLocalChunkIdInArea;
+			private _id = _local call atmos_encodeChId;
+			if (_button == 0) then {
+				[_aObj,[[_id,ifcheck(_ctrl,2127,2125)]],true] call noe_client_nat_loadArea
+			} else {
+				[_aObj,[_id]]call noe_client_nat_deleteChunks;
+			};
+			_z = _local select 2;
+			_aObj call ["mergeRegions",[_aObj get "_regions" select (_z-1),_z]];
+			_aObj set ["toUpdateLevels",[]];
+
+			
+			true
+		}] call inputDebug_addMouseEvent;
+		#endif
+
 	} else {
 		stopUpdate(noe_client_nat_handleUpdate);
 		noe_client_nat_handleUpdate = -1;
@@ -147,6 +178,16 @@ noe_client_nat_onLoadArea = {
 		[_aObj,_remList] call noe_client_nat_deleteChunks;
 		
 		//_aObj callp(optimizeProcess, null);
+		#ifdef ENABLE_OPTIMIZATION
+		if (count (_aObj getv(toUpdateLevels))>0)then{
+			private _lvls = _aObj getv(toUpdateLevels);
+			_aObj setv(toUpdateLevels,[]);
+			private _regions = _aObj getv(_regions);
+			{
+				_aObj callp(mergeRegions,_regions select (_x-1) arg _x)
+			} foreach _lvls;
+		};
+		#endif
 
 		if (_isUpdate) exitWith {};
 
@@ -203,38 +244,41 @@ noe_client_nat_loadArea = {
 
 //процессор оптимизатора при загруке
 noe_client_nat_procLoad = {
+	#ifdef ENABLE_OPTIMIZATION
 	params ["_aObj"];
 	traceformat("============================== PROC[LOAD]: %1",_aObj)
 	{
 		{
 			_x callp(setRenderMode,true);
-			false
-		} count _x;
-		false
-	} count (self getv(_regions));
+		} foreach _x;
+	} foreach (_aObj getv(_regions));
+	#endif
 };
 
 //процессор оптимизатора при выгрузке
 noe_client_nat_procUnload = {
+	#ifdef ENABLE_OPTIMIZATION
 	params ["_aObj"];
 	traceformat("============================== PROC[UNLOAD]: %1",_aObj)
 	{
 		{
 			_x callv(unloadBatchEmitter);
-			false
-		} count _x;
-		false
-	} count (self getv(_regions));
+		} foreach _x;
+	} foreach (_aObj getv(_regions));
+	#endif
 };
 
 //добавление эффекторв (оптимизатор)
 noe_client_nat_procAddEff = {
+	#ifdef ENABLE_OPTIMIZATION
 	params ["_aObj","_ltob"];
 	traceformat("============================== PROC[ADD]: %1",_ltob)
-	_aObj callp(optimizeSingle,_ltob)
+	_aObj callp(optimizeSingle,_ltob);
+	#endif
 };
 //удаление эффекторв (оптимизатор)
 noe_client_nat_procDelEff = {
+	#ifdef ENABLE_OPTIMIZATION
 	params ["_aObj","_ltob"];
 	traceformat("============================== PROC[DELETE]: %1",_ltob)
 	// private _ltObj = _chDat select NAT_CHUNKDAT_OBJECT;
@@ -248,20 +292,32 @@ noe_client_nat_procDelEff = {
 			if (_x callp(isEqualPosInfo,_rpinf select 0 arg _rpinf select 1)) exitWith {
 				_foundRegion = _x;
 			};
-			false
-		} count _regions;
+		} foreach _regions;
 		//!temporary code
 		if !isNullVar(_foundRegion) then {
 			//traceformat("founded region for unloading: %1",_foundRegion);
 			_aObj callp(onDecreaseRegion,_regions arg _foundRegion arg _ltob);
 		};
 	};
+	#endif
 };
 //обновление эффекторв (оптимизатор)
 noe_client_nat_procUpdEff = {
+	#ifdef ENABLE_OPTIMIZATION
 	params ["_aObj","_ltob"];
 	traceformat("============================== PROC[UPDATE]: %1",_ltob)
-	_aObj callp(optimizeSingle,_ltob)
+	if (_ltob callv(isInsideRegion)) then {
+		(_aObj callp(getRegionDatForVLight,_ltob)) params ["_region","_rgList"];
+		assert_str(!isNullVar(_region),"Region not found: " + str(_ltob getv(regionPosInfo)));
+		if (_region callp(isSameCfgType,_ltob)) then {
+			//?what we need here?
+		} else {
+			_aObj callp(onDecreaseRegion,_rgList arg _region arg _ltob);
+		};
+	} else {
+		_aObj callp(optimizeSingle,_ltob);
+	};
+	#endif
 };
 
 

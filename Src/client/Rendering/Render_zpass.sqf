@@ -3,6 +3,8 @@
 // sdk.relicta.ru
 // ======================================================
 
+//#define RENDER_ZPASS_ENABLE_ADDITIONAL_BBX
+
 //возвращает коллекцию информации объектов. 
 // list<vec3(distancetocam,list<screenproj>,metaObject)>
 render_zpass_getObjBBX = {
@@ -56,6 +58,95 @@ render_zpass_getBBXInfoVirtual = {
 		_bmin,
 		[_bmin select 0, _bmax select 1, _bmin select 2],
 		[_bmax select 0, _bmin select 1, _bmax select 2],
+		
+		#ifdef RENDER_ZPASS_ENABLE_ADDITIONAL_BBX
+		[_bmax select 0, _bmax select 1, _bmin select 2],
+		[_bmin select 0, _bmax select 1, _bmax select 2],
+
+		[_bmin select 0, _bmin select 1, _bmax select 2],
+		[_bmax select 0, _bmin select 1, _bmin select 2],
+		#endif
+
+		_bmax
+	];
+	_screenProj
+};
+
+render_zpass_getBBXInfoVirtual_gbuffCheck = {
+	params ["_psCenter","_bmin","_bmax"];
+	private _screenProj = [];
+	private _wpos = null;
+	private _sp = null;
+	private _sideIterCount = 0;
+	{
+		_wpos = _psCenter vectorAdd _x;
+		if (([_wpos] call interact_getIntersectionCount) > 0) then {
+			INC(_sideIterCount);
+		};
+		_sp = worldToScreen _wpos;
+		if !(_sp isEqualTo []) then {
+			_screenProj pushBack _sp;
+		};
+	} foreach [
+		_bmin,
+		[_bmin select 0, _bmax select 1, _bmin select 2],
+		[_bmax select 0, _bmin select 1, _bmax select 2],
+		
+		#ifdef RENDER_ZPASS_ENABLE_ADDITIONAL_BBX
+		[_bmax select 0, _bmax select 1, _bmin select 2],
+		[_bmin select 0, _bmax select 1, _bmax select 2],
+
+		[_bmin select 0, _bmin select 1, _bmax select 2],
+		[_bmax select 0, _bmin select 1, _bmin select 2],
+		#endif
+
+		_bmax
+	];
+	if (_sideIterCount >= 
+		#ifdef RENDER_ZPASS_ENABLE_ADDITIONAL_BBX
+		6
+		#else
+		3
+		#endif
+	) exitWith {null};
+	_screenProj
+};
+
+render_zpass_cachePositions = createhashMap;
+render_zpass_getBBXInfoVirtual_DEBUG = {
+	params ["_psCenter","_bmin","_bmax"];
+	traceformat("ps:%1; bmin:%2; bmax:%3",_psCenter arg _bmin arg _bmax)
+	if isNull(render_zpass_cachePositions) then {
+		render_zpass_cachePositions = createHashMap;
+	};
+	private _screenProj = [];
+	private _wpos = null;
+	private _sp = null;
+	{
+		_wpos = _psCenter vectorAdd _x;
+		if !(_wpos in render_zpass_cachePositions) then {
+			private _s = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
+			_s setObjectTexture [0,"#(rgb,8,8,3)color(1,0,0,1)"];
+			_s setposatl _wpos;
+			render_zpass_cachePositions set [_wpos,struct_newp(AutoModelPtr,_s)];
+		};	
+		_sp = worldToScreen _wpos;
+		if !(_sp isEqualTo []) then {
+			_screenProj pushBack _sp;
+		};
+	} foreach [
+		_bmin,
+		[_bmin select 0, _bmax select 1, _bmin select 2],
+		[_bmax select 0, _bmin select 1, _bmax select 2],
+		
+		#ifdef RENDER_ZPASS_ENABLE_ADDITIONAL_BBX
+		[_bmax select 0, _bmax select 1, _bmin select 2],
+		[_bmin select 0, _bmax select 1, _bmax select 2],
+
+		[_bmin select 0, _bmin select 1, _bmax select 2],
+		[_bmax select 0, _bmin select 1, _bmin select 2],
+		#endif
+
 		_bmax
 	];
 	_screenProj
@@ -87,7 +178,7 @@ render_processZPass = {
 			private _screenProjectionB = _x select 1;
 
 			// Проверка на пересечение проекций bounding box
-			if ([_screenProjectionA, _screenProjectionB] call render_zpass_checkOverlapWithZone) then {
+			if ([_screenProjectionA, _screenProjectionB] call render_zpass_checkFullOverlap) then {
 				_isVisible = false;
 				break;
 			};

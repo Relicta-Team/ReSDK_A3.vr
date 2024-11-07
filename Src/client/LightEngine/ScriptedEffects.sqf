@@ -454,6 +454,8 @@ le_se_setParticleOption = {
 	[_storage,_value] call(_storCode select 1)
 };
 
+le_se_getCurrentEmitterIndex = { _cfgDataCurIdx };
+
 le_se_internal_generateOptionAddress = {
 	private _aListNames = ["setParticleParams","setParticleRandom","setParticleCircle","setDropInterval"];
 	private _aList = [
