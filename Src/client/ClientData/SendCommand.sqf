@@ -318,6 +318,19 @@ localCommand("debugvars")
 	[(parseNumber arguments) > 0] call clistat_setLogVars;
 };
 
+localCommand("ping")
+{
+	[[diag_tickTime],{
+
+		[[_this select 0],{
+			private _rtime = diag_tickTime - (_this select 0);
+			[format["Время ответа (in+out): %1 мс",_rtime *1000],"log"] call chatPrint;
+		}]
+		remoteExec ["call",remoteExecutedOwner]
+
+	}] remoteExec ["call"]
+}
+
 localCommand("smd_reload")
 {
 	//todo
