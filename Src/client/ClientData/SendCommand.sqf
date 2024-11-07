@@ -329,7 +329,7 @@ localCommand("ping")
 		remoteExec ["call",remoteExecutedOwner]
 
 	}] remoteExec ["call"]
-}
+};
 
 localCommand("smd_reload")
 {
