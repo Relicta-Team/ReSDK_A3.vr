@@ -24,6 +24,8 @@
 #define NAT_CHUNKDAT_OBJECT 1
 #define NAT_CHUNKDAT_NEW(cfg) [cfg,nil]
 
+#define NAT_ATMOS_EFFTYPE_FIRE 0
+#define NAT_ATMOS_EFFTYPE_SMOKE 1
 
 //флаг оптимизации при включенном ENABLE_OPTIMIZATION. Отвечает за отсечение невидимых регионов
 #define NET_ATMOS_OPTIMIZATION_RENDER

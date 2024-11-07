@@ -1048,6 +1048,8 @@ struct(AtmosVirtualLight)
 	def(isFireType) {(self getv(id)) in (self getv(_fireTypes))}
 	def(isSmokeType) {(self getv(id)) in (self getv(_smokeTypes))}
 
+	def(effType) -1; //NAT_ATMOS_EFFTYPE_
+
 	def(init)
 	{
 		params ["_cfg","_pos","_lcid","_ctrPos"];
@@ -1069,6 +1071,13 @@ struct(AtmosVirtualLight)
 
 		self setv(id,_cfg);
 		self setv(_pos,_pos);
+
+		if (self callv(isFireType)) then {
+			self setv(effType,NAT_ATMOS_EFFTYPE_FIRE);
+		};
+		if (self callv(isSmokeType)) then {
+			self setv(effType,NAT_ATMOS_EFFTYPE_SMOKE);
+		};
 	}
 
 	def(deleteEmitters)
@@ -1206,8 +1215,9 @@ struct(AtmosClientBatchRegion)
 	def(isSameCfgType)
 	{
 		params ["_otherVL"];
-		self getv(virtLights) select 0 callp(isSameCfgType,_otherVL)
+		equals(self getv(effType),_otherVL getv(effType))
 	}
+	def(effType) -1; //NAT_ATMOS_EFFTYPE_
 
 	//размер зоны оптимизации vec2
 	def(renderZone) null
@@ -1269,9 +1279,11 @@ struct(AtmosClientBatchRegion)
 		private _femit = _virtLights select 0;
 		if (_femit callv(isFireType)) then {
 			_cfg = SLIGHT_ATMOS_FIRE_3;
+			self setv(effType,NAT_ATMOS_EFFTYPE_FIRE);
 		};
 		if (_femit callv(isSmokeType)) then {
 			_cfg = SLIGHT_ATMOS_SMOKE_3;
+			self setv(effType,NAT_ATMOS_EFFTYPE_SMOKE);
 		};
 		self setv(batchCfg,_cfg);
 
