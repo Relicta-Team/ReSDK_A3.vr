@@ -32,6 +32,8 @@
 
 #define threadSleep(time) uisleep (time)
 
+#define threadNull ScriptNull
+
 #define isAsyncContext canSuspend
 
 //critical section
