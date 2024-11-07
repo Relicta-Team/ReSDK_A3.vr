@@ -12,6 +12,7 @@
 #include "HDR\HDRInit.sqf"
 //#include "Effects\Effects_init.sqf"
 #include "RenderDistance.sqf"
+#include "Render_zpass.sqf"
 
 #include "Render_debug.sqf"
 
