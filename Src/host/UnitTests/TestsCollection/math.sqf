@@ -157,8 +157,8 @@ TEST(TestRandInt_Bug_544_large_tests)
 		private _bounds = [_min,_max];
 		private _pcall = 0;
 		for "_i" from 1 to _iterCount do {
-			_pcall = (precentage(_iterCount,_i);
-			if (_pcall% 10)==0)then{
+			_pcall = precentage(_iterCount,_i);
+			if ((_pcall% 10)==0)then{
 				logformat("Progress: %1",_pcall);
 			};
 			//_val = randInt(_min,_max);
