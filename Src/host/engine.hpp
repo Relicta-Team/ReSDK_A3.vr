@@ -464,8 +464,9 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define pick selectRandom
 //выбор рандомного числа включительно Bis_fnc_randomNum
 #define rand(_beg,_end) (linearConversion [0,1,random 1,_beg,_end])
-//BIS_fnc_randomInt
-#define randInt(_beg,_end) (FLOOR linearConversion [0,1,random 1,(_beg)min(_end),(_end)max(_beg)+1])
+
+// Обновлённая функция выбора случайного целого числа из диапазона. 1.000001 было добавлено для решения проблемы когда рандом выпадает в 0.999999989
+#define randInt(_beg,_end) (FLOOR linearConversion [0,1.000001,random 1,(_beg)min(_end),(_end)max(_beg)+1])
 
 #define prob(val) (random[0,50,100]<(val))
 
