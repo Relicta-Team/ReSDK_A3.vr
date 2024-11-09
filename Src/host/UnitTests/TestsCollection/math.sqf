@@ -155,11 +155,10 @@ TEST(TestRandInt_Bug_544_large_tests)
 		private _ctr = [];
 		for "_i" from _min to _max do {_allow pushBack _i; _ctr pushBack 0};
 		private _bounds = [_min,_max];
-		private _pcall = 0;
 		for "_i" from 1 to _iterCount do {
-			_pcall = precentage(_iterCount,_i);
-			if ((_pcall% 10)==0)then{
-				logformat("Progress: %1",_pcall);
+			
+			if ((_i% 1000000)==0)then{
+				logformat("Progress: %1\%2",_i tofixed 0 arg _iterCount tofixed 0);
 			};
 			//_val = randInt(_min,_max);
 			_beg = _min;
