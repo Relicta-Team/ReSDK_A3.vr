@@ -1366,23 +1366,11 @@ Replaced value:
 File: [client\NOEngineClient\NOEngineClient_NetAtmos.hpp at line 37](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.hpp#L37)
 # NOEngineClient_NetAtmos.sqf
 
-## NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-
-```
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 8](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L8)
 ## NOE_NETATMOS_UPDATE_DELAY
 
 Type: constant
 
-Description: 
+Description: #define NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
 
 
 Replaced value:

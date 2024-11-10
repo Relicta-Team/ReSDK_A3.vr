@@ -5805,7 +5805,7 @@ Replaced value:
 		}; \
 	}
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1221](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1221)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1234](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1234)
 ## checkMode(m__)
 
 Type: constant
@@ -5817,7 +5817,7 @@ Replaced value:
 ```sqf
 if (_mode == m__) exitWith
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1325](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1325)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1338](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1338)
 ## compareInput(t__)
 
 Type: constant
@@ -5829,7 +5829,7 @@ Replaced value:
 ```sqf
 if (_userInput == t__) exitWith
 ```
-File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1326](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1326)
+File: [host\GameObjects\Structures\Containers\Tech.sqf at line 1339](../../../Src/host/GameObjects/Structures/Containers/Tech.sqf#L1339)
 # DoorStatic.sqf
 
 ## struct_door_initOpenMode
