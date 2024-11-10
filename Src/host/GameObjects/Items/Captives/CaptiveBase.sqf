@@ -95,18 +95,18 @@ class(CaptiveItemBase) extends(Item)
 	{
 		objParams();
 
-		#ifndef EDITOR
+		//#ifndef EDITOR
 		if equals(_targ,_usr) exitwith {
 			callFuncParams(_usr,localSay,"Самого себя связать не получится." arg "error");
 			false
 		};
 
 		private _dir = callFuncParams(_targ,getDirectionTo,_usr);
-		if (_dir != DIR_BACK) exitwith {
+		if (_dir != DIR_BACK && callFunc(_targ,isActive)) exitwith {
 			callFuncParams(_usr,localSay,"Связать получится только со спины." arg "error");
 			false
 		};
-		#endif
+		//#endif
 
 		if (!callFuncParams(_targ,hasPart,BP_INDEX_ARM_R) || !callFuncParams(_targ,hasPart,BP_INDEX_ARM_L)) exitWith {
 			callFuncParams(_usr,localSay,"Нужны две руки для связывания." arg "error");

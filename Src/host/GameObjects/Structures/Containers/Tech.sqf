@@ -1162,6 +1162,18 @@ class(MerchantConsole) extends(ElectronicDevice)
 	regItemDef(MC_CAT_OTHER,"Lockpick",3,6,5,20)
 	regItemDef(MC_CAT_OTHER,"BrushCleaner",2,5,4,15)
 
+	regItemDef(MC_CAT_OTHER,"WoodenDebris3",4,6,20,50)
+	regItemDef(MC_CAT_OTHER,"WoodenDebris7",3,3,10,30)
+	regItemDef(MC_CAT_OTHER,"WoodenDebris6",2,2,10,30)
+
+	regItemDef(MC_CAT_OTHER,"Pickaxe",5,8,5,15)
+	regItemDef(MC_CAT_OTHER,"WorkingAxe",5,8,5,15)
+	regItemDef(MC_CAT_OTHER,"Sledgehammer",5,8,5,15)
+	regItemDef(MC_CAT_OTHER,"Hammer",3,6,5,15)
+	regItemDef(MC_CAT_OTHER,"Sledgehammer1",4,7,5,15)
+
+	regItemDef(MC_CAT_OTHER,"Rag",1,3,10,30)
+
 	regItemDef(MC_CAT_LIGHT,"TorchDisabled",3,5,5,10)
 	regItemDef(MC_CAT_LIGHT,"CandleDisabled",1,3,10,20)
 	regItemDef(MC_CAT_LIGHT,"LampKeroseneDisabled",8,12,3,8)
@@ -1212,6 +1224,7 @@ class(MerchantConsole) extends(ElectronicDevice)
 	regItemDef(MC_CAT_CONTAINERS,"Suitcase",10,15,1,8)
 	regItemDef(MC_CAT_CONTAINERS,"SteelBrownContainer",10,15,1,8)
 	regItemDef(MC_CAT_CONTAINERS,"ShuttleBag",9,12,1,2)
+	regItem(MC_CAT_CONTAINERS,"FabricBagBig1","FabricBagBig"+str randInt(1,2),10,15,3,8)
 
 	regItemDef(MC_CAT_MONEY,"Zvak",1,1,400,600)
 	regItemDef(MC_CAT_MONEY,"Bryak",10,10,200,400)

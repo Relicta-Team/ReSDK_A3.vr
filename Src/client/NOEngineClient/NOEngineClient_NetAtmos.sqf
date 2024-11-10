@@ -5,7 +5,7 @@
 #include "NOEngineClient_NetAtmos.hpp"
 #include "..\..\host\struct.hpp"
 
-#define NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
+//#define NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
 
 #define NOE_NETATMOS_UPDATE_DELAY 1
 
