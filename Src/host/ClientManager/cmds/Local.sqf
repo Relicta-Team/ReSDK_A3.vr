@@ -17,4 +17,4 @@ addCommandWithDescription("reloadvoice",PUBLIC_COMMAND,"Перезапускае
 
 addCommandWithDescription("grafon",ACCESS_ADMIN,"Переключает режим отображения эффектов в LightEngine") {IS_LOCAL_COMMAND()};
 
-addCommandWithDescription("ping",ACCESS_ADMIN,"Узнать реальный пинг") {IS_LOCAL_COMMAND()};
+addCommandWithDescription("ping",PUBLIC_COMMAND,"Узнать реальный пинг") {IS_LOCAL_COMMAND()};
