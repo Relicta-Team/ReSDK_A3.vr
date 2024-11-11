@@ -4,11 +4,16 @@
 // ======================================================
 
 #include <..\..\host\struct.hpp>
+#include <..\..\host\thread.hpp>
+
+#define LESC_USE_FAST_UPDATE
 
 //#define ENABLE_VISUAL_SPHERE_DEBUG
 
 struct(AbstractLightData)
 	def(src) objNull
+	def(getPos) {getposatl (self getv(src))}
+
 	def(_enabledDebugRender) false
 	def(_dbgrndObj) null
 	def(_renderLoop) null
@@ -65,6 +70,27 @@ struct(AbstractLightData)
 		false
 	}
 
+	def(getBoundingBox)
+	{
+		[[0,0,0],[0,0,0]]
+	}
+
+	def(_culled) false
+	def(_lum) 0//cached setLightIntensity
+
+	def(setCull)
+	{
+		params ["_mode"];
+		if equals(_mode,_culled) exitWith {};
+		self setv(_mode,_mode);
+		private _src = self getv(src);
+		if (_mode) then {
+			_src setLightIntensity 0;
+		} else {
+			_src setLightIntensity (self getv(_lum));
+		};
+	}
+
 endstruct
 
 struct(ScriptedPointLightData) base(AbstractLightData)
@@ -73,10 +99,10 @@ struct(ScriptedPointLightData) base(AbstractLightData)
 
 	def(init)
 	{
-		params ["_obj","_rad"];
-		_rad params ["_rad","_start"];
-		self setv(radius,_rad);
-		self setv(startRadius,_start);
+		params ["_obj","_kvargs"];
+		{
+			self set _x;
+		} foreach _kvargs;
 	}
 
 	#ifdef ENABLE_VISUAL_SPHERE_DEBUG
@@ -107,6 +133,29 @@ struct(ScriptedPointLightData) base(AbstractLightData)
 	{
 		params ["_pos"];
 		[getposatl(self getv(src)),self getv(radius),_pos] call interact_isPointInSphere
+	}
+
+	def(getBoundingBox)
+	{
+		private _sphereRadius = self getv(radius);
+
+		// В локальном пространстве центр сферы — это начало координат
+		private _sphereCenter = [0, 0, 0];
+
+		// Минимальные и максимальные точки BBX
+		private _minPos = [
+			(_sphereCenter select 0) - _sphereRadius,
+			(_sphereCenter select 1) - _sphereRadius,
+			(_sphereCenter select 2) - _sphereRadius
+		];
+
+		private _maxPos = [
+			(_sphereCenter select 0) + _sphereRadius,
+			(_sphereCenter select 1) + _sphereRadius,
+			(_sphereCenter select 2) + _sphereRadius
+		];
+
+		[_minPos, _maxPos]
 	}
 
 endstruct
@@ -163,6 +212,40 @@ struct(ScriptedDirectLightData) base(AbstractLightData)
 			_pos
 		] call interact_isPointInCone;
 	}
+
+	def(getBoundingBox)
+	{
+		private _src = self getv(src);
+		private _outerAngle = self getv(outAngle);
+		private _distance = self getv(distance);
+
+		// Начало и конец конуса в локальных координатах
+		private _coneStartPos = [0, 0, 0];
+		private _coneEndPos = [0, _distance, 0];
+
+		// Направление и длина конуса
+		private _coneDirection = _coneEndPos vectorDiff _coneStartPos;
+		private _coneLength = vectorMagnitude _coneDirection;
+
+		// Максимальный радиус на конце конуса
+		private _maxRadius = _coneLength * tan _outerAngle;
+
+		// Минимальные и максимальные точки BBX с учётом радиуса
+		private _minPos = [
+			(_coneStartPos select 0) min ((_coneEndPos select 0) - _maxRadius),
+			(_coneStartPos select 1) min ((_coneEndPos select 1) - _maxRadius),
+			(_coneStartPos select 2) min ((_coneEndPos select 2) - _maxRadius)
+		];
+
+		private _maxPos = [
+			(_coneStartPos select 0) max ((_coneEndPos select 0) + _maxRadius),
+			(_coneStartPos select 1) max ((_coneEndPos select 1) + _maxRadius),
+			(_coneStartPos select 2) max ((_coneEndPos select 2) + _maxRadius)
+		];
+
+		[_minPos, _maxPos]
+	}
+
 endstruct
 
 #ifdef EDITOR
@@ -222,10 +305,14 @@ lesc_handleProp = {
 			if (_isDirect) then {
 				_cfg pushback ["distance",_rad];
 			} else {
-				_cfg pushBack (_val select 5);
-				_cfg pushBack (_val select 4);
+				_cfg pushBack ["radius",_rad];
+				_cfg pushBack ["startRadius",_val select 4];
 			};
 		};
+	};
+
+	if (_prop == "setLightIntensity") then {
+		_cfg pushBack ["_lum",_val];
 	};
 
 	//only directional settings
@@ -245,7 +332,42 @@ lesc_handleProp = {
 
 };
 
+lesc_cullCnt = 0;
 
 lesc_cullingProcess = {
+	
+	private _campos = positionCameraToWorld[0,0,0];
+	private _culled = 0;
+	//sorting
+	{
+		if (_x callp(isPointInside,_campos)) then {
+			//мы внутри этого света. восстанавливаем видимость
+			_x callp(setCull,false);
+		} else {
+			_bps = _x callv(getPos);
+			_x callv(getBoundingBox) params ["_min","_max"];
+			_precVisible = [_bps,_min,_max,1] call render_zpass_getBBXInfoVirtual_gbuffCheck_visprc;
+			traceformat("obj:%1:: p:%2; min:%3; max:%4",_x arg _bps arg _min arg _max)
+			traceformat("    VISIBLE: %1",_precVisible)
+			if (_precVisible <= 70) then {
+				//объект перекрывает геометрия
+				_x callp(setCull,true);
+				INC(_culled);
+				continue;	
+			};
 
+			//объект видно
+			_x callp(setCull,false);
+		};
+	} foreach targetdebug;
+
+	lesc_cullCnt = _culled;
 };
+
+#ifdef LESC_USE_FAST_UPDATE
+lesc_handle = startUpdate(lesc_cullingProcess,0.5);
+#else
+_looped = {while {true}do{call lesc_cullingProcess}};
+lesc_thd = threadStart(threadNew(_looped));
+#endif
+
