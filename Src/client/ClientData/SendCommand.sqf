@@ -331,6 +331,13 @@ localCommand("ping")
 	}] remoteExecCall ["call",2]
 };
 
+#ifdef EDITOR
+localCommand("lightdebug")
+{
+	[parseNumber arguments != 0] call lesc_setDebugRender;
+};
+#endif
+
 localCommand("smd_reload")
 {
 	//todo
