@@ -177,3 +177,39 @@ interact_isInSphere = {
 
 	[_distToOut - _distToIn, _distToIn];
 };
+
+interact_isPointInSphere = {
+    params ["_spherePos", "_sphereRadius", "_point"];
+
+    // Проверяем расстояние между точкой и центром сферы
+    private _distance = vectorMagnitude (_point vectorDiff _spherePos);
+
+    // Если расстояние меньше или равно радиусу сферы, точка находится внутри
+    _distance <= _sphereRadius
+};
+
+interact_isPointInCone = {
+    params ["_coneStartPos", "_coneEndPos", "_outerAngle", "_point"];
+
+    // Направление и длина конуса
+    private _coneDirection = _coneEndPos vectorDiff _coneStartPos;
+    private _coneLength = vectorMagnitude _coneDirection;
+    private _normConeDirection = vectorNormalized _coneDirection;
+
+    // Вектор от начала конуса до проверяемой точки
+    private _pointVector = _point vectorDiff _coneStartPos;
+    private _distanceToPoint = vectorMagnitude _pointVector;
+
+    // Проверяем, находится ли точка в пределах длины конуса
+    if (_distanceToPoint > _coneLength) exitWith {false};
+
+    // Нормализуем вектор до точки
+    private _pointDir = vectorNormalized _pointVector;
+
+    // Угол между направлением конуса и направлением на точку
+    private _cosAngle = _normConeDirection vectorDotProduct _pointDir;
+    private _cosOuterAngle = cos _outerAngle;
+
+    // Если угол между направлением конуса и точкой меньше внешнего угла, точка в конусе
+    _cosAngle >= _cosOuterAngle
+};
