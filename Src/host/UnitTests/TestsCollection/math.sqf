@@ -212,7 +212,7 @@ TEST(RandomProbConvert)
 	private _pval = 0;
 	for "_s_iter" from 1 to _iterCount do {
 		_pval = floor call _probfnc;
-		_matcher set [_pval,(_matcher get "_pval") + 1];
+		_matcher set [_pval,(_matcher get _pval) + 1];
 	};
 
 	//check
