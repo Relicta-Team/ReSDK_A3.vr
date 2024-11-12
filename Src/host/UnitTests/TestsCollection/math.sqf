@@ -198,26 +198,78 @@ TEST(TestRandInt_Bug_544_large_tests)
 #endif
 
 
-TEST(RandomProbConvert)
-{
-	private _iterCount = 10000000;
-	private _probfnc = {random[0,50,100]};
-	private _matcher = createHashmap;
+// TEST(RandomProbConvert)
+// {
+// 	private _iterCount = 10000000;
+// 	private _probfnc = {random[0,50,100]};
+// 	private _matcher = createHashmap;
 	
-	//fill container
-	for"_i" from 0 to 100 do {
-		_matcher set [_i,0];
-	};
+// 	//fill container
+// 	for"_i" from 0 to 100 do {
+// 		_matcher set [_i,0];
+// 	};
 
-	private _pval = 0;
-	for "_s_iter" from 1 to _iterCount do {
-		_pval = floor call _probfnc;
-		_matcher set [_pval,(_matcher get _pval) + 1];
-	};
+// 	private _pval = 0;
+// 	for "_s_iter" from 1 to _iterCount do {
+// 		_pval = floor call _probfnc;
+// 		_matcher set [_pval,(_matcher get _pval) + 1];
+// 	};
 
-	//check
+// 	//check
+// 	for "_i" from 0 to 100 do {
+// 		private _cv = _matcher get _i;
+// 		logformat("  Pass %1 %2%%",_i arg _cv * 100 / _iterCount)
+// 	};
+// }
+
+#define prob_old_to_new(val) ((val ^ 1.15) / 40)
+
+TEST(RandomProbConvert_Concept)
+{
+	private _iterCount = 1000000;
+	private _oldProbFn = { random [0,50,100]};
+	private _newProbFn = { private _val = floor (_this select 0); random 100 < prob_old_to_new(_val)};
+	private _oldResults = createHashMap;
+	private _newResults = createHashMap;
+
 	for "_i" from 0 to 100 do {
-		private _cv = _matcher get _i;
-		logformat("  Pass %1 %2%%",_i arg _cv * 100 / _iterCount)
+		_oldResults set [_i, 0];
+		_newResults set [_i, 0];
 	};
-}
+
+	for "_i" from 1 to _iterCount do {
+		private _oldVal = floor call _oldProbFn;
+		_oldResults set [_oldVal, (_oldResults get _oldVal) + 1];
+	};
+
+	for "_i" from 0 to 100 do {
+		private _val = _i;
+		for "_j" from 1 to _iterCount / 100 do {
+			if ([ _val ] call _newProbFn) then {
+				_newResults set [_val, (_newResults get _val) + 1];
+			};
+		};
+	};
+
+	for "_i" from 0 to 100 do {
+		private _oldFreq = (_oldResults get _i) / _iterCount;
+		private _newFreq = (_newResults get _i) / (_iterCount / 100);
+		private _diff = abs(_oldFreq - _newFreq);
+
+		if (_diff > 0.05) then {
+			// error("FAILED CHECK");
+			// logformat("_i = %1",_i);
+			// logformat("_oldFreq = %1",_oldFreq);
+			// logformat("_newFreq = %1",_newFreq);
+			// logformat("_diff = %1",_diff);
+			errorformat("  Failed for %1: Old=%2p, New=%3p, Diff=%4p", _i arg  _oldFreq * 100 arg  _newFreq * 100 arg  _diff * 100);
+		} else {
+			// log("OK");
+			// logformat("_i = %1",_i);
+			// logformat("_oldFreq = %1",_oldFreq);
+			// logformat("_newFreq = %1",_newFreq);
+			logformat("  Pass for %1: Old=%2p, New=%3p", _i arg _oldFreq * 100 arg _newFreq * 100);
+		};
+	};
+	log("end check");
+};
