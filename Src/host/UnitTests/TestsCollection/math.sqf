@@ -211,13 +211,13 @@ TEST(RandomProbConvert)
 
 	private _pval = 0;
 	for "_s_iter" from 1 to _iterCount do {
-		_pval = call _probfnc;
+		_pval = floor call _probfnc;
 		_matcher set [_pval,(_matcher get "_pval") + 1];
 	};
 
 	//check
 	for "_i" from 0 to 100 do {
 		private _cv = _matcher get _i;
-		logformat("  Pass %1 %2%%",_i arg _cv * 100 / _iterCount);
+		logformat("  Pass %1 %2%%",_i arg _cv * 100 / _iterCount)
 	};
 }
