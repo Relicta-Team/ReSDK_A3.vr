@@ -196,3 +196,28 @@ TEST(TestRandInt_Bug_544_large_tests)
 	};
 }
 #endif
+
+
+TEST(RandomProbConvert)
+{
+	private _iterCount = 10000000;
+	private _probfnc = {random[0,50,100]};
+	private _matcher = createHashmap;
+	
+	//fill container
+	for"_i" from 0 to 100 do {
+		_matcher set [_i,0];
+	};
+
+	private _pval = 0;
+	for "_s_iter" from 1 to _iterCount do {
+		_pval = call _probfnc;
+		_matcher set [_pval,(_matcher get "_pval") + 1];
+	};
+
+	//check
+	for "_i" from 0 to 100 do {
+		private _cv = _matcher get _i;
+		logformat("  Pass %1 %2%%",_i arg _cv * 100 / _iterCount);
+	};
+}
