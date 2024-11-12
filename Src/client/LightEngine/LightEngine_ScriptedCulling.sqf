@@ -346,7 +346,7 @@ lesc_cullingProcess = {
 		} else {
 			_bps = _x callv(getPos);
 			_x callv(getBoundingBox) params ["_min","_max"];
-			_precVisible = [_bps,_min,_max,1] call render_zpass_getBBXInfoVirtual_gbuffCheck_visprc;
+			_precVisible = [_bps,_min,_max,1] call render_gbuffCheck_photonVisPrc;
 			traceformat("obj:%1:: p:%2; min:%3; max:%4",_x arg _bps arg _min arg _max)
 			traceformat("    VISIBLE: %1",_precVisible)
 			if (_precVisible <= 70) then {
