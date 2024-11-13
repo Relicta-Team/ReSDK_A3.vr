@@ -142,8 +142,10 @@ render_gbuffCheck_photonVisPrc = {
 		_posesDist pushBack [_wpos distance _cps,_wpos,_x];
 	} foreach _baseVecs;
 	_posesDist sort true;
-	private _curPos = _posesDist select 0;
-	_curPos params ["_dst_","_wpos","_loffs"];
+	private _curPosLst = _posesDist select [0,4];
+	//todo write code
+	//_curPosLst params ["_"]
+	//_curPos params ["_dst_","_wpos","_loffs"];
 	
 	//сколько процентов видно
 	100 - (_curIts*100/_maxCnt)
