@@ -200,76 +200,178 @@ TEST(TestRandInt_Bug_544_large_tests)
 
 // TEST(RandomProbConvert)
 // {
-// 	private _iterCount = 10000000;
+// 	private _iterCount = 1000000;
 // 	private _probfnc = {random[0,50,100]};
+// 	private _newprobfnc = {random 100};
 // 	private _matcher = createHashmap;
+// 	private _matcher2 = createHashmap;
 	
 // 	//fill container
 // 	for"_i" from 0 to 100 do {
 // 		_matcher set [_i,0];
+// 		_matcher2 set [_i,0];
 // 	};
 
 // 	private _pval = 0;
 // 	for "_s_iter" from 1 to _iterCount do {
 // 		_pval = floor call _probfnc;
 // 		_matcher set [_pval,(_matcher get _pval) + 1];
+// 		_pval = floor call _newprobfnc;
+// 		_matcher2 set [_pval,(_matcher2 get _pval) + 1];
 // 	};
 
 // 	//check
+// 	logformat("Iter count: %1",_iterCount);
 // 	for "_i" from 0 to 100 do {
 // 		private _cv = _matcher get _i;
-// 		logformat("  Pass %1 %2%%",_i arg _cv * 100 / _iterCount)
+// 		private _cv2 = _matcher2 get _i;
+// 		logformat("  Num %1",_i);
+// 			logformat("     gauss: %1 %2%%",_cv arg _cv*100/_iterCount);
+// 			logformat("    linear: %1 %2%%",_cv2 arg _cv2*100/_iterCount);
 // 	};
 // }
 
-#define prob_old_to_new(val) ((val ^ 1.15) / 40)
+#ifdef ENABLE_CONVERSION_GAUSS_TO_LINEAR
+#define pow(x,y) (x^y)
+#define prob_old_to_new(val) ([val] call convf)
+
+;convf = {
+	params ["_val"];	
+	_val = round _val;
+	private _tvals = convertionTable get _val;
+	if (count _tvals == 0) exitWith {
+		errorformat("UNKNOWN VALUE: %1",_val);
+		0
+	};
+	_tvals select (count _tvals/2)
+};
+convertionTable = null;
+createConvTable = {
+	private _pPath = "src\host\UnitTests\TestsCollection\convTable.c";
+	if fileExists(_pPath) exitWith {
+		convertionTable = createHashMapFromArray (call compile LOADFILE(_pPath));
+		//logformat("CONVTABLE: %1",convertionTable);
+		convertionTable
+	};
+	log("CREATING CONVERTION TABLE");
+	private _itCnt = 100000;
+	private _MRANGE = 100;
+	private _dictOld = createHashMap;
+	private _dictNew = createHashMap;
+	private _convTable = createHashMap;
+	private _oldProbFn = { private _val = floor (_this select 0); (random [0,50,100])<_val};
+	private _newProbFn = { private _val = floor (_this select 0); random 100 < (_val)};
+	for "_i" from 0 to _MRANGE do {
+		_dictOld set [_i,0];
+		_dictNew set [_i,0];
+		_convTable set [_i,[]];
+	};
+	_prev = 0;
+	for "_i" from 0 to _MRANGE do {
+		logformat("GEN %1",_i);
+		private _cv = _i;
+		for "_j" from 1 to _itCnt do {
+			if ([_cv] call _oldProbFn) then {
+				_dictOld set [_cv,(_dictOld get _cv) + 1];
+			};
+			if ([_cv] call _newProbFn) then {
+				_dictNew set [_cv,(_dictNew get _cv) + 1];
+			}
+		};
+
+		_dictNew set [_cv,(_dictNew get _cv) * 100 / _itCnt];
+		_dictOld set [_cv,(_dictOld get _cv) * 100 / _itCnt];
+
+		_diffi = abs ((_dictOld get _cv)-(_dictNew get _cv));
+		logformat("  PREC: %1 %2 (absm:%3); chng:%4",_dictOld get _cv arg _dictNew get _cv arg _diffi arg abs(_diffi - _prev));
+		_prev = _diffi;
+	};
+
+	for "_i" from 0 to _MRANGE do {
+		private _curPrec = _dictOld get _i;
+		{
+			if inRange(_curPrec,_y-0.8,_y+0.8) then {
+				(_convTable get _i)pushBack _x;
+			}	
+		} foreach _dictNew;
+	};
+	convertionTable = _convTable;
+	
+	for"_i" from 0 to _MRANGE do {
+		//logformat("Num %1: %2",_i arg convertionTable get _i);
+		if (count (_convTable get _i)==0) exitWith {
+			errorformat("EMPTY TABLE FOR NUM %1",_i);
+			_convTable = null;
+		};
+	};
+
+	private _dat = [];
+	logformat("Path to save table %1",_pPath);
+	for "_i" from 0 to _MRANGE do {
+		if isNullVar(_convTable) exitWith {};
+		_dat pushBack [_i,_convTable get _i];
+	};
+	if (count _dat == 101) then {
+		if ([_pPath, "["+(_dat joinString (","+endl))+"]",true] call file_write) then {
+			logformat("TABLE SAVED TO %1",_pPath);
+		} else {
+			logformat("ERROR SAVING TABLE TO %1",_pPath);
+		};
+	} else {
+		errorformat("TABLE SIZE IS %1",count _dat);
+	};
+
+	_convTable
+};
 
 TEST(RandomProbConvert_Concept)
 {
-	private _iterCount = 1000000;
-	private _oldProbFn = { random [0,50,100]};
+	ASSERT(!isNull(file_write));
+	ASSERT(!isNull(call createConvTable));
+
+	ASSERT(!isNull(convertionTable));
+	ASSERT(count convertionTable == 101);
+	
+	private _iterCount = 100000;
+	private _oldProbFn = { private _val = floor (_this select 0); (random [0,50,100])<_val};
 	private _newProbFn = { private _val = floor (_this select 0); random 100 < prob_old_to_new(_val)};
 	private _oldResults = createHashMap;
 	private _newResults = createHashMap;
 
 	for "_i" from 0 to 100 do {
-		_oldResults set [_i, 0];
-		_newResults set [_i, 0];
+		_oldResults set [_i tofixed 0, 0];
+		_newResults set [_i tofixed 0, 0];
 	};
 
-	for "_i" from 1 to _iterCount do {
-		private _oldVal = floor call _oldProbFn;
-		_oldResults set [_oldVal, (_oldResults get _oldVal) + 1];
-	};
-
-	for "_i" from 0 to 100 do {
-		private _val = _i;
-		for "_j" from 1 to _iterCount / 100 do {
-			if ([ _val ] call _newProbFn) then {
-				_newResults set [_val, (_newResults get _val) + 1];
+	private _errors = 0;
+	for"_p" from 0 to 100 do {
+		private _cv = _p;
+		private _strCv = _cv tofixed 0;
+		for"_j" from 1 to _iterCount do {
+			if ([_cv] call _oldProbFn) then {
+				_oldResults set [_strCv,(_oldResults get _strCv) + 1];
+			};
+			if ([_cv] call _newProbFn) then {
+				_newResults set [_strCv,(_newResults get _strCv) + 1];
 			};
 		};
-	};
 
-	for "_i" from 0 to 100 do {
-		private _oldFreq = (_oldResults get _i) / _iterCount;
-		private _newFreq = (_newResults get _i) / (_iterCount / 100);
-		private _diff = abs(_oldFreq - _newFreq);
-
-		if (_diff > 0.05) then {
-			// error("FAILED CHECK");
-			// logformat("_i = %1",_i);
-			// logformat("_oldFreq = %1",_oldFreq);
-			// logformat("_newFreq = %1",_newFreq);
-			// logformat("_diff = %1",_diff);
-			errorformat("  Failed for %1: Old=%2p, New=%3p, Diff=%4p", _i arg  _oldFreq * 100 arg  _newFreq * 100 arg  _diff * 100);
-		} else {
-			// log("OK");
-			// logformat("_i = %1",_i);
-			// logformat("_oldFreq = %1",_oldFreq);
-			// logformat("_newFreq = %1",_newFreq);
-			logformat("  Pass for %1: Old=%2p, New=%3p", _i arg _oldFreq * 100 arg _newFreq * 100);
-		};
+		_old = _oldResults get _strCv;
+		_new = _newResults get _strCv;
+		logformat("Pass %1",_p);
+			logformat("    Old: %1 %2%%",_old arg _old * 100 / _iterCount);
+			logformat("    New: %1 %2%%",_new arg _new * 100 / _iterCount);
+			if (abs(_old-_new)>1000) then {
+				errorformat("      Diff: %1",abs(_old-_new));
+				INC(_errors);
+			} else {
+				logformat("      Diff: %1",abs(_old-_new));
+			};
+		if (_errors > 0) exitWith{};
 	};
+	
+	ASSERT_EQ(_errors,0);
 	log("end check");
 };
+
+#endif
