@@ -100,11 +100,13 @@ le_se_handleConfig = {
 				if (_t == "lt") exitwith {
 					_o = "#lightpoint" createVehicleLocal [0,0,0];
 					call _funcInit;
+					[_o] call lesc_handleLight;
 				};
 				//light directional handler
 				if (_t == "ltd") exitwith {
 					_o = "#lightreflector" createVehicleLocal [0,0,0];
 					call _funcInit;
+					[_o,true] call lesc_handleLight;
 				};
 			};
 			_events call le_se_handleCfgEvents;

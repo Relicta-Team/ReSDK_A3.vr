@@ -20,8 +20,8 @@ interact_removeOnScreenCapturedObject = {
 };
 
 interact_getOnSceenCapturedObject = {
-    params [["_isMouseMode",false],["_getRealPtr",true],"_refOutWorldObj"];
-    private _ret = null;
+	params [["_isMouseMode",false],["_getRealPtr",true],"_refOutWorldObj"];
+	private _ret = null;
 
 	//remove nulls if exists
 	private _curObjList = interact_internal_onscreenObjs;
@@ -30,8 +30,8 @@ interact_getOnSceenCapturedObject = {
 		interact_internal_onscreenObjs = _curObjList;
 	};
 	
-    // Получаем позицию мыши на экране
-    private _mousePos = ifcheck(_isMouseMode,getMousePosition,vec2(0.5,0.5));
+	// Получаем позицию мыши на экране
+	private _mousePos = ifcheck(_isMouseMode,getMousePosition,vec2(0.5,0.5));
 	private _cpos = positionCameraToWorld[0,0,0];
 	
 	//sorts near to far
@@ -58,7 +58,7 @@ interact_getOnSceenCapturedObject = {
 		(_sign1 >= 0 && _sign2 >= 0 && _sign3 >= 0 && _sign4 >= 0) || (_sign1 <= 0 && _sign2 <= 0 && _sign3 <= 0 && _sign4 <= 0);
 	};
 
-    {
+	{
 		private _obj = _x;
 		(boundingBoxReal _obj) params ["_min", "_max"];
 
@@ -97,17 +97,17 @@ interact_getOnSceenCapturedObject = {
 
 		// Проверяем каждую плоскость, образованную четырьмя точками
 		if ([_screenPoints select 0, _screenPoints select 1, _screenPoints select 2, _screenPoints select 3] call _isPointInQuadrilateral ||
-            [_screenPoints select 4, _screenPoints select 5, _screenPoints select 6, _screenPoints select 7] call _isPointInQuadrilateral ||
-            // Левые и правые плоскости
-            [_screenPoints select 0, _screenPoints select 1, _screenPoints select 4, _screenPoints select 5] call _isPointInQuadrilateral ||
-            [_screenPoints select 2, _screenPoints select 3, _screenPoints select 6, _screenPoints select 7] call _isPointInQuadrilateral ||
+			[_screenPoints select 4, _screenPoints select 5, _screenPoints select 6, _screenPoints select 7] call _isPointInQuadrilateral ||
+			// Левые и правые плоскости
+			[_screenPoints select 0, _screenPoints select 1, _screenPoints select 4, _screenPoints select 5] call _isPointInQuadrilateral ||
+			[_screenPoints select 2, _screenPoints select 3, _screenPoints select 6, _screenPoints select 7] call _isPointInQuadrilateral ||
 			//передние и задние
 			[_screenPoints select 0, _screenPoints select 2, _screenPoints select 4, _screenPoints select 6] call _isPointInQuadrilateral ||
 			[_screenPoints select 1, _screenPoints select 3, _screenPoints select 5, _screenPoints select 7] call _isPointInQuadrilateral ||
 
-            // Верхние и нижние плоскости
-            [_screenPoints select 0, _screenPoints select 2, _screenPoints select 6, _screenPoints select 4] call _isPointInQuadrilateral ||
-            [_screenPoints select 1, _screenPoints select 3, _screenPoints select 7, _screenPoints select 5] call _isPointInQuadrilateral)
+			// Верхние и нижние плоскости
+			[_screenPoints select 0, _screenPoints select 2, _screenPoints select 6, _screenPoints select 4] call _isPointInQuadrilateral ||
+			[_screenPoints select 1, _screenPoints select 3, _screenPoints select 7, _screenPoints select 5] call _isPointInQuadrilateral)
 		exitWith {
 			_ret = _obj; // Устанавливаем объект, если мышь внутри плоскости
 			// Для отладки
@@ -120,7 +120,7 @@ interact_getOnSceenCapturedObject = {
 		_ret = [_ret,_refOutWorldObj] call noe_client_getPtrInfoNGOSkip;
 	};
 
-    _ret
+	_ret
 };
 
 
@@ -176,4 +176,40 @@ interact_isInSphere = {
 	private _distToIn = -FLOAT_MAX max ((-_b - _s) / (2 * _a));
 
 	[_distToOut - _distToIn, _distToIn];
+};
+
+interact_isPointInSphere = {
+	params ["_spherePos", "_sphereRadius", "_point"];
+
+	// Проверяем расстояние между точкой и центром сферы
+	private _distance = vectorMagnitude (_point vectorDiff _spherePos);
+
+	// Если расстояние меньше или равно радиусу сферы, точка находится внутри
+	_distance <= _sphereRadius
+};
+
+interact_isPointInCone = {
+	params ["_coneStartPos", "_coneEndPos", "_outerAngle", "_point"];
+
+	// Направление и длина конуса
+	private _coneDirection = _coneEndPos vectorDiff _coneStartPos;
+	private _coneLength = vectorMagnitude _coneDirection;
+	private _normConeDirection = vectorNormalized _coneDirection;
+
+	// Вектор от начала конуса до проверяемой точки
+	private _pointVector = _point vectorDiff _coneStartPos;
+	private _distanceToPoint = vectorMagnitude _pointVector;
+
+	// Проверяем, находится ли точка в пределах длины конуса
+	if (_distanceToPoint > _coneLength) exitWith {false};
+
+	// Нормализуем вектор до точки
+	private _pointDir = vectorNormalized _pointVector;
+
+	// Угол между направлением конуса и направлением на точку
+	private _cosAngle = _normConeDirection vectorDotProduct _pointDir;
+	private _cosOuterAngle = cos _outerAngle;
+
+	// Если угол между направлением конуса и точкой меньше внешнего угла, точка в конусе
+	_cosAngle >= _cosOuterAngle
 };

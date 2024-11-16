@@ -112,6 +112,45 @@ render_zpass_getBBXInfoVirtual_gbuffCheck = {
 	_screenProj
 };
 
+//функция возвращает процентное значение видимости бокса
+render_gbuffCheck_photonVisPrc = {
+	params ["_psCenter","_bmin","_bmax",["_lbIC",0]];
+	private _wpos = null;
+	private _sp = null;
+	private _baseVecs = [
+		_psCenter,
+		
+		_bmin,
+		[_bmin select 0, _bmax select 1, _bmin select 2],
+		[_bmax select 0, _bmin select 1, _bmax select 2],
+		
+		//#ifdef RENDER_ZPASS_ENABLE_ADDITIONAL_BBX
+		[_bmax select 0, _bmax select 1, _bmin select 2],
+		[_bmin select 0, _bmax select 1, _bmax select 2],
+
+		[_bmin select 0, _bmin select 1, _bmax select 2],
+		[_bmax select 0, _bmin select 1, _bmin select 2],
+		//#endif
+
+		_bmax
+	];
+
+	private _canSee = false;
+	private _maxCnt = count _baseVecs;
+	private _curIts = 0;
+	private _cps = positionCameraToWorld[0,0,0];
+	private _posesDist = [];
+	{
+		_wpos = _psCenter vectorAdd _x;
+		if (([_wpos] call interact_getIntersectionCount) <= _lbIC) exitWith {
+			_canSee = true;
+		};
+		_posesDist pushBack [_wpos distance _cps,_wpos,_x];
+	} foreach _baseVecs;
+	
+	_canSee
+};
+
 render_zpass_cachePositions = createhashMap;
 render_zpass_getBBXInfoVirtual_DEBUG = {
 	params ["_psCenter","_bmin","_bmax"];

@@ -152,6 +152,7 @@ menu_structureLayout = [
 			],
 			"text:Проверка ''мертвых'' классов (несуществующих классов);act:[false] call classValidator_process",
 			"text:Проверка несуществующих конфигов света на карте;act:call lightValidator_process",
+			"text:Проверка правильности конфигов света;act:call lightConfig_checkOptimizer",
 			"text:Проверка путей классов;act:call systools_checkClassPathes",
 			"text:Проверка классов с одинаковыми моделями;act:call classValidator_validateModels",
 			"text:Проверка шансов спавна лута;act:call systools_openLootCheck",
