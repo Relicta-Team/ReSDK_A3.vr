@@ -92,7 +92,7 @@ call compile __pragma_preprocess "src\host\CommonComponents\Algorithm.sqf";
 };
 
 #include <..\host\CommonComponents\ModelTransform.hpp>
-
+#include <..\client\Rendering\Render_debug.sqf>
 #include <..\host\Yaml\Yaml_init.sqf>
 
 //renode отладчик
