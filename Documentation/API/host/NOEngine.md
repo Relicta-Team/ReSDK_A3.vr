@@ -528,6 +528,15 @@ Description: Получает объект чанка. Если нет - соз�
 - Param: _cht
 
 File: [host\NOEngine\NOEngine_ChunkModel.sqf at line 25](../../../Src/host/NOEngine/NOEngine_ChunkModel.sqf#L25)
+## noe_forceChunksUnsubscribe
+
+Type: function
+
+Description: функция принудительно отписывает клиента с его загруженных зон. функция исключительно для отладки
+- Param: _client
+- Param: _mob
+
+File: [host\NOEngine\NOEngine_ChunkModel.sqf at line 41](../../../Src/host/NOEngine/NOEngine_ChunkModel.sqf#L41)
 # NOEngine_initializers.sqf
 
 ## objectInitializator(cht)
@@ -1083,7 +1092,7 @@ Description:
 - Param: _clientTick
 - Param: _cbPacket
 
-File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 545](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L545)
+File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 548](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L548)
 ## noe_serializeObjectInfoPacket
 
 Type: function
@@ -1092,7 +1101,7 @@ Description: Сериализует в пакет информацию об об
 - Param: _packet
 - Param: _visObj
 
-File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 565](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L565)
+File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 568](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L568)
 ## noe_prepareInfoToRemoveObject
 
 Type: function
@@ -1101,7 +1110,7 @@ Description: подготовка пакета объекта для удале�
 - Param: _packet
 - Param: _ptr
 
-File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 572](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L572)
+File: [host\NOEngine\NOEngine_ObjectRegisterModel.sqf at line 575](../../../Src/host/NOEngine/NOEngine_ObjectRegisterModel.sqf#L575)
 # NOEngine_Shared.sqf
 
 ## noe_posToChunk

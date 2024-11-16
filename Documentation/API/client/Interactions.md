@@ -2604,6 +2604,27 @@ Description:
 - Param: _sphereRadius (optional, default -1)
 
 File: [client\Interactions\interact_onScreenObjects.sqf at line 127](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L127)
+## interact_isPointInSphere
+
+Type: function
+
+Description: 
+- Param: _spherePos
+- Param: _sphereRadius
+- Param: _point
+
+File: [client\Interactions\interact_onScreenObjects.sqf at line 181](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L181)
+## interact_isPointInCone
+
+Type: function
+
+Description: 
+- Param: _coneStartPos
+- Param: _coneEndPos
+- Param: _outerAngle
+- Param: _point
+
+File: [client\Interactions\interact_onScreenObjects.sqf at line 191](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L191)
 # interact_resist.sqf
 
 ## interact_processResist

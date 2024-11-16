@@ -88,6 +88,61 @@ Description:
 - Param: _bbx
 
 File: [client\Rendering\Render_debug.sqf at line 37](../../../Src/client/Rendering/Render_debug.sqf#L37)
+## debug_drawSphere
+
+Type: function
+
+Description: 
+- Param: _pos
+- Param: _color (optional, default ['1', '0', '1', '1'])
+- Param: _width (optional, default 3)
+- Param: _radius (optional, default 1)
+
+File: [client\Rendering\Render_debug.sqf at line 67](../../../Src/client/Rendering/Render_debug.sqf#L67)
+## debug_drawSphereEx
+
+Type: function
+
+Description: 
+- Param: _pos
+- Param: _color (optional, default ['1', '0', '1', '1'])
+- Param: _width (optional, default 3)
+- Param: _radius (optional, default 1)
+- Param: _verticalLines (optional, default 8)
+
+File: [client\Rendering\Render_debug.sqf at line 125](../../../Src/client/Rendering/Render_debug.sqf#L125)
+## debug_drawLightCone
+
+Type: function
+
+Description: 
+- Param: _pos
+- Param: _pitch
+- Param: _bank
+- Param: _distance
+- Param: _outerAngle
+- Param: _innerAngle
+- Param: _attenuation (optional, default 2)
+- Param: _colorOuter (optional, default ['1', '0.5', '0', '0.5'])
+- Param: _colorInner (optional, default ['1', '1', '0', '1'])
+- Param: _width (optional, default 2)
+
+File: [client\Rendering\Render_debug.sqf at line 169](../../../Src/client/Rendering/Render_debug.sqf#L169)
+## debug_drawLightConeEx
+
+Type: function
+
+Description: 
+- Param: _pos
+- Param: _endPos
+- Param: _outerAngle
+- Param: _innerAngle
+- Param: _attenuation
+- Param: _colorOuter (optional, default ['1', '0.5', '0', '0.5'])
+- Param: _colorInner (optional, default ['1', '1', '0', '1'])
+- Param: _width (optional, default 2)
+
+File: [client\Rendering\Render_debug.sqf at line 237](../../../Src/client/Rendering/Render_debug.sqf#L237)
 ## debug_addRenderPos
 
 Type: function
@@ -98,7 +153,7 @@ Description:
 - Param: _wdt
 - Param: _bbx
 
-File: [client\Rendering\Render_debug.sqf at line 67](../../../Src/client/Rendering/Render_debug.sqf#L67)
+File: [client\Rendering\Render_debug.sqf at line 322](../../../Src/client/Rendering/Render_debug.sqf#L322)
 ## debug_addRenderObject
 
 Type: function
@@ -109,7 +164,7 @@ Description:
 - Param: _wdt
 - Param: _bbxVec2
 
-File: [client\Rendering\Render_debug.sqf at line 73](../../../Src/client/Rendering/Render_debug.sqf#L73)
+File: [client\Rendering\Render_debug.sqf at line 328](../../../Src/client/Rendering/Render_debug.sqf#L328)
 # Render_zpass.sqf
 
 ## render_zpass_cachePositions
@@ -123,7 +178,7 @@ Initial value:
 ```sqf
 createhashMap
 ```
-File: [client\Rendering\Render_zpass.sqf at line 115](../../../Src/client/Rendering/Render_zpass.sqf#L115)
+File: [client\Rendering\Render_zpass.sqf at line 154](../../../Src/client/Rendering/Render_zpass.sqf#L154)
 ## render_zpass_getObjBBX
 
 Type: function
@@ -153,6 +208,17 @@ Description:
 - Param: _bmax
 
 File: [client\Rendering\Render_zpass.sqf at line 75](../../../Src/client/Rendering/Render_zpass.sqf#L75)
+## render_gbuffCheck_photonVisPrc
+
+Type: function
+
+Description: функция возвращает процентное значение видимости бокса
+- Param: _psCenter
+- Param: _bmin
+- Param: _bmax
+- Param: _lbIC (optional, default 0)
+
+File: [client\Rendering\Render_zpass.sqf at line 116](../../../Src/client/Rendering/Render_zpass.sqf#L116)
 ## render_zpass_getBBXInfoVirtual_DEBUG
 
 Type: function
@@ -162,7 +228,7 @@ Description:
 - Param: _bmin
 - Param: _bmax
 
-File: [client\Rendering\Render_zpass.sqf at line 116](../../../Src/client/Rendering/Render_zpass.sqf#L116)
+File: [client\Rendering\Render_zpass.sqf at line 155](../../../Src/client/Rendering/Render_zpass.sqf#L155)
 ## render_processZPass
 
 Type: function
@@ -172,7 +238,7 @@ Description: Главная функция для сортировки и про
 - Param: _sortedObjects
 - Param: _pipelineFnc
 
-File: [client\Rendering\Render_zpass.sqf at line 156](../../../Src/client/Rendering/Render_zpass.sqf#L156)
+File: [client\Rendering\Render_zpass.sqf at line 195](../../../Src/client/Rendering/Render_zpass.sqf#L195)
 ## render_zpass_checkOverlapWithZone
 
 Type: function
@@ -181,7 +247,7 @@ Description: Функция для проверки перекрытия дву�
 - Param: _screenBoxA
 - Param: _screenBoxB
 
-File: [client\Rendering\Render_zpass.sqf at line 198](../../../Src/client/Rendering/Render_zpass.sqf#L198)
+File: [client\Rendering\Render_zpass.sqf at line 237](../../../Src/client/Rendering/Render_zpass.sqf#L237)
 ## render_zpass_checkFullOverlap
 
 Type: function
@@ -190,7 +256,7 @@ Description:
 - Param: _screenBoxA
 - Param: _screenBoxB
 
-File: [client\Rendering\Render_zpass.sqf at line 218](../../../Src/client/Rendering/Render_zpass.sqf#L218)
+File: [client\Rendering\Render_zpass.sqf at line 257](../../../Src/client/Rendering/Render_zpass.sqf#L257)
 # CameraControl.hpp
 
 ## CAMERA_MODE_ARCADE

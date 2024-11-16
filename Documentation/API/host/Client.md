@@ -54,7 +54,7 @@ Replaced value:
 ```sqf
 [#key,val]
 ```
-File: [host\Client\client.sqf at line 512](../../../Src/host/Client/client.sqf#L512)
+File: [host\Client\client.sqf at line 525](../../../Src/host/Client/client.sqf#L525)
 ## getRoleByClass(val)
 
 Type: constant
@@ -66,7 +66,7 @@ Replaced value:
 ```sqf
 (missionNamespace getVariable ["role_"+(val),nullPtr])
 ```
-File: [host\Client\client.sqf at line 706](../../../Src/host/Client/client.sqf#L706)
+File: [host\Client\client.sqf at line 719](../../../Src/host/Client/client.sqf#L719)
 ## serverclient_internal_string_changelogs
 
 Type: Variable
@@ -78,7 +78,7 @@ Initial value:
 ```sqf
 ""
 ```
-File: [host\Client\client.sqf at line 1270](../../../Src/host/Client/client.sqf#L1270)
+File: [host\Client\client.sqf at line 1283](../../../Src/host/Client/client.sqf#L1283)
 ## serverclient_internal_map_sysmes
 
 Type: Variable
@@ -90,7 +90,7 @@ Initial value:
 ```sqf
 createHashMapFromArray [...
 ```
-File: [host\Client\client.sqf at line 1274](../../../Src/host/Client/client.sqf#L1274)
+File: [host\Client\client.sqf at line 1287](../../../Src/host/Client/client.sqf#L1287)
 # sysmes.h
 
 ## sysmes(mname)

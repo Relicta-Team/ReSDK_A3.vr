@@ -605,6 +605,71 @@ Description:
 
 
 File: [host\UnitTests\TestsCollection\io.sqf at line 135](../../../Src/host/UnitTests/TestsCollection/io.sqf#L135)
+# math.sqf
+
+## pow(x,y)
+
+Type: constant
+
+> Exists if **ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+
+Description: 
+- Param: x
+- Param: y
+
+Replaced value:
+```sqf
+(x^y)
+```
+File: [host\UnitTests\TestsCollection\math.sqf at line 235](../../../Src/host/UnitTests/TestsCollection/math.sqf#L235)
+## prob_old_to_new(val)
+
+Type: constant
+
+> Exists if **ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+
+Description: 
+- Param: val
+
+Replaced value:
+```sqf
+([val] call convf)
+```
+File: [host\UnitTests\TestsCollection\math.sqf at line 236](../../../Src/host/UnitTests/TestsCollection/math.sqf#L236)
+## convertionTable
+
+Type: Variable
+
+> Exists if **ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+null
+```
+File: [host\UnitTests\TestsCollection\math.sqf at line 248](../../../Src/host/UnitTests/TestsCollection/math.sqf#L248)
+## convf
+
+Type: function
+
+> Exists if **ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+
+Description: 
+- Param: _val
+
+File: [host\UnitTests\TestsCollection\math.sqf at line 238](../../../Src/host/UnitTests/TestsCollection/math.sqf#L238)
+## createConvTable
+
+Type: function
+
+> Exists if **ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+
+Description: 
+
+
+File: [host\UnitTests\TestsCollection\math.sqf at line 249](../../../Src/host/UnitTests/TestsCollection/math.sqf#L249)
 # header_test.h
 
 ## MACRO_TEST
