@@ -126,7 +126,7 @@ inventory_collectInfoOnPutdown = {
 	} else {
 		private _visObj = inventory_previewObject;
 		
-		[getPosATLVisual _visObj,getDir _visObj,vectorUpVisual _visObj,[getInteractibleTarget(_visObj),true] call noe_client_getObjPtr]
+		[getPosATLVisual _visObj,getDir _visObj,vectorUpVisual _visObj,[getInteractibleTarget,true] call noe_client_getObjPtr]
 	};
 };
 
