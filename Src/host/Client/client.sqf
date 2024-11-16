@@ -73,6 +73,17 @@ class(ServerClient) /*extends(NetObject)*/
 	" node_var
 	var(isFirstJoin,true); //первый ли вход игрока в игру
 
+	func(_updateObjectName)
+	{
+		objParams();
+		private _cls = callSelf(getClassName);
+		if getSelf(isFirstJoin) then {
+			this setName (_cls + "::" + (str getSelf(id)));
+		} else {
+			this setName (_cls + "::" + (str getSelf(id)) + "(relog)");
+		};
+	};
+
 	func(constructor)
 	{
 		//objParams_2(_uid,_id);
@@ -123,16 +134,16 @@ class(ServerClient) /*extends(NetObject)*/
 	func(unsubAllChunks)
 	{
 		objParams();
+		
 		//Был в игре выписываем из чанков
 		if (getSelf(state) == "ingame") then {
 			private _ch__ = null;
 			//отписываем клиента из всех чанков
 			{
 				_ch__ = parseSimpleArray _x;
-				rpcCall("unsubChunkListen",vec4(_ch__ select 0,_ch__ select 1,getSelf(id),false));
-			} foreach (getSelf(loadedChunks));
+				rpcCall("unsubChunkListen",vec4(_ch__ select 0,_ch__ select 1,this,false));
+			} foreach (keys getSelf(loadedChunks));
 			setSelf(loadedChunks,createHashMap);
-
 			
 			[this] call atmos_unsubscribeClientListeningSrv;
 			setSelf(loadedAreas,createHashMap);
@@ -332,6 +343,8 @@ class(ServerClient) /*extends(NetObject)*/
 	func(onConnected)
 	{
 		objParams();
+
+		callSelf(_updateObjectName);
 
 		#ifdef RELEASE
 		[getSelf(uid)] call db_updateValuesOnConnect;
