@@ -1091,11 +1091,6 @@ inventory_onPutDownItem = {
 		private _randMes = ["Далеко.","Не дотягиваюсь.","Руки короткие.","Не могу положить так далеко.","Слишком далеко для этого.","Я не могу так далеко положить."];
 		[pick(_randMes),"error"] call chatprint;
 	};
-	private _angle = (_posData select 2) select 2;
-	if (_angle < 0.65) exitWith {
-		private _randMes = ["Упадёт же!","Слишком большой наклон.","Лучше поставлю где поровнее.","Отсюда всё скатится...","Тут не встанет."];
-		[pick(_randMes),"error"] call chatprint;
-	};
 	private _ctx = [player arg _reference arg _posData];
 	if (_isFastPutdown) then {_ctx pushBack true};
 	rpcSendToServer("onPutdownItem",_ctx);

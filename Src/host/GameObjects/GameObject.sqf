@@ -2600,6 +2600,39 @@ region(Pulling functionality)
 		callFuncParams(_dynDisp,openNDisplayInternal,_usr arg getVar(_usr,owner));
 	};
 
+region(Emplacer system)
+	//можно ли расположить предмет на this объекте. проверяемый
+	func(canEmplaceItem)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		//по умолчанию можно расположить только если предмет на полу
+		callFuncParams(_obj,isFloorEmplaceFromVUP,_vup);
+	};
+	
+	//called on canEmplaceItem returns 
+	func(onEmplaceItemFail)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		if !callFuncParams(_obj,isFloorEmplaceFromVUP,_vup) exitWith {
+			private _msg = pick["Упадёт же!","Слишком большой наклон.","Лучше поставлю где поровнее.","Отсюда всё скатится...","Тут не встанет."];
+			callFuncParams(_usr,localSay,_msg arg "error");
+		};
+	};
+
+	func(onEmplaceItem)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		//virtual function for custom functionality
+		//for example: can use for update germs on item and source object
+	};
+
+	//внутренняя функция проверки расположен ли vectorup на полу
+	func(isFloorEmplaceFromVUP)
+	{
+		objParams_1(_vup);
+		(_vup select 2) >= 0.65
+	};
+
 region(Craft system)
 	
 	//кто последний дотрагивался до предмета
