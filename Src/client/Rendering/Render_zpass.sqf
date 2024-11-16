@@ -118,6 +118,8 @@ render_gbuffCheck_photonVisPrc = {
 	private _wpos = null;
 	private _sp = null;
 	private _baseVecs = [
+		_psCenter,
+		
 		_bmin,
 		[_bmin select 0, _bmax select 1, _bmin select 2],
 		[_bmax select 0, _bmin select 1, _bmax select 2],
@@ -133,22 +135,20 @@ render_gbuffCheck_photonVisPrc = {
 		_bmax
 	];
 
+	private _canSee = false;
 	private _maxCnt = count _baseVecs;
 	private _curIts = 0;
 	private _cps = positionCameraToWorld[0,0,0];
 	private _posesDist = [];
 	{
 		_wpos = _psCenter vectorAdd _x;
+		if (([_wpos] call interact_getIntersectionCount) <= _lbIC) exitWith {
+			_canSee = true;
+		};
 		_posesDist pushBack [_wpos distance _cps,_wpos,_x];
 	} foreach _baseVecs;
-	_posesDist sort true;
-	private _curPosLst = _posesDist select [0,4];
-	//todo write code
-	//_curPosLst params ["_"]
-	//_curPos params ["_dst_","_wpos","_loffs"];
 	
-	//сколько процентов видно
-	100 - (_curIts*100/_maxCnt)
+	_canSee
 };
 
 render_zpass_cachePositions = createhashMap;

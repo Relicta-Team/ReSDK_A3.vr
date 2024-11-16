@@ -346,10 +346,13 @@ lesc_cullingProcess = {
 		} else {
 			_bps = _x callv(getPos);
 			_x callv(getBoundingBox) params ["_min","_max"];
-			_precVisible = [_bps,_min,_max,1] call render_gbuffCheck_photonVisPrc;
-			traceformat("obj:%1:: p:%2; min:%3; max:%4",_x arg _bps arg _min arg _max)
-			traceformat("    VISIBLE: %1",_precVisible)
-			if (_precVisible <= 70) then {
+			_canSee = [_bps,_min,_max,
+				//linearConversion[1,30,_bps distance _campos,6,1]
+				6
+				] call render_gbuffCheck_photonVisPrc;
+			// traceformat("obj:%1:: p:%2; min:%3; max:%4",_x arg _bps arg _min arg _max)
+			// traceformat("    VISIBLE: %1",_canSee)
+			if (!_canSee) then {
 				//объект перекрывает геометрия
 				_x callp(setCull,true);
 				INC(_culled);
@@ -359,7 +362,7 @@ lesc_cullingProcess = {
 			//объект видно
 			_x callp(setCull,false);
 		};
-	} foreach targetdebug;
+	} foreach lesc_list_allDataObjs;
 
 	lesc_cullCnt = _culled;
 };
