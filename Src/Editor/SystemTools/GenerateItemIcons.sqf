@@ -11,6 +11,8 @@ function(systools_imageProcessor)
 
 	systools_imageProcessor_isFullBuild = _fullBuild;
 	systools_imageProcessor_searchPatterns = [];
+	systools_imageProcessor_restoreGEOCursorOnEnd = false;
+
 	private _aborted = false;
 	if (_searchPatternUse) then {
 		_ref = refcreate(0);
@@ -46,6 +48,10 @@ function(systools_imageProcessor)
 
 function(systools_internal_imageProcessor)
 {
+	if (geoCursor_enabled) then {
+		call geoCursor_toggle;
+		systools_imageProcessor_restoreGEOCursorOnEnd = true;
+	};
 	//prep scene
 	_posZ = 10;
 	_pos = [1024,1024,_posZ];
@@ -427,6 +433,9 @@ function(systools_internal_imageProcessor)
 		deleteVehicle _centerObject;
 	};
 	
+	if (systools_imageProcessor_restoreGEOCursorOnEnd) then {
+		call geoCursor_toggle;
+	};
 
 	call systools_imageProcessor_convertAndSave;
 }
