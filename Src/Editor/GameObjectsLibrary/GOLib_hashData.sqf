@@ -543,7 +543,10 @@ function(golib_internal_gaussToLinear)
 	};
 	_val = round _val;
 	private _tvals = golib_internal_randomConvTable get _val;
-	_tvals select (count _tvals/2)
+	//For linear distribution between more than one values in table
+	private _accVal = 0;
+	{_accVal = _accVal + _x}foreach _tvals;
+	_accVal / (count _tvals)
 }
 
 function(golib_internal_handleVersionUpdate)
