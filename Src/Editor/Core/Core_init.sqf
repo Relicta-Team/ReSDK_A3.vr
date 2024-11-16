@@ -311,7 +311,7 @@ function(Core_invokeEvent)
 	{
 		_params call _x;
 	} foreach _evList;
-};
+}
 
 function(Core_getStackTrace)
 {
@@ -325,6 +325,7 @@ function(Core_getStackTrace)
 	};
 }
 
+;// for normally including file
 //native error handler
 #include "Core_errorHandler.sqf"
 
