@@ -611,7 +611,7 @@ File: [host\UnitTests\TestsCollection\io.sqf at line 135](../../../Src/host/Unit
 
 Type: constant
 
-> Exists if **ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+> Exists if **CMD__ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
 
 Description: 
 - Param: x
@@ -626,7 +626,7 @@ File: [host\UnitTests\TestsCollection\math.sqf at line 235](../../../Src/host/Un
 
 Type: constant
 
-> Exists if **ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+> Exists if **CMD__ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
 
 Description: 
 - Param: val
@@ -640,7 +640,7 @@ File: [host\UnitTests\TestsCollection\math.sqf at line 236](../../../Src/host/Un
 
 Type: Variable
 
-> Exists if **ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+> Exists if **CMD__ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
 
 Description: 
 
@@ -649,12 +649,12 @@ Initial value:
 ```sqf
 null
 ```
-File: [host\UnitTests\TestsCollection\math.sqf at line 248](../../../Src/host/UnitTests/TestsCollection/math.sqf#L248)
+File: [host\UnitTests\TestsCollection\math.sqf at line 250](../../../Src/host/UnitTests/TestsCollection/math.sqf#L250)
 ## convf
 
 Type: function
 
-> Exists if **ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+> Exists if **CMD__ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
 
 Description: 
 - Param: _val
@@ -664,12 +664,12 @@ File: [host\UnitTests\TestsCollection\math.sqf at line 238](../../../Src/host/Un
 
 Type: function
 
-> Exists if **ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+> Exists if **CMD__ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
 
 Description: 
 
 
-File: [host\UnitTests\TestsCollection\math.sqf at line 249](../../../Src/host/UnitTests/TestsCollection/math.sqf#L249)
+File: [host\UnitTests\TestsCollection\math.sqf at line 251](../../../Src/host/UnitTests/TestsCollection/math.sqf#L251)
 # header_test.h
 
 ## MACRO_TEST

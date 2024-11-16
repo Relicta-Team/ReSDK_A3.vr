@@ -4527,7 +4527,7 @@ _o_upd_impl_internal = { \
 	setSelf(varName,_var); \
 }; rpcAdd('content',_o_upd_impl_internal)
 ```
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 468](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L468)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 474](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L474)
 ## __onUpdateImplMethod(content,varName)
 
 Type: constant
@@ -4545,7 +4545,7 @@ _o_upd_impl_internal = { \
 	callSelfParams(varName,_var); \
 }; rpcAdd('content',_o_upd_impl_internal)
 ```
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 475](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L475)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 481](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L481)
 ## __onUpdateImplMethodNoParams(content,varName)
 
 Type: constant
@@ -4563,7 +4563,7 @@ _o_upd_impl_internal = { \
 	callSelf(varName); \
 }; rpcAdd('content',_o_upd_impl_internal)
 ```
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 482](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L482)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 488](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L488)
 ## repl_doLocal
 
 Type: function
@@ -4573,7 +4573,7 @@ Description: replicator common
 - Param: _method
 - Param: _ctx
 
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 614](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L614)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 620](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L620)
 # Mob_Interact.sqf
 
 ## callScriptedEvent(action__)
