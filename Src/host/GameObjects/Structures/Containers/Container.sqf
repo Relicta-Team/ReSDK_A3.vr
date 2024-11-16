@@ -59,8 +59,8 @@ class(InfoBoard) extends(KeyHolder)
 	func(canEmplaceItem)
 	{
 		objParams_5(_obj,_pos,_dir,_vup,_usr);
-		if !super() exitWith {false};
-		(isTypeOf(_obj,Paper) || isTypeOf(_obj,ItemWritter))
+		if (isTypeOf(_obj,Paper) || isTypeOf(_obj,ItemWritter)) exitWith {true};
+		super()
 	};
 	
 endclass
