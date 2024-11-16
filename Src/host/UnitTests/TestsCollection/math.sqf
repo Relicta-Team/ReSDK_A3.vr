@@ -231,7 +231,7 @@ TEST(TestRandInt_Bug_544_large_tests)
 // 	};
 // }
 
-#ifdef ENABLE_CONVERSION_GAUSS_TO_LINEAR
+#ifdef CMD__ENABLE_CONVERSION_GAUSS_TO_LINEAR
 #define pow(x,y) (x^y)
 #define prob_old_to_new(val) ([val] call convf)
 
@@ -243,16 +243,20 @@ TEST(TestRandInt_Bug_544_large_tests)
 		errorformat("UNKNOWN VALUE: %1",_val);
 		0
 	};
-	_tvals select (count _tvals/2)
+	private _accVal = 0;
+	{_accVal = _accVal + _x}foreach _tvals;
+	_accVal / (count _tvals)//getting middle value
 };
 convertionTable = null;
 createConvTable = {
-	private _pPath = "src\host\UnitTests\TestsCollection\convTable.c";
+	private _pPath = "src\Editor\Bin\RndConvTable.txt";//"src\host\UnitTests\TestsCollection\convTable.c";
 	if fileExists(_pPath) exitWith {
 		convertionTable = createHashMapFromArray (call compile LOADFILE(_pPath));
 		//logformat("CONVTABLE: %1",convertionTable);
 		convertionTable
 	};
+	ASSERT_STR(false,"In this version random convert table placed in " + _pPath);
+	if(true)exitWith{};
 	log("CREATING CONVERTION TABLE");
 	private _itCnt = 100000;
 	private _MRANGE = 100;

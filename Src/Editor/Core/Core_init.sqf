@@ -311,8 +311,21 @@ function(Core_invokeEvent)
 	{
 		_params call _x;
 	} foreach _evList;
-};
+}
 
+function(Core_getStackTrace)
+{
+	params [["_returnAsString",true]];
+	private _stack = diag_stackTrace;
+	private _stackList = (_stack apply {_x call scriptError_internal_handleStack});
+	if (_returnAsString) then {
+		(_stackList joinString endl)
+	} else {
+		_stackList
+	};
+}
+
+;// for normally including file
 //native error handler
 #include "Core_errorHandler.sqf"
 

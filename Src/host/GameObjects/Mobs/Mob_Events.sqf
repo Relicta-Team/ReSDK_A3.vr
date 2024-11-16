@@ -219,6 +219,7 @@ _onDropItem = {
 
 _onPutdownItem = {
 	params ["_mobObj","_refItem","_positionData",["_isFastButton",false]];
+	//_positionData: vec4(posATL,dir(float),vup(vec3),ptrPlace)
 
 	private _vObjMob = getVObjectLink(_mobObj);
 	private _vObjItem = pointer_get(_refItem);
@@ -227,6 +228,11 @@ _onPutdownItem = {
 	if !pointer_isValidResult(_vObjItem) exitWith {errorformat("onPutdownItem() - Item reference has no exists in pointers table - %1",_refItem)};
 	if !isExistsObject(_vObjItem) exitWith {errorformat("onPutdownItem() - Item object has no exists virtual object - %1 as %2",_refItem arg _vObjItem);};
 	if (isTypeOf(_vObjItem,StolenItem)) exitWith {callFuncParams(_vObjItem,onStolen,_vObjMob);};
+	
+	private _pdPlacePtr = _positionData select 3;
+	private _placerObj = pointer_get(_pdPlacePtr);
+	if !pointer_isValidResult(_placerObj) exitWith {errorformat("onPutdownItem() - Placer reference has no exists in pointers table - %1",_pdPlacePtr)};
+	_positionData set [3, _placerObj];
 
 	callFuncParams(_vObjMob,putdownItem, _vObjItem arg _positionData);
 	// 2022-2022 RIP. ЗДЕСЬ БЫЛА ЛОГИКА НА ЗАДЕРЖКУ ПРИ ВЫКЛАДЫВАНИИ С ПОМОЩЬЮ КНОПКИ БЫСТРОГО ВЫКЛАДЫВАНИЯ
