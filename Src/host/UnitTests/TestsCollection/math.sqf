@@ -393,7 +393,7 @@ TEST(GurpsRandom)
 	
 	//fill maps
 	{_smap set [_x,0];} foreach [DICE_SUCCESS,DICE_CRITSUCCESS,DICE_FAIL,DICE_CRITFAIL];
-	_tmap resize (6*3 -3);//max rolls - offset
+	_tmap resize 21;//max rolls - offset
 	_tmap = _tmap apply {0};
 
 	for "_skill" from 1 to 20 do {
@@ -401,20 +401,22 @@ TEST(GurpsRandom)
 		_tmap = _tmap apply {0};
 		{_smap set [_x,0]} foreach _smap;
 
-		log("Check skill value: %1",_skill);
+		logformat("Check skill value: %1",_skill);
 		for"_i" from 1 to _count do {
 		
 			unpackRollResult(_skill call gurps_rollstd,_am,_smkey,_3d6roll);
 
 			_smap set [_smkey,(_smap get _smkey) + 1];
-			private _amStart = _3d6roll - 3;
+			private _amStart = _3d6roll-3;
 			_tmap set [_amStart,(_tmap select _amStart) + 1];
 		};
 
-		private _tda = (_smap apply {format["%1=%2", getRollTypeText(_x), _y * 100 / _count]}) joinString ", ";
+		private _tda = _smap toArray false;
+		_tda sort true;
+		_tda = (_tda apply {_x params ["_k","_v"];format["%1=%2", getRollTypeText(_k), _v * 100 / _count]}) joinString ", ";
 		logformat("    Throws: %1",_tda);
 		{
-			logformat("      VAL %1=%2",_foreachIndex + 3 arg _x * 100 / _count);
+			logformat("      VAL %1=%2",_foreachIndex+3 arg _x * 100 / _count);
 		} foreach _tmap;
 	};
 }
