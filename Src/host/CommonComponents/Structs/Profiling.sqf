@@ -45,7 +45,7 @@ struct(ProfilerStatistics)
 
 	def(getStringStatistics)
 	{
-		format["%1: calls %2, mid %3ms",self callv(_getNormalStringName),self getv(call_count),self getv(midTime)];
+		format["%1: calls %2, mid %3ms",self callv(_getNormalStringName),self getv(call_count),(self getv(midTime)) *1000];
 	}
 endstruct
 
@@ -69,6 +69,13 @@ profiler_getResults = {
 	};
 
 	values _sys
+};
+
+profiler_clearResults = {
+	private _sys = call profiler_getSystemContainer;
+	{
+		_sys deleteAt _x;
+	} foreach (keys _sys);
 };
 
 struct(ProfileZone)
