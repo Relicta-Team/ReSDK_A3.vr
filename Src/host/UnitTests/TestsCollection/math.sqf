@@ -408,7 +408,7 @@ TEST(GurpsRandom)
 
 			_smap set [_smkey,(_smap get _smkey) + 1];
 			private _amStart = _am - 3;
-			_tmap set [_amStart,(_tmap get _amStart) + 1];
+			_tmap set [_amStart,(_tmap select _amStart) + 1];
 		};
 
 		private _tda = (_smap apply {format["%1=%2", getRollTypeText(_x), _y * 100 / _count]}) joinString ", ";
