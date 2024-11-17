@@ -495,7 +495,8 @@ TEST(ObjectStructBase)
 }
 
 #ifdef USE_SCRIPTED_PROFILING
-scripted_profile_test_function_example = {
+
+;scripted_profile_test_function_example = {
 	PROFILE_NAME("base_prof")
 
 	for "_i" from 1 to 123 do {
@@ -535,5 +536,7 @@ TEST(ScriptedProfilerTests)
 	call profiler_clearResults;
 	_pobjects = [false] call profiler_getResults;
 	ASSERT_EQ(count _pobjects,0);
-}
+
+	scripted_profile_test_function_example = null;
+};
 #endif
