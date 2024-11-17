@@ -24,14 +24,25 @@
 
 #define USE_SCRIPTED_PROFILING
 
-#define PROFILE_TOSTRING(val) #val
+#ifdef RELEASE
+    #undef USE_SCRIPTED_PROFILING
+#endif
 
-// #define PROFILE_DECLVAR private _##__RAND_UINT16__##__LINE__
+#ifdef USE_SCRIPTED_PROFILING
+    #define PROFILE_TOSTRING(val) #val
 
-// #define PROFILE private PROFILE_DECLVAR = struct_newp(ProfileZone, PROFILE_TOSTRING(__FILE__) arg __LINE__);
-// #define PROFILE_NAME(x) PROFILE_DECLVAR = struct_newp(ProfileZone, x arg __LINE__);
-// #define PROFILE_SCOPE PROFILE_DECLVAR = struct_newp(ProfileZone, PROFILE_TOSTRING(__FILE__) arg __LINE__);
-// #define PROFILE_SCOPE_NAME(x) PROFILE_DECLVAR = struct_newp(ProfileZone, x arg __LINE__);
+    #define PROFILE_DECLVAR private _##__RAND_UINT16__##__LINE__
+
+    #define PROFILE private PROFILE_DECLVAR = struct_newp(ProfileZone, null argPROFILE_TOSTRING(__FILE__) arg __LINE__);
+    #define PROFILE_NAME(x) PROFILE_DECLVAR = struct_newp(ProfileZone, x arg PROFILE_TOSTRING(__FILE__) arg __LINE__);
+    #define PROFILE_SCOPE PROFILE_DECLVAR = struct_newp(ProfileZone, null arg PROFILE_TOSTRING(__FILE__) arg __LINE__ arg true);
+    #define PROFILE_SCOPE_NAME(x) PROFILE_DECLVAR = struct_newp(ProfileZone, x arg PROFILE_TOSTRING(__FILE__) arg __LINE__ arg true);
+#else
+    #define PROFILE
+    #define PROFILE_NAME(x)
+    #define PROFILE_SCOPE
+    #define PROFILE_SCOPE_NAME(x)
+#endif
 
 #ifndef EDITOR
     #undef ASP_USE_PROFILING

@@ -7,7 +7,7 @@
 #include <..\oop.hpp>
 #include <..\text.hpp>
 #include <..\struct.hpp>
-
+#include <..\profiling.hpp>
 
 /*
 	
