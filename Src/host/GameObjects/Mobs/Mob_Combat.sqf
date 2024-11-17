@@ -234,8 +234,10 @@ func(attackOtherObj)
 		
 		callFuncParams(_target,applyDamage,_basicDamage arg _dType arg callSelf(getLastInteractEndPos) arg "attack"); //conv attack to -> _dir arg di_partDamage arg vec2(_attItem,_attWeapon)
 
-		//weapon damage after attack
-		callFuncParams(_attItem,applyDamage,_weapDamage max 0 arg _dType arg callSelf(getLastInteractStartPos) arg "weap_attack");
+		if ([getVar(_attItem,ht)] call gurps_probSuccess) then {
+			//weapon damage after attack
+			callFuncParams(_attItem,applyDamage,_weapDamage max 0 arg _dType arg callSelf(getLastInteractStartPos) arg "weap_attack");
+		};
 
 		//callSelfParams(onDamageMessage,_target arg _attWeapMes arg _attackedZoneText arg _attRealTargetZone arg _postMessageEffect);
 	};// _delegate_damage

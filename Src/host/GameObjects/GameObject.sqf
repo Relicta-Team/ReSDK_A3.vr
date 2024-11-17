@@ -1313,9 +1313,11 @@ region(throwing and bullets functions)
 			_thDamModif = callFunc(_matObj,getDamageCoefOnAttack);
 		};
 
-		private _weapDamage = round(_dam*_thDamModif) - _drObj;
-		//! THIS CAN BE THROWS ERROR BECAUSE _throwed.loc - is flyingObject
-		callFuncParams(_throwed,applyDamage,_weapDamage arg _type arg _p arg "throwed");
+		if ([getVar(_throwed,ht)] call gurps_probSuccess) then {
+			private _weapDamage = round(_dam*_thDamModif) - _drObj;
+			//! THIS CAN BE THROWS ERROR BECAUSE _throwed.loc - is flyingObject
+			callFuncParams(_throwed,applyDamage,_weapDamage arg _type arg _p arg "throwed");
+		};
 	};
 
 	//Тут обязательно нужно удалить пулю чтобы не вызывать утечек памяти
