@@ -393,7 +393,7 @@ TEST(GurpsRandom)
 	
 	//fill maps
 	{_smap set [_x,0];} foreach [DICE_SUCCESS,DICE_CRITSUCCESS,DICE_FAIL,DICE_CRITFAIL];
-	_tmap resize 21;//max rolls - offset
+	_tmap resize 17;//max rolls - offset
 	_tmap = _tmap apply {0};
 
 	for "_skill" from 1 to 20 do {
@@ -412,7 +412,7 @@ TEST(GurpsRandom)
 		};
 
 		private _tda = _smap toArray false;
-		_tda sort true;
+		_tda sort false;
 		_tda = (_tda apply {_x params ["_k","_v"];format["%1=%2", getRollTypeText(_k), _v * 100 / _count]}) joinString ", ";
 		logformat("    Throws: %1",_tda);
 		{
