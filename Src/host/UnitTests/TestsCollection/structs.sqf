@@ -511,6 +511,12 @@ TEST(ObjectStructBase)
 
 TEST(ScriptedProfilerTests)
 {
+	/*
+		We must clear all profiler data because this code called after possible exists profiler zones
+	*/
+	call profiler_clearResults;
+
+
 	call scripted_profile_test_function_example;
 	call scripted_profile_test_function_example;
 
