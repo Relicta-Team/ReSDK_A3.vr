@@ -404,7 +404,7 @@ TEST(GurpsRandom)
 		log("Check skill value: %1",_skill);
 		for"_i" from 1 to _count do {
 		
-			unpackRollResult(_skill call gurps_rollstd,"_am","_smkey","_3d6roll");
+			unpackRollResult(_skill call gurps_rollstd,_am,_smkey,_3d6roll);
 
 			_smap set [_smkey,(_smap get _smkey) + 1];
 			private _amStart = _am - 3;
