@@ -493,3 +493,56 @@ TEST(ObjectStructBase)
 {
 	
 }
+
+#ifdef USE_SCRIPTED_PROFILING
+
+;scripted_profile_test_function_example = {
+	PROFILE_NAME("base_prof")
+
+	for "_i" from 1 to 123 do {
+		PROFILE_SCOPE_NAME("scoped_prof")
+	};
+
+	for "_i" from 1 to 10 do {
+		//another scoped prof
+		PROFILE_SCOPE_NAME("scoped_prof")
+	};
+};
+
+TEST(ScriptedProfilerTests)
+{
+	/*
+		We must clear all profiler data because this code called after possible exists profiler zones
+	*/
+	call profiler_clearResults;
+
+
+	call scripted_profile_test_function_example;
+	call scripted_profile_test_function_example;
+
+	private _pobjects = [true] call profiler_getResults;
+
+	ASSERT_EQ(count _pobjects,3);
+	private _bprofIndex = _pobjects findif {(_x getv(_pzName) )== "base_prof"};
+	ASSERT_NE(_bprofIndex,-1);
+	private _bprof = _pobjects select _bprofIndex;
+	ASSERT_EQ(_bprof getv(call_count),1 * 2);
+
+	private _sprofobjects = _pobjects select {(_x getv(_pzName)) == "scoped_prof"};
+	ASSERT_EQ(count _sprofobjects,2);
+	private _obj123Index = _sprofobjects findif {(_x getv(call_count))==(123 * 2)};
+	ASSERT_NE(_obj123Index,-1);
+	private _obj123 = _sprofobjects deleteAt _obj123Index;
+	
+	ASSERT_EQ(count _sprofobjects,1);
+	private _lastObj = _sprofobjects select 0;
+	ASSERT_EQ(_lastObj getv(call_count),(10 * 2));
+
+	//clear results
+	call profiler_clearResults;
+	_pobjects = [false] call profiler_getResults;
+	ASSERT_EQ(count _pobjects,0);
+
+	scripted_profile_test_function_example = null;
+};
+#endif
