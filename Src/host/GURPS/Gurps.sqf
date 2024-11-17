@@ -77,6 +77,12 @@ gurps_rollstd = {
     errorformat("No return. skill:%1; dices:%2",_skill arg _d);
 };
 
+//Проверка числа на успех
+gurps_probSuccess = {
+	params ["_skill"];
+	DICE_ISSUCCESS( getRollType(_skill call gurps_rollstd) )
+};
+
 "
 	name:Бросить 3d6 на действие
 	desc:Бросает три 6-гранных кости против значения. Возвращает успешность действия или неудачу. Этот узел не возвращает крилические успехи и провалы и предназначен для проверки успешности совершенного действия.
