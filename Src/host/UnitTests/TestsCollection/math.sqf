@@ -416,7 +416,10 @@ TEST(GurpsRandom)
 		_tda = (_tda apply {_x params ["_k","_v"];format["%1=%2", getRollTypeText(_k), _v * 100 / _count]}) joinString ", ";
 		logformat("    Throws: %1",_tda);
 		{
-			logformat("      VAL %1=%2",_foreachIndex+3 arg _x * 100 / _count);
+			private _lval = _x * 100 / _count;
+			#ifdef DEBUG
+			logformat("      VAL %1=%2",_foreachIndex+3 arg _lval);
+			#endif
 		} foreach _tmap;
 	};
 }
