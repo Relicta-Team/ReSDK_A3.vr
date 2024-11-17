@@ -84,22 +84,24 @@ struct(ProfileZone)
 	{
 		params [["_name",""],"_file","_line",["_isScoped",false]];
 		
-		self setv(_time,tickTime); //сначала захватываем время чтобы минимизировать накладные расходны на создание объекта
-		
-		self setv(_name,_name);
+		if (_name!="") then {
+			self setv(_name,_name);
+		};
 		self setv(_file,_file);
 		self setv(_line,_line);
 		self setv(_isScoped,_isScoped);		
+		
+		self setv(_time,tickTime); //захватываем время в конце после инициализации всех данных
 	}
 	//statistics storage name
 	def(_getSSN)
 	{
-		format["[%1]%2(%2)",self getv(_name),self getv(_file),self getv(_line)];
+		format["[%1]%2(%3)",self getv(_name),self getv(_file),self getv(_line)];
 	}
 
 	def(str)
 	{
-		format["%1<>",struct_typename(self),self callv(_getSSN)]
+		format["%1<%2>",struct_typename(self),self callv(_getSSN)]
 	}
 
 	def(del)
