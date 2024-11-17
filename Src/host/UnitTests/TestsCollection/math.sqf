@@ -407,7 +407,7 @@ TEST(GurpsRandom)
 			unpackRollResult(_skill call gurps_rollstd,_am,_smkey,_3d6roll);
 
 			_smap set [_smkey,(_smap get _smkey) + 1];
-			private _amStart = _am - 3;
+			private _amStart = _3d6roll - 3;
 			_tmap set [_amStart,(_tmap select _amStart) + 1];
 		};
 
