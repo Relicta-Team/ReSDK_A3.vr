@@ -236,7 +236,7 @@ func(attackOtherObj)
 
 		if ([getVar(_attItem,ht)] call gurps_probSuccess) then {
 			//weapon damage after attack
-			callFuncParams(_attItem,applyDamage,_weapDamage max 0 arg _dType arg callSelf(getLastInteractStartPos) arg "weap_attack");
+			callFuncParams(_attItem,applyDamage,_weapDamage max 0 arg DAMAGE_TYPE_CRUSHING arg callSelf(getLastInteractStartPos) arg "weap_attack");
 		};
 
 		//callSelfParams(onDamageMessage,_target arg _attWeapMes arg _attackedZoneText arg _attRealTargetZone arg _postMessageEffect);
