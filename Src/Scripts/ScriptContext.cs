@@ -75,7 +75,7 @@ class ScriptContext : IScript
 			output.Append(currentProcess.ProcessName);
 			output.Append(",");
 			output.Append("WorkingSet64:");
-			output.Append(currentProcess.WorkingSet64 / 1024/ 1024);
+			output.Append(currentProcess.WorkingSet64 / 1024 / 1024);
 			output.Append(",");
 			output.Append("PagedSysMem64:");
 			output.Append(currentProcess.PagedSystemMemorySize64 / 1024/ 1024);
