@@ -7,13 +7,18 @@
 #define SAFE_REFERENCE_POOL_COUNTER 1
 #define SAFE_REFERENCE_POOL_NAME 2
 
+#define SAFE_REFERENCE_MEMORY_ADDR "mpstor"
+
 //создание нового пула для безопасных ссылок
 SafeReference_CreatePool = {
 	params ["_poolName"];
 	if (_poolName == "") then {
 		_poolName = format["AnonimousPool at %1 (frame %2)",tickTime,diag_frameNo];
 	};
-	[createHashMap,1,_poolName]
+	private _m = mem_alloc(); 
+	private _pool = [createHashMap,1,_poolName];
+	mem_set(_m)[SAFE_REFERENCE_MEMORY_ADDR,_pool];
+	_m
 };
 
 sref_defaultPool = ["DefaultPool"] call SafeReference_CreatePool;
@@ -50,6 +55,9 @@ struct(SafeReference)
 		params ['_obj',["_ctObj",sref_defaultPool]];
 		
 		self setv(_ctsr,_ctObj);
+		
+		//unpack storage
+		_ctObj = mem_get(_ctObj,SAFE_REFERENCE_MEMORY_ADDR);
 
 		private _curi = _ctObj select SAFE_REFERENCE_POOL_COUNTER;
 		self setv(iptr, _curi);
@@ -58,7 +66,7 @@ struct(SafeReference)
 	}
 
 	// получает объект контейнера хранящего значения ссылок
-	def(_getContainer) { self getv(_ctsr) select SAFE_REFERENCE_POOL_CONTAINER}
+	def(_getContainer) { mem_get(self getv(_ctsr),SAFE_REFERENCE_MEMORY_ADDR) select SAFE_REFERENCE_POOL_CONTAINER}
 
 	// получает сырой указатель. Указатели равные 0 высвобождены
 	def(getPtr) {self getv(iptr)}
@@ -80,7 +88,7 @@ struct(SafeReference)
 
 	def(str)
 	{
-		private _pn = self getv(_ctsr) select SAFE_REFERENCE_POOL_NAME;
+		private _pn = mem_get(self getv(_ctsr),SAFE_REFERENCE_MEMORY_ADDR) select SAFE_REFERENCE_POOL_NAME;
 		format["ref:%1<%2>=>%3",self getv(iptr),_pn,self callv(getValue)]
 	}
 
