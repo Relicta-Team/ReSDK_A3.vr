@@ -314,6 +314,25 @@ init_function(menu_internal_initialize)
 		_w ctrlShow false;
 	};
 
+	//отладка памяти
+	_w = getEdenDisplay getvariable ["menu_internal_memwidget",widgetNull];
+	if !isNullReference(_w) then {
+		[_w,true] call deleteWidget;
+	};
+	_wloff = getEdenDisplay displayctrl 1055;
+	(_wloff call widgetGetPosition) params ["_wlx","_wly","_wlw","_wlh"];
+	_ctgDown = ctrlParentControlsGroup(_wloff);
+	_mwid = [getEdenDisplay,TEXT,[_wlx+_wlw,_wly,80,_wlh],_ctgDown] call createWidget;
+	[_mwid,"<t align='left'>MEMORY</t>"] call widgetSetText;
+	getEdenDisplay setVariable ["menu_internal_memwidget",_mwid];
+	["onFrame",{
+		_mwid = getEdenDisplay getvariable ["menu_internal_memwidget",widgetNull];
+		if !isNullReference(_mwid) then {
+			_meminfList = (["ScriptContext","mem",null,true] call rescript_callCommand splitString ",") apply {_x splitString ":" select 1};
+			_meminf = format["<t size='0.9'>memory: workset= %1mb, privmem= %3mb, paged= %2mb</t>",_meminfList select 1,_meminfList select 2,_meminfList select 3];
+			[_mwid,_meminf] call widgetSetText;
+		};
+	}] call Core_addEventHandler;
 	//play button
 	
 	_w = getEdenDisplay getVariable ["menu_internal_objlibWidget",widgetNull];
