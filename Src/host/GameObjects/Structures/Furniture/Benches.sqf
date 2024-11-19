@@ -14,6 +14,7 @@ class(BenchBase) extends(IChair)
 	editor_only(var(desc,"Многоместное сиденье");)
 	var(material,"MatWood");
 	var(dr,2);
+	getterconst_func(getCoefAutoWeight,10);
 	//многоместное сидение(лавка)
 endclass
 

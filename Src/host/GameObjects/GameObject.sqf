@@ -2023,6 +2023,9 @@ class(IDestructible) extends(GameObject)
 		setSelf(hpMax,_val);
 	};
 
+	//коэффициент для авторасчета веса. это делитель веса объекта. для мебели например 10
+	getterconst_func(getCoefAutoWeight,1);
+
 	//TODO replace to nullptr and refactoing all checks
 	var(material,null);//string|object
 	func(getMaterial)

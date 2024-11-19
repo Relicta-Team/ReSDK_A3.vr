@@ -19,6 +19,7 @@ class(MetalBarrel) extends(LiquidContainer)
 	var(desc,"Сюда можно что-то налить, да и начерпать отсюда тоже!")
 	var(model,"ml\ml_object_new\model_14_10\oldbarrel.p3d");
 	var(material,"MatMetal");
+	getterconst_func(getCoefAutoWeight,15);
 	var(dr,2);
 endclass
 
@@ -70,6 +71,7 @@ class(PlasticBarrel) extends(LiquidContainer)
 	var(name,"Бочка");
 	var(model,"a3\structures_f_epb\items\vessels\barrelwater_grey_f.p3d");
 	var(material,"MatSynt");
+	getterconst_func(getCoefAutoWeight,10);
 endclass
 
 class(PlasticBarrel1) extends(PlasticBarrel)
@@ -97,6 +99,7 @@ class(ClayPot) extends(LiquidContainer)
 	var(desc,"Сюда можно что-то налить, да и начерпать отсюда тоже!")
 	var(model,"ca\structures_e\misc\misc_interier\vase_loam_ep1.p3d");
 	var(material,"MatGlass");
+	getterconst_func(getCoefAutoWeight,50);
 	var(hp,5);
 endclass
 

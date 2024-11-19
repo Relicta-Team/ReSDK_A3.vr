@@ -16,6 +16,7 @@ class(ShelfBase) extends(Furniture)
 	editor_only(var(desc,"Мебель для складирования предметов на поверхности");)
 	var(material,"MatWood");
 	var(dr,1);
+	getterconst_func(getCoefAutoWeight,10);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -23,6 +24,8 @@ class(Sink) extends(ShelfBase)
 	var(model,"ca\structures\furniture\bathroom\sink\sink.p3d");
 	var(name,"Раковина");
 	var(desc,"Настоящая роскошь");
+
+	getterconst_func(getCoefAutoWeight,30);
 
 	var(material,"MatBeton");
 	var(sourceMatter,"Water");
