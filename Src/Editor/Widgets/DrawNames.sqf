@@ -58,10 +58,12 @@ function(drawNames_internal_onFrame)
 							_clr = [_mat,"color",true] call oop_getFieldBaseValue;
 							_mat = [_mat,"name",true] call oop_getFieldBaseValue;
 							if ([_class,"",true,"isItem"] call oop_getFieldBaseValue) then {
+								_wt = [_class,"weight",true] call oop_getFieldBaseValue;
 								_hp = [null,
-									[_class,"weight",true] call oop_getFieldBaseValue,
+									_wt,
 									[_class,"",true,"objectHealthType"] call oop_getFieldBaseValue
 								] call gurps_calculateItemHP;
+
 							} else {
 								_hp = [
 									_class,
@@ -69,10 +71,11 @@ function(drawNames_internal_onFrame)
 									_matClass,
 									_refwt
 								] call gurps_internal_calculateHP;
+								_wt = refget(_refwt);
 							};
 							_ht = [_class,"ht",true] call oop_getFieldBaseValue;
 							_dr = [_class,"dr",true] call oop_getFieldBaseValue;
-							_wt = refget(_refwt);
+							
 						};
 					};
 					_ext = format["mat:%1 (hp:%2;dr:%3;ht:%4;w_kg:%5)",_mat,_hp,_dr,_ht,_wt * 1000];
