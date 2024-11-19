@@ -102,7 +102,7 @@ Type: function
 Description: 
 - Param: _module
 
-File: [host\UnitTests\init.sqf at line 60](../../../Src/host/UnitTests/init.sqf#L60)
+File: [host\UnitTests\init.sqf at line 62](../../../Src/host/UnitTests/init.sqf#L62)
 ## test_internal_runAllTestCases
 
 Type: function
@@ -111,7 +111,7 @@ Description:
 - Param: __RUT_TESTNAME
 - Param: _testCode
 
-File: [host\UnitTests\init.sqf at line 101](../../../Src/host/UnitTests/init.sqf#L101)
+File: [host\UnitTests\init.sqf at line 103](../../../Src/host/UnitTests/init.sqf#L103)
 ## test_run
 
 Type: function
@@ -119,7 +119,7 @@ Type: function
 Description: 
 
 
-File: [host\UnitTests\init.sqf at line 144](../../../Src/host/UnitTests/init.sqf#L144)
+File: [host\UnitTests\init.sqf at line 146](../../../Src/host/UnitTests/init.sqf#L146)
 # loader.sqf
 
 ## test_collections

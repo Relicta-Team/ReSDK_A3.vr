@@ -1818,6 +1818,18 @@ Replaced value:
 2
 ```
 File: [host\CommonComponents\Structs\Pointers.sqf at line 8](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L8)
+## SAFE_REFERENCE_MEMORY_ADDR
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"mpstor"
+```
+File: [host\CommonComponents\Structs\Pointers.sqf at line 10](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L10)
 ## sref_defaultPool
 
 Type: Variable
@@ -1829,7 +1841,7 @@ Initial value:
 ```sqf
 ["DefaultPool"] call SafeReference_CreatePool
 ```
-File: [host\CommonComponents\Structs\Pointers.sqf at line 19](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L19)
+File: [host\CommonComponents\Structs\Pointers.sqf at line 24](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L24)
 ## SafeReference_CreatePool
 
 Type: function
@@ -1837,7 +1849,7 @@ Type: function
 Description: создание нового пула для безопасных ссылок
 - Param: _poolName
 
-File: [host\CommonComponents\Structs\Pointers.sqf at line 11](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L11)
+File: [host\CommonComponents\Structs\Pointers.sqf at line 13](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L13)
 # Profiling.sqf
 
 ## profiler_getSystemContainer

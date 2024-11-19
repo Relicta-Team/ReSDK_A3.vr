@@ -385,7 +385,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\GameObject.sqf at line 1424](../../../Src/host/GameObjects/GameObject.sqf#L1424)
+File: [host\GameObjects\GameObject.sqf at line 1417](../../../Src/host/GameObjects/GameObject.sqf#L1417)
 ## DEBUG_VISUAL_OPENSPACE
 
 Type: constant
@@ -397,7 +397,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\GameObject.sqf at line 1613](../../../Src/host/GameObjects/GameObject.sqf#L1613)
+File: [host\GameObjects\GameObject.sqf at line 1606](../../../Src/host/GameObjects/GameObject.sqf#L1606)
 ## async_delay_check_
 
 Type: constant
@@ -409,7 +409,7 @@ Replaced value:
 ```sqf
 0.5
 ```
-File: [host\GameObjects\GameObject.sqf at line 2315](../../../Src/host/GameObjects/GameObject.sqf#L2315)
+File: [host\GameObjects\GameObject.sqf at line 2391](../../../Src/host/GameObjects/GameObject.sqf#L2391)
 ## flyingObject
 
 Type: Variable
@@ -4305,7 +4305,7 @@ Replaced value:
 ```sqf
 _d = D6 <= 3; [p1,p2] select _d
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 792](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L792)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 794](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L794)
 ## debuginfo(mes)
 
 Type: constant
@@ -4319,7 +4319,7 @@ Replaced value:
 ```sqf
 breakpoint("("+getSelf(name)+")::EVENT::("+_mode+") " + mes)
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1057](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1057)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1059](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1059)
 ## debuginfo(mes)
 
 Type: constant
@@ -4333,7 +4333,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1059](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1059)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1061](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1061)
 ## __isZoneIn(zones,modif)
 
 Type: constant
@@ -4346,7 +4346,7 @@ Replaced value:
 ```sqf
 if (_attTargetZone in [zones]) exitWith {MOD(_mod,modif)}
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1462](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1462)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1464](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1464)
 ## go_static_internal_map_redirzones
 
 Type: Variable
@@ -4358,7 +4358,7 @@ Initial value:
 ```sqf
 createHashMapFromArray[...
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 822](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L822)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 824](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L824)
 # Mob_combat_attdam_enum.hpp
 
 ## COMBAT_ATTDAM_ATTACK
@@ -5881,7 +5881,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\Structures\Electronics\GeneratorParts.sqf at line 53](../../../Src/host/GameObjects/Structures/Electronics/GeneratorParts.sqf#L53)
+File: [host\GameObjects\Structures\Electronics\GeneratorParts.sqf at line 54](../../../Src/host/GameObjects/Structures/Electronics/GeneratorParts.sqf#L54)
 # Buttons.sqf
 
 ## OVERRIDE_ENABLE_AS_ACTIVATOR()
@@ -5912,7 +5912,7 @@ Replaced value:
 ```sqf
 if (_mode == m__) exitWith
 ```
-File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 252](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L252)
+File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 253](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L253)
 ## compareInput(t__)
 
 Type: constant
@@ -5924,7 +5924,7 @@ Replaced value:
 ```sqf
 if (_userInput == t__) exitWith
 ```
-File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 253](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L253)
+File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 254](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L254)
 ## compareInputAndJump(t__,newmode__)
 
 Type: constant
@@ -5937,7 +5937,7 @@ Replaced value:
 ```sqf
 if (_userInput == t__) exitWith {callSelfParams(setDispMode,newmode__)}
 ```
-File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 254](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L254)
+File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 255](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L255)
 ## compareInputAndUseOptData(t__)
 
 Type: constant
@@ -5949,7 +5949,7 @@ Replaced value:
 ```sqf
 if (_userInput == t__) exitWith
 ```
-File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 256](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L256)
+File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 257](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L257)
 ## optData
 
 Type: constant
@@ -5961,7 +5961,7 @@ Replaced value:
 ```sqf
 _optData
 ```
-File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 257](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L257)
+File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 258](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L258)
 ## throwExceptionWithData()
 
 Type: constant
@@ -5973,7 +5973,7 @@ Replaced value:
 ```sqf
 errorformat("HeadControlPanel::onHandleNDInput() - Unhandled input: %1 (mode: %2, optdat: %3) at line %4",_userInput arg _userMode arg _optData arg __LINE__)
 ```
-File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 259](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L259)
+File: [host\GameObjects\Structures\Electronics\Devices\Control.sqf at line 260](../../../Src/host/GameObjects/Structures/Electronics/Devices/Control.sqf#L260)
 # HeadControlPanel.hpp
 
 ## MODE_NOPOWER

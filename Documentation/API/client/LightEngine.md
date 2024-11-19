@@ -1358,14 +1358,14 @@ File: [client\LightEngine\LightEngine_mainThread.sqf at line 110](../../../Src/c
 
 Type: constant
 
-Description: 
+Description: #define LESC_ENABLE_CULLING
 
 
 Replaced value:
 ```sqf
 
 ```
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 9](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L9)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 12](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L12)
 ## lesc_list_allObjects
 
 Type: Variable
@@ -1377,7 +1377,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 259](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L259)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 262](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L262)
 ## lesc_list_allDataObjs
 
 Type: Variable
@@ -1389,7 +1389,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 262](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L262)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 265](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L265)
 ## lesc_cullCnt
 
 Type: Variable
@@ -1401,33 +1401,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 335](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L335)
-## lesc_handle
-
-Type: Variable
-
-> Exists if **LESC_USE_FAST_UPDATE** defined
-
-Description: 
-
-
-Initial value:
-```sqf
-startUpdate(lesc_cullingProcess,0.5)
-```
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 371](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L371)
-## lesc_thd
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-threadStart(threadNew(_looped))
-```
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 374](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L374)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 338](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L338)
 ## lesc_setDebugRender
 
 Type: function
@@ -1437,7 +1411,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 252](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L252)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 255](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L255)
 ## lesc_handleLight
 
 Type: function
@@ -1447,7 +1421,7 @@ Description: handle light object adding to scene
 - Param: _lt
 - Param: _isDirect (optional, default false)
 
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 268](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L268)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 271](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L271)
 ## lesc_onLightRemove
 
 Type: function
@@ -1455,7 +1429,7 @@ Type: function
 Description: 
 - Param: _dummyParam
 
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 287](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L287)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 290](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L290)
 ## lesc_handleProp
 
 Type: function
@@ -1465,7 +1439,7 @@ Description:
 - Param: _prop
 - Param: _val
 
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 300](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L300)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 303](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L303)
 ## lesc_cullingProcess
 
 Type: function
@@ -1473,7 +1447,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 337](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L337)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 340](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L340)
 # LightRender.sqf
 
 ## LIGHT_RENDER_PRINT_ERROR_IF_NOT_INIT_ON_CUSTOM
