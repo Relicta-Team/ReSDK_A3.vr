@@ -507,7 +507,7 @@ gurps_calculateConstructionWeight = {
 
 //only for editor
 gurps_internal_calculateHP = {
-	params ["_class","_modelPath","_matClass"];
+	params ["_class","_modelPath","_matClass","_refWeight"];
 	if !isNull(core_cfg2model getvariable _modelPath) then {
 		_modelPath = core_cfg2model getvariable _modelPath;
 	};
@@ -524,6 +524,13 @@ gurps_internal_calculateHP = {
 	
 	private _wPer1000sqft = [_matClass,"",true,"getWeightCoefForCalcHP"] call oop_getFieldBaseValue;
 	private _weight = (_areaFt * _wPer1000sqft) / 1000;
+	private _wtx = [_class,"weight",true] call oop_getFieldBaseValue;
+	if not_equals(_wtx,0) then {
+		_weight = _wtx / 1000;//тонн
+	};
+	if !isNullVar(_refWeight) then {
+		refset(_refWeight,_weight);
+	};
 	private _hp = 100 * (_weight ^ (1/3));
 
 	(round _hp) max 1
