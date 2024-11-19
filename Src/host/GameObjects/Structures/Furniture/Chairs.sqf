@@ -19,7 +19,7 @@ class(IChair) extends(Furniture)
 
 	getterconst_func(getChairOffsetPos,vec3(0,0,0));
 	getterconst_func(getChairOffsetDir,0);
-
+	getterconst_func(getCoefAutoWeight,10);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -31,6 +31,7 @@ class(Wheelchair) extends(IChair)
 	var(desc,"Поговаривают если долго на ней сидеть, то можно подцепить вирус...");
 	getter_func(getChairOffsetPos,[0 arg -0.05 arg -0.65]);
 	getterconst_func(getChairOffsetDir,180);
+	getterconst_func(getCoefAutoWeight,40);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -55,12 +56,14 @@ class(OldGreenToiletBowl) extends(IChair)
 	getter_func(isMovable,false);
 	getter_func(getChairOffsetPos,[-0.0479994 arg -0.0999994 arg -1.1]);
 	getterconst_func(getChairOffsetDir,180);
+	getterconst_func(getCoefAutoWeight,20);
 endclass
 
 editor_attribute("EditorGenerated")
 class(BrownOldArmchair) extends(IChair)
 	var(model,"ml\ml_object_new\model_14_10\kreslo.p3d");
 	getter_func(getChairOffsetPos,[0 arg 0.3 arg -0.5]);
+	getterconst_func(getCoefAutoWeight,20);
 endclass
 
 

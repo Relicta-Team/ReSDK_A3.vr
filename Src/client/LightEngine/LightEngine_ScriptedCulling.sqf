@@ -6,6 +6,9 @@
 #include <..\..\host\struct.hpp>
 #include <..\..\host\thread.hpp>
 
+//#define LESC_ENABLE_CULLING
+
+
 #define LESC_USE_FAST_UPDATE
 
 //#define ENABLE_VISUAL_SPHERE_DEBUG
@@ -367,6 +370,10 @@ lesc_cullingProcess = {
 	lesc_cullCnt = _culled;
 };
 
+#ifndef LESC_ENABLE_CULLING
+__nocall_lesc_culling = {
+#endif
+
 #ifdef LESC_USE_FAST_UPDATE
 lesc_handle = startUpdate(lesc_cullingProcess,0.5);
 #else
@@ -374,3 +381,6 @@ _looped = {while {true}do{call lesc_cullingProcess}};
 lesc_thd = threadStart(threadNew(_looped));
 #endif
 
+#ifndef LESC_ENABLE_CULLING
+};
+#endif

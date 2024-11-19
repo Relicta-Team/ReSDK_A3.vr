@@ -68,7 +68,22 @@ class ScriptContext : IScript
 
 	public void Command(string args,StringBuilder output)
 	{
-		
+		if (args == "mem")
+		{
+			Process currentProcess = System.Diagnostics.Process.GetCurrentProcess();
+			output.Append("Proc:");
+			output.Append(currentProcess.ProcessName);
+			output.Append(",");
+			output.Append("WorkingSet64:");
+			output.Append(currentProcess.WorkingSet64 / 1024 / 1024);
+			output.Append(",");
+			output.Append("PagedSysMem64:");
+			output.Append(currentProcess.PagedSystemMemorySize64 / 1024/ 1024);
+			output.Append(",");
+			output.Append("PrivMemSize64:");
+			output.Append(currentProcess.PrivateMemorySize64 / 1024/ 1024);
+			return;
+		}
 	}
 
 	/// <summary>

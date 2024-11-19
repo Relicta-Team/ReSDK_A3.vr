@@ -14,6 +14,7 @@ class(SofaBase) extends(IChair)
 	var(material,"MatCloth");
 	var(dr,2);
 	getter_func(isMovable,true);
+	getterconst_func(getCoefAutoWeight,10);
 	//диваны
 endclass
 

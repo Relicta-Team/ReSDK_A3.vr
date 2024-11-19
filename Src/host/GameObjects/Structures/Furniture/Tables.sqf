@@ -16,6 +16,7 @@ class(TableBase) extends(Furniture)
 	var(material,"MatWood");
 	var(dr,2);
 	getter_func(isMovable,true);
+	getterconst_func(getCoefAutoWeight,30);
 endclass
 
 editor_attribute("EditorGenerated")

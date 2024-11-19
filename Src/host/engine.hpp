@@ -256,6 +256,13 @@ _ret = _this; \
 	#define createMesh(ctx) createSimpleObject (ctx)
 #endif
 
+//custom memobj
+#define mem_alloc() (createLocation ["cba_namespacedummy",[20,20,20],0,0])
+#define mem_set(ptr) (ptr)setvariable 
+#define mem_unset(ptr,val) (ptr)setvariable[val,null]
+#define mem_get(ptr,val) ((ptr)getvariable(val))
+#define mem_free(ptr) (deleteLocation (ptr))
+
 
 //string help
 #define stringEmpty ""

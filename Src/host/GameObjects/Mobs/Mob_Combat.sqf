@@ -104,6 +104,13 @@ func(getDataForApplyDamage)
 		MOD(_basicDamage, * 3);
 	};
 
+	//twohanded stronger
+	if !isNullReference(_attItem) then {
+		if callFuncParams(_caller,isHoldedTwoHands,_attItem) then {
+			rp_log("Twohanded attack",0);
+			modvar(_basicDamage) + 1;
+		};
+	};
 
 	if equals(_attCurCombatStyle,COMBAT_STYLE_WEAK) then {
 		_basicDamage = floor(_basicDamage / 3) max 0;
@@ -225,17 +232,12 @@ func(attackOtherObj)
 		callFuncParams(_caller,playSoundData,callFuncParams(_attWeapon,getAttackSoundData,_attAttackType));
 		callSelf(getDataForApplyDamage) params ["_basicDamage","_dType"];
 		
-		private _m = getVar(_attItem,material);
-		private _modifWeaponDamage = 1;
-		if (!isNullVar(_m) && !isNullReference(_m)) then {
-			_modifWeaponDamage = callFunc(_m,getDamageCoefOnAttack);
-		};
-		private _weapDamage = round(_basicDamage*_modifWeaponDamage) - getVar(_target,dr); //calculate this only before applydam
-		
-		callFuncParams(_target,applyDamage,_basicDamage arg _dType arg callSelf(getLastInteractEndPos) arg "attack"); //conv attack to -> _dir arg di_partDamage arg vec2(_attItem,_attWeapon)
+		private _basicDamageTarg = ifcheck(!isNullReference(_attItem),callFuncParams(_attItem,getEfficiencyOnAttack,_basicDamage arg _target),_basicDamage);
 
-		//weapon damage after attack
-		callFuncParams(_attItem,applyDamage,_weapDamage max 0 arg _dType arg callSelf(getLastInteractStartPos) arg "weap_attack");
+		private _targetDr = getVar(_target,dr);//calculate this only before applydam
+		callFuncParams(_target,applyDamage,_basicDamageTarg arg _dType arg callSelf(getLastInteractEndPos) arg "attack"); //conv attack to -> _dir arg di_partDamage arg vec2(_attItem,_attWeapon)
+		
+		callFuncParams(_attItem,onAttackedObject,_target arg _basicDamage arg _targetDr arg callSelf(getLastInteractStartPos) arg "weap_attack");
 
 		//callSelfParams(onDamageMessage,_target arg _attWeapMes arg _attackedZoneText arg _attRealTargetZone arg _postMessageEffect);
 	};// _delegate_damage

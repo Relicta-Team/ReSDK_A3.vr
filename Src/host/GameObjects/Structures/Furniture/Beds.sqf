@@ -43,6 +43,8 @@ class(BedBase) extends(IChair)
 	getter_func(getMainActionName,"Лечь");
 
 	getter_func(isMovable,true);
+
+	getterconst_func(getCoefAutoWeight,20);
 endclass
 
 editor_attribute("EditorGenerated")
