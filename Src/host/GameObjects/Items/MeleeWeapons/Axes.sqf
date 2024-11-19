@@ -33,6 +33,16 @@ endclass
 editor_attribute("InterfaceClass")
 class(AxeBase) extends(IMeleeWeapon)
 	var(material,"MatWood");
+
+	// func(getEfficiencyOnAttack)
+	// {
+	// 	objParams_2(_dam,_targ);
+	// 	private _effdam = super();
+	// 	if isTypeOf(callFunc(_targ,getMaterial),MatWood) then {
+	// 		_effdam = _effdam * 3;
+	// 	};
+	// 	_dam
+	// };
 endclass
 
 class(CaveAxe) extends(AxeBase)

@@ -237,7 +237,7 @@ class(GameObject) extends(ManagedObject)
 	" node_var
 	editor_attribute("EditorVisible" arg "custom_provider:weight")
 	editor_attribute("Tooltip" arg "Вес объекта в граммах или килограммах")
-	var(weight,gramm(1000));//вес в граммах
+	var(weight,0);//вес в граммах
 
 	//перетаскивание
 	getter_func(isMovable,false); //объект движим
@@ -1307,17 +1307,8 @@ region(throwing and bullets functions)
 		private _drObj = getSelf(dr);
 		callSelfParams(applyDamage,_dam arg _type arg _p arg "throw_hit");
 
-		private _matObj = getVar(_throwed,material);
-		private _thDamModif = 1;
-		if (!isNullVar(_matObj) && !isNullReference(_matObj)) then {
-			_thDamModif = callFunc(_matObj,getDamageCoefOnAttack);
-		};
-
-		if ([getVar(_throwed,ht)] call gurps_probSuccess) then {
-			private _weapDamage = round(_dam*_thDamModif) - _drObj;
-			//! THIS CAN BE THROWS ERROR BECAUSE _throwed.loc - is flyingObject
-			callFuncParams(_throwed,applyDamage,_weapDamage arg DAMAGE_TYPE_CRUSHING arg _p arg "throwed");
-		};
+		//! THIS CAN BE THROWS ERROR BECAUSE _throwed.loc - is flyingObject
+		callFuncParams(_throwed,onAttackedObject,this arg _dam arg _drObj arg _p arg "throwed");
 	};
 
 	//Тут обязательно нужно удалить пулю чтобы не вызывать утечек памяти
@@ -1875,6 +1866,33 @@ class(IDestructible) extends(GameObject)
 		//errorformat("IDestructible::applyDamage() - no affect damage: hp %1; max hp %2; Amount %3",_newhp arg _maxhp arg _amount);
 	};
 
+	func(onAttackedObject)
+	{
+		objParams_5(_targ,_dam,_targDr,_pos,_reason);
+		
+		private _weapDamage = _dam - _targDr;
+		private _mod = 0;
+		if isTypeOf(this,IMeleeWeapon) then {
+			_mod = 6;
+		};
+		if !([getSelf(ht) + _mod] call gurps_probSuccess) then {
+			//weapon damage after attack
+			callSelfParams(applyDamage,_weapDamage max 0 arg DAMAGE_TYPE_CRUSHING arg _pos arg _reason);
+		};
+	};
+
+	//получает эффективный урон против объекта
+	func(getEfficiencyOnAttack)
+	{
+		objParams_2(_dam,_targ);
+		private _mat = callFunc(_targ,getMaterial);
+		if !isNullReference(_mat) then {
+			private _modifWeaponDamage = callFunc(_mat,getDamageCoefOnAttack);
+			_dam = round(_dam*_modifWeaponDamage);
+		};
+		_dam
+	};
+
 	func(getHPStatusText)
 	{
 		objParams_1(_addClr);
@@ -1991,10 +2009,15 @@ class(IDestructible) extends(GameObject)
 		if callSelf(isItem) then {
 			_val = [this] call gurps_calculateItemHP;
 		} else {
-			private _weightTn = [this] call gurps_calculateConstructionWeight;
-			_val = [_weightTn] call gurps_calculateConstructionHP;
-			//lb to kg
-			setSelf(weight,_weightTn * 1000);
+			private _dwt = getSelf(weight);
+			if equals(_dwt,0) then {
+				private _weightTn = [this] call gurps_calculateConstructionWeight;
+				_val = [_weightTn] call gurps_calculateConstructionHP;
+				//lb to kg
+				setSelf(weight,_weightTn * 1000);
+			} else {
+				_val = [_dwt / 1000] call gurps_calculateConstructionHP;
+			};
 		};
 		setSelf(hp,_val);
 		setSelf(hpMax,_val);
