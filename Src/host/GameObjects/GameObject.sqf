@@ -1987,7 +1987,7 @@ class(IDestructible) extends(GameObject)
 		if (getSelf(hp)>0) then {
 			setSelf(hpMax,getSelf(hp));
 			if !callSelf(isItem) then {
-				setSelf(weight,[this] call gurps_calculateConstructionWeight);
+				setSelf(weight,([this] call gurps_calculateConstructionWeight) * 1000);
 			};
 		} else {
 			callSelf(generateObjectHP);

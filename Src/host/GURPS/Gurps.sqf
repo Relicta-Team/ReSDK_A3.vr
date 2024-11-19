@@ -503,8 +503,8 @@ gurps_calculateConstructionWeight = {
 	};
 	private _wPer1000sqft = callFunc(_mat,getWeightCoefForCalcHP);
 	private _cTnWeight = (_areaFt * _wPer1000sqft) / 1000;
-
-	round(_cTnWeight / callFunc(_obj,getCoefAutoWeight));
+	
+	_cTnWeight / callFunc(_obj,getCoefAutoWeight)
 };
 
 //only for editor
@@ -532,7 +532,7 @@ gurps_internal_calculateHP = {
 	// };
 
 
-	_weight = round(_weight / ([_class,"",true,"getCoefAutoWeight"] call oop_getFieldBaseValue));
+	_weight = _weight / ([_class,"",true,"getCoefAutoWeight"] call oop_getFieldBaseValue);
 
 
 	if !isNullVar(_refWeight) then {
