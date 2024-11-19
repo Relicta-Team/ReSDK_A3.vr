@@ -71,14 +71,14 @@ function(drawNames_internal_onFrame)
 									_matClass,
 									_refwt
 								] call gurps_internal_calculateHP;
-								_wt = refget(_refwt);
+								_wt = refget(_refwt) * 1000;
 							};
 							_ht = [_class,"ht",true] call oop_getFieldBaseValue;
 							_dr = [_class,"dr",true] call oop_getFieldBaseValue;
 							
 						};
 					};
-					_ext = format["mat:%1 (hp:%2;dr:%3;ht:%4;w_kg:%5)",_mat,_hp,_dr,_ht,_wt * 1000];
+					_ext = format["mat:%1 (hp:%2;dr:%3;ht:%4;w_kg:%5)",_mat,_hp,_dr,_ht,_wt];
 					_element pushBack [_ext,_clr];
 				};
 				drawNames_internal_list_collectedOjbects pushBack _element;
