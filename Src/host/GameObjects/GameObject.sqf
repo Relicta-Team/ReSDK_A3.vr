@@ -1870,11 +1870,14 @@ class(IDestructible) extends(GameObject)
 	{
 		objParams_5(_targ,_dam,_targDr,_pos,_reason);
 		
-		private _weapDamage = _dam - _targDr;
+		private _weapDamage = (getSelf(dr) + randInt(1,4)) max 0;
 		private _mod = 0;
-		if isTypeOf(this,IMeleeWeapon) then {
-			_mod = 6;
+		if (isTypeOf(this,IMeleeWeapon) || isTypeOf(this,IRangedWeapon)) then {
+			modvar(_mod) + 4;
 		};
+		
+		traceformat("onAttachedObject: %1 => %2 [%3;%4]:: %5 (mod: %6)",this arg _targ arg _dam arg _targDr arg _weapDamage arg _mod)
+
 		if !([getSelf(ht) + _mod] call gurps_probSuccess) then {
 			//weapon damage after attack
 			callSelfParams(applyDamage,_weapDamage max 0 arg DAMAGE_TYPE_CRUSHING arg _pos arg _reason);
