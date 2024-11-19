@@ -8571,30 +8571,104 @@ Replaced value:
 
 ```
 File: [host\profiling.hpp at line 25](../../../Src/host/profiling.hpp#L25)
-## PROFILE_TOSTRING(val)
+## PROFILE_DECLVAR
 
 Type: constant
 
+> Exists if **USE_SCRIPTED_PROFILING** defined
+
 Description: 
-- Param: val
+
 
 Replaced value:
 ```sqf
-#val
+private _##__RAND_UINT16__##__LINE__
 ```
-File: [host\profiling.hpp at line 27](../../../Src/host/profiling.hpp#L27)
+File: [host\profiling.hpp at line 33](../../../Src/host/profiling.hpp#L33)
 ## PROFILE
 
 Type: constant
 
+> Exists if **USE_SCRIPTED_PROFILING** defined
+
 Description: 
 
 
 Replaced value:
 ```sqf
-private PROFILE_DECLVAR = struct_newp(ProfileZone, PROFILE_TOSTRING(__FILE__) arg __LINE__);
+
 ```
-File: [host\profiling.hpp at line 27](../../../Src/host/profiling.hpp#L27)
+File: [host\profiling.hpp at line 35](../../../Src/host/profiling.hpp#L35)
+## PROFILE_NAME(x)
+
+Type: constant
+
+> Exists if **USE_SCRIPTED_PROFILING** defined
+
+Description: 
+- Param: x
+
+Replaced value:
+```sqf
+PROFILE_DECLVAR = struct_newp(ProfileZone, x arg (__FILE__) arg __LINE__);
+```
+File: [host\profiling.hpp at line 36](../../../Src/host/profiling.hpp#L36)
+## PROFILE_SCOPE
+
+Type: constant
+
+> Exists if **USE_SCRIPTED_PROFILING** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\profiling.hpp at line 38](../../../Src/host/profiling.hpp#L38)
+## PROFILE_SCOPE_NAME(x)
+
+Type: constant
+
+> Exists if **USE_SCRIPTED_PROFILING** defined
+
+Description: 
+- Param: x
+
+Replaced value:
+```sqf
+PROFILE_DECLVAR = struct_newp(ProfileZone, x arg (__FILE__) arg __LINE__ arg true);
+```
+File: [host\profiling.hpp at line 38](../../../Src/host/profiling.hpp#L38)
+## PROFILE_NAME(x)
+
+Type: constant
+
+> Exists if **USE_SCRIPTED_PROFILING** not defined
+
+Description: 
+- Param: x
+
+Replaced value:
+```sqf
+
+```
+File: [host\profiling.hpp at line 41](../../../Src/host/profiling.hpp#L41)
+## PROFILE_SCOPE_NAME(x)
+
+Type: constant
+
+> Exists if **USE_SCRIPTED_PROFILING** not defined
+
+Description: 
+- Param: x
+
+Replaced value:
+```sqf
+
+```
+File: [host\profiling.hpp at line 43](../../../Src/host/profiling.hpp#L43)
 ## ASP_MESSAGE(mes)
 
 Type: constant
@@ -8608,7 +8682,7 @@ Replaced value:
 ```sqf
 profilerLog (mes);
 ```
-File: [host\profiling.hpp at line 42](../../../Src/host/profiling.hpp#L42)
+File: [host\profiling.hpp at line 52](../../../Src/host/profiling.hpp#L52)
 ## ASP_REGION(name)
 
 Type: constant
@@ -8622,7 +8696,7 @@ Replaced value:
 ```sqf
 private _ascp__ = createProfileScope (name);
 ```
-File: [host\profiling.hpp at line 44](../../../Src/host/profiling.hpp#L44)
+File: [host\profiling.hpp at line 54](../../../Src/host/profiling.hpp#L54)
 ## ASP_BEGIN_SCOPE(name)
 
 Type: constant
@@ -8636,7 +8710,7 @@ Replaced value:
 ```sqf
 private _asR__ = createProfileScope (name);
 ```
-File: [host\profiling.hpp at line 47](../../../Src/host/profiling.hpp#L47)
+File: [host\profiling.hpp at line 57](../../../Src/host/profiling.hpp#L57)
 ## ASP_END_SCOPE(name)
 
 Type: constant
@@ -8650,7 +8724,7 @@ Replaced value:
 ```sqf
 _asR__ = 0;
 ```
-File: [host\profiling.hpp at line 48](../../../Src/host/profiling.hpp#L48)
+File: [host\profiling.hpp at line 58](../../../Src/host/profiling.hpp#L58)
 ## ASP_MESSAGE(mes)
 
 Type: constant
@@ -8664,7 +8738,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\profiling.hpp at line 50](../../../Src/host/profiling.hpp#L50)
+File: [host\profiling.hpp at line 60](../../../Src/host/profiling.hpp#L60)
 ## ASP_REGION(name)
 
 Type: constant
@@ -8678,7 +8752,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\profiling.hpp at line 51](../../../Src/host/profiling.hpp#L51)
+File: [host\profiling.hpp at line 61](../../../Src/host/profiling.hpp#L61)
 ## ASP_BEGIN_SCOPE(name)
 
 Type: constant
@@ -8692,7 +8766,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\profiling.hpp at line 52](../../../Src/host/profiling.hpp#L52)
+File: [host\profiling.hpp at line 62](../../../Src/host/profiling.hpp#L62)
 ## ASP_END_SCOPE(name)
 
 Type: constant
@@ -8706,7 +8780,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\profiling.hpp at line 53](../../../Src/host/profiling.hpp#L53)
+File: [host\profiling.hpp at line 63](../../../Src/host/profiling.hpp#L63)
 # struct.hpp
 
 ## STRUCT_API_VERSION

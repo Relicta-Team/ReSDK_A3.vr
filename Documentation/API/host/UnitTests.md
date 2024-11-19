@@ -670,6 +670,18 @@ Description:
 
 
 File: [host\UnitTests\TestsCollection\math.sqf at line 251](../../../Src/host/UnitTests/TestsCollection/math.sqf#L251)
+# structs.sqf
+
+## scripted_profile_test_function_example
+
+Type: function
+
+> Exists if **USE_SCRIPTED_PROFILING** defined
+
+Description: 
+
+
+File: [host\UnitTests\TestsCollection\structs.sqf at line 499](../../../Src/host/UnitTests/TestsCollection/structs.sqf#L499)
 # header_test.h
 
 ## MACRO_TEST

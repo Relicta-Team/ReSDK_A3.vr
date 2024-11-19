@@ -1840,15 +1840,27 @@ Description: создание нового пула для безопасных 
 File: [host\CommonComponents\Structs\Pointers.sqf at line 11](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L11)
 # Profiling.sqf
 
-## prof_map_zones
+## profiler_getSystemContainer
 
-Type: Variable
+Type: function
 
-Description: PROFILING
+Description: 
 
 
-Initial value:
-```sqf
-createHashMap
-```
-File: [host\CommonComponents\Structs\Profiling.sqf at line 10](../../../Src/host/CommonComponents/Structs/Profiling.sqf#L10)
+File: [host\CommonComponents\Structs\Profiling.sqf at line 52](../../../Src/host/CommonComponents/Structs/Profiling.sqf#L52)
+## profiler_getResults
+
+Type: function
+
+Description: 
+- Param: _printOnConsole (optional, default false)
+
+File: [host\CommonComponents\Structs\Profiling.sqf at line 56](../../../Src/host/CommonComponents/Structs/Profiling.sqf#L56)
+## profiler_clearResults
+
+Type: function
+
+Description: 
+
+
+File: [host\CommonComponents\Structs\Profiling.sqf at line 74](../../../Src/host/CommonComponents/Structs/Profiling.sqf#L74)
