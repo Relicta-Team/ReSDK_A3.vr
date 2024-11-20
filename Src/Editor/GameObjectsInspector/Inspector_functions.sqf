@@ -38,6 +38,8 @@ function(inspector_init)
 		{
 			[_x] call golib_om_internal_handleTransformEvent;
 		} foreach _list;
+
+		traceformat("[preupdate inspect]: add unit to selection: %1",get3denactionstate "AddUnitToSel");
 		
 		call inspector_menuLoad;
 	};
