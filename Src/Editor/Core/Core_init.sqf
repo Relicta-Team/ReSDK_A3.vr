@@ -78,7 +78,18 @@ removeAll3DENEventHandlers "OnEditableEntityRemoved";
 
 set3DENSelected [];
 
-add3DENEventHandler ["OnSelectionChange",{["onSelectionChange",[get3DENSelected "" select 0]] call Core_invokeEvent}];
+core_internal_lastSelFrame = 0;
+core_internal_select_nframe = {
+	["onSelectionChange",[get3DENSelected "" select 0]] call Core_invokeEvent;
+};
+add3DENEventHandler ["OnSelectionChange",{
+	//При множественном выделении хандлер вызывается один раз для каждого объекта в одном кадре
+	//Здесь мы группируем эти выделения чтобы избежать проблемы с падением производительности перезагрузки инспектора
+	if (core_internal_lastSelFrame != diag_frameNo) then {
+		core_internal_lastSelFrame = diag_frameNo;
+		nextFrame(core_internal_select_nframe);
+	};
+}];
 add3DENEventHandler ["OnMissionSave",{["onSaving",[false]] call Core_invokeEvent}];
 add3DENEventHandler ["OnMissionAutosave",{["onSaving",[true]] call Core_invokeEvent}];
 add3DENEventHandler ["onUndo",{["onUndo",[]] call Core_invokeEvent}];
@@ -317,6 +328,7 @@ function(Core_getStackTrace)
 {
 	params [["_returnAsString",true]];
 	private _stack = diag_stackTrace;
+	_stack deleteAt [-1];
 	private _stackList = (_stack apply {_x call scriptError_internal_handleStack});
 	if (_returnAsString) then {
 		(_stackList joinString endl)
