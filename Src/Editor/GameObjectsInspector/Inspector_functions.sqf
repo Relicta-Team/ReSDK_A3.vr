@@ -39,7 +39,7 @@ function(inspector_init)
 			[_x] call golib_om_internal_handleTransformEvent;
 		} foreach _list;
 
-		traceformat("[preupdate inspect]: add unit to selection: %1",get3denactionstate "AddUnitToSel");
+		traceformat("[preupdate inspect]: FRAME %1; cnt: %2",diag_frameNo arg count(get3DENSelected "" select 0));
 		
 		call inspector_menuLoad;
 	};
@@ -182,7 +182,7 @@ function(inspector_menuLoad)
 	inspector_allSelectedObjects = [];
 	_isWorldContext = count _objList > 0 && {!((_objList select 0) call golib_isVirtualObject)};
 	
-	["Inspector load %1, frame: %2 (world context - %3)%4CTX:%5",tickTime,diag_frameNo,_isWorldContext,endl,diag_stacktrace apply {_x select [0,3] joinString " + "} joinString (endl+"    ")] call printTrace;
+	//["Inspector load %1, frame: %2 (world context - %3)%4CTX:%5",tickTime,diag_frameNo,_isWorldContext,endl,diag_stacktrace apply {_x select [0,3] joinString " + "} joinString (endl+"    ")] call printTrace;
 
 	private _ctgInspectorMain = "inspector_ctg_bind" call widget_getBind;
 	if isNullReference(_ctgInspectorMain) exitWith {};
