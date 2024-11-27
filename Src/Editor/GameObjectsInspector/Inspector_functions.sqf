@@ -994,21 +994,28 @@ function(inspector_menuLoad)
 			_wid setVariable ["___isMultiselectProp",false];
 			_wid setvariable ["___visibleName",_memberVisibleName];
 			_wid setvariable ["___providedClass",_type];
-			_wid ctrlAddEventHandler ["MouseButtonUp",{
-				params ["_w","_b"];
-				if (_b==MOUSE_RIGHT) then {
-					[
-						_w getvariable "_memberName",
-						_w getvariable "___isMultiselectProp",
-						inspector_allSelectedObjects,
-						_w getvariable "___visibleName",
-						_w getvariable "___providedClass"
-					] call inspector_onPressPropertyCtxMenu;
-				};
-				if (_b==MOUSE_LEFT) then {
-					[format["Нажмите ПКМ по свойству ""%1"" для работы со значением",_w getvariable "___visibleName"]] call showInfo;
-				};
-			}];
+			if (!_isVirtualObject) then {
+				_wid ctrlAddEventHandler ["MouseButtonUp",{
+					params ["_w","_b"];
+					if (_b==MOUSE_RIGHT) then {
+						[
+							_w getvariable "_memberName",
+							_w getvariable "___isMultiselectProp",
+							inspector_allSelectedObjects,
+							_w getvariable "___visibleName",
+							_w getvariable "___providedClass"
+						] call inspector_onPressPropertyCtxMenu;
+					};
+					if (_b==MOUSE_LEFT) then {
+						[format["Нажмите ПКМ по свойству ""%1"" для работы со значением",_w getvariable "___visibleName"]] call showInfo;
+					};
+				}];
+			} else {
+				_wid ctrlAddEventHandler ["MouseButtonUp",{
+					["Виртуальные объекты в инспекторе не поддерживают контекстное меню выбора"] call showWarning;
+				}];
+			};
+			
 			_wid ctrlAddEventHandler ["MouseEnter",{(_this select 0) setBackgroundColor [0.4,0.4,0.4,1];}];
 			_wid ctrlAddEventHandler ["MouseExit",{
 				(_this select 0) setBackgroundColor 
@@ -1340,7 +1347,8 @@ function(inspector_internal_onPressCtx)
 	invokeAfterDelayParams({(_this select 0) call inspector_processReselectQuery; _this set [1 arg true]},0.1,_mtxval);
 	startAsyncInvoke
 		{(_this select 1) && ((inputMouse 0) == 0 && (inputMouse 1) == 0)},
-		{invokeAfterDelay({call loadingScreen_stop},0.1);["mps release %1 %2",inputMouse 0,inputMouse 1] call printTrace},_mtxval,10,
+		//!это не ошибка. необходимо сделать фиктивную задержку чтобы "зарелизить" инпут
+		{invokeAfterDelay({call loadingScreen_stop},0);["mps release %1 %2",inputMouse 0,inputMouse 1] call printTrace},_mtxval,10,
 		{["Fatal error on restore mouse state (inspector::onPressPropertyCtxMenu)"] call showError}
 	endAsyncInvoke
 }
