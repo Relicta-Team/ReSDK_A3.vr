@@ -1289,30 +1289,25 @@ function(inspector_onPressPropertyCtxMenu)
 {
 	params ["_propName","_isMultiprop","_objList","_visName","_visClass"];
 
-	private _ctxParams = [_visClass,_propName,_isMultiprop];
+	private _ctxParams = [_visClass,_propName,_isMultiprop,_visName];
 	/*
 		все с этим свойством
 		все с этим значением
 		все с этим значением включая по умолчанию
 	*/
 	
-	#define selprc(flags) \
-		(call contextMenu_getContextParams) params ["_cls","_memb","_isMulProp"]; \
-		_p = ["property",hashMapNewArgs [["class",_cls],["property",_memb]],flags,_isMulProp]; \
-		false call MouseAreaSetEnable; \
-		invokeAfterDelayParams(inspector_processReselectQuery,0.1,_p); \
-		invokeAfterDelayParams({true call MouseAreaSetEnable},0.15);
+	#define selprc(flags) nextFrameParams(inspector_internal_onPressCtx,[call contextMenu_getContextParams arg flags]);
 	
 	private _stackMenu = [
 		["Выделение",[
 			["Свойство",[
 				[format["Выдел. с %1",_visName],{selprc("sel")},null,format["Выбирает выделенные объекты имеющие свойство %1",_visName]],
-				[format["Выдел. %2 с %1",_visName,_visClass],{selprc("sel|classof")},null,format["Выбирает выделенные объекты типа %2 со свойством %1",_visName,_visClass]],
-				[format["Выдел. %2 и дочерние с %1",_visName,_visClass],{selprc("sel|typeof")},null,format["Выбирает выделенные объекты типа %2 и все дочерние со свойством %1",_visName,_visClass]],
+				[format["Выдел. типы с %1",_visName],{selprc("sel|classof")},null,format["Выбирает выделенные объекты типа %2 со свойством %1",_visName,_visClass]],
+				[format["Выдел. типы и их дочерние с %1",_visName],{selprc("sel|typeof")},null,format["Выбирает выделенные объекты типа %2 и все дочерние со свойством %1",_visName,_visClass]],
 				
 				[format["Все с %1",_visName],{selprc("all")},null,format["Выбирает все объекты в сцене имеющие свойство %1",_visName]],
-				[format["Все %2 с %1",_visName,_visClass],{selprc("all|classof")},null,format["Выбирает все объекты в сцене типа %2 со свойством %1",_visName,_visClass]],
-				[format["Все %2 и дочерние с %1",_visName,_visClass],{selprc("all|typeof")},null,format["Выбирает все объекты в сцене типа %2 и все дочерние со свойством %1",_visName,_visClass]]
+				[format["Все типы с %1",_visName],{selprc("all|classof")},null,format["Выбирает все объекты в сцене типа %2 со свойством %1",_visName,_visClass]],
+				[format["Все типы и их дочерние с %1",_visName],{selprc("all|typeof")},null,format["Выбирает все объекты в сцене типа %2 и все дочерние со свойством %1",_visName,_visClass]]
 			],null,"Выделение объектов имеющих данное свойство"],
 			["Значение",[
 				
@@ -1331,6 +1326,23 @@ function(inspector_onPressPropertyCtxMenu)
 		_ctxParams
 	];
 	nextFrameParams(contextMenu_create,_par);
+}
+
+function(inspector_internal_onPressCtx)
+{
+	//пришлось немного накостылить чтобы исправить зажатую мышь при выборе класса из winapi tree
+	params ["_ctxMenu","_flags"];
+	_ctxMenu params ["_cls","_memb","_isMulProp","_visName"];
+	_p = ["property",hashMapNewArgs [["class",_cls],["property",_memb],["visibleName",_visName]],_flags,_isMulProp];
+	[displayNull] call loadingScreen_start;
+	[50,"Запрос объектов"] call loadingScreen_setProgress;
+	_mtxval = [_p,false];
+	invokeAfterDelayParams({(_this select 0) call inspector_processReselectQuery; _this set [1 arg true]},0.1,_mtxval);
+	startAsyncInvoke
+		{(_this select 1) && ((inputMouse 0) == 0 && (inputMouse 1) == 0)},
+		{invokeAfterDelay({call loadingScreen_stop},0.1);["mps release %1 %2",inputMouse 0,inputMouse 1] call printTrace},_mtxval,10,
+		{["Fatal error on restore mouse state (inspector::onPressPropertyCtxMenu)"] call showError}
+	endAsyncInvoke
 }
 
 function(inspector_processReselectQuery)
@@ -1381,7 +1393,11 @@ function(inspector_processReselectQuery)
 		if (count _classes <= 1) exitWith {};
 		
 		private _r = refcreate(0);
-		if ([_r,"Выбор типа","Выберите основной тип для запроса объектов",
+		private _descText = "Выберите основной тип для запроса объектов";
+		if (_isPropCheck) then {
+			_descText = format["Выберите основной тип для запроса объектов со свойством %1",_paramMap get "visibleName"];
+		};
+		if ([_r,"Выбор типа",_descText,
 			["GameObject",{_this in _classes}] call widget_winapi_getTreeObject
 		] call widget_winapi_openTreeView) then {
 			_paramMap set ["class",refget(_r)];
