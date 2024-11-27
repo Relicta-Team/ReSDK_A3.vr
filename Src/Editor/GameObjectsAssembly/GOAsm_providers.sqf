@@ -357,7 +357,10 @@ function(goasm_attributes_handleProvider_size)
 
 function(goasm_attributes_handleProvider_icon)
 {
-	[PICTURE,[30+10,_optimalSizeH * 4],_offsetMemX-10,false] call _createElement;
+	[BACKGROUND,[30,_optimalSizeH * 4],_offsetMemX,false] call _createElement;
+	_wid setBackgroundColor [0.1,0.1,0.1,0.2];
+
+	[PICTURE,[30,_optimalSizeH * 4],_offsetMemX,false] call _createElement;
 	_picture = _wid;
 	{
 		_props = _data get "customProps";

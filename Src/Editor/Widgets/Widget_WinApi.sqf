@@ -8,6 +8,11 @@ init_function(widget_winapi_init)
 	widget_winapi_lastpressTree = 0;
 }
 
+function(widget_winapi_resetLockTreeView)
+{
+	widget_winapi_lastpressTree = 0;
+}
+
 function(widget_winapi_openTextBox)
 {
 	params ["_refOut",["_header","Ввод текста"],["_desc","Введите текст"],["_baseText",""],["_canMultiLine",true],["_maxlen",1024*2]];

@@ -70,7 +70,6 @@ call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
 #undef STRUCT_INIT_FUNCTIONS
 //структурная библиотека
 #include <..\host\CommonComponents\StructLib.sqf>
-#include <GameObjectsAssembly\GOAsm_batch_structs.sqf>
 //дефайны для лута
 #include <..\host\LootSystem\LootSystem_structs.sqf>
 //algorithm
