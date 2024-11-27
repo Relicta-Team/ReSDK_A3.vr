@@ -31,7 +31,7 @@ function(systools_imageProcessor)
 	};
 
 	[ 
-	"Вы уверены? Процесс может занять какое-то время. Для отмены генерации нажмите ПКМ", 
+	"Вы уверены? Процесс может занять какое-то время. Для отмены генерации зажмите ПКМ", 
 	"Генератор иконок", 
 	[ 
 	"Запустить", 
@@ -397,20 +397,19 @@ function(systools_internal_imageProcessor)
 				["saved icon: %1 (%2/%3) [bbx:%4]",_fileName, _forEachIndex,(count _modelList) - 1,_size] call printLog;
 			};
 			sleep 0.01;
-
-			if (inputMouse 1 > 0) exitWith {
-				["User abort catched"] call printError;
-			};
 	
 			if (debug_helper_bbx) then {
 				sleep 1.5;
 			};
 	
-	
 			//--- Delete the object
 			_object setpos [10,10,10];
 			deletevehicle _object;
 			_sphere hideobject true;
+
+			if (inputMouse 1 > 0) exitWith {
+				["User abort catched"] call printError;
+			};
 			
 		} foreach _modelList;
 	};
@@ -522,6 +521,17 @@ function(systools_imageProcessor_convertAndSave)
 		[_paltopac,false,""""+_nogreenOutput+"\"+_x+""" """+_fullPathPaaTemp+""""] call file_openReturn;
 		_newpath = _pathGeneratedIcons + _newname;
 		if ([_newpath,true] call file_exists) then {
+
+			if ([_newpath,true] call file_isLocked) then {
+				["file locked - %1; awaiting unlock",_newpath] call printWarning;
+				while {[_newpath,true] call file_isLocked} do {
+					["unlock attempt..."] call printTrace;
+					call file_clearFileLock;
+					sleep 0.5;
+				};
+				["file unlocked - %1",_newpath] call printLog;
+			};
+
 			if !([_newpath] call file_delete) then {
 				["CANNOT DELETE FILE %1",_newpath] call printError;
 			} else {
@@ -537,6 +547,29 @@ function(systools_imageProcessor_convertAndSave)
 
 	["DONE!"] call printLog;
 	call loadingScreen_stop;
+
+	if (["Очистить папку с сгенерированными исходниками иконок?"+endl+
+		(format["При подтверждении будет удалена папка ""%1"" со всем содержимым.",_generatedPath]) +
+		endl+endl+"Удалить папку?"] call messageBoxRet) then {
+			_unsafeDeleteExternalFolder = {
+				params ["_path"];
+				if ([_path,false] call folder_exists) then {
+					["FileManager","FolderDelete",[_path]] call rescript_callCommandVoid;
+					true
+				} else {false};
+			};
+			["Delete generated icons folder: %1 -> result: %2",_generatedPath,[_generatedPath] call _unsafeDeleteExternalFolder] call printLog;
+	} else {
+		if (["Вы хотите открыть папку с исходниками сгенерированных png иконок?"] call messageBoxRet) then {
+			// ["FileManager","Open",[ 
+			// 	"explorer.exe",
+			// 	[_generatedPath,"""","~"] call stringReplace,
+			// 	"~"
+			// ],true] call rescript_callCommand;
+
+			["WorkspaceHelper","openfolder",[_generatedPath,0,"with_select"],true] call rescript_callCommand;
+		};
+	};	
 
 	["Процедура успешно завершена. Перезапустите редактор для обновления иконок"] call messageBox;
 }
