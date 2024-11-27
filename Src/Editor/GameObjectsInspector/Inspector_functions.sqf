@@ -991,6 +991,29 @@ function(inspector_menuLoad)
 			[_wid,format["<t align='left'>%1</t>",_memberVisibleName]] call widgetSetText;
 			_wid setVariable ["_memberName",_memberName];
 			_wid setVariable ["_editorContext",_editorContext];
+			_wid setVariable ["___isMultiselectProp",false];
+			_wid setvariable ["___visibleName",_memberVisibleName];
+			_wid setvariable ["___providedClass",_type];
+			_wid ctrlAddEventHandler ["MouseButtonUp",{
+				params ["_w","_b"];
+				if (_b==MOUSE_RIGHT) then {
+					[
+						_w getvariable "_memberName",
+						_w getvariable "___isMultiselectProp",
+						inspector_allSelectedObjects,
+						_w getvariable "___visibleName",
+						_w getvariable "___providedClass"
+					] call inspector_onPressPropertyCtxMenu;
+				};
+				if (_b==MOUSE_LEFT) then {
+					[format["Нажмите ПКМ по свойству ""%1"" для работы со значением",_w getvariable "___visibleName"]] call showInfo;
+				};
+			}];
+			_wid ctrlAddEventHandler ["MouseEnter",{(_this select 0) setBackgroundColor [0.4,0.4,0.4,1];}];
+			_wid ctrlAddEventHandler ["MouseExit",{
+				(_this select 0) setBackgroundColor 
+					((_this select 0) getvariable ["___bufferedbackcolor",[0,0,0,0]]);
+			}];
 			
 			_wid ctrlSetTooltip _tooltip;
 
@@ -998,6 +1021,7 @@ function(inspector_menuLoad)
 				_tooltip = "Предоставлено классом " + _type + "\n\n" + _tooltip;
 				_wid ctrlSetTooltip _tooltip;
 				_wid setBackgroundColor inspector_const_providedBatchedPropColor;
+				_wid setVariable ["___bufferedbackcolor",inspector_const_providedBatchedPropColor];
 			};
 
 			_registeredFields set [tolower _memberName,[_wid,1,_memberVisibleName]];
@@ -1030,6 +1054,7 @@ function(inspector_menuLoad)
 		if (_ctr__ > 1) then {
 			[_wid__,format["<t align='left'>%1 (x%2)</t>",_memvisname__,_ctr__]] call widgetSetText;
 			_wid__ ctrlSetTooltip (format["Объектов с этим свойством: %1\n%2",_ctr__,ctrltooltip _wid__]);
+			_wid__ setvariable ["___isMultiselectProp",true];
 		};
 	} foreach _registeredFields;
 
@@ -1257,4 +1282,149 @@ function(inspector_menuLoad)
 		};
 		[_data getOrDefault ["code_onInit",""],_objWorld] call golib_code_open;		
 	} call _setOnPressCode;
+}
+
+//открытие контекстного меню работы со свойствами
+function(inspector_onPressPropertyCtxMenu)
+{
+	params ["_propName","_isMultiprop","_objList","_visName","_visClass"];
+
+	private _ctxParams = [_visClass,_propName,_isMultiprop];
+	/*
+		все с этим свойством
+		все с этим значением
+		все с этим значением включая по умолчанию
+	*/
+	
+	#define selprc(flags) \
+		(call contextMenu_getContextParams) params ["_cls","_memb","_isMulProp"]; \
+		_p = ["property",hashMapNewArgs [["class",_cls],["property",_memb]],flags,_isMulProp]; \
+		false call MouseAreaSetEnable; \
+		invokeAfterDelayParams(inspector_processReselectQuery,0.1,_p); \
+		invokeAfterDelayParams({true call MouseAreaSetEnable},0.15);
+	
+	private _stackMenu = [
+		["Выделение",[
+			["Свойство",[
+				[format["Выдел. с %1",_visName],{selprc("sel")},null,format["Выбирает выделенные объекты имеющие свойство %1",_visName]],
+				[format["Выдел. %2 с %1",_visName,_visClass],{selprc("sel|classof")},null,format["Выбирает выделенные объекты типа %2 со свойством %1",_visName,_visClass]],
+				[format["Выдел. %2 и дочерние с %1",_visName,_visClass],{selprc("sel|typeof")},null,format["Выбирает выделенные объекты типа %2 и все дочерние со свойством %1",_visName,_visClass]],
+				
+				[format["Все с %1",_visName],{selprc("all")},null,format["Выбирает все объекты в сцене имеющие свойство %1",_visName]],
+				[format["Все %2 с %1",_visName,_visClass],{selprc("all|classof")},null,format["Выбирает все объекты в сцене типа %2 со свойством %1",_visName,_visClass]],
+				[format["Все %2 и дочерние с %1",_visName,_visClass],{selprc("all|typeof")},null,format["Выбирает все объекты в сцене типа %2 и все дочерние со свойством %1",_visName,_visClass]]
+			],null,"Выделение объектов имеющих данное свойство"],
+			["Значение",[
+				
+			],null,"Выделение объектов на основе значений"]
+		],null,format["Специализированный выбор объектов, владеющих свойством ""%1""",_visName]],
+		["Сброс",[
+			["Все с этим значением",{}]
+		],null,format["Сброс значения свойства ""%1"" объектов",_visName]]
+	];
+	#undef selprc
+
+	_stackMenu pushBack ["Отмена",{}];
+	private _par = [
+		_stackMenu,
+		call mouseGetPosition,
+		_ctxParams
+	];
+	nextFrameParams(contextMenu_create,_par);
+}
+
+function(inspector_processReselectQuery)
+{
+	params ["_selectType","_paramMap","_flags","_isMulProp"];
+	
+	private _doExit = false;
+	
+	//_selectType == "property"
+	
+	/*
+		flags:
+		all - select from all scene objects
+		sel - select from selected objects
+		classof - select if class equal to _paramMap["class"]
+		typeof - select if class istypeof _paramMap["class"]
+	*/
+	private _flagSet = hashSet_create((tolower _flags) splitString "| ");
+	private _objList = [];
+	["%1: type: %4;flags: %2; params: %3",__FUNC__,_flags,_paramMap,_selectType] call printTrace;
+	
+	if ("all" in _flagSet) then {
+		hashSet_rem(_flagSet,"all");
+		_objList = all3DENEntities select 0;
+	};
+	if ("sel" in _flagSet) then {
+		hashSet_rem(_flagSet,"sel");
+		_objList = inspector_allSelectedObjects;	
+	};
+	if (count _objList == 0) exitWith {
+		["Выбор невозможен - Список объектов пуст"] call showWarning;
+	};
+	
+	private _isPropCheck = _selectType == "property";
+
+	if (_isMulProp) then {
+		private _classes = hashSet_createEmpty();
+		{
+			if ([_x] call golib_hasHashData) then {
+				if (_isPropCheck) then {
+					//у типа нет такого свойства
+					if !((_paramMap get "property") in ([_x] call golib_getClassAllFields)) then {continue};
+				};
+				
+				hashSet_add(_classes,(([_x] call golib_getClassName)));
+			};
+		} foreach _objList;
+		if (count _classes <= 1) exitWith {};
+		
+		private _r = refcreate(0);
+		if ([_r,"Выбор типа","Выберите основной тип для запроса объектов",
+			["GameObject",{_this in _classes}] call widget_winapi_getTreeObject
+		] call widget_winapi_openTreeView) then {
+			_paramMap set ["class",refget(_r)];
+		} else {
+			_doExit = true;
+		};
+		
+	};
+
+	if (_doExit) exitWith {};
+
+
+	private _newSelected = [];
+	private _thisClass = _paramMap get "class";
+	["%1: fact class checked %2",__FUNC__,_thisClass] call printTrace;
+
+	private _canAdd = true;
+	{
+		if !([_x] call golib_hasHashData) then {continue};
+		_canAdd = true;
+
+		if ("classof" in _flagSet) then {
+			//другой класс
+			if (([_x] call golib_getClassName)!=_thisClass) then {continue};
+		};
+		if ("typeof" in _flagSet) then {
+			//не наследник _thisClass
+			if !([
+				[_x] call golib_getClassName, //дочерний тип
+				_thisClass //родительский тип
+			] call oop_isTypeOf) then {continue};
+		};
+		if (_isPropCheck) then {
+			//у типа нет такого свойства
+			if !((_paramMap get "property") in ([_x] call golib_getClassAllFields)) then {continue};
+		};
+
+		if (_canAdd) then {
+			_newSelected pushBack _x;
+		};
+	} foreach _objList;
+
+	["%1: %2 objects selected",__FUNC__,count _newSelected] call printTrace;
+
+	[_newSelected,true] call golib_setSelectedObjects;
 }
