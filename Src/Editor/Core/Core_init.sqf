@@ -181,6 +181,27 @@ function(Core_initObjects)
 	}] call Core_addEventHandler;
 }
 
+function(Core_getCliArgs)
+{
+	private _cli = (["ScriptContext","getcliargs",null,true] call rescript_callCommand) splitString endl;
+	private _map = createHashMap;
+	_map set ["application_path",_cli deleteAt 0];
+	forceUnicode 0;
+	{
+		if ([_x,"-"] call stringStartWith) then {
+			private _param = _x select [1];
+			if ("=" in _x) then {
+				_key = _param select [0,_param find "="];
+				_val = _param select [(_param find "=")+1];
+				_map set [_key,_val];
+			} else {
+				_map set [_param,""];
+			};
+		};
+	} foreach _cli;
+	_map;
+}
+
 function(Core_initObjectEvents)
 {
 	params ["_obj",["_callOnCreate",false]];

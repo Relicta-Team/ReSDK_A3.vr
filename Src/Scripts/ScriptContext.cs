@@ -58,7 +58,7 @@ class ScriptContext : IScript
 
 	public void Init()
 	{
-		
+
 	}
 
 	public void Destroy()
@@ -83,6 +83,15 @@ class ScriptContext : IScript
 			output.Append("PrivMemSize64:");
 			output.Append(currentProcess.PrivateMemorySize64 / 1024/ 1024);
 			return;
+		}
+		if (args == "getcliargs")
+		{
+			string data = "";
+			foreach (string arg in System.Environment.GetCommandLineArgs())
+			{
+				data += arg + Environment.NewLine;
+			}
+			output.Append(EncodingToRV(data));
 		}
 	}
 

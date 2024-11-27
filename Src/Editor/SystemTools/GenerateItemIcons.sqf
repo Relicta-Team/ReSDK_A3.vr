@@ -31,7 +31,7 @@ function(systools_imageProcessor)
 	};
 
 	[ 
-	"Вы уверены? Процесс может занять какое-то время", 
+	"Вы уверены? Процесс может занять какое-то время. Для отмены генерации нажмите ПКМ", 
 	"Генератор иконок", 
 	[ 
 	"Запустить", 
@@ -222,7 +222,7 @@ function(systools_internal_imageProcessor)
 				_path = "Resources\ui\inventory\items\gen\" +
 				(_x splitString "/\." joinString "+") + ".paa";
 						
-				if !([_path] call file_exists) then {
+				if ([_path] call file_exists) then {
 					_modelList set [_foreachindex,objNUll];
 				};
 			} foreach _modelList;
@@ -397,6 +397,10 @@ function(systools_internal_imageProcessor)
 				["saved icon: %1 (%2/%3) [bbx:%4]",_fileName, _forEachIndex,(count _modelList) - 1,_size] call printLog;
 			};
 			sleep 0.01;
+
+			if (inputMouse 1 > 0) exitWith {
+				["User abort catched"] call printError;
+			};
 	
 			if (debug_helper_bbx) then {
 				sleep 1.5;
@@ -450,6 +454,12 @@ function(systools_imageProcessor_convertAndSave)
 
 	//<PROFILEDIR>\Screenshots\ <--- screenshots path
 	private _screenshotsPath = (getMissionPath "") + "..\..\Screenshots\";
+	private _customProfiles = call Core_getCliArgs get "profiles";
+	
+	if !isNullVar(_customProfiles) then {
+		_screenshotsPath = format["%1\Users\%2\Screenshots\",_customProfiles,profileName];
+	};
+
 	private _generatedPath = _screenshotsPath + systools_imageProcessor_lastUsedFolder;
 	private _outputFolder = _screenshotsPath + "output";
 	
@@ -484,6 +494,8 @@ function(systools_imageProcessor_convertAndSave)
 			sleep 5;
 		};
 		[10,"Запуск очистки фона..."] call loadingScreen_setProgress;
+		["Generating path: %1",_generatedPath] call printLog;
+
 		private _result = [_imgRemoverGreenScreenExe,false,""""+_generatedPath+""" 600"] call file_openReturn;
 		["Icon converter result: %1",_result] call printLog;
 		if (_result != 0) exitwith {
