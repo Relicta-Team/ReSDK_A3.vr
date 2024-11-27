@@ -1297,31 +1297,36 @@ function(inspector_onPressPropertyCtxMenu)
 	params ["_propName","_isMultiprop","_objList","_visName","_visClass"];
 
 	private _ctxParams = [_visClass,_propName,_isMultiprop,_visName];
-	/*
-		все с этим свойством
-		все с этим значением
-		все с этим значением включая по умолчанию
-	*/
 	
 	#define selprc(flags) nextFrameParams(inspector_internal_onPressCtx,[call contextMenu_getContextParams arg flags]);
 	
 	private _stackMenu = [
 		["Выделение",[
+			/*
+				Выделение на основе наличия свойства
+			*/
 			["Свойство",[
 				[format["Выдел. с %1",_visName],{selprc("sel")},null,format["Выбирает выделенные объекты имеющие свойство %1",_visName]],
-				[format["Выдел. типы с %1",_visName],{selprc("sel|classof")},null,format["Выбирает выделенные объекты типа %2 со свойством %1",_visName,_visClass]],
-				[format["Выдел. типы и их дочерние с %1",_visName],{selprc("sel|typeof")},null,format["Выбирает выделенные объекты типа %2 и все дочерние со свойством %1",_visName,_visClass]],
-				
+				[format["Выдел. типы с %1",_visName],{selprc("sel|classof")},null,format["Выбирает выделенные объекты определенного типа со свойством %1",_visName]],
+				[format["Выдел. типы и их дочерние с %1",_visName],{selprc("sel|typeof")},null,format["Выбирает выделенные объекты определенного типа и все дочерние со свойством %1",_visName]],
+				//здесь нужна логика выбора мировых объектов чтобы потом делать выбор по значению из выделенных
 				[format["Все с %1",_visName],{selprc("all")},null,format["Выбирает все объекты в сцене имеющие свойство %1",_visName]],
-				[format["Все типы с %1",_visName],{selprc("all|classof")},null,format["Выбирает все объекты в сцене типа %2 со свойством %1",_visName,_visClass]],
-				[format["Все типы и их дочерние с %1",_visName],{selprc("all|typeof")},null,format["Выбирает все объекты в сцене типа %2 и все дочерние со свойством %1",_visName,_visClass]]
+				[format["Все типы с %1",_visName],{selprc("all|classof")},null,format["Выбирает все объекты в сцене определенного типа со свойством %1",_visName]],
+				[format["Все типы и их дочерние с %1",_visName],{selprc("all|typeof")},null,format["Выбирает все объекты в сцене определенного типа и все дочерние со свойством %1",_visName]]
 			],null,"Выделение объектов имеющих данное свойство"],
-			["Значение",[
-				
+			/*
+				Выделение на основе значения свойства
+			*/
+			["Значения",[
+				[format["Со значением"],{selprc("sel|withval")},ifcheck(_isMultiprop,{true},{false}),format["Выбирает все объекты из выделенных принимающих указанное значение для свойства ""%1""",_visName]],
+				[format["С любым значением"],{selprc("sel|withanyval|typeof")},ifcheck(_isMultiprop,{true},{false}),format["Выбирает все объекты из выделенных принимающих любое значение для свойства ""%1""",_visName]],
+				[format["Без значения"],{selprc("sel|withdefault")},ifcheck(_isMultiprop,{true},{false}),"Выбирает все объекты из выделенных, свойство которых принимает значение по умолчанию"]
 			],null,"Выделение объектов на основе значений"]
 		],null,format["Специализированный выбор объектов, владеющих свойством ""%1""",_visName]],
 		["Сброс",[
-			["Все с этим значением",{}]
+			["Выдел. с этим значением",{selprc("sel|withval|deleteprop")},null,"Сбрасывает свойства для объектов, принимающих указанное значение"],
+			["Только типы",{selprc("sel|classof|deleteprop")},null,"Сбрасывает свойства для объектов, определенного типа"],
+			["Только типы и их дочерние",{selprc("sel|typeof|deleteprop")},null,"Сбрасывает свойства для объектов, определенного типа и его дочерних"]
 		],null,format["Сброс значения свойства ""%1"" объектов",_visName]]
 	];
 	#undef selprc
@@ -1362,6 +1367,15 @@ function(inspector_processReselectQuery)
 	//_selectType == "property"
 	
 	/*
+		paramMap:
+		class - class name
+		property - property name
+		visibleName - property visible name
+
+		---
+		rtvals:
+		existValue - string data of exist value
+
 		flags:
 		all - select from all scene objects
 		sel - select from selected objects
@@ -1385,6 +1399,8 @@ function(inspector_processReselectQuery)
 	};
 	
 	private _isPropCheck = _selectType == "property";
+	
+	private _possibleObjectsWithVal = []; //for withval flag
 
 	if (_isMulProp) then {
 		private _classes = hashSet_createEmpty();
@@ -1393,6 +1409,19 @@ function(inspector_processReselectQuery)
 				if (_isPropCheck) then {
 					//у типа нет такого свойства
 					if !((_paramMap get "property") in ([_x] call golib_getClassAllFields)) then {continue};
+				};
+
+				if ("withval" in _flagSet || "withanyval" in _flagSet) then {
+					private _cprops = [_x] call golib_getCustomProps;
+					private _prop = _paramMap get "property";
+					if !(_prop in _cprops) then {continue};
+					_possibleObjectsWithVal pushBack _x;
+				};
+				if ("withdefault" in _flagSet) then {
+					private _cprops = [_x] call golib_getCustomProps;
+					private _prop = _paramMap get "property";
+					if (_prop in _cprops) then {continue};
+					_possibleObjectsWithVal pushBack _x;
 				};
 				
 				hashSet_add(_classes,(([_x] call golib_getClassName)));
@@ -1415,6 +1444,49 @@ function(inspector_processReselectQuery)
 		
 	};
 
+	if (_doExit) exitWith {};
+
+	if ("withval" in _flagSet) then {
+		private _valSet = hashSet_createEmpty();
+		private _prop = _paramMap get "property";
+		{
+			if ([_x] call golib_hasHashData) then {
+				if !([
+					[_x] call golib_getClassName, //дочерний тип
+					_paramMap get "class" //родительский тип
+				] call oop_isTypeOf) then {continue};
+
+				private _cprops = [_x] call golib_getCustomProps;
+				if (_prop in _cprops) then {
+					hashSet_add(_valSet,_cprops get _prop);
+				};
+			};
+		} foreach _possibleObjectsWithVal;
+		["%1: possible values: %2",__FUNC__,count _valSet] call printTrace;
+		if (count _valSet <= 0) exitWith {_doExit = true; ["Не найдено ни одного установленного значения"] call showError;};
+		if (count _valSet == 1) exitWith {
+			_paramMap set ["existValue",str (hashSet_toArray(_valSet) select 0)];
+		};
+		private _tdata = [];
+		{
+			_tdata pushback (format["%1:_noopt_",_x]);
+		} foreach hashSet_toArray(_valSet);
+		_tdata = _tdata joinString ";";
+
+		call widget_winapi_resetLockTreeView;
+		private _r = refcreate(0);
+		private _descText = "Выберите подходящее значение свойства";
+		if ([_r,"Выбор значения",_descText,
+			_tdata
+		] call widget_winapi_openTreeView) then {
+			_paramMap set ["existValue",str refget(_r)];
+			hashSet_add(_flagSet,"typeof");
+		} else {
+			_doExit = true;
+		};
+		
+	};
+	
 	if (_doExit) exitWith {};
 
 
@@ -1441,6 +1513,41 @@ function(inspector_processReselectQuery)
 		if (_isPropCheck) then {
 			//у типа нет такого свойства
 			if !((_paramMap get "property") in ([_x] call golib_getClassAllFields)) then {continue};
+
+			//сравнение значения
+			if ("withval" in _flagSet) then {
+				private _parammapval = _paramMap get "existValue";
+				private _parname = _paramMap get "property";
+				//системная ошибка
+				if isNullVar(_parammapval) exitWith {
+					["%1: existValue is null",__FUNC__] call printError;
+					continue;
+				};
+
+				private _cprops = [_x] call golib_getCustomProps;
+				//свойства нет в данных объекта
+				if !(_parname in _cprops) exitWith {continue};
+				private _strVal = str (_cprops get _parname);
+				//значения не соответствуют
+				["compare: <%1> <%2>",_strVal,_parammapval] call printTrace;
+				if not_equals(_strVal,_parammapval) exitWith {continue};
+			};
+
+			//сравнение отсутствия значения
+			if ("withdefault" in _flagSet) then {
+				private _cprops = [_x] call golib_getCustomProps;
+				private _parname = _paramMap get "property";
+				//свойство зарегистрировано
+				if (_parname in _cprops) exitWith {continue};	
+			};
+
+			//проверка наличия любого значения кроме дефолта
+			if ("withanyval" in _flagSet) then {
+				private _cprops = [_x] call golib_getCustomProps;
+				private _parname = _paramMap get "property";
+				//свойство отсутствует
+				if !(_parname in _cprops) exitWith {continue};	
+			};
 		};
 
 		if (_canAdd) then {
@@ -1449,6 +1556,27 @@ function(inspector_processReselectQuery)
 	} foreach _objList;
 
 	["%1: %2 objects selected",__FUNC__,count _newSelected] call printTrace;
+	
+	if (count _newSelected == 0) exitWith {};
+	if ("deleteprop" in _flagSet) exitWith {
+		["Удаление свойств", "Множественное удаление свойств объектов", "a3\3den\data\cfg3den\history\changeAttributes_ca.paa"] collect3DENHistory
+		{
+			private _parname = _paramMap get "property";
+			{
+				if !([_x] call golib_hasHashData) then {continue};
+				private _hd = [_x,false] call golib_getHashData;
+				(_hd get "customProps") deleteAt _parname;
+				[_x,_hd] call golib_setHashData;
 
+				if (_parname == "light") then {
+					[_x] call lsim_reloadLightOnObject;
+				};
+				if (_parname == "model") then {
+					_defmodel = ([[_x] call golib_getClassName,_parname,true] call oop_getFieldBaseValue);
+					[_x,_defmodel] call golib_om_replaceObject;
+				};
+			} foreach _newSelected;
+		};
+	};
 	[_newSelected,true] call golib_setSelectedObjects;
 }
