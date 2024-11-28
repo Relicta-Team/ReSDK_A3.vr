@@ -60,9 +60,6 @@ nodegen_addClassField = {
 };
 
 nodegen_addClass = {
-    #ifdef _SQFVM
-    if (true) exitwith {};
-    #endif
     if (!nodegen_canUse) exitwith {};
 
     private _ctx = _this;
@@ -70,9 +67,6 @@ nodegen_addClass = {
 };
 
 nodegen_addFunction = {
-    #ifdef _SQFVM
-    if (true) exitwith {};
-    #endif
     if (!nodegen_canUse) exitwith {};
 
     private _ctx = _this;
@@ -102,10 +96,6 @@ nodegen_addFunction = {
 };
 
 nodegen_addSystemNode = {
-    #ifdef _SQFVM
-    if (true) exitwith {};
-    #endif
-
     private _ctx = _this;
     [_ctx,"node"] call nodegen_commonSysAdd;
 };
@@ -161,10 +151,6 @@ nodegen_addStruct = {
 };
 
 nodegen_commonAdd = {
-    #ifdef _SQFVM
-    if (true) exitwith {};
-    #endif
-
     //генерация только в редакторе
     if (!nodegen_canUse) exitwith {};
 
@@ -176,10 +162,6 @@ nodegen_commonAdd = {
 };
 
 nodegen_commonSysAdd = {
-    #ifdef _SQFVM
-    if (true) exitwith {};
-    #endif
-
     if (!nodegen_canUse) exitwith {};
 
     params ["_ctx","_nseg"];

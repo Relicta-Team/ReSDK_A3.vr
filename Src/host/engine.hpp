@@ -139,10 +139,7 @@
 
 // fread subsystem
 
-//this is really need?
-#ifdef _SQFVM
-	#define DISABLE_REGEX_ON_FILE
-#endif
+
 
 //__THIS_FILE_REPLACE__
 //__THIS_MODULE_REPLACE__

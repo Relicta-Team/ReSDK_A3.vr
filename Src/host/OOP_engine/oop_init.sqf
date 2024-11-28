@@ -206,8 +206,6 @@ private _errorAttr = {
 	errorformat("Cant find attribute <%1> in class <%2>",_name arg _pObj getVariable ["classname" arg "UNKNOWN_CLASS"]);
 };
 
-//do not check attributes
-#ifndef _SQFVM
 
 {
 	_x params ["_pObj","_attrs"];
@@ -219,8 +217,6 @@ private _errorAttr = {
 
 	} foreach _attrs;
 } foreach _attr_ex_init_list;
-
-#endif
 
 EXIT_IF_ERROR("Class compilation was terminated");
 

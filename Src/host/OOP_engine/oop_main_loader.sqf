@@ -288,9 +288,6 @@ oop_loadTypes = {
         };
     };
 
-//do not check attributes
-#ifndef _SQFVM
-
     if (_isSim) then {
         {
             _x params ["_pObj","_attrs"];
@@ -307,8 +304,6 @@ oop_loadTypes = {
             } foreach _attrs;
         } foreach _attr_ex_init_list;
     };
-
-#endif
 
     EXIT_IF_ERROR("Class compilation was terminated");
 
