@@ -83,7 +83,7 @@ Count modules: 55
  - [SpecialActions](host//SpecialActions.md) - 3 files
  - [StatusEffects](host//StatusEffects.md) - 6 files
  - [Structs](host//Structs.md) - 2 files
- - [Tools](host//Tools.md) - 15 files
+ - [Tools](host//Tools.md) - 17 files
  - [Traits](host//Traits.md) - 4 files
  - [UnitTests](host//UnitTests.md) - 13 files
  - [VerbSystem](host//VerbSystem.md) - 6 files
