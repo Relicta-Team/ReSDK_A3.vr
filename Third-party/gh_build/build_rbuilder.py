@@ -63,7 +63,7 @@ files = [
 	"loader\\mission.sqm",
 	"mdl_loader\\config.cpp",
 	"preload\\*.*",
-	"deploy\\*.*",
+	"deploy\\**",
 	"VM\\@server\\ru",
 	"VM\\@server\\*.dll",
 	"VM\\dll",
