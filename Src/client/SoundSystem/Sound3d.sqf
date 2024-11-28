@@ -134,7 +134,7 @@ sound3d_playLocalOnObjectLooped = {
 	private _pspFT = array_copy(_playSoundParams);
 	_pspFT set [6,_preendbuf];
 	private _sid = _pspFT call soundGlobal_play;
-	private _spar = _sid call soundParams_impl;
+	private _spar = soundParams _sid;
 	if equals(_spar,[]) exitWith {
 		setLastError("Sound params empty; Args: " + str _this);
 		warningformat("sound3d::playLocalOnObjectLooped() - Sound params empty; Args: %1",_this);
@@ -144,16 +144,13 @@ sound3d_playLocalOnObjectLooped = {
 	sound3d_internal_list_soundBuff pushBack _params;
 };
 
-VM_COMPILER_ADDFUNC_UNARY(stopSound_impl,stopSound);
-VM_COMPILER_ADDFUNC_UNARY(soundParams_impl,soundParams);
-
 sound3d_stopLocalLopped = {
 	params ["_soundPtr"];
 	if (_soundPtr >= (count sound3d_internal_list_soundBuff)) exitWith {false};
 	private _params = sound3d_internal_list_soundBuff select _soundPtr;
-	private _spar = (_params select 1) call soundParams_impl;
+	private _spar = soundParams(_params select 1);
 	if equals(_spar,[]) exitWith {false};
-	(_params select 1) call stopSound_impl;
+	stopSound(_params select 1);
 	sound3d_internal_list_soundBuff select _soundPtr set [0,objNull];
 	true
 };
@@ -162,7 +159,7 @@ sound3d_stopLocalLopped = {
 #ifdef EDITOR
 if !isNullVar(sound3d_internal_list_soundBuff) then {
 	{
-		(_x select 1) call stopSound_impl;
+		stopSound(_x select 1);
 	} foreach sound3d_internal_list_soundBuff;
 };
 #endif
@@ -173,10 +170,10 @@ sound3d_internal_localHandler = {
 	{
 		_x params ["_src","_sid","_preend","_psParams"];
 		//traceformat("check sound %1",_psParams)
-		private _spar = _sid call soundParams_impl;
+		private _spar = soundParams _sid;
 		//this stop event
 		if isNullReference(_src) then {
-			_sid call stopSound_impl;
+			stopSound _sid;
 			_slist set [_foreachindex,objNull];
 			_needDel = true;
 			continue; //next iter

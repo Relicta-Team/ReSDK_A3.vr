@@ -610,11 +610,6 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 
 #define __assert_runtime_file__ __FILE__
 
-#define __EVAL_PATH_VM__(filepath) (filepath) call { \
-private _arr = (tolower _this) splitString "\/"; private _ret = ""; if ("src" in _arr) then {_ret = (_arr select [(_arr find "src"),count _arr]) joinString "\" \
-} else {_ret = _this};\
-_ret} \
-
 
 #define __assert_static_runtime_expr1(expr) if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__] call sys_static_assert_}
 #define __assert_static_runtime_expr2(expr,message) if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__,message] call sys_static_assert_}
@@ -681,14 +676,6 @@ ACRE_IS_ERRORED = false; _ret;}*/
 
 //common macro
 #define BASIC_MOB_TYPE "B_Survivor_F"
-
-
-// bypass compiler unknown commands
-// Данные макросы используются для проброса функций из новой версии в обход компилятора клиента
-// Пример: VM_COMPILER_ADDFUNC_UNARY(freeExtension_impl,freeExtension) -> для вызова используем: call freeExtension_impl
-#define VM_COMPILER_ADDFUNC_BINARY(name,cmd) name = compile '(_this select 0) cmd (_this select 1)'
-#define VM_COMPILER_ADDFUNC_UNARY(name,cmd) name = compile 'cmd _this'
-#define VM_COMPILER_ADDFUNC_NULAR(name,cmd) name = compile 'cmd'
 
 
 #ifdef EDITOR

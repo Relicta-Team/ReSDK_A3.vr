@@ -562,7 +562,7 @@ getScreenPointToWorld = {
 //возвращает мировую позицию по экранным координатам
 screenPosToWorldPoint = {
 	params [["_spos",getMousePosition],["_distanceMul",1000],["_fromNative",true]];
-	private _vectorDir = ifcheck(_fromNative,_spos,_spos call convertScreenCoords) call screenToWorldDirection_impl;
+	private _vectorDir = screenToWorldDirection ifcheck(_fromNative,_spos,_spos call convertScreenCoords);
 	private _startPos = positionCameraToWorld[0,0,0];
 	_startPos vectorAdd (_vectorDir vectorMultiply _distanceMul);
 };

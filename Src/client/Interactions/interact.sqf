@@ -146,7 +146,7 @@ interact_sendAction = {
 		//private _angle = (getCameraViewDirection player) select 2;
 		#define __hardcoded_angle__ -0.2
 		//if (((getCameraViewDirection player) select 2) < __hardcoded_angle__) then {
-			_sourceVecArr = [getmouseposition call screenToWorldDirection_impl,cam_renderVecMouse select 1];
+			_sourceVecArr = [screenToWorldDirection getmouseposition,cam_renderVecMouse select 1];
 		//};
 	};
 	_data append (_sourceVecArr select 0);
