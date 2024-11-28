@@ -6,6 +6,10 @@ pathes:
   sources: ../Src
   vm_dir: ./VM
   resdk_dir: ./../
+  # directory for editor. client binaries for compile client
+  deploy_dir: ./deploy
+  #temporary compiler folder for intermediate files
+  bin_dir: ./bin
 
 # this generating definelist with dependencies
 defines:
