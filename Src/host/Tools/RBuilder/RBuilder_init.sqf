@@ -10,6 +10,7 @@
 
 private _hasTests = false;
 {
+	traceformat("Macro init %1 with value %2",_x arg _y)
 	private _t = tolower _x;
 	if (count _t > 5 && {_t select [0,5] == "test_"}) exitWith {
 		_hasTests = true;
@@ -46,7 +47,7 @@ if ("BUILD_CLIENT" in RBuilder_map_defines) then {
 		["Fatal error on build client; Wrong return type %1",_exit] call cprint;
 		[-2002,"Fatal error on build client; Null return"] call RBuilder_exit;
 	};
-	[_exit] call RBuilder_exit;
+	["RBuilder","exit",[_exit]] call rescript_callCommandVoid;
 };
 
 //noexit on auto-reload

@@ -99,7 +99,7 @@ bt_buildClient = {
 	log("Compiling...");
 	private _finalizedStageCatch = false;
 	private _clientCompileErrorCode = -1;
-	private _preCalledCode = compile __pragma_preprocess "host\Tools\BuildTools\BuildTools_clientLoader.sqf";
+	private _preCalledCode = compile __pragma_preprocess "src\host\Tools\BuildTools\BuildTools_clientLoader.sqf";
 	
 	private _disableCalling = true;
 	isnil _preCalledCode;
@@ -118,17 +118,18 @@ bt_buildClient = {
 	// --- saving 600-700
 	log("Saving build");
 	private _allContent = (CRYPT_KEY+"|"+(str allClientContents));
-	logformat("	Content size: %1",count _allContent);
+	logformat("	Content size: %1 kb",(count _allContent)toFixed 0 splitString "." select 0);
 
 	if isNull(file_write) exitWith {
 		error("Function file_write not found");
 		BT_ERRCODE(600);
 	};
-	private _savePath = RBuilder_map_defines get "CLIENT_BIN_PATH";
+	private _savePath = RBuilder_map_defines get "RBUILDER_DIR";
 	if isNullVar(_savePath) exitWith {
-		error("Save path not found");
+		error("Save path not found; Macro CLIENT_BIN_PATH undefined");
 		BT_ERRCODE(601);	
 	};
+	_savePath = format["%1\bin\client\mission\CLIENT",_savePath];
 	logformat("	Saving path: %1",_savePath);
 	if ([_savePath,false] call file_exists) then {
 		errorformat("Save path already exists: %1",_savePath);
@@ -141,5 +142,7 @@ bt_buildClient = {
 		BT_ERRCODE(603);
 	};
 
+	logformat(" Saving done in %1 ms",((tickTime-_time)*1000)toFixed 0 splitString "." select 0);
 
+	0 //normally exit
 };

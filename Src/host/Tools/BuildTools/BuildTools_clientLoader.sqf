@@ -22,6 +22,12 @@ logformat("Shared components count: %1",_shCnt);
 
 log("Compiling client components");
 
+#ifdef DEBUG
+	#define cmplog(fcat) allClientContents pushBack (compile format['log("Init %1")',fcat]);
+#else
+	#define cmplog(fcat)
+#endif
+
 #include <..\..\..\client\loader.hpp>
 
 ;
@@ -30,5 +36,7 @@ if (_cliCnt == 0) exitWith {
 	error("Client components not found or empty");
 	_clientCompileErrorCode = 102;
 };
+
+logformat("Client components count: %1",_cliCnt);
 
 _finalizedStageCatch = true;
