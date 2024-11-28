@@ -1,9 +1,5 @@
 
 /mission.sqm
-ReMaker/config.ini
-ReMaker/remake_output.log
-ReMaker/Temp
-ReMaker/Client/CLIENT
 Src/Editor/EditorSDKConfig.txt
 Src/Editor/EditorSettings.txt
 Src/Scripts/.vs
@@ -27,7 +23,6 @@ ReNode/comp_guid.json
 Src/host/ReNode/compiled/script_list.hpp
 Src/host/ReNode/compiled/*.sqf
 ReNode/noapp.log
-ReMaker/buildevent.log
 
 Third-party/gh_build/__pycache__/**
 Third-party/gh_build/TEMP/**
@@ -43,3 +38,5 @@ RBuilder/VM/@server/db/GameMain.db
 RBuilder/VM/@server/ReEngineLogs/log.txt
 RBuilder/VM/profile/**
 RBuilder/VM/cmp.exe
+RBuilder/platform_path.cache
+RBuilder/bin/**

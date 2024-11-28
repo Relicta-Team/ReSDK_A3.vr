@@ -100,6 +100,8 @@ if (!isMultiplayer) then {
 #endif
 #ifdef RBUILDER
 	loadFile("src\host\Tools\EditorDebug\EditorDebug.sqf"); //predecl debug utils in rb mode
+
+	loadFile("src\host\Tools\BuildTools\BuildTools_init.sqf");
 #endif
 
 //postload initialize systems
