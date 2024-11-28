@@ -38,10 +38,6 @@ loot_prepareAll = {
 	
 	if (_skipLoad) exitWith {};
 
-	#ifdef __VM_VALIDATE
-	if (true) exitWith {};
-	#endif
-
 	#ifdef RBUILDER
 	//preparing file_getFileList
 	call loot_internal_rbuilder_preloadUtils;

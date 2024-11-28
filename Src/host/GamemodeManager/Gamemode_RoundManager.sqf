@@ -1420,12 +1420,6 @@ lobby_createDummy = {
 	_mob
 };
 private _canCreateDummy = true;
-#ifdef __VM_VALIDATE
-	_canCreateDummy = false;
-#endif
-#ifdef __VM_BUILD
-	_canCreateDummy = false;
-#endif
 
 if (_canCreateDummy) then {
 	private _dummyMobPos = [50,50,0];

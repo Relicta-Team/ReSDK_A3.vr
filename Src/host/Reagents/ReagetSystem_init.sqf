@@ -18,6 +18,5 @@ reagentSystem_internal_lastEx = "";
 reagentSystem_internal_lastObj = nullPtr;
 
 reagentSystem_map_allReactions = createHashMap;
-#ifndef __VM_VALIDATE
+
 call reagentSystem_initReactions;
-#endif

@@ -127,9 +127,7 @@ slt_handleScriptedCfg = {
 		["setLightVolumeShape",{(_this select 0) setLightVolumeShape (_this select 1)}]
 	];
 
-#ifndef __VM_VALIDATE
 slt_const_dummyMob = [10,10,0] call gm_createMob;
-#endif
 
 slt_create = {
 	params ["_obj","_cfg",["_autolink",true],["_select",""]];

@@ -398,11 +398,7 @@ nodegen_loadClasses = {
     private _logger = ifcheck(is3DEN,printLog,cprint);
     private _fEx = {false};
     
-    #ifdef __VM_VALIDATE
-        _fEx = {true};
-    #else
-        _fEx = compile "fileEXISTS _this";
-    #endif
+    _fEx = {true};
 
     if (!(nodegen_scriptClassesLoader call _fEx)) exitwith {
         ["Scripted class loader not found: %1",nodegen_scriptClassesLoader] call _logger;
@@ -414,11 +410,7 @@ nodegen_loadClasses = {
     {
         private _pts = (_x splitString "\/");
         
-        #ifdef __VM_VALIDATE
-            private _filename = _pts select ((count _pts) - 1);
-        #else
-            private _filename = _pts select -1;
-        #endif
+        private _filename = _pts select -1;
 
         private _fullname = nodegen_scriptClassesFolder + "\" + _filename;
         // if (_fullname != _x) then {
