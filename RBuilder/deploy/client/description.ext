@@ -1,0 +1,30 @@
+
+#include "ui\definer.hpp"
+
+class RscTitles
+{
+    #include "ui\titles.hpp"
+};
+
+#include "ui\controls.hpp"
+#include "ui\main.hpp"
+#include "ui\loading.hpp"
+
+disableChannels[] = {0,1,2,4,5};
+disableRandomization[] = { "All", "AllVehicles", "B_G_Offroad_01_F", "myCar", "MyUnitName", "B_Soldier_F" };
+enableDebugConsole[] = {"76561198094364528"};
+enableTargetDebug = 1;
+
+allowProfileGlasses = 0;
+
+class CfgCommands {
+   allowedHTMLLoadURIs[] += {
+	  "http://relicta.ru",
+	  "http://relicta.ru/*",
+	  "https://relicta.ru",
+	  "https://relicta.ru/*",
+	  "*relicta.ru*",
+	  "*relicta.ru/*"
+   };
+};
+
