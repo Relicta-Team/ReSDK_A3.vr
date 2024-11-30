@@ -16,3 +16,9 @@ addCommandWithDescription("camswitch",ACCESS_ADMIN,"Переключает ре�
 addCommandWithDescription("reloadvoice",PUBLIC_COMMAND,"Перезапускает модуль голосового чата") {IS_LOCAL_COMMAND()};
 
 addCommandWithDescription("grafon",ACCESS_ADMIN,"Переключает режим отображения эффектов в LightEngine") {IS_LOCAL_COMMAND()};
+
+addCommandWithDescription("ping",PUBLIC_COMMAND,"Узнать реальный пинг") {IS_LOCAL_COMMAND()};
+
+#ifdef EDITOR
+addCommandWithDescription("lightdebug",PUBLIC_COMMAND,"Показывает отрисовку света для скриптовых эффектов") {IS_LOCAL_COMMAND()};
+#endif

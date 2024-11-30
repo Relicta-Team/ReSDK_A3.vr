@@ -122,11 +122,11 @@ inventory_collectInfoOnPutdown = {
 		//[object, intersect position,vectorUp lod]
 		([objnull] call interact_getIntersectData) params ["_obj","_pos","_vup"];
 		if isInteractible(_obj) then {_vup = [0,0,-1]};
-		[_pos,random 360,_vup]
+		[_pos,random 360,_vup,[_obj,true] call noe_client_getObjPtr];
 	} else {
 		private _visObj = inventory_previewObject;
 		
-		[getPosATLVisual _visObj,inventory_lastDirPreviewObject,vectorUpVisual _visObj]
+		[getPosATLVisual _visObj,getDir _visObj,vectorUpVisual _visObj,[getInteractibleTarget,true] call noe_client_getObjPtr]
 	};
 };
 

@@ -54,6 +54,15 @@ class(InfoBoard) extends(KeyHolder)
 	var(name,"Доска информации");
 	var(model,"ml_shabut\exodus\infotablicka.p3d");
 	var(material,"MatWood");
+	var(canUseContainer,false);
+
+	func(canEmplaceItem)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		if (isTypeOf(_obj,Paper) || isTypeOf(_obj,ItemWritter)) exitWith {true};
+		super()
+	};
+	
 endclass
 
 

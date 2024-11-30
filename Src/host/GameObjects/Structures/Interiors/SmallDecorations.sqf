@@ -27,6 +27,7 @@ class(Vase) extends(InterierProp)
 	var(desc,"Потрясающее изделие невиданной красоты");
 	var(model,"relicta_models\models\interier\props\treasure\vase\vase.p3d");
 	getter_func(isMovable,true);
+	getterconst_func(getCoefAutoWeight,100);
 endclass
 
 //картины
@@ -37,6 +38,7 @@ class(Picture) extends(SmallDecorations)
 	editor_only(var(desc,"Просто картина");)
 	var(material,"MatCloth");
 	getter_func(isMovable,true);
+	getterconst_func(getCoefAutoWeight,5);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -75,6 +77,7 @@ class(PosterLive) extends(Picture)
 	var(model,"metro_ob\model\sovet3.p3d");
 	var(material,"MatCloth");
 	getter_func(isMovable,false);
+	var(weight,1.15);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -130,6 +133,7 @@ class(Carpet) extends(SmallDecorations)
 	editor_only(var(desc,"Красивый ковер");)
 	var(material,"MatCloth");
 	getter_func(isMovable,true);
+	getterconst_func(getCoefAutoWeight,50);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -163,6 +167,7 @@ class(SmallSign) extends(SmallDecorations)
 	var(name,"Табличка");
 	editor_only(var(desc,"Табличка или указатель");)
 	var(material,"MatWood");
+	getterconst_func(getCoefAutoWeight,50);
 	var(dr,1);
 endclass
 

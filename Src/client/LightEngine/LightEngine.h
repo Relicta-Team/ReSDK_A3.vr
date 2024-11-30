@@ -146,9 +146,5 @@ sourceObject setvariable ["__config",type]; sourceObject setVariable ["__light",
 
 #define endScriptEmit ] ;
 
-//только для редактора
-#ifdef EDITOR
-	#define _emitAlias(strval) ["alias",strval],
-#else
-	#define _emitAlias(strval) 
-#endif
+//уникальный алиас
+#define _emitAlias(strval) ["alias",strval],

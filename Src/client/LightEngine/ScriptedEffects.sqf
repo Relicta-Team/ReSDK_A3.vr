@@ -35,7 +35,7 @@ le_se_cfgRange = [2100,4900];
 //Функция-обработчик скриптового освещения (для клиента)
 le_se_handleConfig = {
 	params ["_cfgDataList",["_hMode",SCRIPT_EMIT_HANDLER_MODE_DEFAULT],"_dropPos"];
-	private ["_t","_events","_o","_cfgDataCur","_cfgDataCurIdx"];
+	private ["_t","_events","_alias","_o","_cfgDataCur","_cfgDataCurIdx"];
 	private _isDrop = _hMode == SCRIPT_EMIT_HANDLER_MODE_DROP;
 	private _isUnmanaged = _hMode == SCRIPT_EMIT_HANDLER_MODE_UNMANAGED;
 	private _funcInit = le_se_list_fassoc select _hMode;
@@ -49,6 +49,7 @@ le_se_handleConfig = {
 				_cfgDataCur = _x;
 				_t = _x select 0;
 				_events = _x param [1,[]]; //list events
+				_alias = _x select 2 select 1;
 				//this dosent used
 				// if (_t == "rend") exitwith {
 				// 	sourceObject call le_initRenderer;
@@ -82,6 +83,7 @@ le_se_handleConfig = {
 				_cfgDataCurIdx = _foreachIndex;
 				_t = _x select 0;
 				_events = _x param [1,[]]; //list events
+				_alias = _x select 2 select 1;
 				//this dosent used
 				if (_t == "rend") exitwith {
 					sourceObject call le_initRenderer;
@@ -98,11 +100,13 @@ le_se_handleConfig = {
 				if (_t == "lt") exitwith {
 					_o = "#lightpoint" createVehicleLocal [0,0,0];
 					call _funcInit;
+					[_o] call lesc_handleLight;
 				};
 				//light directional handler
 				if (_t == "ltd") exitwith {
 					_o = "#lightreflector" createVehicleLocal [0,0,0];
 					call _funcInit;
+					[_o,true] call lesc_handleLight;
 				};
 			};
 			_events call le_se_handleCfgEvents;
@@ -197,9 +201,8 @@ le_se_map_cfgHandlers = createHashMap; //карта зарегистрирова
 le_se_mapHandlersUnmanaged = null; //карта нативных эффектов
 le_se_mapHandlersShots = null;
 le_se_mapHandlers = createHashMapFromArray [
-	#ifdef EDITOR
+	
 	["alias",{}],
-	#endif
 
 	//generic events
 	["linkToSrc",{
@@ -248,7 +251,7 @@ le_se_intenral_handleVarInit = {
 		_x params ["_prop","_val"];
 		[_o,_val] call (le_se_mapHandlers getorDefault [_prop,le_se_errorHandler]);
 		true;
-	} count (_x select [2,(count _x) - 2]);
+	} count (_x select [3,(count _x) - 3]);
 };
 
 le_se_internal_createDropEmitterMap = {
@@ -326,10 +329,13 @@ le_se_intenral_handleUnmanagedVarInit = {
 		
 		if equalTypes(_valCopy,[]) then {_valCopy = array_copy(_valCopy)};
 
-		[_o,_prop,_valCopy,_cfgDataCurIdx] call _dataHandler;
+		[_o,_prop,_valCopy,
+			_alias //new version latest param is alias because cfgdatacuridx is unordered value...
+			//_cfgDataCurIdx
+		] call _dataHandler;
 		[_o,_valCopy] call (le_se_mapHandlersUnmanaged getorDefault [_prop,le_se_errorHandler]);
 		true;
-	} count (_x select [2,(count _x) - 2]);
+	} count (_x select [3,(count _x) - 3]);
 };
 
 le_se_intenral_handleDropVarInit = {
@@ -337,7 +343,7 @@ le_se_intenral_handleDropVarInit = {
 		_x params ["_prop","_val"];
 		[_o,_val] call (le_se_mapHandlersShots getorDefault [_prop,le_se_errorHandler]);
 		true;
-	} count (_x select [2,(count _x) - 2]);
+	} count (_x select [3,(count _x) - 3]);
 };
 
 le_se_fireEmit = {
@@ -450,6 +456,8 @@ le_se_setParticleOption = {
 	[_storage,_value] call(_storCode select 1)
 };
 
+le_se_getCurrentEmitterIndex = { _cfgDataCurIdx };
+
 le_se_internal_generateOptionAddress = {
 	private _aListNames = ["setParticleParams","setParticleRandom","setParticleCircle","setDropInterval"];
 	private _aList = [
@@ -505,8 +513,9 @@ le_se_internal_generateOptionAddress = {
 		private _funcBuffSet = ["(_this select 0)"];
 		if (count _addrMap==0) then {
 			//no addresses - is value
-			_funcBuffGet pushBack (format[""]);
-			_funcBuffSet pushBack (format[""]);
+			//_funcBuffGet pushBack (format[""]);
+			//_funcBuffSet pushBack (format[""]);
+			_funcBuffSet = ["_valCopy = _this select 1"]; // _valCopy exref inside le_se_intenral_handleUnmanagedVarInit
 		} else {
 			_funcBuffGet pushBack (format["%1",_addrMap apply {"select " + (str _x)} joinString " "]);
 			private _lastArr = _addrMap select -1;

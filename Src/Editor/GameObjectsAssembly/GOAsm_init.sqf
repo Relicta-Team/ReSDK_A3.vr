@@ -25,4 +25,3 @@ goasm_builder_onError_delegate = {}; //пользовательский код, 
 #include "GOAsm_providers.sqf"
 #include "GOAsm_internalAPI_attributes.sqf"
 #include "GOAsm_prefabCreator.sqf"
-#include "GOAsm_batchProcessor.sqf"

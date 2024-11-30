@@ -102,7 +102,7 @@ Type: function
 Description: 
 - Param: _module
 
-File: [host\UnitTests\init.sqf at line 60](../../../Src/host/UnitTests/init.sqf#L60)
+File: [host\UnitTests\init.sqf at line 62](../../../Src/host/UnitTests/init.sqf#L62)
 ## test_internal_runAllTestCases
 
 Type: function
@@ -111,7 +111,7 @@ Description:
 - Param: __RUT_TESTNAME
 - Param: _testCode
 
-File: [host\UnitTests\init.sqf at line 101](../../../Src/host/UnitTests/init.sqf#L101)
+File: [host\UnitTests\init.sqf at line 103](../../../Src/host/UnitTests/init.sqf#L103)
 ## test_run
 
 Type: function
@@ -119,7 +119,7 @@ Type: function
 Description: 
 
 
-File: [host\UnitTests\init.sqf at line 144](../../../Src/host/UnitTests/init.sqf#L144)
+File: [host\UnitTests\init.sqf at line 146](../../../Src/host/UnitTests/init.sqf#L146)
 # loader.sqf
 
 ## test_collections
@@ -605,3 +605,269 @@ Description:
 
 
 File: [host\UnitTests\TestsCollection\io.sqf at line 135](../../../Src/host/UnitTests/TestsCollection/io.sqf#L135)
+# math.sqf
+
+## pow(x,y)
+
+Type: constant
+
+> Exists if **CMD__ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+
+Description: 
+- Param: x
+- Param: y
+
+Replaced value:
+```sqf
+(x^y)
+```
+File: [host\UnitTests\TestsCollection\math.sqf at line 235](../../../Src/host/UnitTests/TestsCollection/math.sqf#L235)
+## prob_old_to_new(val)
+
+Type: constant
+
+> Exists if **CMD__ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+
+Description: 
+- Param: val
+
+Replaced value:
+```sqf
+([val] call convf)
+```
+File: [host\UnitTests\TestsCollection\math.sqf at line 236](../../../Src/host/UnitTests/TestsCollection/math.sqf#L236)
+## convertionTable
+
+Type: Variable
+
+> Exists if **CMD__ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+null
+```
+File: [host\UnitTests\TestsCollection\math.sqf at line 250](../../../Src/host/UnitTests/TestsCollection/math.sqf#L250)
+## convf
+
+Type: function
+
+> Exists if **CMD__ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+
+Description: 
+- Param: _val
+
+File: [host\UnitTests\TestsCollection\math.sqf at line 238](../../../Src/host/UnitTests/TestsCollection/math.sqf#L238)
+## createConvTable
+
+Type: function
+
+> Exists if **CMD__ENABLE_CONVERSION_GAUSS_TO_LINEAR** defined
+
+Description: 
+
+
+File: [host\UnitTests\TestsCollection\math.sqf at line 251](../../../Src/host/UnitTests/TestsCollection/math.sqf#L251)
+# structs.sqf
+
+## scripted_profile_test_function_example
+
+Type: function
+
+> Exists if **USE_SCRIPTED_PROFILING** defined
+
+Description: 
+
+
+File: [host\UnitTests\TestsCollection\structs.sqf at line 499](../../../Src/host/UnitTests/TestsCollection/structs.sqf#L499)
+# header_test.h
+
+## MACRO_TEST
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+1
+```
+File: [host\UnitTests\utility\header_test.h at line 12](../../../Src/host/UnitTests/utility/header_test.h#L12)
+## MACRO_TEST_INTERNAL
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+2
+```
+File: [host\UnitTests\utility\header_test.h at line 13](../../../Src/host/UnitTests/utility/header_test.h#L13)
+## MACRO_TEST_INTERNAL2
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+3
+```
+File: [host\UnitTests\utility\header_test.h at line 14](../../../Src/host/UnitTests/utility/header_test.h#L14)
+## output(_varname,_val)
+
+Type: constant
+
+Description: 
+- Param: _varname
+- Param: _val
+
+Replaced value:
+```sqf
+_varname = _val;
+```
+File: [host\UnitTests\utility\header_test.h at line 15](../../../Src/host/UnitTests/utility/header_test.h#L15)
+## comment(text)
+
+Type: constant
+
+Description: 
+- Param: text
+
+Replaced value:
+```sqf
+; text ;
+```
+File: [host\UnitTests\utility\header_test.h at line 16](../../../Src/host/UnitTests/utility/header_test.h#L16)
+## version
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+1
+```
+File: [host\UnitTests\utility\header_test.h at line 39](../../../Src/host/UnitTests/utility/header_test.h#L39)
+## _ONE
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+1
+```
+File: [host\UnitTests\utility\header_test.h at line 40](../../../Src/host/UnitTests/utility/header_test.h#L40)
+## included_macro
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"not_connected"
+```
+File: [host\UnitTests\utility\header_test.h at line 51](../../../Src/host/UnitTests/utility/header_test.h#L51)
+## REDEFINE_TEST_HEADER
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\UnitTests\utility\header_test.h at line 59](../../../Src/host/UnitTests/utility/header_test.h#L59)
+## min_
+
+Type: constant
+
+Description: second checks multilevel
+
+
+Replaced value:
+```sqf
+1
+```
+File: [host\UnitTests\utility\header_test.h at line 70](../../../Src/host/UnitTests/utility/header_test.h#L70)
+## maj_
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+2
+```
+File: [host\UnitTests\utility\header_test.h at line 71](../../../Src/host/UnitTests/utility/header_test.h#L71)
+## bld_
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+3
+```
+File: [host\UnitTests\utility\header_test.h at line 72](../../../Src/host/UnitTests/utility/header_test.h#L72)
+## _simpleOne
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+234
+```
+File: [host\UnitTests\utility\header_test.h at line 207](../../../Src/host/UnitTests/utility/header_test.h#L207)
+## __endmacro
+
+Type: constant
+
+> Exists if **MACRO_TEST_INTERNAL** defined
+
+Description: post including define and set
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\UnitTests\utility\header_test.h at line 214](../../../Src/host/UnitTests/utility/header_test.h#L214)
+# included_header_test.h
+
+## included_macro
+
+Type: constant
+
+> Exists if **REDEFINE_TEST_HEADER** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+"connected"
+```
+File: [host\UnitTests\utility\included_header_test.h at line 7](../../../Src/host/UnitTests/utility/included_header_test.h#L7)

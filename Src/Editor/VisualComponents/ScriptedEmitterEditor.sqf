@@ -126,6 +126,10 @@ function(vcom_emit_openMainContextMenuSettings)
 	_stackMenu pushBack [ifcheck(vcom_visual_canDrawLines,"Выключить","Включить") + " линии расстояния",{vcom_visual_canDrawLines = !vcom_visual_canDrawLines},null,
 	"Включает или отключает линии для измерения расстояний"];
 
+	_stackMenu pushBack [ifcheck(vcom_visual_renderDebugGeometry,"Выключить","Включить") + " отладку света",{
+		vcom_visual_renderDebugGeometry = !vcom_visual_renderDebugGeometry;
+	},null,"Включает или выключает отладочную визуализацию направленных и сферических источников освещения"];
+
 	_setText = ifcheck(call rendering_isNightEnabled,"Включить","Выключить");
 	_stackMenu pushBack [_setText+" глобальное освещение",{
 		call vcom_emit_opt_switchNight;
@@ -182,6 +186,46 @@ function(vcom_emit_openMainContextMenuSettings)
 		{
 			_x hideObject _newval;
 		} foreach vcom_emit_envObject_groundAreaList;
+	}
+
+	function(vcom_visual_drawDebugGeometry)
+	{
+		{
+			_etype = _x call vcom_emit_getEmitterType;
+			if (_etype in ["pointlight","directlight"]) then {
+				_vis = _x call vcom_emit_getEmitterVisual;
+				_data = _x getvariable "data";
+				_atten = [_data,"attenuation",vcom_emit_prop_internal_getLightAssoc] call vcom_emit_prop_getPropByName;
+				if (_etype == "pointlight") then {
+					_rad = _atten select 5;
+					_startRad = _atten select 4;
+					
+					_p = getposatl _vis;
+					[_p,[1,1,0,1],30,_rad,16] call debug_drawSphereEx;
+					[_p,[1,0,0,1],15,_startRad,16] call debug_drawSphereEx;
+				};
+				if (_etype == "directlight") then {
+					_cone = [_data,"conepars",vcom_emit_prop_internal_getLightAssoc] call vcom_emit_prop_getPropByName;
+					
+					_p = getposatl _vis;
+					([_vis] call model_getPitchBankYawAccurate) params ["_pt","_bk"];
+					_outAngle = _cone select 0;
+					_inAngle = _cone select 1;
+					_distance = _atten select 5;
+					[
+						_p,
+						_vis modeltoworld [0,_distance,0],
+						_outAngle,
+						_inAngle,
+						0.5, //attenuation
+						[1,1,0,1],
+						[1,0,0,1],
+						15 //width
+					] call debug_drawLightConeEx	
+				};
+				
+			};
+		} foreach (["_ctgMaker","_list","_allEmitters"] call vcom_emit_getVarInSets)
 	}
 
 function(vcom_emit_createEmitterObject)

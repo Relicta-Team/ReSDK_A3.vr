@@ -78,7 +78,18 @@ removeAll3DENEventHandlers "OnEditableEntityRemoved";
 
 set3DENSelected [];
 
-add3DENEventHandler ["OnSelectionChange",{["onSelectionChange",[get3DENSelected "" select 0]] call Core_invokeEvent}];
+core_internal_lastSelFrame = 0;
+core_internal_select_nframe = {
+	["onSelectionChange",[get3DENSelected "" select 0]] call Core_invokeEvent;
+};
+add3DENEventHandler ["OnSelectionChange",{
+	//При множественном выделении хандлер вызывается один раз для каждого объекта в одном кадре
+	//Здесь мы группируем эти выделения чтобы избежать проблемы с падением производительности перезагрузки инспектора
+	if (core_internal_lastSelFrame != diag_frameNo) then {
+		core_internal_lastSelFrame = diag_frameNo;
+		nextFrame(core_internal_select_nframe);
+	};
+}];
 add3DENEventHandler ["OnMissionSave",{["onSaving",[false]] call Core_invokeEvent}];
 add3DENEventHandler ["OnMissionAutosave",{["onSaving",[true]] call Core_invokeEvent}];
 add3DENEventHandler ["onUndo",{["onUndo",[]] call Core_invokeEvent}];
@@ -168,6 +179,27 @@ function(Core_initObjects)
 			[_x,true] call Core_initObjectEvents;
 		} foreach _objList;
 	}] call Core_addEventHandler;
+}
+
+function(Core_getCliArgs)
+{
+	private _cli = (["ScriptContext","getcliargs",null,true] call rescript_callCommand) splitString endl;
+	private _map = createHashMap;
+	_map set ["application_path",_cli deleteAt 0];
+	forceUnicode 0;
+	{
+		if ([_x,"-"] call stringStartWith) then {
+			private _param = _x select [1];
+			if ("=" in _x) then {
+				_key = _param select [0,_param find "="];
+				_val = _param select [(_param find "=")+1];
+				_map set [_key,_val];
+			} else {
+				_map set [_param,""];
+			};
+		};
+	} foreach _cli;
+	_map;
 }
 
 function(Core_initObjectEvents)
@@ -311,8 +343,22 @@ function(Core_invokeEvent)
 	{
 		_params call _x;
 	} foreach _evList;
-};
+}
 
+function(Core_getStackTrace)
+{
+	params [["_returnAsString",true]];
+	private _stack = diag_stackTrace;
+	_stack deleteAt [-1];
+	private _stackList = (_stack apply {_x call scriptError_internal_handleStack});
+	if (_returnAsString) then {
+		(_stackList joinString endl)
+	} else {
+		_stackList
+	};
+}
+
+;// for normally including file
 //native error handler
 #include "Core_errorHandler.sqf"
 

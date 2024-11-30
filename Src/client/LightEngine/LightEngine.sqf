@@ -30,6 +30,7 @@ call le_se_internal_generateOptionAddress;
 // #include "LightEngine_mainThread.sqf"
 
 #include "LightRender.sqf"
+#include "LightEngine_ScriptedCulling.sqf"
 
 // Нужно выяснить какое существо самое лучшее в плане атачинга при первом создании
 le_simulated = clientMob;//"B_Soldier_F" createVehicleLocal [0,0,0];
@@ -149,6 +150,8 @@ le_unloadLight = {
 
 	le_allLights deleteat (le_allLights find _light);
 	le_allLights deleteat (le_allLights find _obj);
+
+	[0] call lesc_onLightRemove;
 	
 	
 	os_light_list_noProcessedLights deleteAt (os_light_list_noProcessedLights find _light);

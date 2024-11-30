@@ -661,3 +661,4 @@ missionNamespace setVariable ["pushFront",
 
 VM_COMPILER_ADDFUNC_BINARY(setPhysicsCollisionFlag_impl,setPhysicsCollisionFlag);
 VM_COMPILER_ADDFUNC_UNARY(screenToWorldDirection_impl,screenToWorldDirection);
+VM_COMPILER_ADDFUNC_BINARY(isequalref_impl,isequalref);

@@ -639,30 +639,14 @@ File: [client\LightEngine\LightEngine.h at line 147](../../../Src/client/LightEn
 
 Type: constant
 
-> Exists if **EDITOR** defined
-
-Description: 
+Description: уникальный алиас
 - Param: strval
 
 Replaced value:
 ```sqf
 ["alias",strval],
 ```
-File: [client\LightEngine\LightEngine.h at line 151](../../../Src/client/LightEngine/LightEngine.h#L151)
-## _emitAlias(strval)
-
-Type: constant
-
-> Exists if **EDITOR** not defined
-
-Description: 
-- Param: strval
-
-Replaced value:
-```sqf
-
-```
-File: [client\LightEngine\LightEngine.h at line 153](../../../Src/client/LightEngine/LightEngine.h#L153)
+File: [client\LightEngine\LightEngine.h at line 150](../../../Src/client/LightEngine/LightEngine.h#L150)
 ## type
 
 Type: function
@@ -1166,7 +1150,7 @@ Initial value:
 ```sqf
 clientMob//"B_Soldier_F" createVehicleLocal [0,0,0]
 ```
-File: [client\LightEngine\LightEngine.sqf at line 35](../../../Src/client/LightEngine/LightEngine.sqf#L35)
+File: [client\LightEngine\LightEngine.sqf at line 36](../../../Src/client/LightEngine/LightEngine.sqf#L36)
 ## le_allChunkTypes
 
 Type: Variable
@@ -1178,7 +1162,7 @@ Initial value:
 ```sqf
 [CHUNK_TYPE_ITEM,CHUNK_TYPE_STRUCTURE,CHUNK_TYPE_DECOR]
 ```
-File: [client\LightEngine\LightEngine.sqf at line 42](../../../Src/client/LightEngine/LightEngine.sqf#L42)
+File: [client\LightEngine\LightEngine.sqf at line 43](../../../Src/client/LightEngine/LightEngine.sqf#L43)
 ## le_allLights
 
 Type: Variable
@@ -1190,7 +1174,7 @@ Initial value:
 ```sqf
 [] //all light points
 ```
-File: [client\LightEngine\LightEngine.sqf at line 44](../../../Src/client/LightEngine/LightEngine.sqf#L44)
+File: [client\LightEngine\LightEngine.sqf at line 45](../../../Src/client/LightEngine/LightEngine.sqf#L45)
 ## le_loadLight
 
 Type: function
@@ -1199,7 +1183,7 @@ Description: загружает источник освещения или ча�
 - Param: _type (optional, default -1)
 - Param: _src
 
-File: [client\LightEngine\LightEngine.sqf at line 66](../../../Src/client/LightEngine/LightEngine.sqf#L66)
+File: [client\LightEngine\LightEngine.sqf at line 67](../../../Src/client/LightEngine/LightEngine.sqf#L67)
 ## le_doFireLight
 
 Type: function
@@ -1208,7 +1192,7 @@ Description: автоматическое событие освещения, э�
 - Param: _type (optional, default -1)
 - Param: _src
 
-File: [client\LightEngine\LightEngine.sqf at line 100](../../../Src/client/LightEngine/LightEngine.sqf#L100)
+File: [client\LightEngine\LightEngine.sqf at line 101](../../../Src/client/LightEngine/LightEngine.sqf#L101)
 ## le_doShot
 
 Type: function
@@ -1218,7 +1202,7 @@ Description:
 - Param: _src
 - Param: _ctxParams (optional, default [])
 
-File: [client\LightEngine\LightEngine.sqf at line 116](../../../Src/client/LightEngine/LightEngine.sqf#L116)
+File: [client\LightEngine\LightEngine.sqf at line 117](../../../Src/client/LightEngine/LightEngine.sqf#L117)
 ## le_unloadLight
 
 Type: function
@@ -1226,7 +1210,7 @@ Type: function
 Description: выгружает источник освещения
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 133](../../../Src/client/LightEngine/LightEngine.sqf#L133)
+File: [client\LightEngine\LightEngine.sqf at line 134](../../../Src/client/LightEngine/LightEngine.sqf#L134)
 ## le_isLoadedLight
 
 Type: function
@@ -1234,7 +1218,7 @@ Type: function
 Description: проверяет висит ли на объекте источник света
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 161](../../../Src/client/LightEngine/LightEngine.sqf#L161)
+File: [client\LightEngine\LightEngine.sqf at line 164](../../../Src/client/LightEngine/LightEngine.sqf#L164)
 ## le_getLoadedLightCfg
 
 Type: function
@@ -1242,7 +1226,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 167](../../../Src/client/LightEngine/LightEngine.sqf#L167)
+File: [client\LightEngine\LightEngine.sqf at line 170](../../../Src/client/LightEngine/LightEngine.sqf#L170)
 ## le_isLightConfig
 
 Type: function
@@ -1250,7 +1234,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 174](../../../Src/client/LightEngine/LightEngine.sqf#L174)
+File: [client\LightEngine\LightEngine.sqf at line 177](../../../Src/client/LightEngine/LightEngine.sqf#L177)
 ## le_isShotConfig
 
 Type: function
@@ -1258,7 +1242,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 178](../../../Src/client/LightEngine/LightEngine.sqf#L178)
+File: [client\LightEngine\LightEngine.sqf at line 181](../../../Src/client/LightEngine/LightEngine.sqf#L181)
 ## le_debug_canViewLight
 
 Type: function
@@ -1267,7 +1251,7 @@ Description:
 - Param: _src
 - Param: _isLightObject
 
-File: [client\LightEngine\LightEngine.sqf at line 216](../../../Src/client/LightEngine/LightEngine.sqf#L216)
+File: [client\LightEngine\LightEngine.sqf at line 219](../../../Src/client/LightEngine/LightEngine.sqf#L219)
 ## le_debug_lightRender
 
 Type: function
@@ -1275,7 +1259,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 317](../../../Src/client/LightEngine/LightEngine.sqf#L317)
+File: [client\LightEngine\LightEngine.sqf at line 320](../../../Src/client/LightEngine/LightEngine.sqf#L320)
 # LightEngine_mainThread.sqf
 
 ## loadLightOnObject(_x)
@@ -1368,6 +1352,102 @@ Description:
 - Param: _chunkType
 
 File: [client\LightEngine\LightEngine_mainThread.sqf at line 110](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L110)
+# LightEngine_ScriptedCulling.sqf
+
+## LESC_USE_FAST_UPDATE
+
+Type: constant
+
+Description: #define LESC_ENABLE_CULLING
+
+
+Replaced value:
+```sqf
+
+```
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 12](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L12)
+## lesc_list_allObjects
+
+Type: Variable
+
+Description: all light objects
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 262](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L262)
+## lesc_list_allDataObjs
+
+Type: Variable
+
+Description: renderer list point lights
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 265](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L265)
+## lesc_cullCnt
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 338](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L338)
+## lesc_setDebugRender
+
+Type: function
+
+> Exists if **EDITOR** defined
+
+Description: 
+- Param: _mode
+
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 255](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L255)
+## lesc_handleLight
+
+Type: function
+
+Description: handle light object adding to scene
+ Вызывается при добавлении света
+- Param: _lt
+- Param: _isDirect (optional, default false)
+
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 271](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L271)
+## lesc_onLightRemove
+
+Type: function
+
+Description: 
+- Param: _dummyParam
+
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 290](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L290)
+## lesc_handleProp
+
+Type: function
+
+Description: 
+- Param: _o
+- Param: _prop
+- Param: _val
+
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 303](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L303)
+## lesc_cullingProcess
+
+Type: function
+
+Description: 
+
+
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 340](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L340)
 # LightRender.sqf
 
 ## LIGHT_RENDER_PRINT_ERROR_IF_NOT_INIT_ON_CUSTOM
@@ -2531,7 +2611,7 @@ Initial value:
 ```sqf
 createHashMap //карта зарегистрированных конфигов
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 192](../../../Src/client/LightEngine/ScriptedEffects.sqf#L192)
+File: [client\LightEngine\ScriptedEffects.sqf at line 196](../../../Src/client/LightEngine/ScriptedEffects.sqf#L196)
 ## le_se_mapHandlersUnmanaged
 
 Type: Variable
@@ -2543,7 +2623,7 @@ Initial value:
 ```sqf
 null //карта нативных эффектов
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 197](../../../Src/client/LightEngine/ScriptedEffects.sqf#L197)
+File: [client\LightEngine\ScriptedEffects.sqf at line 201](../../../Src/client/LightEngine/ScriptedEffects.sqf#L201)
 ## le_se_mapHandlersShots
 
 Type: Variable
@@ -2555,7 +2635,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 198](../../../Src/client/LightEngine/ScriptedEffects.sqf#L198)
+File: [client\LightEngine\ScriptedEffects.sqf at line 202](../../../Src/client/LightEngine/ScriptedEffects.sqf#L202)
 ## le_se_mapHandlers
 
 Type: Variable
@@ -2567,7 +2647,7 @@ Initial value:
 ```sqf
 createHashMapFromArray [...
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 199](../../../Src/client/LightEngine/ScriptedEffects.sqf#L199)
+File: [client\LightEngine\ScriptedEffects.sqf at line 203](../../../Src/client/LightEngine/ScriptedEffects.sqf#L203)
 ## le_se_map_partAddress
 
 Type: Variable
@@ -2579,7 +2659,7 @@ Initial value:
 ```sqf
 createHashMap //key setParticleN , value [functions]
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 434](../../../Src/client/LightEngine/ScriptedEffects.sqf#L434)
+File: [client\LightEngine\ScriptedEffects.sqf at line 440](../../../Src/client/LightEngine/ScriptedEffects.sqf#L440)
 ## le_se_list_fassoc
 
 Type: Variable
@@ -2591,7 +2671,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 534](../../../Src/client/LightEngine/ScriptedEffects.sqf#L534)
+File: [client\LightEngine\ScriptedEffects.sqf at line 543](../../../Src/client/LightEngine/ScriptedEffects.sqf#L543)
 ## le_se_handleConfig
 
 Type: function
@@ -2609,7 +2689,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 134](../../../Src/client/LightEngine/ScriptedEffects.sqf#L134)
+File: [client\LightEngine\ScriptedEffects.sqf at line 138](../../../Src/client/LightEngine/ScriptedEffects.sqf#L138)
 ## le_se_handleCfgEvents
 
 Type: function
@@ -2618,7 +2698,7 @@ Description:
 - Param: _cfgName
 - Param: _cfgInParams
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 155](../../../Src/client/LightEngine/ScriptedEffects.sqf#L155)
+File: [client\LightEngine\ScriptedEffects.sqf at line 159](../../../Src/client/LightEngine/ScriptedEffects.sqf#L159)
 ## le_se_internal_errorFuncCfgEvents
 
 Type: function
@@ -2626,7 +2706,7 @@ Type: function
 Description: 
 - Param: _errpar
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 169](../../../Src/client/LightEngine/ScriptedEffects.sqf#L169)
+File: [client\LightEngine\ScriptedEffects.sqf at line 173](../../../Src/client/LightEngine/ScriptedEffects.sqf#L173)
 ## le_se_registerConfigHandler
 
 Type: function
@@ -2635,7 +2715,7 @@ Description:
 - Param: _cfgName
 - Param: _cfgCode
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 173](../../../Src/client/LightEngine/ScriptedEffects.sqf#L173)
+File: [client\LightEngine\ScriptedEffects.sqf at line 177](../../../Src/client/LightEngine/ScriptedEffects.sqf#L177)
 ## le_se_getCurrentConfigPropVal
 
 Type: function
@@ -2643,7 +2723,7 @@ Type: function
 Description: получает значение опции из конфига. используется в хандлерах событий скриптовых эмиттеров
 - Param: _srch
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 179](../../../Src/client/LightEngine/ScriptedEffects.sqf#L179)
+File: [client\LightEngine\ScriptedEffects.sqf at line 183](../../../Src/client/LightEngine/ScriptedEffects.sqf#L183)
 ## le_se_getCurrentConfigId
 
 Type: function
@@ -2651,7 +2731,7 @@ Type: function
 Description: получает айди текущего конфига. только внутри хандлееров событий скриптовых эмиттеров
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 188](../../../Src/client/LightEngine/ScriptedEffects.sqf#L188)
+File: [client\LightEngine\ScriptedEffects.sqf at line 192](../../../Src/client/LightEngine/ScriptedEffects.sqf#L192)
 ## le_se_errorHandler
 
 Type: function
@@ -2659,7 +2739,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 236](../../../Src/client/LightEngine/ScriptedEffects.sqf#L236)
+File: [client\LightEngine\ScriptedEffects.sqf at line 239](../../../Src/client/LightEngine/ScriptedEffects.sqf#L239)
 ## le_se_intenral_handleVarInit
 
 Type: function
@@ -2667,7 +2747,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 240](../../../Src/client/LightEngine/ScriptedEffects.sqf#L240)
+File: [client\LightEngine\ScriptedEffects.sqf at line 243](../../../Src/client/LightEngine/ScriptedEffects.sqf#L243)
 ## le_se_internal_createDropEmitterMap
 
 Type: function
@@ -2675,7 +2755,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 254](../../../Src/client/LightEngine/ScriptedEffects.sqf#L254)
+File: [client\LightEngine\ScriptedEffects.sqf at line 257](../../../Src/client/LightEngine/ScriptedEffects.sqf#L257)
 ## le_se_internal_createUnmanagedEmitterMap
 
 Type: function
@@ -2683,7 +2763,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 302](../../../Src/client/LightEngine/ScriptedEffects.sqf#L302)
+File: [client\LightEngine\ScriptedEffects.sqf at line 305](../../../Src/client/LightEngine/ScriptedEffects.sqf#L305)
 ## le_se_intenral_handleUnmanagedVarInit
 
 Type: function
@@ -2692,7 +2772,7 @@ Description:
 - Param: _prop
 - Param: _val
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 321](../../../Src/client/LightEngine/ScriptedEffects.sqf#L321)
+File: [client\LightEngine\ScriptedEffects.sqf at line 324](../../../Src/client/LightEngine/ScriptedEffects.sqf#L324)
 ## le_se_intenral_handleDropVarInit
 
 Type: function
@@ -2701,7 +2781,7 @@ Description:
 - Param: _prop
 - Param: _val
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 335](../../../Src/client/LightEngine/ScriptedEffects.sqf#L335)
+File: [client\LightEngine\ScriptedEffects.sqf at line 341](../../../Src/client/LightEngine/ScriptedEffects.sqf#L341)
 ## le_se_fireEmit
 
 Type: function
@@ -2714,7 +2794,7 @@ Description:
 - Param: _refemitters
 - Param: _reservedParam
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 343](../../../Src/client/LightEngine/ScriptedEffects.sqf#L343)
+File: [client\LightEngine\ScriptedEffects.sqf at line 349](../../../Src/client/LightEngine/ScriptedEffects.sqf#L349)
 ## le_se_doSorting
 
 Type: function
@@ -2722,7 +2802,7 @@ Type: function
 Description: Спасибо Богемия...
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 387](../../../Src/client/LightEngine/ScriptedEffects.sqf#L387)
+File: [client\LightEngine\ScriptedEffects.sqf at line 393](../../../Src/client/LightEngine/ScriptedEffects.sqf#L393)
 ## le_se_getParticleOption
 
 Type: function
@@ -2732,7 +2812,7 @@ Description: key setParticleN , value [functions]
 - Param: _varname
 - Param: _storage
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 435](../../../Src/client/LightEngine/ScriptedEffects.sqf#L435)
+File: [client\LightEngine\ScriptedEffects.sqf at line 441](../../../Src/client/LightEngine/ScriptedEffects.sqf#L441)
 ## le_se_setParticleOption
 
 Type: function
@@ -2743,7 +2823,15 @@ Description:
 - Param: _storage
 - Param: _value
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 444](../../../Src/client/LightEngine/ScriptedEffects.sqf#L444)
+File: [client\LightEngine\ScriptedEffects.sqf at line 450](../../../Src/client/LightEngine/ScriptedEffects.sqf#L450)
+## le_se_getCurrentEmitterIndex
+
+Type: function
+
+Description: 
+
+
+File: [client\LightEngine\ScriptedEffects.sqf at line 459](../../../Src/client/LightEngine/ScriptedEffects.sqf#L459)
 ## le_se_internal_generateOptionAddress
 
 Type: function
@@ -2751,7 +2839,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 453](../../../Src/client/LightEngine/ScriptedEffects.sqf#L453)
+File: [client\LightEngine\ScriptedEffects.sqf at line 461](../../../Src/client/LightEngine/ScriptedEffects.sqf#L461)
 # VisualStatesConfigs.sqf
 
 ## VAR_FULL_PREFIX__VST_PRIVATE

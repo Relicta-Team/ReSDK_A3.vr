@@ -523,3 +523,5 @@ endstruct
 #include "Structs\Profiling.sqf"
 
 #include "Structs\Allocator.sqf"
+
+#include "Structs\Updates.sqf"

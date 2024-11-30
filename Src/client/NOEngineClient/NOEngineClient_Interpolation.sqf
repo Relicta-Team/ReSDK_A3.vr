@@ -144,7 +144,7 @@ noe_client_interp_start = {
 
 	private _checkConditions = {
 		params ["_owner","_pList","_dList"];
-		traceformat("CHECK %1",_this)
+		traceformat("INTERP CHECK %1",_this)
 		{
 			if !(_x) then {
 				_pCur = _pList select _foreachIndex;

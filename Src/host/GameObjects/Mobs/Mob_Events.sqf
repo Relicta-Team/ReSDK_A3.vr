@@ -30,7 +30,7 @@ _iact = {
 		9 * ?4? = 36 bytes
 	*/
 	//[ [(sin _dir) * _vuz,(cos _dir) * _vuz,sin _pitch], [0,0,_vuz]
-	if (count _this != 9) exitWith {
+	if (count _this < 9) exitWith {
 		errorformat("rpc<iact>() - Wrong params count => %1",count _this);
 	};
 	
@@ -38,6 +38,10 @@ _iact = {
 	_renderVec = [_this select [3,3],[0,0,_this select 6]];
 	_type = _this select 7;
 	_unit = _this select 8;
+	private _optTarg = null;
+	if (count _this > 9) then {
+		_optTarg = _this select 9;
+	};
 	
 	unrefObject(this,_unit,errorformat("rpc<iact>() - Mob object has no exists virtual object - %1",_unit));
 
@@ -53,6 +57,16 @@ _iact = {
 	private _pos = [];
 	private _normal = [];
 	private _target = [_renderPos,_renderVec,true,_bias,_pos,_ignore,_normal] call si_rayCast;
+	if !isNullVar(_optTarg) then {
+		if equalTypes(_optTarg,objNull) then {
+			_optTarg = (_optTarg getvariable ['link',nullPtr]) getvariable ['pointer',"noref"];
+		};
+		private _vobj__ = pointer_get(_optTarg);
+		if !pointer_isValidResult(_vobj__) exitWith {};
+		_target = _vobj__;
+		_pos = callFunc(_target,getPos);
+		_renderPos = callSelf(getPos);
+	};
 
 	//отмена прогресса при активности
 	callSelfParams(stopProgress,true);
@@ -205,6 +219,7 @@ _onDropItem = {
 
 _onPutdownItem = {
 	params ["_mobObj","_refItem","_positionData",["_isFastButton",false]];
+	//_positionData: vec4(posATL,dir(float),vup(vec3),ptrPlace)
 
 	private _vObjMob = getVObjectLink(_mobObj);
 	private _vObjItem = pointer_get(_refItem);
@@ -213,6 +228,11 @@ _onPutdownItem = {
 	if !pointer_isValidResult(_vObjItem) exitWith {errorformat("onPutdownItem() - Item reference has no exists in pointers table - %1",_refItem)};
 	if !isExistsObject(_vObjItem) exitWith {errorformat("onPutdownItem() - Item object has no exists virtual object - %1 as %2",_refItem arg _vObjItem);};
 	if (isTypeOf(_vObjItem,StolenItem)) exitWith {callFuncParams(_vObjItem,onStolen,_vObjMob);};
+	
+	private _pdPlacePtr = _positionData select 3;
+	private _placerObj = pointer_get(_pdPlacePtr);
+	if !pointer_isValidResult(_placerObj) exitWith {errorformat("onPutdownItem() - Placer reference has no exists in pointers table - %1",_pdPlacePtr)};
+	_positionData set [3, _placerObj];
 
 	callFuncParams(_vObjMob,putdownItem, _vObjItem arg _positionData);
 	// 2022-2022 RIP. ЗДЕСЬ БЫЛА ЛОГИКА НА ЗАДЕРЖКУ ПРИ ВЫКЛАДЫВАНИИ С ПОМОЩЬЮ КНОПКИ БЫСТРОГО ВЫКЛАДЫВАНИЯ

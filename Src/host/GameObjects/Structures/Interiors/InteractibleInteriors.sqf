@@ -13,6 +13,7 @@ class(InteractibleInterior) extends(SmallDecorations)
 	var(name,"Штуковина"); 
 	var(desc,"С этим хочется что-то сделать" pcomma " но пока не знаю что...");
 	var(material,"MatMetal");
+	getterconst_func(getCoefAutoWeight,20);
 	var(dr,2);
 endclass
 

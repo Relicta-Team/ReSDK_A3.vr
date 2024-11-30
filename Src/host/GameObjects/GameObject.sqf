@@ -237,7 +237,7 @@ class(GameObject) extends(ManagedObject)
 	" node_var
 	editor_attribute("EditorVisible" arg "custom_provider:weight")
 	editor_attribute("Tooltip" arg "Вес объекта в граммах или килограммах")
-	var(weight,gramm(1000));//вес в граммах
+	var(weight,0);//вес в граммах
 
 	//перетаскивание
 	getter_func(isMovable,false); //объект движим
@@ -1307,15 +1307,8 @@ region(throwing and bullets functions)
 		private _drObj = getSelf(dr);
 		callSelfParams(applyDamage,_dam arg _type arg _p arg "throw_hit");
 
-		private _matObj = getVar(_throwed,material);
-		private _thDamModif = 1;
-		if (!isNullVar(_matObj) && !isNullReference(_matObj)) then {
-			_thDamModif = callFunc(_matObj,getDamageCoefOnAttack);
-		};
-
-		private _weapDamage = round(_dam*_thDamModif) - _drObj;
 		//! THIS CAN BE THROWS ERROR BECAUSE _throwed.loc - is flyingObject
-		callFuncParams(_throwed,applyDamage,_weapDamage arg _type arg _p arg "throwed");
+		callFuncParams(_throwed,onAttackedObject,this arg _dam arg _drObj arg _p arg "throwed");
 	};
 
 	//Тут обязательно нужно удалить пулю чтобы не вызывать утечек памяти
@@ -1713,13 +1706,34 @@ class(IDestructible) extends(GameObject)
 		качественно или грубо сделанные получают +1 или +2 к ЗД.
 		Большинство машин и подобных артефактов в хорошем состоянии имеют ЗД 10.
 	*/
+	"
+		name:Качество
+		desc:Возвращает @[int качество] игрового объекта. Среднее значение равно 10. Чем выше качество, тем ценее и прочнее предмет.
+		prop:all
+		classprop:1
+		return:int:Качество игрового объекта
+	" node_var
 	var(ht,10); //Статическая переменная "здоровья" объекта. От этого скилла кидаются броски на разрушение
 
 	/*
 		ЕЖ предмета.
 		количество повреждений, которое объект может вынести, прежде чем сломается или прекратит функционировать
 	*/
+	"
+		name:Здоровье
+		desc:Возвращает текущее здоровье игрового объекта. Оно варьируется от максимального здоровья до пятикратного отрицательного значения от максимального здоровья. Наприме, при максимальном здоровье 5 минимальное здоровье после которого предмет будет уничтожен будет -25 (5 * -5)
+		prop:get
+		classprop:1
+		return:int:Здоровье
+	" node_var
 	var(hp,0);
+		"
+			name:Максимальное здоровье
+			desc:Возвращает максимальное здоровье игрового объекта. Это значение никогда не может быть меньше 0.
+			prop:get
+			classprop:1
+			return:int:Максимальное здоровье
+		" node_var
 		var(hpMax,0);
 	/*
 		СП объекта.
@@ -1852,6 +1866,36 @@ class(IDestructible) extends(GameObject)
 		//errorformat("IDestructible::applyDamage() - no affect damage: hp %1; max hp %2; Amount %3",_newhp arg _maxhp arg _amount);
 	};
 
+	func(onAttackedObject)
+	{
+		objParams_5(_targ,_dam,_targDr,_pos,_reason);
+		
+		private _weapDamage = (getSelf(dr) + randInt(1,4)) max 0;
+		private _mod = 0;
+		if (isTypeOf(this,IMeleeWeapon) || isTypeOf(this,IRangedWeapon)) then {
+			modvar(_mod) + 4;
+		};
+		
+		traceformat("onAttachedObject: %1 => %2 [%3;%4]:: %5 (mod: %6)",this arg _targ arg _dam arg _targDr arg _weapDamage arg _mod)
+
+		if !([getSelf(ht) + _mod] call gurps_probSuccess) then {
+			//weapon damage after attack
+			callSelfParams(applyDamage,_weapDamage max 0 arg DAMAGE_TYPE_CRUSHING arg _pos arg _reason);
+		};
+	};
+
+	//получает эффективный урон против объекта
+	func(getEfficiencyOnAttack)
+	{
+		objParams_2(_dam,_targ);
+		private _mat = callFunc(_targ,getMaterial);
+		if !isNullReference(_mat) then {
+			private _modifWeaponDamage = callFunc(_mat,getDamageCoefOnAttack);
+			_dam = round(_dam*_modifWeaponDamage);
+		};
+		_dam
+	};
+
 	func(getHPStatusText)
 	{
 		objParams_1(_addClr);
@@ -1946,7 +1990,7 @@ class(IDestructible) extends(GameObject)
 		if (getSelf(hp)>0) then {
 			setSelf(hpMax,getSelf(hp));
 			if !callSelf(isItem) then {
-				setSelf(weight,[this] call gurps_calculateConstructionWeight);
+				setSelf(weight,([this] call gurps_calculateConstructionWeight) * 1000);
 			};
 		} else {
 			callSelf(generateObjectHP);
@@ -1968,14 +2012,22 @@ class(IDestructible) extends(GameObject)
 		if callSelf(isItem) then {
 			_val = [this] call gurps_calculateItemHP;
 		} else {
-			private _weightTn = [this] call gurps_calculateConstructionWeight;
-			_val = [_weightTn] call gurps_calculateConstructionHP;
-			//lb to kg
-			setSelf(weight,_weightTn * 1000);
+			private _dwt = getSelf(weight);
+			if equals(_dwt,0) then {
+				private _weightTn = [this] call gurps_calculateConstructionWeight;
+				_val = [_weightTn] call gurps_calculateConstructionHP;
+				//lb to kg
+				setSelf(weight,_weightTn * 1000);
+			} else {
+				_val = [_dwt / 1000] call gurps_calculateConstructionHP;
+			};
 		};
 		setSelf(hp,_val);
 		setSelf(hpMax,_val);
 	};
+
+	//коэффициент для авторасчета веса. это делитель веса объекта. для мебели например 10
+	getterconst_func(getCoefAutoWeight,1);
 
 	//TODO replace to nullptr and refactoing all checks
 	var(material,null);//string|object
@@ -2122,13 +2174,37 @@ class(IDestructible) extends(GameObject)
 	getter_func(getOnDestroyTypes,callSelf(getOnDestroyTypesFromMaterial));
 
 	//минимально допустимое хп
+	"
+		name:Минимально допустимое здоровье
+		desc:Возвращает минимальное допустимое здоровье для этого игрового объекта (макс.зд. * -5)
+		type:get
+		lockoverride:1
+		return:int:Минимальное допустимое здоровье игрового объекта
+	" node_met
 	getter_func(getMinAllowedHP,-5 * getSelf(hpMax));
+
+	"
+		name:Текущее здоровье в процентах
+		desc:Возвращает текущее здоровье в процентах от 100 до 0
+		type:get
+		lockoverride:1
+		return:int:Текущее здоровье в процентах
+	" node_met
 	//текущее представление хп в процентном соотношении
 	func(getHPCurrentPrecentage)
 	{
 		objParams();
 		round linearConversion [callSelf(getMinAllowedHP),getSelf(hpMax),getSelf(hp),0,100,true];
 	};
+
+	"
+		name:Установить текущее здоровье в процентах
+		desc:Устанавливает текущее здоровье в процентах от 100 до 0
+		type:method
+		lockoverride:1
+		in:int:Здоровье:Здоровье в процентах
+			opt:def=100
+	" node_met
 	func(setHPCurrentPrecentage)
 	{
 		objParams_1(_val);
@@ -2598,6 +2674,39 @@ region(Pulling functionality)
 		callFuncParams(_dynDisp,setNDOptions,"ObjectPull" arg 10 arg getSelf(pointer) arg _getInfo arg _handleInp arg _ctx);
 		
 		callFuncParams(_dynDisp,openNDisplayInternal,_usr arg getVar(_usr,owner));
+	};
+
+region(Emplacer system)
+	//можно ли расположить предмет на this объекте. проверяемый
+	func(canEmplaceItem)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		//по умолчанию можно расположить только если предмет на полу
+		callFuncParams(_obj,isFloorEmplaceFromVUP,_vup);
+	};
+	
+	//called on canEmplaceItem returns 
+	func(onEmplaceItemFail)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		if !callFuncParams(_obj,isFloorEmplaceFromVUP,_vup) exitWith {
+			private _msg = pick["Упадёт же!","Слишком большой наклон.","Лучше поставлю где поровнее.","Отсюда всё скатится...","Тут не встанет."];
+			callFuncParams(_usr,localSay,_msg arg "error");
+		};
+	};
+
+	func(onEmplaceItem)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		//virtual function for custom functionality
+		//for example: can use for update germs on item and source object
+	};
+
+	//внутренняя функция проверки расположен ли vectorup на полу
+	func(isFloorEmplaceFromVUP)
+	{
+		objParams_1(_vup);
+		(_vup select 2) >= 0.65
 	};
 
 region(Craft system)

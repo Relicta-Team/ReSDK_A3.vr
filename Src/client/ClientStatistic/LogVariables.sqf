@@ -33,11 +33,14 @@ clistat_buffer = [
 		format["cur:%1; min:%2; dt:%3;",round diag_fps,round diag_fpsmin,diag_deltaTime]
 	}],
 	[colortext(CC5460,"frame: "),{diag_frameno toFixed 0}],
-	[colortext(E4F500,"LightRender: "),{_nonvis = 0; _sceneObj = 0;
+	[colortext(E4F500,"LightRender(depr): "),{_nonvis = 0; _sceneObj = 0;
 		{
 			if !(_x getvariable ["isRndrd",false]) then {INC(_nonvis)};
 			if (_x call hasObjectInScene) then {INC(_sceneObj)};
 		} foreach le_allLights; format["all:%1 (dis:%2;rend:%3)		s:%4",count le_allLights,_nonvis,(count le_allLights)-_nonvis,_sceneObj]
+	}],
+	[colortext(E4F500,"LightSC: "),{
+		format["cnt:%1;cull:%2",count lesc_list_allDataObjs,lesc_cullCnt]
 	}],
 	#ifdef EDITOR
 	[colortext(E4F500,"ServerLightRender: "),{count (attachedObjects slt_const_dummyMob)}],
@@ -102,6 +105,17 @@ clistat_buffer = [
 		_state = _ar get "state";
 		format["st:%1(%2)",NAT_LOADING_SLIST_STATES select (_state+1),_state]
 	}],
+	#ifdef ENABLE_OPTIMIZATION
+	[colortext(57D4AC,"NAT_RGC:"),{
+		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;
+		format["%1",(_ar get "_regions") apply {count _x}]
+	}],
+	#endif
+	#ifdef NET_ATMOS_OPTIMIZATION_RENDER
+	[colortext(57D4AC,"NAT_CULL:"),{
+		format["cull:%1;gbf:%2;ms:%3",aopt_cli_culledCnt,aopt_cli_gbuffCull,aopt_cli_prevCallTime*1000]
+	}],
+	#endif
 	#ifdef EDITOR
 	[colortext(57D4AC,"ATMOS_SRV: "),{
 		format["R:%1 C:%2 A:%3",count atmos_map_chunkAreas,atmos_chunks,atmos_areas]

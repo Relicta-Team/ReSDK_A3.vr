@@ -600,7 +600,7 @@ region(Inventory control)
 
 	func(putdownItem) {
 		objParams_2(_item,_posData);
-
+		//_posData:[pos,dir,vecup,placerPtr]
 		private _slotId = getVar(_item,slot);
 		if !callSelfParams(hasSlot,_slotId) exitWith {};
 
@@ -608,11 +608,20 @@ region(Inventory control)
 		if not_equals(getVar(_item,loc),this) exitWith {};
 
 		if isTypeOf(_item,SystemItem) exitWith {
-			callFuncParams(_item,onPutdown, this);
+			callFuncParams(_item,onPutdown, this arg _posData);
 		};
 
 		// can putdown item from hands only
 		if !array_exists(INV_LIST_HANDS,_slotId) exitWith {};
+
+		_posData params ["_pos","_dir","_vecUp","_objPlace"];
+
+		//? Проверка на дистанцию происходит на клиенте. Это дает лучшую точность
+		
+		if !callFuncParams(_objPlace,canEmplaceItem,_item arg _pos arg _dir arg _vecUp arg this) exitWith {
+			callFuncParams(_objPlace,onEmplaceItemFail,_item arg _pos arg _dir arg _vecUp arg this);
+		};
+
 		if callSelfParams(isHoldedTwoHands,_item) then {
 			callSelfParams(onTwoHand,_item);
 		};
@@ -624,6 +633,8 @@ region(Inventory control)
 		callSelfParams(removeItemOnSlot,_item arg _slotId arg _worldObj);
 
 		callFuncParams(_item,onPutdown,this);
+
+		callFuncParams(_objPlace,onEmplaceItem,_item arg _pos arg _dir arg _vecUp arg this);
 	};
 	
 	/*var(__fastputdownbuffer,null);

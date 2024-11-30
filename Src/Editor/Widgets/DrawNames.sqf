@@ -37,7 +37,7 @@ function(drawNames_internal_onFrame)
 		drawNames_internal_list_collectedOjbects = [];
 		// sort objects by distance
 		_collected sort true;
-		
+		_refwt = refcreate(0);
 		{
 			_x = _x select 0;
 			if ([_x,false] call golib_hasHashData) then {
@@ -51,28 +51,34 @@ function(drawNames_internal_onFrame)
 					_hp = 0;
 					_dr = 0;
 					_ht = 0;
+					_wt = 0;
 					if !isNullVar(_mat) then {
 						if equalTypes(_mat,"") then {
 							_matClass = _mat;
 							_clr = [_mat,"color",true] call oop_getFieldBaseValue;
 							_mat = [_mat,"name",true] call oop_getFieldBaseValue;
 							if ([_class,"",true,"isItem"] call oop_getFieldBaseValue) then {
+								_wt = [_class,"weight",true] call oop_getFieldBaseValue;
 								_hp = [null,
-									[_class,"weight",true] call oop_getFieldBaseValue,
+									_wt,
 									[_class,"",true,"objectHealthType"] call oop_getFieldBaseValue
 								] call gurps_calculateItemHP;
+
 							} else {
 								_hp = [
 									_class,
 									[_class,"model",true] call oop_getFieldBaseValue,
-									_matClass
+									_matClass,
+									_refwt
 								] call gurps_internal_calculateHP;
+								_wt = refget(_refwt) * 1000;
 							};
 							_ht = [_class,"ht",true] call oop_getFieldBaseValue;
 							_dr = [_class,"dr",true] call oop_getFieldBaseValue;
+							
 						};
 					};
-					_ext = format["mat:%1 (hp:%2;dr:%3;ht:%4)",_mat,_hp,_dr,_ht];
+					_ext = format["mat:%1 (hp:%2;dr:%3;ht:%4;w_kg:%5)",_mat,_hp,_dr,_ht,_wt];
 					_element pushBack [_ext,_clr];
 				};
 				drawNames_internal_list_collectedOjbects pushBack _element;

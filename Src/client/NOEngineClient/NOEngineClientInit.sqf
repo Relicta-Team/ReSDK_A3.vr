@@ -4,12 +4,15 @@
 // ======================================================
 
 #include <..\..\host\engine.hpp>
+#include <..\..\host\struct.hpp>
+#include <..\..\host\thread.hpp>
 #include <..\..\host\NOEngine\NOEngine.hpp>
 #include "..\..\host\NOEngine\NOEngine_Shared.sqf"
 #include <..\..\host\NOEngine\NOEngine_SharedTransportLevel.hpp>
 #include <..\..\host\Atmos\Atmos.hpp>
 #include <..\..\host\Atmos\Atmos_shared.sqf>
 #include <..\ClientRpc\clientRpc.hpp>
+#include "..\Interactions\interact_component_shared.hpp"
 
 #include <NOEngineClient.h>
 
@@ -22,6 +25,11 @@
 #include "NOEngineClient_ObjectManager.sqf"
 
 //#include "NOEngineClient_localAtmos.sqf"
+//this should be loaded only before netatmos.sqf
+#include "NOEngineClient_AtmosOptimizer.sqf"
+
+//perblock optimization
+#include "NOEngineClient_NetAtmosPerBlockOptimize.sqf"
 
 #include "NOEngineClient_Interpolation.sqf"
 

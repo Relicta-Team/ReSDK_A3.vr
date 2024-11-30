@@ -19,7 +19,7 @@ class(ElectricalShield) extends(ElectronicDeviceNode)
 	#include "..\..\Interfaces\INetDisplay.Interface"
 	var(ndName,"ElecticalHacking");
 	var(ndInteractDistance,INTERACT_DISTANCE);
-	
+	getterconst_func(getCoefAutoWeight,5);
 	func(getNDInfo)
 	{
 		objParams();

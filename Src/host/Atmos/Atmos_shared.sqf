@@ -148,3 +148,8 @@ atmos_decodeChId = {
     private _z = (_id % 10) + 1;
 	[floor _x,floor _y,floor _z]
 };
+
+atmos_decodeChIdAt = {
+	params ["_id","_posIdx"];
+	(_id call atmos_decodeChId) select _posIdx
+};

@@ -32,13 +32,15 @@
 
 #define threadSleep(time) uisleep (time)
 
+#define threadNull ScriptNull
+
 #define isAsyncContext canSuspend
 
 //critical section
 
-#define criticalSectionStart() isNil {
+#define criticalSectionStart isNil {
 
-#define criticalSectionEnd() true}
+#define criticalSectionEnd };
 
 
 //mutex

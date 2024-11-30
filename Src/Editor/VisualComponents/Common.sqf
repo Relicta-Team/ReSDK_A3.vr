@@ -17,6 +17,7 @@ function(vcom_openWindow)
 	
 	vcom_windowMode = _windType;
 	vcom_visual_canDrawLines = true; //reset to default
+	vcom_visual_renderDebugGeometry = false; //reset to default
 
 	_sphereGround = createvehicle ["Sphere_3DEN",[0,0,0],[],0,"none"];
 	_sphereNoGround = createvehicle ["SphereNoGround_3DEN",[0,0,0],[],0,"none"];
@@ -487,6 +488,10 @@ function(vcom_observ_handleControl)
 				
 
 				call prox_syncVisualSceneWidgets;	
+			};
+
+			if (vcom_visual_renderDebugGeometry) then {
+				call vcom_visual_drawDebugGeometry;
 			};
 
 			if (!vcom_visual_canDrawLines) exitwith {};

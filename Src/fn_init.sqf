@@ -171,6 +171,11 @@ if (!isMultiplayer) then {
 	#endif
 };
 
+private _onexit = {
+	#ifdef RBUILDER
+	call RBuilder_onServerLockedLoading;
+	#endif
+};
 
 _calculateClientSide = {
 
@@ -192,14 +197,14 @@ _calculateClientSide = {
 
 _time_global = diag_ticktime;
 loadFile("src\host\init.sqf");
-
+if (server_isLocked) exitwith _onexit; //because class compiler can throws errors
 call dsm_initialize; //discord mgr init
 
 
 if (!call yaml_isExtensionLoaded) then {
 	#ifdef EDITOR
 	["Yaml библиотека не найдена."
-		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""ReMaker\DEPLOY.bat"""] call messageBox;
+		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""RBuilder\DEPLOY.bat"""] call messageBox;
 	#endif
 	setLastError("Yaml library not found.");
 	appExit(APPEXIT_REASON_EXTENSION_ERROR);
@@ -210,17 +215,13 @@ logformat("Yaml version: %1",_yamlObj);
 if ((_yamlObj getv(major)) == 0) then {
 	#ifdef EDITOR
 	["Yaml библиотека не обновлена."
-		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""ReMaker\DEPLOY.bat"""] call messageBox;
+		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""RBuilder\DEPLOY.bat"""] call messageBox;
 	#endif
 	setLastError("Yaml library outdated.");
 	appExit(APPEXIT_REASON_EXTENSION_ERROR);
 };
 
-if (server_isLocked) exitWith {
-	#ifdef RBUILDER
-	call RBuilder_onServerLockedLoading;
-	#endif
-};
+if (server_isLocked) exitWith _onexit;
 
 progLog("Serverside scripts loaded in " + str(diag_ticktime - _time_global) + " sec");
 

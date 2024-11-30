@@ -23,3 +23,19 @@
 #define NAT_CHUNKDAT_CFG 0
 #define NAT_CHUNKDAT_OBJECT 1
 #define NAT_CHUNKDAT_NEW(cfg) [cfg,nil]
+
+#define NAT_ATMOS_EFFTYPE_FIRE 0
+#define NAT_ATMOS_EFFTYPE_SMOKE 1
+
+//флаг оптимизации при включенном ENABLE_OPTIMIZATION. Отвечает за отсечение невидимых регионов
+#define NET_ATMOS_OPTIMIZATION_RENDER
+//дебаг отрисовка для куллинга
+//#define NET_ATMOS_OPTIMIZATION_RENDER_DEBUG
+
+//флаг оптимизации посредством объединения блоков в регионы. 
+// ! не должен быть включен вместе с ENABLE_PERBLOCK_ZPASS_CULLING
+#define ENABLE_OPTIMIZATION
+
+//флаг одиночной оптимизации для каждого блока
+// ! не должен быть включен вместе с ENABLE_OPTIMIZATION
+//#define ENABLE_PERBLOCK_ZPASS_CULLING

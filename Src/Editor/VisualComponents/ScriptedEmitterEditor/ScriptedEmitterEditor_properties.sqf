@@ -284,13 +284,13 @@ function(vcom_emit_internal_makeLightWidgetProperties)
 	modvar(_yPos) + 15;
 
 	["_zoneAttenuationHardlimitStart",[_xPos,_yPos,30,15],_ctg,
-		["attenuationhardlimitstart",["Старт жесткого ограничения","Максимальное расстояние начала жесткого ограничения (начало уменьшения интенсивности до 0) в метрах"],true,[0,999999],0.01,_attenuationColor2,_attenTextSize],
+		["attenuationhardlimitstart",["Старт жесткого ограничения","Максимальное расстояние начала жесткого ограничения (начало уменьшения интенсивности до 0) в метрах"],true,[0,100],0.001,_attenuationColor2,_attenTextSize],
 		_eventControlVec3
 	] call vcom_emit_internal_createZoneInput;
 	modvar(_yPos) + 15;
 
 	["_zoneAttenuationHardlimitEnd",[_xPos,_yPos,30,15],_ctg,
-		["attenuationhardlimitend",["Конец жесткого ограничения","Максимальное расстояние до конца жесткого ограничения (конец затухания интенсивности до 0) в метрах"],true,[0,999999],0.01,_attenuationColor2,_attenTextSize],
+		["attenuationhardlimitend",["Конец жесткого ограничения","Максимальное расстояние до конца жесткого ограничения (конец затухания интенсивности до 0) в метрах"],true,[0,100],0.001,_attenuationColor2,_attenTextSize],
 		_eventControlVec3
 	] call vcom_emit_internal_createZoneInput;
 	modvar(_yPos) + 15;

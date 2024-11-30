@@ -19,7 +19,7 @@
 
 //величина успеха
 #define getRollAmount(throwExec) ((throwExec) select 0)
-//тип возврата
+//тип возврата (DICE_SUCCESS, DICE_FAIL ...)
 #define getRollType(throwExec) ((throwExec) select 1)
 //результат 3d6
 #define getRollDiceAmount(throwExec) ((throwExec) select 2)

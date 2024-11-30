@@ -17,6 +17,7 @@ class(PowerSwitcherBox) extends(ElectronicDeviceNode)
 	var(desc,"Одно нажатие и снова что-нибудь перестанет работать!");
 	var(model,"metro_ob\model\rubilnik_5.p3d");
 	var(material,"MatMetal");
+	getterconst_func(getCoefAutoWeight,10);
 	var(dr,3);
 	
 /*	func(constructor)

@@ -6,6 +6,8 @@
 init_function(golib_hashData_init)
 {
 	golib_internal_lastBatchUpdateMode = [];
+
+	golib_internal_randomConvTable = null;
 }
 
 function(golib_hasHashData)
@@ -532,6 +534,20 @@ function(golib_validateVersion)
 	["Версия карты обновлена. Сохраните, соберите карту и перезапустите редактор.",30] call showInfo;
 }
 
+//функция преобразования старого рандома в новый
+function(golib_internal_gaussToLinear)
+{
+	params ["_val"];
+	if isNull(golib_internal_randomConvTable) then {
+		golib_internal_randomConvTable = createHashMapFromArray (call compile LOADFILE("src\Editor\Bin\RndConvTable.txt"));
+	};
+	_val = round _val;
+	private _tvals = golib_internal_randomConvTable get _val;
+	//For linear distribution between more than one values in table
+	private _accVal = 0;
+	{_accVal = _accVal + _x}foreach _tvals;
+	_accVal / (count _tvals)
+}
 
 function(golib_internal_handleVersionUpdate)
 {

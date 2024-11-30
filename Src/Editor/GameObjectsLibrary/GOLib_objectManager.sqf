@@ -36,6 +36,7 @@ function(golib_om_internal_handleTransformEvent)
 function(golib_om_onAttibutesChanged)
 {
 	params ["_obj"];
+	//[_obj] call lsim_reloadLightOnObject;
 	//[null] call inspector_menuLoad;
 }
 

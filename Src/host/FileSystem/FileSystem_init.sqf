@@ -68,7 +68,7 @@ fso_buildTree = {
 			_tree set [_dir,FSO_NEW_DATA]; 
 		};
 		if !(_parentDir in _tree) then {
-			_tree set [_dir,FSO_NEW_DATA];
+			_tree set [_parentDir,FSO_NEW_DATA];
 		};
 
 		//traceformat("Check path: %1 + %2",_dir arg _probFileName)

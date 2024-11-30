@@ -346,7 +346,7 @@ Replaced value:
 ```sqf
 70
 ```
-File: [client\Chat\functions.sqf at line 125](../../../Src/client/Chat/functions.sqf#L125)
+File: [client\Chat\functions.sqf at line 169](../../../Src/client/Chat/functions.sqf#L169)
 ## chatGettextwidget
 
 Type: function
@@ -398,7 +398,7 @@ Type: function
 Description: Отрисовывает чат в лобби. Копирует информацию из основного GUI чата в чат лобби
 
 
-File: [client\Chat\functions.sqf at line 103](../../../Src/client/Chat/functions.sqf#L103)
+File: [client\Chat\functions.sqf at line 147](../../../Src/client/Chat/functions.sqf#L147)
 ## chatshowhistory
 
 Type: function
@@ -406,7 +406,7 @@ Type: function
 Description: Открывает окно истории чата
 
 
-File: [client\Chat\functions.sqf at line 122](../../../Src/client/Chat/functions.sqf#L122)
+File: [client\Chat\functions.sqf at line 166](../../../Src/client/Chat/functions.sqf#L166)
 ## chatPrintSmart
 
 Type: function
@@ -417,7 +417,7 @@ Description: NOT USED
 - Param: _src
 - Param: _targ
 
-File: [client\Chat\functions.sqf at line 156](../../../Src/client/Chat/functions.sqf#L156)
+File: [client\Chat\functions.sqf at line 200](../../../Src/client/Chat/functions.sqf#L200)
 ## chat_resetFadeTimer
 
 Type: function
@@ -425,7 +425,7 @@ Type: function
 Description: Восстанавливает файдер чата
 
 
-File: [client\Chat\functions.sqf at line 163](../../../Src/client/Chat/functions.sqf#L163)
+File: [client\Chat\functions.sqf at line 207](../../../Src/client/Chat/functions.sqf#L207)
 ## chat_restoreVisible
 
 Type: function
@@ -433,7 +433,7 @@ Type: function
 Description: Восстанавливает видимость. Параметр _now в случае true восстанавливает видимость чата моментально
 - Param: _now
 
-File: [client\Chat\functions.sqf at line 169](../../../Src/client/Chat/functions.sqf#L169)
+File: [client\Chat\functions.sqf at line 213](../../../Src/client/Chat/functions.sqf#L213)
 ## chat_onUpdate
 
 Type: function
@@ -441,7 +441,7 @@ Type: function
 Description: Обновляет чат
 
 
-File: [client\Chat\functions.sqf at line 184](../../../Src/client/Chat/functions.sqf#L184)
+File: [client\Chat\functions.sqf at line 228](../../../Src/client/Chat/functions.sqf#L228)
 ## chat_applyColorTheme
 
 Type: function
@@ -449,7 +449,7 @@ Type: function
 Description: Применяет цветовую тему к виджетам чата
 
 
-File: [client\Chat\functions.sqf at line 205](../../../Src/client/Chat/functions.sqf#L205)
+File: [client\Chat\functions.sqf at line 249](../../../Src/client/Chat/functions.sqf#L249)
 # helpers.hpp
 
 ## ENM_TIPS_ERROR

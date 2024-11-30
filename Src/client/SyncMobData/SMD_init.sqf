@@ -534,7 +534,10 @@ smd_onGrabbed = {
 		_mob setVariable ["__loc_smd_isgrb",false];
 
 		if ((count (_mob getVariable ["__loc_smd_grb_pool",[]])) > 0) then {
-			{deleteVehicle _x} foreach (_mob getVariable ["__loc_smd_grb_pool",[]]);
+			{
+				[_x] call interact_removeOnScreenCapturedObject;
+				deleteVehicle _x;
+			} foreach (_mob getVariable ["__loc_smd_grb_pool",[]]);
 			_mob setVariable ["__loc_smd_grb_pool",[]];
 		};
 
@@ -829,6 +832,34 @@ smd_reloadMobsLighting = {
 
 
 	} foreach smd_allInGameMobs;
+};
+
+smd_createOffGeom = {
+	params ["_user","_srcObj","_oGeom"];
+	startAsyncInvoke
+	{
+		params ["_user","_srcObj","_oGeom"];
+		
+		if isNullReference(_user) exitWith {true};
+		if isNullReference(_srcObj) exitWith {true};
+		if isNullReference(_oGeom) exitWith {true};
+
+		//get relative position
+		_srcPos = asltoatl getPosWorld _srcObj;
+		_srcTransf = [vectorDirVisual _srcObj,vectorUpVisual _srcObj];
+		_srcScale = getObjectScale _srcObj;
+		_localPos = _user worldToModelVisual _srcPos;
+		
+		//hack for disabling roadway lod
+		_oGeom attachTo [_user,_localPos];
+		_oGeom setVectorDirAndUp _srcTransf;
+		_oGeom setObjectScale _srcScale;
+		
+		false
+	},
+	{},
+	[_user,_srcObj,_oGeom]
+	endAsyncInvoke
 };
 
 smd_onChatMessage = {

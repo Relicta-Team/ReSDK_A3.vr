@@ -11,6 +11,8 @@ function(systools_imageProcessor)
 
 	systools_imageProcessor_isFullBuild = _fullBuild;
 	systools_imageProcessor_searchPatterns = [];
+	systools_imageProcessor_restoreGEOCursorOnEnd = false;
+
 	private _aborted = false;
 	if (_searchPatternUse) then {
 		_ref = refcreate(0);
@@ -29,7 +31,7 @@ function(systools_imageProcessor)
 	};
 
 	[ 
-	"Вы уверены? Процесс может занять какое-то время", 
+	"Вы уверены? Процесс может занять какое-то время. Для отмены генерации зажмите ПКМ", 
 	"Генератор иконок", 
 	[ 
 	"Запустить", 
@@ -46,6 +48,10 @@ function(systools_imageProcessor)
 
 function(systools_internal_imageProcessor)
 {
+	if (geoCursor_enabled) then {
+		call geoCursor_toggle;
+		systools_imageProcessor_restoreGEOCursorOnEnd = true;
+	};
 	//prep scene
 	_posZ = 10;
 	_pos = [1024,1024,_posZ];
@@ -216,7 +222,7 @@ function(systools_internal_imageProcessor)
 				_path = "Resources\ui\inventory\items\gen\" +
 				(_x splitString "/\." joinString "+") + ".paa";
 						
-				if !([_path] call file_exists) then {
+				if ([_path] call file_exists) then {
 					_modelList set [_foreachindex,objNUll];
 				};
 			} foreach _modelList;
@@ -396,11 +402,14 @@ function(systools_internal_imageProcessor)
 				sleep 1.5;
 			};
 	
-	
 			//--- Delete the object
 			_object setpos [10,10,10];
 			deletevehicle _object;
 			_sphere hideobject true;
+
+			if (inputMouse 1 > 0) exitWith {
+				["User abort catched"] call printError;
+			};
 			
 		} foreach _modelList;
 	};
@@ -427,6 +436,9 @@ function(systools_internal_imageProcessor)
 		deleteVehicle _centerObject;
 	};
 	
+	if (systools_imageProcessor_restoreGEOCursorOnEnd) then {
+		call geoCursor_toggle;
+	};
 
 	call systools_imageProcessor_convertAndSave;
 }
@@ -441,6 +453,12 @@ function(systools_imageProcessor_convertAndSave)
 
 	//<PROFILEDIR>\Screenshots\ <--- screenshots path
 	private _screenshotsPath = (getMissionPath "") + "..\..\Screenshots\";
+	private _customProfiles = call Core_getCliArgs get "profiles";
+	
+	if !isNullVar(_customProfiles) then {
+		_screenshotsPath = format["%1\Users\%2\Screenshots\",_customProfiles,profileName];
+	};
+
 	private _generatedPath = _screenshotsPath + systools_imageProcessor_lastUsedFolder;
 	private _outputFolder = _screenshotsPath + "output";
 	
@@ -475,6 +493,8 @@ function(systools_imageProcessor_convertAndSave)
 			sleep 5;
 		};
 		[10,"Запуск очистки фона..."] call loadingScreen_setProgress;
+		["Generating path: %1",_generatedPath] call printLog;
+
 		private _result = [_imgRemoverGreenScreenExe,false,""""+_generatedPath+""" 600"] call file_openReturn;
 		["Icon converter result: %1",_result] call printLog;
 		if (_result != 0) exitwith {
@@ -501,6 +521,17 @@ function(systools_imageProcessor_convertAndSave)
 		[_paltopac,false,""""+_nogreenOutput+"\"+_x+""" """+_fullPathPaaTemp+""""] call file_openReturn;
 		_newpath = _pathGeneratedIcons + _newname;
 		if ([_newpath,true] call file_exists) then {
+
+			if ([_newpath,true] call file_isLocked) then {
+				["file locked - %1; awaiting unlock",_newpath] call printWarning;
+				while {[_newpath,true] call file_isLocked} do {
+					["unlock attempt..."] call printTrace;
+					call file_clearFileLock;
+					sleep 0.5;
+				};
+				["file unlocked - %1",_newpath] call printLog;
+			};
+
 			if !([_newpath] call file_delete) then {
 				["CANNOT DELETE FILE %1",_newpath] call printError;
 			} else {
@@ -516,6 +547,29 @@ function(systools_imageProcessor_convertAndSave)
 
 	["DONE!"] call printLog;
 	call loadingScreen_stop;
+
+	if (["Очистить папку с сгенерированными исходниками иконок?"+endl+
+		(format["При подтверждении будет удалена папка ""%1"" со всем содержимым.",_generatedPath]) +
+		endl+endl+"Удалить папку?"] call messageBoxRet) then {
+			_unsafeDeleteExternalFolder = {
+				params ["_path"];
+				if ([_path,false] call folder_exists) then {
+					["FileManager","FolderDelete",[_path]] call rescript_callCommandVoid;
+					true
+				} else {false};
+			};
+			["Delete generated icons folder: %1 -> result: %2",_generatedPath,[_generatedPath] call _unsafeDeleteExternalFolder] call printLog;
+	} else {
+		if (["Вы хотите открыть папку с исходниками сгенерированных png иконок?"] call messageBoxRet) then {
+			// ["FileManager","Open",[ 
+			// 	"explorer.exe",
+			// 	[_generatedPath,"""","~"] call stringReplace,
+			// 	"~"
+			// ],true] call rescript_callCommand;
+
+			["WorkspaceHelper","openfolder",[_generatedPath,0,"with_select"],true] call rescript_callCommand;
+		};
+	};	
 
 	["Процедура успешно завершена. Перезапустите редактор для обновления иконок"] call messageBox;
 }

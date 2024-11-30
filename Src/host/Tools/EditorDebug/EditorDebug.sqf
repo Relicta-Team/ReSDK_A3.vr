@@ -12,6 +12,7 @@
 #include "EditorDebug_visual.sqf"
 #include "EditorDebug_shared.sqf"
 #include "EditorDebug_io.sqf"
+#include "EditorDebug_input.sqf"
 
 editorDebug_isEnabled = true; //global mode
 

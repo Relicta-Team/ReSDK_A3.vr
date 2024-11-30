@@ -92,7 +92,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientStatistic\LogVariables.sqf at line 143](../../../Src/client/ClientStatistic/LogVariables.sqf#L143)
+File: [client\ClientStatistic\LogVariables.sqf at line 157](../../../Src/client/ClientStatistic/LogVariables.sqf#L157)
 ## clistat_setLogVars
 
 Type: function
@@ -100,4 +100,68 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\ClientStatistic\LogVariables.sqf at line 157](../../../Src/client/ClientStatistic/LogVariables.sqf#L157)
+File: [client\ClientStatistic\LogVariables.sqf at line 171](../../../Src/client/ClientStatistic/LogVariables.sqf#L171)
+# MemUsage_init.sqf
+
+## memvis_size_x
+
+Type: constant
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+14
+```
+File: [client\ClientStatistic\MemUsage_init.sqf at line 10](../../../Src/client/ClientStatistic/MemUsage_init.sqf#L10)
+## memvis_size_y
+
+Type: constant
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+10
+```
+File: [client\ClientStatistic\MemUsage_init.sqf at line 11](../../../Src/client/ClientStatistic/MemUsage_init.sqf#L11)
+## cli_mem_widgets
+
+Type: Variable
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+[widgetNull,widgetNull,widgetNull]
+```
+File: [client\ClientStatistic\MemUsage_init.sqf at line 8](../../../Src/client/ClientStatistic/MemUsage_init.sqf#L8)
+## cli_mem_init
+
+Type: function
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+File: [client\ClientStatistic\MemUsage_init.sqf at line 13](../../../Src/client/ClientStatistic/MemUsage_init.sqf#L13)
+## cli_mem_onupdate
+
+Type: function
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+File: [client\ClientStatistic\MemUsage_init.sqf at line 34](../../../Src/client/ClientStatistic/MemUsage_init.sqf#L34)

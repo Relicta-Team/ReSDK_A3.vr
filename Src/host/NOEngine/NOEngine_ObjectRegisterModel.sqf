@@ -486,6 +486,9 @@ _noe_requestChunkLoad = {
 
 	//Добавляем владельца чанка
 	chunk_getOwners(_chObj) pushBackUnique _cli;
+	//вписываемся в список просмотра
+	getVar(_cli,loadedChunks) set [str[_chunk,_type],0];
+	//traceformat("RCHL-added chunk: %1; curcnt: %2",str vec2(_chunk,_type) arg count (getVar(_cli,loadedChunks)))
 
 }; rpcAdd("requestChunkLoad",_noe_requestChunkLoad);
 
@@ -510,10 +513,9 @@ _reqDelUpdCh = {
 
 _noe_unsubChunkListen = {
 	params ["_chunk","_type","_owner",["_skipServerUnsub",true]];
-
 	_chObj = [_chunk,_type] call noe_getChunkObject;
 	_ownerList = chunk_getOwners(_chObj);
-	_cli = _owner call cm_findClientById;
+	_cli = ifcheck(equalTypes(_owner,nullPtr),_owner,_owner call cm_findClientById);
 
 	_ownerList deleteAt (_ownerList find _cli);
 
@@ -528,6 +530,7 @@ _noe_unsubChunkListen = {
 
 	_strChunk = str [_chunk,_type];
 	getVar(_cli,loadedChunks) deleteAt _strChunk;
+	//traceformat("RCHL-removed chunk: %1; curcnt: %2",_strChunk arg count (getVar(_cli,loadedChunks)))
 
 }; rpcAdd("unsubChunkListen",_noe_unsubChunkListen);
 

@@ -256,6 +256,13 @@ _ret = _this; \
 	#define createMesh(ctx) createSimpleObject (ctx)
 #endif
 
+//custom memobj
+#define mem_alloc() (createLocation ["cba_namespacedummy",[20,20,20],0,0])
+#define mem_set(ptr) (ptr)setvariable 
+#define mem_unset(ptr,val) (ptr)setvariable[val,null]
+#define mem_get(ptr,val) ((ptr)getvariable(val))
+#define mem_free(ptr) (deleteLocation (ptr))
+
 
 //string help
 #define stringEmpty ""
@@ -464,8 +471,9 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define pick selectRandom
 //выбор рандомного числа включительно Bis_fnc_randomNum
 #define rand(_beg,_end) (linearConversion [0,1,random 1,_beg,_end])
-//BIS_fnc_randomInt
-#define randInt(_beg,_end) (FLOOR linearConversion [0,1,random 1,(_beg)min(_end),(_end)max(_beg)+1])
+
+// Обновлённая функция выбора случайного целого числа из диапазона. 1.000001 было добавлено для решения проблемы когда рандом выпадает в 0.999999989
+#define randInt(_beg,_end) (FLOOR linearConversion [0,1.000001,random 1,(_beg)min(_end),(_end)max(_beg)+1])
 
 #define prob(val) (random[0,50,100]<(val))
 

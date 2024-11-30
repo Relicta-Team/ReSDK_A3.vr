@@ -194,9 +194,10 @@ function(contextMenu_internal_loadContext)
 					_levelContext = _buttonContext getVariable "level";
 					call (_buttonContext getVariable "_action");
 				};
-				
+
 				nextFrameParams(_c,_this);
-				nextFrame({(call contextMenu_getDisplay) closeDisplay 0});
+				nextFrame({(call contextMenu_getDisplay) closeDisplay 0;});
+				
 			}];
 		};
 		
