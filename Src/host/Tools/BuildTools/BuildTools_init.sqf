@@ -117,7 +117,7 @@ bt_buildClient = {
 
 	// --- saving 600-700
 	log("Saving build");
-	private _allContent = (CRYPT_KEY+"|"+(str allClientContents));
+	private _allContent = str allClientContents;
 	logformat("	Content size: %1 kb",(count _allContent)toFixed 0 splitString "." select 0);
 
 	if isNull(file_write) exitWith {
