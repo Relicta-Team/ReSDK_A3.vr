@@ -2387,6 +2387,25 @@ region(Pulling functionality)
 	func(_pullStarted)
 	{
 		objParams_1(_usr);
+
+		private _wobj = getSelf(loc);
+		_srcPos = asltoatl getPosWorld _wobj;
+		private _own = getVar(_usr,owner);
+		private _offs = _srcPos vectorDiff (getposatl _own);
+
+		callSelf(unloadModel);
+
+		private _rpcInfo = [getSelf(pointer),getSelf(model),_offs,[_wobj] call model_getPitchBankYaw];
+		if (callSelf(canLight) && {getSelf(light) != -1}) then {
+			_rpcInfo pushBack getSelf(light);
+		};
+
+		callFuncParams(_usr,syncSmdVar,"pull" arg _rpcInfo);
+	};
+	
+	func(_pullStarted_OLD)
+	{
+		objParams_1(_usr);
 		//default async check timeout
 		#define async_delay_check_ 0.5
 

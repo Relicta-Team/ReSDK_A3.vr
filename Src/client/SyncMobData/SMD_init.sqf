@@ -560,6 +560,97 @@ smd_isPulling = {
 pulling_canPull = false;
 smd_onPull = {
 	params ["_mob","_ctx"];
+
+	private _syncWalk = {
+		//in pull mode we can only walking
+		if equals(_mob,player) then {
+			_mob call cd_fw_syncForceWalk;
+		};
+	};
+	private _releaseResources = {
+		private _prevObj = _mob getvariable "__loc_pull_obj";
+		if !isNullVar(_prevObj) then {
+			deleteVehicle _prevObj;
+			_mob setvariable ["__loc_pull_obj",null];
+		};
+		_mob getvariable "__loc_pull_ptr";
+	};
+
+	if equals(_ctx,0) exitWith {
+		call _releaseResources;
+		call _syncWalk;
+	};
+
+	_ctx params ["_ptr","_model","_offset","_pby",["_light",-1]];
+
+	call _releaseResources;
+
+	private _obj = createMesh([_model arg [0 arg 0 arg 0] arg true]);
+	_mob setvariable ["__loc_pull_obj",_obj];
+	_mob setVariable ["__loc_pull_lastupd",tickTime];
+	_mob setVariable ["__loc_pull_ptr",_ptr];
+	
+	private _lpp = getPosWorld _obj;
+	_mob setVariable ["__loc_pull_lastpos",_lpp];
+	_mob setVariable ["__loc_pull_newpos",_lpp];
+	_mob setVariable ["__loc_pull_lastVDU",_pby];
+	_mob setVariable ["__loc_pull_newVDU",_pby];
+
+	startAsyncInvoke
+	{
+		params ["_mob","_obj","_offset","_pby"];
+
+		_lastSavedPos = _mob getVariable ["__loc_pull_lastpos",null];
+		_newSavedPos = _mob getVariable ["__loc_pull_newpos",_lastSavedPos];
+		assert(_lastSavedPos);
+		assert(_newSavedPos);
+
+		_lastUpd = _mob getVariable "__loc_pull_lastupd";
+		_nextUpd = _lastUpd + 0.5;
+		//traceformat("pre %1; post %2",_lastSavedPos arg _pos)
+		_newpos = vectorLinearConversion [
+			_lastUpd,
+			_nextUpd,
+			tickTime,
+			_lastSavedPos,
+			_newSavedPos,
+			true//clamp value
+		];
+		_newvdu = vectorLinearConversion [
+			_lastUpd,
+			_nextUpd,
+			tickTime,
+			_mob getVariable "__loc_pull_lastVDU",
+			_mob getVariable "__loc_pull_newVDU",
+			true];
+		//traceformat("interp pull dist %1; ---> FROM %2 TO %3; NEWPOS %4",(_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))) arg _lastSavedPos arg _newSavedPos arg _newpos)
+		
+		if (tickTime >= _nextUpd) then {
+			//_this set [2,tickTime + 0.5];
+			_mob setVariable ["__loc_pull_lastpos",_newpos];
+			_mob setVariable ["__loc_pull_newpos",_pos];
+
+			_mob setVariable ["__loc_pull_lastVDU",_newvdu];
+			_mob setVariable ["__loc_pull_newVDU",_vdu];
+			_mob setVariable ["__loc_pull_lastupd",_nextUpd];
+		};
+		_zdelta = _obj getvariable ["pull_interp_zpos_delta",0];
+		_newpos = _newpos vectorAdd [0,0,_zdelta];
+		_obj setPosWorld (_newpos);
+
+		if isNullReference(_obj) exitWith {true};
+	},
+	{
+
+	},
+	[_mob,_obj,_offset,_pby]
+	endAsyncInvoke
+
+	call _syncWalk;
+};
+
+smd_onPull_old = {
+	params ["_mob","_ctx"];
 	
 	private _syncWalk = {
 		//in pull mode we can only walking
