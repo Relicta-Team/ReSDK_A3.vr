@@ -109,7 +109,7 @@ Type: function
 Description: 
 - Param: _path
 
-File: [host\Namings\Naming_init.sqf at line 11](../../../Src/host/Namings/Naming_init.sqf#L11)
+File: [host\Namings\Naming_init.sqf at line 9](../../../Src/host/Namings/Naming_init.sqf#L9)
 ## naming_generateName
 
 Type: function
@@ -119,7 +119,7 @@ Description: Генерирует имя персонажа в разных ск
 - Param: _f (optional, default "")
 - Param: _s (optional, default "")
 
-File: [host\Namings\Naming_init.sqf at line 28](../../../Src/host/Namings/Naming_init.sqf#L28)
+File: [host\Namings\Naming_init.sqf at line 26](../../../Src/host/Namings/Naming_init.sqf#L26)
 ## naming_generateName_old
 
 Type: function
@@ -129,7 +129,7 @@ Description:
 - Param: _f (optional, default "")
 - Param: _s (optional, default "")
 
-File: [host\Namings\Naming_init.sqf at line 67](../../../Src/host/Namings/Naming_init.sqf#L67)
+File: [host\Namings\Naming_init.sqf at line 65](../../../Src/host/Namings/Naming_init.sqf#L65)
 # ParseNaming.sqf
 
 ## loadMobNames(filename)

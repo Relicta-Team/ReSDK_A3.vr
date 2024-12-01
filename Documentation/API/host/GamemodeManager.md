@@ -249,32 +249,18 @@ Replaced value:
 (missionNamespace getVariable ["role_"+(val),nullPtr])
 ```
 File: [host\GamemodeManager\GamemodeManager.h at line 17](../../../Src/host/GamemodeManager/GamemodeManager.h#L17)
-## conDllCall
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-
-
-Replaced value:
-```sqf
-diag_log
-```
-File: [host\GamemodeManager\GamemodeManager.h at line 21](../../../Src/host/GamemodeManager/GamemodeManager.h#L21)
 ## gprint(mes)
 
 Type: constant
 
-Description: 
+Description: Печатники сообщений
 - Param: mes
 
 Replaced value:
 ```sqf
 conDllCall format["[GMM]:	%1 #0101",mes]
 ```
-File: [host\GamemodeManager\GamemodeManager.h at line 24](../../../Src/host/GamemodeManager/GamemodeManager.h#L24)
+File: [host\GamemodeManager\GamemodeManager.h at line 20](../../../Src/host/GamemodeManager/GamemodeManager.h#L20)
 ## gprintformat(mes,fmt)
 
 Type: constant
@@ -287,7 +273,7 @@ Replaced value:
 ```sqf
 gprint(format[mes arg fmt]) 
 ```
-File: [host\GamemodeManager\GamemodeManager.h at line 26](../../../Src/host/GamemodeManager/GamemodeManager.h#L26)
+File: [host\GamemodeManager\GamemodeManager.h at line 22](../../../Src/host/GamemodeManager/GamemodeManager.h#L22)
 ## DEFAULT_TIME_TO_START
 
 Type: constant
@@ -299,7 +285,7 @@ Replaced value:
 ```sqf
 60
 ```
-File: [host\GamemodeManager\GamemodeManager.h at line 29](../../../Src/host/GamemodeManager/GamemodeManager.h#L29)
+File: [host\GamemodeManager\GamemodeManager.h at line 25](../../../Src/host/GamemodeManager/GamemodeManager.h#L25)
 ## DEFAULT_TIME_TO_START
 
 Type: constant
@@ -313,7 +299,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\GamemodeManager\GamemodeManager.h at line 31](../../../Src/host/GamemodeManager/GamemodeManager.h#L31)
+File: [host\GamemodeManager\GamemodeManager.h at line 27](../../../Src/host/GamemodeManager/GamemodeManager.h#L27)
 ## PRE_LOBBY_AWAIT_TIME
 
 Type: constant
@@ -325,7 +311,7 @@ Replaced value:
 ```sqf
 60*3
 ```
-File: [host\GamemodeManager\GamemodeManager.h at line 35](../../../Src/host/GamemodeManager/GamemodeManager.h#L35)
+File: [host\GamemodeManager\GamemodeManager.h at line 31](../../../Src/host/GamemodeManager/GamemodeManager.h#L31)
 # GamemodeManager.hpp
 
 ## GAME_STATE_PRELOAD

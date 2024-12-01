@@ -912,7 +912,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\SoundSystem\Sound3d.sqf at line 169](../../../Src/client/SoundSystem/Sound3d.sqf#L169)
+File: [client\SoundSystem\Sound3d.sqf at line 166](../../../Src/client/SoundSystem/Sound3d.sqf#L166)
 ## soundProcessor_play
 
 Type: function
@@ -985,7 +985,7 @@ Type: function
 Description: 
 - Param: _soundPtr
 
-File: [client\SoundSystem\Sound3d.sqf at line 150](../../../Src/client/SoundSystem/Sound3d.sqf#L150)
+File: [client\SoundSystem\Sound3d.sqf at line 147](../../../Src/client/SoundSystem/Sound3d.sqf#L147)
 ## sound3d_internal_localHandler
 
 Type: function
@@ -996,4 +996,4 @@ Description:
 - Param: _preend
 - Param: _psParams
 
-File: [client\SoundSystem\Sound3d.sqf at line 170](../../../Src/client/SoundSystem/Sound3d.sqf#L170)
+File: [client\SoundSystem\Sound3d.sqf at line 167](../../../Src/client/SoundSystem/Sound3d.sqf#L167)

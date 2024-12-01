@@ -63,7 +63,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\LootSystem\LootSystem_init.sqf at line 189](../../../Src/host/LootSystem/LootSystem_init.sqf#L189)
+File: [host\LootSystem\LootSystem_init.sqf at line 182](../../../Src/host/LootSystem/LootSystem_init.sqf#L182)
 ## loot_init
 
 Type: function
@@ -97,7 +97,7 @@ Type: function
 Description: 
 
 
-File: [host\LootSystem\LootSystem_init.sqf at line 65](../../../Src/host/LootSystem/LootSystem_init.sqf#L65)
+File: [host\LootSystem\LootSystem_init.sqf at line 58](../../../Src/host/LootSystem/LootSystem_init.sqf#L58)
 ## loot_loadConfig
 
 Type: function
@@ -105,7 +105,7 @@ Type: function
 Description: 
 - Param: _path
 
-File: [host\LootSystem\LootSystem_init.sqf at line 70](../../../Src/host/LootSystem/LootSystem_init.sqf#L70)
+File: [host\LootSystem\LootSystem_init.sqf at line 63](../../../Src/host/LootSystem/LootSystem_init.sqf#L63)
 ## loot_processObject
 
 Type: function
@@ -114,7 +114,7 @@ Description:
 - Param: _type
 - Param: _obj
 
-File: [host\LootSystem\LootSystem_init.sqf at line 141](../../../Src/host/LootSystem/LootSystem_init.sqf#L141)
+File: [host\LootSystem\LootSystem_init.sqf at line 134](../../../Src/host/LootSystem/LootSystem_init.sqf#L134)
 ## loot_internal_editor_reloadLooting
 
 Type: function
@@ -124,7 +124,7 @@ Type: function
 Description: 
 
 
-File: [host\LootSystem\LootSystem_init.sqf at line 166](../../../Src/host/LootSystem/LootSystem_init.sqf#L166)
+File: [host\LootSystem\LootSystem_init.sqf at line 159](../../../Src/host/LootSystem/LootSystem_init.sqf#L159)
 ## loot_editor_isLoadedLib
 
 Type: function
@@ -134,7 +134,7 @@ Type: function
 Description: 
 
 
-File: [host\LootSystem\LootSystem_init.sqf at line 175](../../../Src/host/LootSystem/LootSystem_init.sqf#L175)
+File: [host\LootSystem\LootSystem_init.sqf at line 168](../../../Src/host/LootSystem/LootSystem_init.sqf#L168)
 ## loot_editor_getTemplateByInput
 
 Type: function
@@ -144,7 +144,7 @@ Type: function
 Description: 
 - Param: _input
 
-File: [host\LootSystem\LootSystem_init.sqf at line 179](../../../Src/host/LootSystem/LootSystem_init.sqf#L179)
+File: [host\LootSystem\LootSystem_init.sqf at line 172](../../../Src/host/LootSystem/LootSystem_init.sqf#L172)
 # LootSystem_structs.sqf
 
 ## LOOT_COMPARE_BY_NAME

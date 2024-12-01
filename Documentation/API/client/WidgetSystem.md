@@ -201,20 +201,6 @@ Replaced value:
 (ACT(TurnLeft) + ACT(TurnRight))
 ```
 File: [client\WidgetSystem\blockedButtons.hpp at line 53](../../../Src/client/WidgetSystem/blockedButtons.hpp#L53)
-## ADDRULE_FORBIDDEN_BUTTONS(forkey)
-
-Type: constant
-
-> Exists if **_SQFVM** defined
-
-Description: 
-- Param: forkey
-
-Replaced value:
-```sqf
-(forkey in GROUP_ACTIONS || forkey in GROUP_COMMA_MENU || forkey in SIMPLE_PLAYER_INTERACTION)
-```
-File: [client\WidgetSystem\blockedButtons.hpp at line 57](../../../Src/client/WidgetSystem/blockedButtons.hpp#L57)
 # defines.sqf
 
 ## HEIGHT_WINDOW_DRAGGER
