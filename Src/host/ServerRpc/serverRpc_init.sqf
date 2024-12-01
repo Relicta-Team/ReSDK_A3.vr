@@ -19,9 +19,6 @@
 #define canlog(eventname,code) if !((toLower eventname) in DISABLED_RPC_LOG) then {code}
 
 #define debugprint_type "debug_console" callExtension
-#ifdef __VM_VALIDATE
-	#define debugprint_type diag_log
-#endif
 
 #ifdef log_server_rpc
 	#define rpc_log(event,owner,args) canlog(event,debugprint_type format['[NET::LOG::SERVER]:    <%1> send %4 bytes to (%2) with %3' arg event arg owner arg args arg args call oop_getTypeSizeFull]; ["<%1> send %4 bytes to (%2) with %3" arg event arg owner arg args arg args call oop_getTypeSizeFull] call logInfo)
