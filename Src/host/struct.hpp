@@ -181,11 +181,11 @@
 
 //instansing
 #ifdef STRUCT_USE_ALLOC_INFO
-	#define struct_new(name) (call{_sbj___ = [ pts_##name ,nil] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
-	#define struct_newp(name,arglist) (call{_sbj___ = [ pts_##name ,[arglist]] call struct_iallc; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
+	#define struct_new(name) (call{_sbj___ = createHashMapObject[ pts_##name ,nil]; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
+	#define struct_newp(name,arglist) (call{_sbj___ = createHashMapObject[ pts_##name ,[arglist]]; _sbj___ set ["__fileinfo__",__FILE__+ '+__LINE__']; _sbj___})
 #else
-	#define struct_new(name) ([ pts_##name ,nil ] call struct_iallc)
-	#define struct_newp(name,arglist) ([ pts_##name ,[arglist]] call struct_iallc)
+	#define struct_new(name) (createHashMapObject[ pts_##name ,nil ])
+	#define struct_newp(name,arglist) (createHashMapObject[ pts_##name ,[arglist]])
 #endif
 
 //forced delete structure
@@ -399,15 +399,13 @@
 		private _baseName = null;
 		{
 			_baseName = _x;
-			_tList = ([_y] call struct_iallc) get STRUCT_MEM_TYPE;
+			_tList = (createHashMapObject[_y]) get STRUCT_MEM_TYPE;
 			{
 				(strt_inhChld get _x) pushBack _baseName;
 			} foreach (_tList select [1]);
 			strt_inh set [_x,_tList];
 		} foreach _weakDeclMap;
 	};
-
-	VM_COMPILER_ADDFUNC_UNARY(struct_iallc,createHashMapObject);
 
 	struct_alloc = {
 		params ["_s","_params"];
@@ -417,9 +415,9 @@
 		#endif
 
 		if isNullVar(_params) then {
-			[vtable_s get _s] call struct_iallc;
+			createHashMapObject[vtable_s get _s];
 		} else {
-			[vtable_s get _s,_params] call struct_iallc;
+			createHashMapObject[vtable_s get _s,_params];
 		};
 		
 		#ifdef STRUCT_USE_ALLOC_INFO

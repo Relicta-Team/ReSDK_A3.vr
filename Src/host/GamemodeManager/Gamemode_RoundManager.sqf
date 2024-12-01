@@ -1374,7 +1374,7 @@ gm_createMob = {
 	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
 	
 	//only after platform 2.18
-	[_mob,false] call setPhysicsCollisionFlag_impl;
+	_mob setPhysicsCollisionFlag false;
 
 	_mob disableAI "MOVE";
 	_mob disableAI "TARGET";
@@ -1420,12 +1420,6 @@ lobby_createDummy = {
 	_mob
 };
 private _canCreateDummy = true;
-#ifdef __VM_VALIDATE
-	_canCreateDummy = false;
-#endif
-#ifdef __VM_BUILD
-	_canCreateDummy = false;
-#endif
 
 if (_canCreateDummy) then {
 	private _dummyMobPos = [50,50,0];

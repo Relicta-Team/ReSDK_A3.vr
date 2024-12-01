@@ -155,8 +155,5 @@ soundUI_play = {
 
 	_file = PATH_SOUND(_file);
 	
-	[_file,_volume,_soundPitch,_isEffect] call playSoundUI_impl;
+	playSoundUI[_file,_volume,_soundPitch,_isEffect];
 };
-
-//Данное исправление введено из-за отсутствия реализаций функции в компиляторе vm
-VM_COMPILER_ADDFUNC_UNARY(playSoundUI_impl,playSoundUI);

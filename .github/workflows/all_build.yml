@@ -84,73 +84,73 @@ jobs:
         shell: cmd
         run: ${{ env.graph_validator_path_app }} ${{ env.graph_validator_args }}
         working-directory: ${{ env.graph_validator_path }}
-  checkclient:
-    name: Check client
-    runs-on: windows-latest
-    needs: [ValidatePR]
-    strategy:
-      fail-fast: true
-      matrix:
-        build_type:
-          - client
-          - client-debug
-    steps:
-      - name: Setup Python
-        uses: actions/setup-python@v3.1.4
-      - uses: actions/checkout@v3
-      - name: Validate ${{ matrix.build_type }}
-        continue-on-error: true
-        run: | 
-          echo "::group::Process validate"
-          ${{ env.validate_source_path }} ${{ matrix.build_type }}
-          echo "::endgroup::"
-        working-directory: ${{ github.workspace }}
-      - name: Post validate ${{ matrix.build_type }}
-        run: | 
-          python -V
-          echo "::group::Output check"
-          python ${{ env.parse_source_out_path }} ${{ env.source_out_path }} ./
-          echo "::endgroup::"
-        working-directory: ${{ github.workspace }}
-      - name: Upload output ${{ matrix.build_type }}
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: Output log ${{ matrix.build_type }}
-          path: ${{ env.source_out_path }}
+  # checkclient:
+  #   name: Check client
+  #   runs-on: windows-latest
+  #   needs: [ValidatePR]
+  #   strategy:
+  #     fail-fast: true
+  #     matrix:
+  #       build_type:
+  #         - client
+  #         - client-debug
+  #   steps:
+  #     - name: Setup Python
+  #       uses: actions/setup-python@v3.1.4
+  #     - uses: actions/checkout@v3
+  #     - name: Validate ${{ matrix.build_type }}
+  #       continue-on-error: true
+  #       run: | 
+  #         echo "::group::Process validate"
+  #         ${{ env.validate_source_path }} ${{ matrix.build_type }}
+  #         echo "::endgroup::"
+  #       working-directory: ${{ github.workspace }}
+  #     - name: Post validate ${{ matrix.build_type }}
+  #       run: | 
+  #         python -V
+  #         echo "::group::Output check"
+  #         python ${{ env.parse_source_out_path }} ${{ env.source_out_path }} ./
+  #         echo "::endgroup::"
+  #       working-directory: ${{ github.workspace }}
+  #     - name: Upload output ${{ matrix.build_type }}
+  #       uses: actions/upload-artifact@v3.1.2
+  #       with:
+  #         name: Output log ${{ matrix.build_type }}
+  #         path: ${{ env.source_out_path }}
 
-  checkserver:
-    name: Check host
-    runs-on: windows-latest
-    needs: [ValidatePR]
-    strategy:
-      fail-fast: true
-      matrix:
-        build_type:
-          - server
-          - server-debug
-    steps:
-      - name: Setup Python
-        uses: actions/setup-python@v3.1.4
-      - uses: actions/checkout@v3
-      - name: Validate ${{ matrix.build_type }}
-        continue-on-error: true
-        run: | 
-          echo "::group::Process validate"
-          ${{ env.validate_source_path }} ${{ matrix.build_type }}
-          echo "::endgroup::"
-        working-directory: ${{ github.workspace }}
-      - name: Post validate ${{ matrix.build_type }}
-        run: | 
-          python -V
-          echo "::group::Output check"
-          python ${{ env.parse_source_out_path }} ${{ env.source_out_path }} ./
-          echo "::endgroup::"
-        working-directory: ${{ github.workspace }}
-      - name: Upload output ${{ matrix.build_type }}
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: Output log ${{ matrix.build_type }}
-          path: ${{ env.source_out_path }}
+  # checkserver:
+  #   name: Check host
+  #   runs-on: windows-latest
+  #   needs: [ValidatePR]
+  #   strategy:
+  #     fail-fast: true
+  #     matrix:
+  #       build_type:
+  #         - server
+  #         - server-debug
+  #   steps:
+  #     - name: Setup Python
+  #       uses: actions/setup-python@v3.1.4
+  #     - uses: actions/checkout@v3
+  #     - name: Validate ${{ matrix.build_type }}
+  #       continue-on-error: true
+  #       run: | 
+  #         echo "::group::Process validate"
+  #         ${{ env.validate_source_path }} ${{ matrix.build_type }}
+  #         echo "::endgroup::"
+  #       working-directory: ${{ github.workspace }}
+  #     - name: Post validate ${{ matrix.build_type }}
+  #       run: | 
+  #         python -V
+  #         echo "::group::Output check"
+  #         python ${{ env.parse_source_out_path }} ${{ env.source_out_path }} ./
+  #         echo "::endgroup::"
+  #       working-directory: ${{ github.workspace }}
+  #     - name: Upload output ${{ matrix.build_type }}
+  #       uses: actions/upload-artifact@v3.1.2
+  #       with:
+  #         name: Output log ${{ matrix.build_type }}
+  #         path: ${{ env.source_out_path }}
   
   checkserver-vm:
     name: Check server VM

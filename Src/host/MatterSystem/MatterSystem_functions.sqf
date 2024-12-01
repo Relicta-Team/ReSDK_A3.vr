@@ -6,9 +6,6 @@
 
 // Внутренняя функция активации наследования всех свойств
 ms_internal_initInheritance = {
-	#ifdef __VM_VALIDATE
-	if (true) exitWith {};
-	#endif
 	[ms_map_allMatters] call ms_internal_processInheritanceOnNamespace;
 	[ms_map_allReactions] call ms_internal_processInheritanceOnNamespace;
 

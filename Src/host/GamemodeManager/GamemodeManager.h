@@ -17,10 +17,6 @@
 #define getRoleObject(val) (missionNamespace getVariable ["role_"+(val),nullPtr])
 
 //Печатники сообщений
-#ifdef __VM_VALIDATE
-	#define conDllCall diag_log
-#endif
-
 #define gprint(mes) conDllCall format["[GMM]:	%1 #0101",mes]
 
 #define gprintformat(mes,fmt) gprint(format[mes arg fmt]) 

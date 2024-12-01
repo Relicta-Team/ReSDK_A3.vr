@@ -21,31 +21,6 @@
 	#define __testSyntaxClass
 #endif
 
-#ifdef __VM_VALIDATE
-	//#define __postclassVM __vm_log("Found class: " + _class);
-	#define __postclassVM
-
-	#define createObj (call { \
-		if (isnil "_class") then { \
-			(customnamespace__ ("runtime_object<"+ ((round random 999999999999) Tofixed 0) + ">")) \
-		} else { \
-			(customnamespace__ (_class + "runtime_type<"+ ((round random 999999999999) Tofixed 0) + ">")) \
-		}; \
-	})
-
-	#define __vm_throw_prep_ctx(ctx) ((ctx) splitSTring ENDl joinSTring "\n")
-
-	#define vm_throw(ctx) vm_lastError = __vm_throw_prep_ctx(ctx); throw vm_lastError;
-	#define vm_throw_flinf(ctx) vm_lastError = __vm_throw_prep_ctx(ctx) + "|CTX:" + __FILE__ + "+" + str(__LINE__) ; throw vm_lastError;
-
-	#define setName ;
-	
-#else
-	#define __postclassVM
-	#define vm_throw(ctx)
-	#define vm_throw_flinf(ctx)
-#endif
-
 #define interfaceHeader __interface_header_flag__ = true;
 
 //определение класса
@@ -73,9 +48,7 @@
 
 
 //
-#define endclass [__FILE__,__LINE__] call pc_oop_declareEOC; \
-	__postclassVM \
-
+#define endclass [__FILE__,__LINE__] call pc_oop_declareEOC;
 #define extends(child) _mother = #child;
 #define extends_runtime(child) _mother = child;
 
@@ -152,10 +125,6 @@
 //#define var_multi(defaultvalue)
 
 #define __check_method_duplicate 
-
-#ifdef __VM_VALIDATE
-	#define __check_method_duplicate if (isnil'__interface_header_flag__') then {vm_throw_flinf(format ["Duplicate method '%1::%2'" arg _class arg _mem_name])};
-#endif
 
 #define func(name) _mem_name = #name; _classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LINE__)]; \
 	_propOverride = _methods findIf {(_x select 0) == _mem_name}; \

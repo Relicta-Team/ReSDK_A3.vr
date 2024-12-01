@@ -884,7 +884,7 @@ Replaced value:
 ```sqf
 (_ns get (val))
 ```
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 22](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L22)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 19](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L19)
 ## ms_debug_count
 
 Type: Variable
@@ -896,7 +896,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 296](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L296)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 293](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L293)
 ## ms_internal_initInheritance
 
 Type: function
@@ -912,7 +912,7 @@ Type: function
 Description: 
 - Param: _ns
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 19](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L19)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 16](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L16)
 ## ms_internal_prepToTester
 
 Type: function
@@ -920,7 +920,7 @@ Type: function
 Description: 
 - Param: _value
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 42](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L42)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 39](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L39)
 ## ms_internal_copyFrom
 
 Type: function
@@ -929,7 +929,7 @@ Description: Внутренняя функция копирования свой
 - Param: _thisMatter
 - Param: _copyData
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 89](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L89)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 86](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L86)
 ## ms_internal_makeReactionTable
 
 Type: function
@@ -937,7 +937,7 @@ Type: function
 Description: Внутренняя функция генерации возможных реакций
 
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 109](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L109)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 106](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L106)
 ## ms_internal_printInfo
 
 Type: function
@@ -945,7 +945,7 @@ Type: function
 Description: 
 
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 127](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L127)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 124](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L124)
 ## ms_internal_loadExtension
 
 Type: function
@@ -953,7 +953,7 @@ Type: function
 Description: 
 
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 133](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L133)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 130](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L130)
 ## ms_canReact
 
 Type: function
@@ -962,7 +962,7 @@ Description:
 - Param: _ms
 - Param: _reactType
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 236](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L236)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 233](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L233)
 ## ms_processReaction
 
 Type: function
@@ -971,7 +971,7 @@ Description: process reaction
 - Param: _ms
 - Param: _rT
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 243](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L243)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 240](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L240)
 ## ms_create
 
 Type: function
@@ -982,7 +982,7 @@ Description:
 - Param: _matters (optional, default [])
 - Param: _matData (optional, default [])
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 298](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L298)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 295](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L295)
 ## ms_addMatterData
 
 Type: function
@@ -992,7 +992,7 @@ Description: Добавляет данные для реагента
 - Param: _matter
 - Param: _data
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 322](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L322)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 319](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L319)
 ## ms_removeMatterData
 
 Type: function
@@ -1001,7 +1001,7 @@ Description: убирает данные
 - Param: _ms
 - Param: _matter
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 329](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L329)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 326](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L326)
 ## ms_createOnObject
 
 Type: function
@@ -1010,7 +1010,7 @@ Description:
 - Param: _mats (optional, default [])
 - Param: _capacity
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 339](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L339)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 336](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L336)
 ## ms_delete
 
 Type: function
@@ -1018,7 +1018,7 @@ Type: function
 Description: 
 - Param: _ms
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 358](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L358)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 355](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L355)
 ## ms_addMatter
 
 Type: function
@@ -1029,7 +1029,7 @@ Description:
 - Param: _amount
 - Param: _data
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 363](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L363)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 360](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L360)
 ## ms_removeMatter
 
 Type: function
@@ -1039,7 +1039,7 @@ Description:
 - Param: _matter
 - Param: _amount
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 396](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L396)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 393](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L393)
 ## ms_transToHolder
 
 Type: function
@@ -1049,7 +1049,7 @@ Description:
 - Param: _amount
 - Param: _chemType
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 420](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L420)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 417](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L417)
 ## ms_transferMatter
 
 Type: function
@@ -1059,7 +1059,7 @@ Description: #define ms_log_transfer
 - Param: _mTo
 - Param: _mAmount (optional, default INFINITY)
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 444](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L444)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 441](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L441)
 ## ms_removeMatters
 
 Type: function
@@ -1068,7 +1068,7 @@ Description:
 - Param: _mFrom
 - Param: _mAmount (optional, default INFINITY)
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 504](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L504)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 501](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L501)
 ## ms_removeMattersWithReturns
 
 Type: function
@@ -1077,7 +1077,7 @@ Description: убирает материи из мса и возвращает �
 - Param: _mFrom
 - Param: _mAmount (optional, default INFINITY)
 
-File: [host\MatterSystem\MatterSystem_functions.sqf at line 551](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L551)
+File: [host\MatterSystem\MatterSystem_functions.sqf at line 548](../../../Src/host/MatterSystem/MatterSystem_functions.sqf#L548)
 # MatterSystem_init.sqf
 
 ## ms_map_allMatters

@@ -956,7 +956,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Atmos\Atmos_raycasts.sqf at line 161](../../../Src/host/Atmos/Atmos_raycasts.sqf#L161)
+File: [host\Atmos\Atmos_raycasts.sqf at line 158](../../../Src/host/Atmos/Atmos_raycasts.sqf#L158)
 ## ATMOS_DEBUG_DRAW_INTERSECT_SPHERE
 
 Type: constant
@@ -975,7 +975,7 @@ _qResult = ([_x arg _destPosList select _foreachIndex] call si_getIntersectData)
 			__ATMOS_DEBUG_SPHERE_INIT(0,1,0) \
 		};
 ```
-File: [host\Atmos\Atmos_raycasts.sqf at line 274](../../../Src/host/Atmos/Atmos_raycasts.sqf#L274)
+File: [host\Atmos\Atmos_raycasts.sqf at line 271](../../../Src/host/Atmos/Atmos_raycasts.sqf#L271)
 ## __ATMOS_DEBUG_SPHERE_INIT(r,g,b)
 
 Type: constant
@@ -995,7 +995,7 @@ private _s = ATMOS_DEBUG_CREATE_SPHERE(r,g,ifcheck(_foreachIndex==0,1,b)); atmos
 			_s setposatl ifcheck((_qResult select 1)isequalto vec3(0,0,0),_destPosList select _foreachIndex,_qResult select 1); \
 			_s setvariable ["__index",_foreachIndex];
 ```
-File: [host\Atmos\Atmos_raycasts.sqf at line 281](../../../Src/host/Atmos/Atmos_raycasts.sqf#L281)
+File: [host\Atmos\Atmos_raycasts.sqf at line 278](../../../Src/host/Atmos/Atmos_raycasts.sqf#L278)
 ## exitMethod
 
 Type: constant
@@ -1009,7 +1009,7 @@ Replaced value:
 ```sqf
 then
 ```
-File: [host\Atmos\Atmos_raycasts.sqf at line 287](../../../Src/host/Atmos/Atmos_raycasts.sqf#L287)
+File: [host\Atmos\Atmos_raycasts.sqf at line 284](../../../Src/host/Atmos/Atmos_raycasts.sqf#L284)
 ## setupValue(v)
 
 Type: constant
@@ -1023,7 +1023,7 @@ Replaced value:
 ```sqf
 if (!_valueSetupGet) then {v}
 ```
-File: [host\Atmos\Atmos_raycasts.sqf at line 288](../../../Src/host/Atmos/Atmos_raycasts.sqf#L288)
+File: [host\Atmos\Atmos_raycasts.sqf at line 285](../../../Src/host/Atmos/Atmos_raycasts.sqf#L285)
 ## ATMOS_DEBUG_DRAW_INTERSECT_SPHERE
 
 Type: constant
@@ -1037,7 +1037,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Atmos\Atmos_raycasts.sqf at line 291](../../../Src/host/Atmos/Atmos_raycasts.sqf#L291)
+File: [host\Atmos\Atmos_raycasts.sqf at line 288](../../../Src/host/Atmos/Atmos_raycasts.sqf#L288)
 ## exitMethod
 
 Type: constant
@@ -1051,7 +1051,7 @@ Replaced value:
 ```sqf
 exitWith
 ```
-File: [host\Atmos\Atmos_raycasts.sqf at line 292](../../../Src/host/Atmos/Atmos_raycasts.sqf#L292)
+File: [host\Atmos\Atmos_raycasts.sqf at line 289](../../../Src/host/Atmos/Atmos_raycasts.sqf#L289)
 ## setupValue(v)
 
 Type: constant
@@ -1065,7 +1065,7 @@ Replaced value:
 ```sqf
 v
 ```
-File: [host\Atmos\Atmos_raycasts.sqf at line 293](../../../Src/host/Atmos/Atmos_raycasts.sqf#L293)
+File: [host\Atmos\Atmos_raycasts.sqf at line 290](../../../Src/host/Atmos/Atmos_raycasts.sqf#L290)
 ## NORMALIZE_VEC(l,r,i)
 
 Type: constant
@@ -1079,7 +1079,7 @@ Replaced value:
 ```sqf
 ifcheck((l select i)>(r select i),vec2(r select i call atmos_coordToId,l select i call atmos_coordToId),vec2(l select i call atmos_coordToId,r select i call atmos_coordToId))
 ```
-File: [host\Atmos\Atmos_raycasts.sqf at line 369](../../../Src/host/Atmos/Atmos_raycasts.sqf#L369)
+File: [host\Atmos\Atmos_raycasts.sqf at line 366](../../../Src/host/Atmos/Atmos_raycasts.sqf#L366)
 ## atmos_const_lineVectors
 
 Type: Variable
@@ -1091,7 +1091,7 @@ Initial value:
 ```sqf
 call atmos_getVectorsChunkInfo
 ```
-File: [host\Atmos\Atmos_raycasts.sqf at line 92](../../../Src/host/Atmos/Atmos_raycasts.sqf#L92)
+File: [host\Atmos\Atmos_raycasts.sqf at line 89](../../../Src/host/Atmos/Atmos_raycasts.sqf#L89)
 ## atmos_getVectorsChunkInfo
 
 Type: function
@@ -1108,7 +1108,7 @@ Description: получает все объекты, находящиеся в �
 - Param: _fromCh
 - Param: _fromChObj
 
-File: [host\Atmos\Atmos_raycasts.sqf at line 95](../../../Src/host/Atmos/Atmos_raycasts.sqf#L95)
+File: [host\Atmos\Atmos_raycasts.sqf at line 92](../../../Src/host/Atmos/Atmos_raycasts.sqf#L92)
 ## atmos_getObjectsInChunk
 
 Type: function
@@ -1116,7 +1116,7 @@ Type: function
 Description: собирает объекты попавшие в границы чанка. бросает (count atmos_const_lineVectors) на каждой грани для поиска объектов
 - Param: _fromCh
 
-File: [host\Atmos\Atmos_raycasts.sqf at line 133](../../../Src/host/Atmos/Atmos_raycasts.sqf#L133)
+File: [host\Atmos\Atmos_raycasts.sqf at line 130](../../../Src/host/Atmos/Atmos_raycasts.sqf#L130)
 ## atmos_getIntersectPosList
 
 Type: function
@@ -1126,7 +1126,7 @@ Description: возвращает точки входа и конца перес
 - Param: _side
 - Param: _fromPos (optional, default true)
 
-File: [host\Atmos\Atmos_raycasts.sqf at line 164](../../../Src/host/Atmos/Atmos_raycasts.sqf#L164)
+File: [host\Atmos\Atmos_raycasts.sqf at line 161](../../../Src/host/Atmos/Atmos_raycasts.sqf#L161)
 ## atmos_getIntersectInfo
 
 Type: function
@@ -1137,7 +1137,7 @@ Description:
 - Param: _searchMode (optional, default ATMOS_SEARCH_MODE_GET_COUNT)
 - Param: _refOutPos
 
-File: [host\Atmos\Atmos_raycasts.sqf at line 257](../../../Src/host/Atmos/Atmos_raycasts.sqf#L257)
+File: [host\Atmos\Atmos_raycasts.sqf at line 254](../../../Src/host/Atmos/Atmos_raycasts.sqf#L254)
 ## atmos_getObjectOwnedChunks
 
 Type: function
@@ -1147,7 +1147,7 @@ Description:
 - Param: _retChObj (optional, default false)
 - Param: _retOnlyExists (optional, default false)
 
-File: [host\Atmos\Atmos_raycasts.sqf at line 354](../../../Src/host/Atmos/Atmos_raycasts.sqf#L354)
+File: [host\Atmos\Atmos_raycasts.sqf at line 351](../../../Src/host/Atmos/Atmos_raycasts.sqf#L351)
 # Atmos_shared.sqf
 
 ## atmos_chunkPosToId

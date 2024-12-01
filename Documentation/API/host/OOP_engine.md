@@ -247,63 +247,6 @@ Replaced value:
 ["[OOP]:    " ,(mes) ,"#0111"] call stdoutPrint; ["(OOP_init)	%1",mes] call logInfo
 ```
 File: [host\OOP_engine\oop_init.sqf at line 15](../../../Src/host/OOP_engine/oop_init.sqf#L15)
-## logoop(mes)
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-- Param: mes
-
-Replaced value:
-```sqf
-diag_log format["[OOP_init]: %1",mes]
-```
-File: [host\OOP_engine\oop_init.sqf at line 18](../../../Src/host/OOP_engine/oop_init.sqf#L18)
-## EXIT_IF_ERROR(mes)
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-- Param: mes
-
-Replaced value:
-```sqf
-if (_iserror || server_isLocked) exitWith { diag_log format["[OOP_init]: [Critical]: %1",mes]; exitcode__ -10000; };
-```
-File: [host\OOP_engine\oop_init.sqf at line 19](../../../Src/host/OOP_engine/oop_init.sqf#L19)
-## error(mes)
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-- Param: mes
-
-Replaced value:
-```sqf
-diag_log format["[OOP_init]: [Error]: %1",mes];
-```
-File: [host\OOP_engine\oop_init.sqf at line 20](../../../Src/host/OOP_engine/oop_init.sqf#L20)
-## errorformat(mes,fmt)
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-- Param: mes
-- Param: fmt
-
-Replaced value:
-```sqf
-diag_log format["[OOP_init]: [Error]: %1",format[mes,fmt]];
-```
-File: [host\OOP_engine\oop_init.sqf at line 21](../../../Src/host/OOP_engine/oop_init.sqf#L21)
 ## allocName
 
 Type: constant
@@ -315,7 +258,7 @@ Replaced value:
 ```sqf
 this setName "%2"
 ```
-File: [host\OOP_engine\oop_init.sqf at line 59](../../../Src/host/OOP_engine/oop_init.sqf#L59)
+File: [host\OOP_engine\oop_init.sqf at line 52](../../../Src/host/OOP_engine/oop_init.sqf#L52)
 # oop_logging.sqf
 
 ## oop_upd
@@ -473,63 +416,6 @@ Replaced value:
 ["[OOP]:    ",(mes),"#0111"] call stdoutPrint; ["(OOP_init)	%1",mes] call logInfo
 ```
 File: [host\OOP_engine\oop_main_loader.sqf at line 23](../../../Src/host/OOP_engine/oop_main_loader.sqf#L23)
-## logoop(mes)
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-- Param: mes
-
-Replaced value:
-```sqf
-diag_log format["[OOP_init]: %1",mes]
-```
-File: [host\OOP_engine\oop_main_loader.sqf at line 26](../../../Src/host/OOP_engine/oop_main_loader.sqf#L26)
-## EXIT_IF_ERROR(mes)
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-- Param: mes
-
-Replaced value:
-```sqf
-if (_iserror || server_isLocked) exitWith { diag_log format["[OOP_init]: [Critical]: %1",mes]; exitcode__ -10000; };
-```
-File: [host\OOP_engine\oop_main_loader.sqf at line 27](../../../Src/host/OOP_engine/oop_main_loader.sqf#L27)
-## error(mes)
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-- Param: mes
-
-Replaced value:
-```sqf
-diag_log format["[OOP_init]: [Error]: %1",mes];
-```
-File: [host\OOP_engine\oop_main_loader.sqf at line 28](../../../Src/host/OOP_engine/oop_main_loader.sqf#L28)
-## errorformat(mes,fmt)
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-- Param: mes
-- Param: fmt
-
-Replaced value:
-```sqf
-diag_log format["[OOP_init]: [Error]: %1",format[mes,fmt]];
-```
-File: [host\OOP_engine\oop_main_loader.sqf at line 29](../../../Src/host/OOP_engine/oop_main_loader.sqf#L29)
 ## allocName
 
 Type: constant
@@ -541,7 +427,7 @@ Replaced value:
 ```sqf
 this setName "%2"
 ```
-File: [host\OOP_engine\oop_main_loader.sqf at line 32](../../../Src/host/OOP_engine/oop_main_loader.sqf#L32)
+File: [host\OOP_engine\oop_main_loader.sqf at line 25](../../../Src/host/OOP_engine/oop_main_loader.sqf#L25)
 ## oop_lastTypeLoadTime
 
 Type: Variable
@@ -563,7 +449,7 @@ Description: Данный файл предназначен для общей з
 - Param: _inh_struct
 - Param: _options
 
-File: [host\OOP_engine\oop_main_loader.sqf at line 37](../../../Src/host/OOP_engine/oop_main_loader.sqf#L37)
+File: [host\OOP_engine\oop_main_loader.sqf at line 30](../../../Src/host/OOP_engine/oop_main_loader.sqf#L30)
 ## oop_init_handleMemberAttributes
 
 Type: function
@@ -573,7 +459,7 @@ Description: Общий метод обработки атрибутов чле�
 - Param: _refDict
 - Param: _flag
 
-File: [host\OOP_engine\oop_main_loader.sqf at line 331](../../../Src/host/OOP_engine/oop_main_loader.sqf#L331)
+File: [host\OOP_engine\oop_main_loader.sqf at line 310](../../../Src/host/OOP_engine/oop_main_loader.sqf#L310)
 ## oop_init_handleClassAttributes
 
 Type: function
@@ -583,7 +469,7 @@ Description:
 - Param: _refDict
 - Param: _flag
 
-File: [host\OOP_engine\oop_main_loader.sqf at line 368](../../../Src/host/OOP_engine/oop_main_loader.sqf#L368)
+File: [host\OOP_engine\oop_main_loader.sqf at line 347](../../../Src/host/OOP_engine/oop_main_loader.sqf#L347)
 ## oop_reloadModule
 
 Type: function
@@ -591,7 +477,7 @@ Type: function
 Description: 
 - Param: _filepath
 
-File: [host\OOP_engine\oop_main_loader.sqf at line 394](../../../Src/host/OOP_engine/oop_main_loader.sqf#L394)
+File: [host\OOP_engine\oop_main_loader.sqf at line 373](../../../Src/host/OOP_engine/oop_main_loader.sqf#L373)
 # oop_object.sqf
 
 ## basic()
