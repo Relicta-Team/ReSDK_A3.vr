@@ -35,15 +35,8 @@ loot_prepareAll = {
 	#ifdef TEST_IO
 	_skipLoad = true;
 	#endif
-	#ifdef _SQFVM
-	_skipLoad = true;
-	#endif
 	
 	if (_skipLoad) exitWith {};
-
-	#ifdef __VM_VALIDATE
-	if (true) exitWith {};
-	#endif
 
 	#ifdef RBUILDER
 	//preparing file_getFileList

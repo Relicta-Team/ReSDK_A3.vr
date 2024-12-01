@@ -109,6 +109,58 @@ Description:
 - Param: _end
 
 File: [host\Tools\MoveToTargetDebugger.sqf at line 79](../../../Src/host/Tools/MoveToTargetDebugger.sqf#L79)
+# BuildTools_clientLoader.sqf
+
+## cmplog(fcat)
+
+Type: constant
+
+> Exists if **DEBUG** defined
+
+Description: 
+- Param: fcat
+
+Replaced value:
+```sqf
+allClientContents pushBack (compile format['log("Init %1")',fcat]);
+```
+File: [host\Tools\BuildTools\BuildTools_clientLoader.sqf at line 26](../../../Src/host/Tools/BuildTools/BuildTools_clientLoader.sqf#L26)
+## cmplog(fcat)
+
+Type: constant
+
+> Exists if **DEBUG** not defined
+
+Description: 
+- Param: fcat
+
+Replaced value:
+```sqf
+
+```
+File: [host\Tools\BuildTools\BuildTools_clientLoader.sqf at line 28](../../../Src/host/Tools/BuildTools/BuildTools_clientLoader.sqf#L28)
+# BuildTools_init.sqf
+
+## BT_ERRCODE(code)
+
+Type: constant
+
+Description: 
+- Param: code
+
+Replaced value:
+```sqf
+(-2100 - (code))
+```
+File: [host\Tools\BuildTools\BuildTools_init.sqf at line 16](../../../Src/host/Tools/BuildTools/BuildTools_init.sqf#L16)
+## bt_buildClient
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\BuildTools\BuildTools_init.sqf at line 18](../../../Src/host/Tools/BuildTools/BuildTools_init.sqf#L18)
 # EditorDebug.sqf
 
 ## editorDebug_isEnabled

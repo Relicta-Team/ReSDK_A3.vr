@@ -10,10 +10,6 @@
 //enable static tests
 //#define __ENABLE_ALGORITHM_TEST___
 
-#ifndef _SQFVM
-	#undef __ENABLE_ALGORITHM_TEST___
-#endif
-
 
 allOf = {
 	params ["_list"];

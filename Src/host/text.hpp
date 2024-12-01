@@ -10,15 +10,6 @@
 #define gt &gt;
 #define sgt "&gt;"
 
-#ifdef __VM_VALIDATE
-//<
-#define lt left_br
-#define slt "string_left_br"
-//>
-#define gt right_br
-#define sgt "string_right_br"
-#endif
-
 #define br_inline <br/>
 //Не изменять!!! зависимости есть!!!
 #define sbr "<br/>"
