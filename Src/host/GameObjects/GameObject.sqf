@@ -2345,15 +2345,25 @@ region(Pulling functionality)
 		if (count _mvr == 0) exitWith {nullPtr};
 		_mvr select 0
 	};
-	func(playPullSound)
+	//TODO remove
+	// func(playPullSound)
+	// {
+	// 	objParams();
+	// 	private _mat = callSelf(getMaterial);
+	// 	if isNullReference(_mat) exitWith {};
+	// 	private _snd = callFunc(_mat,getPullSound);
+	// 	if (_snd == "") exitWith {};
+	// 	callSelfParams(playSound,_snd arg getRandomPitchInRange(0.5,1.1) arg 8);
+	// };
+
+	func(_getPullSounds)
 	{
 		objParams();
 		private _mat = callSelf(getMaterial);
-		if isNullReference(_mat) exitWith {};
-		private _snd = callFunc(_mat,getPullSound);
-		if (_snd == "") exitWith {};
-		callSelfParams(playSound,_snd arg getRandomPitchInRange(0.5,1.1) arg 8);
+		if isNullReference(_mat) exitWith {[]};
+		callFunc(_mat,getPullSounds);
 	};
+
 	func(_checkCanPullingConditions)
 	{
 		objParams_1(_usr);
@@ -2395,7 +2405,7 @@ region(Pulling functionality)
 
 		callSelf(unloadModel);
 
-		private _rpcInfo = [getSelf(pointer),getSelf(model),_offs,[_wobj] call model_getPitchBankYaw];
+		private _rpcInfo = [getSelf(pointer),getSelf(model),_offs,[_wobj] call model_getPitchBankYaw,callSelf(_getPullSounds)];
 		if (callSelf(canLight) && {getSelf(light) != -1}) then {
 			_rpcInfo pushBack getSelf(light);
 		};

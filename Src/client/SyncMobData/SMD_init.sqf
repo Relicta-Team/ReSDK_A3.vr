@@ -560,13 +560,17 @@ smd_isPulling = {
 pulling_canPull = false;
 smd_onPull = {
 	params ["_mob","_ctx"];
-
+	
 	private _syncWalk = {
 		//in pull mode we can only walking
 		if equals(_mob,player) then {
 			_mob call cd_fw_syncForceWalk;
 		};
 	};
+	/*
+		TODO:
+		pull ptr can be list because mob can pull more than one object
+	*/
 	private _releaseResources = {
 		private _prevObj = _mob getvariable "__loc_pull_obj";
 		if !isNullVar(_prevObj) then {
@@ -581,7 +585,7 @@ smd_onPull = {
 		call _syncWalk;
 	};
 
-	_ctx params ["_ptr","_model","_offset","_pby",["_light",-1]];
+	_ctx params ["_ptr","_model","_offset","_pby","_pullSoundList",["_light",-1]];
 
 	call _releaseResources;
 
