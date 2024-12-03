@@ -555,7 +555,7 @@ smd_onGrabbed = {
 
 smd_isPulling = {
 	params ["_mob"];
-	!isNull(_mob getvariable "__loc_pull_ptr");
+	count(_mob getvariable "__loc_pull_pList")==0;
 };
 pulling_canPull = false;
 smd_onPull = {
