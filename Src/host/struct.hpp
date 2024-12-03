@@ -110,7 +110,7 @@
 
 #define struct(name) call{ _s_ret = 0; _t_vtable = spi_lst; _t_annot_ = []; _sdecl__ = [ [STRUCT_MEM_TYPE, #name ], [STRUCT_MEM_FLAGS, struct_default_flag], ["__dflg__",false] ];
 #define base(basename) _sdecl__ pushBack [STRUCT_MEM_BASE, #basename ];
-#define endstruct ;_t_vtable pushBack _sdecl__; if (count _t_annot_ > 0) then {_sdecl__ pushBack ["#type_annot_list",_t_annot_]}; _s_ret}
+#define endstruct ;_t_vtable pushBack _sdecl__; if (count _t_annot_ > 0) then {_sdecl__ pushBack ["#type_annot_list",_t_annot_]}; _s_ret};
 
 /*
 	private _obj = inline_struct(TestStruct)
