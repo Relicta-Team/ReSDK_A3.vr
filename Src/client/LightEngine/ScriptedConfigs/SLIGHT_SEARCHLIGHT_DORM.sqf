@@ -13,9 +13,6 @@ regScriptEmit(SLIGHT_SEARCHLIGHT_DORM)
 		["setLightColor",[0.6196,0.8745,1]],
 		["setLightAmbient",[0.35,0.4,0.4]],
 		["setLightIntensity",20000],
-		["setLightUseFlare",true],
-		["setLightFlareSize",5],
-		["setLightFlareMaxDistance",30],
 		["setLightAttenuation",[0,0,0,0,10,20]],
 		["setLightConePars",[50,40,0]]
 	]
@@ -28,5 +25,20 @@ regScriptEmit(SLIGHT_SEARCHLIGHT_DORM)
 		["setLightAmbient",[0.05,0.05,0.05]],
 		["setLightIntensity",500],
 		["setLightAttenuation",[0,0,0,0,0.3,0.5]]
+	]
+	,[
+		"ltd",
+		null,
+		_emitAlias("Направленный свет 3")
+		["linkToLight",[0,-0.299999,-0.0999985]],
+		["setOrient",[0,-27.602,0]],
+		["setLightColor",[0.6196,0.8745,1]],
+		["setLightAmbient",[0.35,0.4,0.4]],
+		["setLightIntensity",100],
+		["setLightUseFlare",true],
+		["setLightFlareSize",10],
+		["setLightFlareMaxDistance",30],
+		["setLightAttenuation",[0,0,0,0,10,20]],
+		["setLightConePars",[100,90,0]]
 	]
 endScriptEmit
