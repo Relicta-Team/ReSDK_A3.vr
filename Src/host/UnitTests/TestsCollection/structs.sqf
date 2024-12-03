@@ -417,7 +417,7 @@ TEST(InlineStruct)
 			self getv(test_num);
 		}
 		def(test_str) "hello"
-	endstruct
+	inline_endstruct;
 
 	ASSERT_EQ(_obj getv(test_str),"hello");
 
