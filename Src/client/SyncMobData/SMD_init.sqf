@@ -8,6 +8,7 @@
 #include <smd.h>
 #include <..\LightEngine\LightEngine.hpp>
 #include <..\ClientRpc\clientRpc.hpp>
+#include <..\Interactions\interact.hpp>
 
 
 #include <..\..\host\CombatSystem\CombatSystem.hpp>
@@ -577,6 +578,10 @@ smd_onPull = {
 	private _releaseResources = {
 		private _prevObj = _mob getvariable "__loc_pull_obj";
 		if !isNullVar(_prevObj) then {
+			private _vtarg = _prevObj getvariable ["_vtarg",objnull];
+			if !isNullReference(_vtarg) then {
+				deleteVehicle _vtarg;	
+			};
 			deleteVehicle _prevObj;
 			_mob setvariable ["__loc_pull_obj",null];
 		};
@@ -593,11 +598,40 @@ smd_onPull = {
 	call _releaseResources;
 
 	private _obj = createMesh([_model arg [0 arg 0 arg 0] arg true]);
+	_obj setPhysicsCollisionFlag false;
 	_obj setPosWorld (atltoasl(getposatl _mob vectoradd _offset));
 	_obj setvariable ["_soundPlayed",false];
 	_mob setvariable ["__loc_pull_obj",_obj];
 	_mob setVariable ["__loc_pull_lastupd",tickTime];
 	_mob setVariable ["__loc_pull_ptr",_ptr];
+
+	if equals(_mob,player) then {
+		private _vtarg = "Land_VR_CoverObject_01_kneel_F" createVehicleLocal [0,0,0];
+		_vtarg setObjectTexture [0,""];
+		_vtarg setObjectMaterial [0,""];
+		_vtarg setObjectTexture [1,"#(argb,8,8,3)color(1,1,0,1,co)"];//edge colors
+		_vtarg disableCollisionWith _mob;
+		_obj setvariable ["_vtarg",_vtarg];
+
+		private _bbxDat = (core_modelBBX get (tolower _model));
+			if isNullVar(_bbxDat) then {_bbxDat = [[0,0,0],[0,0,0],0];};
+			(_bbxDat select 0) params ["_x1","_y1","_z1"];
+			(_bbxDat select 1) params ["_x2","_y2","_z2"];
+			private _bbxDatAll = [
+				[0,0,0],
+				[_x1,_y1,_z1],
+				[_x1,_y1,_z2],
+				[_x1,_y2,_z1],
+				[_x1,_y2,_z2],
+				[_x2,_y1,_z1],
+				[_x2,_y1,_z2],
+				[_x2,_y2,_z1],
+				[_x2,_y2,_z2]
+			];
+			private _maxZ = ((abs _z1) + (abs _z2))/2;
+			_vtarg setVariable ["_maxZOffset",_maxZ];
+			_obj setvariable ["_bbxDatAll",_bbxDatAll];
+	};
 	
 	private _lpp = getPosWorld _obj;
 	_mob setVariable ["__loc_pull_lastpos",_lpp];
@@ -615,7 +649,8 @@ smd_onPull = {
 		_newSavedPos = atltoasl(getposatl _mob vectoradd _offset);//_mob getVariable ["__loc_pull_newpos",_lastSavedPos];
 		assert(_lastSavedPos);
 		assert(_newSavedPos);
-
+		_isStop = false;
+		_isSelf = equals(_mob,player);
 		private _vdu = [_obj] call model_getPitchBankYaw;
 
 		_lastUpd = _mob getVariable "__loc_pull_lastupd";
@@ -653,6 +688,54 @@ smd_onPull = {
 		_zdelta = _obj getvariable ["pull_interp_zpos_delta",0];
 		_newpos = _newpos vectorAdd [0,0,_zdelta];
 
+		_canmove = true;
+		_bbxDatAll = _obj getvariable "_bbxDatAll";
+		_vtarg = _obj getvariable "_vtarg";
+		_vtarg attachTo [_obj,[0,0,0]];
+		_vtarg setObjectScale (1.1 * (boundingBoxReal _obj select 2));
+		detach _vtarg;
+		_upos = getCenterMobPos(_mob);
+		_uposASL = atltoasl(_upos);
+		_itsCount = 0;
+		{
+			_its = ([
+				_vtarg modelToWorld _x,
+				_upos,
+				_vtarg,
+				_obj
+			] call interact_getRayCastData) select 0;
+			if !isNullReference(_its) then {
+				if equals(_its,_mob) exitWith {};
+				INC(_itsCount);
+			};
+		} foreach _bbxDatAll;
+		_canmove = _itsCount <= 4;
+		_vtarg setObjectTexture [1,
+			if (_canmove) then {"#(argb,8,8,3)color(0,1,0,1,co)"} else {"#(argb,8,8,3)color(1,0.0,0,1,co)"}
+		];
+		
+		_maxDst = ([0,0,0]distance _offset)*2;
+		if ((_newSavedPos distance (_lastSavedPos)) > _maxDst) then {
+			_isStop = true;			
+			["Сорвалась хватка!","error"] call chatPrint;
+		};
+		private _dir = _mob getRelDir _obj;
+		_isOnFront = (_dir > 315 || _dir <= 45);
+		if (!_isOnFront) then {
+			_isStop = true;
+		};
+
+		if (_isStop && _isSelf) exitWith {
+			rpcSendToServer("ppc_forceStop",[_mob arg _mob getvariable "__loc_pull_ptr"]);
+			true
+		};
+
+		if (!_canmove) exitWith {
+			_mob setVariable ["__loc_pull_lastpos",getposworld _obj];
+			_mob setVariable ["__loc_pull_lastupd",tickTime];
+			false
+		};
+
 		if (tickTime >= _nextUpd) then {
 			_obj setvariable ["_soundPlayed",false];
 			//_this set [2,tickTime + 0.5];
@@ -669,8 +752,9 @@ smd_onPull = {
 				rpcSendToServer("snc_ppc",[_mob getvariable "__loc_pull_ptr" arg [_nps arg _vdu]]);
 			};
 		};
-		
-		_obj setPosWorld (_newpos);
+		// _localPos = player worldToModelVisual (asltoatl _newpos);
+		// _obj attachTo [player,_localPos];
+		_obj setPosWorld _newpos;
 		isNullReference(_obj)
 	},
 	{

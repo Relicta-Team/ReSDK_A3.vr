@@ -603,6 +603,24 @@ _onSyncPullProcess = {
 	setVar(_obj,__pullProc_tdat,_tdat);
 }; rpcAdd("snc_ppc",_onSyncPullProcess);
 
+_ppc_forceStop = {
+	params ["_mobObj","_ref"];
+
+	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
+
+	private _obj = pointer_get(_ref);
+	if !pointer_isValidResult(_obj) exitWith {
+		errorformat("Gameobject object has no exists virtual object - %1",_ref)
+	};
+	
+	_cond = {
+		params ["_sysHandItm","_ctxTuple"];
+		_ctxTuple params ["_obj"];
+		equals(_obj,getVar(_sysHandItm,object))
+	};
+	callFuncParams(this,stopGrabIf,_cond arg [_obj]);
+}; rpcAdd("ppc_forceStop",_ppc_forceStop);
+
 /**************************************************************************
 |					ONE SYNC SERVER EVENTS								  |
 **************************************************************************/

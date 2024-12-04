@@ -2406,11 +2406,14 @@ region(Pulling functionality)
 		private _wobj = getSelf(loc);
 		private _srcPos = asltoatl getPosWorld _wobj;
 		private _own = getVar(_usr,owner);
+		private _cachedPosVar = [getposatl _wobj,getposworld _wobj];
 		private _offs = _srcPos vectorDiff (getposatl _own);
 		private _pby = [_wobj] call model_getPitchBankYaw;
 		callSelf(unloadModel);
 
-		setSelf(__pullProc_tdat,vec2(_srcPos,_pby));
+		private _wposRequired = !([_pby] call model_isSafedirTransform);
+		private _cachePos = if (_wposRequired) then {_cachedPosVar select 1} else {_cachedPosVar select 0};
+		setSelf(__pullProc_tdat,vec2(_cachePos,_pby));
 
 		private _rpcInfo = [getSelf(pointer),getSelf(model),_offs,_pby,callSelf(_getPullSounds)];
 		if (callSelf(canLight) && {getSelf(light) != -1}) then {
