@@ -64,8 +64,13 @@ _iact = {
 		private _vobj__ = pointer_get(_optTarg);
 		if !pointer_isValidResult(_vobj__) exitWith {};
 		_target = _vobj__;
-		_pos = callFunc(_target,getPos);
 		_renderPos = callSelf(getPos);
+		
+		if (callFunc(_target,isInWorld) && !isNullReference(getVar(_target,loc))) then {
+			_pos = callFunc(_target,getPos);
+		} else {
+			_pos = _renderPos;
+		};
 	};
 
 	//отмена прогресса при активности
@@ -587,6 +592,16 @@ __resetCustomAnim = {
 	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
 	callSelfParams(setCustomActionState,CUSTOM_ANIM_ACTION_NONE arg true);
 }; rpcAdd("__resetCustomAnim",__resetCustomAnim);
+
+_onSyncPullProcess = {
+	params ["_ref","_tdat"];
+	private _obj = pointer_get(_ref);
+	if !pointer_isValidResult(_obj) exitWith {
+		errorformat("Gameobject object has no exists virtual object - %1",_ref)
+	};
+	
+	setVar(_obj,__pullProc_tdat,_tdat);
+}; rpcAdd("snc_ppc",_onSyncPullProcess);
 
 /**************************************************************************
 |					ONE SYNC SERVER EVENTS								  |

@@ -1157,6 +1157,8 @@ endregion
 		if callSelf(isInWorld) exitwith {false};
 		private _wobj = objNull;
 		if (_simDrop) then {
+			if not_equalTypes(_vecOrDist,0) then {_vecOrDist = null};
+			if not_equalTypes(_dir,0) then {_dir = null};
 			_wobj = [this,_pos,_vecOrDist,_dir] call noe_loadVisualObject_OnDrop;
 		} else {
 			_wobj = [this,_pos,_dir,_vec] call noe_loadVisualObject;
@@ -2345,6 +2347,9 @@ region(Pulling functionality)
 		if (count _mvr == 0) exitWith {nullPtr};
 		_mvr select 0
 	};
+
+	var(__pullProc_tdat,null);
+
 	//TODO remove
 	// func(playPullSound)
 	// {
@@ -2399,13 +2404,15 @@ region(Pulling functionality)
 		objParams_1(_usr);
 
 		private _wobj = getSelf(loc);
-		private _srcPos = getPosWorld _wobj;
+		private _srcPos = asltoatl getPosWorld _wobj;
 		private _own = getVar(_usr,owner);
 		private _offs = _srcPos vectorDiff (getposatl _own);
-
+		private _pby = [_wobj] call model_getPitchBankYaw;
 		callSelf(unloadModel);
 
-		private _rpcInfo = [getSelf(pointer),getSelf(model),_offs,[_wobj] call model_getPitchBankYaw,callSelf(_getPullSounds)];
+		setSelf(__pullProc_tdat,vec2(_srcPos,_pby));
+
+		private _rpcInfo = [getSelf(pointer),getSelf(model),_offs,_pby,callSelf(_getPullSounds)];
 		if (callSelf(canLight) && {getSelf(light) != -1}) then {
 			_rpcInfo pushBack getSelf(light);
 		};
@@ -2623,8 +2630,17 @@ region(Pulling functionality)
 		};
 
 		if (count _mvr == 0) then {
-			private _vtarg = callSelf(getPullHelperObject);
-			deleteVehicle _vtarg;
+			// private _vtarg = callSelf(getPullHelperObject);
+			// deleteVehicle _vtarg;
+			getSelf(__pullProc_tdat) params ["_pos","_pby"];
+			(_pby call model_convertPithBankYawToVec)params ["_vd","_vu"];
+			private _wposRequired = !([_pby] call model_isSafedirTransform);
+			traceformat("WPOS REQUIRED: %1",_wposRequired)
+			if (_wposRequired) then {
+				callSelfParams(loadModel,_pos + [true] arg _vd arg _vu arg false);
+			} else {
+				callSelfParams(loadModel,_pos arg _vd arg _vu arg false);
+			};
 		};
 
 		callSelf(onPullChanged);

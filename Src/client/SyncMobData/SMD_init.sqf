@@ -7,6 +7,7 @@
 #include <..\Inventory\inventory.hpp>
 #include <smd.h>
 #include <..\LightEngine\LightEngine.hpp>
+#include <..\ClientRpc\clientRpc.hpp>
 
 
 #include <..\..\host\CombatSystem\CombatSystem.hpp>
@@ -557,6 +558,11 @@ smd_isPulling = {
 	params ["_mob"];
 	!isNull(_mob getvariable "__loc_pull_ptr");
 };
+smd_getPullingObjectPtr = {
+	params ["_mob"]; 
+	_mob getvariable "__loc_pull_ptr"
+};
+
 pulling_canPull = false;
 smd_onPull = {
 	params ["_mob","_ctx"];
@@ -587,7 +593,7 @@ smd_onPull = {
 	call _releaseResources;
 
 	private _obj = createMesh([_model arg [0 arg 0 arg 0] arg true]);
-	_obj setPosWorld (getposatl _mob vectoradd _offset);
+	_obj setPosWorld (atltoasl(getposatl _mob vectoradd _offset));
 	_obj setvariable ["_soundPlayed",false];
 	_mob setvariable ["__loc_pull_obj",_obj];
 	_mob setVariable ["__loc_pull_lastupd",tickTime];
@@ -599,12 +605,14 @@ smd_onPull = {
 	_mob setVariable ["__loc_pull_lastVDU",_pby];
 	_mob setVariable ["__loc_pull_newVDU",_pby];
 
+	[_obj,_ptr] call NGOExt_registerRef;
+
 	startAsyncInvoke
 	{
 		params ["_mob","_obj","_offset","_pby","_pullSoundList"];
 
 		_lastSavedPos = _mob getVariable ["__loc_pull_lastpos",null];
-		_newSavedPos = (getposatl _mob vectoradd _offset);//_mob getVariable ["__loc_pull_newpos",_lastSavedPos];
+		_newSavedPos = atltoasl(getposatl _mob vectoradd _offset);//_mob getVariable ["__loc_pull_newpos",_lastSavedPos];
 		assert(_lastSavedPos);
 		assert(_newSavedPos);
 
@@ -612,7 +620,9 @@ smd_onPull = {
 
 		_lastUpd = _mob getVariable "__loc_pull_lastupd";
 		_nextUpd = _lastUpd + 1;
-		//traceformat("pre %1; post %2",_lastSavedPos arg _pos)
+		
+		//traceformat("pre %1; post %2", _lastSavedPos arg _newSavedPos)
+
 		_newpos = vectorLinearConversion [
 			_lastUpd,
 			_nextUpd,
@@ -635,24 +645,33 @@ smd_onPull = {
 		if ((_newpos distance _lastSavedPos) > 0.1 && {!(_obj getvariable "_soundPlayed")}) then {
 			_pullSnd = pick _pullSoundList;
 			_obj setvariable ["_soundPlayed",true];
-			[_pullSnd,_newpos,1,getRandomPitchInRange(0.5,1.1),15] call soundGlobal_play;
+			if equals(_mob,player) then {
+				[_pullSnd,_newpos,1,getRandomPitchInRange(0.5,1.1),15] call soundGlobal_play;
+			};
 		};
+
+		_zdelta = _obj getvariable ["pull_interp_zpos_delta",0];
+		_newpos = _newpos vectorAdd [0,0,_zdelta];
 
 		if (tickTime >= _nextUpd) then {
 			_obj setvariable ["_soundPlayed",false];
 			//_this set [2,tickTime + 0.5];
 			_mob setVariable ["__loc_pull_lastpos",_newpos];
-			_mob setVariable ["__loc_pull_newpos",_pos];
+			_mob setVariable ["__loc_pull_newpos",_newpos];
 
 			_mob setVariable ["__loc_pull_lastVDU",_newvdu];
 			_mob setVariable ["__loc_pull_newVDU",_vdu];
 			_mob setVariable ["__loc_pull_lastupd",_nextUpd];
-		};
-		_zdelta = _obj getvariable ["pull_interp_zpos_delta",0];
-		_newpos = _newpos vectorAdd [0,0,_zdelta];
-		_obj setPosWorld (_newpos);
 
-		if isNullReference(_obj) exitWith {true};
+			if equals(_mob,player) then {
+				_obj setPosWorld _newpos;
+				_nps = if ([_vdu] call model_isSafedirTransform) then {getposatl _obj} else {getposworld _obj};
+				rpcSendToServer("snc_ppc",[_mob getvariable "__loc_pull_ptr" arg [_nps arg _vdu]]);
+			};
+		};
+		
+		_obj setPosWorld (_newpos);
+		isNullReference(_obj)
 	},
 	{
 
