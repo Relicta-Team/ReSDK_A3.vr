@@ -2399,7 +2399,7 @@ region(Pulling functionality)
 		objParams_1(_usr);
 
 		private _wobj = getSelf(loc);
-		_srcPos = asltoatl getPosWorld _wobj;
+		private _srcPos = getPosWorld _wobj;
 		private _own = getVar(_usr,owner);
 		private _offs = _srcPos vectorDiff (getposatl _own);
 

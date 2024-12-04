@@ -555,7 +555,7 @@ smd_onGrabbed = {
 
 smd_isPulling = {
 	params ["_mob"];
-	count(_mob getvariable "__loc_pull_pList")==0;
+	!isNull(_mob getvariable "__loc_pull_ptr");
 };
 pulling_canPull = false;
 smd_onPull = {
@@ -567,17 +567,14 @@ smd_onPull = {
 			_mob call cd_fw_syncForceWalk;
 		};
 	};
-	/*
-		TODO:
-		pull ptr can be list because mob can pull more than one object
-	*/
+	
 	private _releaseResources = {
 		private _prevObj = _mob getvariable "__loc_pull_obj";
 		if !isNullVar(_prevObj) then {
 			deleteVehicle _prevObj;
 			_mob setvariable ["__loc_pull_obj",null];
 		};
-		_mob getvariable "__loc_pull_ptr";
+		_mob setvariable ["__loc_pull_ptr",null];
 	};
 
 	if equals(_ctx,0) exitWith {
@@ -590,6 +587,8 @@ smd_onPull = {
 	call _releaseResources;
 
 	private _obj = createMesh([_model arg [0 arg 0 arg 0] arg true]);
+	_obj setPosWorld (getposatl _mob vectoradd _offset);
+	_obj setvariable ["_soundPlayed",false];
 	_mob setvariable ["__loc_pull_obj",_obj];
 	_mob setVariable ["__loc_pull_lastupd",tickTime];
 	_mob setVariable ["__loc_pull_ptr",_ptr];
@@ -602,15 +601,17 @@ smd_onPull = {
 
 	startAsyncInvoke
 	{
-		params ["_mob","_obj","_offset","_pby"];
+		params ["_mob","_obj","_offset","_pby","_pullSoundList"];
 
 		_lastSavedPos = _mob getVariable ["__loc_pull_lastpos",null];
-		_newSavedPos = _mob getVariable ["__loc_pull_newpos",_lastSavedPos];
+		_newSavedPos = (getposatl _mob vectoradd _offset);//_mob getVariable ["__loc_pull_newpos",_lastSavedPos];
 		assert(_lastSavedPos);
 		assert(_newSavedPos);
 
+		private _vdu = [_obj] call model_getPitchBankYaw;
+
 		_lastUpd = _mob getVariable "__loc_pull_lastupd";
-		_nextUpd = _lastUpd + 0.5;
+		_nextUpd = _lastUpd + 1;
 		//traceformat("pre %1; post %2",_lastSavedPos arg _pos)
 		_newpos = vectorLinearConversion [
 			_lastUpd,
@@ -620,16 +621,25 @@ smd_onPull = {
 			_newSavedPos,
 			true//clamp value
 		];
+		
 		_newvdu = vectorLinearConversion [
 			_lastUpd,
 			_nextUpd,
 			tickTime,
 			_mob getVariable "__loc_pull_lastVDU",
 			_mob getVariable "__loc_pull_newVDU",
-			true];
+			true
+		];
 		//traceformat("interp pull dist %1; ---> FROM %2 TO %3; NEWPOS %4",(_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))) arg _lastSavedPos arg _newSavedPos arg _newpos)
 		
+		if ((_newpos distance _lastSavedPos) > 0.1 && {!(_obj getvariable "_soundPlayed")}) then {
+			_pullSnd = pick _pullSoundList;
+			_obj setvariable ["_soundPlayed",true];
+			[_pullSnd,_newpos,1,getRandomPitchInRange(0.5,1.1),15] call soundGlobal_play;
+		};
+
 		if (tickTime >= _nextUpd) then {
+			_obj setvariable ["_soundPlayed",false];
 			//_this set [2,tickTime + 0.5];
 			_mob setVariable ["__loc_pull_lastpos",_newpos];
 			_mob setVariable ["__loc_pull_newpos",_pos];
@@ -647,7 +657,7 @@ smd_onPull = {
 	{
 
 	},
-	[_mob,_obj,_offset,_pby]
+	[_mob,_obj,_offset,_pby,_pullSoundList]
 	endAsyncInvoke
 
 	call _syncWalk;
