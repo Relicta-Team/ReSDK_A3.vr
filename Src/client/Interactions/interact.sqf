@@ -154,9 +154,15 @@ interact_sendAction = {
 	_data pushBack _actionType;
 	_data pushBack player;
 
-	private _onscreen = [_isMouseMode] call interact_getOnSceenCapturedObject;
-	if !isNullVar(_onscreen) then {
-		_data pushBack _onscreen;
+	call {
+		private _onscreen = [_isMouseMode] call interact_getOnSceenCapturedObject;
+		if !isNullVar(_onscreen) exitWith {
+			_data pushBack _onscreen;
+		};
+		//! пока мы запрещаем явную интеракцию с таким типом объекта. это может привести к проблеме при уничтожении
+		// if ([player] call smd_isPulling) exitWith {
+		// 	_data pushBack ([player] call smd_getPullingObjectPtr);	
+		// };
 	};
 
 	rpcSendToServer("iact",_data);

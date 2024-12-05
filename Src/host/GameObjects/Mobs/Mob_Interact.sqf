@@ -948,6 +948,18 @@ region(Captives)
 		} foreach getSelf(specHandAct);
 	};
 
+	func(stopGrabIf)
+	{
+		objParams_2(_fcond,_ctxtpl);
+		{
+			if callFunc(_x,isGrabProcess) then {
+				if ([_x,_ctxtpl] call _fcond)	then {
+					callFunc(_x,stopGrab);
+				};
+			};
+		} foreach getSelf(specHandAct)
+	};
+
 	func(startGrab)
 	{
 		objParams_1(_targ);

@@ -103,10 +103,13 @@ model_getPitchBankYawAccurate = {
 
 //проверяет является ли направление безопасным
 model_isSafedirTransform = {
-	params ["_vdu_dir"];
+	params ["_vdu_dir",["_fromVUP",false]];
 	if equalTypes(_vdu_dir,0) then {
 		true
 	} else {
+		if (_fromVUP) exitWith {
+			equals(_vdu_dir apply {((abs _x) toFixed 1)},vec3("0.0","0.0","1.0"))
+		};
 		//conv to vec-coords
 		if (count _vdu_dir == 3) then {
 			_vdu_dir = _vdu_dir call model_convertPithBankYawToVec;

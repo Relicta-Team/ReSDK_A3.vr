@@ -64,8 +64,13 @@ _iact = {
 		private _vobj__ = pointer_get(_optTarg);
 		if !pointer_isValidResult(_vobj__) exitWith {};
 		_target = _vobj__;
-		_pos = callFunc(_target,getPos);
 		_renderPos = callSelf(getPos);
+		
+		if (callFunc(_target,isInWorld) && !isNullReference(getVar(_target,loc))) then {
+			_pos = callFunc(_target,getPos);
+		} else {
+			_pos = _renderPos;
+		};
 	};
 
 	//отмена прогресса при активности
@@ -587,6 +592,34 @@ __resetCustomAnim = {
 	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
 	callSelfParams(setCustomActionState,CUSTOM_ANIM_ACTION_NONE arg true);
 }; rpcAdd("__resetCustomAnim",__resetCustomAnim);
+
+_onSyncPullProcess = {
+	params ["_ref","_tdat"];
+	private _obj = pointer_get(_ref);
+	if !pointer_isValidResult(_obj) exitWith {
+		errorformat("Gameobject object has no exists virtual object - %1",_ref)
+	};
+	
+	setVar(_obj,__pullProc_tdat,_tdat);
+}; rpcAdd("snc_ppc",_onSyncPullProcess);
+
+_ppc_forceStop = {
+	params ["_mobObj","_ref"];
+
+	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
+
+	private _obj = pointer_get(_ref);
+	if !pointer_isValidResult(_obj) exitWith {
+		errorformat("Gameobject object has no exists virtual object - %1",_ref)
+	};
+	
+	_cond = {
+		params ["_sysHandItm","_ctxTuple"];
+		_ctxTuple params ["_obj"];
+		equals(_obj,getVar(_sysHandItm,object))
+	};
+	callFuncParams(this,stopGrabIf,_cond arg [_obj]);
+}; rpcAdd("ppc_forceStop",_ppc_forceStop);
 
 /**************************************************************************
 |					ONE SYNC SERVER EVENTS								  |

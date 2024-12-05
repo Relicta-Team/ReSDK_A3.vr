@@ -678,6 +678,8 @@ region(Connect control events)
 		callSelf(closeOpenedNetDisplay);
 		//release building preview if exist
 		callSelf(releaseBuildingPreview);
+
+		callSelf(dropAllItemsInHands);
 	};
 
 region(Mob location info: position; direction; speed)

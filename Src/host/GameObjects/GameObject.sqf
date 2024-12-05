@@ -1157,9 +1157,11 @@ endregion
 		if callSelf(isInWorld) exitwith {false};
 		private _wobj = objNull;
 		if (_simDrop) then {
+			if not_equalTypes(_vecOrDist,0) then {_vecOrDist = null};
+			if not_equalTypes(_dir,0) then {_dir = null};
 			_wobj = [this,_pos,_vecOrDist,_dir] call noe_loadVisualObject_OnDrop;
 		} else {
-			_wobj = [this,_pos,_dir,_vec] call noe_loadVisualObject;
+			_wobj = [this,_pos,_dir,_vecOrDist] call noe_loadVisualObject;
 		};
 		
 		!isNullReference(_wobj)
@@ -2345,15 +2347,17 @@ region(Pulling functionality)
 		if (count _mvr == 0) exitWith {nullPtr};
 		_mvr select 0
 	};
-	func(playPullSound)
+
+	var(__pullProc_tdat,null);
+
+	func(_getPullSounds)
 	{
 		objParams();
 		private _mat = callSelf(getMaterial);
-		if isNullReference(_mat) exitWith {};
-		private _snd = callFunc(_mat,getPullSound);
-		if (_snd == "") exitWith {};
-		callSelfParams(playSound,_snd arg getRandomPitchInRange(0.5,1.1) arg 8);
+		if isNullReference(_mat) exitWith {[]};
+		callFunc(_mat,getPullSounds);
 	};
+
 	func(_checkCanPullingConditions)
 	{
 		objParams_1(_usr);
@@ -2372,213 +2376,52 @@ region(Pulling functionality)
 	func(startPull)
 	{
 		objParams_1(_usr);
-		if !callSelf(isMovable) exitWith {};
-		if !callSelf(isInWorld) exitWith {};
-		if !callSelfParams(_checkCanPullingConditions,_usr) exitWith {};
 		
-		//todo горящие чанки объекта не позволят двигать его
 		
 		getSelf(__moverMobs) pushBack _usr;
 		callSelfParams(_pullStarted,_usr);
 		callSelf(onPullChanged);
+	};
+	func(canStartPull)
+	{
+		objParams_1(_usr);
+
+		if !callSelf(isMovable) exitWith {false};
+		if !callSelf(isInWorld) exitWith {false};
+		if !callSelfParams(_checkCanPullingConditions,_usr) exitWith {false};
+		//пусть пока тащить может только один
+		if (count getSelf(__moverMobs) > 0) exitWith {false};
+		//todo горящие чанки объекта не позволят двигать его
+
+		true
 	};
 
 	//internal function for handling pullings
 	func(_pullStarted)
 	{
 		objParams_1(_usr);
-		//default async check timeout
-		#define async_delay_check_ 0.5
-
-		//this is helper puller, do not attach
-		private _isMainOwner = equals(callSelf(getPullMainOwner),_usr);
 
 		private _wobj = getSelf(loc);
 		private _srcPos = asltoatl getPosWorld _wobj;
 		private _own = getVar(_usr,owner);
+		private _cachedPosVar = [getposatl _wobj,getposworld _wobj];
 		private _offs = _srcPos vectorDiff (getposatl _own);
+		private _pby = [_wobj] call model_getPitchBankYaw;
+		
+		callSelf(unloadModel);
 
-		private _vtarg = if (_isMainOwner) then {
-			callSelfParams(setTransformMode,true); //enable transform
-			private _newvtarg = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
+		private _wposRequired = !([_pby] call model_isSafedirTransform);
+		private _cachePos = if (_wposRequired) then {_cachedPosVar select 1} else {_cachedPosVar select 0};
+		setSelf(__pullProc_tdat,vec2(_cachePos,_pby));
 
-			_newvtarg setvariable ["_srcPos",_srcPos];
-			_newvtarg setvariable ["_own",_own];
-			_newvtarg setvariable ["_offs",_offs];
-
-			private _rotDefault = [_wobj] call model_getPitchBankYaw;
-			_newvtarg setvariable ["_rot",_rotDefault];//offset vector transform
-			_newvtarg setvariable ["_curRot",_rotDefault]; //current vector transform
-			_newvtarg setvariable ["_zpos",0]; //offset z-axis
-			_newvtarg setvariable ["_curZPos",0]; //current offset z-axis
-
-			_newvtarg setVariable ["_lastTransform",callSelf(getTransform)];
-
-			_wobj setVariable ["__vtarg_pull",_newvtarg];//creating reference
-			
-			_newvtarg setPosATL ((getposatl _own) vectoradd _offs);
-			[_newvtarg,_rotDefault] call model_SetPitchBankYaw;
-
-			_newvtarg
-		} else {
-			callSelf(getPullHelperObject)
+		private _rpcInfo = [getSelf(pointer),getSelf(model),_offs,_pby,callSelf(_getPullSounds)];
+		if (callSelf(canLight) && {getSelf(light) != -1}) then {
+			_rpcInfo pushBack getSelf(light);
 		};
 
-		private _params = [this,_usr,_vtarg,_own,_offs];
-
-		if (_isMainOwner) then {
-			private _bbxDat = (core_modelBBX get (tolower getSelf(model)));
-			if isNullVar(_bbxDat) then {_bbxDat = [[0,0,0],[0,0,0],0];};
-			(_bbxDat select 0) params ["_x1","_y1","_z1"];
-			(_bbxDat select 1) params ["_x2","_y2","_z2"];
-			private _bbxDatAll = [
-				[0,0,0],
-				[_x1,_y1,_z1],
-				[_x1,_y1,_z2],
-				[_x1,_y2,_z1],
-				[_x1,_y2,_z2],
-				[_x2,_y1,_z1],
-				[_x2,_y1,_z2],
-				[_x2,_y2,_z1],
-				[_x2,_y2,_z2]
-			];
-			private _maxZ = ((abs _z1) + (abs _z2))/2;
-			_vtarg setVariable ["_maxZOffset",_maxZ];
-
-			_params pushBack _bbxDatAll;
-		};
-		
-		private _ptrInfo = getSelf(pointer);
-		if (!_isMainOwner) then {
-			_ptrInfo = "helper+"+_ptrInfo;
-		} else {
-			callFuncParams(_usr,fastSendInfo,"pulling_canPull" arg true);
-		};
-		private _paramsRPC = [_ptrInfo];
-		
-		callFuncParams(_usr,syncSmdVar,"pull" arg _paramsRPC);
-		
-
-		startAsyncInvoke
-			{
-				private _tick = _this select 1;
-				if (tickTime < _tick) exitWith {false};
-				_this set [1,tickTime + async_delay_check_];
-				(_this select 0) params ['this',"_usr","_vtarg","_own","_offs","_bbxDatAll"];
-				private _isStop = false;
-
-				if isNullReference(_vtarg) exitWith {true};
-				if !callFunc(this,isInWorld) exitWith {true};
-				private _isMainOwner = equals(callSelf(getPullMainOwner),_usr);
-				private _canmove = true;
-				private _oldpos = getposatl _vtarg;
-				private _modpos = ((getposatl _own) vectoradd _offs);
-				
-				private _newtempPosZ = _vtarg getvariable "_zpos";
-				private _newtempPos = _modpos vectorAdd [0,0,_newtempPosZ];
-				private _newtempVec = _vtarg getvariable "_rot";
-
-				if !callSelfParams(_checkCanPullingConditions,_usr) then {
-					_isStop = true;
-				};
-
-				if (_isMainOwner) then {
-					
-					//apply vtarg temp transform
-					_vtarg setPosATL _newtempPos;
-					[_vtarg,_newtempVec] call model_SetPitchBankYaw;
-
-					_intersectCount = 0;
-					private _its = null;
-					//_upos = _own modelToWorld (_own selectionPosition "spine3");
-					_upos = getPosATL _own; //от предыдущей позиции проверка, не от моба...
-					{
-						_its = [
-							_upos,
-							_vtarg modelToWorld _x,
-							_vtarg,
-							_own
-						] call si_getIntersectData;
-						if !isNullReference(_its select 0) then {
-							private _itobj = _its select 0;
-							if equals(_itobj,_vtarg) exitWith {};
-							_itobj = [_itobj] call si_handleObjectReturnCheckVirtual;
-							if equals(_itobj,this) exitWith {};
-							//traceformat("increment iobj: %1",_its select 0)
-							INC(_intersectCount);
-						};
-					} foreach _bbxDatAll;
-
-					//traceformat("On intersection check result: %1",_intersectCount)
-					_canmove = _intersectCount <= 4;
-				};
-
-				if ((_oldpos distance (_modpos)) > 1.1) then {
-					_isStop = true;
-					callFuncParams(_usr,localSay,"Сорвалась хватка!" arg "error");
-				};
-				_it = [
-					getposatl _own,
-					(getposatl _own) vectoradd [0,0,-100],
-					_own,
-					getSelf(loc)
-				] call si_getIntersectData;
-				if (!isNullReference(_it select 0)) then {
-					if equals(_it select 0,getSelf(loc)) exitWith {
-						_isStop = true;
-					};
-				};
-
-				//bbx checking
-
-				if (!_isStop) then {
-					if (!_isMainOwner) exitWith {};
-					callFuncParams(_usr,fastSendInfo,"pulling_canPull" arg _canmove);
-					if (!_canmove) exitWith {
-						//reset position
-						_vtarg setPosAtl (_oldpos);
-						[_vtarg,_vtarg getVariable "_curRot"] call model_SetPitchBankYaw;
-					};
-					
-					//save positions
-					_vtarg setVariable ["_curRot",_newtempVec];
-					_vtarg setVariable ["_curZPos",_newtempPosZ];
-					
-					private _newPos = _newtempPos;
-					
-					getSelf(loc) setPosWorld (atltoasl _newPos);
-					[getSelf(loc),_newtempVec] call model_SetPitchBankYaw;
-					
-					callSelf(replicateObject);
-					traceformat("transform update %1 %2; OFFSET %3; Z %4",_newPos arg _newtempVec arg _offs arg _newtempPosZ)
-					
-
-					if ((_oldpos distance _newpos) > 0.15) then {
-						callFunc(this,playPullSound);
-					};
-				};
-
-				_isStop;
-			},
-			{
-				(_this select 0) params ['this',"_usr","_vtarg"];
-				
-				traceformat("PULLING TRIGGER STOPPED %1",_vtarg)
-				if !isNullReference(_vtarg) then {
-					//callFuncParams(_usr,onGrab,this);
-					{
-						if equals(getVar(_x,object),this) then {
-							callFunc(_x,stopGrab);
-						};
-					} foreach getVar(_usr,specHandAct);
-				};
-			},
-			[_params,tickTime + async_delay_check_]
-		endAsyncInvoke
-
-		#undef async_delay_check_
+		callFuncParams(_usr,syncSmdVar,"pull" arg _rpcInfo);
 	};
-
+	
 	func(stopPull)
 	{
 		objParams_1(_usr);
@@ -2594,8 +2437,17 @@ region(Pulling functionality)
 		};
 
 		if (count _mvr == 0) then {
-			private _vtarg = callSelf(getPullHelperObject);
-			deleteVehicle _vtarg;
+			// private _vtarg = callSelf(getPullHelperObject);
+			// deleteVehicle _vtarg;
+			getSelf(__pullProc_tdat) params ["_pos","_pby"];
+			(_pby call model_convertPithBankYawToVec) params ["_vd","_vu"];
+			private _wposRequired = !([_pby] call model_isSafedirTransform);
+			traceformat("WPOS REQUIRED: %1; pby: %2 => %3",_wposRequired arg _pby arg vec2(_vd,_vu))
+			if (_wposRequired) then {
+				callSelfParams(loadModel,_pos + [true] arg _vd arg _vu arg false);
+			} else {
+				callSelfParams(loadModel,_pos arg _vd arg _vu arg false);
+			};
 		};
 
 		callSelf(onPullChanged);
@@ -2650,6 +2502,7 @@ region(Pulling functionality)
 		};
 		private _handleInp = {
 			objParams_2(_usr,_inp);
+			assert_str(false,"Pull settings changing not supported");
 			private _src = getSelf(context);
 			if isNullReference(_src) exitWith {};
 			if !callFunc(_src,isInWorld) exitWith {};
