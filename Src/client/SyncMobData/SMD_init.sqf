@@ -635,7 +635,7 @@ smd_onPull = {
 
 	call _releaseResources;
 
-	private _obj = createMesh([_model arg [0 arg 0 arg 0] arg true]);
+	private _obj = createSimpleObject [_model,[0,0,0],true];
 	_obj setPhysicsCollisionFlag false;
 	_obj setPosWorld (atltoasl(getposatl _mob vectoradd _offset));
 	[_obj,_pby] call model_SetPitchBankYaw;
@@ -651,6 +651,9 @@ smd_onPull = {
 		_vtarg setObjectMaterial [0,""];
 		_vtarg setObjectTexture [1,"#(argb,8,8,3)color(1,1,0,1,co)"];//edge colors
 		_vtarg disableCollisionWith _mob;
+		if not_equals(_mob,player) then {
+			_vtarg hideObject true;
+		};
 		_obj setvariable ["_vtarg",_vtarg];
 
 		private _bbxDat = (core_modelBBX get (tolower _model));
