@@ -51,7 +51,7 @@ if (isMultiplayer) then {
         };
     } foreach ((squadParams player) select 0);
 };
-if (!_canload_) exitWith {};
+if (!_canload_) exitWith {error("Unknown reason of cannot load client")};
 
 player allowDamage false;
 
