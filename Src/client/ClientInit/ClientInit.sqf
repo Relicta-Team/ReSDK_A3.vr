@@ -76,8 +76,6 @@ uiNamespace setvariable ["relicta_onRemoveClientCode",__uiCode_onDisconnect];
 
 
 //Fix - 0.7.579: решает проблему зависших динамических дисплеев при кике локального клиента
-[] SPAWN {
-	uisleep 2;
 if (isMultiplayer) then {
     [] SPAWN {
         uisleep 2;
