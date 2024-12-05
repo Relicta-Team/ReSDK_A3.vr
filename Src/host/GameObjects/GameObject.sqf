@@ -2387,16 +2387,24 @@ region(Pulling functionality)
 	func(startPull)
 	{
 		objParams_1(_usr);
-		if !callSelf(isMovable) exitWith {};
-		if !callSelf(isInWorld) exitWith {};
-		if !callSelfParams(_checkCanPullingConditions,_usr) exitWith {};
-		//пусть пока тащить может только один
-		if (count getSelf(__moverMobs) > 0) exitWith {};
-		//todo горящие чанки объекта не позволят двигать его
+		
 		
 		getSelf(__moverMobs) pushBack _usr;
 		callSelfParams(_pullStarted,_usr);
 		callSelf(onPullChanged);
+	};
+	func(canStartPull)
+	{
+		objParams_1(_usr);
+
+		if !callSelf(isMovable) exitWith {false};
+		if !callSelf(isInWorld) exitWith {false};
+		if !callSelfParams(_checkCanPullingConditions,_usr) exitWith {false};
+		//пусть пока тащить может только один
+		if (count getSelf(__moverMobs) > 0) exitWith {false};
+		//todo горящие чанки объекта не позволят двигать его
+
+		true
 	};
 
 	//internal function for handling pullings
@@ -2410,12 +2418,12 @@ region(Pulling functionality)
 		private _cachedPosVar = [getposatl _wobj,getposworld _wobj];
 		private _offs = _srcPos vectorDiff (getposatl _own);
 		private _pby = [_wobj] call model_getPitchBankYaw;
-		private _vdu = [vectorDir _wobj,vectorUp _wobj];
+		
 		callSelf(unloadModel);
 
 		private _wposRequired = !([_pby] call model_isSafedirTransform);
 		private _cachePos = if (_wposRequired) then {_cachedPosVar select 1} else {_cachedPosVar select 0};
-		setSelf(__pullProc_tdat,vec2(_cachePos,_vdu));
+		setSelf(__pullProc_tdat,vec2(_cachePos,_pby));
 
 		private _rpcInfo = [getSelf(pointer),getSelf(model),_offs,_pby,callSelf(_getPullSounds)];
 		if (callSelf(canLight) && {getSelf(light) != -1}) then {

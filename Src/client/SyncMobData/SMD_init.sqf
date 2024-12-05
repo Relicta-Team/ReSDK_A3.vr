@@ -565,21 +565,25 @@ smd_getPullingObjectPtr = {
 };
 
 smd_pullSetTransformValues = {
-	params ["_mob","_t","_v"];
-	_mob setvariable ["_glob_smd_pull_zpos",_t];
-	_mob setvariable ["_glob_smd_pull_rot",_v];
+	params ["_mob","_t","_v",["_networkSync",false]];
+	_mob setvariable ["_glob_smd_pull_zpos",_t,_networkSync];
+	_mob setvariable ["_glob_smd_pull_rot",_v,_networkSync];
 };
+//can be call only on local client
 smd_pullUpdateTransform = {
-	params ["_mob","_mode","_val",["_changeMode",true]];
+	params ["_mob","_mode","_val",["_netSync",true]];
 	if (_mode == "zpos") exitWith {
 		private _newval = ((_mob getvariable ["_glob_smd_pull_zpos",0])+(_val));
 		private _o = call ND_ObjectPull_getHelper;
+		if isNullReference(_o) exitWith {
+			errorformat("smd_pullUpdateTransform() - helper object not found; %1",_mob);
+		};
 		private _maxZOffset = _o getvariable "_maxZOffset";
 		_newval = clamp(_newval,-_maxZOffset/2,_maxZOffset);
-		_mob setvariable ["_glob_smd_pull_zpos",_newval];
+		_mob setvariable ["_glob_smd_pull_zpos",_newval,_netSync];
 	};
 	if (_mode == "rot") exitWith {
-		_mob setvariable ["_glob_smd_pull_rot",_val];
+		_mob setvariable ["_glob_smd_pull_rot",_val,_netSync];
 	};
 	errorformat("smd_pullUpdateTransform() - wrong mode %1",_mode);
 };
@@ -642,7 +646,7 @@ smd_onPull = {
 	_mob setVariable ["__loc_pull_lastupd",tickTime];
 	_mob setVariable ["__loc_pull_ptr",_ptr];
 
-	if equals(_mob,player) then {
+	
 		private _vtarg = "Land_VR_CoverObject_01_kneel_F" createVehicleLocal [0,0,0];
 		_vtarg setObjectTexture [0,""];
 		_vtarg setObjectMaterial [0,""];
@@ -668,7 +672,7 @@ smd_onPull = {
 			private _maxZ = ((abs _z1) + (abs _z2))/2;
 			_vtarg setVariable ["_maxZOffset",_maxZ];
 			_obj setvariable ["_bbxDatAll",_bbxDatAll];
-	};
+
 	
 	private _lpp = getPosWorld _obj;
 	_mob setVariable ["__loc_pull_lastpos",_lpp];
@@ -696,11 +700,11 @@ smd_onPull = {
 		_isSelf = equals(_mob,player);
 		private _vdu = [_obj] call model_getPitchBankYaw;
 
-		if (_isSelf) then {
-			([_mob] call smd_pullGetTransformInfo) params ["_modZ","_modPBY"];
-			_vdu = _modPBY;
-			MODARR(_newSavedPos,2, + _modZ);
-		};
+		
+		([_mob] call smd_pullGetTransformInfo) params ["_modZ","_modPBY"];
+		_vdu = _modPBY;
+		MODARR(_newSavedPos,2, + _modZ);
+		
 
 		_lastUpd = _mob getVariable "__loc_pull_lastupd";
 		_nextUpd = _lastUpd + 1;
@@ -726,13 +730,14 @@ smd_onPull = {
 		];
 		//traceformat("interp pull dist %1; ---> FROM %2 TO %3; NEWPOS %4",(_lastSavedPos select vec2(0,3)) distance ((_pos select vec2(0,3))) arg _lastSavedPos arg _newSavedPos arg _newpos)
 		
-		if ((_newpos distance _lastSavedPos) > 0.1 && {!(_obj getvariable "_soundPlayed")}) then {
-			_pullSnd = pick _pullSoundList;
-			_obj setvariable ["_soundPlayed",true];
-			if equals(_mob,player) then {
+		if (_isSelf) then {
+			if ((_newpos distance _lastSavedPos) > 0.1 && {!(_obj getvariable "_soundPlayed")}) then {
+				_pullSnd = pick _pullSoundList;
+				_obj setvariable ["_soundPlayed",true];
 				[_pullSnd,_newpos,1,getRandomPitchInRange(0.5,1.1),15] call soundGlobal_play;
 			};
 		};
+		
 
 		_canmove = true;
 		_bbxDatAll = _obj getvariable "_bbxDatAll";
@@ -765,15 +770,30 @@ smd_onPull = {
 		];
 		_vtarg setvariable ["canmove",_canmove];
 		
-		_maxDst = ([0,0,0]distance _offset)*2;
-		if ((_newSavedPos distance (_lastSavedPos)) > _maxDst) then {
-			_isStop = true;			
-			["Сорвалась хватка!","error"] call chatPrint;
-		};
-		private _dir = _mob getRelDir _obj;
-		_isOnFront = (_dir > 315 || _dir <= 45);
-		if (!_isOnFront) then {
-			_isStop = true;
+		//self check validation
+		if (_isSelf) then {
+			_maxDst = ([0,0,0]distance _offset)*2;
+			if ((_newSavedPos distance (_lastSavedPos)) > _maxDst) exitwith {
+				_isStop = true;			
+				["Сорвалась хватка!","error"] call chatPrint;
+			};
+			private _dir = _mob getRelDir _obj;
+			_isOnFront = (_dir > 315 || _dir <= 45);
+			if (!_isOnFront) exitwith {
+				_isStop = true;
+			};
+
+			//checking if owner on object
+			_rd = ([
+				getposatl _mob,
+				(getposatl _mob) vectoradd [0,0,-100],
+				_mob,
+				_vtarg
+			] call interact_getRayCastData) select 0;
+			if (!isNullReference(_rd) && {equals(_obj,_rd)}) exitWith {
+				_isStop = true;
+				["Надо слезть. Не могу так тащить","error"] call chatPrint;
+			};
 		};
 
 		if (_isStop && _isSelf) exitWith {
@@ -807,7 +827,7 @@ smd_onPull = {
 			_mob setVariable ["__loc_pull_newVDU",_vdu];
 			_mob setVariable ["__loc_pull_lastupd",_nextUpd];
 
-			if equals(_mob,player) then {
+			if (_isSelf) then {
 				_pbyEx = _newvdu;//!error -> [_obj] call model_getPitchBankYaw;
 				_nps = if ([_pbyEx] call model_isSafedirTransform) then {getposatl _obj} else {getposworld _obj};
 				rpcSendToServer("snc_ppc",[_mob getvariable "__loc_pull_ptr" arg [_nps arg _pbyEx] arg _newvdu]);
