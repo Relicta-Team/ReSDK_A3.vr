@@ -53,6 +53,11 @@ NGOExt_createSoftlink = {
 	true
 };
 
+NGOExt_registerRef = {
+	params ["_obj","_ptr"];
+	_obj setvariable ["ref",_ptr];
+};
+
 //create virtual object
 NGOExt_createDummyObject = {
 	params ["_src","_objType",["_imode",true],["_simple",true]];

@@ -408,6 +408,22 @@ TEST(StructExitWith)
 	ASSERT_EQ(_rval,"val is 9876 +strval:9876");
 }
 
+TEST(InlineStruct)
+{
+	private _obj = inline_struct(AnonType)
+		def(test_num) 123
+		def(test_func)
+		{
+			self getv(test_num);
+		}
+		def(test_str) "hello"
+	inline_endstruct;
+
+	ASSERT_EQ(_obj getv(test_str),"hello");
+
+	ASSERT_EQ(_obj callv(test_func),123);
+}
+
 TEST(SafeReferences)
 {
 	private _pool = ["UnitTest_SafeReference_Container"] call SafeReference_CreatePool;

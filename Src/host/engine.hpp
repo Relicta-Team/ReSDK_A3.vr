@@ -210,7 +210,7 @@ _ret = _this; \
 #ifdef RBUILDER
 	#define __rb_mesh_common_path__ "core\default\default.p3d"
 	#define createMesh(ctx) ctx call { params ["_p","_ps","_loc"]; \
-		createSimpleObject [ __rb_mesh_common_path__, _ps,_loc ]; \
+		createSimpleObject [ ifcheck(isServer,__rb_mesh_common_path__,_p), _ps,_loc ]; \
 	}
 #else
 	#define createMesh(ctx) createSimpleObject (ctx)

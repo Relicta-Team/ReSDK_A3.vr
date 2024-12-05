@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define STRUCT_API_VERSION 1.6
+#define STRUCT_API_VERSION 1.7
 // enable fileinfo for structs. do not enable in release build
 //#define STRUCT_USE_ALLOC_INFO
 
@@ -108,9 +108,27 @@
 
 // * * * * * * * * * * * * Declaration base * * * * * * * * * * * * 
 
-#define struct(name) _t_annot_ = []; _sdecl__ = [ [STRUCT_MEM_TYPE, #name ], [STRUCT_MEM_FLAGS, struct_default_flag], ["__dflg__",false] ];
+#define struct(name) _t_vtable = spi_lst; _t_annot_ = []; _sdecl__ = [ [STRUCT_MEM_TYPE, #name ], [STRUCT_MEM_FLAGS, struct_default_flag], ["__dflg__",false] ];
 #define base(basename) _sdecl__ pushBack [STRUCT_MEM_BASE, #basename ];
-#define endstruct ;spi_lst pushBack _sdecl__; if (count _t_annot_ > 0) then {_sdecl__ pushBack ["#type_annot_list",_t_annot_]};
+#define endstruct ;_t_vtable pushBack _sdecl__; if (count _t_annot_ > 0) then {_sdecl__ pushBack ["#type_annot_list",_t_annot_]};
+
+/*
+	private _obj = inline_struct(TestStruct)
+		def(var)3;
+		def(test_func) {
+			_x = self getv(var);
+			print(_x);
+		}
+	inline_endstruct;
+
+	private _number = _obj getv(var);
+
+	logformat("inline struct: %1", inline_struct(Obj) def(someValue) 123 inline_endstruct);
+*/
+#define inline_struct(name) call{ _sdecl__ = [ [STRUCT_MEM_TYPE, #name ], [STRUCT_MEM_BASE, vtable_s get "InlineStructBase__"], [STRUCT_MEM_FLAGS, struct_default_flag], ["__dflg__",false] ];
+
+#define inline_endstruct ; private _sobj = createHashMapObject [_sdecl__,nil]; _sobj}
+
 
 
 // * * * * * * * * * * * * Member declaration * * * * * * * * * * * *
