@@ -564,6 +564,38 @@ smd_getPullingObjectPtr = {
 	_mob getvariable "__loc_pull_ptr"
 };
 
+smd_pullSetTransformValues = {
+	params ["_mob","_t","_v"];
+	_mob setvariable ["_glob_smd_pull_zpos",_t];
+	_mob setvariable ["_glob_smd_pull_rot",_v];
+};
+smd_pullUpdateTransform = {
+	params ["_mob","_mode","_val",["_changeMode",true]];
+	if (_mode == "zpos") exitWith {
+		private _newval = ((_mob getvariable ["_glob_smd_pull_zpos",0])+(_val));
+		private _o = call ND_ObjectPull_getHelper;
+		private _maxZOffset = _o getvariable "_maxZOffset";
+		_newval = clamp(_newval,-_maxZOffset/2,_maxZOffset);
+		_mob setvariable ["_glob_smd_pull_zpos",_newval];
+	};
+	if (_mode == "rot") exitWith {
+		_mob setvariable ["_glob_smd_pull_rot",_val];
+	};
+	errorformat("smd_pullUpdateTransform() - wrong mode %1",_mode);
+};
+smd_pullGetTransformInfo = {
+	params ["_mob"];
+	private _tpRet = [_mob getvariable ["_glob_smd_pull_zpos",0],_mob getvariable ["_glob_smd_pull_rot",[0,0,0]]];
+	// _mob setvariable ["_glob_smd_pull_zpos",null];
+	// _mob setvariable ["_glob_smd_pull_rot",null];
+	_tpRet
+};
+
+smd_pullGetHeplerObject = {
+	params ["_mob"];
+	_mob getvariable "__loc_pull_obj" getvariable ["_vtarg",objNull];
+};
+
 pulling_canPull = false;
 smd_onPull = {
 	params ["_mob","_ctx"];
@@ -586,6 +618,9 @@ smd_onPull = {
 			_mob setvariable ["__loc_pull_obj",null];
 		};
 		_mob setvariable ["__loc_pull_ptr",null];
+		if equals(_mob,player) then {
+			[_mob,null,null] call smd_pullSetTransformValues;
+		};
 	};
 
 	if equals(_ctx,0) exitWith {
@@ -600,6 +635,8 @@ smd_onPull = {
 	private _obj = createMesh([_model arg [0 arg 0 arg 0] arg true]);
 	_obj setPhysicsCollisionFlag false;
 	_obj setPosWorld (atltoasl(getposatl _mob vectoradd _offset));
+	[_obj,_pby] call model_SetPitchBankYaw;
+	
 	_obj setvariable ["_soundPlayed",false];
 	_mob setvariable ["__loc_pull_obj",_obj];
 	_mob setVariable ["__loc_pull_lastupd",tickTime];
@@ -641,9 +678,15 @@ smd_onPull = {
 
 	[_obj,_ptr] call NGOExt_registerRef;
 
+	if (equals(_mob,player)) then {
+		[_mob,"rot",_pby] call smd_pullUpdateTransform;
+	};
+
 	startAsyncInvoke
 	{
 		params ["_mob","_obj","_offset","_pby","_pullSoundList"];
+		
+		if isNullReference(_obj) exitWith {true};//forward exit
 
 		_lastSavedPos = _mob getVariable ["__loc_pull_lastpos",null];
 		_newSavedPos = atltoasl(getposatl _mob vectoradd _offset);//_mob getVariable ["__loc_pull_newpos",_lastSavedPos];
@@ -652,6 +695,12 @@ smd_onPull = {
 		_isStop = false;
 		_isSelf = equals(_mob,player);
 		private _vdu = [_obj] call model_getPitchBankYaw;
+
+		if (_isSelf) then {
+			([_mob] call smd_pullGetTransformInfo) params ["_modZ","_modPBY"];
+			_vdu = _modPBY;
+			MODARR(_newSavedPos,2, + _modZ);
+		};
 
 		_lastUpd = _mob getVariable "__loc_pull_lastupd";
 		_nextUpd = _lastUpd + 1;
@@ -685,15 +734,16 @@ smd_onPull = {
 			};
 		};
 
-		_zdelta = _obj getvariable ["pull_interp_zpos_delta",0];
-		_newpos = _newpos vectorAdd [0,0,_zdelta];
-
 		_canmove = true;
 		_bbxDatAll = _obj getvariable "_bbxDatAll";
 		_vtarg = _obj getvariable "_vtarg";
-		_vtarg attachTo [_obj,[0,0,0]];
+		_vtarg setPosWorld (_newpos vectoradd [0,0,_vtarg getvariable ["pull_interp_zpos_delta",0]]);
+		[_vtarg,_newvdu] call model_SetPitchBankYaw; 
+		_pbdelt = _vtarg getvariable "pull_interp_pby";
+		if !isNullVar(_pbdelt) then {
+			[_vtarg,_pbdelt] call model_SetPitchBankYaw;
+		};
 		_vtarg setObjectScale (1.1 * (boundingBoxReal _obj select 2));
-		detach _vtarg;
 		_upos = getCenterMobPos(_mob);
 		_uposASL = atltoasl(_upos);
 		_itsCount = 0;
@@ -713,6 +763,7 @@ smd_onPull = {
 		_vtarg setObjectTexture [1,
 			if (_canmove) then {"#(argb,8,8,3)color(0,1,0,1,co)"} else {"#(argb,8,8,3)color(1,0.0,0,1,co)"}
 		];
+		_vtarg setvariable ["canmove",_canmove];
 		
 		_maxDst = ([0,0,0]distance _offset)*2;
 		if ((_newSavedPos distance (_lastSavedPos)) > _maxDst) then {
@@ -726,7 +777,9 @@ smd_onPull = {
 		};
 
 		if (_isStop && _isSelf) exitWith {
-			rpcSendToServer("ppc_forceStop",[_mob arg _mob getvariable "__loc_pull_ptr"]);
+			if ([_mob] call smd_isPulling) then {
+				rpcSendToServer("ppc_forceStop",[_mob arg _mob getvariable "__loc_pull_ptr"]);
+			};
 			true
 		};
 
@@ -735,6 +788,14 @@ smd_onPull = {
 			_mob setVariable ["__loc_pull_lastupd",tickTime];
 			false
 		};
+
+		// _localPos = player worldToModelVisual (asltoatl _newpos);
+		// _obj attachTo [player,_localPos];
+		_obj setPosWorld _newpos;
+		[_obj,
+			//ifcheck(_isSelf,_vdu,_newvdu)
+			_newvdu
+		] call model_SetPitchBankYaw;
 
 		if (tickTime >= _nextUpd) then {
 			_obj setvariable ["_soundPlayed",false];
@@ -747,14 +808,12 @@ smd_onPull = {
 			_mob setVariable ["__loc_pull_lastupd",_nextUpd];
 
 			if equals(_mob,player) then {
-				_obj setPosWorld _newpos;
-				_nps = if ([_vdu] call model_isSafedirTransform) then {getposatl _obj} else {getposworld _obj};
-				rpcSendToServer("snc_ppc",[_mob getvariable "__loc_pull_ptr" arg [_nps arg _vdu]]);
+				_pbyEx = _newvdu;//!error -> [_obj] call model_getPitchBankYaw;
+				_nps = if ([_pbyEx] call model_isSafedirTransform) then {getposatl _obj} else {getposworld _obj};
+				rpcSendToServer("snc_ppc",[_mob getvariable "__loc_pull_ptr" arg [_nps arg _pbyEx] arg _newvdu]);
 			};
 		};
-		// _localPos = player worldToModelVisual (asltoatl _newpos);
-		// _obj attachTo [player,_localPos];
-		_obj setPosWorld _newpos;
+		
 		isNullReference(_obj)
 	},
 	{

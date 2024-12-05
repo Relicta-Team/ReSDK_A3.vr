@@ -1161,7 +1161,7 @@ endregion
 			if not_equalTypes(_dir,0) then {_dir = null};
 			_wobj = [this,_pos,_vecOrDist,_dir] call noe_loadVisualObject_OnDrop;
 		} else {
-			_wobj = [this,_pos,_dir,_vec] call noe_loadVisualObject;
+			_wobj = [this,_pos,_dir,_vecOrDist] call noe_loadVisualObject;
 		};
 		
 		!isNullReference(_wobj)
@@ -2390,7 +2390,8 @@ region(Pulling functionality)
 		if !callSelf(isMovable) exitWith {};
 		if !callSelf(isInWorld) exitWith {};
 		if !callSelfParams(_checkCanPullingConditions,_usr) exitWith {};
-		
+		//пусть пока тащить может только один
+		if (count getSelf(__moverMobs) > 0) exitWith {};
 		//todo горящие чанки объекта не позволят двигать его
 		
 		getSelf(__moverMobs) pushBack _usr;
@@ -2409,11 +2410,12 @@ region(Pulling functionality)
 		private _cachedPosVar = [getposatl _wobj,getposworld _wobj];
 		private _offs = _srcPos vectorDiff (getposatl _own);
 		private _pby = [_wobj] call model_getPitchBankYaw;
+		private _vdu = [vectorDir _wobj,vectorUp _wobj];
 		callSelf(unloadModel);
 
 		private _wposRequired = !([_pby] call model_isSafedirTransform);
 		private _cachePos = if (_wposRequired) then {_cachedPosVar select 1} else {_cachedPosVar select 0};
-		setSelf(__pullProc_tdat,vec2(_cachePos,_pby));
+		setSelf(__pullProc_tdat,vec2(_cachePos,_vdu));
 
 		private _rpcInfo = [getSelf(pointer),getSelf(model),_offs,_pby,callSelf(_getPullSounds)];
 		if (callSelf(canLight) && {getSelf(light) != -1}) then {
@@ -2636,9 +2638,9 @@ region(Pulling functionality)
 			// private _vtarg = callSelf(getPullHelperObject);
 			// deleteVehicle _vtarg;
 			getSelf(__pullProc_tdat) params ["_pos","_pby"];
-			(_pby call model_convertPithBankYawToVec)params ["_vd","_vu"];
+			(_pby call model_convertPithBankYawToVec) params ["_vd","_vu"];
 			private _wposRequired = !([_pby] call model_isSafedirTransform);
-			traceformat("WPOS REQUIRED: %1",_wposRequired)
+			traceformat("WPOS REQUIRED: %1; pby: %2 => %3",_wposRequired arg _pby arg vec2(_vd,_vu))
 			if (_wposRequired) then {
 				callSelfParams(loadModel,_pos + [true] arg _vd arg _vu arg false);
 			} else {
