@@ -1732,6 +1732,15 @@ Description:
 - Param: _target
 
 File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 46](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L46)
+## NGOExt_registerRef
+
+Type: function
+
+Description: 
+- Param: _obj
+- Param: _ptr
+
+File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 56](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L56)
 ## NGOExt_createDummyObject
 
 Type: function
@@ -1742,7 +1751,7 @@ Description: create virtual object
 - Param: _imode (optional, default true)
 - Param: _simple (optional, default true)
 
-File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 57](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L57)
+File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 62](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L62)
 ## noe_client_ngo_check
 
 Type: function
@@ -1751,7 +1760,7 @@ Description:
 - Param: _obj
 - Param: _model
 
-File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 75](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L75)
+File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 80](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L80)
 ## noe_client_isNGO
 
 Type: function
@@ -1759,7 +1768,7 @@ Type: function
 Description: check if is ngo object
 
 
-File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 119](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L119)
+File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 124](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L124)
 ## noe_client_getNGOSource
 
 Type: function
@@ -1767,7 +1776,7 @@ Type: function
 Description: getting ngo
 
 
-File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 122](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L122)
+File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 127](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L127)
 ## noe_client_getObjectNGOSkip
 
 Type: function
@@ -1775,7 +1784,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 124](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L124)
+File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 129](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L129)
 ## noe_client_getPtrInfoNGOSkip
 
 Type: function
@@ -1784,7 +1793,7 @@ Description:
 - Param: _obj
 - Param: _worldRef
 
-File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 135](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L135)
+File: [client\NOEngineClient\NOEngineClient_NOGEOM_ext.sqf at line 140](../../../Src/client/NOEngineClient/NOEngineClient_NOGEOM_ext.sqf#L140)
 # NOEngineClient_ObjectManager.sqf
 
 ## NOE_CLIENT_DELETEOBJS_COUNT

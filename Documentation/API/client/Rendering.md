@@ -142,7 +142,7 @@ Description:
 - Param: _colorInner (optional, default ['1', '1', '0', '1'])
 - Param: _width (optional, default 2)
 
-File: [client\Rendering\Render_debug.sqf at line 237](../../../Src/client/Rendering/Render_debug.sqf#L237)
+File: [client\Rendering\Render_debug.sqf at line 241](../../../Src/client/Rendering/Render_debug.sqf#L241)
 ## debug_addRenderPos
 
 Type: function
@@ -153,7 +153,7 @@ Description:
 - Param: _wdt
 - Param: _bbx
 
-File: [client\Rendering\Render_debug.sqf at line 322](../../../Src/client/Rendering/Render_debug.sqf#L322)
+File: [client\Rendering\Render_debug.sqf at line 329](../../../Src/client/Rendering/Render_debug.sqf#L329)
 ## debug_addRenderObject
 
 Type: function
@@ -164,7 +164,7 @@ Description:
 - Param: _wdt
 - Param: _bbxVec2
 
-File: [client\Rendering\Render_debug.sqf at line 328](../../../Src/client/Rendering/Render_debug.sqf#L328)
+File: [client\Rendering\Render_debug.sqf at line 335](../../../Src/client/Rendering/Render_debug.sqf#L335)
 # Render_zpass.sqf
 
 ## render_zpass_cachePositions

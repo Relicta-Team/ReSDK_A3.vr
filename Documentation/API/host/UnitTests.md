@@ -681,7 +681,7 @@ Type: function
 Description: 
 
 
-File: [host\UnitTests\TestsCollection\structs.sqf at line 499](../../../Src/host/UnitTests/TestsCollection/structs.sqf#L499)
+File: [host\UnitTests\TestsCollection\structs.sqf at line 515](../../../Src/host/UnitTests/TestsCollection/structs.sqf#L515)
 # header_test.h
 
 ## MACRO_TEST
