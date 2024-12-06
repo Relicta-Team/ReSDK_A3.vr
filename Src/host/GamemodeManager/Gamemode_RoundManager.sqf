@@ -99,6 +99,18 @@ gm_startRound = {
 
 	["Round started"] call discLog;
 
+	private _allcliInfo = [""];
+	private _setmap = ["role1","role2","role3"];
+	{
+		if getVar(_x,isReady) then {
+			private _chSet = getVar(_x,charSettings);
+			_allcliInfo pushBack (
+				format["%1: %2 => %3",_foreachIndex,getVar(_x,name),_setmap apply {_chSet get _x}];
+			);
+		};
+	} foreach (call cm_getAllClientsInLobby);
+	[format["Declare info: %1",_allcliInfo joinString endl]] call gameLog;
+
 	//Выбираем объект аспекта
 	call gm_pickRoundAspect;
 	//private _curRole = null;
@@ -209,6 +221,8 @@ gm_prepareToRole = {
 				modVar(_defaultRole,count, - 1);
 				_isSpawned = true;
 				gm_preparedClients pushBack vec2(_client,_defaultRole);
+
+				[format["Client %1 picking role %2",getVar(_client,name),_defaultRole]] call gameLog;
 				//[_client,_roleClass,true] call gm_spawnClientToRole;
 			};			
 		};
@@ -216,6 +230,7 @@ gm_prepareToRole = {
 
 	if (!_isSpawned) then {
 		gm_noRoleClients pushBack _client;
+		[format["Client %1 cannot pick role (added into norole-list)",getVar(_client,name)]] call gameLog;
 	};
 
 };
@@ -238,6 +253,7 @@ gm_prepareNoRoleClients = {
 				) exitWith {
 				modVar(_x,count, - 1);
 				gm_preparedClients pushBack vec2(_client,_x);
+				[format["Norole-list pick for client %1 is %2",getVar(_client,name),_x]] call gameLog;
 				//[_client,callFunc(_x,getClassName),true] call gm_spawnClientToRole;
 			};
 		} foreach _newVec;
