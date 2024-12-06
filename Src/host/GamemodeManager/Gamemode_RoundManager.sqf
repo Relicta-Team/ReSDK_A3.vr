@@ -120,17 +120,22 @@ gm_startRound = {
 	//! сделать так, чтобы полные и скрытые не моги перемешаться
 
 	// 1. распределяем на роли по vec2
+	["----- Prepare to roles -----"] call gameLog;
 	{
 		_x call gm_prepareToRole;
 	} foreach _sortedList;
 	// 2. распределяем безролевых
+	["----- Prepare no-role clients -----"] call gameLog;
 	call gm_prepareNoRoleClients;
 	
 	// 3. обрабатываем возможных антагов. пустые листы - регеним на всех доступных
+	["----- Handle prelist antags -----"] call gameLog;
 	call gm_handlePreListAntags;
 	// 4. хандлим антагов полных
+	["----- Handle full antags -----"] call gameLog;
 	call gm_handleDefineFullAntags;
 	// 5. спавн
+	["----- Spawn prepared clients -----"] call gameLog;
 	call gm_spawnPreparedClients;
 	call gm_internal_resetContenders;
 
