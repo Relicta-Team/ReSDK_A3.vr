@@ -105,7 +105,7 @@ gm_startRound = {
 		if getVar(_x,isReady) then {
 			private _chSet = getVar(_x,charSettings);
 			_allcliInfo pushBack (
-				format["%1: %2 => %3",_foreachIndex,getVar(_x,name),_setmap apply {_chSet get _x}];
+				format["%1: %2 => %3",_foreachIndex,getVar(_x,name),_setmap apply {_chSet get _x}]
 			);
 		};
 	} foreach (call cm_getAllClientsInLobby);
