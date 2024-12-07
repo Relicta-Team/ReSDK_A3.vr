@@ -2804,7 +2804,7 @@ _3953_751464042_7878431_38000 = ['SteelBlueCase',[3953.75,4042.79,31.38],178.266
 }] call InitStruct; 
 ['SmallStoveGrill',[3958.68,4048.51,31.2262],340,[0,0,1], {_thisObj setvariable ['lightisenabled',false]; _thisObj setvariable ['light',SLIGHT_LIGHT_STOVE_var];}] call InitStruct; 
 ['WoodenOfficeTable4',[3956.8,4050.63,31.3748],180.001,[0,0,1]] call InitStruct; 
-['FreezerStruct',[3958.74,4051.56,31.375],180,[0,0,1]] call InitStruct; 
+_3958_739994051_5573731_37500 = ['FreezerStruct',[3958.74,4051.56,31.375],180,[0,0,1]] call InitStruct; 
 ['RedSteelBox',[3956.49,4051.25,32.4758],270.001,[0,0,1]] call InitStruct; 
 ['Shelves',[3957.88,4051.66,31.3733],9.8184e-06,[0,0,1]] call InitStruct; 
 ['Umivalnik',[3958.76,4049.23,31.3698],270,[0,0,1]] call InitStruct; 
@@ -2836,6 +2836,7 @@ _3959_992194042_8356931_38000 = ['SteelBlueCase',[3959.99,4042.84,31.38],187.312
 ['StripedChair',[3966.59,4047.31,31.375],180,[0,0,1], {go_editor_globalRefs set ["RHeadGuardDormChair",_thisObj];
 }] call InitItem; 
 ['SmallChair1',[3967.35,4045.46,31.375],90,[0,0,1]] call InitItem; 
+_3951_633544045_2172931_37498 = ['SteelBlueCase',[3951.63,4045.22,31.375],269.575,[0,0,1]] call InitStruct; 
 ['Bucket1',[3956.42,4049.48,31.375],330,[0,0,1]] call InitItem; 
 ['Cup1',[3956.51,4049.82,32.4533],60,[0,0,1]] call InitItem; 
 ['KitchenKnife',[3956.98,4050.94,37.4767,true],[-0.965926,-0.258819,-1.93881e-06],[-0.258819,0.965926,7.29254e-08]] call InitItem; 
@@ -2897,6 +2898,11 @@ _3960_181884064_4689931_44694 = ['SteelDoorThinSmall',[3960.18,4064.47,31.4469],
 ['ChairLibrary',[3958.1,4065.7,31.4469],265,[0,0,1]] call InitItem; 
 ['WoodenOfficeTable',[3958.23,4064.88,31.4505],0,[0,0,1]] call InitStruct; 
 ['BigFileCabinet',[3962.85,4065.58,31.5537],0,[0,0,1]] call InitStruct; 
+['SquareWoodenBox',[3951.54,4042.84,34.4278],350,[0,0,1]] call InitStruct; 
+['ConcreteSlabsStack',[3966.55,4043.24,34.4041],270,[0,0,1]] call InitStruct; 
+['SquareWoodenBox',[3952.78,4042.78,34.4328],9.8184e-06,[0,0,1]] call InitStruct; 
+['SquareWoodenBox',[3951.65,4044.11,34.4328],350,[0,0,1]] call InitStruct; 
+['BigPilePipes',[3958.99,4043.31,34.4278],0,[0,0,1]] call InitStruct; 
 
 
 
@@ -3578,6 +3584,15 @@ if (!isNil'_3953_751464042_7878431_38000') then {
 	[_3953_751464042_7878431_38000,'FlashlightLoaded',1,100] call (_3953_751464042_7878431_38000 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3953_751464042_7878431_38000,'MatchBox',1,100] call (_3953_751464042_7878431_38000 getvariable 'proto' getvariable 'createItemInContainer');
 };
+if (!isNil'_3958_739994051_5573731_37500') then {
+	[_3958_739994051_5573731_37500,'Cutlet',5,100] call (_3958_739994051_5573731_37500 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3958_739994051_5573731_37500,'Omlet',1,100] call (_3958_739994051_5573731_37500 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3958_739994051_5573731_37500,'Pancakes',1,100] call (_3958_739994051_5573731_37500 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3958_739994051_5573731_37500,'Pie',1,100] call (_3958_739994051_5573731_37500 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3958_739994051_5573731_37500,'Shavirma',2,100] call (_3958_739994051_5573731_37500 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3958_739994051_5573731_37500,'Lepeshka',2,100] call (_3958_739994051_5573731_37500 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3958_739994051_5573731_37500,'Bun',2,100] call (_3958_739994051_5573731_37500 getvariable 'proto' getvariable 'createItemInContainer');
+};
 if (!isNil'_3962_701664042_7695331_38000') then {
 	[_3962_701664042_7695331_38000,'CombatHat',1,100] call (_3962_701664042_7695331_38000 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3962_701664042_7695331_38000,'ArmorLite',1,100] call (_3962_701664042_7695331_38000 getvariable 'proto' getvariable 'createItemInContainer');
@@ -3619,6 +3634,12 @@ if (!isNil'_3959_992194042_8356931_38000') then {
 	[_3959_992194042_8356931_38000,'CombatHat',1,100] call (_3959_992194042_8356931_38000 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3959_992194042_8356931_38000,'ArmorLite',1,100] call (_3959_992194042_8356931_38000 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3959_992194042_8356931_38000,'ArmyCloth1',1,100] call (_3959_992194042_8356931_38000 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3951_633544045_2172931_37498') then {
+	[_3951_633544045_2172931_37498,'RopeItem',1,100] call (_3951_633544045_2172931_37498 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3951_633544045_2172931_37498,'Baton1',1,100] call (_3951_633544045_2172931_37498 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3951_633544045_2172931_37498,'FlashlightLoaded',1,100] call (_3951_633544045_2172931_37498 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3951_633544045_2172931_37498,'MatchBox',1,100] call (_3951_633544045_2172931_37498 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3960_181884064_4689931_44694') then {
 	_3960_181884064_4689931_44694 setvariable ['islocked',true];
