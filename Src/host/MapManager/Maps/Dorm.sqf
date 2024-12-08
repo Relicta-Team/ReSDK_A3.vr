@@ -2516,7 +2516,7 @@ if ((random 1) < 0.8) then {
 };
 ['SquareWoodenBox',[4030.8,4074.94,24.8567],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier2_3_4"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SquareWoodenBox',[4001.58,4076.17,24.7711],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier2_3_4"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-['SteelBlueCase',[4055.48,4112.99,29.9854,true],[0.984782,-0.173664,0.00671369],[-0.173602,-0.981147,0.0849299], {_thisObj setvariable ['preinit@__loottemplate',"ToolsTools_tier2_3_4"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SteelBlueCase',[4055.48,4112.99,29.9854,true],[0.984782,-0.173664,0.00671369],[-0.173602,-0.981147,0.0849299], {_thisObj setvariable ['preinit@__loottemplate',"Tools_tier2_3_4"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['OldWoodenBox',[4015.98,4063.95,29.7937,true],180,[-0.00693116,-0.00566258,0.99996], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier2_3_4"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SquareWoodenBox',[4024.35,4027.5,14.3493],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SquareWoodenBox',[4024.91,4027.53,15.3081],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
@@ -2638,7 +2638,7 @@ _3975_156984066_0766631_08417 = ['IStruct',[3975.16,4066.08,31.0842],181.001,[0,
 _3973_278324060_9060131_08356 = ['IStruct',[3973.28,4060.91,31.0836],359.001,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_exp\cultural\basaltruins\basaltkerb_01_4m_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3977_380864060_9245631_09532 = ['IStruct',[3977.38,4060.92,36.2129,true],0.00080776,[0.0174521,0,0.999848], {_thisObj setvariable ['model','a3\structures_f_exp\cultural\basaltruins\basaltkerb_01_4m_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['BigGermoGate1',[3945.75,4063.75,30.6845],270,[0,0,1]] call InitDecor; 
-_3953_750004065_0000031_14468 = ['IStruct',[3953.75,4065,31.1447],168.998,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\wrecks\trailercistern_wreck_f.p3d'];}] call InitStruct; // !!! realocated model !!!
+_3952_900634065_1899431_14468 = ['IStruct',[3952.9,4065.19,31.1447],168.998,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\wrecks\trailercistern_wreck_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['ConcreteTreePlanter',[3965.25,4058.88,31.1447],270,[0,0,1]] call InitStruct; 
 ['ConcreteTreePlanter',[3963.63,4058.88,31.1447],0,[0,0,1]] call InitStruct; 
 ['SmallMushroom',[3963.7,4058.82,31.3056],91.3799,[0,0,1]] call InitStruct; 
@@ -2657,7 +2657,7 @@ _3953_750004065_0000031_14468 = ['IStruct',[3953.75,4065,31.1447],168.998,[0,0,1
 }] call InitStruct; 
 ['StreetLamp',[3951.38,4060.13,29],40,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_DORM_var]; go_editor_globalRefs set ["StreetLamp G:+LbpR6UVeeY (2)",_thisObj];
 }] call InitStruct; 
-_3944_187504063_7917531_00000 = ['PowerGenerator',[3944.19,4063.79,31],87.0855,[0,0,1], {go_editor_globalRefs set ["PowerGenerator G:ypG1zj0SEXE",_thisObj];
+_3935_251464057_9597233_17921 = ['PowerGenerator',[3935.25,4057.96,33.1792],87.0855,[0,0,1], {go_editor_globalRefs set ["PowerGenerator G:ypG1zj0SEXE",_thisObj];
 }] call InitStruct; 
 _3963_916504063_5000036_51882 = ['StreetLamp',[3963.92,4063.5,39.6671,true],[0.5,5.52683e-08,-0.866025],[-0.866025,7.54979e-08,-0.5], {_thisObj setvariable ['model','ml_shabut\projector\projector.p3d']; _thisObj setvariable ['light',SLIGHT_SEARCHLIGHT_DORM_var]; go_editor_globalRefs set ["StreetLamp G:eZRD0jnQn3s (2)",_thisObj];
 }] call InitStruct; // !!! realocated model !!!
@@ -2686,7 +2686,7 @@ _3963_443364045_6232932_32338 = ['IntercomOld',[3963.44,4045.62,32.3234],0,[0,0,
 }] call InitStruct; 
 ['LampCeiling',[3961.28,4050.18,33.875],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_LAMP_HOUSE_var]; go_editor_globalRefs set ["LampCeiling G:qsyEIvDjAgI (4)",_thisObj];
 }] call InitStruct; 
-_3978_333254032_3935538_08013 = ['RedButton',[3978.33,4032.39,38.0801],0,[0,0,1]] call InitStruct; 
+_3974_457034032_6416038_56679 = ['RedButton',[3974.46,4032.64,43.5666,true],7.70829e-13,[1,0,1.19249e-08]] call InitStruct; 
 _3958_965824045_1452632_86649 = ['RedButton',[3958.97,4045.15,37.8666,true],[-1.45414e-17,1,3.32669e-10],[-1,0,-4.37114e-08], {go_editor_globalRefs set ["RedButton G:QaN0z5bZVNU",_thisObj];
 }] call InitStruct; 
 _3963_535404043_4843832_85275 = ['RedButton',[3963.54,4043.48,37.8526,true],0,[1,0,1.19249e-08], {go_editor_globalRefs set ["RedButton G:bZsBuYUJDIg",_thisObj];
@@ -2701,17 +2701,13 @@ _3961_488284064_5471232_41827 = ['PowerSwitcher',[3961.49,4064.55,32.4183],0,[0,
 }] call InitStruct; 
 _3961_178474064_5471232_41665 = ['PowerSwitcher',[3961.18,4064.55,32.4167],0,[0,0,1], {go_editor_globalRefs set ["PowerSwitcher G:7M9Ex3e7DBU",_thisObj];
 }] call InitStruct; 
-_3959_345464064_5351632_39715 = ['PowerSwitcherBox_Activator',[3959.35,4064.54,32.3971],0,[0,0,1], {go_editor_globalRefs set ["PowerSwitcherBox_Activator G:EgEVXnuqrVo",_thisObj];
-}] call InitStruct; 
 _3963_530764065_6084032_08355 = ['ElectricalShieldSmall',[3963.53,4065.61,32.0835],270,[0,0,1], {go_editor_globalRefs set ["ElectricalShieldSmall G:AzVfeEX8vOI",_thisObj];
 }] call InitStruct; 
 _3967_544434050_2976131_95592 = ['ElectricalShieldSmall',[3967.54,4050.3,31.9559],90,[0,0,1], {go_editor_globalRefs set ["ElectricalShieldSmall G:8DrWNsn9/UM",_thisObj];
 }] call InitStruct; 
 ['StationSpeaker',[3982.38,4031.15,39.9975],270,[0,0,1], {go_editor_globalRefs set ["GuardAlarm",_thisObj];
 }] call InitStruct; 
-['LampCeiling',[3982.06,4011.64,-9.53674e-07],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_LAMP_HOUSE_var]; go_editor_globalRefs set ["LampCeiling G:qsyEIvDjAgI (5)",_thisObj];
-}] call InitStruct; 
-['LampCeiling',[3986.79,4009.22,-9.53674e-07],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_LAMP_HOUSE_var]; go_editor_globalRefs set ["LampCeiling G:qsyEIvDjAgI (6)",_thisObj];
+_3959_210694064_5664132_99703 = ['PowerSwitcherBig',[3959.21,4064.57,32.997],180,[0,0,1], {go_editor_globalRefs set ["PowerSwitcherBig G:wORuyt6fg7U",_thisObj];
 }] call InitStruct; 
 ['WhiteBrickWall',[3967.88,4043.75,32.25],270.001,[0,0,1]] call InitStruct; 
 ['WhiteBrickWall',[3962.75,4056.5,32.25],90.0009,[0,0,1]] call InitStruct; 
@@ -2786,44 +2782,44 @@ _3966_625004046_1250031_37500 = ['IStruct',[3966.63,4046.13,31.375],90.0004,[0,0
 ['WoodenChair',[3961.47,4047.98,31.377],10,[0,0,1]] call InitItem; 
 ['WoodenChair',[3960.22,4047.08,31.375],185,[0,0,1]] call InitItem; 
 ['InfoBoard',[3963.06,4046.87,32.1637],0,[0,0,1]] call InitStruct; 
-['BigFileCabinet',[3964.75,4048.07,31.4966],270,[0,0,1]] call InitStruct; 
-['SmallBookcase',[3967.6,4047.45,31.375],90,[0,0,1]] call InitStruct; 
+['BigFileCabinet',[3964.75,4048.07,31.4966],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SmallBookcase',[3967.6,4047.45,31.375],90,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['WoodenSmallShelf1',[3958.38,4042.66,31.38],270,[0,0,1]] call InitStruct; 
 ['WoodenSmallShelf1',[3957.42,4042.66,31.38],90.0004,[0,0,1]] call InitStruct; 
 _3957_408694042_5485832_74214 = ['IStruct',[3957.41,4042.55,32.7421],90,[0,0,1], {_thisObj setvariable ['model','ml\ml_object_new\model_05\polka_ak.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3958_387704042_5485832_74214 = ['IStruct',[3958.39,4042.55,32.7421],90,[0,0,1], {_thisObj setvariable ['model','ml\ml_object_new\model_05\polka_ak.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3956_583984043_6726131_36909 = ['SteelGreenCabinet',[3956.58,4043.67,31.3691],0.000446097,[0,0,1]] call InitStruct; 
 ['DoubleArmyBed',[3952.08,4046.98,31.38],270,[0,0,1]] call InitStruct; 
-['CaseBedroomMedium',[3951.64,4047.88,31.38],86.9093,[0,0,1]] call InitStruct; 
+['CaseBedroomMedium',[3951.64,4047.88,31.38],86.9093,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['DoubleArmyBed',[3951.73,4043.21,31.38],180,[0,0,1], {go_editor_globalRefs set ["RRookieGuardDormBed1",_thisObj];
 }] call InitStruct; 
-['CaseBedroomMedium',[3952.81,4042.77,31.38],1.56728,[0,0,1]] call InitStruct; 
+['CaseBedroomMedium',[3952.81,4042.77,31.38],1.56728,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _3953_751464042_7878431_38000 = ['SteelBlueCase',[3953.75,4042.79,31.38],178.266,[0,0,1]] call InitStruct; 
-['CaseBedroomMedium',[3954.41,4042.76,31.38],358.138,[0,0,1]] call InitStruct; 
+['CaseBedroomMedium',[3954.41,4042.76,31.38],358.138,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['DoubleArmyBed',[3955.32,4043.21,31.38],180,[0,0,1], {go_editor_globalRefs set ["RRookieGuardDormBed0",_thisObj];
 }] call InitStruct; 
 ['SmallStoveGrill',[3958.68,4048.51,31.2262],340,[0,0,1], {_thisObj setvariable ['lightisenabled',false]; _thisObj setvariable ['light',SLIGHT_LIGHT_STOVE_var];}] call InitStruct; 
 ['WoodenOfficeTable4',[3956.8,4050.63,31.3748],180.001,[0,0,1]] call InitStruct; 
 _3958_739994051_5573731_37500 = ['FreezerStruct',[3958.74,4051.56,31.375],180,[0,0,1]] call InitStruct; 
-['RedSteelBox',[3956.49,4051.25,32.4758],270.001,[0,0,1]] call InitStruct; 
+['RedSteelBox',[3956.49,4051.25,32.4758],270.001,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Kintchen_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['Shelves',[3957.88,4051.66,31.3733],9.8184e-06,[0,0,1]] call InitStruct; 
 ['Umivalnik',[3958.76,4049.23,31.3698],270,[0,0,1]] call InitStruct; 
 ['SmallWoodenTable',[3955.12,4051.27,31.375],270,[0,0,1]] call InitStruct; 
 ['SmallChair4',[3954,4051.36,31.3733],105,[0,0,1]] call InitItem; 
 ['SmallChair1',[3955.44,4050.54,31.375],165,[0,0,1]] call InitItem; 
-['BigClothCabinet',[3952.56,4051.55,31.375],0,[0,0,1]] call InitStruct; 
-['BigClothCabinet1',[3951.68,4050.71,31.375],90,[0,0,1]] call InitStruct; 
-['SteelGreenCabinet',[3958.8,4047.17,31.375],180,[0,0,1]] call InitStruct; 
+['BigClothCabinet',[3952.56,4051.55,31.375],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['BigClothCabinet1',[3951.68,4050.71,31.375],90,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"CityCloth_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SteelGreenCabinet',[3958.8,4047.17,31.375],180,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Kintchen_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SmallWoodenTable',[3965.38,4057,31.375],0,[0,0,1]] call InitStruct; 
 ['WoodenChair',[3964.51,4057.45,31.375],285.001,[0,0,1]] call InitItem; 
 ['DoubleArmyBed',[3963.63,4056.88,31.375],0,[0,0,1]] call InitStruct; 
 ['DoubleArmyBed',[3967.25,4056.88,31.375],1.36604e-05,[0,0,1]] call InitStruct; 
 ['WoodenSmallBench',[3967.5,4053.63,31.5],270,[0,0,1]] call InitStruct; 
-['SmallTrashCan',[3966.63,4052.38,31.375],260,[0,0,1]] call InitStruct; 
+['SmallTrashCan',[3966.63,4052.38,31.375],260,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['OldGreenToiletBowl',[3963.25,4053,31.375],270,[0,0,1]] call InitStruct; 
 ['WoodenChair',[3963.38,4053.52,31.375],270,[0,0,1]] call InitItem; 
 ['WoodenChair',[3963.38,4054.07,31.375],260,[0,0,1]] call InitItem; 
-['TrashCan',[3957.63,4057.63,31.1447],270,[0,0,1]] call InitStruct; 
+['TrashCan',[3957.63,4057.63,31.1447],270,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _3962_701664042_7695331_38000 = ['SteelBlueCase',[3962.7,4042.77,31.38],178.266,[0,0,1]] call InitStruct; 
 _3953_302734042_7714831_38000 = ['SteelBlueCase',[3953.3,4042.77,31.38],182.035,[0,0,1]] call InitStruct; 
 _3951_548584045_9345731_37671 = ['SteelBlueCase',[3951.55,4045.93,31.3767],274.575,[0,0,1]] call InitStruct; 
@@ -2837,6 +2833,9 @@ _3959_992194042_8356931_38000 = ['SteelBlueCase',[3959.99,4042.84,31.38],187.312
 }] call InitItem; 
 ['SmallChair1',[3967.35,4045.46,31.375],90,[0,0,1]] call InitItem; 
 _3951_633544045_2172931_37498 = ['SteelBlueCase',[3951.63,4045.22,31.375],269.575,[0,0,1]] call InitStruct; 
+['SquareWoodenBox',[3951.54,4042.84,34.4278],350,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SquareWoodenBox',[3952.78,4042.78,34.4328],9.8184e-06,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+['SquareWoodenBox',[3951.65,4044.11,34.4328],350,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Things_tier1_2"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['Bucket1',[3956.42,4049.48,31.375],330,[0,0,1]] call InitItem; 
 ['Cup1',[3956.51,4049.82,32.4533],60,[0,0,1]] call InitItem; 
 ['KitchenKnife',[3956.98,4050.94,37.4767,true],[-0.965926,-0.258819,-1.93881e-06],[-0.258819,0.965926,7.29254e-08]] call InitItem; 
@@ -2891,6 +2890,8 @@ _3957_625004054_0000031_28679 = ['IStruct',[3957.63,4054,31.2868],126,[0,0,1], {
 ['RedCarpet',[3965.83,4045.54,30.795],0,[0,0,1]] call InitStruct; 
 ['SmallGrayStone',[3958.63,4048.5,37.375],0,[0,0,1]] call InitStruct; 
 ['SmallConcretePipe',[3958.63,4048.52,40.5386,true],[-4.37114e-08,-1.19646e-05,1],[-1,0,-4.37114e-08]] call InitStruct; 
+['BigPilePipes',[3958.99,4043.31,34.4278],0,[0,0,1]] call InitStruct; 
+['ConcreteSlabsStack',[3966.55,4043.24,34.4041],270,[0,0,1]] call InitStruct; 
 _3959_906984065_8190931_25003 = ['IStruct',[3959.91,4065.82,31.25],270,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\military\barracks\guardhouse_03_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['OldBrickWallMedium',[3958.79,4066.92,32.2843],0,[0,0,1]] call InitStruct; 
 ['OldBrickWallMedium',[3961.01,4066.91,32.2822],180,[0,0,1]] call InitStruct; 
@@ -2898,11 +2899,7 @@ _3960_181884064_4689931_44694 = ['SteelDoorThinSmall',[3960.18,4064.47,31.4469],
 ['ChairLibrary',[3958.1,4065.7,31.4469],265,[0,0,1]] call InitItem; 
 ['WoodenOfficeTable',[3958.23,4064.88,31.4505],0,[0,0,1]] call InitStruct; 
 ['BigFileCabinet',[3962.85,4065.58,31.5537],0,[0,0,1]] call InitStruct; 
-['SquareWoodenBox',[3951.54,4042.84,34.4278],350,[0,0,1]] call InitStruct; 
-['ConcreteSlabsStack',[3966.55,4043.24,34.4041],270,[0,0,1]] call InitStruct; 
-['SquareWoodenBox',[3952.78,4042.78,34.4328],9.8184e-06,[0,0,1]] call InitStruct; 
-['SquareWoodenBox',[3951.65,4044.11,34.4328],350,[0,0,1]] call InitStruct; 
-['BigPilePipes',[3958.99,4043.31,34.4278],0,[0,0,1]] call InitStruct; 
+_3954_822274052_2812535_58392 = ['IStruct',[3954.82,4052.28,40.8171,true],[-0.683018,-0.683008,0.258818],[0.183013,0.183012,0.965926], {_thisObj setvariable ['model','ml\ml_object_new\model_14_10\dshk.p3d'];}] call InitStruct; // !!! realocated model !!!
 
 
 
@@ -3505,17 +3502,23 @@ if (!isNil'_4026_000004020_8750016_62500') then {
 if (!isNil'_4026_033204020_4653330_99574') then {
 	_4026_033204020_4653330_99574 setvariable ['destination',"ExitLuk"];
 };
-if (!isNil'_3944_187504063_7917531_00000') then {
-	[_3944_187504063_7917531_00000,go_editor_globalRefs get "ElectricalShieldSmall G:AzVfeEX8vOI"] call (_3944_187504063_7917531_00000 getvariable 'proto' getvariable 'addConnection');
-	[_3944_187504063_7917531_00000,go_editor_globalRefs get "ElectricalShieldSmall G:8DrWNsn9/UM"] call (_3944_187504063_7917531_00000 getvariable 'proto' getvariable 'addConnection');
-	[_3944_187504063_7917531_00000,go_editor_globalRefs get "PowerSwitcherBox_Activator G:jf50a0d4mCA"] call (_3944_187504063_7917531_00000 getvariable 'proto' getvariable 'addConnection');
+if (!isNil'_3952_900634065_1899431_14468') then {
+	_3952_900634065_1899431_14468 setvariable ['name',"Бочка"];
+	_3952_900634065_1899431_14468 setvariable ['desc',"Металлическая!"];
+};
+if (!isNil'_3935_251464057_9597233_17921') then {
+	[_3935_251464057_9597233_17921,go_editor_globalRefs get "ElectricalShieldSmall G:AzVfeEX8vOI"] call (_3935_251464057_9597233_17921 getvariable 'proto' getvariable 'addConnection');
+	[_3935_251464057_9597233_17921,go_editor_globalRefs get "ElectricalShieldSmall G:8DrWNsn9/UM"] call (_3935_251464057_9597233_17921 getvariable 'proto' getvariable 'addConnection');
+	[_3935_251464057_9597233_17921,go_editor_globalRefs get "PowerSwitcherBox_Activator G:jf50a0d4mCA"] call (_3935_251464057_9597233_17921 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3963_443364045_6232932_32338') then {
 	[_3963_443364045_6232932_32338,go_editor_globalRefs get "StationSpeaker G:PVIZKloCU1M"] call (_3963_443364045_6232932_32338 getvariable 'proto' getvariable 'addConnection');
 };
-if (!isNil'_3978_333254032_3935538_08013') then {
+if (!isNil'_3974_457034032_6416038_56679') then {
+	_3974_457034032_6416038_56679 setvariable ['name',"Кнопка тревоги!"];
+	_3974_457034032_6416038_56679 setvariable ['desc',"Нажать в случае потери контроля над обстановкой."];
 	
-['SCR_GuardButtonDorm',_3978_333254032_3935538_08013,nil] call createGameObjectScript;
+['SCR_GuardButtonDorm',_3974_457034032_6416038_56679,nil] call createGameObjectScript;
 };
 if (!isNil'_3958_965824045_1452632_86649') then {
 	[_3958_965824045_1452632_86649,go_editor_globalRefs get "LampCeiling G:qsyEIvDjAgI"] call (_3958_965824045_1452632_86649 getvariable 'proto' getvariable 'addConnection');
@@ -3534,26 +3537,21 @@ if (!isNil'_3964_319094051_8200732_85275') then {
 	[_3964_319094051_8200732_85275,go_editor_globalRefs get "LampCeiling G:qsyEIvDjAgI (2)"] call (_3964_319094051_8200732_85275 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3962_152594064_5339432_39930') then {
+	_3962_152594064_5339432_39930 setvariable ['name',"Ворота"];
 	[_3962_152594064_5339432_39930,go_editor_globalRefs get "GateCity G:784RgeR4g/8"] call (_3962_152594064_5339432_39930 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3961_488284064_5471232_41827') then {
+	_3961_488284064_5471232_41827 setvariable ['name',"Прожектор #1"];
 	[_3961_488284064_5471232_41827,go_editor_globalRefs get "StreetLamp G:eZRD0jnQn3s (2)"] call (_3961_488284064_5471232_41827 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3961_178474064_5471232_41665') then {
+	_3961_178474064_5471232_41665 setvariable ['name',"Прожектор #2"];
 	[_3961_178474064_5471232_41665,go_editor_globalRefs get "StreetLamp G:eZRD0jnQn3s (4)"] call (_3961_178474064_5471232_41665 getvariable 'proto' getvariable 'addConnection');
-};
-if (!isNil'_3959_345464064_5351632_39715') then {
-	[_3959_345464064_5351632_39715,go_editor_globalRefs get "StreetLamp G:eZRD0jnQn3s"] call (_3959_345464064_5351632_39715 getvariable 'proto' getvariable 'addConnection');
-	[_3959_345464064_5351632_39715,go_editor_globalRefs get "StreetLamp G:rx403/5RY94"] call (_3959_345464064_5351632_39715 getvariable 'proto' getvariable 'addConnection');
-	[_3959_345464064_5351632_39715,go_editor_globalRefs get "StreetLamp G:bUYa/2ZFq+E"] call (_3959_345464064_5351632_39715 getvariable 'proto' getvariable 'addConnection');
-	[_3959_345464064_5351632_39715,go_editor_globalRefs get "StreetLamp G:+LbpR6UVeeY"] call (_3959_345464064_5351632_39715 getvariable 'proto' getvariable 'addConnection');
-	[_3959_345464064_5351632_39715,go_editor_globalRefs get "StreetLamp G:bUYa/2ZFq+E (2)"] call (_3959_345464064_5351632_39715 getvariable 'proto' getvariable 'addConnection');
-	[_3959_345464064_5351632_39715,go_editor_globalRefs get "StreetLamp G:+LbpR6UVeeY (2)"] call (_3959_345464064_5351632_39715 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3963_530764065_6084032_08355') then {
 	[_3963_530764065_6084032_08355,go_editor_globalRefs get "PowerSwitcher G:vgfU2yV6Yzg"] call (_3963_530764065_6084032_08355 getvariable 'proto' getvariable 'addConnection');
 	[_3963_530764065_6084032_08355,go_editor_globalRefs get "PowerSwitcher G:7M9Ex3e7DBU"] call (_3963_530764065_6084032_08355 getvariable 'proto' getvariable 'addConnection');
-	[_3963_530764065_6084032_08355,go_editor_globalRefs get "PowerSwitcherBox_Activator G:EgEVXnuqrVo"] call (_3963_530764065_6084032_08355 getvariable 'proto' getvariable 'addConnection');
+	[_3963_530764065_6084032_08355,go_editor_globalRefs get "PowerSwitcherBig G:wORuyt6fg7U"] call (_3963_530764065_6084032_08355 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3967_544434050_2976131_95592') then {
 	[_3967_544434050_2976131_95592,go_editor_globalRefs get "IntercomOld G:4i8ntN3gdtY"] call (_3967_544434050_2976131_95592 getvariable 'proto' getvariable 'addConnection');
@@ -3561,6 +3559,15 @@ if (!isNil'_3967_544434050_2976131_95592') then {
 	[_3967_544434050_2976131_95592,go_editor_globalRefs get "RedButton G:O1FdMlcveHw"] call (_3967_544434050_2976131_95592 getvariable 'proto' getvariable 'addConnection');
 	[_3967_544434050_2976131_95592,go_editor_globalRefs get "RedButton G:VK9gRE64Vp0"] call (_3967_544434050_2976131_95592 getvariable 'proto' getvariable 'addConnection');
 	[_3967_544434050_2976131_95592,go_editor_globalRefs get "RedButton G:QaN0z5bZVNU"] call (_3967_544434050_2976131_95592 getvariable 'proto' getvariable 'addConnection');
+};
+if (!isNil'_3959_210694064_5664132_99703') then {
+	_3959_210694064_5664132_99703 setvariable ['name',"Уличное освещение"];
+	[_3959_210694064_5664132_99703,go_editor_globalRefs get "StreetLamp G:eZRD0jnQn3s"] call (_3959_210694064_5664132_99703 getvariable 'proto' getvariable 'addConnection');
+	[_3959_210694064_5664132_99703,go_editor_globalRefs get "StreetLamp G:rx403/5RY94"] call (_3959_210694064_5664132_99703 getvariable 'proto' getvariable 'addConnection');
+	[_3959_210694064_5664132_99703,go_editor_globalRefs get "StreetLamp G:bUYa/2ZFq+E"] call (_3959_210694064_5664132_99703 getvariable 'proto' getvariable 'addConnection');
+	[_3959_210694064_5664132_99703,go_editor_globalRefs get "StreetLamp G:+LbpR6UVeeY"] call (_3959_210694064_5664132_99703 getvariable 'proto' getvariable 'addConnection');
+	[_3959_210694064_5664132_99703,go_editor_globalRefs get "StreetLamp G:bUYa/2ZFq+E (2)"] call (_3959_210694064_5664132_99703 getvariable 'proto' getvariable 'addConnection');
+	[_3959_210694064_5664132_99703,go_editor_globalRefs get "StreetLamp G:+LbpR6UVeeY (2)"] call (_3959_210694064_5664132_99703 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3960_333984051_9055231_18212') then {
 	_3960_333984051_9055231_18212 setvariable ['islocked',true];
@@ -3641,6 +3648,14 @@ if (!isNil'_3951_633544045_2172931_37498') then {
 	[_3951_633544045_2172931_37498,'FlashlightLoaded',1,100] call (_3951_633544045_2172931_37498 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3951_633544045_2172931_37498,'MatchBox',1,100] call (_3951_633544045_2172931_37498 getvariable 'proto' getvariable 'createItemInContainer');
 };
+if (!isNil'_3957_625004054_0000031_28679') then {
+	_3957_625004054_0000031_28679 setvariable ['name',"Линда Структура"];
+	_3957_625004054_0000031_28679 setvariable ['desc',"Красотка.rrrd.. у неё титьки!"];
+};
 if (!isNil'_3960_181884064_4689931_44694') then {
 	_3960_181884064_4689931_44694 setvariable ['islocked',true];
+};
+if (!isNil'_3954_822274052_2812535_58392') then {
+	_3954_822274052_2812535_58392 setvariable ['name',"Бандура!"];
+	_3954_822274052_2812535_58392 setvariable ['desc',"Против буйных, за спокойных"];
 };
