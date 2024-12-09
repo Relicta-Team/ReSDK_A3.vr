@@ -8,6 +8,8 @@
 //generated version macros
 #include <..\version.hpp>
 
+#include <lang.hpp>
+
 //platform specific
 //! dont use on client, because compiled client (CONTENT-file) used vm-compiler. Only server and editor allowed
 #define PLATFORM_VERSION '__GAME_VER__'
