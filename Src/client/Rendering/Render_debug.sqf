@@ -168,7 +168,7 @@ debug_drawSphereEx = {
 
 debug_drawLightCone = {
 	params ["_pos", "_pitch", "_bank", "_distance", "_outerAngle", "_innerAngle", ["_attenuation",2], ["_colorOuter", [1, 0.5, 0, 0.5]], ["_colorInner", [1, 1, 0, 1]], ["_width", 2]];
-
+	assert_str(false,"debug::drawLightCone is unsupported; Use debug::drawLightConeEx instead");
 	private _segments = 16;  // Количество сегментов для окружности, большее значение делает конус более плавным
 	private _angleStep = 360 / _segments;
 
@@ -193,6 +193,10 @@ debug_drawLightCone = {
 		_rotatedBank
 	};
 
+	
+	private _distOut = if (_outerAngle > 180) then {_distance * -1} else {_distance};
+	private _distIn = if (_innerAngle > 180) then {_distance * -1} else {_distance};
+
 	// Функция для рисования круга на заданной дальности и угле
 	private _drawConeCircle = {
 		params ["_pos", "_radius", "_pitch", "_bank", "_color", "_width"];
@@ -212,8 +216,8 @@ debug_drawLightCone = {
 	};
 
 	// Расчет радиусов для внутреннего и внешнего углов конуса
-	private _outerRadius = _distance * tan (_outerAngle / 2);
-	private _innerRadius = _distance * tan (_innerAngle / 2);
+	private _outerRadius = _distOut * tan (_outerAngle / 2);
+	private _innerRadius = _distIn * tan (_innerAngle / 2);
 
 	// Рисуем внешний и внутренний круги на дальности света
 	[_pos, _outerRadius, _pitch, _bank, _colorOuter, _width] call _drawConeCircle;
@@ -223,8 +227,8 @@ debug_drawLightCone = {
 	for "_i" from 0 to (_segments - 1) do {
 		private _angle = _i * _angleStep;
 		
-		private _outerPoint = [_outerRadius * cos _angle, _outerRadius * sin _angle, _distance];
-		private _innerPoint = [_innerRadius * cos _angle, _innerRadius * sin _angle, _distance];
+		private _outerPoint = [_outerRadius * cos _angle, _outerRadius * sin _angle, _distOut];
+		private _innerPoint = [_innerRadius * cos _angle, _innerRadius * sin _angle, _distIn];
 
 		_outerPoint = _pos vectorAdd ([_outerPoint, _pitch, _bank] call _rotatePoint);
 		_innerPoint = _pos vectorAdd ([_innerPoint, _pitch, _bank] call _rotatePoint);
@@ -283,13 +287,16 @@ debug_drawLightConeEx = {
         };
     };
 
+	private _distOut = if (_outerAngle > 180) then {_distance * -1} else {_distance};
+	private _distIn = if (_innerAngle > 180) then {_distance * -1} else {_distance};
+	
     // Расчет радиусов для внутреннего и внешнего углов конуса
-    private _outerRadius = _distance * tan (_outerAngle / 2);
-    private _innerRadius = _distance * tan (_innerAngle / 2);
+    private _outerRadius = _distOut * tan (_outerAngle / 2);
+    private _innerRadius = _distIn * tan (_innerAngle / 2);
 
     // Позиции для внутренней и внешней окружностей на конце конуса
-    private _outerCirclePos = _pos vectorAdd (_normDirection vectorMultiply _distance);
-    private _innerCirclePos = _pos vectorAdd (_normDirection vectorMultiply _distance);
+    private _outerCirclePos = _pos vectorAdd (_normDirection vectorMultiply _distOut);
+    private _innerCirclePos = _pos vectorAdd (_normDirection vectorMultiply _distIn);
 
     // Рисуем внешний и внутренний круги на конце конуса
     [_outerCirclePos, _outerRadius, _normDirection, _colorOuter, _width] call _drawConeCircle;

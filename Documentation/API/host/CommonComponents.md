@@ -1204,6 +1204,7 @@ Type: function
 
 Description: проверяет является ли направление безопасным
 - Param: _vdu_dir
+- Param: _fromVUP (optional, default false)
 
 File: [host\CommonComponents\ModelTransform.hpp at line 105](../../../Src/host/CommonComponents/ModelTransform.hpp#L105)
 ## model_isPosInsideBBX
@@ -1214,7 +1215,7 @@ Description:
 - Param: _pos
 - Param: _obj
 
-File: [host\CommonComponents\ModelTransform.hpp at line 120](../../../Src/host/CommonComponents/ModelTransform.hpp#L120)
+File: [host\CommonComponents\ModelTransform.hpp at line 123](../../../Src/host/CommonComponents/ModelTransform.hpp#L123)
 # Pencfg.sqf
 
 ## addtobj(model,soundpen,armpen)
