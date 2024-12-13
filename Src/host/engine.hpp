@@ -235,7 +235,7 @@ _ret = _this; \
 //псевдоним if (valid(modlue_somevariable))
 #define valid(ptr) ([ptr] call rv_cppcheck)
 // alias to valid
-#define bool(val) valid(val)
+#define toBoolean(val) valid(val)
 
 //
 #define __gptr_os (selectrandom table_hex)
