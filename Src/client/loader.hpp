@@ -35,7 +35,6 @@ importClient("src\client\ClientStatistic\ClientStatistics_init.sqf"); cmplog("CS
 importClient("src\client\ClientData\ClientData.sqf"); cmplog("CDat")//В этом модуле НАСТРОЙКИ. Всё что используется в них должно быть ДО этого файла
 importClient("src\client\Rendering\Camera\CameraControl.sqf"); cmplog("Camera")//только после clientData (потому что использует cd_cameraSetting)
 importClient("src\client\StaminaControl\Stamina_init.sqf"); cmplog("Stamina")//только после ClientData (потому что использует cd_stamina...)
-importClient("src\client\ParticleEngine\ParticleEngine.sqf"); cmplog("ParticleEngine")
 importClient("src\client\LightEngine\LightEngine.sqf"); cmplog("LightEngine")
 importClient("src\client\ProxyItems\ProxyItems.sqf"); cmplog("ProxIt")//proxypos of items
 importClient("src\client\ProxyItems\RProx.sqf"); cmplog("RProxExtension")//proxy system v2. !load only after proxit
