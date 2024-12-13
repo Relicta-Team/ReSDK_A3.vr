@@ -81,6 +81,12 @@
 */
 #define const
 
+// specifier for external member (can be accessed outside current module)
+/* example:
+	extern decl(int) testvar = 123;
+*/
+#define extern
+
 //emplace macro value to constant in root module scope
 /*	example:
 
