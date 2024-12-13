@@ -6,7 +6,6 @@
 #include "..\..\host\engine.hpp"
 #include "..\..\host\keyboard.hpp"
 #include "..\WidgetSystem\widgets.hpp"
-#include <..\Chat\Chat.hpp>
 
 
 #define BACKGROUND_COLOR [0,0,0,0.7]
@@ -426,7 +425,7 @@ lobby_onLoad = {
 	getTextFieldWg commit TIME_ONLOAD;
 
 	if (_isOpenMode) then {
-		getChatAllText() call chat_onRenderLobby;
+		(call chat_getAllText) call chat_onRenderLobby;
 	};
 };
 

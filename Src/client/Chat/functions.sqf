@@ -7,35 +7,48 @@
 #include "..\WidgetSystem\widgets.hpp"
 #include <..\..\host\text.hpp>
 #include "helpers.hpp"
-#include <Chat.hpp>
+
+namespace(chat,chat_;chat)
 
 // Получает виджет, содержащий текстовое поле чата
+decl(widget())
 chatGettextwidget = {chat_widgets select 2};
 
 // Получает виджет, содержащий задний фон чата
+decl(widget())
 chatgetbackgroundwidget = {chat_widgets select 1};
 
 // Получает основную контрольную группу, содержающу виджеты чата
+decl(widget())
 chatgetwidget = {chat_widgets select 0};
 
+decl(widget())
+chatgethistorywidget = { (chat_widgets select 3) };
+
+// Получение всех сообщений сгруппированных в цельную строку с переносом строки
+decl(string())
+chat_getAllText = { (chat_messages_data joinString "<br/>") };
+
 // Синхронизирует размеры виджетов чата
+decl(void())
 chat_syncsize = {
 	private _ctg = call chatgetwidget;
 	[_ctg,[0,0,chat_size_x,chat_size_y]] call widgetSetPosition;
 
-	[getBackground,WIDGET_FULLSIZE] call widgetSetPosition;
+	[(call chatgetbackgroundwidget),WIDGET_FULLSIZE] call widgetSetPosition;
 
-	private _tf = getTextField;
+	private _tf = (call chatGettextwidget);
 
-	private _newHeight = getTextField call widgetGetTextHeight;
+	private _newHeight = (call chatGettextwidget) call widgetGetTextHeight;
 	(_tf call widgetGetPosition) params ["_x","_y","_w","_h"];
 
-	private _windSize = (getBackground call widgetGetPosition) select 3;
+	private _windSize = ((call chatgetbackgroundwidget) call widgetGetPosition) select 3;
 
-	[_tf,[0,- _newHeight + _windSize/*0*/,(getBackground call widgetGetPosition) select 2,_newHeight]] call widgetSetPosition;
+	[_tf,[0,- _newHeight + _windSize/*0*/,((call chatgetbackgroundwidget) call widgetGetPosition) select 2,_newHeight]] call widgetSetPosition;
 };
 
 // Выводит текст в чат
+decl(void(string;string))
 chatprint = {
 	params ["_text",["_type","default"]];
 
@@ -101,7 +114,7 @@ chatprint = {
 		/*игровые события*/case "event" : {_struct = "<t color='#7e8b36' font='Ringbear' shadow = '1' shadowColor='#3a3824'>" + _text + "</t>";};
 		/*для системных сообщений*/case "system" : {_struct = "<t color='#40c8b3' font='RobotoCondensed' shadow = '1'shadowColor='#a80ab6' size = '0.87'>" + _text + "</t>";};
 		case "error" : {
-			private _randomTip = pick(ENM_TIPS_ERROR);
+			private _randomTip = pick(chat_errorMessagePrefixes);
 			private _randomSize = random(0.7) + 0.7;
 			_struct = format ["<t color='#ad0000' font='PuristaBold' size = '%3'>%1 %2</t>",_randomTip,_text,_randomSize];};
 		case "default" : {_struct = _text};
@@ -117,25 +130,25 @@ chatprint = {
 		chat_messages_data deleteAt 0;
 	};
 
-	private _newtext = getChatAllText();
+	private _newtext = call chat_getAllText;
 
-	private _tf = getTextField;
+	private _tf = (call chatGettextwidget);
 
 	[_tf,_newtext] call widgetSetText;
 
-	private _newHeight = getTextField call widgetGetTextHeight;
+	private _newHeight = (call chatGettextwidget) call widgetGetTextHeight;
 	(_tf call widgetGetPosition) params ["_x","_y","_w","_h"];
 
-	private _windSize = (getBackground call widgetGetPosition) select 3;
+	private _windSize = ((call chatgetbackgroundwidget) call widgetGetPosition) select 3;
 
 	[_tf,[0,- _newHeight + _windSize/*0*/,_w,_newHeight],0.15] call widgetSetPosition;
 
 	//post events
 
    if (chat_isHistoryOpen) then {
-	  [getHistoryField,_newtext] call widgetSetText;
-	  private _histHeight = getHistoryField call widgetGetTextHeight;
-	  [getHistoryField,[0,0,100,_histHeight]] call widgetSetPosition;
+	  [(call chatgethistorywidget),_newtext] call widgetSetText;
+	  private _histHeight = (call chatgethistorywidget) call widgetGetTextHeight;
+	  [(call chatgethistorywidget),[0,0,100,_histHeight]] call widgetSetPosition;
    };
 
 	if (isLobbyOpen) then {
@@ -144,6 +157,7 @@ chatprint = {
 };
 
 // Отрисовывает чат в лобби. Копирует информацию из основного GUI чата в чат лобби
+decl(void())
 chat_onRenderLobby = {
 	private _tf_lobby = lobby_widgetList select 1;
 	private _wgTf_lobby = lobby_widgetList select 2;
@@ -163,6 +177,7 @@ chat_onRenderLobby = {
 };
 
 // Открывает окно истории чата
+decl(void())
 chatshowhistory = {
 	_d = call dynamicDisplayOpen;
 
@@ -196,20 +211,15 @@ chatshowhistory = {
 	[50,50] call mouseSetPosition
 };
 
-// NOT USED
-chatPrintSmart = {
-	params ["_txt","_ch","_src","_targ"];
-
-	//check can see source and target
-};
-
 // Восстанавливает файдер чата
+decl(void())
 chat_resetFadeTimer = {
 	chat_hideTimestamp = tickTime + chat_hideAfter;
 	chat_isFullHidden = false;
 };
 
 // Восстанавливает видимость. Параметр _now в случае true восстанавливает видимость чата моментально
+decl(void(bool))
 chat_restoreVisible = {
 	params ["_now"];
 	if (chat_hideValue != 0) then {
@@ -225,6 +235,7 @@ chat_restoreVisible = {
 };
 
 // Обновляет чат
+decl(void())
 chat_onUpdate = {
 	if (chat_isHideEnabled) then {
 		if (tickTime > chat_hideTimestamp) then {
@@ -246,6 +257,7 @@ chat_onUpdate = {
 };
 
 // Применяет цветовую тему к виджетам чата
+decl(void())
 chat_applyColorTheme = {
-	getBackground setBackgroundColor (["chat_back"] call ct_getValue)
+	(call chatgetbackgroundwidget) setBackgroundColor (["chat_back"] call ct_getValue)
 };

@@ -56,6 +56,12 @@
 	noengine_function2 = {};
 	noengine_var1 = 1;
 	noengine_var2 = false;
+
+	* prefix will be added in rules:
+	namespace(testNamespace,test_;test)
+
+	test_fnc = {}; //in testNamespace because test_ prefix catch
+	testFnc = {}; //in testNamespace because second test prefix catch
 */
 #define namespace(ns_name,prefix)
 
