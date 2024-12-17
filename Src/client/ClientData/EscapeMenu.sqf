@@ -3,13 +3,21 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
+namespace(EscapeMenu,esc_)
+
 #include <..\WidgetSystem\widgets.hpp>
 
+macro_const(esc_menu_size_x)
 #define ESC_MENU_SIZE_X 20
+macro_const(esc_menu_size_y)
 #define ESC_MENU_SIZE_Y 30
+macro_const(esc_menu_default_button_bias_x)
 #define ESC_MENU_DEFAULT_BUTTON_BIAS_X 5
+macro_const(esc_menu_default_button_bias_y)
 #define ESC_MENU_DEFAULT_BUTTON_BIAS_Y 5
 
+macro_const(esc_menu_background_color_t3)
 #define ESC_MENU_BACKGROUND_COLOR_T3 0.4
 
 #define handleSettings(closerEv,OpenerEv) addOpenerAndActivator(OpenerEv); addCloseEventToSetting(closerEv)

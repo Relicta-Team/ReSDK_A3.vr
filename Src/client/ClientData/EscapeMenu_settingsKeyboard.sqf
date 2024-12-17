@@ -3,8 +3,10 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
+namespace(clientData,cd_)
 
-
+decl(void())
 esc_settings_loader_keyboard = {
 	
 	if (esc_settings_curIndex == 0) exitWith {};
@@ -52,6 +54,7 @@ esc_settings_loader_keyboard = {
 	[false] call esc_settings_onUpdateKeybinds;
 };
 
+decl(void(bool))
 esc_settings_onUpdateKeybinds = {
 	params [["_enableAllButtons",false]];
 	
@@ -100,6 +103,7 @@ esc_settings_onUpdateKeybinds = {
 };
 
 //Событие при изменении кнопки
+decl(void(widget;int;bool;bool;bool))
 esc_settings_keyboard_changeButton = {
 	params ["_button","_code","_shift","_control","_alt"];
 	
@@ -192,6 +196,7 @@ esc_settings_keyboard_changeButton = {
 };
 
 //событие синхронизирует все внешние изменения клавиш
+decl(void())
 esc_settings_event_onSyncKeyboard = {
 	{
 		cd_settingsKeyboard select _forEachIndex set [KEYBIND_INDEX_CURRENT,+(missionNamespace getVariable (_x select KEYBIND_INDEX_VARNAME))]

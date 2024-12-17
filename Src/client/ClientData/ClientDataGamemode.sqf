@@ -3,10 +3,12 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
+namespace(clientData,cd_)
 
-
-_onChangeGameState = {
+decl(void(int;int))
+cd_onChangeGameState = {
 	params ["_oldState","_newState"];
 	
 	[_oldState,_newState] call lobby_onChangeGameState;
-}; rpcAdd("onChangeGameState",_onChangeGameState);
+}; rpcAdd("onChangeGameState",cd_onChangeGameState);

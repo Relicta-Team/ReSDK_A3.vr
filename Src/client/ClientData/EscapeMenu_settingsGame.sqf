@@ -3,7 +3,10 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
+namespace(clientData,cd_)
 
+enum(EscapeSettingDataIndex,SETTING_INDEX_)
 #define SETTING_INDEX_NAME 0
 #define SETTING_INDEX_DESC 1
 #define SETTING_INDEX_TYPE 2
@@ -16,6 +19,7 @@
 #define SETTING_INDEX_EVENTONABORT 9
 #define SETTING_INDEX_EVENTONCHANGE 10
 
+//TODO annotation
 #define setting(name,desc,type,range,variable,event_on_apply,event_on_abort,event_on_change) [name,desc,type,range,#variable,variable,variable,variable,event_on_apply,event_on_abort,event_on_change]
 //Тоже что и setting но использует общее событие
 #define settingTEvent(name,desc,type,range,variable,__EVNT__) [name,desc,type,range,#variable,variable,variable,variable,__EVNT__,__EVNT__,__EVNT__]
