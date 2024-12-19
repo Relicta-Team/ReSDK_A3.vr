@@ -5,6 +5,9 @@
 
 #include <..\..\host\engine.hpp>
 
+namespace(ClientRpc,client_)
+
+macro_const(client_log_rpc)
 #define log_client_rpc
 
 #ifndef ENABLE_RPCLOG_CONSOLE_CLIENT
@@ -23,30 +26,35 @@
 #endif
 
 // Добавляет обработчик событий на стороне клиента
+decl(void(string;any))
 client_addEvent = {
 	params ["_eventName","_eventCode"];
 	["client_" + _eventName,_eventCode] call cba_fnc_addEventHandler
 };
 
 // Удаляет обработчик событий на стороне клиента
+decl(void(string;int))
 client_removeEvent = {
 	params ["_eventName","_eventId"];
 	["client_" + _eventName,_eventId] call CBA_fnc_removeeventhandler
 };
 
 // Удаляет глобальный обработчик событий на стороне клиента
+decl(void(string;int))
 rpc_removeEventGlobal = {
 	params ["_eventName","_eventId"];
 	[_eventName,_eventId] call CBA_fnc_removeeventhandler
 };
 
 // Вызывает клиентский обработчик событий
+decl(void(string;any))
 client_callEvent = {
 	params ["_eventName","_args"];
 	["client_" + _eventName,_args] call CBA_fnc_localEvent
 };
 
 // Отправляет событие на сервер
+decl(void(string;any))
 client_sendToServer = {
 	params ["_eventName","_eventargs"];
 	

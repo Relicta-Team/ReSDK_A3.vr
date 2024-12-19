@@ -3,6 +3,9 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
+macro_const(clientside_list_allowedExtensions)
 // Generated from systools::generateLibInfo (ReEditor 1.18)
 #define CLIENTSIDE_LIST_ALLOWED_EXTENSIONS [ \
 	["debug_console", "C0AD30DFFBB32CD85BC73FE39021FD61E2CDE7D1"], \
