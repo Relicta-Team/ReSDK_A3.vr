@@ -48,7 +48,7 @@ inline_macro
 #define sk_nan [0,0]
 decl(string[])
 cd_skillNames = ["СЛ","ИН","ЛВ","ЗД","ВНС","ВОЛЯ","ВОС","ЖЗ"];
-decl(string[][])
+decl(int[][])
 cd_skills = [sk_nan,sk_nan,sk_nan,sk_nan,sk_nan,sk_nan,sk_nan,sk_nan]; //массив со скиллами
 
 //stamina vars
