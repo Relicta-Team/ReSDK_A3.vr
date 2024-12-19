@@ -66,12 +66,15 @@
 #define namespace(ns_name,prefix)
 
 //inline macrocode to real value
-/* example:
+/* example usage:
 	inline_macro
 	#define GLOBAL_MACRO 1
 
 	inline_macro
 	#define TEST_CONST_STRING "hello"
+
+	inline_macro
+	#define FNC_TEST(a,b) a + b
 */
 #define inline_macro
 
@@ -88,7 +91,9 @@
 #define extern
 
 //emplace macro value to constant in root module scope
-/*	example:
+/*	
+	! perform before tokenization !
+	example:
 
 	macro_const(noe_test_macro)
 	#define TEST_MACRO 1
@@ -97,6 +102,18 @@
 
 */
 #define macro_const(full_func_name)
+
+/* Register macro function. Code of function will be emplace into root scope
+	! perform before tokenization !
+
+	used in macrofunctions or const:
+
+	macro_func(testModule_testName,void())
+	#define getZero 0
+	->>>
+	decl(void()) testModule_testName = {0}; ...
+*/
+#define macro_func(name,signature)
 
 //pragma for ignore file
 #define ignore_this_file

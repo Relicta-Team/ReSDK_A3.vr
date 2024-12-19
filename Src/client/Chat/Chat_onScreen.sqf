@@ -40,9 +40,9 @@ chatos_mobSelections = [
 decl(widget[])
 chatos_guiCtg = [widgetNull];
 
-decl(map<string,widget>)
+decl(map<string;widget>)
 chatos_renderedWidgets = createHashMap;
-decl(map<string,widget>)
+decl(map<string;widget>)
 chatos_renderedWidgetsPrint = createHashMap;
 
 decl(float)
@@ -250,7 +250,7 @@ chatos_canSeeObject = {
 	false
 };
 
-decl(array[any])
+decl(any[])
 chatos_list_blobMobs = [];
 
 chatos_actBlob = {
