@@ -91,7 +91,8 @@
               ]
             ]
           ],
-          "Ogranicheniya_pola":"Мужчина"
+          "Ogranicheniya_pola":"Мужчина",
+          "desc":"Хозяин роскошной семейной усадьбы в «Кармане», которая передается из поколения в поколение.\nВы очень великодушный человек и в честь праздника разослали приглашения своим родным и близким на застолье.\nВ эту смену придет много гостей, и они принесут много подарков! Позаботьтесь о том, чтобы мероприятие прошло гладко."
         },
         "methods":{
           "_canVisibleAfterStartConst":false,
@@ -101,19 +102,19 @@
           "isMainRole":true
         }
       },
-      "compileStatus":"Compiled",
+      "compileStatus":"Warnings",
       "graphVersion":2
     },
     "mpos":[
-      168.0102732646808,
-      -210.85375384288227,
-      1281.9262710968483,
-      1206.5188433852686
+      298.58621611020413,
+      -25.18349969199741,
+      794.6228030260738,
+      747.8802852010105
     ],
-    "mzoom":-0.26
+    "mzoom":0.48
   },
   "nodes":{
-    "0x1ade1d7c290":{
+    "0x21653e2aed0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -148,7 +149,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x1ade1d7dd90":{
+    "0x21653e2b080":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -183,7 +184,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x1ade1d7f080":{
+    "0x21653e2b260":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При конце раунда за роль",
@@ -218,7 +219,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.onEndgameBasic_0"
     },
-    "0x1ade1d7c050":{
+    "0x21653e2b2f0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",

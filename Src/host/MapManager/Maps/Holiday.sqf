@@ -1467,6 +1467,8 @@ _4008_127443980_4021013_37088 = ['IStruct',[4008.13,3980.4,13.3709],180,[0,0,1],
 ['SteelThinWallSmall',[4009.52,3977.15,12.4805],0,[0,0,1]] call InitStruct; 
 ['SmallSteelRustyFence',[4005.5,3977.63,13.1209],0,[0,0,1]] call InitStruct; 
 ['SmallSteelRustyFence',[4005.38,3972.75,13.1209],0,[0,0,1]] call InitStruct; 
+_4042_262454007_0810512_30955 = ['IStruct',[4042.26,4007.08,18.3987,true],[-0.758975,0.651119,-3.62843e-06],[-0.0526749,-0.0613948,0.996723], {_thisObj setvariable ['model','ml_shabut\xlamdoor\xlamdoor.p3d'];}] call InitStruct; // !!! realocated model !!!
+['Poo',[4046.7,4006.6,17.404,true],[0,-0.0170723,0.999854],[0,-0.999854,-0.0170723]] call InitItem; 
 ['ConcreteSmallFloor',[4007.75,3971.5,20.1991,true],270,[-0.000174533,0,1]] call InitStruct; 
 ['ConcreteSmallFloor',[4011.63,3971.5,20.2001,true],270,[0,0.000174533,1]] call InitStruct; 
 ['ConcreteSmallFloor',[4007.75,3974.25,20.1991,true],270,[0,0.000174533,1]] call InitStruct; 
@@ -1553,7 +1555,7 @@ _4009_750003975_0000017_62088 = ['IStruct',[4009.75,3975,17.6209],90.0004,[0,0,1
 ['Documents1',[4008.18,3974.14,13.495],0,[0,0,1]] call InitItem; 
 ['PaperHolder',[4006.84,3974.42,13.495],100,[0,0,1]] call InitItem; 
 ['Baton1',[4013.26,3972.37,13.3977],115,[0,0,1]] call InitItem; 
-['MedicalBag',[4013.28,3971.82,13.3916],15,[0,0,1]] call InitItem; 
+_4013_282233971_8225113_39159 = ['MedicalBag',[4013.28,3971.82,13.3916],15,[0,0,1]] call InitItem; 
 _4013_492683972_3432613_87988 = ['HandcuffItem',[4013.49,3972.34,13.8799],0,[0,0,1]] call InitItem; 
 ['RopeItem',[4013.44,3972.59,13.874],10,[0,0,1]] call InitItem; 
 ['Key',[4013.37,3972.19,13.874],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"naruch"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
@@ -1567,6 +1569,7 @@ _4008_489503973_8459513_47349 = ['Key',[4008.49,3973.85,13.4735],340,[0,0,1], {_
 ['Suitcase',[4013.5,3976.99,12.6096],80,[0,0,1]] call InitItem; 
 ['CoinBag',[4013.49,3975.69,13.7397],0,[0,0,1]] call InitItem; 
 _4006_229253974_3566913_76910 = ['KnutCloth',[4006.23,3974.36,13.7691],300,[0,0,1]] call InitItem; 
+['SurgicalExpander',[4013.47,3971.81,13.892],43.2166,[0,0,1]] call InitItem; 
 ['ShortRottenBoards',[4033.5,3992.75,12.5803],335,[0,0,1]] call InitStruct; 
 ['ShortRottenBoards',[4034.18,3993.03,12.5541],335,[0,0,1]] call InitStruct; 
 ['WoodenSmallFloor',[4031.5,3992.04,12.3939],336.058,[0,0,1]] call InitStruct; 
@@ -2096,8 +2099,7 @@ _4073_182374009_4133312_98873 = ['SpawnPoint',[4073.18,4009.41,12.9887],187.011,
 ['CaseBedroomMedium',[4018.31,4023.91,16.9444],90,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Presents"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['CaseBedroomMedium',[3993.83,3974.51,13.1096],0,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Presents"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['CaseBedroomMedium',[3988.49,3976.6,13.1096],90,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Presents"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-_4042_262454007_0810512_30955 = ['IStruct',[4042.26,4007.08,18.3987,true],[-0.758975,0.651119,-3.62843e-06],[-0.0526749,-0.0613948,0.996723], {_thisObj setvariable ['model','ml_shabut\xlamdoor\xlamdoor.p3d'];}] call InitStruct; // !!! realocated model !!!
-['Poo',[4046.7,4006.6,17.404,true],[0,-0.0170723,0.999854],[0,-0.999854,-0.0170723]] call InitItem; 
+['MediumWoodenTable1',[4008.87,3944.22,17.0904],0,[0,0,1]] call InitStruct; 
 
 
 
@@ -2377,6 +2379,9 @@ if (!isNil'_4037_834233944_8847715_51155') then {
 if (!isNil'_4037_947273942_6789615_50098') then {
 	_4037_947273942_6789615_50098 setvariable ['initialcategory',"milk"];
 };
+if (!isNil'_4042_262454007_0810512_30955') then {
+	_4042_262454007_0810512_30955 setvariable ['name',"Деревянная дверь"];
+};
 if (!isNil'_4013_882573978_8669412_56690') then {
 	_4013_882573978_8669412_56690 setvariable ['islocked',true];
 };
@@ -2388,6 +2393,20 @@ if (!isNil'_4005_970463979_9802212_60255') then {
 };
 if (!isNil'_4006_665283979_8151912_62715') then {
 	_4006_665283979_8151912_62715 setvariable ['name',"Дружковка"];
+};
+if (!isNil'_4013_282233971_8225113_39159') then {
+	_4013_282233971_8225113_39159 setvariable ['countslots',20];
+	[_4013_282233971_8225113_39159,'NeedleWithThreads',2,100] call (_4013_282233971_8225113_39159 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4013_282233971_8225113_39159,'NeedleWithThreads',1,50] call (_4013_282233971_8225113_39159 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4013_282233971_8225113_39159,'NeedleWithThreads',1,33] call (_4013_282233971_8225113_39159 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4013_282233971_8225113_39159,'Syringe',1,100] call (_4013_282233971_8225113_39159 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4013_282233971_8225113_39159,'LiqPainkiller',1,100] call (_4013_282233971_8225113_39159 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4013_282233971_8225113_39159,'PainkillerBox',1,100] call (_4013_282233971_8225113_39159 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4013_282233971_8225113_39159,'Bandage',1,100] call (_4013_282233971_8225113_39159 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4013_282233971_8225113_39159,'AmmoBoxBase',1,100] call (_4013_282233971_8225113_39159 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4013_282233971_8225113_39159,'BrushCleaner',1,100] call (_4013_282233971_8225113_39159 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4013_282233971_8225113_39159,'Forceps',1,100] call (_4013_282233971_8225113_39159 getvariable 'proto' getvariable 'createItemInContainer');
+	[_4013_282233971_8225113_39159,'SurgeryScalpel',1,100] call (_4013_282233971_8225113_39159 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_4013_492683972_3432613_87988') then {
 	_4013_492683972_3432613_87988 setvariable ['keylockers',"naruch"];
@@ -2724,7 +2743,4 @@ if (!isNil'_4074_006104009_5295412_98866') then {
 };
 if (!isNil'_4073_182374009_4133312_98873') then {
 	_4073_182374009_4133312_98873 setvariable ['spawnpointname',"RLateGuestHoliday5"];
-};
-if (!isNil'_4042_262454007_0810512_30955') then {
-	_4042_262454007_0810512_30955 setvariable ['name',"Деревянная дверь"];
 };

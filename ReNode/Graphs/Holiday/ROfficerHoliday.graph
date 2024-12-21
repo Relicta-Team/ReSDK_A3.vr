@@ -68,7 +68,8 @@
             "GameObject",
             -1
           ],
-          "Ogranicheniya_pola":"Мужчина"
+          "Ogranicheniya_pola":"Мужчина",
+          "desc":"Вы — Канавский участковый, в эту смену приехали на свою дачу, чтобы посетить застолье, на которое вас пригласил хороший друг — хозяин усадьбы. \nВы уже приготовили подарок, нужно только вспомнить, где он лежит.\nВероятно, в эту смену криминала не будет, но всё равно стоит быть начеку."
         },
         "methods":{
           "needDiscordRoles":[
@@ -81,15 +82,15 @@
       "graphVersion":2
     },
     "mpos":[
-      217.81934347140532,
-      -386.5851269377025,
-      1344.9729703705136,
-      1265.856913289895
+      -1419.104708201772,
+      -930.9952857146301,
+      2812.2832825621217,
+      2646.8548541761147
     ],
-    "mzoom":-0.14
+    "mzoom":-0.58
   },
   "nodes":{
-    "0x1ad4a63eb40":{
+    "0x2165d00fa10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -124,7 +125,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x1ad4d3a7020":{
+    "0x2165d00fbc0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -159,7 +160,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x1ad4f92dca0":{
+    "0x2165d00fda0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При конце раунда за роль",
@@ -194,7 +195,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.onEndgameBasic_0"
     },
-    "0x1ad4f92cdd0":{
+    "0x2165d00fe30":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",

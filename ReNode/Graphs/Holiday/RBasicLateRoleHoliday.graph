@@ -21,15 +21,15 @@
       "graphVersion":2
     },
     "mpos":[
-      3.072272195179835,
-      513.6720162588257,
-      1093.2538826681648,
-      1028.9448307465082
+      72.97648931714019,
+      1073.8294271727366,
+      687.8326973560137,
+      647.3719504527189
     ],
-    "mzoom":-0.05
+    "mzoom":0.42
   },
   "nodes":{
-    "0x1ad4a63d5b0":{
+    "0x21653f17dd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -64,7 +64,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x1ad4a63d820":{
+    "0x21653f17fb0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -99,7 +99,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x1ad4a63dbe0":{
+    "0x21653e281d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При конце раунда за роль",
@@ -134,7 +134,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.onEndgameBasic_0"
     },
-    "0x1ad4a63d8e0":{
+    "0x21653e28350":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",
@@ -169,7 +169,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onDeadBasicWrapper_0"
     },
-    "0x1ad4a63c830":{
+    "0x21653e284d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"*",
@@ -258,12 +258,12 @@
             255
           ]
         },
-        "Число 1":30.0,
-        "Число 2":1.0
+        "Число 1":60.0,
+        "Число 2":5.0
       },
       "class_":"math.mul"
     },
-    "0x1ad4a63d220":{
+    "0x21653e28890":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"&gt;=",
@@ -357,7 +357,7 @@
       },
       "class_":"math.greaterthanorequalnum"
     },
-    "0x1ad4a63cd40":{
+    "0x21653e28ad0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Доступность роли после старта",
@@ -379,7 +379,7 @@
         180
       ],
       "disabled":false,
-      "selected":true,
+      "selected":false,
       "visible":true,
       "width":339.0,
       "height":98.30000000000001,
@@ -392,7 +392,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.canVisibleAfterStart_0"
     },
-    "0x1ad4a63ddf0":{
+    "0x21653e28b90":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка 6",
@@ -431,7 +431,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x1ad4d44be00":{
+    "0x21653e28ce0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Node_16x",
       "name":"Вернуть значение",
@@ -511,7 +511,7 @@
       },
       "class_":"control.return"
     },
-    "0x1ad57671010":{
+    "0x21653e28e30":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\FIB_VarGet",
       "name":"Время игры",
@@ -549,7 +549,7 @@
       },
       "class_":"methods.ScriptedGamemode._getDurationWrapper_0"
     },
-    "0x1ad57673f50":{
+    "0x21653e29040":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"•",
@@ -585,7 +585,7 @@
       "subgraph_session":{},
       "class_":"conversion.floatToInt"
     },
-    "0x1ad57673a40":{
+    "0x21653e28fb0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\Icon_Sequencer_Key_Part_24x",
       "name":"Получить текущий режим",
@@ -627,61 +627,61 @@
   "connections":[
     {
       "out":[
-        "0x1ad4a63c830",
+        "0x21653e284d0",
         "Результат"
       ],
       "in":[
-        "0x1ad57673f50",
+        "0x21653e29040",
         "Число"
       ]
     },
     {
       "in":[
-        "0x1ad4a63d220",
+        "0x21653e28890",
         "Число 1"
       ],
       "out":[
-        "0x1ad57671010",
+        "0x21653e28e30",
         "Результат"
       ]
     },
     {
       "in":[
-        "0x1ad4a63d220",
+        "0x21653e28890",
         "Число 2"
       ],
       "out":[
-        "0x1ad57673f50",
+        "0x21653e29040",
         "Целое число"
       ]
     },
     {
       "out":[
-        "0x1ad4a63d220",
+        "0x21653e28890",
         "Результат"
       ],
       "in":[
-        "0x1ad4d44be00",
+        "0x21653e28ce0",
         "Возвращаемое значение"
       ]
     },
     {
       "out":[
-        "0x1ad4a63cd40",
+        "0x21653e28ad0",
         "Выход"
       ],
       "in":[
-        "0x1ad4d44be00",
+        "0x21653e28ce0",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x1ad57671010",
+        "0x21653e28e30",
         "Цель"
       ],
       "out":[
-        "0x1ad57673a40",
+        "0x21653e28fb0",
         "Результат"
       ]
     }

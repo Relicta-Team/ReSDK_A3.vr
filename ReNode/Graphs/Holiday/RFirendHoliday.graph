@@ -45,7 +45,8 @@
             ]
           ],
           "_currentOtherSkills":[],
-          "Ogranicheniya_pola":"Мужчина"
+          "Ogranicheniya_pola":"Мужчина",
+          "desc":"Самый лучший товарищ, который всегда выручит в трудную минуту.\nЛучший друг пригласил вас на застолье в честь праздника, и вы, конечно же, придете! Это ведь все-таки лучший друг!\nПодарок уже готов и где-то дома лежит, осталось подготовиться самому и выдвигаться поздравлять!"
         },
         "methods":{
           "_canVisibleAfterStartConst":false,
@@ -54,19 +55,19 @@
           ]
         }
       },
-      "compileStatus":"Compiled",
+      "compileStatus":"Warnings",
       "graphVersion":2
     },
     "mpos":[
-      250.59571581187322,
-      -622.17749411611,
-      1943.0771395405548,
-      1828.7784842734657
+      344.70775690948005,
+      -533.6014554360092,
+      1754.853057345341,
+      1651.6264069132642
     ],
-    "mzoom":-0.49
+    "mzoom":-0.33
   },
   "nodes":{
-    "0x1b96a273800":{
+    "0x21658125fd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -101,7 +102,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x1b96a2739b0":{
+    "0x21658126180":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -136,7 +137,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x1b96a273b90":{
+    "0x21658126360":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При конце раунда за роль",
@@ -171,7 +172,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.onEndgameBasic_0"
     },
-    "0x1b96a273c20":{
+    "0x216581263f0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",

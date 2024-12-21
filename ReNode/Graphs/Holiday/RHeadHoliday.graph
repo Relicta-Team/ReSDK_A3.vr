@@ -16,7 +16,7 @@
       "props":{
         "fields":{
           "name":"Голова",
-          "desc":"Вы - Голова одного из независимых городов сети. Очень удобно что у вас есть дом в пригороде канавы, \nпотому что хозяева усадьбы как раз пригласили вас на праздник. \nИ он уже в эту смену! Жаль что в этот раз без семьи...",
+          "desc":"Вы — Глава одного из независимых городов Сети. \nОчень удобно, что у вас есть дом в пригороде Канавы, потому что хозяева усадьбы как раз пригласили вас на праздник.\nИ он уже в эту смену! Жаль, что в этот раз без семьи...",
           "_deadTimeout":300,
           "_currentBaseSkills":[
             [
@@ -92,19 +92,19 @@
           "_canVisibleAfterStartConst":false
         }
       },
-      "compileStatus":"Compiled",
+      "compileStatus":"Warnings",
       "graphVersion":2
     },
     "mpos":[
-      524.0105558801463,
-      -1209.1435678999292,
-      2560.9095948644463,
-      2410.267853990066
+      648.1276730738125,
+      -1092.3274576000083,
+      2312.675360477114,
+      2176.6356333902245
     ],
-    "mzoom":-0.58
+    "mzoom":-0.49
   },
   "nodes":{
-    "0x1b96a2711f0":{
+    "0x2165e0e4740":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -139,7 +139,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x1b96a2713a0":{
+    "0x2165e0e48f0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -174,7 +174,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x1b96a271580":{
+    "0x2165e0e4ad0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При конце раунда за роль",
@@ -209,7 +209,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.onEndgameBasic_0"
     },
-    "0x1b96a271610":{
+    "0x2165e0e4b60":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",

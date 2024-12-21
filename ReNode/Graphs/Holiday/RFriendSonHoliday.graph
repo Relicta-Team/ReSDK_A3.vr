@@ -15,7 +15,7 @@
       "path":".Сын близкого друга семьи",
       "props":{
         "fields":{
-          "name":"Сын близкого друга",
+          "name":"Сын друга",
           "_currentBaseSkills":[
             [
               7.0,
@@ -47,7 +47,8 @@
           "__canBeFullAntag":false,
           "__canBeHiddenAntag":false,
           "_deadTimeout":300,
-          "Ogranicheniya_pola":"Мужчина"
+          "Ogranicheniya_pola":"Мужчина",
+          "desc":"Папа сказал, что в эту смену мы идём к дяде в гости. \nБудем много кушать и веселиться, мои друзья тоже будут там!"
         },
         "methods":{
           "needDiscordRoles":[
@@ -55,19 +56,19 @@
           ]
         }
       },
-      "compileStatus":"Compiled",
+      "compileStatus":"Warnings",
       "graphVersion":2
     },
     "mpos":[
-      38.49207946603144,
-      -925.110102450491,
-      1807.5706630752757,
-      1701.2429770120239
+      124.0671846287537,
+      -844.5688270032232,
+      1636.4204527498312,
+      1540.1604261174882
     ],
-    "mzoom":-0.4
+    "mzoom":-0.28
   },
   "nodes":{
-    "0x1d2949223f0":{
+    "0x21658170620":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -102,7 +103,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x1d2949225a0":{
+    "0x216581707d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -137,7 +138,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x1d294922780":{
+    "0x216581709b0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При конце раунда за роль",
@@ -172,7 +173,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.onEndgameBasic_0"
     },
-    "0x1d294922810":{
+    "0x21658170a40":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",

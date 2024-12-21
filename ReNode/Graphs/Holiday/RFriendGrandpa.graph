@@ -15,7 +15,7 @@
       "path":".Отец друга",
       "props":{
         "fields":{
-          "name":"Отец близкого друга",
+          "name":"Отец друга",
           "_deadTimeout":300,
           "_currentBaseSkills":[
             [
@@ -48,7 +48,8 @@
           "__canBeFullAntag":true,
           "__canBeHiddenAntag":true,
           "Ogranicheniya_pola":"Мужчина",
-          "Ogranicheniya_vozrasta__net_tolko_deti_tolko_starye_":"Только старые"
+          "Ogranicheniya_vozrasta__net_tolko_deti_tolko_starye_":"Только старые",
+          "desc":"Старость не радость, силы уже не те. Кости болят, вставать тяжело… \nА в эту смену ещё и нужно идти на праздник. Неохота… Подарок, правда, есть. \nРадует лишь то, что вы не единственный старый хрыч на этом застолье."
         },
         "methods":{
           "needDiscordRoles":[
@@ -56,19 +57,19 @@
           ]
         }
       },
-      "compileStatus":"Compiled",
+      "compileStatus":"Warnings",
       "graphVersion":2
     },
     "mpos":[
-      -37.96711668008345,
-      -638.8687689626842,
-      1743.4454041971042,
-      1640.8897921855091
+      45.74353299262623,
+      -560.082275153075,
+      1576.0241048516848,
+      1483.3168045662908
     ],
-    "mzoom":-0.39
+    "mzoom":-0.25
   },
   "nodes":{
-    "0x1b96b494ad0":{
+    "0x2165d00d3a0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -103,7 +104,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x1b96b494c80":{
+    "0x2165d00d550":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -138,7 +139,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x1b96b494e60":{
+    "0x2165d00d730":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При конце раунда за роль",
@@ -173,7 +174,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.onEndgameBasic_0"
     },
-    "0x1b96b494ef0":{
+    "0x2165d00d7c0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",

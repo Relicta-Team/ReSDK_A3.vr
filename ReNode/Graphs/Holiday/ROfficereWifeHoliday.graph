@@ -61,7 +61,8 @@
             "GameObject",
             -1
           ],
-          "Ogranicheniya_pola":"Женщина"
+          "Ogranicheniya_pola":"Женщина",
+          "desc":"Вы посвятили свою жизнь заботе о здоровье жителей Канавы. \nВ эту смену  вы не работаете и не на дежурстве, но когда за одним столом с вами врач, сразу становится спокойнее, верно?"
         },
         "methods":{
           "needDiscordRoles":[
@@ -69,19 +70,19 @@
           ]
         }
       },
-      "compileStatus":"Compiled",
+      "compileStatus":"Warnings",
       "graphVersion":2
     },
     "mpos":[
-      -3747.203838189166,
-      144.64914654672975,
-      4107.74550430049,
-      3866.113415812226
+      112.03073786967934,
+      -375.77176592810554,
+      2038.5038921550408,
+      1918.5918984988618
     ],
-    "mzoom":-0.73
+    "mzoom":-0.42
   },
   "nodes":{
-    "0x25cd5f62f30":{
+    "0x2165d0860c0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -116,7 +117,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x25cd5f630e0":{
+    "0x2165d086270":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -151,7 +152,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x25cd5f632c0":{
+    "0x2165d086450":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При конце раунда за роль",
@@ -186,7 +187,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.onEndgameBasic_0"
     },
-    "0x25cd5f63350":{
+    "0x2165d0864e0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",

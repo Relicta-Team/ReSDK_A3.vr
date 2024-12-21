@@ -15,7 +15,7 @@
       "path":".Жена близкого друга",
       "props":{
         "fields":{
-          "name":"Жена близкого друга",
+          "name":"Жена друга",
           "__canBeFullAntag":false,
           "__canBeHiddenAntag":false,
           "_deadTimeout":300,
@@ -56,7 +56,8 @@
             "Спавнпоинт",
             "RFriendWife"
           ],
-          "Ogranicheniya_pola":"Женщина"
+          "Ogranicheniya_pola":"Женщина",
+          "desc":"Любящая жена, строгая мама, добрая тёща. Дома порядок, на столе еда, а ребёнок одет.\nДруг семьи пригласил вас на застолье – это большая радость и честь! \nПомогите его жене приготовить еду и накрыть на стол. \nПозаботьтесь о том, чтобы в эту смену всё прошло гладко и никто из вашей семьи не натворил глупостей по пьянке."
         },
         "methods":{
           "needDiscordRoles":[
@@ -64,19 +65,19 @@
           ]
         }
       },
-      "compileStatus":"Compiled",
+      "compileStatus":"Warnings",
       "graphVersion":2
     },
     "mpos":[
-      156.36347042584885,
-      -394.2555484174359,
-      1263.2335599690614,
-      1188.925703500293
+      217.58738403844598,
+      -336.6330414879327,
+      1140.7857327438671,
+      1073.6806896412866
     ],
-    "mzoom":-0.13
+    "mzoom":0.03
   },
   "nodes":{
-    "0x25cd4d3bc50":{
+    "0x21658172cc0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -111,7 +112,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x25cd4d3be00":{
+    "0x21658172e70":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -146,7 +147,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x25cd4d3bfe0":{
+    "0x21658173050":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При конце раунда за роль",
@@ -181,7 +182,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.onEndgameBasic_0"
     },
-    "0x25cd5f180b0":{
+    "0x216581730e0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",

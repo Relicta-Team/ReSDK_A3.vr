@@ -91,7 +91,8 @@
           ],
           "__canBeFullAntag":false,
           "__canBeHiddenAntag":false,
-          "Ogranicheniya_pola":"Женщина"
+          "Ogranicheniya_pola":"Женщина",
+          "desc":"Хранительница домашнего уюта и очага. Всегда следит за тем, чтобы всё было идеально: от украшения зала до подачи блюд. \nЕё присутствие ощущается в каждой детали торжества."
         },
         "methods":{
           "isMainRole":false,
@@ -100,19 +101,19 @@
           ]
         }
       },
-      "compileStatus":"Compiled",
+      "compileStatus":"Warnings",
       "graphVersion":2
     },
     "mpos":[
-      144.82102020741183,
-      -199.96390778284797,
-      1175.0489947444305,
-      1105.928465641817
+      200.450901434588,
+      -147.60637251021154,
+      1063.7892322900782,
+      1001.2133950965441
     ],
-    "mzoom":-0.16
+    "mzoom":0.11
   },
   "nodes":{
-    "0x1b965c6ed80":{
+    "0x216543ad4f0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -147,7 +148,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x1b965c6ef30":{
+    "0x216543ad6a0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -182,7 +183,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x1b965c6f110":{
+    "0x216543ad880":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При конце раунда за роль",
@@ -217,7 +218,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.onEndgameBasic_0"
     },
-    "0x1b965c6f1a0":{
+    "0x216543ad910":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",

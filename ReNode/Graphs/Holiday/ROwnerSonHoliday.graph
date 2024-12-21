@@ -15,7 +15,7 @@
       "path":".Сын хозяина",
       "props":{
         "fields":{
-          "name":"Сын хозяина усадьбы",
+          "name":"Сын хозяина",
           "__canBeHiddenAntag":false,
           "__canBeFullAntag":false,
           "_deadTimeout":300,
@@ -48,7 +48,8 @@
             ]
           ],
           "Ogranicheniya_pola":"Мужчина",
-          "Ogranicheniya_vozrasta__net_tolko_deti_tolko_starye_":"только дети"
+          "Ogranicheniya_vozrasta__net_tolko_deti_tolko_starye_":"только дети",
+          "desc":"Наследник семьи и будущий владелец всего этого богатства. \nОбычно занят своими детскими делами, но сегодня появится на празднике чтобы показать себя."
         },
         "methods":{
           "needDiscordRoles":[
@@ -56,19 +57,19 @@
           ]
         }
       },
-      "compileStatus":"Compiled",
+      "compileStatus":"Warnings",
       "graphVersion":2
     },
     "mpos":[
-      91.01707047228632,
-      85.6631251503872,
-      667.9658590554274,
-      628.6737496992256
+      -113.99350294450437,
+      -268.32072911317005,
+      1241.908688189695,
+      1168.8552359432417
     ],
-    "mzoom":0.6
+    "mzoom":-0.05
   },
   "nodes":{
-    "0x1b96a081280":{
+    "0x2165443b980":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Выдача снаряжения",
@@ -103,7 +104,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
     },
-    "0x1b96a081430":{
+    "0x2165443bb30":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При назначении",
@@ -138,7 +139,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole._onAssignedWrapper_0"
     },
-    "0x1b96a081610":{
+    "0x2165443bd10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При конце раунда за роль",
@@ -173,7 +174,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.onEndgameBasic_0"
     },
-    "0x1b96a0816a0":{
+    "0x2165443bda0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При смерти за роль",
