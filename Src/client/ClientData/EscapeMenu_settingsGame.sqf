@@ -60,7 +60,7 @@ cd_esc_settings_internal_curChangedValue = 0;
 
 // !!! only debug !!!
 decl(float) somedebugvar1 = 1;
-delc(float) somedebugvar2 = 1;
+decl(float) somedebugvar2 = 1;
 decl(bool) testbool = false;
 
 decl(any[])
