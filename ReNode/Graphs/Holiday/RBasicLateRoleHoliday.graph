@@ -17,158 +17,18 @@
         "fields":{},
         "methods":{}
       },
-      "compileStatus":"Warnings",
+      "compileStatus":"Compiled",
       "graphVersion":2
     },
     "mpos":[
-      72.97648931714019,
-      1073.8294271727366,
-      687.8326973560137,
-      647.3719504527189
+      75.27001417145182,
+      119.71786010436057,
+      1409.0943856871586,
+      1326.2064806467379
     ],
-    "mzoom":0.42
+    "mzoom":-0.31
   },
   "nodes":{
-    "0x21653f17dd0":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"Выдача снаряжения",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":279.0,
-      "height":131.10000000000002,
-      "pos":[
-        16.611261855633302,
-        4.254987726348929
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedRole.getEquipment_0"
-    },
-    "0x21653f17fb0":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"При назначении",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":279.0,
-      "height":158.4,
-      "pos":[
-        16.611261855633302,
-        238.20498772634895
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedRole._onAssignedWrapper_0"
-    },
-    "0x21653e281d0":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"При конце раунда за роль",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":339.0,
-      "height":119.3,
-      "pos":[
-        16.611261855633302,
-        446.704987726349
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedRole.onEndgameBasic_0"
-    },
-    "0x21653e28350":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"При смерти за роль",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":279.0,
-      "height":135.3,
-      "pos":[
-        16.611261855633302,
-        651.654987726349
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedRole._onDeadBasicWrapper_0"
-    },
     "0x21653e284d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",

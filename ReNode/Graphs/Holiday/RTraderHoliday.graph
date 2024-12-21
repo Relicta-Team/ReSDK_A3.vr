@@ -90,12 +90,12 @@
       "graphVersion":2
     },
     "mpos":[
-      352.58935920387046,
-      -396.70261349895725,
-      1346.9643890248744,
-      1267.7311896704698
+      19.819968015626387,
+      -329.6130724168404,
+      1345.0588647918485,
+      1265.9377550982101
     ],
-    "mzoom":-0.13
+    "mzoom":-0.27
   },
   "nodes":{
     "0x2165e0e6d80":{
@@ -132,111 +132,6 @@
       "port_deletion_allowed":false,
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
-    },
-    "0x2165e0e6f30":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"При назначении",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":279.0,
-      "height":158.4,
-      "pos":[
-        -40.33024234388381,
-        238.11562622653955
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedRole._onAssignedWrapper_0"
-    },
-    "0x2165e0e7110":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"При конце раунда за роль",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":339.0,
-      "height":119.3,
-      "pos":[
-        -40.33024234388381,
-        446.6156262265396
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedRole.onEndgameBasic_0"
-    },
-    "0x2165e0e71a0":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"При смерти за роль",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":279.0,
-      "height":135.3,
-      "pos":[
-        -40.33024234388381,
-        651.5656262265396
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedRole._onDeadBasicWrapper_0"
     }
   }
 }

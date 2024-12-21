@@ -48,7 +48,8 @@
           "__canBeHiddenAntag":false,
           "_deadTimeout":300,
           "Ogranicheniya_pola":"Мужчина",
-          "desc":"Папа сказал, что в эту смену мы идём к дяде в гости. \nБудем много кушать и веселиться, мои друзья тоже будут там!"
+          "desc":"Папа сказал, что в эту смену мы идём к дяде в гости. \nБудем много кушать и веселиться, мои друзья тоже будут там!",
+          "Ogranicheniya_vozrasta__net_tolko_deti_tolko_starye_":"Только дети"
         },
         "methods":{
           "needDiscordRoles":[
@@ -60,12 +61,12 @@
       "graphVersion":2
     },
     "mpos":[
-      124.0671846287537,
-      -844.5688270032232,
-      1636.4204527498312,
-      1540.1604261174882
+      -116.80603395274522,
+      -1271.3212731289661,
+      2573.1529958512474,
+      2421.791054918821
     ],
-    "mzoom":-0.28
+    "mzoom":-0.62
   },
   "nodes":{
     "0x21658170620":{
@@ -102,111 +103,6 @@
       "port_deletion_allowed":false,
       "subgraph_session":{},
       "class_":"methods.ScriptedRole.getEquipment_0"
-    },
-    "0x216581707d0":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"При назначении",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":279.0,
-      "height":158.4,
-      "pos":[
-        70.88052540455459,
-        217.1355225189774
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedRole._onAssignedWrapper_0"
-    },
-    "0x216581709b0":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"При конце раунда за роль",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":339.0,
-      "height":119.3,
-      "pos":[
-        70.88052540455459,
-        425.63552251897744
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedRole.onEndgameBasic_0"
-    },
-    "0x21658170a40":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"При смерти за роль",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":279.0,
-      "height":135.3,
-      "pos":[
-        70.88052540455459,
-        630.5855225189775
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedRole._onDeadBasicWrapper_0"
     }
   }
 }
