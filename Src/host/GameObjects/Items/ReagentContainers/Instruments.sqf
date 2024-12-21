@@ -73,6 +73,16 @@ class(Teapot) extends(IReagentNDItem)
 	getterconst_func(transferAmount,[5 arg 10 arg 20 arg 30]);
 endclass
 
+class(Teapot1) extends(Teapot)
+	var(name,"Заварник");
+	var(model,"ml_shabut\furniture\teabaggin.p3d");
+	var(material,"MatGlass");
+	var(weight,gramm(300));
+	var(size,ITEM_SIZE_MEDIUM);
+	var(reagents,vec2(this,100) call ms_create);
+	getterconst_func(transferAmount,[5 arg 10 arg 20 arg 30]);
+endclass
+
 class(Canister) extends(IReagentNDItem)
 	var(name,"Канистра");
 	var(weight,gramm(5000));

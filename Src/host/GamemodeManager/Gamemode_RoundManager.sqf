@@ -1101,6 +1101,10 @@ gm_endRound = {
 
 	//обрабатываем все незавершенные задачи как проваленные
 	{
+		// Предварительно проверим задачи перед завершением (потому что поток проверит их только в следующем цикле симуляции)
+		if (!getVar(_x,isDone) && !callFunc(_x,checkCompleteOnEnd)) then {
+			callFunc(_x,updateMethodInternal);
+		};
 		if !getVar(_x,isDone) then {
 			callFuncParams(_x,setTaskResult,-1 arg true);
 		};
