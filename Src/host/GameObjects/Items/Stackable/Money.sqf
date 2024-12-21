@@ -54,3 +54,13 @@ class(Tooth) extends(Stack)
 
 	getter_func(canDisentegrate,true);
 endclass
+
+//Перенести в другую категорию!
+class(Necklace) extends(Item)
+	var(name,"Роскошное ожерелье");
+	var(desc,"Отличная безделушка для поднятия настроения!");
+	var(model,"relicta_models\models\interier\props\treasure\necklace\necklace.p3d");
+	var(weight,gramm(50));
+	var(material,"MatMetal");
+	var(size,ITEM_SIZE_SMALL);
+endclass

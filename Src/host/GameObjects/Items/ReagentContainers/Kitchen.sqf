@@ -225,6 +225,17 @@ class(FoodPlate) extends(Container)
 	var(dr,1);
 endclass
 
+class(Ashtray) extends(Container)
+	var(name,"Пепельница");
+	var(desc,"Окурки все сюда!");
+	var(model,"ml_shabut\exodus\ashtray.p3d");
+	var(material,"MatMetal");
+	var(weight,gramm(130));
+	var_exprval(countSlots,BASE_STORAGE_CAPACITY(1.4));
+	var(size,ITEM_SIZE_SMALL);
+	var(maxSize,ITEM_SIZE_SMALL);
+endclass
+
 // Cups
 
 class(Cup) extends(IReagentNDItem)

@@ -343,6 +343,17 @@ class(SamokrutkaDisabled) extends(Samokrutka)
 	var(lightIsEnabled,false);
 endclass
 
+class(SmokingPipe) extends(Sigarette)
+	var(name,"Курительная трубка");
+	var(desc,"Лучше для курения не придумешь!");
+	var(model,"relicta_models\models\interier\props\treasure\pipe\pipe.p3d");
+	getter_func(fuelEmptyModel,"relicta_models\models\interier\props\treasure\pipe\pipe.p3d");
+endclass
+
+class(SmokingPipeDisabled) extends(SmokingPipe)
+	var(lightIsEnabled,false);
+endclass
+
 class(Candle) extends(Sigarette)
 	var(name,"Свеча");
 	var(desc,"");
@@ -414,6 +425,13 @@ class(LampKerosene) extends(Torch)
 endclass
 
 class(LampKeroseneDisabled) extends(LampKerosene)
+	var(lightIsEnabled,false);
+endclass
+
+class(LuxuryLamp) extends(LampKerosene)
+	var(name,"Роскошная лампа");
+	var(desc,"Ручная работа");
+	var(model,"ca\structures\furniture\lighting\lantern\lantern.p3d");
 	var(lightIsEnabled,false);
 endclass
 
