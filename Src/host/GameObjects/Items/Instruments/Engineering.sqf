@@ -186,3 +186,13 @@ class(ToolStraigthPipe) extends(ToolPipe)
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_SWORD);
 endclass
+
+//Перенести в другую категорию!
+class(Shield) extends(Item)
+	var(name,"Металлический щит.");
+	var(desc,"Лучше с ним, чем без него.");
+	var(model,"relicta_models\models\cloth\shieldcircle\shieldcircle.p3d");
+	var(weight,3.7);
+	var(material,"MatMetal");
+	var(size,ITEM_SIZE_MEDIUM);
+endclass
