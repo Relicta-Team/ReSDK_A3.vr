@@ -9,8 +9,14 @@
 #define vec4(x,y,w,h) [x,y,w,h]
 #include "interactCombat_defines.sqf"
 
-#define size_def_w 30
+#include "..\..\host\lang.hpp"
 
+namespace(InteractCombat,interactCombat_)
+
+macro_const(interactCombat_sizeDefaultWidth)
+#define size_def_w 30
+//TODO annotate this
+//decl(void(display;))
 interactCombat_initCombatStyles = {
 	params ["_d","_pos","_index",["_modeLoad",0]]; //_mode: 0 create, 1 load
 

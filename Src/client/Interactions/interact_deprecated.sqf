@@ -3,10 +3,14 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
+
+namespace(InteractDeprecated,interact_)
 
 // TODO remove this file
 
 //позиция достаточно близка чтобы тронуть рукой
+decl(bool(any;float))
 interact_canHandReach = {
 	OBSOLETE(interact::canHandReach);
 	params ["_pos2",["_dopDist",0]];
@@ -25,6 +29,7 @@ interact_canHandReach = {
 };
 
 // видно ли объект
+decl(bool())
 interact_canSeeObject = {
 	OBSOLETE(interact::canSeeObject);
 	FHEADER;
@@ -89,14 +94,17 @@ interact_canSeeObject = {
 	false
 };
 
+decl(widget[])
 interact_debug_viswidgets = [];
 //#define useviswidgets
 
+decl(bool(actor))
 interact_canSeeMob_handReach = {
 	OBSOLETE(interact::canSeeMob_handReach);
 	private _target = _this;
 	private _unit = player;
 
+	inline_macro
 	#define mlp(selection) #selection
 
 	private _selectionsNames= [
@@ -191,8 +199,10 @@ interact_canSeeMob_handReach = {
 	false
 };
 
+decl(vector3(actor))
 interact_findNearPosMob = {
 	OBSOLETE(interact::findNearPosMob);
+	inline_macro
 	#define mlp(selection) #selection
 
 	//TODO переименовать функцию и сделать выборку из самых ближайших позиций к центру экрана через worldToScreen
@@ -250,6 +260,7 @@ interact_findNearPosMob = {
 
 //Отладочная отрисовка геометрии (снижает производительность в несколько раз)
 //#define DEBUG_ALLOW_DRAW_BBX
+macro_const(interact_debugFlag_drawBBX)
 #define DEBUG_DRAW_BBX_DISTANCE 10
 
 #ifndef DEBUG
@@ -257,16 +268,19 @@ interact_findNearPosMob = {
 #endif
 
 #ifdef DEBUG_ALLOW_DRAW_BBX
+decl(void())
 interact_debug_drawBBX = {
 	{
 		_x call interact_debug_internal_drawBBXObject;
 	} foreach (player nearObjects DEBUG_DRAW_BBX_DISTANCE);
 };
+decl(any[]())
 interact_debug_unboxDecal = {
 	_o = call interact_cursorobject;
-	o = _o;
-	decal = _o getVariable "ngo_src";
+	[_o,_o getVariable "ngo_src"];
 };
+
+decl(void(mesh))
 interact_debug_internal_drawBBXObject = {
 	_obj = _this;
 	_bbxGlob = boundingBoxReal _obj;

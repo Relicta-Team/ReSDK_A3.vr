@@ -3,18 +3,26 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
 
+namespace(InteractAim,interaction_aim_)
+
+macro_const(interaction_aim_widgetSize)
 #define AIM_SIZE 3
 
+decl(int)
 interaction_aim_handle = -1;
+decl(int)
 interaction_aim_alphaUpdHandle = -1;
 
+decl(widget[])
 interaction_aim_widgets = [widgetNull];
 
 /*
 var posW = Client::Interface.Display.transformSizeByAR(SIZE_AIM);
 aim = new Client::ScreenRenderer::Widgets.AimPointer(display,50 - posW / 2,50 - SIZE_AIM / 2,posW,SIZE_AIM
 */
+decl(void())
 interaction_aim_init = {
 
 	private _aim = [getGUI,PICTURE,call interaction_aim_getStdPos] call createWidget;
@@ -30,11 +38,13 @@ interaction_aim_init = {
 	interaction_aim_alphaUpdHandle = startUpdate(interaction_aim_alphaUpdate,0.05);
 };
 
+decl(void())
 interaction_aim_getStdPos = {
 	private _posW = getWidthByHeightToSquare(AIM_SIZE);
 	[50-_posW/2,50-AIM_SIZE/2,_posW,AIM_SIZE]
 };
 
+decl(void())
 interaction_aim_alphaUpdate = {
 	/*(getLightingAt player select 2) params ["_r","_g","_b"];
 
@@ -61,10 +71,12 @@ interaction_aim_alphaUpdate = {
 	(interaction_aim_widgets select 0) ctrlSetTextColor _col;
 };
 
+decl(void())
 interaction_aim_applyColorTheme = {
 	(interaction_aim_widgets select 0) setVariable ["rgb_col",["cursor"] call ct_getValue];
 };
 
+decl(void())
 interaction_aim_onUpdate = {
 
 	_pos = call interaction_aim_getStdPos;

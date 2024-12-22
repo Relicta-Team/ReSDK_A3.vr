@@ -3,16 +3,25 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
 
+namespace(InteractGrab,interact_grab_)
+
+macro_const(interact_grab_update_delay)
 #define INTERACT_GRAB_UPDATE_DELAY 0
+decl(int[])
 interact_grab_handleupdate = vec2(-1,-1);
-
+decl(vector3)
 interact_grab_bias = vec3(0,0,0);
+decl(vector3)
 interact_grab_dir = vec3(0,0,0);
+decl(mesh)
 interact_grab_mobObj = objNUll;
 
+decl(bool)
 interact_grab_isGrabbed = false;
 
+decl(void(any;any;any;int))
 interact_grab_start = {
 	params ["_src","_sidePos","_vDir","_sideIdx"];
 	
@@ -23,6 +32,7 @@ interact_grab_start = {
 	
 }; rpcAdd("grab_strt",interact_grab_start);
 
+decl(void(any))
 interact_grab_onUpdate = {
 	_data = (_this select 0);
 	_data params ["_src","_sidePos","_vDir"];
@@ -57,6 +67,7 @@ interact_grab_onUpdate = {
 	_ins select 0 select 2
 };
 
+decl(void(int))
 interact_grab_stop = {
 	params ["_idx"];
 	stopUpdate(interact_grab_handleupdate select _idx);

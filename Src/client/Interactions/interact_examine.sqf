@@ -3,8 +3,11 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
 
+namespace(Interact,interact_)
 
+decl(void())
 interact_examine = {
 	
 	if (["examine"] call input_spamProtect) exitWith {};
@@ -21,8 +24,9 @@ interact_examine = {
 	private _hashData = if (typeof _target == BASIC_MOB_TYPE) then {_target} else {getObjReference(_target)};
 	
 	rpcSendToServer("examine",[player arg _hashData]);
-};	
+};
 
+decl(void())
 interact_pointTo = {
 	["emt_point"]call interactEmote_doEmoteAction;
 };

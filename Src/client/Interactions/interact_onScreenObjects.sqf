@@ -5,20 +5,26 @@
 
 #include "..\..\host\engine.hpp"
 
+namespace(InteractOnScreen,interact_)
+
+decl(any[])
 interact_internal_onscreenObjs = [];
 
+decl(void(mesh|actor))
 interact_addOnScreenCapturedObject = {
 	params ["_wobj"];
 	if isNullReference(_wobj) exitWith {false};
 	interact_internal_onscreenObjs pushBackUnique _wobj;
 };
 
+decl(void(mesh|actor))
 interact_removeOnScreenCapturedObject = {
 	params ["_wobj"];
 	if isNullReference(_wobj) exitWith {false};
 	[interact_internal_onscreenObjs,_wobj] call arrayDeleteItem;	
 };
 
+decl(any(bool;bool;any))
 interact_getOnSceenCapturedObject = {
 	params [["_isMouseMode",false],["_getRealPtr",true],"_refOutWorldObj"];
 	private _ret = null;
@@ -123,7 +129,7 @@ interact_getOnSceenCapturedObject = {
 	_ret
 };
 
-
+decl(bool(vector3;vector3;vector3;float))
 interact_isInSphere = {
 	/* --------------------------------------------------------------------------------------------------------------------
 		Author:	 	Cre8or
@@ -149,6 +155,7 @@ interact_isInSphere = {
 	if (_startPos isEqualTo [] or {_rayDir isEqualTo []} or {_sphPos isEqualTo []} or {_sphereRadius <= 0}) exitWith {[-1, -1]};
 
 	// Define some macros
+	macro_const(interact_floatMax)
 	#define FLOAT_MAX 3.40282346639e+38 // Using 32-bit floats
 
 	// Set up some variables
@@ -178,6 +185,7 @@ interact_isInSphere = {
 	[_distToOut - _distToIn, _distToIn];
 };
 
+decl(bool(vector3;float;vector3))
 interact_isPointInSphere = {
 	params ["_spherePos", "_sphereRadius", "_point"];
 
@@ -188,6 +196,7 @@ interact_isPointInSphere = {
 	_distance <= _sphereRadius
 };
 
+decl(bool(vector3;vector3;float;vector3))
 interact_isPointInCone = {
 	params ["_coneStartPos", "_coneEndPos", "_outerAngle", "_point"];
 
