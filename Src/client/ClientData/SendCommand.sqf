@@ -310,7 +310,7 @@ cd_commands_localCommandsList = createHashMap;
 inline_macro
 #define localCommand(name) _cd_map_dataCode = []; cd_commands_localCommandsList set [name,_cd_map_dataCode]; _cd_map_dataCode pushBack
 
-macro_func(cd_localCmdGetArgs,any)
+macro_func(cd_localCmdGetArgs,any())
 #define arguments cd_internal_cmd_thisArguments
 
 decl(any) cd_internal_cmd_thisArguments = 0;

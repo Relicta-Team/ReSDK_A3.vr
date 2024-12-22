@@ -228,7 +228,7 @@ macro_func(esc_getSettingsAccept,widget())
 macro_func(esc_getSettingsAbort,widget())
 #define getSettingsAbort (esc_settings_widgets select 3)
 
-macro_func(esc_getAllSettingsToFade,widget[])
+macro_func(esc_getAllSettingsToFade,widget[]())
 #define ESC_GET_ALL_SETTINGS_TO_FADE [getSettingsAbort,getSettingsAccept,getSettingsList,getSettingsCtg]
 
 macro_const(esc_settings_size_x)
