@@ -6,21 +6,31 @@
 #include <..\WidgetSystem\widgets.hpp>
 #include <..\..\host\text.hpp>
 
+#include "..\..\host\lang.hpp"
+
+namespace(InputHelper,inputHelper_)
 
 //Помощь по управлению
-
+macro_const(inputHelper_widget_size_w)
 #define INPUTHELPER_WIDGET_SIZE_W 30
+macro_const(inputHelper_widget_size_h)
 #define INPUTHELPER_WIDGET_SIZE_H 13
 
+decl(bool)
 inputHelper_enabled = true;
 
+decl(int)
 inputHelper_handleUpdate = -1;
+decl(widget[])
 inputHelper_widgets = [];
+decl(float)
 inputHelper_firstRunTaskId = 0;
 
+decl(bool)
 inputHelper_isSuccessCurrentTask = false; //системная переменная для выполнения внутренней задачи
 
 //Базовые задачи это первый вход
+decl(any[])
 inputHelper_basicTask = [
 	["","",{isLobbyOpen || call client_isInGame},{
 
@@ -29,6 +39,7 @@ inputHelper_basicTask = [
 	["Нажмите %1, чтобы осмотреть объект"]
 ];
 
+decl(void())
 inputHelper_init = {
 	if (!inputHelper_enabled) exitWith {};
 
@@ -59,7 +70,7 @@ inputHelper_init = {
 	inputHelper_handleUpdate = startUpdate(_onUpdate,0);
 };
 
-
+decl(void(string;any))
 inputHelper_showNotification = {
 	params ["_text","_timeOrCode"];
 	if (!inputHelper_enabled) exitWith {};
@@ -80,6 +91,7 @@ inputHelper_showNotification = {
 	call inputHelper_internal_sortWidgets;
 };
 
+decl(void())
 inputHelper_internal_sortWidgets = {
 	private _refWid = inputHelper_widgets;
 	for "_i" from 0 to (count _refWid) -1 do {

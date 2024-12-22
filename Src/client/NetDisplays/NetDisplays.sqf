@@ -175,7 +175,7 @@ nd_loadDisplay = {
 	_d displayAddEventHandler ["KeyUp",{
 		params ["_d","_key"];
 
-		doPrepareKeyData();
+		doPrepareKeyData(_this);
 		
 		if (ctrlType(focusedCtrl _d) == 2) exitWith {};
 		

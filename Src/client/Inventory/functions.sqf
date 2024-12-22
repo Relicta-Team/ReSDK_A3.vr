@@ -262,7 +262,7 @@ openInventory = {
 			//process input emote text
 			if equals(focusedCtrl _d,_d getVariable "ieMenuCtg" getVariable "input") exitWith {};
 
-			doPrepareKeyData();
+			doPrepareKeyData(_this);
 
 			if isPressed(input_act_inventory) exitWith {
 				nextFrame({call closeInventory});
@@ -363,14 +363,14 @@ openInventory = {
 	inventory_modifierScroll = false;
 	if (!inventory_supressInventoryOpen) then {
 		_d displayAddEventHandler ["keyDown",{params ["_d","_key","_shift"];
-			doPrepareKeyData();
+			doPrepareKeyData(_this);
 
 			if (_shift) then {inventory_modifierScroll = true};
 			//if isPressed(input_act_mainAction) exitWith {inventory_isPressedInteractButton = true};
 			inventory_isHoldMode && _key == KEY_TAB
 		}];
 		_d displayAddEventHandler ["keyUp",{params ["_d","_key","_shift"];
-			doPrepareKeyData();
+			doPrepareKeyData(_this);
 
 			if (_shift) then {inventory_modifierScroll = false};
 			//if isPressed(input_act_mainAction) exitWith {inventory_isPressedInteractButton = false};
