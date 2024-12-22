@@ -3,8 +3,11 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
 
+namespace(GeometryFixer,gf_)
 
+decl(void())
 gf_start = {
 	if (gf_handle_update != -1) then {
 		call gf_stop;
@@ -16,6 +19,7 @@ gf_start = {
 	gf_handle_update = startUpdate(gf_onUpdate,GEOMETRY_FIXER_UPDATE_DELAY);
 };
 
+decl(void())
 gf_stop = {
 	if (gf_handle_update != -1) then {
 		stopUpdate(gf_handle_update);
@@ -24,12 +28,12 @@ gf_stop = {
 	};
 };
 
-
+decl(void())
 gf_onUpdate = {
 	
 	private _curpos = getposatl player;
 	#ifndef GEOMETRYFIXER_ROADWAY_DISABLED
-	call gf_processRoadway;
+	[_curpos] call gf_processRoadway;
 	#endif
 	
 	#ifdef GEOMETRYFIXER_COLLISION_ALLOWED
@@ -42,7 +46,7 @@ gf_onUpdate = {
 	};
 	
 	#ifndef GEOMETRYFIXER_GEOSAVER_DISABLED
-	call gf_processGeometry;
+	[_curpos] call gf_processGeometry;
 	#endif
 	
 /*
@@ -63,13 +67,15 @@ gf_onUpdate = {
 };	
 
 #ifdef GEOMETRYFIXER_GEOSAVER_DISABLED
+decl(vector3)
 gf_lastNormalPos = vec3(0,0,0);
 #endif
 
 #ifdef GEOMETRYFIXER_GEOSAVER_DISABLED
 //функционал сломан и не поддерживатеся на данный момент
+decl(void(vector3))
 gf_processGeometry = {
-	
+	params ["_curpos"];
 	if (!isOnGround(player)) then {
 		if (!gf_isCatchedFalling) then {
 			gf_isCatchedFalling = true;
@@ -171,7 +177,9 @@ gf_processGeometry = {
 #endif
 //GEOMETRYFIXER_GEOSAVER_DISABLED
 
+decl(void(vector3))
 gf_processRoadway = {
+	params ["_curpos"];
 	_itsc = lineIntersectsSurfaces [ATLToASL _curpos,ATLToASL (_curpos vectoradd [0,0,-1000]),
 		player,
 		gf_objRoadway, 
@@ -184,12 +192,14 @@ gf_processRoadway = {
 		gf_objRoadway setobjectscale 0.18;
 	};
 };	
-
+decl(vector3)
 gf_lastPosWallLock = vec3(0,0,0);
-
+decl(float)
 gf_lastWallCrushingTime = 0;
+macro_const(gf_lastWallCrushingDelay)
 #define LAST_WALL_CRUSH_DELAY 1
 
+decl(void())
 gf_processWallLock = {
 	_headpos = player modelToWorldVisual (player selectionPosition "head");
 	_headpos2 = player modelToWorldVisual (player selectionPosition "head" vectorAdd vec3(0,1.2,0));
@@ -250,6 +260,7 @@ gf_processWallLock = {
 
 //процессор коллизии армовских мобов
 //выключает локальную коллизию моба на клиенте полностью
+decl(void())
 gf_collisionProcess = {
 	_dist = 0;
 	_mindist = 100;
