@@ -3,6 +3,9 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
+namespace(DiscordRPC,discrpc_)
 
 //http://www.online-decoder.com/ru utf-8 -> win-1251
 private _maplet = discrpc_list_ruLetters;

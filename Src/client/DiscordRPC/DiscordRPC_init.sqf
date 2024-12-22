@@ -9,13 +9,17 @@
 
 #include <..\..\host\engine.hpp>
 
+namespace(DiscordRPC,discrpc_)
+
 #include <DiscordRPC.h>
 
+decl(map)
 discrpc_list_ruLetters = createHashMap; //в кодировке 1251
 #include "DiscordRPC_ruLetters.sqf"
 
 
 //допустимые ключи для расширения
+decl(string[])
 discrpc_allowedTaskTypes = [
 	"UpdateDetails",
 	"UpdateState",
@@ -30,6 +34,7 @@ discrpc_allowedTaskTypes = [
 ];
 
 //отправляет новую информацию в rpc и обновляет статус клиента
+decl(void(...any[]))
 discrpc_send = {
 	if (isNullVar(_this) || {not_equalTypes(_this,[])}) exitwith {
 		error("discrpc::send() - Cant update client state: wrong type or null params");
@@ -61,6 +66,7 @@ discrpc_send = {
 };
 
 //инициализатор. вызывается при подключении к серверу и устанавливает статус клиента
+decl(void())
 discrpc_init = {
 
 	private _ret = initApplication();
@@ -102,15 +108,18 @@ discrpc_init = {
 
 };
 
+decl(void())
 discrpc_reload = {
 	initApplication();
 };
 
+decl(void())
 discrpc_unload = {
 	extname callExtension ["CloseRichPresence",[]];
 };
 
 //кодирует русские символы из utf8 в win-1252
+decl(string(string))
 discrpc_encodeRu = {
 	private _ruStr = _this;
 	forceUnicode 1;
@@ -129,6 +138,7 @@ discrpc_encodeRu = {
 };
 
 #ifdef USE_LOCALES
+decl(any(any))
 discrpc_getLetterByLocale = {
 	private _l = _this;
 	//private _langs = ["Russian","English"];
@@ -143,6 +153,7 @@ discrpc_getLetterByLocale = {
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 //установить статус клиента. Доступные статусы ingame,lobby
+decl(void(string))
 discrpc_setStatus = {
 	params ["_strStatus"];
 
@@ -162,6 +173,7 @@ discrpc_setStatus = {
 };
 
 //вызывается когда клиент подключился
+decl(void())
 discrpc_setIngameStatus = {
 	private _randState = pick ["Готовится к худшему","Пожирает мельтешат",""];
 	[
@@ -171,6 +183,7 @@ discrpc_setIngameStatus = {
 };
 
 //вызывается когда клиент в лобби
+decl(void(string))
 discrpc_setInLobbyStatus = {
 	params [["_mainRole",""]];
 
@@ -189,6 +202,7 @@ discrpc_setInLobbyStatus = {
 };
 
 //вызывается когда клиент в игре
+decl(void())
 discrpc_setPlayingStatus = {
 	//params ["_charName"];
 	
@@ -206,6 +220,7 @@ discrpc_setPlayingStatus = {
 };
 
 if (is3DEN) then {
+	decl(void())
 	discrpc_editor_init = {
 		initApplication();
 
@@ -222,6 +237,7 @@ if (is3DEN) then {
 		_settings call discrpc_send;
 	};
 
+	decl(void(string))
 	discrpc_editor_updateState = {
 		[
 			["UpdateState",_this]
