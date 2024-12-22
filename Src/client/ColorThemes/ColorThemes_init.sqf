@@ -6,10 +6,17 @@
 #include <..\..\host\engine.hpp>
 #include <..\WidgetSystem\widgets.hpp>
 
+namespace(ColorThemes,ct_)
 
+macro_const(ct_default_color)
 #define defVec4 vec4(1,1,1,1)
+macro_const(ct_default_colorHtml)
 #define defHTML "ffffff"
 
+decl(map)
+ct_internal_currentRegTheme = createHashMap;
+
+decl(map)
 ct_map_colors = createHashMapFromArray [
 	//common widgets
 	["back",defVec4], //Задний фон
@@ -51,12 +58,13 @@ ct_map_colors = createHashMapFromArray [
 
 	["endTheme",defVec4]
 ];
-
+decl(map)
 ct_map_defaultColors = +ct_map_colors;
 
 //Лист с темами
+decl(map)
 ct_map_themes = createHashMap;
-
+decl(void(string))
 ct_load = {
 	params ["_themeName"];
 
@@ -75,11 +83,13 @@ ct_load = {
 };
 
 //Восстанавливает тему по-умолчанию
+decl(void())
 ct_reset = {
 	NOTIMPLEMENTED(ct::reset);
 };
 
 //Применяет установленную тему из ct_map_colors
+decl(void())
 ct_applyTheme = {
 
 	private _nextFrameCall = false;
@@ -110,7 +120,7 @@ ct_applyTheme = {
 		call _codeCall;
 	};
 };
-
+decl(any(string;string;int))
 ct_internal_copy = {
 	params ["_name","_key","_line"];
  	if !(_name in ct_map_themes) exitWith {
@@ -136,6 +146,7 @@ ct_internal_copy = {
 } foreach ct_map_themes;
 
 //Возвращает цвет с карты
+decl(any(string))
 ct_getValue = {
 	params ["_name"];
 	ct_map_colors getOrDefault [toLower _name,[1,0,0,1]];
@@ -143,6 +154,7 @@ ct_getValue = {
 
 //Отладочная функция отборажения цветов
 #ifdef DEBUG
+decl(void(string))
 ct_debug_viewColors = {
 	params ["_themeName"];
 
