@@ -22,7 +22,7 @@ _text = [_gui,TEXT,[0,0,100,100],_ctg] call createWidget;
 clistat_widgets = [_ctg,_back,_text];
 inline_macro
 #define colortext(clr,txt) "<t color='#"+'clr'+"'>"+txt+"</t>"
-delc(float[])
+decl(float[])
 clistat_internal_allch_buffer = [0,0,0];
 decl(float)
 clistat_internal_allch_buffer_frame = 0;
