@@ -27,7 +27,7 @@ lobbyOpen = {
 		};
 		call inventory_resetPositionHandWidgets;call closeInventory_handle;
 	};
-	if (isCraftOpen) then {call craft_close};
+	if (craft_isMenuOpen) then {call craft_close};
 	if (esc_isMenuOpened) then {call esc_closeMenu};
 	if (nd_isOpenDisplay) then {call nd_onClose};
 	if (chat_isHistoryOpen) then {chat_isHistoryOpen = false; call displayClose};

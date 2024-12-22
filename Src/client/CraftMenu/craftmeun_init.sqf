@@ -30,7 +30,7 @@
 
 craft_cxtRpcSourcePtr = "";
 
-isCraftOpen = false;
+craft_isMenuOpen = false;
 
 craft_widgets = [widgetNull,widgetNull,widgetNull];
 craft_isActiveCraftButton = false;
@@ -66,7 +66,7 @@ craft_open = {
 	
 	private _d = call displayOpen;
 	
-	isCraftOpen = true;
+	craft_isMenuOpen = true;
 	craft_isActiveCraftButton = true;
 	craft_lastPressedRecipeID = -1;
 	craft_loadCateg_isLoading = false;
@@ -275,7 +275,7 @@ craft_onPressCraft = {
 };
 
 craft_onClose = {
-	isCraftOpen = false;
+	craft_isMenuOpen = false;
 };
 
 craft_close = {

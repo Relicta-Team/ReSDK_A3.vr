@@ -17,7 +17,7 @@ _openCraftMenu = {
 _onCraftLoadCateg = {
 	params ["_categ","_list"];
 	
-	if (!isCraftOpen) exitWith {};
+	if (!craft_isMenuOpen) exitWith {};
 	
 	if equalTypes(_categ,"") exitWith {
 		craft_loadCateg_isLoading = false;
