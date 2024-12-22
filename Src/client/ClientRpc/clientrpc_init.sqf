@@ -7,7 +7,7 @@
 
 namespace(ClientRpc,client_)
 
-macro_const(client_log_rpc)
+macro_def(client_log_rpc)
 #define log_client_rpc
 
 #ifndef ENABLE_RPCLOG_CONSOLE_CLIENT
@@ -19,6 +19,7 @@ macro_const(client_log_rpc)
 #endif
 
 #ifdef log_client_rpc
+	inline_macro
 	#define rpc_log(event,args) 'debug_console' callExtension format['[NET::LOG::CLIENT]:    <%1> send %3 bytes to SERVER with %2',event,args,args call oop_getTypeSizeFull]
 	#define rpc_simple(data) 'debug_console' callExtension format['[NET::LOG]:    %1',data]
 #else
@@ -61,13 +62,15 @@ client_sendToServer = {
 	#ifdef ENABLE_LAG_NETWORK
 		private _c = {
 			params ["_eventName","_eventargs"];
-	#endif
 	
-	rpc_log(_eventName,_eventargs);
+			rpc_log(_eventName,_eventargs);
 	
-	["server_" + _eventName, _eventargs] call CBA_fnc_serverEvent;
+			["server_" + _eventName, _eventargs] call CBA_fnc_serverEvent;
 
-	#ifdef ENABLE_LAG_NETWORK
 		}; invokeAfterDelayParams(_c,__LAG_NETWORK_GET_LAG__,_this)
+	#else
+		rpc_log(_eventName,_eventargs);
+	
+		["server_" + _eventName, _eventargs] call CBA_fnc_serverEvent;
 	#endif
 };

@@ -115,5 +115,16 @@
 */
 #define macro_func(name,signature)
 
+/* Macro definition foor conditional logic
+	!Пока неизвестно понадобится ли этот макрос. Поэтому пока считаем что это указатель макроконстант, проверяемых в ifdef-ах!
+	macro_def(moduleName_varname)
+	#define TEST_VAR
+
+	->>>
+	
+*/
+#define macro_def(name)
+
+
 //pragma for ignore file
 #define ignore_this_file
