@@ -3,9 +3,13 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
+
+namespace(InteractMenu,interactMenu_)
+
 #include <interactMenu.hpp>
 
-
+decl(void())
 interactMenu_onUpdateSkills = {
 
 	if (!interact_isOpenMousemode) exitWith {};
@@ -31,6 +35,7 @@ interactMenu_onUpdateSkills = {
 };
 
 //Запрос на получение воспоминаний
+decl(void(int))
 interactMenu_getMemories = {
 	params ["_mode"];
 	if (["im_getmemories",1] call input_spamProtect) exitWith {};
@@ -44,6 +49,7 @@ interactMenu_getMemories = {
 ================================================================================
 */
 
+decl(void(int;int))
 interactMenu_setSelection = {
 	params ["_id","_button"];
 	//Запрещённое действие при стане
@@ -57,6 +63,7 @@ interactMenu_setSelection = {
 	rpcSendToServer("onUpdateSelection",[player arg _id]);
 };
 
+decl(void())
 interactMenu_syncCurSelection = {
 	if (!interact_isOpenMousemode) exitWith {};
 	private _sel = cd_curSelection;
@@ -81,6 +88,7 @@ interactMenu_syncCurSelection = {
 	};
 };
 
+decl(void(widget;int))
 interactMenu_onPressSpecAct = {
 	params ["_ct","_butt"];
 

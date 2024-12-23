@@ -7,9 +7,16 @@
 #include "..\WidgetSystem\widgets.hpp"
 #include "..\Inventory\helpers.hpp"
 
+#include "..\..\host\lang.hpp"
+
+namespace(InteractVerbs,verb_;interact_)
+
+macro_const(verb_timeFadeoutVerbMenu)
 #define TIME_FADEOUT_VERBMENU 0.15
+macro_const(verb_timeFadeinVerbMenu)
 #define TIME_FADEIN_VERBMENU 0.15
 
+decl(void(any;any[];any))
 interact_onLoadVerbs = {
 
 	params ["_targetName","_verbList","_targetHash"];
@@ -67,6 +74,7 @@ interact_onLoadVerbs = {
 }; rpcAdd("loadVerbs",interact_onLoadVerbs);
 
 //Проверка бинда и возвращение доп постфикса
+decl(string(any))
 verb_internal_checkBind = {
 	params ["_intorstr"];
 	if equalTypes(_intorstr,0) then {
@@ -79,6 +87,7 @@ verb_internal_checkBind = {
 	};
 };
 
+decl(string(any))
 verb_translate = {
 	private _verb = _this;
 
@@ -91,6 +100,7 @@ verb_translate = {
 	((verb_list get _probClass) select 0)+([_probClass] call verb_internal_checkBind);
 };
 
+decl(void(any[];any[];any;bool))
 verb_loadMenu = {
 	params ["_translateList","_verbList","_targetName",["_isInInventory",false]];
 
@@ -179,6 +189,7 @@ verb_loadMenu = {
 };
 
 //Событие которое возникает при нажатии на кнопку действия
+decl(void(widget))
 verb_onPickVerb = {
 	params ["_control"];
 	
@@ -187,6 +198,7 @@ verb_onPickVerb = {
 	#else
 		#define ON_FINALIZE(reason) nextFrame(verb_unloadMenu)
 	#endif*/
+	inline_macro
 	#define ON_FINALIZE(reason) nextFrame(verb_unloadMenu)
 
 	_verbId = _control getvariable ["verbId",-1];
@@ -220,6 +232,7 @@ verb_onPickVerb = {
 	ON_FINALIZE("no errors")
 };
 
+decl(void())
 verb_resetDataForND = {
 	verb_isMenuLoaded = false;
 	verb_widgets set [0,widgetNull];
@@ -229,6 +242,7 @@ verb_resetDataForND = {
 	inventory_supressInventoryOpen = false;
 };
 
+decl(void())
 verb_unloadMenu = {
 	verb_isMenuLoaded = false;
 	if (inventory_supressInventoryOpen) then {
@@ -253,6 +267,7 @@ verb_unloadMenu = {
 
 };
 
+decl(void(bool;bool))
 verb_setHideInventory = {
 	params ["_mode",["_closeFlag",false]];
 	
@@ -296,17 +311,24 @@ verb_setHideInventory = {
 	};
 };
 
-isInsideVerbMenu = {
+decl(widget())
+verb_isInsideVerbMenu = {
 	(verb_widgets select 0) call isMouseInsideWidget;
 };
 
+decl(widget[])
 verb_widgets = [];
+decl(vector2)
 verb_lastclickedpos = [0,0];
+decl(bool)
 verb_isMenuLoaded = false;
 
 // verb_list = []; //не разкоммен
 
+decl(any[])
 verb_lastTargetObjectData = [objnull,[0,0,0]]; //колбэк дата последнего захваченного объекта
+
+decl(any)
 verb_lastCheckedObjectData = VERB_LASTCHECKEDOBJECTDATA_DEFAULT; //[object reference,interact bias pos (use (object modeltoworld pos)),ismob]
 
 

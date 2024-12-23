@@ -3,44 +3,68 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
+
+namespace(InteractProgress,interact_progress_)
 
 //#define PROGRESS_DEBUG
-
+macro_const(interact_progress_sizeProgress)
 #define SIZEPROG 15
+macro_const(interact_progress_onePercentSize)
 #define ONEPERCENTSIZE 10
+
+macro_const(interact_progress_progressRadiusPercent)
 #define PROGRADIUSPERCENT 40
 
+macro_const(interact_progress_maxDistanceFalldown)
 #define PROGRESS_MAX_DISTANCE_FALLDOWN 0.2
+macro_const(interact_progress_distanceTargetFallDown)
 #define PROGRESS_DISTANCE_TARGET_FALLDOWN 0.01
 
-
+macro_const(interact_progress_timeToOutfadeProgress)
 #define TIME_TO_OUTFADE_PROGRESS 0.000006
+macro_const(interact_progress_timeToSuccessProgress)
 #define TIME_TO_SUCCESS_PROGRESS 0.00003
+macro_const(interact_progress_timeToAbortProgress)
 #define TIME_TO_ABORT_PROGRESS 0.00001
 
+macro_const(interact_progress_roundStep)
 #define ROUNDSTEP 10
+macro_func(interact_progress_getRoundCount,int())
 #define ROUNDCOUNT (360 / ROUNDSTEP)
 
+macro_func(interact_progress_override_setpos_precent_w,void(float))
 #define override_setpos_precent_w(h_value) transformSizeByAR(h_value)
 
 #ifndef DEBUG
 	#undef PROGRESS_DEBUG
 #endif
 
+decl(bool)
 interact_progress_hasProcessed = false;
 //interact_progress_curItmIndex = 0;
+	decl(int)
 	interact_progress_countItms = 0; //use inline interact_progress_countItms
 	//#define interact_progress_countItms 90
+decl(int)
 interact_progress_handleUpdate = -1;
 //interact_progress_lastDelta = 0;
+decl(float)
 interact_progress_tick = 0;
+decl(any[])
 interact_progress_pData = ["",objnull]; //ref to player, and ptr to target
+decl(vector3)
 interact_progress_lastTargetPos = vec3(0,0,0);
+decl(vector3)
 interact_progress_lastPlayerPos = vec3(0,0,0);
+decl(vector3)
 interact_progress_lastScreenPoint = vec3(0,0,0);
 //interact_progress_lastPlayerDir = 0;
+	macro_const(interact_progress_maxAllowDistanceCamOffset)
 	#define MAX_ALLOW_DISTANCE_CAM_OFFSET 0.01
+	decl(vector3)
 	interact_progress_renderPos = vec3(0,0,0);
+decl(float)
 interact_progress_lastProgressType = -1;
 
 /*
@@ -51,7 +75,8 @@ interact_progress_lastProgressType = -1;
 */
 
 //Запуск процедуры прогресса
-_startProg = {
+decl(void(any;any;int;float))
+interact_progress_startProg = {
 	params ["_ptrPlayer","_target","_checkType","_duration"];
 
 	/*
@@ -83,12 +108,13 @@ _startProg = {
 
 	[_duration] call interact_progress_start;
 
-}; rpcAdd("startProg",_startProg);
+}; rpcAdd("startProg",interact_progress_startProg);
 
 //Вызов отмены прогресса
-_cnclprg = {
+decl(void())
+interact_progress_cancelProgress = {
 	[false] call interact_progress_stop;
-}; rpcAdd("cnclprg",_cnclprg);
+}; rpcAdd("cnclprg",interact_progress_cancelProgress);
 
 //Проверка активности для определенных типов прогресса
 /*interact_progress_checkActivity = {
@@ -96,6 +122,7 @@ _cnclprg = {
 };*/
 
 //if return true then falldown
+decl((()=>bool)[])
 interact_progress_checkDelegates = [
 	{
 		//INTERACT_PROGRESS_TYPE_FULL
@@ -117,6 +144,7 @@ interact_progress_checkDelegates = [
 
 
 //Запуск функции прогресса
+decl(void(float))
 interact_progress_start = {
 	params ["_duration"];
 
@@ -138,6 +166,7 @@ interact_progress_start = {
 	#endif
 };
 
+decl(void())
 interact_progress_onUpdate = {
 	if (!interact_progress_hasProcessed) exitWith {};
 
@@ -167,12 +196,14 @@ interact_progress_onUpdate = {
 };
 
 //Прогресс выполнен
+decl(void())
 interact_progress_success = {
 	[false,TIME_TO_SUCCESS_PROGRESS] call interact_progress_stop;
 	rpcSendToServer("stprg",vec2(interact_progress_pData select 0,true));
 };
 
 //Остановка прогресса
+decl(void(bool;float))
 interact_progress_stop = {
 	params [["_sendToServerCancellationToken",false],["_fadeValue",0]];
 
@@ -192,14 +223,19 @@ interact_progress_stop = {
 };
 
 //widget components and initializers
+decl(vector4)
 interact_progress_startColor = [0,0.427,0.298,1];
+decl(vector4)
 interact_progress_endColor = [0.11,0.161,0.043,1];
+decl(widget[])
 interact_progress_widgets = [widgetNull,widgetNull]; //ctg,text
+decl(widget[])
 interact_progress_allItems = [];
 
 
 
 //initializer progress
+decl(void())
 interact_progress_init = {
 	private _picture = PATH_PICTURE("progress\round.paa");
 	private _gui = getGUI;
@@ -245,6 +281,7 @@ interact_progress_init = {
 	interact_progress_handleUpdate = startUpdate(interact_progress_onUpdate,0);
 };
 
+decl(void())
 interact_progress_applyColorTheme = {
 	if !isNullVar(__supressReloadProgColors__) then {
 		interact_progress_startColor = ["prog_start"] call ct_getValue;

@@ -612,7 +612,7 @@ interact_onMouseButtonUp = {
 	if (call smd_isStunned) exitWith {};
 
 	if verb_isMenuLoaded exitWith {
-		if (_key == MOUSE_RIGHT && !(call isInsideVerbMenu)) then {
+		if (_key == MOUSE_RIGHT && !(call verb_isInsideVerbMenu)) then {
 			call verb_unloadMenu;
 		};
 	};

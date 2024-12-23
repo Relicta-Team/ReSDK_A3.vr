@@ -11,32 +11,46 @@
 #include "interactMenu.hpp"
 #include <..\ClientData\ClientData.hpp>
 
+namespace(InteractMenu,interactMenu_)
 
-
+macro_def(interactMenu_debug_use_borders)
 #define DEBUG_USE_BORDERS
 
+macro_func(interactMenu_debug_colorize,void(widget))
 #define debug_colorize(wid) wid setBackgroundColor [random 1,random 1,random 1,1]
+macro_func(interactMenu_debug_colorizeButton,void(widget))
 #define debug_colorizeButton(wid) wid setBackgroundColor  [random 1,random 1,random 1,1]
 
+macro_func(interactMenu_colorizeCategory,void(widget))
 #define colorizeCategory(wid) wid setBackgroundColor [.3,.3,.3,.7]
+macro_func(interactMenu_colorizeButton,void(widget))
 #define colorizeButton(wid) wid setBackgroundColor [.1,.1,.1,.7]
 
 //setting text for attr (skill)
+macro_func(interactMenu_setButtonText,void(widget,string))
 #define setButtonText(wid,text) wid ctrlSetStructuredText (parseText format["<t size='0.8' align='center' valign='middle'>%1</t>" arg text])
+macro_func(interactMenu_setCategText,void(widget,string))
 #define setCategText(wid,text) wid ctrlSetStructuredText (parseText format ["<t size='0.8' align='center' valign='middle'>%1</t>" arg text])
+macro_func(interactMenu_setAttrText,void(widget,string,string))
 #define setAttrText(wid,text,addit) setText(wid,format["<t size='1.2'>%1</t><t size='0.8'>%2</t>" arg text arg addit])
+macro_func(interactMenu_setTextBase,void(widget,string))
 #define setText(wid,text) [wid,text] call widgetSetText
 
+macro_const(interactMenu_view_widthAttr)
 #define WIDTH_ATTR 30
+macro_const(interactMenu_view_heightCategory)
 #define HEIGHT_CATEGORY 2.5
+macro_const(interactMenu_view_sizeIntentButton)
 #define SIZE_INTENT_BUTTON 10
+macro_const(interactMenu_view_stdBiasY)
 #define STD_BIAS_Y 1.5
+macro_const(interactMenu_view_stdBiasX)
 #define STD_BIAS_X 1.5
 
 #include "interactMenu_defines.sqf"
 #include "interactMenu_functions.sqf"
 
-
+decl(void())
 interactMenu_load = {
 
 	private _d = getDisplay;
@@ -139,7 +153,7 @@ interactMenu_load = {
 	/*private _interModeX = _int_but_w * 3 + STD_BIAS_X * 4;
 	_butt = createButton(vec4(_interModeX,_ypos,100 - _interModeX - STD_BIAS_X,SIZE_INTENT_BUTTON));
 	[_butt,CALLING_IN_DISPLAY_MODE,true] call interactMenu_setInteractionSrc;
-	//setButtonText(_butt,sbr + "Я/Мир" + sbr + format["<img size='1.5' image='%1'/>" arg INT_PATH(selfworld)]);
+	//setButtonText(_butt,sbr + "Я/Мир" + sbr + format["<img size='1.5' image='%1'/>" arg INT_PATH("selfworld")]);
 	colorizeButton(_butt);
 	_butt ctrlAddEventHandler ["MouseButtonUp",{
 		params ["_wid","_button"];
@@ -156,12 +170,15 @@ interactMenu_load = {
 
 	MOD(_ypos,+_height + STD_BIAS_Y);
 
+	macro_const(interactMenu_view_maxSelectionsToDown)
 	#define MAX_SELECTIONS_TODOWN 6
 
+	inline_macro
 	#define allocSelectionId(wid,sel) wid setvariable ['id',sel]; \
 	wid ctrlAddEventHandler ["MouseButtonUp",{params ["_w","_button"]; \
 	[_w getVariable 'id',_button] call interactMenu_setSelection}];
 
+	inline_macro
 	#define allocSelectionId_limb(wid,sel) allocSelectionId(wid,sel); \
 	INC(_counter); interactMenu_selectionWidgets set [MAX_SELECTIONS_TODOWN + _counter,_butt];
 
@@ -242,6 +259,7 @@ interactMenu_load = {
 	call interactMenu_onUpdateSkills;
 };
 
+decl(void(display;float;float))
 interactMenu_onMouseMove = {
 	params ["_display", "_xPos", "_yPos"];
 
@@ -261,6 +279,7 @@ interactMenu_onMouseMove = {
 	};
 };
 
+decl(void())
 interactMenu_unloadMenu = {
 	interactMenu_isLoadedMenu = false;
 	_ctg = getDisplay getVariable "interactMenuCtg";
@@ -269,6 +288,7 @@ interactMenu_unloadMenu = {
 	[_ctg,[100,0],TIME_PREPARE_SLOTS] call widgetSetPositionOnly;
 };
 
+decl(void(bool))
 interactMenu_syncSpecialActions = {
 	params [["_isInit",true]];
 	
@@ -287,8 +307,11 @@ interactMenu_syncSpecialActions = {
 	};
 	
 	if (_isInit) then {
+		macro_const(interactMenu_view_specact_bias_x)
 		#define _specact_bias_x 5
+		macro_const(interactMenu_view_specact_bias_y)
 		#define _specact_bias_y 2
+		macro_const(interactMenu_view_specact_size_h)
 		#define _specact_size_h 15
 		
 		private _refSpec = interactMenu_specialActions;
