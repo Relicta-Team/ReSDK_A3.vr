@@ -91,6 +91,12 @@ class(Umivalnik) extends(Sink)
 	var(name,"Умывальник");
 endclass
 
+class(Bath) extends(Sink)
+	var(model,"ca\structures\furniture\bathroom\bath\bath.p3d");
+	var(name,"Ванна");
+	var(desc,"Такое только у настоящих богачей!")
+endclass
+
 editor_attribute("EditorGenerated")
 class(WoodenSmallShelf) extends(ShelfBase)
 	var(model,"ml\ml_object_new\shabbat\bar_stoika.p3d");
