@@ -348,6 +348,7 @@ class(SmokingPipe) extends(Sigarette)
 	var(desc,"Лучше для курения не придумешь!");
 	var(model,"relicta_models\models\interier\props\treasure\pipe\pipe.p3d");
 	getter_func(fuelEmptyModel,"relicta_models\models\interier\props\treasure\pipe\pipe.p3d");
+	var(fuelLeft,60 * 15);
 endclass
 
 class(SmokingPipeDisabled) extends(SmokingPipe)
