@@ -8,7 +8,7 @@ class EditorData
 	toggles=42;
 	class ItemIDProvider
 	{
-		nextID=6485;
+		nextID=6494;
 	};
 	class LayerIndexProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3810.4697,13.603003,4063.3757};
-		dir[]={0.95435464,-0.28814739,-0.080218777};
-		up[]={0.28721604,0.95753449,-0.024142586};
-		aside[]={-0.083766244,7.7469304e-07,-0.99658096};
+		pos[]={4008.5872,18.911997,3971.4915};
+		dir[]={0.53482509,-0.098320194,0.83937585};
+		up[]={0.052908767,0.99509484,0.083034873};
+		aside[]={0.84342366,-1.4161924e-07,-0.5374105};
 	};
 };
 binarizationWanted=0;
@@ -24726,7 +24726,7 @@ class Mission
 			name="Структуры";
 			class Entities
 			{
-				items=118;
+				items=116;
 				class Item0
 				{
 					dataType="Object";
@@ -26324,25 +26324,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3845.375,7.1437287,4054.125};
-						angles[]={0,4.7123914,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_01_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4228;
-					type="Land_BrickWall_01_l_5m_F";
-					atlOffset=1.375;
-				};
-				class Item98
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3849.5,7.3937287,4050.25};
+						position[]={3849.084,7.3937287,4049.8291};
 						angles[]={0,2.3841858e-07,0};
 					};
 					side="Empty";
@@ -26355,25 +26337,7 @@ class Mission
 					type="Land_BrickWall_01_l_5m_F";
 					atlOffset=1.625;
 				};
-				class Item99
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3849.5,7.1437287,4051.125};
-						angles[]={0,3.1416049,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_01_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4260;
-					type="Land_BrickWall_01_l_5m_F";
-					atlOffset=1.375;
-				};
-				class Item100
+				class Item98
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26391,7 +26355,7 @@ class Mission
 					type="Land_BrickWall_01_l_corner_F";
 					atlOffset=1.875;
 				};
-				class Item101
+				class Item99
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26408,7 +26372,7 @@ class Mission
 					type="Land_BrickWall_02_l_corner_v2_F";
 					atlOffset=1;
 				};
-				class Item102
+				class Item100
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26420,13 +26384,13 @@ class Mission
 					flags=1;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 					};
 					id=4254;
 					type="Land_BrickWall_02_l_5m_F";
 					atlOffset=1;
 				};
-				class Item103
+				class Item101
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26444,24 +26408,24 @@ class Mission
 					type="Land_BrickWall_03_l_gate_F";
 					atlOffset=1.7500005;
 				};
-				class Item104
+				class Item102
 				{
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3851.75,6.86695,4059};
+						position[]={3852.3003,6.8669491,4050.3506};
 					};
 					side="Empty";
 					flags=1;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 					};
 					id=4263;
 					type="Land_BrickWall_03_l_pole_F";
-					atlOffset=1.125;
+					atlOffset=1.1249995;
 				};
-				class Item105
+				class Item103
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26478,7 +26442,7 @@ class Mission
 					type="Land_BrickWall_03_l_5m_v1_F";
 					atlOffset=1;
 				};
-				class Item106
+				class Item104
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26495,7 +26459,7 @@ class Mission
 					type="Land_BrickWall_03_l_5m_v1_d_F";
 					atlOffset=1;
 				};
-				class Item107
+				class Item105
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26513,7 +26477,7 @@ class Mission
 					type="Land_BrickWall_03_l_5m_v2_d_F";
 					atlOffset=1;
 				};
-				class Item108
+				class Item106
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26531,7 +26495,7 @@ class Mission
 					type="Land_BrickWall_04_l_5m_d_F";
 					atlOffset=1;
 				};
-				class Item109
+				class Item107
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26548,7 +26512,7 @@ class Mission
 					type="Land_BrickWall_04_l_5m_old_F";
 					atlOffset=1.625;
 				};
-				class Item110
+				class Item108
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26565,7 +26529,7 @@ class Mission
 					type="Land_WallCity_01_4m_plain_whiteblue_F";
 					atlOffset=1;
 				};
-				class Item111
+				class Item109
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26582,7 +26546,7 @@ class Mission
 					type="Land_BrickWall_01_l_pole_F";
 					atlOffset=1.125;
 				};
-				class Item112
+				class Item110
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26598,7 +26562,7 @@ class Mission
 					id=4571;
 					type="land_woodbri";
 				};
-				class Item113
+				class Item111
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26616,7 +26580,7 @@ class Mission
 					type="proigr";
 					atlOffset=0.12717152;
 				};
-				class Item114
+				class Item112
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26634,7 +26598,7 @@ class Mission
 					type="kartina";
 					atlOffset=0.875;
 				};
-				class Item115
+				class Item113
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26652,7 +26616,7 @@ class Mission
 					type="picture_115";
 					atlOffset=1.1599855;
 				};
-				class Item116
+				class Item114
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26669,7 +26633,7 @@ class Mission
 					id=6458;
 					type="koverchik";
 				};
-				class Item117
+				class Item115
 				{
 					dataType="Object";
 					class PositionInfo
@@ -26689,7 +26653,7 @@ class Mission
 				};
 			};
 			id=3861;
-			atlOffset=0.076136589;
+			atlOffset=9.2421322;
 		};
 		class Item8
 		{
@@ -26882,7 +26846,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=4238;
 							type="Land_BrickWall_03_l_pole_F";
@@ -26899,7 +26863,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=4268;
 							type="Land_BrickWall_03_l_pole_F";
@@ -26916,7 +26880,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=4272;
 							type="Land_BrickWall_03_l_pole_F";
@@ -26933,7 +26897,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=4275;
 							type="Land_BrickWall_03_l_pole_F";
@@ -26950,7 +26914,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=4278;
 							type="Land_BrickWall_03_l_pole_F";
@@ -26967,7 +26931,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=4305;
 							type="Land_BrickWall_03_l_pole_F";
@@ -26985,7 +26949,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickWall""]]}";
 							};
 							id=4250;
 							type="Land_BrickWall_04_l_5m_F";
@@ -27002,7 +26966,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickWall""]]}";
 							};
 							id=4266;
 							type="Land_BrickWall_04_l_5m_F";
@@ -27020,7 +26984,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickWall""]]}";
 							};
 							id=4269;
 							type="Land_BrickWall_04_l_5m_F";
@@ -27037,7 +27001,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickWall""]]}";
 							};
 							id=4273;
 							type="Land_BrickWall_04_l_5m_F";
@@ -27055,7 +27019,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickWall""]]}";
 							};
 							id=4274;
 							type="Land_BrickWall_04_l_5m_F";
@@ -27554,7 +27518,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Фундамент";
-					state=1;
 					class Entities
 					{
 						items=8;
@@ -27570,7 +27533,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4315;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27588,7 +27551,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4317;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27605,7 +27568,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4318;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27622,7 +27585,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4319;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27640,7 +27603,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4320;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27658,7 +27621,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4321;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27676,7 +27639,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4322;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27694,7 +27657,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4323;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27702,7 +27665,7 @@ class Mission
 						};
 					};
 					id=4313;
-					atlOffset=10.580257;
+					atlOffset=11.473431;
 				};
 				class Item4
 				{
@@ -29693,7 +29656,7 @@ class Mission
 				};
 			};
 			id=4217;
-			atlOffset=0.11621284;
+			atlOffset=0.11907387;
 		};
 		class Item9
 		{
@@ -32869,7 +32832,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=5701;
 							type="Land_BrickWall_03_l_pole_F";

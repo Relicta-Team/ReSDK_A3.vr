@@ -99,3 +99,7 @@ editor_attribute("EditorGenerated")
 class(MediumLightConcretePole) extends(ConcreteLongPole)
 	var(model,"a3\structures_f_argo\walls\city\wallcity_01_pillar_grey_f.p3d");
 endclass
+
+class(BrickPole) extends(SmallPole)
+	var(model,"a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d");
+endclass

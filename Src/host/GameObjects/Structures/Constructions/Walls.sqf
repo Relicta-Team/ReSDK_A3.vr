@@ -62,6 +62,10 @@ class(MediumLightWall) extends(SmallWall)
 	var(name,"Стена");
 endclass
 
+class(MediumLightWall1) extends(MediumLightWall)
+	var(model,"a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d");
+endclass
+
 editor_attribute("EditorGenerated")
 class(MediumRuinedLightFrame) extends(MediumLightWall)
 	var(model,"a3\structures_f_argo\walls\city\wallcity_01_4m_plain_dmg_grey_f.p3d");
@@ -196,6 +200,12 @@ editor_attribute("EditorGenerated")
 class(BrickThinWallSmall) extends(SmallWall)
 	var(model,"csa_constr\csa_obj\kr_stena_m.p3d");
 	var(name,"Кирпичная стена");
+endclass
+
+class(BrickWall) extends(BrickThinWallSmall)
+	var(name,"Красивая кирпичная стена");
+	var(desc,"Очень приятно выглядит");
+	var(model,"a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_f.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
