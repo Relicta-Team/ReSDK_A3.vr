@@ -135,6 +135,10 @@ class(LuxuryClayWall) extends(SmallWall)
 	var(material,"MatDirt");
 endclass
 
+class(RuinedLuxuryClayWall) extends(LuxuryClayWall)
+	var(model,"ca\structures_e\wall\wall_l\wall_l2_5m_end_ep1.p3d");
+endclass
+
 editor_attribute("EditorGenerated")
 class(SmallConcreteArch) extends(SmallWall)
 	var(model,"a3\structures_f\walls\cncshelter_f.p3d");

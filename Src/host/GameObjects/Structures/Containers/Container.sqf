@@ -65,6 +65,20 @@ class(InfoBoard) extends(KeyHolder)
 	
 endclass
 
+class(Hanger) extends(InfoBoard)
+	var(name,"Вешалка");
+	var(model,"ml_shabut\exodusss\veshalochechka.p3d");
+	var(material,"MatMetal");
+
+	func(canEmplaceItem)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		if (isTypeOf(_obj,Cloth)) exitWith {true};
+		super()
+	};
+
+endclass	
+
 
 
 

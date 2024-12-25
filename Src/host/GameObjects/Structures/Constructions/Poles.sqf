@@ -36,6 +36,10 @@ class(WoodPole1) extends(WoodPole)
 	var(model,"a3\structures_f_exp\walls\polewalls\polewall_01_pole_f.p3d");
 endclass
 
+class(TimberLog) extends(WoodPole)
+	var(model,"a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d");
+endclass
+
 editor_attribute("EditorGenerated")
 class(WoodCross) extends(SmallPole)
 	var(name,"Крест");
