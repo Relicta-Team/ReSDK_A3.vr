@@ -28,6 +28,10 @@ class(SmallTileWall) extends(SmallWall)
 	var(model,"ml_shabut\sbs\plitkastenka2.p3d");
 endclass
 
+class(SmallTileWall1) extends(SmallTileWall)
+	var(model,"ml_shabut\sbs\plitkastenka.p3d");
+endclass
+
 editor_attribute("EditorGenerated")
 class(WhiteBrickWall) extends(SmallWall)
 	var(model,"a3\structures_f\walls\city2_4m_f.p3d");
@@ -242,6 +246,10 @@ endclass
 editor_attribute("EditorGenerated")
 class(BrickThinWallDoorwayWindow) extends(BrickThinWallDoorway)
 	var(model,"csa_constr\csa_obj\kr_stena_do1.p3d");
+endclass
+
+class(BrickThinWallDoorwayBig) extends(BrickThinWallDoorway)
+	var(model,"csa_constr\csa_obj\kr_stena_3d.p3d");
 endclass
 
 editor_attribute("EditorGenerated")

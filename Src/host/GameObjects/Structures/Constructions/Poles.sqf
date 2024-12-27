@@ -103,3 +103,12 @@ endclass
 class(BrickPole) extends(SmallPole)
 	var(model,"a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d");
 endclass
+
+class(BrickPole1) extends(BrickPole)
+	var(model,"a3\structures_f_enoch\walls\brick\brickwall_04_l_pole_f.p3d");
+endclass
+
+class(BrickPole2) extends(BrickPole)
+	var(model,"a3\structures_f_enoch\walls\brick\brickwall_01_l_pole_f.p3d");
+endclass
+
