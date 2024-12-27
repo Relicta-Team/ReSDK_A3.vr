@@ -38,6 +38,7 @@ endclass
 
 class(Sofa01) extends(SofaBase)
 	var(model,"a3\props_f_orange\furniture\sofa_01_f.p3d");
+	getter_func(getChairOffsetPos,[[-0.65 arg 0.1 arg -0.5] arg [0 arg 0.1 arg -0.5] arg [0.65 arg 0.1 arg -0.5]]);
 endclass
 
 class(CoolSofa) extends(SofaBase)

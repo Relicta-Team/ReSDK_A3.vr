@@ -1,0 +1,78 @@
+Presents:
+  name: Подарки
+  health: {min: 70%, max: 90%}
+  quality: {min: 40%, max: 60%}
+  pass_count: 1
+
+  items:
+    Suitcase1:
+      prob: 100%
+    Sledgehammer:
+      prob: 50%
+    Sledgehammer1:
+      prob: 50%
+    Pie:
+      prob: 100%
+    Scepter:
+      prob: 100%
+    DaggerKnife:
+      prob: 33%
+    LittleKnife:
+      prob: 33%
+    CustomKnife:
+      prob: 33%
+    HalfHandedSword:
+      prob: 33%
+    ShortSword:
+      prob: 33%
+    TwoHandedSword:
+      prob: 33%
+    Documents:
+      prob: 100%
+    DBShotgun:
+      prob: 100%
+    PistolHandmade:
+      prob: 25%
+    Revolver:
+      prob: 25%
+    RifleFinisher:
+      prob: 25%
+    Shotgun:
+      prob: 25%
+    Teapot:
+      prob: 100%
+    FryingPan:
+      prob: 100%
+    GlassGoblet:
+      prob: 100%
+      count: 
+        min: 2 
+        max: 3
+    RadioBaikal:
+      prob: 100%
+      count: 2
+    Hat:
+      prob: 100%
+    Hat(1-2):
+      prob: 50%
+    HatUshankaUp:
+      prob: 25%
+    HatUshankaUp(1-3):
+      prob: 25%
+    WoolCoat:
+      prob: 100%
+    SigaretteDisabled:
+      prob: 50%
+      count:
+        min: 4
+        max: 6
+    SamokrutkaDisabled:
+      prob: 50%
+      count:
+        min: 4
+        max: 6
+    Book:
+      name: Увлекательная книга
+      prob: 100%
+    Crown(1-2):
+      prob: 30%

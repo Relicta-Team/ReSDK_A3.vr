@@ -192,3 +192,9 @@ class(SmallStoveGrill) extends(ILightibleStruct)
 		};
 	};
 endclass
+
+class(KitchenStove) extends(SmallStoveGrill)
+	var(name,"Дружковка");
+	var(desc,"Используется для приготовления пищи.")
+	var(model,"ml_exodusnew\stalker_tun\plita.p3d");
+endclass
