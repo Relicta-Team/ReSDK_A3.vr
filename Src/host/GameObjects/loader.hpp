@@ -121,6 +121,7 @@ loadFile("src\host\GameObjects\Structures\Tools\Farming.sqf");
 	loadFile("src\host\GameObjects\Structures\Tools\Spawners.sqf");
 loadFile("src\host\GameObjects\Structures\Interiors\SmallDecorations.sqf");
 	loadFile("src\host\GameObjects\Structures\Interiors\InteractibleInteriors.sqf");
+loadFile("src\host\GameObjects\Structures\Musical\Musical.sqf");
 
 
 //decorations

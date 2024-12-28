@@ -61,6 +61,10 @@ class(PictureTwoMans) extends(PictureIcon)
 	var(model,"ml\ml_plakats\pictures\picture_02.p3d");
 endclass
 
+class(PictureMan) extends(PictureIcon)
+	var(model,"a3\props_f_aow\civilian\gallery\galleryframe_01_large_portrait_f.p3d");
+endclass
+
 editor_attribute("EditorGenerated")
 class(PictureHovan) extends(PictureIcon)
 	var(model,"ml\ml_plakats\pictures\picture_03.p3d");
