@@ -87,6 +87,15 @@ class(SteelLatticeGate) extends(DoorDynamic)
 	var(material,"MatMetal");
 endclass
 
+class(TinGate) extends(DoorDynamic)
+	var(name,"Железные ворота");
+	var(model,"land_tinwall_01_m_gate_v2_closed_f");
+	getter_func(anmCount,animObj_count(2));
+	getter_func(animateData,[["door_1_rot" arg 2.5 arg ifcheck(!getSelf(isOpen),0.7,0.7)] arg ["door_2_rot" arg 2.5 arg ifcheck(!getSelf(isOpen),0.7,0.7)]]);
+	var(serializedAnim,[-1 arg -1 arg -1 arg -1 arg -1 arg -1]);
+	var(material,"MatMetal");
+endclass
+
 class(GreenAmbarWithDoors) extends(DoorDynamic)
 	getter_func(canUseMainAction,false); //В амбаре нельзя юзать такие дейсвтия
 	getter_func(canApplyDamage,false);

@@ -5,25 +5,25 @@ class EditorData
 	angleGridStep=0.08726646;
 	scaleGridStep=100;
 	autoGroupingDist=10;
-	toggles=34;
+	toggles=42;
 	class ItemIDProvider
 	{
-		nextID=6352;
+		nextID=6641;
 	};
 	class LayerIndexProvider
 	{
-		nextID=1654;
+		nextID=2333;
 	};
 	class Camera
 	{
-		pos[]={3998.4326,25.475834,3963.8696};
-		dir[]={0.24015358,-0.28008032,-0.92958522};
-		up[]={0.070078336,0.95992661,-0.27128053};
-		aside[]={-0.9683044,-2.0256484e-06,-0.25015131};
+		pos[]={3995.3118,24.703943,3952.4836};
+		dir[]={0.94300377,-0.26811165,0.19776927};
+		up[]={0.26244685,0.96336406,0.055042963};
+		aside[]={0.20527837,-1.080014e-06,-0.97881776};
 	};
 };
 binarizationWanted=0;
-sourceName="resdk_a3";
+sourceName="ReSDK_A3";
 addons[]=
 {
 	"A3_Characters_F",
@@ -65,9 +65,10 @@ addons[]=
 	"A3_Rocks_F_Sharp",
 	"rel_vox",
 	"A3_Structures_F_Enoch_Military_Training",
-	"CUP_Misc_e_Config",
 	"A3_Rocks_F_Argo_Limestone",
 	"chto_to",
+	"A3_Structures_F_Enoch_Industrial_Mines",
+	"egl_veg_gliese",
 	"A3_Structures_F_Exp_Industrial_Port",
 	"ml_germogate",
 	"l03_camp_1",
@@ -87,6 +88,7 @@ addons[]=
 	"ml_objects_heavy",
 	"Red_gates",
 	"doorvlk",
+	"A3_Structures_F_Argo_Walls_Tin",
 	"A3_Structures_F_Civ_Constructions",
 	"A3_Props_F_AoW_Civilian_Gallery",
 	"CUP_CASigns2",
@@ -109,40 +111,34 @@ addons[]=
 	"A3_Structures_F_Enoch_Industrial_Materials",
 	"A3_Structures_F_EPA_Civ_Camping",
 	"A3_Structures_F_Exp_Infrastructure_Pavements",
-	"A3_Props_F_Enoch_Military_Garbage",
 	"A3_Structures_F_Civ_Camping",
+	"A3_Props_F_Enoch_Military_Garbage",
 	"A3_Structures_F_Civ_Market",
 	"A3_Structures_F_Households_Addons",
-	"A3_Structures_F_Training",
-	"Ferrum",
-	"plakats3",
-	"A3_Structures_F_Enoch_Cultural_Cemeteries",
-	"zhel_panel",
-	"A3_Structures_F_Civ_Dead",
-	"burzhuika",
-	"A3_Structures_F_Exp_Cultural_Cemeteries",
 	"A3_Structures_F_Heli_Items_Tools",
 	"rabochiystol",
 	"A3_Structures_F_Enoch_Walls_Polewalls",
 	"A3_Props_F_Enoch_Infrastructure_Traffic",
+	"Ferrum",
 	"stalker_props",
 	"Diggers",
 	"l08_market",
+	"A3_Structures_F_Enoch_Cultural_Cemeteries",
 	"A3_Structures_F_Households_WIP",
-	"CUP_CAStructures_E_Misc_Misc_Interier",
-	"biblio",
-	"AtmObjects",
-	"CUP_CAStructures_E_Wall_Wall_L",
 	"A3_Structures_F_Exp_Civilian_Sheds",
-	"A3_Structures_F_Bootcamp_VR_Helpers",
+	"biblio",
+	"plakats3",
+	"AtmObjects",
 	"A3_Structures_F_Civ_Lamps",
-	"A3_Structures_F_Argo_Industrial_Agriculture"
+	"A3_Structures_F_Argo_Industrial_Agriculture",
+	"A3_Structures_F_Bootcamp_VR_Helpers",
+	"A3_Structures_F_Bootcamp_VR_Blocks"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=83;
+		items=79;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -359,187 +355,188 @@ class AddonsMetaData
 		};
 		class Item36
 		{
-			className="CUP_Misc_e_Config";
-			name="CUP_Misc_e_Config";
-		};
-		class Item37
-		{
 			className="A3_Rocks_F_Argo";
 			name="Arma 3 Malden - Rocks and Stones";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item38
+		class Item37
 		{
 			className="chto_to";
 			name="chto_to";
 		};
+		class Item38
+		{
+			className="A3_Structures_F_Enoch_Industrial";
+			name="Arma 3 Contact Platform - Industrial Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 		class Item39
+		{
+			className="egl_veg_gliese";
+			name="Vegetation Gliese";
+			author="EAGLE";
+		};
+		class Item40
 		{
 			className="A3_Structures_F_Exp_Industrial";
 			name="Arma 3 Apex - Industrial Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item40
+		class Item41
 		{
 			className="ml_germogate";
 			name="ml_germogate";
 		};
-		class Item41
+		class Item42
 		{
 			className="l03_camp_1";
 			name="l03_camp_1";
 		};
-		class Item42
+		class Item43
 		{
 			className="l04_catacombs";
 			name="l04_catacombs";
 		};
-		class Item43
+		class Item44
 		{
 			className="A3_Structures_F_Exp_Cultural";
 			name="Arma 3 Apex - Cultural Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item44
+		class Item45
 		{
 			className="A3_Props_F_Exp";
 			name="Arma 3 Apex - Decorative and Mission Objects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item45
+		class Item46
 		{
 			className="SMG_Metro_building";
 			name="SMG Metro Static Object";
 			author="TRIDJ,Zebra,Smesitel";
 			url="https://vk.com/smg_tvt";
 		};
-		class Item46
+		class Item47
 		{
 			className="sovokgoods";
 			name="sovokgoods";
 		};
-		class Item47
+		class Item48
 		{
 			className="model_05";
 			name="model_05";
 		};
-		class Item48
+		class Item49
 		{
 			className="A3_Weapons_F_Orange";
 			name="Arma 3 Orange - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item49
+		class Item50
 		{
 			className="A3_Structures_F_Enoch_Civilian";
 			name="Arma 3 Contact Platform - Civilian Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item50
+		class Item51
 		{
 			className="tinfence";
 			name="tinfence";
 		};
-		class Item51
+		class Item52
 		{
 			className="csa_objects";
 			name="csa_objects";
 		};
-		class Item52
+		class Item53
 		{
 			className="ml_objects_heavy";
 			name="ml_objects_heavy";
 		};
-		class Item53
+		class Item54
 		{
 			className="Red_gates";
 			name="Red_gates";
 		};
-		class Item54
+		class Item55
 		{
 			className="doorvlk";
 			name="doorvlk";
 		};
-		class Item55
+		class Item56
 		{
 			className="A3_Props_F_AoW";
 			name="Arma 3 Art of War - Decorative and Mission ";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item56
+		class Item57
 		{
 			className="CUP_CASigns2";
 			name="CUP_CASigns2";
 		};
-		class Item57
+		class Item58
 		{
 			className="bookshelf";
 			name="bookshelf";
 		};
-		class Item58
+		class Item59
 		{
 			className="kryslo";
 			name="kryslo";
 		};
-		class Item59
+		class Item60
 		{
 			className="furniture";
 			name="furniture";
 		};
-		class Item60
+		class Item61
 		{
 			className="sofa";
 			name="sofa";
 		};
-		class Item61
+		class Item62
 		{
 			className="stelazh_ot_seregi";
 			name="stelazh_ot_seregi";
 		};
-		class Item62
+		class Item63
 		{
 			className="A3_Structures_F_EPC";
 			name="Arma 3 Win Episode - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item63
+		class Item64
 		{
 			className="BSG_EFT";
 			name="BSG_EFT";
 		};
-		class Item64
+		class Item65
 		{
 			className="A3_Rocks_F_Exp";
 			name="Arma 3 Apex - Rocks and Stones";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item65
+		class Item66
 		{
 			className="A3_Structures_F_Ind";
 			name="Arma 3 - Industrial Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item66
+		class Item67
 		{
 			className="CUP_Buildings_Config";
 			name="CUP_Buildings_Config";
-		};
-		class Item67
-		{
-			className="A3_Structures_F_Enoch_Industrial";
-			name="Arma 3 Contact Platform - Industrial Structures";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
 		};
 		class Item68
 		{
@@ -550,72 +547,52 @@ class AddonsMetaData
 		};
 		class Item69
 		{
-			className="Ferrum";
-			name="Ferrum";
+			className="rabochiystol";
+			name="rabochiystol";
 		};
 		class Item70
 		{
-			className="plakats3";
-			name="plakats3";
+			className="Ferrum";
+			name="Ferrum";
 		};
 		class Item71
+		{
+			className="stalker_props";
+			name="stalker_props";
+		};
+		class Item72
+		{
+			className="Diggers";
+			name="Diggers";
+		};
+		class Item73
+		{
+			className="l08_market";
+			name="l08_market";
+		};
+		class Item74
 		{
 			className="A3_Structures_F_Enoch_Cultural";
 			name="Arma 3 Contact Platform - Cultural Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item72
-		{
-			className="zhel_panel";
-			name="zhel_panel";
-		};
-		class Item73
-		{
-			className="burzhuika";
-			name="burzhuika";
-		};
-		class Item74
-		{
-			className="rabochiystol";
-			name="rabochiystol";
-		};
 		class Item75
-		{
-			className="stalker_props";
-			name="stalker_props";
-		};
-		class Item76
-		{
-			className="Diggers";
-			name="Diggers";
-		};
-		class Item77
-		{
-			className="l08_market";
-			name="l08_market";
-		};
-		class Item78
-		{
-			className="CUP_CAStructures_E_Misc_Misc_Interier";
-			name="CUP_CAStructures_E_Misc_Misc_Interier";
-		};
-		class Item79
 		{
 			className="biblio";
 			name="biblio";
 		};
-		class Item80
+		class Item76
+		{
+			className="plakats3";
+			name="plakats3";
+		};
+		class Item77
 		{
 			className="AtmObjects";
 			name="AtmObjects";
 		};
-		class Item81
-		{
-			className="CUP_CAStructures_E_Wall_Wall_L";
-			name="CUP_CAStructures_E_Wall_Wall_L";
-		};
-		class Item82
+		class Item78
 		{
 			className="A3_Structures_F_Bootcamp";
 			name="Arma 3 Bootcamp Update - Buildings and Structures";
@@ -724,7 +701,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=15;
+		items=16;
 		class Item0
 		{
 			dataType="Group";
@@ -2096,7 +2073,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4004.8713,18.123352,4014.3723};
-								angles[]={5.1487236,3.1416035,-0};
+								angles[]={5.1487236,3.1416035,0};
 							};
 							side="Empty";
 							class Attributes
@@ -2113,7 +2090,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3997.594,18.449928,4006.7354};
-								angles[]={0,3.8397288,-0};
+								angles[]={0,3.8397288,0};
 							};
 							side="Empty";
 							flags=5;
@@ -2147,7 +2124,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4001.0393,18.243731,4008.0593};
-								angles[]={0,0.087266445,-0};
+								angles[]={0,0.087266445,0};
 							};
 							side="Empty";
 							flags=5;
@@ -2198,7 +2175,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4000.6016,18.629698,4006.0249};
-								angles[]={0,0.78539813,-0};
+								angles[]={0,0.78539813,0};
 							};
 							side="Empty";
 							flags=4;
@@ -2215,7 +2192,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3998.7083,18.57029,4004.4485};
-								angles[]={0,2.3561943,-0};
+								angles[]={0,2.3561943,0};
 							};
 							side="Empty";
 							class Attributes
@@ -2281,7 +2258,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3998.8518,18.553743,4004.7075};
-								angles[]={0,0.087266445,-0};
+								angles[]={0,0.087266445,0};
 							};
 							side="Empty";
 							class Attributes
@@ -2298,7 +2275,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3998.8035,18.553743,4004.697};
-								angles[]={0,6.1086526,-0};
+								angles[]={0,6.1086526,0};
 							};
 							side="Empty";
 							class Attributes
@@ -2315,7 +2292,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3998.8979,18.553743,4004.6824};
-								angles[]={0,0.17453289,-0};
+								angles[]={0,0.17453289,0};
 							};
 							side="Empty";
 							class Attributes
@@ -2802,7 +2779,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\bathroom\bath\bath.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bath""]]}";
 							};
 							id=2461;
 							type="CUP_bath";
@@ -2924,7 +2901,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exodusss\veshalochechka.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Hanger""]]}";
 							};
 							id=4164;
 							type="land_veshalochechka";
@@ -3091,7 +3068,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4004.0667,18.583052,4009.6418};
-								angles[]={0,1.6580627,-0};
+								angles[]={0,1.6580627,0};
 							};
 							side="Empty";
 							flags=5;
@@ -6777,7 +6754,7 @@ class Mission
 							};
 							id=5906;
 							type="Land_SharpRock_monolith";
-							atlOffset=6.5802307;
+							atlOffset=6.6106701;
 						};
 					};
 					id=4714;
@@ -6790,7 +6767,7 @@ class Mission
 					state=1;
 					class Entities
 					{
-						items=42;
+						items=46;
 						class Item0
 						{
 							dataType="Object";
@@ -6917,24 +6894,6 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4008.7578,21.963097,3922.907};
-								angles[]={6.2821498,6.1959329,0.0069996603};
-							};
-							side="Empty";
-							flags=4;
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MetalTank""]]}";
-							};
-							id=4778;
-							type="Land_Fuel_tank_stairs_ep1";
-							atlOffset=0.016506195;
-						};
-						class Item8
-						{
-							dataType="Object";
-							class PositionInfo
-							{
 								position[]={4023,21.93515,3932.25};
 								angles[]={0,3.5464764e-06,0};
 							};
@@ -6948,7 +6907,7 @@ class Mission
 							type="Land_Slum_House02_ruins_F";
 							atlOffset=0.50703049;
 						};
-						class Item9
+						class Item8
 						{
 							dataType="Object";
 							class PositionInfo
@@ -6965,7 +6924,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=1.0465755;
 						};
-						class Item10
+						class Item9
 						{
 							dataType="Object";
 							class PositionInfo
@@ -6983,7 +6942,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=0.17453194;
 						};
-						class Item11
+						class Item10
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7001,7 +6960,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=0.10723305;
 						};
-						class Item12
+						class Item11
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7018,7 +6977,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=16.495884;
 						};
-						class Item13
+						class Item12
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7035,25 +6994,25 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=0.64157867;
 						};
-						class Item14
+						class Item13
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4004.5,20.286156,3924.375};
-								angles[]={0,0.34906584,0};
+								position[]={4003.6379,20.286156,3924.53};
+								angles[]={0,0.17453296,0};
 							};
 							side="Empty";
-							flags=5;
+							flags=1;
 							class Attributes
 							{
 								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallDirtBrown""]]}";
 							};
 							id=4758;
 							type="gryazyuka4";
-							atlOffset=0.11090469;
+							atlOffset=2.5589123;
 						};
-						class Item15
+						class Item14
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7071,7 +7030,7 @@ class Mission
 							type="gryazyuka4";
 							atlOffset=0.024715424;
 						};
-						class Item16
+						class Item15
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7089,7 +7048,7 @@ class Mission
 							type="gryazyuka5";
 							atlOffset=15.495884;
 						};
-						class Item17
+						class Item16
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7106,7 +7065,7 @@ class Mission
 							type="gryazyuka5";
 							atlOffset=2.0255184;
 						};
-						class Item18
+						class Item17
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7122,7 +7081,7 @@ class Mission
 							type="CUP_A1_Nasypka";
 							atlOffset=15.120899;
 						};
-						class Item19
+						class Item18
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7140,7 +7099,7 @@ class Mission
 							type="CUP_A2_rubble_bricks_03";
 							atlOffset=0.020673752;
 						};
-						class Item20
+						class Item19
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7157,12 +7116,13 @@ class Mission
 							type="Land_Limestone_01_erosion_F";
 							atlOffset=13.800667;
 						};
-						class Item21
+						class Item20
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4024.125,23.051317,3925.5};
+								position[]={4022.4185,22.184238,3925.0967};
+								angles[]={0,1.1344664,0};
 							};
 							side="Empty";
 							flags=1;
@@ -7172,14 +7132,14 @@ class Mission
 							};
 							id=4894;
 							type="nowoederewo";
-							atlOffset=14.245884;
+							atlOffset=13.378805;
 						};
-						class Item22
+						class Item21
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4015.875,23.006334,3920.375};
+								position[]={4015.7981,23.144297,3920.6829};
 							};
 							side="Empty";
 							flags=5;
@@ -7189,9 +7149,8 @@ class Mission
 							};
 							id=4893;
 							type="derevo";
-							atlOffset=0.044538498;
 						};
-						class Item23
+						class Item22
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7208,7 +7167,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=12.137777;
 						};
-						class Item24
+						class Item23
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7226,7 +7185,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=0.011512756;
 						};
-						class Item25
+						class Item24
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7243,7 +7202,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=2.9967899;
 						};
-						class Item26
+						class Item25
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7261,7 +7220,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=0.026918411;
 						};
-						class Item27
+						class Item26
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7278,7 +7237,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=12.138271;
 						};
-						class Item28
+						class Item27
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7296,7 +7255,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=0.01742363;
 						};
-						class Item29
+						class Item28
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7313,7 +7272,7 @@ class Mission
 							type="CraterLong_02_F";
 							atlOffset=11.991665;
 						};
-						class Item30
+						class Item29
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7331,7 +7290,7 @@ class Mission
 							type="gryazyuka5";
 							atlOffset=0.052310944;
 						};
-						class Item31
+						class Item30
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7348,7 +7307,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=11.875;
 						};
-						class Item32
+						class Item31
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7366,7 +7325,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=0.0078659058;
 						};
-						class Item33
+						class Item32
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7383,7 +7342,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=3.5283909;
 						};
-						class Item34
+						class Item33
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7401,7 +7360,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=0.083797455;
 						};
-						class Item35
+						class Item34
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7419,7 +7378,7 @@ class Mission
 							type="gryazyuka5";
 							atlOffset=0.1187439;
 						};
-						class Item36
+						class Item35
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7437,7 +7396,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=0.096673965;
 						};
-						class Item37
+						class Item36
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7454,7 +7413,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=12.125;
 						};
-						class Item38
+						class Item37
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7471,7 +7430,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=12.125;
 						};
-						class Item39
+						class Item38
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7488,7 +7447,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=12.125;
 						};
-						class Item40
+						class Item39
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7505,7 +7464,7 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=12.125;
 						};
-						class Item41
+						class Item40
 						{
 							dataType="Object";
 							class PositionInfo
@@ -7522,9 +7481,97 @@ class Mission
 							type="CUP_A2_castle_wall5_d_ruins";
 							atlOffset=12.125;
 						};
+						class Item41
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4010.4685,20.818335,3922.0879};
+								angles[]={0.16497555,1.3978932,0.024578555};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\mines\mine_01_minecart_f.p3d""]]],[""class"",""IStruct""]]}";
+							};
+							id=6436;
+							type="Land_Mine_01_minecart_F";
+							atlOffset=15.282925;
+						};
+						class Item42
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4009.5784,28.506645,3920.1731};
+								angles[]={0,5.410522,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TreeRootsNoGeom""]]}";
+							};
+							id=6423;
+							type="gardentree";
+							atlOffset=4.8931351;
+						};
+						class Item43
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3992.1892,23.881729,3925.0801};
+								angles[]={0,0.43633226,0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigMushroom7""]]}";
+							};
+							id=6425;
+							type="egl_t1";
+						};
+						class Item44
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4004.5803,21.855474,3922.0769};
+								angles[]={0,2.9670644,0};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings2\ind_tank\ind_tanksmall.p3d""]]],[""class"",""IStruct""]]}";
+							};
+							id=6431;
+							type="CUP_A2_tanksmall";
+							atlOffset=0.11724663;
+						};
+						class Item45
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3994.9971,22.318386,3922.864};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallMushroom3""]]}";
+							};
+							id=6427;
+							type="egl_tt1";
+							atlOffset=0.025497437;
+						};
 					};
 					id=4747;
-					atlOffset=0.017877579;
+					atlOffset=0.62663841;
 				};
 				class Item4
 				{
@@ -8617,7 +8664,7 @@ class Mission
 				};
 			};
 			id=2606;
-			atlOffset=0.90632629;
+			atlOffset=0.8379097;
 		};
 		class Item5
 		{
@@ -10105,7 +10152,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\bathroom\bath\bath.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bath""]]}";
 							};
 							id=2737;
 							type="CUP_bath";
@@ -10297,7 +10344,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exodusss\veshalochechka.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Hanger""]]}";
 							};
 							id=5965;
 							type="land_veshalochechka";
@@ -10942,7 +10989,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3989.314,19.249226,3974.6414};
-								angles[]={0,4.450592,-0};
+								angles[]={0,4.450592,0};
 							};
 							side="Empty";
 							class Attributes
@@ -10959,7 +11006,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3989.2351,19.260578,3974.9348};
-								angles[]={0,2.6180005,-0};
+								angles[]={0,2.6180005,0};
 							};
 							side="Empty";
 							class Attributes
@@ -10976,7 +11023,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={3988.512,19.286371,3974.4922};
-								angles[]={0,1.3089969,-0};
+								angles[]={0,1.3089969,0};
 							};
 							side="Empty";
 							class Attributes
@@ -10998,7 +11045,7 @@ class Mission
 					state=1;
 					class Entities
 					{
-						items=3;
+						items=7;
 						class Item0
 						{
 							dataType="Object";
@@ -11053,9 +11100,79 @@ class Mission
 							type="Land_StoneWell_01_F";
 							atlOffset=12.120884;
 						};
+						class Item3
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3997.4321,17.722198,3979.0688};
+								angles[]={0.10716308,0,0.014966577};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MetalBarrel4""]]}";
+							};
+							id=6515;
+							type="CUP_A1_Barel3";
+							atlOffset=0.12517548;
+						};
+						class Item4
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3996.8457,17.721615,3978.6917};
+								angles[]={0.10716308,0,0.014966577};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MetalBarrel5""]]}";
+							};
+							id=6514;
+							type="CUP_A1_Barel4";
+							atlOffset=0.13053513;
+						};
+						class Item5
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3996.9241,17.667473,3977.6902};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MetalBarrel1""]]}";
+							};
+							id=6512;
+							type="galon";
+							atlOffset=0.033311844;
+						};
+						class Item6
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3996.9045,17.671688,3979.5095};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MetalBarrel""]]}";
+							};
+							id=6513;
+							type="oldbarrel";
+							atlOffset=0.04948616;
+						};
 					};
 					id=4078;
-					atlOffset=0.01953125;
+					atlOffset=0.14594269;
 				};
 				class Item6
 				{
@@ -11658,7 +11775,7 @@ class Mission
 				};
 			};
 			id=2799;
-			atlOffset=0.44401932;
+			atlOffset=0.43094063;
 		};
 		class Item6
 		{
@@ -11923,7 +12040,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3992.125,24.276148,3939.625};
+								position[]={3992.125,24.276148,3939.6001};
 							};
 							side="Empty";
 							class Attributes
@@ -11939,7 +12056,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3992.125,24.276247,3934.25};
+								position[]={3992.1399,24.278263,3934.25};
 							};
 							side="Empty";
 							class Attributes
@@ -11948,7 +12065,7 @@ class Mission
 							};
 							id=4826;
 							type="Land_plita_6x6";
-							atlOffset=2.7864037;
+							atlOffset=2.7884197;
 						};
 						class Item17
 						{
@@ -12024,7 +12141,7 @@ class Mission
 						};
 					};
 					id=3155;
-					atlOffset=2.6472626;
+					atlOffset=2.6473236;
 				};
 				class Item1
 				{
@@ -12147,17 +12264,17 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3995.2222,23.476856,3930.291};
+								position[]={3995.2222,23.476856,3930.26};
 								angles[]={0,4.7123981,0};
 							};
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""weight"",""1""]]],[""class"",""BrickThinWallSmall""]]}";
 							};
 							id=2859;
 							type="Land_kr_stena_3x3";
-							atlOffset=1.0550613;
+							atlOffset=1.0557137;
 						};
 						class Item7
 						{
@@ -12499,7 +12616,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole1""]]}";
 							};
 							id=3207;
 							type="Land_BrickWall_04_l_pole_F";
@@ -12517,7 +12634,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole1""]]}";
 							};
 							id=3208;
 							type="Land_BrickWall_04_l_pole_F";
@@ -12752,17 +12869,17 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4015.2222,19.477835,3947.666};
+								position[]={4015.2222,19.480684,3947.666};
 							};
 							side="Empty";
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""desc"",""Маленькие стена, которую можно разрушить""]]],[""class"",""LargeConcreteWallWithReinforcement""]]}";
 							};
 							id=3059;
 							type="Land_Canal_WallSmall_10m_F";
-							atlOffset=0.50355339;
+							atlOffset=0.50640297;
 						};
 						class Item42
 						{
@@ -12787,7 +12904,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4019.2222,19.477835,3933.916};
+								position[]={4019.2222,19.480684,3933.916};
 								angles[]={0,4.7123909,0};
 							};
 							side="Empty";
@@ -12798,7 +12915,7 @@ class Mission
 							};
 							id=3062;
 							type="Land_Canal_WallSmall_10m_F";
-							atlOffset=0.52635384;
+							atlOffset=0.52920341;
 						};
 						class Item44
 						{
@@ -12841,7 +12958,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3999.0972,19.602835,3928.416};
+								position[]={3999.0972,19.610685,3928.416};
 								angles[]={0,2.5629997e-06,0};
 							};
 							side="Empty";
@@ -12852,7 +12969,7 @@ class Mission
 							};
 							id=3065;
 							type="Land_Canal_WallSmall_10m_F";
-							atlOffset=0.67635345;
+							atlOffset=0.6842041;
 						};
 						class Item47
 						{
@@ -13010,7 +13127,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\plitkastenka.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallTileWall1""]]}";
 							};
 							id=2940;
 							type="plitkastenka";
@@ -13027,7 +13144,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\plitkastenka.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallTileWall1""]]}";
 							};
 							id=2936;
 							type="plitkastenka";
@@ -13045,7 +13162,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\plitkastenka.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallTileWall1""]]}";
 							};
 							id=2941;
 							type="plitkastenka";
@@ -13098,7 +13215,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_01_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole2""]]}";
 							};
 							id=3205;
 							type="Land_BrickWall_01_l_pole_F";
@@ -13116,7 +13233,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole1""]]}";
 							};
 							id=3818;
 							type="Land_BrickWall_04_l_pole_F";
@@ -13134,7 +13251,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole1""]]}";
 							};
 							id=3819;
 							type="Land_BrickWall_04_l_pole_F";
@@ -13152,7 +13269,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_3d.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorwayBig""]]}";
 							};
 							id=3846;
 							type="Land_kr_stena_3x6_3dv";
@@ -13259,7 +13376,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_3d.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorwayBig""]]}";
 							};
 							id=4824;
 							type="Land_kr_stena_3x6_3dv";
@@ -14700,7 +14817,7 @@ class Mission
 					state=1;
 					class Entities
 					{
-						items=12;
+						items=13;
 						class Item0
 						{
 							dataType="Object";
@@ -14916,9 +15033,26 @@ class Mission
 							id=5503;
 							type="Land_xlamdoor";
 						};
+						class Item12
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3992.1311,22.180283,3942.667};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""land_tinwall_01_m_gate_v2_closed_f""],[""islocked"",true],[""preinit@__keytypesstr"",""ManorKey""]]],[""class"",""TinGate""]]}";
+							};
+							id=6361;
+							type="Land_TinWall_01_m_gate_v2_closed_F";
+							atlOffset=0.083856583;
+						};
 					};
 					id=3258;
-					atlOffset=0.044017792;
+					atlOffset=1.4288197;
 				};
 				class Item5
 				{
@@ -14927,7 +15061,7 @@ class Mission
 					state=1;
 					class Entities
 					{
-						items=48;
+						items=51;
 						class Item0
 						{
 							dataType="Object";
@@ -14957,30 +15091,13 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\civ\constructions\pallet_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenPallet1""]]}";
 							};
 							id=3822;
 							type="Land_Pallet_F";
 							atlOffset=0.60869408;
 						};
 						class Item2
-						{
-							dataType="Object";
-							class PositionInfo
-							{
-								position[]={4009.7222,24.248226,3938.4285};
-								angles[]={5.4977884,3.1416049,0};
-							};
-							side="Empty";
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""relicta_models\models\mutants\bloatfly.p3d""]]],[""class"",""IStruct""]]}";
-							};
-							id=3522;
-							type="bloatfly";
-							atlOffset=1.7752399;
-						};
-						class Item3
 						{
 							dataType="Object";
 							class PositionInfo
@@ -14998,7 +15115,7 @@ class Mission
 							type="koverold";
 							atlOffset=0.00013923645;
 						};
-						class Item4
+						class Item3
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15015,7 +15132,7 @@ class Mission
 							type="ashtray";
 							atlOffset=0.77858162;
 						};
-						class Item5
+						class Item4
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15032,7 +15149,7 @@ class Mission
 							type="ashtray";
 							atlOffset=0.80947113;
 						};
-						class Item6
+						class Item5
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15050,7 +15167,7 @@ class Mission
 							type="batareya";
 							atlOffset=0.010988235;
 						};
-						class Item7
+						class Item6
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15068,25 +15185,7 @@ class Mission
 							type="batareya";
 							atlOffset=0.011131287;
 						};
-						class Item8
-						{
-							dataType="Object";
-							class PositionInfo
-							{
-								position[]={3766.625,5.8758998,4048.625};
-								angles[]={1.1583131e-07,3.1971822e-06,1.1250377e-06};
-							};
-							side="Empty";
-							flags=1;
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\kartina.p3d""]]],[""class"",""IStruct""]]}";
-							};
-							id=3291;
-							type="kartina";
-							atlOffset=0.875;
-						};
-						class Item9
+						class Item7
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15104,7 +15203,7 @@ class Mission
 							type="kartina";
 							atlOffset=1.2491417;
 						};
-						class Item10
+						class Item8
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15122,7 +15221,7 @@ class Mission
 							type="batareya";
 							atlOffset=0.0001373291;
 						};
-						class Item11
+						class Item9
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15140,7 +15239,7 @@ class Mission
 							type="batareya";
 							atlOffset=0.0001373291;
 						};
-						class Item12
+						class Item10
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15158,7 +15257,7 @@ class Mission
 							type="batareya";
 							atlOffset=0.011621475;
 						};
-						class Item13
+						class Item11
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15176,7 +15275,7 @@ class Mission
 							type="batareya";
 							atlOffset=0.011304855;
 						};
-						class Item14
+						class Item12
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15194,7 +15293,7 @@ class Mission
 							type="batareya";
 							atlOffset=0.10001183;
 						};
-						class Item15
+						class Item13
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15212,7 +15311,7 @@ class Mission
 							type="batareya";
 							atlOffset=7.6293945e-05;
 						};
-						class Item16
+						class Item14
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15230,7 +15329,7 @@ class Mission
 							type="batareya";
 							atlOffset=3.2598038;
 						};
-						class Item17
+						class Item15
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15248,7 +15347,7 @@ class Mission
 							type="batareya";
 							atlOffset=3.1273613;
 						};
-						class Item18
+						class Item16
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15266,7 +15365,7 @@ class Mission
 							type="batareya";
 							atlOffset=0.011545181;
 						};
-						class Item19
+						class Item17
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15284,7 +15383,7 @@ class Mission
 							type="batareya";
 							atlOffset=1.172802;
 						};
-						class Item20
+						class Item18
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15302,7 +15401,7 @@ class Mission
 							type="shtora_pravo";
 							atlOffset=0.23136139;
 						};
-						class Item21
+						class Item19
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15320,43 +15419,7 @@ class Mission
 							type="shtora_pravo";
 							atlOffset=0.24324989;
 						};
-						class Item22
-						{
-							dataType="Object";
-							class PositionInfo
-							{
-								position[]={4012.6875,24.168018,3945.1265};
-								angles[]={1.5707965,1.5708041,0.61086607};
-							};
-							side="Empty";
-							flags=1;
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\ruki.p3d""]]],[""class"",""IStruct""]]}";
-							};
-							id=3687;
-							type="ruki";
-							atlOffset=1.7133598;
-						};
-						class Item23
-						{
-							dataType="Object";
-							class PositionInfo
-							{
-								position[]={4012.6897,24.16638,3946.1096};
-								angles[]={4.7123899,1.5708054,0.61086643};
-							};
-							side="Empty";
-							flags=1;
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\ruki.p3d""]]],[""class"",""IStruct""]]}";
-							};
-							id=3692;
-							type="ruki";
-							atlOffset=1.7117214;
-						};
-						class Item24
+						class Item20
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15367,13 +15430,13 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\misc\paletaa.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenPallet""]]}";
 							};
 							id=3758;
 							type="CUP_A1_paletaA";
 							atlOffset=5.7220459e-05;
 						};
-						class Item25
+						class Item21
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15383,13 +15446,13 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\misc\paletaa.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenPallet""]]}";
 							};
 							id=3759;
 							type="CUP_A1_paletaA";
 							atlOffset=0.18083954;
 						};
-						class Item26
+						class Item22
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15400,13 +15463,13 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\misc\paletaa.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenPallet""]]}";
 							};
 							id=3760;
 							type="CUP_A1_paletaA";
 							atlOffset=0.16037369;
 						};
-						class Item27
+						class Item23
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15424,7 +15487,7 @@ class Mission
 							type="Land_IronPipes_F";
 							atlOffset=0.011098862;
 						};
-						class Item28
+						class Item24
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15441,7 +15504,7 @@ class Mission
 							type="CUP_A2_carpet_2_ep1";
 							atlOffset=0.86485863;
 						};
-						class Item29
+						class Item25
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15459,7 +15522,7 @@ class Mission
 							type="CUP_A1_hrobecek_krizek2";
 							atlOffset=0.080072403;
 						};
-						class Item30
+						class Item26
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15470,13 +15533,13 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\props_f_aow\civilian\gallery\galleryframe_01_large_portrait_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PictureMan""]]}";
 							};
 							id=3338;
 							type="GalleryFrame_01_large_portrait_F";
 							atlOffset=0.87085724;
 						};
-						class Item31
+						class Item27
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15493,7 +15556,7 @@ class Mission
 							type="Land_SignB_Pub_RU1";
 							atlOffset=1.9621315;
 						};
-						class Item32
+						class Item28
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15511,7 +15574,7 @@ class Mission
 							type="katrinka";
 							atlOffset=2.0225773;
 						};
-						class Item33
+						class Item29
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15528,7 +15591,7 @@ class Mission
 							type="CUP_picture_b_02";
 							atlOffset=1.0816517;
 						};
-						class Item34
+						class Item30
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15539,13 +15602,13 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\misc\paletaa.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenPallet""]]}";
 							};
 							id=4974;
 							type="CUP_A1_paletaA";
 							atlOffset=0.54037857;
 						};
-						class Item35
+						class Item31
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15557,29 +15620,29 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\misc\paletaa.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenPallet""]]}";
 							};
 							id=5021;
 							type="CUP_A1_paletaA";
 						};
-						class Item36
+						class Item32
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3991.9009,21.436298,3937.5894};
+								position[]={3991.9009,21.436298,3937.7288};
 								angles[]={0,4.7123909,0};
 							};
 							side="Empty";
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\misc\paletaa.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenPallet""]]}";
 							};
 							id=5022;
 							type="CUP_A1_paletaA";
 						};
-						class Item37
+						class Item33
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15596,7 +15659,7 @@ class Mission
 							id=4946;
 							type="engine_turbo_01";
 						};
-						class Item38
+						class Item34
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15612,7 +15675,7 @@ class Mission
 							id=4951;
 							type="wesi";
 						};
-						class Item39
+						class Item35
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15629,7 +15692,7 @@ class Mission
 							id=4953;
 							type="genagenagenerator";
 						};
-						class Item40
+						class Item36
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15646,7 +15709,7 @@ class Mission
 							type="oldbarrel";
 							atlOffset=0.079072952;
 						};
-						class Item41
+						class Item37
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15663,7 +15726,7 @@ class Mission
 							id=4965;
 							type="CUP_A1_hrobecek";
 						};
-						class Item42
+						class Item38
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15680,7 +15743,7 @@ class Mission
 							id=5032;
 							type="CUP_A1_hrobecek";
 						};
-						class Item43
+						class Item39
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15697,7 +15760,7 @@ class Mission
 							id=5033;
 							type="CUP_A1_hrobecek";
 						};
-						class Item44
+						class Item40
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15714,7 +15777,7 @@ class Mission
 							id=4963;
 							type="CUP_A1_hrobecek";
 						};
-						class Item45
+						class Item41
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15731,7 +15794,7 @@ class Mission
 							id=4964;
 							type="CUP_A1_hrobecek";
 						};
-						class Item46
+						class Item42
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15748,7 +15811,7 @@ class Mission
 							id=4943;
 							type="nakowal";
 						};
-						class Item47
+						class Item43
 						{
 							dataType="Object";
 							class PositionInfo
@@ -15766,9 +15829,134 @@ class Mission
 							type="turbosos";
 							atlOffset=0.55690956;
 						};
+						class Item44
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4011.25,20.72068,3949};
+								angles[]={0,6.195919,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcreteTreePlanter""]]}";
+							};
+							id=6410;
+							type="Land_ConcreteTreePlanter_01_F";
+							atlOffset=15.375;
+						};
+						class Item45
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4004.25,23.917469,3949.625};
+								angles[]={0,2.5307343,0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigMushroom3""]]}";
+							};
+							id=6414;
+							type="egl_tx7";
+							atlOffset=0.13478088;
+						};
+						class Item46
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4011.625,24.042469,3949.625};
+								angles[]={0,3.8397329,0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigMushroom3""]]}";
+							};
+							id=6416;
+							type="egl_tx7";
+							atlOffset=0.019615173;
+						};
+						class Item47
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4004.75,20.72068,3949};
+								angles[]={0,6.195919,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcreteTreePlanter""]]}";
+							};
+							id=6408;
+							type="Land_ConcreteTreePlanter_01_F";
+							atlOffset=15.375;
+						};
+						class Item48
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4012.6899,24.168051,3945.1299};
+								angles[]={1.5707964,1.5707964,0.61086518};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\ruki.p3d""],[""name"",""Сушёные руки""],[""desc"",""Валялись на улице.""]]],[""class"",""SmallGrayStone""]]}";
+							};
+							id=6627;
+							type="ruki";
+							atlOffset=1.7133923;
+						};
+						class Item49
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4012.6899,24.166351,3946.1101};
+								angles[]={4.712389,1.5708048,0.6108669};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\ruki.p3d""],[""name"",""Сушёные руки""],[""desc"",""Валялись на улице.""]]],[""class"",""SmallGrayStone""]]}";
+							};
+							id=6629;
+							type="ruki";
+							atlOffset=1.7116928;
+						};
+						class Item50
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4009.72,24.18214,3938.4299};
+								angles[]={5.497787,3.1415992,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""relicta_models\models\mutants\bloatfly.p3d""],[""name"",""Чучело жруна""],[""desc"",""Здоровый был едок""]]],[""class"",""SmallGrayStone""]]}";
+							};
+							id=6631;
+							type="bloatfly";
+							atlOffset=1.7091541;
+						};
 					};
 					id=3259;
-					atlOffset=0.055351257;
+					atlOffset=1.3040047;
 				};
 				class Item6
 				{
@@ -15788,7 +15976,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""relicta_models\models\interier\bookshelf.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallShelf3""]]}";
 							};
 							id=3532;
 							type="bookshelf";
@@ -15804,7 +15992,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""relicta_models\models\interier\bookshelf.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallShelf3""]]}";
 							};
 							id=3695;
 							type="bookshelf";
@@ -15821,7 +16009,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""relicta_models\models\interier\bookshelf.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallShelf3""]]}";
 							};
 							id=3697;
 							type="bookshelf";
@@ -15892,7 +16080,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\tables\table_drawer\table_drawer.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallWoodenTable1""]]}";
 							};
 							id=3392;
 							type="CUP_A2_table_drawer";
@@ -16018,7 +16206,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\tables\table_drawer\table_drawer.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallWoodenTable1""]]}";
 							};
 							id=3393;
 							type="CUP_A2_table_drawer";
@@ -16070,7 +16258,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\misc\misc_interier\rack_ep1.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallShelf2""]]}";
 							};
 							id=3499;
 							type="CUP_A2_rack_ep1";
@@ -16087,7 +16275,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\kitchen_table_a.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallWoodenTable3""]]}";
 							};
 							id=3364;
 							type="CUP_A1_kitchen_table_a";
@@ -16493,7 +16681,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\bathroom\bath\bath.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bath""]]}";
 							};
 							id=3429;
 							type="CUP_bath";
@@ -16571,18 +16759,18 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4012.3472,22.919361,3942.9778};
+								position[]={4012.2644,22.94186,3942.9778};
 								angles[]={0,3.1415992,0};
 							};
 							side="Empty";
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\royal.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Piano""],[""__scriptName"",""SCR_Piano""],[""mark"",""Piano""]]}";
 							};
 							id=3620;
 							type="royal";
-							atlOffset=0.20646095;
+							atlOffset=0.01823616;
 						};
 						class Item46
 						{
@@ -16774,7 +16962,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\furniture\dhangar_psacistul.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryWoodenTable""]]}";
 							};
 							id=3606;
 							type="Dhangar_psacistul";
@@ -16978,7 +17166,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4005.0972,22.617325,3944.541};
+								position[]={4005.1963,22.606058,3944.541};
 							};
 							side="Empty";
 							flags=5;
@@ -16988,7 +17176,6 @@ class Mission
 							};
 							id=3438;
 							type="sofa";
-							atlOffset=0.011283875;
 						};
 						class Item69
 						{
@@ -17038,7 +17225,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exodusss\veshalochechka.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Hanger""]]}";
 							};
 							id=3340;
 							type="land_veshalochechka";
@@ -17145,7 +17332,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exodusss\veshalochechka.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Hanger""]]}";
 							};
 							id=3739;
 							type="land_veshalochechka";
@@ -17304,7 +17491,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\furniture\paranormaltable.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenOfficeTable5""]]}";
 							};
 							id=3750;
 							type="paranormaltable";
@@ -17812,7 +17999,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""countslots"",60]]],[""class"",""SteelGreenCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",10]]],[""""class"""",""""Bryak""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",6]]],[""""prob"""",66],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",7]]],[""""prob"""",56],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",3]]],[""""prob"""",73],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",2]]],[""""prob"""",69],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",10]]],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",10]]],[""""prob"""",57],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",10]]],[""""prob"""",38],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",3]]],[""""class"""",""""Zvak""""]]}"",1]]]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Сейф""],[""desc"",""Звяков валом!""],[""countslots"",60]]],[""class"",""SteelGreenCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",10]]],[""""class"""",""""Bryak""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",6]]],[""""prob"""",66],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",7]]],[""""prob"""",56],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",3]]],[""""prob"""",73],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",2]]],[""""prob"""",69],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",10]]],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",10]]],[""""prob"""",57],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",10]]],[""""prob"""",38],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",3]]],[""""class"""",""""Zvak""""]]}"",1]]]]}";
 							};
 							id=6140;
 							type="shkafsin";
@@ -20511,7 +20698,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4013.5879,23.187733,3944.2256};
-								angles[]={0,3.3161316,-0};
+								angles[]={0,3.3161316,0};
 							};
 							side="Empty";
 							class Attributes
@@ -20528,7 +20715,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4013.6814,23.177031,3944.0869};
-								angles[]={0,1.3962634,-0};
+								angles[]={0,1.3962634,0};
 							};
 							side="Empty";
 							class Attributes
@@ -20767,10 +20954,9 @@ class Mission
 				{
 					dataType="Layer";
 					name="Баня";
-					state=1;
 					class Entities
 					{
-						items=11;
+						items=9;
 						class Item0
 						{
 							dataType="Layer";
@@ -20844,7 +21030,7 @@ class Mission
 							state=1;
 							class Entities
 							{
-								items=47;
+								items=48;
 								class Item0
 								{
 									dataType="Object";
@@ -20868,7 +21054,7 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={4016.9995,24.023113,3953.375};
+										position[]={4016.939,24.023113,3953.375};
 										angles[]={1.9992571e-07,7.8007579e-06,2.7903363e-07};
 									};
 									side="Empty";
@@ -20879,7 +21065,7 @@ class Mission
 									};
 									id=4642;
 									type="ykritie";
-									atlOffset=1.6421795;
+									atlOffset=2.6860981;
 								};
 								class Item2
 								{
@@ -21199,7 +21385,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4576;
 									type="Land_TimberLog_04_F";
@@ -21217,7 +21403,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4581;
 									type="Land_TimberLog_04_F";
@@ -21235,7 +21421,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4582;
 									type="Land_TimberLog_04_F";
@@ -21253,7 +21439,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4583;
 									type="Land_TimberLog_04_F";
@@ -21271,7 +21457,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4584;
 									type="Land_TimberLog_04_F";
@@ -21289,7 +21475,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4585;
 									type="Land_TimberLog_04_F";
@@ -21307,7 +21493,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4586;
 									type="Land_TimberLog_04_F";
@@ -21325,7 +21511,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4587;
 									type="Land_TimberLog_04_F";
@@ -21343,7 +21529,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4588;
 									type="Land_TimberLog_04_F";
@@ -21361,7 +21547,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4589;
 									type="Land_TimberLog_04_F";
@@ -21379,7 +21565,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4590;
 									type="Land_TimberLog_04_F";
@@ -21397,7 +21583,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4591;
 									type="Land_TimberLog_04_F";
@@ -21415,7 +21601,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4604;
 									type="Land_TimberLog_04_F";
@@ -21433,7 +21619,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4610;
 									type="Land_TimberLog_04_F";
@@ -21451,7 +21637,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4611;
 									type="Land_TimberLog_04_F";
@@ -21469,7 +21655,7 @@ class Mission
 									flags=1;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d""]]],[""class"",""IStruct""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TimberLog""]]}";
 									};
 									id=4612;
 									type="Land_TimberLog_04_F";
@@ -21691,9 +21877,27 @@ class Mission
 									type="Land_Plank_01_4m_F";
 									atlOffset=0.94080925;
 								};
+								class Item47
+								{
+									dataType="Object";
+									class PositionInfo
+									{
+										position[]={4015.5195,21.098648,3951.604};
+										angles[]={6.2831831,1.570803,6.3851476e-06};
+									};
+									side="Empty";
+									flags=5;
+									class Attributes
+									{
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopySmall""]]}";
+									};
+									id=5801;
+									type="Land_cargo_addon01_V2_F";
+									atlOffset=0.069610596;
+								};
 							};
 							id=4469;
-							atlOffset=0.62970543;
+							atlOffset=0.39727974;
 						};
 						class Item2
 						{
@@ -22012,18 +22216,18 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={4021.7275,24.989748,3950.6702};
+										position[]={4021.0364,24.780317,3950.6792};
 										angles[]={0,1.5708048,0};
 									};
 									side="Empty";
 									flags=5;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""lightisenabled"",false]]],[""class"",""BlackSmallStove""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""lightisenabled"",false],[""light"",""SLIGHT_LIGHT_BAKE_SAUNA""]]],[""class"",""BlackSmallStove""]]}";
 									};
 									id=4553;
 									type="pechechkas";
-									atlOffset=0.24534607;
+									atlOffset=0.035799026;
 								};
 								class Item3
 								{
@@ -22045,7 +22249,7 @@ class Mission
 								};
 							};
 							id=4666;
-							atlOffset=15.583508;
+							atlOffset=15.531151;
 						};
 						class Item6
 						{
@@ -22054,7 +22258,7 @@ class Mission
 							state=1;
 							class Entities
 							{
-								items=8;
+								items=9;
 								class Item0
 								{
 									dataType="Object";
@@ -22197,9 +22401,26 @@ class Mission
 									type="Land_ChairWood_F";
 									atlOffset=0.0015850067;
 								};
+								class Item8
+								{
+									dataType="Object";
+									class PositionInfo
+									{
+										position[]={4016.4734,20.602333,3952.0276};
+										angles[]={0.0069996775,1.5708033,0.0010353366};
+									};
+									side="Empty";
+									flags=4;
+									class Attributes
+									{
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""HospitalBench""]]}";
+									};
+									id=5883;
+									type="CUP_A2_hospital_bench";
+								};
 							};
 							id=4667;
-							atlOffset=0.0060787201;
+							atlOffset=0.081674576;
 						};
 						class Item7
 						{
@@ -22366,44 +22587,9 @@ class Mission
 							id=4669;
 							atlOffset=0.060428619;
 						};
-						class Item9
-						{
-							dataType="Object";
-							class PositionInfo
-							{
-								position[]={4015.5195,21.098648,3951.604};
-								angles[]={6.2831831,1.570803,6.3851476e-06};
-							};
-							side="Empty";
-							flags=5;
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopySmall""]]}";
-							};
-							id=5801;
-							type="Land_cargo_addon01_V2_F";
-							atlOffset=0.069610596;
-						};
-						class Item10
-						{
-							dataType="Object";
-							class PositionInfo
-							{
-								position[]={4016.4734,20.602333,3952.0276};
-								angles[]={0.0069996775,1.5708033,0.0010353366};
-							};
-							side="Empty";
-							flags=4;
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""HospitalBench""]]}";
-							};
-							id=5883;
-							type="CUP_A2_hospital_bench";
-						};
 					};
 					id=4463;
-					atlOffset=0.0097312927;
+					atlOffset=0.36221313;
 				};
 				class Item10
 				{
@@ -22425,7 +22611,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_end_ep1.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RuinedLuxuryClayWall""]]}";
 							};
 							id=4461;
 							type="CUP_A2_l2_5m_end_ep1";
@@ -22495,7 +22681,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_end_ep1.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RuinedLuxuryClayWall""]]}";
 							};
 							id=4848;
 							type="CUP_A2_l2_5m_end_ep1";
@@ -22513,7 +22699,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_end_ep1.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RuinedLuxuryClayWall""]]}";
 							};
 							id=4849;
 							type="CUP_A2_l2_5m_end_ep1";
@@ -22531,7 +22717,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_end_ep1.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RuinedLuxuryClayWall""]]}";
 							};
 							id=4850;
 							type="CUP_A2_l2_5m_end_ep1";
@@ -22547,7 +22733,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l2_5m_end_ep1.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RuinedLuxuryClayWall""]]}";
 							};
 							id=4891;
 							type="CUP_A2_l2_5m_end_ep1";
@@ -23240,7 +23426,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Shield""],[""mark"",""target_item_7""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Выделанный щит.""]]],[""class"",""Shield""],[""mark"",""target_item_7""]]}";
 							};
 							id=3691;
 							type="shieldcircle";
@@ -23257,7 +23443,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Дневник""]]],[""class"",""Book""],[""mark"",""target_item_3""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Дневник""],[""preinit@__content"",""В прошлую смену я потерял черенок от лопаты. Черенок был короткий но толстый, лопата у меня специальная для грибничества." \n "" \n "Искал много промежутков. Сначала я думал что черенок я оставил где-то в мельтешатне. Проверил за клеткой бойцовых - там не было. " \n "Еще смотрел на грядках, думал может под забор угодила, но нет, там тоже не оказалось. " \n "Искал я долго и в многих местах. В итоге я нашёл его у жены в тумбочке. Не пойму, зачем он ей сдался?""]]],[""class"",""Book""],[""mark"",""target_item_3""]]}";
 							};
 							id=5725;
 							type="book6";
@@ -23274,7 +23460,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PerfumeBottle""],[""mark"",""target_item_4""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""bottlename"",""Дорогие духи""]]],[""class"",""PerfumeBottle""],[""mark"",""target_item_4""]]}";
 							};
 							id=3498;
 							type="perfume";
@@ -23308,7 +23494,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RifleSVT""],[""mark"",""target_item_6""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Наградная винтовка СВТ""],[""desc"",""На прикладе гравировка """"За доблесную службу в ополчение Канавы""""""]]],[""class"",""RifleSVT""],[""mark"",""target_item_6""]]}";
 							};
 							id=4869;
 							type="sks";
@@ -23324,7 +23510,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Роскошная лампа ручной работы.""],[""desc"",""Подарок от Овода Горана!""]]],[""class"",""LuxuryLamp""],[""mark"",""target_item_5""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""desc"",""Подарок от Овода Горана!""]]],[""class"",""LuxuryLamp""],[""mark"",""target_item_5""]]}";
 							};
 							id=5728;
 							type="CUP_A2_lantern";
@@ -23375,7 +23561,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmokingPipeDisabled""],[""mark"",""target_item_9""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Курительная трубка деда""]]],[""class"",""SmokingPipeDisabled""],[""mark"",""target_item_9""]]}";
 							};
 							id=5754;
 							type="pipe";
@@ -23484,7 +23670,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4008.875,20.216663,3954};
+								position[]={4008.875,20.178183,3954};
 								angles[]={1.8621962,4.8971701,1.1263746};
 							};
 							side="Empty";
@@ -23495,14 +23681,14 @@ class Mission
 							};
 							id=5871;
 							type="Land_BasaltKerb_01_2m_F";
-							atlOffset=15.125;
+							atlOffset=15.086519;
 						};
 						class Item1
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4008.9268,20.215212,3954.6357};
+								position[]={4008.9268,20.176731,3954.6357};
 								angles[]={6.2393651,3.0978186,4.8867588};
 							};
 							side="Empty";
@@ -23513,14 +23699,14 @@ class Mission
 							};
 							id=5872;
 							type="Land_BasaltKerb_01_2m_F";
-							atlOffset=15.123549;
+							atlOffset=15.085068;
 						};
 						class Item2
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4007.4224,20.203175,3953.8748};
+								position[]={4007.4224,20.164694,3953.8748};
 								angles[]={3.2289176,6.2831345,4.7996511};
 							};
 							side="Empty";
@@ -23531,14 +23717,14 @@ class Mission
 							};
 							id=5873;
 							type="Land_BasaltKerb_01_2m_F";
-							atlOffset=15.111511;
+							atlOffset=15.07303;
 						};
 						class Item3
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4007.3933,20.176155,3954.4502};
+								position[]={4007.3933,20.137674,3954.4502};
 								angles[]={6.2831702,3.1415851,1.4835308};
 							};
 							side="Empty";
@@ -23549,7 +23735,7 @@ class Mission
 							};
 							id=5874;
 							type="Land_BasaltKerb_01_2m_F";
-							atlOffset=15.084492;
+							atlOffset=15.046011;
 						};
 						class Item4
 						{
@@ -23590,24 +23776,6 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4008.1462,21.029604,3954.3091};
-								angles[]={0,2.5307357,0};
-							};
-							side="Empty";
-							flags=5;
-							class Attributes
-							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\props_f_enoch\military\garbage\garbagebarrel_02_buried_f.p3d""],[""name"",""Бочка""]]],[""class"",""IStruct""]]}";
-							};
-							id=5855;
-							type="Land_GarbageBarrel_02_buried_F";
-							atlOffset=0.045957565;
-						};
-						class Item7
-						{
-							dataType="Object";
-							class PositionInfo
-							{
 								position[]={4008.3665,20.959389,3957.0203};
 								angles[]={0.0069253813,3.1415982,0.0056624333};
 							};
@@ -23621,7 +23789,7 @@ class Mission
 							type="Land_WoodenLog_02_F";
 							atlOffset=0.02041626;
 						};
-						class Item8
+						class Item7
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23639,7 +23807,7 @@ class Mission
 							type="Land_Bucket_clean_F";
 							atlOffset=0.024925232;
 						};
-						class Item9
+						class Item8
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23657,12 +23825,12 @@ class Mission
 							type="Land_Matches_F";
 							atlOffset=5.7220459e-06;
 						};
-						class Item10
+						class Item9
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4008.1294,21.385504,3954.3152};
+								position[]={4008.1294,21.347023,3954.3152};
 								angles[]={0,0.43633491,0};
 							};
 							side="Empty";
@@ -23672,9 +23840,9 @@ class Mission
 							};
 							id=5879;
 							type="Land_FirePlace_F";
-							atlOffset=0.67588234;
+							atlOffset=0.63468742;
 						};
-						class Item11
+						class Item10
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23692,7 +23860,7 @@ class Mission
 							type="Land_TinWall_01_m_4m_v2_F";
 							atlOffset=0.80524445;
 						};
-						class Item12
+						class Item11
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23710,7 +23878,7 @@ class Mission
 							type="Land_TinWall_01_m_4m_v2_F";
 							atlOffset=1.2745323;
 						};
-						class Item13
+						class Item12
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23728,7 +23896,7 @@ class Mission
 							type="Land_ChairWood_F";
 							atlOffset=0.039701462;
 						};
-						class Item14
+						class Item13
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23746,7 +23914,7 @@ class Mission
 							type="Land_ChairWood_F";
 							atlOffset=0.039373398;
 						};
-						class Item15
+						class Item14
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23763,7 +23931,7 @@ class Mission
 							id=5884;
 							type="ashtray";
 						};
-						class Item16
+						class Item15
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23781,12 +23949,12 @@ class Mission
 							type="derewobarik";
 							atlOffset=0.99614525;
 						};
-						class Item17
+						class Item16
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4008.1719,21.258917,3954.2656};
+								position[]={4008.1719,21.220436,3954.2656};
 								angles[]={0,6.1959219,0};
 							};
 							side="Empty";
@@ -23797,9 +23965,9 @@ class Mission
 							};
 							id=5836;
 							type="grill";
-							atlOffset=0.59747505;
+							atlOffset=0.55899429;
 						};
-						class Item18
+						class Item17
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23816,7 +23984,7 @@ class Mission
 							type="CUP_A2_indcnc_pole";
 							atlOffset=0.42536163;
 						};
-						class Item19
+						class Item18
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23833,7 +24001,7 @@ class Mission
 							type="CUP_A2_indcnc_pole";
 							atlOffset=15.187492;
 						};
-						class Item20
+						class Item19
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23850,7 +24018,7 @@ class Mission
 							type="CUP_A2_indcnc_pole";
 							atlOffset=0.39197922;
 						};
-						class Item21
+						class Item20
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23867,7 +24035,7 @@ class Mission
 							type="CUP_A2_indcnc_pole";
 							atlOffset=0.86437225;
 						};
-						class Item22
+						class Item21
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23884,7 +24052,7 @@ class Mission
 							type="CUP_A2_indcnc_pole";
 							atlOffset=15.187492;
 						};
-						class Item23
+						class Item22
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23899,9 +24067,9 @@ class Mission
 							};
 							id=5823;
 							type="CUP_A2_indcnc_pole";
-							atlOffset=0.68004799;
+							atlOffset=0.71852875;
 						};
-						class Item24
+						class Item23
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23919,12 +24087,12 @@ class Mission
 							type="kastryla";
 							atlOffset=0.025657654;
 						};
-						class Item25
+						class Item24
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4007.7832,21.450373,3954.0303};
+								position[]={4007.7832,21.411892,3954.0303};
 								angles[]={4.712389,4.712389,1.3089976};
 							};
 							side="Empty";
@@ -23937,7 +24105,7 @@ class Mission
 							type="rat1";
 							atlOffset=0.044082642;
 						};
-						class Item26
+						class Item25
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23955,7 +24123,7 @@ class Mission
 							type="land_skovoroda";
 							atlOffset=0.79920578;
 						};
-						class Item27
+						class Item26
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23973,7 +24141,7 @@ class Mission
 							type="CUP_A2_smalltable";
 							atlOffset=0.026670456;
 						};
-						class Item28
+						class Item27
 						{
 							dataType="Object";
 							class PositionInfo
@@ -23991,7 +24159,7 @@ class Mission
 							type="CUP_A2_smalltable";
 							atlOffset=0.03012085;
 						};
-						class Item29
+						class Item28
 						{
 							dataType="Object";
 							class PositionInfo
@@ -24008,7 +24176,7 @@ class Mission
 							type="land_tarkov_wood";
 							atlOffset=0.51724052;
 						};
-						class Item30
+						class Item29
 						{
 							dataType="Object";
 							class PositionInfo
@@ -24026,7 +24194,7 @@ class Mission
 							type="ykritie";
 							atlOffset=0.028236389;
 						};
-						class Item31
+						class Item30
 						{
 							dataType="Object";
 							class PositionInfo
@@ -24044,7 +24212,7 @@ class Mission
 							type="cigarette";
 							atlOffset=3.8146973e-06;
 						};
-						class Item32
+						class Item31
 						{
 							dataType="Object";
 							class PositionInfo
@@ -24062,7 +24230,7 @@ class Mission
 							type="cigarette";
 							atlOffset=0.00028800964;
 						};
-						class Item33
+						class Item32
 						{
 							dataType="Object";
 							class PositionInfo
@@ -24079,9 +24247,27 @@ class Mission
 							type="cigarette";
 							atlOffset=0.79670525;
 						};
+						class Item33
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4008.124,21.00913,3954.2827};
+								angles[]={0,6.195919,0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\props_f_enoch\military\garbage\garbagebarrel_02_buried_f.p3d""],[""desc"",""Дырки со всех сторон!""]]],[""class"",""MetalBarrel""]]}";
+							};
+							id=6407;
+							type="Land_GarbageBarrel_02_buried_F";
+							atlOffset=0.025541306;
+						};
 					};
 					id=5887;
-					atlOffset=0.69160461;
+					atlOffset=0.33200264;
 				};
 				class Item16
 				{
@@ -24586,1906 +24772,14 @@ class Mission
 				};
 			};
 			id=3154;
-			atlOffset=2.5764999;
+			atlOffset=2.5315056;
 		};
 		class Item7
 		{
 			dataType="Layer";
 			name="Структуры";
-			state=1;
-			class Entities
-			{
-				items=114;
-				class Item0
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3806.125,6.6754999,4037.625};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\training\shoot_house_panels_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3315;
-					type="Land_Shoot_House_Panels_F";
-				};
-				class Item1
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3801.9258,6.4701672,4074.915};
-						angles[]={0,1.5707963,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\ferrum\zasran_fence2.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=2937;
-					type="zasran_fence2";
-				};
-				class Item2
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3785.5322,6.2080002,4049.2019};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PictureFoliesBergere""]]}";
-					};
-					id=3634;
-					type="picture_121";
-					atlOffset=1.125;
-				};
-				class Item3
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3765.75,5.6528969,4048.625};
-						angles[]={0,3.1415992,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\props_f_aow\civilian\gallery\galleryframe_01_large_portrait_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3305;
-					type="GalleryFrame_01_large_portrait_F";
-				};
-				class Item4
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3814.25,5.7543626,4047.375};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\civilian\accessories\chickencoop_01_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3295;
-					type="Land_ChickenCoop_01_F";
-				};
-				class Item5
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3822.429,5.6883569,4046.803};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\cultural\cemeteries\tombstone_05_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3297;
-					type="Land_Tombstone_05_F";
-				};
-				class Item6
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3811.4258,6.1218624,4074.915};
-						angles[]={0,1.5707963,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\zhel_panel\zhel_panel.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=2933;
-					type="zhel_panel";
-				};
-				class Item7
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3816.7717,5.1010365,4049.5571};
-						angles[]={6.2815657,0,0.0065963282};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\civ\constructions\pallet_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3286;
-					type="Land_Pallet_F";
-				};
-				class Item8
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3813.8008,6.4324627,4074.915};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\woodstenka2.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=2983;
-					type="woodstenka2";
-				};
-				class Item9
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3816.5508,6.4324627,4074.915};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\sbs\woodstenka3.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=2938;
-					type="woodstenka3";
-				};
-				class Item10
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3814.25,5,4059};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\furniture\dhangar_psacistul.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3468;
-					type="Dhangar_psacistul";
-				};
-				class Item11
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3814.125,6.630712,4064.125};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\furniture\heatpump_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3464;
-					type="Land_HeatPump_F";
-				};
-				class Item12
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3801.5378,5.1842299,4068.2671};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Teapot1""]]}";
-					};
-					id=3476;
-					type="teabaggin";
-				};
-				class Item13
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3791.625,5.1464076,4049.25};
-						angles[]={0,3.1415992,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\civ\dead\humanskull_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3630;
-					type="Land_HumanSkull_F";
-				};
-				class Item14
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3810.7815,5.8886976,4054.8599};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\burzhuika\burzhuika.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3344;
-					type="burzhuika";
-					atlOffset=-0.035752296;
-				};
-				class Item15
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3793.2888,5.2288499,4049.2534};
-						angles[]={0,1.5707963,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\apparat.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3622;
-					type="apparat";
-				};
-				class Item16
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3787.9954,5.0857921,4049.1643};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Ashtray""]]}";
-					};
-					id=3632;
-					type="ashtray";
-				};
-				class Item17
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3798.8008,5.9935732,4074.915};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""metro_ob\model\barikdvertza.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=2935;
-					type="land_barikdvertza";
-				};
-				class Item18
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3811.1348,5,4058.2849};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\bathroom\basin_a\basin_a.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3484;
-					type="CUP_A2_basin_a";
-				};
-				class Item19
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3808.125,5.75,4061.5};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\bed_husbands.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3478;
-					type="CUP_A1_bed_husbands";
-					atlOffset=0.75;
-				};
-				class Item20
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3817.1758,6.4935384,4077.165};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_3d.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3242;
-					type="Land_kr_stena_3x6_3dv";
-				};
-				class Item21
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3799.3008,6.4935384,4077.165};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_2o.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3246;
-					type="Land_kr_stena_3x6_2okn";
-				};
-				class Item22
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3805.3008,6.4935384,4077.165};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_d.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3244;
-					type="Land_kr_stena_3x6_dv_1";
-				};
-				class Item23
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3811.3008,6.4935384,4077.165};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""csa_constr\csa_obj\kr_stena_d_o.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3248;
-					type="Land_kr_stena_3x6_dv_okn";
-				};
-				class Item24
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3798.625,5.0676618,4062.5};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\misc\misc_interier\carpet_ep1.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3668;
-					type="CUP_A2_carpet_ep1";
-				};
-				class Item25
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3798.375,5.875,4060.125};
-						angles[]={0,4.7123909,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\misc\misc_interier\carpet_wallv2_ep1.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3664;
-					type="CUP_A2_carpet_wallv2_ep1";
-					atlOffset=0.875;
-				};
-				class Item26
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3796.625,5.0685091,4062.5};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\misc\misc_interier\carpetv2_ep1.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3677;
-					type="CUP_A2_carpetv2_ep1";
-				};
-				class Item27
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3814.125,5,4057.125};
-						angles[]={0,1.5707963,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\cases\case_d\case_d.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3466;
-					type="CUP_A2_case_d";
-				};
-				class Item28
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3823.8164,5,4031.5605};
-						angles[]={0,1.5708032,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\case_wall_unit_part_c.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3301;
-					type="CUP_A1_case_wall_unit_part_c";
-				};
-				class Item29
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3824.1494,5,4032.6365};
-						angles[]={0,1.5707963,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\case_wall_unit_part_c.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3490;
-					type="CUP_A1_case_wall_unit_part_c";
-				};
-				class Item30
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3824.125,5,4033.875};
-						angles[]={0,1.5707963,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\case_wall_unit_part_d.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3460;
-					type="CUP_A1_case_wall_unit_part_d";
-				};
-				class Item31
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3824,5,4056.125};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\ch_mod_c.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3327;
-					type="CUP_A1_ch_mod_c";
-				};
-				class Item32
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3810.5,5,4059.25};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\ch_mod_c.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3482;
-					type="CUP_A1_ch_mod_c";
-				};
-				class Item33
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3822.78,5.3996615,4056.1577};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""relicta_models\models\interier\chairbar2.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3321;
-					type="chairbar2";
-				};
-				class Item34
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3792.3418,5.2498498,4049.3113};
-						angles[]={0,1.7136335e-07,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\cherep.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3624;
-					type="cherep";
-					atlOffset=0.25;
-				};
-				class Item35
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3812.125,5.7543626,4047.375};
-						angles[]={0,3.1415994,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\misc\chickencoop\misc_chickencoop.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3672;
-					type="CUP_A2_chickencoop";
-				};
-				class Item36
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3793.75,5.4105,4060};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\misc\misc_market\counter_ep1.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3666;
-					type="CUP_A2_counter_ep1";
-				};
-				class Item37
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3814.25,5,4061.375};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\dhangar_psacistul.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3462;
-					type="CUP_A1_Dhangar_psacistul";
-				};
-				class Item38
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3807.4258,6.6995502,4074.915};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\wall\wall_indcnc_4.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=2934;
-					type="CUP_A2_indcnc_4";
-					atlOffset=1;
-				};
-				class Item39
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3765.0459,5.625247,4048.4846};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\katrinka.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3311;
-					type="katrinka";
-					atlOffset=0.62494707;
-				};
-				class Item40
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3823.375,5.125,4063.125};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\kitchen_table_a.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3353;
-					type="CUP_A1_kitchen_table_a";
-					atlOffset=0.125;
-				};
-				class Item41
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3802.5,5.0106621,4068.75};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""relicta_models\models\weapons\melee\kunai\kunai.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3528;
-					type="kunai";
-				};
-				class Item42
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3810.875,5.7700753,4051.75};
-						angles[]={1.5707963,0,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""metro_ob\model\l19_cell_type_03.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3331;
-					type="l19_cell_type_03";
-					atlOffset=0.75;
-				};
-				class Item43
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3802.125,5,4068.125};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryLamp""]]}";
-					};
-					id=3325;
-					type="CUP_A2_lantern";
-				};
-				class Item44
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3820.625,5,4062};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\tables\lobby_table\lobby_table.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3359;
-					type="CUP_A2_lobby_table";
-				};
-				class Item45
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3801.9128,5.0193458,4067.6421};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Necklace""]]}";
-					};
-					id=3520;
-					type="necklace";
-				};
-				class Item46
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3811.75,5.3960605,4059.125};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\chairs\office_chair\office_chair.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3486;
-					type="CUP_A2_office_chair";
-				};
-				class Item47
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3816.75,5.8000002,4061.25};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\misc\ohrada_popelnice.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3329;
-					type="CUP_A1_Ohrada_popelnice";
-				};
-				class Item48
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3817.9182,5.1017189,4054.8643};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\misc\paletaa.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3319;
-					type="CUP_A1_paletaA";
-				};
-				class Item49
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3822.125,5.5166001,4060.75};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\furniture\paranormaltable.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3363;
-					type="paranormaltable";
-				};
-				class Item50
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3802.5811,5.124999,4067.823};
-						angles[]={0,4.537858,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PerfumeBottle""]]}";
-					};
-					id=3313;
-					type="perfume";
-				};
-				class Item51
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3782.2422,5,4049.2939};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_a_02\picture_a_02.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3636;
-					type="CUP_picture_a_02";
-				};
-				class Item52
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3779.3958,5,4049.2507};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_a_03\picture_a_03.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3642;
-					type="CUP_picture_a_03";
-				};
-				class Item53
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3774.6387,5,4049.012};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_a_04\picture_a_04.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3650;
-					type="CUP_picture_a_04";
-				};
-				class Item54
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3771.3452,5,4048.7708};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_a_05\picture_a_05.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3656;
-					type="CUP_picture_a_05";
-				};
-				class Item55
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3769.0454,5,4048.7856};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_b\picture_b.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3660;
-					type="CUP_picture_b";
-				};
-				class Item56
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3781.4385,5,4049.2537};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_b_02\picture_b_02.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3638;
-					type="CUP_picture_b_02";
-				};
-				class Item57
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3770.1721,5,4048.7732};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_c\picture_c.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3658;
-					type="CUP_picture_c";
-				};
-				class Item58
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3780.6609,5,4049.272};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_c_02\picture_c_02.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3640;
-					type="CUP_picture_c_02";
-				};
-				class Item59
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3772.5144,5,4048.8069};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_d\picture_d.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3654;
-					type="CUP_picture_d";
-				};
-				class Item60
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3773.4233,5,4048.8584};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_e\picture_e.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3652;
-					type="CUP_picture_e";
-				};
-				class Item61
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3777.1428,5,4049.2083};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_f\picture_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3646;
-					type="CUP_picture_f";
-				};
-				class Item62
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3775.9675,5,4049.0364};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_f_02\picture_f_02.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3648;
-					type="CUP_picture_f_02";
-				};
-				class Item63
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3778.1226,5,4049.3054};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_g\picture_g.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3644;
-					type="CUP_picture_g";
-				};
-				class Item64
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3767.9626,5,4048.6394};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\decoration\wallboards\picture_a\picture_a.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3662;
-					type="CUP_A2_picture_a";
-				};
-				class Item65
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3801.875,5.0500002,4068.75};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""relicta_models\models\interier\props\treasure\pipe\pipe.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3524;
-					type="pipe";
-				};
-				class Item66
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3819.5,5.6207395,4052.625};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\stalker_tun\plita.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3317;
-					type="plita_kushat";
-				};
-				class Item67
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3820.125,6.2287049,4057.125};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\misc\plot_istan2.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3323;
-					type="CUP_A1_plot_istan2";
-				};
-				class Item68
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3822.5,6.002243,4031.125};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_05\polka.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3516;
-					type="polka";
-					atlOffset=0.45751381;
-				};
-				class Item69
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3794.6265,5.7590876,4065.1074};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\misc\misc_postbox\misc_postbox.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3674;
-					type="CUP_A2_postbox";
-				};
-				class Item70
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3808.875,6.5584745,4038.5};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\misc\prolejzacka.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3303;
-					type="CUP_A1_prolejzacka";
-				};
-				class Item71
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3824,5.8051043,4050.625};
-						angles[]={0,3.1415992,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\misc\misc_interier\rack_ep1.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3299;
-					type="CUP_A2_rack_ep1";
-				};
-				class Item72
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3796.375,5.8329,4049.25};
-						angles[]={0,4.7123909,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\royal.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3619;
-					type="royal";
-				};
-				class Item73
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3798.6646,5.9969001,4049.2944};
-						angles[]={0,3.1415992,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\rubilnik.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3616;
-					type="rubilnik";
-					atlOffset=1;
-				};
-				class Item74
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3790.875,5.3639498,4049.25};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\ruki.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3626;
-					type="ruki";
-				};
-				class Item75
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3812.6926,6.3105793,4054.0029};
-						angles[]={0,2.1816614,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""HoochMachine""]]}";
-					};
-					id=3342;
-					type="samogonapparat";
-				};
-				class Item76
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3825.2659,5,4027.6726};
-						angles[]={0,1.5707963,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\skrin_bar.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3472;
-					type="CUP_A1_skrin_bar";
-				};
-				class Item77
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3811.8992,5.6259999,4054.8682};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""relicta_models\models\interier\stove.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3337;
-					type="stove";
-				};
-				class Item78
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3811.875,5,4062.375};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\stul_hospoda.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3470;
-					type="CUP_A1_stul_hospoda";
-				};
-				class Item79
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3821.625,5,4062.25};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\tables\stul_kuch1\stul_kuch1.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3357;
-					type="CUP_stul_kuch1";
-				};
-				class Item80
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3821.0688,5,4064.4253};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\tables\table_drawer\table_drawer.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3361;
-					type="CUP_A2_table_drawer";
-				};
-				class Item81
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3789.3228,5.6216497,4049.0212};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_14_10\tachka.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3628;
-					type="tachka";
-				};
-				class Item82
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3809.8906,5,4059.52};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\toilet_b.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3480;
-					type="CUP_A1_toilet_b";
-				};
-				class Item83
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3809.75,5,4057.75};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\bathroom\toilet_b_02\toilet_b_02.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3492;
-					type="CUP_A2_toilet_b_02";
-				};
-				class Item84
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3802.875,5.0313096,4068.375};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BattleAxe""]]}";
-					};
-					id=3526;
-					type="waraxe";
-				};
-				class Item85
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3825.4468,5,4030.8838};
-						angles[]={0,1.5707963,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\cases\skrin_bar\skrin_bar.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3333;
-					type="CUP_Skrin_bar";
-				};
-				class Item86
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3816.0137,6.019804,4042.9019};
-						angles[]={0,1.5707963,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exodus\woodzaborka.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3293;
-					type="woodzaborka";
-				};
-				class Item87
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3824.125,5.3481889,4055};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\props_f_exp\commercial\market\woodencrate_01_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3288;
-					type="Land_WoodenCrate_01_F";
-				};
-				class Item88
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3821.4644,5.288209,4056.3706};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""relicta_models\models\interier\bookshelf.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=3518;
-					type="bookshelf";
-				};
-				class Item89
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3811.125,5,4057.875};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Sink""]]}";
-					};
-					id=3488;
-					type="CUP_A2_sink";
-				};
-				class Item90
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3853.25,7.0078154,4037.375};
-						angles[]={0,3.1415992,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\cultural\cemeteries\mausoleum_01_ruins_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4028;
-					type="Land_Mausoleum_01_ruins_F";
-					atlOffset=1.75;
-				};
-				class Item91
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3867.875,10.36627,4036.875};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\ind\concretemixingplant\cmp_shed_ruins_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4029;
-					type="Land_cmp_Shed_ruins_F";
-					atlOffset=2.25;
-				};
-				class Item92
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3868.875,7.0774646,4049.75};
-						angles[]={0,4.7123909,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\ruins\housewallruin_door_01_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4032;
-					type="Land_HouseWallRuin_Door_01_F";
-					atlOffset=1;
-				};
-				class Item93
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3879.75,7.7997999,4032.25};
-						angles[]={0,4.7123899,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\ruins\dum_zboreny_ruins.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4035;
-					type="CUP_A1_dum_zboreny_ruins";
-					atlOffset=3;
-				};
-				class Item94
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3856.875,10.451615,4009.5};
-						angles[]={0,4.7123904,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings2\houseblocks\houseblock_c\houseblock_c5_ruins.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4036;
-					type="CUP_A2_houseblock_c5_ruins";
-					atlOffset=3.375;
-				};
-				class Item95
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3859.125,8.8266153,4025};
-						angles[]={0,1.5708029,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings2\houseblocks\houseblock_c\houseblock_c5_ruins.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4037;
-					type="CUP_A2_houseblock_c5_ruins";
-					atlOffset=1.75;
-				};
-				class Item96
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3871.125,7.1480126,4013.5};
-						angles[]={0,4.7123899,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\ruins\ruin_corner_2.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4038;
-					type="CUP_A2_ruin_corner_2";
-					atlOffset=1.125;
-				};
-				class Item97
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3873.5,7.0230126,4045.375};
-						angles[]={0,3.1415989,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\ruins\ruin_corner_2.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4040;
-					type="CUP_A2_ruin_corner_2";
-					atlOffset=1;
-				};
-				class Item98
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3845.375,7.1437287,4054.125};
-						angles[]={0,4.7123914,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_01_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4228;
-					type="Land_BrickWall_01_l_5m_F";
-					atlOffset=1.375;
-				};
-				class Item99
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3849.5,7.3937287,4050.25};
-						angles[]={0,2.3841858e-07,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_01_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4259;
-					type="Land_BrickWall_01_l_5m_F";
-					atlOffset=1.625;
-				};
-				class Item100
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3849.5,7.1437287,4051.125};
-						angles[]={0,3.1416049,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_01_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4260;
-					type="Land_BrickWall_01_l_5m_F";
-					atlOffset=1.375;
-				};
-				class Item101
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3854,7.6443357,4053.625};
-						angles[]={0,4.7123933,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_01_l_corner_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4236;
-					type="Land_BrickWall_01_l_corner_F";
-					atlOffset=1.875;
-				};
-				class Item102
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3849.5,6.8216119,4059.125};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_corner_v2_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4234;
-					type="Land_BrickWall_02_l_corner_v2_F";
-					atlOffset=1;
-				};
-				class Item103
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3850.625,6.83004,4057.375};
-						angles[]={6.2762537,0,6.2775221};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4254;
-					type="Land_BrickWall_02_l_5m_F";
-					atlOffset=1;
-				};
-				class Item104
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3850.625,8.4688187,4066.375};
-						angles[]={6.2762537,0,6.2775221};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_gate_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4252;
-					type="Land_BrickWall_03_l_gate_F";
-					atlOffset=1.7500005;
-				};
-				class Item105
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3851.75,6.86695,4059};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4263;
-					type="Land_BrickWall_03_l_pole_F";
-					atlOffset=1.125;
-				};
-				class Item106
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3850.25,6.7382135,4061.875};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_5m_v1_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4242;
-					type="Land_BrickWall_03_l_5m_v1_F";
-					atlOffset=1;
-				};
-				class Item107
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3848.75,6.7444901,4053.8223};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_5m_v1_d_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4230;
-					type="Land_BrickWall_03_l_5m_v1_d_F";
-					atlOffset=1;
-				};
-				class Item108
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3850.375,6.6073399,4060.375};
-						angles[]={0,3.1415973,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_5m_v2_d_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4240;
-					type="Land_BrickWall_03_l_5m_v2_d_F";
-					atlOffset=1;
-				};
-				class Item109
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3851.75,6.6466742,4054.375};
-						angles[]={6.2762537,0,6.2775221};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_d_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4232;
-					type="Land_BrickWall_04_l_5m_d_F";
-					atlOffset=1;
-				};
-				class Item110
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3852,7.2716742,4052.375};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldBrickWallMedium""]]}";
-					};
-					id=4224;
-					type="Land_BrickWall_04_l_5m_old_F";
-					atlOffset=1.625;
-				};
-				class Item111
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3849,6,4055.25};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallWhiteConcreteWall""]]}";
-					};
-					id=4258;
-					type="Land_WallCity_01_4m_plain_whiteblue_F";
-					atlOffset=1;
-				};
-				class Item112
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3853.5,6.8668995,4055.875};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_01_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4246;
-					type="Land_BrickWall_01_l_pole_F";
-					atlOffset=1.125;
-				};
-				class Item113
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3884.625,5.9443297,4052.375};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""apalon\metro_a3\redgates\woodbri.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=4571;
-					type="land_woodbri";
-				};
-			};
 			id=3861;
-			atlOffset=0.5714488;
+			atlOffset=-5;
 		};
 		class Item8
 		{
@@ -26678,7 +24972,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=4238;
 							type="Land_BrickWall_03_l_pole_F";
@@ -26695,7 +24989,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=4268;
 							type="Land_BrickWall_03_l_pole_F";
@@ -26712,7 +25006,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=4272;
 							type="Land_BrickWall_03_l_pole_F";
@@ -26729,7 +25023,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=4275;
 							type="Land_BrickWall_03_l_pole_F";
@@ -26746,7 +25040,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=4278;
 							type="Land_BrickWall_03_l_pole_F";
@@ -26763,7 +25057,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
 							};
 							id=4305;
 							type="Land_BrickWall_03_l_pole_F";
@@ -26781,7 +25075,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickWall""]]}";
 							};
 							id=4250;
 							type="Land_BrickWall_04_l_5m_F";
@@ -26798,7 +25092,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickWall""]]}";
 							};
 							id=4266;
 							type="Land_BrickWall_04_l_5m_F";
@@ -26816,7 +25110,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickWall""]]}";
 							};
 							id=4269;
 							type="Land_BrickWall_04_l_5m_F";
@@ -26833,7 +25127,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickWall""]]}";
 							};
 							id=4273;
 							type="Land_BrickWall_04_l_5m_F";
@@ -26851,7 +25145,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickWall""]]}";
 							};
 							id=4274;
 							type="Land_BrickWall_04_l_5m_F";
@@ -27366,7 +25660,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4315;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27384,7 +25678,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4317;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27401,7 +25695,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4318;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27418,7 +25712,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4319;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27436,7 +25730,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4320;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27454,7 +25748,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4321;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27472,7 +25766,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4322;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27490,7 +25784,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumLightWall1""]]}";
 							};
 							id=4323;
 							type="Land_BrickWall_02_l_5m_F";
@@ -27584,7 +25878,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\bathroom\bath\bath.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bath""]]}";
 							};
 							id=4339;
 							type="CUP_bath";
@@ -27611,14 +25905,14 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={4011.0508,17.57958,3979.7546};
+								position[]={4011.0508,17.603083,3979.7546};
 								angles[]={0,3.1415999,0};
 							};
 							side="Empty";
 							flags=4;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures\furniture\bathroom\toilet_b_02\toilet_b_02.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldLightToilet""]]}";
 							};
 							id=4341;
 							type="CUP_A2_toilet_b_02";
@@ -27633,7 +25927,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""relicta_models\models\interier\bookshelf.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallShelf3""]]}";
 							};
 							id=4388;
 							type="bookshelf";
@@ -27959,7 +26253,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\stul_hospoda.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallWoodenTable2""]]}";
 							};
 							id=4354;
 							type="CUP_A1_stul_hospoda";
@@ -28058,7 +26352,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exodusss\veshalochechka.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Hanger""]]}";
 							};
 							id=4370;
 							type="land_veshalochechka";
@@ -28247,7 +26541,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4006.0593,17.609533,3977.6887};
-								angles[]={0,5.2359886,-0};
+								angles[]={0,5.2359886,0};
 							};
 							side="Empty";
 							flags=4;
@@ -28281,7 +26575,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4005.8352,18.002522,3978.6194};
-								angles[]={0,4.7123909,-0};
+								angles[]={0,4.7123909,0};
 							};
 							side="Empty";
 							class Attributes
@@ -28519,7 +26813,7 @@ class Mission
 					state=1;
 					class Entities
 					{
-						items=13;
+						items=17;
 						class Item0
 						{
 							dataType="Object";
@@ -28751,9 +27045,81 @@ class Mission
 							type="Land_GardenPavement_02_F";
 							atlOffset=12.174713;
 						};
+						class Item13
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4003.9604,17.034143,3979.6343};
+								angles[]={0,3.2380598,0};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallStoneRoad""]]}";
+							};
+							id=6500;
+							type="Land_GardenPavement_02_F";
+							atlOffset=0.032615662;
+						};
+						class Item14
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4003.9341,17.041761,3975.4421};
+								angles[]={0,6.2051201,0};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallStoneRoad""]]}";
+							};
+							id=6501;
+							type="Land_GardenPavement_02_F";
+							atlOffset=0.0051326752;
+						};
+						class Item15
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4003.8555,17.090412,3971.0547};
+								angles[]={0,3.2380588,0};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallStoneRoad""]]}";
+							};
+							id=6502;
+							type="Land_GardenPavement_02_F";
+							atlOffset=0.060066223;
+						};
+						class Item16
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4010.2856,18.136623,3968.5032};
+								angles[]={0,2.0071325,0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigPipePump""]]}";
+							};
+							id=6507;
+							type="turbosos";
+							atlOffset=0.23224258;
+						};
 					};
 					id=5932;
-					atlOffset=0.10654068;
+					atlOffset=12.1064;
 				};
 				class Item9
 				{
@@ -28762,7 +27128,7 @@ class Mission
 					state=1;
 					class Entities
 					{
-						items=39;
+						items=40;
 						class Item0
 						{
 							dataType="Object";
@@ -29341,7 +27707,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4006.1025,18.488951,3976.9932};
-								angles[]={0,4.7996573,-0};
+								angles[]={0,4.7996573,0};
 							};
 							side="Empty";
 							class Attributes
@@ -29358,7 +27724,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4013.4639,19.178049,3971.7473};
-								angles[]={0,0.17453289,-0};
+								angles[]={0,0.17453289,0};
 							};
 							side="Empty";
 							class Attributes
@@ -29375,7 +27741,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4005.8137,18.412859,3978.26};
-								angles[]={0,6.1086526,-0};
+								angles[]={0,6.1086526,0};
 							};
 							side="Empty";
 							flags=4;
@@ -29408,7 +27774,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={4005.8674,18.412859,3978.3069};
-								angles[]={0,0.26179937,-0};
+								angles[]={0,0.26179937,0};
 							};
 							side="Empty";
 							flags=4;
@@ -29419,9 +27785,25 @@ class Mission
 							id=6340;
 							type="cigarette";
 						};
+						class Item39
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4005.9077,18.418774,3978.8855};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MatchBox""]]}";
+							};
+							id=6367;
+							type="Land_Matches_F";
+						};
 					};
 					id=6176;
-					atlOffset=0.82607269;
+					atlOffset=0.01448822;
 				};
 				class Item10
 				{
@@ -29473,13 +27855,12 @@ class Mission
 				};
 			};
 			id=4217;
-			atlOffset=0.082279205;
+			atlOffset=0.19129372;
 		};
 		class Item9
 		{
 			dataType="Layer";
 			name="Горбарь";
-			state=1;
 			class Entities
 			{
 				items=10;
@@ -32383,2241 +30764,2153 @@ class Mission
 		{
 			dataType="Layer";
 			name="Головинская";
-			state=1;
 			class Entities
 			{
-				items=128;
+				items=8;
 				class Item0
 				{
-					dataType="Object";
-					class PositionInfo
+					dataType="Layer";
+					name="Стены";
+					state=1;
+					class Entities
 					{
-						position[]={4025.2122,23.468241,4021.5859};
-						angles[]={0,6.2729163,0};
+						items=18;
+						class Item0
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4017.9922,20.093275,4024.2776};
+								angles[]={0,4.6891608,0};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
+							};
+							id=5257;
+							type="Land_kr_stena_3x6";
+							atlOffset=0.038576126;
+						};
+						class Item1
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4017.8721,23.449638,4018.3408};
+								angles[]={0,1.5707964,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
+							};
+							id=5355;
+							type="Land_kr_stena_3x6_dv";
+							atlOffset=3.3869076;
+						};
+						class Item2
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4025.9375,23.463747,4011.625};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
+							};
+							id=5694;
+							type="Land_kr_stena_3x6_dv";
+							atlOffset=3.4202003;
+						};
+						class Item3
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4022.8826,21.772186,4026.2183};
+								angles[]={0,6.2763729,0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
+							};
+							id=5262;
+							type="zhelstenabig";
+							atlOffset=0.21890831;
+						};
+						class Item4
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4027.6436,21.550591,4022.6914};
+								angles[]={0,1.5707964,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
+							};
+							id=5263;
+							type="zhelstenabig";
+							atlOffset=1.3341522;
+						};
+						class Item5
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4027.6931,21.555271,4019.6716};
+								angles[]={0,1.5707964,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
+							};
+							id=5334;
+							type="zhelstenabig";
+							atlOffset=1.2936916;
+						};
+						class Item6
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4027.5,16.126049,4014.625};
+								angles[]={3.1415951,1.5707964,1.1250376e-06};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
+							};
+							id=5689;
+							type="zhelstenabig";
+							atlOffset=8.125001;
+						};
+						class Item7
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4027.5,22.251049,4014.625};
+								angles[]={0,1.5707964,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
+							};
+							id=5690;
+							type="zhelstenabig";
+							atlOffset=0.69412994;
+						};
+						class Item8
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4015.3037,19.807947,4017.8389};
+								angles[]={0,4.7021117,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
+							};
+							id=5283;
+							type="Land_kr_stena_3x3";
+							atlOffset=0.30323982;
+						};
+						class Item9
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4015.292,19.810946,4019.5178};
+								angles[]={0,4.7021117,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
+							};
+							id=5284;
+							type="Land_kr_stena_3x3";
+							atlOffset=0.30623817;
+						};
+						class Item10
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4017,19.754045,4016.375};
+								angles[]={0,0.00081366126,0};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
+							};
+							id=5285;
+							type="Land_kr_stena_3x3";
+							atlOffset=0.16022301;
+						};
+						class Item11
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4018,23.455807,4012.875};
+								angles[]={0,1.5707964,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
+							};
+							id=5373;
+							type="Land_kr_stena_3x3";
+							atlOffset=3.2188148;
+						};
+						class Item12
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4021.5635,21.053015,4017.8481};
+								angles[]={0,1.560526,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigBrickUnfinishedTwoStoreyHouse""]]}";
+							};
+							id=5367;
+							type="Land_Unfinished_Building_02_F";
+							atlOffset=1.0781536;
+						};
+						class Item13
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4025.25,19.541,4016.25};
+								angles[]={6.2821531,1.1727499e-05,0.0069904658};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l3_5m_ep1.p3d""]]],[""class"",""IStruct""]]}";
+							};
+							id=5692;
+							type="CUP_A2_l3_5m_ep1";
+							atlOffset=0.88588905;
+						};
+						class Item14
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4027.375,23.741949,4011.625};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickPole""]]}";
+							};
+							id=5701;
+							type="Land_BrickWall_03_l_pole_F";
+							atlOffset=0.97226143;
+						};
+						class Item15
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4015.5,19.1367,4016.1299};
+								angles[]={0,3.1585748,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l3_5m_ep1.p3d""]]],[""class"",""IStruct""]]}";
+							};
+							id=6446;
+							type="CUP_A2_l3_5m_ep1";
+							atlOffset=0.48296356;
+						};
+						class Item16
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4010.8799,19.1367,4016.3799};
+								angles[]={0,3.2458413,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l3_5m_ep1.p3d""]]],[""class"",""IStruct""]]}";
+							};
+							id=6447;
+							type="CUP_A2_l3_5m_ep1";
+							atlOffset=0.51042557;
+						};
+						class Item17
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4014.2705,19.424904,4011.2986};
+								angles[]={0,3.1415997,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopy""]]}";
+							};
+							id=5564;
+							type="Land_Shed_06_F";
+							atlOffset=0.78473473;
+						};
 					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\ml_plakats3\picture_115.p3d""]]],[""class"",""Decor""]]}";
-					};
-					id=5349;
-					type="picture_115";
-					atlOffset=1.357502;
+					id=6439;
+					atlOffset=1.0225201;
 				};
 				class Item1
 				{
-					dataType="Object";
-					class PositionInfo
+					dataType="Layer";
+					name="Мебель";
+					state=1;
+					class Entities
 					{
-						position[]={4015.7131,19.877649,4018.8882};
-						angles[]={0,1.5469447,0};
+						items=42;
+						class Item0
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.3828,21.956739,4025.6577};
+								angles[]={0,6.2617974,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier4""]]],[""class"",""LargeClothCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""WomanBasicCloth""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",47],[""""class"""",""""WomanBasicCloth""""]]}"",1]]]]}";
+							};
+							id=5259;
+							type="CUP_almara";
+							atlOffset=3.1538486;
+						};
+						class Item1
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4018.7817,21.935041,4024.8994};
+								angles[]={0,4.697155,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier3_4""]]],[""class"",""OldWoodenBox""]]}";
+							};
+							id=5255;
+							type="land_tarkov_wood";
+							atlOffset=3.1370773;
+						};
+						class Item2
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4025.2324,21.935541,4025.6282};
+								angles[]={0,6.2535076,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier4""]]],[""class"",""LargeClothCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""HeadCloth""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",48],[""""class"""",""""HeadCloth""""]]}"",1]]]]}";
+							};
+							id=5258;
+							type="CUP_almara";
+							atlOffset=3.3857098;
+						};
+						class Item3
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4026.4634,22.335855,4023.668};
+								angles[]={0,1.560526,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryDoubleBed""],[""mark"",""RHeadHolidayBed""]]}";
+							};
+							id=5310;
+							type="Land_WoodenBed_01_F";
+							atlOffset=3.3300247;
+						};
+						class Item4
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4027.2529,22.027739,4022.3411};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroom""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",10]]],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",6]]],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",2]]],[""""prob"""",61],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",4]]],[""""prob"""",51],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",10]]],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",5]]],[""""prob"""",73],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",4]]],[""""prob"""",52],[""""class"""",""""Zvak""""]]}"",1]]]]}";
+							};
+							id=6180;
+							type="CUP_A1_case_bedroom_b";
+						};
+						class Item5
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4023.0427,21.952131,4021.8286};
+								angles[]={0,3.061604,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_all""]]],[""class"",""SmallBookcase""]]}";
+							};
+							id=5315;
+							type="CUP_Dhangar_knihovna";
+							atlOffset=3.3937511;
+						};
+						class Item6
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.2681,21.93944,4021.7148};
+								angles[]={0,3.061604,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_all""]]],[""class"",""SmallBookcase""]]}";
+							};
+							id=5314;
+							type="CUP_Dhangar_knihovna";
+							atlOffset=3.3763962;
+						};
+						class Item7
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4018.3779,22.28236,4018.5967};
+								angles[]={0,1.5708032,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""CaseBedroomMedium""]]}";
+							};
+							id=5978;
+							type="yashik";
+							atlOffset=3.3623734;
+						};
+						class Item8
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4018.3784,22.28236,4017.9175};
+								angles[]={0,1.5708032,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""CaseBedroomMedium""]]}";
+							};
+							id=5979;
+							type="yashik";
+							atlOffset=3.3621502;
+						};
+						class Item9
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4018.3154,22.895702,4018.2292};
+								angles[]={0,7.2345138e-06,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""ContainerGreen""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""FoodPlate""""]]}"",5],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""GlassGoblet""""]]}"",5]]]]}";
+							};
+							id=5977;
+							type="sundugan";
+							atlOffset=0.60073471;
+						};
+						class Item10
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4018.2734,23.825033,4017.3862};
+								angles[]={0,1.5708057,4.712389};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""ContainerGreen3""]]}";
+							};
+							id=5975;
+							type="box";
+							atlOffset=1.5282211;
+						};
+						class Item11
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4019.1489,23.825033,4016.5127};
+								angles[]={1.5707963,3.6082076e-06,1.1250377e-06};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""ContainerGreen3""]]}";
+							};
+							id=5974;
+							type="box";
+							atlOffset=1.5282211;
+						};
+						class Item12
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4018.3184,21.91263,4020.731};
+								angles[]={0,1.5708033,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""FreezerStruct""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""Meat""""]]}"",3],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""Butter""""]]}"",6],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""Egg""""]]}"",3],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""MilkBottle""""]]}"",3]]]]}";
+							};
+							id=5972;
+							type="CUP_A2_fridge";
+							atlOffset=3.3448563;
+						};
+						class Item13
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4016.1023,21.80475,4019.7673};
+								angles[]={0,4.697155,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldWoodenBox""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",52],[""""class"""",""""SpirtBottle""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",46],[""""class"""",""""Zvak""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",8],[""""class"""",""""KitchenKnife""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",77],[""""class"""",""""BrightRedCloth""""]]}"",1]]]]}";
+							};
+							id=5360;
+							type="land_tarkov_wood";
+							atlOffset=3.375885;
+						};
+						class Item14
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4016.6069,21.745607,4017.5168};
+								angles[]={0,1.6000302,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BedOld2""]]}";
+							};
+							id=5358;
+							type="CUP_postel_panelak1";
+							atlOffset=3.316021;
+						};
+						class Item15
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4016.7173,22.0641,4018.239};
+								angles[]={0,1.5646948,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TinyWoodenTable""]]}";
+							};
+							id=5359;
+							type="Land_TableSmall_01_F";
+							atlOffset=3.4187946;
+						};
+						class Item16
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4016.7607,22.489914,4020.1187};
+								angles[]={0,6.1517653,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ChairLibrary""]]}";
+							};
+							id=5361;
+							type="land_biblastul";
+							atlOffset=3.4627361;
+						};
+						class Item17
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4025.1809,22.506813,4017.0173};
+								angles[]={0,3.1476033,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CoolSofa""]]}";
+							};
+							id=5335;
+							type="vitoriansofa";
+							atlOffset=3.2538643;
+						};
+						class Item18
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4025.0911,22.390129,4018.4241};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumWoodenTable1""]]}";
+							};
+							id=5982;
+							type="Land_TableBig_01_F";
+							atlOffset=3.38517;
+						};
+						class Item19
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4019.457,22.232758,4016.5967};
+								angles[]={0,3.1415992,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallShelf1""]]}";
+							};
+							id=5973;
+							type="Land_ShelvesWooden_F";
+							atlOffset=2.8590469;
+						};
+						class Item20
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4018.6431,22.699894,4016.6919};
+								angles[]={0,7.3984265e-06,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Umivalnik""]]}";
+							};
+							id=5976;
+							type="umivalnik1";
+							atlOffset=3.0777702;
+						};
+						class Item21
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.2063,22.540539,4016.8633};
+								angles[]={0,3.1415992,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\stalker_tun\plita.p3d""],[""lightisenabled"",false],[""name"",""Дружковка""],[""light"",""SLIGHT_LIGHT_STOVE""]]],[""class"",""SmallStoveGrill""]]}";
+							};
+							id=5981;
+							type="plita_kushat";
+							atlOffset=3.2939949;
+						};
+						class Item22
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4026.9834,22.169394,4012.3235};
+								angles[]={0,5.8468533,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelBrownContainer""]]}";
+							};
+							id=6332;
+							type="box_metal_9";
+							atlOffset=3.402462;
+						};
+						class Item23
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4026.8643,22.735041,4015.2969};
+								angles[]={0,3.1337273,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""SteelGreenCabinet""]]}";
+							};
+							id=5308;
+							type="shkafsin";
+							atlOffset=2.9603329;
+						};
+						class Item24
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4024.1616,22.856443,4015.8792};
+								angles[]={0,6.2717633,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Shelves""]]}";
+							};
+							id=5303;
+							type="Land_Metal_rack_F";
+							atlOffset=3.3942451;
+						};
+						class Item25
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4019.4419,23.251478,4020.918};
+								angles[]={0,1.4835298,0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MeatGrinder""]]}";
+							};
+							id=5987;
+							type="press";
+						};
+						class Item26
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4019.7754,22.343527,4020.9199};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelTable""]]}";
+							};
+							id=5983;
+							type="CUP_A2_smalltable";
+							atlOffset=3.3784351;
+						};
+						class Item27
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.3047,18.913944,4022.6282};
+								angles[]={0,1.560526,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallRoundWoodenTable""]]}";
+							};
+							id=5336;
+							type="stolempire";
+							atlOffset=1.2374401;
+						};
+						class Item28
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4019.4817,19.099501,4023.1187};
+								angles[]={0,3.6282485,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ChairLibrary""]]}";
+							};
+							id=5318;
+							type="land_biblastul";
+							atlOffset=1.2743893;
+						};
+						class Item29
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.9634,19.093939,4023.2791};
+								angles[]={0,5.4295659,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ChairLibrary""]]}";
+							};
+							id=5317;
+							type="land_biblastul";
+							atlOffset=1.265976;
+						};
+						class Item30
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.6831,19.083521,4021.7471};
+								angles[]={0,1.03218,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ChairLibrary""]]}";
+							};
+							id=5319;
+							type="land_biblastul";
+							atlOffset=1.2334747;
+						};
+						class Item31
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4025.0532,19.058168,4025.5208};
+								angles[]={0,3.1258144,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""TorchDisabled""""]]}"",3],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""MatchBox""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""SigaretteDisabled""""]]}"",8]]]]}";
+							};
+							id=5260;
+							type="komodvirus";
+							atlOffset=1.3067112;
+						};
+						class Item32
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4027.1526,19.662088,4024.2783};
+								angles[]={0,1.560526,0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_all""]]],[""class"",""Bookcase""]]}";
+							};
+							id=5261;
+							type="biblio";
+							atlOffset=0.0034561157;
+						};
+						class Item33
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4023.5352,18.934416,4020.3459};
+								angles[]={0,1.90959,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedSofa""]]}";
+							};
+							id=5311;
+							type="sofa";
+							atlOffset=1.1745358;
+						};
+						class Item34
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4016.4124,19.042145,4018.7673};
+								angles[]={0,6.275516,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedLuxuryChair""]]}";
+							};
+							id=5309;
+							type="kryslo";
+							atlOffset=0.30633736;
+						};
+						class Item35
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4025.7466,18.559172,4015.2102};
+								angles[]={6.2805133,0.26179853,6.2828302};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LobbyChair""]]}";
+							};
+							id=5698;
+							type="CUP_A2_lobby_chair";
+						};
+						class Item36
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4026.8403,18.555408,4014.1631};
+								angles[]={6.2817373,1.39626,0.0022710452};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LobbyChair""]]}";
+							};
+							id=5699;
+							type="CUP_A2_lobby_chair";
+						};
+						class Item37
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4026.7463,18.773739,4015.0754};
+								angles[]={0,0.95382971,0};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TinyWoodenTable""]]}";
+							};
+							id=5700;
+							type="Land_TableSmall_01_F";
+						};
+						class Item38
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4011.6846,19.110472,4017.1289};
+								angles[]={0,3.2185886,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldGreenToiletBowl""]]}";
+							};
+							id=5371;
+							type="tolchek";
+							atlOffset=0.78641319;
+						};
+						class Item39
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4013.0217,18.729261,4016.9397};
+								angles[]={0,3.1415937,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Sink""]]}";
+							};
+							id=5370;
+							type="CUP_A2_sink";
+							atlOffset=0.72426033;
+						};
+						class Item40
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4027.1621,22.816442,4013.7883};
+								angles[]={0,1.5520431,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Shelves""]]}";
+							};
+							id=5302;
+							type="Land_Metal_rack_F";
+							atlOffset=3.3623085;
+						};
+						class Item41
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4017.79,18.376301,4018.8};
+								angles[]={0,6.2661681,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryWoodenTable1""]]}";
+							};
+							id=6450;
+							type="CUP_A1_Dhangar_psacistul";
+							atlOffset=0.37129974;
+						};
 					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PictureFranklin""]]}";
-					};
-					id=5352;
-					type="picture_119";
-					atlOffset=1.3653908;
+					id=6440;
+					atlOffset=0.68550491;
 				};
 				class Item2
 				{
-					dataType="Object";
-					class PositionInfo
+					dataType="Layer";
+					name="Предметы";
+					state=1;
+					class Entities
 					{
-						position[]={4021.0137,18.52124,4019.2373};
-						angles[]={0,1.560526,0};
+						items=31;
+						class Item0
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4027.1206,23.209135,4022.2659};
+								angles[]={0,1.0471977,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""HeadCloth""]]}";
+							};
+							id=6182;
+							type="S_Clothes";
+							atlOffset=1.1595173;
+						};
+						class Item1
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.3943,23.02669,4017.0598};
+								angles[]={0,3.3161316,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""FryingPan""]]}";
+							};
+							id=5984;
+							type="land_skovoroda";
+							atlOffset=0.95483398;
+						};
+						class Item2
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4019.5945,22.882107,4016.4263};
+								angles[]={0,7.3984265e-06,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Muka""]]}";
+							};
+							id=5980;
+							type="risochek";
+							atlOffset=0.67121696;
+						};
+						class Item3
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4019.4619,22.506842,4016.8499};
+								angles[]={0,6.1086602,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Muka""]]}";
+							};
+							id=5990;
+							type="risochek";
+							atlOffset=0.29595184;
+						};
+						class Item4
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4019.4282,22.710056,4016.9043};
+								angles[]={0.0058593834,5.9073958,1.0913936e-10};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MatchBox""]]}";
+							};
+							id=6185;
+							type="Land_Matches_F";
+							atlOffset=0.67121696;
+						};
+						class Item5
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4024.8257,22.97286,4018.7898};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
+							};
+							id=6329;
+							type="buhlo1";
+						};
+						class Item6
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4025.3547,22.969604,4018.7932};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
+							};
+							id=6326;
+							type="buhlo1";
+							atlOffset=0.80486679;
+						};
+						class Item7
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4025.3445,22.969604,4018.4624};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
+							};
+							id=6325;
+							type="buhlo1";
+							atlOffset=0.80486679;
+						};
+						class Item8
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4025.3542,22.969604,4018.155};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
+							};
+							id=6324;
+							type="buhlo1";
+							atlOffset=0.80486679;
+						};
+						class Item9
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4024.8252,22.97286,4018.1516};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
+							};
+							id=6327;
+							type="buhlo1";
+						};
+						class Item10
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4024.8154,22.97286,4018.459};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
+							};
+							id=6328;
+							type="buhlo1";
+						};
+						class Item11
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4019.7742,22.760233,4020.9197};
+								angles[]={0,1.4835298,0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CuttingBoard""]]}";
+							};
+							id=5986;
+							type="land_doskarez";
+						};
+						class Item12
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.1167,22.765163,4020.884};
+								angles[]={1.5707965,4.7123895,4.9741888};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""KitchenKnife""]]}";
+							};
+							id=5985;
+							type="knife2";
+							atlOffset=0.71184731;
+						};
+						class Item13
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4015.6443,22.597204,4019.5286};
+								angles[]={0.0002818348,4.6884747,6.2624836};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
+							};
+							id=5364;
+							type="Leaflet_05_Old_F";
+							atlOffset=7.8201294e-05;
+						};
+						class Item14
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4015.9014,22.602674,4019.7068};
+								angles[]={6.2629075,6.0692816,6.2789955};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
+							};
+							id=5366;
+							type="Leaflet_05_Old_F";
+							atlOffset=0.00016784668;
+						};
+						class Item15
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4015.7075,22.603228,4019.7446};
+								angles[]={0,2.7183897,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PenBlack""]]}";
+							};
+							id=5362;
+							type="Land_PenBlack_F";
+							atlOffset=0.56760597;
+						};
+						class Item16
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4015.7837,22.600187,4020.04};
+								angles[]={0.020641658,3.2053218,6.2816529};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
+							};
+							id=5363;
+							type="Leaflet_05_Old_F";
+							atlOffset=1.1444092e-05;
+						};
+						class Item17
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4015.6941,22.598307,4020.4019};
+								angles[]={0.013389351,2.2639709,0.015787611};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
+							};
+							id=5365;
+							type="Leaflet_05_Old_F";
+							atlOffset=0.5678997;
+						};
+						class Item18
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4022.7234,19.18004,4021.689};
+								angles[]={0,1.575488,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""radiosettings"",[1,""enc_sta"",-10,5,any,1000,0]]]],[""class"",""Intercom""],[""mark"",""Imported Intercom47894""]]}";
+							};
+							id=5313;
+							type="speeker";
+							atlOffset=0.62092018;
+						};
+						class Item19
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.3022,19.509937,4022.6179};
+								angles[]={0,1.560526,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
+							};
+							id=5293;
+							type="buhlo1";
+							atlOffset=0.81179047;
+						};
+						class Item20
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.2446,19.455706,4022.498};
+								angles[]={0,1.028741,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""GlassGoblet""]]}";
+							};
+							id=5327;
+							type="vinecup";
+							atlOffset=0.81306076;
+						};
+						class Item21
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.2029,19.458208,4022.6797};
+								angles[]={0,0.65817493,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""GlassGoblet""]]}";
+							};
+							id=5326;
+							type="vinecup";
+							atlOffset=0.81587219;
+						};
+						class Item22
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.4236,19.457506,4022.679};
+								angles[]={0,1.560526,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""GlassGoblet""]]}";
+							};
+							id=5328;
+							type="vinecup";
+							atlOffset=0.81549454;
+						};
+						class Item23
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4017.3538,19.409304,4019.5984};
+								angles[]={0,1.560526,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""GlassGoblet""]]}";
+							};
+							id=5329;
+							type="vinecup";
+							atlOffset=0.89921379;
+						};
+						class Item24
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4017.4434,19.369528,4017.7893};
+								angles[]={0,3.0733471,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PaperHolder""]]}";
+							};
+							id=5353;
+							type="Leaflet_05_Stack_F";
+							atlOffset=0.84378052;
+						};
+						class Item25
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4017.426,19.343029,4018.0146};
+								angles[]={0,4.6877823,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PenBlack""]]}";
+							};
+							id=5288;
+							type="Land_PenBlack_F";
+							atlOffset=0.89698792;
+						};
+						class Item26
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4017.4146,19.339626,4017.9653};
+								angles[]={6.2758741,1.5416369,6.27706};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PenRed""]]}";
+							};
+							id=5354;
+							type="Land_PenRed_F";
+							atlOffset=0.89850235;
+						};
+						class Item27
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4017.7249,18.711229,4020.0273};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Briefcase""]]}";
+							};
+							id=6330;
+							type="land_portfeluga";
+							atlOffset=0.48883438;
+						};
+						class Item28
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4019.9185,22.802427,4021.0938};
+								angles[]={0,1.6580627,0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bread""]]}";
+							};
+							id=5988;
+							type="hleb";
+						};
+						class Item29
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4018.1912,22.204796,4023.2327};
+								angles[]={0,1.6580627,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ShuttleBag""]]}";
+							};
+							id=6331;
+							type="case_1";
+							atlOffset=3.3826408;
+						};
+						class Item30
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4026.8926,23.191423,4022.4453};
+								angles[]={0,1.919862,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Ключ от дома""],[""preinit@__keytypesstr"",""Head""]]],[""class"",""Key""]]}";
+							};
+							id=6181;
+							type="key";
+							atlOffset=1.1595173;
+						};
 					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedCarpet""]]}";
-					};
-					id=5340;
-					type="carpet";
-					atlOffset=0.7052002;
+					id=6441;
+					atlOffset=0.26034164;
 				};
 				class Item3
 				{
-					dataType="Object";
-					class PositionInfo
+					dataType="Layer";
+					name="Декор";
+					state=1;
+					class Entities
 					{
-						position[]={4016.7173,22.0641,4018.239};
-						angles[]={0,1.5646948,0};
+						items=15;
+						class Item0
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.2441,22.015368,4023.9673};
+								angles[]={0,1.560526,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OrangeCapet""]]}";
+							};
+							id=5264;
+							type="kovernew";
+							atlOffset=3.4293671;
+						};
+						class Item1
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4025.2161,22.011766,4018.1038};
+								angles[]={0,3.1547148,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OrangeCapet""]]}";
+							};
+							id=5338;
+							type="kovernew";
+							atlOffset=3.4234409;
+						};
+						class Item2
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4021.0137,18.52124,4019.2373};
+								angles[]={0,1.560526,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedCarpet""]]}";
+							};
+							id=5340;
+							type="carpet";
+							atlOffset=0.7052002;
+						};
+						class Item3
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4016.7136,18.481867,4018.8491};
+								angles[]={0,1.562096,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OrangeCapet""]]}";
+							};
+							id=5339;
+							type="kovernew";
+							atlOffset=0.025180817;
+						};
+						class Item4
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4018.2839,18.994162,4023.8586};
+								angles[]={0,1.560526,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CurtainElectronic""]]}";
+							};
+							id=5265;
+							type="shtora_centr";
+							atlOffset=10.812239;
+						};
+						class Item5
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4015.5632,18.865263,4018.8684};
+								angles[]={0,4.70679,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CurtainElectronic""]]}";
+							};
+							id=5347;
+							type="shtora_centr";
+							atlOffset=10.68334;
+						};
+						class Item6
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4016.5337,18.802389,4016.5681};
+								angles[]={0,3.1259508,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryRedCurtain""]]}";
+							};
+							id=5345;
+							type="shtora_pravo";
+							atlOffset=10.666939;
+						};
+						class Item7
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4016.4226,18.852388,4020.9985};
+								angles[]={0,3.1259508,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryRedCurtain""]]}";
+							};
+							id=5346;
+							type="shtora_pravo";
+							atlOffset=10.716938;
+						};
+						class Item8
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4021.7686,21.962015,4018.061};
+								angles[]={0,0.087266445,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\koverchik.p3d""]]],[""class"",""IStruct""]]}";
+							};
+							id=6452;
+							type="koverchik";
+							atlOffset=3.3416309;
+						};
+						class Item9
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4020.3572,18.48996,4022.2698};
+								angles[]={0,4.7996578,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\koverchik.p3d""]]],[""class"",""IStruct""]]}";
+							};
+							id=6453;
+							type="koverchik";
+							atlOffset=1.1777344;
+						};
+						class Item10
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4024.4912,23.843601,4016.4673};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PictureTwoMans""]]}";
+							};
+							id=6470;
+							type="picture_02";
+							atlOffset=1.7328625;
+						};
+						class Item11
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4015.6714,19.857197,4018.7759};
+								angles[]={0,1.5707963,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PictureFranklin""]]}";
+							};
+							id=6471;
+							type="picture_119";
+							atlOffset=1.3449039;
+						};
+						class Item12
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4025.3208,23.597082,4021.604};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PictureFoliesBergere""]]}";
+							};
+							id=6459;
+							type="picture_121";
+							atlOffset=1.4863434;
+						};
+						class Item13
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4016.8557,21.854204,4019.728};
+								angles[]={0,3.1415994,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\misc\misc_interier\carpet_ep1.p3d""]]],[""class"",""IStruct""]]}";
+							};
+							id=6455;
+							type="CUP_A2_carpet_ep1";
+							atlOffset=3.3576622;
+						};
+						class Item14
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4023.0554,21.980835,4023.6372};
+								angles[]={0,4.7124004,0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\misc\misc_interier\carpet_ep1.p3d""]]],[""class"",""IStruct""]]}";
+							};
+							id=6456;
+							type="CUP_A2_carpet_ep1";
+							atlOffset=3.3581676;
+						};
 					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TinyWoodenTable""]]}";
-					};
-					id=5359;
-					type="Land_TableSmall_01_F";
-					atlOffset=3.4187984;
+					id=6442;
+					atlOffset=3.3431606;
 				};
 				class Item4
 				{
-					dataType="Object";
-					class PositionInfo
+					dataType="Layer";
+					name="Двери";
+					state=1;
+					class Entities
 					{
-						position[]={4016.4124,19.042145,4018.7673};
-						angles[]={0,6.275516,0};
+						items=3;
+						class Item0
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4021.5481,23.182848,4016.3247};
+								angles[]={0,3.1410801,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""keytypes"",[""headup"",""super""]]]],[""class"",""SteelGreenDoor""]]}";
+							};
+							id=5368;
+							type="dooor";
+							atlOffset=3.2515736;
+						};
+						class Item1
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4021.5586,19.694937,4016.25};
+								angles[]={0,3.1415927,0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__keytypesstr"",""Head""]]],[""class"",""SteelGreenDoor""]]}";
+							};
+							id=6184;
+							type="dooor";
+							atlOffset=1.1208096;
+						};
+						class Item2
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4024.8137,23.119694,4011.7327};
+								angles[]={0,4.4703484e-07,0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""keytypes"",[""medpublic"",""medmain"",""super""]]]],[""class"",""WoodenDoor""]]}";
+							};
+							id=5695;
+							type="Land_xlamdoor";
+						};
 					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedLuxuryChair""]]}";
-					};
-					id=5309;
-					type="kryslo";
-					atlOffset=0.30633736;
+					id=6443;
+					atlOffset=2.4916687;
 				};
 				class Item5
 				{
-					dataType="Object";
-					class PositionInfo
+					dataType="Layer";
+					name="Лестницы";
+					state=1;
+					class Entities
 					{
-						position[]={4026.4634,22.335855,4023.668};
-						angles[]={0,1.560526,0};
+						items=2;
+						class Item0
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4021.5,17.515209,4009.625};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
+							};
+							id=5296;
+							type="Land_lest_pod_2x4";
+							atlOffset=0.18414497;
+						};
+						class Item1
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4019.5076,17.515209,4009.625};
+							};
+							side="Empty";
+							flags=4;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
+							};
+							id=5297;
+							type="Land_lest_pod_2x4";
+							atlOffset=0.17284775;
+						};
 					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryDoubleBed""],[""mark"",""RHeadHolidayBed""]]}";
-					};
-					id=5310;
-					type="Land_WoodenBed_01_F";
-					atlOffset=3.3300419;
+					id=6444;
+					atlOffset=0.17849731;
 				};
 				class Item6
 				{
-					dataType="Object";
-					class PositionInfo
+					dataType="Layer";
+					name="Потолок";
+					state=1;
+					class Entities
 					{
-						position[]={4017.4434,19.369528,4017.7893};
-						angles[]={0,3.0733471,0};
+						items=4;
+						class Item0
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4021.25,25.376049,4014.625};
+								angles[]={0,1.560526,4.712389};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
+							};
+							id=5682;
+							type="zhelstenabig";
+							atlOffset=0.34726143;
+						};
+						class Item1
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4026,25.376049,4014.625};
+								angles[]={0,1.560526,4.712389};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
+							};
+							id=5683;
+							type="zhelstenabig";
+							atlOffset=0.34726143;
+						};
+						class Item2
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4021.25,25.376049,4020.625};
+								angles[]={0,1.560526,4.712389};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
+							};
+							id=5684;
+							type="zhelstenabig";
+							atlOffset=0.34726143;
+						};
+						class Item3
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4026.125,25.376049,4020.75};
+								angles[]={0,1.560526,4.712389};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
+							};
+							id=5688;
+							type="zhelstenabig";
+							atlOffset=2.9357147;
+						};
 					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PaperHolder""]]}";
-					};
-					id=5353;
-					type="Leaflet_05_Stack_F";
-					atlOffset=0.84973526;
+					id=6445;
+					atlOffset=0.34726143;
 				};
 				class Item7
 				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4015.7837,22.600187,4020.04};
-						angles[]={0.020641658,3.2053218,6.2816529};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
-					};
-					id=5363;
-					type="Leaflet_05_Old_F";
-					atlOffset=1.335144e-05;
-				};
-				class Item8
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4015.6443,22.597204,4019.5286};
-						angles[]={0.0002818348,4.6884747,6.2624836};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
-					};
-					id=5364;
-					type="Leaflet_05_Old_F";
-					atlOffset=7.8201294e-05;
-				};
-				class Item9
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4015.6941,22.598307,4020.4019};
-						angles[]={0.013389351,2.2639709,0.015787611};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
-					};
-					id=5365;
-					type="Leaflet_05_Old_F";
-					atlOffset=0.56790161;
-				};
-				class Item10
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4015.9014,22.602674,4019.7068};
-						angles[]={6.2629075,6.0692816,6.2789955};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Paper""]]}";
-					};
-					id=5366;
-					type="Leaflet_05_Old_F";
-					atlOffset=0.00016784668;
-				};
-				class Item11
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4027.1621,22.816442,4013.7883};
-						angles[]={0,1.5520431,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Shelves""]]}";
-					};
-					id=5302;
-					type="Land_Metal_rack_F";
-					atlOffset=3.3623161;
-				};
-				class Item12
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4024.1616,22.856443,4015.8792};
-						angles[]={0,6.2717633,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Shelves""]]}";
-					};
-					id=5303;
-					type="Land_Metal_rack_F";
-					atlOffset=3.394268;
-				};
-				class Item13
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4021.5635,21.053015,4017.8481};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BigBrickUnfinishedTwoStoreyHouse""]]}";
-					};
-					id=5367;
-					type="Land_Unfinished_Building_02_F";
-					atlOffset=1.0781536;
-				};
-				class Item14
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4017.9922,20.093275,4024.2776};
-						angles[]={0,4.6891608,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWall""]]}";
-					};
-					id=5257;
-					type="Land_kr_stena_3x6";
-					atlOffset=0.038576126;
-				};
-				class Item15
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4017.8721,23.449638,4018.3408};
-						angles[]={0,1.5707964,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
-					};
-					id=5355;
-					type="Land_kr_stena_3x6_dv";
-					atlOffset=3.3869076;
-				};
-				class Item16
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4017.4146,19.339626,4017.9653};
-						angles[]={6.2758741,1.5416369,6.27706};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PenRed""]]}";
-					};
-					id=5354;
-					type="Land_PenRed_F";
-					atlOffset=0.89850235;
-				};
-				class Item17
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4017.426,19.343029,4018.0146};
-						angles[]={0,4.6877823,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PenBlack""]]}";
-					};
-					id=5288;
-					type="Land_PenBlack_F";
-					atlOffset=0.89698792;
-				};
-				class Item18
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4015.7075,22.603228,4019.7446};
-						angles[]={0,2.7183897,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PenBlack""]]}";
-					};
-					id=5362;
-					type="Land_PenBlack_F";
-					atlOffset=0.56760406;
-				};
-				class Item19
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4021.6731,17.544338,4009.3997};
-						angles[]={0,0.029313741,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
-					};
-					id=5296;
-					type="Land_lest_pod_2x4";
-					atlOffset=0.21582031;
-				};
-				class Item20
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4019.7332,17.546741,4009.4783};
-						angles[]={0,0.029313741,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StoneSmallLadder""]]}";
-					};
-					id=5297;
-					type="Land_lest_pod_2x4";
-					atlOffset=0.20667839;
-				};
-				class Item21
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4023.1545,21.9699,4023.7183};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\misc\misc_interier\carpet_ep1.p3d""]]],[""class"",""Decor""]]}";
-					};
-					id=5343;
-					type="Land_Carpet_EP1";
-					atlOffset=3.3475437;
-				};
-				class Item22
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4016.7656,21.872614,4019.4561};
-						angles[]={0,3.1341689,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\misc\misc_interier\carpet_ep1.p3d""]]],[""class"",""Decor""]]}";
-					};
-					id=5357;
-					type="Land_Carpet_EP1";
-					atlOffset=3.3759861;
-				};
-				class Item23
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.2441,22.015368,4023.9673};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OrangeCapet""]]}";
-					};
-					id=5264;
-					type="kovernew";
-					atlOffset=3.4293671;
-				};
-				class Item24
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4025.2161,22.011766,4018.1038};
-						angles[]={0,3.1547148,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OrangeCapet""]]}";
-					};
-					id=5338;
-					type="kovernew";
-					atlOffset=3.4234409;
-				};
-				class Item25
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4016.7136,18.481867,4018.8491};
-						angles[]={0,1.562096,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OrangeCapet""]]}";
-					};
-					id=5339;
-					type="kovernew";
-					atlOffset=0.025180817;
-				};
-				class Item26
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4025.2324,21.935541,4025.6282};
-						angles[]={0,6.2535076,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier4""]]],[""class"",""LargeClothCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""HeadCloth""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",48],[""""class"""",""""HeadCloth""""]]}"",1]]]]}";
-					};
-					id=5258;
-					type="CUP_almara";
-					atlOffset=3.3857098;
-				};
-				class Item27
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.3828,21.956739,4025.6577};
-						angles[]={0,6.2617974,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""CityCloth_tier4""]]],[""class"",""LargeClothCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""WomanBasicCloth""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",47],[""""class"""",""""WomanBasicCloth""""]]}"",1]]]]}";
-					};
-					id=5259;
-					type="CUP_almara";
-					atlOffset=3.1538486;
-				};
-				class Item28
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.9634,19.157961,4023.2791};
-						angles[]={0,5.4295659,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ChairLibrary""]]}";
-					};
-					id=5317;
-					type="land_biblastul";
-					atlOffset=0.00071716309;
-				};
-				class Item29
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4019.4817,19.160864,4023.1187};
-						angles[]={0,3.6282485,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ChairLibrary""]]}";
-					};
-					id=5318;
-					type="land_biblastul";
-					atlOffset=0.0011081696;
-				};
-				class Item30
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.6831,18.966166,4021.7471};
-						angles[]={0,1.03218,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ChairLibrary""]]}";
-					};
-					id=5319;
-					type="land_biblastul";
-					atlOffset=1.1161194;
-				};
-				class Item31
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4016.7607,22.489914,4020.1187};
-						angles[]={0,6.1517653,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ChairLibrary""]]}";
-					};
-					id=5361;
-					type="land_biblastul";
-					atlOffset=3.4627361;
-				};
-				class Item32
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4027.1526,19.662088,4024.2783};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_all""]]],[""class"",""Bookcase""]]}";
-					};
-					id=5261;
-					type="biblio";
-					atlOffset=0.0034561157;
-				};
-				class Item33
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.3022,19.509937,4022.6179};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
-					};
-					id=5293;
-					type="buhlo1";
-					atlOffset=0.81179047;
-				};
-				class Item34
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4015.3037,19.807947,4017.8389};
-						angles[]={0,4.7021117,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
-					};
-					id=5283;
-					type="Land_kr_stena_3x3";
-					atlOffset=0.30323982;
-				};
-				class Item35
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4015.292,19.810946,4019.5178};
-						angles[]={0,4.7021117,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
-					};
-					id=5284;
-					type="Land_kr_stena_3x3";
-					atlOffset=0.30623817;
-				};
-				class Item36
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4017,19.754045,4016.375};
-						angles[]={0,0.00081366126,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
-					};
-					id=5285;
-					type="Land_kr_stena_3x3";
-					atlOffset=0.16022301;
-				};
-				class Item37
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4018,23.455807,4012.875};
-						angles[]={0,1.5707964,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallSmall""]]}";
-					};
-					id=5373;
-					type="Land_kr_stena_3x3";
-					atlOffset=0.25712204;
-				};
-				class Item38
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4021.5481,23.182848,4016.3247};
-						angles[]={0,3.1410801,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""keytypes"",[""headup"",""super""]]]],[""class"",""SteelGreenDoor""]]}";
-					};
-					id=5368;
-					type="dooor";
-					atlOffset=3.2515736;
-				};
-				class Item39
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4024.1689,23.500551,4016.4751};
-						angles[]={0,6.2686925,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\ml_plakats3\ironfelix.p3d""]]],[""class"",""Decor""]]}";
-					};
-					id=5351;
-					type="ironfelix";
-					atlOffset=1.3896999;
-				};
-				class Item40
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4022.6719,20.109842,4016.6477};
-						angles[]={1.5869575,4.6894608,0.075734399};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedButton""],[""edConnected"",[""Imported Intercom47894"",""Imported LampCeiling33082"",""Imported LampCeiling125000"",""Imported LampCeiling856506""]],[""mark"",""_sw_adminbase_1""]]}";
-					};
-					id=5289;
-					type="knopka";
-					atlOffset=1.5110512;
-				};
-				class Item41
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4022.7334,23.336439,4021.0889};
-						angles[]={4.6962714,1.5468718,6.2706771};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedButton""],[""edConnected"",[""Imported LampCeiling315928"",""Imported LampCeiling432651"",""Imported LampCeiling666555""]],[""mark"",""_sw_adminbase_2""]]}";
-					};
-					id=5290;
-					type="knopka";
-					atlOffset=1.2857571;
-				};
-				class Item42
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4025.0532,19.058168,4025.5208};
-						angles[]={0,3.1258144,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryCabinet""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""TorchDisabled""""]]}"",3],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""MatchBox""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""SigaretteDisabled""""]]}"",8]]]]}";
-					};
-					id=5260;
-					type="komodvirus";
-					atlOffset=1.3067112;
-				};
-				class Item43
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.4434,18.492266,4022.627};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\koverchik.p3d""]]],[""class"",""Decor""]]}";
-					};
-					id=5337;
-					type="koverchik";
-					atlOffset=1.2332153;
-				};
-				class Item44
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4021.8433,21.964315,4017.9954};
-						angles[]={0,3.2005255,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\koverchik.p3d""]]],[""class"",""Decor""]]}";
-					};
-					id=5356;
-					type="koverchik";
-					atlOffset=3.3439865;
-				};
-				class Item45
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4023.375,25.036621,4024};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling315928""]]}";
-					};
-					id=5256;
-					type="Lamp_tarelka";
-					atlOffset=2.8362942;
-				};
-				class Item46
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.5132,21.301062,4018.9585};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling33082""]]}";
-					};
-					id=5272;
-					type="Lamp_tarelka";
-					atlOffset=2.5731812;
-				};
-				class Item47
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4021.2637,21.334661,4013.9771};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling980749""]]}";
-					};
-					id=5273;
-					type="Lamp_tarelka";
-					atlOffset=2.4784927;
-				};
-				class Item48
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4023.7039,21.378962,4023.5481};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling856506""]]}";
-					};
-					id=5274;
-					type="Lamp_tarelka";
-					atlOffset=2.6515694;
-				};
-				class Item49
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4017.1917,21.195963,4018.7188};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling125000""]]}";
-					};
-					id=5276;
-					type="Lamp_tarelka";
-					atlOffset=2.6051388;
-				};
-				class Item50
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4016.7944,24.77276,4018.8674};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling666555""]]}";
-					};
-					id=5278;
-					type="Lamp_tarelka";
-					atlOffset=2.5834007;
-				};
-				class Item51
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4022.6641,24.898062,4018.6685};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling432651""]]}";
-					};
-					id=5279;
-					type="Lamp_tarelka";
-					atlOffset=2.7087021;
-				};
-				class Item52
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4016.6069,21.745607,4017.5168};
-						angles[]={0,1.6000302,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BedOld2""]]}";
-					};
-					id=5358;
-					type="CUP_postel_panelak1";
-					atlOffset=3.316021;
-				};
-				class Item53
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4026.8643,22.735041,4015.2969};
-						angles[]={0,3.1337273,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""SteelGreenCabinet""]]}";
-					};
-					id=5308;
-					type="shkafsin";
-					atlOffset=2.9603329;
-				};
-				class Item54
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4018.2839,18.994162,4023.8586};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CurtainElectronic""]]}";
-					};
-					id=5265;
-					type="shtora_centr";
-					atlOffset=10.812239;
-				};
-				class Item55
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4015.5632,18.865263,4018.8684};
-						angles[]={0,4.70679,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CurtainElectronic""]]}";
-					};
-					id=5347;
-					type="shtora_centr";
-					atlOffset=10.68334;
-				};
-				class Item56
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4016.5337,18.802389,4016.5681};
-						angles[]={0,3.1259508,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryRedCurtain""]]}";
-					};
-					id=5345;
-					type="shtora_pravo";
-					atlOffset=10.666939;
-				};
-				class Item57
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4016.4226,18.852388,4020.9985};
-						angles[]={0,3.1259508,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LuxuryRedCurtain""]]}";
-					};
-					id=5346;
-					type="shtora_pravo";
-					atlOffset=10.716938;
-				};
-				class Item58
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4013.0217,18.729261,4016.9397};
-						angles[]={0,3.1415937,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Sink""]]}";
-					};
-					id=5370;
-					type="CUP_A2_sink";
-					atlOffset=0.72426033;
-				};
-				class Item59
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4023.5352,18.934416,4020.3459};
-						angles[]={0,1.90959,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedSofa""]]}";
-					};
-					id=5311;
-					type="sofa";
-					atlOffset=1.1745358;
-				};
-				class Item60
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4022.7234,19.18004,4021.689};
-						angles[]={0,1.575488,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""radiosettings"",[1,""enc_sta"",-10,5,any,1000,0]]]],[""class"",""Intercom""],[""mark"",""Imported Intercom47894""]]}";
-					};
-					id=5313;
-					type="speeker";
-					atlOffset=0.62092018;
-				};
-				class Item61
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.3047,18.913944,4022.6282};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallRoundWoodenTable""]]}";
-					};
-					id=5336;
-					type="stolempire";
-					atlOffset=1.2374401;
-				};
-				class Item62
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4018.7817,21.935041,4024.8994};
-						angles[]={0,4.697155,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier3_4""]]],[""class"",""OldWoodenBox""]]}";
-					};
-					id=5255;
-					type="land_tarkov_wood";
-					atlOffset=3.1370773;
-				};
-				class Item63
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4016.1023,21.80475,4019.7673};
-						angles[]={0,4.697155,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldWoodenBox""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",52],[""""class"""",""""SpirtBottle""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",46],[""""class"""",""""Zvak""""]]}"",2],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",8],[""""class"""",""""KitchenKnife""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""prob"""",77],[""""class"""",""""BrightRedCloth""""]]}"",1]]]]}";
-					};
-					id=5360;
-					type="land_tarkov_wood";
-					atlOffset=3.375885;
-				};
-				class Item64
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4011.6846,19.110472,4017.1289};
-						angles[]={0,3.2185886,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldGreenToiletBowl""]]}";
-					};
-					id=5371;
-					type="tolchek";
-					atlOffset=0.78641319;
-				};
-				class Item65
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.2029,19.458208,4022.6797};
-						angles[]={0,0.65817493,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""GlassGoblet""]]}";
-					};
-					id=5326;
-					type="vinecup";
-					atlOffset=0.81587219;
-				};
-				class Item66
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.2446,19.455706,4022.498};
-						angles[]={0,1.028741,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""GlassGoblet""]]}";
-					};
-					id=5327;
-					type="vinecup";
-					atlOffset=0.81306076;
-				};
-				class Item67
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.4236,19.457506,4022.679};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""GlassGoblet""]]}";
-					};
-					id=5328;
-					type="vinecup";
-					atlOffset=0.81549454;
-				};
-				class Item68
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4017.3538,19.409304,4019.5984};
-						angles[]={0,1.560526,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""GlassGoblet""]]}";
-					};
-					id=5329;
-					type="vinecup";
-					atlOffset=0.89921379;
-				};
-				class Item69
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4025.1809,22.506813,4017.0173};
-						angles[]={0,3.1476033,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CoolSofa""]]}";
-					};
-					id=5335;
-					type="vitoriansofa";
-					atlOffset=3.2538643;
-				};
-				class Item70
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.2681,21.93944,4021.7148};
-						angles[]={0,3.061604,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_all""]]],[""class"",""SmallBookcase""]]}";
-					};
-					id=5314;
-					type="CUP_Dhangar_knihovna";
-					atlOffset=3.3763962;
-				};
-				class Item71
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4023.0427,21.952131,4021.8286};
-						angles[]={0,3.061604,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_all""]]],[""class"",""SmallBookcase""]]}";
-					};
-					id=5315;
-					type="CUP_Dhangar_knihovna";
-					atlOffset=3.3937511;
-				};
-				class Item72
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4017.7922,18.376341,4018.7971};
-						angles[]={0,6.2661614,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\buildings\furniture\dhangar_psacistul.p3d""]]],[""class"",""Decor""]]}";
-					};
-					id=5342;
-					type="CUP_Dhangar_psacistul";
-					atlOffset=0.3713398;
-				};
-				class Item73
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4022.8826,21.772186,4026.2183};
-						angles[]={0,6.2763729,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
-					};
-					id=5262;
-					type="zhelstenabig";
-					atlOffset=0.21890831;
-				};
-				class Item74
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4027.6436,21.550591,4022.6914};
-						angles[]={0,1.5707964,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
-					};
-					id=5263;
-					type="zhelstenabig";
-					atlOffset=1.3341522;
-				};
-				class Item75
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4027.6931,21.555271,4019.6716};
-						angles[]={0,1.5707964,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
-					};
-					id=5334;
-					type="zhelstenabig";
-					atlOffset=1.2936916;
-				};
-				class Item76
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4015.5,19.536884,4016.125};
-						angles[]={0,3.158581,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l3_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
-					};
-					id=5517;
-					type="Land_Wall_L3_5m_EP1";
-					atlOffset=0.88315201;
-				};
-				class Item77
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4010.875,19.536884,4016.375};
-						angles[]={0,3.2458491,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l3_5m_ep1.p3d""]]],[""class"",""Decor""]]}";
-					};
-					id=5518;
-					type="Land_Wall_L3_5m_EP1";
-					atlOffset=0.91061592;
-				};
-				class Item78
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4014.375,19.415705,4010.5};
-						angles[]={0,3.1415997,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopy""]]}";
-					};
-					id=5564;
-					type="Land_Shed_06_F";
-					atlOffset=0.78166771;
-				};
-				class Item79
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4021.25,25.376049,4014.625};
-						angles[]={0,1.560526,4.712389};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
-					};
-					id=5682;
-					type="zhelstenabig";
-					atlOffset=0.34726143;
-				};
-				class Item80
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4026,25.376049,4014.625};
-						angles[]={0,1.560526,4.712389};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
-					};
-					id=5683;
-					type="zhelstenabig";
-					atlOffset=0.34726143;
-				};
-				class Item81
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4021.25,25.376049,4020.625};
-						angles[]={0,1.560526,4.712389};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
-					};
-					id=5684;
-					type="zhelstenabig";
-					atlOffset=0.34726143;
-				};
-				class Item82
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4026.125,25.376049,4020.75};
-						angles[]={0,1.560526,4.712389};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
-					};
-					id=5688;
-					type="zhelstenabig";
-					atlOffset=2.9357147;
-				};
-				class Item83
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4027.5,16.126049,4014.625};
-						angles[]={3.1415951,1.5707964,1.1250376e-06};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
-					};
-					id=5689;
-					type="zhelstenabig";
-					atlOffset=8.125001;
-				};
-				class Item84
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4027.5,22.251049,4014.625};
-						angles[]={0,1.5707964,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelThinWallBig""]]}";
-					};
-					id=5690;
-					type="zhelstenabig";
-					atlOffset=0.69412994;
-				};
-				class Item85
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4024.8137,23.119694,4011.7327};
-						angles[]={0,4.4703484e-07,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""keytypes"",[""medpublic"",""medmain"",""super""]]]],[""class"",""WoodenDoor""]]}";
-					};
-					id=5695;
-					type="Land_xlamdoor";
-				};
-				class Item86
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4026.7463,18.773739,4015.0754};
-						angles[]={0,0.95382971,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TinyWoodenTable""]]}";
-					};
-					id=5700;
-					type="Land_TableSmall_01_F";
-				};
-				class Item87
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4025.9375,23.463747,4011.625};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BrickThinWallDoorway""]]}";
-					};
-					id=5694;
-					type="Land_kr_stena_3x6_dv";
-					atlOffset=3.4202003;
-				};
-				class Item88
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4025.25,19.541,4016.25};
-						angles[]={6.2821531,1.1727499e-05,0.0069904658};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\structures_e\wall\wall_l\wall_l3_5m_ep1.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=5692;
-					type="CUP_A2_l3_5m_ep1";
-					atlOffset=0.88588905;
-				};
-				class Item89
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4025.7466,18.559172,4015.2102};
-						angles[]={6.2805133,0.26179853,6.2828302};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LobbyChair""]]}";
-					};
-					id=5698;
-					type="CUP_A2_lobby_chair";
-				};
-				class Item90
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4026.8403,18.555408,4014.1631};
-						angles[]={6.2817373,1.39626,0.0022710452};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LobbyChair""]]}";
-					};
-					id=5699;
-					type="CUP_A2_lobby_chair";
-				};
-				class Item91
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4027.375,23.741949,4011.625};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d""]]],[""class"",""IStruct""]]}";
-					};
-					id=5701;
-					type="Land_BrickWall_03_l_pole_F";
-					atlOffset=0.97226143;
-				};
-				class Item92
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4015,17.002501,4019.5};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorSmall""]]}";
-					};
-					id=5924;
-					type="Land_pod_6x6";
-					atlOffset=0.27812576;
-				};
-				class Item93
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4009,17.002501,4019.5};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorSmall""]]}";
-					};
-					id=5925;
-					type="Land_pod_6x6";
-					atlOffset=0.26656914;
-				};
-				class Item94
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4015,17.001501,4023.5};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorSmall""]]}";
-					};
-					id=5922;
-					type="Land_pod_6x6";
-					atlOffset=0.29479218;
-				};
-				class Item95
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4025.0911,22.390129,4018.4241};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumWoodenTable1""]]}";
-					};
-					id=5982;
-					type="Land_TableBig_01_F";
-					atlOffset=3.38517;
-				};
-				class Item96
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4019.5945,22.882107,4016.4263};
-						angles[]={0,7.3984265e-06,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Muka""]]}";
-					};
-					id=5980;
-					type="risochek";
-					atlOffset=0.67121696;
-				};
-				class Item97
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4019.4619,22.506842,4016.8499};
-						angles[]={0,6.1086602,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Muka""]]}";
-					};
-					id=5990;
-					type="risochek";
-					atlOffset=0.29595184;
-				};
-				class Item98
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4019.457,22.232758,4016.5967};
-						angles[]={0,3.1415992,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenSmallShelf1""]]}";
-					};
-					id=5973;
-					type="Land_ShelvesWooden_F";
-					atlOffset=2.8590469;
-				};
-				class Item99
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4019.1489,23.825033,4016.5127};
-						angles[]={1.5707963,3.6082076e-06,1.1250377e-06};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""ContainerGreen3""]]}";
-					};
-					id=5974;
-					type="box";
-					atlOffset=1.5282211;
-				};
-				class Item100
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4018.2734,23.825033,4017.3862};
-						angles[]={0,1.5708057,4.712389};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""ContainerGreen3""]]}";
-					};
-					id=5975;
-					type="box";
-					atlOffset=1.5282211;
-				};
-				class Item101
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4019.7742,22.760233,4020.9197};
-						angles[]={0,1.4835298,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CuttingBoard""]]}";
-					};
-					id=5986;
-					type="land_doskarez";
-				};
-				class Item102
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4018.3184,21.91263,4020.731};
-						angles[]={0,1.5708033,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""FreezerStruct""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""Meat""""]]}"",3],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""Butter""""]]}"",6],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""Egg""""]]}"",3],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""MilkBottle""""]]}"",3]]]]}";
-					};
-					id=5972;
-					type="CUP_A2_fridge";
-					atlOffset=3.3448563;
-				};
-				class Item103
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4019.9185,22.802427,4021.0938};
-						angles[]={0,1.6580627,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Bread""]]}";
-					};
-					id=5988;
-					type="hleb";
-				};
-				class Item104
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.1167,22.765163,4020.884};
-						angles[]={1.5707965,4.7123895,4.9741888};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""KitchenKnife""]]}";
-					};
-					id=5985;
-					type="knife2";
-					atlOffset=0.71184731;
-				};
-				class Item105
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.2063,22.540539,4016.8633};
-						angles[]={0,3.1415992,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_exodusnew\stalker_tun\plita.p3d""],[""lightisenabled"",false],[""name"",""Дружковка""],[""light"",""SLIGHT_LIGHT_STOVE""]]],[""class"",""SmallStoveGrill""]]}";
-					};
-					id=5981;
-					type="plita_kushat";
-					atlOffset=3.2939949;
-				};
-				class Item106
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4019.4419,23.251478,4020.918};
-						angles[]={0,1.4835298,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MeatGrinder""]]}";
-					};
-					id=5987;
-					type="press";
-				};
-				class Item107
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4020.3943,23.02669,4017.0598};
-						angles[]={0,3.3161316,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""FryingPan""]]}";
-					};
-					id=5984;
-					type="land_skovoroda";
-					atlOffset=0.95483398;
-				};
-				class Item108
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4019.7754,22.343527,4020.9199};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelTable""]]}";
-					};
-					id=5983;
-					type="CUP_A2_smalltable";
-					atlOffset=3.3784351;
-				};
-				class Item109
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4018.3154,22.895702,4018.2292};
-						angles[]={0,7.2345138e-06,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""ContainerGreen""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""FoodPlate""""]]}"",5],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""GlassGoblet""""]]}"",5]]]]}";
-					};
-					id=5977;
-					type="sundugan";
-					atlOffset=0.60073471;
-				};
-				class Item110
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4018.6431,22.699894,4016.6919};
-						angles[]={0,7.3984265e-06,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Umivalnik""]]}";
-					};
-					id=5976;
-					type="umivalnik1";
-					atlOffset=3.0777702;
-				};
-				class Item111
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4018.3779,22.28236,4018.5967};
-						angles[]={0,1.5708032,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""CaseBedroomMedium""]]}";
-					};
-					id=5978;
-					type="yashik";
-					atlOffset=3.3623734;
-				};
-				class Item112
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4018.3784,22.28236,4017.9175};
-						angles[]={0,1.5708032,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Kintchen_all""]]],[""class"",""CaseBedroomMedium""]]}";
-					};
-					id=5979;
-					type="yashik";
-					atlOffset=3.3621502;
-				};
-				class Item113
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4027.2529,22.027739,4022.3411};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CaseBedroom""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",10]]],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",6]]],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",2]]],[""""prob"""",61],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",4]]],[""""prob"""",51],[""""class"""",""""Bryak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",10]]],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",5]]],[""""prob"""",73],[""""class"""",""""Zvak""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""stackcount"""",4]]],[""""prob"""",52],[""""class"""",""""Zvak""""]]}"",1]]]]}";
-					};
-					id=6180;
-					type="CUP_A1_case_bedroom_b";
-				};
-				class Item114
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4021.5586,19.694937,4016.25};
-						angles[]={0,3.1415927,0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__keytypesstr"",""Head""]]],[""class"",""SteelGreenDoor""]]}";
-					};
-					id=6184;
-					type="dooor";
-					atlOffset=1.1208096;
-				};
-				class Item115
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4026.8926,23.191423,4022.4453};
-						angles[]={0,1.919862,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Ключ от дома""],[""preinit@__keytypesstr"",""Head""]]],[""class"",""Key""]]}";
-					};
-					id=6181;
-					type="key";
-					atlOffset=1.1595173;
-				};
-				class Item116
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4027.1206,23.209135,4022.2659};
-						angles[]={0,1.0471977,0};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""HeadCloth""]]}";
-					};
-					id=6182;
-					type="S_Clothes";
-					atlOffset=1.1595173;
-				};
-				class Item117
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4025.792,23.076738,4022.2639};
-						angles[]={0,1.5707963,0};
-					};
-					side="Empty";
-					flags=5;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""spawnpointname"",""RHeadHoliday""]]],[""class"",""SpawnPoint""]]}";
-					};
-					id=6179;
-					type="VR_3DSelector_01_default_F";
-				};
-				class Item118
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4019.4282,22.710056,4016.9043};
-						angles[]={0.0058593834,5.9073958,1.0913936e-10};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MatchBox""]]}";
-					};
-					id=6185;
-					type="Land_Matches_F";
-					atlOffset=0.67121696;
-				};
-				class Item119
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4025.3542,22.969604,4018.155};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
-					};
-					id=6324;
-					type="buhlo1";
-					atlOffset=0.80486679;
-				};
-				class Item120
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4025.3445,22.969604,4018.4624};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
-					};
-					id=6325;
-					type="buhlo1";
-					atlOffset=0.80486679;
-				};
-				class Item121
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4025.3547,22.969604,4018.7932};
-					};
-					side="Empty";
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
-					};
-					id=6326;
-					type="buhlo1";
-					atlOffset=0.80486679;
-				};
-				class Item122
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4024.8252,22.97286,4018.1516};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
-					};
-					id=6327;
-					type="buhlo1";
-				};
-				class Item123
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4024.8154,22.97286,4018.459};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
-					};
-					id=6328;
-					type="buhlo1";
-				};
-				class Item124
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4024.8257,22.97286,4018.7898};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
-					};
-					id=6329;
-					type="buhlo1";
-				};
-				class Item125
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4018.1912,22.204796,4023.2327};
-						angles[]={0,1.6580627,-0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ShuttleBag""]]}";
-					};
-					id=6331;
-					type="case_1";
-					atlOffset=3.3826408;
-				};
-				class Item126
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4017.7249,18.711229,4020.0273};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Briefcase""]]}";
-					};
-					id=6330;
-					type="land_portfeluga";
-					atlOffset=0.48883438;
-				};
-				class Item127
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={4026.9834,22.169394,4012.3235};
-						angles[]={0,5.8468533,-0};
-					};
-					side="Empty";
-					flags=1;
-					class Attributes
-					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelBrownContainer""]]}";
-					};
-					id=6332;
-					type="box_metal_9";
-					atlOffset=3.402462;
+					dataType="Layer";
+					name="Пол";
+					state=1;
+					class Entities
+					{
+						items=3;
+						class Item0
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4015,17.002501,4019.5};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorSmall""]]}";
+							};
+							id=5924;
+							type="Land_pod_6x6";
+							atlOffset=0.27812576;
+						};
+						class Item1
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4009,17.002501,4019.5};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorSmall""]]}";
+							};
+							id=5925;
+							type="Land_pod_6x6";
+							atlOffset=0.26656914;
+						};
+						class Item2
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={4015,17.001501,4023.5};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ThickConcreteFloorSmall""]]}";
+							};
+							id=5922;
+							type="Land_pod_6x6";
+							atlOffset=0.29479218;
+						};
+					};
+					id=6448;
+					atlOffset=0.26856232;
 				};
 			};
 			id=5376;
-			atlOffset=2.6327419;
+			atlOffset=0.59308052;
 		};
 		class Item11
 		{
@@ -34626,7 +32919,7 @@ class Mission
 			state=1;
 			class Entities
 			{
-				items=103;
+				items=116;
 				class Item0
 				{
 					dataType="Object";
@@ -34649,7 +32942,8 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3987.5745,22.604683,3942.0166};
+						position[]={3993.8044,22.729313,3930.1482};
+						angles[]={0,3.4033992,0};
 					};
 					side="Empty";
 					flags=1;
@@ -34659,7 +32953,7 @@ class Mission
 					};
 					id=5431;
 					type="transformator_2";
-					atlOffset=15.495884;
+					atlOffset=0.43962479;
 				};
 				class Item2
 				{
@@ -34672,7 +32966,7 @@ class Mission
 					side="Empty";
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PowerGenerator""],[""edConnected"",[""ElectricalShield G:A/Fxjmd5TYI"",""ElectricalShield G:Mx8vHMxFHf0""]],[""mark"",""PowerGenerator G:j0+qQckZZcQ""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PowerGenerator""],[""edConnected"",[""ElectricalShield G:A/Fxjmd5TYI"",""ElectricalShield G:Mx8vHMxFHf0"",""ElectricalShield G:mp0uENe3I9U""]],[""mark"",""PowerGenerator G:j0+qQckZZcQ""]]}";
 					};
 					id=4867;
 					type="controlpanel";
@@ -34702,13 +32996,13 @@ class Mission
 					class PositionInfo
 					{
 						position[]={4018.125,18.7498,3990.375};
-						angles[]={0,4.7123914,-0};
+						angles[]={0,4.7123914,0};
 					};
 					side="Empty";
 					flags=1;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PowerSwitcherBig""],[""edConnected"",[""StreetLamp G:UxJWjCC/Bg4 (1)"",""StreetLamp G:UxJWjCC/Bg4 (2)"",""StreetLamp G:UxJWjCC/Bg4 (3)"",""StreetLamp G:UxJWjCC/Bg4 (13)"",""StreetLamp G:UxJWjCC/Bg4 (12)"",""StreetLamp G:UxJWjCC/Bg4 (11)"",""StreetLamp G:UxJWjCC/Bg4 (14)"",""StreetLamp G:UxJWjCC/Bg4 (15)"",""StreetLamp G:UxJWjCC/Bg4 (16)"",""LampCeiling G:B/Xr2DSNEE8"",""LampCeiling G:xpMHtXxlmTQ"",""LampCeiling G:r5W+CtYRS6c"",""StreetLampEnabled G:6iJmJ3WK9as"",""StreetLampEnabled G:slX98dqPZSk"",""LampCeiling G:ZbdDii2fLK0"",""StreetLamp G:UxJWjCC/Bg4 (17)""]],[""mark"",""PowerSwitcherBig G:iKcDSG5wGLU""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PowerSwitcherBig""],[""edConnected"",[""StreetLamp G:UxJWjCC/Bg4 (1)"",""StreetLamp G:UxJWjCC/Bg4 (2)"",""StreetLamp G:UxJWjCC/Bg4 (3)"",""StreetLamp G:UxJWjCC/Bg4 (13)"",""StreetLamp G:UxJWjCC/Bg4 (12)"",""StreetLamp G:UxJWjCC/Bg4 (11)""]],[""mark"",""PowerSwitcherBig G:iKcDSG5wGLU""]]}";
 					};
 					id=5439;
 					type="electron";
@@ -35214,7 +33508,7 @@ class Mission
 					flags=1;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ElectricalShield""],[""edConnected"",[""PowerSwitcherBig G:iKcDSG5wGLU"",""RedButton G:O5Lw3Er5g0k"",""RedButton G:RsfWhASoqhI"",""RedButton G:Ml/0rpX9BHE"",""RedButton G:7n8Jrn5regU"",""ElectricalShieldSmall G:ZiTg3D55oVI"",""ElectricalShieldSmall G:qw45CAjaolk"",""ElectricalShieldSmall G:yF6baoGdZeo"",""ElectricalShieldSmall G:WffAD4Ce0tA""]],[""mark"",""ElectricalShield G:Mx8vHMxFHf0""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ElectricalShield""],[""edConnected"",[""PowerSwitcherBig G:iKcDSG5wGLU"",""RedButton G:O5Lw3Er5g0k"",""RedButton G:RsfWhASoqhI"",""RedButton G:Ml/0rpX9BHE"",""RedButton G:7n8Jrn5regU"",""ElectricalShieldSmall G:ZiTg3D55oVI"",""ElectricalShieldSmall G:qw45CAjaolk"",""ElectricalShieldSmall G:yF6baoGdZeo"",""ElectricalShieldSmall G:WffAD4Ce0tA"",""ElectricalShieldSmall G:coP0W6EU6lQ""]],[""mark"",""ElectricalShield G:Mx8vHMxFHf0""]]}";
 					};
 					id=5438;
 					type="transformator_2";
@@ -35261,18 +33555,18 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3997.625,21.142914,3982.25};
+						position[]={3997.625,20.767914,3982.25};
 						angles[]={0,1.5708032,0};
 					};
 					side="Empty";
-					flags=5;
+					flags=1;
 					class Attributes
 					{
 						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_STREET_LAMP_DORM""]]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:UxJWjCC/Bg4 (2)""]]}";
 					};
 					id=4875;
 					type="Land_LampShabby_off_F";
-					atlOffset=0.1702137;
+					atlOffset=4.6405621;
 				};
 				class Item37
 				{
@@ -35333,18 +33627,18 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3987.5,24.142914,3947.5};
+						position[]={3987.875,24.14703,3948.25};
 						angles[]={0,1.8326081,0};
 					};
 					side="Empty";
-					flags=5;
+					flags=1;
 					class Attributes
 					{
 						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_STREET_LAMP_DORM""]]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:UxJWjCC/Bg4 (6)""]]}";
 					};
 					id=4879;
 					type="Land_LampShabby_off_F";
-					atlOffset=0.2237606;
+					atlOffset=0.31478119;
 				};
 				class Item41
 				{
@@ -35637,18 +33931,18 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={4021.8003,20.973539,3994.8228};
-						angles[]={0,6.0213938,0};
+						position[]={4024.55,20.618889,3992.8225};
+						angles[]={0,5.7595944,0};
 					};
 					side="Empty";
-					flags=5;
+					flags=1;
 					class Attributes
 					{
 						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_STREET_LAMP_DORM""]]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:UxJWjCC/Bg4 (14)""]]}";
 					};
 					id=5540;
 					type="Land_LampShabby_off_F";
-					atlOffset=0.0059185028;
+					atlOffset=11.846859;
 				};
 				class Item58
 				{
@@ -36294,7 +34588,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ElectricalShieldSmall""],[""edConnected"",[""_sw_adminbase_2"",""_sw_adminbase_1""]],[""mark"",""ElectricalShieldSmall G:yF6baoGdZeo""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ElectricalShieldSmall""],[""edConnected"",[""_sw_adminbase_2"",""_sw_adminbase_1"",""StreetLamp G:UxJWjCC/Bg4 (17)""]],[""mark"",""ElectricalShieldSmall G:yF6baoGdZeo""]]}";
 					};
 					id=5791;
 					type="transformator";
@@ -36311,7 +34605,7 @@ class Mission
 					flags=1;
 					class Attributes
 					{
-						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ElectricalShieldSmall""],[""edConnected"",[""LampCeiling G:Fuyk/7Certg""]],[""mark"",""ElectricalShieldSmall G:WffAD4Ce0tA""]]}";
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ElectricalShieldSmall""],[""mark"",""ElectricalShieldSmall G:WffAD4Ce0tA""]]}";
 					};
 					id=5792;
 					type="transformator";
@@ -36442,9 +34736,242 @@ class Mission
 					type="Lamp_tarelka";
 					atlOffset=2.3033218;
 				};
+				class Item103
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4035.2725,18.877422,3989.866};
+						angles[]={0,5.8468533,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ElectricalShieldSmall""],[""edConnected"",[""PowerSwitcher G:utY5rBforEs"",""RedButton G:1Ts8HL9tS58""]],[""mark"",""ElectricalShieldSmall G:coP0W6EU6lQ""]]}";
+					};
+					id=6373;
+					type="transformator";
+					atlOffset=0.74511147;
+				};
+				class Item104
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4062.9785,19.001205,4011.3301};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ElectricalShield""],[""edConnected"",[""StreetLampEnabled G:slX98dqPZSk"",""StreetLampEnabled G:6iJmJ3WK9as"",""LampCeiling G:B/Xr2DSNEE8"",""LampCeiling G:xpMHtXxlmTQ"",""LampCeiling G:ZbdDii2fLK0"",""LampCeiling G:r5W+CtYRS6c""]],[""mark"",""ElectricalShield G:mp0uENe3I9U""]]}";
+					};
+					id=6372;
+					type="transformator_2";
+					atlOffset=11.892406;
+				};
+				class Item105
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4034.4143,18.699226,3989.7083};
+						angles[]={0,2.7052746,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PowerSwitcher""],[""edConnected"",[""StreetLamp G:UxJWjCC/Bg4 (15)"",""StreetLamp G:UxJWjCC/Bg4 (16)"",""StreetLamp G:UxJWjCC/Bg4 (14)""]],[""mark"",""PowerSwitcher G:utY5rBforEs""]]}";
+					};
+					id=6375;
+					type="rubilnik_4";
+					atlOffset=0.98654556;
+				};
+				class Item106
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4030.7598,18.871567,3991.9028};
+						angles[]={4.7123928,1.6749154e-06,5.8468552};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedButton""],[""edConnected"",[""LampCeiling G:Fuyk/7Certg""]],[""mark"",""RedButton G:1Ts8HL9tS58""]]}";
+					};
+					id=6374;
+					type="knopka";
+					atlOffset=1.204998;
+				};
+				class Item107
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4023.375,25.036621,4024};
+						angles[]={0,1.560526,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling315928""]]}";
+					};
+					id=5256;
+					type="Lamp_tarelka";
+					atlOffset=2.8253593;
+				};
+				class Item108
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4020.5132,21.301062,4018.9585};
+						angles[]={0,1.560526,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling33082""]]}";
+					};
+					id=5272;
+					type="Lamp_tarelka";
+					atlOffset=2.5731812;
+				};
+				class Item109
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4021.2637,21.334661,4013.9771};
+						angles[]={0,1.560526,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling980749""]]}";
+					};
+					id=5273;
+					type="Lamp_tarelka";
+					atlOffset=2.4784927;
+				};
+				class Item110
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4023.7039,21.378962,4023.5481};
+						angles[]={0,1.560526,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling856506""]]}";
+					};
+					id=5274;
+					type="Lamp_tarelka";
+					atlOffset=2.6515694;
+				};
+				class Item111
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4017.1917,21.195963,4018.7188};
+						angles[]={0,1.560526,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling125000""]]}";
+					};
+					id=5276;
+					type="Lamp_tarelka";
+					atlOffset=2.6051388;
+				};
+				class Item112
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4016.7944,24.77276,4018.8674};
+						angles[]={0,1.560526,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling666555""]]}";
+					};
+					id=5278;
+					type="Lamp_tarelka";
+					atlOffset=2.5834007;
+				};
+				class Item113
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4022.6641,24.898062,4018.6685};
+						angles[]={0,1.560526,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""Imported LampCeiling432651""]]}";
+					};
+					id=5279;
+					type="Lamp_tarelka";
+					atlOffset=2.7087021;
+				};
+				class Item114
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4022.6719,20.109842,4016.6477};
+						angles[]={1.5869575,4.6894608,0.075734399};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedButton""],[""edConnected"",[""Imported Intercom47894"",""Imported LampCeiling33082"",""Imported LampCeiling125000"",""Imported LampCeiling856506""]],[""mark"",""_sw_adminbase_1""]]}";
+					};
+					id=5289;
+					type="knopka";
+					atlOffset=1.5110512;
+				};
+				class Item115
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4022.7334,23.336439,4021.0889};
+						angles[]={4.6962714,1.5468718,6.2706771};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedButton""],[""edConnected"",[""Imported LampCeiling315928"",""Imported LampCeiling432651"",""Imported LampCeiling666555""]],[""mark"",""_sw_adminbase_2""]]}";
+					};
+					id=5290;
+					type="knopka";
+					atlOffset=1.2857571;
+				};
 			};
 			id=3862;
-			atlOffset=2.9981709;
+			atlOffset=0.5941906;
 		};
 		class Item12
 		{
@@ -36606,7 +35133,7 @@ class Mission
 			state=1;
 			class Entities
 			{
-				items=17;
+				items=18;
 				class Item0
 				{
 					dataType="Object";
@@ -36899,9 +35426,26 @@ class Mission
 					type="VR_3DSelector_01_default_F";
 					atlOffset=0.86299133;
 				};
+				class Item17
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4025.792,23.076738,4022.2639};
+						angles[]={0,1.5707963,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""spawnpointname"",""RHeadHoliday""]]],[""class"",""SpawnPoint""]]}";
+					};
+					id=6179;
+					type="VR_3DSelector_01_default_F";
+				};
 			};
 			id=5678;
-			atlOffset=0.41419601;
+			atlOffset=2.8131618;
 		};
 		class Item14
 		{
@@ -37138,6 +35682,1262 @@ class Mission
 			};
 			id=6127;
 			atlOffset=0.51244736;
+		};
+		class Item15
+		{
+			dataType="Layer";
+			name="Effects";
+			state=3;
+			class Entities
+			{
+				items=17;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3999.375,22.5,3954};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6381;
+					type="Land_VR_Block_02_F";
+					atlOffset=15.5;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item1
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3987.375,22.5,3948.875};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6386;
+					type="Land_VR_Block_02_F";
+					atlOffset=15.5;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item2
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4000.125,19,3985.625};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6387;
+					type="Land_VR_Block_02_F";
+					atlOffset=2.6343508;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item3
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3994.375,19,3997.625};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6388;
+					type="Land_VR_Block_02_F";
+					atlOffset=6.0937996;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item4
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3999.875,19,3973.5};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6389;
+					type="Land_VR_Block_02_F";
+					atlOffset=12;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item5
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4009.625,22.5,3954};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6391;
+					type="Land_VR_Block_02_F";
+					atlOffset=15.5;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item6
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3983.25,22.5,3936.875};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6392;
+					type="Land_VR_Block_02_F";
+					atlOffset=15.5;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item7
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3989,22.5,3924.875};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6393;
+					type="Land_VR_Block_02_F";
+					atlOffset=15.5;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item8
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4011.375,20.957247,3963.4924};
+						angles[]={0.34906581,0,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6394;
+					type="Land_VR_Block_02_F";
+					atlOffset=0.063268661;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item9
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3999.47,20.807831,3963.3809};
+						angles[]={0.34906581,0,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6395;
+					type="Land_VR_Block_02_F";
+					atlOffset=0.054084778;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item10
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4006.3577,19,3997.6667};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6396;
+					type="Land_VR_Block_02_F";
+					atlOffset=0.77441216;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item11
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4018.3999,19,4000.1445};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6397;
+					type="Land_VR_Block_02_F";
+					atlOffset=12;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item12
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4042.4204,19,4010.8125};
+						angles[]={0,5.5850539,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6399;
+					type="Land_VR_Block_02_F";
+					atlOffset=12;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item13
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4056,19,4014.75};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6400;
+					type="Land_VR_Block_02_F";
+					atlOffset=5.7220459e-05;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item14
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4030.6045,19,4002.3984};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6402;
+					type="Land_VR_Block_02_F";
+					atlOffset=12;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item15
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4031.25,22.5,3942.75};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6403;
+					type="Land_VR_Block_02_F";
+					atlOffset=15.5;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+				class Item16
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4009.9905,22.5,3921.8184};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""__effinit"",""dust_pieces_10m""]]],[""class"",""EffectAsStruct""]]}";
+					};
+					id=6404;
+					type="Land_VR_Block_02_F";
+					atlOffset=15.5;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ObjectMaterialCustom0";
+							expression="_this setObjectMaterialGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ObjectTextureCustom0";
+							expression="_this setObjectTextureGlobal [0,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ObjectTextureCustom1";
+							expression="_this setObjectTextureGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="#(argb,8,8,3)color(1.0,0.0,0.4,1.0,co)";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ObjectMaterialCustom1";
+							expression="_this setObjectMaterialGlobal [1,_value]";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="";
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+			};
+			id=6382;
+			atlOffset=1.0385227;
 		};
 	};
 };

@@ -41,3 +41,4 @@
 #include "ScriptedConfigs\SLIGHT_ITAL_LAMP_MEDIUM.sqf"
 #include "ScriptedConfigs\SLIGHT_MOB_VOMIT.sqf"
 #include "ScriptedConfigs\SLIGHT_SEARCHLIGHT_DORM.sqf"
+#include "ScriptedConfigs\SLIGHT_LIGHT_BAKE_SAUNA.sqf"

@@ -45,12 +45,6 @@ class(Scales) extends(InteractibleInterior)
 	getter_func(isMovable,true);
 endclass
 
-class(Gramofon) extends(InteractibleInterior)
-	var(model,"relicta_models\models\interier\props\patefon.p3d");
-	var(material,"MatWood");
-	getter_func(isMovable,true);
-endclass
-
 class(OldEngine) extends(InteractibleInterior)
 	var(model,"metro_ob\model\engine_sm_01.p3d");
 endclass
