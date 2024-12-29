@@ -5,7 +5,7 @@
 
 #include "..\..\host\lang.hpp"
 
-namepsace(Craft,craft_)
+namespace(Craft,craft_)
 
 decl(bool)
 craft_isPreviewEnabled = false;

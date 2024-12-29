@@ -8,7 +8,7 @@
 #include <..\..\host\text.hpp>
 #include <..\..\host\CombatSystem\CombatSystem.hpp>
 
-namepsace(Hud,hud_)
+namespace(Hud,hud_)
 
 macro_const(hud_size_x)
 #define HUD_SIZE_X 10

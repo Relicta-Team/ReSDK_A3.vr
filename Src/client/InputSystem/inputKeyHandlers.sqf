@@ -13,7 +13,7 @@ input__ikdp = [];
 
 // [name,desc,current,default,variable]
 macro_func(input_registerKeybind,any[](string;string;any;string))
-#define kb(name,desc,defkey,varname) [name,desc,defkey,defkey,call{missionnamespace setvariable [varname,defkey]; missionNamespace getvariable varname},defkey]
+#define kb(name,desc,defkey,varname) [name,desc,defkey,defkey,call{missionnamespace setvariable [varname,defkey]; varname},defkey]
 macro_func(input_makeKeybind,any[](any;bool;bool;bool;bool))
 #define keybind(value,shift,ctrl,alt,isMouse) [value,shift,ctrl,alt,isMouse]
 

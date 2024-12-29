@@ -36,7 +36,7 @@ clistat_buffer pushback [colortext(CC5460,"ReNode:"),{
 clistat_buffer append [
 	[colortext(CC5460,"fps: "),{
 		format["cur:%1; min:%2; dt:%3;",round diag_fps,round diag_fpsmin,diag_deltaTime]
-	}];
+	}],
 	[colortext(CC5460,"frame: "),{diag_frameno toFixed 0}],
 	[colortext(E4F500,"LightRender(depr): "),{_nonvis = 0; _sceneObj = 0;
 		{
