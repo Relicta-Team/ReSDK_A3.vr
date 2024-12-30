@@ -8,9 +8,13 @@
 #include "helpers.hpp"
 #include "..\ClientRpc\clientRpc.hpp"
 
+namespace(Inventory,inventory_)
+
 //as TIME_PREPARE_SLOTS
+macro_const(inventory_timePrepareVerbMenu)
 #define TIME_PREPARE_VERBMENU 0.09
 
+decl(void(int))
 inventory_onGetItemVerbs = {
 	params ["_slot"];
 	
@@ -28,6 +32,7 @@ inventory_onGetItemVerbs = {
 	//todo block double press
 };
 
+decl(void(string;any[];int;string))
 inventory_onLoadVerbsInventory = {
 	
 	params ["_targetName","_verbList","_slotId","_pointer"];
@@ -66,7 +71,7 @@ inventory_onLoadVerbsInventory = {
 	
 }; rpcAdd("loadVerbsInventory",inventory_onLoadVerbsInventory);
 
-
+decl(void())
 inventory_onPrepareVerbMenu = {
 	
 	private _menuWidget = getVerbMenuWidget;
@@ -84,6 +89,7 @@ inventory_onPrepareVerbMenu = {
 	[_menuWidget,_newPos,TIME_PREPARE_VERBMENU] call widgetSetPosition;
 };
 
+decl(void(widget))
 inventory_onPressVerb = {
 	params ["_control"];
 	
@@ -104,6 +110,7 @@ inventory_onPressVerb = {
 	
 };
 
+decl(void())
 inventory_unloadVerbMenu = {
 	
 	false call inventory_onPrepareVerbMenu;
