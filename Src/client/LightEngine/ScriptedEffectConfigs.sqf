@@ -44,3 +44,5 @@
 #include "ScriptedConfigs\SLIGHT_LIGHT_BAKE_SAUNA.sqf"
 #include "ScriptedConfigs\SLIGHT_LAMP_REDLIGHT_ALARM.sqf"
 #include "ScriptedConfigs\SLIGHT_LAMP_KINKY_VIBE.sqf"
+#include "ScriptedConfigs\SLIGHT_PRISON_LAMP_MAIN.sqf"
+#include "ScriptedConfigs\SLIGHT_PRISON_LAMP_GREEN.sqf"

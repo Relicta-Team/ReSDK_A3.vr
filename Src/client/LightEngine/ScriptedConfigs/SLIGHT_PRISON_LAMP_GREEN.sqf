@@ -1,9 +1,9 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2024 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
-regScriptEmit(SLIGHT_THEATRE_SCENE_AREA_MAIN)
+regScriptEmit(SLIGHT_PRISON_LAMP_GREEN)
 	[
 		"lt",
 		null,
