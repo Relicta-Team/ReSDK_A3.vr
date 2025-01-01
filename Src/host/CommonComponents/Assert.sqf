@@ -1,13 +1,10 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
 
 #include <..\engine.hpp>
-
-#define __vmthrow_assert(res) __vm_log(res); exitcode__ -100;
-#define __vmthrow_assert_nothrow(res) __vm_log(res); if(true)exitwith{};
 
 sys_int_evalassert = {
 	params ["_value"];
@@ -26,22 +23,6 @@ sys_static_assert_ = {
 	params [["_expr","NO_EXPR"],["_module","UNK_MODULE"],["_line",0],["_message",""]];
 	
 	private _syslogprefix__ = "&SYSTEMLOG ";
-
-	//for client build
-	#ifdef __VM_VALIDATE
-	if (_message != "") then {_message = " - " + _message};
-	private ___STA_VM_MESSAGE = format["Static assertion failed '%1'%4 (%2 at line %3)",_expr,_module,_line,_message];
-	___STA_VM_MESSAGE = _syslogprefix__ + ___STA_VM_MESSAGE;
-	__vmthrow_assert_nothrow(___STA_VM_MESSAGE);
-	#endif
-	#ifdef __VM_BUILD
-	if isNull(client_sys_loaded) exitWith {
-		if (_message != "") then {_message = " - " + _message};
-		private ___STA_VM_MESSAGE = format["Static assertion failed '%1'%4 (%2 at line %3)",_expr,_module,_line,_message];
-		___STA_VM_MESSAGE = _syslogprefix__ + ___STA_VM_MESSAGE;
-		__vmthrow_assert_nothrow(___STA_VM_MESSAGE);
-	};
-	#endif
 	
 	#ifdef EDITOR
 	

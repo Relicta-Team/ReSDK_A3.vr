@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -36,6 +36,7 @@ function(golib_om_internal_handleTransformEvent)
 function(golib_om_onAttibutesChanged)
 {
 	params ["_obj"];
+	//[_obj] call lsim_reloadLightOnObject;
 	//[null] call inspector_menuLoad;
 }
 

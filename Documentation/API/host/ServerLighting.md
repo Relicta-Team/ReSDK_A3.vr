@@ -165,8 +165,6 @@ File: [host\ServerLighting\ServerLighting_init.sqf at line 90](../../../Src/host
 
 Type: Variable
 
-> Exists if **__VM_VALIDATE** not defined
-
 Description: 
 
 
@@ -174,7 +172,7 @@ Initial value:
 ```sqf
 [10,10,0] call gm_createMob
 ```
-File: [host\ServerLighting\ServerLighting_init.sqf at line 131](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L131)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 130](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L130)
 ## type
 
 Type: function
@@ -209,7 +207,7 @@ Description:
 - Param: _autolink (optional, default true)
 - Param: _select (optional, default "")
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 134](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L134)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 132](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L132)
 ## slt_destr
 
 Type: function
@@ -217,7 +215,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 159](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L159)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 157](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L157)
 ## slt_destr_impl
 
 Type: function
@@ -225,7 +223,7 @@ Type: function
 Description: real impl of destroy server light
 - Param: _o
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 167](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L167)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 165](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L165)
 ## slt_scriptCfg_doSorting
 
 Type: function
@@ -233,4 +231,4 @@ Type: function
 Description: фикс из le_se_doSorting с доп.оптимизацией
 
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 177](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L177)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 175](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L175)

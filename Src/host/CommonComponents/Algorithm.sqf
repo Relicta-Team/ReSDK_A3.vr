@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -9,10 +9,6 @@
 
 //enable static tests
 //#define __ENABLE_ALGORITHM_TEST___
-
-#ifndef _SQFVM
-	#undef __ENABLE_ALGORITHM_TEST___
-#endif
 
 
 allOf = {

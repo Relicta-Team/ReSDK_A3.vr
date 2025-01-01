@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -18,6 +18,5 @@ reagentSystem_internal_lastEx = "";
 reagentSystem_internal_lastObj = nullPtr;
 
 reagentSystem_map_allReactions = createHashMap;
-#ifndef __VM_VALIDATE
+
 call reagentSystem_initReactions;
-#endif

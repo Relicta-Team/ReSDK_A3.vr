@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -60,7 +60,7 @@ proxIt_updateModel = {
 	_object attachTo [_mob,_posData select 0,proxIt_list_selections select _newselection,true];
 	_object setvariable ["_pit_lastAttachData",[_mob,_posData select 0,proxIt_list_selections select _newselection,true]];
 	
-	[_object,false] call setPhysicsCollisionFlag_impl;
+	_object setPhysicsCollisionFlag false;
 };
 
 proxIt_loadConfig = {
@@ -89,7 +89,7 @@ proxIt_loadConfig = {
 	if (isNull(_map)) then {
 		errorformat("Cant find data on path %1",_modelPathOrClass);
 		_object = createSimpleObject [_baseModel,[0,0,0],true];
-		[_object,false] call setPhysicsCollisionFlag_impl;
+		_object setPhysicsCollisionFlag false;
 		_object attachTo [_mob,[0,0,0],proxIt_list_selections select _selectionId,true];
 		_object setvariable ["_pit_lastAttachData",[_mob,[0,0,0],proxIt_list_selections select _selectionId,true]];
 		RETURN(_object);
@@ -110,7 +110,7 @@ proxIt_loadConfig = {
 	_object attachTo [_mob,_posData select 0,proxIt_list_selections select _selectionId,true];
 	_object setvariable ["_pit_lastAttachData",[_mob,_posData select 0,proxIt_list_selections select _selectionId,true]];
 
-	[_object,false] call setPhysicsCollisionFlag_impl;
+	_object setPhysicsCollisionFlag false;
 	
 	_object
 };

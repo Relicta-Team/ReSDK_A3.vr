@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -16,6 +16,7 @@ class(ShelfBase) extends(Furniture)
 	editor_only(var(desc,"Мебель для складирования предметов на поверхности");)
 	var(material,"MatWood");
 	var(dr,1);
+	getterconst_func(getCoefAutoWeight,10);
 endclass
 
 editor_attribute("EditorGenerated")
@@ -23,6 +24,8 @@ class(Sink) extends(ShelfBase)
 	var(model,"ca\structures\furniture\bathroom\sink\sink.p3d");
 	var(name,"Раковина");
 	var(desc,"Настоящая роскошь");
+
+	getterconst_func(getCoefAutoWeight,30);
 
 	var(material,"MatBeton");
 	var(sourceMatter,"Water");
@@ -97,6 +100,14 @@ endclass
 editor_attribute("EditorGenerated")
 class(WoodenSmallShelf1) extends(WoodenSmallShelf)
 	var(model,"a3\structures_f_epb\furniture\shelveswooden_f.p3d");
+endclass
+
+class(WoodenSmallShelf2) extends(WoodenSmallShelf)
+	var(model,"ca\structures_e\misc\misc_interier\rack_ep1.p3d");
+endclass
+
+class(WoodenSmallShelf3) extends(WoodenSmallShelf)
+	var(model,"relicta_models\models\interier\bookshelf.p3d");
 endclass
 
 editor_attribute("EditorGenerated")

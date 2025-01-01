@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -49,7 +49,7 @@ db_init = {
 			errorformat("Database version mismatch. Expected: %1, found: %2", db_version arg _ver);
 			["Database version mismatch. Expected: %1, found: %2", db_version, _ver] call logCritical;
 			#ifdef EDITOR
-			["Версия базы данных отличается от используемой в '%3'.%4%4Текущая версия: %1; Используемая %2;%4%4Обновите БД через ReMaker, либо скопируйте базу вручную, взяв её из 'ReMaker\Deploy\db'",
+			["Версия базы данных отличается от используемой в '%3'.%4%4Текущая версия: %1; Используемая %2;%4%4Обновите БД через RBuilder, либо скопируйте базу вручную, взяв её из 'RBuilder\deploy\editor\db'",
 			_ver,db_version,DB_PATH,endl] call messageBox;
 			#endif
 			appExit(APPEXIT_REASON_CRITICAL);

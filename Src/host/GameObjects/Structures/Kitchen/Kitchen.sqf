@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -26,6 +26,7 @@ class(BlackSmallStove) extends(ILightibleStruct)
 	var(desc,"Используется для приготовления пищи.");
 	var(model,"ml_shabut\pechka\pechechkas.p3d");
 	var(material,"MatMetal");
+	getterconst_func(getCoefAutoWeight,50);
 	var(dr,3);
 	getterconst_func(isFireLight,true);
 	var(light,LIGHT_BAKE);
@@ -103,6 +104,7 @@ class(SmallStoveGrill) extends(ILightibleStruct)
 	var(name,"Печка");
 	var(model,"ml_shabut\pechka\pechka.p3d");
 	var(material,"MatMetal");
+	getterconst_func(getCoefAutoWeight,2.5);
 	var(dr,3);
 	
 	getterconst_func(isFireLight,true);
@@ -189,4 +191,10 @@ class(SmallStoveGrill) extends(ILightibleStruct)
 			callSelfParams(lightSetMode,false);
 		};
 	};
+endclass
+
+class(KitchenStove) extends(SmallStoveGrill)
+	var(name,"Дружковка");
+	var(desc,"Используется для приготовления пищи.")
+	var(model,"ml_exodusnew\stalker_tun\plita.p3d");
 endclass

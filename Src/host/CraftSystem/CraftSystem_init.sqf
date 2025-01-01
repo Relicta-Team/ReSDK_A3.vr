@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -55,10 +55,6 @@ csys_cat_debug_allCrafts = [];
 #endif
 
 csys_init = {
-	
-	#ifdef _SQFVM
-	if (true) exitWith {};
-	#endif
 
 	{
 		csys_cat_map_sysnames set [_x,_foreachindex];

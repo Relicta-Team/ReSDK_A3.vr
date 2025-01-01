@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -18,6 +18,7 @@ class(SignBar) extends(StreetLampEnabled)
 	var(edReqPower,80);
 	var(model,"ca\signs2\sign_bar_ru.p3d");
 	var(material,"MatMetal");
+	getterconst_func(getCoefAutoWeight,30);
 	var(dr,1);
 
 	func(getDescFor)

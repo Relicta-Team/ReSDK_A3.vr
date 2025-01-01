@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -204,7 +204,7 @@ call dsm_initialize; //discord mgr init
 if (!call yaml_isExtensionLoaded) then {
 	#ifdef EDITOR
 	["Yaml библиотека не найдена."
-		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""ReMaker\DEPLOY.bat"""] call messageBox;
+		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""RBuilder\DEPLOY.bat"""] call messageBox;
 	#endif
 	setLastError("Yaml library not found.");
 	appExit(APPEXIT_REASON_EXTENSION_ERROR);
@@ -215,7 +215,7 @@ logformat("Yaml version: %1",_yamlObj);
 if ((_yamlObj getv(major)) == 0) then {
 	#ifdef EDITOR
 	["Yaml библиотека не обновлена."
-		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""ReMaker\DEPLOY.bat"""] call messageBox;
+		+endl+endl+"Пожалуйста выполните команду по обновлению файлов редактора: Закройте Платформу и запустите ""RBuilder\DEPLOY.bat"""] call messageBox;
 	#endif
 	setLastError("Yaml library outdated.");
 	appExit(APPEXIT_REASON_EXTENSION_ERROR);

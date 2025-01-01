@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -139,10 +139,7 @@
 
 // fread subsystem
 
-//this is really need?
-#ifdef _SQFVM
-	#define DISABLE_REGEX_ON_FILE
-#endif
+
 
 //__THIS_FILE_REPLACE__
 //__THIS_MODULE_REPLACE__
@@ -167,43 +164,6 @@
 	__prep = ((__pragma_prep_cli ("src\host\CommonComponents\" + path)) regexReplace ["__THIS_FILE_REPLACE__",(_macro_file regexReplace ["\\","\\\\"])]) regexReplace ["__THIS_MODULE_REPLACE__",""""+ _macro_module+""""]; \
 	private _ctx = compile __prep; \
 	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
-#endif
-
-#ifdef __VM_VALIDATE
-	#define __vm_log(text) "debug_console" callExtension ((text)+"#1110")
-
-	#define loadFile(path) \
-	__vm_log("Load file: " + path); \
-	call compile preprocessFile (path);
-
-	#define __vm_warning(data) diag_log format["[VM_WARN]: %1",data];
-
-
-	#define locationnull 0
-	#define is3DEN true
-
-	#define addMissionEventHandler ["addMissionEventHandler"] pushBack 
-
-	#define toString str
-	#define linearConversion ["linearConversion"] pushBack 
-	#define parseSimpleArray ["parseSimpleArray"] pushBack 
-	#define endMission ["endMission"] pushBack 
-	//for randInt
-	#define FLOOR 
-	
-	#define NO_VM_EXECUTE if (true) exitwith {};
-#else
-	#define __vm_log(text)
-	#define __vm_warning(data)
-	
-	#define NO_VM_EXECUTE
-#endif
-
-#ifdef __GH_ACTION
-	#define __vm_log(text) diag_log (text)
-#endif
-#ifdef __VM_BUILD
-	#define __vm_log(text) "debug_console" callExtension ((text)+"#1110")
 #endif
 
 //check if file exists
@@ -250,11 +210,18 @@ _ret = _this; \
 #ifdef RBUILDER
 	#define __rb_mesh_common_path__ "core\default\default.p3d"
 	#define createMesh(ctx) ctx call { params ["_p","_ps","_loc"]; \
-		createSimpleObject [ __rb_mesh_common_path__, _ps,_loc ]; \
+		createSimpleObject [ ifcheck(isServer,__rb_mesh_common_path__,_p), _ps,_loc ]; \
 	}
 #else
 	#define createMesh(ctx) createSimpleObject (ctx)
 #endif
+
+//custom memobj
+#define mem_alloc() (createLocation ["cba_namespacedummy",[20,20,20],0,0])
+#define mem_set(ptr) (ptr)setvariable 
+#define mem_unset(ptr,val) (ptr)setvariable[val,null]
+#define mem_get(ptr,val) ((ptr)getvariable(val))
+#define mem_free(ptr) (deleteLocation (ptr))
 
 
 //string help
@@ -464,8 +431,9 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define pick selectRandom
 //выбор рандомного числа включительно Bis_fnc_randomNum
 #define rand(_beg,_end) (linearConversion [0,1,random 1,_beg,_end])
-//BIS_fnc_randomInt
-#define randInt(_beg,_end) (FLOOR linearConversion [0,1,random 1,(_beg)min(_end),(_end)max(_beg)+1])
+
+// Обновлённая функция выбора случайного целого числа из диапазона. 1.000001 было добавлено для решения проблемы когда рандом выпадает в 0.999999989
+#define randInt(_beg,_end) (FLOOR linearConversion [0,1.000001,random 1,(_beg)min(_end),(_end)max(_beg)+1])
 
 #define prob(val) (random[0,50,100]<(val))
 
@@ -642,19 +610,6 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 
 #define __assert_runtime_file__ __FILE__
 
-#define __EVAL_PATH_VM__(filepath) (filepath) call { \
-private _arr = (tolower _this) splitString "\/"; private _ret = ""; if ("src" in _arr) then {_ret = (_arr select [(_arr find "src"),count _arr]) joinString "\" \
-} else {_ret = _this};\
-_ret} \
-
-#ifdef __VM_BUILD
-	#define __assert_runtime_file__ __EVAL(call compile '_ref = toArray __FILE__;{if (_x <= 0)then{_ref set [_foreachindex,32]}} foreach _ref; __EVAL_PATH_VM__(TOString _ref)')
-	#define __assert_value_tostring__(val) 'val'
-#endif
-#ifdef __VM_VALIDATE
-	#define __assert_runtime_file__ __EVAL(call compile '_ref = toArray __FILE__;{if (_x <= 0)then{_ref set [_foreachindex,32]}} foreach _ref; __EVAL_PATH_VM__(TOString _ref)')
-	#define __assert_value_tostring__(val) 'val'
-#endif
 
 #define __assert_static_runtime_expr1(expr) if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__] call sys_static_assert_}
 #define __assert_static_runtime_expr2(expr,message) if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__,message] call sys_static_assert_}
@@ -671,19 +626,6 @@ _ret} \
 //called at runtime; Only simple expressions without macros
 #define assert(expr) __assert_runtime_expr1(expr)
 #define assert_str(expr,message) __assert_runtime_expr2(expr,message)
-
-#ifdef __VM_BUILD
-	//called at compile/build; Only simple expressions without macros
-	#define static_assert(expr) __assert_static_compile_expr1(expr)
-	//see static_assert; Only simple expressions without macros
-	#define static_assert_str(expr,message) __assert_static_compile_expr2(expr,message)
-#endif
-#ifdef __VM_VALIDATE
-	//called at compile/build; Only simple expressions without macros
-	#define static_assert(expr) __assert_static_compile_expr1(expr)
-	//see static_assert; Only simple expressions without macros
-	#define static_assert_str(expr,message) __assert_static_compile_expr2(expr,message)
-#endif
 
 #define __THIS_FILE_REPLACE__ SHORT_PATH
 
@@ -734,14 +676,6 @@ ACRE_IS_ERRORED = false; _ret;}*/
 
 //common macro
 #define BASIC_MOB_TYPE "B_Survivor_F"
-
-
-// bypass compiler unknown commands
-// Данные макросы используются для проброса функций из новой версии в обход компилятора клиента
-// Пример: VM_COMPILER_ADDFUNC_UNARY(freeExtension_impl,freeExtension) -> для вызова используем: call freeExtension_impl
-#define VM_COMPILER_ADDFUNC_BINARY(name,cmd) name = compile '(_this select 0) cmd (_this select 1)'
-#define VM_COMPILER_ADDFUNC_UNARY(name,cmd) name = compile 'cmd _this'
-#define VM_COMPILER_ADDFUNC_NULAR(name,cmd) name = compile 'cmd'
 
 
 #ifdef EDITOR

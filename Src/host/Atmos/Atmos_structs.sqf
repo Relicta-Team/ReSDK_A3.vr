@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -23,7 +23,7 @@ struct(AtmosChunk)
 
 	def(chCtr) 0; //chunk counter
 
-	def(areaSR) null;//saferef to area
+	def(areaSR) null;//SafeReference to area
 	def(chId) null;
 	def(chNum) -1; //local chunk id
 	def(chLPos) null; //local position in area 

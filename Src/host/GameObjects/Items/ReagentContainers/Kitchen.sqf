@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -223,6 +223,17 @@ class(FoodPlate) extends(Container)
 	var(size,ITEM_SIZE_SMALL);
 	var(weight,gramm(200));
 	var(dr,1);
+endclass
+
+class(Ashtray) extends(Container)
+	var(name,"Пепельница");
+	var(desc,"Окурки все сюда!");
+	var(model,"ml_shabut\exodus\ashtray.p3d");
+	var(material,"MatMetal");
+	var(weight,gramm(130));
+	var_exprval(countSlots,BASE_STORAGE_CAPACITY(1.4));
+	var(size,ITEM_SIZE_SMALL);
+	var(maxSize,ITEM_SIZE_SMALL);
 endclass
 
 // Cups

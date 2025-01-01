@@ -1,12 +1,12 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
-
-addCommandWithDescription("ping",PUBLIC_COMMAND,"Проверка соединения") {
-	rpcSendToClient(caller,"chatPrint",["pong" arg "log"]);
-};
+//replaced with local
+// addCommandWithDescription("ping",PUBLIC_COMMAND,"Проверка соединения") {
+// 	rpcSendToClient(caller,"chatPrint",["pong" arg "log"]);
+// };
 
 addCommandWithDescription("help",PUBLIC_COMMAND,"Отображает доступные вам команды") {
 	_comliststr = "Доступные команды:" ;

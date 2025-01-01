@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -46,14 +46,9 @@ call nodegen_loadClasses;
 call cs_runtime_internal_makeAll;
 
 //OOP INIT ZONE
-#ifndef _SQFVM
 if !([] call oop_loadTypes) exitWith {
 	appExit(APPEXIT_REASON_COMPILATIOEXCEPTION);
 };
-#else
-//fucking sqfvm cant works normally...
-[] call oop_loadTypes;
-#endif
 //end classes
 
 //structures initialize
@@ -100,6 +95,8 @@ if (!isMultiplayer) then {
 #endif
 #ifdef RBUILDER
 	loadFile("src\host\Tools\EditorDebug\EditorDebug.sqf"); //predecl debug utils in rb mode
+
+	loadFile("src\host\Tools\BuildTools\BuildTools_init.sqf");
 #endif
 
 //postload initialize systems

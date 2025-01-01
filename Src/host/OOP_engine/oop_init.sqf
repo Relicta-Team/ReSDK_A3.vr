@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -13,13 +13,6 @@
 #define EXIT_IF_ERROR(mes) if (_iserror || server_isLocked) exitWith {error(mes); [mes] call logCritical}
 #define shell_init(__name__system,__value__system) format["_thisobj setvariable ['%1',%2]; ",__name__system,__value__system]
 #define logoop(mes) ["[OOP]:    " ,(mes) ,"#0111"] call stdoutPrint; ["(OOP_init)	%1",mes] call logInfo
-
-#ifdef __VM_VALIDATE
-	#define logoop(mes) diag_log format["[OOP_init]: %1",mes]
-	#define EXIT_IF_ERROR(mes) if (_iserror || server_isLocked) exitWith { diag_log format["[OOP_init]: [Critical]: %1",mes]; exitcode__ -10000; };
-	#define error(mes) diag_log format["[OOP_init]: [Error]: %1",mes];
-	#define errorformat(mes,fmt) diag_log format["[OOP_init]: [Error]: %1",format[mes,fmt]];
-#endif
 
 logoop("Starting class compilation");
 
@@ -146,17 +139,13 @@ _attr_ex_init_list = [];
 	//calling ctors
 	_shell_data = _shell_data + '{this call (_x getvariable "constructor")} foreach (this getvariable "proto" getvariable "__ctors"); this';
 
-	#ifndef __VM_VALIDATE
 	_pObj setvariable ['__instance',compile _shell_data];
-	#endif
 	_pObj setvariable ["__inhlistCase",_inheritance_list];
 	_inheritance_list = _inheritance_list apply {tolower _x};
 	_pObj setvariable ["__inhlist",_inheritance_list];
 
-	#ifndef __VM_VALIDATE
 	//make hashset for isTypeOf faster algorithm
 	_pObj setVariable ["__inhlist_map",hashSet_create(_inheritance_list)];
-	#endif
 
 	//reversing ctors. base to childs...
 	reverse _ctor_objects;
@@ -178,10 +167,8 @@ _attr_ex_init_list = [];
 	_pObj setVariable ["__allfields",_exist_fields];
 	_pObj setVariable ["__allmethods",_exists_methods];
 
-	#ifndef __VM_VALIDATE
 	//hashing faster than arrays
 	_pObj setVariable ["__allfields_map",createHashMapFromArray _fieldsBaseValues];
-	#endif
 
 	//init all attributes
 	if not_equals(_attrs,[]) then {
@@ -206,8 +193,6 @@ private _errorAttr = {
 	errorformat("Cant find attribute <%1> in class <%2>",_name arg _pObj getVariable ["classname" arg "UNKNOWN_CLASS"]);
 };
 
-//do not check attributes
-#ifndef _SQFVM
 
 {
 	_x params ["_pObj","_attrs"];
@@ -219,8 +204,6 @@ private _errorAttr = {
 
 	} foreach _attrs;
 } foreach _attr_ex_init_list;
-
-#endif
 
 EXIT_IF_ERROR("Class compilation was terminated");
 

@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -13,6 +13,7 @@ class(InteractibleInterior) extends(SmallDecorations)
 	var(name,"Штуковина"); 
 	var(desc,"С этим хочется что-то сделать" pcomma " но пока не знаю что...");
 	var(material,"MatMetal");
+	getterconst_func(getCoefAutoWeight,20);
 	var(dr,2);
 endclass
 
@@ -41,12 +42,6 @@ endclass
 
 class(Scales) extends(InteractibleInterior)
 	var(model,"ml\ml_object_new\model_14_10\wesi.p3d");
-	getter_func(isMovable,true);
-endclass
-
-class(Gramofon) extends(InteractibleInterior)
-	var(model,"relicta_models\models\interier\props\patefon.p3d");
-	var(material,"MatWood");
 	getter_func(isMovable,true);
 endclass
 

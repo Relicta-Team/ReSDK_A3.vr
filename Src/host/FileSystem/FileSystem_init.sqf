@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -12,12 +12,8 @@ fso_map_tree = createhashMap; //flat object
 
 //initialize filesystem
 fso_init = {
-	private _nativeCollection = 
-		#ifdef _SQFVM
-		[];
-		#else
-		addonFiles ["src\"];
-		#endif
+	private _nativeCollection = addonFiles ["src\"];
+
 	private _useNativeCollector = count _nativeCollection > 0;
 	if (!_useNativeCollector) then {
 		
@@ -48,9 +44,7 @@ fso_init = {
 fso_buildTree = {
 	params ["_flist"];
 	private _tree = createhashMap;
-	#ifndef _SQFVM
 	forceUnicode 0;
-	#endif
 	_flist = _flist apply {tolower _x splitString "\/"};
 	private _parts = null;
 	

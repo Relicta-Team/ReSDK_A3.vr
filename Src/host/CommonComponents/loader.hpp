@@ -1,24 +1,10 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
 #include <..\engine.hpp>
 #include <..\client_compiled.hpp>
-
-#ifdef __VM_BUILD
-	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = [];}; \
-	__vm_log("[LOAD] " + ("src\host\CommonComponents\" + path)); \
-	_path = "src\host\CommonComponents\" + path; \
-	private _ctx = compile ((__pragma_prep_cli _path)); \
-	allClientContents pushback _ctx;
-#endif
-
-#ifdef __VM_VALIDATE
-	#define importCommon(path) diag_log format["Start validate common module %1",path]; \
-	private _ctx = compile preprocessFileLineNumberS ("src\host\CommonComponents\" + path); \
-	diag_log format["   - Module %1 loaded",path];
-#endif
 
 importCommon("!PreInit.sqf");
 importCommon("Assert.sqf");

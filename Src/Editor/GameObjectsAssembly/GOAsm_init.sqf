@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -25,4 +25,3 @@ goasm_builder_onError_delegate = {}; //пользовательский код, 
 #include "GOAsm_providers.sqf"
 #include "GOAsm_internalAPI_attributes.sqf"
 #include "GOAsm_prefabCreator.sqf"
-#include "GOAsm_batchProcessor.sqf"

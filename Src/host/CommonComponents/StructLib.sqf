@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -263,6 +263,20 @@ struct(Version)
 
 endstruct
 
+/*
+	Internal type for inline structs ( struct api 1.7+)
+*/
+struct(InlineStructBase__)
+	def(init)
+	{
+		//no params for inline struct
+	}
+
+	def(str)
+	{
+		format["[INLINE_STRUCT]%1",self callv(str)]; //for compatibility inline methods
+	}
+endstruct
 
 
 /*
@@ -523,3 +537,5 @@ endstruct
 #include "Structs\Profiling.sqf"
 
 #include "Structs\Allocator.sqf"
+
+#include "Structs\Updates.sqf"

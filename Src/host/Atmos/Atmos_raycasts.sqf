@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -74,16 +74,13 @@ atmos_getVectorsChunkInfo = {
 			(_x select 1) vectoradd [_size,0,0]
 		]
 	});
-
-	//?!fuck sqfvm...
-	#ifndef _SQFVM
+	
 	_points append (_origPoints apply {
 		[
 			([(_x select 1),-90,1] call BIS_fnc_rotateVector3D)vectoradd [0,0,_size],
 			([(_x select 0),-90,1] call BIS_fnc_rotateVector3D)vectoradd [0,0,_size]
 		]
 	});
-	#endif
 
 	
     _points

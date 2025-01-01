@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -69,12 +69,12 @@ class(MatBase) attribute(staticInit)
 	};
 
 	var(pullSounds,[]);
-	func(getPullSound)
+	func(getPullSounds)
 	{
 		objParams();
 		private _ps = getSelf(pullSounds);
-		if (count _ps == 0) exitWith {""};
-		pick _ps
+		if (count _ps == 0) exitWith {[]};
+		_ps
 	};
 
 	func(getResistSound)
@@ -98,6 +98,7 @@ class(MatBase) attribute(staticInit)
 	//коэффициент для вычисления хп с помощью веса объекта
 	getterconst_func(getWeightCoefForCalcHP,1);
 
+	//модификатор (коэффициент) урона в зависимости от материала
 	getter_func(getDamageCoefOnAttack,1);
 
 	//------------------------------------------------
@@ -203,7 +204,7 @@ class(MatMetal) extends(MatBase)
 	var(pullSounds,["pull\wood7"]);
 	getterconst_func(getWeightCoefForCalcHP,100);
 
-	getter_func(getDamageCoefOnAttack,0.7);
+	getter_func(getDamageCoefOnAttack,0.5);
 
 	getter_func(getDestructionTypes,["MetalDebris1" arg "MetalDebris2"]);
 
@@ -236,7 +237,7 @@ class(MatCloth) extends(MatBase)
 	var(pullSounds,["updown\armorUp"]);
 	getterconst_func(getWeightCoefForCalcHP,20);
 
-	getter_func(getDamageCoefOnAttack,1.5);
+	getter_func(getDamageCoefOnAttack,1.8);
 
 	getterconst_func(getFireDamageModifier,2.5);
 	getterconst_func(getFireDamageIgniteProb,80);

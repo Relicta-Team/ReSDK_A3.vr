@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -16,8 +16,4 @@
 #else
 	#define netSetGlobal(var,val) missionNamespace setVariable ['var',val,true]
 	#define netSyncObjVar(obj,var,val) obj setvariable [var,val,true]
-#endif
-
-#ifdef __VM_VALIDATE
-	#define netSetGlobal(var,val) [var,val];
 #endif

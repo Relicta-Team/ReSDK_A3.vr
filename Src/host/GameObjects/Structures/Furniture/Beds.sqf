@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -43,6 +43,8 @@ class(BedBase) extends(IChair)
 	getter_func(getMainActionName,"Лечь");
 
 	getter_func(isMovable,true);
+
+	getterconst_func(getCoefAutoWeight,20);
 endclass
 
 editor_attribute("EditorGenerated")

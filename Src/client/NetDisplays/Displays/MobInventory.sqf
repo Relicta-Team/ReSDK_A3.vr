@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -80,13 +80,9 @@ ND_INIT(MobInventory)
 	
 ND_END
 
-ND_ObjectPull_getVtarget = {
-	player getvariable ["__loc_pull_vtarg",objNUll]
-};
-ND_ObjectPull_getPtrObj = {
-	private _ptr = player getvariable ["__loc_pull_ptr",null];
-	if isNullVar(_ptr) exitWith {objNUll};
-	noe_client_allPointers getOrDefault [_ptr,objNull]
+
+ND_ObjectPull_getHelper = {
+	[player] call smd_pullGetHeplerObject;
 };
 
 ND_INIT(ObjectPull)
@@ -130,7 +126,7 @@ ND_INIT(ObjectPull)
 			};
 			_w setVariable ["_altMode",_alt];
 			_w setVariable ["_pressedPos",call mouseGetPosition];
-			private _o = call ND_ObjectPull_getPtrObj;
+			private _o = call ND_ObjectPull_getHelper;
 			if !isNullReference(_o) then {
 				_w setVariable ["_transform_vec",[_o] call model_getPitchBankYaw];
 				_w setvariable ["_presaved_pos",getPosWorld _o];
@@ -149,16 +145,22 @@ ND_INIT(ObjectPull)
 			private _zpos = _w getVariable ["_ch_pos",0];
 			_w setvariable ["_transform_pos",_zpos];
 			
-			private _o = call ND_ObjectPull_getPtrObj;
+			private _o = call ND_ObjectPull_getHelper;
 			if !isNullReference(_o) then {
 				_o setvariable ["pull_interp_zpos_delta",null];
+				_o setvariable ["pull_interp_pby",null];
 			};
+
+			//moving locked
+			if !(_o getvariable ["canmove",false]) exitWith {};
 
 			//send new transform
 			if (_isPressedPos) then {
-				[["zupd",_zpos]]call nd_onPressButton;
+				//[["zupd",_zpos]]call nd_onPressButton;
+				[player,"zpos",_zpos] call smd_pullUpdateTransform;
 			} else {
-				[["vupd",_transform]]call nd_onPressButton;
+				//[["vupd",_transform]]call nd_onPressButton;
+				[player,"rot",_transform] call smd_pullUpdateTransform;
 			};
 		}];
 		_back ctrlAddEventHandler ["MouseMoving",{
@@ -178,8 +180,8 @@ ND_INIT(ObjectPull)
 					// modvar(_oldZ) + _dY;
 					_newdelta = _dY * 0.01;
 					_w setvariable ["_ch_pos",_newdelta];
-					private _o = call ND_ObjectPull_getPtrObj;
-					if !isNullReference(_o) then {
+					private _o = call ND_ObjectPull_getHelper;
+					if !isNullReference(_o) then {	
 						_o setvariable ["pull_interp_zpos_delta",_newdelta];	
 					};
 				} else {
@@ -197,9 +199,10 @@ ND_INIT(ObjectPull)
 					traceformat("NEWVEC %1 (alt: %2; isposchange: %3)",_newvec arg _altMode arg _isPressedPos)
 
 					_w setvariable ["_ch_vec",_newvec];
-					private _o = call ND_ObjectPull_getPtrObj;
+					private _o = call ND_ObjectPull_getHelper;
 					if !isNullReference(_o) then {
-						[_o,_newvec] call model_SetPitchBankYaw;
+						_o setvariable ["pull_interp_pby",_newvec];
+						//[_o,_newvec] call model_SetPitchBankYaw;
 					};
 				};
 				
@@ -215,10 +218,11 @@ ND_INIT(ObjectPull)
 			_tvec = _w getVariable ["_transform_vec",vec3(0,0,0)];
 			_tvec set [0,0];
 			_tvec set [1,0];
-			[["vupd",_tvec]]call nd_onPressButton;
-			private _o = call ND_ObjectPull_getPtrObj;
+			//[["vupd",_tvec]]call nd_onPressButton;
+			private _o = call ND_ObjectPull_getHelper;
 			if !isNullReference(_o) then {
-				[_o,_tvec] call model_SetPitchBankYaw;
+				//[_o,_tvec] call model_SetPitchBankYaw;
+				[player,"rot",_tvec] call smd_pullUpdateTransform;
 			};
 		}];
 

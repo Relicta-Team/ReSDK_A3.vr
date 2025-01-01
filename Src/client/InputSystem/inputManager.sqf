@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -168,6 +168,10 @@ onGameMouseInputs = {
 
 	if (isDisplayOpen || call smd_isStunned || !([] call interact_isActive)) exitWith {false};
 	if (craft_isPreviewEnabled) exitWith {};
+
+	#ifdef EDITOR
+	if ([_button,_shift,_ctrl,_alt] call inputDebug_handleMouseEvent) exitWith {false};
+	#endif
 
 	if (_button == MOUSE_LEFT) exitwith {
 		[true] call interact_onLMBPress

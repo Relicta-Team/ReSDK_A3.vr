@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -32,13 +32,15 @@
 
 #define threadSleep(time) uisleep (time)
 
+#define threadNull ScriptNull
+
 #define isAsyncContext canSuspend
 
 //critical section
 
-#define criticalSectionStart() isNil {
+#define criticalSectionStart isNil {
 
-#define criticalSectionEnd() true}
+#define criticalSectionEnd };
 
 
 //mutex

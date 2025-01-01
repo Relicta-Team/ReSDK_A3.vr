@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -9,15 +9,6 @@
 //>
 #define gt &gt;
 #define sgt "&gt;"
-
-#ifdef __VM_VALIDATE
-//<
-#define lt left_br
-#define slt "string_left_br"
-//>
-#define gt right_br
-#define sgt "string_right_br"
-#endif
 
 #define br_inline <br/>
 //Не изменять!!! зависимости есть!!!

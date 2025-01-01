@@ -11,7 +11,7 @@ Replaced value:
 ```sqf
 (call (call compile val))
 ```
-File: [host\MapManager\DynamicMapLoader.sqf at line 193](../../../Src/host/MapManager/DynamicMapLoader.sqf#L193)
+File: [host\MapManager\DynamicMapLoader.sqf at line 188](../../../Src/host/MapManager/DynamicMapLoader.sqf#L188)
 ## sizeof_float
 
 Type: constant
@@ -23,7 +23,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\MapManager\DynamicMapLoader.sqf at line 194](../../../Src/host/MapManager/DynamicMapLoader.sqf#L194)
+File: [host\MapManager\DynamicMapLoader.sqf at line 189](../../../Src/host/MapManager/DynamicMapLoader.sqf#L189)
 ## dml_const_enum_instancerNames
 
 Type: Variable
@@ -35,7 +35,7 @@ Initial value:
 ```sqf
 ["InitItem","InitStruct","InitDecor"]
 ```
-File: [host\MapManager\DynamicMapLoader.sqf at line 167](../../../Src/host/MapManager/DynamicMapLoader.sqf#L167)
+File: [host\MapManager\DynamicMapLoader.sqf at line 162](../../../Src/host/MapManager/DynamicMapLoader.sqf#L162)
 ## dml_const_tab
 
 Type: Variable
@@ -47,7 +47,7 @@ Initial value:
 ```sqf
 toString [9]
 ```
-File: [host\MapManager\DynamicMapLoader.sqf at line 168](../../../Src/host/MapManager/DynamicMapLoader.sqf#L168)
+File: [host\MapManager\DynamicMapLoader.sqf at line 163](../../../Src/host/MapManager/DynamicMapLoader.sqf#L163)
 ## dml_internal_eulerToVec
 
 Type: function
@@ -71,7 +71,7 @@ Type: function
 Description: подготовка загрузочных инструкций
 - Param: _mapPath
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 94](../../../Src/host/MapManager/DynamicMapLoader.sqf#L94)
+File: [host\MapManager\DynamicMapLoader.sqf at line 89](../../../Src/host/MapManager/DynamicMapLoader.sqf#L89)
 ## dml_prepareMapBuffer
 
 Type: function
@@ -80,7 +80,7 @@ Description:
 - Param: _cfg
 - Param: _bmap
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 116](../../../Src/host/MapManager/DynamicMapLoader.sqf#L116)
+File: [host\MapManager\DynamicMapLoader.sqf at line 111](../../../Src/host/MapManager/DynamicMapLoader.sqf#L111)
 ## dml_internal_addMapHeaders
 
 Type: function
@@ -88,7 +88,7 @@ Type: function
 Description: 
 - Param: _bmap
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 134](../../../Src/host/MapManager/DynamicMapLoader.sqf#L134)
+File: [host\MapManager\DynamicMapLoader.sqf at line 129](../../../Src/host/MapManager/DynamicMapLoader.sqf#L129)
 ## reditor_binding_fc
 
 Type: function
@@ -96,7 +96,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 140](../../../Src/host/MapManager/DynamicMapLoader.sqf#L140)
+File: [host\MapManager\DynamicMapLoader.sqf at line 135](../../../Src/host/MapManager/DynamicMapLoader.sqf#L135)
 ## reditor_binding_gv
 
 Type: function
@@ -104,7 +104,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 149](../../../Src/host/MapManager/DynamicMapLoader.sqf#L149)
+File: [host\MapManager\DynamicMapLoader.sqf at line 144](../../../Src/host/MapManager/DynamicMapLoader.sqf#L144)
 ## reditor_binding_sv
 
 Type: function
@@ -112,7 +112,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 154](../../../Src/host/MapManager/DynamicMapLoader.sqf#L154)
+File: [host\MapManager\DynamicMapLoader.sqf at line 149](../../../Src/host/MapManager/DynamicMapLoader.sqf#L149)
 ## reditor_binding_gref
 
 Type: function
@@ -120,7 +120,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 159](../../../Src/host/MapManager/DynamicMapLoader.sqf#L159)
+File: [host\MapManager\DynamicMapLoader.sqf at line 154](../../../Src/host/MapManager/DynamicMapLoader.sqf#L154)
 ## dml_internal_handleObj
 
 Type: function
@@ -129,7 +129,7 @@ Description:
 - Param: _mapDat
 - Param: _bmap
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 170](../../../Src/host/MapManager/DynamicMapLoader.sqf#L170)
+File: [host\MapManager\DynamicMapLoader.sqf at line 165](../../../Src/host/MapManager/DynamicMapLoader.sqf#L165)
 # map_manager.sqf
 
 ## mapmanager_savemap
@@ -366,6 +366,40 @@ Description:
 - Param: _o
 
 File: [host\MapManager\Maps\Dorm.sqf at line 22](../../../Src/host/MapManager/Maps/Dorm.sqf#L22)
+# Holiday.sqf
+
+## reditor_binding_fc
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\Holiday.sqf at line 3](../../../Src/host/MapManager/Maps/Holiday.sqf#L3)
+## reditor_binding_gv
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\Holiday.sqf at line 12](../../../Src/host/MapManager/Maps/Holiday.sqf#L12)
+## reditor_binding_sv
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\Holiday.sqf at line 17](../../../Src/host/MapManager/Maps/Holiday.sqf#L17)
+## reditor_binding_gref
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\Holiday.sqf at line 22](../../../Src/host/MapManager/Maps/Holiday.sqf#L22)
 # Hunt.sqf
 
 ## reditor_binding_fc

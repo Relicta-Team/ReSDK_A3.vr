@@ -104,21 +104,6 @@ Replaced value:
 obj setvariable [var,val,true]
 ```
 File: [host\Networking\Network.hpp at line 18](../../../Src/host/Networking/Network.hpp#L18)
-## netSetGlobal(var,val)
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-- Param: var
-- Param: val
-
-Replaced value:
-```sqf
-[var,val];
-```
-File: [host\Networking\Network.hpp at line 22](../../../Src/host/Networking/Network.hpp#L22)
 # Network.sqf
 
 ## netlog(mes,fmt)

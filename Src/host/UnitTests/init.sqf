@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -45,8 +45,10 @@ test_getAllTestMacroNames = {
 
 test_loadModule = {
 	params ["_name",["_showError",true]];
+	traceformat("check module %1",_name)
 	private _fullpath = format[test_const_pathFormatter,_name];
-	if (!fileExists(_fullpath)) then {
+	traceformat("fullpath %1 -> %2",_fullpath arg FileExists(_fullpath))
+	if (!FileExists(_fullpath)) then {
 		if (_showError) then {
 			["Test module ""%1"" not found",_name] call cprintErr;
 		};

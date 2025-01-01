@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -34,6 +34,10 @@ endclass
 editor_attribute("EditorGenerated")
 class(WoodPole1) extends(WoodPole)
 	var(model,"a3\structures_f_exp\walls\polewalls\polewall_01_pole_f.p3d");
+endclass
+
+class(TimberLog) extends(WoodPole)
+	var(model,"a3\structures_f_enoch\industrial\materials\timberlog_04_f.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -95,3 +99,16 @@ editor_attribute("EditorGenerated")
 class(MediumLightConcretePole) extends(ConcreteLongPole)
 	var(model,"a3\structures_f_argo\walls\city\wallcity_01_pillar_grey_f.p3d");
 endclass
+
+class(BrickPole) extends(SmallPole)
+	var(model,"a3\structures_f_enoch\walls\brick\brickwall_03_l_pole_f.p3d");
+endclass
+
+class(BrickPole1) extends(BrickPole)
+	var(model,"a3\structures_f_enoch\walls\brick\brickwall_04_l_pole_f.p3d");
+endclass
+
+class(BrickPole2) extends(BrickPole)
+	var(model,"a3\structures_f_enoch\walls\brick\brickwall_01_l_pole_f.p3d");
+endclass
+

@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -33,6 +33,16 @@ endclass
 editor_attribute("InterfaceClass")
 class(AxeBase) extends(IMeleeWeapon)
 	var(material,"MatWood");
+
+	// func(getEfficiencyOnAttack)
+	// {
+	// 	objParams_2(_dam,_targ);
+	// 	private _effdam = super();
+	// 	if isTypeOf(callFunc(_targ,getMaterial),MatWood) then {
+	// 		_effdam = _effdam * 3;
+	// 	};
+	// 	_dam
+	// };
 endclass
 
 class(CaveAxe) extends(AxeBase)

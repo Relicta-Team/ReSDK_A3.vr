@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -14,6 +14,7 @@ class(SofaBase) extends(IChair)
 	var(material,"MatCloth");
 	var(dr,2);
 	getter_func(isMovable,true);
+	getterconst_func(getCoefAutoWeight,10);
 	//диваны
 endclass
 
@@ -37,6 +38,7 @@ endclass
 
 class(Sofa01) extends(SofaBase)
 	var(model,"a3\props_f_orange\furniture\sofa_01_f.p3d");
+	getter_func(getChairOffsetPos,[[-0.65 arg 0.1 arg -0.5] arg [0 arg 0.1 arg -0.5] arg [0.65 arg 0.1 arg -0.5]]);
 endclass
 
 class(CoolSofa) extends(SofaBase)

@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -99,6 +99,18 @@ gm_startRound = {
 
 	["Round started"] call discLog;
 
+	private _allcliInfo = [""];
+	private _setmap = ["role1","role2","role3"];
+	{
+		if getVar(_x,isReady) then {
+			private _chSet = getVar(_x,charSettings);
+			_allcliInfo pushBack (
+				format["%1: %2 => %3",_foreachIndex,getVar(_x,name),_setmap apply {_chSet get _x}]
+			);
+		};
+	} foreach (call cm_getAllClientsInLobby);
+	[format["Declare info: %1",_allcliInfo joinString endl]] call gameLog;
+
 	//Выбираем объект аспекта
 	call gm_pickRoundAspect;
 	//private _curRole = null;
@@ -108,17 +120,22 @@ gm_startRound = {
 	//! сделать так, чтобы полные и скрытые не моги перемешаться
 
 	// 1. распределяем на роли по vec2
+	["----- Prepare to roles -----"] call gameLog;
 	{
 		_x call gm_prepareToRole;
 	} foreach _sortedList;
 	// 2. распределяем безролевых
+	["----- Prepare no-role clients -----"] call gameLog;
 	call gm_prepareNoRoleClients;
 	
 	// 3. обрабатываем возможных антагов. пустые листы - регеним на всех доступных
+	["----- Handle prelist antags -----"] call gameLog;
 	call gm_handlePreListAntags;
 	// 4. хандлим антагов полных
+	["----- Handle full antags -----"] call gameLog;
 	call gm_handleDefineFullAntags;
 	// 5. спавн
+	["----- Spawn prepared clients -----"] call gameLog;
 	call gm_spawnPreparedClients;
 	call gm_internal_resetContenders;
 
@@ -209,6 +226,8 @@ gm_prepareToRole = {
 				modVar(_defaultRole,count, - 1);
 				_isSpawned = true;
 				gm_preparedClients pushBack vec2(_client,_defaultRole);
+
+				[format["Client %1 picking role %2",getVar(_client,name),_defaultRole]] call gameLog;
 				//[_client,_roleClass,true] call gm_spawnClientToRole;
 			};			
 		};
@@ -216,6 +235,7 @@ gm_prepareToRole = {
 
 	if (!_isSpawned) then {
 		gm_noRoleClients pushBack _client;
+		[format["Client %1 cannot pick role (added into norole-list)",getVar(_client,name)]] call gameLog;
 	};
 
 };
@@ -238,6 +258,7 @@ gm_prepareNoRoleClients = {
 				) exitWith {
 				modVar(_x,count, - 1);
 				gm_preparedClients pushBack vec2(_client,_x);
+				[format["Norole-list pick for client %1 is %2",getVar(_client,name),_x]] call gameLog;
 				//[_client,callFunc(_x,getClassName),true] call gm_spawnClientToRole;
 			};
 		} foreach _newVec;
@@ -1080,6 +1101,10 @@ gm_endRound = {
 
 	//обрабатываем все незавершенные задачи как проваленные
 	{
+		// Предварительно проверим задачи перед завершением (потому что поток проверит их только в следующем цикле симуляции)
+		if (!getVar(_x,isDone) && !callFunc(_x,checkCompleteOnEnd)) then {
+			callFunc(_x,updateMethodInternal);
+		};
 		if !getVar(_x,isDone) then {
 			callFuncParams(_x,setTaskResult,-1 arg true);
 		};
@@ -1374,7 +1399,7 @@ gm_createMob = {
 	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
 	
 	//only after platform 2.18
-	[_mob,false] call setPhysicsCollisionFlag_impl;
+	_mob setPhysicsCollisionFlag false;
 
 	_mob disableAI "MOVE";
 	_mob disableAI "TARGET";
@@ -1420,12 +1445,6 @@ lobby_createDummy = {
 	_mob
 };
 private _canCreateDummy = true;
-#ifdef __VM_VALIDATE
-	_canCreateDummy = false;
-#endif
-#ifdef __VM_BUILD
-	_canCreateDummy = false;
-#endif
 
 if (_canCreateDummy) then {
 	private _dummyMobPos = [50,50,0];

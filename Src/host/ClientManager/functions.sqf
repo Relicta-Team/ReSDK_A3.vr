@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -26,13 +26,11 @@ if (IS_INIT_MODULE) then {
 
 }; //IS_INIT_MODULE
 
-#ifndef __VM_VALIDATE
 //Быренько раскидываем указатели мобов
 _tx = table_hex;
 {
 	_x setvariable ["voiceptr","0x" + pick _tx + pick _tx + pick _tx + pick _tx + pick _tx + pick _tx,true]; //generator pointers for voice system
 } foreach cm_allAwaitMobs;
-#endif
 
 cm_owners = ["76561198094364528"]; //me
 

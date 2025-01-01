@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -51,7 +51,7 @@ if (isMultiplayer) then {
         };
     } foreach ((squadParams player) select 0);
 };
-if (!_canload_) exitWith {};
+if (!_canload_) exitWith {error("Unknown reason of cannot load client")};
 
 player allowDamage false;
 
@@ -76,26 +76,28 @@ uiNamespace setvariable ["relicta_onRemoveClientCode",__uiCode_onDisconnect];
 
 
 //Fix - 0.7.579: решает проблему зависших динамических дисплеев при кике локального клиента
-[] SPAWN {
-	uisleep 2;
+if (isMultiplayer) then {
+    [] SPAWN {
+        uisleep 2;
 
-	client_internal_lastchecknet = netTickTime - 1;
-    
-	while {true} do {
+        client_internal_lastchecknet = netTickTime - 1;
         
-        if (cba_missiontime == client_internal_lastchecknet) exitwith {
-            _d = (findDisplay 10000);    
-            if !(iSNULL _d) then {
-                if (_d getVariable ["$dynflag$",false]) then {
-                    _d closeDisplay 0;
+        while {true} do {
+            
+            if (cba_missiontime == client_internal_lastchecknet) exitwith {
+                _d = (findDisplay 10000);    
+                if !(iSNULL _d) then {
+                    if (_d getVariable ["$dynflag$",false]) then {
+                        _d closeDisplay 0;
+                    };
                 };
-            };
-            if (userInputDisabled) then {
-				disableUserInput false;
-            };
-        };   
-        client_internal_lastchecknet = netTickTime;
-        uisleep 1;
+                if (userInputDisabled) then {
+                    disableUserInput false;
+                };
+            };   
+            client_internal_lastchecknet = netTickTime;
+            uisleep 1;
+        };
     };
 };
 

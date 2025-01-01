@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -47,6 +47,7 @@ class(Campfire) extends(ICampfireStruct)
 	var(light,LIGHT_CAMPFIRE);
 	var(model,"a3\structures_f\civ\camping\fireplace_f.p3d");
 	var(material,"MatStone");
+	getterconst_func(getCoefAutoWeight,10);
 	var(dr,2);
 	getterconst_func(isFireLight,true);
 	getter_func(canIgniteArea,getSelf(lightIsEnabled));
@@ -176,6 +177,7 @@ class(BarrelCampfireBig) extends(CampfireBig)
 	var(model,"a3\props_f_enoch\military\garbage\garbagebarrel_02_buried_f.p3d");
 	var(name,"Костёр в бочке");
 	var(material,"MatMetal");
+	getterconst_func(getCoefAutoWeight,10);
 	var(dr,2);
 
 	func(checkCanIgniteObject)

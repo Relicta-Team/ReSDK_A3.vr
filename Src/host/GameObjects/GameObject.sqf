@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -237,7 +237,7 @@ class(GameObject) extends(ManagedObject)
 	" node_var
 	editor_attribute("EditorVisible" arg "custom_provider:weight")
 	editor_attribute("Tooltip" arg "Вес объекта в граммах или килограммах")
-	var(weight,gramm(1000));//вес в граммах
+	var(weight,0);//вес в граммах
 
 	//перетаскивание
 	getter_func(isMovable,false); //объект движим
@@ -1157,9 +1157,11 @@ endregion
 		if callSelf(isInWorld) exitwith {false};
 		private _wobj = objNull;
 		if (_simDrop) then {
+			if not_equalTypes(_vecOrDist,0) then {_vecOrDist = null};
+			if not_equalTypes(_dir,0) then {_dir = null};
 			_wobj = [this,_pos,_vecOrDist,_dir] call noe_loadVisualObject_OnDrop;
 		} else {
-			_wobj = [this,_pos,_dir,_vec] call noe_loadVisualObject;
+			_wobj = [this,_pos,_dir,_vecOrDist] call noe_loadVisualObject;
 		};
 		
 		!isNullReference(_wobj)
@@ -1307,15 +1309,8 @@ region(throwing and bullets functions)
 		private _drObj = getSelf(dr);
 		callSelfParams(applyDamage,_dam arg _type arg _p arg "throw_hit");
 
-		private _matObj = getVar(_throwed,material);
-		private _thDamModif = 1;
-		if (!isNullVar(_matObj) && !isNullReference(_matObj)) then {
-			_thDamModif = callFunc(_matObj,getDamageCoefOnAttack);
-		};
-
-		private _weapDamage = round(_dam*_thDamModif) - _drObj;
 		//! THIS CAN BE THROWS ERROR BECAUSE _throwed.loc - is flyingObject
-		callFuncParams(_throwed,applyDamage,_weapDamage arg _type arg _p arg "throwed");
+		callFuncParams(_throwed,onAttackedObject,this arg _dam arg _drObj arg _p arg "throwed");
 	};
 
 	//Тут обязательно нужно удалить пулю чтобы не вызывать утечек памяти
@@ -1713,13 +1708,34 @@ class(IDestructible) extends(GameObject)
 		качественно или грубо сделанные получают +1 или +2 к ЗД.
 		Большинство машин и подобных артефактов в хорошем состоянии имеют ЗД 10.
 	*/
+	"
+		name:Качество
+		desc:Возвращает @[int качество] игрового объекта. Среднее значение равно 10. Чем выше качество, тем ценее и прочнее предмет.
+		prop:all
+		classprop:1
+		return:int:Качество игрового объекта
+	" node_var
 	var(ht,10); //Статическая переменная "здоровья" объекта. От этого скилла кидаются броски на разрушение
 
 	/*
 		ЕЖ предмета.
 		количество повреждений, которое объект может вынести, прежде чем сломается или прекратит функционировать
 	*/
+	"
+		name:Здоровье
+		desc:Возвращает текущее здоровье игрового объекта. Оно варьируется от максимального здоровья до пятикратного отрицательного значения от максимального здоровья. Наприме, при максимальном здоровье 5 минимальное здоровье после которого предмет будет уничтожен будет -25 (5 * -5)
+		prop:get
+		classprop:1
+		return:int:Здоровье
+	" node_var
 	var(hp,0);
+		"
+			name:Максимальное здоровье
+			desc:Возвращает максимальное здоровье игрового объекта. Это значение никогда не может быть меньше 0.
+			prop:get
+			classprop:1
+			return:int:Максимальное здоровье
+		" node_var
 		var(hpMax,0);
 	/*
 		СП объекта.
@@ -1852,6 +1868,36 @@ class(IDestructible) extends(GameObject)
 		//errorformat("IDestructible::applyDamage() - no affect damage: hp %1; max hp %2; Amount %3",_newhp arg _maxhp arg _amount);
 	};
 
+	func(onAttackedObject)
+	{
+		objParams_5(_targ,_dam,_targDr,_pos,_reason);
+		
+		private _weapDamage = (getSelf(dr) + randInt(1,4)) max 0;
+		private _mod = 0;
+		if (isTypeOf(this,IMeleeWeapon) || isTypeOf(this,IRangedWeapon)) then {
+			modvar(_mod) + 4;
+		};
+		
+		traceformat("onAttachedObject: %1 => %2 [%3;%4]:: %5 (mod: %6)",this arg _targ arg _dam arg _targDr arg _weapDamage arg _mod)
+
+		if !([getSelf(ht) + _mod] call gurps_probSuccess) then {
+			//weapon damage after attack
+			callSelfParams(applyDamage,_weapDamage max 0 arg DAMAGE_TYPE_CRUSHING arg _pos arg _reason);
+		};
+	};
+
+	//получает эффективный урон против объекта
+	func(getEfficiencyOnAttack)
+	{
+		objParams_2(_dam,_targ);
+		private _mat = callFunc(_targ,getMaterial);
+		if !isNullReference(_mat) then {
+			private _modifWeaponDamage = callFunc(_mat,getDamageCoefOnAttack);
+			_dam = round(_dam*_modifWeaponDamage);
+		};
+		_dam
+	};
+
 	func(getHPStatusText)
 	{
 		objParams_1(_addClr);
@@ -1946,7 +1992,7 @@ class(IDestructible) extends(GameObject)
 		if (getSelf(hp)>0) then {
 			setSelf(hpMax,getSelf(hp));
 			if !callSelf(isItem) then {
-				setSelf(weight,[this] call gurps_calculateConstructionWeight);
+				setSelf(weight,([this] call gurps_calculateConstructionWeight) * 1000);
 			};
 		} else {
 			callSelf(generateObjectHP);
@@ -1968,14 +2014,22 @@ class(IDestructible) extends(GameObject)
 		if callSelf(isItem) then {
 			_val = [this] call gurps_calculateItemHP;
 		} else {
-			private _weightTn = [this] call gurps_calculateConstructionWeight;
-			_val = [_weightTn] call gurps_calculateConstructionHP;
-			//lb to kg
-			setSelf(weight,_weightTn * 1000);
+			private _dwt = getSelf(weight);
+			if equals(_dwt,0) then {
+				private _weightTn = [this] call gurps_calculateConstructionWeight;
+				_val = [_weightTn] call gurps_calculateConstructionHP;
+				//lb to kg
+				setSelf(weight,_weightTn * 1000);
+			} else {
+				_val = [_dwt / 1000] call gurps_calculateConstructionHP;
+			};
 		};
 		setSelf(hp,_val);
 		setSelf(hpMax,_val);
 	};
+
+	//коэффициент для авторасчета веса. это делитель веса объекта. для мебели например 10
+	getterconst_func(getCoefAutoWeight,1);
 
 	//TODO replace to nullptr and refactoing all checks
 	var(material,null);//string|object
@@ -2122,13 +2176,37 @@ class(IDestructible) extends(GameObject)
 	getter_func(getOnDestroyTypes,callSelf(getOnDestroyTypesFromMaterial));
 
 	//минимально допустимое хп
+	"
+		name:Минимально допустимое здоровье
+		desc:Возвращает минимальное допустимое здоровье для этого игрового объекта (макс.зд. * -5)
+		type:get
+		lockoverride:1
+		return:int:Минимальное допустимое здоровье игрового объекта
+	" node_met
 	getter_func(getMinAllowedHP,-5 * getSelf(hpMax));
+
+	"
+		name:Текущее здоровье в процентах
+		desc:Возвращает текущее здоровье в процентах от 100 до 0
+		type:get
+		lockoverride:1
+		return:int:Текущее здоровье в процентах
+	" node_met
 	//текущее представление хп в процентном соотношении
 	func(getHPCurrentPrecentage)
 	{
 		objParams();
 		round linearConversion [callSelf(getMinAllowedHP),getSelf(hpMax),getSelf(hp),0,100,true];
 	};
+
+	"
+		name:Установить текущее здоровье в процентах
+		desc:Устанавливает текущее здоровье в процентах от 100 до 0
+		type:method
+		lockoverride:1
+		in:int:Здоровье:Здоровье в процентах
+			opt:def=100
+	" node_met
 	func(setHPCurrentPrecentage)
 	{
 		objParams_1(_val);
@@ -2269,15 +2347,17 @@ region(Pulling functionality)
 		if (count _mvr == 0) exitWith {nullPtr};
 		_mvr select 0
 	};
-	func(playPullSound)
+
+	var(__pullProc_tdat,null);
+
+	func(_getPullSounds)
 	{
 		objParams();
 		private _mat = callSelf(getMaterial);
-		if isNullReference(_mat) exitWith {};
-		private _snd = callFunc(_mat,getPullSound);
-		if (_snd == "") exitWith {};
-		callSelfParams(playSound,_snd arg getRandomPitchInRange(0.5,1.1) arg 8);
+		if isNullReference(_mat) exitWith {[]};
+		callFunc(_mat,getPullSounds);
 	};
+
 	func(_checkCanPullingConditions)
 	{
 		objParams_1(_usr);
@@ -2296,213 +2376,52 @@ region(Pulling functionality)
 	func(startPull)
 	{
 		objParams_1(_usr);
-		if !callSelf(isMovable) exitWith {};
-		if !callSelf(isInWorld) exitWith {};
-		if !callSelfParams(_checkCanPullingConditions,_usr) exitWith {};
 		
-		//todo горящие чанки объекта не позволят двигать его
 		
 		getSelf(__moverMobs) pushBack _usr;
 		callSelfParams(_pullStarted,_usr);
 		callSelf(onPullChanged);
+	};
+	func(canStartPull)
+	{
+		objParams_1(_usr);
+
+		if !callSelf(isMovable) exitWith {false};
+		if !callSelf(isInWorld) exitWith {false};
+		if !callSelfParams(_checkCanPullingConditions,_usr) exitWith {false};
+		//пусть пока тащить может только один
+		if (count getSelf(__moverMobs) > 0) exitWith {false};
+		//todo горящие чанки объекта не позволят двигать его
+
+		true
 	};
 
 	//internal function for handling pullings
 	func(_pullStarted)
 	{
 		objParams_1(_usr);
-		//default async check timeout
-		#define async_delay_check_ 0.5
-
-		//this is helper puller, do not attach
-		private _isMainOwner = equals(callSelf(getPullMainOwner),_usr);
 
 		private _wobj = getSelf(loc);
 		private _srcPos = asltoatl getPosWorld _wobj;
 		private _own = getVar(_usr,owner);
+		private _cachedPosVar = [getposatl _wobj,getposworld _wobj];
 		private _offs = _srcPos vectorDiff (getposatl _own);
+		private _pby = [_wobj] call model_getPitchBankYaw;
+		
+		callSelf(unloadModel);
 
-		private _vtarg = if (_isMainOwner) then {
-			callSelfParams(setTransformMode,true); //enable transform
-			private _newvtarg = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
+		private _wposRequired = !([_pby] call model_isSafedirTransform);
+		private _cachePos = if (_wposRequired) then {_cachedPosVar select 1} else {_cachedPosVar select 0};
+		setSelf(__pullProc_tdat,vec2(_cachePos,_pby));
 
-			_newvtarg setvariable ["_srcPos",_srcPos];
-			_newvtarg setvariable ["_own",_own];
-			_newvtarg setvariable ["_offs",_offs];
-
-			private _rotDefault = [_wobj] call model_getPitchBankYaw;
-			_newvtarg setvariable ["_rot",_rotDefault];//offset vector transform
-			_newvtarg setvariable ["_curRot",_rotDefault]; //current vector transform
-			_newvtarg setvariable ["_zpos",0]; //offset z-axis
-			_newvtarg setvariable ["_curZPos",0]; //current offset z-axis
-
-			_newvtarg setVariable ["_lastTransform",callSelf(getTransform)];
-
-			_wobj setVariable ["__vtarg_pull",_newvtarg];//creating reference
-			
-			_newvtarg setPosATL ((getposatl _own) vectoradd _offs);
-			[_newvtarg,_rotDefault] call model_SetPitchBankYaw;
-
-			_newvtarg
-		} else {
-			callSelf(getPullHelperObject)
+		private _rpcInfo = [getSelf(pointer),getSelf(model),_offs,_pby,callSelf(_getPullSounds)];
+		if (callSelf(canLight) && {getSelf(light) != -1}) then {
+			_rpcInfo pushBack getSelf(light);
 		};
 
-		private _params = [this,_usr,_vtarg,_own,_offs];
-
-		if (_isMainOwner) then {
-			private _bbxDat = (core_modelBBX get (tolower getSelf(model)));
-			if isNullVar(_bbxDat) then {_bbxDat = [[0,0,0],[0,0,0],0];};
-			(_bbxDat select 0) params ["_x1","_y1","_z1"];
-			(_bbxDat select 1) params ["_x2","_y2","_z2"];
-			private _bbxDatAll = [
-				[0,0,0],
-				[_x1,_y1,_z1],
-				[_x1,_y1,_z2],
-				[_x1,_y2,_z1],
-				[_x1,_y2,_z2],
-				[_x2,_y1,_z1],
-				[_x2,_y1,_z2],
-				[_x2,_y2,_z1],
-				[_x2,_y2,_z2]
-			];
-			private _maxZ = ((abs _z1) + (abs _z2))/2;
-			_vtarg setVariable ["_maxZOffset",_maxZ];
-
-			_params pushBack _bbxDatAll;
-		};
-		
-		private _ptrInfo = getSelf(pointer);
-		if (!_isMainOwner) then {
-			_ptrInfo = "helper+"+_ptrInfo;
-		} else {
-			callFuncParams(_usr,fastSendInfo,"pulling_canPull" arg true);
-		};
-		private _paramsRPC = [_ptrInfo];
-		
-		callFuncParams(_usr,syncSmdVar,"pull" arg _paramsRPC);
-		
-
-		startAsyncInvoke
-			{
-				private _tick = _this select 1;
-				if (tickTime < _tick) exitWith {false};
-				_this set [1,tickTime + async_delay_check_];
-				(_this select 0) params ['this',"_usr","_vtarg","_own","_offs","_bbxDatAll"];
-				private _isStop = false;
-
-				if isNullReference(_vtarg) exitWith {true};
-				if !callFunc(this,isInWorld) exitWith {true};
-				private _isMainOwner = equals(callSelf(getPullMainOwner),_usr);
-				private _canmove = true;
-				private _oldpos = getposatl _vtarg;
-				private _modpos = ((getposatl _own) vectoradd _offs);
-				
-				private _newtempPosZ = _vtarg getvariable "_zpos";
-				private _newtempPos = _modpos vectorAdd [0,0,_newtempPosZ];
-				private _newtempVec = _vtarg getvariable "_rot";
-
-				if !callSelfParams(_checkCanPullingConditions,_usr) then {
-					_isStop = true;
-				};
-
-				if (_isMainOwner) then {
-					
-					//apply vtarg temp transform
-					_vtarg setPosATL _newtempPos;
-					[_vtarg,_newtempVec] call model_SetPitchBankYaw;
-
-					_intersectCount = 0;
-					private _its = null;
-					//_upos = _own modelToWorld (_own selectionPosition "spine3");
-					_upos = getPosATL _own; //от предыдущей позиции проверка, не от моба...
-					{
-						_its = [
-							_upos,
-							_vtarg modelToWorld _x,
-							_vtarg,
-							_own
-						] call si_getIntersectData;
-						if !isNullReference(_its select 0) then {
-							private _itobj = _its select 0;
-							if equals(_itobj,_vtarg) exitWith {};
-							_itobj = [_itobj] call si_handleObjectReturnCheckVirtual;
-							if equals(_itobj,this) exitWith {};
-							//traceformat("increment iobj: %1",_its select 0)
-							INC(_intersectCount);
-						};
-					} foreach _bbxDatAll;
-
-					//traceformat("On intersection check result: %1",_intersectCount)
-					_canmove = _intersectCount <= 4;
-				};
-
-				if ((_oldpos distance (_modpos)) > 1.1) then {
-					_isStop = true;
-					callFuncParams(_usr,localSay,"Сорвалась хватка!" arg "error");
-				};
-				_it = [
-					getposatl _own,
-					(getposatl _own) vectoradd [0,0,-100],
-					_own,
-					getSelf(loc)
-				] call si_getIntersectData;
-				if (!isNullReference(_it select 0)) then {
-					if equals(_it select 0,getSelf(loc)) exitWith {
-						_isStop = true;
-					};
-				};
-
-				//bbx checking
-
-				if (!_isStop) then {
-					if (!_isMainOwner) exitWith {};
-					callFuncParams(_usr,fastSendInfo,"pulling_canPull" arg _canmove);
-					if (!_canmove) exitWith {
-						//reset position
-						_vtarg setPosAtl (_oldpos);
-						[_vtarg,_vtarg getVariable "_curRot"] call model_SetPitchBankYaw;
-					};
-					
-					//save positions
-					_vtarg setVariable ["_curRot",_newtempVec];
-					_vtarg setVariable ["_curZPos",_newtempPosZ];
-					
-					private _newPos = _newtempPos;
-					
-					getSelf(loc) setPosWorld (atltoasl _newPos);
-					[getSelf(loc),_newtempVec] call model_SetPitchBankYaw;
-					
-					callSelf(replicateObject);
-					traceformat("transform update %1 %2; OFFSET %3; Z %4",_newPos arg _newtempVec arg _offs arg _newtempPosZ)
-					
-
-					if ((_oldpos distance _newpos) > 0.15) then {
-						callFunc(this,playPullSound);
-					};
-				};
-
-				_isStop;
-			},
-			{
-				(_this select 0) params ['this',"_usr","_vtarg"];
-				
-				traceformat("PULLING TRIGGER STOPPED %1",_vtarg)
-				if !isNullReference(_vtarg) then {
-					//callFuncParams(_usr,onGrab,this);
-					{
-						if equals(getVar(_x,object),this) then {
-							callFunc(_x,stopGrab);
-						};
-					} foreach getVar(_usr,specHandAct);
-				};
-			},
-			[_params,tickTime + async_delay_check_]
-		endAsyncInvoke
-
-		#undef async_delay_check_
+		callFuncParams(_usr,syncSmdVar,"pull" arg _rpcInfo);
 	};
-
+	
 	func(stopPull)
 	{
 		objParams_1(_usr);
@@ -2518,8 +2437,17 @@ region(Pulling functionality)
 		};
 
 		if (count _mvr == 0) then {
-			private _vtarg = callSelf(getPullHelperObject);
-			deleteVehicle _vtarg;
+			// private _vtarg = callSelf(getPullHelperObject);
+			// deleteVehicle _vtarg;
+			getSelf(__pullProc_tdat) params ["_pos","_pby"];
+			(_pby call model_convertPithBankYawToVec) params ["_vd","_vu"];
+			private _wposRequired = !([_pby] call model_isSafedirTransform);
+			traceformat("WPOS REQUIRED: %1; pby: %2 => %3",_wposRequired arg _pby arg vec2(_vd,_vu))
+			if (_wposRequired) then {
+				callSelfParams(loadModel,_pos + [true] arg _vd arg _vu arg false);
+			} else {
+				callSelfParams(loadModel,_pos arg _vd arg _vu arg false);
+			};
 		};
 
 		callSelf(onPullChanged);
@@ -2574,6 +2502,7 @@ region(Pulling functionality)
 		};
 		private _handleInp = {
 			objParams_2(_usr,_inp);
+			assert_str(false,"Pull settings changing not supported");
 			private _src = getSelf(context);
 			if isNullReference(_src) exitWith {};
 			if !callFunc(_src,isInWorld) exitWith {};
@@ -2598,6 +2527,39 @@ region(Pulling functionality)
 		callFuncParams(_dynDisp,setNDOptions,"ObjectPull" arg 10 arg getSelf(pointer) arg _getInfo arg _handleInp arg _ctx);
 		
 		callFuncParams(_dynDisp,openNDisplayInternal,_usr arg getVar(_usr,owner));
+	};
+
+region(Emplacer system)
+	//можно ли расположить предмет на this объекте. проверяемый
+	func(canEmplaceItem)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		//по умолчанию можно расположить только если предмет на полу
+		callFuncParams(_obj,isFloorEmplaceFromVUP,_vup);
+	};
+	
+	//called on canEmplaceItem returns 
+	func(onEmplaceItemFail)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		if !callFuncParams(_obj,isFloorEmplaceFromVUP,_vup) exitWith {
+			private _msg = pick["Упадёт же!","Слишком большой наклон.","Лучше поставлю где поровнее.","Отсюда всё скатится...","Тут не встанет."];
+			callFuncParams(_usr,localSay,_msg arg "error");
+		};
+	};
+
+	func(onEmplaceItem)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		//virtual function for custom functionality
+		//for example: can use for update germs on item and source object
+	};
+
+	//внутренняя функция проверки расположен ли vectorup на полу
+	func(isFloorEmplaceFromVUP)
+	{
+		objParams_1(_vup);
+		(_vup select 2) >= 0.65
 	};
 
 region(Craft system)

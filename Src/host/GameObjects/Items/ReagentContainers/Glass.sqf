@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -35,6 +35,7 @@ class(GlassBottle) extends(IGlassReagentItem)
 	//var(model,"ml\ml_object_new\model_14_10\bottledef.p3d"); //nogeom
 	var(model,"relicta_models\models\interier\props\kitchen\buhlo1.p3d");
 	var(material,"MatGlass");
+	var(hp,1);
 	var(weight,gramm(350));
 	var(size,ITEM_SIZE_SMALL);
 	var(reagents,vec2(this,60) call ms_create);
@@ -77,6 +78,12 @@ endclass
 
 class(SpirtBottle) extends(GlassBottle)
 	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",45) arg vec2("Nutriment",15)]);
+endclass
+
+class(PerfumeBottle) extends(GlassBottle)
+	var(model,"relicta_models\models\interier\props\treasure\perfume\perfume.p3d");
+	var(bottleName,"Духи");
 	getterconst_func(contentReagents,[vec2("Spirt",45) arg vec2("Nutriment",15)]);
 endclass
 

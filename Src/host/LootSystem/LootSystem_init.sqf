@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -35,15 +35,8 @@ loot_prepareAll = {
 	#ifdef TEST_IO
 	_skipLoad = true;
 	#endif
-	#ifdef _SQFVM
-	_skipLoad = true;
-	#endif
 	
 	if (_skipLoad) exitWith {};
-
-	#ifdef __VM_VALIDATE
-	if (true) exitWith {};
-	#endif
 
 	#ifdef RBUILDER
 	//preparing file_getFileList

@@ -249,32 +249,18 @@ Replaced value:
 (missionNamespace getVariable ["role_"+(val),nullPtr])
 ```
 File: [host\GamemodeManager\GamemodeManager.h at line 17](../../../Src/host/GamemodeManager/GamemodeManager.h#L17)
-## conDllCall
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-
-
-Replaced value:
-```sqf
-diag_log
-```
-File: [host\GamemodeManager\GamemodeManager.h at line 21](../../../Src/host/GamemodeManager/GamemodeManager.h#L21)
 ## gprint(mes)
 
 Type: constant
 
-Description: 
+Description: Печатники сообщений
 - Param: mes
 
 Replaced value:
 ```sqf
 conDllCall format["[GMM]:	%1 #0101",mes]
 ```
-File: [host\GamemodeManager\GamemodeManager.h at line 24](../../../Src/host/GamemodeManager/GamemodeManager.h#L24)
+File: [host\GamemodeManager\GamemodeManager.h at line 20](../../../Src/host/GamemodeManager/GamemodeManager.h#L20)
 ## gprintformat(mes,fmt)
 
 Type: constant
@@ -287,7 +273,7 @@ Replaced value:
 ```sqf
 gprint(format[mes arg fmt]) 
 ```
-File: [host\GamemodeManager\GamemodeManager.h at line 26](../../../Src/host/GamemodeManager/GamemodeManager.h#L26)
+File: [host\GamemodeManager\GamemodeManager.h at line 22](../../../Src/host/GamemodeManager/GamemodeManager.h#L22)
 ## DEFAULT_TIME_TO_START
 
 Type: constant
@@ -299,7 +285,7 @@ Replaced value:
 ```sqf
 60
 ```
-File: [host\GamemodeManager\GamemodeManager.h at line 29](../../../Src/host/GamemodeManager/GamemodeManager.h#L29)
+File: [host\GamemodeManager\GamemodeManager.h at line 25](../../../Src/host/GamemodeManager/GamemodeManager.h#L25)
 ## DEFAULT_TIME_TO_START
 
 Type: constant
@@ -313,7 +299,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\GamemodeManager\GamemodeManager.h at line 31](../../../Src/host/GamemodeManager/GamemodeManager.h#L31)
+File: [host\GamemodeManager\GamemodeManager.h at line 27](../../../Src/host/GamemodeManager/GamemodeManager.h#L27)
 ## PRE_LOBBY_AWAIT_TIME
 
 Type: constant
@@ -325,7 +311,7 @@ Replaced value:
 ```sqf
 60*3
 ```
-File: [host\GamemodeManager\GamemodeManager.h at line 35](../../../Src/host/GamemodeManager/GamemodeManager.h#L35)
+File: [host\GamemodeManager\GamemodeManager.h at line 31](../../../Src/host/GamemodeManager/GamemodeManager.h#L31)
 # GamemodeManager.hpp
 
 ## GAME_STATE_PRELOAD
@@ -1180,7 +1166,7 @@ Replaced value:
 ```sqf
 [_x,_prior]
 ```
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 444](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L444)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 465](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L465)
 ## hashPair(key,val)
 
 Type: constant
@@ -1193,7 +1179,7 @@ Replaced value:
 ```sqf
 [#key,val]
 ```
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 490](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L490)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 511](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L511)
 ## getClientSetting(var)
 
 Type: constant
@@ -1205,7 +1191,7 @@ Replaced value:
 ```sqf
 (_cliSettings get #var)
 ```
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 548](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L548)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 569](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L569)
 ## gameEvents_internal_list_allObjects
 
 Type: Variable
@@ -1217,7 +1203,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1305](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1305)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1330](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1330)
 ## gm_startRound
 
 Type: function
@@ -1233,7 +1219,7 @@ Type: function
 Description: 
 - Param: _client
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 183](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L183)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 200](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L200)
 ## gm_prepareNoRoleClients
 
 Type: function
@@ -1241,7 +1227,7 @@ Type: function
 Description: 
 
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 223](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L223)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 243](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L243)
 ## gm_internal_resetContenders
 
 Type: function
@@ -1249,7 +1235,7 @@ Type: function
 Description: 
 
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 247](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L247)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 268](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L268)
 ## gm_handlePreListAntags
 
 Type: function
@@ -1258,7 +1244,7 @@ Description:
 - Param: _client
 - Param: _rObj
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 261](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L261)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 282](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L282)
 ## gm_handleDefineFullAntags
 
 Type: function
@@ -1266,7 +1252,7 @@ Type: function
 Description: 
 - Param: _cli
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 355](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L355)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 376](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L376)
 ## gm_spawnPreparedClients
 
 Type: function
@@ -1276,7 +1262,7 @@ Description:
 - Param: _rObj
 - Param: _isFullAntag (optional, default false)
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 392](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L392)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 413](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L413)
 ## gm_handleDefineHiddenAntags
 
 Type: function
@@ -1284,7 +1270,7 @@ Type: function
 Description: 
 
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 403](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L403)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 424](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L424)
 ## gm_prepareReadyClients
 
 Type: function
@@ -1292,7 +1278,7 @@ Type: function
 Description: Готовит структуру с приоритетами на роли
 
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 424](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L424)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 445](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L445)
 ## gm_initHashMapCharSettings
 
 Type: function
@@ -1301,7 +1287,7 @@ Description: Установка настроек персонажа для ре�
 - Param: _name
 - Param: _val
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 489](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L489)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 510](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L510)
 ## gm_spawnClientToRole
 
 Type: function
@@ -1312,7 +1298,7 @@ Description: Создать клиента в игре
 - Param: _decrementRoleCount (optional, default true)
 - Param: _mobsetup_map
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 517](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L517)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 538](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L538)
 ## gm_internal_assignToImpl
 
 Type: function
@@ -1322,7 +1308,7 @@ Description:
 - Param: _mob
 - Param: _usr
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 669](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L669)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 690](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L690)
 ## gm_sendLateRolesToClient
 
 Type: function
@@ -1330,7 +1316,7 @@ Type: function
 Description: Отсылает клиенту запрос на открытие окна выбора доступных лейт ролей и список
 - Param: _owner
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 817](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L817)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 838](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L838)
 ## gm_spawnSelectedLateRole
 
 Type: function
@@ -1339,7 +1325,7 @@ Description: спавнит лейтового персонажа на свою 
 - Param: _roleClass
 - Param: _owner
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 893](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L893)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 914](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L914)
 ## gm_addClientToEmbark
 
 Type: function
@@ -1349,7 +1335,7 @@ Description:
 - Param: _roleData
 - Param: _owner
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 935](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L935)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 956](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L956)
 ## gm_removeClientFromEmbark
 
 Type: function
@@ -1358,7 +1344,7 @@ Description:
 - Param: _client
 - Param: _syncRPC (optional, default true)
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 947](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L947)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 968](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L968)
 ## gm_doEmbark
 
 Type: function
@@ -1366,7 +1352,7 @@ Type: function
 Description: 
 
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 969](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L969)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 990](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L990)
 ## gm_validateRolesOnPickGameMode
 
 Type: function
@@ -1374,7 +1360,7 @@ Type: function
 Description: Если таких ролей не указано или клиент не имеет возможности взять роль - сбрасываем её
 - Param: this
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1007](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1007)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1028](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1028)
 ## gm_endRound
 
 Type: function
@@ -1382,7 +1368,7 @@ Type: function
 Description: 
 - Param: _endgameState
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1041](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1041)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1062](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1062)
 ## gm_isAspectAllowedToMode
 
 Type: function
@@ -1391,7 +1377,7 @@ Description: может ли аспект быть установленным в
 - Param: _aspect
 - Param: _curMode
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1131](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1131)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1156](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1156)
 ## gm_internal_getPossibleAspects
 
 Type: function
@@ -1399,7 +1385,7 @@ Type: function
 Description: 
 - Param: _curMode
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1155](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1155)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1180](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1180)
 ## gm_isAspectSetup
 
 Type: function
@@ -1407,7 +1393,7 @@ Type: function
 Description: 
 - Param: _checked
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1167](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1167)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1192](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1192)
 ## gm_pickRoundAspect
 
 Type: function
@@ -1415,7 +1401,7 @@ Type: function
 Description: 
 
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1177](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1177)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1202](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1202)
 ## gm_pickMultiAspects
 
 Type: function
@@ -1423,7 +1409,7 @@ Type: function
 Description: 
 - Param: _aspObj
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1225](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1225)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1250](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1250)
 ## gameEvents_getPossibleEvents
 
 Type: function
@@ -1431,7 +1417,7 @@ Type: function
 Description: получение всех доступных событий
 
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1271](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1271)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1296](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1296)
 ## gameEvents_pickEvent
 
 Type: function
@@ -1440,7 +1426,7 @@ Description: запуск события
 - Param: _evs
 - Param: _wts
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1308](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1308)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1333](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1333)
 ## gameEvents_internal_isEventAllowedToSession
 
 Type: function
@@ -1449,7 +1435,7 @@ Description:
 - Param: _aspect
 - Param: _curMode
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1321](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1321)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1346](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1346)
 ## gameEvents_process
 
 Type: function
@@ -1457,7 +1443,7 @@ Type: function
 Description: 
 
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1342](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1342)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1367](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1367)
 ## gm_createMob
 
 Type: function
@@ -1465,7 +1451,7 @@ Type: function
 Description: создаёт игровую оболочку
 - Param: _pos
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1370](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1370)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1395](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1395)
 ## lobby_createDummy
 
 Type: function
@@ -1474,4 +1460,4 @@ Description:
 - Param: _pos
 - Param: _isWoman (optional, default false)
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1403](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1403)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1428](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1428)

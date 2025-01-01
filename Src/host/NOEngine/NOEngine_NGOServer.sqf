@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -37,7 +37,7 @@ noe_server_ngo_check = {
 			//#endif
 			_bnd attachto [_obj,_vec];
 			_bnd setObjectScale _scale;
-			[_bnd,false] call setPhysicsCollisionFlag_impl;
+			_bnd setPhysicsCollisionFlag false;
 			_obj setVariable ["srv_ngo_geom",_bnd];
 			_bnd setVariable ["srv_ngo_src",_obj];
 			_bnd setVariable ["link",_obj getVariable "link"];
@@ -52,7 +52,7 @@ noe_server_ngo_check = {
 			//#endif
 			_bnd attachto [_obj,_vec];
 			_bnd setObjectScale _scale;
-			[_bnd,false] call setPhysicsCollisionFlag_impl;
+			_bnd setPhysicsCollisionFlag false;
 			_bnd setVariable ["srv_ngo_src",_obj];
 			_bnd setVariable ["link",_obj getVariable "link"];
 			//#ifndef NOE_NGO_DEBUG_MODE

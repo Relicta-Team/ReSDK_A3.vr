@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -68,6 +68,16 @@ class(Teapot) extends(IReagentNDItem)
 	var(model,"relicta_models\models\interier\props\kitchen\chaynik.p3d");
 	var(material,"MatMetal");
 	var(weight,gramm(400));
+	var(size,ITEM_SIZE_MEDIUM);
+	var(reagents,vec2(this,100) call ms_create);
+	getterconst_func(transferAmount,[5 arg 10 arg 20 arg 30]);
+endclass
+
+class(Teapot1) extends(Teapot)
+	var(name,"Заварник");
+	var(model,"ml_shabut\furniture\teabaggin.p3d");
+	var(material,"MatGlass");
+	var(weight,gramm(300));
 	var(size,ITEM_SIZE_MEDIUM);
 	var(reagents,vec2(this,100) call ms_create);
 	getterconst_func(transferAmount,[5 arg 10 arg 20 arg 30]);

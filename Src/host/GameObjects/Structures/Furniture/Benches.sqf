@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -14,6 +14,7 @@ class(BenchBase) extends(IChair)
 	editor_only(var(desc,"Многоместное сиденье");)
 	var(material,"MatWood");
 	var(dr,2);
+	getterconst_func(getCoefAutoWeight,10);
 	//многоместное сидение(лавка)
 endclass
 

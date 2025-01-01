@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -87,6 +87,7 @@ class(LogDebris1) extends(Debris)
 	var(model,"relicta_models2\debris\s_wooden_debris7\s_wooden_debris7.p3d");
 	var(weight,gramm(16524));
 	var(size,ITEM_SIZE_HUGE);
+	var(material,"MatWood");
 endclass
 
 class(LogDebris2) extends(LogDebris1)

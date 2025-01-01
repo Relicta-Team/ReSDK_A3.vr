@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -299,6 +299,12 @@ region(raycast)
 	getter_func(getLastInteractVector,getSelf(__lastinteractdata__) select 3); //направление
 	getter_func(getLastInteractTarget,getSelf(__lastinteractdata__) select 4);
 	getter_func(getLastInteractNormal,getSelf(__lastinteractdata__) select 5);
+
+	func(__setLastInteractDistance)
+	{
+		objParams_1(_dist);
+		getSelf(__lastinteractdata__) set [2,_dist];
+	};
 
 	#define __debug_getinteractiontarget_spheres__
 	#ifdef __debug_getinteractiontarget_spheres__
@@ -672,6 +678,8 @@ region(Connect control events)
 		callSelf(closeOpenedNetDisplay);
 		//release building preview if exist
 		callSelf(releaseBuildingPreview);
+
+		callSelf(dropAllItemsInHands);
 	};
 
 region(Mob location info: position; direction; speed)

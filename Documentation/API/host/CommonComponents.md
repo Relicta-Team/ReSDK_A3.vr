@@ -682,16 +682,26 @@ Description:
 - Param: _doPreprocess (optional, default false)
 
 File: [host\CommonComponents\!PreInit.sqf at line 638](../../../Src/host/CommonComponents/!PreInit.sqf#L638)
+## pushFront
+
+Type: function
+
+Description: 
+- Param: _list
+- Param: _element
+- Param: _unique (optional, default false)
+
+File: [host\CommonComponents\!PreInit.sqf at line 648](../../../Src/host/CommonComponents/!PreInit.sqf#L648)
 # Algorithm.sqf
 
 ## allOf
 
 Type: function
 
-Description: 
+Description: #define __ENABLE_ALGORITHM_TEST___
 - Param: _list
 
-File: [host\CommonComponents\Algorithm.sqf at line 18](../../../Src/host/CommonComponents/Algorithm.sqf#L18)
+File: [host\CommonComponents\Algorithm.sqf at line 14](../../../Src/host/CommonComponents/Algorithm.sqf#L14)
 ## anyOf
 
 Type: function
@@ -699,7 +709,7 @@ Type: function
 Description: 
 - Param: _list
 
-File: [host\CommonComponents\Algorithm.sqf at line 23](../../../Src/host/CommonComponents/Algorithm.sqf#L23)
+File: [host\CommonComponents\Algorithm.sqf at line 19](../../../Src/host/CommonComponents/Algorithm.sqf#L19)
 ## noneOf
 
 Type: function
@@ -707,7 +717,7 @@ Type: function
 Description: 
 - Param: _list
 
-File: [host\CommonComponents\Algorithm.sqf at line 28](../../../Src/host/CommonComponents/Algorithm.sqf#L28)
+File: [host\CommonComponents\Algorithm.sqf at line 24](../../../Src/host/CommonComponents/Algorithm.sqf#L24)
 # Animator.sqf
 
 ## addAnim(name)
@@ -843,30 +853,6 @@ Description:
 File: [host\CommonComponents\Animator.sqf at line 308](../../../Src/host/CommonComponents/Animator.sqf#L308)
 # Assert.sqf
 
-## __vmthrow_assert(res)
-
-Type: constant
-
-Description: 
-- Param: res
-
-Replaced value:
-```sqf
-__vm_log(res); exitcode__ -100;
-```
-File: [host\CommonComponents\Assert.sqf at line 9](../../../Src/host/CommonComponents/Assert.sqf#L9)
-## __vmthrow_assert_nothrow(res)
-
-Type: constant
-
-Description: 
-- Param: res
-
-Replaced value:
-```sqf
-__vm_log(res); if(true)exitwith{};
-```
-File: [host\CommonComponents\Assert.sqf at line 10](../../../Src/host/CommonComponents/Assert.sqf#L10)
 ## sys_int_evalassert
 
 Type: function
@@ -874,7 +860,7 @@ Type: function
 Description: 
 - Param: _value
 
-File: [host\CommonComponents\Assert.sqf at line 12](../../../Src/host/CommonComponents/Assert.sqf#L12)
+File: [host\CommonComponents\Assert.sqf at line 9](../../../Src/host/CommonComponents/Assert.sqf#L9)
 ## sys_static_assert_
 
 Type: function
@@ -885,7 +871,7 @@ Description:
 - Param: _line (optional, default 0)
 - Param: _message (optional, default "")
 
-File: [host\CommonComponents\Assert.sqf at line 25](../../../Src/host/CommonComponents/Assert.sqf#L25)
+File: [host\CommonComponents\Assert.sqf at line 22](../../../Src/host/CommonComponents/Assert.sqf#L22)
 ## sys_assert_
 
 Type: function
@@ -896,7 +882,7 @@ Description:
 - Param: _line (optional, default 0)
 - Param: _message (optional, default "")
 
-File: [host\CommonComponents\Assert.sqf at line 89](../../../Src/host/CommonComponents/Assert.sqf#L89)
+File: [host\CommonComponents\Assert.sqf at line 70](../../../Src/host/CommonComponents/Assert.sqf#L70)
 # AttackTypesAssoc.sqf
 
 ## ata_assoc_map
@@ -1147,42 +1133,6 @@ Description: Конвертация даты и времени в строку
 - Param: _outms (optional, default false)
 
 File: [host\CommonComponents\DateTime.sqf at line 13](../../../Src/host/CommonComponents/DateTime.sqf#L13)
-# loader.hpp
-
-## importCommon(path)
-
-Type: constant
-
-> Exists if **__VM_BUILD** defined
-
-Description: 
-- Param: path
-
-Replaced value:
-```sqf
-if (isNil {allClientContents}) then {allClientContents = [];}; \
-	__vm_log("[LOAD] " + ("src\host\CommonComponents\" + path)); \
-	_path = "src\host\CommonComponents\" + path; \
-	private _ctx = compile ((__pragma_prep_cli _path)); \
-	allClientContents pushback _ctx;
-```
-File: [host\CommonComponents\loader.hpp at line 10](../../../Src/host/CommonComponents/loader.hpp#L10)
-## importCommon(path)
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-- Param: path
-
-Replaced value:
-```sqf
-diag_log format["Start validate common module %1",path]; \
-	private _ctx = compile preprocessFileLineNumberS ("src\host\CommonComponents\" + path); \
-	diag_log format["   - Module %1 loaded",path];
-```
-File: [host\CommonComponents\loader.hpp at line 18](../../../Src/host/CommonComponents/loader.hpp#L18)
 # ModelsPath.sqf
 
 ## model_getAssoc
@@ -1240,14 +1190,32 @@ Description:
 - Param: _vehicle
 
 File: [host\CommonComponents\ModelTransform.hpp at line 86](../../../Src/host/CommonComponents/ModelTransform.hpp#L86)
+## model_getPitchBankYawAccurate
+
+Type: function
+
+Description: 
+- Param: _v
+
+File: [host\CommonComponents\ModelTransform.hpp at line 91](../../../Src/host/CommonComponents/ModelTransform.hpp#L91)
 ## model_isSafedirTransform
 
 Type: function
 
 Description: проверяет является ли направление безопасным
 - Param: _vdu_dir
+- Param: _fromVUP (optional, default false)
 
-File: [host\CommonComponents\ModelTransform.hpp at line 92](../../../Src/host/CommonComponents/ModelTransform.hpp#L92)
+File: [host\CommonComponents\ModelTransform.hpp at line 105](../../../Src/host/CommonComponents/ModelTransform.hpp#L105)
+## model_isPosInsideBBX
+
+Type: function
+
+Description: 
+- Param: _pos
+- Param: _obj
+
+File: [host\CommonComponents\ModelTransform.hpp at line 123](../../../Src/host/CommonComponents/ModelTransform.hpp#L123)
 # Pencfg.sqf
 
 ## addtobj(model,soundpen,armpen)
@@ -1765,19 +1733,55 @@ Description:
 File: [host\CommonComponents\Structs\Collections.sqf at line 331](../../../Src/host/CommonComponents/Structs/Collections.sqf#L331)
 # Pointers.sqf
 
-## sref_cont
+## SAFE_REFERENCE_POOL_CONTAINER
 
-Type: Variable
+Type: constant
 
-Description: Safe reference. Used for bypass crossreferences and possible memory leaks
+Description: 
 
 
-Initial value:
+Replaced value:
 ```sqf
-createHashMap
+0
+```
+File: [host\CommonComponents\Structs\Pointers.sqf at line 6](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L6)
+## SAFE_REFERENCE_POOL_COUNTER
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+1
 ```
 File: [host\CommonComponents\Structs\Pointers.sqf at line 7](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L7)
-## sref_i
+## SAFE_REFERENCE_POOL_NAME
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+2
+```
+File: [host\CommonComponents\Structs\Pointers.sqf at line 8](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L8)
+## SAFE_REFERENCE_MEMORY_ADDR
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"mpstor"
+```
+File: [host\CommonComponents\Structs\Pointers.sqf at line 10](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L10)
+## sref_defaultPool
 
 Type: Variable
 
@@ -1786,20 +1790,40 @@ Description:
 
 Initial value:
 ```sqf
-0
+["DefaultPool"] call SafeReference_CreatePool
 ```
-File: [host\CommonComponents\Structs\Pointers.sqf at line 8](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L8)
+File: [host\CommonComponents\Structs\Pointers.sqf at line 24](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L24)
+## SafeReference_CreatePool
+
+Type: function
+
+Description: создание нового пула для безопасных ссылок
+- Param: _poolName
+
+File: [host\CommonComponents\Structs\Pointers.sqf at line 13](../../../Src/host/CommonComponents/Structs/Pointers.sqf#L13)
 # Profiling.sqf
 
-## prof_map_zones
+## profiler_getSystemContainer
 
-Type: Variable
+Type: function
 
-Description: PROFILING
+Description: 
 
 
-Initial value:
-```sqf
-createHashMap
-```
-File: [host\CommonComponents\Structs\Profiling.sqf at line 10](../../../Src/host/CommonComponents/Structs/Profiling.sqf#L10)
+File: [host\CommonComponents\Structs\Profiling.sqf at line 52](../../../Src/host/CommonComponents/Structs/Profiling.sqf#L52)
+## profiler_getResults
+
+Type: function
+
+Description: 
+- Param: _printOnConsole (optional, default false)
+
+File: [host\CommonComponents\Structs\Profiling.sqf at line 56](../../../Src/host/CommonComponents/Structs/Profiling.sqf#L56)
+## profiler_clearResults
+
+Type: function
+
+Description: 
+
+
+File: [host\CommonComponents\Structs\Profiling.sqf at line 74](../../../Src/host/CommonComponents/Structs/Profiling.sqf#L74)

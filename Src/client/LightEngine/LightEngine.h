@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -146,9 +146,5 @@ sourceObject setvariable ["__config",type]; sourceObject setVariable ["__light",
 
 #define endScriptEmit ] ;
 
-//только для редактора
-#ifdef EDITOR
-	#define _emitAlias(strval) ["alias",strval],
-#else
-	#define _emitAlias(strval) 
-#endif
+//уникальный алиас
+#define _emitAlias(strval) ["alias",strval],

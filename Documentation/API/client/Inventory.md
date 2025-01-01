@@ -571,7 +571,7 @@ Type: function
 Description: Событие которое выбрасывает предмет из инвентаря
 - Param: _id (optional, default cd_activeHand)
 
-File: [client\Inventory\functions.sqf at line 1105](../../../Src/client/Inventory/functions.sqf#L1105)
+File: [client\Inventory\functions.sqf at line 1100](../../../Src/client/Inventory/functions.sqf#L1100)
 ## inventory_onTransferSlot
 
 Type: function
@@ -580,7 +580,7 @@ Description: Событие при передачи из одного слота
 - Param: _slotFrom
 - Param: _slotTo
 
-File: [client\Inventory\functions.sqf at line 1119](../../../Src/client/Inventory/functions.sqf#L1119)
+File: [client\Inventory\functions.sqf at line 1114](../../../Src/client/Inventory/functions.sqf#L1114)
 ## inventory_onInteractTargetWith
 
 Type: function
@@ -589,7 +589,7 @@ Description:
 - Param: _obj
 - Param: _slotData
 
-File: [client\Inventory\functions.sqf at line 1156](../../../Src/client/Inventory/functions.sqf#L1156)
+File: [client\Inventory\functions.sqf at line 1151](../../../Src/client/Inventory/functions.sqf#L1151)
 ## inventory_onMainAction
 
 Type: function
@@ -597,7 +597,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1173](../../../Src/client/Inventory/functions.sqf#L1173)
+File: [client\Inventory\functions.sqf at line 1168](../../../Src/client/Inventory/functions.sqf#L1168)
 ## inventory_onExtraAction
 
 Type: function
@@ -605,7 +605,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1209](../../../Src/client/Inventory/functions.sqf#L1209)
+File: [client\Inventory\functions.sqf at line 1204](../../../Src/client/Inventory/functions.sqf#L1204)
 ## inventory_onClick
 
 Type: function
@@ -613,7 +613,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1267](../../../Src/client/Inventory/functions.sqf#L1267)
+File: [client\Inventory\functions.sqf at line 1262](../../../Src/client/Inventory/functions.sqf#L1262)
 ## inventory_onExamine
 
 Type: function
@@ -621,7 +621,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1308](../../../Src/client/Inventory/functions.sqf#L1308)
+File: [client\Inventory\functions.sqf at line 1303](../../../Src/client/Inventory/functions.sqf#L1303)
 ## inventory_changeActiveHand
 
 Type: function

@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -10,6 +10,10 @@ interact_examine = {
 	if (["examine"] call input_spamProtect) exitWith {};
 		
 	private _target = call interact_cursorObject;
+	private _probOnScr = [true,false] call interact_getOnSceenCapturedObject;
+	if !isNullVar(_probOnScr) then {
+		_target = _probOnScr;
+	};
 	
 	//skip NGO objects
 	_target = _target call noe_client_getObjectNGOSkip;

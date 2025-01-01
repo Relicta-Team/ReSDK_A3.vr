@@ -1,14 +1,11 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
 
 // Внутренняя функция активации наследования всех свойств
 ms_internal_initInheritance = {
-	#ifdef __VM_VALIDATE
-	if (true) exitWith {};
-	#endif
 	[ms_map_allMatters] call ms_internal_processInheritanceOnNamespace;
 	[ms_map_allReactions] call ms_internal_processInheritanceOnNamespace;
 

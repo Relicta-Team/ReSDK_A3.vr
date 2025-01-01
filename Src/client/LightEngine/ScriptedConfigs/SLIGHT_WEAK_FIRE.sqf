@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -38,7 +38,7 @@ regScriptEmit(SLIGHT_WEAK_FIRE)
 		"pt",
 		null,
 		_emitAlias("Огонь")
-		["linkToLight",[-0.0499992,3.8147e-006,0.0840034]],
+		["linkToLight",[-0.0499992,3.8147e-06,0.0840034]],
 		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,10,32,1],"","Billboard",3,0.4,[0,0,0],[0,0,0.5],0,0.05,0.04,0.16,[0.2],[[1,1,0.6,-80]],[0.2],0,0,"","","",0,false,-1,[]]],
 		["setParticleRandom",[0.15,[0.15,0.15,0.15],[0.03,0.03,0.09],0,0.02,[0.1,0.1,0.1,0],0,0,1,0]],
 		["setParticleCircle",[0,[0,0,0]]],

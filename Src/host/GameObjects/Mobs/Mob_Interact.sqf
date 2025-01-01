@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -946,6 +946,18 @@ region(Captives)
 				callFunc(_x,stopGrab);
 			};
 		} foreach getSelf(specHandAct);
+	};
+
+	func(stopGrabIf)
+	{
+		objParams_2(_fcond,_ctxtpl);
+		{
+			if callFunc(_x,isGrabProcess) then {
+				if ([_x,_ctxtpl] call _fcond)	then {
+					callFunc(_x,stopGrab);
+				};
+			};
+		} foreach getSelf(specHandAct)
 	};
 
 	func(startGrab)

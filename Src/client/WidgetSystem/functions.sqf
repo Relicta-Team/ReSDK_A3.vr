@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -562,7 +562,7 @@ getScreenPointToWorld = {
 //возвращает мировую позицию по экранным координатам
 screenPosToWorldPoint = {
 	params [["_spos",getMousePosition],["_distanceMul",1000],["_fromNative",true]];
-	private _vectorDir = ifcheck(_fromNative,_spos,_spos call convertScreenCoords) call screenToWorldDirection_impl;
+	private _vectorDir = screenToWorldDirection ifcheck(_fromNative,_spos,_spos call convertScreenCoords);
 	private _startPos = positionCameraToWorld[0,0,0];
 	_startPos vectorAdd (_vectorDir vectorMultiply _distanceMul);
 };

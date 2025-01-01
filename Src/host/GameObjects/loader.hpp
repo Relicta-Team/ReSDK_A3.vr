@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -121,6 +121,7 @@ loadFile("src\host\GameObjects\Structures\Tools\Farming.sqf");
 	loadFile("src\host\GameObjects\Structures\Tools\Spawners.sqf");
 loadFile("src\host\GameObjects\Structures\Interiors\SmallDecorations.sqf");
 	loadFile("src\host\GameObjects\Structures\Interiors\InteractibleInteriors.sqf");
+loadFile("src\host\GameObjects\Structures\Musical\Musical.sqf");
 
 
 //decorations

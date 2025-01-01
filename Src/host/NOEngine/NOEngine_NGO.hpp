@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -51,3 +51,5 @@ addNGO("ml_shabut\eft\svd_trubka.p3d",vec3(0,0,0),0.025);
 addNGO("a3\structures_f_exp\infrastructure\roads\sewercover_03_f.p3d",vec3(0,0,-0.25),0.065);
 // матрас
 addNGODecal("ml\ml_object_new\model_05\matras_2.p3d",vec3(0,0,-0.05),0.4,"geopolsm");
+//чайничек
+addNGO("ml_shabut\furniture\teabaggin.p3d",vec3(0,0,0),0.018);

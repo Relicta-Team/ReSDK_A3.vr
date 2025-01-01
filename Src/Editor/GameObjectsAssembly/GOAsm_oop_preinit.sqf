@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -94,7 +94,8 @@ oop_getSimpleTypeSize = {
 --------------------------------------------------------------------------------
 */
 
-// object istypeof gameobject (from base to childs) (!!!Slower)
+// object istypeof gameobject (from base to childs)
+//now oop_getinhlist use cache and will be faster
 //TODO replace by oop_isTypeOfBase
 oop_isTypeOf = {
 	params ["_searched","_type"];
@@ -137,16 +138,21 @@ oop_getTypeValue = {
 
 oop_getinhlist = {
 	params ["_typename","_recurs","_refarr"];
-
+	private _isFirstCall = isNullVar(_refarr);
 	private _type = missionNamespace getVariable ["pt_"+_typename,0];
 	if equals(_type,0) exitWith {
 		errorformat("oop::getInhlist() - Cant find type %1 in memory",_typename);
 		[]
 	};
+	private _hasCache = !isNull(_type getvariable "$cache_childs_all");
+	if (_isFirstCall && {_hasCache} && {_recurs}) exitWith {
+		array_copy(_type getvariable "$cache_childs_all")
+	};
+
 
 	private _childs = +(_type getVariable "__childList");
 
-	if (_recurs) then {
+	private _chRet = if (_recurs) then {
 		private _internalRefArr = defIsNull(_refarr,_childs);
 
 		{
@@ -161,6 +167,12 @@ oop_getinhlist = {
 	} else {
 		_childs
 	};
+
+	if (_isFirstCall && {!_hasCache} && {_recurs}) then {
+		_type setvariable ["$cache_childs_all",array_copy(_chRet)];
+	};
+
+	_chRet
 };
 
 oop_getAllObjectsOfType = {

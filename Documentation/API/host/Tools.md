@@ -109,6 +109,58 @@ Description:
 - Param: _end
 
 File: [host\Tools\MoveToTargetDebugger.sqf at line 79](../../../Src/host/Tools/MoveToTargetDebugger.sqf#L79)
+# BuildTools_clientLoader.sqf
+
+## cmplog(fcat)
+
+Type: constant
+
+> Exists if **DEBUG** defined
+
+Description: 
+- Param: fcat
+
+Replaced value:
+```sqf
+allClientContents pushBack (compile format['log("Init %1")',fcat]);
+```
+File: [host\Tools\BuildTools\BuildTools_clientLoader.sqf at line 26](../../../Src/host/Tools/BuildTools/BuildTools_clientLoader.sqf#L26)
+## cmplog(fcat)
+
+Type: constant
+
+> Exists if **DEBUG** not defined
+
+Description: 
+- Param: fcat
+
+Replaced value:
+```sqf
+
+```
+File: [host\Tools\BuildTools\BuildTools_clientLoader.sqf at line 28](../../../Src/host/Tools/BuildTools/BuildTools_clientLoader.sqf#L28)
+# BuildTools_init.sqf
+
+## BT_ERRCODE(code)
+
+Type: constant
+
+Description: 
+- Param: code
+
+Replaced value:
+```sqf
+(-2100 - (code))
+```
+File: [host\Tools\BuildTools\BuildTools_init.sqf at line 16](../../../Src/host/Tools/BuildTools/BuildTools_init.sqf#L16)
+## bt_buildClient
+
+Type: function
+
+Description: 
+
+
+File: [host\Tools\BuildTools\BuildTools_init.sqf at line 18](../../../Src/host/Tools/BuildTools/BuildTools_init.sqf#L18)
 # EditorDebug.sqf
 
 ## editorDebug_isEnabled
@@ -122,7 +174,7 @@ Initial value:
 ```sqf
 true //global mode
 ```
-File: [host\Tools\EditorDebug\EditorDebug.sqf at line 16](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L16)
+File: [host\Tools\EditorDebug\EditorDebug.sqf at line 17](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L17)
 ## editorDebug_handlerUpdate
 
 Type: Variable
@@ -134,7 +186,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [host\Tools\EditorDebug\EditorDebug.sqf at line 18](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L18)
+File: [host\Tools\EditorDebug\EditorDebug.sqf at line 19](../../../Src/host/Tools/EditorDebug/EditorDebug.sqf#L19)
 # EditorDebug_datahandler.sqf
 
 ## metstart(val)
@@ -239,6 +291,39 @@ Description: общий обработчик данных
 
 
 File: [host\Tools\EditorDebug\EditorDebug_datahandler.sqf at line 224](../../../Src/host/Tools/EditorDebug/EditorDebug_datahandler.sqf#L224)
+# EditorDebug_input.sqf
+
+## inputDebug_list_events
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\Tools\EditorDebug\EditorDebug_input.sqf at line 6](../../../Src/host/Tools/EditorDebug/EditorDebug_input.sqf#L6)
+## inputDebug_addMouseEvent
+
+Type: function
+
+Description: 
+- Param: _code
+
+File: [host\Tools\EditorDebug\EditorDebug_input.sqf at line 8](../../../Src/host/Tools/EditorDebug/EditorDebug_input.sqf#L8)
+## inputDebug_handleMouseEvent
+
+Type: function
+
+Description: 
+- Param: _button
+- Param: _shift
+- Param: _ctrl
+- Param: _alt
+
+File: [host\Tools\EditorDebug\EditorDebug_input.sqf at line 13](../../../Src/host/Tools/EditorDebug/EditorDebug_input.sqf#L13)
 # EditorDebug_io.sqf
 
 ## PRINT_FILEWRITE_ERROR_REASON

@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -19,7 +19,7 @@
 
 //величина успеха
 #define getRollAmount(throwExec) ((throwExec) select 0)
-//тип возврата
+//тип возврата (DICE_SUCCESS, DICE_FAIL ...)
 #define getRollType(throwExec) ((throwExec) select 1)
 //результат 3d6
 #define getRollDiceAmount(throwExec) ((throwExec) select 2)

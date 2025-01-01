@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -84,11 +84,6 @@ dml_loadMap = {
 	};
 };
 
-#ifndef __GH_ACTION
-
-VM_COMPILER_ADDFUNC_UNARY(dml_internal_loadConfig,LoadConfig);
-
-#endif
 
 //подготовка загрузочных инструкций
 dml_parseMap = {
@@ -97,7 +92,7 @@ dml_parseMap = {
 
 	traceformat("Attempt load config %1",_mapPath);
 
-	private _cfg = _mapPath call dml_internal_loadConfig;
+	private _cfg = LoadConfig _mapPath;
 	private _cfgMap = _cfg call dml_prepMapConfig;
 	private _bmap = struct_new(BinaryMapInstructions);
 

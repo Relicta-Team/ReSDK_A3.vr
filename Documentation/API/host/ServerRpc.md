@@ -208,20 +208,6 @@ Replaced value:
 "debug_console" callExtension
 ```
 File: [host\ServerRpc\serverRpc_init.sqf at line 21](../../../Src/host/ServerRpc/serverRpc_init.sqf#L21)
-## debugprint_type
-
-Type: constant
-
-> Exists if **__VM_VALIDATE** defined
-
-Description: 
-
-
-Replaced value:
-```sqf
-diag_log
-```
-File: [host\ServerRpc\serverRpc_init.sqf at line 23](../../../Src/host/ServerRpc/serverRpc_init.sqf#L23)
 ## rpc_log(event,owner,args)
 
 Type: constant
@@ -237,7 +223,7 @@ Replaced value:
 ```sqf
 canlog(event,debugprint_type format['[NET::LOG::SERVER]:    <%1> send %4 bytes to (%2) with %3' arg event arg owner arg args arg args call oop_getTypeSizeFull]; ["<%1> send %4 bytes to (%2) with %3" arg event arg owner arg args arg args call oop_getTypeSizeFull] call logInfo)
 ```
-File: [host\ServerRpc\serverRpc_init.sqf at line 27](../../../Src/host/ServerRpc/serverRpc_init.sqf#L27)
+File: [host\ServerRpc\serverRpc_init.sqf at line 24](../../../Src/host/ServerRpc/serverRpc_init.sqf#L24)
 ## rpc_simple(data)
 
 Type: constant
@@ -251,7 +237,7 @@ Replaced value:
 ```sqf
 debugprint_type format['[NET::LOG]:    %1' arg data]; ["<RPC::Simple> %1" arg  data] call logInfo
 ```
-File: [host\ServerRpc\serverRpc_init.sqf at line 28](../../../Src/host/ServerRpc/serverRpc_init.sqf#L28)
+File: [host\ServerRpc\serverRpc_init.sqf at line 25](../../../Src/host/ServerRpc/serverRpc_init.sqf#L25)
 ## rpc_log(event,owner,args)
 
 Type: constant
@@ -267,7 +253,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\ServerRpc\serverRpc_init.sqf at line 30](../../../Src/host/ServerRpc/serverRpc_init.sqf#L30)
+File: [host\ServerRpc\serverRpc_init.sqf at line 27](../../../Src/host/ServerRpc/serverRpc_init.sqf#L27)
 ## rpc_simple(data)
 
 Type: constant
@@ -281,7 +267,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\ServerRpc\serverRpc_init.sqf at line 31](../../../Src/host/ServerRpc/serverRpc_init.sqf#L31)
+File: [host\ServerRpc\serverRpc_init.sqf at line 28](../../../Src/host/ServerRpc/serverRpc_init.sqf#L28)
 ## EMULATE_SERVERINDEBUG
 
 Type: constant
@@ -293,7 +279,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\ServerRpc\serverRpc_init.sqf at line 34](../../../Src/host/ServerRpc/serverRpc_init.sqf#L34)
+File: [host\ServerRpc\serverRpc_init.sqf at line 31](../../../Src/host/ServerRpc/serverRpc_init.sqf#L31)
 ## server_addEvent
 
 Type: function
@@ -302,7 +288,7 @@ Description:
 - Param: _eventName
 - Param: _eventCode
 
-File: [host\ServerRpc\serverRpc_init.sqf at line 36](../../../Src/host/ServerRpc/serverRpc_init.sqf#L36)
+File: [host\ServerRpc\serverRpc_init.sqf at line 33](../../../Src/host/ServerRpc/serverRpc_init.sqf#L33)
 ## server_removeEvent
 
 Type: function
@@ -311,7 +297,7 @@ Description:
 - Param: _eventName
 - Param: _eventId
 
-File: [host\ServerRpc\serverRpc_init.sqf at line 43](../../../Src/host/ServerRpc/serverRpc_init.sqf#L43)
+File: [host\ServerRpc\serverRpc_init.sqf at line 40](../../../Src/host/ServerRpc/serverRpc_init.sqf#L40)
 ## rpc_removeEventGlobal
 
 Type: function
@@ -320,7 +306,7 @@ Description:
 - Param: _eventName
 - Param: _eventId
 
-File: [host\ServerRpc\serverRpc_init.sqf at line 48](../../../Src/host/ServerRpc/serverRpc_init.sqf#L48)
+File: [host\ServerRpc\serverRpc_init.sqf at line 45](../../../Src/host/ServerRpc/serverRpc_init.sqf#L45)
 ## server_callEvent
 
 Type: function
@@ -329,7 +315,7 @@ Description:
 - Param: _eventName
 - Param: _args
 
-File: [host\ServerRpc\serverRpc_init.sqf at line 53](../../../Src/host/ServerRpc/serverRpc_init.sqf#L53)
+File: [host\ServerRpc\serverRpc_init.sqf at line 50](../../../Src/host/ServerRpc/serverRpc_init.sqf#L50)
 ## server_sendtoclient
 
 Type: function
@@ -339,7 +325,7 @@ Description:
 - Param: _eventName
 - Param: _args
 
-File: [host\ServerRpc\serverRpc_init.sqf at line 58](../../../Src/host/ServerRpc/serverRpc_init.sqf#L58)
+File: [host\ServerRpc\serverRpc_init.sqf at line 55](../../../Src/host/ServerRpc/serverRpc_init.sqf#L55)
 ## server_sendtoclientobject
 
 Type: function
@@ -349,7 +335,7 @@ Description:
 - Param: _eventName
 - Param: _args
 
-File: [host\ServerRpc\serverRpc_init.sqf at line 77](../../../Src/host/ServerRpc/serverRpc_init.sqf#L77)
+File: [host\ServerRpc\serverRpc_init.sqf at line 74](../../../Src/host/ServerRpc/serverRpc_init.sqf#L74)
 ## server_sendtoallclients
 
 Type: function
@@ -358,7 +344,7 @@ Description:
 - Param: _eventName
 - Param: _args
 
-File: [host\ServerRpc\serverRpc_init.sqf at line 122](../../../Src/host/ServerRpc/serverRpc_init.sqf#L122)
+File: [host\ServerRpc\serverRpc_init.sqf at line 119](../../../Src/host/ServerRpc/serverRpc_init.sqf#L119)
 ## rpc_sendGlobal
 
 Type: function
@@ -367,7 +353,7 @@ Description:
 - Param: _eventName
 - Param: _args
 
-File: [host\ServerRpc\serverRpc_init.sqf at line 139](../../../Src/host/ServerRpc/serverRpc_init.sqf#L139)
+File: [host\ServerRpc\serverRpc_init.sqf at line 136](../../../Src/host/ServerRpc/serverRpc_init.sqf#L136)
 ## rpc_getClientEvent
 
 Type: function
@@ -377,7 +363,7 @@ Type: function
 Description: 
 - Param: _name
 
-File: [host\ServerRpc\serverRpc_init.sqf at line 162](../../../Src/host/ServerRpc/serverRpc_init.sqf#L162)
+File: [host\ServerRpc\serverRpc_init.sqf at line 159](../../../Src/host/ServerRpc/serverRpc_init.sqf#L159)
 ## rpc_getServerEvent
 
 Type: function
@@ -387,4 +373,4 @@ Type: function
 Description: 
 - Param: _name
 
-File: [host\ServerRpc\serverRpc_init.sqf at line 166](../../../Src/host/ServerRpc/serverRpc_init.sqf#L166)
+File: [host\ServerRpc\serverRpc_init.sqf at line 163](../../../Src/host/ServerRpc/serverRpc_init.sqf#L163)

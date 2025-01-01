@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -54,7 +54,30 @@ class(InfoBoard) extends(KeyHolder)
 	var(name,"Доска информации");
 	var(model,"ml_shabut\exodus\infotablicka.p3d");
 	var(material,"MatWood");
+	var(canUseContainer,false);
+
+	func(canEmplaceItem)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		if (isTypeOf(_obj,Paper) || isTypeOf(_obj,ItemWritter)) exitWith {true};
+		super()
+	};
+	
 endclass
+
+class(Hanger) extends(InfoBoard)
+	var(name,"Вешалка");
+	var(model,"ml_shabut\exodusss\veshalochechka.p3d");
+	var(material,"MatMetal");
+
+	func(canEmplaceItem)
+	{
+		objParams_5(_obj,_pos,_dir,_vup,_usr);
+		if (isTypeOf(_obj,Cloth)) exitWith {true};
+		super()
+	};
+
+endclass	
 
 
 

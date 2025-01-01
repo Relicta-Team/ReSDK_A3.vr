@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -173,6 +173,7 @@ class(GameObjectKindTask) extends(TaskBase)
 		lockoverride:1
 		return:array[string]:Массив имен игровых объектов
 	" node_met
+	
 	func(getObjectNames)
 	{
 		objParams();
@@ -183,15 +184,16 @@ class(GameObjectKindTask) extends(TaskBase)
 
 		//first pass: get count of each item
 		{
+			if isNullReference(_x) then {continue};
 			_cur = callFunc(_x,getName);
-			if isNullReference(_cur) then {continue};
+			if isNullVar(_cur) then {continue};
 			_allItems set [_cur,(_allItems getOrDefault [_cur,0]) + 1];
 		} foreach getSelf(__objRefs);
 
 		{
 			_cur = getFieldBaseValueWithMethod(_x,"name","getName");
 			_allItems set [_cur,(_allItems getOrDefault [_cur,0]) + 1];
-		} foreach getSelf(__objRefs);
+		} foreach getSelf(__typeList);
 
 		//second pass: get names of items with count postfix
 		{
@@ -202,10 +204,10 @@ class(GameObjectKindTask) extends(TaskBase)
 
 			if (_curCount > 1) then {
 				_names pushBack format["%1 (x%2)",_cur,_curCount];
-				_allItems deleteAt _cur;
 			} else {
 				_names pushBack _cur;
 			};
+			
 		} foreach getSelf(__objRefs);
 
 		{
@@ -216,16 +218,15 @@ class(GameObjectKindTask) extends(TaskBase)
 
 			if (_curCount > 1) then {
 				_names pushBack format["%1 (x%2)",_cur,_curCount];
-				_allItems deleteAt _cur;
 			} else {
 				_names pushBack _cur;
 			};
+			
 		} foreach getSelf(__typeList);
-		assert_str(count _allItems == 0,"Logic error: Unknown game object in task: " + str _allItems);
+		
 		_names
 	};
-
-
+	
 endclass
 
 class(ItemKindTask) extends(GameObjectKindTask)

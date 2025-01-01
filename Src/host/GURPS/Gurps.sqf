@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -75,6 +75,12 @@ gurps_rollstd = {
     if (_d > _skill) exitWith {RET(DICE_FAIL)};
 
     errorformat("No return. skill:%1; dices:%2",_skill arg _d);
+};
+
+//Проверка числа на успех
+gurps_probSuccess = {
+	params ["_skill"];
+	DICE_ISSUCCESS( getRollType(_skill call gurps_rollstd) )
 };
 
 "
@@ -496,12 +502,14 @@ gurps_calculateConstructionWeight = {
 		0
 	};
 	private _wPer1000sqft = callFunc(_mat,getWeightCoefForCalcHP);
-	(_areaFt * _wPer1000sqft) / 1000;
+	private _cTnWeight = (_areaFt * _wPer1000sqft) / 1000;
+	
+	_cTnWeight / callFunc(_obj,getCoefAutoWeight)
 };
 
 //only for editor
 gurps_internal_calculateHP = {
-	params ["_class","_modelPath","_matClass"];
+	params ["_class","_modelPath","_matClass","_refWeight"];
 	if !isNull(core_cfg2model getvariable _modelPath) then {
 		_modelPath = core_cfg2model getvariable _modelPath;
 	};
@@ -518,6 +526,18 @@ gurps_internal_calculateHP = {
 	
 	private _wPer1000sqft = [_matClass,"",true,"getWeightCoefForCalcHP"] call oop_getFieldBaseValue;
 	private _weight = (_areaFt * _wPer1000sqft) / 1000;
+	// private _wtx = [_class,"weight",true] call oop_getFieldBaseValue;
+	// if not_equals(_wtx,0) then {
+	// 	_weight = _wtx / 1000;//тонн
+	// };
+
+
+	_weight = _weight / ([_class,"",true,"getCoefAutoWeight"] call oop_getFieldBaseValue);
+
+
+	if !isNullVar(_refWeight) then {
+		refset(_refWeight,_weight);
+	};
 	private _hp = 100 * (_weight ^ (1/3));
 
 	(round _hp) max 1

@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -88,12 +88,28 @@ model_getPitchBankYaw = {
 	(_vehicle call BIS_fnc_getPitchBank) + [getDir _vehicle]
 };
 
+model_getPitchBankYawAccurate = {
+    private _v = _this select 0;
+
+    private _y = vectorDir _v;
+    private _z = vectorUp _v;
+    private _x1 = _y vectorCrossProduct _z;
+
+    private _ay = -asin(_z select 0);
+    private _az = (_y select 0) atan2 (_x1 select 0);
+    private _ax = (_z select 1) atan2 (_z select 2);
+    [_ax, _ay, _az]
+};
+
 //проверяет является ли направление безопасным
 model_isSafedirTransform = {
-	params ["_vdu_dir"];
+	params ["_vdu_dir",["_fromVUP",false]];
 	if equalTypes(_vdu_dir,0) then {
 		true
 	} else {
+		if (_fromVUP) exitWith {
+			equals(_vdu_dir apply {((abs _x) toFixed 1)},vec3("0.0","0.0","1.0"))
+		};
 		//conv to vec-coords
 		if (count _vdu_dir == 3) then {
 			_vdu_dir = _vdu_dir call model_convertPithBankYawToVec;
@@ -102,4 +118,25 @@ model_isSafedirTransform = {
 		equals(_vup apply {((abs _x) toFixed 1)},vec3("0.0","0.0","1.0"))
 	};
 	
+};
+
+model_isPosInsideBBX = {
+	params ["_pos","_obj"];	
+	private _relPos = _obj worldToModel _pos;
+	private _boundingBox = boundingBox _obj;
+
+	private _min = _boundingBox select 0;
+	private _max = _boundingBox select 1;
+
+	_relPos params ["_myX","_myY","_myZ"];
+	private _inside = false;
+	if ((_myX > (_min select 0)) and (_myX < (_max select 0))) then {
+		if ((_myY > (_min select 1)) and (_myY < (_max select 1))) then {
+			if ((_myZ > (_min select 2)) and (_myZ < (_max select 2))) then {
+				_inside = true;
+			};
+		};
+	};
+
+	_inside
 };

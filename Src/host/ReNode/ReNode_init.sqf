@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -60,9 +60,6 @@ nodegen_addClassField = {
 };
 
 nodegen_addClass = {
-    #ifdef _SQFVM
-    if (true) exitwith {};
-    #endif
     if (!nodegen_canUse) exitwith {};
 
     private _ctx = _this;
@@ -70,9 +67,6 @@ nodegen_addClass = {
 };
 
 nodegen_addFunction = {
-    #ifdef _SQFVM
-    if (true) exitwith {};
-    #endif
     if (!nodegen_canUse) exitwith {};
 
     private _ctx = _this;
@@ -102,10 +96,6 @@ nodegen_addFunction = {
 };
 
 nodegen_addSystemNode = {
-    #ifdef _SQFVM
-    if (true) exitwith {};
-    #endif
-
     private _ctx = _this;
     [_ctx,"node"] call nodegen_commonSysAdd;
 };
@@ -161,10 +151,6 @@ nodegen_addStruct = {
 };
 
 nodegen_commonAdd = {
-    #ifdef _SQFVM
-    if (true) exitwith {};
-    #endif
-
     //генерация только в редакторе
     if (!nodegen_canUse) exitwith {};
 
@@ -176,10 +162,6 @@ nodegen_commonAdd = {
 };
 
 nodegen_commonSysAdd = {
-    #ifdef _SQFVM
-    if (true) exitwith {};
-    #endif
-
     if (!nodegen_canUse) exitwith {};
 
     params ["_ctx","_nseg"];
@@ -414,15 +396,8 @@ nodegen_generateLib = {
 
 nodegen_loadClasses = {
     private _logger = ifcheck(is3DEN,printLog,cprint);
-    private _fEx = {false};
-    
-    #ifdef __VM_VALIDATE
-        _fEx = {true};
-    #else
-        _fEx = compile "fileEXISTS _this";
-    #endif
 
-    if (!(nodegen_scriptClassesLoader call _fEx)) exitwith {
+    if (!(fileExists(nodegen_scriptClassesLoader))) exitwith {
         ["Scripted class loader not found: %1",nodegen_scriptClassesLoader] call _logger;
     };
 
@@ -432,11 +407,7 @@ nodegen_loadClasses = {
     {
         private _pts = (_x splitString "\/");
         
-        #ifdef __VM_VALIDATE
-            private _filename = _pts select ((count _pts) - 1);
-        #else
-            private _filename = _pts select -1;
-        #endif
+        private _filename = _pts select -1;
 
         private _fullname = nodegen_scriptClassesFolder + "\" + _filename;
         // if (_fullname != _x) then {

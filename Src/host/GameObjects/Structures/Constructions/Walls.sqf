@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -26,6 +26,10 @@ endclass
 editor_attribute("EditorGenerated")
 class(SmallTileWall) extends(SmallWall)
 	var(model,"ml_shabut\sbs\plitkastenka2.p3d");
+endclass
+
+class(SmallTileWall1) extends(SmallTileWall)
+	var(model,"ml_shabut\sbs\plitkastenka.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -60,6 +64,10 @@ editor_attribute("EditorGenerated")
 class(MediumLightWall) extends(SmallWall)
 	var(model,"a3\structures_f_argo\walls\city\wallcity_01_4m_plain_grey_f.p3d");
 	var(name,"Стена");
+endclass
+
+class(MediumLightWall1) extends(MediumLightWall)
+	var(model,"a3\structures_f_enoch\walls\brick\brickwall_02_l_5m_f.p3d");
 endclass
 
 editor_attribute("EditorGenerated")
@@ -135,6 +143,10 @@ class(LuxuryClayWall) extends(SmallWall)
 	var(material,"MatDirt");
 endclass
 
+class(RuinedLuxuryClayWall) extends(LuxuryClayWall)
+	var(model,"ca\structures_e\wall\wall_l\wall_l2_5m_end_ep1.p3d");
+endclass
+
 editor_attribute("EditorGenerated")
 class(SmallConcreteArch) extends(SmallWall)
 	var(model,"a3\structures_f\walls\cncshelter_f.p3d");
@@ -194,6 +206,12 @@ class(BrickThinWallSmall) extends(SmallWall)
 	var(name,"Кирпичная стена");
 endclass
 
+class(BrickWall) extends(BrickThinWallSmall)
+	var(name,"Красивая кирпичная стена");
+	var(desc,"Очень приятно выглядит");
+	var(model,"a3\structures_f_enoch\walls\brick\brickwall_04_l_5m_f.p3d");
+endclass
+
 editor_attribute("EditorGenerated")
 class(BrickThinWall) extends(BrickThinWallSmall)
 	var(model,"csa_constr\csa_obj\kr_stena.p3d");
@@ -228,6 +246,10 @@ endclass
 editor_attribute("EditorGenerated")
 class(BrickThinWallDoorwayWindow) extends(BrickThinWallDoorway)
 	var(model,"csa_constr\csa_obj\kr_stena_do1.p3d");
+endclass
+
+class(BrickThinWallDoorwayBig) extends(BrickThinWallDoorway)
+	var(model,"csa_constr\csa_obj\kr_stena_3d.p3d");
 endclass
 
 editor_attribute("EditorGenerated")

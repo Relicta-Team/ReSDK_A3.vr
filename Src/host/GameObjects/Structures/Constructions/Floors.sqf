@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -107,6 +107,14 @@ class(WoodenSmallFloor) extends(SmallFloor)
 	var(model,"ml_shabut\sbs\poldrevko.p3d");
 endclass
 
+class(WoodenPallet) extends(SmallFloor)
+	var(model,"ca\misc\paletaa.p3d");
+endclass
+
+class(WoodenPallet1) extends(WoodenPallet)
+	var(model,"a3\structures_f\civ\constructions\pallet_f.p3d");
+endclass
+
 editor_attribute("EditorGenerated")
 class(ThickConcreteFloorSmall) extends(SmallFloor)
 	var(model,"csa_constr\csa_obj\pod_6x6.p3d");
@@ -188,6 +196,7 @@ editor_attribute("EditorGenerated")
 class(BigConcretePanel) extends(ConcretePanel)
 	var(model,"a3\structures_f_enoch\infrastructure\roads\concretepanels_02_four_f.p3d");
 endclass
+
 editor_attribute("EditorGenerated")
 class(SmallConcretePanel) extends(ConcretePanel)
 	var(model,"a3\structures_f_exp\infrastructure\pavements\gardenpavement_01_f.p3d");

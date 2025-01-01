@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -64,3 +64,10 @@ model("\relicta_models2\tools\s_fire_extinguisher\s_fire_extinguisher.p3d") [[IN
 model("\relicta_models2\debris\s_metal_debris\s_metal_debris.p3d") [[INV_HAND_L,[[-0.149,0,-0.215],[-21,42,-51]]],[INV_HAND_R,[[0.176,-0.082,-0.232],[0,9,48]]]]
 model("\relicta_models2\debris\s_wooden_debris5\s_wooden_debris5.p3d") [[INV_HAND_L,[[-0.075,0.274,0.042],[-21,0,9]]],[INV_HAND_R,[[-0.074,0.259,0.051],proxIt_vec]]]
 model("\relicta_models2\debris\s_wooden_debris6\s_wooden_debris6.p3d") [[INV_HAND_L,[[-0.082,0.274,0.034],[-21,0,9]]],[INV_HAND_R,[[-0.066,0.184,0.026],proxIt_vec]]]
+model("\relicta_models\models\interier\props\treasure\pipe\pipe.p3d") [[INV_FACE,[[-0.048,0.069,0.004],[95,78,-8]]],[INV_HAND_L,[[-0.03,0.012,0.02],[-11,67,-89]]],[INV_HAND_R,[[-0.097,-0.013,0.062],[122,67,4]]]]
+model("\relicta_models\models\cloth\shieldcircle\shieldcircle.p3d") [[INV_FACE,[[-0.048,0.069,0.004],[95,78,-8]]],[INV_HAND_L,[[0.037,-0.089,0.062],[4,64,-32]]],[INV_HAND_R,[[-0.073,-0.055,0.162],[4,25,55]]]]
+model("\ca\structures\furniture\lighting\lantern\lantern.p3d") [[INV_FACE,[[-0.048,0.069,0.004],[95,78,-8]]],[INV_HAND_L,[[-0.197,-0.013,-0.331],[31,-20,25]]],[INV_HAND_R,[[0.146,0.037,-0.256],[16,22,-29]]]]
+model("\ml_shabut\furniture\teabaggin.p3d") [[INV_FACE,[[-0.048,0.069,0.004],[95,78,-8]]],[INV_HAND_L,[[-0.089,0.162,-0.047],[-26,-20,43]]],[INV_HAND_R,[[-0.022,0.112,0.012],[16,-5,-35]]]]
+model("\relicta_models\models\interier\props\treasure\perfume\perfume.p3d") [[INV_FACE,[[-0.048,0.069,0.004],[95,78,-8]]],[INV_HAND_L,[[-0.064,0.012,-0.038],[-26,13,25]]],[INV_HAND_R,[[-0.005,-0.005,0.02],[110,46,7]]]]
+model("\relicta_models\models\interier\props\treasure\necklace\necklace.p3d") [[INV_FACE,[[-0.048,0.069,0.004],[95,78,-8]]],[INV_HAND_L,[[-0.03,0.037,0.012],[-207,-8,49]]],[INV_HAND_R,[[-0.005,-0.005,0.02],[-161,-11,-44]]]]
+model("\ml_shabut\exodus\ashtray.p3d") [[INV_FACE,[[-0.048,0.069,0.004],[95,78,-8]]],[INV_HAND_L,[[-0.047,0.02,-0.038],[-204,-2,7]]],[INV_HAND_R,[[-0.005,-0.064,-0.022],[7,-11,1]]]]

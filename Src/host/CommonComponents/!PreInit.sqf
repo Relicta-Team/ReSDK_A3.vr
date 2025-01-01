@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -645,8 +645,7 @@ fileLoad_Node = {
 	};
 };
 
-missionNamespace setVariable ["pushFront",
-{
+pushFront = {
 	params ["_list","_element",["_unique",false]];
 	reverse _list;
 	if (_unique) then {
@@ -655,9 +654,4 @@ missionNamespace setVariable ["pushFront",
 		_list pushBack _element;
 	};
 	reverse _list;
-}
-];
-//!pushfront = {}; <- throws compier error
-
-VM_COMPILER_ADDFUNC_BINARY(setPhysicsCollisionFlag_impl,setPhysicsCollisionFlag);
-VM_COMPILER_ADDFUNC_UNARY(screenToWorldDirection_impl,screenToWorldDirection);
+};

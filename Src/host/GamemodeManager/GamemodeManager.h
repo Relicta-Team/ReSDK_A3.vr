@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -17,10 +17,6 @@
 #define getRoleObject(val) (missionNamespace getVariable ["role_"+(val),nullPtr])
 
 //Печатники сообщений
-#ifdef __VM_VALIDATE
-	#define conDllCall diag_log
-#endif
-
 #define gprint(mes) conDllCall format["[GMM]:	%1 #0101",mes]
 
 #define gprintformat(mes,fmt) gprint(format[mes arg fmt]) 
