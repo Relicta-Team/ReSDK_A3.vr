@@ -382,18 +382,20 @@ lesc_cullingProcess = {
 
 	lesc_cullCnt = _culled;
 };
-//todo finalize
-#ifndef LESC_ENABLE_CULLING
-__nocall_lesc_culling = {
-#endif
 
-#ifdef LESC_USE_FAST_UPDATE
-lesc_handle = startUpdate(lesc_cullingProcess,0.5);
-#else
-_looped = {while {true}do{call lesc_cullingProcess}};
-lesc_thd = threadStart(threadNew(_looped));
-#endif
+decl(int) lesc_handle = -1;
+decl(thread_handle) lesc_thd = threadNull;
 
-#ifndef LESC_ENABLE_CULLING
+__lesc_culling_start = {
+	#ifdef LESC_USE_FAST_UPDATE
+		lesc_handle = startUpdate(lesc_cullingProcess,0.5);
+	#else
+		private _looped = {while {true}do{call lesc_cullingProcess}};
+		lesc_thd = threadStart(threadNew(_looped));
+	#endif
 };
+
+
+#ifdef LESC_ENABLE_CULLING
+	call __lesc_culling_start;
 #endif
