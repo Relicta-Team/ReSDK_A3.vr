@@ -191,7 +191,7 @@ slt_scriptCfg_doSorting = {
 			
 			//Частицы нам не нужны
 			_cfgSegments resize 0;
-			_cfgSegments pushBack [ "lt",null,["linkToSrc",[0,0,0]] ];
+			_cfgSegments pushBack [ "lt",null,["alias","autogen_light"],["linkToSrc",[0,0,0]] ];
 
 		} else {
 			//не все - частицы
@@ -204,7 +204,7 @@ slt_scriptCfg_doSorting = {
 			};
 			//Если эмиттеров не осталось - добавим dummy эмиттер
 			if (count _cfgSegments == 0) then {
-				_cfgSegments pushBack [ "lt",null,["linkToSrc",[0,0,0]] ];
+				_cfgSegments pushBack [ "lt",null,["alias","autogen_light"],["linkToSrc",[0,0,0]] ];
 			};
 		};
 

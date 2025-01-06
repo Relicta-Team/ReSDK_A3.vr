@@ -26,6 +26,8 @@ init_function(lsim_init)
 	lsim_objMap = createHashMap;
 	lsim_internal_registeredLights = createHashMap;
 
+	lsim_proxyObject = objNull;
+
 	le_allLights = [];
 
 	lsim_internal_handleUndo = -1;
@@ -122,6 +124,13 @@ function(lsim_setMode)
 	};
 
 	if (_mode) then {
+		//ранее был подключен созданный локальный костер но он всё равно дает задержки симуляции
+		lsim_proxyObject = golib_com_object;
+		//lsim_proxyObject setposatl [100,100,100];
+		//lsim_proxyObject hideObject true;
+		lsim_proxyObject enableSimulation true;
+		//lsim_proxyObject attachto [player,[0,0,0]];
+
 		//preinit internal data
 		call lsim_internal_buildScriptedConfigs;
 		
@@ -134,6 +143,8 @@ function(lsim_setMode)
 		lsim_internal_handleRedo = ["onRedo",{call lsim_internal_rebuildAllLights}] call Core_addEventHandler;
 		
 	} else {
+		//! Внимание ! удаление прокси объекта ссылающегося на golib_com_object приведёт к поломке карты
+		//deleteVehicle lsim_proxyObject;
 
 		["onUndo",lsim_internal_handleUndo] call Core_removeEventHandler;
 		["onRedo",lsim_internal_handleRedo] call Core_removeEventHandler;

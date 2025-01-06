@@ -200,13 +200,19 @@ le_se_map_cfgHandlers = createHashMap; //карта зарегистрирова
 
 le_se_mapHandlersUnmanaged = null; //карта нативных эффектов
 le_se_mapHandlersShots = null;
+
+//специальная функция разрешения симуляции для игры и для редактора
+le_se_getSimProxObj = {
+	if (is3den) then {lsim_proxyObject} else {player}
+};
+
 le_se_mapHandlers = createHashMapFromArray [
 	
 	["alias",{}],
 
 	//generic events
 	["linkToSrc",{
-		(_this select 0) attachTo [player,[0,0,0]];
+		(_this select 0) attachTo [call le_se_getSimProxObj,[0,0,0]];
 		_offset = _this select 1;
 		(_this select 0) attachTo [sourceObject,_offset];
 	}],
@@ -404,7 +410,7 @@ le_se_doSorting = {
 			//Все - частицы
 			//adding dummy light
 			[_cfgSegments,
-				[ "lt",null,["linkToSrc",[0,0,0]] ]
+				[ "lt",null,["alias","autogen_light"],["linkToSrc",[0,0,0]] ]
 			] call (missionnamespace getvariable "pushFront"); //for bypass vm error
 		} else {
 			//не все - частицы
