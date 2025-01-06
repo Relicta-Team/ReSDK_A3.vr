@@ -99,3 +99,39 @@
 	};
 	[_emit,_curval_const] call os_light_registerAsNoProcessedLight;
 }] call le_se_registerConfigHandler;
+
+["sign_bar_blink",{
+	params ["_emit","_src","_inPar"];
+	private _delay = 0.7;
+	private _posvec = [
+		[0.1,-0,0.2], //center
+		[0.5,-0,0.4],//up
+		[0.5,-0,0.0], //middle
+		[0.25,-0,-0.15],//semiarrow
+		[-0.2,-0,-0.6], //arrow
+		[0,0,-100] //nopos
+	];
+	private _code = {
+		params ["_light","_src","_stateIndex","_delay","_method","_posvec"];
+		if isNullReference(_light) exitWith {};
+
+		_light attachTo [_src,_posvec select _stateIndex];
+
+		if (_stateIndex >= (count _posvec -1)) then {
+			_stateIndex = -1
+		} else {
+			if (_stateIndex % 2 == 0) then {
+				_light setLightColor [0.013,0.001,0];
+				_light setLightAmbient [0.013,0.001,0];
+			} else {
+				_light setLightColor [0.001,0.013,0];
+				_light setLightAmbient [0.001,0.013,0];
+			};
+		};
+		_this set [2,_stateIndex + 1];
+
+		invokeAfterDelayParams(_method,_delay,_this);
+	};
+	_params = [_emit,_src,0,_delay,_code,_posvec];
+	invokeAfterDelayParams(_code,_delay,_params);
+}] call le_se_registerConfigHandler;

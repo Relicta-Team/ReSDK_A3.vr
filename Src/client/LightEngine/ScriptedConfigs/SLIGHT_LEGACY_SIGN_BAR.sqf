@@ -6,8 +6,8 @@
 regScriptEmit(SLIGHT_LEGACY_SIGN_BAR)
 	[
 		"lt",
-		null,
-		_emitAlias("Свет-todo-addblink_handler")
+		[['sign_bar_blink']],
+		_emitAlias("Свет")
 		["linkToSrc",[0,0,0]],
 		["setLightColor",[0.013,0.001,0]],
 		["setLightAmbient",[0.013,0.001,0]],
