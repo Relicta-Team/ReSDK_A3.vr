@@ -11,7 +11,7 @@ regScriptEmit(SLIGHT_AREA_EATER_NIGHTVISION)
 		["linkToSrc",[0,0,0]],
 		["setLightColor",[0.043,0.036,0]],
 		["setLightAmbient",[0.005,0.006,0]],
-		["setLightIntensity",147840.25],
+		["setLightIntensity",147840],
 		["setLightAttenuation",[15,30,80,5,10,40]]
 	]
 endScriptEmit

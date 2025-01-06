@@ -10,7 +10,7 @@ regScriptEmit(SLIGHT_LEGACY_LAMP_CEILING_OLD)
 		_emitAlias("Направленный свет")
 		["linkToSrc",[0,0,0]],
 		["setOrient",[0,-90,0]],
-		["setLightColor",[0.99,0.92,0.49,1]],
+		["setLightColor",[0.99,0.92,0.49]],
 		["setLightAmbient",[0.01,0,0]],
 		["setLightIntensity",800],
 		["setLightUseFlare",true],

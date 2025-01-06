@@ -8,10 +8,10 @@ regScriptEmit(SLIGHT_LEGACY_LAMP_CEILING)
 		"lt",
 		null,
 		_emitAlias("Свет")
-		["linkToSrc",[0,0,0.3]],
+		["linkToSrc",[0,0,-1]],
 		["setLightColor",[0.016,0.012,0.012]],
 		["setLightAmbient",[0.022,0.023,0.013]],
-		["setLightIntensity",1776.6225],
-		["setLightAttenuation",[0,0,0,1]]
+		["setLightIntensity",1776.62],
+		["setLightAttenuation",[0,0,0,0,6,7]]
 	]
 endScriptEmit

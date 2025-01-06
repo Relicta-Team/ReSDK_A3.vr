@@ -12,6 +12,6 @@ regScriptEmit(SLIGHT_LEGACY_LAMP_CEILING_REDLIGHT)
 		["setLightColor",[0.08,0.035,0.012]],
 		["setLightAmbient",[0.169,0.009,0.009]],
 		["setLightIntensity",2809],
-		["setLightAttenuation",[0,0,0,1]]
+		["setLightAttenuation",[0,0,0,0,6,7]]
 	]
 endScriptEmit
