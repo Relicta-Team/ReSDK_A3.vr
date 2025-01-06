@@ -605,6 +605,7 @@ function(vcom_emit_internal_handleEmitterParseValues)
 		["Searching data offset warning; Key %1 not found",_key] call printWarning;
 	};
 
+	//todo fix issue float values random shift
 	_outData set [_offsetIndex,call compile _cachedValue];
 }
 
