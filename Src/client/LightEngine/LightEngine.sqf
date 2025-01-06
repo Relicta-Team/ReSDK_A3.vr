@@ -154,7 +154,7 @@ le_unloadLight = {
 	[0] call lesc_onLightRemove;
 	
 	
-	os_light_list_noProcessedLights deleteAt (os_light_list_noProcessedLights find _light);
+	os_light_list_noProcessedLights deleteAt (os_light_list_noProcessedLights findif {equals(_x select 0,_light)});
 	
 	
 	deleteVehicle _light;

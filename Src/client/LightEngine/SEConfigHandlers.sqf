@@ -89,3 +89,13 @@
 	// if (!acli_bool_enableSystem) exitWith {};
 	// [_emit,call le_se_getCurrentConfigId] call acli_handleAddObj;
 }] call le_se_registerConfigHandler;
+
+//abstract light cant be get from getLightingAt
+["virtual_light",{
+	params ["_emit","_src","_inPar"];
+	private _curval_const = ["setLightIntensity"] call le_se_getCurrentConfigPropVal;
+	if isNullVar(_curval_const) exitWith {
+		errorformat("virtual_light() - Unknown intensity value for source object %1",_src);
+	};
+	[_emit,_curval_const] call os_light_registerAsNoProcessedLight;
+}] call le_se_registerConfigHandler;

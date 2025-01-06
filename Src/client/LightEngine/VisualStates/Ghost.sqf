@@ -25,9 +25,7 @@ regVST(VST_GHOST_EFFECT)
 			_dummy attachTo [src,[0,0,0],"head",true];
 			
 			//create NightVision
-			//[
-			//	[LIGHT_AREA_GHOST_NIGHTVISION,_dummy] call le_loadLight
-			//] call os_light_registerAsNoProcessedLight;
+			//	[LIGHT_AREA_GHOST_NIGHTVISION,_dummy] call le_loadLight;
 			
 			src call cd_fw_syncForceWalk;
 			//для самого себя клиент виден
