@@ -12,13 +12,13 @@ regScriptEmit(SLIGHT_LEGACY_CAMPFIRE_BIG)
 		["setLightColor",[1,0.65,0.4]],
 		["setLightAmbient",[0.15,0.05,0]],
 		["setLightIntensity",506.25],
-		["setLightAttenuation",[0,0,0,1]]
+		["setLightAttenuation",[0,0,0,0,10.5,15]]
 	]
 	,[
 		"pt",
-		[["loop_sound",["fire\campfire",null,10]]],
+		[["loop_sound",["fire\campfire",null,10,3]]],
 		_emitAlias("Огонь")
-		["linkToLight",[0,0,0]],
+		["linkToLight",[-0.1,0,-0.05]],
 		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal",16,10,32,1],"","Billboard",3,0.25,[0,0,0],[0,0,0.7],0,0.05,0.04,0.05,[0.54,0],[[1,1,1,-100],[1,1,1,-100],[0,0,0,0]],[1],0,0,"","","",0,false,0,[[0,0,0,0]]]],
 		["setParticleRandom",[0.15,[0.01,0.01,0.15],[0.04,0.04,0.2],0,0.04,[0.1,0.1,0.1,0],0,0,1,0]],
 		["setParticleCircle",[0,[0,0,0]]],
@@ -28,7 +28,7 @@ regScriptEmit(SLIGHT_LEGACY_CAMPFIRE_BIG)
 		"pt",
 		null,
 		_emitAlias("Дым")
-		["linkToLight",[0,0,0]],
+		["linkToLight",[-0.1,0,-0.05]],
 		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,7,48,1],"","Billboard",1,5,[0,0,0],[0,0,0.6],0,0.05,0.04,0.1,[0.15,3],[[0.1,0.1,0.1,0.06],[0.2,0.2,0.2,0.04],[0.2,0.2,0.2,0.02],[0.3,0.3,0.3,0.01],[0.4,0.4,0.4,0.005]],[1.5,0.5],0.4,0.02,"","","",0,false,-1,[]]],
 		["setParticleRandom",[1.5,[0.08,0.08,0.04],[0.08,0.08,0.1],10,0.1,[0,0,0,0],0.1,0.01,1,0]],
 		["setParticleCircle",[0,[0,0,0]]],
@@ -48,7 +48,7 @@ regScriptEmit(SLIGHT_LEGACY_CAMPFIRE_BIG)
 		"pt",
 		null,
 		_emitAlias("Преломление")
-		["linkToLight",[0,0,0]],
+		["linkToLight",[-0.1,0,-0.05]],
 		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Refract",1,0,1,0],"","Billboard",1,2,[0,0,0],[0,0,0.6],0,0.05,0.04,0.05,[0.2,1.8,2.6],[[0.6,0.6,0.6,0.2],[0.7,0.7,0.7,0.2],[0.8,0.8,0.8,0.1],[1,1,1,0]],[1.5,0.5],0.4,0.09,"","","",0,false,0,[[0,0,0,0]]]],
 		["setParticleRandom",[0.3,[0.1,0.1,0.2],[0.05,0.05,0.5],0,0.3,[0,0,0,0.1],0.2,0.05,1,0]],
 		["setParticleCircle",[0,[0,0,0]]],
