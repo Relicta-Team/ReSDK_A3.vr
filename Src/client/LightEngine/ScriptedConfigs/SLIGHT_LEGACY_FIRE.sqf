@@ -11,7 +11,8 @@ regScriptEmit(SLIGHT_LEGACY_FIRE)
 		["linkToSrc",[0,0.28,0.05]],
 		["setLightColor",[1,0.65,0.4]],
 		["setLightAmbient",[0.15,0.05,0]],
-		["setLightIntensity",132.25]
+		["setLightIntensity",132.25],
+		["setLightAttenuation",[0,0,0,0,2.5,5]]
 	]
 	,[
 		"pt",
