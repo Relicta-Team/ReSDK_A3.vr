@@ -140,10 +140,20 @@
 	params ["_emit","_src","_inPar"];
 	assert_str(INV_FACE,"sigarette scripted handler error - cant find INV_FACE enum - include not found");
 	
-	//if (!call le_se_isAttachedToMob) exitWith {};
-	//if not_equals(call le_se_getAttachedProxySlot,INV_FACE) exitWith {};
-	
 	_inPar params ["_type","_pars"];
+
+	private _disableSmoke = {
+		if (_type == "smoke") then {
+			_emit setDropInterval 100000;
+		};
+	};
+	
+	if !(_src call le_se_isAttachedToMob) exitWith {
+		call _disableSmoke;
+	};
+	if not_equals(_src call le_se_getAttachedProxySlot,INV_FACE) exitWith {
+		call _disableSmoke;
+	};	
 	
 	if (_type == "light") exitWith {
 

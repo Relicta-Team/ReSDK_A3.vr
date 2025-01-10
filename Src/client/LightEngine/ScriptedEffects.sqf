@@ -181,12 +181,12 @@ le_se_registerConfigHandler = {
 
 //работает внутри обработчика скрипта для эмиттера. проверяет является ли контекст подключением к мобу
 le_se_isAttachedToMob = {
-	!isNullVar(_smd_slotId)
+	_this call smd_isSMDObjectInSlot
 };
 
 //получает айди слота подключения к мобу (например INV_FACE)
 le_se_getAttachedProxySlot = {
-	_smd_slotId
+	_this call smd_getSMDObjectSlotId;
 };
 
 //получает значение опции из конфига. используется в хандлерах событий скриптовых эмиттеров
