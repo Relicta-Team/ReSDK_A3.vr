@@ -7,7 +7,7 @@ regScriptEmit(SLIGHT_LEGACY_SIGARETTE)
 	[
 		"lt",
 		null,
-		_emitAlias("Свет-todo-добавить_мерцание")
+		_emitAlias("Свет")
 		["linkToSrc",[0,0.01,0]],
 		["setLightColor",[0.013,0.001,0]],
 		["setLightAmbient",[0.013,0.001,0]],
@@ -17,11 +17,11 @@ regScriptEmit(SLIGHT_LEGACY_SIGARETTE)
 	,[
 		"pt",
 		null,
-		_emitAlias("Дым-todo-добавить_парилку")
-		["linkToLight",[0,0.01,0]],
-		["setParticleParams",["\A3\data_f\cl_basic","","Billboard",0.5,2,[0,0,0],[0,0.1,-0.1],1,1.2,1,0.1,[0.1,0.2,0.1],[[0.2,0.2,0.2,0.3],[0,0,0,0.01],[1,1,1,0]],[500],1,0.04,"","",""]],
-		["setParticleRandom",[2,[0,0,0],[0.25,0.25,0.25],0,0.5,[0,0,0,0.1],0,0,10]],
+		_emitAlias("Дым")
+		["linkToLight",[0,0.02,0]],
+		["setParticleParams",[["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,7,48,1],"","Billboard",1,3,[0,0,0],[0,0,0.15],0,0.051,0.04,0.1,[0.04,0.16],[[0.1,0.1,0.1,0.0450001],[0.2,0.2,0.2,0.13],[0.2,0.2,0.2,0.02],[0.3,0.3,0.3,0.01]],[1.5,0.5],0.4,0.02,"","","",0,false,-1,[]]],
+		["setParticleRandom",[3,[0,0,0],[0.1,0.1,0],0,0.7,[0,0,0,0.1],0,0,10]],
 		["setParticleCircle",[0,[0,0,0]]],
-		["setDropInterval",0.005]
+		["setDropInterval",0.015]
 	]
 endScriptEmit
