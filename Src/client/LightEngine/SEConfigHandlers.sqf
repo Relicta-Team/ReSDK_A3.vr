@@ -135,3 +135,67 @@
 	_params = [_emit,_src,0,_delay,_code,_posvec];
 	invokeAfterDelayParams(_code,_delay,_params);
 }] call le_se_registerConfigHandler;
+
+["sigarette_visual",{
+	params ["_emit","_src","_inPar"];
+	assert_str(INV_FACE,"sigarette scripted handler error - cant find INV_FACE enum - include not found");
+	
+	//if (!call le_se_isAttachedToMob) exitWith {};
+	//if not_equals(call le_se_getAttachedProxySlot,INV_FACE) exitWith {};
+	
+	_inPar params ["_type","_pars"];
+	
+	if (_type == "light") exitWith {
+
+		_pars params ["_minLight","_maxLight"];
+		startAsyncInvoke
+		{
+			private _args = _this;
+			_args params ["_emit","_minLt","_maxLt","_curT","_modeUpd","_src"];
+			if isNullReference(_emit) exitWith {
+				_src setvariable ["__scriptHandler_sigarette_visual_smoke",null];
+				true
+			};
+			if (_curT > tickTime) exitWith {false};
+			_smoke = _src getVariable ["__scriptHandler_sigarette_visual_smoke",objNull];
+			_orig = _src getVariable "__scriptHandler_sigarette_visual_ppar";
+			//for test
+			// _minLt = _minLt * 10;
+			// _maxLt = _maxLt * 10;
+			private _curLight = 0;
+			if (_modeUpd) then {
+				if !isNullReference(_smoke) then {
+					(_orig select 0) set [1,16];
+					_smoke setParticleParams _orig;
+				};
+				_curLight = linearConversion [_curT,_curT + 1,tickTime,_minLt,_maxLt,true];
+				if (_curLight >= _maxLt) then {
+					_args set [3,tickTime + rand(0.1,0.5)];
+					_args set [4,false];
+					if !isNullReference(_smoke) then {
+						(_orig select 0) set [1,1];
+						_smoke setParticleParams _orig;
+					};
+				};
+			} else {
+				_curLight = linearConversion [_curT,_curT + 1.2,tickTime,_maxLt,_minLt,true];
+				if (_curLight <= _minLt) then {
+					_args set [3,tickTime + rand(7,15)];
+					_args set [4,true];
+				};
+			};
+			traceformat("lt %1 ; mode %2; t: %3 | %4",_curLight arg _modeUpd arg _curT arg tickTime)
+			_emit setLightIntensity _curLight;
+
+			false
+		},
+		{},
+		[_emit,_minLight,_maxLight,tickTime,true,_src]
+		endAsyncInvoke
+	};
+	if (_type == "smoke") exitWith {
+		_src setVariable ["__scriptHandler_sigarette_visual_smoke",_emit];
+		private _orig = ["setParticleParams"] call le_se_getCurrentConfigPropVal;
+		_src setVariable ["__scriptHandler_sigarette_visual_ppar",_orig]; 
+	};
+}] call le_se_registerConfigHandler;
