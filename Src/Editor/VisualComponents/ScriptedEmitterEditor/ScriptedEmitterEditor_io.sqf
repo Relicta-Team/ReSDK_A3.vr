@@ -265,8 +265,16 @@ function(vcom_emit_io_readConfigs)
 					INC(_segZoneIdx);
 					continue;
 				};
+				//reading custom scripted events
 				if (_segZoneIdx == 1) exitwith {
-					_cevents = [_x,"(.*)(?:\,)/",1] call regex_getFirstMatch;
+					_cevents = [_x,"(?:\s*)(.*)(?!\,)/",1] call regex_getFirstMatch;
+					if !([_cevents,","] call stringEndWith) exitwith {
+						setLastError("Config custom events reading error from " + _curConfigName);
+					};
+					
+					//endline removing last ','
+					_cevents = _cevents select [0,count _cevents-1];
+
 					_segZoneData pushBack ["customEvents",_cevents];
 					#ifdef ENABLE_TRACE_MESSAGES_IOCFG
 					["read events >>> %1",_cevents] call printTrace;
@@ -399,7 +407,7 @@ function(vcom_emit_io_saveAllConfigs)
 				modvar(_output) + endl + _tabSim+_tabSim + str _tp + (call _checkNeedCommaData);
 				if ("customEvents" in _x) then {
 					//без табов потому что данные сырые
-					modvar(_output) + endl + (_x get "customEvents") + (call _checkNeedCommaData);
+					modvar(_output) + endl + _tabSim+_tabSim + (_x get "customEvents") + (call _checkNeedCommaData);
 				};
 				if ("alias" in _x) then {
 					modvar(_output) + endl + _tabSim+_tabSim + (format["_emitAlias(%1)",str(_x get "alias")]);
@@ -560,7 +568,7 @@ function(vcom_emit_io_loadConfig)
 		
 		//["----- data(%1): %2",_cfgSect get "alias",_data] call printTrace;
 
-		private _newObj = [_emitType,_cfgSect get "alias",_data] call vcom_emit_createEmitter;
+		private _newObj = [_emitType,_cfgSect get "alias",_data,_cfgSect get "customEvents"] call vcom_emit_createEmitter;
 
 		{
 			_x params ["_rule","_ctx"];
@@ -784,8 +792,8 @@ function(vcom_emit_io_internal_serializeEmittersToConfig)
 		_el = createHashMap;
 		//type, typeshort, customEvents, alias, settings
 		_el set ["alias",_x getvariable "unicalIDStr"];
-		//TODO custom events
-		_el set ["customEvents","		null"];
+		
+		_el set ["customEvents",_x getvariable ["serializedCustomEvents","null"]];
 		
 		_emType = _x getvariable "emitType";
 		_el set ["type",_emType];
