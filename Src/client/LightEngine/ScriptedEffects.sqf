@@ -9,9 +9,11 @@
 
 //карта эффектов. ключи - айди эффектов, значения - настройки эмиттеров
 le_se_map = createHashMap;
-le_se_noattr = null;
+le_se_noattr = null; //!not used
 le_se_cfgRange = [2100,4900];
 
+
+#include "..\..\host\CommonComponents\LightCfg.sqf"
 
 /*
 	regScriptEmit(name) //ineditor: start of cfg location
