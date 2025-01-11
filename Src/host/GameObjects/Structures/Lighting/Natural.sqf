@@ -192,7 +192,7 @@ class(TorchAsStruct) extends(Campfire)
 	var(material,"MatWood");
 	getter_func(canApplyDamage,false); //TODO revert on fixed destroying holders
 	var(holder,nullPtr); //привязан к холдеру
-	var(light,LIGHT_FIRE);
+	var(light,SLIGHT_LEGACY_FIRE);
 	getter_func(isFireLight,true);
 	getter_func(canIgniteArea,false); //holders cannot ignite any
 	var(lightIsEnabled,false);
@@ -244,7 +244,7 @@ endclass
 class(LampKeroseneAsStruct) extends(TorchAsStruct)
 	var(model,"ml_shabut\exoduss\keroslampa.p3d");
 	var(material,"MatGlass");
-	var(light,LIGHT_LAMP_KEROSENE);
+	var(light,SLIGHT_LEGACY_LAMP_KEROSENE);
 	var(name,null);
 	var(desc,"");
 endclass
