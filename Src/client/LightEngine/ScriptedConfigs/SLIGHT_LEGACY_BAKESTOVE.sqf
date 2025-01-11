@@ -12,7 +12,7 @@ regScriptEmit(SLIGHT_LEGACY_BAKESTOVE)
 		["setLightColor",[1,0.65,0.4]],
 		["setLightAmbient",[0.15,0.05,0]],
 		["setLightIntensity",612.56],
-		["setLightAttenuation",[0,0,0,1]]
+		["setLightAttenuation",[0,0,0,0,2,6]]
 	]
 	,[
 		"pt",
