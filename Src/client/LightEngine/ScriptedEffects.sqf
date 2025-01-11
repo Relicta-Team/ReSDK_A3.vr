@@ -407,7 +407,12 @@ le_se_fireEmit = {
 };
 
 le_se_initScriptedLights = {
-	//todo implement	
+	if (isMultiplayer) then {
+		setLastError("Not implemented MP scripted lights");
+	} else {
+		assert_str(count slt_internal_fileListBuffer > 0,"Server scripted configs not found");
+		//todo implement
+	};
 };
 
 //Опытным путем было выяснено что тип частиц не может быть прикреплен напрямую к источнику

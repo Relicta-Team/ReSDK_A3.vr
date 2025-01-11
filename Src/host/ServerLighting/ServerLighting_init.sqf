@@ -30,9 +30,12 @@ private __slt_configs = [];
 
 slt_map_scriptCfgs = createHashMap;
 
+slt_internal_fileListBuffer = [];
+
 slt_initScriptedLights = {
 	private _flist = ["src\client\LightEngine\ScriptedConfigs",".sqf",true] call fso_getFiles;
 	assert_str(count _flist > 0,"Scripted configs not found");
+	slt_internal_fileListBuffer = _flist;
 
 	private _content = "";
 	{
