@@ -7,6 +7,7 @@
 #include "LightEngine.h"
 //place this file before all configs
 
+//карта эффектов. ключи - айди эффектов, значения - настройки эмиттеров
 le_se_map = createHashMap;
 le_se_noattr = null;
 le_se_cfgRange = [2100,4900];
