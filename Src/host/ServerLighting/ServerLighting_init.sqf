@@ -30,6 +30,19 @@ private __slt_configs = [];
 
 slt_map_scriptCfgs = createHashMap;
 
+slt_initScriptedLights = {
+	private _flist = ["src\client\LightEngine\ScriptedConfigs",".sqf",true] call fso_getFiles;
+	assert_str(count _flist > 0,"Scripted configs not found");
+
+	private _content = "";
+	{
+		_content = preprocessFlie _x;
+		if !([_content,true] call lightSys_registerConfig) exitWith {
+			setLastError("Build scripted config error on server; File: " + _x);
+		};
+	} foreach _flist;
+};
+
 #define regScriptEmit(type) _semDat = []; slt_map_scriptCfgs set ['type',_semDat]; slt_cfg_id_##type = { \
 	params ['sourceObject']; \
 	(slt_map_scriptCfgs get 'type') call slt_handleScriptedCfg; \
