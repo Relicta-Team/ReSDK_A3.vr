@@ -9,7 +9,7 @@ regScriptEmit(SLIGHT_LEGACY_STREETLAMP)
 		null,
 		_emitAlias("Направленный свет")
 		["linkToSrc",[0,0,3.298]],
-		["setOrient",[0,-90,0]],
+		["setOrient",[0,-80,0]],
 		["setLightColor",[1100,700,500]],
 		["setLightAmbient",[11,7,5]],
 		["setLightIntensity",5],
