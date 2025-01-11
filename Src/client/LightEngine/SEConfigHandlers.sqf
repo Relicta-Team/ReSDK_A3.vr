@@ -194,7 +194,7 @@
 					_args set [4,true];
 				};
 			};
-			traceformat("lt %1 ; mode %2; t: %3 | %4",_curLight arg _modeUpd arg _curT arg tickTime)
+			//traceformat("lt %1 ; mode %2; t: %3 | %4",_curLight arg _modeUpd arg _curT arg tickTime)
 			_emit setLightIntensity _curLight;
 
 			false

@@ -77,6 +77,10 @@ le_loadLight = {
 			traceformat("LightEngine::LoadLight() - args %1",_this);
 		};
 	};
+	if isNullReference(_src) exitWith {
+		error("LightEngine::LoadLight() - Undefined light source");
+		setLastError("LightEngine::LoadLight() - Undefined light source");
+	};
 
 	private _code = missionNamespace getVariable ["le_conf_" + str _type,{}];
 
@@ -155,8 +159,7 @@ le_unloadLight = {
 	
 	
 	os_light_list_noProcessedLights deleteAt (os_light_list_noProcessedLights findif {equals(_x select 0,_light)});
-	
-	
+
 	deleteVehicle _light;
 };
 
