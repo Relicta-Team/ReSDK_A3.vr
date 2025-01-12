@@ -407,11 +407,22 @@ le_se_fireEmit = {
 };
 
 le_se_initScriptedLights = {
+	
 	if (isMultiplayer) then {
-		setLastError("Not implemented MP scripted lights");
+		assert_str(count lt_preload_cfgList > 0,"Client scripted configs not found");
+		{
+			if !([_x,true] call lightSys_registerConfig) exitWith {
+				setLastError("Build scripted config error at index " + (str _foreachIndex));
+			};
+		} foreach lt_preload_cfgList;
 	} else {
 		assert_str(count slt_internal_fileListBuffer > 0,"Server scripted configs not found");
-		//todo implement
+		{
+			private _content = preprocessFlie _x;
+			if !([_content,false] call lightSys_registerConfig) exitWith {
+				setLastError("Build scripted config error on client; File: " + _x);
+			};
+		} foreach slt_internal_fileListBuffer;
 	};
 };
 

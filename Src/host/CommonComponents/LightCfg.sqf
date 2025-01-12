@@ -40,6 +40,10 @@ lightSys_registerConfig = {
 	lightSys_assocCfg_keyName set [_nameval,_idval];
 
 	lightSys_cfgId_cur = lightSys_cfgId_cur + 1;
+
+	//build config
+	call compile _prepCfg;
+
 	true
 };
 
