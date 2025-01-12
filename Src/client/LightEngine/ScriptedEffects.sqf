@@ -418,7 +418,7 @@ le_se_initScriptedLights = {
 	} else {
 		assert_str(count slt_internal_fileListBuffer > 0,"Server scripted configs not found");
 		{
-			private _content = preprocessFlie _x;
+			private _content = preprocessFile _x;
 			if !([_content,false] call lightSys_registerConfig) exitWith {
 				setLastError("Build scripted config error on client; File: " + _x);
 			};

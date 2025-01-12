@@ -39,7 +39,7 @@ slt_initScriptedLights = {
 
 	private _content = "";
 	{
-		_content = preprocessFlie _x;
+		_content = preprocessFile _x;
 		if !([_content,true] call lightSys_registerConfig) exitWith {
 			setLastError("Build scripted config error on server; File: " + _x);
 		};
