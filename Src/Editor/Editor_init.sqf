@@ -74,6 +74,8 @@ call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
 #include <..\host\LootSystem\LootSystem_structs.sqf>
 //algorithm
 call compile __pragma_preprocess "src\host\CommonComponents\Algorithm.sqf";
+//light system
+call compile __pragma_preprocess "src\host\CommonComponents\LightCfg.sqf";
 //Отладчик
 #include <..\host\Tools\EditorWorkspaceDebug\InternalImpl.sqf>
 ;relicta_debug_onPostErrorHandle = {

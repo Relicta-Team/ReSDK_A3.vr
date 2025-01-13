@@ -10,17 +10,18 @@ lightSys_prepConfig = {
 	params ["_content","_id","_refName",["_isServerPrep",false]];
 	private _patHeader = "regScriptEmit\((\w+)\)";
 	private _patFooter = "[\t ]*endScriptEmit[\t ]*$";
-	private _emitAlias = "[\t ]*_emitAlias\((.*)\)$";
+	private _patEmitAlias = "[\t ]*_emitAlias\(([^\)]*)\)";
+
 	if !([_content,_patHeader] call regex_isMatch) exitWith {""};
 	private _name = [_content,_patHeader,1] call regex_getFirstMatch;
 	_content = [_content,_patHeader,format[ifcheck(_isServerPrep,lightSys_replacer_server_header,lightSys_replacer_client_header),_id]] call regex_replace;
+	
 	if !([_content,_patFooter] call regex_isMatch) exitWith {""};
 	_content = [_content,_patFooter,lightSys_replacer_footer] call regex_replace;
-	if !([_content,_emitAlias] call regex_isMatch) exitWith {""};
 	
-	private _contentAlias = [_content,_emitAlias,1] call regex_getFirstMatch;
-	_content = [_content,_emitAlias,format["[""alias"",""%1""],",_contentAlias]] call regex_replace;
-
+	if !([_content,_patEmitAlias] call regex_isMatch) exitWith {""};
+	_content = [_content,_patEmitAlias,"[""alias"",$1],"] call regex_replace;
+	
 	refset(_refName,_name);
 
 	_content

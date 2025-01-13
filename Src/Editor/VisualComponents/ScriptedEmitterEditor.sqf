@@ -97,7 +97,8 @@ function(vcom_emit_closeVisualWindow)
 
 function(vcom_emit_closeVisualWindowHandled)
 {
-	call vcom_emit_io_saveAllConfigs;
+	//! конфиги не должны сохраняться при выходе
+	//[vcom_emit_io_list_allConfigsNames] call vcom_emit_io_saveAllConfigs;
 
 	call displayClose;
 	false call rendering_setInGameHDR;

@@ -250,7 +250,7 @@ function(lsim_internal_loadLight)
 	};
 
 	private _ltCfg = [_obj,"light"] call golib_getActualDataValue;
-	
+	private _dataValue = _ltCfg;
 	//do not load deprecated light config
 	if equalTypes(_ltCfg,0) then {
 		if !inRange(_ltCfg,le_se_cfgRange select 0,le_se_cfgRange select 1) exitWith {
@@ -272,7 +272,7 @@ function(lsim_internal_loadLight)
 
 	private _cfgLightStr = vcom_emit_io_enumAssocKeyStr get _ltCfg;
 	if isNullVar(_cfgLightStr) exitWith {
-		["Cant load non-existen light %1",_ltCfg] call printError;
+		["Cant load non-existen light %1 (data: %2)",_ltCfg,_dataValue] call printError;
 	};
 
 	private _code = missionNamespace getVariable ["le_conf_" + _cfgLightStr,objNull];

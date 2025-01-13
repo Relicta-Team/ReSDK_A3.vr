@@ -41,7 +41,7 @@ private _flist = [_pathPrefix,true,"*.sqf",true] call file_getFileList;
 if (count _flist == 0) exitWith {
 	["Light configs not found"] call showError;
 };
-private _commentPat = "^\/\/.*$";
+private _commentPat = "^\/\/[^\n\r]*";
 call lightSys_preInitialize;
 {
 	["Attempt load scripted config: %1",_x] call printTrace;
