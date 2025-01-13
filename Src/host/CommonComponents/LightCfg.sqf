@@ -78,11 +78,11 @@ lightSys_cfgId_cur = 2100;
 //get cfg name by id
 lightSys_getConfigNameById = {
 	params ["_id"];
-	lightSys_assocCfg_keyId get _id
+	lightSys_assocCfg_keyId getOrDefault [_id,""]
 };
 
 //get cfg id by name
 lightSys_getConfigIdByName = {
 	params ["_name"];
-	lightSys_assocCfg_keyName get _name
+	lightSys_assocCfg_keyName getorDefault [_name,-1]
 };
