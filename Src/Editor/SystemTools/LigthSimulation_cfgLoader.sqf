@@ -42,6 +42,7 @@ if (count _flist == 0) exitWith {
 	["Light configs not found"] call showError;
 };
 private _commentPat = "^\/\/.*$";
+call lightSys_preInitialize;
 {
 	["Attempt load scripted config: %1",_x] call printTrace;
 
@@ -53,6 +54,6 @@ private _commentPat = "^\/\/.*$";
 } foreach _flist;
 
 //load cfgs
-call le_se_initScriptedLights;
+//call le_se_initScriptedLights;
 //prepare cfgs
 call le_se_doSorting;

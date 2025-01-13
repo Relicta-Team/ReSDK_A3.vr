@@ -13,9 +13,8 @@
 
 //decl
 #include "ScriptedEffects.sqf"
-//cfgs
-#include "ScriptedEffectConfigs.sqf"
 //prepare cfgs
+call lightSys_preInitialize;
 call le_se_initScriptedLights;
 call le_se_doSorting;
 //create drop emitter map
@@ -23,8 +22,6 @@ call le_se_internal_createDropEmitterMap;
 call le_se_internal_createUnmanagedEmitterMap;
 call le_se_internal_generateOptionAddress;
 
-#include "LightConfigs.sqf"
-#include "FireLightConfigs.sqf"
 #include "ShotableConfigs.sqf"
 #include "VisualStatesConfigs.sqf"
 

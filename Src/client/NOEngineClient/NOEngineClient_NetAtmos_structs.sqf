@@ -3,7 +3,6 @@
 // sdk.relicta.ru
 // ======================================================
 #include "..\..\host\struct.hpp"
-#include "..\LightEngine\ScriptedEffects.hpp"
 #include "NOEngineClient_NetAtmos.hpp"
 /*
 	Структура зоны атмоса

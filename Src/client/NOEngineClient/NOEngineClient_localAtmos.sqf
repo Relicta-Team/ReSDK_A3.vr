@@ -8,7 +8,6 @@
 */
 
 #include "..\..\host\Atmos\Atmos.hpp"
-#include "..\LightEngine\ScriptedEffects.hpp"
 
 
 #define ACLI_TYPE_FIRE [SLIGHT_ATMOS_FIRE_1,SLIGHT_ATMOS_FIRE_2,SLIGHT_ATMOS_FIRE_3]

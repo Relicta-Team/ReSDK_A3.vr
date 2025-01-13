@@ -36,9 +36,6 @@
 #define EFF_GREEN_DUST 2003
 #define EFF_ROTTEN_HUMAN 2004
 
-//!custom scripted lights in range le_se_cfgRange
-#include "ScriptedEffects.hpp"
-
 //firelghts start after 5000 (le_firelight_startindex)
 #define FLIGHT_TEST 5001
 

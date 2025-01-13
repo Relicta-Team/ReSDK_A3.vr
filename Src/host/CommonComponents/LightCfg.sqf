@@ -75,6 +75,12 @@ lightSys_assocCfg_keyName = createHashMap;
 //base config id
 lightSys_cfgId_cur = 2100;
 
+lightSys_preInitialize = {
+	lightSys_cfgId_cur = 2100;
+	lightSys_assocCfg_keyId = createHashMap;
+	lightSys_assocCfg_keyName = createHashMap;
+};
+
 //get cfg name by id
 lightSys_getConfigNameById = {
 	params ["_id"];

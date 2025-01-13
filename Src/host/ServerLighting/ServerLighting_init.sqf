@@ -7,27 +7,6 @@
 #include <..\oop.hpp>
 #include <..\GameObjects\GameConstants.hpp>
 
-private __slt_configs = [];
-
-#define sltInit(cfg) _new_seg_slt = [cfg]; __slt_configs pushBack _new_seg_slt; _new_seg_slt pushBack
-
-#define slt_createLight() ("#lightpoint" createVehicleLocal [0,0,0])
-#define slt_createObj(type) (call {private __o = (type) createVehicleLocal [0,0,0]; __o allowDamage false; __o})
-#define sourceObject _obj
-#define lightObject _lt
-#define linkToSource(obj,vecoffset) obj setPosAtl (getPosATL sourceObject); obj setVectorDirAndUp [vectorDirVisual sourceObject,vectorUpVisual sourceObject]
-#define linkLightToSource(obj,vecoffset) obj lightAttachObject [sourceObject,vecoffset]
-
-#include "ServerLighting_configs.sqf"
-
-{
-	_x params ["_id","_code"];
-	missionNamespace setVariable [format["slt_cfg_id_%1",_id],_code];
-} foreach __slt_configs;
-
-#define sourceObject _wObj
-#define lightObject _firstLight
-
 slt_map_scriptCfgs = createHashMap;
 
 slt_internal_fileListBuffer = [];
@@ -36,7 +15,7 @@ slt_initScriptedLights = {
 	private _flist = ["src\client\LightEngine\ScriptedConfigs",".sqf",true] call fso_getFiles;
 	assert_str(count _flist > 0,"Scripted configs not found");
 	slt_internal_fileListBuffer = _flist;
-
+	call lightSys_preInitialize;
 	private _content = "";
 	{
 		_content = preprocessFile _x;
@@ -46,20 +25,7 @@ slt_initScriptedLights = {
 	} foreach _flist;
 };
 
-#define regScriptEmit(type) _semDat = []; slt_map_scriptCfgs set ['type',_semDat]; slt_cfg_id_##type = { \
-	params ['sourceObject']; \
-	(slt_map_scriptCfgs get 'type') call slt_handleScriptedCfg; \
-}; _semDat append [
-#define endScriptEmit  ];
-#define _emitAlias(v) 
-
-
-#include "..\..\client\LightEngine\ScriptedEffectConfigs.sqf"
-
-//Опеределяем предкомпилированные константы
-#define SCRIPT_EMIT_EVAL_SERVER
-
-#include "..\..\client\LightEngine\ScriptedEffects.hpp"
+call slt_initScriptedLights;
 
 slt_handleScriptedCfg = {
 	private ["_t","_events"];

@@ -4,7 +4,6 @@
 // ======================================================
 
 #include "NOEngineClient_NetAtmos.hpp"
-#include "..\LightEngine\ScriptedEffects.hpp"
 nat_pbo_threadHandle = threadNull;
 
 nat_pbo_lastUpd = 0;
