@@ -91,5 +91,11 @@ lightSys_getConfigNameById = {
 //get cfg id by name
 lightSys_getConfigIdByName = {
 	params ["_name"];
+	#ifdef EDITOR
+	if !(_name in lightSys_assocCfg_keyName) exitWith {
+		setLastError("Unknown config name: " + _name + "; Loaded configs: " + (str count lightSys_assocCfg_keyName));
+		-1
+	};
+	#endif
 	lightSys_assocCfg_keyName getorDefault [_name,-1]
 };

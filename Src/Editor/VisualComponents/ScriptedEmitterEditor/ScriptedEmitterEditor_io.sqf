@@ -38,8 +38,6 @@
 
 init_function(vcom_emit_io_initialize)
 {
-	vcom_emit_io_configPath = "src\client\LightEngine\ScriptedEffectConfigs.sqf";
-	vcom_emit_io_configNames = "src\client\LightEngine\ScriptedEffects.hpp";
 	vcom_emit_io_configFilesFormatter = "src\client\LightEngine\ScriptedConfigs\%1";
 	vcom_emit_io_configFileNamePathFormatter = "src\client\LightEngine\ScriptedConfigs\%1.sqf";
 
@@ -79,8 +77,6 @@ init_function(vcom_emit_io_initialize)
 	vcom_emit_io_enumAssocKeyInt = createHashMap;//int is string...
 
 	vcom_emit_io_internal_isEnumAssocLoaded = false;
-
-	vcom_emit_io_configPathEnums = "src\client\LightEngine\LightEngine.hpp";
 }
 
 function(vcom_emit_io_hasConfig) {(tolower _this) in vcom_emit_io_list_allConfigsNames}
@@ -185,13 +181,6 @@ function(vcom_emit_io_readConfigs)
 {
 	vcom_emit_io_map_configs = createHashMap;
 	vcom_emit_io_list_allConfigsNames = [];
-
-	// if !([vcom_emit_io_configPath] call file_exists) exitwith {
-	// 	setLastError("File config data not found: " + vcom_emit_io_configPath);
-	// };
-	// if !([vcom_emit_io_configNames] call file_exists) exitwith {
-	// 	setLastError("File config id's not found: " + vcom_emit_io_configNames);
-	// };
 
 	//get configs
 	private _cfgData = [vcom_emit_io_configsDirectory] call vcom_emit_io_readConfigLoader;

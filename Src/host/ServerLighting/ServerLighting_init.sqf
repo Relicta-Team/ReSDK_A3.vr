@@ -9,6 +9,7 @@
 
 slt_map_scriptCfgs = createHashMap;
 
+//кэш загрузчика серверный конфигов эмиттеров
 slt_internal_fileListBuffer = [];
 
 slt_initScriptedLights = {
@@ -23,6 +24,11 @@ slt_initScriptedLights = {
 			setLastError("Build scripted config error on server; File: " + _x);
 		};
 	} foreach _flist;
+
+	#ifdef EDITOR
+	assert_str(!isNull(le_initializeScriptedConfigs),"Initialize scripted configs error - function not found");
+	call le_initializeScriptedConfigs;
+	#endif
 };
 
 call slt_initScriptedLights;
@@ -209,5 +215,7 @@ slt_scriptCfg_doSorting = {
 
 	} foreach slt_map_scriptCfgs;
 };
+
+
 //autosorting
 call slt_scriptCfg_doSorting;

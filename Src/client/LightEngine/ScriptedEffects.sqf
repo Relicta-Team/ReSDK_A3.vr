@@ -411,7 +411,7 @@ le_se_initScriptedLights = {
 	if (isMultiplayer) then {
 		assert_str(count lt_preload_cfgList > 0,"Client scripted configs not found");
 		{
-			if !([_x,true] call lightSys_registerConfig) exitWith {
+			if !([_x,false] call lightSys_registerConfig) exitWith {
 				setLastError("Build scripted config error at index " + (str _foreachIndex));
 			};
 		} foreach lt_preload_cfgList;

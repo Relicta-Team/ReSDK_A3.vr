@@ -4,29 +4,8 @@
 // ======================================================
 
 #include "Materials.h"
-#include "..\Networking\Network.hpp"
 
-class(MatBase) attribute(staticInit)
-	
-	func(staticInit)
-	{
-		params ["_thisClass","_thisType"];
-		if (_thisClass!="MatBase") exitWith {};
-
-		private _mdata = createHashMap;
-		{
-			private _class = _x;
-			
-			private _obj = instantiate(_class);
-			private _objClass = callFunc(_obj,getClassName);
-
-			mat_map_all set [tolower _objClass,_obj];
-
-			callFuncParams(_obj,applyStepDataForGlobalVar,_mdata);
-		} foreach getAllObjectsTypeOfStr(_thisClass);
-
-		netSetGlobal(materials_map_stepData,_mdata);
-	};
+class(MatBase)
 	
 	var(name,"Материал");
 	var(color,"ffffff");
@@ -42,6 +21,7 @@ class(MatBase) attribute(staticInit)
 		objParams_1(_hm);
 
 		if (callSelf(getStepDataKey) in _hm) exitWith {
+			errorformat("Duplicated step config for %1; Input param %2; keys: %3",callSelf(getClassName) arg _hm arg callSelf(getStepDataKey));
 			setLastError("Duplicated step config for " + callSelf(getClassName));
 		};
 

@@ -13,10 +13,17 @@
 
 //decl
 #include "ScriptedEffects.sqf"
-//prepare cfgs
-call lightSys_preInitialize;
-call le_se_initScriptedLights;
-call le_se_doSorting;
+
+//prepare cfgs, called on serverside
+le_initializeScriptedConfigs = {
+	call lightSys_preInitialize;
+	call le_se_initScriptedLights;
+	call le_se_doSorting;
+};
+#ifndef EDITOR
+call le_initializeScriptedConfigs;
+#endif
+
 //create drop emitter map
 call le_se_internal_createDropEmitterMap;
 call le_se_internal_createUnmanagedEmitterMap;
