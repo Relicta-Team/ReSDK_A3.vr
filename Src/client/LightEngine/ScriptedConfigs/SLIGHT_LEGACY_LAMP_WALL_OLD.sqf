@@ -6,7 +6,7 @@
 regScriptEmit(SLIGHT_LEGACY_LAMP_WALL_OLD)
 	[
 		"ltd",
-		null,
+		[["scr_volume_shape",["a3\data_f\volumelightflashlight", [5, 1, 5]]]],
 		_emitAlias("Направленный свет")
 		["linkToSrc",[-0.09,0,0]],
 		["setOrient",[-90,0,0]],

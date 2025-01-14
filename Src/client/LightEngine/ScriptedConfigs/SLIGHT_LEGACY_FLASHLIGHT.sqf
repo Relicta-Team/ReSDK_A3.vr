@@ -6,7 +6,7 @@
 regScriptEmit(SLIGHT_LEGACY_FLASHLIGHT)
 	[
 		"ltd",
-		null,
+		[["scr_volume_shape",["a3\data_f\volumelightflashlight", [2, 1.5, 2]]]],
 		_emitAlias("Направленный свет")
 		["linkToSrc",[0,0.07,0]],
 		["setLightColor",[180,156,120]],

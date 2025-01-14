@@ -12,6 +12,9 @@ regScriptEmit(SLIGHT_LEGACY_SIGN_BAR)
 		["setLightColor",[0.013,0.001,0]],
 		["setLightAmbient",[0.013,0.001,0]],
 		["setLightIntensity",562500],
+		["setLightUseFlare",true],
+		["setLightFlareSize",0.5],
+		["setLightFlareMaxDistance",15],
 		["setLightAttenuation",[0,50,3,700,4,1]]
 	]
 endScriptEmit
