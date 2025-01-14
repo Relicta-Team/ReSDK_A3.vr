@@ -32,7 +32,7 @@ os_light_getLighting = {
 	} count os_light_list_noProcessedLights;
 	
 	//значения взяты с сервера. всё должно совпадать
-	private _light = round linearConversion [10,100,(getLightingAt player) select 3,0,4,true];
+	private _light = round linearConversion [10,60,(getLightingAt player) select 3,0,4,true];
 
 	{
 		(_x select 0) setLightIntensity (_x select 1);
