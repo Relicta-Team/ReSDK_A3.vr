@@ -367,7 +367,7 @@ function(vcom_emit_io_readConfigs)
 	vcom_emit_io_internal_isCfgListLoaded = true;
 }
 
-//сохранятор конфигов. vcom_emit_io_list_allConfigsNames для сохранения всех конфигов
+//сохранятор конфигов. vcom_emit_io_list_allConfigsNames для сохранения всех конфигов. имена конфигов без префиксов
 function(vcom_emit_io_saveAllConfigs)
 {
 	params ["_cfgListLoader"];
@@ -671,7 +671,7 @@ function(vcom_emit_io_saveCurrentConfig)
 				{ 
 					private _curData = call vcom_emit_io_internal_serializeEmittersToConfig;
 					vcom_emit_io_map_configs set [toUpper vcom_emit_io_currentConfig,_curData];
-					
+					[[tolower vcom_emit_io_currentConfig]] call vcom_emit_io_saveAllConfigs;
 					[format["Конфиг %1 перезаписан",toUpper vcom_emit_io_currentConfig],5] call showInfo;
 				} 
 			], 
@@ -688,7 +688,7 @@ function(vcom_emit_io_saveCurrentConfig)
 
 	vcom_emit_io_list_allConfigsNames pushBack (tolower vcom_emit_io_currentConfig);
 	vcom_emit_io_map_configs set [toUpper vcom_emit_io_currentConfig,_curData];
-
+	[[tolower vcom_emit_io_currentConfig]] call vcom_emit_io_saveAllConfigs;
 	[format["Конфиг %1 сохранён",toUpper vcom_emit_io_currentConfig],5] call showInfo;
 }
 
