@@ -535,12 +535,11 @@ function(goasm_attributes_handleProvider_scriptedlight)
 		
 		if (_memberName in _props) then {
 			_keyName = (_props get _memberName);
-			_wid ctrlSetText ([_keyName,"UNKERR->%1"] call vcom_emit_io_parseConfigName);
+			_wid ctrlSetText ([_keyName,"UNKERR->%1"] call vcom_emit_io_parseScriptedConfigName);
 			_wid ctrlSetBackgroundColor [.7,.7,.7,.7];
 		} else {
-			_keyName = vcom_emit_io_enumAssocKeyInt getorDefault [_defval,"ERROR_NULL_CONFIG"];
-			_wid ctrlSetText ([_keyName,"(deprecated) %1"] call vcom_emit_io_parseConfigName);
-			if ("(deprecated)" in (ctrlText _wid)) then {
+			_wid ctrlSetText ([_defval,"[error] %1"] call vcom_emit_io_parseScriptedConfigName);
+			if ("[error]" in (ctrlText _wid)) then {
 				_wid ctrlSetBackgroundColor [.5,.15,.15,.3];
 			} else {
 				_wid ctrlSetBackgroundColor [.3,.3,.3,.3];

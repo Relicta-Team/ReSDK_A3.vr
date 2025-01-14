@@ -98,27 +98,51 @@ function(vcom_emit_io_loadEnumAssoc)
 	vcom_emit_io_enumAssocKeyStr = createHashMap;
 	vcom_emit_io_enumAssocKeyInt = createHashMap;
 
-	private _cfgData = ([vcom_emit_io_configPathEnums] call file_read) splitString endl;
-	modvar(_cfgData) + (([vcom_emit_io_configNames] call file_read) splitString endl);
-	private _patReg = "^\#define\s+(S?LIGHT_\w+)\s+(\d+)/";
+	private _flist = [vcom_emit_io_configsDirectory,true,"*.sqf",true] call file_getFileList;
+	if (count _flist == 0) exitWith {
+		["Light configs not found"] call showError;
+	};
+	private _patHeader = "regScriptEmit\(SLIGHT_(\w+)\)";
+
+	private _cfgIndex = 2100;
 	{
-		if ([_x,_patReg] call regex_isMatch) then {
-			private _name = [_x,_patReg,1] call regex_getFirstMatch;
-			private _val = [_x,_patReg,2] call regex_getFirstMatch;
-			_val = _val;
-			vcom_emit_io_enumAssocKeyStr set [_name,_val];
-			vcom_emit_io_enumAssocKeyInt set [_val,_name];
+		_fp = format[vcom_emit_io_configFilesFormatter,_x];
+		private _content = [_fp] call file_read;
+		if (_content=="") exitWith {
+			setLastError("Cannot load file " + _fp);
 		};
-	} foreach _cfgData;
+		if !([_content,_patHeader] call regex_isMatch) exitWith {
+			setLastError("Cannot load config name from " + _fp);
+		};
+		private _name = [_content,_patHeader,1] call regex_getFirstMatch;
+		private _valStr = str _cfgIndex;
+
+		vcom_emit_io_enumAssocKeyStr set [_name,_valStr];
+		vcom_emit_io_enumAssocKeyInt set [_valStr,_name];
+
+		INC(_cfgIndex);
+	} foreach _flist;
 
 	vcom_emit_io_internal_isEnumAssocLoaded = true;
 }
 
+//!deprecated function
 function(vcom_emit_io_parseConfigName)
 {
 	params ["_cfg",["_customFormatOnErr","%1"]];
 	if ([_cfg,"^SLIGHT_(\w+)$"] call regex_isMatch) then {
 		[_cfg,"^SLIGHT_(\w+)$",1] call regex_getFirstMatch
+	} else {
+		format[_customFormatOnErr,_cfg]
+	};
+}
+
+//возвращает имя конфига без префикса slight_
+function(vcom_emit_io_parseScriptedConfigName)
+{
+	params ["_cfg",["_customFormatOnErr","%1"]];
+	if ([_cfg,"SLIGHT_(\w+)\b"] call regex_isMatch) then {
+		[_cfg,"SLIGHT_(\w+)\b",1] call regex_getFirstMatch
 	} else {
 		format[_customFormatOnErr,_cfg]
 	};
@@ -131,7 +155,7 @@ function(vcom_emit_io_readConfigLoader)
 	#ifdef ENABLE_TRACE_MESSAGES_CFGLOADER
 	["Start %1",__FUNC__] call printTrace;
 	#endif
-	
+
 	private _output = [];
 
 	private _flist = [_cfgDir,true,"*.sqf",true] call file_getFileList;
