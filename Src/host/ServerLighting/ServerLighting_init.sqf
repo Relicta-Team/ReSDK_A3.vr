@@ -76,17 +76,19 @@ slt_handleScriptedCfg = {
 		} count (_x select [2,(count _x) - 2]);
 	};
 	slt_scriptedCfgMapHandlers = createHashMapFromArray [
+		//_source is outref
 		["linkToSrc",{
 			_offset = _this select 1;
 			if (_autolink) then {
-				(_this select 0) attachTo [sourceObject,_offset];
+				(_this select 0) attachTo [_source,_offset];
 			} else {
 				(_this select 0) attachTo [_obj,_offset,_select];
 			};
 		}],
+		//_source is outref
 		["linkToLight",{
 			if (_autolink) then {
-				(_this select 0) attachTo [sourceObject,(_this select 1)];
+				(_this select 0) attachTo [_source,(_this select 1)];
 			} else {
 				(_this select 0) attachTo [_firstLight,(_this select 1),_select];
 			};
@@ -115,7 +117,7 @@ slt_handleScriptedCfg = {
 		["setLightVolumeShape",{(_this select 0) setLightVolumeShape (_this select 1)}]
 	];
 
-slt_const_dummyMob = [10,10,0] call gm_createMob;
+slt_const_dummyMob = objNull;
 
 slt_create = {
 	params ["_obj","_cfg",["_autolink",true],["_select",""]];
@@ -130,6 +132,12 @@ slt_create = {
 		errorformat("slt::create() - null config %1",_cfg);
 		objNUll
 	};
+
+	//initialize dummy mob first time
+	if isNullReference(slt_const_dummyMob) then {
+		slt_const_dummyMob = [10,10,0] call gm_createMob;
+	};
+
 	//in case with scripted emitters its (list of objects)
 	private _o = [_obj] call _code;
 	if (_autolink) then {

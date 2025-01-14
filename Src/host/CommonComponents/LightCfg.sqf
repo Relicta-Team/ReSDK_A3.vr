@@ -25,9 +25,7 @@ lightSys_prepConfig = {
 	_content = [_content,_patEmitAlias,"[""alias"",$1],"] call regex_replace;
 
 	//serverside null_t replace
-	_content = [_content,"[\t ]*null\,","lightSys_null_t,"] call regex_replace;
-
-	//replace nulls
+	_content = [_content,"[\t ]*null\,","(_server_scrEmit_EvtNull_t select 0),"] call regex_replace;
 
 	refset(_refName,_name);
 
@@ -66,7 +64,9 @@ lightSys_replacer_client_header = "
 };	_semDat append [
 ";
 
+//здесь приходится обходить пробему undefined variable. в генераторе мы выбираем null значение
 lightSys_replacer_server_header = "
+	_server_scrEmit_EvtNull_t = [nil];
 	_semDat = []; slt_map_scriptCfgs set ['%1',_semDat]; slt_cfg_id_%1 = {
 		params ['_source'];
 		(slt_map_scriptCfgs get '%1') call slt_handleScriptedCfg;
