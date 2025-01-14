@@ -209,3 +209,9 @@
 		_src setVariable ["__scriptHandler_sigarette_visual_ppar",_orig]; 
 	};
 }] call le_se_registerConfigHandler;
+
+["scr_volume_shape",{
+	params ["_emit","_src","_inPar"];
+	_inPar params ["_shapePath","_size"];
+	_emit setLightVolumeShape [_shapePath,_size];
+}] call le_se_registerConfigHandler;
