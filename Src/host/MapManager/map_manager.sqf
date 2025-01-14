@@ -10,6 +10,8 @@
 #include "ObjectManager.sqf"
 #include "DynamicMapLoader.sqf"
 
+mapmanager_minMapVersion = 5;
+
 mapmanager_savemap = {
 
 	_buffer = '[';
@@ -124,7 +126,27 @@ mapManager_load = {
 		false
 	};
 
-	call compile preprocessFileLineNumbers _fullpath;
+	private _mapContent = preprocessFileLineNumbers _fullpath;
+
+	private _mapHeaderEnd = _mapContent find "go_editor_globalRefs";
+	if (_mapHeaderEnd == -1) exitWith {
+		errorformat("Cant find map header '%1'",_path);
+		false
+	};
+	private _mapHeader = _mapContent select [0,_mapHeaderEnd];
+	private __metaInfoVersion__ = -1;
+	call compile _mapHeader;
+	if (__metaInfoVersion__ == -1) exitWith {
+		errorformat("Cant resolve map version '%1'",_path);
+		false
+	};
+
+	if (__metaInfoVersion__ < mapmanager_minMapVersion) exitWith {
+		errorformat("Cant load obsoleted version '%2' for map '%1'; Required version '%3' or higher",_path arg __metaInfoVersion__ arg mapmanager_minMapVersion);
+		false
+	};
+
+	call compile _mapContent;
 
 	_timing = diag_ticktime - _timing;
 

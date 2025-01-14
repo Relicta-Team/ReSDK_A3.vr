@@ -317,23 +317,19 @@ gm_initGameMode = {
 	//Загрузка карты
 	//Загрузка самой реликтовской карты
 	["    Строим Сеть...","system"] call cm_sendLobbyMessage;
+	private _errMapLoading = false;
 	if isNullVar(__DO_NOT_CREATE_MAP__) then {
 		private _mapName = callFunc(gm_currentMode,getMapName);
 		if (_mapName != "") then {
-			[_mapName] call mapManager_load;
+			private _loaded = [_mapName] call mapManager_load;
+			if (!_loaded) then {
+				_errMapLoading = true;
+				["<t size='2'>Карта не установлена. Требуется перезапуск</t>","system"] call cm_sendLobbyMessage;
+				setLastError("Map loading '"+_mapName+"' error; See console for more details");
+			};
 		};
 	};
-	
-	#ifdef EDITOR
-	["Campfire",[1931.15,2214.4,5.36588],null,false] call createStructure;
-	
-	//Загрузим в первый раз карту
-	if (!isMultiplayer) then {
-		//old loader not used
-		//["src\host\MapManager\Maps\testmap.sqf"] call MapManager_loadmap;
-		vasya setPosATL vec3(1935.4,2216.2,5.36289);
-	};
-	#endif
+	if (_errMapLoading) exitWith {};
 	
 	["    Придумываем должности...","system"] call cm_sendLobbyMessage;
 	{
