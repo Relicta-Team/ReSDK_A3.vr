@@ -26,7 +26,7 @@ private _ltData = ["lt_preload_cfgList = [];"];
 	)
 } foreach slt_internal_fileListBuffer;
 if (count _ltData == 0) exitWith {}; //fatal light loading
-allClientContents pushBack (_ltData joinString endl);
+allClientContents pushBack (compile(_ltData joinString endl));
 
 
 private _shCnt = count allClientContents;

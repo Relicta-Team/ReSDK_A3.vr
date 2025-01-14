@@ -5,6 +5,8 @@
 
 #include <..\engine.hpp>
 
+lightSys_null_t = null;
+
 //light config parser
 lightSys_prepConfig = {
 	params ["_content","_id","_refName",["_isServerPrep",false]];
@@ -21,7 +23,12 @@ lightSys_prepConfig = {
 	
 	if !([_content,_patEmitAlias] call regex_isMatch) exitWith {""};
 	_content = [_content,_patEmitAlias,"[""alias"",$1],"] call regex_replace;
-	
+
+	//serverside null_t replace
+	_content = [_content,"[\t ]*null\,","lightSys_null_t,"] call regex_replace;
+
+	//replace nulls
+
 	refset(_refName,_name);
 
 	_content
