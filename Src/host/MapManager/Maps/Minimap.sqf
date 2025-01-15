@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: 1.18';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.19';__metaInfoVersion__ = 5;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
