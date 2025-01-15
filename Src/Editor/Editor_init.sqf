@@ -105,9 +105,9 @@ call compile __pragma_preprocess "src\host\MapManager\DynamicMapLoader.sqf";
 #include <EditorEngine.h>
 
 //Строковое название версии. Пишется в пользовательском интерфейсе редактора
-Core_version_name = "1.18";
+Core_version_name = "1.19";
 //Номер версии сборки редактора. Используется в бинарных файлах карт.
-Core_version_number = 4;
+Core_version_number = 5;
 
 Editor_enableAutoloadGOLIB = true;
 
