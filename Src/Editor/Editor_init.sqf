@@ -76,6 +76,9 @@ call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
 call compile __pragma_preprocess "src\host\CommonComponents\Algorithm.sqf";
 //light system
 call compile __pragma_preprocess "src\host\CommonComponents\LightCfg.sqf";
+//dynamic map loader
+call compile __pragma_preprocess "src\host\MapManager\DynamicMapLoader.sqf";
+
 //Отладчик
 #include <..\host\Tools\EditorWorkspaceDebug\InternalImpl.sqf>
 ;relicta_debug_onPostErrorHandle = {
