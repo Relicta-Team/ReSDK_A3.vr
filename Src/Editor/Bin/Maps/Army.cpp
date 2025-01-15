@@ -12,18 +12,18 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=4459;
+		nextID=4578;
 	};
 	class Camera
 	{
-		pos[]={3895.0403,29.303802,4050.1289};
-		dir[]={-0.1066445,-0.20558596,0.97293794};
-		up[]={-0.022407938,0.97857797,0.20443669};
-		aside[]={0.99413031,-3.7397258e-06,0.10898154};
+		pos[]={3893.5654,29.303802,4045.2417};
+		dir[]={-0.63143039,-0.39136878,-0.66960752};
+		up[]={-0.26852939,0.92016941,-0.2847642};
+		aside[]={-0.72761548,-6.4083579e-06,0.68611228};
 	};
 };
 binarizationWanted=0;
-sourceName="ReSDK_A3";
+sourceName="resdk_fork";
 addons[]=
 {
 	"A3_Characters_F",
@@ -850,7 +850,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""missionName"",""Army""],[""version"",4]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""missionName"",""Army""],[""version"",5]]}";
 			};
 			id=2205;
 			type="Land_Orange_01_F";
