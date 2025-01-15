@@ -317,7 +317,7 @@ init_function(menu_internal_initialize)
 	//отладка памяти
 	_w = getEdenDisplay getvariable ["menu_internal_memwidget",widgetNull];
 	if !isNullReference(_w) then {
-		[_w,true] call deleteWidget;
+		[_w,false] call deleteWidget;
 	};
 	_wloff = getEdenDisplay displayctrl 1055;
 	(_wloff call widgetGetPosition) params ["_wlx","_wly","_wlw","_wlh"];
