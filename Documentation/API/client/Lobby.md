@@ -374,7 +374,7 @@ Replaced value:
 ```sqf
 [0,0,0,0.7]
 ```
-File: [client\Lobby\functions.sqf at line 12](../../../Src/client/Lobby/functions.sqf#L12)
+File: [client\Lobby\functions.sqf at line 11](../../../Src/client/Lobby/functions.sqf#L11)
 ## TIME_ONLOAD
 
 Type: constant
@@ -386,7 +386,7 @@ Replaced value:
 ```sqf
 2.2
 ```
-File: [client\Lobby\functions.sqf at line 13](../../../Src/client/Lobby/functions.sqf#L13)
+File: [client\Lobby\functions.sqf at line 12](../../../Src/client/Lobby/functions.sqf#L12)
 ## LOBBY_LOADING_TIME
 
 Type: constant
@@ -398,7 +398,7 @@ Replaced value:
 ```sqf
 rand(10,20)
 ```
-File: [client\Lobby\functions.sqf at line 15](../../../Src/client/Lobby/functions.sqf#L15)
+File: [client\Lobby\functions.sqf at line 14](../../../Src/client/Lobby/functions.sqf#L14)
 ## LOBBY_HINT_TIME_MINIMUM
 
 Type: constant
@@ -410,7 +410,7 @@ Replaced value:
 ```sqf
 2.5
 ```
-File: [client\Lobby\functions.sqf at line 16](../../../Src/client/Lobby/functions.sqf#L16)
+File: [client\Lobby\functions.sqf at line 15](../../../Src/client/Lobby/functions.sqf#L15)
 ## LOBBY_HINT_TIME_PER_SYMBOL
 
 Type: constant
@@ -422,7 +422,7 @@ Replaced value:
 ```sqf
 0.07
 ```
-File: [client\Lobby\functions.sqf at line 17](../../../Src/client/Lobby/functions.sqf#L17)
+File: [client\Lobby\functions.sqf at line 16](../../../Src/client/Lobby/functions.sqf#L16)
 ## addWid(type,pos)
 
 Type: constant
@@ -435,7 +435,7 @@ Replaced value:
 ```sqf
 [_d,type,pos,_ctg] call createWidget
 ```
-File: [client\Lobby\functions.sqf at line 162](../../../Src/client/Lobby/functions.sqf#L162)
+File: [client\Lobby\functions.sqf at line 161](../../../Src/client/Lobby/functions.sqf#L161)
 ## vec4(x,y,w,h)
 
 Type: constant
@@ -450,7 +450,7 @@ Replaced value:
 ```sqf
 [x,y,w,h]
 ```
-File: [client\Lobby\functions.sqf at line 163](../../../Src/client/Lobby/functions.sqf#L163)
+File: [client\Lobby\functions.sqf at line 162](../../../Src/client/Lobby/functions.sqf#L162)
 ## initButtonMenu(wid)
 
 Type: constant
@@ -462,7 +462,7 @@ Replaced value:
 ```sqf
 wid ctrlSetFont "PuristaBold";wid ctrlSetBackgroundColor [0,0,0,0.1];
 ```
-File: [client\Lobby\functions.sqf at line 168](../../../Src/client/Lobby/functions.sqf#L168)
+File: [client\Lobby\functions.sqf at line 167](../../../Src/client/Lobby/functions.sqf#L167)
 ## iniTextInfoStyle(wid)
 
 Type: constant
@@ -474,7 +474,7 @@ Replaced value:
 ```sqf
 lobby_charSetWidList pushBack wid; wid setBackgroundColor [0,0,0,0.1]
 ```
-File: [client\Lobby\functions.sqf at line 170](../../../Src/client/Lobby/functions.sqf#L170)
+File: [client\Lobby\functions.sqf at line 169](../../../Src/client/Lobby/functions.sqf#L169)
 ## iniText(text)
 
 Type: constant
@@ -486,7 +486,7 @@ Replaced value:
 ```sqf
 _wid ctrlSetText (text)
 ```
-File: [client\Lobby\functions.sqf at line 170](../../../Src/client/Lobby/functions.sqf#L170)
+File: [client\Lobby\functions.sqf at line 169](../../../Src/client/Lobby/functions.sqf#L169)
 ## iniVar(var)
 
 Type: constant
@@ -498,7 +498,7 @@ Replaced value:
 ```sqf
 setMainWid(var,_wid); lobby_charSetWidList pushBack _wid
 ```
-File: [client\Lobby\functions.sqf at line 172](../../../Src/client/Lobby/functions.sqf#L172)
+File: [client\Lobby\functions.sqf at line 171](../../../Src/client/Lobby/functions.sqf#L171)
 ## iniOnSetCode(code)
 
 Type: constant
@@ -510,7 +510,7 @@ Replaced value:
 ```sqf
 _wid setVariable ["onSetCode",code]
 ```
-File: [client\Lobby\functions.sqf at line 173](../../../Src/client/Lobby/functions.sqf#L173)
+File: [client\Lobby\functions.sqf at line 172](../../../Src/client/Lobby/functions.sqf#L172)
 ## iniOnPress(event)
 
 Type: constant
@@ -522,7 +522,7 @@ Replaced value:
 ```sqf
 _wid ctrlAddEventHandler ["MouseButtonUp",event]
 ```
-File: [client\Lobby\functions.sqf at line 174](../../../Src/client/Lobby/functions.sqf#L174)
+File: [client\Lobby\functions.sqf at line 173](../../../Src/client/Lobby/functions.sqf#L173)
 ## iniVarResizingName(name)
 
 Type: constant
@@ -534,7 +534,7 @@ Replaced value:
 ```sqf
 iniVar(name); lobby_listResizingName pushBack name
 ```
-File: [client\Lobby\functions.sqf at line 175](../../../Src/client/Lobby/functions.sqf#L175)
+File: [client\Lobby\functions.sqf at line 174](../../../Src/client/Lobby/functions.sqf#L174)
 ## TIME_ONLOAD
 
 Type: constant
@@ -548,7 +548,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Lobby\functions.sqf at line 419](../../../Src/client/Lobby/functions.sqf#L419)
+File: [client\Lobby\functions.sqf at line 418](../../../Src/client/Lobby/functions.sqf#L418)
 ## DEFADE_GUI_ELEMENTS_TIME
 
 Type: constant
@@ -560,7 +560,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\Lobby\functions.sqf at line 574](../../../Src/client/Lobby/functions.sqf#L574)
+File: [client\Lobby\functions.sqf at line 573](../../../Src/client/Lobby/functions.sqf#L573)
 ## lobby_isMusicEnabled
 
 Type: Variable
@@ -572,7 +572,7 @@ Initial value:
 ```sqf
 true
 ```
-File: [client\Lobby\functions.sqf at line 376](../../../Src/client/Lobby/functions.sqf#L376)
+File: [client\Lobby\functions.sqf at line 375](../../../Src/client/Lobby/functions.sqf#L375)
 ## lobby_internal_progressclose
 
 Type: Variable
@@ -584,7 +584,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Lobby\functions.sqf at line 559](../../../Src/client/Lobby/functions.sqf#L559)
+File: [client\Lobby\functions.sqf at line 558](../../../Src/client/Lobby/functions.sqf#L558)
 ## lobbyOpen
 
 Type: function
@@ -592,7 +592,7 @@ Type: function
 Description: 
 - Param: _settings
 
-File: [client\Lobby\functions.sqf at line 21](../../../Src/client/Lobby/functions.sqf#L21)
+File: [client\Lobby\functions.sqf at line 20](../../../Src/client/Lobby/functions.sqf#L20)
 ## lobby_handleMusic
 
 Type: function
@@ -600,7 +600,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\Lobby\functions.sqf at line 378](../../../Src/client/Lobby/functions.sqf#L378)
+File: [client\Lobby\functions.sqf at line 377](../../../Src/client/Lobby/functions.sqf#L377)
 ## lobby_onLoad
 
 Type: function
@@ -608,7 +608,7 @@ Type: function
 Description: 
 - Param: _isOpenMode
 
-File: [client\Lobby\functions.sqf at line 395](../../../Src/client/Lobby/functions.sqf#L395)
+File: [client\Lobby\functions.sqf at line 394](../../../Src/client/Lobby/functions.sqf#L394)
 ## lobby_initLoadingScreen
 
 Type: function
@@ -616,7 +616,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\functions.sqf at line 433](../../../Src/client/Lobby/functions.sqf#L433)
+File: [client\Lobby\functions.sqf at line 432](../../../Src/client/Lobby/functions.sqf#L432)
 ## lobby_loadSettings
 
 Type: function
@@ -624,7 +624,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\functions.sqf at line 538](../../../Src/client/Lobby/functions.sqf#L538)
+File: [client\Lobby\functions.sqf at line 537](../../../Src/client/Lobby/functions.sqf#L537)
 ## lobby_onSendChatMessage
 
 Type: function
@@ -632,7 +632,7 @@ Type: function
 Description: 
 - Param: _text
 
-File: [client\Lobby\functions.sqf at line 545](../../../Src/client/Lobby/functions.sqf#L545)
+File: [client\Lobby\functions.sqf at line 544](../../../Src/client/Lobby/functions.sqf#L544)
 ## lobbyClose
 
 Type: function
@@ -640,7 +640,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\functions.sqf at line 561](../../../Src/client/Lobby/functions.sqf#L561)
+File: [client\Lobby\functions.sqf at line 560](../../../Src/client/Lobby/functions.sqf#L560)
 ## lobby_onChangeGameState
 
 Type: function
@@ -649,7 +649,7 @@ Description:
 - Param: _oldState
 - Param: _newState
 
-File: [client\Lobby\functions.sqf at line 590](../../../Src/client/Lobby/functions.sqf#L590)
+File: [client\Lobby\functions.sqf at line 589](../../../Src/client/Lobby/functions.sqf#L589)
 ## lobby_openSelectLateRole
 
 Type: function
@@ -657,7 +657,7 @@ Type: function
 Description: коллбэк сервера на показ списка ролей
 
 
-File: [client\Lobby\functions.sqf at line 622](../../../Src/client/Lobby/functions.sqf#L622)
+File: [client\Lobby\functions.sqf at line 621](../../../Src/client/Lobby/functions.sqf#L621)
 ## lobby_onSelectedLateRole
 
 Type: function
@@ -665,7 +665,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\functions.sqf at line 710](../../../Src/client/Lobby/functions.sqf#L710)
+File: [client\Lobby\functions.sqf at line 709](../../../Src/client/Lobby/functions.sqf#L709)
 # lobbi_init.sqf
 
 ## DISABLE_NOT_USED_SETTINGS

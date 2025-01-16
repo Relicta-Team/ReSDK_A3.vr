@@ -189,14 +189,14 @@ Description:
 
 Initial value:
 ```sqf
-[]
+[] //vec2 (light,intensity)
 ```
 File: [client\OneSync\OneSync_light.sqf at line 16](../../../Src/client/OneSync/OneSync_light.sqf#L16)
 ## os_light_setEnable
 
 Type: function
 
-Description: 
+Description: vec2 (light,intensity)
 - Param: _mode
 
 File: [client\OneSync\OneSync_light.sqf at line 18](../../../Src/client/OneSync/OneSync_light.sqf#L18)
@@ -215,15 +215,16 @@ Type: function
 Description: 
 
 
-File: [client\OneSync\OneSync_light.sqf at line 38](../../../Src/client/OneSync/OneSync_light.sqf#L38)
+File: [client\OneSync\OneSync_light.sqf at line 43](../../../Src/client/OneSync/OneSync_light.sqf#L43)
 ## os_light_registerAsNoProcessedLight
 
 Type: function
 
 Description: 
 - Param: _lt
+- Param: _intensity
 
-File: [client\OneSync\OneSync_light.sqf at line 52](../../../Src/client/OneSync/OneSync_light.sqf#L52)
+File: [client\OneSync\OneSync_light.sqf at line 57](../../../Src/client/OneSync/OneSync_light.sqf#L57)
 # OneSync_mobcollision.sqf
 
 ## OS_MOBCOLLISION_DISTANCE_CHECK
@@ -341,7 +342,7 @@ Description:
 
 Replaced value:
 ```sqf
-SLIGHT_DAM_STONE
+("SLIGHT_DAM_STONE" call lightSys_getConfigIdByName)
 ```
 File: [client\OneSync\OneSync_steps.sqf at line 13](../../../Src/client/OneSync/OneSync_steps.sqf#L13)
 ## distLTG

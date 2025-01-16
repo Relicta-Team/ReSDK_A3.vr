@@ -113,7 +113,7 @@ Description:
 - Param: _modelPathOrClass
 - Param: _selectionId
 
-File: [client\ProxyItems\ProxyItems.sqf at line 66](../../../Src/client/ProxyItems/ProxyItems.sqf#L66)
+File: [client\ProxyItems\ProxyItems.sqf at line 67](../../../Src/client/ProxyItems/ProxyItems.sqf#L67)
 # RProx.sqf
 
 ## proxIt_canUseRProx

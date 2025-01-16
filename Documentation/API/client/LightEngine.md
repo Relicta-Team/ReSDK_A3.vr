@@ -968,7 +968,7 @@ Replaced value:
 ```sqf
 5001
 ```
-File: [client\LightEngine\LightEngine.hpp at line 43](../../../Src/client/LightEngine/LightEngine.hpp#L43)
+File: [client\LightEngine\LightEngine.hpp at line 40](../../../Src/client/LightEngine/LightEngine.hpp#L40)
 ## SHOT_MEATSPLAT
 
 Type: constant
@@ -980,7 +980,7 @@ Replaced value:
 ```sqf
 10001
 ```
-File: [client\LightEngine\LightEngine.hpp at line 46](../../../Src/client/LightEngine/LightEngine.hpp#L46)
+File: [client\LightEngine\LightEngine.hpp at line 43](../../../Src/client/LightEngine/LightEngine.hpp#L43)
 ## SHOT_DESTROYLIMB
 
 Type: constant
@@ -992,7 +992,7 @@ Replaced value:
 ```sqf
 10002
 ```
-File: [client\LightEngine\LightEngine.hpp at line 47](../../../Src/client/LightEngine/LightEngine.hpp#L47)
+File: [client\LightEngine\LightEngine.hpp at line 44](../../../Src/client/LightEngine/LightEngine.hpp#L44)
 ## SHOT_BULLET_PISTOL
 
 Type: constant
@@ -1004,7 +1004,7 @@ Replaced value:
 ```sqf
 10003
 ```
-File: [client\LightEngine\LightEngine.hpp at line 48](../../../Src/client/LightEngine/LightEngine.hpp#L48)
+File: [client\LightEngine\LightEngine.hpp at line 45](../../../Src/client/LightEngine/LightEngine.hpp#L45)
 ## SHOT_BULLET_SHOTGUN
 
 Type: constant
@@ -1016,7 +1016,7 @@ Replaced value:
 ```sqf
 10004
 ```
-File: [client\LightEngine\LightEngine.hpp at line 49](../../../Src/client/LightEngine/LightEngine.hpp#L49)
+File: [client\LightEngine\LightEngine.hpp at line 46](../../../Src/client/LightEngine/LightEngine.hpp#L46)
 ## SHOT_BULLET_SHOTRIFLE
 
 Type: constant
@@ -1028,7 +1028,7 @@ Replaced value:
 ```sqf
 10005
 ```
-File: [client\LightEngine\LightEngine.hpp at line 50](../../../Src/client/LightEngine/LightEngine.hpp#L50)
+File: [client\LightEngine\LightEngine.hpp at line 47](../../../Src/client/LightEngine/LightEngine.hpp#L47)
 ## VST_EATER_NIGHTVISION
 
 Type: constant
@@ -1040,7 +1040,7 @@ Replaced value:
 ```sqf
 20001
 ```
-File: [client\LightEngine\LightEngine.hpp at line 53](../../../Src/client/LightEngine/LightEngine.hpp#L53)
+File: [client\LightEngine\LightEngine.hpp at line 50](../../../Src/client/LightEngine/LightEngine.hpp#L50)
 ## VST_HUMAN_STEALTH
 
 Type: constant
@@ -1052,7 +1052,7 @@ Replaced value:
 ```sqf
 20002
 ```
-File: [client\LightEngine\LightEngine.hpp at line 54](../../../Src/client/LightEngine/LightEngine.hpp#L54)
+File: [client\LightEngine\LightEngine.hpp at line 51](../../../Src/client/LightEngine/LightEngine.hpp#L51)
 ## VST_CLOTH_BREASTPLATE
 
 Type: constant
@@ -1064,7 +1064,7 @@ Replaced value:
 ```sqf
 20003
 ```
-File: [client\LightEngine\LightEngine.hpp at line 55](../../../Src/client/LightEngine/LightEngine.hpp#L55)
+File: [client\LightEngine\LightEngine.hpp at line 52](../../../Src/client/LightEngine/LightEngine.hpp#L52)
 ## VST_CLOTH_CERAMIC
 
 Type: constant
@@ -1076,7 +1076,7 @@ Replaced value:
 ```sqf
 20004
 ```
-File: [client\LightEngine\LightEngine.hpp at line 56](../../../Src/client/LightEngine/LightEngine.hpp#L56)
+File: [client\LightEngine\LightEngine.hpp at line 53](../../../Src/client/LightEngine/LightEngine.hpp#L53)
 ## VST_CLOTH_STRONGARMOR
 
 Type: constant
@@ -1088,7 +1088,7 @@ Replaced value:
 ```sqf
 20005
 ```
-File: [client\LightEngine\LightEngine.hpp at line 57](../../../Src/client/LightEngine/LightEngine.hpp#L57)
+File: [client\LightEngine\LightEngine.hpp at line 54](../../../Src/client/LightEngine/LightEngine.hpp#L54)
 ## VST_CLOTH_METALARMOR
 
 Type: constant
@@ -1100,7 +1100,7 @@ Replaced value:
 ```sqf
 20006
 ```
-File: [client\LightEngine\LightEngine.hpp at line 58](../../../Src/client/LightEngine/LightEngine.hpp#L58)
+File: [client\LightEngine\LightEngine.hpp at line 55](../../../Src/client/LightEngine/LightEngine.hpp#L55)
 ## VST_CLOTH_FLEXIBLEARMOR
 
 Type: constant
@@ -1112,7 +1112,7 @@ Replaced value:
 ```sqf
 20007
 ```
-File: [client\LightEngine\LightEngine.hpp at line 59](../../../Src/client/LightEngine/LightEngine.hpp#L59)
+File: [client\LightEngine\LightEngine.hpp at line 56](../../../Src/client/LightEngine/LightEngine.hpp#L56)
 ## VST_GHOST_EFFECT
 
 Type: constant
@@ -1124,7 +1124,7 @@ Replaced value:
 ```sqf
 20008
 ```
-File: [client\LightEngine\LightEngine.hpp at line 60](../../../Src/client/LightEngine/LightEngine.hpp#L60)
+File: [client\LightEngine\LightEngine.hpp at line 57](../../../Src/client/LightEngine/LightEngine.hpp#L57)
 ## VST_ATTACHED_OBJECTS
 
 Type: constant
@@ -1136,7 +1136,7 @@ Replaced value:
 ```sqf
 20009
 ```
-File: [client\LightEngine\LightEngine.hpp at line 61](../../../Src/client/LightEngine/LightEngine.hpp#L61)
+File: [client\LightEngine\LightEngine.hpp at line 58](../../../Src/client/LightEngine/LightEngine.hpp#L58)
 # LightEngine.sqf
 
 ## le_simulated
@@ -1150,7 +1150,7 @@ Initial value:
 ```sqf
 clientMob//"B_Soldier_F" createVehicleLocal [0,0,0]
 ```
-File: [client\LightEngine\LightEngine.sqf at line 36](../../../Src/client/LightEngine/LightEngine.sqf#L36)
+File: [client\LightEngine\LightEngine.sqf at line 41](../../../Src/client/LightEngine/LightEngine.sqf#L41)
 ## le_allChunkTypes
 
 Type: Variable
@@ -1162,7 +1162,7 @@ Initial value:
 ```sqf
 [CHUNK_TYPE_ITEM,CHUNK_TYPE_STRUCTURE,CHUNK_TYPE_DECOR]
 ```
-File: [client\LightEngine\LightEngine.sqf at line 43](../../../Src/client/LightEngine/LightEngine.sqf#L43)
+File: [client\LightEngine\LightEngine.sqf at line 48](../../../Src/client/LightEngine/LightEngine.sqf#L48)
 ## le_allLights
 
 Type: Variable
@@ -1174,7 +1174,15 @@ Initial value:
 ```sqf
 [] //all light points
 ```
-File: [client\LightEngine\LightEngine.sqf at line 45](../../../Src/client/LightEngine/LightEngine.sqf#L45)
+File: [client\LightEngine\LightEngine.sqf at line 50](../../../Src/client/LightEngine/LightEngine.sqf#L50)
+## le_initializeScriptedConfigs
+
+Type: function
+
+Description: prepare cfgs, called on serverside
+
+
+File: [client\LightEngine\LightEngine.sqf at line 18](../../../Src/client/LightEngine/LightEngine.sqf#L18)
 ## le_loadLight
 
 Type: function
@@ -1183,7 +1191,7 @@ Description: загружает источник освещения или ча�
 - Param: _type (optional, default -1)
 - Param: _src
 
-File: [client\LightEngine\LightEngine.sqf at line 67](../../../Src/client/LightEngine/LightEngine.sqf#L67)
+File: [client\LightEngine\LightEngine.sqf at line 72](../../../Src/client/LightEngine/LightEngine.sqf#L72)
 ## le_doFireLight
 
 Type: function
@@ -1192,7 +1200,7 @@ Description: автоматическое событие освещения, э�
 - Param: _type (optional, default -1)
 - Param: _src
 
-File: [client\LightEngine\LightEngine.sqf at line 101](../../../Src/client/LightEngine/LightEngine.sqf#L101)
+File: [client\LightEngine\LightEngine.sqf at line 110](../../../Src/client/LightEngine/LightEngine.sqf#L110)
 ## le_doShot
 
 Type: function
@@ -1202,7 +1210,7 @@ Description:
 - Param: _src
 - Param: _ctxParams (optional, default [])
 
-File: [client\LightEngine\LightEngine.sqf at line 117](../../../Src/client/LightEngine/LightEngine.sqf#L117)
+File: [client\LightEngine\LightEngine.sqf at line 126](../../../Src/client/LightEngine/LightEngine.sqf#L126)
 ## le_unloadLight
 
 Type: function
@@ -1210,7 +1218,7 @@ Type: function
 Description: выгружает источник освещения
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 134](../../../Src/client/LightEngine/LightEngine.sqf#L134)
+File: [client\LightEngine\LightEngine.sqf at line 143](../../../Src/client/LightEngine/LightEngine.sqf#L143)
 ## le_isLoadedLight
 
 Type: function
@@ -1218,7 +1226,7 @@ Type: function
 Description: проверяет висит ли на объекте источник света
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 164](../../../Src/client/LightEngine/LightEngine.sqf#L164)
+File: [client\LightEngine\LightEngine.sqf at line 172](../../../Src/client/LightEngine/LightEngine.sqf#L172)
 ## le_getLoadedLightCfg
 
 Type: function
@@ -1226,7 +1234,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 170](../../../Src/client/LightEngine/LightEngine.sqf#L170)
+File: [client\LightEngine\LightEngine.sqf at line 178](../../../Src/client/LightEngine/LightEngine.sqf#L178)
 ## le_isLightConfig
 
 Type: function
@@ -1234,7 +1242,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 177](../../../Src/client/LightEngine/LightEngine.sqf#L177)
+File: [client\LightEngine\LightEngine.sqf at line 185](../../../Src/client/LightEngine/LightEngine.sqf#L185)
 ## le_isShotConfig
 
 Type: function
@@ -1242,7 +1250,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 181](../../../Src/client/LightEngine/LightEngine.sqf#L181)
+File: [client\LightEngine\LightEngine.sqf at line 189](../../../Src/client/LightEngine/LightEngine.sqf#L189)
 ## le_debug_canViewLight
 
 Type: function
@@ -1251,7 +1259,7 @@ Description:
 - Param: _src
 - Param: _isLightObject
 
-File: [client\LightEngine\LightEngine.sqf at line 219](../../../Src/client/LightEngine/LightEngine.sqf#L219)
+File: [client\LightEngine\LightEngine.sqf at line 227](../../../Src/client/LightEngine/LightEngine.sqf#L227)
 ## le_debug_lightRender
 
 Type: function
@@ -1259,7 +1267,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 320](../../../Src/client/LightEngine/LightEngine.sqf#L320)
+File: [client\LightEngine\LightEngine.sqf at line 328](../../../Src/client/LightEngine/LightEngine.sqf#L328)
 # LightEngine_mainThread.sqf
 
 ## loadLightOnObject(_x)
@@ -1273,7 +1281,7 @@ Replaced value:
 ```sqf
 [_x getVariable "light",_x] call le_loadLight
 ```
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 47](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L47)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 48](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L48)
 ## unloadLightOnObject(_x)
 
 Type: constant
@@ -1285,7 +1293,7 @@ Replaced value:
 ```sqf
 [_x] call le_unloadLight
 ```
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 48](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L48)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 49](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L49)
 ## __chunkToGLSType()
 
 Type: constant
@@ -1297,7 +1305,7 @@ Replaced value:
 ```sqf
 (format["%1:%2:%3",_type,_cx,_cy])
 ```
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 50](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L50)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 51](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L51)
 ## __compareHashesStr()
 
 Type: constant
@@ -1309,19 +1317,19 @@ Replaced value:
 ```sqf
 (format["G:%1 -> L:%2",_hash,_localHash])
 ```
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 51](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L51)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 52](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L52)
 ## le_lastChunkItem
 
 Type: Variable
 
-Description: 
+Description: ! This file not used.
 
 
 Initial value:
 ```sqf
 null
 ```
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 7](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L7)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 8](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L8)
 ## le_lastChunkStructure
 
 Type: Variable
@@ -1333,7 +1341,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 8](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L8)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 9](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L9)
 ## le_onUpdate
 
 Type: function
@@ -1341,7 +1349,7 @@ Type: function
 Description: основной поток обновления
 
 
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 11](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L11)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 12](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L12)
 ## le_collectAroundChunks
 
 Type: function
@@ -1351,7 +1359,7 @@ Description:
 - Param: _chunk
 - Param: _chunkType
 
-File: [client\LightEngine\LightEngine_mainThread.sqf at line 110](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L110)
+File: [client\LightEngine\LightEngine_mainThread.sqf at line 111](../../../Src/client/LightEngine/LightEngine_mainThread.sqf#L111)
 # LightEngine_ScriptedCulling.sqf
 
 ## LESC_USE_FAST_UPDATE
@@ -1365,31 +1373,31 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 12](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L12)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 15](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L15)
 ## lesc_list_allObjects
 
 Type: Variable
 
-Description: all light objects
+Description: 
 
 
 Initial value:
 ```sqf
 []
 ```
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 262](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L262)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 269](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L269)
 ## lesc_list_allDataObjs
 
 Type: Variable
 
-Description: renderer list point lights
+Description: 
 
 
 Initial value:
 ```sqf
 []
 ```
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 265](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L265)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 273](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L273)
 ## lesc_cullCnt
 
 Type: Variable
@@ -1401,7 +1409,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 338](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L338)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 350](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L350)
 ## lesc_setDebugRender
 
 Type: function
@@ -1411,17 +1419,16 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 255](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L255)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 261](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L261)
 ## lesc_handleLight
 
 Type: function
 
-Description: handle light object adding to scene
- Вызывается при добавлении света
+Description: 
 - Param: _lt
 - Param: _isDirect (optional, default false)
 
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 271](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L271)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 280](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L280)
 ## lesc_onLightRemove
 
 Type: function
@@ -1429,7 +1436,7 @@ Type: function
 Description: 
 - Param: _dummyParam
 
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 290](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L290)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 300](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L300)
 ## lesc_handleProp
 
 Type: function
@@ -1439,7 +1446,7 @@ Description:
 - Param: _prop
 - Param: _val
 
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 303](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L303)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 314](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L314)
 ## lesc_cullingProcess
 
 Type: function
@@ -1447,7 +1454,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 340](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L340)
+File: [client\LightEngine\LightEngine_ScriptedCulling.sqf at line 353](../../../Src/client/LightEngine/LightEngine_ScriptedCulling.sqf#L353)
 # LightRender.sqf
 
 ## LIGHT_RENDER_PRINT_ERROR_IF_NOT_INIT_ON_CUSTOM
@@ -1670,960 +1677,20 @@ Description:
 - Param: _mode
 
 File: [client\LightEngine\LightRender.sqf at line 258](../../../Src/client/LightEngine/LightRender.sqf#L258)
-# ScriptedEffects.hpp
-
-## SLIGHT_MAGICSTORM_DEBUG
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2100
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 6](../../../Src/client/LightEngine/ScriptedEffects.hpp#L6)
-## SLIGHT_SET123_DEBUG
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2101
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 7](../../../Src/client/LightEngine/ScriptedEffects.hpp#L7)
-## SLIGHT_TEMPLATE_DIRECTLIGHT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2102
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 8](../../../Src/client/LightEngine/ScriptedEffects.hpp#L8)
-## SLIGHT_TEMPLATE_POINTLIGHT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2103
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 9](../../../Src/client/LightEngine/ScriptedEffects.hpp#L9)
-## SLIGHT_STREET_LAMP
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2104
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 10](../../../Src/client/LightEngine/ScriptedEffects.hpp#L10)
-## SLIGHT_SHIT_SMELL
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2105
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 11](../../../Src/client/LightEngine/ScriptedEffects.hpp#L11)
-## SLIGHT_WEAK_FIRE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2106
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 12](../../../Src/client/LightEngine/ScriptedEffects.hpp#L12)
-## SLIGHT_SPOT_LAMP
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2107
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 13](../../../Src/client/LightEngine/ScriptedEffects.hpp#L13)
-## SLIGHT_LAMP_HOUSE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2108
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 14](../../../Src/client/LightEngine/ScriptedEffects.hpp#L14)
-## SLIGHT_LIGHT_STOVE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2109
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 15](../../../Src/client/LightEngine/ScriptedEffects.hpp#L15)
-## SLIGHT_LIGHT_BAKE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2110
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 16](../../../Src/client/LightEngine/ScriptedEffects.hpp#L16)
-## SLIGHT_STREET_LAMP_DORM
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2111
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 17](../../../Src/client/LightEngine/ScriptedEffects.hpp#L17)
-## SLIGHT_DAM_METAL
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2112
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 18](../../../Src/client/LightEngine/ScriptedEffects.hpp#L18)
-## SLIGHT_DAM_STONE
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2113
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 19](../../../Src/client/LightEngine/ScriptedEffects.hpp#L19)
-## SLIGHT_DAM_WOOD
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2114
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 20](../../../Src/client/LightEngine/ScriptedEffects.hpp#L20)
-## SLIGHT_DAM_BETON
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2115
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 21](../../../Src/client/LightEngine/ScriptedEffects.hpp#L21)
-## SLIGHT_DAM_DIRT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2116
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 22](../../../Src/client/LightEngine/ScriptedEffects.hpp#L22)
-## SLIGHT_DAM_GLASS
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2117
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 23](../../../Src/client/LightEngine/ScriptedEffects.hpp#L23)
-## SLIGHT_DAM_CLOTH
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2118
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 24](../../../Src/client/LightEngine/ScriptedEffects.hpp#L24)
-## SLIGHT_DAM_PAPER
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2119
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 25](../../../Src/client/LightEngine/ScriptedEffects.hpp#L25)
-## SLIGHT_DAM_FLESH
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2120
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 26](../../../Src/client/LightEngine/ScriptedEffects.hpp#L26)
-## SLIGHT_DAM_ORGANIC
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2121
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 27](../../../Src/client/LightEngine/ScriptedEffects.hpp#L27)
-## SLIGHT_DAM_SYNT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2122
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 28](../../../Src/client/LightEngine/ScriptedEffects.hpp#L28)
-## SLIGHT_ATMOS_FIRE_1
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2123
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 29](../../../Src/client/LightEngine/ScriptedEffects.hpp#L29)
-## SLIGHT_ATMOS_FIRE_2
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2124
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 30](../../../Src/client/LightEngine/ScriptedEffects.hpp#L30)
-## SLIGHT_ATMOS_FIRE_3
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2125
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 31](../../../Src/client/LightEngine/ScriptedEffects.hpp#L31)
-## SLIGHT_ATMOS_SMOKE_1
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2126
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 32](../../../Src/client/LightEngine/ScriptedEffects.hpp#L32)
-## SLIGHT_ATMOS_SMOKE_2
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2127
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 33](../../../Src/client/LightEngine/ScriptedEffects.hpp#L33)
-## SLIGHT_ATMOS_SMOKE_3
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2128
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 34](../../../Src/client/LightEngine/ScriptedEffects.hpp#L34)
-## SLIGHT_THEATRE_SCENE_MAIN
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2129
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 35](../../../Src/client/LightEngine/ScriptedEffects.hpp#L35)
-## SLIGHT_THEATRE_SCENE_AREA_MAIN
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2130
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 36](../../../Src/client/LightEngine/ScriptedEffects.hpp#L36)
-## SLIGHT_THEATRE_SCENE_STREETS
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2131
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 37](../../../Src/client/LightEngine/ScriptedEffects.hpp#L37)
-## SLIGHT_THEATRE_ROOM_GENERIC
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2132
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 38](../../../Src/client/LightEngine/ScriptedEffects.hpp#L38)
-## SLIGHT_STREET_LAMP_ITAL
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2133
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 39](../../../Src/client/LightEngine/ScriptedEffects.hpp#L39)
-## SLIGHT_ITAL_LAMP_STRONG
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2134
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 40](../../../Src/client/LightEngine/ScriptedEffects.hpp#L40)
-## SLIGHT_ITAL_LAMP_MEDIUM
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2135
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 41](../../../Src/client/LightEngine/ScriptedEffects.hpp#L41)
-## SLIGHT_MOB_VOMIT
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2136
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 42](../../../Src/client/LightEngine/ScriptedEffects.hpp#L42)
-## SLIGHT_SEARCHLIGHT_DORM
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2137
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 43](../../../Src/client/LightEngine/ScriptedEffects.hpp#L43)
-## SLIGHT_LIGHT_BAKE_SAUNA
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-2138
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 44](../../../Src/client/LightEngine/ScriptedEffects.hpp#L44)
-## SLIGHT_MAGICSTORM_DEBUG_var
-
-Type: Variable
-
-> Exists if **SCRIPT_EMIT_EVAL_SERVER** defined
-
-Description: 
-
-
-Initial value:
-```sqf
-2100
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 48](../../../Src/client/LightEngine/ScriptedEffects.hpp#L48)
-## SLIGHT_SET123_DEBUG_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2101
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 49](../../../Src/client/LightEngine/ScriptedEffects.hpp#L49)
-## SLIGHT_TEMPLATE_DIRECTLIGHT_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2102
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 50](../../../Src/client/LightEngine/ScriptedEffects.hpp#L50)
-## SLIGHT_TEMPLATE_POINTLIGHT_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2103
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 51](../../../Src/client/LightEngine/ScriptedEffects.hpp#L51)
-## SLIGHT_STREET_LAMP_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2104
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 52](../../../Src/client/LightEngine/ScriptedEffects.hpp#L52)
-## SLIGHT_SHIT_SMELL_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2105
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 53](../../../Src/client/LightEngine/ScriptedEffects.hpp#L53)
-## SLIGHT_WEAK_FIRE_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2106
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 54](../../../Src/client/LightEngine/ScriptedEffects.hpp#L54)
-## SLIGHT_SPOT_LAMP_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2107
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 55](../../../Src/client/LightEngine/ScriptedEffects.hpp#L55)
-## SLIGHT_LAMP_HOUSE_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2108
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 56](../../../Src/client/LightEngine/ScriptedEffects.hpp#L56)
-## SLIGHT_LIGHT_STOVE_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2109
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 57](../../../Src/client/LightEngine/ScriptedEffects.hpp#L57)
-## SLIGHT_LIGHT_BAKE_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2110
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 58](../../../Src/client/LightEngine/ScriptedEffects.hpp#L58)
-## SLIGHT_STREET_LAMP_DORM_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2111
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 59](../../../Src/client/LightEngine/ScriptedEffects.hpp#L59)
-## SLIGHT_DAM_METAL_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2112
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 60](../../../Src/client/LightEngine/ScriptedEffects.hpp#L60)
-## SLIGHT_DAM_STONE_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2113
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 61](../../../Src/client/LightEngine/ScriptedEffects.hpp#L61)
-## SLIGHT_DAM_WOOD_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2114
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 62](../../../Src/client/LightEngine/ScriptedEffects.hpp#L62)
-## SLIGHT_DAM_BETON_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2115
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 63](../../../Src/client/LightEngine/ScriptedEffects.hpp#L63)
-## SLIGHT_DAM_DIRT_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2116
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 64](../../../Src/client/LightEngine/ScriptedEffects.hpp#L64)
-## SLIGHT_DAM_GLASS_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2117
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 65](../../../Src/client/LightEngine/ScriptedEffects.hpp#L65)
-## SLIGHT_DAM_CLOTH_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2118
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 66](../../../Src/client/LightEngine/ScriptedEffects.hpp#L66)
-## SLIGHT_DAM_PAPER_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2119
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 67](../../../Src/client/LightEngine/ScriptedEffects.hpp#L67)
-## SLIGHT_DAM_FLESH_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2120
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 68](../../../Src/client/LightEngine/ScriptedEffects.hpp#L68)
-## SLIGHT_DAM_ORGANIC_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2121
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 69](../../../Src/client/LightEngine/ScriptedEffects.hpp#L69)
-## SLIGHT_DAM_SYNT_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2122
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 70](../../../Src/client/LightEngine/ScriptedEffects.hpp#L70)
-## SLIGHT_ATMOS_FIRE_1_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2123
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 71](../../../Src/client/LightEngine/ScriptedEffects.hpp#L71)
-## SLIGHT_ATMOS_FIRE_2_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2124
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 72](../../../Src/client/LightEngine/ScriptedEffects.hpp#L72)
-## SLIGHT_ATMOS_FIRE_3_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2125
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 73](../../../Src/client/LightEngine/ScriptedEffects.hpp#L73)
-## SLIGHT_ATMOS_SMOKE_1_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2126
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 74](../../../Src/client/LightEngine/ScriptedEffects.hpp#L74)
-## SLIGHT_ATMOS_SMOKE_2_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2127
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 75](../../../Src/client/LightEngine/ScriptedEffects.hpp#L75)
-## SLIGHT_ATMOS_SMOKE_3_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2128
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 76](../../../Src/client/LightEngine/ScriptedEffects.hpp#L76)
-## SLIGHT_THEATRE_SCENE_MAIN_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2129
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 77](../../../Src/client/LightEngine/ScriptedEffects.hpp#L77)
-## SLIGHT_THEATRE_SCENE_AREA_MAIN_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2130
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 78](../../../Src/client/LightEngine/ScriptedEffects.hpp#L78)
-## SLIGHT_THEATRE_SCENE_STREETS_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2131
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 79](../../../Src/client/LightEngine/ScriptedEffects.hpp#L79)
-## SLIGHT_THEATRE_ROOM_GENERIC_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2132
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 80](../../../Src/client/LightEngine/ScriptedEffects.hpp#L80)
-## SLIGHT_STREET_LAMP_ITAL_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2133
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 81](../../../Src/client/LightEngine/ScriptedEffects.hpp#L81)
-## SLIGHT_ITAL_LAMP_STRONG_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2134
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 82](../../../Src/client/LightEngine/ScriptedEffects.hpp#L82)
-## SLIGHT_ITAL_LAMP_MEDIUM_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2135
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 83](../../../Src/client/LightEngine/ScriptedEffects.hpp#L83)
-## SLIGHT_MOB_VOMIT_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2136
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 84](../../../Src/client/LightEngine/ScriptedEffects.hpp#L84)
-## SLIGHT_SEARCHLIGHT_DORM_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2137
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 85](../../../Src/client/LightEngine/ScriptedEffects.hpp#L85)
-## SLIGHT_LIGHT_BAKE_SAUNA_var
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-2138
-```
-File: [client\LightEngine\ScriptedEffects.hpp at line 86](../../../Src/client/LightEngine/ScriptedEffects.hpp#L86)
 # ScriptedEffects.sqf
 
 ## le_se_map
 
 Type: Variable
 
-Description: place this file before all configs
+Description: карта эффектов. ключи - айди эффектов, значения - настройки эмиттеров
 
 
 Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 10](../../../Src/client/LightEngine/ScriptedEffects.sqf#L10)
+File: [client\LightEngine\ScriptedEffects.sqf at line 11](../../../Src/client/LightEngine/ScriptedEffects.sqf#L11)
 ## le_se_noattr
 
 Type: Variable
@@ -2633,21 +1700,21 @@ Description:
 
 Initial value:
 ```sqf
-null
+null //!not used
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 11](../../../Src/client/LightEngine/ScriptedEffects.sqf#L11)
+File: [client\LightEngine\ScriptedEffects.sqf at line 12](../../../Src/client/LightEngine/ScriptedEffects.sqf#L12)
 ## le_se_cfgRange
 
 Type: Variable
 
-Description: 
+Description: !not used
 
 
 Initial value:
 ```sqf
 [2100,4900]
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 12](../../../Src/client/LightEngine/ScriptedEffects.sqf#L12)
+File: [client\LightEngine\ScriptedEffects.sqf at line 13](../../../Src/client/LightEngine/ScriptedEffects.sqf#L13)
 ## le_se_map_cfgHandlers
 
 Type: Variable
@@ -2659,7 +1726,7 @@ Initial value:
 ```sqf
 createHashMap //карта зарегистрированных конфигов
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 196](../../../Src/client/LightEngine/ScriptedEffects.sqf#L196)
+File: [client\LightEngine\ScriptedEffects.sqf at line 206](../../../Src/client/LightEngine/ScriptedEffects.sqf#L206)
 ## le_se_mapHandlersUnmanaged
 
 Type: Variable
@@ -2671,7 +1738,7 @@ Initial value:
 ```sqf
 null //карта нативных эффектов
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 201](../../../Src/client/LightEngine/ScriptedEffects.sqf#L201)
+File: [client\LightEngine\ScriptedEffects.sqf at line 211](../../../Src/client/LightEngine/ScriptedEffects.sqf#L211)
 ## le_se_mapHandlersShots
 
 Type: Variable
@@ -2683,7 +1750,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 202](../../../Src/client/LightEngine/ScriptedEffects.sqf#L202)
+File: [client\LightEngine\ScriptedEffects.sqf at line 212](../../../Src/client/LightEngine/ScriptedEffects.sqf#L212)
 ## le_se_mapHandlers
 
 Type: Variable
@@ -2695,7 +1762,7 @@ Initial value:
 ```sqf
 createHashMapFromArray [...
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 203](../../../Src/client/LightEngine/ScriptedEffects.sqf#L203)
+File: [client\LightEngine\ScriptedEffects.sqf at line 219](../../../Src/client/LightEngine/ScriptedEffects.sqf#L219)
 ## le_se_map_partAddress
 
 Type: Variable
@@ -2707,7 +1774,7 @@ Initial value:
 ```sqf
 createHashMap //key setParticleN , value [functions]
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 440](../../../Src/client/LightEngine/ScriptedEffects.sqf#L440)
+File: [client\LightEngine\ScriptedEffects.sqf at line 476](../../../Src/client/LightEngine/ScriptedEffects.sqf#L476)
 ## le_se_list_fassoc
 
 Type: Variable
@@ -2719,7 +1786,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 543](../../../Src/client/LightEngine/ScriptedEffects.sqf#L543)
+File: [client\LightEngine\ScriptedEffects.sqf at line 579](../../../Src/client/LightEngine/ScriptedEffects.sqf#L579)
 ## le_se_handleConfig
 
 Type: function
@@ -2764,6 +1831,22 @@ Description:
 - Param: _cfgCode
 
 File: [client\LightEngine\ScriptedEffects.sqf at line 177](../../../Src/client/LightEngine/ScriptedEffects.sqf#L177)
+## le_se_isAttachedToMob
+
+Type: function
+
+Description: работает внутри обработчика скрипта для эмиттера. проверяет является ли контекст подключением к мобу
+
+
+File: [client\LightEngine\ScriptedEffects.sqf at line 183](../../../Src/client/LightEngine/ScriptedEffects.sqf#L183)
+## le_se_getAttachedProxySlot
+
+Type: function
+
+Description: получает айди слота подключения к мобу (например INV_FACE)
+
+
+File: [client\LightEngine\ScriptedEffects.sqf at line 188](../../../Src/client/LightEngine/ScriptedEffects.sqf#L188)
 ## le_se_getCurrentConfigPropVal
 
 Type: function
@@ -2771,7 +1854,7 @@ Type: function
 Description: получает значение опции из конфига. используется в хандлерах событий скриптовых эмиттеров
 - Param: _srch
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 183](../../../Src/client/LightEngine/ScriptedEffects.sqf#L183)
+File: [client\LightEngine\ScriptedEffects.sqf at line 193](../../../Src/client/LightEngine/ScriptedEffects.sqf#L193)
 ## le_se_getCurrentConfigId
 
 Type: function
@@ -2779,7 +1862,15 @@ Type: function
 Description: получает айди текущего конфига. только внутри хандлееров событий скриптовых эмиттеров
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 192](../../../Src/client/LightEngine/ScriptedEffects.sqf#L192)
+File: [client\LightEngine\ScriptedEffects.sqf at line 202](../../../Src/client/LightEngine/ScriptedEffects.sqf#L202)
+## le_se_getSimProxObj
+
+Type: function
+
+Description: специальная функция разрешения симуляции для игры и для редактора
+
+
+File: [client\LightEngine\ScriptedEffects.sqf at line 215](../../../Src/client/LightEngine/ScriptedEffects.sqf#L215)
 ## le_se_errorHandler
 
 Type: function
@@ -2787,7 +1878,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 239](../../../Src/client/LightEngine/ScriptedEffects.sqf#L239)
+File: [client\LightEngine\ScriptedEffects.sqf at line 255](../../../Src/client/LightEngine/ScriptedEffects.sqf#L255)
 ## le_se_intenral_handleVarInit
 
 Type: function
@@ -2795,7 +1886,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 243](../../../Src/client/LightEngine/ScriptedEffects.sqf#L243)
+File: [client\LightEngine\ScriptedEffects.sqf at line 259](../../../Src/client/LightEngine/ScriptedEffects.sqf#L259)
 ## le_se_internal_createDropEmitterMap
 
 Type: function
@@ -2803,7 +1894,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 257](../../../Src/client/LightEngine/ScriptedEffects.sqf#L257)
+File: [client\LightEngine\ScriptedEffects.sqf at line 273](../../../Src/client/LightEngine/ScriptedEffects.sqf#L273)
 ## le_se_internal_createUnmanagedEmitterMap
 
 Type: function
@@ -2811,7 +1902,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 305](../../../Src/client/LightEngine/ScriptedEffects.sqf#L305)
+File: [client\LightEngine\ScriptedEffects.sqf at line 321](../../../Src/client/LightEngine/ScriptedEffects.sqf#L321)
 ## le_se_intenral_handleUnmanagedVarInit
 
 Type: function
@@ -2820,7 +1911,7 @@ Description:
 - Param: _prop
 - Param: _val
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 324](../../../Src/client/LightEngine/ScriptedEffects.sqf#L324)
+File: [client\LightEngine\ScriptedEffects.sqf at line 340](../../../Src/client/LightEngine/ScriptedEffects.sqf#L340)
 ## le_se_intenral_handleDropVarInit
 
 Type: function
@@ -2829,7 +1920,7 @@ Description:
 - Param: _prop
 - Param: _val
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 341](../../../Src/client/LightEngine/ScriptedEffects.sqf#L341)
+File: [client\LightEngine\ScriptedEffects.sqf at line 357](../../../Src/client/LightEngine/ScriptedEffects.sqf#L357)
 ## le_se_fireEmit
 
 Type: function
@@ -2842,7 +1933,15 @@ Description:
 - Param: _refemitters
 - Param: _reservedParam
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 349](../../../Src/client/LightEngine/ScriptedEffects.sqf#L349)
+File: [client\LightEngine\ScriptedEffects.sqf at line 365](../../../Src/client/LightEngine/ScriptedEffects.sqf#L365)
+## le_se_initScriptedLights
+
+Type: function
+
+Description: 
+
+
+File: [client\LightEngine\ScriptedEffects.sqf at line 406](../../../Src/client/LightEngine/ScriptedEffects.sqf#L406)
 ## le_se_doSorting
 
 Type: function
@@ -2850,7 +1949,7 @@ Type: function
 Description: Спасибо Богемия...
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 393](../../../Src/client/LightEngine/ScriptedEffects.sqf#L393)
+File: [client\LightEngine\ScriptedEffects.sqf at line 429](../../../Src/client/LightEngine/ScriptedEffects.sqf#L429)
 ## le_se_getParticleOption
 
 Type: function
@@ -2860,7 +1959,7 @@ Description: key setParticleN , value [functions]
 - Param: _varname
 - Param: _storage
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 441](../../../Src/client/LightEngine/ScriptedEffects.sqf#L441)
+File: [client\LightEngine\ScriptedEffects.sqf at line 477](../../../Src/client/LightEngine/ScriptedEffects.sqf#L477)
 ## le_se_setParticleOption
 
 Type: function
@@ -2871,7 +1970,7 @@ Description:
 - Param: _storage
 - Param: _value
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 450](../../../Src/client/LightEngine/ScriptedEffects.sqf#L450)
+File: [client\LightEngine\ScriptedEffects.sqf at line 486](../../../Src/client/LightEngine/ScriptedEffects.sqf#L486)
 ## le_se_getCurrentEmitterIndex
 
 Type: function
@@ -2879,7 +1978,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 459](../../../Src/client/LightEngine/ScriptedEffects.sqf#L459)
+File: [client\LightEngine\ScriptedEffects.sqf at line 495](../../../Src/client/LightEngine/ScriptedEffects.sqf#L495)
 ## le_se_internal_generateOptionAddress
 
 Type: function
@@ -2887,7 +1986,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 461](../../../Src/client/LightEngine/ScriptedEffects.sqf#L461)
+File: [client\LightEngine\ScriptedEffects.sqf at line 497](../../../Src/client/LightEngine/ScriptedEffects.sqf#L497)
 # VisualStatesConfigs.sqf
 
 ## VAR_FULL_PREFIX__VST_PRIVATE
@@ -2997,71 +2096,6 @@ Description:
 - Param: _var
 
 File: [client\LightEngine\VisualStatesConfigs.sqf at line 98](../../../Src/client/LightEngine/VisualStatesConfigs.sqf#L98)
-# Natural.sqf
-
-## __event
-
-Type: constant
-
-Description: Blinking light
-
-
-Replaced value:
-```sqf
-stopUpdateIfNull(_this select 0); \
-		(_this select 0) setLightColor [rand(0.7,1) , 0.65 , rand(0.4,0.5)]; \
-		(_this select 0) setLightAmbient [rand(0.18,0.2),0.05,0]; \
-		(_this select 0) setLightBrightness rand(0.04,0.043);
-```
-File: [client\LightEngine\LightConfigs\Natural.sqf at line 603](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L603)
-## TORCH_SOUND_DELAY
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-20
-```
-File: [client\LightEngine\LightConfigs\Natural.sqf at line 111](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L111)
-## CAMPFIRE_SOUND_DELAY
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-50
-```
-File: [client\LightEngine\LightConfigs\Natural.sqf at line 550](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L550)
-## light_min_brightness
-
-Type: constant
-
-Description: [false,0,10,4.34,[0.013,0.001,0],0,[0,0,0],[0,50,3,700,4,1]]
-
-
-Replaced value:
-```sqf
-2.5
-```
-File: [client\LightEngine\LightConfigs\Natural.sqf at line 256](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L256)
-## light_max_brightness
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-4.34
-```
-File: [client\LightEngine\LightConfigs\Natural.sqf at line 257](../../../Src/client/LightEngine/LightConfigs/Natural.sqf#L257)
 # Bullets.sqf
 
 ## SHOT_BULLET_PISTOL_TIMEOUT
