@@ -9,8 +9,14 @@
 #define vec4(x,y,w,h) [x,y,w,h]
 #include "interactCombat_defines.sqf"
 
+#include "..\..\host\lang.hpp"
+
+namespace(InteractCombat,interactCombat_)
+
+macro_const(interactCombat_sizeDefaultWidth)
 #define size_def_w 30
 
+decl(void(display;vector4;int))
 interactCombat_initCombatStyles = {
 	params ["_d","_pos","_index",["_modeLoad",0]]; //_mode: 0 create, 1 load
 
@@ -68,6 +74,7 @@ interactCombat_initCombatStyles = {
 	};
 };
 
+decl(void(int))
 interactCombat_updateAttackTypes = {
 	params [["_assocEnum",interactCombat_at_assocEnum]];
 	
@@ -155,6 +162,7 @@ interactCombat_updateAttackTypes = {
 	
 };
 
+decl(void())
 interactCombat_load = {
 
 	private _d = getDisplay;
@@ -166,16 +174,19 @@ interactCombat_load = {
 	private _back = [_d,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
 	_back setBackgroundColor [0,0,0,0.9];
 
-
+	macro_const(interactCombat_sizeColumn)
 	#define size_col 2
+	inline_macro
 	#define centerizeText(mes) mes
 
+	inline_macro
 	#define setFadeIfMode(checked,enum,fade,index) \
 		if (equals(checked,enum)) then { \
 			_butt setFade fade; _butt commit 0; \
 			curWidgets set [index,_butt]; \
 		}
 
+	inline_macro
 	#define allocDefButton(sizes,name,_mode) \
 		_butt = [_d,BUTTON,sizes,_ctg] call createWidget; \
 		_butt setvariable ['mode',_mode]; \
@@ -258,6 +269,7 @@ interactCombat_load = {
 };
 
 //Событие при движении мыши
+decl(void(display))
 interactCombat_onMouseMoving = {
 	params ["_display"];
 
@@ -286,10 +298,12 @@ interactCombat_onMouseMoving = {
 	};
 };
 
+macro_func(interactCombat_getModeNameWidget,any(widget))
 #define getMode(wid) wid getVariable "mode"
 
 //вызывается когда нажимается один из комбат стилей
 //перегрузка метода принимет первый параметр как стиль
+decl(void(widget;int))
 interactCombat_onPressCS = {
 	params ["_ct","_butt"];
 	
@@ -305,6 +319,7 @@ interactCombat_onPressCS = {
 };
 
 //событие при нажатии на кнопку типа защиты
+decl(void(widget;int))
 interactCombat_onPressDef = {
 	params ["_ct","_butt"];
 	private _mode = getMode(_ct);
@@ -327,6 +342,7 @@ interactCombat_onPressDef = {
 };
 
 //событие при нажатии на кнопку типа атаки
+decl(void(widget;int))
 interactCombat_onPressAttType = {
 	params ["_ct","_butt"];
 	if (["pressAttackType",0.2] call input_spamProtect) exitWith {};
@@ -336,7 +352,8 @@ interactCombat_onPressAttType = {
 	rpcSendToServer("onUpdateAttackType",[player arg _mode]);
 };
 
-_onSBH = {
+decl(void(string))
+interactCombat_syncView_onSBH = {
 	private _buffer = _this;
 	//[hand(1 byte)][cur combat style(1 byte)][attacktype(2 byte)][attack typelist enum(2 byte)].[targetzone(2 byte)][spec act(2 byte)]
 	//2 1 99 99.99 99
@@ -377,4 +394,4 @@ _onSBH = {
 	cd_curSelection = _tz;
 	call interactMenu_syncCurSelection;
 	
-}; rpcAdd("onSBH",_onSBH);
+}; rpcAdd("onSBH",interactCombat_syncView_onSBH);

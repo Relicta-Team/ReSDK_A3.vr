@@ -4,29 +4,8 @@
 // ======================================================
 
 #include "Materials.h"
-#include "..\Networking\Network.hpp"
 
-class(MatBase) attribute(staticInit)
-	
-	func(staticInit)
-	{
-		params ["_thisClass","_thisType"];
-		if (_thisClass!="MatBase") exitWith {};
-
-		private _mdata = createHashMap;
-		{
-			private _class = _x;
-			
-			private _obj = instantiate(_class);
-			private _objClass = callFunc(_obj,getClassName);
-
-			mat_map_all set [tolower _objClass,_obj];
-
-			callFuncParams(_obj,applyStepDataForGlobalVar,_mdata);
-		} foreach getAllObjectsTypeOfStr(_thisClass);
-
-		netSetGlobal(materials_map_stepData,_mdata);
-	};
+class(MatBase)
 	
 	var(name,"Материал");
 	var(color,"ffffff");
@@ -42,6 +21,7 @@ class(MatBase) attribute(staticInit)
 		objParams_1(_hm);
 
 		if (callSelf(getStepDataKey) in _hm) exitWith {
+			errorformat("Duplicated step config for %1; Input param %2; keys: %3",callSelf(getClassName) arg _hm arg callSelf(getStepDataKey));
 			setLastError("Duplicated step config for " + callSelf(getClassName));
 		};
 
@@ -122,7 +102,7 @@ class(MatStone) extends(MatBase)
 	var(color,"3D3833");
 	var(stepSound,["stone" arg 6]);
 
-	var(damageEffect,SLIGHT_DAM_STONE);
+	var(damageEffect,"SLIGHT_DAM_STONE" call lightSys_getConfigIdByName);
 	var(damageSounds,["damage\stone_1" arg "damage\stone_2" arg "damage\stone_3"]);
 	var(resistSounds,["damage\block_stone_1" arg "damage\block_stone_2"]);
 	
@@ -139,7 +119,7 @@ endclass
 class(MatBeton) extends(MatStone)
 
 	var(name,"Бетон");
-	var(damageEffect,SLIGHT_DAM_BETON);
+	var(damageEffect,"SLIGHT_DAM_BETON" call lightSys_getConfigIdByName);
 	var(color,"8C8C8C");
 	var(stepSound,["concrete" arg 5]);
 
@@ -159,7 +139,7 @@ class(MatDirt) extends(MatBase)
 	var(name,"Земля");
 	var(color,"704402");
 	var(stepSound,["mud" arg 5]);
-	var(damageEffect,SLIGHT_DAM_DIRT);
+	var(damageEffect,"SLIGHT_DAM_DIRT" call lightSys_getConfigIdByName);
 	var(damageSounds,["damage\cloth_1" arg "damage\cloth_2" arg "damage\cloth_3"]);
 	var(pullSounds,["pull\stone1" arg "pull\stone2" arg "pull\stone3"]);
 	getterconst_func(getWeightCoefForCalcHP,50);
@@ -177,7 +157,7 @@ class(MatWood) extends(MatBase)
 	var(color,"362D25");
 	var(stepSound,["wood" arg 8]);
 
-	var(damageEffect,SLIGHT_DAM_WOOD);
+	var(damageEffect,"SLIGHT_DAM_WOOD" call lightSys_getConfigIdByName);
 	var(damageSounds,["damage\wood_1" arg "damage\wood_2" arg "damage\wood_3"]);
 	var(resistSounds,["damage\block_wood_1" arg "damage\block_wood_2" arg "damage\block_wood_3"]);
 	var(pullSounds,["pull\wood1" arg "pull\wood2" arg "pull\wood3" arg "pull\wood4" arg "pull\wood5" arg "pull\wood6"]);
@@ -198,7 +178,7 @@ class(MatMetal) extends(MatBase)
 	var(color,"822B14");
 	var(stepSound,["baremetal" arg 4]);
 
-	var(damageEffect,SLIGHT_DAM_METAL);
+	var(damageEffect,"SLIGHT_DAM_METAL" call lightSys_getConfigIdByName);
 	var(damageSounds,["damage\metal_1" arg "damage\metal_2"]);
 	var(resistSounds,["damage\block_metal_1" arg "damage\block_metal_2"]);
 	var(pullSounds,["pull\wood7"]);
@@ -216,7 +196,7 @@ class(MatGlass) extends(MatBase)
 	var(name,"Стекло");
 	var(color,"147182");
 	var(stepSound,["glass" arg 1]);
-	var(damageEffect,SLIGHT_DAM_GLASS);
+	var(damageEffect,"SLIGHT_DAM_GLASS" call lightSys_getConfigIdByName);
 	var(damageSounds,["damage\glass_1" arg "damage\glass_2" arg "damage\glass_3"]);
 	var(resistSounds,["steps\glass1"]);
 	var(pullSounds,["pull\glass1" arg "pull\glass2" arg "pull\glass3" arg "pull\glass4" arg "pull\glass5" arg "pull\glass6"]);
@@ -231,7 +211,7 @@ class(MatCloth) extends(MatBase)
 
 	var(name,"Ткань");
 	var(color,"5CAD8A");
-	var(damageEffect,SLIGHT_DAM_CLOTH);
+	var(damageEffect,"SLIGHT_DAM_CLOTH" call lightSys_getConfigIdByName);
 	var(damageSounds,["damage\cloth_1" arg "damage\cloth_2" arg "damage\cloth_3"]);
 	var(stepSound,["capet" arg 7]);
 	var(pullSounds,["updown\armorUp"]);
@@ -250,7 +230,7 @@ class(MatPaper) extends(MatBase)
 	var(name,"Бумага");
 	var(color,"E8E5B0");
 	var(stepSound,["paper" arg 1]);
-	var(damageEffect,SLIGHT_DAM_PAPER);
+	var(damageEffect,"SLIGHT_DAM_PAPER" call lightSys_getConfigIdByName);
 	var(damageSounds,["damage\paper_1" arg "damage\paper_2" arg "damage\paper_3"]);
 	var(pullSounds,["updown\paper_up1" arg "updown\paper_up2"]);
 	getterconst_func(getWeightCoefForCalcHP,10);
@@ -269,7 +249,7 @@ class(MatFlesh) extends(MatBase)
 	var(name,"Плоть");
 	var(color,"B04A6A");
 	var(stepSound,["flesh" arg 2]);
-	var(damageEffect,SLIGHT_DAM_FLESH);
+	var(damageEffect,"SLIGHT_DAM_FLESH" call lightSys_getConfigIdByName);
 	var(damageSounds,["damage\flesh_1" arg "damage\flesh_2" arg "damage\flesh_3"]);
 	var(pullSounds,["pull\organic1"]);
 	getterconst_func(getWeightCoefForCalcHP,30);
@@ -287,7 +267,7 @@ class(MatOrganic) extends(MatBase)
 	var(name,"Органика");
 	var(color,"85497A");
 	var(stepSound,["org" arg 4]);
-	var(damageEffect,SLIGHT_DAM_ORGANIC);
+	var(damageEffect,"SLIGHT_DAM_ORGANIC" call lightSys_getConfigIdByName);
 	var(damageSounds,["damage\organic_1" arg "damage\organic_2"]);
 	var(pullSounds,["pull\organic1"]);
 	getterconst_func(getWeightCoefForCalcHP,25);
@@ -306,7 +286,7 @@ class(MatSynt) extends(MatBase)
 	var(name,"Синтетика");
 	var(color,"6038A6");
 	var(stepSound,["cr_step" arg 2]);
-	var(damageEffect,SLIGHT_DAM_SYNT);
+	var(damageEffect,"SLIGHT_DAM_SYNT" call lightSys_getConfigIdByName);
 	var(damageSounds,["damage\synt_1" arg "damage\synt_2" arg "damage\synt_3"]);
 	var(pullSounds,["pull\synt1" arg "pull\synt2" arg "pull\synt3" arg "pull\synt4" arg "pull\synt5" arg "pull\synt6"]);
 	getterconst_func(getWeightCoefForCalcHP,50);

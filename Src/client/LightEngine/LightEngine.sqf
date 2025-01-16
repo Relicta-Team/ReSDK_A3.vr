@@ -13,17 +13,22 @@
 
 //decl
 #include "ScriptedEffects.sqf"
-//cfgs
-#include "ScriptedEffectConfigs.sqf"
-//prepare cfgs
-call le_se_doSorting;
+
+//prepare cfgs, called on serverside
+le_initializeScriptedConfigs = {
+	call lightSys_preInitialize;
+	call le_se_initScriptedLights;
+	call le_se_doSorting;
+};
+#ifndef EDITOR
+call le_initializeScriptedConfigs;
+#endif
+
 //create drop emitter map
 call le_se_internal_createDropEmitterMap;
 call le_se_internal_createUnmanagedEmitterMap;
 call le_se_internal_generateOptionAddress;
 
-#include "LightConfigs.sqf"
-#include "FireLightConfigs.sqf"
 #include "ShotableConfigs.sqf"
 #include "VisualStatesConfigs.sqf"
 
@@ -76,6 +81,10 @@ le_loadLight = {
 		if (!isMultiplayer) then {
 			traceformat("LightEngine::LoadLight() - args %1",_this);
 		};
+	};
+	if isNullReference(_src) exitWith {
+		error("LightEngine::LoadLight() - Undefined light source");
+		setLastError("LightEngine::LoadLight() - Undefined light source");
 	};
 
 	private _code = missionNamespace getVariable ["le_conf_" + str _type,{}];
@@ -154,9 +163,8 @@ le_unloadLight = {
 	[0] call lesc_onLightRemove;
 	
 	
-	os_light_list_noProcessedLights deleteAt (os_light_list_noProcessedLights find _light);
-	
-	
+	os_light_list_noProcessedLights deleteAt (os_light_list_noProcessedLights findif {equals(_x select 0,_light)});
+
 	deleteVehicle _light;
 };
 

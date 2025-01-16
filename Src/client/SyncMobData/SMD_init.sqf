@@ -519,6 +519,10 @@ smd_isSMDObjectInSlot = {
 	!isNull(_this getvariable "_pit_lastattachdata")
 };
 
+smd_getSMDObjectSlotId = {
+	_this getvariable "_pit_slotId"
+};
+
 smd_onStun = {
 	params ["_mob","_ctx"];
 };

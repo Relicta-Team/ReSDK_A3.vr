@@ -8,6 +8,8 @@
 //generated version macros
 #include <..\version.hpp>
 
+#include <lang.hpp>
+
 //platform specific
 //! dont use on client, because compiled client (CONTENT-file) used vm-compiler. Only server and editor allowed
 #define PLATFORM_VERSION '__GAME_VER__'
@@ -233,7 +235,7 @@ _ret = _this; \
 //псевдоним if (valid(modlue_somevariable))
 #define valid(ptr) ([ptr] call rv_cppcheck)
 // alias to valid
-#define bool(val) valid(val)
+#define toBoolean(val) valid(val)
 
 //
 #define __gptr_os (selectrandom table_hex)

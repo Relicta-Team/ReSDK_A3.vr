@@ -37,20 +37,29 @@
 
 #include "ClientData_customAnims.sqf"
 
-//уникальное имя клиента
-cd_clientName = "";
-cd_charName = "Обитатель Сети";
+namespace(clientData,cd_)
 
+//уникальное имя клиента
+decl(string)
+cd_clientName = "";
+decl(string)
+cd_charName = "Обитатель Сети";
+inline_macro
 #define sk_nan [0,0]
+decl(string[])
 cd_skillNames = ["СЛ","ИН","ЛВ","ЗД","ВНС","ВОЛЯ","ВОС","ЖЗ"];
+decl(int[][])
 cd_skills = [sk_nan,sk_nan,sk_nan,sk_nan,sk_nan,sk_nan,sk_nan,sk_nan]; //массив со скиллами
 
 //stamina vars
+decl(float)
 cd_stamina_cur = 100;
+decl(float)
 cd_stamina_max = 100;
 
 //if client get new skills data - apply this
-_OnSkillsUpdate = {
+decl(void(...any[]))
+cd_OnSkillsUpdate = {
 	private _skillList = _this;
 #ifdef DEBUG
 	_skillList = parseSimpleArray str _skillList;
@@ -74,26 +83,34 @@ _OnSkillsUpdate = {
 	} foreach _skillList;
 
 	call interactMenu_onUpdateSkills;
-}; rpcAdd("OnSkillsUpdate",_OnSkillsUpdate);
+}; rpcAdd("OnSkillsUpdate",cd_OnSkillsUpdate);
 
 //текущая зона взаимодействия
+decl(int)
 cd_curSelection = TARGET_ZONE_TORSO;
+decl(int)
 cd_specialAction = SPECIAL_ACTION_NO;
 
 //комбат штуки
+decl(string)
 cd_curDefType = DEF_TYPE_DODGE;
-cd_curCombatStyle = COMBAT_STYLE_ATTACK;
+decl(string)
+cd_curCombatStyle = COMBAT_STYLE_NO;
+decl(string)
 cd_curAttackType = ATTACK_TYPE_THRUST;
-
+decl(int)
 cd_activeHand = INV_HAND_L;
 //last combat action colorizer
+decl(int)
 cd_lca_r = 0;
+decl(int)
 cd_lca_l = 0;
 
-cd_cameraSetting = CAMERA_MODE_ARCADE;
+decl(int) cd_cameraSetting = CAMERA_MODE_ARCADE;
 [cd_cameraSetting] call cam_setCameraSetting;
 
-cd_videoSettings = VIDEO_SETTINGS_MAX; //пользовательские настройки графики
+decl(int) cd_videoSettings = VIDEO_SETTINGS_MAX; //пользовательские настройки графики
+decl(void(int))
 cd_setVideoSettings = {
 	private _value = _this;
 
@@ -115,7 +132,8 @@ cd_setVideoSettings = {
 
 #include "ClientDataUnconscious.sqf"
 
-_onPrepareClient = {
+decl(void(vector3;int))
+cd_onPrepareClient = {
 
 	params ["_atlPos","_vision"];
 
@@ -214,16 +232,23 @@ _onPrepareClient = {
 
 	startUpdateParams(_asyncPositionCheck,0,[_atlPos arg tickTime arg false arg _tempObject arg _vision]);
 
-}; rpcAdd("onPrepareClient",_onPrepareClient);
+}; rpcAdd("onPrepareClient",cd_onPrepareClient);
 
+decl(vector3)
 cd_internal_lastTPPos = vec3(0,0,0);
+decl(NULL|float)
 cd_internal_lastTPDir = null;
+decl(int)
 cd_internal_tpHandle = -1;
+	decl(bool)
 	cd_internal_hasTPError = false;
+decl(mesh)
 cd_internal_lastTPObj = objnull;
+decl(float)
 cd_internal_startLoadTime = 0;
 
-_tpLoad = {
+decl(void(vector3;float))
+cd_tpLoad = {
 	params ["_pos","_dir"];
 	
 	//close eyes one one time
@@ -335,19 +360,21 @@ _tpLoad = {
 	cd_internal_hasTPError = false;
 	cd_internal_startLoadTime = tickTime;
 
-}; rpcAdd("tpLoad",_tpLoad);
+}; rpcAdd("tpLoad",cd_tpLoad);
 
-_syncObjTransform = {
+decl(void(mesh;vector3;float))
+cd_syncObjTransform = {
 	params ["_src","_pos","_dir"];
 	//todo check distance
 	_src setPosAtl _pos;
 	_src setdir _dir;
-}; rpcAddGlobal("syncObjTransform",_syncObjTransform);
+}; rpcAddGlobal("syncObjTransform",cd_syncObjTransform);
 
 // attack animation playing
 rpcAdd("attanm",anim_doAttack);
 
-_clientDisconnect = {
+decl(void(...any[]))
+cd_clientDisconnect = {
 	private _args = _this;
 
 	call vs_stopHandleProcessPlayerPos;
@@ -372,14 +399,16 @@ _clientDisconnect = {
 		endMission "LOSER";
 	};
 
-}; rpcAdd("clientDisconnect",_clientDisconnect);
+}; rpcAdd("clientDisconnect",cd_clientDisconnect);
 
-_authproc = {
+decl(void())
+cd_authproc = {
 	call cd_openAuth;
-}; rpcAdd("authproc",_authproc);
+}; rpcAdd("authproc",cd_authproc);
 
 
 // Открытие окна регистрации клиента
+decl(void())
 cd_openAuth = {
 	private _d = call displayOpen;
 	private _back = [_d,BACKGROUND,[0,0,100,100]] call createWidget;
@@ -485,12 +514,14 @@ cd_openAuth = {
 
 };
 
-_authResult = {
+decl(void(int;string))
+cd_authResult = {
 	params ["_code","_nick"];
 
 	(getDisplay getVariable "closebutton") ctrlEnable true;
 	(getDisplay getVariable "regbutton") ctrlEnable true;
 
+	inline_macro
 	#define printerr(code,text) if (_code == code) exitWith {[text] call (getDisplay getVariable ["printError",{}])}
 	call {
 		if (_code == 0) exitWith {
@@ -512,51 +543,61 @@ _authResult = {
 		printerr(6,"Никнейм должен содержать не менее 3х букв");
 		printerr(100,"Системная ошибка при регистрации.");
 	};
-}; rpcAdd("authResult",_authResult);
+}; rpcAdd("authResult",cd_authResult);
 
 //client side animator
-_anim = {
+decl(void(actor;string))
+cd_switchMove_anim = {
 	(_this select 0) switchmove (_this select 1);
-}; rpcAdd("switchMove",_anim);
+}; rpcAdd("switchMove",cd_switchMove_anim);
 
-_anim = {
+decl(void(actor;string))
+cd_switchMove_force_anim = {
 	(_this select 0) switchmove (_this select 1);
 	(_this select 0) playMoveNow (_this select 1); //fix force switchmove for fuckedup animations configs
-}; rpcAdd("switchMove_force",_anim);
+}; rpcAdd("switchMove_force",cd_switchMove_force_anim);
 
 //Плавная смена анимации
-_anim = {
+decl(void(actor;string))
+cd_playMove_anim = {
 	(_this select 0) playMove (_this select 1)
-}; rpcAdd("playMove",_anim);
+}; rpcAdd("playMove",cd_playMove_anim);
 
 //установить мимику
-_anim = {
+decl(void(actor;string))
+cd_setMimic_anim = {
 	(_this select 0) setMimic (_this select 1)
-}; rpcAdd("setMimic",_anim);
+}; rpcAdd("setMimic",cd_setMimic_anim);
 //для кнокдауна
-_anim = {
+decl(void(actor;string))
+cd_switchAction_anim = {
 	(_this select 0) switchAction (_this select 1)
-}; rpcAdd("switchAction",_anim);
+}; rpcAdd("switchAction",cd_switchAction_anim);
 
-_setvdirup = {
+decl(void(vector3))
+cd_syncongrabrot_setvdirup = {
 	params ["_m"];
 	private _worldObj = player;
 	_worldObj setVectorDirAndUp [_m,vec3(0,0,1)];
 	_worldObj setPosASL getPosASL _worldObj;
-}; rpcAdd("syncongrabrot",_setvdirup);
+}; rpcAdd("syncongrabrot",cd_syncongrabrot_setvdirup);
 
 //теперь cam_addCamShake можно вызывать удаленно
-rpcAdd("camshake",{_this call cam_addCamShake}); //fix initialization error
+decl(void(...float[]))
+cd_camshake_proc = {_this call cam_addCamShake};
+rpcAdd("camshake",cd_camshake_proc); //fix initialization error
 
 //Репликация любых методов. универсальный удаленный вызов
-_replloc = {
+decl(void(string;any))
+cd_replicate_replloc = {
 	params ["_method","_ctx"];
 	_ctx call (repl_map_funcs getOrDefault [(_method),{
 		errorformat("repl::doLocal<net>() - unsupported method ctx[%1]",_method);
 	}]);
-}; rpcAdd("replloc",_replloc);
+}; rpcAdd("replloc",cd_replicate_replloc);
 
 if (isMultiplayer) then {
+	decl(void(string;any))
 	repl_doLocal = {
 		params ["_method","_ctx"];
 		

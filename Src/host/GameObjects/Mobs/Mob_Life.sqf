@@ -2344,7 +2344,7 @@ region(Food and drinking)
 		callSelfParams(meSay,pick _mes);
 
 		private _vomitDuration = precentage(_stunTime,60);
-		private _vparams = [getSelf(owner),SLIGHT_MOB_VOMIT_var,
+		private _vparams = [getSelf(owner),"SLIGHT_MOB_VOMIT" call lightSys_getConfigIdByName,
 			["bubbleseffect","Memory"] //"head"
 			,_vomitDuration];
 		{

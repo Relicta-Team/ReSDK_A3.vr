@@ -435,9 +435,9 @@ struct(AtmosAreaFire) base(AtmosAreaBase)
 	def(getLightTypeBySize)
 	{
 		[
-			SLIGHT_ATMOS_FIRE_1,
-			SLIGHT_ATMOS_FIRE_2,
-			SLIGHT_ATMOS_FIRE_3
+			"SLIGHT_ATMOS_FIRE_1" call lightSys_getConfigIdByName,
+			"SLIGHT_ATMOS_FIRE_2" call lightSys_getConfigIdByName,
+			"SLIGHT_ATMOS_FIRE_3" call lightSys_getConfigIdByName
 		] select ((self getv(size))-1)
 	}
 

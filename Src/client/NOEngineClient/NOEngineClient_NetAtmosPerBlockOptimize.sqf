@@ -4,7 +4,6 @@
 // ======================================================
 
 #include "NOEngineClient_NetAtmos.hpp"
-#include "..\LightEngine\ScriptedEffects.hpp"
 nat_pbo_threadHandle = threadNull;
 
 nat_pbo_lastUpd = 0;
@@ -33,7 +32,7 @@ nat_pbo_renderThread = {
 
 		{
 			_vlt = _y select NAT_CHUNKDAT_OBJECT;
-			//if !(_vlt getv(cfg) in [SLIGHT_ATMOS_FIRE_3,SLIGHT_ATMOS_SMOKE_3]) then {continue};
+			//if !(_vlt getv(cfg) in ["SLIGHT_ATMOS_FIRE_3" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_SMOKE_3" call lightSys_getConfigIdByName]) then {continue};
 
 			_p = _vlt getv(centerPos);
 			_buff pushBack [

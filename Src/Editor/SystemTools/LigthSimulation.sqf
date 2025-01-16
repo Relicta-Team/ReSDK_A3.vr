@@ -26,6 +26,8 @@ init_function(lsim_init)
 	lsim_objMap = createHashMap;
 	lsim_internal_registeredLights = createHashMap;
 
+	lsim_proxyObject = objNull;
+
 	le_allLights = [];
 
 	lsim_internal_handleUndo = -1;
@@ -60,7 +62,7 @@ function(lsim_internal_event_onRemoved)
 function(lsim_isLightSimulated) { params ["_obj"];(hashValue _obj) in lsim_objMap }
 function(lsim_canSimulateLight) { 
 	params ["_obj"];
-	private _v = [_obj,"light"] call golib_getActualDataValue;
+	private _v = [_obj,"light",false] call golib_getActualDataValue;
 	if equalTypes(_v,0) exitWith {
 		inRange(_v,le_se_cfgRange select 0,le_se_cfgRange select 1)	
 	};
@@ -81,7 +83,7 @@ function(lsim_resolveObjectConfig)
 		[true] call vcom_emit_io_loadEnumAssoc;
 	};
 
-	private _lt = [_obj,"light"] call golib_getActualDataValue;
+	private _lt = [_obj,"light",false] call golib_getActualDataValue;
 	if equalTypes(_lt,0) then {
 		_lt = str _lt;
 	};
@@ -94,13 +96,13 @@ function(lsim_resolveObjectConfig)
 		if !inRange(parseNumber _cfg,le_se_cfgRange select 0,le_se_cfgRange select 1) then {
 			""
 		} else {
-			[_lt,""] call vcom_emit_io_parseConfigName;
+			[_lt,""] call vcom_emit_io_parseScriptedConfigName;
 		}
 	} else {
 		if !inRange(parseNumber _lt,le_se_cfgRange select 0,le_se_cfgRange select 1) then {
 			""
 		} else {
-			[_lt,""] call vcom_emit_io_parseConfigName;
+			[_lt,""] call vcom_emit_io_parseScriptedConfigName;
 		};
 	};
 	
@@ -122,6 +124,13 @@ function(lsim_setMode)
 	};
 
 	if (_mode) then {
+		//ранее был подключен созданный локальный костер но он всё равно дает задержки симуляции
+		lsim_proxyObject = golib_com_object;
+		//lsim_proxyObject setposatl [100,100,100];
+		//lsim_proxyObject hideObject true;
+		lsim_proxyObject enableSimulation true;
+		//lsim_proxyObject attachto [player,[0,0,0]];
+
 		//preinit internal data
 		call lsim_internal_buildScriptedConfigs;
 		
@@ -134,6 +143,8 @@ function(lsim_setMode)
 		lsim_internal_handleRedo = ["onRedo",{call lsim_internal_rebuildAllLights}] call Core_addEventHandler;
 		
 	} else {
+		//! Внимание ! удаление прокси объекта ссылающегося на golib_com_object приведёт к поломке карты
+		//deleteVehicle lsim_proxyObject;
 
 		["onUndo",lsim_internal_handleUndo] call Core_removeEventHandler;
 		["onRedo",lsim_internal_handleRedo] call Core_removeEventHandler;
@@ -238,8 +249,8 @@ function(lsim_internal_loadLight)
 		
 	};
 
-	private _ltCfg = [_obj,"light"] call golib_getActualDataValue;
-	
+	private _ltCfg = [_obj,"light",false] call golib_getActualDataValue;
+	private _dataValue = _ltCfg;
 	//do not load deprecated light config
 	if equalTypes(_ltCfg,0) then {
 		if !inRange(_ltCfg,le_se_cfgRange select 0,le_se_cfgRange select 1) exitWith {
@@ -253,15 +264,15 @@ function(lsim_internal_loadLight)
 	if (str parseNumber _ltCfg == _ltCfg || !_canLoad) exitWith {}; //this deprecated light
 
 	private _nullName = "<NULL>";
-	private _parsedName = [_ltCfg,_nullName] call vcom_emit_io_parseConfigName;
+	private _parsedName = [_ltCfg,_nullName] call vcom_emit_io_parseScriptedConfigName;
 	
 	if (_nullName == _parsedName) exitWith {
 		["Cant load light %1",_ltCfg] call printError;
 	};
 
-	private _cfgLightStr = vcom_emit_io_enumAssocKeyStr get _ltCfg;
+	private _cfgLightStr = vcom_emit_io_enumAssocKeyStr get _parsedName;
 	if isNullVar(_cfgLightStr) exitWith {
-		["Cant load non-existen light %1",_ltCfg] call printError;
+		["Cant load non-existen light %1 (data: %2)",_parsedName,_dataValue] call printError;
 	};
 
 	private _code = missionNamespace getVariable ["le_conf_" + _cfgLightStr,objNull];

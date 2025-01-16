@@ -5,7 +5,6 @@
 
 #include <..\..\..\engine.hpp>
 #include <..\..\..\oop.hpp>
-#include <..\..\..\..\client\LightEngine\LightEngine.hpp>
 #include <..\..\GameConstants.hpp>
 #include <..\..\..\text.hpp>
 
@@ -44,7 +43,7 @@ class(Campfire) extends(ICampfireStruct)
 	
 	var(name,"Костёр");
 	var(desc,"Главный источник тепла и света.");
-	var(light,LIGHT_CAMPFIRE);
+	var(light,"SLIGHT_LEGACY_CAMPFIRE" call lightSys_getConfigIdByName);
 	var(model,"a3\structures_f\civ\camping\fireplace_f.p3d");
 	var(material,"MatStone");
 	getterconst_func(getCoefAutoWeight,10);
@@ -161,7 +160,7 @@ endclass
 class(CampfireBig) extends(Campfire)
 	var(name,"Большой костёр");
 	var(desc,"Он достаточно хорошо закидан различными горящими материалами, что позволит осветить и согреть окружение на долгий срок.");
-	var(light,LIGHT_CAMPFIRE_BIG);
+	var(light,"SLIGHT_LEGACY_CAMPFIRE_BIG" call lightSys_getConfigIdByName);
 	var(model,"ml_shabut\drova\pepelishe.p3d");
 	var(dr,3);
 	var(fuelLeft,-1);

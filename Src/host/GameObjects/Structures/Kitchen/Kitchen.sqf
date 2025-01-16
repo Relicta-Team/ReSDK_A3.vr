@@ -29,7 +29,7 @@ class(BlackSmallStove) extends(ILightibleStruct)
 	getterconst_func(getCoefAutoWeight,50);
 	var(dr,3);
 	getterconst_func(isFireLight,true);
-	var(light,LIGHT_BAKE);
+	var(light,"SLIGHT_LEGACY_BAKE" call lightSys_getConfigIdByName);
 	var(lightIsEnabled,true);
 
 	var(craftComponentName,"BakingOvenSystem");
@@ -108,7 +108,7 @@ class(SmallStoveGrill) extends(ILightibleStruct)
 	var(dr,3);
 	
 	getterconst_func(isFireLight,true);
-	var(light,LIGHT_BAKESTOVE);
+	var(light,"SLIGHT_LEGACY_BAKESTOVE" call lightSys_getConfigIdByName);
 	var(lightIsEnabled,true);
 	
 	var(handleUpdate,-1);

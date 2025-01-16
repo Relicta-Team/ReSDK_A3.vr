@@ -6,7 +6,6 @@
 #include "..\..\host\engine.hpp"
 #include "..\..\host\keyboard.hpp"
 #include "..\WidgetSystem\widgets.hpp"
-#include <..\Chat\Chat.hpp>
 
 
 #define BACKGROUND_COLOR [0,0,0,0.7]
@@ -28,7 +27,7 @@ lobbyOpen = {
 		};
 		call inventory_resetPositionHandWidgets;call closeInventory_handle;
 	};
-	if (isCraftOpen) then {call craft_close};
+	if (craft_isMenuOpen) then {call craft_close};
 	if (esc_isMenuOpened) then {call esc_closeMenu};
 	if (nd_isOpenDisplay) then {call nd_onClose};
 	if (chat_isHistoryOpen) then {chat_isHistoryOpen = false; call displayClose};
@@ -426,7 +425,7 @@ lobby_onLoad = {
 	getTextFieldWg commit TIME_ONLOAD;
 
 	if (_isOpenMode) then {
-		getChatAllText() call chat_onRenderLobby;
+		(call chat_getAllText) call chat_onRenderLobby;
 	};
 };
 

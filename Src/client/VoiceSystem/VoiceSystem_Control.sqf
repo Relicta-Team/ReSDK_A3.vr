@@ -164,8 +164,8 @@ vs_initChangeVoiceCtrl = {
 	}];
 	
 	// tranmith in game display
-	(findDisplay 46) displayAddEventHandler ["KeyDown",{doPrepareKeyData(); if isPressed(input_act_radio) then {[true] call vs_handleTransmith}}];
-	(findDisplay 46) displayAddEventHandler ["KeyUp",{doPrepareKeyData(); if isPressed(input_act_radio) then {[false] call vs_handleTransmith}}];
+	(findDisplay 46) displayAddEventHandler ["KeyDown",{doPrepareKeyData(_this); if isPressed(input_act_radio) then {[true] call vs_handleTransmith}}];
+	(findDisplay 46) displayAddEventHandler ["KeyUp",{doPrepareKeyData(_this); if isPressed(input_act_radio) then {[false] call vs_handleTransmith}}];
 };
 
 

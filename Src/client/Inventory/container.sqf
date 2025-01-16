@@ -11,14 +11,22 @@
 #include "helpers.hpp"
 #include "..\Interactions\interact.hpp"
 
+namespace(Inventory,inventory_)
+
+macro_const(inventory_widgetContainerSizeW)
 #define CONTAINER_SIZE_W 3
+macro_const(inventory_widgetContainerSizeH)
 #define CONTAINER_SIZE_Y
+macro_const(inventory_widgetContainerSizeButton)
 #define SIZE_BUTTON 3
 
+macro_const(inventory_timeContainerOnLoad)
 #define TIME_CONTAINER_ONLOAD 0.25
 //из TIME_PREPARE_SLOTS
+macro_const(inventory_timeContainerOnUnload)
 #define TIME_CONTAINER_ONUNLOAD 0.09
 
+decl(void())
 inventory_openContainer = {
 	if (!isInventoryOpen) exitWith {};
 
@@ -26,8 +34,8 @@ inventory_openContainer = {
 
 	private _d = getDisplay;
 
-	_w = abs (_leftX - _rigthX);
-	_h = abs (_leftY - _rigthY);
+	private _w = abs (_leftX - _rigthX);
+	private _h = abs (_leftY - _rigthY);
 	
 	// fix for 4:3 screensize (after 0.8.239)
 	private _xContPos = _leftX - (_w * CONTAINER_SIZE_W);
@@ -104,6 +112,7 @@ inventory_openContainer = {
 	inventory_isOpenContainer = true;
 };
 
+decl(widget[](display;string|int;vector4;int;widget))
 createWidget_contSlot = {
 	params ["_display","_slotName","_pos","_slotId","_ctgScr"];
 
@@ -146,6 +155,7 @@ createWidget_contSlot = {
 	_ctg
 };
 
+decl(void())
 inventory_loadContainerSlots = {
 
 	private _ctgScrolling = getContainerSlotsCtg;
@@ -242,6 +252,7 @@ inventory_loadContainerSlots = {
 	};
 };
 
+decl(void())
 inventory_onPrepareContainer = {
 
 	private _ctg = getContainerMainCtg;
@@ -263,6 +274,7 @@ inventory_onPrepareContainer = {
 
 };
 
+decl(void())
 inventory_closeContainer = {
 
 	rpcSendToServer("onContainerClose",[player arg getContainerRef]);
@@ -276,6 +288,7 @@ inventory_closeContainer = {
 	inventory_contWidgetSize = [0,0,0,0];
 };
 
+decl(void())
 inventory_onChangeLocContainer = {
 	if (isInventoryOpen) then {
 		if (inventory_isOpenContainer) then {
@@ -289,6 +302,7 @@ inventory_onChangeLocContainer = {
 	inventory_contWidgetSize = [0,0,0,0];
 };
 
+decl(void())
 inventory_unloadContainerMenu = {
 	false call inventory_onPrepareContainer;
 
@@ -313,6 +327,7 @@ inventory_unloadContainerMenu = {
 };
 
 // Открывает контейнер и загружает данные
+decl(void(...any[]))
 inventory_onContainerOpen = {
 	private _prms = _this;
 	params ["_main","_data"];
@@ -384,6 +399,7 @@ inventory_onContainerOpen = {
 	nextFrameParams(_nextFrame,_nextFrame);
 };
 
+decl(void(...any[]))
 inventory_onContainerContentUpdate = {
 	private _data = _this;
 
@@ -419,6 +435,7 @@ inventory_onContainerContentUpdate = {
 };
 
 //цикл в маин треде
+decl(void())
 inventory_onUpdateContainer = {
 
 	if (isWorldContainer) then {
@@ -452,7 +469,7 @@ inventory_onUpdateContainer = {
 
 };
 
-
+decl(void(widget))
 inventory_onPressContainerSlot = {
 	private _slotFrom = _this;
 
@@ -477,6 +494,7 @@ inventory_onPressContainerSlot = {
 	//(getSlotId(_slotFrom) call inventory_getModelById) call inventory_createPreviewObject;
 };
 
+decl(void(widget))
 inventory_onReleaseSlotFromContainer = {
 	private _slotTo = _this;
 
@@ -511,6 +529,7 @@ inventory_onReleaseSlotFromContainer = {
 
 };
 
+decl(void(widget;widget))
 inventory_onTransferSlotContainer = {
 	params ["_containerSlot","_slotTo"];
 
@@ -530,6 +549,7 @@ inventory_onTransferSlotContainer = {
 	rpcSendToServer("onRemoveItemFromContainer",[player arg _hashContainer arg _hashContItem arg _idTo]);
 };
 
+decl(void())
 inventory_onReleaseSlotToContainer = {
 	private _pressedSlot = getPressedSlot;
 
