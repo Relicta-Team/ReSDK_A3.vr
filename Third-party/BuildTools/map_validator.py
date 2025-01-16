@@ -78,9 +78,9 @@ def validateConfigs():
             error(f'Empty file',fcfgPath)
             hasError = True
             continue
-        grp = re.match(r'\s*regScriptEmit\((SLIGHT_\w+)\)/',cfgFileContent,re.DOTALL)
+        grp = re.search(r'regScriptEmit\((SLIGHT_[\w_]+)\)',cfgFileContent)
         if not grp:
-            error('Wrong config structure',fcfgPath)
+            error('Wrong config structure',os.path.relpath(fcfgPath,workspace))
             hasError = True
             continue
         cfgName = grp.group(1)
@@ -90,8 +90,6 @@ def validateConfigs():
             continue
         allConfigs[cfgName] = fcfgPath
         writeSummary(f" {cfgName} ({fcfgPath})")
-    
-    mathces = []
 
     if hasError: return
     
@@ -106,7 +104,7 @@ def validateConfigs():
         with open(mapPath,"r",encoding="utf8") as f:
             buf = f.read()
             
-            mapDataBin = re.match("\"\"missionName\"\",\"\"([\w_]*)\"\"\]\,\[\"\"version\"\"\,(\d+)\]",buf)
+            mapDataBin = re.search("\"\"missionName\"\",\"\"([\w_]*)\"\"\]\,\[\"\"version\"\"\,(\d+)\]",buf)
             if not mapDataBin:
                 error(f"Map {map} has no internal name or unknown version")
                 hasError = True
@@ -141,7 +139,7 @@ def validateConfigs():
         with open(mapPath,"r",encoding="utf8") as f:
             buf = f.read()
 
-            mapver = re.match(r"__metaInfoVersion__\s*\=\s*\d+",buf)
+            mapver = re.search(r"__metaInfoVersion__\s*\=\s*(\d+)",buf)
             if not mapver:
                 error(f"Map {map} has no internal version marker or unknown version")
                 hasError = True
