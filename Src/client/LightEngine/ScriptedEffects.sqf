@@ -118,7 +118,7 @@ le_se_handleConfig = {
 	
 
 	if (_isDrop || _isUnmanaged) exitWith {true};
-	//addEventOnDestroySource not used in scripted emitters
+	//auto delete not used in scripted emitters
 	//! native evh Destroyed not working with simple objects (sourceObject it is)
 
 	//Возвращаем свет 

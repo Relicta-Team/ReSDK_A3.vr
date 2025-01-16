@@ -14,29 +14,7 @@
 
 #define le_light_max_index 1999
 
-#define regLight(type) le_conf_##type = { params ['sourceObject']; private lightObject = "#lightpoint" createVehicleLocal [0,0,0]; \
-sourceObject setvariable ["__config",type]; sourceObject setVariable ["__light",lightObject]; private allEmitters = [lightObject]; sourceObject setVariable ["__allEmitters",allEmitters]; \
-1 call le_debug_lightRender;
-
-#define endRegLight lightObject };
-
-#define regCustomLight(type,classnamestr) le_conf_##type = {params ['sourceObject']; private lightObject = (classnamestr) createVehicleLocal [0,0,0]; \
-sourceObject setvariable ["__config",type]; sourceObject setVariable ["__light",lightObject]; private allEmitters = [lightObject]; sourceObject setVariable ["__allEmitters",allEmitters]; \
-2 call le_debug_lightRender;
-
 #define emitterObject _effEmitter
-
-#define regEffect(type) le_conf_##type = { params ['sourceObject']; private emitterObject = "#particlesource" createVehicleLocal [0,0,0]; \
-sourceObject setvariable ["__config",type]; sourceObject setVariable ["__light",emitterObject]; private allEmitters = [emitterObject]; sourceObject setVariable ["__allEmitters",allEmitters]; \
-
-#define endRegEffect };
-
-//firelight event type def
-#define regFireLight(type) _rfl_t = type; _rfl_ev = {params ['sourceObject'];
-
-#define endRegFireLight }; missionNamespace setVariable ["le_conf_fire_" + str(_rfl_t - le_firelight_startindex),_rfl_ev];
-
-#define initLightObject() private lightObject = "#lightpoint" createVehicleLocal [0,0,0]
 
 //visual states functionality
 #define regVST(type) le_conf_##type = { params ["_condit","_src",["_ctxParams",0]]; private __GLOB_CFG_IDX__ = type ;
@@ -54,41 +32,15 @@ sourceObject setvariable ["__config",type]; sourceObject setVariable ["__light",
 
 #define endRegVST };
 
-#define vector(x,y,z) [x,y,z]
-
-#define initBrightness(val) lightObject setLightBrightness (val); sourceObject setvariable ["__defBright",val];
-
-#define initAsRenderer() sourceObject call le_initRenderer;
-
-#define linkLight(light,object,anotherParams) light attachto [object,anotherParams]
-
-//Сразу делает свет динамическим и рабочим (проблема при отсутствии первого атача к игроку)
-#define linkLightDynamic(src,object,anotParams) linkLight(src,player,vector(0,0,0)); linkLight(src,object,anotParams)
-
-
-#define joinEmitter(link) allEmitters pushBackUnique link
-
 //частота обновления основного треда
+//!not used
 #define update_delay_mainThread 0.01
-//частота проверики на необходимость удаления
-#define checktime_ondestroysource 0
+
 //начальное число индексатора для firelight событий (исключая его)
 #define le_firelight_startindex 5000
 
-#define addEventOnDestroySource(listobjects) private __onframecode = { sourceObject = (_this select 0) select 0; lightObject = (_this select 0) select 1 select 0;if (isNULL sourceObject || isNULL lightObject) then { \
-{deleteVehicle _x} foreach ((_this select 0) select 1); [sourceObject] call le_unloadLight; stopThisUpdate(); \
-}}; startUpdateParams(__onframecode,checktime_ondestroysource,[sourceObject arg [listobjects]])
-
-#define __lcfg__null_params__
-#define addEventOnDestroySourceNoParams() addEventOnDestroySource(__lcfg__null_params__)
-
-//spec events helper
-#define stopUpdateIfNull(data) if (isNULL (data)) exitWith {stopThisUpdate()}
-
 //helpers
 #include <..\Inventory\inventory.hpp>
-#define isAttachedToMob() (!isNullVar(_smd_slotId))
-#define attachedMobSlot _smd_slotId
 
 /*
 ================================================================================
@@ -134,6 +86,8 @@ sourceObject setvariable ["__config",type]; sourceObject setVariable ["__light",
 #define SCRIPT_EMIT_HANDLER_MODE_DROP 1
 //скриптовый обработчик неуправляемый. основная особенность - не привязан к объекту, создается в позиции. пользователь самостоятельно должен удалять его
 #define SCRIPT_EMIT_HANDLER_MODE_UNMANAGED 2
+
+// макросы ниже сохранены для обратной совместимости
 
 //scripted emitters
 #define regScriptEmit(type) _semDat = []; le_se_map set ['type',_semDat]; le_conf_##type = { \

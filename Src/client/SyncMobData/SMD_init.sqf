@@ -435,7 +435,7 @@ smd_onChangeSlotData = {
 
 	if !isNullReference(_prevObject) then {
 		//Updated at 0.7.690
-		// - scripted emitters not contains preframe update: addEventOnDestroySource
+		// - scripted emitters unload
 		if ([_prevObject] call le_isLoadedLight) then {
 			[_prevObject] call le_unloadLight;
 		};
@@ -493,7 +493,6 @@ smd_onChangeSlotData = {
 		_object = [_mob,_model,_slotId] call proxIt_loadConfig;
 
 		if (!isNullReference(_object) && _cfgLight != -1) then {
-			private _smd_slotId = _slotId;
 			[_cfgLight,_object] call le_loadLight;
 		};
 	};

@@ -107,21 +107,21 @@ le_loadLight = {
 };
 
 //автоматическое событие освещения, эффектов или звука
-le_doFireLight = {
-	params [["_type",-1],"_src"];
+// le_doFireLight = {
+// 	params [["_type",-1],"_src"];
 
-	if (_type <= le_firelight_startindex) exitWith {
-		error("LightEngine::doFireLight() - Undefined light type");
-	};
+// 	if (_type <= le_firelight_startindex) exitWith {
+// 		error("LightEngine::doFireLight() - Undefined light type");
+// 	};
 
-	private _code = missionNamespace getVariable ["le_conf_fire_" + str (_type - le_firelight_startindex),{}];
+// 	private _code = missionNamespace getVariable ["le_conf_fire_" + str (_type - le_firelight_startindex),{}];
 
-	if equals(_code,{}) exitWith {
-		errorformat("Cant load light from config => %1",_type);
-	};
+// 	if equals(_code,{}) exitWith {
+// 		errorformat("Cant load light from config => %1",_type);
+// 	};
 
-	[_src] call _code;
-};
+// 	[_src] call _code;
+// };
 
 le_doShot = {
 	params ["_type","_src",["_ctxParams",[]]];
@@ -269,6 +269,7 @@ le_debug_canViewLight = {
 			_light setLightColor [0.013,0.001,0];
 			_light setLightAmbient [0.013,0.001,0];
 			_light setLightAttenuation [0,50,3,700,4,1];
+			#define vector(x,y,z) [x,y,z]
 			linkLight(_light,player,vector(0,0,0));
 			linkLight(_light,_arrow,vector(0,0,0));
 		} foreach _list;
@@ -302,6 +303,7 @@ le_debug_canViewLight = {
 		_light setLightColor [0.013,0.001,0];
 		_light setLightAmbient [0.013,0.001,0];
 		_light setLightAttenuation [0,50,3,700,4,1];
+		#define vector(x,y,z) [x,y,z]
 		linkLight(_light,player,vector(0,0,0));
 		linkLight(_light,_arrow,vector(0,0,0));
 
@@ -325,11 +327,13 @@ le_debug_canViewLight = {
 	true
 };
 
+/* 
+! legacy render
 le_debug_lightRender = {
 	#ifndef usedebuglightrender
 		if (true) exitWith {};
 	#endif
-
+	#define vector(x,y,z) [x,y,z]
 	private _renderMode = _this; //1 and 2
 	_evlight = {
 		(_this select 0) params ['lightObject','sourceObject',"_renderMode"];
@@ -367,6 +371,7 @@ le_debug_lightRender = {
 
 	}; startUpdateParams(_evlight,0.01,[lightObject arg sourceObject arg _renderMode]);
 };
+*/
 
 //render damage effect for objects
 _dofe = {
