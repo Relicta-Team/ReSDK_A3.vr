@@ -18,6 +18,21 @@ noe_client_nat_handleUpdate = -1;
 noe_client_nat_areas = createHashMap;
 noe_client_nat_prevArea = null;
 
+noe_client_nat_ltCfg_initialized = false;
+//генерируемые ссылки с айди конфигов света для клиентских структур
+noe_client_nat_ltCfg_fire = [];
+noe_client_nat_ltCfg_smoke = [];
+
+noe_client_nat_initializeLtCfg = {
+	{
+		noe_client_nat_ltCfg_fire set [_foreachIndex,_x call lightSys_getConfigIdByName];
+	} foreach ["SLIGHT_ATMOS_FIRE_1","SLIGHT_ATMOS_FIRE_2","SLIGHT_ATMOS_FIRE_3"];
+
+	{
+		noe_client_nat_ltCfg_smoke set [_foreachIndex,_x call lightSys_getConfigIdByName];
+	} foreach ["SLIGHT_ATMOS_SMOKE_1","SLIGHT_ATMOS_SMOKE_2","SLIGHT_ATMOS_SMOKE_3"];
+};
+
 #ifndef EDITOR
 	#undef NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
 #endif
@@ -26,6 +41,12 @@ noe_client_nat_setEnabled = {
 	if equals(_mode,call noe_client_nat_isEnabled) exitWith {false};
 
 	if (_mode) then {
+
+		if (!noe_client_nat_ltCfg_initialized) then {
+			noe_client_nat_ltCfg_initialized = true;
+			call noe_client_nat_initializeLtCfg;
+		};
+
 		noe_client_nat_handleUpdate = startUpdate(noe_client_nat_onUpdate,NOE_NETATMOS_UPDATE_DELAY);
 
 		#ifdef NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE

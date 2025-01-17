@@ -100,6 +100,7 @@ lightSys_getConfigIdByName = {
 	params ["_name"];
 	#ifdef EDITOR
 	if !(_name in lightSys_assocCfg_keyName) exitWith {
+		errorformat("Unknown config name: %1",_name);
 		setLastError("Unknown config name: " + _name + "; Loaded configs: " + (str count lightSys_assocCfg_keyName));
 		-1
 	};

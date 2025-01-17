@@ -1251,6 +1251,16 @@ class(SystemHandItem) extends(SystemItem)
 		]
 	};
 
+	func(getIcon)
+	{
+		objParams();
+		if callSelf(isGrabProcess) exitWith {
+			private _sidePostfix = ifcheck(getSelf(side)==SIDE_LEFT,"_l","_r");
+			PATH_PICTURE("inventory\pull"+_sidePostfix+".paa")
+		};
+		super();
+	};
+
 endclass
 
 

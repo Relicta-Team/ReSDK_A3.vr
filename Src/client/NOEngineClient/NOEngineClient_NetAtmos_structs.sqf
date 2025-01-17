@@ -1041,8 +1041,8 @@ struct(AtmosVirtualLight)
 	def(isInsideRegion) {!isNull(self getv(regionPosInfo))};
 
 	//do not change this constval
-	def(_fireTypes) ["SLIGHT_ATMOS_FIRE_1" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_FIRE_2" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_FIRE_3" call lightSys_getConfigIdByName];
-	def(_smokeTypes) ["SLIGHT_ATMOS_SMOKE_1" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_SMOKE_2" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_SMOKE_3" call lightSys_getConfigIdByName];
+	def(_fireTypes) noe_client_nat_ltCfg_fire;
+	def(_smokeTypes) noe_client_nat_ltCfg_smoke;
 	//check if atmos if firetype
 	def(isFireType) {(self getv(id)) in (self getv(_fireTypes))}
 	def(isSmokeType) {(self getv(id)) in (self getv(_smokeTypes))}
