@@ -5860,7 +5860,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 39](../../../Src/host/lang.hpp#L39)
+File: [host\lang.hpp at line 43](../../../Src/host/lang.hpp#L43)
 ## enum(name,prefix)
 
 Type: constant
@@ -5873,7 +5873,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 49](../../../Src/host/lang.hpp#L49)
+File: [host\lang.hpp at line 53](../../../Src/host/lang.hpp#L53)
 ## namespace(ns_name,prefix)
 
 Type: constant
@@ -5886,7 +5886,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 66](../../../Src/host/lang.hpp#L66)
+File: [host\lang.hpp at line 70](../../../Src/host/lang.hpp#L70)
 ## inline_macro
 
 Type: constant
@@ -5898,7 +5898,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 79](../../../Src/host/lang.hpp#L79)
+File: [host\lang.hpp at line 83](../../../Src/host/lang.hpp#L83)
 ## const
 
 Type: constant
@@ -5910,7 +5910,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 85](../../../Src/host/lang.hpp#L85)
+File: [host\lang.hpp at line 89](../../../Src/host/lang.hpp#L89)
 ## extern
 
 Type: constant
@@ -5922,7 +5922,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 91](../../../Src/host/lang.hpp#L91)
+File: [host\lang.hpp at line 95](../../../Src/host/lang.hpp#L95)
 ## macro_const(full_func_name)
 
 Type: constant
@@ -5934,7 +5934,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 104](../../../Src/host/lang.hpp#L104)
+File: [host\lang.hpp at line 108](../../../Src/host/lang.hpp#L108)
 ## macro_func(name,signature)
 
 Type: constant
@@ -5947,7 +5947,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 116](../../../Src/host/lang.hpp#L116)
+File: [host\lang.hpp at line 120](../../../Src/host/lang.hpp#L120)
 ## macro_def(name)
 
 Type: constant
@@ -5959,7 +5959,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 126](../../../Src/host/lang.hpp#L126)
+File: [host\lang.hpp at line 130](../../../Src/host/lang.hpp#L130)
 ## ignore_this_file
 
 Type: constant
@@ -5971,7 +5971,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 130](../../../Src/host/lang.hpp#L130)
+File: [host\lang.hpp at line 134](../../../Src/host/lang.hpp#L134)
 # memory.hpp
 
 ## size_ptr
