@@ -1414,6 +1414,42 @@ Initial value:
 null
 ```
 File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 19](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L19)
+## noe_client_nat_ltCfg_initialized
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 21](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L21)
+## noe_client_nat_ltCfg_fire
+
+Type: Variable
+
+Description: генерируемые ссылки с айди конфигов света для клиентских структур
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 23](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L23)
+## noe_client_nat_ltCfg_smoke
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 24](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L24)
 ## noe_client_nat_const_nearList
 
 Type: Variable
@@ -1425,7 +1461,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 349](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L349)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 370](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L370)
 ## noe_client_nat_isEnabled
 
 Type: function
@@ -1434,6 +1470,14 @@ Description:
 
 
 File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 12](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L12)
+## noe_client_nat_initializeLtCfg
+
+Type: function
+
+Description: 
+
+
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 26](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L26)
 ## noe_client_nat_setEnabled
 
 Type: function
@@ -1441,7 +1485,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 24](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L24)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 39](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L39)
 ## noe_client_nat_onUpdate
 
 Type: function
@@ -1449,7 +1493,7 @@ Type: function
 Description: основной цикл обработки областей
 
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 64](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L64)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 85](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L85)
 ## noe_client_nat_getArea
 
 Type: function
@@ -1457,7 +1501,7 @@ Type: function
 Description: получение области. если область не создана - генерирует новую
 - Param: _areaId
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 105](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L105)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 126](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L126)
 ## noe_client_nat_getAreaUnsafe
 
 Type: function
@@ -1465,7 +1509,7 @@ Type: function
 Description: 
 - Param: _areaId
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 114](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L114)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 135](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L135)
 ## noe_client_nat_requestLoad
 
 Type: function
@@ -1473,7 +1517,7 @@ Type: function
 Description: запрос зоны на загрузку
 - Param: _areaObj
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 121](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L121)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 142](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L142)
 ## noe_client_nat_requestDelExpired
 
 Type: function
@@ -1482,7 +1526,7 @@ Description:
 - Param: _areaObj
 - Param: _newTick
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 132](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L132)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 153](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L153)
 ## noe_client_nat_onLoadArea
 
 Type: function
@@ -1490,7 +1534,7 @@ Type: function
 Description: ответ от сервера
 - Param: _packet
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 145](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L145)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 166](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L166)
 ## noe_client_nat_decodePacket
 
 Type: function
@@ -1500,7 +1544,7 @@ Description: декодирование пакета в массивы запр�
 - Param: _addList
 - Param: _remList
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 210](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L210)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 231](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L231)
 ## noe_client_nat_loadArea
 
 Type: function
@@ -1510,7 +1554,7 @@ Description: обновление и загрузка зоны
 - Param: _arrChDat (optional, default [])
 - Param: _isUpdateFlag (optional, default false)
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 233](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L233)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 254](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L254)
 ## noe_client_nat_procLoad
 
 Type: function
@@ -1518,7 +1562,7 @@ Type: function
 Description: процессор оптимизатора при загруке
 - Param: _aObj
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 246](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L246)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 267](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L267)
 ## noe_client_nat_procUnload
 
 Type: function
@@ -1526,7 +1570,7 @@ Type: function
 Description: процессор оптимизатора при выгрузке
 - Param: _aObj
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 259](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L259)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 280](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L280)
 ## noe_client_nat_procAddEff
 
 Type: function
@@ -1535,7 +1579,7 @@ Description: добавление эффекторв (оптимизатор)
 - Param: _aObj
 - Param: _ltob
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 272](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L272)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 293](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L293)
 ## noe_client_nat_procDelEff
 
 Type: function
@@ -1544,7 +1588,7 @@ Description: удаление эффекторв (оптимизатор)
 - Param: _aObj
 - Param: _ltob
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 280](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L280)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 301](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L301)
 ## noe_client_nat_procUpdEff
 
 Type: function
@@ -1553,7 +1597,7 @@ Description: обновление эффекторв (оптимизатор)
 - Param: _aObj
 - Param: _ltob
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 305](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L305)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 326](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L326)
 ## noe_client_nat_deleteChunks
 
 Type: function
@@ -1562,7 +1606,7 @@ Description:
 - Param: _aObj
 - Param: _arrChIds
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 324](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L324)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 345](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L345)
 ## noe_client_nat_unloadArea
 
 Type: function
@@ -1570,7 +1614,7 @@ Type: function
 Description: выгрузка зоны. обращаю внимание, что проверка состояния загруженности должна производиться снаружи функции
 - Param: _areaObj
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 332](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L332)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 353](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L353)
 ## noe_client_nat_unsubscribeArea
 
 Type: function
@@ -1578,7 +1622,7 @@ Type: function
 Description: снятие клиента с прослушки зоны
 - Param: _areaObj
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 342](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L342)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 363](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L363)
 ## noe_client_nat_nearId
 
 Type: function
@@ -1587,7 +1631,7 @@ Description: находит соседний айди [0,0,0] - no offset; [-1,0
 - Param: _id
 - Param: _xyz
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 356](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L356)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 377](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L377)
 ## noe_client_getAtmosVirtualLight
 
 Type: function
@@ -1595,7 +1639,7 @@ Type: function
 Description: получает объект AtmosVirtualLight на указанной позиции
 - Param: _pos
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 371](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L371)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 392](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L392)
 ## noe_client_getAtmosArea
 
 Type: function
@@ -1603,7 +1647,7 @@ Type: function
 Description: 
 - Param: _pos
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 383](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L383)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 404](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L404)
 # NOEngineClient_NetAtmosPerBlockOptimize.sqf
 
 ## nat_pbo_threadHandle
