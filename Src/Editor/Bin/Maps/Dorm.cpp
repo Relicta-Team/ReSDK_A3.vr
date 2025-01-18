@@ -12,18 +12,18 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=5862;
+		nextID=5934;
 	};
 	class Camera
 	{
 		pos[]={4040.4861,46.232788,4024.8391};
-		dir[]={0.18115203,-0.23187903,0.95585698};
-		up[]={0.043194443,0.97270441,0.22791378};
-		aside[]={0.98262352,-1.433189e-06,-0.18622805};
+		dir[]={-0.50420398,-0.19305433,0.84187472};
+		up[]={-0.099242389,0.98115009,0.16570728};
+		aside[]={0.8580066,-1.5754486e-06,0.51386184};
 	};
 };
 binarizationWanted=0;
-sourceName="resdk_a3";
+sourceName="resdk_fork";
 addons[]=
 {
 	"A3_Characters_F",
@@ -848,7 +848,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""missionName"",""Dorm""],[""version"",4]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""missionName"",""Dorm""],[""version"",5]]}";
 			};
 			id=2205;
 			type="Land_Orange_01_F";

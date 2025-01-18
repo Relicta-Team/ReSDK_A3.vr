@@ -3,10 +3,11 @@
 // sdk.relicta.ru
 // ======================================================
 
-
+#include "..\..\host\lang.hpp"
+namespace(clientData,cd_)
 
 // TODO: change render distance for smd_allInGameMobs
-
+decl(void())
 esc_settings_loader_graphic = {
 	if (esc_settings_curIndex == 0) exitWith {};
 

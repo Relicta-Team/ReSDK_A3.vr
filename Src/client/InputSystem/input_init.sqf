@@ -13,16 +13,19 @@
 #include "inputKeyHandlers.sqf"
 //#include "inputHelper.sqf"
 
+namespace(Input,input_)
 
 (findDisplay 46) displayAddEventHandler ["KeyUp",onGameKeyInputs];
 (findDisplay 46) displayAddEventHandler ["KeyDown",onGameInputs_Down];
 (findDisplay 46) displayAddEventHandler ["MouseButtonUp",onGameMouseInputs];
 
+decl(bool)
 input_catchedEscape = false;
 
 
 
 //Хандлить ли нативную паузу
+decl(bool)
 input_internal_handleNativeEsc = false;
 
 #ifdef DISABLE_SCRIPTED_ESCAPE_MENU

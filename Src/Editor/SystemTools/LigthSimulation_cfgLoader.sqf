@@ -31,11 +31,29 @@ missionNamespace setVariable ["pushFront",
 
 //for init varobjects
 
-#include "..\..\client\LightEngine\ScriptedEffects.hpp"
-
 //light functions init
 #include "..\..\client\LightEngine\ScriptedEffects.sqf"
-//configs init
-#include "..\..\client\LightEngine\ScriptedEffectConfigs.sqf"
 
+;
+//get files
+private _pathPrefix = "src\client\LightEngine\ScriptedConfigs";
+private _flist = [_pathPrefix,true,"*.sqf",true] call file_getFileList;
+if (count _flist == 0) exitWith {
+	["Light configs not found"] call showError;
+};
+private _commentPat = "^\/\/[^\n\r]*";
+call lightSys_preInitialize;
+{
+	["Attempt load scripted config: %1",_x] call printTrace;
+
+	private _content = [_pathPrefix + "\" + _x] call file_read;
+	_content = [_content,_commentPat,""] call regex_replace;
+	if !([_content,false] call lightSys_registerConfig) exitWith {
+		["Build scripted config error on client; File: " + _x] call showError;
+	};
+} foreach _flist;
+
+//load cfgs
+//call le_se_initScriptedLights;
+//prepare cfgs
 call le_se_doSorting;

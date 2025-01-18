@@ -13,37 +13,58 @@
 #include "CraftMenu_RPC.sqf"
 #include "Craft_preview.sqf"
 
+namespace(Craft,craft_)
+
+macro_const(craft_wind_size_x)
 #define CRAFT_WIND_SIZE_X 60
+macro_const(craft_wind_size_y)
 #define CRAFT_WIND_SIZE_Y 80
 
+macro_const(craft_size_category_button)
 #define SIZE_CATEGORY_BUTTON 10
+
+macro_const(craft_size_recipe_text)
 #define SIZE_RECIPE_TEXT 8
 
+macro_func(craft_getRecipesWidget,widget())
 #define getRecipesWidget() (craft_widgets select 0)
+macro_func(craft_setRecipesWidget,void(widget))
 #define setRecipesWidget(_refer) (craft_widgets set [0,_refer])
 
+macro_func(craft_getRecipeInfoWidget,widget())
 #define getRecipeInfoWidget() (craft_widgets select 1)
+macro_func(craft_setRecipeInfoWidget,void(widget))
 #define setRecipeInfoWidget(_refer) (craft_widgets set [1,_refer])
 
+macro_func(craft_getCraftButton,widget())
 #define getCraftButton() (craft_widgets select 2)
+macro_func(craft_setCraftButton,void(widget))
 #define setCraftButton(_refer) (craft_widgets set [2,_refer])
 
+decl(string)
 craft_cxtRpcSourcePtr = "";
 
-isCraftOpen = false;
+decl(bool)
+craft_isMenuOpen = false;
 
+decl(widget[])
 craft_widgets = [widgetNull,widgetNull,widgetNull];
+decl(bool)
 craft_isActiveCraftButton = false;
+decl(map)
 craft_attributes = createHashMap;
-
+decl(int)
 craft_lastPressedRecipeID = -1;
-
+decl(bool)
 craft_loadCateg_isLoading = false;
+decl(float)
 craft_loadCateg_lastLoadingTime = 0;
 
 //режим предпросмотра рецептов (без кнопки крафта)
+decl(bool)
 craft_isPreviewOnlyMode = false;
 
+decl(void(string;any[];bool))
 craft_open = {
 	__nextframedata_ = _this;
 	params ["_visibleCat","_listRecipes",["_onlyPreview",false]];
@@ -66,7 +87,7 @@ craft_open = {
 	
 	private _d = call displayOpen;
 	
-	isCraftOpen = true;
+	craft_isMenuOpen = true;
 	craft_isActiveCraftButton = true;
 	craft_lastPressedRecipeID = -1;
 	craft_loadCateg_isLoading = false;
@@ -147,7 +168,7 @@ craft_open = {
 	};	*/
 };
 
-
+decl(void(string;any[]))
 craft_onLoadCategory = {
 	params ["_cat","_listRecipes"]; //_listRecipes vec2(recipeId,name +\n+ needs +\n+ optdesc)
 	
@@ -219,7 +240,7 @@ craft_onLoadCategory = {
 	} foreach _listRecipes;
 	call craft_clearRecipeInfo;
 };	
-
+decl(void(widget))
 craft_onSelectRecipe = {
 	params ["_wid"];
 	private _id = _wid getVariable "systemID";
@@ -243,6 +264,7 @@ craft_onSelectRecipe = {
 	[true] call craft_setActiveCraftButton;
 };	
 
+decl(void())
 craft_clearRecipeInfo = {
 	craft_lastPressedRecipeID = -1;
 	_txt = getRecipeInfoWidget();
@@ -250,6 +272,7 @@ craft_clearRecipeInfo = {
 	[false] call craft_setActiveCraftButton;
 };	
 
+decl(void(bool))
 craft_setActiveCraftButton = {
 	params ["_mode"];
 	if (_mode == craft_isActiveCraftButton) exitWith {};
@@ -266,6 +289,7 @@ craft_setActiveCraftButton = {
 	};	
 };
 
+decl(void())
 craft_onPressCraft = {
 	if (!craft_isActiveCraftButton || craft_lastPressedRecipeID == -1 || craft_cxtRpcSourcePtr == "") exitWith {
 		errorformat("craft::onPressCraft() - condition error: <%1:%2:%3>",!craft_isActiveCraftButton arg craft_lastPressedRecipeID == -1 arg craft_cxtRpcSourcePtr == "");
@@ -274,10 +298,12 @@ craft_onPressCraft = {
 	rpcSendToServer("tryCraft",vec3(player,craft_cxtRpcSourcePtr,craft_lastPressedRecipeID));
 };
 
+decl(void())
 craft_onClose = {
-	isCraftOpen = false;
+	craft_isMenuOpen = false;
 };
 
+decl(void())
 craft_close = {
 	call craft_onClose;
 	call displayClose;

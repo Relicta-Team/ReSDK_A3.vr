@@ -6,6 +6,9 @@
 #include "..\..\host\engine.hpp"
 #include "interact.hpp"
 
+namespace(Interact,interact_)
+
+macro_def(interact_log_mainHandle)
 #define __log_mainhandle
 
 #ifdef RELEASE
@@ -13,11 +16,13 @@
 #endif
 
 #ifdef __log_mainhandle 
+	macro_func(interact_finalizeMainHandle,void(any))
 	#define ON_FINALIZE(reason) warningformat("Abort - %1",reason);interact_mainHandleLock = true; nextFrame(_codeExit)
 #else
 	#define ON_FINALIZE(reason) interact_mainHandleLock = true;nextFrame(_codeExit)
 #endif
 
+decl(bool)
 interact_mainHandleLock = false;
 
 _upd = {

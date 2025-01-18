@@ -3,22 +3,32 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
 
+namespace(clientData,client_;cd_)
 
+macro_const(cd_preparePlayerPosTimeout)
 #define PREPARE_PLAYER_POS_TIMEOUT 120
 
+macro_const(cd_switchPlayerTimeout)
 #define SWITCH_PLAYER_TIMEOUT 30
 
 #include <..\..\host\ClientManager\ClientController.hpp>
 
+decl(string)
 client_state = "init";
+decl(string())
 client_getState = {client_state};
+decl(string(string))
 client_setState = {client_state = _this};
+decl(bool())
 client_isInGame = {client_state == "game"};
+decl(bool())
 client_isInLobby = {client_state == "lobby"};
 
 // Подготавливает позицию персонажа для спавна
-_prepPlayerPos = {
+decl(void(vector3;actor))
+cd_prepPlayerPos = {
 	params ["_pos","_mob"];
 
 	if !(call noe_client_isEnabled) then {
@@ -49,9 +59,10 @@ _prepPlayerPos = {
 		}
 	endAsyncInvoke
 
-}; rpcAdd("prepPlayerPos",_prepPlayerPos);
+}; rpcAdd("prepPlayerPos",cd_prepPlayerPos);
 
 // Внутренний интрфейс подключения к мобу или безголовому клиенту
+decl(void(bool;actor;int))
 cd_processConnection = {
 	params ["_isLinkTo","_mob","_prepareNextMode"];
 
@@ -175,15 +186,17 @@ cd_processConnection = {
 };
 
 //Подключаемся к мобу
+decl(void(actor;int))
 cd_connectToMob = {
 	params ["_mob",["_nextAction",-1]];
 
 	[true,_mob,_nextAction] call cd_processConnection;
 };
 
-_onPlayingEnd = {
+decl(void(actor;int))
+cd_onPlayingEnd = {
 	params ["_mob",["_nextAction",-1]];
 
 	[false,_mob,_nextAction] call cd_processConnection;
 
-}; rpcAdd("onPlayingEnd",_onPlayingEnd);
+}; rpcAdd("onPlayingEnd",cd_onPlayingEnd);

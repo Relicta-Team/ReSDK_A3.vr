@@ -38,11 +38,10 @@
 
 init_function(vcom_emit_io_initialize)
 {
-	vcom_emit_io_configPath = "src\client\LightEngine\ScriptedEffectConfigs.sqf";
-	vcom_emit_io_configNames = "src\client\LightEngine\ScriptedEffects.hpp";
-	vcom_emit_io_configFilesFormatter = "src\client\LightEngine\%1";
+	vcom_emit_io_configFilesFormatter = "src\client\LightEngine\ScriptedConfigs\%1";
 	vcom_emit_io_configFileNamePathFormatter = "src\client\LightEngine\ScriptedConfigs\%1.sqf";
-	vcom_emit_io_configIncludePattern = "#include ""ScriptedConfigs\%1.sqf""";
+
+	vcom_emit_io_configsDirectory = "src\client\LightEngine\ScriptedConfigs";
 
 	vcom_emit_io_map_configs = createHashMap;
 		//ключ в верхнем регистре, знач. массив элементов: type, typeshort, customEvents, alias, settings
@@ -78,8 +77,6 @@ init_function(vcom_emit_io_initialize)
 	vcom_emit_io_enumAssocKeyInt = createHashMap;//int is string...
 
 	vcom_emit_io_internal_isEnumAssocLoaded = false;
-
-	vcom_emit_io_configPathEnums = "src\client\LightEngine\LightEngine.hpp";
 }
 
 function(vcom_emit_io_hasConfig) {(tolower _this) in vcom_emit_io_list_allConfigsNames}
@@ -97,22 +94,35 @@ function(vcom_emit_io_loadEnumAssoc)
 	vcom_emit_io_enumAssocKeyStr = createHashMap;
 	vcom_emit_io_enumAssocKeyInt = createHashMap;
 
-	private _cfgData = ([vcom_emit_io_configPathEnums] call file_read) splitString endl;
-	modvar(_cfgData) + (([vcom_emit_io_configNames] call file_read) splitString endl);
-	private _patReg = "^\#define\s+(S?LIGHT_\w+)\s+(\d+)/";
+	private _flist = [vcom_emit_io_configsDirectory,true,"*.sqf",true] call file_getFileList;
+	if (count _flist == 0) exitWith {
+		["Light configs not found"] call showError;
+	};
+	private _patHeader = "regScriptEmit\(SLIGHT_(\w+)\)";
+
+	private _cfgIndex = 2100;
 	{
-		if ([_x,_patReg] call regex_isMatch) then {
-			private _name = [_x,_patReg,1] call regex_getFirstMatch;
-			private _val = [_x,_patReg,2] call regex_getFirstMatch;
-			_val = _val;
-			vcom_emit_io_enumAssocKeyStr set [_name,_val];
-			vcom_emit_io_enumAssocKeyInt set [_val,_name];
+		_fp = format[vcom_emit_io_configFilesFormatter,_x];
+		private _content = [_fp] call file_read;
+		if (_content=="") exitWith {
+			setLastError("Cannot load file " + _fp);
 		};
-	} foreach _cfgData;
+		if !([_content,_patHeader] call regex_isMatch) exitWith {
+			setLastError("Cannot load config name from " + _fp);
+		};
+		private _name = [_content,_patHeader,1] call regex_getFirstMatch;
+		private _valStr = str _cfgIndex;
+
+		vcom_emit_io_enumAssocKeyStr set [_name,_valStr];
+		vcom_emit_io_enumAssocKeyInt set [_valStr,_name];
+
+		INC(_cfgIndex);
+	} foreach _flist;
 
 	vcom_emit_io_internal_isEnumAssocLoaded = true;
 }
 
+//!deprecated function
 function(vcom_emit_io_parseConfigName)
 {
 	params ["_cfg",["_customFormatOnErr","%1"]];
@@ -123,25 +133,32 @@ function(vcom_emit_io_parseConfigName)
 	};
 }
 
+//возвращает имя конфига без префикса slight_
+function(vcom_emit_io_parseScriptedConfigName)
+{
+	params ["_cfg",["_customFormatOnErr","%1"]];
+	if ([_cfg,"SLIGHT_(\w+)\b"] call regex_isMatch) then {
+		[_cfg,"SLIGHT_(\w+)\b",1] call regex_getFirstMatch
+	} else {
+		format[_customFormatOnErr,_cfg]
+	};
+}
+
 //Возвращает массив с файлами загрузчика
 function(vcom_emit_io_readConfigLoader)
 {
-	params ["_cfgPathes"];
+	params ["_cfgDir"];
 	#ifdef ENABLE_TRACE_MESSAGES_CFGLOADER
 	["Start %1",__FUNC__] call printTrace;
 	#endif
-	private _list = _cfgPathes splitString endl;
-	private _flist = [];
+
 	private _output = [];
-	{
-		if ([_x,"#include",false] call stringStartWith) then {
-			_path = [_x,'"(.*)"',1] call regex_getFirstMatch;
-			_flist pushBack _path;
-			#ifdef ENABLE_TRACE_MESSAGES_CFGLOADER
-			["Added cfgloader path: %1",_path] call printTrace;
-			#endif
-		};
-	} foreach _list;
+
+	private _flist = [_cfgDir,true,"*.sqf",true] call file_getFileList;
+	if (count _flist == 0) exitWith {
+		["Light configs not found"] call showError;
+		_output
+	};
 
 	{
 		_fp = format[vcom_emit_io_configFilesFormatter,_x];
@@ -165,24 +182,8 @@ function(vcom_emit_io_readConfigs)
 	vcom_emit_io_map_configs = createHashMap;
 	vcom_emit_io_list_allConfigsNames = [];
 
-	if !([vcom_emit_io_configPath] call file_exists) exitwith {
-		setLastError("File config data not found: " + vcom_emit_io_configPath);
-	};
-	if !([vcom_emit_io_configNames] call file_exists) exitwith {
-		setLastError("File config id's not found: " + vcom_emit_io_configNames);
-	};
-
-	//read line by line
-	private _cfgData = ([vcom_emit_io_configPath] call file_read);
-	if (_cfgData == "") exitWith {
-		setLastError("Config data is empty: " + vcom_emit_io_configPath);
-	};
-	if ([_cfgData,"regScriptEmit"] call regex_isMatch) exitWith {
-		setLastError("Config version is obsoleted. Use ""src\client\lightengine\export_scripted_configs.exe"" for update configs");
-	};
-
-	//_cfgData = _cfgData splitString endl;
-	_cfgData = [_cfgData] call vcom_emit_io_readConfigLoader;
+	//get configs
+	private _cfgData = [vcom_emit_io_configsDirectory] call vcom_emit_io_readConfigLoader;
 
 
 	private _isInMLComment = false;
@@ -265,8 +266,16 @@ function(vcom_emit_io_readConfigs)
 					INC(_segZoneIdx);
 					continue;
 				};
+				//reading custom scripted events
 				if (_segZoneIdx == 1) exitwith {
-					_cevents = [_x,"(.*)(?:\,)/",1] call regex_getFirstMatch;
+					_cevents = [_x,"(?:\s*)(.*)(?!\,)/",1] call regex_getFirstMatch;
+					if !([_cevents,","] call stringEndWith) exitwith {
+						setLastError("Config custom events reading error from " + _curConfigName);
+					};
+					
+					//endline removing last ','
+					_cevents = _cevents select [0,count _cevents-1];
+
 					_segZoneData pushBack ["customEvents",_cevents];
 					#ifdef ENABLE_TRACE_MESSAGES_IOCFG
 					["read events >>> %1",_cevents] call printTrace;
@@ -347,17 +356,16 @@ function(vcom_emit_io_readConfigs)
 	vcom_emit_io_internal_isCfgListLoaded = true;
 }
 
+//сохранятор конфигов. vcom_emit_io_list_allConfigsNames для сохранения всех конфигов. имена конфигов без префиксов
 function(vcom_emit_io_saveAllConfigs)
 {
+	params ["_cfgListLoader"];
 	if (count vcom_emit_io_map_configs == 0) exitWith {
 		["%1 - no configs found",__FUNC__] call printError;
 	};
 	
 	private _tabSim = toString[9];
 	private _output = "";
-	private _outputLoader = "";
-	private _indexesOuptut = "";
-	private _postIndexesOutput = "";
 	private _copyright = ["src\Editor\Bin\copyright.sqf"] call file_read;
 
 	private _checkNeedCommaSetting = {
@@ -382,14 +390,10 @@ function(vcom_emit_io_saveAllConfigs)
 		if (count _data > 0) then {
 			_output = ""; //cleanup output
 
-			modvar(_outputLoader) + endl + (format[vcom_emit_io_configIncludePattern,_fullName]);
-
 			private _cfgSaveName = format[vcom_emit_io_configFileNamePathFormatter,_fullName];
 
 			modvar(_output) + endl + (format["regScriptEmit(%1)",_fullName]);
 
-			modvar(_indexesOuptut) + endl + format["#define %1 %2",_fullName,_configId];
-			modvar(_postIndexesOutput) + endl +_tabSim+ format["%1_var = %2;",_fullName,_configId];
 			INC(_configId);
 
 			{
@@ -399,7 +403,7 @@ function(vcom_emit_io_saveAllConfigs)
 				modvar(_output) + endl + _tabSim+_tabSim + str _tp + (call _checkNeedCommaData);
 				if ("customEvents" in _x) then {
 					//без табов потому что данные сырые
-					modvar(_output) + endl + (_x get "customEvents") + (call _checkNeedCommaData);
+					modvar(_output) + endl + _tabSim+_tabSim + (_x get "customEvents") + (call _checkNeedCommaData);
 				};
 				if ("alias" in _x) then {
 					modvar(_output) + endl + _tabSim+_tabSim + (format["_emitAlias(%1)",str(_x get "alias")]);
@@ -420,47 +424,15 @@ function(vcom_emit_io_saveAllConfigs)
 		};
 		
 
-	} foreach vcom_emit_io_list_allConfigsNames;
+	} foreach _cfgListLoader;
+		
+	//reload enums
+	call vcom_emit_io_loadEnumAssoc;
 
-	//preare evaluated id
-
-	//["Запуск процедуры сохранения конфигураций",5] call showInfo;
-	["Start saving config files"] call printLog;
-	
-	vcom_emit_internal_str_cfgNamesContent = _copyright + _indexesOuptut + endl + endl + 
-		"#ifdef SCRIPT_EMIT_EVAL_SERVER" + endl +
-		_postIndexesOutput + endl +
-		"#endif"
-	;
-
-	[vcom_emit_io_configPath,
-		_copyright + _outputLoader,null,{
-		["Config saved"] call printLog;
-
-		[vcom_emit_io_configNames,vcom_emit_internal_str_cfgNamesContent
-		,null,{
-			["Config names saved"] call printLog;
-			
-			//reload enums
-			call vcom_emit_io_loadEnumAssoc;
-
-			if (lsim_mode) then {
-				call lsim_internal_buildScriptedConfigs;
-				call lsim_internal_rebuildAllLights;
-			};
-		},{
-			["Cannot save %1",vcom_emit_io_configNames] call printError;
-			["Cannot save file " + vcom_emit_io_configNames] call showError;	
-		}] call file_writeAsync;
-
-
-	},{
-		["Cannot save %1",vcom_emit_io_configPath] call printError;
-		["Cannot save file " + vcom_emit_io_configPath] call showError;	
-	}] call file_writeAsync;
-
-	
-	
+	if (lsim_mode) then {
+		call lsim_internal_buildScriptedConfigs;
+		call lsim_internal_rebuildAllLights;
+	};	
 }
 
 function(vcom_emit_io_openWindow_selectConfigLoad)
@@ -560,7 +532,7 @@ function(vcom_emit_io_loadConfig)
 		
 		//["----- data(%1): %2",_cfgSect get "alias",_data] call printTrace;
 
-		private _newObj = [_emitType,_cfgSect get "alias",_data] call vcom_emit_createEmitter;
+		private _newObj = [_emitType,_cfgSect get "alias",_data,_cfgSect get "customEvents"] call vcom_emit_createEmitter;
 
 		{
 			_x params ["_rule","_ctx"];
@@ -605,6 +577,7 @@ function(vcom_emit_internal_handleEmitterParseValues)
 		["Searching data offset warning; Key %1 not found",_key] call printWarning;
 	};
 
+	//todo fix issue float values random shift
 	_outData set [_offsetIndex,call compile _cachedValue];
 }
 
@@ -687,7 +660,7 @@ function(vcom_emit_io_saveCurrentConfig)
 				{ 
 					private _curData = call vcom_emit_io_internal_serializeEmittersToConfig;
 					vcom_emit_io_map_configs set [toUpper vcom_emit_io_currentConfig,_curData];
-					
+					[[tolower vcom_emit_io_currentConfig]] call vcom_emit_io_saveAllConfigs;
 					[format["Конфиг %1 перезаписан",toUpper vcom_emit_io_currentConfig],5] call showInfo;
 				} 
 			], 
@@ -704,7 +677,7 @@ function(vcom_emit_io_saveCurrentConfig)
 
 	vcom_emit_io_list_allConfigsNames pushBack (tolower vcom_emit_io_currentConfig);
 	vcom_emit_io_map_configs set [toUpper vcom_emit_io_currentConfig,_curData];
-
+	[[tolower vcom_emit_io_currentConfig]] call vcom_emit_io_saveAllConfigs;
 	[format["Конфиг %1 сохранён",toUpper vcom_emit_io_currentConfig],5] call showInfo;
 }
 
@@ -783,8 +756,8 @@ function(vcom_emit_io_internal_serializeEmittersToConfig)
 		_el = createHashMap;
 		//type, typeshort, customEvents, alias, settings
 		_el set ["alias",_x getvariable "unicalIDStr"];
-		//TODO custom events
-		_el set ["customEvents","		null"];
+		
+		_el set ["customEvents",_x getvariable ["serializedCustomEvents","null"]];
 		
 		_emType = _x getvariable "emitType";
 		_el set ["type",_emType];

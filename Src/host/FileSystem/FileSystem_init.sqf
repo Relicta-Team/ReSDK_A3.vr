@@ -10,6 +10,7 @@
 
 fso_map_tree = createhashMap; //flat object
 
+
 //initialize filesystem
 fso_init = {
 	private _nativeCollection = addonFiles ["src\"];
@@ -17,6 +18,10 @@ fso_init = {
 	private _useNativeCollector = count _nativeCollection > 0;
 	if (!_useNativeCollector) then {
 		
+		#ifdef EDITOR_OR_RBUILDER
+			#include "..\Tools\EditorDebug\EditorDebug_io.sqf"
+		#endif
+
 		if isNull(file_getFileList) exitWith {
 			setLastError("file::getFileList function not found");
 		};

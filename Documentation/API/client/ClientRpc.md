@@ -11,12 +11,12 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\ClientRpc\clientRpc.hpp at line 7](../../../Src/client/ClientRpc/clientRpc.hpp#L7)
+File: [client\ClientRpc\clientRpc.hpp at line 11](../../../Src/client/ClientRpc/clientRpc.hpp#L11)
 ## rpcAdd(name,code)
 
 Type: constant
 
-Description: #endif
+Description: 
 - Param: name
 - Param: code
 
@@ -24,7 +24,7 @@ Replaced value:
 ```sqf
 [name,code] call client_addEvent
 ```
-File: [client\ClientRpc\clientRpc.hpp at line 13](../../../Src/client/ClientRpc/clientRpc.hpp#L13)
+File: [client\ClientRpc\clientRpc.hpp at line 17](../../../Src/client/ClientRpc/clientRpc.hpp#L17)
 ## rpcAddGlobal(name,code)
 
 Type: constant
@@ -37,7 +37,7 @@ Replaced value:
 ```sqf
 [name,code] call rpc_addEventGlobal
 ```
-File: [client\ClientRpc\clientRpc.hpp at line 15](../../../Src/client/ClientRpc/clientRpc.hpp#L15)
+File: [client\ClientRpc\clientRpc.hpp at line 19](../../../Src/client/ClientRpc/clientRpc.hpp#L19)
 ## rpcRemove(name,id)
 
 Type: constant
@@ -50,7 +50,7 @@ Replaced value:
 ```sqf
 [name,id] call client_removeEvent
 ```
-File: [client\ClientRpc\clientRpc.hpp at line 17](../../../Src/client/ClientRpc/clientRpc.hpp#L17)
+File: [client\ClientRpc\clientRpc.hpp at line 21](../../../Src/client/ClientRpc/clientRpc.hpp#L21)
 ## rpcRemoveGlobal(name,id)
 
 Type: constant
@@ -63,7 +63,7 @@ Replaced value:
 ```sqf
 [name,id] call rpc_removeEventGlobal
 ```
-File: [client\ClientRpc\clientRpc.hpp at line 19](../../../Src/client/ClientRpc/clientRpc.hpp#L19)
+File: [client\ClientRpc\clientRpc.hpp at line 23](../../../Src/client/ClientRpc/clientRpc.hpp#L23)
 ## rpcCall(name,args)
 
 Type: constant
@@ -76,7 +76,7 @@ Replaced value:
 ```sqf
 [name,args] call client_callEvent
 ```
-File: [client\ClientRpc\clientRpc.hpp at line 21](../../../Src/client/ClientRpc/clientRpc.hpp#L21)
+File: [client\ClientRpc\clientRpc.hpp at line 25](../../../Src/client/ClientRpc/clientRpc.hpp#L25)
 ## rpcSendToServer(name,args)
 
 Type: constant
@@ -89,7 +89,7 @@ Replaced value:
 ```sqf
 [name,args] call client_sendToServer
 ```
-File: [client\ClientRpc\clientRpc.hpp at line 23](../../../Src/client/ClientRpc/clientRpc.hpp#L23)
+File: [client\ClientRpc\clientRpc.hpp at line 27](../../../Src/client/ClientRpc/clientRpc.hpp#L27)
 # clientrpc_init.sqf
 
 ## log_client_rpc
@@ -103,7 +103,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\ClientRpc\clientrpc_init.sqf at line 8](../../../Src/client/ClientRpc/clientrpc_init.sqf#L8)
+File: [client\ClientRpc\clientrpc_init.sqf at line 11](../../../Src/client/ClientRpc/clientrpc_init.sqf#L11)
 ## rpc_log(event,args)
 
 Type: constant
@@ -118,7 +118,7 @@ Replaced value:
 ```sqf
 'debug_console' callExtension format['[NET::LOG::CLIENT]:    <%1> send %3 bytes to SERVER with %2',event,args,args call oop_getTypeSizeFull]
 ```
-File: [client\ClientRpc\clientrpc_init.sqf at line 19](../../../Src/client/ClientRpc/clientrpc_init.sqf#L19)
+File: [client\ClientRpc\clientrpc_init.sqf at line 23](../../../Src/client/ClientRpc/clientrpc_init.sqf#L23)
 ## rpc_simple(data)
 
 Type: constant
@@ -132,7 +132,7 @@ Replaced value:
 ```sqf
 'debug_console' callExtension format['[NET::LOG]:    %1',data]
 ```
-File: [client\ClientRpc\clientrpc_init.sqf at line 20](../../../Src/client/ClientRpc/clientrpc_init.sqf#L20)
+File: [client\ClientRpc\clientrpc_init.sqf at line 24](../../../Src/client/ClientRpc/clientrpc_init.sqf#L24)
 ## rpc_log(event,args)
 
 Type: constant
@@ -147,49 +147,49 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\ClientRpc\clientrpc_init.sqf at line 22](../../../Src/client/ClientRpc/clientrpc_init.sqf#L22)
+File: [client\ClientRpc\clientrpc_init.sqf at line 26](../../../Src/client/ClientRpc/clientrpc_init.sqf#L26)
 ## client_addEvent
 
 Type: function
 
-Description: Добавляет обработчик событий на стороне клиента
+Description: 
 - Param: _eventName
 - Param: _eventCode
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 26](../../../Src/client/ClientRpc/clientrpc_init.sqf#L26)
+File: [client\ClientRpc\clientrpc_init.sqf at line 31](../../../Src/client/ClientRpc/clientrpc_init.sqf#L31)
 ## client_removeEvent
 
 Type: function
 
-Description: Удаляет обработчик событий на стороне клиента
-- Param: _eventName
-- Param: _eventId
-
-File: [client\ClientRpc\clientrpc_init.sqf at line 32](../../../Src/client/ClientRpc/clientrpc_init.sqf#L32)
-## rpc_removeEventGlobal
-
-Type: function
-
-Description: Удаляет глобальный обработчик событий на стороне клиента
+Description: 
 - Param: _eventName
 - Param: _eventId
 
 File: [client\ClientRpc\clientrpc_init.sqf at line 38](../../../Src/client/ClientRpc/clientrpc_init.sqf#L38)
+## rpc_removeEventGlobal
+
+Type: function
+
+Description: 
+- Param: _eventName
+- Param: _eventId
+
+File: [client\ClientRpc\clientrpc_init.sqf at line 45](../../../Src/client/ClientRpc/clientrpc_init.sqf#L45)
 ## client_callEvent
 
 Type: function
 
-Description: Вызывает клиентский обработчик событий
+Description: 
 - Param: _eventName
 - Param: _args
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 44](../../../Src/client/ClientRpc/clientrpc_init.sqf#L44)
+File: [client\ClientRpc\clientrpc_init.sqf at line 52](../../../Src/client/ClientRpc/clientrpc_init.sqf#L52)
 ## client_sendToServer
 
 Type: function
 
-Description: Отправляет событие на сервер
+Description: 
 - Param: _eventName
 - Param: _eventargs
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 50](../../../Src/client/ClientRpc/clientrpc_init.sqf#L50)
+File: [client\ClientRpc\clientrpc_init.sqf at line 59](../../../Src/client/ClientRpc/clientrpc_init.sqf#L59)

@@ -8,10 +8,9 @@
 */
 
 #include "..\..\host\Atmos\Atmos.hpp"
-#include "..\LightEngine\ScriptedEffects.hpp"
 
 
-#define ACLI_TYPE_FIRE [SLIGHT_ATMOS_FIRE_1,SLIGHT_ATMOS_FIRE_2,SLIGHT_ATMOS_FIRE_3]
+#define ACLI_TYPE_FIRE ["SLIGHT_ATMOS_FIRE_1" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_FIRE_2" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_FIRE_3" call lightSys_getConfigIdByName]
 
 #define ACLI_DATA_OBJECTS 0
 #define ACLI_DATA_METAINFO 1

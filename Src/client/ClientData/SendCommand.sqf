@@ -3,11 +3,22 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
+namespace(ClientData,cd_)
+
 #include <..\WidgetSystem\widgets.hpp>
 
+macro_const(cd_SC_SIZE_W)
 #define SC_SIZE_W 40
+macro_const(cd_SC_SIZE_H)
 #define SC_SIZE_H 30
+
+macro_const(cd_MAX_COMMANDS_HISTORY_COUNT)
 #define CD_MAX_COMMANDS_HISTORY_COUNT 100
+
+decl(string[])
+cd_commandHistoryBuffer = [];
+
 #ifdef EDITOR
 	if isNull(cd_commandHistoryBuffer) then {
 		cd_commandHistoryBuffer = [];
@@ -21,6 +32,7 @@
 #endif
 
 //Открывает окно отправки сообщения на сервер
+decl(void(bool))
 cd_openSendCommandWindow = {
 	
 	params [["_isLobbyContext",false]];
@@ -253,6 +265,7 @@ cd_openSendCommandWindow = {
 	//endif EDITOR
 };
 
+decl(void())
 cd_closeSendCommandWindow = {
 	if (getDisplay getVariable ["cd_sendCommand_isLobbyContext",false]) exitWith {
 
@@ -268,6 +281,7 @@ cd_closeSendCommandWindow = {
 	call displayClose;
 };
 
+decl(void())
 cd_openAhelp = {
 	if (["cd_openAhelp",5] call input_spamProtect) exitWith {
 		["Подождите немного прежде чем заново попытаться открыть это окно","system"] call chatPrint; 
@@ -277,23 +291,29 @@ cd_openAhelp = {
 	rpcSendToServer("processClientCommand",_args);
 };
 
-_onLocalCmdCall = {
+decl(void(string;any))
+cd_onLocalCmdCall = {
 	params ["_cmd",["_args",0]];
 
 	_cmdcode = (cd_commands_localCommandsList get _cmd);
 	if isNullVar(_cmdcode) exitWith {
 		errorformat("onCallbackClientCommand() - command %1 not found",_cmd);
 	};
+	cd_internal_cmd_thisArguments = _args;
+	0 call (_cmdcode select 0);
 
-	_args call (_cmdcode select 0);
+}; rpcAdd("onLocalCommandCalled",cd_onLocalCmdCall);
 
-}; rpcAdd("onLocalCommandCalled",_onLocalCmdCall);
-
+decl(map<string;any>)
 cd_commands_localCommandsList = createHashMap;
 
+inline_macro
 #define localCommand(name) _cd_map_dataCode = []; cd_commands_localCommandsList set [name,_cd_map_dataCode]; _cd_map_dataCode pushBack
 
-#define arguments _args
+macro_func(cd_localCmdGetArgs,any())
+#define arguments cd_internal_cmd_thisArguments
+
+decl(any) cd_internal_cmd_thisArguments = 0;
 
 /***************************************************************************************************
 ----------------------------------------------------------------------------------------------------

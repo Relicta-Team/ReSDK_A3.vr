@@ -97,7 +97,8 @@ function(vcom_emit_closeVisualWindow)
 
 function(vcom_emit_closeVisualWindowHandled)
 {
-	call vcom_emit_io_saveAllConfigs;
+	//! конфиги не должны сохраняться при выходе
+	//[vcom_emit_io_list_allConfigsNames] call vcom_emit_io_saveAllConfigs;
 
 	call displayClose;
 	false call rendering_setInGameHDR;
@@ -622,7 +623,7 @@ function(vcom_emit_relpos_hasSelectedEmitter) {!isNullReference(call vcom_emit_r
 
 function(vcom_emit_createEmitter)
 {
-	params ["_emitType",["_emitterName",""],["_dataList",[]]];
+	params ["_emitType",["_emitterName",""],["_dataList",[]],["_serializedEvents","null"]];
 	if !(_emitType in vcom_emit_emitterTypeAssoc) exitwith {
 		setLastError(__FUNC__ + " - Wrong emitter type: " + _emitType);
 	};
@@ -642,6 +643,8 @@ function(vcom_emit_createEmitter)
 
 	_o setvariable ["emitType",_emitType];
 	_o setvariable ["index",_allEmitters pushBack _o];
+
+	_o setVariable ["serializedCustomEvents",_serializedEvents];
 	
 	//relpos component
 	private _defPos = [0,0,0]; private _defOrient = [0,0,0];

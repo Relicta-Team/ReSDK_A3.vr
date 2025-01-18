@@ -7,43 +7,31 @@
 #include <..\oop.hpp>
 #include <..\GameObjects\GameConstants.hpp>
 
-private __slt_configs = [];
-
-#define sltInit(cfg) _new_seg_slt = [cfg]; __slt_configs pushBack _new_seg_slt; _new_seg_slt pushBack
-
-#define slt_createLight() ("#lightpoint" createVehicleLocal [0,0,0])
-#define slt_createObj(type) (call {private __o = (type) createVehicleLocal [0,0,0]; __o allowDamage false; __o})
-#define sourceObject _obj
-#define lightObject _lt
-#define linkToSource(obj,vecoffset) obj setPosAtl (getPosATL sourceObject); obj setVectorDirAndUp [vectorDirVisual sourceObject,vectorUpVisual sourceObject]
-#define linkLightToSource(obj,vecoffset) obj lightAttachObject [sourceObject,vecoffset]
-
-#include "ServerLighting_configs.sqf"
-
-{
-	_x params ["_id","_code"];
-	missionNamespace setVariable [format["slt_cfg_id_%1",_id],_code];
-} foreach __slt_configs;
-
-#define sourceObject _wObj
-#define lightObject _firstLight
-
 slt_map_scriptCfgs = createHashMap;
 
-#define regScriptEmit(type) _semDat = []; slt_map_scriptCfgs set ['type',_semDat]; slt_cfg_id_##type = { \
-	params ['sourceObject']; \
-	(slt_map_scriptCfgs get 'type') call slt_handleScriptedCfg; \
-}; _semDat append [
-#define endScriptEmit  ];
-#define _emitAlias(v) 
+//кэш загрузчика серверный конфигов эмиттеров
+slt_internal_fileListBuffer = [];
 
+slt_initScriptedLights = {
+	private _flist = ["src\client\LightEngine\ScriptedConfigs",".sqf",true] call fso_getFiles;
+	assert_str(count _flist > 0,"Scripted configs not found");
+	slt_internal_fileListBuffer = _flist;
+	call lightSys_preInitialize;
+	private _content = "";
+	{
+		_content = preprocessFile _x;
+		if !([_content,true] call lightSys_registerConfig) exitWith {
+			setLastError("Build scripted config error on server; File: " + _x);
+		};
+	} foreach _flist;
 
-#include "..\..\client\LightEngine\ScriptedEffectConfigs.sqf"
+	#ifdef EDITOR
+	assert_str(!isNull(le_initializeScriptedConfigs),"Initialize scripted configs error - function not found");
+	call le_initializeScriptedConfigs;
+	#endif
+};
 
-//Опеределяем предкомпилированные константы
-#define SCRIPT_EMIT_EVAL_SERVER
-
-#include "..\..\client\LightEngine\ScriptedEffects.hpp"
+call slt_initScriptedLights;
 
 slt_handleScriptedCfg = {
 	private ["_t","_events"];
@@ -88,17 +76,19 @@ slt_handleScriptedCfg = {
 		} count (_x select [2,(count _x) - 2]);
 	};
 	slt_scriptedCfgMapHandlers = createHashMapFromArray [
+		//_source is outref
 		["linkToSrc",{
 			_offset = _this select 1;
 			if (_autolink) then {
-				(_this select 0) attachTo [sourceObject,_offset];
+				(_this select 0) attachTo [_source,_offset];
 			} else {
 				(_this select 0) attachTo [_obj,_offset,_select];
 			};
 		}],
+		//_source is outref
 		["linkToLight",{
 			if (_autolink) then {
-				(_this select 0) attachTo [sourceObject,(_this select 1)];
+				(_this select 0) attachTo [_source,(_this select 1)];
 			} else {
 				(_this select 0) attachTo [_firstLight,(_this select 1),_select];
 			};
@@ -127,7 +117,7 @@ slt_handleScriptedCfg = {
 		["setLightVolumeShape",{(_this select 0) setLightVolumeShape (_this select 1)}]
 	];
 
-slt_const_dummyMob = [10,10,0] call gm_createMob;
+slt_const_dummyMob = objNull;
 
 slt_create = {
 	params ["_obj","_cfg",["_autolink",true],["_select",""]];
@@ -142,6 +132,12 @@ slt_create = {
 		errorformat("slt::create() - null config %1",_cfg);
 		objNUll
 	};
+
+	//initialize dummy mob first time
+	if isNullReference(slt_const_dummyMob) then {
+		slt_const_dummyMob = [10,10,0] call gm_createMob;
+	};
+
 	//in case with scripted emitters its (list of objects)
 	private _o = [_obj] call _code;
 	if (_autolink) then {
@@ -191,7 +187,7 @@ slt_scriptCfg_doSorting = {
 			
 			//Частицы нам не нужны
 			_cfgSegments resize 0;
-			_cfgSegments pushBack [ "lt",null,["linkToSrc",[0,0,0]] ];
+			_cfgSegments pushBack [ "lt",null,["alias","autogen_light"],["linkToSrc",[0,0,0]] ];
 
 		} else {
 			//не все - частицы
@@ -204,7 +200,7 @@ slt_scriptCfg_doSorting = {
 			};
 			//Если эмиттеров не осталось - добавим dummy эмиттер
 			if (count _cfgSegments == 0) then {
-				_cfgSegments pushBack [ "lt",null,["linkToSrc",[0,0,0]] ];
+				_cfgSegments pushBack [ "lt",null,["alias","autogen_light"],["linkToSrc",[0,0,0]] ];
 			};
 		};
 
@@ -227,5 +223,7 @@ slt_scriptCfg_doSorting = {
 
 	} foreach slt_map_scriptCfgs;
 };
+
+
 //autosorting
 call slt_scriptCfg_doSorting;

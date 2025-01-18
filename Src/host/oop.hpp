@@ -73,7 +73,8 @@
 
 //CONST DISABLED
 //const modif. Create const inside type: const var(PI,3.14);
-#define const _isConstant = true;
+//!do not enable after lang spec
+//#define const _isConstant = true; assert(false);
 	#define __set_const_value(var,val) _pt_obj setvariable ['cst_##var',val]
 
 #define __internal_flag_processor(flagname,act) if (!isnil 'flagname') then {act; flagname = nil}

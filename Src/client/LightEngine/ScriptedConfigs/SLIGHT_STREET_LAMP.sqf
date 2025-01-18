@@ -6,7 +6,7 @@
 regScriptEmit(SLIGHT_STREET_LAMP)
 	[
 		"ltd",
-		null,
+		[["scr_volume_shape",["a3\data_f\volumelightflashlight", [4, 3, 4]]]],
 		_emitAlias("Направленный свет 1")
 		["linkToSrc",[0,0,3.4]],
 		["setOrient",[0,-90,0]],

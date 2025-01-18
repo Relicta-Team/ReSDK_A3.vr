@@ -5,14 +5,21 @@
 
 
 #include <..\..\host\keyboard.hpp>
+#include "..\..\host\lang.hpp"
 
+namespace(Input,input_)
 
+decl(map)
 input_map_keyName = createHashMap;
+decl(string[])
 input_keyList_reversedAssoc = [];
 
+macro_func(input_bindKey,void(string;int))
 #define bindKey(name,val) input_map_keyName set [name,val];
-#define bindMouse(name,val) bindKey(mouse_key_prefix  + name,val)
+inline_macro
 #define mouse_key_prefix "@"
+macro_func(input_bindMouse,void(string;int))
+#define bindMouse(name,val) bindKey(mouse_key_prefix  + name,val)
 
 bindKey("ESCAPE",0x01)
 bindKey("1",0x02)
@@ -185,6 +192,7 @@ bindMouse("MIDDLE",2)
 } foreach input_map_keyName;
 
 // Получает значение ключа из клавиатуры
+decl(int(string;bool))
 input_getKeyValue = {
 	params ["_str","_isMouse"];
 	if (_isMouse) then {_str = mouse_key_prefix + _str};
@@ -200,6 +208,7 @@ input_getKeyValue = {
 };	
 
 //Получает массив всех названий кнопок
+decl(string[](int))
 input_getAllKeyNames = {
 	params ["_idx"];
 	private _list = [];

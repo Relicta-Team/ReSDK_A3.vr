@@ -28,12 +28,12 @@ class(EffectAsStruct) extends(ILightibleStruct)
 		objParams_1(_ef);
 
 		private _efstr = ["dust_pieces_10m","dust_clouds_10m","govnelin","rotten_human"];
-		private _efenm = [EFF_DUST_PARTICLES,EFF_DUST_CLOUDS,EFF_GREEN_DUST,EFF_ROTTEN_HUMAN];
+		private _efenm = ["SLIGHT_EFF_DUST_PARTICLES" call lightSys_getConfigIdByName,"SLIGHT_EFF_DUST_CLOUDS" call lightSys_getConfigIdByName,"SLIGHT_EFF_DUST_GREEN" call lightSys_getConfigIdByName,"SLIGHT_EFF_DUST_ROTTEN_HUMAN" call lightSys_getConfigIdByName];
 
 		private _idx = _efstr find _ef;
 		if (_idx == -1) exitWith {
 			warningformat("EffectAsStruct::getEffectEnum() - cant find effect <%1> in string list. Return by default EFF_DUST_PARTICLES",_ef);
-			EFF_DUST_PARTICLES //some random enum effect
+			"SLIGHT_EFF_DUST_PARTICLES" call lightSys_getConfigIdByName //some random enum effect
 		};
 
 		_efenm select _idx

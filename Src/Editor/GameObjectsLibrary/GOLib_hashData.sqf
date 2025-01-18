@@ -314,13 +314,13 @@ function(golib_getCustomProps)
 
 function(golib_getActualDataValue)
 {
-	params ["_obj","_field"];
+	params ["_obj","_field",["_compileResult",true]];
 	_field = tolower _field;
 	private _hd = [_obj,false] call golib_getHashData;
 	if (_field in (_hd get "customProps")) then {
 		(_hd get "customProps") get _field;
 	} else {
-		[_hd get "class",_field,true] call oop_getFieldBaseValue;
+		[_hd get "class",_field,_compileResult] call oop_getFieldBaseValue;
 	};
 }
 

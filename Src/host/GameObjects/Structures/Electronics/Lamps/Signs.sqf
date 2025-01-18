@@ -13,7 +13,7 @@ class(SignBar) extends(StreetLampEnabled)
 	var(desc,"Знаменитый Бар ""Кабак""! Эта вывеска так приятно переливается своими цветами и будто зазывает каждого прохожего внутрь.");
 	editor_attribute("EditorVisible" arg "type:string") editor_attribute("Tooltip" arg "Описание таблички в выключенном состоянии")
 	var(descDisabled,"Знаменитый Бар ""Кабак""! Судя по отсуствию красивой подсветки заведение сейчас не работает.");
-	var(light,LIGHT_SIGN_BAR);
+	var(light,"SLIGHT_LEGACY_SIGN_BAR" call lightSys_getConfigIdByName);
 	var(edIsEnabled,true);
 	var(edReqPower,80);
 	var(model,"ca\signs2\sign_bar_ru.p3d");
@@ -56,5 +56,5 @@ class(SignMedical) extends(SignBar)
 	var(name,"Лекарня");
 	var(edReqPower,80);
 	var(desc,"Иногда лечат, иногда - калечат...");
-	var(light,LIGHT_SIGN_MEDICAL);
+	var(light,"SLIGHT_LEGACY_SIGN_MEDICAL" call lightSys_getConfigIdByName);
 endclass

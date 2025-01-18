@@ -14,7 +14,7 @@
 class(Flashlight) extends(ILightible)
 	var(name,"Фонарик");
 	var(desc,"Собираются народными умельцами.");
-	var(light,LIGHT_FLASHLIGHT);
+	var(light,"SLIGHT_LEGACY_FLASHLIGHT" call lightSys_getConfigIdByName);
 	var(lightIsEnabled,false);
 	var(size,ITEM_SIZE_SMALL);
 	var(dr,2);

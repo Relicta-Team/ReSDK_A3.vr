@@ -9,15 +9,22 @@
 #include "..\Interactions\interact.hpp"
 #include "..\WidgetSystem\widgets.hpp"
 
+namespace(Inventory,inventory_)
+
 //угол наклона при котором режим выкладывания меняется с центра экрана на мышь
+macro_const(inventory_maxOnMouseCursorDropAngle)
 #define MAX_ONMOUSECURSOR_DROP_ANGLE -0.2
 
 //дистанция выкладывания
+macro_const(inventory_putDownRadius)
 #define PUTDOWN_RADIUS INTERACT_ITEM_DISTANCE
 
+decl(mesh)
 inventory_previewObject = objnull;
+decl(float)
 inventory_lastDirPreviewObject = 0;
 
+decl(void(int))
 inventory_createPreviewObject = {
 	params ["_slotId"];
 	if !isHandDrag exitWith {};
@@ -45,10 +52,13 @@ inventory_createPreviewObject = {
 	};
 };
 
+decl(void())
 inventory_onVisualPreviewObject = {
 	if (!isHandDrag || inventory_isPressedRMBDrag) exitWith {};
 	
+	inline_macro
 	#define __internal_resetBackColor  getSlotBackground(getDragSlot) setBackgroundColor BACKGROUND_COLOR
+	inline_macro
 	#define resetBackgrounDragSlot _visObj hideObject false; __internal_resetBackColor
 		
 	private _visObj = inventory_previewObject;
@@ -115,6 +125,7 @@ inventory_onVisualPreviewObject = {
 	_visObj setVariable ["interactibleTarget",_targ];
 };
 
+decl(void(bool))
 inventory_collectInfoOnPutdown = {
 	params ["_isFastPutdown"];
 	
@@ -130,6 +141,7 @@ inventory_collectInfoOnPutdown = {
 	};
 };
 
+decl(void())
 inventory_deletePreviewObject = {
 	if (true) exitWith {
 		// пока вся система ниже не настроена и работает нестабильно

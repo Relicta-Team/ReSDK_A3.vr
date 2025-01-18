@@ -37,7 +37,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\SyncMobData\SMD_init.sqf at line 851](../../../Src/client/SyncMobData/SMD_init.sqf#L851)
+File: [client\SyncMobData\SMD_init.sqf at line 854](../../../Src/client/SyncMobData/SMD_init.sqf#L854)
 ## VISIBILITY_MODE_GHOST
 
 Type: constant
@@ -49,7 +49,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\SyncMobData\SMD_init.sqf at line 852](../../../Src/client/SyncMobData/SMD_init.sqf#L852)
+File: [client\SyncMobData\SMD_init.sqf at line 855](../../../Src/client/SyncMobData/SMD_init.sqf#L855)
 ## VISIBILITY_MODE_STEALTH
 
 Type: constant
@@ -61,7 +61,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\SyncMobData\SMD_init.sqf at line 853](../../../Src/client/SyncMobData/SMD_init.sqf#L853)
+File: [client\SyncMobData\SMD_init.sqf at line 856](../../../Src/client/SyncMobData/SMD_init.sqf#L856)
 ## VISIBILITY_MODE_ADMIN
 
 Type: constant
@@ -73,7 +73,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\SyncMobData\SMD_init.sqf at line 854](../../../Src/client/SyncMobData/SMD_init.sqf#L854)
+File: [client\SyncMobData\SMD_init.sqf at line 857](../../../Src/client/SyncMobData/SMD_init.sqf#L857)
 ## VISIBILITY_MODE_CUSTOM
 
 Type: constant
@@ -85,7 +85,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [client\SyncMobData\SMD_init.sqf at line 855](../../../Src/client/SyncMobData/SMD_init.sqf#L855)
+File: [client\SyncMobData\SMD_init.sqf at line 858](../../../Src/client/SyncMobData/SMD_init.sqf#L858)
 ## smd_list_variables
 
 Type: Variable
@@ -133,7 +133,7 @@ Initial value:
 ```sqf
 createHashMapFromArray [...
 ```
-File: [client\SyncMobData\SMD_init.sqf at line 857](../../../Src/client/SyncMobData/SMD_init.sqf#L857)
+File: [client\SyncMobData\SMD_init.sqf at line 860](../../../Src/client/SyncMobData/SMD_init.sqf#L860)
 ## smd_isProcessed
 
 Type: function
@@ -281,7 +281,15 @@ Type: function
 Description: проверяет является ли объект смд слотом
 
 
-File: [client\SyncMobData\SMD_init.sqf at line 518](../../../Src/client/SyncMobData/SMD_init.sqf#L518)
+File: [client\SyncMobData\SMD_init.sqf at line 517](../../../Src/client/SyncMobData/SMD_init.sqf#L517)
+## smd_getSMDObjectSlotId
+
+Type: function
+
+Description: 
+
+
+File: [client\SyncMobData\SMD_init.sqf at line 521](../../../Src/client/SyncMobData/SMD_init.sqf#L521)
 ## smd_onStun
 
 Type: function
@@ -290,7 +298,7 @@ Description:
 - Param: _mob
 - Param: _ctx
 
-File: [client\SyncMobData\SMD_init.sqf at line 522](../../../Src/client/SyncMobData/SMD_init.sqf#L522)
+File: [client\SyncMobData\SMD_init.sqf at line 525](../../../Src/client/SyncMobData/SMD_init.sqf#L525)
 ## smd_isStunned
 
 Type: function
@@ -298,7 +306,7 @@ Type: function
 Description: проверяет застанен ли персонаж
 
 
-File: [client\SyncMobData\SMD_init.sqf at line 526](../../../Src/client/SyncMobData/SMD_init.sqf#L526)
+File: [client\SyncMobData\SMD_init.sqf at line 529](../../../Src/client/SyncMobData/SMD_init.sqf#L529)
 ## smd_onGrabbed
 
 Type: function
@@ -307,7 +315,7 @@ Description:
 - Param: _mob
 - Param: _ctx
 
-File: [client\SyncMobData\SMD_init.sqf at line 529](../../../Src/client/SyncMobData/SMD_init.sqf#L529)
+File: [client\SyncMobData\SMD_init.sqf at line 532](../../../Src/client/SyncMobData/SMD_init.sqf#L532)
 ## smd_isPulling
 
 Type: function
@@ -315,7 +323,7 @@ Type: function
 Description: 
 - Param: _mob
 
-File: [client\SyncMobData\SMD_init.sqf at line 558](../../../Src/client/SyncMobData/SMD_init.sqf#L558)
+File: [client\SyncMobData\SMD_init.sqf at line 561](../../../Src/client/SyncMobData/SMD_init.sqf#L561)
 ## smd_getPullingObjectPtr
 
 Type: function
@@ -323,7 +331,7 @@ Type: function
 Description: 
 - Param: _mob
 
-File: [client\SyncMobData\SMD_init.sqf at line 562](../../../Src/client/SyncMobData/SMD_init.sqf#L562)
+File: [client\SyncMobData\SMD_init.sqf at line 565](../../../Src/client/SyncMobData/SMD_init.sqf#L565)
 ## smd_pullSetTransformValues
 
 Type: function
@@ -334,7 +342,7 @@ Description:
 - Param: _v
 - Param: _networkSync (optional, default false)
 
-File: [client\SyncMobData\SMD_init.sqf at line 567](../../../Src/client/SyncMobData/SMD_init.sqf#L567)
+File: [client\SyncMobData\SMD_init.sqf at line 570](../../../Src/client/SyncMobData/SMD_init.sqf#L570)
 ## smd_pullUpdateTransform
 
 Type: function
@@ -345,7 +353,7 @@ Description: can be call only on local client
 - Param: _val
 - Param: _netSync (optional, default true)
 
-File: [client\SyncMobData\SMD_init.sqf at line 573](../../../Src/client/SyncMobData/SMD_init.sqf#L573)
+File: [client\SyncMobData\SMD_init.sqf at line 576](../../../Src/client/SyncMobData/SMD_init.sqf#L576)
 ## smd_pullGetTransformInfo
 
 Type: function
@@ -353,7 +361,7 @@ Type: function
 Description: 
 - Param: _mob
 
-File: [client\SyncMobData\SMD_init.sqf at line 590](../../../Src/client/SyncMobData/SMD_init.sqf#L590)
+File: [client\SyncMobData\SMD_init.sqf at line 593](../../../Src/client/SyncMobData/SMD_init.sqf#L593)
 ## smd_pullGetHeplerObject
 
 Type: function
@@ -361,7 +369,7 @@ Type: function
 Description: 
 - Param: _mob
 
-File: [client\SyncMobData\SMD_init.sqf at line 598](../../../Src/client/SyncMobData/SMD_init.sqf#L598)
+File: [client\SyncMobData\SMD_init.sqf at line 601](../../../Src/client/SyncMobData/SMD_init.sqf#L601)
 ## smd_onPull
 
 Type: function
@@ -370,7 +378,7 @@ Description:
 - Param: _mob
 - Param: _ctx
 
-File: [client\SyncMobData\SMD_init.sqf at line 603](../../../Src/client/SyncMobData/SMD_init.sqf#L603)
+File: [client\SyncMobData\SMD_init.sqf at line 606](../../../Src/client/SyncMobData/SMD_init.sqf#L606)
 ## smd_onVisiblility
 
 Type: function
@@ -379,7 +387,7 @@ Description:
 - Param: _mob
 - Param: _ctx
 
-File: [client\SyncMobData\SMD_init.sqf at line 863](../../../Src/client/SyncMobData/SMD_init.sqf#L863)
+File: [client\SyncMobData\SMD_init.sqf at line 866](../../../Src/client/SyncMobData/SMD_init.sqf#L866)
 ## smd_onVisualStates
 
 Type: function
@@ -388,7 +396,7 @@ Description:
 - Param: _mob
 - Param: _ctx
 
-File: [client\SyncMobData\SMD_init.sqf at line 877](../../../Src/client/SyncMobData/SMD_init.sqf#L877)
+File: [client\SyncMobData\SMD_init.sqf at line 880](../../../Src/client/SyncMobData/SMD_init.sqf#L880)
 ## smd_hasVisualState
 
 Type: function
@@ -397,7 +405,7 @@ Description: check if unit have visual state [player,VST_HUMAN_STEALTH] call smd
 - Param: _mob
 - Param: _state
 
-File: [client\SyncMobData\SMD_init.sqf at line 900](../../../Src/client/SyncMobData/SMD_init.sqf#L900)
+File: [client\SyncMobData\SMD_init.sqf at line 903](../../../Src/client/SyncMobData/SMD_init.sqf#L903)
 ## smd_onInterpolate
 
 Type: function
@@ -406,7 +414,7 @@ Description:
 - Param: _mob
 - Param: _data
 
-File: [client\SyncMobData\SMD_init.sqf at line 908](../../../Src/client/SyncMobData/SMD_init.sqf#L908)
+File: [client\SyncMobData\SMD_init.sqf at line 911](../../../Src/client/SyncMobData/SMD_init.sqf#L911)
 ## smd_onAnimSpeed
 
 Type: function
@@ -415,7 +423,7 @@ Description:
 - Param: _mob
 - Param: _val
 
-File: [client\SyncMobData\SMD_init.sqf at line 916](../../../Src/client/SyncMobData/SMD_init.sqf#L916)
+File: [client\SyncMobData\SMD_init.sqf at line 919](../../../Src/client/SyncMobData/SMD_init.sqf#L919)
 ## smd_getObjectInSlot
 
 Type: function
@@ -424,7 +432,7 @@ Description:
 - Param: _mob
 - Param: _slot
 
-File: [client\SyncMobData\SMD_init.sqf at line 921](../../../Src/client/SyncMobData/SMD_init.sqf#L921)
+File: [client\SyncMobData\SMD_init.sqf at line 924](../../../Src/client/SyncMobData/SMD_init.sqf#L924)
 ## smd_getRedirectOnTwoHanded
 
 Type: function
@@ -433,7 +441,7 @@ Description:
 - Param: _mob
 - Param: _slot
 
-File: [client\SyncMobData\SMD_init.sqf at line 929](../../../Src/client/SyncMobData/SMD_init.sqf#L929)
+File: [client\SyncMobData\SMD_init.sqf at line 932](../../../Src/client/SyncMobData/SMD_init.sqf#L932)
 ## smd_reloadMobsLighting
 
 Type: function
@@ -441,7 +449,7 @@ Type: function
 Description: 
 
 
-File: [client\SyncMobData\SMD_init.sqf at line 936](../../../Src/client/SyncMobData/SMD_init.sqf#L936)
+File: [client\SyncMobData\SMD_init.sqf at line 939](../../../Src/client/SyncMobData/SMD_init.sqf#L939)
 ## smd_createOffGeom
 
 Type: function
@@ -451,7 +459,7 @@ Description:
 - Param: _srcObj
 - Param: _oGeom
 
-File: [client\SyncMobData\SMD_init.sqf at line 959](../../../Src/client/SyncMobData/SMD_init.sqf#L959)
+File: [client\SyncMobData\SMD_init.sqf at line 962](../../../Src/client/SyncMobData/SMD_init.sqf#L962)
 ## smd_onChatMessage
 
 Type: function
@@ -460,7 +468,7 @@ Description:
 - Param: _mob
 - Param: _ctx
 
-File: [client\SyncMobData\SMD_init.sqf at line 987](../../../Src/client/SyncMobData/SMD_init.sqf#L987)
+File: [client\SyncMobData\SMD_init.sqf at line 990](../../../Src/client/SyncMobData/SMD_init.sqf#L990)
 ## smd_onVoiceBlobInit
 
 Type: function
@@ -469,7 +477,7 @@ Description: ["_voiceType","_basePitch","_baseSpeed"]
 - Param: _mob
 - Param: _ctx
 
-File: [client\SyncMobData\SMD_init.sqf at line 1022](../../../Src/client/SyncMobData/SMD_init.sqf#L1022)
+File: [client\SyncMobData\SMD_init.sqf at line 1025](../../../Src/client/SyncMobData/SMD_init.sqf#L1025)
 ## smd_onIsPrintingSay
 
 Type: function
@@ -478,4 +486,4 @@ Description:
 - Param: _mob
 - Param: _ctx
 
-File: [client\SyncMobData\SMD_init.sqf at line 1027](../../../Src/client/SyncMobData/SMD_init.sqf#L1027)
+File: [client\SyncMobData\SMD_init.sqf at line 1030](../../../Src/client/SyncMobData/SMD_init.sqf#L1030)

@@ -7,6 +7,8 @@
 #include "..\..\host\keyboard.hpp"
 #include "..\WidgetSystem\widgets.hpp"
 //invokeAfterDelay({inventory_isHoldMode = true},2);
+
+decl(bool(any;int;bool;bool;bool))
 onGameInputs_Down = {
 	params ["","_key","_shift","_ctrl","_alt"];
 
@@ -38,6 +40,7 @@ onGameInputs_Down = {
 };
 
 //клавиши в режиме игры
+decl(bool(any;int;bool;bool;bool))
 onGameKeyInputs = {
 	params ["","_key","_shift","_ctrl","_alt"];
 
@@ -163,6 +166,7 @@ onGameKeyInputs = {
 };
 
 //мышь в режиме игры
+decl(bool(any;int;any;any;bool;bool;bool))
 onGameMouseInputs = {
 	params ["","_button", "", "", "_shift", "_ctrl", "_alt"];
 

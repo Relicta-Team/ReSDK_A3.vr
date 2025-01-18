@@ -9,7 +9,7 @@
 
 class(StreetLamp) extends(ElectronicDeviceLighting)
 	var(name,"Фонарный столб");
-	var(light,LIGHT_STREETLAMP);
+	var(light,"SLIGHT_LEGACY_STREETLAMP" call lightSys_getConfigIdByName);
 	var(lightIsEnabled,false);
 	//var(model,"a3\structures_f_enoch\infrastructure\lamps\lampindustrial_01_f.p3d"); //"Land_LampIndustrial_01_F"
 	var(model,"a3\structures_f\civ\lamps\lampshabby_off_f.p3d"); //"Land_LampShabby_F"
@@ -66,7 +66,7 @@ endclass
 class(LampCeiling) extends(StreetLampEnabled)
 	var(name,"Лампа");
 	var(edReqPower,50);
-	var(light,LIGHT_LAMP_CEILING);
+	var(light,"SLIGHT_LEGACY_LAMP_CEILING" call lightSys_getConfigIdByName);
 	var(model,"atmobjects\lamps\data\model\lamp_tarelka.p3d")
 	var(material,"MatMetal");
 	getterconst_func(getCoefAutoWeight,80);
@@ -81,7 +81,7 @@ endclass
 
 //для бара свет
 class(LampCeiling_Red) extends(LampCeiling)
-	var(light,LIGHT_LAMP_CEILING_REDLIGHT);
+	var(light,"SLIGHT_LEGACY_LAMP_CEILING_REDLIGHT" call lightSys_getConfigIdByName);
 endclass
 
 class(LampWall) extends(StreetLampEnabled)
@@ -90,6 +90,6 @@ class(LampWall) extends(StreetLampEnabled)
 	getterconst_func(getCoefAutoWeight,80);
 	var(dr,1);
 	var(edReqPower,50);
-	var(light,LIGHT_LAMP_WALL);
+	var(light,"SLIGHT_LEGACY_LAMP_WALL" call lightSys_getConfigIdByName);
 	var(model,"atmobjects\lamps\data\model\lamp_stena.p3d");
 endclass

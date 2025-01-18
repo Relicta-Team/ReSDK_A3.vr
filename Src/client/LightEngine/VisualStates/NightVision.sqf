@@ -16,9 +16,7 @@ regVST(VST_EATER_NIGHTVISION)
 			_dummy attachTo [src,[0,0,0],"head",true];
 			
 			//create NightVision
-			//[
-			//	[LIGHT_AREA_EATER_NIGHTVISION,_dummy] call le_loadLight
-			//] call os_light_registerAsNoProcessedLight;
+			//	[LIGHT_AREA_EATER_NIGHTVISION,_dummy] call le_loadLight;
 			
 			//["eater_nightvision_color",true] call pp_setEnable;
 			

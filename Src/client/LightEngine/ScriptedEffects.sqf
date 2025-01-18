@@ -7,10 +7,10 @@
 #include "LightEngine.h"
 //place this file before all configs
 
+//карта эффектов. ключи - айди эффектов, значения - настройки эмиттеров
 le_se_map = createHashMap;
-le_se_noattr = null;
+le_se_noattr = null; //!not used
 le_se_cfgRange = [2100,4900];
-
 
 /*
 	regScriptEmit(name) //ineditor: start of cfg location
@@ -118,7 +118,7 @@ le_se_handleConfig = {
 	
 
 	if (_isDrop || _isUnmanaged) exitWith {true};
-	//addEventOnDestroySource not used in scripted emitters
+	//auto delete not used in scripted emitters
 	//! native evh Destroyed not working with simple objects (sourceObject it is)
 
 	//Возвращаем свет 
@@ -179,6 +179,16 @@ le_se_registerConfigHandler = {
 	le_se_map_cfgHandlers set [_cfgName,_cfgCode];
 }; //регистрация нового конфига. только на клиенте
 
+//работает внутри обработчика скрипта для эмиттера. проверяет является ли контекст подключением к мобу
+le_se_isAttachedToMob = {
+	_this call smd_isSMDObjectInSlot
+};
+
+//получает айди слота подключения к мобу (например INV_FACE)
+le_se_getAttachedProxySlot = {
+	_this call smd_getSMDObjectSlotId;
+};
+
 //получает значение опции из конфига. используется в хандлерах событий скриптовых эмиттеров
 le_se_getCurrentConfigPropVal = {
 	params ["_srch"];
@@ -200,13 +210,19 @@ le_se_map_cfgHandlers = createHashMap; //карта зарегистрирова
 
 le_se_mapHandlersUnmanaged = null; //карта нативных эффектов
 le_se_mapHandlersShots = null;
+
+//специальная функция разрешения симуляции для игры и для редактора
+le_se_getSimProxObj = {
+	if (is3den) then {lsim_proxyObject} else {player}
+};
+
 le_se_mapHandlers = createHashMapFromArray [
 	
 	["alias",{}],
 
 	//generic events
 	["linkToSrc",{
-		(_this select 0) attachTo [player,[0,0,0]];
+		(_this select 0) attachTo [call le_se_getSimProxObj,[0,0,0]];
 		_offset = _this select 1;
 		(_this select 0) attachTo [sourceObject,_offset];
 	}],
@@ -387,6 +403,26 @@ le_se_fireEmit = {
 	true
 };
 
+le_se_initScriptedLights = {
+	
+	if (isMultiplayer) then {
+		assert_str(count lt_preload_cfgList > 0,"Client scripted configs not found");
+		{
+			if !([_x,false] call lightSys_registerConfig) exitWith {
+				setLastError("Build scripted config error at index " + (str _foreachIndex));
+			};
+		} foreach lt_preload_cfgList;
+	} else {
+		assert_str(count slt_internal_fileListBuffer > 0,"Server scripted configs not found");
+		{
+			private _content = preprocessFile _x;
+			if !([_content,false] call lightSys_registerConfig) exitWith {
+				setLastError("Build scripted config error on client; File: " + _x);
+			};
+		} foreach slt_internal_fileListBuffer;
+	};
+};
+
 //Опытным путем было выяснено что тип частиц не может быть прикреплен напрямую к источнику
 //А если использовать хаки, то к частицам нельзя присоеденить другие объекты
 //Спасибо Богемия...
@@ -404,7 +440,7 @@ le_se_doSorting = {
 			//Все - частицы
 			//adding dummy light
 			[_cfgSegments,
-				[ "lt",null,["linkToSrc",[0,0,0]] ]
+				[ "lt",null,["alias","autogen_light"],["linkToSrc",[0,0,0]] ]
 			] call (missionnamespace getvariable "pushFront"); //for bypass vm error
 		} else {
 			//не все - частицы

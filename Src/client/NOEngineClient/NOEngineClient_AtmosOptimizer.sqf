@@ -5,7 +5,6 @@
 
 #include "..\..\host\Atmos\Atmos.hpp"
 #include "NOEngineClient_NetAtmos.hpp"
-#include "..\LightEngine\ScriptedEffects.hpp"
 
 aopt_cli_enableSystem = !false;
 

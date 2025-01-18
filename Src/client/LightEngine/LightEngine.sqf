@@ -13,17 +13,22 @@
 
 //decl
 #include "ScriptedEffects.sqf"
-//cfgs
-#include "ScriptedEffectConfigs.sqf"
-//prepare cfgs
-call le_se_doSorting;
+
+//prepare cfgs, called on serverside
+le_initializeScriptedConfigs = {
+	call lightSys_preInitialize;
+	call le_se_initScriptedLights;
+	call le_se_doSorting;
+};
+#ifndef EDITOR
+call le_initializeScriptedConfigs;
+#endif
+
 //create drop emitter map
 call le_se_internal_createDropEmitterMap;
 call le_se_internal_createUnmanagedEmitterMap;
 call le_se_internal_generateOptionAddress;
 
-#include "LightConfigs.sqf"
-#include "FireLightConfigs.sqf"
 #include "ShotableConfigs.sqf"
 #include "VisualStatesConfigs.sqf"
 
@@ -77,6 +82,10 @@ le_loadLight = {
 			traceformat("LightEngine::LoadLight() - args %1",_this);
 		};
 	};
+	if isNullReference(_src) exitWith {
+		error("LightEngine::LoadLight() - Undefined light source");
+		setLastError("LightEngine::LoadLight() - Undefined light source");
+	};
 
 	private _code = missionNamespace getVariable ["le_conf_" + str _type,{}];
 
@@ -98,21 +107,21 @@ le_loadLight = {
 };
 
 //автоматическое событие освещения, эффектов или звука
-le_doFireLight = {
-	params [["_type",-1],"_src"];
+// le_doFireLight = {
+// 	params [["_type",-1],"_src"];
 
-	if (_type <= le_firelight_startindex) exitWith {
-		error("LightEngine::doFireLight() - Undefined light type");
-	};
+// 	if (_type <= le_firelight_startindex) exitWith {
+// 		error("LightEngine::doFireLight() - Undefined light type");
+// 	};
 
-	private _code = missionNamespace getVariable ["le_conf_fire_" + str (_type - le_firelight_startindex),{}];
+// 	private _code = missionNamespace getVariable ["le_conf_fire_" + str (_type - le_firelight_startindex),{}];
 
-	if equals(_code,{}) exitWith {
-		errorformat("Cant load light from config => %1",_type);
-	};
+// 	if equals(_code,{}) exitWith {
+// 		errorformat("Cant load light from config => %1",_type);
+// 	};
 
-	[_src] call _code;
-};
+// 	[_src] call _code;
+// };
 
 le_doShot = {
 	params ["_type","_src",["_ctxParams",[]]];
@@ -154,9 +163,8 @@ le_unloadLight = {
 	[0] call lesc_onLightRemove;
 	
 	
-	os_light_list_noProcessedLights deleteAt (os_light_list_noProcessedLights find _light);
-	
-	
+	os_light_list_noProcessedLights deleteAt (os_light_list_noProcessedLights findif {equals(_x select 0,_light)});
+
 	deleteVehicle _light;
 };
 
@@ -261,6 +269,7 @@ le_debug_canViewLight = {
 			_light setLightColor [0.013,0.001,0];
 			_light setLightAmbient [0.013,0.001,0];
 			_light setLightAttenuation [0,50,3,700,4,1];
+			#define vector(x,y,z) [x,y,z]
 			linkLight(_light,player,vector(0,0,0));
 			linkLight(_light,_arrow,vector(0,0,0));
 		} foreach _list;
@@ -294,6 +303,7 @@ le_debug_canViewLight = {
 		_light setLightColor [0.013,0.001,0];
 		_light setLightAmbient [0.013,0.001,0];
 		_light setLightAttenuation [0,50,3,700,4,1];
+		#define vector(x,y,z) [x,y,z]
 		linkLight(_light,player,vector(0,0,0));
 		linkLight(_light,_arrow,vector(0,0,0));
 
@@ -317,11 +327,13 @@ le_debug_canViewLight = {
 	true
 };
 
+/* 
+! legacy render
 le_debug_lightRender = {
 	#ifndef usedebuglightrender
 		if (true) exitWith {};
 	#endif
-
+	#define vector(x,y,z) [x,y,z]
 	private _renderMode = _this; //1 and 2
 	_evlight = {
 		(_this select 0) params ['lightObject','sourceObject',"_renderMode"];
@@ -359,6 +371,7 @@ le_debug_lightRender = {
 
 	}; startUpdateParams(_evlight,0.01,[lightObject arg sourceObject arg _renderMode]);
 };
+*/
 
 //render damage effect for objects
 _dofe = {

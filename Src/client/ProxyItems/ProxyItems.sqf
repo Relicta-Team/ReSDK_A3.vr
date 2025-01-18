@@ -59,7 +59,8 @@ proxIt_updateModel = {
 	//fix lagvector after 0.8.147
 	_object attachTo [_mob,_posData select 0,proxIt_list_selections select _newselection,true];
 	_object setvariable ["_pit_lastAttachData",[_mob,_posData select 0,proxIt_list_selections select _newselection,true]];
-	
+	_object setvariable ["_pit_slotId",_newselection];
+
 	_object setPhysicsCollisionFlag false;
 };
 
@@ -109,6 +110,7 @@ proxIt_loadConfig = {
 	//fix lagvector after 0.8.147
 	_object attachTo [_mob,_posData select 0,proxIt_list_selections select _selectionId,true];
 	_object setvariable ["_pit_lastAttachData",[_mob,_posData select 0,proxIt_list_selections select _selectionId,true]];
+	_object setvariable ["_pit_slotId",_selectionId];
 
 	_object setPhysicsCollisionFlag false;
 	

@@ -3,7 +3,11 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
 
+namespace(Interact,interact_)
+
+decl(void())
 interact_processResist = {
 	
 	if (["resist",0.7] call input_spamProtect) exitWith {};

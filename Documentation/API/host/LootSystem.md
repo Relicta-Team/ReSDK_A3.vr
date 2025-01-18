@@ -63,7 +63,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\LootSystem\LootSystem_init.sqf at line 182](../../../Src/host/LootSystem/LootSystem_init.sqf#L182)
+File: [host\LootSystem\LootSystem_init.sqf at line 171](../../../Src/host/LootSystem/LootSystem_init.sqf#L171)
 ## loot_init
 
 Type: function
@@ -88,16 +88,6 @@ Description:
 
 
 File: [host\LootSystem\LootSystem_init.sqf at line 32](../../../Src/host/LootSystem/LootSystem_init.sqf#L32)
-## loot_internal_rbuilder_preloadUtils
-
-Type: function
-
-> Exists if **RBUILDER** defined
-
-Description: 
-
-
-File: [host\LootSystem\LootSystem_init.sqf at line 58](../../../Src/host/LootSystem/LootSystem_init.sqf#L58)
 ## loot_loadConfig
 
 Type: function
@@ -105,7 +95,7 @@ Type: function
 Description: 
 - Param: _path
 
-File: [host\LootSystem\LootSystem_init.sqf at line 63](../../../Src/host/LootSystem/LootSystem_init.sqf#L63)
+File: [host\LootSystem\LootSystem_init.sqf at line 52](../../../Src/host/LootSystem/LootSystem_init.sqf#L52)
 ## loot_processObject
 
 Type: function
@@ -114,7 +104,7 @@ Description:
 - Param: _type
 - Param: _obj
 
-File: [host\LootSystem\LootSystem_init.sqf at line 134](../../../Src/host/LootSystem/LootSystem_init.sqf#L134)
+File: [host\LootSystem\LootSystem_init.sqf at line 123](../../../Src/host/LootSystem/LootSystem_init.sqf#L123)
 ## loot_internal_editor_reloadLooting
 
 Type: function
@@ -124,7 +114,7 @@ Type: function
 Description: 
 
 
-File: [host\LootSystem\LootSystem_init.sqf at line 159](../../../Src/host/LootSystem/LootSystem_init.sqf#L159)
+File: [host\LootSystem\LootSystem_init.sqf at line 148](../../../Src/host/LootSystem/LootSystem_init.sqf#L148)
 ## loot_editor_isLoadedLib
 
 Type: function
@@ -134,7 +124,7 @@ Type: function
 Description: 
 
 
-File: [host\LootSystem\LootSystem_init.sqf at line 168](../../../Src/host/LootSystem/LootSystem_init.sqf#L168)
+File: [host\LootSystem\LootSystem_init.sqf at line 157](../../../Src/host/LootSystem/LootSystem_init.sqf#L157)
 ## loot_editor_getTemplateByInput
 
 Type: function
@@ -144,7 +134,7 @@ Type: function
 Description: 
 - Param: _input
 
-File: [host\LootSystem\LootSystem_init.sqf at line 172](../../../Src/host/LootSystem/LootSystem_init.sqf#L172)
+File: [host\LootSystem\LootSystem_init.sqf at line 161](../../../Src/host/LootSystem/LootSystem_init.sqf#L161)
 # LootSystem_structs.sqf
 
 ## LOOT_COMPARE_BY_NAME

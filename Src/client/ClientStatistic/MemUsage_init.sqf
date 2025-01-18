@@ -3,13 +3,21 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
+namespace(ClientMemUsage,mem_)
+
 #ifdef EDITOR
 
+decl(widget[])
 cli_mem_widgets = [widgetNull,widgetNull,widgetNull];
 
+macro_const(cli_mem_memvis_size_x)
 #define memvis_size_x 14
+macro_const(cli_mem_memvis_size_y)
 #define memvis_size_y 10
 
+decl(void())
 cli_mem_init = {
 	private _gui = getGUI;
 
@@ -30,7 +38,7 @@ cli_mem_init = {
 	startUpdateParams(cli_mem_onupdate,0,[_text]);
 };
 
-
+decl(void(widget))
 cli_mem_onupdate = {
 	_text = _this select 0 select 0;
 

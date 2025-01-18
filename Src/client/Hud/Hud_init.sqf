@@ -8,52 +8,87 @@
 #include <..\..\host\text.hpp>
 #include <..\..\host\CombatSystem\CombatSystem.hpp>
 
+namespace(Hud,hud_)
 
+macro_const(hud_size_x)
 #define HUD_SIZE_X 10
 
+macro_const(hud_size_y)
 #define STAT_SIZE_H 4
 
+macro_func(hud_canVisibleAttribute,bool(string))
 #define canVisibleAttribute(data) (data != "")
 
+inline_macro
 #define getWidgetVar(_w,var) (_w getvariable #var)
+inline_macro
 #define setWidgetVar(_w,var,val) _w setVariable [#var,val]
 
+decl(string[])
 hud_vars = ["oxy","hunger","thirst","encumb","pee","poo","tf_lastError","combatMode","bone","pain","sleep","bleeding","stealth","light","combStyle","specAct",
 "holdbreath","tox"];
+decl(map)
 hud_map_defaultValues = createHashMap;
+decl(map)
 hud_map_widgets = createHashMap;
 
 //hud_[var]_overlay select 0 -название. может быть кодом для рантайм вычисления. _value будет текущим значением (!!!_curval рантайм значение!!!)
 //hud_[var]_overlay select 1 - сортировка. true для тех где от меньшего к большему и false наоборот
-
+decl(float)
 hud_thirst = 100; //жажда
+	decl(any[])
 	hud_thirst_overlay = ["Жажда",[[51,""],[50,"#56C9F0"],[40,"#2AA7D1"],[30,"#0C87B0"],[20,"#078A8F"],[10,"#03704E"]],false];
+decl(float)
 hud_hunger = 100; //голод
+	decl(any[])
 	hud_hunger_overlay = ["Голод",[[51,""],[50,"#F2BF8F"],[40,"#D18E4F"],[30,"#A8611E"],[20,"#8C420D"],[10,"#630603"]],false];
+decl(float)
 hud_encumb = 0; //перегруз
+	decl(any[])
 	hud_encumb_overlay = ["Перегруз",[[0,""],[1,"#A46EF0"],[2,"#6926C7"],[3,"#8104B3"],[4,"#8C0052"]],true];
+decl(float)
 hud_temp = 36; //внешняя температура
 	//hud_hunger_overlay = ["Температура",[[0,""],[1,""],[2,""],[3,""],[4,""]]];
+decl(float)
 hud_oxy = 100; //дыхалка
+	decl(any[])
 	hud_oxy_overlay = ["Кислород",[[90,""],[70,"#46F0E7"],[50,"#7ACFCA"],[30,"#5F9C99"],[10,"#2E705D"],[5,"#0B5434"],[1,"#AD0017"]],false];
+decl(float)
 hud_holdbreath = 0;
+	decl(any[])
 	hud_holdbreath_overlay = ["Не дышу",[[0,""],[1,"#718BD9"]],true];
+decl(float)
 hud_tox = 0;
+	decl(any[])
 	hud_tox_overlay = ["Отравление",[[0,""],[10,"#A9E084"],[25,"#82C456"],[50,"#539129"],[100,"#245206"]],true];
+decl(float)
 hud_pee = 0; //малая нужда
+	decl(any[])
 	hud_pee_overlay = ["Мочевой пузырь",[[0,""],[20,"#E3E691"],[40,"#D0D45D"],[60,"#E0D238"],[80,"#FFB805"]],true];
+decl(float)
 hud_poo = 0; //большая нужда
+	decl(any[])
 	hud_poo_overlay = ["Кишечник",[[0,""],[20,"#80715B"],[40,"#665235"],[60,"#573E18"],[80,"#472400"]],true];
 
+decl(float)
 hud_pain = 0;//уровень боли
+	decl(any[])
 	hud_pain_overlay = ["Боль",[[0,""],[1,"#693F60"],[2,"#913463"],[3,"#C91C59"],[4,"#FF033D"]],true];
+decl(float)
 hud_bone = 0;//переломы
+	decl(any[])
 	hud_bone_overlay = ["Перелом",[[0,""],[1,"#FA9F3E"]],true];
+decl(float)
 hud_sleep = 0; //сон
+	decl(any[])
 	hud_sleep_overlay = ["Сон",[[0,""],[1,"#133AAC"]],true];
+decl(float)
 hud_stealth = 0;
+	decl(any[])
 	hud_stealth_overlay = ["Скрытность",[[0,""],[1,"#0C87B0"]],true];
+decl(float)
 hud_light = 0;
+	decl(any[])
 	hud_light_overlay = [
 		{
 			//runtile light renamer, use _value as current val
@@ -67,9 +102,13 @@ hud_light = 0;
 			format[["Слабый %1","Средний %1","Умеренный %1","Яркий %1"] select (_value-1),"свет"]
 		},[[0,""],[1,"#CC9712"],[2,"#E3B540"],[3,"#F0D695"],[4,"#F7F2E4"]],true];
 #include <..\..\host\GameObjects\ConstantAndDefines\Life.h>
+decl(float)
 hud_bleeding = 0;
+	decl(any[])
 	hud_bleeding_overlay = ["Кровотечение",[[0,""],[0.1,"#FF7A66"],[1,"#E04128"],[5,"#A61A05"],[10,"#540D02"],[20,"#210601"]],true];
+decl(float)
 hud_combStyle = 0;
+	decl(void())
 	hud_combStyle_onCombatUpdate = {
 		["combStyle"] call hud_recalculateStat; //reset
 		private _r = 0;
@@ -77,6 +116,7 @@ hud_combStyle = 0;
 		if ([player] call smd_isCombatModeEnabled) then {INC(_r)};
 		hud_combStyle = _r;
 	};
+	decl(any[])
 	hud_combStyle_overlay = [
 		{
 			_rf = (interactCombat_hud_map_Styles getOrDefault [cd_curCombatStyle,["#FFFFFF","error","r-error"]]);
@@ -85,18 +125,23 @@ hud_combStyle = 0;
 		true
 	];
 
+decl(float)
 hud_combatMode = 0;
+	decl(void())
 	hud_combatMode_sync = {
 		hud_combatMode = ifcheck([player] call smd_isCombatModeEnabled,1,0);
 	};
+	decl(any[])
 	hud_combatMode_overlay = [
 		"Бой",
 		[[0,""],[1,"#ED002F"]],
 		true
 	];
 
+decl(float)
 hud_specAct = 0;
 //вызывается при обновлении спец.кнопок.
+decl(void())
 hud_specAct_update = {
 	if (cd_specialAction in interactMenu_specialActions_map_hud)then {
 		["specAct"] call hud_recalculateStat;
@@ -105,6 +150,7 @@ hud_specAct_update = {
 		hud_specAct = 0;
 	};
 };
+decl(any[])
 hud_specAct_overlay = [
 	{
 		interactMenu_specialActions_map_hud get cd_specialAction
@@ -113,7 +159,9 @@ hud_specAct_overlay = [
 ];
 
 //system
+	decl(float)
 	hud_tf_lastError = 0;
+	decl(any[])
 	hud_tf_lastError_overlay = ["!!!ТИМСПИК!!!",[[0,""],[1,"#ED002F"]],true];
 
 /*hud_canHide = true;
@@ -137,6 +185,7 @@ hud_specAct_overlay = [
 		} foreach hud_widgets;
 	};*/
 
+decl(void(string))
 hud_recalculateStat = {
 	params ["_name"];
 	private _w = hud_map_widgets getOrDefault [_name,widgetNull];
@@ -144,12 +193,14 @@ hud_recalculateStat = {
 };
 
 //очистка худа - сброс всех переменных на стандартные значения
+decl(void())
 hud_cleanup = {
 	{
 		missionNamespace setVariable [_x,_y];
 	} foreach hud_map_defaultValues;
 };
 
+decl(void())
 hud_init = {
 	
 	//сначала сериализация дефолтных значений худа
@@ -204,7 +255,7 @@ hud_init = {
 	startUpdate(hud_onUpdate,0);
 };
 
-
+decl(void())
 hud_onUpdate = {
 
 	//linking tf_lastError

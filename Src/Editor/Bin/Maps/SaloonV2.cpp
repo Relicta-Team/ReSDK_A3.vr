@@ -8,22 +8,22 @@ class EditorData
 	toggles=42;
 	class ItemIDProvider
 	{
-		nextID=8550;
+		nextID=8555;
 	};
 	class LayerIndexProvider
 	{
-		nextID=1770;
+		nextID=1828;
 	};
 	class Camera
 	{
-		pos[]={3425.8596,46.78759,3677.5537};
-		dir[]={0.72899598,-0.47217509,-0.49584198};
-		up[]={0.3904365,0.88149023,-0.26556706};
-		aside[]={-0.56247836,1.8235296e-06,-0.82695311};
+		pos[]={3447.1213,33.353004,3640.323};
+		dir[]={0.97682184,-0.15751623,-0.14577411};
+		up[]={0.15586442,0.98747039,-0.023265209};
+		aside[]={-0.14762071,2.0057778e-06,-0.98916024};
 	};
 };
 binarizationWanted=0;
-sourceName="ReSDK_A3";
+sourceName="resdk_fork";
 addons[]=
 {
 	"A3_Characters_F",
@@ -132,13 +132,14 @@ addons[]=
 	"A3_Structures_F_Argo_Industrial_Agriculture",
 	"rabochiystol",
 	"A3_Structures_F_Bootcamp_VR_Helpers",
-	"A3_Structures_F_Bootcamp_VR_Blocks"
+	"A3_Structures_F_Bootcamp_VR_Blocks",
+	"A3_Structures_F_Exp_Civilian_Accessories"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=66;
+		items=67;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -521,6 +522,13 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item66
+		{
+			className="A3_Structures_F_Exp_Civilian";
+			name="Arma 3 Apex - Civilian Buildings";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 	};
 };
 dlcs[]=
@@ -622,7 +630,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=8;
+		items=9;
 		class Item0
 		{
 			dataType="Group";
@@ -769,13 +777,13 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14,-994.9588,8100};
+				position[]={14.007331,5.039011,8100.002};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""missionName"",""SaloonV2""],[""version"",4]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""missionName"",""SaloonV2""],[""version"",5]]}";
 			};
 			id=2205;
 			type="Land_Orange_01_F";
@@ -7164,7 +7172,7 @@ class Mission
 											dataType="Object";
 											class PositionInfo
 											{
-												position[]={3458.9248,30.114836,3647.5251};
+												position[]={3458.9912,30.295,3647.5103};
 											};
 											side="Empty";
 											class Attributes
@@ -10821,7 +10829,7 @@ class Mission
 										};
 									};
 									id=6131;
-									atlOffset=21.868858;
+									atlOffset=21.86886;
 								};
 								class Item1
 								{
@@ -12532,7 +12540,7 @@ class Mission
 										};
 									};
 									id=6257;
-									atlOffset=2.6690674;
+									atlOffset=2.6683674;
 								};
 								class Item3
 								{
@@ -12617,7 +12625,7 @@ class Mission
 								};
 							};
 							id=6194;
-							atlOffset=0.28629875;
+							atlOffset=0.28612518;
 						};
 						class Item3
 						{
@@ -16965,16 +16973,15 @@ class Mission
 						};
 					};
 					id=5574;
-					atlOffset=2.3403931;
+					atlOffset=2.3403473;
 				};
 				class Item2
 				{
 					dataType="Layer";
 					name="Электричество";
-					state=1;
 					class Entities
 					{
-						items=95;
+						items=97;
 						class Item0
 						{
 							dataType="Object";
@@ -17023,7 +17030,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Щиток""]]],[""class"",""ElectricalShield""],[""edConnected"",[""Imported StreetLamp541131"",""Imported StreetLamp788408"",""Imported StreetLamp683191"",""Imported StreetLamp299223"",""Imported StreetLamp98921"",""Imported LampCeiling94513"",""Imported LampCeiling56063"",""Imported StreetLamp381331"",""Imported StreetLamp307249"",""Imported LampCeiling_Red54736"",""Imported StreetLamp625248"",""Imported LampCeiling469303"",""Imported StreetLamp219203"",""Imported LampCeiling384768"",""Imported LampCeiling715977"",""Imported StreetLamp394622"",""Imported StreetLamp674401"",""Imported StreetLamp782069"",""Imported StreetLamp435861"",""Imported LampCeiling10309"",""Imported LampCeiling709277"",""Imported StreetLamp782069 (2)"",""Imported LampCeiling_Red54736 (1)"",""Imported StreetLamp394622 (1)"",""Imported StreetLamp394622 (2)"",""Imported StreetLamp394622 (3)"",""Imported StreetLamp394622 (4)"",""Imported StreetLamp394622 (5)"",""StreetLamp G:oNY70Wu+yPw (1)"",""RedButton G:ZHnk/2rK28c"",""RedButton G:/AhUzzHCDzM"",""RedButton G:5P+kpUj2oP0""]],[""mark"",""_sw_ulica""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Щиток""]]],[""class"",""ElectricalShield""],[""edConnected"",[""Imported StreetLamp541131"",""Imported StreetLamp788408"",""Imported StreetLamp683191"",""Imported StreetLamp299223"",""Imported StreetLamp98921"",""Imported LampCeiling94513"",""Imported LampCeiling56063"",""Imported StreetLamp381331"",""Imported StreetLamp307249"",""Imported LampCeiling_Red54736"",""Imported StreetLamp625248"",""Imported LampCeiling469303"",""Imported StreetLamp219203"",""Imported LampCeiling384768"",""Imported LampCeiling715977"",""Imported StreetLamp394622"",""Imported StreetLamp674401"",""Imported StreetLamp782069"",""Imported StreetLamp435861"",""Imported LampCeiling10309"",""Imported LampCeiling709277"",""Imported StreetLamp782069 (2)"",""Imported LampCeiling_Red54736 (1)"",""Imported StreetLamp394622 (1)"",""Imported StreetLamp394622 (2)"",""Imported StreetLamp394622 (3)"",""Imported StreetLamp394622 (4)"",""Imported StreetLamp394622 (5)"",""StreetLamp G:oNY70Wu+yPw (1)"",""RedButton G:ZHnk/2rK28c"",""RedButton G:/AhUzzHCDzM"",""RedButton G:5P+kpUj2oP0"",""Imported LampCeiling_Red54736 (4)"",""Imported StreetLamp394622 (6)""]],[""mark"",""_sw_ulica""]]}";
 							};
 							id=2533;
 							type="transformator_2";
@@ -17238,17 +17245,17 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3444.5859,36.199116,3733.7439};
+								position[]={3444.5859,35.317013,3733.7439};
 							};
 							side="Empty";
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling_Red""],[""mark"",""Imported LampCeiling_Red54736""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_THEATRE_SCENE_AREA_MAIN""]]],[""class"",""LampCeiling_Red""],[""mark"",""Imported LampCeiling_Red54736""]]}";
 							};
 							id=2534;
 							type="Lamp_tarelka";
-							atlOffset=5.9143028;
+							atlOffset=5.0321999;
 						};
 						class Item16
 						{
@@ -18335,7 +18342,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3446.3125,34.809193,3682.9744};
+								position[]={3446.3125,34.524918,3682.9744};
 							};
 							side="Empty";
 							flags=1;
@@ -18345,7 +18352,7 @@ class Mission
 							};
 							id=7447;
 							type="Lamp_tarelka";
-							atlOffset=4.4831581;
+							atlOffset=4.1988831;
 						};
 						class Item79
 						{
@@ -18370,18 +18377,18 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3439.5549,33.772217,3651.0259};
+								position[]={3443.7336,33.772217,3650.7727};
 								angles[]={0,0.93468088,0};
 							};
 							side="Empty";
-							flags=5;
+							flags=1;
 							class Attributes
 							{
 								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_STREET_LAMP""]]],[""class"",""StreetLamp""],[""mark"",""Imported StreetLamp394622 (2)""]]}";
 							};
 							id=7451;
 							type="Land_LampShabby_off_F";
-							atlOffset=0.046489716;
+							atlOffset=25.000187;
 						};
 						class Item81
 						{
@@ -18628,9 +18635,45 @@ class Mission
 							type="knopka";
 							atlOffset=1.5186424;
 						};
+						class Item95
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3391.2039,36.86356,3734.1912};
+								angles[]={0,6.0213861,-0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_THEATRE_SCENE_AREA_MAIN""]]],[""class"",""LampCeiling_Red""],[""mark"",""Imported LampCeiling_Red54736 (4)""]]}";
+							};
+							id=8550;
+							type="Lamp_tarelka";
+							atlOffset=4.7019691;
+						};
+						class Item96
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3450.0684,33.432987,3626.3735};
+								angles[]={0,6.1706681,-0};
+							};
+							side="Empty";
+							flags=1;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_STREET_LAMP""]]],[""class"",""StreetLamp""],[""mark"",""Imported StreetLamp394622 (6)""]]}";
+							};
+							id=8552;
+							type="Land_LampShabby_off_F";
+							atlOffset=24.660955;
+						};
 					};
 					id=5214;
-					atlOffset=1.5791206;
+					atlOffset=1.9978828;
 				};
 				class Item3
 				{
@@ -27203,7 +27246,7 @@ class Mission
 											class PositionInfo
 											{
 												position[]={3474.0642,36.640182,3738.7307};
-												angles[]={0,4.6251268,-0};
+												angles[]={0,4.6251268,0};
 											};
 											side="Empty";
 											flags=1;
@@ -30921,7 +30964,7 @@ class Mission
 				};
 			};
 			id=6175;
-			atlOffset=1.7583618;
+			atlOffset=1.7556801;
 		};
 		class Item4
 		{
@@ -34095,6 +34138,24 @@ class Mission
 			id=8239;
 			type="EmptyDetector";
 			atlOffset=1.3671341;
+		};
+		class Item8
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3391.1707,37.308426,3734.4126};
+				angles[]={1.5707963,4.7123895,4.9741888};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LongRottenBoards""]]}";
+			};
+			id=8551;
+			type="Land_Plank_01_8m_F";
+			atlOffset=5.26474;
 		};
 	};
 };
