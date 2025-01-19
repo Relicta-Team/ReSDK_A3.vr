@@ -51,7 +51,7 @@ vst_create = {
 	params ["_type","_src","_ctx"];
 
 	if (!vst_dictInitialized) then {
-		vst_initializeDict;
+		call vst_initializeDict;
 	};
 
 	if array_exists(vst_map_cfgs,_type) exitWith {
