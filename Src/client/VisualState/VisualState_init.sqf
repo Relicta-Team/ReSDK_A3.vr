@@ -31,7 +31,7 @@ vst_containsConfig = {
 	params ["_src","_type"];
 
 	private _oldCfgs = _src getVariable vst_const_internalVarName;
-	if isNullVar(_oldCfgs) exitWith {};
+	if isNullVar(_oldCfgs) exitWith {false};
 	array_exists(_oldCfgs,_type);
 };
 
@@ -106,31 +106,4 @@ vst_createDummyMesh = {
 		_so hideObject true;
 	};
 	_so
-};
-
-//! TODO replace all this shit with vst_getSourceHandler
-//vst varmap manager
-#define VAR_FULL_PREFIX__VST_PRIVATE ("__levst_cfg"+str __GLOB_CFG_IDX__+"_var_"+_var)
-le_vst_regVar = {
-	params ["_obj","_var","_val"];
-	_obj setVariable [VAR_FULL_PREFIX__VST_PRIVATE,_val];
-};
-le_vst_hasVar = {
-	params ["_obj","_var"]; !isNull(vec2(_obj,_var) call le_vst_getVar)
-};
-	le_vst_hasVarExt = {
-		params ["_obj","_var","_cfg"];
-		private __GLOB_CFG_IDX__ = _cfg;
-		[_obj,_var] call le_vst_hasVar
-	};
-le_vst_getVar = {
-	params ["_obj","_var"]; _obj getVariable VAR_FULL_PREFIX__VST_PRIVATE
-};
-	le_vst_getVarExt = {
-		params ["_obj","_var","_cfg"];
-		private __GLOB_CFG_IDX__ = _cfg;
-		[_obj,_var] call le_vst_getVar
-	};
-le_vst_remVar = {
-	params ["_obj","_var"]; _obj setVariable [VAR_FULL_PREFIX__VST_PRIVATE,null];
 };

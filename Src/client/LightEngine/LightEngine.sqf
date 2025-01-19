@@ -30,7 +30,6 @@ call le_se_internal_createUnmanagedEmitterMap;
 call le_se_internal_generateOptionAddress;
 
 #include "ShotableConfigs.sqf"
-#include "VisualStatesConfigs.sqf"
 
 // #include "LightEngine_mainThread.sqf"
 

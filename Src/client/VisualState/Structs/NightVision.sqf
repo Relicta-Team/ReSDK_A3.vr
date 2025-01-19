@@ -19,7 +19,7 @@ struct(VSTEaterNightVision) base(VSTBase)
 			self setv(_dummyMesh,_dummy);
 			_dummy attachTo [self getv(_src),[0,0,0],"head",true];
 		} else {
-			private _object = ["relicta_models\models\mutants\bloatfly.p3d",false] call le_vst_createDummyObj;
+			private _object = ["relicta_models\models\mutants\bloatfly.p3d",false] call vst_createDummyMesh;
 
 			private _posData = [[-0.053,0.017,-0.024],[180,-55,0]];
 			_object disableCollisionWith player;

@@ -16,21 +16,12 @@
 
 #define emitterObject _effEmitter
 
-//visual states functionality
-#define regVST(type) le_conf_##type = { params ["_condit","_src",["_ctxParams",0]]; private __GLOB_CFG_IDX__ = type ;
-#define vstParams _ctxParams
 //source object who inited vst
+//! can be used in light engine code. check and remove
 #define src _src
 //external reference, defined in smd
 //local player == this
 #define localPlayer __LOCAL_PLAYER__
-#define VST_COND_CREATE 1
-#define VST_COND_DESTR 0
-#define vstIsState(state) (state == _condit)
-#define VSTCreate if (_condit == VST_COND_CREATE) exitWith
-#define VSTDestroy if (_condit == VST_COND_DESTR) exitWith
-
-#define endRegVST };
 
 //частота обновления основного треда
 //!not used

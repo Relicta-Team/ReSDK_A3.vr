@@ -63,7 +63,7 @@ class(Breastplate) extends(ArmorVST)
 	var(size,ITEM_SIZE_BIG);
 	var(allowedSlots,[INV_ARMOR]);
 	var(canUseContainer,false);
-	var(armaClass,VST_CLOTH_BREASTPLATE);
+	var(armaClass,"VST_CLOTH_BREASTPLATE");
 
 	var(bodyPartsCovered,UPPER_TORSO + LOWER_TORSO);
 	var(dr,5);
@@ -74,7 +74,7 @@ endclass
 class(ArmorCeramic) extends(ArmorVST)
 	var(name,"Керамический бронежилет");
 	var(desc,"Собирается в больших городах и имеет хорошую защиту.");
-	var(armaClass,VST_CLOTH_CERAMIC);
+	var(armaClass,"VST_CLOTH_CERAMIC");
 	
 	var(weight,24);
 	var(size,ITEM_SIZE_BIG);
@@ -87,11 +87,11 @@ class(ArmorCeramic) extends(ArmorVST)
 endclass
 
 class(ArmorStrong) extends(ArmorCeramic)
-	var(armaClass,VST_CLOTH_STRONGARMOR);
+	var(armaClass,"VST_CLOTH_STRONGARMOR");
 endclass
 
 class(ArmorSteel) extends(ArmorCeramic)
-	var(armaClass,VST_CLOTH_METALARMOR);
+	var(armaClass,"VST_CLOTH_METALARMOR");
 endclass
 
 class(Bandolier) extends(Armor)

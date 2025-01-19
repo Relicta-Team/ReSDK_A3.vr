@@ -30,7 +30,7 @@ cd_fw_isForceWalk = {cd_fw_forceWalk || cd_fw_hasBreakBone || ([player] call smd
 decl(void(actor))
 cd_fw_syncForceWalk = {
 	private _mob = _this;
-	if ([_mob,"ghost_flag",VST_GHOST_EFFECT] call le_vst_hasVarExt) exitWith {
+	if ([_mob,"VST_GHOST_EFFECT"] call vst_containsConfig) exitWith {
 		_mob forceWalk false;
 	};
 	_mob forceWalk (call cd_fw_isForceWalk)
