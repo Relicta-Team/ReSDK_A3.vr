@@ -3,6 +3,8 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
 struct(BFXBase)
 	decl(string) def(name) "";
 
