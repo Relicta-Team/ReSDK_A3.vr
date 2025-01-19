@@ -36,7 +36,8 @@ importClient("src\client\ClientData\ClientData.sqf"); cmplog("CDat")//В это�
 importClient("src\client\Rendering\Camera\CameraControl.sqf"); cmplog("Camera")//только после clientData (потому что использует cd_cameraSetting)
 importClient("src\client\StaminaControl\Stamina_init.sqf"); cmplog("Stamina")//только после ClientData (потому что использует cd_stamina...)
 importClient("src\client\LightEngine\LightEngine.sqf"); cmplog("LightEngine")
-importClient("src\client\VisualState\VisualState_init.sqf"); cmplog("VST")
+importClient("src\client\VisualState\VisualState_init.sqf"); cmplog("VST") //visual states
+importClient("src\client\BlastFx\BlastFX_init.sqf"); cmplog("BlastFX") //fast blast fx component
 importClient("src\client\ProxyItems\ProxyItems.sqf"); cmplog("ProxIt")//proxypos of items
 importClient("src\client\ProxyItems\RProx.sqf"); cmplog("RProxExtension")//proxy system v2. !load only after proxit
 importClient("src\client\SyncMobData\SMD_init.sqf"); cmplog("SMD")//synced mobs
