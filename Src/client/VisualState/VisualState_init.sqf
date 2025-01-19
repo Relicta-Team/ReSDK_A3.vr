@@ -21,7 +21,9 @@ vst_initializeDict = {
 	private _cfgName = "";
 	{
 		_cfgName = [_x,"name"] call struct_reflect_getTypeValue;
-		vst_map_cfgs set [_cfgName,_x];
+		if (_cfgName != "") then {
+			vst_map_cfgs set [_cfgName,_x];
+		};
 	} foreach _vstList;
 	vst_dictInitialized = true;
 };
