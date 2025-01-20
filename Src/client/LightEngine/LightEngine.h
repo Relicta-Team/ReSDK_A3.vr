@@ -75,6 +75,7 @@ enum(ScriptEmitHandlerType,SCRIPT_EMIT_HANDLER_MODE_)
 #define SCRIPT_EMIT_HANDLER_MODE_DROP 1
 //скриптовый обработчик неуправляемый. основная особенность - не привязан к объекту, создается в позиции. пользователь самостоятельно должен удалять его
 #define SCRIPT_EMIT_HANDLER_MODE_UNMANAGED 2
+enumend
 
 // макросы ниже сохранены для обратной совместимости
 

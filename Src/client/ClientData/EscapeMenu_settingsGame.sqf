@@ -18,6 +18,7 @@ enum(EscapeSettingDataIndex,SETTING_INDEX_)
 #define SETTING_INDEX_EVENTONAPPLY 8
 #define SETTING_INDEX_EVENTONABORT 9
 #define SETTING_INDEX_EVENTONCHANGE 10
+enumend
 
 inline_macro
 #define setting(name,desc,type,range,variable,event_on_apply,event_on_abort,event_on_change) [name,desc,type,range,#variable,variable,variable,variable,event_on_apply,event_on_abort,event_on_change]
@@ -37,6 +38,7 @@ enum(EscapeSettingDataType,type)
 #define typeSwitcher 1
 #define typeSlider 2
 #define typeBool 3
+enumend
 
 inline_macro
 #define centerize(val) "<t align='center'>" + val + "</t>"

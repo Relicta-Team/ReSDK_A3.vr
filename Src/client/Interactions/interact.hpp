@@ -46,6 +46,7 @@ enum(InteractRpcMode,INTERACT_RPC_)
 #define INTERACT_RPC_MAIN 3
 #define INTERACT_RPC_EXTRA 4
 #define INTERACT_RPC_CLICK_SELF 5
+enumend
 
 // types of client-side progress
 /*
@@ -57,6 +58,7 @@ enum(InteractProgressType,INTERACT_PROGRESS_)
 #define INTERACT_PROGRESS_TYPE_FULL 0
 #define INTERACT_PROGRESS_TYPE_MEDIUM 1
 #define INTERACT_PROGRESS_TYPE_LAZY 2
+enumend
 
 enum(AttackTypeAssoc,ATTACK_TYPE_ASSOC_)
 #define ATTACK_TYPE_ASSOC_HAND 0
@@ -72,6 +74,7 @@ enum(AttackTypeAssoc,ATTACK_TYPE_ASSOC_)
 #define ATTACK_TYPE_ASSOC_WPN_1_3 6
 
 #define ATTACK_TYPE_ASSOC_SWING_HANDLE 7
+enumend
 
 macro_func(interact_attackTypeAssocIsShooting,bool(int))
 #define ATTACK_TYPE_ASSOC_IS_SHOOTING(v) (v in [ATTACK_TYPE_ASSOC_WPN_1,ATTACK_TYPE_ASSOC_WPN_1_3])

@@ -34,6 +34,7 @@ enum(PressedRefId,PRESSED_)
 #define PRESSED_LINK 0
 //ссылка на драгуемую ктгшку 
 #define PRESSED_DRAG 1
+enumend
 
 macro_const(inventory_indexDragger)
 #define INDEX_DRAGGER -9

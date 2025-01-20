@@ -48,9 +48,12 @@
 	#define ACCESS_MODE_USER 1
 	#define ACCESS_MODE_MODERATOR 2
 	#define ACCESS_MODE_ADMIN 3
+	enumend
 
 */
 #define enum(name,prefix)
+//end block enum declaration
+#define enumend
 
 //top-level namespace name prefix for functions
 /*example: 
