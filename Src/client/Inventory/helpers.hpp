@@ -144,6 +144,7 @@ macro_func(inventory_getContainerNameText,widget())
 	#define container_index_isInWorld container_index_object
 	//this does not used
 	#define container_object_awaitGenerateValue -1
+	enumend
 
 macro_func(inventory_getWorldContainer,mesh())
 #define getWorldContainer (inventory_containerCommonData select container_index_object)
