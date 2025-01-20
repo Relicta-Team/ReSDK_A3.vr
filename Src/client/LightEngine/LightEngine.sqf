@@ -15,6 +15,7 @@
 #include "ScriptedEffects.sqf"
 
 //prepare cfgs, called on serverside
+decl(void())
 le_initializeScriptedConfigs = {
 	call lightSys_preInitialize;
 	call le_se_initScriptedLights;
@@ -35,15 +36,17 @@ call le_se_internal_generateOptionAddress;
 #include "LightEngine_ScriptedCulling.sqf"
 
 // Нужно выяснить какое существо самое лучшее в плане атачинга при первом создании
+decl(actor)
 le_simulated = clientMob;//"B_Soldier_F" createVehicleLocal [0,0,0];
 
 //le_handler_mainThread = -1;
 //le_handler_rendering = -1;
 //le_glsData = objNull;
 //le_localGlsData = nullPtr;
-
+decl(int[])
 le_allChunkTypes = [CHUNK_TYPE_ITEM,CHUNK_TYPE_STRUCTURE,CHUNK_TYPE_DECOR];
 
+decl(mesh[])
 le_allLights = []; //all light points
 
 /*le_init = {
@@ -66,6 +69,7 @@ le_allLights = []; //all light points
 
 
 //загружает источник освещения или частиц
+decl(mesh(int;mesh))
 le_loadLight = {
 	params [['_type',-1],"_src"];
 	
@@ -121,6 +125,7 @@ le_loadLight = {
 // };
 
 //выгружает источник освещения
+decl(void(mesh))
 le_unloadLight = {
 	params ["_obj"];
 
@@ -150,12 +155,14 @@ le_unloadLight = {
 };
 
 //проверяет висит ли на объекте источник света
+decl(bool(mesh))
 le_isLoadedLight = {
 	params ["_obj"];
 	private _light = _obj getvariable ["__light",objNUll];
 	not_equals(_light,objNUll)
 };
 
+decl(int(mesh))
 le_getLoadedLightCfg = {
 	params ["_obj"];
 	private _light = _obj getvariable ["__light",objNUll];
@@ -163,6 +170,7 @@ le_getLoadedLightCfg = {
 	_obj getvariable ["__config",-1]
 };
 
+decl(bool(int|string))
 le_isLightConfig = {
 	if not_equalTypes(_this,0) exitWith {false};
 	_this > 0 && _this <= le_light_max_index
@@ -202,6 +210,7 @@ le_isLightConfig = {
 };
 */
 
+decl(bool(mesh;bool))
 le_debug_canViewLight = {
 	params ["_src","_isLightObject"];
 
@@ -352,14 +361,16 @@ le_debug_lightRender = {
 */
 
 //render damage effect for objects
-_dofe = {
+decl(bool(vector3;int|string;vector3))
+le_se_emitFireAtPos = {
 	params ["_pos","_type","_norm"];
 	traceformat("damage effect normal: %1",_norm)
 	[_type,_pos,_norm] call le_se_fireEmit;
 };
-rpcAdd("do_fe",_dofe);
+rpcAdd("do_fe",le_se_emitFireAtPos);
 
-_dofe_mob = {
+decl(void(actor;string|int;string;float))
+le_se_emitFireAtActor = {
 	params ["_owner","_type",["_sel","spine3"],"_deleteAfter"];
 	private _refem = refcreate([]);
 	[
@@ -389,7 +400,7 @@ _dofe_mob = {
 		_params
 	endAsyncInvoke
 };
-rpcAdd("do_fe_mob",_dofe_mob);
+rpcAdd("do_fe_mob",le_se_emitFireAtActor);
 
 /*
 Memory head_axis (dist: 0.127475)

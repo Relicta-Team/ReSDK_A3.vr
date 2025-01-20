@@ -111,7 +111,7 @@ struct(ScriptedPointLightData) base(AbstractLightData)
 		} foreach _kvargs;
 	}
 
-	decl(mesh()) def(_onActivateDebugRender)
+	decl(override) def(_onActivateDebugRender)
 	{
 	#ifdef ENABLE_VISUAL_SPHERE_DEBUG
 		private _s = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
@@ -125,7 +125,7 @@ struct(ScriptedPointLightData) base(AbstractLightData)
 	#endif
 	}
 
-	decl(void())def(_onDrawRender)
+	decl(override) def(_onDrawRender)
 	{
 		private _p = getposatl (self getv(src));
 		[_p,[1,1,0,1],30,self getv(radius),16] call debug_drawSphereEx;
@@ -137,13 +137,13 @@ struct(ScriptedPointLightData) base(AbstractLightData)
 		format["PointLight(%1)<%2>",self getv(radius),self getv(src)]
 	}
 
-	decl(bool(vector3)) def(isPointInside)
+	decl(override) def(isPointInside)
 	{
 		params ["_pos"];
 		[getposatl(self getv(src)),self getv(radius),_pos] call interact_isPointInSphere
 	}
 
-	decl(vector3[]()) def(getBoundingBox)
+	decl(override) def(getBoundingBox)
 	{
 		private _sphereRadius = self getv(radius);
 
@@ -186,7 +186,7 @@ struct(ScriptedDirectLightData) base(AbstractLightData)
 		} foreach _kvargs;
 	}
 
-	decl(void()) def(_onDrawRender)
+	decl(override) def(_onDrawRender)
 	{
 		private _p = getposatl (self getv(src));
 		([self getv(src)] call model_getPitchBankYawAccurate) params ["_pt","_bk"];
@@ -209,7 +209,7 @@ struct(ScriptedDirectLightData) base(AbstractLightData)
 		format["DirectLight(%1)<%2>",format["o:%1 i:%2 d:%3 pb:{%4,%5}",self getv(outAngle),self getv(inAngle),self getv(distance),self getv(pitch),self getv(bank)],self getv(src)]
 	}
 
-	decl(bool(vector3)) def(isPointInside)
+	decl(override) def(isPointInside)
 	{
 		params ["_pos"];
 		private _obj = self getv(src);
@@ -221,7 +221,7 @@ struct(ScriptedDirectLightData) base(AbstractLightData)
 		] call interact_isPointInCone;
 	}
 
-	decl(vector3[]()) def(getBoundingBox)
+	decl(override) def(getBoundingBox)
 	{
 		private _src = self getv(src);
 		private _outerAngle = self getv(outAngle);
