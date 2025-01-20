@@ -49,21 +49,6 @@
 #define getOnlyObjects(_data) ((_data) select [1,count (_data) - 1])
 */
 
-//начальное число индексатора для shot событий (исключая его)
-#define le_shot_startindex 10000
-
-#define shotParams _shotParams
-
-#define regShot(type) _rshot_t = type; _rfl_ev = {params ['sourceObject','shotParams']; private __disposable = [];
-#define makeParticle(namevar) namevar = "#particlesource" createVehicleLocal [0,0,0]; __disposable pushBack namevar
-#define makeLight(namevar) namevar = "#lightpoint" createVehicleLocal [0,0,0]; __disposable pushBack namevar
-
-#define disposeAllAfterTime(time) invokeAfterDelayParams({{deleteVehicle _x}count _this},time,__disposable)
-
-#define linkObject(light,object,anotherParams) light attachto [object,anotherParams]
-
-#define endRegShot }; missionNamespace setVariable ["le_conf_shot_" + str(_rshot_t - le_shot_startindex),_rfl_ev];
-
 /*
 ================================================================================
 	GROUP: Scripted emitter

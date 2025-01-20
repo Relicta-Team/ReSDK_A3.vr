@@ -55,3 +55,10 @@ bfx_doShot = {
 	
 	_obj
 };	
+
+//check if config valid
+decl(bool(string))
+bfx_containConfig = {
+	params ["_type"];
+	array_exists(bfx_map_configTable,_type)
+};

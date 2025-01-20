@@ -40,7 +40,7 @@ class(DBShotgun) extends(IRangedWeapon)
 	var(model,"relicta_models\models\weapons\fireweapon\shotguns\izh43\izh43.p3d");
 	getter_func(getTwoHandAnim,ITEM_2HANIM_RIFLE);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_RIFLE);
-	getter_func(getAttackVisualData,SHOT_BULLET_SHOTGUN);
+	getter_func(getAttackVisualData,"BFX_BULLET_SHOTGUN");
 	getter_func(getUsingSkill,"shotgun");
 	var(basicDamage,vec2(1,2));
 
@@ -227,7 +227,7 @@ class(Shotgun) extends(IRangedWeapon)
 	var(model,"relicta_models\models\weapons\fireweapon\shotguns\mp133\mp133.p3d");
 	getter_func(getTwoHandAnim,ITEM_2HANIM_RIFLE);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_RIFLE);
-	getter_func(getAttackVisualData,SHOT_BULLET_SHOTGUN);
+	getter_func(getAttackVisualData,"BFX_BULLET_SHOTGUN");
 	getter_func(getUsingSkill,"shotgun");
 	var(basicDamage,vec2(1,1));
 

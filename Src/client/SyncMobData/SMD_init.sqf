@@ -289,12 +289,12 @@ smd_onAttackOrDamage = {
 
 			};
 			if (_damageType == WOUND_TYPE_BLEEDING) exitWith {
-				[SHOT_MEATSPLAT,_mob,[_selection]] call le_doshot;
+				["BFX_MEATSPLAT",_mob,[_selection]] call bfx_doShot;
 			};
 			//specials
 			//-100 - destroy or loss limb
 			if (_damageType == -100) exitWith {
-				[SHOT_DESTROYLIMB,_mob,[_selection]] call le_doshot;
+				["BFX_DESTROYLIMB",_mob,[_selection]] call bfx_doShot;
 			};
 		};
 

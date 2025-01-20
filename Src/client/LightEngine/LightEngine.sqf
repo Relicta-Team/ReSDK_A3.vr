@@ -29,8 +29,6 @@ call le_se_internal_createDropEmitterMap;
 call le_se_internal_createUnmanagedEmitterMap;
 call le_se_internal_generateOptionAddress;
 
-#include "ShotableConfigs.sqf"
-
 // #include "LightEngine_mainThread.sqf"
 
 #include "LightRender.sqf"
@@ -122,22 +120,6 @@ le_loadLight = {
 // 	[_src] call _code;
 // };
 
-le_doShot = {
-	params ["_type","_src",["_ctxParams",[]]];
-
-	if (_type <= le_shot_startindex) exitWith {
-		error("LightEngine::doShot() - Undefined light type");
-	};
-	
-	private _code = missionNamespace getVariable ["le_conf_shot_" + str (_type - le_shot_startindex),{}];
-	
-	if equals(_code,{}) exitWith {
-		errorformat("Cant load light from config => %1",_type);
-	};
-
-	[_src,_ctxParams] call _code;
-};	
-
 //выгружает источник освещения
 le_unloadLight = {
 	params ["_obj"];
@@ -182,11 +164,8 @@ le_getLoadedLightCfg = {
 };
 
 le_isLightConfig = {
+	if not_equalTypes(_this,0) exitWith {false};
 	_this > 0 && _this <= le_light_max_index
-};
-
-le_isShotConfig = {
-	_this >= le_shot_startindex
 };
 
 //OBSOLETE
