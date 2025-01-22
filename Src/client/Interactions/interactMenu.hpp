@@ -47,3 +47,4 @@ macro_const(interactMenu_timeToInfade)
 enum(InteractMenuActionType,ACTION_)
 #define ACTION_SWITCHABLE 0
 #define ACTION_PLAYING 1
+enumend

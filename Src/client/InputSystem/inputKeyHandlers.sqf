@@ -201,7 +201,7 @@ input_movementCheck = {
 	};
 	_hasNoArms = !_ra && !_la;
 	
-	if ([player,"ghost_flag",VST_GHOST_EFFECT] call le_vst_hasVarExt) then {
+	if ([player,"VST_GHOST_EFFECT"] call vst_containsConfig) then {
 		_hasNoArms = false; 
 		_hasNoLegs = false;
 	};

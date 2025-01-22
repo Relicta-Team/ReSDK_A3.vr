@@ -1121,10 +1121,10 @@ region(stealth system)
 		if equals(_mode,getSelf(isStealthEnabled)) exitWith {};
 
 		if (_mode) then {
-			callSelfParams(addVisualState,VST_HUMAN_STEALTH);
+			callSelfParams(addVisualState,"VST_HUMAN_STEALTH");
 		} else {
 			callSelfParams(fastSendInfo,"hud_light" arg 0); //drop lighting mode
-			callSelfParams(removeVisualState,VST_HUMAN_STEALTH);
+			callSelfParams(removeVisualState,"VST_HUMAN_STEALTH");
 		};
 		setSelf(isStealthEnabled,_mode);
 	};

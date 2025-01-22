@@ -3,19 +3,21 @@
 // sdk.relicta.ru
 // ======================================================
 
-//"a3\structures_f\items\vessels\waterbarrel_f.p3d"
-/*
+struct(VSTStrongArmor) base(VSTBase)
 
-*/
-regVST(VST_CLOTH_STRONGARMOR)
-	private _var = "cl_strongarmor";
-	VSTCreate {
+	def(name) "VST_CLOTH_STRONGARMOR";
+
+	def(_list) [];
+
+	def(onCreated)
+	{
+		params ["_ctx"];
 		private _list = [];
-		
+		self setv(_list,_list);
 		{
 			_x params ["_bias","_slot","_vec","_scale"];
-			_o = createSimpleObject ["a3\structures_f\items\vessels\waterbarrel_f.p3d",[0,0,0],true];
-			_o attachTo [src,_bias,_slot,true];
+			private _o = createSimpleObject ["a3\structures_f\items\vessels\waterbarrel_f.p3d",[0,0,0],true];
+			_o attachTo [self getv(_src),_bias,_slot,true];
 			[_o,_vec] call model_SetPitchBankYaw;
 			_o setObjectScale _scale;
 			_list pushBack _o;
@@ -25,11 +27,13 @@ regVST(VST_CLOTH_STRONGARMOR)
 			[[0,0,-0.15],"rightupleg",[20,0,50],0.23],
 			[[0,0,-0.15],"leftupleg",[20,0,-50],0.23]
 		];
-		
-		[src,_var,_list] call le_vst_regVar;
-	};
-	VSTDestroy {
-		{deleteVehicle _x} foreach ([src,_var] call le_vst_getVar);
-		[src,_var] call le_vst_remVar;
-	};
-endRegVST
+	}
+
+	def(onDestroy)
+	{
+		params ["_ctx"];
+		{deleteVehicle _x} foreach (self getv(_list));
+		self setv(_list,[]);
+	}
+
+endstruct

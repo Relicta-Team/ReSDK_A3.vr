@@ -390,7 +390,7 @@ si_addThrowTask = {
 				_leveldown,
 				_speed
 			];
-			if (_vData != 0) then {
+			if not_equals(_vData,"") then {
 				_dat pushBack _vData;
 			};
 

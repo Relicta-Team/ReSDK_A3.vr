@@ -14,7 +14,7 @@ class(PistolPBM) extends(IRangedWeapon)
 	var(model,"relicta_models\models\weapons\fireweapon\pistols\type94\type94.p3d");
 	getter_func(getTwoHandAnim,ITEM_2HANIM_PISTOL);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_PISTOL);
-	getter_func(getAttackVisualData,SHOT_BULLET_PISTOL);
+	getter_func(getAttackVisualData,"BFX_BULLET_PISTOL");
 	getter_func(getUsingSkill,"pistol");
 
 	var(basicDistance,700);
@@ -41,7 +41,7 @@ class(Revolver) extends(IRangedWeapon)
 	var(model,"relicta_models\models\weapons\fireweapon\pistols\nagan\nagan.p3d");
 	getter_func(getTwoHandAnim,ITEM_2HANIM_PISTOL);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_PISTOL);
-	getter_func(getAttackVisualData,SHOT_BULLET_PISTOL);
+	getter_func(getAttackVisualData,"BFX_BULLET_PISTOL");
 	getter_func(getUsingSkill,"pistol");
 	var(basicDamage,vec2(2,-1));
 	getter_func(getAmmoCaliber,".38");
@@ -247,7 +247,7 @@ class(PistolHandmade) extends(IRangedWeapon)
 
 	getter_func(getTwoHandAnim,ITEM_2HANIM_PISTOL);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_PISTOL);
-	getter_func(getAttackVisualData,SHOT_BULLET_PISTOL);
+	getter_func(getAttackVisualData,"BFX_BULLET_PISTOL");
 	getter_func(getUsingSkill,"pistol");
 	var(basicDamage,vec2(2,5));
 
@@ -280,7 +280,7 @@ class(PistolOneShoot) extends(DBShotgun)
 
 	getter_func(getTwoHandAnim,ITEM_2HANIM_PISTOL);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_PISTOL);
-	getter_func(getAttackVisualData,SHOT_BULLET_PISTOL);
+	getter_func(getAttackVisualData,"BFX_BULLET_PISTOL");
 	getter_func(getUsingSkill,"pistol");
 	var(basicDamage,vec2(2,-1));
 

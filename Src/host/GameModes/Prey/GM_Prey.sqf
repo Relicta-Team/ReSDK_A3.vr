@@ -259,7 +259,7 @@ class(GMPreyMobEater) extends(Mob)
 	{
 		objParams_1(_linked);
 		super();
-		callSelfParams(addVisualState,VST_EATER_NIGHTVISION);
+		callSelfParams(addVisualState,"VST_EATER_NIGHTVISION");
 	};
 
 	func(getRandomNamePrefix)
