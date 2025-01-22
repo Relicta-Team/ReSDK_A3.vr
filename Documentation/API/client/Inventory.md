@@ -785,7 +785,7 @@ Replaced value:
 ```sqf
 -9
 ```
-File: [client\Inventory\helpers.hpp at line 39](../../../Src/client/Inventory/helpers.hpp#L39)
+File: [client\Inventory\helpers.hpp at line 40](../../../Src/client/Inventory/helpers.hpp#L40)
 ## SLOT_BIASH
 
 Type: constant
@@ -797,7 +797,7 @@ Replaced value:
 ```sqf
 0.3
 ```
-File: [client\Inventory\helpers.hpp at line 42](../../../Src/client/Inventory/helpers.hpp#L42)
+File: [client\Inventory\helpers.hpp at line 43](../../../Src/client/Inventory/helpers.hpp#L43)
 ## TIME_PREPARE_SLOTS
 
 Type: constant
@@ -809,7 +809,7 @@ Replaced value:
 ```sqf
 0.09
 ```
-File: [client\Inventory\helpers.hpp at line 46](../../../Src/client/Inventory/helpers.hpp#L46)
+File: [client\Inventory\helpers.hpp at line 47](../../../Src/client/Inventory/helpers.hpp#L47)
 ## TIME_PREPARE_DRAG
 
 Type: constant
@@ -821,7 +821,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Inventory\helpers.hpp at line 49](../../../Src/client/Inventory/helpers.hpp#L49)
+File: [client\Inventory\helpers.hpp at line 50](../../../Src/client/Inventory/helpers.hpp#L50)
 ## DRAG_FADE_PROCESS
 
 Type: constant
@@ -833,7 +833,7 @@ Replaced value:
 ```sqf
 0.4
 ```
-File: [client\Inventory\helpers.hpp at line 52](../../../Src/client/Inventory/helpers.hpp#L52)
+File: [client\Inventory\helpers.hpp at line 53](../../../Src/client/Inventory/helpers.hpp#L53)
 ## getDragSlot
 
 Type: constant
@@ -845,7 +845,7 @@ Replaced value:
 ```sqf
 (inventory_pressedwidget select PRESSED_DRAG)
 ```
-File: [client\Inventory\helpers.hpp at line 56](../../../Src/client/Inventory/helpers.hpp#L56)
+File: [client\Inventory\helpers.hpp at line 57](../../../Src/client/Inventory/helpers.hpp#L57)
 ## onDragInit(wid)
 
 Type: constant
@@ -857,7 +857,7 @@ Replaced value:
 ```sqf
 inventory_pressedwidget set [PRESSED_DRAG,wid]; wid ctrlSetFade 1; wid ctrlCommit 0
 ```
-File: [client\Inventory\helpers.hpp at line 59](../../../Src/client/Inventory/helpers.hpp#L59)
+File: [client\Inventory\helpers.hpp at line 60](../../../Src/client/Inventory/helpers.hpp#L60)
 ## isInteractibleAction
 
 Type: constant
@@ -869,7 +869,7 @@ Replaced value:
 ```sqf
 ((inventory_previewObject getVariable ["isInteractible",false]) || (typeof getInteractibleTarget == BASIC_MOB_TYPE))
 ```
-File: [client\Inventory\helpers.hpp at line 62](../../../Src/client/Inventory/helpers.hpp#L62)
+File: [client\Inventory\helpers.hpp at line 63](../../../Src/client/Inventory/helpers.hpp#L63)
 ## getInteractibleTarget
 
 Type: constant
@@ -881,7 +881,7 @@ Replaced value:
 ```sqf
 (inventory_previewObject getVariable ["interactibleTarget",objnull])
 ```
-File: [client\Inventory\helpers.hpp at line 65](../../../Src/client/Inventory/helpers.hpp#L65)
+File: [client\Inventory\helpers.hpp at line 66](../../../Src/client/Inventory/helpers.hpp#L66)
 ## getPressedSlot
 
 Type: constant
@@ -893,7 +893,7 @@ Replaced value:
 ```sqf
 (inventory_pressedwidget select PRESSED_LINK)
 ```
-File: [client\Inventory\helpers.hpp at line 70](../../../Src/client/Inventory/helpers.hpp#L70)
+File: [client\Inventory\helpers.hpp at line 71](../../../Src/client/Inventory/helpers.hpp#L71)
 ## isDragProcess
 
 Type: constant
@@ -905,7 +905,7 @@ Replaced value:
 ```sqf
 (! (getPressedSlot isequalto widgetNull))
 ```
-File: [client\Inventory\helpers.hpp at line 73](../../../Src/client/Inventory/helpers.hpp#L73)
+File: [client\Inventory\helpers.hpp at line 74](../../../Src/client/Inventory/helpers.hpp#L74)
 ## isHandDrag
 
 Type: constant
@@ -917,7 +917,7 @@ Replaced value:
 ```sqf
 ((getSlotId(getPressedSlot) in [INV_HAND_L,INV_HAND_R]) && !isContainerSlot(getPressedSlot))
 ```
-File: [client\Inventory\helpers.hpp at line 76](../../../Src/client/Inventory/helpers.hpp#L76)
+File: [client\Inventory\helpers.hpp at line 77](../../../Src/client/Inventory/helpers.hpp#L77)
 ## onPressSlot(slotwid)
 
 Type: constant
@@ -929,7 +929,7 @@ Replaced value:
 ```sqf
 [slotwid] call inventory_onPressSlot
 ```
-File: [client\Inventory\helpers.hpp at line 79](../../../Src/client/Inventory/helpers.hpp#L79)
+File: [client\Inventory\helpers.hpp at line 80](../../../Src/client/Inventory/helpers.hpp#L80)
 ## onReleaseSlot(zone)
 
 Type: constant
@@ -941,7 +941,7 @@ Replaced value:
 ```sqf
 [zone] call inventory_onReleaseSlot
 ```
-File: [client\Inventory\helpers.hpp at line 82](../../../Src/client/Inventory/helpers.hpp#L82)
+File: [client\Inventory\helpers.hpp at line 83](../../../Src/client/Inventory/helpers.hpp#L83)
 ## getSlotId(wid)
 
 Type: constant
@@ -953,7 +953,7 @@ Replaced value:
 ```sqf
 (wid getvariable "slotid")
 ```
-File: [client\Inventory\helpers.hpp at line 86](../../../Src/client/Inventory/helpers.hpp#L86)
+File: [client\Inventory\helpers.hpp at line 87](../../../Src/client/Inventory/helpers.hpp#L87)
 ## getSlotIcon(wid)
 
 Type: constant
@@ -965,7 +965,7 @@ Replaced value:
 ```sqf
 (wid getVariable "icon")
 ```
-File: [client\Inventory\helpers.hpp at line 89](../../../Src/client/Inventory/helpers.hpp#L89)
+File: [client\Inventory\helpers.hpp at line 90](../../../Src/client/Inventory/helpers.hpp#L90)
 ## getSlotDirtOverlay(wid)
 
 Type: constant
@@ -977,7 +977,7 @@ Replaced value:
 ```sqf
 (wid getvariable "dirtOverlay")
 ```
-File: [client\Inventory\helpers.hpp at line 92](../../../Src/client/Inventory/helpers.hpp#L92)
+File: [client\Inventory\helpers.hpp at line 93](../../../Src/client/Inventory/helpers.hpp#L93)
 ## getSlotBackground(wid)
 
 Type: constant
@@ -989,7 +989,7 @@ Replaced value:
 ```sqf
 (wid getVariable "background")
 ```
-File: [client\Inventory\helpers.hpp at line 97](../../../Src/client/Inventory/helpers.hpp#L97)
+File: [client\Inventory\helpers.hpp at line 98](../../../Src/client/Inventory/helpers.hpp#L98)
 ## getSlotName(wid)
 
 Type: constant
@@ -1001,7 +1001,7 @@ Replaced value:
 ```sqf
 (wid getVariable "slotname")
 ```
-File: [client\Inventory\helpers.hpp at line 100](../../../Src/client/Inventory/helpers.hpp#L100)
+File: [client\Inventory\helpers.hpp at line 101](../../../Src/client/Inventory/helpers.hpp#L101)
 ## isEmptySlot(id)
 
 Type: constant
@@ -1013,7 +1013,7 @@ Replaced value:
 ```sqf
 ((inventory_slotdata select (id)) isequalto [])
 ```
-File: [client\Inventory\helpers.hpp at line 103](../../../Src/client/Inventory/helpers.hpp#L103)
+File: [client\Inventory\helpers.hpp at line 104](../../../Src/client/Inventory/helpers.hpp#L104)
 ## isEmptyWidget(wid)
 
 Type: constant
@@ -1025,7 +1025,7 @@ Replaced value:
 ```sqf
 isEmptySlot(getSlotId(wid))
 ```
-File: [client\Inventory\helpers.hpp at line 106](../../../Src/client/Inventory/helpers.hpp#L106)
+File: [client\Inventory\helpers.hpp at line 107](../../../Src/client/Inventory/helpers.hpp#L107)
 ## getSlotDataById(id)
 
 Type: constant
@@ -1037,7 +1037,7 @@ Replaced value:
 ```sqf
 ((id) call inventory_getSlotDataById)
 ```
-File: [client\Inventory\helpers.hpp at line 109](../../../Src/client/Inventory/helpers.hpp#L109)
+File: [client\Inventory\helpers.hpp at line 110](../../../Src/client/Inventory/helpers.hpp#L110)
 ## getPressedSlotPosition
 
 Type: constant
@@ -1049,7 +1049,7 @@ Replaced value:
 ```sqf
 inventory_pressedSlotPosition
 ```
-File: [client\Inventory\helpers.hpp at line 112](../../../Src/client/Inventory/helpers.hpp#L112)
+File: [client\Inventory\helpers.hpp at line 113](../../../Src/client/Inventory/helpers.hpp#L113)
 ## setPressedSlotPosition(pos)
 
 Type: constant
@@ -1061,7 +1061,7 @@ Replaced value:
 ```sqf
 inventory_pressedSlotPosition = (pos)
 ```
-File: [client\Inventory\helpers.hpp at line 114](../../../Src/client/Inventory/helpers.hpp#L114)
+File: [client\Inventory\helpers.hpp at line 115](../../../Src/client/Inventory/helpers.hpp#L115)
 ## isInsidePressedSlot
 
 Type: constant
@@ -1073,7 +1073,7 @@ Replaced value:
 ```sqf
 inventory_isInsidePressedSlot
 ```
-File: [client\Inventory\helpers.hpp at line 117](../../../Src/client/Inventory/helpers.hpp#L117)
+File: [client\Inventory\helpers.hpp at line 118](../../../Src/client/Inventory/helpers.hpp#L118)
 ## getVerbMenuWidget
 
 Type: constant
@@ -1085,7 +1085,7 @@ Replaced value:
 ```sqf
 (inventory_verbMenuWidgets select 0)
 ```
-File: [client\Inventory\helpers.hpp at line 120](../../../Src/client/Inventory/helpers.hpp#L120)
+File: [client\Inventory\helpers.hpp at line 121](../../../Src/client/Inventory/helpers.hpp#L121)
 ## isInsideVerbMenu_inv
 
 Type: constant
@@ -1097,7 +1097,7 @@ Replaced value:
 ```sqf
 (getVerbMenuWidget call isMouseInsideWidget)
 ```
-File: [client\Inventory\helpers.hpp at line 124](../../../Src/client/Inventory/helpers.hpp#L124)
+File: [client\Inventory\helpers.hpp at line 125](../../../Src/client/Inventory/helpers.hpp#L125)
 ## isOpenedVerbMenu
 
 Type: constant
@@ -1109,7 +1109,7 @@ Replaced value:
 ```sqf
 (!(getVerbMenuWidget isEqualTo widgetNull))
 ```
-File: [client\Inventory\helpers.hpp at line 126](../../../Src/client/Inventory/helpers.hpp#L126)
+File: [client\Inventory\helpers.hpp at line 127](../../../Src/client/Inventory/helpers.hpp#L127)
 ## getContainerMainCtg
 
 Type: constant
@@ -1121,7 +1121,7 @@ Replaced value:
 ```sqf
 (inventory_containerWidgets select 0)
 ```
-File: [client\Inventory\helpers.hpp at line 130](../../../Src/client/Inventory/helpers.hpp#L130)
+File: [client\Inventory\helpers.hpp at line 131](../../../Src/client/Inventory/helpers.hpp#L131)
 ## getContainerSlotsCtg
 
 Type: constant
@@ -1133,7 +1133,7 @@ Replaced value:
 ```sqf
 (inventory_containerWidgets select 1)
 ```
-File: [client\Inventory\helpers.hpp at line 132](../../../Src/client/Inventory/helpers.hpp#L132)
+File: [client\Inventory\helpers.hpp at line 133](../../../Src/client/Inventory/helpers.hpp#L133)
 ## getContainerNameText
 
 Type: constant
@@ -1145,7 +1145,7 @@ Replaced value:
 ```sqf
 (inventory_containerWidgets select 2)
 ```
-File: [client\Inventory\helpers.hpp at line 134](../../../Src/client/Inventory/helpers.hpp#L134)
+File: [client\Inventory\helpers.hpp at line 135](../../../Src/client/Inventory/helpers.hpp#L135)
 ## container_index_name
 
 Type: constant
@@ -1157,7 +1157,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Inventory\helpers.hpp at line 138](../../../Src/client/Inventory/helpers.hpp#L138)
+File: [client\Inventory\helpers.hpp at line 139](../../../Src/client/Inventory/helpers.hpp#L139)
 ## container_index_ref
 
 Type: constant
@@ -1169,7 +1169,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Inventory\helpers.hpp at line 139](../../../Src/client/Inventory/helpers.hpp#L139)
+File: [client\Inventory\helpers.hpp at line 140](../../../Src/client/Inventory/helpers.hpp#L140)
 ## container_index_object
 
 Type: constant
@@ -1181,7 +1181,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Inventory\helpers.hpp at line 140](../../../Src/client/Inventory/helpers.hpp#L140)
+File: [client\Inventory\helpers.hpp at line 141](../../../Src/client/Inventory/helpers.hpp#L141)
 ## container_index_posoffset
 
 Type: constant
@@ -1193,7 +1193,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\Inventory\helpers.hpp at line 141](../../../Src/client/Inventory/helpers.hpp#L141)
+File: [client\Inventory\helpers.hpp at line 142](../../../Src/client/Inventory/helpers.hpp#L142)
 ## container_index_isInWorld
 
 Type: constant
@@ -1205,7 +1205,7 @@ Replaced value:
 ```sqf
 container_index_object
 ```
-File: [client\Inventory\helpers.hpp at line 143](../../../Src/client/Inventory/helpers.hpp#L143)
+File: [client\Inventory\helpers.hpp at line 144](../../../Src/client/Inventory/helpers.hpp#L144)
 ## container_object_awaitGenerateValue
 
 Type: constant
@@ -1217,7 +1217,7 @@ Replaced value:
 ```sqf
 -1
 ```
-File: [client\Inventory\helpers.hpp at line 145](../../../Src/client/Inventory/helpers.hpp#L145)
+File: [client\Inventory\helpers.hpp at line 146](../../../Src/client/Inventory/helpers.hpp#L146)
 ## getWorldContainer
 
 Type: constant
@@ -1229,7 +1229,7 @@ Replaced value:
 ```sqf
 (inventory_containerCommonData select container_index_object)
 ```
-File: [client\Inventory\helpers.hpp at line 148](../../../Src/client/Inventory/helpers.hpp#L148)
+File: [client\Inventory\helpers.hpp at line 150](../../../Src/client/Inventory/helpers.hpp#L150)
 ## getContainerRef
 
 Type: constant
@@ -1241,7 +1241,7 @@ Replaced value:
 ```sqf
 (inventory_containerCommonData select container_index_ref)
 ```
-File: [client\Inventory\helpers.hpp at line 150](../../../Src/client/Inventory/helpers.hpp#L150)
+File: [client\Inventory\helpers.hpp at line 152](../../../Src/client/Inventory/helpers.hpp#L152)
 ## getContainerPosOffset
 
 Type: constant
@@ -1253,7 +1253,7 @@ Replaced value:
 ```sqf
 (inventory_containerCommonData select container_index_posoffset)
 ```
-File: [client\Inventory\helpers.hpp at line 152](../../../Src/client/Inventory/helpers.hpp#L152)
+File: [client\Inventory\helpers.hpp at line 154](../../../Src/client/Inventory/helpers.hpp#L154)
 ## setContainerPosOffset(val)
 
 Type: constant
@@ -1265,7 +1265,7 @@ Replaced value:
 ```sqf
 inventory_containerCommonData set [container_index_posoffset,val]
 ```
-File: [client\Inventory\helpers.hpp at line 154](../../../Src/client/Inventory/helpers.hpp#L154)
+File: [client\Inventory\helpers.hpp at line 156](../../../Src/client/Inventory/helpers.hpp#L156)
 ## isWorldContainer
 
 Type: constant
@@ -1277,7 +1277,7 @@ Replaced value:
 ```sqf
 (getWorldContainer isEqualType objnull)
 ```
-File: [client\Inventory\helpers.hpp at line 156](../../../Src/client/Inventory/helpers.hpp#L156)
+File: [client\Inventory\helpers.hpp at line 158](../../../Src/client/Inventory/helpers.hpp#L158)
 ## isContainerSlot(slot)
 
 Type: constant
@@ -1289,7 +1289,7 @@ Replaced value:
 ```sqf
 (slot getVariable ["isContainerSlot",false])
 ```
-File: [client\Inventory\helpers.hpp at line 159](../../../Src/client/Inventory/helpers.hpp#L159)
+File: [client\Inventory\helpers.hpp at line 161](../../../Src/client/Inventory/helpers.hpp#L161)
 ## nullContainerCommonData
 
 Type: constant
@@ -1301,7 +1301,7 @@ Replaced value:
 ```sqf
 ["","","none",[0,0,0]]
 ```
-File: [client\Inventory\helpers.hpp at line 162](../../../Src/client/Inventory/helpers.hpp#L162)
+File: [client\Inventory\helpers.hpp at line 164](../../../Src/client/Inventory/helpers.hpp#L164)
 ## nullPostionPreviewObject
 
 Type: constant
@@ -1313,7 +1313,7 @@ Replaced value:
 ```sqf
 [0,0,0]
 ```
-File: [client\Inventory\helpers.hpp at line 164](../../../Src/client/Inventory/helpers.hpp#L164)
+File: [client\Inventory\helpers.hpp at line 166](../../../Src/client/Inventory/helpers.hpp#L166)
 ## SELF_CTG_SIZE_H
 
 Type: constant
@@ -1325,7 +1325,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\Inventory\helpers.hpp at line 168](../../../Src/client/Inventory/helpers.hpp#L168)
+File: [client\Inventory\helpers.hpp at line 170](../../../Src/client/Inventory/helpers.hpp#L170)
 ## getSelfCtg
 
 Type: constant
@@ -1337,7 +1337,7 @@ Replaced value:
 ```sqf
 (inventory_selfWidgets select 0)
 ```
-File: [client\Inventory\helpers.hpp at line 170](../../../Src/client/Inventory/helpers.hpp#L170)
+File: [client\Inventory\helpers.hpp at line 172](../../../Src/client/Inventory/helpers.hpp#L172)
 ## setSelfCtg(wid)
 
 Type: constant
@@ -1349,7 +1349,7 @@ Replaced value:
 ```sqf
 inventory_selfWidgets set [0,wid]
 ```
-File: [client\Inventory\helpers.hpp at line 172](../../../Src/client/Inventory/helpers.hpp#L172)
+File: [client\Inventory\helpers.hpp at line 174](../../../Src/client/Inventory/helpers.hpp#L174)
 ## getSelfCtgText
 
 Type: constant
@@ -1361,7 +1361,7 @@ Replaced value:
 ```sqf
 (inventory_selfWidgets select 1)
 ```
-File: [client\Inventory\helpers.hpp at line 175](../../../Src/client/Inventory/helpers.hpp#L175)
+File: [client\Inventory\helpers.hpp at line 177](../../../Src/client/Inventory/helpers.hpp#L177)
 ## setSelfCtgText(wid)
 
 Type: constant
@@ -1373,7 +1373,7 @@ Replaced value:
 ```sqf
 inventory_selfWidgets set [1,wid]
 ```
-File: [client\Inventory\helpers.hpp at line 177](../../../Src/client/Inventory/helpers.hpp#L177)
+File: [client\Inventory\helpers.hpp at line 179](../../../Src/client/Inventory/helpers.hpp#L179)
 ## TIME_TO_RELOAD_EXTRAACTION
 
 Type: constant
@@ -1385,7 +1385,7 @@ Replaced value:
 ```sqf
 0.8
 ```
-File: [client\Inventory\helpers.hpp at line 181](../../../Src/client/Inventory/helpers.hpp#L181)
+File: [client\Inventory\helpers.hpp at line 183](../../../Src/client/Inventory/helpers.hpp#L183)
 ## TIME_TO_RELOAD_ALTCLICKACTION
 
 Type: constant
@@ -1397,7 +1397,7 @@ Replaced value:
 ```sqf
 0.8
 ```
-File: [client\Inventory\helpers.hpp at line 183](../../../Src/client/Inventory/helpers.hpp#L183)
+File: [client\Inventory\helpers.hpp at line 185](../../../Src/client/Inventory/helpers.hpp#L185)
 ## INV_HIDE_UPDATE_DELAY
 
 Type: constant
@@ -1409,7 +1409,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Inventory\helpers.hpp at line 187](../../../Src/client/Inventory/helpers.hpp#L187)
+File: [client\Inventory\helpers.hpp at line 189](../../../Src/client/Inventory/helpers.hpp#L189)
 ## INV_HIDE_PERUPDATE_DELAY
 
 Type: constant
@@ -1421,7 +1421,7 @@ Replaced value:
 ```sqf
 0.09
 ```
-File: [client\Inventory\helpers.hpp at line 189](../../../Src/client/Inventory/helpers.hpp#L189)
+File: [client\Inventory\helpers.hpp at line 191](../../../Src/client/Inventory/helpers.hpp#L191)
 ## invlog(mes,ft)
 
 Type: constant
@@ -1436,7 +1436,7 @@ Replaced value:
 ```sqf
 logformat(mes,ft)
 ```
-File: [client\Inventory\helpers.hpp at line 200](../../../Src/client/Inventory/helpers.hpp#L200)
+File: [client\Inventory\helpers.hpp at line 202](../../../Src/client/Inventory/helpers.hpp#L202)
 ## invlog(mes,ft)
 
 Type: constant
@@ -1451,7 +1451,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\Inventory\helpers.hpp at line 204](../../../Src/client/Inventory/helpers.hpp#L204)
+File: [client\Inventory\helpers.hpp at line 206](../../../Src/client/Inventory/helpers.hpp#L206)
 # inventory.hpp
 
 ## INV_BACKPACK
@@ -1573,7 +1573,7 @@ Replaced value:
 ```sqf
 [INV_HAND_L,INV_HAND_R]
 ```
-File: [client\Inventory\inventory.hpp at line 24](../../../Src/client/Inventory/inventory.hpp#L24)
+File: [client\Inventory\inventory.hpp at line 25](../../../Src/client/Inventory/inventory.hpp#L25)
 ## INV_LIST_ALL
 
 Type: constant
@@ -1585,7 +1585,7 @@ Replaced value:
 ```sqf
 [INV_BACKPACK, INV_ARMOR, INV_HEAD, INV_BACK,INV_CLOTH,INV_FACE,INV_HAND_L,INV_BELT,INV_HAND_R]
 ```
-File: [client\Inventory\inventory.hpp at line 26](../../../Src/client/Inventory/inventory.hpp#L26)
+File: [client\Inventory\inventory.hpp at line 27](../../../Src/client/Inventory/inventory.hpp#L27)
 ## INV_LIST_VARNAME
 
 Type: constant
@@ -1597,7 +1597,7 @@ Replaced value:
 ```sqf
 ["INV_BACKPACK","INV_ARMOR","INV_HEAD","INV_BACK","INV_CLOTH","INV_FACE","INV_HAND_L","INV_BELT","INV_HAND_R"]
 ```
-File: [client\Inventory\inventory.hpp at line 28](../../../Src/client/Inventory/inventory.hpp#L28)
+File: [client\Inventory\inventory.hpp at line 29](../../../Src/client/Inventory/inventory.hpp#L29)
 ## INV_LIST_SLOTNAMES
 
 Type: constant
@@ -1609,7 +1609,7 @@ Replaced value:
 ```sqf
 ["Спина","Броня","Голова","Плечо","Одеяния","Лицо","Левая рука","Пояс","Правая рука"]
 ```
-File: [client\Inventory\inventory.hpp at line 30](../../../Src/client/Inventory/inventory.hpp#L30)
+File: [client\Inventory\inventory.hpp at line 31](../../../Src/client/Inventory/inventory.hpp#L31)
 ## INV_LIST_FACE
 
 Type: constant
@@ -1621,7 +1621,7 @@ Replaced value:
 ```sqf
 [INV_HEAD,INV_FACE]
 ```
-File: [client\Inventory\inventory.hpp at line 33](../../../Src/client/Inventory/inventory.hpp#L33)
+File: [client\Inventory\inventory.hpp at line 34](../../../Src/client/Inventory/inventory.hpp#L34)
 ## INV_LIST_TORSO
 
 Type: constant
@@ -1633,7 +1633,7 @@ Replaced value:
 ```sqf
 [INV_BACKPACK,INV_BACK,INV_CLOTH,INV_BELT,INV_ARMOR]
 ```
-File: [client\Inventory\inventory.hpp at line 35](../../../Src/client/Inventory/inventory.hpp#L35)
+File: [client\Inventory\inventory.hpp at line 36](../../../Src/client/Inventory/inventory.hpp#L36)
 ## SD_NAME
 
 Type: constant
@@ -1645,7 +1645,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Inventory\inventory.hpp at line 38](../../../Src/client/Inventory/inventory.hpp#L38)
+File: [client\Inventory\inventory.hpp at line 39](../../../Src/client/Inventory/inventory.hpp#L39)
 ## SD_ICON
 
 Type: constant
@@ -1657,7 +1657,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Inventory\inventory.hpp at line 39](../../../Src/client/Inventory/inventory.hpp#L39)
+File: [client\Inventory\inventory.hpp at line 40](../../../Src/client/Inventory/inventory.hpp#L40)
 ## SD_POINTER
 
 Type: constant
@@ -1669,7 +1669,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Inventory\inventory.hpp at line 40](../../../Src/client/Inventory/inventory.hpp#L40)
+File: [client\Inventory\inventory.hpp at line 41](../../../Src/client/Inventory/inventory.hpp#L41)
 ## SD_MODEL
 
 Type: constant
@@ -1681,7 +1681,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\Inventory\inventory.hpp at line 41](../../../Src/client/Inventory/inventory.hpp#L41)
+File: [client\Inventory\inventory.hpp at line 42](../../../Src/client/Inventory/inventory.hpp#L42)
 ## PATH_PICTURE_INV(icon)
 
 Type: constant
@@ -1693,7 +1693,7 @@ Replaced value:
 ```sqf
 PATH_PICTURE("inventory\items\" + (icon) + ".paa")
 ```
-File: [client\Inventory\inventory.hpp at line 46](../../../Src/client/Inventory/inventory.hpp#L46)
+File: [client\Inventory\inventory.hpp at line 48](../../../Src/client/Inventory/inventory.hpp#L48)
 # inventory_init.sqf
 
 ## PIC_PATH(name)

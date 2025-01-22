@@ -1,6 +1,7 @@
 # Side: client
-Count modules: 30
+Count modules: 32
  - [client](client//client.md) - 2 files
+ - [BlastFx](client//BlastFx.md) - 2 files
  - [Chat](client//Chat.md) - 4 files
  - [ClientData](client//ClientData.md) - 14 files
  - [ClientInit](client//ClientInit.md) - 3 files
@@ -15,7 +16,7 @@ Count modules: 30
  - [InputSystem](client//InputSystem.md) - 6 files
  - [Interactions](client//Interactions.md) - 22 files
  - [Inventory](client//Inventory.md) - 7 files
- - [LightEngine](client//LightEngine.md) - 85 files
+ - [LightEngine](client//LightEngine.md) - 71 files
  - [Lobby](client//Lobby.md) - 8 files
  - [LocalEffects](client//LocalEffects.md) - 3 files
  - [NetDisplays](client//NetDisplays.md) - 16 files
@@ -28,11 +29,12 @@ Count modules: 30
  - [StrafeLock](client//StrafeLock.md) - 1 files
  - [SyncMobData](client//SyncMobData.md) - 3 files
  - [Traps](client//Traps.md) - 1 files
+ - [VisualState](client//VisualState.md) - 10 files
  - [VoiceSystem](client//VoiceSystem.md) - 12 files
  - [WidgetSystem](client//WidgetSystem.md) - 6 files
 # Side: host
 Count modules: 55
- - [host](host//host.md) - 14 files
+ - [host](host//host.md) - 12 files
  - [AI](host//AI.md) - 1 files
  - [AmbientControl](host//AmbientControl.md) - 1 files
  - [Atmos](host//Atmos.md) - 9 files

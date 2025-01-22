@@ -319,7 +319,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Interactions\interact.hpp at line 57](../../../Src/client/Interactions/interact.hpp#L57)
+File: [client\Interactions\interact.hpp at line 58](../../../Src/client/Interactions/interact.hpp#L58)
 ## INTERACT_PROGRESS_TYPE_MEDIUM
 
 Type: constant
@@ -331,7 +331,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Interactions\interact.hpp at line 58](../../../Src/client/Interactions/interact.hpp#L58)
+File: [client\Interactions\interact.hpp at line 59](../../../Src/client/Interactions/interact.hpp#L59)
 ## INTERACT_PROGRESS_TYPE_LAZY
 
 Type: constant
@@ -343,7 +343,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Interactions\interact.hpp at line 59](../../../Src/client/Interactions/interact.hpp#L59)
+File: [client\Interactions\interact.hpp at line 60](../../../Src/client/Interactions/interact.hpp#L60)
 ## ATTACK_TYPE_ASSOC_HAND
 
 Type: constant
@@ -355,7 +355,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Interactions\interact.hpp at line 62](../../../Src/client/Interactions/interact.hpp#L62)
+File: [client\Interactions\interact.hpp at line 64](../../../Src/client/Interactions/interact.hpp#L64)
 ## ATTACK_TYPE_ASSOC_THRUST_ONLY
 
 Type: constant
@@ -367,7 +367,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Interactions\interact.hpp at line 64](../../../Src/client/Interactions/interact.hpp#L64)
+File: [client\Interactions\interact.hpp at line 66](../../../Src/client/Interactions/interact.hpp#L66)
 ## ATTACK_TYPE_ASSOC_SWING_ONLY
 
 Type: constant
@@ -379,7 +379,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Interactions\interact.hpp at line 66](../../../Src/client/Interactions/interact.hpp#L66)
+File: [client\Interactions\interact.hpp at line 68](../../../Src/client/Interactions/interact.hpp#L68)
 ## ATTACK_TYPE_ASSOC_STANDARD
 
 Type: constant
@@ -391,7 +391,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\Interactions\interact.hpp at line 68](../../../Src/client/Interactions/interact.hpp#L68)
+File: [client\Interactions\interact.hpp at line 70](../../../Src/client/Interactions/interact.hpp#L70)
 ## ATTACK_TYPE_ASSOC_WPN_HANDLE
 
 Type: constant
@@ -403,7 +403,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [client\Interactions\interact.hpp at line 70](../../../Src/client/Interactions/interact.hpp#L70)
+File: [client\Interactions\interact.hpp at line 72](../../../Src/client/Interactions/interact.hpp#L72)
 ## ATTACK_TYPE_ASSOC_WPN_1
 
 Type: constant
@@ -415,7 +415,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\Interactions\interact.hpp at line 71](../../../Src/client/Interactions/interact.hpp#L71)
+File: [client\Interactions\interact.hpp at line 73](../../../Src/client/Interactions/interact.hpp#L73)
 ## ATTACK_TYPE_ASSOC_WPN_1_3
 
 Type: constant
@@ -427,7 +427,7 @@ Replaced value:
 ```sqf
 6
 ```
-File: [client\Interactions\interact.hpp at line 72](../../../Src/client/Interactions/interact.hpp#L72)
+File: [client\Interactions\interact.hpp at line 74](../../../Src/client/Interactions/interact.hpp#L74)
 ## ATTACK_TYPE_ASSOC_SWING_HANDLE
 
 Type: constant
@@ -439,7 +439,7 @@ Replaced value:
 ```sqf
 7
 ```
-File: [client\Interactions\interact.hpp at line 74](../../../Src/client/Interactions/interact.hpp#L74)
+File: [client\Interactions\interact.hpp at line 76](../../../Src/client/Interactions/interact.hpp#L76)
 ## ATTACK_TYPE_ASSOC_IS_SHOOTING(v)
 
 Type: constant
@@ -451,7 +451,7 @@ Replaced value:
 ```sqf
 (v in [ATTACK_TYPE_ASSOC_WPN_1,ATTACK_TYPE_ASSOC_WPN_1_3])
 ```
-File: [client\Interactions\interact.hpp at line 77](../../../Src/client/Interactions/interact.hpp#L77)
+File: [client\Interactions\interact.hpp at line 80](../../../Src/client/Interactions/interact.hpp#L80)
 # interact.sqf
 
 ## __hardcoded_angle__
@@ -801,7 +801,7 @@ Replaced value:
 ```sqf
 interactCombat_curWidgets
 ```
-File: [client\Interactions\interactCombat.hpp at line 20](../../../Src/client/Interactions/interactCombat.hpp#L20)
+File: [client\Interactions\interactCombat.hpp at line 21](../../../Src/client/Interactions/interactCombat.hpp#L21)
 ## CM_CUR_IND_ATT
 
 Type: constant
@@ -813,7 +813,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Interactions\interactCombat.hpp at line 23](../../../Src/client/Interactions/interactCombat.hpp#L23)
+File: [client\Interactions\interactCombat.hpp at line 24](../../../Src/client/Interactions/interactCombat.hpp#L24)
 ## CM_CUR_IND_DEF
 
 Type: constant
@@ -825,7 +825,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Interactions\interactCombat.hpp at line 24](../../../Src/client/Interactions/interactCombat.hpp#L24)
+File: [client\Interactions\interactCombat.hpp at line 25](../../../Src/client/Interactions/interactCombat.hpp#L25)
 ## CM_CUR_IND_CS
 
 Type: constant
@@ -837,7 +837,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Interactions\interactCombat.hpp at line 25](../../../Src/client/Interactions/interactCombat.hpp#L25)
+File: [client\Interactions\interactCombat.hpp at line 26](../../../Src/client/Interactions/interactCombat.hpp#L26)
 ## CS_SIZE_H
 
 Type: constant
@@ -849,7 +849,7 @@ Replaced value:
 ```sqf
 25
 ```
-File: [client\Interactions\interactCombat.hpp at line 29](../../../Src/client/Interactions/interactCombat.hpp#L29)
+File: [client\Interactions\interactCombat.hpp at line 31](../../../Src/client/Interactions/interactCombat.hpp#L31)
 ## CS_SIZE_W
 
 Type: constant
@@ -861,7 +861,7 @@ Replaced value:
 ```sqf
 30
 ```
-File: [client\Interactions\interactCombat.hpp at line 32](../../../Src/client/Interactions/interactCombat.hpp#L32)
+File: [client\Interactions\interactCombat.hpp at line 34](../../../Src/client/Interactions/interactCombat.hpp#L34)
 ## TIME_TOLOAD_INTERACTCOMBAT
 
 Type: constant
@@ -873,7 +873,7 @@ Replaced value:
 ```sqf
 0.05
 ```
-File: [client\Interactions\interactCombat.hpp at line 35](../../../Src/client/Interactions/interactCombat.hpp#L35)
+File: [client\Interactions\interactCombat.hpp at line 37](../../../Src/client/Interactions/interactCombat.hpp#L37)
 ## TIME_TOUNLOAD_INTERACTCOMBAT
 
 Type: constant
@@ -885,7 +885,7 @@ Replaced value:
 ```sqf
 0.2
 ```
-File: [client\Interactions\interactCombat.hpp at line 37](../../../Src/client/Interactions/interactCombat.hpp#L37)
+File: [client\Interactions\interactCombat.hpp at line 39](../../../Src/client/Interactions/interactCombat.hpp#L39)
 ## FADE_BUT_AT
 
 Type: constant
@@ -897,7 +897,7 @@ Replaced value:
 ```sqf
 0.7
 ```
-File: [client\Interactions\interactCombat.hpp at line 41](../../../Src/client/Interactions/interactCombat.hpp#L41)
+File: [client\Interactions\interactCombat.hpp at line 43](../../../Src/client/Interactions/interactCombat.hpp#L43)
 ## FADE_BUT_DEF
 
 Type: constant
@@ -909,7 +909,7 @@ Replaced value:
 ```sqf
 0.7
 ```
-File: [client\Interactions\interactCombat.hpp at line 42](../../../Src/client/Interactions/interactCombat.hpp#L42)
+File: [client\Interactions\interactCombat.hpp at line 44](../../../Src/client/Interactions/interactCombat.hpp#L44)
 ## FADE_BUT_CS
 
 Type: constant
@@ -921,7 +921,7 @@ Replaced value:
 ```sqf
 0.8
 ```
-File: [client\Interactions\interactCombat.hpp at line 43](../../../Src/client/Interactions/interactCombat.hpp#L43)
+File: [client\Interactions\interactCombat.hpp at line 45](../../../Src/client/Interactions/interactCombat.hpp#L45)
 ## TIME_BUT_AT
 
 Type: constant
@@ -933,7 +933,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Interactions\interactCombat.hpp at line 46](../../../Src/client/Interactions/interactCombat.hpp#L46)
+File: [client\Interactions\interactCombat.hpp at line 49](../../../Src/client/Interactions/interactCombat.hpp#L49)
 ## TIME_BUT_DEF
 
 Type: constant
@@ -945,7 +945,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Interactions\interactCombat.hpp at line 47](../../../Src/client/Interactions/interactCombat.hpp#L47)
+File: [client\Interactions\interactCombat.hpp at line 50](../../../Src/client/Interactions/interactCombat.hpp#L50)
 ## TIME_BUT_CS
 
 Type: constant
@@ -957,7 +957,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Interactions\interactCombat.hpp at line 48](../../../Src/client/Interactions/interactCombat.hpp#L48)
+File: [client\Interactions\interactCombat.hpp at line 51](../../../Src/client/Interactions/interactCombat.hpp#L51)
 # interactCombat.sqf
 
 ## vec4(x,y,w,h)

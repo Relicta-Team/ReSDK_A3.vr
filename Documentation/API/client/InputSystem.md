@@ -287,7 +287,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 21](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L21)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 22](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L22)
 ## KEYDATA_INDEX_SHIFT
 
 Type: constant
@@ -299,7 +299,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 22](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L22)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 23](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L23)
 ## KEYDATA_INDEX_CTRL
 
 Type: constant
@@ -311,7 +311,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 23](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L23)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 24](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L24)
 ## KEYDATA_INDEX_ALT
 
 Type: constant
@@ -323,7 +323,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 24](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L24)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 25](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L25)
 ## KEYDATA_INDEX_ISMOUSE
 
 Type: constant
@@ -335,7 +335,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 25](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L25)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 26](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L26)
 ## unpackKeyData(_dat)
 
 Type: constant
@@ -347,7 +347,7 @@ Replaced value:
 ```sqf
 _dat select [1,4]
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 29](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L29)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 31](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L31)
 ## doPrepareKeyData(pars)
 
 Type: constant
@@ -359,7 +359,7 @@ Replaced value:
 ```sqf
 input__ikdp = unpackKeyData(pars)
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 32](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L32)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 34](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L34)
 ## isPressedKey(_key,variable)
 
 Type: constant
@@ -372,7 +372,7 @@ Replaced value:
 ```sqf
 ([_key,variable,true] call input_checkKeyState)
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 36](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L36)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 38](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L38)
 ## isPressed(var)
 
 Type: constant
@@ -384,7 +384,7 @@ Replaced value:
 ```sqf
 isPressedKey(input__ikdp,var)
 ```
-File: [client\InputSystem\inputKeyHandlers.hpp at line 36](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L36)
+File: [client\InputSystem\inputKeyHandlers.hpp at line 38](../../../Src/client/InputSystem/inputKeyHandlers.hpp#L38)
 # inputKeyHandlers.sqf
 
 ## kb(name,desc,defkey,varname)
