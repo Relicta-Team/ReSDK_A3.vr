@@ -31,7 +31,9 @@ vst_initializeDict = {
 //check if config exists
 vst_containsConfig = {
 	params ["_src","_type"];
-
+	if (!vst_dictInitialized) then {
+		call vst_initializeDict;
+	};
 	private _oldCfgs = _src getVariable vst_const_internalVarName;
 	if isNullVar(_oldCfgs) exitWith {false};
 	array_exists(_oldCfgs,_type);
@@ -48,13 +50,13 @@ vst_getSourceHandler = {
 
 //initialize vst config
 vst_create = {
-	params ["_type","_src","_ctx"];
-
+	params ["_type","_src",["_ctx",[]]];
+	//traceformat("VST::create(%1) on %2 with %3",_type arg _src arg _ctx);
 	if (!vst_dictInitialized) then {
 		call vst_initializeDict;
 	};
 
-	if array_exists(vst_map_cfgs,_type) exitWith {
+	if !array_exists(vst_map_cfgs,_type) exitWith {
 		errorformat("VST::create() - Undefined config type: %1",_type);
 		false
 	};

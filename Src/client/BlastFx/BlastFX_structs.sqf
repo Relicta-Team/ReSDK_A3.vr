@@ -8,6 +8,11 @@
 struct(BFXBase)
 	decl(string) def(name) "";
 
+	decl(string()) def(str)
+	{
+		format["BFX<%1>",self getv(name)]
+	}
+
 	decl(mesh) def(_src) objNull;
 	
 	decl(mesh[]) def(_disposable) [];
@@ -31,7 +36,7 @@ struct(BFXBase)
 	decl(void()) def(postActivate)
 	{
 		if (self getv(autoDispose)) then {
-			self callp(disposeAllAfterTime,rand(self getv(minDisposeTime,self getv(maxDisposeTime))));
+			self callp(disposeAllAfterTime,rand(self getv(minDisposeTime),self getv(maxDisposeTime)));
 		};
 	}
 
@@ -59,7 +64,7 @@ struct(BFXBase)
 	decl(void(mesh;vector3;string;bool))
 	def(linkToSource)
 	{
-		params ["_lt",["_offset",vec3(0,0,0)],["_slot",null],["_followBone",false]];
+		params ["_lt",["_offset",vec3(0,0,0)],["_slot",""],["_followBone",false]];
 
 		_lt attachTo [self getv(_src),_offset,_slot,_followBone];
 	}
@@ -182,9 +187,9 @@ endstruct
 struct(BFXBulletBase) base(BFXBase)
 	decl(override) def(name) ""
 
-	decl(void(float;float)) def(addLight)
+	decl(void(float;float;vector3)) def(addLight)
 	{
-		params ["_intensity","_timeout"];
+		params ["_intensity","_timeout","_pos"];
 
 		private _light = self callv(makeLight);
 		_light setPosAtl _pos;
@@ -213,7 +218,7 @@ struct(BFXBulletBase) base(BFXBase)
 	{
 		params ["_side",["_addY",0]];
 
-		if (typeof sourceObject == BASIC_MOB_TYPE) then {
+		if ((typeof (self getv(_src))) == BASIC_MOB_TYPE) then {
 			private _sel = if (_side < 0) then {
 				"lefthand"
 			} else {
@@ -239,7 +244,7 @@ struct(BFXBulletPistol) base(BFXBulletBase)
 		_ctxParams params ["_side"];
 
 		private _pos = self callp(getFactPos,_side arg 0.18);
-		self callp(addLight,30 arg self getv(minDisposeTime));
+		self callp(addLight,30 arg self getv(minDisposeTime) arg _pos);
 
 		private _shotFire = self callv(makeParticle);
 		_shotFire setPosAtl _pos;
@@ -276,7 +281,7 @@ struct(BFXBulletShotgun) base(BFXBulletBase)
 		_ctxParams params ["_side"];
 
 		private _pos = self callp(getFactPos,_side arg 0.65);
-		self callp(addLight,70 arg self getv(minDisposeTime));
+		self callp(addLight,70 arg self getv(minDisposeTime) arg _pos);
 
 		private _shotFire = self callv(makeParticle);
 		_shotFire setPosAtl _pos;
@@ -300,7 +305,7 @@ struct(BFXBulletRifle) base(BFXBulletBase)
 		_ctxParams params ["_side"];
 
 		private _pos = self callp(getFactPos,_side arg 0.75);
-		self callp(addLight,140 arg self getv(minDisposeTime));
+		self callp(addLight,140 arg self getv(minDisposeTime) arg _pos);
 
 		private _shotFire = self callv(makeParticle);	
 		_shotFire setPosAtl _pos;

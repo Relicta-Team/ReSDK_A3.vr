@@ -25,6 +25,11 @@
 struct(VSTBase)
     def(name) "" //must be defined
 
+    def(str)
+    {
+        format["VSTConfig<%1>",self getv(name)]
+    }
+
     def(_src) objNull
 
     def(getLocalPlayer)

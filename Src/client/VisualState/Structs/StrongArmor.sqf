@@ -17,7 +17,7 @@ struct(VSTStrongArmor) base(VSTBase)
 		{
 			_x params ["_bias","_slot","_vec","_scale"];
 			private _o = createSimpleObject ["a3\structures_f\items\vessels\waterbarrel_f.p3d",[0,0,0],true];
-			_o attachTo [src,_bias,_slot,true];
+			_o attachTo [self getv(_src),_bias,_slot,true];
 			[_o,_vec] call model_SetPitchBankYaw;
 			_o setObjectScale _scale;
 			_list pushBack _o;

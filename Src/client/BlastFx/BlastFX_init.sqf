@@ -39,17 +39,21 @@ bfx_initialize = {
 decl((struct_t.AbstractLightData|NULL)(string;mesh;any[]))
 bfx_doShot = {
 	params ["_type","_src",["_ctxParams",[]]];
-
+	//traceformat("BFX::doShot(%1) on %2 with %3",_type arg _src arg _ctxParams);
 	if (!bfx_isInitialized) then {
 		call bfx_initialize;
 	};
 
-	if array_exists(bfx_map_configTable,_type) exitWith {
+	if !array_exists(bfx_map_configTable,_type) exitWith {
 		errorformat("BFX::doShot() - Undefined key: %1",_type);
 		null
 	};
 	
-	private _obj = [_type,[_src]] call struct_alloc;
+	private _obj = [bfx_map_configTable get _type,[_src]] call struct_alloc;
+	if isNullVar(_obj) exitWith {
+		errorformat("BFX::doShot() - Failed to create object: %1",bfx_map_configTable get _type);
+		null
+	};
 	_obj callp(activate,_ctxParams);
 	_obj callv(postActivate);
 	
@@ -60,5 +64,8 @@ bfx_doShot = {
 decl(bool(string))
 bfx_containConfig = {
 	params ["_type"];
+	if (!bfx_isInitialized) then {
+		call bfx_initialize;
+	};
 	array_exists(bfx_map_configTable,_type)
 };
