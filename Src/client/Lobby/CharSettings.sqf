@@ -3,14 +3,16 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
+
 //serverside includes
 #include <..\..\host\Family\Family.hpp>
 #include <..\..\host\MatterSystem\bloodTypes.hpp>
 //serverside includes end
 
+namespace(Lobby,lobby_)
 
-
-
+decl(void())
 lobby_onCloseSetting = {
 	if (!isLobbyOpen) exitWith {
 		error("lobby::onCloseSetting() - lobby already closed");
@@ -28,6 +30,7 @@ lobby_onCloseSetting = {
 };
 
 //событие при ОК имени
+decl(void(widget;int))
 lobby_onSetName = {
 	onPressParams();
 
@@ -77,6 +80,7 @@ lobby_onSetName = {
 };
 
 //событие рандомного имени
+decl(void(widget;int))
 lobby_onSetRandomName = {
 	onPressParams(); //DELAY_TO_PICKRANDOMNAME
 
@@ -111,6 +115,7 @@ lobby_onSetRandomName = {
 };
 
 // событие когда сервер заколбечил и подтвердил изменения
+decl(void(widget;int))
 lobby_onSetNameCode = {
 	params ["_wid","_val"];
 	[_wid,("Имя: " + _val)] call widgetSetText;
@@ -136,6 +141,7 @@ lobby_onSetNameCode = {
 };
 
 //Событие при выборе имени
+decl(void(widget;int))
 lobby_setName = {
 	onPressParams();
 
@@ -161,11 +167,13 @@ lobby_setName = {
 };
 
 //callback on server
+decl(void(widget;int))
 lobby_onSetAgeCode = {
 	params ["_wid","_val"];
 	[_wid,("Возраст: " + str _val)] call widgetSetText;
 };
 
+decl(void(widget;int))
 lobby_setAge = {
 	onPressParams();
 
@@ -195,6 +203,7 @@ lobby_setAge = {
 	addCloseEvent(_w);
 };
 
+decl(void(widget;int))
 lobby_onSetAge = {
 	onPressParams();
 
@@ -217,6 +226,7 @@ lobby_onSetAge = {
 	call lobby_onCloseSetting;
 };
 
+decl(void(widget;int))
 lobby_setFaith = {
 	onPressParams();
 
@@ -289,6 +299,7 @@ lobby_setFaith = {
 	addCloseEvent(_w);
 };
 
+decl(void(widget;int))
 lobby_onSetFaith = {
 	onPressParams();
 	_faithIndex = lbCurSel getMainWid("currentControl");
@@ -305,6 +316,7 @@ lobby_onSetFaith = {
 	call lobby_onCloseSetting;
 };
 
+decl(void(widget;int))
 lobby_onSetFaithCode = {
 	params ["_wid","_val"];
 
@@ -326,7 +338,7 @@ lobby_onSetFaithCode = {
 	_wid ctrlSetTooltip _faithName;
 };
 
-
+decl(void(widget;int))
 lobby_setAntag = {
 	onPressParams();
 	
@@ -338,6 +350,7 @@ lobby_setAntag = {
 	["antag",_mode] call lobby_sendToServerSetting;
 };
 
+decl(void(widget;int))
 lobby_onSetAntagCode = {
 	params ["_wid","_val"];
 	
@@ -360,15 +373,18 @@ lobby_onSetAntagCode = {
 	_wid ctrlSetTooltip (_tEnumListDesc select _val);
 };
 
+decl(void(widget;int))
 lobby_setTrait = {
 	rpcSendToServer("onClientPressedTrait",[clientOwner]);
 };
 
+decl(vector3(vector3;float;float))
 lobby_face_internal_relpos = {
 	params ["_posI",["_dirPos",0],["_dropRad",2]];
 	[(_posI select 0) + (sin _dirPos) * _dropRad, (_posI select 1) + (cos _dirPos) * _dropRad, _posI select 2];
 };
 
+decl(void(widget;int))
 lobby_setFace = {
 	onPressParams();
 
@@ -573,6 +589,7 @@ lobby_setFace = {
 
 };
 
+decl(void(widget;int))
 lobby_onSetFace = {
 	onPressParams();
 	_faceIndex = tvCurSel getMainWid("currentControl");
@@ -602,6 +619,7 @@ lobby_onSetFace = {
 	call lobby_onCloseSetting;
 };
 
+decl(void(widget;string))
 lobby_onSetFaceCode = {
 	params ["_wid","_val"];
 
@@ -640,6 +658,7 @@ lobby_onSetFaceCode = {
 	_wid ctrlSetTooltip _text;
 };
 
+decl(void(widget;int))
 lobby_setVice = {
 	onPressParams();
 
@@ -678,6 +697,7 @@ lobby_setVice = {
 	addCloseEvent(_w);
 };
 
+decl(void(widget;int))
 lobby_onSetVice = {
 	onPressParams();
 	_viceIndex = lbCurSel getMainWid("currentControl");
@@ -694,6 +714,7 @@ lobby_onSetVice = {
 	call lobby_onCloseSetting;
 };
 
+decl(void(widget;string))
 lobby_onSetViceCode = {
 	params ["_wid","_val"];
 
@@ -715,6 +736,7 @@ lobby_onSetViceCode = {
 	_wid ctrlSetTooltip _text;
 };
 
+decl(void(widget;int))
 lobby_setBlood = {
 	onPressParams();
 
@@ -763,6 +785,7 @@ lobby_setBlood = {
 	addCloseEvent(_w);
 };
 
+decl(void(widget;int))
 lobby_onSetBlood = {
 	onPressParams();
 
@@ -785,6 +808,7 @@ lobby_onSetBlood = {
 	call lobby_onCloseSetting;
 };
 
+decl(void(widget;int))
 lobby_onSetBloodCode = {
 	params ["_wid","_val"];
 
@@ -804,6 +828,7 @@ lobby_onSetBloodCode = {
 
 };
 
+decl(void(widget;int))
 lobby_onSetGender = {
 	onPressParams();
 
@@ -827,6 +852,7 @@ lobby_onSetGender = {
 	};
 };
 
+decl(void(widget;int))
 lobby_onSetGenderCode = {
 	params ["_wid","_val"];
 	_gend = if (_val == 0) then {"мужской"} else {"женский"};
@@ -840,6 +866,7 @@ lobby_onSetGenderCode = {
 	//todo blocking beard
 };
 
+decl(void(widget;int))
 lobby_onSetFamily = {
 	onPressParams();
 
@@ -871,6 +898,7 @@ lobby_onSetFamily = {
 	};
 };
 
+decl(void(widget;int))
 lobby_onSetFamilyCode = {
 	params ["_wid","_val"];
 
@@ -890,6 +918,7 @@ lobby_onSetFamilyCode = {
 	_wid ctrlSetTooltip ("Семейное положение: " + _famText);
 };
 
+decl(void(widget;int))
 lobby_onSetMainHand = {
 	onPressParams();
 
@@ -904,6 +933,7 @@ lobby_onSetMainHand = {
 	};
 };
 
+decl(void(widget;int))
 lobby_onSetMainHandCode = {
 	params ["_wid","_val"];
 	_eval = ["левая","правая"]; _evalsetting = ["Левша","Правша"];
@@ -913,6 +943,7 @@ lobby_onSetMainHandCode = {
 };
 
 //событие при выборе
+decl(void(widget;int))
 lobby_onSetRole = {
 	onPressParams();
 
@@ -936,6 +967,7 @@ lobby_onSetRole = {
 };
 
 //событие вызывается когда сервер подтвердил изменения
+decl(void(widget;int))
 lobby_onSetRoleCode = {
 	params ["_wid","_val"];
 
@@ -971,6 +1003,7 @@ lobby_onSetRoleCode = {
 };
 
 //вызывается когда установлена новая роль и надо изменить размер
+decl(void(int))
 lobby_resizingByRoleChanged = {
 	private _startingInd = _this;
 
@@ -983,6 +1016,7 @@ lobby_resizingByRoleChanged = {
 };
 
 //Событие при выборе роли
+decl(void(widget;int))
 lobby_setRole = {
 	onPressParams();
 	
@@ -1013,9 +1047,6 @@ lobby_setRole = {
 
 	} foreach lobby_roleList;
 
-
-
-
 	_w = [getDisplay,BUTTON,[0,90,50,10],getMainCtg] call createWidget;
 	addWidToList(_w);
 	addOnPressEvent(_w,lobby_onSetRole);
@@ -1034,6 +1065,7 @@ lobby_setRole = {
 ================================================================================
 */
 
+decl(void(bool))
 lobby_setEnableCharSetting = {
 	private _mode = _this;
 
@@ -1048,19 +1080,13 @@ lobby_setEnableCharSetting = {
 	} foreach lobby_charSetWidList;
 };
 
-lobby_createInput = {
-
-};
-
-//создаёт выборку цвета
-lobby_createColorize = {};
-
 /*
 ================================================================================
 	GROUP: COMMON
 ================================================================================
 */
 
+decl(void())
 lobby_initReadyButton = {
 	
 	if isNullReference(getDisplay) exitWith {warning("lobby::initReadyButton() - Display closed")};
@@ -1110,6 +1136,7 @@ lobby_initReadyButton = {
 };
 
 //переключение режима готовности моба
+decl(void(widget;int))
 lobby_switchReady = {
 	params ["_wid","_butt"];
 
@@ -1141,6 +1168,7 @@ lobby_switchReady = {
 	rpcSendToServer("onClientPrepareToPlay",[_newMode arg clientOwner]);
 };
 
+decl(void(int))
 lobby_onSwitchReadyCallback = {
 	params ["_newMode"];
 	
