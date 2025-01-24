@@ -35,9 +35,10 @@ macro_func(locef_sanitizeCfgName,string(string))
 macro_func(locef_effectExists,bool(string))
 #define effectExists(checked) (checked in locef_allActiveEffects)
 
-#define callEffectEvent(name,indx) call (locef_allEffectsCfg get (name) select indx)
-
+decl(bool)
 locef_isInitialized = false;
+
+decl(void())
 locef_initConfigs = {
 	private _types = ["LocEffBase"] call struct_getAllTypesOf;
 	if (count _types == 0) exitWith {
@@ -53,6 +54,7 @@ locef_initConfigs = {
 	locef_isInitialized = true;
 };
 
+decl(void(string))
 locef_remove = {
 	private _eventName = _this;
 	_eventName = sanitizeCfgName(_eventName);
@@ -65,6 +67,7 @@ locef_remove = {
 	};
 }; rpcAdd("lcfrem",locef_remove);
 
+decl(void(string;any))
 locef_update = {
 	params ["_eventName",["_context",[]]];
 
@@ -91,12 +94,14 @@ locef_update = {
 	
 }; rpcAdd("lcfupd",locef_update);
 
+decl(void())
 locef_removeAll = {
 	{
 		_x call locef_remove;
 	} foreach (keys locef_allActiveEffects);
 }; rpcAdd("lcfclr",locef_removeAll);
 
+decl(mesh())
 locef_createTempObject = {
 	private _o = [null,null,true] call vst_createDummyMesh;
 	_o
