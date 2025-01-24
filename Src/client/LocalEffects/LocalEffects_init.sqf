@@ -4,6 +4,7 @@
 // ======================================================
 
 #include <..\..\host\engine.hpp>
+#include <..\..\host\struct.hpp>
 #include <..\ClientRpc\clientRpc.hpp>
 
 #include "LocalEffects_structs.sqf"
