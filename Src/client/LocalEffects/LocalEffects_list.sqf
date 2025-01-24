@@ -10,9 +10,7 @@ effect(GhostNightVision)
 		_obj = call locef_createTempObject;
 		_obj attachTo [player,[0,0,0],"head",true];
 		updateContext(_obj);
-		[
-			[LIGHT_AREA_GHOST_NIGHTVISION,_obj] call le_loadLight
-		] call os_light_registerAsNoProcessedLight;
+		["SLIGHT_AREA_GHOST_NIGHTVISION" call lightSys_getConfigIdByName,_obj] call le_loadLight;
 
 		//jumpto(EFFECT_EVENT_INDEX_UPDATE);
 	destroy
@@ -38,9 +36,7 @@ effect(EaterNightVision)
 		_obj = call locef_createTempObject;
 		_obj attachTo [player,[0,0,0],"head",true];
 		updateContext(_obj);
-		[
-			[LIGHT_AREA_EATER_NIGHTVISION,_obj] call le_loadLight
-		] call os_light_registerAsNoProcessedLight;
+		["SLIGHT_AREA_EATER_NIGHTVISION" call lightSys_getConfigIdByName,_obj] call le_loadLight;
 		
 		["eater_nightvision_color",true] call pp_setEnable;
 	destroy

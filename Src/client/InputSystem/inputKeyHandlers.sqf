@@ -3,47 +3,59 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
 
+namespace(Input,input_;cd_)
+
+decl(any[])
+input__ikdp = [];
 
 
 // [name,desc,current,default,variable]
-#define kb(name,desc,defkey,varname) [name,desc,defkey,defkey,call{varname = defkey; 'varname'},defkey]
+macro_func(input_registerKeybind,any[](string;string;any;string))
+#define kb(name,desc,defkey,varname) [name,desc,defkey,defkey,call{missionnamespace setvariable [varname,defkey]; varname},defkey]
+macro_func(input_makeKeybind,any[](any;bool;bool;bool;bool))
 #define keybind(value,shift,ctrl,alt,isMouse) [value,shift,ctrl,alt,isMouse]
 
+macro_func(input_keyDef,any[](string))
 #define std_key(name) keybind([name arg false] call input_getKeyValue,false,false,false,false)
+macro_func(input_keyDefArgs,any[](string;bool;bool;bool;bool))
 #define std_keyArgs(name,shift,ctrl,alt,isMouse) keybind([name arg false] call input_getKeyValue,shift,ctrl,alt,isMouse)
 
  // Список кейбиндов
+decl(any[][])
 cd_settingsKeyboard = [
-	kb("Инвентарь","Открыть или закрыть инвентарь",std_key("TAB"),input_act_inventory),
-	kb("Бросить","Выпустить предмет из активной руки",std_key("G"),input_act_dropitem),
-	kb("Выложить","Быстрое выкладывание предмета в активной руке",std_key("B"),input_act_putdownitem),
-	kb("Двумя руками","Схватить предмет в активной руке двумя руками\nПовторное нажатие снова возвращает одноручный режим",std_key("T"),input_act_switchTwoHands),
-	kb("Сменить руку","Изменяет активную руку",std_key("Q"),input_act_changeActHand),
-	kb("Включить комбат","Переключает персонажа во враждебное состояние и позволяет атаковать окружение",std_key("SPACE"),input_act_combatMode),
-	kb("Встать\сопротивляться","Используется при:\n - попытках вырваться из захвата\n - вставании с кроватей и стульев\n - попытках освободиться от наручников или веревки",std_key("R"),input_act_resist),
-	kb("Основное действие","Совершить основное действие",std_key("E"),input_act_mainAction),
-	kb("Вспомогательное действие","Совершить дополнительное действие",std_key("F"),input_act_extraAction),
-	kb("Указать","Указать на какой-то объект в мире",std_key("Y"),input_act_pointTo),
-	kb("Изучить","Позволяет изучить предмет в инвентаре или осмотреть объект в мире",std_key("F1"),input_act_examine),
-	kb("Крафт","Открывает меню крафта",std_key("K"),input_act_craft),
-	kb("Радиосвязь","Активирует разговор по радиосвязи (при наличии радио)",std_key("CAPSLOCK"),input_act_radio),
-	kb("Эмоции","Открывает меню эмоций и описания действий персонажа",std_key("F2"),input_act_emoteMenu),
-	kb("История сообщений","Открывает список последних сообщений из чата",std_key("F8"),input_act_chatHistory),
-	kb("Консоль","Открывает окно ввода специальных команд",std_key("F10"),input_act_commandMenu),
-	kb("Сообщение администрации","Отправляет сообщение администрации.",std_key("F11"),input_act_openAhelp)
+	kb("Инвентарь","Открыть или закрыть инвентарь",std_key("TAB"),"input_act_inventory"),
+	kb("Бросить","Выпустить предмет из активной руки",std_key("G"),"input_act_dropitem"),
+	kb("Выложить","Быстрое выкладывание предмета в активной руке",std_key("B"),"input_act_putdownitem"),
+	kb("Двумя руками","Схватить предмет в активной руке двумя руками\nПовторное нажатие снова возвращает одноручный режим",std_key("T"),"input_act_switchTwoHands"),
+	kb("Сменить руку","Изменяет активную руку",std_key("Q"),"input_act_changeActHand"),
+	kb("Включить комбат","Переключает персонажа во враждебное состояние и позволяет атаковать окружение",std_key("SPACE"),"input_act_combatMode"),
+	kb("Встать\сопротивляться","Используется при:\n - попытках вырваться из захвата\n - вставании с кроватей и стульев\n - попытках освободиться от наручников или веревки",std_key("R"),"input_act_resist"),
+	kb("Основное действие","Совершить основное действие",std_key("E"),"input_act_mainAction"),
+	kb("Вспомогательное действие","Совершить дополнительное действие",std_key("F"),"input_act_extraAction"),
+	kb("Указать","Указать на какой-то объект в мире",std_key("Y"),"input_act_pointTo"),
+	kb("Изучить","Позволяет изучить предмет в инвентаре или осмотреть объект в мире",std_key("F1"),"input_act_examine"),
+	kb("Крафт","Открывает меню крафта",std_key("K"),"input_act_craft"),
+	kb("Радиосвязь","Активирует разговор по радиосвязи (при наличии радио)",std_key("CAPSLOCK"),"input_act_radio"),
+	kb("Эмоции","Открывает меню эмоций и описания действий персонажа",std_key("F2"),"input_act_emoteMenu"),
+	kb("История сообщений","Открывает список последних сообщений из чата",std_key("F8"),"input_act_chatHistory"),
+	kb("Консоль","Открывает окно ввода специальных команд",std_key("F10"),"input_act_commandMenu"),
+	kb("Сообщение администрации","Отправляет сообщение администрации.",std_key("F11"),"input_act_openAhelp")
 ];
 
 if !isNull(relicta_global_textChatEnabled) then {
 	cd_settingsKeyboard pushBack
-		kb("Сказать","Открывает окно текстового чата",std_key("H"),input_act_speak);
+		kb("Сказать","Открывает окно текстового чата",std_key("H"),"input_act_speak");
 };
 
+decl(map)
 input_internal_map_act2kb = createHashMap;
 {
 	input_internal_map_act2kb set [tolower(_x select KEYBIND_INDEX_VARNAME),_forEachIndex];
 } foreach cd_settingsKeyboard;
 
+decl(void())
 input_updateAllKeyBinds = {
 	private _serverUpdateList = [];
 	{
@@ -63,7 +75,8 @@ input_updateAllKeyBinds = {
 };
 
 //Событие загрузки кастомных биндов юзера
-_onLoadKeyBinds = {
+decl(void(...any[]))
+input_internal_onLoadKeyBinds = {
 	private _kbList = _this;
 	private _listAllowedVarNames = cd_settingsKeyboard apply {tolower(_x select KEYBIND_INDEX_VARNAME)};
 	private _remList = [];
@@ -101,9 +114,9 @@ _onLoadKeyBinds = {
 		rpcSendToServer("remKeyBindList",[_remList arg clientOwner]);
 	};
 	
-}; rpcAdd("onLoadKeybinds",_onLoadKeyBinds);
+}; rpcAdd("onLoadKeybinds",input_internal_onLoadKeyBinds);
 
-
+decl(bool(any,any,bool))
 input_checkKeyState = {
 	params ["_keyData","_state",["_doRemKeyState",false]];
 
@@ -120,8 +133,10 @@ input_checkKeyState = {
 	if (["somebutton"] call input_spamProtect) exitWith {};
 
 */
+decl(map)
 input_map_spamProtect = createHashMap;
 
+decl(bool(string;float))
 input_spamProtect = {
 	params ["_strname",["_timeout",0.3]];
 	_strname = tolower _strname;
@@ -139,6 +154,7 @@ input_spamProtect = {
 };
 
 //temorary wall pass through walls 
+decl(bool())
 input_passThroughWallsProtect = {
 	private _anmList = [
 		"aovrpercmstpsnonwnondf", //default
@@ -155,14 +171,15 @@ input_passThroughWallsProtect = {
 #include <..\WidgetSystem\blockedButtons.hpp>
 
 //Проверяет пользовательский инпут. true означает что клавиша заблокирована
+decl(bool(int))
 input_movementCheck = {
 	params ["_key"];
 
 	//disable V in combat mode
 	if ([player] call smd_isCombatModeEnabled && {_key in (actionKeys "GetOver")}) exitWith {true};
 
-	_isMov = call input_internal_isMovingButton;
-	_isCS = call input_internal_isChangeStance;
+	_isMov = _key call input_internal_isMovingButton;
+	_isCS = _key call input_internal_isChangeStance;
 
 	if ((gf_isLockedInputByWall || gf_isLockedInputByActor) && (_isMov || _isCS)) exitWith {
 		true
@@ -174,7 +191,7 @@ input_movementCheck = {
 	};
 
 	//нельзя тащить вперёд
-	if (_isMov && {[player] call smd_isPulling} && {call input_internal_isMovingForward}) exitWith {true};
+	if (_isMov && {[player] call smd_isPulling} && {_key call input_internal_isMovingForward}) exitWith {true};
 
 	(player getVariable ["smd_bodyParts",[true,true,true,true]]) params ["_ra","_la","_rl","_ll","_canStand"];
 	_hasNoLegs = !_rl && !_ll;
@@ -184,7 +201,7 @@ input_movementCheck = {
 	};
 	_hasNoArms = !_ra && !_la;
 	
-	if ([player,"ghost_flag",VST_GHOST_EFFECT] call le_vst_hasVarExt) then {
+	if ([player,"VST_GHOST_EFFECT"] call vst_containsConfig) then {
 		_hasNoArms = false; 
 		_hasNoLegs = false;
 	};
@@ -218,10 +235,14 @@ input_movementCheck = {
 
 	//false
 };
-input_internal_isChangeStance = {_key in CHANGE_STANCE_BUTTONS};
-input_internal_isMovingButton = {_key in CAN_MOVE_BUTTONS};
-input_internal_isMovingForward = {_key in MOVE_FORWARD_BUTTONS};
+decl(bool(int))
+input_internal_isChangeStance = {_this in CHANGE_STANCE_BUTTONS};
+decl(bool(int))
+input_internal_isMovingButton = {_this in CAN_MOVE_BUTTONS};
+decl(bool(int))
+input_internal_isMovingForward = {_this in MOVE_FORWARD_BUTTONS};
 
+decl(string(string))
 input_getKeyNameByInputName = {
 	params ["_inp"];
 	_inp = toLower _inp;

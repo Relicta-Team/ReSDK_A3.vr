@@ -2,6 +2,7 @@ import re
 import sys
 import string
 import os
+import glob
 
 
 def log(mes):
@@ -35,20 +36,25 @@ workspace = os.path.abspath(sys.argv[2])
 log(f"Task {taskname}")
 log(f"Workspace path: {workspace}")
 
-mapStorageFolder = os.path.abspath(workspace + '\\Src\\Editor\\Bin\\Maps')
+mapStorageFolder = os.path.abspath(workspace + '/Src/Editor/Bin/Maps')
 log(f'Check map storage: {mapStorageFolder}')
-if not os.path.exists(mapStorageFolder): sys.exit(-20)
+if not os.path.exists(mapStorageFolder): 
+    error("Binary maps directory not found " + mapStorageFolder)
+    sys.exit(-20)
 
-mapCompiledFolder = os.path.abspath(workspace + '\\Src\\host\\MapManager\\Maps')
+mapCompiledFolder = os.path.abspath(workspace + '/Src/host/MapManager/Maps')
 log(f'Check baked maps: {mapCompiledFolder}')
-if not os.path.exists(mapCompiledFolder): sys.exit(-21)
+if not os.path.exists(mapCompiledFolder): 
+    error("Baked maps directory not found")
+    sys.exit(-21)
 
-lightEngineFolder ='\\Src\\client\\LightEngine\\'
-legacyLightsFile = os.path.abspath(workspace + lightEngineFolder + 'LightEngine.hpp')
-scriptedLightsFile = os.path.abspath(workspace + lightEngineFolder + 'ScriptedEffects.hpp')
+lightEngineFolder ='/Src/client/LightEngine'
+scrCfgDirectory = os.path.abspath(workspace + lightEngineFolder + "/ScriptedConfigs")
 
 log('Check light configs')
-if not os.path.exists(legacyLightsFile) or not os.path.exists(scriptedLightsFile): sys.exit(22)
+if not os.path.exists(scrCfgDirectory): 
+    error("Light configs directory not found")
+    sys.exit(22)
 
 hasError = False
 
@@ -57,36 +63,33 @@ def validateConfigs():
     global hasError
     global mapStorageFolder
     global mapCompiledFolder
-    global legacyLightsFile
-    global scriptedLightsFile
-    allConfigsLE = {}
-    
-    
-
-
-    log("Scanning configs")
-    allContents = ""
-    with open(scriptedLightsFile,"r",encoding="utf8") as f:
-        allContents += f.read()
-    with open(legacyLightsFile,"r",encoding="utf8") as f:
-        allContents += f.read()
-    
-    mathces = re.findall("\#\s*define\s+(S?LIGHT_\w+)\s+(\d+)",allContents)
+    global scrCfgDirectory
+    allConfigs = {}
     
     writeSummary(f"Light configs:")
-    for match in mathces:
-        cfg = match[0]
-        id = match[1]
-        if cfg in allConfigsLE:
-            error(f"Duplicate config {cfg}")
+    log(f"Searching configs in directory: {scrCfgDirectory}")
+    for fcfgPath in glob.glob(f"{scrCfgDirectory}/*.sqf"):
+        log(f'Found {fcfgPath}')
+        log("    Scanning...")
+        cfgFileContent = ""
+        with open(fcfgPath,"r",encoding="utf8") as f:
+            cfgFileContent = f.read()
+        if len(cfgFileContent) == 0:
+            error(f'Empty file',fcfgPath)
             hasError = True
-        if id in allConfigsLE.values():
-            configwithid = next((k for k, v in allConfigsLE.items() if v == id), None)
-            error(f"Duplicate config id {id}; This id already used for {configwithid}")
+            continue
+        grp = re.search(r'regScriptEmit\((SLIGHT_[\w_]+)\)',cfgFileContent)
+        if not grp:
+            error('Wrong config structure',os.path.relpath(fcfgPath,workspace))
             hasError = True
-        log(f'Found config {cfg} with id {id}')
-        writeSummary(f" - {cfg}={id}")
-        allConfigsLE[cfg] = id
+            continue
+        cfgName = grp.group(1)
+        if cfgName in allConfigs:
+            error(f"Duplicate config {cfgName}; Previous path: {allConfigs[cfgName]}",fcfgPath)
+            hasError = True
+            continue
+        allConfigs[cfgName] = fcfgPath
+        writeSummary(f" {cfgName} ({fcfgPath})")
 
     if hasError: return
     
@@ -97,28 +100,31 @@ def validateConfigs():
 
         mapPath = os.path.join(mapStorageFolder,map)
         log(f"Scanning map file {map}")
-        writeSummary(f"- {map}")
+        
         with open(mapPath,"r",encoding="utf8") as f:
             buf = f.read()
             
-            mapnamebin = re.findall("\"\"missionName\"\",\"\"([\w_]*)\"\"",buf)
-            if mapnamebin.__len__() != 1:
-                error(f"Map {map} has no internal name")
+            mapDataBin = re.search("\"\"missionName\"\",\"\"([\w_]*)\"\"\]\,\[\"\"version\"\"\,(\d+)\]",buf)
+            if not mapDataBin:
+                error(f"Map {map} has no internal name or unknown version")
                 hasError = True
+                continue
             
-            mapnamebin = mapnamebin[0]
+            mapnamebin = mapDataBin.group(1)
+            mapnameVersion = mapDataBin.group(2)
 
             mathces = re.findall("\"\"light\"\",\"\"(\w+)\"\"",buf)
             foundedCfgs = 0
             for match in mathces:
                 cfg = match
-                if not cfg in allConfigsLE:
+                if not cfg in allConfigs:
                     error(f"Config {cfg} not found in binary map {mapnamebin}")
                     hasError = True
                 else:
                     foundedCfgs += 1
             
             log(f"Map {map} has {foundedCfgs} config uses")
+            writeSummary(f"- {map} (v{mapnameVersion}) - {foundedCfgs} cfgs")
     
     if hasError: return
         
@@ -129,22 +135,35 @@ def validateConfigs():
 
         mapPath = os.path.join(mapCompiledFolder,map)
         log(f"Scanning map builded file {map}")
-        writeSummary(f"- {map}")
+        
         with open(mapPath,"r",encoding="utf8") as f:
             buf = f.read()
+
+            mapver = re.search(r"__metaInfoVersion__\s*\=\s*(\d+)",buf)
+            if not mapver:
+                error(f"Map {map} has no internal version marker or unknown version")
+                hasError = True
+                continue
+            buildVersion = float(mapver.group(1))
+
+            if (buildVersion < 5):
+                writeSummary(f"- [SKIP CHECK] {map} v{buildVersion} ")
+                log(f"Skip map checking because version {buildVersion} < 5")
+                continue
+
+
             foundedCfgs = 0
-            mathces = re.findall("\[\'light\'\,(\w+)\]",buf)
+            mathces = re.findall("\[\'light\'\,\"(\w+)\" call lightSys_getConfigIdByName\]",buf)
             for match in mathces:
-                if match.endswith('_var'):
-                    match = match[:-4]
                 cfg = match
-                if not cfg in allConfigsLE:
+                if not cfg in allConfigs:
                     error(f"Config {cfg} not found in builded map {map}")
                     hasError = True
                 else:
                     foundedCfgs += 1
             
             log(f"Map {map} has {foundedCfgs} config uses")
+            writeSummary(f'- [OK] {map} v{buildVersion} - {foundedCfgs} configs')
 
 #endregion
 

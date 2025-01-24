@@ -13,7 +13,7 @@
 
 os_light_handle_onupdate = -1;
 os_light_lastTimeSendInfo = 0;
-os_light_list_noProcessedLights = [];
+os_light_list_noProcessedLights = []; //vec2 (light,intensity)
 
 os_light_setEnable = {
 	params ["_mode"];
@@ -27,11 +27,16 @@ os_light_setEnable = {
 };
 
 os_light_getLighting = {
-	{_x setLightBrightness 0} count os_light_list_noProcessedLights;
+	{
+		(_x select 0) setLightIntensity 0;
+	} count os_light_list_noProcessedLights;
+	
 	//значения взяты с сервера. всё должно совпадать
-	private _light = round linearConversion [10,100,(getLightingAt player) select 3,0,4,true];
-	private _varName = "__defBright";
-	{_x setLightBrightness ((attachedTo _x) getVariable [_varName,0])} count os_light_list_noProcessedLights;
+	private _light = round linearConversion [10,60,(getLightingAt player) select 3,0,4,true];
+
+	{
+		(_x select 0) setLightIntensity (_x select 1);
+	} count os_light_list_noProcessedLights;
 	_light
 };
 
@@ -50,7 +55,7 @@ os_light_onUpdate = {
 };
 
 os_light_registerAsNoProcessedLight = {
-	params ["_lt"];
-	os_light_list_noProcessedLights pushBackUnique _lt;
+	params ["_lt","_intensity"];
+	os_light_list_noProcessedLights pushBackUnique [_lt,_intensity];
 	_lt
 };

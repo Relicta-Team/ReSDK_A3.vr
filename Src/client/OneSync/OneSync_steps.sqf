@@ -10,7 +10,7 @@ os_steps_handle = -1;
 os_steps_currentSoundName = "";
 os_steps_currentSoundCount = 0;
 
-#define OS_STEPS_DEFAULT_SOUND_KEY SLIGHT_DAM_STONE
+#define OS_STEPS_DEFAULT_SOUND_KEY ("SLIGHT_DAM_STONE" call lightSys_getConfigIdByName)
 
 //os_steps_soundsType = [];
 os_steps_getStepData = { materials_map_stepData };

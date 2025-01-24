@@ -414,7 +414,7 @@ Replaced value:
 ```sqf
 '__GAME_VER__'
 ```
-File: [host\engine.hpp at line 13](../../../Src/host/engine.hpp#L13)
+File: [host\engine.hpp at line 15](../../../Src/host/engine.hpp#L15)
 ## PLATFORM_VERSION_MAJ
 
 Type: constant
@@ -426,7 +426,7 @@ Replaced value:
 ```sqf
 __GAME_VER_MAJ__
 ```
-File: [host\engine.hpp at line 14](../../../Src/host/engine.hpp#L14)
+File: [host\engine.hpp at line 16](../../../Src/host/engine.hpp#L16)
 ## PLATFORM_VERSION_MIN
 
 Type: constant
@@ -438,7 +438,7 @@ Replaced value:
 ```sqf
 __GAME_VER_MIN__
 ```
-File: [host\engine.hpp at line 15](../../../Src/host/engine.hpp#L15)
+File: [host\engine.hpp at line 17](../../../Src/host/engine.hpp#L17)
 ## PLATFORM_VERSION_BUILD
 
 Type: constant
@@ -450,7 +450,7 @@ Replaced value:
 ```sqf
 __GAME_BUILD__
 ```
-File: [host\engine.hpp at line 16](../../../Src/host/engine.hpp#L16)
+File: [host\engine.hpp at line 18](../../../Src/host/engine.hpp#L18)
 ## ISDEVBUILD
 
 Type: constant
@@ -480,7 +480,7 @@ Replaced value:
 		}; \
 	})
 ```
-File: [host\engine.hpp at line 19](../../../Src/host/engine.hpp#L19)
+File: [host\engine.hpp at line 21](../../../Src/host/engine.hpp#L21)
 ## ISDEVBUILD
 
 Type: constant
@@ -494,7 +494,7 @@ Replaced value:
 ```sqf
 false
 ```
-File: [host\engine.hpp at line 37](../../../Src/host/engine.hpp#L37)
+File: [host\engine.hpp at line 39](../../../Src/host/engine.hpp#L39)
 ## ENABLE_LINE_IN_FILES
 
 Type: constant
@@ -506,7 +506,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 46](../../../Src/host/engine.hpp#L46)
+File: [host\engine.hpp at line 48](../../../Src/host/engine.hpp#L48)
 ## __pragma_preprocess
 
 Type: constant
@@ -520,7 +520,7 @@ Replaced value:
 ```sqf
 preprocessFileLineNumbers
 ```
-File: [host\engine.hpp at line 49](../../../Src/host/engine.hpp#L49)
+File: [host\engine.hpp at line 51](../../../Src/host/engine.hpp#L51)
 ## __pragma_preprocess
 
 Type: constant
@@ -534,7 +534,7 @@ Replaced value:
 ```sqf
 preprocessFile
 ```
-File: [host\engine.hpp at line 51](../../../Src/host/engine.hpp#L51)
+File: [host\engine.hpp at line 53](../../../Src/host/engine.hpp#L53)
 ## __pragma_prep_cli
 
 Type: constant
@@ -546,7 +546,7 @@ Replaced value:
 ```sqf
 preprocessFile
 ```
-File: [host\engine.hpp at line 54](../../../Src/host/engine.hpp#L54)
+File: [host\engine.hpp at line 56](../../../Src/host/engine.hpp#L56)
 ## region(name)
 
 Type: constant
@@ -558,7 +558,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 57](../../../Src/host/engine.hpp#L57)
+File: [host\engine.hpp at line 59](../../../Src/host/engine.hpp#L59)
 ## endregion
 
 Type: constant
@@ -570,7 +570,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 58](../../../Src/host/engine.hpp#L58)
+File: [host\engine.hpp at line 60](../../../Src/host/engine.hpp#L60)
 ## arg
 
 Type: constant
@@ -582,7 +582,7 @@ Replaced value:
 ```sqf
 ,
 ```
-File: [host\engine.hpp at line 61](../../../Src/host/engine.hpp#L61)
+File: [host\engine.hpp at line 63](../../../Src/host/engine.hpp#L63)
 ## args1(a)
 
 Type: constant
@@ -594,7 +594,7 @@ Replaced value:
 ```sqf
 a
 ```
-File: [host\engine.hpp at line 64](../../../Src/host/engine.hpp#L64)
+File: [host\engine.hpp at line 66](../../../Src/host/engine.hpp#L66)
 ## args2(a,b)
 
 Type: constant
@@ -607,7 +607,7 @@ Replaced value:
 ```sqf
 a,b
 ```
-File: [host\engine.hpp at line 65](../../../Src/host/engine.hpp#L65)
+File: [host\engine.hpp at line 67](../../../Src/host/engine.hpp#L67)
 ## args3(a,b,c)
 
 Type: constant
@@ -621,7 +621,7 @@ Replaced value:
 ```sqf
 a,b,c
 ```
-File: [host\engine.hpp at line 66](../../../Src/host/engine.hpp#L66)
+File: [host\engine.hpp at line 68](../../../Src/host/engine.hpp#L68)
 ## args4(a,b,c,d)
 
 Type: constant
@@ -636,7 +636,7 @@ Replaced value:
 ```sqf
 a,b,c,d
 ```
-File: [host\engine.hpp at line 67](../../../Src/host/engine.hpp#L67)
+File: [host\engine.hpp at line 69](../../../Src/host/engine.hpp#L69)
 ## args5(a,b,c,d,e)
 
 Type: constant
@@ -652,7 +652,7 @@ Replaced value:
 ```sqf
 a,b,c,d,e
 ```
-File: [host\engine.hpp at line 68](../../../Src/host/engine.hpp#L68)
+File: [host\engine.hpp at line 70](../../../Src/host/engine.hpp#L70)
 ## args6(a,b,c,d,e,f)
 
 Type: constant
@@ -669,7 +669,7 @@ Replaced value:
 ```sqf
 a,b,c,d,e,f
 ```
-File: [host\engine.hpp at line 69](../../../Src/host/engine.hpp#L69)
+File: [host\engine.hpp at line 71](../../../Src/host/engine.hpp#L71)
 ## conDllCall
 
 Type: constant
@@ -681,7 +681,7 @@ Replaced value:
 ```sqf
 "debug_console" callExtension
 ```
-File: [host\engine.hpp at line 71](../../../Src/host/engine.hpp#L71)
+File: [host\engine.hpp at line 73](../../../Src/host/engine.hpp#L73)
 ## log(message)
 
 Type: constant
@@ -693,7 +693,7 @@ Replaced value:
 ```sqf
 [message] call cprint
 ```
-File: [host\engine.hpp at line 73](../../../Src/host/engine.hpp#L73)
+File: [host\engine.hpp at line 75](../../../Src/host/engine.hpp#L75)
 ## logformat(provider,formatText)
 
 Type: constant
@@ -706,7 +706,7 @@ Replaced value:
 ```sqf
 [provider,formatText] call cprint
 ```
-File: [host\engine.hpp at line 74](../../../Src/host/engine.hpp#L74)
+File: [host\engine.hpp at line 76](../../../Src/host/engine.hpp#L76)
 ## warning(message)
 
 Type: constant
@@ -718,7 +718,7 @@ Replaced value:
 ```sqf
 [message] call cprintWarn
 ```
-File: [host\engine.hpp at line 77](../../../Src/host/engine.hpp#L77)
+File: [host\engine.hpp at line 79](../../../Src/host/engine.hpp#L79)
 ## error(message)
 
 Type: constant
@@ -730,7 +730,7 @@ Replaced value:
 ```sqf
 [message] call cprintErr
 ```
-File: [host\engine.hpp at line 78](../../../Src/host/engine.hpp#L78)
+File: [host\engine.hpp at line 80](../../../Src/host/engine.hpp#L80)
 ## warningformat(message,fmt)
 
 Type: constant
@@ -743,7 +743,7 @@ Replaced value:
 ```sqf
 [message,fmt] call cprintWarn
 ```
-File: [host\engine.hpp at line 80](../../../Src/host/engine.hpp#L80)
+File: [host\engine.hpp at line 82](../../../Src/host/engine.hpp#L82)
 ## errorformat(message,fmt)
 
 Type: constant
@@ -756,7 +756,7 @@ Replaced value:
 ```sqf
 [message,fmt] call cprintErr
 ```
-File: [host\engine.hpp at line 81](../../../Src/host/engine.hpp#L81)
+File: [host\engine.hpp at line 83](../../../Src/host/engine.hpp#L83)
 ## __post_message_RB(m)
 
 Type: constant
@@ -770,7 +770,7 @@ Replaced value:
 ```sqf
 if (RBuilder_serverStarted) then {["RBuilder","c_send",["print",m]] call rescript_callCommandVoid};
 ```
-File: [host\engine.hpp at line 84](../../../Src/host/engine.hpp#L84)
+File: [host\engine.hpp at line 86](../../../Src/host/engine.hpp#L86)
 ## __RB_FATAL_EXIT
 
 Type: constant
@@ -784,7 +784,7 @@ Replaced value:
 ```sqf
 call RBuilder_onServerLockedLoading;
 ```
-File: [host\engine.hpp at line 85](../../../Src/host/engine.hpp#L85)
+File: [host\engine.hpp at line 87](../../../Src/host/engine.hpp#L87)
 ## __post_message_RB(m)
 
 Type: constant
@@ -798,7 +798,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 87](../../../Src/host/engine.hpp#L87)
+File: [host\engine.hpp at line 89](../../../Src/host/engine.hpp#L89)
 ## __RB_FATAL_EXIT
 
 Type: constant
@@ -812,7 +812,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 88](../../../Src/host/engine.hpp#L88)
+File: [host\engine.hpp at line 90](../../../Src/host/engine.hpp#L90)
 ## trace(message)
 
 Type: constant
@@ -826,7 +826,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 95](../../../Src/host/engine.hpp#L95)
+File: [host\engine.hpp at line 97](../../../Src/host/engine.hpp#L97)
 ## traceformat(message,fmt)
 
 Type: constant
@@ -841,7 +841,7 @@ Replaced value:
 ```sqf
 "debug_console" callExtension (format ["TRACE: " + message + "#1011",fmt]); __post_message_RB(format["TRACE: " + (message) arg fmt])
 ```
-File: [host\engine.hpp at line 95](../../../Src/host/engine.hpp#L95)
+File: [host\engine.hpp at line 97](../../../Src/host/engine.hpp#L97)
 ## breakpoint_setfile(x)
 
 Type: constant
@@ -855,7 +855,7 @@ Replaced value:
 ```sqf
 __bp__file__ = x;
 ```
-File: [host\engine.hpp at line 98](../../../Src/host/engine.hpp#L98)
+File: [host\engine.hpp at line 100](../../../Src/host/engine.hpp#L100)
 ## breakpoint(data)
 
 Type: constant
@@ -869,7 +869,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 99](../../../Src/host/engine.hpp#L99)
+File: [host\engine.hpp at line 101](../../../Src/host/engine.hpp#L101)
 ## traceformat(message,fmt)
 
 Type: constant
@@ -884,7 +884,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 104](../../../Src/host/engine.hpp#L104)
+File: [host\engine.hpp at line 106](../../../Src/host/engine.hpp#L106)
 ## breakpoint_setfile(x)
 
 Type: constant
@@ -898,7 +898,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 106](../../../Src/host/engine.hpp#L106)
+File: [host\engine.hpp at line 108](../../../Src/host/engine.hpp#L108)
 ## OBSOLETE(funcname)
 
 Type: constant
@@ -910,7 +910,7 @@ Replaced value:
 ```sqf
 private _dt = format ["[OBSOLETE] => %1(): This function will be removed in the future and should not be used." + "#1101", #funcname]; warning(_dt); [_dt] call discWarning;
 ```
-File: [host\engine.hpp at line 113](../../../Src/host/engine.hpp#L113)
+File: [host\engine.hpp at line 115](../../../Src/host/engine.hpp#L115)
 ## NOTIMPLEMENTED(funcname)
 
 Type: constant
@@ -922,7 +922,7 @@ Replaced value:
 ```sqf
 private _dt = format ["[NOT_IMPLEMENTED] => %1(): This function not implemented." + "#1101", #funcname]; warning(_dt); [_dt] call discWarning;
 ```
-File: [host\engine.hpp at line 115](../../../Src/host/engine.hpp#L115)
+File: [host\engine.hpp at line 117](../../../Src/host/engine.hpp#L117)
 ## ___appexitstr(value)
 
 Type: constant
@@ -934,7 +934,7 @@ Replaced value:
 ```sqf
 #value
 ```
-File: [host\engine.hpp at line 118](../../../Src/host/engine.hpp#L118)
+File: [host\engine.hpp at line 120](../../../Src/host/engine.hpp#L120)
 ## appExit(exitCode)
 
 Type: constant
@@ -946,7 +946,7 @@ Replaced value:
 ```sqf
 logformat("Application exited. Reason: %1 (%2)",exitCode arg __appexit_listreasons select exitCode); if (!isMultiplayer) then {client_isLocked = true; server_isLocked = true; endMission "END1";} else {if (isServer) then {server_isLocked = true; __RB_FATAL_EXIT} else {client_isLocked = true}}
 ```
-File: [host\engine.hpp at line 119](../../../Src/host/engine.hpp#L119)
+File: [host\engine.hpp at line 121](../../../Src/host/engine.hpp#L121)
 ## __appexit_listreasons
 
 Type: constant
@@ -966,7 +966,7 @@ Replaced value:
 	,"EXTENSION_ERROR" \
 	])apply{"APPEXIT_REASON_"+_x}
 ```
-File: [host\engine.hpp at line 120](../../../Src/host/engine.hpp#L120)
+File: [host\engine.hpp at line 122](../../../Src/host/engine.hpp#L122)
 ## APPEXIT_REASON_EXIT
 
 Type: constant
@@ -978,7 +978,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\engine.hpp at line 130](../../../Src/host/engine.hpp#L130)
+File: [host\engine.hpp at line 132](../../../Src/host/engine.hpp#L132)
 ## APPEXIT_REASON_CRITICAL
 
 Type: constant
@@ -990,7 +990,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\engine.hpp at line 131](../../../Src/host/engine.hpp#L131)
+File: [host\engine.hpp at line 133](../../../Src/host/engine.hpp#L133)
 ## APPEXIT_REASON_DOUBLEDEF
 
 Type: constant
@@ -1002,7 +1002,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\engine.hpp at line 132](../../../Src/host/engine.hpp#L132)
+File: [host\engine.hpp at line 134](../../../Src/host/engine.hpp#L134)
 ## APPEXIT_REASON_UNDEFINEDMODULE
 
 Type: constant
@@ -1014,7 +1014,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\engine.hpp at line 133](../../../Src/host/engine.hpp#L133)
+File: [host\engine.hpp at line 135](../../../Src/host/engine.hpp#L135)
 ## APPEXIT_REASON_COMPILATIOEXCEPTION
 
 Type: constant
@@ -1026,7 +1026,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\engine.hpp at line 134](../../../Src/host/engine.hpp#L134)
+File: [host\engine.hpp at line 136](../../../Src/host/engine.hpp#L136)
 ## APPEXIT_REASON_RUNTIMEERROR
 
 Type: constant
@@ -1038,7 +1038,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\engine.hpp at line 135](../../../Src/host/engine.hpp#L135)
+File: [host\engine.hpp at line 137](../../../Src/host/engine.hpp#L137)
 ## APPEXIT_REASON_ASSERTION_FAIL
 
 Type: constant
@@ -1050,7 +1050,7 @@ Replaced value:
 ```sqf
 6
 ```
-File: [host\engine.hpp at line 136](../../../Src/host/engine.hpp#L136)
+File: [host\engine.hpp at line 138](../../../Src/host/engine.hpp#L138)
 ## APPEXIT_REASON_EXTENSION_ERROR
 
 Type: constant
@@ -1062,7 +1062,7 @@ Replaced value:
 ```sqf
 7
 ```
-File: [host\engine.hpp at line 137](../../../Src/host/engine.hpp#L137)
+File: [host\engine.hpp at line 139](../../../Src/host/engine.hpp#L139)
 ## loadFile(path)
 
 Type: constant
@@ -1076,7 +1076,7 @@ Replaced value:
 ```sqf
 if (server_isLocked) exitWith {error("Compile process aborted - server.isLocked == true")}; logformat("Start loading file %1",path); ["Load file - '%1'",path] call logInfo;  call compile __pragma_preprocess (path)
 ```
-File: [host\engine.hpp at line 147](../../../Src/host/engine.hpp#L147)
+File: [host\engine.hpp at line 149](../../../Src/host/engine.hpp#L149)
 ## importClient(path)
 
 Type: constant
@@ -1091,7 +1091,7 @@ Replaced value:
 if (isNil {allClientContents}) then {allClientContents = [];}; if (client_isLocked) exitWith {error("Compile process aborted - client.isLocked == true")}; \
 	private _ctx = compile __pragma_prep_cli (path); if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 ```
-File: [host\engine.hpp at line 149](../../../Src/host/engine.hpp#L149)
+File: [host\engine.hpp at line 151](../../../Src/host/engine.hpp#L151)
 ## importCommon(path)
 
 Type: constant
@@ -1107,7 +1107,7 @@ if (isNil {allClientContents}) then {allClientContents = [];}; \
 	private _ctx = compile __pragma_prep_cli ("src\host\CommonComponents\" + path); \
 	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 ```
-File: [host\engine.hpp at line 152](../../../Src/host/engine.hpp#L152)
+File: [host\engine.hpp at line 154](../../../Src/host/engine.hpp#L154)
 ## loadFile(path)
 
 Type: constant
@@ -1121,7 +1121,7 @@ Replaced value:
 ```sqf
 if (server_isLocked) exitWith {error("Compile process aborted - server.isLocked == true")}; logformat("Start loading file %1",path); ["Load file - '%1'",path] call logInfo; call compile __pragma_preprocess (path)
 ```
-File: [host\engine.hpp at line 156](../../../Src/host/engine.hpp#L156)
+File: [host\engine.hpp at line 158](../../../Src/host/engine.hpp#L158)
 ## importClient(path)
 
 Type: constant
@@ -1137,7 +1137,7 @@ if (isNil {allClientContents}) then {allClientContents = [];}; if (client_isLock
 	_macro_module = path regexFind ["\w+(?=\.)",0] select 0 select 0 select 0; \
 	private _ctx = compile ((__pragma_prep_cli (path))regexReplace ["__THIS_MODULE_REPLACE__",""""+ _macro_module+""""]); if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 ```
-File: [host\engine.hpp at line 158](../../../Src/host/engine.hpp#L158)
+File: [host\engine.hpp at line 160](../../../Src/host/engine.hpp#L160)
 ## importCommon(path)
 
 Type: constant
@@ -1155,7 +1155,7 @@ if (isNil {allClientContents}) then {allClientContents = [];}; \
 	private _ctx = compile __prep; \
 	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 ```
-File: [host\engine.hpp at line 162](../../../Src/host/engine.hpp#L162)
+File: [host\engine.hpp at line 164](../../../Src/host/engine.hpp#L164)
 ## fileExists(file)
 
 Type: constant
@@ -1167,7 +1167,7 @@ Replaced value:
 ```sqf
 fileexists (file)
 ```
-File: [host\engine.hpp at line 170](../../../Src/host/engine.hpp#L170)
+File: [host\engine.hpp at line 172](../../../Src/host/engine.hpp#L172)
 ## SHORT_PATH
 
 Type: constant
@@ -1183,7 +1183,7 @@ _ret = __FILE__; \
 }; _ret select [1,count _ret - 1]} \
 
 ```
-File: [host\engine.hpp at line 172](../../../Src/host/engine.hpp#L172)
+File: [host\engine.hpp at line 174](../../../Src/host/engine.hpp#L174)
 ## getMissionName
 
 Type: constant
@@ -1195,7 +1195,7 @@ Replaced value:
 ```sqf
 (missionname+".vr")
 ```
-File: [host\engine.hpp at line 177](../../../Src/host/engine.hpp#L177)
+File: [host\engine.hpp at line 179](../../../Src/host/engine.hpp#L179)
 ## SHORT_PATH_CUSTOM(d__)
 
 Type: constant
@@ -1211,7 +1211,7 @@ _ret = _this; \
 }; _ret} \
 
 ```
-File: [host\engine.hpp at line 178](../../../Src/host/engine.hpp#L178)
+File: [host\engine.hpp at line 180](../../../Src/host/engine.hpp#L180)
 ## null
 
 Type: constant
@@ -1223,7 +1223,7 @@ Replaced value:
 ```sqf
 nil
 ```
-File: [host\engine.hpp at line 186](../../../Src/host/engine.hpp#L186)
+File: [host\engine.hpp at line 188](../../../Src/host/engine.hpp#L188)
 ## isNull(val)
 
 Type: constant
@@ -1235,7 +1235,7 @@ Replaced value:
 ```sqf
 (isnil{val})
 ```
-File: [host\engine.hpp at line 188](../../../Src/host/engine.hpp#L188)
+File: [host\engine.hpp at line 190](../../../Src/host/engine.hpp#L190)
 ## isNullReference(obj)
 
 Type: constant
@@ -1247,7 +1247,7 @@ Replaced value:
 ```sqf
 (isNULL (obj))
 ```
-File: [host\engine.hpp at line 189](../../../Src/host/engine.hpp#L189)
+File: [host\engine.hpp at line 191](../../../Src/host/engine.hpp#L191)
 ## isNullVar(var)
 
 Type: constant
@@ -1259,7 +1259,7 @@ Replaced value:
 ```sqf
 (isnil 'var')
 ```
-File: [host\engine.hpp at line 190](../../../Src/host/engine.hpp#L190)
+File: [host\engine.hpp at line 192](../../../Src/host/engine.hpp#L192)
 ## defIsNull(_v,_defval)
 
 Type: constant
@@ -1272,7 +1272,7 @@ Replaced value:
 ```sqf
 if isNullVar(_v) then {_defval} else {_v}
 ```
-File: [host\engine.hpp at line 193](../../../Src/host/engine.hpp#L193)
+File: [host\engine.hpp at line 195](../../../Src/host/engine.hpp#L195)
 ## outRef(var,def)
 
 Type: constant
@@ -1285,7 +1285,7 @@ Replaced value:
 ```sqf
 var = if isNullVar(var) then {def} else {var}
 ```
-File: [host\engine.hpp at line 195](../../../Src/host/engine.hpp#L195)
+File: [host\engine.hpp at line 197](../../../Src/host/engine.hpp#L197)
 ## privates(v)
 
 Type: constant
@@ -1297,7 +1297,7 @@ Replaced value:
 ```sqf
 private (v splitString "."); 
 ```
-File: [host\engine.hpp at line 198](../../../Src/host/engine.hpp#L198)
+File: [host\engine.hpp at line 200](../../../Src/host/engine.hpp#L200)
 ## isNullPtr(obj)
 
 Type: constant
@@ -1309,7 +1309,7 @@ Replaced value:
 ```sqf
 (obj isequaltypeany [locationnull,controlnull,objnull,displaynull])
 ```
-File: [host\engine.hpp at line 201](../../../Src/host/engine.hpp#L201)
+File: [host\engine.hpp at line 203](../../../Src/host/engine.hpp#L203)
 ## isReference(obj)
 
 Type: constant
@@ -1321,7 +1321,7 @@ Replaced value:
 ```sqf
 (obj isequaltypeany [locationnull,controlnull,objnull,displaynull])
 ```
-File: [host\engine.hpp at line 203](../../../Src/host/engine.hpp#L203)
+File: [host\engine.hpp at line 205](../../../Src/host/engine.hpp#L205)
 ## __rb_mesh_common_path__
 
 Type: constant
@@ -1335,7 +1335,7 @@ Replaced value:
 ```sqf
 "core\default\default.p3d"
 ```
-File: [host\engine.hpp at line 211](../../../Src/host/engine.hpp#L211)
+File: [host\engine.hpp at line 213](../../../Src/host/engine.hpp#L213)
 ## createMesh(ctx)
 
 Type: constant
@@ -1351,7 +1351,7 @@ ctx call { params ["_p","_ps","_loc"]; \
 		createSimpleObject [ ifcheck(isServer,__rb_mesh_common_path__,_p), _ps,_loc ]; \
 	}
 ```
-File: [host\engine.hpp at line 212](../../../Src/host/engine.hpp#L212)
+File: [host\engine.hpp at line 214](../../../Src/host/engine.hpp#L214)
 ## createMesh(ctx)
 
 Type: constant
@@ -1365,7 +1365,7 @@ Replaced value:
 ```sqf
 createSimpleObject (ctx)
 ```
-File: [host\engine.hpp at line 216](../../../Src/host/engine.hpp#L216)
+File: [host\engine.hpp at line 218](../../../Src/host/engine.hpp#L218)
 ## mem_alloc()
 
 Type: constant
@@ -1377,7 +1377,7 @@ Replaced value:
 ```sqf
 (createLocation ["cba_namespacedummy",[20,20,20],0,0])
 ```
-File: [host\engine.hpp at line 220](../../../Src/host/engine.hpp#L220)
+File: [host\engine.hpp at line 222](../../../Src/host/engine.hpp#L222)
 ## mem_set(ptr)
 
 Type: constant
@@ -1389,7 +1389,7 @@ Replaced value:
 ```sqf
 (ptr)setvariable 
 ```
-File: [host\engine.hpp at line 221](../../../Src/host/engine.hpp#L221)
+File: [host\engine.hpp at line 223](../../../Src/host/engine.hpp#L223)
 ## mem_unset(ptr,val)
 
 Type: constant
@@ -1402,7 +1402,7 @@ Replaced value:
 ```sqf
 (ptr)setvariable[val,null]
 ```
-File: [host\engine.hpp at line 222](../../../Src/host/engine.hpp#L222)
+File: [host\engine.hpp at line 224](../../../Src/host/engine.hpp#L224)
 ## mem_get(ptr,val)
 
 Type: constant
@@ -1415,7 +1415,7 @@ Replaced value:
 ```sqf
 ((ptr)getvariable(val))
 ```
-File: [host\engine.hpp at line 223](../../../Src/host/engine.hpp#L223)
+File: [host\engine.hpp at line 225](../../../Src/host/engine.hpp#L225)
 ## mem_free(ptr)
 
 Type: constant
@@ -1427,7 +1427,7 @@ Replaced value:
 ```sqf
 (deleteLocation (ptr))
 ```
-File: [host\engine.hpp at line 224](../../../Src/host/engine.hpp#L224)
+File: [host\engine.hpp at line 226](../../../Src/host/engine.hpp#L226)
 ## stringEmpty
 
 Type: constant
@@ -1439,7 +1439,7 @@ Replaced value:
 ```sqf
 ""
 ```
-File: [host\engine.hpp at line 228](../../../Src/host/engine.hpp#L228)
+File: [host\engine.hpp at line 230](../../../Src/host/engine.hpp#L230)
 ## isValid(ptr)
 
 Type: constant
@@ -1451,7 +1451,7 @@ Replaced value:
 ```sqf
 ([ptr] call rv_cppcheck)
 ```
-File: [host\engine.hpp at line 232](../../../Src/host/engine.hpp#L232)
+File: [host\engine.hpp at line 234](../../../Src/host/engine.hpp#L234)
 ## valid(ptr)
 
 Type: constant
@@ -1463,8 +1463,8 @@ Replaced value:
 ```sqf
 ([ptr] call rv_cppcheck)
 ```
-File: [host\engine.hpp at line 234](../../../Src/host/engine.hpp#L234)
-## bool(val)
+File: [host\engine.hpp at line 236](../../../Src/host/engine.hpp#L236)
+## toBoolean(val)
 
 Type: constant
 
@@ -1475,7 +1475,7 @@ Replaced value:
 ```sqf
 valid(val)
 ```
-File: [host\engine.hpp at line 236](../../../Src/host/engine.hpp#L236)
+File: [host\engine.hpp at line 238](../../../Src/host/engine.hpp#L238)
 ## __gptr_os
 
 Type: constant
@@ -1487,7 +1487,7 @@ Replaced value:
 ```sqf
 (selectrandom table_hex)
 ```
-File: [host\engine.hpp at line 239](../../../Src/host/engine.hpp#L239)
+File: [host\engine.hpp at line 241](../../../Src/host/engine.hpp#L241)
 ## generatePtr
 
 Type: constant
@@ -1499,7 +1499,7 @@ Replaced value:
 ```sqf
 (__gptr_os + __gptr_os + __gptr_os + __gptr_os + __gptr_os)
 ```
-File: [host\engine.hpp at line 240](../../../Src/host/engine.hpp#L240)
+File: [host\engine.hpp at line 242](../../../Src/host/engine.hpp#L242)
 ## inRange(numberToCheck,bottom,top)
 
 Type: constant
@@ -1513,7 +1513,7 @@ Replaced value:
 ```sqf
 ((numberToCheck) >= bottom && (numberToCheck) <= top)
 ```
-File: [host\engine.hpp at line 250](../../../Src/host/engine.hpp#L250)
+File: [host\engine.hpp at line 252](../../../Src/host/engine.hpp#L252)
 ## isInt(num)
 
 Type: constant
@@ -1525,7 +1525,7 @@ Replaced value:
 ```sqf
 ((num) call {floor _this == _this})
 ```
-File: [host\engine.hpp at line 253](../../../Src/host/engine.hpp#L253)
+File: [host\engine.hpp at line 255](../../../Src/host/engine.hpp#L255)
 ## boolToInt(bval)
 
 Type: constant
@@ -1537,7 +1537,7 @@ Replaced value:
 ```sqf
 ([0,1]select (bval))
 ```
-File: [host\engine.hpp at line 255](../../../Src/host/engine.hpp#L255)
+File: [host\engine.hpp at line 257](../../../Src/host/engine.hpp#L257)
 ## precentage(checked,precval)
 
 Type: constant
@@ -1550,7 +1550,7 @@ Replaced value:
 ```sqf
 ((checked)*(precval)/100)
 ```
-File: [host\engine.hpp at line 258](../../../Src/host/engine.hpp#L258)
+File: [host\engine.hpp at line 260](../../../Src/host/engine.hpp#L260)
 ## formatTime(secs)
 
 Type: constant
@@ -1562,7 +1562,7 @@ Replaced value:
 ```sqf
 (secs call{format["%1 мин. %2 сек.",floor(_this / 60),_this % 60]})
 ```
-File: [host\engine.hpp at line 261](../../../Src/host/engine.hpp#L261)
+File: [host\engine.hpp at line 263](../../../Src/host/engine.hpp#L263)
 ## t_asMin(s)
 
 Type: constant
@@ -1574,7 +1574,7 @@ Replaced value:
 ```sqf
 ((s)*60)
 ```
-File: [host\engine.hpp at line 264](../../../Src/host/engine.hpp#L264)
+File: [host\engine.hpp at line 266](../../../Src/host/engine.hpp#L266)
 ## t_asHrs(s)
 
 Type: constant
@@ -1586,7 +1586,7 @@ Replaced value:
 ```sqf
 ((s)*3600)
 ```
-File: [host\engine.hpp at line 265](../../../Src/host/engine.hpp#L265)
+File: [host\engine.hpp at line 267](../../../Src/host/engine.hpp#L267)
 ## INFINITY
 
 Type: constant
@@ -1598,7 +1598,7 @@ Replaced value:
 ```sqf
 1e39
 ```
-File: [host\engine.hpp at line 267](../../../Src/host/engine.hpp#L267)
+File: [host\engine.hpp at line 269](../../../Src/host/engine.hpp#L269)
 ## INC(var)
 
 Type: constant
@@ -1610,7 +1610,7 @@ Replaced value:
 ```sqf
 var = var+1
 ```
-File: [host\engine.hpp at line 269](../../../Src/host/engine.hpp#L269)
+File: [host\engine.hpp at line 271](../../../Src/host/engine.hpp#L271)
 ## DEC(var)
 
 Type: constant
@@ -1622,7 +1622,7 @@ Replaced value:
 ```sqf
 var = var-1
 ```
-File: [host\engine.hpp at line 270](../../../Src/host/engine.hpp#L270)
+File: [host\engine.hpp at line 272](../../../Src/host/engine.hpp#L272)
 ## MOD(var,val)
 
 Type: constant
@@ -1635,7 +1635,7 @@ Replaced value:
 ```sqf
 var = var val
 ```
-File: [host\engine.hpp at line 273](../../../Src/host/engine.hpp#L273)
+File: [host\engine.hpp at line 275](../../../Src/host/engine.hpp#L275)
 ## modvar(var)
 
 Type: constant
@@ -1647,7 +1647,7 @@ Replaced value:
 ```sqf
 var = var
 ```
-File: [host\engine.hpp at line 274](../../../Src/host/engine.hpp#L274)
+File: [host\engine.hpp at line 276](../../../Src/host/engine.hpp#L276)
 ## MODARR(var,index,modif)
 
 Type: constant
@@ -1661,7 +1661,7 @@ Replaced value:
 ```sqf
 var set[index,(var select(index)) modif]
 ```
-File: [host\engine.hpp at line 277](../../../Src/host/engine.hpp#L277)
+File: [host\engine.hpp at line 279](../../../Src/host/engine.hpp#L279)
 ## SETARR(arr,index,val)
 
 Type: constant
@@ -1675,7 +1675,7 @@ Replaced value:
 ```sqf
 arr set[index,val]
 ```
-File: [host\engine.hpp at line 278](../../../Src/host/engine.hpp#L278)
+File: [host\engine.hpp at line 280](../../../Src/host/engine.hpp#L280)
 ## GETARR(arr,index)
 
 Type: constant
@@ -1688,7 +1688,7 @@ Replaced value:
 ```sqf
 arr select(index)
 ```
-File: [host\engine.hpp at line 279](../../../Src/host/engine.hpp#L279)
+File: [host\engine.hpp at line 281](../../../Src/host/engine.hpp#L281)
 ## array_exists(arr,var)
 
 Type: constant
@@ -1701,7 +1701,7 @@ Replaced value:
 ```sqf
 ((var)in(arr))
 ```
-File: [host\engine.hpp at line 281](../../../Src/host/engine.hpp#L281)
+File: [host\engine.hpp at line 283](../../../Src/host/engine.hpp#L283)
 ## array_shuffle(array)
 
 Type: constant
@@ -1713,7 +1713,7 @@ Replaced value:
 ```sqf
 (array call BIS_fnc_arrayShuffle)
 ```
-File: [host\engine.hpp at line 283](../../../Src/host/engine.hpp#L283)
+File: [host\engine.hpp at line 285](../../../Src/host/engine.hpp#L285)
 ## array_copy(array)
 
 Type: constant
@@ -1725,7 +1725,7 @@ Replaced value:
 ```sqf
 (+(array))
 ```
-File: [host\engine.hpp at line 285](../../../Src/host/engine.hpp#L285)
+File: [host\engine.hpp at line 287](../../../Src/host/engine.hpp#L287)
 ## array_remlast(arr)
 
 Type: constant
@@ -1737,7 +1737,7 @@ Replaced value:
 ```sqf
 (arr call {_this deleteAt (count _this - 1)})
 ```
-File: [host\engine.hpp at line 287](../../../Src/host/engine.hpp#L287)
+File: [host\engine.hpp at line 289](../../../Src/host/engine.hpp#L289)
 ## array_selectlast(arr)
 
 Type: constant
@@ -1749,7 +1749,7 @@ Replaced value:
 ```sqf
 (arr call {_this select (count _this - 1)})
 ```
-File: [host\engine.hpp at line 289](../../../Src/host/engine.hpp#L289)
+File: [host\engine.hpp at line 291](../../../Src/host/engine.hpp#L291)
 ## array_isempty(arr)
 
 Type: constant
@@ -1761,7 +1761,7 @@ Replaced value:
 ```sqf
 (count(arr)==0)
 ```
-File: [host\engine.hpp at line 291](../../../Src/host/engine.hpp#L291)
+File: [host\engine.hpp at line 293](../../../Src/host/engine.hpp#L293)
 ## array_count(arr)
 
 Type: constant
@@ -1773,7 +1773,7 @@ Replaced value:
 ```sqf
 (count (arr))
 ```
-File: [host\engine.hpp at line 293](../../../Src/host/engine.hpp#L293)
+File: [host\engine.hpp at line 295](../../../Src/host/engine.hpp#L295)
 ## array_remove(array,el)
 
 Type: constant
@@ -1786,7 +1786,7 @@ Replaced value:
 ```sqf
 ([array,el] call {params["_a","_e"]; _a deleteAt(_a find _e)})
 ```
-File: [host\engine.hpp at line 295](../../../Src/host/engine.hpp#L295)
+File: [host\engine.hpp at line 297](../../../Src/host/engine.hpp#L297)
 ## vec1(x)
 
 Type: constant
@@ -1798,7 +1798,7 @@ Replaced value:
 ```sqf
 [x]
 ```
-File: [host\engine.hpp at line 297](../../../Src/host/engine.hpp#L297)
+File: [host\engine.hpp at line 299](../../../Src/host/engine.hpp#L299)
 ## vec2(x,y)
 
 Type: constant
@@ -1811,7 +1811,7 @@ Replaced value:
 ```sqf
 [x,y]
 ```
-File: [host\engine.hpp at line 298](../../../Src/host/engine.hpp#L298)
+File: [host\engine.hpp at line 300](../../../Src/host/engine.hpp#L300)
 ## vec3(x,y,z)
 
 Type: constant
@@ -1825,7 +1825,7 @@ Replaced value:
 ```sqf
 [x,y,z]
 ```
-File: [host\engine.hpp at line 299](../../../Src/host/engine.hpp#L299)
+File: [host\engine.hpp at line 301](../../../Src/host/engine.hpp#L301)
 ## vec4(x,y,w,h)
 
 Type: constant
@@ -1840,7 +1840,7 @@ Replaced value:
 ```sqf
 [x,y,w,h]
 ```
-File: [host\engine.hpp at line 300](../../../Src/host/engine.hpp#L300)
+File: [host\engine.hpp at line 302](../../../Src/host/engine.hpp#L302)
 ## __sw_combine(o1,o2)
 
 Type: constant
@@ -1853,7 +1853,7 @@ Replaced value:
 ```sqf
 o1##o2
 ```
-File: [host\engine.hpp at line 303](../../../Src/host/engine.hpp#L303)
+File: [host\engine.hpp at line 305](../../../Src/host/engine.hpp#L305)
 ## swap_lvars(a,b)
 
 Type: constant
@@ -1866,7 +1866,7 @@ Replaced value:
 ```sqf
 private __sw_combine(__t_swp_,b) = a; a = b; b = __sw_combine(__t_swp_,b)
 ```
-File: [host\engine.hpp at line 304](../../../Src/host/engine.hpp#L304)
+File: [host\engine.hpp at line 306](../../../Src/host/engine.hpp#L306)
 ## refcreate(value)
 
 Type: constant
@@ -1878,7 +1878,7 @@ Replaced value:
 ```sqf
 [value]
 ```
-File: [host\engine.hpp at line 307](../../../Src/host/engine.hpp#L307)
+File: [host\engine.hpp at line 309](../../../Src/host/engine.hpp#L309)
 ## refget(val)
 
 Type: constant
@@ -1890,7 +1890,7 @@ Replaced value:
 ```sqf
 (val select 0)
 ```
-File: [host\engine.hpp at line 308](../../../Src/host/engine.hpp#L308)
+File: [host\engine.hpp at line 310](../../../Src/host/engine.hpp#L310)
 ## refset(ref,newvalue)
 
 Type: constant
@@ -1903,7 +1903,7 @@ Replaced value:
 ```sqf
 ref set[0,newvalue]
 ```
-File: [host\engine.hpp at line 309](../../../Src/host/engine.hpp#L309)
+File: [host\engine.hpp at line 311](../../../Src/host/engine.hpp#L311)
 ## refunpack(ref)
 
 Type: constant
@@ -1915,7 +1915,7 @@ Replaced value:
 ```sqf
 ref = (ref select 0)
 ```
-File: [host\engine.hpp at line 310](../../../Src/host/engine.hpp#L310)
+File: [host\engine.hpp at line 312](../../../Src/host/engine.hpp#L312)
 ## __ptr_struct_internal__(address,value)
 
 Type: constant
@@ -1928,7 +1928,7 @@ Replaced value:
 ```sqf
 vec2(address,value)
 ```
-File: [host\engine.hpp at line 329](../../../Src/host/engine.hpp#L329)
+File: [host\engine.hpp at line 331](../../../Src/host/engine.hpp#L331)
 ## nullptr
 
 Type: constant
@@ -1940,7 +1940,7 @@ Replaced value:
 ```sqf
 ptr_cnl
 ```
-File: [host\engine.hpp at line 330](../../../Src/host/engine.hpp#L330)
+File: [host\engine.hpp at line 332](../../../Src/host/engine.hpp#L332)
 ## ptr_alloc(initial)
 
 Type: constant
@@ -1952,7 +1952,7 @@ Replaced value:
 ```sqf
 ((initial)call ptr_create)
 ```
-File: [host\engine.hpp at line 331](../../../Src/host/engine.hpp#L331)
+File: [host\engine.hpp at line 333](../../../Src/host/engine.hpp#L333)
 ## ptr_free(refval)
 
 Type: constant
@@ -1964,7 +1964,7 @@ Replaced value:
 ```sqf
 ((refval)call ptr_destroy)
 ```
-File: [host\engine.hpp at line 332](../../../Src/host/engine.hpp#L332)
+File: [host\engine.hpp at line 334](../../../Src/host/engine.hpp#L334)
 ## PTR_STRUCT_ADDRESS
 
 Type: constant
@@ -1976,7 +1976,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\engine.hpp at line 334](../../../Src/host/engine.hpp#L334)
+File: [host\engine.hpp at line 336](../../../Src/host/engine.hpp#L336)
 ## PTR_STRUCT_VALUE
 
 Type: constant
@@ -1988,7 +1988,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\engine.hpp at line 335](../../../Src/host/engine.hpp#L335)
+File: [host\engine.hpp at line 337](../../../Src/host/engine.hpp#L337)
 ## ptr_address(p)
 
 Type: constant
@@ -2000,7 +2000,7 @@ Replaced value:
 ```sqf
 ((p)call ptr_cts)
 ```
-File: [host\engine.hpp at line 337](../../../Src/host/engine.hpp#L337)
+File: [host\engine.hpp at line 339](../../../Src/host/engine.hpp#L339)
 ## ptr_read(p)
 
 Type: constant
@@ -2012,7 +2012,7 @@ Replaced value:
 ```sqf
 ((p)select PTR_STRUCT_VALUE)
 ```
-File: [host\engine.hpp at line 338](../../../Src/host/engine.hpp#L338)
+File: [host\engine.hpp at line 340](../../../Src/host/engine.hpp#L340)
 ## ptr_write(p,v)
 
 Type: constant
@@ -2025,7 +2025,7 @@ Replaced value:
 ```sqf
 (p)set[PTR_STRUCT_VALUE,v]
 ```
-File: [host\engine.hpp at line 339](../../../Src/host/engine.hpp#L339)
+File: [host\engine.hpp at line 341](../../../Src/host/engine.hpp#L341)
 ## ptr_modvar(p)
 
 Type: constant
@@ -2037,7 +2037,7 @@ Replaced value:
 ```sqf
 _poldvm_g_=0;(p call ptr_remval)pushBack _poldvm_g_
 ```
-File: [host\engine.hpp at line 341](../../../Src/host/engine.hpp#L341)
+File: [host\engine.hpp at line 343](../../../Src/host/engine.hpp#L343)
 ## ptr_inc(p)
 
 Type: constant
@@ -2049,7 +2049,7 @@ Replaced value:
 ```sqf
 _poldvs_g_=(p)select PTR_STRUCT_VALUE;p set[PTR_STRUCT_VALUE,_poldvs_g_+1];
 ```
-File: [host\engine.hpp at line 342](../../../Src/host/engine.hpp#L342)
+File: [host\engine.hpp at line 344](../../../Src/host/engine.hpp#L344)
 ## ptr_dec(p)
 
 Type: constant
@@ -2061,7 +2061,7 @@ Replaced value:
 ```sqf
 _poldvs_g_=(p)select PTR_STRUCT_VALUE;p set[PTR_STRUCT_VALUE,_poldvs_g_-1];
 ```
-File: [host\engine.hpp at line 343](../../../Src/host/engine.hpp#L343)
+File: [host\engine.hpp at line 345](../../../Src/host/engine.hpp#L345)
 ## ptr(p)
 
 Type: constant
@@ -2073,7 +2073,7 @@ Replaced value:
 ```sqf
 _poldvm_g_=0;(p call ptr_remval)pushBack
 ```
-File: [host\engine.hpp at line 331](../../../Src/host/engine.hpp#L331)
+File: [host\engine.hpp at line 333](../../../Src/host/engine.hpp#L333)
 ## isptr(p)
 
 Type: constant
@@ -2085,7 +2085,7 @@ Replaced value:
 ```sqf
 ((p)call ptr_check)
 ```
-File: [host\engine.hpp at line 347](../../../Src/host/engine.hpp#L347)
+File: [host\engine.hpp at line 349](../../../Src/host/engine.hpp#L349)
 ## hashSet_createEmpty()
 
 Type: constant
@@ -2097,7 +2097,7 @@ Replaced value:
 ```sqf
 createHashMap
 ```
-File: [host\engine.hpp at line 350](../../../Src/host/engine.hpp#L350)
+File: [host\engine.hpp at line 352](../../../Src/host/engine.hpp#L352)
 ## hashSet_create(keys)
 
 Type: constant
@@ -2109,7 +2109,7 @@ Replaced value:
 ```sqf
 ((keys)createHashMapFromArray [])
 ```
-File: [host\engine.hpp at line 350](../../../Src/host/engine.hpp#L350)
+File: [host\engine.hpp at line 352](../../../Src/host/engine.hpp#L352)
 ## hashSet_createList(vals)
 
 Type: constant
@@ -2121,7 +2121,7 @@ Replaced value:
 ```sqf
 ([vals]createHashMapFromArray [])
 ```
-File: [host\engine.hpp at line 352](../../../Src/host/engine.hpp#L352)
+File: [host\engine.hpp at line 354](../../../Src/host/engine.hpp#L354)
 ## hashSet_add(hash,item)
 
 Type: constant
@@ -2134,7 +2134,7 @@ Replaced value:
 ```sqf
 (hash)set [item,nil]
 ```
-File: [host\engine.hpp at line 353](../../../Src/host/engine.hpp#L353)
+File: [host\engine.hpp at line 355](../../../Src/host/engine.hpp#L355)
 ## hashSet_toArray(hash)
 
 Type: constant
@@ -2146,7 +2146,7 @@ Replaced value:
 ```sqf
 (keys(hash))
 ```
-File: [host\engine.hpp at line 354](../../../Src/host/engine.hpp#L354)
+File: [host\engine.hpp at line 356](../../../Src/host/engine.hpp#L356)
 ## hashSet_rem(hash,item)
 
 Type: constant
@@ -2159,7 +2159,7 @@ Replaced value:
 ```sqf
 (hash)deleteAt (item)
 ```
-File: [host\engine.hpp at line 355](../../../Src/host/engine.hpp#L355)
+File: [host\engine.hpp at line 357](../../../Src/host/engine.hpp#L357)
 ## hashSet_exists(hash,item)
 
 Type: constant
@@ -2172,7 +2172,7 @@ Replaced value:
 ```sqf
 ((item)in(hash))
 ```
-File: [host\engine.hpp at line 356](../../../Src/host/engine.hpp#L356)
+File: [host\engine.hpp at line 358](../../../Src/host/engine.hpp#L358)
 ## hashSet_count(hash)
 
 Type: constant
@@ -2184,7 +2184,7 @@ Replaced value:
 ```sqf
 (count(hash))
 ```
-File: [host\engine.hpp at line 357](../../../Src/host/engine.hpp#L357)
+File: [host\engine.hpp at line 359](../../../Src/host/engine.hpp#L359)
 ## hashSet_clear(hash)
 
 Type: constant
@@ -2196,7 +2196,7 @@ Replaced value:
 ```sqf
 (hash)call{{_this deleteat _x}foreach +_this}
 ```
-File: [host\engine.hpp at line 358](../../../Src/host/engine.hpp#L358)
+File: [host\engine.hpp at line 360](../../../Src/host/engine.hpp#L360)
 ## hashSet_copyFrom(hash,merged)
 
 Type: constant
@@ -2209,7 +2209,7 @@ Replaced value:
 ```sqf
 (hash)merge (merged)
 ```
-File: [host\engine.hpp at line 359](../../../Src/host/engine.hpp#L359)
+File: [host\engine.hpp at line 361](../../../Src/host/engine.hpp#L361)
 ## hashMapNew
 
 Type: constant
@@ -2221,7 +2221,7 @@ Replaced value:
 ```sqf
 createHashMap
 ```
-File: [host\engine.hpp at line 362](../../../Src/host/engine.hpp#L362)
+File: [host\engine.hpp at line 364](../../../Src/host/engine.hpp#L364)
 ## hashMapNewArgs
 
 Type: constant
@@ -2233,7 +2233,7 @@ Replaced value:
 ```sqf
 createHashMapFromArray
 ```
-File: [host\engine.hpp at line 363](../../../Src/host/engine.hpp#L363)
+File: [host\engine.hpp at line 365](../../../Src/host/engine.hpp#L365)
 ## toMap
 
 Type: constant
@@ -2245,7 +2245,7 @@ Replaced value:
 ```sqf
 hashMapNewArgs
 ```
-File: [host\engine.hpp at line 364](../../../Src/host/engine.hpp#L364)
+File: [host\engine.hpp at line 366](../../../Src/host/engine.hpp#L366)
 ## prop(varname)
 
 Type: constant
@@ -2257,7 +2257,7 @@ Replaced value:
 ```sqf
 varname
 ```
-File: [host\engine.hpp at line 384](../../../Src/host/engine.hpp#L384)
+File: [host\engine.hpp at line 386](../../../Src/host/engine.hpp#L386)
 ## onpropset(varname)
 
 Type: constant
@@ -2269,7 +2269,7 @@ Replaced value:
 ```sqf
 varname##_set
 ```
-File: [host\engine.hpp at line 385](../../../Src/host/engine.hpp#L385)
+File: [host\engine.hpp at line 387](../../../Src/host/engine.hpp#L387)
 ## onpropget(varname)
 
 Type: constant
@@ -2281,7 +2281,7 @@ Replaced value:
 ```sqf
 varname##_get
 ```
-File: [host\engine.hpp at line 386](../../../Src/host/engine.hpp#L386)
+File: [host\engine.hpp at line 388](../../../Src/host/engine.hpp#L388)
 ## propset(varname,val)
 
 Type: constant
@@ -2294,7 +2294,7 @@ Replaced value:
 ```sqf
 val call onpropset(varname)
 ```
-File: [host\engine.hpp at line 387](../../../Src/host/engine.hpp#L387)
+File: [host\engine.hpp at line 389](../../../Src/host/engine.hpp#L389)
 ## propget(varname)
 
 Type: constant
@@ -2306,7 +2306,7 @@ Replaced value:
 ```sqf
 call onpropget(varname)
 ```
-File: [host\engine.hpp at line 388](../../../Src/host/engine.hpp#L388)
+File: [host\engine.hpp at line 390](../../../Src/host/engine.hpp#L390)
 ## objectAddEventHandler
 
 Type: constant
@@ -2318,7 +2318,7 @@ Replaced value:
 ```sqf
 ADDEVENTHANDLER
 ```
-File: [host\engine.hpp at line 407](../../../Src/host/engine.hpp#L407)
+File: [host\engine.hpp at line 409](../../../Src/host/engine.hpp#L409)
 ## __eventHandlerName__(varname)
 
 Type: constant
@@ -2330,7 +2330,7 @@ Replaced value:
 ```sqf
 varname##_evh
 ```
-File: [host\engine.hpp at line 409](../../../Src/host/engine.hpp#L409)
+File: [host\engine.hpp at line 411](../../../Src/host/engine.hpp#L411)
 ## eventHandlerArgs
 
 Type: constant
@@ -2342,7 +2342,7 @@ Replaced value:
 ```sqf
 _evhargs__
 ```
-File: [host\engine.hpp at line 410](../../../Src/host/engine.hpp#L410)
+File: [host\engine.hpp at line 412](../../../Src/host/engine.hpp#L412)
 ## registerEventHandler(varname)
 
 Type: constant
@@ -2354,7 +2354,7 @@ Replaced value:
 ```sqf
 __eventHandlerName__(varname) = []
 ```
-File: [host\engine.hpp at line 411](../../../Src/host/engine.hpp#L411)
+File: [host\engine.hpp at line 413](../../../Src/host/engine.hpp#L413)
 ## addEventHandler(varname,val)
 
 Type: constant
@@ -2367,7 +2367,7 @@ Replaced value:
 ```sqf
 __eventHandlerName__(varname) pushBack (val)
 ```
-File: [host\engine.hpp at line 412](../../../Src/host/engine.hpp#L412)
+File: [host\engine.hpp at line 414](../../../Src/host/engine.hpp#L414)
 ## removeEventHandler(varname,val)
 
 Type: constant
@@ -2380,7 +2380,7 @@ Replaced value:
 ```sqf
 __eventHandlerName__(varname) deleteat (__eventHandlerName__(varname) find (val))
 ```
-File: [host\engine.hpp at line 413](../../../Src/host/engine.hpp#L413)
+File: [host\engine.hpp at line 415](../../../Src/host/engine.hpp#L415)
 ## callEventHandler(varname,evhargs)
 
 Type: constant
@@ -2393,7 +2393,7 @@ Replaced value:
 ```sqf
 private eventHandlerArgs = evhargs; {call _x;true} count __eventHandlerName__(varname)
 ```
-File: [host\engine.hpp at line 414](../../../Src/host/engine.hpp#L414)
+File: [host\engine.hpp at line 416](../../../Src/host/engine.hpp#L416)
 ## equals(obja,objb)
 
 Type: constant
@@ -2406,7 +2406,7 @@ Replaced value:
 ```sqf
 ((obja)isequalto(objb))
 ```
-File: [host\engine.hpp at line 418](../../../Src/host/engine.hpp#L418)
+File: [host\engine.hpp at line 420](../../../Src/host/engine.hpp#L420)
 ## not_equals(obja,objb)
 
 Type: constant
@@ -2419,7 +2419,7 @@ Replaced value:
 ```sqf
 ((obja)isnotequalto(objb))
 ```
-File: [host\engine.hpp at line 419](../../../Src/host/engine.hpp#L419)
+File: [host\engine.hpp at line 421](../../../Src/host/engine.hpp#L421)
 ## equalTypes(obja,objb)
 
 Type: constant
@@ -2432,7 +2432,7 @@ Replaced value:
 ```sqf
 ((obja)isequaltype(objb))
 ```
-File: [host\engine.hpp at line 422](../../../Src/host/engine.hpp#L422)
+File: [host\engine.hpp at line 424](../../../Src/host/engine.hpp#L424)
 ## not_equalTypes(obja,objb)
 
 Type: constant
@@ -2445,7 +2445,7 @@ Replaced value:
 ```sqf
 (!equalTypes(obja,objb))
 ```
-File: [host\engine.hpp at line 423](../../../Src/host/engine.hpp#L423)
+File: [host\engine.hpp at line 425](../../../Src/host/engine.hpp#L425)
 ## all_of(values)
 
 Type: constant
@@ -2457,7 +2457,7 @@ Replaced value:
 ```sqf
 ([values] call allOf)
 ```
-File: [host\engine.hpp at line 426](../../../Src/host/engine.hpp#L426)
+File: [host\engine.hpp at line 428](../../../Src/host/engine.hpp#L428)
 ## any_of(values)
 
 Type: constant
@@ -2469,7 +2469,7 @@ Replaced value:
 ```sqf
 ([values] call anyOf)
 ```
-File: [host\engine.hpp at line 427](../../../Src/host/engine.hpp#L427)
+File: [host\engine.hpp at line 429](../../../Src/host/engine.hpp#L429)
 ## none_of(values)
 
 Type: constant
@@ -2481,7 +2481,7 @@ Replaced value:
 ```sqf
 ([values] call noneOf)
 ```
-File: [host\engine.hpp at line 428](../../../Src/host/engine.hpp#L428)
+File: [host\engine.hpp at line 430](../../../Src/host/engine.hpp#L430)
 ## pick
 
 Type: constant
@@ -2493,7 +2493,7 @@ Replaced value:
 ```sqf
 selectRandom
 ```
-File: [host\engine.hpp at line 431](../../../Src/host/engine.hpp#L431)
+File: [host\engine.hpp at line 433](../../../Src/host/engine.hpp#L433)
 ## rand(_beg,_end)
 
 Type: constant
@@ -2506,7 +2506,7 @@ Replaced value:
 ```sqf
 (linearConversion [0,1,random 1,_beg,_end])
 ```
-File: [host\engine.hpp at line 433](../../../Src/host/engine.hpp#L433)
+File: [host\engine.hpp at line 435](../../../Src/host/engine.hpp#L435)
 ## randInt(_beg,_end)
 
 Type: constant
@@ -2519,7 +2519,7 @@ Replaced value:
 ```sqf
 (FLOOR linearConversion [0,1.000001,random 1,(_beg)min(_end),(_end)max(_beg)+1])
 ```
-File: [host\engine.hpp at line 436](../../../Src/host/engine.hpp#L436)
+File: [host\engine.hpp at line 438](../../../Src/host/engine.hpp#L438)
 ## prob(val)
 
 Type: constant
@@ -2531,7 +2531,7 @@ Replaced value:
 ```sqf
 (random[0,50,100]<(val))
 ```
-File: [host\engine.hpp at line 438](../../../Src/host/engine.hpp#L438)
+File: [host\engine.hpp at line 440](../../../Src/host/engine.hpp#L440)
 ## prob_new(val)
 
 Type: constant
@@ -2543,7 +2543,7 @@ Replaced value:
 ```sqf
 (random 100<(val))
 ```
-File: [host\engine.hpp at line 440](../../../Src/host/engine.hpp#L440)
+File: [host\engine.hpp at line 442](../../../Src/host/engine.hpp#L442)
 ## pow(a,b)
 
 Type: constant
@@ -2556,7 +2556,7 @@ Replaced value:
 ```sqf
 ((a) ^ (b))
 ```
-File: [host\engine.hpp at line 443](../../../Src/host/engine.hpp#L443)
+File: [host\engine.hpp at line 445](../../../Src/host/engine.hpp#L445)
 ## clamp(val,__min,__max)
 
 Type: constant
@@ -2570,7 +2570,7 @@ Replaced value:
 ```sqf
 ((val)max(__min)min(__max))
 ```
-File: [host\engine.hpp at line 446](../../../Src/host/engine.hpp#L446)
+File: [host\engine.hpp at line 448](../../../Src/host/engine.hpp#L448)
 ## clampangle(x,a,b)
 
 Type: constant
@@ -2584,7 +2584,7 @@ Replaced value:
 ```sqf
 (((((x) % 360 + 360) % 360) max (a)) min (b))
 ```
-File: [host\engine.hpp at line 448](../../../Src/host/engine.hpp#L448)
+File: [host\engine.hpp at line 450](../../../Src/host/engine.hpp#L450)
 ## parseNumberSafe(v)
 
 Type: constant
@@ -2596,7 +2596,7 @@ Replaced value:
 ```sqf
 ((parseNumber (v)) call {if(finite _this) then {_this} else {0}})
 ```
-File: [host\engine.hpp at line 450](../../../Src/host/engine.hpp#L450)
+File: [host\engine.hpp at line 452](../../../Src/host/engine.hpp#L452)
 ## getdiff(a,b)
 
 Type: constant
@@ -2609,7 +2609,7 @@ Replaced value:
 ```sqf
 ([a,b] call {params["_a","_b"]; if equals(_a,_b)exitWith{0}; ifcheck(_a>_b,-_a+_b,_b-_a) })
 ```
-File: [host\engine.hpp at line 452](../../../Src/host/engine.hpp#L452)
+File: [host\engine.hpp at line 454](../../../Src/host/engine.hpp#L454)
 ## netTickTime
 
 Type: constant
@@ -2621,7 +2621,7 @@ Replaced value:
 ```sqf
 CBA_missionTime
 ```
-File: [host\engine.hpp at line 456](../../../Src/host/engine.hpp#L456)
+File: [host\engine.hpp at line 458](../../../Src/host/engine.hpp#L458)
 ## tickTime
 
 Type: constant
@@ -2633,7 +2633,7 @@ Replaced value:
 ```sqf
 diag_tickTime
 ```
-File: [host\engine.hpp at line 457](../../../Src/host/engine.hpp#L457)
+File: [host\engine.hpp at line 459](../../../Src/host/engine.hpp#L459)
 ## deltaTime
 
 Type: constant
@@ -2645,7 +2645,7 @@ Replaced value:
 ```sqf
 diag_deltaTime
 ```
-File: [host\engine.hpp at line 458](../../../Src/host/engine.hpp#L458)
+File: [host\engine.hpp at line 460](../../../Src/host/engine.hpp#L460)
 ## __alloc_thread_loc__
 
 Type: constant
@@ -2660,7 +2660,7 @@ Replaced value:
 (cba_common_perFrameHandlerArray select -1) set [6,format["%1 at line %2",[__FILE__,getMissionPath "",""] call stringReplace,__LINE__]]; \
 		(cba_common_perFrameHandlerArray select -1) set [7,diag_stacktrace]
 ```
-File: [host\engine.hpp at line 461](../../../Src/host/engine.hpp#L461)
+File: [host\engine.hpp at line 463](../../../Src/host/engine.hpp#L463)
 ## startUpdate(func,delay)
 
 Type: constant
@@ -2675,7 +2675,7 @@ Replaced value:
 ```sqf
 [func,delay] call CBA_fnc_addPerFrameHandler
 ```
-File: [host\engine.hpp at line 464](../../../Src/host/engine.hpp#L464)
+File: [host\engine.hpp at line 466](../../../Src/host/engine.hpp#L466)
 ## startUpdateParams(func,delay,params)
 
 Type: constant
@@ -2691,7 +2691,7 @@ Replaced value:
 ```sqf
 call{private _h = [func,delay,params] call CBA_fnc_addPerFrameHandler; __alloc_thread_loc__; _h}
 ```
-File: [host\engine.hpp at line 464](../../../Src/host/engine.hpp#L464)
+File: [host\engine.hpp at line 466](../../../Src/host/engine.hpp#L466)
 ## startUpdateParams(func,delay,params)
 
 Type: constant
@@ -2707,7 +2707,7 @@ Replaced value:
 ```sqf
 [func,delay,params] call CBA_fnc_addPerFrameHandler
 ```
-File: [host\engine.hpp at line 467](../../../Src/host/engine.hpp#L467)
+File: [host\engine.hpp at line 469](../../../Src/host/engine.hpp#L469)
 ## stopUpdate(handle)
 
 Type: constant
@@ -2719,7 +2719,7 @@ Replaced value:
 ```sqf
 handle call CBA_fnc_removePerFrameHandler
 ```
-File: [host\engine.hpp at line 470](../../../Src/host/engine.hpp#L470)
+File: [host\engine.hpp at line 472](../../../Src/host/engine.hpp#L472)
 ## thisUpdate
 
 Type: constant
@@ -2731,7 +2731,7 @@ Replaced value:
 ```sqf
 (_this select 1)
 ```
-File: [host\engine.hpp at line 472](../../../Src/host/engine.hpp#L472)
+File: [host\engine.hpp at line 474](../../../Src/host/engine.hpp#L474)
 ## stopThisUpdate()
 
 Type: constant
@@ -2743,7 +2743,7 @@ Replaced value:
 ```sqf
 stopUpdate(_this select 1)
 ```
-File: [host\engine.hpp at line 474](../../../Src/host/engine.hpp#L474)
+File: [host\engine.hpp at line 476](../../../Src/host/engine.hpp#L476)
 ## changeUpdateTime(handle,newTime)
 
 Type: constant
@@ -2757,7 +2757,7 @@ Replaced value:
 (call {if (handle < 0 || newTime < 0) exitWith {false}; \
 cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 ```
-File: [host\engine.hpp at line 476](../../../Src/host/engine.hpp#L476)
+File: [host\engine.hpp at line 478](../../../Src/host/engine.hpp#L478)
 ## changeThisUpdateTime(newTime)
 
 Type: constant
@@ -2769,7 +2769,7 @@ Replaced value:
 ```sqf
 changeUpdateTime(thisUpdate,newTime)
 ```
-File: [host\engine.hpp at line 479](../../../Src/host/engine.hpp#L479)
+File: [host\engine.hpp at line 481](../../../Src/host/engine.hpp#L481)
 ## getThisCodeInTimeEvent(varname)
 
 Type: constant
@@ -2781,7 +2781,7 @@ Replaced value:
 ```sqf
 varname = _x select 1
 ```
-File: [host\engine.hpp at line 481](../../../Src/host/engine.hpp#L481)
+File: [host\engine.hpp at line 483](../../../Src/host/engine.hpp#L483)
 ## nextFrame(code)
 
 Type: constant
@@ -2793,7 +2793,7 @@ Replaced value:
 ```sqf
 [code] call CBA_fnc_execNextFrame
 ```
-File: [host\engine.hpp at line 483](../../../Src/host/engine.hpp#L483)
+File: [host\engine.hpp at line 485](../../../Src/host/engine.hpp#L485)
 ## nextFrameParams(code,args)
 
 Type: constant
@@ -2806,7 +2806,7 @@ Replaced value:
 ```sqf
 [code,args] call CBA_fnc_execNextFrame
 ```
-File: [host\engine.hpp at line 484](../../../Src/host/engine.hpp#L484)
+File: [host\engine.hpp at line 486](../../../Src/host/engine.hpp#L486)
 ## invokeAfterDelay(code,delay)
 
 Type: constant
@@ -2819,7 +2819,7 @@ Replaced value:
 ```sqf
 [code,[],delay] call CBA_fnc_waitAndExecute
 ```
-File: [host\engine.hpp at line 486](../../../Src/host/engine.hpp#L486)
+File: [host\engine.hpp at line 488](../../../Src/host/engine.hpp#L488)
 ## invokeAfterDelayParams(code,delay,params)
 
 Type: constant
@@ -2833,7 +2833,7 @@ Replaced value:
 ```sqf
 [code,params,delay] call CBA_fnc_waitAndExecute
 ```
-File: [host\engine.hpp at line 487](../../../Src/host/engine.hpp#L487)
+File: [host\engine.hpp at line 489](../../../Src/host/engine.hpp#L489)
 ## deferred
 
 Type: constant
@@ -2845,7 +2845,7 @@ Replaced value:
 ```sqf
 __cframe__=
 ```
-File: [host\engine.hpp at line 498](../../../Src/host/engine.hpp#L498)
+File: [host\engine.hpp at line 500](../../../Src/host/engine.hpp#L500)
 ## doInvoke(delay)
 
 Type: constant
@@ -2857,7 +2857,7 @@ Replaced value:
 ```sqf
 ;invokeAfterDelay(__cframe__,delay)
 ```
-File: [host\engine.hpp at line 499](../../../Src/host/engine.hpp#L499)
+File: [host\engine.hpp at line 501](../../../Src/host/engine.hpp#L501)
 ## doInvokeParams(delay,_prms)
 
 Type: constant
@@ -2870,7 +2870,7 @@ Replaced value:
 ```sqf
 ;invokeAfterDelayParams(__cframe__,delay,_prms)
 ```
-File: [host\engine.hpp at line 500](../../../Src/host/engine.hpp#L500)
+File: [host\engine.hpp at line 502](../../../Src/host/engine.hpp#L502)
 ## asyncInvoke(c_condit,c_state,args,timeout,c_tim)
 
 Type: constant
@@ -2886,7 +2886,7 @@ Replaced value:
 ```sqf
 [c_condit, c_state, args,timeout,c_tim] call CBA_fnc_waitUntilAndExecute
 ```
-File: [host\engine.hpp at line 502](../../../Src/host/engine.hpp#L502)
+File: [host\engine.hpp at line 504](../../../Src/host/engine.hpp#L504)
 ## startAsyncInvoke
 
 Type: constant
@@ -2898,7 +2898,7 @@ Replaced value:
 ```sqf
 [
 ```
-File: [host\engine.hpp at line 504](../../../Src/host/engine.hpp#L504)
+File: [host\engine.hpp at line 506](../../../Src/host/engine.hpp#L506)
 ## endAsyncInvoke
 
 Type: constant
@@ -2910,7 +2910,7 @@ Replaced value:
 ```sqf
 ] call CBA_fnc_waitUntilAndExecute;
 ```
-File: [host\engine.hpp at line 505](../../../Src/host/engine.hpp#L505)
+File: [host\engine.hpp at line 507](../../../Src/host/engine.hpp#L507)
 ## ifcheck(val,_trueval,_falseval)
 
 Type: constant
@@ -2924,7 +2924,7 @@ Replaced value:
 ```sqf
 (if(val)then{_trueval}else{_falseval})
 ```
-File: [host\engine.hpp at line 510](../../../Src/host/engine.hpp#L510)
+File: [host\engine.hpp at line 512](../../../Src/host/engine.hpp#L512)
 ## FHEADER
 
 Type: constant
@@ -2936,7 +2936,7 @@ Replaced value:
 ```sqf
 scopename "main"
 ```
-File: [host\engine.hpp at line 512](../../../Src/host/engine.hpp#L512)
+File: [host\engine.hpp at line 514](../../../Src/host/engine.hpp#L514)
 ## RETURN(val)
 
 Type: constant
@@ -2948,7 +2948,7 @@ Replaced value:
 ```sqf
 (val) breakout "main"
 ```
-File: [host\engine.hpp at line 514](../../../Src/host/engine.hpp#L514)
+File: [host\engine.hpp at line 516](../../../Src/host/engine.hpp#L516)
 ## IF(val)
 
 Type: constant
@@ -2960,7 +2960,7 @@ Replaced value:
 ```sqf
 if (val) then
 ```
-File: [host\engine.hpp at line 516](../../../Src/host/engine.hpp#L516)
+File: [host\engine.hpp at line 518](../../../Src/host/engine.hpp#L518)
 ## IF_EXIT(val)
 
 Type: constant
@@ -2972,7 +2972,7 @@ Replaced value:
 ```sqf
 if (val) exitwith
 ```
-File: [host\engine.hpp at line 518](../../../Src/host/engine.hpp#L518)
+File: [host\engine.hpp at line 520](../../../Src/host/engine.hpp#L520)
 ## IF_RET(val,ret)
 
 Type: constant
@@ -2985,7 +2985,7 @@ Replaced value:
 ```sqf
 if (val) then {RETURN(ret)}
 ```
-File: [host\engine.hpp at line 520](../../../Src/host/engine.hpp#L520)
+File: [host\engine.hpp at line 522](../../../Src/host/engine.hpp#L522)
 ## FOR(init,start,end)
 
 Type: constant
@@ -2999,7 +2999,7 @@ Replaced value:
 ```sqf
 for #init from start to end do
 ```
-File: [host\engine.hpp at line 522](../../../Src/host/engine.hpp#L522)
+File: [host\engine.hpp at line 524](../../../Src/host/engine.hpp#L524)
 ## WHILE(cond)
 
 Type: constant
@@ -3011,7 +3011,7 @@ Replaced value:
 ```sqf
 while {cond} do
 ```
-File: [host\engine.hpp at line 524](../../../Src/host/engine.hpp#L524)
+File: [host\engine.hpp at line 526](../../../Src/host/engine.hpp#L526)
 ## SWITCH(cond)
 
 Type: constant
@@ -3023,7 +3023,7 @@ Replaced value:
 ```sqf
 switch(cond) do
 ```
-File: [host\engine.hpp at line 526](../../../Src/host/engine.hpp#L526)
+File: [host\engine.hpp at line 528](../../../Src/host/engine.hpp#L528)
 ## CASE(cond)
 
 Type: constant
@@ -3035,7 +3035,7 @@ Replaced value:
 ```sqf
 case (cond) :
 ```
-File: [host\engine.hpp at line 528](../../../Src/host/engine.hpp#L528)
+File: [host\engine.hpp at line 530](../../../Src/host/engine.hpp#L530)
 ## fswitch(val)
 
 Type: constant
@@ -3047,7 +3047,7 @@ Replaced value:
 ```sqf
 (val) call
 ```
-File: [host\engine.hpp at line 531](../../../Src/host/engine.hpp#L531)
+File: [host\engine.hpp at line 533](../../../Src/host/engine.hpp#L533)
 ## fcase(val)
 
 Type: constant
@@ -3059,7 +3059,7 @@ Replaced value:
 ```sqf
 if equals(_this,val) exitWith
 ```
-File: [host\engine.hpp at line 532](../../../Src/host/engine.hpp#L532)
+File: [host\engine.hpp at line 534](../../../Src/host/engine.hpp#L534)
 ## fcasein(values)
 
 Type: constant
@@ -3071,7 +3071,7 @@ Replaced value:
 ```sqf
 if (_this in (values)) exitWith
 ```
-File: [host\engine.hpp at line 533](../../../Src/host/engine.hpp#L533)
+File: [host\engine.hpp at line 535](../../../Src/host/engine.hpp#L535)
 ## soundPathPrep(v)
 
 Type: constant
@@ -3083,7 +3083,7 @@ Replaced value:
 ```sqf
 ((v)splitString "/" joinString "\")
 ```
-File: [host\engine.hpp at line 537](../../../Src/host/engine.hpp#L537)
+File: [host\engine.hpp at line 539](../../../Src/host/engine.hpp#L539)
 ## soundDataDef(path)
 
 Type: constant
@@ -3095,7 +3095,7 @@ Replaced value:
 ```sqf
 [path]
 ```
-File: [host\engine.hpp at line 538](../../../Src/host/engine.hpp#L538)
+File: [host\engine.hpp at line 540](../../../Src/host/engine.hpp#L540)
 ## soundData(path,pithmin,pithmax)
 
 Type: constant
@@ -3109,7 +3109,7 @@ Replaced value:
 ```sqf
 [path,pithmin,pithmax]
 ```
-File: [host\engine.hpp at line 538](../../../Src/host/engine.hpp#L538)
+File: [host\engine.hpp at line 540](../../../Src/host/engine.hpp#L540)
 ## getRandomPitch
 
 Type: constant
@@ -3121,7 +3121,7 @@ Replaced value:
 ```sqf
 (linearConversion [0, 1, random 1, 0.5, 2])
 ```
-File: [host\engine.hpp at line 542](../../../Src/host/engine.hpp#L542)
+File: [host\engine.hpp at line 544](../../../Src/host/engine.hpp#L544)
 ## getRandomPitchInRange(low,up)
 
 Type: constant
@@ -3134,7 +3134,7 @@ Replaced value:
 ```sqf
 (linearConversion [0, 1, random 1,low, up])
 ```
-File: [host\engine.hpp at line 544](../../../Src/host/engine.hpp#L544)
+File: [host\engine.hpp at line 546](../../../Src/host/engine.hpp#L546)
 ## criptPtr_index
 
 Type: constant
@@ -3148,7 +3148,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\engine.hpp at line 556](../../../Src/host/engine.hpp#L556)
+File: [host\engine.hpp at line 558](../../../Src/host/engine.hpp#L558)
 ## criptPtr(val)
 
 Type: constant
@@ -3162,7 +3162,7 @@ Replaced value:
 ```sqf
 (toString (toarray (val) apply {_x + criptPtr_index}))
 ```
-File: [host\engine.hpp at line 557](../../../Src/host/engine.hpp#L557)
+File: [host\engine.hpp at line 559](../../../Src/host/engine.hpp#L559)
 ## criptPtr_index
 
 Type: constant
@@ -3176,7 +3176,7 @@ Replaced value:
 ```sqf
 32
 ```
-File: [host\engine.hpp at line 559](../../../Src/host/engine.hpp#L559)
+File: [host\engine.hpp at line 561](../../../Src/host/engine.hpp#L561)
 ## getArmaVersion()
 
 Type: constant
@@ -3188,7 +3188,7 @@ Replaced value:
 ```sqf
 (format ["%1.%2",(productVersion select 2)/100 toFixed 2,(productVersion select 3)])
 ```
-File: [host\engine.hpp at line 564](../../../Src/host/engine.hpp#L564)
+File: [host\engine.hpp at line 566](../../../Src/host/engine.hpp#L566)
 ## defineModule(name)
 
 Type: constant
@@ -3202,7 +3202,7 @@ Replaced value:
 ```sqf
 _thisModule = 'name';
 ```
-File: [host\engine.hpp at line 571](../../../Src/host/engine.hpp#L571)
+File: [host\engine.hpp at line 573](../../../Src/host/engine.hpp#L573)
 ## global_var(var)
 
 Type: constant
@@ -3216,7 +3216,7 @@ Replaced value:
 ```sqf
 [#var,__FILE__,__LINE__,_thisModule] call gv_rv; var
 ```
-File: [host\engine.hpp at line 573](../../../Src/host/engine.hpp#L573)
+File: [host\engine.hpp at line 575](../../../Src/host/engine.hpp#L575)
 ## global_func(var)
 
 Type: constant
@@ -3230,7 +3230,7 @@ Replaced value:
 ```sqf
 [#var,__FILE__,__LINE__,_thisModule] call gv_rf; var
 ```
-File: [host\engine.hpp at line 574](../../../Src/host/engine.hpp#L574)
+File: [host\engine.hpp at line 576](../../../Src/host/engine.hpp#L576)
 ## __iglob_provider(var,type)
 
 Type: constant
@@ -3245,7 +3245,7 @@ Replaced value:
 ```sqf
 [#var,type] call gv_rts
 ```
-File: [host\engine.hpp at line 589](../../../Src/host/engine.hpp#L589)
+File: [host\engine.hpp at line 591](../../../Src/host/engine.hpp#L591)
 ## global_num(var)
 
 Type: constant
@@ -3259,7 +3259,7 @@ Replaced value:
 ```sqf
 __iglob_provider(var,0)
 ```
-File: [host\engine.hpp at line 590](../../../Src/host/engine.hpp#L590)
+File: [host\engine.hpp at line 592](../../../Src/host/engine.hpp#L592)
 ## global_str(var)
 
 Type: constant
@@ -3273,7 +3273,7 @@ Replaced value:
 ```sqf
 __iglob_provider(var,"")
 ```
-File: [host\engine.hpp at line 591](../../../Src/host/engine.hpp#L591)
+File: [host\engine.hpp at line 593](../../../Src/host/engine.hpp#L593)
 ## global_arr(var)
 
 Type: constant
@@ -3287,7 +3287,7 @@ Replaced value:
 ```sqf
 __iglob_provider(var,[])
 ```
-File: [host\engine.hpp at line 592](../../../Src/host/engine.hpp#L592)
+File: [host\engine.hpp at line 594](../../../Src/host/engine.hpp#L594)
 ## global_obj(var)
 
 Type: constant
@@ -3301,7 +3301,7 @@ Replaced value:
 ```sqf
 __iglob_provider(var,objnull)
 ```
-File: [host\engine.hpp at line 593](../../../Src/host/engine.hpp#L593)
+File: [host\engine.hpp at line 595](../../../Src/host/engine.hpp#L595)
 ## global_ptr(var)
 
 Type: constant
@@ -3315,7 +3315,7 @@ Replaced value:
 ```sqf
 __iglob_provider(var,locationnull)
 ```
-File: [host\engine.hpp at line 594](../../../Src/host/engine.hpp#L594)
+File: [host\engine.hpp at line 596](../../../Src/host/engine.hpp#L596)
 ## __aps_on_assert_exit
 
 Type: constant
@@ -3327,7 +3327,7 @@ Replaced value:
 ```sqf
 appExit(APPEXIT_REASON_ASSERTION_FAIL)
 ```
-File: [host\engine.hpp at line 597](../../../Src/host/engine.hpp#L597)
+File: [host\engine.hpp at line 599](../../../Src/host/engine.hpp#L599)
 ## __aps_on_assert_exit
 
 Type: constant
@@ -3341,7 +3341,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 599](../../../Src/host/engine.hpp#L599)
+File: [host\engine.hpp at line 601](../../../Src/host/engine.hpp#L601)
 ## __ASSERT_WEBHOOK_PREFIX__
 
 Type: constant
@@ -3353,7 +3353,7 @@ Replaced value:
 ```sqf
 "<@&1137382730074697728> "
 ```
-File: [host\engine.hpp at line 607](../../../Src/host/engine.hpp#L607)
+File: [host\engine.hpp at line 609](../../../Src/host/engine.hpp#L609)
 ## __assert_value_tostring__(val)
 
 Type: constant
@@ -3365,7 +3365,7 @@ Replaced value:
 ```sqf
 'val'
 ```
-File: [host\engine.hpp at line 609](../../../Src/host/engine.hpp#L609)
+File: [host\engine.hpp at line 611](../../../Src/host/engine.hpp#L611)
 ## __assert_runtime_file__
 
 Type: constant
@@ -3377,7 +3377,7 @@ Replaced value:
 ```sqf
 __FILE__
 ```
-File: [host\engine.hpp at line 611](../../../Src/host/engine.hpp#L611)
+File: [host\engine.hpp at line 613](../../../Src/host/engine.hpp#L613)
 ## __assert_static_runtime_expr1(expr)
 
 Type: constant
@@ -3389,7 +3389,7 @@ Replaced value:
 ```sqf
 if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__] call sys_static_assert_}
 ```
-File: [host\engine.hpp at line 614](../../../Src/host/engine.hpp#L614)
+File: [host\engine.hpp at line 616](../../../Src/host/engine.hpp#L616)
 ## __assert_static_runtime_expr2(expr,message)
 
 Type: constant
@@ -3402,7 +3402,7 @@ Replaced value:
 ```sqf
 if !([expr] call sys_int_evalassert) exitWith {[__assert_value_tostring__(expr),__assert_runtime_file__,__LINE__,message] call sys_static_assert_}
 ```
-File: [host\engine.hpp at line 615](../../../Src/host/engine.hpp#L615)
+File: [host\engine.hpp at line 617](../../../Src/host/engine.hpp#L617)
 ## __assert_static_compile_expr1(expr)
 
 Type: constant
@@ -3414,7 +3414,7 @@ Replaced value:
 ```sqf
 __EVAL(__assert_static_runtime_expr1(expr))
 ```
-File: [host\engine.hpp at line 616](../../../Src/host/engine.hpp#L616)
+File: [host\engine.hpp at line 618](../../../Src/host/engine.hpp#L618)
 ## __assert_static_compile_expr2(expr,message)
 
 Type: constant
@@ -3427,7 +3427,7 @@ Replaced value:
 ```sqf
 __EVAL(__assert_static_runtime_expr2(expr,message))
 ```
-File: [host\engine.hpp at line 617](../../../Src/host/engine.hpp#L617)
+File: [host\engine.hpp at line 619](../../../Src/host/engine.hpp#L619)
 ## __assert_runtime_expr1(expr)
 
 Type: constant
@@ -3439,7 +3439,7 @@ Replaced value:
 ```sqf
 if !([expr] call sys_int_evalassert)exitWith {[toString {expr},__assert_runtime_file__,__LINE__] call sys_assert_}
 ```
-File: [host\engine.hpp at line 618](../../../Src/host/engine.hpp#L618)
+File: [host\engine.hpp at line 620](../../../Src/host/engine.hpp#L620)
 ## __assert_runtime_expr2(expr,message)
 
 Type: constant
@@ -3452,7 +3452,7 @@ Replaced value:
 ```sqf
 if !([expr] call sys_int_evalassert)exitWith {[toString {expr},__assert_runtime_file__,__LINE__,message] call sys_assert_}
 ```
-File: [host\engine.hpp at line 619](../../../Src/host/engine.hpp#L619)
+File: [host\engine.hpp at line 621](../../../Src/host/engine.hpp#L621)
 ## static_assert(a)
 
 Type: constant
@@ -3464,7 +3464,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 624](../../../Src/host/engine.hpp#L624)
+File: [host\engine.hpp at line 626](../../../Src/host/engine.hpp#L626)
 ## static_assert_str(expr,message)
 
 Type: constant
@@ -3477,7 +3477,7 @@ Replaced value:
 ```sqf
 __assert_static_runtime_expr2(expr,message)
 ```
-File: [host\engine.hpp at line 624](../../../Src/host/engine.hpp#L624)
+File: [host\engine.hpp at line 626](../../../Src/host/engine.hpp#L626)
 ## assert(a)
 
 Type: constant
@@ -3489,7 +3489,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 628](../../../Src/host/engine.hpp#L628)
+File: [host\engine.hpp at line 630](../../../Src/host/engine.hpp#L630)
 ## assert_str(expr,message)
 
 Type: constant
@@ -3502,7 +3502,7 @@ Replaced value:
 ```sqf
 __assert_runtime_expr2(expr,message)
 ```
-File: [host\engine.hpp at line 628](../../../Src/host/engine.hpp#L628)
+File: [host\engine.hpp at line 630](../../../Src/host/engine.hpp#L630)
 ## __THIS_FILE_REPLACE__
 
 Type: constant
@@ -3514,7 +3514,7 @@ Replaced value:
 ```sqf
 SHORT_PATH
 ```
-File: [host\engine.hpp at line 630](../../../Src/host/engine.hpp#L630)
+File: [host\engine.hpp at line 632](../../../Src/host/engine.hpp#L632)
 ## __THIS_MODULE_REPLACE__
 
 Type: constant
@@ -3528,7 +3528,7 @@ Replaced value:
 ```sqf
 "<RUNTIME_MODULE>"
 ```
-File: [host\engine.hpp at line 634](../../../Src/host/engine.hpp#L634)
+File: [host\engine.hpp at line 636](../../../Src/host/engine.hpp#L636)
 ## assert_str(a,b)
 
 Type: constant
@@ -3543,7 +3543,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 639](../../../Src/host/engine.hpp#L639)
+File: [host\engine.hpp at line 641](../../../Src/host/engine.hpp#L641)
 ## static_assert_str(a,b)
 
 Type: constant
@@ -3558,7 +3558,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 641](../../../Src/host/engine.hpp#L641)
+File: [host\engine.hpp at line 643](../../../Src/host/engine.hpp#L643)
 ## __THIS_FILE_REPLACE__
 
 Type: constant
@@ -3572,7 +3572,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 642](../../../Src/host/engine.hpp#L642)
+File: [host\engine.hpp at line 644](../../../Src/host/engine.hpp#L644)
 ## assert(a)
 
 Type: constant
@@ -3586,7 +3586,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 638](../../../Src/host/engine.hpp#L638)
+File: [host\engine.hpp at line 640](../../../Src/host/engine.hpp#L640)
 ## assert_str(a,b)
 
 Type: constant
@@ -3601,7 +3601,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 648](../../../Src/host/engine.hpp#L648)
+File: [host\engine.hpp at line 650](../../../Src/host/engine.hpp#L650)
 ## static_assert(a)
 
 Type: constant
@@ -3615,7 +3615,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 640](../../../Src/host/engine.hpp#L640)
+File: [host\engine.hpp at line 642](../../../Src/host/engine.hpp#L642)
 ## static_assert_str(a,b)
 
 Type: constant
@@ -3630,7 +3630,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 650](../../../Src/host/engine.hpp#L650)
+File: [host\engine.hpp at line 652](../../../Src/host/engine.hpp#L652)
 ## __THIS_FILE_REPLACE__
 
 Type: constant
@@ -3644,7 +3644,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 652](../../../Src/host/engine.hpp#L652)
+File: [host\engine.hpp at line 654](../../../Src/host/engine.hpp#L654)
 ## setLastError(data__)
 
 Type: constant
@@ -3658,7 +3658,7 @@ Replaced value:
 ```sqf
 ([data__] call relicta_debug_setlasterror); halt
 ```
-File: [host\engine.hpp at line 664](../../../Src/host/engine.hpp#L664)
+File: [host\engine.hpp at line 666](../../../Src/host/engine.hpp#L666)
 ## setLastError(data__)
 
 Type: constant
@@ -3672,7 +3672,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 666](../../../Src/host/engine.hpp#L666)
+File: [host\engine.hpp at line 668](../../../Src/host/engine.hpp#L668)
 ## exitScope(cond)
 
 Type: constant
@@ -3684,7 +3684,7 @@ Replaced value:
 ```sqf
 if (true) exitWith {cond};
 ```
-File: [host\engine.hpp at line 670](../../../Src/host/engine.hpp#L670)
+File: [host\engine.hpp at line 672](../../../Src/host/engine.hpp#L672)
 ## getCallStack()
 
 Type: constant
@@ -3696,7 +3696,7 @@ Replaced value:
 ```sqf
 diag_stacktrace
 ```
-File: [host\engine.hpp at line 672](../../../Src/host/engine.hpp#L672)
+File: [host\engine.hpp at line 674](../../../Src/host/engine.hpp#L674)
 ## BASIC_MOB_TYPE
 
 Type: constant
@@ -3708,7 +3708,7 @@ Replaced value:
 ```sqf
 "B_Survivor_F"
 ```
-File: [host\engine.hpp at line 678](../../../Src/host/engine.hpp#L678)
+File: [host\engine.hpp at line 680](../../../Src/host/engine.hpp#L680)
 ## editor_only(any)
 
 Type: constant
@@ -3722,7 +3722,7 @@ Replaced value:
 ```sqf
 any
 ```
-File: [host\engine.hpp at line 682](../../../Src/host/engine.hpp#L682)
+File: [host\engine.hpp at line 684](../../../Src/host/engine.hpp#L684)
 ## editor_conditional(ed__,noted__)
 
 Type: constant
@@ -3737,7 +3737,7 @@ Replaced value:
 ```sqf
 ed__
 ```
-File: [host\engine.hpp at line 683](../../../Src/host/engine.hpp#L683)
+File: [host\engine.hpp at line 685](../../../Src/host/engine.hpp#L685)
 ## editor_only(any)
 
 Type: constant
@@ -3751,7 +3751,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 685](../../../Src/host/engine.hpp#L685)
+File: [host\engine.hpp at line 687](../../../Src/host/engine.hpp#L687)
 ## editor_conditional(ed__,noted__)
 
 Type: constant
@@ -3766,7 +3766,7 @@ Replaced value:
 ```sqf
 noted__
 ```
-File: [host\engine.hpp at line 686](../../../Src/host/engine.hpp#L686)
+File: [host\engine.hpp at line 688](../../../Src/host/engine.hpp#L688)
 ## IS_INIT_MODULE
 
 Type: constant
@@ -3778,7 +3778,7 @@ Replaced value:
 ```sqf
 isNullVar(__FUNCITONS_LOAD_ONLY__)
 ```
-File: [host\engine.hpp at line 693](../../../Src/host/engine.hpp#L693)
+File: [host\engine.hpp at line 695](../../../Src/host/engine.hpp#L695)
 ## node_var
 
 Type: constant
@@ -3790,7 +3790,7 @@ Replaced value:
 ```sqf
 call nodegen_addClassField;
 ```
-File: [host\engine.hpp at line 705](../../../Src/host/engine.hpp#L705)
+File: [host\engine.hpp at line 707](../../../Src/host/engine.hpp#L707)
 ## node_met
 
 Type: constant
@@ -3802,7 +3802,7 @@ Replaced value:
 ```sqf
 call nodegen_addClassMethod;
 ```
-File: [host\engine.hpp at line 751](../../../Src/host/engine.hpp#L751)
+File: [host\engine.hpp at line 753](../../../Src/host/engine.hpp#L753)
 ## node_class
 
 Type: constant
@@ -3814,7 +3814,7 @@ Replaced value:
 ```sqf
 call nodegen_addClass;
 ```
-File: [host\engine.hpp at line 758](../../../Src/host/engine.hpp#L758)
+File: [host\engine.hpp at line 760](../../../Src/host/engine.hpp#L760)
 ## node_func(name)
 
 Type: constant
@@ -3826,7 +3826,7 @@ Replaced value:
 ```sqf
 + endl+ 'node:name' call nodegen_addFunction; name
 ```
-File: [host\engine.hpp at line 769](../../../Src/host/engine.hpp#L769)
+File: [host\engine.hpp at line 771](../../../Src/host/engine.hpp#L771)
 ## node_system
 
 Type: constant
@@ -3838,7 +3838,7 @@ Replaced value:
 ```sqf
 call nodegen_addSystemNode;
 ```
-File: [host\engine.hpp at line 772](../../../Src/host/engine.hpp#L772)
+File: [host\engine.hpp at line 774](../../../Src/host/engine.hpp#L774)
 ## node_enum
 
 Type: constant
@@ -3850,7 +3850,7 @@ Replaced value:
 ```sqf
 call nodegen_addEnumerator;
 ```
-File: [host\engine.hpp at line 795](../../../Src/host/engine.hpp#L795)
+File: [host\engine.hpp at line 797](../../../Src/host/engine.hpp#L797)
 ## node_struct
 
 Type: constant
@@ -3862,7 +3862,7 @@ Replaced value:
 ```sqf
 call nodegen_addStruct;
 ```
-File: [host\engine.hpp at line 809](../../../Src/host/engine.hpp#L809)
+File: [host\engine.hpp at line 811](../../../Src/host/engine.hpp#L811)
 ## node_system_group(gname)
 
 Type: constant
@@ -3874,7 +3874,7 @@ Replaced value:
 ```sqf
 __nsys_grp = gname;
 ```
-File: [host\engine.hpp at line 825](../../../Src/host/engine.hpp#L825)
+File: [host\engine.hpp at line 827](../../../Src/host/engine.hpp#L827)
 # init.sqf
 
 ## server_loadingState
@@ -3888,7 +3888,7 @@ Initial value:
 ```sqf
 1
 ```
-File: [host\init.sqf at line 106](../../../Src/host/init.sqf#L106)
+File: [host\init.sqf at line 109](../../../Src/host/init.sqf#L109)
 # keyboard.hpp
 
 ## KEY_ESCAPE
@@ -5847,9 +5847,59 @@ Replaced value:
 2
 ```
 File: [host\keyboard.hpp at line 175](../../../Src/host/keyboard.hpp#L175)
-# memory.hpp
+# lang.hpp
 
-## size_ptr
+## decl(data)
+
+Type: constant
+
+Description: 
+- Param: data
+
+Replaced value:
+```sqf
+
+```
+File: [host\lang.hpp at line 43](../../../Src/host/lang.hpp#L43)
+## enum(name,prefix)
+
+Type: constant
+
+Description: end block enum declaration
+- Param: name
+- Param: prefix
+
+Replaced value:
+```sqf
+
+```
+File: [host\lang.hpp at line 54](../../../Src/host/lang.hpp#L54)
+## enumend
+
+Type: constant
+
+Description: end block enum declaration
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\lang.hpp at line 56](../../../Src/host/lang.hpp#L56)
+## namespace(ns_name,prefix)
+
+Type: constant
+
+Description: 
+- Param: ns_name
+- Param: prefix
+
+Replaced value:
+```sqf
+
+```
+File: [host\lang.hpp at line 73](../../../Src/host/lang.hpp#L73)
+## inline_macro
 
 Type: constant
 
@@ -5858,10 +5908,10 @@ Description:
 
 Replaced value:
 ```sqf
-8
+
 ```
-File: [host\memory.hpp at line 8](../../../Src/host/memory.hpp#L8)
-## size_float
+File: [host\lang.hpp at line 86](../../../Src/host/lang.hpp#L86)
+## const
 
 Type: constant
 
@@ -5870,10 +5920,10 @@ Description:
 
 Replaced value:
 ```sqf
-4
+
 ```
-File: [host\memory.hpp at line 9](../../../Src/host/memory.hpp#L9)
-## size_bool
+File: [host\lang.hpp at line 92](../../../Src/host/lang.hpp#L92)
+## extern
 
 Type: constant
 
@@ -5882,121 +5932,35 @@ Description:
 
 Replaced value:
 ```sqf
-1
+
 ```
-File: [host\memory.hpp at line 10](../../../Src/host/memory.hpp#L10)
-## size_array
+File: [host\lang.hpp at line 98](../../../Src/host/lang.hpp#L98)
+## macro_const(full_func_name)
 
 Type: constant
 
 Description: 
-
+- Param: full_func_name
 
 Replaced value:
 ```sqf
-size_ptr
+
 ```
-File: [host\memory.hpp at line 12](../../../Src/host/memory.hpp#L12)
-## size_ptr_object
+File: [host\lang.hpp at line 111](../../../Src/host/lang.hpp#L111)
+## macro_func(name,signature)
 
 Type: constant
 
 Description: 
-
-
-Replaced value:
-```sqf
-size_ptr
-```
-File: [host\memory.hpp at line 13](../../../Src/host/memory.hpp#L13)
-## sizeof(var)
-
-Type: constant
-
-Description: 4 for x32*/
-- Param: var
+- Param: name
+- Param: signature
 
 Replaced value:
 ```sqf
-\
-((var) call { \
-	if (_this isEqualType true) exitWith {1}; \
-	if (_this isEqualType 0) exitWith {4}; \
-	if (_this isEqualType "") exitWith {count _this}; \
-	size_ptr \
-}) 
+
 ```
-File: [host\memory.hpp at line 16](../../../Src/host/memory.hpp#L16)
-## obj_sizeof(ref)
-
-Type: constant
-
-Description: 
-- Param: ref
-
-Replaced value:
-```sqf
-\
-((ref) call { \
-	\
-	private _size = size_ptr; \
-	\
-	if (_this in [locationnull,objnull]) exitWith {_size}; \
-	\
-	private _gtp = { \
-		if (_this isEqualType true) exitWith {1}; \
-		if (_this isEqualType 0) exitWith {4}; \
-		if (_this isEqualType "") exitWith {count _this}; \
-		if (_this isequalType []) exitWith { \
-			\
-			private _size = size_ptr; \
-			{ \
-				MOD(_size,+ sizeof(_x)); \
-			} foreach _this; \
-			\
-			_size \
-		}; \
-		if (_this isEqualType {}) exitWith { \
-			size_ptr \
-		};\
-		size_ptr \
-	};\
-	\
-	{\
-		MOD(_size,+ ((_this getvariable _x) call _gtp));\
-	} foreach allVariables _this;\
-	\
-	_size\
-})
-```
-File: [host\memory.hpp at line 26](../../../Src/host/memory.hpp#L26)
-# module.hpp
-
-## moduleName
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-common
-```
-File: [host\module.hpp at line 8](../../../Src/host/module.hpp#L8)
-## ___fullmodulename(var)
-
-Type: constant
-
-Description: 
-- Param: var
-
-Replaced value:
-```sqf
-moduleName##_##var
-```
-File: [host\module.hpp at line 10](../../../Src/host/module.hpp#L10)
-## mFunction(name)
+File: [host\lang.hpp at line 123](../../../Src/host/lang.hpp#L123)
+## macro_def(name)
 
 Type: constant
 
@@ -6005,57 +5969,21 @@ Description:
 
 Replaced value:
 ```sqf
-___fullmodulename(name) = 
+
 ```
-File: [host\module.hpp at line 12](../../../Src/host/module.hpp#L12)
-## mVariable(name)
+File: [host\lang.hpp at line 133](../../../Src/host/lang.hpp#L133)
+## ignore_this_file
 
 Type: constant
 
-Description: 
-- Param: name
+Description: pragma for ignore file
+
 
 Replaced value:
 ```sqf
-___fullmodulename(name)
+
 ```
-File: [host\module.hpp at line 14](../../../Src/host/module.hpp#L14)
-## mCallFunc(name)
-
-Type: constant
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-call ___fullmodulename(name)
-```
-File: [host\module.hpp at line 16](../../../Src/host/module.hpp#L16)
-## mGetVar(name)
-
-Type: constant
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-___fullmodulename(name)
-```
-File: [host\module.hpp at line 18](../../../Src/host/module.hpp#L18)
-## mSetVar(name)
-
-Type: constant
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-___fullmodulename(name)
-```
-File: [host\module.hpp at line 20](../../../Src/host/module.hpp#L20)
+File: [host\lang.hpp at line 137](../../../Src/host/lang.hpp#L137)
 # oop.hpp
 
 ## PROTOTYPE_VAR_NAME
@@ -6331,23 +6259,11 @@ Replaced value:
 _isAutoRefUse = true;
 ```
 File: [host\oop.hpp at line 72](../../../Src/host/oop.hpp#L72)
-## const
-
-Type: constant
-
-Description: const modif. Create const inside type: const var(PI,3.14);
-
-
-Replaced value:
-```sqf
-_isConstant = true;
-```
-File: [host\oop.hpp at line 76](../../../Src/host/oop.hpp#L76)
 ## __set_const_value(var,val)
 
 Type: constant
 
-Description: 
+Description: #define const _isConstant = true; assert(false);
 - Param: var
 - Param: val
 
@@ -6355,7 +6271,7 @@ Replaced value:
 ```sqf
 _pt_obj setvariable ['cst_##var',val]
 ```
-File: [host\oop.hpp at line 77](../../../Src/host/oop.hpp#L77)
+File: [host\oop.hpp at line 78](../../../Src/host/oop.hpp#L78)
 ## __internal_flag_processor(flagname,act)
 
 Type: constant
@@ -6368,7 +6284,7 @@ Replaced value:
 ```sqf
 if (!isnil 'flagname') then {act; flagname = nil}
 ```
-File: [host\oop.hpp at line 79](../../../Src/host/oop.hpp#L79)
+File: [host\oop.hpp at line 80](../../../Src/host/oop.hpp#L80)
 ## var(name,value)
 
 Type: constant
@@ -6384,7 +6300,7 @@ Replaced value:
 	_lastIndexF = _fields pushback [_mem_name,'value']; \
 	call pc_oop_handleAttrF;
 ```
-File: [host\oop.hpp at line 82](../../../Src/host/oop.hpp#L82)
+File: [host\oop.hpp at line 83](../../../Src/host/oop.hpp#L83)
 ## pair(key,val)
 
 Type: constant
@@ -6397,7 +6313,7 @@ Replaced value:
 ```sqf
 [key,val]
 ```
-File: [host\oop.hpp at line 94](../../../Src/host/oop.hpp#L94)
+File: [host\oop.hpp at line 95](../../../Src/host/oop.hpp#L95)
 ## varpair(name,value)
 
 Type: constant
@@ -6413,7 +6329,7 @@ Replaced value:
 	_lastIndexF = _fields pushback [_mem_name,"createHashMapFromArray [" + ('value' splitString (";"+toString[9,13,10]) joinString ",") + "]"]; \
 	call pc_oop_handleAttrF;
 ```
-File: [host\oop.hpp at line 95](../../../Src/host/oop.hpp#L95)
+File: [host\oop.hpp at line 96](../../../Src/host/oop.hpp#L96)
 ## var_runtime(name,value)
 
 Type: constant
@@ -6429,7 +6345,7 @@ Replaced value:
 	_lastIndexF = _fields pushback [_mem_name,'value']; \
 	call pc_oop_handleAttrF;
 ```
-File: [host\oop.hpp at line 101](../../../Src/host/oop.hpp#L101)
+File: [host\oop.hpp at line 102](../../../Src/host/oop.hpp#L102)
 ## var_exprval(name,value)
 
 Type: constant
@@ -6446,7 +6362,7 @@ Replaced value:
 	_lastIndexF = _fields pushback [_mem_name,format["%1",__iv_r]]; \
 	call pc_oop_handleAttrF;
 ```
-File: [host\oop.hpp at line 108](../../../Src/host/oop.hpp#L108)
+File: [host\oop.hpp at line 109](../../../Src/host/oop.hpp#L109)
 ## net_use
 
 Type: constant
@@ -6458,7 +6374,7 @@ Replaced value:
 ```sqf
 _netuse = true;
 ```
-File: [host\oop.hpp at line 114](../../../Src/host/oop.hpp#L114)
+File: [host\oop.hpp at line 115](../../../Src/host/oop.hpp#L115)
 ## var_num(name)
 
 Type: constant
@@ -6470,7 +6386,7 @@ Replaced value:
 ```sqf
 var(name,0)
 ```
-File: [host\oop.hpp at line 116](../../../Src/host/oop.hpp#L116)
+File: [host\oop.hpp at line 117](../../../Src/host/oop.hpp#L117)
 ## var_str(name)
 
 Type: constant
@@ -6482,7 +6398,7 @@ Replaced value:
 ```sqf
 var(name,"")
 ```
-File: [host\oop.hpp at line 117](../../../Src/host/oop.hpp#L117)
+File: [host\oop.hpp at line 118](../../../Src/host/oop.hpp#L118)
 ## var_bool(name)
 
 Type: constant
@@ -6494,7 +6410,7 @@ Replaced value:
 ```sqf
 var(name,false)
 ```
-File: [host\oop.hpp at line 118](../../../Src/host/oop.hpp#L118)
+File: [host\oop.hpp at line 119](../../../Src/host/oop.hpp#L119)
 ## var_array(name)
 
 Type: constant
@@ -6506,7 +6422,7 @@ Replaced value:
 ```sqf
 var(name,[])
 ```
-File: [host\oop.hpp at line 119](../../../Src/host/oop.hpp#L119)
+File: [host\oop.hpp at line 120](../../../Src/host/oop.hpp#L120)
 ## var_obj(name)
 
 Type: constant
@@ -6518,7 +6434,7 @@ Replaced value:
 ```sqf
 var(name,objnull)
 ```
-File: [host\oop.hpp at line 120](../../../Src/host/oop.hpp#L120)
+File: [host\oop.hpp at line 121](../../../Src/host/oop.hpp#L121)
 ## var_vobj(name)
 
 Type: constant
@@ -6530,7 +6446,7 @@ Replaced value:
 ```sqf
 var(name,locationnull)
 ```
-File: [host\oop.hpp at line 121](../../../Src/host/oop.hpp#L121)
+File: [host\oop.hpp at line 122](../../../Src/host/oop.hpp#L122)
 ## var_hashmap(name)
 
 Type: constant
@@ -6542,7 +6458,7 @@ Replaced value:
 ```sqf
 var(name,createHashMap)
 ```
-File: [host\oop.hpp at line 122](../../../Src/host/oop.hpp#L122)
+File: [host\oop.hpp at line 123](../../../Src/host/oop.hpp#L123)
 ## var_handle(name)
 
 Type: constant
@@ -6554,7 +6470,7 @@ Replaced value:
 ```sqf
 var(name,-1)
 ```
-File: [host\oop.hpp at line 123](../../../Src/host/oop.hpp#L123)
+File: [host\oop.hpp at line 124](../../../Src/host/oop.hpp#L124)
 ## __check_method_duplicate
 
 Type: constant
@@ -6566,7 +6482,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\oop.hpp at line 127](../../../Src/host/oop.hpp#L127)
+File: [host\oop.hpp at line 128](../../../Src/host/oop.hpp#L128)
 ## func(name)
 
 Type: constant
@@ -6584,7 +6500,7 @@ _mem_name = #name; _classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LIN
 	call pc_oop_handleAttrM; \
 	(_methods select _lastIndex) pushback
 ```
-File: [host\oop.hpp at line 129](../../../Src/host/oop.hpp#L129)
+File: [host\oop.hpp at line 130](../../../Src/host/oop.hpp#L130)
 ## func_runtime(name)
 
 Type: constant
@@ -6599,7 +6515,7 @@ _mem_name = name; _classmet_declinfo set [_mem_name,__FILE__ + "?" + (str __LINE
 	call pc_oop_handleAttrM; \
 	(_methods select _lastIndex) pushback
 ```
-File: [host\oop.hpp at line 137](../../../Src/host/oop.hpp#L137)
+File: [host\oop.hpp at line 138](../../../Src/host/oop.hpp#L138)
 ## verbList(strlist,motherObj)
 
 Type: constant
@@ -6612,7 +6528,7 @@ Replaced value:
 ```sqf
 _nCode = 'objParams(); _outArr append ' + (strlist call verbs_parse_strToListOfNum) + '; callSuper(motherObj,getVerbs)'; func(getVerbs) (compile _nCode)
 ```
-File: [host\oop.hpp at line 143](../../../Src/host/oop.hpp#L143)
+File: [host\oop.hpp at line 144](../../../Src/host/oop.hpp#L144)
 ## verbListOverride(strlist)
 
 Type: constant
@@ -6624,7 +6540,7 @@ Replaced value:
 ```sqf
 _nCode = 'objParams(); _outArr append ' + (strlist call verbs_parse_strToListOfNum) + ';'; func(getVerbs) (compile _nCode)
 ```
-File: [host\oop.hpp at line 145](../../../Src/host/oop.hpp#L145)
+File: [host\oop.hpp at line 146](../../../Src/host/oop.hpp#L146)
 ## getter_func(name,do)
 
 Type: constant
@@ -6637,7 +6553,7 @@ Replaced value:
 ```sqf
 func(name) {objParams(); do }
 ```
-File: [host\oop.hpp at line 148](../../../Src/host/oop.hpp#L148)
+File: [host\oop.hpp at line 149](../../../Src/host/oop.hpp#L149)
 ## getterconst_func(name,do)
 
 Type: constant
@@ -6650,7 +6566,7 @@ Replaced value:
 ```sqf
 func(name) { do }
 ```
-File: [host\oop.hpp at line 151](../../../Src/host/oop.hpp#L151)
+File: [host\oop.hpp at line 152](../../../Src/host/oop.hpp#L152)
 ## getset_func(name,getcode,setcode)
 
 Type: constant
@@ -6664,7 +6580,7 @@ Replaced value:
 ```sqf
 _getcode = getcode; _setcode = setcode; func_runtime('get' + 'name') _getcode; func_runtime('set' + 'name') _setcode
 ```
-File: [host\oop.hpp at line 153](../../../Src/host/oop.hpp#L153)
+File: [host\oop.hpp at line 154](../../../Src/host/oop.hpp#L154)
 ## simpleGet(getcode)
 
 Type: constant
@@ -6676,7 +6592,7 @@ Replaced value:
 ```sqf
 {objParams(); getcode }
 ```
-File: [host\oop.hpp at line 155](../../../Src/host/oop.hpp#L155)
+File: [host\oop.hpp at line 156](../../../Src/host/oop.hpp#L156)
 ## simpleSet(setcode)
 
 Type: constant
@@ -6688,7 +6604,7 @@ Replaced value:
 ```sqf
 {objParams_1(_value); setcode }
 ```
-File: [host\oop.hpp at line 156](../../../Src/host/oop.hpp#L156)
+File: [host\oop.hpp at line 157](../../../Src/host/oop.hpp#L157)
 ## value
 
 Type: constant
@@ -6700,7 +6616,7 @@ Replaced value:
 ```sqf
 _value
 ```
-File: [host\oop.hpp at line 157](../../../Src/host/oop.hpp#L157)
+File: [host\oop.hpp at line 158](../../../Src/host/oop.hpp#L158)
 ## abstract_func(name)
 
 Type: constant
@@ -6712,7 +6628,7 @@ Replaced value:
 ```sqf
 func(name) {}; private _reqImpl = format['[OOP]:    <%1::%2> Method requires implementation (%3)',_class,#name,SHORT_PATH]; warning(_reqImpl);
 ```
-File: [host\oop.hpp at line 161](../../../Src/host/oop.hpp#L161)
+File: [host\oop.hpp at line 162](../../../Src/host/oop.hpp#L162)
 ## proto_func(name)
 
 Type: constant
@@ -6724,7 +6640,7 @@ Replaced value:
 ```sqf
 func(name) {}
 ```
-File: [host\oop.hpp at line 162](../../../Src/host/oop.hpp#L162)
+File: [host\oop.hpp at line 163](../../../Src/host/oop.hpp#L163)
 ## new(type)
 
 Type: constant
@@ -6736,7 +6652,7 @@ Replaced value:
 ```sqf
 (call (pt_##type getvariable "__instance"))
 ```
-File: [host\oop.hpp at line 165](../../../Src/host/oop.hpp#L165)
+File: [host\oop.hpp at line 166](../../../Src/host/oop.hpp#L166)
 ## newParams(type,Params)
 
 Type: constant
@@ -6749,7 +6665,7 @@ Replaced value:
 ```sqf
 ((Params) call (pt_##type getvariable "__instance"))
 ```
-File: [host\oop.hpp at line 166](../../../Src/host/oop.hpp#L166)
+File: [host\oop.hpp at line 167](../../../Src/host/oop.hpp#L167)
 ## delete(ref)
 
 Type: constant
@@ -6773,7 +6689,7 @@ Replaced value:
 ```sqf
 (!isNIL{ref getvariable "__del_flag__"})
 ```
-File: [host\oop.hpp at line 168](../../../Src/host/oop.hpp#L168)
+File: [host\oop.hpp at line 169](../../../Src/host/oop.hpp#L169)
 ## instantiate(strType)
 
 Type: constant
@@ -6785,7 +6701,7 @@ Replaced value:
 ```sqf
 (call ((missionNamespace getVariable ("pt_" + (strType))) getvariable '__instance'))
 ```
-File: [host\oop.hpp at line 169](../../../Src/host/oop.hpp#L169)
+File: [host\oop.hpp at line 170](../../../Src/host/oop.hpp#L170)
 ## instantiateParams(strType,Params)
 
 Type: constant
@@ -6798,7 +6714,7 @@ Replaced value:
 ```sqf
 ((Params) call ((missionNamespace getVariable ("pt_" + (strType))) getvariable '__instance'))
 ```
-File: [host\oop.hpp at line 170](../../../Src/host/oop.hpp#L170)
+File: [host\oop.hpp at line 171](../../../Src/host/oop.hpp#L171)
 ## ctxParams
 
 Type: constant
@@ -6810,7 +6726,7 @@ Replaced value:
 ```sqf
 _internalParams
 ```
-File: [host\oop.hpp at line 173](../../../Src/host/oop.hpp#L173)
+File: [host\oop.hpp at line 174](../../../Src/host/oop.hpp#L174)
 ## sizeOf(obj)
 
 Type: constant
@@ -6822,7 +6738,7 @@ Replaced value:
 ```sqf
 obj call oop_getobjsize
 ```
-File: [host\oop.hpp at line 175](../../../Src/host/oop.hpp#L175)
+File: [host\oop.hpp at line 176](../../../Src/host/oop.hpp#L176)
 ## getObjectsTypeOf(type)
 
 Type: constant
@@ -6834,7 +6750,7 @@ Replaced value:
 ```sqf
 ([#type,false] call oop_getinhlist)
 ```
-File: [host\oop.hpp at line 178](../../../Src/host/oop.hpp#L178)
+File: [host\oop.hpp at line 179](../../../Src/host/oop.hpp#L179)
 ## getAllObjectsTypeOf(type)
 
 Type: constant
@@ -6846,7 +6762,7 @@ Replaced value:
 ```sqf
 ([#type,true] call oop_getinhlist)
 ```
-File: [host\oop.hpp at line 180](../../../Src/host/oop.hpp#L180)
+File: [host\oop.hpp at line 181](../../../Src/host/oop.hpp#L181)
 ## getObjectsTypeOfStr(type)
 
 Type: constant
@@ -6858,7 +6774,7 @@ Replaced value:
 ```sqf
 ([type,false] call oop_getinhlist)
 ```
-File: [host\oop.hpp at line 182](../../../Src/host/oop.hpp#L182)
+File: [host\oop.hpp at line 183](../../../Src/host/oop.hpp#L183)
 ## getAllObjectsTypeOfStr(type)
 
 Type: constant
@@ -6870,7 +6786,7 @@ Replaced value:
 ```sqf
 ([type,true] call oop_getinhlist)
 ```
-File: [host\oop.hpp at line 183](../../../Src/host/oop.hpp#L183)
+File: [host\oop.hpp at line 184](../../../Src/host/oop.hpp#L184)
 ## callSuper(superclass,metname)
 
 Type: constant
@@ -6883,7 +6799,7 @@ Replaced value:
 ```sqf
 call ( pt_##superclass getVariable #metname )
 ```
-File: [host\oop.hpp at line 187](../../../Src/host/oop.hpp#L187)
+File: [host\oop.hpp at line 188](../../../Src/host/oop.hpp#L188)
 ## super()
 
 Type: constant
@@ -6895,7 +6811,7 @@ Replaced value:
 ```sqf
 (__BASECALLFLAG__)
 ```
-File: [host\oop.hpp at line 189](../../../Src/host/oop.hpp#L189)
+File: [host\oop.hpp at line 190](../../../Src/host/oop.hpp#L190)
 ## this
 
 Type: constant
@@ -6907,7 +6823,7 @@ Replaced value:
 ```sqf
 _thisobj
 ```
-File: [host\oop.hpp at line 192](../../../Src/host/oop.hpp#L192)
+File: [host\oop.hpp at line 193](../../../Src/host/oop.hpp#L193)
 ## updateParams()
 
 Type: constant
@@ -6919,7 +6835,7 @@ Replaced value:
 ```sqf
 private this = (_this select 0)
 ```
-File: [host\oop.hpp at line 194](../../../Src/host/oop.hpp#L194)
+File: [host\oop.hpp at line 195](../../../Src/host/oop.hpp#L195)
 ## STD_UPDATE_DELAY
 
 Type: constant
@@ -6931,7 +6847,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\oop.hpp at line 197](../../../Src/host/oop.hpp#L197)
+File: [host\oop.hpp at line 198](../../../Src/host/oop.hpp#L198)
 ## startSelfUpdate(method)
 
 Type: constant
@@ -6943,7 +6859,7 @@ Replaced value:
 ```sqf
 startUpdateParams(getSelfFunc(method),STD_UPDATE_DELAY,this)
 ```
-File: [host\oop.hpp at line 199](../../../Src/host/oop.hpp#L199)
+File: [host\oop.hpp at line 200](../../../Src/host/oop.hpp#L200)
 ## startObjUpdate(obj,method)
 
 Type: constant
@@ -6956,7 +6872,7 @@ Replaced value:
 ```sqf
 startUpdateParams(getFunc(obj,method),STD_UPDATE_DELAY,obj)
 ```
-File: [host\oop.hpp at line 200](../../../Src/host/oop.hpp#L200)
+File: [host\oop.hpp at line 201](../../../Src/host/oop.hpp#L201)
 ## startSelfUpdateWithDelay(method,del)
 
 Type: constant
@@ -6969,7 +6885,7 @@ Replaced value:
 ```sqf
 startUpdateParams(getSelfFunc(method),del,this)
 ```
-File: [host\oop.hpp at line 202](../../../Src/host/oop.hpp#L202)
+File: [host\oop.hpp at line 203](../../../Src/host/oop.hpp#L203)
 ## startObjUpdateWithDelay(obj,method,del)
 
 Type: constant
@@ -6983,7 +6899,7 @@ Replaced value:
 ```sqf
 startUpdateParams(getFunc(obj,method),del,obj)
 ```
-File: [host\oop.hpp at line 203](../../../Src/host/oop.hpp#L203)
+File: [host\oop.hpp at line 204](../../../Src/host/oop.hpp#L204)
 ## setParam(idx,val)
 
 Type: constant
@@ -6996,7 +6912,7 @@ Replaced value:
 ```sqf
 _this set [idx,val]
 ```
-File: [host\oop.hpp at line 205](../../../Src/host/oop.hpp#L205)
+File: [host\oop.hpp at line 206](../../../Src/host/oop.hpp#L206)
 ## objParams()
 
 Type: constant
@@ -7008,7 +6924,7 @@ Replaced value:
 ```sqf
 private this = _this
 ```
-File: [host\oop.hpp at line 207](../../../Src/host/oop.hpp#L207)
+File: [host\oop.hpp at line 208](../../../Src/host/oop.hpp#L208)
 ## objParams_1(a)
 
 Type: constant
@@ -7020,7 +6936,7 @@ Replaced value:
 ```sqf
 params ['this', #a ]
 ```
-File: [host\oop.hpp at line 209](../../../Src/host/oop.hpp#L209)
+File: [host\oop.hpp at line 210](../../../Src/host/oop.hpp#L210)
 ## objParams_1_nostr(a)
 
 Type: constant
@@ -7032,7 +6948,7 @@ Replaced value:
 ```sqf
 params ['this', a ]
 ```
-File: [host\oop.hpp at line 210](../../../Src/host/oop.hpp#L210)
+File: [host\oop.hpp at line 211](../../../Src/host/oop.hpp#L211)
 ## objParams_2(a,b)
 
 Type: constant
@@ -7045,7 +6961,7 @@ Replaced value:
 ```sqf
 params ['this', #a , #b]
 ```
-File: [host\oop.hpp at line 211](../../../Src/host/oop.hpp#L211)
+File: [host\oop.hpp at line 212](../../../Src/host/oop.hpp#L212)
 ## objParams_2_nostr(a,b)
 
 Type: constant
@@ -7058,7 +6974,7 @@ Replaced value:
 ```sqf
 params ['this', a , b]
 ```
-File: [host\oop.hpp at line 212](../../../Src/host/oop.hpp#L212)
+File: [host\oop.hpp at line 213](../../../Src/host/oop.hpp#L213)
 ## objParams_3(a,b,c)
 
 Type: constant
@@ -7072,7 +6988,7 @@ Replaced value:
 ```sqf
 params ['this', #a , #b , #c]
 ```
-File: [host\oop.hpp at line 214](../../../Src/host/oop.hpp#L214)
+File: [host\oop.hpp at line 215](../../../Src/host/oop.hpp#L215)
 ## objParams_4(a,b,c,d)
 
 Type: constant
@@ -7087,7 +7003,7 @@ Replaced value:
 ```sqf
 params ['this', #a , #b , #c , #d]
 ```
-File: [host\oop.hpp at line 215](../../../Src/host/oop.hpp#L215)
+File: [host\oop.hpp at line 216](../../../Src/host/oop.hpp#L216)
 ## objParams_5(a,b,c,d,e)
 
 Type: constant
@@ -7103,7 +7019,7 @@ Replaced value:
 ```sqf
 params ['this', #a , #b , #c , #d , #e]
 ```
-File: [host\oop.hpp at line 216](../../../Src/host/oop.hpp#L216)
+File: [host\oop.hpp at line 217](../../../Src/host/oop.hpp#L217)
 ## objParams_6(a,b,c,d,e,f)
 
 Type: constant
@@ -7120,7 +7036,7 @@ Replaced value:
 ```sqf
 params ['this', #a , #b , #c , #d , #e , #f]
 ```
-File: [host\oop.hpp at line 217](../../../Src/host/oop.hpp#L217)
+File: [host\oop.hpp at line 218](../../../Src/host/oop.hpp#L218)
 ## setprop(obj,func,val)
 
 Type: constant
@@ -7134,7 +7050,7 @@ Replaced value:
 ```sqf
 ([obj,val] call ((obj) getvariable PROTOTYPE_VAR_NAME getvariable ('set##func')))*/
 ```
-File: [host\oop.hpp at line 245](../../../Src/host/oop.hpp#L245)
+File: [host\oop.hpp at line 246](../../../Src/host/oop.hpp#L246)
 ## privateCall(func)
 
 Type: constant
@@ -7146,7 +7062,7 @@ Replaced value:
 ```sqf
 (call (this getvariable PROTOTYPE_VAR_NAME getvariable #func))
 ```
-File: [host\oop.hpp at line 249](../../../Src/host/oop.hpp#L249)
+File: [host\oop.hpp at line 250](../../../Src/host/oop.hpp#L250)
 ## getSelf(name)
 
 Type: constant
@@ -7158,7 +7074,7 @@ Replaced value:
 ```sqf
 (this getvariable #name)
 ```
-File: [host\oop.hpp at line 251](../../../Src/host/oop.hpp#L251)
+File: [host\oop.hpp at line 252](../../../Src/host/oop.hpp#L252)
 ## setSelf(name,val)
 
 Type: constant
@@ -7171,7 +7087,7 @@ Replaced value:
 ```sqf
 this setvariable [#name,val]
 ```
-File: [host\oop.hpp at line 252](../../../Src/host/oop.hpp#L252)
+File: [host\oop.hpp at line 253](../../../Src/host/oop.hpp#L253)
 ## modSelf(name,val)
 
 Type: constant
@@ -7184,7 +7100,7 @@ Replaced value:
 ```sqf
 setSelf(name,getSelf(name) val)
 ```
-File: [host\oop.hpp at line 253](../../../Src/host/oop.hpp#L253)
+File: [host\oop.hpp at line 254](../../../Src/host/oop.hpp#L254)
 ## initSelf(name,_initial)
 
 Type: constant
@@ -7197,7 +7113,7 @@ Replaced value:
 ```sqf
 (if ISNIL{getSelf(name)}then{setSelf(name,_initial);_initial}else{getSelf(name)})
 ```
-File: [host\oop.hpp at line 254](../../../Src/host/oop.hpp#L254)
+File: [host\oop.hpp at line 255](../../../Src/host/oop.hpp#L255)
 ## getSelfReflect(name)
 
 Type: constant
@@ -7209,7 +7125,7 @@ Replaced value:
 ```sqf
 (this getvariable name)
 ```
-File: [host\oop.hpp at line 256](../../../Src/host/oop.hpp#L256)
+File: [host\oop.hpp at line 257](../../../Src/host/oop.hpp#L257)
 ## setSelfReflect(name,val)
 
 Type: constant
@@ -7222,7 +7138,7 @@ Replaced value:
 ```sqf
 this setvariable [name,val]
 ```
-File: [host\oop.hpp at line 257](../../../Src/host/oop.hpp#L257)
+File: [host\oop.hpp at line 258](../../../Src/host/oop.hpp#L258)
 ## modSelfReflect(name,val)
 
 Type: constant
@@ -7235,7 +7151,7 @@ Replaced value:
 ```sqf
 setSelfReflect(name,getSelfReflect(name) val)
 ```
-File: [host\oop.hpp at line 258](../../../Src/host/oop.hpp#L258)
+File: [host\oop.hpp at line 259](../../../Src/host/oop.hpp#L259)
 ## callSelf(func)
 
 Type: constant
@@ -7247,7 +7163,7 @@ Replaced value:
 ```sqf
 (this call (this getvariable PROTOTYPE_VAR_NAME getvariable #func))
 ```
-File: [host\oop.hpp at line 260](../../../Src/host/oop.hpp#L260)
+File: [host\oop.hpp at line 261](../../../Src/host/oop.hpp#L261)
 ## callSelfAfter(func,time)
 
 Type: constant
@@ -7260,7 +7176,7 @@ Replaced value:
 ```sqf
 [this getVariable PROTOTYPE_VAR_NAME getVariable #func,this,time] call CBA_fnc_waitAndExecute
 ```
-File: [host\oop.hpp at line 261](../../../Src/host/oop.hpp#L261)
+File: [host\oop.hpp at line 262](../../../Src/host/oop.hpp#L262)
 ## callSelfAfterParams(func,time,parms)
 
 Type: constant
@@ -7274,7 +7190,7 @@ Replaced value:
 ```sqf
 [this getVariable PROTOTYPE_VAR_NAME getVariable #func,[this,parms],time] call CBA_fnc_waitAndExecute
 ```
-File: [host\oop.hpp at line 262](../../../Src/host/oop.hpp#L262)
+File: [host\oop.hpp at line 263](../../../Src/host/oop.hpp#L263)
 ## callSelfParams(func,parms)
 
 Type: constant
@@ -7287,7 +7203,7 @@ Replaced value:
 ```sqf
 ([this,parms] call (this getvariable PROTOTYPE_VAR_NAME getvariable #func))
 ```
-File: [host\oop.hpp at line 263](../../../Src/host/oop.hpp#L263)
+File: [host\oop.hpp at line 264](../../../Src/host/oop.hpp#L264)
 ## callSelfParamsInline(func,parms)
 
 Type: constant
@@ -7300,7 +7216,7 @@ Replaced value:
 ```sqf
 (([this]+(parms)) call (this getvariable PROTOTYPE_VAR_NAME getvariable #func))
 ```
-File: [host\oop.hpp at line 264](../../../Src/host/oop.hpp#L264)
+File: [host\oop.hpp at line 265](../../../Src/host/oop.hpp#L265)
 ## callSelfReflect(func)
 
 Type: constant
@@ -7312,7 +7228,7 @@ Replaced value:
 ```sqf
 (this call (this getvariable PROTOTYPE_VAR_NAME getvariable func))
 ```
-File: [host\oop.hpp at line 266](../../../Src/host/oop.hpp#L266)
+File: [host\oop.hpp at line 267](../../../Src/host/oop.hpp#L267)
 ## callSelfReflectParams(func,parms)
 
 Type: constant
@@ -7325,7 +7241,7 @@ Replaced value:
 ```sqf
 ([this,parms] call (this getvariable PROTOTYPE_VAR_NAME getvariable func))
 ```
-File: [host\oop.hpp at line 267](../../../Src/host/oop.hpp#L267)
+File: [host\oop.hpp at line 268](../../../Src/host/oop.hpp#L268)
 ## callSelfReflectParamsInline(func,parms)
 
 Type: constant
@@ -7338,7 +7254,7 @@ Replaced value:
 ```sqf
 (([this]+(parms)) call (this getvariable PROTOTYPE_VAR_NAME getvariable func))
 ```
-File: [host\oop.hpp at line 269](../../../Src/host/oop.hpp#L269)
+File: [host\oop.hpp at line 270](../../../Src/host/oop.hpp#L270)
 ## getSelfFunc(func)
 
 Type: constant
@@ -7350,7 +7266,7 @@ Replaced value:
 ```sqf
 (this getvariable PROTOTYPE_VAR_NAME getvariable (#func))
 ```
-File: [host\oop.hpp at line 271](../../../Src/host/oop.hpp#L271)
+File: [host\oop.hpp at line 272](../../../Src/host/oop.hpp#L272)
 ## getSelfFuncReflect(func)
 
 Type: constant
@@ -7362,7 +7278,7 @@ Replaced value:
 ```sqf
 (this getvariable PROTOTYPE_VAR_NAME getvariable (func))
 ```
-File: [host\oop.hpp at line 272](../../../Src/host/oop.hpp#L272)
+File: [host\oop.hpp at line 273](../../../Src/host/oop.hpp#L273)
 ## getSelfProp(func)
 
 Type: constant
@@ -7374,7 +7290,7 @@ Replaced value:
 ```sqf
 (this call (this getvariable PROTOTYPE_VAR_NAME getvariable 'get##func'))
 ```
-File: [host\oop.hpp at line 274](../../../Src/host/oop.hpp#L274)
+File: [host\oop.hpp at line 275](../../../Src/host/oop.hpp#L275)
 ## setSelfProp(func,val)
 
 Type: constant
@@ -7387,7 +7303,7 @@ Replaced value:
 ```sqf
 [this,val] call (this getvariable PROTOTYPE_VAR_NAME getvariable 'set##func')
 ```
-File: [host\oop.hpp at line 275](../../../Src/host/oop.hpp#L275)
+File: [host\oop.hpp at line 276](../../../Src/host/oop.hpp#L276)
 ## callFunc(obj,func)
 
 Type: constant
@@ -7400,7 +7316,7 @@ Replaced value:
 ```sqf
 ((obj) call ((obj) getvariable PROTOTYPE_VAR_NAME getvariable (#func)))
 ```
-File: [host\oop.hpp at line 278](../../../Src/host/oop.hpp#L278)
+File: [host\oop.hpp at line 279](../../../Src/host/oop.hpp#L279)
 ## callFuncAfter(obj,func,time)
 
 Type: constant
@@ -7414,7 +7330,7 @@ Replaced value:
 ```sqf
 [(obj) getVariable PROTOTYPE_VAR_NAME getVariable #func,obj,time] call CBA_fnc_waitAndExecute
 ```
-File: [host\oop.hpp at line 279](../../../Src/host/oop.hpp#L279)
+File: [host\oop.hpp at line 280](../../../Src/host/oop.hpp#L280)
 ## callFuncAfterParams(obj,func,time,parms)
 
 Type: constant
@@ -7429,7 +7345,7 @@ Replaced value:
 ```sqf
 [(obj) getVariable PROTOTYPE_VAR_NAME getVariable #func,[obj,parms],time] call CBA_fnc_waitAndExecute
 ```
-File: [host\oop.hpp at line 280](../../../Src/host/oop.hpp#L280)
+File: [host\oop.hpp at line 281](../../../Src/host/oop.hpp#L281)
 ## callFuncParams(obj,func,parms)
 
 Type: constant
@@ -7443,7 +7359,7 @@ Replaced value:
 ```sqf
 ([obj, parms] call ((obj) getvariable PROTOTYPE_VAR_NAME getvariable (#func)))
 ```
-File: [host\oop.hpp at line 281](../../../Src/host/oop.hpp#L281)
+File: [host\oop.hpp at line 282](../../../Src/host/oop.hpp#L282)
 ## callFuncParamsInline(obj,func,parms)
 
 Type: constant
@@ -7457,7 +7373,7 @@ Replaced value:
 ```sqf
 (([obj]+(parms)) call ((obj) getvariable PROTOTYPE_VAR_NAME getvariable (#func)))
 ```
-File: [host\oop.hpp at line 282](../../../Src/host/oop.hpp#L282)
+File: [host\oop.hpp at line 283](../../../Src/host/oop.hpp#L283)
 ## callFuncReflect(obj,func)
 
 Type: constant
@@ -7470,7 +7386,7 @@ Replaced value:
 ```sqf
 ((obj) call ((obj) getvariable PROTOTYPE_VAR_NAME getvariable (func)))
 ```
-File: [host\oop.hpp at line 284](../../../Src/host/oop.hpp#L284)
+File: [host\oop.hpp at line 285](../../../Src/host/oop.hpp#L285)
 ## callFuncReflectParams(obj,func,parms)
 
 Type: constant
@@ -7484,7 +7400,7 @@ Replaced value:
 ```sqf
 ([obj, parms] call ((obj) getvariable PROTOTYPE_VAR_NAME getvariable (func)))
 ```
-File: [host\oop.hpp at line 285](../../../Src/host/oop.hpp#L285)
+File: [host\oop.hpp at line 286](../../../Src/host/oop.hpp#L286)
 ## callFuncReflectParamsInline(obj,func,parms)
 
 Type: constant
@@ -7498,7 +7414,7 @@ Replaced value:
 ```sqf
 (([obj]+(parms)) call ((obj) getvariable PROTOTYPE_VAR_NAME getvariable (func)))
 ```
-File: [host\oop.hpp at line 287](../../../Src/host/oop.hpp#L287)
+File: [host\oop.hpp at line 288](../../../Src/host/oop.hpp#L288)
 ## getFunc(obj,func)
 
 Type: constant
@@ -7511,7 +7427,7 @@ Replaced value:
 ```sqf
 ((obj) getvariable PROTOTYPE_VAR_NAME getvariable (#func))
 ```
-File: [host\oop.hpp at line 289](../../../Src/host/oop.hpp#L289)
+File: [host\oop.hpp at line 290](../../../Src/host/oop.hpp#L290)
 ## getFuncReflect(obj,func)
 
 Type: constant
@@ -7524,7 +7440,7 @@ Replaced value:
 ```sqf
 ((obj) getvariable PROTOTYPE_VAR_NAME getvariable (func))
 ```
-File: [host\oop.hpp at line 290](../../../Src/host/oop.hpp#L290)
+File: [host\oop.hpp at line 291](../../../Src/host/oop.hpp#L291)
 ## getVar(obj,name)
 
 Type: constant
@@ -7537,7 +7453,7 @@ Replaced value:
 ```sqf
 ((obj) getvariable (#name))
 ```
-File: [host\oop.hpp at line 292](../../../Src/host/oop.hpp#L292)
+File: [host\oop.hpp at line 293](../../../Src/host/oop.hpp#L293)
 ## setVar(obj,name,value)
 
 Type: constant
@@ -7551,7 +7467,7 @@ Replaced value:
 ```sqf
 (obj) setvariable [#name,value]
 ```
-File: [host\oop.hpp at line 293](../../../Src/host/oop.hpp#L293)
+File: [host\oop.hpp at line 294](../../../Src/host/oop.hpp#L294)
 ## modVar(obj,name,val)
 
 Type: constant
@@ -7565,7 +7481,7 @@ Replaced value:
 ```sqf
 setVar(obj,name,getVar(obj,name) val)
 ```
-File: [host\oop.hpp at line 294](../../../Src/host/oop.hpp#L294)
+File: [host\oop.hpp at line 295](../../../Src/host/oop.hpp#L295)
 ## initVar(obj,name,_initial)
 
 Type: constant
@@ -7579,7 +7495,7 @@ Replaced value:
 ```sqf
 (if ISNIL{getVar(obj,name)}then{setVar(obj,name,_initial);_initial}else{getVar(obj,name)})
 ```
-File: [host\oop.hpp at line 295](../../../Src/host/oop.hpp#L295)
+File: [host\oop.hpp at line 296](../../../Src/host/oop.hpp#L296)
 ## getVarReflect(obj,name)
 
 Type: constant
@@ -7592,7 +7508,7 @@ Replaced value:
 ```sqf
 ((obj) getvariable (name))
 ```
-File: [host\oop.hpp at line 297](../../../Src/host/oop.hpp#L297)
+File: [host\oop.hpp at line 298](../../../Src/host/oop.hpp#L298)
 ## setVarReflect(obj,name,value)
 
 Type: constant
@@ -7606,7 +7522,7 @@ Replaced value:
 ```sqf
 (obj) setvariable [name,value]
 ```
-File: [host\oop.hpp at line 298](../../../Src/host/oop.hpp#L298)
+File: [host\oop.hpp at line 299](../../../Src/host/oop.hpp#L299)
 ## modVarReflect(obj,name,val)
 
 Type: constant
@@ -7620,7 +7536,7 @@ Replaced value:
 ```sqf
 setVarReflect(obj,name,getVarReflect(obj,name) val)
 ```
-File: [host\oop.hpp at line 299](../../../Src/host/oop.hpp#L299)
+File: [host\oop.hpp at line 300](../../../Src/host/oop.hpp#L300)
 ## getProp(obj,func)
 
 Type: constant
@@ -7633,7 +7549,7 @@ Replaced value:
 ```sqf
 ((obj) call ((obj) getvariable PROTOTYPE_VAR_NAME getvariable ('get##func')))
 ```
-File: [host\oop.hpp at line 301](../../../Src/host/oop.hpp#L301)
+File: [host\oop.hpp at line 302](../../../Src/host/oop.hpp#L302)
 ## setProp(obj,func,val)
 
 Type: constant
@@ -7647,7 +7563,7 @@ Replaced value:
 ```sqf
 ([obj,val] call ((obj) getvariable PROTOTYPE_VAR_NAME getvariable ('set##func')))
 ```
-File: [host\oop.hpp at line 302](../../../Src/host/oop.hpp#L302)
+File: [host\oop.hpp at line 303](../../../Src/host/oop.hpp#L303)
 ## getConst(obj,constvar)
 
 Type: constant
@@ -7660,7 +7576,7 @@ Replaced value:
 ```sqf
 callFunc(obj,constvar)
 ```
-File: [host\oop.hpp at line 305](../../../Src/host/oop.hpp#L305)
+File: [host\oop.hpp at line 306](../../../Src/host/oop.hpp#L306)
 ## getSelfConst(constvar)
 
 Type: constant
@@ -7672,7 +7588,7 @@ Replaced value:
 ```sqf
 callSelf(constvar)
 ```
-File: [host\oop.hpp at line 306](../../../Src/host/oop.hpp#L306)
+File: [host\oop.hpp at line 307](../../../Src/host/oop.hpp#L307)
 ## typeGet(typ)
 
 Type: constant
@@ -7684,7 +7600,7 @@ Replaced value:
 ```sqf
 (missionNamespace getvariable ['pt_'+ 'typ',nullPtr])
 ```
-File: [host\oop.hpp at line 310](../../../Src/host/oop.hpp#L310)
+File: [host\oop.hpp at line 311](../../../Src/host/oop.hpp#L311)
 ## typeGetFromObject(obj)
 
 Type: constant
@@ -7696,7 +7612,7 @@ Replaced value:
 ```sqf
 (obj getVariable PROTOTYPE_VAR_NAME)
 ```
-File: [host\oop.hpp at line 311](../../../Src/host/oop.hpp#L311)
+File: [host\oop.hpp at line 312](../../../Src/host/oop.hpp#L312)
 ## typeGetFromString(strvar)
 
 Type: constant
@@ -7708,7 +7624,7 @@ Replaced value:
 ```sqf
 (missionNamespace getvariable ['pt_'+ (strvar),nullPtr])
 ```
-File: [host\oop.hpp at line 312](../../../Src/host/oop.hpp#L312)
+File: [host\oop.hpp at line 313](../../../Src/host/oop.hpp#L313)
 ## typeGetVar(obj,var)
 
 Type: constant
@@ -7721,7 +7637,7 @@ Replaced value:
 ```sqf
 (obj getVariable 'var')
 ```
-File: [host\oop.hpp at line 313](../../../Src/host/oop.hpp#L313)
+File: [host\oop.hpp at line 314](../../../Src/host/oop.hpp#L314)
 ## typeHasVar(obj,var)
 
 Type: constant
@@ -7734,7 +7650,7 @@ Replaced value:
 ```sqf
 (!isnil {typeGetVar(obj,var)})
 ```
-File: [host\oop.hpp at line 314](../../../Src/host/oop.hpp#L314)
+File: [host\oop.hpp at line 315](../../../Src/host/oop.hpp#L315)
 ## typeSetVar(obj,var,val)
 
 Type: constant
@@ -7748,7 +7664,7 @@ Replaced value:
 ```sqf
 obj setvariable ['var',val]
 ```
-File: [host\oop.hpp at line 315](../../../Src/host/oop.hpp#L315)
+File: [host\oop.hpp at line 316](../../../Src/host/oop.hpp#L316)
 ## typeGetDefaultFieldValueSerialized(tp,var)
 
 Type: constant
@@ -7761,7 +7677,7 @@ Replaced value:
 ```sqf
 (tp getVariable "__allfields_map" get 'var')
 ```
-File: [host\oop.hpp at line 317](../../../Src/host/oop.hpp#L317)
+File: [host\oop.hpp at line 318](../../../Src/host/oop.hpp#L318)
 ## typeGetDefaultFieldValue(tp,var)
 
 Type: constant
@@ -7774,7 +7690,7 @@ Replaced value:
 ```sqf
 (compile typeGetDefaultFieldValueSerialized(tp,var))
 ```
-File: [host\oop.hpp at line 317](../../../Src/host/oop.hpp#L317)
+File: [host\oop.hpp at line 318](../../../Src/host/oop.hpp#L318)
 ## isExistsObject(ref)
 
 Type: constant
@@ -7786,7 +7702,7 @@ Replaced value:
 ```sqf
 (!isnil {(ref getvariable 'proto')})
 ```
-File: [host\oop.hpp at line 322](../../../Src/host/oop.hpp#L322)
+File: [host\oop.hpp at line 323](../../../Src/host/oop.hpp#L323)
 ## isTypeOf(obj,type)
 
 Type: constant
@@ -7799,7 +7715,7 @@ Replaced value:
 ```sqf
 ((tolower #type) in ((obj) getvariable PROTOTYPE_VAR_NAME getvariable ("__inhlist_map")))
 ```
-File: [host\oop.hpp at line 324](../../../Src/host/oop.hpp#L324)
+File: [host\oop.hpp at line 325](../../../Src/host/oop.hpp#L325)
 ## isTypeStringOf(obj,type)
 
 Type: constant
@@ -7812,7 +7728,7 @@ Replaced value:
 ```sqf
 ((tolower (type)) in ((obj) getvariable PROTOTYPE_VAR_NAME getvariable ("__inhlist_map")))
 ```
-File: [host\oop.hpp at line 325](../../../Src/host/oop.hpp#L325)
+File: [host\oop.hpp at line 326](../../../Src/host/oop.hpp#L326)
 ## isTypeNameOf(obj,type)
 
 Type: constant
@@ -7825,7 +7741,7 @@ Replaced value:
 ```sqf
 ((tolower #type) in (typeGetFromString(obj) getvariable ("__inhlist_map")))
 ```
-File: [host\oop.hpp at line 326](../../../Src/host/oop.hpp#L326)
+File: [host\oop.hpp at line 327](../../../Src/host/oop.hpp#L327)
 ## isTypeNameStringOf(obj,type)
 
 Type: constant
@@ -7838,7 +7754,7 @@ Replaced value:
 ```sqf
 ((tolower (type)) in (typeGetFromString(obj) getvariable ("__inhlist_map")))
 ```
-File: [host\oop.hpp at line 328](../../../Src/host/oop.hpp#L328)
+File: [host\oop.hpp at line 329](../../../Src/host/oop.hpp#L329)
 ## isImplementClass(strname)
 
 Type: constant
@@ -7850,7 +7766,7 @@ Replaced value:
 ```sqf
 (!isNullReference(typeGetFromString(strname)))
 ```
-File: [host\oop.hpp at line 330](../../../Src/host/oop.hpp#L330)
+File: [host\oop.hpp at line 331](../../../Src/host/oop.hpp#L331)
 ## isImplementFunc(objref,met)
 
 Type: constant
@@ -7863,7 +7779,7 @@ Replaced value:
 ```sqf
 (!isnil{getFunc(objref,met)})
 ```
-File: [host\oop.hpp at line 332](../../../Src/host/oop.hpp#L332)
+File: [host\oop.hpp at line 333](../../../Src/host/oop.hpp#L333)
 ## isImplementVar(objref,var)
 
 Type: constant
@@ -7876,7 +7792,7 @@ Replaced value:
 ```sqf
 ((tolower #var) in getFunc(objref,__allfields_map))
 ```
-File: [host\oop.hpp at line 333](../../../Src/host/oop.hpp#L333)
+File: [host\oop.hpp at line 334](../../../Src/host/oop.hpp#L334)
 ## isImplementFuncStr(objref,met)
 
 Type: constant
@@ -7889,7 +7805,7 @@ Replaced value:
 ```sqf
 (!isnil{getFuncReflect(objref,met)})
 ```
-File: [host\oop.hpp at line 334](../../../Src/host/oop.hpp#L334)
+File: [host\oop.hpp at line 335](../../../Src/host/oop.hpp#L335)
 ## isImplementVarStr(objref,var)
 
 Type: constant
@@ -7902,7 +7818,7 @@ Replaced value:
 ```sqf
 ((tolower (var)) in getFunc(objref,__allfields_map))
 ```
-File: [host\oop.hpp at line 335](../../../Src/host/oop.hpp#L335)
+File: [host\oop.hpp at line 336](../../../Src/host/oop.hpp#L336)
 ## getFieldBaseValue(strt,varx)
 
 Type: constant
@@ -7915,7 +7831,7 @@ Replaced value:
 ```sqf
 ([strt,varx,true] call oop_getFieldBaseValue)
 ```
-File: [host\oop.hpp at line 337](../../../Src/host/oop.hpp#L337)
+File: [host\oop.hpp at line 338](../../../Src/host/oop.hpp#L338)
 ## getFieldBaseValueWithMethod(strt,varx,prp)
 
 Type: constant
@@ -7929,7 +7845,7 @@ Replaced value:
 ```sqf
 ([strt,varx,true,prp] call oop_getFieldBaseValue)
 ```
-File: [host\oop.hpp at line 338](../../../Src/host/oop.hpp#L338)
+File: [host\oop.hpp at line 339](../../../Src/host/oop.hpp#L339)
 ## isNullObject(obj)
 
 Type: constant
@@ -7941,7 +7857,7 @@ Replaced value:
 ```sqf
 ((obj) isequalto nullPtr)
 ```
-File: [host\oop.hpp at line 342](../../../Src/host/oop.hpp#L342)
+File: [host\oop.hpp at line 343](../../../Src/host/oop.hpp#L343)
 # precompiled.sqf
 
 ## __on_editor_attribute(membername,membertype)

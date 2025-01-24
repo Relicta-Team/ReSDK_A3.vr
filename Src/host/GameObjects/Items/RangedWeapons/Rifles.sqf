@@ -27,7 +27,7 @@ class(RifleFinisher) extends(IRangedWeapon)
 	var(shootSpeed,860);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_RIFLE);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_RIFLE);
-	getter_func(getAttackVisualData,SHOT_BULLET_SHOTRIFLE);
+	getter_func(getAttackVisualData,"BFX_BULLET_SHOTRIFLE");
 	getter_func(getUsingSkill,"rifle");
 	var(basicDamage,vec2(7,0));
 
@@ -109,7 +109,7 @@ class(RifleFinisherSmall) extends(RifleFinisher)
 	var(shootSpeed,860);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_RIFLE);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_RIFLE);
-	getter_func(getAttackVisualData,SHOT_BULLET_SHOTRIFLE);
+	getter_func(getAttackVisualData,"BFX_BULLET_SHOTRIFLE");
 	getter_func(getUsingSkill,"rifle");
 	var(basicDamage,vec2(6,2));
 	getter_func(getAmmoCaliber,"7.62мм");
@@ -129,7 +129,7 @@ class(RifleSVT) extends(IRangedWeapon)
 	var(shootSpeed,735);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_RIFLE);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_RIFLE);
-	getter_func(getAttackVisualData,SHOT_BULLET_SHOTRIFLE);
+	getter_func(getAttackVisualData,"BFX_BULLET_SHOTRIFLE");
 	getter_func(getUsingSkill,"rifle");
 	var(basicDamage,vec2(5,0));
 
@@ -167,7 +167,7 @@ class(RifleAuto) extends(IRangedWeapon)
 
 	getter_func(getTwoHandAnim,ITEM_2HANIM_RIFLE);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_RIFLE);
-	getter_func(getAttackVisualData,SHOT_BULLET_SHOTRIFLE);
+	getter_func(getAttackVisualData,"BFX_BULLET_SHOTRIFLE");
 	getter_func(getUsingSkill,"rifle");
 	var(basicDamage,vec2(5,0));
 
@@ -205,7 +205,7 @@ class(RifleBastard) extends(IRangedWeapon)
 
 	getter_func(getTwoHandAnim,ITEM_2HANIM_RIFLE);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_RIFLE);
-	getter_func(getAttackVisualData,SHOT_BULLET_SHOTRIFLE);
+	getter_func(getAttackVisualData,"BFX_BULLET_SHOTRIFLE");
 	getter_func(getUsingSkill,"rifle");
 	var(basicDamage,vec2(7,0));
 

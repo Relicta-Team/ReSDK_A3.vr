@@ -3,21 +3,25 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
 
-_openCraftMenu = {
+namespace(Craft,craft_)
+
+decl(void(any;any;any[];any[];bool))
+craft_openCraftMenuRequest = {
 	params ["_src","_usr","_categories","_listFirstCat",["_onlyPreview",false]];
 	
 	craft_cxtRpcSourcePtr = _src;	
 	//[[1],[1]] call craft_open;
 	[_categories,_listFirstCat,_onlyPreview] call craft_open;
 	
-}; rpcAdd("openCraftMenu",_openCraftMenu);
+}; rpcAdd("openCraftMenu",craft_openCraftMenuRequest);
 
-
-_onCraftLoadCateg = {
+decl(void(any;any[]))
+craft_onCraftLoadCateg = {
 	params ["_categ","_list"];
 	
-	if (!isCraftOpen) exitWith {};
+	if (!craft_isMenuOpen) exitWith {};
 	
 	if equalTypes(_categ,"") exitWith {
 		craft_loadCateg_isLoading = false;
@@ -27,10 +31,10 @@ _onCraftLoadCateg = {
 	craft_loadCateg_isLoading = false;
 	[_categ,_list] call craft_onLoadCategory;
 	
-}; rpcAdd("onCraftLoadCateg",_onCraftLoadCateg);
+}; rpcAdd("onCraftLoadCateg",craft_onCraftLoadCateg);
 
-
-_craft_preview = {
+decl(void(vector3;mesh))
+craft_craftPreviewProcess = {
 	params ["_pos","_model"];
 	private _txt = [
 		"Режим предпросмотра: ",
@@ -40,4 +44,4 @@ _craft_preview = {
 	] joinString sbr;
 	["<t size='1.4'>"+_txt+"</t>","system"] call chatPrint;
 	[_model,_pos] call craft_startPreview;
-}; rpcAdd("craft_preview",_craft_preview);
+}; rpcAdd("craft_preview",craft_craftPreviewProcess);

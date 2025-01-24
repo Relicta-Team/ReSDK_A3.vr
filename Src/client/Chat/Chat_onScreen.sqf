@@ -5,9 +5,13 @@
 
 #include <..\ClientRpc\clientRpc.hpp>
 
+namespace(chatos,chatos_)
+
+inline_macro
 #define mlp(v) 'v'
 
 // Список селекшонов мобов
+decl(string[])
 chatos_mobSelections = [
 				mlp(neck),
 				mlp(head),
@@ -33,13 +37,18 @@ chatos_mobSelections = [
 #undef mlp
 
 // Ссылка на контрольную группу текстового чата
+decl(widget[])
 chatos_guiCtg = [widgetNull];
 
+decl(map<string;widget>)
 chatos_renderedWidgets = createHashMap;
+decl(map<string;widget>)
 chatos_renderedWidgetsPrint = createHashMap;
 
+decl(float)
 chatos_postMessageVisibleDelay = 2.5;
 
+decl(void())
 chatos_onUpdate = {
 	if (isDisplayOpen && !(nd_openedDisplayType=="Input" || isInventoryOpen)) exitwith {
 		{
@@ -123,6 +132,7 @@ chatos_onUpdate = {
 
 };
 
+decl(void())
 chatos_inlinecode = {
 	_convTsize = linearConversion [1,_visDist,_distToTarget,2.5,0.1,true];
 	_convWidSize = linearConversion [1,_visDist,_distToTarget,30,0,true];
@@ -149,10 +159,12 @@ chatos_inlinecode = {
 };
 
 //get message buffer
+decl(tuple<string;float;float>(actor))
 chatos_getMobMessages = {
 	_this getVariable ["__local_mob_onchatmessage",["",0,0]]
 };
 
+decl(float(actor;string))
 chatos_getTimeText = {
 	params ["_mob","_text"];
 	(_mob getvariable ["__local_mob_voiceblobParams",[
@@ -166,6 +178,7 @@ chatos_getTimeText = {
 };
 
 //standart check
+decl(bool(actor))
 chatos_canSeeObject = {
 	params ["_obj"];
 
@@ -237,6 +250,7 @@ chatos_canSeeObject = {
 	false
 };
 
+decl(any[])
 chatos_list_blobMobs = [];
 
 chatos_actBlob = {
@@ -258,6 +272,7 @@ chatos_actBlob = {
 	chatos_list_blobMobs pushBack _ctxparams;
 };
 
+decl(void())
 chatos_onUpdateBlobTask = {
 	_deleted = false;
 	
@@ -292,6 +307,7 @@ chatos_onUpdateBlobTask = {
 	chatos_list_blobMobs = chatos_list_blobMobs - [objnull];
 };
 
+decl(void())
 chatos_onUpdatePrintingSay = {
 	if (isDisplayOpen && !(nd_openedDisplayType=="Input" || isInventoryOpen)) exitwith {
 		{
@@ -320,6 +336,7 @@ chatos_onUpdatePrintingSay = {
 	} foreach _list;
 };
 
+decl(bool(actor))
 chatos_isMobPrinting = {
 	_this getvariable ["smd_isPrintingSay",false]
 };
@@ -330,6 +347,7 @@ if !isNull(relicta_global_textChatEnabled) then {
 		[getGUI,WIDGETGROUP,[0,0,100,100]] call createWidget
 	];
 	
+	decl(void(actor;bool))
 	chatos_event_onSpeak = {
 		eventHandlerArgs params ["_mob","_isspeaking"];
 		
@@ -338,12 +356,13 @@ if !isNull(relicta_global_textChatEnabled) then {
 		};
 	};
 
+	decl(void())
 	chatos_onSay = {
 		private eventHandlerArgs = [player,true];
 		call chatos_event_onSpeak;
 	};
 
-	chatos_onupdate_handle = startUpdate(chatos_onUpdate,0);
-	chatos_taksblobs_handle = startUpdate(chatos_onUpdateBlobTask,0);
+	decl(int) chatos_onupdate_handle = startUpdate(chatos_onUpdate,0);
+	decl(int) chatos_taksblobs_handle = startUpdate(chatos_onUpdateBlobTask,0);
 	//chatos_onUpdatePrintingSay_handle = startUpdate(chatos_onUpdatePrintingSay,0);
 };

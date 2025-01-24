@@ -31,4 +31,4 @@ Replaced value:
 	["real_date", "179A73FD58174CA7B45B052F1777161D641163A9"] \
  ]
 ```
-File: [client\ClientInit\_allowed_extensions.h at line 7](../../../Src/client/ClientInit/_allowed_extensions.h#L7)
+File: [client\ClientInit\_allowed_extensions.h at line 10](../../../Src/client/ClientInit/_allowed_extensions.h#L10)

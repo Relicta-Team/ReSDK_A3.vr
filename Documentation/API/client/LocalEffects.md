@@ -253,4 +253,4 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\LocalEffects\LocalEffects_list.sqf at line 56](../../../Src/client/LocalEffects/LocalEffects_list.sqf#L56)
+File: [client\LocalEffects\LocalEffects_list.sqf at line 52](../../../Src/client/LocalEffects/LocalEffects_list.sqf#L52)

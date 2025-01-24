@@ -2,7 +2,8 @@
 // Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
-
+#include "..\engine.hpp"
+#include "..\oop.hpp"
 #include "..\struct.hpp"
 
 struct(BinaryMapInstructions)
@@ -24,7 +25,7 @@ struct(BinaryMapInstructions)
 		self setv(_allSpawnPoints,[]);
 	}
 
-	def(isSuccessBuild) {self getv(_errorCount) == 0}
+	def(isSuccessBuild) {(self getv(_errorCount)) == 0}
 
 	def(printErr)
 	{
@@ -41,7 +42,7 @@ struct(BinaryMapInstructions)
 		if !(_message in (self getv(_errorList))) then {
 			self getv(_errorList) pushBack _message;
 		};
-		self setv(_errorCount,self getv(_errorCount) + 1);
+		self setv(_errorCount,(self getv(_errorCount)) + 1);
 	}
 
 	def(prepareCode)
@@ -50,7 +51,7 @@ struct(BinaryMapInstructions)
 		private _buffEnd = self getv(_bufferEnd);
 		_buff append _buffEnd;
 
-		compile (_buff joinString endl);
+		compile (_buff joinString "");
 	}
 
 	endstruct
@@ -74,6 +75,8 @@ dml_internal_eulerToVec = {
 	];
 	_vectorDirAndUp
 };
+
+dml_const_zOffset = 6.04903;
 
 //загрузчик карты
 dml_loadMap = {
@@ -103,7 +106,7 @@ dml_parseMap = {
 		[false,{}]
 	};
 
-	logformat("Map parsing done; Objects %1",_bmap getv(_generated));
+	traceformat("Map parsing done; Objects %1",_bmap getv(_generated));
 
 	[true,_bmap callv(prepareCode)];
 };
@@ -132,6 +135,7 @@ dml_internal_addMapHeaders = {
 
 	_buffer pushBack "go_editor_globalRefs = createHashMap;";
 	_buffer pushBack endl;
+	_buffer pushBack endl;
 	private _ecodeInstr = "reditor_binding_fc = {" + toString {
 		private _o = _this deleteAt 0;
 		private _m = _this deleteAt 0;
@@ -157,6 +161,8 @@ dml_internal_addMapHeaders = {
 		go_editor_globalRefs getOrDefault [_m,nullPtr];
 	} + "};";
 	_buffer pushBack _ecodeInstr;
+	_buffer pushBack endl;
+	_buffer pushBack endl;
 };
 
 dml_const_enum_instancerNames = ["InitItem","InitStruct","InitDecor"];
@@ -170,9 +176,13 @@ dml_internal_handleObj = {
 	
 	//handle layer
 	if (_dataType=="layer") exitWith {
-		logformat("Loading layer: %1",_mapDat get "name");
+		//empty layer skip
+		if !("entities" in _mapDat) exitWith {};
+
 		private _objlist = _mapDat get "entities";
+		private _atlOffset = _mapDat get "atloffset";
 		private _itCount = _objlist get "items";
+		traceformat("Loading layer: %1",_mapDat get "name");
 		{
 			if equalTypes(_y,hashMapNull) then {
 				[_y,_bmap] call dml_internal_handleObj;
@@ -181,7 +191,7 @@ dml_internal_handleObj = {
 	};
 
 	if (_dataType!="object")exitWith {
-		traceformat("Skipped loading id %1",_id);
+		traceformat("Skipped loading id %1 (type %2)",_id arg _dataType);
 		true
 	};
 
@@ -190,11 +200,12 @@ dml_internal_handleObj = {
 
 
 	//deser hash: call (call compile _serializedData)
-	private _posI = _mapData get "positioninfo" get "position"; //x,z,y
-	_posI = [_posI select 0,_posI select 2,_posI select 1];
-	private _rotI = _mapData get "positioninfo" get "angles";
-	private _hashData = _mapData get "attributes" get "init";
-	private _otype = _mapData get "type"; //normal classname
+	private _posI = _mapDat get "positioninfo" get "position"; //x,z,y
+	private _atlOffset = _mapDat get "atloffset";
+	_posI = [_posI select 0,_posI select 2,(_posI select 1) - _atlOffset];
+	private _rotI = _mapDat get "positioninfo" get "angles";
+	private _hashData = _mapDat get "attributes" get "init";
+	private _otype = _mapDat get "type"; //normal classname
 
 	private _hd = deserializeHashData(_hashData);
 	if ("missionName" in _hd && {_otype == "Land_Orange_01_F"}) exitWith {
@@ -208,7 +219,7 @@ dml_internal_handleObj = {
 	};
 	private _class = _hd get "class";
 	if !isImplementClass(_class) exitWith {
-		_bmap callp(printErr,format vec3("Unknow class %1 for object with id %2",_class,_id));
+		_bmap callp(printErr,format vec3("Unknown class %1 for object with id %2",_class,_id));
 	};
 
 	private _instancer = dml_const_enum_instancerNames select ([_class,"",true,"getChunkType"] call oop_getFieldBaseValue);
@@ -242,8 +253,10 @@ dml_internal_handleObj = {
 
 	private _pos = _posI;//todo check convert to atl, for example -> z-side:: 10.4 => 4.3
 	//TODO convert euler angles to vdir/vup
+	
+	([_rotI] call dml_internal_eulerToVec) params ["_pVD","_pVU"];
 	private _vdir = 0;
-	private _vup = [0,0,0];
+	private _vup = [0,0,1];
 
 	private _randSpawn = false;
 	private _randSpawnString = "";
@@ -310,10 +323,29 @@ dml_internal_handleObj = {
 
 		if (_name == "model") then {continue};
 		if (_name == "light") then {
-			_realVal = _val select [1,count _val - 2];
-			private _realVarname = _realVal + "_var";
-			if isNull(missionName getvariable _realVarname) exitWith {
-				_bmap callp(printErr,format vec2("Cant find light %1",_realVal));
+			//! light can parse only from editor
+			private _realVal = _val select [1,count _val - 2];
+			private _cfgName = "#ERR#";
+			if (is3DEN) then {
+				_cfgName = [_realVal,"#ERR#"] call vcom_emit_io_parseScriptedConfigName;
+			};
+			if (_cfgName != "#ERR#") then {
+				if (is3DEN) then {
+					if !(call vcom_emit_io_isEnumConfigsLoaded) then {
+						[true] call vcom_emit_io_loadEnumAssoc;
+					};
+					private _idxlight = (keys vcom_emit_io_enumAssocKeyStr) findif {_cfgName==_x};
+					if (_idxlight == -1) exitWith {
+						_bmap callp(printErr,format vec2("Cant find light %1",_realVal));
+						continue;
+					};
+
+					_val = format["%1 call lightSys_getConfigIdByName",_val];
+				} else {
+					_bmap callp(printErr,format vec2("Light validation is not supported in non-editor %1",_realVal));
+				};
+			} else {
+				_bmap callp(printErr,format vec2("Cant resolve light name %1",_realVal));
 			};
 		};
 		if ("@preinit" in _name) then {
@@ -344,7 +376,19 @@ dml_internal_handleObj = {
 	private _tryErrorOnInit = false;
 	private _customCodeOnInit = "";
 	if !isNullVar(_code_init) exitWith {
-		_bmap callp(printErr,format vec2("ECode instructions not supported; Error class %1",_class));
+		if (is3DEN) then {
+			private _retStrCode = [_code_init,false] call golib_code_prepareInstructions;
+			if (_retStrCode == "!ERROR!") exitWith {
+				_bmap callp(printErr,format vec2("ECode compile error at id %1",_id));
+			};
+
+			INC(_counterNotNeedLvar);
+
+			_objcustomdata pushBackUnique "";
+			_customCodeOnInit = _retStrCode;
+		} else {
+			_bmap callp(printErr,format vec2("ECode instructions not supported; Error class %1",_class));
+		};
 	};
 
 	//* electronic device connection

@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
 
 #include "_allowed_extensions.h"
 private _signDLLError = false;

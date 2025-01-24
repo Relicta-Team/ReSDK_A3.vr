@@ -7,10 +7,13 @@
 #include "LightEngine.h"
 //place this file before all configs
 
+//карта эффектов. ключи - айди эффектов, значения - настройки эмиттеров
+decl(map<string;any>)
 le_se_map = createHashMap;
-le_se_noattr = null;
+decl(any)
+le_se_noattr = null; //!not used
+decl(tuple<int;int>)
 le_se_cfgRange = [2100,4900];
-
 
 /*
 	regScriptEmit(name) //ineditor: start of cfg location
@@ -33,6 +36,7 @@ le_se_cfgRange = [2100,4900];
 */
 
 //Функция-обработчик скриптового освещения (для клиента)
+decl(bool|NULL(any[];int;vector3))
 le_se_handleConfig = {
 	params ["_cfgDataList",["_hMode",SCRIPT_EMIT_HANDLER_MODE_DEFAULT],"_dropPos"];
 	private ["_t","_events","_alias","_o","_cfgDataCur","_cfgDataCurIdx"];
@@ -86,7 +90,7 @@ le_se_handleConfig = {
 				_alias = _x select 2 select 1;
 				//this dosent used
 				if (_t == "rend") exitwith {
-					sourceObject call le_initRenderer;
+					//sourceObject call le_initRenderer;
 				};
 				//particle handler
 				if (_t == "pt") exitwith {
@@ -118,7 +122,7 @@ le_se_handleConfig = {
 	
 
 	if (_isDrop || _isUnmanaged) exitWith {true};
-	//addEventOnDestroySource not used in scripted emitters
+	//auto delete not used in scripted emitters
 	//! native evh Destroyed not working with simple objects (sourceObject it is)
 
 	//Возвращаем свет 
@@ -135,6 +139,7 @@ le_se_handleConfig = {
 		- emitter_index - индекс эмиттера в списке конфигурации
 
 */
+decl(mesh[](string|int;vector3;any))
 le_se_createUnmanagedEmitter = {
 	params ["_cfg","_pos",["_dataHandler",{}]];
 	
@@ -156,6 +161,7 @@ le_se_createUnmanagedEmitter = {
 	_allEmitters
 };
 
+decl(void())
 le_se_handleCfgEvents = {
 	//all configs are handler
 	//params is: ["configHandlerName",cfgparams_any]
@@ -170,16 +176,33 @@ le_se_handleCfgEvents = {
 		] call _hfunc
 	} foreach _this;
 };
+
+decl(void(any))
 le_se_internal_errorFuncCfgEvents = {
 	private _errpar = _this;
 	setLastError("Cannot initialize config handler: " + str _errpar);
 };
+
+decl(void(string;any))
 le_se_registerConfigHandler = {
 	params ["_cfgName","_cfgCode"];
 	le_se_map_cfgHandlers set [_cfgName,_cfgCode];
 }; //регистрация нового конфига. только на клиенте
 
+//работает внутри обработчика скрипта для эмиттера. проверяет является ли контекст подключением к мобу
+decl(bool(mesh|actor))
+le_se_isAttachedToMob = {
+	_this call smd_isSMDObjectInSlot
+};
+
+//получает айди слота подключения к мобу (например INV_FACE)
+decl(int(actor))
+le_se_getAttachedProxySlot = {
+	_this call smd_getSMDObjectSlotId;
+};
+
 //получает значение опции из конфига. используется в хандлерах событий скриптовых эмиттеров
+decl(any(string))
 le_se_getCurrentConfigPropVal = {
 	params ["_srch"];
 	
@@ -189,24 +212,36 @@ le_se_getCurrentConfigPropVal = {
 	_ls select _id select 1
 };
 //получает айди текущего конфига. только внутри хандлееров событий скриптовых эмиттеров
+decl(any())
 le_se_getCurrentConfigId = {
 	assert_str(sourceObject getVariable "__config","Unexpected context or null config returns");
 };
 
+decl(map<string;any>)
 le_se_map_cfgHandlers = createHashMap; //карта зарегистрированных конфигов
 
 //always need included on client
 #include "SEConfigHandlers.sqf"
 
+decl(map<string;any>)
 le_se_mapHandlersUnmanaged = null; //карта нативных эффектов
+decl(map<string;any>)
 le_se_mapHandlersShots = null;
+
+//специальная функция разрешения симуляции для игры и для редактора
+decl(mesh|actor())
+le_se_getSimProxObj = {
+	if (is3den) then {lsim_proxyObject} else {player}
+};
+
+decl(map<string;any>)
 le_se_mapHandlers = createHashMapFromArray [
 	
 	["alias",{}],
 
 	//generic events
 	["linkToSrc",{
-		(_this select 0) attachTo [player,[0,0,0]];
+		(_this select 0) attachTo [call le_se_getSimProxObj,[0,0,0]];
 		_offset = _this select 1;
 		(_this select 0) attachTo [sourceObject,_offset];
 	}],
@@ -236,10 +271,12 @@ le_se_mapHandlers = createHashMapFromArray [
 	["setDropInterval",{(_this select 0) setDropInterval (_this select 1)}]
 ];
 
+decl(void())
 le_se_errorHandler = {
 	errorformat("le::se::errorHandler() - error on parse value %1 (in type: %2)",_prop arg _t);
 };
 
+decl(void())
 le_se_intenral_handleVarInit = {
 	//Добавляем первый источник как свет
 	if (!_handleFirstEmit) then {
@@ -254,6 +291,7 @@ le_se_intenral_handleVarInit = {
 	} count (_x select [3,(count _x) - 3]);
 };
 
+decl(void())
 le_se_internal_createDropEmitterMap = {
 	private _listNew = le_se_mapHandlers toArray false;
 	private _funcSetPos = {
@@ -302,6 +340,7 @@ le_se_internal_createDropEmitterMap = {
 	le_se_mapHandlersShots = createHashMapFromArray _listNew;
 };
 
+decl(void())
 le_se_internal_createUnmanagedEmitterMap = {
 	private _listNew = le_se_mapHandlers toArray false;
 	private _funcSetPos = {
@@ -321,6 +360,7 @@ le_se_internal_createUnmanagedEmitterMap = {
 	le_se_mapHandlersUnmanaged = createHashMapFromArray _listNew;
 };
 
+decl(void())
 le_se_intenral_handleUnmanagedVarInit = {
 	private _valCopy = null;
 	{
@@ -338,6 +378,7 @@ le_se_intenral_handleUnmanagedVarInit = {
 	} count (_x select [3,(count _x) - 3]);
 };
 
+decl(void())
 le_se_intenral_handleDropVarInit = {
 	{
 		_x params ["_prop","_val"];
@@ -346,6 +387,7 @@ le_se_intenral_handleDropVarInit = {
 	} count (_x select [3,(count _x) - 3]);
 };
 
+decl(bool(string|int;vector3;vector3;float;ref;any))
 le_se_fireEmit = {
 	params ["_cfg","_pos",["_norm",[0,0,1]],"_deleteAfter","_refemitters","_reservedParam"];
 	
@@ -387,9 +429,31 @@ le_se_fireEmit = {
 	true
 };
 
+decl(void())
+le_se_initScriptedLights = {
+	
+	if (isMultiplayer) then {
+		assert_str(count lt_preload_cfgList > 0,"Client scripted configs not found");
+		{
+			if !([_x,false] call lightSys_registerConfig) exitWith {
+				setLastError("Build scripted config error at index " + (str _foreachIndex));
+			};
+		} foreach lt_preload_cfgList;
+	} else {
+		assert_str(count slt_internal_fileListBuffer > 0,"Server scripted configs not found");
+		{
+			private _content = preprocessFile _x;
+			if !([_content,false] call lightSys_registerConfig) exitWith {
+				setLastError("Build scripted config error on client; File: " + _x);
+			};
+		} foreach slt_internal_fileListBuffer;
+	};
+};
+
 //Опытным путем было выяснено что тип частиц не может быть прикреплен напрямую к источнику
 //А если использовать хаки, то к частицам нельзя присоеденить другие объекты
 //Спасибо Богемия...
+decl(void())
 le_se_doSorting = {
 	private ["_cfgSegments","_curItm","_idx","_curPg"];
 	private _cfgId = 0;
@@ -404,7 +468,7 @@ le_se_doSorting = {
 			//Все - частицы
 			//adding dummy light
 			[_cfgSegments,
-				[ "lt",null,["linkToSrc",[0,0,0]] ]
+				[ "lt",null,["alias","autogen_light"],["linkToSrc",[0,0,0]] ]
 			] call (missionnamespace getvariable "pushFront"); //for bypass vm error
 		} else {
 			//не все - частицы
@@ -437,7 +501,10 @@ le_se_doSorting = {
 	} foreach le_se_map;
 };
 
+decl(map<string;any>)
 le_se_map_partAddress = createHashMap; //key setParticleN , value [functions]
+
+decl(any(string;string;any))
 le_se_getParticleOption = {
 	params ["_optName","_varname","_storage"];
 	private _oDat = le_se_map_partAddress get _optName;
@@ -447,6 +514,7 @@ le_se_getParticleOption = {
 	(_storage)call(_storCode select 0)
 };
 
+decl(void(string;string;any;any))
 le_se_setParticleOption = {
 	params ["_optName","_varname","_storage","_value"];
 	private _oDat = le_se_map_partAddress get _optName;
@@ -456,8 +524,10 @@ le_se_setParticleOption = {
 	[_storage,_value] call(_storCode select 1)
 };
 
+decl(int())
 le_se_getCurrentEmitterIndex = { _cfgDataCurIdx };
 
+decl(void())
 le_se_internal_generateOptionAddress = {
 	private _aListNames = ["setParticleParams","setParticleRandom","setParticleCircle","setDropInterval"];
 	private _aList = [
@@ -540,6 +610,7 @@ le_se_internal_generateOptionAddress = {
 
 
 //see macro SCRIPT_EMIT_HANDLER_MODE_
+decl(any[])
 le_se_list_fassoc = [];
 le_se_list_fassoc set [SCRIPT_EMIT_HANDLER_MODE_DEFAULT,le_se_intenral_handleVarInit];
 le_se_list_fassoc set [SCRIPT_EMIT_HANDLER_MODE_DROP,le_se_intenral_handleDropVarInit];

@@ -3,14 +3,20 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
 #include "..\..\host\GameObjects\ConstantAndDefines\Mobs.h"
 
+namespace(clientDataCustomAnim,cd_)
+
+decl(int)
 cd_customAnim = CUSTOM_ANIM_ACTION_NONE;
 
+decl(bool())
 cd_isCustomAnimEnabled = {
 	cd_customAnim != CUSTOM_ANIM_ACTION_NONE && ([] call interact_isActive)
 };
 
+decl(void())
 cd_handleRestCustomAnim = {
 	if !(call cd_isCustomAnimEnabled) exitWith {};
 	private _mob = player;

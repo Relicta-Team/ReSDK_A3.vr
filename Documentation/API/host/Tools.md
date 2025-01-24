@@ -124,7 +124,7 @@ Replaced value:
 ```sqf
 allClientContents pushBack (compile format['log("Init %1")',fcat]);
 ```
-File: [host\Tools\BuildTools\BuildTools_clientLoader.sqf at line 26](../../../Src/host/Tools/BuildTools/BuildTools_clientLoader.sqf#L26)
+File: [host\Tools\BuildTools\BuildTools_clientLoader.sqf at line 43](../../../Src/host/Tools/BuildTools/BuildTools_clientLoader.sqf#L43)
 ## cmplog(fcat)
 
 Type: constant
@@ -138,7 +138,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Tools\BuildTools\BuildTools_clientLoader.sqf at line 28](../../../Src/host/Tools/BuildTools/BuildTools_clientLoader.sqf#L28)
+File: [host\Tools\BuildTools\BuildTools_clientLoader.sqf at line 45](../../../Src/host/Tools/BuildTools/BuildTools_clientLoader.sqf#L45)
 # BuildTools_init.sqf
 
 ## BT_ERRCODE(code)
@@ -719,6 +719,18 @@ Initial value:
 ""
 ```
 File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 95](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L95)
+## relicta_debug_internal_lastStackTrace
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 96](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L96)
 ## relicta_debug_internal_lastErrorFileLine
 
 Type: Variable
@@ -730,7 +742,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 96](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L96)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 97](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L97)
 ## relicta_debug_internal_postCompileProcess
 
 Type: function
@@ -806,7 +818,7 @@ Description:
 - Param: _stack
 - Param: _offset
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 98](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L98)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 99](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L99)
 ## relicta_debug_internal_serializeStackTrace
 
 Type: function
@@ -817,7 +829,7 @@ Description:
 - Param: _scope
 - Param: _varmap
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 148](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L148)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 149](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L149)
 ## relicta_debug_setlasterror
 
 Type: function
@@ -825,7 +837,7 @@ Type: function
 Description: used on halt system call
 - Param: _name
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 184](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L184)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 185](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L185)
 ## relicta_debug_internal_testErrorInternal
 
 Type: function
@@ -833,7 +845,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 190](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L190)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 192](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L192)
 ## relicta_debug_internal_testError
 
 Type: function
@@ -841,7 +853,7 @@ Type: function
 Description: 
 
 
-File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 197](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L197)
+File: [host\Tools\EditorWorkspaceDebug\InternalImpl.sqf at line 199](../../../Src/host/Tools/EditorWorkspaceDebug/InternalImpl.sqf#L199)
 # HotReload_init.sqf
 
 ## printTrace

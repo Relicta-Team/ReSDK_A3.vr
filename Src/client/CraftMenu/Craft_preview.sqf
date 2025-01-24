@@ -3,15 +3,27 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
+
+namespace(Craft,craft_)
+
+decl(bool)
 craft_isPreviewEnabled = false;
+decl(any)
 craft_previewMesh = null;
 
+decl(float)
 craft_previewMeshDistance = 0;
+decl(float)
 craft_previewMeshDir = 0;
+decl(bool)
 craft_preview_modifierRotation = false;
+decl(bool)
 craft_preview_modifierDistance = false;
+decl(any[])
 craft_internal_handlers = []; //zchanged, mouseup
 
+decl(void())
 craft_internal_releaseHandlers = {
 	if (count craft_internal_handlers > 0) then {
 		{
@@ -26,6 +38,7 @@ craft_internal_releaseHandlers = {
 	craft_preview_modifierDistance = false;
 };
 
+decl(void(mesh;vector3))
 craft_startPreview = {
 	params ["_model","_pos"];
 	if !isNullVar(craft_previewMesh) then {
@@ -115,6 +128,7 @@ craft_startPreview = {
 	endAsyncInvoke
 };
 
+decl(void(bool))
 craft_endPreview = {
 	params ["_apply"];
 	private _args = [_apply] call craft_endPreviewImpl;
@@ -122,6 +136,7 @@ craft_endPreview = {
 	rpcSendToServer("craft_onEndPreview",_args);
 };
 
+decl(void(bool))
 craft_endPreviewImpl = {
 	params ["_apply"];
 	private _curPos = craft_previewMesh callv(getPos);

@@ -13,19 +13,22 @@
 
 //decl
 #include "ScriptedEffects.sqf"
-//cfgs
-#include "ScriptedEffectConfigs.sqf"
-//prepare cfgs
-call le_se_doSorting;
+
+//prepare cfgs, called on serverside
+decl(void())
+le_initializeScriptedConfigs = {
+	call lightSys_preInitialize;
+	call le_se_initScriptedLights;
+	call le_se_doSorting;
+};
+#ifndef EDITOR
+call le_initializeScriptedConfigs;
+#endif
+
 //create drop emitter map
 call le_se_internal_createDropEmitterMap;
 call le_se_internal_createUnmanagedEmitterMap;
 call le_se_internal_generateOptionAddress;
-
-#include "LightConfigs.sqf"
-#include "FireLightConfigs.sqf"
-#include "ShotableConfigs.sqf"
-#include "VisualStatesConfigs.sqf"
 
 // #include "LightEngine_mainThread.sqf"
 
@@ -33,15 +36,17 @@ call le_se_internal_generateOptionAddress;
 #include "LightEngine_ScriptedCulling.sqf"
 
 // Нужно выяснить какое существо самое лучшее в плане атачинга при первом создании
+decl(actor)
 le_simulated = clientMob;//"B_Soldier_F" createVehicleLocal [0,0,0];
 
 //le_handler_mainThread = -1;
 //le_handler_rendering = -1;
 //le_glsData = objNull;
 //le_localGlsData = nullPtr;
-
+decl(int[])
 le_allChunkTypes = [CHUNK_TYPE_ITEM,CHUNK_TYPE_STRUCTURE,CHUNK_TYPE_DECOR];
 
+decl(mesh[])
 le_allLights = []; //all light points
 
 /*le_init = {
@@ -64,6 +69,7 @@ le_allLights = []; //all light points
 
 
 //загружает источник освещения или частиц
+decl(mesh(int;mesh))
 le_loadLight = {
 	params [['_type',-1],"_src"];
 	
@@ -76,6 +82,10 @@ le_loadLight = {
 		if (!isMultiplayer) then {
 			traceformat("LightEngine::LoadLight() - args %1",_this);
 		};
+	};
+	if isNullReference(_src) exitWith {
+		error("LightEngine::LoadLight() - Undefined light source");
+		setLastError("LightEngine::LoadLight() - Undefined light source");
 	};
 
 	private _code = missionNamespace getVariable ["le_conf_" + str _type,{}];
@@ -98,39 +108,24 @@ le_loadLight = {
 };
 
 //автоматическое событие освещения, эффектов или звука
-le_doFireLight = {
-	params [["_type",-1],"_src"];
+// le_doFireLight = {
+// 	params [["_type",-1],"_src"];
 
-	if (_type <= le_firelight_startindex) exitWith {
-		error("LightEngine::doFireLight() - Undefined light type");
-	};
+// 	if (_type <= le_firelight_startindex) exitWith {
+// 		error("LightEngine::doFireLight() - Undefined light type");
+// 	};
 
-	private _code = missionNamespace getVariable ["le_conf_fire_" + str (_type - le_firelight_startindex),{}];
+// 	private _code = missionNamespace getVariable ["le_conf_fire_" + str (_type - le_firelight_startindex),{}];
 
-	if equals(_code,{}) exitWith {
-		errorformat("Cant load light from config => %1",_type);
-	};
+// 	if equals(_code,{}) exitWith {
+// 		errorformat("Cant load light from config => %1",_type);
+// 	};
 
-	[_src] call _code;
-};
-
-le_doShot = {
-	params ["_type","_src",["_ctxParams",[]]];
-
-	if (_type <= le_shot_startindex) exitWith {
-		error("LightEngine::doShot() - Undefined light type");
-	};
-	
-	private _code = missionNamespace getVariable ["le_conf_shot_" + str (_type - le_shot_startindex),{}];
-	
-	if equals(_code,{}) exitWith {
-		errorformat("Cant load light from config => %1",_type);
-	};
-
-	[_src,_ctxParams] call _code;
-};	
+// 	[_src] call _code;
+// };
 
 //выгружает источник освещения
+decl(void(mesh))
 le_unloadLight = {
 	params ["_obj"];
 
@@ -154,19 +149,20 @@ le_unloadLight = {
 	[0] call lesc_onLightRemove;
 	
 	
-	os_light_list_noProcessedLights deleteAt (os_light_list_noProcessedLights find _light);
-	
-	
+	os_light_list_noProcessedLights deleteAt (os_light_list_noProcessedLights findif {equals(_x select 0,_light)});
+
 	deleteVehicle _light;
 };
 
 //проверяет висит ли на объекте источник света
+decl(bool(mesh))
 le_isLoadedLight = {
 	params ["_obj"];
 	private _light = _obj getvariable ["__light",objNUll];
 	not_equals(_light,objNUll)
 };
 
+decl(int(mesh))
 le_getLoadedLightCfg = {
 	params ["_obj"];
 	private _light = _obj getvariable ["__light",objNUll];
@@ -174,12 +170,10 @@ le_getLoadedLightCfg = {
 	_obj getvariable ["__config",-1]
 };
 
+decl(bool(int|string))
 le_isLightConfig = {
+	if not_equalTypes(_this,0) exitWith {false};
 	_this > 0 && _this <= le_light_max_index
-};
-
-le_isShotConfig = {
-	_this >= le_shot_startindex
 };
 
 //OBSOLETE
@@ -216,6 +210,7 @@ le_isShotConfig = {
 };
 */
 
+decl(bool(mesh;bool))
 le_debug_canViewLight = {
 	params ["_src","_isLightObject"];
 
@@ -261,6 +256,7 @@ le_debug_canViewLight = {
 			_light setLightColor [0.013,0.001,0];
 			_light setLightAmbient [0.013,0.001,0];
 			_light setLightAttenuation [0,50,3,700,4,1];
+			#define vector(x,y,z) [x,y,z]
 			linkLight(_light,player,vector(0,0,0));
 			linkLight(_light,_arrow,vector(0,0,0));
 		} foreach _list;
@@ -294,6 +290,7 @@ le_debug_canViewLight = {
 		_light setLightColor [0.013,0.001,0];
 		_light setLightAmbient [0.013,0.001,0];
 		_light setLightAttenuation [0,50,3,700,4,1];
+		#define vector(x,y,z) [x,y,z]
 		linkLight(_light,player,vector(0,0,0));
 		linkLight(_light,_arrow,vector(0,0,0));
 
@@ -317,11 +314,13 @@ le_debug_canViewLight = {
 	true
 };
 
+/* 
+! legacy render
 le_debug_lightRender = {
 	#ifndef usedebuglightrender
 		if (true) exitWith {};
 	#endif
-
+	#define vector(x,y,z) [x,y,z]
 	private _renderMode = _this; //1 and 2
 	_evlight = {
 		(_this select 0) params ['lightObject','sourceObject',"_renderMode"];
@@ -359,16 +358,19 @@ le_debug_lightRender = {
 
 	}; startUpdateParams(_evlight,0.01,[lightObject arg sourceObject arg _renderMode]);
 };
+*/
 
 //render damage effect for objects
-_dofe = {
+decl(bool(vector3;int|string;vector3))
+le_se_emitFireAtPos = {
 	params ["_pos","_type","_norm"];
 	traceformat("damage effect normal: %1",_norm)
 	[_type,_pos,_norm] call le_se_fireEmit;
 };
-rpcAdd("do_fe",_dofe);
+rpcAdd("do_fe",le_se_emitFireAtPos);
 
-_dofe_mob = {
+decl(void(actor;string|int;string;float))
+le_se_emitFireAtActor = {
 	params ["_owner","_type",["_sel","spine3"],"_deleteAfter"];
 	private _refem = refcreate([]);
 	[
@@ -398,7 +400,7 @@ _dofe_mob = {
 		_params
 	endAsyncInvoke
 };
-rpcAdd("do_fe_mob",_dofe_mob);
+rpcAdd("do_fe_mob",le_se_emitFireAtActor);
 
 /*
 Memory head_axis (dist: 0.127475)

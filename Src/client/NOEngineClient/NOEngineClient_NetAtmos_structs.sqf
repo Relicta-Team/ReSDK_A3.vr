@@ -3,7 +3,6 @@
 // sdk.relicta.ru
 // ======================================================
 #include "..\..\host\struct.hpp"
-#include "..\LightEngine\ScriptedEffects.hpp"
 #include "NOEngineClient_NetAtmos.hpp"
 /*
 	Структура зоны атмоса
@@ -334,7 +333,7 @@ struct(AtmosAreaClient)
 	def(hasSnapToDownCfg)
 	{
 		params ["_cfg"];
-		_cfg in [SLIGHT_ATMOS_FIRE_1,SLIGHT_ATMOS_FIRE_2,SLIGHT_ATMOS_FIRE_3]
+		_cfg in ["SLIGHT_ATMOS_FIRE_1" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_FIRE_2" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_FIRE_3" call lightSys_getConfigIdByName]
 	}
 
 	def(getChunkIdList)
@@ -1042,8 +1041,8 @@ struct(AtmosVirtualLight)
 	def(isInsideRegion) {!isNull(self getv(regionPosInfo))};
 
 	//do not change this constval
-	def(_fireTypes) [SLIGHT_ATMOS_FIRE_1,SLIGHT_ATMOS_FIRE_2,SLIGHT_ATMOS_FIRE_3];
-	def(_smokeTypes) [SLIGHT_ATMOS_SMOKE_1,SLIGHT_ATMOS_SMOKE_2,SLIGHT_ATMOS_SMOKE_3];
+	def(_fireTypes) noe_client_nat_ltCfg_fire;
+	def(_smokeTypes) noe_client_nat_ltCfg_smoke;
 	//check if atmos if firetype
 	def(isFireType) {(self getv(id)) in (self getv(_fireTypes))}
 	def(isSmokeType) {(self getv(id)) in (self getv(_smokeTypes))}
@@ -1275,14 +1274,14 @@ struct(AtmosClientBatchRegion)
 			_x setv(regionPosInfo,vec2(_startPos,_sizes));
 		} foreach _virtLights;
 
-		private _cfg = SLIGHT_ATMOS_FIRE_3;
+		private _cfg = "SLIGHT_ATMOS_FIRE_3" call lightSys_getConfigIdByName;
 		private _femit = _virtLights select 0;
 		if (_femit callv(isFireType)) then {
-			_cfg = SLIGHT_ATMOS_FIRE_3;
+			_cfg = "SLIGHT_ATMOS_FIRE_3" call lightSys_getConfigIdByName;
 			self setv(effType,NAT_ATMOS_EFFTYPE_FIRE);
 		};
 		if (_femit callv(isSmokeType)) then {
-			_cfg = SLIGHT_ATMOS_SMOKE_3;
+			_cfg = "SLIGHT_ATMOS_SMOKE_3" call lightSys_getConfigIdByName;
 			self setv(effType,NAT_ATMOS_EFFTYPE_SMOKE);
 		};
 		self setv(batchCfg,_cfg);
@@ -1408,7 +1407,7 @@ struct(AtmosClientBatchRegion)
 	def(_nocullLight) -1
 	def(handleCfgCanCulled)
 	{
-		if ((self getv(batchCfg)) in [SLIGHT_ATMOS_SMOKE_1,SLIGHT_ATMOS_SMOKE_2,SLIGHT_ATMOS_SMOKE_3]) then {
+		if ((self getv(batchCfg)) in ["SLIGHT_ATMOS_SMOKE_1" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_SMOKE_2" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_SMOKE_3" call lightSys_getConfigIdByName]) then {
 			self setv(canUseCullOpt,true);
 		};
 	}
@@ -1549,7 +1548,7 @@ struct(AtmosClientBatchRegion)
 		#ifdef ENABLE_DRAW_DEBUG_LINES_REGIONS
 		self getv(sizes) params ["_ddlX","_ddlY"];
 		private _clrTp = [0,1,rand(0,0.3),1];
-		if (self getv(batchCfg) == SLIGHT_ATMOS_FIRE_3) then {
+		if (self getv(batchCfg) == ("SLIGHT_ATMOS_FIRE_3" call lightSys_getConfigIdByName)) then {
 			_clrTp = [1,rand(0,0.3),0,1];
 		};
 		modvar(_ddlX) - 0.1;

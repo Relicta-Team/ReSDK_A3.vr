@@ -3,8 +3,11 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
 #include <..\..\host\struct.hpp>
 #include <..\..\host\thread.hpp>
+
+namespace(LightScriptedCulling,lesc_)
 
 //#define LESC_ENABLE_CULLING
 
@@ -14,20 +17,20 @@
 //#define ENABLE_VISUAL_SPHERE_DEBUG
 
 struct(AbstractLightData)
-	def(src) objNull
-	def(getPos) {getposatl (self getv(src))}
+	decl(mesh) def(src) objNull
+	decl(vector3()) def(getPos) {getposatl (self getv(src))}
 
-	def(_enabledDebugRender) false
-	def(_dbgrndObj) null
-	def(_renderLoop) null
+	decl(bool) def(_enabledDebugRender) false
+	decl(struct_t.AutoModelPtr) def(_dbgrndObj) null
+	decl(struct_t.LoopedFunction) def(_renderLoop) null
 
-	def(init)
+	decl(void(mesh)) def(init)
 	{
 		params ["_obj"];
 		self setv(src,_obj);
 	}
 
-	def(setDebugRender)
+	decl(void(bool)) def(setDebugRender)
 	{
 		params ["_mode"];
 		if equals(_mode,self getv(_enabledDebugRender)) exitWith {};
@@ -52,36 +55,36 @@ struct(AbstractLightData)
 		};
 	}
 
-	def(_onActivateDebugRender)
+	decl(mesh()) def(_onActivateDebugRender)
 	{
 		objNull
 	}
 
-	def(_onDrawRender)
+	decl(void()) def(_onDrawRender)
 	{
 
 	}
 
-	def(del)
+	decl(void()) def(del)
 	{
 		self callp(setDebugRender,false);
 	}
 
-	def(isPointInside)
+	decl(bool(vector3)) def(isPointInside)
 	{
 		params ["_point"];
 		false
 	}
 
-	def(getBoundingBox)
+	decl(vector3[]()) def(getBoundingBox)
 	{
 		[[0,0,0],[0,0,0]]
 	}
 
-	def(_culled) false
-	def(_lum) 0//cached setLightIntensity
+	decl(bool) def(_culled) false
+	decl(float) def(_lum) 0//cached setLightIntensity
 
-	def(setCull)
+	decl(void(bool)) def(setCull)
 	{
 		params ["_mode"];
 		if equals(_mode,_culled) exitWith {};
@@ -97,10 +100,10 @@ struct(AbstractLightData)
 endstruct
 
 struct(ScriptedPointLightData) base(AbstractLightData)
-	def(radius) 0
-	def(startRadius) 0
+	decl(float) def(radius) 0
+	decl(float) def(startRadius) 0
 
-	def(init)
+	decl(void(mesh;...any[])) def(init)
 	{
 		params ["_obj","_kvargs"];
 		{
@@ -108,37 +111,39 @@ struct(ScriptedPointLightData) base(AbstractLightData)
 		} foreach _kvargs;
 	}
 
-	#ifdef ENABLE_VISUAL_SPHERE_DEBUG
-	def(_onActivateDebugRender)
+	decl(override) def(_onActivateDebugRender)
 	{
+	#ifdef ENABLE_VISUAL_SPHERE_DEBUG
 		private _s = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
 		private _clr = [random(1),random(1),random(1)] joinString ",";
 		_s setObjectTexture [0,"#(rgb,8,8,3)color("+_clr+",0.01)"];
 		_s setposatl (getposatl(self getv(src)));
 		_s setobjectscale ((self getv(radius)) * 2 * 10);
 		_s
-	}
+	#else
+		objNull
 	#endif
+	}
 
-	def(_onDrawRender)
+	decl(override) def(_onDrawRender)
 	{
-		_p = getposatl (self getv(src));
+		private _p = getposatl (self getv(src));
 		[_p,[1,1,0,1],30,self getv(radius),16] call debug_drawSphereEx;
 		[_p,[1,0,0,1],15,self getv(startRadius),16] call debug_drawSphereEx;
 	}
 
-	def(str)
+	decl(string()) def(str)
 	{
 		format["PointLight(%1)<%2>",self getv(radius),self getv(src)]
 	}
 
-	def(isPointInside)
+	decl(override) def(isPointInside)
 	{
 		params ["_pos"];
 		[getposatl(self getv(src)),self getv(radius),_pos] call interact_isPointInSphere
 	}
 
-	def(getBoundingBox)
+	decl(override) def(getBoundingBox)
 	{
 		private _sphereRadius = self getv(radius);
 
@@ -164,16 +169,16 @@ struct(ScriptedPointLightData) base(AbstractLightData)
 endstruct
 
 struct(ScriptedDirectLightData) base(AbstractLightData)
-	def(outAngle) 0
-	def(inAngle) 0
-	def(limit) 0
+	decl(float) def(outAngle) 0
+	decl(float) def(inAngle) 0
+	decl(float) def(limit) 0
 
-	def(pitch) 0
-	def(bank) 0
+	decl(float) def(pitch) 0
+	decl(float) def(bank) 0
 
-	def(distance) 0
+	decl(float) def(distance) 0
 
-	def(init)
+	decl(void(mesh;...any[])) def(init)
 	{
 		params ["_obj","_kvargs"];
 		{
@@ -181,9 +186,9 @@ struct(ScriptedDirectLightData) base(AbstractLightData)
 		} foreach _kvargs;
 	}
 
-	def(_onDrawRender)
+	decl(override) def(_onDrawRender)
 	{
-		_p = getposatl (self getv(src));
+		private _p = getposatl (self getv(src));
 		([self getv(src)] call model_getPitchBankYawAccurate) params ["_pt","_bk"];
 		
 		[
@@ -199,12 +204,12 @@ struct(ScriptedDirectLightData) base(AbstractLightData)
 		] call debug_drawLightConeEx
 	}
 
-	def(str)
+	decl(string()) def(str)
 	{
 		format["DirectLight(%1)<%2>",format["o:%1 i:%2 d:%3 pb:{%4,%5}",self getv(outAngle),self getv(inAngle),self getv(distance),self getv(pitch),self getv(bank)],self getv(src)]
 	}
 
-	def(isPointInside)
+	decl(override) def(isPointInside)
 	{
 		params ["_pos"];
 		private _obj = self getv(src);
@@ -216,7 +221,7 @@ struct(ScriptedDirectLightData) base(AbstractLightData)
 		] call interact_isPointInCone;
 	}
 
-	def(getBoundingBox)
+	decl(override) def(getBoundingBox)
 	{
 		private _src = self getv(src);
 		private _outerAngle = self getv(outAngle);
@@ -252,6 +257,7 @@ struct(ScriptedDirectLightData) base(AbstractLightData)
 endstruct
 
 #ifdef EDITOR
+decl(void(bool))
 lesc_setDebugRender = {
 	params ["_mode"];
 	{_x callp(setDebugRender,_mode)} foreach lesc_list_allDataObjs;
@@ -259,15 +265,18 @@ lesc_setDebugRender = {
 #endif
 
 //all light objects
+decl(mesh[])
 lesc_list_allObjects = [];
 
 //renderer list point lights
+decl(struct_t.AbstractLightData[])
 lesc_list_allDataObjs = [];
 
 /*
 	handle light object adding to scene
 	Вызывается при добавлении света
 */
+decl(void(mesh;bool))
 lesc_handleLight = {
 	params ["_lt",["_isDirect",false]];
 	lesc_list_allObjects pushBack _lt;
@@ -287,6 +296,7 @@ lesc_handleLight = {
 	};
 };
 
+decl(void(any))
 lesc_onLightRemove = {
 	params ["_dummyParam"];
 	if (objNull in lesc_list_allObjects) then {
@@ -300,6 +310,7 @@ lesc_onLightRemove = {
 	};
 };
 
+decl(void(mesh;string;any))
 lesc_handleProp = {
 	params ["_o","_prop","_val"];
 	if (_prop == "setLightAttenuation") then {
@@ -335,8 +346,10 @@ lesc_handleProp = {
 
 };
 
+decl(int)
 lesc_cullCnt = 0;
 
+decl(void())
 lesc_cullingProcess = {
 	
 	private _campos = positionCameraToWorld[0,0,0];
@@ -370,17 +383,19 @@ lesc_cullingProcess = {
 	lesc_cullCnt = _culled;
 };
 
-#ifndef LESC_ENABLE_CULLING
-__nocall_lesc_culling = {
-#endif
+decl(int) lesc_handle = -1;
+decl(thread_handle) lesc_thd = threadNull;
 
-#ifdef LESC_USE_FAST_UPDATE
-lesc_handle = startUpdate(lesc_cullingProcess,0.5);
-#else
-_looped = {while {true}do{call lesc_cullingProcess}};
-lesc_thd = threadStart(threadNew(_looped));
-#endif
-
-#ifndef LESC_ENABLE_CULLING
+__lesc_culling_start = {
+	#ifdef LESC_USE_FAST_UPDATE
+		lesc_handle = startUpdate(lesc_cullingProcess,0.5);
+	#else
+		private _looped = {while {true}do{call lesc_cullingProcess}};
+		lesc_thd = threadStart(threadNew(_looped));
+	#endif
 };
+
+
+#ifdef LESC_ENABLE_CULLING
+	call __lesc_culling_start;
 #endif

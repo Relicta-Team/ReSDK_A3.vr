@@ -1,0 +1,39 @@
+// ======================================================
+// Copyright (c) 2017-2025 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
+struct(VSTStrongArmor) base(VSTBase)
+
+	def(name) "VST_CLOTH_STRONGARMOR";
+
+	def(_list) [];
+
+	def(onCreated)
+	{
+		params ["_ctx"];
+		private _list = [];
+		self setv(_list,_list);
+		{
+			_x params ["_bias","_slot","_vec","_scale"];
+			private _o = createSimpleObject ["a3\structures_f\items\vessels\waterbarrel_f.p3d",[0,0,0],true];
+			_o attachTo [self getv(_src),_bias,_slot,true];
+			[_o,_vec] call model_SetPitchBankYaw;
+			_o setObjectScale _scale;
+			_list pushBack _o;
+		} foreach [
+			[[0,0,0.05],"spine3",[-3,0,0],0.37],
+			[[0,0,0],"pelvis",[-180,0,0],0.34],
+			[[0,0,-0.15],"rightupleg",[20,0,50],0.23],
+			[[0,0,-0.15],"leftupleg",[20,0,-50],0.23]
+		];
+	}
+
+	def(onDestroy)
+	{
+		params ["_ctx"];
+		{deleteVehicle _x} foreach (self getv(_list));
+		self setv(_list,[]);
+	}
+
+endstruct

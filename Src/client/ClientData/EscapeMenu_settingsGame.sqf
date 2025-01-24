@@ -3,7 +3,10 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
+namespace(clientData,cd_)
 
+enum(EscapeSettingDataIndex,SETTING_INDEX_)
 #define SETTING_INDEX_NAME 0
 #define SETTING_INDEX_DESC 1
 #define SETTING_INDEX_TYPE 2
@@ -15,36 +18,54 @@
 #define SETTING_INDEX_EVENTONAPPLY 8
 #define SETTING_INDEX_EVENTONABORT 9
 #define SETTING_INDEX_EVENTONCHANGE 10
+enumend
 
+inline_macro
 #define setting(name,desc,type,range,variable,event_on_apply,event_on_abort,event_on_change) [name,desc,type,range,#variable,variable,variable,variable,event_on_apply,event_on_abort,event_on_change]
 //Тоже что и setting но использует общее событие
+inline_macro
 #define settingTEvent(name,desc,type,range,variable,__EVNT__) [name,desc,type,range,#variable,variable,variable,variable,__EVNT__,__EVNT__,__EVNT__]
 
+inline_macro
 #define nextRegion(nameof) [nameof]
+macro_const(cd_COUNT_REGION_SETTINGS)
 #define COUNT_REGION_SETTINGS 1
+macro_const(cd_COLOR_BACKGROUND_REGION_NAME)
 #define COLOR_BACKGROUND_REGION_NAME [0.2,0.2,0.2,0.9]
 
+enum(EscapeSettingDataType,type)
 #define typeInputFloat 0
 #define typeSwitcher 1
 #define typeSlider 2
 #define typeBool 3
+enumend
 
+inline_macro
 #define centerize(val) "<t align='center'>" + val + "</t>"
-#define booleanText [centerize("нет"),centerize("да")]
-#define boolRange booleanText
-#define defRange(min,max) [min,max]
+
+macro_const(cd_boolRange)
+#define boolRange [centerize("нет"),centerize("да")]
+inline_macro
+#define defRange(min,max) ([min,max] call cd_internal_defRange)
+
+decl(float[](float;float))
+cd_internal_defRange = { params ["_mi","_ma"]; [_mi,_ma] };
 
 //отключенное событие просто будет устанавливать переменную по имени из SETTING_INDEX_VARNAME
+macro_const(cd_NO_EVENT_ON_APPLY)
 #define NO_EVENT_ON_APPLY ""
 
-#define value __eventValue
+#define value cd_esc_settings_internal_curChangedValue
+
+decl(any)
+cd_esc_settings_internal_curChangedValue = 0;
 
 // !!! only debug !!!
-somedebugvar1 = 1;
-somedebugvar2 = 1;
-testbool = false;
+decl(float) somedebugvar1 = 1;
+decl(float) somedebugvar2 = 1;
+decl(bool) testbool = false;
 
-
+decl(any[])
 cd_settingsGame = [
 /*	nextRegion("Основные"),
 	setting("Скрывать чат","Скрывает чат если нет новых сообщений",typeBool,boolRange,chat_isHideEnabled,NO_EVENT_ON_APPLY),
@@ -80,6 +101,7 @@ cd_settingsGame = [
 ];
 
 //событие выгрузки текущих настроек
+decl(void(bool))
 esc_settings_game_unloading = {
 	private _mode = _this;
 	if (_mode) then {
@@ -136,7 +158,7 @@ esc_settings_game_unloading = {
 		} foreach cd_settingsGame;
 	};
 };
-
+decl(void())
 esc_settings_loader_game = {
 
 	if (esc_settings_curIndex == 2) exitWith {};
@@ -230,6 +252,7 @@ esc_settings_loader_game = {
 };
 
 //событие ввода
+decl(void(widget;int))
 esc_settings_eventOnInput = {
 	params ["_bt","_key"];
 
@@ -247,6 +270,7 @@ esc_settings_eventOnInput = {
 };
 
 //событие переключателя
+decl(void(widget))
 esc_settings_eventOnSwitcher = {
 	params ["_bt"];
 	_curIdx = _bt getVariable "curIdx";
@@ -265,11 +289,12 @@ esc_settings_eventOnSwitcher = {
 	cd_settingsGame select (_bt getvariable "index") set [SETTING_INDEX_CURRENT,_newval];
 	
 	if !isNullVar(__f_init) exitWith {};
-	private value = _newval;
+	value = _newval;
 	call (cd_settingsGame select (_bt getVariable "index") select SETTING_INDEX_EVENTONCHANGE);
 };
 
 // событие слайдера
+decl(void(widget;float))
 esc_settings_eventOnSlider = {
 	params ["_bt", "_newValue"];
 
@@ -279,11 +304,12 @@ esc_settings_eventOnSlider = {
 	cd_settingsGame select (_bt getvariable "index") set [SETTING_INDEX_CURRENT,_newValue];
 	
 	if !isNullVar(__f_init) exitWith {};
-	private value = _newValue;
+	value = _newValue;
 	call (cd_settingsGame select (_bt getVariable "index") select SETTING_INDEX_EVENTONCHANGE);
 };
 
 // событие бинарного условия
+decl(void(widget))
 esc_settings_eventOnBool = {
 	params ["_bt"];
 
@@ -300,12 +326,13 @@ esc_settings_eventOnBool = {
 	cd_settingsGame select (_bt getvariable "index") set [SETTING_INDEX_CURRENT,_newCurValue];
 	
 	if !isNullVar(__f_init) exitWith {};
-	private value = _newCurValue;
+	value = _newCurValue;
 	call (cd_settingsGame select _idx select SETTING_INDEX_EVENTONCHANGE);
 };
 
 
 //событие синхронизирует все внешние изменения клавиш
+decl(void())
 esc_settings_event_onSyncGame = {
 	{
 		if (count _x == COUNT_REGION_SETTINGS) then {continue};
@@ -313,7 +340,8 @@ esc_settings_event_onSyncGame = {
 	} foreach cd_settingsGame;
 };
 
-_onLoadGameSettings = {
+decl(void(...any[]))
+cd_onLoadGameSettings = {
 	private _list = _this;
 	private _listAllowedVarNames = cd_settingsGame apply {if (count _x == COUNT_REGION_SETTINGS)then{"<__system:region__>"}else{tolower(_x select SETTING_INDEX_VARNAME)}};
 	private _remList = [];
@@ -365,7 +393,7 @@ _onLoadGameSettings = {
 		warningformat("rpc::onLoadGameSettings() - outdated keys found: %1",count _remList);
 		rpcSendToServer("syncGameSettings",[_remList arg clientOwner]);
 	};
-}; rpcAdd("onLoadGameSettings",_onLoadGameSettings);
+}; rpcAdd("onLoadGameSettings",cd_onLoadGameSettings);
 
 
 //validate variable settings

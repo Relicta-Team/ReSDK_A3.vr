@@ -1,4 +1,4 @@
-__metaInfo__ = 'Builded on editor version: 1.18';__metaInfoVersion__ = 4;go_editor_globalRefs = createHashMap;
+__metaInfo__ = 'Builded on editor version: 1.19';__metaInfoVersion__ = 5;go_editor_globalRefs = createHashMap;
 
 reditor_binding_fc = {
 private _o = _this deleteAt 0;
@@ -399,7 +399,7 @@ _3455_342773637_5549324_94983 = ['IStruct',[3455.34,3637.55,30.7412,true],98.134
 _3486_148683640_6464825_08593 = ['Umivalnik',[3486.15,3640.65,25.0859],270,[0,0,1]] call InitStruct; 
 ['RifleBastard',[3455.97,3639.03,33.6011,true],0,[-0.00659628,-0.424076,0.905603]] call InitItem; 
 ['RifleBastard',[3455.96,3639.28,33.6187,true],[-6.763e-06,-0.905624,0.424081],[0.00658919,0.424072,0.905604]] call InitItem; 
-['ILightibleStruct',[3458.92,3647.53,24.9845],0,[0,0,1], {_thisObj setvariable ['light',SLIGHT_SHIT_SMELL_var];}] call InitStruct; 
+['ILightibleStruct',[3458.99,3647.51,30.295,true],[0.246424,0.124557,0.961125],[-0.216609,0.973698,-0.0706504], {_thisObj setvariable ['light',"SLIGHT_SHIT_SMELL" call lightSys_getConfigIdByName];}] call InitStruct; 
 ['MediumConcreteBlockDestroyed',[3467.78,3635.22,25.098],0,[0,0,1]] call InitStruct; 
 ['MediumConcreteBlockDestroyed',[3457.82,3633.55,25.0683],230,[0,0,1]] call InitStruct; 
 ['ConcreteSlabsStack',[3477.36,3641.42,25.0678],0,[0,0,1]] call InitStruct; 
@@ -1049,7 +1049,7 @@ _3406_678963708_600347_98954 = ['ElectricalShield',[3406.68,3708.6,7.98954],180.
 }] call InitStruct; 
 ['LampCeiling',[3411.94,3697.71,29.7631],0,[0,0,1], {go_editor_globalRefs set ["Imported LampCeiling56063",_thisObj];
 }] call InitStruct; 
-['LampCeiling_Red',[3444.59,3733.74,31.0375],0,[0,0,1], {go_editor_globalRefs set ["Imported LampCeiling_Red54736",_thisObj];
+['LampCeiling_Red',[3444.59,3733.74,30.1554],0,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_THEATRE_SCENE_AREA_MAIN" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported LampCeiling_Red54736",_thisObj];
 }] call InitStruct; 
 ['LampCeiling',[3418.22,3658.94,28.3245],0,[0,0,1], {go_editor_globalRefs set ["Imported LampCeiling469303",_thisObj];
 }] call InitStruct; 
@@ -1063,33 +1063,33 @@ _3406_678963708_600347_98954 = ['ElectricalShield',[3406.68,3708.6,7.98954],180.
 }] call InitStruct; 
 _3421_001223552_166507_52494 = ['PowerGenerator',[3421,3552.17,7.52494],0,[0,0,1], {go_editor_globalRefs set ["_gen",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3357.2,3727.07,26.9121],60.3326,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp541131",_thisObj];
+['StreetLamp',[3357.2,3727.07,26.9121],60.3326,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp541131",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3370.55,3671.12,26.8827],120.584,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp788408",_thisObj];
+['StreetLamp',[3370.55,3671.12,26.8827],120.584,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp788408",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3381.47,3680.85,27.2718],285.585,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp683191",_thisObj];
+['StreetLamp',[3381.47,3680.85,27.2718],285.585,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp683191",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3366.62,3709.82,26.8797],85.3326,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp299223",_thisObj];
+['StreetLamp',[3366.62,3709.82,26.8797],85.3326,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp299223",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3384.65,3709.93,26.8651],269.973,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp98921",_thisObj];
+['StreetLamp',[3384.65,3709.93,26.8651],269.973,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp98921",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3424.24,3670.82,24.9854],170.748,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp381331",_thisObj];
+['StreetLamp',[3424.24,3670.82,24.9854],170.748,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp381331",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3397.56,3657.79,26.6515],1.00613,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp307249",_thisObj];
+['StreetLamp',[3397.56,3657.79,26.6515],1.00613,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp307249",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3419.94,3729.42,24.988],355.374,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp625248",_thisObj];
+['StreetLamp',[3419.94,3729.42,24.988],355.374,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp625248",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3437.86,3630.52,24.9524],68.8429,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp219203",_thisObj];
+['StreetLamp',[3437.86,3630.52,24.9524],68.8429,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp219203",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3454.83,3667.08,24.8606],228.553,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp394622",_thisObj];
+['StreetLamp',[3454.83,3667.08,24.8606],228.553,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp394622",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3436.68,3719.03,25.8038],103.384,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp674401",_thisObj];
+['StreetLamp',[3436.68,3719.03,25.8038],103.384,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp674401",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3440.37,3692.41,24.8315],65.8472,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp782069",_thisObj];
+['StreetLamp',[3440.37,3692.41,24.8315],65.8472,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp782069",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3464.19,3703.05,26.1587],334.762,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp435861",_thisObj];
+['StreetLamp',[3464.19,3703.05,26.1587],334.762,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp435861",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3447.85,3706.26,25.0044],272.697,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp782069 (2)",_thisObj];
+['StreetLamp',[3447.85,3706.26,25.0044],272.697,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp782069 (2)",_thisObj];
 }] call InitStruct; 
 _3454_833253641_1513727_91209 = ['SignBar',[3454.83,3641.15,27.9121],181.594,[0,0,1], {go_editor_globalRefs set ["Imported SignBar549678",_thisObj];
 }] call InitStruct; 
@@ -1173,21 +1173,21 @@ _3478_830083642_9831526_63170 = ['Tumbler',[3478.83,3642.98,26.6317],270,[0,0,1]
 }] call InitStruct; 
 _3478_828133642_9785226_10868 = ['Tumbler',[3478.83,3642.98,26.1087],270,[0,0,1], {go_editor_globalRefs set ["_room2f_glob",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3478.06,3597.83,24.9744],312.674,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["StreetLamp G:oNY70Wu+yPw",_thisObj];
+['StreetLamp',[3478.06,3597.83,24.9744],312.674,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["StreetLamp G:oNY70Wu+yPw",_thisObj];
 }] call InitStruct; 
-['LampCeiling_Red',[3446.31,3682.97,29.6476],0,[0,0,1], {go_editor_globalRefs set ["Imported LampCeiling_Red54736 (1)",_thisObj];
+['LampCeiling_Red',[3446.31,3682.97,29.3633],0,[0,0,1], {go_editor_globalRefs set ["Imported LampCeiling_Red54736 (1)",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3436.8,3671.81,24.9797],143.553,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp394622 (1)",_thisObj];
+['StreetLamp',[3436.8,3671.81,24.9797],143.553,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp394622 (1)",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3439.55,3651.03,25.0002],53.5533,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp394622 (2)",_thisObj];
+['StreetLamp',[3443.73,3650.77,25.0002],53.5533,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp394622 (2)",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3413.18,3658.22,24.9],338.553,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp394622 (3)",_thisObj];
+['StreetLamp',[3413.18,3658.22,24.9],338.553,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp394622 (3)",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3376.59,3651.51,26.8408],328.553,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp394622 (4)",_thisObj];
+['StreetLamp',[3376.59,3651.51,26.8408],328.553,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp394622 (4)",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3373.38,3694.3,26.9388],133.553,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["Imported StreetLamp394622 (5)",_thisObj];
+['StreetLamp',[3373.38,3694.3,26.9388],133.553,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp394622 (5)",_thisObj];
 }] call InitStruct; 
-['StreetLamp',[3456.63,3604.8,25.6732],32.6739,[0,0,1], {_thisObj setvariable ['light',SLIGHT_STREET_LAMP_var]; go_editor_globalRefs set ["StreetLamp G:oNY70Wu+yPw (1)",_thisObj];
+['StreetLamp',[3456.63,3604.8,25.6732],32.6739,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["StreetLamp G:oNY70Wu+yPw (1)",_thisObj];
 }] call InitStruct; 
 ['LampCeiling_Red',[3469.49,3643.53,27.7],0,[0,0,1], {go_editor_globalRefs set ["Imported LampCeiling_Red589334 (1)",_thisObj];
 }] call InitStruct; 
@@ -1208,6 +1208,10 @@ _3432_722903653_9841327_37082 = ['RedButton',[3432.72,3653.98,32.3707,true],0,[1
 _3432_709723653_7087427_36783 = ['RedButton',[3432.71,3653.71,32.3677,true],0,[1,0,1.19249e-08], {go_editor_globalRefs set ["RedButton G:/AhUzzHCDzM",_thisObj];
 }] call InitStruct; 
 _3432_711673653_4465327_36512 = ['RedButton',[3432.71,3653.45,32.365,true],2.86681e-12,[1,0,1.19249e-08], {go_editor_globalRefs set ["RedButton G:5P+kpUj2oP0",_thisObj];
+}] call InitStruct; 
+['LampCeiling_Red',[3391.2,3734.19,31.7019],345,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_THEATRE_SCENE_AREA_MAIN" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported LampCeiling_Red54736 (4)",_thisObj];
+}] call InitStruct; 
+['StreetLamp',[3450.07,3626.37,24.661],353.553,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["Imported StreetLamp394622 (6)",_thisObj];
 }] call InitStruct; 
 _3370_036383698_403088_47983 = ['Decor',[3370.04,3698.4,8.47983],270,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\dominants\castle\castle_01_tower_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3410_695313648_235607_33084 = ['Decor',[3410.7,3648.24,7.33084],270,[0,0,1], {_thisObj setvariable ['model','a3\structures_f\dominants\castle\castle_01_tower_f.p3d'];}] call InitDecor; // !!! realocated model !!!
@@ -2014,6 +2018,7 @@ _3424_681403498_129880_80898 = ['IStruct',[3424.68,3498.13,5.80182,true],[-0.006
 _3420_941893497_050291_37144 = ['IStruct',[3420.94,3497.05,1.37144],0,[0,0,1], {_thisObj setvariable ['model','ca\structures\wall\wall_cyel_5.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3420_738043499_405031_46790 = ['IStruct',[3420.74,3499.41,6.66745,true],95.3356,[7.75496e-05,0.000909055,1], {_thisObj setvariable ['model','relicta_models\models\mutants\spider.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3420_746093499_722662_13411 = ['IStruct',[3420.75,3499.72,7.13388,true],0,[-0.00091349,0,1], {_thisObj setvariable ['model','ml_shabut\exoduss\shyrevo.p3d'];}] call InitStruct; // !!! realocated model !!!
+['LongRottenBoards',[3391.17,3734.41,37.3084,true],[-0.258819,0.965926,-4.15837e-07],[0.965926,0.258819,1.95403e-08]] call InitStruct; 
 
 
 
@@ -2306,6 +2311,8 @@ if (!isNil'_3406_678963708_600347_98954') then {
 	[_3406_678963708_600347_98954,go_editor_globalRefs get "RedButton G:ZHnk/2rK28c"] call (_3406_678963708_600347_98954 getvariable 'proto' getvariable 'addConnection');
 	[_3406_678963708_600347_98954,go_editor_globalRefs get "RedButton G:/AhUzzHCDzM"] call (_3406_678963708_600347_98954 getvariable 'proto' getvariable 'addConnection');
 	[_3406_678963708_600347_98954,go_editor_globalRefs get "RedButton G:5P+kpUj2oP0"] call (_3406_678963708_600347_98954 getvariable 'proto' getvariable 'addConnection');
+	[_3406_678963708_600347_98954,go_editor_globalRefs get "Imported LampCeiling_Red54736 (4)"] call (_3406_678963708_600347_98954 getvariable 'proto' getvariable 'addConnection');
+	[_3406_678963708_600347_98954,go_editor_globalRefs get "Imported StreetLamp394622 (6)"] call (_3406_678963708_600347_98954 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3421_001223552_166507_52494') then {
 	[_3421_001223552_166507_52494,go_editor_globalRefs get "_transpolice"] call (_3421_001223552_166507_52494 getvariable 'proto' getvariable 'addConnection');

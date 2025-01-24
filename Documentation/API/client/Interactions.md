@@ -11,7 +11,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\Interactions\aim_cursor.sqf at line 7](../../../Src/client/Interactions/aim_cursor.sqf#L7)
+File: [client\Interactions\aim_cursor.sqf at line 11](../../../Src/client/Interactions/aim_cursor.sqf#L11)
 ## interaction_aim_handle
 
 Type: Variable
@@ -23,7 +23,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [client\Interactions\aim_cursor.sqf at line 9](../../../Src/client/Interactions/aim_cursor.sqf#L9)
+File: [client\Interactions\aim_cursor.sqf at line 14](../../../Src/client/Interactions/aim_cursor.sqf#L14)
 ## interaction_aim_alphaUpdHandle
 
 Type: Variable
@@ -35,7 +35,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [client\Interactions\aim_cursor.sqf at line 10](../../../Src/client/Interactions/aim_cursor.sqf#L10)
+File: [client\Interactions\aim_cursor.sqf at line 16](../../../Src/client/Interactions/aim_cursor.sqf#L16)
 ## interaction_aim_widgets
 
 Type: Variable
@@ -47,7 +47,7 @@ Initial value:
 ```sqf
 [widgetNull]
 ```
-File: [client\Interactions\aim_cursor.sqf at line 12](../../../Src/client/Interactions/aim_cursor.sqf#L12)
+File: [client\Interactions\aim_cursor.sqf at line 19](../../../Src/client/Interactions/aim_cursor.sqf#L19)
 ## interaction_aim_init
 
 Type: function
@@ -55,7 +55,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\aim_cursor.sqf at line 18](../../../Src/client/Interactions/aim_cursor.sqf#L18)
+File: [client\Interactions\aim_cursor.sqf at line 26](../../../Src/client/Interactions/aim_cursor.sqf#L26)
 ## interaction_aim_getStdPos
 
 Type: function
@@ -63,7 +63,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\aim_cursor.sqf at line 33](../../../Src/client/Interactions/aim_cursor.sqf#L33)
+File: [client\Interactions\aim_cursor.sqf at line 42](../../../Src/client/Interactions/aim_cursor.sqf#L42)
 ## interaction_aim_alphaUpdate
 
 Type: function
@@ -73,7 +73,7 @@ Description:
 - Param: _g
 - Param: _b
 
-File: [client\Interactions\aim_cursor.sqf at line 38](../../../Src/client/Interactions/aim_cursor.sqf#L38)
+File: [client\Interactions\aim_cursor.sqf at line 48](../../../Src/client/Interactions/aim_cursor.sqf#L48)
 ## interaction_aim_applyColorTheme
 
 Type: function
@@ -81,7 +81,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\aim_cursor.sqf at line 64](../../../Src/client/Interactions/aim_cursor.sqf#L64)
+File: [client\Interactions\aim_cursor.sqf at line 75](../../../Src/client/Interactions/aim_cursor.sqf#L75)
 ## interaction_aim_onUpdate
 
 Type: function
@@ -89,7 +89,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\aim_cursor.sqf at line 68](../../../Src/client/Interactions/aim_cursor.sqf#L68)
+File: [client\Interactions\aim_cursor.sqf at line 80](../../../Src/client/Interactions/aim_cursor.sqf#L80)
 # interact.hpp
 
 ## INTERACT_ITEM_DISTANCE
@@ -103,7 +103,7 @@ Replaced value:
 ```sqf
 1.35
 ```
-File: [client\Interactions\interact.hpp at line 7](../../../Src/client/Interactions/interact.hpp#L7)
+File: [client\Interactions\interact.hpp at line 11](../../../Src/client/Interactions/interact.hpp#L11)
 ## INTERACT_ITEM_LEG_DISTANCE
 
 Type: constant
@@ -115,7 +115,7 @@ Replaced value:
 ```sqf
 1.7
 ```
-File: [client\Interactions\interact.hpp at line 8](../../../Src/client/Interactions/interact.hpp#L8)
+File: [client\Interactions\interact.hpp at line 13](../../../Src/client/Interactions/interact.hpp#L13)
 ## INTERACT_MOB_DISTANCE
 
 Type: constant
@@ -127,7 +127,7 @@ Replaced value:
 ```sqf
 1.2
 ```
-File: [client\Interactions\interact.hpp at line 9](../../../Src/client/Interactions/interact.hpp#L9)
+File: [client\Interactions\interact.hpp at line 15](../../../Src/client/Interactions/interact.hpp#L15)
 ## INTERACT_MOB_COLLECT_DIST
 
 Type: constant
@@ -139,7 +139,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\Interactions\interact.hpp at line 10](../../../Src/client/Interactions/interact.hpp#L10)
+File: [client\Interactions\interact.hpp at line 17](../../../Src/client/Interactions/interact.hpp#L17)
 ## WORLD_CONTAINER_ALLOWDISTANCE
 
 Type: constant
@@ -151,7 +151,7 @@ Replaced value:
 ```sqf
 INTERACT_ITEM_DISTANCE
 ```
-File: [client\Interactions\interact.hpp at line 11](../../../Src/client/Interactions/interact.hpp#L11)
+File: [client\Interactions\interact.hpp at line 19](../../../Src/client/Interactions/interact.hpp#L19)
 ## INTERACT_DISTANCE
 
 Type: constant
@@ -163,7 +163,7 @@ Replaced value:
 ```sqf
 1.35
 ```
-File: [client\Interactions\interact.hpp at line 14](../../../Src/client/Interactions/interact.hpp#L14)
+File: [client\Interactions\interact.hpp at line 22](../../../Src/client/Interactions/interact.hpp#L22)
 ## getHeadMobPos(mob)
 
 Type: constant
@@ -175,7 +175,7 @@ Replaced value:
 ```sqf
 (mob modelToWorld (mob selectionPosition "head"))
 ```
-File: [client\Interactions\interact.hpp at line 16](../../../Src/client/Interactions/interact.hpp#L16)
+File: [client\Interactions\interact.hpp at line 25](../../../Src/client/Interactions/interact.hpp#L25)
 ## getCenterMobPos(mob)
 
 Type: constant
@@ -187,7 +187,7 @@ Replaced value:
 ```sqf
 (mob modelToWorld (mob selectionPosition("spine3")))
 ```
-File: [client\Interactions\interact.hpp at line 17](../../../Src/client/Interactions/interact.hpp#L17)
+File: [client\Interactions\interact.hpp at line 27](../../../Src/client/Interactions/interact.hpp#L27)
 ## isInteractible(targ)
 
 Type: constant
@@ -199,7 +199,7 @@ Replaced value:
 ```sqf
 ((targ getVariable ["isInteractible",true] && inventory_isPressedInteractButton) || (typeof targ == BASIC_MOB_TYPE))
 ```
-File: [client\Interactions\interact.hpp at line 19](../../../Src/client/Interactions/interact.hpp#L19)
+File: [client\Interactions\interact.hpp at line 30](../../../Src/client/Interactions/interact.hpp#L30)
 ## VERB_LASTCHECKEDOBJECTDATA_DEFAULT
 
 Type: constant
@@ -211,7 +211,7 @@ Replaced value:
 ```sqf
 [objNull,[0,0,0],false]
 ```
-File: [client\Interactions\interact.hpp at line 21](../../../Src/client/Interactions/interact.hpp#L21)
+File: [client\Interactions\interact.hpp at line 33](../../../Src/client/Interactions/interact.hpp#L33)
 ## INTERACT_LODS_CHECK_STANDART
 
 Type: constant
@@ -221,33 +221,33 @@ Description:
 
 Replaced value:
 ```sqf
-"VIEW","FIRE"
+"VIEW","FIRE"/*interact_lods_check_standart*/
 ```
-File: [client\Interactions\interact.hpp at line 23](../../../Src/client/Interactions/interact.hpp#L23)
+File: [client\Interactions\interact.hpp at line 36](../../../Src/client/Interactions/interact.hpp#L36)
 ## INTERACT_LODS_CHECK_GEOM
 
 Type: constant
 
-Description: #define INTERACT_LODS_CHECK_STANDART "ROADWAY","VIEW"
+Description: 
 
 
 Replaced value:
 ```sqf
-"GEOM","VIEW"
+"GEOM","VIEW"/*interact_lods_check_geom*/
 ```
-File: [client\Interactions\interact.hpp at line 25](../../../Src/client/Interactions/interact.hpp#L25)
+File: [client\Interactions\interact.hpp at line 39](../../../Src/client/Interactions/interact.hpp#L39)
 ## INTERACT_RPC_CLICK
 
 Type: constant
 
-Description: interact modes in rpc iact
+Description: 
 
 
 Replaced value:
 ```sqf
 0
 ```
-File: [client\Interactions\interact.hpp at line 28](../../../Src/client/Interactions/interact.hpp#L28)
+File: [client\Interactions\interact.hpp at line 43](../../../Src/client/Interactions/interact.hpp#L43)
 ## INTERACT_RPC_ALTCLICK
 
 Type: constant
@@ -259,7 +259,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Interactions\interact.hpp at line 29](../../../Src/client/Interactions/interact.hpp#L29)
+File: [client\Interactions\interact.hpp at line 44](../../../Src/client/Interactions/interact.hpp#L44)
 ## INTERACT_RPC_EXAMINE
 
 Type: constant
@@ -271,7 +271,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Interactions\interact.hpp at line 30](../../../Src/client/Interactions/interact.hpp#L30)
+File: [client\Interactions\interact.hpp at line 45](../../../Src/client/Interactions/interact.hpp#L45)
 ## INTERACT_RPC_MAIN
 
 Type: constant
@@ -283,7 +283,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\Interactions\interact.hpp at line 31](../../../Src/client/Interactions/interact.hpp#L31)
+File: [client\Interactions\interact.hpp at line 46](../../../Src/client/Interactions/interact.hpp#L46)
 ## INTERACT_RPC_EXTRA
 
 Type: constant
@@ -295,7 +295,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [client\Interactions\interact.hpp at line 32](../../../Src/client/Interactions/interact.hpp#L32)
+File: [client\Interactions\interact.hpp at line 47](../../../Src/client/Interactions/interact.hpp#L47)
 ## INTERACT_RPC_CLICK_SELF
 
 Type: constant
@@ -307,7 +307,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\Interactions\interact.hpp at line 33](../../../Src/client/Interactions/interact.hpp#L33)
+File: [client\Interactions\interact.hpp at line 48](../../../Src/client/Interactions/interact.hpp#L48)
 ## INTERACT_PROGRESS_TYPE_FULL
 
 Type: constant
@@ -319,7 +319,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Interactions\interact.hpp at line 41](../../../Src/client/Interactions/interact.hpp#L41)
+File: [client\Interactions\interact.hpp at line 58](../../../Src/client/Interactions/interact.hpp#L58)
 ## INTERACT_PROGRESS_TYPE_MEDIUM
 
 Type: constant
@@ -331,7 +331,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Interactions\interact.hpp at line 42](../../../Src/client/Interactions/interact.hpp#L42)
+File: [client\Interactions\interact.hpp at line 59](../../../Src/client/Interactions/interact.hpp#L59)
 ## INTERACT_PROGRESS_TYPE_LAZY
 
 Type: constant
@@ -343,7 +343,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Interactions\interact.hpp at line 43](../../../Src/client/Interactions/interact.hpp#L43)
+File: [client\Interactions\interact.hpp at line 60](../../../Src/client/Interactions/interact.hpp#L60)
 ## ATTACK_TYPE_ASSOC_HAND
 
 Type: constant
@@ -355,7 +355,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Interactions\interact.hpp at line 46](../../../Src/client/Interactions/interact.hpp#L46)
+File: [client\Interactions\interact.hpp at line 64](../../../Src/client/Interactions/interact.hpp#L64)
 ## ATTACK_TYPE_ASSOC_THRUST_ONLY
 
 Type: constant
@@ -367,7 +367,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Interactions\interact.hpp at line 48](../../../Src/client/Interactions/interact.hpp#L48)
+File: [client\Interactions\interact.hpp at line 66](../../../Src/client/Interactions/interact.hpp#L66)
 ## ATTACK_TYPE_ASSOC_SWING_ONLY
 
 Type: constant
@@ -379,7 +379,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Interactions\interact.hpp at line 50](../../../Src/client/Interactions/interact.hpp#L50)
+File: [client\Interactions\interact.hpp at line 68](../../../Src/client/Interactions/interact.hpp#L68)
 ## ATTACK_TYPE_ASSOC_STANDARD
 
 Type: constant
@@ -391,7 +391,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\Interactions\interact.hpp at line 52](../../../Src/client/Interactions/interact.hpp#L52)
+File: [client\Interactions\interact.hpp at line 70](../../../Src/client/Interactions/interact.hpp#L70)
 ## ATTACK_TYPE_ASSOC_WPN_HANDLE
 
 Type: constant
@@ -403,7 +403,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [client\Interactions\interact.hpp at line 54](../../../Src/client/Interactions/interact.hpp#L54)
+File: [client\Interactions\interact.hpp at line 72](../../../Src/client/Interactions/interact.hpp#L72)
 ## ATTACK_TYPE_ASSOC_WPN_1
 
 Type: constant
@@ -415,7 +415,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\Interactions\interact.hpp at line 55](../../../Src/client/Interactions/interact.hpp#L55)
+File: [client\Interactions\interact.hpp at line 73](../../../Src/client/Interactions/interact.hpp#L73)
 ## ATTACK_TYPE_ASSOC_WPN_1_3
 
 Type: constant
@@ -427,7 +427,7 @@ Replaced value:
 ```sqf
 6
 ```
-File: [client\Interactions\interact.hpp at line 56](../../../Src/client/Interactions/interact.hpp#L56)
+File: [client\Interactions\interact.hpp at line 74](../../../Src/client/Interactions/interact.hpp#L74)
 ## ATTACK_TYPE_ASSOC_SWING_HANDLE
 
 Type: constant
@@ -439,7 +439,7 @@ Replaced value:
 ```sqf
 7
 ```
-File: [client\Interactions\interact.hpp at line 58](../../../Src/client/Interactions/interact.hpp#L58)
+File: [client\Interactions\interact.hpp at line 76](../../../Src/client/Interactions/interact.hpp#L76)
 ## ATTACK_TYPE_ASSOC_IS_SHOOTING(v)
 
 Type: constant
@@ -451,7 +451,7 @@ Replaced value:
 ```sqf
 (v in [ATTACK_TYPE_ASSOC_WPN_1,ATTACK_TYPE_ASSOC_WPN_1_3])
 ```
-File: [client\Interactions\interact.hpp at line 60](../../../Src/client/Interactions/interact.hpp#L60)
+File: [client\Interactions\interact.hpp at line 80](../../../Src/client/Interactions/interact.hpp#L80)
 # interact.sqf
 
 ## __hardcoded_angle__
@@ -465,7 +465,7 @@ Replaced value:
 ```sqf
 -0.2
 ```
-File: [client\Interactions\interact.sqf at line 279](../../../Src/client/Interactions/interact.sqf#L279)
+File: [client\Interactions\interact.sqf at line 292](../../../Src/client/Interactions/interact.sqf#L292)
 ## verb_internal_bufferedObjData
 
 Type: Variable
@@ -477,7 +477,7 @@ Initial value:
 ```sqf
 [[objNUll,vec3(0,0,0),false],[50,50]]
 ```
-File: [client\Interactions\interact.sqf at line 106](../../../Src/client/Interactions/interact.sqf#L106)
+File: [client\Interactions\interact.sqf at line 112](../../../Src/client/Interactions/interact.sqf#L112)
 ## verb_internal_isAwaitWorldVerb
 
 Type: Variable
@@ -489,7 +489,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Interactions\interact.sqf at line 107](../../../Src/client/Interactions/interact.sqf#L107)
+File: [client\Interactions\interact.sqf at line 114](../../../Src/client/Interactions/interact.sqf#L114)
 ## interact_isOpenMousemode
 
 Type: Variable
@@ -501,7 +501,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Interactions\interact.sqf at line 468](../../../Src/client/Interactions/interact.sqf#L468)
+File: [client\Interactions\interact.sqf at line 490](../../../Src/client/Interactions/interact.sqf#L490)
 ## interact_isMouseModeActive
 
 Type: Variable
@@ -513,7 +513,7 @@ Initial value:
 ```sqf
 true //допускается ли активность режима мышь/мир
 ```
-File: [client\Interactions\interact.sqf at line 469](../../../Src/client/Interactions/interact.sqf#L469)
+File: [client\Interactions\interact.sqf at line 492](../../../Src/client/Interactions/interact.sqf#L492)
 ## interact_isActive
 
 Type: function
@@ -522,7 +522,7 @@ Description:
 - Param: _conscious (optional, default true)
 - Param: _stunned (optional, default false)
 
-File: [client\Interactions\interact.sqf at line 44](../../../Src/client/Interactions/interact.sqf#L44)
+File: [client\Interactions\interact.sqf at line 47](../../../Src/client/Interactions/interact.sqf#L47)
 ## interact_onLMBPress
 
 Type: function
@@ -531,7 +531,7 @@ Description:
 - Param: _isWorld (optional, default true)
 - Param: _isSelfClick (optional, default false)
 
-File: [client\Interactions\interact.sqf at line 50](../../../Src/client/Interactions/interact.sqf#L50)
+File: [client\Interactions\interact.sqf at line 54](../../../Src/client/Interactions/interact.sqf#L54)
 ## interact_onRMBPress
 
 Type: function
@@ -539,7 +539,7 @@ Type: function
 Description: 
 - Param: _isWorld (optional, default true)
 
-File: [client\Interactions\interact.sqf at line 73](../../../Src/client/Interactions/interact.sqf#L73)
+File: [client\Interactions\interact.sqf at line 78](../../../Src/client/Interactions/interact.sqf#L78)
 ## interact_onMainAction
 
 Type: function
@@ -548,7 +548,7 @@ Description:
 - Param: _obj
 - Param: _posAtl
 
-File: [client\Interactions\interact.sqf at line 110](../../../Src/client/Interactions/interact.sqf#L110)
+File: [client\Interactions\interact.sqf at line 117](../../../Src/client/Interactions/interact.sqf#L117)
 ## interact_onExtraAction
 
 Type: function
@@ -557,16 +557,16 @@ Description:
 - Param: _obj
 - Param: _posAtl
 
-File: [client\Interactions\interact.sqf at line 125](../../../Src/client/Interactions/interact.sqf#L125)
+File: [client\Interactions\interact.sqf at line 133](../../../Src/client/Interactions/interact.sqf#L133)
 ## interact_sendAction
 
 Type: function
 
-Description: параметры: _isMouseMode - если включен то вектор направления будет браться от позиции мыши
+Description: 
 - Param: _isMouseMode
 - Param: _actionType
 
-File: [client\Interactions\interact.sqf at line 141](../../../Src/client/Interactions/interact.sqf#L141)
+File: [client\Interactions\interact.sqf at line 150](../../../Src/client/Interactions/interact.sqf#L150)
 ## interact_setCombatMode
 
 Type: function
@@ -574,116 +574,116 @@ Type: function
 Description: 
 - Param: _newMode
 
-File: [client\Interactions\interact.sqf at line 172](../../../Src/client/Interactions/interact.sqf#L172)
+File: [client\Interactions\interact.sqf at line 181](../../../Src/client/Interactions/interact.sqf#L181)
 ## interact_cursorObject
 
 Type: function
 
-Description: Получает цель. В отличии от cursorObject может поймать объект в этом же кадре при свапе видимости
+Description: 
 
 
-File: [client\Interactions\interact.sqf at line 190](../../../Src/client/Interactions/interact.sqf#L190)
+File: [client\Interactions\interact.sqf at line 200](../../../Src/client/Interactions/interact.sqf#L200)
 ## interact_getCursorIntersectPos
 
 Type: function
 
-Description: Получает точку пересечения центра экрана в мир
+Description: 
 
 
-File: [client\Interactions\interact.sqf at line 221](../../../Src/client/Interactions/interact.sqf#L221)
+File: [client\Interactions\interact.sqf at line 232](../../../Src/client/Interactions/interact.sqf#L232)
 ## interact_getIntersectData
 
 Type: function
 
-Description: Получает информацию об объекте пересечения в виде: [object, intersect position as ATL,vectorUp lod]
+Description: 
 - Param: _ignored
 
-File: [client\Interactions\interact.sqf at line 247](../../../Src/client/Interactions/interact.sqf#L247)
+File: [client\Interactions\interact.sqf at line 259](../../../Src/client/Interactions/interact.sqf#L259)
 ## interact_getMouseIntersectData
 
 Type: function
 
-Description: Функция аналогична interact_getIntersectData но по-умоному вычисляет позицию не из центра а из мыши (если возможно)
+Description: 
 - Param: _ignored
 
-File: [client\Interactions\interact.sqf at line 275](../../../Src/client/Interactions/interact.sqf#L275)
+File: [client\Interactions\interact.sqf at line 288](../../../Src/client/Interactions/interact.sqf#L288)
 ## interact_getRayCastData
 
 Type: function
 
-Description: возвращает [object,atl pos,vectorup normal]
+Description: 
 - Param: _startPos
 - Param: _endPos
 - Param: _ig1 (optional, default objnull)
 - Param: _ig2 (optional, default objnull)
 
-File: [client\Interactions\interact.sqf at line 303](../../../Src/client/Interactions/interact.sqf#L303)
+File: [client\Interactions\interact.sqf at line 317](../../../Src/client/Interactions/interact.sqf#L317)
 ## interact_checkPosition
 
 Type: function
 
-Description: Проверяет дистанцию до позиции - может ли взаимодействовать по дистанции
+Description: 
 
 
-File: [client\Interactions\interact.sqf at line 331](../../../Src/client/Interactions/interact.sqf#L331)
+File: [client\Interactions\interact.sqf at line 346](../../../Src/client/Interactions/interact.sqf#L346)
 ## interact_inScreenView
 
 Type: function
 
-Description: Проверяет видимость позиции в экране
+Description: 
 
 
-File: [client\Interactions\interact.sqf at line 336](../../../Src/client/Interactions/interact.sqf#L336)
+File: [client\Interactions\interact.sqf at line 352](../../../Src/client/Interactions/interact.sqf#L352)
 ## interact_getHeadDirection
 
 Type: function
 
-Description: Получает направление (азимут) головы. Взято с TFAR_fnc_currentDirection
+Description: 
 
 
-File: [client\Interactions\interact.sqf at line 341](../../../Src/client/Interactions/interact.sqf#L341)
+File: [client\Interactions\interact.sqf at line 358](../../../Src/client/Interactions/interact.sqf#L358)
 ## interact_canTouchPosition
 
 Type: function
 
-Description: Иным образом функция является проверкой: может ли игрок дотянуться рукой до позиции
+Description: 
 - Param: _posAtl
 - Param: _ignored (optional, default objNull)
 
-File: [client\Interactions\interact.sqf at line 369](../../../Src/client/Interactions/interact.sqf#L369)
+File: [client\Interactions\interact.sqf at line 387](../../../Src/client/Interactions/interact.sqf#L387)
 ## interact_canInteractWithObject
 
 Type: function
 
-Description: Основной обработчик возможности взаимодействия с пердметом. Включает в себя все стандартные проверки позиции, направления и пересечения
+Description: 
 - Param: _object
 - Param: _pos
 
-File: [client\Interactions\interact.sqf at line 398](../../../Src/client/Interactions/interact.sqf#L398)
+File: [client\Interactions\interact.sqf at line 417](../../../Src/client/Interactions/interact.sqf#L417)
 ## interact_getNearPointForObject
 
 Type: function
 
-Description: Находит ближайшую точку на линии игрок->объект
+Description: 
 - Param: _targetOrPos
 
-File: [client\Interactions\interact.sqf at line 425](../../../Src/client/Interactions/interact.sqf#L425)
+File: [client\Interactions\interact.sqf at line 445](../../../Src/client/Interactions/interact.sqf#L445)
 ## interact_getIntersectionCount
 
 Type: function
 
-Description: получает количество пересечений
+Description: 
 - Param: _targetPos
 
-File: [client\Interactions\interact.sqf at line 448](../../../Src/client/Interactions/interact.sqf#L448)
+File: [client\Interactions\interact.sqf at line 469](../../../Src/client/Interactions/interact.sqf#L469)
 ## interact_canUseInteract
 
 Type: function
 
-Description: Однако открыть меню интеракций и изменить какое-либо из значений (кроме интента) можно без этой проверки
+Description: 
 
 
-File: [client\Interactions\interact.sqf at line 473](../../../Src/client/Interactions/interact.sqf#L473)
+File: [client\Interactions\interact.sqf at line 497](../../../Src/client/Interactions/interact.sqf#L497)
 ## interact_openMouseMode
 
 Type: function
@@ -691,7 +691,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 478](../../../Src/client/Interactions/interact.sqf#L478)
+File: [client\Interactions\interact.sqf at line 503](../../../Src/client/Interactions/interact.sqf#L503)
 ## interact_closeMouseMode
 
 Type: function
@@ -699,7 +699,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 503](../../../Src/client/Interactions/interact.sqf#L503)
+File: [client\Interactions\interact.sqf at line 529](../../../Src/client/Interactions/interact.sqf#L529)
 ## interact_closeMouseMode_handle
 
 Type: function
@@ -707,7 +707,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 557](../../../Src/client/Interactions/interact.sqf#L557)
+File: [client\Interactions\interact.sqf at line 584](../../../Src/client/Interactions/interact.sqf#L584)
 ## interact_onMouseButtonUp
 
 Type: function
@@ -721,7 +721,7 @@ Description:
 - Param: _ctrl
 - Param: _alt
 
-File: [client\Interactions\interact.sqf at line 572](../../../Src/client/Interactions/interact.sqf#L572)
+File: [client\Interactions\interact.sqf at line 600](../../../Src/client/Interactions/interact.sqf#L600)
 ## interact_getReachItem
 
 Type: function
@@ -729,7 +729,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 649](../../../Src/client/Interactions/interact.sqf#L649)
+File: [client\Interactions\interact.sqf at line 678](../../../Src/client/Interactions/interact.sqf#L678)
 ## setpostestmobinmouse
 
 Type: function
@@ -739,21 +739,21 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 717](../../../Src/client/Interactions/interact.sqf#L717)
+File: [client\Interactions\interact.sqf at line 747](../../../Src/client/Interactions/interact.sqf#L747)
 # interactCombat.hpp
 
 ## CS_MAP_INDEX_TEXT
 
 Type: constant
 
-Description: ключи для комбат стилей
+Description: 
 
 
 Replaced value:
 ```sqf
 0
 ```
-File: [client\Interactions\interactCombat.hpp at line 8](../../../Src/client/Interactions/interactCombat.hpp#L8)
+File: [client\Interactions\interactCombat.hpp at line 13](../../../Src/client/Interactions/interactCombat.hpp#L13)
 ## CS_MAP_INDEX_COLOR
 
 Type: constant
@@ -765,7 +765,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Interactions\interactCombat.hpp at line 9](../../../Src/client/Interactions/interactCombat.hpp#L9)
+File: [client\Interactions\interactCombat.hpp at line 14](../../../Src/client/Interactions/interactCombat.hpp#L14)
 ## CS_MAP_INDEX_ENUM
 
 Type: constant
@@ -777,7 +777,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Interactions\interactCombat.hpp at line 10](../../../Src/client/Interactions/interactCombat.hpp#L10)
+File: [client\Interactions\interactCombat.hpp at line 15](../../../Src/client/Interactions/interactCombat.hpp#L15)
 ## CS_MAP_INDEX_TEXT_RANGED
 
 Type: constant
@@ -789,19 +789,19 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\Interactions\interactCombat.hpp at line 11](../../../Src/client/Interactions/interactCombat.hpp#L11)
+File: [client\Interactions\interactCombat.hpp at line 16](../../../Src/client/Interactions/interactCombat.hpp#L16)
 ## curWidgets
 
 Type: constant
 
-Description: ссылки на массив в interactCombat_curWidgets
+Description: 
 
 
 Replaced value:
 ```sqf
 interactCombat_curWidgets
 ```
-File: [client\Interactions\interactCombat.hpp at line 14](../../../Src/client/Interactions/interactCombat.hpp#L14)
+File: [client\Interactions\interactCombat.hpp at line 21](../../../Src/client/Interactions/interactCombat.hpp#L21)
 ## CM_CUR_IND_ATT
 
 Type: constant
@@ -813,7 +813,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Interactions\interactCombat.hpp at line 16](../../../Src/client/Interactions/interactCombat.hpp#L16)
+File: [client\Interactions\interactCombat.hpp at line 24](../../../Src/client/Interactions/interactCombat.hpp#L24)
 ## CM_CUR_IND_DEF
 
 Type: constant
@@ -825,7 +825,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Interactions\interactCombat.hpp at line 17](../../../Src/client/Interactions/interactCombat.hpp#L17)
+File: [client\Interactions\interactCombat.hpp at line 25](../../../Src/client/Interactions/interactCombat.hpp#L25)
 ## CM_CUR_IND_CS
 
 Type: constant
@@ -837,31 +837,31 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Interactions\interactCombat.hpp at line 18](../../../Src/client/Interactions/interactCombat.hpp#L18)
+File: [client\Interactions\interactCombat.hpp at line 26](../../../Src/client/Interactions/interactCombat.hpp#L26)
 ## CS_SIZE_H
 
 Type: constant
 
-Description: высота комбат меню
+Description: 
 
 
 Replaced value:
 ```sqf
 25
 ```
-File: [client\Interactions\interactCombat.hpp at line 21](../../../Src/client/Interactions/interactCombat.hpp#L21)
+File: [client\Interactions\interactCombat.hpp at line 31](../../../Src/client/Interactions/interactCombat.hpp#L31)
 ## CS_SIZE_W
 
 Type: constant
 
-Description: ширина
+Description: 
 
 
 Replaced value:
 ```sqf
 30
 ```
-File: [client\Interactions\interactCombat.hpp at line 23](../../../Src/client/Interactions/interactCombat.hpp#L23)
+File: [client\Interactions\interactCombat.hpp at line 34](../../../Src/client/Interactions/interactCombat.hpp#L34)
 ## TIME_TOLOAD_INTERACTCOMBAT
 
 Type: constant
@@ -873,7 +873,7 @@ Replaced value:
 ```sqf
 0.05
 ```
-File: [client\Interactions\interactCombat.hpp at line 26](../../../Src/client/Interactions/interactCombat.hpp#L26)
+File: [client\Interactions\interactCombat.hpp at line 37](../../../Src/client/Interactions/interactCombat.hpp#L37)
 ## TIME_TOUNLOAD_INTERACTCOMBAT
 
 Type: constant
@@ -885,7 +885,7 @@ Replaced value:
 ```sqf
 0.2
 ```
-File: [client\Interactions\interactCombat.hpp at line 27](../../../Src/client/Interactions/interactCombat.hpp#L27)
+File: [client\Interactions\interactCombat.hpp at line 39](../../../Src/client/Interactions/interactCombat.hpp#L39)
 ## FADE_BUT_AT
 
 Type: constant
@@ -897,7 +897,7 @@ Replaced value:
 ```sqf
 0.7
 ```
-File: [client\Interactions\interactCombat.hpp at line 31](../../../Src/client/Interactions/interactCombat.hpp#L31)
+File: [client\Interactions\interactCombat.hpp at line 43](../../../Src/client/Interactions/interactCombat.hpp#L43)
 ## FADE_BUT_DEF
 
 Type: constant
@@ -909,7 +909,7 @@ Replaced value:
 ```sqf
 0.7
 ```
-File: [client\Interactions\interactCombat.hpp at line 32](../../../Src/client/Interactions/interactCombat.hpp#L32)
+File: [client\Interactions\interactCombat.hpp at line 44](../../../Src/client/Interactions/interactCombat.hpp#L44)
 ## FADE_BUT_CS
 
 Type: constant
@@ -921,7 +921,7 @@ Replaced value:
 ```sqf
 0.8
 ```
-File: [client\Interactions\interactCombat.hpp at line 33](../../../Src/client/Interactions/interactCombat.hpp#L33)
+File: [client\Interactions\interactCombat.hpp at line 45](../../../Src/client/Interactions/interactCombat.hpp#L45)
 ## TIME_BUT_AT
 
 Type: constant
@@ -933,7 +933,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Interactions\interactCombat.hpp at line 35](../../../Src/client/Interactions/interactCombat.hpp#L35)
+File: [client\Interactions\interactCombat.hpp at line 49](../../../Src/client/Interactions/interactCombat.hpp#L49)
 ## TIME_BUT_DEF
 
 Type: constant
@@ -945,7 +945,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Interactions\interactCombat.hpp at line 36](../../../Src/client/Interactions/interactCombat.hpp#L36)
+File: [client\Interactions\interactCombat.hpp at line 50](../../../Src/client/Interactions/interactCombat.hpp#L50)
 ## TIME_BUT_CS
 
 Type: constant
@@ -957,7 +957,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Interactions\interactCombat.hpp at line 37](../../../Src/client/Interactions/interactCombat.hpp#L37)
+File: [client\Interactions\interactCombat.hpp at line 51](../../../Src/client/Interactions/interactCombat.hpp#L51)
 # interactCombat.sqf
 
 ## vec4(x,y,w,h)
@@ -986,7 +986,7 @@ Replaced value:
 ```sqf
 30
 ```
-File: [client\Interactions\interactCombat.sqf at line 12](../../../Src/client/Interactions/interactCombat.sqf#L12)
+File: [client\Interactions\interactCombat.sqf at line 17](../../../Src/client/Interactions/interactCombat.sqf#L17)
 ## size_col
 
 Type: constant
@@ -998,7 +998,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Interactions\interactCombat.sqf at line 170](../../../Src/client/Interactions/interactCombat.sqf#L170)
+File: [client\Interactions\interactCombat.sqf at line 178](../../../Src/client/Interactions/interactCombat.sqf#L178)
 ## centerizeText(mes)
 
 Type: constant
@@ -1010,7 +1010,7 @@ Replaced value:
 ```sqf
 mes
 ```
-File: [client\Interactions\interactCombat.sqf at line 171](../../../Src/client/Interactions/interactCombat.sqf#L171)
+File: [client\Interactions\interactCombat.sqf at line 180](../../../Src/client/Interactions/interactCombat.sqf#L180)
 ## setFadeIfMode(checked,enum,fade,index)
 
 Type: constant
@@ -1029,7 +1029,7 @@ Replaced value:
 			curWidgets set [index,_butt]; \
 		}
 ```
-File: [client\Interactions\interactCombat.sqf at line 173](../../../Src/client/Interactions/interactCombat.sqf#L173)
+File: [client\Interactions\interactCombat.sqf at line 183](../../../Src/client/Interactions/interactCombat.sqf#L183)
 ## allocDefButton(sizes,name,_mode)
 
 Type: constant
@@ -1048,7 +1048,7 @@ Replaced value:
 		_butt ctrlAddEventHandler ["MouseButtonUp",interactCombat_onPressDef]; \
 		_butt ctrlSetTextColor [0.275,0.58,0,1]
 ```
-File: [client\Interactions\interactCombat.sqf at line 179](../../../Src/client/Interactions/interactCombat.sqf#L179)
+File: [client\Interactions\interactCombat.sqf at line 190](../../../Src/client/Interactions/interactCombat.sqf#L190)
 ## allocAttTypeButton(sizes,name,_mode)
 
 Type: constant
@@ -1068,7 +1068,7 @@ Replaced value:
 		_butt ctrlAddEventHandler ["MouseButtonUp",interactCombat_onPressAttType]; \
 		_butt ctrlSetTextColor [0.886,0,0.282,1]
 ```
-File: [client\Interactions\interactCombat.sqf at line 186](../../../Src/client/Interactions/interactCombat.sqf#L186)
+File: [client\Interactions\interactCombat.sqf at line 197](../../../Src/client/Interactions/interactCombat.sqf#L197)
 ## getMode(wid)
 
 Type: constant
@@ -1080,7 +1080,7 @@ Replaced value:
 ```sqf
 wid getVariable "mode"
 ```
-File: [client\Interactions\interactCombat.sqf at line 289](../../../Src/client/Interactions/interactCombat.sqf#L289)
+File: [client\Interactions\interactCombat.sqf at line 302](../../../Src/client/Interactions/interactCombat.sqf#L302)
 ## interactCombat_initCombatStyles
 
 Type: function
@@ -1091,7 +1091,7 @@ Description:
 - Param: _index
 - Param: _modeLoad (optional, default 0)
 
-File: [client\Interactions\interactCombat.sqf at line 14](../../../Src/client/Interactions/interactCombat.sqf#L14)
+File: [client\Interactions\interactCombat.sqf at line 20](../../../Src/client/Interactions/interactCombat.sqf#L20)
 ## interactCombat_updateAttackTypes
 
 Type: function
@@ -1099,7 +1099,7 @@ Type: function
 Description: 
 - Param: _assocEnum (optional, default interactCombat_at_assocEnum)
 
-File: [client\Interactions\interactCombat.sqf at line 71](../../../Src/client/Interactions/interactCombat.sqf#L71)
+File: [client\Interactions\interactCombat.sqf at line 78](../../../Src/client/Interactions/interactCombat.sqf#L78)
 ## interactCombat_load
 
 Type: function
@@ -1107,49 +1107,57 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactCombat.sqf at line 158](../../../Src/client/Interactions/interactCombat.sqf#L158)
+File: [client\Interactions\interactCombat.sqf at line 166](../../../Src/client/Interactions/interactCombat.sqf#L166)
 ## interactCombat_onMouseMoving
 
 Type: function
 
-Description: Событие при движении мыши
+Description: 
 - Param: _display
 
-File: [client\Interactions\interactCombat.sqf at line 261](../../../Src/client/Interactions/interactCombat.sqf#L261)
+File: [client\Interactions\interactCombat.sqf at line 273](../../../Src/client/Interactions/interactCombat.sqf#L273)
 ## interactCombat_onPressCS
 
 Type: function
 
-Description: перегрузка метода принимет первый параметр как стиль
+Description: 
 - Param: _ct
 - Param: _butt
 
-File: [client\Interactions\interactCombat.sqf at line 293](../../../Src/client/Interactions/interactCombat.sqf#L293)
+File: [client\Interactions\interactCombat.sqf at line 307](../../../Src/client/Interactions/interactCombat.sqf#L307)
 ## interactCombat_onPressDef
 
 Type: function
 
-Description: событие при нажатии на кнопку типа защиты
+Description: 
 - Param: _ct
 - Param: _butt
 
-File: [client\Interactions\interactCombat.sqf at line 308](../../../Src/client/Interactions/interactCombat.sqf#L308)
+File: [client\Interactions\interactCombat.sqf at line 323](../../../Src/client/Interactions/interactCombat.sqf#L323)
 ## interactCombat_onPressAttType
 
 Type: function
 
-Description: событие при нажатии на кнопку типа атаки
+Description: 
 - Param: _ct
 - Param: _butt
 
-File: [client\Interactions\interactCombat.sqf at line 330](../../../Src/client/Interactions/interactCombat.sqf#L330)
+File: [client\Interactions\interactCombat.sqf at line 346](../../../Src/client/Interactions/interactCombat.sqf#L346)
+## interactCombat_syncView_onSBH
+
+Type: function
+
+Description: 
+- Param: _buffer
+
+File: [client\Interactions\interactCombat.sqf at line 356](../../../Src/client/Interactions/interactCombat.sqf#L356)
 # interactCombat_defines.sqf
 
 ## addCStyle(_color,name,nameranged,_enum)
 
 Type: constant
 
-Description: 0 handed,1 shooting
+Description: 
 - Param: _color
 - Param: name
 - Param: nameranged
@@ -1159,7 +1167,7 @@ Replaced value:
 ```sqf
 ['name','_color',_enum,'nameranged']
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 12](../../../Src/client/Interactions/interactCombat_defines.sqf#L12)
+File: [client\Interactions\interactCombat_defines.sqf at line 20](../../../Src/client/Interactions/interactCombat_defines.sqf#L20)
 ## interactCombat_disableGlobal
 
 Type: Variable
@@ -1171,19 +1179,19 @@ Initial value:
 ```sqf
 false //true means upper combat menu is not shown
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 6](../../../Src/client/Interactions/interactCombat_defines.sqf#L6)
+File: [client\Interactions\interactCombat_defines.sqf at line 11](../../../Src/client/Interactions/interactCombat_defines.sqf#L11)
 ## interactCombat_isLoadedMenu
 
 Type: Variable
 
-Description: true means upper combat menu is not shown
+Description: 
 
 
 Initial value:
 ```sqf
 false
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 8](../../../Src/client/Interactions/interactCombat_defines.sqf#L8)
+File: [client\Interactions\interactCombat_defines.sqf at line 14](../../../Src/client/Interactions/interactCombat_defines.sqf#L14)
 ## interactCombat_csModesType
 
 Type: Variable
@@ -1195,7 +1203,7 @@ Initial value:
 ```sqf
 0 //0 handed,1 shooting
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 10](../../../Src/client/Interactions/interactCombat_defines.sqf#L10)
+File: [client\Interactions\interactCombat_defines.sqf at line 17](../../../Src/client/Interactions/interactCombat_defines.sqf#L17)
 ## interactCombat_styleMap
 
 Type: Variable
@@ -1207,7 +1215,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 13](../../../Src/client/Interactions/interactCombat_defines.sqf#L13)
+File: [client\Interactions\interactCombat_defines.sqf at line 22](../../../Src/client/Interactions/interactCombat_defines.sqf#L22)
 ## interactCombat_map_widgetStyles
 
 Type: Variable
@@ -1219,7 +1227,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 39](../../../Src/client/Interactions/interactCombat_defines.sqf#L39)
+File: [client\Interactions\interactCombat_defines.sqf at line 49](../../../Src/client/Interactions/interactCombat_defines.sqf#L49)
 ## interactCombat_hud_map_Styles
 
 Type: Variable
@@ -1231,7 +1239,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 40](../../../Src/client/Interactions/interactCombat_defines.sqf#L40)
+File: [client\Interactions\interactCombat_defines.sqf at line 51](../../../Src/client/Interactions/interactCombat_defines.sqf#L51)
 ## interactCombat_curWidgets
 
 Type: Variable
@@ -1243,19 +1251,19 @@ Initial value:
 ```sqf
 [widgetNull,widgetNull,widgetNull]
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 51](../../../Src/client/Interactions/interactCombat_defines.sqf#L51)
+File: [client\Interactions\interactCombat_defines.sqf at line 63](../../../Src/client/Interactions/interactCombat_defines.sqf#L63)
 ## interactCombat_at_list_types
 
 Type: Variable
 
-Description: сюда вносятся типы атак
+Description: 
 
 
 Initial value:
 ```sqf
 []
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 53](../../../Src/client/Interactions/interactCombat_defines.sqf#L53)
+File: [client\Interactions\interactCombat_defines.sqf at line 66](../../../Src/client/Interactions/interactCombat_defines.sqf#L66)
 ## interactCombat_at_assocEnum
 
 Type: Variable
@@ -1267,31 +1275,31 @@ Initial value:
 ```sqf
 ATTACK_TYPE_ASSOC_HAND
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 54](../../../Src/client/Interactions/interactCombat_defines.sqf#L54)
+File: [client\Interactions\interactCombat_defines.sqf at line 68](../../../Src/client/Interactions/interactCombat_defines.sqf#L68)
 ## interactCombat_map_attTypeWidgets
 
 Type: Variable
 
-Description: карта ассоциаций виджетов типов атаки. ключ тип
+Description: 
 
 
 Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 56](../../../Src/client/Interactions/interactCombat_defines.sqf#L56)
+File: [client\Interactions\interactCombat_defines.sqf at line 71](../../../Src/client/Interactions/interactCombat_defines.sqf#L71)
 ## interactCombat_at_widgets
 
 Type: Variable
 
-Description: виджеты комбата в порядке объявления
+Description: 
 
 
 Initial value:
 ```sqf
 []
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 60](../../../Src/client/Interactions/interactCombat_defines.sqf#L60)
+File: [client\Interactions\interactCombat_defines.sqf at line 76](../../../Src/client/Interactions/interactCombat_defines.sqf#L76)
 # interactEmoteMenu.sqf
 
 ## INTERACT_EMOTE_SIZE_H
@@ -1305,7 +1313,7 @@ Replaced value:
 ```sqf
 40
 ```
-File: [client\Interactions\interactEmoteMenu.sqf at line 17](../../../Src/client/Interactions/interactEmoteMenu.sqf#L17)
+File: [client\Interactions\interactEmoteMenu.sqf at line 27](../../../Src/client/Interactions/interactEmoteMenu.sqf#L27)
 ## INTERACT_EMOTE_SIZE_W
 
 Type: constant
@@ -1317,7 +1325,7 @@ Replaced value:
 ```sqf
 40
 ```
-File: [client\Interactions\interactEmoteMenu.sqf at line 18](../../../Src/client/Interactions/interactEmoteMenu.sqf#L18)
+File: [client\Interactions\interactEmoteMenu.sqf at line 29](../../../Src/client/Interactions/interactEmoteMenu.sqf#L29)
 ## interactEmote_isLoadedMenu
 
 Type: Variable
@@ -1329,7 +1337,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Interactions\interactEmoteMenu.sqf at line 7](../../../Src/client/Interactions/interactEmoteMenu.sqf#L7)
+File: [client\Interactions\interactEmoteMenu.sqf at line 11](../../../Src/client/Interactions/interactEmoteMenu.sqf#L11)
 ## interactEmote_inputText
 
 Type: Variable
@@ -1341,7 +1349,7 @@ Initial value:
 ```sqf
 ""
 ```
-File: [client\Interactions\interactEmoteMenu.sqf at line 9](../../../Src/client/Interactions/interactEmoteMenu.sqf#L9)
+File: [client\Interactions\interactEmoteMenu.sqf at line 14](../../../Src/client/Interactions/interactEmoteMenu.sqf#L14)
 ## interactEmote_curTabIdx
 
 Type: Variable
@@ -1353,7 +1361,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\Interactions\interactEmoteMenu.sqf at line 11](../../../Src/client/Interactions/interactEmoteMenu.sqf#L11)
+File: [client\Interactions\interactEmoteMenu.sqf at line 17](../../../Src/client/Interactions/interactEmoteMenu.sqf#L17)
 ## interactEmote_actions
 
 Type: Variable
@@ -1365,7 +1373,7 @@ Initial value:
 ```sqf
 [["Эмоции","Эмоция:emt_1"]]
 ```
-File: [client\Interactions\interactEmoteMenu.sqf at line 13](../../../Src/client/Interactions/interactEmoteMenu.sqf#L13)
+File: [client\Interactions\interactEmoteMenu.sqf at line 20](../../../Src/client/Interactions/interactEmoteMenu.sqf#L20)
 ## interactEmote_generatedActs
 
 Type: Variable
@@ -1375,9 +1383,9 @@ Description:
 
 Initial value:
 ```sqf
-[]
+[] //not used
 ```
-File: [client\Interactions\interactEmoteMenu.sqf at line 14](../../../Src/client/Interactions/interactEmoteMenu.sqf#L14)
+File: [client\Interactions\interactEmoteMenu.sqf at line 22](../../../Src/client/Interactions/interactEmoteMenu.sqf#L22)
 ## interactEmote_act_widgets
 
 Type: Variable
@@ -1389,7 +1397,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\Interactions\interactEmoteMenu.sqf at line 15](../../../Src/client/Interactions/interactEmoteMenu.sqf#L15)
+File: [client\Interactions\interactEmoteMenu.sqf at line 24](../../../Src/client/Interactions/interactEmoteMenu.sqf#L24)
 ## interactEmote_load
 
 Type: function
@@ -1398,15 +1406,15 @@ Description:
 - Param: 
 - Param: _key
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 24](../../../Src/client/Interactions/interactEmoteMenu.sqf#L24)
+File: [client\Interactions\interactEmoteMenu.sqf at line 36](../../../Src/client/Interactions/interactEmoteMenu.sqf#L36)
 ## interactEmote_onListCategoryes
 
 Type: function
 
-Description: открыть лист категорий
+Description: 
 - Param: _mode
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 178](../../../Src/client/Interactions/interactEmoteMenu.sqf#L178)
+File: [client\Interactions\interactEmoteMenu.sqf at line 191](../../../Src/client/Interactions/interactEmoteMenu.sqf#L191)
 ## interactEmote_cleanupInputText
 
 Type: function
@@ -1414,23 +1422,23 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 251](../../../Src/client/Interactions/interactEmoteMenu.sqf#L251)
+File: [client\Interactions\interactEmoteMenu.sqf at line 265](../../../Src/client/Interactions/interactEmoteMenu.sqf#L265)
 ## interactEmote_getInputTextParams
 
 Type: function
 
-Description: Получение виджета инпута и текста в нём
+Description: 
 
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 257](../../../Src/client/Interactions/interactEmoteMenu.sqf#L257)
+File: [client\Interactions\interactEmoteMenu.sqf at line 272](../../../Src/client/Interactions/interactEmoteMenu.sqf#L272)
 ## interactEmote_handleInputText
 
 Type: function
 
-Description: Обработчик строки инпута. Возврат bool значений означает ошибку текста
+Description: 
 - Param: _text
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 263](../../../Src/client/Interactions/interactEmoteMenu.sqf#L263)
+File: [client\Interactions\interactEmoteMenu.sqf at line 279](../../../Src/client/Interactions/interactEmoteMenu.sqf#L279)
 ## interactEmote_onSendEmote
 
 Type: function
@@ -1438,7 +1446,7 @@ Type: function
 Description: 
 - Param: _text
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 311](../../../Src/client/Interactions/interactEmoteMenu.sqf#L311)
+File: [client\Interactions\interactEmoteMenu.sqf at line 328](../../../Src/client/Interactions/interactEmoteMenu.sqf#L328)
 ## interactEmote_onMouseMoving
 
 Type: function
@@ -1446,7 +1454,7 @@ Type: function
 Description: 
 - Param: _display
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 326](../../../Src/client/Interactions/interactEmoteMenu.sqf#L326)
+File: [client\Interactions\interactEmoteMenu.sqf at line 344](../../../Src/client/Interactions/interactEmoteMenu.sqf#L344)
 ## interactEmote_switchActionMenu
 
 Type: function
@@ -1455,7 +1463,7 @@ Description:
 - Param: _mode
 - Param: _isSetMode (optional, default false)
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 350](../../../Src/client/Interactions/interactEmoteMenu.sqf#L350)
+File: [client\Interactions\interactEmoteMenu.sqf at line 369](../../../Src/client/Interactions/interactEmoteMenu.sqf#L369)
 ## interactEmote_loadActions
 
 Type: function
@@ -1463,15 +1471,15 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 370](../../../Src/client/Interactions/interactEmoteMenu.sqf#L370)
+File: [client\Interactions\interactEmoteMenu.sqf at line 390](../../../Src/client/Interactions/interactEmoteMenu.sqf#L390)
 ## interactEmote_doEmoteAction
 
 Type: function
 
-Description: Отправка эмоута
+Description: 
 - Param: _act
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 451](../../../Src/client/Interactions/interactEmoteMenu.sqf#L451)
+File: [client\Interactions\interactEmoteMenu.sqf at line 472](../../../Src/client/Interactions/interactEmoteMenu.sqf#L472)
 ## interactEmote_unloadActions
 
 Type: function
@@ -1479,7 +1487,24 @@ Type: function
 Description: 
 - Param: _acts
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 473](../../../Src/client/Interactions/interactEmoteMenu.sqf#L473)
+File: [client\Interactions\interactEmoteMenu.sqf at line 496](../../../Src/client/Interactions/interactEmoteMenu.sqf#L496)
+## interactEmote_RpcLoadEmotes
+
+Type: function
+
+Description: 
+
+
+File: [client\Interactions\interactEmoteMenu.sqf at line 501](../../../Src/client/Interactions/interactEmoteMenu.sqf#L501)
+## interactEmote_RpcUpdateCateg
+
+Type: function
+
+Description: 
+- Param: _cat
+- Param: _list
+
+File: [client\Interactions\interactEmoteMenu.sqf at line 510](../../../Src/client/Interactions/interactEmoteMenu.sqf#L510)
 # interactMenu.hpp
 
 ## SIZE_HITPART_ZONE
@@ -1493,7 +1518,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\Interactions\interactMenu.hpp at line 8](../../../Src/client/Interactions/interactMenu.hpp#L8)
+File: [client\Interactions\interactMenu.hpp at line 13](../../../Src/client/Interactions/interactMenu.hpp#L13)
 ## map_hit(x,y)
 
 Type: constant
@@ -1506,7 +1531,7 @@ Replaced value:
 ```sqf
 [x,y,32,SIZE_HITPART_ZONE]
 ```
-File: [client\Interactions\interactMenu.hpp at line 10](../../../Src/client/Interactions/interactMenu.hpp#L10)
+File: [client\Interactions\interactMenu.hpp at line 16](../../../Src/client/Interactions/interactMenu.hpp#L16)
 ## map_zonenames
 
 Type: constant
@@ -1518,7 +1543,7 @@ Replaced value:
 ```sqf
 ["Голова","Лицо","Рот","Шея","Торс","Живот","Пах"]
 ```
-File: [client\Interactions\interactMenu.hpp at line 12](../../../Src/client/Interactions/interactMenu.hpp#L12)
+File: [client\Interactions\interactMenu.hpp at line 19](../../../Src/client/Interactions/interactMenu.hpp#L19)
 ## map_zoneindex
 
 Type: constant
@@ -1530,7 +1555,7 @@ Replaced value:
 ```sqf
 [TARGET_ZONE_HEAD,TARGET_ZONE_FACE,TARGET_ZONE_MOUTH,TARGET_ZONE_NECK,TARGET_ZONE_TORSO,TARGET_ZONE_ABDOMEN,TARGET_ZONE_GROIN]
 ```
-File: [client\Interactions\interactMenu.hpp at line 13](../../../Src/client/Interactions/interactMenu.hpp#L13)
+File: [client\Interactions\interactMenu.hpp at line 21](../../../Src/client/Interactions/interactMenu.hpp#L21)
 ## map_limbs
 
 Type: constant
@@ -1542,7 +1567,7 @@ Replaced value:
 ```sqf
 [TARGET_ZONE_EYE_L,TARGET_ZONE_EYE_R,TARGET_ZONE_ARM_L,TARGET_ZONE_ARM_R,TARGET_ZONE_LEG_L,TARGET_ZONE_LEG_R]
 ```
-File: [client\Interactions\interactMenu.hpp at line 15](../../../Src/client/Interactions/interactMenu.hpp#L15)
+File: [client\Interactions\interactMenu.hpp at line 24](../../../Src/client/Interactions/interactMenu.hpp#L24)
 ## CALLING_IN_DISPLAY_MODE
 
 Type: constant
@@ -1554,7 +1579,7 @@ Replaced value:
 ```sqf
 true
 ```
-File: [client\Interactions\interactMenu.hpp at line 17](../../../Src/client/Interactions/interactMenu.hpp#L17)
+File: [client\Interactions\interactMenu.hpp at line 27](../../../Src/client/Interactions/interactMenu.hpp#L27)
 ## TIME_TOLOAD_INTERACTMENU
 
 Type: constant
@@ -1566,7 +1591,7 @@ Replaced value:
 ```sqf
 TIME_PREPARE_SLOTS
 ```
-File: [client\Interactions\interactMenu.hpp at line 19](../../../Src/client/Interactions/interactMenu.hpp#L19)
+File: [client\Interactions\interactMenu.hpp at line 30](../../../Src/client/Interactions/interactMenu.hpp#L30)
 ## TIME_TOUNLOAD_INTERACTMENU
 
 Type: constant
@@ -1578,7 +1603,7 @@ Replaced value:
 ```sqf
 TIME_PREPARE_SLOTS
 ```
-File: [client\Interactions\interactMenu.hpp at line 20](../../../Src/client/Interactions/interactMenu.hpp#L20)
+File: [client\Interactions\interactMenu.hpp at line 33](../../../Src/client/Interactions/interactMenu.hpp#L33)
 ## FADEIN_SPECACT
 
 Type: constant
@@ -1590,7 +1615,7 @@ Replaced value:
 ```sqf
 0.7
 ```
-File: [client\Interactions\interactMenu.hpp at line 22](../../../Src/client/Interactions/interactMenu.hpp#L22)
+File: [client\Interactions\interactMenu.hpp at line 36](../../../Src/client/Interactions/interactMenu.hpp#L36)
 ## FADE_TIME
 
 Type: constant
@@ -1602,7 +1627,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Interactions\interactMenu.hpp at line 23](../../../Src/client/Interactions/interactMenu.hpp#L23)
+File: [client\Interactions\interactMenu.hpp at line 38](../../../Src/client/Interactions/interactMenu.hpp#L38)
 ## FADE_FOR_SELECTED
 
 Type: constant
@@ -1614,7 +1639,7 @@ Replaced value:
 ```sqf
 0.6
 ```
-File: [client\Interactions\interactMenu.hpp at line 25](../../../Src/client/Interactions/interactMenu.hpp#L25)
+File: [client\Interactions\interactMenu.hpp at line 41](../../../Src/client/Interactions/interactMenu.hpp#L41)
 ## TIME_TO_INFADE
 
 Type: constant
@@ -1626,19 +1651,19 @@ Replaced value:
 ```sqf
 0.2
 ```
-File: [client\Interactions\interactMenu.hpp at line 26](../../../Src/client/Interactions/interactMenu.hpp#L26)
+File: [client\Interactions\interactMenu.hpp at line 44](../../../Src/client/Interactions/interactMenu.hpp#L44)
 ## ACTION_SWITCHABLE
 
 Type: constant
 
-Description: типы действий. ACTION_SWITCHABLE - переключаемое, ACTION_PLAYING - проигрываемое
+Description: 
 
 
 Replaced value:
 ```sqf
 0
 ```
-File: [client\Interactions\interactMenu.hpp at line 29](../../../Src/client/Interactions/interactMenu.hpp#L29)
+File: [client\Interactions\interactMenu.hpp at line 48](../../../Src/client/Interactions/interactMenu.hpp#L48)
 ## ACTION_PLAYING
 
 Type: constant
@@ -1650,7 +1675,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Interactions\interactMenu.hpp at line 30](../../../Src/client/Interactions/interactMenu.hpp#L30)
+File: [client\Interactions\interactMenu.hpp at line 49](../../../Src/client/Interactions/interactMenu.hpp#L49)
 # interactMenu.sqf
 
 ## DEBUG_USE_BORDERS
@@ -1664,7 +1689,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\Interactions\interactMenu.sqf at line 16](../../../Src/client/Interactions/interactMenu.sqf#L16)
+File: [client\Interactions\interactMenu.sqf at line 17](../../../Src/client/Interactions/interactMenu.sqf#L17)
 ## debug_colorize(wid)
 
 Type: constant
@@ -1676,7 +1701,7 @@ Replaced value:
 ```sqf
 wid setBackgroundColor [random 1,random 1,random 1,1]
 ```
-File: [client\Interactions\interactMenu.sqf at line 18](../../../Src/client/Interactions/interactMenu.sqf#L18)
+File: [client\Interactions\interactMenu.sqf at line 20](../../../Src/client/Interactions/interactMenu.sqf#L20)
 ## debug_colorizeButton(wid)
 
 Type: constant
@@ -1688,7 +1713,7 @@ Replaced value:
 ```sqf
 wid setBackgroundColor  [random 1,random 1,random 1,1]
 ```
-File: [client\Interactions\interactMenu.sqf at line 19](../../../Src/client/Interactions/interactMenu.sqf#L19)
+File: [client\Interactions\interactMenu.sqf at line 22](../../../Src/client/Interactions/interactMenu.sqf#L22)
 ## colorizeCategory(wid)
 
 Type: constant
@@ -1700,7 +1725,7 @@ Replaced value:
 ```sqf
 wid setBackgroundColor [.3,.3,.3,.7]
 ```
-File: [client\Interactions\interactMenu.sqf at line 21](../../../Src/client/Interactions/interactMenu.sqf#L21)
+File: [client\Interactions\interactMenu.sqf at line 25](../../../Src/client/Interactions/interactMenu.sqf#L25)
 ## colorizeButton(wid)
 
 Type: constant
@@ -1712,12 +1737,12 @@ Replaced value:
 ```sqf
 wid setBackgroundColor [.1,.1,.1,.7]
 ```
-File: [client\Interactions\interactMenu.sqf at line 22](../../../Src/client/Interactions/interactMenu.sqf#L22)
+File: [client\Interactions\interactMenu.sqf at line 27](../../../Src/client/Interactions/interactMenu.sqf#L27)
 ## setButtonText(wid,text)
 
 Type: constant
 
-Description: setting text for attr (skill)
+Description: 
 - Param: wid
 - Param: text
 
@@ -1725,7 +1750,7 @@ Replaced value:
 ```sqf
 wid ctrlSetStructuredText (parseText format["<t size='0.8' align='center' valign='middle'>%1</t>" arg text])
 ```
-File: [client\Interactions\interactMenu.sqf at line 25](../../../Src/client/Interactions/interactMenu.sqf#L25)
+File: [client\Interactions\interactMenu.sqf at line 31](../../../Src/client/Interactions/interactMenu.sqf#L31)
 ## setCategText(wid,text)
 
 Type: constant
@@ -1738,7 +1763,7 @@ Replaced value:
 ```sqf
 wid ctrlSetStructuredText (parseText format ["<t size='0.8' align='center' valign='middle'>%1</t>" arg text])
 ```
-File: [client\Interactions\interactMenu.sqf at line 26](../../../Src/client/Interactions/interactMenu.sqf#L26)
+File: [client\Interactions\interactMenu.sqf at line 33](../../../Src/client/Interactions/interactMenu.sqf#L33)
 ## setAttrText(wid,text,addit)
 
 Type: constant
@@ -1752,7 +1777,7 @@ Replaced value:
 ```sqf
 setText(wid,format["<t size='1.2'>%1</t><t size='0.8'>%2</t>" arg text arg addit])
 ```
-File: [client\Interactions\interactMenu.sqf at line 27](../../../Src/client/Interactions/interactMenu.sqf#L27)
+File: [client\Interactions\interactMenu.sqf at line 35](../../../Src/client/Interactions/interactMenu.sqf#L35)
 ## setText(wid,text)
 
 Type: constant
@@ -1765,7 +1790,7 @@ Replaced value:
 ```sqf
 [wid,text] call widgetSetText
 ```
-File: [client\Interactions\interactMenu.sqf at line 28](../../../Src/client/Interactions/interactMenu.sqf#L28)
+File: [client\Interactions\interactMenu.sqf at line 37](../../../Src/client/Interactions/interactMenu.sqf#L37)
 ## WIDTH_ATTR
 
 Type: constant
@@ -1777,7 +1802,7 @@ Replaced value:
 ```sqf
 30
 ```
-File: [client\Interactions\interactMenu.sqf at line 30](../../../Src/client/Interactions/interactMenu.sqf#L30)
+File: [client\Interactions\interactMenu.sqf at line 40](../../../Src/client/Interactions/interactMenu.sqf#L40)
 ## HEIGHT_CATEGORY
 
 Type: constant
@@ -1789,7 +1814,7 @@ Replaced value:
 ```sqf
 2.5
 ```
-File: [client\Interactions\interactMenu.sqf at line 31](../../../Src/client/Interactions/interactMenu.sqf#L31)
+File: [client\Interactions\interactMenu.sqf at line 42](../../../Src/client/Interactions/interactMenu.sqf#L42)
 ## SIZE_INTENT_BUTTON
 
 Type: constant
@@ -1801,7 +1826,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [client\Interactions\interactMenu.sqf at line 32](../../../Src/client/Interactions/interactMenu.sqf#L32)
+File: [client\Interactions\interactMenu.sqf at line 44](../../../Src/client/Interactions/interactMenu.sqf#L44)
 ## STD_BIAS_Y
 
 Type: constant
@@ -1813,7 +1838,7 @@ Replaced value:
 ```sqf
 1.5
 ```
-File: [client\Interactions\interactMenu.sqf at line 33](../../../Src/client/Interactions/interactMenu.sqf#L33)
+File: [client\Interactions\interactMenu.sqf at line 46](../../../Src/client/Interactions/interactMenu.sqf#L46)
 ## STD_BIAS_X
 
 Type: constant
@@ -1825,7 +1850,7 @@ Replaced value:
 ```sqf
 1.5
 ```
-File: [client\Interactions\interactMenu.sqf at line 34](../../../Src/client/Interactions/interactMenu.sqf#L34)
+File: [client\Interactions\interactMenu.sqf at line 48](../../../Src/client/Interactions/interactMenu.sqf#L48)
 ## createText(sizes)
 
 Type: constant
@@ -1837,7 +1862,7 @@ Replaced value:
 ```sqf
 [_d,TEXT,sizes,_ctg] call createWidget
 ```
-File: [client\Interactions\interactMenu.sqf at line 50](../../../Src/client/Interactions/interactMenu.sqf#L50)
+File: [client\Interactions\interactMenu.sqf at line 64](../../../Src/client/Interactions/interactMenu.sqf#L64)
 ## createButton(sizes)
 
 Type: constant
@@ -1849,7 +1874,7 @@ Replaced value:
 ```sqf
 [_d,BUTTONMENU,sizes,_ctg] call createWidget
 ```
-File: [client\Interactions\interactMenu.sqf at line 51](../../../Src/client/Interactions/interactMenu.sqf#L51)
+File: [client\Interactions\interactMenu.sqf at line 65](../../../Src/client/Interactions/interactMenu.sqf#L65)
 ## createSpecButton(sizes)
 
 Type: constant
@@ -1861,7 +1886,7 @@ Replaced value:
 ```sqf
 [_d,BUTTONMENU,sizes,_ctgSpec] call createWidget
 ```
-File: [client\Interactions\interactMenu.sqf at line 52](../../../Src/client/Interactions/interactMenu.sqf#L52)
+File: [client\Interactions\interactMenu.sqf at line 66](../../../Src/client/Interactions/interactMenu.sqf#L66)
 ## vec4(x,y,w,h)
 
 Type: constant
@@ -1876,7 +1901,7 @@ Replaced value:
 ```sqf
 [x,y,w,h]
 ```
-File: [client\Interactions\interactMenu.sqf at line 54](../../../Src/client/Interactions/interactMenu.sqf#L54)
+File: [client\Interactions\interactMenu.sqf at line 68](../../../Src/client/Interactions/interactMenu.sqf#L68)
 ## MAX_SELECTIONS_TODOWN
 
 Type: constant
@@ -1888,7 +1913,7 @@ Replaced value:
 ```sqf
 6
 ```
-File: [client\Interactions\interactMenu.sqf at line 159](../../../Src/client/Interactions/interactMenu.sqf#L159)
+File: [client\Interactions\interactMenu.sqf at line 174](../../../Src/client/Interactions/interactMenu.sqf#L174)
 ## allocSelectionId(wid,sel)
 
 Type: constant
@@ -1903,7 +1928,7 @@ wid setvariable ['id',sel]; \
 	wid ctrlAddEventHandler ["MouseButtonUp",{params ["_w","_button"]; \
 	[_w getVariable 'id',_button] call interactMenu_setSelection}];
 ```
-File: [client\Interactions\interactMenu.sqf at line 161](../../../Src/client/Interactions/interactMenu.sqf#L161)
+File: [client\Interactions\interactMenu.sqf at line 177](../../../Src/client/Interactions/interactMenu.sqf#L177)
 ## allocSelectionId_limb(wid,sel)
 
 Type: constant
@@ -1917,7 +1942,7 @@ Replaced value:
 allocSelectionId(wid,sel); \
 	INC(_counter); interactMenu_selectionWidgets set [MAX_SELECTIONS_TODOWN + _counter,_butt];
 ```
-File: [client\Interactions\interactMenu.sqf at line 165](../../../Src/client/Interactions/interactMenu.sqf#L165)
+File: [client\Interactions\interactMenu.sqf at line 182](../../../Src/client/Interactions/interactMenu.sqf#L182)
 ## _specact_bias_x
 
 Type: constant
@@ -1929,7 +1954,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\Interactions\interactMenu.sqf at line 290](../../../Src/client/Interactions/interactMenu.sqf#L290)
+File: [client\Interactions\interactMenu.sqf at line 311](../../../Src/client/Interactions/interactMenu.sqf#L311)
 ## _specact_bias_y
 
 Type: constant
@@ -1941,7 +1966,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Interactions\interactMenu.sqf at line 291](../../../Src/client/Interactions/interactMenu.sqf#L291)
+File: [client\Interactions\interactMenu.sqf at line 313](../../../Src/client/Interactions/interactMenu.sqf#L313)
 ## _specact_size_h
 
 Type: constant
@@ -1953,7 +1978,7 @@ Replaced value:
 ```sqf
 15
 ```
-File: [client\Interactions\interactMenu.sqf at line 292](../../../Src/client/Interactions/interactMenu.sqf#L292)
+File: [client\Interactions\interactMenu.sqf at line 315](../../../Src/client/Interactions/interactMenu.sqf#L315)
 ## interactMenu_load
 
 Type: function
@@ -1961,7 +1986,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactMenu.sqf at line 40](../../../Src/client/Interactions/interactMenu.sqf#L40)
+File: [client\Interactions\interactMenu.sqf at line 54](../../../Src/client/Interactions/interactMenu.sqf#L54)
 ## interactMenu_onMouseMove
 
 Type: function
@@ -1971,7 +1996,7 @@ Description:
 - Param: _xPos
 - Param: _yPos
 
-File: [client\Interactions\interactMenu.sqf at line 245](../../../Src/client/Interactions/interactMenu.sqf#L245)
+File: [client\Interactions\interactMenu.sqf at line 263](../../../Src/client/Interactions/interactMenu.sqf#L263)
 ## interactMenu_unloadMenu
 
 Type: function
@@ -1979,7 +2004,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactMenu.sqf at line 264](../../../Src/client/Interactions/interactMenu.sqf#L264)
+File: [client\Interactions\interactMenu.sqf at line 283](../../../Src/client/Interactions/interactMenu.sqf#L283)
 ## interactMenu_syncSpecialActions
 
 Type: function
@@ -1987,7 +2012,7 @@ Type: function
 Description: 
 - Param: _isInit (optional, default true)
 
-File: [client\Interactions\interactMenu.sqf at line 272](../../../Src/client/Interactions/interactMenu.sqf#L272)
+File: [client\Interactions\interactMenu.sqf at line 292](../../../Src/client/Interactions/interactMenu.sqf#L292)
 # interactMenu_defines.sqf
 
 ## INT_PATH(pt)
@@ -1999,9 +2024,9 @@ Description:
 
 Replaced value:
 ```sqf
-(PATH_PICTURE_FOLDER + "interact\" + 'pt' + ".paa" )
+(PATH_PICTURE_FOLDER + "interact\" + pt + ".paa" )
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 17](../../../Src/client/Interactions/interactMenu_defines.sqf#L17)
+File: [client\Interactions\interactMenu_defines.sqf at line 27](../../../Src/client/Interactions/interactMenu_defines.sqf#L27)
 ## interactMenu_disableGlobal
 
 Type: Variable
@@ -2013,19 +2038,19 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 7](../../../Src/client/Interactions/interactMenu_defines.sqf#L7)
+File: [client\Interactions\interactMenu_defines.sqf at line 11](../../../Src/client/Interactions/interactMenu_defines.sqf#L11)
 ## interactMenu_isLoadedMenu
 
 Type: Variable
 
-Description: активно ли интеракт меню
+Description: 
 
 
 Initial value:
 ```sqf
 false
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 10](../../../Src/client/Interactions/interactMenu_defines.sqf#L10)
+File: [client\Interactions\interactMenu_defines.sqf at line 15](../../../Src/client/Interactions/interactMenu_defines.sqf#L15)
 ## interactMenu_skillWidgets
 
 Type: Variable
@@ -2037,7 +2062,7 @@ Initial value:
 ```sqf
 _interactMenu_skillWidgets apply ...
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 14](../../../Src/client/Interactions/interactMenu_defines.sqf#L14)
+File: [client\Interactions\interactMenu_defines.sqf at line 22](../../../Src/client/Interactions/interactMenu_defines.sqf#L22)
 ## interactMenu_skillNames
 
 Type: Variable
@@ -2049,7 +2074,7 @@ Initial value:
 ```sqf
 ["СЛ","ИН","ЛВ","ЗД","ВНС","ВОЛЯ","ВОС","ЖЗ"]
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 15](../../../Src/client/Interactions/interactMenu_defines.sqf#L15)
+File: [client\Interactions\interactMenu_defines.sqf at line 24](../../../Src/client/Interactions/interactMenu_defines.sqf#L24)
 ## interactMenu_intentPath
 
 Type: Variable
@@ -2059,9 +2084,9 @@ Description:
 
 Initial value:
 ```sqf
-[INT_PATH(help),INT_PATH(grab),INT_PATH(harm)]
+[INT_PATH("help"),INT_PATH("grab"),INT_PATH("harm")]
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 19](../../../Src/client/Interactions/interactMenu_defines.sqf#L19)
+File: [client\Interactions\interactMenu_defines.sqf at line 30](../../../Src/client/Interactions/interactMenu_defines.sqf#L30)
 ## interactMenu_intentWidgets
 
 Type: Variable
@@ -2073,7 +2098,7 @@ Initial value:
 ```sqf
 [widgetNull,widgetNull,widgetNull]
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 21](../../../Src/client/Interactions/interactMenu_defines.sqf#L21)
+File: [client\Interactions\interactMenu_defines.sqf at line 33](../../../Src/client/Interactions/interactMenu_defines.sqf#L33)
 ## interactMenu_activeIntent
 
 Type: Variable
@@ -2085,19 +2110,19 @@ Initial value:
 ```sqf
 [widgetNull] //ссылка на виджет активного
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 22](../../../Src/client/Interactions/interactMenu_defines.sqf#L22)
+File: [client\Interactions\interactMenu_defines.sqf at line 35](../../../Src/client/Interactions/interactMenu_defines.sqf#L35)
 ## interactMenu_intentActiveColors
 
 Type: Variable
 
-Description: ссылка на виджет активного
+Description: 
 
 
 Initial value:
 ```sqf
 [...
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 23](../../../Src/client/Interactions/interactMenu_defines.sqf#L23)
+File: [client\Interactions\interactMenu_defines.sqf at line 37](../../../Src/client/Interactions/interactMenu_defines.sqf#L37)
 ## interactMenu_selectionWidgets
 
 Type: Variable
@@ -2109,7 +2134,7 @@ Initial value:
 ```sqf
 _sels apply ...
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 31](../../../Src/client/Interactions/interactMenu_defines.sqf#L31)
+File: [client\Interactions\interactMenu_defines.sqf at line 48](../../../Src/client/Interactions/interactMenu_defines.sqf#L48)
 ## interactMenu_activeSelectionWidget
 
 Type: Variable
@@ -2121,31 +2146,31 @@ Initial value:
 ```sqf
 [widgetNull] //виджет активной зоны
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 33](../../../Src/client/Interactions/interactMenu_defines.sqf#L33)
+File: [client\Interactions\interactMenu_defines.sqf at line 50](../../../Src/client/Interactions/interactMenu_defines.sqf#L50)
 ## interactMenu_specialActions
 
 Type: Variable
 
-Description: специальные действия на F
+Description: 
 
 
 Initial value:
 ```sqf
 [...
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 36](../../../Src/client/Interactions/interactMenu_defines.sqf#L36)
+File: [client\Interactions\interactMenu_defines.sqf at line 54](../../../Src/client/Interactions/interactMenu_defines.sqf#L54)
 ## interactMenu_specialActions_map_hud
 
 Type: Variable
 
-Description: фразы для худа
+Description: 
 
 
 Initial value:
 ```sqf
 createHashMapFromArray [...
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 50](../../../Src/client/Interactions/interactMenu_defines.sqf#L50)
+File: [client\Interactions\interactMenu_defines.sqf at line 69](../../../Src/client/Interactions/interactMenu_defines.sqf#L69)
 ## interactMenu_curActiveSpecAct
 
 Type: Variable
@@ -2157,7 +2182,7 @@ Initial value:
 ```sqf
 [widgetNull]
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 59](../../../Src/client/Interactions/interactMenu_defines.sqf#L59)
+File: [client\Interactions\interactMenu_defines.sqf at line 79](../../../Src/client/Interactions/interactMenu_defines.sqf#L79)
 ## interactMenu_specActWidgets
 
 Type: Variable
@@ -2169,7 +2194,7 @@ Initial value:
 ```sqf
 _nmap apply ...
 ```
-File: [client\Interactions\interactMenu_defines.sqf at line 64](../../../Src/client/Interactions/interactMenu_defines.sqf#L64)
+File: [client\Interactions\interactMenu_defines.sqf at line 87](../../../Src/client/Interactions/interactMenu_defines.sqf#L87)
 # interactMenu_functions.sqf
 
 ## interactMenu_onUpdateSkills
@@ -2179,15 +2204,15 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactMenu_functions.sqf at line 9](../../../Src/client/Interactions/interactMenu_functions.sqf#L9)
+File: [client\Interactions\interactMenu_functions.sqf at line 13](../../../Src/client/Interactions/interactMenu_functions.sqf#L13)
 ## interactMenu_getMemories
 
 Type: function
 
-Description: Запрос на получение воспоминаний
+Description: 
 - Param: _mode
 
-File: [client\Interactions\interactMenu_functions.sqf at line 34](../../../Src/client/Interactions/interactMenu_functions.sqf#L34)
+File: [client\Interactions\interactMenu_functions.sqf at line 39](../../../Src/client/Interactions/interactMenu_functions.sqf#L39)
 ## interactMenu_setSelection
 
 Type: function
@@ -2196,7 +2221,7 @@ Description:
 - Param: _id
 - Param: _button
 
-File: [client\Interactions\interactMenu_functions.sqf at line 47](../../../Src/client/Interactions/interactMenu_functions.sqf#L47)
+File: [client\Interactions\interactMenu_functions.sqf at line 53](../../../Src/client/Interactions/interactMenu_functions.sqf#L53)
 ## interactMenu_syncCurSelection
 
 Type: function
@@ -2204,7 +2229,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactMenu_functions.sqf at line 60](../../../Src/client/Interactions/interactMenu_functions.sqf#L60)
+File: [client\Interactions\interactMenu_functions.sqf at line 67](../../../Src/client/Interactions/interactMenu_functions.sqf#L67)
 ## interactMenu_onPressSpecAct
 
 Type: function
@@ -2213,7 +2238,7 @@ Description:
 - Param: _ct
 - Param: _butt
 
-File: [client\Interactions\interactMenu_functions.sqf at line 84](../../../Src/client/Interactions/interactMenu_functions.sqf#L84)
+File: [client\Interactions\interactMenu_functions.sqf at line 92](../../../Src/client/Interactions/interactMenu_functions.sqf#L92)
 # interact_component_shared.hpp
 
 ## getObjReference(obj)
@@ -2227,7 +2252,7 @@ Replaced value:
 ```sqf
 (obj getVariable ["ref","noref"])
 ```
-File: [client\Interactions\interact_component_shared.hpp at line 7](../../../Src/client/Interactions/interact_component_shared.hpp#L7)
+File: [client\Interactions\interact_component_shared.hpp at line 11](../../../Src/client/Interactions/interact_component_shared.hpp#L11)
 ## getObjReferenceWithMob(obj)
 
 Type: constant
@@ -2239,7 +2264,7 @@ Replaced value:
 ```sqf
 (if (typeof obj == BASIC_MOB_TYPE) then {obj} else {getObjReference(obj)})
 ```
-File: [client\Interactions\interact_component_shared.hpp at line 9](../../../Src/client/Interactions/interact_component_shared.hpp#L9)
+File: [client\Interactions\interact_component_shared.hpp at line 14](../../../Src/client/Interactions/interact_component_shared.hpp#L14)
 # interact_deprecated.sqf
 
 ## mlp(selection)
@@ -2253,19 +2278,19 @@ Replaced value:
 ```sqf
 #selection
 ```
-File: [client\Interactions\interact_deprecated.sqf at line 196](../../../Src/client/Interactions/interact_deprecated.sqf#L196)
+File: [client\Interactions\interact_deprecated.sqf at line 206](../../../Src/client/Interactions/interact_deprecated.sqf#L206)
 ## DEBUG_DRAW_BBX_DISTANCE
 
 Type: constant
 
-Description: #define DEBUG_ALLOW_DRAW_BBX
+Description: 
 
 
 Replaced value:
 ```sqf
 10
 ```
-File: [client\Interactions\interact_deprecated.sqf at line 253](../../../Src/client/Interactions/interact_deprecated.sqf#L253)
+File: [client\Interactions\interact_deprecated.sqf at line 264](../../../Src/client/Interactions/interact_deprecated.sqf#L264)
 ## interact_debug_viswidgets
 
 Type: Variable
@@ -2277,32 +2302,32 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\Interactions\interact_deprecated.sqf at line 92](../../../Src/client/Interactions/interact_deprecated.sqf#L92)
+File: [client\Interactions\interact_deprecated.sqf at line 98](../../../Src/client/Interactions/interact_deprecated.sqf#L98)
 ## interact_canHandReach
 
 Type: function
 
-Description: позиция достаточно близка чтобы тронуть рукой
+Description: 
 - Param: _pos2
 - Param: _dopDist (optional, default 0)
 
-File: [client\Interactions\interact_deprecated.sqf at line 10](../../../Src/client/Interactions/interact_deprecated.sqf#L10)
+File: [client\Interactions\interact_deprecated.sqf at line 14](../../../Src/client/Interactions/interact_deprecated.sqf#L14)
 ## interact_canSeeObject
 
 Type: function
 
-Description: видно ли объект
+Description: 
 
 
-File: [client\Interactions\interact_deprecated.sqf at line 28](../../../Src/client/Interactions/interact_deprecated.sqf#L28)
+File: [client\Interactions\interact_deprecated.sqf at line 33](../../../Src/client/Interactions/interact_deprecated.sqf#L33)
 ## interact_canSeeMob_handReach
 
 Type: function
 
-Description: #define useviswidgets
+Description: 
 - Param: _target
 
-File: [client\Interactions\interact_deprecated.sqf at line 95](../../../Src/client/Interactions/interact_deprecated.sqf#L95)
+File: [client\Interactions\interact_deprecated.sqf at line 102](../../../Src/client/Interactions/interact_deprecated.sqf#L102)
 ## interact_findNearPosMob
 
 Type: function
@@ -2311,7 +2336,7 @@ Description:
 - Param: _mx
 - Param: _my
 
-File: [client\Interactions\interact_deprecated.sqf at line 194](../../../Src/client/Interactions/interact_deprecated.sqf#L194)
+File: [client\Interactions\interact_deprecated.sqf at line 203](../../../Src/client/Interactions/interact_deprecated.sqf#L203)
 ## interact_debug_drawBBX
 
 Type: function
@@ -2321,7 +2346,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact_deprecated.sqf at line 260](../../../Src/client/Interactions/interact_deprecated.sqf#L260)
+File: [client\Interactions\interact_deprecated.sqf at line 272](../../../Src/client/Interactions/interact_deprecated.sqf#L272)
 ## interact_debug_unboxDecal
 
 Type: function
@@ -2331,7 +2356,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact_deprecated.sqf at line 265](../../../Src/client/Interactions/interact_deprecated.sqf#L265)
+File: [client\Interactions\interact_deprecated.sqf at line 278](../../../Src/client/Interactions/interact_deprecated.sqf#L278)
 ## interact_debug_internal_drawBBXObject
 
 Type: function
@@ -2341,7 +2366,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact_deprecated.sqf at line 270](../../../Src/client/Interactions/interact_deprecated.sqf#L270)
+File: [client\Interactions\interact_deprecated.sqf at line 284](../../../Src/client/Interactions/interact_deprecated.sqf#L284)
 # interact_examine.sqf
 
 ## interact_examine
@@ -2351,7 +2376,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact_examine.sqf at line 8](../../../Src/client/Interactions/interact_examine.sqf#L8)
+File: [client\Interactions\interact_examine.sqf at line 11](../../../Src/client/Interactions/interact_examine.sqf#L11)
 ## interact_pointTo
 
 Type: function
@@ -2359,7 +2384,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact_examine.sqf at line 26](../../../Src/client/Interactions/interact_examine.sqf#L26)
+File: [client\Interactions\interact_examine.sqf at line 30](../../../Src/client/Interactions/interact_examine.sqf#L30)
 # interact_grabbing.sqf
 
 ## INTERACT_GRAB_UPDATE_DELAY
@@ -2373,7 +2398,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Interactions\interact_grabbing.sqf at line 7](../../../Src/client/Interactions/interact_grabbing.sqf#L7)
+File: [client\Interactions\interact_grabbing.sqf at line 11](../../../Src/client/Interactions/interact_grabbing.sqf#L11)
 ## interact_grab_handleupdate
 
 Type: Variable
@@ -2385,7 +2410,7 @@ Initial value:
 ```sqf
 vec2(-1,-1)
 ```
-File: [client\Interactions\interact_grabbing.sqf at line 8](../../../Src/client/Interactions/interact_grabbing.sqf#L8)
+File: [client\Interactions\interact_grabbing.sqf at line 13](../../../Src/client/Interactions/interact_grabbing.sqf#L13)
 ## interact_grab_bias
 
 Type: Variable
@@ -2397,7 +2422,7 @@ Initial value:
 ```sqf
 vec3(0,0,0)
 ```
-File: [client\Interactions\interact_grabbing.sqf at line 10](../../../Src/client/Interactions/interact_grabbing.sqf#L10)
+File: [client\Interactions\interact_grabbing.sqf at line 15](../../../Src/client/Interactions/interact_grabbing.sqf#L15)
 ## interact_grab_dir
 
 Type: Variable
@@ -2409,7 +2434,7 @@ Initial value:
 ```sqf
 vec3(0,0,0)
 ```
-File: [client\Interactions\interact_grabbing.sqf at line 11](../../../Src/client/Interactions/interact_grabbing.sqf#L11)
+File: [client\Interactions\interact_grabbing.sqf at line 17](../../../Src/client/Interactions/interact_grabbing.sqf#L17)
 ## interact_grab_mobObj
 
 Type: Variable
@@ -2421,7 +2446,7 @@ Initial value:
 ```sqf
 objNUll
 ```
-File: [client\Interactions\interact_grabbing.sqf at line 12](../../../Src/client/Interactions/interact_grabbing.sqf#L12)
+File: [client\Interactions\interact_grabbing.sqf at line 19](../../../Src/client/Interactions/interact_grabbing.sqf#L19)
 ## interact_grab_isGrabbed
 
 Type: Variable
@@ -2433,7 +2458,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Interactions\interact_grabbing.sqf at line 14](../../../Src/client/Interactions/interact_grabbing.sqf#L14)
+File: [client\Interactions\interact_grabbing.sqf at line 22](../../../Src/client/Interactions/interact_grabbing.sqf#L22)
 ## interact_grab_start
 
 Type: function
@@ -2444,7 +2469,7 @@ Description:
 - Param: _vDir
 - Param: _sideIdx
 
-File: [client\Interactions\interact_grabbing.sqf at line 16](../../../Src/client/Interactions/interact_grabbing.sqf#L16)
+File: [client\Interactions\interact_grabbing.sqf at line 25](../../../Src/client/Interactions/interact_grabbing.sqf#L25)
 ## interact_grab_onUpdate
 
 Type: function
@@ -2454,7 +2479,7 @@ Description:
 - Param: _sidePos
 - Param: _vDir
 
-File: [client\Interactions\interact_grabbing.sqf at line 26](../../../Src/client/Interactions/interact_grabbing.sqf#L26)
+File: [client\Interactions\interact_grabbing.sqf at line 36](../../../Src/client/Interactions/interact_grabbing.sqf#L36)
 ## interact_grab_stop
 
 Type: function
@@ -2462,7 +2487,7 @@ Type: function
 Description: 
 - Param: _idx
 
-File: [client\Interactions\interact_grabbing.sqf at line 60](../../../Src/client/Interactions/interact_grabbing.sqf#L60)
+File: [client\Interactions\interact_grabbing.sqf at line 71](../../../Src/client/Interactions/interact_grabbing.sqf#L71)
 # interact_mainhandle.sqf
 
 ## __log_mainhandle
@@ -2476,7 +2501,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\Interactions\interact_mainhandle.sqf at line 9](../../../Src/client/Interactions/interact_mainhandle.sqf#L9)
+File: [client\Interactions\interact_mainhandle.sqf at line 12](../../../Src/client/Interactions/interact_mainhandle.sqf#L12)
 ## ON_FINALIZE(reason)
 
 Type: constant
@@ -2490,7 +2515,7 @@ Replaced value:
 ```sqf
 warningformat("Abort - %1",reason);interact_mainHandleLock = true; nextFrame(_codeExit)
 ```
-File: [client\Interactions\interact_mainhandle.sqf at line 16](../../../Src/client/Interactions/interact_mainhandle.sqf#L16)
+File: [client\Interactions\interact_mainhandle.sqf at line 20](../../../Src/client/Interactions/interact_mainhandle.sqf#L20)
 ## ON_FINALIZE(reason)
 
 Type: constant
@@ -2504,7 +2529,7 @@ Replaced value:
 ```sqf
 interact_mainHandleLock = true;nextFrame(_codeExit)
 ```
-File: [client\Interactions\interact_mainhandle.sqf at line 18](../../../Src/client/Interactions/interact_mainhandle.sqf#L18)
+File: [client\Interactions\interact_mainhandle.sqf at line 22](../../../Src/client/Interactions/interact_mainhandle.sqf#L22)
 ## checkExiter()
 
 Type: constant
@@ -2516,7 +2541,7 @@ Replaced value:
 ```sqf
 if (_exiter) exitWith {}
 ```
-File: [client\Interactions\interact_mainhandle.sqf at line 28](../../../Src/client/Interactions/interact_mainhandle.sqf#L28)
+File: [client\Interactions\interact_mainhandle.sqf at line 33](../../../Src/client/Interactions/interact_mainhandle.sqf#L33)
 ## setExiter(mode)
 
 Type: constant
@@ -2528,7 +2553,7 @@ Replaced value:
 ```sqf
 _exiter = mode
 ```
-File: [client\Interactions\interact_mainhandle.sqf at line 29](../../../Src/client/Interactions/interact_mainhandle.sqf#L29)
+File: [client\Interactions\interact_mainhandle.sqf at line 34](../../../Src/client/Interactions/interact_mainhandle.sqf#L34)
 ## interact_mainHandleLock
 
 Type: Variable
@@ -2540,21 +2565,21 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Interactions\interact_mainhandle.sqf at line 21](../../../Src/client/Interactions/interact_mainhandle.sqf#L21)
+File: [client\Interactions\interact_mainhandle.sqf at line 26](../../../Src/client/Interactions/interact_mainhandle.sqf#L26)
 # interact_onScreenObjects.sqf
 
 ## FLOAT_MAX
 
 Type: constant
 
-Description: Define some macros
+Description: 
 
 
 Replaced value:
 ```sqf
 3.40282346639e+38 // Using 32-bit floats
 ```
-File: [client\Interactions\interact_onScreenObjects.sqf at line 152](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L152)
+File: [client\Interactions\interact_onScreenObjects.sqf at line 159](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L159)
 ## interact_internal_onscreenObjs
 
 Type: Variable
@@ -2566,7 +2591,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\Interactions\interact_onScreenObjects.sqf at line 8](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L8)
+File: [client\Interactions\interact_onScreenObjects.sqf at line 11](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L11)
 ## interact_addOnScreenCapturedObject
 
 Type: function
@@ -2574,7 +2599,7 @@ Type: function
 Description: 
 - Param: _wobj
 
-File: [client\Interactions\interact_onScreenObjects.sqf at line 10](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L10)
+File: [client\Interactions\interact_onScreenObjects.sqf at line 14](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L14)
 ## interact_removeOnScreenCapturedObject
 
 Type: function
@@ -2582,7 +2607,7 @@ Type: function
 Description: 
 - Param: _wobj
 
-File: [client\Interactions\interact_onScreenObjects.sqf at line 16](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L16)
+File: [client\Interactions\interact_onScreenObjects.sqf at line 21](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L21)
 ## interact_getOnSceenCapturedObject
 
 Type: function
@@ -2592,7 +2617,7 @@ Description:
 - Param: _getRealPtr (optional, default true)
 - Param: _refOutWorldObj
 
-File: [client\Interactions\interact_onScreenObjects.sqf at line 22](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L22)
+File: [client\Interactions\interact_onScreenObjects.sqf at line 28](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L28)
 ## interact_isInSphere
 
 Type: function
@@ -2603,7 +2628,7 @@ Description:
 - Param: _sphPos (optional, default [])
 - Param: _sphereRadius (optional, default -1)
 
-File: [client\Interactions\interact_onScreenObjects.sqf at line 127](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L127)
+File: [client\Interactions\interact_onScreenObjects.sqf at line 133](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L133)
 ## interact_isPointInSphere
 
 Type: function
@@ -2613,7 +2638,7 @@ Description:
 - Param: _sphereRadius
 - Param: _point
 
-File: [client\Interactions\interact_onScreenObjects.sqf at line 181](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L181)
+File: [client\Interactions\interact_onScreenObjects.sqf at line 189](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L189)
 ## interact_isPointInCone
 
 Type: function
@@ -2624,7 +2649,7 @@ Description:
 - Param: _outerAngle
 - Param: _point
 
-File: [client\Interactions\interact_onScreenObjects.sqf at line 191](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L191)
+File: [client\Interactions\interact_onScreenObjects.sqf at line 200](../../../Src/client/Interactions/interact_onScreenObjects.sqf#L200)
 # interact_resist.sqf
 
 ## interact_processResist
@@ -2634,21 +2659,21 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact_resist.sqf at line 7](../../../Src/client/Interactions/interact_resist.sqf#L7)
+File: [client\Interactions\interact_resist.sqf at line 11](../../../Src/client/Interactions/interact_resist.sqf#L11)
 # progress.sqf
 
 ## SIZEPROG
 
 Type: constant
 
-Description: #define PROGRESS_DEBUG
+Description: 
 
 
 Replaced value:
 ```sqf
 15
 ```
-File: [client\Interactions\progress.sqf at line 9](../../../Src/client/Interactions/progress.sqf#L9)
+File: [client\Interactions\progress.sqf at line 12](../../../Src/client/Interactions/progress.sqf#L12)
 ## ONEPERCENTSIZE
 
 Type: constant
@@ -2660,7 +2685,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [client\Interactions\progress.sqf at line 10](../../../Src/client/Interactions/progress.sqf#L10)
+File: [client\Interactions\progress.sqf at line 14](../../../Src/client/Interactions/progress.sqf#L14)
 ## PROGRADIUSPERCENT
 
 Type: constant
@@ -2672,7 +2697,7 @@ Replaced value:
 ```sqf
 40
 ```
-File: [client\Interactions\progress.sqf at line 11](../../../Src/client/Interactions/progress.sqf#L11)
+File: [client\Interactions\progress.sqf at line 17](../../../Src/client/Interactions/progress.sqf#L17)
 ## PROGRESS_MAX_DISTANCE_FALLDOWN
 
 Type: constant
@@ -2684,7 +2709,7 @@ Replaced value:
 ```sqf
 0.2
 ```
-File: [client\Interactions\progress.sqf at line 13](../../../Src/client/Interactions/progress.sqf#L13)
+File: [client\Interactions\progress.sqf at line 20](../../../Src/client/Interactions/progress.sqf#L20)
 ## PROGRESS_DISTANCE_TARGET_FALLDOWN
 
 Type: constant
@@ -2696,7 +2721,7 @@ Replaced value:
 ```sqf
 0.01
 ```
-File: [client\Interactions\progress.sqf at line 14](../../../Src/client/Interactions/progress.sqf#L14)
+File: [client\Interactions\progress.sqf at line 22](../../../Src/client/Interactions/progress.sqf#L22)
 ## TIME_TO_OUTFADE_PROGRESS
 
 Type: constant
@@ -2708,7 +2733,7 @@ Replaced value:
 ```sqf
 0.000006
 ```
-File: [client\Interactions\progress.sqf at line 17](../../../Src/client/Interactions/progress.sqf#L17)
+File: [client\Interactions\progress.sqf at line 25](../../../Src/client/Interactions/progress.sqf#L25)
 ## TIME_TO_SUCCESS_PROGRESS
 
 Type: constant
@@ -2720,7 +2745,7 @@ Replaced value:
 ```sqf
 0.00003
 ```
-File: [client\Interactions\progress.sqf at line 18](../../../Src/client/Interactions/progress.sqf#L18)
+File: [client\Interactions\progress.sqf at line 27](../../../Src/client/Interactions/progress.sqf#L27)
 ## TIME_TO_ABORT_PROGRESS
 
 Type: constant
@@ -2732,7 +2757,7 @@ Replaced value:
 ```sqf
 0.00001
 ```
-File: [client\Interactions\progress.sqf at line 19](../../../Src/client/Interactions/progress.sqf#L19)
+File: [client\Interactions\progress.sqf at line 29](../../../Src/client/Interactions/progress.sqf#L29)
 ## ROUNDSTEP
 
 Type: constant
@@ -2744,7 +2769,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [client\Interactions\progress.sqf at line 21](../../../Src/client/Interactions/progress.sqf#L21)
+File: [client\Interactions\progress.sqf at line 32](../../../Src/client/Interactions/progress.sqf#L32)
 ## ROUNDCOUNT
 
 Type: constant
@@ -2756,7 +2781,7 @@ Replaced value:
 ```sqf
 (360 / ROUNDSTEP)
 ```
-File: [client\Interactions\progress.sqf at line 22](../../../Src/client/Interactions/progress.sqf#L22)
+File: [client\Interactions\progress.sqf at line 34](../../../Src/client/Interactions/progress.sqf#L34)
 ## override_setpos_precent_w(h_value)
 
 Type: constant
@@ -2768,19 +2793,19 @@ Replaced value:
 ```sqf
 transformSizeByAR(h_value)
 ```
-File: [client\Interactions\progress.sqf at line 24](../../../Src/client/Interactions/progress.sqf#L24)
+File: [client\Interactions\progress.sqf at line 37](../../../Src/client/Interactions/progress.sqf#L37)
 ## MAX_ALLOW_DISTANCE_CAM_OFFSET
 
 Type: constant
 
-Description: interact_progress_lastPlayerDir = 0;
+Description: 
 
 
 Replaced value:
 ```sqf
 0.01
 ```
-File: [client\Interactions\progress.sqf at line 42](../../../Src/client/Interactions/progress.sqf#L42)
+File: [client\Interactions\progress.sqf at line 64](../../../Src/client/Interactions/progress.sqf#L64)
 ## interact_progress_hasProcessed
 
 Type: Variable
@@ -2792,43 +2817,43 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Interactions\progress.sqf at line 30](../../../Src/client/Interactions/progress.sqf#L30)
+File: [client\Interactions\progress.sqf at line 44](../../../Src/client/Interactions/progress.sqf#L44)
 ## interact_progress_countItms
 
 Type: Variable
 
-Description: interact_progress_curItmIndex = 0;
+Description: 
 
 
 Initial value:
 ```sqf
 0 //use inline interact_progress_countItms
 ```
-File: [client\Interactions\progress.sqf at line 32](../../../Src/client/Interactions/progress.sqf#L32)
+File: [client\Interactions\progress.sqf at line 47](../../../Src/client/Interactions/progress.sqf#L47)
 ## interact_progress_handleUpdate
 
 Type: Variable
 
-Description: #define interact_progress_countItms 90
+Description: 
 
 
 Initial value:
 ```sqf
 -1
 ```
-File: [client\Interactions\progress.sqf at line 34](../../../Src/client/Interactions/progress.sqf#L34)
+File: [client\Interactions\progress.sqf at line 50](../../../Src/client/Interactions/progress.sqf#L50)
 ## interact_progress_tick
 
 Type: Variable
 
-Description: interact_progress_lastDelta = 0;
+Description: 
 
 
 Initial value:
 ```sqf
 0
 ```
-File: [client\Interactions\progress.sqf at line 36](../../../Src/client/Interactions/progress.sqf#L36)
+File: [client\Interactions\progress.sqf at line 53](../../../Src/client/Interactions/progress.sqf#L53)
 ## interact_progress_pData
 
 Type: Variable
@@ -2840,19 +2865,19 @@ Initial value:
 ```sqf
 ["",objnull] //ref to player, and ptr to target
 ```
-File: [client\Interactions\progress.sqf at line 37](../../../Src/client/Interactions/progress.sqf#L37)
+File: [client\Interactions\progress.sqf at line 55](../../../Src/client/Interactions/progress.sqf#L55)
 ## interact_progress_lastTargetPos
 
 Type: Variable
 
-Description: ref to player, and ptr to target
+Description: 
 
 
 Initial value:
 ```sqf
 vec3(0,0,0)
 ```
-File: [client\Interactions\progress.sqf at line 38](../../../Src/client/Interactions/progress.sqf#L38)
+File: [client\Interactions\progress.sqf at line 57](../../../Src/client/Interactions/progress.sqf#L57)
 ## interact_progress_lastPlayerPos
 
 Type: Variable
@@ -2864,7 +2889,7 @@ Initial value:
 ```sqf
 vec3(0,0,0)
 ```
-File: [client\Interactions\progress.sqf at line 39](../../../Src/client/Interactions/progress.sqf#L39)
+File: [client\Interactions\progress.sqf at line 59](../../../Src/client/Interactions/progress.sqf#L59)
 ## interact_progress_lastScreenPoint
 
 Type: Variable
@@ -2876,7 +2901,7 @@ Initial value:
 ```sqf
 vec3(0,0,0)
 ```
-File: [client\Interactions\progress.sqf at line 40](../../../Src/client/Interactions/progress.sqf#L40)
+File: [client\Interactions\progress.sqf at line 61](../../../Src/client/Interactions/progress.sqf#L61)
 ## interact_progress_renderPos
 
 Type: Variable
@@ -2888,7 +2913,7 @@ Initial value:
 ```sqf
 vec3(0,0,0)
 ```
-File: [client\Interactions\progress.sqf at line 43](../../../Src/client/Interactions/progress.sqf#L43)
+File: [client\Interactions\progress.sqf at line 66](../../../Src/client/Interactions/progress.sqf#L66)
 ## interact_progress_lastProgressType
 
 Type: Variable
@@ -2900,31 +2925,31 @@ Initial value:
 ```sqf
 -1
 ```
-File: [client\Interactions\progress.sqf at line 44](../../../Src/client/Interactions/progress.sqf#L44)
+File: [client\Interactions\progress.sqf at line 68](../../../Src/client/Interactions/progress.sqf#L68)
 ## interact_progress_checkDelegates
 
 Type: Variable
 
-Description: if return true then falldown
+Description: 
 
 
 Initial value:
 ```sqf
 [...
 ```
-File: [client\Interactions\progress.sqf at line 99](../../../Src/client/Interactions/progress.sqf#L99)
+File: [client\Interactions\progress.sqf at line 126](../../../Src/client/Interactions/progress.sqf#L126)
 ## interact_progress_startColor
 
 Type: Variable
 
-Description: widget components and initializers
+Description: 
 
 
 Initial value:
 ```sqf
 [0,0.427,0.298,1]
 ```
-File: [client\Interactions\progress.sqf at line 195](../../../Src/client/Interactions/progress.sqf#L195)
+File: [client\Interactions\progress.sqf at line 227](../../../Src/client/Interactions/progress.sqf#L227)
 ## interact_progress_endColor
 
 Type: Variable
@@ -2936,7 +2961,7 @@ Initial value:
 ```sqf
 [0.11,0.161,0.043,1]
 ```
-File: [client\Interactions\progress.sqf at line 196](../../../Src/client/Interactions/progress.sqf#L196)
+File: [client\Interactions\progress.sqf at line 229](../../../Src/client/Interactions/progress.sqf#L229)
 ## interact_progress_widgets
 
 Type: Variable
@@ -2948,27 +2973,46 @@ Initial value:
 ```sqf
 [widgetNull,widgetNull] //ctg,text
 ```
-File: [client\Interactions\progress.sqf at line 197](../../../Src/client/Interactions/progress.sqf#L197)
+File: [client\Interactions\progress.sqf at line 231](../../../Src/client/Interactions/progress.sqf#L231)
 ## interact_progress_allItems
 
 Type: Variable
 
-Description: ctg,text
+Description: 
 
 
 Initial value:
 ```sqf
 []
 ```
-File: [client\Interactions\progress.sqf at line 198](../../../Src/client/Interactions/progress.sqf#L198)
+File: [client\Interactions\progress.sqf at line 233](../../../Src/client/Interactions/progress.sqf#L233)
+## interact_progress_startProg
+
+Type: function
+
+Description: 
+- Param: _ptrPlayer
+- Param: _target
+- Param: _checkType
+- Param: _duration
+
+File: [client\Interactions\progress.sqf at line 79](../../../Src/client/Interactions/progress.sqf#L79)
+## interact_progress_cancelProgress
+
+Type: function
+
+Description: 
+
+
+File: [client\Interactions\progress.sqf at line 115](../../../Src/client/Interactions/progress.sqf#L115)
 ## interact_progress_start
 
 Type: function
 
-Description: Запуск функции прогресса
+Description: 
 - Param: _duration
 
-File: [client\Interactions\progress.sqf at line 120](../../../Src/client/Interactions/progress.sqf#L120)
+File: [client\Interactions\progress.sqf at line 148](../../../Src/client/Interactions/progress.sqf#L148)
 ## interact_progress_onUpdate
 
 Type: function
@@ -2976,34 +3020,34 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\progress.sqf at line 141](../../../Src/client/Interactions/progress.sqf#L141)
+File: [client\Interactions\progress.sqf at line 170](../../../Src/client/Interactions/progress.sqf#L170)
 ## interact_progress_success
 
 Type: function
 
-Description: Прогресс выполнен
+Description: 
 
 
-File: [client\Interactions\progress.sqf at line 170](../../../Src/client/Interactions/progress.sqf#L170)
+File: [client\Interactions\progress.sqf at line 200](../../../Src/client/Interactions/progress.sqf#L200)
 ## interact_progress_stop
 
 Type: function
 
-Description: Остановка прогресса
+Description: 
 - Param: _sendToServerCancellationToken (optional, default false)
 - Param: _fadeValue (optional, default 0)
 
-File: [client\Interactions\progress.sqf at line 176](../../../Src/client/Interactions/progress.sqf#L176)
+File: [client\Interactions\progress.sqf at line 207](../../../Src/client/Interactions/progress.sqf#L207)
 ## interact_progress_init
 
 Type: function
 
-Description: initializer progress
+Description: 
 - Param: _rs
 - Param: _gs
 - Param: _bs
 
-File: [client\Interactions\progress.sqf at line 203](../../../Src/client/Interactions/progress.sqf#L203)
+File: [client\Interactions\progress.sqf at line 239](../../../Src/client/Interactions/progress.sqf#L239)
 ## interact_progress_applyColorTheme
 
 Type: function
@@ -3011,7 +3055,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\progress.sqf at line 248](../../../Src/client/Interactions/progress.sqf#L248)
+File: [client\Interactions\progress.sqf at line 285](../../../Src/client/Interactions/progress.sqf#L285)
 # RayCastConcept.sqf
 
 ## getPosObjFromList(idx)
@@ -3176,7 +3220,7 @@ Replaced value:
 ```sqf
 0.15
 ```
-File: [client\Interactions\verbs.sqf at line 10](../../../Src/client/Interactions/verbs.sqf#L10)
+File: [client\Interactions\verbs.sqf at line 15](../../../Src/client/Interactions/verbs.sqf#L15)
 ## TIME_FADEIN_VERBMENU
 
 Type: constant
@@ -3188,7 +3232,7 @@ Replaced value:
 ```sqf
 0.15
 ```
-File: [client\Interactions\verbs.sqf at line 11](../../../Src/client/Interactions/verbs.sqf#L11)
+File: [client\Interactions\verbs.sqf at line 17](../../../Src/client/Interactions/verbs.sqf#L17)
 ## SIZE_WIND_W
 
 Type: constant
@@ -3200,7 +3244,7 @@ Replaced value:
 ```sqf
 15
 ```
-File: [client\Interactions\verbs.sqf at line 97](../../../Src/client/Interactions/verbs.sqf#L97)
+File: [client\Interactions\verbs.sqf at line 107](../../../Src/client/Interactions/verbs.sqf#L107)
 ## SIZE_WIND_H
 
 Type: constant
@@ -3212,7 +3256,7 @@ Replaced value:
 ```sqf
 30
 ```
-File: [client\Interactions\verbs.sqf at line 98](../../../Src/client/Interactions/verbs.sqf#L98)
+File: [client\Interactions\verbs.sqf at line 108](../../../Src/client/Interactions/verbs.sqf#L108)
 ## SIZE_BUTTON
 
 Type: constant
@@ -3224,7 +3268,7 @@ Replaced value:
 ```sqf
 20
 ```
-File: [client\Interactions\verbs.sqf at line 99](../../../Src/client/Interactions/verbs.sqf#L99)
+File: [client\Interactions\verbs.sqf at line 109](../../../Src/client/Interactions/verbs.sqf#L109)
 ## verb_widgets
 
 Type: Variable
@@ -3236,7 +3280,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\Interactions\verbs.sqf at line 303](../../../Src/client/Interactions/verbs.sqf#L303)
+File: [client\Interactions\verbs.sqf at line 320](../../../Src/client/Interactions/verbs.sqf#L320)
 ## verb_lastclickedpos
 
 Type: Variable
@@ -3248,7 +3292,7 @@ Initial value:
 ```sqf
 [0,0]
 ```
-File: [client\Interactions\verbs.sqf at line 304](../../../Src/client/Interactions/verbs.sqf#L304)
+File: [client\Interactions\verbs.sqf at line 322](../../../Src/client/Interactions/verbs.sqf#L322)
 ## verb_isMenuLoaded
 
 Type: Variable
@@ -3260,7 +3304,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Interactions\verbs.sqf at line 305](../../../Src/client/Interactions/verbs.sqf#L305)
+File: [client\Interactions\verbs.sqf at line 324](../../../Src/client/Interactions/verbs.sqf#L324)
 ## verb_lastTargetObjectData
 
 Type: Variable
@@ -3272,7 +3316,7 @@ Initial value:
 ```sqf
 [objnull,[0,0,0]] //колбэк дата последнего захваченного объекта
 ```
-File: [client\Interactions\verbs.sqf at line 309](../../../Src/client/Interactions/verbs.sqf#L309)
+File: [client\Interactions\verbs.sqf at line 329](../../../Src/client/Interactions/verbs.sqf#L329)
 ## verb_lastCheckedObjectData
 
 Type: Variable
@@ -3284,7 +3328,7 @@ Initial value:
 ```sqf
 VERB_LASTCHECKEDOBJECTDATA_DEFAULT //[object reference,interact bias pos (use (object modeltoworld pos)),ismob]
 ```
-File: [client\Interactions\verbs.sqf at line 310](../../../Src/client/Interactions/verbs.sqf#L310)
+File: [client\Interactions\verbs.sqf at line 332](../../../Src/client/Interactions/verbs.sqf#L332)
 ## interact_onLoadVerbs
 
 Type: function
@@ -3294,15 +3338,15 @@ Description:
 - Param: _verbList
 - Param: _targetHash
 
-File: [client\Interactions\verbs.sqf at line 13](../../../Src/client/Interactions/verbs.sqf#L13)
+File: [client\Interactions\verbs.sqf at line 20](../../../Src/client/Interactions/verbs.sqf#L20)
 ## verb_internal_checkBind
 
 Type: function
 
-Description: Проверка бинда и возвращение доп постфикса
+Description: 
 - Param: _intorstr
 
-File: [client\Interactions\verbs.sqf at line 70](../../../Src/client/Interactions/verbs.sqf#L70)
+File: [client\Interactions\verbs.sqf at line 78](../../../Src/client/Interactions/verbs.sqf#L78)
 ## verb_translate
 
 Type: function
@@ -3310,7 +3354,7 @@ Type: function
 Description: 
 - Param: _verb
 
-File: [client\Interactions\verbs.sqf at line 82](../../../Src/client/Interactions/verbs.sqf#L82)
+File: [client\Interactions\verbs.sqf at line 91](../../../Src/client/Interactions/verbs.sqf#L91)
 ## verb_loadMenu
 
 Type: function
@@ -3321,15 +3365,15 @@ Description:
 - Param: _targetName
 - Param: _isInInventory (optional, default false)
 
-File: [client\Interactions\verbs.sqf at line 94](../../../Src/client/Interactions/verbs.sqf#L94)
+File: [client\Interactions\verbs.sqf at line 104](../../../Src/client/Interactions/verbs.sqf#L104)
 ## verb_onPickVerb
 
 Type: function
 
-Description: Событие которое возникает при нажатии на кнопку действия
+Description: 
 - Param: _control
 
-File: [client\Interactions\verbs.sqf at line 182](../../../Src/client/Interactions/verbs.sqf#L182)
+File: [client\Interactions\verbs.sqf at line 193](../../../Src/client/Interactions/verbs.sqf#L193)
 ## verb_resetDataForND
 
 Type: function
@@ -3337,7 +3381,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\verbs.sqf at line 223](../../../Src/client/Interactions/verbs.sqf#L223)
+File: [client\Interactions\verbs.sqf at line 236](../../../Src/client/Interactions/verbs.sqf#L236)
 ## verb_unloadMenu
 
 Type: function
@@ -3345,7 +3389,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\verbs.sqf at line 232](../../../Src/client/Interactions/verbs.sqf#L232)
+File: [client\Interactions\verbs.sqf at line 246](../../../Src/client/Interactions/verbs.sqf#L246)
 ## verb_setHideInventory
 
 Type: function
@@ -3354,12 +3398,12 @@ Description:
 - Param: _mode
 - Param: _closeFlag (optional, default false)
 
-File: [client\Interactions\verbs.sqf at line 256](../../../Src/client/Interactions/verbs.sqf#L256)
-## isInsideVerbMenu
+File: [client\Interactions\verbs.sqf at line 271](../../../Src/client/Interactions/verbs.sqf#L271)
+## verb_isInsideVerbMenu
 
 Type: function
 
 Description: 
 
 
-File: [client\Interactions\verbs.sqf at line 299](../../../Src/client/Interactions/verbs.sqf#L299)
+File: [client\Interactions\verbs.sqf at line 315](../../../Src/client/Interactions/verbs.sqf#L315)

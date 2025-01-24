@@ -41,12 +41,16 @@
 
 #include "interactEmoteMenu.sqf"
 
+namespace(Interact,interact_)
+
+decl(bool(bool;bool))
 interact_isActive = {
 	params [["_conscious",true],["_stunned",false]];
 	ifcheck(_conscious,!cd_isUnconscious && hud_sleep == 0,true) &&
 	ifcheck(_stunned,call smd_isStunned,true)
 };
 
+decl(void(bool;bool))
 interact_onLMBPress = {
 	params [["_isWorld",true],["_isSelfClick",false]];
 	
@@ -70,6 +74,7 @@ interact_onLMBPress = {
 	rpcSendToServer("onClickTarget",[player arg _hash]);*/
 };
 
+decl(void(bool))
 interact_onRMBPress = {
 	params [["_isWorld",true]];
 
@@ -103,10 +108,12 @@ interact_onRMBPress = {
 
 };
 
+decl(any[])
 verb_internal_bufferedObjData = [[objNUll,vec3(0,0,0),false],[50,50]];
+decl(bool)
 verb_internal_isAwaitWorldVerb = false;
 
-
+decl(void())
 interact_onMainAction = {
 	/*(objnull call interact_getIntersectData) params ["_obj","_posAtl"];
 
@@ -122,6 +129,7 @@ interact_onMainAction = {
 	[false,INTERACT_RPC_MAIN] call interact_sendAction;
 };
 
+decl(void())
 interact_onExtraAction = {
 	[false,INTERACT_RPC_EXTRA] call interact_sendAction;
 	/*(objnull call interact_getIntersectData) params ["_obj","_posAtl"];
@@ -138,6 +146,7 @@ interact_onExtraAction = {
 
 //основной интерфейс отправки действия на сервер
 //параметры: _isMouseMode - если включен то вектор направления будет браться от позиции мыши
+decl(void(bool;int))
 interact_sendAction = {
 	params ["_isMouseMode","_actionType"];
 	private _data = array_copy(cam_renderPos);
@@ -168,7 +177,7 @@ interact_sendAction = {
 	rpcSendToServer("iact",_data);
 };
 
-
+decl(void(bool))
 interact_setCombatMode = {
 	params ["_newMode"];
 	
@@ -187,6 +196,7 @@ interact_setCombatMode = {
 
 
 //Получает цель. В отличии от cursorObject может поймать объект в этом же кадре при свапе видимости
+decl(any())
 interact_cursorObject = {
 	private _ins = lineIntersectsSurfaces [
   		AGLToASL positionCameraToWorld [0,0,0],
@@ -218,6 +228,7 @@ interact_cursorObject = {
 };
 
 //Получает точку пересечения центра экрана в мир
+decl(any())
 interact_getCursorIntersectPos = {
 	private _ins = lineIntersectsSurfaces [
   		AGLToASL positionCameraToWorld [0,0,0],
@@ -244,6 +255,7 @@ interact_getCursorIntersectPos = {
 };
 
 //Получает информацию об объекте пересечения в виде: [object, intersect position as ATL,vectorUp lod]
+decl(any[](mesh))
 interact_getIntersectData = {
 	private _ignored = _this param [0,objnull];
 
@@ -272,6 +284,7 @@ interact_getIntersectData = {
 };
 
 // Функция аналогична interact_getIntersectData но по-умоному вычисляет позицию не из центра а из мыши (если возможно)
+decl(any[](mesh))
 interact_getMouseIntersectData = {
 	private _ignored = _this param [0,objnull];
 
@@ -300,6 +313,7 @@ interact_getMouseIntersectData = {
 };
 
 //возвращает [object,atl pos,vectorup normal]
+decl(any[](vector3;vector3;mesh;mesh))
 interact_getRayCastData = {
 	params ["_startPos","_endPos",["_ig1",objnull],["_ig2",objnull]];
 
@@ -328,16 +342,19 @@ interact_getRayCastData = {
 };
 
 // Проверяет дистанцию до позиции - может ли взаимодействовать по дистанции
+decl(bool(vector3))
 interact_checkPosition = {
 	(_this distance getCenterMobPos(player)) <= INTERACT_DISTANCE
 };
 
 // Проверяет видимость позиции в экране
+decl(bool(vector3))
 interact_inScreenView = {
 	(_this call positionWorldToScreen) call canSeeScreenPoint;
 };
 
 //Получает направление (азимут) головы. Взято с TFAR_fnc_currentDirection
+decl(float())
 interact_getHeadDirection = {
 	private ["_current_look_at_x","_current_look_at_y","_current_look_at_z","_current_hyp_horizontal","_current_rotation_horizontal"];
 
@@ -366,6 +383,7 @@ interact_getHeadDirection = {
 
 // Проверяет пересечение с позицией исключая целевой объект. Луч всегда берётся из центра моба
 // Иным образом функция является проверкой: может ли игрок дотянуться рукой до позиции
+decl(bool(vector3;mesh))
 interact_canTouchPosition = {
 	params ["_posAtl",["_ignored",objNull]];
 
@@ -395,6 +413,7 @@ interact_canTouchPosition = {
 
 //#define INTERACT_LOG_CANINTERACTWITHOBJECT
 // Основной обработчик возможности взаимодействия с пердметом. Включает в себя все стандартные проверки позиции, направления и пересечения
+decl(bool(mesh;vector3))
 interact_canInteractWithObject = {
 	params ["_object","_pos"];
 
@@ -422,6 +441,7 @@ interact_canInteractWithObject = {
 };
 
 //Находит ближайшую точку на линии игрок->объект
+decl(vector3(any))
 interact_getNearPointForObject = {
 	params ["_targetOrPos"];
 
@@ -445,6 +465,7 @@ interact_getNearPointForObject = {
 };
 
 //получает количество пересечений
+decl(int(vector3))
 interact_getIntersectionCount = {
 	params ["_targetPos"];
 	private _ins = lineIntersectsSurfaces [
@@ -465,16 +486,20 @@ interact_getIntersectionCount = {
 ================================================================================
 */
 
+decl(bool)
 interact_isOpenMousemode = false;
+decl(bool)
 interact_isMouseModeActive = true; //допускается ли активность режима мышь/мир
 
 // Невозможность интеракции будет блокировать загрузку verb-menu, LMB action, Main and Extra actions.
 // Однако открыть меню интеракций и изменить какое-либо из значений (кроме интента) можно без этой проверки
+decl(bool())
 interact_canUseInteract = {
 	OBSOLETE(interact::canUseinteract);
 	([] call interact_isActive)
 };
 
+decl(void())
 interact_openMouseMode = {
 
 	private _d = getDisplay;
@@ -500,6 +525,7 @@ interact_openMouseMode = {
 
 };
 
+decl(void())
 interact_closeMouseMode = {
 
 	if (inventory_supressInventoryOpen) exitWith {
@@ -554,6 +580,7 @@ interact_closeMouseMode = {
 	call interact_closeMouseMode_handle;
 };
 
+decl(void())
 interact_closeMouseMode_handle = {
 
 	interact_isOpenMousemode = false;
@@ -569,6 +596,7 @@ interact_closeMouseMode_handle = {
 ================================================================================
 */
 
+decl(void(display;int;float;float;bool;bool;bool))
 interact_onMouseButtonUp = {
 	params ["_d","_key","_xPos", "_yPos", "_shift", "_ctrl", "_alt"];
 
@@ -584,7 +612,7 @@ interact_onMouseButtonUp = {
 	if (call smd_isStunned) exitWith {};
 
 	if verb_isMenuLoaded exitWith {
-		if (_key == MOUSE_RIGHT && !(call isInsideVerbMenu)) then {
+		if (_key == MOUSE_RIGHT && !(call verb_isInsideVerbMenu)) then {
 			call verb_unloadMenu;
 		};
 	};
@@ -646,6 +674,7 @@ interact_onMouseButtonUp = {
 ================================================================================
 */
 
+decl(void())
 interact_getReachItem = {
 	FHEADER;
 	/*
@@ -714,6 +743,7 @@ interact_getReachItem = {
 
 //onlydebug
 #ifdef DEBUG
+decl(void())
 setpostestmobinmouse = {
 	private _end = AGLToASL ([] call screenPosToWorldPoint);
 

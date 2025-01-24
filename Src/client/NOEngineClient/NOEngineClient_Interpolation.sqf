@@ -225,9 +225,12 @@ noe_client_interp_start = {
 				_tEventOnDelete pushBack [
 					[_x,_ltX],{
 						params ["_o","_lt"];
-						_o hideObject false;
-						if(_lt!=-1) then {
-							[_lt,_o] call le_loadLight;
+						//? по непонятным причинам в списке объектов оказывается null объект. возможно это нормальное поведение
+						if !isNullReference(_o) then {						
+							_o hideObject false;
+							if(_lt!=-1) then {
+								[_lt,_o] call le_loadLight;
+							};
 						};
 					}
 				];

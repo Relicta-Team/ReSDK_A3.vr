@@ -3,10 +3,13 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
 
-clistat_onupdate_handle = -1;
-clistat_isEnabled = false;
-clistat_widgets = [widgetNull,widgetNull,widgetNull];
+namespace(ClientStatistic,clistat_)
+
+decl(int) clistat_onupdate_handle = -1;
+decl(bool) clistat_isEnabled = false;
+decl(widget[]) clistat_widgets = [widgetNull,widgetNull,widgetNull];
 
 _gui = getGUI;
 private _ctg = [_gui,WIDGETGROUP,[0,40,20,60]] call createWidget;
@@ -17,34 +20,40 @@ _back setBackgroundColor [0,0.07,0.01,0.4];
 _text = [_gui,TEXT,[0,0,100,100],_ctg] call createWidget;
 
 clistat_widgets = [_ctg,_back,_text];
-
+inline_macro
 #define colortext(clr,txt) "<t color='#"+'clr'+"'>"+txt+"</t>"
-
+decl(float[])
 clistat_internal_allch_buffer = [0,0,0];
+decl(float)
 clistat_internal_allch_buffer_frame = 0;
-
-clistat_buffer = [
+decl(any[][])
+clistat_buffer = [];
 	#ifdef EDITOR
-	[colortext(CC5460,"ReNode:"),{
+clistat_buffer pushback [colortext(CC5460,"ReNode:"),{
 		ifcheck(call nbp_isEditorConnected,"CONNECTED","off")
-	}],
+	}];
 	#endif
+clistat_buffer append [
 	[colortext(CC5460,"fps: "),{
 		format["cur:%1; min:%2; dt:%3;",round diag_fps,round diag_fpsmin,diag_deltaTime]
 	}],
 	[colortext(CC5460,"frame: "),{diag_frameno toFixed 0}],
-	[colortext(E4F500,"LightRender(depr): "),{_nonvis = 0; _sceneObj = 0;
-		{
-			if !(_x getvariable ["isRndrd",false]) then {INC(_nonvis)};
-			if (_x call hasObjectInScene) then {INC(_sceneObj)};
-		} foreach le_allLights; format["all:%1 (dis:%2;rend:%3)		s:%4",count le_allLights,_nonvis,(count le_allLights)-_nonvis,_sceneObj]
-	}],
+	// [colortext(E4F500,"LightRender(depr): "),{_nonvis = 0; _sceneObj = 0;
+	// 	{
+	// 		if !(_x getvariable ["isRndrd",false]) then {INC(_nonvis)};
+	// 		if (_x call hasObjectInScene) then {INC(_sceneObj)};
+	// 	} foreach le_allLights; format["all:%1 (dis:%2;rend:%3)		s:%4",count le_allLights,_nonvis,(count le_allLights)-_nonvis,_sceneObj]
+	// }],
 	[colortext(E4F500,"LightSC: "),{
 		format["cnt:%1;cull:%2",count lesc_list_allDataObjs,lesc_cullCnt]
-	}],
+	}]
+];
 	#ifdef EDITOR
-	[colortext(E4F500,"ServerLightRender: "),{count (attachedObjects slt_const_dummyMob)}],
+clistat_buffer pushBack [colortext(E4F500,"ALt: "),{format["%1 lum",(getLightingAt cam_object) select 3]}];
+clistat_buffer pushback [colortext(E4F500,"ServerLightRender: "),{count (attachedObjects slt_const_dummyMob)}];
 	#endif
+
+clistat_buffer append [
 	[colortext(D3C857,"NOE packets: "),{format["amount %1; packets query %2",noe_client_packetId,count noe_client_packets]}],
 	[colortext(D3C857,"NOE progress: "),{
 		_ppos = getPosATL player; _buf = [];
@@ -104,56 +113,59 @@ clistat_buffer = [
 		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;
 		_state = _ar get "state";
 		format["st:%1(%2)",NAT_LOADING_SLIST_STATES select (_state+1),_state]
-	}],
+	}]
+];
 	#ifdef ENABLE_OPTIMIZATION
-	[colortext(57D4AC,"NAT_RGC:"),{
+clistat_buffer pushback [colortext(57D4AC,"NAT_RGC:"),{
 		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;
 		format["%1",(_ar get "_regions") apply {count _x}]
-	}],
+	}];
 	#endif
 	#ifdef NET_ATMOS_OPTIMIZATION_RENDER
-	[colortext(57D4AC,"NAT_CULL:"),{
+clistat_buffer pushback [colortext(57D4AC,"NAT_CULL:"),{
 		format["cull:%1;gbf:%2;ms:%3",aopt_cli_culledCnt,aopt_cli_gbuffCull,aopt_cli_prevCallTime*1000]
-	}],
+	}];
 	#endif
 	#ifdef EDITOR
-	[colortext(57D4AC,"ATMOS_SRV: "),{
+clistat_buffer pushback [colortext(57D4AC,"ATMOS_SRV: "),{
 		format["R:%1 C:%2 A:%3",count atmos_map_chunkAreas,atmos_chunks,atmos_areas]
-	}],
+	}];
 	#endif
+clistat_buffer append [
 	[colortext(5D56DB,"Receiver in world:"),{count vs_allWorldRadios}],
 	[colortext(5D56DB,"TF local transport:"),{count vs_processingRadiosList}],
 	[colortext(1FC4C4,"Cur music: "),{ifcheck(isNull(music_playedObject),"no",music_playedObject get "file")}],
 	[colortext(1FC4C4,"m_playedtime:"),{ifcheck(isNull(music_playedObject),"no",str(music_playedObject get "curtime"))}],
 	[colortext(1FC4C4,"m_vol:"),{str musicVolume}],
 	[colortext(1FC4C4,"m_curchan:"),{str music_internal_lastPriority}]
+];
 	#ifdef EDITOR
-	,[colortext(1FC4C4,"stepdat: "),{format["%1 x%2; ptr:%3 all:%4"
+clistat_buffer append [
+	[colortext(1FC4C4,"stepdat: "),{format["%1 x%2; ptr:%3 all:%4"
 		,os_steps_currentSoundName
 		,os_steps_currentSoundCount
 		,os_steps_lastPtr
 		,count os_steps_map_objToMaterialPtr]}]
-	#endif
-	#ifdef EDITOR
 	,["<t color='#832DCF'>[ENGINE]</t> Global threads:",{format["upd %1; hndl %2",count cba_common_perFrameHandlerArray,count cba_common_PFHhandles]}]
 	,["<t color='#832DCF'>[ENGINE]</t> Delayed:",{str count cba_common_waitAndExecArray}]
 	,["<t color='#832DCF'>[ENGINE]</t> Async delayed:",{str count cba_common_waitUntilAndExecArray}]
 	,["<t color='#2BA639'>[OBJ]</t> Created objects:",{str oop_cco}]
 	,["<t color='#2BA639'>[OBJ]</t> Active objects:",{str oop_cao}]
 	,["<t color='#2BA639'>[OBJ]</t> Threads:",{str oop_upd}]
+];
 	#endif
 	/*,
 	["Processed SMD:",{count smd_allInGameMobs}],
 	["Objects:",{count (allSimpleObjects [])}]*/
 	#ifdef NOE_CLIENT_THREAD_DEBUG
-	,["NOE_CTD:",{
-		_s = format["c:%1",count noe_debug_allthreads];
-		modvar(_s) + str noe_debug_allthreads;
-		_s
-		}]
+clistat_buffer pushback ["NOE_CTD:",{
+			_s = format["c:%1",count noe_debug_allthreads];
+			modvar(_s) + str noe_debug_allthreads;
+			_s
+		}];
 	#endif
-];
 
+decl(void())
 clistat_onupdate = {
 	
 	if (!clistat_isEnabled) exitwith {};
@@ -167,7 +179,7 @@ clistat_onupdate = {
 	[(clistat_widgets select 2),_text] call widgetSetText;
 };
 
-
+decl(void(bool))
 clistat_setLogVars = {
 	params ["_mode"];
 

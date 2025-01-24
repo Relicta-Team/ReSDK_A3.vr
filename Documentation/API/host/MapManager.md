@@ -11,7 +11,7 @@ Replaced value:
 ```sqf
 (call (call compile val))
 ```
-File: [host\MapManager\DynamicMapLoader.sqf at line 188](../../../Src/host/MapManager/DynamicMapLoader.sqf#L188)
+File: [host\MapManager\DynamicMapLoader.sqf at line 198](../../../Src/host/MapManager/DynamicMapLoader.sqf#L198)
 ## sizeof_float
 
 Type: constant
@@ -23,7 +23,19 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\MapManager\DynamicMapLoader.sqf at line 189](../../../Src/host/MapManager/DynamicMapLoader.sqf#L189)
+File: [host\MapManager\DynamicMapLoader.sqf at line 199](../../../Src/host/MapManager/DynamicMapLoader.sqf#L199)
+## dml_const_zOffset
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+6.04903
+```
+File: [host\MapManager\DynamicMapLoader.sqf at line 79](../../../Src/host/MapManager/DynamicMapLoader.sqf#L79)
 ## dml_const_enum_instancerNames
 
 Type: Variable
@@ -35,7 +47,7 @@ Initial value:
 ```sqf
 ["InitItem","InitStruct","InitDecor"]
 ```
-File: [host\MapManager\DynamicMapLoader.sqf at line 162](../../../Src/host/MapManager/DynamicMapLoader.sqf#L162)
+File: [host\MapManager\DynamicMapLoader.sqf at line 168](../../../Src/host/MapManager/DynamicMapLoader.sqf#L168)
 ## dml_const_tab
 
 Type: Variable
@@ -47,7 +59,7 @@ Initial value:
 ```sqf
 toString [9]
 ```
-File: [host\MapManager\DynamicMapLoader.sqf at line 163](../../../Src/host/MapManager/DynamicMapLoader.sqf#L163)
+File: [host\MapManager\DynamicMapLoader.sqf at line 169](../../../Src/host/MapManager/DynamicMapLoader.sqf#L169)
 ## dml_internal_eulerToVec
 
 Type: function
@@ -55,7 +67,7 @@ Type: function
 Description: https://github.com/CBATeam/CBA_A3/issues/1352#issuecomment-665343452
 - Param: _rotation
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 59](../../../Src/host/MapManager/DynamicMapLoader.sqf#L59)
+File: [host\MapManager\DynamicMapLoader.sqf at line 60](../../../Src/host/MapManager/DynamicMapLoader.sqf#L60)
 ## dml_loadMap
 
 Type: function
@@ -63,7 +75,7 @@ Type: function
 Description: загрузчик карты
 - Param: _path
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 79](../../../Src/host/MapManager/DynamicMapLoader.sqf#L79)
+File: [host\MapManager\DynamicMapLoader.sqf at line 82](../../../Src/host/MapManager/DynamicMapLoader.sqf#L82)
 ## dml_parseMap
 
 Type: function
@@ -71,7 +83,7 @@ Type: function
 Description: подготовка загрузочных инструкций
 - Param: _mapPath
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 89](../../../Src/host/MapManager/DynamicMapLoader.sqf#L89)
+File: [host\MapManager\DynamicMapLoader.sqf at line 92](../../../Src/host/MapManager/DynamicMapLoader.sqf#L92)
 ## dml_prepareMapBuffer
 
 Type: function
@@ -80,7 +92,7 @@ Description:
 - Param: _cfg
 - Param: _bmap
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 111](../../../Src/host/MapManager/DynamicMapLoader.sqf#L111)
+File: [host\MapManager\DynamicMapLoader.sqf at line 114](../../../Src/host/MapManager/DynamicMapLoader.sqf#L114)
 ## dml_internal_addMapHeaders
 
 Type: function
@@ -88,7 +100,7 @@ Type: function
 Description: 
 - Param: _bmap
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 129](../../../Src/host/MapManager/DynamicMapLoader.sqf#L129)
+File: [host\MapManager\DynamicMapLoader.sqf at line 132](../../../Src/host/MapManager/DynamicMapLoader.sqf#L132)
 ## reditor_binding_fc
 
 Type: function
@@ -96,7 +108,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 135](../../../Src/host/MapManager/DynamicMapLoader.sqf#L135)
+File: [host\MapManager\DynamicMapLoader.sqf at line 139](../../../Src/host/MapManager/DynamicMapLoader.sqf#L139)
 ## reditor_binding_gv
 
 Type: function
@@ -104,7 +116,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 144](../../../Src/host/MapManager/DynamicMapLoader.sqf#L144)
+File: [host\MapManager\DynamicMapLoader.sqf at line 148](../../../Src/host/MapManager/DynamicMapLoader.sqf#L148)
 ## reditor_binding_sv
 
 Type: function
@@ -112,7 +124,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 149](../../../Src/host/MapManager/DynamicMapLoader.sqf#L149)
+File: [host\MapManager\DynamicMapLoader.sqf at line 153](../../../Src/host/MapManager/DynamicMapLoader.sqf#L153)
 ## reditor_binding_gref
 
 Type: function
@@ -120,7 +132,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 154](../../../Src/host/MapManager/DynamicMapLoader.sqf#L154)
+File: [host\MapManager\DynamicMapLoader.sqf at line 158](../../../Src/host/MapManager/DynamicMapLoader.sqf#L158)
 ## dml_internal_handleObj
 
 Type: function
@@ -129,9 +141,21 @@ Description:
 - Param: _mapDat
 - Param: _bmap
 
-File: [host\MapManager\DynamicMapLoader.sqf at line 165](../../../Src/host/MapManager/DynamicMapLoader.sqf#L165)
+File: [host\MapManager\DynamicMapLoader.sqf at line 171](../../../Src/host/MapManager/DynamicMapLoader.sqf#L171)
 # map_manager.sqf
 
+## mapmanager_minMapVersion
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+5
+```
+File: [host\MapManager\map_manager.sqf at line 13](../../../Src/host/MapManager/map_manager.sqf#L13)
 ## mapmanager_savemap
 
 Type: function
@@ -139,7 +163,7 @@ Type: function
 Description: 
 
 
-File: [host\MapManager\map_manager.sqf at line 13](../../../Src/host/MapManager/map_manager.sqf#L13)
+File: [host\MapManager\map_manager.sqf at line 15](../../../Src/host/MapManager/map_manager.sqf#L15)
 ## MapManager_loadmap
 
 Type: function
@@ -147,7 +171,7 @@ Type: function
 Description: deprecated loader
 - Param: _mappath
 
-File: [host\MapManager\map_manager.sqf at line 44](../../../Src/host/MapManager/map_manager.sqf#L44)
+File: [host\MapManager\map_manager.sqf at line 46](../../../Src/host/MapManager/map_manager.sqf#L46)
 ## mapManager_collectAllGameObjects
 
 Type: function
@@ -155,7 +179,7 @@ Type: function
 Description: 
 
 
-File: [host\MapManager\map_manager.sqf at line 65](../../../Src/host/MapManager/map_manager.sqf#L65)
+File: [host\MapManager\map_manager.sqf at line 67](../../../Src/host/MapManager/map_manager.sqf#L67)
 ## mapManager_load
 
 Type: function
@@ -163,7 +187,7 @@ Type: function
 Description: ["Map1"] call mapManager_load; (allUnits select (allUnits findif {isPlayer _x}) setposatl [3714.46,3722.83,40.1354])
 - Param: _path
 
-File: [host\MapManager\map_manager.sqf at line 115](../../../Src/host/MapManager/map_manager.sqf#L115)
+File: [host\MapManager\map_manager.sqf at line 117](../../../Src/host/MapManager/map_manager.sqf#L117)
 # ObjectManager.sqf
 
 ## doPhisicsLog

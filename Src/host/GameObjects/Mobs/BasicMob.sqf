@@ -1110,7 +1110,7 @@ region(lighting helper)
 		) then {
 			getSelf(__lastClientLighting)
 		} else {
-			round linearConversion [10,100,(getLightingAt getSelf(owner)) select 3,0,4,true]
+			round linearConversion [10,60,(getLightingAt getSelf(owner)) select 3,0,4,true]
 		};
 		/*private _lum = parseNumber(((getLightingAt getSelf(owner)) select 3)toFixed 3);
 		private _val = (_lum / 300) max 0 min 1;

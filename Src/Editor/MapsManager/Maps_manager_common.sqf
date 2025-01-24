@@ -215,13 +215,14 @@ function(mm_handleObjectSave)
 		//model decl inside marks sys
 		if (_x == "model") then {continue};
 		if (_x == "light") then {
-			_realVal = _val select [1,count _val - 2];
-			if ([_realVal,"#ERR#"] call vcom_emit_io_parseConfigName != "#ERR#") then {
-				_val = _realVal + "_var";
+			private _realVal = _val select [1,count _val-2];
+			private _cfgName = [_realVal,"#ERR#"] call vcom_emit_io_parseScriptedConfigName;
+			if (_cfgName != "#ERR#") then {
+				_val = format["%1 call lightSys_getConfigIdByName",_val];
 				if !(call vcom_emit_io_isEnumConfigsLoaded) then {
 					[true] call vcom_emit_io_loadEnumAssoc;
 				};
-				private _idxlight = (keys vcom_emit_io_enumAssocKeyStr) findif {_realVal==_x};
+				private _idxlight = (keys vcom_emit_io_enumAssocKeyStr) findif {_cfgName==_x};
 				if (_idxlight == -1) exitWith {
 					INC(mm_internal_errorCount);
 					mm_internal_threadErrorText = mm_internal_threadErrorText + endl +
@@ -231,7 +232,7 @@ function(mm_handleObjectSave)
 			} else {
 				INC(mm_internal_errorCount);
 				mm_internal_threadErrorText = mm_internal_threadErrorText + endl +
-				format["Wrong light type '%1' for object at position '%2'",_realVal,getposatl _obj];
+				format["Wrong light type '%1' for object at position '%2'",_val,getposatl _obj];
 				continue;
 			};
 		};

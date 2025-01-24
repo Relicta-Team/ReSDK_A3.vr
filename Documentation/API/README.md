@@ -1,7 +1,8 @@
 # Side: client
-Count modules: 31
+Count modules: 32
  - [client](client//client.md) - 2 files
- - [Chat](client//Chat.md) - 6 files
+ - [BlastFx](client//BlastFx.md) - 2 files
+ - [Chat](client//Chat.md) - 4 files
  - [ClientData](client//ClientData.md) - 14 files
  - [ClientInit](client//ClientInit.md) - 3 files
  - [ClientMenus](client//ClientMenus.md) - 1 files
@@ -15,13 +16,12 @@ Count modules: 31
  - [InputSystem](client//InputSystem.md) - 6 files
  - [Interactions](client//Interactions.md) - 22 files
  - [Inventory](client//Inventory.md) - 7 files
- - [LightEngine](client//LightEngine.md) - 70 files
+ - [LightEngine](client//LightEngine.md) - 71 files
  - [Lobby](client//Lobby.md) - 8 files
  - [LocalEffects](client//LocalEffects.md) - 3 files
  - [NetDisplays](client//NetDisplays.md) - 16 files
  - [NOEngineClient](client//NOEngineClient.md) - 16 files
  - [OneSync](client//OneSync.md) - 5 files
- - [ParticleEngine](client//ParticleEngine.md) - 3 files
  - [ProxyItems](client//ProxyItems.md) - 8 files
  - [Rendering](client//Rendering.md) - 13 files
  - [SoundSystem](client//SoundSystem.md) - 6 files
@@ -29,11 +29,12 @@ Count modules: 31
  - [StrafeLock](client//StrafeLock.md) - 1 files
  - [SyncMobData](client//SyncMobData.md) - 3 files
  - [Traps](client//Traps.md) - 1 files
+ - [VisualState](client//VisualState.md) - 10 files
  - [VoiceSystem](client//VoiceSystem.md) - 12 files
  - [WidgetSystem](client//WidgetSystem.md) - 6 files
 # Side: host
 Count modules: 55
- - [host](host//host.md) - 13 files
+ - [host](host//host.md) - 12 files
  - [AI](host//AI.md) - 1 files
  - [AmbientControl](host//AmbientControl.md) - 1 files
  - [Atmos](host//Atmos.md) - 9 files
@@ -41,7 +42,7 @@ Count modules: 55
  - [Client](host//Client.md) - 3 files
  - [ClientManager](host//ClientManager.md) - 16 files
  - [CombatSystem](host//CombatSystem.md) - 13 files
- - [CommonComponents](host//CommonComponents.md) - 29 files
+ - [CommonComponents](host//CommonComponents.md) - 30 files
  - [CraftSystem](host//CraftSystem.md) - 16 files
  - [Curl](host//Curl.md) - 3 files
  - [Database](host//Database.md) - 4 files
@@ -76,7 +77,7 @@ Count modules: 55
  - [ScriptErrorHandler](host//ScriptErrorHandler.md) - 1 files
  - [ServerChat](host//ServerChat.md) - 1 files
  - [ServerInteraction](host//ServerInteraction.md) - 6 files
- - [ServerLighting](host//ServerLighting.md) - 2 files
+ - [ServerLighting](host//ServerLighting.md) - 1 files
  - [ServerRpc](host//ServerRpc.md) - 2 files
  - [ServerSceneTest](host//ServerSceneTest.md) - 2 files
  - [ServerVoice](host//ServerVoice.md) - 1 files

@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
+//! This file not used.
 
 le_lastChunkItem = null;
 le_lastChunkStructure = null;

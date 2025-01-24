@@ -11,7 +11,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\Inventory\container.sqf at line 14](../../../Src/client/Inventory/container.sqf#L14)
+File: [client\Inventory\container.sqf at line 17](../../../Src/client/Inventory/container.sqf#L17)
 ## CONTAINER_SIZE_Y
 
 Type: constant
@@ -23,7 +23,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\Inventory\container.sqf at line 15](../../../Src/client/Inventory/container.sqf#L15)
+File: [client\Inventory\container.sqf at line 19](../../../Src/client/Inventory/container.sqf#L19)
 ## SIZE_BUTTON
 
 Type: constant
@@ -35,7 +35,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\Inventory\container.sqf at line 16](../../../Src/client/Inventory/container.sqf#L16)
+File: [client\Inventory\container.sqf at line 21](../../../Src/client/Inventory/container.sqf#L21)
 ## TIME_CONTAINER_ONLOAD
 
 Type: constant
@@ -47,19 +47,19 @@ Replaced value:
 ```sqf
 0.25
 ```
-File: [client\Inventory\container.sqf at line 18](../../../Src/client/Inventory/container.sqf#L18)
+File: [client\Inventory\container.sqf at line 24](../../../Src/client/Inventory/container.sqf#L24)
 ## TIME_CONTAINER_ONUNLOAD
 
 Type: constant
 
-Description: из TIME_PREPARE_SLOTS
+Description: 
 
 
 Replaced value:
 ```sqf
 0.09
 ```
-File: [client\Inventory\container.sqf at line 20](../../../Src/client/Inventory/container.sqf#L20)
+File: [client\Inventory\container.sqf at line 27](../../../Src/client/Inventory/container.sqf#L27)
 ## inventory_openContainer
 
 Type: function
@@ -67,7 +67,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\container.sqf at line 22](../../../Src/client/Inventory/container.sqf#L22)
+File: [client\Inventory\container.sqf at line 30](../../../Src/client/Inventory/container.sqf#L30)
 ## createWidget_contSlot
 
 Type: function
@@ -79,7 +79,7 @@ Description:
 - Param: _slotId
 - Param: _ctgScr
 
-File: [client\Inventory\container.sqf at line 107](../../../Src/client/Inventory/container.sqf#L107)
+File: [client\Inventory\container.sqf at line 116](../../../Src/client/Inventory/container.sqf#L116)
 ## inventory_loadContainerSlots
 
 Type: function
@@ -87,7 +87,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\container.sqf at line 149](../../../Src/client/Inventory/container.sqf#L149)
+File: [client\Inventory\container.sqf at line 159](../../../Src/client/Inventory/container.sqf#L159)
 ## inventory_onPrepareContainer
 
 Type: function
@@ -95,7 +95,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\container.sqf at line 245](../../../Src/client/Inventory/container.sqf#L245)
+File: [client\Inventory\container.sqf at line 256](../../../Src/client/Inventory/container.sqf#L256)
 ## inventory_closeContainer
 
 Type: function
@@ -103,7 +103,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\container.sqf at line 266](../../../Src/client/Inventory/container.sqf#L266)
+File: [client\Inventory\container.sqf at line 278](../../../Src/client/Inventory/container.sqf#L278)
 ## inventory_onChangeLocContainer
 
 Type: function
@@ -111,7 +111,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\container.sqf at line 279](../../../Src/client/Inventory/container.sqf#L279)
+File: [client\Inventory\container.sqf at line 292](../../../Src/client/Inventory/container.sqf#L292)
 ## inventory_unloadContainerMenu
 
 Type: function
@@ -119,16 +119,16 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\container.sqf at line 292](../../../Src/client/Inventory/container.sqf#L292)
+File: [client\Inventory\container.sqf at line 306](../../../Src/client/Inventory/container.sqf#L306)
 ## inventory_onContainerOpen
 
 Type: function
 
-Description: Открывает контейнер и загружает данные
+Description: 
 - Param: _main
 - Param: _data
 
-File: [client\Inventory\container.sqf at line 316](../../../Src/client/Inventory/container.sqf#L316)
+File: [client\Inventory\container.sqf at line 331](../../../Src/client/Inventory/container.sqf#L331)
 ## inventory_onContainerContentUpdate
 
 Type: function
@@ -136,15 +136,15 @@ Type: function
 Description: 
 - Param: _data
 
-File: [client\Inventory\container.sqf at line 387](../../../Src/client/Inventory/container.sqf#L387)
+File: [client\Inventory\container.sqf at line 403](../../../Src/client/Inventory/container.sqf#L403)
 ## inventory_onUpdateContainer
 
 Type: function
 
-Description: цикл в маин треде
+Description: 
 
 
-File: [client\Inventory\container.sqf at line 422](../../../Src/client/Inventory/container.sqf#L422)
+File: [client\Inventory\container.sqf at line 439](../../../Src/client/Inventory/container.sqf#L439)
 ## inventory_onPressContainerSlot
 
 Type: function
@@ -152,7 +152,7 @@ Type: function
 Description: 
 - Param: _slotFrom
 
-File: [client\Inventory\container.sqf at line 456](../../../Src/client/Inventory/container.sqf#L456)
+File: [client\Inventory\container.sqf at line 473](../../../Src/client/Inventory/container.sqf#L473)
 ## inventory_onReleaseSlotFromContainer
 
 Type: function
@@ -160,7 +160,7 @@ Type: function
 Description: 
 - Param: _slotTo
 
-File: [client\Inventory\container.sqf at line 480](../../../Src/client/Inventory/container.sqf#L480)
+File: [client\Inventory\container.sqf at line 498](../../../Src/client/Inventory/container.sqf#L498)
 ## inventory_onTransferSlotContainer
 
 Type: function
@@ -169,7 +169,7 @@ Description:
 - Param: _containerSlot
 - Param: _slotTo
 
-File: [client\Inventory\container.sqf at line 514](../../../Src/client/Inventory/container.sqf#L514)
+File: [client\Inventory\container.sqf at line 533](../../../Src/client/Inventory/container.sqf#L533)
 ## inventory_onReleaseSlotToContainer
 
 Type: function
@@ -177,7 +177,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\container.sqf at line 533](../../../Src/client/Inventory/container.sqf#L533)
+File: [client\Inventory\container.sqf at line 553](../../../Src/client/Inventory/container.sqf#L553)
 # functions.sqf
 
 ## SIZE_INVSLOT
@@ -191,7 +191,7 @@ Replaced value:
 ```sqf
 7
 ```
-File: [client\Inventory\functions.sqf at line 14](../../../Src/client/Inventory/functions.sqf#L14)
+File: [client\Inventory\functions.sqf at line 17](../../../Src/client/Inventory/functions.sqf#L17)
 ## MYPERSON_FADEVAL_EXIT
 
 Type: constant
@@ -203,7 +203,7 @@ Replaced value:
 ```sqf
 0.9
 ```
-File: [client\Inventory\functions.sqf at line 16](../../../Src/client/Inventory/functions.sqf#L16)
+File: [client\Inventory\functions.sqf at line 20](../../../Src/client/Inventory/functions.sqf#L20)
 ## MYPERSON_FADEVAL_ENTER
 
 Type: constant
@@ -215,7 +215,7 @@ Replaced value:
 ```sqf
 0.2
 ```
-File: [client\Inventory\functions.sqf at line 17](../../../Src/client/Inventory/functions.sqf#L17)
+File: [client\Inventory\functions.sqf at line 22](../../../Src/client/Inventory/functions.sqf#L22)
 ## MYPERSON_FADETIME
 
 Type: constant
@@ -227,7 +227,7 @@ Replaced value:
 ```sqf
 0.5
 ```
-File: [client\Inventory\functions.sqf at line 18](../../../Src/client/Inventory/functions.sqf#L18)
+File: [client\Inventory\functions.sqf at line 24](../../../Src/client/Inventory/functions.sqf#L24)
 ## setslotpos(obj,xpos,ypos)
 
 Type: constant
@@ -241,7 +241,7 @@ Replaced value:
 ```sqf
 [obj,[_xp + ((_wp + _biasW) * xpos),_yp + ((_hp + SLOT_BIASH) * ypos)] , TIME_PREPARE_SLOTS] call widgetSetPositionOnly
 ```
-File: [client\Inventory\functions.sqf at line 405](../../../Src/client/Inventory/functions.sqf#L405)
+File: [client\Inventory\functions.sqf at line 420](../../../Src/client/Inventory/functions.sqf#L420)
 ## DEMAP(index,side)
 
 Type: constant
@@ -254,7 +254,7 @@ Replaced value:
 ```sqf
 (inventory_slotpos_map select index select side)
 ```
-File: [client\Inventory\functions.sqf at line 434](../../../Src/client/Inventory/functions.sqf#L434)
+File: [client\Inventory\functions.sqf at line 449](../../../Src/client/Inventory/functions.sqf#L449)
 ## POS_LEFTUP
 
 Type: constant
@@ -266,7 +266,7 @@ Replaced value:
 ```sqf
 _xp + ((_wp + _biasW) * DEMAP(INV_BACKPACK,0)),_yp + ((_hp + SLOT_BIASH) * DEMAP(INV_BACKPACK,1))
 ```
-File: [client\Inventory\functions.sqf at line 435](../../../Src/client/Inventory/functions.sqf#L435)
+File: [client\Inventory\functions.sqf at line 450](../../../Src/client/Inventory/functions.sqf#L450)
 ## POS_RIGHTDOWN
 
 Type: constant
@@ -278,7 +278,7 @@ Replaced value:
 ```sqf
 _xp + ((_wp + _biasW) * DEMAP(INV_HAND_R,0)) + _wp,_yp + ((_hp + SLOT_BIASH) * DEMAP(INV_HAND_R,1)) + _hp
 ```
-File: [client\Inventory\functions.sqf at line 436](../../../Src/client/Inventory/functions.sqf#L436)
+File: [client\Inventory\functions.sqf at line 451](../../../Src/client/Inventory/functions.sqf#L451)
 ## inventory_isGlobalVisible
 
 Type: Variable
@@ -290,7 +290,7 @@ Initial value:
 ```sqf
 true
 ```
-File: [client\Inventory\functions.sqf at line 106](../../../Src/client/Inventory/functions.sqf#L106)
+File: [client\Inventory\functions.sqf at line 115](../../../Src/client/Inventory/functions.sqf#L115)
 ## inventory_init
 
 Type: function
@@ -298,7 +298,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 20](../../../Src/client/Inventory/functions.sqf#L20)
+File: [client\Inventory\functions.sqf at line 27](../../../Src/client/Inventory/functions.sqf#L27)
 ## inventory_setHideHands
 
 Type: function
@@ -306,7 +306,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\Inventory\functions.sqf at line 40](../../../Src/client/Inventory/functions.sqf#L40)
+File: [client\Inventory\functions.sqf at line 48](../../../Src/client/Inventory/functions.sqf#L48)
 ## inventory_restoreHide
 
 Type: function
@@ -315,15 +315,15 @@ Description:
 - Param: _now
 - Param: _applyCommit (optional, default true)
 
-File: [client\Inventory\functions.sqf at line 91](../../../Src/client/Inventory/functions.sqf#L91)
+File: [client\Inventory\functions.sqf at line 100](../../../Src/client/Inventory/functions.sqf#L100)
 ## inventory_setGlobalVisible
 
 Type: function
 
-Description: установка видимости слотов на глобальном уровне
+Description: 
 - Param: _mode
 
-File: [client\Inventory\functions.sqf at line 109](../../../Src/client/Inventory/functions.sqf#L109)
+File: [client\Inventory\functions.sqf at line 119](../../../Src/client/Inventory/functions.sqf#L119)
 ## inventory_applyColorTheme
 
 Type: function
@@ -331,16 +331,16 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 127](../../../Src/client/Inventory/functions.sqf#L127)
+File: [client\Inventory\functions.sqf at line 138](../../../Src/client/Inventory/functions.sqf#L138)
 ## inventory_widgetSetPicture
 
 Type: function
 
-Description: Псевдоним widgetSetPicture в этом модуле
+Description: 
 - Param: _pic
 - Param: _val
 
-File: [client\Inventory\functions.sqf at line 134](../../../Src/client/Inventory/functions.sqf#L134)
+File: [client\Inventory\functions.sqf at line 146](../../../Src/client/Inventory/functions.sqf#L146)
 ## createWidget_invSlot
 
 Type: function
@@ -351,7 +351,7 @@ Description:
 - Param: _pos
 - Param: _slotId
 
-File: [client\Inventory\functions.sqf at line 164](../../../Src/client/Inventory/functions.sqf#L164)
+File: [client\Inventory\functions.sqf at line 177](../../../Src/client/Inventory/functions.sqf#L177)
 ## openInventory
 
 Type: function
@@ -359,7 +359,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 233](../../../Src/client/Inventory/functions.sqf#L233)
+File: [client\Inventory\functions.sqf at line 247](../../../Src/client/Inventory/functions.sqf#L247)
 ## inventory_onPrepareSlots
 
 Type: function
@@ -370,7 +370,7 @@ Description:
 - Param: _wp
 - Param: _hp
 
-File: [client\Inventory\functions.sqf at line 391](../../../Src/client/Inventory/functions.sqf#L391)
+File: [client\Inventory\functions.sqf at line 406](../../../Src/client/Inventory/functions.sqf#L406)
 ## inventory_resetPositionHandWidgets
 
 Type: function
@@ -378,7 +378,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 480](../../../Src/client/Inventory/functions.sqf#L480)
+File: [client\Inventory\functions.sqf at line 496](../../../Src/client/Inventory/functions.sqf#L496)
 ## closeInventory
 
 Type: function
@@ -386,15 +386,15 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 490](../../../Src/client/Inventory/functions.sqf#L490)
+File: [client\Inventory\functions.sqf at line 507](../../../Src/client/Inventory/functions.sqf#L507)
 ## closeInventory_handle
 
 Type: function
 
-Description: Событие закрытия инвентаря
+Description: 
 
 
-File: [client\Inventory\functions.sqf at line 522](../../../Src/client/Inventory/functions.sqf#L522)
+File: [client\Inventory\functions.sqf at line 540](../../../Src/client/Inventory/functions.sqf#L540)
 ## inventoryGetPictureById
 
 Type: function
@@ -402,7 +402,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 531](../../../Src/client/Inventory/functions.sqf#L531)
+File: [client\Inventory\functions.sqf at line 550](../../../Src/client/Inventory/functions.sqf#L550)
 ## inventoryGetSlotNameById
 
 Type: function
@@ -410,7 +410,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 535](../../../Src/client/Inventory/functions.sqf#L535)
+File: [client\Inventory\functions.sqf at line 555](../../../Src/client/Inventory/functions.sqf#L555)
 ## inventoryGetWidgetById
 
 Type: function
@@ -418,7 +418,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 539](../../../Src/client/Inventory/functions.sqf#L539)
+File: [client\Inventory\functions.sqf at line 560](../../../Src/client/Inventory/functions.sqf#L560)
 ## inventoryGetWidgetOnMouse
 
 Type: function
@@ -426,7 +426,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 544](../../../Src/client/Inventory/functions.sqf#L544)
+File: [client\Inventory\functions.sqf at line 565](../../../Src/client/Inventory/functions.sqf#L565)
 ## inventoryGetContainerWidgetOnMouse
 
 Type: function
@@ -434,7 +434,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 556](../../../Src/client/Inventory/functions.sqf#L556)
+File: [client\Inventory\functions.sqf at line 577](../../../Src/client/Inventory/functions.sqf#L577)
 ## inventoryIsInContainerWidgetsZone
 
 Type: function
@@ -442,7 +442,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 567](../../../Src/client/Inventory/functions.sqf#L567)
+File: [client\Inventory\functions.sqf at line 589](../../../Src/client/Inventory/functions.sqf#L589)
 ## inventoryIsInWidgetsZone
 
 Type: function
@@ -450,7 +450,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 571](../../../Src/client/Inventory/functions.sqf#L571)
+File: [client\Inventory\functions.sqf at line 594](../../../Src/client/Inventory/functions.sqf#L594)
 ## inventoryIsInsideSelfWidget
 
 Type: function
@@ -458,7 +458,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 575](../../../Src/client/Inventory/functions.sqf#L575)
+File: [client\Inventory\functions.sqf at line 599](../../../Src/client/Inventory/functions.sqf#L599)
 ## inventory_onUpdate
 
 Type: function
@@ -466,34 +466,34 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 583](../../../Src/client/Inventory/functions.sqf#L583)
+File: [client\Inventory\functions.sqf at line 608](../../../Src/client/Inventory/functions.sqf#L608)
 ## inventory_onMousePress
 
 Type: function
 
-Description: Событие при нажатии мышки на слот
+Description: 
 - Param: _obj
 - Param: _key
 
-File: [client\Inventory\functions.sqf at line 725](../../../Src/client/Inventory/functions.sqf#L725)
+File: [client\Inventory\functions.sqf at line 751](../../../Src/client/Inventory/functions.sqf#L751)
 ## inventory_onMouseRelease
 
 Type: function
 
-Description: событие при отпускании мышки на слоте
+Description: 
 - Param: _obj
 - Param: _key
 
-File: [client\Inventory\functions.sqf at line 774](../../../Src/client/Inventory/functions.sqf#L774)
+File: [client\Inventory\functions.sqf at line 801](../../../Src/client/Inventory/functions.sqf#L801)
 ## inventory_onMouseScroll
 
 Type: function
 
-Description: При скроллинге мышкой
+Description: 
 - Param: _disp
 - Param: _scroll
 
-File: [client\Inventory\functions.sqf at line 816](../../../Src/client/Inventory/functions.sqf#L816)
+File: [client\Inventory\functions.sqf at line 844](../../../Src/client/Inventory/functions.sqf#L844)
 ## inventory_onSlotUpdate
 
 Type: function
@@ -503,7 +503,7 @@ Description:
 - Param: _data
 - Param: _supressRestoreHide (optional, default false)
 
-File: [client\Inventory\functions.sqf at line 844](../../../Src/client/Inventory/functions.sqf#L844)
+File: [client\Inventory\functions.sqf at line 873](../../../Src/client/Inventory/functions.sqf#L873)
 ## inventory_syncGerms
 
 Type: function
@@ -511,7 +511,7 @@ Type: function
 Description: 
 - Param: _data
 
-File: [client\Inventory\functions.sqf at line 891](../../../Src/client/Inventory/functions.sqf#L891)
+File: [client\Inventory\functions.sqf at line 921](../../../Src/client/Inventory/functions.sqf#L921)
 ## inventory_internal_syncGermsBodyPartKey
 
 Type: function
@@ -520,7 +520,7 @@ Description:
 - Param: _partKey
 - Param: _opacity
 
-File: [client\Inventory\functions.sqf at line 909](../../../Src/client/Inventory/functions.sqf#L909)
+File: [client\Inventory\functions.sqf at line 940](../../../Src/client/Inventory/functions.sqf#L940)
 ## inventory_syncModelPos
 
 Type: function
@@ -530,7 +530,7 @@ Type: function
 Description: 
 - Param: _wid
 
-File: [client\Inventory\functions.sqf at line 928](../../../Src/client/Inventory/functions.sqf#L928)
+File: [client\Inventory\functions.sqf at line 960](../../../Src/client/Inventory/functions.sqf#L960)
 ## inventory_onSlotListUpdate
 
 Type: function
@@ -538,7 +538,7 @@ Type: function
 Description: 
 - Param: _data
 
-File: [client\Inventory\functions.sqf at line 957](../../../Src/client/Inventory/functions.sqf#L957)
+File: [client\Inventory\functions.sqf at line 990](../../../Src/client/Inventory/functions.sqf#L990)
 ## inventory_onReleaseSlot
 
 Type: function
@@ -546,7 +546,7 @@ Type: function
 Description: 
 - Param: _slotTo
 
-File: [client\Inventory\functions.sqf at line 965](../../../Src/client/Inventory/functions.sqf#L965)
+File: [client\Inventory\functions.sqf at line 999](../../../Src/client/Inventory/functions.sqf#L999)
 ## inventory_onPressSlot
 
 Type: function
@@ -554,33 +554,33 @@ Type: function
 Description: 
 - Param: _slotFrom
 
-File: [client\Inventory\functions.sqf at line 1033](../../../Src/client/Inventory/functions.sqf#L1033)
+File: [client\Inventory\functions.sqf at line 1068](../../../Src/client/Inventory/functions.sqf#L1068)
 ## inventory_onPutDownItem
 
 Type: function
 
-Description: параметр _isFastPutdown - событие безопасного выкладывания из руки
+Description: 
 - Param: _id (optional, default cd_activeHand)
 - Param: _isFastPutdown (optional, default false)
 
-File: [client\Inventory\functions.sqf at line 1060](../../../Src/client/Inventory/functions.sqf#L1060)
+File: [client\Inventory\functions.sqf at line 1095](../../../Src/client/Inventory/functions.sqf#L1095)
 ## inventory_onDropItem
 
 Type: function
 
-Description: Событие которое выбрасывает предмет из инвентаря
+Description: 
 - Param: _id (optional, default cd_activeHand)
 
-File: [client\Inventory\functions.sqf at line 1100](../../../Src/client/Inventory/functions.sqf#L1100)
+File: [client\Inventory\functions.sqf at line 1136](../../../Src/client/Inventory/functions.sqf#L1136)
 ## inventory_onTransferSlot
 
 Type: function
 
-Description: Событие при передачи из одного слота в другой
+Description: 
 - Param: _slotFrom
 - Param: _slotTo
 
-File: [client\Inventory\functions.sqf at line 1114](../../../Src/client/Inventory/functions.sqf#L1114)
+File: [client\Inventory\functions.sqf at line 1151](../../../Src/client/Inventory/functions.sqf#L1151)
 ## inventory_onInteractTargetWith
 
 Type: function
@@ -589,7 +589,7 @@ Description:
 - Param: _obj
 - Param: _slotData
 
-File: [client\Inventory\functions.sqf at line 1151](../../../Src/client/Inventory/functions.sqf#L1151)
+File: [client\Inventory\functions.sqf at line 1188](../../../Src/client/Inventory/functions.sqf#L1188)
 ## inventory_onMainAction
 
 Type: function
@@ -597,7 +597,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1168](../../../Src/client/Inventory/functions.sqf#L1168)
+File: [client\Inventory\functions.sqf at line 1206](../../../Src/client/Inventory/functions.sqf#L1206)
 ## inventory_onExtraAction
 
 Type: function
@@ -605,7 +605,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1204](../../../Src/client/Inventory/functions.sqf#L1204)
+File: [client\Inventory\functions.sqf at line 1243](../../../Src/client/Inventory/functions.sqf#L1243)
 ## inventory_onClick
 
 Type: function
@@ -613,7 +613,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1262](../../../Src/client/Inventory/functions.sqf#L1262)
+File: [client\Inventory\functions.sqf at line 1302](../../../Src/client/Inventory/functions.sqf#L1302)
 ## inventory_onExamine
 
 Type: function
@@ -621,15 +621,15 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1303](../../../Src/client/Inventory/functions.sqf#L1303)
+File: [client\Inventory\functions.sqf at line 1344](../../../Src/client/Inventory/functions.sqf#L1344)
 ## inventory_changeActiveHand
 
 Type: function
 
-Description: Смена активной руки
+Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1363](../../../Src/client/Inventory/functions.sqf#L1363)
+File: [client\Inventory\functions.sqf at line 1405](../../../Src/client/Inventory/functions.sqf#L1405)
 ## inventory_changeTwoHandsMode
 
 Type: function
@@ -637,7 +637,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1376](../../../Src/client/Inventory/functions.sqf#L1376)
+File: [client\Inventory\functions.sqf at line 1419](../../../Src/client/Inventory/functions.sqf#L1419)
 ## inventory_onChangeActiveHand
 
 Type: function
@@ -647,7 +647,7 @@ Description:
 - Param: _act
 - Param: _setToNew (optional, default false)
 
-File: [client\Inventory\functions.sqf at line 1381](../../../Src/client/Inventory/functions.sqf#L1381)
+File: [client\Inventory\functions.sqf at line 1425](../../../Src/client/Inventory/functions.sqf#L1425)
 ## inventory_isEmptyHands
 
 Type: function
@@ -655,7 +655,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1406](../../../Src/client/Inventory/functions.sqf#L1406)
+File: [client\Inventory\functions.sqf at line 1451](../../../Src/client/Inventory/functions.sqf#L1451)
 ## inventory_isEmptyActiveHand
 
 Type: function
@@ -663,7 +663,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1410](../../../Src/client/Inventory/functions.sqf#L1410)
+File: [client\Inventory\functions.sqf at line 1456](../../../Src/client/Inventory/functions.sqf#L1456)
 ## inventory_getModelById
 
 Type: function
@@ -671,7 +671,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1412](../../../Src/client/Inventory/functions.sqf#L1412)
+File: [client\Inventory\functions.sqf at line 1459](../../../Src/client/Inventory/functions.sqf#L1459)
 ## inventory_getSlotDataById
 
 Type: function
@@ -679,7 +679,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1416](../../../Src/client/Inventory/functions.sqf#L1416)
+File: [client\Inventory\functions.sqf at line 1464](../../../Src/client/Inventory/functions.sqf#L1464)
 ## inventory_getContainerSlotDataById
 
 Type: function
@@ -687,45 +687,45 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1420](../../../Src/client/Inventory/functions.sqf#L1420)
+File: [client\Inventory\functions.sqf at line 1469](../../../Src/client/Inventory/functions.sqf#L1469)
 # helpers.hpp
 
 ## INVENTORY_LOG
 
 Type: constant
 
-Description: comment this if dont need logging
+Description: 
 
 
 Replaced value:
 ```sqf
 
 ```
-File: [client\Inventory\helpers.hpp at line 11](../../../Src/client/Inventory/helpers.hpp#L11)
+File: [client\Inventory\helpers.hpp at line 14](../../../Src/client/Inventory/helpers.hpp#L14)
 ## BACKGROUND_COLOR_NOITEM
 
 Type: constant
 
-Description: #define INVENTORY_USE_NEW_RENDER_ICONS
+Description: 
 
 
 Replaced value:
 ```sqf
 [0.161,0.322,0.204,0.25]
 ```
-File: [client\Inventory\helpers.hpp at line 19](../../../Src/client/Inventory/helpers.hpp#L19)
+File: [client\Inventory\helpers.hpp at line 22](../../../Src/client/Inventory/helpers.hpp#L22)
 ## BACKGROUND_COLOR
 
 Type: constant
 
-Description: #define INVENTORY_USE_NEW_RENDER_ICONS
+Description: 
 
 
 Replaced value:
 ```sqf
-(["inv_slot_back"] call ct_getValue)/*[0.161,0.322,0.204,0.5]*/
+(["inv_slot_back"] call ct_getValue)
 ```
-File: [client\Inventory\helpers.hpp at line 19](../../../Src/client/Inventory/helpers.hpp#L19)
+File: [client\Inventory\helpers.hpp at line 22](../../../Src/client/Inventory/helpers.hpp#L22)
 ## BACKGROUND_COLOR_ACTIVEHAND
 
 Type: constant
@@ -735,9 +735,9 @@ Description:
 
 Replaced value:
 ```sqf
-(["inv_slot_act"] call ct_getValue)/*[0,0.6,0,0.5]*/
+(["inv_slot_act"] call ct_getValue)
 ```
-File: [client\Inventory\helpers.hpp at line 21](../../../Src/client/Inventory/helpers.hpp#L21)
+File: [client\Inventory\helpers.hpp at line 28](../../../Src/client/Inventory/helpers.hpp#L28)
 ## BACKGROUND_COLOR_CANINTERACT
 
 Type: constant
@@ -749,20 +749,8 @@ Replaced value:
 ```sqf
 [0,0.4,0,0.7]
 ```
-File: [client\Inventory\helpers.hpp at line 22](../../../Src/client/Inventory/helpers.hpp#L22)
+File: [client\Inventory\helpers.hpp at line 30](../../../Src/client/Inventory/helpers.hpp#L30)
 ## PRESSED_LINK
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-0 //ссылка на ивентарный нажатый слот
-```
-File: [client\Inventory\helpers.hpp at line 24](../../../Src/client/Inventory/helpers.hpp#L24)
-## PRESSED_DRAG
 
 Type: constant
 
@@ -771,10 +759,10 @@ Description: ссылка на ивентарный нажатый слот
 
 Replaced value:
 ```sqf
-1 //ссылка на драгуемую ктгшку
+0
 ```
-File: [client\Inventory\helpers.hpp at line 25](../../../Src/client/Inventory/helpers.hpp#L25)
-## INDEX_DRAGGER
+File: [client\Inventory\helpers.hpp at line 34](../../../Src/client/Inventory/helpers.hpp#L34)
+## PRESSED_DRAG
 
 Type: constant
 
@@ -783,9 +771,21 @@ Description: ссылка на драгуемую ктгшку
 
 Replaced value:
 ```sqf
+1
+```
+File: [client\Inventory\helpers.hpp at line 36](../../../Src/client/Inventory/helpers.hpp#L36)
+## INDEX_DRAGGER
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
 -9
 ```
-File: [client\Inventory\helpers.hpp at line 27](../../../Src/client/Inventory/helpers.hpp#L27)
+File: [client\Inventory\helpers.hpp at line 40](../../../Src/client/Inventory/helpers.hpp#L40)
 ## SLOT_BIASH
 
 Type: constant
@@ -797,55 +797,55 @@ Replaced value:
 ```sqf
 0.3
 ```
-File: [client\Inventory\helpers.hpp at line 29](../../../Src/client/Inventory/helpers.hpp#L29)
+File: [client\Inventory\helpers.hpp at line 43](../../../Src/client/Inventory/helpers.hpp#L43)
 ## TIME_PREPARE_SLOTS
 
 Type: constant
 
-Description: время на подготовку (выезжание слотов)
+Description: 
 
 
 Replaced value:
 ```sqf
 0.09
 ```
-File: [client\Inventory\helpers.hpp at line 32](../../../Src/client/Inventory/helpers.hpp#L32)
+File: [client\Inventory\helpers.hpp at line 47](../../../Src/client/Inventory/helpers.hpp#L47)
 ## TIME_PREPARE_DRAG
 
 Type: constant
 
-Description: Время на подготовку (появление) драга
+Description: 
 
 
 Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Inventory\helpers.hpp at line 34](../../../Src/client/Inventory/helpers.hpp#L34)
+File: [client\Inventory\helpers.hpp at line 50](../../../Src/client/Inventory/helpers.hpp#L50)
 ## DRAG_FADE_PROCESS
 
 Type: constant
 
-Description: Непрозрачность драг-иконки во время перетаскивания
+Description: 
 
 
 Replaced value:
 ```sqf
 0.4
 ```
-File: [client\Inventory\helpers.hpp at line 36](../../../Src/client/Inventory/helpers.hpp#L36)
+File: [client\Inventory\helpers.hpp at line 53](../../../Src/client/Inventory/helpers.hpp#L53)
 ## getDragSlot
 
 Type: constant
 
-Description: drag managment. Драг это иконка предмета, идущая за указателем мыши при isDragProcess
+Description: 
 
 
 Replaced value:
 ```sqf
 (inventory_pressedwidget select PRESSED_DRAG)
 ```
-File: [client\Inventory\helpers.hpp at line 40](../../../Src/client/Inventory/helpers.hpp#L40)
+File: [client\Inventory\helpers.hpp at line 57](../../../Src/client/Inventory/helpers.hpp#L57)
 ## onDragInit(wid)
 
 Type: constant
@@ -857,7 +857,7 @@ Replaced value:
 ```sqf
 inventory_pressedwidget set [PRESSED_DRAG,wid]; wid ctrlSetFade 1; wid ctrlCommit 0
 ```
-File: [client\Inventory\helpers.hpp at line 42](../../../Src/client/Inventory/helpers.hpp#L42)
+File: [client\Inventory\helpers.hpp at line 60](../../../Src/client/Inventory/helpers.hpp#L60)
 ## isInteractibleAction
 
 Type: constant
@@ -869,31 +869,31 @@ Replaced value:
 ```sqf
 ((inventory_previewObject getVariable ["isInteractible",false]) || (typeof getInteractibleTarget == BASIC_MOB_TYPE))
 ```
-File: [client\Inventory\helpers.hpp at line 44](../../../Src/client/Inventory/helpers.hpp#L44)
+File: [client\Inventory\helpers.hpp at line 63](../../../Src/client/Inventory/helpers.hpp#L63)
 ## getInteractibleTarget
 
 Type: constant
 
-Description: #define isInteractibleAction ((inventory_previewObject getVariable ["isInteractible",false]) && inventory_isPressedInteractButton || (typeof getInteractibleTarget == BASIC_MOB_TYPE))
+Description: 
 
 
 Replaced value:
 ```sqf
 (inventory_previewObject getVariable ["interactibleTarget",objnull])
 ```
-File: [client\Inventory\helpers.hpp at line 46](../../../Src/client/Inventory/helpers.hpp#L46)
+File: [client\Inventory\helpers.hpp at line 66](../../../Src/client/Inventory/helpers.hpp#L66)
 ## getPressedSlot
 
 Type: constant
 
-Description: link managment . Нажатый это просто референс на виджет из инвентаря
+Description: 
 
 
 Replaced value:
 ```sqf
 (inventory_pressedwidget select PRESSED_LINK)
 ```
-File: [client\Inventory\helpers.hpp at line 50](../../../Src/client/Inventory/helpers.hpp#L50)
+File: [client\Inventory\helpers.hpp at line 71](../../../Src/client/Inventory/helpers.hpp#L71)
 ## isDragProcess
 
 Type: constant
@@ -905,7 +905,7 @@ Replaced value:
 ```sqf
 (! (getPressedSlot isequalto widgetNull))
 ```
-File: [client\Inventory\helpers.hpp at line 52](../../../Src/client/Inventory/helpers.hpp#L52)
+File: [client\Inventory\helpers.hpp at line 74](../../../Src/client/Inventory/helpers.hpp#L74)
 ## isHandDrag
 
 Type: constant
@@ -917,7 +917,7 @@ Replaced value:
 ```sqf
 ((getSlotId(getPressedSlot) in [INV_HAND_L,INV_HAND_R]) && !isContainerSlot(getPressedSlot))
 ```
-File: [client\Inventory\helpers.hpp at line 54](../../../Src/client/Inventory/helpers.hpp#L54)
+File: [client\Inventory\helpers.hpp at line 77](../../../Src/client/Inventory/helpers.hpp#L77)
 ## onPressSlot(slotwid)
 
 Type: constant
@@ -929,7 +929,7 @@ Replaced value:
 ```sqf
 [slotwid] call inventory_onPressSlot
 ```
-File: [client\Inventory\helpers.hpp at line 56](../../../Src/client/Inventory/helpers.hpp#L56)
+File: [client\Inventory\helpers.hpp at line 80](../../../Src/client/Inventory/helpers.hpp#L80)
 ## onReleaseSlot(zone)
 
 Type: constant
@@ -941,19 +941,19 @@ Replaced value:
 ```sqf
 [zone] call inventory_onReleaseSlot
 ```
-File: [client\Inventory\helpers.hpp at line 58](../../../Src/client/Inventory/helpers.hpp#L58)
+File: [client\Inventory\helpers.hpp at line 83](../../../Src/client/Inventory/helpers.hpp#L83)
 ## getSlotId(wid)
 
 Type: constant
 
-Description: other
+Description: 
 - Param: wid
 
 Replaced value:
 ```sqf
 (wid getvariable "slotid")
 ```
-File: [client\Inventory\helpers.hpp at line 62](../../../Src/client/Inventory/helpers.hpp#L62)
+File: [client\Inventory\helpers.hpp at line 87](../../../Src/client/Inventory/helpers.hpp#L87)
 ## getSlotIcon(wid)
 
 Type: constant
@@ -965,7 +965,7 @@ Replaced value:
 ```sqf
 (wid getVariable "icon")
 ```
-File: [client\Inventory\helpers.hpp at line 64](../../../Src/client/Inventory/helpers.hpp#L64)
+File: [client\Inventory\helpers.hpp at line 90](../../../Src/client/Inventory/helpers.hpp#L90)
 ## getSlotDirtOverlay(wid)
 
 Type: constant
@@ -977,19 +977,19 @@ Replaced value:
 ```sqf
 (wid getvariable "dirtOverlay")
 ```
-File: [client\Inventory\helpers.hpp at line 66](../../../Src/client/Inventory/helpers.hpp#L66)
+File: [client\Inventory\helpers.hpp at line 93](../../../Src/client/Inventory/helpers.hpp#L93)
 ## getSlotBackground(wid)
 
 Type: constant
 
-Description: #define widgetSetPicture inventory_widgetSetPicture
+Description: 
 - Param: wid
 
 Replaced value:
 ```sqf
 (wid getVariable "background")
 ```
-File: [client\Inventory\helpers.hpp at line 71](../../../Src/client/Inventory/helpers.hpp#L71)
+File: [client\Inventory\helpers.hpp at line 98](../../../Src/client/Inventory/helpers.hpp#L98)
 ## getSlotName(wid)
 
 Type: constant
@@ -1001,7 +1001,7 @@ Replaced value:
 ```sqf
 (wid getVariable "slotname")
 ```
-File: [client\Inventory\helpers.hpp at line 73](../../../Src/client/Inventory/helpers.hpp#L73)
+File: [client\Inventory\helpers.hpp at line 101](../../../Src/client/Inventory/helpers.hpp#L101)
 ## isEmptySlot(id)
 
 Type: constant
@@ -1013,7 +1013,7 @@ Replaced value:
 ```sqf
 ((inventory_slotdata select (id)) isequalto [])
 ```
-File: [client\Inventory\helpers.hpp at line 75](../../../Src/client/Inventory/helpers.hpp#L75)
+File: [client\Inventory\helpers.hpp at line 104](../../../Src/client/Inventory/helpers.hpp#L104)
 ## isEmptyWidget(wid)
 
 Type: constant
@@ -1025,7 +1025,7 @@ Replaced value:
 ```sqf
 isEmptySlot(getSlotId(wid))
 ```
-File: [client\Inventory\helpers.hpp at line 77](../../../Src/client/Inventory/helpers.hpp#L77)
+File: [client\Inventory\helpers.hpp at line 107](../../../Src/client/Inventory/helpers.hpp#L107)
 ## getSlotDataById(id)
 
 Type: constant
@@ -1037,7 +1037,7 @@ Replaced value:
 ```sqf
 ((id) call inventory_getSlotDataById)
 ```
-File: [client\Inventory\helpers.hpp at line 79](../../../Src/client/Inventory/helpers.hpp#L79)
+File: [client\Inventory\helpers.hpp at line 110](../../../Src/client/Inventory/helpers.hpp#L110)
 ## getPressedSlotPosition
 
 Type: constant
@@ -1049,7 +1049,7 @@ Replaced value:
 ```sqf
 inventory_pressedSlotPosition
 ```
-File: [client\Inventory\helpers.hpp at line 81](../../../Src/client/Inventory/helpers.hpp#L81)
+File: [client\Inventory\helpers.hpp at line 113](../../../Src/client/Inventory/helpers.hpp#L113)
 ## setPressedSlotPosition(pos)
 
 Type: constant
@@ -1061,7 +1061,7 @@ Replaced value:
 ```sqf
 inventory_pressedSlotPosition = (pos)
 ```
-File: [client\Inventory\helpers.hpp at line 82](../../../Src/client/Inventory/helpers.hpp#L82)
+File: [client\Inventory\helpers.hpp at line 115](../../../Src/client/Inventory/helpers.hpp#L115)
 ## isInsidePressedSlot
 
 Type: constant
@@ -1073,7 +1073,7 @@ Replaced value:
 ```sqf
 inventory_isInsidePressedSlot
 ```
-File: [client\Inventory\helpers.hpp at line 84](../../../Src/client/Inventory/helpers.hpp#L84)
+File: [client\Inventory\helpers.hpp at line 118](../../../Src/client/Inventory/helpers.hpp#L118)
 ## getVerbMenuWidget
 
 Type: constant
@@ -1085,19 +1085,19 @@ Replaced value:
 ```sqf
 (inventory_verbMenuWidgets select 0)
 ```
-File: [client\Inventory\helpers.hpp at line 86](../../../Src/client/Inventory/helpers.hpp#L86)
+File: [client\Inventory\helpers.hpp at line 121](../../../Src/client/Inventory/helpers.hpp#L121)
 ## isInsideVerbMenu_inv
 
 Type: constant
 
-Description: название данной функции заменено, потому что isInsideVerbMenu уже определён в Interactions
+Description: 
 
 
 Replaced value:
 ```sqf
 (getVerbMenuWidget call isMouseInsideWidget)
 ```
-File: [client\Inventory\helpers.hpp at line 88](../../../Src/client/Inventory/helpers.hpp#L88)
+File: [client\Inventory\helpers.hpp at line 125](../../../Src/client/Inventory/helpers.hpp#L125)
 ## isOpenedVerbMenu
 
 Type: constant
@@ -1109,19 +1109,19 @@ Replaced value:
 ```sqf
 (!(getVerbMenuWidget isEqualTo widgetNull))
 ```
-File: [client\Inventory\helpers.hpp at line 89](../../../Src/client/Inventory/helpers.hpp#L89)
+File: [client\Inventory\helpers.hpp at line 127](../../../Src/client/Inventory/helpers.hpp#L127)
 ## getContainerMainCtg
 
 Type: constant
 
-Description: container helpers
+Description: 
 
 
 Replaced value:
 ```sqf
 (inventory_containerWidgets select 0)
 ```
-File: [client\Inventory\helpers.hpp at line 92](../../../Src/client/Inventory/helpers.hpp#L92)
+File: [client\Inventory\helpers.hpp at line 131](../../../Src/client/Inventory/helpers.hpp#L131)
 ## getContainerSlotsCtg
 
 Type: constant
@@ -1133,7 +1133,7 @@ Replaced value:
 ```sqf
 (inventory_containerWidgets select 1)
 ```
-File: [client\Inventory\helpers.hpp at line 93](../../../Src/client/Inventory/helpers.hpp#L93)
+File: [client\Inventory\helpers.hpp at line 133](../../../Src/client/Inventory/helpers.hpp#L133)
 ## getContainerNameText
 
 Type: constant
@@ -1145,19 +1145,19 @@ Replaced value:
 ```sqf
 (inventory_containerWidgets select 2)
 ```
-File: [client\Inventory\helpers.hpp at line 94](../../../Src/client/Inventory/helpers.hpp#L94)
+File: [client\Inventory\helpers.hpp at line 135](../../../Src/client/Inventory/helpers.hpp#L135)
 ## container_index_name
 
 Type: constant
 
-Description: internal macro for inventory::containerCommonData
+Description: 
 
 
 Replaced value:
 ```sqf
 0
 ```
-File: [client\Inventory\helpers.hpp at line 97](../../../Src/client/Inventory/helpers.hpp#L97)
+File: [client\Inventory\helpers.hpp at line 139](../../../Src/client/Inventory/helpers.hpp#L139)
 ## container_index_ref
 
 Type: constant
@@ -1169,7 +1169,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Inventory\helpers.hpp at line 98](../../../Src/client/Inventory/helpers.hpp#L98)
+File: [client\Inventory\helpers.hpp at line 140](../../../Src/client/Inventory/helpers.hpp#L140)
 ## container_index_object
 
 Type: constant
@@ -1181,7 +1181,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Inventory\helpers.hpp at line 99](../../../Src/client/Inventory/helpers.hpp#L99)
+File: [client\Inventory\helpers.hpp at line 141](../../../Src/client/Inventory/helpers.hpp#L141)
 ## container_index_posoffset
 
 Type: constant
@@ -1193,7 +1193,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\Inventory\helpers.hpp at line 100](../../../Src/client/Inventory/helpers.hpp#L100)
+File: [client\Inventory\helpers.hpp at line 142](../../../Src/client/Inventory/helpers.hpp#L142)
 ## container_index_isInWorld
 
 Type: constant
@@ -1205,7 +1205,7 @@ Replaced value:
 ```sqf
 container_index_object
 ```
-File: [client\Inventory\helpers.hpp at line 102](../../../Src/client/Inventory/helpers.hpp#L102)
+File: [client\Inventory\helpers.hpp at line 144](../../../Src/client/Inventory/helpers.hpp#L144)
 ## container_object_awaitGenerateValue
 
 Type: constant
@@ -1217,7 +1217,7 @@ Replaced value:
 ```sqf
 -1
 ```
-File: [client\Inventory\helpers.hpp at line 104](../../../Src/client/Inventory/helpers.hpp#L104)
+File: [client\Inventory\helpers.hpp at line 146](../../../Src/client/Inventory/helpers.hpp#L146)
 ## getWorldContainer
 
 Type: constant
@@ -1229,7 +1229,7 @@ Replaced value:
 ```sqf
 (inventory_containerCommonData select container_index_object)
 ```
-File: [client\Inventory\helpers.hpp at line 106](../../../Src/client/Inventory/helpers.hpp#L106)
+File: [client\Inventory\helpers.hpp at line 150](../../../Src/client/Inventory/helpers.hpp#L150)
 ## getContainerRef
 
 Type: constant
@@ -1241,7 +1241,7 @@ Replaced value:
 ```sqf
 (inventory_containerCommonData select container_index_ref)
 ```
-File: [client\Inventory\helpers.hpp at line 107](../../../Src/client/Inventory/helpers.hpp#L107)
+File: [client\Inventory\helpers.hpp at line 152](../../../Src/client/Inventory/helpers.hpp#L152)
 ## getContainerPosOffset
 
 Type: constant
@@ -1253,7 +1253,7 @@ Replaced value:
 ```sqf
 (inventory_containerCommonData select container_index_posoffset)
 ```
-File: [client\Inventory\helpers.hpp at line 108](../../../Src/client/Inventory/helpers.hpp#L108)
+File: [client\Inventory\helpers.hpp at line 154](../../../Src/client/Inventory/helpers.hpp#L154)
 ## setContainerPosOffset(val)
 
 Type: constant
@@ -1265,7 +1265,7 @@ Replaced value:
 ```sqf
 inventory_containerCommonData set [container_index_posoffset,val]
 ```
-File: [client\Inventory\helpers.hpp at line 109](../../../Src/client/Inventory/helpers.hpp#L109)
+File: [client\Inventory\helpers.hpp at line 156](../../../Src/client/Inventory/helpers.hpp#L156)
 ## isWorldContainer
 
 Type: constant
@@ -1277,7 +1277,7 @@ Replaced value:
 ```sqf
 (getWorldContainer isEqualType objnull)
 ```
-File: [client\Inventory\helpers.hpp at line 110](../../../Src/client/Inventory/helpers.hpp#L110)
+File: [client\Inventory\helpers.hpp at line 158](../../../Src/client/Inventory/helpers.hpp#L158)
 ## isContainerSlot(slot)
 
 Type: constant
@@ -1289,7 +1289,7 @@ Replaced value:
 ```sqf
 (slot getVariable ["isContainerSlot",false])
 ```
-File: [client\Inventory\helpers.hpp at line 113](../../../Src/client/Inventory/helpers.hpp#L113)
+File: [client\Inventory\helpers.hpp at line 161](../../../Src/client/Inventory/helpers.hpp#L161)
 ## nullContainerCommonData
 
 Type: constant
@@ -1301,7 +1301,7 @@ Replaced value:
 ```sqf
 ["","","none",[0,0,0]]
 ```
-File: [client\Inventory\helpers.hpp at line 115](../../../Src/client/Inventory/helpers.hpp#L115)
+File: [client\Inventory\helpers.hpp at line 164](../../../Src/client/Inventory/helpers.hpp#L164)
 ## nullPostionPreviewObject
 
 Type: constant
@@ -1313,19 +1313,19 @@ Replaced value:
 ```sqf
 [0,0,0]
 ```
-File: [client\Inventory\helpers.hpp at line 116](../../../Src/client/Inventory/helpers.hpp#L116)
+File: [client\Inventory\helpers.hpp at line 166](../../../Src/client/Inventory/helpers.hpp#L166)
 ## SELF_CTG_SIZE_H
 
 Type: constant
 
-Description: self widgets
+Description: 
 
 
 Replaced value:
 ```sqf
 5
 ```
-File: [client\Inventory\helpers.hpp at line 119](../../../Src/client/Inventory/helpers.hpp#L119)
+File: [client\Inventory\helpers.hpp at line 170](../../../Src/client/Inventory/helpers.hpp#L170)
 ## getSelfCtg
 
 Type: constant
@@ -1337,7 +1337,7 @@ Replaced value:
 ```sqf
 (inventory_selfWidgets select 0)
 ```
-File: [client\Inventory\helpers.hpp at line 120](../../../Src/client/Inventory/helpers.hpp#L120)
+File: [client\Inventory\helpers.hpp at line 172](../../../Src/client/Inventory/helpers.hpp#L172)
 ## setSelfCtg(wid)
 
 Type: constant
@@ -1349,7 +1349,7 @@ Replaced value:
 ```sqf
 inventory_selfWidgets set [0,wid]
 ```
-File: [client\Inventory\helpers.hpp at line 121](../../../Src/client/Inventory/helpers.hpp#L121)
+File: [client\Inventory\helpers.hpp at line 174](../../../Src/client/Inventory/helpers.hpp#L174)
 ## getSelfCtgText
 
 Type: constant
@@ -1361,7 +1361,7 @@ Replaced value:
 ```sqf
 (inventory_selfWidgets select 1)
 ```
-File: [client\Inventory\helpers.hpp at line 123](../../../Src/client/Inventory/helpers.hpp#L123)
+File: [client\Inventory\helpers.hpp at line 177](../../../Src/client/Inventory/helpers.hpp#L177)
 ## setSelfCtgText(wid)
 
 Type: constant
@@ -1373,19 +1373,19 @@ Replaced value:
 ```sqf
 inventory_selfWidgets set [1,wid]
 ```
-File: [client\Inventory\helpers.hpp at line 124](../../../Src/client/Inventory/helpers.hpp#L124)
+File: [client\Inventory\helpers.hpp at line 179](../../../Src/client/Inventory/helpers.hpp#L179)
 ## TIME_TO_RELOAD_EXTRAACTION
 
 Type: constant
 
-Description: timing protection
+Description: 
 
 
 Replaced value:
 ```sqf
 0.8
 ```
-File: [client\Inventory\helpers.hpp at line 127](../../../Src/client/Inventory/helpers.hpp#L127)
+File: [client\Inventory\helpers.hpp at line 183](../../../Src/client/Inventory/helpers.hpp#L183)
 ## TIME_TO_RELOAD_ALTCLICKACTION
 
 Type: constant
@@ -1397,19 +1397,19 @@ Replaced value:
 ```sqf
 0.8
 ```
-File: [client\Inventory\helpers.hpp at line 128](../../../Src/client/Inventory/helpers.hpp#L128)
+File: [client\Inventory\helpers.hpp at line 185](../../../Src/client/Inventory/helpers.hpp#L185)
 ## INV_HIDE_UPDATE_DELAY
 
 Type: constant
 
-Description: hiding inventory
+Description: 
 
 
 Replaced value:
 ```sqf
 0.1
 ```
-File: [client\Inventory\helpers.hpp at line 131](../../../Src/client/Inventory/helpers.hpp#L131)
+File: [client\Inventory\helpers.hpp at line 189](../../../Src/client/Inventory/helpers.hpp#L189)
 ## INV_HIDE_PERUPDATE_DELAY
 
 Type: constant
@@ -1421,7 +1421,7 @@ Replaced value:
 ```sqf
 0.09
 ```
-File: [client\Inventory\helpers.hpp at line 132](../../../Src/client/Inventory/helpers.hpp#L132)
+File: [client\Inventory\helpers.hpp at line 191](../../../Src/client/Inventory/helpers.hpp#L191)
 ## invlog(mes,ft)
 
 Type: constant
@@ -1436,7 +1436,7 @@ Replaced value:
 ```sqf
 logformat(mes,ft)
 ```
-File: [client\Inventory\helpers.hpp at line 143](../../../Src/client/Inventory/helpers.hpp#L143)
+File: [client\Inventory\helpers.hpp at line 202](../../../Src/client/Inventory/helpers.hpp#L202)
 ## invlog(mes,ft)
 
 Type: constant
@@ -1451,21 +1451,21 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\Inventory\helpers.hpp at line 147](../../../Src/client/Inventory/helpers.hpp#L147)
+File: [client\Inventory\helpers.hpp at line 206](../../../Src/client/Inventory/helpers.hpp#L206)
 # inventory.hpp
 
 ## INV_BACKPACK
 
 Type: constant
 
-Description: Порядок слотов отвечает за их порядок отрисовки в инвентаре
+Description: 
 
 
 Replaced value:
 ```sqf
 0
 ```
-File: [client\Inventory\inventory.hpp at line 9](../../../Src/client/Inventory/inventory.hpp#L9)
+File: [client\Inventory\inventory.hpp at line 13](../../../Src/client/Inventory/inventory.hpp#L13)
 ## INV_ARMOR
 
 Type: constant
@@ -1477,7 +1477,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Inventory\inventory.hpp at line 10](../../../Src/client/Inventory/inventory.hpp#L10)
+File: [client\Inventory\inventory.hpp at line 14](../../../Src/client/Inventory/inventory.hpp#L14)
 ## INV_HEAD
 
 Type: constant
@@ -1489,19 +1489,19 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Inventory\inventory.hpp at line 11](../../../Src/client/Inventory/inventory.hpp#L11)
+File: [client\Inventory\inventory.hpp at line 15](../../../Src/client/Inventory/inventory.hpp#L15)
 ## INV_BACK
 
 Type: constant
 
-Description: Порядок слотов отвечает за их порядок отрисовки в инвентаре
+Description: 
 
 
 Replaced value:
 ```sqf
 3
 ```
-File: [client\Inventory\inventory.hpp at line 9](../../../Src/client/Inventory/inventory.hpp#L9)
+File: [client\Inventory\inventory.hpp at line 13](../../../Src/client/Inventory/inventory.hpp#L13)
 ## INV_CLOTH
 
 Type: constant
@@ -1513,7 +1513,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [client\Inventory\inventory.hpp at line 13](../../../Src/client/Inventory/inventory.hpp#L13)
+File: [client\Inventory\inventory.hpp at line 17](../../../Src/client/Inventory/inventory.hpp#L17)
 ## INV_FACE
 
 Type: constant
@@ -1525,7 +1525,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\Inventory\inventory.hpp at line 14](../../../Src/client/Inventory/inventory.hpp#L14)
+File: [client\Inventory\inventory.hpp at line 18](../../../Src/client/Inventory/inventory.hpp#L18)
 ## INV_HAND_L
 
 Type: constant
@@ -1537,7 +1537,7 @@ Replaced value:
 ```sqf
 6
 ```
-File: [client\Inventory\inventory.hpp at line 15](../../../Src/client/Inventory/inventory.hpp#L15)
+File: [client\Inventory\inventory.hpp at line 19](../../../Src/client/Inventory/inventory.hpp#L19)
 ## INV_BELT
 
 Type: constant
@@ -1549,7 +1549,7 @@ Replaced value:
 ```sqf
 7
 ```
-File: [client\Inventory\inventory.hpp at line 16](../../../Src/client/Inventory/inventory.hpp#L16)
+File: [client\Inventory\inventory.hpp at line 20](../../../Src/client/Inventory/inventory.hpp#L20)
 ## INV_HAND_R
 
 Type: constant
@@ -1561,7 +1561,7 @@ Replaced value:
 ```sqf
 8
 ```
-File: [client\Inventory\inventory.hpp at line 17](../../../Src/client/Inventory/inventory.hpp#L17)
+File: [client\Inventory\inventory.hpp at line 21](../../../Src/client/Inventory/inventory.hpp#L21)
 ## INV_LIST_HANDS
 
 Type: constant
@@ -1573,7 +1573,7 @@ Replaced value:
 ```sqf
 [INV_HAND_L,INV_HAND_R]
 ```
-File: [client\Inventory\inventory.hpp at line 19](../../../Src/client/Inventory/inventory.hpp#L19)
+File: [client\Inventory\inventory.hpp at line 25](../../../Src/client/Inventory/inventory.hpp#L25)
 ## INV_LIST_ALL
 
 Type: constant
@@ -1585,7 +1585,7 @@ Replaced value:
 ```sqf
 [INV_BACKPACK, INV_ARMOR, INV_HEAD, INV_BACK,INV_CLOTH,INV_FACE,INV_HAND_L,INV_BELT,INV_HAND_R]
 ```
-File: [client\Inventory\inventory.hpp at line 20](../../../Src/client/Inventory/inventory.hpp#L20)
+File: [client\Inventory\inventory.hpp at line 27](../../../Src/client/Inventory/inventory.hpp#L27)
 ## INV_LIST_VARNAME
 
 Type: constant
@@ -1597,7 +1597,7 @@ Replaced value:
 ```sqf
 ["INV_BACKPACK","INV_ARMOR","INV_HEAD","INV_BACK","INV_CLOTH","INV_FACE","INV_HAND_L","INV_BELT","INV_HAND_R"]
 ```
-File: [client\Inventory\inventory.hpp at line 21](../../../Src/client/Inventory/inventory.hpp#L21)
+File: [client\Inventory\inventory.hpp at line 29](../../../Src/client/Inventory/inventory.hpp#L29)
 ## INV_LIST_SLOTNAMES
 
 Type: constant
@@ -1609,7 +1609,7 @@ Replaced value:
 ```sqf
 ["Спина","Броня","Голова","Плечо","Одеяния","Лицо","Левая рука","Пояс","Правая рука"]
 ```
-File: [client\Inventory\inventory.hpp at line 22](../../../Src/client/Inventory/inventory.hpp#L22)
+File: [client\Inventory\inventory.hpp at line 31](../../../Src/client/Inventory/inventory.hpp#L31)
 ## INV_LIST_FACE
 
 Type: constant
@@ -1621,7 +1621,7 @@ Replaced value:
 ```sqf
 [INV_HEAD,INV_FACE]
 ```
-File: [client\Inventory\inventory.hpp at line 24](../../../Src/client/Inventory/inventory.hpp#L24)
+File: [client\Inventory\inventory.hpp at line 34](../../../Src/client/Inventory/inventory.hpp#L34)
 ## INV_LIST_TORSO
 
 Type: constant
@@ -1633,7 +1633,7 @@ Replaced value:
 ```sqf
 [INV_BACKPACK,INV_BACK,INV_CLOTH,INV_BELT,INV_ARMOR]
 ```
-File: [client\Inventory\inventory.hpp at line 25](../../../Src/client/Inventory/inventory.hpp#L25)
+File: [client\Inventory\inventory.hpp at line 36](../../../Src/client/Inventory/inventory.hpp#L36)
 ## SD_NAME
 
 Type: constant
@@ -1645,7 +1645,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Inventory\inventory.hpp at line 27](../../../Src/client/Inventory/inventory.hpp#L27)
+File: [client\Inventory\inventory.hpp at line 39](../../../Src/client/Inventory/inventory.hpp#L39)
 ## SD_ICON
 
 Type: constant
@@ -1657,7 +1657,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\Inventory\inventory.hpp at line 28](../../../Src/client/Inventory/inventory.hpp#L28)
+File: [client\Inventory\inventory.hpp at line 40](../../../Src/client/Inventory/inventory.hpp#L40)
 ## SD_POINTER
 
 Type: constant
@@ -1669,7 +1669,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\Inventory\inventory.hpp at line 29](../../../Src/client/Inventory/inventory.hpp#L29)
+File: [client\Inventory\inventory.hpp at line 41](../../../Src/client/Inventory/inventory.hpp#L41)
 ## SD_MODEL
 
 Type: constant
@@ -1681,19 +1681,19 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\Inventory\inventory.hpp at line 30](../../../Src/client/Inventory/inventory.hpp#L30)
+File: [client\Inventory\inventory.hpp at line 42](../../../Src/client/Inventory/inventory.hpp#L42)
 ## PATH_PICTURE_INV(icon)
 
 Type: constant
 
-Description: default picture path
+Description: 
 - Param: icon
 
 Replaced value:
 ```sqf
 PATH_PICTURE("inventory\items\" + (icon) + ".paa")
 ```
-File: [client\Inventory\inventory.hpp at line 34](../../../Src/client/Inventory/inventory.hpp#L34)
+File: [client\Inventory\inventory.hpp at line 48](../../../Src/client/Inventory/inventory.hpp#L48)
 # inventory_init.sqf
 
 ## PIC_PATH(name)
@@ -1707,7 +1707,7 @@ Replaced value:
 ```sqf
 (PATH_PICTURE_FOLDER + "inventory\" + name + ".paa")
 ```
-File: [client\Inventory\inventory_init.sqf at line 11](../../../Src/client/Inventory/inventory_init.sqf#L11)
+File: [client\Inventory\inventory_init.sqf at line 14](../../../Src/client/Inventory/inventory_init.sqf#L14)
 ## TEMP_ITEM_ICON
 
 Type: constant
@@ -1719,19 +1719,19 @@ Replaced value:
 ```sqf
 PIC_PATH("items\temp_item")
 ```
-File: [client\Inventory\inventory_init.sqf at line 12](../../../Src/client/Inventory/inventory_init.sqf#L12)
+File: [client\Inventory\inventory_init.sqf at line 16](../../../Src/client/Inventory/inventory_init.sqf#L16)
 ## inventory_sloticons_default
 
 Type: Variable
 
-Description: ассоциатор путей до картинок
+Description: 
 
 
 Initial value:
 ```sqf
 [...
 ```
-File: [client\Inventory\inventory_init.sqf at line 21](../../../Src/client/Inventory/inventory_init.sqf#L21)
+File: [client\Inventory\inventory_init.sqf at line 26](../../../Src/client/Inventory/inventory_init.sqf#L26)
 ## inventory_const_dirtOverlayIcon
 
 Type: Variable
@@ -1743,7 +1743,7 @@ Initial value:
 ```sqf
 PIC_PATH("dirt_overlay")
 ```
-File: [client\Inventory\inventory_init.sqf at line 33](../../../Src/client/Inventory/inventory_init.sqf#L33)
+File: [client\Inventory\inventory_init.sqf at line 39](../../../Src/client/Inventory/inventory_init.sqf#L39)
 ## inventory_const_partkeyToSlots
 
 Type: Variable
@@ -1755,7 +1755,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [client\Inventory\inventory_init.sqf at line 34](../../../Src/client/Inventory/inventory_init.sqf#L34)
+File: [client\Inventory\inventory_init.sqf at line 41](../../../Src/client/Inventory/inventory_init.sqf#L41)
 ## inventory_slotdataDirt
 
 Type: Variable
@@ -1767,8 +1767,8 @@ Initial value:
 ```sqf
 inventory_const_partkeyToSlots apply ...
 ```
-File: [client\Inventory\inventory_init.sqf at line 41](../../../Src/client/Inventory/inventory_init.sqf#L41)
-## invenotry_commitNowAllGerms
+File: [client\Inventory\inventory_init.sqf at line 51](../../../Src/client/Inventory/inventory_init.sqf#L51)
+## inventory_commitNowAllGerms
 
 Type: Variable
 
@@ -1779,19 +1779,19 @@ Initial value:
 ```sqf
 false//используется для быстрого применения грязи при открытии инвентаря
 ```
-File: [client\Inventory\inventory_init.sqf at line 43](../../../Src/client/Inventory/inventory_init.sqf#L43)
+File: [client\Inventory\inventory_init.sqf at line 54](../../../Src/client/Inventory/inventory_init.sqf#L54)
 ## inventory_openModeSlotsId
 
 Type: Variable
 
-Description: используется для быстрого применения грязи при открытии инвентаря
+Description: 
 
 
 Initial value:
 ```sqf
 [INV_BACKPACK,INV_ARMOR,INV_HEAD,INV_BACK,INV_CLOTH,INV_FACE,INV_BELT]
 ```
-File: [client\Inventory\inventory_init.sqf at line 45](../../../Src/client/Inventory/inventory_init.sqf#L45)
+File: [client\Inventory\inventory_init.sqf at line 57](../../../Src/client/Inventory/inventory_init.sqf#L57)
 ## inventory_slotnames_default
 
 Type: Variable
@@ -1803,7 +1803,7 @@ Initial value:
 ```sqf
 INV_LIST_SLOTNAMES
 ```
-File: [client\Inventory\inventory_init.sqf at line 49](../../../Src/client/Inventory/inventory_init.sqf#L49)
+File: [client\Inventory\inventory_init.sqf at line 62](../../../Src/client/Inventory/inventory_init.sqf#L62)
 ## inventory_slotpos_map
 
 Type: Variable
@@ -1815,7 +1815,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [client\Inventory\inventory_init.sqf at line 51](../../../Src/client/Inventory/inventory_init.sqf#L51)
+File: [client\Inventory\inventory_init.sqf at line 65](../../../Src/client/Inventory/inventory_init.sqf#L65)
 ## inventor_slot_widgets
 
 Type: Variable
@@ -1827,7 +1827,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\Inventory\inventory_init.sqf at line 63](../../../Src/client/Inventory/inventory_init.sqf#L63)
+File: [client\Inventory\inventory_init.sqf at line 78](../../../Src/client/Inventory/inventory_init.sqf#L78)
 ## inventory_slotdata
 
 Type: Variable
@@ -1839,7 +1839,7 @@ Initial value:
 ```sqf
 _inventory_slotdata apply ...
 ```
-File: [client\Inventory\inventory_init.sqf at line 68](../../../Src/client/Inventory/inventory_init.sqf#L68)
+File: [client\Inventory\inventory_init.sqf at line 87](../../../Src/client/Inventory/inventory_init.sqf#L87)
 ## isInventoryOpen
 
 Type: Variable
@@ -1851,7 +1851,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Inventory\inventory_init.sqf at line 70](../../../Src/client/Inventory/inventory_init.sqf#L70)
+File: [client\Inventory\inventory_init.sqf at line 90](../../../Src/client/Inventory/inventory_init.sqf#L90)
 ## inventory_modifierScroll
 
 Type: Variable
@@ -1863,19 +1863,19 @@ Initial value:
 ```sqf
 false//множитель прокручивания при нажатом шифте
 ```
-File: [client\Inventory\inventory_init.sqf at line 72](../../../Src/client/Inventory/inventory_init.sqf#L72)
+File: [client\Inventory\inventory_init.sqf at line 93](../../../Src/client/Inventory/inventory_init.sqf#L93)
 ## inventory_pressedwidget
 
 Type: Variable
 
-Description: common flags and other info
+Description: 
 
 
 Initial value:
 ```sqf
 [widgetNull,widgetNull]
 ```
-File: [client\Inventory\inventory_init.sqf at line 75](../../../Src/client/Inventory/inventory_init.sqf#L75)
+File: [client\Inventory\inventory_init.sqf at line 97](../../../Src/client/Inventory/inventory_init.sqf#L97)
 ## inventory_pressedSlotPosition
 
 Type: Variable
@@ -1887,7 +1887,7 @@ Initial value:
 ```sqf
 [0,0]
 ```
-File: [client\Inventory\inventory_init.sqf at line 76](../../../Src/client/Inventory/inventory_init.sqf#L76)
+File: [client\Inventory\inventory_init.sqf at line 99](../../../Src/client/Inventory/inventory_init.sqf#L99)
 ## inventory_isInsidePressedSlot
 
 Type: Variable
@@ -1899,19 +1899,19 @@ Initial value:
 ```sqf
 false //На данный момент (Legacy - 0.5.148) данная переменная только устанавливает значения, но не использует их.
 ```
-File: [client\Inventory\inventory_init.sqf at line 77](../../../Src/client/Inventory/inventory_init.sqf#L77)
+File: [client\Inventory\inventory_init.sqf at line 101](../../../Src/client/Inventory/inventory_init.sqf#L101)
 ## inventory_invWidgetSize
 
 Type: Variable
 
-Description: На данный момент (Legacy - 0.5.148) данная переменная только устанавливает значения, но не использует их.
+Description: 
 
 
 Initial value:
 ```sqf
 [0,0,0,0]
 ```
-File: [client\Inventory\inventory_init.sqf at line 79](../../../Src/client/Inventory/inventory_init.sqf#L79)
+File: [client\Inventory\inventory_init.sqf at line 104](../../../Src/client/Inventory/inventory_init.sqf#L104)
 ## inventory_verbMenuWidgets
 
 Type: Variable
@@ -1923,7 +1923,7 @@ Initial value:
 ```sqf
 [widgetNull]
 ```
-File: [client\Inventory\inventory_init.sqf at line 81](../../../Src/client/Inventory/inventory_init.sqf#L81)
+File: [client\Inventory\inventory_init.sqf at line 107](../../../Src/client/Inventory/inventory_init.sqf#L107)
 ## inventory_lastPressedSlotId
 
 Type: Variable
@@ -1935,31 +1935,31 @@ Initial value:
 ```sqf
 -1 //нигде не используется?
 ```
-File: [client\Inventory\inventory_init.sqf at line 82](../../../Src/client/Inventory/inventory_init.sqf#L82)
+File: [client\Inventory\inventory_init.sqf at line 109](../../../Src/client/Inventory/inventory_init.sqf#L109)
 ## inventory_verbItemPointer
 
 Type: Variable
 
-Description: нигде не используется?
+Description: 
 
 
 Initial value:
 ```sqf
 ""
 ```
-File: [client\Inventory\inventory_init.sqf at line 83](../../../Src/client/Inventory/inventory_init.sqf#L83)
+File: [client\Inventory\inventory_init.sqf at line 111](../../../Src/client/Inventory/inventory_init.sqf#L111)
 ## inventory_protectAltClick
 
 Type: Variable
 
-Description: inventory_protectExtraAction = false;
+Description: 
 
 
 Initial value:
 ```sqf
 false
 ```
-File: [client\Inventory\inventory_init.sqf at line 86](../../../Src/client/Inventory/inventory_init.sqf#L86)
+File: [client\Inventory\inventory_init.sqf at line 115](../../../Src/client/Inventory/inventory_init.sqf#L115)
 ## inventory_containerCommonData
 
 Type: Variable
@@ -1971,31 +1971,31 @@ Initial value:
 ```sqf
 nullContainerCommonData//name,ref,local game object
 ```
-File: [client\Inventory\inventory_init.sqf at line 88](../../../Src/client/Inventory/inventory_init.sqf#L88)
+File: [client\Inventory\inventory_init.sqf at line 118](../../../Src/client/Inventory/inventory_init.sqf#L118)
 ## inventory_containerData
 
 Type: Variable
 
-Description: name,ref,local game object
+Description: 
 
 
 Initial value:
 ```sqf
 []// check SD_<var>
 ```
-File: [client\Inventory\inventory_init.sqf at line 89](../../../Src/client/Inventory/inventory_init.sqf#L89)
+File: [client\Inventory\inventory_init.sqf at line 120](../../../Src/client/Inventory/inventory_init.sqf#L120)
 ## inventory_isOpenContainer
 
 Type: Variable
 
-Description: check SD_<var>
+Description: 
 
 
 Initial value:
 ```sqf
 false
 ```
-File: [client\Inventory\inventory_init.sqf at line 90](../../../Src/client/Inventory/inventory_init.sqf#L90)
+File: [client\Inventory\inventory_init.sqf at line 122](../../../Src/client/Inventory/inventory_init.sqf#L122)
 ## inventory_containerWidgets
 
 Type: Variable
@@ -2007,43 +2007,43 @@ Initial value:
 ```sqf
 [widgetNull,widgetNull]//0 - ctg,1 - ctgScroll
 ```
-File: [client\Inventory\inventory_init.sqf at line 91](../../../Src/client/Inventory/inventory_init.sqf#L91)
+File: [client\Inventory\inventory_init.sqf at line 124](../../../Src/client/Inventory/inventory_init.sqf#L124)
 ## inventory_containerSlots
 
 Type: Variable
 
-Description: 0 - ctg,1 - ctgScroll
+Description: 
 
 
 Initial value:
 ```sqf
 []//список виджетов иконок внутри контейнера
 ```
-File: [client\Inventory\inventory_init.sqf at line 92](../../../Src/client/Inventory/inventory_init.sqf#L92)
+File: [client\Inventory\inventory_init.sqf at line 126](../../../Src/client/Inventory/inventory_init.sqf#L126)
 ## inventory_freeSpaceSlots
 
 Type: Variable
 
-Description: список виджетов иконок внутри контейнера
+Description: 
 
 
 Initial value:
 ```sqf
 []//список виджетов свободного места
 ```
-File: [client\Inventory\inventory_init.sqf at line 93](../../../Src/client/Inventory/inventory_init.sqf#L93)
+File: [client\Inventory\inventory_init.sqf at line 128](../../../Src/client/Inventory/inventory_init.sqf#L128)
 ## inventory_contWidgetSize
 
 Type: Variable
 
-Description: список виджетов свободного места
+Description: 
 
 
 Initial value:
 ```sqf
 [0,0,0,0]
 ```
-File: [client\Inventory\inventory_init.sqf at line 94](../../../Src/client/Inventory/inventory_init.sqf#L94)
+File: [client\Inventory\inventory_init.sqf at line 130](../../../Src/client/Inventory/inventory_init.sqf#L130)
 ## inventory_isPressedRMBDrag
 
 Type: Variable
@@ -2055,67 +2055,67 @@ Initial value:
 ```sqf
 false //для защиты драга пкмом
 ```
-File: [client\Inventory\inventory_init.sqf at line 96](../../../Src/client/Inventory/inventory_init.sqf#L96)
+File: [client\Inventory\inventory_init.sqf at line 133](../../../Src/client/Inventory/inventory_init.sqf#L133)
 ## inventory_isPressedInteractButton
 
 Type: Variable
 
-Description: для защиты драга пкмом
+Description: 
 
 
 Initial value:
 ```sqf
 false //специальный модификатор интерации
 ```
-File: [client\Inventory\inventory_init.sqf at line 97](../../../Src/client/Inventory/inventory_init.sqf#L97)
+File: [client\Inventory\inventory_init.sqf at line 135](../../../Src/client/Inventory/inventory_init.sqf#L135)
 ## inventory_isOutsideDragCatch
 
 Type: Variable
 
-Description: специальный модификатор интерации
+Description: 
 
 
 Initial value:
 ```sqf
 false //указатель защиты от main action при условии: mouseDown > move outside current slot > move inside current
 ```
-File: [client\Inventory\inventory_init.sqf at line 99](../../../Src/client/Inventory/inventory_init.sqf#L99)
+File: [client\Inventory\inventory_init.sqf at line 138](../../../Src/client/Inventory/inventory_init.sqf#L138)
 ## inventory_supressInventoryOpen
 
 Type: Variable
 
-Description: указатель защиты от main action при условии: mouseDown > move outside current slot > move inside current
+Description: 
 
 
 Initial value:
 ```sqf
 false //подавляет открытие инвентарных функций. работает для ПКМ по предмету
 ```
-File: [client\Inventory\inventory_init.sqf at line 101](../../../Src/client/Inventory/inventory_init.sqf#L101)
+File: [client\Inventory\inventory_init.sqf at line 141](../../../Src/client/Inventory/inventory_init.sqf#L141)
 ## inventory_lastFocusedWidget
 
 Type: Variable
 
-Description: подавляет открытие инвентарных функций. работает для ПКМ по предмету
+Description: 
 
 
 Initial value:
 ```sqf
 [widgetNull] //последний в фокусе для увеличения
 ```
-File: [client\Inventory\inventory_init.sqf at line 103](../../../Src/client/Inventory/inventory_init.sqf#L103)
+File: [client\Inventory\inventory_init.sqf at line 144](../../../Src/client/Inventory/inventory_init.sqf#L144)
 ## inventory_canHideHands
 
 Type: Variable
 
-Description: Скрывает инвентарь
+Description: 
 
 
 Initial value:
 ```sqf
 false
 ```
-File: [client\Inventory\inventory_init.sqf at line 106](../../../Src/client/Inventory/inventory_init.sqf#L106)
+File: [client\Inventory\inventory_init.sqf at line 148](../../../Src/client/Inventory/inventory_init.sqf#L148)
 ## inventory_isFullHide
 
 Type: Variable
@@ -2127,7 +2127,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Inventory\inventory_init.sqf at line 107](../../../Src/client/Inventory/inventory_init.sqf#L107)
+File: [client\Inventory\inventory_init.sqf at line 150](../../../Src/client/Inventory/inventory_init.sqf#L150)
 ## inventory_hideAfter
 
 Type: Variable
@@ -2139,7 +2139,7 @@ Initial value:
 ```sqf
 10
 ```
-File: [client\Inventory\inventory_init.sqf at line 108](../../../Src/client/Inventory/inventory_init.sqf#L108)
+File: [client\Inventory\inventory_init.sqf at line 152](../../../Src/client/Inventory/inventory_init.sqf#L152)
 ## inventory_hideValue
 
 Type: Variable
@@ -2151,7 +2151,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\Inventory\inventory_init.sqf at line 109](../../../Src/client/Inventory/inventory_init.sqf#L109)
+File: [client\Inventory\inventory_init.sqf at line 154](../../../Src/client/Inventory/inventory_init.sqf#L154)
 ## inventory_hideTimestamp
 
 Type: Variable
@@ -2163,7 +2163,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [client\Inventory\inventory_init.sqf at line 110](../../../Src/client/Inventory/inventory_init.sqf#L110)
+File: [client\Inventory\inventory_init.sqf at line 156](../../../Src/client/Inventory/inventory_init.sqf#L156)
 ## inventory_hideHandler
 
 Type: Variable
@@ -2175,57 +2175,57 @@ Initial value:
 ```sqf
 -1
 ```
-File: [client\Inventory\inventory_init.sqf at line 111](../../../Src/client/Inventory/inventory_init.sqf#L111)
+File: [client\Inventory\inventory_init.sqf at line 158](../../../Src/client/Inventory/inventory_init.sqf#L158)
 ## inventory_isHoldMode
 
 Type: Variable
 
-Description: Инвентарь по удержанию
+Description: 
 
 
 Initial value:
 ```sqf
 false
 ```
-File: [client\Inventory\inventory_init.sqf at line 114](../../../Src/client/Inventory/inventory_init.sqf#L114)
+File: [client\Inventory\inventory_init.sqf at line 162](../../../Src/client/Inventory/inventory_init.sqf#L162)
 ## inventory_selfWidgets
 
 Type: Variable
 
-Description: Селф окно
+Description: 
 
 
 Initial value:
 ```sqf
 [widgetNull,widgetNull] //0 ctg,1 text
 ```
-File: [client\Inventory\inventory_init.sqf at line 117](../../../Src/client/Inventory/inventory_init.sqf#L117)
+File: [client\Inventory\inventory_init.sqf at line 166](../../../Src/client/Inventory/inventory_init.sqf#L166)
 # PreviewObject.sqf
 
 ## MAX_ONMOUSECURSOR_DROP_ANGLE
 
 Type: constant
 
-Description: угол наклона при котором режим выкладывания меняется с центра экрана на мышь
+Description: 
 
 
 Replaced value:
 ```sqf
 -0.2
 ```
-File: [client\Inventory\PreviewObject.sqf at line 13](../../../Src/client/Inventory/PreviewObject.sqf#L13)
+File: [client\Inventory\PreviewObject.sqf at line 16](../../../Src/client/Inventory/PreviewObject.sqf#L16)
 ## PUTDOWN_RADIUS
 
 Type: constant
 
-Description: дистанция выкладывания
+Description: 
 
 
 Replaced value:
 ```sqf
 INTERACT_ITEM_DISTANCE
 ```
-File: [client\Inventory\PreviewObject.sqf at line 16](../../../Src/client/Inventory/PreviewObject.sqf#L16)
+File: [client\Inventory\PreviewObject.sqf at line 20](../../../Src/client/Inventory/PreviewObject.sqf#L20)
 ## __internal_resetBackColor
 
 Type: constant
@@ -2237,7 +2237,7 @@ Replaced value:
 ```sqf
 getSlotBackground(getDragSlot) setBackgroundColor BACKGROUND_COLOR
 ```
-File: [client\Inventory\PreviewObject.sqf at line 51](../../../Src/client/Inventory/PreviewObject.sqf#L51)
+File: [client\Inventory\PreviewObject.sqf at line 60](../../../Src/client/Inventory/PreviewObject.sqf#L60)
 ## resetBackgrounDragSlot
 
 Type: constant
@@ -2249,7 +2249,7 @@ Replaced value:
 ```sqf
 _visObj hideObject false; __internal_resetBackColor
 ```
-File: [client\Inventory\PreviewObject.sqf at line 52](../../../Src/client/Inventory/PreviewObject.sqf#L52)
+File: [client\Inventory\PreviewObject.sqf at line 62](../../../Src/client/Inventory/PreviewObject.sqf#L62)
 ## inventory_previewObject
 
 Type: Variable
@@ -2261,7 +2261,7 @@ Initial value:
 ```sqf
 objnull
 ```
-File: [client\Inventory\PreviewObject.sqf at line 18](../../../Src/client/Inventory/PreviewObject.sqf#L18)
+File: [client\Inventory\PreviewObject.sqf at line 23](../../../Src/client/Inventory/PreviewObject.sqf#L23)
 ## inventory_lastDirPreviewObject
 
 Type: Variable
@@ -2273,7 +2273,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\Inventory\PreviewObject.sqf at line 19](../../../Src/client/Inventory/PreviewObject.sqf#L19)
+File: [client\Inventory\PreviewObject.sqf at line 25](../../../Src/client/Inventory/PreviewObject.sqf#L25)
 ## inventory_createPreviewObject
 
 Type: function
@@ -2281,7 +2281,7 @@ Type: function
 Description: 
 - Param: _slotId
 
-File: [client\Inventory\PreviewObject.sqf at line 21](../../../Src/client/Inventory/PreviewObject.sqf#L21)
+File: [client\Inventory\PreviewObject.sqf at line 28](../../../Src/client/Inventory/PreviewObject.sqf#L28)
 ## inventory_onVisualPreviewObject
 
 Type: function
@@ -2289,7 +2289,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\PreviewObject.sqf at line 48](../../../Src/client/Inventory/PreviewObject.sqf#L48)
+File: [client\Inventory\PreviewObject.sqf at line 56](../../../Src/client/Inventory/PreviewObject.sqf#L56)
 ## inventory_collectInfoOnPutdown
 
 Type: function
@@ -2297,7 +2297,7 @@ Type: function
 Description: 
 - Param: _isFastPutdown
 
-File: [client\Inventory\PreviewObject.sqf at line 118](../../../Src/client/Inventory/PreviewObject.sqf#L118)
+File: [client\Inventory\PreviewObject.sqf at line 129](../../../Src/client/Inventory/PreviewObject.sqf#L129)
 ## inventory_deletePreviewObject
 
 Type: function
@@ -2305,21 +2305,21 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\PreviewObject.sqf at line 133](../../../Src/client/Inventory/PreviewObject.sqf#L133)
+File: [client\Inventory\PreviewObject.sqf at line 145](../../../Src/client/Inventory/PreviewObject.sqf#L145)
 # verbs.sqf
 
 ## TIME_PREPARE_VERBMENU
 
 Type: constant
 
-Description: as TIME_PREPARE_SLOTS
+Description: 
 
 
 Replaced value:
 ```sqf
 0.09
 ```
-File: [client\Inventory\verbs.sqf at line 12](../../../Src/client/Inventory/verbs.sqf#L12)
+File: [client\Inventory\verbs.sqf at line 15](../../../Src/client/Inventory/verbs.sqf#L15)
 ## inventory_onGetItemVerbs
 
 Type: function
@@ -2327,7 +2327,7 @@ Type: function
 Description: 
 - Param: _slot
 
-File: [client\Inventory\verbs.sqf at line 14](../../../Src/client/Inventory/verbs.sqf#L14)
+File: [client\Inventory\verbs.sqf at line 18](../../../Src/client/Inventory/verbs.sqf#L18)
 ## inventory_onLoadVerbsInventory
 
 Type: function
@@ -2338,7 +2338,7 @@ Description:
 - Param: _slotId
 - Param: _pointer
 
-File: [client\Inventory\verbs.sqf at line 31](../../../Src/client/Inventory/verbs.sqf#L31)
+File: [client\Inventory\verbs.sqf at line 36](../../../Src/client/Inventory/verbs.sqf#L36)
 ## inventory_onPrepareVerbMenu
 
 Type: function
@@ -2346,7 +2346,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\verbs.sqf at line 70](../../../Src/client/Inventory/verbs.sqf#L70)
+File: [client\Inventory\verbs.sqf at line 75](../../../Src/client/Inventory/verbs.sqf#L75)
 ## inventory_onPressVerb
 
 Type: function
@@ -2354,7 +2354,7 @@ Type: function
 Description: 
 - Param: _control
 
-File: [client\Inventory\verbs.sqf at line 87](../../../Src/client/Inventory/verbs.sqf#L87)
+File: [client\Inventory\verbs.sqf at line 93](../../../Src/client/Inventory/verbs.sqf#L93)
 ## inventory_unloadVerbMenu
 
 Type: function
@@ -2362,4 +2362,4 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\verbs.sqf at line 107](../../../Src/client/Inventory/verbs.sqf#L107)
+File: [client\Inventory\verbs.sqf at line 114](../../../Src/client/Inventory/verbs.sqf#L114)
