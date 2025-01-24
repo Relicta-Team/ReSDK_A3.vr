@@ -7,6 +7,8 @@
 #include <..\..\host\text.hpp>
 #include <..\WidgetSystem\widgets.hpp>
 
+//TODO change all net displays to struct-based decla
+
 #define ND_INIT(name) nd_map_displays set ['name',{ private _args = _this select 0; private _isFirstCreate = _this select 1; private _w_d_ = widgetNull;
 
 #define ND_END }];

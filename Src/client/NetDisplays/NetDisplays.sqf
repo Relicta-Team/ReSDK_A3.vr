@@ -12,30 +12,42 @@
 #include <..\Interactions\interact.hpp>
 #include <..\Inventory\inventory.hpp>
 
+namespace(NetDisplay,nd_)
 
-
+decl(map<string;any>)
 nd_map_displays = createHashMap;
 //filling hashmap in this file
 #include "Displays\Displays.loader"
 
 if !isNullVar(_IINTERNALCOMPILER) exitWith {};
 
+decl(int)
 nd_handleUpdate = -1;
 
+decl(widget[][])
 nd_list_widgets = [[],[]]; //список виджетов с данными. В левом стеке неочищаемые данные до закрытия окна, в правом обновляемый список
+decl(mesh)
 nd_sourceObject = objNUll;
+decl(float)
 nd_interactionDistance = 0;
+decl(bool)
 nd_isOpenDisplay = false;
+decl(string)
 nd_openedDisplayType = "";
+decl(string)
 nd_sourceRef = "";
+decl(vector3)
 nd_checkedPos = vec3(0,0,0);
 
 //variables for lobby
+decl(bool)
 nd_lobby_isOpen = false;
 
+decl(int)
 nd_internal_attemptLoad = 0;
 
 #ifdef DEBUG
+	decl(void(string;any))
 	nd_createTestDisplay = {
 		params ["_class","_data"];
 		_IINTERNALCOMPILER = true;
@@ -54,6 +66,7 @@ nd_internal_attemptLoad = 0;
 	};	
 #endif
 
+decl(void(string;any[];any;float))
 nd_loadDisplay = {
 	params ["_type",["_data",[]],"_srcRef","_interactDistance"];
 	
@@ -201,6 +214,7 @@ nd_loadDisplay = {
 
 }; rpcAdd("opnND",nd_loadDisplay);
 
+decl(void(string;any[]))
 nd_loadDisplay_lobby = {
 	params ["_type",["_data",[]]];
 	if (!isLobbyOpen) exitWith {
@@ -235,6 +249,7 @@ nd_loadDisplay_lobby = {
 	
 }; rpcAdd("opnNDLobby",nd_loadDisplay_lobby);
 
+decl(void(bool))
 nd_closeND_lobby = {
 	params [["_isRpc",false]];
 	[false] call lobby_sysSetEnable;
@@ -247,6 +262,7 @@ nd_closeND_lobby = {
 	};
 }; rpcAdd("clsNDLobby",nd_closeND_lobby);
 
+decl(void())
 nd_closeND_lobbyImpl = {
 	nd_lobby_isOpen = false;
 	nd_openedDisplayType = "";
@@ -254,6 +270,7 @@ nd_closeND_lobbyImpl = {
 };
 
 //отсылает тип ввода пользователем. можно отправлять данные. Вся логика обработки на сервере в onHandleNDInput
+decl(void(any))
 nd_onPressButton = {
 	params ["_data"];
 #ifdef DEBUG
@@ -267,6 +284,7 @@ nd_onPressButton = {
 };
 
 // очистка списка виджетов для полной перегрузки визуала
+decl(void())
 nd_cleanupData = {
 	{
 		[_x] call deleteWidget;
@@ -275,12 +293,14 @@ nd_cleanupData = {
 	nd_list_widgets set [1,[]];
 };
 
+decl(widget(string;vector4;widget;string))
 nd_regWidget = {
 	params ["_type","_vecpos","_probCtg","_dataType"];
 	regNDWidget(_type,_vecpos,_probCtg,_dataType);
 	lastNDWidget
 };
 
+decl(widget(display;vector4;widget;bool))
 nd_addClosingButton = {
 	params ["_display","_vec4Pos",["_ctg",widgetNull],["_registerAsReloaded",false]]; // _registerAsReloaded означает что виджет регистрируется в буфере который чистится при обновлении
 	private _buttonClose = [_display,BUTTON,_vec4Pos,_ctg] call createWidget;
@@ -297,12 +317,14 @@ nd_addClosingButton = {
 	_buttonClose
 };
 
+decl(void())
 nd_onUpdate = {
 	_d = getDisplay;
 	[_this,false] call (nd_map_displays get nd_openedDisplayType)
 }; rpcAdd("updND",nd_onUpdate);
 
 
+decl(void())
 nd_onClose = {
 #ifdef DEBUG
 	if (getDisplay getvariable ["isdebugdisplay",false]) exitWith {call nd_unloadDisplay};
@@ -312,7 +334,7 @@ nd_onClose = {
 	call nd_unloadDisplay;
 };
 
-
+decl(void())
 nd_unloadDisplay = {
 	if (!nd_isOpenDisplay) exitWith {};
 	if (nd_handleUpdate > -1) then {stopUpdate(nd_handleUpdate)};
@@ -330,6 +352,7 @@ nd_unloadDisplay = {
 
 
 //стандартный алгоритм
+decl(widget(float;float;string))
 nd_stdLoad = {
 	params [["_sx",50],["_sy",50],["_btName","Закрыть"]];
 	if (isFirstLoad) then {
