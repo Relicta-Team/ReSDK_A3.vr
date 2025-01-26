@@ -16,8 +16,8 @@
 #define vec4(x,y,w,h) [x,y,w,h]
 #define ctgNULL NIL
 
-#define addSavedWdiget(wid) getSavedWidgets pushBack(wid)
-#define getSavedWidgets (nd_list_widgets select 0)
+#define self callp(addSavedWidget, wid) (self callv(getSavedWidgets)) pushBack(wid)
+#define (self callv(getSavedWidgets)) (nd_list_widgets select 0)
 
 #define regNDWidget(widgetType,vecpos,probCtg,datatype) _w_d_ = [_d,widgetType,vecpos,probCtg] call createWidget; \
 (nd_list_widgets select 1)pushBack _w_d_; \

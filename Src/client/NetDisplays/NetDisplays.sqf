@@ -4,6 +4,7 @@
 // ======================================================
 
 #include <..\..\host\engine.hpp>
+#include <..\..\host\struct.hpp>
 #include <..\..\host\text.hpp>
 #include <..\..\host\keyboard.hpp>
 #include <..\InputSystem\inputKeyHandlers.hpp>
@@ -52,8 +53,8 @@ nd_internal_attemptLoad = 0;
 		params ["_class","_data"];
 		_IINTERNALCOMPILER = true;
 		call compile preprocessFileLineNumbers "src\client\NetDisplays\NetDisplays.sqf";
-		private _code = nd_map_displays get _class;
-		if isNullVar(_code) exitWith {
+		private _obj = [_class] call nd_createNDObject;
+		if isNullVar(_obj) exitWith {
 			errorformat("NetDisplay::createTestDisplay() - cant find display by type %1",_class);
 		};
 		
@@ -61,10 +62,18 @@ nd_internal_attemptLoad = 0;
 		_d displayRemoveAllEventHandlers "KeyDown";
 		_d displayRemoveAllEventHandlers "KeyUp";
 		_d setvariable ['isdebugdisplay',true];
-	
-		[_data,true] call _code;
+
+		_obj callp(process,_data arg true);
 	};	
 #endif
+
+decl(NULL|struct_t.NDBase)
+nd_createNDObject = {
+	params ["_type"];
+	private _allowed = ["NDBase"] call struct_getAllTypesOf;
+	if !array_exists(_allowed,_type) exitWith {null};
+	[_type] call struct_alloc;
+};
 
 decl(void(string;any[];any;float))
 nd_loadDisplay = {
@@ -120,8 +129,8 @@ nd_loadDisplay = {
 
 	nd_internal_attemptLoad = 0; //free attempt loader
 
-	private _code = nd_map_displays get _type;
-	if isNullVar(_code) exitWith {
+	private _obj = [_type] call nd_createNDObject;
+	if isNullVar(_obj) exitWith {
 		errorformat("NetDisplay::loadDisplay() - cant find display by type %1",_type);
 		call nd_onClose;
 	};
@@ -210,7 +219,7 @@ nd_loadDisplay = {
 		};
 	}];
 
-	[_data,true] call _code;
+	_obj callp(process,_data arg true);
 
 }; rpcAdd("opnND",nd_loadDisplay);
 
@@ -231,8 +240,8 @@ nd_loadDisplay_lobby = {
 		call nd_closeND_lobby;
 	};
 	
-	private _code = nd_map_displays get _type;
-	if isNullVar(_code) exitWith {
+	private _obj = [_type] call nd_createNDObject;
+	if isNullVar(_obj) exitWith {
 		errorformat("NetDisplay::loadDisplay() - cant find display by type %1",_type);
 		call nd_onClose;
 	};
@@ -245,7 +254,7 @@ nd_loadDisplay_lobby = {
 	nd_openedDisplayType = _type;
 	[true] call lobby_sysSetEnable;
 	private _d = getDisplay;
-	[_data,true] call _code;
+	_obj callp(process,_data arg true);
 	
 }; rpcAdd("opnNDLobby",nd_loadDisplay_lobby);
 
@@ -320,7 +329,7 @@ nd_addClosingButton = {
 decl(void())
 nd_onUpdate = {
 	_d = getDisplay;
-	[_this,false] call (nd_map_displays get nd_openedDisplayType)
+	nd_internal_currentStructObj callp(process, _this arg false);
 }; rpcAdd("updND",nd_onUpdate);
 
 
@@ -348,8 +357,12 @@ nd_unloadDisplay = {
 	nd_openedDisplayType = "";
 	nd_sourceRef = "";
 	nd_list_widgets = [[],[]];
+
+	nd_internal_currentStructObj = null;
 }; rpcAdd("clsND",nd_unloadDisplay);
 
+decl(NULL|struct_t.NDBase)
+nd_internal_currentStructObj = null;
 
 //стандартный алгоритм
 decl(widget(float;float;string))
@@ -357,7 +370,7 @@ nd_stdLoad = {
 	params [["_sx",50],["_sy",50],["_btName","Закрыть"]];
 	if (isFirstLoad) then {
 		private _ctg = [thisDisplay,WIDGETGROUP,[50 - _sx/2,50-_sy/2,_sx,_sy]] call createWidget;
-		addSavedWdiget(_ctg);
+		nd_internal_currentStructObj callp(addSavedWidget, _ctg);
 		
 		_back = [thisDisplay,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
 		_back setBackgroundColor [0.3,0.3,0.3,0.5];
@@ -369,14 +382,14 @@ nd_stdLoad = {
 			_closer ctrlSetText _btName;
 			
 			_ctg = [thisDisplay,WIDGETGROUPSCROLLS,[0,0,100,90],_ctg] call createWidget;
-			addSavedWdiget(_ctg);
+			nd_internal_currentStructObj callp(addSavedWidget, _ctg);
 			
 			_ctg
 		};
 		
 	} else {
-		private __svcnt = count getSavedWidgets;
+		private __svcnt = count (nd_internal_currentStructObj callv(getSavedWidgets));
 		if (__svcnt == 0) exitWith {widgetNull};
-		getSavedWidgets select (__svcnt - 1);
+		(nd_internal_currentStructObj callv(getSavedWidgets)) select (__svcnt - 1);
 	};
 };
