@@ -72,7 +72,7 @@ locef_update = {
 	params ["_eventName",["_context",[]]];
 
 	if (!locef_isInitialized) then {
-		call locef_isInitialized;
+		call locef_initConfigs;
 	};
 
 	_eventName = sanitizeCfgName(_eventName);
@@ -88,6 +88,7 @@ locef_update = {
 			errorformat("locef_update() - Undefined key: %1",_eventName);
 		};
 		private _obj = [_cfg] call struct_alloc;
+		locef_allActiveEffects set [_eventName,_obj];
 		_obj callp(updateContext,_context);
 		_obj callv(create);
 	};

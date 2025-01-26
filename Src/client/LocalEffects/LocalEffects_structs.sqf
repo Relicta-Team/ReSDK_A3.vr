@@ -10,6 +10,11 @@ struct(LocEffBase)
 
     decl(any) def(_context) null;
 
+    decl(string) def(str)
+    {
+        format["LocalEffect<%1>",self getv(name)]
+    }
+
     decl(void()) def(create) 
     {
 
@@ -51,8 +56,8 @@ struct(LocEffGhostNightVision) base(LocEffBase)
 
     decl(override) def(destroy)
     {
-        [self getv(getContext)] call le_unloadLight;
-        deleteVehicle (self getv(getContext));
+        [self callv(getContext)] call le_unloadLight;
+        deleteVehicle (self callv(getContext));
     }
 endstruct
 
@@ -89,8 +94,8 @@ struct(LocEffEaterNightVision) base(LocEffBase)
 
     decl(override) def(destroy)
     {
-        [self getv(getContext)] call le_unloadLight;
-        deleteVehicle (self getv(getContext));
+        [self callv(getContext)] call le_unloadLight;
+        deleteVehicle (self callv(getContext));
         ["eater_nightvision_color",false] call pp_setEnable;
     }
 endstruct
@@ -146,6 +151,6 @@ struct(LocEffGenericAmbSound) base(LocEffBase)
 
     decl(override) def(destroy)
     {
-        deleteVehicle (self getv(getContext));
+        deleteVehicle (self callv(getContext));
     }
 endstruct
