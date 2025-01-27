@@ -258,6 +258,7 @@ nd_loadDisplay_lobby = {
 	nd_openedDisplayType = _type;
 	[true] call lobby_sysSetEnable;
 	private _d = getDisplay;
+	_obj callp(assignDisplay,_d);
 	_obj callp(process,_data arg true);
 	
 }; rpcAdd("opnNDLobby",nd_loadDisplay_lobby);
@@ -280,6 +281,8 @@ nd_closeND_lobbyImpl = {
 	nd_lobby_isOpen = false;
 	nd_openedDisplayType = "";
 	nd_list_widgets = [[],[]];
+
+	nd_internal_currentStructObj = null;
 };
 
 //отсылает тип ввода пользователем. можно отправлять данные. Вся логика обработки на сервере в onHandleNDInput

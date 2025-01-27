@@ -372,14 +372,19 @@ struct(TestingReputation) base(NDBase)
 endstruct
 
 //структуры с виджетами
+decl(void())
 nd_internal_voterep_cleanupMaps = {
 	nd_internal_map_voterepBest = createHashMap;
 	nd_internal_map_veoterepBad = createHashMap;
 };
+decl(any[])
 nd_internal_voterep_widgets = [];
+
+enum(VoteRepWidgetIndex,ND_VOTEREP_WIDGET_INDEX_)
 #define ND_VOTEREP_WIDGET_INDEX_ERROR 0
 #define ND_VOTEREP_WIDGET_INDEX_BESTCTG 1
 #define ND_VOTEREP_WIDGET_INDEX_BADCTG 2
+enumend
 
 struct(VoteRep) base(NDBase)
 
