@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-#include <..\..\host\lang.hpp>
+#include <..\..\..\host\lang.hpp>
 
 if (!isMultiplayer) then {
 	nd_internal_data_ChemReactionsInfo = null;

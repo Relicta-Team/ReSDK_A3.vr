@@ -63,6 +63,8 @@ nd_internal_attemptLoad = 0;
 		_d displayRemoveAllEventHandlers "KeyUp";
 		_d setvariable ['isdebugdisplay',true];
 
+		_obj callp(assignDisplay,_d);
+
 		_obj callp(process,_data arg true);
 	};	
 #endif
@@ -219,6 +221,8 @@ nd_loadDisplay = {
 		};
 	}];
 
+	_obj callp(assignDisplay,_d);
+
 	_obj callp(process,_data arg true);
 
 }; rpcAdd("opnND",nd_loadDisplay);
@@ -368,20 +372,21 @@ nd_internal_currentStructObj = null;
 decl(widget(float;float;string|bool))
 nd_stdLoad = {
 	params ["_isFirstCall",["_sx",50],["_sy",50],["_btName","Закрыть"]];
+	private _disp = nd_internal_currentStructObj getv(thisDisplay);
 	if (_isFirstCall) then {
-		private _ctg = [thisDisplay,WIDGETGROUP,[50 - _sx/2,50-_sy/2,_sx,_sy]] call createWidget;
+		private _ctg = [_disp,WIDGETGROUP,[50 - _sx/2,50-_sy/2,_sx,_sy]] call createWidget;
 		nd_internal_currentStructObj callp(addSavedWidget, _ctg);
 		
-		_back = [thisDisplay,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
+		_back = [_disp,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
 		_back setBackgroundColor [0.3,0.3,0.3,0.5];
 		
 		if (equalTypes(_btName,true) && {equals(_btName,false)}) then {
 			_ctg
 		} else {
-			_closer = [thisDisplay,[0,90,100,10],_ctg] call nd_addClosingButton;
+			_closer = [_disp,[0,90,100,10],_ctg] call nd_addClosingButton;
 			_closer ctrlSetText _btName;
 			
-			_ctg = [thisDisplay,WIDGETGROUPSCROLLS,[0,0,100,90],_ctg] call createWidget;
+			_ctg = [_disp,WIDGETGROUPSCROLLS,[0,0,100,90],_ctg] call createWidget;
 			nd_internal_currentStructObj callp(addSavedWidget, _ctg);
 			
 			_ctg
