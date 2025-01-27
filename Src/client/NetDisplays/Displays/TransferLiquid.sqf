@@ -32,15 +32,15 @@ struct(TransferLiquid) base(NDBase)
 		
 		call nd_cleanupData;
 		
-		regNDWidget(TEXT,vec4(0,0,100,20),_ctg,null);
+		self callp(addWidget, TEXT arg vec4(0,0,100,20) arg _ctg arg null);
 		_curAm = _args select 1;
 		[(self getv(lastNDWidget)),format["<t align='center'>%1%2Сколько переливать? (текущ. %3)</t>",_args deleteAt 0,sbr,_args deleteAt 0]] call widgetSetText;
 		(self getv(lastNDWidget)) ctrlSetTooltip "Двойное нажатие по элементу списка выберет его";
 		
-		regNDWidget(WIDGETGROUP,vec4(0,20,100,70),_ctg,null);
+		self callp(addWidget, WIDGETGROUP arg vec4(0,20,100,70) arg _ctg arg null);
 		_ctgListbox = (self getv(lastNDWidget));
 		
-		regNDWidget(LISTBOX,WIDGET_FULLSIZE,_ctgListbox,null);
+		self callp(addWidget, LISTBOX arg WIDGET_FULLSIZE arg _ctgListbox arg null);
 		_list = (self getv(lastNDWidget));
 		
 		_idx = -1; 
@@ -75,7 +75,7 @@ struct(TransferLiquid) base(NDBase)
 			_list lbSetCurSel _selIdx;
 		};
 		
-		//regNDWidget(BUTTON,vec4(0,20 + 30,100,30),_ctg,null);
+		//self callp(addWidget, BUTTON arg vec4(0,20 + 30,100,30) arg _ctg arg null);
 		//(self getv(lastNDWidget)) ctrlSetText "Перелить";
 		
 	};

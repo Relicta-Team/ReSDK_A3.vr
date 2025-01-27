@@ -45,7 +45,7 @@ struct(HeadConsole) base(NDBase)
 		_prevtext = ctrlText (_ctg getVariable ["input",widgetNull]);
 
 		call nd_cleanupData;
-		//regNDWidget(TEXT,vec4(0,0,100,5),_ctg,null);
+		//self callp(addWidget, TEXT arg vec4(0,0,100,5) arg _ctg arg null);
 		//[vec2(0,_text)] call nd_onPressButton;
 		//
 
@@ -91,7 +91,7 @@ struct(HeadConsole) base(NDBase)
 				//smart creation
 				for "_i" from 0 to (count _Btns) - 1 do {
 					(_Btns select _i) params ["_t","_evT","_var"];
-					regNDWidget(TEXT,vec4(5,_i * _sizeH,90,_sizeH),_ctg,null);
+					self callp(addWidget, TEXT arg vec4(5,_i * _sizeH,90,_sizeH) arg _ctg arg null);
 					(self getv(lastNDWidget)) setVariable ["data",_var];
 					(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 						params ["_c","_b"];
@@ -112,11 +112,11 @@ struct(HeadConsole) base(NDBase)
 				_listRoles = _args deleteAt 0;
 				
 				_ypos = 0;
-				regNDWidget(TEXT,vec4(0,0,100,5),_ctg,null);
+				self callp(addWidget, TEXT arg vec4(0,0,100,5) arg _ctg arg null);
 				[(self getv(lastNDWidget)),"<t align='center'>Поселенцы</t>"] call widgetSetText;
 				modvar(_ypos) + 5;
 				
-				regNDWidget(LISTBOX,vec4(0,_ypos,100,30),_ctg,null);
+				self callp(addWidget, LISTBOX arg vec4(0,_ypos,100,30) arg _ctg arg null);
 				_lbUsers = (self getv(lastNDWidget));
 				{
 					_x params ["_name","_ptr"];
@@ -125,11 +125,11 @@ struct(HeadConsole) base(NDBase)
 				} foreach _listUsers;
 				
 				modvar(_ypos) + 30;
-				regNDWidget(TEXT,vec4(0,_ypos,100,5),_ctg,null);
+				self callp(addWidget, TEXT arg vec4(0,_ypos,100,5) arg _ctg arg null);
 				[(self getv(lastNDWidget)),"<t align='center'>Должности</t>"] call widgetSetText;
 				modvar(_ypos)+5;
 				
-				regNDWidget(LISTBOX,vec4(0,_ypos,100,30),_ctg,null);
+				self callp(addWidget, LISTBOX arg vec4(0,_ypos,100,30) arg _ctg arg null);
 				_lbRoles = (self getv(lastNDWidget));
 				{
 					_x params ["_type","_name"];
@@ -140,7 +140,7 @@ struct(HeadConsole) base(NDBase)
 				modvar(_ypos)+30;
 				
 				//buttons: assign, reasign
-				regNDWidget(BUTTON,vec4(0,_ypos,100,15),_ctg,null);
+				self callp(addWidget, BUTTON arg vec4(0,_ypos,100,15) arg _ctg arg null);
 				_btAssign = (self getv(lastNDWidget));
 
 				_btAssign setVariable ["lbRoles",_lbRoles];
@@ -169,7 +169,7 @@ struct(HeadConsole) base(NDBase)
 				
 				modvar(_ypos)+15;
 				
-				regNDWidget(BUTTON,vec4(50-20,_ypos,40,15),_ctg,null);
+				self callp(addWidget, BUTTON arg vec4(50-20,_ypos,40,15) arg _ctg arg null);
 				(self getv(lastNDWidget)) ctrlSetText "Назад";
 				(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 					params ["_w","_b"];
@@ -183,11 +183,11 @@ struct(HeadConsole) base(NDBase)
 				_listUsers = _args deleteAt 0;
 				_ypos = 0;
 				
-				regNDWidget(TEXT,vec4(0,_ypos,100,5),_ctg,null);
+				self callp(addWidget, TEXT arg vec4(0,_ypos,100,5) arg _ctg arg null);
 				[(self getv(lastNDWidget)),"<t align='center'>Поселенцы</t>"] call widgetSetText;
 				modvar(_ypos)+5;
 				
-				regNDWidget(LISTBOX,vec4(0,_ypos,100,40),_ctg,null);
+				self callp(addWidget, LISTBOX arg vec4(0,_ypos,100,40) arg _ctg arg null);
 				_lbUsers = (self getv(lastNDWidget));
 				{
 					_x params ["_name","_ptr"];
@@ -196,7 +196,7 @@ struct(HeadConsole) base(NDBase)
 				} foreach _listUsers;
 				modvar(_ypos)+40;
 				
-				regNDWidget(BUTTON,vec4(0,_ypos,100,15),_ctg,null);
+				self callp(addWidget, BUTTON arg vec4(0,_ypos,100,15) arg _ctg arg null);
 				_btAssign = (self getv(lastNDWidget));
 
 				_btAssign setVariable ["lbUsers",_lbUsers];
@@ -218,7 +218,7 @@ struct(HeadConsole) base(NDBase)
 				_btAssign ctrlSetText "Изгнать";
 				modvar(_ypos) + 15;
 				
-				regNDWidget(BUTTON,vec4(50-20,_ypos+15/2,40,15),_ctg,null);
+				self callp(addWidget, BUTTON arg vec4(50-20,_ypos+15/2,40,15) arg _ctg arg null);
 				(self getv(lastNDWidget)) ctrlSetText "Назад";
 				(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 					params ["_w","_b"];
@@ -229,7 +229,7 @@ struct(HeadConsole) base(NDBase)
 			//окно указа
 			if (_mode == MODE_DECREE) exitWith {
 				_ypos = 5;
-				regNDWidget(INPUTMULTI,vec4(5,_ypos,90,40),_ctg,null);
+				self callp(addWidget, INPUTMULTI arg vec4(5,_ypos,90,40) arg _ctg arg null);
 
 				_input = (self getv(lastNDWidget));
 				_input ctrlSetText _prevtext;
@@ -272,7 +272,7 @@ struct(HeadConsole) base(NDBase)
 				}];
 				modvar(_ypos) + 40 + 5;
 				
-				regNDWidget(BUTTON,vec4(5,_ypos,90,20),_ctg,null);
+				self callp(addWidget, BUTTON arg vec4(5,_ypos,90,20) arg _ctg arg null);
 				(self getv(lastNDWidget)) ctrlSetText "Издать";
 				(self getv(lastNDWidget)) setVariable ["input",_input];
 				(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
@@ -303,7 +303,7 @@ struct(HeadConsole) base(NDBase)
 				
 				modvar(_ypos)+20;
 				
-				regNDWidget(BUTTON,vec4(50-20,_ypos+15/2,40,15),_ctg,null);
+				self callp(addWidget, BUTTON arg vec4(50-20,_ypos+15/2,40,15) arg _ctg arg null);
 				(self getv(lastNDWidget)) ctrlSetText "Назад";
 				(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 					params ["_w","_b"];

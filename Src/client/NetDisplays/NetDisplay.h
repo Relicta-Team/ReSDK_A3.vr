@@ -19,7 +19,7 @@
 #define self callp(addSavedWidget, wid) (self callv(getSavedWidgets)) pushBack(wid)
 #define (self callv(getSavedWidgets)) (nd_list_widgets select 0)
 
-#define regNDWidget(widgetType,vecpos,probCtg,datatype) _w_d_ = [_d,widgetType,vecpos,probCtg] call createWidget; \
+#define self callp(addWidget, widgetType arg vecpos arg probCtg arg datatype) _w_d_ = [_d,widgetType,vecpos,probCtg] call createWidget; \
 (nd_list_widgets select 1)pushBack _w_d_; \
 _w_d_ setVariable ["data",datatype];
 

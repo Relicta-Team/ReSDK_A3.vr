@@ -305,8 +305,8 @@ nd_cleanupData = {
 decl(widget(string;vector4;widget;string))
 nd_regWidget = {
 	params ["_type","_vecpos","_probCtg","_dataType"];
-	regNDWidget(_type,_vecpos,_probCtg,_dataType);
-	lastNDWidget
+	nd_internal_currentStructObj callp(addWidget, _type arg _vecpos arg _probCtg arg _dataType);
+	nd_internal_currentStructObj getv(lastNDWidget);
 };
 
 decl(widget(display;vector4;widget;bool))

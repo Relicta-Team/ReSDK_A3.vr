@@ -50,7 +50,7 @@ struct(Paper) base(NDBase)
 
 		_curY = 0;
 		//header
-		regNDWidget(TEXT,vec4(0,0,100,5),_ctg,null);
+		self callp(addWidget, TEXT arg vec4(0,0,100,5) arg _ctg arg null);
 		[(self getv(lastNDWidget)),format["<t align='center'>%1</t>",ifcheck(_ctg getVariable vec2("iswrite",false),"Прочитать","Записать")]] call widgetSetText;
 		(self getv(lastNDWidget)) setVariable ["ctg",_ctg];
 		_ctg setVariable ["onChangeMode",{
@@ -80,12 +80,12 @@ struct(Paper) base(NDBase)
 		};
 
 		//text content
-		regNDWidget(WIDGETGROUP_H,vec4(0,5,100,100-5),_ctg,null);
+		self callp(addWidget, WIDGETGROUP_H arg vec4(0,5,100,100-5) arg _ctg arg null);
 		_ctgInside = (self getv(lastNDWidget));
 
 		_ctg setVariable ["readwidget",_ctgInside];
 
-		regNDWidget(TEXT,WIDGET_FULLSIZE,_ctgInside,null);
+		self callp(addWidget, TEXT arg WIDGET_FULLSIZE arg _ctgInside arg null);
 		_txt = _args deleteAt 0;
 		//fix 190
 		_txt = [_txt,"ё","е"] call stringReplace;
@@ -98,22 +98,22 @@ struct(Paper) base(NDBase)
 		(self getv(lastNDWidget)) ctrlSetPositionH _baseTextH;
 		(self getv(lastNDWidget)) ctrlcommit 0;
 
-		regNDWidget(WIDGETGROUP_H,vec4(0,5,100,100-5),_ctg,null);
+		self callp(addWidget, WIDGETGROUP_H arg vec4(0,5,100,100-5) arg _ctg arg null);
 		_ctgInside = (self getv(lastNDWidget));
 		_ctg setVariable ["writewidget",_ctgInside];
 
 		//ctg textsection (writemode)
-		regNDWidget(WIDGETGROUP_H,vec4(0,0,100,70),_ctgInside,null);
+		self callp(addWidget, WIDGETGROUP_H arg vec4(0,0,100,70) arg _ctgInside arg null);
 		_ctgTextSection = (self getv(lastNDWidget));
 		
 		//readprop (inside writemode)
-		regNDWidget(TEXT,vec4(0,0,98,100),_ctgTextSection,null);
+		self callp(addWidget, TEXT arg vec4(0,0,98,100) arg _ctgTextSection arg null);
 		[(self getv(lastNDWidget)),_formatedText + format["<t size='1' color='#A600A6'>***конец текста***</t>"]] call widgetSetText;
 		(self getv(lastNDWidget)) ctrlSetPositionH (_baseTextH);
 		(self getv(lastNDWidget)) ctrlcommit 0;
 
 		//writeprop (inside writemode)
-		regNDWidget(INPUTMULTI,vec4(0,0,98,70),_ctgTextSection,null);
+		self callp(addWidget, INPUTMULTI arg vec4(0,0,98,70) arg _ctgTextSection arg null);
 		(self getv(lastNDWidget)) ctrlSetPositionY (_baseTextH);
 		(self getv(lastNDWidget)) ctrlcommit 0;
 		_input = (self getv(lastNDWidget));
@@ -168,7 +168,7 @@ struct(Paper) base(NDBase)
 		/*(self getv(lastNDWidget)) ctrlSetFont "KursivC";
 		(self getv(lastNDWidget)) ctrlSetTextColor debug_vec4color;*/
 
-		regNDWidget(BUTTON,vec4(5,75,90,20),_ctgInside,null);
+		self callp(addWidget, BUTTON arg vec4(5,75,90,20) arg _ctgInside arg null);
 		(self getv(lastNDWidget)) ctrlSetText "Написать текст";
 		(self getv(lastNDWidget)) setVariable ["input",_input];
 		(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{

@@ -43,7 +43,7 @@ struct(ChemReactionsInfo) base(NDBase)
 		FHEADER;
 		
 		if (count _args == 1 && isNull(nd_internal_data_ChemReactionsInfo)) then {
-			regNDWidget(BUTTON,vec4(0,0,100,10),_ctg,null);
+			self callp(addWidget, BUTTON arg vec4(0,0,100,10) arg _ctg arg null);
 			(self getv(lastNDWidget)) ctrlSetText "Выгрузить информацию";
 			(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 				params ["_ct","_bt"];
@@ -55,9 +55,9 @@ struct(ChemReactionsInfo) base(NDBase)
 			RETURN(0);
 		} else {
 			
-			regNDWidget(TEXT,vec4(0,0,50,10),_ctg,null);
+			self callp(addWidget, TEXT arg vec4(0,0,50,10) arg _ctg arg null);
 			[(self getv(lastNDWidget)),format["<t align='center'>РЕАГЕНТЫ</t>"]] call widgetSetText;
-			regNDWidget(TEXT,vec4(50,0,50,10),_ctg,null);
+			self callp(addWidget, TEXT arg vec4(50,0,50,10) arg _ctg arg null);
 			[(self getv(lastNDWidget)),format["<t align='center'>РЕАКЦИИ</t>"]] call widgetSetText;
 		};
 		
@@ -79,14 +79,14 @@ struct(ChemReactionsInfo) base(NDBase)
 		} foreach _reagentsSource;*/
 		
 		MOD(_curY,+ 10);
-		regNDWidget(WIDGETGROUP_H,vec4(0,_curY,50,90),_ctg,null);
+		self callp(addWidget, WIDGETGROUP_H arg vec4(0,_curY,50,90) arg _ctg arg null);
 		_ctgReagents = (self getv(lastNDWidget));
-		regNDWidget(BACKGROUND,vec4(0,_curY,50,90),_ctg,null);
+		self callp(addWidget, BACKGROUND arg vec4(0,_curY,50,90) arg _ctg arg null);
 		(self getv(lastNDWidget)) setBackgroundColor [1,0,0,0.01];
 		
-		regNDWidget(WIDGETGROUP_H,vec4(50,_curY,50,90),_ctg,null);
+		self callp(addWidget, WIDGETGROUP_H arg vec4(50,_curY,50,90) arg _ctg arg null);
 		_ctgReactions = (self getv(lastNDWidget));
-		regNDWidget(BACKGROUND,vec4(50,_curY,50,90),_ctg,null);
+		self callp(addWidget, BACKGROUND arg vec4(50,_curY,50,90) arg _ctg arg null);
 		(self getv(lastNDWidget)) setBackgroundColor [0,0,1,0.01];
 		
 		#include <..\..\..\host\MatterSystem\MatterSystem.hpp>
@@ -103,7 +103,7 @@ struct(ChemReactionsInfo) base(NDBase)
 				["_heating_products",[]],["_heating_point","NO"]];
 			
 			
-			regNDWidget(TEXT,vec4(0,30 * _forEachIndex,100,30),_ctgReagents,null);
+			self callp(addWidget, TEXT arg vec4(0,30 * _forEachIndex,100,30) arg _ctgReagents arg null);
 			(self getv(lastNDWidget)) setBackgroundColor [rand(0,0.3),rand(0,0.9),rand(0,0.8),0.2];
 			
 			_text = ["TypeName: %2%1Name:%3; SciName:%4; SlaName:%5;%1"+
@@ -143,7 +143,7 @@ struct(ChemReactionsInfo) base(NDBase)
 			_x params ["_className","_name",["_result","NORESULT"],["_resultAmount",0],
 			["_reqMatters",[]],["_cata",[]],["_inhib",[]],"_reaType","_minTemp","_maxTemp","_itemsNeed"];
 			
-			regNDWidget(TEXT,vec4(0,35 * _forEachIndex,100,35),_ctgReactions,null);
+			self callp(addWidget, TEXT arg vec4(0,35 * _forEachIndex,100,35) arg _ctgReactions arg null);
 			(self getv(lastNDWidget)) setBackgroundColor [rand(0,0.3),rand(0,0.9),rand(0,0.8),0.2];
 			
 			_text = ["SystemName:%2%1" +

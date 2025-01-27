@@ -35,21 +35,21 @@ struct(FreezerDisplay) base(NDBase)
 		call nd_cleanupData;
 		
 		_curY = 0;
-		regNDWidget(TEXT,vec4(0,0,100,15),_ctg,null);
+		self callp(addWidget, TEXT arg vec4(0,0,100,15) arg _ctg arg null);
 		[(self getv(lastNDWidget)),format["<t align='center'>%1</t>",_args deleteat 0]] call widgetSetText;
 		(self getv(lastNDWidget)) setBackgroundColor [0.4,0.4,0.4,0.8];
 		MOD(_curY,+ 15);
 		
-		/*regNDWidget(TEXT,vec4(0,_curY,100,15),_ctg,null);
+		/*self callp(addWidget, TEXT arg vec4(0,_curY,100,15) arg _ctg arg null);
 		[(self getv(lastNDWidget)),format["<t align='center'>Текущая температура: %1°C</t>",_args deleteat 0]] call widgetSetText;*/
 		MOD(_curY,+ 15);
 		
 		
-		/*regNDWidget(TEXT,vec4(0,_curY,100,35),_ctg,null);
+		/*self callp(addWidget, TEXT arg vec4(0,_curY,100,35) arg _ctg arg null);
 		[(self getv(lastNDWidget)),format["<t align='center'>Возможный диапазон: от %1°C до %2°C</t>",_args deleteat 0,_args deleteat 0]] call widgetSetText;*/
 		
 		MOD(_curY,+ 35);
-		/*regNDWidget(BUTTON,vec4(0,_curY,50,15),_ctg,null);
+		/*self callp(addWidget, BUTTON arg vec4(0,_curY,50,15) arg _ctg arg null);
 		(self getv(lastNDWidget)) ctrlSetText "-";
 		(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 			params ["_ct","_bt"];
@@ -58,7 +58,7 @@ struct(FreezerDisplay) base(NDBase)
 			[-1] call nd_onPressButton;
 		}];
 		
-		regNDWidget(BUTTON,vec4(50,_curY,50,15),_ctg,null);
+		self callp(addWidget, BUTTON arg vec4(50,_curY,50,15) arg _ctg arg null);
 		(self getv(lastNDWidget)) ctrlSetText "+";
 		(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 			params ["_ct","_bt"];
@@ -71,7 +71,7 @@ struct(FreezerDisplay) base(NDBase)
 		
 		_isEnabled = _args deleteAt 0;
 		
-		regNDWidget(BUTTON,vec4(0,_curY,100,15),_ctg,null);
+		self callp(addWidget, BUTTON arg vec4(0,_curY,100,15) arg _ctg arg null);
 		(self getv(lastNDWidget)) ctrlSetText (["Включить","Выключить"] select _isEnabled);
 		(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 			params ["_ct","_bt"];

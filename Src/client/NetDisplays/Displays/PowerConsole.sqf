@@ -38,7 +38,7 @@ struct(PowerConsole) base(NDBase)
 		call nd_cleanupData;
 
 		_rightCtg = (self callv(getSavedWidgets)) select 2;
-		regNDWidget(TEXT,vec4(0,0,100,100),_rightCtg,null);
+		self callp(addWidget, TEXT arg vec4(0,0,100,100) arg _rightCtg arg null);
 		
 		
 		[(self getv(lastNDWidget)),format["Резервная мощность: %2 Вт.%1Используется: %3 Вт.%1Выработка: %4 Вт.%1Требуется всего: %5 Вт.",
@@ -70,7 +70,7 @@ struct(PowerConsole) base(NDBase)
 		
 		{
 			_x params ["_genName","_isEnabled","_isUsePower"];
-			regNDWidget(TEXT,vec4(_xpos,_ypos,_wsize,_hsize),_ctg,null);
+			self callp(addWidget, TEXT arg vec4(_xpos,_ypos,_wsize,_hsize) arg _ctg arg null);
 			_colback = [0.2,0.8] select _isEnabled;
 			(self getv(lastNDWidget)) setBackgroundColor [_colback,_colback,_colback,0.3];
 			if (!_isEnabled) then {(self getv(lastNDWidget)) setFade 0.7; (self getv(lastNDWidget)) commit 0};

@@ -34,16 +34,16 @@ struct(ElecticalHacking) base(NDBase)
 		call nd_cleanupData;
 		_curY = 0;
 		
-		regNDWidget(TEXT,vec4(0,_curY,100,8),_ctg,null);
+		self callp(addWidget, TEXT arg vec4(0,_curY,100,8) arg _ctg arg null);
 		[(self getv(lastNDWidget)),format["<t align='center'>%1</t>",_args deleteat 0]] call widgetSetText;
 		(self getv(lastNDWidget)) setBackgroundColor [0.4,0.4,0.4,0.8];
 
 		
-		regNDWidget(TEXT,vec4(0,8,50,15-8),_ctg,null);
+		self callp(addWidget, TEXT arg vec4(0,8,50,15-8) arg _ctg arg null);
 		[(self getv(lastNDWidget)),format["<t align='center'>%1</t>","Провода"]] call widgetSetText;
 		(self getv(lastNDWidget)) setBackgroundColor [0.4,0.4,0.4,0.6];
 		
-		regNDWidget(TEXT,vec4(50,8,50,15-8),_ctg,null);
+		self callp(addWidget, TEXT arg vec4(50,8,50,15-8) arg _ctg arg null);
 		[(self getv(lastNDWidget)),format["<t align='center'>%1</t>","Действия"]] call widgetSetText;
 		(self getv(lastNDWidget)) setBackgroundColor [0.4,0.4,0.4,0.6];
 		
@@ -58,7 +58,7 @@ struct(ElecticalHacking) base(NDBase)
 		{
 			_curstate = _states select _forEachIndex;
 			_sizeState = if (_curstate == 0) then {10} else {48};
-			regNDWidget(TEXT,vec4(2,_curY + 2,_sizeState,8 - 4),_ctg,null);
+			self callp(addWidget, TEXT arg vec4(2,_curY + 2,_sizeState,8 - 4) arg _ctg arg null);
 			//[(self getv(lastNDWidget)),format["<t align='center'>Провод</t>"]] call widgetSetText;
 			_color = _x;
 			_color pushBack 1;
@@ -73,7 +73,7 @@ struct(ElecticalHacking) base(NDBase)
 			
 			//actions
 			
-			regNDWidget(BUTTON,vec4(52 + _actSizeX * 0,_curY,_actSizeX,8),_ctg,null);
+			self callp(addWidget, BUTTON arg vec4(52 + _actSizeX * 0,_curY,_actSizeX,8) arg _ctg arg null);
 			(self getv(lastNDWidget)) ctrlSetText "ТЕСТ";
 			(self getv(lastNDWidget)) setvariable ["wireIndex",_forEachIndex];
 			(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
@@ -83,7 +83,7 @@ struct(ElecticalHacking) base(NDBase)
 				[[1,_ct getvariable "wireIndex"]] call nd_onPressButton;
 			}];
 			
-			regNDWidget(TEXT,vec4(52 + _actSizeX * 1,_curY,_actSizeX,8),_ctg,null);
+			self callp(addWidget, TEXT arg vec4(52 + _actSizeX * 1,_curY,_actSizeX,8) arg _ctg arg null);
 			[(self getv(lastNDWidget)),format["<t align='left'>%1</t>","Вынуть"]] call widgetSetText;
 			(self getv(lastNDWidget)) ctrlEnable false;
 			

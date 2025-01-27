@@ -7,7 +7,9 @@
 
 struct(NDBase)
 
+	//reference to last created widget
 	decl(widget) def((self getv(lastNDWidget))) widgetNull;
+	//reference to current display
 	decl(display) def((self getv(thisDisplay))) displayNull;
 
 	decl(string) def(str)
@@ -18,6 +20,8 @@ struct(NDBase)
 	decl(void()) def(init)
 	{
 		nd_internal_currentStructObj = self;
+		assert_str(!isNullReference(getDisplay),"Display cannot be null on construct ND struct");
+		self setv(thisDisplay,getDisplay);
 	}
 
 	//create or update netdisplay context

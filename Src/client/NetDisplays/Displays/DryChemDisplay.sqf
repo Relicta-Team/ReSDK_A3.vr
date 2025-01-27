@@ -36,18 +36,18 @@ struct(DryChemDisplay) base(NDBase)
 		_args params ["_name","_isLaucnhed","_isConnected","_timeLeft"];
 		
 		_curY = 0;
-		regNDWidget(TEXT,vec4(0,0,100,17),_ctg,null);
+		self callp(addWidget, TEXT arg vec4(0,0,100,17) arg _ctg arg null);
 		[(self getv(lastNDWidget)),format["<t align='center'>%1</t>",_name]] call widgetSetText;
 		(self getv(lastNDWidget)) setBackgroundColor [0.6,0.6,0.6,0.9];
 		MOD(_curY,+ 17 + 3);
 		
-		regNDWidget(TEXT,vec4(5,_curY,90,17),_ctg,null);
+		self callp(addWidget, TEXT arg vec4(5,_curY,90,17) arg _ctg arg null);
 		[(self getv(lastNDWidget)),format["<t align='center'>Источник: %1</t>",["Не подключен","Подключен"] select _isConnected]] call widgetSetText;
 		(self getv(lastNDWidget)) setBackgroundColor [0.2,0.2,0.2,0.3];
 		MOD(_curY,+ 17);
 		
 		if (_isLaucnhed && _isConnected) then {
-			regNDWidget(TEXT,vec4(5,_curY,90,20),_ctg,null);
+			self callp(addWidget, TEXT arg vec4(5,_curY,90,20) arg _ctg arg null);
 			[(self getv(lastNDWidget)),
 				if (_timeLeft != 0) then {
 					format["<t align='center'>До начала сушки: %1 сек</t>",_timeLeft]
@@ -58,7 +58,7 @@ struct(DryChemDisplay) base(NDBase)
 		};
 		MOD(_curY,+ 20 + 5);
 		
-		regNDWidget(BUTTON,vec4(20,_curY,60,30),_ctg,null);
+		self callp(addWidget, BUTTON arg vec4(20,_curY,60,30) arg _ctg arg null);
 		(self getv(lastNDWidget)) ctrlSetText (["Включить","Выключить"] select _isLaucnhed);
 		(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 			params ["_ct","_bt"];

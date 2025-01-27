@@ -51,7 +51,7 @@ struct(MobInventory) base(NDBase)
 		_sizeH = 100 / (count _lall);
 		_ptr = ""; //outside reference
 		for "_i" from 0 to (count _lall) - 1 do {
-			regNDWidget(TEXT,vec4(0,_sizeH * _i,100,_sizeH),_ctg,null);
+			self callp(addWidget, TEXT arg vec4(0,_sizeH * _i,100,_sizeH) arg _ctg arg null);
 			[(self getv(lastNDWidget)),format["<t align='center'>%1</t>",(_args deleteAt 0) call __allocTxt]] call widgetSetText;
 			(self getv(lastNDWidget)) setVariable ["ref",_ptr];
 			(self getv(lastNDWidget)) setVariable ["slotid",_lall select _i];

@@ -32,10 +32,10 @@ struct(TransferStack) base(NDBase)
 		
 		call nd_cleanupData;
 		
-		regNDWidget(TEXT,vec4(0,0,100,20),_ctg,null);
+		self callp(addWidget, TEXT arg vec4(0,0,100,20) arg _ctg arg null);
 		[(self getv(lastNDWidget)),format["<t align='center'>%1 %2 из %3</t>",_args deleteAt 0,_args select 0,_args select 1]] call widgetSetText;
 		
-		regNDWidget(INPUT,vec4(0,20,100,40),_ctg,null);
+		self callp(addWidget, INPUT arg vec4(0,20,100,40) arg _ctg arg null);
 		(self getv(lastNDWidget)) setVariable ["curCount",_args deleteAt 0];
 		(self getv(lastNDWidget)) setVariable ["maxCount",_args deleteAt 0];
 		
@@ -51,7 +51,7 @@ struct(TransferStack) base(NDBase)
 		}];
 		_input = (self getv(lastNDWidget));
 		
-		regNDWidget(BUTTON,vec4(0,20 + 40,100,30),_ctg,null);
+		self callp(addWidget, BUTTON arg vec4(0,20 + 40,100,30) arg _ctg arg null);
 		(self getv(lastNDWidget)) ctrlSetText "Разделить";
 		(self getv(lastNDWidget)) setVariable ["input",_input];
 		

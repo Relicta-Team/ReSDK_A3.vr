@@ -38,7 +38,7 @@ struct(MerchantConsole) base(NDBase)
 			//smart creation
 			for "_i" from 0 to (count _posmodes) - 1 do {
 				(_posmodes select _i) params ["_t","_var"];
-				regNDWidget(TEXT,vec4(5,_i * _sizeH,90,_sizeH),_ctg,null);
+				self callp(addWidget, TEXT arg vec4(5,_i * _sizeH,90,_sizeH) arg _ctg arg null);
 				(self getv(lastNDWidget)) setVariable ["data",_var];
 				(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 					params ["_c","_b"];
@@ -56,7 +56,7 @@ struct(MerchantConsole) base(NDBase)
 		if equals(_dispType,MC_MODE_DISABLED) exitWith {
 			_sizeH = 100 / 5;
 			_i = 4;
-			regNDWidget(TEXT,vec4(5,_i * _sizeH,90,_sizeH),_ctg,null);
+			self callp(addWidget, TEXT arg vec4(5,_i * _sizeH,90,_sizeH) arg _ctg arg null);
 			call _genericSetBackEvents;
 			(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 				params ["_c","_b"];
@@ -71,7 +71,7 @@ struct(MerchantConsole) base(NDBase)
 			_curY = 0;
 			{
 				_x params ["_cat","_name"];
-				regNDWidget(TEXT,vec4(5,_curY,90,_sizeH),_ctg,null);
+				self callp(addWidget, TEXT arg vec4(5,_curY,90,_sizeH) arg _ctg arg null);
 				(self getv(lastNDWidget)) setVariable ["data",_cat];
 				call _genericSetBackEvents;
 				[(self getv(lastNDWidget)),format["<t align='center'>%1</t>",_name]] call widgetSetText;
@@ -86,13 +86,13 @@ struct(MerchantConsole) base(NDBase)
 			
 			//debug
 			/*for "_i" from 1 to 50 do {
-				regNDWidget(TEXT,vec4(5,_curY,90,_sizeH),_ctg,null);
+				self callp(addWidget, TEXT arg vec4(5,_curY,90,_sizeH) arg _ctg arg null);
 				call _genericSetBackEvents;
 				[(self getv(lastNDWidget)),format["<t align='center'>BT: %1</t>",_i]] call widgetSetText;
 				modvar(_curY) + _sizeH;
 			};*/
 			
-			regNDWidget(TEXT,vec4(5,_curY,90,_sizeH),_ctg,null);
+			self callp(addWidget, TEXT arg vec4(5,_curY,90,_sizeH) arg _ctg arg null);
 			call _genericSetBackEvents;
 			(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 				params ["_c","_b"];
@@ -101,10 +101,10 @@ struct(MerchantConsole) base(NDBase)
 			[(self getv(lastNDWidget)),format["<t align='center'>%1%1%1НАЗАД%2%2%2</t>",slt,sgt]] call widgetSetText;
 		};
 		if equals(_dispType,MC_MODE_CATLIST) exitWith {
-			regNDWidget(WIDGETGROUP_H,vec4(0,8,100,92),_ctg,null);
+			self callp(addWidget, WIDGETGROUP_H arg vec4(0,8,100,92) arg _ctg arg null);
 			_inctg = (self getv(lastNDWidget));
 			
-			regNDWidget(TEXT,vec4(5,0,90,8),_ctg,null);
+			self callp(addWidget, TEXT arg vec4(5,0,90,8) arg _ctg arg null);
 			call _genericSetBackEvents;
 			(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 				params ["_c","_b"];
@@ -118,7 +118,7 @@ struct(MerchantConsole) base(NDBase)
 			//smart creation
 			for "_i" from 0 to (count _args) - 1 do {
 				(_args select _i) params ["_name","_price","_count",["_amounted",0]];
-				regNDWidget(TEXT,vec4(5,_i * _sizeH,_c_sizex,_sizeH),_inctg,null);
+				self callp(addWidget, TEXT arg vec4(5,_i * _sizeH,_c_sizex,_sizeH) arg _inctg arg null);
 				(self getv(lastNDWidget)) setVariable ["data",_i];
 				/*(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 					params ["_c","_b"];
@@ -132,7 +132,7 @@ struct(MerchantConsole) base(NDBase)
 				[(self getv(lastNDWidget)),format["<t align='center'>%1 - %2 зв. %3</t>",_name,_price,ifcheck(_amounted>0,format vec3("[СКЛ:%1/ЗАК:%2]",_count,_amounted),format vec2("[СКЛ:%1]",_count))]] call widgetSetText;
 				
 				
-				regNDWidget(TEXT,vec4(_c_posx,_i * _sizeH,_c_sizex/2,_sizeH),_inctg,null);
+				self callp(addWidget, TEXT arg vec4(_c_posx,_i * _sizeH,_c_sizex/2,_sizeH) arg _inctg arg null);
 				(self getv(lastNDWidget)) setVariable ["data",_i];
 				call _genericSetBackEvents;
 				[(self getv(lastNDWidget)),format["<t align='center'>Меньше</t>"]] call widgetSetText;
@@ -145,7 +145,7 @@ struct(MerchantConsole) base(NDBase)
 					[(self getv(lastNDWidget)),format["<t align='center' color='#A30000'>Меньше</t>"]] call widgetSetText;
 				};
 
-				regNDWidget(TEXT,vec4(_c_posx+_c_sizex/2,_i * _sizeH,_c_sizex/2,_sizeH),_inctg,null);
+				self callp(addWidget, TEXT arg vec4(_c_posx+_c_sizex/2,_i * _sizeH,_c_sizex/2,_sizeH) arg _inctg arg null);
 				(self getv(lastNDWidget)) setVariable ["data",_i];
 				call _genericSetBackEvents;
 				[(self getv(lastNDWidget)),format["<t align='center'>Больше</t>"]] call widgetSetText;
@@ -161,11 +161,11 @@ struct(MerchantConsole) base(NDBase)
 			};
 		};
 		if equals(_dispType,MC_MODE_PRINT) exitWith {
-			regNDWidget(WIDGETGROUP_H,vec4(5,0,90,60),_ctg,null);
+			self callp(addWidget, WIDGETGROUP_H arg vec4(5,0,90,60) arg _ctg arg null);
 			_ctgIn = (self getv(lastNDWidget));
 			_priceAll = _args deleteAt 0;
 			if (_priceAll == -999) then {
-				regNDWidget(TEXT,WIDGET_FULLSIZE,_ctgIn,null);
+				self callp(addWidget, TEXT arg WIDGET_FULLSIZE arg _ctgIn arg null);
 				[(self getv(lastNDWidget)),"<t size='1.6' align='center'>Ничего не заказано</t>"] call widgetSetText;
 			} else {
 				_txt = "<t size='1.4' align='center'>Заказ сформирован:</t><t size='1.2'>";
@@ -176,7 +176,7 @@ struct(MerchantConsole) base(NDBase)
 				
 				modvar(_txt)+"</t>"+sbr+sbr+format["<t size='1.4'>Итоговая стоимость: %1</t>",[_priceAll,["звяк","звяка","звяков"],true] call toNumeralString];
 				
-				regNDWidget(TEXT,WIDGET_FULLSIZE,_ctgIn,null);
+				self callp(addWidget, TEXT arg WIDGET_FULLSIZE arg _ctgIn arg null);
 				[(self getv(lastNDWidget)),_txt] call widgetSetText;
 				_ht = (self getv(lastNDWidget)) call widgetGetTextHeight;
 				[(self getv(lastNDWidget)),[0,0,100,_ht]] call widgetSetPosition;
@@ -192,7 +192,7 @@ struct(MerchantConsole) base(NDBase)
 			for "_i" from 1 to 3 do {
 				if (_i < 3 && _noReq) then {continue};
 				
-				regNDWidget(TEXT,vec4(5,60 + (_i * 10),90,10),_ctg,null);
+				self callp(addWidget, TEXT arg vec4(5,60 + (_i * 10),90,10) arg _ctg arg null);
 				[(self getv(lastNDWidget)),_tml select (_i-1) select 0] call widgetSetText;
 				call _genericSetBackEvents;
 				(self getv(lastNDWidget)) setVariable ["data",_tml select (_i-1) select 1];
@@ -203,7 +203,7 @@ struct(MerchantConsole) base(NDBase)
 			};
 		};
 		if equals(_dispType,MC_MODE_GETSTATUS) exitWith {
-			regNDWidget(TEXT,vec4(0,0,100,70),_ctg,null);
+			self callp(addWidget, TEXT arg vec4(0,0,100,70) arg _ctg arg null);
 			
 			_txt = "<t align='center' size='1.3'>Информация</t><t size='1.2'>";
 			_mon = _args deleteAt 0;
@@ -214,7 +214,7 @@ struct(MerchantConsole) base(NDBase)
 			modvar(_txt)+"</t>";
 			[(self getv(lastNDWidget)),_txt] call widgetSetText;
 			
-			regNDWidget(TEXT,vec4(5,75,90,20),_ctg,null);
+			self callp(addWidget, TEXT arg vec4(5,75,90,20) arg _ctg arg null);
 			call _genericSetBackEvents;
 			(self getv(lastNDWidget)) ctrlAddEventHandler ["MouseButtonUp",{
 				params ["_c","_b"];
