@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-
+#include <..\..\host\lang.hpp>
 
 struct(DryChemDisplay) base(NDBase)
 

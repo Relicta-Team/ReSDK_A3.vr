@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
 
 #include <..\..\..\host\GameObjects\Structures\Electronics\Devices\HeadControlPanel.hpp>
 

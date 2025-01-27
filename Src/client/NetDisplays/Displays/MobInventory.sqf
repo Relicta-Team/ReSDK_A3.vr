@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
 
 struct(MobInventory) base(NDBase)
 
