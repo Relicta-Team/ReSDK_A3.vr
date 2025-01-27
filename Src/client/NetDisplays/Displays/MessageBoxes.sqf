@@ -10,7 +10,7 @@ struct(MessageBox) base(NDBase)
 	decl(override) def(process)
 	{
 		params ["_args","_isFirstCall"];
-		private _ctg = [30,20,false] call nd_stdLoad;
+		private _ctg = [_isFirstCall,30,20,false] call nd_stdLoad;
 		call nd_cleanupData;
 		
 		_args params [["_text",""],["_ok","ОК"],["_can","Закрыть"]];
@@ -47,7 +47,7 @@ struct(Listbox) base(NDBase)
 	decl(override) def(process)
 	{
 		params ["_args","_isFirstCall"];	
-		private _ctg = [30,50,false] call nd_stdLoad;
+		private _ctg = [_isFirstCall,30,50,false] call nd_stdLoad;
 		call nd_cleanupData;
 		
 		private _textWid = [BACKGROUND,[1,1+5,98,79-5],_ctg] call nd_regWidget;
@@ -103,7 +103,7 @@ struct(Text) base(NDBase)
 	decl(override) def(process)
 	{
 		params ["_args","_isFirstCall"];
-		private _ctg = [60,80,false] call nd_stdLoad;
+		private _ctg = [_isFirstCall,60,80,false] call nd_stdLoad;
 
 		call nd_cleanupData;
 		
@@ -133,7 +133,7 @@ struct(Alert) base(NDBase)
 	decl(override) def(process)
 	{
 		params ["_args","_isFirstCall"];
-		private _ctg = [30,20,false] call nd_stdLoad;
+		private _ctg = [_isFirstCall,30,20,false] call nd_stdLoad;
 		call nd_cleanupData;
 		
 		_args params [["_text",""],["_ok","Да"],["_can","Нет"]];
@@ -174,7 +174,7 @@ struct(Input) base(NDBase)
 	decl(override) def(process)
 	{
 		params ["_args","_isFirstCall"];
-		private _ctg = [40,40,false] call nd_stdLoad;
+		private _ctg = [_isFirstCall,40,40,false] call nd_stdLoad;
 		
 		call nd_cleanupData;
 		
@@ -257,7 +257,7 @@ struct(TestingReputation) base(NDBase)
 	decl(override) def(process)
 	{
 		params ["_args","_isFirstCall"];
-		private _ctg = [50,70,false] call nd_stdLoad;
+		private _ctg = [_isFirstCall,50,70,false] call nd_stdLoad;
 		
 		call nd_cleanupData;
 
@@ -386,7 +386,7 @@ struct(VoteRep) base(NDBase)
 	decl(override) def(process)
 	{
 		params ["_args","_isFirstCall"];
-		private _ctg = [70,80,false] call nd_stdLoad;
+		private _ctg = [_isFirstCall,70,80,false] call nd_stdLoad;
 		
 		call nd_internal_voterep_cleanupMaps;
 		call nd_cleanupData;

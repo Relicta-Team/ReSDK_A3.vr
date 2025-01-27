@@ -365,10 +365,10 @@ decl(NULL|struct_t.NDBase)
 nd_internal_currentStructObj = null;
 
 //стандартный алгоритм
-decl(widget(float;float;string))
+decl(widget(float;float;string|bool))
 nd_stdLoad = {
-	params [["_sx",50],["_sy",50],["_btName","Закрыть"]];
-	if (isFirstLoad) then {
+	params ["_isFirstCall",["_sx",50],["_sy",50],["_btName","Закрыть"]];
+	if (_isFirstCall) then {
 		private _ctg = [thisDisplay,WIDGETGROUP,[50 - _sx/2,50-_sy/2,_sx,_sy]] call createWidget;
 		nd_internal_currentStructObj callp(addSavedWidget, _ctg);
 		

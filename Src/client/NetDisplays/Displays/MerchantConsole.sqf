@@ -12,7 +12,7 @@ struct(MerchantConsole) base(NDBase)
 	decl(override) def(process)
 	{
 		params ["_args","_isFirstCall"];
-		private _ctg = [50,70] call nd_stdLoad;
+		private _ctg = [_isFirstCall,50,70] call nd_stdLoad;
 		
 		call nd_cleanupData;
 		

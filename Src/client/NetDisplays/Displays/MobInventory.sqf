@@ -11,7 +11,7 @@ struct(MobInventory) base(NDBase)
 	{
 		params ["_args","_isFirstCall"];
 		//getWidthByHeightToSquare
-		//_ctg = [(40),(40)] call nd_stdLoad;
+		//_ctg = [_isFirstCall,(40),(40)] call nd_stdLoad;
 		_ctg = if (_isFirstCall) then {
 			_sx = 40;
 			_sy = 70;
