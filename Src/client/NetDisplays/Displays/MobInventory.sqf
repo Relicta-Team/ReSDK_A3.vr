@@ -78,7 +78,7 @@ struct(MobInventory) base(NDBase)
 		
 		{
 			(inventory_slotpos_map select _x) params ["_xMap","_yMap"];
-			regNDWidget(PICTURE,allocpos__(_xMap,_yMap),null,null);
+			self.addWidget (PICTURE,allocpos__(_xMap,_yMap),null,null);
 			(self getv(lastNDWidget)) ctrlSetText (inventory_sloticons_default select _x);
 		} foreach inventory_openModeSlotsId;*/
 		

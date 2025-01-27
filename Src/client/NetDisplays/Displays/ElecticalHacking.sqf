@@ -90,7 +90,7 @@ struct(ElecticalHacking) base(NDBase)
 			MOD(_curY,+ 8);
 		} foreach _colors;
 		
-		regNDWidget(TEXT,vec4(50,15,2,(_curY-15) max (100-15)),_ctg,null);
+		self callp(addWidget,TEXT arg vec4(50,15,2,(_curY-15) max (100-15)) arg _ctg arg null);
 		(self getv(lastNDWidget)) setBackgroundColor [1,1,1,0.8];
 		
 	};
