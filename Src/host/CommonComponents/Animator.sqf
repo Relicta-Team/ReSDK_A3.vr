@@ -223,7 +223,7 @@ anim_syncAnim = {
 	if !isNullVar(_flag_check_canwalk_local_player) then {
 		#define __compareanims(idx) ((_anims select idx) == "nl" && ((_blender select idx) == 1))
 		cd_fw_forceWalk = (__compareanims(2) || __compareanims(3));
-		if ([_mob,"ghost_flag",VST_GHOST_EFFECT] call le_vst_hasVarExt) then {
+		if ([_mob,"VST_GHOST_EFFECT"] call vst_containsConfig) then {
 			cd_fw_forceWalk = false;
 		};
 		_mob call cd_fw_syncForceWalk;

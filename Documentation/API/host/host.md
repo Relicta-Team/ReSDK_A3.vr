@@ -5865,7 +5865,7 @@ File: [host\lang.hpp at line 43](../../../Src/host/lang.hpp#L43)
 
 Type: constant
 
-Description: 
+Description: end block enum declaration
 - Param: name
 - Param: prefix
 
@@ -5873,7 +5873,19 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 53](../../../Src/host/lang.hpp#L53)
+File: [host\lang.hpp at line 54](../../../Src/host/lang.hpp#L54)
+## enumend
+
+Type: constant
+
+Description: end block enum declaration
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\lang.hpp at line 56](../../../Src/host/lang.hpp#L56)
 ## namespace(ns_name,prefix)
 
 Type: constant
@@ -5886,7 +5898,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 70](../../../Src/host/lang.hpp#L70)
+File: [host\lang.hpp at line 73](../../../Src/host/lang.hpp#L73)
 ## inline_macro
 
 Type: constant
@@ -5898,7 +5910,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 83](../../../Src/host/lang.hpp#L83)
+File: [host\lang.hpp at line 86](../../../Src/host/lang.hpp#L86)
 ## const
 
 Type: constant
@@ -5910,7 +5922,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 89](../../../Src/host/lang.hpp#L89)
+File: [host\lang.hpp at line 92](../../../Src/host/lang.hpp#L92)
 ## extern
 
 Type: constant
@@ -5922,7 +5934,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 95](../../../Src/host/lang.hpp#L95)
+File: [host\lang.hpp at line 98](../../../Src/host/lang.hpp#L98)
 ## macro_const(full_func_name)
 
 Type: constant
@@ -5934,7 +5946,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 108](../../../Src/host/lang.hpp#L108)
+File: [host\lang.hpp at line 111](../../../Src/host/lang.hpp#L111)
 ## macro_func(name,signature)
 
 Type: constant
@@ -5947,7 +5959,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 120](../../../Src/host/lang.hpp#L120)
+File: [host\lang.hpp at line 123](../../../Src/host/lang.hpp#L123)
 ## macro_def(name)
 
 Type: constant
@@ -5959,7 +5971,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 130](../../../Src/host/lang.hpp#L130)
+File: [host\lang.hpp at line 133](../../../Src/host/lang.hpp#L133)
 ## ignore_this_file
 
 Type: constant
@@ -5971,216 +5983,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\lang.hpp at line 134](../../../Src/host/lang.hpp#L134)
-# memory.hpp
-
-## size_ptr
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-8
-```
-File: [host\memory.hpp at line 8](../../../Src/host/memory.hpp#L8)
-## size_float
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-4
-```
-File: [host\memory.hpp at line 9](../../../Src/host/memory.hpp#L9)
-## size_bool
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-1
-```
-File: [host\memory.hpp at line 10](../../../Src/host/memory.hpp#L10)
-## size_array
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-size_ptr
-```
-File: [host\memory.hpp at line 12](../../../Src/host/memory.hpp#L12)
-## size_ptr_object
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-size_ptr
-```
-File: [host\memory.hpp at line 13](../../../Src/host/memory.hpp#L13)
-## sizeof(var)
-
-Type: constant
-
-Description: 4 for x32*/
-- Param: var
-
-Replaced value:
-```sqf
-\
-((var) call { \
-	if (_this isEqualType true) exitWith {1}; \
-	if (_this isEqualType 0) exitWith {4}; \
-	if (_this isEqualType "") exitWith {count _this}; \
-	size_ptr \
-}) 
-```
-File: [host\memory.hpp at line 16](../../../Src/host/memory.hpp#L16)
-## obj_sizeof(ref)
-
-Type: constant
-
-Description: 
-- Param: ref
-
-Replaced value:
-```sqf
-\
-((ref) call { \
-	\
-	private _size = size_ptr; \
-	\
-	if (_this in [locationnull,objnull]) exitWith {_size}; \
-	\
-	private _gtp = { \
-		if (_this isEqualType true) exitWith {1}; \
-		if (_this isEqualType 0) exitWith {4}; \
-		if (_this isEqualType "") exitWith {count _this}; \
-		if (_this isequalType []) exitWith { \
-			\
-			private _size = size_ptr; \
-			{ \
-				MOD(_size,+ sizeof(_x)); \
-			} foreach _this; \
-			\
-			_size \
-		}; \
-		if (_this isEqualType {}) exitWith { \
-			size_ptr \
-		};\
-		size_ptr \
-	};\
-	\
-	{\
-		MOD(_size,+ ((_this getvariable _x) call _gtp));\
-	} foreach allVariables _this;\
-	\
-	_size\
-})
-```
-File: [host\memory.hpp at line 26](../../../Src/host/memory.hpp#L26)
-# module.hpp
-
-## moduleName
-
-Type: constant
-
-Description: 
-
-
-Replaced value:
-```sqf
-common
-```
-File: [host\module.hpp at line 8](../../../Src/host/module.hpp#L8)
-## ___fullmodulename(var)
-
-Type: constant
-
-Description: 
-- Param: var
-
-Replaced value:
-```sqf
-moduleName##_##var
-```
-File: [host\module.hpp at line 10](../../../Src/host/module.hpp#L10)
-## mFunction(name)
-
-Type: constant
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-___fullmodulename(name) = 
-```
-File: [host\module.hpp at line 12](../../../Src/host/module.hpp#L12)
-## mVariable(name)
-
-Type: constant
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-___fullmodulename(name)
-```
-File: [host\module.hpp at line 14](../../../Src/host/module.hpp#L14)
-## mCallFunc(name)
-
-Type: constant
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-call ___fullmodulename(name)
-```
-File: [host\module.hpp at line 16](../../../Src/host/module.hpp#L16)
-## mGetVar(name)
-
-Type: constant
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-___fullmodulename(name)
-```
-File: [host\module.hpp at line 18](../../../Src/host/module.hpp#L18)
-## mSetVar(name)
-
-Type: constant
-
-Description: 
-- Param: name
-
-Replaced value:
-```sqf
-___fullmodulename(name)
-```
-File: [host\module.hpp at line 20](../../../Src/host/module.hpp#L20)
+File: [host\lang.hpp at line 137](../../../Src/host/lang.hpp#L137)
 # oop.hpp
 
 ## PROTOTYPE_VAR_NAME

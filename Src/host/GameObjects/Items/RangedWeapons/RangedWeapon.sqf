@@ -241,7 +241,7 @@ class(IRangedWeapon) extends(Item)
 	func(getAttackVisualData)
 	{
 		objParams();
-		0
+		""
 	};
 
 	getter_func(getShootSoundDistance,80);

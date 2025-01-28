@@ -19,6 +19,7 @@ enum(InventorySlotId,INV_)
 #define INV_HAND_L 6
 #define INV_BELT 7
 #define INV_HAND_R 8
+enumend
 
 macro_const(inventory_listSlotIDHands)
 #define INV_LIST_HANDS [INV_HAND_L,INV_HAND_R]
@@ -39,6 +40,7 @@ enum(SlotDataId,SD_)
 #define SD_ICON 1
 #define SD_POINTER 2
 #define SD_MODEL 3
+enumend
 
 
 //default picture path

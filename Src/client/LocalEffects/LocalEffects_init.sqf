@@ -65,7 +65,7 @@ locef_removeAll = {
 }; rpcAdd("lcfclr",locef_removeAll);
 
 locef_createTempObject = {
-	private _o = [null,null,true] call le_vst_createDummyObj;
+	private _o = [null,null,true] call vst_createDummyMesh;
 	_o
 };
 

@@ -34,6 +34,7 @@ enum(PressedRefId,PRESSED_)
 #define PRESSED_LINK 0
 //ссылка на драгуемую ктгшку 
 #define PRESSED_DRAG 1
+enumend
 
 macro_const(inventory_indexDragger)
 #define INDEX_DRAGGER -9
@@ -143,6 +144,7 @@ macro_func(inventory_getContainerNameText,widget())
 	#define container_index_isInWorld container_index_object
 	//this does not used
 	#define container_object_awaitGenerateValue -1
+	enumend
 
 macro_func(inventory_getWorldContainer,mesh())
 #define getWorldContainer (inventory_containerCommonData select container_index_object)

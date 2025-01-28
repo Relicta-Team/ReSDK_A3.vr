@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
 
 ["loop_sound",{
 	params ["_emit","_src","_inPar"];

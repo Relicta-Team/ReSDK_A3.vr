@@ -15,6 +15,7 @@ enum(KeybindIndex,KEYBIND_INDEX_)
 #define KEYBIND_INDEX_DEFAULT 3
 #define KEYBIND_INDEX_VARNAME 4
 #define KEYBIND_INDEX_SERIALIZED 5
+enumend
 
 // [value,shift,ctrl,alt,isMouse]
 enum(KeyDataIndex,KEYDATA_INDEX_)
@@ -23,6 +24,7 @@ enum(KeyDataIndex,KEYDATA_INDEX_)
 #define KEYDATA_INDEX_CTRL 2
 #define KEYDATA_INDEX_ALT 3
 #define KEYDATA_INDEX_ISMOUSE 4
+enumend
 
 //Распаковывает массив клавиш
 macro_func(input_unpackKeyData,array())

@@ -35,7 +35,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\ClientData\ClientData.hpp at line 14](../../../Src/client/ClientData/ClientData.hpp#L14)
+File: [client\ClientData\ClientData.hpp at line 15](../../../Src/client/ClientData/ClientData.hpp#L15)
 ## VIDEO_SETTINGS_MIN
 
 Type: constant
@@ -47,7 +47,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\ClientData\ClientData.hpp at line 15](../../../Src/client/ClientData/ClientData.hpp#L15)
+File: [client\ClientData\ClientData.hpp at line 16](../../../Src/client/ClientData/ClientData.hpp#L16)
 # ClientData.sqf
 
 ## sk_nan
@@ -1344,7 +1344,7 @@ Replaced value:
 ```sqf
 [name,desc,type,range,#variable,variable,variable,variable,event_on_apply,event_on_abort,event_on_change]
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 23](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L23)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 24](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L24)
 ## settingTEvent(name,desc,type,range,variable,__EVNT__)
 
 Type: constant
@@ -1361,7 +1361,7 @@ Replaced value:
 ```sqf
 [name,desc,type,range,#variable,variable,variable,variable,__EVNT__,__EVNT__,__EVNT__]
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 26](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L26)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 27](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L27)
 ## nextRegion(nameof)
 
 Type: constant
@@ -1373,7 +1373,7 @@ Replaced value:
 ```sqf
 [nameof]
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 29](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L29)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 30](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L30)
 ## COUNT_REGION_SETTINGS
 
 Type: constant
@@ -1385,7 +1385,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 31](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L31)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 32](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L32)
 ## COLOR_BACKGROUND_REGION_NAME
 
 Type: constant
@@ -1397,7 +1397,7 @@ Replaced value:
 ```sqf
 [0.2,0.2,0.2,0.9]
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 33](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L33)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 34](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L34)
 ## typeInputFloat
 
 Type: constant
@@ -1409,7 +1409,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 36](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L36)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 37](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L37)
 ## typeSwitcher
 
 Type: constant
@@ -1421,7 +1421,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 37](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L37)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 38](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L38)
 ## typeSlider
 
 Type: constant
@@ -1433,7 +1433,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 38](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L38)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 39](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L39)
 ## typeBool
 
 Type: constant
@@ -1445,7 +1445,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 39](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L39)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 40](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L40)
 ## centerize(val)
 
 Type: constant
@@ -1457,7 +1457,7 @@ Replaced value:
 ```sqf
 "<t align='center'>" + val + "</t>"
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 42](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L42)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 44](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L44)
 ## boolRange
 
 Type: constant
@@ -1469,7 +1469,7 @@ Replaced value:
 ```sqf
 [centerize("нет"),centerize("да")]
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 45](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L45)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 47](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L47)
 ## defRange(min,max)
 
 Type: constant
@@ -1482,7 +1482,7 @@ Replaced value:
 ```sqf
 ([min,max] call cd_internal_defRange)
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 47](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L47)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 49](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L49)
 ## NO_EVENT_ON_APPLY
 
 Type: constant
@@ -1494,7 +1494,7 @@ Replaced value:
 ```sqf
 ""
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 54](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L54)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 56](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L56)
 ## value
 
 Type: constant
@@ -1506,7 +1506,7 @@ Replaced value:
 ```sqf
 cd_esc_settings_internal_curChangedValue
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 56](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L56)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 58](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L58)
 ## setting_element_size_x
 
 Type: constant
@@ -1518,7 +1518,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 164](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L164)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 166](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L166)
 ## cd_esc_settings_internal_curChangedValue
 
 Type: Variable
@@ -1530,7 +1530,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 59](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L59)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 61](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L61)
 ## cd_settingsGame
 
 Type: Variable
@@ -1542,7 +1542,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 67](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L67)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 69](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L69)
 ## cd_internal_defRange
 
 Type: function
@@ -1551,7 +1551,7 @@ Description:
 - Param: _mi
 - Param: _ma
 
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 50](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L50)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 52](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L52)
 ## esc_settings_game_unloading
 
 Type: function
@@ -1559,7 +1559,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 103](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L103)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 105](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L105)
 ## esc_settings_loader_game
 
 Type: function
@@ -1567,7 +1567,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 160](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L160)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 162](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L162)
 ## esc_settings_eventOnInput
 
 Type: function
@@ -1576,7 +1576,7 @@ Description:
 - Param: _bt
 - Param: _key
 
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 254](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L254)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 256](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L256)
 ## esc_settings_eventOnSwitcher
 
 Type: function
@@ -1584,7 +1584,7 @@ Type: function
 Description: 
 - Param: _bt
 
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 272](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L272)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 274](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L274)
 ## esc_settings_eventOnSlider
 
 Type: function
@@ -1593,7 +1593,7 @@ Description:
 - Param: _bt
 - Param: _newValue
 
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 296](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L296)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 298](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L298)
 ## esc_settings_eventOnBool
 
 Type: function
@@ -1601,7 +1601,7 @@ Type: function
 Description: 
 - Param: _bt
 
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 311](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L311)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 313](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L313)
 ## esc_settings_event_onSyncGame
 
 Type: function
@@ -1609,7 +1609,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 334](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L334)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 336](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L336)
 ## cd_onLoadGameSettings
 
 Type: function
@@ -1617,7 +1617,7 @@ Type: function
 Description: 
 - Param: _list
 
-File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 342](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L342)
+File: [client\ClientData\EscapeMenu_settingsGame.sqf at line 344](../../../Src/client/ClientData/EscapeMenu_settingsGame.sqf#L344)
 # EscapeMenu_settingsGraphics.sqf
 
 ## setting_element_size_x

@@ -289,12 +289,12 @@ smd_onAttackOrDamage = {
 
 			};
 			if (_damageType == WOUND_TYPE_BLEEDING) exitWith {
-				[SHOT_MEATSPLAT,_mob,[_selection]] call le_doshot;
+				["BFX_MEATSPLAT",_mob,[_selection]] call bfx_doShot;
 			};
 			//specials
 			//-100 - destroy or loss limb
 			if (_damageType == -100) exitWith {
-				[SHOT_DESTROYLIMB,_mob,[_selection]] call le_doshot;
+				["BFX_DESTROYLIMB",_mob,[_selection]] call bfx_doShot;
 			};
 		};
 
@@ -889,11 +889,11 @@ smd_onVisualStates = {
 
 	private _prevlv = _mob getVariable ["__lv_visstates",[]];
 	{
-		ifcheck(equalTypes(_x,[]),vec3(_x select 0,_mob,_x select 1),vec2(_x,_mob)) call le_vst_remove;
+		ifcheck(equalTypes(_x,[]),vec3(_x select 0,_mob,_x select 1),vec2(_x,_mob)) call vst_remove;
 	} foreach _prevlv;
 
 	{
-		ifcheck(equalTypes(_x,[]),vec3(_x select 0,_mob,_x select 1),vec2(_x,_mob)) call le_vst_create;
+		ifcheck(equalTypes(_x,[]),vec3(_x select 0,_mob,_x select 1),vec2(_x,_mob)) call vst_create;
 	} foreach _ctx;
 	//do sync data
 	_mob setVariable ["__lv_visstates",array_copy(_ctx)];

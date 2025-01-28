@@ -106,7 +106,7 @@ class(MobGhost) extends(BasicMob)
 
 		if callSelf(isGameplayGhost) then {
 
-			callSelfParams(addVisualState,VST_GHOST_EFFECT);
+			callSelfParams(addVisualState,"VST_GHOST_EFFECT");
 
 			callSelfParams(addAction,"Призрак" arg "Время?" arg "ghost_getdeadtime");
 
@@ -301,10 +301,10 @@ class(MobObserver) extends(MobGhost)
 		callSelfParams(addAction,"Наблюдатель" arg "Разбанить роль" arg "admin_cmdjobunban");
 		callSelfParams(addAction,"Наблюдатель" arg "Админ.сообщение игроку" arg "admin_cmdadminmes");
 		callSelfParams(addAction,"Наблюдатель" arg "Ночное зрение" arg "admin_nightvision");
-		//callSelfParams(addVisualState,VST_GHOST_EFFECT arg ["no_gray"]);
+		//callSelfParams(addVisualState,"VST_GHOST_EFFECT" arg ["no_gray"]);
 
 		//очень временное решение инвиза
-		callSelfParams(addVisualState,VST_HUMAN_STEALTH);
+		callSelfParams(addVisualState,"VST_HUMAN_STEALTH");
 
 		//
 	};

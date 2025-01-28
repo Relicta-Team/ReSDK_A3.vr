@@ -686,7 +686,7 @@ class(Body) extends(BodyPart)
 				_ctx
 			};
 			
-			callFuncParams(getSelf(loc),updateVisualState,VST_ATTACHED_OBJECTS arg _handle arg []);
+			callFuncParams(getSelf(loc),updateVisualState,"VST_ATTACHED_OBJECTS" arg _handle arg []);
 			
 			callFuncParams(getSelf(loc),playSound,"flesh\flesh"+str pick[1 arg 2] arg getRandomPitchInRange(.85,1.6));
 		};
@@ -718,7 +718,7 @@ class(Body) extends(BodyPart)
 			_ctx
 		};
 		
-		callFuncParams(getSelf(loc),updateVisualState,VST_ATTACHED_OBJECTS arg _handle arg [_ctxUpdate]);
+		callFuncParams(getSelf(loc),updateVisualState,"VST_ATTACHED_OBJECTS" arg _handle arg [_ctxUpdate]);
 		
 		callFuncParams(getSelf(loc),playSound,"flesh\flesh"+str pick[1 arg 2] arg getRandomPitchInRange(.85,1.6));
 	};
