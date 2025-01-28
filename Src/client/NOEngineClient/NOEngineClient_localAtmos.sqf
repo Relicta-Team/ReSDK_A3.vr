@@ -22,11 +22,11 @@ enum(AtmosDataIndex,ACLI_DATA_)
 #define ACLI_DATA_CHUNK_ID 2
 enumend
 
-macro_func(acli_createBufferObjects;mesh[]())
+macro_func(acli_createBufferObjects,mesh[]())
 #define __ACLI_NEW_BUFFER_OBJECTS [objNull,objNull]
 macro_const(acli_createBufferMetaInfo)
 #define __ACLI_NEW_BUFFER_METAINFO 0
-macro_func(acli_createChunkData;any[]())
+macro_func(acli_createChunkData,any[]())
 #define __ACLI_NEW_DATA [__ACLI_NEW_BUFFER_OBJECTS,__ACLI_NEW_BUFFER_METAINFO,_chid]
 inline_macro
 #define ACLI_NEW_CHUNK __ACLI_NEW_DATA
