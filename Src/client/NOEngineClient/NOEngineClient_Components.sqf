@@ -3,25 +3,29 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
 
+namespace(NOEngine.Client.Components,noe_client_)
 
 /*
 
 			 === FUNCTIONS ===
 
 */
-
+decl(bool(vector2;int))
 noe_client_isChunkCreated = {
 	params ["_chunk","_type"];
 	!isNull(getChunk(getChunkStorage(_type),str _chunk))
 };
 
 //получает временную отметку чанка. Если чанк не существует - создаёт его
+decl(float(vector2;int))
 noe_client_GetChunkLastUpdate = {
 	chunk_getLastTicktimeUpdate(_this call noe_client_getPosChunkToData)
 };
 
 //Получает объект чанка с информацией
+decl(any(vector2;int))
 noe_client_getPosChunkToData = {
 	params ["_chunk","_type"];
 	
@@ -43,11 +47,12 @@ noe_client_getPosChunkToData = {
 */
 
 
-
+decl(thread_handle[])
 noe_client_threadList = [];
 
 //Производит спавн объектов
 //_spawnObjList - массив обновления данных. Чанк загружается весь
+decl(void(any;any[]))
 noe_client_loadObjects = {
 	params ["_chunkObject","_spawnObjList"];
 	
@@ -118,12 +123,14 @@ noe_client_loadObjects = {
 };
 
 //проверят созданы ли все объекты в чанке
+decl(bool(any))
 noe_client_isObjectsLoadingDone = {
 	params ["_chunk"];
 	chunk_getProgress(_chunk) == CHUNK_PROGRESS_LOADED
 };	
 
 //проверяет загружены ли все объекты чанков в которых позиционируется игрок
+decl(bool())
 noe_client_isPlayerPositionChunksLoaded = {
 	FHEADER;
 	private _ppos = getPosATL player;

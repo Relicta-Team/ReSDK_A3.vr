@@ -3,8 +3,14 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
+namespace(NOEngine.Client.Interpolation,noe_client_interp_;noe_client_)
+
+decl(float)
 noe_client_defaultInterpTime = 0.15;
 
+decl(void(mesh;vector3;vector3;vector3;vector3;float;int;int;bool))
 noe_client_interp_processObjInterp = {
 	params ["_srcObj","_fromPos","_fromTransf","_toPos","_toTransf","_time",["_scaleMode",0],["_stdMode",0],["_emuMode",false]];
 	_srcObj setPhysicsCollisionFlag false;
@@ -134,6 +140,7 @@ noe_client_interp_processObjInterp = {
 			получает данные по позиции этой модели в слоте
 		transform - позиция и поворот
 */
+decl(void(actor;any[]))
 noe_client_interp_start = {
 	params ["_owner","_paramsT"];
 	private _options = [];
@@ -273,6 +280,7 @@ noe_client_interp_start = {
 };
 
 //returns [srcobj,pos,trans]
+decl(any(actor;any))
 noe_client_interp_determineTransform = {
 	params ["_owner","_data"];
 	//is pointer
@@ -298,9 +306,10 @@ noe_client_interp_determineTransform = {
 	};
 };
 
-_interpNet = {
+decl(void(any;any;any))
+noe_client_interp_interpNet = {
 	params ["_f","_t","_opt"];
 
 	[player,[_f,_t,_opt]] call noe_client_interp_start;
 
-}; rpcAdd("nintrp",_interpNet);
+}; rpcAdd("nintrp",noe_client_interp_interpNet);
