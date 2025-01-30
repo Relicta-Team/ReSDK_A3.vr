@@ -3,18 +3,28 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
+namespace(OneSync;NULL)
+
 /*
 	Компонент клиентского освещения
 */
 
+macro_const(os_light_updateDelay)
 #define OS_LIGHT_UPDATE_DELAY 0.2
 // влияет на частоту отправки сообщений. менять с осторожностью
+macro_const(os_light_dataSendDelay)
 #define OS_LIGHT_DATASEND_DELAY 1
 
+decl(int)
 os_light_handle_onupdate = -1;
+decl(float)
 os_light_lastTimeSendInfo = 0;
+decl(vector2[])
 os_light_list_noProcessedLights = []; //vec2 (light,intensity)
 
+decl(void(bool))
 os_light_setEnable = {
 	params ["_mode"];
 	if (_mode) then {
@@ -26,6 +36,7 @@ os_light_setEnable = {
 	};
 };
 
+decl(float())
 os_light_getLighting = {
 	{
 		(_x select 0) setLightIntensity 0;
@@ -40,6 +51,7 @@ os_light_getLighting = {
 	_light
 };
 
+decl(void())
 os_light_onUpdate = {
 	if (hud_stealth > 0) then {
 		if (tickTime >= os_light_lastTimeSendInfo) then {
@@ -54,6 +66,7 @@ os_light_onUpdate = {
 	};
 };
 
+decl(mesh(mesh;float))
 os_light_registerAsNoProcessedLight = {
 	params ["_lt","_intensity"];
 	os_light_list_noProcessedLights pushBackUnique [_lt,_intensity];
