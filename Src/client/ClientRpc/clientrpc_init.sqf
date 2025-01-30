@@ -21,6 +21,7 @@ macro_def(client_log_rpc)
 #ifdef log_client_rpc
 	inline_macro
 	#define rpc_log(event,args) 'debug_console' callExtension format['[NET::LOG::CLIENT]:    <%1> send %3 bytes to SERVER with %2',event,args,args call oop_getTypeSizeFull]
+	inline_macro
 	#define rpc_simple(data) 'debug_console' callExtension format['[NET::LOG]:    %1',data]
 #else
 	#define rpc_log(event,args)

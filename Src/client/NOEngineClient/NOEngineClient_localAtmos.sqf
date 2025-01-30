@@ -189,7 +189,7 @@ acli_getAroundChIDList = {
 
 decl(vector3(float;float;float))
 acli_chunkPosToId = {
-	params ["_x","_y","_z"];
+	_this params ["_x","_y","_z"];
 
 	[
 		floor(_x / ATMOS_SIZE) + ATMOS_START_INDEX,
@@ -201,7 +201,7 @@ acli_chunkPosToId = {
 //returns center atl pos of chunk
 decl(vector3(int;int;int))
 acli_chunkIdToPos = {
-	params ["_iX","_iY","_iZ"];
+	_this params ["_iX","_iY","_iZ"];
 
 	[
 		(_iX - ATMOS_START_INDEX) * ATMOS_SIZE,
