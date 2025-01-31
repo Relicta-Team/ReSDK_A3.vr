@@ -6,6 +6,7 @@
 #include <..\..\host\engine.hpp>
 #include <..\..\host\struct.hpp>
 
+namespace(Rendering,NULL)
 
 //including modules
 #include "PostProcessing\PPInit.sqf"
