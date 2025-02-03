@@ -6,8 +6,9 @@
 #include <..\..\host\engine.hpp>
 #include <..\ClientRpc\clientRpc.hpp>
 
-//#include "MusicManager.sqf"
 #include "Music.sqf"
+
+namespace(AudioSystem.Sound,sound3d_;sound_)
 
 
 // params: ["_file","_source","_vol","_pitch","_maxDist",["_soundExtension","ogg"]];
@@ -16,6 +17,7 @@ rpcAdd("sl_p",soundLocal_play);
 rpcAdd("sui_p",soundUI_play);
 
 //Рантайм вычисление процессор громкости звука
+decl(void(...any[]))
 soundProcessor_play = {
 	FHEADER;
 	_this set [7,true];
@@ -38,6 +40,7 @@ soundProcessor_play = {
 
 //воспроизводит объектный звук. Источник
 //функция локальна
+decl(mesh(mesh;string;float;float;float))
 sound3d_playOnObject = {
 	params ["_source","_class","_dist",["_pitch",1],["_offset",0]];
 
@@ -66,6 +69,7 @@ sound3d_playOnObject = {
 }; rpcAdd("soundPlayOnObject",sound3d_playOnObject);
 
 //функция локальна
+decl(void(mesh|mesh[];any[];float))
 sound3d_playOnObjectLooped = {
 	params ["_additionalObjects","_3dSoundData",["_soundDuration",-1]];
 
@@ -101,15 +105,18 @@ sound3d_playOnObjectLooped = {
 };
 
 //Проигрывает локальный звук
+//! this doesn't used
+decl(void(string;float))
 sound_selfPlay = {
 	params ["_path",["_offset",0]];
 	playSound [_path, false, _offset]
-};	rpcAdd("soundSelfPlay",sound_selfPlay);
+}; rpcAdd("soundSelfPlay",sound_selfPlay);
 
 
 
 // проигрывание локальных звуков
 //from say3D [sound, maxDistance, pitch, isSpeech, offset]
+decl(mesh(mesh;string;float;float;float))
 sound3d_playLocal = {
 	params ["_obj","_clsSound",["_pitch",1],["_distance",10],["_offset",0]];
 	
@@ -122,9 +129,10 @@ sound3d_playLocal = {
 	звук располагается статично и не перемещается за объектом. при удалении источника звук автоматически остановится
 	Возвращает указатель зацикленного звука
 */
+decl(int(string;mesh;float;float;float;float;float))
 sound3d_playLocalOnObjectLooped = {
-	private _refParams = _this;
 	params ["_file","_src",["_pitch",1],["_dist",10],["_offset",0],["_preendbuf",0],["_vol",1]];
+	//? private _refParams = _this; //never used
 	
 	if equalTypes(_pitch,[]) then {
 		_pitch = rand(_pitch select 0,_pitch select 1);
@@ -144,6 +152,7 @@ sound3d_playLocalOnObjectLooped = {
 	sound3d_internal_list_soundBuff pushBack _params;
 };
 
+decl(bool(int))
 sound3d_stopLocalLopped = {
 	params ["_soundPtr"];
 	if (_soundPtr >= (count sound3d_internal_list_soundBuff)) exitWith {false};
@@ -163,7 +172,11 @@ if !isNullVar(sound3d_internal_list_soundBuff) then {
 	} foreach sound3d_internal_list_soundBuff;
 };
 #endif
+
+decl(any[])
 sound3d_internal_list_soundBuff = [];
+sound3d_internal_handle3dSounds = -1;
+decl(void())
 sound3d_internal_localHandler = {
 	private _slist = sound3d_internal_list_soundBuff;
 	private _needDel = false;
@@ -204,4 +217,6 @@ sound3d_internal_localHandler = {
 		sound3d_internal_list_soundBuff = _slist;
 		
 	};
-}; startUpdate(sound3d_internal_localHandler,0.1);
+}; 
+
+sound3d_internal_handle3dSounds = startUpdate(sound3d_internal_localHandler,0.1);

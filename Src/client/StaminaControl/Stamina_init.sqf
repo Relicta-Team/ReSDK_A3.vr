@@ -10,37 +10,44 @@
 
 #include "Stamina.sqf"
 
+namespace(StaminaSystem,stamina_)
+
+decl(widget[])
 stamina_widgets = [];
+decl(int)
 stamina_mainHandle = -1;
+decl(int)
 stamina_heartbeatHandle = -1;
+decl(float)
 stamina_lastVal = -1;
+decl(float)
 stamina_lastFullTime = -1; //отметка времени последнего полного заполнения стамины
 
 call stamina_init;
 
 
-#ifdef stamina_debug
+// #ifdef stamina_debug
 
-	ison = true;
-	_pfh = {
-		_isInc = false;
+// 	ison = true;
+// 	_pfh = {
+// 		_isInc = false;
 		
-		_precentVal = call stamina_convCurToPrec;
-		//logformat("in precented %1",_precentVal);
+// 		_precentVal = call stamina_convCurToPrec;
+// 		//logformat("in precented %1",_precentVal);
 		
-		if (ison) then {
-			INC(_precentVal);
-			INC(cd_stamina_cur);
-			if (_precentVal >= 100) then {ison = false};
-		} else {
-			DEC(_precentVal);
-			DEC(cd_stamina_cur);
-			if (_precentVal <= 0) then {ison = true};
-		};
+// 		if (ison) then {
+// 			INC(_precentVal);
+// 			INC(cd_stamina_cur);
+// 			if (_precentVal >= 100) then {ison = false};
+// 		} else {
+// 			DEC(_precentVal);
+// 			DEC(cd_stamina_cur);
+// 			if (_precentVal <= 0) then {ison = true};
+// 		};
 		
-		[_precentVal] call stamina_setValue;
-	};
+// 		[_precentVal] call stamina_setValue;
+// 	};
 
-	startUpdate(_pfh,1);
+// 	startUpdate(_pfh,1);
 	
-#endif
+// #endif
