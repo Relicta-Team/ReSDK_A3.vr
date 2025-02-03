@@ -3,11 +3,15 @@
 // sdk.relicta.ru
 // ======================================================
 
-struct(VSTBreastPlate) base(VSTBase)
-	def(name) "VST_CLOTH_BREASTPLATE";
-	def(_listModels) [];
+#include <..\..\..\host\lang.hpp>
 
-	def(onCreated)
+namespace(VisualState.Configs,vst_)
+
+struct(VSTBreastPlate) base(VSTBase)
+	decl(override) def(name) "VST_CLOTH_BREASTPLATE";
+	decl(mesh[]) def(_listModels) [];
+
+	decl(override) def(onCreated)
 	{
 		params ["_ctx"];
 		private _createObj = {
@@ -34,7 +38,7 @@ struct(VSTBreastPlate) base(VSTBase)
 		];
 	};
 
-	def(onDestroy)
+	decl(override) def(onDestroy)
 	{
 		params ["_ctx"];
 		{deleteVehicle _x} foreach (self getv(_listModels));

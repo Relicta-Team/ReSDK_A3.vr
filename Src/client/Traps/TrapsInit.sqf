@@ -8,6 +8,8 @@
 #include <..\LightEngine\LightEngine.hpp>
 #include <..\ClientRpc\clientRpc.hpp>
 
+namespace(Traps,traps_)
+
 /*
 	Порядок работы:
 		1. клиент во время подгрузки получает все известные ловушки (перед NOE загрузчиком)
@@ -23,10 +25,11 @@
 		
 	Метод ресинка должен вызываться только при авторизации клиента
 */
-
+decl(set<string>)
 traps_hashSet_pointers = hashSet_createEmpty();
 
 //Загружает все известные ловушки
+decl(void(set<string>))
 traps_resyncAllTraps = {
 	private _ptrlist = _this;
 	call traps_unhideAll;
@@ -36,18 +39,21 @@ traps_resyncAllTraps = {
 	
 }; rpcAdd("resyncTraps",traps_resyncAllTraps);
 
+decl(void())
 traps_unhideAll = {
 	{
 		[_x,true] call traps_syncObject;
 	} foreach hashSet_toArray(traps_hashSet_pointers);
 };
 
+decl(void())
 traps_syncAll = {
 	{
 		[_x] call traps_syncObject;
 	} foreach hashSet_toArray(traps_hashSet_pointers);
 };
 
+decl(void(mesh))
 traps_checkKnownObject = {
 	params ["_o"];
 	private _ref = _o getVariable "ref";
@@ -58,12 +64,14 @@ traps_checkKnownObject = {
 	};
 };
 
+decl(void(string))
 traps_AutoDispose = {
 	params ["_ptr"];
 	hashSet_rem(traps_hashSet_pointers,_ptr);
 };
 
 //
+decl(void(string;bool))
 traps_syncObject = {
 	params ["_ref","_doKnown"];
 	private _obj = noe_client_allPointers getOrDefault [_ref,objNUll];

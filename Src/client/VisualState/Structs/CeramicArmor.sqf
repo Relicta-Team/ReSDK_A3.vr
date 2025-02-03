@@ -3,16 +3,20 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\..\host\lang.hpp>
+
+namespace(VisualState.Configs,vst_)
+
 //2 variations
 //"a3\structures_f_epb\items\vessels\barrelwater_grey_f.p3d"
 //"a3\structures_f_epb\items\vessels\barrelempty_grey_f.p3d"
 
 struct(VSTCeramicArmor) base(VSTBase)
-	def(name) "VST_CLOTH_CERAMIC";
+	decl(override) def(name) "VST_CLOTH_CERAMIC";
 
-	def(_clothMesh) objNull;
+	decl(mesh) def(_clothMesh) objNull;
 
-	def(onCreated)
+	decl(override) def(onCreated)
 	{
 		params ["_ctx"];
 		private _obj = createSimpleObject ["a3\structures_f_epb\items\vessels\barrelempty_grey_f.p3d",[0,0,0],true];
@@ -22,7 +26,7 @@ struct(VSTCeramicArmor) base(VSTBase)
 		self setv(_clothMesh,_obj);
 	}
 
-	def(onDestroy)
+	decl(override) def(onDestroy)
 	{
 		deleteVehicle (self getv(_clothMesh));
 	}

@@ -3,14 +3,18 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\..\host\lang.hpp>
+
+namespace(VisualState.Configs,vst_)
+
 struct(VSTGhost) base(VSTBase)
-	def(name) "VST_GHOST_EFFECT";
+	decl(override) def(name) "VST_GHOST_EFFECT";
 
-	def(_dummyMesh) objNull;
+	decl(mesh) def(_dummyMesh) objNull;
 
-	def(lock_ghostSyncState) false;
+	decl(bool) def(lock_ghostSyncState) false;
 
-	def(onCreated)
+	decl(override) def(onCreated)
 	{
 		params ["_ctx"];
 		if equals(self callv(getLocalPlayer),self getv(_src)) then {
@@ -53,7 +57,7 @@ struct(VSTGhost) base(VSTBase)
 		[self getv(_src),"onChangeBodyParts",true] call smd_syncVar;
 	}
 
-	def(onDestroy)
+	decl(override) def(onDestroy)
 	{
 		params ["_ctx"];
 		if !isNullReference(self getv(_dummyMesh)) then {
