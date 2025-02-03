@@ -8,15 +8,17 @@
 #include "widgets.hpp"
 #include "blockedButtons.hpp"
 
+namespace(WidgetSystem,NULL)
+
 
 //init gui
 ("GUI" call bis_fnc_rsclayer) cutrsc ["GUI", "PLAIN"];
 _display = uinamespace getvariable ["gui",DisplayNull];
 
 #include "functions.sqf"
-#include "widget_eventSystem.sqf"
 #include "defines.sqf"
 
+decl(void())
 removealldisplayevents = {
 	(findDisplay 46) displayRemoveAllEventHandlers "keydown";
 	(findDisplay 46) displayRemoveAllEventHandlers "keyup";
