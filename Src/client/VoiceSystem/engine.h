@@ -5,15 +5,6 @@
 
 #include <..\..\SETTINGS.h>
 
-#define ENABLE_LINE_IN_FILES
-
-#ifdef ENABLE_LINE_IN_FILES
-	#define __pragma_preprocess preprocessFileLineNumbers
-#else
-	#define __pragma_preprocess preprocessFile
-#endif
-
-#define __pragma_prep_cli preprocessFile
 
 // logger
 #define arg ,
