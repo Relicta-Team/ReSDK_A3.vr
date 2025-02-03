@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
+//! this file not used
 
 #define RENDER_EFFECTS_UPDATEDELAY 0.1
 

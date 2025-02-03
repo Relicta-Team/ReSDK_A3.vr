@@ -2,6 +2,14 @@
 // Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
+/*
+	Легаси система постпроцесса
+	TODO: перенести на структуры
+
+*/
+#include <..\..\..\host\lang.hpp>
+
+namespace(Rendering.PostProcess,pp_)
 
 #include <postprocessing.h>
 
@@ -18,10 +26,14 @@ if (!isNullVar(pp_allEffects)) then {
 	};
 };
 
+decl(any[])
 pp_buffer_efx = [];
+decl(any[])
 pp_allEffects = [];
+decl(int)
 pp_uniIndex = 5000;
 
+decl(void())
 pp_reload = {
 	
 	pp_allEffects = [];
@@ -42,6 +54,7 @@ pp_reload = {
 	} foreach _copyBuffer;
 };
 
+decl(void(string;string;any[];any[];any;float;any;bool))
 pp_init = {
 	params ["_name","_config","_settings",["_args",[]],["_code",{}],["_delay",0],["_initStatement",{}],["_isActive",false]];
 	
@@ -67,12 +80,14 @@ pp_init = {
 	pp_buffer_efx pushBack [_name,_config,_settings,_args,_code,_delay,_initStatement,_isActive];
 };
 
+decl(void(...any[]))
 pp_init_active = {
 	_this set [7,true];
 	_this call pp_init;
 	[_this select 0,true] call pp_setEnable
 };
 
+decl(void(string;bool))
 pp_setEnable = {
 	params ["_varName","_mode"];
 

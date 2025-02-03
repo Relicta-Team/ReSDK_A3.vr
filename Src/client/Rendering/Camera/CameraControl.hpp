@@ -3,7 +3,11 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\..\host\lang.hpp>
 
+namespace(Rendering.Camera,cam_)
 
+enum(CameraMode,CAMERA_MODE_)
 #define CAMERA_MODE_ARCADE 0
 #define CAMERA_MODE_REALISTIC 1
+enumend
