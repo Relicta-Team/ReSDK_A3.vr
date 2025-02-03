@@ -103,7 +103,7 @@ vs_changeVoiceVolume = {
 	]] call widgetSetPosition;
 	
 	vs_curVoiceMode = _mode;
-	TF_speak_volume_meters = _enumVol;
+	vs_speak_volume_meters = _enumVol;
 	vs_voiceVolume_lastUpdate = tickTime + vs_voiceDelayFadein;
 };
 
