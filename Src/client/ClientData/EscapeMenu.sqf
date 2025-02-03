@@ -49,8 +49,8 @@ macro_func(esc_getEscapeCtg,widget())
 decl(void(int;int))
 esc_internal_handleSettings = {
 	params ["_closerEv","_openerEv"];
-	addOpenerAndActivator(OpenerEv); 
-	addCloseEventToSetting(closerEv);
+	addOpenerAndActivator(_openerEv); 
+	addCloseEventToSetting(_closerEv);
 };
 
 decl(any[])
