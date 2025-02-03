@@ -966,7 +966,7 @@ Replaced value:
 ```sqf
 (esc_settings_widgets select 0)
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 223](../../../Src/client/ClientData/EscapeMenu.sqf#L223)
+File: [client\ClientData\EscapeMenu.sqf at line 230](../../../Src/client/ClientData/EscapeMenu.sqf#L230)
 ## getSettingsList
 
 Type: constant
@@ -978,7 +978,7 @@ Replaced value:
 ```sqf
 (esc_settings_widgets select 1)
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 225](../../../Src/client/ClientData/EscapeMenu.sqf#L225)
+File: [client\ClientData\EscapeMenu.sqf at line 232](../../../Src/client/ClientData/EscapeMenu.sqf#L232)
 ## getSettingsAccept
 
 Type: constant
@@ -990,7 +990,7 @@ Replaced value:
 ```sqf
 (esc_settings_widgets select 2)
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 227](../../../Src/client/ClientData/EscapeMenu.sqf#L227)
+File: [client\ClientData\EscapeMenu.sqf at line 234](../../../Src/client/ClientData/EscapeMenu.sqf#L234)
 ## getSettingsAbort
 
 Type: constant
@@ -1002,7 +1002,7 @@ Replaced value:
 ```sqf
 (esc_settings_widgets select 3)
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 229](../../../Src/client/ClientData/EscapeMenu.sqf#L229)
+File: [client\ClientData\EscapeMenu.sqf at line 236](../../../Src/client/ClientData/EscapeMenu.sqf#L236)
 ## ESC_GET_ALL_SETTINGS_TO_FADE
 
 Type: constant
@@ -1014,7 +1014,7 @@ Replaced value:
 ```sqf
 [getSettingsAbort,getSettingsAccept,getSettingsList,getSettingsCtg]
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 232](../../../Src/client/ClientData/EscapeMenu.sqf#L232)
+File: [client\ClientData\EscapeMenu.sqf at line 239](../../../Src/client/ClientData/EscapeMenu.sqf#L239)
 ## SETTINGS_SIZE_X
 
 Type: constant
@@ -1026,7 +1026,7 @@ Replaced value:
 ```sqf
 60
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 235](../../../Src/client/ClientData/EscapeMenu.sqf#L235)
+File: [client\ClientData\EscapeMenu.sqf at line 242](../../../Src/client/ClientData/EscapeMenu.sqf#L242)
 ## SETTINGS_SIZE_Y
 
 Type: constant
@@ -1038,7 +1038,7 @@ Replaced value:
 ```sqf
 60
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 237](../../../Src/client/ClientData/EscapeMenu.sqf#L237)
+File: [client\ClientData\EscapeMenu.sqf at line 244](../../../Src/client/ClientData/EscapeMenu.sqf#L244)
 ## SETTINGS_MENU_BACKGROUND_COLOR_T3
 
 Type: constant
@@ -1050,7 +1050,7 @@ Replaced value:
 ```sqf
 ESC_MENU_BACKGROUND_COLOR_T3
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 239](../../../Src/client/ClientData/EscapeMenu.sqf#L239)
+File: [client\ClientData\EscapeMenu.sqf at line 246](../../../Src/client/ClientData/EscapeMenu.sqf#L246)
 ## esc_isMenuOpened
 
 Type: Variable
@@ -1086,7 +1086,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 57](../../../Src/client/ClientData/EscapeMenu.sqf#L57)
+File: [client\ClientData\EscapeMenu.sqf at line 64](../../../Src/client/ClientData/EscapeMenu.sqf#L64)
 ## esc_settings_widgets
 
 Type: Variable
@@ -1098,7 +1098,7 @@ Initial value:
 ```sqf
 [widgetNull,widgetNull,widgetNull,widgetNull]
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 246](../../../Src/client/ClientData/EscapeMenu.sqf#L246)
+File: [client\ClientData\EscapeMenu.sqf at line 253](../../../Src/client/ClientData/EscapeMenu.sqf#L253)
 ## esc_settings_names
 
 Type: Variable
@@ -1110,7 +1110,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 249](../../../Src/client/ClientData/EscapeMenu.sqf#L249)
+File: [client\ClientData\EscapeMenu.sqf at line 256](../../../Src/client/ClientData/EscapeMenu.sqf#L256)
 ## esc_settings_curIndex
 
 Type: Variable
@@ -1122,7 +1122,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 256](../../../Src/client/ClientData/EscapeMenu.sqf#L256)
+File: [client\ClientData\EscapeMenu.sqf at line 263](../../../Src/client/ClientData/EscapeMenu.sqf#L263)
 ## cd_settingsVersion
 
 Type: Variable
@@ -1134,7 +1134,7 @@ Initial value:
 ```sqf
 1.0
 ```
-File: [client\ClientData\EscapeMenu.sqf at line 259](../../../Src/client/ClientData/EscapeMenu.sqf#L259)
+File: [client\ClientData\EscapeMenu.sqf at line 266](../../../Src/client/ClientData/EscapeMenu.sqf#L266)
 ## esc_internal_handleSettings
 
 Type: function
@@ -1151,7 +1151,7 @@ Type: function
 Description: 
 - Param: _isOpenedInLobby (optional, default false)
 
-File: [client\ClientData\EscapeMenu.sqf at line 69](../../../Src/client/ClientData/EscapeMenu.sqf#L69)
+File: [client\ClientData\EscapeMenu.sqf at line 76](../../../Src/client/ClientData/EscapeMenu.sqf#L76)
 ## esc_confirmExit
 
 Type: function
@@ -1159,7 +1159,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\EscapeMenu.sqf at line 129](../../../Src/client/ClientData/EscapeMenu.sqf#L129)
+File: [client\ClientData\EscapeMenu.sqf at line 136](../../../Src/client/ClientData/EscapeMenu.sqf#L136)
 ## esc_closeMenu
 
 Type: function
@@ -1167,7 +1167,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\EscapeMenu.sqf at line 193](../../../Src/client/ClientData/EscapeMenu.sqf#L193)
+File: [client\ClientData\EscapeMenu.sqf at line 200](../../../Src/client/ClientData/EscapeMenu.sqf#L200)
 ## esc_settings_open
 
 Type: function
@@ -1175,7 +1175,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\EscapeMenu.sqf at line 262](../../../Src/client/ClientData/EscapeMenu.sqf#L262)
+File: [client\ClientData\EscapeMenu.sqf at line 269](../../../Src/client/ClientData/EscapeMenu.sqf#L269)
 ## esc_settings_close
 
 Type: function
@@ -1183,7 +1183,7 @@ Type: function
 Description: 
 - Param: _isSaved (optional, default false)
 
-File: [client\ClientData\EscapeMenu.sqf at line 324](../../../Src/client/ClientData/EscapeMenu.sqf#L324)
+File: [client\ClientData\EscapeMenu.sqf at line 331](../../../Src/client/ClientData/EscapeMenu.sqf#L331)
 ## esc_settings_clearSettingList
 
 Type: function
@@ -1191,7 +1191,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\EscapeMenu.sqf at line 351](../../../Src/client/ClientData/EscapeMenu.sqf#L351)
+File: [client\ClientData\EscapeMenu.sqf at line 358](../../../Src/client/ClientData/EscapeMenu.sqf#L358)
 # EscapeMenu_settingsGame.sqf
 
 ## SETTING_INDEX_NAME

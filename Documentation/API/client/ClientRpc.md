@@ -132,7 +132,7 @@ Replaced value:
 ```sqf
 'debug_console' callExtension format['[NET::LOG]:    %1',data]
 ```
-File: [client\ClientRpc\clientrpc_init.sqf at line 24](../../../Src/client/ClientRpc/clientrpc_init.sqf#L24)
+File: [client\ClientRpc\clientrpc_init.sqf at line 25](../../../Src/client/ClientRpc/clientrpc_init.sqf#L25)
 ## rpc_log(event,args)
 
 Type: constant
@@ -147,7 +147,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\ClientRpc\clientrpc_init.sqf at line 26](../../../Src/client/ClientRpc/clientrpc_init.sqf#L26)
+File: [client\ClientRpc\clientrpc_init.sqf at line 27](../../../Src/client/ClientRpc/clientrpc_init.sqf#L27)
 ## client_addEvent
 
 Type: function
@@ -156,7 +156,7 @@ Description:
 - Param: _eventName
 - Param: _eventCode
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 31](../../../Src/client/ClientRpc/clientrpc_init.sqf#L31)
+File: [client\ClientRpc\clientrpc_init.sqf at line 32](../../../Src/client/ClientRpc/clientrpc_init.sqf#L32)
 ## client_removeEvent
 
 Type: function
@@ -165,7 +165,7 @@ Description:
 - Param: _eventName
 - Param: _eventId
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 38](../../../Src/client/ClientRpc/clientrpc_init.sqf#L38)
+File: [client\ClientRpc\clientrpc_init.sqf at line 39](../../../Src/client/ClientRpc/clientrpc_init.sqf#L39)
 ## rpc_removeEventGlobal
 
 Type: function
@@ -174,7 +174,7 @@ Description:
 - Param: _eventName
 - Param: _eventId
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 45](../../../Src/client/ClientRpc/clientrpc_init.sqf#L45)
+File: [client\ClientRpc\clientrpc_init.sqf at line 46](../../../Src/client/ClientRpc/clientrpc_init.sqf#L46)
 ## client_callEvent
 
 Type: function
@@ -183,7 +183,7 @@ Description:
 - Param: _eventName
 - Param: _args
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 52](../../../Src/client/ClientRpc/clientrpc_init.sqf#L52)
+File: [client\ClientRpc\clientrpc_init.sqf at line 53](../../../Src/client/ClientRpc/clientrpc_init.sqf#L53)
 ## client_sendToServer
 
 Type: function
@@ -192,4 +192,4 @@ Description:
 - Param: _eventName
 - Param: _eventargs
 
-File: [client\ClientRpc\clientrpc_init.sqf at line 59](../../../Src/client/ClientRpc/clientrpc_init.sqf#L59)
+File: [client\ClientRpc\clientrpc_init.sqf at line 60](../../../Src/client/ClientRpc/clientrpc_init.sqf#L60)

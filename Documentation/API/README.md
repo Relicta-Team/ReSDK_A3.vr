@@ -18,12 +18,12 @@ Count modules: 32
  - [Inventory](client//Inventory.md) - 7 files
  - [LightEngine](client//LightEngine.md) - 71 files
  - [Lobby](client//Lobby.md) - 8 files
- - [LocalEffects](client//LocalEffects.md) - 3 files
- - [NetDisplays](client//NetDisplays.md) - 16 files
- - [NOEngineClient](client//NOEngineClient.md) - 16 files
+ - [LocalEffects](client//LocalEffects.md) - 2 files
+ - [NetDisplays](client//NetDisplays.md) - 15 files
+ - [NOEngineClient](client//NOEngineClient.md) - 15 files
  - [OneSync](client//OneSync.md) - 5 files
- - [ProxyItems](client//ProxyItems.md) - 8 files
- - [Rendering](client//Rendering.md) - 13 files
+ - [ProxyItems](client//ProxyItems.md) - 7 files
+ - [Rendering](client//Rendering.md) - 12 files
  - [SoundSystem](client//SoundSystem.md) - 6 files
  - [StaminaControl](client//StaminaControl.md) - 4 files
  - [StrafeLock](client//StrafeLock.md) - 1 files
