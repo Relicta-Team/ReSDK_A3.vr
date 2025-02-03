@@ -7,13 +7,8 @@
 
 namespace(VoiceSystem.Internal,vs_)
 
-TFAR_fnc_calcTerrainInterception = {
-	/*
-	 	Name: TFAR_fnc_calcTerrainInterception
-
-	 	Author(s):
-			NKey
-
+/*
+	! Source info !
 	 	Description:
 			Calculates the terrain interception between the player and the passed unit.
 
@@ -25,7 +20,6 @@ TFAR_fnc_calcTerrainInterception = {
 
 	 	Example:
 			_interception = soldier2 call TFAR_fnc_calcTerrainInterception;
-	*/
 	private ["_result", "_l", "_r", "_m", "_p1", "_p2", "_middle"];
 
 	_result = 0;
@@ -52,7 +46,10 @@ TFAR_fnc_calcTerrainInterception = {
 		_result = _m;
 	};
 	_result
-};
+
+*/
+decl(float(actor))
+vs_internalCalcTerrainInterception = { params ["_actor"]; 0 };
 
 TFAR_fnc_canSpeak = {
 	/*
