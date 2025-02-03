@@ -51,6 +51,13 @@ esc_internal_handleSettings = {
 	params ["_closerEv","_openerEv"];
 	addOpenerAndActivator(_openerEv); 
 	addCloseEventToSetting(_closerEv);
+	if (_closerEv == ces_video) then {
+		(findDisplay _closerEv) displayAddEventHandler ["Unload",{
+			(findDisplay 49) closeDisplay 0;
+			//fix #599
+			[true] call pp_reload;
+		}];
+	};
 };
 
 decl(any[])
