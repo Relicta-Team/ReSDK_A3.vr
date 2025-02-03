@@ -3,10 +3,15 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
+namespace(Rendering.Occlusion,render_)
+
 //#define RENDER_ZPASS_ENABLE_ADDITIONAL_BBX
 
 //возвращает коллекцию информации объектов. 
 // list<vec3(distancetocam,list<screenproj>,metaObject)>
+decl(any[](vector3;mesh[]))
 render_zpass_getObjBBX = {
 	params ["_cameraPos","_objlist"];
 	private _sortedObjects = [];
@@ -43,6 +48,7 @@ render_zpass_getObjBBX = {
 	_sortedObjects
 };
 
+decl(vector2[](vector3;vector3;vector3))
 render_zpass_getBBXInfoVirtual = {
 	params ["_psCenter","_bmin","_bmax"];
 	private _screenProj = [];
@@ -72,6 +78,7 @@ render_zpass_getBBXInfoVirtual = {
 	_screenProj
 };
 
+decl(NULL|vector2[](vector3;vector3;vector3))
 render_zpass_getBBXInfoVirtual_gbuffCheck = {
 	params ["_psCenter","_bmin","_bmax"];
 	private _screenProj = [];
@@ -113,6 +120,7 @@ render_zpass_getBBXInfoVirtual_gbuffCheck = {
 };
 
 //функция возвращает процентное значение видимости бокса
+decl(bool(vector3;vector3;vector3;int))
 render_gbuffCheck_photonVisPrc = {
 	params ["_psCenter","_bmin","_bmax",["_lbIC",0]];
 	private _wpos = null;
@@ -151,7 +159,10 @@ render_gbuffCheck_photonVisPrc = {
 	_canSee
 };
 
+decl(map<vector3;struct_t.AutoModelPtr>)
 render_zpass_cachePositions = createhashMap;
+
+decl(vector2[](vector3;vector3;vector3))
 render_zpass_getBBXInfoVirtual_DEBUG = {
 	params ["_psCenter","_bmin","_bmax"];
 	traceformat("ps:%1; bmin:%2; bmax:%3",_psCenter arg _bmin arg _bmax)
@@ -192,6 +203,7 @@ render_zpass_getBBXInfoVirtual_DEBUG = {
 };
 
 // Главная функция для сортировки и проверки видимости объектов
+decl(void(vector3;any[];any))
 render_processZPass = {
 	params ["_cameraPos", "_sortedObjects","_pipelineFnc"];
 
@@ -234,6 +246,7 @@ render_processZPass = {
 };
 
 // Функция для проверки перекрытия двух проекций на экране
+decl(bool(vector2;vector2))
 render_zpass_checkOverlapWithZone = {
 	params ["_screenBoxA", "_screenBoxB"];
 	if (_screenBoxA isEqualTo []) exitWith {true};
@@ -254,6 +267,7 @@ render_zpass_checkOverlapWithZone = {
 	!((_maxXA < _minXB) || (_minXA > _maxXB) || (_maxYA < _minYB) || (_minYA > _maxYB));
 };
 
+decl(bool(vector2;vector2))
 render_zpass_checkFullOverlap = {
 	params ["_screenBoxA", "_screenBoxB"];
 	if (_screenBoxB isEqualTo []) exitWith {true};

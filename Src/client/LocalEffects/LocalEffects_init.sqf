@@ -4,8 +4,13 @@
 // ======================================================
 
 #include <..\..\host\engine.hpp>
+#include <..\..\host\struct.hpp>
 #include <..\ClientRpc\clientRpc.hpp>
-#include <LocalEffects.h>
+
+#include "LocalEffects_structs.sqf"
+
+namespace(LocalEffects,locef_)
+
 /*
 	Local effects system
 	night vision
@@ -20,54 +25,85 @@
 
 */
 
+decl(map<string;string)
 locef_allEffectsCfg = createHashMap; //списки конфигураций эффектов
-locef_allActiveEffects = createHashMap; //key:name, value:context data (list)
+decl(map<string;struct_t.LocEffBase>)
+locef_allActiveEffects = createHashMap; //key:name, value:struct_t.LocEffBase
 
-#define sanitizeCfgName(var) var = tolower var
+macro_func(locef_sanitizeCfgName,string(string))
+#define sanitizeCfgName(var) tolower var
+macro_func(locef_effectExists,bool(string))
 #define effectExists(checked) (checked in locef_allActiveEffects)
 
-#define callEffectEvent(name,indx) call (locef_allEffectsCfg get (name) select indx)
+decl(bool)
+locef_isInitialized = false;
 
-//? this method not need. use locef::update()
-// locef_add = {
-// 	params ['thisEventName',"_context"];
-// 	sanitizeCfgName(thisEventName);
-// 	callEffectEvent(thisEventName,EFFECT_EVENT_INDEX_CREATE);
-// };
+decl(void())
+locef_initConfigs = {
+	private _types = ["LocEffBase"] call struct_getAllTypesOf;
+	if (count _types == 0) exitWith {
+		setLastError("LocEff: Not found any LocEffs");
+	};
+	{
+		private _cfgName = [_x,"name"] call struct_reflect_getTypeValue;
+		if (_cfgName != "") then {
+			locef_allEffectsCfg set [sanitizeCfgName(_cfgName),_x];
+		};
+	} foreach _types;
 
+	locef_isInitialized = true;
+};
+
+decl(void(string))
 locef_remove = {
-	private thisEventName = _this;
-	sanitizeCfgName(thisEventName);
+	private _eventName = _this;
+	_eventName = sanitizeCfgName(_eventName);
 	
-	if !effectExists(thisEventName) exitwith {};
-	private thisContext = locef_allActiveEffects get thisEventName;
-	callEffectEvent(thisEventName,EFFECT_EVENT_INDEX_DESTROY);
-	locef_allActiveEffects deleteAt thisEventName;
+	if !effectExists(_eventName) exitwith {};
+	private _evObj = locef_allActiveEffects get _eventName;
+	if !isNullVar(_evObj) then {
+		_evObj callv(destroy);
+		locef_allActiveEffects deleteAt _eventName;
+	};
 }; rpcAdd("lcfrem",locef_remove);
 
+decl(void(string;any))
 locef_update = {
-	params ['thisEventName',["_context",[]]];
-	sanitizeCfgName(thisEventName);
-	private _isExists = effectExists(thisEventName);
-	locef_allActiveEffects set [thisEventName,_context];
-	private thisContext = _context;
-	if _isExists then {
-		callEffectEvent(thisEventName,EFFECT_EVENT_INDEX_UPDATE);
-	} else {
-		callEffectEvent(thisEventName,EFFECT_EVENT_INDEX_CREATE);
+	params ["_eventName",["_context",[]]];
+
+	if (!locef_isInitialized) then {
+		call locef_initConfigs;
 	};
+
+	_eventName = sanitizeCfgName(_eventName);
+	private _isExists = effectExists(_eventName);
+	//! здесь очевидно не должен записываться контекст. может возникнуть повреждение контекста при обновлении эффекта
+	if (_isExists) then {
+		private _obj = locef_allActiveEffects get _eventName;
+		_obj callp(updateContext,_context);
+		_obj callv(update);
+	} else {
+		private _cfg = locef_allEffectsCfg get _eventName;
+		if isNullVar(_cfg) exitWith {
+			errorformat("locef_update() - Undefined key: %1",_eventName);
+		};
+		private _obj = [_cfg] call struct_alloc;
+		locef_allActiveEffects set [_eventName,_obj];
+		_obj callp(updateContext,_context);
+		_obj callv(create);
+	};
+	
 }; rpcAdd("lcfupd",locef_update);
 
+decl(void())
 locef_removeAll = {
 	{
 		_x call locef_remove;
 	} foreach (keys locef_allActiveEffects);
 }; rpcAdd("lcfclr",locef_removeAll);
 
+decl(mesh())
 locef_createTempObject = {
 	private _o = [null,null,true] call vst_createDummyMesh;
 	_o
 };
-
-#include <..\LightEngine\LightEngine.hpp>
-#include <LocalEffects_list.sqf>

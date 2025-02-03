@@ -2,27 +2,40 @@
 // Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
+
+#include <..\..\host\lang.hpp>
+
+namespace(NOEngine.Client.NetAtmos,noe_client_nat_)
+
 #include "NOEngineClient_NetAtmos.hpp"
 #include "..\..\host\struct.hpp"
 
 //#define NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
-
+macro_const(noe_client_nat_update_delay)
 #define NOE_NETATMOS_UPDATE_DELAY 1
 
+decl(bool())
 noe_client_nat_isEnabled = {noe_client_nat_handleUpdate != -1};
+decl(int)
 noe_client_nat_handleUpdate = -1;
 /*
 	key-AreaId
 	value-AtmosAreaClient
 */
+decl(map<string;struct_t.AtmosAreaClient>)
 noe_client_nat_areas = createHashMap;
+decl(NULL|vector3)
 noe_client_nat_prevArea = null;
 
+decl(bool)
 noe_client_nat_ltCfg_initialized = false;
 //генерируемые ссылки с айди конфигов света для клиентских структур
+decl(int[])
 noe_client_nat_ltCfg_fire = [];
+decl(int[])
 noe_client_nat_ltCfg_smoke = [];
 
+decl(void())
 noe_client_nat_initializeLtCfg = {
 	{
 		noe_client_nat_ltCfg_fire set [_foreachIndex,_x call lightSys_getConfigIdByName];
@@ -36,6 +49,7 @@ noe_client_nat_initializeLtCfg = {
 #ifndef EDITOR
 	#undef NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
 #endif
+decl(bool(bool))
 noe_client_nat_setEnabled = {
 	params ["_mode"];
 	if equals(_mode,call noe_client_nat_isEnabled) exitWith {false};
@@ -82,6 +96,7 @@ noe_client_nat_setEnabled = {
 };
 
 //основной цикл обработки областей
+decl(void())
 noe_client_nat_onUpdate = {
 	_mob = player;
 	_arCenter = (getposatl _mob) call atmos_getAreaIdByPos;
@@ -123,6 +138,7 @@ noe_client_nat_onUpdate = {
 	} foreach _toLoad;
 };
 //получение области. если область не создана - генерирует новую
+decl(struct_t.AtmosAreaClient(vector3))
 noe_client_nat_getArea = {
 	params ["_areaId"];
 	private _key = str _areaId;
@@ -132,6 +148,7 @@ noe_client_nat_getArea = {
 	noe_client_nat_areas get _key
 };
 
+decl(NULL|struct_t.AtmosAreaClient(vector3))
 noe_client_nat_getAreaUnsafe = {
 	params ["_areaId"];
 	private _key = str _areaId;
@@ -139,6 +156,7 @@ noe_client_nat_getAreaUnsafe = {
 };
 
 //запрос зоны на загрузку
+decl(void(struct_t.AtmosAreaClient))
 noe_client_nat_requestLoad = {
 	params ["_areaObj"];
 	_areaObj setv(state,NAT_LOADING_STATE_AWAIT_RESPONE);
@@ -150,6 +168,7 @@ noe_client_nat_requestLoad = {
 	rpcSendToServer(ATMOS_RPC_SERVER_REQUEST_AREA,_packet);
 };
 
+decl(void(struct_t.AtmosAreaClient;float))
 noe_client_nat_requestDelExpired = {
 	params ["_areaObj","_newTick"];
 	_areaObj setv(lastDel,_newTick);
@@ -163,6 +182,7 @@ noe_client_nat_requestDelExpired = {
 };
 
 //ответ от сервера
+decl(void(...any[]))
 noe_client_nat_onLoadArea = {
 	private _packet = _this;
 	assert(count _packet > 3);
@@ -228,6 +248,7 @@ noe_client_nat_onLoadArea = {
 rpcAdd(ATMOS_RPC_CLIENT_UPDATE_CHUNK,noe_client_nat_onLoadArea);
 
 //декодирование пакета в массивы запросов
+decl(bool(any[];any[];any[]))
 noe_client_nat_decodePacket = {
 	params ["_buff","_addList","_remList"];
 	private _buffLen = count _buff;
@@ -251,6 +272,7 @@ noe_client_nat_decodePacket = {
 };
 
 //обновление и загрузка зоны
+decl(void(struct_t.AtmosAreaClient;any[];bool))
 noe_client_nat_loadArea = {
 	params ["_aObj",["_arrChDat",[]],["_isUpdateFlag",false]];//_arrChDat<locid,cmd_t>
 	{
@@ -264,6 +286,7 @@ noe_client_nat_loadArea = {
 };
 
 //процессор оптимизатора при загруке
+decl(void(struct_t.AtmosAreaClient))
 noe_client_nat_procLoad = {
 	#ifdef ENABLE_OPTIMIZATION
 	params ["_aObj"];
@@ -277,6 +300,7 @@ noe_client_nat_procLoad = {
 };
 
 //процессор оптимизатора при выгрузке
+decl(void(struct_t.AtmosAreaClient))
 noe_client_nat_procUnload = {
 	#ifdef ENABLE_OPTIMIZATION
 	params ["_aObj"];
@@ -290,6 +314,7 @@ noe_client_nat_procUnload = {
 };
 
 //добавление эффекторв (оптимизатор)
+decl(void(struct_t.AtmosAreaClient;mesh))
 noe_client_nat_procAddEff = {
 	#ifdef ENABLE_OPTIMIZATION
 	params ["_aObj","_ltob"];
@@ -297,7 +322,9 @@ noe_client_nat_procAddEff = {
 	_aObj callp(optimizeSingle,_ltob);
 	#endif
 };
+
 //удаление эффекторв (оптимизатор)
+decl(void(struct_t.AtmosAreaClient;mesh))
 noe_client_nat_procDelEff = {
 	#ifdef ENABLE_OPTIMIZATION
 	params ["_aObj","_ltob"];
@@ -322,7 +349,9 @@ noe_client_nat_procDelEff = {
 	};
 	#endif
 };
+
 //обновление эффекторв (оптимизатор)
+decl(void(struct_t.AtmosAreaClient;mesh))
 noe_client_nat_procUpdEff = {
 	#ifdef ENABLE_OPTIMIZATION
 	params ["_aObj","_ltob"];
@@ -341,7 +370,7 @@ noe_client_nat_procUpdEff = {
 	#endif
 };
 
-
+decl(void(struct_t.AtmosAreaClient;int[]))
 noe_client_nat_deleteChunks = {
 	params ["_aObj","_arrChIds"];//_arrChIds<locid>
 	{
@@ -350,6 +379,7 @@ noe_client_nat_deleteChunks = {
 };
 
 //выгрузка зоны. обращаю внимание, что проверка состояния загруженности должна производиться снаружи функции
+decl(void(struct_t.AtmosAreaClient))
 noe_client_nat_unloadArea = {
 	params ["_areaObj"];
 	_areaObj setv(state,NAT_LOADING_STATE_NOT_LOADED);
@@ -360,6 +390,7 @@ noe_client_nat_unloadArea = {
 };
 
 //снятие клиента с прослушки зоны
+decl(void(struct_t.AtmosAreaClient))
 noe_client_nat_unsubscribeArea = {
 	params ["_areaObj"];
 	private _aid = _areaObj getv(areaId);
@@ -367,6 +398,7 @@ noe_client_nat_unsubscribeArea = {
 	rpcSendToServer(ATMOS_RPC_CLIENT_UNSUBSCRIBE_LISTEN_CHUNK,_upacket)
 };
 
+decl(int[])
 noe_client_nat_const_nearList = [
 	100,
 	10,
@@ -374,6 +406,7 @@ noe_client_nat_const_nearList = [
 ];
 
 //находит соседний айди [0,0,0] - no offset; [-1,0,0] - x left
+decl(int(int;vector3))
 noe_client_nat_nearId = {
 	params ["_id","_xyz"];
 	private _baseId = _id;
@@ -389,6 +422,7 @@ noe_client_nat_nearId = {
 };
 
 //получает объект AtmosVirtualLight на указанной позиции
+decl(mesh(vector3))
 noe_client_getAtmosVirtualLight = {
 	params ["_pos"];
 	private _aId = _pos call atmos_getAreaIdByPos;
@@ -401,6 +435,7 @@ noe_client_getAtmosVirtualLight = {
 	_data select NAT_CHUNKDAT_OBJECT
 };
 
+decl(NULL|struct_t.AtmosAreaClient(vector3))
 noe_client_getAtmosArea = {
 	params ["_pos"];
 	private _aId = _pos call atmos_getAreaIdByPos;

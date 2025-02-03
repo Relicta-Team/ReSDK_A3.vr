@@ -126,7 +126,7 @@ cd_processConnection = {
 				[false] call noe_client_nat_setEnabled;
 				
 				//перезагрузка постпроцессора
-				call pp_reload;
+				[false] call pp_reload;
 				
 				//отключение тряски камеры
 				call cam_camShake_resetAll;

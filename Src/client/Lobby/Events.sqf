@@ -3,7 +3,11 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
 
+namespace(Lobby,lobby_)
+
+decl(void(string;any))
 lobby_sendToServerSetting = {
 	params ["_settingName","_val"];
 	rpcSendToServer("onClientChangeCharSetting",[_settingName arg _val arg clientOwner]);
@@ -18,7 +22,8 @@ lobby_sendToServerSetting = {
 */
 
 //Событие вызывается когда сервер подтвердил изменение настройки
-_onCharSettingCallback = {
+decl(void(string;any))
+lobby_RcpOnCharSettingCallback = {
 	params ["_setting","_value"];
 
 	_wid = getMainCtg getVariable ["set" + _setting,widgetNull];
@@ -35,25 +40,29 @@ _onCharSettingCallback = {
 	
 	[_wid,_value] call (_wid getVariable "onSetCode");
 	
-}; rpcAdd("onCharSettingCallback",_onCharSettingCallback);
+}; rpcAdd("onCharSettingCallback",lobby_RcpOnCharSettingCallback);
 
 //событие для открытия лобби
-_openLobby = {
+decl(void(...any[]))
+lobby_RpcOpenLobby = {
 	private _settings = _this;
 	_settings call lobbyOpen;
-}; rpcAdd("openLobby",_openLobby);
+}; rpcAdd("openLobby",lobby_RpcOpenLobby);
 
 //событие для закрытия лобби
-_closeLobby = {
+decl(void())
+lobby_RpcCloseLobby = {
 	call lobbyClose;
-}; rpcAdd("closeLobby",_closeLobby);
+}; rpcAdd("closeLobby",lobby_RpcCloseLobby);
 
-_onMusicSetupLobby = {
+decl(void())
+lobby_RpcOnMusicSetupLobby = {
 	[lobby_isMusicEnabled] call lobby_handleMusic;
-}; rpcAdd("onMusicSetupLobby",_onMusicSetupLobby);
+}; rpcAdd("onMusicSetupLobby",lobby_RpcOnMusicSetupLobby);
 
 //загружает клиенту все ролли.
-_loadRoles = {
+decl(void(...any[]))
+lobby_RpcLoadRoles = {
 	private _roles = _this;
 	
 	//TODO если окно с ролями было открыто - перезагружаем их
@@ -75,14 +84,15 @@ _loadRoles = {
 	trace("Roles updated");
 	
 	lobby_roleList = _newRoles;
-}; rpcAdd("loadRoles",_loadRoles);
+}; rpcAdd("loadRoles",lobby_RpcLoadRoles);
 
 /*
 --------------------------------------------------------------------------------
 				Менеджер системных категорий
 --------------------------------------------------------------------------------
 */
-_removeLobbySystemAction = {
+decl(void(string;any))
+lobby_RpcRemoveLobbySystemAction = {
 	params ["_cat","_act"];
 	//checking cat
 	if !(_cat in lobby_sys_buttonActions_sortedList) exitWith {};
@@ -99,9 +109,10 @@ _removeLobbySystemAction = {
 		};
 	};
 	
-};rpcAdd("removeLobbySystemAction",_removeLobbySystemAction);
+};rpcAdd("removeLobbySystemAction",lobby_RpcRemoveLobbySystemAction);
 
-_addLobbySystemAction = {
+decl(void(string;any;string))
+lobby_RpcAddLobbySystemAction = {
 	params ["_cat","_act","_name"];
 	//checking cat
 	if !(_cat in lobby_sys_buttonActions_sortedList) exitWith {};
@@ -116,4 +127,4 @@ _addLobbySystemAction = {
 		[lobby_sys_curActionCategory] call lobby_sysLoadSettings;
 	};
 	
-};rpcAdd("addLobbySystemAction",_addLobbySystemAction);
+};rpcAdd("addLobbySystemAction",lobby_RpcAddLobbySystemAction);

@@ -3,17 +3,26 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
+namespace(OneSync;NULL)
 
 //Частота обновления службы падения
+macro_const(os_falling_updateFrequency)
 #define OS_FALLING_UPDATE_FREQUENCY 0
 
+decl(int)
 os_falling_handle = -1;
 
-os_falling_isEnabled = {os_falling_handle != -1};
+decl(bool())
+os_falling_isEnabled = { os_falling_handle != -1 };
 
+decl(vector3)
 os_falling_startPos = vec3(0,0,0);
+decl(bool)
 os_falling_isOnGround = false;
 
+decl(void(bool))
 os_falling_setEnable = {
 	params ["_mode"];
 	
@@ -31,6 +40,7 @@ os_falling_setEnable = {
 };
 
 //код эквивалентен методу Mob::handle_falling()
+decl(void())
 os_falling_onUpdate = {
 	_mob = player;
 	/*if !isNullReference(attachedTo _mob) then {
@@ -66,12 +76,14 @@ os_falling_onUpdate = {
 	};
 };
 
+decl(void(actor))
 os_falling_beginFalling = {
 	params ["_mob"];
 	os_falling_isOnGround = false;
 	os_falling_startPos = getPosATL _mob;
 };
 
+decl(void(float))
 os_falling_handleFall = {
 	params ["_distFall"];
 	

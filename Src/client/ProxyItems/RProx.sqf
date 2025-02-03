@@ -8,19 +8,24 @@
 #include <..\..\host\oop.hpp>
 #include <..\Inventory\inventory.hpp>
 
+namespace(RProx,rprox_)
+
 /*
 	RProx is improvement proxy system for inventory slots
 */
 
-proxIt_canUseRProx = true; //переопределение
-
+decl(vector3)
 rprox_const_vec = [0,0,0];
+decl(vector3[])
 rprox_const_vdu = [rprox_const_vec,rprox_const_vec];
+decl(string[])
 rprox_const_selections = ["spine3","spine3","head","rightshoulder","spine3","head","lefthand","pelvis","righthand"];
 
+decl(map<string;map<int;any[]>>)
 rprox_map_configs = createHashMap; //ключ - путь до модели (без префикса \), значение - карта селекшонов
 
 //загрузка модели на моба. Возвращает приаттаченный объект, objNull если не удалось создать
+decl(mesh(actor;string;int))
 rprox_loadConfig = {
 	params ["_mob","_modelPathOrClass","_selectionId"];
 	private _model = _modelPathOrClass;
@@ -66,6 +71,7 @@ rprox_loadConfig = {
 	_object	
 };
 
+decl(bool(string))
 rprox_hasConfigForModel = {
 	params ["_modOrCfg"];
 	if !(".p3d" in _modOrCfg) then {
@@ -75,13 +81,18 @@ rprox_hasConfigForModel = {
 	_modOrCfg in rprox_map_configs;
 };
 
+decl(void(actor;mesh;int))
 rprox_updateModel = {
 	params ["_mob","_object","_newselection"];
 	setLastError("Not implemented");
 };
 
 //загрузчик конфигураций
+decl(void())
 rprox_init = {
+	
+	proxIt_canUseRProx = true; //переопределение
+
 	private _mvdata = null;
 	private _rprox_preload = [];
 	#include "RProx_cfg.h"

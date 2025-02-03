@@ -3,6 +3,10 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\..\host\lang.hpp>
+
+namespace(Rendering.PostProcess.Effects,pp_)
+
 //old rlct set: [0.96,0.9,-0.02,[0,0.19,0.05,0.14],[1.64,1.43,0.82,0.79],[-0.17,1.09,1.26,0.56],[0,0,0,0,0,0,4]],[0.2]
 
 //cfg gppe: 
@@ -25,7 +29,12 @@
 
 }] call pp_init;
 
-
+decl(int) pp_pain_lvl = 0;
+decl(float) pp_pain_nextGlobal = 0;
+decl(float) pp_pain_nextTime = 0;
+decl(bool) pp_pain_isLocked = false;
+decl(bool) pp_pain_isProgressed = false;
+decl(float) pp_pain_timing = 2;
 ["pain","ChromAberration",[0,0,true],null,{
 	if (pp_pain_lvl==0)exitWith{
 		if (pp_pain_isLocked || pp_pain_isProgressed) then {
@@ -81,6 +90,7 @@
 }] call pp_init_active;
 
 
+decl(any[]) pp_agony_data = [false,0];
 ["agony","ChromAberration",[0,0,true],null,{
 	if (!(pp_agony_data select 0)) exitWith {};
 	pp_agony_data set [0,false];
@@ -110,6 +120,7 @@
 ["ghost_grain","FilmGrain",[0.1,0.49,1.89,0.81,0.18,true]] call pp_init;
 
 //alco pp_alc_amount
+decl(float) pp_alc_amount = 0;
 ["alcohol_intox","WetDistortion",[0,0.1,0.1,-3.69,3.09,3.09,-2.74,0.05,0.01,0.05,0.01,0,0,0.23,0.1],null,{
 	/*if (pp_alc_amount==0) exitWith {
 		setThisEffect [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];

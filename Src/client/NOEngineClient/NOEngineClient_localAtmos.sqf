@@ -3,28 +3,42 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
+namespace(NOEngine.Client.LocalAtmos,acli_)
+
 /*
 	Atmos Client subsystem
 */
 
 #include "..\..\host\Atmos\Atmos.hpp"
 
-
+macro_func(acli_getFireConfigIds)
 #define ACLI_TYPE_FIRE ["SLIGHT_ATMOS_FIRE_1" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_FIRE_2" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_FIRE_3" call lightSys_getConfigIdByName]
 
+enum(AtmosDataIndex,ACLI_DATA_)
 #define ACLI_DATA_OBJECTS 0
 #define ACLI_DATA_METAINFO 1
 #define ACLI_DATA_CHUNK_ID 2
+enumend
 
+macro_func(acli_createBufferObjects,mesh[]())
 #define __ACLI_NEW_BUFFER_OBJECTS [objNull,objNull]
+macro_const(acli_createBufferMetaInfo)
 #define __ACLI_NEW_BUFFER_METAINFO 0
+macro_func(acli_createChunkData,any[]())
 #define __ACLI_NEW_DATA [__ACLI_NEW_BUFFER_OBJECTS,__ACLI_NEW_BUFFER_METAINFO,_chid]
+inline_macro
 #define ACLI_NEW_CHUNK __ACLI_NEW_DATA
 
+decl(map<string;any>)
 acli_map_chunks = createHashMap;
+decl(bool)
 acli_bool_requestUpdate = false;
+decl(bool)
 acli_bool_enableSystem = false; //turn off is won't work
 
+decl(void(mesh;int))
 acli_handleAddObj = {
 	params ["_obj","_cfgId"];
 	private _chPos = (getPosATL _obj) call acli_chunkPosToId;
@@ -75,7 +89,7 @@ acli_handleAddObj = {
 // acli_bitmask_getByOfs = {
 
 // };
-
+decl(any(vector3))
 acli_getChunk = {
 	params ["_chid"];
 	private _chidS = str _chid;
@@ -87,6 +101,7 @@ acli_getChunk = {
 	acli_getChunk get _chidS
 };
 
+decl(NULL|any(vector3))
 acli_getChunkUnsafe = {
 	params ["_chid"];
 	_chid = str _chid;
@@ -106,7 +121,7 @@ acli_getChunkUnsafe = {
 			On create collecting around chunks and make connections
 		
 */
-
+decl(void())
 acli_lazyCheck = {
 	if (!acli_bool_requestUpdate) exitWith {};
 
@@ -156,8 +171,11 @@ acli_lazyCheck = {
 	acli_bool_requestUpdate = false;
 };
 
+decl(int)
+acli_internal_onUpdate_handle = -1;
 acli_internal_onUpdate_handle = ifcheck(acli_bool_enableSystem,startUpdate(acli_lazyCheck,1),-1);
 
+decl(vector3[](vector3))
 acli_getAroundChIDList = {
 	params ["_chid"];
 	//constarr faster... or not?
@@ -169,9 +187,9 @@ acli_getAroundChIDList = {
 	]
 };
 
-
+decl(vector3(float;float;float))
 acli_chunkPosToId = {
-	params ["_x","_y","_z"];
+	_this params ["_x","_y","_z"];
 
 	[
 		floor(_x / ATMOS_SIZE) + ATMOS_START_INDEX,
@@ -181,8 +199,9 @@ acli_chunkPosToId = {
 };
 
 //returns center atl pos of chunk
+decl(vector3(int;int;int))
 acli_chunkIdToPos = {
-	params ["_iX","_iY","_iZ"];
+	_this params ["_iX","_iY","_iZ"];
 
 	[
 		(_iX - ATMOS_START_INDEX) * ATMOS_SIZE,

@@ -3,26 +3,43 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
+namespace(OneSync;NULL)
+
 #include "..\LightEngine\LightEngine.hpp"
 
+decl(int)
 os_steps_handle = -1;
 
+decl(string)
 os_steps_currentSoundName = "";
+decl(int)
 os_steps_currentSoundCount = 0;
 
+macro_func(os_steps_getDefaultSoundKey,int())
 #define OS_STEPS_DEFAULT_SOUND_KEY ("SLIGHT_DAM_STONE" call lightSys_getConfigIdByName)
 
 //os_steps_soundsType = [];
+decl(map<string;any[]>)
 os_steps_getStepData = { materials_map_stepData };
+
+decl(map<string;int>)
 os_steps_map_objToMaterialPtr = createHashMap; //key - strPtr, value - materials_map_stepData:key
+decl(string)
 os_steps_lastPtr = stringEmpty;
+decl(bool)
 os_steps_canUseRequests = false;
 
+decl(vector3)
 os_steps_lastpos = vec3(0,0,0);
 
+decl(string[])
 os_steps_const_foots = ["rightfoot","leftfoot"];
+decl(string[])
 os_steps_const_foots_inversed = ["leftfoot","rightfoot"];
 
+decl(void(bool))
 os_steps_setEnable = {
 	params ["_mode"];
 	if (_mode) then {
@@ -35,6 +52,7 @@ os_steps_setEnable = {
 	};
 };
 
+decl(void(string))
 os_steps_handleStepData = {
 	params ["_ptr"];
 	if (_ptr==stringEmpty) exitWith {};
@@ -65,6 +83,7 @@ os_steps_handleStepData = {
 	};
 };
 
+decl(string())
 os_steps_getObjectOnFoot = {
 	private _footObjParams = [getPosAtl player,(getPosAtl player) vectorDiff [0,0,1000],player] call interact_getRayCastData;
 	private _footObj = _footObjParams select 0;
@@ -72,6 +91,7 @@ os_steps_getObjectOnFoot = {
 	[_footObj] call noe_client_getObjPtr
 };
 
+decl(void(string;int))
 os_steps_onGetStepData = {
 	params ["_wobjPtr","_sdPtr"];
 
@@ -81,22 +101,27 @@ os_steps_onGetStepData = {
 
 // -------- internal processes -------------
 
+decl(void())
 os_steps_updateLastPos = {
 	os_steps_lastpos = getPosAtl player;
 };
 
+decl(vector3(string))
 os_steps_getFootPos = {
 	player selectionPosition _this select 2
 };
 
+decl(vector3(string))
 os_steps_getFootPosVec = {
 	player selectionPosition _this
 };
 
+decl(void())
 os_steps_resetTriggers = {
 	{{[_x,false] call os_steps_setTrigger} foreach os_steps_const_foots};
 };
 
+decl(void())
 os_steps_resetAllVariables = {
 	{
 		player setVariable [("__fs_isCall_"+_x),null];
@@ -105,22 +130,28 @@ os_steps_resetAllVariables = {
 	os_steps_lastPtr = stringEmpty;
 };
 
+decl(bool(string))
 os_steps_getTrigger = {
 	player getVariable [("__fs_isCall_"+_this),false];
 };
 
+decl(void(string;bool))
 os_steps_setTrigger = {
 	player setVariable [("__fs_isCall_"+(_this select 0)),_this select 1];
 };
 
+decl(float(string))
 os_steps_getLastCall = {
 	player getVariable [("__fs_lastCall_"+_this),0];
 };
 
+decl(void(string;float))
 os_steps_setLastCall = {
 	player setVariable [("__fs_lastCall_"+(_this select 0)),_this select 1];
 };
 
+
+decl(void())
 os_steps_onUpdate = {
 	if !isNullReference(attachedTo player) exitWith {};
 	if (!os_steps_canUseRequests) exitWith {};
@@ -186,6 +217,7 @@ os_steps_onUpdate = {
 	};
 };
 
+decl(void())
 os_steps_doFootStep = {
 	if (!vst_human_stealth_allowStepsounds) exitWith {};
 
@@ -193,6 +225,7 @@ os_steps_doFootStep = {
 	[_soundPath,getPosATL player,rand(1.3,1.35),getRandomPitch,10] call soundGlobal_play;
 };
 
+decl(void(string;int))
 os_steps_onUpdateSoundData = {
 	params ["_pattern","_count"];
 	os_steps_currentSoundName = _pattern;
@@ -201,11 +234,15 @@ os_steps_onUpdateSoundData = {
 
 #ifdef EDITOR
 
+decl(mesh[])
 os_steps_debug_arrows=["Sign_Sphere10cm_F" createVehicle [0,0,0],"Sign_Sphere10cm_F" createVehicle [0,0,0]];
+decl(mesh[])
 os_steps_debug_arrowsGround=["Sign_Sphere10cm_F" createVehicle [0,0,0],"Sign_Sphere10cm_F" createVehicle [0,0,0]];
 
+decl(bool)
 os_steps_enable_debugInfo = false;
 
+decl(void())
 os_steps_debug_renderInfo = {
 	{
 		(os_steps_debug_arrows select _forEachIndex) setposatl (player modelToWorldVisual ((_x call _getFootPosVec) vectorAdd ([0,0.1,0])));
