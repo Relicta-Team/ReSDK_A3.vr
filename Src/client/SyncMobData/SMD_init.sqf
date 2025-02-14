@@ -456,6 +456,7 @@ smd_onAttackOrDamage = {
 	};
 };
 
+//выключение процессирования слотов на персонаже. например выключает рендер слотов для спрятанных
 decl(void(actor;bool))
 smd_setSlotDataProcessor = {
 	params ["_mob","_mode"];
