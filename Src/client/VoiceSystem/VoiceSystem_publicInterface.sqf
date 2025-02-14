@@ -88,6 +88,8 @@ decl(float) vs_lastErrorTimeout = 0;
 
 decl(float) vs_msSpectatorPerStepMax = 0.035;
 
+decl(actor) TFAR_currentUnit = objNull;
+
 decl(void())
 vs_init = {
 	#ifdef VOICE_DISABLE_IN_SINGLEPLAYERMODE

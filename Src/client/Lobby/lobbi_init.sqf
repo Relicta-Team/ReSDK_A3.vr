@@ -40,8 +40,9 @@ lobby_openedCharSetWidList = []; //этот лист для виджетов в 
 decl(widget[])
 lobby_backgroundWidget = [widgetNull];
 
-decl(string)
-lobby_background = "";
+//lang question: how to get value (network issue)
+//decl(string)
+//lobby_background = "";
 
 if (isMultiplayer) then {
 	if isNull(lobby_background) then {

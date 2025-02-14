@@ -34,6 +34,9 @@ struct(VSTStealth) base(VSTBase)
 			hud_stealth = 0;
 			vst_human_stealth_allowStepsounds = true;
 		} else {
+			(self getv(_src)) hideObject false;
+			[self getv(_src),true] call smd_setSlotDataProcessor;
+			
 			self callp(setHideProxyMeshes,false);
 		};
 	}
