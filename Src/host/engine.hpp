@@ -142,30 +142,29 @@
 // fread subsystem
 
 
-
 //__THIS_FILE_REPLACE__
 //__THIS_MODULE_REPLACE__
 #ifdef DISABLE_REGEX_ON_FILE
 	#define loadFile(path) if (server_isLocked) exitWith {error("Compile process aborted - server.isLocked == true")}; logformat("Start loading file %1",path); ["Load file - '%1'",path] call logInfo;  call compile __pragma_preprocess (path)
-
-	#define importClient(path) if (isNil {allClientContents}) then {allClientContents = [];}; if (client_isLocked) exitWith {error("Compile process aborted - client.isLocked == true")}; \
+	
+	#define importClient(path) if (isNil {allClientContents}) then {allClientContents = []; allClientModulePathes = [];}; if (client_isLocked) exitWith {error("Compile process aborted - client.isLocked == true")}; \
 	private _ctx = compile __pragma_prep_cli (path); if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 
-	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = [];}; \
+	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = []; allClientModulePathes = [];}; \
 	private _ctx = compile __pragma_prep_cli ("src\host\CommonComponents\" + path); \
 	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 #else
 	#define loadFile(path) if (server_isLocked) exitWith {error("Compile process aborted - server.isLocked == true")}; logformat("Start loading file %1",path); ["Load file - '%1'",path] call logInfo; call compile __pragma_preprocess (path)
 
-	#define importClient(path) if (isNil {allClientContents}) then {allClientContents = [];}; if (client_isLocked) exitWith {error("Compile process aborted - client.isLocked == true")}; \
+	#define importClient(path) if (isNil {allClientContents}) then {allClientContents = []; allClientModulePathes = [];}; if (client_isLocked) exitWith {error("Compile process aborted - client.isLocked == true")}; \
 	_macro_module = path regexFind ["\w+(?=\.)",0] select 0 select 0 select 0; \
-	private _ctx = compile ((__pragma_prep_cli (path))regexReplace ["__THIS_MODULE_REPLACE__",""""+ _macro_module+""""]); if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
+	private _ctx = compile ((__pragma_prep_cli (path))regexReplace ["__THIS_MODULE_REPLACE__",""""+ _macro_module+""""]); if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;  allClientModulePathes pushBack (path);
 
-	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = [];}; \
+	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = []; allClientModulePathes = [];}; \
 	_macro_file = """shared" +"\" + path + """"; _macro_module = path regexFind ["\w+(?=\.)",0] select 0 select 0 select 0; \
 	__prep = ((__pragma_prep_cli ("src\host\CommonComponents\" + path)) regexReplace ["__THIS_FILE_REPLACE__",(_macro_file regexReplace ["\\","\\\\"])]) regexReplace ["__THIS_MODULE_REPLACE__",""""+ _macro_module+""""]; \
 	private _ctx = compile __prep; \
-	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
+	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx; allClientModulePathes pushBack (path);
 #endif
 
 //check if file exists
