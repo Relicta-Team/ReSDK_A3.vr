@@ -12,6 +12,10 @@
 #include "Structs\Stealth.sqf"
 #include "Structs\StrongArmor.sqf"
 
+#include <..\..\host\lang.hpp>
+
+namespace(VisualState.Configs,vst_)
+
 //todo
 //barreled armor
 //"a3\props_f_enoch\military\garbage\garbagebarrel_02_f.p3d"
@@ -23,32 +27,32 @@
 
 
 struct(VSTBase)
-    def(name) "" //must be defined
+    decl(string) def(name) "" //must be defined
 
-    def(str)
+    decl(string()) def(str)
     {
         format["VSTConfig<%1>",self getv(name)]
     }
 
-    def(_src) objNull
+    decl(actor) def(_src) objNull
 
-    def(getLocalPlayer)
+    decl(actor()) def(getLocalPlayer)
     {
         __LOCAL_PLAYER__ //external reference
     }
 
-    def(init)
+    decl(void(actor)) def(init)
     {
         params ["_src"];
         self setv(_src,_src);
     }
 
-    def(onCreated)
+    decl(void(any[])) def(onCreated)
     {
         params ["_ctx"];
     }
 
-    def(onDestroy)
+    decl(void(any[])) def(onDestroy)
     {
         params ["_ctx"];
     }

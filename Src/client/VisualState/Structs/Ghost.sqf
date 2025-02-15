@@ -3,14 +3,19 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\..\host\lang.hpp>
+
+namespace(VisualState.Configs,vst_)
+
+decl(bool)
+vst_ghost_lockSyncStateGlobal = false;
+
 struct(VSTGhost) base(VSTBase)
-	def(name) "VST_GHOST_EFFECT";
+	decl(override) def(name) "VST_GHOST_EFFECT";
 
-	def(_dummyMesh) objNull;
+	decl(mesh) def(_dummyMesh) objNull;
 
-	def(lock_ghostSyncState) false;
-
-	def(onCreated)
+	decl(override) def(onCreated)
 	{
 		params ["_ctx"];
 		if equals(self callv(getLocalPlayer),self getv(_src)) then {
@@ -34,26 +39,21 @@ struct(VSTGhost) base(VSTBase)
 		};
 
 		//пост синхронизация видимости гостов
-		if !(self getv(lock_ghostSyncState)) then {
+		if !(vst_ghost_lockSyncStateGlobal) then {
+			vst_ghost_lockSyncStateGlobal = true;
 			private _otherUsers = smd_allInGameMobs - [self getv(_src)];
-			private _vstGhostObj = null;
 			{
-				_vstGhostObj = [_x,self getv(name)] call vst_getSourceHandler;
-				if !isNullVar(_vstGhostObj) then {
-					_vstGhostObj setv(lock_ghostSyncState,true);  
-					[_x,"onVisualStates",true] call smd_syncVar;
-					_vstGhostObj setv(lock_ghostSyncState,false);
-				} else {
-					[_x,"onVisualStates",true] call smd_syncVar;
-				};
-			} foreach _otherUsers; 
+				[_x,"onVisualStates",true] call smd_syncVar;
+			} foreach _otherUsers;
+
+			vst_ghost_lockSyncStateGlobal = false;
 		};
 
 		//пост синхронизация частей тела
 		[self getv(_src),"onChangeBodyParts",true] call smd_syncVar;
 	}
 
-	def(onDestroy)
+	decl(override) def(onDestroy)
 	{
 		params ["_ctx"];
 		if !isNullReference(self getv(_dummyMesh)) then {

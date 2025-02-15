@@ -7,8 +7,13 @@
 #include "..\..\host\keyboard.hpp"
 #include "widgets.hpp"
 
+#include <..\..\host\lang.hpp>
+
+namespace(WidgetSystem.Templates,widget_)
+
 
 // Создать виджет типа закрывающая дисплей кнопка
+decl(widget(display;string;vector4;widget))
 createWidget_closeButton = {
 	params ["_display",["_text","Закрыть"],"_pos","_parent"];
 
@@ -28,9 +33,11 @@ createWidget_closeButton = {
 };
 
 // Размер верхней части окна (драг-зоны)
+macro_const(widget_height_window_dragger)
 #define HEIGHT_WINDOW_DRAGGER 3
 
 // Создать виджет типа окно
+decl(widget(display;string;vector4;widget))
 createWidget_window = {
 	params ["_display","_type","_pos","_parent"];
 
@@ -46,9 +53,11 @@ createWidget_window = {
 	private _title = [_display,TEXT,[0,0,100 - 10,100],_titleGroup] call createWidget;
 	_title setvariable ["connected",_ctg];
 
+	_titleGroup
 };
 
 //указывать ширину не нужно...
+decl(widget(display;string;vector4;widget))
 createWidget_square = {
 	params ["_display","_type","_pos","_parent"];
 
@@ -66,50 +75,50 @@ createWidget_square = {
 // theme creator
 
 // NOT USED
-createCtWidget = {
-	params ["_name","_params"];
-	_params call (missionNamespace getVariable ("createWidget_"+_name))
-};
+// createCtWidget = {
+// 	params ["_name","_params"];
+// 	_params call (missionNamespace getVariable ("createWidget_"+_name))
+// };
 
 // ========================== api ==========================
 
-createWidget_backImpl = {
-	params ["_d","_pos","_ctg"];
-	[_d,BACKGROUND,_pos,_ctg] call createWidget;
-};
+// createWidget_backImpl = {
+// 	params ["_d","_pos","_ctg"];
+// 	[_d,BACKGROUND,_pos,_ctg] call createWidget;
+// };
 
-// Бэкграунд
-createWidget_back = {
-	params ["_d","_pos","_parent"];
-	private _w = [_d,_pos,_ctg] call createWidget_backImpl;
-	_w setBackgroundColor (["back"] call ct_getValue);
-	_w
-};
+// // Бэкграунд
+// createWidget_back = {
+// 	params ["_d","_pos","_parent"];
+// 	private _w = [_d,_pos,_ctg] call createWidget_backImpl;
+// 	_w setBackgroundColor (["back"] call ct_getValue);
+// 	_w
+// };
 
-// Бэкграунд
-createWidget_back2 = {
-	params ["_d","_pos","_parent"];
-	private _w = [_d,_pos,_ctg] call createWidget_backImpl;
-	_w setBackgroundColor (["back2"] call ct_getValue);
-	_w
-};
+// // Бэкграунд
+// createWidget_back2 = {
+// 	params ["_d","_pos","_parent"];
+// 	private _w = [_d,_pos,_ctg] call createWidget_backImpl;
+// 	_w setBackgroundColor (["back2"] call ct_getValue);
+// 	_w
+// };
 
-// Заголовок
-createWidget_title = {
-	params ["_d","_pos","_parent",["_text",""]];
-	private _tit = [_d,TEXT,_pos,_parent] call createWidget;
-	_tit setBackgroundColor (["title"] call ct_getValue);
-	[_tit,format["<t color='#%1'>%2</t>",["title_text"] call ct_getValue],_text] call widgetSetText;
-	_tit
-};
+// // Заголовок
+// createWidget_title = {
+// 	params ["_d","_pos","_parent",["_text",""]];
+// 	private _tit = [_d,TEXT,_pos,_parent] call createWidget;
+// 	_tit setBackgroundColor (["title"] call ct_getValue);
+// 	[_tit,format["<t color='#%1'>%2</t>",["title_text"] call ct_getValue],_text] call widgetSetText;
+// 	_tit
+// };
 
-// Кнопка
-createWidget_button = {
-	params ["_d","_pos","_ctg","_txt"];
-	private _bt = [_d,BUTTON,_pos,_ctg] call createWidget;
-	_bt ctrlSetTextColor (["button_text"] call ct_getValue);
-	_bt setBackgroundColor (["button"] call ct_getValue);
-	_bt ctrlAddEventHandler ["MouseEnter",{(_this select 0) setBackgroundColor (["button_active"] call ct_getValue)}];
-	_bt ctrlAddEventHandler ["MouseExit",{(_this select 0) setBackgroundColor (["button"] call ct_getValue)}];
-	_bt
-};
+// // Кнопка
+// createWidget_button = {
+// 	params ["_d","_pos","_ctg","_txt"];
+// 	private _bt = [_d,BUTTON,_pos,_ctg] call createWidget;
+// 	_bt ctrlSetTextColor (["button_text"] call ct_getValue);
+// 	_bt setBackgroundColor (["button"] call ct_getValue);
+// 	_bt ctrlAddEventHandler ["MouseEnter",{(_this select 0) setBackgroundColor (["button_active"] call ct_getValue)}];
+// 	_bt ctrlAddEventHandler ["MouseExit",{(_this select 0) setBackgroundColor (["button"] call ct_getValue)}];
+// 	_bt
+// };

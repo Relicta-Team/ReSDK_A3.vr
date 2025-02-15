@@ -3,14 +3,17 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\..\host\lang.hpp>
+
+namespace(VisualState.Configs,vst_)
 
 struct(VSTMetalArmor) base(VSTBase)
 
-	def(name) "VST_CLOTH_METALARMOR";
+	decl(override) def(name) "VST_CLOTH_METALARMOR";
 
-	def(_meshList) [];
+	decl(mesh[]) def(_meshList) [];
 
-	def(onCreated)
+	decl(override) def(onCreated)
 	{
 		params ["_ctx"];
 		
@@ -31,7 +34,7 @@ struct(VSTMetalArmor) base(VSTBase)
 		self setv(_meshList,_list);
 	}
 
-	def(onDestroy)
+	decl(override) def(onDestroy)
 	{
 		params ["_ctx"];
 		{deleteVehicle _x} foreach (self getv(_meshList));

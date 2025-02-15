@@ -7,12 +7,17 @@
 #include <..\..\host\struct.hpp>
 #include "VisualState_structBase.sqf"
 
+namespace(VisualState,vst_)
 
+decl(map<string;string>)
 vst_map_cfgs = createHashMap; //key:name, value:struct type
+decl(bool)
 vst_dictInitialized = false;
 
+decl(string)
 vst_const_internalVarName = "__vst_cfgs";
 
+decl(void())
 vst_initializeDict = {
 	private _vstList = ["VSTBase"] call struct_getAllTypesOf;
 	if (count _vstList == 0) exitWith {
@@ -29,6 +34,7 @@ vst_initializeDict = {
 };
 
 //check if config exists
+decl(bool(actor;string))
 vst_containsConfig = {
 	params ["_src","_type"];
 	if (!vst_dictInitialized) then {
@@ -40,6 +46,7 @@ vst_containsConfig = {
 };
 
 //get vst handler
+decl(struct_t.VSTBase|NULL(actor;string))
 vst_getSourceHandler = {
 	params ["_src","_type"];
 
@@ -49,6 +56,7 @@ vst_getSourceHandler = {
 };
 
 //initialize vst config
+decl(bool(string;actor;any[]))
 vst_create = {
 	params ["_type","_src",["_ctx",[]]];
 	//traceformat("VST::create(%1) on %2 with %3",_type arg _src arg _ctx);
@@ -83,6 +91,7 @@ vst_create = {
 };
 
 //remove vst
+decl(bool(actor;string;any[]))
 vst_remove = {
 	params ["_type","_src","_ctx"];
 
@@ -99,6 +108,7 @@ vst_remove = {
 	_finalized
 };
 
+decl(mesh(string;bool;bool))
 vst_createDummyMesh = {
 	params [["_model","Sign_Sphere10cm_F"],["_doHide",true],["_createAsVehicle",false]];
 	private _so = if (_createAsVehicle) then {

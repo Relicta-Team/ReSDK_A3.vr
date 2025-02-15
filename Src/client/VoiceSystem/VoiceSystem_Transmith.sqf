@@ -6,14 +6,23 @@
 
 #include <..\Inventory\inventory.hpp>
 
+#include <..\..\host\lang.hpp>
+
+namespace(VoiceSystem.Transmith,vs_)
+
+decl(bool)
 vs_tangent_pressed = false;
 
+decl(float)
 vs_transmithDistance = 1000;
 
+decl(int)
 vs_curTransmithType = 0; //режим передачи
+decl(string[])
 vs_transmithTypes = ["digital","digital_lr","airborne"];
 
 //запускает потоковую передачу
+decl(void(any;float;string))
 vs_startTransmith = {
 	params ["_freqAndCode",["_dist",vs_transmithDistance],["_curT","digital"]];
 	
@@ -22,7 +31,7 @@ vs_startTransmith = {
 	//["OnBeforeTangent", TFAR_currentUnit, [TFAR_currentUnit, _freqAndCode, 0, false, true]] call TFAR_fnc_fireEventHandlers;
 	private _request = format[
 		#ifdef VOICE_DEBUG
-		"TANGENT"+TF_horizontal_tab+"PRESSED"+TF_horizontal_tab+"%1%2"+TF_horizontal_tab+"%3"+TF_horizontal_tab+"%4",		
+		"TANGENT"+vs_horizontal_tab+"PRESSED"+vs_horizontal_tab+"%1%2"+vs_horizontal_tab+"%3"+vs_horizontal_tab+"%4",		
 		#else
 		"TANGENT	PRESSED	%1%2	%3	%4",
 		#endif
@@ -40,13 +49,14 @@ vs_startTransmith = {
 };
 
 //останавливает потоковую передачу
+decl(void(any;float;string))
 vs_stopTransmith = {
 	params ["_freqAndCode",["_dist",vs_transmithDistance],["_curT","digital"]];
 	
 	//["OnBeforeTangent", TFAR_currentUnit, [TFAR_currentUnit, _freqAndCode, 0, false, false]] call TFAR_fnc_fireEventHandlers;
 	private _request = format[
 		#ifdef VOICE_DEBUG
-		"TANGENT"+TF_horizontal_tab+"RELEASED"+TF_horizontal_tab+"%1%2"+TF_horizontal_tab+"%3"+TF_horizontal_tab+"%4",		
+		"TANGENT"+vs_horizontal_tab+"RELEASED"+vs_horizontal_tab+"%1%2"+vs_horizontal_tab+"%3"+vs_horizontal_tab+"%4",		
 		#else
 		"TANGENT	RELEASED	%1%2	%3	%4",
 		#endif
@@ -61,11 +71,15 @@ vs_stopTransmith = {
 	//["OnTangent", TFAR_currentUnit, [TFAR_currentUnit, _freqAndCode, 0, false, false]] call TFAR_fnc_fireEventHandlers;
 };
 
+macro_func(vs_getTransmithDefaultSettings,any[]())
 #define VS_TRANSMITHINFO_DEFAULT [objNUll,["","",""]]
+decl(bool)
 vs_hasTransmithProcess = false;
+decl(any[])
 vs_lastTransmithInfo = VS_TRANSMITHINFO_DEFAULT; //object and radiocode
 
 // Логика остановки передачи в радио
+decl(void())
 vs_doStopTransmith = {
 	
 	vs_hasTransmithProcess = false;
@@ -76,14 +90,13 @@ vs_doStopTransmith = {
 };
 
 //запускаем передачу
+decl(void(bool))
 vs_handleTransmith = {
 	params ["_mode"];
 	
 	if equals(vs_hasTransmithProcess,_mode) exitWith {
 		//warningformat("vs::handleTransmith() - already in mode %1",vs_hasTransmithProcess);
 	};
-	
-	
 	
 	if (_mode) then {
 		
@@ -104,29 +117,18 @@ vs_handleTransmith = {
 		
 	} else {
 		call vs_doStopTransmith;
-		
-		/*private _obj = call interact_cursorObject;
-		if (_obj call vs_isWorldRadioObject && getRadioVar(_obj,canSpeak)) then {
-			[getRadioVar(_obj,freq),getRadioVar(_obj,ds),getRadioVar(_obj,tp)] call vs_stopTransmith;
-		};
-		// cd_activeHand
-		
-		{
-			_obj = [player,_x] call smd_getObjectInSlot;
-			if (not_equals(_obj,objNUll) && {_obj call vs_isWorldRadioObject}) then {
-				[getRadioVar(_obj,freq),getRadioVar(_obj,ds),getRadioVar(_obj,tp)] call vs_stopTransmith;
-			};
-		} foreach [INV_HAND_L,INV_HAND_R,INV_FACE,INV_HEAD,INV_BELT,INV_BACK];*/
 		//or maybee RELEASE_ALL_TANGENTS ??
 	};
 };
 
+decl(bool(mesh))
 vs_canUseIntercomObject = {
 	(objnull call interact_getIntersectData) params ["_obj","_pos"];
 	equals(_this,_obj) && _pos distance (ASLToAGL eyepos player) <= vs_intercom_maxdist && equals(_this,call interact_cursorObject)
 };
 
 //Обработчик цикла
+decl(void())
 vs_handleProcessedTransmith = {
 	if (vs_hasTransmithProcess) then {
 		vs_lastTransmithInfo params ["_obj","_tData"];
@@ -139,10 +141,12 @@ vs_handleProcessedTransmith = {
 	};
 };
 
+decl(string[])
 vs_processingRadiosList = []; //какие радио слышит клиент из ушей
 
 //добавить радио которое внутри игрока
 //В параметрах надо указать частоту и громкость передачи
+decl(void(mesh;any[]))
 vs_addProcessingRadio = {
 	params ["_obj","_rParams"];
 	
@@ -168,6 +172,7 @@ vs_addProcessingRadio = {
 };	
 
 //Убирает процессироуемое радио
+decl(void(mesh))
 vs_removeProcessingRadio = {
 	params ["_obj"];
 	
@@ -186,34 +191,15 @@ vs_removeProcessingRadio = {
 	};
 };
 
+decl(void())
 vs_clearProcessingRadio = {vs_processingRadiosList = []};
 
 //Получает все радио игрока
+decl(string[]())
 vs_onProcessingRadios = {
 	if (count vs_processingRadiosList > 0) then {
 		vs_processingRadiosList
 	} else {
 		["No_SW_Radio"]
 	};
-	
-	/*if (((call TFAR_fnc_haveSWRadio) or (TFAR_currentUnit != player)) and {[TFAR_currentUnit, _isolated_and_inside, _can_speak, _depth] call TFAR_fnc_canUseSWRadio}) then {
-		_freq = [];
-		_radios = TFAR_currentUnit call TFAR_fnc_radiosList;
-		if (TFAR_currentUnit != player) then {
-			_radios = _radios + (player call TFAR_fnc_radiosList);
-		};
-		{
-			if (!(_x call TFAR_fnc_getSwSpeakers) or {(TFAR_currentUnit != player) and (_x in (player call TFAR_fnc_radiosList))}) then {
-				if ((_x call TFAR_fnc_getAdditionalSwChannel) == (_x call TFAR_fnc_getSwChannel)) then {
-					_freq pushBack format ["%1%2|%3|%4", _x call TFAR_fnc_getSwFrequency, _x call TFAR_fnc_getSwRadioCode, _x call TFAR_fnc_getSwVolume, _x call TFAR_fnc_getAdditionalSwStereo];
-				} else {
-					_freq pushBack format ["%1%2|%3|%4", _x call TFAR_fnc_getSwFrequency, _x call TFAR_fnc_getSwRadioCode, _x call TFAR_fnc_getSwVolume, _x call TFAR_fnc_getSwStereo];
-					if ((_x call TFAR_fnc_getAdditionalSwChannel) > -1) then {
-						_freq pushBack format ["%1%2|%3|%4", [_x, (_x call TFAR_fnc_getAdditionalSwChannel) + 1] call TFAR_fnc_GetChannelFrequency, _x call TFAR_fnc_getSwRadioCode, _x call TFAR_fnc_getSwVolume, _x call TFAR_fnc_getAdditionalSwStereo];
-					};
-				};
-			};
-			true;
-		} count (_radios);
-	};*/
 };

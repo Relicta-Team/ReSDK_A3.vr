@@ -3,15 +3,18 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\..\host\lang.hpp>
+
+namespace(VisualState.Configs,vst_)
 
 struct(VSTEaterNightVision) base(VSTBase)
 
-	def(name) "VST_EATER_NIGHTVISION";
+	decl(override) def(name) "VST_EATER_NIGHTVISION";
 
-	def(_headMesh) objNull;
-	def(_dummyMesh) objNull;
+	decl(mesh) def(_headMesh) objNull;
+	decl(mesh) def(_dummyMesh) objNull;
 
-	def(onCreated)
+	decl(override) def(onCreated)
 	{
 		params ["_ctx"];
 		if equals(self callv(getLocalPlayer),self getv(_src)) then {
@@ -34,7 +37,7 @@ struct(VSTEaterNightVision) base(VSTBase)
 		};
 	}
 
-	def(onDestroy)
+	decl(override) def(onDestroy)
 	{
 		params ["_ctx"];
 		if !isNullReference(self getv(_dummyMesh)) then {

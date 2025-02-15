@@ -105,6 +105,7 @@ progLog("START LOADING CONTENT...");
 loadFile("src\host\SceneReloader\SceneReloader.sqf"); //works only inside debug mode
 
 allClientContents = [];
+allClientModulePathes = [];
 
 //removing all cba events in debug mode
 if (isnil {mem_cba_events}) then {

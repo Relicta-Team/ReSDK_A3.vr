@@ -7,26 +7,90 @@
 #include <..\ClientRpc\clientRpc.hpp>
 #include <..\..\host\NOEngine\NOEngine.hpp>
 
+namespace(VoiceSystem,vs_)
 
 //использует клиентский ник как имя для тимспика
 //#define VOICE_IS_USE_NICKNAME_AS_TS
 
 // при включенном режиме не будет запускать войс в СП-моде
+macro_def(vs_voice_disable_in_singleplayer)
 #define VOICE_DISABLE_IN_SINGLEPLAYERMODE
 
 // режим отладки войс системы (для возможности изменения переменных кода)
+macro_def(vs_voice_debugMode)
 #define VOICE_DEBUG
 
 //таймаут до кика
+macro_const(vs_errorConnectionTimeout)
 #define VS_ERROR_CONNECTION_TIMEOUT 30
+macro_const(vs_errorNotInGameChannelTimeout)
 #define VS_ERROR_NOTINGAMECHANNEL_TIMEOUT 15
 
+macro_const(vs_intercomMaxDistanceTransmith)
 #define VS_INTERCOM_MAXDISTANCE_TRANSMITH 1.25
 
+decl(bool)
 vs_canProcess = true; //при выключенном режиме процессинг радио не будет происходить
 
+decl(float)
 vs_intercom_maxdist = VS_INTERCOM_MAXDISTANCE_TRANSMITH;
 
+decl(string)
+vs_nickName = "No_player";
+
+decl(bool)
+vs_isEnabledText = false;
+
+decl(float)
+vs_underwaterRadioDepth = -3;
+
+decl(string) vs_new_line = toString [0xA];
+decl(string) vs_vertical_tab = toString [0xB];
+decl(string) vs_horizontal_tab = toString [9]; //для запросов
+
+decl(float)
+vs_dd_volume_level = 7;
+
+decl(float) vs_speakerDistance = chunkSize_structure ; //struct distance
+
+decl(float) vs_speak_volume_meters = 20;
+decl(float) vs_max_voice_volume = 60;
+
+decl(float) vs_lastNearFrameTick = 0;
+decl(float) vs_lastFarFrameTick = 0;
+
+decl(string[]) vs_speakerRadios = [];
+decl(actor[]) vs_nearPlayers = [];
+decl(actor[]) vs_farPlayers = [];
+
+decl(int) vs_nearPlayersIndex = 0;
+decl(bool) vs_nearPlayersProcessed = true;
+
+decl(int) vs_farPlayersIndex = 0;
+decl(bool) vs_farPlayersProcessed = true;
+
+decl(float) vs_msNearPerStepMax = 0.025;
+decl(float) vs_msNearPerStepMin = 0.1;
+decl(float) vs_msNearPerStep = vs_msNearPerStepMax;
+decl(float) vs_nearUpdateTime = 0.3;
+
+decl(float) vs_msFarPerStepMax = 0.025;
+decl(float) vs_msFarPerStepMin = 1.00;
+decl(float) vs_msFarPerStep = vs_msFarPerStepMax;
+decl(float) vs_farUpdateTime = 3.5;
+
+decl(float) vs_lastFrequencyInfoTick = 0;
+decl(float) vs_lastNearPlayersUpdate = 0;
+
+decl(bool) vs_lastError = false;
+decl(string) vs_lastErrorText = "";
+decl(float) vs_lastErrorTimeout = 0;
+
+decl(float) vs_msSpectatorPerStepMax = 0.035;
+
+decl(actor) TFAR_currentUnit = objNull;
+
+decl(void())
 vs_init = {
 	#ifdef VOICE_DISABLE_IN_SINGLEPLAYERMODE
 	if (!isMultiplayer) exitWith {};
@@ -44,111 +108,15 @@ vs_init = {
 			addEventHandler(OnSpeak,chatos_event_onSpeak);
 		};
 
-	vs_nickName = "No_player";
-
 	//serverside
 	if isNull(tf_radio_channel_name)  then {
+		//serverside shared variables
 		tf_radio_channel_name = "Channel";
 		tf_radio_channel_password = "Password";
 	};
 
-
-	TFAR_currentUnit = call TFAR_fnc_currentUnit;
-
 	vs_isEnabledText = !isNull(relicta_global_textChatEnabled);
-
-	//группа непонятных переменных
-	TF_radio_request_mutex = false;
-
-		TF_use_saved_sw_setting = false;
-		TF_saved_active_sw_settings = nil;
-
-		TF_use_saved_lr_setting = false;
-		TF_saved_active_lr_settings = nil;
-
-		TF_curator_backpack_1 = nil;
-		TF_curator_backpack_2 = nil;
-		TF_curator_backpack_3 = nil;
-
-		TF_MAX_SW_VOLUME = 10;
-		TF_MAX_LR_VOLUME = 10;
-		TF_MAX_DD_VOLUME = 10;
-
-		TF_UNDERWATER_RADIO_DEPTH = -3;
-
-		TF_new_line = toString [0xA];
-		TF_vertical_tab = toString [0xB];
-		TF_horizontal_tab = toString [9]; //для запросов
-
-		TF_dd_volume_level = 7;
-
-		TF_last_lr_tangent_press = 0.0;
-		TF_last_dd_tangent_press = 0.0;
-
-		TF_HintFnc = nil;
-
-	//и ещё переменные после инициализации клиента
-	TF_tangent_sw_pressed = false; //флаги нажаты ли радейки
-		TF_tangent_lr_pressed = false;
-		TF_tangent_dd_pressed = false;
-
-		TF_dd_frequency = nil;
-
-		TF_speakerDistance = 20;
-			TF_speakerDistance = chunkSize_structure ; //struct distance
-		TF_speak_volume_level = "normal";
-		TF_speak_volume_meters = 20;
-		TF_max_voice_volume = 60;
-		TF_sw_dialog_radio = nil;
-
-		TF_lr_dialog_radio = nil;
-		TF_lr_active_radio = nil;
-		TF_lr_active_curator_radio = nil;
-
-		tf_lastNearFrameTick = diag_tickTime;
-		tf_lastFarFrameTick = diag_tickTime;
-		tf_msPerStep = 0;
-
-		tf_speakerRadios = [];
-		tf_nearPlayers = [];
-		tf_farPlayers = [];
-
-		tf_nearPlayersIndex = 0;
-		tf_nearPlayersProcessed = true;
-
-		tf_farPlayersIndex = 0;
-		tf_farPlayersProcessed = true;
-
-		tf_msNearPerStepMax = 0.025;
-		tf_msNearPerStepMin = 0.1;
-		tf_msNearPerStep = tf_msNearPerStepMax;
-		tf_nearUpdateTime = 0.3;
-
-		tf_msFarPerStepMax = 0.025;
-		tf_msFarPerStepMin = 1.00;
-		tf_msFarPerStep = tf_msFarPerStepMax;
-		tf_farUpdateTime = 3.5;
-
-		tf_lastFrequencyInfoTick = 0;
-		tf_lastNearPlayersUpdate = 0;
-
-		tf_lastError = false;
-		vs_lastErrorText = "";
-		vs_lastErrorTimeout = 0;
-
-		tf_msSpectatorPerStepMax = 0.035;
-
-
-	//ненужный спам
-	TF_first_radio_request = true;
-	TF_last_request_time = 0;
-
-
-	//а вот здесь вижу хуйню
-	TF_respawnedAt = time;
-	TFAR_previouscurrentUnit = nil;
-	TFAR_currentUnit = player; //конкретно тут, так как раньше вызвано было
-
+	
 	//вот тут самое вкусное
 
 	logformat("vs::init() - Plugin version %1",TF_ADDON_VERSION);
@@ -201,123 +169,121 @@ vs_onProcessPlayerPosition = {
 	if (TFAR_currentUnit != player) then {
 		TFAR_currentUnit = player;
 	};
+	private _curUnit = player;
 
 	call vs_handleProcessedTransmith;
 
-	//if !(isNull (findDisplay 46)) then {
-		//if !(isNull TFAR_currentUnit) then {
-			if ((tf_farPlayersProcessed) and {tf_nearPlayersProcessed}) then {
-				tf_nearPlayersIndex = 0;
-				tf_farPlayersIndex = 0;
+	if ((vs_farPlayersProcessed) && {vs_nearPlayersProcessed}) then {
+		vs_nearPlayersIndex = 0;
+		vs_farPlayersIndex = 0;
 
-				if (count tf_nearPlayers == 0) then {
-					tf_nearPlayers = call vs_getNearInGameMobs; //replace to vs_getNearInGameMobs
-				};
+		if (count vs_nearPlayers == 0) then {
+			vs_nearPlayers = call vs_getNearInGameMobs; //replace to vs_getNearInGameMobs
+		};
 
-				// Другие юниты как дальняковые подлежат вырезке нахуй
-				_other_units = allUnits - tf_nearPlayers;
+		// Другие юниты как дальняковые подлежат вырезке нахуй
+		_other_units = allUnits - vs_nearPlayers;
 
-				{
-					if !(_x in _other_units) then {
-						_other_units pushBack _x;
-					};
-					true;
-				} count (call BIS_fnc_listCuratorPlayers);//Add curators
+		{
+			if !(_x in _other_units) then {
+				_other_units pushBack _x;
+			};
+			true;
+		} count (call BIS_fnc_listCuratorPlayers);//Add curators
 
 
-				tf_farPlayers = [];
-				tf_farPlayersIndex = 0;
-				{
-					_spectator = _x getVariable "tf_forceSpectator";
-					if (isNil "_spectator") then {
-						_spectator = false;
-					};
-					if ((isPlayer _x) and {!_spectator}) then {
-						tf_farPlayers set[tf_farPlayersIndex, _x];
-						tf_farPlayersIndex = tf_farPlayersIndex + 1;
-					};
-					true;
-				} count _other_units;
+		vs_farPlayers = [];
+		vs_farPlayersIndex = 0;
+		{
+			_spectator = _x getVariable "tf_forceSpectator";
+			if (isNil "_spectator") then {
+				_spectator = false;
+			};
+			if ((isPlayer _x) && {!_spectator}) then {
+				vs_farPlayers set[vs_farPlayersIndex, _x];
+				vs_farPlayersIndex = vs_farPlayersIndex + 1;
+			};
+			true;
+		} count _other_units;
 
-				tf_farPlayersIndex = 0;
+		vs_farPlayersIndex = 0;
 
-				if (count tf_nearPlayers > 0) then {
-					tf_nearPlayersProcessed = false;
-					tf_msNearPerStep = tf_msNearPerStepMax max (tf_nearUpdateTime / (count tf_nearPlayers));
-					tf_msNearPerStep = tf_msNearPerStep min tf_msNearPerStepMin;
-				} else {
-					tf_msNearPerStep = tf_nearUpdateTime;
-				};
-				if (count tf_farPlayers > 0) then {
-					tf_farPlayersProcessed = false;
-					if (count tf_nearPlayers > 0) then {
-						tf_msFarPerStep = tf_msFarPerStepMax max (tf_farUpdateTime / (count tf_farPlayers));
-						tf_msFarPerStep = tf_msFarPerStep min tf_msFarPerStepMin;
-					} else {
-						tf_msFarPerStep = tf_msSpectatorPerStepMax;
-					};
-				} else {
-					tf_msFarPerStep = tf_farUpdateTime;
-				};
-				call vs_sendVersionInfo;
+		if (count vs_nearPlayers > 0) then {
+			vs_nearPlayersProcessed = false;
+			vs_msNearPerStep = vs_msNearPerStepMax max (vs_nearUpdateTime / (count vs_nearPlayers));
+			vs_msNearPerStep = vs_msNearPerStep min vs_msNearPerStepMin;
+		} else {
+			vs_msNearPerStep = vs_nearUpdateTime;
+		};
+		if (count vs_farPlayers > 0) then {
+			vs_farPlayersProcessed = false;
+			if (count vs_nearPlayers > 0) then {
+				vs_msFarPerStep = vs_msFarPerStepMax max (vs_farUpdateTime / (count vs_farPlayers));
+				vs_msFarPerStep = vs_msFarPerStep min vs_msFarPerStepMin;
 			} else {
-				_elemsNearToProcess = (diag_tickTime - tf_lastNearFrameTick) / tf_msNearPerStep;
-				if (_elemsNearToProcess >= 1) then {
-					for "_y" from 0 to _elemsNearToProcess step 1 do {
-						if (tf_nearPlayersIndex < count tf_nearPlayers) then {
-							_unit = (tf_nearPlayers select tf_nearPlayersIndex);
-							_controlled = _unit getVariable "tf_controlled_unit";
-							if !(isNil "_controlled") then {
-								[_controlled, true, _unit getvariable "voiceptr"] call vs_sendPlayerInfo;
-							} else {
-								[_unit, true, _unit getvariable "voiceptr"] call vs_sendPlayerInfo;
-							};
-							tf_nearPlayersIndex = tf_nearPlayersIndex + 1;
-						} else {
-							tf_nearPlayersIndex = 0;
-							tf_nearPlayersProcessed = true;
-
-							if (diag_tickTime - tf_lastNearPlayersUpdate > 0.5) then {
-								tf_nearPlayers = call TFAR_fnc_getNearPlayers;
-								tf_lastNearPlayersUpdate = diag_tickTime;
-							};
-
-							//call TFAR_fnc_processSpeakerRadios; //а тут как раз радейки обрабатываются
-							call vs_processSpeakerRadios;
-
-							_speakers = "SPEAKERS	";
-							{
-								_speakers = _speakers + TF_vertical_tab + _x;
-							} count (tf_speakerRadios);
-							"task_force_radio_pipe" callExtension _speakers;
-
-							tf_speakerRadios = [];
-						};
+				vs_msFarPerStep = vs_msSpectatorPerStepMax;
+			};
+		} else {
+			vs_msFarPerStep = vs_farUpdateTime;
+		};
+		call vs_sendVersionInfo;
+	} else {
+		_elemsNearToProcess = (diag_tickTime - vs_lastNearFrameTick) / vs_msNearPerStep;
+		if (_elemsNearToProcess >= 1) then {
+			for "_y" from 0 to _elemsNearToProcess step 1 do {
+				if (vs_nearPlayersIndex < count vs_nearPlayers) then {
+					_unit = (vs_nearPlayers select vs_nearPlayersIndex);
+					_controlled = _unit getVariable "tf_controlled_unit";
+					if !(isNil "_controlled") then {
+						[_controlled, true, _unit getvariable "voiceptr"] call vs_sendPlayerInfo;
+					} else {
+						[_unit, true, _unit getvariable "voiceptr"] call vs_sendPlayerInfo;
 					};
-					tf_lastNearFrameTick = diag_tickTime;
-				};
+					vs_nearPlayersIndex = vs_nearPlayersIndex + 1;
+				} else {
+					vs_nearPlayersIndex = 0;
+					vs_nearPlayersProcessed = true;
 
-				_elemsFarToProcess = (diag_tickTime - tf_lastFarFrameTick) / tf_msFarPerStep;
-				if (_elemsFarToProcess >= 1) then {
-					for "_y" from 0 to _elemsFarToProcess step 1 do {
-						if (tf_farPlayersIndex < count tf_farPlayers) then {
-							_unit = (tf_farPlayers select tf_farPlayersIndex);
-							[_unit, false, _unit getvariable "voiceptr"] call vs_sendPlayerInfo;
-							tf_farPlayersIndex = tf_farPlayersIndex + 1;
-						} else {
-							tf_farPlayersIndex = 0;
-							tf_farPlayersProcessed = true;
-						};
+					if (diag_tickTime - vs_lastNearPlayersUpdate > 0.5) then {
+						vs_nearPlayers = call TFAR_fnc_getNearPlayers;
+						vs_lastNearPlayersUpdate = diag_tickTime;
 					};
-					tf_lastFarFrameTick = diag_tickTime;
+
+					//call TFAR_fnc_processSpeakerRadios; //а тут как раз радейки обрабатываются
+					call vs_processSpeakerRadios;
+
+					_speakers = "SPEAKERS	";
+					{
+						_speakers = _speakers + vs_vertical_tab + _x;
+					} count (vs_speakerRadios);
+					"task_force_radio_pipe" callExtension _speakers;
+
+					vs_speakerRadios = [];
 				};
 			};
-			if (diag_tickTime - tf_lastFrequencyInfoTick > 0.5) then {
-				call vs_sendFrequencyInfo;
-				tf_lastFrequencyInfoTick = diag_tickTime;
+			vs_lastNearFrameTick = diag_tickTime;
+		};
+
+		_elemsFarToProcess = (diag_tickTime - vs_lastFarFrameTick) / vs_msFarPerStep;
+		if (_elemsFarToProcess >= 1) then {
+			for "_y" from 0 to _elemsFarToProcess step 1 do {
+				if (vs_farPlayersIndex < count vs_farPlayers) then {
+					_unit = (vs_farPlayers select vs_farPlayersIndex);
+					[_unit, false, _unit getvariable "voiceptr"] call vs_sendPlayerInfo;
+					vs_farPlayersIndex = vs_farPlayersIndex + 1;
+				} else {
+					vs_farPlayersIndex = 0;
+					vs_farPlayersProcessed = true;
+				};
 			};
-		//};
-	//};
+			vs_lastFarFrameTick = diag_tickTime;
+		};
+	};
+	if (diag_tickTime - vs_lastFrequencyInfoTick > 0.5) then {
+		call vs_sendFrequencyInfo;
+		vs_lastFrequencyInfoTick = diag_tickTime;
+	};
+
 };
 
 vs_startHandleProcessPlayerPos = {
@@ -340,24 +306,25 @@ vs_stopHandleProcessPlayerPos = {
 // отсылает частоты раций у игрока в плагин
 vs_sendFrequencyInfo = {
 	private ["_request","_result","_freq","_freq_lr","_freq_dd","_alive","_nickname","_isolated_and_inside","_can_speak","_depth","_globalVolume", "_voiceVolume", "_spectator", "_receivingDistanceMultiplicator", "_radios"];
+	
 
 	// send frequencies
 	_freq = ["No_SW_Radio"];
 	_freq_lr = ["No_LR_Radio"];
 	_freq_dd = "No_DD_Radio";
 
-	_isolated_and_inside = TFAR_currentUnit call TFAR_fnc_vehicleIsIsolatedAndInside;
+	_isolated_and_inside = false;//TFAR_currentUnit call TFAR_fnc_vehicleIsIsolatedAndInside;
 	_depth = TFAR_currentUnit call TFAR_fnc_eyeDepth;
 	_can_speak = [_isolated_and_inside, _depth] call TFAR_fnc_canSpeak;
 
-	if (((call TFAR_fnc_haveSWRadio) or (TFAR_currentUnit != player)) and {[TFAR_currentUnit, _isolated_and_inside, _can_speak, _depth] call TFAR_fnc_canUseSWRadio}) then {
+	if (((call TFAR_fnc_haveSWRadio) or (TFAR_currentUnit != player)) && {[TFAR_currentUnit, _isolated_and_inside, _can_speak, _depth] call TFAR_fnc_canUseSWRadio}) then {
 		_freq = [];
 		_radios = TFAR_currentUnit call TFAR_fnc_radiosList;
 		if (TFAR_currentUnit != player) then {
 			_radios = _radios + (player call TFAR_fnc_radiosList);
 		};
 		{
-			if (!(_x call TFAR_fnc_getSwSpeakers) or {(TFAR_currentUnit != player) and (_x in (player call TFAR_fnc_radiosList))}) then {
+			if (!(_x call TFAR_fnc_getSwSpeakers) or {(TFAR_currentUnit != player) && (_x in (player call TFAR_fnc_radiosList))}) then {
 				if ((_x call TFAR_fnc_getAdditionalSwChannel) == (_x call TFAR_fnc_getSwChannel)) then {
 					_freq pushBack format ["%1%2|%3|%4", _x call TFAR_fnc_getSwFrequency, _x call TFAR_fnc_getSwRadioCode, _x call TFAR_fnc_getSwVolume, _x call TFAR_fnc_getAdditionalSwStereo];
 				} else {
@@ -370,14 +337,14 @@ vs_sendFrequencyInfo = {
 			true;
 		} count (_radios);
 	};
-	if (((call TFAR_fnc_haveLRRadio) or (TFAR_currentUnit != player)) and {[TFAR_currentUnit, _isolated_and_inside, _depth] call TFAR_fnc_canUseLRRadio}) then {
+	if (((call TFAR_fnc_haveLRRadio) or (TFAR_currentUnit != player)) && {[TFAR_currentUnit, _isolated_and_inside, _depth] call TFAR_fnc_canUseLRRadio}) then {
 		_freq_lr = [];
 		_radios = TFAR_currentUnit call TFAR_fnc_lrRadiosList;
 		if (TFAR_currentUnit != player) then {
 			_radios = _radios + (player call TFAR_fnc_lrRadiosList);
 		};
 		{
-			if (!(_x call TFAR_fnc_getLrSpeakers) or {(TFAR_currentUnit != player) and (_x in (player call TFAR_fnc_lrRadiosList))}) then {
+			if (!(_x call TFAR_fnc_getLrSpeakers) or {(TFAR_currentUnit != player) && (_x in (player call TFAR_fnc_lrRadiosList))}) then {
 				if ((_x call TFAR_fnc_getAdditionalLrChannel) == (_x call TFAR_fnc_getLrChannel)) then {
 					_freq_lr pushBack format ["%1%2|%3|%4", _x call TFAR_fnc_getLrFrequency, _x call TFAR_fnc_getLrRadioCode, _x call TFAR_fnc_getLrVolume, _x call TFAR_fnc_getAdditionalLrStereo];
 				} else {
@@ -390,9 +357,9 @@ vs_sendFrequencyInfo = {
 			true;
 		} count (_radios);
 	};
-	if ((call TFAR_fnc_haveDDRadio) and {[_depth, _isolated_and_inside] call TFAR_fnc_canUseDDRadio}) then {
-		_freq_dd = TF_dd_frequency;
-	};
+	// if ((call TFAR_fnc_haveDDRadio) && {[_depth, _isolated_and_inside] call TFAR_fnc_canUseDDRadio}) then {
+	// 	_freq_dd = TF_dd_frequency;
+	// };
 	_alive = alive TFAR_currentUnit;
 	if (_alive) then {
 		//TFAR_player_name = name player;
@@ -427,14 +394,14 @@ vs_sendFrequencyInfo = {
 	// getting local player all radios
 	_freq = call vs_onProcessingRadios;
 	
-	_volLocPlay = TF_speak_volume_meters;
+	_volLocPlay = vs_speak_volume_meters;
 	//если в бессознанке или в лобби то собсна нихуя
 	if (!([] call interact_isActive) || isLobbyOpen) then {
 		_volLocPlay = 0;
 		_voiceVolume = 0;
 	};
 	
-	_request = format["FREQ	%1	%2	%3	%4	%5	%6	%7	%8	%9	%10	%11	%12	%13", str(_freq), str(_freq_lr), _freq_dd, _alive, _volLocPlay min TF_max_voice_volume, TF_dd_volume_level, _nickname, waves, TF_terrain_interception_coefficient, _globalVolume, _voiceVolume, _receivingDistanceMultiplicator, TF_speakerDistance];
+	_request = format["FREQ	%1	%2	%3	%4	%5	%6	%7	%8	%9	%10	%11	%12	%13", str(_freq), str(_freq_lr), _freq_dd, _alive, _volLocPlay min vs_max_voice_volume, vs_dd_volume_level, _nickname, waves, TF_terrain_interception_coefficient, _globalVolume, _voiceVolume, _receivingDistanceMultiplicator, vs_speakerDistance];
 	_result = "task_force_radio_pipe" callExtension _request;
 };
 
@@ -453,18 +420,18 @@ vs_processSpeakerRadios = {
 			//todo vectoradd biasPos
 			_p = [(_pos select 0) - (_unit_pos select 0), (_pos select 1) - (_unit_pos select 1), (_pos select 2) - (_unit_pos select 2)];
 			{
-				if ((_x call TFAR_fnc_isRadio) and {_x call TFAR_fnc_getSwSpeakers}) then {
+				if ((_x call TFAR_fnc_isRadio) && {_x call TFAR_fnc_getSwSpeakers}) then {
 					_freq = format ["%1%2", _x call TFAR_fnc_getSwFrequency, _x call TFAR_fnc_getSwRadioCode];
 					if ((_x call TFAR_fnc_getAdditionalSwChannel) > -1) then {
 						_freq = _freq + format ["|%1%2", [_x, (_x call TFAR_fnc_getAdditionalSwChannel) + 1] call TFAR_fnc_GetChannelFrequency, _x call TFAR_fnc_getSwRadioCode];
 					};
-					tf_speakerRadios pushBack (format ["%1%2%3%4%5%6%7%8%9%10%11%12%13", _x, TF_new_line, _freq, TF_new_line,  "", TF_new_line, _p, TF_new_line, _x call TFAR_fnc_getSwVolume, TF_new_line, "no", TF_new_line, _pos select 2]);
+					vs_speakerRadios pushBack (format ["%1%2%3%4%5%6%7%8%9%10%11%12%13", _x, vs_new_line, _freq, vs_new_line,  "", vs_new_line, _p, vs_new_line, _x call TFAR_fnc_getSwVolume, vs_new_line, "no", vs_new_line, _pos select 2]);
 				};
 			} forEach ((getItemCargo _x) select 0); //рефракторинг
 
 			//lr не юзаемс)))
 			/*{
-				if  ((_x getVariable ["tf_lr_speakers", false]) and {[typeof (_x), "tf_hasLRradio", 0] call TFAR_fnc_getConfigProperty == 1}) then {
+				if  ((_x getVariable ["tf_lr_speakers", false]) && {[typeof (_x), "tf_hasLRradio", 0] call TFAR_fnc_getConfigProperty == 1}) then {
 					_manpack = [_x, "radio_settings"];
 					if (_manpack call TFAR_fnc_getLrSpeakers) then {
 						_freq = format ["%1%2", _manpack call TFAR_fnc_getLrFrequency, _manpack call TFAR_fnc_getLrRadioCode];
@@ -476,7 +443,7 @@ vs_processSpeakerRadios = {
 							_radio_id = str (_manpack select 0);
 						};
 
-						tf_speakerRadios pushBack (format ["%1%2%3%4%5%6%7%8%9%10%11%12%13", _radio_id, TF_new_line, _freq, TF_new_line,  "", TF_new_line, _p, TF_new_line, _manpack call TFAR_fnc_getLrVolume, TF_new_line, "no", TF_new_line, _pos select 2]);
+						vs_speakerRadios pushBack (format ["%1%2%3%4%5%6%7%8%9%10%11%12%13", _radio_id, vs_new_line, _freq, vs_new_line,  "", vs_new_line, _p, vs_new_line, _manpack call TFAR_fnc_getLrVolume, vs_new_line, "no", vs_new_line, _pos select 2]);
 					};
 				};
 
@@ -484,14 +451,14 @@ vs_processSpeakerRadios = {
 		};
 
 	// вместо прохода по массиву берём call vs_collectSpeakersInWorld
-	} forEach (nearestObjects [getPos TFAR_currentUnit, ["WeaponHolder", "GroundWeaponHolder", "WeaponHolderSimulated"], TF_speakerDistance]);
+	} forEach (nearestObjects [getPos TFAR_currentUnit, ["WeaponHolder", "GroundWeaponHolder", "WeaponHolderSimulated"], vs_speakerDistance]);
 
 	call vs_processWorldRadios;
 
 	{
-		if ((_x getVariable ["tf_lr_speakers", false]) and {_x call TFAR_fnc_hasVehicleRadio}) then {
+		if ((_x getVariable ["tf_lr_speakers", false]) && {_x call TFAR_fnc_hasVehicleRadio}) then {
 			_pos = getPosASL _x;
-			if (_pos select 2 >= TF_UNDERWATER_RADIO_DEPTH) then {
+			if (_pos select 2 >= vs_underwaterRadioDepth) then {
 				_p = [(_pos select 0) - (_unit_pos select 0), (_pos select 1) - (_unit_pos select 1), (_pos select 2) - (_unit_pos select 2)];
 
 				_lrs = [];
@@ -525,14 +492,14 @@ vs_processSpeakerRadios = {
 						};
 						_isolation = _isolation + "_" + str ([(typeof (_x select 0)), "tf_isolatedAmount", 0.0] call TFAR_fnc_getConfigProperty);
 
-						tf_speakerRadios pushBack (format ["%1%2%3%4%5%6%7%8%9%10%11%12%13", _radio_id, TF_new_line, _freq, TF_new_line,  "", TF_new_line, _p, TF_new_line, _x call TFAR_fnc_getLrVolume, TF_new_line, _isolation, TF_new_line, _pos select 2]);
+						vs_speakerRadios pushBack (format ["%1%2%3%4%5%6%7%8%9%10%11%12%13", _radio_id, vs_new_line, _freq, vs_new_line,  "", vs_new_line, _p, vs_new_line, _x call TFAR_fnc_getLrVolume, vs_new_line, _isolation, vs_new_line, _pos select 2]);
 					};
 				}
 				forEach (_lrs);
 			};
 
 		};
-	} forEach  (TFAR_currentUnit nearEntities [["LandVehicle", "Air", "Ship"], TF_speakerDistance]);
+	} forEach  (TFAR_currentUnit nearEntities [["LandVehicle", "Air", "Ship"], vs_speakerDistance]);
 
 };
 
@@ -545,15 +512,15 @@ vs_sendPlayerInfo = {
 	_request = _this call vs_preparePositionCoordinates;//TFAR_fnc_preparePositionCoordinates;
 	_result = "task_force_radio_pipe" callExtension _request;
 
-	if ((_result != "OK") and {_result != "SPEAKING"} and {_result != "NOT_SPEAKING"} || {!call vs_isIngameTSChannel}) then {
+	if ((_result != "OK") && {_result != "SPEAKING"} && {_result != "NOT_SPEAKING"} || {!call vs_isIngameTSChannel}) then {
 		if (vs_lastErrorText != _result) then {
 			errorformat("vs::sendPlayerInfo() - Internal exception: %1",_result);
 			vs_lastErrorText = _result;
 			vs_lastErrorTimeout = tickTime + ifcheck(!call vs_isIngameTSChannel,VS_ERROR_NOTINGAMECHANNEL_TIMEOUT,VS_ERROR_CONNECTION_TIMEOUT);
 		};
-		//[parseText (_result), 10] call TFAR_fnc_showHint;
+		
 		// todo handle pipe closing error
-		tf_lastError = true;
+		vs_lastError = true;
 
 		if (tickTime > vs_lastErrorTimeout) then {
 			warningformat("vs::sendPlayerInfo() - Plugin connection timeout. The connection was not restored for %1 sec. Client is being disconnected.",ifcheck(!call vs_isIngameTSChannel,VS_ERROR_NOTINGAMECHANNEL_TIMEOUT,VS_ERROR_CONNECTION_TIMEOUT));
@@ -562,10 +529,10 @@ vs_sendPlayerInfo = {
 			rpcCall("clientDisconnect",vec2("Ошибка подключения плагина","Истекло время ожидания подключения плагина. Пожалуйста зайдите в тимспик srv.relicta.ru во время игры и включите плагин TaskForceRadio в настройках вашего тимспика."));
 		};
 	} else {
-		if (tf_lastError) then {
+		if (vs_lastError) then {
 			//call TFAR_fnc_hideHint;
 			log("vs::sendPlayerInfo() - Restored plugin pipe connection!");
-			tf_lastError = false;
+			vs_lastError = false;
 			vs_lastErrorText = "";
 			vs_lastErrorTimeout = 0;
 		};
@@ -613,7 +580,7 @@ vs_preparePositionCoordinates = {
 
 	// + оптимизация
 	_pos = [_unit, _nearPlayer] call TFAR_fnc_defaultPositionCoordinates;//(_unit getVariable ["TF_fnc_position", TFAR_fnc_defaultPositionCoordinates]);
-	_isolated_and_inside = _unit call TFAR_fnc_vehicleIsIsolatedAndInside;
+	_isolated_and_inside = false;//_unit call TFAR_fnc_vehicleIsIsolatedAndInside;
 	_depth = _unit call TFAR_fnc_eyeDepth;
 	_can_speak = [_isolated_and_inside, _depth] call TFAR_fnc_canSpeak; //заменить на vs_canSpeakUnit (означает может ли слышать кто-то этого юнита)
 	_useSw = true;
@@ -634,7 +601,7 @@ vs_preparePositionCoordinates = {
 	_vehicle = _unit call TFAR_fnc_vehicleId;
 
 	//подключаем все динамики на юнитах
-	if ((_nearPlayer) and {TFAR_currentUnit distance _unit <= TF_speakerDistance}) then {
+	if ((_nearPlayer) && {TFAR_currentUnit distance _unit <= vs_speakerDistance}) then {
 		// LR нет
 		/*if (_unit getVariable ["tf_lr_speakers", false] && _useLr) then {
 			{
@@ -648,7 +615,7 @@ vs_preparePositionCoordinates = {
 						_radio_id = str (_x select 0);
 					};
 
-					tf_speakerRadios pushBack (format ["%1%2%3%4%5%6%7%8%9%10%11%12%13", _radio_id, TF_new_line, _freq, TF_new_line, _this select 2, TF_new_line, [], TF_new_line, _x call TFAR_fnc_getLrVolume, TF_new_line, _vehicle, TF_new_line, (getPosASL _unit) select 2]);
+					vs_speakerRadios pushBack (format ["%1%2%3%4%5%6%7%8%9%10%11%12%13", _radio_id, vs_new_line, _freq, vs_new_line, _this select 2, vs_new_line, [], vs_new_line, _x call TFAR_fnc_getLrVolume, vs_new_line, _vehicle, vs_new_line, (getPosASL _unit) select 2]);
 				};
 				true;
 			} count (_unit call TFAR_fnc_lrRadiosList);
@@ -662,7 +629,7 @@ vs_preparePositionCoordinates = {
 						_freq = _freq + format ["|%1%2", [_x, (_x call TFAR_fnc_getAdditionalSwChannel) + 1] call TFAR_fnc_GetChannelFrequency, _x call TFAR_fnc_getSwRadioCode];
 					};
 					_radio_id = _x;
-					tf_speakerRadios pushBack (format ["%1%2%3%4%5%6%7%8%9%10%11%12%13", _radio_id, TF_new_line, _freq, TF_new_line, _this select 2, TF_new_line, [], TF_new_line, _x call TFAR_fnc_getSwVolume, TF_new_line, _vehicle, TF_new_line, (getPosASL _unit) select 2]);
+					vs_speakerRadios pushBack (format ["%1%2%3%4%5%6%7%8%9%10%11%12%13", _radio_id, vs_new_line, _freq, vs_new_line, _this select 2, vs_new_line, [], vs_new_line, _x call TFAR_fnc_getSwVolume, vs_new_line, _vehicle, vs_new_line, (getPosASL _unit) select 2]);
 				};
 				true;
 			} count (_unit call TFAR_fnc_radiosList); //заменить на vs_getUnitRadios
@@ -676,12 +643,12 @@ vs_preparePositionCoordinates = {
 	_newVoiceVolume = [_unit,_newVoiceVolume] call vs_processSpeakingLangs;
 	
 	#ifdef VOICE_DEBUG
-	__tb = TF_horizontal_tab;
+	__tb = vs_horizontal_tab;
 	format["POS"+__tb+"%1"+__tb+"%2"+__tb+"%3"+__tb+"%4"+__tb+"%5"+__tb+"%6"+__tb+"%7"+__tb+"%8"+__tb+"%9"+__tb+"%10"+__tb+"%11"+__tb+"%12"+__tb+"%13",
 	#else
 	format["POS	%1	%2	%3	%4	%5	%6	%7	%8	%9	%10	%11	%12	%13",
 	#endif
-	_this select 2, _pos select 0, _pos select 1, _pos select 2, _pos select 3, _can_speak, _useSw, _useLr, _useDd, _vehicle, _unit call TFAR_fnc_calcTerrainInterception, _newVoiceVolume, call TFAR_fnc_currentDirection]
+	_this select 2, _pos select 0, _pos select 1, _pos select 2, _pos select 3, _can_speak, _useSw, _useLr, _useDd, _vehicle, _unit call vs_internalCalcTerrainInterception, _newVoiceVolume, call TFAR_fnc_currentDirection]
 };
 
 //Калькулирует понимание речи персонажа
@@ -737,14 +704,14 @@ vs_calcVoiceIntersection = {
 		
 		//(0 boundingBoxReal call interact_cursorobject)
 		__vs_cvi_ = lineIntersectsSurfaces [
-		    _plaEyePos,
-		    eyepos _unit,
-		    player,
-		    _unit,
-		    false,
-		    20,
-		    "VIEW",
-		    "NONE"
+			_plaEyePos,
+			eyepos _unit,
+			player,
+			_unit,
+			false,
+			20,
+			"VIEW",
+			"NONE"
 		];
 		
 		__distAll = _plaEyePos distance(eyePos _unit);
@@ -808,14 +775,14 @@ vs_calcVoiceIntersection = {
 	
 	#else
 	__vs_cvi_ = lineIntersectsSurfaces [
-	    eyepos player,
-	    eyepos _unit,
-	    player,
-	    _unit,
-	    true,
-	    10,
-	    "GEOM",
-	    "NONE"
+		eyepos player,
+		eyepos _unit,
+		player,
+		_unit,
+		true,
+		10,
+		"GEOM",
+		"NONE"
 	];
 	
 	//[_unit,__vs_cvi_] call vs_debug_voiceIntersection;
@@ -872,10 +839,10 @@ vs_getNearInGameMobs = {
 	//private _players_in_group = count (units (group TFAR_currentUnit)); // - 0.0012 ms
 	private _result = [];
 	//Вот эта замечательная проверка могла бы замениться на проверку призраков
-	if (alive TFAR_currentUnit || true) then {
+	if (true) then {
 
-		//	TF_max_voice_volume - Данная константа по моему хотению будет меняться. А значит нужен копир
-		private _allUnits = TFAR_currentUnit nearEntities ["Man", TF_max_voice_volume];
+		//	vs_max_voice_volume - Данная константа по моему хотению будет меняться. А значит нужен копир
+		private _allUnits = player nearEntities ["Man", vs_max_voice_volume];
 
 		//У нас все юниты по своим группам. Не думаю что тут нужен ктонить
 		// - 0.003ms
@@ -896,12 +863,12 @@ vs_getNearInGameMobs = {
 			{
 				_allUnits pushBack _x;
 			} forEach (crew _v);
-		} forEach  (TFAR_currentUnit nearEntities [["LandVehicle", "Air", "Ship"], TF_max_voice_volume]);*/
+		} forEach  (TFAR_currentUnit nearEntities [["LandVehicle", "Air", "Ship"], vs_max_voice_volume]);*/
 
 
 		//В теории тут тоже можно спасти фпса
 		{
-			if ((isPlayer _x) and {alive _x}) then {
+			if ((isPlayer _x) && {alive _x}) then {
 				private _spectator = _x getVariable "tf_forceSpectator";
 				if (isNil "_spectator") then {
 					_spectator = false;
@@ -927,7 +894,6 @@ vs_releaseAllTangents = {
 
 #include "VoiceSystem_WorldRadioComponent.sqf"
 #include "VoiceSystem_Transmith.sqf"
-#include "VoiceSystem_HandleTangent.sqf"
 #include "VoiceSystem_Control.sqf"
 
 
