@@ -11,15 +11,15 @@ Initial value:
 ```sqf
 hashSet_createEmpty()
 ```
-File: [client\Traps\TrapsInit.sqf at line 27](../../../Src/client/Traps/TrapsInit.sqf#L27)
+File: [client\Traps\TrapsInit.sqf at line 29](../../../Src/client/Traps/TrapsInit.sqf#L29)
 ## traps_resyncAllTraps
 
 Type: function
 
-Description: Загружает все известные ловушки
+Description: 
 - Param: _ptrlist
 
-File: [client\Traps\TrapsInit.sqf at line 30](../../../Src/client/Traps/TrapsInit.sqf#L30)
+File: [client\Traps\TrapsInit.sqf at line 33](../../../Src/client/Traps/TrapsInit.sqf#L33)
 ## traps_unhideAll
 
 Type: function
@@ -27,7 +27,7 @@ Type: function
 Description: 
 
 
-File: [client\Traps\TrapsInit.sqf at line 39](../../../Src/client/Traps/TrapsInit.sqf#L39)
+File: [client\Traps\TrapsInit.sqf at line 43](../../../Src/client/Traps/TrapsInit.sqf#L43)
 ## traps_syncAll
 
 Type: function
@@ -35,7 +35,7 @@ Type: function
 Description: 
 
 
-File: [client\Traps\TrapsInit.sqf at line 45](../../../Src/client/Traps/TrapsInit.sqf#L45)
+File: [client\Traps\TrapsInit.sqf at line 50](../../../Src/client/Traps/TrapsInit.sqf#L50)
 ## traps_checkKnownObject
 
 Type: function
@@ -43,7 +43,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [client\Traps\TrapsInit.sqf at line 51](../../../Src/client/Traps/TrapsInit.sqf#L51)
+File: [client\Traps\TrapsInit.sqf at line 57](../../../Src/client/Traps/TrapsInit.sqf#L57)
 ## traps_AutoDispose
 
 Type: function
@@ -51,7 +51,7 @@ Type: function
 Description: 
 - Param: _ptr
 
-File: [client\Traps\TrapsInit.sqf at line 61](../../../Src/client/Traps/TrapsInit.sqf#L61)
+File: [client\Traps\TrapsInit.sqf at line 68](../../../Src/client/Traps/TrapsInit.sqf#L68)
 ## traps_syncObject
 
 Type: function
@@ -60,4 +60,4 @@ Description:
 - Param: _ref
 - Param: _doKnown
 
-File: [client\Traps\TrapsInit.sqf at line 67](../../../Src/client/Traps/TrapsInit.sqf#L67)
+File: [client\Traps\TrapsInit.sqf at line 75](../../../Src/client/Traps/TrapsInit.sqf#L75)

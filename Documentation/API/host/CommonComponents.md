@@ -1544,7 +1544,7 @@ Description:
 
 Initial value:
 ```sqf
-"TF RELICTA ADDON API 1.8"
+"TF RELICTA ADDON API 2.0"
 ```
 File: [host\CommonComponents\Voice.sqf at line 8](../../../Src/host/CommonComponents/Voice.sqf#L8)
 ## vs_list_langs

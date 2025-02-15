@@ -799,18 +799,6 @@ Initial value:
 [widgetNull]
 ```
 File: [client\Lobby\lobbi_init.sqf at line 41](../../../Src/client/Lobby/lobbi_init.sqf#L41)
-## lobby_background
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-""
-```
-File: [client\Lobby\lobbi_init.sqf at line 44](../../../Src/client/Lobby/lobbi_init.sqf#L44)
 ## lobby_background_local
 
 Type: Variable
@@ -822,7 +810,7 @@ Initial value:
 ```sqf
 PATH_PICTURE("lobby\black.paa")
 ```
-File: [client\Lobby\lobbi_init.sqf at line 55](../../../Src/client/Lobby/lobbi_init.sqf#L55)
+File: [client\Lobby\lobbi_init.sqf at line 56](../../../Src/client/Lobby/lobbi_init.sqf#L56)
 ## lobby_listResizingName
 
 Type: Variable
@@ -834,7 +822,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\Lobby\lobbi_init.sqf at line 58](../../../Src/client/Lobby/lobbi_init.sqf#L58)
+File: [client\Lobby\lobbi_init.sqf at line 59](../../../Src/client/Lobby/lobbi_init.sqf#L59)
 ## lobby_charData
 
 Type: Variable
@@ -846,7 +834,7 @@ Initial value:
 ```sqf
 createLocation ["cba_namespacedummy",[100,100,100],0,0]
 ```
-File: [client\Lobby\lobbi_init.sqf at line 61](../../../Src/client/Lobby/lobbi_init.sqf#L61)
+File: [client\Lobby\lobbi_init.sqf at line 62](../../../Src/client/Lobby/lobbi_init.sqf#L62)
 ## lobby_internal_rttcamera
 
 Type: Variable
@@ -858,7 +846,7 @@ Initial value:
 ```sqf
 "camera" camCreate [0,0,0]
 ```
-File: [client\Lobby\lobbi_init.sqf at line 64](../../../Src/client/Lobby/lobbi_init.sqf#L64)
+File: [client\Lobby\lobbi_init.sqf at line 65](../../../Src/client/Lobby/lobbi_init.sqf#L65)
 ## lobby_internal_backwallObject
 
 Type: Variable
@@ -870,7 +858,7 @@ Initial value:
 ```sqf
 objNull
 ```
-File: [client\Lobby\lobbi_init.sqf at line 66](../../../Src/client/Lobby/lobbi_init.sqf#L66)
+File: [client\Lobby\lobbi_init.sqf at line 67](../../../Src/client/Lobby/lobbi_init.sqf#L67)
 ## lobby_internal_backwallSettings
 
 Type: Variable
@@ -882,7 +870,7 @@ Initial value:
 ```sqf
 createHashMapFromArray [...
 ```
-File: [client\Lobby\lobbi_init.sqf at line 68](../../../Src/client/Lobby/lobbi_init.sqf#L68)
+File: [client\Lobby\lobbi_init.sqf at line 69](../../../Src/client/Lobby/lobbi_init.sqf#L69)
 ## lobby_internal_backwallObjects
 
 Type: Variable
@@ -894,7 +882,7 @@ Initial value:
 ```sqf
 createHashMapFromArray ((keys lobby_internal_backwallSettings) apply ...
 ```
-File: [client\Lobby\lobbi_init.sqf at line 96](../../../Src/client/Lobby/lobbi_init.sqf#L96)
+File: [client\Lobby\lobbi_init.sqf at line 97](../../../Src/client/Lobby/lobbi_init.sqf#L97)
 ## lobby_internal_rttlight
 
 Type: Variable
@@ -906,7 +894,7 @@ Initial value:
 ```sqf
 objnull
 ```
-File: [client\Lobby\lobbi_init.sqf at line 101](../../../Src/client/Lobby/lobbi_init.sqf#L101)
+File: [client\Lobby\lobbi_init.sqf at line 102](../../../Src/client/Lobby/lobbi_init.sqf#L102)
 ## lobby_roleList
 
 Type: Variable
@@ -918,7 +906,7 @@ Initial value:
 ```sqf
 [] //Содержит список ролей с описанием, названием и айди
 ```
-File: [client\Lobby\lobbi_init.sqf at line 106](../../../Src/client/Lobby/lobbi_init.sqf#L106)
+File: [client\Lobby\lobbi_init.sqf at line 107](../../../Src/client/Lobby/lobbi_init.sqf#L107)
 ## lobby_timeLeft
 
 Type: Variable
@@ -930,7 +918,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\Lobby\lobbi_init.sqf at line 110](../../../Src/client/Lobby/lobbi_init.sqf#L110)
+File: [client\Lobby\lobbi_init.sqf at line 111](../../../Src/client/Lobby/lobbi_init.sqf#L111)
 ## lobby_RoleContenders
 
 Type: Variable
@@ -942,7 +930,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\Lobby\lobbi_init.sqf at line 112](../../../Src/client/Lobby/lobbi_init.sqf#L112)
+File: [client\Lobby\lobbi_init.sqf at line 113](../../../Src/client/Lobby/lobbi_init.sqf#L113)
 ## lobby_isReadyToPlay
 
 Type: Variable
@@ -954,7 +942,7 @@ Initial value:
 ```sqf
 false //готовность к игре в лобби до начала раунда
 ```
-File: [client\Lobby\lobbi_init.sqf at line 114](../../../Src/client/Lobby/lobbi_init.sqf#L114)
+File: [client\Lobby\lobbi_init.sqf at line 115](../../../Src/client/Lobby/lobbi_init.sqf#L115)
 ## lobby_isSelectedEmbarkRole
 
 Type: Variable
@@ -966,7 +954,7 @@ Initial value:
 ```sqf
 false //выбранная роль эмбарковая (только во время прогресса раунда)
 ```
-File: [client\Lobby\lobbi_init.sqf at line 116](../../../Src/client/Lobby/lobbi_init.sqf#L116)
+File: [client\Lobby\lobbi_init.sqf at line 117](../../../Src/client/Lobby/lobbi_init.sqf#L117)
 ## lobby_faithDesc_map
 
 Type: Variable
@@ -978,7 +966,7 @@ Initial value:
 ```sqf
 createHashMap //клиентские описания вероисповеданий
 ```
-File: [client\Lobby\lobbi_init.sqf at line 119](../../../Src/client/Lobby/lobbi_init.sqf#L119)
+File: [client\Lobby\lobbi_init.sqf at line 120](../../../Src/client/Lobby/lobbi_init.sqf#L120)
 ## lobby_loading_allHints
 
 Type: Variable
@@ -990,7 +978,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [client\Lobby\lobbi_init.sqf at line 139](../../../Src/client/Lobby/lobbi_init.sqf#L139)
+File: [client\Lobby\lobbi_init.sqf at line 140](../../../Src/client/Lobby/lobbi_init.sqf#L140)
 # lobby.hpp
 
 ## FAST_INIT_LOBBY

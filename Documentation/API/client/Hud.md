@@ -72,7 +72,7 @@ Description:
 
 Initial value:
 ```sqf
-["oxy","hunger","thirst","encumb","pee","poo","tf_lastError","combatMode","bone","pain","sleep","bleeding","stealth","light","combStyle","specAct",...
+["oxy","hunger","thirst","encumb","pee","poo","vs_lastError","combatMode","bone","pain","sleep","bleeding","stealth","light","combStyle","specAct",...
 ```
 File: [client\Hud\Hud_init.sqf at line 28](../../../Src/client/Hud/Hud_init.sqf#L28)
 ## hud_map_defaultValues
@@ -519,11 +519,11 @@ Initial value:
 [...
 ```
 File: [client\Hud\Hud_init.sqf at line 154](../../../Src/client/Hud/Hud_init.sqf#L154)
-## hud_tf_lastError
+## hud_vs_lastError
 
 Type: Variable
 
-Description: linking tf_lastError
+Description: linking vs_lastError
 
 
 Initial value:
@@ -531,7 +531,7 @@ Initial value:
 0
 ```
 File: [client\Hud\Hud_init.sqf at line 163](../../../Src/client/Hud/Hud_init.sqf#L163)
-## hud_tf_lastError_overlay
+## hud_vs_lastError_overlay
 
 Type: Variable
 

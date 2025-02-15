@@ -24,13 +24,13 @@ Count modules: 32
  - [OneSync](client//OneSync.md) - 5 files
  - [ProxyItems](client//ProxyItems.md) - 7 files
  - [Rendering](client//Rendering.md) - 12 files
- - [SoundSystem](client//SoundSystem.md) - 6 files
- - [StaminaControl](client//StaminaControl.md) - 4 files
+ - [SoundSystem](client//SoundSystem.md) - 3 files
+ - [StaminaControl](client//StaminaControl.md) - 3 files
  - [StrafeLock](client//StrafeLock.md) - 1 files
- - [SyncMobData](client//SyncMobData.md) - 3 files
+ - [SyncMobData](client//SyncMobData.md) - 2 files
  - [Traps](client//Traps.md) - 1 files
  - [VisualState](client//VisualState.md) - 10 files
- - [VoiceSystem](client//VoiceSystem.md) - 12 files
+ - [VoiceSystem](client//VoiceSystem.md) - 6 files
  - [WidgetSystem](client//WidgetSystem.md) - 6 files
 # Side: host
 Count modules: 55
