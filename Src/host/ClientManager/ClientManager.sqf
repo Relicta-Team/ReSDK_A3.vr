@@ -50,8 +50,7 @@ _event_onClientDisconnected = {
 cm_onClientAuthSuccess = {
 	params ["_owner","_gameToken","_discId","_atok","_reftok","_expDT"];
 	private _pwData = cm_preAwaitClientData get _owner;
-	if !isNullVar(_pwData) exitWith {
-		_pwData setv(cancelToken,true);
+	if isNullVar(_pwData) exitWith {
 		[_owner,"Внутренняя ошибка. Клиент не найден"] call cm_serverKickById;
 	};
 
@@ -67,6 +66,7 @@ cm_onClientAuthSuccess = {
 	// send client load request
 	[[],
 		{
+			call srv_auth_int_successed;
 			call relicta_cli_publicLoader;
 		}
 	] remoteExecCall ["spawn", _owner];
@@ -120,13 +120,13 @@ _authRequest = {
 //Регистрация клиента
 _onRegClient = {
 	params ["_owner","_name"];
-	private _disId = [_owner] call cm_map_ownerToDisIdAssoc;
+	private _disId = [_owner] call cm_getDiscordIdByOwner;
 	if isNullVar(_disId) exitWith {
 		[_owner,"Регистрация невозможна. Клиент не найден"] call cm_serverKickById;
 	};
 
+	//todo add port from old database and override name
 	[_disId,_name] call db_registerAccount;
-
 	newParams(ServerClient,[_owner arg _disId]);
 
 }; rpcAdd("onRegClient",_onRegClient);

@@ -3,6 +3,8 @@
 // sdk.relicta.ru
 // ======================================================
 
+//выклюачем старую систему запроса ролей с диса
+#define DISABLE_OLD_DISCORDID_LOAD
 
 //система аккаунтов.
 //! Внимание! На рантайме если перелкючать этот флаг, то нужно принудительно вызывать dsm_accounts_loadDiscordId на каждом клиенте в сессии
@@ -119,15 +121,24 @@ dsm_accounts_register = {
 };
 
 //загрузка привязки дискорда. Вызывается когда клиент загружается из БД
+
 dsm_accounts_loadDiscordId = {
 	params ["_client","_nick"];
 
 	if (!call dsm_accounts_canUse) exitwith {};
 
+	#ifdef DISABLE_OLD_DISCORDID_LOAD
+	if (true) exitWith {
+		setVar(_client,discordIdAcc,getVar(_client,discordId));
+		setVar(_client,arrivedInCity,0);
+		callFunc(_client,requestDiscordRoles);
+	};
+	#endif
+
 	private _ref = refcreate(0);
 	if ([_nick,_ref,true] call db_da_isSynced) then {
 		refget(_ref) params [["_disId",""],["_arrived",0]];
-		setVar(_client,discordId,_disId);
+		setVar(_client,discordIdAcc,_disId);
 		setVar(_client,arrivedInCity,_arrived);
 		
 		callFunc(_client,requestDiscordRoles);

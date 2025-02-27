@@ -8,8 +8,6 @@ params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
 
 cm_maxClients = (count allPlayers) max cm_maxClients;
 
-logger_client("Client connected. Owner %1; UID:%2; ID %3",_owner arg _uid arg _id);
-
 
 /*
 if !isNull(CRYPT_ENABLED) then {
@@ -53,3 +51,5 @@ cm_preAwaitClientData set [_owner,_pwData];
 	[_owner],
 	srv_auth_connected
 ] remoteExecCall ["spawn", _owner];
+
+logger_client("Client connected. Owner %1; UID:%2; ID %3",_owner arg _uid arg _id);

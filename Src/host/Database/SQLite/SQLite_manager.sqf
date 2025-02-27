@@ -339,14 +339,14 @@ db_getAllBannedRolesWithDescription = {
 // };
 
 //регистрация аккаунта по объекту
-db_registerClient = {
-	params ['this'];
+// db_registerClient = {
+// 	params ['this'];
 
-	private _query = "INSERT INTO Accounts (Uid,Name,Access,ClientSettings,CharSettings,CountConnections,LastJoin,FirstJoin)" +
-	"VALUES('%1','%2','ACCESS_PLAYER','[[],[],[]]','[nil,nil,nil,nil]',1,datetime('now','localtime'),datetime('now','localtime'))";
+// 	private _query = "INSERT INTO Accounts (Uid,Name,Access,ClientSettings,CharSettings,CountConnections,LastJoin,FirstJoin)" +
+// 	"VALUES('%1','%2','ACCESS_PLAYER','[[],[],[]]','[nil,nil,nil,nil]',1,datetime('now','localtime'),datetime('now','localtime'))";
 
-	[text format[_query,getSelf(uid),getSelf(name)]] call db_query
-};
+// 	[text format[_query,getSelf(uid),getSelf(name)]] call db_query
+// };
 
 db_saveClient = {
 	params ['this'];
@@ -376,8 +376,8 @@ db_saveClient = {
 	} foreach getSelf(lockedSettings);
 
 	[
-		text format["UPDATE Accounts SET Name='%2',Access='%3',Points=%4,CharSettings='[%5]',ClientSettings='[%6]',PlayedRounds=%7,LockedSettings='[%8]' where uid=%1",
-		getSelf(uid),
+		text format["UPDATE Accounts SET Name='%2',Access='%3',Points=%4,CharSettings='[%5]',ClientSettings='[%6]',PlayedRounds=%7,LockedSettings='[%8]' where DiscordId=%1",
+		getSelf(discordId),
 		getSelf(name),
 		[getSelf(access)] call cm_accessNumToType,
 		getSelf(points),
