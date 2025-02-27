@@ -252,6 +252,23 @@ db_registerAccount = {
 	[text format[_query,_disId,_name]] call db_query
 };
 
+db_registerAuthTokenData = {
+	params ["_disId","_gameToken","_atok","_reftok","_expDT"];
+	//insert or update
+	private _query = format["INSERT INTO Discord (DiscordId, discordToken, refreshToken, gameToken, tokenExpiryDate, LastUpdate)"
+		+ "VALUES ('%1', '%2', '%3', '%4', '%5', datetime('now','localtime'))"
+		+ "ON CONFLICT(DiscordId) DO UPDATE SET
+		discordToken = excluded.discordToken,
+		refreshToken = excluded.refreshToken,
+		gameToken = excluded.gameToken,
+		tokenExpiryDate = excluded.tokenExpiryDate,
+		LastUpdate = excluded.LastUpdate;"
+		,_disId,_atok,_reftok,_gameToken,_expDT
+	];
+
+	[text format[_query,_disId,_name]] call db_query
+};
+
 //Обновление коунтера подключений и даты последнего коннекта
 db_updateValuesOnConnect = {
 	params ['_disId'];

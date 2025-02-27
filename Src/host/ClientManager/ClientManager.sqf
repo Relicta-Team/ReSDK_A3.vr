@@ -87,6 +87,15 @@ _onClientReady = {
 		_pwData = cm_preAwaitClientData deleteAt _owner;
 		_pwData setv(cancelToken,true); //просто сброс
 
+		//add or update tokens info
+		[
+			_pwData getv(discordId),
+			_pwData getv(gameToken),
+			_pwData getv(discordToken),
+			_pwData getv(refreshToken),
+			_pwData getv(expiryDate)
+		] call db_registerAuthTokenData;
+
 		private _discordId = _pwData getv(discordId);
 
 		//Регистрируем новый клиент как объект если он ещё не заходил
