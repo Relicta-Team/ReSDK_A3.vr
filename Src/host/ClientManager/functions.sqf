@@ -5,6 +5,7 @@
 
 #include "..\oop.hpp"
 #include "..\engine.hpp"
+#include "..\struct.hpp"
 #include <..\Networking\Network.hpp>
 
 if (IS_INIT_MODULE) then {
@@ -13,8 +14,9 @@ if (IS_INIT_MODULE) then {
 	//закрыт ли сервер
 	cm_isServerLocked = false;
 
-	//список клиентов на ожидание кика. Только значимые типы в массивах
-	cm_preAwaitClientData = [];
+	//список клиентов на ожидание кика. PreAwaitClientData является значением, ключ uint (clientOwner)
+	cm_preAwaitClientData = hashMapNew;
+	cm_map_ownerToDisIdAssoc = hashMapNew;
 
 	cm_allClients = []; //список зарегистрированных объектов клиентов
 	cm_disconnectedClients = hashMapNew; //список дисконнектнутых клиентов. Отсюда берутся все jip-ам
@@ -174,7 +176,7 @@ cm_idToUid = {
 };
 
 //зарегистрирован в памяти или нет
-cm_isRegisteredClient = {
+cm_isClientExist = {
 	not_equals(_this call cm_findClientById,nullPtr);
 };
 
@@ -343,9 +345,9 @@ cm_unregisterMobInGame = {
 
 //Проверяет наличие ранее подключенного клиента
 cm_checkClientInJIPMemory = {
-	params ["_uid","_owner"];
+	params ["_disId","_owner"];
 
-	private _client = cm_disconnectedClients getOrDefault [_uid,nullPtr];
+	private _client = cm_disconnectedClients getOrDefault [_disId,nullPtr];
 	if equals(_client,nullPtr) exitWith {
 		false
 	};

@@ -36,8 +36,9 @@ _event_onClientDisconnected = {
 	if (!isMultiplayer) then {
 		log("Init emulated player...");
 		//newParams(ServerClient,["Yodes(emulate)" arg player arg 0 arg "76561198094364528"]);
+		//TODO update id
 		_parameters = [0,false,"76561198094364528"];
-		cm_preAwaitClientData pushBack _parameters;
+		cm_preAwaitClientData set [0,_parameters];
 	};
 
 
@@ -45,22 +46,53 @@ _event_onClientDisconnected = {
 	client_handler_onDisconnect = addMissionEventHandler ["PlayerDisconnected",_event_onClientDisconnected]; //HandleDisconnect - не удовлетворяет требованиям
 #endif
 
+//called on client auth success
+cm_onClientAuthSuccess = {
+	params ["_owner","_gameToken","_discId","_atok","_reftok","_expDT"];
+	private _pwData = cm_preAwaitClientData get _owner;
+	if !isNullVar(_pwData) exitWith {
+		_pwData setv(cancelToken,true);
+		[_owner,"Внутренняя ошибка. Клиент не найден"] call cm_serverKickById;
+	};
+
+	//save discord id to owner
+	cm_map_ownerToDisIdAssoc set [_owner,_discId];
+
+	_pwData setv(gameToken,_gameToken);
+	_pwData setv(discordId,_discId);
+	_pwData setv(discordToken,_atok);
+	_pwData setv(refreshToken,_reftok);
+	_pwData setv(expireDate,_expDT);
+
+	// send client load request
+	[[],
+		{
+			call relicta_cli_publicLoader;
+		}
+	] remoteExecCall ["spawn", _owner];
+};
+
+cm_getDiscordIdByOwner = {
+	params ["_owner"];
+	cm_map_ownerToDisIdAssoc get _owner
+};
+
 //Событие когда клиент готов (загрузил все данные)
 _onClientReady = {
 	params ["_owner"];
 
 	//Убираем из cm_preAwaitClientData нашего клиента (через _doNothing)
-	_index = cm_preAwaitClientData findif {(_x select 0) == _owner};
-	if (_index != -1) then {
-		_el = cm_preAwaitClientData deleteat _index;
-		_el set [1,true];//просто сброс
+	private _pwData = cm_preAwaitClientData get _owner;
+	if !isNullVar(_pwData) then {
+		_pwData = cm_preAwaitClientData deleteAt _owner;
+		_pwData setv(cancelToken,true); //просто сброс
 
-		private _uid = _el select 2;
+		private _discordId = _pwData getv(discordId);
 
 		//Регистрируем новый клиент как объект если он ещё не заходил
-		if (!([_uid,_owner] call cm_checkClientInJIPMemory)) then {
-			if ([_uid] call db_isUIDRegistered) then {
-				newParams(ServerClient,[_owner arg _uid]); //_el select 2 == UID
+		if (!([_discordId,_owner] call cm_checkClientInJIPMemory)) then {
+			if ([_discordId] call db_isDiscordIdRegistered) then {
+				newParams(ServerClient,[_owner arg _discordId]);
 			} else {
 				//rpc create conn
 				rpcSendToClient(_owner,"authproc",null);
@@ -87,11 +119,15 @@ _authRequest = {
 
 //Регистрация клиента
 _onRegClient = {
-	params ["_owner","_uid","_name"];
+	params ["_owner","_name"];
+	private _disId = [_owner] call cm_map_ownerToDisIdAssoc;
+	if isNullVar(_disId) exitWith {
+		[_owner,"Регистрация невозможна. Клиент не найден"] call cm_serverKickById;
+	};
 
-	[_uid,_name] call db_registerAccount;
+	[_disId,_name] call db_registerAccount;
 
-	newParams(ServerClient,[_owner arg _uid]);
+	newParams(ServerClient,[_owner arg _disId]);
 
 }; rpcAdd("onRegClient",_onRegClient);
 

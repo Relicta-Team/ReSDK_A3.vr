@@ -99,7 +99,7 @@ dsm_accounts_register = {
 
 	[_nick,_discordUserId] call db_da_register;
 	
-	setVar(_client,discordId,_discordUserId);
+	setVar(_client,discordIdAcc,_discordUserId);
 	setVar(_client,arrivedInCity,0);
 
 	[_chanId,format["Игровой аккаунт `%1` привязан к профилю <@%2>",_nick,_discordUserId]] call dsm_sendToChannel;

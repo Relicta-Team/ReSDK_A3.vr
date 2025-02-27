@@ -11,7 +11,7 @@
 #include "SQLite_manager.sqf"
 
 //!версия базы данных (не расширения)
-db_version = "2.0";
+db_version = "3.0";
 //true будет выводить каждый запрос в дебаг консоль
 db_canUseQueryLogToStdout = false;
 

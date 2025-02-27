@@ -15,9 +15,9 @@ db_isClientRegistered = {
 	count([text format["select Id from Accounts where Uid=%1",getSelf(uid)],"uint"] call db_query)!=0
 };
 
-db_isUIDRegistered = {
-	params ["_uid"];
-	count([text format["select Id from Accounts where Uid=%1",_uid],"string"] call db_query)!=0
+db_isDiscordIdRegistered = {
+	params ["_disId"];
+	count([text format["select Id from Accounts where DiscordId=%1",_disId],"string"] call db_query)!=0
 };
 
 //Проверяет юид в бан-листе. Если забанен выводит сообщение. Если срок бана истёк - разбаниваем клиента
@@ -242,22 +242,22 @@ db_updateClientLockedSettings = {
 	true
 };
 
-//Регистрация аккаунта по юиду и имени
+//Регистрация аккаунта по айди и имени
 db_registerAccount = {
-	params ['_uid',"_name"];
+	params ['_disId',"_name"];
 
-	private _query = "INSERT INTO Accounts (Uid,Name,Access,ClientSettings,CharSettings,CountConnections,LastJoin,FirstJoin)" +
+	private _query = "INSERT INTO Accounts (DiscordId,Name,Access,ClientSettings,CharSettings,CountConnections,LastJoin,FirstJoin)" +
 	"VALUES('%1','%2','ACCESS_PLAYER','[[],[],[]]','[nil,nil,nil,nil]',1,datetime('now','localtime'),datetime('now','localtime'))";
 
-	[text format[_query,_uid,_name]] call db_query
+	[text format[_query,_disId,_name]] call db_query
 };
 
 //Обновление коунтера подключений и даты последнего коннекта
 db_updateValuesOnConnect = {
-	params ['_uid'];
+	params ['_disId'];
 
-	private _query = "UPDATE Accounts SET LastJoin=datetime('now','localtime'),CountConnections=CountConnections+1 where uid=%1";
-	[text format[_query,_uid]] call db_query
+	private _query = "UPDATE Accounts SET LastJoin=datetime('now','localtime'),CountConnections=CountConnections+1 where DiscordId=%1";
+	[text format[_query,_disId]] call db_query
 };
 
 db_checkAccessOnFirstSession = {
@@ -412,7 +412,7 @@ db_saveClient = {
 db_loadClient = {
 	params ['this'];
 
-	([text format["select Name,Access,Points,ClientSettings,CharSettings,FirstJoin,LastJoin,PlayedRounds,LockedSettings from accounts where uid=%1",getSelf(uid)],"string|string|int|string|string|DateTime|DateTime|int|string",true] call db_query)
+	([text format["select Name,Access,Points,ClientSettings,CharSettings,FirstJoin,LastJoin,PlayedRounds,LockedSettings from accounts where DiscordId=%1",getSelf(discordId)],"string|string|int|string|string|DateTime|DateTime|int|string",true] call db_query)
 	params ["_name","_access","_points","_cliSet","_charSet","_firstJoin","_lastJoin","_playedRounds","_lockedSettings"];
 
 	setSelf(name,_name);
