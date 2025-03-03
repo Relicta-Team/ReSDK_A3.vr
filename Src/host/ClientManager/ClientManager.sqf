@@ -61,12 +61,12 @@ cm_onClientAuthSuccess = {
 	_pwData setv(discordId,_discId);
 	_pwData setv(discordToken,_atok);
 	_pwData setv(refreshToken,_reftok);
-	_pwData setv(expireDate,_expDT);
+	_pwData setv(expiryDate,_expDT);
 
 	// send client load request
-	[[],
+	[[_gameToken],
 		{
-			call srv_auth_int_successed;
+			[_this select 0] call srv_auth_int_successed;
 			call relicta_cli_publicLoader;
 		}
 	] remoteExecCall ["spawn", _owner];
@@ -103,6 +103,10 @@ _onClientReady = {
 			if ([_discordId] call db_isDiscordIdRegistered) then {
 				newParams(ServerClient,[_owner arg _discordId]);
 			} else {
+				//check account from old table
+				if ([_discordId] call db_port_oldAccountRegistered) exitWith {
+					newParams(ServerClient,[_owner arg _discordId]);
+				};
 				//rpc create conn
 				rpcSendToClient(_owner,"authproc",null);
 			};
@@ -134,9 +138,11 @@ _onRegClient = {
 		[_owner,"Регистрация невозможна. Клиент не найден"] call cm_serverKickById;
 	};
 
-	//todo add port from old database and override name
 	[_disId,_name] call db_registerAccount;
-	newParams(ServerClient,[_owner arg _disId]);
+	[_disId] call db_registerStats;
+	
+	private _newClient = newParams(ServerClient,[_owner arg _disId]);
+	callFuncParams(_newClient,addDiscordRole,"Dweller");
 
 }; rpcAdd("onRegClient",_onRegClient);
 

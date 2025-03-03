@@ -252,6 +252,13 @@ db_registerAccount = {
 	[text format[_query,_disId,_name]] call db_query
 };
 
+db_registerStats = {
+	params ["_disId",["_arrCity",0]];
+
+	private _query = "INSERT INTO Stats (DiscordId,ArrivedInCity) VALUES('%1',%2)";
+	[text format[_query,_disId,_arrCity]] call db_query
+};
+
 db_registerAuthTokenData = {
 	params ["_disId","_gameToken","_atok","_reftok","_expDT"];
 	//insert or update
@@ -314,6 +321,7 @@ db_isConnectedFirstTimeToday = {
 
 db_getAllBannedRoles = {
 	params ["_uid"];
+	if (true) exitWith {[]};//! temporary banned roles
 	private _query = format["delete from JobBans where datetime('now','localtime') >= UnbanDate and Uid=%1;",_uid];
 	([text _query,"string"] call db_query);
 	_query = format["select Job from JobBans where Uid=%1",_uid];
@@ -429,8 +437,9 @@ db_saveClient = {
 db_loadClient = {
 	params ['this'];
 
-	([text format["select Name,Access,Points,ClientSettings,CharSettings,FirstJoin,LastJoin,PlayedRounds,LockedSettings from accounts where DiscordId=%1",getSelf(discordId)],"string|string|int|string|string|DateTime|DateTime|int|string",true] call db_query)
-	params ["_name","_access","_points","_cliSet","_charSet","_firstJoin","_lastJoin","_playedRounds","_lockedSettings"];
+	([text format["select Name,Access,Points,ClientSettings,CharSettings,FirstJoin,LastJoin,PlayedRounds,LockedSettings from Accounts where DiscordId=%1",getSelf(discordId)],
+		"string|string|int|string|string|DateTime|DateTime|int|string",true] call db_query
+	) params ["_name","_access","_points","_cliSet","_charSet","_firstJoin","_lastJoin","_playedRounds","_lockedSettings"];
 
 	setSelf(name,_name);
 	private _accessNum = [_access] call cm_accessTypeToNum;
@@ -1065,4 +1074,49 @@ db_da_register = {
 	"VALUES('%1','%2',datetime('now','localtime'),0)";
 
 	[text format[_query,_nick,_discordid]] call db_query
+};
+
+
+//======================================
+// Legacy db porting
+//======================================
+
+//port handler, if true - successed port from old account
+db_port_oldAccountRegistered = {
+	params ["_did"];
+	private _query = "select Nick,ArrivedInCity from Discord_OLD where DiscordId='%1'";
+	private _dusr = ([text format[_query,_did],"string|int"] call db_query);
+	if (count _dusr == 0) exitwith {false};
+	(_dusr select 0) params ["_nickLwr","_arrCity"];
+
+	_query = "select Name,Access,Points,ClientSettings,CharSettings,CountConnections,PlayedRounds,FirstJoin,LockedSettings from Accounts_OLD where Name=='%1' COLLATE nocase";
+	private _dacc = ([text format[_query,_nickLwr],
+		"string|string|int|string|string|int|int|string|string"
+	] call db_query);
+	if (count _dacc == 0) exitwith {false};
+	(_dacc select 0) params ["_name","_acc","_pt","_cset","_chset","_ccn","_pr","_fj","_lset"];
+
+
+	_query = "INSERT INTO Accounts (DiscordId,Name,Access,Points,ClientSettings,CharSettings,LockedSettings,CountConnections,PlayedRounds,FirstJoin,LastJoin)" +
+	"VALUES('%1','%2','%3',%4,'%5','%6','%7',%8,%9,'%10',datetime('now','localtime'))";
+
+	[text format[_query
+		,_did
+		,_name
+		,_acc
+		,_pt
+		,_cset regexReplace["""/g",""""""]
+		,_chset regexReplace["""/g",""""""]
+		,_lset regexReplace["""/g",""""""]
+		,_ccn
+		,_pr
+		,_fj
+	]] call db_query;
+
+	//add arrived in city info
+	[_did,_arrCity] call db_registerStats;
+
+	//todo delete account info
+
+	true
 };
