@@ -4,6 +4,7 @@
 // ======================================================
 
 #include "..\engine.hpp"
+#include "..\struct.hpp"
 #include "..\oop.hpp"
 #include <..\text.hpp>
 #include <ClientManager.h>
@@ -35,10 +36,19 @@ _event_onClientDisconnected = {
 
 	if (!isMultiplayer) then {
 		log("Init emulated player...");
-		//newParams(ServerClient,["Yodes(emulate)" arg player arg 0 arg "76561198094364528"]);
-		//TODO update id
-		_parameters = [0,false,"76561198094364528"];
-		cm_preAwaitClientData set [0,_parameters];
+		private _pwData = struct_newp(PreAwaitClientData,0);
+		cm_preAwaitClientData set [0,_pwData];
+		
+		private _disId = "12345";
+		private _name = "User";
+
+		_pwData setv(discordId,_disId);
+
+		if (!(([_name] call db_isNickRegistered))) then {
+			[_disId,_name] call db_registerAccount;
+			[_disId] call db_registerStats;
+			[text format["update Accounts set Access='ACCESS_OWNERS' where DiscordId='%1'",_disId]] call db_query;
+		};
 	};
 
 

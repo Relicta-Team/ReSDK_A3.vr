@@ -261,6 +261,12 @@ db_registerStats = {
 
 db_registerAuthTokenData = {
 	params ["_disId","_gameToken","_atok","_reftok","_expDT"];
+	
+	//disabled in editor mode
+	#ifdef EDITOR
+	if(true) exitWith {};
+	#endif
+
 	//insert or update
 	private _query = format["INSERT INTO Discord (DiscordId, discordToken, refreshToken, gameToken, tokenExpiryDate, LastUpdate)"
 		+ "VALUES ('%1', '%2', '%3', '%4', '%5', datetime('now','localtime'))"
