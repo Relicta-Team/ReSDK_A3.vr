@@ -432,6 +432,7 @@ lobby_setFace = {
 	lobby_internal_rttcamera campreparetarget (_camPos vectoradd [-0.05,0,0.11]);
 	lobby_internal_rttcamera camSetFov 0.16;
 	lobby_internal_rttcamera camcommitprepared 0;
+	private _defPos = getPosATL lobby_internal_rttcamera;
 
 	//adding wall
 	// deletevehicle lobby_internal_backwallObject;
@@ -487,36 +488,56 @@ lobby_setFace = {
 		} foreach lobby_internal_backwallObjects;
 	}];
 	
-	//TODO rotate camera around player preview
-		// _pic ctrladdeventhandler ["MouseButtonDown",{
-		// 	params ["_w","_b"];
-		// 	_w setvariable ["moving",true];
-		// }];
-		// _pic ctrladdeventhandler ["MouseExit",{
-		// 	params ["_w"];
-		// 	_w setvariable ["moving",false];
-		// }];
-		// _pic ctrladdeventhandler ["MouseButtonUp",{
-		// 	params ["_w","_b"];
-		// 	_w setvariable ["moving",false];
-		// }];
-		// _pic ctrladdeventhandler ["MouseMoving",{
-		// 	params ["_w","_x","_y"];
-		// 	if (_w getvariable ["moving",false]) then {
-		// 		private _campos = (lobby_glob_dummy_man modeltoworldvisual (lobby_glob_dummy_man selectionPosition "head"));
-		// 		lobby_internal_rttcamera setposatl (_campos vectoradd [0+(_x*10),1+(_y*10),0]);
-		// 	};
-		// }];
+	//camera rotator
+	_pic ctrlEnable true;
+	_pic setvariable ["defPos",_defPos];
+	_pic setvariable ["mimicEnable",{
+		params ["_mode"];
+		if (_mode && {!(simulationEnabled lobby_glob_dummy_man)}) then {
+			lobby_glob_dummy_man enablesimulation _mode;
+		};
+		lobby_glob_dummy_man setMimic "default";
+		lobby_glob_dummy_man enableMimics _mode;
+	}];
+	_pic ctrladdeventhandler ["MouseExit",{
+		params ["_w"];
+		lobby_internal_rttcamera setposatl (_w getvariable "defPos");
+		[false] call (_w getvariable "mimicEnable");
+	}];
+	_pic ctrladdeventhandler ["MouseEnter",{
+		params ["_w"];
+		[true] call (_w getvariable "mimicEnable");
+		ctrlSetFocus _w;
+	}];
+	_pic ctrladdeventhandler ["MouseMoving",{
+		params ["_w","_xm","_ym"];
+		(ctrlPosition _w) params ["_bpx","_bpy","_szX","_szY"];
+
+		private _campos = (lobby_glob_dummy_man modeltoworldvisual (lobby_glob_dummy_man selectionPosition "head"));
+		private _defPos = _w getvariable "defPos";
+		
+		private _rad = _campos distance _defPos;
+		private _mul = 100;
+		private _dirX = linearConversion [0,_szX,_xm,-_rad* _mul,_rad* _mul];
+		private _dirY = linearConversion [0,_szY,_ym,0.3,-0.3];
+
+		lobby_internal_rttcamera setposatl (_defPos vectoradd [
+			0 + (sin _dirX) * (_rad),
+			0,
+			_dirY
+		]);
+		
+	}];
 
 	addWidToList(_pic);
 	_list setvariable ["pic",_pic];
 
 	_text = [getDisplay,TEXT,WIDGET_FULLSIZE,_ctg] call createWidget;
 	_text setBackgroundColor [0,0,0,1];
+	_text ctrlEnable false; //fix for mouseenter rtt-picture
 	_text setFade 0;
 	_text commit 0;
 	_list setvariable ["text",_text];
-
 
 	_onTreeSelChanged = {
 		params ["_list", "_selectedPath"];
@@ -536,7 +557,8 @@ lobby_setFace = {
 			_text commit 0.1;
 		};
 		if (_optionName == "select") exitwith {
-			lobby_glob_dummy_man setFace _config;
+			lobby_glob_dummy_man setFace _config;			
+			
 			_text setFade 1;
 			_text commit 0.2;
 			//_optData here is category (white,black,asian etc...)
