@@ -243,7 +243,7 @@ cm_serverKickById = {
 
 	// Системная функция при обнаружении подозрительной активности
 	pre_oncheat = {
-		params ["_owner","_ctxCheat","_uid"];
+		params ["_owner","_ctxCheat"];
 		_ctxCheat params [["_mes","nullmes"],["_data",null]];
 		call {
 
@@ -251,19 +251,20 @@ cm_serverKickById = {
 			if (_mes == "EFHmod") exitWith {
 				//[format["[RECHEAT]:	<%1> (%2) : deviation of the frame number by %3 frames",_mes,_uid,_data]] call discLog;
 				
-				private _errorNick = "ERROR_UID_NOT_IN_DATABASE:"+_uid;
-				private _nick = [_uid,_errorNick] call db_uidToNick;
-				private _m = format["[RECHEAT]:	<%1> (%2 -> %4) : deviation of the frame number by %3 frames",_mes,_nick,_data,_uid];
+				//private _errorNick = "ERROR_UID_NOT_IN_DATABASE:"+_uid;
+				//private _nick = [_uid,_errorNick] call db_disIdToNick;
+				private _m = format["[RECHEAT]:	<%1> (owner %2) : deviation of the frame number by %3 frames",_mes,_owner,_data];
 				
-				if (_nick != _errorNick) then {
-					modvar(_m) + "; Attempt execute ban by uid (platform side)";
-				};
+				// if (_nick != _errorNick) then {
+				// 	modvar(_m) + "; Attempt execute ban by uid (platform side)";
+				// };
 
 				["ADMIN_RECHEAT: "+ _m] call adminLog;
 				["@everyone ADMIN_RECHEAT: "+_m] call disc_adminlog_provider;
 
 				[_owner,"Подозрительная активность. Код: 1"] call cm_serverKickById;
 				
+				/*
 				if (_nick != _errorNick) then {
 					private _reason = "Подозрительная активность. Код: 1. Зайдите в discord.relicta.ru";
 					[null,_nick,_reason] call db_banByName;
@@ -272,14 +273,15 @@ cm_serverKickById = {
 					//? Where placed .txt banfile on serverside?
 					private _r = (format["#exec ban %1",_uid]) call cm_serverCommand;
 					["@everyone ADMIN_RECHEAT: Client " + str _uid + "not registered. Executed platform ban; Result: " + str _r] call disc_adminlog_provider;
-				};			
+				};
+				*/	
 			};
 
 		};
 	};
 
 	pre_notifClientAssert = {
-		params ["_message","_owner","_uid"];
+		params ["_message","_owner"];
 		private _id = (str randInt(1,1000)) + "-" + (toUpper generatePtr);
 		_message = format["%1 (ID: %2, UID: %3)",_message,_id,_uid];
 		[__ASSERT_WEBHOOK_PREFIX__ + _message] call discError;
