@@ -111,7 +111,7 @@ db_banByName = {
 	//if (getVar(_banner,Access) <= ([_access] call cm_accessTypeToNum)) exitWith {format["NOT BANNED: Your access level is lower than %1",_access]};
 
 	//get client by disId
-	private _bannedClient = _disId call cm_findClientByUid;
+	private _bannedClient = _disId call cm_findClientByDisId;
 	private _andKicked = "";
 	if !isNullReference(_bannedClient) then {
 		[callFunc(_bannedClient,getOwner),"Вы были забанены." + (if(_isPerm)then{""}else{" Перезайдите на сервер чтобы узнать дату разбана."})] call cm_serverKickById;
@@ -164,7 +164,7 @@ db_banJobByName = {
 	private _query = format[_qText,_disId,_role,_unbanDate,_reason,_bannerDisId];
 	[text format["%1",_query],""] call db_query;
 
-	private _probCli = [_disId,true] call cm_findClientByUid;
+	private _probCli = [_disId,true] call cm_findClientByDisId;
 	if !isNullReference(_probCli) then {
 		callFunc(_probCli,flushBannedRolesLastGet);
 	};
@@ -196,7 +196,7 @@ db_unbanJobByName = {
 	private _query = format["DELETE FROM JobBans WHERE discordId=%1 and Job='%2'",_disId,_role];
 	[text format["%1",_query],""] call db_query;
 
-	private _probCli = [_disId,true] call cm_findClientByUid;
+	private _probCli = [_disId,true] call cm_findClientByDisId;
 	if !isNullReference(_probCli) then {
 		callFunc(_probCli,flushBannedRolesLastGet);
 	};

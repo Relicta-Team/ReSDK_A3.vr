@@ -81,7 +81,7 @@ cm_forsakens = ["76561198096453655","76561198072294284","76561198156220735","765
 //найти клиента по айди. Допускается перегрузка с двумя параметрами, где второй - искать ли клиента в отключенных
 protoFind(Id,id,__compare_equality_hard); //cm_findClientById
 protoFind(Name,name,__compare_equality_soft); //cm_findClientByName
-protoFind(Uid,uid,__compare_equality_hard); //cm_findClientByUid
+protoFind(DisId,discordId,__compare_equality_hard); //cm_findClientByDisId
 protoFind(Access,access,__compare_equality_hard); //cm_findClientByAccess
 
 cm_findClientByAccessLevel = {
