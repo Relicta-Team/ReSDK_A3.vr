@@ -82,6 +82,39 @@ cm_onClientAuthSuccess = {
 	] remoteExecCall ["spawn", _owner];
 };
 
+//handle ban client on auth
+cm_handleBanClient = {
+	params ["_owner","_disId"];
+
+	private _ref = refcreate(0);
+	private _isBanned = false;
+	if ([_disId,_ref] call db_checkBan) then {
+		_isBanned = true;
+		refget(_ref) params ["_banTime","_banReason","_unbanAfter","_isPerm"];
+		if (_isPerm) then {
+
+			_mes = format[
+				if (_banReason == "") then {
+					"Доступ заблокирован."
+				} else {
+					"Доступ заблокирован. %1"
+				},_banReason];
+			[_owner,_mes] call cm_serverKickById;
+		} else {
+			_mes = format[
+				if (_banReason == "") then {
+					"Вы забанены до %2."
+				} else {
+					"Вы забанены до %2. %1"
+				}
+			,_banReason,_unbanAfter];
+			[_owner,_mes] call cm_serverKickById;
+		};
+	};
+
+	_isBanned
+};
+
 cm_getDiscordIdByOwner = {
 	params ["_owner"];
 	cm_map_ownerToDisIdAssoc get _owner
@@ -422,31 +455,8 @@ if (isMultiplayer) then {
 			nextFrameParams(cm_serverKickById,vec2(_owner,"Сервер переполнен."));
 		};
 
-		_ref = refcreate(0);
-		if ([_uid,_ref] call db_checkBan) exitWith {
-			refget(_ref) params ["_banTime","_banReason","_unbanAfter","_isPerm"];
-			if (_isPerm) then {
-
-				_mes = format[
-					if (_banReason == "") then {
-						"Доступ заблокирован."
-					} else {
-						"Доступ заблокирован. %1"
-					},_banReason];
-				nextFrameParams(cm_serverKickById,vec2(_owner,_mes));
-			} else {
-				_mes = format[
-					if (_banReason == "") then {
-						"Вы забанены до %2."
-					} else {
-						"Вы забанены до %2. %1"
-					}
-				,_banReason,_unbanAfter];
-				nextFrameParams(cm_serverKickById,vec2(_owner,_mes));
-			};
-		};
-
 		//whitelist protect
+		//todo replace or remove this
 		#ifdef TEST_WHITELISTED
 			private _listAllow = cm_owners + cm_admins + cm_forsakens;
 			if (!array_exists(_listAllow,_uid)) exitWith {

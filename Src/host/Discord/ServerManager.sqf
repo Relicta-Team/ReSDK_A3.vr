@@ -157,6 +157,7 @@ dsm_callbackHandle = {
 			};
 		};
 		//Ответ от дискорда (регистрация через лс)
+		//! not used
 		if (_function == "accounting_register_request") exitwith {
 			_list = _data call dsm_deserializeStringList;
 			_list params ["_id","_nick","_hash","_discordUserId"];

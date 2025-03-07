@@ -168,11 +168,11 @@ cm_idToName = {
 	getVar(_cli,name);
 };
 
-cm_idToUid = {
+cm_idToDisId = {
 	params ["_id"];
 	private _cli = _id call cm_findClientById;
-	if isNullReference(_cli) exitWith {format["<Unknown uid (%1)>",_id]};
-	getVar(_cli,uid);
+	if isNullReference(_cli) exitWith {format["<Unknown client (%1)>",_id]};
+	getVar(_cli,discordId);
 };
 
 //зарегистрирован в памяти или нет

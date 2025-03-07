@@ -1038,6 +1038,7 @@ db_hasNeedClientVote = {
 //======================================
 // Discord accounting
 //======================================
+//! not used
 db_da_isSynced = {
 	params ["_nick","_refId",["_loadArrived",false]];
 	private _res = if(_loadArrived) then {
@@ -1057,6 +1058,7 @@ db_da_isSynced = {
 	true
 };
 
+//! not used
 db_da_isSyncedAsDiscordId = {
 	params ["_id"];
 	private _res = ([text format["select Nick from Discord where DiscordId='%1' COLLATE NOCASE",_id],"string"] call db_query);
@@ -1064,6 +1066,7 @@ db_da_isSyncedAsDiscordId = {
 	true
 };
 
+//! not used
 db_da_updateArrivedInCity = {
 	params ["_nick"];
 	if ([_nick] call db_da_isSynced) exitwith {
@@ -1078,6 +1081,7 @@ db_da_updateArrivedInCity = {
 	false
 };
 
+//! not used
 db_da_register = {
 	params ["_nick","_discordid"];
 	private _query = "INSERT INTO Discord (Nick,DiscordId,AddedDate,ArrivedInCity)" +
@@ -1086,6 +1090,15 @@ db_da_register = {
 	[text format[_query,_nick,_discordid]] call db_query
 };
 
+//обновляем статистику посещения города
+db_da_updateStatArrivedInCity = {
+	params ["_client"];
+	private _query = format["UPDATE Stats SET ArrivedInCity=%2 where DiscordId='%1'",
+		getVar(_client,disId),
+		getVar(_client,arrivedInCity)
+	];
+	[text format[_query,_uid]] call db_query
+};
 
 //======================================
 // Legacy db porting
@@ -1125,8 +1138,6 @@ db_port_oldAccountRegistered = {
 
 	//add arrived in city info
 	[_did,_arrCity] call db_registerStats;
-
-	//todo delete account info
 
 	true
 };

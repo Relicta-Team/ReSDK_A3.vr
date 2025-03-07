@@ -28,6 +28,7 @@ dsm_accounts_arriveInCityCountNeed = 5;
 
 //возвращает результат проверки наличия. вызывается коллбэком
 //вызывается из лс сообщений у бота. запрос токена авторизации
+//! not used
 dsm_accounts_checkSync = {
 	params ["_nick","_hash","_chanId","_discordUserId"];
 	
@@ -71,6 +72,7 @@ dsm_accounts_checkSync = {
 
 //регистрация аккаунта
 //выполняет привязку дискорда к учетке и проивзодит синхронизацию ролей
+//! not used
 dsm_accounts_register = {
 	params ["_client","_token"];
 
@@ -159,7 +161,7 @@ dsm_accounts_handleRegisterArriveInCity = {
 	modVar(_cli,arrivedInCity, + 1);
 
 	//sync in database
-	[getVar(_cli,name)] call db_da_updateArrivedInCity;
+	[_cli] call db_da_updateStatArrivedInCity;
 
 	//validate count and adjust role
 	if (
