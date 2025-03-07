@@ -552,6 +552,14 @@ db_loadClient = {
 	[this] call db_updateClientSettings;
 
 	[this,_name] call dsm_accounts_loadDiscordId;
+
+	//load user stats
+	private _statsq = "select ArrivedInCity from Stats where DiscordId='%1'";
+	private _statsDat = [text format[_statsq,getSelf(discordId)],"int"] call db_query;
+	if (count _statsDat > 0) then {
+		(_statsDat select 0) params ["_acit"];
+		setSelf(arrivedInCity,_acit);
+	};
 };
 
 //проверяет клиентские настройки. Если что-то не так делает логику...
@@ -1093,8 +1101,9 @@ db_da_register = {
 //обновляем статистику посещения города
 db_da_updateStatArrivedInCity = {
 	params ["_client"];
+	if isNullReference(_client) exitWith {};
 	private _query = format["UPDATE Stats SET ArrivedInCity=%2 where DiscordId='%1'",
-		getVar(_client,disId),
+		getVar(_client,discordId),
 		getVar(_client,arrivedInCity)
 	];
 	[text format[_query,_uid]] call db_query

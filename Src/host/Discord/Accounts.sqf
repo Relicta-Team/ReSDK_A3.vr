@@ -132,7 +132,7 @@ dsm_accounts_loadDiscordId = {
 	#ifdef DISABLE_OLD_DISCORDID_LOAD
 	if (true) exitWith {
 		setVar(_client,discordIdAcc,getVar(_client,discordId));
-		setVar(_client,arrivedInCity,0);
+		//setVar(_client,arrivedInCity,0);
 		callFunc(_client,requestDiscordRoles);
 	};
 	#endif

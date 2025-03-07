@@ -493,11 +493,13 @@ lobby_setFace = {
 	_pic setvariable ["defPos",_defPos];
 	_pic setvariable ["mimicEnable",{
 		params ["_mode"];
-		if (_mode && {!(simulationEnabled lobby_glob_dummy_man)}) then {
-			lobby_glob_dummy_man enablesimulation _mode;
-		};
-		lobby_glob_dummy_man setMimic "default";
-		lobby_glob_dummy_man enableMimics _mode;
+		// if (_mode && {!(simulationEnabled lobby_glob_dummy_man)}) then {
+		// 	lobby_glob_dummy_man enablesimulation _mode;
+		// };
+		//! Это не работает из-за каких-то сетевых ебаных чешких тонкостей.
+		//Для решения проблемы возможно стоит создавать dummy чара для каждого клиента
+		// lobby_glob_dummy_man setMimic "default";
+		// lobby_glob_dummy_man enableMimics _mode;
 	}];
 	_pic ctrladdeventhandler ["MouseExit",{
 		params ["_w"];
