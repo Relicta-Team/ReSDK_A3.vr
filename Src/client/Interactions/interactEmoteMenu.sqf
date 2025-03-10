@@ -8,6 +8,9 @@
 namespace(InteractEmote_interactEmote_)
 
 decl(bool)
+interactEmote_disableGlobal = false;
+
+decl(bool)
 interactEmote_isLoadedMenu = false;
 
 decl(string)
@@ -78,6 +81,7 @@ interactEmote_load = {
 	}];
 	_input ctrlAddEventHandler ["KeyUp",{
 		params ["_w","_key"];
+		if (interactEmote_disableGlobal) exitWith {};
 		if (_key == KEY_BACKSPACE) exitWith {
 			forceUnicode 0;
 			_text = ctrlText _w;
@@ -345,7 +349,7 @@ interactEmote_onMouseMoving = {
 	params ["_display"];
 
 	if (isDragProcess) exitWith {};
-
+	if (interactEmote_disableGlobal) exitWith {};
 	_ctg = _display getVariable "ieMenuCtg";
 
 	if ((_ctg getVariable "checkedPos") call isMouseInsidePosition &&
