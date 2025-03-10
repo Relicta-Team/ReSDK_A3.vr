@@ -491,6 +491,53 @@ lobby_setFace = {
 	//camera rotator
 	_pic ctrlEnable true;
 	_pic setvariable ["defPos",_defPos];
+	_pic setvariable ["_interpExit",false];
+	_pic setvariable ["_interpEnter",false];
+	startAsyncInvoke
+	{
+		_this params ["_pic"];
+		if isNullReference(_pic) exitWith {true};
+		
+		//if equals(getPosATL lobby_internal_rttcamera,_pic getvariable "defPos") exitWith {false};
+
+		if (_pic getvariable ["_interpExit",false]) then {
+			
+			_newpos = vectorLinearConversion [
+				(_pic getvariable "_interpStartTime"),
+				(_pic getvariable "_interpStartTime") + 0.7,
+				tickTime,
+				_pic getvariable "_interpCamPos",
+				_pic getvariable "defPos",
+				true
+			];
+			lobby_internal_rttcamera setPosATL _newpos;
+		};
+		if (_pic getvariable ["_interpEnter",false]) then {
+			_stime = _pic getvariable "_interpEnterStartTime";
+			_stimeEnd = _stime+0.5;
+			// if (tickTime > _stimeEnd) exitWith {
+			// 	//_pic setvariable ["_interpEnter",false];
+			// };
+			
+			_endPos = vectorLinearConversion [
+				_stime,
+				_stimeEnd,
+				tickTime,
+				_pic getvariable "_interpCamPos",
+				_pic getvariable "_mouseMovingCamPos",
+				true
+			];
+
+			lobby_internal_rttcamera setPosATL _endPos;
+		};
+		false
+	},
+	{
+		_this params ["_pic","_defPos"];
+		lobby_internal_rttcamera setPosATL _defPos;
+	},
+	[_pic,_defPos]
+	endAsyncInvoke
 	_pic setvariable ["mimicEnable",{
 		params ["_mode"];
 		// if (_mode && {!(simulationEnabled lobby_glob_dummy_man)}) then {
@@ -503,11 +550,19 @@ lobby_setFace = {
 	}];
 	_pic ctrladdeventhandler ["MouseExit",{
 		params ["_w"];
-		lobby_internal_rttcamera setposatl (_w getvariable "defPos");
+		//lobby_internal_rttcamera setposatl (_w getvariable "defPos");
 		[false] call (_w getvariable "mimicEnable");
+		_w setvariable ["_interpCamPos",getPosATL lobby_internal_rttcamera];
+		_w setvariable ["_interpStartTime",tickTime];
+		_w setvariable ["_interpExit",true];
+		_w setvariable ["_interpEnter",false];
 	}];
 	_pic ctrladdeventhandler ["MouseEnter",{
 		params ["_w"];
+		_w setvariable ["_interpExit",false];
+		_w setvariable ["_interpEnter",true];
+			_w setvariable ["_interpCamPos",getPosATL lobby_internal_rttcamera];
+			_w setvariable ["_interpEnterStartTime",tickTime];
 		[true] call (_w getvariable "mimicEnable");
 		ctrlSetFocus _w;
 	}];
@@ -523,11 +578,12 @@ lobby_setFace = {
 		private _dirX = linearConversion [0,_szX,_xm,-_rad* _mul,_rad* _mul];
 		private _dirY = linearConversion [0,_szY,_ym,0.3,-0.3];
 
-		lobby_internal_rttcamera setposatl (_defPos vectoradd [
+		_endPos = (_defPos vectoradd [
 			0 + (sin _dirX) * (_rad),
 			0,
 			_dirY
 		]);
+		_w setvariable ["_mouseMovingCamPos",_endPos];
 		
 	}];
 
