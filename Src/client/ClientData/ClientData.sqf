@@ -530,8 +530,7 @@ cd_authResult = {
 
 			//Do register process account
 			private _nextFrame = {
-				private _uid = if(!isMultiplayer)then{"76561198094364528"}else{getPlayerUID player};
-				rpcSendToServer("onRegClient",[clientOwner arg _uid arg _this]);
+				rpcSendToServer("onRegClient",[clientOwner arg _this]);
 			};
 			nextFrameParams(_nextFrame,_nick);
 		};

@@ -30,11 +30,11 @@ lobby_sys_buttonActions = createHashMapFromArray [
 		["Окно команд",{[true] call cd_openSendCommandWindow}],
 		["Персонажи",{call lobby_sys_bc_charachters}],
 		["Кто в сети?!","system_whoonline"],
-		["Список изменений","system_whatnews"],
+		["Список изменений","system_whatnews"]
 		//["ref:https://relicta.ru/wiki@На вики",{}],// for references use this
 		//["<t colorLink='#ffffff'><a href='https://relicta.ru/wiki'>На вики</a></t>",{}],//font='Ringbear' colorLink='#77DE4E'
-		["<t colorLink='#ffffff'><a href='https://relicta.ru/wiki/%D0%9F%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0%23%D0%9F%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D0%BA%D0%B0_%D0%B4%D0%B8%D1%81%D0%BA%D0%BE%D1%80%D0%B4%D0%B0_%D0%BA_%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%BC%D1%83_%D0%B0%D0%BA%D0%BA%D0%B0%D1%83%D0%BD%D1%82%D1%83'>Инструкция по привязке к Discord</a></t>",{}],
-		["Обучение",{["Ждите в грядущих обновлениях...","event"] call chatPrint}]
+		//["<t colorLink='#ffffff'><a href='https://relicta.ru/wiki/%D0%9F%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0%23%D0%9F%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D0%BA%D0%B0_%D0%B4%D0%B8%D1%81%D0%BA%D0%BE%D1%80%D0%B4%D0%B0_%D0%BA_%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%BC%D1%83_%D0%B0%D0%BA%D0%BA%D0%B0%D1%83%D0%BD%D1%82%D1%83'>Инструкция по привязке к Discord</a></t>",{}],
+		//["Обучение",{["Ждите в грядущих обновлениях...","event"] call chatPrint}]
 	]],
 	["wiki",[
 		["ref:https://relicta.ru/wiki@Главная страница",{}]

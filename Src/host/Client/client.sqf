@@ -86,34 +86,16 @@ class(ServerClient) /*extends(NetObject)*/
 
 	func(constructor)
 	{
-		//objParams_2(_uid,_id);
 		objParams();
 
-		ctxParams params ["_id","_uid"];
+		ctxParams params ["_id","_disId"];
 
 		this setName ((name this) + "::" + str _id);
 
-		setSelf(uid,_uid);
+		setSelf(discordId,_disId);
 		setSelf(id,_id);
 
-		//private _access = _uid call cm_getAccessByUid;
-		//setSelf(access,_access); //player
-
-		//critical exit in debug mode
-		/*if (!isMultiplayer) exitWith {
-			setSelf(name,_name);
-			//[this] call db_updateClientSettings; //test validate
-			callSelf(onConnected);
-		};*/
-
-		//checking register
-		//if ([this] call db_isClientRegistered) then {
-			//traceformat("load client %1",_name);
-			[this] call db_loadClient;
-		/*} else {
-			traceformat("register new client %1",_name);
-			[this] call db_registerClient;
-		};*/		
+		[this] call db_loadClient;
 
 		callSelf(onConnected);
 		
@@ -160,9 +142,9 @@ class(ServerClient) /*extends(NetObject)*/
 		
 		cm_allClients deleteat (cm_allClients find this);
 
-		cm_disconnectedClients set [getSelf(uid),this];
+		cm_disconnectedClients set [getSelf(discordId),this];
 
-		traceformat("Disconnected client saved - %1",equals(cm_disconnectedClients get getSelf(uid),this));
+		traceformat("Disconnected client saved - %1",equals(cm_disconnectedClients get getSelf(discordId),this));
 		
 		if getSelf(isMBOpened) then {
 			callSelf(onClosedMessageBox);
@@ -204,7 +186,7 @@ class(ServerClient) /*extends(NetObject)*/
 			[this,false] call gm_removeClientFromEmbark;
 		};
 
-		[format["Disconnected - %1 (netid: %2; uid: %3)",getSelf(name),getSelf(id),getSelf(uid)]] call discLog;
+		[format["Disconnected - %1 (netid: %2; disid: %3)",getSelf(name),getSelf(id),getSelf(discordId)]] call discLog;
 	};
 
 	//Принудительно отключение клиента
@@ -240,6 +222,9 @@ class(ServerClient) /*extends(NetObject)*/
 		return:string:Строчное представление SteamID
 	" node_var
 	var_str(uid); //стим-айди клиента
+
+	var_str(discordId); //дискорд айди
+	
 	"
 		name:Никнейм клиента
 		desc:Уникальное имя клиента, выводимое в чате, лобби и служащее идентификатором игрока.
@@ -347,7 +332,7 @@ class(ServerClient) /*extends(NetObject)*/
 		callSelf(_updateObjectName);
 
 		#ifdef RELEASE
-		[getSelf(uid)] call db_updateValuesOnConnect;
+		[getSelf(discordId)] call db_updateValuesOnConnect;
 		#endif
 
 		//cleanup chunks
@@ -356,7 +341,7 @@ class(ServerClient) /*extends(NetObject)*/
 
 		cm_allClients pushBack this;
 		setSelf(isReady,false);
-		[format["Connected and ready - %1 (netid: %2; uid: %3)",getSelf(name),getSelf(id),getSelf(uid)]] call discLog;
+		[format["Connected and ready - %1 (netid: %2; disid: %3)",getSelf(name),getSelf(id),getSelf(discordId)]] call discLog;
 
 		netSendVar("cd_clientName",getSelf(name),getSelf(id)); //быстренько отсылаем клиенту его имя
 
@@ -796,7 +781,7 @@ class(ServerClient) /*extends(NetObject)*/
 	{
 		objParams();
 		if (tickTime >= getSelf(_getBannedRoles_lastGet)) then {
-			private _lastRes = [getSelf(uid)] call db_getAllBannedRoles;
+			private _lastRes = [getSelf(discordId)] call db_getAllBannedRoles;
 			setSelf(_getBannedRoles_lastGet,tickTime + (60*10));
 			setSelf(_bannedRolesCache,_lastRes);
 			_lastRes;
@@ -1204,13 +1189,13 @@ region(Clientside music manager and local sounds)
 
 region(discord accounting)
 
-	var(discordId,""); //unique discord id
+	var(discordIdAcc,""); //unique discord id
 	var(arrivedInCity,0); //сколько раз был зарегистрирован в городе
 
 	var(hasFirstLoadedRoles,false);
 
 	//зареган ли в дискорде чел
-	getter_func(isDiscordAccountRegistered,getSelf(discordId)!="");
+	getter_func(isDiscordAccountRegistered,getSelf(discordIdAcc)!="");
 
 	//производит асинхронную синхронизацию дискордовых ролей с этим клиентом
 	func(requestDiscordRoles)
@@ -1218,7 +1203,7 @@ region(discord accounting)
 		objParams();
 		if (!callSelf(isDiscordAccountRegistered)) exitWith {};
 
-		[getSelf(name),getSelf(discordId)] call dsm_accounts_requestUpdateRoles;
+		[getSelf(name),getSelf(discordIdAcc)] call dsm_accounts_requestUpdateRoles;
 	};
 	//bot callback set roles
 	func(updateDiscordRoles)
@@ -1226,6 +1211,7 @@ region(discord accounting)
 		objParams_1(_roles);
 		setSelf(hasFirstLoadedRoles,true);
 		setSelf(_discordRolesCache,_roles);
+		//? возможно здесь стоит обновить _getDiscordRoles_lastGet
 	};
 
 	func(hasDiscordRole)
@@ -1258,7 +1244,7 @@ region(discord accounting)
 
 		if (!callSelf(isDiscordAccountRegistered)) exitWith {false};
 
-		[getSelf(discordId),_role] call dsm_accounts_addToRole;
+		[getSelf(discordIdAcc),_role] call dsm_accounts_addToRole;
 		callSelf(flushDiscordRolesLastGet);
 		callSelf(getDiscordRoles);
 
@@ -1271,7 +1257,7 @@ region(discord accounting)
 
 		if (!callSelf(isDiscordAccountRegistered)) exitWith {false};
 
-		[getSelf(discordId),_role] call dsm_accounts_removeFromRole;
+		[getSelf(discordIdAcc),_role] call dsm_accounts_removeFromRole;
 		callSelf(flushDiscordRolesLastGet);
 		callSelf(getDiscordRoles);
 

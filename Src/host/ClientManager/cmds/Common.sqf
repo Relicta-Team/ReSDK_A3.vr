@@ -133,23 +133,23 @@ addCommandWithDescription("showmybans",PUBLIC_COMMAND,"Показывает ка
 	callFuncParams(thisClient,ShowMessageBox,"Text" arg _text);
 };
 
-addCommandWithDescription("discordsync",PUBLIC_COMMAND,"Привязывает дискорд к игровому аккаунту по токену")
-{
-	_h = {
-		private thisClient = ifcheck(isTypeOf(this,ServerClient),this,getSelf(client));
+// addCommandWithDescription("discordsync",PUBLIC_COMMAND,"Привязывает дискорд к игровому аккаунту по токену")
+// {
+// 	_h = {
+// 		private thisClient = ifcheck(isTypeOf(this,ServerClient),this,getSelf(client));
 		
-		//fix #236 - removing spaces,and nextlines from token
-		private _token = (_value splitString (" "+endl)) joinString "";
+// 		//fix #236 - removing spaces,and nextlines from token
+// 		private _token = (_value splitString (" "+endl)) joinString "";
 
-		private _result = [thisClient,_token] call dsm_accounts_register;
-		callFuncParams(thisClient,localSay,_result arg "system");
+// 		private _result = [thisClient,_token] call dsm_accounts_register;
+// 		callFuncParams(thisClient,localSay,_result arg "system");
 
-		callSelf(CloseMessageBox);
-	};
-	_m = "<t color='#ff0000'>Внимание! Никому не передавайте свой токен до активации.</t>"+sbr +
-	"Введите токен, который был получен от бота RELICTA в дискорде.";
-	callFuncParams(thisClient,ShowMessageBox,"Input" arg [_m arg "" arg "Активировать"] arg _h);
-};
+// 		callSelf(CloseMessageBox);
+// 	};
+// 	_m = "<t color='#ff0000'>Внимание! Никому не передавайте свой токен до активации.</t>"+sbr +
+// 	"Введите токен, который был получен от бота RELICTA в дискорде.";
+// 	callFuncParams(thisClient,ShowMessageBox,"Input" arg [_m arg "" arg "Активировать"] arg _h);
+// };
 
 addCommandWithDescription("discordgetroles",PUBLIC_COMMAND,"Получить свои роли из дискорда")
 {

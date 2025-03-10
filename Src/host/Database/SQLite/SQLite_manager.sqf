@@ -12,21 +12,21 @@ db_closeConnection = {
 
 db_isClientRegistered = {
 	params ['this'];
-	count([text format["select Id from Accounts where Uid=%1",getSelf(uid)],"uint"] call db_query)!=0
+	count([text format["select Id from Accounts where discordId=%1",getSelf(discordId)],"uint"] call db_query)!=0
 };
 
-db_isUIDRegistered = {
-	params ["_uid"];
-	count([text format["select Id from Accounts where Uid=%1",_uid],"string"] call db_query)!=0
+db_isDiscordIdRegistered = {
+	params ["_disId"];
+	count([text format["select Id from Accounts where discordId=%1",_disId],"string"] call db_query)!=0
 };
 
 //Проверяет юид в бан-листе. Если забанен выводит сообщение. Если срок бана истёк - разбаниваем клиента
 db_checkBan = {
-	params ["_uid","_refData"];
+	params ["_disId","_refData"];
 
-	private _query = format["select BanTime,BanReason,UnbanAfter,IsPermanent from Bans where uid=%1",_uid];
+	private _query = format["select BanTime,BanReason,UnbanAfter,IsPermanent from Bans where discordId=%1",_disId];
 
-	private _res = [text format[_query,_uid],"DateTime|string|DateTime|bool"] call db_query;
+	private _res = [text format[_query,_disId],"DateTime|string|DateTime|bool"] call db_query;
 
 	if (count _res == 0) exitWith {false};
 	(_res select 0) params ["_banTime",["_banReason",""],"_unbanAfter","_isPerm"];
@@ -38,7 +38,7 @@ db_checkBan = {
 	private _canUnban = if (_isPerm)then {false} else {([text _unbanCheckQuery,"bool",true] call db_query) select 0};
 	if (_canUnban) exitWith {
 		//remove ban
-		[text format["DELETE FROM Bans WHERE uid=%1",_uid]] call db_query;
+		[text format["DELETE FROM Bans WHERE discordId=%1",_disId]] call db_query;
 		false
 	};
 
@@ -54,26 +54,30 @@ db_unbanByName = {
 	params ["_name","_whoWantUnban"];
 
 	//Получаем юид по имени
-	private _uid = [text format["select Uid from Accounts where Name='%1' COLLATE NOCASE",_name],"string"] call db_query;
-	if (count _uid == 0) exitWith {format["ERROR: Account '%1' not found" arg _name]};
-	_uid = _uid select 0 select 0;
+	private _disId = [text format["select discordId from Accounts where Name='%1' COLLATE NOCASE",_name],"string"] call db_query;
+	if (count _disId == 0) exitWith {format["ERROR: Account '%1' not found" arg _name]};
+	_disId = _disId select 0 select 0;
 
 	// check if name in banlist
 
-	private _return = [text format["select UidBanner from Bans where Uid='%1' COLLATE NOCASE",_uid],"string"] call db_query;
+	private _return = [text format["select discordIdBanner from Bans where discordId='%1'",_disId],"string"] call db_query;
 
 	if (count _return == 0) exitWith {
 		callFuncParams(_whoWantUnban,localSay,format vec2("Client '%1' not banned.",_name) arg "log");
 		format vec2("Client '%1' not banned",_name)
 	};
-	// get access _whoWantUnban and compare to UidBanner
-	private _uidBanner = _return select 0 select 0;
-	private _accBanner = [text format["select Access from Accounts where Uid=%1",_uidBanner],"string"] call db_query;
+	// get access _whoWantUnban and compare to discordIdBanner
+	private _discordIdBanner = _return select 0 select 0;
+	private _accBanner = [text format["select Access from Accounts where discordId=%1",_discordIdBanner],"string"] call db_query;
 	private _accBan = if (count _accBanner == 0) then {
-		callFuncParams(_whoWantUnban,localSay,"UID ban is undefined in accounts table" arg "log");
+		callFuncParams(_whoWantUnban,localSay,"DiscordId ban is undefined in accounts table" arg "log");
 		["ACCESS_PLAYER"] call cm_accessTypeToNum;
 	} else {
-		[_accBanner select 0 select 0] call cm_accessTypeToNum;
+		private _accLvl = _accBanner select 0 select 0;
+		if (_accLvl == "system") exitWith {
+			["ACCESS_OWNERS"] call cm_accessTypeToNum
+		};
+		[_accLvl] call cm_accessTypeToNum;
 	};
 
 	//	if access low - cant unban
@@ -83,7 +87,7 @@ db_unbanByName = {
 	};
 
 	//process unban
-	[text format["DELETE FROM Bans WHERE Name='%1' COLLATE NOCASE",_name]] call db_query;
+	[text format["DELETE FROM Bans WHERE discordId='%1'",_disId]] call db_query;
 
 	callFuncParams(_whoWantUnban,localSay,vec2("Client '%1' unbanned!",_name) arg "log");
 
@@ -95,19 +99,19 @@ db_banByName = {
 	params [["_banner","AUTOMATIC"],"_name",["_reason",""],["_modif",[]]];
 
 	private _isPerm = count _modif == 0;
-	private _bannerUid = ifcheck(equals(_banner,"AUTOMATIC"),"76561198094364528",getVar(_banner,Uid));
+	private _bannerDisId = ifcheck(equals(_banner,"AUTOMATIC"),"system",getVar(_banner,discordId));
 
 	//get name and access
-	private _res = [text format["select Uid,Access from Accounts where Name='%1' COLLATE NOCASE",_name],"string,string"] call db_query;
+	private _res = [text format["select discordId,Access from Accounts where Name='%1' COLLATE NOCASE",_name],"string,string"] call db_query;
 
 	if (count _res == 0) exitWith {format["NOT BANNED: Account '%1' not found",_name]};
-	(_res select 0) params ["_uid","_access"];
+	(_res select 0) params ["_disId","_access"];
 
 	//! чтобы раскомментить эту строчку надо дорабатывать логику когда _banner AUTOMATIC
 	//if (getVar(_banner,Access) <= ([_access] call cm_accessTypeToNum)) exitWith {format["NOT BANNED: Your access level is lower than %1",_access]};
 
-	//get client by uid
-	private _bannedClient = _uid call cm_findClientByUid;
+	//get client by disId
+	private _bannedClient = _disId call cm_findClientByDisId;
 	private _andKicked = "";
 	if !isNullReference(_bannedClient) then {
 		[callFunc(_bannedClient,getOwner),"Вы были забанены." + (if(_isPerm)then{""}else{" Перезайдите на сервер чтобы узнать дату разбана."})] call cm_serverKickById;
@@ -124,9 +128,9 @@ db_banByName = {
 		__dt__ + ")"
 	};
 
-	private _query = format["%1,%2,%3,%4,'%5',%6",_uid,"datetime('now','localtime')",_dt,_isPerm,_reason,_bannerUid];
+	private _query = format["%1,%2,%3,%4,'%5',%6",_disId,"datetime('now','localtime')",_dt,_isPerm,_reason,_bannerDisId];
 	//insert or replace ???
-	[text format["insert into Bans (Uid, BanTime,UnbanAfter, IsPermanent, BanReason, UidBanner) values (%1)",_query],""] call db_query;
+	[text format["insert into Bans (discordId, BanTime,UnbanAfter, IsPermanent, BanReason, discordIdBanner) values (%1)",_query],""] call db_query;
 	
 	"BANNED" + _andKicked + " until the " + ifcheck(_isPerm,"(permanent)",_dt) + " user " + _name;
 };
@@ -138,12 +142,12 @@ db_banJobByName = {
 	if ("'" in _reason || """" in _reason) exitwith {"ERROR: symbol ' or "" cannot added in reason"};
 
 	private _isPerm = count _modif == 0;
-	private _bannerUid = ifcheck(equals(_banner,"AUTOMATIC"),"76561198094364528",getVar(_banner,uid));
+	private _bannerDisId = ifcheck(equals(_banner,"AUTOMATIC"),"system",getVar(_banner,discordId));
 
-	//Получаем юид по имени
-	private _uid = [text format["select Uid from Accounts where Name='%1' COLLATE NOCASE",_name],"string"] call db_query;
-	if (count _uid == 0) exitWith {format["ERROR: Account '%1' not found",_name]};
-	_uid = _uid select 0 select 0;
+	//Получаем дискорд-айди по имени
+	private _disId = [text format["select discordId from Accounts where Name='%1' COLLATE NOCASE",_name],"string"] call db_query;
+	if (count _disId == 0) exitWith {format["ERROR: Account '%1' not found",_name]};
+	_disId = _disId select 0 select 0;
 
 	private _unbanDate = if (_isPerm) then {"datetime('now','localtime','+300 years')"} else {
 		private __dt__ = "datetime('now','localtime'";
@@ -155,12 +159,12 @@ db_banJobByName = {
 	};
 
 	//добавляем новую запись в таблицу JobBans. если она уже есть, обновляем время
-	private _qText = "INSERT OR IGNORE INTO JobBans (Uid, Job, AddedDate, UnbanDate, Reason, WhoAdded) VALUES (%1, '%2', datetime('now','localtime'), %3, '%4', %5);" + 
-	"UPDATE JobBans SET AddedDate='%3' WHERE Uid=%1 and Job='%2';";
-	private _query = format[_qText,_uid,_role,_unbanDate,_reason,_bannerUid];
+	private _qText = "INSERT OR IGNORE INTO JobBans (discordId, Job, AddedDate, UnbanDate, Reason, WhoAdded) VALUES (%1, '%2', datetime('now','localtime'), %3, '%4', %5);" + 
+	"UPDATE JobBans SET AddedDate='%3' WHERE discordId=%1 and Job='%2';";
+	private _query = format[_qText,_disId,_role,_unbanDate,_reason,_bannerDisId];
 	[text format["%1",_query],""] call db_query;
 
-	private _probCli = [_uid,true] call cm_findClientByUid;
+	private _probCli = [_disId,true] call cm_findClientByDisId;
 	if !isNullReference(_probCli) then {
 		callFunc(_probCli,flushBannedRolesLastGet);
 	};
@@ -173,26 +177,26 @@ db_unbanJobByName = {
 	if (_role == "") exitWith {"ERROR: Role is empty"};
 
 	//Получаем юид по имени
-	private _uid = [text format["select Uid from Accounts where Name='%1' COLLATE NOCASE",_name],"string"] call db_query;
-	if (count _uid == 0) exitWith {format["ERROR: Account '%1' not found",_name]};
-	_uid = _uid select 0 select 0;
+	private _disId = [text format["select discordId from Accounts where Name='%1' COLLATE NOCASE",_name],"string"] call db_query;
+	if (count _disId == 0) exitWith {format["ERROR: Account '%1' not found",_name]};
+	_disId = _disId select 0 select 0;
 
-	// check if role is banned. search by uid and return iteself
-	private _res = [text format["select WhoAdded from JobBans where Uid=%1 and Job='%2'",_uid,_role],"string"] call db_query;
+	// check if role is banned. search by disId and return iteself
+	private _res = [text format["select WhoAdded from JobBans where discordId=%1 and Job='%2'",_disId,_role],"string"] call db_query;
 	if (count _res == 0) exitWith {format["ERROR: Job '%1' is not banned for client '%2'",_role,_name]};
 
 	//covert returned value to access from table Accounts
-	//private _access = [text format["select Access from Accounts where Uid=%1",_res select 0],"string"] call db_query;
+	//private _access = [text format["select Access from Accounts where discordId=%1",_res select 0],"string"] call db_query;
 	//_access = _access select 0;
 
 	//check access level
 	//if (getVar(_banner,access) <= ([_access] call cm_accessTypeToNum)) exitWith {format["ERROR: Your access level is lower than %1",_access]};
 
 	//удаляем запись из таблицы JobBans
-	private _query = format["DELETE FROM JobBans WHERE Uid=%1 and Job='%2'",_uid,_role];
+	private _query = format["DELETE FROM JobBans WHERE discordId=%1 and Job='%2'",_disId,_role];
 	[text format["%1",_query],""] call db_query;
 
-	private _probCli = [_uid,true] call cm_findClientByUid;
+	private _probCli = [_disId,true] call cm_findClientByDisId;
 	if !isNullReference(_probCli) then {
 		callFunc(_probCli,flushBannedRolesLastGet);
 	};
@@ -203,21 +207,21 @@ db_unbanJobByName = {
 
 db_isNickRegistered = {
 	params ["_nick"];
-	count([text format["select Id from Accounts where Name='%1' COLLATE NOCASE",_nick],"uint"] call db_query)!=0
+	count([text format["select discordId from Accounts where Name='%1' COLLATE NOCASE",_nick],"uint"] call db_query)!=0
 };
 
 //конвертация uid в никнейм из базы данных
-db_uidToNick = {
-	params ["_uid",["_errorNick",""]];
-	private _r = [text format["select Name from Accounts where Uid='%1' COLLATE NOCASE",_uid],"string"] call db_query;
+db_disIdToNick = {
+	params ["_disId",["_errorNick",""]];
+	private _r = [text format["select Name from Accounts where discordId='%1' COLLATE NOCASE",_disId],"string"] call db_query;
 	if (count _r == 0) exitwith {_errorNick};
 	_r select 0 select 0
 };
 
-db_NickToUid = {
-	params ["_nick",["_errorUid",""]];
-	private _r = [text format["select Uid from Accounts where Name='%1' COLLATE NOCASE",_nick],"string"] call db_query;
-	if (count _r == 0) exitwith {_errorUid};
+db_NickToDisId = {
+	params ["_nick",["_errorDisId",""]];
+	private _r = [text format["select discordId from Accounts where Name='%1' COLLATE NOCASE",_nick],"string"] call db_query;
+	if (count _r == 0) exitwith {_errorDisId};
 	_r select 0 select 0
 };
 
@@ -242,22 +246,52 @@ db_updateClientLockedSettings = {
 	true
 };
 
-//Регистрация аккаунта по юиду и имени
+//Регистрация аккаунта по айди и имени
 db_registerAccount = {
-	params ['_uid',"_name"];
+	params ['_disId',"_name"];
 
-	private _query = "INSERT INTO Accounts (Uid,Name,Access,ClientSettings,CharSettings,CountConnections,LastJoin,FirstJoin)" +
+	private _query = "INSERT INTO Accounts (DiscordId,Name,Access,ClientSettings,CharSettings,CountConnections,LastJoin,FirstJoin)" +
 	"VALUES('%1','%2','ACCESS_PLAYER','[[],[],[]]','[nil,nil,nil,nil]',1,datetime('now','localtime'),datetime('now','localtime'))";
 
-	[text format[_query,_uid,_name]] call db_query
+	[text format[_query,_disId,_name]] call db_query
+};
+
+db_registerStats = {
+	params ["_disId",["_arrCity",0]];
+
+	private _query = "INSERT INTO Stats (DiscordId,ArrivedInCity) VALUES('%1',%2)";
+	[text format[_query,_disId,_arrCity]] call db_query
+};
+
+db_registerAuthTokenData = {
+	params ["_disId","_gameToken","_atok","_reftok","_expDT"];
+	
+	//disabled in editor mode
+	#ifdef EDITOR
+	if(true) exitWith {};
+	#endif
+
+	//insert or update
+	private _query = format["INSERT INTO Discord (DiscordId, discordToken, refreshToken, gameToken, tokenExpiryDate, LastUpdate)"
+		+ "VALUES ('%1', '%2', '%3', '%4', '%5', datetime('now','localtime'))"
+		+ "ON CONFLICT(DiscordId) DO UPDATE SET
+		discordToken = excluded.discordToken,
+		refreshToken = excluded.refreshToken,
+		gameToken = excluded.gameToken,
+		tokenExpiryDate = excluded.tokenExpiryDate,
+		LastUpdate = excluded.LastUpdate;"
+		,_disId,_atok,_reftok,_gameToken,_expDT
+	];
+
+	[text format[_query,_disId,_name]] call db_query
 };
 
 //Обновление коунтера подключений и даты последнего коннекта
 db_updateValuesOnConnect = {
-	params ['_uid'];
+	params ['_disId'];
 
-	private _query = "UPDATE Accounts SET LastJoin=datetime('now','localtime'),CountConnections=CountConnections+1 where uid=%1";
-	[text format[_query,_uid]] call db_query
+	private _query = "UPDATE Accounts SET LastJoin=datetime('now','localtime'),CountConnections=CountConnections+1 where DiscordId=%1";
+	[text format[_query,_disId]] call db_query
 };
 
 db_checkAccessOnFirstSession = {
@@ -296,10 +330,11 @@ db_isConnectedFirstTimeToday = {
 };
 
 db_getAllBannedRoles = {
-	params ["_uid"];
-	private _query = format["delete from JobBans where datetime('now','localtime') >= UnbanDate and Uid=%1;",_uid];
+	params ["_disId"];
+	
+	private _query = format["delete from JobBans where datetime('now','localtime') >= UnbanDate and discordId=%1;",_disId];
 	([text _query,"string"] call db_query);
-	_query = format["select Job from JobBans where Uid=%1",_uid];
+	_query = format["select Job from JobBans where discordId=%1",_disId];
 	([text _query,"string"] call db_query) apply {_x select 0}
 };
 
@@ -311,11 +346,11 @@ db_getAllBannedRoles = {
 	_banner - кто забанил
 */
 db_getAllBannedRolesWithDescription = {
-	params ["_uid",["_handlerDesc",{_jobClass}]];
+	params ["_disId",["_handlerDesc",{_jobClass}]];
 	private _mapBanner = createHashMap;
-	private _query = format["delete from JobBans where datetime('now','localtime') >= UnbanDate and Uid=%1;",_uid];
+	private _query = format["delete from JobBans where datetime('now','localtime') >= UnbanDate and discordId=%1;",_disId];
 	([text _query,"string"] call db_query);
-	_query = format["select Job,AddedDate,UnbanDate,Reason,WhoAdded from JobBans where Uid=%1",_uid];
+	_query = format["select Job,AddedDate,UnbanDate,Reason,WhoAdded from JobBans where discordId=%1",_disId];
 	([text _query,"string|DateTime|DateTime|string|string"] call db_query) apply {
 		_x params ["_jobClass","_addedDate","_unbanDate","_reason","_banner"];
 		_addedDate = _addedDate call db_dateTimeFormatForComparsion;
@@ -323,7 +358,7 @@ db_getAllBannedRolesWithDescription = {
 		if (_banner in _mapBanner) then {
 			_banner = _mapBanner get _banner;
 		} else {
-			private _newbanner = [_banner,"ERROR_NAME_UNKNOWN"] call db_uidToNick;
+			private _newbanner = [_banner,"ERROR_NAME_UNKNOWN"] call db_disIdToNick;
 			_banner = _newbanner;
 		};
 		call _handlerDesc;
@@ -339,14 +374,14 @@ db_getAllBannedRolesWithDescription = {
 // };
 
 //регистрация аккаунта по объекту
-db_registerClient = {
-	params ['this'];
+// db_registerClient = {
+// 	params ['this'];
 
-	private _query = "INSERT INTO Accounts (Uid,Name,Access,ClientSettings,CharSettings,CountConnections,LastJoin,FirstJoin)" +
-	"VALUES('%1','%2','ACCESS_PLAYER','[[],[],[]]','[nil,nil,nil,nil]',1,datetime('now','localtime'),datetime('now','localtime'))";
+// 	private _query = "INSERT INTO Accounts (Uid,Name,Access,ClientSettings,CharSettings,CountConnections,LastJoin,FirstJoin)" +
+// 	"VALUES('%1','%2','ACCESS_PLAYER','[[],[],[]]','[nil,nil,nil,nil]',1,datetime('now','localtime'),datetime('now','localtime'))";
 
-	[text format[_query,getSelf(uid),getSelf(name)]] call db_query
-};
+// 	[text format[_query,getSelf(uid),getSelf(name)]] call db_query
+// };
 
 db_saveClient = {
 	params ['this'];
@@ -376,8 +411,8 @@ db_saveClient = {
 	} foreach getSelf(lockedSettings);
 
 	[
-		text format["UPDATE Accounts SET Name='%2',Access='%3',Points=%4,CharSettings='[%5]',ClientSettings='[%6]',PlayedRounds=%7,LockedSettings='[%8]' where uid=%1",
-		getSelf(uid),
+		text format["UPDATE Accounts SET Name='%2',Access='%3',Points=%4,CharSettings='[%5]',ClientSettings='[%6]',PlayedRounds=%7,LockedSettings='[%8]' where DiscordId=%1",
+		getSelf(discordId),
 		getSelf(name),
 		[getSelf(access)] call cm_accessNumToType,
 		getSelf(points),
@@ -412,8 +447,9 @@ db_saveClient = {
 db_loadClient = {
 	params ['this'];
 
-	([text format["select Name,Access,Points,ClientSettings,CharSettings,FirstJoin,LastJoin,PlayedRounds,LockedSettings from accounts where uid=%1",getSelf(uid)],"string|string|int|string|string|DateTime|DateTime|int|string",true] call db_query)
-	params ["_name","_access","_points","_cliSet","_charSet","_firstJoin","_lastJoin","_playedRounds","_lockedSettings"];
+	([text format["select Name,Access,Points,ClientSettings,CharSettings,FirstJoin,LastJoin,PlayedRounds,LockedSettings from Accounts where DiscordId=%1",getSelf(discordId)],
+		"string|string|int|string|string|DateTime|DateTime|int|string",true] call db_query
+	) params ["_name","_access","_points","_cliSet","_charSet","_firstJoin","_lastJoin","_playedRounds","_lockedSettings"];
 
 	setSelf(name,_name);
 	private _accessNum = [_access] call cm_accessTypeToNum;
@@ -516,6 +552,14 @@ db_loadClient = {
 	[this] call db_updateClientSettings;
 
 	[this,_name] call dsm_accounts_loadDiscordId;
+
+	//load user stats
+	private _statsq = "select ArrivedInCity from Stats where DiscordId='%1'";
+	private _statsDat = [text format[_statsq,getSelf(discordId)],"int"] call db_query;
+	if (count _statsDat > 0) then {
+		(_statsDat select 0) params ["_acit"];
+		setSelf(arrivedInCity,_acit);
+	};
 };
 
 //проверяет клиентские настройки. Если что-то не так делает логику...
@@ -1002,6 +1046,7 @@ db_hasNeedClientVote = {
 //======================================
 // Discord accounting
 //======================================
+//! not used
 db_da_isSynced = {
 	params ["_nick","_refId",["_loadArrived",false]];
 	private _res = if(_loadArrived) then {
@@ -1021,6 +1066,7 @@ db_da_isSynced = {
 	true
 };
 
+//! not used
 db_da_isSyncedAsDiscordId = {
 	params ["_id"];
 	private _res = ([text format["select Nick from Discord where DiscordId='%1' COLLATE NOCASE",_id],"string"] call db_query);
@@ -1028,6 +1074,7 @@ db_da_isSyncedAsDiscordId = {
 	true
 };
 
+//! not used
 db_da_updateArrivedInCity = {
 	params ["_nick"];
 	if ([_nick] call db_da_isSynced) exitwith {
@@ -1042,10 +1089,64 @@ db_da_updateArrivedInCity = {
 	false
 };
 
+//! not used
 db_da_register = {
 	params ["_nick","_discordid"];
 	private _query = "INSERT INTO Discord (Nick,DiscordId,AddedDate,ArrivedInCity)" +
 	"VALUES('%1','%2',datetime('now','localtime'),0)";
 
 	[text format[_query,_nick,_discordid]] call db_query
+};
+
+//обновляем статистику посещения города
+db_da_updateStatArrivedInCity = {
+	params ["_client"];
+	if isNullReference(_client) exitWith {};
+	private _query = format["UPDATE Stats SET ArrivedInCity=%2 where DiscordId='%1'",
+		getVar(_client,discordId),
+		getVar(_client,arrivedInCity)
+	];
+	[text format[_query,_uid]] call db_query
+};
+
+//======================================
+// Legacy db porting
+//======================================
+
+//port handler, if true - successed port from old account
+db_port_oldAccountRegistered = {
+	params ["_did"];
+	private _query = "select Nick,ArrivedInCity from Discord_OLD where DiscordId='%1'";
+	private _dusr = ([text format[_query,_did],"string|int"] call db_query);
+	if (count _dusr == 0) exitwith {false};
+	(_dusr select 0) params ["_nickLwr","_arrCity"];
+
+	_query = "select Name,Access,Points,ClientSettings,CharSettings,CountConnections,PlayedRounds,FirstJoin,LockedSettings from Accounts_OLD where Name=='%1' COLLATE nocase";
+	private _dacc = ([text format[_query,_nickLwr],
+		"string|string|int|string|string|int|int|string|string"
+	] call db_query);
+	if (count _dacc == 0) exitwith {false};
+	(_dacc select 0) params ["_name","_acc","_pt","_cset","_chset","_ccn","_pr","_fj","_lset"];
+
+
+	_query = "INSERT INTO Accounts (DiscordId,Name,Access,Points,ClientSettings,CharSettings,LockedSettings,CountConnections,PlayedRounds,FirstJoin,LastJoin)" +
+	"VALUES('%1','%2','%3',%4,'%5','%6','%7',%8,%9,'%10',datetime('now','localtime'))";
+
+	[text format[_query
+		,_did
+		,_name
+		,_acc
+		,_pt
+		,_cset regexReplace["""/g",""""""]
+		,_chset regexReplace["""/g",""""""]
+		,_lset regexReplace["""/g",""""""]
+		,_ccn
+		,_pr
+		,_fj
+	]] call db_query;
+
+	//add arrived in city info
+	[_did,_arrCity] call db_registerStats;
+
+	true
 };
