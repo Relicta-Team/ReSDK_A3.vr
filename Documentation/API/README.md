@@ -16,7 +16,7 @@ Count modules: 32
  - [InputSystem](client//InputSystem.md) - 6 files
  - [Interactions](client//Interactions.md) - 22 files
  - [Inventory](client//Inventory.md) - 7 files
- - [LightEngine](client//LightEngine.md) - 71 files
+ - [LightEngine](client//LightEngine.md) - 73 files
  - [Lobby](client//Lobby.md) - 8 files
  - [LocalEffects](client//LocalEffects.md) - 2 files
  - [NetDisplays](client//NetDisplays.md) - 15 files
@@ -40,7 +40,7 @@ Count modules: 55
  - [Atmos](host//Atmos.md) - 9 files
  - [CaveSystem](host//CaveSystem.md) - 4 files
  - [Client](host//Client.md) - 3 files
- - [ClientManager](host//ClientManager.md) - 16 files
+ - [ClientManager](host//ClientManager.md) - 17 files
  - [CombatSystem](host//CombatSystem.md) - 13 files
  - [CommonComponents](host//CommonComponents.md) - 30 files
  - [CraftSystem](host//CraftSystem.md) - 16 files

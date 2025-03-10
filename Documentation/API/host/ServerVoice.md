@@ -11,7 +11,7 @@ Replaced value:
 ```sqf
 1000
 ```
-File: [host\ServerVoice\ServerVoice_init.sqf at line 90](../../../Src/host/ServerVoice/ServerVoice_init.sqf#L90)
+File: [host\ServerVoice\ServerVoice_init.sqf at line 91](../../../Src/host/ServerVoice/ServerVoice_init.sqf#L91)
 ## vsm_map_freqAndCode
 
 Type: Variable
@@ -98,4 +98,4 @@ Type: function
 Description: 
 
 
-File: [host\ServerVoice\ServerVoice_init.sqf at line 175](../../../Src/host/ServerVoice/ServerVoice_init.sqf#L175)
+File: [host\ServerVoice\ServerVoice_init.sqf at line 177](../../../Src/host/ServerVoice/ServerVoice_init.sqf#L177)
