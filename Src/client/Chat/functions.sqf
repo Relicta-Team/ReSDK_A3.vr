@@ -156,6 +156,13 @@ chatprint = {
 	};
 };
 
+decl(void(string))
+chat_clearBuffer = {
+	params ["_mes"];
+	chat_messages_data resize 0;
+	[_mes] call chatprint;
+};
+
 // Отрисовывает чат в лобби. Копирует информацию из основного GUI чата в чат лобби
 decl(void())
 chat_onRenderLobby = {
