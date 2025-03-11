@@ -12,13 +12,8 @@
 #include "singleplayer_camera.sqf"
 #include "singleplayer_view.sqf"
 #include "singleplayer_ai.sqf"
-
-sp_list_scenario = [];
-sp_loadScenario = {
-	params ["_path"];
-	//loadFile(_path)
-};
-
+#include "singleplayer_scenarioFramework.sqf"
+#include "singleplayer_gameControl.sqf"
 
 sp_initMainModule = {
 	call sp_initGUI;
