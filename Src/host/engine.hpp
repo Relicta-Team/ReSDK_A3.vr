@@ -667,6 +667,10 @@ ACRE_IS_ERRORED = false; _ret;}*/
 	#define setLastError(data__)
 #endif
 
+#ifdef SP_MODE
+	#define setLastError(data__) error(data__)
+#endif
+
 
 #define exitScope(cond) if (true) exitWith {cond};
 //TODO: опционально возвращаем только первые несколько функций стека вызова

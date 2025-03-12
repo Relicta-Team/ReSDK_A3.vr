@@ -112,8 +112,10 @@ if (isMultiplayer) then {
 };
 
 if (!isMultiplayer) then {
-    //против задержки пакетов
-    invokeAfterDelayParams({rpcSendToServer("onClientReady",_this)},0.3,_data)
+    #ifndef SP_MODE
+        //против задержки пакетов
+        invokeAfterDelayParams({rpcSendToServer("onClientReady",_this)},0.3,_data)
+    #endif
 } else {
     rpcSendToServer("onClientReady",_data);
 };

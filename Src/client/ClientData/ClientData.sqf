@@ -193,6 +193,10 @@ cd_onPrepareClient = {
 
 		_tempObject setposatl (_atlPos vectordiff [0,0,0.1]);
 
+		#ifdef SP_MODE
+		_trace = [[0,0,_tempObject]];
+		#endif
+
 		if (count _trace == 0) then {
 			player setPosAtl _atlPos;
 		} else {

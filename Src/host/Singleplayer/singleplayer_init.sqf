@@ -17,7 +17,9 @@
 
 sp_initMainModule = {
 	call sp_initGUI;
-
+	if (isNull(gm_currentMode) || isNullReference(gm_currentMode)) then {
+		call sp_preloadScenarioEnvironment;
+	};
 };
 
 //get actor

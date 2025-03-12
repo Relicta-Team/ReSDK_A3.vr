@@ -32,6 +32,10 @@ loot_addConfig = {
 loot_prepareAll = {
 	private _skipLoad = false;
 	
+	#ifdef SP_MODE
+	if(true)exitWith{};
+	#endif
+
 	#ifdef TEST_IO
 	_skipLoad = true;
 	#endif
