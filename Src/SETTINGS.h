@@ -28,6 +28,8 @@
 	#define RBUILDER_OR_EDITOR
 #endif
 
+//uncomment for enable singleplayer
+//#define SP_MODE
 
 #ifdef SP_MODE
 	#define SP_MODE_OR_EDITOR
