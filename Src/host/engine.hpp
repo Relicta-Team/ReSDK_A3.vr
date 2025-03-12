@@ -458,7 +458,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define tickTime diag_tickTime
 #define deltaTime diag_deltaTime
 
-#ifdef EDITOR
+#ifdef EDITOR_OR_SP_MODE
 	#define __alloc_thread_loc__ (cba_common_perFrameHandlerArray select -1) set [6,format["%1 at line %2",[__FILE__,getMissionPath "",""] call stringReplace,__LINE__]]; \
 		(cba_common_perFrameHandlerArray select -1) set [7,diag_stacktrace]
 	#define startUpdate(func,delay) call{private _h = [func,delay] call CBA_fnc_addPerFrameHandler; __alloc_thread_loc__; _h}

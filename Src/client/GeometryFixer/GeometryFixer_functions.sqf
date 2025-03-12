@@ -267,7 +267,7 @@ gf_collisionProcess = {
 	_mindistobj = objNull;
 	
 	//enable player collision
-	#ifdef EDITOR
+	#ifdef EDITOR_OR_SP_MODE
 	player setPhysicsCollisionFlag true;
 	#endif
 

@@ -17,12 +17,23 @@
 #ifdef EDITOR
 	#define EDITOR_OR_RBUILDER
 	#define RBUILDER_OR_EDITOR
+
+	#define SP_MODE_OR_EDITOR
+	#define EDITOR_OR_SP_MODE
 #endif
 
 #ifdef RBUILDER
 	#undef EDITOR
 	#define EDITOR_OR_RBUILDER
 	#define RBUILDER_OR_EDITOR
+#endif
+
+
+#ifdef SP_MODE
+	#define SP_MODE_OR_EDITOR
+	#define EDITOR_OR_SP_MODE
+
+	#undef EDITOR
 #endif
 
 
@@ -217,4 +228,11 @@
 #else
 	#define USEEVERYDAYRUN_doValidation() 
 	#define USEEVERYDAYRUN_THREAD_UPDATE() 
+#endif
+
+
+#ifdef SP_MODE
+	#undef EDITOR
+	#define DEBUG
+	#undef RELEASE
 #endif

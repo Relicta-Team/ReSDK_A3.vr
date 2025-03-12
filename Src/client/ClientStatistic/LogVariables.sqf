@@ -48,7 +48,7 @@ clistat_buffer append [
 		format["cnt:%1;cull:%2",count lesc_list_allDataObjs,lesc_cullCnt]
 	}]
 ];
-	#ifdef EDITOR
+	#ifdef EDITOR_OR_SP_MODE
 clistat_buffer pushBack [colortext(E4F500,"ALt: "),{format["%1 lum",(getLightingAt cam_object) select 3]}];
 clistat_buffer pushback [colortext(E4F500,"ServerLightRender: "),{count (attachedObjects slt_const_dummyMob)}];
 	#endif
@@ -139,7 +139,7 @@ clistat_buffer append [
 	[colortext(1FC4C4,"m_vol:"),{str musicVolume}],
 	[colortext(1FC4C4,"m_curchan:"),{str music_internal_lastPriority}]
 ];
-	#ifdef EDITOR
+	#ifdef EDITOR_OR_SP_MODE
 clistat_buffer append [
 	[colortext(1FC4C4,"stepdat: "),{format["%1 x%2; ptr:%3 all:%4"
 		,os_steps_currentSoundName
