@@ -407,3 +407,52 @@ class(Struct_DebugMaterial__) extends(IStruct)
 		setSelf(name,getVar(_m,name));
 	};
 endclass
+
+class(Struct_SPISpecialObject) extends(IStruct)
+	editor_attribute("InternalImpl") var(name,"");
+	editor_attribute("InternalImpl") var(desc,"");
+	editor_attribute("InternalImpl") var(model,"a3\structures_f\system\cluttercutter_small_f.p3d");
+	getterconst_func(disableVisual,true);
+	func(constructor)
+	{
+		objParams();
+		if callSelf(disableVisual) then {
+			setSelf(model,"a3\structures_f\system\cluttercutter_small_f.p3d");
+		};
+	};
+endclass
+
+class(Struct_SPTrigger) extends(Struct_SPISpecialObject)
+	var(model,"a3\structures_f_orange\vr\helpers\sign_sphere100cm_geometry_f.p3d");
+
+	editor_attribute("EditorVisible" arg "type:string")
+	var(triggerName,"");
+
+	editor_attribute("EditorVisible" arg "type:float")
+	var(triggerDistance,0);
+	
+	func(constructor)
+	{
+		objParams();
+		sp_gc_map_triggers set [getSelf(triggerName),this];
+	};
+endclass
+
+class(Struct_SPPoint) extends(Struct_SPISpecialObject)
+	var(model,"a3\structures_f_bootcamp\vr\helpers\vr_groundicon_01_f.p3d");
+
+	editor_attribute("EditorVisible" arg "type:string")
+	var(pointName,"");
+
+	func(constructor)
+	{
+		objParams();
+		sp_gc_map_pointList set [getSelf(pointName),this];
+	};
+endclass
+
+class(Struct_SPInvisibleWall) extends(Struct_SPISpecialObject)
+	var(model,"ca\misc3\invisiblebarrier.p3d");
+	getterconst_func(disableVisual,false);
+endclass
+
