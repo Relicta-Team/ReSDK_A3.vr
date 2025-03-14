@@ -122,9 +122,7 @@ class(GMSp_game_BasicRole) extends(BasicRole) // BasicRole - базовая ро
 	{
 		//_mob - персонаж, _usr - клиент
 		objParams_2(_mob,_usr);
-		#ifdef SP_MODE
-		[_mob] call sp_gc_onPlayerAssigned;
-		#endif
+		
 	};
 
 	// Функция, вызывающаяся когда умирает персонаж, зашедший за эту роль с самого начала

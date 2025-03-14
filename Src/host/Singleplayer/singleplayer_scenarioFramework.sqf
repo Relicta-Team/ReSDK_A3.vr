@@ -3,14 +3,38 @@
 // sdk.relicta.ru
 // ======================================================
 
-sp_list_scenario = [];
-//todo load logic
+sp_map_scenario = createHashMap;
+
+sp_loadedScenarios = [];
+sp_lastStartedScene = "";
+
+//client object
+sp_clientInstance = nullPtr;
+
+
 sp_loadScenario = {
-	params ["_path"];
-	//loadFile(_path)
+	params ["_name"];
+	if !([_name,".sqf"] call stringEndWith) then {
+		modvar(_name) + ".sqf";
+	};
+
+	loadFile("src\host\Singleplayer\Scenarios\"+_name);
+	sp_loadedScenarios pushBack _name;
 };
 
-sp_clientInstance = nullPtr;
+sp_startScene = {
+	params ["_name"];
+	call (sp_internal_map_scenes getOrDefault [_name,{
+		errorformat("Scene not found - %1",_name);
+	}]);
+	sp_lastStartedScene = _name;
+};
+
+sp_internal_map_scenes = createHashMap;
+sp_addScene = {
+	params ["_name","_code"];
+	sp_internal_map_scenes set [_name,_code];
+};
 
 sp_preloadScenarioEnvironment = {
 	

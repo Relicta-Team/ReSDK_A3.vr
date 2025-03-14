@@ -129,7 +129,7 @@ sp_setHideTaskMessageCtg = {
 	};
 };
 sp_isVisibleTaskMesssageCtg = {
-	(getFade (call sp_int_getTaskCtgWidget)) > 0;
+	(getFade (call sp_int_getTaskCtgWidget)) == 0;
 };
 
 //notification system
@@ -137,9 +137,27 @@ sp_setNotification = {
 	params ["_text"];
 	if (!sp_isGUIInit) exitWith {};
 	private _tWid = call sp_int_getNotificationWidget;
+
+	while {[_text,"\$\w+"] call regex_isMatch} do {
+		private _vname = [_text,"\$\w+"] call regex_getFirstMatch;
+		private _keyName = _vname select [1,count _vname];
+		private _inpName = [_keyName] call input_getKeyNameByInputName;
+		_text = [_text,"\$"+_keyName,_inpName] call regex_replace;
+	};
+
+	while {[_text,"\@\w+"] call regex_isMatch} do {
+		private _vname = [_text,"\@\w+"] call regex_getFirstMatch;
+		private _keyName = _vname select [1,count _vname];
+		private _inpName = actionKeysNames _keyName;
+		_text = [_text,"\@"+_keyName,_inpName] call regex_replace;
+	};
+
 	[_tWid,format["%2<t align='center' size='1.2'>%1</t>%2 ",_text,sbr]] call widgetSetText;
 	_tWid ctrlSetPositionH (ctrlTextHeight _tWid);
 	_tWid commit 0;
+	if (!(call sp_isVisibleNotification)) then {
+		[true] call sp_setNotificationVisible;
+	};
 };
 
 sp_setNotificationVisible = {
@@ -152,6 +170,10 @@ sp_setNotificationVisible = {
 		_ctg setFade 1;
 		_ctg commit 0.7;
 	};
+};
+
+sp_isVisibleNotification = {
+	(getFade (call sp_int_getNotificationWidgetCtg)) == 0;	
 };
 
 
@@ -247,13 +269,17 @@ sp_createWidgetHighlight = {
 };
 
 //включение или отключение отображения худа. для черного экрана используем setBlackScreenGUI
-sp_view_setPlayerHud = {
-	params ["_mode"];
-	[_mode] call inventory_setGlobalVisible; //enable inventory slots
-	interactMenu_disableGlobal = !_mode; //right menu
-	interactCombat_disableGlobal = !_mode; //up menu
-	interactEmote_disableGlobal = !_mode; //left/emote menu
-	{_x ctrlShow _mode} foreach hud_widgets;
+sp_view_setPlayerHudVisible = {
+	params [["_mode","inv+right+up+left+stats+cursor"]];
+	private _modesList = _mode splitString " +";
+	["inv" in _modesList] call inventory_setGlobalVisible; //enable inventory slots
+	interactMenu_disableGlobal = !("right" in _modesList); //right menu
+	interactCombat_disableGlobal = !("up" in _modesList); //up menu
+	interactEmote_disableGlobal = !("left" in _modesList); //left/emote menu
+
+	interact_aim_disableGlobal = !("cursor" in _modesList);
+	
+	{_x ctrlShow ("stats" in _modesList)} foreach hud_widgets; //statuses
 };
 
 //установить видимость головы игрока

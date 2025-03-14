@@ -330,6 +330,7 @@ interactMenu_syncSpecialActions = {
 			interactMenu_specActWidgets set [_i,_butt];
 			MOD(_specactypos,+ _specact_size_h + _specact_bias_y);
 			setButtonText(_butt,_name);
+			_butt setvariable ["actionName",_name];
 			_butt setvariable ["action",_action];
 			_butt setvariable ["actionType",_type];
 			if (_action == cd_specialAction) then {

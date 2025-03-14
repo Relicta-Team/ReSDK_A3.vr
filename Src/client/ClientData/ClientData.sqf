@@ -225,6 +225,10 @@ cd_onPrepareClient = {
 				rpcCall("onChangeEyeState",[_vision arg "load"]);
 
 				stopThisUpdate();
+
+				#ifdef SP_MODE
+				[call sp_getActor] call sp_gc_onPlayerAssigned;
+				#endif
 			} else {
 				if (_atlPos distance (getPosATL player) > 1) then {
 					player setPosATL _atlPos;

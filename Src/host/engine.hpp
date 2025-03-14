@@ -678,6 +678,13 @@ ACRE_IS_ERRORED = false; _ret;}*/
 //#define CALLSTACK_NAMED(function, functionName) {private ['_ret']; if (ACRE_IS_ERRORED) then { ['AUTO','AUTO'] call ACRE_DUMPSTACK_FNC; ACRE_IS_ERRORED = false; }; ACRE_IS_ERRORED = true; ACRE_STACK_TRACE set [ACRE_STACK_DEPTH, [diag_tickTime, __FILE__, __LINE__, ACRE_CURRENT_FUNCTION, functionName, _this]]; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH + 1; ACRE_CURRENT_FUNCTION = functionName; _ret = _this call ##function; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH - 1; ACRE_IS_ERRORED = false; _ret;}
 //#define DUMPSTACK ([__FILE__, __LINE__] call acre_main_fnc_dumpCallStack
 
+//special spmode macros
+#ifdef SP_MODE
+	#define sp_checkInput(varname,params) if ([varname,params] call sp_gc_handlePlayerInput) exitWith {};
+#else
+	#define sp_checkInput(varname,params)
+#endif
+
 
 //common macro
 #define BASIC_MOB_TYPE "B_Survivor_F"
