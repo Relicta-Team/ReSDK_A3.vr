@@ -201,7 +201,7 @@ sp_createWidgetHighlight = {
 			_this params ["_code","_cancelToken","_widRef","_sizePx","_refWidHandle"];
 			refset(_refWidHandle,true);
 		},
-		[_w,_cancelToken,call _w,_sizePx,refcreate(false)]
+		[_w,_cancelToken,widgetNull,_sizePx,refcreate(false)]
 		endAsyncInvoke
 
 		_cancelToken

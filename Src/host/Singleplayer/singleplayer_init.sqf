@@ -169,5 +169,9 @@ sp_threadWait = {
 	waitUntil _this;
 };
 
+sp_threadWaitForEnd = {
+	waitUntil {equals(_this,threadNull)};
+};
+
 call sp_initMainModule;
 
