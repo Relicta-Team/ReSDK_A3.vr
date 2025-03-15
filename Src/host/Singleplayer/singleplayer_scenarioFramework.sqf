@@ -55,7 +55,11 @@ sp_preloadScenarioEnvironment = {
 
 
 	private _startupMode = "GMSp_game";
-	invokeAfterDelayParams({["processClientCommand" arg vec2("setmode "+ _this ,player)] call client_sendToServer},0.2,_startupMode);
+	private _codeOnMode = {
+		["processClientCommand" arg vec2("setmode "+ _this ,player)] call client_sendToServer;
+		sp_gc_internal_listTriggers = ["Struct_SPTrigger",false] call getAllObjectsInWorldTypeOf;
+	};
+	invokeAfterDelayParams(_codeOnMode,0.2,_startupMode);
 	
 
 	private _startupRole = "GMSp_game_BasicRole";

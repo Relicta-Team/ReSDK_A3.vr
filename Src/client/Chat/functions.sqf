@@ -186,6 +186,10 @@ chat_onRenderLobby = {
 // Открывает окно истории чата
 decl(void())
 chatshowhistory = {
+	#ifdef SP_MODE
+		sp_checkInput("chat_show_history",[]);
+	#endif
+
 	_d = call dynamicDisplayOpen;
 
 	#define HIST_SIZE_H 70

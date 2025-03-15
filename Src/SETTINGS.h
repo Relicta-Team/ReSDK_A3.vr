@@ -87,6 +87,10 @@
 #ifndef EDITOR
 	#undef USE_LOCAL_PATHES
 #endif
+#define USE_LOCAL_PATHES
+#ifndef SP_MODE
+	#undef USE_LOCAL_PATHES
+#endif
 
 //Пути до разных сегментов
 #ifdef USE_LOCAL_PATHES

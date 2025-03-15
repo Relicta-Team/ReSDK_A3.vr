@@ -15,8 +15,42 @@
 #include "singleplayer_ai.sqf"
 #include "singleplayer_scenarioFramework.sqf"
 #include "singleplayer_gameControl.sqf"
+#include "singleplayer_audio.sqf"
+
+sp_storage = createHashMap;
+
+sp_storageGet = {
+	params ["_name","_def"];
+	if !(_name in sp_storage) then {
+		sp_storage set [_name,_def];
+		_def
+	} else {
+		sp_storage get _name
+	};
+};
+sp_storageUpdate = {
+	params ["_name","_valCode","_defval"];
+	
+	private _val = [_name,_defval] call sp_storageGet;
+	sp_storage set [_name, _val call _valCode];
+};
+
+sp_storageSet = {
+	params ["_name","_defval"];
+	sp_storage set [_name, _defval];
+};
 
 sp_internal_reloadScenario = {
+	//cleanup input
+	sp_gc_internal_map_playerInputHandlers = createHashMap;
+	sp_storage = createHashMap;
+
+	[true] call sp_setHideTaskMessageCtg;
+	[false] call sp_setNotificationVisible;
+
+	//reset triggers
+	sp_gc_internal_listTriggers = ["Struct_SPTrigger",false] call getAllObjectsInWorldTypeOf;
+
 	private _oldscn = sp_loadedScenarios;
 	
 	{
@@ -35,18 +69,38 @@ sp_internal_reloadScenario = {
 	[sp_lastStartedScene] call sp_startScene;
 };
 
-//список триггеров
-if (!isNull(sp_gc_map_triggers)) then {
-	sp_gc_map_triggersExport = sp_gc_map_triggers;
+
+if (!isNull(sp_gc_handleUpdateTriggers)) then {
+	stopUpdate(sp_gc_handleUpdateTriggers);
 };
-sp_gc_map_triggers = createHashMap;
+
+
+sp_gc_handleUpdateTriggers = -1;
+sp_gc_internal_listTriggers = [];
 
 sp_initMainModule = {
 	call sp_initGUI;
 	if (isNull(gm_currentMode) || isNullReference(gm_currentMode)) then {
 		call sp_preloadScenarioEnvironment;
 	};
-	sp_gc_map_triggers merge sp_gc_map_triggersExport;
+
+	private _triggerHandle = {
+		_del = false;
+		_dist = 0;
+		{
+			if isNullReference(_x) then {_del = true; continue};
+			_dist = player distance (callFunc(_x,getPos));
+			if (_dist <= getVar(_x,triggerDistance)) then {
+				_del = true;
+				sp_gc_internal_listTriggers set [_foreachIndex,nullPtr];
+				[getVar(_x,triggerName)] call sp_startScene;
+			};
+		} foreach sp_gc_internal_listTriggers;
+		if (_del) then {
+			sp_gc_internal_listTriggers = sp_gc_internal_listTriggers - [nullPtr];
+		};
+	};
+	sp_gc_handleUpdateTriggers = startUpdate(_triggerHandle,0.05);
 };
 
 //get actor
@@ -91,13 +145,18 @@ if !isNull(sp_internal_threads) then {
 sp_internal_threads = [];
 
 sp_threadStart = {
-	params ["_thdCode"];
+	params ["_thdCode",["_args",[]]];
 	
 	sp_internal_threads = sp_internal_threads - [threadNull];
 
-	private _handl = threadStart(threadNew(_thdCode));
+	private _handl = threadStart(threadNewArgs(_thdCode,_args));
 	sp_internal_threads pushback _handl;
 	_handl
+};
+
+sp_threadCriticalSection = {
+	params ["_code"];
+	isnil _code;
 };
 
 sp_threadPause = {
@@ -105,6 +164,7 @@ sp_threadPause = {
 	threadSleep(_time);
 };
 
+//called only when result is true
 sp_threadWait = {
 	waitUntil _this;
 };

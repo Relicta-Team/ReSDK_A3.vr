@@ -22,7 +22,9 @@ interact_examine = {
 	_target = _target call noe_client_getObjectNGOSkip;
 
 	private _hashData = if (typeof _target == BASIC_MOB_TYPE) then {_target} else {getObjReference(_target)};
-	
+	#ifdef SP_MODE
+		sp_checkInput("examine",[_hashData]);
+	#endif
 	rpcSendToServer("examine",[player arg _hashData]);
 };
 

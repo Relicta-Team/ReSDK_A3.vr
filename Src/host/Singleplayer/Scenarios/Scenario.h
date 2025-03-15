@@ -8,4 +8,5 @@
 #include "..\..\oop.hpp"
 #include "..\..\struct.hpp"
 #include "..\..\text.hpp"
+#include "..\..\GameObjects\GameConstants.hpp"
 #include "..\..\..\client\WidgetSystem\widgets.hpp"

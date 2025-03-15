@@ -3,38 +3,49 @@
 // sdk.relicta.ru
 // ======================================================
 
-sp_gc_playerInteractHandlers = [];
-
-/*
-	if returns true - input intercept
-	
-	[{
-		params ["_mob","_target","_opthanditem"];
-		
-	}] call sp_gc_addPlayerInteractHandler
-*/
-sp_gc_handlePlayerInteract = {
-	params ["_target",["_opthanditem",""]];
-	private _mob = call sp_getActor;
-	private _lst = sp_gc_playerInteractHandlers apply {[_mob,_target,_opthanditem] call _x};
-	any_of(_lst)
-};
-
-sp_gc_addPlayerInteractHandler = {
-	params ["_code"];
-	sp_gc_playerInteractHandlers pushBack _code;
-};
-
 sp_gc_internal_map_playerInputHandlers = createHashMap;
 
 //if returns true - input intercepted
 sp_gc_handlePlayerInput = {
 	params ["_inputType","_params"];
 	private _input = sp_gc_internal_map_playerInputHandlers get _inputType;
-	if isNullVar(_input) exitWith {false};
-	
+	if isNullVar(_input) exitWith {
+		traceformat("intercepted command - %1",_inputType)
+		true
+	};
+	private _inptercepted = _input apply {
+		_params call (_x select 0)
+	};
+	traceformat("intercepted logic - %1 is %2",_inputType arg any_of(_inptercepted))
+	any_of(_inptercepted)
+};
 
-	false
+sp_addPlayerHandler = {
+	params ["_inputType","_handlerCode"];
+	private _stack = sp_gc_internal_map_playerInputHandlers getOrDefault [_inputType,[]];
+	private _h = floor random 999999;
+	_stack pushBack [_handlerCode,_h];
+	sp_gc_internal_map_playerInputHandlers set [_inputType,_stack];
+	[_inputType,_h]
+};
+
+sp_removePlayerHandler = {
+	_this params ["_inputType","_hndlIndex"];
+	private _stack = sp_gc_internal_map_playerInputHandlers getOrDefault [_inputType,[]];
+	private _id = _stack findif {_x select 1 == _hndlIndex};
+	if (_id != -1) then {
+		_stack deleteAt _id;
+		if (count _stack == 0) then {
+			sp_gc_internal_map_playerInputHandlers deleteAt _inputType;
+		} else {
+			sp_gc_internal_map_playerInputHandlers set [_inputType,_stack];
+		};
+	};
+};
+
+//clear all handlers
+sp_clearPlayerHandlers = {
+	sp_gc_internal_map_playerInputHandlers = createHashMap;
 };
 
 //used for on assigned handler

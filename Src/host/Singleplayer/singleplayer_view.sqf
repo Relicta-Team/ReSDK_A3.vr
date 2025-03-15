@@ -184,7 +184,10 @@ sp_createWidgetHighlight = {
 		startAsyncInvoke
 		{
 			_this params ["_code","_cancelToken","_widRef","_sizePx","_refWidHandle"];
-			if (refget(_cancelToken)) exitWith {true};
+			if (refget(_cancelToken)) exitWith {
+				refset(_refWidHandle,true);
+				true
+			};
 			if !isNullReference(_widRef) exitWith {false};
 			_probWid = call _code;
 			if !isNullReference(_probWid) then {

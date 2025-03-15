@@ -434,7 +434,6 @@ class(Struct_SPTrigger) extends(Struct_SPISpecialObject)
 	func(constructor)
 	{
 		objParams();
-		sp_gc_map_triggers set [getSelf(triggerName),this];
 	};
 endclass
 

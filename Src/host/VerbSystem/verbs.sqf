@@ -98,6 +98,11 @@ _getObjectVerbs = {
 	unrefObject(_mob,_callbackOwnwer,errorformat("On collect verb (from object) error: Target is %1",_callbackOwnwer));
 
 	_verbs = [_mob,_obj] call verb_tryCollectVerbs;
+	
+	#ifdef SP_MODE
+		sp_checkInput("load_verbs",[_obj arg _verbs]);
+	#endif
+
 	if (_retAsInv) then {
 		rpcSendToObject(_callbackOwnwer,"loadVerbsInventory",[callFunc(_obj,getName) arg _verbs arg -100 arg _objectHash]);
 	} else {
@@ -117,6 +122,10 @@ _getInventoryVerbs = {
 	if isTypeOf(_obj,StolenItem) exitWith {callFuncParams(_obj,onStolen,_mob)};
 	
 	_verbs = [_mob,_obj] call verb_tryCollectVerbs;
+
+	#ifdef SP_MODE
+		sp_checkInput("load_verbs",[_obj arg _verbs]);
+	#endif
 
 	_hash = getVar(_obj,pointer);
 
