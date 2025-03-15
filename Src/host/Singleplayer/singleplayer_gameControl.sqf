@@ -13,11 +13,27 @@ sp_gc_handlePlayerInput = {
 		traceformat("intercepted command - %1",_inputType)
 		true
 	};
-	private _inptercepted = _input apply {
+	private __curPlayerInputHandler__ = -1;
+	private _removeEvents = [];
+	private _inptercepted = _input apply { 
+		INC(__curPlayerInputHandler__);
 		_params call (_x select 0)
+	};
+	if (count _removeEvents > 0) then {
+		{_input set [_x,objNull]} foreach _removeEvents;
+		_input = _input - [objNull];
+		if (count _input == 0) then {
+			sp_gc_internal_map_playerInputHandlers deleteAt _inputType;
+		} else {
+			sp_gc_internal_map_playerInputHandlers set [_inputType,_input];
+		};
 	};
 	traceformat("intercepted logic - %1 is %2",_inputType arg any_of(_inptercepted))
 	any_of(_inptercepted)
+};
+
+sp_removeCurrentPlayerHandler = {
+	_removeEvents pushBackUnique __curPlayerInputHandler__;
 };
 
 sp_addPlayerHandler = {
@@ -27,6 +43,20 @@ sp_addPlayerHandler = {
 	_stack pushBack [_handlerCode,_h];
 	sp_gc_internal_map_playerInputHandlers set [_inputType,_stack];
 	[_inputType,_h]
+};
+
+sp_filterVerbsOnHandle = {
+	params ["_verbs","_handlerCode"];
+	
+	private _vrbs_backup = array_copy(_verbs);
+	_verbs resize 0;
+	{
+		if ([_x call verb_getTypeById,_x] call _handlerCode) then {
+			_verbs pushBack _x;
+		};
+	} foreach _vrbs_backup;
+
+	true
 };
 
 sp_removePlayerHandler = {

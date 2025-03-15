@@ -189,3 +189,9 @@ verb_tryCollectVerbs = {
 
 	_list
 };
+
+
+verb_getTypeById = {
+	params ["_id"];
+	verb_inverted_list get _id
+};
