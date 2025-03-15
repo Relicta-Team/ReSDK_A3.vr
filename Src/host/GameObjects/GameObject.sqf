@@ -1359,7 +1359,7 @@ class(IDestructible) extends(GameObject)
 	{
 		objParams();
 		private _script = getSelf(__script);
-		if !isNullReference(_srcipt) then {
+		if !isNullReference(_script) then {
 			delete(_script);
 		};
 
