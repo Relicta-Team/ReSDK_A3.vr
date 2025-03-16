@@ -3,6 +3,11 @@
 // sdk.relicta.ru
 // ======================================================
 
+/*
+TODO head control:
+lookAt with enabling all enableAI "ANIM"
+*/
+
 sp_ai_debug_curCaptureHandle = -1;
 sp_ai_debug_curCaptureTarget = objNull;
 sp_ai_debug_curCaptureBasePos = vec3(0,0,0);
@@ -39,15 +44,15 @@ sp_ai_debug_stopCapture = {
 sp_ai_debug_processCaptureSwitch = {
     if (!call sp_ai_debug_isCapturing) then {
         ["Capture --> STARTED...","debug"] call chatPrint;
-        call sp_ai_debug_startCapture;
+        [player] call sp_ai_debug_startCapture;
     } else {
         ["!!!STOPPED CAPTURE!!! Pasted to clipboard. Buffer size: " + (str count sp_ai_debug_captureData),"debug"] call chatPrint;
         call sp_ai_debug_stopCapture;
     };
 };
 
-#define SP_AI_TICKRATE_POSITION 0.2
-#define SP_AI_TICKRATE_DIRECTION 0.1
+#define SP_AI_TICKRATE_POSITION 0.1
+#define SP_AI_TICKRATE_DIRECTION 0.05
 
 #define SP_AI_DATAFRAME_ANIMSTATE 0
 #define SP_AI_DATAFRAME_POSITION 1
