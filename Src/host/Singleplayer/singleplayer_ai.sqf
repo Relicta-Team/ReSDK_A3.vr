@@ -21,6 +21,9 @@ sp_ai_debug_startCapture = {
     sp_ai_debug_lastPos = [0,0,0];
         sp_ai_debug_lastPosChecked = tickTime;
         
+    sp_ai_debug_lastDir = [0,0,0];
+        sp_ai_debug_lastDirChecked = tickTime;
+
     sp_ai_debug_frame = 0;
     sp_ai_debug_startTime = tickTime;
     sp_ai_debug_curCaptureHandle = startUpdate(sp_ai_debug_internal_handleUpdate,0);
@@ -44,9 +47,11 @@ sp_ai_debug_processCaptureSwitch = {
 };
 
 #define SP_AI_TICKRATE_POSITION 0.2
+#define SP_AI_TICKRATE_DIRECTION 0.1
 
 #define SP_AI_DATAFRAME_ANIMSTATE 0
 #define SP_AI_DATAFRAME_POSITION 1
+#define SP_AI_DATAFRAME_DIRECTION 2
 
 /*
     Usage: 
@@ -79,6 +84,13 @@ sp_ai_debug_internal_handleUpdate = {
             _deltaTime,SP_AI_DATAFRAME_POSITION,_localPos
         ];
     };
+    if (tickTime >= sp_ai_debug_lastDirChecked && {not_equals(_lastVDir,sp_ai_debug_lastDir)}) then {
+        sp_ai_debug_lastDir = _lastVDir;
+        sp_ai_debug_lastDirChecked = tickTime + SP_AI_TICKRATE_DIRECTION;
+        sp_ai_debug_captureData pushBack [
+            _deltaTime,SP_AI_DATAFRAME_DIRECTION,_lastVDir
+        ];
+    };
 };
 
 sp_ai_debug_isCapturing = {
@@ -96,17 +108,32 @@ sp_ai_debug_suspendCapture = {
 sp_ai_startCapture = {
     params ["_target","_cdata","_basePos"];
     private _cpydta = array_copy(_cdata);
-    startUpdateParams(sp_ai_internal_processPlayingStates,0,[tickTime arg _target arg _cpydta arg _basePos]);
+    private _ctx = createHashMapFromArray [
+        ["curPos",_basePos],
+        ["prevPos",_basePos],
+        ["prevDir",vectorDir _target],
+        ["curDir",vectorDir _target],
+        ["prevDeltaPos",0],
+        ["prevDeltaDir",0]
+    ];
+    startUpdateParams(sp_ai_internal_processPlayingStates,0,[tickTime arg _target arg _cpydta arg _basePos arg _ctx]);
 };
 
 sp_ai_internal_processPlayingStates = {
-    (_this select 0) params ["_t","_obj","_cdata","_basePos"];
+    (_this select 0) params ["_t","_obj","_cdata","_basePos","_ctx"];
     if (count _cdata == 0) exitWith {
         stopThisUpdate();
     };
     _curDelta = tickTime - _t;
     _firstFrame = _cdata select 0;
     _firstFrame params ["_dt","_opType","_frameData"];
+
+    //interpolate
+    _pos = vectorLinearConversion [_ctx getv(prevDeltaPos),_dt,_curDelta,_ctx getv(prevPos),_ctx getv(curPos),true];
+    _dir = vectorLinearConversion [_ctx getv(prevDeltaDir),_dt,_curDelta,_ctx getv(prevDir),_ctx getv(curDir),true];
+    _obj setPosAtl _pos;
+    _obj setvectordir _dir;
+
     if (_curDelta >= _dt) then {
         _cdata deleteAt 0;
         if (_opType == SP_AI_DATAFRAME_ANIMSTATE) exitWith {
@@ -115,7 +142,15 @@ sp_ai_internal_processPlayingStates = {
         };
         if (_opType == SP_AI_DATAFRAME_POSITION) exitWith {
             _newRealPos = _basePos vectoradd _frameData;
-            _obj setposatl _newRealPos;
+            
+            _ctx setv(prevPos,_ctx getv(curPos));
+            _ctx setv(prevDeltaPos,_curDelta);
+            _ctx setv(curPos,_newRealPos);
+        };
+        if (_opType == SP_AI_DATAFRAME_DIRECTION) exitWith {
+            _ctx setv(prevDir,_ctx getv(curDir));
+            _ctx setv(prevDeltaDir,_curDelta);
+            _ctx setv(curDir,_frameData);
         };
 
     };
