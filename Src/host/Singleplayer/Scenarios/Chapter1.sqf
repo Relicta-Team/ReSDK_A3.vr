@@ -84,6 +84,13 @@
 
 		5 call sp_threadPause;
 
+		[
+			"Для активации свободного осмотра удерживайте @lookAround,"
+			+ sbr + "для переключения режима нажмите @lookAroundToggle"
+		] call sp_setNotification;
+
+		5 call sp_threadPause;
+
 		["right+stats+cursor"] call sp_view_setPlayerHudVisible;
 		["Курсор в центре отображает то, на что вы смотрите. Его яркость отражает уровень освещённости вашего персонажа."] call sp_setNotification;
 		_ct = [

@@ -13,6 +13,12 @@
 
 }] call sp_addScene;
 
+["cpt2_trg_hunger",{
+    {
+
+    } call sp_threadStart;
+}] call sp_addScene;
+
 //cpt2_obj_kol_wallbeforecooking -invisible wall before cooking guide
 //cpt2_obj_cellbeforefall - решетка дверь перед падением вниз
 //cpt2_obj_rottenboards -rotten boards ref
