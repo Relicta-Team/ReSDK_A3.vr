@@ -40,6 +40,10 @@ _onActivateVerb = {
 	};
 	private _action = (verbs_funcData get _probClass) select 1;
 	if equals(_action,{true}) then {_action = verb_act_undefinded};
+	
+	#ifdef SP_MODE
+		sp_checkInput("activate_verb",[_thisObj arg _verbId call verb_getTypeById arg _verbId]);
+	#endif
 
 	[_thisObj, _usrObj, _mob] call _action;
 };
@@ -66,6 +70,10 @@ _onActivateInventoryVerb = {
 	};
 	private _action = (verbs_funcData get _probClass) select 1;
 	if equals(_action,{true}) then {_action = verb_act_undefinded};
+
+	#ifdef SP_MODE
+		sp_checkInput("activate_verb",[_thisObj arg _verbId call verb_getTypeById arg _verbId]);
+	#endif
 
 	[_thisObj, _usrObj, _mob] call _action;
 

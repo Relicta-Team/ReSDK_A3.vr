@@ -19,6 +19,9 @@
 
 sp_storage = createHashMap;
 
+sp_debug = true;
+sp_debug_viewOnReload = true;
+
 sp_storageGet = {
 	params ["_name","_def"];
 	if !(_name in sp_storage) then {
@@ -65,8 +68,12 @@ sp_internal_reloadScenario = {
 	{
 		[_x] call sp_loadScenario;
 	} foreach _oldscn;
-
-	[sp_lastStartedScene] call sp_startScene;
+	
+	if (sp_debug_viewOnReload) then {
+		[false,0] call setBlackScreenGUI;
+		[null] call sp_view_setPlayerHudVisible;
+	};
+	[sp_lastStartedScene,true] call sp_startScene;
 };
 
 

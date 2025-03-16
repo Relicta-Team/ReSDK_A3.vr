@@ -10,6 +10,8 @@ sp_gc_handlePlayerInput = {
 	params ["_inputType","_params"];
 	private _input = sp_gc_internal_map_playerInputHandlers get _inputType;
 	if isNullVar(_input) exitWith {
+		if (sp_debug) exitWith {false};
+		
 		traceformat("intercepted command - %1",_inputType)
 		true
 	};
@@ -28,6 +30,7 @@ sp_gc_handlePlayerInput = {
 			sp_gc_internal_map_playerInputHandlers set [_inputType,_input];
 		};
 	};
+	if (sp_debug) exitWith {false};
 	traceformat("intercepted logic - %1 is %2",_inputType arg any_of(_inptercepted))
 	any_of(_inptercepted)
 };
@@ -36,6 +39,7 @@ sp_removeCurrentPlayerHandler = {
 	_removeEvents pushBackUnique __curPlayerInputHandler__;
 };
 
+//Добавить обработчик ввода игрока. возврат true перехватит управление
 sp_addPlayerHandler = {
 	params ["_inputType","_handlerCode"];
 	private _stack = sp_gc_internal_map_playerInputHandlers getOrDefault [_inputType,[]];
@@ -45,6 +49,7 @@ sp_addPlayerHandler = {
 	[_inputType,_h]
 };
 
+//фильтрует доступные ПКМ-действия
 sp_filterVerbsOnHandle = {
 	params ["_verbs","_handlerCode"];
 	

@@ -23,14 +23,22 @@ sp_loadScenario = {
 };
 
 sp_startScene = {
-	params ["_name"];
+	params ["_name",["_doTeleport",false]];
 	call (sp_internal_map_scenes getOrDefault [_name,{
 		errorformat("Scene not found - %1",_name);
 	}]);
 	sp_lastStartedScene = _name;
+	if (_doTeleport) then {
+		{
+			if equals(getVar(_x,triggerName),_name) exitWith {
+				[callFunc(_x,getPos),callFunc(_x,getDir)] call sp_setPlayerPos;
+			};
+		} foreach sp_gc_internal_listTriggers;
+	};
 };
 
 sp_internal_map_scenes = createHashMap;
+//Добавление сцены. Если в мире есть триггер с таким же названием, либо объект - то при системном запуске персонажа телепортирует в сцену
 sp_addScene = {
 	params ["_name","_code"];
 	sp_internal_map_scenes set [_name,_code];

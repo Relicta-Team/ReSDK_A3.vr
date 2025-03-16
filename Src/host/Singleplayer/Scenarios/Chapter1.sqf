@@ -391,7 +391,7 @@
 		_h call sp_threadWaitForEnd;
 		_wall = "cpt1_loot_wall_topart2" call sp_getObject;
 		if !isNullReference(_wall) then {
-			delete(_wall);
+			[_wall] call deleteStructure;
 		};
 		["cpt1_walk_topart2"] call sp_startScene;
 
@@ -402,5 +402,80 @@
 	["Новый дом","Отправляйтесь к ближайшему городу через коллекторы"] call sp_setTaskMessageEff;
 }] call sp_addScene;
 
-//cpt1_loot_wall_topart2 - invwall topart2
-//
+["cpt1_trg_founddoor",{
+	
+	["chap1\gg9"] call sp_audio_sayPlayer;
+	["Вы также можете взаимодействовать с миром через ПКМ меню. Попробуйте открыть дверь с помощью ПКМ, выбрав пункт ""Открыть"""] call sp_setNotification;
+	["load_verbs",{
+		params ["_targ","_verbs"];
+		if equals(_targ,"cpt1_obj_doortopart2" call sp_getObject) then {
+			[_verbs,{
+				params ["_name","_id"];
+				_name in ["description","mainact"]
+			}] call sp_filterVerbsOnHandle;
+		};
+		false
+	}] call sp_addPlayerHandler;
+
+	["activate_verb",{
+		params ["_t","_name"];
+		if (_name == "mainact") then {
+			if equals(_t,"cpt1_obj_doortopart2" call sp_getObject) then {
+				["chap1\gg10"] call sp_audio_sayPlayer;
+				[false] call sp_setNotificationVisible;
+				call sp_removeCurrentPlayerHandler;
+				["cpt1_walk_searchkey"] call sp_startScene;
+			};
+		};
+	}] call sp_addPlayerHandler;
+
+	// ["main_action",{
+	// 	params ["_t"];
+	// 	if equals(_t,"cpt1_obj_doortopart2" call sp_getObject) then {
+	// 		["chap1\gg10"] call sp_audio_sayPlayer;
+	// 		[false] call sp_setNotificationVisible;
+	// 		call sp_removeCurrentPlayerHandler;
+	// 		["cpt1_walk_searchkey"] call sp_startScene;
+	// 	};
+	// 	false
+	// }] call sp_addPlayerHandler;
+	
+}] call sp_addScene;
+
+["cpt1_walk_searchkey",{
+	["Новый дом","Найдите способ открыть дверь"] call sp_setTaskMessageEff;
+	{
+		{
+			equals(call sp_getActor,callFunc("cpt1_obj_keytopart2" call sp_getObject,getSourceLoc))
+		} call sp_threadWait;
+		["Новый дом","Откройте дверь"] call sp_setTaskMessageEff;
+
+		{
+			callFuncParams("cpt1_obj_doortopart2" call sp_getObject,getDistanceTo,call sp_getActor arg true) <= 3
+			&& equals(call sp_getActor,callFunc("cpt1_obj_keytopart2" call sp_getObject,getSourceLoc))
+		} call sp_threadWait;
+
+		["Чтобы открыть дверь с помощью ключа - возьмите его в руку и нажмите ЛКМ, нацелившись на дверь"] call sp_setNotification;
+		{
+			!getVar("cpt1_obj_doortopart2" call sp_getObject,isLocked)
+		} call sp_threadWait;
+		[false] call sp_setNotificationVisible;
+
+		{
+			getVar("cpt1_obj_doortopart2" call sp_getObject,isOpen)
+		} call sp_threadWait;
+		[true] call sp_setHideTaskMessageCtg;
+		["cpt1_walk_final"] call sp_startScene;
+	} call sp_threadStart;
+}] call sp_addScene;
+
+["cpt1_walk_final",{
+	{
+		{
+			getVar("cpt1_obj_finaldoor" call sp_getObject,isOpen)
+		} call sp_threadWait;
+
+		[""] call sp_view_setPlayerHudVisible;
+		[true,2.5] call setBlackScreenGUI;
+	} call sp_threadStart;
+}] call sp_addScene;
