@@ -176,6 +176,9 @@ slt_destr = {
 //real impl of destroy server light
 slt_destr_impl = {
 	params ["_o"];
+	if isNullVar(_o) exitWith {
+		error("slt::destr::impl() - destruct object already undefined");
+	};
 	if equalTypes(_o,objNull) then {
 		deleteVehicle _o;
 	} else {
