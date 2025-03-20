@@ -781,6 +781,10 @@ region(Status effects)
 	//внутренний метод обработки крови
 	func(handle_blood)
 	{
+		#ifdef SP_MODE
+			sp_checkWSim("blood");
+		#endif
+
 		_ms = getSelf(reagents);
 		_bloodLoss = getSelf(bloodLossValue);
 		if (_bloodLoss > 0) then {
@@ -1187,6 +1191,10 @@ region(Status effects)
 
 	func(handle_food)
 	{
+		#ifdef SP_MODE
+			sp_checkWSim("hunger");
+		#endif
+
 		// только за реген стамины
 		callSelfParams(adjustHunger, - HUNGER_PER_TICK_LESS);
 		//callSelfParams(adjustThirst, - THIRST_PER_TICK_LESS);
@@ -1301,6 +1309,10 @@ region(Status effects)
 		setSelf(stamina,_newstamina);
 		callSelfParams(fastSendInfo,"cd_stamina_cur" arg _newstamina);
 
+		#ifdef SP_MODE
+			sp_checkWSim("hunger");
+		#endif
+		
 		//за реген стамины тратим голод и жажду
 		callSelfParams(adjustHunger, - HUNGER_STAMINA_LESS * ((getSelf(curEncumbranceLevel) + 1)));
 		callSelfParams(adjustThirst, - THIRST_PER_TICK_LESS);
@@ -1326,6 +1338,10 @@ region(Log macros)
 	{
 		// количество урона, тип повреждений, хитзона, причина урона
 		objParams_6(_amount,_type,_hitZone,_dir,_cause,_vec2WeaponInfo);
+
+		#ifdef SP_MODE
+			sp_checkWSim("damage");
+		#endif
 
 		//Обновляем информацию о последнем повреждении
 		if isNullVar(_cause) then {
@@ -2493,6 +2509,10 @@ region(Handle pain)
 	getter_func(canRegenPain,callSelf(isSleep));
 	func(handle_pain)
 	{
+		#ifdef SP_MODE
+			sp_checkWSim("pain");
+		#endif
+
 		_pp = 0;
 		_painTimeDec = PAIN_DEFAULT_RESTORE;
 		_tPain = tickTime;

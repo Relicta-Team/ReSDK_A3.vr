@@ -108,7 +108,7 @@ _iact = {
 	if (_type == INTERACT_RPC_CLICK_SELF) exitWith {
 		_target = this;
 		#ifdef SP_MODE
-			sp_checkInput("click_self",[_target]);
+			sp_checkInput("click_self",[callSelf(getItemInActiveHandRedirect)]);
 		#endif
 		callSelfParams(clickTarget,_target);
 	};
