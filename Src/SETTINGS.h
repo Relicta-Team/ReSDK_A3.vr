@@ -30,12 +30,17 @@
 
 //uncomment for enable singleplayer
 //#define SP_MODE
+#define SP_DEBUG
 
 #ifdef SP_MODE
 	#define SP_MODE_OR_EDITOR
 	#define EDITOR_OR_SP_MODE
-
 	#undef EDITOR
+#endif
+
+//disable spdebug on disabled spmode
+#ifndef SP_MODE
+	#undef SP_DEBUG
 #endif
 
 
