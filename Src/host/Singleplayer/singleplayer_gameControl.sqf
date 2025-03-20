@@ -10,7 +10,10 @@ sp_gc_handlePlayerInput = {
 	params ["_inputType","_params"];
 	private _input = sp_gc_internal_map_playerInputHandlers get _inputType;
 	if isNullVar(_input) exitWith {
-		if (sp_debug) exitWith {false};
+		if (sp_debug) exitWith {
+			traceformat("intercepted debug-skipped command - %1",_inputType)
+			false
+		};
 		
 		traceformat("intercepted command - %1",_inputType)
 		true
@@ -22,7 +25,9 @@ sp_gc_handlePlayerInput = {
 		_params call (_x select 0)
 	};
 	if (count _removeEvents > 0) then {
-		{_input set [_x,objNull]} foreach _removeEvents;
+		{
+			_input set [_x,objNull];
+		} foreach _removeEvents;
 		_input = _input - [objNull];
 		if (count _input == 0) then {
 			sp_gc_internal_map_playerInputHandlers deleteAt _inputType;
@@ -30,8 +35,8 @@ sp_gc_handlePlayerInput = {
 			sp_gc_internal_map_playerInputHandlers set [_inputType,_input];
 		};
 	};
-	if (sp_debug) exitWith {false};
 	traceformat("intercepted logic - %1 is %2",_inputType arg any_of(_inptercepted))
+	if (sp_debug) exitWith {false};
 	any_of(_inptercepted)
 };
 
@@ -47,6 +52,12 @@ sp_addPlayerHandler = {
 	_stack pushBack [_handlerCode,_h];
 	sp_gc_internal_map_playerInputHandlers set [_inputType,_stack];
 	[_inputType,_h]
+};
+
+sp_isValidPlayerHandler = {
+	params ["_inputType","_hndlIndex"];
+	private _stack = sp_gc_internal_map_playerInputHandlers getOrDefault [_inputType,[]];
+	(_stack findif {equals(_x select 1,_hndlIndex)}) != -1
 };
 
 //фильтрует доступные ПКМ-действия
@@ -88,7 +99,13 @@ sp_gc_onPlayerAssigned = {
 	params ["_mob"];
 
 	["Chapter1"] call sp_loadScenario;
-	["cpt1_begin"] call sp_startScene;
+	["Chapter2"] call sp_loadScenario;
+	["Chapter3"] call sp_loadScenario;
+	["Chapter4"] call sp_loadScenario;
+	["Chapter5"] call sp_loadScenario;
+
+	//["cpt1_begin"] call sp_startScene;
+	["cpt3_begin",true] call sp_startScene;
 };
 
 //устанавливает позицию игрока
@@ -112,6 +129,27 @@ sp_setPlayerPos = {
 		player setDir _dir;
 	};
 	
+	startAsyncInvoke
+	{
+		params ["_pos","_dir"];
+		player setposatl _pos;
+		if !isNullVar(_dir) then {
+			player setDir _dir;
+		};
+
+		call noe_client_isPlayerPositionChunksLoaded;
+	},
+	{
+		params ["_pos","_dir"];
+		player setposatl _pos;
+		if !isNullVar(_dir) then {
+			player setDir _dir;
+		};
+	},
+	[_pos,_dir]
+	endAsyncInvoke
+	
+	
 };
 
 //получает объект по глобальной ссылке
@@ -126,3 +164,28 @@ sp_getPoint = {
 	sp_gc_map_pointList getOrDefault [_pointName,nullPtr];
 };
 
+sp_internal_map_wsim = createHashMap;
+_wsim = [
+	"atmos" //atmos sim
+	,"light" //lightsim (fireplace,torchs)
+	,"damage" //applydamage for mob
+	,"hunger" //hunger loss
+	,"blood" //bloodloss 
+	,"pain"
+];
+
+{
+	sp_internal_map_wsim set [_x,false];
+} foreach _wsim;
+
+//use wsim sp_checkWSim for disable world simulation
+sp_wsimIsActive = {
+	sp_internal_map_wsim getOrDefault [_this,true]
+};
+
+sp_wsimSetActive = {
+	params ["_handler","_mode"];
+	if (!array_exists(sp_internal_map_wsim,_handler)) exitWith {false};
+	sp_internal_map_wsim set [_handler,_mode];
+	true
+};

@@ -5,11 +5,14 @@
 
 sp_audio_sayPlayer = {
 	params ["_pathPost"];
+	if (sp_debug_skipAudio) exitWith {-1};
+
 	["singleplayer\sp_guide\" + _pathPost] call soundUI_play;
 };
 
 sp_audio_sayPlayerList = {
 	private _pathlist = _this;
+	if (sp_debug_skipAudio) exitWith {scriptNull};
 	
 	[{
 		params ["_pathlist"];

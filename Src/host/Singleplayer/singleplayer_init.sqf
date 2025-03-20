@@ -21,6 +21,10 @@ sp_storage = createHashMap;
 
 sp_debug = true;
 sp_debug_viewOnReload = true;
+sp_debug_skipAudio = true;
+
+sp_ai_debug_testmobs = createHashMap;
+sp_ai_debug_curCaptureBasePos = vec3(0,0,0);
 
 sp_storageGet = {
 	params ["_name","_def"];
@@ -47,6 +51,8 @@ sp_internal_reloadScenario = {
 	//cleanup input
 	sp_gc_internal_map_playerInputHandlers = createHashMap;
 	sp_storage = createHashMap;
+
+	sp_internal_lastNotification = "";
 
 	[true] call sp_setHideTaskMessageCtg;
 	[false] call sp_setNotificationVisible;
@@ -99,8 +105,8 @@ sp_initMainModule = {
 			_dist = player distance (callFunc(_x,getPos));
 			if (_dist <= getVar(_x,triggerDistance)) then {
 				_del = true;
-				sp_gc_internal_listTriggers set [_foreachIndex,nullPtr];
 				[getVar(_x,triggerName)] call sp_startScene;
+				sp_gc_internal_listTriggers set [_foreachIndex,nullPtr]; //delete trigger only after called scene
 			};
 		} foreach sp_gc_internal_listTriggers;
 		if (_del) then {
@@ -108,6 +114,19 @@ sp_initMainModule = {
 		};
 	};
 	sp_gc_handleUpdateTriggers = startUpdate(_triggerHandle,0.05);
+};
+
+sp_getTriggerByName = {
+	private _searchName = _this;
+	private _retObj = nullPtr;
+	{
+		if isNullReference(_x) then {continue};
+		
+		if (_searchName == getVar(_x,triggerName)) exitWith {
+			_retObj = _x;
+		};
+	} foreach sp_gc_internal_listTriggers;
+	_retObj
 };
 
 //get actor

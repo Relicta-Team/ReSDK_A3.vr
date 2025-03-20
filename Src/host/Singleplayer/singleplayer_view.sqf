@@ -13,6 +13,8 @@ sp_gui_notificationSizeH = 70;
 
 sp_gui_taskMessageWidth = 25;
 
+sp_internal_lastNotification = "";
+
 sp_isGUIInit = false;
 sp_initGUI = {
 	if (count sp_gui_taskWidgets > 0) exitWith {};
@@ -135,7 +137,9 @@ sp_isVisibleTaskMesssageCtg = {
 //notification system
 sp_setNotification = {
 	params ["_text"];
-	if (!sp_isGUIInit) exitWith {};
+	if (!sp_isGUIInit) exitWith {""};
+	sp_internal_lastNotification = _text;
+	private _tcopy = _text;
 	private _tWid = call sp_int_getNotificationWidget;
 
 	while {[_text,"\$\w+"] call regex_isMatch} do {
@@ -158,10 +162,13 @@ sp_setNotification = {
 	if (!(call sp_isVisibleNotification)) then {
 		[true] call sp_setNotificationVisible;
 	};
+
+	_tcopy
 };
 
 sp_setNotificationVisible = {
-	params ["_mode"];
+	params ["_mode",["_notifHandler",""]];
+	if (not_equals(_notifHandler,"") && not_equals(_notifHandler,sp_internal_lastNotification)) exitWith {};
 	private _ctg = call sp_int_getNotificationWidgetCtg;
 	if (_mode) then {
 		_ctg setFade 0;

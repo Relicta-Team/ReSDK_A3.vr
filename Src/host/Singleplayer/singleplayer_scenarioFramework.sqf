@@ -27,6 +27,7 @@ sp_startScene = {
 	call (sp_internal_map_scenes getOrDefault [_name,{
 		errorformat("Scene not found - %1",_name);
 	}]);
+	traceformat("Scene started: %1",_name)
 	sp_lastStartedScene = _name;
 	if (_doTeleport) then {
 		{
