@@ -484,5 +484,7 @@
 
 		[""] call sp_view_setPlayerHudVisible;
 		[true,2.5] call setBlackScreenGUI;
+
+		["cpt2_begin"] call sp_startScene;
 	} call sp_threadStart;
 }] call sp_addScene;
