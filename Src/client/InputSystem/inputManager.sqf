@@ -21,6 +21,15 @@ onGameInputs_Down = {
 		false
 	};
 
+	#ifdef SP_DEBUG
+	if (_key == KEY_ADD) exitWith {
+		call sp_ai_debug_processCaptureSwitch;
+	};
+	if (_key == KEY_NUMPADENTER) exitWith {
+		call sp_ai_debug_playLastAnim;
+	};
+	#endif
+
 	#ifdef EDITOR
 	//editorDebug functionality
 

@@ -681,8 +681,10 @@ ACRE_IS_ERRORED = false; _ret;}*/
 //special spmode macros
 #ifdef SP_MODE
 	#define sp_checkInput(varname,params) if ([varname,params] call sp_gc_handlePlayerInput) exitWith {};
+	#define sp_checkWSim(varname) if (!(varname call sp_wsimIsActive)) exitWith {};
 #else
 	#define sp_checkInput(varname,params)
+	#define sp_checkWSim(varname)
 #endif
 
 
