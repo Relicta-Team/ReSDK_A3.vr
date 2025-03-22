@@ -476,7 +476,7 @@ region(Actions subsystem)
 		if isNullVar(_refverbs) then {
 			_refverbs = getSelf(__listactions);
 		};
-		#ifdef EDITOR
+		#ifdef EDITOR_OR_SP_MODE
 		_refverbs = array_copy(_refverbs);
 		#endif
 
@@ -1134,7 +1134,7 @@ region(Visual states)
 			getSelf(__visualStates) pushBack [_state,_ctxParams];
 		};
 
-		#ifdef EDITOR
+		#ifdef EDITOR_OR_SP_MODE
 			callSelfParams(syncSmdVar,"visualStates" arg array_copy(getSelf(__visualStates)));
 		#else
 			callSelfParams(syncSmdVar,"visualStates" arg getSelf(__visualStates));
@@ -1147,7 +1147,7 @@ region(Visual states)
 		private _states = getSelf(__visualStates);
 		_states deleteAt (_states findif {ifcheck(equalTypes(_x,[]),equals(_x select 0,_state),equals(_x,_state))});
 
-		#ifdef EDITOR
+		#ifdef EDITOR_OR_SP_MODE
 			callSelfParams(syncSmdVar,"visualStates" arg array_copy(getSelf(__visualStates)));
 		#else
 			callSelfParams(syncSmdVar,"visualStates" arg getSelf(__visualStates));
@@ -1174,7 +1174,7 @@ region(Visual states)
 			};
 			_states set [_idx,(_states select _idx) call _eventState];
 			
-			#ifdef EDITOR
+			#ifdef EDITOR_OR_SP_MODE
 				callSelfParams(syncSmdVar,"visualStates" arg array_copy(getSelf(__visualStates)));
 			#else
 				callSelfParams(syncSmdVar,"visualStates" arg getSelf(__visualStates));
