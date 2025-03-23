@@ -9,6 +9,7 @@
 #include "..\text.hpp"
 #include "..\thread.hpp"
 #include "..\..\client\WidgetSystem\widgets.hpp"
+#include "..\NOEngine\NOEngine.hpp"
 
 /*
 TODO head control:
@@ -148,10 +149,11 @@ sp_ai_debug_suspendCapture = {
 
 
 sp_ai_playCapture = {
-    params ["_target","_cdata","_basePos"];
+    params ["_target","_cdata","_basePos",["_postCode",{}]];
     private _cpydta = array_copy(_cdata);
     private _ctx = createHashMapFromArray [
-        ["curPos",_cpydta select (_cpydta findif {_x select 1 == SP_AI_DATAFRAME_POSITION}) select 2],
+        //["curPos",_cpydta select (_cpydta findif {_x select 1 == SP_AI_DATAFRAME_POSITION}) select 2],
+        ["curPos",_basePos],
         ["prevPos",_basePos],
         ["prevDir",vectorDirVisual _target],
         ["curDir",vectorDirVisual _target],
@@ -159,8 +161,22 @@ sp_ai_playCapture = {
         ["prevDeltaDir",0],
 
         ["lastState",animationState _target],
-        ["lastHeadPos",[0,0,0]]
+        ["lastHeadPos",[0,0,0]],
+
+        ["postAnimCode",_postCode]
     ];
+    _target attachto [player,[0,0,10]];
+
+    _finalPos = [0,0,0];
+    reverse _cpydta;
+    _iposlast = _cpydta findif {_x select 1 == SP_AI_DATAFRAME_POSITION};
+    if (_iposlast != -1) then {
+        _finalPos = _cpydta select _iposlast select 2;
+    };
+    if not_equals(_finalPos,vec3(0,0,0)) then {
+        _ctx set ["postendPos",_finalPos vectoradd _basePos];
+    };
+    reverse _cpydta;
     
     startUpdateParams(sp_ai_internal_processPlayingStates,0,[tickTime arg _target arg _cpydta arg _basePos arg _ctx]);
 };
@@ -168,7 +184,15 @@ sp_ai_playCapture = {
 sp_ai_internal_processPlayingStates = {
     (_this select 0) params ["_t","_obj","_cdata","_basePos","_ctx"];
     if (count _cdata == 0) exitWith {
+        
         stopThisUpdate();
+        if ("postendPos" in _ctx) then {
+            _obj setposatl (_ctx get "postendPos");
+            _obj switchmove "";
+        };
+        detach _obj;
+        [_obj,getposatl _obj,false] call sp_ai_commitMobPos;
+        [_obj] call (_ctx get "postAnimCode");
     };
     _curDelta = tickTime - _t;
     _firstFrame = _cdata select 0;
@@ -248,6 +272,129 @@ sp_ai_debug_createTestPerson = {
 	callFuncParams(_mob,initAsActor,_m);
     sp_ai_debug_testmobs set [_target,_m];
     _m
+};
+
+sp_ai_playAnim = {
+    params ["_target","_basePos","_animName",["_postCode",{}]];
+
+    if equalTypes(_target,"") then {
+        _target = _target call sp_ai_getMobObject;
+    };
+    if equalTypes(_target,nullPtr) then {
+        _target = getVar(_target,owner);
+    };
+    if isNullReference(_target) exitWith {
+        errorformat("sp::ai::playAnim - Wrong target - cannot play animation %1 at %2",_animName arg _target);
+    };
+
+    if isNullVar(_basePos) then {
+        _basePos = getposatlvisual _target;
+    };
+    
+    if !([_animName,".anm"] call stringEndWith) then {
+        modvar(_animName) + ".anm";
+    };
+    
+    private _prefix = "Src\host\Singleplayer\Anims\";
+    _animName = _prefix + _animName;
+    if (!fileExists(_animName)) exitwith {
+        errorformat("sp::ai::playAnim - Animation %1 not found",_animName);
+    };
+
+    private _buff = call compile LOADFILE _animName;
+
+    [_target,_buff,_basePos,_postCode] call sp_ai_playCapture;
+};
+
+sp_ai_createPerson = {
+    params ["_pos",["_mtype","Mob"],["_target","CREATE_NEW"]];
+    if (_target == "CREATE_NEW") then {
+        _target = "mob_" + (count sp_ai_mobs + 1);
+    };
+    if equalTypes(_pos,"") then {
+        if isNullReference(_pos call sp_getObject) exitWith {
+            _pos = [0,0,0];
+        };
+        _pos = callFunc(_pos call sp_getObject,getPos);
+    };
+    private _m = _pos call gm_createMob;
+    [_m,_pos,false] call sp_ai_commitMobPos;
+    private _mob = instantiate(_mtype);
+	callFuncParams(_mob,initAsActor,_m);
+    smd_allInGameMobs pushBackUnique _m;
+    sp_ai_mobs set [_target,_m];
+    _m
+};
+
+sp_ai_getMobObject = {
+    private _body = sp_ai_mobs getOrDefault [_this,objNull];
+    if isNullReference(_body) exitWith {nullPtr};
+    _body getvariable ["link",nullPtr]
+};
+
+sp_ai_commitMobPos = {
+    params ["_m","_p",["_doApply",true]];
+    
+    _m setvariable ["__sp_ai_internal_commitPos",_p];
+    if (_doApply) then {
+        _m setposatl _p;
+    };
+
+};
+
+sp_ai_setMobPos = {
+    params ["_mob","_reforpos",["_dir",null]];
+	private _pos = vec3(0,0,0);
+	if equalTypes(_reforpos,"") then {
+		private _obj = _reforpos call sp_getObject;
+		_pos = callFunc(_obj,getPos);
+		if !isNullVar(_dir) then {
+			_dir = callFunc(_obj,getDir);
+		};	
+	} else {
+		_pos = _reforpos;
+	};
+
+	if equals(_pos,vec3(0,0,0)) exitWith {};
+
+    if equalTypes(_mob,"") then {
+        _mob = _mob call sp_ai_getMobObject;
+        _mob = getVar(_mob,owner);
+    };
+    if equalTypes(_mob,nullPtr) then {
+        _mob = getVar(_mob,owner);
+    };
+
+	_mob setPosAtl _pos;
+    [_mob,_pos,false] call sp_ai_commitMobPos;
+	if !isNullVar(_dir) then {
+		_mob setDir _dir;
+	};
+};
+
+sp_ai_internal_onUpdate = {
+    _chunkLoaded = {
+        params ["_ps"];
+        private _cht = CHUNK_TYPE_STRUCTURE;
+        [[[_ps,_cht] call noe_posToChunk,_cht] call noe_client_getPosChunkToData] call noe_client_isObjectsLoadingDone
+    };
+    _specvar = "__sp_ai_internal_nftime";
+    _svstate = "__sp_ai_internal_statepos";
+    {
+        _vpos = _y getvariable "__sp_ai_internal_commitPos";
+        _loaded = [_vpos] call _chunkLoaded;
+        if (!_loaded) then {
+            _y setposatl _vpos;
+            _y setvariable [_specvar,null];
+        } else {
+            if isNull(_y getvariable _specvar) then {
+                _y setvariable [_specvar,tickTime+1]; //postloading delay
+            };
+            if (tickTime >= (_y getvariable [_specvar,tickTime])) exitwith {};
+            _y setposatl (_vpos vectoradd [0,0,0.1]);
+            //traceformat("syncpos %1 %2",_y arg _y getvariable _svstate)
+        };
+    } foreach sp_ai_mobs;
 };
 
 /*

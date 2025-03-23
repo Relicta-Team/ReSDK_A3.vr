@@ -191,7 +191,7 @@ _emoteAct = {
 	[format["(EMOTE_ACTION) - %1 perform emote '%2' (%3)",callSelfParams(getNameEx,"кто"),_emt,getVar(getSelf(client),name)]] call rpLog;
 
 	#ifdef SP_MODE
-		sp_checkInput("emote_text",[_txt]);
+		sp_checkInput("emote_action",[_emt arg _optString]);
 	#endif
 	
 	//Сохраняем строку если она передана по сети

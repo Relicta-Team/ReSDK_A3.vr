@@ -24,7 +24,11 @@ sp_debug_viewOnReload = true;
 sp_debug_skipAudio = true;
 
 sp_ai_debug_testmobs = createHashMap;
+sp_ai_mobs = createHashMap;
+sp_ai_handleFarMobs = startUpdate({call sp_ai_internal_onUpdate},0);
 sp_ai_debug_curCaptureBasePos = vec3(0,0,0);
+
+sp_playerCanMove = true;
 
 sp_storageGet = {
 	params ["_name","_def"];

@@ -2401,6 +2401,10 @@ region(Handle falling)
 		_mob = getSelf(owner);
 		if (isNullReference(_mob) || (abs speed _mob)==0) exitWith {};
 
+		#ifdef SP_MODE
+		if equals(attachedto _mob,player) exitWith {}; //do not fall on attached
+		#endif
+
 		if (isTouchingGround _mob) then {
 			//упал
 			if !getSelf(isOnGround) then {

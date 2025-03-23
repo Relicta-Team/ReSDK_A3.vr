@@ -51,6 +51,7 @@ src\client\LightEngine\ScriptedConfigs\SLIGHT_SEARCHLIGHT_DORM.sqf
 src\client\LightEngine\ScriptedConfigs\SLIGHT_SET123_DEBUG.sqf
 src\client\LightEngine\ScriptedConfigs\SLIGHT_SHIT_SMELL.sqf
 src\client\LightEngine\ScriptedConfigs\SLIGHT_SPOT_LAMP.sqf
+src\client\LightEngine\ScriptedConfigs\SLIGHT_SP_LAMP_1.sqf
 src\client\LightEngine\ScriptedConfigs\SLIGHT_SP_LIGHT_ZONE1.sqf
 src\client\LightEngine\ScriptedConfigs\SLIGHT_SP_LIGHT_ZONE2.sqf
 src\client\LightEngine\ScriptedConfigs\SLIGHT_STREET_LAMP.sqf

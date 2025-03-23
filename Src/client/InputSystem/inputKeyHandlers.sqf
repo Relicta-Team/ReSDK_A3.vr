@@ -194,6 +194,10 @@ input_movementCheck = {
 		true
 	};
 
+	#ifdef SP_MODE
+	if ((_isMov || _isCS) && {!sp_playerCanMove}) exitWith {true};
+	#endif
+
 	//нельзя тащить вперёд
 	if (_isMov && {[player] call smd_isPulling} && {_key call input_internal_isMovingForward}) exitWith {true};
 
