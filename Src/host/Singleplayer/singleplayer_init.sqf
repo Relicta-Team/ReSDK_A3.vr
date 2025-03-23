@@ -44,6 +44,7 @@ sp_storageUpdate = {
 	
 	private _val = [_name,_defval] call sp_storageGet;
 	sp_storage set [_name, _val call _valCode];
+	sp_storage get _name
 };
 
 sp_storageSet = {

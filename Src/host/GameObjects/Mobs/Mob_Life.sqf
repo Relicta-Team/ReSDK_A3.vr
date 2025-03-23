@@ -2403,6 +2403,9 @@ region(Handle falling)
 
 		#ifdef SP_MODE
 		if equals(attachedto _mob,player) exitWith {}; //do not fall on attached
+		if not_equals(_mob,player) exitwith {
+			errorformat("Unexpected falling error: mob %1",_mob);
+		};
 		#endif
 
 		if (isTouchingGround _mob) then {

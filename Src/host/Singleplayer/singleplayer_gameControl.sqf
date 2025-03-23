@@ -105,7 +105,7 @@ sp_gc_onPlayerAssigned = {
 	["Chapter5"] call sp_loadScenario;
 
 	//["cpt1_begin"] call sp_startScene;
-	["cpt3_begin",true] call sp_startScene;
+	["cpt4_begin",true] call sp_startScene;
 };
 
 //устанавливает позицию игрока

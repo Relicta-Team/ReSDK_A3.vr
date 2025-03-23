@@ -6,6 +6,7 @@
 #include "Scenario.h"
 cpt3_hudvis_default = "right+stats+cursor+inv";
 cpt3_hudvis_eaterzone = cpt3_hudvis_default + "+left";
+cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 ["cpt3_begin",{
 	
 	["cpt3_pos_start",0] call sp_setPlayerPos;
@@ -39,7 +40,7 @@ cpt3_hudvis_eaterzone = cpt3_hudvis_default + "+left";
 	_eaterBdy = ["cpt3_pos_eaterbase","GMPreyMobEater","cpt3_eater"] call sp_ai_createPerson;
 	_eaterBdy setDir (callFunc("cpt3_pos_eaterbase" call sp_getObject,getDir));
 	if (!sp_debug) then {
-		_eaterBdy hideObject false;
+		_eaterBdy hideObject true;
 	};
 	_eater = _eaterBdy getvariable "link";
 
@@ -47,6 +48,7 @@ cpt3_hudvis_eaterzone = cpt3_hudvis_default + "+left";
 	["Castoffs1",_eater,INV_CLOTH] call createItemInInventory;
 
 	_eaterBdy switchmove "ApanPercMstpSnonWnonDnon_G01";
+	_eaterBdy setface "persianhead_a3_01_player";//disable eater head
 
 
 }] call sp_addScene;
@@ -155,7 +157,7 @@ cpt3_hudvis_eaterzone = cpt3_hudvis_default + "+left";
 		_m = "Я что-то слышу...";
 		callFuncParams(call sp_getActor,mindSay,_m);
 		["Вы можете внимательно всматриваться и прислушиваться к окружению, чтобы замечать подозрительные вещи. "
-		+sbr+sbr+"Нажмите $input_act_inventory, переместите мышь влево и в выезжающем перейдите в раздел ""восприятие"". "
+		+sbr+sbr+"Нажмите $input_act_inventory, переместите мышь влево и в выезжающем меню перейдите в раздел ""восприятие"". "
 		+"Попробуйте присмотреться к окружению"] call sp_setNotification;
 
 		["perform_search_action",false] call sp_storageSet;
@@ -262,7 +264,7 @@ cpt3_hudvis_eaterzone = cpt3_hudvis_default + "+left";
             _w
         }] call sp_createWidgetHighlight;
 
-		_hmes = ["Активное особое действие отображается справа. Для активации особого действия нажмите $input_act_extraAction"] call sp_setNotification;
+		_hmes = ["Активное особое действие отображается в статусах справа. Каждое активное действие устанавливается для левой и правой руки отдельно. Для активации особого действия нажмите $input_act_extraAction нацелившись в сторону жруна."] call sp_setNotification;
 		
 		_hact = ["extra_action",{
 			params ["_targ"];
@@ -337,11 +339,16 @@ cpt3_hudvis_eaterzone = cpt3_hudvis_default + "+left";
 // "LampCeiling G:a3+rKIedoM0" - lamp stealth testing
 
 ["cpt3_trg_startStealthPre",{
-	
+	if (sp_debug) then {
+		_mob = getVar("cpt3_eater" call sp_ai_getMobObject,owner);
+		[_mob,"cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
+		_mob switchmove "ApanPercMstpSnonWnonDnon_G01";
+	};
+	["cpt3_lightswitch",true] call sp_storageSet;
 	{
 		
 		private _obj = "LampCeiling G:a3+rKIedoM0" call sp_getObject;
-		while {true} do {
+		while {["cpt3_lightswitch",true] call sp_storageGet} do {
 			
 			1 call sp_threadPause;
 			private _mode = false;
@@ -351,23 +358,218 @@ cpt3_hudvis_eaterzone = cpt3_hudvis_default + "+left";
 				callFuncParams(_obj,setEnable,_mode);
 				_mode = !_mode;
 				
-				rand(0.2,0.7) call sp_threadPause;
+				rand(0.1,0.45) call sp_threadPause;
 			};
 			//callFuncParams(_obj,playSound,"electronics\lamp_lag" arg getRandomPitchInRange(0.8,1.3) arg 20 arg 2.2 arg null arg false);
-			5 call sp_threadPause;
+			5.5 call sp_threadPause;
 			
 			callFuncParams(_obj,setEnable,true);
 
 			3 call sp_threadPause;
 		};
+
+		callFuncParams(_obj,setEnable,true);
+	} call sp_threadStart;
+}] call sp_addScene;
+
+["cpt3_trg_stealthguide",{
+
+	//eater stealth handler
+	{
+		_eater = "cpt3_eater" call sp_ai_getMobObject;
+		while {!getVar(_eater,isDead)} do {
+			_refm = refcreate(0);
+			if (callFuncParams(_eater,canSeeObject,call sp_getActor arg _refm)
+				&& !getVar(call sp_getActor,isStealthEnabled)
+			) then {
+				//уже за спиной у жруна
+				if (callFuncParams(call sp_getActor,getDirTo,_eater) == DIR_BACK) exitWith {};
+
+				if (refget(_refm) >= VISIBILITY_MODE_LOW) then {
+					{
+						
+						[_eater,null,"cpt3_eater_attack",{
+							params ["_mob"];
+							[_mob,"cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
+							_mob switchmove "ApanPercMstpSnonWnonDnon_G01";
+						}] call sp_ai_playAnim;
+
+						callFuncParams(_eater,playSound,"monster\eater\scream5" arg getRandomPitchInRange(0.9,1.1) arg 50 arg 2.2 arg null arg false);
+						_c = { [0.23,30.5,0.05,0.8] call cam_addCamShake; };
+						invokeAfterDelay(_c,0.45);
+						[true,1.8] call setBlackScreenGUI;
+						callFuncParams(call sp_getActor,setStealth,false);
+						["cpt3_flag_caneatercheck",false] call sp_storageSet;
+						
+					} call sp_threadCriticalSection;
+					_post = {
+						["cpt3_flag_caneatercheck",true] call sp_storageSet;
+						["cpt3_pos_onfailstealth",0] call sp_setPlayerPos;
+						[false,1.1] call setBlackScreenGUI;
+					}; invokeAfterDelay(_post,3);
+
+					{
+						(["cpt3_flag_caneatercheck",false] call sp_storageGet)
+					} call sp_threadWait;
+					
+				};
+			};
+		};
+		
+	} call sp_threadStart;
+
+	{
+		_notifHandle = ["Чтобы двигаться незаметно для других перейдите в режим скрытности. Для этого в правом меню нажмите ""Прятаться""."] call sp_setNotification;
+
+		_ct = [{
+			_wid = widgetNull;
+			{
+				if (!isNullReference(_x) && {(_x getvariable "actionName") == "Прятаться"}) exitWith {
+					_wid = _x;
+				};
+			} foreach interactMenu_specActWidgets;
+			_wid
+		}] call sp_createWidgetHighlight;
+
+		{
+			getVar(call sp_getActor,isStealthEnabled)
+		} call sp_threadWait;
+		[false,_notifHandle] call sp_setNotificationVisible;
+		refset(_ct,true);
+
+		["Прятки со смертью","Незаметно подкрадитесь к жруну сзади"] call sp_setTaskMessageEff;
+
+	} call sp_threadStart;
+}] call sp_addScene;
+
+["cpt3_trg_stealthlightnotif",{
+	{
+		_h = ["<t align='left'>Скрытное передвижение прекратится в следующих случаях:"
+			+sbr+ " - Яркое освещение"
+			+sbr+ " - Быстрое передвижение"
+			+sbr+ " - Враг бдительно осматривается или прислушивается"
+			+sbr+ " - Вы атаковали кого-то или получили урон"
+			+ "</t>"
+		] call sp_setNotification;
+		10 call sp_threadPause;
+		[false,_h] call sp_setNotificationVisible;
 	} call sp_threadStart;
 }] call sp_addScene;
 
 ["cpt3_trg_attackeater",{
+	[cpt3_hudvis_eatercombat] call sp_setHudVisibility;
+	["click_target",{
+		params ["_t"];
+		_ret = true;
+		_eater = "cpt3_eater" call sp_ai_getMobObject;
+		if equals(_t,_eater) then {
+			if not_equals(callFunc(call sp_getActor,getItemInActiveHandRedirect),"cpt3_obj_caveaxeguide" call sp_getObject) exitWith {};
+			if (getVar(call sp_getActor,isCombatModeEnable)) then {
+				_ret = false;
+				_tzSel = [getVar(call sp_getActor,curTargZone)] call gurps_convertTargetZoneToBodyPart;
+				
+				if (_tzSel != BP_INDEX_TORSO) then {
+					callFuncParams(_eater,lossLimb,_tzSel);
+				};
+				
+				setVar(_eater,isDead,true);
+				getVar(_eater,owner) switchMove "Acts_StaticDeath_05";
+				call sp_removeCurrentPlayerHandler;
+			};
+		};
+		_ret
+	}] call sp_addPlayerHandler;
 
+	{
+		_h = ["Чтобы атаковать противника перейдите в боевой режим, нажав $input_act_combatMode"] call sp_setNotification;
+		{
+			getVar(call sp_getActor,isCombatModeEnable)
+		} call sp_threadWait;
+
+		_hWidget = [{
+			_wid = widgetNull;
+			_d = getDisplay;
+			if isNullReference(_d) exitWith {_wid};
+			_d getvariable ["combatMenuCtg",widgetNull]
+		},0.02] call sp_createWidgetHighlight;
+
+		_h = ["В верхнем меню вы можете настроить способы атаки и защиты, а справа настраивается зона атаки - место куда вы будете бить противника."+
+		sbr+"Как будете готовы атаковать - нажмите ЛКМ для атаки"] call sp_setNotification;
+
+		{
+			getVar("cpt3_eater" call sp_ai_getMobObject,isDead)
+		} call sp_threadWait;
+		
+		refset(_hWidget,true);
+		[false,_h] call sp_setNotificationVisible;
+
+		["cpt3_lightswitch",false] call sp_storageSet;
+		[true] call sp_setHideTaskMessageCtg;
+
+		// {
+		// 	callFuncParams(call sp_getActor,canSeeObject,"cpt3_obj_doordestr" call sp_getObject)
+		// } call sp_threadWait;
+		_h1 = ["main_action",{
+			params ["_t"];
+			if equals(_t,"cpt3_obj_doordestr" call sp_getObject) then {
+				{_x call sp_removePlayerHandler} foreach (["cpt3_handlers_dooract",[]] call sp_storageGet);
+				["cpt3_dodestroydoor"] call sp_startScene;
+			}
+		}] call sp_addPlayerHandler;
+		_h2 = ["activate_verb",{
+			params ["_t","_name"];
+			if (_name == "mainact") then {
+				if equals(_t,"cpt3_obj_doordestr" call sp_getObject) then {
+					{_x call sp_removePlayerHandler} foreach (["cpt3_handlers_dooract",[]] call sp_storageGet);
+					["cpt3_dodestroydoor"] call sp_startScene;
+				};
+			};
+		}] call sp_addPlayerHandler;
+		["cpt3_handlers_dooract",[_h1,_h2]] call sp_storageSet;
+
+
+	} call sp_threadStart;
 }] call sp_addScene;
 
-//cpt3_obj_doordestr - need destroy
+cpt3_func_damageEvent = {
+    _trg = _this;
+    _worldPos = callFunc(_trg,getPos) vectorAdd [0,0,0.5];
+    _eff = true;
+    _snd = true;
+    _isblock = false;
+
+    //[0.5,3.5,.05,0.8] call cam_addCamShake;
+
+    callFuncParams(_trg,sendDamageVisualOnPos,_worldPos arg _eff arg _snd arg _isblock);
+
+    _snd = false;
+    for "_i" from 1 to randInt(2,4) do {
+        private _wpos = _worldPos vectoradd [rand(-0.1,0.1),rand(-0.1,0.1),rand(-0.1,0.1)];
+        callFuncParams(_trg,sendDamageVisualOnPos,_wpos arg _eff arg _snd arg _isblock);
+    };
+};
+
+["cpt3_dodestroydoor",{
+	{
+		["Вы можете разрушать объекты с помощью вашего оружия. Для этого нажмите ЛКМ в боевом режиме по двери"] call sp_setNotification;
+		_obj = "cpt3_obj_doordestr" call sp_getObject;
+		//callFuncParams(_obj,setHPCurrentPrecentage,10);
+
+		["click_target",{
+			params ["_t"];
+			_hret = true;
+			if (!getVar(call sp_getActor,isCombatModeEnable)) exitWith {_hret};
+			if equals(_t,"cpt3_obj_doordestr" call sp_getObject) then {
+				_t call cpt3_func_damageEvent;
+				if ((["cpt3_ctr_doordam",{_this + 1},0] call sp_storageUpdate) >= 4) then {
+					nextFrameParams(deleteGameObject,[_t]);
+				};
+				_hret = false;
+			};
+			_hret
+		}] call sp_addPlayerHandler;
+	} call sp_threadStart;
+}] call sp_addScene;
 
 ["t3_trg_foundgate",{
 
