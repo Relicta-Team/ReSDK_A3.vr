@@ -165,7 +165,7 @@ sp_ai_playCapture = {
 
         ["postAnimCode",_postCode]
     ];
-    _target attachto [player,[0,0,10]];
+    _target attachto [player,[0,0,0]];
 
     _finalPos = [0,0,0];
     reverse _cpydta;
@@ -209,9 +209,12 @@ sp_ai_internal_processPlayingStates = {
             _obj switchMove [_lstate,0,1,true];
         };
     };
+    
+    //_obj attachto [player,player worldToModelVisual _pos];
     _obj setPosAtl _pos;
     _obj setvectordir _dir;
     
+    //detach _obj;
 
     if (_curDelta >= _dt) then {
         _cdata deleteAt 0;
@@ -289,6 +292,13 @@ sp_ai_playAnim = {
 
     if isNullVar(_basePos) then {
         _basePos = getposatlvisual _target;
+    } else {
+        if equalTypes(_basePos,"") then {
+            private _ptrobj = _basePos call sp_getObject;
+            if !isNullReference(_ptrobj) then {
+                _basePos = callFunc(_ptrobj,getPos);
+            };
+        };
     };
     
     if !([_animName,".anm"] call stringEndWith) then {
@@ -385,22 +395,47 @@ sp_ai_internal_onUpdate = {
         _loaded = [_vpos] call _chunkLoaded;
         if (!_loaded) then {
             _y setposatl _vpos;
+            _y setVelocity [0,0,0];
             _y setvariable [_specvar,null];
         } else {
             if isNull(_y getvariable _specvar) then {
-                _y setvariable [_specvar,tickTime+1]; //postloading delay
+                _val = createSimpleObject ["rel_vox\obj\block_dirt.p3d",[0,0,0],true];
+                _mptr = struct_newp(AutoModelPtr,_val);
+                _y setvariable [_specvar,_mptr];
+                startAsyncInvoke
+                    {
+                        params ["_m","_vpos","_specvar","_tskip"];
+                        if isNull(_m getvariable _specvar) exitWith {true};
+                        _mptr = _m getvariable _specvar;
+                        _mptr callv(get) setposatl (_vpos vectordiff [0,0,0.1]);
+                        _m setposatl (_vpos vectoradd [0,0,0.3]);
+                        
+                        _aslPos = ATLToASL _vpos;
+                        _trace = lineIntersectsSurfaces [
+                            _aslPos,
+                            _aslPos vectorAdd [0,0,-500],
+                            _m,
+                            objNull,
+                            true,
+                            1,
+                            "GEOM",
+                            "NONE"
+                        ];
+                        
+                        count _trace > 0 && tickTime > _tskip
+                    },
+                    {
+                        params ["_m","_vpos","_specvar"];
+                        if (!isNull(_m getvariable _specvar)) then {
+                            _mptr = _m getvariable _specvar;
+                            _mptr callv(get) setposatl (_vpos vectordiff [0,0,0.1]);
+                            _m setPosAtl (_vpos vectoradd [0,0,0.3]);
+                            _mptr callv(get) hideObject true;
+                        };
+                    },
+                    [_y,_vpos,_specvar,tickTime + 2]
+                endAsyncInvoke
             };
-            if (tickTime >= (_y getvariable [_specvar,tickTime])) exitwith {};
-            _y setposatl (_vpos vectoradd [0,0,0.1]);
-            //traceformat("syncpos %1 %2",_y arg _y getvariable _svstate)
         };
     } foreach sp_ai_mobs;
 };
-
-/*
-
-    Plane movable ai
-    TODO:
-
-    ...
-*/
