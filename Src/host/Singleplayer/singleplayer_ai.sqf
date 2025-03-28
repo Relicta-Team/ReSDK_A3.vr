@@ -19,8 +19,10 @@ lookAt with enabling all enableAI "ANIM"
 sp_ai_debug_curCaptureHandle = -1;
 sp_ai_debug_curCaptureTarget = objNull;
 
+sp_ai_debug_captureMove = false;
+
 sp_ai_debug_startCapture = {
-    params ["_target"];
+    params ["_target","_movecapt"];
 
     if (call sp_ai_debug_isCapturing) then {
         call sp_ai_debug_suspendCapture;
@@ -29,7 +31,12 @@ sp_ai_debug_startCapture = {
 
     sp_ai_debug_curCaptureBasePos = getposatlvisual _target;
     sp_ai_debug_curCaptureTarget = _target;
-    sp_ai_debug_captureData = []; //[[frame1, data1], [frame2, data2]]...
+    sp_ai_debug_captureData = [
+        "cap_v1",
+        [
+            ["usepos",_movecapt]
+        ]
+    ]; //[[frame1, data1], [frame2, data2]]...
     sp_ai_debug_lastAnim = "";
     sp_ai_debug_lastPos = [0,0,0];
         sp_ai_debug_lastPosChecked = tickTime;
@@ -55,8 +62,8 @@ sp_ai_debug_stopCapture = {
 
 sp_ai_debug_processCaptureSwitch = {
     if (!call sp_ai_debug_isCapturing) then {
-        ["Capture --> STARTED...","debug"] call chatPrint;
-        [player] call sp_ai_debug_startCapture;
+        [format["Capture --> STARTED... %1",ifcheck(sp_ai_debug_captureMove,"with MOVE","")],"debug"] call chatPrint;
+        [player,sp_ai_debug_captureMove] call sp_ai_debug_startCapture;
     } else {
         ["!!!STOPPED CAPTURE!!! Pasted to clipboard. Buffer size: " + (str count sp_ai_debug_captureData),"debug"] call chatPrint;
         call sp_ai_debug_stopCapture;
@@ -100,9 +107,12 @@ sp_ai_debug_internal_handleUpdate = {
     if (tickTime >= sp_ai_debug_lastPosChecked && {not_equals(_localPos,sp_ai_debug_lastPos)}) then {
         sp_ai_debug_lastPos = _localPos;
         sp_ai_debug_lastPosChecked = tickTime + SP_AI_TICKRATE_POSITION;
-        sp_ai_debug_captureData pushBack [
-            _deltaTime,SP_AI_DATAFRAME_POSITION,_localPos
-        ];
+        if (sp_ai_debug_captureMove) then {
+            sp_ai_debug_captureData pushBack [
+                _deltaTime,SP_AI_DATAFRAME_POSITION,_localPos
+            ];
+        };
+        
     };
     if (tickTime >= sp_ai_debug_lastDirChecked && {not_equals(_lastVDir,sp_ai_debug_lastDir)}) then {
         sp_ai_debug_lastDir = _lastVDir;
@@ -151,10 +161,25 @@ sp_ai_debug_suspendCapture = {
 sp_ai_playCapture = {
     params ["_target","_cdata","_basePos",["_postCode",{}]];
     private _cpydta = array_copy(_cdata);
+
+    private _moveproc = true;
+    if equalTypes(_cpydta select 0,"") then {
+        _cpydta deleteAt 0;
+        private _pars = _cpydta deleteAt 0;
+        {
+            _x params ["_name","_val"];
+            if (_name == "usepos") then {
+                _moveproc = _val;
+                continue;
+            };
+        } foreach _pars;
+    };
+
     private _ctx = createHashMapFromArray [
         //["curPos",_cpydta select (_cpydta findif {_x select 1 == SP_AI_DATAFRAME_POSITION}) select 2],
         ["curPos",_basePos],
         ["prevPos",_basePos],
+        ["capturePos",_moveproc],
         ["prevDir",vectorDirVisual _target],
         ["curDir",vectorDirVisual _target],
         ["prevDeltaPos",0],
@@ -165,32 +190,46 @@ sp_ai_playCapture = {
 
         ["postAnimCode",_postCode]
     ];
-    _target attachto [player,[0,0,0]];
+    traceformat("CAPINFO: %1 [%2]",_ctx get "capturePos" arg _moveproc)
+    if (_ctx get "capturePos") then {
+        _target attachto [player,[0,0,0]];
+    } else {
+        _target setPosATL _basePos;
+    };
 
-    _finalPos = [0,0,0];
-    reverse _cpydta;
-    _iposlast = _cpydta findif {_x select 1 == SP_AI_DATAFRAME_POSITION};
-    if (_iposlast != -1) then {
-        _finalPos = _cpydta select _iposlast select 2;
+    //process write postendPos
+    if (_ctx get "capturePos") then {
+        _finalPos = [0,0,0];
+        reverse _cpydta;
+        _iposlast = _cpydta findif {_x select 1 == SP_AI_DATAFRAME_POSITION};
+        if (_iposlast != -1) then {
+            _finalPos = _cpydta select _iposlast select 2;
+        };
+        if not_equals(_finalPos,vec3(0,0,0)) then {
+            _ctx set ["postendPos",_finalPos vectoradd _basePos];
+        };
+        reverse _cpydta;
     };
-    if not_equals(_finalPos,vec3(0,0,0)) then {
-        _ctx set ["postendPos",_finalPos vectoradd _basePos];
-    };
-    reverse _cpydta;
     
     startUpdateParams(sp_ai_internal_processPlayingStates,0,[tickTime arg _target arg _cpydta arg _basePos arg _ctx]);
 };
 
 sp_ai_internal_processPlayingStates = {
     (_this select 0) params ["_t","_obj","_cdata","_basePos","_ctx"];
+    _capmove = _ctx get "capturePos";
+    
     if (count _cdata == 0) exitWith {
         
         stopThisUpdate();
-        if ("postendPos" in _ctx) then {
-            _obj setposatl (_ctx get "postendPos");
-            _obj switchmove "";
+
+        if (_capmove) then {
+            if ("postendPos" in _ctx) then {
+                _obj setposatl (_ctx get "postendPos");
+                _obj switchmove "";
+            };
+            detach _obj;
         };
-        detach _obj;
+        
         [_obj,getposatl _obj,false] call sp_ai_commitMobPos;
         [_obj] call (_ctx get "postAnimCode");
     };
@@ -199,7 +238,10 @@ sp_ai_internal_processPlayingStates = {
     _firstFrame params ["_dt","_opType","_frameData"];
 
     //interpolate
-    _pos = vectorLinearConversion [_ctx getv(prevDeltaPos),(_ctx getv(prevDeltaPos)) + SP_AI_TICKRATE_POSITION,_curDelta,_ctx getv(prevPos),_ctx getv(curPos),true];
+    _pos = null;
+    if (_capmove) then {
+        _pos = vectorLinearConversion [_ctx getv(prevDeltaPos),(_ctx getv(prevDeltaPos)) + SP_AI_TICKRATE_POSITION,_curDelta,_ctx getv(prevPos),_ctx getv(curPos),true];
+    };
     _dir = vectorLinearConversion [_ctx getv(prevDeltaDir),(_ctx getv(prevDeltaDir)) + SP_AI_TICKRATE_DIRECTION,_curDelta,_ctx getv(prevDir),_ctx getv(curDir),true];
     
 
@@ -211,7 +253,9 @@ sp_ai_internal_processPlayingStates = {
     };
     
     //_obj attachto [player,player worldToModelVisual _pos];
-    _obj setPosAtl _pos;
+    if (_capmove) then {
+        _obj setPosAtl _pos;
+    };
     _obj setvectordir _dir;
     
     //detach _obj;
@@ -225,6 +269,7 @@ sp_ai_internal_processPlayingStates = {
             _ctx setv(lastState,_animState);
         };
         if (_opType == SP_AI_DATAFRAME_POSITION) exitWith {
+            if (!_capmove) exitWith {}; //no-pos-handle
             _newRealPos = _basePos vectoradd _frameData;
             _ctx setv(prevPos,_newRealPos);
             
