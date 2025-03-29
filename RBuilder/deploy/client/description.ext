@@ -12,7 +12,6 @@ class RscTitles
 
 disableChannels[] = {0,1,2,4,5};
 disableRandomization[] = { "All", "AllVehicles", "B_G_Offroad_01_F", "myCar", "MyUnitName", "B_Soldier_F" };
-enableDebugConsole[] = {"76561198094364528"};
 enableTargetDebug = 1;
 
 allowProfileGlasses = 0;
@@ -21,6 +20,7 @@ class CfgCommands {
    allowedHTMLLoadURIs[] += {
 	  "http://relicta.ru",
 	  "http://auth.relicta.ru:9699",
+	  "https://auth.relicta.ru:9700",
 	  "http://relicta.ru/*",
 	  "https://relicta.ru",
 	  "https://relicta.ru/*",
