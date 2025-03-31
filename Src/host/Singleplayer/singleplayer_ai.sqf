@@ -28,8 +28,9 @@ sp_ai_debug_startCapture = {
         call sp_ai_debug_suspendCapture;
     };
 
-
+    sp_ai_debug_previewPerson = call sp_ai_debug_getPreviewPerson;
     sp_ai_debug_curCaptureBasePos = getposatlvisual _target;
+    sp_ai_debug_previewPerson setposatl sp_ai_debug_curCaptureBasePos;
     sp_ai_debug_curCaptureTarget = _target;
     sp_ai_debug_captureData = [
         "cap_v1",
@@ -38,6 +39,7 @@ sp_ai_debug_startCapture = {
         ]
     ]; //[[frame1, data1], [frame2, data2]]...
     sp_ai_debug_lastAnim = "";
+    sp_ai_debug_lastAnimTime = 0;
     sp_ai_debug_lastPos = [0,0,0];
         sp_ai_debug_lastPosChecked = tickTime;
         
@@ -97,12 +99,17 @@ sp_ai_debug_internal_handleUpdate = {
     _animState = animationState _targ;
     _deltaTime = tickTime - sp_ai_debug_startTime;
     _camtargpos = (positioncameratoworld [0,0,0.5]) vectorDiff _basePos;
-
+    
     if (_animState != sp_ai_debug_lastAnim) then {
+        
+        _prevanim = sp_ai_debug_lastAnim;
         sp_ai_debug_lastAnim = _animState;
+        sp_ai_debug_lastAnimTime = _mTime;
         sp_ai_debug_captureData pushBack [
             _deltaTime,SP_AI_DATAFRAME_ANIMSTATE,[_animState,_mProg,_mTime,_mDur,_mBlndFact]
         ];
+
+        sp_ai_debug_previewPerson switchmove [_animState,_mProg,_mBlndFact,false];
     };
     if (tickTime >= sp_ai_debug_lastPosChecked && {not_equals(_localPos,sp_ai_debug_lastPos)}) then {
         sp_ai_debug_lastPos = _localPos;
@@ -120,6 +127,8 @@ sp_ai_debug_internal_handleUpdate = {
         sp_ai_debug_captureData pushBack [
             _deltaTime,SP_AI_DATAFRAME_DIRECTION,_lastVDir
         ];
+
+        sp_ai_debug_previewPerson setvectordir _lastVDir;
     };
     /*
     if (FreeLook != sp_ai_debug_headMovingEnable) then {
@@ -242,7 +251,7 @@ sp_ai_internal_processPlayingStates = {
     if (_capmove) then {
         _pos = vectorLinearConversion [_ctx getv(prevDeltaPos),(_ctx getv(prevDeltaPos)) + SP_AI_TICKRATE_POSITION,_curDelta,_ctx getv(prevPos),_ctx getv(curPos),true];
     };
-    _dir = vectorLinearConversion [_ctx getv(prevDeltaDir),(_ctx getv(prevDeltaDir)) + SP_AI_TICKRATE_DIRECTION,_curDelta,_ctx getv(prevDir),_ctx getv(curDir),true];
+    //_dir = vectorLinearConversion [_ctx getv(prevDeltaDir),(_ctx getv(prevDeltaDir)) + SP_AI_TICKRATE_DIRECTION,_curDelta,_ctx getv(prevDir),_ctx getv(curDir),true];
     
 
     if (_curDelta < _dt) then {
@@ -256,7 +265,7 @@ sp_ai_internal_processPlayingStates = {
     if (_capmove) then {
         _obj setPosAtl _pos;
     };
-    _obj setvectordir _dir;
+    //_obj setvectordir _dir;
     
     //detach _obj;
 
@@ -285,6 +294,8 @@ sp_ai_internal_processPlayingStates = {
             _ctx setv(prevDir,_ctx getv(curDir));
             _ctx setv(prevDeltaDir,_curDelta);
             _ctx setv(curDir,_frameData);
+            _obj setvectordir _frameData;
+            //_obj setposatl _ps;
         };
         /*
         if (_opType == SP_AI_DATAFRAME_HEADTARGET) exitWith {
@@ -308,6 +319,13 @@ sp_ai_debug_playLastAnim = {
     private _pmob = sp_ai_debug_testmobs get "PREVIEW";
     _pmob setposatl sp_ai_debug_curCaptureBasePos;
     [_pmob,sp_ai_debug_captureData,sp_ai_debug_curCaptureBasePos] call sp_ai_playCapture;
+};
+
+sp_ai_debug_getPreviewPerson = {
+     if (!array_exists(sp_ai_debug_testmobs,"PREVIEW")) then {
+        [sp_ai_debug_curCaptureBasePos,null,"PREVIEW"] call sp_ai_debug_createTestPerson;
+    };
+    sp_ai_debug_testmobs get "PREVIEW";
 };
 
 sp_ai_debug_createTestPerson = {
