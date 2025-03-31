@@ -28,10 +28,18 @@ sp_ai_debug_startCapture = {
         call sp_ai_debug_suspendCapture;
     };
 
+    if (!call sp_cam_isCreated) then {
+        call sp_cam_createCinematicCam;
+    };
+    
+    [true] call sp_cam_setCinematicCam;
+
+
     sp_ai_debug_previewPerson = call sp_ai_debug_getPreviewPerson;
     sp_ai_debug_curCaptureBasePos = getposatlvisual _target;
     sp_ai_debug_previewPerson setposatl sp_ai_debug_curCaptureBasePos;
     sp_ai_debug_curCaptureTarget = _target;
+    sp_cam_cinematicCam attachto [sp_ai_debug_previewPerson,[0,0,0],"head",true];
     sp_ai_debug_captureData = [
         "cap_v1",
         [
@@ -96,6 +104,9 @@ sp_ai_debug_internal_handleUpdate = {
         "_rtmStep",
         "_gProg","_gTime","_gDur","_gBlndFact"
     ];
+
+    _targ setposatl (_basePos vectorAdd [0,0,0]);
+
     _animState = animationState _targ;
     _deltaTime = tickTime - sp_ai_debug_startTime;
     _camtargpos = (positioncameratoworld [0,0,0.5]) vectorDiff _basePos;
@@ -159,6 +170,8 @@ sp_ai_debug_isCapturing = {
 };
 
 sp_ai_debug_suspendCapture = {
+    [false] call sp_cam_setCinematicCam;
+
     stopUpdate(sp_ai_debug_curCaptureHandle);
     sp_ai_debug_curCaptureHandle = -1;
     sp_ai_debug_headMovingEnable = false;

@@ -17,6 +17,15 @@ sp_cam_createCinematicCam = {
 	sp_cam_cinematicCam = _cam;
 };
 
+sp_cam_isCreated = {
+	!isNullReference(sp_cam_cinematicCam);
+};
+
+sp_cam_setCamPos = {
+	params ["_pos"];
+	sp_cam_cinematicCam setposatl _pos;
+};
+
 sp_cam_setCinematicCam = {
 	params ["_mode"];
 	if (_mode) then {
