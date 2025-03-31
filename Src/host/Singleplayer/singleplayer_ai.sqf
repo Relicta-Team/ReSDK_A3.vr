@@ -39,7 +39,11 @@ sp_ai_debug_startCapture = {
     sp_ai_debug_curCaptureBasePos = getposatlvisual _target;
     sp_ai_debug_previewPerson setposatl sp_ai_debug_curCaptureBasePos;
     sp_ai_debug_curCaptureTarget = _target;
-    sp_cam_cinematicCam attachto [sp_ai_debug_previewPerson,[0,0,0],"head",true];
+    
+    sp_cam_cinematicCam attachto [sp_ai_debug_previewPerson,[0.1,-0.7,0.2],"head",true];
+
+    sp_ai_debug_stateCount = 1;
+
     sp_ai_debug_captureData = [
         "cap_v1",
         [
@@ -88,6 +92,7 @@ sp_ai_debug_processCaptureSwitch = {
 #define SP_AI_DATAFRAME_POSITION 1
 #define SP_AI_DATAFRAME_DIRECTION 2
 #define SP_AI_DATAFRAME_HEADTARGET 3
+#define SP_AI_DATAFRAME_SCRIPTEDSTATE 4
 
 /*
     Usage: 
@@ -106,12 +111,14 @@ sp_ai_debug_internal_handleUpdate = {
     ];
 
     _targ setposatl (_basePos vectorAdd [0,0,0]);
-
+    
     _animState = animationState _targ;
     _deltaTime = tickTime - sp_ai_debug_startTime;
     _camtargpos = (positioncameratoworld [0,0,0.5]) vectorDiff _basePos;
     
-    if (_animState != sp_ai_debug_lastAnim) then {
+    if (_animState != sp_ai_debug_lastAnim
+    //!error on play -> || {(animationState sp_ai_debug_previewPerson) != _animState}
+    ) then {
         
         _prevanim = sp_ai_debug_lastAnim;
         sp_ai_debug_lastAnim = _animState;
@@ -119,9 +126,10 @@ sp_ai_debug_internal_handleUpdate = {
         sp_ai_debug_captureData pushBack [
             _deltaTime,SP_AI_DATAFRAME_ANIMSTATE,[_animState,_mProg,_mTime,_mDur,_mBlndFact]
         ];
-
         sp_ai_debug_previewPerson switchmove [_animState,_mProg,_mBlndFact,false];
     };
+    
+
     if (tickTime >= sp_ai_debug_lastPosChecked && {not_equals(_localPos,sp_ai_debug_lastPos)}) then {
         sp_ai_debug_lastPos = _localPos;
         sp_ai_debug_lastPosChecked = tickTime + SP_AI_TICKRATE_POSITION;
@@ -165,6 +173,14 @@ sp_ai_debug_internal_handleUpdate = {
     */
 };
 
+sp_ai_debug_addScriptedState = {
+    sp_ai_debug_captureData pushBack [
+        tickTime - sp_ai_debug_startTime,SP_AI_DATAFRAME_SCRIPTEDSTATE,format["state_%1",sp_ai_debug_stateCount]
+    ];
+    [format["State saved - %1",sp_ai_debug_stateCount],"log"] call chatPrint;
+    INC(sp_ai_debug_stateCount);
+};
+
 sp_ai_debug_isCapturing = {
     sp_ai_debug_curCaptureHandle != -1;
 };
@@ -181,7 +197,7 @@ sp_ai_debug_suspendCapture = {
 
 
 sp_ai_playCapture = {
-    params ["_target","_cdata","_basePos",["_postCode",{}]];
+    params ["_target","_cdata","_basePos",["_postCode",{}],"_mapStates"];
     private _cpydta = array_copy(_cdata);
 
     private _moveproc = true;
@@ -210,7 +226,9 @@ sp_ai_playCapture = {
         ["lastState",animationState _target],
         ["lastHeadPos",[0,0,0]],
 
-        ["postAnimCode",_postCode]
+        ["postAnimCode",_postCode],
+
+        ["mapStates",_mapStates]
     ];
     traceformat("CAPINFO: %1 [%2]",_ctx get "capturePos" arg _moveproc)
     if (_ctx get "capturePos") then {
@@ -321,6 +339,15 @@ sp_ai_internal_processPlayingStates = {
             };
         };
         */
+        if (_opType == SP_AI_DATAFRAME_SCRIPTEDSTATE) exitWith {
+            _mapStates = _ctx get "mapStates";
+            if equals(_mapStates,"debug_preview") exitWith {
+                ["Debug preview state " + _frameData,"log"] call chatPrint;
+            };
+            [_obj] call (_mapStates getOrDefault [_frameData,{
+                ["Unknown scripted state " + _frameData,"log"] call chatPrint;
+            }]);
+        };
 
     };
 };
@@ -331,7 +358,7 @@ sp_ai_debug_playLastAnim = {
     };
     private _pmob = sp_ai_debug_testmobs get "PREVIEW";
     _pmob setposatl sp_ai_debug_curCaptureBasePos;
-    [_pmob,sp_ai_debug_captureData,sp_ai_debug_curCaptureBasePos] call sp_ai_playCapture;
+    [_pmob,sp_ai_debug_captureData,sp_ai_debug_curCaptureBasePos,null,"debug_preview"] call sp_ai_playCapture;
 };
 
 sp_ai_debug_getPreviewPerson = {
@@ -354,7 +381,11 @@ sp_ai_debug_createTestPerson = {
 };
 
 sp_ai_playAnim = {
-    params ["_target","_basePos","_animName",["_postCode",{}]];
+    params ["_target","_basePos","_animName",["_postCode",{}],"_mapStates"];
+
+    if isNullVar(_mapStates) then {
+        _mapStates = createHashMap;
+    };
 
     if equalTypes(_target,"") then {
         _target = _target call sp_ai_getMobObject;
@@ -389,7 +420,7 @@ sp_ai_playAnim = {
 
     private _buff = call compile LOADFILE _animName;
 
-    [_target,_buff,_basePos,_postCode] call sp_ai_playCapture;
+    [_target,_buff,_basePos,_postCode,_mapStates] call sp_ai_playCapture;
 };
 
 sp_ai_createPerson = {

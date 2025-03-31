@@ -31,6 +31,9 @@ onGameInputs_Down = {
 	if (_key == KEY_NUMPADENTER) exitWith {
 		call sp_ai_debug_playLastAnim;
 	};
+	if (_key == KEY_G && {call sp_ai_debug_isCapturing}) exitWith {
+		call sp_ai_debug_addScriptedState;
+	};
 	#endif
 
 	#ifdef EDITOR
