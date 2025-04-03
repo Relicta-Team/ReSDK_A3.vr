@@ -25,7 +25,7 @@
 // enable for more verbose logging
 #define CRAFT_DEBUG_LOAD
 
-#define CRAFT_DEBUG_DURATION_CREATING 10
+// #define CRAFT_DEBUG_DURATION_CREATING 10 
 
 #define CRAFT_DEBUG_VISUAL_ON_ATTEMPT
 

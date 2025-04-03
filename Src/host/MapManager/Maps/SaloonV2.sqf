@@ -399,7 +399,7 @@ _3455_342773637_5549324_94983 = ['IStruct',[3455.34,3637.55,30.7412,true],98.134
 _3486_148683640_6464825_08593 = ['Umivalnik',[3486.15,3640.65,25.0859],270,[0,0,1]] call InitStruct; 
 ['RifleBastard',[3455.97,3639.03,33.6011,true],0,[-0.00659628,-0.424076,0.905603]] call InitItem; 
 ['RifleBastard',[3455.96,3639.28,33.6187,true],[-6.763e-06,-0.905624,0.424081],[0.00658919,0.424072,0.905604]] call InitItem; 
-['ILightibleStruct',[3458.99,3647.51,30.295,true],[0.246424,0.124557,0.961125],[-0.216609,0.973698,-0.0706504], {_thisObj setvariable ['light',"SLIGHT_SHIT_SMELL" call lightSys_getConfigIdByName];}] call InitStruct; 
+['ILightibleStruct',[3458.99,3647.51,25.1647],0,[0,0,1], {_thisObj setvariable ['light',"SLIGHT_SHIT_SMELL" call lightSys_getConfigIdByName];}] call InitStruct; 
 ['MediumConcreteBlockDestroyed',[3467.78,3635.22,25.098],0,[0,0,1]] call InitStruct; 
 ['MediumConcreteBlockDestroyed',[3457.82,3633.55,25.0683],230,[0,0,1]] call InitStruct; 
 ['ConcreteSlabsStack',[3477.36,3641.42,25.0678],0,[0,0,1]] call InitStruct; 
