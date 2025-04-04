@@ -929,6 +929,9 @@ region(Nearest game objects)
 		private _algGet = ifcheck(_retByType,{isTypeStringOf(_this,_checkedType)},{callFunc(_this,isMob)});
 		{
 			_x = _x getVariable "link";
+			#ifdef EDITOR_OR_SP_MODE
+			if isNullVar(_x) then {continue};
+			#endif
 			if (_x call _algGet) then {_list pushBack _x};
 		} foreach (_ownerObj nearObjects _radius);
 		if (_excludeThis) then {

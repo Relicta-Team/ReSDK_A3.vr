@@ -230,6 +230,9 @@ sp_ai_playCapture = {
 
         ["mapStates",_mapStates]
     ];
+    
+    _target setanimspeedcoef 1;
+
     traceformat("CAPINFO: %1 [%2]",_ctx get "capturePos" arg _moveproc)
     if (_ctx get "capturePos") then {
         _target attachto [player,[0,0,0]];
@@ -386,6 +389,9 @@ sp_ai_playAnim = {
     if isNullVar(_mapStates) then {
         _mapStates = createHashMap;
     };
+    if equalTypes(_mapStates,[]) then {
+        _mapStates = createHashMapFromArray _mapStates;
+    };
 
     if equalTypes(_target,"") then {
         _target = _target call sp_ai_getMobObject;
@@ -457,6 +463,72 @@ sp_ai_commitMobPos = {
         _m setposatl _p;
     };
 
+};
+
+sp_ai_moveItemToWorld = {
+    params ["_m","_it","_pos",["_dir",random 360],["_vecup",[0,0,1]]];
+    
+    if (canSuspend) exitWith {
+        private _p = _this;
+        private _r = null;
+        {_r = _p call sp_ai_moveItemToWorld} call sp_threadCriticalSection;
+        _r
+    };
+
+    if equalTypes(_m,objNull) then {
+        _m = _m getvariable "link";
+    };
+    if isNullVar(_m) exitWith {nullPtr};
+
+    if equalTypes(_it,1) then {
+        _it = callFuncParams(_m,getItemInSlotRedirect,_it);
+    };
+    if isNullReference(_it) exitWith {nullPtr};
+
+    //params ["_pos","_dir","_vecUp","_objPlace"];
+    private _positionData = [_pos,_dir,_vecup,nullPtr];
+    callFuncParams(_m,putdownItem, _it arg _positionData);
+
+    [getVar(_m,owner)] call anim_syncAnim;
+
+    _it
+};
+
+sp_ai_moveItemToMob = {
+    params ["_m","_item","_slot"];
+    if (canSuspend) exitWith {
+        private _p = _this;
+        private _r = null;
+        {_r = _p call sp_ai_moveItemToMob} call sp_threadCriticalSection;
+        _r
+    };
+    
+    if equalTypes(_m,objNull) then {
+        _m = _m getvariable "link";
+    };
+    if isNullVar(_m) exitWith {};
+    if isNullReference(_item) exitWith {};
+    private this = _m;
+    //check if in world (server protect)
+    if !callFunc(_item,isInWorld) exitWith {};
+
+    if !callFunc(_item,canPickup) exitWith {
+        callFuncParams(_item,onCantPickup,this);
+    }; //cant pickup item
+
+    if !callSelfParams(canSetItemOnSlot,args2(_item,_slot)) exitWith {};
+
+    callSelfParams(interpolate,"pickup" arg _item arg _slot);
+
+    callFunc(_item,simulatePhysics);
+
+    callFunc(_item,unloadModel);
+
+    callSelfParams(setItemOnSlot, _item arg _slot);
+
+    callFuncParams(_item,onPickup,this); //calling std event on pickup
+
+    [getSelf(owner)] call anim_syncAnim;
 };
 
 sp_ai_setMobPos = {
