@@ -752,7 +752,7 @@ _3789_469973782_3601120_30800 = ['IStruct',[3789.47,3782.36,20.308],240.323,[0,0
 ['BigSteelGrating',[3786.24,3779.78,28.8328],0,[0,0,1]] call InitStruct; 
 _3790_669923781_3798832_28434 = ['Decor',[3790.67,3781.38,36.0754,true],0,[8.74228e-08,0,-1], {_thisObj setvariable ['model','a3\structures_f\walls\sportground_fence_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3788_709963807_7600125_57168 = ['Decor',[3788.71,3807.76,31.5397,true],84.2776,[-0.00636027,-0.00237347,0.999977], {_thisObj setvariable ['model','ca\structures_e\housec\house_c_2_ruins_ep1.p3d'];}] call InitDecor; // !!! realocated model !!!
-_3803_617433802_3076225_58860 = ['Decor',[3803.62,3802.31,31.5551,true],0,[-0.0154596,-0.00692834,0.999856], {_thisObj setvariable ['model','ca\structures_e\housec\house_c_2_ruins_ep1.p3d'];}] call InitDecor; // !!! realocated model !!!
+_3803_709963802_2700225_58860 = ['Decor',[3803.71,3802.27,31.5551,true],0,[-0.0154596,-0.00692834,0.999856], {_thisObj setvariable ['model','ca\structures_e\housec\house_c_2_ruins_ep1.p3d'];}] call InitDecor; // !!! realocated model !!!
 ['StoneBigLadderDouble',[3796.47,3786.7,25.3605],179.719,[0,0,1]] call InitStruct; 
 ['StoneBigLadderDouble',[3796.47,3786.38,22.171],179.719,[0,0,1]] call InitStruct; 
 ['MediumBetonWall',[3786.99,3777.47,26.8074],179.254,[0,0,1]] call InitStruct; 
@@ -2595,8 +2595,6 @@ _3750_413333761_0468833_22764 = ['WoodenDoor',[3750.41,3761.05,33.2276],0.588527
 ['Sink',[3805.03,3718.69,31.7077,true],270.001,[0.00103027,-0.0069902,0.999975]] call InitStruct; 
 ['OldWoodenBox',[3744.19,3786.93,28.8064,true],[1,0.00052689,3.12325e-05],[0,-0.0591732,0.998248], {_thisObj setvariable ['preinit@__loottemplate',"Kintchen_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['CaseBedroom',[3761.41,3754.19,24.5779],196.402,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Office_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-['SyntDebris1',[3835.59,3765.61,27.2705,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
-['StoneDebris1',[3803.57,3754.52,29.4548,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
 
 
 
